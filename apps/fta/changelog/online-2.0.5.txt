@@ -1,0 +1,37 @@
+================================================================================
+Fichiers et Tables à basculer de intranet.dev.agis.fr vers intranet.agis.fr:
+================================================================================
+
+[ ]: Reste à effectuer
+[X]: Réalisé
+================================================================================
+
+Pour les copies MYSQL[]:
+---------------------------
+[D]: DATA et STRUCTURE sont à transférer
+[S]: STRUCTURE seulement sont à transférer
+[O]: Renommer la table en OLD_nom_de_la_table
+================================================================================
+
+Pour les copies de FILE:
+----------------------------
+chemin depuis le répertoire racine du site
+- si c'est le répertoire du module:
+    - renommer le répertoire d'exploitation nom-AAAA-MM-JJ où la date est la
+        date du jour de la modification
+    - faire un TAR.GZ
+    - supprimer l'original
+    - copier le répertoire de développement vers le site d'exploitation
+
+================================================================================
+
+[V] Systématique: MYSQL[D]: intranet_modules
+[A] Systématique: MYSQL[D]: fta_*
+[V] Systématique: /repertoire_du_module
+
+[V] Faire de la partie etiquette un chapitre à part entière
+[V] [D]fta_processus
+[V] [S]annexe_materiel_service
+[V] adminagis/gestion_salaries22.php
+[V] [S] fta_nomenclature/quantite_piece_par_carton (désignation)
+[V] Execution de "UPDATE `fta_conditionnement` SET longueur_fta_conditionnement="", largeur_fta_conditionnement="", hauteur_fta_conditionnement="" WHERE longueur_fta_conditionnement=1200 AND largeur_fta_conditionnement=800 AND hauteur_fta_conditionnement=150 AND id_annexe_emballage_groupe<>10"

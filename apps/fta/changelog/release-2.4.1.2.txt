@@ -1,0 +1,37 @@
+================================================================================
+Modifications à apporter aux différentes versions du modules
+================================================================================
+
+[ ]: Reste à effectuer
+[!]: Prioritaire
+[V]: Réalisé
+[.]: Abandonné
+[R]: Reporté
+================================================================================
+Exemples:
+[V] 23/05/2003: saisie_vierge_origine.php
+      Déplacer les informations de cette page au niveau du composant.
+
+[ ] 28/07/2003: saisie_origine.php
+                Saisie de plusieurs origine sans cycle.
+                Rajouter dans la listedes origine:
+                         - Cf Origine MP
+                         - Cf Lieu dernière Transformation
+                         - Cf Origine Multiple
+                         - Cf Non défini
+                Bouton "Terminer Saisie"
+================================================================================
+
+
+[V] PROBLEME PALETTE:
+
+La palette n'apparaissait plus car depuis la nouvelle version, on affiche le nom du fournisseur. La palette n'ayant pas de fournisseur était exclus de la requête.
+
+UPDATE `annexe_emballage` SET `id_fte_fournisseur` = '1',
+`epaisseur_annexe_emballage` = NULL WHERE `id_annexe_emballage` =126 LIMIT 1 ;
+
+[V] PROBLEME COMPO:
+
+Dans la composition la fonction de regroupement n'état accessible uniquement si elle était activée. Donc comme par défaut elle n'est pas activée, on ne peut pas y accéder pour l'activer . . . !!
+
+

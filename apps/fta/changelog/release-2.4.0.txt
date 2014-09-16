@@ -1,0 +1,189 @@
+================================================================================
+Modifications à apporter aux différentes versions du modules
+================================================================================
+
+[ ]: Reste à effectuer
+[!]: Prioritaire
+[V]: Réalisé
+[.]: Abandonné
+================================================================================
+Exemples:
+[V] 23/05/2003: saisie_vierge_origine.php
+      Déplacer les informations de cette page au niveau du composant.
+
+[ ] 28/07/2003: saisie_origine.php
+                Saisie de plusieurs origine sans cycle.
+                Rajouter dans la listedes origine:
+                         - Cf Origine MP
+                         - Cf Lieu dernière Transformation
+                         - Cf Origine Multiple
+                         - Cf Non défini
+                Bouton "Terminer Saisie"
+===============================================================================
+
+[!] 2008-09-09 : blocage de l'étiquetage composition (liste composition vide) quand une fta est en cours de révision et une autre fta est validée.
+
+
+CORRECTIFS:
+-----------
+[V] 2008-04-02 : lors du changement de l'environnement de conservation dans l'onglet COMPOSITION (ex frais --> surgelé) après validation l'information affichée est toujours FRAIS (cas vu en exploitation sur le code 10524) et non reproduit sur le dev. Filtrer la listes des environnement de conservation du chapiter Composition et fonction de l'environnement de la classification.
+ Le FRAIS/SURGELE de l'étiquette est actuellement basé sur la classification. La baser sur la composition et plus edxactement sur annexe_environnement_conservation_groupe
+[V] Sur le Chapitre Palettisation, afficher le poids net à partir de ce qui est saisie dans le chapitre "Identité". Si le chapitre Composition annonce un poids différents, afficher en plus un petit logo + "Attention la composition indique un poids colis différents" + poids colis
+    Voir pour dissocier le calcul issue de l'identité de celui de la composition.
+
+[V] Dans le titre des mails de validation, les apostrophes reste protégés par les "\"
+    - Contenu dans Correction 
+    - Titre d'une correction
+    - Mail de validation (titre + contenu)
+
+[V] Message de correction n'apparait pas dans le mail envoyé
+[V] Sur la composition, si le composant n'a pas de code Agrologic, masquer la partie etiquette.
+[A] Impossible à reproduire - Calcul du poids net de la palettisation:
+    Exemple: 
+    10541 - NOIX ST JACQ SOUFFLE HOMARD SCE NOILLY  
+    1995v0 - GAMBAS A LA CREME DE HOMARD 
+[V] Erreur sur Hauteur Palette
+    http://intranet.agis.fr/fta/modification_fiche.php?id_fta=2018&id_fta_chapitre_encours=70&synthese_action=all
+    pb dans le calcul de la hauteur palette
+    0.097 * 1 3 + .015 = 1.411 et non 1.7 comme affiché
+    >>> Reste à contrôler.
+
+[V] Voir les message d'erreur en entête du chapitre Recette
+
+[V] 2008-12-14: Fiche Présentation:
+    Lorsqu'un chef deprojet dévalide le chapitre tarif, la FTA sort de son cycle de vie et n'est plus visible.
+    ACTION: Autoriser la correction d'un chapitre uniquement si: L'utilisateur est propriétaire et que le chapitre fait partie du cycle de vie en courS.
+    Déjà actif, en fait le cycle de vie était mal configuré.
+
+[V] 2008-04-22: - sur les éditions PDF des FP, remplacer (Validé + date) par (Imprimé le + date du jour)
+[V] Index pour droit en consultation = Dernière fiches validées + Fiches en cours de modifications + Etat d'avancement
+[V] Index pour les participants: afficher les FTA en cours de modification
+[ ] Validation différée (implémenter la fonctionnalité pour clarifier la visiblité)
+    - Champ supplémentaire sur le chapitre Gestion Article et Identité
+    - Si date de validation différeée est supérieur à la date du jour, la FTA est vérrouillée et ne peut être validée
+[V] http://intranet.agis.fr/fta/index.php?id_fta_etat=8&nom_fta_etat=P&synthese_action=correction
+    Les fiche PDF sont décaler d'un ligne sur le tableau récap.
+    Boris.
+    Pas de reproductibilité, à tester en post-mise en ligne
+
+[V] Faire en sorte de ne voir que certains chapitre en mode non-authentifié (en URL direct)
+[V] Emballage UVC:
+    Exemple du 21220 - 4 N PORC LSTDA 6X280G 
+    Les dimensions de l'UVC ne sont pas correcte car il s'agit d'une "compilation" des dimensions de chque éléments. Du coup, le FTA PDF est fausse.
+    --> Prendre les dimensions les plus grandes entre "Emballage UVC" et "Emballages Primaires et Accessoires"
+
+[V] Pouvoir migrer une FP vers une FTA
+  Action vérrouillée
+Cette fiche est déjà en cours de modification. 
+
+[A] Retour à la ligne sur l'intitulé de la composition sur les PDF Client: http://intranet.agis.fr/fta/pdf.php?id_fta=3040&mode=client
+    Cas unique, donc pas de correctif pour le momment.
+    Mettre la traduction dans le détail de la composition.
+
+[V] Contrôler que le classement soit par Classification.
+    Ordre des informations:
+    - Dossier-Version
+        - Classification
+    - Agrologic
+    - Arcadia
+    - Désignation Normalisée (sinon, Désignation Commerciale)
+    - Date d'échéance
+
+[V] Chapitre tarif: tarduire en "date" Immédiatement et jusqu'à la fin de l'année
+
+[V] Magali Mariet:
+    V Présentation d'un élemant de la liste
+    V Nom composé: FOURNISSEUR + NOM FICHE TECHNIQUE + DIMENSION
+    V Contenu de cette liste est filtré par défaut en montrant uniquement les emballages déjà utilisée par le site d'assemblage. Avec possibilité de désactiver le filtrer si besoin
+    A Code Article advitium
+    A Définir une norme de désignation cf Article --> A définir entre les services concernés: Achats <-> Responsable Emballages
+
+[V] Suppression des listes pour les DLC
+
+[V] Ajouter le nom de l'article quand on est sur le détail de l'état d'avancement
+
+[V] Ajouter le champ EAN palette: Table access_arti2 = EAN_palette + Chapitre CSE
+
+------------
+FONCTIONNALITES:
+----------------
+[V] Gestion des délais: http://intranet.agis.fr/mediawiki/index.php/Formation_FTA/Administrateur:_Gestion_des_d%C3%A9lais
+    sur le chapitre identité:
+        V Définition d'une date d'échéance correspondant à la validation de la FTA
+        V Définition d'une date d'échéance par processus
+
+    une fois le chapitre identité validé:
+        V Si seulement un date d'échéance a été saisie, calcul automatique des échéances par processus
+        V Si aucune date d'échance n'a été saisie, empécher la validation + message d'info
+        V Application des échéances pour chaque chapitre du suivi de dossier.
+
+    Sur la consultation de liste de FTA:
+        V Si une FTA à dépassé une échéance d'un processus, symbole (panneau point d'exclammation en début de ligne)
+        V Si une FTA à dépassé son échéance de validation, fond rouge
+        V Faire apparaitre la date d'échance
+
+    Sur l'Etat d'avancement:
+        V Montrer les échéances par processus et le nombre de jour restant
+        V Montrer l'échéance de validation et le nombre de jour restant
+
+
+        
+
+[V] MAJ automatique FTE > FTA
+    Dans la liste des FTE:
+        V Interdire la possibilité de supprimer des FTE tant qu'elles sont utilisées par des FTA autre que retirées
+
+    Lors de la modification d'une FTE:
+        V Mettre à jour les FTA
+        V Informer par mails les services des assistantes de projets concernés par les FTA validées qui ont été mises à jour
+        V Montrer dans la liste des FTA Validée associées
+        A Conserver l'historique de l'emballage
+          A Versionning des FTE
+          A Afficher le versionning sur le FTE
+          A Permettre sur la FTA de voir l'historique
+
+[V] Book des Tarifs
+    Bonjour,
+    En effet on peut rajouter le code agrologic, ce dernier est intimement lié au gencod qui est une information
+    pertinente. Justement le gencod a comme avantage de s'affranchir de l'intitulé de l'article, c'est donc une
+    information qui ne souffre aucune ambiguité.
+    J'ai vu avec Boris pour que les documents qui sont produits par le commercial ou le marketing 
+    (tarifs,mercuriales ...) puissent être extraits de l'intranet et que l'on choisisse les informations 
+    à extraire => cela fera l'objet d'un développement à venir
+    @+
+
+    >>> valerie guyony 27/11/06 14h48 >>>
+    Bonjour
+    je vous adresse, comme je l'ai fait au marketing, une demande d'optimisation sur 
+    la présentation des tarifs et des book commerciaux :
+    pouvons-nous mettre systematiquement les codes infologic des articles à la vente 
+    sur les tarifs et book commerciaux afin d'éviter toute confusion entre articles proches en libéllés ??
+    en effet le gencod n'est pas 1 info pertinente pour vérifier s'il s'agit du bon article , 
+    les intitulés sont parfois insuffisants et trop ressemblants , les anciens articles existent toujours, ...
+    il me semble que cela permettrait de fiabiliser le systeme ... qu'en pensez-vous ?
+    merci A+
+
+V Liste des champs: PRODUITS    POIDS   CODE        Site    GENCOD  PCB DLC PRIX NET FACTURE
+V Critères de recherche:
+    Période de recherche
+    Raccourcis de Classification
+    Enseigne (du chapitre tarif)
+
+
+
+
+
+
+--------------------------------------------------------------------------------
+
+ 
+
+
+[V] modification du fichier functions.php pour n'envoyer des mails qu'aux salariés actifs (commentaire //maj 2007-08-13 sm)
+                 notification_suivi_projet rajout ligne . "AND `salaries`.`actif` = 'oui' "
+                 mail prévention
+                      $adrfrom="postmaster@agis-sa.fr"; --> adresse à changer ???
+                 liste_diffusion_transition
+[V] 2007-10-24: Bug sur dérogation:
+ 
+

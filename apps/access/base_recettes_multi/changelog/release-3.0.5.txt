@@ -1,0 +1,59 @@
+================================================================================
+Modifications à apporter aux différentes versions du modules
+================================================================================
+
+[ ]: Reste à effectuer
+[!]: Prioritaire
+[V]: Réalisé
+[.]: Abandonné
+================================================================================
+Exemples:
+[V] 23/05/2003: saisie_vierge_origine.php
+      Déplacer les informations de cette page au niveau du composant.
+
+[ ] 28/07/2003: saisie_origine.php
+                Saisie de plusieurs origine sans cycle.
+                Rajouter dans la listedes origine:
+                         - Cf Origine MP
+                         - Cf Lieu dernière Transformation
+                         - Cf Origine Multiple
+                         - Cf Non défini
+                Bouton "Terminer Saisie"
+================================================================================
+
+[v] dans F gérer déverrouiller les champs quand on passe par le code gpao direct (visualiser les of, modifier ...)
+
+
+[v] Cecile PFISTER/LDCAVI/GRPLDC/FR a écrit sur 12/01/2009 10:56:29 :
+> Bonjour Stéphane,
+> 
+> Sur la page fiche recette imprimée, la colonne fournisseur a disparu...
+> Merci de la réintégrer.
+> 
+> A+
+> Cécile
+
+[v] Cecile PFISTER/LDCAVI/GRPLDC/FR a écrit sur 12/01/2009 16:39:38 :
+> Stéphane, 
+> 
+> La base de données recettes...toujours...
+> Lors de l'impression d'une page provisoire - identique écran, 
+> l'impression se fait désormais sur 2 pages... avec juste une bande 
+> de couleurs sur la 2ème page.
+> La mention NON enregistrée n'apparaît plus en bas de page.
+> 
+> Merci
+> A+
+> Cécile
+
+fiche recette 7270 initialement enregistrée sous "FARCE PASTILLA CHEVRE EURIAL" est à présent nommée comme ci-dessous : 
+Pourquoi ? 
+=> CORRECTION de la requete de mise à jour qui ne prenait pas en compte la notion de site (la mise à jour initiale correspond à une modification sur avignon qui a aussi renommé ta recette, j'ai renommé ta recette correctement)
+
++ pour la recette 7303 "Acras crevette 10g tda piece", je ne peux pas appeler la farce que je veux ... à savoir la 7055 "Farce Acras Crevette avec levure TDA Prep Kg" : elle n'est pas disponible ds la liste, or elle existe bien en dossier 7055 et j'ai pu travailler dessus.
+=> elle y est pourtant bien ???
++ pour l'impression de l'Ordre de Fabrication, la colonne de qté de matière sur la base de 1 kg n'y est plus : or elle est aussi nécessaire. Merci de la remettre.
+=> rajout de la colonne mais en diminuant obligatoirement celle du libelle ingrédient et fournisseur
+
++ pour la création des recettes, dans le choix des ingrédients, la colonne est de l'intitulé de l'ingrédient n'est pas assez grande pour voir l'ensemble de l'intitulé : est-ce possible de l'agrandir ? et de diminuer légèrement celle de fournisseur ?
+=> colonne agrandie cependant les dénominations ne sont pas correctes : PREPARATION devrait être PREP, FARCE -> FCE .... ceci afin d'avoir plus d'information en visuel

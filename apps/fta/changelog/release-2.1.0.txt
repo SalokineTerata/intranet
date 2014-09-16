@@ -1,0 +1,315 @@
+================================================================================
+Modifications à apporter aux différentes versions du modules
+================================================================================
+
+[ ]: Reste à effectuer
+[!]: Prioritaire
+[V]: Réalisé
+[.]: Abandonné
+================================================================================
+Exemples:
+[V] 23/05/2003: saisie_vierge_origine.php
+      Déplacer les informations de cette page au niveau du composant.
+
+[ ] 28/07/2003: saisie_origine.php
+                Saisie de plusieurs origine sans cycle.
+                Rajouter dans la listedes origine:
+                         - Cf Origine MP
+                         - Cf Lieu dernière Transformation
+                         - Cf Origine Multiple
+                         - Cf Non défini
+                Bouton "Terminer Saisie"
+================================================================================
+[V] recherche rapide sur code Agrologic
+
+[!] Définir les différents type de d'interprétation.
+    Pour chaque exemple,
+
+    Tableau composition = périmètre UVC ou pérmiètre "Colis" ?
+
+[V] pb dans la mise à jour des champs suivants dans access_arti2
+    NB UV PAR US1           => NULL 
+    code_barre_specifique       => NULL alors que valeur par défaut = 0  
+    fiche_palette_specifique    => NULL alors que valeur par défaut = 0
+
+[A] ACCESS: RCP04_05.mdb
+    - Supprimer le lien vers erp_data/ARTI2
+    - Créer le lien vesr MySQL(agis)/access_arti2
+    - Créer la requête ARTI2 en corrigeant les noms de champs
+
+[A] PDF Client: Ajouter le nombre de portions de l'UVC géré par de chef de projet
+
+[A] Pouvoir intégrer un conseil de réchauffage par composants (+ répercution sur PDF)
+[V] Fiche Présentation:
+    - Processus: Chef de projet
+         - Chapitre: Identité (ne pas faire apparaitre durée de vie interne
+
+         - Processus: Qualité
+              - Chapitre: Composition
+         - Processus: Informatique
+              - Chapitre: Codification Standard Externe
+         - Processus: Emballage
+              - Cahpitre: Emballage
+[A] Produire un recap tarif à partir d'une liste d'Article
+[R] Faire en sorte qu'un utilisateur qui est rattaché au site "Agis" puisse voir tous les multisites
+[R] Actions Groupées
+  - Transition avec Mail groupé
+
+[V] Voir pour les règles de gestion des données suivantes dans access_arti2:
+         - FAMILLE_BUDGET
+         - FAMILLE_ARTICLE
+         - FAMILLE_MKTG
+
+[R] Possibilité de classer l'index en cliquent sur les entête de colonne.
+
+[V] PDF: problème de marge cf. papier:
+    + 0,5cm à gauche
+    + 0,5cm à droite
+    + 1cm en Bas
+    + 0,5cm en haut
+
+[V] Cycle de Vie Pésentation:
+     - Chef de projet -> Achats
+                      -> Qualité
+     - Possibilité d'extraire le PDF pendant ce cycle.
+
+[V] Vérifier pourquoi il y a un code article sur les FTA d'élodie.
+    Pourquoi il y a des informations d'activation Articles et d'activation produits
+    ex: crumble de canard
+
+[V] Poids brut palette du Timable écrevisse: différence avec intranet FicheTech
+
+[V] Langouste, voir pourquoi il y a PCB=2 alors que sur l'Intranet Fichetech = 4
+
+[V] Vérifier poids brut colis pour la lotte (4.26 kg)
+
+[V] Verrou sur les doublons de code LDC
+
+[V] Code Article 11727 = doublon id_fta 176 et 210.
+    Faire requ^te de de doublon sur le champ fta.id_article_agrologic
+
+    SELECT `id_article_agrologic` AS `code_agrologic` , COUNT( `id_article_agrologic` ) AS `compte`
+    FROM `fta`
+    WHERE id_fta_etat =3
+    GROUP BY `id_article_agrologic`
+    ORDER BY `compte` DESC 
+
+    V 27000  2
+    V 11710  2
+    V  5331  2
+    V  5325  2
+    V 10541  2
+    V 21205  2
+    V 11083  2
+    V 10064  2
+    V 11084  2
+    V 11730  2
+    V 11727  2
+    V 10222  2
+    V 10726  2
+    V 10001  2
+    V 23066  2
+
+[A] Former Gestion des Ventes
+
+[V] Sur ajout nomenclature, reprendre par défaut le site d'assemblaghe
+
+
+[V] Classification:
+
+    Saisonnalité:
+      Permanent
+      Thématique
+          - Festif
+          - Chasse
+          - NAA
+          - ...etc.
+
+    Dans FAMILLES ATICLES: 210 - Frits LS TDA faut-il continuer à le gérer
+         (sinon, fusion du 230 vers le 210 et renommer le 210 en LS TDA)
+         - source = Annelise, Géraldine
+
+    Dans FAMILLES MAKTG:
+         - REG: vérifier puis supprimer son fonctionnement.
+         - FAM MKTG: Activité + Rayon + Marque
+
+[V](Christine) exmple: 11087
+    Erreur sur hauteur total palette au niveau PDF (cf. valeur Intranet qui est OK)
+
+
+[V](Christine) Vréifier qu'il ny ait pas confusion entre:
+    - "Nombre de couche par palette"
+    - "Nombre de colis par couche"
+
+[V](Christine) Vérifier la présence des dimensions Barquettes sur le PDF
+
+[V] Mail d'information, lors de l'information, mail en double, Gestion Article + Qualité
+
+[V] Fusionner (modifier + consulter)
+
+[V] Régénération des FTA manquantes:
+    - Requête de récupération de access_arti2: "SELECT * FROM `access_arti2` WHERE `id_fta` IS NULL AND `actif` = -1"
+    - Créer un enregistrement fta
+    - mise à jour fta;
+           id_access_arti2
+           id_dossier_fta=id_fta
+           id_fta_etat=3
+           date_derniere_maj_fta=2006-06-09
+           remarque_fta=FTA recréée automatiquement.
+           designation_commerciale_fta=access_arti2.LIBELLE_CLIENT
+           id_article_agrologic=CODE_ARTICLE
+
+    - mise à jour access_arti2;
+           id_fta
+
+    - Création du suivi de projet:
+      pour tous les chapitres:
+           id_fta
+           commentaire_suivi_projet=FTA recréée automatiquement.
+           date_validation_suivi_projet=2006-06-09
+           signature_validation_suivi_projet=-1
+           notification_fta_suivi_projet=1
+
+[V] Classement des synthèse de fiches: un premier celle modifiable, puis celle en attente, et afin celle terminée.
+
+[V] Pouvoir modifier un intermédiaire de production
+
+[V] Dans la liste des FTA initialisée, ne monterer que les FTA initié par son service.
+
+[V] FTA Validé avec Code Agrologic à 0
+    190-v0
+    85-v1
+    88-v2
+    51-v0
+    82-v1
+    90-v1
+    86-v1
+    89-v1
+    87-v1
+    142-v1
+[V] Lors d'une transition en mise à jour:
+    Warning: mysql_result(): signature_validation_suivi_projet not found in MySQL result index 602 in /mnt/sda3/var/www/intranet/fta/functions.php on line 549
+    Warning: mysql_result(): signature_validation_suivi_projet not found in MySQL result index 603 in /mnt/sda3/var/www/intranet/fta/functions.php on line 549
+    Warning: mysql_result(): signature_validation_suivi_projet not found in MySQL result index 604 in /mnt/sda3/var/www/intranet/fta/functions.php on line 549
+    Warning: mysql_result(): signature_validation_suivi_projet not found in MySQL result index 605 in /mnt/sda3/var/www/intranet/fta/functions.php on line 549
+    Warning: mysql_result(): signature_validation_suivi_projet not found in MySQL result index 606 in /mnt/sda3/var/www/intranet/fta/functions.php on line 549
+    Warning: mysql_result(): signature_validation_suivi_projet not found in MySQL result index 607 in /mnt/sda3/var/www/intranet/fta/functions.php on line 549
+    Warning: mysql_result(): signature_validation_suivi_projet not found in MySQL result index 608 in /mnt/sda3/var/www/intranet/fta/functions.php on line 549
+    Warning: Cannot modify header information - headers already sent by (output started at /mnt/sda3/var/www/intranet/fta/functions.php:549) in /mnt/sda3/var/www/intranet/fta/transiter_post.php on line 162
+    Warning: Cannot modify header information - headers already sent by (output started at /mnt/sda3/var/www/intranet/fta/functions.php:549) in /mnt/sda3/var/www/intranet/fta/transiter_post.php on line 291
+
+[V] Vérrouiller la possibilité d'affecter le même code agrologic lors de l'initialisation
+
+[A] Ajouter la légende des couleur du tableau de synthèse
+[V] Information de Validation, voir pourquoi la R&D et la qualité ne reçoivent pas les mails
+    Pour la qualité, c'est normal.
+    Voir pour la R&D
+
+[V] Information des R&D dès la création des produits
+
+[V] Ajout nom du modèle + palettisation par défaut lors de la sélection d'un modèle d'emballeg
+[V] Possibilité de modifier un emballage sans avoir à le supprimer puis le recréer
+[V] Affichage de l'intitulé du modèle d'emballage.
+[V] Ajout automatique d'une palette à la création d'un nouvelle FTA
+[V] Modification
+[A] Définition de notes internes
+[V] Ouvrir nouvelle fenetre lors de ouvrte modification
+[V] Environnement sec, Code 3 dans table access arti2
+    k_gestion doit être à 1
+[A] Tableau abreviation et gamme
+    De plus a modifier Les produits 600000 ne sont pas toujours des farces mais aussi des galettes. Avec la saisie automatique on se retrouve avec FCE Galette
+    Vue le peu de nombre de galette, on garde FCE devant.
+
+[V] DIN:
+    V Ne saisir que le nom abrégé de l'article.
+    V Produire le nom DIN (enregistré dans LIBELLE)
+    V Produire le nom étiquette (enregistré dans LIBELLE_CLIENT)
+    V Permettre à la qualité de pouvoir mettre à jour cette information.
+    V Mise à jour de l'alimentation de l'enregistrement temporaire pour la base codesoft. (impossible de le valider, pas de système de développement fonctionnel)
+    V Mise à jour du champ LIBELLE_CLIENT par LIBELLE
+
+[V] Bonjour,
+     Sur les FTA créés la semaine dernière et validées, lorsqu'on regarde chaque partie tout est OK mais lorsqu'on imprime la FTA à partir du pdf la palettisation est fausse.
+    De plus dans la partie informations générales du pdf, au niveau du conditionnement, il est inscrit le commentaire sur le chapitre.
+    Les FTA concernées :
+    BL FAMILIAL :  Filets de lieu aux écrevisses et julienne de légumes, sauté de porc marengo, Boeuf cuisiné aux carottes, Aiguilletes de poulet à la normande.
+    ILYA  :  Tomates Farcies à la ricotte et aux légumes, Volaille à la catalane et au piment d'Espelette
+    TAPAS : assortiment de tapas froid, assortiment de tapas chaud
+    Merci de me tenir informer de la suite
+    Amandine
+
+    http://intranet.agis.fr/fta/modification_fiche.php?id_fta=581&id_fta_chapitre_encours=70&synthese_action=consultation
+    http://intranet.agis.fr/fta/pdf.php?id_fta=581&mode=client --> Poids net Colis
+
+[V] Ajouter la notion de créateur de la FTA
+[A] Ajouter * Processus: Gestion des Articles
+            [ ] Agrologic:Matière
+            [ ] Agrologic:Produit fini
+            [ ] Agrologic:Article
+            [ ] Agrologic:Zones Variables
+            [ ] Agrologic:Casiers correspondants (pour le produit fini)
+            [ ] Agrologic:MATSIT
+            [ ] Agrologic: Tarif
+
+[V] Limiter la taille du champ Désignation Commerciale à 60 Caractères
+[V] Ajouter "prenom nom: adesse email" dans le mail de renseignement
+
+[V] Intégrer le commentaire de transition dans le mail de communication
+[V] Vérifier la duplication et bug sur code Agrologic.
+[V] Notification (voir pour la qualité)
+    Exemple: sur FTA ATI
+    - superviseur
+    - avignon qualite !!
+    - ati 
+[V] Voir pour éviter d'avoir des mails en series
+A Création d'un utilisateur ATI: avec tous les droits
+V Voir pour intégrer dans le login utilisateur
+V Limiter les redondances de mails à chaque validation de chapitre.
+
+[V] Fusionner les cycles de vies additionnels sur l'unique cycle de vie FTA.
+    Le chef de projet reste l'unique processus qui peut lancer une modification de FTA.
+    45500, 45501
+
+[A] Afficher une colonne personnalisé au processus (par exemple Dta de transfert industriel pour le processus Gestion des Articles)
+
+[v] Affichage de l'arborescence dans FTMP
+[V] Poids Net colis en fonction de la composition
+[V] Fabriqué en france
+
+[v]  Sur ajout emballe UVC, problème pour saisie PCB
+
+
+
+/*****************************************
+FTA ATI:
+
+
+
+
+
+[V] Ajout Commposant: Le site doit être par défaut le site d'assemablage
+[V] Sur le chapitre composition, faire apparaitre le poids net colis (sous le tableau)
+[V] Information par mail
+[V] Ajouter recherche par code LDC
+[V] Supprimer le bouton "Supprimer le dossier technique"
+[V] Mail d'information périmètre service -> pas de mail.
+[V] Affectation Code Agrologic: Le controle ne permet pas d'utiliser un code lorsque la FTA est en état Retiré.
+[V] Le Nom DIN n'apparait pas dans l'index.
+[V] Commentaire Emballage sur export PDF --> Supprimer le Gras
+
+
+[V] Mail à cécile.
+[ ] Voir pour les modèle d'emballage
+- Sur la FTA ATI, l'information "Poids emballage en g" est-elle la somme des poids des emballages de l'UVC ?
+[ ] Manque EAN Article + Colis
+- sur la FTA ATI, vérifier la "Hauteur de palette en m"
+- Créer une FTA ATI Modèle avec le nom des champs intranet à la place du contenu.
+
+
+V Poids emballage UVC (problème avec le PCB)
+V Poids brut palette à corriger sur le chapitre palettisation (il doit manquer le poidsz de la palette
+[ ] Intégrer Florence Pontoire pour la gestion Produit + explication à la personne.
+
+
+
+

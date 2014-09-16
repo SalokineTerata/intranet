@@ -1,0 +1,25 @@
+================================================================================
+Modifications à apporter aux différentes versions du modules
+================================================================================
+
+[ ]: Reste à effectuer
+[!]: Prioritaire
+[V]: Réalisé
+[.]: Abandonné
+================================================================================
+Exemples:
+[V] 23/05/2003: saisie_vierge_origine.php
+      Déplacer les informations de cette page au niveau du composant.
+
+[ ] 28/07/2003: saisie_origine.php
+                Saisie de plusieurs origine sans cycle.
+                Rajouter dans la listedes origine:
+                         - Cf Origine MP
+                         - Cf Lieu dernière Transformation
+                         - Cf Origine Multiple
+                         - Cf Non défini
+                Bouton "Terminer Saisie"
+================================================================================
+
+20/08/08 migration totale dans l'intranet de la base risque pro de tarare (alors que les base risq_pro (= avignon) et siège ont les data dans L:\).
+S'il y a un besoin futur de centraliser toutes les bases risq dans l'intranet il faudra alors utiliser cette base ci => mais la table secteur est spécifque par site

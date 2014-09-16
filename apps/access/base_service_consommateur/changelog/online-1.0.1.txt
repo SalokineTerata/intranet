@@ -1,0 +1,58 @@
+================================================================================
+Fiches et Tables à basculer de intranet.dev.agis.fr vers intranet.agis.fr:
+================================================================================
+
+[ ]: Reste à effectuer
+[X]: Réalisé
+================================================================================
+
+Pour les copies MYSQL[]:
+---------------------------
+[D]: DATA et STRUCTURE sont à transférer
+[S]: STRUCTURE seulement sont à transférer
+[O]: Renommer la table en OLD_nom_de_la_table
+================================================================================
+
+Pour les copies de FILE:
+----------------------------
+chemin depuis le répertoire racine du site
+- si c'est le répertoire du module:
+	- renommer le répertoire d'exploitation nom-AAAA-MM-JJ où la date est la
+		date du jour de la modification
+	- faire un TAR.GZ
+	- supprimer l'original
+	- copier le répertoire de développement vers le site d'exploitation
+
+================================================================================
+[V] Systématique: Ecarter une sauvegarde de l'intranet exploitation
+[V] Systématique: ACCESS: Démarrage --> Titre de l'Application --> Incrémenter la version
+[V] Systématique: MYSQL[D]: intranet_access_linked_table uniquement pour la base sur laquelle on travaille
+REPLACE INTO `intranet_access_linked_table` VALUES (478, 'service_consommateur', 'salaries', 'salaries', 'complet', '', '', '');
+REPLACE INTO `intranet_access_linked_table` VALUES (479, 'service_consommateur', 'access_materiel_service', 'service', 'complet', '', '', '');
+REPLACE INTO `intranet_access_linked_table` VALUES (452, 'service_consommateur', 'access_service_consommateur_ciliviltes', 'access_service_consommateur_ciliviltes', 'complet', '', '', '');
+REPLACE INTO `intranet_access_linked_table` VALUES (453, 'service_consommateur', 'access_service_consommateur_consommateur', 'access_service_consommateur_consommateur', 'complet', '', '', '');
+REPLACE INTO `intranet_access_linked_table` VALUES (454, 'service_consommateur', 'access_service_consommateur_lettres_types', 'access_service_consommateur_lettres_types', 'complet', '', '', '');
+REPLACE INTO `intranet_access_linked_table` VALUES (455, 'service_consommateur', 'access_service_consommateur_reclamations', 'access_service_consommateur_reclamations', 'complet', '', '', '');
+REPLACE INTO `intranet_access_linked_table` VALUES (456, 'service_consommateur', 'access_service_consommateur_typologies', 'access_service_consommateur_typologies', 'complet', '', '', '');
+REPLACE INTO `intranet_access_linked_table` VALUES (457, 'service_consommateur', 'access_arti2', 'access_arti2', 'complet', '', '', '');
+REPLACE INTO `intranet_access_linked_table` VALUES (458, 'service_consommateur', 'access_clients_rayon', 'access_clients_rayon', 'complet', '', '', '');
+REPLACE INTO `intranet_access_linked_table` VALUES (459, 'service_consommateur', 'access_clients', 'access_clients', 'complet', '', '', '');
+REPLACE INTO `intranet_access_linked_table` VALUES (460, 'service_consommateur', 'access_familles_articles', 'FAMILLES ARTICLES', 'complet', '', '', '');
+REPLACE INTO `intranet_access_linked_table` VALUES (461, 'service_consommateur', 'access_familles_clients', 'FAMILLES CLIENTS', 'complet', '', '', '');
+REPLACE INTO `intranet_access_linked_table` VALUES (462, 'service_consommateur', 'access_gammes', 'GAMMES', 'complet', '', '', '');
+REPLACE INTO `intranet_access_linked_table` VALUES (463, 'service_consommateur', 'access_regroupements', 'REGROUPEMENTS', 'complet', '', '', '');
+REPLACE INTO `intranet_access_linked_table` VALUES (464, 'service_consommateur', 'geo', 'SITES', 'complet', '', '', '');
+REPLACE INTO `intranet_access_linked_table` VALUES (495, 'service_consommateur', 'access_service_consommateur_liste_diffusion', 'access_service_consommateur_liste_diffusion', 'complet', '', '', '');
+REPLACE INTO `intranet_access_linked_table` VALUES (496, 'service_consommateur', 'access_service_consommateur_mesure_corrective', 'access_service_consommateur_mesure_corrective', 'complet', '', '', '');
+REPLACE INTO `intranet_access_linked_table` VALUES (497, 'service_consommateur', 'intranet_droits_acces', 'intranet_droits_acces', 'complet', '', '', '');
+REPLACE INTO `intranet_access_linked_table` VALUES (498, 'service_consommateur', 'intranet_actions', 'intranet_actions', 'complet', '', '', '');
+REPLACE INTO `intranet_access_linked_table` VALUES (499, 'service_consommateur', 'intranet_niveau_acces', 'intranet_niveau_acces', 'complet', '', '', '');
+REPLACE INTO `intranet_access_linked_table` VALUES (500, 'service_consommateur', 'access_service_consommateur_statistiques_articles', 'access_service_consommateur_statistiques_articles', 'complet', '', '', '');
+        
+[V] Systématique: Créer le fichier .agismde
+[V] Systématique: copier le sous dossier actuel /base_nom_du_sous_module
+[V] Systématique: Ajouter à l'extension du .mdb l'extension ".lock"
+[A] systématique: transfert du dossier \\Avi1203\www\intranet.dev\access\data (contient les modèles de lettre de fusion)
+	Aucune modification
+
+

@@ -1,0 +1,56 @@
+================================================================================
+Modifications à apporter aux différentes versions du modules
+================================================================================
+
+[ ]: Reste à effectuer
+[!]: Prioritaire
+[V]: Réalisé
+[.]: Abandonné
+================================================================================
+Exemples:
+[V] 23/05/2003: saisie_vierge_origine.php
+      Déplacer les informations de cette page au niveau du composant.
+
+[ ] 28/07/2003: saisie_origine.php
+                Saisie de plusieurs origine sans cycle.
+                Rajouter dans la listedes origine:
+                         - Cf Origine MP
+                         - Cf Lieu dernière Transformation
+                         - Cf Origine Multiple
+                         - Cf Non défini
+                Bouton "Terminer Saisie"
+================================================================================
+
+
+[V] Cacher la fonctionnalité "Mémo"
+[V] Nouvelles règles d'utilisation des fichiers bureautiques qualité:
+    Fichier Modèle (ex: 0750aMD.doc) deviennent des documents OpenOffice (ex: 0750aMD.sxw)
+            -> Ceci évitera les problèmes de gestion des chemins d'accès
+            -> Ceci ne fait plus qu'un seul programme de traitement des modèles
+            -> Simplification de la procédure d'export PDF
+    Fichier Document Qualité (ex: 075a02.doc) devient des exports PDF (ex: 075a02.pdf)
+            -> allègement de la taille des fichier
+            -> Facilité pour la transmition des document
+            -> Vérouillage des documents
+            -> Suppression du risque de confusion pour l'utilisateur
+[V] Rétablir la fonctionalité de gestion des fichiers .xls
+[V] Possibilité de modifier un document de Word vers Excel
+
+
+[V] Bonjour
+    Bien reçu ton message indiquant le passage de la base qualité sur le site intranet d'Agis.
+    OK pour tout ce qui est WORD (recherche de la source de données, etc...)
+    En ce qui concerne les fichiers EXCEL tu note dans les modifications à planifier : "Rétablisssement de la fonction des fichiers de type .XLS"
+    effectivement, j'ai voulu modifier un doc EXCEL et lorsque j'ai cliqué sur l'icône EXCEL, j'ai eu le message "Fichier introuvable"
+    Que faut il faire dans ces cas là ?
+    Merci de ton aide
+    si tu dois disposer de mon poste (n°36), je suis absente demain toute la journée
+    A bientôt
+    Christine
+    --> Changement de la sources de données (M:\extract.mdb vers C:\temp.mdb
+
+[V] Point de la norme:
+    Mettre en commun les données
+    Mettre à jour les enregistrements existants
+    Renommer l'ensemble "Point de la norme" par "Processus"
+

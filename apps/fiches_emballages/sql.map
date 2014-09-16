@@ -1,0 +1,10 @@
+#Ce fichier doit contenir uniquement les jointures entre les differentes
+#tables d'un même module.
+#Les noms des champs doivent etre précédés par le nom de la table 
+#a laquelle ils appartiennent et un point
+#Les liaisons doivent etre séparées par des sauts de lignes 
+#(pas de AND a la fin)
+#
+#Exemple:
+#matiere_premiere.id_matiere_premiere_etat=matiere_premiere_etat.id_matiere_premiere_etat
+#matiere_premiere_filiere.id_matiere_premiere_filiere=matiere_premiere.id_matiere_premiere_filiere

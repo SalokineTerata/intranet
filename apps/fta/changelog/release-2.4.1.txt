@@ -1,0 +1,92 @@
+================================================================================
+Modifications à apporter aux différentes versions du modules
+================================================================================
+
+[ ]: Reste à effectuer
+[!]: Prioritaire
+[V]: Réalisé
+[.]: Abandonné
+[R]: Reporté
+================================================================================
+Exemples:
+[V] 23/05/2003: saisie_vierge_origine.php
+      Déplacer les informations de cette page au niveau du composant.
+
+[ ] 28/07/2003: saisie_origine.php
+                Saisie de plusieurs origine sans cycle.
+                Rajouter dans la listedes origine:
+                         - Cf Origine MP
+                         - Cf Lieu dernière Transformation
+                         - Cf Origine Multiple
+                         - Cf Non défini
+                Bouton "Terminer Saisie"
+================================================================================
+
+[V] Intitulé "Libellé etiquette carton:" disparait lorsqu'on revient sur la FTA
+[V] Doublon dans les emballage UVC:
+            Correction manuelle réalisée via http://intranet.agis.fr/fta/migration.php --> Doublon dans les emballage UVC 
+[V] Problème dans l'envoi des mails - output started at /mnt/sda3/var/www/intranet/lib/functions.mail.php:98
+  Recherche des FTA passez au travers de la faille:
+            SELECT *
+            FROM access_arti2
+            WHERE CODE_ARTICLE IS NOT NULL
+            AND LIBELLE_CLIENT IS NULL 
+  Seule le "23125 - PLT ECREVISSES LSBL 4X290G" était concerné --> Corrigé
+
+[V] Voir les problèmes d'association fta_composition <-> fta_nomenclature
+
+    ETAPE #1: Identification
+
+    SELECT fta_composition.id_fta_composition, fta_composition.id_fta, fta_composition.id_fta_nomenclature, fta_composition.ingredient_fta_composition, fta_nomenclature.id_fta_nomenclature, fta_nomenclature.last_id_fta_nomenclature, fta_nomenclature.id_fta
+    FROM fta_composition, fta_nomenclature
+    WHERE fta_composition.id_fta_nomenclature = fta_nomenclature.id_fta_nomenclature 
+    AND fta_composition.id_fta <>fta_nomenclature.id_fta
+    ORDER BY `id_fta_composition` DESC 
+
+    ETAPE #2: Correction
+
+    UPDATE fta_composition,
+    fta_nomenclature SET fta_composition.id_fta_nomenclature = fta_nomenclature.last_id_fta_nomenclature WHERE fta_composition.id_fta_nomenclature = fta_nomenclature.id_fta_nomenclature AND fta_composition.id_fta <> fta_nomenclature.id_fta
+
+[V] Cécile Pfister: Ce matin, impossible d'enregistrer les dates de transfert industriel dans les FTA...
+[V] Mail Valérie Guyony
+
+    Ajout de "AND intranet_modules.id_intranet_modules=intranet_droits_acces.id_intranet_modules ". Il manquait la liaison !!!
+
+         SELECT salaries.id_user, nom, prenom, mail
+         FROM salaries, intranet_droits_acces, intranet_modules, intranet_actions, geo
+         WHERE `salaries`.`id_user` = `intranet_droits_acces`.`id_user`
+         AND `salaries`.`actif` = 'oui'
+         AND `intranet_droits_acces`.`id_intranet_actions` = `intranet_actions`.`id_intranet_actions`
+         AND `intranet_actions`.`nom_intranet_actions` = 'diffusion'
+         AND `intranet_droits_acces`.`niveau_intranet_droits_acces` =1
+         AND `intranet_modules`.`nom_intranet_modules` = 'fta'
+   ==>>  AND intranet_modules.id_intranet_modules=intranet_droits_acces.id_intranet_modules
+         AND geo.id_geo = salaries.lieu_geo
+         AND (
+         (
+         id_service = '33'
+         )
+         OR (
+         id_service = '46'
+         AND lieu_geo = '1'
+         )
+         OR (
+         id_service = '47'
+         AND lieu_geo = '1'
+         )
+         OR (
+         id_service = '54'
+         AND lieu_geo = '1'
+         )
+         OR (
+         id_service = '62'
+         )
+         OR (
+         id_service = '67'
+         )
+         OR geo.raccourci_site_agis = 'PF'
+         OR id_service =66
+         )
+
+

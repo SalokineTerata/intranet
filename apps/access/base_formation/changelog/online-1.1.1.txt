@@ -1,0 +1,50 @@
+================================================================================
+Fiches et Tables à basculer de intranet.dev.agis.fr vers intranet.agis.fr:
+================================================================================
+
+[ ]: Reste à effectuer
+[X]: Réalisé
+================================================================================
+
+Pour les copies MYSQL[]:
+---------------------------
+[D]: DATA et STRUCTURE sont à transférer
+[S]: STRUCTURE seulement sont à transférer
+[O]: Renommer la table en OLD_nom_de_la_table
+================================================================================
+
+Pour les copies de FILE:
+----------------------------
+chemin depuis le répertoire racine du site
+- si c'est le répertoire du module:
+	- renommer le répertoire d'exploitation nom-AAAA-MM-JJ où la date est la
+		date du jour de la modification
+	- faire un TAR.GZ
+	- supprimer l'original
+	- copier le répertoire de développement vers le site d'exploitation
+
+================================================================================
+[ ] Systématique: Ecarter une sauvegarde de l'intranet exploitation
+[ ] Systématique: ACCESS: Démarrage --> Titre de l'Application --> Incrémenter la version
+[ ] Systématique: MYSQL[D]: intranet_access_linked_table uniquement pour la base sur laquelle on travaille
+[ ] Systématique: Créer le fichier .agismde
+[ ] Systématique: copier le sous dossier actuel /base_nom_du_sous_module
+[ ] Systématique: Ajouter à l'extension du .mdb l'extension ".lock"
+
+
+
+ALTER TABLE `access_formation_categories_socio_professionnelles` ADD `date_heure_operation` TIMESTAMP NOT NULL ;
+ALTER TABLE `access_formation_departements` ADD `date_heure_operation` TIMESTAMP NOT NULL ;
+ALTER TABLE `access_formation_fonctions` ADD `date_heure_operation` TIMESTAMP NOT NULL ;
+ALTER TABLE `access_formation_formation` ADD `date_heure_operation` TIMESTAMP NOT NULL ;
+ALTER TABLE `access_formation_regroupement_age` ADD `date_heure_operation` TIMESTAMP NOT NULL ;
+ALTER TABLE `access_formation_salarie` ADD `date_heure_operation` TIMESTAMP NOT NULL ;
+ALTER TABLE `access_formation_services` ADD `date_heure_operation` TIMESTAMP NOT NULL ;
+ALTER TABLE `access_formation_stage_informations` ADD `date_heure_operation` TIMESTAMP NOT NULL ;
+ALTER TABLE `access_formation_stage_intitule_formation` ADD `date_heure_operation` TIMESTAMP NOT NULL ;
+ALTER TABLE `access_formation_stage_table_des_domaines` ADD `date_heure_operation` TIMESTAMP NOT NULL ;
+ALTER TABLE `access_formation_stage_table_des_intitules` ADD `date_heure_operation` TIMESTAMP NOT NULL ;
+ALTER TABLE `access_formation_stage_table_des_organismes` ADD `date_heure_operation` TIMESTAMP NOT NULL ;
+ALTER TABLE `access_formation_table_des_Tx` ADD `date_heure_operation` TIMESTAMP NOT NULL ;
+ALTER TABLE `access_formation_table_des_donnees` ADD `date_heure_operation` TIMESTAMP NOT NULL ;   
+ALTER TABLE `access_formation_table_des_postes_de_depenses` ADD `date_heure_operation` TIMESTAMP NOT NULL ; 

@@ -1,0 +1,217 @@
+ ================================================================================
+Modifications à apporter aux différentes versions du modules
+================================================================================
+
+[ ]: Reste à effectuer
+[!]: Prioritaire
+[V]: Réalisé
+[.]: Abandonné
+[R]: Reporté
+================================================================================
+Exemples:
+[V] 23/05/2003: saisie_vierge_origine.php
+      Déplacer les informations de cette page au niveau du composant.
+
+[ ] 28/07/2003: saisie_origine.php
+                Saisie de plusieurs origine sans cycle.
+                Rajouter dans la listedes origine:
+                         - Cf Origine MP
+                         - Cf Lieu dernière Transformation
+                         - Cf Origine Multiple
+                         - Cf Non défini
+                Bouton "Terminer Saisie"
+================================================================================
+[v] rajouter le champ Durée de vie commerciale dans la partie TARIF
+
+[V] Lors du passage d'une FTA de Validé vers Modifié, le commentaire doit être inclus dans le mail envoyé.
+(inclure aussi l'information des chapitres qui ont été coché), rendre obligatoire la justification.
+
+[V] Ajouter les informations de chapitre concerné dans le chapitre commentaire.
+
+
+[V] recherche d'une fta par moteur de recherche / consutlation fta / clic sur lien retour vers synthese => message ci dessous
+Warning: mysql_num_rows(): supplied argument is not a valid MySQL result resource in /mnt/sda3/var/www/intranet/fta/functions.php on line 2238
+Warning: mysql_fetch_array(): supplied argument is not a valid MySQL result resource in /mnt/sda3/var/www/intranet/fta/functions.php on line 2272
+
+[V] clic su le lien voir des fiches en état VALIDE / ARCHIVE / RETIRE
+Warning: mysql_num_rows(): supplied argument is not a valid MySQL result resource in /mnt/sda3/var/www/intranet/fta/functions.php on line 2238
+Warning: mysql_fetch_array(): supplied argument is not a valid MySQL result resource in /mnt/sda3/var/www/intranet/fta/functions.php on line 2272
+
+
+[V] Vérifier que le nom de la marque + Poids + Nb UVC apparait bien à la place de la DIN
+    lorsqu'on est en visualisation moteur de recherche sur des article n'ayant pas encore de DIN
+
+[V] Ne pas montrer la codification "00 - Porduit fini en carton" au niveau de la saisie des nomenclature
+
+[V] VERIFIER LA REQUETE LORS DE LA VALIDATION DE LA FTA EN USER SUPERVISEUR (cela se fait aussi avec le user Boris)
+    Sylvie Bourdelin
+    Salut,
+    Je pense que la base cerise fait encore des siennes............
+    a+
+    >>> <boris SANEGRE> 26/09/06 19h54 >>>
+    Bonjour,
+      Nous vous informons de la validation des Fiches Techniques Articles suivantes:
+    Site d'assemblage: AVIGNON
+    10167 MOUSS CELERI AIRELLE TRFST 12X90G
+    10168 MOUSS BROCOLIS CHOU TRFST 12X90G
+    10169 MOUSS ASPERGE VERTE TRFST 12X90G
+    10208 GRATIN DAUPHINOIS TRFST 8X300G
+    10524 CANARD SCE MORILLE TRFST 2X2KG
+    Ces Articles sont maintenant disponibles et à jour dans l'ensemble de notre système informatique
+    Bonne journée.
+    Intranet - FTA
+
+    
+[V] mail de validation de FTA : quand un article n'a pas de composant saisie (dans chapitre activation des produits) la liste des codes qui lui est affectée est cele du code précédent
+
+        Site d'assemblage: AVIGNON
+        10173 MENU RELAI BERNARD LOISEAU TRFEST B 1X660G        0210321, 0210322, 0210323, 0210324, 0210325, 0210258, 0210326, 0210327, 0210328, 0500770, 0500771, 0700378, 0700535, 0700390, 0700536, 0700566, 0700537, 0700538, 0700539, 0700540, 0700541, 0700542, 0700543, 0700544, 0700545, 0700546, 
+
+
+        Site d'assemblage: TARARE
+        11087 PLATEAU MISES EN FETE COUPE       0210321, 0210322, 0210323, 0210324, 0210325, 0210258, 0210326, 0210327, 0210328, 0500770, 0500771, 0700378, 0700535, 0700390, 0700536, 0700566, 0700537, 0700538, 0700539, 0700540, 0700541, 0700542, 0700543, 0700544, 0700545, 0700546, 
+
+        Ces Articles sont maintenant disponibles et à jour dans l'ensemble de notre système informatique
+
+
+[V] Montrer les différences de entre le chapitre en cours, et sa version précédente
+    fonction de comparaison de versionning du type
+
+             diff_version_register($id_fta)
+             analyse les différences entre les deux versions
+             enregistre ces différences dans le champ fta.champ_maj_fta
+             sous forme de liste.
+             Cette fonction est effectuée à chaque enregsitrement de fiche.
+
+             intégration d'un clef [last_id_."nom de la table"] pour les tables à versionning
+
+             diff_version_show($id_fta, "table.champ")
+             recherche le nom "table.champ" dans le champ fta.champ_maj_fta
+             retourne 1 si il trouve le champ.
+             Cette fonction est utilisée pour définir les fonds de couleurs des champ de saisie.
+
+
+[A] Fiche Technique EPC (Contact du service Qualité du site + Maquette de saisie)
+[V] Farce toujours en KG lors de la création produit:
+    21922 - NEMS AUX LEGUMES 
+    0600189 - FCE FARCE NEM LEGUMES MDPIC G
+    0121922 - NEM AUX LEGUMES MDPIC 25G PCE
+
+[V] Sur le chapitre Composition, rendre les champs durée de vie obligatoire
+
+[V] Formater la saisie des EAN
+
+[E] Modifier la désignation "Durée de Vie Technique" pour quelle soit moins ambigü avec la "Durée de Vie Production"
+[V] Modifier la fonction mysql_field_desc() pour proposer une aide en ligne
+
+    chapitre ETIQUETTE FTA : 
+    voir pour rajouter les notions de taille de police (faire une liste avec les valeurs 6.7.8) et de justification ou aligenement gauche du texte 
+    rajouter le champ modèle etiquette COMPO
+
+    préciser que les durees de vie concernent le carton 
+        Durée de vie Production (en jours)  
+        Durée de vie Technique (en jours)  
+        Etiquette   A SUPPRIMER
+
+[V] CHAPITRE COMPO (modification d'un composant) voir pour macher le travail au RAQ en  lançant tout le chemininement pour avoir l'aperçu pdf directement (en ayant récupéré toutes les valeurs de l'intranet)
+    http://intranet.dev.agis.fr/access/base_codesoft/secure_start-dev.vbs
+
+[V] chapitre ETIQUETTE
+    Activer le système d'impression Base Etiquette Codesoft => mettre case à cocher carton / compo (si les 2 sont sélectionnées faire la somme)
+
+[A] chapitre ETIQUETTE pour la partie CARTON voir pour macher le travail au RAQ en  lançant tout le chemininement pour avoir l'aperçu pdf directement (en ayant récupéré toutes les valeurs de l'intranet)
+    http://intranet.dev.agis.fr/access/base_codesoft/secure_start-dev.vbs
+    L'extension pour exécuter une macro est /x start /WAIT msaccess.exe O:\outils\automa~1\autonet.mdb /x Archivage >> %LogFil% 2>Archivage
+    Si on a plusieurs variables à faire passer (pas dans ce
+    cas mais quelqu'un peut en avoir besoin) on préparera une
+    moulinette pour les séparer sur la base d'un séparateur,
+    classiquement l'espace, pour cela on pourra s'inspirer de
+    http://www.mvps.org/accessfr/strings/str0003.htm
+    ou faire une recherche sur la question, d'autres
+    moulinettes toutes prêtes se trouvent probablement quelque
+    part sur le web (séparation de la ligne de commande en
+    différents arguments).
+
+    Pour un raccourci, la syntaxe se présente comme suit :
+    "C:\Microsoft Office 97
+    \Office\MsAccess" "D:\testliste97.mdb" /cmdfrmA
+
+    On note les guillemets autour du chemin du programme
+    Access, et les guillemets autour du chemin de la base.
+    On pourrait aussi utiliser des chemins courts, cette fois
+    sans guillemets. 
+
+[V] Ajout d'une case pour l'intitulé etiquette permettant de vérrouiller le nom par la DIN
+[V] Lors d'erreur telque le même code Agrologic, avorter la validation
+[V] Après correction du chapitre Identié, vérifier l'envoi du mail de correction vers Emballage
+    Bug non reproduit
+[V] Par défaut, si l'utilisateur à la droit de modification, arriver sur la page des fiches en cours.
+[V] Emilie jouet: Peut-on montrer les informations d'allergène sur l'exportation PDF ?
+[R] Délais limite 2 semaines par Processus.
+[V] Pourvoir voir l'état d'avancement d'une FTA pour le droit consultation
+[A] Configuration des Approvisionnements  (1 mois avant le lancement)
+    Bonjour,
+
+    Le Service Approvisionnement (Isabelle Bord) m'indique des difficultés pour pouvoir configurer les nomenclatures dans le temps qu'il lui est imparti. 
+    Par rapport à celà, et dans le but de mieux répondre au contrainte du timing de chacun, j'ai quelques questions.
+
+    - La partie concernant la configuration des nomenclatures par le service Approvisionnement est-elle intégrée dans le Rétro-Planning ?
+    - La contrainte de temps est-elle indiquée dans le rétro-planning ? ( a priori, 1 mois avant la première commande).
+    - Sur la Fiche Technique Article (Chapitre Tarif), le champ "Date prévisionnelle de la 1ère commande" est rarement renseigné.
+      Puis-je:
+      - Déplacer cette information dans le Chapitre Identité ?
+      - La rendre obligatoire ?
+      - La renommer en "Echéance Validation FTA"
+    - Peut-on consulter les retro-plannings en cours ? (s:\partages\...etc)
+
+    Merci et bon après-midi.
+    Boris Sanègre.
+
+
+[R] Book des Tarifs
+    Bonjour,
+    En effet on peut rajouter le code agrologic, ce dernier est intimement lié au gencod qui est une information
+    pertinente. Justement le gencod a comme avantage de s'affranchir de l'intitulé de l'article, c'est donc une
+    information qui ne souffre aucune ambiguité.
+    J'ai vu avec Boris pour que les documents qui sont produits par le commercial ou le marketing 
+    (tarifs,mercuriales ...) puissent être extraits de l'intranet et que l'on choisisse les informations 
+    à extraire => cela fera l'objet d'un développement à venir
+    @+
+
+    >>> valerie guyony 27/11/06 14h48 >>>
+    Bonjour
+    je vous adresse, comme je l'ai fait au marketing, une demande d'optimisation sur 
+    la présentation des tarifs et des book commerciaux :
+    pouvons-nous mettre systematiquement les codes infologic des articles à la vente 
+    sur les tarifs et book commerciaux afin d'éviter toute confusion entre articles proches en libéllés ??
+    en effet le gencod n'est pas 1 info pertinente pour vérifier s'il s'agit du bon article , 
+    les intitulés sont parfois insuffisants et trop ressemblants , les anciens articles existent toujours, ...
+    il me semble que cela permettrait de fiabiliser le systeme ... qu'en pensez-vous ?
+    merci A+
+[V] Bonjour,
+    Nous souhaiterions voir apparaître le nombre de portions lors de l'impression d'une fiche technique.
+    Est-ce possible de rajouter un emplacement pour cette information?
+    Merci
+    Bérengère
+
+[R] Voir pour la gestion des dérogation des durées de vie des Composants
+
+
+[R] CRéer une vrai table des produits (associés au nomenclature)
+
+[V] pour les kits PLV pb dans la table access_arti2 => pb pour les bases utilisant ce champ (pour l'instant correction à la MANO du champ)
+    champ NB UV PAR US1 = vide
+    champ unité_facturation = vide
+    champ FAMILLE BUDGET = vide
+    sm
+[R] Index pour droit en consultation = Dernière fiches validées + Fiches en cours de modifications.
+
+[V] Liste de diffusion pour site ATI trop vaste
+
+[V] Commentaire sur mail d'information contient le code de documentation.
+
+[V] http://intranet.agis.fr/fta/modifier_composition.php?id_fta=1584&id_fta_composition=1532&id_fta_chapitre_encours=100&synthese_action=encours
+    Warning: mysql_fetch_array(): supplied argument is not a valid MySQL result resource in /mnt/sda3/var/www/intranet/lib/functions.php on line 1208
+    Warning: mysql_fetch_array(): supplied argument is not a valid MySQL result resource in /mnt/sda3/var/www/intranet/lib/functions.php on line 1208
+
+

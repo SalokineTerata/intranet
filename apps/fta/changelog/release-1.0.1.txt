@@ -1,0 +1,21 @@
+date la demande : 2003.11.07
+
+date de début : 2003.11.10
+
+
+
+[ ] Pouvoir faire une recherche par code Article ( Le marketing demande également par gencod)
+[ ] Le code article doit apparaître lors de l'impression usine.
+[ ] Supprimer la zone picking (l'avoir sur infologic suffit à la plate-forme)
+[ ] Quand on clique sur validation l'ensemble des FT non validées apparaissent. Est il possible de travailler uniquement par site ou que ce soit classé par ordre code article croissant.
+[ ] Après avoir testé le mode archivage il ne fonctionne pas. 
+
+
+Comment fait on pour créer une nouvelle gamme (exemple  TDA coupe,  et CARREFOUR coupe ,  AUCHAN coupe).
+
+
+/*********** Fichiers php modifiés
+indexft.php
+resmoteur.php
+archivage.php
+desarchivage.php

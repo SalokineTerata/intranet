@@ -1,0 +1,51 @@
+================================================================================
+Fiches et Tables à basculer de intranet.dev.agis.fr vers intranet.agis.fr:
+================================================================================
+
+[ ]: Reste à effectuer
+[X]: Réalisé
+================================================================================
+
+Pour les copies MYSQL[]:
+---------------------------
+[D]: DATA et STRUCTURE sont à transférer
+[S]: STRUCTURE seulement sont à transférer
+[O]: Renommer la table en OLD_nom_de_la_table
+================================================================================
+
+Pour les copies de FILE:
+----------------------------
+chemin depuis le répertoire racine du site
+- si c'est le répertoire du module:
+    - renommer le répertoire d'exploitation nom-AAAA-MM-JJ où la date est la
+        date du jour de la modification
+    - faire un TAR.GZ
+    - supprimer l'original
+    - copier le répertoire de développement vers le site d'exploitation
+
+================================================================================
+[V] Systématique: Ecarter une sauvegarde
+[V] Systématique: MYSQL[D]: intranet_modules
+[V] Systématique: /repertoire_du_module
+
+[V] access_arti2: libellé de "Durée_de_vie_technique"
+[V] fta[D]: duree_vie_technique_fta
+[V] fta_composition[S]: ajout de id_fta_nomenclature
+[V] fta_transition[D]
+[V] Geo: Ajout de ATI
+[V] [D] fta_processus_multisite
+[V] [D] fta_etat
+[V] [D] fta_processus_cycle
+[V] [S] fta:
+        allergenes_matiere_fta
+[V] [D] annexe_emballage_groupe
+[V] Requete SQL: update annexe_emballage SET id_annexe_emballage_groupe = 14 WHERE id_annexe_emballage_groupe = 1;
+[V] [D] annexe_emballage_groupe_type
+[V] MySQL[D] fta_processus_multisite
+[V] [D] fta_processus
+[V] [S] fta:
+        synoptique_experimental_fta --> Libellé "Description de l'échantillon"
+[V] [D] fta_transition
+
+
+

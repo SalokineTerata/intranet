@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Cas d'une Erreur de mise en forme : Syntaxe XML incorrecte
+-->
+
+<Transaction id="8" version="1" type="proposal">
+    <Parameters>
+        <IdFirm>40</IdFirm><!-- Agis -->   
+        <IdArcadia>75349</IdArcadia><!-- Code article dans Arcadia -->
+        <IdFta>11457</IdFta><!-- N° de la FTA -->
+    </Parameters>
+    <Tables>
+        <DUN14>
+            <DataToImport>
+                
+                <Recordset id="1" action="create">  
+                    <NO_ART key="TRUE">75349</NO_ART>
+                    <COD_PCB key="TRUE">6</COD_PCB>                
+                    <TYPE_CARTON>79</TYPE_CARTON><!-- 00979023 MONO FEST 20x17 -->
+                </Recordset>              
+
+                <!-- /DataToImport -->
+        </DUN14>
+    </Tables>    
+</Transaction>

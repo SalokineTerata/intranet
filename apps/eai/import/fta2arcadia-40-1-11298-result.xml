@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Cas d'une création de données privée sur un article déjà existant dans Arcadia
+-->
+
+<Transaction id="1" version="1" type="result">
+    <Parameters>
+        <IdFirm>40</IdFirm><!-- Agis -->      
+        <IdArcadia>69032</IdArcadia><!-- Code article dans Arcadia -->
+        <IdFta>11298</IdFta><!-- N° de la FTA -->
+        <CodeReply>0</CodeReply><!-- Proposition traitée avec succés -->
+    </Parameters>
+</Transaction>

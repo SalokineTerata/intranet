@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Cas d'un nouveau code article généré par Arcadia
+Lors des tests, il faudra bien entendu, corriger le code article, je viens
+d'en mettre un totalement arbitraire.
+-->
+
+<Transaction id="2" version="1" type="result">
+    <Parameters>
+        <IdFirm>40</IdFirm><!-- Agis -->      
+        <IdArcadia>99999</IdArcadia><!-- Code article dans Arcadia -->
+        <IdFta>11267</IdFta><!-- N° de la FTA -->
+        <CodeReply>0</CodeReply><!-- Proposition traitée avec succés -->
+    </Parameters>
+</Transaction>

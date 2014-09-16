@@ -1,0 +1,92 @@
+/* Définition des styles par défaut*/
+@media print {
+
+       .display_none {
+       display: none;
+       }
+
+       #origine{
+       page-break-before: always;
+       }
+}
+
+body {
+     font-family: Arial, Helvetica, sans-serif;
+     font-size: 8px;
+     color: #000000;
+     text-decoration: none;
+     background-color: #AAAAFF;
+}
+
+table {
+     font-size: 11px;
+}
+
+/* Classes Personnalisées*/
+.logFFCC66 {  font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 10px; font-style: normal; font-weight: normal; color: #663300; background-color: #FFCC66; background-position: center center; text-align: center; vertical-align: middle; font-variant: normal}
+.rollmarron { font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 9px; font-style: normal; font-weight: normal; color: #FFFFFF; background-color: #996633; text-decoration: none; background-position: left top }
+A.link1
+{
+color:black;
+text-decoration:none;
+}
+A:hover.link1
+{
+color:yellow;
+text-decoration:underline;
+background-color:blue;
+}
+.txtentreprise { font-family: Arial, Helvetica, sans-serif; font-size: 11px; font-weight: bold; color: #663300; text-decoration: none}
+.txtproduction { font-family: Arial, Helvetica, sans-serif; font-size: 11px; font-style: normal; font-weight: bold; color: #FF3300; text-decoration: none; vertical-align: middle }
+.txtdevelopp { font-family: Arial, Helvetica, sans-serif; font-size: 11px; font-weight: bold; color: #FF6600; text-decoration: none }
+.rollgeneral { font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 9px; font-style: normal; font-weight: normal; text-decoration: none; background-position: left top ; color: #FFFFFF}
+.logFFE5B2 { font-family: Arial, Helvetica, sans-serif; font-size: 10px; font-style: normal; font-weight: normal; color: #000000; background-color: #FFE5B2; text-decoration: none; background-position: center center; text-align: center; vertical-align: middle; font-variant: normal}
+.loginFFCC66 { font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 10px; font-style: normal; font-weight: bold; color: #000000;  background-color: #AAAAFF; text-decoration: none; text-align: left; vertical-align: middle; font-variant: normal }
+.loginFFFFFF { font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 10px; font-style: normal; font-weight: normal; color: #000000; text-decoration: none; text-align: left; vertical-align: middle; font-variant: normal }
+.loginFFFFFFdroit { font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 9px; font-style: normal; font-weight: bold; color: #000000; text-decoration: none; text-align: right; vertical-align: middle; font-variant: normal }
+.loginFFCC66droit { font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 10px; font-style: normal; font-weight: normal; color: #000000; background-color: #FFCC66; text-decoration: none; text-align: right; vertical-align: middle; font-variant: normal }
+.loginFFCC66Centre { font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 10px; font-style: normal; font-weight: bold; color: #000000; background-color: #FFCC66; text-decoration: none; text-align: center; vertical-align: middle; font-variant: normal }
+.contours {  font-family: Arial, Helvetica, sans-serif; font-size: 10px; background-color: #FFE5B2; border-top-width: 1px; border-right-width: 1px; border-bottom-width: 1px; border-left-width: 1px; line-height: 12px; color: #000000}
+.titre_principal { text-align: center; vertical-align: middle; font-size: 13px; font-weight: bold; background-color: #CCCCFF; vertical-align: middle; text-align: center;}
+.titre { text-align: center; vertical-align: middle; font-size: 11px; font-weight: bold;  vertical-align: middle; text-align: center;}
+.titresynthese { font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 20px; clip: rect( ) }
+.contenu {
+         font-size: 11px;
+         background-color: #EDEDFF;
+         font-style: normal;
+         font-weight: normal;
+         text-align: left;
+}
+
+.contenu_mini {
+         font-size: 10px;
+         background-color: #EDEDFF;
+         font-style: normal;
+         font-weight: normal;
+         text-align: left;
+}
+.couleur_alternative {
+    background-color: #A7FA98
+}
+
+.couleur_rouge {
+    background-color: #FF7151
+}
+
+.alerte {
+    text-align: center;
+    vertical-align: middle;
+    font-size: 25px; font-weight: bold;
+    background-color: #FF0000;
+    vertical-align: middle;
+    text-align: center;
+}
+
+.vertical {
+font-family: Arial, Helvetica, sans-serif;
+font-style: oblique;
+color: #000000;
+width: 15px;
+writing-mode: tb-rl;
+filter: flipv fliph;
+}

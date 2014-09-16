@@ -1,0 +1,63 @@
+================================================================================
+Fiches et Tables à basculer de intranet.dev.agis.fr vers intranet.agis.fr:
+================================================================================
+
+[ ]: Reste à effectuer
+[X]: Réalisé
+================================================================================
+
+Pour les copies MYSQL[]:
+---------------------------
+[D]: DATA et STRUCTURE sont à transférer
+[S]: STRUCTURE seulement sont à transférer
+[O]: Renommer la table en OLD_nom_de_la_table
+================================================================================
+
+Pour les copies de FILE:
+----------------------------
+chemin depuis le répertoire racine du site
+- si c'est le répertoire du module:
+	- renommer le répertoire d'exploitation nom-AAAA-MM-JJ où la date est la
+		date du jour de la modification
+	- faire un TAR.GZ
+	- supprimer l'original
+	- copier le répertoire de développement vers le site d'exploitation
+
+================================================================================
+[NA] Systématique: Ecarter une sauvegarde de l'intranet exploitation
+[v] Systématique: ACCESS: Démarrage --> Titre de l'Application --> Incrémenter la version
+[toute la table 2008-04-10] Systématique: MYSQL[D]: intranet_access_linked_table uniquement pour la base sur laquelle on travaille
+[v] Systématique: Créer le fichier .agismde
+[v] Systématique: copier le sous dossier actuel /base_nom_du_sous_module
+[v] Systématique: Ajouter à l'extension du .mdb l'extension ".lock"
+
+[v] systématique: transfert du dossier \\Avi1203\www\intranet.dev\access\data (contient les modèles de lettre de fusion)
+
+
+[v] ALTER TABLE `access_service_consommateur_reclamations` ADD `date_heure_operation` TIMESTAMP NOT NULL ;
+k_mesure_corrective   	tinyint(4)  	  Non   1  Modifier   	Supprimer   	Primaire   	Index   Unique  Texte entier
+action_conso_client  	tinyint(4) 	  Oui  	0  Modifier 	Supprimer 	Primaire 	Index 	Unique 	Texte entier
+k_responsable_mesure_corrective   int(11) Non   0  Modifier   	Supprimer   	Primaire   	Index   Unique  Texte entier
+date_cloture_mesure_corrective  date 	  Oui  	NULL  	  Modifier 	Supprimer 	Primaire 	Index 	Unique 	Texte entier 
+commentaire   	longtext  	 Oui   	NULL   	 Modifier   	  Supprimer   	  Primaire   	  Index   	  Unique   	  Texte entier
+
+[v] transferer la table access_service_consommateur_liste_diffusion
+
+INSERT INTO `intranet_access_linked_table` ( `id_intranet_access_linked_table` , `base_intranet_access_linked_table` , `source_intranet_access_linked_table` , `destination_intranet_access_linked_table` , `droits_intranet_access_linked_table` , `location_intranet_access_linked_table` , `extension_intranet_access_linked_table` , `mode_connect_intranet_access_linked_table` )
+VALUES (
+'', 'service_consommateur', 'access_service_consommateur_liste_diffusion', 'access_service_consommateur_liste_diffusion', 'complet', '', '', ''
+);
+
+
+[v] transfert du lib ajout fonction envoismail_CC
+
+/******* requete de mise à jour
+-- passage en mode réseau
+UPDATE `intranet_access_linked_table`
+SET mode_connect_intranet_access_linked_table=""
+WHERE base_intranet_access_linked_table = "service_consommateur"
+
+-- passage en mode deconnecté
+UPDATE `intranet_access_linked_table`
+SET mode_connect_intranet_access_linked_table="snapshot"
+WHERE base_intranet_access_linked_table = service_consommateur

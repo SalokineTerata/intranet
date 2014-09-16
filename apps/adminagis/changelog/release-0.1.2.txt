@@ -1,0 +1,34 @@
+================================================================================
+Modifications à apporter aux différentes versions du modules
+================================================================================
+
+[ ]: Reste à effectuer
+[!]: Prioritaire
+[V]: Réalisé
+[.]: Abandonné
+================================================================================
+Exemples:
+[V] 23/05/2003: saisie_vierge_origine.php
+      Déplacer les informations de cette page au niveau du composant.
+
+[ ] 28/07/2003: saisie_origine.php
+                Saisie de plusieurs origine sans cycle.
+                Rajouter dans la listedes origine:
+                         - Cf Origine MP
+                         - Cf Lieu dernière Transformation
+                         - Cf Origine Multiple
+                         - Cf Non défini
+                Bouton "Terminer Saisie"
+================================================================================
+
+
+[V] 2005-03-25: http://intranet.agis.fr/adminagis/gestion_salaries2.php
+    Après la validation de la création d'un compte utilisateur:
+    Fatal error: Undefined class name 'smtp' in /mnt/sda3/var/www/intranet/fonction_mail/ on line 45
+
+[V] lors de la création d'un compte faire en sorte que toutes les news non lues pour l'utilisateur soient mises en automatique en lues
+    - Intégrer la notion de date de création du compte utilisateur
+    - Dans la fonction d'affichage des news, intégrer l'algorythme suivant:
+        Si (News/Utilisateur est dans la table "lu" ou date de news < date de création du compte utilisateur), ne pas afficher
+
+[V] Ajout de la notion de goupe au niveau structure

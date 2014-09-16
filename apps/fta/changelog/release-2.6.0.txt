@@ -1,0 +1,56 @@
+================================================================================
+Modifications à apporter aux différentes versions du modules
+================================================================================
+
+[ ]: Reste à effectuer
+[!]: Prioritaire
+[V]: Réalisé
+[.]: Abandonné
+[R]: Reporté
+================================================================================
+Exemples:
+[V] 23/05/2003: saisie_vierge_origine.php
+      Déplacer les informations de cette page au niveau du composant.
+
+[ ] 28/07/2003: saisie_origine.php
+                Saisie de plusieurs origine sans cycle.
+                Rajouter dans la listedes origine:
+                         - Cf Origine MP
+                         - Cf Lieu dernière Transformation
+                         - Cf Origine Multiple
+                         - Cf Non défini
+                Bouton "Terminer Saisie"
+================================================================================
+
+[v] SM : saisi du pvc de l'article dans access_arti2 (comme cette information est au niveau chef de projet je créé un nouveau champ dans arti2 et non fta composant bien que le prix se mette lors de l'etiquetage de la barquette)
+    ALTER TABLE `access_arti2` ADD `pvc_article` FLOAT DEFAULT '0' AFTER `TARIF` ;
+    ALTER TABLE `access_arti2` CHANGE `pvc_article` `pvc_article` FLOAT DEFAULT '0';
+[v] modification chapitre_tarif.inc
+
+[ ] Gestion des étiquettes personnalisées:
+    ALTER TABLE `fta_composant` ADD `etiquette_libelle_fta_composition` VARCHAR( 50 ) NOT NULL AFTER `ingredient_fta_composition1` ;
+    ALTER TABLE `fta_composant` ADD `etiquette_poids_fta_composition` DECIMAL( 10, 3 ) DEFAULT '0.000' NOT NULL AFTER `etiquette_supplementaire_fta_composition` ;
+    ALTER TABLE `fta_composant` ADD `etiquette_quantite_fta_composition` INT DEFAULT '1' AFTER `etiquette_poids_fta_composition` ;
+
+[ ] Première alimentation de ces nouvelles données:
+    UPDATE fta_composant SET etiquette_libelle_fta_composition = `nom_fta_composition` 
+    UPDATE fta_composant SET etiquette_poids_fta_composition = `poids_fta_composition`
+    UPDATE fta_composant SET etiquette_quantite_fta_composition = `quantite_fta_composition`    
+
+[V] Gestion de l'apostrophe dans la désignation.
+[ ] Modification de lib/function.mysql.php (ligne 845)
+[ ] Base Access/Codeosft (MAJ CSQ + table creation_etiquette_carton_ean)
+
+/************
+[ ] Pouvoir filtrer les diffusions en fonction des réseaux de la classification.
+[ ] Afficher le poids facturé (PCB x UVC)
+[ ] Gestion des confilts de périodes de tarif
+[ ] Sur l'Index, Signaler les FTA dont le chapitre Tarif à été modifié.
+
+[ ] Pas systématique et lié soit aux validations groupées ou aux validations uniques
+    Warning: mysql_num_rows(): supplied argument is not a valid MySQL result resource in /mnt/sda3/var/www/intranet/fta/functions.php on line 255
+    Warning: Cannot modify header information - headers already sent by (output started at /mnt/sda3/var/www/intranet/fta/functions.php:255) 
+    in /mnt/sda3/var/www/intranet/fta/transiter_post.php on line 178
+
+
+

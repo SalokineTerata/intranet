@@ -1,0 +1,29 @@
+================================================================================
+Modifications à apporter aux différentes versions du modules
+================================================================================
+
+[ ]: Reste à effectuer
+[!]: Prioritaire
+[X]: Réalisé
+[.]: Abandonné
+================================================================================
+Exemples:
+[X] 23/05/2003: saisie_vierge_origine.php
+      Déplacer les informations de cette page au niveau du composant.
+
+[ ] 28/07/2003: saisie_origine.php
+                Saisie de plusieurs origine sans cycle.
+                Rajouter dans la listedes origine:
+                         - Cf Origine MP
+                         - Cf Lieu dernière Transformation
+                         - Cf Origine Multiple
+                         - Cf Non défini
+                Bouton "Terminer Saisie"
+================================================================================
+
+[X] 26/02/03 : modification des pages ayant du Java Script testant la version de IE pour les impressions. Remplacement du
+               test ie == 5 par ie >= 5
+
+[X] 2004-10-13: Problème d'arhivage
+    Warning: mysql_num_rows(): supplied argument is not a valid MySQL result resource in /mnt/sda3/var/www/intranet/fichetech/archivage.php on line 57
+    Exemple: ft0110g00

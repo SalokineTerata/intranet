@@ -1,0 +1,33 @@
+================================================================================
+Modifications à apporter aux différentes versions du modules
+================================================================================
+
+[ ]: Reste à effectuer
+[!]: Prioritaire
+[V]: Réalisé
+[.]: Abandonné
+================================================================================
+Exemples:
+[V] 23/05/2003: saisie_vierge_origine.php
+      Déplacer les informations de cette page au niveau du composant.
+
+[ ] 28/07/2003: saisie_origine.php
+                Saisie de plusieurs origine sans cycle.
+                Rajouter dans la listedes origine:
+                         - Cf Origine MP
+                         - Cf Lieu dernière Transformation
+                         - Cf Origine Multiple
+                         - Cf Non défini
+                Bouton "Terminer Saisie"
+================================================================================
+
+[V] Problème de ressource lors du login:
+    PID USER      PR  NI  VIRT  RES  SHR S %CPU %MEM    TIME+  COMMAND
+    7250 mysql     16   0 20036  19m  18m R 99.3  7.7   0:09.13 mysqld
+
+    droits_access.php = 14 secondes --> 0
+    nombre de droits d'accès par utiliasteur = 625 --> nombre exact de droit acquis (>0)
+
+[ ] Possibilité de créer un nouvel Utilisateur a partir d'un autre utilisateur
+[ ] Fusion la fonction d'autologin et la fonction de login.
+[V] Modification du site de localisation d'un salarie

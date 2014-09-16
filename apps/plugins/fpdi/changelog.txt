@@ -1,0 +1,7 @@
+Changelog for FPDI:
+
+v1.01 (2004-08-10):
+    - fixed regex in php_parser::find_xref_table to handle files with
+      whitespaces before xref position.
+    - fixed php_parser::rebuildContentStream to run without notice
+      if error_reporting is set to all and no Filter is given.

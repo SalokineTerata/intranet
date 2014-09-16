@@ -1,0 +1,111 @@
+================================================================================
+Modifications à apporter aux différentes versions du modules
+================================================================================
+
+[ ]: Reste à effectuer
+[!]: Prioritaire
+[V]: Réalisé
+[.]: Abandonné
+================================================================================
+Exemples:
+[V] 23/05/2003: saisie_vierge_origine.php
+      Déplacer les informations de cette page au niveau du composant.
+
+[ ] 28/07/2003: saisie_origine.php
+                Saisie de plusieurs origine sans cycle.
+                Rajouter dans la listedes origine:
+                         - Cf Origine MP
+                         - Cf Lieu dernière Transformation
+                         - Cf Origine Multiple
+                         - Cf Non défini
+                Bouton "Terminer Saisie"
+================================================================================
+
+[V] Puis si je tape un mot clé pour rechercher ma fiche : ex "nems", je trouve ma fiche mais il n'y a pas l'histogramme avec les %.
+    Cas du "1233v0 - 2 NEMS PORC AVEC SAUCE NUOC MAM, RECHAUFFAGE EXPRESS "
+
+[A] Si chapitre Commentaire fonctionne bien avec l'historique des correction, désactiver les mails de dévalidation.
+[V] En fonction des chapitres modifié, associer une liste de diffusion de la validation de la FTA
+[V] Ajout de la fonction de la gestion dérogation de durée de vie.
+[V] Actions groupées
+    validation sur le 1281v0 (90020 KIT DECORATION INDE)
+
+
+[A] Lors d'un dévalidation voir pour ne pas s'auto informer
+
+[V] Correction PCB
+    Bonjour,
+
+      Suite à la dernière mise à jour du module Fiche Technique Article, pouvez-vous me communiquer les PCB concernant les Articles suivants:
+
+    Chef de projet:  FTA
+    2      Christine Lucas  421v0 - FILET DE CABILLAUD AUX PETITS LEGUMES
+    10     Elodie Germain  1096v0 - CRUMBLE DE CANARD, FOIE GRAS ET CEPES
+    4      Amandine Pelletier  27505 - PLATEAU TEX MEX
+    10     Christine Lucas  1168v0 - GRATIN DAUPHINOIS 170G SU
+    6      Christine Lucas  1169v0 - GRATIN DE COURGETTES AU PARMESAN 150G SU
+    6      Marie-Paule Couget  1191v0 - CHOU FARCI CAR
+    6      Marie-Paule Couget  1207v0 - CASSOULET AU CONFIT DE CANARD CAR
+    2      Elodie Germain  1232v0 - SAUTé DE PORC AU BROUILLY
+    4      Amandine Pelletier  21218 - ASSORTIMENT INDIEN
+    50     Christine Alberola  11516 - ALOO BONDA COCO 15 G
+    2      Christine Alberola  1344v0 - BROCHETTE DE DINDE AU CURRY ET LEGUMES WOK
+    4      France Auger  1354v0 - ASSORTIMENT ASIATIQUE 465 G NETMDD
+
+    Le PCB est maintenant géré au niveau du chapitre Identité. Les fiches précédentes était déjà passées par cette étape sans être validées au niveau du chapitre Emballages.
+
+    Merci de votre réponse.
+    Bonne fin de journée.
+    Boris.
+
+[V] Bug sur chapiter emballage
+    la fiche regardée ensemble est :
+    35817 - riz canto Cora 1 Kg
+    Céline
+    + Interdire la suppression de l'emballage UVC
+
+[V] Chapitre: Gestion des produits
+    Modifier le libelle auto du code 03
+
+[V] Il faut saisir descriptif et conseil de préparation alors que la  Ret D le saisie déja??.
+    --> Effectivement, il y a bug que je dois résoudre, par défaut, ton information doit être pré-rempli par ce qu'à saisie la R&D. Te laissant ainsi la possibilité de personnaliser.
+
+[V] Ajouter commentaire sur dérogation.
+
+[V] Modif R&D:
+    bonjour
+
+    concernant le mail d'infos sur intranet, peux-tu :
+
+    * rajouter le code dans l'intitulé du message car nous sommes obligés de le chercher dans la liste déroulante car
+    le message dit uniquement :" FTA: Correction de france auger sur NEM POULET 25G MDNETTO"
+
+    * rajouter la nature de la modification car le message dit uniquement :  "vos chapitres viennent d'etre devalides par ..." et franchement je valide sans savoir ce qui a changé ...
+
+    + je recois bien les mails d'infos sur les modifs mais pas ceux pour les creations
+
+    merci A+
+
+
+
+[V] Cécile Jaegle (Exemple avec 1191v0)
+    Emballage Colis: 371,04
+    Colis Net:       1740
+    Total Colis:     2111,04
+
+          --> Voir quand le PCB n'est pas affiché car celà reproduit le Bug.
+          cf. 32751 - CHAPON SAUCE FOIE GRAS ET EMBEURREE 840G AUC  là ça marche.
+
+[V] Voir le 21220 car pas de classification apparente du coup, recopie de la dernière classification visible dans le tableau d'index.
+
+[V] En effectué sous bs4300280, je ne vois pas la DIN dans l'index.
+
+[V] Faire apparaitre PCB x Poids UVC dans le DIN lorqu'il n'y a pas de Désignation Interne.
+
+[V] Passer en archivé.
+Produits TDA
+
+
+[V] Procédure Chef de projet --> Insité sur les risque de doublons, + Rercherche de dossier déjà existant avant création
+
+[V] Possibilté de retirer une fiche validé via le bouton "Supprimer la fiche"

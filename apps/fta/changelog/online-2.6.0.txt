@@ -1,0 +1,51 @@
+================================================================================
+Fiches et Tables à basculer de intranet.dev.agis.fr vers intranet.agis.fr:
+================================================================================
+
+[ ]: Reste à effectuer
+[X]: Réalisé
+================================================================================
+
+Pour les copies MYSQL[]:
+---------------------------
+[D]: DATA et STRUCTURE sont à transférer
+[S]: STRUCTURE seulement sont à transférer
+[O]: Renommer la table en OLD_nom_de_la_table
+================================================================================
+
+Pour les copies de FILE:
+----------------------------
+chemin depuis le répertoire racine du site
+- si c'est le répertoire du module:
+	- renommer le répertoire d'exploitation nom-AAAA-MM-JJ où la date est la
+		date du jour de la modification
+	- faire un TAR.GZ
+	- supprimer l'original
+	- copier le répertoire de développement vers le site d'exploitation
+
+================================================================================
+[ ] Systématique: Ecarter une sauvegarde
+[ ] Systématique: MYSQL[D]: intranet_modules
+[ ] Systématique: /repertoire_du_module
+
+
+
+[v] SM : saisi du pvc de l'article dans access_arti2 (comme cette information est au niveau chef de projet je créé un nouveau champ dans arti2 et non fta composant bien que le prix se mette lors de l'etiquetage de la barquette)
+    ALTER TABLE `access_arti2` ADD `pvc_article` FLOAT DEFAULT '0' AFTER `TARIF` ;
+    ALTER TABLE `access_arti2` CHANGE `pvc_article` `pvc_article` FLOAT DEFAULT '0';
+[v] modification chapitre_tarif.inc
+
+[ ] Gestion des étiquettes personnalisées:
+    ALTER TABLE `fta_composant` ADD `etiquette_libelle_fta_composition` VARCHAR( 50 ) NOT NULL AFTER `ingredient_fta_composition1` ;
+    ALTER TABLE `fta_composant` ADD `etiquette_poids_fta_composition` DECIMAL( 10, 3 ) DEFAULT '0.000' NOT NULL AFTER `etiquette_supplementaire_fta_composition` ;
+    ALTER TABLE `fta_composant` ADD `etiquette_quantite_fta_composition` INT DEFAULT '1' AFTER `etiquette_poids_fta_composition` ;
+
+[ ] Première alimentation de ces nouvelles données:
+    UPDATE fta_composant SET etiquette_libelle_fta_composition = `nom_fta_composition` 
+    UPDATE fta_composant SET etiquette_poids_fta_composition = `poids_fta_composition`
+    UPDATE fta_composant SET etiquette_quantite_fta_composition = `quantite_fta_composition`   
+
+
+
+
+

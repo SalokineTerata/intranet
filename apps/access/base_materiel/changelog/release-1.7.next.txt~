@@ -1,0 +1,37 @@
+================================================================================
+Modifications à apporter aux différentes versions du modules
+================================================================================
+
+[ ]: Reste à effectuer
+[!]: Prioritaire
+[V]: Réalisé
+[.]: Abandonné
+================================================================================
+Exemples:
+[V] 23/05/2003: saisie_vierge_origine.php
+      Déplacer les informations de cette page au niveau du composant.
+
+[ ] 28/07/2003: saisie_origine.php
+                Saisie de plusieurs origine sans cycle.
+                Rajouter dans la listedes origine:
+                         - Cf Origine MP
+                         - Cf Lieu dernière Transformation
+                         - Cf Origine Multiple
+                         - Cf Non défini
+                Bouton "Terminer Saisie"
+================================================================================
+
+
+IP: 
+Requête1 {
+SELECT logiciel.nom_logiciel_materiel_detail, module.nom_module
+FROM module INNER JOIN (logiciel INNER JOIN (nature_incident INNER JOIN (etat_incident INNER JOIN incident ON etat_incident.K_etat = incident.Ke_etat_incident) ON nature_incident.K_nature_incident = incident.Ke_type_nature_incident) ON logiciel.K_logiciel = incident.id_groupe) ON module.K_module = incident.id_module
+GROUP BY logiciel.nom_logiciel_materiel_detail, module.nom_module, incident.date_cloture_incident, incident.K_incident, etat_incident.K_etat, incident.Ke_type_nature_incident
+HAVING (((incident.date_cloture_incident)>#1/1/2009#) AND ((etat_incident.K_etat)=1) AND ((incident.Ke_type_nature_incident)=1));
+}
+
+SELECT [nom_logiciel_materiel_detail] & " " & [nom_module] AS [Module logiciel], Count(Requête1.nom_module) AS CompteDenom_module
+FROM Requête1
+GROUP BY [nom_logiciel_materiel_detail] & " " & [nom_module]
+ORDER BY Count(Requête1.nom_module) DESC;
+

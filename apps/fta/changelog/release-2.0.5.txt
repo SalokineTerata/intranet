@@ -1,0 +1,85 @@
+================================================================================
+Modifications à apporter aux différentes versions du modules
+================================================================================
+
+[ ]: Reste à effectuer
+[!]: Prioritaire
+[X]: Réalisé
+[.]: Abandonné
+================================================================================
+Exemples:
+[X] 23/05/2003: saisie_vierge_origine.php
+      Déplacer les informations de cette page au niveau du composant.
+
+[ ] 28/07/2003: saisie_origine.php
+                Saisie de plusieurs origine sans cycle.
+                Rajouter dans la listedes origine:
+                         - Cf Origine MP
+                         - Cf Lieu dernière Transformation
+                         - Cf Origine Multiple
+                         - Cf Non défini
+                Bouton "Terminer Saisie"
+================================================================================
+
+
+[V] dans la liste des FTA du tableau de synthèse, ne pas afficher les FTA pour les sites non-concernés.
+[V] Diffusion de mail de validation des chapitres.
+    - Essayer de faire un filtre en fonction de la classification.
+    - Pour le processus Identité et Tarif, seul les membre du même service que le chef de projet sont informé.
+
+
+[V] Définir un contenu mail et une liste de diffusion par rapport à une transition.
+    exemple: T -> V, M -> V
+
+[V] Article: 10318
+    Durée vie client 17 -> 11
+    --> Nombre de couches par palette
+
+[V] Passerelle de Migration, Attention, les côuts PF sont faux car:
+    - Le site d'expédition Plateforme a été migré en Tarare
+    - Pour corriger:
+           Surgelé = Site Expé Tarare et Cout PF = 0
+           Frais = Site Expé Plateforme et Cout PF = 1
+
+[V] Composition:
+    Attention, mauvaise utilisation du tableau.
+    Rapport "Poids Unitaire / Nombre d'élément", interprétation différente entre Avignon et Tarare
+
+[V] Désactiver les mail des Chefs de projets
+
+[V] Retirer une Fiche: Ajouter le choix:
+    - Le dossier complet
+    - La fiche Uniquement
+
+
+[V] Sur modification FTA, avoir la possibilité de revenir directement dans la synthèse de l'état de la fiche en cours de modification.
+[V] PATE IMPERIAL ALLEGE LSTDA --> sur le PDF, pas de conditionement UVC
+
+[V] Dans le tableau de synthèse, si pas de DIN, montrer le réseau et la marque.
+[V] Bonjour,
+    La prochaine mise à jour du module intègrera un filtre des chefs de projet. Ainsi le marketing ne vera pas les FTA du département Commercial et vice-versa. Le système de mail suivera la même logique.
+    Boris.
+    >>> elodie germain vendredi 19 mai 2006 15:14:46 >>>
+    Une suggestion : peut-être faudrait il revoir la procédure d'envoi automatique de mail pour la validation ou la modification de FTA. Le grand nbre de mail reçu risque de nous faire perdre notre vigilance sur ceux qui nous concernent réellement. 
+    Qu'en pensez-vous?
+    Elodie
+
+[V] Bonjour,
+    Juste une petite précision sur le module des fiches technques Intranet, sur la partie NOMMENCLATURE à renseigner par la R&D:
+    Dans "AJOUT D'UNE NOMMENCLATURE" / "INFO SUR LA NOMENCLATURE"
+    Nous avons un champ à remplis : "QUANTITE PAR CARTON" 
+    --> Ce champ n'est à remplir UNIQUEMENT que pour les sous recette du type boulette de fricadelle ou kefta:
+    produit piécé qui transite sous forme IQF en carton vrac de site à site.
+    --> Ce champ n'a rien à voir avec le PCB du produit fini
+    BORIS:
+    1. Pour éviter les sources d'erreur, peux-t-on remplacer l'appellation "QUATITE PAR CARTON" par "CARTON VRAC: QUATITE PAR CARTON"? ou autrement si vous avez d'autres idées.
+    2. Est-il possible de ne faire apparaitre que les champs à remplir en fonction de la sélection du type de nommenclature (CRU / CUIT / SAUCE / PREP...):
+    Pour une sous-recette (sauce, prep, prec, farce) : pas de poids à saisir
+    Pour une recette (cru/cuit/fini): pas de quantité par carton à saisir.
+    On en reparle,
+    Julie
+
+[V] Erreur: Hauteur de Palette: PASTILLAS MIEL AMANDES 25G - 263v0  --> Erreur de saisie
+[V] Date prévisionnelle transfert ne réazpparait pas après correction.
+
+

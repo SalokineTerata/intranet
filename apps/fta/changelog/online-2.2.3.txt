@@ -1,0 +1,67 @@
+================================================================================
+Fiches et Tables à basculer de intranet.dev.agis.fr vers intranet.agis.fr:
+================================================================================
+
+[ ]: Reste à effectuer
+[X]: Réalisé
+================================================================================
+
+Pour les copies MYSQL[]:
+---------------------------
+[D]: DATA et STRUCTURE sont à transférer
+[S]: STRUCTURE seulement sont à transférer
+[O]: Renommer la table en OLD_nom_de_la_table
+================================================================================
+
+Pour les copies de FILE:
+----------------------------
+chemin depuis le répertoire racine du site
+- si c'est le répertoire du module:
+    - renommer le répertoire d'exploitation nom-AAAA-MM-JJ où la date est la
+        date du jour de la modification
+    - faire un TAR.GZ
+    - supprimer l'original
+    - copier le répertoire de développement vers le site d'exploitation
+
+================================================================================
+[V] Systématique: Ecarter une sauvegarde
+[V] Systématique: MYSQL[D]: intranet_modules
+[V] Systématique: /repertoire_du_module
+[V] MySQL[S] fta_derogation_duree_vie
+[V] MySQL[S] fta:
+    ajout du champ liste_chapitre_maj_fta
+[V] MySQL[S] Ajout du champ commentaire sur la dérogation
+    fta_derogation_duree_vie.commentaire_fta_derogation_duree_vie
+
+[V] MySQL[R] Correction des PCB dans le chapitre emballages
+
+Consultation:
+    SELECT * FROM `fta_conditionnement`
+    WHERE `quantite_par_couche_fta_conditionnement` IS NULL
+    AND `dimension_uvc_fta_confitionnement` = 1
+    ORDER BY `id_fta` ASC
+
+Mise à jour:
+    UPDATE `fta_conditionnement`, access_arti2
+    SET quantite_par_couche_fta_conditionnement=NB_UNIT_ELEM
+    WHERE `quantite_par_couche_fta_conditionnement` IS NULL
+    AND `dimension_uvc_fta_confitionnement` = 1
+    AND fta_conditionnement.id_fta=access_arti2.id_fta
+
+[V] Epuration Table obsolètes 323 tables --> 234 tables
+
+[V] MySQL[S]: access_arti2:
+[V] ACCESS[S]:ARTI2
+    - activation_codesoft_arti2
+    - id_etiquette_codesoft_arti2
+[V] MySQL[D] codesoft_etiquettes
+[V] EPR_datasync
+[V] Codesoft
+[V] MySQL[D] intranet_niveau_acces
+
+
+
+
+
+
+

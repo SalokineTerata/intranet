@@ -1,0 +1,470 @@
+================================================================================
+Fiches et Tables à basculer de intranet.dev.agis.fr vers intranet.agis.fr:
+================================================================================
+
+[ ]: Reste à effectuer
+[X]: Réalisé
+================================================================================
+
+Pour les copies MYSQL[]:
+---------------------------
+[D]: DATA et STRUCTURE sont à transférer
+[S]: STRUCTURE seulement sont à transférer
+[O]: Renommer la table en OLD_nom_de_la_table
+================================================================================
+
+Pour les copies de FILE:
+----------------------------
+chemin depuis le répertoire racine du site
+- si c'est le répertoire du module:
+	- renommer le répertoire d'exploitation nom-AAAA-MM-JJ où la date est la
+		date du jour de la modification
+	- faire un TAR.GZ
+	- supprimer l'original
+	- copier le répertoire de développement vers le site d'exploitation
+
+================================================================================
+[V] Systématique: Ecarter une sauvegarde
+[V] Systématique: MYSQL[D]: intranet_modules
+[V] Systématique: /repertoire_du_module
+
+
+- Liste d'ingrédients à jour:
+- 10006
+- 10022
+- 10541
+- 10612
+
+Pas de doublon d'ingrédient:
+- 10001
+- 10951	
+- 10950
+
+
+
+[V] Renommage des tables fta_nomenclature et fta_composition en OLD_*
+
+[ ] Renommage des champs dans la table fta_composant en OLD_:
+	ALTER TABLE `fta_composant` CHANGE `id_fta_composition` `OLD_id_fta_composition` INT( 11 ) DEFAULT '0' NOT NULL ,
+	CHANGE `last_id_fta_composition` `OLD_last_id_fta_composition` INT( 11 ) DEFAULT '0' NOT NULL ,
+	CHANGE `id_fta_nomenclature` `OLD_id_fta_nomenclature` INT( 11 ) DEFAULT '0' NOT NULL ,
+	CHANGE `last_id_fta_nomenclature` `OLD_last_id_fta_nomenclature` INT( 11 ) DEFAULT '0' NOT NULL 
+
+[V] Construction de la table fta_composant:
+
+CREATE TABLE `fta_composant` (
+`id_fta_composant` INT NOT NULL AUTO_INCREMENT ,
+`last_id_fta_composant` INT NOT NULL ,
+`id_fta_composition` INT NOT NULL ,
+`last_id_fta_composition` INT NOT NULL ,
+`id_fta` INT NOT NULL ,
+`ingredient_fta_composition` TEXT DEFAULT NULL ,
+`ingredient_fta_composition1` TEXT DEFAULT NULL ,
+`etiquette_fta_composition` TEXT NOT NULL ,
+`mode_etiquette_fta_composition` TINYINT NOT NULL ,
+`etiquette_supplementaire_fta_composition` TEXT NOT NULL ,
+`etiquette_poids_fta_composition` DECIMAL( 10, 3 ) NOT NULL ,
+`etiquette_duree_vie_fta_composition` INT NOT NULL ,
+`etiquette_id_fta_conditionnement` INT NOT NULL ,
+`etiquette_id_fta_composition` INT NOT NULL ,
+`nom_fta_composition` TINYTEXT,
+`id_geo` INT,
+`poids_fta_composition` DECIMAL( 10, 3 ) ,
+`quantite_fta_composition` INT DEFAULT '1',
+`ordre_fta_composition` TINYINT NOT NULL ,
+`taille_police_nom_fta_composition` INT,
+`taille_police_ingredient_fta_composition` INT,
+`k_style_paragraphe_ingredient_fta_composition` TINYINT NOT NULL ,
+`duree_vie_technique_fta_composition` INT NOT NULL ,
+`k_etiquette_fta_composition` TINYINT NOT NULL ,
+`id_fta_nomenclature` INT NOT NULL ,
+`last_id_fta_nomenclature` INT NOT NULL ,
+`id_annexe_agrologic_article_codification` INT DEFAULT '6' NOT NULL ,
+`id_access_recette_recette` INT NOT NULL ,
+`ascendant_fta_nomenclature` INT,
+`site_production_fta_nomenclature` INT,
+`poids_fta_nomenclature` DECIMAL( 10, 3 ) ,
+`id_annexe_unite` VARCHAR( 15 ) ,
+`quantite_piece_par_carton` INT UNSIGNED,
+`poids_total_carton_vrac_fta_nomenclature` DOUBLE NOT NULL ,
+`code_produit_agrologic_fta_nomenclature` VARCHAR( 5 ) ,
+`etat_fta_nomenclature` INT UNSIGNED,
+`nom_fta_nomenclature` TINYTEXT,
+`din_fta_nomenclature` VARCHAR( 50 ) NOT NULL ,
+`suffixe_agrologic_fta_nomenclature` VARCHAR( 10 ) NOT NULL ,
+`is_nomenclature_fta_composant` TINYINT NOT NULL ,
+`is_composition_fta_composant` TINYINT NOT NULL ,
+`_VERSION` VARCHAR( 50 ) DEFAULT '2.5.0' NOT NULL ,
+PRIMARY KEY ( `id_fta_composant` )
+);
+
+[V] Création des commentaires:
+
+INSERT INTO `pma_column_info` VALUES (3477, 'agis_dev', 'fta_composant', 'id_annexe_unite', 'Unité du poids', '', '', '');
+INSERT INTO `pma_column_info` VALUES (3475, 'agis_dev', 'fta_composant', 'code_produit_agrologic_fta_nomenclature', 'Code Produit Agrologic', '', '', '');
+INSERT INTO `pma_column_info` VALUES (3463, 'agis_dev', 'fta_composant', 'etiquette_poids_fta_composition', 'Poids étiquetéde sur le composant (en Kg)', '', '', '');
+INSERT INTO `pma_column_info` VALUES (3476, 'agis_dev', 'fta_composant', 'etat_fta_nomenclature', 'Environnement de conservation', '', '', '');
+INSERT INTO `pma_column_info` VALUES (3445, 'agis_dev', 'fta_composant', 'k_etiquette_fta_composition', 'Etiquette par défaut', '', '', '');
+INSERT INTO `pma_column_info` VALUES (3446, 'agis_dev', 'fta_composant', 'duree_vie_technique_fta_composition', 'Durée de Vie Production (en jours)', '', '', '');
+INSERT INTO `pma_column_info` VALUES (3447, 'agis_dev', 'fta_composant', 'etiquette_id_fta_composition', 'Composant regroupant l''étiquette', '', '', '');
+INSERT INTO `pma_column_info` VALUES (3448, 'agis_dev', 'fta_composant', 'etiquette_id_fta_conditionnement', 'Conditionnement à étiqueter', '', '', '');
+INSERT INTO `pma_column_info` VALUES (3449, 'agis_dev', 'fta_composant', 'k_style_paragraphe_ingredient_fta_composition', 'Style des paragraphes', '', '', '');
+INSERT INTO `pma_column_info` VALUES (3450, 'agis_dev', 'fta_composant', 'etiquette_fta_composition', 'Composition de l''étiquette(Paragraphe #1)', '', '', '');
+INSERT INTO `pma_column_info` VALUES (3451, 'agis_dev', 'fta_composant', 'mode_etiquette_fta_composition', 'Mode de fonctionnement de l''Etiquette Composition', '', '', '');
+INSERT INTO `pma_column_info` VALUES (3452, 'agis_dev', 'fta_composant', 'etiquette_supplementaire_fta_composition', 'Composition de l''étiquette(Paragraphe #2)', '', '', '');
+INSERT INTO `pma_column_info` VALUES (3453, 'agis_dev', 'fta_composant', 'ingredient_fta_composition1', 'Liste des ingrédients supplémentaires', '', '', '');
+INSERT INTO `pma_column_info` VALUES (3454, 'agis_dev', 'fta_composant', 'id_fta_nomenclature', 'Nomeclature Associée', '', '', '');
+INSERT INTO `pma_column_info` VALUES (3455, 'agis_dev', 'fta_composant', 'id_geo', 'Site de Fabrication', '', '', '');
+INSERT INTO `pma_column_info` VALUES (3456, 'agis_dev', 'fta_composant', 'ingredient_fta_composition', 'Liste des Ingrédients', '', '', '');
+INSERT INTO `pma_column_info` VALUES (3457, 'agis_dev', 'fta_composant', 'nom_fta_composition', 'Nom du composant', '', '', '');
+INSERT INTO `pma_column_info` VALUES (3458, 'agis_dev', 'fta_composant', 'ordre_fta_composition', 'Ordre de présentation', '', '', '');
+INSERT INTO `pma_column_info` VALUES (3459, 'agis_dev', 'fta_composant', 'poids_fta_composition', 'Poids du composant (g)', '', '', '');
+INSERT INTO `pma_column_info` VALUES (3472, 'agis_dev', 'fta_composant', 'poids_fta_nomenclature', 'Poids Unitaire', '', '', '');
+INSERT INTO `pma_column_info` VALUES (3473, 'agis_dev', 'fta_composant', 'nom_fta_nomenclature', 'Désignation', '', '', '');
+INSERT INTO `pma_column_info` VALUES (3464, 'agis_dev', 'fta_composant', 'etiquette_duree_vie_fta_composition', 'Durée de Vie utilisée pour calculer la DLC etiquetée', '', '', '');
+INSERT INTO `pma_column_info` VALUES (3465, 'agis_dev', 'fta_composant', '_VERSION', 'Version de l''enregistrement', '', '', '');
+INSERT INTO `pma_column_info` VALUES (3466, 'agis_dev', 'fta_composant', 'suffixe_agrologic_fta_nomenclature', 'Raccourcis de classification', '', '', '');
+INSERT INTO `pma_column_info` VALUES (3467, 'agis_dev', 'fta_composant', 'quantite_piece_par_carton', 'Carton Vrac: Quantité par Carton', '', '', '');
+INSERT INTO `pma_column_info` VALUES (3468, 'agis_dev', 'fta_composant', 'site_production_fta_nomenclature', 'Site de Production', '', '', '');
+INSERT INTO `pma_column_info` VALUES (3469, 'agis_dev', 'fta_composant', 'site_production', 'Site de Production', '', '', '');
+INSERT INTO `pma_column_info` VALUES (3462, 'agis_dev', 'fta_composant', 'taille_police_nom_fta_composition', 'Taille de Nom sur l''étiquette', '', '', '');
+INSERT INTO `pma_column_info` VALUES (3474, 'agis_dev', 'fta_composant', 'din_fta_nomenclature', 'Désignation Interne Normalisée', '', '', '');
+INSERT INTO `pma_column_info` VALUES (3470, 'agis_dev', 'fta_composant', 'recette_racine', 'Recette', '', '', '');
+INSERT INTO `pma_column_info` VALUES (3471, 'agis_dev', 'fta_composant', 'poids_total_carton_vrac_fta_nomenclature', 'Carton Vrac: Poids total (en kg)', '', '', '');
+INSERT INTO `pma_column_info` VALUES (3460, 'agis_dev', 'fta_composant', 'quantite_fta_composition', 'Quantité par Colis', '', '', '');
+INSERT INTO `pma_column_info` VALUES (3461, 'agis_dev', 'fta_composant', 'taille_police_ingredient_fta_composition', 'Taille des ingrédients sur l''étiquette', '', '', '');
+
+INSERT INTO `pma_column_info` VALUES ('', 'agis', 'fta_composant', 'id_annexe_unite', 'Unité du poids', '', '', '');
+INSERT INTO `pma_column_info` VALUES ('', 'agis', 'fta_composant', 'code_produit_agrologic_fta_nomenclature', 'Code Produit Agrologic', '', '', '');
+INSERT INTO `pma_column_info` VALUES ('', 'agis', 'fta_composant', 'etiquette_poids_fta_composition', 'Poids étiquetéde sur le composant (en Kg)', '', '', '');
+INSERT INTO `pma_column_info` VALUES ('', 'agis', 'fta_composant', 'etat_fta_nomenclature', 'Environnement de conservation', '', '', '');
+INSERT INTO `pma_column_info` VALUES ('', 'agis', 'fta_composant', 'k_etiquette_fta_composition', 'Etiquette par défaut', '', '', '');
+INSERT INTO `pma_column_info` VALUES ('', 'agis', 'fta_composant', 'duree_vie_technique_fta_composition', 'Durée de Vie Production (en jours)', '', '', '');
+INSERT INTO `pma_column_info` VALUES ('', 'agis', 'fta_composant', 'etiquette_id_fta_composition', 'Composant regroupant l''étiquette', '', '', '');
+INSERT INTO `pma_column_info` VALUES ('', 'agis', 'fta_composant', 'etiquette_id_fta_conditionnement', 'Conditionnement à étiqueter', '', '', '');
+INSERT INTO `pma_column_info` VALUES ('', 'agis', 'fta_composant', 'k_style_paragraphe_ingredient_fta_composition', 'Style des paragraphes', '', '', '');
+INSERT INTO `pma_column_info` VALUES ('', 'agis', 'fta_composant', 'etiquette_fta_composition', 'Composition de l''étiquette(Paragraphe #1)', '', '', '');
+INSERT INTO `pma_column_info` VALUES ('', 'agis', 'fta_composant', 'mode_etiquette_fta_composition', 'Mode de fonctionnement de l''Etiquette Composition', '', '', '');
+INSERT INTO `pma_column_info` VALUES ('', 'agis', 'fta_composant', 'etiquette_supplementaire_fta_composition', 'Composition de l''étiquette(Paragraphe #2)', '', '', '');
+INSERT INTO `pma_column_info` VALUES ('', 'agis', 'fta_composant', 'ingredient_fta_composition1', 'Liste des ingrédients supplémentaires', '', '', '');
+INSERT INTO `pma_column_info` VALUES ('', 'agis', 'fta_composant', 'id_fta_nomenclature', 'Nomeclature Associée', '', '', '');
+INSERT INTO `pma_column_info` VALUES ('', 'agis', 'fta_composant', 'id_geo', 'Site de Fabrication', '', '', '');
+INSERT INTO `pma_column_info` VALUES ('', 'agis', 'fta_composant', 'ingredient_fta_composition', 'Liste des Ingrédients', '', '', '');
+INSERT INTO `pma_column_info` VALUES ('', 'agis', 'fta_composant', 'nom_fta_composition', 'Nom du composant', '', '', '');
+INSERT INTO `pma_column_info` VALUES ('', 'agis', 'fta_composant', 'ordre_fta_composition', 'Ordre de présentation', '', '', '');
+INSERT INTO `pma_column_info` VALUES ('', 'agis', 'fta_composant', 'poids_fta_composition', 'Poids du composant (g)', '', '', '');
+INSERT INTO `pma_column_info` VALUES ('', 'agis', 'fta_composant', 'poids_fta_nomenclature', 'Poids Unitaire', '', '', '');
+INSERT INTO `pma_column_info` VALUES ('', 'agis', 'fta_composant', 'nom_fta_nomenclature', 'Désignation', '', '', '');
+INSERT INTO `pma_column_info` VALUES ('', 'agis', 'fta_composant', 'etiquette_duree_vie_fta_composition', 'Durée de Vie utilisée pour calculer la DLC etiquetée', '', '', '');
+INSERT INTO `pma_column_info` VALUES ('', 'agis', 'fta_composant', '_VERSION', 'Version de l''enregistrement', '', '', '');
+INSERT INTO `pma_column_info` VALUES ('', 'agis', 'fta_composant', 'suffixe_agrologic_fta_nomenclature', 'Raccourcis de classification', '', '', '');
+INSERT INTO `pma_column_info` VALUES ('', 'agis', 'fta_composant', 'quantite_piece_par_carton', 'Carton Vrac: Quantité par Carton', '', '', '');
+INSERT INTO `pma_column_info` VALUES ('', 'agis', 'fta_composant', 'site_production_fta_nomenclature', 'Site de Production', '', '', '');
+INSERT INTO `pma_column_info` VALUES ('', 'agis', 'fta_composant', 'site_production', 'Site de Production', '', '', '');
+INSERT INTO `pma_column_info` VALUES ('', 'agis', 'fta_composant', 'taille_police_nom_fta_composition', 'Taille de Nom sur l''étiquette', '', '', '');
+INSERT INTO `pma_column_info` VALUES ('', 'agis', 'fta_composant', 'din_fta_nomenclature', 'Désignation Interne Normalisée', '', '', '');
+INSERT INTO `pma_column_info` VALUES ('', 'agis', 'fta_composant', 'recette_racine', 'Recette', '', '', '');
+INSERT INTO `pma_column_info` VALUES ('', 'agis', 'fta_composant', 'poids_total_carton_vrac_fta_nomenclature', 'Carton Vrac: Poids total (en kg)', '', '', '');
+INSERT INTO `pma_column_info` VALUES ('', 'agis', 'fta_composant', 'quantite_fta_composition', 'Quantité par Colis', '', '', '');
+INSERT INTO `pma_column_info` VALUES ('', 'agis', 'fta_composant', 'taille_police_ingredient_fta_composition', 'Taille des ingrédients sur l''étiquette', '', '', '');
+        
+
+
+
+[V] Alimentation de la table composant à partir de la table fta_nomenclature:
+
+insert into fta_composant  (
+`id_fta`,
+`id_fta_nomenclature`,
+`last_id_fta_nomenclature`,
+`id_annexe_agrologic_article_codification`,
+`id_access_recette_recette`,
+`ascendant_fta_nomenclature`,
+`site_production_fta_nomenclature`,
+`poids_fta_nomenclature`,
+`id_annexe_unite`,
+`quantite_piece_par_carton`,
+`poids_total_carton_vrac_fta_nomenclature`,
+`code_produit_agrologic_fta_nomenclature`,
+`etat_fta_nomenclature`,
+`nom_fta_nomenclature`,
+`din_fta_nomenclature`,
+`suffixe_agrologic_fta_nomenclature`,
+`is_nomenclature_fta_composant`
+) select 
+`id_fta`,
+`id_fta_nomenclature`,
+`last_id_fta_nomenclature`,
+`id_annexe_agrologic_article_codification`,
+`id_access_recette_recette`,
+`ascendant_fta_nomenclature`,
+`site_production_fta_nomenclature`,
+`poids_fta_nomenclature`,
+`id_annexe_unite`,
+`quantite_piece_par_carton`,
+`poids_total_carton_vrac_fta_nomenclature`,
+`code_produit_agrologic_fta_nomenclature`,
+`etat_fta_nomenclature`,
+`nom_fta_nomenclature`,
+`din_fta_nomenclature`,
+`suffixe_agrologic_fta_nomenclature`,
+1
+ from OLD_fta_nomenclature
+
+
+[V] Mise à jour des informations de composition dans la tables des composants pour lesquels une nomenclature est associée
+
+update fta_composant, OLD_fta_composition set
+`fta_composant`.`id_fta_composition`=`OLD_fta_composition`.`id_fta_composition`  ,
+`fta_composant`.`last_id_fta_composition`=`OLD_fta_composition`.`last_id_fta_composition`  ,
+`fta_composant`.`id_fta`=`OLD_fta_composition`.`id_fta` ,
+`fta_composant`.`id_fta_nomenclature`=`OLD_fta_composition`.`id_fta_nomenclature`,
+`fta_composant`.`ingredient_fta_composition`=`OLD_fta_composition`.`ingredient_fta_composition`  ,
+`fta_composant`.`ingredient_fta_composition1`=`OLD_fta_composition`.`ingredient_fta_composition1` ,
+`fta_composant`.`etiquette_fta_composition`=`OLD_fta_composition`.`etiquette_fta_composition` ,
+`fta_composant`.`mode_etiquette_fta_composition`=`OLD_fta_composition`.`mode_etiquette_fta_composition`  ,
+`fta_composant`.`etiquette_supplementaire_fta_composition`=`OLD_fta_composition`.`etiquette_supplementaire_fta_composition`  ,
+`fta_composant`.`etiquette_poids_fta_composition`=`OLD_fta_composition`.`etiquette_poids_fta_composition`  ,
+`fta_composant`.`etiquette_duree_vie_fta_composition`=`OLD_fta_composition`.`etiquette_duree_vie_fta_composition` ,
+`fta_composant`.`etiquette_id_fta_conditionnement`=`OLD_fta_composition`.`etiquette_id_fta_conditionnement`  ,
+`fta_composant`.`etiquette_id_fta_composition`=`OLD_fta_composition`.`etiquette_id_fta_composition` ,
+`fta_composant`.`nom_fta_composition`=`OLD_fta_composition`.`nom_fta_composition` ,
+`fta_composant`.`id_geo`=`OLD_fta_composition`.`id_geo`,
+`fta_composant`.`poids_fta_composition`=`OLD_fta_composition`.`poids_fta_composition` ,
+`fta_composant`.`quantite_fta_composition`=`OLD_fta_composition`.`quantite_fta_composition` ,
+`fta_composant`.`ordre_fta_composition`=`OLD_fta_composition`.`ordre_fta_composition`  ,
+`fta_composant`.`taille_police_nom_fta_composition`=`OLD_fta_composition`.`taille_police_nom_fta_composition` ,
+`fta_composant`.`taille_police_ingredient_fta_composition`=`OLD_fta_composition`.`taille_police_ingredient_fta_composition`,
+`fta_composant`.`k_style_paragraphe_ingredient_fta_composition`=`OLD_fta_composition`.`k_style_paragraphe_ingredient_fta_composition` ,
+`fta_composant`.`duree_vie_technique_fta_composition`=`OLD_fta_composition`.`duree_vie_technique_fta_composition` ,
+`fta_composant`.`k_etiquette_fta_composition`=`OLD_fta_composition`.`k_etiquette_fta_composition` ,
+`fta_composant`.`is_composition_fta_composant`=1
+
+WHERE 
+fta_composant.id_fta_nomenclature = OLD_fta_composition.id_fta_nomenclature 
+AND fta_composant.id_fta=OLD_fta_composition.id_fta
+
+
+
+
+[V] Ajout des compositions n'ayant pas de nomenclature
+
+insert into fta_composant  (
+`id_fta_composition`  ,
+`last_id_fta_composition`  ,
+`id_fta` ,
+id_fta_nomenclature,
+`ingredient_fta_composition`  ,
+`ingredient_fta_composition1` ,
+`etiquette_fta_composition` ,
+`mode_etiquette_fta_composition`  ,
+`etiquette_supplementaire_fta_composition`  ,
+`etiquette_poids_fta_composition`  ,
+`etiquette_duree_vie_fta_composition` ,
+`etiquette_id_fta_conditionnement`  ,
+`etiquette_id_fta_composition` ,
+`nom_fta_composition` ,
+`id_geo`,
+`poids_fta_composition`  ,
+`quantite_fta_composition` ,
+`ordre_fta_composition`  ,
+`taille_police_nom_fta_composition` ,
+`taille_police_ingredient_fta_composition`,
+`k_style_paragraphe_ingredient_fta_composition` ,
+`duree_vie_technique_fta_composition` ,
+`k_etiquette_fta_composition` 
+) select `id_fta_composition`  ,
+`last_id_fta_composition`  ,
+`id_fta` ,
+id_fta_nomenclature,
+`ingredient_fta_composition`  ,
+`ingredient_fta_composition1` ,
+`etiquette_fta_composition` ,
+`mode_etiquette_fta_composition`  ,
+`etiquette_supplementaire_fta_composition`  ,
+`etiquette_poids_fta_composition`  ,
+`etiquette_duree_vie_fta_composition` ,
+`etiquette_id_fta_conditionnement`  ,
+`etiquette_id_fta_composition` ,
+`nom_fta_composition` ,
+`id_geo`,
+`poids_fta_composition`  ,
+`quantite_fta_composition` ,
+`ordre_fta_composition`  ,
+`taille_police_nom_fta_composition` ,
+`taille_police_ingredient_fta_composition`,
+`k_style_paragraphe_ingredient_fta_composition` ,
+`duree_vie_technique_fta_composition` ,
+`k_etiquette_fta_composition` 
+ from OLD_fta_composition
+ where OLD_fta_composition.id_fta_nomenclature=0
+
+
+[V] Mise à jour de `is_composition_fta_composant` et `is_nomenclature_fta_composant`
+
+update fta_composant set
+is_composition_fta_composant=1
+WHERE 
+fta_composant.id_fta_composition <>0
+
+update fta_composant set
+is_nomenclature_fta_composant=1
+WHERE 
+fta_composant.id_fta_nomenclature <>0
+
+
+* Mise à jour BASE CODESOFT
+
+
+* [V] Correctino des clefs id_fta des composants sur les FTA validée
+
+update fta_composant, OLD_fta_nomenclature, fta set
+	fta_composant.id_fta=OLD_fta_nomenclature.id_fta
+where
+fta_composant.id_fta_nomenclature=OLD_fta_nomenclature.id_fta_nomenclature 
+AND fta.id_fta=OLD_fta_nomenclature.id_fta 
+AND fta.id_fta_etat<>1 
+AND fta_composant.last_id_fta_composant=0
+
+fta_composant-2008-11-27-1
+
+[V] Mise à jour des informations de composition dans la tables des composants pour lesquels une nomenclature est associée (le id_fta dans le WHERE était nécessaire)
+
+update fta_composant, OLD_fta_composition set
+`fta_composant`.`id_fta_composition`=`OLD_fta_composition`.`id_fta_composition`  ,
+`fta_composant`.`last_id_fta_composition`=`OLD_fta_composition`.`last_id_fta_composition`  ,
+`fta_composant`.`id_fta`=`OLD_fta_composition`.`id_fta` ,
+`fta_composant`.`id_fta_nomenclature`=`OLD_fta_composition`.`id_fta_nomenclature`,
+`fta_composant`.`ingredient_fta_composition`=`OLD_fta_composition`.`ingredient_fta_composition`  ,
+`fta_composant`.`ingredient_fta_composition1`=`OLD_fta_composition`.`ingredient_fta_composition1` ,
+`fta_composant`.`etiquette_fta_composition`=`OLD_fta_composition`.`etiquette_fta_composition` ,
+`fta_composant`.`mode_etiquette_fta_composition`=`OLD_fta_composition`.`mode_etiquette_fta_composition`  ,
+`fta_composant`.`etiquette_supplementaire_fta_composition`=`OLD_fta_composition`.`etiquette_supplementaire_fta_composition`  ,
+`fta_composant`.`etiquette_poids_fta_composition`=`OLD_fta_composition`.`etiquette_poids_fta_composition`  ,
+`fta_composant`.`etiquette_duree_vie_fta_composition`=`OLD_fta_composition`.`etiquette_duree_vie_fta_composition` ,
+`fta_composant`.`OLD_etiquette_id_fta_conditionnement`=`OLD_fta_composition`.`etiquette_id_fta_conditionnement`  ,
+`fta_composant`.`etiquette_id_fta_composition`=`OLD_fta_composition`.`etiquette_id_fta_composition` ,
+`fta_composant`.`nom_fta_composition`=`OLD_fta_composition`.`nom_fta_composition` ,
+`fta_composant`.`id_geo`=`OLD_fta_composition`.`id_geo`,
+`fta_composant`.`poids_fta_composition`=`OLD_fta_composition`.`poids_fta_composition` ,
+`fta_composant`.`quantite_fta_composition`=`OLD_fta_composition`.`quantite_fta_composition` ,
+`fta_composant`.`ordre_fta_composition`=`OLD_fta_composition`.`ordre_fta_composition`  ,
+`fta_composant`.`taille_police_nom_fta_composition`=`OLD_fta_composition`.`taille_police_nom_fta_composition` ,
+`fta_composant`.`taille_police_ingredient_fta_composition`=`OLD_fta_composition`.`taille_police_ingredient_fta_composition`,
+`fta_composant`.`k_style_paragraphe_ingredient_fta_composition`=`OLD_fta_composition`.`k_style_paragraphe_ingredient_fta_composition` ,
+`fta_composant`.`duree_vie_technique_fta_composition`=`OLD_fta_composition`.`duree_vie_technique_fta_composition` ,
+`fta_composant`.`k_etiquette_fta_composition`=`OLD_fta_composition`.`k_etiquette_fta_composition` ,
+`fta_composant`.`is_composition_fta_composant`=1
+
+WHERE 
+fta_composant.id_fta_nomenclature = OLD_fta_composition.id_fta_nomenclature 
+AND fta_composant.id_fta=OLD_fta_composition.id_fta
+
+
+
+
+* Sauvegarde: fta_composant-2008-11-27-2
+
+[V] Mise à jour des informations de composition dans la tables des composants pour lesquels une nomenclature est associée 
+(le id_fta dans le WHERE était nécessaire) + Cas des fta_composition qui n'avaient pas de nomenclatures associées
+
+update fta_composant, OLD_fta_composition set
+`fta_composant`.`id_fta_composition`=`OLD_fta_composition`.`id_fta_composition`  ,
+`fta_composant`.`last_id_fta_composition`=`OLD_fta_composition`.`last_id_fta_composition`  ,
+`fta_composant`.`id_fta`=`OLD_fta_composition`.`id_fta` ,
+`fta_composant`.`id_fta_nomenclature`=`OLD_fta_composition`.`id_fta_nomenclature`,
+`fta_composant`.`ingredient_fta_composition`=`OLD_fta_composition`.`ingredient_fta_composition`  ,
+`fta_composant`.`ingredient_fta_composition1`=`OLD_fta_composition`.`ingredient_fta_composition1` ,
+`fta_composant`.`etiquette_fta_composition`=`OLD_fta_composition`.`etiquette_fta_composition` ,
+`fta_composant`.`mode_etiquette_fta_composition`=`OLD_fta_composition`.`mode_etiquette_fta_composition`  ,
+`fta_composant`.`etiquette_supplementaire_fta_composition`=`OLD_fta_composition`.`etiquette_supplementaire_fta_composition`  ,
+`fta_composant`.`etiquette_poids_fta_composition`=`OLD_fta_composition`.`etiquette_poids_fta_composition`  ,
+`fta_composant`.`etiquette_duree_vie_fta_composition`=`OLD_fta_composition`.`etiquette_duree_vie_fta_composition` ,
+`fta_composant`.`OLD_etiquette_id_fta_conditionnement`=`OLD_fta_composition`.`etiquette_id_fta_conditionnement`  ,
+`fta_composant`.`etiquette_id_fta_composition`=`OLD_fta_composition`.`etiquette_id_fta_composition` ,
+`fta_composant`.`nom_fta_composition`=`OLD_fta_composition`.`nom_fta_composition` ,
+`fta_composant`.`id_geo`=`OLD_fta_composition`.`id_geo`,
+`fta_composant`.`poids_fta_composition`=`OLD_fta_composition`.`poids_fta_composition` ,
+`fta_composant`.`quantite_fta_composition`=`OLD_fta_composition`.`quantite_fta_composition` ,
+`fta_composant`.`ordre_fta_composition`=`OLD_fta_composition`.`ordre_fta_composition`  ,
+`fta_composant`.`taille_police_nom_fta_composition`=`OLD_fta_composition`.`taille_police_nom_fta_composition` ,
+`fta_composant`.`taille_police_ingredient_fta_composition`=`OLD_fta_composition`.`taille_police_ingredient_fta_composition`,
+`fta_composant`.`k_style_paragraphe_ingredient_fta_composition`=`OLD_fta_composition`.`k_style_paragraphe_ingredient_fta_composition` ,
+`fta_composant`.`duree_vie_technique_fta_composition`=`OLD_fta_composition`.`duree_vie_technique_fta_composition` ,
+`fta_composant`.`k_etiquette_fta_composition`=`OLD_fta_composition`.`k_etiquette_fta_composition` ,
+`fta_composant`.`is_composition_fta_composant`=1
+
+WHERE 
+fta_composant.id_fta_composition = OLD_fta_composition.id_fta_composition 
+AND fta_composant.id_fta_nomenclature=0 
+AND fta_composant.id_fta=OLD_fta_composition.id_fta
+
+Restauration de fta_composant-2008-11-27-1 vers fta_composant
+
+[V] Mise à jour des informations de composition dans la tables des composants pour lesquels une nomenclature est associée 
+(le id_fta dans le WHERE était nécessaire) + Cas des fta_composition qui n'avaient pas de nomenclatures associées
+
+update fta_composant, OLD_fta_composition set
+`fta_composant`.`id_fta_composition`=`OLD_fta_composition`.`id_fta_composition`  ,
+`fta_composant`.`last_id_fta_composition`=`OLD_fta_composition`.`last_id_fta_composition`  ,
+`fta_composant`.`id_fta`=`OLD_fta_composition`.`id_fta` ,
+`fta_composant`.`id_fta_nomenclature`=`OLD_fta_composition`.`id_fta_nomenclature`,
+`fta_composant`.`ingredient_fta_composition`=`OLD_fta_composition`.`ingredient_fta_composition`  ,
+`fta_composant`.`ingredient_fta_composition1`=`OLD_fta_composition`.`ingredient_fta_composition1` ,
+`fta_composant`.`etiquette_fta_composition`=`OLD_fta_composition`.`etiquette_fta_composition` ,
+`fta_composant`.`mode_etiquette_fta_composition`=`OLD_fta_composition`.`mode_etiquette_fta_composition`  ,
+`fta_composant`.`etiquette_supplementaire_fta_composition`=`OLD_fta_composition`.`etiquette_supplementaire_fta_composition`  ,
+`fta_composant`.`etiquette_poids_fta_composition`=`OLD_fta_composition`.`etiquette_poids_fta_composition`  ,
+`fta_composant`.`etiquette_duree_vie_fta_composition`=`OLD_fta_composition`.`etiquette_duree_vie_fta_composition` ,
+`fta_composant`.`OLD_etiquette_id_fta_conditionnement`=`OLD_fta_composition`.`etiquette_id_fta_conditionnement`  ,
+`fta_composant`.`etiquette_id_fta_composition`=`OLD_fta_composition`.`etiquette_id_fta_composition` ,
+`fta_composant`.`nom_fta_composition`=`OLD_fta_composition`.`nom_fta_composition` ,
+`fta_composant`.`id_geo`=`OLD_fta_composition`.`id_geo`,
+`fta_composant`.`poids_fta_composition`=`OLD_fta_composition`.`poids_fta_composition` ,
+`fta_composant`.`quantite_fta_composition`=`OLD_fta_composition`.`quantite_fta_composition` ,
+`fta_composant`.`ordre_fta_composition`=`OLD_fta_composition`.`ordre_fta_composition`  ,
+`fta_composant`.`taille_police_nom_fta_composition`=`OLD_fta_composition`.`taille_police_nom_fta_composition` ,
+`fta_composant`.`taille_police_ingredient_fta_composition`=`OLD_fta_composition`.`taille_police_ingredient_fta_composition`,
+`fta_composant`.`k_style_paragraphe_ingredient_fta_composition`=`OLD_fta_composition`.`k_style_paragraphe_ingredient_fta_composition` ,
+`fta_composant`.`duree_vie_technique_fta_composition`=`OLD_fta_composition`.`duree_vie_technique_fta_composition` ,
+`fta_composant`.`k_etiquette_fta_composition`=`OLD_fta_composition`.`k_etiquette_fta_composition` ,
+`fta_composant`.`is_composition_fta_composant`=1
+
+WHERE 
+fta_composant.id_fta_composition = OLD_fta_composition.id_fta_composition 
+AND fta_composant.id_fta_nomenclature=0 
+AND fta_composant.id_fta=OLD_fta_composition.id_fta
+
+
+
+update fta_composant, OLD_fta_composition set
+`fta_composant`.`id_fta_composition`=`OLD_fta_composition`.`id_fta_composition`  ,
+`fta_composant`.`last_id_fta_composition`=`OLD_fta_composition`.`last_id_fta_composition`  ,
+`fta_composant`.`id_fta`=`OLD_fta_composition`.`id_fta` ,
+`fta_composant`.`id_fta_nomenclature`=`OLD_fta_composition`.`id_fta_nomenclature`,
+`fta_composant`.`ingredient_fta_composition`=`OLD_fta_composition`.`ingredient_fta_composition`  ,
+`fta_composant`.`ingredient_fta_composition1`=`OLD_fta_composition`.`ingredient_fta_composition1` ,
+`fta_composant`.`etiquette_fta_composition`=`OLD_fta_composition`.`etiquette_fta_composition` ,
+`fta_composant`.`mode_etiquette_fta_composition`=`OLD_fta_composition`.`mode_etiquette_fta_composition`  ,
+`fta_composant`.`etiquette_supplementaire_fta_composition`=`OLD_fta_composition`.`etiquette_supplementaire_fta_composition`  ,
+`fta_composant`.`etiquette_poids_fta_composition`=`OLD_fta_composition`.`etiquette_poids_fta_composition`  ,
+`fta_composant`.`etiquette_duree_vie_fta_composition`=`OLD_fta_composition`.`etiquette_duree_vie_fta_composition` ,
+`fta_composant`.`OLD_etiquette_id_fta_conditionnement`=`OLD_fta_composition`.`etiquette_id_fta_conditionnement`  ,
+`fta_composant`.`etiquette_id_fta_composition`=`OLD_fta_composition`.`etiquette_id_fta_composition` ,
+`fta_composant`.`nom_fta_composition`=`OLD_fta_composition`.`nom_fta_composition` ,
+`fta_composant`.`id_geo`=`OLD_fta_composition`.`id_geo`,
+`fta_composant`.`poids_fta_composition`=`OLD_fta_composition`.`poids_fta_composition` ,
+`fta_composant`.`quantite_fta_composition`=`OLD_fta_composition`.`quantite_fta_composition` ,
+`fta_composant`.`ordre_fta_composition`=`OLD_fta_composition`.`ordre_fta_composition`  ,
+`fta_composant`.`taille_police_nom_fta_composition`=`OLD_fta_composition`.`taille_police_nom_fta_composition` ,
+`fta_composant`.`taille_police_ingredient_fta_composition`=`OLD_fta_composition`.`taille_police_ingredient_fta_composition`,
+`fta_composant`.`k_style_paragraphe_ingredient_fta_composition`=`OLD_fta_composition`.`k_style_paragraphe_ingredient_fta_composition` ,
+`fta_composant`.`duree_vie_technique_fta_composition`=`OLD_fta_composition`.`duree_vie_technique_fta_composition` ,
+`fta_composant`.`k_etiquette_fta_composition`=`OLD_fta_composition`.`k_etiquette_fta_composition` ,
+`fta_composant`.`is_composition_fta_composant`=1
+
+WHERE 
+fta_composant.id_fta_nomenclature = OLD_fta_composition.id_fta_nomenclature 
+AND fta_composant.id_fta=OLD_fta_composition.id_fta
+AND fta_composant.id_fta_nomenclature<>0 
+

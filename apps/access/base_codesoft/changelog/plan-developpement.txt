@@ -1,0 +1,13 @@
+Prochaines étapes:
+
+	
+
+1.0:	Application du cahier des charges
+
+2.0:	Changement d'ActiveX de date
+
+2.1: 	Amélioration des protections contre les erreurs de saisies
+
+2.2:	Centralisation du Programme dans l'intranet
+
+2.3:	Centralisation des données dans MySQL

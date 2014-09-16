@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Cas de structure XML non-implémentée pour anticipation de la rétrocompatibilité
+-->
+
+<XmlTagUnknown1>
+    <XmlTagUnknown1_1 attribute1="CONTENT_ATTRIB_1" />
+</XmlTagUnknown1>
+
+<Transaction id="7" attribute2="CONTENT_ATTRIB_2" version="1" type="result">
+    <Parameters>
+        <IdFirm>40</IdFirm><!-- Agis -->      
+        <IdArcadia>69032</IdArcadia><!-- Code article dans Arcadia -->
+        <IdFta>11493</IdFta><!-- N° de la FTA -->
+        <CodeReply>0</CodeReply><!-- Proposition traitée avec succés -->
+        <XmlTagUnknown2>CONTENT_XmlTagUnknown2</XmlTagUnknown2>
+        <XmlTagUnknown3 attribute3="CONTENT_ATTRIB_3"/>
+    </Parameters>
+    <XmlTagUnknown4>
+        <XmlTagUnknown4_1 attribute4="CONTENT_ATTRIB_4" />
+    </XmlTagUnknown4>
+</Transaction>

@@ -1,0 +1,82 @@
+================================================================================
+Modifications à apporter aux différentes versions du modules
+================================================================================
+
+[ ]: Reste à effectuer
+[!]: Prioritaire
+[V]: Réalisé
+[.]: Abandonné
+================================================================================
+Exemples:
+[V] 23/05/2003: saisie_vierge_origine.php
+      Déplacer les informations de cette page au niveau du composant.
+
+[ ] 28/07/2003: saisie_origine.php
+                Saisie de plusieurs origine sans cycle.
+                Rajouter dans la listedes origine:
+                         - Cf Origine MP
+                         - Cf Lieu dernière Transformation
+                         - Cf Origine Multiple
+                         - Cf Non défini
+                Bouton "Terminer Saisie"
+================================================================================
+
+[V] Validation de la DLC et influence sur l'étiquettage et l'informatique
+[V] Accès à l'ensemble des actions via le moteur de recherche
+[V] Sur Synthèse: présentation par ordre alphabétique + Code Agrologic
+[V] Passerelle de Migration: Bug migration Poids UVC 23000 (exemple, dossier 465)
+[V] Palettisation: Poids brut Palette / Poids Brut Colis
+                   - Arrondir les valeurs à 2 chiffres après la virgule
+[V] Interdire la suppression/Ajout de nomenclature pour l'Informatique.
+[V] lors de multiple ajout de nomenclature, celà genère une multitude de composants pour la qualité
+[V] Ajouter le Dictionnaire des raccouris dans l'informatique
+[V] Transiter: intutilé "retirer la recette" a revoir
+[V] En modification, ne voir que les FTA pour lesquelles un fait partie du processus en cours
+[V] Saisie/Identité:
+        - Retour HTML de fonction de classification pour une consultation sous forme de tableau.
+        - Ne pas montrer le "/" en consultation et en sélection de classification.
+[A] Voir comment intégrer les FTA de Campagnéros ( Site ATI)
+[A] Voir intégration ATI --> il faudrait qu'ils utilisent Agrologic Agis pour qu'il y ait un intérêt
+[A] --> Mise en commentaire Intégrer une date d'échéance souhaitée par le chef de projet pour l'ensemble du projet
+[V] emilie jouet mercredi 12 avril 2006 14:00:22 >>>
+    J'ai ajouté les codes agrologic de toutes les FT Avignon sauf :
+    - Les FT festives dont les produits n'ont pas de code article : FT 271, 263, 262, 264, 266, 267, 268, 265. --> Fiche Présentation
+    - Archivage de 3 FT : 261, 201, 202 dont la 261 à supprimer (car des 0 partout et pas de code agro).
+    - 2 codes agrologic non trouvés: FT 107, 179 --> A supprimer
+    - FT 258 : code agro déjà présent : albondigas 10302 --> regarder pourquoi message
+    Que signifie "conditionnement pas unité de poids", quel case dois je modifier ?
+    Emilie
+[V] Boris,
+    je fais des essais sur intranet et j'ai qq points "flous" : 
+    V est il possible de supprimer des fiches pas encore passé par tous les processus?
+    V dans le chemin de désignation, dans marque : AGIS et NEUTRE ? quel est la différence?
+    V dans le choix de la durée de vie : attention le titre de la page est faux, faute dans allongement, et les titres dans le tableau me semblent faux (3eme colonne : description?)
+
+[V] Informations des Allergènes
+[A] Ajouter par défaut une palette
+[V] Intitulé Quantité par colis (ajouter PCB). Faire plus voyant au niveau de la saisie
+[V] Type d'Emballage:
+         V Ajouter les coffrets
+         V Les films deviennent des sachets   (1 --> 14)
+[V] Chapitre Emballages:
+         V "Emballages Primaire" renommé en "Emballages Primaires et Accessoires"
+         V Inverser ordre "Emballage Primaire" avec "Emballage UVC"
+[V] Désactiver la saisie manuelle des emballages (lien sur le module FTE)
+
+
+[V] Log suite à la migration des données.
+    FT0107G00: Code Agrologic manquant
+    FT0179G00: Code Agrologic manquant
+    FT0271G00: Code Agrologic manquant
+    FT0263G01: Code Agrologic manquant
+    FT0262G00: Code Agrologic manquant
+    FT0264G00: Code Agrologic manquant
+    FT0266G02: Code Agrologic manquant
+    FT0267G03: Code Agrologic manquant
+    FT0268G04: Code Agrologic manquant
+    FT0265G02: Code Agrologic manquant
+    ???     --> FT0113T00: Code Article 11546 inexistant dans ARTI2 
+    228v0 --> FT0196T00: Code Agrologic manquant
+    282v0 --> FT0217T04: Conditionnement, Il ne s'agit pas d'une unité de poids
+
+

@@ -1,0 +1,62 @@
+================================================================================
+Modification apportées à la version: 0.0.x
+================================================================================
+Version en cours: 0.0.0
+
+[-]: Reste à effectuer
++++: Réalisé
+================================================================================
+Exemples:
+[+++] 23/05/2003: saisie_vierge_origine.php
+      Déplacer les informations de cette page au niveau du composant.
+
+[-] 28/07/2003: saisie_origine.php
+                Saisie de plusieurs origine sans cycle.
+                Rajouter dans la listedes origine:
+                         - Cf Origine MP
+                         - Cf Lieu dernière Transformation
+                         - Cf Origine Multiple
+                         - Cf Non défini
+                Bouton "Terminer Saisie"
+================================================================================
+
+[V] 06/10/2003: Images dans articles
+    A chaque modification de l'article, il faut refaire les liens ce qui entraine une nouvelle
+    recopie des images sur le serveur.
+
+[V] 28/11/2004:probleme de copie de l'image
+    Warning: getimagesize(../imgarticle/436_1): failed to open stream: No such file or directory in /home/www/intranet/adminagis/fonc.php on line 106
+
+    Warning: imagesx(): supplied argument is not a valid Image resource in /home/www/intranet/adminagis/fonc.php on line 127
+
+    Warning: imagesy(): supplied argument is not a valid Image resource in /home/www/intranet/adminagis/fonc.php on line 127
+
+    Warning: imagecopyresized(): supplied argument is not a valid Image resource in /home/www/intranet/adminagis/fonc.php on line 127
+    probleme de copie de l'image 
+    Warning: getimagesize(../imgarticle/436_2): failed to open stream: No such file or directory in /home/www/intranet/adminagis/fonc.php on line 106
+
+    Warning: imagesx(): supplied argument is not a valid Image resource in /home/www/intranet/adminagis/fonc.php on line 127
+
+    Warning: imagesy(): supplied argument is not a valid Image resource in /home/www/intranet/adminagis/fonc.php on line 127
+
+    Warning: imagecopyresized(): supplied argument is not a valid Image resource in /home/www/intranet/adminagis/fonc.php on line 127
+
+
+[V] 15/03/2004:Problème image:
+    probleme de copie de l'image 
+Warning: getimagesize(../imgarticle/449_1): failed to open stream: No such file or directory in /mnt/sda3/var/www/intranet/adminagis/fonc.php on line 106
+
+Fatal error: Call to undefined function: imagecreate() in /mnt/sda3/var/www/intranet/adminagis/fonc.php on line 112    
+
+[V] 18/03/2004:Arriver par défaut sur la page nouveautés du module.
+
+[V] Réduire la hauteur des fenêtres "news longues"
+    Suivant la résolution de l'écran, la fenêtre pop-up est trop grande.
+
+[V] centraliser le module news dans le répertoire news !
+
+[V] Focus sur la page index.php
+
+[V] Moteur de recherche
+
+[V] Naviguation par service.

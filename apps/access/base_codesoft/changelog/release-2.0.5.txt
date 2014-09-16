@@ -1,0 +1,30 @@
+================================================================================
+Modifications à apporter aux différentes versions du modules
+================================================================================
+
+[ ]: Reste à effectuer
+[!]: Prioritaire
+[V]: Réalisé
+[.]: Abandonné
+================================================================================
+Exemples:
+[V] 23/05/2003: saisie_vierge_origine.php
+      Déplacer les informations de cette page au niveau du composant.
+
+[ ] 28/07/2003: saisie_origine.php
+                Saisie de plusieurs origine sans cycle.
+                Rajouter dans la listedes origine:
+                         - Cf Origine MP
+                         - Cf Lieu dernière Transformation
+                         - Cf Origine Multiple
+                         - Cf Non défini
+                Bouton "Terminer Saisie"
+================================================================================
+
+[A] 2005-11-28 : etiquette BOFROST pour l'export : création d'une table ARTI2_EXPORT
+
+[v] 2006-04-24 : pour VSR rajout d'un champ dans la table ARTI2 k_gestion_lot définit le mode de gestion du lot
+	1 = gestion du lot égal au quantième du jour de production
+	2 = gestion du lot VSR égal au format YYMMDD
+	cette gestion du lot est faite en automatique dans le formulaire lorsque l'on sélectionne l'article pour la sortie d''étiquette
+

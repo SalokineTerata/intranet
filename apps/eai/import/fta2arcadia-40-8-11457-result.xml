@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Cas d'une Erreur de mise en forme : Structure XML ne respecte pas la version 1 du projet
+-->
+
+<Transaction id="8"><!-- Manque les attributs "version" et "type" -->
+    <Parameters>
+        <IdFirm>40</IdFirm><!-- Agis -->      
+        <IdArcadia>75349</IdArcadia><!-- Code article dans Arcadia -->
+        <IdFta>11457</IdFta><!-- N° de la FTA -->
+        <CodeReply>0</CodeReply><!-- Proposition traitée avec succés -->
+    </Parameters>
+</Transaction>

@@ -1,0 +1,50 @@
+================================================================================
+Fiches et Tables à basculer de intranet.dev.agis.fr vers intranet.agis.fr:
+================================================================================
+
+[ ]: Reste à effectuer
+[X]: Réalisé
+================================================================================
+
+Pour les copies MYSQL[]:
+---------------------------
+[D]: DATA et STRUCTURE sont à transférer
+[S]: STRUCTURE seulement sont à transférer
+[O]: Renommer la table en OLD_nom_de_la_table
+================================================================================
+
+Pour les copies de FILE:
+----------------------------
+chemin depuis le répertoire racine du site
+- si c'est le répertoire du module:
+    - renommer le répertoire d'exploitation nom-AAAA-MM-JJ où la date est la
+        date du jour de la modification
+    - faire un TAR.GZ
+    - supprimer l'original
+    - copier le répertoire de développement vers le site d'exploitation
+
+================================================================================
+[V] Systématique: Ecarter une sauvegarde
+[V] Systématique: MYSQL[D]: intranet_modules
+[V] Systématique: /repertoire_du_module
+
+[V] MAJ des droits d'accès pour intégrer l'utilisation du droits de diffusion:
+        UPDATE `intranet_droits_acces` SET niveau_intranet_droits_acces=1 WHERE (
+        id_intranet_modules = '19'
+        AND `id_intranet_actions` = '3'
+        AND `intranet_droits_acces`.`niveau_intranet_droits_acces`=0
+        )
+
+[V] fta.date_derniere_maj_fta passe de TINYTEXT vers TEXT
+[V] fta.designation_commerciale_fta --> 150 caractères
+[V] MySQL[D]:fta.chapitre
+[V] MySQL[S]: fta_suivi_projet (ajout de correction)
+[V] MySQL[D]: fta_saisie_obligatoire
+[V] MySQL[S]: fta_composition (ajout de ordre_fta_composition)
+
+
+
+
+
+
+

@@ -1,0 +1,94 @@
+================================================================================
+Modifications à apporter aux différentes versions du modules
+================================================================================
+
+[ ]: Reste à effectuer
+[!]: Prioritaire
+[X]: Réalisé
+[.]: Abandonné
+================================================================================
+Exemples:
+[X] 23/05/2003: saisie_vierge_origine.php
+      Déplacer les informations de cette page au niveau du composant.
+
+[ ] 28/07/2003: saisie_origine.php
+                Saisie de plusieurs origine sans cycle.
+                Rajouter dans la listedes origine:
+                         - Cf Origine MP
+                         - Cf Lieu dernière Transformation
+                         - Cf Origine Multiple
+                         - Cf Non défini
+                Bouton "Terminer Saisie"
+================================================================================
+
+[A] 09/03/2004: http://intranet.agis.fr/fichetech/telecharger.php
+    Sur impression usine, il n'y a pas toutes les informations de la fiche technique, mais seulement celles de type "client"
+
+[A] 02/04/2004 : modification page consultation.php (mauvaise requete SQL ne prenant pas en compte le nom du produit)
+
+[A] 06/04/2004 : en saisie de fiche lors du clic sur le bouton enregistrer
+-> Warning: mysql_result(): Unable to jump to row 0 on MySQL result index 17 in /mnt/sda3/var/www/intranet.dev/fichetech/foncft.php on line 22
+
+[A] 2004-06-09: Impression Fiches Techniques (Gestion des sauts de pages automatiques)
+        Exemple:
+            Gamme coupe festive  : Plateau les mises en fêtes, 16 bouchées
+            Gencod 3366760011456
+            Gamme festive bernard loiseau : croustade de canard au foie gras 3366760007824
+            Sauce foie gras 3366760008906
+            Sauté de cerf sauce poivrade 3366760011449
+            Cuisse de canard aux cèpes 3366760008883
+
+[A] 2005-02-07:
+    Bonjour !!
+
+    Comme convenu la dernière fois que je t'avais parlé de cette anomalie, je te faxe l'impression d'une fiche technique (sur 1 seule feuille) avec la première partie anormalement "volumineuse" ...
+    Penses tu pouvoir faire qqch ?
+
+    Merci d'avance et bonne journée
+    Marie
+
+[A] Warning: mysql_result(): Unable to jump to row 0 on MySQL result index 33 in /mnt/sda3/var/www/intranet/stats/menustats.inc on line 36
+[A] Warning: mysql_result(): Unable to jump to row 0 on MySQL result index 29 in /mnt/sda3/var/www/intranet/fichetech/menuft.inc on line 25
+
+
+[A] Dans la liste déroulante des emballage, afficher le nom du fournisseur
+
+[V] En entête de saisie, afficher le nom de l'Article
+
+[V] Tableau des durée de vie pré-validées.
+            Dans le cas d'une autre information, définir un document de validation.
+            Dans Arti2:
+            Durée_de_vie_technique -> Devient Durée de vie limite 
+            Dans fta:
+            duree_vie_limite_fta -> durée validé par RAQ
+
+            Définir un tableau des DLC validées
+
+          DvClient  DvLimite  Désignation
+          11  22  Faible Coulpe de Cuisson  Produit à base de Poisson ou de Volaille
+          14  25  Allongement de DLC  pour Produit à base de Poisson ou de Volaille
+          17  29  Autre produit    Par défaut
+          21  35  Allogement de DLC
+          21  42  Allogement de DLC
+          ...  ...  Demander RAQ
+
+
+[A] Génération d'un FTAi (Multi-utilsateur sur le bloc de saisie; Un composant dédié à un RAQ)
+
+
+[V] Origines des Composants Principaux (précision sur la position dans la base: fta ou fta_composition) (listes ??)
+    Champ texte libre mais dédié aux origines et situé au niveau composant
+
+
+
+[A] Fatal error: Allowed memory size of 8388608 bytes exhausted (tried to allocate 47 bytes) in /mnt/sda3/var/www/system/phpMyAdmin/libraries/dbi/mysql.dbi.lib.php on line 115
+
+
+[V] Modification du chapitre Emballage de l'UVC / Emballages Primaires / Palettisation
+    PAssage en Liste déroulante des Types + Saisie manuelle des dimensions + Saisie manuelle du poids.
+
+[V] Vérrouiller la possibilté de modifier l'environnement de conservation sur la partie recette.
+
+[V] moteur de recherche: Gencod attention aux espaces
+
+

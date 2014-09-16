@@ -1,0 +1,21 @@
+Planning de développement:
+
+1.1:
+    - Intégration des Droits d'accès
+    - Gestion de la Classification Articles
+    - Modification des menus existants
+
+
+V Gestion des Processus
+
+- Création des Interfaces par Processus
+
+V Création des Blocs de Saisie
+
+- Gestion des Donnés Annexes
+
+- Gestion du Suivi de Processus
+
+- Gestion des Mails
+
+2.0:    Validation de l'ensemble du module par le Groupe de Développement.

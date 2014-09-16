@@ -1,0 +1,26 @@
+#Ce fichier doit contenir uniquement les liaisons entre les differentes
+#tables d'un même module.
+#Les noms des champs doivent etre précédés par le nom de la table
+#a laquelle ils appartiennent et un point
+#Les liaisons doivent etre séparées par des sauts de lignes
+#(pas de AND a la fin)
+#
+
+fta.id_fta=fta_suivi_projet.id_fta
+fta.id_fta=fta_tarif.id_fta
+fta.id_fta_categorie=fta_categorie.id_fta_categorie
+
+#fta.id_fta=fta_nomenclature.id_fta
+#fta.id_fta=fta_composition.id_fta
+fta.id_fta=fta_composant.id_fta
+
+fta.id_fta=fta_conditionnement.id_fta
+fta.id_fta=classification_fta.id_fta
+
+access_arti2.id_access_arti2=fta.id_access_arti2
+access_arti2.Site_de_production=geo.id_site
+
+fta_suivi_projet.id_fta_chapitre=fta_chaptitre.id_fta_chapitre
+fta_chapitre.id_fta_processus=fta_processus.id_fta_processus
+fta_processus.id_intranet_actions=intranet_actions.id_intranet_actions
+

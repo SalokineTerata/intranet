@@ -1,0 +1,37 @@
+================================================================================
+Fiches et Tables à basculer de intranet.dev.agis.fr vers intranet.agis.fr:
+================================================================================
+
+[ ]: Reste à effectuer
+[X]: Réalisé
+================================================================================
+
+Pour les copies MYSQL[]:
+---------------------------
+[D]: DATA et STRUCTURE sont à transférer
+[S]: STRUCTURE seulement sont à transférer
+[O]: Renommer la table en OLD_nom_de_la_table
+================================================================================
+
+Pour les copies de FILE:
+----------------------------
+chemin depuis le répertoire racine du site
+- si c'est le répertoire du module:
+    - renommer le répertoire d'exploitation nom-AAAA-MM-JJ où la date est la
+        date du jour de la modification
+    - faire un TAR.GZ
+    - supprimer l'original
+    - copier le répertoire de développement vers le site d'exploitation
+
+================================================================================
+[ ] Systématique: Ecarter une sauvegarde
+[ ] Systématique: MYSQL[D]: intranet_modules
+[ ] Systématique: /repertoire_du_module
+
+[ ] MySQL[S]: table geo rajout champ : geo_cnud_preparer_par / commentaire : CNUD du site de préparation
+[ ] modification de la page chapitre_logistique.inc (rajout du champ geo_cnud_preparer_par / rajout du critère . "AND site_actif = 1 " pour affichage des sites actis)
+
+
+
+
+

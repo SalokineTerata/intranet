@@ -1,0 +1,39 @@
+================================================================================
+Modifications à apporter aux différentes versions du modules
+================================================================================
+
+[ ]: Reste à effectuer
+[!]: Prioritaire
+[X]: Réalisé
+[.]: Abandonné
+================================================================================
+Exemples:
+[X] 23/05/2003: saisie_vierge_origine.php
+      Déplacer les informations de cette page au niveau du composant.
+
+[ ] 28/07/2003: saisie_origine.php
+                Saisie de plusieurs origine sans cycle.
+                Rajouter dans la listedes origine:
+                         - Cf Origine MP
+                         - Cf Lieu dernière Transformation
+                         - Cf Origine Multiple
+                         - Cf Non défini
+                Bouton "Terminer Saisie"
+================================================================================
+
+[ ] Correction de la publication d'Article CE
+[ ] Corriger la saisie des news longues
+[ ] Corriger la navigation dans les onglets départements
+[V] Lors de la création d'un utilisateur, celui-ci voit d'entrer une tonne de news
+
+Bonjour,
+
+Est-ce que c'est normal qu'on ne puisse pas aller sur les autres onglets que celui de sa "direction" ( développement pour moi ) et celui de l'entreprise ???
+Dommage .....
+
+[ ] Externaliser le stockage des données du module pour simplifier la mise en ligne
+
+[ ] Bug sur la modification d'une news
+
+[ ] Pouvoir mettre le lien en GET
+

@@ -1,0 +1,93 @@
+================================================================================
+Modifications à apporter aux différentes versions du modules
+================================================================================
+
+[ ]: Reste à effectuer
+[!]: Prioritaire
+[V]: Réalisé
+[.]: Abandonné
+================================================================================
+Exemples:
+[V] 23/05/2003: saisie_vierge_origine.php
+      Déplacer les informations de cette page au niveau du composant.
+
+[ ] 28/07/2003: saisie_origine.php
+                Saisie de plusieurs origine sans cycle.
+                Rajouter dans la listedes origine:
+                         - Cf Origine MP
+                         - Cf Lieu dernière Transformation
+                         - Cf Origine Multiple
+                         - Cf Non défini
+                Bouton "Terminer Saisie"
+================================================================================
+
+[v] dans le formulaire PPM rajouter un bouton pour editer la requete ppm - calcul final
+	rajouter une édition tableau recap mensuel par site date enseigne / gamme (sans notion d'article)
+
+[v] Editions / Consultations  / par produit - mettre les mêmes critères que le formulaire par typo (article / gamme / toutes gammes / site)
+
+[v] formulaire suivi des dossiers rajouter la colonne nom du produit dans la zone de liste + filtrer par site l'édition (et la consulation)
+	lors du double clic sur le dossier rajouter les info DLC et lot
+
+[v] niveau gravité Carrefour à mettre en correspondance avec les niveaux Agis
+
+
+[v] dans le formulaire Saisie - Réclamations rajouter un onglet avec un champ Commentaire libelle commentaire_interne pour le suivi du dossier
+
+
+[v] dans le formulaire HISTORIQUE pouvoir filter par site + type client
+
+[ ] voir l'état Synthese - Gamme quand filtre avec date  de fab / toutes les gammes / ATI
+
+[.] formulaire de saisie empecher la saisie de 2 dossiers à la fois (touche page bas)
+	j'ai pas trouvé la solution
+
+[v] Jasmine COUSTON/LDCAVI/GRPLDC/FR a écrit sur 27/02/2009 09:38:57 :
+
+> Bonjour,
+> 
+> Nous arrivons un peu tard pour faire un point sur la base 
+> consommateur, mais voici quelques informations supplémentaires sur 
+> l'utilisation, pour notre part, de la base conso :
+> 
+> Dans Suivi des dossiers / Client / Attente date clôture (pour info :
+> les réclamations de 2008 du site d'Avignon des clients MDD sont 
+> toutes clôturées, avec traça et actions correctives) :
+> 
+> La liste des dossiers imprime toutes les réclamations, clôturées / 
+> non clôturées / tout site confondu. (Attention, sur l'impression le 
+> titre est Liste des réclamations clôturées du ... au ...)
+> La liste n'est pas triée par client ou consommateur.
+> 
+> Est-il possible de :
+> 
+> Faire un tri par site
+> Faire une impression d'une liste uniquement des réclamations Client 
+> non clôturées
+> Faire un tri par client / consommateur
+> 
+> En effet, j'utilise exclusivement le dossier Client (MDD).
+> 
+> Toujours dans Suivi des dossiers / Client / Attente date clôture, 
+> les n° chrono ne sont pas forcément dans l'ordre chronologique, donc
+> pour rechercher par n°, ce n'est pas évident.
+> 
+> Quand on rentre dans une réclamation en cours, quand un produit 
+> n'est plus fabriqué, il  n'apparait plus en tant qu'article, la case
+> est vide, donc on ne sait pas quel produit est concernée par la réclamation.
+> 
+> Quand je renseigne l'onglet Information courrier à la saisie de la réclamation
+> , quand je retourne sur suivi, ce que j'ai renseigné a disparu.
+> 
+> Pour l'informatique : sur l'impression de la liste des réclamations,
+> 2 réclamations posent un problème : le n° 3774 et 3989 apparaissent 
+> en 3 exemplaires non clôturés, mais n'apparaissent ni dans les 
+> clôturées, ni dans les non clôturées dans le suivi des dossiers.
+> 
+> Nous restons à votre disposition.
+> 
+> Jasmine COUSTON
+> Secrétaire Qualité AGIS AVIGNON
+> jasmine.couston@agis-sa.fr
+> Tél. : 04.90.80.99.87 - Poste 1932
+> Fax : 04.90.80.99.75

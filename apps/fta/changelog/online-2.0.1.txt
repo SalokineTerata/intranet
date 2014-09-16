@@ -1,0 +1,110 @@
+================================================================================
+Fichiers et Tables à basculer de intranet.dev.agis.fr vers intranet.agis.fr:
+================================================================================
+
+[ ]: Reste à effectuer
+[X]: Réalisé
+================================================================================
+
+Pour les copies MYSQL[]:
+---------------------------
+[D]: DATA et STRUCTURE sont à transférer
+[S]: STRUCTURE seulement sont à transférer
+[O]: Renommer la table en OLD_nom_de_la_table
+================================================================================
+
+Pour les copies de FILE:
+----------------------------
+chemin depuis le répertoire racine du site
+- si c'est le répertoire du module:
+    - renommer le répertoire d'exploitation nom-AAAA-MM-JJ où la date est la
+        date du jour de la modification
+    - faire un TAR.GZ
+    - supprimer l'original
+    - copier le répertoire de développement vers le site d'exploitation
+
+================================================================================
+
+[V] Systématique: MYSQL[D]: intranet_modules
+[V] Systématique: MYSQL[D]: fta_*
+[V] Systématique: /repertoire_du_module
+
+[V] /lib
+[V] /adminagis
+
+[A] MYSQL[S] : rajout champs dans table droift
+[A]    -> creation_fiche_produit, enum(oui/non) nouveau droit pour création de fiche identité produit, defaut non
+
+[A] MYSQL[S] : rajout des champs dans Tables INFOG, INFOGV, INFOGA
+        -> nomprod_interne, varchar(50)
+        -> etat, enum('frais', 'surgelé')
+        -> commentaire_chef_projet, text
+        -> type_facturation, enum('Pièce', 'Kilo')
+
+[V] MYSQL[D]: intranet_niveau_acces
+    Ajout des droits d'accès personnalisés
+
+[A] MYSQL[D]: intranet_modules
+[A] /fichetech: Archiver
+[V] MYSQL[S]: access_arti2
+    Modification des clefs !
+    CODE_ARTICLE: UNIQUE, NULL
+
+[V] fiches_mp_achats/saisie_composition.php
+[V] fiches_mp_achats/ingredient.inc.php
+[V] fiches_mp_achats/visualiser_ingredient.inc.php
+[V] Mise en ligne du module classification
+[V] MySQL[S]: classification_fta
+[V] MySQL[D]: annexe_emballage_groupe
+[V] Access/Recette (partie programme)
+[V] MySQL[D]:intranet_access_linked_table
+[A] Migration des fiches existantes
+[V] MySQL[S]: salaries
+[V] Affectation des droits d'accès
+
+-------------------
+
+[V] MySQL[D]: intranet_niveau_acces,
+
+[V] /lib
+[A] MySQL[D]: annexe_societe
+[V] MySQL[S]: annexe_emballage
+              --> Commentaire de id_annexe_emballage
+[V] MySQL[S]: fte_fournisseur
+              --> Commentaire de nom_fte_fournisseur
+[V] MySQL[S]: fta
+[V] MySQL[D]: classification_arborescence_article*
+[V] MySQL[D): annexe_emballage_groupe
+
+[V] MySQL[S]: intranet_actions:    Ajout de l'index unique sur le champ nom_intranet_actions
+[V] MySQL[S]: fta_conditionnement: Ajout du champ longueur_fta_conditionnement, largeur_fta_conditionnement
+[V] MySQL[D]: annexe_emballage_groupe_type: création de la table
+[A] MySQL[O]: annexe_emballage: Suppression
+[V] MySQL[D]: fta_processus_etat
+
+[V] ARTI2: Ajouter le champ "id_fta" de la table access_arti2
+[V] Access ERP: Requête access_arti2_alias
+[A] Ajouter une clef primaire id_compos à la table coompos
+
+
+//Incidence du lib
+[V] fiches_mp_achats_moteur_de_recherche
+        --> renommage de la table et des champs
+
+[V] Access/ARTI2[S]:
+        id_fta
+
+
+[V] Reverse Data + /fta
+  + annexe_environnement_conservation*
+  + annexe_emballage*
+  + access_arti2
+  + fta
+  + fta_composition
+  + fta_conditionnement
+
+
+[V] annexe_environnement_conservation_groupe
+[V] MySQL/access_arti2[Libellé]
+[V] /fta et /lib
+

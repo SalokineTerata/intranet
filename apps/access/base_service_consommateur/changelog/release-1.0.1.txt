@@ -1,0 +1,40 @@
+================================================================================
+Modifications à apporter aux différentes versions du modules
+================================================================================
+
+[ ]: Reste à effectuer
+[!]: Prioritaire
+[V]: Réalisé
+[.]: Abandonné
+================================================================================
+Exemples:
+[V] 23/05/2003: saisie_vierge_origine.php
+      Déplacer les informations de cette page au niveau du composant.
+
+[ ] 28/07/2003: saisie_origine.php
+                Saisie de plusieurs origine sans cycle.
+                Rajouter dans la listedes origine:
+                         - Cf Origine MP
+                         - Cf Lieu dernière Transformation
+                         - Cf Origine Multiple
+                         - Cf Non défini
+                Bouton "Terminer Saisie"
+================================================================================
+[V] Pour les XP: Le fichier C:\login.txt n'est plus nécessaire. Utilisation des variables d'environnement (MAJ Biblio)
+	Pour les Windows 9x, rien n'a changé.
+[V] Modification de index.php (pas celle du module, mais bien celle du site intranet) pour intégrer l'authentification automatique basée sur le login Windows
+[V] Correction de lib/session.php pour intégrer ATI (ldcseg) et permettre d'ajouter de nouveau contexte
+[V] Dans la base il y a des références à L:\erp_data.mdb ce qui est impossible pour ATI
+	access_arti2		--> bascule sur la table déjà existante dans l'intranet
+	Clients 		--> bascule sur la table access_clients dans l'intranet --> + utilisation d'un Alias car requête
+	FAMILLES ARTICLES	--> migration MySQL vers access_familles_articles
+	FAMILLES CLIENTS	--> migration MySQL vers access_familles_clients
+	FAMILLES MKTG		--> migration MySQL vers access_familles_marketing
+	GAMMES			--> migration MySQL vers access_gammes
+	REGROUPEMENTS		--> migration MySQL vers access_regroupements
+	SITES			--> bascule sur la table geo dans l'intranet
+
+[V] Manuel dans L:\conso-manuel.pdf n'existe pas --> correction vers \\Avi1203\www\intranet.dev\access\base_service_consommateur\doc\manuel.pdf	
+[V] Recherche #2, par Date de réception, message: l'argument ou la méthode requiert 'Nom état'
+[V] Désactivation des boutons pour ouvrir les formulaires depuis les "Préparations à la recherche". Les formulaires n'existe pas.
+

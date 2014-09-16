@@ -1,0 +1,32 @@
+================================================================================
+Modifications à apporter aux différentes versions du modules
+================================================================================
+
+[ ]: Reste à effectuer
+[!]: Prioritaire
+[X]: Réalisé
+[.]: Abandonné
+================================================================================
+Exemples:
+[X] 23/05/2003: saisie_vierge_origine.php
+      Déplacer les informations de cette page au niveau du composant.
+
+[ ] 28/07/2003: saisie_origine.php
+                Saisie de plusieurs origine sans cycle.
+                Rajouter dans la listedes origine:
+                         - Cf Origine MP
+                         - Cf Lieu dernière Transformation
+                         - Cf Origine Multiple
+                         - Cf Non défini
+                Bouton "Terminer Saisie"
+================================================================================
+
+[X] dans le moteur de recherche des FT : 2 nouvelles recherche par code infologic ou par gencod
+[X] dans les différentes consultation la colonne n° de fiche technique a été remplacée par le code infologic (et le classement s'effectue par code infologic croissant)
+
+[X] partie validation, l'affichage des FT se fait par tri croissant sur le code infologic. Pour rechercher rapidement une fiche dans toute la liste il suffit de cliquer sur le bouton CTRL puis sur F. Cela ouvre une boite de dialogue dans laquelle il faut taper le code infologic de la fiche recherchée puis cliquer sur suivant. Si la fiche existe le code est mis en surbrillance bleue.
+
+[X] partie archivage : le fonctionnement est correct. J'ai fait le test sur toutes les fiches d'Alby
+
+[X] la création des gammes : il suffit de cliquer sur le bouton créer une gamme (ce bouton n'est présent que si l'utilisateur à le droit de création) et rajouter la gamme si cette dernière n'est pas déjà présente
+

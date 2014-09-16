@@ -1,0 +1,35 @@
+================================================================================
+Modifications à apporter aux différentes versions du modules
+================================================================================
+
+[ ]: Reste à effectuer
+[!]: Prioritaire
+[V]: Réalisé
+[.]: Abandonné
+[R]: Reporté
+================================================================================
+Exemples:
+[V] 23/05/2003: saisie_vierge_origine.php
+      Déplacer les informations de cette page au niveau du composant.
+
+[ ] 28/07/2003: saisie_origine.php
+                Saisie de plusieurs origine sans cycle.
+                Rajouter dans la listedes origine:
+                         - Cf Origine MP
+                         - Cf Lieu dernière Transformation
+                         - Cf Origine Multiple
+                         - Cf Non défini
+                Bouton "Terminer Saisie"
+================================================================================
+
+[ ] Simplifier la gestion des relations nomenclature <-> composition pour eradiquer le problème de MAJ des composants
+	- Fusion des deux tables "fta_nomenclature" et "fta_composition" en une nouvelle table "fta_composant"
+
+Dans cette table fta_composant, l'ensemble des champs de fta_nomenclature et de fta_compoasition sont présents.
+- Deux champs d'identification sont créés : id_fta_composant et id_last_fta_composant.
+	Ce dernier sera progressivement renseigné dès les prochaines mises à jour.
+
+- Deux champs permettant de distinguer les composant gérées dans les nomenclatures ou dans les compositions:
+	-> is_nomenclature_fta_composant et is_composition_fta_composant
+
+

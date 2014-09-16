@@ -1,0 +1,45 @@
+================================================================================
+Modifications à apporter aux différentes versions du modules
+================================================================================
+
+[ ]: Reste à effectuer
+[!]: Prioritaire
+[X]: Réalisé
+[.]: Abandonné
+================================================================================
+Exemples:
+[X] 23/05/2003: saisie_vierge_origine.php
+      Déplacer les informations de cette page au niveau du composant.
+
+[ ] 28/07/2003: saisie_origine.php
+                Saisie de plusieurs origine sans cycle.
+                Rajouter dans la listedes origine:
+                         - Cf Origine MP
+                         - Cf Lieu dernière Transformation
+                         - Cf Origine Multiple
+                         - Cf Non défini
+                Bouton "Terminer Saisie"
+================================================================================
+[V] Problème de ressource lors du login:
+    PID USER      PR  NI  VIRT  RES  SHR S %CPU %MEM    TIME+  COMMAND
+    7250 mysql     16   0 20036  19m  18m R 99.3  7.7   0:09.13 mysqld
+
+    droits_access.php = 14 secondes --> 0
+    nombre de droits d'accès par utiliasteur = 625 --> nombre exact de droit acquis (>0)
+
+[V] Fonction affichage_classification_article($id_fta,$extension) = 8 secondes
+    Réécriture du code:
+    - Suppression de toute utilisation de variable Globales
+    - Simplification SQL
+
+[V] Gestion de timeout
+    - session.php: ajout explicite du timout du cache de session
+    - httpd.conf: augmentation du timeout pour l'exécution des scripts
+                  #Timeout 300
+                  # Modifier par Boris 2006-01-20:
+                  # Pour palier le timeout lors de la génération de fichier PDF via PHP
+                  Timeout 500
+
+
+
+

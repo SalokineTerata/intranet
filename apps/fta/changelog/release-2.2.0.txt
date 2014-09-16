@@ -1,0 +1,186 @@
+================================================================================
+Modifications à apporter aux différentes versions du modules
+================================================================================
+
+[ ]: Reste à effectuer
+[!]: Prioritaire
+[V]: Réalisé
+[.]: Abandonné
+================================================================================
+Exemples:
+[V] 23/05/2003: saisie_vierge_origine.php
+      Déplacer les informations de cette page au niveau du composant.
+
+[ ] 28/07/2003: saisie_origine.php
+                Saisie de plusieurs origine sans cycle.
+                Rajouter dans la listedes origine:
+                         - Cf Origine MP
+                         - Cf Lieu dernière Transformation
+                         - Cf Origine Multiple
+                         - Cf Non défini
+                Bouton "Terminer Saisie"
+================================================================================
+[R] Faire en sorte qu'un utilisateur qui est rattaché au site "Agis" puisse voir tous les multisites
+[R] Actions Groupées
+  - Transition avec Mail groupé
+[R] Possibilité de classer l'index en cliquent sur les entête de colonne.
+[R] Afficher une colonne personnalisé au processus (par exemple Dta de transfert industriel pour le processus Gestion des Articles)
+
+
+[V] Bonjour,
+    ... effectivement, je vais recherché les désignations FTA = 60 caractères, et je le
+    - Rechercher la description commercialle la plus des FTA +10% sera limite.
+      --> Passage à 90 Caractères
+    - Description: Boubler la capacité de caractères (27004)
+    >>> amandine pelletier jeudi 13 juillet 2006 10:09:27 >>>
+    Bonjour Boris,
+    Au niveau des FTA, le fait d'avoir réduit à 60 caractères la désignation commerciale coupe des titres. En effet nous avons des "titres" assez long et normalement sur la FT toute la désignation doit apparaitre.
+    A ta dispo pour en parler
+    Amandine
+
+    SELECT * FROM fta WHERE CHAR_LENGTH(designation_commerciale_fta)>58
+    id_fta  Code Agrologic  Désignation Commeriale
+    581  24000   BRICKS CHEVRE BASILIC ET POIS CHICHES CUISINES, CAROTTES ET
+    582  24005   VOLAILLE à LA CATALANE AU PIMENT D'ESPELETTE, RIZ COMPLET AU
+    583  24001   KEFTAS D'AGNEAU, CONCASSEE DE TOMATE AUX EPICES, BOULGHOUR A
+    576  23117   FILETS DE LIEU AUX ECREVISSES SAUCE CITRON ET JULIENNE DE LE
+    1092  10339   SAUTE D\'AUTRUCHE, POIRES FONDANTES, JUS D\'EPICES AU XERES
+    1094  24005   VOLAILLE à LA CATALANE AU PIMENT D'ESPELETTE, RIZ COMPLET AU
+    1116  0   GAMBAS A L\'AMERICAINE AU COGNAC ET RISOTTO DE HOMARD ET SAF
+    1119  0   GAMBAS A L'AMERICAINE AU COGNAC ET RISOTTO DE HOMARD ET SAFR
+    1121  0   SELLE D\'AGNEAU AUX HERBES FINES JUS AU POIVRE DE SHISHUAN M
+    1122  0   FILET DE CANARD SAUCE FOIE GRAS ET COMPOTEE POMMES POIRES MD
+    1143   23117   FILETS DE LIEU AUX ECREVISSES SAUCE CITRON ET JULIENNE DE LE
+    1146  24001   KEFTAS D'AGNEAU, CONCASSEE DE TOMATE AUX EPICES, BOULGHOUR A
+    1163   23117   FILETS DE LIEU AUX ECREVISSES SAUCE CITRON ET JULIENNE DE LE
+
+
+    Voici les désignations tronquées .... peux-tu me donner leur nom complet ?
+
+    Merci.
+    Boris.
+    Boris;
+     Cf ajout en rouge ci dessous!
+    A+
+    Amandine
+
+    >>> boris sanegre 13/07/06 12h08 >>>
+    SELECT * FROM fta WHERE CHAR_LENGTH(designation_commerciale_fta)>58
+
+    id_fta  Code Agrologic  Désignation Commeriale
+    V 581  24000   BRICKS CHEVRE BASILIC ET POIS CHICHES CUISINES, CAROTTES ET COURGETTES
+    V 582  24005   VOLAILLE à LA CATALANE AU PIMENT D'ESPELETTE, RIZ COMPLET AUX LENTILLES
+    V 583  24001   KEFTAS D'AGNEAU, CONCASSEE DE TOMATE AUX EPICES, BOULGHOUR AUX LEGUMES
+    V 576  23117   FILETS DE LIEU AUX ECREVISSES SAUCE CITRON ET JULIENNE DE LEGUMES
+    V 1092  10339   SAUTE D\'AUTRUCHE, POIRES FONDANTES, JUS D\'EPICES AU XERES ==> pas moi, plutot MDD
+    V 1094  24005   VOLAILLE à LA CATALANE AU PIMENT D'ESPELETTE, RIZ COMPLET AUX LENTILLES ==> attention tu as deja la meme recette plus haut.
+    V 1116  0   GAMBAS A L\'AMERICAINE AU COGNAC ET RISOTTO DE HOMARD ET SAF ==> pas moi, plutot MDD
+    V 1119  0   GAMBAS A L'AMERICAINE AU COGNAC ET RISOTTO DE HOMARD ET SAFRAN ==> pas moi, plutot MDD
+    A 1121  0   SELLE D\'AGNEAU AUX HERBES FINES JUS AU POIVRE DE SHISHUAN M ==> pas moi, plutot MDD
+    V 1122  0   FILET DE CANARD SAUCE FOIE GRAS ET COMPOTEE POMMES POIRES MD ==> pas moi, plutot MDD
+    V 1143   23117   FILETS DE LIEU AUX ECREVISSES SAUCE CITRON ET JULIENNE DE LEGUMES ==> attention tu as deja la meme recette plus haut.
+    V 1146  24001   KEFTAS D'AGNEAU, CONCASSEE DE TOMATE AUX EPICES, BOULGHOUR AUX LEGUMES ==> attention tu as deja la meme recette plus haut.
+    V 1163   23117   FILETS DE LIEU AUX ECREVISSES SAUCE CITRON ET JULIENNE DE LEGUMES ==> attention tu as deja la meme recette plus haut.
+
+    Voici les désignations tronquées .... peux-tu me donner leur nom complet ?
+
+    Merci.
+    Boris.
+
+[V] Sur le Chapitre Tarif, Ajout d'une période d'application par tarif
+    lors de la saisie d'un tarif avec sélection du tarif GENERAL, le libelle n'apparait pas dans le tableau
+    il faudrait rajouter sur le même prinicpe que le tarif THEMATIQUE GENERAL
+
+[V] est il possible de savoir qui a archivé une FTA cas du code  23118 nouveau produit BL qui était en état archivé
+    Pouvoir consulter l'historique des mises à jour des FTA.
+[V] PCB sur identité
+[V] Saisie obligatoire
+[V] Controle de cohérence
+
+[V] - dossier 90v2 : pb sur affichage des emballages UVC - COLIS - PALETTE
+
+    - dossierr 88v3 : calcul poids palette erroné
+
+    - moteur de recherche sur langouste => affichage d'une fiche présentation  à 33% alors que pour céline il ne reste plsu que sa partie à saisir (dossier 133 v1)
+
+    - Sur Tableau emballage UVC pourvoir saisir plusieur emballage sachant que un seul peut être défini commétant l'emblalge UVC (pour le PCB)
+    - Mettre Quantité par UVC en décimal.
+
+    - Erreur poid colis sur FTA validé
+      10306 : Boulhgour --> Erreur sur la composition
+      10213 ; Fajitas   --> Erreur sur la composition (Magnifique)
+
+
+[V] >>> elodie germain lundi 17 juillet 2006 16:19:49 >>>
+    Boris,
+
+    Voici un nouveau casse-tête : les monos du tarif festif Agis ont la DLC garantie client suivante :
+    DLC au 26/12 si commande avant le 15/12
+    DLC au 3/07 si commande à compter du 15/12/06
+
+
+    Mais alors qu'est ce que je marque sur la FTA?!
+    merci
+    Elodie
+
+[V] Pas d'information du processus si dans la liste, la personne qui vient de validé est présente.
+
+[V] Lors de la validation, le service du chef de projet doit être informé. Actuellement, c'est figé au niveau du département commerciale.
+    Voir transiter_post.php sur le requête "Liste des utilisateurs ayant les droits de diffusion". vers la ligne 250
+[V] Réintégrer la Qualité dans la liste de diffusion de validation.
+[V] La colonne "type de tarif" du chapitre "tarif" n'affiche pas les infos.
+[V] Sur le lien de "retour vers l'index"
+[V] Sur les PDF, voir les taux des composants cf. id_fta=1195
+[A] Voir pour optimiser le cycle de modification à partir d'un membre du cycle de vie de la FTA
+    --> Le chef de projet doit être informer de la mise à jour d'une FTA. La meilleur façon pour lui d'être au courant reste de passer par lui pour toute révision de la FTA.
+
+[V] Mise à jour de la liste des groupe de Tarifs Client
+    Bonjour,
+    Afin de rajouter la centrale SYSTEME U merci de spécifier les éléments ci dessous (ceux en gras) :
+    Proprietaire: SYS U
+    Marque: SYS U
+    Activite: ???? Plats Cuisines, Asiatique, Soupe ...etc
+    Environnement: ????Frais, Surgele, Sec.
+    Rayon: Libre Service, Traiteur, Hors Rayon
+    Reseau: GMS, MDD, Export, RDS ...etc.
+    Saisonnalite: Permanent, Thematique, Festifs (si thematique, alors preciser)
+    stéphane
+    >>> christine lucas 13/07/06 11h31 >>>
+    Quand je veux saisir un tarif sur une nouvelle FTA je n'ai pas la centrale SYSTEME U
+    Pouvez vous la rajouter ?
+    Merci
+    Christine
+
+[A]>>> julie weymuller 26/07/06 17h56 >>>
+    Bonjour,
+
+    Actuellement, lorsque pour une recette donnée,  les codes infologic sont ouverts, nous n'avons pas directement l'information.
+    Souvent, nous appelons Benoît pour savoir si les codes sont ouverts et il nous envoi un mail avec les infos.
+
+    Proposition d'optimisation de fonctionnement:
+    Dès que la partie "activation produit" est validée, est-il possible que la base FTA nous envoi un mail type ("partie activation produit validée"), comme c'est déjà le cas sur les autres parties?!
+
+    Merci de votre retour,
+    Julie
+
+[V] Intégrer dans le changelog: "comment mettre à jour la liste des Code de regroupement des Tarifs Clients ?"
+
+[V] Liste des en cours
+    les Achats voient le site d'Herbignac mais ça ne devrait pas être le cas.
+[V] Etendre le nombre de caractère à 150 pour la désignation commerciale (+ MAJ procédure pour la facture dans Agroplogic.)
+[V] Ajouter Les Appro du site dans la notification validation FTA
+
+[V] Ajouter la notion de priorité pour le classement des composants sur le Fiche Client.
+[A] Lors de la modification d'un modèle d'emballage, dans le tableau récapitulatif, le nom apparait en cascade dans le tableau
+    --> je n'arrive pas à reproduire le bug, besoin d'exmple.
+[V] Achats: Colonne Sur index = Marque.
+[V] Ajout des raccourcis de classification dans le moteur de recherche
+
+
+http://intranet.agis.fr/fta/index.php?id_fta_etat=1&nom_fta_etat=I&synthese_action=encours
+Warning: mysql_fetch_array(): supplied argument is not a valid MySQL result resource in /mnt/sda3/var/www/intranet/fta/functions.php on line 1399
+
+[V] Taux
+[V] Doublon
+[R] Trier les colonnes de l'index
+

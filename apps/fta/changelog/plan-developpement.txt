@@ -1,0 +1,7 @@
+Planning de développement:
+
+2.0b:
+
+Voir  temps_developpement.sxc
+
+2.0:    Validation de l'ensemble du module par le Groupe de Développement.

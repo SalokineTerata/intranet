@@ -1,0 +1,105 @@
+================================================================================
+Modifications à apporter aux différentes versions du modules
+================================================================================
+
+[ ]: Reste à effectuer
+[!]: Prioritaire
+[V]: Réalisé
+[.]: Abandonné
+[R]: Reporté
+================================================================================
+Exemples:
+[V] 23/05/2003: saisie_vierge_origine.php
+      Déplacer les informations de cette page au niveau du composant.
+
+[ ] 28/07/2003: saisie_origine.php
+                Saisie de plusieurs origine sans cycle.
+                Rajouter dans la listedes origine:
+                         - Cf Origine MP
+                         - Cf Lieu dernière Transformation
+                         - Cf Origine Multiple
+                         - Cf Non défini
+                Bouton "Terminer Saisie"
+================================================================================
+
+
+[V] Sur le Chapitre Etiquette:
+    Mettre Forcer DIN et Libellé Etiquette au niveau "Etiquette Colis"
+
+[V] Sur le Chapitre Etiquette:
+    Revoir la liste des étiquettes par défaut des étiquettes colis
+
+[V] Sur le composant:
+    Agrandir le nombre de lignes des champs Composants: 15lignes / 6lignes
+
+
+[V] Erreur de DLC pour le 10520 en développement
+
+[V] Faire apparaitre la composition #2 sur le chapitre Compo + PDF
+
+[V] Voir avec Cathy la mise en oeuvre sur le terrain.
+
+[V] Rajouter la DIN de l'article sur l'étiquette
+
+[V] Gestion des Etiquettes à compositions regroupées
+
+[V] Au niveau d'un Composant, avoir la possibilité entre 2 options:
+    - Composition identique à la liste des Ingrédients
+    - Composition personnalisée
+
+    - Dans le cas d'une Composition identique à la liste des ingrédients, les infos de compo sont identique et en lecture seule.
+    - Dans le cas où la Composition personnalisée est cochée, activation du double bloc d'information des champs compositions
+
+[V] Par défaut, ne cocher que étiquette colis
+
+[V] Valider le bon fonctionnement de la communication du produit fini en carton avec le service Approvisionnement
+
+================================================================================
+
+[R] Passerelle de Migration:
+    Lors de la mise en production, vider l'ancien champs composition.
+
+[V] Problème sur la 10211 - TAJINE KEFTA PRUNEAUX COUPE
+    Soucis sur les liens entre nomenclature et Composition. Il y a trop de composant orphelins.
+
+[V] Pouvoir consulter le détail du composant
+[V] Corriger le PDF + (fusionner les 2 paragraphes)
+
+[V] Pouvoir consulter le détail du composant.
+
+[V] France Auger
+    Lors d'une duplication, ne pas prendre en compte la désignation commerciale
+    --> Voir si c'est uniquement pour distinger la copie de l'originale:
+    Si oui: Pas de soucis, on rejoute "DUPLICATION " devant la désignation commerciale
+    si non: problématique des autres informations; EAN, PCB .... etc.
+
+[V] Impossible d'enregistrer le 10173 341X4 dlc 30
+
+[V] Erreur sur les Dérogation
+    result(): Unable to jump to row 0 on MySQL result index 61 in /mnt/sda3/var/www/intranet/fta/derogation_duree_vie.php on line 138
+    Warning: mysql_result(): Unable to jump to row 0 on MySQL result index 61 in    /mnt/sda3/var/www/intranet/fta/derogation_duree_vie.php on line 139
+
+[V] lors d'une duplication de fiche voir pour que la DIN, le code agrologic / ldc, ean soient mis à vide dans le cas d'une évolution majeure d'une référence (ie changement de pcb, de recette, de poids ...)
+[V] 2007-02-12
+Reponse à France
+Bonjour,
+En effet pour l'instant c'est soit une duplication totale, soit une création vierge, le mode sélectif n'existe pas.
+Nous notons cette demande pour les évolutions futures
+stéphane
+
+[V] Inclure le Service Approvisionnement dans la liste de Diffusion de Validation
+[V] Manuel en ligne: Les données ce faut systématiquement écrasée.
+[V] Lors du cas où la Durée de Vie Production est supérieur à la Durée de Vie Technique,
+    un message d'avertissement apparait lors de la validation des chapitres. Il devient impossible
+    de valider son chapitre.
+[V] Attention, les Chefs de Projets peuvent créer des Durée de Vie FTA
+    --> Attention au fait qu'ils gère la partie qualité du site d'ATI.
+[R][V] Voir pour la gestion des dérogation des durées de vie des Composants
+
+================
+- Règle de gestion dans le manuel utilisateurs
+  Si le composant à pour option: Etiquette à composition regroupée = Etiquette à composition regroupée 
+  Alors Durée de Vie Production utilisée = celle de la FTA
+
+  Si le composant à pour option: Etiquette à composition regroupée = Contenu de l'etiquette identique à la liste des ingrédients 
+  Alors Durée de Vie Production utilisée = celle du Composant

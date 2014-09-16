@@ -1,0 +1,32 @@
+================================================================================
+Modifications à apporter aux différentes versions du modules
+================================================================================
+
+[ ]: Reste à effectuer
+[!]: Prioritaire
+[V]: Réalisé
+[.]: Abandonné
+================================================================================
+Exemples:
+[V] 23/05/2003: saisie_vierge_origine.php
+      Déplacer les informations de cette page au niveau du composant.
+
+[ ] 28/07/2003: saisie_origine.php
+                Saisie de plusieurs origine sans cycle.
+                Rajouter dans la listedes origine:
+                         - Cf Origine MP
+                         - Cf Lieu dernière Transformation
+                         - Cf Origine Multiple
+                         - Cf Non défini
+                Bouton "Terminer Saisie"
+================================================================================
+
+[V] Bonjour Boris,
+    Nous sommes en train de repasser sur toutes les recettes festives Access pour faire les créations Infologic. C'est à ce moment que nous saisissont le code Infologic de chaque recette sur Access.
+
+    Peut-tu nous déverouiller cette cellule d'Access pour que l'on puisse saisir les codes... dans l'attente d'avoir une saisie complétement automatique avec les FIP révolutionnaires!
+
+    Merci, 
+    Julie
+
+

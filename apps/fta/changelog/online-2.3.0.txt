@@ -1,0 +1,209 @@
+================================================================================
+Fiches et Tables à basculer de intranet.dev.agis.fr vers intranet.agis.fr:
+================================================================================
+
+[ ]: Reste à effectuer
+[X]: Réalisé
+================================================================================
+
+Pour les copies MYSQL[]:
+---------------------------
+[D]: DATA et STRUCTURE sont à transférer
+[S]: STRUCTURE seulement sont à transférer
+[O]: Renommer la table en OLD_nom_de_la_table
+================================================================================
+
+Pour les copies de FILE:
+----------------------------
+chemin depuis le répertoire racine du site
+- si c'est le répertoire du module:
+    - renommer le répertoire d'exploitation nom-AAAA-MM-JJ où la date est la
+        date du jour de la modification
+    - faire un TAR.GZ
+    - supprimer l'original
+    - copier le répertoire de développement vers le site d'exploitation
+
+================================================================================
+[V] Systématique: Ecarter une sauvegarde
+[V] Systématique: MYSQL[D]: intranet_modules
+[V] Systématique: /repertoire_du_module
+
+[V] /lib
+[V] /adminagis
+
+[V] MySQL[D] fta_saisie_obligatoire
+
+[V] MySQL[S]:  classification_fta
+               id_fta   =>  UNIQUE
+[V] MySQL[S]:
+        V fta_tarif
+          last_id_fta_tarif            int(11)             Non     0
+
+        V fta_nomenclature
+          last_id_fta_nomenclature     int(11)             Non     0
+          din_fta_nomenclature         varchar(50)         Non      
+          _VERSION                     varchar(50)         Non     2.3.0
+                   
+        V fta_composition
+          last_id_fta_composition      int(11)             Oui     NULL
+          ingredient_fta_composition1  text                Oui     NULL
+          k_style_paragraphe_ingredient_fta_composition     tinyint(4)         Non     0 
+          duree_vie_technique_fta_composition               tinyint(4)         Non     0 
+          k_etiquette_fta_composition                       tinyint(4)         Non     0 
+
+        V fta_conditionnement
+          last_id_fta_conditionnement     int(11)         Non     0 
+
+[V] MySQL[S]: intranet_description
+[V] MySQL[S]: fta
+              champ_maj_fta     text         Non
+              fta.duree_vie_technique_fta --> Commentaire="Durée de Vie Maximale (en jour)"
+              verrouillage_libelle_etiquette_fta     tinyint(4)         Non     1 
+              nombre_portion_fta                     tinyint(4)         Oui     NULL 
+
+[V] MySQL[D]: fta_categorie
+[ ] MySQL[D]: codesoft_style_paragraphe
+
+
+/*******************************************************************************
+
+[ ] Extraction Agrologic
+
+Tables necessaires: PRODUIT, NOMENCLATURE
+
+***********
+Importation de la table NOMENCLATURE:
+
+TRIER NOMENCLATURE ! 0 ! CPRO ! 3 ! 1 ! 4 INDICE ! SUPP-ID (P
+A TE: 4 - POLYVALENT
+A Excel: Délimitation fixe
+A Excel: Filtre Automatique
+A Excel: Recherche des ligneS commençant par le caractère "carré"
+A Excel: Suppression des lignes
+A Excel: Suppression du filtre
+A Excel: Enregistrement au format CSV
+V Récupération de "nomenclature-avignon.csv"
+V Récupération de "nomenclature-tarare.csv"
+V OOo2: Ajout de la colonne SITE (cf. id_geo, avignon=1, tarare=3)
+V OOo2: Enregistrement au format CSV (séparateur = ; texte=")
+A WordPad: Ajouter l'en-tête: "_AUTO_NOMENCLATURE";"_AUTO_PRODUIT";"SOUS_PRODUIT";"_AUTO_DATE";"QTE";"SITE"
+VV Intranet/AdminAgis: Importation vers tmp-import-migration-nomenclature
+
+Une fois les deux comptes effectués
+V PhpMyAdmin: renommage du préfixe de "tmp-import-migration-nomenclature" en "fta_migration_nomenclature"
+
+V Table de travail: fta_migration_nomenclature
+
+***********
+Importation de la table PRODUIT:
+
+TRIER PRODUIT ! 0 ! 1 ! 11 ! 12 ! 13 ! SUPP-ID (P
+- Excel: Délimitation fixe
+- Excel: Filtre Automatique
+- Excel: Recherche des ligneS commençant par le caractère "carré"
+- Excel: Suppression des lignes
+- Excel: Suppression du filtre
+- Excel: Enregistrement au format CSV
+- OOo2: Enregistrement au format CSV (séparateur = ; texte=")
+- WordPad: Ajouter l'en-tête: "CODE_PRODUIT";"DESCRIPTION";"CODE_US1";"CODE_US2";"COEF_US1_VERS_US2"
+- Intranet/AdminAgis: Importation
+- PhpMyAdmin: renommage du préfixe de "tmp_import_" en "fta_migration_"
+
+V Table de travail: fta_migration_produit
+
+***********
+
+[ ] Passerelle de mise à niveau des données
+
+
+Table de correspondance:
+
+MySQL.[fta_nomenclature]
+id_fta_nomenclature                                --> Incrémentation automatique
+last_id_fta_nomenclature                           --> 0
+OLD_id_fta_composition                             --> NULL
+id_annexe_agrologic_article_codification           --> Cf. Agro|10- CPRO            Code produit                        7R  |  
+id_access_recette_recette                          --> 0
+id_fta                                             --> Cf. Agro.[PRODUIT].[No Produit](0) du code == "00]" + Agro.[NOMENCLATURE]
+ascendant_fta_nomenclature                         --> NULL
+site_production_fta_nomenclature                   --> Cf. Agro.SE BASER SUR l'extraction du compte GG= ou GT=[MATIERE].[Fournisseurs](33) du code "000]" (voir PRIFOUR ?)
+poids_fta_nomenclature                             --> Cf. Agro. 6- 4               Quantité de lien du composant  MR4  9R  |   
+id_annexe_unite                                    --> Cf. Agro.[PRODUIT].[champ 11] / [PRODUIT].[champ 12] / [PRODUIT].[champ 13]
+quantite_piece_par_carton                          --> Cf. Agro.[PRODUIT].[Nb pièces/US1]
+poids_total_carton_vrac_fta_nomenclature           --> Cf. Agro.[PRODUIT].[Nombre de KG  dans 1 CAR] du code == "0211]"
+code_produit_agrologic_fta_nomenclature            --> Cf. Agro.[PRODUIT].[No Produit] du code <> "00"
+etat_fta_nomenclature                              --> Cf. Agro.[PRODUIT].[No Produit] du code == ( "0211]" ou "03]"
+nom_fta_nomenclature                               --> Cf. Agro.[PRODUIT].[Désignation]
+suffixe_agrologic_fta_nomenclature                 --> Cf. Agro.[PRODUIT].[No Produit] du code == "00]"
+
+MySQL.[access_arti2]
+actif                                              --> Cf. Agro.[ARTICLE].[Article bloqué]
+
+MySQL.[fta]
+id_fta_etat                                        --> Cf. Agro.[ARTICLE].[Article bloqué]
+
+
+Objectif:
+Permettre d'associer un composant à son Code Agrologic
+
+Etude:
+Le composant est stocké dans la table fta_composition
+fta_composition est lié à la table fta_nomenclature
+la table fta_nomenclature contient le code Agrologic
+
+Problématique:
+Certains enregsitrements de la table fta_composition n'ont pas de nomenclature associée
+C'est le cas des fiches issu du module FTAv1, il est donc necessaire de procéder à la'importattion des nomenclature d'Agrologic.
+
+Cadre:
+Seules les FTA validées seront concernée par la mise à jour.
+Ceci se traduit par les FTA ayant un code Agrologic dans access_arti2 et étant en état "actif"
+
+Algorithme des Règles de mise à jour:
+
+V 1. Archivage des FTA par rapport aux ventes Agrologic:
+ Seul les FTA non classées sont concernées
+ A renommage de tmp_import_articles_actifs_2006 en fta_migration_import_articles_actifs
+ A Lancer l'archivage des articles n'étant pas dans cette liste.
+ V Copie de la table fta_migration_import_articles_actifs de "agis_dev" vers "agis"
+ V log sauvegardé dans changelog/2.3.0-archivage_fta.csv
+
+Avant: 863 FTA Validées
+Après: 555 FTA Validées
+
+V 2. Epuration des nomenclatures:
+  - Récupérer uniquement les versions de nomenclatures les plus récentes cf. 11801
+               ---LISTE DES NOMENCLATURES POUR PRODUIT 0011801-----------------------        |
+              ||1.0011801002 BEIGNET CREV 20G ITM LAIZE 461  applicable le 18/01/06 |-       |
+              ||2.0011801003 BEIGNET CREV 20G ITM LAIZE 423  applicable le 17/01/06 ||       |
+              ||3.0011801001 BEIGNET CREV 20G ITM X 16       applicable le 06/12/04 ||       |
+              |----------------------------------------------------------------------|       |
+              Se baser sur la date d'application !!
+
+   - Sélectionner les nomenclatures les plus récentes dans un tableau: SELECT `_AUTO_NOMENCLATURE`, `_AUTO_PRODUIT`, MAX( `_AUTO_DATE` ) FROM `fta_migration_nomenclature` GROUP BY `_AUTO_PRODUIT`
+   - Parcourir la table fta_migration_nomenclature
+     - Si le Code _AUTO_NOMENCLATURE n'existe pas dans le tableau, alors suppression
+
+V 3. Mise à jour fta_nomenclature:
+- Parcours de tous les articles n'ayant aucune nomenclature et ayant un correspondant dans fta-migration-nomenclature._AUTO_PRODUIT
+  - Récupérer la liste des semis-finis
+    - Si nombre de caractère = 6, alors:
+      - Création de la nomenclature dans fta_nomenclature à partir de la table fta-migration-produit
+      - Appel récursif pour parcourir les sous-produits et les traiter de la même manière.
+
+4. Correction des composants orphelins
+Rattachement d'un composant (Qualité) à son correspondant produit (Gestion)
+Seules les FTA Validées sont concernée (celle avec un code Agrologic dans access_arti2 et actives)
+SELECT `access_arti2`.`CODE_ARTICLE`, `access_arti2`.`LIBELLE`, `fta_composition`.`nom_fta_composition`, `access_arti2`.`actif` FROM `agis_dev`.`fta_composition` `fta_composition`, `agis_dev`.`access_arti2` `access_arti2`, `agis_dev`.`fta` `fta` WHERE ( `fta_composition`.`id_fta` = `access_arti2`.`id_fta` AND `fta`.`id_fta` = `access_arti2`.`id_fta` AND `fta`.`id_access_arti2` = `access_arti2`.`id_access_arti2` ) AND ( ( `access_arti2`.`CODE_ARTICLE` IS NOT NULL AND `access_arti2`.`actif` = - 1 ) )
+
+
+V 5. Lancer la recréation des DIN des Nomenclatures
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Cas d'une mise à jour de code Nomenclature.
+Le code communiqué (fichier proposal) est trop long: "00" en trop à la fin.
+Normalement tronquée, la valeur a du être correctement prise en compte par Arcadia.
+-->
+
+<Transaction id="3" version="1" type="result">
+    <Parameters>
+        <IdFirm>40</IdFirm><!-- Agis -->      
+        <IdArcadia>80932</IdArcadia><!-- Code article dans Arcadia -->
+        <IdFta>11480</IdFta><!-- N° de la FTA -->
+        <CodeReply>0</CodeReply><!-- Proposition traitée avec succés -->
+    </Parameters>
+</Transaction>

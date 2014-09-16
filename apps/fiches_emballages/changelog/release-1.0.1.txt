@@ -1,0 +1,50 @@
+================================================================================
+Modifications à apporter aux différentes versions du modules
+================================================================================
+
+[ ]: Reste à effectuer
+[!]: Prioritaire
+[V]: Réalisé
+[.]: Abandonné
+================================================================================
+Exemples:
+[V] 23/05/2003: saisie_vierge_origine.php
+      Déplacer les informations de cette page au niveau du composant.
+
+[ ] 28/07/2003: saisie_origine.php
+                Saisie de plusieurs origine sans cycle.
+                Rajouter dans la listedes origine:
+                         - Cf Origine MP
+                         - Cf Lieu dernière Transformation
+                         - Cf Origine Multiple
+                         - Cf Non défini
+                Bouton "Terminer Saisie"
+================================================================================
+
+
+
+[V] Bonjour Boris,
+
+    J'ai commencé à rédiger la procédure de saisie mais pourrait on apporter quelques modifs ?
+    -peut on mettre une liste déroulante pour sélectionner le groupe d'emballage (ça évite d'imprimer la feuille et puis comme ça la liste sera toujours à jour)
+    -peut on masquer les colonnes que l'on ne remplie pas ?
+    -peut-on mettre des noms de champs plus simples ?
+    -peut-on faire apparaitre les unités de saisie (mm, µm, g) ?
+    merci d'avance,
+    Mélanie
+
+[V] Tableau de recherche associatif FTA <-> FTE
+    Pouvoir rechercher une FTE par son article associé
+
+[V] Ajouter "exterieur" dans les libellé des données longueur, largeur et hauteur.
+[V] Clic sur Suppr d'une FTE trop radicale:
+    V Interdire si la FTE est utilisée par une FTA
+    V Confirmer avant de réelle supprimer.
+[V] Lors de la modification d'un FTE
+    V la dated e dernière modif se met systématiquement à la date du jour
+    V le poids n'est pas repris.
+    V Bonjour,
+      Lorsqu'on va sur un article existant pour modifier des données, on avait identifié  que le poids n'est pas gardé en mémoire  ;  l'épaisseur non plus. A ajouter à ta longue liste de tâches donc ....
+      Merci
+      Céline
+

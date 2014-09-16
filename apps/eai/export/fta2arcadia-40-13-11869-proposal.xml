@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Version : 1.1
+
+Historique des modifications:
+
+    * Version 1.1 - 2014-08-27 bs4300280@ldc.fr:
+        - Ajout du champs obligatoire DUN14.IS_STANDARD
+        - Ajout du champs obligatoire DUN14.DUN14.IS_SPECIFIQUE
+        - Lors d'une création article, ESP_PRODUITS_FINIS.Recordset.action = "create"
+        - Renommage du champs ARTICLE_REF.POIDS_MAX_BARQ en ARTICLE_REF.POIDS_MAXI_BARQ
+        - Renommage du champs ARTICLE_REF.COD_POIDS_CST_UVC en ARTICLE_REF.COD_POID_CST_UVC
+        - Renommage du champs ARTICLE_REF.ID_UC en ARTICLE_REF.UC
+    
+    * Version 1.0 - 2014-06-16 bs4300280@ldc.fr:
+        - Version initiale.
+        
+-->
+
+
+<Transaction id="13" version="1.1" type="proposal">
+    <Parameters>
+        <IdFirm>40</IdFirm><!-- Agis -->      
+        <IdArcadia></IdArcadia><!-- Code article dans Arcadia -->
+        <IdFta>11869</IdFta><!-- N° de la FTA -->
+    </Parameters>
+    <Tables>
+        <ARTICLE_REF>
+            <DataToImport>
+                <Recordset id="1" action="create">
+                    
+                    <!-- Entête -->
+                    <NO_ART key="TRUE"></NO_ART>
+                    <LIB_CCIAL><![CDATA[PLATEAU BRESILIEN TRFE 4X280G]]></LIB_CCIAL>
+                    <COD_MARQUE>44</COD_MARQUE><!-- NEUTRE groupe LDC (produit pr gms) -->
+                    <LIB_PRODUCTION><![CDATA[PLATEAU BRESILIEN TRFE 4X280G]]></LIB_PRODUCTION>
+                
+                    <!-- Info générales -->
+                    <UTILISABLE_SITE>1</UTILISABLE_SITE><!-- Oui -->
+
+                    <!-- Class./Ident. -->
+                    <COD_GENCOD_ADM>3366760030693</COD_GENCOD_ADM>
+                    <CNUF>336676</CNUF>
+                    <COD_FAMVTE>499</COD_FAMVTE><!-- APERITIF -->
+                    <IS_HALLAL>0</IS_HALLAL><!-- Non -->
+                    <COD_SOUSFAM>442</COD_SOUSFAM><!-- APERITIF -->
+                    <COD_GENERIQUE_FM></COD_GENERIQUE_FM><!-- Sera généré automatiquement -->
+                    <COD_SOCIETE_RESP_PV>40</COD_SOCIETE_RESP_PV><!-- Agis -->     
+                
+                    <!-- Qualite -->
+                    <DLC_CCIAL>17</DLC_CCIAL>
+                    <DUREE_VIE>29</DUREE_VIE>
+                    <DTS>12</DTS>
+                    <PROLOGATION_DLC>0</PROLOGATION_DLC><!-- Non -->
+                        
+                    <!-- Info Prod 1 -->
+                    <POIDS_MOY_CALCULE>280</POIDS_MOY_CALCULE>
+                    <COD_POIDS_MINI_BARQ>280</COD_POIDS_MINI_BARQ>
+                    <POIDS_MAXI_BARQ>280</POIDS_MAXI_BARQ>
+                    <COD_POID_CST_UVC>1</COD_POID_CST_UVC><!-- Oui -->
+                    <POIDS_CST_UVC>280</POIDS_CST_UVC>
+                
+                    <!-- Info Prod 2 -->
+                    <FRAIS_CONGELE>1</FRAIS_CONGELE><!-- FRAIS : [0oC,4oC] -->
+                    <COD_TYP_CONDIT_PUB>0</COD_TYP_CONDIT_PUB><!-- A modifier -->
+                    <SITE_PROD_EE>46</SITE_PROD_EE><!-- AGIS TARARE SITE -->
+                    <UC>1</UC>
+                
+                    <!-- Pds Mini/Maxi -->
+                    <POIDS_MINI>280</POIDS_MINI>
+                    <POIDS_MAXI>280</POIDS_MAXI>
+                
+                    <!-- Info Fact -->
+                    <UNITE_FACT>0</UNITE_FACT><!-- Pièce -->
+                    <UNITE_FACT_PRIVE>0</UNITE_FACT_PRIVE><!-- Pièce -->
+                
+                    <!-- Export/Compta -->
+                    <COD_NDP>20049098</COD_NDP><!-- Legumes et melanges de legumes, prepares ou conser -->
+                
+                    <!-- OPTIVENTES -->
+                    <COD_CIRCUIT>9</COD_CIRCUIT><!-- Coupe marque nationale -->
+                                
+                    <!-- Fourniture -->
+                    <SOUMIS_ECO_EMBALLAGE>0</SOUMIS_ECO_EMBALLAGE><!-- Non -->
+                    <SITE_REF_ECO_EMB>46</SITE_REF_ECO_EMB><!-- AGIS TARARE SITE -->
+                
+                    <!-- Regate -->
+                    <LIBELLE_TARIF><![CDATA[PLATEAU BRESILIEN 280G]]></LIBELLE_TARIF>
+                    <COD_FAM_BUDGET>250</COD_FAM_BUDGET><!-- PRODUITS FRITS FRAIS EMBALLE -->
+                    <COD_GAM_FAM_BUDGET>1115</COD_GAM_FAM_BUDGET><!-- AUCHAN SPE EXO -->
+                    <COD_GAM_COOP>130</COD_GAM_COOP><!-- ASIE FE -->
+                    <COD_FESTIF>0</COD_FESTIF><!-- NON FESTIF -->
+                    <COD_FAM_DECL_CA_CLIENT>46</COD_FAM_DECL_CA_CLIENT><!-- AGIS TARARE SITE -->
+                </Recordset>
+
+            </DataToImport>
+        </ARTICLE_REF>
+        <ESP_PRODUITS_FINIS>
+            <DataToImport>
+                <Recordset id="1" action="create">
+                    
+                    <!-- Entête -->
+                    <COD_PRODUIT key="TRUE"></COD_PRODUIT>
+                    <NO_VAR>0</NO_VAR>
+
+                    <!-- RegateAC Achat -->
+                    <ACREG_SITE>47</ACREG_SITE><!-- Agis Tarare Plateforme -->
+                    <ACREG_LIEU>1</ACREG_LIEU><!-- PLATEFORME -->
+                    <ACREG_NOQUAI>301</ACREG_NOQUAI><!-- PFTAR - REC AVEC ANNONCE EDI -->
+                    <ACREG_NOMETHODE>619</ACREG_NOMETHODE><!-- Annonce fournisseur -->
+                    
+                    <!-- RegateAC Stock -->
+                    <ACREG_SITESECONDAIRE>47</ACREG_SITESECONDAIRE><!-- Agis Tarare Plateforme -->
+                    <ACREG_LIEUSECONDAIRE>1</ACREG_LIEUSECONDAIRE><!-- LIEU (par Defaut) -->
+                    <ACREG_TYPE_PROD_EMPLACEMENT>50</ACREG_TYPE_PROD_EMPLACEMENT><!-- PLATEFORME -->
+                    <ACREG_QUANTITE_EMPLACEMENT>120</ACREG_QUANTITE_EMPLACEMENT>
+                </Recordset>
+
+            </DataToImport>
+        </ESP_PRODUITS_FINIS>
+        <ART_SITE>
+            <DataToImport>
+                
+                <Recordset id="1" action="create">
+                    <NO_ART key="TRUE"></NO_ART>
+                    <COD_SITE_GRP key="TRUE">47</COD_SITE_GRP><!-- Agis Tarare Plateforme -->
+                    <NIVEAU key="TRUE">1</NIVEAU><!-- Primaire -->
+                    <DATE_DEBUT_EFFET>16/07/2014</DATE_DEBUT_EFFET>
+                    <DATE_FIN_EFFET>31/12/2029</DATE_FIN_EFFET>
+                    <COD_POSTE_CC>3</COD_POSTE_CC><!-- AGIS - Poste PF -->
+                    <COD_ATELIER>1</COD_ATELIER><!-- AGIS EN ATTENTE -->
+                    <SIT_AFFECT_RES>46</SIT_AFFECT_RES><!-- AGIS TARARE SITE -->
+                </Recordset>
+                <Recordset id="2" action="create">
+                    <NO_ART key="TRUE"></NO_ART>
+                    <COD_SITE_GRP key="TRUE">46</COD_SITE_GRP><!-- AGIS TARARE SITE -->
+                    <NIVEAU key="TRUE">1</NIVEAU><!-- Primaire -->
+                    <DATE_DEBUT_EFFET>16/07/2014</DATE_DEBUT_EFFET>
+                    <DATE_FIN_EFFET>31/12/2029</DATE_FIN_EFFET>
+                    <COD_POSTE_CC>2</COD_POSTE_CC><!-- Poste CANTUBAS -->
+                    <COD_ATELIER>1</COD_ATELIER><!-- AGIS EN ATTENTE -->
+                    <SIT_AFFECT_RES>46</SIT_AFFECT_RES><!-- AGIS TARARE SITE -->
+                </Recordset>
+                             
+            </DataToImport>
+        </ART_SITE>
+        <DUN14>
+            <DataToImport>
+                <Recordset id="1" action="create"> 
+                    <NO_ART key="TRUE"></NO_ART>
+                    <COD_PCB key="TRUE">4</COD_PCB>                
+                    <DUN14>13366760030690</DUN14>
+                    <TYPE_CARTON>6</TYPE_CARTON><!-- 08030092 HB1 8x15 -->
+                    <IS_STANDARD>1</IS_STANDARD>
+                    <IS_SPECIFIQUE>0</IS_SPECIFIQUE>
+                    <DUN_PALETTE>23366760030697</DUN_PALETTE>
+                </Recordset>              
+
+            </DataToImport>
+        </DUN14>
+    </Tables>    
+</Transaction>
+
+
+

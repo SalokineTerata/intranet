@@ -235,7 +235,7 @@ class DatabaseOperation {
      * @param mixed $paramRequest
      * @return array Tableau PHP
      */
-    public static function convertSqlQueryWithOutKeyToArray($paramRequest) {
+    public static function convertSqlQueryWithAutomaticKeyToArray($paramRequest) {
 
         return DatabaseOperation::convertSqlResultWithoutKeyToArray(
                         DatabaseOperation::query(

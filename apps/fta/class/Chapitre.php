@@ -13,6 +13,7 @@
 class Chapitre {
 
     const NOT_EDITABLE = false;
+    const ID_CHAPITRE_IDENTITE = 1;
 
     /**
      *
@@ -815,96 +816,107 @@ class Chapitre {
         $bloc.="<tr class=titre_principal><td class>Demandeur</td></tr>";
         $objectFta = new ObjectFta($id_fta);
 
-        $IdFta = $id_fta;
-        $ftaModel = new FtaModel($IdFta);
-        $fta = new FtaView($ftaModel);
-        $fta->setIsEditable($isEditable);
+        $idFta = $id_fta;
+        $ftaModel = new FtaModel($idFta);
+        $ftaView = new FtaView($ftaModel);
+        $ftaView->setIsEditable($isEditable);
+        $ftaView->setFtaChapitreModelById(self::ID_CHAPITRE_IDENTITE);
 
 
         //Nom du demandeur
-        $bloc.=$fta->getHtmlDataField(FtaModel::FIELDNAME_NOM_DEMANDEUR);
+        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_NOM_DEMANDEUR);
 
         //Société du demandeur
-        $bloc.=$fta->getHtmlDataField(FtaModel::FIELDNAME_SOCIETE_DEMANDEUR);
+        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_SOCIETE_DEMANDEUR);
 
         //Date de la demande
-        $bloc.=$fta->getHtmlDataField(FtaModel::FIELDNAME_DATE_DEMANDEUR);
+        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_DATE_DEMANDEUR);
 
         //Echéance du demandeur
-        $bloc.=$fta->getHtmlDataField(FtaModel::FIELDNAME_ECHEANCE_DEMANDEUR);
+        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_ECHEANCE_DEMANDEUR);
 
         $bloc.="<tr class=titre_principal><td class>Classification</td></tr>";
 
         //Nom du client du demandeur
-        $bloc.=$fta->getHtmlDataField(FtaModel::FIELDNAME_NOM_CLIENT_DEMANDEUR);
+        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_NOM_CLIENT_DEMANDEUR);
 
         //Circuit du client
-        $bloc.=$fta->getHtmlDataField(FtaModel::FIELDNAME_CIRCUIT_CLIENT);
+        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_CIRCUIT_CLIENT);
 
         //Réseau du client
-        $bloc.=$fta->getHtmlDataField(FtaModel::FIELDNAME_RESEAU_CLIENT);
+        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_RESEAU_CLIENT);
 
 
         //Segment du client
-        $bloc.=$fta->getHtmlDataField(FtaModel::FIELDNAME_SEGMENT_CLIENT);
+        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_SEGMENT_CLIENT);
 
         $bloc.="<tr class=titre_principal><td class>Estimations</td></tr>";
 
 
         //Quantité estimée en poids ou pièce par semaine
-        $bloc.=$fta->getHtmlDataField(FtaModel::FIELDNAME_QUANTITE_HEBDOMADAIRE_ESTIMEE_COMMANDE);
+        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_QUANTITE_HEBDOMADAIRE_ESTIMEE_COMMANDE);
 
         //Fréquence estimée de commande par semaine
-        $bloc.=$fta->getHtmlDataField(FtaModel::FIELDNAME_FREQUENCE_HEBDOMADAIRE_ESTIMEE_COMMANDE);
+        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_FREQUENCE_HEBDOMADAIRE_ESTIMEE_COMMANDE);
 
         $bloc.="<tr class=titre_principal><td class>Caractéristiques générales du produit</td></tr>";
 
         //Désignation commerciale
-        $bloc.=$fta->getHtmlDataField(FtaModel::FIELDNAME_DESIGNATION_COMMERCIALE);
+        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_DESIGNATION_COMMERCIALE);
 
         //Environnement de conservation
-        $bloc.=$fta->getHtmlDataField(FtaModel::FIELDNAME_ENVIRONNEMENT_CONSERVATION_GROUPE);
+        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_ENVIRONNEMENT_CONSERVATION_GROUPE);
 
         //Type d'emballage
 
-        $bloc.=$fta->getHtmlDataField(FtaModel::FIELDNAME_ARCADIA_EMBALLAGE_TYPE);
+        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_ARCADIA_EMBALLAGE_TYPE);
 
         //Unité de facturation et Poids élémentaire
-        $bloc.=$fta->getHtmlUniteFacturationWithPoidsElementaire();
+        $bloc.=$ftaView->getHtmlUniteFacturationWithPoidsElementaire();
 
 
         //PCB
-        $bloc.=$fta->getHtmlDataField(FtaModel::FIELDNAME_PCB);
+        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_PCB);
 
 
         $bloc.="<tr class=titre_principal><td class>Caractéristiques FTA</td></tr>";
 
         //Créateur
-        $bloc.=$fta->getHtmlCreateurFta();
+        $bloc.=$ftaView->getHtmlCreateurFta();
 
         //Catégorie de FTA
-        $bloc.=$fta->getHtmlDataField(FtaModel::FIELDNAME_CATEGORIE_FTA);
+        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_CATEGORIE_FTA);
 
         //Besoin de la fiche technique ?
-        $bloc.=$fta->getHtmlDataField(FtaModel::FIELDNAME_BESOIN_FICHE_TECHNIQUE);
+        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_BESOIN_FICHE_TECHNIQUE);
 
         //Etude de prix ?
-        $bloc.=$fta->getHtmlDataField(FtaModel::FIELDNAME_ETUDE_PRIX_FTA);
+        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_ETUDE_PRIX_FTA);
 
         //Calibre par défaut
-        $bloc.=$fta->getHtmlDataField(FtaModel::FIELDNAME_CALIBRE_DEFAUT);
+        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_CALIBRE_DEFAUT);
 
         $bloc.="<tr class=titre_principal><td class>Echéances</td></tr>";
 
         //Date d'échéance des processus
-        $bloc.=$fta->getHtmlEcheancesProcessus();
+        $bloc.=$ftaView->getHtmlEcheancesProcessus();
         /**        */
         return $bloc;
     }
 
     public static function buildSuiviDossier() {
 
+        $isEditable = self::$is_editable;
+        $id_fta = self::$id_fta;
+
+        $idFta = $id_fta;
+        $ftaModel = new FtaModel($idFta);
+        $ftaView = new FtaView($ftaModel);
+        $ftaView->setIsEditable($isEditable);
+        $ftaView->setFtaChapitreModelById(self::$id_fta_chapitre);
+
         $id_fta_chapitre = self::$id_fta_chapitre;
+
         $id_fta_processus = self::$id_fta_processus;
         $is_editable = self::$is_editable;
         $taux_validation_processus = self::$taux_validation_processus;
@@ -916,22 +928,23 @@ class Chapitre {
         $bloc_suivi = "";
 
         if ($id_fta_processus <> 0) {
-// //Si le chapitre en cours n'est pas public
-            $bloc_suivi .= "<" . Html::DEFAULT_HTML_TABLE_CONTENU . ">
-<tr class=titre_principal><td class>
-Suivi de dossier
-</td></tr><tr><td><" . Html::DEFAULT_HTML_TABLE_CONTENU . ">
-";
+            //Si le chapitre en cours n'est pas public
+            $bloc_suivi .= "<" . Html::DEFAULT_HTML_TABLE_CONTENU . ">"
+                    . "<tr class=titre_principal><td class>"
+                    . "Suivi de dossier"
+                    . "</td></tr><tr><td><" . Html::DEFAULT_HTML_TABLE_CONTENU . ">"
+            ;
 
-//Commentaire sur le Chapitre
+            //Commentaire sur le Chapitre
             $champ = "commentaire_suivi_projet";
-            $bloc_suivi .= "<tr class=contenu><td>" . mysql_field_desc("fta_suivi_projet", $champ) . "</td><td>";
-            if ($proprietaire) {
-                $bloc_suivi .= "<textarea name=" . $champ . " rows=10 cols=40>${$champ}</textarea>";
-            } else {
-                $bloc_suivi .= html_view_txt(${$champ});
-            }
-            $bloc_suivi.="</td></tr>";
+//            $bloc_suivi .= "<tr class=contenu><td>" . mysql_field_desc("fta_suivi_projet", $champ) . "</td><td>";
+//            if ($proprietaire) {
+//                $bloc_suivi .= "<textarea name=" . $champ . " rows=10 cols=40>${$champ}</textarea>";
+//            } else {
+//                $bloc_suivi .= html_view_txt(${$champ});
+//            }
+//            $bloc_suivi.="</td></tr>";
+            $bloc_suivi .= $ftaView->getHtmlCommentaireChapitre();
 //            $htmlObject = new HtmlTextArea(
 //                    $field = "commentaire_suivi_projet", $table = ObjectFta::TABLE_SUIVI_PROJET_NAME, $value = self::$objectFta->getFieldValue($table, $field), $is_editable, $warning_update = ${"diff_" . $table_name}[$field_name]
 //            );

@@ -21,88 +21,67 @@ class FtaSuiviProjetModel extends AbstractModel {
     const FIELDNAME_CORRECTION_FTA_SUIVI_PROJET = "correction_fta_suivi_projet";
 
     /**
-     * Processus initial
-     * @var FtaProcessusModel
+     * Fta
+     * @var FtaModel
      */
-    private $modelProcessusInit;
+    private $modelFta;
 
     /**
-     * Processus suivant
-     * @var FtaProcessusModel
+     * Chapitre concerné par le suivi
+     * @var FtaChapitreModel
      */
-    private $modelProcessusNext;
-
-    /**
-     * Etat de la FTA
-     * @var FtaEtatModel
-     */
-    private $modelFtaEtat;
-
-    /**
-     * Etat de la FTA
-     * @var FtaCategorieModel
-     */
-    private $modelFtaCategorie;
+    private $modelFtaChapitre;
 
     public function __construct($paramId = NULL, $paramIsCreateRecordsetInDatabaseIfKeyDoesntExist = AbstractModel::DEFAULT_IS_CREATE_RECORDSET_IN_DATABASE_IF_KEY_DOESNT_EXIST) {
         parent::__construct($paramId, $paramIsCreateRecordsetInDatabaseIfKeyDoesntExist);
 
-        $this->setModelProcessusInit(
-                new FtaProcessusModel(
-                $this->getDataField(self::FIELDNAME_PROCESSUS_INIT)->getFieldValue()
+        //Tables filles
+        $this->setModelFta(
+                new FtaModel(
+                $this->getDataField(self::FIELDNAME_ID_FTA)->getFieldValue()
                 , DatabaseRecord::VALUE_DONT_CREATE_RECORD_IN_DATABASE_IF_KEY_DOESNT_EXIST
                 )
         );
-        $this->setModelProcessusNext(
-                new FtaProcessusModel(
-                $this->getDataField(self::FIELDNAME_PROCESSUS_NEXT)->getFieldValue()
-                , DatabaseRecord::VALUE_DONT_CREATE_RECORD_IN_DATABASE_IF_KEY_DOESNT_EXIST
-                )
-        );
-        $this->setModelFtaEtat(
-                new FtaEtatModel(
-                $this->getDataField(self::FIELDNAME_FTA_ETAT)->getFieldValue()
-                , DatabaseRecord::VALUE_DONT_CREATE_RECORD_IN_DATABASE_IF_KEY_DOESNT_EXIST
-                )
-        );
-        $this->setModelFtaCategorie(
-                new FtaCategorieModel(
-                $this->getDataField(self::FIELDNAME_CATEGORIE)->getFieldValue()
+        $this->setModelFtaChapitre(
+                new FtaChapitreModel(
+                $this->getDataField(self::FIELDNAME_ID_FTA_CHAPITRE)->getFieldValue()
                 , DatabaseRecord::VALUE_DONT_CREATE_RECORD_IN_DATABASE_IF_KEY_DOESNT_EXIST
                 )
         );
     }
 
-    public function getModelProcessusInit() {
-        return $this->modelProcessusInit;
+    static public function getIdFtaSuiviProjetByIdFtaAndIdChapitre($paramIdFta, $paramIdChapitre) {
+
+        //Récupération du tableau de résultat
+        $keyName = FtaSuiviProjetModel::KEYNAME;
+        $tableName = FtaSuiviProjetModel::TABLENAME;
+        $idFtaName = FtaSuiviProjetModel::FIELDNAME_ID_FTA;
+        $idFtaChapitreName = FtaSuiviProjetModel::FIELDNAME_ID_FTA_CHAPITRE;
+        $sql = "SELECT " . $keyName . " "
+                . "FROM " . $tableName . " "
+                . "WHERE " . $idFtaName . "=" . $paramIdFta . " "
+                . "AND " . $idFtaChapitreName . "=" . $paramIdChapitre . " "
+        ;
+        $array = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray($sql);
+
+        //Retourne uniquement la première valeur
+        return $array[0];
     }
 
-    public function getModelProcessusNext() {
-        return $this->modelProcessusNext;
+    public function getModelFta() {
+        return $this->modelFta;
     }
 
-    public function getModelFtaEtat() {
-        return $this->modelFtaEtat;
+    public function getModelFtaChapitre() {
+        return $this->modelFtaChapitre;
     }
 
-    public function getModelFtaCategorie() {
-        return $this->modelFtaCategorie;
+    private function setModelFta(FtaModel $modelFta) {
+        $this->modelFta = $modelFta;
     }
 
-    private function setModelProcessusInit(FtaProcessusModel $modelProcessusInit) {
-        $this->modelProcessusInit = $modelProcessusInit;
-    }
-
-    private function setModelProcessusNext(FtaProcessusModel $modelProcessusNext) {
-        $this->modelProcessusNext = $modelProcessusNext;
-    }
-
-    private function setModelFtaEtat(FtaEtatModel $modelFtaEtat) {
-        $this->modelFtaEtat = $modelFtaEtat;
-    }
-
-    private function setModelFtaCategorie(FtaCategorieModel $modelFtaCategorie) {
-        $this->modelFtaCategorie = $modelFtaCategorie;
+    private function setModelFtaChapitre(FtaChapitreModel $modelFtaChapitre) {
+        $this->modelFtaChapitre = $modelFtaChapitre;
     }
 
 }

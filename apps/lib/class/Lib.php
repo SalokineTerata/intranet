@@ -112,9 +112,10 @@ class Lib {
     public static function setModule($module = null) {
 
         $return = "";
-
+        $conf = $_SESSION["conf"];
+        $scriptName = $_SERVER["SCRIPT_NAME"];
         if ($module == null) {
-            $return = substr($_SERVER["SCRIPT_NAME"], strlen($_SESSION["conf"]->site_subdir . "/"));
+            $return = substr($scriptName, strlen($conf->site_subdir . "/"));
             $return = substr($return, 0, strlen($return) - strlen(strstr($return, '/')));
         } else {
             $return = $module;

@@ -45,7 +45,9 @@ if ($_SESSION["session_init"] == "false") {
     $conf->mysql_database_name = "intranet_V3_0";
     $conf->mysql_table_authentification = "salaries";
     $conf->project_name_simple = "intranet";
-    $conf->project_version = "3.0";
+    $conf->application_dir = "apps";
+    $conf->site_subdir = "/" . $conf->project_name_simple . "/" . $conf->application_dir;
+    //$conf->project_version = "3.0";
     $conf->site = $_SERVER['SERVER_NAME'];
     $conf->smtp_developemnent_email_info_redirection = "administrateurs.fta@ldc.fr";
     $conf->smtp_developemnent_email_user_redirection = "utilisateurs.fta@ldc.fr";
@@ -65,7 +67,6 @@ if ($_SESSION["session_init"] == "false") {
             $conf->mysql_database_host = "localhost";
             $conf->mysql_database_user_name = "root";
             $conf->mysql_database_user_password = "";
-            $conf->site_subdir = "/" . $conf->project_name_simple . "-" . $conf->project_version;
             $conf->site_webroot = "http://" . $conf->site . $conf->site_subdir;
             $conf->smtp_service_enable = FALSE;
 

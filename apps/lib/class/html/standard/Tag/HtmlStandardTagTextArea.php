@@ -23,7 +23,7 @@
  * @author Boris Sanègre <boris.sanegre@ldc.fr>
  * @license see LICENSE.TXT at the root of this project
  */
-class HtmlStandardTagTextArea implements InterfaceHtmlStandardTag {
+class HtmlStandardTagTextArea extends AbstractAllHtmlParameters implements InterfaceHtmlStandardTag {
 
     const TAG_NAME = "textarea";
 

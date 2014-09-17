@@ -47,6 +47,8 @@ require_once("../lib/class/model/FtaProcessusCycleModel.php");
 require_once("../lib/class/model/FtaModel.php");
 require_once("../lib/class/model/FtaEtatModel.php");
 require_once("../lib/class/model/FtaProcessusModel.php");
+require_once("../lib/class/model/FtaChapitreModel.php");
+require_once("../lib/class/model/FtaSuiviProjetModel.php");
 require_once("../lib/class/model/FtaProcessusDelaiModel.php");
 
 // Rendus HTML standard
@@ -136,13 +138,14 @@ require_once("../lib/class/html/HtmlInputCalendar.php");
 require_once("../lib/class/html/AbstractHtmlSelect.php");
 require_once("../lib/class/html/HtmlList.php");
 require_once("../lib/class/html/HtmlListBoolean.php");
-//require_once("../lib/class/html/HtmlTextArea.php");
+require_once("../lib/class/html/HtmlTextArea.php");
 require_once("../lib/class/html/HtmlCheckbox.php");
 require_once("../lib/class/html/TraitDataFieldToHtml.php");
 require_once("../lib/class/html/DataFieldToHtmlInputText.php");
 require_once("../lib/class/html/DataFieldToHtmlList.php");
 require_once("../lib/class/html/DataFieldToHtmlListBoolean.php");
 require_once("../lib/class/html/DataFieldToHtmlInputCalendar.php");
+require_once("../lib/class/html/DataFieldToHtmlTextArea.php");
 
 // Session utilisateur
 require_once("../lib/session.php");

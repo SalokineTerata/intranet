@@ -4,10 +4,10 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<meta name="generator" content="ApiGen 2.8.0" />
 
-	<title>Class W3C\TagInput | intranet-3.0</title>
+	<title>Class W3C\TagInput | Intranet</title>
 
-	<script type="text/javascript" src="resources/combined.js?72472579"></script>
-	<script type="text/javascript" src="elementlist.js?185303876"></script>
+	<script type="text/javascript" src="resources/combined.js?2380021251"></script>
+	<script type="text/javascript" src="elementlist.js?1051158679"></script>
 	<link rel="stylesheet" type="text/css" media="all" href="resources/style.css?3505392360" />
 
 </head>
@@ -34,10 +34,11 @@
 		<div id="elements">
 			<h3>Classes</h3>
 			<ul>
-				<li><a href="class-W3C.AbstractAttributeTypeBoolean.html">AbstractAttributeTypeBoolean</a></li>
 				<li><a href="class-W3C.AbstractAttributeTypeGenericValue.html">AbstractAttributeTypeGenericValue</a></li>
 				<li><a href="class-W3C.AbstractAttributeTypeMixed.html">AbstractAttributeTypeMixed</a></li>
+				<li><a href="class-W3C.AbstractAttributeTypeTrueFalse.html">AbstractAttributeTypeTrueFalse</a></li>
 				<li><a href="class-W3C.AbstractAttributeTypeUnique.html">AbstractAttributeTypeUnique</a></li>
+				<li><a href="class-W3C.AbstractAttributeTypeYesNo.html">AbstractAttributeTypeYesNo</a></li>
 				<li><a href="class-W3C.AbstractGlobalAttributes.html">AbstractGlobalAttributes</a></li>
 				<li><a href="class-W3C.AbstractStylesCSS.html">AbstractStylesCSS</a></li>
 				<li><a href="class-W3C.AttributeAccept.html">AttributeAccept</a></li>
@@ -63,7 +64,9 @@
 				<li><a href="class-W3C.AttributeFormTarget.html">AttributeFormTarget</a></li>
 				<li><a href="class-W3C.AttributeHeight.html">AttributeHeight</a></li>
 				<li><a href="class-W3C.AttributeHidden.html">AttributeHidden</a></li>
+				<li><a href="class-W3C.AttributeId.html">AttributeId</a></li>
 				<li><a href="class-W3C.AttributeInputType.html">AttributeInputType</a></li>
+				<li><a href="class-W3C.AttributeLang.html">AttributeLang</a></li>
 				<li><a href="class-W3C.AttributeList.html">AttributeList</a></li>
 				<li><a href="class-W3C.AttributeMax.html">AttributeMax</a></li>
 				<li><a href="class-W3C.AttributeMaxLength.html">AttributeMaxLength</a></li>
@@ -76,8 +79,13 @@
 				<li><a href="class-W3C.AttributeRequired.html">AttributeRequired</a></li>
 				<li><a href="class-W3C.AttributeRows.html">AttributeRows</a></li>
 				<li><a href="class-W3C.AttributeSize.html">AttributeSize</a></li>
+				<li><a href="class-W3C.AttributeSpellCheck.html">AttributeSpellCheck</a></li>
 				<li><a href="class-W3C.AttributeSrc.html">AttributeSrc</a></li>
 				<li><a href="class-W3C.AttributeStep.html">AttributeStep</a></li>
+				<li><a href="class-W3C.AttributeStyle.html">AttributeStyle</a></li>
+				<li><a href="class-W3C.AttributeTabIndex.html">AttributeTabIndex</a></li>
+				<li><a href="class-W3C.AttributeTitle.html">AttributeTitle</a></li>
+				<li><a href="class-W3C.AttributeTranslate.html">AttributeTranslate</a></li>
 				<li><a href="class-W3C.AttributeValue.html">AttributeValue</a></li>
 				<li><a href="class-W3C.AttributeWidth.html">AttributeWidth</a></li>
 				<li><a href="class-W3C.AttributeWrap.html">AttributeWrap</a></li>
@@ -123,16 +131,10 @@
 				<a href="tree.html" title="Tree view of classes, interfaces, traits and exceptions"><span>Tree</span></a>
 			</li>
 			<li>
-				<a href="deprecated.html" title="List of deprecated elements"><span>Deprecated</span></a>
-			</li>
-			<li>
 				<a href="todo.html" title="Todo list"><span>Todo</span></a>
 			</li>
 		</ul>
 		<ul>
-			<li>
-				<a href="intranet-3-0-api-documentation.zip" title="Download documentation as ZIP archive"><span>Download</span></a>
-			</li>
 		</ul>
 	</div>
 
@@ -162,10 +164,6 @@
 	</dl>
 
 
-	<div>
-		<h4>Direct known subclasses</h4>
-			<a href="class-AttributesInput.html">AttributesInput</a>
-	</div>
 
 
 
@@ -183,7 +181,7 @@
 				<b>Author:</b>
 				Boris Sanègre &lt;<a
 href="mailto:boris.sanegre&#64;ldc.fr">boris.sanegre&#64;<!---->ldc.fr</a>&gt;<br />
-		<b>Located at</b> lib/class/html/W3C/Tag/TagInput.php<br />
+		<b>Located at</b> apps/lib/class/html/W3C/Tag/TagInput.php<br />
 	</div>
 
 
@@ -215,8 +213,6 @@ href="mailto:boris.sanegre&#64;ldc.fr">boris.sanegre&#64;<!---->ldc.fr</a>&gt;<b
 
 
 
-				<h4>Overrides</h4>
-				<div class="list"><code><a href="class-W3C.AbstractGlobalAttributes.html#___construct">W3C\AbstractGlobalAttributes::__construct()</a></code></div>
 
 		</div>
 		</div></td>
@@ -1214,76 +1210,38 @@ href="mailto:boris.sanegre&#64;ldc.fr">boris.sanegre&#64;<!---->ldc.fr</a>&gt;<b
 	<tr>
 		<td><code>
 			<a href="class-W3C.AbstractGlobalAttributes.html#_getAccessKey">getAccessKey()</a>, 
-			<a href="class-W3C.AbstractGlobalAttributes.html#_getAccessKeyForHtmlParameter">getAccessKeyForHtmlParameter()</a>, 
+			<a href="class-W3C.AbstractGlobalAttributes.html#_getAllGlobalAttributes">getAllGlobalAttributes()</a>, 
 			<a href="class-W3C.AbstractGlobalAttributes.html#_getAllHtmlParametersWithSpaceBefore">getAllHtmlParametersWithSpaceBefore()</a>, 
-			<a href="class-W3C.AbstractGlobalAttributes.html#_getAllParameters">getAllParameters()</a>, 
 			<a href="class-W3C.AbstractGlobalAttributes.html#_getAllParametersWithSpaceBefore">getAllParametersWithSpaceBefore()</a>, 
 			<a href="class-W3C.AbstractGlobalAttributes.html#_getClass">getClass()</a>, 
-			<a href="class-W3C.AbstractGlobalAttributes.html#_getClassForHtmlParameter">getClassForHtmlParameter()</a>, 
 			<a href="class-W3C.AbstractGlobalAttributes.html#_getContentEditable">getContentEditable()</a>, 
-			<a href="class-W3C.AbstractGlobalAttributes.html#_getContentEditableForHtmlParameter">getContentEditableForHtmlParameter()</a>, 
 			<a href="class-W3C.AbstractGlobalAttributes.html#_getContextMenu">getContextMenu()</a>, 
-			<a href="class-W3C.AbstractGlobalAttributes.html#_getContextMenuForHtmlParameter">getContextMenuForHtmlParameter()</a>, 
 			<a href="class-W3C.AbstractGlobalAttributes.html#_getDir">getDir()</a>, 
-			<a href="class-W3C.AbstractGlobalAttributes.html#_getDirForHtmlParameter">getDirForHtmlParameter()</a>, 
 			<a href="class-W3C.AbstractGlobalAttributes.html#_getDraggable">getDraggable()</a>, 
-			<a href="class-W3C.AbstractGlobalAttributes.html#_getDraggableForHtmlParameter">getDraggableForHtmlParameter()</a>, 
-			<a href="class-W3C.AbstractGlobalAttributes.html#_getDropZone">getDropZone()</a>, 
-			<a href="class-W3C.AbstractGlobalAttributes.html#_getDropZoneForHtmlParameter">getDropZoneForHtmlParameter()</a>, 
+			<a href="class-W3C.AbstractGlobalAttributes.html#_getDropzone">getDropzone()</a>, 
 			<a href="class-W3C.AbstractGlobalAttributes.html#_getHidden">getHidden()</a>, 
-			<a href="class-W3C.AbstractGlobalAttributes.html#_getHiddenForHtmlParameter">getHiddenForHtmlParameter()</a>, 
 			<a href="class-W3C.AbstractGlobalAttributes.html#_getId">getId()</a>, 
-			<a href="class-W3C.AbstractGlobalAttributes.html#_getIdForHtmlParameter">getIdForHtmlParameter()</a>, 
 			<a href="class-W3C.AbstractGlobalAttributes.html#_getLang">getLang()</a>, 
-			<a href="class-W3C.AbstractGlobalAttributes.html#_getLangForHtmlParameter">getLangForHtmlParameter()</a>, 
 			<a href="class-W3C.AbstractGlobalAttributes.html#_getSpellCheck">getSpellCheck()</a>, 
-			<a href="class-W3C.AbstractGlobalAttributes.html#_getSpellCheckForHtmlParameter">getSpellCheckForHtmlParameter()</a>, 
 			<a href="class-W3C.AbstractGlobalAttributes.html#_getStyle">getStyle()</a>, 
-			<a href="class-W3C.AbstractGlobalAttributes.html#_getStyleForHtmlParameter">getStyleForHtmlParameter()</a>, 
 			<a href="class-W3C.AbstractGlobalAttributes.html#_getTabIndex">getTabIndex()</a>, 
-			<a href="class-W3C.AbstractGlobalAttributes.html#_getTabIndexForHtmlParameter">getTabIndexForHtmlParameter()</a>, 
 			<a href="class-W3C.AbstractGlobalAttributes.html#_getTitle">getTitle()</a>, 
-			<a href="class-W3C.AbstractGlobalAttributes.html#_getTitleForHtmlParameter">getTitleForHtmlParameter()</a>, 
 			<a href="class-W3C.AbstractGlobalAttributes.html#_getTranslate">getTranslate()</a>, 
-			<a href="class-W3C.AbstractGlobalAttributes.html#_getTranslateForHtmlParameter">getTranslateForHtmlParameter()</a>, 
 			<a href="class-W3C.AbstractGlobalAttributes.html#_setAccessKey">setAccessKey()</a>, 
 			<a href="class-W3C.AbstractGlobalAttributes.html#_setClass">setClass()</a>, 
-			<a href="class-W3C.AbstractGlobalAttributes.html#_setContentEditableToFalse">setContentEditableToFalse()</a>, 
-			<a href="class-W3C.AbstractGlobalAttributes.html#_setContentEditableToInherit">setContentEditableToInherit()</a>, 
-			<a href="class-W3C.AbstractGlobalAttributes.html#_setContentEditableToTrue">setContentEditableToTrue()</a>, 
+			<a href="class-W3C.AbstractGlobalAttributes.html#_setContentEditable">setContentEditable()</a>, 
 			<a href="class-W3C.AbstractGlobalAttributes.html#_setContextMenu">setContextMenu()</a>, 
-			<a href="class-W3C.AbstractGlobalAttributes.html#_setDirToAuto">setDirToAuto()</a>, 
-			<a href="class-W3C.AbstractGlobalAttributes.html#_setDirToLtr">setDirToLtr()</a>, 
-			<a href="class-W3C.AbstractGlobalAttributes.html#_setDirToRtl">setDirToRtl()</a>, 
-			<a href="class-W3C.AbstractGlobalAttributes.html#_setDraggableToAuto">setDraggableToAuto()</a>, 
-			<a href="class-W3C.AbstractGlobalAttributes.html#_setDraggableToFalse">setDraggableToFalse()</a>, 
-			<a href="class-W3C.AbstractGlobalAttributes.html#_setDraggableToTrue">setDraggableToTrue()</a>, 
-			<a href="class-W3C.AbstractGlobalAttributes.html#_setDropZoneToCopy">setDropZoneToCopy()</a>, 
-			<a href="class-W3C.AbstractGlobalAttributes.html#_setDropZoneToLink">setDropZoneToLink()</a>, 
-			<a href="class-W3C.AbstractGlobalAttributes.html#_setDropZoneToMove">setDropZoneToMove()</a>, 
+			<a href="class-W3C.AbstractGlobalAttributes.html#_setDir">setDir()</a>, 
+			<a href="class-W3C.AbstractGlobalAttributes.html#_setDraggable">setDraggable()</a>, 
+			<a href="class-W3C.AbstractGlobalAttributes.html#_setDropzone">setDropzone()</a>, 
 			<a href="class-W3C.AbstractGlobalAttributes.html#_setHidden">setHidden()</a>, 
 			<a href="class-W3C.AbstractGlobalAttributes.html#_setId">setId()</a>, 
 			<a href="class-W3C.AbstractGlobalAttributes.html#_setLang">setLang()</a>, 
-			<a href="class-W3C.AbstractGlobalAttributes.html#_setSpellCheckToFalse">setSpellCheckToFalse()</a>, 
-			<a href="class-W3C.AbstractGlobalAttributes.html#_setSpellCheckToTrue">setSpellCheckToTrue()</a>, 
+			<a href="class-W3C.AbstractGlobalAttributes.html#_setSpellCheck">setSpellCheck()</a>, 
 			<a href="class-W3C.AbstractGlobalAttributes.html#_setStyle">setStyle()</a>, 
 			<a href="class-W3C.AbstractGlobalAttributes.html#_setTabIndex">setTabIndex()</a>, 
 			<a href="class-W3C.AbstractGlobalAttributes.html#_setTitle">setTitle()</a>, 
-			<a href="class-W3C.AbstractGlobalAttributes.html#_setTranslate">setTranslate()</a>, 
-			<a href="class-W3C.AbstractGlobalAttributes.html#_unsetAccessKey">unsetAccessKey()</a>, 
-			<a href="class-W3C.AbstractGlobalAttributes.html#_unsetClass">unsetClass()</a>, 
-			<a href="class-W3C.AbstractGlobalAttributes.html#_unsetContentEditable">unsetContentEditable()</a>, 
-			<a href="class-W3C.AbstractGlobalAttributes.html#_unsetContextMenu">unsetContextMenu()</a>, 
-			<a href="class-W3C.AbstractGlobalAttributes.html#_unsetDir">unsetDir()</a>, 
-			<a href="class-W3C.AbstractGlobalAttributes.html#_unsetDraggable">unsetDraggable()</a>, 
-			<a href="class-W3C.AbstractGlobalAttributes.html#_unsetDropZone">unsetDropZone()</a>, 
-			<a href="class-W3C.AbstractGlobalAttributes.html#_unsetHidden">unsetHidden()</a>, 
-			<a href="class-W3C.AbstractGlobalAttributes.html#_unsetId">unsetId()</a>, 
-			<a href="class-W3C.AbstractGlobalAttributes.html#_unsetSpellCheck">unsetSpellCheck()</a>, 
-			<a href="class-W3C.AbstractGlobalAttributes.html#_unsetStyle">unsetStyle()</a>, 
-			<a href="class-W3C.AbstractGlobalAttributes.html#_unsetTabIndex">unsetTabIndex()</a>, 
-			<a href="class-W3C.AbstractGlobalAttributes.html#_unsetTitle">unsetTitle()</a>, 
-			<a href="class-W3C.AbstractGlobalAttributes.html#_unsetTranslate">unsetTranslate()</a>
+			<a href="class-W3C.AbstractGlobalAttributes.html#_setTranslate">setTranslate()</a>
 		</code></td>
 	</tr>
 	</table>
@@ -1295,22 +1253,6 @@ href="mailto:boris.sanegre&#64;ldc.fr">boris.sanegre&#64;<!---->ldc.fr</a>&gt;<b
 
 
 
-	<table class="summary inherited">
-	<caption>Constants inherited from <a href="class-W3C.AbstractGlobalAttributes.html#constants">W3C\AbstractGlobalAttributes</a></caption>
-	<tr>
-		<td><code>
-			<a href="class-W3C.AbstractGlobalAttributes.html#ATTRIBUTE_GLOBAL_SPELLCHECK_FALSE"><b>ATTRIBUTE_GLOBAL_SPELLCHECK_FALSE</b></a>, 
-			<a href="class-W3C.AbstractGlobalAttributes.html#ATTRIBUTE_GLOBAL_SPELLCHECK_TRUE"><b>ATTRIBUTE_GLOBAL_SPELLCHECK_TRUE</b></a>, 
-			<a href="class-W3C.AbstractGlobalAttributes.html#ATTRIBUTE_NAME_GLOBAL_ID"><b>ATTRIBUTE_NAME_GLOBAL_ID</b></a>, 
-			<a href="class-W3C.AbstractGlobalAttributes.html#ATTRIBUTE_NAME_GLOBAL_LANG"><b>ATTRIBUTE_NAME_GLOBAL_LANG</b></a>, 
-			<a href="class-W3C.AbstractGlobalAttributes.html#ATTRIBUTE_NAME_GLOBAL_SPELLCHECK"><b>ATTRIBUTE_NAME_GLOBAL_SPELLCHECK</b></a>, 
-			<a href="class-W3C.AbstractGlobalAttributes.html#ATTRIBUTE_NAME_GLOBAL_STYLE"><b>ATTRIBUTE_NAME_GLOBAL_STYLE</b></a>, 
-			<a href="class-W3C.AbstractGlobalAttributes.html#ATTRIBUTE_NAME_GLOBAL_TABINDEX"><b>ATTRIBUTE_NAME_GLOBAL_TABINDEX</b></a>, 
-			<a href="class-W3C.AbstractGlobalAttributes.html#ATTRIBUTE_NAME_GLOBAL_TITLE"><b>ATTRIBUTE_NAME_GLOBAL_TITLE</b></a>, 
-			<a href="class-W3C.AbstractGlobalAttributes.html#ATTRIBUTE_NAME_GLOBAL_TRANSLATE"><b>ATTRIBUTE_NAME_GLOBAL_TRANSLATE</b></a>
-		</code></td>
-	</tr>
-	</table>
 
 
 
@@ -1323,7 +1265,7 @@ href="mailto:boris.sanegre&#64;ldc.fr">boris.sanegre&#64;<!---->ldc.fr</a>&gt;<b
 </div>
 
 	<div id="footer">
-		intranet-3.0 API documentation generated by <a href="http://apigen.org">ApiGen 2.8.0</a>
+		Intranet API documentation generated by <a href="http://apigen.org">ApiGen 2.8.0</a>
 	</div>
 </div>
 </div>

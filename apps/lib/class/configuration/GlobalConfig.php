@@ -48,7 +48,7 @@ class GlobalConfig {
     public $smtp_service_enable = null; //Suivant environnement
 
     public function getHtmlUrlDocApiGen() {
-        return "<a href=\"" . $this->site_webroot . self::DOC_APIGEN_DIR . "\" target=\"_blank\"><img src=../lib/images/apigen.jpeg width=15  border=0> - Doc ApiGen</a>";
+        return "<a href=\"" . $this->site_webroot ."/". self::DOC_APIGEN_DIR . "\" target=\"_blank\"><img src=../lib/images/apigen.jpeg width=15  border=0> - Doc ApiGen</a>";
     }
 
 }

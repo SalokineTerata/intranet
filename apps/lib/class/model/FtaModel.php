@@ -63,7 +63,7 @@ class FtaModel extends AbstractModel {
     public function __construct($paramId = NULL, $paramIsCreateRecordsetInDatabaseIfKeyDoesntExist = AbstractModel::DEFAULT_IS_CREATE_RECORDSET_IN_DATABASE_IF_KEY_DOESNT_EXIST) {
         parent::__construct($paramId, $paramIsCreateRecordsetInDatabaseIfKeyDoesntExist);
 
-        // Tables liées
+        // Tables filles
         $this->setModelCreateur(
                 new UserModel($this->getDataField(self::FIELDNAME_CREATEUR)->getFieldValue()
                 , DatabaseRecord::VALUE_DONT_CREATE_RECORD_IN_DATABASE_IF_KEY_DOESNT_EXIST)
@@ -76,9 +76,6 @@ class FtaModel extends AbstractModel {
                 new FtaCategorieModel($this->getDataField(self::FIELDNAME_CATEGORIE_FTA)->getFieldValue()
                 , DatabaseRecord::VALUE_DONT_CREATE_RECORD_IN_DATABASE_IF_KEY_DOESNT_EXIST)
         );
-
-        //$this->setModelFtaProcessusDelai(new FtaProcessusDelaiModel());
-        //$this->getModelFtaProcessusDelai()->setModelFtaById($this->getKeyValue());
     }
 
     /**
@@ -148,7 +145,7 @@ class FtaModel extends AbstractModel {
         );
 
         //Sélection de tous les processus appartenant au cycle de vie de la FTA
-        return DatabaseOperation::convertSqlQueryWithOutKeyToArray(
+        return DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
                         "SELECT DISTINCT " . FtaProcessusCycleModel::FIELDNAME_PROCESSUS_INIT . " AS " . FtaProcessusModel::KEYNAME . " "
                         . ", " . FtaProcessusCycleModel::FIELDNAME_DELAI . " "
                         . "FROM " . FtaProcessusCycleModel::TABLENAME . ", " . FtaProcessusModel::TABLENAME . " "
@@ -164,7 +161,7 @@ class FtaModel extends AbstractModel {
         //Sélection de tous les processus appartenant au cycle de vie de la FTA
         $sqlDataIdFtaValue = $this->getKeyValue();
 
-        return DatabaseOperation::convertSqlQueryWithOutKeyToArray(
+        return DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
                         "SELECT " . FtaProcessusDelaiModel::FIELDNAME_ID_FTA_PROCESSUS . " FROM " . FtaProcessusDelaiModel::TABLENAME . " "
                         . "WHERE " . FtaProcessusDelaiModel::FIELDNAME_ID_FTA . "=" . $sqlDataIdFtaValue . " "
         );

@@ -38,12 +38,36 @@ class FtaView {
     private $ftaProcessusDelaiView;
 
     /**
+     * Suivi de projet relatif à la FTA
+     * @var FtaProcessusDelaiView Description
+     */
+    private $ftaSuiviProjetView;
+
+    /**
+     * Chapitre à afficher dans la vue.
+     * @var FtaChapitreModel
+     */
+    private $ftaChapitreModel;
+
+    /**
      * 
      * @param FtaModel $ParamFtaModel
      */
     public function __construct(FtaModel $ParamFtaModel) {
         $this->setModel($ParamFtaModel);
         $this->setFtaProcessusDelaiView(new FtaProcessusDelaiView($this->getModel()));
+    }
+
+    private function getFtaChapitreModel() {
+        return $this->ftaChapitreModel;
+    }
+
+    private function setFtaChapitreModel(FtaChapitreModel $ftaChapitreModel) {
+        $this->ftaChapitreModel = $ftaChapitreModel;
+    }
+
+    public function setFtaChapitreModelById($paramIdChapitre) {
+        $this->setFtaChapitreModel(new FtaChapitreModel($paramIdChapitre));
     }
 
     private function getFtaProcessusDelaiView() {
@@ -161,6 +185,28 @@ class FtaView {
             $blocEcheanceLignes .= $HtmlElementEcheance->getHtmlResult();
         }
         return $blocEcheanceLignes;
+    }
+
+    public function getHtmlCommentaireChapitre() {
+        $return = NULL;
+        $idFtaSuiviProjet = FtaSuiviProjetModel::getIdFtaSuiviProjetByIdFtaAndIdChapitre(
+                        $this->ftaModel->getDataField(FtaModel::KEYNAME)->getFieldValue()
+                        , 1
+        );
+        $recordsetIdFtaSuiviProjet = new FtaSuiviProjetModel($idFtaSuiviProjet);
+        $HtmlSuiviProjet = new DataFieldToHtmlTextArea(
+                $recordsetIdFtaSuiviProjet->getDataField(
+                        FtaSuiviProjetModel::FIELDNAME_COMMENTAIRE_SUIVI_PROJET
+                )
+        );
+        $HtmlSuiviProjet->setIsEditable(TRUE);
+//        $HtmlSuiviProjet = new HtmlTextArea();
+//        $HtmlSuiviProjet->getAttributes()->getName()->setValue("Test");
+//        $HtmlSuiviProjet->setTextAreaContent("TEST");
+//        $HtmlSuiviProjet->setIsEditable(TRUE);
+
+        $return = $HtmlSuiviProjet->getHtmlResult();
+        return $return;
     }
 
 }

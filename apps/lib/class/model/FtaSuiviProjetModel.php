@@ -65,7 +65,7 @@ class FtaSuiviProjetModel extends AbstractModel {
         $array = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray($sql);
 
         //Retourne uniquement la première valeur
-        return $array[0];
+        return $array[0][$keyName];
     }
 
     public function getModelFta() {

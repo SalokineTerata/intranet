@@ -29,6 +29,7 @@ require_once("../lib/functions.mysql.php");
 require_once("../lib/functions.pdf.php");
 require_once("../lib/functions.html.php");
 require_once("../lib/class/Lib.php");
+require_once("../lib/class/Logger.php");
 require_once("../lib/class/session/SessionSaveAndRestoreAbstract.php");
 
 // Moteur de base de données

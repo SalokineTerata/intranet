@@ -15,7 +15,7 @@ class HtmlTextArea extends AbstractHtmlGlobalElement {
     const DEFAULT_COLS_SIZE = 60;
 
     /**
-     * Contenu de la TextArea
+     * Contenu du TextArea
      * @var mixed
      */
     private $textAreaContent;

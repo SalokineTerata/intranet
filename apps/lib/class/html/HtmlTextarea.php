@@ -47,7 +47,7 @@ class HtmlTextArea extends AbstractHtmlGlobalElement {
         );
 
         $this->getAttributes()->getName()->setValue($paramName);
-        $this->getAttributes()->getValue()->setValue($paramValue);
+        $this->setTextAreaContent($paramValue);
     }
 
     /**
@@ -78,7 +78,7 @@ class HtmlTextArea extends AbstractHtmlGlobalElement {
                 . parent::getEventsMouse()->getAllHtmlParametersWithSpaceBefore()
                 . $this->getAttributes()->getAllHtmlParametersWithSpaceBefore()
                 . "/>"
-                . Html::showValue($this->getTextAreaContent())
+                . $this->getTextAreaContent()
                 . "</" . $this->getAttributes()->getTagName() . ">"
                 . parent::getAttributesGlobal()->getIconMenuToHtml()
         ;

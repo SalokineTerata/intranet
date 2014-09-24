@@ -5,6 +5,7 @@
         <group>
             <file>file:/E:/weblocal/intranet/apps/lib/class/html/AttributesTextArea.php</file>
             <file>file:/E:/weblocal/intranet/apps/lib/class/html/AbstractHtmlInput.php</file>
+            <file>file:/E:/weblocal/intranet/apps/lib/class/html/DataFieldToHtmlTextArea.php</file>
             <file>file:/E:/weblocal/intranet/apps/lib/class/html/DataFieldToHtmlInputText.php</file>
             <file>file:/E:/weblocal/intranet/apps/fta/class/Chapitre.php</file>
             <file>file:/E:/weblocal/intranet/apps/inc/javascript.php</file>

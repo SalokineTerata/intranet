@@ -167,6 +167,19 @@ class FtaModel extends AbstractModel {
         );
     }
 
+    public function getEcheanceByIdProcessus($paramIdProcessus) {
+
+        //Sélection de tous les processus appartenant au cycle de vie de la FTA
+        $sqlDataIdFtaValue = $this->getKeyValue();
+
+        $returnArray = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
+                        "SELECT " . FtaProcessusDelaiModel::FIELDNAME_DATE_ECHEANCE_PROCESSUS . " FROM " . FtaProcessusDelaiModel::TABLENAME . " "
+                        . "WHERE " . FtaProcessusDelaiModel::FIELDNAME_ID_FTA . "=" . $sqlDataIdFtaValue . " "
+                        . "AND " . FtaProcessusDelaiModel::FIELDNAME_ID_FTA_PROCESSUS . "=" . $paramIdProcessus . " "
+        );
+        return $returnArray[0][FtaProcessusDelaiModel::FIELDNAME_DATE_ECHEANCE_PROCESSUS];
+    }
+
     public function getArrayModelFtaProcessusDelaiByIdProcessus() {
 
         //Parcours de tous les processus dont un délai a déjà été resenseigné

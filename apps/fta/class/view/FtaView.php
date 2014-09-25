@@ -189,6 +189,8 @@ class FtaView {
 
     public function getHtmlCommentaireChapitre() {
         $return = NULL;
+        
+
         $idFtaSuiviProjet = FtaSuiviProjetModel::getIdFtaSuiviProjetByIdFtaAndIdChapitre(
                         $this->ftaModel->getDataField(FtaModel::KEYNAME)->getFieldValue()
                         , 1
@@ -200,12 +202,8 @@ class FtaView {
                 )
         );
         $HtmlSuiviProjet->setIsEditable(TRUE);
-//        $HtmlSuiviProjet = new HtmlTextArea();
-//        $HtmlSuiviProjet->getAttributes()->getName()->setValue("Test");
-//        $HtmlSuiviProjet->setTextAreaContent("TEST");
-//        $HtmlSuiviProjet->setIsEditable(TRUE);
 
-        $return = $HtmlSuiviProjet->getHtmlResult();
+        $return .= $HtmlSuiviProjet->getHtmlResult();
         return $return;
     }
 

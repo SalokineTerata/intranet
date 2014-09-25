@@ -907,79 +907,40 @@ class Chapitre {
     public static function buildSuiviDossier() {
 
         $isEditable = self::$is_editable;
-        $id_fta = self::$id_fta;
-
-        $idFta = $id_fta;
+        $idFta = self::$id_fta;
         $ftaModel = new FtaModel($idFta);
         $ftaView = new FtaView($ftaModel);
         $ftaView->setIsEditable($isEditable);
         $ftaView->setFtaChapitreModelById(self::$id_fta_chapitre);
-
         $id_fta_chapitre = self::$id_fta_chapitre;
-
         $id_fta_processus = self::$id_fta_processus;
         $is_editable = self::$is_editable;
         $taux_validation_processus = self::$taux_validation_processus;
-
-        $id_fta_processus_encours = $id_fta_processus;
         $proprietaire = $is_editable;
         self::$objectFta->loadCurrentSuiviProjectByChapter($id_fta_chapitre);
 
         $bloc_suivi = "";
 
-        if ($id_fta_processus <> 0) {
-            //Si le chapitre en cours n'est pas public
-            $bloc_suivi .= "<" . Html::DEFAULT_HTML_TABLE_CONTENU . ">"
-                    . "<tr class=titre_principal><td class>"
-                    . "Suivi de dossier"
-                    . "</td></tr><tr><td><" . Html::DEFAULT_HTML_TABLE_CONTENU . ">"
-            ;
+        //Si le chapitre en cours n'est pas public
+        $bloc_suivi .= "<" . Html::DEFAULT_HTML_TABLE_CONTENU . ">"
+                . "<tr class=titre_principal><td class>"
+                . "Suivi de dossier"
+                . "</td></tr><tr><td><" . Html::DEFAULT_HTML_TABLE_CONTENU . ">"
+        ;
+        if ($id_fta_processus <> FtaProcessusModel::PROCESSUS_PUBLIC) {
 
             //Commentaire sur le Chapitre
-            $champ = "commentaire_suivi_projet";
-//            $bloc_suivi .= "<tr class=contenu><td>" . mysql_field_desc("fta_suivi_projet", $champ) . "</td><td>";
-//            if ($proprietaire) {
-//                $bloc_suivi .= "<textarea name=" . $champ . " rows=10 cols=40>${$champ}</textarea>";
-//            } else {
-//                $bloc_suivi .= html_view_txt(${$champ});
-//            }
-//            $bloc_suivi.="</td></tr>";
             $bloc_suivi .= $ftaView->getHtmlCommentaireChapitre();
-//            $htmlObject = new HtmlTextArea(
-//                    $field = "commentaire_suivi_projet", $table = ObjectFta::TABLE_SUIVI_PROJET_NAME, $value = self::$objectFta->getFieldValue($table, $field), $is_editable, $warning_update = ${"diff_" . $table_name}[$field_name]
-//            );
-//            $bloc_suivi .= $htmlObject->getHtmlResult();
-////Date de démarrage
-//            $field_name = "date_echeance_fta";
-//            $table_name = ObjectFta::TABLE_FTA_NAME;
-//            $value = self::$objectFta->getFieldValue($table_name, $field_name);
-//$champ = "date_demarrage_chapitre_fta_suivi_projet";
-//Par défaut date du jour
-//echo ${$champ};
+
             if (!$value) {
                 $value = date("Y-m-d");
             }
-//$bloc_suivi .= "<tr class=contenu><td>" . mysql_field_desc("fta_suivi_projet", $champ) . "</td><td>";
-            /* if($proprietaire)
-              {
-
-              $bloc_suivi .= selection_date_pour_mysql($champ, ${$champ});
-              }else
-             */
-//Valeur non modifiable {
-//$bloc_suivi .="${$champ}";
-//$bloc_suivi .="<input type=hidden name=$champ value=${$champ}>";
-
-            $htmlObject = new HtmlInputCalendar(
-                    $field_name, $table_name, $value, $is_editable_false, $warning_update = ${"diff_" . $table_name}[$field_name]
-            );
-            $bloc_suivi .= $htmlObject->getHtmlResult();
         }
         $bloc_suivi.="</td></tr>";
 
-//Date d'échéance
+        //Date d'échéance
         $champ = "date_echeance_processus";
-//$id_fta_processus = $id_fta_processus_encours;
+        //$id_fta_processus = $id_fta_processus_encours;
         $req = "SELECT date_echeance_processus "
                 . "FROM fta_processus_delai "
                 . "WHERE id_fta='" . self::$objectFta->getIdFta() . "' AND id_fta_processus='" . $id_fta_processus . "' "
@@ -998,7 +959,8 @@ class Chapitre {
             $blod_end = "";
         }
         $bloc_suivi .= "<tr class=contenu><td>" . DatabaseDescription::getFieldDocLabel("fta_processus_delai", $champ) . "</td><td $bgcolor>";
-        $bloc_suivi .="$blod ${$champ} $blod_end";
+        //$bloc_suivi .="$blod ${$champ} $blod_end";
+        $bloc_suivi .="$blod " . $ftaModel->getEcheanceByIdProcessus($id_fta_processus) . " $blod_end";
         $bloc_suivi .="<input type=hidden name=$champ value=${$champ}>";
         $bloc_suivi.="</td></tr>";
 

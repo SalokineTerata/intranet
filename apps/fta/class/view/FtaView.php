@@ -38,12 +38,6 @@ class FtaView {
     private $ftaProcessusDelaiView;
 
     /**
-     * Suivi de projet relatif à la FTA
-     * @var FtaProcessusDelaiView Description
-     */
-    private $ftaSuiviProjetView;
-
-    /**
      * Chapitre à afficher dans la vue.
      * @var FtaChapitreModel
      */
@@ -189,7 +183,7 @@ class FtaView {
 
     public function getHtmlCommentaireChapitre() {
         $return = NULL;
-        
+
 
         $idFtaSuiviProjet = FtaSuiviProjetModel::getIdFtaSuiviProjetByIdFtaAndIdChapitre(
                         $this->ftaModel->getDataField(FtaModel::KEYNAME)->getFieldValue()
@@ -205,6 +199,17 @@ class FtaView {
 
         $return .= $HtmlSuiviProjet->getHtmlResult();
         return $return;
+    }
+
+    function getFtaSuiviProjetModel() {
+
+        $idFtaChapitre = $this->getFtaChapitreModel()->getKeyValue();
+        $idFtaSuiviProjet = FtaSuiviProjetModel::getIdFtaSuiviProjetByIdFtaAndIdChapitre(
+                        $this->getModel()->getKeyValue(), $idFtaChapitre
+        );
+        $ftaSuiviProjetModel = new FtaSuiviProjetModel($idFtaSuiviProjet);
+        $ftaSuiviProjetModel->setIsEditable($this->getIsEditable());
+        return $ftaSuiviProjetModel;
     }
 
 }

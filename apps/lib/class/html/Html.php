@@ -24,10 +24,11 @@ class Html {
     const PREFIXE_ID_DATA = AttributesGlobal::PREFIXE_ID_DATA;
     const PREFIXE_ID_ICON_STATUS = AttributesGlobal::PREFIXE_ID_ICON_STATUS;
     const PREFIXE_ID_ICON_UNDO = AttributesGlobal::PREFIXE_ID_ICON_UNDO;
+    const TYPE_OF_OBJECT_BOOLEAN = "BOOLEAN";
     const TYPE_OF_OBJECT_CALENDAR = "CALENDAR";
     const TYPE_OF_OBJECT_INPUTTEXT = "INPUTTEXT";
     const TYPE_OF_OBJECT_LIST = "LIST";
-    const TYPE_OF_OBJECT_BOOLEAN = "BOOLEAN";
+    const TYPE_OF_OBJECT_TEXTAREA = "TEXTAREA";
     const JS_SCRIPTNAME_AUTOSAVE = "ajaxAutosave";
     const JS_SCRIPTNAME_DOACTION = "ajaxDoAction";
 
@@ -161,6 +162,10 @@ class Html {
             default:
             case Html::TYPE_OF_OBJECT_BOOLEAN:
                 $htmlObject = new DataFieldToHtmlListBoolean($paramDataField);
+                break;
+            default:
+            case Html::TYPE_OF_OBJECT_TEXTAREA:
+                $htmlObject = new DataFieldToHtmlTextArea($paramDataField);
                 break;
             default:
                 throw new Exception("Type d'objet inconnu." . " Champs concerné:" . $paramDataField->getFieldName() . " ");

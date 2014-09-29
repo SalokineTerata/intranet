@@ -182,22 +182,29 @@ class FtaModel extends AbstractModel {
 
     public function getArrayModelFtaProcessusDelaiByIdProcessus() {
 
-        //Parcours de tous les processus dont un délai a déjà été resenseigné
-        foreach ($this->getArrayIdProcessusFromFtaProcessusDelai() as $rows) {
+        $arrayReturn = NULL;
+        $arrayIdProcessusFromFtaProcessusDelai = $this->getArrayIdProcessusFromFtaProcessusDelai();
 
-            //Extraction des données du tableau PHP
-            $idFtaProcessus = $rows[FtaProcessusModel::KEYNAME];
+        if ($arrayIdProcessusFromFtaProcessusDelai != NULL) {
+            //Parcours de tous les processus dont un délai a déjà été resenseigné
+            foreach ($arrayIdProcessusFromFtaProcessusDelai as $rows) {
 
-            //Stockage dans un tableau où la clef est l'ID du processus
-            $arrayModelFtaProcessusDelaiByIdProcessus[$idFtaProcessus] = new FtaProcessusDelaiModel($idFtaProcessus);
+                //Extraction des données du tableau PHP
+                $idFtaProcessus = $rows[FtaProcessusModel::KEYNAME];
+
+                //Stockage dans un tableau où la clef est l'ID du processus
+                $arrayModelFtaProcessusDelaiByIdProcessus[$idFtaProcessus] = new FtaProcessusDelaiModel($idFtaProcessus);
+            }
+            $arrayReturn = $arrayModelFtaProcessusDelaiByIdProcessus;
         }
-        return $arrayModelFtaProcessusDelaiByIdProcessus;
+        return $arrayReturn;
     }
 
     public function getArrayDataFieldEcheancesForProcessusCycle() {
 
         $dateEcheanceFta = $this->getDataField(FtaModel::FIELDNAME_DATE_ECHEANCE_FTA)->getFieldValue();
 
+        $isEcheanceForThisFtaExist = NULL;
 
         //Date par processus
         $annee_date_echeance_fta = substr($dateEcheanceFta, 0, 4);
@@ -208,9 +215,9 @@ class FtaModel extends AbstractModel {
 
 
         //Sélection de tous les processus appartenant au cycle de vie de la FTA
-        $result = $this->getArrayIdProcessusFromFtaCycleDeVie();
+        $arrayIdProcessusFromFtaCycleDeVie = $this->getArrayIdProcessusFromFtaCycleDeVie();
 
-        foreach ($result as $rows) {
+        foreach ($arrayIdProcessusFromFtaCycleDeVie as $rows) {
 
             //Extraction des données du tableau PHP
             $idFtaProcessus = $rows[FtaProcessusModel::KEYNAME];
@@ -220,11 +227,12 @@ class FtaModel extends AbstractModel {
             $modelFtaProcessusForCycle = new FtaProcessusModel($idFtaProcessus);
 
             //La FTA a-t-elle une échéance de renseignée pour ce processus ?
-            $isEcheanceForThisFtaExist = array_key_exists(
-                    $modelFtaProcessusForCycle->getKeyValue()
-                    , $arrayModelFtaProcessusDelaiByIdProcessus
-            );
-
+            if ($arrayModelFtaProcessusDelaiByIdProcessus != NULL) {
+                $isEcheanceForThisFtaExist = array_key_exists(
+                        $modelFtaProcessusForCycle->getKeyValue()
+                        , $arrayModelFtaProcessusDelaiByIdProcessus
+                );
+            }
 
             if ($isEcheanceForThisFtaExist) {
                 //Si il existe, on récupère ce délai
@@ -234,7 +242,7 @@ class FtaModel extends AbstractModel {
                 //Si il n'existe pas, il faut initialiser l'échéance
 
                 $modelFtaProcessusDelai = new FtaProcessusDelaiModel();
-                $modelFtaProcessusDelai->setModelFtaById($this->getModel()->getKeyValue());
+                $modelFtaProcessusDelai->setModelFtaById($this->getKeyValue());
                 $modelFtaProcessusDelai->setModelFtaProcessusById($modelFtaProcessusForCycle->getKeyValue());
 
                 //Mise à jour du tableau

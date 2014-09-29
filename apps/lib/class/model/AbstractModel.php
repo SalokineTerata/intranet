@@ -66,6 +66,11 @@ class AbstractModel {
         $this->getRecord()->saveToDatabase();
     }
 
-}
+    public function getHtmlDataField($paramFieldName) {
+        return Html::convertDataFieldToHtml(
+                        $this->getDataField($paramFieldName)
+                        , $this->getIsEditable()
+        );
+    }
 
-?>
+}

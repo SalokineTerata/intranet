@@ -930,8 +930,8 @@ class Chapitre {
         if ($id_fta_processus <> FtaProcessusModel::PROCESSUS_PUBLIC) {
 
             //Commentaire sur le Chapitre
-            $bloc_suivi .= $ftaView->getHtmlCommentaireChapitre();
-
+            //$bloc_suivi .= $ftaView->getHtmlCommentaireChapitre();
+            $bloc_suivi .= $ftaView->getFtaSuiviProjetModel()->getHtmlDataField(FtaSuiviprojetmodel::FIELDNAME_COMMENTAIRE_SUIVI_PROJET);
             if (!$value) {
                 $value = date("Y-m-d");
             }
@@ -964,11 +964,13 @@ class Chapitre {
         $bloc_suivi .="<input type=hidden name=$champ value=${$champ}>";
         $bloc_suivi.="</td></tr>";
 
-        $htmlObject = new HtmlInputCalendar(
-                $field_name = "date_validation_suivi_projet", $table_name = "fta_suivi_projet", $value = self::$objectFta->getFieldValue($table_name, $field_name), $is_editable_false, $warning_update = ${"diff_" . $table_name}[$field_name]
-        );
-        $bloc_suivi .= $htmlObject->getHtmlResult();
+        //$bloc_suivi .= $ftaView->getFtaSuiviProjetModel()->getDataField(FtaSuiviprojetmodel::FIELDNAME_DATE_VALIDATION_SUIVI_PROJET)->getFieldValue();
+        $bloc_suivi .= $ftaView->getFtaSuiviProjetModel()->getHtmlDataField(FtaSuiviprojetmodel::FIELDNAME_DATE_VALIDATION_SUIVI_PROJET);
 
+//        $htmlObject = new HtmlInputCalendar(
+//                $field_name = "date_validation_suivi_projet", $table_name = "fta_suivi_projet", $value = self::$objectFta->getFieldValue($table_name, $field_name), $is_editable_false, $warning_update = ${"diff_" . $table_name}[$field_name]
+//        );
+//        $bloc_suivi .= $htmlObject->getHtmlResult();
 //Date de validation
 //        $champ = "date_validation_suivi_projet";
 //        $bloc_suivi .= "<tr class=contenu><td>" . DatabaseDescription::getFieldDocLabel("fta_suivi_projet", $champ) . "</td><td>";
@@ -981,20 +983,18 @@ class Chapitre {
 //            $bloc_suivi .="<input type=hidden name=$champ value=${$champ}>";
 //        }
 //        $bloc_suivi.="</td></tr>";
-
-        $field_name = "date_validation_suivi_projet";
-        $table_name = "fta_suivi_projet";
-        if ($is_editable) {
-            $value = date("Y-m-d");
-        } else {
-            $value = self::$objectFta->getFieldValue($table_name, $field_name);
-        }
-
-        $htmlObject = new HtmlInputCalendar(
-                $field_name, $table_name, $value, $is_editable_false, $warning_update = ${"diff_" . $table_name}[$field_name]
-        );
-        $bloc_suivi .= $htmlObject->getHtmlResult();
-
+//        $field_name = "date_validation_suivi_projet";
+//        $table_name = "fta_suivi_projet";
+//        if ($is_editable) {
+//            $value = date("Y-m-d");
+//        } else {
+//            $value = self::$objectFta->getFieldValue($table_name, $field_name);
+//        }
+//
+//        $htmlObject = new HtmlInputCalendar(
+//                $field_name, $table_name, $value, $is_editable_false, $warning_update = ${"diff_" . $table_name}[$field_name]
+//        );
+//        $bloc_suivi .= $htmlObject->getHtmlResult();
         //Signature / Vérrouillage
         $field_name = "signature_validation_suivi_projet";
         $table_name = "fta_suivi_projet";
@@ -1013,7 +1013,7 @@ class Chapitre {
             $bloc_suivi .= "<input type=checkbox name=$field_name value=" . $_SESSION["id_user"] . " $checked $disabled/>";
         } else {
 
-//Recherche de la personnes ayant signé ce chapitre
+            //Recherche de la personnes ayant signé ce chapitre
             if (self::$objectFta->getFieldValue($table_name, $field_name)) { //Le chapitre est signé
                 $req = "SELECT prenom, nom FROM salaries WHERE id_user=" . self::$objectFta->getFieldValue($table_name, $field_name);
                 $result = DatabaseOperation::query($req);

@@ -63,7 +63,7 @@ Sinon, accéder à l'<a href=index.php> intranet en vous authentifiant ici</a><b
     echo "</head>";
 //} else {
 
-    $req = "SELECT * FROM ".$conf->mysql_table_authentification." WHERE (login = '$autologin')";
+    $req = "SELECT * FROM ".$globalConfig->mysql_table_authentification." WHERE (login = '$autologin')";
     //echo $req;
     $q1 = DatabaseOperation::query($req);
     //"$autologin TEST".mysql_num_rows($q1);

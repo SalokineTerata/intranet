@@ -3,13 +3,8 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/E:/weblocal/intranet/apps/fta/class/Chapitre.php</file>
-            <file>file:/E:/weblocal/intranet/apps/lib/class/model/AbstractModel.php</file>
-            <file>file:/E:/weblocal/intranet/apps/fta/class/view/FtaSuiviProjetView.php</file>
-            <file>file:/E:/weblocal/intranet/apps/fta/class/view/AbstractView.php</file>
-            <file>file:/E:/weblocal/intranet/apps/lib/class/model/FtaModel.php</file>
-            <file>file:/E:/weblocal/intranet/apps/fta/class/view/FtaView.php</file>
-            <file>file:/E:/weblocal/intranet/apps/lib/class/model/FtaSuiviProjetModel.php</file>
+            <file>file:/D:/weblocal/intranet-v3/apps/lib/session.php</file>
+            <file>file:/D:/weblocal/intranet-v3/index.php</file>
         </group>
     </open-files>
 </project-private>

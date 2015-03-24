@@ -48,8 +48,8 @@ foreach ($result1 as $rows1) {
         $i = 1;
     }
     echo "<td align=center>";
-    echo "<a href=" . $conf->site_subdir . "/$nom_intranet_modules target=_top>";
-    echo "<img src=" . $conf->site_subdir . "/$nom_intranet_modules/images/bouton_module.png width=34 height=34 border=0 alt=`$nom_usuel_intranet_modules`>";
+    echo "<a href=" . $globalConfig->site_subdir . "/$nom_intranet_modules target=_top>";
+    echo "<img src=" . $globalConfig->site_subdir . "/$nom_intranet_modules/images/bouton_module.png width=34 height=34 border=0 alt=`$nom_usuel_intranet_modules`>";
     echo "</a>";
     echo "</td>";
     $i = $i + 1;
@@ -85,12 +85,12 @@ if ($id_user) {//Si l'utilisateur est connecté
         }
         echo "<td align=center>";
         echo "<a href="
-        . $conf->site_subdir
+        . $globalConfig->site_subdir
         . "/"
         . $nom_intranet_modules
         . "$additional_ref target=_top>";
         echo "<img src="
-        . $conf->site_subdir
+        . $globalConfig->site_subdir
         . "/"
         . $nom_intranet_modules
         . "/images/bouton_module.png width=34 height=34 border=0 alt=`$nom_usuel_intranet_modules`>";

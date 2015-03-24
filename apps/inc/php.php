@@ -32,6 +32,11 @@ require_once("../lib/class/Lib.php");
 require_once("../lib/class/Logger.php");
 require_once("../lib/class/session/SessionSaveAndRestoreAbstract.php");
 
+// Configuration des environnements
+require_once("../conf/EnvironmentConf.php");
+require_once("../conf/EnvironmentAbstract.php");
+require_once("../conf/EnvironmentCod.php");
+
 // Moteur de base de données
 require_once("../lib/class/database/DatabaseOperation.php");
 require_once("../lib/class/database/DatabaseDescription.php");
@@ -168,5 +173,5 @@ if ($module != "lib") {
     //Inclusion de la librairie de fonction propre au module
     require_once ("../$module/functions.php");
 }
-$conf = $_SESSION["conf"];
+$globalConfig = $_SESSION["globalConfig"];
 ?>

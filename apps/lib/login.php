@@ -14,7 +14,7 @@ $_SERVER["REQUEST_METHOD"];   //Méthode d'envoi des informations: la méthode G
                               //on voit le login et le mot de passe dans la barre d'adresse !!
 
 //Variables envoyées par la page d'appel
-$bdd = $conf->mysql_database_name;
+$bdd = $globalConfig->mysql_database_name;
 $id_user = Lib::isDefined("id_user");
 $login = Lib::isDefined("login");
 $num_log = Lib::isDefined("num_log");
@@ -24,7 +24,7 @@ $session = Lib::isDefined("session");
 $session_id = session_id();
 $tentative = Lib::isDefined("tentative");
 $identite  = Lib::isDefined("identite ");
-$mysql_table_authentification = $conf->mysql_table_authentification;
+$mysql_table_authentification = $globalConfig->mysql_table_authentification;
 
 //Démarrage de la session si celle-ci n'a pas été démarrée.
 if(empty($session_id)) session_start();
@@ -67,7 +67,7 @@ if ($login)
       $nb1 = mysql_numrows($q1);
       */
       
-      if (!identification1($conf->mysql_table_authentification, $login, $pass))
+      if (!identification1($globalConfig->mysql_table_authentification, $login, $pass))
       {
             /* nouvelle fonction de test des tentatives */
             if($tentative==0){$tentative=1;}

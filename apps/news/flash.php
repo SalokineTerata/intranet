@@ -146,7 +146,7 @@ default:
      <frameset border=0 frameborder=0 framespacing=0 COLS=150,*>
         <frame NAME=g SRC=../lib/frame_gauche.php?module=$module&menu=$menu NORESIZE>
   <frameset border=0 frameborder=0 framespacing=0>
-        <frame NAME=d_b SRC=http://".$conf->site."/news.swf NORESIZE>
+        <frame NAME=d_b SRC=http://".$globalConfig->site."/news.swf NORESIZE>
 ";
 /*      <frameset rows=58,* border=1 frameborder=0 framespacing=0>
                <frame name=top scrolling=yes noresize src=../lib/debut_page.php>

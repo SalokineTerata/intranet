@@ -443,7 +443,7 @@ echo"<table width=\"100%\" border=\"1\" cellspacing=0 cellpadding=\"3\"><tr>";
       $numa= mysql_result($result, $i, num_article);
       $taille= mysql_result($result, $i, taille);
       $date= mysql_result($result, $i, date_crea);
-      $conf= mysql_result($result, $i, nivo_conf);
+      $globalConfig= mysql_result($result, $i, nivo_conf);
       echo "<tr bgcolor=\"#FF3333\" class=\"logFFCC66\">";
 
 $jour = substr($date, 8, 2);
@@ -461,7 +461,7 @@ $sujet=stripslashes($sujet);
       $ouou="recherchefine";
       taille2($taille,$numa,"",$ouou);
       echo "<br>détail de l'article</a></td>";
-      echo"          <td class=\"txttabl\" width=\"20\" bgcolor=\"#FFFFCC\">$conf</td>";
+      echo"          <td class=\"txttabl\" width=\"20\" bgcolor=\"#FFFFCC\">$globalConfig</td>";
       echo "</tr>";
       $i++;
      }
@@ -553,7 +553,7 @@ echo"<table width=\"100%\" border=\"1\" cellspacing=0 cellpadding=\"3\"><tr>";
       $numa= mysql_result($result, $i, num_article);
       $taille= mysql_result($result, $i, taille);
       $date= mysql_result($result, $i, date_crea);
-      $conf= mysql_result($result, $i, nivo_conf);
+      $globalConfig= mysql_result($result, $i, nivo_conf);
 
 
 
@@ -574,7 +574,7 @@ $sujet=stripslashes($sujet);
 
       taille3($taille,$numa,"",$ouou);
       echo "<br>détail de l'article</a></td>";
-      echo"          <td class=\"txttabl\" width=\"20\" bgcolor=\"#FFFFCC\">$conf</td>";
+      echo"          <td class=\"txttabl\" width=\"20\" bgcolor=\"#FFFFCC\">$globalConfig</td>";
       echo "</tr>";
       $i++;
      }

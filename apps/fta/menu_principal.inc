@@ -112,7 +112,7 @@ if (
 }
 
 //Migration de V1 vers V2
-if ($conf->exec_debug) {
+if ($globalConfig->exec_debug) {
     echo "<br>";
     echo "<a href=./migration.php target=_top>Administration du module</a>";
     echo "</td>";

@@ -576,7 +576,7 @@ function popup($paramPopupName
 function print_page_begin($disable_full_page = FALSE, $menu_file = NULL, $conf = null) {
 
     if ($conf == null) {
-        $conf = $_SESSION["conf"];
+        $conf = $_SESSION["globalConfig"];
     }
     $module = Lib::getModule();
     $title = Lib::setTitle();

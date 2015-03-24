@@ -273,8 +273,8 @@ function StartTimer(delai) {
       $date_crea=affiche_date($date_crea);
       $req2="select serv_conf from modes where id_user='$id_user' and id_service='$id_art_serv'";
       $result2=DatabaseOperation::query($req2);
-      $conf=mysql_result($result2, 0, serv_conf);
-      if ($conf >= $nivo_conf)
+      $globalConfig=mysql_result($result2, 0, serv_conf);
+      if ($globalConfig >= $nivo_conf)
       {
       $titre_art=stripslashes($titre_art);
       $sujet=stripslashes($sujet);

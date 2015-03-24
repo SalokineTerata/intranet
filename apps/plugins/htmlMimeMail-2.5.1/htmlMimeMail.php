@@ -137,7 +137,7 @@ class htmlMimeMail
         }
 
         //$this->smtp_params['host'] = 'localhost';
-        $this->smtp_params['host'] = $_SESSION["conf"]->smtp_server_adress;
+        $this->smtp_params['host'] = $_SESSION["globalConfig"]->smtp_server_adress;
         $this->smtp_params['port'] = 25;
         //$this->smtp_params['helo'] = $helo;
         $this->smtp_params['helo'] = 'linux.agis.fr';

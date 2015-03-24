@@ -4,16 +4,16 @@ $id_user = Lib::isDefined("id_user");
 $repere = Lib::isDefined("repere");
 $prenom = Lib::isDefined("prenom");
 $message = null;
-$conf = $_SESSION["conf"];
+$globalConfig = $_SESSION["globalConfig"];
 
 if ($repere != "") {
     $position = $repere;
 }
 
-switch ($conf->exec_environnement) {
+switch ($globalConfig->exec_environnement) {
     case GlobalConfig::ENV_COD:
         $logo = "logo_developpeur.gif";
-        $message = "<BR><FONT SIZE=4><marquee>Environnement développeur</marquee></FONT>" . $conf->getHtmlUrlDocApiGen() . "</CENTER>";
+        $message = "<BR><FONT SIZE=4><marquee>Environnement développeur</marquee></FONT>" . $globalConfig->getHtmlUrlDocApiGen() . "</CENTER>";
         break;
     case GlobalConfig::ENV_DEV:
         $logo = "logo_developpement.gif";
@@ -58,7 +58,7 @@ if (0) {
        ";
 }
 echo $message;
-if ($conf->exec_debug) {
+if ($globalConfig->exec_debug) {
     echo "<h4>Mode Debugger</h4>";
 }
 echo "

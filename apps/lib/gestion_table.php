@@ -17,7 +17,7 @@ $mysql_database;  //voir session.php
 //Paramétrage de la page
 $lang='fr';
 $server=1;
-$db=$_SESSION["conf"]->mysql_database_name;
+$db=$_SESSION["globalConfig"]->mysql_database_name;
 //$goto='tbl_properties.php';
 $goto='sql.php';
 $sql_query="SELECT * FROM $nom_table";

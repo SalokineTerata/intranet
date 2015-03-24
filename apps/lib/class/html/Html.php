@@ -91,8 +91,8 @@ class Html {
          * **************************
          */
 //$conf = new conf();
-//$conf = $_SESSION["conf"];
-        $bdd = $_SESSION["conf"]->mysql_database_name;            //Variable Globale definissant le nom de la base de donnees MySQL
+//$conf = $_SESSION["globalConfig"];
+        $bdd = $_SESSION["globalConfig"]->mysql_database_name;            //Variable Globale definissant le nom de la base de donnees MySQL
         $module = $_SESSION["module"];
         $nom_intranet_actions = Lib::isDefined("nom_intranet_actions");
         $comment = "";

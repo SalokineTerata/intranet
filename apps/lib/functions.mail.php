@@ -80,7 +80,7 @@
 function envoismail($sujetmail, $text, $destinataire, $expediteur, $conf = null) {
 
     if ($conf == null) {
-        $conf = $_SESSION["conf"];
+        $conf = $_SESSION["globalConfig"];
     }
     if ($conf->smtp_service_enable == true) {
 

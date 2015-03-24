@@ -95,7 +95,7 @@ echo "
      <tr class=titre_principal><td>
 
          ATTENTION CETTE PAGE VA PROVOQUER UNE PERTE DE DONNEES<br>
-         Site concerné: $conf->site<br>
+         Site concerné: $globalConfig->site<br>
          Module concerné: $module<br>
 
      </td></tr>

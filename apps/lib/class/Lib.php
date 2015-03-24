@@ -112,11 +112,12 @@ class Lib {
     public static function setModule($module = null) {
 
         $return = "";
-        $conf = $_SESSION["conf"];
+        $conf = new GlobalConfig();
         $scriptName = $_SERVER["SCRIPT_NAME"];
         if ($module == null) {
-            $return = substr($scriptName, strlen($conf->site_subdir . "/"));
-            $return = substr($return, 0, strlen($return) - strlen(strstr($return, '/')));
+            $subdir = "/" . $conf->getConf()->getUrlRoot() . "/" . $conf->getConf()->getUrlSubdir() . "/";
+            $tmp = substr($scriptName, strlen($subdir));
+            $return = substr($tmp, 0, strlen($tmp) - strlen(strstr($tmp, '/')));
         } else {
             $return = $module;
         }
@@ -134,7 +135,8 @@ class Lib {
         $return = "";
 
         if ($title == null) {
-            $title = GlobalConfig::SITE_TITLE
+            $globalConfig = new GlobalConfig();
+            $title = $globalConfig->getConf()->getApplicationTitle()
                     . " (v" . $_SESSION["intranet_modules"]["lib"]["version_intranet_modules"] . ") "
                     . " - "
                     . $_SESSION["intranet_modules"][self::$module]["nom_usuel_intranet_modules"]

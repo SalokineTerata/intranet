@@ -171,7 +171,7 @@ if(!$error)
       if($abreviation_fta_transition=="V")
       {
           //Ouverture de la base ERP Data sync
-          if ($conf->exec_environnement=="production"){
+          if ($globalConfig->exec_environnement=="production"){
              $extension="mdb";
           }
           else{

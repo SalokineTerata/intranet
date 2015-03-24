@@ -217,7 +217,7 @@
                                              )
                    )
                  {
-                     if ($conf->exec_environnement!="production"){
+                     if ($globalConfig->exec_environnement!="production"){
 
                         $extension="-dev";
 

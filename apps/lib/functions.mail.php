@@ -88,7 +88,7 @@ function envoismail($sujetmail, $text, $destinataire, $expediteur, $conf = null)
          * Dans le l'environnement développement, 
          * Toutes les adresses emails sont redirigées vers utilisateurs.fta@ldc.fr
          */
-        if ($conf->exec_environnement == GlobalConfig::ENV_DEV) {
+        if ($conf->exec_environnement == EnvironmentConf::ENV_DEV) {
             $destinataire_orig = $destinataire;
             $destinataire = $conf->smtp_developemnent_email_user_redirection;
 

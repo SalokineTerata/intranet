@@ -28,8 +28,10 @@ class EnvironmentConf {
 
     //Variables
     //A classer par ordre alphabérique
-    protected $applicationName = null;
+    private $applicationName = null;
     private $applicationTitle = null;
+    private $applicationLogo = null;
+    private $applicationLogoMessage = null;
     private $execDebugEnable = null;
     private $execEnvironnement = null;
     private $ldapServerName = null;
@@ -49,8 +51,24 @@ class EnvironmentConf {
     private $urlServer = null;
     private $urlSubdir = null;
 
+    function getApplicationLogoMessage() {
+        return $this->applicationLogoMessage;
+    }
+
+    function setApplicationLogoMessage($applicationLogoMessage) {
+        $this->applicationLogoMessage = $applicationLogoMessage;
+    }
+
+    function getApplicationLogo() {
+        return $this->applicationLogo;
+    }
+
+    function setApplicationLogo($applicationLogo) {
+        $this->applicationLogo = $applicationLogo;
+    }
+
     public function getUrlFullRoot() {
-        return $this->getUrlProtocol() . "://" 
+        return $this->getUrlProtocol() . "://"
                 . $this->getUrlServer() . "/"
                 . $this->getUrlRoot() . "/"
                 . $this->getUrlSubdir()
@@ -66,7 +84,8 @@ class EnvironmentConf {
     }
 
     public function getHtmlUrlDocApiGen() {
-        return "<a href=\"" . $this->getUrlFullRoot() . "/" . self::DOC_APIGEN_DIR . "\" target=\"_blank\"><img src=../lib/images/apigen.jpeg width=15  border=0> - Doc ApiGen</a>";
+        return "<a href=\"" . $this->getUrlFullRoot() . "/"
+                . self::DOC_APIGEN_DIR . "\" target=\"_blank\"><img src=../lib/images/apigen.jpeg width=15  border=0> - Doc ApiGen</a>";
     }
 
     public function getApplicationName() {

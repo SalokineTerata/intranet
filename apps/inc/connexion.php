@@ -3,35 +3,33 @@
 $id_user = Lib::isDefined("id_user");
 $repere = Lib::isDefined("repere");
 $prenom = Lib::isDefined("prenom");
-$message = null;
-$globalConfig = $_SESSION["globalConfig"];
+$lieu_geo = Lib::isDefined("lieu_geo");
 
+$globalConfig = new GlobalConfig();
+$message = $globalConfig->getConf()->getApplicationLogoMessage();
+$logo = $globalConfig->getConf()->getApplicationLogo();
+
+/**
+ * @TODO A quoi sert cette partie ?
+ */
 if ($repere != "") {
     $position = $repere;
 }
 
-switch ($globalConfig->exec_environnement) {
-    case GlobalConfig::ENV_COD:
-        $logo = "logo_developpeur.gif";
-        $message = "<BR><FONT SIZE=4><marquee>Environnement développeur</marquee></FONT>" . $globalConfig->getHtmlUrlDocApiGen() . "</CENTER>";
-        break;
-    case GlobalConfig::ENV_DEV:
-        $logo = "logo_developpement.gif";
-        $message = "<BR><FONT SIZE=4><marquee>Environnement développement</marquee></FONT></CENTER>";
-        break;
-
-    case GlobalConfig::ENV_PRD:
-        $logo = "logo_exploitation.png";
-        switch ($lieu_geo) {
-            case 11:
-                $logo = "logo_exploitation_ati.png";
-                break;
-            case 12:
-                $logo = "logo_exploitation_epc.png";
-                break;
-        }
-        break;
+/**
+ * Personnalisation selon la société de rattachement.
+ */
+if ($globalConfig->getConf()->getExecEnvironment() == EnvironmentConf::ENV_PRD) {
+    switch ($lieu_geo) {
+        case 11:
+            $logo = "logo_exploitation_ati.png";
+            break;
+        case 12:
+            $logo = "logo_exploitation_epc.png";
+            break;
+    }
 }
+
 //Pour les grandes occasions !!
 if (0) {
     //Joyeux Noel

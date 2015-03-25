@@ -13,15 +13,24 @@
 class GlobalConfig {
 
     /**
-     *
      * @var EnvironmentConf
      */
     private $conf = null;
+    private $confIsInitialized = FALSE;
 
     function __construct() {
         if (gettype($_SESSION["globalConfig"]) == "object") {
             $this->setConf($_SESSION["globalConfig"]->getConf());
+            $this->setConfIsInitialized(TRUE);
         }
+    }
+
+    function getConfIsInitialized() {
+        return $this->confIsInitialized;
+    }
+
+    function setConfIsInitialized($confIsInitialized) {
+        $this->confIsInitialized = $confIsInitialized;
     }
 
     function getConf() {

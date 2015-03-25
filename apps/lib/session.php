@@ -19,17 +19,13 @@ session_start();
  * Restauration de la session si précédemment initialisée
  */
 $globalConfig = new GlobalConfig();
-if ($globalConfig != NULL) {
+if ($globalConfig->getConfIsInitialized()) {
     /**
      * Si le mode Debug de session est activé, on reconstruit systématiquement la session
      */
     if ($globalConfig->getConf()->getSessionDebugEnable()) {
         session_destroy();
     }
-} else {
-    /**
-     * Sinon on créer une conf vierge.
-     */
 }
 
 /**
@@ -119,7 +115,7 @@ if ($_SESSION["session_init"] == "variable") {
             . "WHERE public_intranet_modules='1' "
             . "ORDER BY classement_intranet_modules DESC"
     ;
-    $_SESSION["intranet_module_public"] = DatabaseOperation::query($req, "table");
+    $_SESSION["intranet_module_public"] = DatabaseOperation::query($req);
 
     //Chargement des méta-données des tables et champs
     DatabaseDescription::buildDatabaseDescription();

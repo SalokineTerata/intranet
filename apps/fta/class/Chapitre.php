@@ -229,19 +229,19 @@ class Chapitre {
         );
         $bloc.=$htmlObject->getHtmlResult();
 
-//Désignation Commerciale de l'Article
+        //Désignation Commerciale de l'Article
         $htmlObject = new htmlInputText(
                 $field_name = "designation_commerciale_fta", $table_name = ObjectFta::TABLE_FTA_NAME, $value = self::$objectFta->getFieldValue($table_name, $field_name), $is_editable, $warning_update = ${"diff_" . $table_name}[$field_name], $size = 110, $maxlength = 150
         );
         $bloc.=$htmlObject->getHtmlResult();
 
-//Poids élémentaire
+        //Poids élémentaire
         $htmlObject = new htmlInputKg(
                 $field_name = "Poids_ELEM", $table_name = ObjectFta::TABLE_ARTI_NAME, $value = self::$objectFta->getFieldValue($table_name, $field_name), $is_editable, $warning_update = ${"diff_" . $table_name}[$field_name], $size = 20, $maxlength = 150
         );
         $bloc.=$htmlObject->getHtmlResult();
 
-//PCB
+        //PCB
         $htmlObject = new htmlInputText(
                 $field_name = "NB_UNIT_ELEM", $table_name = ObjectFta::TABLE_ARTI_NAME, $value = self::$objectFta->getFieldValue($table_name, $field_name), $is_editable, $warning_update = ${"diff_" . $table_name}[$field_name]
         );
@@ -259,13 +259,13 @@ class Chapitre {
         );
         $bloc.=$htmlObject->getHtmlResult();
 
-//Date d'échéance de la FTA
+        //Date d'échéance de la FTA
         $htmlObject = new HtmlInputCalendar(
                 $field_name = "date_echeance_fta", $table_name = ObjectFta::TABLE_FTA_NAME, $value = self::$objectFta->getFieldValue($table_name, $field_name), $is_editable, $warning_update = ${"diff_" . $table_name}[$field_name]
         );
         $bloc .= $htmlObject->getHtmlResult();
 
-//Date d'échéance des processus
+        //Date d'échéance des processus
         $bloc .= ObjectFta::showDatesEcheanceProcessus(
                         $id_fta, $abreviation_fta_etat = self::$objectFta->getFieldValue(
                         ObjectFta::TABLE_ETAT_NAME, "abreviation_fta_etat"
@@ -810,11 +810,11 @@ class Chapitre {
         $synthese_action = self::$synthese_action;
         $is_editable = self::$is_editable;
         $isEditable = $is_editable;
-        $is_editable_false = false;
+        //$is_editable_false = false;
 
 
         $bloc.="<tr class=titre_principal><td class>Demandeur</td></tr>";
-        $objectFta = new ObjectFta($id_fta);
+        //$objectFta = new ObjectFta($id_fta);
 
         $idFta = $id_fta;
         $ftaModel = new FtaModel($idFta);

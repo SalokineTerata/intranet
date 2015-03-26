@@ -1,6 +1,6 @@
 <?php
-//Inclusion
 
+//Inclusion
 //La déconnexion s'effectue dans session.php
 //include ("functions.php");
 //include ("../lib/session.php");
@@ -9,12 +9,11 @@ require_once '../inc/php.php';
 
 //Variables:
 
-$page=$_SERVER["HTTP_REFERER"];     //Page qui a demandé l'authentification
+$page = $_SERVER["HTTP_REFERER"];     //Page qui a demandé l'authentification
 $_SERVER["REQUEST_METHOD"];   //Méthode d'envoi des informations: la méthode GET n'est pas recommandée car
-                              //on voit le login et le mot de passe dans la barre d'adresse !!
-
+//on voit le login et le mot de passe dans la barre d'adresse !!
 //Variables envoyées par la page d'appel
-$bdd = $globalConfig->mysql_database_name;
+$bdd = $globalConfig->getConf()->getMysqlDatabaseName();
 $id_user = Lib::isDefined("id_user");
 $login = Lib::isDefined("login");
 $num_log = Lib::isDefined("num_log");
@@ -23,178 +22,167 @@ $position = Lib::isDefined("position");
 $session = Lib::isDefined("session");
 $session_id = session_id();
 $tentative = Lib::isDefined("tentative");
-$identite  = Lib::isDefined("identite ");
-$mysql_table_authentification = $globalConfig->mysql_table_authentification;
+$identite = Lib::isDefined("identite ");
+$globalConfig = new GlobalConfig();
+$mysql_table_authentification = $globalConfig->getConf()->getMysqlDatabaseAuthentificationTableName();
 
 //Démarrage de la session si celle-ci n'a pas été démarrée.
-if(empty($session_id)) session_start();
+if (empty($session_id))
+    session_start();
 
 
-/*---------------------------------
-    destruction de la session
----------------------------------*/
+/* ---------------------------------
+  destruction de la session
+  --------------------------------- */
 
-if ($session == "logout")
-{
-   
-   DatabaseOperation::query("update log set date = now() where ((num_log='$num_log') and (id_user='$id_user'))");
-   $pass = "";
-   $id_user = "";
-   $login="";
-   session_destroy();
-   header("Location: ../index.php");
-   /* effacement des fichiers creer dans la session */
+if ($session == "logout") {
+
+    DatabaseOperation::query("update log set date = now() where ((num_log='$num_log') and (id_user='$id_user'))");
+    $pass = "";
+    $id_user = "";
+    $login = "";
+    session_destroy();
+    header("Location: ../index.php");
+    /* effacement des fichiers creer dans la session */
 }
 
 
 
 
-/*------------------------------------------------
-fonction de recherche du pass par session ou log
--------------------------------------------------*/
-if ($login)
-{
-      // on redirige avec une variable qui informe qu'on navigue sans identification en niveau 1
-      /*
+/* ------------------------------------------------
+  fonction de recherche du pass par session ou log
+  ------------------------------------------------- */
+if ($login) {
+    // on redirige avec une variable qui informe qu'on navigue sans identification en niveau 1
+    /*
       $req_authentification = "SELECT * FROM salaries WHERE ( "
-                            . "(login = '$login') AND "
-                            . "(pass = PASSWORD('$pass')) AND "
-                            . "(blocage='non') AND "
-                            . "(actif='oui') "
-                            . ")"
-                            ;
+      . "(login = '$login') AND "
+      . "(pass = PASSWORD('$pass')) AND "
+      . "(blocage='non') AND "
+      . "(actif='oui') "
+      . ")"
+      ;
       $q1 = DatabaseOperation::query($req_authentification);
       $nb1 = mysql_numrows($q1);
-      */
-      
-      if (!identification1($globalConfig->mysql_table_authentification, $login, $pass))
-      {
-            /* nouvelle fonction de test des tentatives */
-            if($tentative==0){$tentative=1;}
-            if($identite=="$login")
-            {
-                $tentative++;
-                if($tentative>=3)
-                {
-                     $unique=DatabaseOperation::query("select * from salaries where login='$identite' and blocage='oui'");
-                     $reponse=mysql_num_rows($unique);
-                     if ($reponse!=1)
-                     {
+     */
 
-                         /* envois du mail d'information à l'utilisateur concerné */
-                         $corpsmail="Votre compte pour l'intranet Agis a été bloqué suite à trois tentatives de connexion <br>";
-                         $corpsmail.="avec un mot de passe invalide.<br>";
-                         $corpsmail.="Contactez un Administrateur pour réactiver votre compte.<br>";
+    if (!identification1($mysql_table_authentification, $login, $pass)) {
+        /* nouvelle fonction de test des tentatives */
+        if ($tentative == 0) {
+            $tentative = 1;
+        }
+        if ($identite == "$login") {
+            $tentative++;
+            if ($tentative >= 3) {
+                $unique = DatabaseOperation::query("select * from salaries where login='$identite' and blocage='oui'");
+                $reponse = mysql_num_rows($unique);
+                if ($reponse != 1) {
 
-                         $mailadmin=DatabaseOperation::query("select mail from salaries where id_type=4 and actif='oui'");
-                         while($rowsmail=mysql_fetch_array($mailadmin))
-                         {
-                              $corpsmail.=" - $rowsmail[mail] <br>";
-                         }
+                    /* envois du mail d'information à l'utilisateur concerné */
+                    $corpsmail = "Votre compte pour l'intranet Agis a été bloqué suite à trois tentatives de connexion <br>";
+                    $corpsmail.="avec un mot de passe invalide.<br>";
+                    $corpsmail.="Contactez un Administrateur pour réactiver votre compte.<br>";
 
-                         $adrfrom="postmaster@agis-sa.fr";
-                         $recupmail=DatabaseOperation::query("select mail from salaries where login='$identite'");
-                         $colonnemail=mysql_fetch_array($recupmail);
-                         $adrTo=$colonnemail[mail];
-                         $sujet="connexion intranet Agis";
-                         /*Constition du corps du mail*/
-                         $rep=envoismail($sujet,$corpsmail,$adrTo,$adrfrom);
-                         $titou=DatabaseOperation::query("update salaries set blocage='oui' where (login='$identite')");
-                      }
+                    $mailadmin = DatabaseOperation::query("select mail from salaries where id_type=4 and actif='oui'");
+                    while ($rowsmail = mysql_fetch_array($mailadmin)) {
+                        $corpsmail.=" - $rowsmail[mail] <br>";
+                    }
+
+                    $adrfrom = "postmaster@agis-sa.fr";
+                    $recupmail = DatabaseOperation::query("select mail from salaries where login='$identite'");
+                    $colonnemail = mysql_fetch_array($recupmail);
+                    $adrTo = $colonnemail[mail];
+                    $sujet = "connexion intranet Agis";
+                    /* Constition du corps du mail */
+                    $rep = envoismail($sujet, $corpsmail, $adrTo, $adrfrom);
+                    $titou = DatabaseOperation::query("update salaries set blocage='oui' where (login='$identite')");
                 }
             }
-            else
-            {
-                $identite="$login";
-                $tentative=1;
-                $_SESSION["identite"];
-                $_SESSION["tentative"];
-            }
+        } else {
+            $identite = "$login";
+            $tentative = 1;
+            $_SESSION["identite"];
+            $_SESSION["tentative"];
+        }
 
-      /* fin nouvelles fonctions tests tentatives */
-      header("Location: $page");
+        /* fin nouvelles fonctions tests tentatives */
+        header("Location: $page");
+    } else {
 
-      }
-      else
-      {
+        //Création des variables une fois l'authentification terminé
+        if (!$id_user) {
 
-          //Création des variables une fois l'authentification terminé
-          if (!$id_user)
-          {
-
-              $req1 = "SELECT * FROM salaries WHERE ( "
+            $req1 = "SELECT * FROM salaries WHERE ( "
                     . "(login = '$login') AND "
                     . "(blocage='non') AND "
                     . "(actif='oui') "
                     . ")"
-                    ;
-              $q1 = DatabaseOperation::query($req1);
-              $rows = mysql_fetch_array($q1);
-              $prenom = $rows["prenom"];
-              $id_user = $rows["id_user"];
-              $id_catsopro = $rows["id_catsopro"];
-              $id_service = $rows["id_service"];
-              $id_type = $rows["id_type"];
-              $nom_famille_ses = $rows["nom"];
-              $mail_user = $rows["mail"];
-              $lieu_geo = $rows["lieu_geo"];
-              $portail_wiki_salaries = $rows["portail_wiki_salaries"];
+            ;
+            $q1 = DatabaseOperation::query($req1);
+            $rows = mysql_fetch_array($q1);
+            $prenom = $rows["prenom"];
+            $id_user = $rows["id_user"];
+            $id_catsopro = $rows["id_catsopro"];
+            $id_service = $rows["id_service"];
+            $id_type = $rows["id_type"];
+            $nom_famille_ses = $rows["nom"];
+            $mail_user = $rows["mail"];
+            $lieu_geo = $rows["lieu_geo"];
+            $portail_wiki_salaries = $rows["portail_wiki_salaries"];
 
-              $_SESSION["pass"]=$pass;
-              $_SESSION["nom_famille_ses"]=$nom_famille_ses;
-              $_SESSION["login"]=$login;
-              $_SESSION["prenom"]=$prenom;
-              $_SESSION["id_user"]=$id_user;
-              $_SESSION["id_catsopro"]=$id_catsopro;
-              $_SESSION["id_service"]=$id_service;
-              $_SESSION["id_type"]=$id_type;
-              $_SESSION["num_log"]=$num_log;
-              $_SESSION["position"]=$position;
-              //$_SESSION["bdd"]=$bdd;
-              $_SESSION["mail_user"]=$mail_user;
-              $_SESSION["lieu_geo"]=$lieu_geo;
-              $_SESSION["portail_wiki_salaries"]=$portail_wiki_salaries;
+            $_SESSION["pass"] = $pass;
+            $_SESSION["nom_famille_ses"] = $nom_famille_ses;
+            $_SESSION["login"] = $login;
+            $_SESSION["prenom"] = $prenom;
+            $_SESSION["id_user"] = $id_user;
+            $_SESSION["id_catsopro"] = $id_catsopro;
+            $_SESSION["id_service"] = $id_service;
+            $_SESSION["id_type"] = $id_type;
+            $_SESSION["num_log"] = $num_log;
+            $_SESSION["position"] = $position;
+            //$_SESSION["bdd"]=$bdd;
+            $_SESSION["mail_user"] = $mail_user;
+            $_SESSION["lieu_geo"] = $lieu_geo;
+            $_SESSION["portail_wiki_salaries"] = $portail_wiki_salaries;
 
-              /*--------------------------------------------------------------
+            /* --------------------------------------------------------------
               Appel de la page qui définit les droits d'accès de l'utilisateur
               dans l'ensemble des pages des modules
-              --------------------------------------------------------------*/
-              include ("droits_acces.php");
+              -------------------------------------------------------------- */
+            include ("droits_acces.php");
 
-              /*-------------------------------------------------------------
+            /* -------------------------------------------------------------
               Variables définissant que l'utilisateur est sur l'Intranet Agis
               cette variable est utile lorsque l'utilisateur utilie des
               applications autres
-              -------------------------------------------------------------*/
-              //Permet à phpMyAdmin d'identifier l'Intranet
-              $application_courante='intranet.agis.fr';
-              //session_register( 'application_courante' );
-              $mysql_user;      //voir session.php
-              $bdpass;          //Mot de passe NIV I - voir session.php
-              $mysql_database;  //voir session.php
+              ------------------------------------------------------------- */
+            //Permet à phpMyAdmin d'identifier l'Intranet
+            $application_courante = 'intranet.agis.fr';
+            //session_register( 'application_courante' );
+            $mysql_user;      //voir session.php
+            $bdpass;          //Mot de passe NIV I - voir session.php
+            $mysql_database;  //voir session.php
 
-              /* session_register('mysql_user');
+            /* session_register('mysql_user');
               session_register('bdpass');
               session_register('mysql_database');
- */
-              /*--------------------------------------------
+             */
+            /* --------------------------------------------
               Utilisé pour renvoyer un code d'erreur général
               --------------------------------------------/*
               session_register('erreur');
               $erreur=0;
-              */
-              /* creation de la ligne user dans la table log */
-              $req=DatabaseOperation::query("insert into log (id_user, date) values('$id_user', NOW())");
-              //$ng=DatabaseOperation::query("select * from log");
-              //$num_log=mysql_num_rows($ng);
-              $num_log=mysql_insert_id();
-              /*--- redirection si ok sur groupe et service propre ---*/
-              //$q1 = DatabaseOperation::query("SELECT * FROM $mysql_table_authentification WHERE ((login = '$login') AND (pass = '$pass'))");
-
-              //Page par défaut après un login réussi
-              header("Location: $page");
-          }
-     }
+             */
+            /* creation de la ligne user dans la table log */
+            $req = DatabaseOperation::query("insert into log (id_user, date) values('$id_user', NOW())");
+            //$ng=DatabaseOperation::query("select * from log");
+            //$num_log=mysql_num_rows($ng);
+            $num_log = mysql_insert_id();
+            /* --- redirection si ok sur groupe et service propre --- */
+            //$q1 = DatabaseOperation::query("SELECT * FROM $mysql_table_authentification WHERE ((login = '$login') AND (pass = '$pass'))");
+            //Page par défaut après un login réussi
+            header("Location: $page");
+        }
+    }
 }
-
 ?>

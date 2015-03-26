@@ -25,6 +25,7 @@ class EnvironmentConf {
     const LDAP_DEBUG = false;
     const URL_PROTOCOL = "http";
     const DOC_APIGEN_DIR = "doc/apigen";
+    const URL_EASYPHP = "http://127.0.0.1/home";
 
     //Variables
     //A classer par ordre alphabérique
@@ -83,9 +84,13 @@ class EnvironmentConf {
         $this->urlProtocol = $urlProtocol;
     }
 
-    public function getHtmlUrlDocApiGen() {
+    public function getHtmlUrlDoc() {
         return "<a href=\"" . $this->getUrlFullRoot() . "/"
-                . self::DOC_APIGEN_DIR . "\" target=\"_blank\"><img src=../lib/images/apigen.jpeg width=15  border=0> - Doc ApiGen</a>";
+                . self::DOC_APIGEN_DIR . "\" target=\"_blank\"><img src=../lib/images/apigen.jpeg width=15  border=0> - Doc ApiGen</a>"
+                . "<br>"
+                . "<a href=\"" 
+                . self::URL_EASYPHP . "\" target=\"_blank\"><img src=../lib/images/pma_icone.png width=15  border=0> - Administration EasyPHP</a>"
+        ;
     }
 
     public function getApplicationName() {

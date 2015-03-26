@@ -14,6 +14,8 @@ Par défaut, le nom du module est le répetoire courant
 //include ("./functions.php");
 require_once '../inc/main.php';
 
+$globalConfig = new GlobalConfig();
+
 if(!$action)
 {
    $titre="Erreur";
@@ -171,7 +173,7 @@ if(!$error)
       if($abreviation_fta_transition=="V")
       {
           //Ouverture de la base ERP Data sync
-          if ($globalConfig->exec_environnement=="production"){
+          if ($globalConfig->getConf()->getExecEnvironment() != EnvironmentConf::ENV_PRD){
              $extension="mdb";
           }
           else{

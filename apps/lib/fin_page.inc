@@ -6,7 +6,9 @@
  * include ("../inc/footer.php");
  */
 require_once '../inc/footer.php';
-if ($globalConfig->exec_debug) {
+$globalConfig = new GlobalConfig();
+
+if ($globalConfig->getConf()->getExecDebugEnable()) {
     $exec_debug_time_stop = microtime(true);
     $exec_debug_time_show = round($exec_debug_time_stop - $_SESSION["exec_debug_time_start"], 4) . ' seconds';
 

@@ -34,7 +34,7 @@ class EnvironmentCod extends EnvironmentAbstract {
         $this->getConf()->setApplicationName("intranet");
         $this->getConf()->setApplicationTitle(EnvironmentConf::SITE_TITLE);
         $this->getConf()->setApplicationLogo("logo_developpeur.gif");
-        $this->getConf()->setApplicationLogoMessage("<BR><FONT SIZE=4><marquee>Environnement développeur</marquee></FONT>" . $this->getConf()->getHtmlUrlDocApiGen() . "</CENTER>");
+        $this->getConf()->setApplicationLogoMessage("<BR><FONT SIZE=4><marquee>Environnement développeur</marquee></FONT>" . $this->getConf()->getHtmlUrlDoc() . "</CENTER>");
         $this->getConf()->setExecDebugEnable(FALSE);
         $this->getConf()->setExecEnvironnement(EnvironmentConf::ENV_COD);
         $this->getConf()->setLdapServerName(EnvironmentConf::LDAP_SERVER_NAME);

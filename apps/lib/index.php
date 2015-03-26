@@ -9,6 +9,9 @@ include("../inc/php.php");
 $autologin = Lib::isDefined("autologin");
 $enable_autologin = Lib::isDefined("autologin");
 
+$globalConfig = new GlobalConfig();
+
+
 //if ($conf->exec_debug) {
 //    echo "<h3>Mode Debugger</h3>";
 //}
@@ -63,7 +66,7 @@ Sinon, accéder à l'<a href=index.php> intranet en vous authentifiant ici</a><b
     echo "</head>";
 //} else {
 
-    $req = "SELECT * FROM ".$globalConfig->mysql_table_authentification." WHERE (login = '$autologin')";
+    $req = "SELECT * FROM ".$globalConfig->getConf()->getMysqlDatabaseAuthentificationTableName()." WHERE (login = '$autologin')";
     //echo $req;
     $q1 = DatabaseOperation::query($req);
     //"$autologin TEST".mysql_num_rows($q1);

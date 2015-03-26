@@ -26,6 +26,7 @@
 
 */
 
+$globalConfig = new GlobalConfig();      
 
 switch ($action)
 {
@@ -82,7 +83,7 @@ switch ($action)
      }
 
      //Retour dans la base en cours
-     mysql_select_db($globalConfig->mysql_database_name);
+     mysql_select_db($globalConfig->getConf()->getMysqlDatabaseName());
 
 
      //Redirection

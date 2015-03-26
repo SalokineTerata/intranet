@@ -56,7 +56,7 @@ if (0) {
        ";
 }
 echo $message;
-if ($globalConfig->exec_debug) {
+if ($globalConfig->getConf()->getExecDebugEnable()) {
     echo "<h4>Mode Debugger</h4>";
 }
 echo "

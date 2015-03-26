@@ -45,6 +45,8 @@ $conditionnement_expedition = Lib::getParameterFromRequest("conditionnement_expe
 $synthese_action = Lib::getParameterFromRequest("synthese_action");
 $societe_demandeur_fta = Lib::getParameterFromRequest("societe_demandeur_fta");
 //$id_classification_fta = Lib::getParameterFromRequest("id_classification_fta");
+$signature_validation_suivi_projet = Lib::getParameterFromRequest(FtaSuiviProjetModel::FIELDNAME_SIGNATURE_VALIDATION_SUIVI_PROJET);
+
 switch ($action) {
 
     /*
@@ -100,7 +102,7 @@ switch ($action) {
         
         //$id_fta_chapitre_encours = $objectFta->getFieldValue(ObjectFta::TABLE_SUIVI_PROJET_NAME, "id_fta_chapitre");
         
-        $signature_validation_suivi_projet = $objectFta->getFieldValue(ObjectFta::TABLE_SUIVI_PROJET_NAME, "signature_validation_suivi_projet");
+        //$signature_validation_suivi_projet = $objectFta->getFieldValue(ObjectFta::TABLE_SUIVI_PROJET_NAME, "signature_validation_suivi_projet");
 
         //$id_fta_chapitre = $id_fta_chapitre_encours;
         $recordChapitre = new DatabaseRecord("fta_chapitre", $id_fta_chapitre_encours);

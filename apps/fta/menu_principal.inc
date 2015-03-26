@@ -9,6 +9,8 @@ $module_modification = $module . "_modification";
 
 $fta_definition = Lib::isDefined("fta_definition");
 $fta_composition = Lib::isDefined("fta_composition");
+
+$globalConfig = new GlobalConfig();
 /*
   Menu accessible pour les utilisateurs ayant les droits
   en consultation sur ce module
@@ -112,7 +114,7 @@ if (
 }
 
 //Migration de V1 vers V2
-if ($globalConfig->exec_debug) {
+if ($globalConfig->getConf()->getExecDebugEnable()) {
     echo "<br>";
     echo "<a href=./migration.php target=_top>Administration du module</a>";
     echo "</td>";

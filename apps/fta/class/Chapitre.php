@@ -816,6 +816,7 @@ class Chapitre {
         $bloc.="<tr class=titre_principal><td class>Demandeur</td></tr>";
         //$objectFta = new ObjectFta($id_fta);
 
+        //Identifiant FTA
         $idFta = $id_fta;
         $ftaModel = new FtaModel($idFta);
         $ftaView = new FtaView($ftaModel);

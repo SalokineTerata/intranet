@@ -144,7 +144,7 @@ class Chapitre {
         return $return;
     }
 
-    protected static function buildChapitreCore() {
+    protected static function buildChapitreCore () {
         $return = "";
         switch (self::$recordChapitre->getFieldValue("nom_fta_chapitre")) {
             case "identite":
@@ -765,7 +765,33 @@ class Chapitre {
         $synthese_action = self::$synthese_action;
         $isEditable = self::$is_editable;
 
-        $bloc = "TEST";
+        $bloc="<tr class=titre_principal><td class>Test</td></tr>";
+                
+        
+        
+        //Identifiant FTA
+        $idFta = $id_fta;
+        $ftaModel = new FtaModel($idFta);
+        $ftaView = new FtaView($ftaModel);
+        $ftaView->setIsEditable($isEditable);
+        $ftaView->setFtaChapitreModelById(self::ID_CHAPITRE_IDENTITE);
+        
+        //Site d'assemblage
+        $bloc.=$ftaView->getHtmlDataField(FtaProcessusMultisite::FIELDNAME_ID_SITE_PROCESSUS_FTA_PROCESSUS_MULTISITE);
+        
+        //Site d'expedition
+        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_SITE_EXPEDITION_FTA);
+        
+        
+        //CNUD PREPARER PAR
+        $bloc.=$ftaView->getHtmlDataField(GeoModel::FIELDNAME_GEO_CNUD_PREPARER_PAR);
+        
+        //Code Douane 
+        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_CODE_DOUANE_FTA);
+        
+        //Libellé Code Douane 
+        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_CODE_DOUANE_LIBELLE_FTA);
+        
         
         return $bloc;
     }

@@ -16,6 +16,8 @@ class FtaModel extends AbstractModel {
     const FIELDNAME_CALIBRE_DEFAUT = "calibre_defaut";
     const FIELDNAME_CATEGORIE_FTA = "id_fta_categorie";
     const FIELDNAME_CIRCUIT_CLIENT = "id_arcadia_client_circuit";
+    const FIELDNAME_CODE_DOUANE_FTA = "code_douane_fta";
+    const FIELDNAME_CODE_DOUANE_LIBELLE_FTA = "code_douane_libelle_fta";
     const FIELDNAME_CREATEUR = "createur_fta";
     const FIELDNAME_DATE_DEMANDEUR = "date_demandeur_fta";
     const FIELDNAME_DATE_ECHEANCE_FTA = "date_echeance_fta";
@@ -32,10 +34,11 @@ class FtaModel extends AbstractModel {
     const FIELDNAME_QUANTITE_HEBDOMADAIRE_ESTIMEE_COMMANDE = "quantite_hebdomadaire_estime_commande";
     const FIELDNAME_RESEAU_CLIENT = "id_arcadia_client_reseau";
     const FIELDNAME_SEGMENT_CLIENT = "id_arcadia_client_segment";
+    const FIELDNAME_SITE_EXPEDITION_FTA = "site_expedition_fta";
     const FIELDNAME_SOCIETE_DEMANDEUR = "societe_demandeur_fta";
     const FIELDNAME_UNITE_FACTURATION = "id_annexe_unite_facturation";
     const ID_POIDS_VARIABLE = "3";
-
+    
     /**
      * Utilisateur ayant créé la FTA
      * @var UserModel
@@ -59,7 +62,7 @@ class FtaModel extends AbstractModel {
      * @var FtaProcessusDelaiModel
      */
     private $modelFtaProcessusDelai;
-
+    
     public function __construct($paramId = NULL, $paramIsCreateRecordsetInDatabaseIfKeyDoesntExist = AbstractModel::DEFAULT_IS_CREATE_RECORDSET_IN_DATABASE_IF_KEY_DOESNT_EXIST) {
         parent::__construct($paramId, $paramIsCreateRecordsetInDatabaseIfKeyDoesntExist);
 
@@ -76,8 +79,9 @@ class FtaModel extends AbstractModel {
                 new FtaCategorieModel($this->getDataField(self::FIELDNAME_CATEGORIE_FTA)->getFieldValue()
                 , DatabaseRecord::VALUE_DONT_CREATE_RECORD_IN_DATABASE_IF_KEY_DOESNT_EXIST)
         );
-    }
-
+        
+    }    
+        
     /**
      * 
      * @return FtaProcessusDelaiModel

@@ -24,7 +24,7 @@ class EnvironmentCod extends EnvironmentAbstract {
          * directement utilisée dans la Partie 3
          */
         $this->getConf()->setUrlProtocol("http");
-        $this->getConf()->setUrlServer("127.0.0.1");
+        $this->getConf()->setUrlServer("localhost");
         $this->getConf()->setUrlRoot("dev-intranet");
         $this->getConf()->setUrlSubdir("apps");
 

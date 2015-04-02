@@ -34,31 +34,6 @@ class GeoModel extends AbstractModel {
     const FIELDNAME_K_SOCIETE= "k_societe";
     const FIELDNAME_TAG_APPLICATION_GEO = "tag_application_geo";
 
-           /**
-     * Model de donnée d'une FTA
-     * @var FtaSiteExpModel
-     */
-    
-    private $ModelSiteExp;
-    
-    public function __construct($paramId = NULL, $paramIsCreateRecordsetInDatabaseIfKeyDoesntExist = AbstractModel::DEFAULT_IS_CREATE_RECORDSET_IN_DATABASE_IF_KEY_DOESNT_EXIST) {
-        parent::__construct($paramId, $paramIsCreateRecordsetInDatabaseIfKeyDoesntExist);
-    
-    $this->setModelSiteExp(
-                new GeoModel($this->getDataField(self::FIELDNAME_ID_SITE)->getFieldValue()
-                , DatabaseRecord::VALUE_DONT_CREATE_RECORD_IN_DATABASE_IF_KEY_DOESNT_EXIST)
-                );
-    
-    }    
-    function getModelSiteExp() {
-        return $this->modelSiteExp;
-    }
-
-    function setModelSiteExp(FtaSiteExpModel $modelSiteExp) {
-        $this->modelSiteExp = $modelSiteExp;
-    }
- 
-    
 }
 
 ?>

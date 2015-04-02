@@ -763,29 +763,10 @@ class Chapitre {
         $bloc = "";
         $id_fta = self::$id_fta;
         $synthese_action = self::$synthese_action;
-        $is_editable = self::$is_editable;
-        $is_editable_false = false;
+        $isEditable = self::$is_editable;
 
-        $bloc.="<tr class=titre_principal><td class>Demandeur</td></tr>";
-
-        //Besoin compostage ?
-        $htmlObject = new HtmlListBoolean(
-                $data_field = self::$objectFta->getFieldDescription(
-                ObjectFta::TABLE_FTA_NAME, "besoin_compostage_fta"), $default_value = HtmlListBoolean::NO_VALUE, $is_editable, $warning_update = ${"diff_" . $table_name}[$field_name]
-        );
-        $bloc.=$htmlObject->getHtmlResult();
-
-        //Maquette étiquette
-        $htmlObject = new OldHtmlList(
-                $data_field = self::$objectFta->getFieldDescription(
-                ObjectFta::TABLE_FTA_NAME, "id_arcadia_maquette_etiquette"
-                ), $content_label_field = new DatabaseDescriptionField(
-                $field_table = "arcadia_maquette_etiquette", $field_name = "nom_arcadia_maquette_etiquette", $field_value = $data_field->getValue()
-                ), $default_value = null, $is_editable, $warning_update = ${"diff_" . $table_name}[$field_name]
-        );
-        $bloc.=$htmlObject->getHtmlResult();
-
-        //$bloc .= "</table>";
+        $bloc = "TEST";
+        
         return $bloc;
     }
 
@@ -808,14 +789,11 @@ class Chapitre {
         $bloc = "";
         $id_fta = self::$id_fta;
         $synthese_action = self::$synthese_action;
-        $is_editable = self::$is_editable;
-        $isEditable = $is_editable;
-        //$is_editable_false = false;
+        $isEditable = self::$is_editable;
 
 
         $bloc.="<tr class=titre_principal><td class>Demandeur</td></tr>";
         //$objectFta = new ObjectFta($id_fta);
-
         //Identifiant FTA
         $idFta = $id_fta;
         $ftaModel = new FtaModel($idFta);

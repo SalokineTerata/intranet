@@ -12,7 +12,7 @@
  */
 class EnvironmentConf {
 
-    const ENV_COD = "developpeur";
+    const ENV_COD = "codeur";
     const ENV_DEV = "developpement";
     const ENV_REC = "recette";
     const ENV_PRD = "production";

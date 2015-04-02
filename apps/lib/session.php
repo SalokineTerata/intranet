@@ -46,7 +46,8 @@ if ($_SESSION["session_init"] == "false") {
      */
 
     //Variables relatives aux environnements:
-    switch ($_SERVER['SERVER_NAME']) {
+    $server = $_SERVER['SERVER_NAME'];
+    switch ($server) {
 
         //Environnement Codeur
         case EnvironmentConf::SITE_COD:

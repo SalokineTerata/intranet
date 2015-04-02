@@ -16,7 +16,7 @@ $mysql_database;  //voir session.php
 
 //Paramétrage de la page
 $lang='fr';
-$server=1;
+$serverName=1;
 $db=$_SESSION["globalConfig"]->mysql_database_name;
 //$goto='tbl_properties.php';
 $goto='sql.php';
@@ -35,7 +35,7 @@ if ($nb1)
          <frame src='../lib/frame_gauche.php?module=$module&menu=$menu' noresize />
          <frame src='../phpMyAdmin/sql.php"
     . "?lang=$lang"
-    . "&server=$server"
+    . "&server=$serverName"
     . "&db=$db"
     . "&goto=$goto"
     . "&sql_query=$sql_query"

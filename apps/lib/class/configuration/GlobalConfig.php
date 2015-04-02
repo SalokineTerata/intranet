@@ -12,25 +12,62 @@
  */
 class GlobalConfig {
 
+    const INITIALIZED_TRUE = TRUE;
+    const INITIALIZED_FALSE = FALSE;
+    const VARNAME_IS_GLOBALCONFIG_INITIALIZED = "isGlobalConfigInitialized";
+    const VARNAME_IS_DATABASE_INITIALIZED = "isDatabaseInitialized";
+
     /**
      * @var EnvironmentConf
      */
     private $conf = null;
-    private $confIsInitialized = FALSE;
 
     function __construct() {
+
+
         if (gettype($_SESSION["globalConfig"]) == "object") {
             $this->setConf($_SESSION["globalConfig"]->getConf());
-            $this->setConfIsInitialized(TRUE);
         }
     }
 
-    function getConfIsInitialized() {
-        return $this->confIsInitialized;
+    static function getConfIsInitialized() {
+        /**
+         * La configuration globale est-elle initialisée ?
+         * On récupère cette information stockée dans la session PHP.
+         */
+        return $_SESSION[self::VARNAME_IS_GLOBALCONFIG_INITIALIZED];
     }
 
     function setConfIsInitialized($confIsInitialized) {
-        $this->confIsInitialized = $confIsInitialized;
+        $_SESSION[self::VARNAME_IS_GLOBALCONFIG_INITIALIZED] = $confIsInitialized;
+    }
+
+    function setConfIsInitializedToTrue() {
+        $this->setConfIsInitialized(self::INITIALIZED_TRUE);
+    }
+
+    function setConfIsInitializedToFalse() {
+        $this->setConfIsInitialized(self::INITIALIZED_FALSE);
+    }
+
+    static function getDatabaseIsInitialized() {
+        /**
+         * La configuration base de données est-elle initialisée ?
+         * On récupère cette information stockée dans la session PHP.
+         */
+        return $_SESSION[self::VARNAME_IS_DATABASE_INITIALIZED];
+    }
+
+    function setDatabaseIsInitialized($databaseIsInitialized) {
+        $_SESSION[self::VARNAME_IS_DATABASE_INITIALIZED] = $databaseIsInitialized;
+    }
+
+    function setDatabaseIsInitializedToTrue() {
+        $this->setDatabaseIsInitialized(self::INITIALIZED_TRUE);
+    }
+
+    function setDatabaseIsInitializedToFalse() {
+        $this->setDatabaseIsInitialized(self::INITIALIZED_FALSE);
     }
 
     function getConf() {

@@ -15,39 +15,30 @@ session_cache_limiter('nocache');     // Configure le délai d'expiration à X m
  */
 session_start();
 
+
+/**
+ * Nom du serveur sur lequel est hébergé le script PHP
+ */
+$serverName = filter_input(INPUT_SERVER, 'SERVER_NAME');
+
 /**
  * Restauration de la session si précédemment initialisée
  */
 $globalConfig = new GlobalConfig();
-if ($globalConfig->getConfIsInitialized()) {
+if (!$globalConfig->getConfIsInitialized()) {
     /**
      * Si le mode Debug de session est activé, on reconstruit systématiquement la session
      */
-    if ($globalConfig->getConf()->getSessionDebugEnable()) {
-        session_destroy();
-    }
-}
-
-/**
- * Si la session a déjà était initialisé, on ne la reconfigure pas à nouveau.
- */
-if ($_SESSION["session_init"] == "false") {
-
-    //La session a déjà été initialisé
-    //echo "INIT OK";
-    //var_dump($_SESSION);
-} else {
-
-    //echo "INIT EN COURS";
-    $_SESSION["session_init"] = "variable";
+//    if ($globalConfig->getConf()->getSessionDebugEnable()) {
+//        session_destroy();
+//    }
 
     /*
       Initialisation des variables de sessions et de connexions:
      */
 
     //Variables relatives aux environnements:
-    $server = $_SERVER['SERVER_NAME'];
-    switch ($server) {
+    switch ($serverName) {
 
         //Environnement Codeur
         case EnvironmentConf::SITE_COD:
@@ -69,23 +60,24 @@ if ($_SESSION["session_init"] == "false") {
 
         default:
             echo "L'environnement d'exécution n'a pas pu être trouvé. Vérifiez les fichiers conf/Environment*.php";
-            $confToInit = null;
+            $envToInit = null;
     }
     //Initialisation de la configuration
     $globalConfig->setConf($envToInit->getConf());
 
     //Sauvegarde de la configuration dans la session:
     $_SESSION["globalConfig"] = $globalConfig;
+
+    /**
+     * A chaque ouverture de script et si le paramètre de debug est activé,
+     * Chronométrage du temps d'exécution du script.
+     */
+    if ($globalConfig->getConf()->getExecDebugEnable()) {
+        $_SESSION["exec_debug_time_start"] = microtime(true);
+    }
+
+    $globalConfig->setConfIsInitializedToTrue();
 }//Fin de l'initialisation de la session
-
-
-/**
- * A chaque ouverture de script et si le paramètre de debug est activé,
- * Chronométrage du temps d'exécution du script.
- */
-if ($globalConfig->getConf()->getExecDebugEnable()) {
-    $_SESSION["exec_debug_time_start"] = microtime(true);
-}
 
 /**
  * Ouverture de la connexion MySQL  
@@ -103,37 +95,34 @@ mysql_query("SET NAMES utf8");
  * On indique qu'on a terminé l'étape de configuration des variables.
  * La session est prête à être utilisée.
  */
-if ($_SESSION["session_init"] == "variable") {
+/**
+ * Information de session public
+ */
+//Liste des modules public:
+$req = "SELECT * FROM intranet_modules "
+        . "WHERE public_intranet_modules='1' "
+        . "ORDER BY classement_intranet_modules DESC"
+;
+$_SESSION["intranet_module_public"] = DatabaseOperation::query($req);
 
-
-    $_SESSION["session_init"] = "ok";
-
-    /**
-     * Information de session public
-     */
-    //Liste des modules public:
-    $req = "SELECT * FROM intranet_modules "
-            . "WHERE public_intranet_modules='1' "
-            . "ORDER BY classement_intranet_modules DESC"
-    ;
-    $_SESSION["intranet_module_public"] = DatabaseOperation::query($req);
-
-    //Chargement des méta-données des tables et champs
+//Chargement des méta-données des tables et champs
+if (!$globalConfig->getDatabaseIsInitialized()) {
     DatabaseDescription::buildDatabaseDescription();
-
-    $req = "SELECT * FROM intranet_modules";
-    $result = DatabaseOperation::query($req);
-    while ($rows = mysql_fetch_array($result)) {
-        $_SESSION["intranet_modules"][$rows["nom_intranet_modules"]]["id_intranet_modules"] = $rows["id_intranet_modules"];
-        $_SESSION["intranet_modules"][$rows["nom_intranet_modules"]]["nom_intranet_modules"] = $rows["nom_intranet_modules"];
-        $_SESSION["intranet_modules"][$rows["nom_intranet_modules"]]["nom_usuel_intranet_modules"] = $rows["nom_usuel_intranet_modules"];
-        $_SESSION["intranet_modules"][$rows["nom_intranet_modules"]]["version_intranet_modules"] = $rows["version_intranet_modules"];
-        $_SESSION["intranet_modules"][$rows["nom_intranet_modules"]]["visible_intranet_modules"] = $rows["visible_intranet_modules"];
-        $_SESSION["intranet_modules"][$rows["nom_intranet_modules"]]["classement_intranet_modules"] = $rows["classement_intranet_modules"];
-        $_SESSION["intranet_modules"][$rows["nom_intranet_modules"]]["public_intranet_modules"] = $rows["public_intranet_modules"];
-        $_SESSION["intranet_modules"][$rows["nom_intranet_modules"]]["css_intranet_module"] = $rows["css_intranet_module"];
-    }
+    $globalConfig->setDatabaseIsInitializedToTrue();
 } //Fin des enregistrements MySQL en session
+
+$req = "SELECT * FROM intranet_modules";
+$result = DatabaseOperation::query($req);
+while ($rows = mysql_fetch_array($result)) {
+    $_SESSION["intranet_modules"][$rows["nom_intranet_modules"]]["id_intranet_modules"] = $rows["id_intranet_modules"];
+    $_SESSION["intranet_modules"][$rows["nom_intranet_modules"]]["nom_intranet_modules"] = $rows["nom_intranet_modules"];
+    $_SESSION["intranet_modules"][$rows["nom_intranet_modules"]]["nom_usuel_intranet_modules"] = $rows["nom_usuel_intranet_modules"];
+    $_SESSION["intranet_modules"][$rows["nom_intranet_modules"]]["version_intranet_modules"] = $rows["version_intranet_modules"];
+    $_SESSION["intranet_modules"][$rows["nom_intranet_modules"]]["visible_intranet_modules"] = $rows["visible_intranet_modules"];
+    $_SESSION["intranet_modules"][$rows["nom_intranet_modules"]]["classement_intranet_modules"] = $rows["classement_intranet_modules"];
+    $_SESSION["intranet_modules"][$rows["nom_intranet_modules"]]["public_intranet_modules"] = $rows["public_intranet_modules"];
+    $_SESSION["intranet_modules"][$rows["nom_intranet_modules"]]["css_intranet_module"] = $rows["css_intranet_module"];
+}
 
 function identification1($mysql_table_authentification, $login, $pass, GlobalConfig $globalConfig = null) {
     $debug = EnvironmentConf::LDAP_DEBUG;

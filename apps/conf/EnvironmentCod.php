@@ -39,10 +39,10 @@ class EnvironmentCod extends EnvironmentAbstract {
         $this->getConf()->setExecEnvironnement(EnvironmentConf::ENV_COD);
         $this->getConf()->setLdapServerName(EnvironmentConf::LDAP_SERVER_NAME);
         $this->getConf()->setLdapServiceEnable(FALSE);
-        $this->getConf()->setMysqlServerName("localhost");
-        $this->getConf()->setMysqlDatabaseName("intranet_V3_0_COD");
+        $this->getConf()->setMysqlServerName("dev-intranet.agis.fr");
+        $this->getConf()->setMysqlDatabaseName("intranet_v3_0_dev");
         $this->getConf()->setMysqlDatabaseAuthentificationUsername("root");
-        $this->getConf()->setMysqlDatabaseAuthentificationPassword("");
+        $this->getConf()->setMysqlDatabaseAuthentificationPassword("8ale!ne");
         $this->getConf()->setMysqlDatabaseAuthentificationTableName("salaries");
         $this->getConf()->setSessionDebugEnable(FALSE);
         $this->getConf()->setSmtpServerName("smtp05401.grpldc.com");

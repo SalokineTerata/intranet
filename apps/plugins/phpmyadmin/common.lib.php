@@ -1132,8 +1132,8 @@ h1    {font-family: sans-serif; font-size: large; font-weight: bold}
         }
     }
 
-    if (empty($server) || !isset($cfg['Servers'][$server]) || !is_array($cfg['Servers'][$server])) {
-        $server = $cfg['ServerDefault'];
+    if (empty($serverName) || !isset($cfg['Servers'][$serverName]) || !is_array($cfg['Servers'][$serverName])) {
+        $serverName = $cfg['ServerDefault'];
     }
 
 
@@ -1145,15 +1145,15 @@ h1    {font-family: sans-serif; font-size: large; font-weight: bold}
      * present a choice of servers in the case that there are multiple servers
      * and '$cfg['ServerDefault'] = 0' is set.
      */
-    if ($server == 0) {
+    if ($serverName == 0) {
         $cfg['Server'] = array();
     }
 
     /**
      * Otherwise, set up $cfg['Server'] and do the usual login stuff.
      */
-    else if (isset($cfg['Servers'][$server])) {
-        $cfg['Server'] = $cfg['Servers'][$server];
+    else if (isset($cfg['Servers'][$serverName])) {
+        $cfg['Server'] = $cfg['Servers'][$serverName];
 
         /**
          * Loads the proper database interface for this server

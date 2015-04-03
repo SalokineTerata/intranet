@@ -295,7 +295,7 @@ class Chapitre {
         return $bloc;
     }
 
-    public static function buildChapitreProduction() {
+   public static function buildChapitreProduction() {
 
         $bloc = "";
         $id_fta = self::$id_fta;
@@ -907,6 +907,10 @@ class Chapitre {
         $bloc.=$ftaView->getHtmlEcheancesProcessus();
         /**        */
         return $bloc;
+    }
+    
+    public static function  buildChapitreNomenclature() {
+        
     }
 
     public static function buildSuiviDossier() {

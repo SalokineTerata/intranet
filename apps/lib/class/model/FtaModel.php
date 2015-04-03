@@ -64,11 +64,11 @@ class FtaModel extends AbstractModel {
     private $modelFtaProcessusDelai;
     
     /**
-     * Model de donnée d'une FTA
-     * @var FtaSiteExpModel
+     * 
+     * @var GeoModel
      */
     
-    private $ModelSiteExp;
+    private $modelSiteExp;
     
     
     public function __construct($paramId = NULL, $paramIsCreateRecordsetInDatabaseIfKeyDoesntExist = AbstractModel::DEFAULT_IS_CREATE_RECORDSET_IN_DATABASE_IF_KEY_DOESNT_EXIST) {
@@ -88,23 +88,25 @@ class FtaModel extends AbstractModel {
                 , DatabaseRecord::VALUE_DONT_CREATE_RECORD_IN_DATABASE_IF_KEY_DOESNT_EXIST)
         );
         
-                   
-    $this->setModelSiteExp(
-                new GeoModel($this->getDataField(self::FIELDNAME_ID_SITE)->getFieldValue()
+        $this->setModelSiteExp(
+                new GeoModel($this->getDataField(self::FIELDNAME_SITE_EXPEDITION_FTA)->getFieldValue()
                 , DatabaseRecord::VALUE_DONT_CREATE_RECORD_IN_DATABASE_IF_KEY_DOESNT_EXIST)
-                );
+        );
     
     }    
-    function getModelSiteExp() {
+    
+    /**
+     * 
+     * @return GeoModel
+     */
+    public function getModelSiteExp() {
         return $this->modelSiteExp;
     }
 
-    function setModelSiteExp(FtaSiteExpModel $modelSiteExp) {
+    private function setModelSiteExp($modelSiteExp) {
         $this->modelSiteExp = $modelSiteExp;
     }
- 
-    
-    }    
+   
         
     /**
      * 

@@ -34,6 +34,7 @@ class FtaModel extends AbstractModel {
     const FIELDNAME_QUANTITE_HEBDOMADAIRE_ESTIMEE_COMMANDE = "quantite_hebdomadaire_estime_commande";
     const FIELDNAME_RESEAU_CLIENT = "id_arcadia_client_reseau";
     const FIELDNAME_SEGMENT_CLIENT = "id_arcadia_client_segment";
+    const FIELDNAME_SITE_ASSEMBLAGE = "Site_de_production";
     const FIELDNAME_SITE_EXPEDITION_FTA = "site_expedition_fta";
     const FIELDNAME_SOCIETE_DEMANDEUR = "societe_demandeur_fta";
     const FIELDNAME_UNITE_FACTURATION = "id_annexe_unite_facturation";
@@ -64,11 +65,11 @@ class FtaModel extends AbstractModel {
     private $modelFtaProcessusDelai;
     
     /**
-     * 
+     * Site d'expedition de la FTA
      * @var GeoModel
      */
     
-    private $modelSiteExp;
+    private $modelSiteExpediton;
     
     
     public function __construct($paramId = NULL, $paramIsCreateRecordsetInDatabaseIfKeyDoesntExist = AbstractModel::DEFAULT_IS_CREATE_RECORDSET_IN_DATABASE_IF_KEY_DOESNT_EXIST) {
@@ -88,7 +89,7 @@ class FtaModel extends AbstractModel {
                 , DatabaseRecord::VALUE_DONT_CREATE_RECORD_IN_DATABASE_IF_KEY_DOESNT_EXIST)
         );
         
-        $this->setModelSiteExp(
+        $this->setModelSiteExpediton(
                 new GeoModel($this->getDataField(self::FIELDNAME_SITE_EXPEDITION_FTA)->getFieldValue()
                 , DatabaseRecord::VALUE_DONT_CREATE_RECORD_IN_DATABASE_IF_KEY_DOESNT_EXIST)
         );
@@ -99,15 +100,15 @@ class FtaModel extends AbstractModel {
      * 
      * @return GeoModel
      */
-    public function getModelSiteExp() {
-        return $this->modelSiteExp;
+
+    function getModelSiteExpediton() {
+        return $this->modelSiteExpediton;
     }
 
-    private function setModelSiteExp($modelSiteExp) {
-        $this->modelSiteExp = $modelSiteExp;
+    function setModelSiteExpediton(GeoModel $modelSiteExpediton) {
+        $this->modelSiteExpediton = $modelSiteExpediton;
     }
-   
-        
+
     /**
      * 
      * @return FtaProcessusDelaiModel

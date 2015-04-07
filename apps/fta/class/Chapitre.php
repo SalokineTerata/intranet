@@ -511,10 +511,19 @@ class Chapitre {
         $id_fta = self::$id_fta;
         $synthese_action = self::$synthese_action;
         $is_editable = self::$is_editable;
-        $is_editable_false = false;
+        
+/*
+        $bloc.="<tr class=titre_principal><td class>Codification_nomenclature</td></tr>";
 
-        $bloc.="<tr class=titre_principal><td class>Demandeur</td></tr>";
-
+        //Identifiant FTA
+        $idFta = $id_fta;
+        $ftaModel = new FtaModel($idFta);
+        $ftaView = new FtaView($ftaModel);
+        $ftaView->setIsEditable($isEditable);
+        $ftaView->setFtaChapitreModelById(self::ID_CHAPITRE_IDENTITE);
+        
+        */
+        
         //Nom du demandeur
         $htmlObject = new htmlInputText(
                 $field_name = "code_article_ldc", $table_name = ObjectFta::TABLE_ARTI_NAME, $value = self::$objectFta->getFieldValue($table_name, $field_name), $is_editable, $warning_update = ${"diff_" . $table_name}[$field_name]
@@ -764,8 +773,8 @@ class Chapitre {
         $id_fta = self::$id_fta;
         $synthese_action = self::$synthese_action;
         $isEditable = self::$is_editable;
-
-        $bloc="<tr class=titre_principal><td class>Test</td></tr>";
+                
+        $bloc.="<tr class=titre_principal><td class>Logistique</td></tr>";
                 
         
         
@@ -777,14 +786,14 @@ class Chapitre {
         $ftaView->setFtaChapitreModelById(self::ID_CHAPITRE_IDENTITE);
         
         //Site d'assemblage
-        $bloc.=$ftaView->getHtmlDataField(FtaProcessusMultisite::FIELDNAME_ID_SITE_PROCESSUS_FTA_PROCESSUS_MULTISITE);
+        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_SITE_ASSEMBLAGE);
         
         //Site d'expedition
         $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_SITE_EXPEDITION_FTA);
         
         
         //CNUD PREPARER PAR
-        $bloc.=$ftaView->getHtmlDataField(GeoModel::FIELDNAME_GEO_CNUD_PREPARER_PAR);
+        $bloc.=$ftaView->getHtmlCNUDPreparerPar();
         
         //Code Douane 
         $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_CODE_DOUANE_FTA);

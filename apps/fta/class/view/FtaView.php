@@ -44,6 +44,12 @@ class FtaView {
     private $ftaChapitreModel;
 
     /**
+     * Model de donnée d'une FTA
+     * @var GeoModel 
+     */
+    private $GeoModel;
+
+    /**
      * 
      * @param FtaModel $ParamFtaModel
      */
@@ -71,6 +77,22 @@ class FtaView {
     private function setFtaProcessusDelaiView(FtaProcessusDelaiView $ftaProcessusDelaiView) {
         $this->ftaProcessusDelaiView = $ftaProcessusDelaiView;
     }
+
+    
+    /*
+     * Gettteur setteur pour l'affichage d'un champ
+     * d'une sous table avec la table geo
+     */
+    /* private function getGeoModel() {
+      return $this->GeoModel;
+      }
+
+      private function  setGeoModel(GeoModel $ParamGeoModel) {
+      if ($ParamGeoModel instanceof GeoModel) {
+      $this->GeoModel = $ParamGeoModel;
+      }
+      }
+     */
 
     private function getModel() {
         return $this->ftaModel;
@@ -210,6 +232,14 @@ class FtaView {
         $ftaSuiviProjetModel = new FtaSuiviProjetModel($idFtaSuiviProjet);
         $ftaSuiviProjetModel->setIsEditable($this->getIsEditable());
         return $ftaSuiviProjetModel;
+    }
+
+    function getHtmlCNUDPreparerPar() {
+
+        return Html::convertDataFieldToHtml(
+                        $this->getModel()->getModelSiteExpediton()->getDataField(GeoModel::FIELDNAME_GEO_CNUD_PREPARER_PAR)
+                        , false
+        );
     }
 
 }

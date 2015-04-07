@@ -39,7 +39,7 @@ class FtaModel extends AbstractModel {
     const FIELDNAME_SOCIETE_DEMANDEUR = "societe_demandeur_fta";
     const FIELDNAME_UNITE_FACTURATION = "id_annexe_unite_facturation";
     const ID_POIDS_VARIABLE = "3";
-    
+
     /**
      * Utilisateur ayant créé la FTA
      * @var UserModel
@@ -63,15 +63,14 @@ class FtaModel extends AbstractModel {
      * @var FtaProcessusDelaiModel
      */
     private $modelFtaProcessusDelai;
-    
+
     /**
      * Site d'expedition de la FTA
      * @var GeoModel
      */
-    
     private $modelSiteExpediton;
-    
-    
+
+
     public function __construct($paramId = NULL, $paramIsCreateRecordsetInDatabaseIfKeyDoesntExist = AbstractModel::DEFAULT_IS_CREATE_RECORDSET_IN_DATABASE_IF_KEY_DOESNT_EXIST) {
         parent::__construct($paramId, $paramIsCreateRecordsetInDatabaseIfKeyDoesntExist);
 
@@ -88,19 +87,18 @@ class FtaModel extends AbstractModel {
                 new FtaCategorieModel($this->getDataField(self::FIELDNAME_CATEGORIE_FTA)->getFieldValue()
                 , DatabaseRecord::VALUE_DONT_CREATE_RECORD_IN_DATABASE_IF_KEY_DOESNT_EXIST)
         );
-        
+
         $this->setModelSiteExpediton(
                 new GeoModel($this->getDataField(self::FIELDNAME_SITE_EXPEDITION_FTA)->getFieldValue()
                 , DatabaseRecord::VALUE_DONT_CREATE_RECORD_IN_DATABASE_IF_KEY_DOESNT_EXIST)
         );
-    
-    }    
-    
+
+    }
+
     /**
      * 
      * @return GeoModel
      */
-
     function getModelSiteExpediton() {
         return $this->modelSiteExpediton;
     }

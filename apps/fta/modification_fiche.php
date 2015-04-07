@@ -61,7 +61,7 @@ $show_help = 1;                              //Activer l'aide en ligne Pop-up
 
 //Paramètre d'URL
 $id_fta = Lib::getParameterFromRequest("id_fta");
-$id_fta_chapitre_encours = Lib::getParameterFromRequest("id_fta_chapitre_encours", 1);
+$id_fta_chapitre_encours = Lib::getParameterFromRequest("id_fta_chapitre_encours", 9);
 $synthese_action = Lib::getParameterFromRequest("synthese_action");
 $comeback = Lib::getParameterFromRequest("comeback");
 $id_fta_chapitre = $id_fta_chapitre_encours;

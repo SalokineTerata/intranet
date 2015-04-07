@@ -106,7 +106,7 @@ $req = "SELECT * FROM intranet_modules "
 $_SESSION["intranet_module_public"] = DatabaseOperation::query($req);
 
 //Chargement des méta-données des tables et champs
-if (!$globalConfig->getDatabaseIsInitialized()) {
+if (!$globalConfig->getDatabaseIsInitialized() || $globalConfig->getConf()->getSessionDebugEnable() ) {
     DatabaseDescription::buildDatabaseDescription();
     $globalConfig->setDatabaseIsInitializedToTrue();
 } //Fin des enregistrements MySQL en session

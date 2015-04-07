@@ -44,7 +44,7 @@ class EnvironmentCod extends EnvironmentAbstract {
         $this->getConf()->setMysqlDatabaseAuthentificationUsername("root");
         $this->getConf()->setMysqlDatabaseAuthentificationPassword("8ale!ne");
         $this->getConf()->setMysqlDatabaseAuthentificationTableName("salaries");
-        $this->getConf()->setSessionDebugEnable(FALSE);
+        $this->getConf()->setSessionDebugEnable(TRUE);
         $this->getConf()->setSmtpServerName("smtp05401.grpldc.com");
         $this->getConf()->setSmtpServiceEnable(FALSE);
         $this->getConf()->setSmtpEmailRedirectionAdmin("administrateurs.fta@ldc.fr");

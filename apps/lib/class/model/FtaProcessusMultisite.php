@@ -4,12 +4,10 @@
  * Description of FtaSuiviProjetModel
  * Table des FtaSuiviProjetModel
  *
- * @author franwastaken
+ * @author franckwastaken
  */
-
-
 class FtaProcessusMultisite extends AbstractModel {
-    
+
     const TABLENAME = "fta_processus_multisite";
     const KEYNAME = "id_fta_processus_multisite";
     const FIELDNAME_ID_PROCESSUS_FTA_PROCESSUS_MULTISITE = "id_processus_fta_processus_multisite";
@@ -17,6 +15,5 @@ class FtaProcessusMultisite extends AbstractModel {
     const FIELDNAME_ID_SITE_ASSEMBLAGE_FTA_PROCESSUS_MULTISITE = "id_site_assemblage_fta_processus_multisite";
 
 }
-
 
 ?>

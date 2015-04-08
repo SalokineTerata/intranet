@@ -78,7 +78,6 @@ class FtaView {
         $this->ftaProcessusDelaiView = $ftaProcessusDelaiView;
     }
 
-    
     /*
      * Gettteur setteur pour l'affichage d'un champ
      * d'une sous table avec la table geo

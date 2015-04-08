@@ -1,8 +1,8 @@
 #Ce fichier doit contenir uniquement les liaisons entre les differentes
-#tables d'un même module.
-#Les noms des champs doivent etre précédés par le nom de la table
+#tables d'un mï¿½me module.
+#Les noms des champs doivent etre prï¿½cï¿½dï¿½s par le nom de la table
 #a laquelle ils appartiennent et un point
-#Les liaisons doivent etre séparées par des sauts de lignes
+#Les liaisons doivent etre sï¿½parï¿½es par des sauts de lignes
 #(pas de AND a la fin)
 #
 
@@ -12,7 +12,7 @@ fta.id_fta_categorie=fta_categorie.id_fta_categorie
 
 #fta.id_fta=fta_nomenclature.id_fta
 #fta.id_fta=fta_composition.id_fta
-fta.id_fta=fta_composant.id_fta
+fta.id_fta=nom_fta_nomenclature 
 
 fta.id_fta=fta_conditionnement.id_fta
 fta.id_fta=classification_fta.id_fta

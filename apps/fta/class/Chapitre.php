@@ -512,7 +512,7 @@ class Chapitre {
         $synthese_action = self::$synthese_action;
         $is_editable = self::$is_editable;
         
-/*
+
         $bloc.="<tr class=titre_principal><td class>Codification_nomenclature</td></tr>";
 
         //Identifiant FTA
@@ -522,8 +522,11 @@ class Chapitre {
         $ftaView->setIsEditable($isEditable);
         $ftaView->setFtaChapitreModelById(self::ID_CHAPITRE_IDENTITE);
         
-        */
-        
+        //Codification
+        //$bloc.=$ftaView->;
+ 
+        //Designation
+        $bloc.=$ftaView->getHtmlDataField($paramFieldName);
         //Nom du demandeur
         $htmlObject = new htmlInputText(
                 $field_name = "code_article_ldc", $table_name = ObjectFta::TABLE_ARTI_NAME, $value = self::$objectFta->getFieldValue($table_name, $field_name), $is_editable, $warning_update = ${"diff_" . $table_name}[$field_name]

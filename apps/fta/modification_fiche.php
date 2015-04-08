@@ -59,9 +59,14 @@ $show_help = 1;                              //Activer l'aide en ligne Pop-up
   echo htmlspecialchars($comeback);
  */
 
+
+/**
+ * @todo Problème d'initialisation de la valeur par défaut.
+ */
+
 //Paramètre d'URL
 $id_fta = Lib::getParameterFromRequest("id_fta");
-$id_fta_chapitre_encours = Lib::getParameterFromRequest("id_fta_chapitre_encours", 1);
+$id_fta_chapitre_encours = Lib::getParameterFromRequest("id_fta_chapitre_encours", 23);
 $synthese_action = Lib::getParameterFromRequest("synthese_action");
 $comeback = Lib::getParameterFromRequest("comeback");
 $id_fta_chapitre = $id_fta_chapitre_encours;

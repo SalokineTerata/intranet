@@ -3,3 +3,20 @@
 
 [] Corriger le isEditable = false pour les différents chapitre 
 [] Terminner le chapitre codification(nomenclature).
+
+PARTIE 1: Construction des interfaces utilisateurs (v1) --> Pas de sous table pour le moment.
+
+[V] Chapitre Logistique
+[V] Chapitre codification (ex- Activation des Articles)
+[V] Chapitre codification_externe (ex- Codification standard Externe)
+[V] Chapitre etiquette (ex Etiquette)
+[ ] Chapitre Commerce (ex Données clients) --> pas les sous table.
+[ ] Chapitre composition (ex composition) --> pas les sous table.
+[ ] Chapitre Activation des produits --> pas les sous table.
+[ ] Chapitre Nomenclature --> pas les sous table.
+
+[ ] Chapitre commentaire
+[ ] Chapitre Palletisation
+
+[ ] Chapitre Emballage
+

@@ -11,23 +11,35 @@ class FtaModel extends AbstractModel {
     const TABLENAME = "fta";
     const KEYNAME = "id_fta";
     const KEYNAME_CREATEUR = "id_user";
+    const FIELDNAME_ACTIVATION_CODESOFT = "activation_codesoft_arti2";
     const FIELDNAME_ARCADIA_EMBALLAGE_TYPE = "id_arcadia_emballage_type";
     const FIELDNAME_BESOIN_FICHE_TECHNIQUE = "besoin_fiche_technique";
     const FIELDNAME_CALIBRE_DEFAUT = "calibre_defaut";
     const FIELDNAME_CATEGORIE_FTA = "id_fta_categorie";
     const FIELDNAME_CIRCUIT_CLIENT = "id_arcadia_client_circuit";
+    const FIELDNAME_CODE_ARTICLE_LDC = "code_article_ldc";
     const FIELDNAME_CODE_DOUANE_FTA = "code_douane_fta";
     const FIELDNAME_CODE_DOUANE_LIBELLE_FTA = "code_douane_libelle_fta";
+    const FIELDNAME_COMPOSITION1 = "Composition";
+    const FIELDNAME_COMPOSITION2 = "composition1";
     const FIELDNAME_CREATEUR = "createur_fta";
     const FIELDNAME_DATE_DEMANDEUR = "date_demandeur_fta";
     const FIELDNAME_DATE_ECHEANCE_FTA = "date_echeance_fta";
     const FIELDNAME_DESIGNATION_COMMERCIALE = "designation_commerciale_fta";
+    const FIELDNAME_EAN_COLIS = "EAN_COLIS";
+    const FIELDNAME_EAN_PALETTE = "EAN_PALETTE";
+    const FIELDNAME_EAN_UVC = "EAN_UVC";
     const FIELDNAME_ECHEANCE_DEMANDEUR = "echeance_demandeur";
     const FIELDNAME_ENVIRONNEMENT_CONSERVATION_GROUPE = "id_annexe_environnement_conservation_groupe";
+    const FIELDNAME_ETIQUETTE_CODESOFT = "id_etiquette_codesoft_arti2";
     const FIELDNAME_ETUDE_PRIX_FTA = "etude_prix_fta";
     const FIELDNAME_FREQUENCE_HEBDOMADAIRE_ESTIMEE_COMMANDE = "frequence_hebdomadaire_estime_commande";
     const FIELDNAME_ID_FTA_ETAT = "id_fta_etat";
+    const FIELDNAME_LIBELLE = "LIBELLE";
+    const FIELDNAME_LIBELLE_CLIENT = "LIBELLE_CLIENT";
+    const FIELDNAME_LIBELLE_MULTILANGUE = "libelle_multilangue";
     const FIELDNAME_NOM_CLIENT_DEMANDEUR = "nom_client_demandeur";
+    const FIELDNAME_NOM_ABREGE = "nom_abrege_fta";
     const FIELDNAME_NOM_DEMANDEUR = "nom_demandeur_fta";
     const FIELDNAME_PCB = "NB_UNIT_ELEM";
     const FIELDNAME_POIDS_ELEMENTAIRE = "Poids_ELEM";
@@ -37,7 +49,9 @@ class FtaModel extends AbstractModel {
     const FIELDNAME_SITE_ASSEMBLAGE = "Site_de_production";
     const FIELDNAME_SITE_EXPEDITION_FTA = "site_expedition_fta";
     const FIELDNAME_SOCIETE_DEMANDEUR = "societe_demandeur_fta";
+    const FIELDNAME_UNITE_AFFICHAGE = "unite_affichage_fta";
     const FIELDNAME_UNITE_FACTURATION = "id_annexe_unite_facturation";
+    const FIELDNAME_VERROUILLAGE_LIBELLE_ETIQUETTE = "verrouillage_libelle_etiquette_fta";
     const ID_POIDS_VARIABLE = "3";
     
     /**

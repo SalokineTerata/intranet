@@ -41,6 +41,8 @@ class Chapitre {
     protected static $html_chapitre_conditionnement_piece_entiere;
     protected static $html_chapitre_conditionnement_decoupe;
     protected static $html_chapitre_codification;
+    protected static $html_chapitre_codification_externe;
+    protected static $html_chapitre_etiquette;
     protected static $html_chapitre_expedition;
     protected static $html_chapitre_need_rebuild;
     protected static $html_submit_button;
@@ -144,7 +146,7 @@ class Chapitre {
         return $return;
     }
 
-    protected static function buildChapitreCore () {
+    protected static function buildChapitreCore() {
         $return = "";
         switch (self::$recordChapitre->getFieldValue("nom_fta_chapitre")) {
             case "identite":
@@ -182,6 +184,14 @@ class Chapitre {
             case "codification":
                 self::$html_chapitre_codification = self::buildChapitreCodification();
                 $return = self::$html_chapitre_codification;
+                break;
+            case "codification_externe":
+                self::$html_chapitre_codification_externe = self::buildChapitreCodificationExterne();
+                $return = self::$html_chapitre_codification_externe;
+                break;
+            case "etiquette":
+                self::$html_chapitre_etiquette = self::buildChapitreEtiquette();
+                $return = self::$html_chapitre_etiquette;
                 break;
             case "expedition":
                 self::$html_chapitre_expedition = self::buildChapitreExpedition();
@@ -295,7 +305,7 @@ class Chapitre {
         return $bloc;
     }
 
-   public static function buildChapitreProduction() {
+    public static function buildChapitreProduction() {
 
         $bloc = "";
         $id_fta = self::$id_fta;
@@ -510,30 +520,65 @@ class Chapitre {
         $bloc = "";
         $id_fta = self::$id_fta;
         $synthese_action = self::$synthese_action;
-        $is_editable = self::$is_editable;
-        
-
-        $bloc.="<tr class=titre_principal><td class>Codification_nomenclature</td></tr>";
-
+        $isEditable = self::$is_editable;
+        //$isEditable = TRUE;
+        //
         //Identifiant FTA
         $idFta = $id_fta;
         $ftaModel = new FtaModel($idFta);
         $ftaView = new FtaView($ftaModel);
         $ftaView->setIsEditable($isEditable);
         $ftaView->setFtaChapitreModelById(self::ID_CHAPITRE_IDENTITE);
-        
-        //Codification
-        //$bloc.=$ftaView->;
- 
-        //Designation
-        $bloc.=$ftaView->getHtmlDataField($paramFieldName);
-        //Nom du demandeur
-        $htmlObject = new htmlInputText(
-                $field_name = "code_article_ldc", $table_name = ObjectFta::TABLE_ARTI_NAME, $value = self::$objectFta->getFieldValue($table_name, $field_name), $is_editable, $warning_update = ${"diff_" . $table_name}[$field_name]
-        );
-        $bloc.=$htmlObject->getHtmlResult();
 
-        //$bloc .= "</table>";
+        /**
+         * @todo Non implementé
+         */
+        //Unité de Poids d'affichage:
+        $bloc.="<tr> <td> not implement</td></tr>";
+
+        //Désignation Abrégée
+        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_NOM_ABREGE);
+
+        //Désignation Interne Agis
+        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_LIBELLE);
+
+        //Désignation Etiquette
+        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_LIBELLE_CLIENT);
+
+        //Code Article LDC
+        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_CODE_ARTICLE_LDC);
+
+        //Site d'expédition
+        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_SITE_EXPEDITION_FTA);
+
+        return $bloc;
+    }
+
+    public static function buildChapitreCodificationExterne() {
+
+        $bloc = "";
+        $id_fta = self::$id_fta;
+        $synthese_action = self::$synthese_action;
+        $isEditable = self::$is_editable;
+        //$isEditable = FALSE;
+        
+        //Identifiant FTA
+        $idFta = $id_fta;
+        $ftaModel = new FtaModel($idFta);
+        $ftaView = new FtaView($ftaModel);
+        $ftaView->setIsEditable($isEditable);
+        $ftaView->setFtaChapitreModelById(self::ID_CHAPITRE_IDENTITE);
+
+
+        //Gencod EAN Article
+        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_EAN_COLIS);
+
+        //Gencod EAN Colis
+        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_EAN_COLIS);
+
+        //Gencod EAN Palette
+        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_EAN_PALETTE);
+
         return $bloc;
     }
 
@@ -769,42 +814,94 @@ class Chapitre {
         //$bloc .= "</table>";
         return $bloc;
     }
-
-    public static function buildChapitreExpedition() {
+    
+        public static function buildChapitreExpedition() {
 
         $bloc = "";
         $id_fta = self::$id_fta;
         $synthese_action = self::$synthese_action;
         $isEditable = self::$is_editable;
-                
+        $isEditable = TRUE;
+
         $bloc.="<tr class=titre_principal><td class>Logistique</td></tr>";
-                
-        
-        
+
+
+
         //Identifiant FTA
         $idFta = $id_fta;
         $ftaModel = new FtaModel($idFta);
         $ftaView = new FtaView($ftaModel);
         $ftaView->setIsEditable($isEditable);
         $ftaView->setFtaChapitreModelById(self::ID_CHAPITRE_IDENTITE);
-        
+
         //Site d'assemblage
         $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_SITE_ASSEMBLAGE);
-        
+
         //Site d'expedition
         $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_SITE_EXPEDITION_FTA);
-        
-        
+
+
         //CNUD PREPARER PAR
         $bloc.=$ftaView->getHtmlCNUDPreparerPar();
-        
+
         //Code Douane 
         $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_CODE_DOUANE_FTA);
-        
+
         //Libellé Code Douane 
         $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_CODE_DOUANE_LIBELLE_FTA);
+
+
+        return $bloc;
+    }
+
+
+    public static function buildChapitreEtiquette() {
+
+        $bloc = "";
+        $id_fta = self::$id_fta;
+        $synthese_action = self::$synthese_action;
+        $isEditable = self::$is_editable;
+        //$isEditable = TRUE;
+
+        $bloc.="<tr class=titre_principal><td class>Gestion des étiquettes</td></tr>";
+
+        //Identifiant FTA
+        $idFta = $id_fta;
+        $ftaModel = new FtaModel($idFta);
+        $ftaView = new FtaView($ftaModel);
+        $ftaView->setIsEditable($isEditable);
+        $ftaView->setFtaChapitreModelById(self::ID_CHAPITRE_IDENTITE);
+
         
+         /**
+         * @todo Non implementé
+         */
+        //Activer le système d'impression Base Etiquette Codesoft
+        $bloc.="<tr> <td> not implement</td></tr>";
+
+        $bloc.="<tr class=titre_principal><td class>Etiquettes Colis</td></tr>";
         
+        //Laisser l'informatique gérer la désignation ?
+        $bloc.="<tr> <td> not implement</td></tr>";
+
+        //Libellé etiquette carton:
+        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_LIBELLE_CLIENT);
+        
+        //Modèle d'étiquette
+        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_ETIQUETTE_CODESOFT);
+
+        $bloc.="<tr class=titre_principal><td class>Etiquettes Composition</td></tr>";
+        
+        //Composition Etiquette (1er paragraphe)
+        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_COMPOSITION1);
+
+        //Composition Etiquette (2nd paragraphe)
+        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_COMPOSITION2);
+
+        //Libellé Code Douane 
+        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_LIBELLE_MULTILANGUE);
+
+
         return $bloc;
     }
 
@@ -828,7 +925,7 @@ class Chapitre {
         $id_fta = self::$id_fta;
         $synthese_action = self::$synthese_action;
         $isEditable = self::$is_editable;
-        $isEditable = FALSE;
+        $isEditable = FASLE;
 
         $bloc.="<tr class=titre_principal><td class>Demandeur</td></tr>";
         //$objectFta = new ObjectFta($id_fta);
@@ -920,8 +1017,8 @@ class Chapitre {
         /**        */
         return $bloc;
     }
-    
-    public static function  buildChapitreNomenclature() {
+
+    public static function buildChapitreNomenclature() {
         
     }
 

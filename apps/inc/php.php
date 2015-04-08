@@ -59,7 +59,7 @@ require_once("../lib/class/model/FtaProcessusMultisite.php");
 require_once("../lib/class/model/FtaProcessusDelaiModel.php");
 require_once("../lib/class/model/GeoModel.php");
 
-// Rendus HTML standard
+// Standard HTML
 require_once("../lib/class/html/Html.php");
 require_once("../lib/class/html/standard/AbstractAllHtmlParameters.php");
 require_once("../lib/class/html/standard/Attribute/AbstractAttributeTypeGenericValue.php");
@@ -128,6 +128,8 @@ require_once("../lib/class/html/standard/Tag/HtmlStandardTagInput.php");
 require_once("../lib/class/html/standard/Tag/HtmlStandardTagOption.php");
 require_once("../lib/class/html/standard/Tag/HtmlStandardTagSelect.php");
 require_once("../lib/class/html/standard/Tag/HtmlStandardTagTextArea.php");
+
+// Classe de représentation d'objet HTML
 require_once("../lib/class/html/AttributesGlobal.php");
 require_once("../lib/class/html/AttributesInput.php");
 require_once("../lib/class/html/AttributesOption.php");
@@ -154,6 +156,7 @@ require_once("../lib/class/html/DataFieldToHtmlList.php");
 require_once("../lib/class/html/DataFieldToHtmlListBoolean.php");
 require_once("../lib/class/html/DataFieldToHtmlInputCalendar.php");
 require_once("../lib/class/html/DataFieldToHtmlTextArea.php");
+require_once("../lib/class/html/HtmlSubForm3Fields.php");
 
 // Session utilisateur
 require_once("../lib/session.php");

@@ -200,6 +200,26 @@ class DatabaseOperation {
 
     /**
      * Convertie un résultat SQL en tableau PHP
+     * La clef du tableau sera générée car asbente dans le résultat SQL
+     * @param resource $paramResult
+     * @return array Tableau
+     */
+    public static function convertSqlResultWithKeyAsFirstFieldToArray($paramResult) {
+        $return = NULL;
+        $i = 0;
+        if ($paramResult <> NULL) {
+            while ($rows = mysql_fetch_array($paramResult, MYSQL_ASSOC)) {
+                $keys = array_keys($rows);
+                $key_value = $rows[$keys[0]];
+                $return[$key_value] = $rows;
+                $i++;
+            }
+        }
+        return $return;
+    }
+
+    /**
+     * Convertie un résultat SQL en tableau PHP
      * La clef du tableau sera celle de la première colonne du résultat SQL
      * @param resource $paramResult
      * @return array Tableau PHP
@@ -210,8 +230,8 @@ class DatabaseOperation {
             while ($rows = mysql_fetch_array($paramResult, MYSQL_NUM)) {
                 $return[$rows[0]] = $rows[1];
             }
+            return $return;
         }
-        return $return;
     }
 
     /**

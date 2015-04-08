@@ -14,20 +14,175 @@ class GlobalConfig {
 
     const INITIALIZED_TRUE = TRUE;
     const INITIALIZED_FALSE = FALSE;
+    const VARNAME_EXEC_DEBUG_TIME_START = "exec_debug_time_start";
+    const VARNAME_GLOBALCONFIG_IN_PHP_SESSION = "globalConfig";
     const VARNAME_IS_GLOBALCONFIG_INITIALIZED = "isGlobalConfigInitialized";
     const VARNAME_IS_DATABASE_INITIALIZED = "isDatabaseInitialized";
 
     /**
      * @var EnvironmentConf
      */
-    private $conf = null;
+    private $conf = NULL;
+    private $needBuildConf = NULL;
 
     function __construct() {
 
+        /**
+         * Par défaut, on estime qu'il n'est pas nécessaire de reconstruire la 
+         * configuration de la session.
+         */
+        $this->setNeedBuildConf(FALSE);
 
-        if (gettype($_SESSION["globalConfig"]) == "object") {
-            $this->setConf($_SESSION["globalConfig"]->getConf());
+        /**
+         * Si la GlobalConfig n'existe pas en session PHP, alors il faut
+         * la reconstruire.
+         */
+        if (!self::getIsGlobalConfigExistInPhpSession()) {
+            $this->setNeedBuildConf(TRUE);
+        } else {
+            /**
+             * Sinon, on restaure la Configuration précédemment sauvegardée
+             * dans la session PHP
+             */
+            $this->setConf($_SESSION[self::VARNAME_GLOBALCONFIG_IN_PHP_SESSION]->getConf());
+
+            /**
+             * Si le mode Debug de session est activé, on reconstruit
+             * tout de même la configuration de l'environnement.
+             */
+            if ($this->getConf()->getExecDebugEnable()) {
+                $this->setNeedBuildConf(TRUE);
+            }
         }
+
+        /**
+         * Si il s'est précédemment révélé nécessaire de reconstruire
+         * la configuration de l'environnement, alors on le réalise.
+         */
+        if ($this->getNeedBuildConf()) {
+            $this->buildEnvironmentConf();
+        }
+    }
+
+    /**
+     * Sauvegarde de la GlobalConfig dans la session PHP
+     * @param GlobalConfig $paramGlobalConfig
+     */
+    static function saveGlobalConfToPhpSession(GlobalConfig $paramGlobalConfig) {
+        $_SESSION[GlobalConfig::VARNAME_GLOBALCONFIG_IN_PHP_SESSION] = $paramGlobalConfig;
+    }
+
+    function openDatabaseConnexion() {
+        /**
+         * Ouverture de la connexion MySQL  
+         */
+        mysql_connect($this->getConf()->getMysqlServerName()
+                , $this->getConf()->getMysqlDatabaseAuthentificationUsername()
+                , $this->getConf()->getMysqlDatabaseAuthentificationPassword()
+                , ""
+                , MYSQL_CLIENT_COMPRESS)
+        ;
+        mysql_select_db($this->getConf()->getMysqlDatabaseName());
+        mysql_query("SET NAMES utf8");
+    }
+
+    /**
+     * Chargement de la description de la base de données en mémoire.
+     * Attention, cette partie coûte du temps d'exécution.
+     * Elle ne sera exécutée qu'une seule fois par session
+     * La connexion à la base MySQL est prérequise.
+     */
+    function buildDatabaseDescription() {
+
+        if (!GlobalConfig::getDatabaseDescriptionIsInitialized() ||
+                $this->getConf()->getSessionDebugEnable()
+        ) {
+            DatabaseDescription::buildDatabaseDescription();
+
+            /**
+             * Liste des modules public
+             */
+            $req = "SELECT * FROM intranet_modules "
+                    . "WHERE public_intranet_modules='1' "
+                    . "ORDER BY classement_intranet_modules DESC"
+            ;
+            $_SESSION["intranet_module_public"] = DatabaseOperation::convertSqlResultWithoutKeyToArray(DatabaseOperation::query($req));
+
+            $req = "SELECT * FROM intranet_modules";
+            $result = DatabaseOperation::query($req);
+            while ($rows = mysql_fetch_array($result)) {
+                $_SESSION["intranet_modules"][$rows["nom_intranet_modules"]]["id_intranet_modules"] = $rows["id_intranet_modules"];
+                $_SESSION["intranet_modules"][$rows["nom_intranet_modules"]]["nom_intranet_modules"] = $rows["nom_intranet_modules"];
+                $_SESSION["intranet_modules"][$rows["nom_intranet_modules"]]["nom_usuel_intranet_modules"] = $rows["nom_usuel_intranet_modules"];
+                $_SESSION["intranet_modules"][$rows["nom_intranet_modules"]]["version_intranet_modules"] = $rows["version_intranet_modules"];
+                $_SESSION["intranet_modules"][$rows["nom_intranet_modules"]]["visible_intranet_modules"] = $rows["visible_intranet_modules"];
+                $_SESSION["intranet_modules"][$rows["nom_intranet_modules"]]["classement_intranet_modules"] = $rows["classement_intranet_modules"];
+                $_SESSION["intranet_modules"][$rows["nom_intranet_modules"]]["public_intranet_modules"] = $rows["public_intranet_modules"];
+                $_SESSION["intranet_modules"][$rows["nom_intranet_modules"]]["css_intranet_module"] = $rows["css_intranet_module"];
+            }
+            $this->setDatabaseIsInitializedToTrue();
+        } //Fin des enregistrements MySQL en session
+    }
+
+    function buildEnvironmentConf() {
+        /*
+          Initialisation des variables de sessions et de connexions:
+         */
+
+        //Variables relatives aux environnements:
+        switch (filter_input(INPUT_SERVER, 'SERVER_NAME')) {
+
+            //Environnement Codeur
+            case EnvironmentConf::SITE_COD:
+
+                $envToInit = new EnvironmentCod();
+                break;
+
+            //Environnement Développement
+            Case EnvironmentConf::SITE_DEV:
+
+                $envToInit = null;
+                break;
+
+            //Environnement Production
+            Case EnvironmentConf::SITE_PRD:
+
+                $envToInit = null;
+                break;
+
+            default:
+                echo EnvironmentConf::ENVIRONMENT_DONT_EXIST_MESSAGE;
+                $envToInit = null;
+        }
+        //Initialisation de la configuration
+        $this->setConf($envToInit->getConf());
+
+        /**
+         * A chaque ouverture de script et si le paramètre de debug est activé,
+         * Chronométrage du temps d'exécution du script.
+         */
+        if ($this->getConf()->getExecDebugEnable()) {
+            $_SESSION[GlobalConfig::VARNAME_EXEC_DEBUG_TIME_START] = microtime(true);
+        }
+
+        //Sauvegarde de la configuration dans la session:
+        $this->setConfIsInitializedToTrue();
+    }
+
+    function getNeedBuildConf() {
+        return $this->needBuildConf;
+    }
+
+    function setNeedBuildConf($needBuildConf) {
+        $this->needBuildConf = $needBuildConf;
+    }
+
+    static function getIsGlobalConfigExistInPhpSession() {
+        /**
+         * La configuration globale est-elle initialisée ?
+         * On récupère cette information stockée dans la session PHP.
+         */
+        return gettype($_SESSION[self::VARNAME_GLOBALCONFIG_IN_PHP_SESSION]) == "object";
     }
 
     static function getConfIsInitialized() {
@@ -50,7 +205,7 @@ class GlobalConfig {
         $this->setConfIsInitialized(self::INITIALIZED_FALSE);
     }
 
-    static function getDatabaseIsInitialized() {
+    static function getDatabaseDescriptionIsInitialized() {
         /**
          * La configuration base de données est-elle initialisée ?
          * On récupère cette information stockée dans la session PHP.

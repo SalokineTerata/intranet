@@ -26,6 +26,7 @@ class EnvironmentConf {
     const URL_PROTOCOL = "http";
     const DOC_APIGEN_DIR = "doc/apigen";
     const URL_EASYPHP = "http://127.0.0.1/home";
+    const ENVIRONMENT_DONT_EXIST_MESSAGE = "L'environnement d'exécution n'a pas pu être trouvé. Vérifiez les fichiers conf/Environment*.php";
 
     //Variables
     //A classer par ordre alphabérique
@@ -177,7 +178,7 @@ class EnvironmentConf {
         $this->applicationTitle = $applicationTitle;
     }
 
-    public function setExecDebugEnable($execDebugEnable) {
+    public function setExecEnvironmentDebugEnable($execDebugEnable) {
         $this->execDebugEnable = $execDebugEnable;
     }
 
@@ -233,7 +234,7 @@ class EnvironmentConf {
         $this->smtpServiceEnable = $smtpServiceEnable;
     }
 
-    public function setUrlRoot($urlRoot) {
+    public function setUrlRootDir($urlRoot) {
         $this->urlRoot = $urlRoot;
     }
 

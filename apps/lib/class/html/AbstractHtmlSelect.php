@@ -76,7 +76,7 @@ abstract class AbstractHtmlSelect extends AbstractHtmlGlobalElement {
      */
     public function getHtmlViewedContent() {
         if ($this->getSelectedValue()) {
-            $return = $this->getSelectedValue();
+            $return = $this->getSelectedContent();
         } else {
             $return = self::LIST_NO_SELECTION_VALUE;
         }
@@ -177,11 +177,20 @@ abstract class AbstractHtmlSelect extends AbstractHtmlGlobalElement {
     }
 
     /**
-     * Retourne la valeur sélectionné dans la liste
+     * Retourne la valeur sélectionnée dans la liste
      * @return mixed
      */
     public function getSelectedValue() {
         return $this->selectedValue;
+    }
+
+    /**
+     * Retourne le libellé de la valeur sélectionnée dans la liste
+     * @return mixed
+     */
+    public function getSelectedContent() {
+        $arrayContent = $this->getArrayListContent();
+        return $arrayContent[$this->getSelectedValue()];
     }
 
     /**

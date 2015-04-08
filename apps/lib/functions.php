@@ -148,6 +148,74 @@
   $nb_limite_resultat = nombre maximun de resultat que peut avoir une requete.
 
  * ******************************************************************************** */
+function identification1($mysql_table_authentification, $login, $pass, GlobalConfig $globalConfig = null) {
+    $debug = EnvironmentConf::LDAP_DEBUG;
+    $return = TRUE;         //On part du principe que l'authentification doit fonctionner
+    $mysql_passwd = "";     //On part du principe que l'authentification MySQL ne sera pas nécessaire.
+    if ($globalConfig == null) {
+        $globalConfig = $_SESSION["globalConfig"];
+    }
+    $ldap_active = $globalConfig->getConf()->getLdapServiceEnable();
+    $ldap_server = $globalConfig->getConf()->getLdapServerName();
+    $ldap_context = array("Comptes", "ldcseg");  //Liste des contextes LDAP supportés
+    $ldap_result = false;
+
+    //Authentification LDAP
+    if ($debug)
+        echo "ldap_active=$ldap_active<br>";
+    if ($ldap_active) {
+        $ldap_connect = ldap_connect($ldap_server);  // doit être un serveur LDAP valide !
+        $result_LDAP_OPT_PROTOCOL_VERSION = ldap_set_option($ldap_connect, LDAP_OPT_PROTOCOL_VERSION, 3);
+        if ($debug)
+            echo "result_LDAP_OPT_PROTOCOL_VERSION=$result_LDAP_OPT_PROTOCOL_VERSION<br>";
+        if ($debug)
+            $get_LDAP_OPT_PROTOCOL_VERSION = 0;
+        if ($debug)
+            ldap_get_option($ldap_connect, "LDAP_OPT_PROTOCOL_VERSION", $get_LDAP_OPT_PROTOCOL_VERSION);
+        if ($debug)
+            echo "LDAP_OPT_PROTOCOL_VERSION=$get_LDAP_OPT_PROTOCOL_VERSION<br>";
+        if ($debug)
+            echo "ldap_connect = $ldap_connect<br>";
+        if ($ldap_connect) {
+            if ($debug) {
+                $ldap_result = ldap_bind($ldap_connect, "uid=" . $login . ",ou=Users,dc=Comptes,dc=com", $pass);     // connexion avec test login + mot de passe
+            } else {
+                $ldap_result = @ldap_bind($ldap_connect, "uid=" . $login . ",ou=Users,dc=Comptes,dc=com", $pass);     // connexion avec test login + mot de passe
+            }
+            if ($debug)
+                echo "ldap_result=$ldap_result<br>";
+            ldap_close($ldap_connect);
+        } else {
+            echo "Connexion au serveur LDAP impossible...";
+        }
+    }
+
+    //Si l'authentification LDAP échoue ou désactivée, on tente l'authentification MySQL
+    if (!$ldap_result or $pass == "") {
+        $mysql_passwd = "AND (pass=PASSWORD('$pass'))";
+        $req_authentification_main = "SELECT * FROM " . $mysql_table_authentification . " WHERE "
+                . "(login = '$login') "
+                . "AND (blocage='non') "
+                . "AND (actif='oui') "
+        ;
+        $req_authentification = $req_authentification_main . $mysql_passwd;
+
+        $q1 = mysql_query($req_authentification);
+        $mysql_result = mysql_numrows($q1);
+        if (!$mysql_result) {
+
+            $mysql_passwd = "AND (pass=OLD_PASSWORD('$pass'))";
+            $req_authentification = $req_authentification_main . $mysql_passwd;
+            $q1 = mysql_query($req_authentification);
+            $mysql_result = mysql_numrows($q1);
+            if (!$mysql_result) {
+                $return = 0;
+            }
+        }
+    }
+
+    return $return;
+}
 
 function recuperation_donnees_recherche($module, $url_page_depart, $module_table, $champ_retour, $nb_limite_resultat, $nbligne, $nbcol, $champ_recherche, $operateur_recherche, $texte_recherche, $champ_courant, $operateur_courant, $texte_courant, $nb_col_courant, $nb_ligne_courant, $ajout_col
 ) {
@@ -268,7 +336,7 @@ function recuperation_donnees_recherche($module, $url_page_depart, $module_table
             if (!strstr($url_page_depart, '?'))
                 $lien = $url . "?url_page_depart=$url_page_depart&nb_limite_resultat=$nb_limite_resultat&champ_recherche=$champ_recherche_aux&operateur_recherche=$operateur_recherche_aux&texte_recherche=$texte_recherche_aux&nbligne=$nbligne&nbcol=$nbcol&nb_col_courant=$cpt_col&nb_ligne_courant=$cpt_ligne&champ_courant=";
             else
-                $lien=$url . "&url_page_depart=$url_page_depart&nb_limite_resultat=$nb_limite_resultat&champ_recherche=$champ_recherche_aux&operateur_recherche=$operateur_recherche_aux&texte_recherche=$texte_recherche_aux&nbligne=$nbligne&nbcol=$nbcol&nb_col_courant=$cpt_col&nb_ligne_courant=$cpt_ligne&champ_courant=";
+                $lien = $url . "&url_page_depart=$url_page_depart&nb_limite_resultat=$nb_limite_resultat&champ_recherche=$champ_recherche_aux&operateur_recherche=$operateur_recherche_aux&texte_recherche=$texte_recherche_aux&nbligne=$nbligne&nbcol=$nbcol&nb_col_courant=$cpt_col&nb_ligne_courant=$cpt_ligne&champ_courant=";
 
             // remplissage de la première liste déroulante
             $liste_champ.="<option value" . $lien;
@@ -304,7 +372,7 @@ function recuperation_donnees_recherche($module, $url_page_depart, $module_table
                 if (!strstr($url_page_depart, '?'))
                     $lien = $url . "?url_page_depart=$url_page_depart&nb_limite_resultat=$nb_limite_resultat&champ_recherche=$champ_recherche_aux&operateur_recherche=$operateur_recherche_aux&texte_recherche=$texte_recherche_aux&nbligne=$nbligne&nbcol=$nbcol&nb_col_courant=$cpt_col&nb_ligne_courant=$cpt_ligne&champ_courant=";
                 else
-                    $lien=$url . "&url_page_depart=$url_page_depart&nb_limite_resultat=$nb_limite_resultat&champ_recherche=$champ_recherche_aux&operateur_recherche=$operateur_recherche_aux&texte_recherche=$texte_recherche_aux&nbligne=$nbligne&nbcol=$nbcol&nb_col_courant=$cpt_col&nb_ligne_courant=$cpt_ligne&champ_courant=";
+                    $lien = $url . "&url_page_depart=$url_page_depart&nb_limite_resultat=$nb_limite_resultat&champ_recherche=$champ_recherche_aux&operateur_recherche=$operateur_recherche_aux&texte_recherche=$texte_recherche_aux&nbligne=$nbligne&nbcol=$nbcol&nb_col_courant=$cpt_col&nb_ligne_courant=$cpt_ligne&champ_courant=";
                 $liste_champ.="<option value=" . $lien . $enr[0] . " " . $selected;
                 $liste_champ.=">$enr[3]</option>";
             }
@@ -395,7 +463,7 @@ function recuperation_donnees_recherche($module, $url_page_depart, $module_table
                     if (!strstr($url_page_depart, '?'))
                         $lien = $url . "?url_page_depart=$url_page_depart&nb_limite_resultat=$nb_limite_resultat&champ_recherche=$champ_recherche_aux&operateur_recherche=$operateur_recherche_aux&texte_recherche=$texte_recherche_aux&nbligne=$nbligne&nbcol=$nbcol&nb_col_courant=$cpt_col&nb_ligne_courant=$cpt_ligne&operateur_courant=";
                     else
-                        $lien=$url . "&url_page_depart=$url_page_depart&nb_limite_resultat=$nb_limite_resultat&champ_recherche=$champ_recherche_aux&operateur_recherche=$operateur_recherche_aux&texte_recherche=$texte_recherche_aux&nbligne=$nbligne&nbcol=$nbcol&nb_col_courant=$cpt_col&nb_ligne_courant=$cpt_ligne&operateur_courant=";
+                        $lien = $url . "&url_page_depart=$url_page_depart&nb_limite_resultat=$nb_limite_resultat&champ_recherche=$champ_recherche_aux&operateur_recherche=$operateur_recherche_aux&texte_recherche=$texte_recherche_aux&nbligne=$nbligne&nbcol=$nbcol&nb_col_courant=$cpt_col&nb_ligne_courant=$cpt_ligne&operateur_courant=";
 
                     $liste_operateur.="<option value=" . $lien . $enr3[0] . " " . $selected;
                     $liste_operateur.=">$enr3[1]</option>";
@@ -1045,8 +1113,8 @@ function afficher_table_en_liste_deroulante($nom_table, $champ, $id_defaut, $nom
     }//Fin WHILE de recherche des clefs
     //Création de la liste déroulante
     if ($nom_liste == ""
-
-        )$nom_liste = $id_liste;
+    )
+        $nom_liste = $id_liste;
     $html_liste = "<select name=$nom_liste>";
 
 
@@ -1191,17 +1259,7 @@ function recursif($resultat, $id_recherche, $champ_id_pere, $champ_id_fils, $cha
             $liste_id = $extension[3];
             $dont_explore = $return[2];    //Permet de ne deployer tous les dossiers HTML tout en parcourant l'ensemble de l'arboresence.
             $return = recursif(
-                            $resultat,
-                            $id_recherche,
-                            $champ_id_pere,
-                            $champ_id_fils,
-                            $champ_valeur,
-                            $tab_fils,
-                            $tab_arborescence,
-                            $tab_espace,
-                            $return,
-                            $nombre_ligne,
-                            $extension
+                    $resultat, $id_recherche, $champ_id_pere, $champ_id_fils, $champ_valeur, $tab_fils, $tab_arborescence, $tab_espace, $return, $nombre_ligne, $extension
             );
 
             if ($_SESSION["module"] <> "fiches_mp_achats") { //A optimiser !!
@@ -1314,20 +1372,11 @@ function arborescence_construction($table, $champ_valeur, $champ_id_fils, $champ
     $i = 1;    //Affiche le niveau dans lequel on est
 
     $return = recursif(
-                    $resultat,
-                    $id_recherche,
-                    $champ_id_pere,
-                    $champ_id_fils,
-                    $champ_valeur,
-                    $tab_fils,
-                    $tab_arborescence,
-                    $tab_espace,
-                    $return,
-                    $nombre_ligne,
-                    $extension
+            $resultat, $id_recherche, $champ_id_pere, $champ_id_fils, $champ_valeur, $tab_fils, $tab_arborescence, $tab_espace, $return, $nombre_ligne, $extension
     );
 
     //var_dump($return);
     return $return;
 }
+
 ?>

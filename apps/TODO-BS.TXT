@@ -4,3 +4,5 @@
 [V] Optimisation de l'initialisation de la session PHP
 [V] Liste déroulante HS lorsqu'on en Editable = FALSE.
 [ ] GitHUB Issue
+
+

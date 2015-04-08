@@ -828,7 +828,7 @@ class Chapitre {
         $id_fta = self::$id_fta;
         $synthese_action = self::$synthese_action;
         $isEditable = self::$is_editable;
-
+        $isEditable = FALSE;
 
         $bloc.="<tr class=titre_principal><td class>Demandeur</td></tr>";
         //$objectFta = new ObjectFta($id_fta);

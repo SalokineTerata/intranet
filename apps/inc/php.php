@@ -55,7 +55,9 @@ require_once("../lib/class/model/FtaEtatModel.php");
 require_once("../lib/class/model/FtaProcessusModel.php");
 require_once("../lib/class/model/FtaChapitreModel.php");
 require_once("../lib/class/model/FtaSuiviProjetModel.php");
+require_once("../lib/class/model/FtaProcessusMultisite.php");
 require_once("../lib/class/model/FtaProcessusDelaiModel.php");
+require_once("../lib/class/model/GeoModel.php");
 
 // Rendus HTML standard
 require_once("../lib/class/html/Html.php");

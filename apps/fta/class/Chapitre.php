@@ -144,7 +144,7 @@ class Chapitre {
         return $return;
     }
 
-    protected static function buildChapitreCore() {
+    protected static function buildChapitreCore () {
         $return = "";
         switch (self::$recordChapitre->getFieldValue("nom_fta_chapitre")) {
             case "identite":
@@ -295,7 +295,7 @@ class Chapitre {
         return $bloc;
     }
 
-    public static function buildChapitreProduction() {
+   public static function buildChapitreProduction() {
 
         $bloc = "";
         $id_fta = self::$id_fta;
@@ -511,10 +511,19 @@ class Chapitre {
         $id_fta = self::$id_fta;
         $synthese_action = self::$synthese_action;
         $is_editable = self::$is_editable;
-        $is_editable_false = false;
+        
+/*
+        $bloc.="<tr class=titre_principal><td class>Codification_nomenclature</td></tr>";
 
-        $bloc.="<tr class=titre_principal><td class>Demandeur</td></tr>";
-
+        //Identifiant FTA
+        $idFta = $id_fta;
+        $ftaModel = new FtaModel($idFta);
+        $ftaView = new FtaView($ftaModel);
+        $ftaView->setIsEditable($isEditable);
+        $ftaView->setFtaChapitreModelById(self::ID_CHAPITRE_IDENTITE);
+        
+        */
+        
         //Nom du demandeur
         $htmlObject = new htmlInputText(
                 $field_name = "code_article_ldc", $table_name = ObjectFta::TABLE_ARTI_NAME, $value = self::$objectFta->getFieldValue($table_name, $field_name), $is_editable, $warning_update = ${"diff_" . $table_name}[$field_name]
@@ -764,8 +773,34 @@ class Chapitre {
         $id_fta = self::$id_fta;
         $synthese_action = self::$synthese_action;
         $isEditable = self::$is_editable;
-
-        $bloc = "TEST";
+                
+        $bloc.="<tr class=titre_principal><td class>Logistique</td></tr>";
+                
+        
+        
+        //Identifiant FTA
+        $idFta = $id_fta;
+        $ftaModel = new FtaModel($idFta);
+        $ftaView = new FtaView($ftaModel);
+        $ftaView->setIsEditable($isEditable);
+        $ftaView->setFtaChapitreModelById(self::ID_CHAPITRE_IDENTITE);
+        
+        //Site d'assemblage
+        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_SITE_ASSEMBLAGE);
+        
+        //Site d'expedition
+        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_SITE_EXPEDITION_FTA);
+        
+        
+        //CNUD PREPARER PAR
+        $bloc.=$ftaView->getHtmlCNUDPreparerPar();
+        
+        //Code Douane 
+        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_CODE_DOUANE_FTA);
+        
+        //Libellé Code Douane 
+        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_CODE_DOUANE_LIBELLE_FTA);
+        
         
         return $bloc;
     }
@@ -881,6 +916,10 @@ class Chapitre {
         $bloc.=$ftaView->getHtmlEcheancesProcessus();
         /**        */
         return $bloc;
+    }
+    
+    public static function  buildChapitreNomenclature() {
+        
     }
 
     public static function buildSuiviDossier() {

@@ -53,6 +53,12 @@ class FtaModel extends AbstractModel {
      * @var FtaCategorieModel
      */
     private $modelFtaCategorie;
+    
+    /**
+     * Site d'expédition de la FTA
+     * @var GeoModel
+     */
+    private $modelSiteExpedition;
 
     /**
      * Model de donnée d'une FTA
@@ -76,8 +82,27 @@ class FtaModel extends AbstractModel {
                 new FtaCategorieModel($this->getDataField(self::FIELDNAME_CATEGORIE_FTA)->getFieldValue()
                 , DatabaseRecord::VALUE_DONT_CREATE_RECORD_IN_DATABASE_IF_KEY_DOESNT_EXIST)
         );
+    
+        $this->setModelFtaCategorie(
+                new FtaCategorieModel($this->getDataField(self::FIELDNAME_CATEGORIE_FTA)->getFieldValue()
+                , DatabaseRecord::VALUE_DONT_CREATE_RECORD_IN_DATABASE_IF_KEY_DOESNT_EXIST)
+        );
+    
+        
+        
     }
 
+    
+    
+    function getModelSiteExpedition() {
+        return $this->modelSiteExpedition;
+    }
+
+    function setModelSiteExpedition(GeoModel $modelSiteExpedition) {
+        $this->modelSiteExpedition = $modelSiteExpedition;
+    }
+  
+    
     /**
      * 
      * @return FtaProcessusDelaiModel

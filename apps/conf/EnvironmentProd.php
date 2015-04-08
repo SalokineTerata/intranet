@@ -20,7 +20,7 @@ class EnvironmentProd extends EnvironmentAbstract {
         $this->getConf()->setApplicationTitle(EnvironmentConf::SITE_TITLE);
         $this->getConf()->setApplicationLogo("logo_exploitation.png");
         $this->getConf()->setApplicationLogoMessage("");
-        $this->getConf()->setExecDebugEnable(FALSE);
+        $this->getConf()->setExecEnvironmentDebugEnable(FALSE);
         $this->getConf()->setExecEnvironnement(EnvironmentConf::ENV_COD);
         $this->getConf()->setLdapServerName(EnvironmentConf::LDAP_SERVER_NAME);
         $this->getConf()->setLdapServiceEnable(FALSE);
@@ -36,7 +36,7 @@ class EnvironmentProd extends EnvironmentAbstract {
         $this->getConf()->setSmtpEmailRedirectionUser("utilisateurs.fta@ldc.fr");
         $this->getConf()->setUrlProtocol("http");
         $this->getConf()->setUrlServer("127.0.0.1");
-        $this->getConf()->setUrlRoot("dev-intranet");
+        $this->getConf()->setUrlRootDir("dev-intranet");
         $this->getConf()->setUrlSubdir("apps");
     }
 

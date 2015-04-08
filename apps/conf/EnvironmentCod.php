@@ -12,6 +12,30 @@
  */
 class EnvironmentCod extends EnvironmentAbstract {
 
+    const APPLICATION_HTML_MESSAGE_BEGIN = "<CENTER><BR><FONT SIZE=4><marquee>Environnement développeur</marquee></FONT>";
+    const APPLICATION_HTML_MESSAGE_END = "</CENTER>";
+    const APPLICATION_LOGO = "logo_developpeur.gif";
+    const APPLICATION_NAME = "intranet";
+    const EXECUTION_ENVIRONMENT = EnvironmentConf::ENV_COD;
+    const IS_DEBUG_EXEC_ENVIRONMENT_ENABLED = FALSE;
+    const IS_DEBUG_SESSION_ENABLED = FALSE;
+    const IS_SERVICE_LDAP_ENABLED = FALSE;
+    const IS_SERVICE_SMTP_ENABLED = FALSE;
+    const LDAP_SERVER_NAME = EnvironmentConf::LDAP_SERVER_NAME;
+    const MYSQL_AUTHENTIFICATION_PASSWORD = "8ale!ne";
+    const MYSQL_AUTHENTIFICATION_TABLE_NAME = "salaries";
+    const MYSQL_AUTHENTIFICATION_USER_NAME = "root";
+    const MYSQL_DATABASE_NAME = "intranet_v3_0_dev";
+    const MYSQL_SERVER_NAME = "dev-intranet.agis.fr";
+    const SITE_TITLE = EnvironmentConf::SITE_TITLE;
+    const SMTP_EMAIL_REDIRECTION_ADMIN = "administrateurs.fta@ldc.fr";
+    const SMTP_EMAIL_REDIRECTION_USER = "utilisateurs.fta@ldc.fr";
+    const SMTP_SERVER_NAME = "smtp05401.grpldc.com";
+    const URL_PROTOCOL = "http";
+    const URL_ROOT_DIR = "dev-intranet";
+    const URL_SERVEUR_NAME = EnvironmentConf::SITE_COD;
+    const URL_SUBDIR = "apps";
+
     function __construct() {
 
         /*
@@ -23,32 +47,32 @@ class EnvironmentCod extends EnvironmentAbstract {
          * Partie 2 : Bloc de variables pouvant être
          * directement utilisée dans la Partie 3
          */
-        $this->getConf()->setUrlProtocol("http");
-        $this->getConf()->setUrlServer(EnvironmentConf::SITE_COD);
-        $this->getConf()->setUrlRoot("dev-intranet");
-        $this->getConf()->setUrlSubdir("apps");
+        $this->getConf()->setUrlProtocol(self::URL_PROTOCOL);
+        $this->getConf()->setUrlServer(self::URL_SERVEUR_NAME);
+        $this->getConf()->setUrlRootDir(self::URL_ROOT_DIR);
+        $this->getConf()->setUrlSubdir(self::URL_SUBDIR);
 
         /**
          * Partie 3 :
          */
-        $this->getConf()->setApplicationName("intranet");
-        $this->getConf()->setApplicationTitle(EnvironmentConf::SITE_TITLE);
-        $this->getConf()->setApplicationLogo("logo_developpeur.gif");
-        $this->getConf()->setApplicationLogoMessage("<BR><FONT SIZE=4><marquee>Environnement développeur</marquee></FONT>" . $this->getConf()->getHtmlUrlDoc() . "</CENTER>");
-        $this->getConf()->setExecDebugEnable(FALSE);
-        $this->getConf()->setExecEnvironnement(EnvironmentConf::ENV_COD);
-        $this->getConf()->setLdapServerName(EnvironmentConf::LDAP_SERVER_NAME);
-        $this->getConf()->setLdapServiceEnable(FALSE);
-        $this->getConf()->setMysqlServerName("dev-intranet.agis.fr");
-        $this->getConf()->setMysqlDatabaseName("intranet_v3_0_dev");
-        $this->getConf()->setMysqlDatabaseAuthentificationUsername("root");
-        $this->getConf()->setMysqlDatabaseAuthentificationPassword("8ale!ne");
-        $this->getConf()->setMysqlDatabaseAuthentificationTableName("salaries");
-        $this->getConf()->setSessionDebugEnable(TRUE);
-        $this->getConf()->setSmtpServerName("smtp05401.grpldc.com");
-        $this->getConf()->setSmtpServiceEnable(FALSE);
-        $this->getConf()->setSmtpEmailRedirectionAdmin("administrateurs.fta@ldc.fr");
-        $this->getConf()->setSmtpEmailRedirectionUser("utilisateurs.fta@ldc.fr");
+        $this->getConf()->setApplicationName(self::APPLICATION_NAME);
+        $this->getConf()->setApplicationTitle(self::SITE_TITLE);
+        $this->getConf()->setApplicationLogo(self::APPLICATION_LOGO);
+        $this->getConf()->setApplicationLogoMessage(self::APPLICATION_HTML_MESSAGE_BEGIN . $this->getConf()->getHtmlUrlDoc() . self::APPLICATION_HTML_MESSAGE_END);
+        $this->getConf()->setExecEnvironmentDebugEnable(self::IS_DEBUG_EXEC_ENVIRONMENT_ENABLED);
+        $this->getConf()->setExecEnvironnement(self::EXECUTION_ENVIRONMENT);
+        $this->getConf()->setLdapServerName(self::LDAP_SERVER_NAME);
+        $this->getConf()->setLdapServiceEnable(self::IS_SERVICE_LDAP_ENABLED);
+        $this->getConf()->setMysqlServerName(self::MYSQL_SERVER_NAME);
+        $this->getConf()->setMysqlDatabaseName(self::MYSQL_DATABASE_NAME);
+        $this->getConf()->setMysqlDatabaseAuthentificationUsername(self::MYSQL_AUTHENTIFICATION_USER_NAME);
+        $this->getConf()->setMysqlDatabaseAuthentificationPassword(self::MYSQL_AUTHENTIFICATION_PASSWORD);
+        $this->getConf()->setMysqlDatabaseAuthentificationTableName(self::MYSQL_AUTHENTIFICATION_TABLE_NAME);
+        $this->getConf()->setSessionDebugEnable(self::IS_DEBUG_SESSION_ENABLED);
+        $this->getConf()->setSmtpServerName(self::SMTP_SERVER_NAME);
+        $this->getConf()->setSmtpServiceEnable(self::IS_SERVICE_SMTP_ENABLED);
+        $this->getConf()->setSmtpEmailRedirectionAdmin(self::SMTP_EMAIL_REDIRECTION_ADMIN);
+        $this->getConf()->setSmtpEmailRedirectionUser(self::SMTP_EMAIL_REDIRECTION_USER);
     }
 
 }

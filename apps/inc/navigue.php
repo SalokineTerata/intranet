@@ -36,12 +36,10 @@ $i = 1;              //Compteur du positionnement du bouton
 
 /* Modules Public
  * ************* */
-
-$result1 = DatabaseOperation::convertSqlResultWithoutKeyToArray($intranet_module_public);
 echo "<tr>";
 
 //Création des boutons
-foreach ($result1 as $rows1) {
+foreach ($intranet_module_public as $rows1) {
     $nom_intranet_modules = $rows1["nom_intranet_modules"];
     $nom_usuel_intranet_modules = $rows1["nom_usuel_intranet_modules"];
     if ($i > $limite_colonne) {

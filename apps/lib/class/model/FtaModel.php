@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Description of FtaModel
  * Table des FTA
@@ -6,6 +7,7 @@
  * @author salokine
  */
 class FtaModel extends AbstractModel {
+
     const TABLENAME = "fta";
     const KEYNAME = "id_fta";
     const KEYNAME_CREATEUR = "id_user";
@@ -43,17 +45,25 @@ class FtaModel extends AbstractModel {
      * @var UserModel
      */
     private $modelCreateur;
+
     /**
      * Etat de la FTA
      * @var FtaEtatModel
      */
     private $modelFtaEtat;
+
     /**
      * Catégorie de la FTA
      * @var FtaCategorieModel
      */
     private $modelFtaCategorie;
     
+    /**
+     * Site d'expédition de la FTA
+     * @var GeoModel
+     */
+    private $modelSiteExpedition;
+
     /**
      * Model de donnée d'une FTA
      * @var FtaProcessusDelaiModel
@@ -64,11 +74,13 @@ class FtaModel extends AbstractModel {
      * Site d'expedition de la FTA
      * @var GeoModel
      */
+    
     private $modelSiteExpediton;
     
     
     public function __construct($paramId = NULL, $paramIsCreateRecordsetInDatabaseIfKeyDoesntExist = AbstractModel::DEFAULT_IS_CREATE_RECORDSET_IN_DATABASE_IF_KEY_DOESNT_EXIST) {
         parent::__construct($paramId, $paramIsCreateRecordsetInDatabaseIfKeyDoesntExist);
+
         // Tables filles
         $this->setModelCreateur(
                 new UserModel($this->getDataField(self::FIELDNAME_CREATEUR)->getFieldValue()
@@ -94,12 +106,25 @@ class FtaModel extends AbstractModel {
      * 
      * @return GeoModel
      */
+
     function getModelSiteExpediton() {
         return $this->modelSiteExpediton;
     }
+
     function setModelSiteExpediton(GeoModel $modelSiteExpediton) {
         $this->modelSiteExpediton = $modelSiteExpediton;
     }
+
+    
+    
+    function getModelSiteExpedition() {
+        return $this->modelSiteExpedition;
+    }
+
+    function setModelSiteExpedition(GeoModel $modelSiteExpedition) {
+        $this->modelSiteExpedition = $modelSiteExpedition;
+    }
+  
     
     /**
      * 
@@ -108,9 +133,11 @@ class FtaModel extends AbstractModel {
     public function getModelFtaProcessusDelai() {
         return $this->modelFtaProcessusDelai;
     }
+
     public function setModelFtaProcessusDelai(FtaProcessusDelaiModel $modelFtaProcessusDelai) {
         $this->modelFtaProcessusDelai = $modelFtaProcessusDelai;
     }
+
     /**
      * Retourne le créateur de la FTA
      * @return UserModel
@@ -118,6 +145,7 @@ class FtaModel extends AbstractModel {
     public function getModelCreateur() {
         return $this->modelCreateur;
     }
+
     /**
      * Retourne l'état de la FTA
      * @return FtaEtatModel
@@ -125,6 +153,7 @@ class FtaModel extends AbstractModel {
     public function getModelFtaEtat() {
         return $this->modelFtaEtat;
     }
+
     /**
      * Défini le créateur de la FTA
      * @param UserModel 
@@ -132,6 +161,7 @@ class FtaModel extends AbstractModel {
     private function setModelCreateur($modelCreateur) {
         $this->modelCreateur = $modelCreateur;
     }
+
     /**
      * Défini l'état de la FTA
      * @param FtaEtatModel 
@@ -139,24 +169,29 @@ class FtaModel extends AbstractModel {
     private function setModelFtaEtat(FtaEtatModel $modelFtaEtat) {
         $this->modelFtaEtat = $modelFtaEtat;
     }
+
     public function getModelFtaCategorie() {
         return $this->modelFtaCategorie;
     }
+
     private function setModelFtaCategorie(FtaCategorieModel $modelFtaCategorie) {
         $this->modelFtaCategorie = $modelFtaCategorie;
     }
+
     /**
      * Tableau de DatabaseRecord contenant les processus de cycle de vie
      * de la FTA
      * @return array
      */
     public function getArrayIdProcessusFromFtaCycleDeVie() {
+
         $sqlDataEtatAbreviationValue = DatabaseOperation::convertDataForQuery(
                         $this->getModelFtaEtat()->getDataField(FtaEtatModel::FIELDNAME_ABREVIATION)->getFieldValue()
         );
         $sqlDataIdFtaCategorieValue = DatabaseOperation::convertDataForQuery(
                         $this->getModelFtaCategorie()->getKeyValue()
         );
+
         //Sélection de tous les processus appartenant au cycle de vie de la FTA
         return DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
                         "SELECT DISTINCT " . FtaProcessusCycleModel::FIELDNAME_PROCESSUS_INIT . " AS " . FtaProcessusModel::KEYNAME . " "
@@ -168,17 +203,23 @@ class FtaModel extends AbstractModel {
                         . "ORDER BY " . FtaProcessusCycleModel::FIELDNAME_PROCESSUS_INIT
         );
     }
+
     public function getArrayIdProcessusFromFtaProcessusDelai() {
+
         //Sélection de tous les processus appartenant au cycle de vie de la FTA
         $sqlDataIdFtaValue = $this->getKeyValue();
+
         return DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
                         "SELECT " . FtaProcessusDelaiModel::FIELDNAME_ID_FTA_PROCESSUS . " FROM " . FtaProcessusDelaiModel::TABLENAME . " "
                         . "WHERE " . FtaProcessusDelaiModel::FIELDNAME_ID_FTA . "=" . $sqlDataIdFtaValue . " "
         );
     }
+
     public function getEcheanceByIdProcessus($paramIdProcessus) {
+
         //Sélection de tous les processus appartenant au cycle de vie de la FTA
         $sqlDataIdFtaValue = $this->getKeyValue();
+
         $returnArray = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
                         "SELECT " . FtaProcessusDelaiModel::FIELDNAME_DATE_ECHEANCE_PROCESSUS . " FROM " . FtaProcessusDelaiModel::TABLENAME . " "
                         . "WHERE " . FtaProcessusDelaiModel::FIELDNAME_ID_FTA . "=" . $sqlDataIdFtaValue . " "
@@ -186,14 +227,19 @@ class FtaModel extends AbstractModel {
         );
         return $returnArray[0][FtaProcessusDelaiModel::FIELDNAME_DATE_ECHEANCE_PROCESSUS];
     }
+
     public function getArrayModelFtaProcessusDelaiByIdProcessus() {
+
         $arrayReturn = NULL;
         $arrayIdProcessusFromFtaProcessusDelai = $this->getArrayIdProcessusFromFtaProcessusDelai();
+
         if ($arrayIdProcessusFromFtaProcessusDelai != NULL) {
             //Parcours de tous les processus dont un délai a déjà été resenseigné
             foreach ($arrayIdProcessusFromFtaProcessusDelai as $rows) {
+
                 //Extraction des données du tableau PHP
                 $idFtaProcessus = $rows[FtaProcessusModel::KEYNAME];
+
                 //Stockage dans un tableau où la clef est l'ID du processus
                 $arrayModelFtaProcessusDelaiByIdProcessus[$idFtaProcessus] = new FtaProcessusDelaiModel($idFtaProcessus);
             }
@@ -201,22 +247,33 @@ class FtaModel extends AbstractModel {
         }
         return $arrayReturn;
     }
+
     public function getArrayDataFieldEcheancesForProcessusCycle() {
+
         $dateEcheanceFta = $this->getDataField(FtaModel::FIELDNAME_DATE_ECHEANCE_FTA)->getFieldValue();
+
         $isEcheanceForThisFtaExist = NULL;
+
         //Date par processus
         $annee_date_echeance_fta = substr($dateEcheanceFta, 0, 4);
         $mois_date_echeance_fta = substr($dateEcheanceFta, 5, 2);
         $jour_date_echeance_fta = substr($dateEcheanceFta, 8, 2);
+
         $arrayModelFtaProcessusDelaiByIdProcessus = $this->getArrayModelFtaProcessusDelaiByIdProcessus();
+
+
         //Sélection de tous les processus appartenant au cycle de vie de la FTA
         $arrayIdProcessusFromFtaCycleDeVie = $this->getArrayIdProcessusFromFtaCycleDeVie();
+
         foreach ($arrayIdProcessusFromFtaCycleDeVie as $rows) {
+
             //Extraction des données du tableau PHP
             $idFtaProcessus = $rows[FtaProcessusModel::KEYNAME];
             $WeekSinceFirstProcessus = $rows[FtaProcessusCycleModel::FIELDNAME_DELAI];
+
             //Processus défini pour ce cycle de vie
             $modelFtaProcessusForCycle = new FtaProcessusModel($idFtaProcessus);
+
             //La FTA a-t-elle une échéance de renseignée pour ce processus ?
             if ($arrayModelFtaProcessusDelaiByIdProcessus != NULL) {
                 $isEcheanceForThisFtaExist = array_key_exists(
@@ -224,29 +281,37 @@ class FtaModel extends AbstractModel {
                         , $arrayModelFtaProcessusDelaiByIdProcessus
                 );
             }
+
             if ($isEcheanceForThisFtaExist) {
                 //Si il existe, on récupère ce délai
+
                 $modelFtaProcessusDelai = $arrayModelFtaProcessusDelaiByIdProcessus[$modelFtaProcessusForCycle->getKeyValue()];
             } else {
                 //Si il n'existe pas, il faut initialiser l'échéance
+
                 $modelFtaProcessusDelai = new FtaProcessusDelaiModel();
                 $modelFtaProcessusDelai->setModelFtaById($this->getKeyValue());
                 $modelFtaProcessusDelai->setModelFtaProcessusById($modelFtaProcessusForCycle->getKeyValue());
+
                 //Mise à jour du tableau
                 $arrayModelFtaProcessusDelaiByIdProcessus[
                         $modelFtaProcessusForCycle->getDataField(FtaProcessusDelaiModel::FIELDNAME_ID_FTA_PROCESSUS)->getFieldValue()
                         ] = $modelFtaProcessusDelai;
             }
+
             //Récupération de la date d'échéance de la FTA définie pour ce processus
             if (($dateEcheanceFta == NULL or $dateEcheanceFta == "0000-00-00") and parent::getIsEditable()) {
                 $modelFtaProcessusDelai->getDataField(FtaProcessusDelaiModel::FIELDNAME_DATE_ECHEANCE_PROCESSUS)->setFieldValue("");
             } else {
+
                 $delai_jour = $WeekSinceFirstProcessus * ModuleConfig::DELAI_ECHEANCE_PROCESSUS_JOUR;
                 $timestamp_date_echeance_fta = mktime(0, 0, 0, $mois_date_echeance_fta, $jour_date_echeance_fta - $delai_jour, $annee_date_echeance_fta);
                 $dateDefaultEcheance = date("Y-m-d", $timestamp_date_echeance_fta);
                 $modelFtaProcessusDelai->getDataField(FtaProcessusDelaiModel::FIELDNAME_DATE_ECHEANCE_PROCESSUS)->setFieldValue($dateDefaultEcheance);
             }
+
             $modelFtaProcessusDelai->saveToDatabase();
+
 //            $arrayDataFieldEcheancesForProcessusCycle[] = $modelFtaProcessusDelai->getDataField(FtaProcessusDelaiModel::FIELDNAME_DATE_ECHEANCE_PROCESSUS);
             $arrayDataFieldEcheancesForProcessusCycle[] = $modelFtaProcessusDelai;
             //Construction des objets HTML de date
@@ -258,7 +323,10 @@ class FtaModel extends AbstractModel {
 //
 //            $blocEcheanceLignes .= $HtmlElementEcheance->getHtmlResult();
         }
+
         return $arrayDataFieldEcheancesForProcessusCycle;
     }
+
 }
+
 ?>

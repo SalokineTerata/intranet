@@ -95,19 +95,19 @@ switch ($action) {
         $modelFta->saveToDatabase();
         
         //$date_echeance_fta = $objectFta->getFieldValue(ObjectFta::TABLE_FTA_NAME, "date_echeance_fta");
-        $date_echeance_fta = $modelFta->getDataField(FtaModel::FIELDNAME_DATE_ECHEANCE_FTA)->getFieldValue();
+        //$date_echeance_fta = $modelFta->getDataField(FtaModel::FIELDNAME_DATE_ECHEANCE_FTA)->getFieldValue();
         
         //$abreviation_fta_etat = $objectFta->getFieldValue(ObjectFta::TABLE_ETAT_NAME, "abreviation_fta_etat");
-        $abreviation_fta_etat = $modelFta->getModelFtaEtat()->getDataField(FtaEtatModel::FIELDNAME_ABREVIATION);
+        //$abreviation_fta_etat = $modelFta->getModelFtaEtat()->getDataField(FtaEtatModel::FIELDNAME_ABREVIATION);
         
         //$id_fta_chapitre_encours = $objectFta->getFieldValue(ObjectFta::TABLE_SUIVI_PROJET_NAME, "id_fta_chapitre");
         
         //$signature_validation_suivi_projet = $objectFta->getFieldValue(ObjectFta::TABLE_SUIVI_PROJET_NAME, "signature_validation_suivi_projet");
 
         //$id_fta_chapitre = $id_fta_chapitre_encours;
-        $recordChapitre = new DatabaseRecord("fta_chapitre", $id_fta_chapitre_encours);
-        $id_fta_processus_encours = $recordChapitre->getFieldValue("id_fta_processus");
-        $nom_fta_chapitre_encours = $recordChapitre->getFieldValue("nom_fta_chapitre");
+//        $recordChapitre = new DatabaseRecord("fta_chapitre", $id_fta_chapitre_encours);
+//        $id_fta_processus_encours = $recordChapitre->getFieldValue("id_fta_processus");
+//        $nom_fta_chapitre_encours = $recordChapitre->getFieldValue("nom_fta_chapitre");
 
 
         //Calcul des éléments de palettisation (tout est issu de cette fonction)
@@ -135,151 +135,151 @@ switch ($action) {
 //            }
 //        }
 
-        if ($objectFta->getFieldValue(ObjectFta::TABLE_FTA_NAME, "designation_commerciale_fta")) {
-            $objectFta->setFieldValue(
-                    ObjectFta::TABLE_FTA_NAME, "designation_commerciale_fta", strtoupper(
-                            $objectFta->getFieldValue(
-                                    ObjectFta::TABLE_FTA_NAME, "designation_commerciale_fta"
-            )));
-        }
+//        if ($objectFta->getFieldValue(ObjectFta::TABLE_FTA_NAME, "designation_commerciale_fta")) {
+//            $objectFta->setFieldValue(
+//                    ObjectFta::TABLE_FTA_NAME, "designation_commerciale_fta", strtoupper(
+//                            $objectFta->getFieldValue(
+//                                    ObjectFta::TABLE_FTA_NAME, "designation_commerciale_fta"
+//            )));
+//        }
 
         //echo $date_validation_suivi_projet;
         //Récupération des dates MySQL
-        $tab_date = array(array("name" => "date_echeance_fta"
-                , "default" => "0000-00-00"
-                , "force" => ""
-                , "recordset" => ObjectFta::TABLE_FTA_NAME
-            )
-            , array("name" => "date_transfert_industriel"
-                , "default" => "0000-00-00"
-                , "force" => ""
-                , "recordset" => ObjectFta::TABLE_FTA_NAME
-            )
-            , array("name" => "date_demarrage_chapitre_fta_suivi_projet"
-                , "default" => "Y-m-d"
-                , "force" => ""
-                , "recordset" => ObjectFta::TABLE_SUIVI_PROJET_NAME
-            )
-            , array("name" => "date_validation_suivi_projet"
-                , "default" => "Y-m-d"
-                , "force" => "Y-m-d"
-                , "recordset" => ObjectFta::TABLE_SUIVI_PROJET_NAME
-            )
-        );
-        foreach ($tab_date as $current_date) {
-            //Initialisation des variables locales
-            $nom_date = $current_date["name"];
-            $${"nom_date"} = Lib::getParameterFromRequest($current_date["name"]);
-            $txt1 = "jour_date_" . $nom_date;
-            $jour_date = Lib::getParameterFromRequest($txt1);
-            $txt1 = "mois_date_" . $nom_date;
-            $mois_date = Lib::getParameterFromRequest($txt1);
-            $txt1 = "annee_date_" . $nom_date;
-            $annee_date = Lib::getParameterFromRequest($txt1);
-
-            //Valeur par défaut
-            if ($$nom_date == "0000-00-00") {
-                $$nom_date = date($current_date["default"]);
-            }
-
-            //Si la date est cohérente, affectation de la bonne valeur
-            if ($jour_date and $mois_date and $annee_date) {
-                $$nom_date = recuperation_date_pour_mysql($jour_date, $mois_date, $annee_date, $nom_date);
-            }
-
-            //Affectation forcée de la date
-            if ($current_date["force"]) {
-                $$nom_date = date($current_date["force"]);
-            }
-
-            //Enregistrement de la date au bon format
-            //$current_date["recordset"]->setFieldValue($nom_date, $$nom_date);
-            $objectFta->setFieldValue($current_date["recordset"], $nom_date, $$nom_date);
-        }
-
-        //Conditionnement d'expédition
-        if ($conditionnement_expedition) {
-            //Recherche de la palette déjà sélectionnée
-            $req = "SELECT id_fta_conditionnement "
-                    . "FROM fta_conditionnement, annexe_emballage, annexe_emballage_groupe "
-                    . "WHERE id_fta=$id_fta "
-                    . "AND annexe_emballage_groupe.id_annexe_emballage_groupe=10 " //Palette
-                    . "AND fta_conditionnement.id_annexe_emballage=annexe_emballage.id_annexe_emballage "
-                    . "AND annexe_emballage_groupe.id_annexe_emballage_groupe=annexe_emballage.id_annexe_emballage_groupe "
-            ;
-            $result = DatabaseOperation::query($req);
-            $nombre_resultat = mysql_num_rows($result);
-            if ($nombre_resultat > 1) {
-                $titre = "Erreur";
-                $message = "Il y a plus d'une palette pour cette palettisation!";
-                //afficher_message($titre, $message, $redirection);
-                Lib::showMessage($titre, $message);
-            } else {
-                //Préparation des données
-                $hauteur_emballage_fta_conditionnement = 3;  //La hauteur de l'emballage sera considérer comme hauteur dans la palettisation
-                $quantite_emballage_fta_conditionnement = 1; //Qu'une palette par palettisation !!
-                $id_annexe_emballage = $conditionnement_expedition;
-
-                switch ($nombre_resultat) {
-                    case 0: //Aucune palette donc ajout
-
-
-                        $id_fta;
-
-                        mysql_table_operation("fta_conditionnement", "insert");
-
-                        break;
-
-                    case 1: //Il y en a déjà une. Donc mise à jour
-
-                        $id_fta_conditionnement = mysql_result($result, 0);
-                        mysql_table_operation("fta_conditionnement", "rewrite");
-
-                        break;
-                }
-                mysql_table_load("fta_conditionnement");
-                mysql_table_load("annexe_emballage");
-                //$poids_annexe_emballage;
-            }
-        }
-
-        //Préparation des données et règles de gestion
-        //Coût de la plateforme
-        if ($objectFta->getFieldValue(ObjectFta::TABLE_FTA_NAME, "site_expedition_fta") == 6) {
-            // //plateforme
-            $objectFta->setFieldValue(ObjectFta::TABLE_ARTI_NAME, "Cout_PF", 1);
-        } else {
-            $objectFta->setFieldValue(ObjectFta::TABLE_ARTI_NAME, "Cout_PF", 0);
-        }
-
-        //10 = Coupe et 70 = LS
-        //Rayon
-        $id_element = "4"; //Recherche du Rayon
-        $extension[0] = 1; //Passage en mode recherche d'une catégorie
-        $champ = recherche_element_classification_fta($id_fta, $id_element, $extension);
-        switch ($champ[1]) {
-            //Libre Service: valeur 70
-            case 5:
-                $objectFta->setFieldValue(ObjectFta::TABLE_ARTI_NAME, "Rayon", 70);
-                break;
-
-            //Traiteur: valeur 10
-            case 21:
-                $objectFta->setFieldValue(ObjectFta::TABLE_ARTI_NAME, "Rayon", 10);
-                break;
-            //Non géré
-
-            default:
-                $objectFta->setFieldValue(ObjectFta::TABLE_ARTI_NAME, "Rayon", 99);
-        }
-        //echo $Rayon;
-        //Mise à jour de NB_UV_PAR_US1
-        $objectFta->buildNbUvParUs1();
-
-        //Préparation des données Etiquettes
-        if ($id_fta_chapitre_encours == 101) { //Chapitre Etiquette
-            $objectFta->setFieldValue(ObjectFta::TABLE_ARTI_NAME, "activation_codesoft_arti2", $temp_colis_activation_codesoft_arti2 + $temp_composition_activation_codesoft_arti2);
-        }
+//        $tab_date = array(array("name" => "date_echeance_fta"
+//                , "default" => "0000-00-00"
+//                , "force" => ""
+//                , "recordset" => ObjectFta::TABLE_FTA_NAME
+//            )
+//            , array("name" => "date_transfert_industriel"
+//                , "default" => "0000-00-00"
+//                , "force" => ""
+//                , "recordset" => ObjectFta::TABLE_FTA_NAME
+//            )
+//            , array("name" => "date_demarrage_chapitre_fta_suivi_projet"
+//                , "default" => "Y-m-d"
+//                , "force" => ""
+//                , "recordset" => ObjectFta::TABLE_SUIVI_PROJET_NAME
+//            )
+//            , array("name" => "date_validation_suivi_projet"
+//                , "default" => "Y-m-d"
+//                , "force" => "Y-m-d"
+//                , "recordset" => ObjectFta::TABLE_SUIVI_PROJET_NAME
+//            )
+//        );
+//        foreach ($tab_date as $current_date) {
+//            //Initialisation des variables locales
+//            $nom_date = $current_date["name"];
+//            $${"nom_date"} = Lib::getParameterFromRequest($current_date["name"]);
+//            $txt1 = "jour_date_" . $nom_date;
+//            $jour_date = Lib::getParameterFromRequest($txt1);
+//            $txt1 = "mois_date_" . $nom_date;
+//            $mois_date = Lib::getParameterFromRequest($txt1);
+//            $txt1 = "annee_date_" . $nom_date;
+//            $annee_date = Lib::getParameterFromRequest($txt1);
+//
+//            //Valeur par défaut
+//            if ($$nom_date == "0000-00-00") {
+//                $$nom_date = date($current_date["default"]);
+//            }
+//
+//            //Si la date est cohérente, affectation de la bonne valeur
+//            if ($jour_date and $mois_date and $annee_date) {
+//                $$nom_date = recuperation_date_pour_mysql($jour_date, $mois_date, $annee_date, $nom_date);
+//            }
+//
+//            //Affectation forcée de la date
+//            if ($current_date["force"]) {
+//                $$nom_date = date($current_date["force"]);
+//            }
+//
+//            //Enregistrement de la date au bon format
+//            //$current_date["recordset"]->setFieldValue($nom_date, $$nom_date);
+//            $objectFta->setFieldValue($current_date["recordset"], $nom_date, $$nom_date);
+//        }
+//
+//        //Conditionnement d'expédition
+//        if ($conditionnement_expedition) {
+//            //Recherche de la palette déjà sélectionnée
+//            $req = "SELECT id_fta_conditionnement "
+//                    . "FROM fta_conditionnement, annexe_emballage, annexe_emballage_groupe "
+//                    . "WHERE id_fta=$id_fta "
+//                    . "AND annexe_emballage_groupe.id_annexe_emballage_groupe=10 " //Palette
+//                    . "AND fta_conditionnement.id_annexe_emballage=annexe_emballage.id_annexe_emballage "
+//                    . "AND annexe_emballage_groupe.id_annexe_emballage_groupe=annexe_emballage.id_annexe_emballage_groupe "
+//            ;
+//            $result = DatabaseOperation::query($req);
+//            $nombre_resultat = mysql_num_rows($result);
+//            if ($nombre_resultat > 1) {
+//                $titre = "Erreur";
+//                $message = "Il y a plus d'une palette pour cette palettisation!";
+//                //afficher_message($titre, $message, $redirection);
+//                Lib::showMessage($titre, $message);
+//            } else {
+//                //Préparation des données
+//                $hauteur_emballage_fta_conditionnement = 3;  //La hauteur de l'emballage sera considérer comme hauteur dans la palettisation
+//                $quantite_emballage_fta_conditionnement = 1; //Qu'une palette par palettisation !!
+//                $id_annexe_emballage = $conditionnement_expedition;
+//
+//                switch ($nombre_resultat) {
+//                    case 0: //Aucune palette donc ajout
+//
+//
+//                        $id_fta;
+//
+//                        mysql_table_operation("fta_conditionnement", "insert");
+//
+//                        break;
+//
+//                    case 1: //Il y en a déjà une. Donc mise à jour
+//
+//                        $id_fta_conditionnement = mysql_result($result, 0);
+//                        mysql_table_operation("fta_conditionnement", "rewrite");
+//
+//                        break;
+//                }
+//                mysql_table_load("fta_conditionnement");
+//                mysql_table_load("annexe_emballage");
+//                //$poids_annexe_emballage;
+//            }
+//        }
+//
+//        //Préparation des données et règles de gestion
+//        //Coût de la plateforme
+//        if ($objectFta->getFieldValue(ObjectFta::TABLE_FTA_NAME, "site_expedition_fta") == 6) {
+//            // //plateforme
+//            $objectFta->setFieldValue(ObjectFta::TABLE_ARTI_NAME, "Cout_PF", 1);
+//        } else {
+//            $objectFta->setFieldValue(ObjectFta::TABLE_ARTI_NAME, "Cout_PF", 0);
+//        }
+//
+//        //10 = Coupe et 70 = LS
+//        //Rayon
+//        $id_element = "4"; //Recherche du Rayon
+//        $extension[0] = 1; //Passage en mode recherche d'une catégorie
+//        $champ = recherche_element_classification_fta($id_fta, $id_element, $extension);
+//        switch ($champ[1]) {
+//            //Libre Service: valeur 70
+//            case 5:
+//                $objectFta->setFieldValue(ObjectFta::TABLE_ARTI_NAME, "Rayon", 70);
+//                break;
+//
+//            //Traiteur: valeur 10
+//            case 21:
+//                $objectFta->setFieldValue(ObjectFta::TABLE_ARTI_NAME, "Rayon", 10);
+//                break;
+//            //Non géré
+//
+//            default:
+//                $objectFta->setFieldValue(ObjectFta::TABLE_ARTI_NAME, "Rayon", 99);
+//        }
+//        //echo $Rayon;
+//        //Mise à jour de NB_UV_PAR_US1
+//        $objectFta->buildNbUvParUs1();
+//
+//        //Préparation des données Etiquettes
+//        if ($id_fta_chapitre_encours == 101) { //Chapitre Etiquette
+//            $objectFta->setFieldValue(ObjectFta::TABLE_ARTI_NAME, "activation_codesoft_arti2", $temp_colis_activation_codesoft_arti2 + $temp_composition_activation_codesoft_arti2);
+//        }
 
         //Gestion des délais (Attention, uniquement sur le chapitre identité)
         //echo $nom_fta_chapitre_encours;

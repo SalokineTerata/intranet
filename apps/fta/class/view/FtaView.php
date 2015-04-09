@@ -170,12 +170,31 @@ class FtaView {
         if ($this->getModel()->getDataField(FtaModel::FIELDNAME_DATE_ECHEANCE_FTA)) {
 
             //Date d'échéance de la FTA
-            $dataFieldDateEcheanceFta = $this->getModel()->getDataField(FtaModel::FIELDNAME_DATE_ECHEANCE_FTA);
-            $htmlElement = new DataFieldToHtmlInputCalendar($dataFieldDateEcheanceFta);
+            $dataField = $this->getModel()->getDataField(FtaModel::FIELDNAME_DATE_ECHEANCE_FTA);
+            $htmlElement = new DataFieldToHtmlInputCalendar($dataField);
             $htmlElement->setIsEditable($this->getIsEditable());
 
             $bloc .=$htmlElement->getHtmlResult();
             $bloc .= self::showDatesEcheanceProcessus();
+
+            $bloc = "";
+
+            $req = "SELECT id_fta_processus_delai, nom_fta_processus, date_echeance_processus FROM `fta_processus_delai`, fta_processus WHERE `id_fta` ="
+                    . $this->getModel()->getKeyValue() . " "
+                    . "AND fta_processus_delai.id_fta_processus=fta_processus.id_fta_processus "
+                    . "ORDER BY date_echeance_processus "
+            ;
+
+            $paramTitle = "Echéances des processus";
+            $paramDivId = "echeance_processus";
+            $paramSubFormModelClassName = "FtaProcessusDelaiModel";
+
+            $paramArrayContent = DatabaseOperation::convertSqlResultWithKeyAsFirstFieldToArray(
+                            DatabaseOperation::query($req)
+            );
+
+            $subFormDateEcheance = new HtmlSubForm3Fields($paramArrayContent, $paramSubFormModelClassName, $paramTitle, $paramDivId);
+            $bloc = $subFormDateEcheance->getHtmlResult();
         }
         return $bloc;
     }

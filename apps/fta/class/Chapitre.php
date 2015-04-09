@@ -529,6 +529,8 @@ class Chapitre {
         $ftaView = new FtaView($ftaModel);
         $ftaView->setIsEditable($isEditable);
         $ftaView->setFtaChapitreModelById(self::ID_CHAPITRE_IDENTITE);
+        
+        $bloc.="<tr class=titre_principal><td class>Codification</td></tr>";
 
         /**
          * @todo Non implementé
@@ -881,6 +883,9 @@ class Chapitre {
 
         $bloc.="<tr class=titre_principal><td class>Etiquettes Colis</td></tr>";
         
+         /**
+         * @todo Non implementé
+         */
         //Laisser l'informatique gérer la désignation ?
         $bloc.="<tr> <td> not implement</td></tr>";
 

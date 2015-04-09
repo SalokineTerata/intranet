@@ -26,14 +26,18 @@ class FtaModel extends AbstractModel {
     const FIELDNAME_CONDITION_SOUS_ATMOSPHERE = "atmosphere_protectrice";
     const FIELDNAME_CONSEIL_APRES_OUVERTURE = "apres_ouverture_fta";
     const FIELDNAME_CONSEIL_DE_RECHAUFFAGE= "conseil_rechauffage_valide_fta";
+    const FIELDNAME_CONSEIL_DE_RECHAUFFAGE_DEVELOPPEMENT= "conseil_rechauffage_experimentale_fta";
     const FIELDNAME_CONSEIL_DE_PRESENTATION = "presentation_fta";
     const FIELDNAME_CREATEUR = "createur_fta";
     const FIELDNAME_DATE_DEMANDEUR = "date_demandeur_fta";
     const FIELDNAME_DATE_ECHEANCE_FTA = "date_echeance_fta";
+    const FIELDNAME_DATE_PREVISONNELLE_TRANSFERT_INDUSTRIEL = "date_transfert_industriel";
     const FIELDNAME_DESCRIPTION_DU_PRODUIT = "synoptique_valide_fta";
+    const FIELDNAME_DESCRIPTION_TECHNIQUE_INTERNE = "synoptique_experimental_fta";
     const FIELDNAME_DESIGNATION_COMMERCIALE = "designation_commerciale_fta";
     const FIELDNAME_DUREE_DE_VIE = "Duree_de_vie";
-    const FIELDNAME_DUREE_DE_VIE8TECHNIQUE = "DurEe_de_vie_technique";
+    const FIELDNAME_DUREE_DE_VIE_TECHNIQUE_PRODUCTION = "Duree_de_vie_technique";
+    const FIELDNAME_DUREE_DE_VIE_TECHNIQUE_MAXIMALE = "duree_vie_technique_fta";
     const FIELDNAME_EAN_COLIS = "EAN_COLIS";
     const FIELDNAME_EAN_PALETTE = "EAN_PALETTE";
     const FIELDNAME_EAN_UVC = "EAN_UVC";
@@ -61,6 +65,7 @@ class FtaModel extends AbstractModel {
     const FIELDNAME_PVC_ARTICLE = "pvc_article";
     const FIELDNAME_PVC_ARTICLE_KG = "pvc_article_kg";
     const FIELDNAME_QUANTITE_HEBDOMADAIRE_ESTIMEE_COMMANDE = "quantite_hebdomadaire_estime_commande";
+    const FIELDNAME_REFERENCE_EXTERNES = "reference_externe_fta";
     const FIELDNAME_REMARQUE = "remarque_fta";
     const FIELDNAME_RESEAU_CLIENT = "id_arcadia_client_reseau";
     const FIELDNAME_SEGMENT_CLIENT = "id_arcadia_client_segment";

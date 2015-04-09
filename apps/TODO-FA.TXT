@@ -10,7 +10,7 @@ PARTIE 1: Construction des interfaces utilisateurs (v1) --> Pas de sous table po
 [V] Chapitre codification (ex- Activation des Articles)
 [V] Chapitre codification_externe (ex- Codification standard Externe)
 [V] Chapitre etiquette (ex Etiquette)
-[ ] Chapitre Commerce (ex Données clients) --> pas les sous table.
+[V] Chapitre Commerce (ex Données clients) --> pas les sous table.
 [ ] Chapitre composition (ex composition) --> pas les sous table.
 [ ] Chapitre Activation des produits --> pas les sous table.
 [ ] Chapitre Nomenclature --> pas les sous table.

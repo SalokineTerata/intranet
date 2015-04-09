@@ -25,36 +25,37 @@ class Chapitre {
      * Objet FTA
      * @var ObjectFta 
      */
-    protected static $objectFta;
-    protected static $id_fta_chapitre;
-    protected static $recordChapitre;
-    protected static $id_fta_processus;
-    protected static $recordProcessus;
-    protected static $id_intranet_actions;
-    protected static $recordIntranetActions;
-    protected static $html_chapitre_identite;
-    protected static $html_chapitre_commerce;
-    protected static $html_chapitre_production;
-    protected static $html_chapitre_qualite;
-    protected static $html_chapitre_emballage;
-    protected static $html_chapitre_decoupe;
-    protected static $html_chapitre_conditionnement_piece_entiere;
-    protected static $html_chapitre_conditionnement_decoupe;
+    protected static $html_chapitre_all;
     protected static $html_chapitre_codification;
     protected static $html_chapitre_codification_externe;
+    protected static $html_chapitre_commerce;
+    protected static $html_chapitre_composition;
+    protected static $html_chapitre_conditionnement_decoupe;
+    protected static $html_chapitre_conditionnement_piece_entiere;
+    protected static $html_chapitre_core;
+    protected static $html_chapitre_decoupe;
+    protected static $html_chapitre_emballage;
     protected static $html_chapitre_etiquette;
     protected static $html_chapitre_expedition;
+    protected static $html_chapitre_identite;
+    protected static $html_chapitre_qualite;
+    protected static $html_chapitre_production;
     protected static $html_chapitre_need_rebuild;
+    protected static $html_correct_button;
     protected static $html_submit_button;
+    protected static $html_suivi_dossier;
+    protected static $id_fta_chapitre;
+    protected static $id_fta_processus;
+    protected static $id_intranet_actions;
+    protected static $is_correctable;
     protected static $is_editable;
     protected static $is_owner;
-    protected static $is_correctable;
-    protected static $taux_validation_processus;
+    protected static $objectFta;
+    protected static $recordChapitre;
+    protected static $recordIntranetActions;
+    protected static $recordProcessus;
     protected static $synthese_action;
-    protected static $html_correct_button;
-    protected static $html_chapitre_core;
-    protected static $html_suivi_dossier;
-    protected static $html_chapitre_all;
+    protected static $taux_validation_processus;
 
     private static function NOT_IMPLEMENTED_initObject($id_fta) {
 
@@ -197,6 +198,10 @@ class Chapitre {
                 self::$html_chapitre_expedition = self::buildChapitreExpedition();
                 $return = self::$html_chapitre_expedition;
                 break;
+            case "composition":
+                self::$html_chapitre_composition = self::buildChapitreComposition();
+                $return = self::$html_chapitre_composition;
+                break;
             default:
         }
         return $return;
@@ -296,12 +301,149 @@ class Chapitre {
         $bloc = "";
         $id_fta = self::$id_fta;
         $synthese_action = self::$synthese_action;
-        $is_editable = self::$is_editable;
-        $is_editable_false = false;
+        $isEditable = self::$is_editable;
+        //$isEditable = TRUE;
+        //
+        //Identifiant FTA
+        $idFta = $id_fta;
+        $ftaModel = new FtaModel($idFta);
+        $ftaView = new FtaView($ftaModel);
+        $ftaView->setIsEditable($isEditable);
+        $ftaView->setFtaChapitreModelById(self::ID_CHAPITRE_IDENTITE);
 
-        $bloc.="<tr class=titre_principal><td class>Demandeur</td></tr>";
+        $bloc.="<tr class=titre_principal><td class>Commerce</td></tr>";
 
-        //$bloc .= "</table>";
+
+        /**
+         * @todo Non implementé
+         */
+        //Désignation de l'enseigne
+        $bloc.="<tr> <td> not implement(sous table)</td></tr>";
+        /**
+         * @todo Non implementé
+         */
+        //Remise sur factures
+        $bloc.="<tr> <td> not implement(sous table)</td></tr>";
+        /**
+         * @todo Non implementé
+         */
+        //Ristournes
+        $bloc.="<tr> <td> not implement(sous table)</td></tr>";
+
+
+        //Période de commercialisation
+        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_PERIODE_DE_COMMERCIALISATION);
+
+
+        /**
+         * @todo Non implementé
+         */
+        //Unité de Facturation
+        $bloc.="<tr> <td> not implement</td></tr>";
+
+        //Gencod EAN Article
+        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_EAN_COLIS);
+
+        //Gencod EAN Colis
+        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_EAN_COLIS);
+
+        //Gencod EAN Palette
+        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_EAN_PALETTE);
+
+        //Libellé du code article chez le client
+        $bloc.="<tr> <td> champ de table inconnu</td></tr>";
+
+        //Valeur du code article chez le client
+        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_CODE_ARTICLE_CLIENT);
+
+        //PVC de l'article:
+        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_PVC_ARTICLE);
+
+        //Prix / KG
+        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_PVC_ARTICLE_KG);
+
+        //Durée de vie garantie client (en jours)
+        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_DUREE_DE_VIE);
+
+        //Nombre de portion
+        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_NOMBRE_PORTION_FTA);
+
+        //Description du produit
+        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_DESCRIPTION_DU_PRODUIT);
+
+        //Conseil de Présentation
+        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_CONSEIL_DE_PRESENTATION);
+
+        //Service consommateur
+        $bloc.="<tr> <td> champ de table inconnu</td></tr>";
+
+
+        return $bloc;
+    }
+
+    public static function buildChapitreComposition() {
+        
+        $bloc = "";
+        $id_fta = self::$id_fta;
+        $synthese_action = self::$synthese_action;
+        $isEditable = self::$is_editable;
+        $isEditable = TRUE;
+        //
+        //Identifiant FTA
+        $idFta = $id_fta;
+        $ftaModel = new FtaModel($idFta);
+        $ftaView = new FtaView($ftaModel);
+        $ftaView->setIsEditable($isEditable);
+        $ftaView->setFtaChapitreModelById(self::ID_CHAPITRE_IDENTITE);
+
+        $bloc.="<tr class=titre_principal><td class>Composition</td></tr>";
+
+        //Agrément CE
+        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_SITE_ASSEMBLAGE);
+
+        //Produit Transformé en France
+        $bloc.="<tr> <td> not implement</td></tr>";
+
+        //Agrément CE
+        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_SITE_ASSEMBLAGE);
+
+        //Agrément CE
+        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_SITE_ASSEMBLAGE);
+
+        //Agrément CE
+        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_SITE_ASSEMBLAGE);
+
+        //Agrément CE
+        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_SITE_ASSEMBLAGE);
+
+        //Agrément CE
+        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_SITE_ASSEMBLAGE);
+
+        //Agrément CE
+        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_SITE_ASSEMBLAGE);
+
+        //Agrément CE
+        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_SITE_ASSEMBLAGE);
+
+        //Agrément CE
+        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_SITE_ASSEMBLAGE);
+
+        //Agrément CE
+        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_SITE_ASSEMBLAGE);
+
+        //Agrément CE
+        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_SITE_ASSEMBLAGE);
+
+        //Agrément CE
+        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_SITE_ASSEMBLAGE);
+
+        //Agrément CE
+        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_SITE_ASSEMBLAGE);
+
+        //Agrément CE
+        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_SITE_ASSEMBLAGE);
+
+
         return $bloc;
     }
 
@@ -529,7 +671,7 @@ class Chapitre {
         $ftaView = new FtaView($ftaModel);
         $ftaView->setIsEditable($isEditable);
         $ftaView->setFtaChapitreModelById(self::ID_CHAPITRE_IDENTITE);
-        
+
         $bloc.="<tr class=titre_principal><td class>Codification</td></tr>";
 
         /**
@@ -563,7 +705,6 @@ class Chapitre {
         $synthese_action = self::$synthese_action;
         $isEditable = self::$is_editable;
         //$isEditable = FALSE;
-        
         //Identifiant FTA
         $idFta = $id_fta;
         $ftaModel = new FtaModel($idFta);
@@ -816,8 +957,8 @@ class Chapitre {
         //$bloc .= "</table>";
         return $bloc;
     }
-    
-        public static function buildChapitreExpedition() {
+
+    public static function buildChapitreExpedition() {
 
         $bloc = "";
         $id_fta = self::$id_fta;
@@ -856,7 +997,6 @@ class Chapitre {
         return $bloc;
     }
 
-
     public static function buildChapitreEtiquette() {
 
         $bloc = "";
@@ -874,16 +1014,16 @@ class Chapitre {
         $ftaView->setIsEditable($isEditable);
         $ftaView->setFtaChapitreModelById(self::ID_CHAPITRE_IDENTITE);
 
-        
-         /**
+
+        /**
          * @todo Non implementé
          */
         //Activer le système d'impression Base Etiquette Codesoft
         $bloc.="<tr> <td> not implement</td></tr>";
 
         $bloc.="<tr class=titre_principal><td class>Etiquettes Colis</td></tr>";
-        
-         /**
+
+        /**
          * @todo Non implementé
          */
         //Laisser l'informatique gérer la désignation ?
@@ -891,12 +1031,12 @@ class Chapitre {
 
         //Libellé etiquette carton:
         $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_LIBELLE_CLIENT);
-        
+
         //Modèle d'étiquette
         $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_ETIQUETTE_CODESOFT);
 
         $bloc.="<tr class=titre_principal><td class>Etiquettes Composition</td></tr>";
-        
+
         //Composition Etiquette (1er paragraphe)
         $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_COMPOSITION1);
 

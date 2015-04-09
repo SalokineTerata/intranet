@@ -25,8 +25,8 @@ class Chapitre {
      * Objet FTA
      * @var ObjectFta 
      */
+    protected static $html_chapitre_activation_des_produits;
     protected static $html_chapitre_all;
-    protected static $html_chapitre_activation_des_articles;
     protected static $html_chapitre_codification;
     protected static $html_chapitre_codification_externe;
     protected static $html_chapitre_commerce;
@@ -204,9 +204,9 @@ class Chapitre {
                 self::$html_chapitre_composition = self::buildChapitreComposition();
                 $return = self::$html_chapitre_composition;
                 break;
-            case "activation_des_articles":
-                self::$html_chapitre_activation_des_articles = self::buildChapitreActivationDesArticles();
-                $return = self::$html_chapitre_activation_des_articles;
+            case "activation_des_produits":
+                self::$html_chapitre_activation_des_produits = self::buildChapitreActivationDesProduits();
+                $return = self::$html_chapitre_activation_des_produits;
                 break;
             case "nomenclature":
                 self::$html_chapitre_nomenclature = self::buildChapitreNomenclature();
@@ -312,7 +312,7 @@ class Chapitre {
         $id_fta = self::$id_fta;
         $synthese_action = self::$synthese_action;
         $isEditable = self::$is_editable;
-        //$isEditable = TRUE;
+        $isEditable = TRUE;
         //
         //Identifiant FTA
         $idFta = $id_fta;
@@ -349,7 +349,7 @@ class Chapitre {
          * @todo Non implementé
          */
         //Unité de Facturation
-        $bloc.="<tr><td>Unité de Facturation</td> <td> not implement</td></tr>";
+        $bloc.="<tr><td>Unité de Facturation</td> <td> not implement(bouton radio)</td></tr>";
 
         //Gencod EAN Article
         $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_EAN_COLIS);
@@ -360,11 +360,9 @@ class Chapitre {
         //Gencod EAN Palette
         $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_EAN_PALETTE);
 
-        /**
-         * @todo Non implementé
-         */
+
         //Libellé du code article chez le client
-        $bloc.="<tr><td>Libellé du code article chez le client</td> <td> champ de table inconnu</td></tr>";
+        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_LIBELLE_CODE_ARTICLE_CLIENT);
 
         //Valeur du code article chez le client
         $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_CODE_ARTICLE_CLIENT);
@@ -387,11 +385,9 @@ class Chapitre {
         //Conseil de Présentation
         $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_CONSEIL_DE_PRESENTATION);
 
-        /**
-         * @todo Non implementé
-         */
+
         //Service consommateur
-        $bloc.="<tr><td>Service consommateur</td> <td> champ de table inconnu</td></tr>";
+        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_SERVICE_CONSOMMATEUR);
 
 
         return $bloc;
@@ -416,18 +412,28 @@ class Chapitre {
 
         //Agrément CE
         $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_SITE_ASSEMBLAGE);
-
+        /**
+         * @todo Non implementé
+         */
         //Produit Transformé en France
+        $bloc.="<tr> <td>Produit Transformé en France:</td><td> not implement(bouton radio)</td></tr>";
         $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_PRODUIT_TRANSFORME);
 
-        //Environnement de conservation
+       //Environnement de conservation
         $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_ENVIRONNEMENT_CONSERVATION);
 
+        /**
+         * @todo Non implementé
+         */
         //Conditionné sous atmosphère protectrice
+        $bloc.="<tr> <td>Conditionné sous atmosphère protectrice:</td><td> not implement(bouton radio)</td></tr>";
         $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_CONDITION_SOUS_ATMOSPHERE);
 
-
-        //Logo éco-emballage
+        /**
+         * @todo Non implementé
+         */
+         //Logo éco-emballage
+        $bloc.="<tr> <td>Logo éco-emballage:</td><td> not implement(bouton radio)</td></tr>";
         $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_LOGO_ECO_EMBALLAGE);
 
         //
@@ -676,7 +682,7 @@ class Chapitre {
         return $bloc;
     }
 
-    public static function buildChapitreActivationDesArticles() {
+    public static function buildChapitreActivationDesProduits() {
 
         $bloc = "";
         $id_fta = self::$id_fta;
@@ -691,13 +697,9 @@ class Chapitre {
         $ftaView->setIsEditable($isEditable);
         $ftaView->setFtaChapitreModelById(self::ID_CHAPITRE_IDENTITE);
 
-        $bloc.="<tr class=titre_principal><td class>Activation des Articles</td></tr>";
+        $bloc.="<tr class=titre_principal><td class>Activation des Produits</td></tr>";
 
-        /**
-         * @todo Non implementé
-         */
-        //Unité de Poids d'affichage:
-        $bloc.="<tr><td>Unité de Poids d'affichage</td><td> not implement</td></tr>";
+        
 
         //Désignation Abrégée
         $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_NOM_ABREGE);
@@ -738,7 +740,7 @@ class Chapitre {
          * @todo Non implementé
          */
         //Unité de Poids d'affichage:
-        $bloc.="<tr><td> Unité de Poids d'affichage</td><td> not implement</td></tr>";
+        $bloc.="<tr> <td>Unité de Poids d'affichage:</td><td> not implement(bouton radio)</td></tr>";
 
         //Désignation Abrégée
         $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_NOM_ABREGE);
@@ -1082,7 +1084,7 @@ class Chapitre {
          * @todo Non implementé
          */
         //Activer le système d'impression Base Etiquette Codesoft
-        $bloc.="<tr><td>Activer le système d'impression Base Etiquette Codesoft</td> <td> not implement</td></tr>";
+        $bloc.="<tr><td>Activer le système d'impression Base Etiquette Codesoft</td> <td> not implement (bouton radio)</td></tr>";
 
         $bloc.="<tr class=titre_principal><td class>Etiquettes Colis</td></tr>";
 
@@ -1090,7 +1092,7 @@ class Chapitre {
          * @todo Non implementé
          */
         //Laisser l'informatique gérer la désignation ?
-        $bloc.="<tr><td>Laisser l'informatique gérer la désignation ?</td><td> not implement</td></tr>";
+        $bloc.="<tr><td>Laisser l'informatique gérer la désignation ?</td><td> not implement(bouton radio)</td></tr>";
         $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_VERROUILLAGE_LIBELLE_ETIQUETTE);
 
         //Libellé etiquette carton:
@@ -1233,7 +1235,7 @@ class Chapitre {
         $id_fta = self::$id_fta;
         $synthese_action = self::$synthese_action;
         $isEditable = self::$is_editable;
-        //$isEditable = TRUE;
+        $isEditable = TRUE;
         //
         //Identifiant FTA
         $idFta = $id_fta;
@@ -1243,7 +1245,13 @@ class Chapitre {
         $ftaView->setFtaChapitreModelById(self::ID_CHAPITRE_IDENTITE);
 
         $bloc.="<tr class=titre_principal><td class>Nomenclature</td></tr>";
-
+        
+        /**
+         * @todo Non implementé
+         */
+        //Codification /Désignation /Poids Unitaire /Unité du poids /Site de Production	/Carton Vrac
+        $bloc.="<tr> <td>Codification | Désignation | Poids Unitaire | Unité du poids | Site de Production | Carton Vrac</td><td> not implement(sous table)</td></tr>";
+        
         //Description technique interne
         $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_DESCRIPTION_TECHNIQUE_INTERNE);
 
@@ -1254,7 +1262,8 @@ class Chapitre {
 
         //Date prévisionnelle du transfert Industriel
         $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_DATE_PREVISONNELLE_TRANSFERT_INDUSTRIEL);
-
+         
+        
         return $bloc;
     }
 

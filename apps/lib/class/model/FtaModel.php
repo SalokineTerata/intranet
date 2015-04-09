@@ -50,6 +50,7 @@ class FtaModel extends AbstractModel {
     const FIELDNAME_ID_FTA_ETAT = "id_fta_etat";
     const FIELDNAME_LIBELLE = "LIBELLE";
     const FIELDNAME_LIBELLE_CLIENT = "LIBELLE_CLIENT";
+    const FIELDNAME_LIBELLE_CODE_ARTICLE_CLIENT = "libelle_code_article_client";
     const FIELDNAME_LIBELLE_MULTILANGUE = "libelle_multilangue";
     const FIELDNAME_LISTE_ALLERGENE = "allergenes_matiere_fta";
     const FIELDNAME_LOGO_ECO_EMBALLAGE = "image_eco_emballage";
@@ -69,6 +70,7 @@ class FtaModel extends AbstractModel {
     const FIELDNAME_REMARQUE = "remarque_fta";
     const FIELDNAME_RESEAU_CLIENT = "id_arcadia_client_reseau";
     const FIELDNAME_SEGMENT_CLIENT = "id_arcadia_client_segment";
+    const FIELDNAME_SERVICE_CONSOMMATEUR = "id_service_consommateur";
     const FIELDNAME_SITE_ASSEMBLAGE = "Site_de_production";
     const FIELDNAME_SITE_EXPEDITION_FTA = "site_expedition_fta";
     const FIELDNAME_SOCIETE_DEMANDEUR = "societe_demandeur_fta";

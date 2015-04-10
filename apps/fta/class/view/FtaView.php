@@ -240,8 +240,8 @@ class FtaView {
         $return .= $HtmlSuiviProjet->getHtmlResult();
         return $return;
     }
-    
-        public function getHtmlCorrectionChapitre() {
+
+    public function getHtmlCorrectionChapitre() {
         $return = NULL;
 
 
@@ -261,8 +261,6 @@ class FtaView {
         return $return;
     }
 
-
-    
     function getFtaSuiviProjetModel() {
 
         $idFtaChapitre = $this->getFtaChapitreModel()->getKeyValue();
@@ -278,6 +276,14 @@ class FtaView {
 
         return Html::convertDataFieldToHtml(
                         $this->getModel()->getModelSiteExpediton()->getDataField(GeoModel::FIELDNAME_GEO_CNUD_PREPARER_PAR)
+                        , false
+        );
+    }
+
+    function getHtmlSiteAgrement() {
+
+        return Html::convertDataFieldToHtml(
+                        $this->getModel()->getModelSiteExpediton()->getDataField(GeoModel::FIELDNAME_SITE_AGREMENT_CE)
                         , false
         );
     }

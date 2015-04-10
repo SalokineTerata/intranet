@@ -42,7 +42,7 @@ class Chapitre {
     protected static $html_chapitre_identite;
     protected static $html_chapitre_need_rebuild;
     protected static $html_chapitre_nomenclature;
-    protected static $html_chapitre_palletisation;
+    protected static $html_chapitre_palettisation;
     protected static $html_chapitre_production;
     protected static $html_chapitre_qualite;
     protected static $html_correct_button;
@@ -218,9 +218,9 @@ class Chapitre {
                 self::$html_chapitre_commentaire = self::buildChapitreCommentaire();
                 $return = self::$html_chapitre_commentaire;
                 break;
-            case "palletisation":
-                self::$html_chapitre_palletisation = self::buildChapitrePalletisation();
-                $return = self::$html_chapitre_palletisation;
+            case "palettisation":
+                self::$html_chapitre_palettisation = self::buildChapitrePalettisation();
+                $return = self::$html_chapitre_palettisation;
                 break;
             default:
         }
@@ -456,7 +456,8 @@ class Chapitre {
         $bloc.="<tr class=titre_principal><td class>Composition</td></tr>";
 
         //Agrément CE
-        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_SITE_ASSEMBLAGE);
+        $bloc.=$ftaView->getHtmlSiteAgrement();
+
         /**
          * @todo Non implementé
          */
@@ -1320,7 +1321,7 @@ class Chapitre {
         return $bloc;
     }
 
-    public static function buildChapitrePalletisation() {
+    public static function buildChapitrePalettisation() {
 
         $bloc = "";
         $id_fta = self::$id_fta;
@@ -1335,7 +1336,7 @@ class Chapitre {
         $ftaView->setIsEditable($isEditable);
         $ftaView->setFtaChapitreModelById(self::ID_CHAPITRE_IDENTITE);
 
-        $bloc.="<tr class=titre_principal><td class>Palletisasion</td></tr>";
+        $bloc.="<tr class=titre_principal><td class>Palettisasion</td></tr>";
 
         $bloc.="<tr class=titre_principal><td class>Informations Générales de l'UVC</td></tr>";
 
@@ -1349,9 +1350,22 @@ class Chapitre {
         $htmlPoidsNetUVC->getAttributes()->getName()->setValue("TESTName");
         $htmlPoidsNetUVC->getAttributes()->getValue()->setValue("TESTValue");
         $htmlPoidsNetUVC->setIsEditable(FALSE);
+        //Calcul du poids des emballages d'une Palette
+        /*SELECT * FROM fta_conditionnement, annexe_emballage_groupe, annexe_emballage_groupe_type 
+                WHERE id_fta=id_fta AND annexe_emballage_groupe_type.id_annexe_emballage_groupe_type=4 
+                AND fta_conditionnement.id_annexe_emballage_groupe=annexe_emballage_groupe.id_annexe_emballage_groupe 
+                AND annexe_emballage_groupe.id_annexe_emballage_groupe_configuration=annexe_emballage_groupe_type.id_annexe_emballage_groupe_type 
+                ORDER BY nom_annexe_emballage_groupe_type*/
+        $franck = new HtmlInputText();
+        $franck->setLabel("Poids Emballage UVC (en g):");
+        $franck->getAttributes()->getName()->setValue("Calcul du poids des emballages d'une Palette");
+        $franck->getAttributes()->getValue()->setValue("36");
+        $franck->setIsEditable(FALSE);
+        
+        
 
 
-
+        $bloc.= $franck->getHtmlResult();
         $bloc.= $htmlPoidsNetUVC->getHtmlResult();
 
         //Poids Emballage UVC (en g):

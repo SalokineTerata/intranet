@@ -16,7 +16,7 @@ PARTIE 1: Construction des interfaces utilisateurs (v1) --> Pas de sous table po
 [V] Chapitre Nomenclature --> pas les sous table.
 
 [ ] Chapitre commentaire
-[ ] Chapitre Palletisation
+[ ] Chapitre Palettisation
 
 [ ] Chapitre Emballage
 

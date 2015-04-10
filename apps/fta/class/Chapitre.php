@@ -852,204 +852,204 @@ class Chapitre {
 
         $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_DESCRIPTION_EMBALLAGE);
         /*
-        //Selection de tous les types de groupe d'emballage
-        $req = "SELECT * FROM annexe_emballage_groupe_type ORDER BY ordre_emballage_groupe_type";
-        //$req = "SELECT * FROM annexe_emballage_groupe_type WHERE `id_annexe_emballage_groupe_type`='1' ORDER BY ordre_emballage_groupe_type";
-        $result1 = DatabaseOperation::query($req);
-        while ($rows1 = mysql_fetch_array($result1)) {
+          //Selection de tous les types de groupe d'emballage
+          $req = "SELECT * FROM annexe_emballage_groupe_type ORDER BY ordre_emballage_groupe_type";
+          //$req = "SELECT * FROM annexe_emballage_groupe_type WHERE `id_annexe_emballage_groupe_type`='1' ORDER BY ordre_emballage_groupe_type";
+          $result1 = DatabaseOperation::query($req);
+          while ($rows1 = mysql_fetch_array($result1)) {
 
 
-            //Sélection du bon groupe d'emballage
-            $type_emballage_groupe = $rows1["id_annexe_emballage_groupe_type"]; //Emballe pour l'UVC
-            $id_annexe_emballage_groupe_type = $type_emballage_groupe;
-            $titre = $rows1["nom_annexe_emballage_groupe_type"];
+          //Sélection du bon groupe d'emballage
+          $type_emballage_groupe = $rows1["id_annexe_emballage_groupe_type"]; //Emballe pour l'UVC
+          $id_annexe_emballage_groupe_type = $type_emballage_groupe;
+          $titre = $rows1["nom_annexe_emballage_groupe_type"];
 
-           // $bloc.="<tr><td><br></td></tr><" . Html::$DEFAULT_HTML_TABLE_CONTENU . "><tr class=titre_principal><td align=left>$titre";
+          // $bloc.="<tr><td><br></td></tr><" . Html::$DEFAULT_HTML_TABLE_CONTENU . "><tr class=titre_principal><td align=left>$titre";
 
-            //Ajouter un nouveau Conditionement
-            if ($is_editable) {
-                if ($type_emballage_groupe == 2) {
-                    $dimension_uvc_fta_confitionnement = 1;
-                }
-                $bloc.= "
-                   <a href=ajout_conditionnement.php?id_fta=$id_fta&type_emballage_groupe=$type_emballage_groupe&id_fta_chapitre_encours=$id_fta_chapitre_encours&synthese_action=$synthese_action&dimension_uvc_fta_confitionnement=$dimension_uvc_fta_confitionnement>
-                   (Ajouter)
-                   </a>
-                   ";
-            }
-            $bloc.= "</td></tr>";
+          //Ajouter un nouveau Conditionement
+          if ($is_editable) {
+          if ($type_emballage_groupe == 2) {
+          $dimension_uvc_fta_confitionnement = 1;
+          }
+          $bloc.= "
+          <a href=ajout_conditionnement.php?id_fta=$id_fta&type_emballage_groupe=$type_emballage_groupe&id_fta_chapitre_encours=$id_fta_chapitre_encours&synthese_action=$synthese_action&dimension_uvc_fta_confitionnement=$dimension_uvc_fta_confitionnement>
+          (Ajouter)
+          </a>
+          ";
+          }
+          $bloc.= "</td></tr>";
 
-            //Intitulé des quantité
-            $intitule_quantite = "Quantité par ";
-            switch ($id_annexe_emballage_groupe_type) {
-                case 1: $intitule_quantite .= "UVC";
-                    break;
-                case 2: $intitule_quantite .= "Colis";
-                    break;
-                case 3: $intitule_quantite .= "Palette";
-                    break;
-                case 4: $intitule_quantite = "Quantité";
-                    break;
-            }
-            //Tableau récapitulatif du conditionnement
-            $recap_conditionnement = "
-                        <" . Html::$DEFAULT_HTML_TABLE_CONTENU . ">
-                        <tr class=contenu>
-                            <td>
-                            Type
-                            </td>
-                            <td>
-                            Longeur x Largeur x Hauteur (en mm)
-                            </td>
-                            <td>
-                            Poids (en g)
-                            </td>
-                            <td>
-                            $intitule_quantite
-                            </td>";
-            if ($id_annexe_emballage_groupe_type == 3) {
-                $recap_conditionnement .="<td>PCB</td>";
-            }
-            if ($is_editable) {
-                $recap_conditionnement.="<td><small><i>Actions</i></small></td>";
-            }
-            $recap_conditionnement.="</tr>";
+          //Intitulé des quantité
+          $intitule_quantite = "Quantité par ";
+          switch ($id_annexe_emballage_groupe_type) {
+          case 1: $intitule_quantite .= "UVC";
+          break;
+          case 2: $intitule_quantite .= "Colis";
+          break;
+          case 3: $intitule_quantite .= "Palette";
+          break;
+          case 4: $intitule_quantite = "Quantité";
+          break;
+          }
+          //Tableau récapitulatif du conditionnement
+          $recap_conditionnement = "
+          <" . Html::$DEFAULT_HTML_TABLE_CONTENU . ">
+          <tr class=contenu>
+          <td>
+          Type
+          </td>
+          <td>
+          Longeur x Largeur x Hauteur (en mm)
+          </td>
+          <td>
+          Poids (en g)
+          </td>
+          <td>
+          $intitule_quantite
+          </td>";
+          if ($id_annexe_emballage_groupe_type == 3) {
+          $recap_conditionnement .="<td>PCB</td>";
+          }
+          if ($is_editable) {
+          $recap_conditionnement.="<td><small><i>Actions</i></small></td>";
+          }
+          $recap_conditionnement.="</tr>";
 
-            $req = "SELECT id_fta_conditionnement, fta_conditionnement.id_annexe_emballage_groupe "
-                    . "FROM fta_conditionnement, annexe_emballage_groupe "
-                    . "WHERE id_fta=$id_fta "
-                    . "AND ( "
-                    . "id_annexe_emballage_groupe_type=$type_emballage_groupe "
-                    //. "OR ( fta_conditionnement.id_annexe_emballage_groupe = annexe_emballage_groupe.id_annexe_emballage_groupe "
-                    //. "AND id_annexe_emballage_groupe_configuration =$type_emballage_groupe )"
-                    . " )"
-                    . "AND fta_conditionnement.id_annexe_emballage_groupe=annexe_emballage_groupe.id_annexe_emballage_groupe "
-                    . "ORDER BY nom_annexe_emballage_groupe, poids_fta_conditionnement "
-            ;
+          $req = "SELECT id_fta_conditionnement, fta_conditionnement.id_annexe_emballage_groupe "
+          . "FROM fta_conditionnement, annexe_emballage_groupe "
+          . "WHERE id_fta=$id_fta "
+          . "AND ( "
+          . "id_annexe_emballage_groupe_type=$type_emballage_groupe "
+          //. "OR ( fta_conditionnement.id_annexe_emballage_groupe = annexe_emballage_groupe.id_annexe_emballage_groupe "
+          //. "AND id_annexe_emballage_groupe_configuration =$type_emballage_groupe )"
+          . " )"
+          . "AND fta_conditionnement.id_annexe_emballage_groupe=annexe_emballage_groupe.id_annexe_emballage_groupe "
+          . "ORDER BY nom_annexe_emballage_groupe, poids_fta_conditionnement "
+          ;
 
-            $result = DatabaseOperation::query($req);
-            if (mysql_num_rows($result)) {
-                while ($rows = mysql_fetch_array($result)) {
-                    $id_fta_conditionnement = $rows["id_fta_conditionnement"];
-                    $last_id_fta_conditionnement = $rows["last_id_fta_conditionnement"];
-                    //$table = "fta_conditionnement";
-//                    mysql_table_load($table);
-//                    mysql_table_load("annexe_emballage");
-//                    mysql_table_load("annexe_emballage_groupe");
-                    $recordConditionnement = new DatabaseRecord(
-                            "fta_conditionnement", $id_fta_conditionnement)
-                    ;
-                    $recordEmballage = new DatabaseRecord(
-                            "annexe_emballage", $recordConditionnement->getFieldValue("id_annexe_emballage"))
-                    ;
-                    $recordEmballageGroupe = new DatabaseRecord(
-                            "annexe_emballage_groupe", $recordEmballage->getFieldValue("id_annexe_emballage_groupe"))
-                    ;
+          $result = DatabaseOperation::query($req);
+          if (mysql_num_rows($result)) {
+          while ($rows = mysql_fetch_array($result)) {
+          $id_fta_conditionnement = $rows["id_fta_conditionnement"];
+          $last_id_fta_conditionnement = $rows["last_id_fta_conditionnement"];
+          //$table = "fta_conditionnement";
+          //                    mysql_table_load($table);
+          //                    mysql_table_load("annexe_emballage");
+          //                    mysql_table_load("annexe_emballage_groupe");
+          $recordConditionnement = new DatabaseRecord(
+          "fta_conditionnement", $id_fta_conditionnement)
+          ;
+          $recordEmballage = new DatabaseRecord(
+          "annexe_emballage", $recordConditionnement->getFieldValue("id_annexe_emballage"))
+          ;
+          $recordEmballageGroupe = new DatabaseRecord(
+          "annexe_emballage_groupe", $recordEmballage->getFieldValue("id_annexe_emballage_groupe"))
+          ;
 
-                    //Récupération du différenciel de version
-                    $table = "fta_conditionnement";
-                    $table_name_1 = $table;
-                    $id_1 = $id_fta_conditionnement;
-                    $table_name_2 = $table;
-                    $id_2 = $last_id_fta_conditionnement;
-                    //$debug=1;
-                    ${"diff_" . $table_name_1} = DatabaseOperation::getArrayFieldsNameForDiffRecords($table_name_1, $id_1, $id_2);
-                    $image_modif = "";
+          //Récupération du différenciel de version
+          $table = "fta_conditionnement";
+          $table_name_1 = $table;
+          $id_1 = $id_fta_conditionnement;
+          $table_name_2 = $table;
+          $id_2 = $last_id_fta_conditionnement;
+          //$debug=1;
+          ${"diff_" . $table_name_1} = DatabaseOperation::getArrayFieldsNameForDiffRecords($table_name_1, $id_1, $id_2);
+          $image_modif = "";
 
-                    //Groupe d'emballage
-                    //$champ = "id_annexe_emballage_groupe";
-                    //$table = "fta_conditionnement";
-                    //Versionning
-                    $color_modif = "";
-                    if (${"diff_" . $table}[$champ]) {
-                        $image_modif = $html_image_modif;
-                        $color_modif = $html_color_modif;
-                    }
-                    //$champ = "nom_annexe_emballage_groupe";
-                    $recap_conditionnement .= "<tr class=contenu ><td $color_modif width=\"20%\">" . $recordEmballageGroupe->getFieldValue("nom_annexe_emballage_groupe") . "<br>&nbsp;&nbsp;" . $recordEmballage->getFieldValue("reference_fournisseur_annexe_emballage") . "</td>";
+          //Groupe d'emballage
+          //$champ = "id_annexe_emballage_groupe";
+          //$table = "fta_conditionnement";
+          //Versionning
+          $color_modif = "";
+          if (${"diff_" . $table}[$champ]) {
+          $image_modif = $html_image_modif;
+          $color_modif = $html_color_modif;
+          }
+          //$champ = "nom_annexe_emballage_groupe";
+          $recap_conditionnement .= "<tr class=contenu ><td $color_modif width=\"20%\">" . $recordEmballageGroupe->getFieldValue("nom_annexe_emballage_groupe") . "<br>&nbsp;&nbsp;" . $recordEmballage->getFieldValue("reference_fournisseur_annexe_emballage") . "</td>";
 
-                    //Dimensions
-                    $color_modif = "";
-                    $table = "fta_conditionnement";
+          //Dimensions
+          $color_modif = "";
+          $table = "fta_conditionnement";
 
-                    //Versionning
-                    //$champ="hauteur_fta_conditionnement";
-                    if (${"diff_" . $table}["hauteur_fta_conditionnement"] or $ {"diff_" . $table}["longueur_fta_conditionnement"] or $ {"diff_" . $table}["largeur_fta_conditionnement"]
-                    ) {
-                        $image_modif = $html_image_modif;
-                        $color_modif = $html_color_modif;
-                    }
+          //Versionning
+          //$champ="hauteur_fta_conditionnement";
+          if (${"diff_" . $table}["hauteur_fta_conditionnement"] or $ {"diff_" . $table}["longueur_fta_conditionnement"] or $ {"diff_" . $table}["largeur_fta_conditionnement"]
+          ) {
+          $image_modif = $html_image_modif;
+          $color_modif = $html_color_modif;
+          }
 
-                    $champ = "Longeur x Largeur x Hauteur (en mm)";
-                    $recap_conditionnement .= "<td $color_modif width=\"20%\">"
-                            . $recordConditionnement->getFieldValue("longueur_fta_conditionnement")
-                            . " x "
-                            . $recordConditionnement->getFieldValue("largeur_fta_conditionnement")
-                            . " x "
-                            . $recordConditionnement->getFieldValue("hauteur_fta_conditionnement")
-                            . "</td>"
-                    ;
+          $champ = "Longeur x Largeur x Hauteur (en mm)";
+          $recap_conditionnement .= "<td $color_modif width=\"20%\">"
+          . $recordConditionnement->getFieldValue("longueur_fta_conditionnement")
+          . " x "
+          . $recordConditionnement->getFieldValue("largeur_fta_conditionnement")
+          . " x "
+          . $recordConditionnement->getFieldValue("hauteur_fta_conditionnement")
+          . "</td>"
+          ;
 
-                    //Poids
-//                    $champ = "poids_fta_conditionnement";
-//                    $table = "fta_conditionnement";
-                    //Versionning
-                    $color_modif = "";
-                    if (${"diff_" . $table}[$champ]) {
-                        $image_modif = $html_image_modif;
-                        $color_modif = $html_color_modif;
-                    }
-                    $recap_conditionnement .= "<td $color_modif width=\"20%\">" . $recordConditionnement->getFieldValue("poids_fta_conditionnement") . "</td>";
+          //Poids
+          //                    $champ = "poids_fta_conditionnement";
+          //                    $table = "fta_conditionnement";
+          //Versionning
+          $color_modif = "";
+          if (${"diff_" . $table}[$champ]) {
+          $image_modif = $html_image_modif;
+          $color_modif = $html_color_modif;
+          }
+          $recap_conditionnement .= "<td $color_modif width=\"20%\">" . $recordConditionnement->getFieldValue("poids_fta_conditionnement") . "</td>";
 
-                    //Versionning
-                    $champ = "quantite_par_couche_fta_conditionnement";
-                    $table = "fta_conditionnement";
-                    $color_modif = "";
-                    if (${"diff_" . $table}[$champ]) {
-                        $image_modif = $html_image_modif;
-                        $color_modif = $html_color_modif;
-                    }
+          //Versionning
+          $champ = "quantite_par_couche_fta_conditionnement";
+          $table = "fta_conditionnement";
+          $color_modif = "";
+          if (${"diff_" . $table}[$champ]) {
+          $image_modif = $html_image_modif;
+          $color_modif = $html_color_modif;
+          }
 
-                    if ($recordConditionnement->getFieldValue("nombre_couche_fta_conditionnement") == 1) {
+          if ($recordConditionnement->getFieldValue("nombre_couche_fta_conditionnement") == 1) {
 
-                        $recap_conditionnement .= "<td $color_modif width=\"20%\" align=\"center\">" . $recordConditionnement->getFieldValue("quantite_par_couche_fta_conditionnement") . "</td>";
-                    } else {
-                        //Versionning
-                        $champ = "nombre_couche_fta_conditionnement";
-                        $table = "fta_conditionnement";
-                        //$color_modif="";
-                        if (${"diff_" . $table}[$champ]) {
-                            $image_modif = $html_image_modif;
-                            $color_modif = $html_color_modif;
-                        }
-                        $recap_conditionnement .= "<td $color_modif width=\"20%\">" . $recordConditionnement->getFieldValue("quantite_par_couche_fta_conditionnement") . " colis x " . $recordConditionnement->getFieldValue("nombre_couche_fta_conditionnement") . " couches</td>";
-                        $recap_conditionnement .= "<td $color_modif width=\"20%\"><big><b>" . $recordConditionnement->getFieldValue("pcb_fta_conditionnement") . "</b></big></td>";
-                    }
+          $recap_conditionnement .= "<td $color_modif width=\"20%\" align=\"center\">" . $recordConditionnement->getFieldValue("quantite_par_couche_fta_conditionnement") . "</td>";
+          } else {
+          //Versionning
+          $champ = "nombre_couche_fta_conditionnement";
+          $table = "fta_conditionnement";
+          //$color_modif="";
+          if (${"diff_" . $table}[$champ]) {
+          $image_modif = $html_image_modif;
+          $color_modif = $html_color_modif;
+          }
+          $recap_conditionnement .= "<td $color_modif width=\"20%\">" . $recordConditionnement->getFieldValue("quantite_par_couche_fta_conditionnement") . " colis x " . $recordConditionnement->getFieldValue("nombre_couche_fta_conditionnement") . " couches</td>";
+          $recap_conditionnement .= "<td $color_modif width=\"20%\"><big><b>" . $recordConditionnement->getFieldValue("pcb_fta_conditionnement") . "</b></big></td>";
+          }
 
 
 
-                    //Action
-                    $color_modif = "";
-                    if ($image_modif) {
-                        $color_modif = $html_color_modif;
-                    }
-                    $recap_conditionnement .= "<td $color_modif width=\"1%\">";
-                    if ($is_editable) {
-                        $recap_conditionnement .= "
-                                <a href=modification_fiche_post.php?id_fta=$id_fta&id_fta_conditionnement=$id_fta_conditionnement&action=suppression_conditionnement&id_fta_chapitre_encours=$id_fta_chapitre_encours&synthese_action=$synthese_action>
-                                <img src=../lib/images/supprimer.png width=15 height=15 border=0/>
-                                </a><br>
-                                <a href=ajout_conditionnement.php?id_fta=$id_fta&id_fta_conditionnement=$id_fta_conditionnement&action=etape3&id_fta_chapitre_encours=$id_fta_chapitre_encours&synthese_action=$synthese_action>
-                                <img src=../lib/images/next.png width=15 height=15 border=0/></a>
-                                ";
-                    }
-                    $recap_conditionnement.="$image_modif</td>";
-                }//Fin du While
-            }//Fin du If
+          //Action
+          $color_modif = "";
+          if ($image_modif) {
+          $color_modif = $html_color_modif;
+          }
+          $recap_conditionnement .= "<td $color_modif width=\"1%\">";
+          if ($is_editable) {
+          $recap_conditionnement .= "
+          <a href=modification_fiche_post.php?id_fta=$id_fta&id_fta_conditionnement=$id_fta_conditionnement&action=suppression_conditionnement&id_fta_chapitre_encours=$id_fta_chapitre_encours&synthese_action=$synthese_action>
+          <img src=../lib/images/supprimer.png width=15 height=15 border=0/>
+          </a><br>
+          <a href=ajout_conditionnement.php?id_fta=$id_fta&id_fta_conditionnement=$id_fta_conditionnement&action=etape3&id_fta_chapitre_encours=$id_fta_chapitre_encours&synthese_action=$synthese_action>
+          <img src=../lib/images/next.png width=15 height=15 border=0/></a>
+          ";
+          }
+          $recap_conditionnement.="$image_modif</td>";
+          }//Fin du While
+          }//Fin du If
 
-            $recap_conditionnement.="</tr>";
-            $bloc.= $recap_conditionnement;
-        }*/
+          $recap_conditionnement.="</tr>";
+          $bloc.= $recap_conditionnement;
+          } */
 
 //        $bloc.="</table><".Html::$DEFAULT_HTML_TABLE_CONTENU.">";
 //
@@ -1326,7 +1326,7 @@ class Chapitre {
         $id_fta = self::$id_fta;
         $synthese_action = self::$synthese_action;
         $isEditable = self::$is_editable;
-        
+
         //
         //Identifiant FTA
         $idFta = $id_fta;
@@ -1338,6 +1338,21 @@ class Chapitre {
         $bloc.="<tr class=titre_principal><td class>Palletisasion</td></tr>";
 
         $bloc.="<tr class=titre_principal><td class>Informations Générales de l'UVC</td></tr>";
+
+
+        // Code pour récuper, calculer et préparer les données
+        //Partie Vue:
+
+        $return = "";
+        $htmlPoidsNetUVC = new HtmlInputText();
+        $htmlPoidsNetUVC->setLabel("TESTLabel");
+        $htmlPoidsNetUVC->getAttributes()->getName()->setValue("TESTName");
+        $htmlPoidsNetUVC->getAttributes()->getValue()->setValue("TESTValue");
+        $htmlPoidsNetUVC->setIsEditable(FALSE);
+
+
+
+        $bloc.= $htmlPoidsNetUVC->getHtmlResult();
 
         //Poids Emballage UVC (en g):
         $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_POIDS_EMBALLAGES_UVC);
@@ -1352,55 +1367,55 @@ class Chapitre {
 
         //Dimension de l'UVC (en mm):
         $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_DIMENSION_UVC);
-               
+
         $bloc.="<tr class=titre_principal> <td>Informations Générales du Colis</td></tr>";
 
         //Nombre d'UVC par colis:
         $bloc.="<tr><td>Nombre d'UVC par colis:</td><td> not implement(champ inconnu)</td></tr>";
 
-        
+
         //Poids des Emballages (en g):
         $bloc.="<tr><td>Poids des Emballages (en g)</td><td> not implement(champ inconnu)</td></tr>";
 
-        
+
         //Poids Net (en Kg) du Colis:
         $bloc.="<tr><td>Poids Net (en Kg) du Colis:</td><td> not implement(champ inconnu)</td></tr>";
 
-        
+
         //Poids Brut (en Kg) du Colis:
         $bloc.="<tr><td>Poids Brut (en Kg) du Colis:</td><td> not implement(champ inconnu)</td></tr>";
 
-        
+
         //Hauteur (en mm) du Colis
         $bloc.="<tr><td>Hauteur (en mm) du Colis</td><td> not implement(champ inconnu)</td></tr>";
 
-        
+
         $bloc.="<tr class=titre_principal> <td>Informations Générales d'une Palette</td></tr>";
 
-        
+
         //Poids Net (en Kg) d'une Palette:
         $bloc.="<tr><td>Poids Net (en Kg) d'une Palette:</td><td> not implement(champ inconnu)</td></tr>";
 
-        
+
         //Poids Brut (en Kg) d'une Palette:
         $bloc.="<tr><td>Poids Brut (en Kg) d'une Palette:</td><td> not implement(champ inconnu)</td></tr>";
 
-        
+
         //Hauteur (en m) d'une Palette:
         $bloc.="<tr><td>Hauteur (en m) d'une Palette:</td><td> not implement(champ inconnu)</td></tr>";
 
-        
+
         //Nombre de couche par palette:
         $bloc.="<tr><td>Nombre de couche par palette:</td><td> not implement(champ inconnu)</td></tr>";
 
-        
+
         //Nombre de colis par couche:
         $bloc.="<tr><td>Nombre de colis par couche:</td><td> not implement(champ inconnu)</td></tr>";
 
-        
+
         //Nombre total de Carton par palette:
         $bloc.="<tr><td>Nombre total de Carton par palette:</td><td> not implement(champ inconnu)</td></tr>";
-        
+
         return $bloc;
     }
 

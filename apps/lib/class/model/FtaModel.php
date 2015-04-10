@@ -34,7 +34,9 @@ class FtaModel extends AbstractModel {
     const FIELDNAME_DATE_PREVISONNELLE_TRANSFERT_INDUSTRIEL = "date_transfert_industriel";
     const FIELDNAME_DESCRIPTION_DU_PRODUIT = "synoptique_valide_fta";
     const FIELDNAME_DESCRIPTION_TECHNIQUE_INTERNE = "synoptique_experimental_fta";
+    const FIELDNAME_DESCRIPTION_EMBALLAGE = "description_emballage";
     const FIELDNAME_DESIGNATION_COMMERCIALE = "designation_commerciale_fta";
+    const FIELDNAME_DIMENSION_UVC = "dimension_uvc";
     const FIELDNAME_DUREE_DE_VIE = "Duree_de_vie";
     const FIELDNAME_DUREE_DE_VIE_TECHNIQUE_PRODUCTION = "Duree_de_vie_technique";
     const FIELDNAME_DUREE_DE_VIE_TECHNIQUE_MAXIMALE = "duree_vie_technique_fta";
@@ -58,10 +60,14 @@ class FtaModel extends AbstractModel {
     const FIELDNAME_NOM_ABREGE = "nom_abrege_fta";
     const FIELDNAME_NOM_DEMANDEUR = "nom_demandeur_fta";
     const FIELDNAME_NOMBRE_PORTION_FTA = "nombre_portion_fta";
+    const FIELDNAME_NOMBRE_UVC_PAR_CARTON = "NB_UNIT_ELEM";
     const FIELDNAME_ORIGINE_MATIERE_PREMIERE = "origine_matiere_fta";
     const FIELDNAME_PCB = "NB_UNIT_ELEM";
     const FIELDNAME_PERIODE_DE_COMMERCIALISATION = "periode_commercialisation_fta";
     const FIELDNAME_POIDS_ELEMENTAIRE = "Poids_ELEM";
+    const FIELDNAME_POIDS_BRUT_UVC = "poids_brut_uvc_fta";
+    const FIELDNAME_POIDS_EMBALLAGES_UVC = "poids_emballages_uvc_fta";
+    const FIELDNAME_POIDS_NET_UVC = "poids_net_uvc_fta";
     const FIELDNAME_PRODUIT_TRANSFORME = "origine_transformation_fta";
     const FIELDNAME_PVC_ARTICLE = "pvc_article";
     const FIELDNAME_PVC_ARTICLE_KG = "pvc_article_kg";

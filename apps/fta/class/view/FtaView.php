@@ -240,7 +240,29 @@ class FtaView {
         $return .= $HtmlSuiviProjet->getHtmlResult();
         return $return;
     }
+    
+        public function getHtmlCorrectionChapitre() {
+        $return = NULL;
 
+
+        $idFtaSuiviProjet = FtaSuiviProjetModel::getIdFtaSuiviProjetByIdFtaAndIdChapitre(
+                        $this->ftaModel->getDataField(FtaModel::KEYNAME)->getFieldValue()
+                        , 1
+        );
+        $recordsetIdFtaSuiviProjet = new FtaSuiviProjetModel($idFtaSuiviProjet);
+        $HtmlSuiviProjet = new DataFieldToHtmlTextArea(
+                $recordsetIdFtaSuiviProjet->getDataField(
+                        FtaSuiviProjetModel::FIELDNAME_CORRECTION_FTA_SUIVI_PROJET
+                )
+        );
+        $HtmlSuiviProjet->setIsEditable(TRUE);
+
+        $return .= $HtmlSuiviProjet->getHtmlResult();
+        return $return;
+    }
+
+
+    
     function getFtaSuiviProjetModel() {
 
         $idFtaChapitre = $this->getFtaChapitreModel()->getKeyValue();

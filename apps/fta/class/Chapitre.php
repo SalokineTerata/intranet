@@ -29,6 +29,7 @@ class Chapitre {
     protected static $html_chapitre_all;
     protected static $html_chapitre_codification;
     protected static $html_chapitre_codification_externe;
+    protected static $html_chapitre_commentaire;
     protected static $html_chapitre_commerce;
     protected static $html_chapitre_composition;
     protected static $html_chapitre_conditionnement_decoupe;
@@ -39,10 +40,11 @@ class Chapitre {
     protected static $html_chapitre_etiquette;
     protected static $html_chapitre_expedition;
     protected static $html_chapitre_identite;
-    protected static $html_chapitre_qualite;
-    protected static $html_chapitre_production;
     protected static $html_chapitre_need_rebuild;
     protected static $html_chapitre_nomenclature;
+    protected static $html_chapitre_palletisation;
+    protected static $html_chapitre_production;
+    protected static $html_chapitre_qualite;
     protected static $html_correct_button;
     protected static $html_submit_button;
     protected static $html_suivi_dossier;
@@ -212,6 +214,14 @@ class Chapitre {
                 self::$html_chapitre_nomenclature = self::buildChapitreNomenclature();
                 $return = self::$html_chapitre_nomenclature;
                 break;
+            case "commentaire":
+                self::$html_chapitre_commentaire = self::buildChapitreCommentaire();
+                $return = self::$html_chapitre_commentaire;
+                break;
+            case "palletisation":
+                self::$html_chapitre_palletisation = self::buildChapitrePalletisation();
+                $return = self::$html_chapitre_palletisation;
+                break;
             default:
         }
         return $return;
@@ -304,6 +314,41 @@ class Chapitre {
 
     public static function buildChapitreIdentite() {
         return self::buildChapitreIdentiteVolaille();
+    }
+
+    public static function buildChapitreCommentaire() {
+
+        $bloc = "";
+        $id_fta = self::$id_fta;
+        $synthese_action = self::$synthese_action;
+        $isEditable = self::$is_editable;
+        $isEditable = TRUE;
+        //
+        //Identifiant FTA
+        $idFta = $id_fta;
+        $ftaModel = new FtaModel($idFta);
+        $ftaView = new FtaView($ftaModel);
+        $ftaView->setIsEditable($isEditable);
+        $ftaView->setFtaChapitreModelById(self::ID_CHAPITRE_IDENTITE);
+
+        $bloc.="<tr class=titre_principal><td class>Commentaire</td></tr>";
+
+        //Liste des corrections apportées
+        $bloc.="<tr class=titre_principal><td>Récapitulatif des corrections</td></tr>";
+
+        $bloc.=$ftaView->getHtmlCorrectionChapitre();
+
+        //Liste de tous les commentaires des chapitres
+        $bloc.="<tr class=titre_principal><td>Récapitulatif des commentaires</td></tr>";
+
+        $bloc.=$ftaView->getHtmlCommentaireChapitre();
+
+        //Historique des mises à jour de la FTA
+        $bloc.="<tr class=titre_principal><td>Historique des actions effectuées sur le Fiche Technique Article</td></tr>";
+
+        $bloc.="<tr> <td>Historique des mises à jour de la FTA:</td><td> not implement(champ inconnu)</td></tr>";
+
+        return $bloc;
     }
 
     public static function buildChapitreCommerce() {
@@ -419,7 +464,7 @@ class Chapitre {
         $bloc.="<tr> <td>Produit Transformé en France:</td><td> not implement(bouton radio)</td></tr>";
         $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_PRODUIT_TRANSFORME);
 
-       //Environnement de conservation
+        //Environnement de conservation
         $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_ENVIRONNEMENT_CONSERVATION);
 
         /**
@@ -432,7 +477,7 @@ class Chapitre {
         /**
          * @todo Non implementé
          */
-         //Logo éco-emballage
+        //Logo éco-emballage
         $bloc.="<tr> <td>Logo éco-emballage:</td><td> not implement(bouton radio)</td></tr>";
         $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_LOGO_ECO_EMBALLAGE);
 
@@ -699,7 +744,7 @@ class Chapitre {
 
         $bloc.="<tr class=titre_principal><td class>Activation des Produits</td></tr>";
 
-        
+
 
         //Désignation Abrégée
         $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_NOM_ABREGE);
@@ -793,12 +838,20 @@ class Chapitre {
         $bloc = "";
         $id_fta = self::$id_fta;
         $synthese_action = self::$synthese_action;
-        $is_editable = self::$is_editable;
-        $is_editable_false = false;
-        $id_fta_chapitre_encours = self::$id_fta_chapitre;
+        $isEditable = self::$is_editable;
+        $isEditable = TRUE;
+        //
+        //Identifiant FTA
+        $idFta = $id_fta;
+        $ftaModel = new FtaModel($idFta);
+        $ftaView = new FtaView($ftaModel);
+        $ftaView->setIsEditable($isEditable);
+        $ftaView->setFtaChapitreModelById(self::ID_CHAPITRE_IDENTITE);
 
-        $bloc.="<tr class=titre_principal><td class>Demandeur</td></tr>";
+        $bloc.="<tr class=titre_principal><td class>Emballage</td></tr>";
 
+        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_DESCRIPTION_EMBALLAGE);
+        /*
         //Selection de tous les types de groupe d'emballage
         $req = "SELECT * FROM annexe_emballage_groupe_type ORDER BY ordre_emballage_groupe_type";
         //$req = "SELECT * FROM annexe_emballage_groupe_type WHERE `id_annexe_emballage_groupe_type`='1' ORDER BY ordre_emballage_groupe_type";
@@ -811,7 +864,7 @@ class Chapitre {
             $id_annexe_emballage_groupe_type = $type_emballage_groupe;
             $titre = $rows1["nom_annexe_emballage_groupe_type"];
 
-            $bloc.="<tr><td><br></td></tr><" . Html::$DEFAULT_HTML_TABLE_CONTENU . "><tr class=titre_principal><td align=left>$titre";
+           // $bloc.="<tr><td><br></td></tr><" . Html::$DEFAULT_HTML_TABLE_CONTENU . "><tr class=titre_principal><td align=left>$titre";
 
             //Ajouter un nouveau Conditionement
             if ($is_editable) {
@@ -996,7 +1049,7 @@ class Chapitre {
 
             $recap_conditionnement.="</tr>";
             $bloc.= $recap_conditionnement;
-        }
+        }*/
 
 //        $bloc.="</table><".Html::$DEFAULT_HTML_TABLE_CONTENU.">";
 //
@@ -1245,13 +1298,13 @@ class Chapitre {
         $ftaView->setFtaChapitreModelById(self::ID_CHAPITRE_IDENTITE);
 
         $bloc.="<tr class=titre_principal><td class>Nomenclature</td></tr>";
-        
+
         /**
          * @todo Non implementé
          */
         //Codification /Désignation /Poids Unitaire /Unité du poids /Site de Production	/Carton Vrac
         $bloc.="<tr> <td>Codification | Désignation | Poids Unitaire | Unité du poids | Site de Production | Carton Vrac</td><td> not implement(sous table)</td></tr>";
-        
+
         //Description technique interne
         $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_DESCRIPTION_TECHNIQUE_INTERNE);
 
@@ -1262,7 +1315,91 @@ class Chapitre {
 
         //Date prévisionnelle du transfert Industriel
         $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_DATE_PREVISONNELLE_TRANSFERT_INDUSTRIEL);
-         
+
+
+        return $bloc;
+    }
+
+    public static function buildChapitrePalletisation() {
+
+        $bloc = "";
+        $id_fta = self::$id_fta;
+        $synthese_action = self::$synthese_action;
+        $isEditable = self::$is_editable;
+        
+        //
+        //Identifiant FTA
+        $idFta = $id_fta;
+        $ftaModel = new FtaModel($idFta);
+        $ftaView = new FtaView($ftaModel);
+        $ftaView->setIsEditable($isEditable);
+        $ftaView->setFtaChapitreModelById(self::ID_CHAPITRE_IDENTITE);
+
+        $bloc.="<tr class=titre_principal><td class>Palletisasion</td></tr>";
+
+        $bloc.="<tr class=titre_principal><td class>Informations Générales de l'UVC</td></tr>";
+
+        //Poids Emballage UVC (en g):
+        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_POIDS_EMBALLAGES_UVC);
+
+
+        //Poids Net UVC (en g):
+        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_POIDS_NET_UVC);
+
+
+        //Poids Brut UVC (en g):
+        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_POIDS_BRUT_UVC);
+
+        //Dimension de l'UVC (en mm):
+        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_DIMENSION_UVC);
+               
+        $bloc.="<tr class=titre_principal> <td>Informations Générales du Colis</td></tr>";
+
+        //Nombre d'UVC par colis:
+        $bloc.="<tr><td>Nombre d'UVC par colis:</td><td> not implement(champ inconnu)</td></tr>";
+
+        
+        //Poids des Emballages (en g):
+        $bloc.="<tr><td>Poids des Emballages (en g)</td><td> not implement(champ inconnu)</td></tr>";
+
+        
+        //Poids Net (en Kg) du Colis:
+        $bloc.="<tr><td>Poids Net (en Kg) du Colis:</td><td> not implement(champ inconnu)</td></tr>";
+
+        
+        //Poids Brut (en Kg) du Colis:
+        $bloc.="<tr><td>Poids Brut (en Kg) du Colis:</td><td> not implement(champ inconnu)</td></tr>";
+
+        
+        //Hauteur (en mm) du Colis
+        $bloc.="<tr><td>Hauteur (en mm) du Colis</td><td> not implement(champ inconnu)</td></tr>";
+
+        
+        $bloc.="<tr class=titre_principal> <td>Informations Générales d'une Palette</td></tr>";
+
+        
+        //Poids Net (en Kg) d'une Palette:
+        $bloc.="<tr><td>Poids Net (en Kg) d'une Palette:</td><td> not implement(champ inconnu)</td></tr>";
+
+        
+        //Poids Brut (en Kg) d'une Palette:
+        $bloc.="<tr><td>Poids Brut (en Kg) d'une Palette:</td><td> not implement(champ inconnu)</td></tr>";
+
+        
+        //Hauteur (en m) d'une Palette:
+        $bloc.="<tr><td>Hauteur (en m) d'une Palette:</td><td> not implement(champ inconnu)</td></tr>";
+
+        
+        //Nombre de couche par palette:
+        $bloc.="<tr><td>Nombre de couche par palette:</td><td> not implement(champ inconnu)</td></tr>";
+
+        
+        //Nombre de colis par couche:
+        $bloc.="<tr><td>Nombre de colis par couche:</td><td> not implement(champ inconnu)</td></tr>";
+
+        
+        //Nombre total de Carton par palette:
+        $bloc.="<tr><td>Nombre total de Carton par palette:</td><td> not implement(champ inconnu)</td></tr>";
         
         return $bloc;
     }

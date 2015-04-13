@@ -1,8 +1,8 @@
 <?php
 
 /**
- * Description of FtaSuiviProjetModel
- * Table des FtaSuiviProjetModel
+ * Description of AnnexeAgrologicArticleCodification
+ * Table des AnnexeAgrologicArticleCodification
  *
  * @author franckwastaken
  */

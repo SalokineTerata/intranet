@@ -1340,47 +1340,117 @@ class Chapitre {
 
         $bloc.="<tr class=titre_principal><td class>Informations Générales de l'UVC</td></tr>";
 
-
+        //Exemple
         // Code pour récuper, calculer et préparer les données
         //Partie Vue:
 
         $return = "";
-        $htmlPoidsNetUVC = new HtmlInputText();
-        $htmlPoidsNetUVC->setLabel("TESTLabel");
-        $htmlPoidsNetUVC->getAttributes()->getName()->setValue("TESTName");
-        $htmlPoidsNetUVC->getAttributes()->getValue()->setValue("TESTValue");
-        $htmlPoidsNetUVC->setIsEditable(FALSE);
+       /* $htmltest = new HtmlInputText();
+        $htmltest->setLabel("TESTLabel");
+        $htmltest->getAttributes()->getName()->setValue("TESTName");
+        $htmltest->getAttributes()->getValue()->setValue("TESTValue");
+        $htmltest->setIsEditable(FALSE);
+
+        $bloc.= $htmltest->getHtmlResult();
+
+        */
+        
+        //V1 du calcul du poids net ou brut non précisés
         //Calcul du poids des emballages d'une Palette
-        /*SELECT * FROM fta_conditionnement, annexe_emballage_groupe, annexe_emballage_groupe_type 
-                WHERE id_fta=id_fta AND annexe_emballage_groupe_type.id_annexe_emballage_groupe_type=4 
-                AND fta_conditionnement.id_annexe_emballage_groupe=annexe_emballage_groupe.id_annexe_emballage_groupe 
-                AND annexe_emballage_groupe.id_annexe_emballage_groupe_configuration=annexe_emballage_groupe_type.id_annexe_emballage_groupe_type 
-                ORDER BY nom_annexe_emballage_groupe_type*/
-        $franck = new HtmlInputText();
-        $franck->setLabel("Poids Emballage UVC (en g):");
-        $franck->getAttributes()->getName()->setValue("Calcul du poids des emballages d'une Palette");
-        $franck->getAttributes()->getValue()->setValue("36");
-        $franck->setIsEditable(FALSE);
-        
-        
+        // Selections 
+        $req = "SELECT  * 
+                    FROM fta_conditionnement, annexe_emballage_groupe, annexe_emballage_groupe_type 
+                    WHERE id_fta="
+                . FtaModel::KEYNAME . " "
+                . "AND annexe_emballage_groupe_type.id_annexe_emballage_groupe_type=" . 4 . " "
+                . "AND fta_conditionnement.id_annexe_emballage_groupe=annexe_emballage_groupe.id_annexe_emballage_groupe "
+                . "AND annexe_emballage_groupe.id_annexe_emballage_groupe_configuration=annexe_emballage_groupe_type.id_annexe_emballage_groupe_type "
+                . "ORDER BY `fta_conditionnement`.`quantite_par_couche_fta_conditionnement` "
+        ;
 
 
-        $bloc.= $franck->getHtmlResult();
-        $bloc.= $htmlPoidsNetUVC->getHtmlResult();
+
+        $result = DatabaseOperation::query($req);
+        if (mysql_num_rows($result)) {
+            while ($rows = mysql_fetch_array($result)) {
+                //Calcul du poids
+                $return["$description_annexe_emballage_groupe_type"]+=$rows["poids_fta_conditionnement"] * $rows["quantite_par_couche_fta_conditionnement"] * $rows["nombre_couche_fta_conditionnement"];
+
+                //Calcul des dimension (on recherche la taille la plus grande
+                if ($return["dimension_uvc_hauteur"] < $rows["hauteur_fta_conditionnement"]) {
+                    $return["dimension_uvc_hauteur"] = $rows["hauteur_fta_conditionnement"];
+                }
+                if ($return["dimension_uvc_longueur"] < $rows["longueur_fta_conditionnement"]) {
+                    $return["dimension_uvc_longueur"] = $rows["longueur_fta_conditionnement"];
+                }
+                if ($return["dimension_uvc_largeur"] < $rows["largeur_fta_conditionnement"]) {
+                    $return["dimension_uvc_largeur"] = $rows["largeur_fta_conditionnement"];
+                }
+            }
+
+            $return["dimension_uvc"] = $return["dimension_uvc_longueur"] . "x" . $return["dimension_uvc_largeur"];
+
+            //Si la hauteur n'est pas nulle, on l'intègre.
+            if ($return["dimension_uvc_hauteur"]) {
+                $return["dimension_uvc"] = $return["dimension_uvc"] . "x" . $return["dimension_uvc_hauteur"];
+            }
+        }
+
+
+
 
         //Poids Emballage UVC (en g):
-        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_POIDS_EMBALLAGES_UVC);
 
+        $htmlPoidsUVC = new HtmlInputText();
+
+
+        $htmlPoidsUVC->setLabel(DatabaseDescription::getFieldDocLabel("fta","poids_emballages_uvc_fta"));
+        $htmlPoidsUVC->getAttributes()->getName()->setValue("Poids_UVC");
+        $htmlPoidsUVC->getAttributes()->getValue()->setValue($return["$description_annexe_emballage_groupe_type"]);
+        $htmlPoidsUVC->setIsEditable(FALSE);
+
+        $bloc.= $htmlPoidsUVC->getHtmlResult();
 
         //Poids Net UVC (en g):
-        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_POIDS_NET_UVC);
+        $req = "SELECT * FROM fta";
+        $result = DatabaseOperation::query($req);
+
+        $return["uvc_net"] = mysql_result($result, 0, "Poids_ELEM") * 1000;
+
+        $htmlPoidsNetUVC = new HtmlInputText();
+
+        $htmlPoidsNetUVC->setLabel(DatabaseDescription::getFieldDocLabel("fta","poids_net_uvc_fta"));
+        $htmlPoidsNetUVC->getAttributes()->getName()->setValue("Poids_Net_UVC");
+        $htmlPoidsNetUVC->getAttributes()->getValue()->setValue($return["uvc_net"]);
+        $htmlPoidsNetUVC->setIsEditable(FALSE);
+
+        $bloc.= $htmlPoidsNetUVC->getHtmlResult();
 
 
         //Poids Brut UVC (en g):
-        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_POIDS_BRUT_UVC);
+
+        $return["uvc_brut"] = $return["uvc_net"] + $return["$description_annexe_emballage_groupe_type"];
+        $htmlPoidsBrutUVC = new HtmlInputText();
+
+        $htmlPoidsBrutUVC->setLabel(DatabaseDescription::getFieldDocLabel("fta","poids_brut_uvc_fta"));
+        $htmlPoidsBrutUVC->getAttributes()->getName()->setValue("Poids_Brut_UVC");
+        $htmlPoidsBrutUVC->getAttributes()->getValue()->setValue($return["uvc_brut"]);
+        $htmlPoidsBrutUVC->setIsEditable(FALSE);
+
+        $bloc.= $htmlPoidsBrutUVC->getHtmlResult();
 
         //Dimension de l'UVC (en mm):
-        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_DIMENSION_UVC);
+
+
+        $htmlDimensionUVC = new HtmlInputText();
+
+        $htmlDimensionUVC->setLabel("Dimension de l'UVC (en mm): (Longueur x Largeur x Hauteur)");
+        $htmlDimensionUVC->getAttributes()->getName()->setValue("Dimension_UVC");
+        $htmlDimensionUVC->getAttributes()->getValue()->setValue($return["dimension_uvc"]);
+        $htmlDimensionUVC->setIsEditable(FALSE);
+
+
+        $bloc.=$htmlDimensionUVC->getHtmlResult();
 
         $bloc.="<tr class=titre_principal> <td>Informations Générales du Colis</td></tr>";
 

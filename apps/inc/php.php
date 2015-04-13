@@ -47,8 +47,12 @@ require_once("../lib/class/database/DatabaseRecord.php");
 
 // Modèles des tables en base de données
 require_once("../lib/class/model/AbstractModel.php");
+require_once("../lib/class/model/AnnexeEmballage.php");
+require_once("../lib/class/model/AnnexeEmballageGroupe.php");
+require_once("../lib/class/model/AnnexeEmballageGroupeType.php");
 require_once("../lib/class/model/UserModel.php");
 require_once("../lib/class/model/FtaCategorieModel.php");
+require_once("../lib/class/model/FtaConditionnement.php");
 require_once("../lib/class/model/FtaProcessusCycleModel.php");
 require_once("../lib/class/model/FtaModel.php");
 require_once("../lib/class/model/FtaEtatModel.php");

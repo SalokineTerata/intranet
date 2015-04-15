@@ -456,28 +456,19 @@ class Chapitre {
         //Agrément CE
         $bloc.=$ftaView->getHtmlSiteAgrement();
 
-        /**
-         * @todo Non implementé
-         */
+        
         //Produit Transformé en France
-        $bloc.="<tr> <td>Produit Transformé en France:</td><td> not implement(bouton radio)</td></tr>";
         $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_PRODUIT_TRANSFORME);
 
         //Environnement de conservation
         $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_ENVIRONNEMENT_CONSERVATION);
 
-        /**
-         * @todo Non implementé
-         */
+        
         //Conditionné sous atmosphère protectrice
-        $bloc.="<tr> <td>Conditionné sous atmosphère protectrice:</td><td> not implement(bouton radio)</td></tr>";
-        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_CONDITION_SOUS_ATMOSPHERE);
+         $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_CONDITION_SOUS_ATMOSPHERE);
 
-        /**
-         * @todo Non implementé
-         */
+        
         //Logo éco-emballage
-        $bloc.="<tr> <td>Logo éco-emballage:</td><td> not implement(bouton radio)</td></tr>";
         $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_LOGO_ECO_EMBALLAGE);
 
         //
@@ -780,11 +771,9 @@ class Chapitre {
 
         $bloc.="<tr class=titre_principal><td class>Codification</td></tr>";
 
-        /**
-         * @todo Non implementé
-         */
+
         //Unité de Poids d'affichage:
-        $bloc.="<tr> <td>Unité de Poids d'affichage:</td><td> not implement(bouton radio)</td></tr>";
+        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_UNITE_AFFICHAGE);
 
         //Désignation Abrégée
         $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_NOM_ABREGE);

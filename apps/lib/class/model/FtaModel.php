@@ -387,7 +387,7 @@ class FtaModel extends AbstractModel {
 
         return $arrayDataFieldEcheancesForProcessusCycle;
     }
-    /*
+    
     public function getArrayEmballageUVC() {
 
      return   $this->getArrayEmballagesUVC(FtaModel::EMBALLAGES_UVC);
@@ -434,7 +434,7 @@ class FtaModel extends AbstractModel {
            
 
          
-    }*/
+    }
     
     
  public function getArrayFta() {

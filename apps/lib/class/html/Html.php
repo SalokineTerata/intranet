@@ -31,6 +31,7 @@ class Html {
     const TYPE_OF_OBJECT_INPUTTEXT = "INPUTTEXT";
     const TYPE_OF_OBJECT_LIST = "LIST";
     const TYPE_OF_OBJECT_TEXTAREA = "TEXTAREA";
+    const TYPE_OF_OBJECT_UNITE_AFFICHAGE = "UNITEAFFICHAGE";
     const TYPE_OF_OBJECT_UNITE_FACTURATION = "UNITEFACTURATION";
     const JS_SCRIPTNAME_AUTOSAVE = "ajaxAutosave";
     const JS_SCRIPTNAME_DOACTION = "ajaxDoAction";
@@ -169,6 +170,10 @@ class Html {
             default:
             case Html::TYPE_OF_OBJECT_TEXTAREA:
                 $htmlObject = new DataFieldToHtmlTextArea($paramDataField);
+                break;
+            default:
+            case Html::TYPE_OF_OBJECT_UNITE_AFFICHAGE:
+                $htmlObject = new DataFieldToHtmlListUniteAffichage($paramDataField);
                 break;
             default:
             case Html::TYPE_OF_OBJECT_UNITE_FACTURATION:

@@ -357,7 +357,7 @@ class Chapitre {
         $id_fta = self::$id_fta;
         $synthese_action = self::$synthese_action;
         $isEditable = self::$is_editable;
-        $isEditable = TRUE;
+        //$isEditable = TRUE;
         //
         //Identifiant FTA
         $idFta = $id_fta;
@@ -812,7 +812,8 @@ class Chapitre {
         $id_fta = self::$id_fta;
         $synthese_action = self::$synthese_action;
         $isEditable = self::$is_editable;
-        //$isEditable = FALSE;
+        $isEditable = FALSE;
+        
         //Identifiant FTA
         $idFta = $id_fta;
         $ftaModel = new FtaModel($idFta);
@@ -1081,7 +1082,7 @@ class Chapitre {
         $id_fta = self::$id_fta;
         $synthese_action = self::$synthese_action;
         $isEditable = self::$is_editable;
-        $isEditable = TRUE;
+        //$isEditable = TRUE;
 
         $bloc.="<tr class=titre_principal><td class>Logistique</td></tr>";
 
@@ -1120,7 +1121,7 @@ class Chapitre {
         $id_fta = self::$id_fta;
         $synthese_action = self::$synthese_action;
         $isEditable = self::$is_editable;
-        //$isEditable = TRUE;
+        $isEditable = FALSE;
 
         $bloc.="<tr class=titre_principal><td class>Etiquettes</td></tr>";
 

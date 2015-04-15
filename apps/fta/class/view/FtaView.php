@@ -290,37 +290,15 @@ class FtaView {
 
     function getHtmlPoidsEmballageUVC() {
 
-        $req = "SELECT  * 
-                    FROM fta_conditionnement, annexe_emballage_groupe, annexe_emballage_groupe_type 
-                    WHERE id_fta="
-                . FtaModel::KEYNAME . " "
-                . "AND annexe_emballage_groupe_type.id_annexe_emballage_groupe_type=" . 1 . " "
-                . "AND fta_conditionnement.id_annexe_emballage_groupe=annexe_emballage_groupe.id_annexe_emballage_groupe "
-                . "AND ( "
-                . "( fta_conditionnement.id_annexe_emballage_groupe_type IS NOT NULL AND fta_conditionnement.id_annexe_emballage_groupe_type=annexe_emballage_groupe_type.id_annexe_emballage_groupe_type )"
-                . " OR "
-                . "( fta_conditionnement.id_annexe_emballage_groupe_type IS NULL AND annexe_emballage_groupe.id_annexe_emballage_groupe_configuration=annexe_emballage_groupe_type.id_annexe_emballage_groupe_type )"
-                . "    ) "
-                . "ORDER BY nom_annexe_emballage_groupe_type "
-        ;
-
-
-
-        $result = DatabaseOperation::query($req);
-        if (mysql_num_rows($result)) {
-            while ($rows = mysql_fetch_array($result)) {
-                //Calcul du poids
-                $return["uvc_emballage"] = $rows["poids_fta_conditionnement"] * $rows["quantite_par_couche_fta_conditionnement"] * $rows["nombre_couche_fta_conditionnement"];
-            }
-        }
-
         //Poids Emballage UVC (en g):
+        
+        $test=$this->ftaModel->getArrayEmballageUVC();
+        var_dump($test);
 
         $htmlPoidsUVC = new HtmlInputText();
 
-        $htmlPoidsUVC->setLabel(DatabaseDescription::getFieldDocLabel("fta", "poids_emballages_uvc_fta"));
-        $htmlPoidsUVC->getAttributes()->getName()->setValue("Poids_UVC");
-        $htmlPoidsUVC->getAttributes()->getValue()->setValue($return["uvc_emballage"]);
+        $htmlPoidsUVC->setLabel(DatabaseDescription::getFieldDocLabel(FtaModel::TABLENAME, FtaModel::FIELDNAME_POIDS_EMBALLAGES_UVC));
+        $htmlPoidsUVC->getAttributes()->getValue()->setValue([FtaModel::UVC_EMBALLAGE]);
         $htmlPoidsUVC->setIsEditable(FALSE);
 
         return $htmlPoidsUVC->getHtmlResult();
@@ -328,7 +306,7 @@ class FtaView {
 
     function getHtmlPoidsNetEmballageUVC() {
         //Calcul du Poid Net Emballage (g)        
-        $req = "SELECT * FROM fta";
+        $req = "SELECT * FROM ". FtaModel::TABLENAME;
         $result = DatabaseOperation::query($req);
 
         //Remplacer par getHtmlValueToGramme($value)
@@ -353,18 +331,17 @@ class FtaView {
         $return["uvc_net"] = mysql_result($result, 0, "Poids_ELEM") * 1000;
 
 
-        $req = "SELECT  * 
-                    FROM fta_conditionnement, annexe_emballage_groupe, annexe_emballage_groupe_type 
-                    WHERE id_fta="
+        $req = "SELECT  * FROM " . FtaConditionnement::TABLENAME . "," . AnnexeEmballageGroupe::TABLENAME . "," . AnnexeEmballageGroupeType::TABLENAME . " "
+                . "WHERE " . FtaConditionnement::FIELDNAME_ID_FTA . "="
                 . FtaModel::KEYNAME . " "
-                . "AND annexe_emballage_groupe_type.id_annexe_emballage_groupe_type=" . 1 . " "
-                . "AND fta_conditionnement.id_annexe_emballage_groupe=annexe_emballage_groupe.id_annexe_emballage_groupe "
+                . "AND " . AnnexeEmballageGroupeType::KEYNAME . "=" . $paramgroupetype . " "
+                . "AND " . FtaConditionnement::FIELDNAME_ID_ANNEXE_EMBALLAGE_GROUPE_TYPE . "=" . AnnexeEmballageGroupe::KEYNAME . " "
                 . "AND ( "
-                . "( fta_conditionnement.id_annexe_emballage_groupe_type IS NOT NULL AND fta_conditionnement.id_annexe_emballage_groupe_type=annexe_emballage_groupe_type.id_annexe_emballage_groupe_type )"
+                . "( " . FtaConditionnement::FIELDNAME_ID_ANNEXE_EMBALLAGE_GROUPE_TYPE . " IS NOT NULL AND " . FtaConditionnement::FIELDNAME_ID_ANNEXE_EMBALLAGE_GROUPE_TYPE . "=" . AnnexeEmballageGroupeType::KEYNAME . ")"
                 . " OR "
-                . "( fta_conditionnement.id_annexe_emballage_groupe_type IS NULL AND annexe_emballage_groupe.id_annexe_emballage_groupe_configuration=annexe_emballage_groupe_type.id_annexe_emballage_groupe_type )"
+                . "( " . FtaConditionnement::FIELDNAME_ID_ANNEXE_EMBALLAGE_GROUPE_TYPE . " IS NULL AND " . AnnexeEmballageGroupe::FIELDNAME_ID_ANNEXE_EMBALLAGE_GROUPE_CONFIGURATION . "=" . AnnexeEmballageGroupeType::KEYNAME . ")"
                 . "    ) "
-                . "ORDER BY nom_annexe_emballage_groupe_type "
+                . " ORDER BY " . AnnexeEmballageGroupeType::FIELDNAME_NOM_ANNEXE_EMBALLAGE_GROUPE_TYPE
         ;
 
 

@@ -11,6 +11,10 @@ class FtaModel extends AbstractModel {
     const TABLENAME = "fta";
     const KEYNAME = "id_fta";
     const KEYNAME_CREATEUR = "id_user";
+    const EMBALLAGES_UVC = "1";
+    const EMBALLAGES_PAR_COLIS = "2";
+    const EMBALLAGES_DU_COLIS = "3";
+    const EMBALLAGES_PALETTE = "4";
     const FIELDNAME_ACTIVATION_CODESOFT = "activation_codesoft_arti2";
     const FIELDNAME_ARCADIA_EMBALLAGE_TYPE = "id_arcadia_emballage_type";
     const FIELDNAME_BESOIN_FICHE_TECHNIQUE = "besoin_fiche_technique";
@@ -84,6 +88,18 @@ class FtaModel extends AbstractModel {
     const FIELDNAME_UNITE_FACTURATION = "id_annexe_unite_facturation";
     const FIELDNAME_VERROUILLAGE_LIBELLE_ETIQUETTE = "verrouillage_libelle_etiquette_fta";
     const ID_POIDS_VARIABLE = "3";
+    const UVC_EMBALLAGE = "uvc_emballage";
+    const UVC_EMBALLAGE_NET = "uvc_net";
+    const UVC_EMBALLAGE_BRUT = "uvc_brut";
+    const UVC_EMBALLAGE_DIMENSION = "dimension_brut";
+    const COLIS_EMBALLAGE = "colis_emballage";
+    const COLIS_EMBALLAGE_NET = "colis_net";
+    const COLIS_EMBALLAGE_BRUT = "colis_brut";
+    const PALETTE_EMBALLAGE = "palette_emballage";
+    const PALETTE_EMBALLAGE_NET = "palette_net";
+    const PALETTE_EMBALLAGE_BRUT = "palette_brut";
+    
+
     
     /**
      * Utilisateur ayant créé la FTA
@@ -371,6 +387,60 @@ class FtaModel extends AbstractModel {
 
         return $arrayDataFieldEcheancesForProcessusCycle;
     }
+    /*
+    public function getArrayEmballageUVC() {
+
+     return   $this->getArrayEmballagesUVC(FtaModel::EMBALLAGES_UVC);
+    }
+
+    public function getArrayEmballageParColis() {
+
+      return  $this->getArrayEmballagesUVC(FtaModel::EMBALLAGES_PAR_COLIS);
+    }
+
+    public function getArrayEmballageDuColis() {
+
+      return  $this->getArrayEmballagesUVC(FtaModel::EMBALLAGES_DU_COLIS);
+    }
+
+    public function getArrayEmballagePalette() {
+
+      return  $this->getArrayEmballagesUVC(FtaModel::EMBALLAGES_PALETTE);
+    }
+
+    private function getArrayEmballagesUVC($paramgroupetype) {
+
+        //Calcul du poids et dimension de Emballages par UVC
+          $array =DatabaseOperation::convertSqlResultKeyAndOneFieldToArray(
+                "SELECT  * FROM " . FtaConditionnement::TABLENAME . "," . AnnexeEmballageGroupe::TABLENAME . "," . AnnexeEmballageGroupeType::TABLENAME . " "
+                . "WHERE " . FtaConditionnement::FIELDNAME_ID_FTA . "="
+                . FtaModel::KEYNAME . " "
+                . "AND " . AnnexeEmballageGroupeType::KEYNAME . "=" . $paramgroupetype . " "
+                . "AND " . FtaConditionnement::FIELDNAME_ID_ANNEXE_EMBALLAGE_GROUPE_TYPE . "=" . AnnexeEmballageGroupe::KEYNAME . " "
+                . "AND ( "
+                . "( " . FtaConditionnement::FIELDNAME_ID_ANNEXE_EMBALLAGE_GROUPE_TYPE . " IS NOT NULL AND " . FtaConditionnement::FIELDNAME_ID_ANNEXE_EMBALLAGE_GROUPE_TYPE . "=" . AnnexeEmballageGroupeType::KEYNAME . ")"
+                . " OR "
+                . "( " . FtaConditionnement::FIELDNAME_ID_ANNEXE_EMBALLAGE_GROUPE_TYPE . " IS NULL AND " . AnnexeEmballageGroupe::FIELDNAME_ID_ANNEXE_EMBALLAGE_GROUPE_CONFIGURATION . "=" . AnnexeEmballageGroupeType::KEYNAME . ")"
+                . "    ) "
+                . " ORDER BY " . AnnexeEmballageGroupeType::FIELDNAME_NOM_ANNEXE_EMBALLAGE_GROUPE_TYPE
+            );
+          
+            foreach ($array as $rows) {
+                $return[FtaModel::UVC_EMBALLAGE] = $rows[FtaConditionnement::FIELDNAME_POIDS_FTA_CONDITIONNEMENT] * $rows[FtaConditionnement::FIELDNAME_QUANTITE_PAR_COUCHE_FTA_CONDITIONNEMENT] * $rows[FtaConditionnement::FIELDNAME_NOMBRE_COUCHE_FTA_CONDITIONNEMENT];
+         
+            }                
+        
+            //Calcul du poids
+           
+
+         
+    }*/
+    
+    
+ public function getArrayFta() {
+     
+ }
+   
 
 }
 

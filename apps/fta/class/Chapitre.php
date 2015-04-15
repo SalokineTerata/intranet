@@ -357,7 +357,7 @@ class Chapitre {
         $id_fta = self::$id_fta;
         $synthese_action = self::$synthese_action;
         $isEditable = self::$is_editable;
-        //$isEditable = TRUE;
+        $isEditable = TRUE;
         //
         //Identifiant FTA
         $idFta = $id_fta;
@@ -390,12 +390,10 @@ class Chapitre {
         $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_PERIODE_DE_COMMERCIALISATION);
 
 
-        /**
-         * @todo Non implementé
-         */
-        //Unité de Facturation
-        $bloc.="<tr><td>Unité de Facturation</td> <td> not implement(bouton radio)</td></tr>";
 
+        //Unité de Facturation
+        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_UNITE_FACTURATION);
+                
         //Gencod EAN Article
         $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_EAN_COLIS);
 
@@ -1121,7 +1119,7 @@ class Chapitre {
         $id_fta = self::$id_fta;
         $synthese_action = self::$synthese_action;
         $isEditable = self::$is_editable;
-        $isEditable = FALSE;
+        $isEditable = TRUE;
 
         $bloc.="<tr class=titre_principal><td class>Etiquettes</td></tr>";
 
@@ -1135,19 +1133,12 @@ class Chapitre {
         $ftaView->setFtaChapitreModelById(self::ID_CHAPITRE_IDENTITE);
 
 
-        /**
-         * @todo Non implementé
-         */
+
         //Activer le système d'impression Base Etiquette Codesoft
-        $bloc.="<tr><td>Activer le système d'impression Base Etiquette Codesoft</td> <td> not implement (bouton radio)</td></tr>";
+        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_ACTIVATION_CODESOFT);
 
         $bloc.="<tr class=titre_principal><td class>Etiquettes Colis</td></tr>";
 
-        /**
-         * @todo Non implementé
-         */
-        //Laisser l'informatique gérer la désignation ?
-        $bloc.="<tr><td>Laisser l'informatique gérer la désignation ?</td><td> not implement(bouton radio)</td></tr>";
         $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_VERROUILLAGE_LIBELLE_ETIQUETTE);
 
         //Libellé etiquette carton:
@@ -1329,9 +1320,8 @@ class Chapitre {
         $synthese_action = self::$synthese_action;
         $isEditable = self::$is_editable;
 
-        //
+        
         //Identifiant FTA
-        $idFta = $id_fta;
         $ftaModel = new FtaModel($idFta);
         $ftaView = new FtaView($ftaModel);
         $ftaView->setIsEditable($isEditable);
@@ -1343,7 +1333,7 @@ class Chapitre {
 
 
 
-        //Calcul du poids et dimension de Emballages par UVC
+        
         $bloc.=$ftaView->getHtmlPoidsEmballageUVC();
 
 

@@ -18,7 +18,7 @@ class FtaConditionnement extends AbstractModel {
     const FIELDNAME_ID_ANNEXE_EMBALLAGE_GROUPE_TYPE = "id_annexe_emballage_groupe_type";
     const FIELDNAME_LARGEUR_FTA_CONDITIONNEMENT = "largeur_fta_conditionnement";    
     const FIELDNAME_LONGUEUR_FTA_CONDITIONNEMENT = "longueur_fta_conditionnement";
-    const FIELDNAME_NOMBRE_COUCHE_FTA_CONDITIONNEMENT = "longueur_fta_conditionnement";
+    const FIELDNAME_NOMBRE_COUCHE_FTA_CONDITIONNEMENT = "nombre_couche_fta_conditionnement";
     const FIELDNAME_PCB_FTA_CONDITIONNEMENT = "pcb_fta_conditionnement";
     const FIELDNAME_POIDS_FTA_CONDITIONNEMENT = "poids_fta_conditionnement";
     const FIELDNAME_QUANTITE_PAR_COUCHE_FTA_CONDITIONNEMENT = "quantite_par_couche_fta_conditionnement";

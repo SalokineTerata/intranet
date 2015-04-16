@@ -393,7 +393,7 @@ class Chapitre {
 
         //Unité de Facturation
         $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_UNITE_FACTURATION);
-                
+
         //Gencod EAN Article
         $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_EAN_COLIS);
 
@@ -456,18 +456,18 @@ class Chapitre {
         //Agrément CE
         $bloc.=$ftaView->getHtmlSiteAgrement();
 
-        
+
         //Produit Transformé en France
         $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_PRODUIT_TRANSFORME);
 
         //Environnement de conservation
         $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_ENVIRONNEMENT_CONSERVATION);
 
-        
-        //Conditionné sous atmosphère protectrice
-         $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_CONDITION_SOUS_ATMOSPHERE);
 
-        
+        //Conditionné sous atmosphère protectrice
+        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_CONDITION_SOUS_ATMOSPHERE);
+
+
         //Logo éco-emballage
         $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_LOGO_ECO_EMBALLAGE);
 
@@ -800,7 +800,7 @@ class Chapitre {
         $synthese_action = self::$synthese_action;
         $isEditable = self::$is_editable;
         $isEditable = FALSE;
-        
+
         //Identifiant FTA
         $idFta = $id_fta;
         $ftaModel = new FtaModel($idFta);
@@ -1309,7 +1309,7 @@ class Chapitre {
         $synthese_action = self::$synthese_action;
         $isEditable = self::$is_editable;
 
-        
+
         //Identifiant FTA
         $ftaModel = new FtaModel($idFta);
         $ftaView = new FtaView($ftaModel);
@@ -1320,11 +1320,7 @@ class Chapitre {
 
         $bloc.="<tr class=titre_principal><td class>Informations Générales de l'UVC</td></tr>";
 
-
-
-        
         $bloc.=$ftaView->getHtmlPoidsEmballageUVC();
-
 
         //Poids Net UVC (en g):
         $bloc.=$ftaView->getHtmlPoidsNetEmballageUVC();

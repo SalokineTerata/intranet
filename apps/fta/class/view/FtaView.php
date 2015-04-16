@@ -292,16 +292,16 @@ class FtaView {
 
         //Poids Emballage UVC (en g):
         
-        $test=$this->ftaModel->getArrayEmballageUVC();
-        var_dump($test);
-
+        $this->getModel()->getArrayEmballageTypeUVC();
+        
         $htmlPoidsUVC = new HtmlInputText();
 
         $htmlPoidsUVC->setLabel(DatabaseDescription::getFieldDocLabel(FtaModel::TABLENAME, FtaModel::FIELDNAME_POIDS_EMBALLAGES_UVC));
-        $htmlPoidsUVC->getAttributes()->getValue()->setValue([FtaModel::UVC_EMBALLAGE]);
+        $htmlPoidsUVC->getAttributes()->getValue()->setValue($return[FtaModel::UVC_EMBALLAGE]);
         $htmlPoidsUVC->setIsEditable(FALSE);
-
         return $htmlPoidsUVC->getHtmlResult();
+    
+        
     }
 
     function getHtmlPoidsNetEmballageUVC() {
@@ -322,7 +322,7 @@ class FtaView {
         return $htmlPoidsNetUVC->getHtmlResult();
     }
 
-    function getHtmlPoidsBrutEmballageUVC() {
+   function getHtmlPoidsBrutEmballageUVC() {
         //Calcul du Poid Net Emballage (g)        
         $req = "SELECT * FROM fta";
         $result = DatabaseOperation::query($req);
@@ -350,22 +350,22 @@ class FtaView {
         if (mysql_num_rows($result)) {
             while ($rows = mysql_fetch_array($result)) {
                 //Calcul du poids
-                $return["uvc_emballage"] = $rows["poids_fta_conditionnement"] * $rows["quantite_par_couche_fta_conditionnement"] * $rows["nombre_couche_fta_conditionnement"];
+                $return[FtaModel::UVC_EMBALLAGE] = $rows[FtaConditionnement::FIELDNAME_POIDS_FTA_CONDITIONNEMENT] * $rows[FtaConditionnement::FIELDNAME_QUANTITE_PAR_COUCHE_FTA_CONDITIONNEMENT] * $rows[FtaConditionnement::FIELDNAME_NOMBRE_COUCHE_FTA_CONDITIONNEMENT];
 
                 //Calcul des dimension (on recherche la taille la plus grande
-                if ($return["dimension_uvc_hauteur"] < $rows["hauteur_fta_conditionnement"]) {
-                    $return["dimension_uvc_hauteur"] = $rows["hauteur_fta_conditionnement"];
+                if ($return[FtaModel::UVC_EMBALLAGE_DIMENSION_HAUTEUR] < $rows[FtaConditionnement::FIELDNAME_HAUTEUR_FTA_CONDITIONNEMENT]) {
+                    $return[FtaModel::UVC_EMBALLAGE_DIMENSION_HAUTEUR] = $rows[FtaConditionnement::FIELDNAME_HAUTEUR_FTA_CONDITIONNEMENT];
                 }
-                if ($return["dimension_uvc_longueur"] < $rows["longueur_fta_conditionnement"]) {
-                    $return["dimension_uvc_longueur"] = $rows["longueur_fta_conditionnement"];
+                if ($return[FtaModel::UVC_EMBALLAGE_DIMENSION_LONGEUR] < $rows[FtaConditionnement::FIELDNAME_LONGUEUR_FTA_CONDITIONNEMENT]) {
+                    $return[FtaModel::UVC_EMBALLAGE_DIMENSION_LONGEUR] = $rows[FtaConditionnement::FIELDNAME_LONGUEUR_FTA_CONDITIONNEMENT];
                 }
-                if ($return["dimension_uvc_largeur"] < $rows["largeur_fta_conditionnement"]) {
-                    $return["dimension_uvc_largeur"] = $rows["largeur_fta_conditionnement"];
+                if ($return[FtaModel::UVC_EMBALLAGE_DIMENSION_LARGEUR] < $rows[FtaConditionnement::FIELDNAME_LARGEUR_FTA_CONDITIONNEMENT]) {
+                    $return[FtaModel::UVC_EMBALLAGE_DIMENSION_LARGEUR] = $rows[FtaConditionnement::FIELDNAME_LARGEUR_FTA_CONDITIONNEMENT];
                 }
             }
         }
 
-        $return["uvc_brut"] = $return["uvc_net"] + $return["uvc_emballage"];
+        $return[FtaModel::UVC_EMBALLAGE_BRUT] = $return[FtaModel::UVC_EMBALLAGE_NET] + $return[FtaModel::UVC_EMBALLAGE];
         $htmlPoidsBrutUVC = new HtmlInputText();
 
         $htmlPoidsBrutUVC->setLabel(DatabaseDescription::getFieldDocLabel("fta", "poids_brut_uvc_fta"));
@@ -375,21 +375,22 @@ class FtaView {
 
         return $htmlPoidsBrutUVC->getHtmlResult();
     }
+    
+    
 
     function getHtmlDimensionEmballageUVC() {
 
-        $req = "SELECT  * 
-                    FROM fta_conditionnement, annexe_emballage_groupe, annexe_emballage_groupe_type 
-                    WHERE id_fta="
+        $req =  "SELECT  * FROM " . FtaConditionnement::TABLENAME . "," . AnnexeEmballageGroupe::TABLENAME . "," . AnnexeEmballageGroupeType::TABLENAME . " "
+                . "WHERE " . FtaConditionnement::FIELDNAME_ID_FTA . "="
                 . FtaModel::KEYNAME . " "
-                . "AND annexe_emballage_groupe_type.id_annexe_emballage_groupe_type=" . 1 . " "
-                . "AND fta_conditionnement.id_annexe_emballage_groupe=annexe_emballage_groupe.id_annexe_emballage_groupe "
+                . "AND " . AnnexeEmballageGroupeType::KEYNAME . "=" . $paramgroupetype . " "
+                . "AND " . FtaConditionnement::FIELDNAME_ID_ANNEXE_EMBALLAGE_GROUPE_TYPE . "=" . AnnexeEmballageGroupe::KEYNAME . " "
                 . "AND ( "
-                . "( fta_conditionnement.id_annexe_emballage_groupe_type IS NOT NULL AND fta_conditionnement.id_annexe_emballage_groupe_type=annexe_emballage_groupe_type.id_annexe_emballage_groupe_type )"
+                . "( " . FtaConditionnement::FIELDNAME_ID_ANNEXE_EMBALLAGE_GROUPE_TYPE . " IS NOT NULL AND " . FtaConditionnement::FIELDNAME_ID_ANNEXE_EMBALLAGE_GROUPE_TYPE . "=" . AnnexeEmballageGroupeType::KEYNAME . ")"
                 . " OR "
-                . "( fta_conditionnement.id_annexe_emballage_groupe_type IS NULL AND annexe_emballage_groupe.id_annexe_emballage_groupe_configuration=annexe_emballage_groupe_type.id_annexe_emballage_groupe_type )"
+                . "( " . FtaConditionnement::FIELDNAME_ID_ANNEXE_EMBALLAGE_GROUPE_TYPE . " IS NULL AND " . AnnexeEmballageGroupe::FIELDNAME_ID_ANNEXE_EMBALLAGE_GROUPE_CONFIGURATION . "=" . AnnexeEmballageGroupeType::KEYNAME . ")"
                 . "    ) "
-                . "ORDER BY nom_annexe_emballage_groupe_type "
+                . " ORDER BY " . AnnexeEmballageGroupeType::FIELDNAME_NOM_ANNEXE_EMBALLAGE_GROUPE_TYPE
         ;
 
 
@@ -398,25 +399,25 @@ class FtaView {
         if (mysql_num_rows($result)) {
             while ($rows = mysql_fetch_array($result)) {
                 //Calcul du poids
-                $return["uvc_emballage"] = $rows["poids_fta_conditionnement"] * $rows["quantite_par_couche_fta_conditionnement"] * $rows["nombre_couche_fta_conditionnement"];
+                $return[FtaModel::UVC_EMBALLAGE] = $rows[FtaConditionnement::FIELDNAME_POIDS_FTA_CONDITIONNEMENT] * $rows[FtaConditionnement::FIELDNAME_QUANTITE_PAR_COUCHE_FTA_CONDITIONNEMENT] * $rows[FtaConditionnement::FIELDNAME_NOMBRE_COUCHE_FTA_CONDITIONNEMENT];
 
                 //Calcul des dimension (on recherche la taille la plus grande
-                if ($return["dimension_uvc_hauteur"] < $rows["hauteur_fta_conditionnement"]) {
-                    $return["dimension_uvc_hauteur"] = $rows["hauteur_fta_conditionnement"];
+                if ($return[FtaModel::UVC_EMBALLAGE_DIMENSION_HAUTEUR] < $rows[FtaConditionnement::FIELDNAME_HAUTEUR_FTA_CONDITIONNEMENT]) {
+                    $return[FtaModel::UVC_EMBALLAGE_DIMENSION_HAUTEUR] = $rows[FtaConditionnement::FIELDNAME_HAUTEUR_FTA_CONDITIONNEMENT];
                 }
-                if ($return["dimension_uvc_longueur"] < $rows["longueur_fta_conditionnement"]) {
-                    $return["dimension_uvc_longueur"] = $rows["longueur_fta_conditionnement"];
+                if ($return[FtaModel::UVC_EMBALLAGE_DIMENSION_LONGEUR] < $rows[FtaConditionnement::FIELDNAME_LONGUEUR_FTA_CONDITIONNEMENT]) {
+                    $return[FtaModel::UVC_EMBALLAGE_DIMENSION_LONGEUR] = $rows[FtaConditionnement::FIELDNAME_LONGUEUR_FTA_CONDITIONNEMENT];
                 }
-                if ($return["dimension_uvc_largeur"] < $rows["largeur_fta_conditionnement"]) {
-                    $return["dimension_uvc_largeur"] = $rows["largeur_fta_conditionnement"];
+                if ($return[FtaModel::UVC_EMBALLAGE_DIMENSION_LARGEUR] < $rows[FtaConditionnement::FIELDNAME_LARGEUR_FTA_CONDITIONNEMENT]) {
+                    $return[FtaModel::UVC_EMBALLAGE_DIMENSION_LARGEUR] = $rows[FtaConditionnement::FIELDNAME_LARGEUR_FTA_CONDITIONNEMENT];
                 }
             }
         }
-        $return["dimension_uvc"] = $return["dimension_uvc_longueur"] . "x" . $return["dimension_uvc_largeur"];
+        $return[FtaModel::UVC_EMBALLAGE_DIMENSION] = $return[FtaModel::UVC_EMBALLAGE_DIMENSION_LONGEUR] . "x" . $return[FtaModel::UVC_EMBALLAGE_DIMENSION_LARGEUR];
 
         //Si la hauteur n'est pas nulle, on l'intègre.
-        if ($return["dimension_uvc_hauteur"]) {
-            $return["dimension_uvc"] = $return["dimension_uvc"] . "x" . $return["dimension_uvc_hauteur"];
+        if ($return[FtaModel::UVC_EMBALLAGE_DIMENSION_HAUTEUR]) {
+            $return[FtaModel::UVC_EMBALLAGE_DIMENSION] = $return[FtaModel::UVC_EMBALLAGE_DIMENSION] . "x" . $return[FtaModel::UVC_EMBALLAGE_DIMENSION_HAUTEUR];
         }
 
         $htmlDimensionUVC = new HtmlInputText();
@@ -531,7 +532,7 @@ class FtaView {
                     FROM fta_conditionnement, annexe_emballage_groupe, annexe_emballage_groupe_type 
                     WHERE id_fta="
                 . FtaModel::KEYNAME . " "
-                . "AND annexe_emballage_groupe_type.id_annexe_emballage_groupe_type=" . 2 . " "
+                . "AND annexe_emballage_groupe_type.id_annexe_emballage_groupe_type=" . 3 . " "
                 . "AND fta_conditionnement.id_annexe_emballage_groupe=annexe_emballage_groupe.id_annexe_emballage_groupe "
                 . "AND ( "
                 . "( fta_conditionnement.id_annexe_emballage_groupe_type IS NOT NULL AND fta_conditionnement.id_annexe_emballage_groupe_type=annexe_emballage_groupe_type.id_annexe_emballage_groupe_type )"
@@ -544,13 +545,12 @@ class FtaView {
         $result = DatabaseOperation::query($req);
         if (mysql_num_rows($result)) {
             while ($rows = mysql_fetch_array($result)) {
-                //Calcul du poids
-
-                $return["colis_emballage"] = $rows["poids_fta_conditionnement"] * $rows["quantite_par_couche_fta_conditionnement"] * $rows["nombre_couche_fta_conditionnement"];
+                //Calcul du poids d'emballage par colis
+                $return[FtaModel::COLIS_EMBALLAGE] = $rows[FtaConditionnement::FIELDNAME_POIDS_FTA_CONDITIONNEMENT] * $rows[FtaConditionnement::FIELDNAME_QUANTITE_PAR_COUCHE_FTA_CONDITIONNEMENT] * $rows[FtaConditionnement::FIELDNAME_NOMBRE_COUCHE_FTA_CONDITIONNEMENT];
             }
         }
 
-        $return["colis_emballage"] = $return["colis_emballage"] * $return["pcb"];
+        $return[FtaModel::COLIS_EMBALLAGE] = $return[FtaModel::COLIS_EMBALLAGE] * $return[FtaModel::FIELDNAME_PCB];
 
         //Calcul du poids net du colis en Kg
         $req = "SELECT * FROM fta_composant WHERE id_fta='" . FtaModel::KEYNAME . "' AND is_composition_fta_composant=1 ";
@@ -619,15 +619,15 @@ class FtaView {
         $result = DatabaseOperation::query($req);
         if (mysql_num_rows($result)) {
             while ($rows = mysql_fetch_array($result)) {
-                //Calcul du poids
-                $return["couche_palette"] = $rows["nombre_couche_fta_conditionnement"];
-                $return["colis_couche"] = $rows["quantite_par_couche_fta_conditionnement"];
-                $return["palette_emballage"] = ($rows["poids_fta_conditionnement"] / 1000) * $return["colis_couche"] * $return["couche_palette"];
-                $return["hauteur_palette"] = (($rows["hauteur_fta_conditionnement"] * $return["couche_palette"]) + $rows["hauteur_fta_conditionnement"]) / 1000;
+                //Calcul du poids de l'emballage par palette
+                $return[FtaModel::PALETTE_NOMBRE_DE_COUCHE] = $rows[FtaConditionnement::FIELDNAME_NOMBRE_COUCHE_FTA_CONDITIONNEMENT];
+                $return[FtaModel::PALETTE_NOMBRE_COLIS_PAR_COUCHE] = $rows[FtaConditionnement::FIELDNAME_QUANTITE_PAR_COUCHE_FTA_CONDITIONNEMENT];
+                $return[FtaModel::PALETTE_EMBALLAGE] = ($rows[FtaConditionnement::FIELDNAME_POIDS_FTA_CONDITIONNEMENT] / 1000) * $return[FtaModel::PALETTE_NOMBRE_COLIS_PAR_COUCHE] * $return[FtaModel::PALETTE_NOMBRE_DE_COUCHE];
+                $return[FtaModel::PALETTE_EMBALLAGE_HAUTEUR] = (($rows[FtaConditionnement::FIELDNAME_HAUTEUR_FTA_CONDITIONNEMENT] * $return[FtaModel::PALETTE_NOMBRE_DE_COUCHE]) + $rows[FtaConditionnement::FIELDNAME_HAUTEUR_FTA_CONDITIONNEMENT]) / 1000;
             }
         }
 
-        $return["palette_emballage"] = $return["palette_emballage"] * ($rows["quantite_par_couche_fta_conditionnement"] * $rows["nombre_couche_fta_conditionnement"]);
+    $return[FtaModel::PALETTE_EMBALLAGE] = $return[FtaModel::PALETTE_EMBALLAGE] * ($rows[FtaConditionnement::FIELDNAME_QUANTITE_PAR_COUCHE_FTA_CONDITIONNEMENT] * $rows[FtaConditionnement::FIELDNAME_NOMBRE_COUCHE_FTA_CONDITIONNEMENT]);
 
 
 
@@ -679,7 +679,7 @@ class FtaView {
         $return["palette_net"] = $return["colis_net"] * ($rows["quantite_par_couche_fta_conditionnement"] * $rows["nombre_couche_fta_conditionnement"]);
 
         //Calcul Poids Brut (en Kg) d'une Palette:
-        $return["palette_brut"] = $return["palette_net"] + $return["palette_emballage"];
+        $return[FtaModel::PALETTE_EMBALLAGE_BRUT] = $return[FtaModel::PALETTE_EMBALLAGE_NET] + $return[FtaModel::PALETTE_EMBALLAGE];
 
         $htmlPoidsBrutPalettisationUVC = new HtmlInputText();
 
@@ -837,7 +837,7 @@ class FtaView {
         }
 
         //Calcul du nombre total de Carton par palette:
-        $return["total_colis"] = $return["colis_couche"] * $return["couche_palette"];
+        $return[FtaModel::PALETTE_NOMBRE_TOTAL_PAR_CARTON] = $return[FtaModel::PALETTE_NOMBRE_COLIS_PAR_COUCHE] * $return[FtaModel::PALETTE_NOMBRE_DE_COUCHE];
 
         $htmlTotalColisPalettisationUVC = new HtmlInputText();
 

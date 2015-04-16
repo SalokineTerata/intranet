@@ -292,7 +292,7 @@ class FtaView {
 
         //Poids Emballage UVC (en g):
         
-        $this->getModel()->getArrayEmballageTypeUVC();
+        $return = $this->getModel()->getArrayEmballageTypeUVC();
         
         $htmlPoidsUVC = new HtmlInputText();
 

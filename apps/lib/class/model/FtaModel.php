@@ -409,7 +409,8 @@ class FtaModel extends AbstractModel {
     private function getArrayEmballages($paramgroupetype) {
 
         //Les calculs pour Emballages
-        $array = DatabaseOperation::convertSqlResultKeyAndOneFieldToArray(
+        //$array = DatabaseOperation::convertSqlResultKeyAndOneFieldToArray(
+        $array = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
                         "SELECT  * FROM " . FtaConditionnement::TABLENAME . "," . AnnexeEmballageGroupe::TABLENAME . "," . AnnexeEmballageGroupeType::TABLENAME . " "
                         . "WHERE " . FtaConditionnement::FIELDNAME_ID_FTA . "=" . FtaModel::KEYNAME . " "
                         . "AND " . AnnexeEmballageGroupeType::KEYNAME . "=" . $paramgroupetype . " "
@@ -482,7 +483,7 @@ class FtaModel extends AbstractModel {
     public function getArrayFta() {
 
         //Les Calculs de la table fta
-        $array = DatabaseOperation::convertSqlResultKeyAndOneFieldToArray(
+        $array = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
                         "SELECT * FROM" . FtaModel::TABLENAME
         );
 
@@ -490,7 +491,7 @@ class FtaModel extends AbstractModel {
          * @todo Remplacer par getDataoperation?($value)
          */
         //Calcul du Poids net par UVC
-        $return[FtaModel::UVC_EMBALLAGE_NET] = mysql_result($array, 0, FtaModel::FIELDNAME_POIDS_ELEMENTAIRE) * 1000;
+        $return[FtaModel::UVC_EMBALLAGE_NET] = $array[FtaModel::UVC_EMBALLAGE_NET];
 
         //Calcul du PCB
         $return[FtaModel::FIELDNAME_PCB] = mysql_result($array, 0, FtaModel::FIELDNAME_PCB);

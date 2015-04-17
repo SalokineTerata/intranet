@@ -1312,6 +1312,7 @@ class Chapitre {
         //Identifiant FTA
         $ftaModel = new FtaModel($idFta);
         $ftaView = new FtaView($ftaModel);
+    //    $ftaConditionnement = new FtaConditionnementView($ftaConditionnement);
         $ftaView->setIsEditable($isEditable);
         $ftaView->setFtaChapitreModelById(self::ID_CHAPITRE_IDENTITE);
 
@@ -1322,11 +1323,11 @@ class Chapitre {
         $bloc.=$ftaView->getHtmlPoidsEmballageUVC();
 
         //Poids Net UVC (en g):
-        $bloc.=$ftaView->getHtmlPoidsNetEmballageUVC();
+  /*      $bloc.=$ftaView->getHtmlPoidsNetEmballageUVC();
 
         //Poids Brut UVC (en g):
 
-        $bloc.=$ftaView->getHtmlPoidsBrutEmballageUVC();
+      /*  $bloc.=$ftaView->getHtmlPoidsBrutEmballageUVC();
 
         //Dimension de l'UVC (en mm):
 
@@ -1386,7 +1387,7 @@ class Chapitre {
 
         $bloc.=$ftaView->getHtmlColisTotalUVC();
 
-
+*/
         return $bloc;
     }
 

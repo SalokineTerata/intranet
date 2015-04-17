@@ -48,8 +48,14 @@ class FtaView {
      * @var GeoModel 
      */
     private $GeoModel;
+    
+        /**
+     * Model de donnée d'une FTA
+     * @var FtaConditionnementModel
+     */
+    private $ftaConditionnementModel;
 
-    /**
+  /**
      * 
      * @param FtaModel $ParamFtaModel
      */
@@ -77,6 +83,8 @@ class FtaView {
     private function setFtaProcessusDelaiView(FtaProcessusDelaiView $ftaProcessusDelaiView) {
         $this->ftaProcessusDelaiView = $ftaProcessusDelaiView;
     }
+
+
 
     /*
      * Gettteur setteur pour l'affichage d'un champ
@@ -287,26 +295,39 @@ class FtaView {
                         , false
         );
     }
+    
+        /**
+     * 
+     * @return FtaConditionnementModel
+     */
+    
+        //similaire à getModel
+    public function getFtaConditionnementModel() {
+        return $this->ftaConditionnementModel;
+    }
+
+    function setFtaConditionnementModel(FtaConditionnementModel $ftaConditonnementModel) {
+        if ($ftaConditonnementModel instanceof FtaConditionnementModel) {
+            $this->ftaConditionnementModel = $ftaConditonnementModel;
+        }
+    }
+    
 
     function getHtmlPoidsEmballageUVC() {
+    
+        $return = $this->getModel()->getArrayComposant();
 
-        //Poids Emballage UVC (en g):
-        
-        $return = $this->getModel()->getArrayEmballageTypeUVC();
-        
         $htmlPoidsUVC = new HtmlInputText();
 
         $htmlPoidsUVC->setLabel(DatabaseDescription::getFieldDocLabel(FtaModel::TABLENAME, FtaModel::FIELDNAME_POIDS_EMBALLAGES_UVC));
-        $htmlPoidsUVC->getAttributes()->getValue()->setValue($return[FtaModel::UVC_EMBALLAGE]);
+        $htmlPoidsUVC->getAttributes()->getValue()->setValue($return[FtaConditionnementModel::UVC_EMBALLAGE]);
         $htmlPoidsUVC->setIsEditable(FALSE);
         return $htmlPoidsUVC->getHtmlResult();
-    
-        
     }
 
     function getHtmlPoidsNetEmballageUVC() {
         //Calcul du Poid Net Emballage (g)        
-        $req = "SELECT * FROM ". FtaModel::TABLENAME;
+        $req = "SELECT * FROM " . FtaModel::TABLENAME;
         $result = DatabaseOperation::query($req);
 
         //Remplacer par getHtmlValueToGramme($value)
@@ -331,15 +352,15 @@ class FtaView {
         $return["uvc_net"] = mysql_result($result, 0, "Poids_ELEM") * 1000;
 
 
-        $req = "SELECT  * FROM " . FtaConditionnement::TABLENAME . "," . AnnexeEmballageGroupe::TABLENAME . "," . AnnexeEmballageGroupeType::TABLENAME . " "
-                . "WHERE " . FtaConditionnement::FIELDNAME_ID_FTA . "="
+        $req = "SELECT  * FROM " . FtaConditionnementModel::TABLENAME . "," . AnnexeEmballageGroupeModel::TABLENAME . "," . AnnexeEmballageGroupeType::TABLENAME . " "
+                . "WHERE " . FtaConditionnementModel::FIELDNAME_ID_FTA . "="
                 . FtaModel::KEYNAME . " "
                 . "AND " . AnnexeEmballageGroupeType::KEYNAME . "=" . $paramgroupetype . " "
-                . "AND " . FtaConditionnement::FIELDNAME_ID_ANNEXE_EMBALLAGE_GROUPE_TYPE . "=" . AnnexeEmballageGroupe::KEYNAME . " "
+                . "AND " . FtaConditionnementModel::FIELDNAME_ID_ANNEXE_EMBALLAGE_GROUPE_TYPE . "=" . AnnexeEmballageGroupeModel::KEYNAME . " "
                 . "AND ( "
-                . "( " . FtaConditionnement::FIELDNAME_ID_ANNEXE_EMBALLAGE_GROUPE_TYPE . " IS NOT NULL AND " . FtaConditionnement::FIELDNAME_ID_ANNEXE_EMBALLAGE_GROUPE_TYPE . "=" . AnnexeEmballageGroupeType::KEYNAME . ")"
+                . "( " . FtaConditionnementModel::FIELDNAME_ID_ANNEXE_EMBALLAGE_GROUPE_TYPE . " IS NOT NULL AND " . FtaConditionnementModel::FIELDNAME_ID_ANNEXE_EMBALLAGE_GROUPE_TYPE . "=" . AnnexeEmballageGroupeType::KEYNAME . ")"
                 . " OR "
-                . "( " . FtaConditionnement::FIELDNAME_ID_ANNEXE_EMBALLAGE_GROUPE_TYPE . " IS NULL AND " . AnnexeEmballageGroupe::FIELDNAME_ID_ANNEXE_EMBALLAGE_GROUPE_CONFIGURATION . "=" . AnnexeEmballageGroupeType::KEYNAME . ")"
+                . "( " . FtaConditionnementModel::FIELDNAME_ID_ANNEXE_EMBALLAGE_GROUPE_TYPE . " IS NULL AND " . AnnexeEmballageGroupeModel::FIELDNAME_ID_ANNEXE_EMBALLAGE_GROUPE_CONFIGURATION . "=" . AnnexeEmballageGroupeType::KEYNAME . ")"
                 . "    ) "
                 . " ORDER BY " . AnnexeEmballageGroupeType::FIELDNAME_NOM_ANNEXE_EMBALLAGE_GROUPE_TYPE
         ;
@@ -350,17 +371,17 @@ class FtaView {
         if (mysql_num_rows($result)) {
             while ($rows = mysql_fetch_array($result)) {
                 //Calcul du poids
-                $return[FtaModel::UVC_EMBALLAGE] = $rows[FtaConditionnement::FIELDNAME_POIDS_FTA_CONDITIONNEMENT] * $rows[FtaConditionnement::FIELDNAME_QUANTITE_PAR_COUCHE_FTA_CONDITIONNEMENT] * $rows[FtaConditionnement::FIELDNAME_NOMBRE_COUCHE_FTA_CONDITIONNEMENT];
+                $return[FtaModel::UVC_EMBALLAGE] = $rows[FtaConditionnementModel::FIELDNAME_POIDS_FTA_CONDITIONNEMENT] * $rows[FtaConditionnementModel::FIELDNAME_QUANTITE_PAR_COUCHE_FTA_CONDITIONNEMENT] * $rows[FtaConditionnement::FIELDNAME_NOMBRE_COUCHE_FTA_CONDITIONNEMENT];
 
                 //Calcul des dimension (on recherche la taille la plus grande
-                if ($return[FtaModel::UVC_EMBALLAGE_DIMENSION_HAUTEUR] < $rows[FtaConditionnement::FIELDNAME_HAUTEUR_FTA_CONDITIONNEMENT]) {
-                    $return[FtaModel::UVC_EMBALLAGE_DIMENSION_HAUTEUR] = $rows[FtaConditionnement::FIELDNAME_HAUTEUR_FTA_CONDITIONNEMENT];
+                if ($return[FtaModel::UVC_EMBALLAGE_DIMENSION_HAUTEUR] < $rows[FtaConditionnementModel::FIELDNAME_HAUTEUR_FTA_CONDITIONNEMENT]) {
+                    $return[FtaModel::UVC_EMBALLAGE_DIMENSION_HAUTEUR] = $rows[FtaConditionnementModel::FIELDNAME_HAUTEUR_FTA_CONDITIONNEMENT];
                 }
-                if ($return[FtaModel::UVC_EMBALLAGE_DIMENSION_LONGEUR] < $rows[FtaConditionnement::FIELDNAME_LONGUEUR_FTA_CONDITIONNEMENT]) {
-                    $return[FtaModel::UVC_EMBALLAGE_DIMENSION_LONGEUR] = $rows[FtaConditionnement::FIELDNAME_LONGUEUR_FTA_CONDITIONNEMENT];
+                if ($return[FtaModel::UVC_EMBALLAGE_DIMENSION_LONGEUR] < $rows[FtaConditionnementModel::FIELDNAME_LONGUEUR_FTA_CONDITIONNEMENT]) {
+                    $return[FtaModel::UVC_EMBALLAGE_DIMENSION_LONGEUR] = $rows[FtaConditionnementModel::FIELDNAME_LONGUEUR_FTA_CONDITIONNEMENT];
                 }
-                if ($return[FtaModel::UVC_EMBALLAGE_DIMENSION_LARGEUR] < $rows[FtaConditionnement::FIELDNAME_LARGEUR_FTA_CONDITIONNEMENT]) {
-                    $return[FtaModel::UVC_EMBALLAGE_DIMENSION_LARGEUR] = $rows[FtaConditionnement::FIELDNAME_LARGEUR_FTA_CONDITIONNEMENT];
+                if ($return[FtaModel::UVC_EMBALLAGE_DIMENSION_LARGEUR] < $rows[FtaConditionnementModel::FIELDNAME_LARGEUR_FTA_CONDITIONNEMENT]) {
+                    $return[FtaModel::UVC_EMBALLAGE_DIMENSION_LARGEUR] = $rows[FtaConditionnementModel::FIELDNAME_LARGEUR_FTA_CONDITIONNEMENT];
                 }
             }
         }
@@ -375,20 +396,18 @@ class FtaView {
 
         return $htmlPoidsBrutUVC->getHtmlResult();
     }
-    
-    
 
     function getHtmlDimensionEmballageUVC() {
 
-        $req =  "SELECT  * FROM " . FtaConditionnement::TABLENAME . "," . AnnexeEmballageGroupe::TABLENAME . "," . AnnexeEmballageGroupeType::TABLENAME . " "
+        $req = "SELECT  * FROM " . FtaConditionnement::TABLENAME . "," . AnnexeEmballageGroupeModel::TABLENAME . "," . AnnexeEmballageGroupeType::TABLENAME . " "
                 . "WHERE " . FtaConditionnement::FIELDNAME_ID_FTA . "="
                 . FtaModel::KEYNAME . " "
                 . "AND " . AnnexeEmballageGroupeType::KEYNAME . "=" . $paramgroupetype . " "
-                . "AND " . FtaConditionnement::FIELDNAME_ID_ANNEXE_EMBALLAGE_GROUPE_TYPE . "=" . AnnexeEmballageGroupe::KEYNAME . " "
+                . "AND " . FtaConditionnement::FIELDNAME_ID_ANNEXE_EMBALLAGE_GROUPE_TYPE . "=" . AnnexeEmballageGroupeModel::KEYNAME . " "
                 . "AND ( "
                 . "( " . FtaConditionnement::FIELDNAME_ID_ANNEXE_EMBALLAGE_GROUPE_TYPE . " IS NOT NULL AND " . FtaConditionnement::FIELDNAME_ID_ANNEXE_EMBALLAGE_GROUPE_TYPE . "=" . AnnexeEmballageGroupeType::KEYNAME . ")"
                 . " OR "
-                . "( " . FtaConditionnement::FIELDNAME_ID_ANNEXE_EMBALLAGE_GROUPE_TYPE . " IS NULL AND " . AnnexeEmballageGroupe::FIELDNAME_ID_ANNEXE_EMBALLAGE_GROUPE_CONFIGURATION . "=" . AnnexeEmballageGroupeType::KEYNAME . ")"
+                . "( " . FtaConditionnement::FIELDNAME_ID_ANNEXE_EMBALLAGE_GROUPE_TYPE . " IS NULL AND " . AnnexeEmballageGroupeModel::FIELDNAME_ID_ANNEXE_EMBALLAGE_GROUPE_CONFIGURATION . "=" . AnnexeEmballageGroupeType::KEYNAME . ")"
                 . "    ) "
                 . " ORDER BY " . AnnexeEmballageGroupeType::FIELDNAME_NOM_ANNEXE_EMBALLAGE_GROUPE_TYPE
         ;
@@ -627,7 +646,7 @@ class FtaView {
             }
         }
 
-    $return[FtaModel::PALETTE_EMBALLAGE] = $return[FtaModel::PALETTE_EMBALLAGE] * ($rows[FtaConditionnement::FIELDNAME_QUANTITE_PAR_COUCHE_FTA_CONDITIONNEMENT] * $rows[FtaConditionnement::FIELDNAME_NOMBRE_COUCHE_FTA_CONDITIONNEMENT]);
+        $return[FtaModel::PALETTE_EMBALLAGE] = $return[FtaModel::PALETTE_EMBALLAGE] * ($rows[FtaConditionnement::FIELDNAME_QUANTITE_PAR_COUCHE_FTA_CONDITIONNEMENT] * $rows[FtaConditionnement::FIELDNAME_NOMBRE_COUCHE_FTA_CONDITIONNEMENT]);
 
 
 

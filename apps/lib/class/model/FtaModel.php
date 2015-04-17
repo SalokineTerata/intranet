@@ -106,6 +106,7 @@ class FtaModel extends AbstractModel {
     const PALETTE_NOMBRE_COLIS_PAR_COUCHE = "colis_couche";
     const PALETTE_NOMBRE_TOTAL_PAR_CARTON = "total_colis";
 
+
     /**
      * Utilisateur ayant créé la FTA
      * @var UserModel
@@ -484,17 +485,15 @@ class FtaModel extends AbstractModel {
 
         //Les Calculs de la table fta
         $array = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
-                        "SELECT * FROM" . FtaModel::TABLENAME
+                        "SELECT " . FtaModel::FIELDNAME_PCB . "," . FtaModel::FIELDNAME_POIDS_ELEMENTAIRE . " FROM " . FtaModel::TABLENAME
         );
 
-        /**
-         * @todo Remplacer par getDataoperation?($value)
-         */
+
         //Calcul du Poids net par UVC
         $return[FtaModel::UVC_EMBALLAGE_NET] = $array[FtaModel::UVC_EMBALLAGE_NET];
 
         //Calcul du PCB
-        $return[FtaModel::FIELDNAME_PCB] = mysql_result($array, 0, FtaModel::FIELDNAME_PCB);
+        $return[FtaModel::FIELDNAME_PCB] = $array[FtaModel::FIELDNAME_PCB];
     }
 
     public function getArrayComposant() {
@@ -513,7 +512,7 @@ class FtaModel extends AbstractModel {
 
             // Calcul du Poids net par colis
             $return[FtaModel::COLIS_EMBALLAGE_NET] = $return[FtaModel::COLIS_EMBALLAGE_NET] + ($rows[FtaComposantModel::FIELDNAME_QUANTITE_FTA_COMPOSITION] * $rows[FtaComposantModel::FIELDNAME_POIDS_UNITAIRE_CODIFICATION]);
-        }
+}
         /**
          * @todo Remplacer par getDataoperation?($value)
          */

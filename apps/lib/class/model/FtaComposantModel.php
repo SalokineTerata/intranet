@@ -23,40 +23,37 @@ class FtaComposantModel extends AbstractModel {
     
     
     /**
-     * Site d'expedition de la FTA
-     * @var GeoModel
+     * FTA associée
+     * @var FtaModel
      */
-    
-    private $modelSiteExpediton;
-    
-    public function getArrayComposant() {
+    private $modelFta;
 
-        //Les Calculs de la table composant        
-        $array = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
-                        "SELECT " . FtaComposantModel::FIELDNAME_QUANTITE_FTA_COMPOSITION . "," . FtaComposantModel::FIELDNAME_IS_COMPOSITION_FTA_COMPOSANT . "," . FtaComposantModel::FIELDNAME_POIDS_UNITAIRE_CODIFICATION . " FROM " . FtaComposantModel::TABLENAME
-                        . "WHERE " . FtaComposantModel::FIELDNAME_ID_FTA . "=" . FtaModel::KEYNAME
-                        . " AND " . FtaComposantModel::FIELDNAME_IS_COMPOSITION_FTA_COMPOSANT . "=" . FtaModel::EMBALLAGES_UVC
-        );
+    public function __construct($paramId = NULL, $paramIsCreateRecordsetInDatabaseIfKeyDoesntExist = AbstractModel::DEFAULT_IS_CREATE_RECORDSET_IN_DATABASE_IF_KEY_DOESNT_EXIST) {
+        parent::__construct($paramId, $paramIsCreateRecordsetInDatabaseIfKeyDoesntExist);
 
-        foreach ($array as $rows) {
-
-            //Calcul du Poids net par Palette
-            $return[FtaModel::PALETTE_EMBALLAGE_NET] = $return[FtaModel::COLIS_EMBALLAGE_NET] * ($rows[FtaConditionnementModel::FIELDNAME_QUANTITE_PAR_COUCHE_FTA_CONDITIONNEMENT] * $rows[FtaConditionnementModel::FIELDNAME_NOMBRE_COUCHE_FTA_CONDITIONNEMENT]);
-
-            // Calcul du Poids net du colis
-            $return[FtaModel::COLIS_EMBALLAGE_NET] = $return[FtaModel::COLIS_EMBALLAGE_NET] + ($rows[FtaComposantModel::FIELDNAME_QUANTITE_FTA_COMPOSITION] * $rows[FtaComposantModel::FIELDNAME_POIDS_UNITAIRE_CODIFICATION]);
-        }
-
-        // Calcul du Poids net du colis
-        $return[FtaModel::COLIS_EMBALLAGE_NET] = $return[FtaModel::COLIS_EMBALLAGE_NET] / 1000; //Conversion en g --> Kg
-        if (!$return[FtaModel::COLIS_EMBALLAGE_NET]) {
-            $return = "SELECT ". FtaComposantModel::FIELDNAME_QUANTITE_FTA_COMPOSITION . "," . FtaComposantModel::FIELDNAME_IS_COMPOSITION_FTA_COMPOSANT . "," . FtaComposantModel::FIELDNAME_POIDS_UNITAIRE_CODIFICATION . " FROM " . FtaComposantModel::TABLENAME . "WHERE " . FtaComposantModel::FIELDNAME_ID_FTA . "=" . FtaModel::KEYNAME . " AND " . FtaComposantModel::FIELDNAME_IS_COMPOSITION_FTA_COMPOSANT . "=" . FtaModel::EMBALLAGES_UVC;
-            $return[FtaModel::COLIS_EMBALLAGE_NET] = $array[FtaModel::FIELDNAME_POIDS_ELEMENTAIRE] * $array[FtaModel::FIELDNAME_PCB];
-        }
+        $this->setModelFtaById($this->getDataField(self::FIELDNAME_ID_FTA)->getFieldValue());
     }
-    
-    
-    
+
+    public function setModelFtaById($id) {
+        $this->getDataField(self::FIELDNAME_ID_FTA)->setFieldValue($id);
+        $this->setModelFta(
+                new FtaModel($this->getDataField(self::FIELDNAME_ID_FTA)->getFieldValue(), DatabaseRecord::VALUE_DONT_CREATE_RECORD_IN_DATABASE_IF_KEY_DOESNT_EXIST)
+        );
+    }
+
+    function getModelFta() {
+        return $this->modelFta;
+    }
+
+    function setModelFta(FtaModel $modelFta) {
+        $this->modelFta = $modelFta;
+    }
+
+       //Calcul du poids de l'emballage  par UVC
+    static function getCalculPoidsNetEmballageParColis($paramPoidsEmballageUnitaire, $paramQuantiteCouche, $paramNombreCouche) {
+        return $paramPoidsEmballageUnitaire * $paramQuantiteCouche * $paramNombreCouche;
+    }
+
 }
 
 ?>

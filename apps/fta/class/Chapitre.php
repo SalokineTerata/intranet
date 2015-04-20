@@ -763,8 +763,7 @@ class Chapitre {
         //$isEditable = TRUE;
         //
         //Identifiant FTA
-        $idFta = $id_fta;
-        $ftaModel = new FtaModel($idFta);
+        $ftaModel = new FtaModel($id_fta);
         $ftaView = new FtaView($ftaModel);
         $ftaView->setIsEditable($isEditable);
         $ftaView->setFtaChapitreModelById(self::ID_CHAPITRE_IDENTITE);
@@ -802,8 +801,7 @@ class Chapitre {
         $isEditable = FALSE;
 
         //Identifiant FTA
-        $idFta = $id_fta;
-        $ftaModel = new FtaModel($idFta);
+        $ftaModel = new FtaModel($id_fta);
         $ftaView = new FtaView($ftaModel);
         $ftaView->setIsEditable($isEditable);
         $ftaView->setFtaChapitreModelById(self::ID_CHAPITRE_IDENTITE);
@@ -831,8 +829,7 @@ class Chapitre {
         $isEditable = TRUE;
         //
         //Identifiant FTA
-        $idFta = $id_fta;
-        $ftaModel = new FtaModel($idFta);
+        $ftaModel = new FtaModel($id_fta);
         $ftaView = new FtaView($ftaModel);
         $ftaView->setIsEditable($isEditable);
         $ftaView->setFtaChapitreModelById(self::ID_CHAPITRE_IDENTITE);
@@ -1076,8 +1073,7 @@ class Chapitre {
 
 
         //Identifiant FTA
-        $idFta = $id_fta;
-        $ftaModel = new FtaModel($idFta);
+        $ftaModel = new FtaModel($id_fta);
         $ftaView = new FtaView($ftaModel);
         $ftaView->setIsEditable($isEditable);
         $ftaView->setFtaChapitreModelById(self::ID_CHAPITRE_IDENTITE);
@@ -1115,8 +1111,7 @@ class Chapitre {
         $bloc.="<tr class=titre_principal><td class>Gestion des étiquettes</td></tr>";
 
         //Identifiant FTA
-        $idFta = $id_fta;
-        $ftaModel = new FtaModel($idFta);
+        $ftaModel = new FtaModel($id_fta);
         $ftaView = new FtaView($ftaModel);
         $ftaView->setIsEditable($isEditable);
         $ftaView->setFtaChapitreModelById(self::ID_CHAPITRE_IDENTITE);
@@ -1175,8 +1170,7 @@ class Chapitre {
         $bloc.="<tr class=titre_principal><td class>Demandeur</td></tr>";
         //$objectFta = new ObjectFta($id_fta);
         //Identifiant FTA
-        $idFta = $id_fta;
-        $ftaModel = new FtaModel($idFta);
+        $ftaModel = new FtaModel($id_fta);
         $ftaView = new FtaView($ftaModel);
         $ftaView->setIsEditable($isEditable);
         $ftaView->setFtaChapitreModelById(self::ID_CHAPITRE_IDENTITE);
@@ -1235,7 +1229,7 @@ class Chapitre {
 
 
         //PCB
-        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_PCB);
+        $bloc.=$ftaView->getHtmlDataField(FtaConditionnementModel::FIELDNAME_PCB_FTA_CONDITIONNEMENT);
 
 
         $bloc.="<tr class=titre_principal><td class>Caractéristiques FTA</td></tr>";
@@ -1272,8 +1266,7 @@ class Chapitre {
         $isEditable = TRUE;
         //
         //Identifiant FTA
-        $idFta = $id_fta;
-        $ftaModel = new FtaModel($idFta);
+        $ftaModel = new FtaModel($id_fta);
         $ftaView = new FtaView($ftaModel);
         $ftaView->setIsEditable($isEditable);
         $ftaView->setFtaChapitreModelById(self::ID_CHAPITRE_IDENTITE);
@@ -1310,9 +1303,8 @@ class Chapitre {
 
 
         //Identifiant FTA
-        $ftaModel = new FtaModel($idFta);
+        $ftaModel = new FtaModel($id_fta);
         $ftaView = new FtaView($ftaModel);
-    //    $ftaConditionnement = new FtaConditionnementView($ftaConditionnement);
         $ftaView->setIsEditable($isEditable);
         $ftaView->setFtaChapitreModelById(self::ID_CHAPITRE_IDENTITE);
 
@@ -1323,15 +1315,15 @@ class Chapitre {
         $bloc.=$ftaView->getHtmlPoidsEmballageUVC();
 
         //Poids Net UVC (en g):
-  /*      $bloc.=$ftaView->getHtmlPoidsNetEmballageUVC();
+        $bloc.=$ftaView->getHtmlPoidsNetEmballageUVC();
 
         //Poids Brut UVC (en g):
 
-      /*  $bloc.=$ftaView->getHtmlPoidsBrutEmballageUVC();
+        $bloc.=$ftaView->getHtmlPoidsBrutEmballageUVC();
 
         //Dimension de l'UVC (en mm):
 
-        $bloc.=$ftaView->getHtmlDimensionEmballageUVC();
+    /*    $bloc.=$ftaView->getHtmlDimensionEmballageUVC();
 
         $bloc.="<tr class=titre_principal> <td>Informations Générales du Colis</td></tr>";
 

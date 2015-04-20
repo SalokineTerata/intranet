@@ -5,8 +5,6 @@ require_once ("../$module/class/ObjectFta.php");
 require_once ("../$module/class/Chapitre.php");
 require_once ("../$module/class/view/FtaView.php");
 require_once ("../$module/class/view/FtaProcessusDelaiView.php");
-require_once ("../$module/class/view/FtaConditionnementView.php");
-//require_once ("../$module/class/view/FtaConposantView.php");
 
 /* * *********
   AUTORISATION

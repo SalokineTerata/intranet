@@ -144,7 +144,7 @@ class Html {
     /**
      * Retourne l'objet Html associé au champ DataField
      * @param DatabaseDataField $paramDataField
-     * @return DataFieldToHtm
+     * @return AbstractHtmlGlobalElement
      */
     public static function getHtmlObjectFromDataField(DatabaseDataField $paramDataField) {
         $htmlObject = NULL;

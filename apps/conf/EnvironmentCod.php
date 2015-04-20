@@ -17,7 +17,16 @@ class EnvironmentCod extends EnvironmentAbstract {
     const APPLICATION_LOGO = "logo_developpeur.gif";
     const APPLICATION_NAME = "intranet";
     const EXECUTION_ENVIRONMENT = EnvironmentConf::ENV_COD;
-    const IS_DEBUG_EXEC_ENVIRONMENT_ENABLED = FALSE;
+    const IS_DEBUG_EXEC_ENVIRONMENT_ENABLED = TRUE;
+
+    /**
+     * Force l'initialisation systématique de la session à chaque 
+     * exécution de script.
+     * L'activation de la cette foncntionnalité impact lourdement les
+     * performances du site.
+     * TRUE: Initialisation systématique.
+     * FALSE: l'initialisation n'est réalisée qu'une seule fois pas session.
+     */
     const IS_DEBUG_SESSION_ENABLED = FALSE;
     const IS_SERVICE_LDAP_ENABLED = FALSE;
     const IS_SERVICE_SMTP_ENABLED = FALSE;

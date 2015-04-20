@@ -211,6 +211,9 @@ class DatabaseOperation {
             while ($rows = mysql_fetch_array($paramResult, MYSQL_ASSOC)) {
                 $keys = array_keys($rows);
                 $key_value = $rows[$keys[0]];
+
+                //Suppression de la clef dans la liste des champs
+                unset($rows[$keys[0]]);
                 $return[$key_value] = $rows;
                 $i++;
             }

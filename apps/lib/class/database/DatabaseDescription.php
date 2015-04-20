@@ -14,7 +14,7 @@
  *        (
  *            ["Nom du champ"] => Array              (Ex: id_access_arti2)
  *            (
- *                [Sql] => Array                     //Caractéristiques SQL
+ *                [Sql] => Array                     //Caractéristiques SQL Standards
  *                (
  *                    [Field]  => "Nom du champ"     (Ex: id_access_arti2)
  *                    [Type]   => "type de donnée"   (Ex: int(11))
@@ -23,14 +23,16 @@
  *                    [Default]=> "Valeur par défaut (Ex: -1)
  *                    [Extra]  => "Supplément"       (Ex: auto_increment)
  *                )
- *                [Doc] => Array                      //Doc utilisateur
+ *                [Doc] => Array                      //Caractéristiques Personnalisés
  *                (
  *                    [IdDoc]  => "Id Désignation"   (Ex: 2452)
  *                    [Label]  => "Désignation"      (Ex: Clef de la table)
  *                    [Help]   => "Aide"             (Ex: Cette clef est unique)                  
- *                    [ContentSql]   => "Requête SQL (Ex: "SELECT * FROM TABLE1;")
+ *                    [ContentSql]   => Requête liste(Ex: "SELECT * FROM TABLE1;")
  *                    [ContentArray] => Array        (Ex: array("clef1" => "donnee1", "clef2" => "donnee2")
- *                    [TypeOfHtmlObject] => type HTML(Ex: CALENDAR, INPUTTEXT, LIST ...)
+ *                    [TypeOfHtmlObject] => type HTML(Ex: CALENDAR, INPUTTEXT, LIST, SUBFORM ...)
+ *                    [ForeignKey] => jointure SQL   (Ex: "fta_processus_delai.id_fta=fta.id_fta")
+ *                    [ForeignTable] => Table jointe (Ex: "fta")
  *                )
  *        )
  *    )
@@ -42,13 +44,6 @@
  * @todo Gestion de table multi-clef
  */
 class DatabaseDescription {
-
-    /**
-     * Tableau de résultat stocké dans $_SESSION
-     * @var array 
-     * @static
-     */
-    private static $resultInSession = array();
 
     /**
      * Nom du tableau contenant la documentation d'un champ
@@ -104,6 +99,16 @@ class DatabaseDescription {
     const ARRAY_NAME_DOC_TYPE_OF_HTML_OBJECT = "TypeOfHtmlObject";
 
     /**
+     * Nom de la clé étrangère dans la table étrangère
+     */
+    const ARRAY_NAME_DOC_FOREIGN_KEY = "ForeignKey";
+
+    /**
+     * Nom de la table étrangère
+     */
+    const ARRAY_NAME_DOC_FOREIGN_TABLE = "ForeignTable";
+
+    /**
      * Nom de la variable contenant le nom du champ (défini par MySQL)
      */
     const ARRAY_NAME_SQL_FIELDNAME = "Field";
@@ -137,9 +142,28 @@ class DatabaseDescription {
     const ARRAY_NAME_SQL_EXTRA = "Extra";
 
     /**
-     * Régénère la description de la base de données dans $_SESSION
+     * Tableau de résultat stocké dans $_SESSION
+     * @var array 
+     * @static
      */
-    public static function buildDatabaseDescription() {
+    private static $resultInSession = array();
+
+    /**
+     * Nom de la base de données
+     * @var mixed 
+     */
+    private static $databaseName = NULL;
+
+    /**
+     * Régénère la description de la base de données dans $_SESSION
+     * @param mixed $paramDatabaseName
+     */
+    public static function buildDatabaseDescription($paramDatabaseName) {
+
+        /**
+         * Récupération de la configuration de la base de données
+         */
+        self::setDatabaseName($paramDatabaseName);
 
         /**
          * Dans le cas où l'objet est sauvegardé dans la session, destruction de cet objet
@@ -222,6 +246,24 @@ class DatabaseDescription {
         }
 
         /**
+         * Récupération des relations des tables
+         */
+        $tableRelationship = self::getArrayAllForeignKey();
+
+        foreach ($tableRelationship as $value) {
+
+            $paramTableName = $value["TABLE_NAME"];
+            $paramFieldName = $value["COLUMN_NAME"];
+            $paramForeignKey = $value["REFERENCED_COLUMN_NAME"];
+            $paramForeignTable = $value["REFERENCED_TABLE_NAME"];
+            self::$resultInSession[$paramTableName][self::ARRAY_NAME_FIELDS]
+                    [$paramFieldName][self::ARRAY_NAME_DOC][self::ARRAY_NAME_DOC_FOREIGN_KEY] = $paramForeignKey;
+            self::$resultInSession[$paramTableName][self::ARRAY_NAME_FIELDS]
+                    [$paramFieldName][self::ARRAY_NAME_DOC][self::ARRAY_NAME_DOC_FOREIGN_TABLE] = $paramForeignTable;
+        }
+
+
+        /**
          * Enregistrement du résultat final en session PHP $_SESSION
          */
         $_SESSION[get_class()] = self::$resultInSession;
@@ -242,12 +284,50 @@ class DatabaseDescription {
     }
 
     /**
+     * Retourne le nom de la base de données.
+     * @return mixed
+     */
+    public static function getDatabaseName() {
+        return self::$databaseName;
+    }
+
+    /**
+     * Défini le nom de la base de données.
+     * @param mixed $paramDatabaseName
+     */
+    public static function setDatabaseName($paramDatabaseName) {
+        self::$databaseName = $paramDatabaseName;
+    }
+
+    /**
      * Retourne le nom de la clef de la table
      * @param string $paramTableName
      * @return string Nom du champs
      */
     public static function getTableKeyName($paramTableName) {
         return $_SESSION[get_class()][$paramTableName][self::ARRAY_NAME_KEY];
+    }
+
+    /**
+     * Retourne le nom du champ dans la table étrangère
+     * @param string $paramTableName Nom de la table
+     * @param string $paramFieldName Nom du champs
+     * @return string Label du champ
+     */
+    public static function getFieldDocForeignKey($paramTableName, $paramFieldName) {
+        return $_SESSION[get_class()][$paramTableName][self::ARRAY_NAME_FIELDS]
+                [$paramFieldName][self::ARRAY_NAME_DOC][self::ARRAY_NAME_DOC_FOREIGN_KEY];
+    }
+
+    /**
+     * Retourne de la table étrangère
+     * @param string $paramTableName Nom de la table
+     * @param string $paramFieldName Nom du champs
+     * @return string Label du champ
+     */
+    public static function getFieldDocForeignTable($paramTableName, $paramFieldName) {
+        return $_SESSION[get_class()][$paramTableName][self::ARRAY_NAME_FIELDS]
+                [$paramFieldName][self::ARRAY_NAME_DOC][self::ARRAY_NAME_DOC_FOREIGN_TABLE];
     }
 
     /**
@@ -363,6 +443,20 @@ class DatabaseDescription {
             $arrayResult[$fieldName] = new DatabaseDescriptionField($table, $fieldName);
         }
         return $arrayResult;
+    }
+
+    public static function getArrayAllForeignKey() {
+        $paramSql = "SELECT k.TABLE_NAME, "
+                . "k.COLUMN_NAME, k.REFERENCED_TABLE_NAME, "
+                . "k.REFERENCED_COLUMN_NAME "
+                . "FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE AS k "
+                . "INNER JOIN INFORMATION_SCHEMA.TABLE_CONSTRAINTS AS c ON "
+                . "k.CONSTRAINT_SCHEMA = c.CONSTRAINT_SCHEMA "
+                . "AND k.CONSTRAINT_NAME = c.CONSTRAINT_NAME "
+                . "WHERE c.CONSTRAINT_TYPE =  'FOREIGN KEY' AND k.CONSTRAINT_SCHEMA = '" . self::getDatabaseName() . "'"
+        ;
+
+        return DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray($paramSql);
     }
 
 }

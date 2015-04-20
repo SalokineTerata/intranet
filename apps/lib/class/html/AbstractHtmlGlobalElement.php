@@ -30,10 +30,29 @@ abstract class AbstractHtmlGlobalElement {
     const DEFAULT_IS_EDITABLE = FALSE;
 
     /**
+     * Type de représentation lors du rendu HTML
+     * form = Formulaire.
+     *      - La représentation sera de type formulaire.
+     *      - Le label précèdera la données.
+     * 
+     * table = Table.
+     *      - La représentation sera de type table.
+     *      - Le label ne sera pas affiché.
+     */
+    const HTML_RENDER_TO_FORM = "form";
+    const HTML_RENDER_TO_TABLE = "table";
+
+    /**
      * L'élément est-il modifiable ?
      * @var boolean
      */
     private $isEditable;
+
+    /**
+     * Sous quel forme l'élément doit-il être présenté ?
+     * @var self::HTML_RENDER_TO_FORM | self::HTML_RENDER_TO_TABLE
+     */
+    private $htmlRender = NULL;
 
     /**
      * Object manipulant les évènements JavaScript possible sur le rendu HTML
@@ -87,6 +106,10 @@ abstract class AbstractHtmlGlobalElement {
     private $ChangedImage;
 
     public function __construct() {
+        /**
+         * Par défaut l'élément est représenté sous forme de formulaire.
+         */
+        $this->setHtmlRenderToForm();
         $this->setEventsForm(new EventsForm());
         $this->setEventsMouse(new EventsMouse());
         $this->setStyleCSS(new CustomStyleCSS());
@@ -102,6 +125,30 @@ abstract class AbstractHtmlGlobalElement {
         $this->setLabel($paramLabel);
         $this->setIsWarningUpdate($paramIsWarningUpdate);
         $this->getAttributesGlobal()->getId()->setValue($paramId);
+    }
+
+    /**
+     * Retourne de la forme sous laquelle l'élément HTML sera représenté.
+     * @return self::HTML_RENDER_TO_*
+     */
+    function getHtmlRender() {
+        return $this->htmlRender;
+    }
+
+    /**
+     * L'élément HTML sera représenté sous forme de formluaire.
+     * @return mixed
+     */
+    function setHtmlRenderToForm() {
+        $this->htmlRender = self::HTML_RENDER_TO_FORM;
+    }
+
+    /**
+     * L'élément HTML sera représenté sous forme de formluaire.
+     * @return mixed
+     */
+    function setHtmlRenderToTable() {
+        $this->htmlRender = self::HTML_RENDER_TO_TABLE;
     }
 
     /**
@@ -211,11 +258,19 @@ abstract class AbstractHtmlGlobalElement {
             $color_modif = Html::DEFAULT_HTML_WARNING_UPDATE_BGCOLOR;
         }
 
-        //Rendu HTML
-        $html_result .= "<tr " . $idRow . " " . $style . "class=contenu>"
-                . "<td style=\"$color_modif\">$label</td>"
-                . "<td style=\"$color_modif\">"
-        ;
+        //Rendu HTML - début encapsulation
+        switch ($this->getHtmlRender()) {
+            case self::HTML_RENDER_TO_FORM:
+                $html_result .= "<tr " . $idRow . " " . $style . "class=contenu>";
+                $html_result .= "<td style=\"$color_modif\">$label</td>";
+                break;
+
+            case self::HTML_RENDER_TO_TABLE:
+                break;
+        }
+        $html_result .= "<td style=\"$color_modif\">";
+
+        //Contenu
         if ($this->getIsEditable()) {
             $html_result .= $this->getHtmlEditableContent();
         } else {
@@ -225,7 +280,17 @@ abstract class AbstractHtmlGlobalElement {
             $html_result.= "<i>&nbsp;" . Html::showValue($this->getAdditionnalTextInfo()) . "</i>";
         }
 
-        $html_result.= $image_modif . "</td></tr>";
+        //Rendu HTML - fin encapsulation
+        switch ($this->getHtmlRender()) {
+            case self::HTML_RENDER_TO_FORM:
+                $html_result.= $image_modif . "</td></tr>";
+                break;
+
+            case self::HTML_RENDER_TO_TABLE:
+                $html_result.= $image_modif . "</td>";
+                break;
+        }
+
         return $html_result;
     }
 

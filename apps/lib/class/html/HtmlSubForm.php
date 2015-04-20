@@ -29,7 +29,7 @@
  *
  * @author bs4300280
  */
-class HtmlSubForm3Fields {
+class HtmlSubForm {
 
     /**
      * Tableau PHP stockant le résultat de la requête sur laquelle est basée
@@ -56,6 +56,12 @@ class HtmlSubForm3Fields {
      */
     private $subFormModelClassName = NULL;
 
+    /**
+     * L'élément est-il modifiable ?
+     * @var boolean
+     */
+    private $isEditable;
+
     function __construct($paramArrayContent, $paramSubFormModelClassName, $paramTitle = NULL, $paramDivId = NULL) {
 
         $this->setArrayContent($paramArrayContent);
@@ -63,24 +69,42 @@ class HtmlSubForm3Fields {
         $this->setTitle($paramTitle);
         $this->setDivId($paramDivId);
     }
+    function getIsEditable() {
+        return $this->isEditable;
+    }
 
+    function setIsEditable($isEditable) {
+        $this->isEditable = $isEditable;
+    }
+
+        /**
+     * 
+     * @param boolean $paramIsEditable
+     * @return string
+     */
     function getHtmlResult() {
         $return = NULL;
         $return .= "<table><tr><td><fieldset>";
         $return .= "<legend>" . $this->getTitle() . "</legend>";
         $return .= "<div id=\"" . $this->getDivId() . "\">";
         $return .="<table>";
+        $subFormModelClassName = $this->getSubFormModelClassName();
         foreach ($this->getArrayContent() as $key => $valueArray) {
 
-            $subFormModelClassName = $this->getSubFormModelClassName();
+
             $modelSubForm = new $subFormModelClassName($key);
             $valueArrayKeys = array_keys($valueArray);
 
-            $dataField = $modelSubForm->getDataField($valueArrayKeys[2]);
-            $dataField->setLabelCustom($valueArray[$valueArrayKeys[1]]);
-            $htmlField = Html::convertDataFieldToHtml($dataField, TRUE);
-
-            $return.=$htmlField;
+            $return.= "<tr class=contenu>";
+            foreach ($valueArrayKeys as $fieldName) {
+                $dataField = $modelSubForm->getDataField($fieldName);
+                $dataField->setLabelCustom(NULL);
+                $htmlField = Html::getHtmlObjectFromDataField($dataField);
+                $htmlField->setIsEditable($this->getIsEditable());
+                $htmlField->setHtmlRenderToTable();
+                $return.=$htmlField->getHtmlResult();
+            }
+            $return.= "</tr>";
         }
         $return .= "</table>";
         $return .= "</div></fieldset></td></tr></table>";

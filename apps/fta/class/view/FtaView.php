@@ -179,10 +179,41 @@ class FtaView {
 
             $bloc = "";
 
-            $req = "SELECT id_fta_processus_delai, nom_fta_processus, date_echeance_processus FROM `fta_processus_delai`, fta_processus WHERE `id_fta` ="
-                    . $this->getModel()->getKeyValue() . " "
-                    . "AND fta_processus_delai.id_fta_processus=fta_processus.id_fta_processus "
-                    . "ORDER BY date_echeance_processus "
+            /**
+             * Informations d'entrées
+             * ----------------------
+             */
+            $foreignKeyValue = $this->getModel()->getKeyValue();
+            $foreignFieldName = FtaProcessusDelaiModel::FIELDNAME_ID_FTA;
+            $tableName = FtaProcessusDelaiModel::TABLENAME;
+            $fieldsNameToDisplay = "id_fta_processus,date_echeance_processus";
+            $rightToAdd = TRUE;
+            $statusValidation = FALSE;
+            /**
+             * Informations à déterminer
+             * -------------------------
+             * Liaison entre les deux tables = fta_processus_delai.id_fta=DatabaseDescription .id_fta
+             */
+            $sqlRelationship = $tableName . "." . $foreignFieldName . " = "
+                    . DatabaseDescription::getFieldDocForeignTable($tableName, $foreignFieldName)
+                    . "."
+                    . DatabaseDescription::getFieldDocForeignKey($tableName, $foreignFieldName)
+            ;
+            /**
+             * 
+             * 
+             */
+            $tableDescription = new DatabaseDescriptionTable($tableName);
+            $keyName = $tableDescription->getKeyName();
+            $paramSelectClause = $keyName . "," . $fieldsNameToDisplay;
+            $paramTableClause = $tableName;
+            $paramWhereClause = $foreignFieldName . " = " . $foreignKeyValue;
+            $paramOrderClause = FtaProcessusDelaiModel::FIELDNAME_DATE_ECHEANCE_PROCESSUS;
+
+            $req = "SELECT " . $paramSelectClause
+                    . " FROM " . $paramTableClause
+                    . " WHERE " . $paramWhereClause
+                    . " ORDER BY " . $paramOrderClause
             ;
 
             $paramTitle = "Echéances des processus";
@@ -193,7 +224,8 @@ class FtaView {
                             DatabaseOperation::query($req)
             );
 
-            $subFormDateEcheance = new HtmlSubForm3Fields($paramArrayContent, $paramSubFormModelClassName, $paramTitle, $paramDivId);
+            $subFormDateEcheance = new HtmlSubForm($paramArrayContent, $paramSubFormModelClassName, $paramTitle, $paramDivId);
+            $subFormDateEcheance->setIsEditable(TRUE);
             $bloc = $subFormDateEcheance->getHtmlResult();
         }
         return $bloc;
@@ -291,22 +323,20 @@ class FtaView {
     function getHtmlPoidsEmballageUVC() {
 
         //Poids Emballage UVC (en g):
-        
+
         $return = $this->getModel()->getArrayEmballageTypeUVC();
-        
+
         $htmlPoidsUVC = new HtmlInputText();
 
         $htmlPoidsUVC->setLabel(DatabaseDescription::getFieldDocLabel(FtaModel::TABLENAME, FtaModel::FIELDNAME_POIDS_EMBALLAGES_UVC));
         $htmlPoidsUVC->getAttributes()->getValue()->setValue($return[FtaModel::UVC_EMBALLAGE]);
         $htmlPoidsUVC->setIsEditable(FALSE);
         return $htmlPoidsUVC->getHtmlResult();
-    
-        
     }
 
     function getHtmlPoidsNetEmballageUVC() {
         //Calcul du Poid Net Emballage (g)        
-        $req = "SELECT * FROM ". FtaModel::TABLENAME;
+        $req = "SELECT * FROM " . FtaModel::TABLENAME;
         $result = DatabaseOperation::query($req);
 
         //Remplacer par getHtmlValueToGramme($value)
@@ -322,7 +352,7 @@ class FtaView {
         return $htmlPoidsNetUVC->getHtmlResult();
     }
 
-   function getHtmlPoidsBrutEmballageUVC() {
+    function getHtmlPoidsBrutEmballageUVC() {
         //Calcul du Poid Net Emballage (g)        
         $req = "SELECT * FROM fta";
         $result = DatabaseOperation::query($req);
@@ -375,12 +405,10 @@ class FtaView {
 
         return $htmlPoidsBrutUVC->getHtmlResult();
     }
-    
-    
 
     function getHtmlDimensionEmballageUVC() {
 
-        $req =  "SELECT  * FROM " . FtaConditionnement::TABLENAME . "," . AnnexeEmballageGroupe::TABLENAME . "," . AnnexeEmballageGroupeType::TABLENAME . " "
+        $req = "SELECT  * FROM " . FtaConditionnement::TABLENAME . "," . AnnexeEmballageGroupe::TABLENAME . "," . AnnexeEmballageGroupeType::TABLENAME . " "
                 . "WHERE " . FtaConditionnement::FIELDNAME_ID_FTA . "="
                 . FtaModel::KEYNAME . " "
                 . "AND " . AnnexeEmballageGroupeType::KEYNAME . "=" . $paramgroupetype . " "
@@ -627,7 +655,7 @@ class FtaView {
             }
         }
 
-    $return[FtaModel::PALETTE_EMBALLAGE] = $return[FtaModel::PALETTE_EMBALLAGE] * ($rows[FtaConditionnement::FIELDNAME_QUANTITE_PAR_COUCHE_FTA_CONDITIONNEMENT] * $rows[FtaConditionnement::FIELDNAME_NOMBRE_COUCHE_FTA_CONDITIONNEMENT]);
+        $return[FtaModel::PALETTE_EMBALLAGE] = $return[FtaModel::PALETTE_EMBALLAGE] * ($rows[FtaConditionnement::FIELDNAME_QUANTITE_PAR_COUCHE_FTA_CONDITIONNEMENT] * $rows[FtaConditionnement::FIELDNAME_NOMBRE_COUCHE_FTA_CONDITIONNEMENT]);
 
 
 

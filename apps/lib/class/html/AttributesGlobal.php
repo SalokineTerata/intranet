@@ -84,7 +84,7 @@ class AttributesGlobal extends StandardGlobalAttributes {
     public function getIconMenuToHtml() {
 
         $return = "<span " . $this->getIdStatusToHtml() . ">" . self::DEFAULT_HTML_IMAGE_OK . "</span>"
-                . "<span " . $this->getIdUndoToHtml() . ">" . self::DEFAULT_HTML_IMAGE_UNDO . "</span>"
+                //. "<span " . $this->getIdUndoToHtml() . ">" . self::DEFAULT_HTML_IMAGE_UNDO . "</span>"
         ;
 
         return $return;

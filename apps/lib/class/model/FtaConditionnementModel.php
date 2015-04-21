@@ -33,6 +33,7 @@ class FtaConditionnementModel extends AbstractModel {
     const UVC_EMBALLAGE_DIMENSION_HAUTEUR = "dimension_uvc_hauteur";
     const UVC_EMBALLAGE_DIMENSION_LONGEUR = "dimension_uvc_longueur";
     const UVC_EMBALLAGE_DIMENSION_LARGEUR = "dimension_uvc_largeur";
+    const UVC_EMBALLAGE_DIMENSION_LABEL = "Dimension de l'UVC (en mm):";
     const COLIS_EMBALLAGE = "colis_emballage";
     const COLIS_EMBALLAGE_NET = "colis_net";
     const COLIS_EMBALLAGE_BRUT = "colis_brut";
@@ -44,6 +45,7 @@ class FtaConditionnementModel extends AbstractModel {
     const PALETTE_NOMBRE_DE_COUCHE = "couche_palette";
     const PALETTE_NOMBRE_COLIS_PAR_COUCHE = "colis_couche";
     const PALETTE_NOMBRE_TOTAL_PAR_CARTON = "total_colis";
+    const PALETTE_NOMBRE_TOTAL_PAR_CARTON_LABEL = "Nombre total de Carton par palette";
 
     /**
      * FTA associée
@@ -72,7 +74,6 @@ class FtaConditionnementModel extends AbstractModel {
         $this->modelFta = $modelFta;
     }
 
-
     //Calcul du poids de l'emballage  par UVC
     static function getCalculPoidsEmballage($paramPoidsEmballageUnitaire, $paramQuantiteCouche, $paramNombreCouche) {
         return $paramPoidsEmballageUnitaire * $paramQuantiteCouche * $paramNombreCouche;
@@ -90,13 +91,13 @@ class FtaConditionnementModel extends AbstractModel {
         if ($paramDimensionEmballageLargeur < $paramDimensionEmballageLargeurRow) {
             $paramDimensionEmballageLargeur = $paramDimensionEmballageLargeurRow;
         }
-        return $paramDimensionEmballageLongueur . "x" . $paramDimensionEmballageLongueur . "x" . $paramDimensionEmballageLargeur;
+        return $paramDimensionEmballageLongueur . "x" . $paramDimensionEmballageLargeur . "x" . $paramDimensionEmballageHauteur . "Longueur x Largeur x Hauteur";
     }
 
     static function getCalculHauteurEmballagePalette($paramHauteurFtaConditionnement, $paramCouchePalette) {
         return (($paramHauteurFtaConditionnement * $paramCouchePalette) + $paramHauteurFtaConditionnement ) / 1000;
     }
-    
+
     static function getCalculPoidsBrutEmballage($paramPoidsNet, $paramPoidsEmballage) {
         return $paramPoidsNet + $paramPoidsEmballage;
     }
@@ -105,11 +106,11 @@ class FtaConditionnementModel extends AbstractModel {
         return $paramPoidsNet + ($paramPoidsEmballage / 1000);
     }
 
-    static function getCalculPoidsEmballagePalette ($paramPoidsFta, $paramNombreColisCouche, $paramNombreCouchePalette, $paramQuantiteCouche, $paramNombreCouche) {
-        return ($paramPoidsFta / 1000) * $paramNombreColisCouche * $paramNombreCouchePalette *($paramQuantiteCouche * $paramNombreCouche);
+    static function getCalculPoidsEmballagePalette($paramPoidsFta, $paramNombreColisCouche, $paramNombreCouchePalette, $paramQuantiteCouche, $paramNombreCouche) {
+        return ($paramPoidsFta / 1000) * $paramNombreColisCouche * $paramNombreCouchePalette * ($paramQuantiteCouche * $paramNombreCouche);
     }
 
-    static function getCalculGenericMultiplication ($param, $paramb) {
+    static function getCalculGenericMultiplication($param, $paramb) {
         return $param * $paramb;
     }
 

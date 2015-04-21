@@ -50,7 +50,7 @@ class FtaComposantModel extends AbstractModel {
     }
 
        //Calcul du poids de l'emballage  par UVC
-    static function getCalculPoidsNetEmballageParColis($paramPoidsEmballageUnitaire, $paramQuantiteCouche, $paramNombreCouche) {
+    static function getCalculPoidsNetEmballageDuColis($paramPoidsEmballageUnitaire, $paramQuantiteCouche, $paramNombreCouche) {
         return $paramPoidsEmballageUnitaire * $paramQuantiteCouche * $paramNombreCouche;
     }
 

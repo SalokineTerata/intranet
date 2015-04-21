@@ -1323,11 +1323,11 @@ class Chapitre {
 
         //Dimension de l'UVC (en mm):
 
-    /*    $bloc.=$ftaView->getHtmlDimensionEmballageUVC();
+        $bloc.=$ftaView->getHtmlDimensionEmballageUVC();
 
         $bloc.="<tr class=titre_principal> <td>Informations Générales du Colis</td></tr>";
 
-        //Nombre d'UVC par colis:
+        //Nombre d'UVC du colis:
 
         $bloc.=$ftaView->getHtmlNombreColisUVC();
 
@@ -1379,7 +1379,7 @@ class Chapitre {
 
         $bloc.=$ftaView->getHtmlColisTotalUVC();
 
-*/
+
         return $bloc;
     }
 

@@ -367,22 +367,22 @@ class FtaModel extends AbstractModel {
 
     public function getArrayEmballageTypeUVC() {
 
-        $this->getArrayEmballages(FtaConditionnementModel::EMBALLAGES_UVC);
+        return $this->getArrayEmballages(FtaConditionnementModel::EMBALLAGES_UVC);
     }
 
     public function getArrayEmballageTypeParColis() {
 
-        $this->getArrayEmballages(FtaConditionnementModel::EMBALLAGES_PAR_COLIS);
+        return $this->getArrayEmballages(FtaConditionnementModel::EMBALLAGES_PAR_COLIS);
     }
 
     public function getArrayEmballageTypeDuColis() {
 
-        $this->getArrayEmballages(FtaConditionnementModel::EMBALLAGES_DU_COLIS);
+        return $this->getArrayEmballages(FtaConditionnementModel::EMBALLAGES_DU_COLIS);
     }
 
     public function getArrayEmballageTypePalette() {
 
-        $this->getArrayEmballages(FtaConditionnementModel::EMBALLAGES_PALETTE);
+        return $this->getArrayEmballages(FtaConditionnementModel::EMBALLAGES_PALETTE);
     }
 
     public function getArrayEmballages($paramGroupeType) {
@@ -390,11 +390,14 @@ class FtaModel extends AbstractModel {
         //Les calculs pour Emballages
         //$array = DatabaseOperation::convertSqlResultKeyAndOneFieldToArray(
         $array = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
-                        "SELECT  * FROM " . FtaConditionnementModel::TABLENAME . "," . AnnexeEmballageGroupeModel::TABLENAME . "," . AnnexeEmballageGroupeTypeModel::TABLENAME . " "
-                        . "WHERE " . FtaConditionnementModel::FIELDNAME_ID_FTA . "=" . $this->getKeyValue() . " "
-                        . "AND " . AnnexeEmballageGroupeTypeModel::TABLENAME . "." . AnnexeEmballageGroupeTypeModel::KEYNAME . "=" . $paramGroupeType . " "
-                        . "AND " . FtaConditionnementModel::TABLENAME . "." . FtaConditionnementModel::FIELDNAME_ID_ANNEXE_EMBALLAGE_GROUPE_TYPE . "=" . AnnexeEmballageGroupeModel::TABLENAME . "." . AnnexeEmballageGroupeModel::KEYNAME . " "
-                        . "AND ( "
+                        "SELECT " . FtaConditionnementModel::FIELDNAME_POIDS_FTA_CONDITIONNEMENT . ", " . FtaConditionnementModel::FIELDNAME_QUANTITE_PAR_COUCHE_FTA_CONDITIONNEMENT
+                        . ", " . FtaConditionnementModel::FIELDNAME_NOMBRE_COUCHE_FTA_CONDITIONNEMENT . ", " . FtaConditionnementModel::FIELDNAME_HAUTEUR_FTA_CONDITIONNEMENT
+                        . ", " . FtaConditionnementModel::FIELDNAME_LONGUEUR_FTA_CONDITIONNEMENT . ", " . FtaConditionnementModel::FIELDNAME_LARGEUR_FTA_CONDITIONNEMENT
+                        . "  FROM " . FtaConditionnementModel::TABLENAME . ", " . AnnexeEmballageGroupeModel::TABLENAME . ", " . AnnexeEmballageGroupeTypeModel::TABLENAME . " "
+                        . " WHERE " . FtaConditionnementModel::TABLENAME . "." . FtaConditionnementModel::FIELDNAME_ID_FTA . "=" . $this->getKeyValue() . " "
+                        . " AND " . AnnexeEmballageGroupeTypeModel::TABLENAME . "." . AnnexeEmballageGroupeTypeModel::KEYNAME . "=" . $paramGroupeType . " "
+                        . " AND " . FtaConditionnementModel::TABLENAME . "." . FtaConditionnementModel::FIELDNAME_ID_ANNEXE_EMBALLAGE_GROUPE_TYPE . "=" . AnnexeEmballageGroupeModel::TABLENAME . "." . AnnexeEmballageGroupeModel::KEYNAME . " "
+                        . " AND ( "
                         . "( " . FtaConditionnementModel::TABLENAME . "." . FtaConditionnementModel::FIELDNAME_ID_ANNEXE_EMBALLAGE_GROUPE_TYPE . " IS NOT NULL AND " . FtaConditionnementModel::TABLENAME . "." . FtaConditionnementModel::FIELDNAME_ID_ANNEXE_EMBALLAGE_GROUPE_TYPE . "=" . AnnexeEmballageGroupeTypeModel::TABLENAME . "." . AnnexeEmballageGroupeTypeModel::KEYNAME . ")"
                         . " OR "
                         . "( " . FtaConditionnementModel::TABLENAME . "." . FtaConditionnementModel::FIELDNAME_ID_ANNEXE_EMBALLAGE_GROUPE_TYPE . " IS NULL AND " . AnnexeEmballageGroupeModel::TABLENAME . "." . AnnexeEmballageGroupeModel::FIELDNAME_ID_ANNEXE_EMBALLAGE_GROUPE_CONFIGURATION . "=" . AnnexeEmballageGroupeTypeModel::TABLENAME . "." . AnnexeEmballageGroupeTypeModel::KEYNAME . ")"
@@ -402,30 +405,46 @@ class FtaModel extends AbstractModel {
                         . " ORDER BY " . AnnexeEmballageGroupeTypeModel::FIELDNAME_NOM_ANNEXE_EMBALLAGE_GROUPE_TYPE
         );
 
-        // Dileme je ne peux pas faire appelle à des chammps vide donc soit je stock le résultat dans une variable static,
-        // soit je crée les nouveau champ dans la BDD  
-        // Calcul du poids de l'emballage  par UVC      
-
         foreach ($array as $rows) {
 
-
+            // Calcul du poids de l'emballage  par UVC  
             $return[FtaConditionnementModel::UVC_EMBALLAGE] = FtaConditionnementModel::getCalculPoidsEmballage(
                             $rows[FtaConditionnementModel::FIELDNAME_POIDS_FTA_CONDITIONNEMENT]
                             , $rows[FtaConditionnementModel::FIELDNAME_QUANTITE_PAR_COUCHE_FTA_CONDITIONNEMENT]
                             , $rows[FtaConditionnementModel::FIELDNAME_NOMBRE_COUCHE_FTA_CONDITIONNEMENT]
             );
 
-
-
             //Calcul des dimensions de l'emballage par UVC 
             $return[FtaConditionnementModel::UVC_EMBALLAGE_DIMENSION] = FtaConditionnementModel::getCalculDimensionEmballageUvc(
-                            $return[FtaConditionnementModel::UVC_EMBALLAGE_DIMENSION_HAUTEUR]
-                            , $rows[FtaConditionnementModel::UVC_EMBALLAGE_DIMENSION_HAUTEUR]
-                            , $return[FtaConditionnementModel::UVC_EMBALLAGE_DIMENSION_LONGEUR]
-                            , $rows[FtaConditionnementModel::UVC_EMBALLAGE_DIMENSION_LONGEUR]
-                            , $return[FtaConditionnementModel::UVC_EMBALLAGE_DIMENSION_LARGEUR]
-                            , $rows[FtaConditionnementModel::UVC_EMBALLAGE_DIMENSION_LARGEUR]
+                            $return[FtaConditionnementModel::UVC_EMBALLAGE_DIMENSION_HAUTEUR] = 0
+                            , $rows[FtaConditionnementModel::FIELDNAME_HAUTEUR_FTA_CONDITIONNEMENT]
+                            , $return[FtaConditionnementModel::UVC_EMBALLAGE_DIMENSION_LONGEUR] = 0
+                            , $rows[FtaConditionnementModel::FIELDNAME_LONGUEUR_FTA_CONDITIONNEMENT]
+                            , $return[FtaConditionnementModel::UVC_EMBALLAGE_DIMENSION_LARGEUR] = 0
+                            , $rows[FtaConditionnementModel::FIELDNAME_LARGEUR_FTA_CONDITIONNEMENT]
             );
+
+            //Les Calculs de la table fta
+            $arrayFta = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
+                            "SELECT DISTINCT " . FtaModel::FIELDNAME_PCB . "," . FtaModel::FIELDNAME_POIDS_ELEMENTAIRE
+                            . " FROM " . FtaModel::TABLENAME . " "
+                            . " WHERE " . FtaModel::KEYNAME . "=" . $this->getKeyValue()
+            );
+
+            foreach ($arrayFta as $rowsFta) {
+
+                //Calcul du Poids net par UVC
+                $return[FtaConditionnementModel::UVC_EMBALLAGE_NET] = $rowsFta[FtaModel::FIELDNAME_POIDS_ELEMENTAIRE];
+
+                //Calcul du PCB du colis
+                $return[FtaModel::FIELDNAME_PCB] = $rowsFta[FtaModel::FIELDNAME_PCB];
+            }
+            //Calcul du poids brut par UVC en g
+            $return[FtaConditionnementModel::UVC_EMBALLAGE_BRUT] = FtaConditionnementModel::getCalculPoidsBrutEmballage(
+                            $return[FtaConditionnementModel::UVC_EMBALLAGE_NET]
+                            , $return[FtaConditionnementModel::UVC_EMBALLAGE]
+            );
+
 
 
             //Calcul du poids de Emballages du Colis
@@ -435,14 +454,51 @@ class FtaModel extends AbstractModel {
                             , $rows[FtaConditionnementModel::FIELDNAME_NOMBRE_COUCHE_FTA_CONDITIONNEMENT]
             );
 
-            //Calcul de la hauteur par palette
-            $return[FtaConditionnementModel::PALETTE_EMBALLAGE_HAUTEUR] = FtaConditionnementModel::getCalculHauteurEmballagePalette(
-                            $rows[FtaConditionnementModel::FIELDNAME_HAUTEUR_FTA_CONDITIONNEMENT]
-                            , $return[FtaConditionnementModel::PALETTE_NOMBRE_DE_COUCHE]
+            //Calcul du poids de Emballages du Colis
+            $return[FtaConditionnementModel::COLIS_EMBALLAGE] = $return[FtaConditionnementModel::COLIS_EMBALLAGE] * $return[FtaModel::FIELDNAME_PCB];
+
+
+
+            //Les Calculs de la table composant        
+            $arrayComposant = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
+                            "SELECT " . FtaComposantModel::FIELDNAME_QUANTITE_FTA_COMPOSITION . "," . FtaComposantModel::FIELDNAME_IS_COMPOSITION_FTA_COMPOSANT . "," . FtaComposantModel::FIELDNAME_POIDS_UNITAIRE_CODIFICATION . " FROM " . FtaComposantModel::TABLENAME
+                            . " WHERE " . FtaComposantModel::FIELDNAME_ID_FTA . "=" . $this->getKeyValue()
+                            . " AND " . FtaComposantModel::FIELDNAME_IS_COMPOSITION_FTA_COMPOSANT . "=" . FtaConditionnementModel::EMBALLAGES_UVC
             );
+
+            foreach ($arrayComposant as $rowsComposant) {
+
+                // Calcul du Poids net du colis
+                $return[FtaConditionnementModel::COLIS_EMBALLAGE_NET] = FtaConditionnementModel::getCalculGenericMultiplication(
+                                $rowsComposant[FtaComposantModel::FIELDNAME_QUANTITE_FTA_COMPOSITION]
+                                , $rowsComposant[FtaComposantModel::FIELDNAME_POIDS_UNITAIRE_CODIFICATION]
+                );
+            }
+
+
+
+            // Calcul du Poids net du colis
+            $return[FtaConditionnementModel::COLIS_EMBALLAGE_NET] = $return[FtaConditionnementModel::COLIS_EMBALLAGE_NET] / 1000; //Conversion en g --> Kg
+            if (!$return[FtaConditionnementModel::COLIS_EMBALLAGE_NET]) {
+                $return[FtaConditionnementModel::COLIS_EMBALLAGE_NET] = FtaConditionnementModel::getCalculGenericMultiplication(
+                                $rowsFta[FtaModel::FIELDNAME_POIDS_ELEMENTAIRE]
+                                , $rowsFta[FtaModel::FIELDNAME_PCB]
+                );
+            }
+
+            //Calcul du poids brut du Colis en Kg
+            $return[FtaConditionnementModel::COLIS_EMBALLAGE_BRUT] = FtaConditionnementModel::getCalculPoidsBrutEmballageColis(
+                            $return[FtaConditionnementModel::COLIS_EMBALLAGE_NET]
+                            , $return[FtaConditionnementModel::COLIS_EMBALLAGE]
+            );
+
+            //Hauteur du colis
+            $return[FtaConditionnementModel::COLIS_EMBALLAGE_HAUTEUR] = $rows[FtaConditionnementModel::FIELDNAME_HAUTEUR_FTA_CONDITIONNEMENT];
+
 
             //Calcul du nombre de colis par couche
             $return[FtaConditionnementModel::PALETTE_NOMBRE_COLIS_PAR_COUCHE] = $rows[FtaConditionnementModel::FIELDNAME_QUANTITE_PAR_COUCHE_FTA_CONDITIONNEMENT];
+
 
             //Calcul du nombre de couche par palette
             $return[FtaConditionnementModel::PALETTE_NOMBRE_DE_COUCHE] = $rows[FtaConditionnementModel::FIELDNAME_NOMBRE_COUCHE_FTA_CONDITIONNEMENT];
@@ -458,22 +514,12 @@ class FtaModel extends AbstractModel {
             );
 
 
-            //Calcul du poids brut par UVC en g
-            $return[FtaConditionnementModel::UVC_EMBALLAGE_BRUT] = FtaConditionnementModel::getCalculPoidsBrutEmballage(
-                            $return[FtaConditionnementModel::UVC_EMBALLAGE_NET]
-                            , $return[FtaConditionnementModel::UVC_EMBALLAGE]
-            );
-
-
-            //Calcul du poids de Emballages du Colis
-            $return[FtaConditionnementModel::COLIS_EMBALLAGE] = $return[FtaConditionnementModel::COLIS_EMBALLAGE] * $return[FtaModel::FIELDNAME_PCB];
-
-            //Calcul du poids brut du Colis en Kg
-            $return[FtaConditionnementModel::COLIS_EMBALLAGE_BRUT] = FtaConditionnementModel::getCalculPoidsBrutEmballageColis(
-                            $return[FtaConditionnementModel::PALETTE_EMBALLAGE_NET]
-                            , $return[FtaConditionnementModel::PALETTE_EMBALLAGE]
-            );
-
+            //Calcul du Poids net par Palette
+            $return[FtaConditionnementModel::PALETTE_EMBALLAGE_NET] = FtaConditionnementModel::getCalculPoidsEmballage(
+                            $return[FtaConditionnementModel::COLIS_EMBALLAGE_NET]
+                            , $rows[FtaConditionnementModel::FIELDNAME_QUANTITE_PAR_COUCHE_FTA_CONDITIONNEMENT]
+                            , $rows[FtaConditionnementModel::FIELDNAME_NOMBRE_COUCHE_FTA_CONDITIONNEMENT])
+            ;
 
             //Calcul Poids Brut  d'une Palette en Kg
             $return[FtaConditionnementModel::PALETTE_EMBALLAGE_BRUT] = FtaConditionnementModel::getCalculPoidsBrutEmballage(
@@ -481,75 +527,22 @@ class FtaModel extends AbstractModel {
                             , $return[FtaConditionnementModel::PALETTE_EMBALLAGE]
             );
 
+            //Calcul de la hauteur par palette
+            $return[FtaConditionnementModel::PALETTE_EMBALLAGE_HAUTEUR] = FtaConditionnementModel::getCalculHauteurEmballagePalette(
+                            $rows[FtaConditionnementModel::FIELDNAME_HAUTEUR_FTA_CONDITIONNEMENT]
+                            , $return[FtaConditionnementModel::PALETTE_NOMBRE_DE_COUCHE]
+            );
+
+
+
             //Calcul du nombre total de Carton par palette:
             $return[FtaConditionnementModel::PALETTE_NOMBRE_TOTAL_PAR_CARTON] = FtaConditionnementModel::getCalculGenericMultiplication(
                             $return[FtaConditionnementModel::PALETTE_NOMBRE_COLIS_PAR_COUCHE]
                             , $return[FtaConditionnementModel::PALETTE_NOMBRE_DE_COUCHE]
             );
         }
-    }
 
-    public function getArrayFta() {
-
-
-        //Les Calculs de la table fta
-        $array = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
-                        "SELECT " . FtaModel::FIELDNAME_PCB . "," . FtaModel::FIELDNAME_POIDS_ELEMENTAIRE . " FROM " . FtaModel::TABLENAME
-        );
-
-
-        //Calcul du Poids net par UVC
-        $return[FtaConditionnementModel::UVC_EMBALLAGE_NET] = $array[FtaConditionnementModel::UVC_EMBALLAGE_NET];
-
-        //Calcul du PCB
-        $return[FtaModel::FIELDNAME_PCB] = $array[FtaModel::FIELDNAME_PCB];
-    }
-
-    public function getArrayConditionnement() {
-
-        //Les calculs pour la table conditionnment
-        $array = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray("SELECT " . FtaConditionnementModel::FIELDNAME_HAUTEUR_FTA_CONDITIONNEMENT . " FROM " . FtaConditionnementModel::TABLENAME
-                        . " WHERE " . FtaConditionnementModel::FIELDNAME_ID_FTA . "=" . $this->getKeyValue()
-        );
-
-        $return[FtaConditionnementModel::COLIS_EMBALLAGE_HAUTEUR] = $array[FtaConditionnementModel::FIELDNAME_HAUTEUR_FTA_CONDITIONNEMENT];
-    }
-
-    public function getArrayComposant() {
-
-        //Les Calculs de la table composant        
-        $array = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
-                        "SELECT " . FtaComposantModel::FIELDNAME_QUANTITE_FTA_COMPOSITION . "," . FtaComposantModel::FIELDNAME_IS_COMPOSITION_FTA_COMPOSANT . "," . FtaComposantModel::FIELDNAME_POIDS_UNITAIRE_CODIFICATION . " FROM " . FtaComposantModel::TABLENAME
-                        . "WHERE " . FtaComposantModel::FIELDNAME_ID_FTA . "=" . $this->getKeyValue()
-                        . " AND " . FtaComposantModel::FIELDNAME_IS_COMPOSITION_FTA_COMPOSANT . "=" . FtaConditionnementModel::EMBALLAGES_UVC
-        );
-
-
-        //Calcul du Poids net par Palette
-        $return[FtaConditionnementModel::PALETTE_EMBALLAGE_NET] = FtaConditionnementModel::getCalculPoidsEmballage(
-                        $return[FtaConditionnementModel::COLIS_EMBALLAGE_NET]
-                        , $array[FtaConditionnementModel::FIELDNAME_QUANTITE_PAR_COUCHE_FTA_CONDITIONNEMENT]
-                        , $array[FtaConditionnementModel::FIELDNAME_NOMBRE_COUCHE_FTA_CONDITIONNEMENT])
-        ;
-
-        // Calcul du Poids net du colis
-        $return[FtaConditionnementModel::COLIS_EMBALLAGE_NET] = FtaConditionnementModel::getCalculGenericMultiplication(
-                        $array[FtaComposantModel::FIELDNAME_QUANTITE_FTA_COMPOSITION]
-                        , $array[FtaComposantModel::FIELDNAME_POIDS_UNITAIRE_CODIFICATION]
-        );
-
-        // Calcul du Poids net du colis
-        $return[FtaConditionnementModel::COLIS_EMBALLAGE_NET] = $return[FtaConditionnementModel::COLIS_EMBALLAGE_NET] / 1000; //Conversion en g --> Kg
-        if (!$return[FtaConditionnementModel::COLIS_EMBALLAGE_NET]) {
-            $return = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
-                            "SELECT " . FtaComposantModel::FIELDNAME_QUANTITE_FTA_COMPOSITION . "," . FtaComposantModel::FIELDNAME_IS_COMPOSITION_FTA_COMPOSANT . "," . FtaComposantModel::FIELDNAME_POIDS_UNITAIRE_CODIFICATION
-                            . " FROM " . FtaComposantModel::TABLENAME
-                            . "WHERE " . FtaComposantModel::FIELDNAME_ID_FTA . "=" . $this->getKeyValue()
-                            . " AND " . FtaComposantModel::FIELDNAME_IS_COMPOSITION_FTA_COMPOSANT . "=" . FtaConditionnementModel::EMBALLAGES_UVC
-            );
-            $return[FtaConditionnementModel::COLIS_EMBALLAGE_NET] = FtaConditionnementModel::getCalculGenericMultiplication($array[FtaConditionnementModel::FIELDNAME_POIDS_ELEMENTAIRE], $array[FtaModel::FIELDNAME_PCB]
-            );
-        }
+        return $return;
     }
 
 }

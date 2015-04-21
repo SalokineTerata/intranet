@@ -262,7 +262,6 @@ class FtaView {
     public function getHtmlCommentaireChapitre() {
         $return = NULL;
 
-
         $idFtaSuiviProjet = FtaSuiviProjetModel::getIdFtaSuiviProjetByIdFtaAndIdChapitre(
                         $this->ftaModel->getDataField(FtaModel::KEYNAME)->getFieldValue()
                         , 1
@@ -313,7 +312,7 @@ class FtaView {
     function getHtmlCNUDPreparerPar() {
 
         return Html::convertDataFieldToHtml(
-                        $this->getModel()->getModelSiteExpediton()->getDataField(GeoModel::FIELDNAME_GEO_CNUD_PREPARER_PAR)
+                        $this->getModel()->getModelSiteExpedition()->getDataField(GeoModel::FIELDNAME_GEO_CNUD_PREPARER_PAR)
                         , false
         );
     }
@@ -321,12 +320,12 @@ class FtaView {
     function getHtmlSiteAgrement() {
 
         return Html::convertDataFieldToHtml(
-                        $this->getModel()->getModelSiteExpediton()->getDataField(GeoModel::FIELDNAME_SITE_AGREMENT_CE)
+                        $this->getModel()->getModelSiteExpedition()->getDataField(GeoModel::FIELDNAME_SITE_AGREMENT_CE)
                         , false
         );
     }
 
-    /**
+     /**
      * 
      * @return FtaConditionnementModel
      */
@@ -410,7 +409,6 @@ class FtaView {
 
         $return = $this->getModel()->getArrayEmballageTypeDuColis();
 
-
         $htmlPoidColisUVC = new HtmlInputText();
 
         $htmlPoidColisUVC->setLabel(DatabaseDescription::getFieldDocLabel(FtaModel::TABLENAME, FtaModel::FIELDNAME_POIDS_EMBALLAGES_UVC));
@@ -435,9 +433,7 @@ class FtaView {
 
     function getHtmlPoidsBrutColisUVC() {
 
-
         $return = $this->getModel()->getArrayEmballageTypeDuColis();
-
 
         $htmlPoidsBrutColisUVC = new HtmlInputText();
 
@@ -449,7 +445,6 @@ class FtaView {
     }
 
     function getHtmlHauteurColisUVC() {
-
 
         $return = $this->getModel()->getArrayEmballageTypeDuColis();
 

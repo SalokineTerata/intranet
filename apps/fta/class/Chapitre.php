@@ -36,6 +36,7 @@ class Chapitre {
     protected static $html_chapitre_conditionnement_piece_entiere;
     protected static $html_chapitre_core;
     protected static $html_chapitre_decoupe;
+    protected static $html_dictionnaire_de_donnees;
     protected static $html_chapitre_emballage;
     protected static $html_chapitre_etiquette;
     protected static $html_chapitre_expedition;
@@ -221,6 +222,10 @@ class Chapitre {
             case "palettisation":
                 self::$html_chapitre_palettisation = self::buildChapitrePalettisation();
                 $return = self::$html_chapitre_palettisation;
+                break;
+            case "dictionnaire_de_donnees":
+                self::$html_dictionnaire_de_donnees = self::buildChapitreDictionnaireDeDonnees();
+                $return = self::$html_dictionnaire_de_donnees;
                 break;
             default:
         }
@@ -620,6 +625,179 @@ class Chapitre {
         return $bloc;
     }
 
+    public function buildChapitreDictionnaireDeDonnees() {
+
+        $bloc = "";
+        $id_fta = self::$id_fta;
+        $synthese_action = self::$synthese_action;
+        $isEditable = self::$is_editable;
+        //$isEditable = TRUE;
+
+        $bloc.="<tr class=titre_principal><td class>Logistique</td></tr>";
+
+        //Identifiant FTA
+        $ftaModel = new FtaModel($id_fta);
+        $ftaView = new FtaView($ftaModel);
+        $ftaView->setIsEditable($isEditable);
+        $ftaView->setFtaChapitreModelById(self::ID_CHAPITRE_IDENTITE);
+
+        //Site d'assemblage
+        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_SITE_ASSEMBLAGE);
+
+        //Site d'expedition
+        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_SITE_EXPEDITION_FTA);
+
+        //Code Douane 
+        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_CODE_DOUANE_FTA);
+
+        $bloc.="<tr class=titre_principal><td class>Palettisasion</td></tr>";
+
+        $bloc.="<tr class=titre_principal><td class>Informations Générales de l'UVC</td></tr>";
+
+        $bloc.=$ftaView->getHtmlPoidsEmballageUVC();
+
+        //Poids Net UVC (en g):
+        $bloc.=$ftaView->getHtmlPoidsNetEmballageUVC();
+
+        //Poids Brut UVC (en g):
+
+        $bloc.=$ftaView->getHtmlPoidsBrutEmballageUVC();
+
+        //Dimension de l'UVC (en mm):
+
+        $bloc.=$ftaView->getHtmlDimensionEmballageUVC();
+
+        $bloc.="<tr class=titre_principal> <td>Informations Générales du Colis</td></tr>";
+
+        //Nombre d'UVC du colis:
+
+        $bloc.=$ftaView->getHtmlNombreColisUVC();
+
+
+        //Poids des Emballages du Colis (en g):
+
+        $bloc.=$ftaView->getHtmlPoidsColisUVC();
+
+
+        //Poids Net (en Kg) du Colis:
+
+        $bloc.=$ftaView->getHtmlPoidsNetColisUVC();
+
+
+        //Poids Brut (en Kg) du Colis:
+
+        $bloc.=$ftaView->getHtmlPoidsBrutColisUVC();
+
+        //Hauteur (en mm) du Colis
+
+        $bloc.=$ftaView->getHtmlHauteurColisUVC();
+
+        $bloc.="<tr class=titre_principal> <td>Informations Générales d'une Palette</td></tr>";
+
+        //Poids Net (en Kg) d'une Palette:
+
+        $bloc.=$ftaView->getHtmlPoidsNetPaletteUVC();
+
+        //Poids Brut (en Kg) d'une Palette:
+
+        $bloc.=$ftaView->getHtmlPoidsBrutPaletteUVC();
+
+
+        //Hauteur (en m) d'une Palette:
+
+        $bloc.=$ftaView->getHtmlHauteurPaletteUVC();
+
+
+        //Nombre de couche par palette:
+
+        $bloc.=$ftaView->getHtmlNombrePaletteUVC();
+
+
+        //Nombre de colis par couche:
+
+        $bloc.=$ftaView->getHtmlColisCouchePaletteUVC();
+
+        //Nombre total de Carton par palette:
+
+        $bloc.=$ftaView->getHtmlColisTotalUVC();
+
+        $bloc.="<tr class=titre_principal><td class>Composition</td></tr>";
+
+
+        //Agrément CE
+        $bloc.=$ftaView->getHtmlSiteAgrement();
+
+
+        //Produit Transformé en France
+        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_PRODUIT_TRANSFORME);
+
+        //Environnement de conservation
+        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_ENVIRONNEMENT_CONSERVATION);
+
+
+        //Conditionné sous atmosphère protectrice
+        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_CONDITION_SOUS_ATMOSPHERE);
+
+
+        //Logo éco-emballage
+        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_LOGO_ECO_EMBALLAGE);
+
+        //
+        //Remarque
+        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_REMARQUE);
+
+        //Origine des Matières Premières
+        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_ORIGINE_MATIERE_PREMIERE);
+
+        //Listes des Allergènes
+        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_LISTE_ALLERGENE);
+
+        //Conseil après ouverture
+        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_CONSEIL_APRES_OUVERTURE);
+
+        //Conseil de Réchauffage Validé
+        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_CONSEIL_DE_RECHAUFFAGE);
+
+        //Durée de vie Production (en jours)
+        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_DUREE_DE_VIE_TECHNIQUE_PRODUCTION);
+
+        //Code douane
+        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_CODE_DOUANE_FTA);
+
+        $bloc.="<tr class=titre_principal><td class>Codification Standard Externe</td></tr><tr><td>";
+
+        //Gencod EAN Article
+        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_EAN_COLIS);
+
+        //Gencod EAN Colis
+        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_EAN_COLIS);
+
+        //Gencod EAN Palette
+        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_EAN_PALETTE);
+
+        $bloc.="<tr class=titre_principal><td class>Codification</td></tr>";
+
+        //Unité de Poids d'affichage:
+        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_UNITE_AFFICHAGE);
+
+        //Désignation Abrégée
+        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_NOM_ABREGE);
+
+        //Désignation Interne Agis
+        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_LIBELLE);
+
+        //Désignation Etiquette
+        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_LIBELLE_CLIENT);
+
+        //Code Article LDC
+        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_CODE_ARTICLE_LDC);
+
+        //Site d'expédition
+        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_SITE_EXPEDITION_FTA);
+
+        return $bloc;
+    }
+
     public static function buildChapitreConditionnementPieceEntiere() {
 
         $bloc = "";
@@ -736,20 +914,28 @@ class Chapitre {
 
 
 
-        //Désignation Abrégée
-        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_NOM_ABREGE);
+        //Codification
+        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_SUFFIXE_AGROLOGIC_FTA);
 
-        //Désignation Interne Agis
-        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_LIBELLE);
+        //Code Produit Agrologic
+        //  $bloc.=$ftaView->getHtmlDataField(FtaComposantModel::FIELDNAME_CODE_PRODUIT_AGROLOGIC_FTA_NOMENCLATURE);
 
-        //Désignation Etiquette
-        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_LIBELLE_CLIENT);
+        $bloc.="<tr> <td>Code Produit Agrologic</td><td> not implement(sous table)</td></tr>";
 
-        //Code Article LDC
-        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_CODE_ARTICLE_LDC);
+        //Désignation (Format DIN)
+        //   $bloc.=$ftaView->getHtmlDataField(FtaComposantModel::FIELDNAME_DESIGNATION_CODIFICATION);
 
-        //Site d'expédition
-        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_SITE_EXPEDITION_FTA);
+        $bloc.="<tr> <td>Désignation (Format DIN)</td><td> not implement(sous table)</td></tr>";
+
+        //Site de Production
+        //  $bloc.=$ftaView->getHtmlDataField(FtaComposantModel::FIELDNAME_SITE_PRODUCTION_FTA_CODIFICATION);
+
+        $bloc.="<tr> <td>Site de Production</td><td> not implement(sous table)</td></tr>";
+
+        //Environnement de conservation
+        //  $bloc.=$ftaView->getHtmlDataField(FtaComposantModel::FIELDNAME_ETAT_FTA_CODIFICATION);
+
+        $bloc.="<tr> <td>Environnement de conservation</td><td> not implement(sous table)</td></tr>";
 
         return $bloc;
     }
@@ -1070,8 +1256,6 @@ class Chapitre {
 
         $bloc.="<tr class=titre_principal><td class>Logistique</td></tr>";
 
-
-
         //Identifiant FTA
         $ftaModel = new FtaModel($id_fta);
         $ftaView = new FtaView($ftaModel);
@@ -1166,7 +1350,7 @@ class Chapitre {
         $id_fta = self::$id_fta;
         $synthese_action = self::$synthese_action;
         $isEditable = self::$is_editable;
-        
+
         $bloc.="<tr class=titre_principal><td class>Demandeur</td></tr>";
         //$objectFta = new ObjectFta($id_fta);
         //Identifiant FTA

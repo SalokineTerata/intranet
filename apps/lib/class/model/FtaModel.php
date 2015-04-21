@@ -79,6 +79,7 @@ class FtaModel extends AbstractModel {
     const FIELDNAME_SITE_ASSEMBLAGE = "Site_de_production";
     const FIELDNAME_SITE_EXPEDITION_FTA = "site_expedition_fta";
     const FIELDNAME_SOCIETE_DEMANDEUR = "societe_demandeur_fta";
+    const FIELDNAME_SUFFIXE_AGROLOGIC_FTA = "suffixe_agrologic_fta";
     const FIELDNAME_UNITE_AFFICHAGE = "unite_affichage_fta";
     const FIELDNAME_UNITE_FACTURATION = "id_annexe_unite_facturation";
     const FIELDNAME_VERROUILLAGE_LIBELLE_ETIQUETTE = "verrouillage_libelle_etiquette_fta";
@@ -102,11 +103,6 @@ class FtaModel extends AbstractModel {
      */
     private $modelFtaCategorie;
 
-    /**
-     * Site d'expédition de la FTA
-     * @var GeoModel
-     */
-    private $modelSiteExpedition;
 
     /**
      * Model de donnée d'une FTA
@@ -118,7 +114,7 @@ class FtaModel extends AbstractModel {
      * Site d'expedition de la FTA
      * @var GeoModel
      */
-    private $modelSiteExpediton;
+    private $modelSiteExpedition;
 
     public function __construct($paramId = NULL, $paramIsCreateRecordsetInDatabaseIfKeyDoesntExist = AbstractModel::DEFAULT_IS_CREATE_RECORDSET_IN_DATABASE_IF_KEY_DOESNT_EXIST) {
         parent::__construct($paramId, $paramIsCreateRecordsetInDatabaseIfKeyDoesntExist);
@@ -137,7 +133,7 @@ class FtaModel extends AbstractModel {
                 , DatabaseRecord::VALUE_DONT_CREATE_RECORD_IN_DATABASE_IF_KEY_DOESNT_EXIST)
         );
 
-        $this->setModelSiteExpediton(
+        $this->setModelSiteExpedition(
                 new GeoModel($this->getDataField(self::FIELDNAME_SITE_EXPEDITION_FTA)->getFieldValue()
                 , DatabaseRecord::VALUE_DONT_CREATE_RECORD_IN_DATABASE_IF_KEY_DOESNT_EXIST)
         );
@@ -147,14 +143,6 @@ class FtaModel extends AbstractModel {
      * 
      * @return GeoModel
      */
-    function getModelSiteExpediton() {
-        return $this->modelSiteExpediton;
-    }
-
-    function setModelSiteExpediton(GeoModel $modelSiteExpediton) {
-        $this->modelSiteExpediton = $modelSiteExpediton;
-    }
-
     function getModelSiteExpedition() {
         return $this->modelSiteExpedition;
     }
@@ -364,7 +352,7 @@ class FtaModel extends AbstractModel {
 
         return $arrayDataFieldEcheancesForProcessusCycle;
     }
-
+    
     public function getArrayEmballageTypeUVC() {
 
         return $this->getArrayEmballages(FtaConditionnementModel::EMBALLAGES_UVC);
@@ -388,7 +376,6 @@ class FtaModel extends AbstractModel {
     public function getArrayEmballages($paramGroupeType) {
 
         //Les calculs pour Emballages
-        //$array = DatabaseOperation::convertSqlResultKeyAndOneFieldToArray(
         $array = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
                         "SELECT " . FtaConditionnementModel::FIELDNAME_POIDS_FTA_CONDITIONNEMENT . ", " . FtaConditionnementModel::FIELDNAME_QUANTITE_PAR_COUCHE_FTA_CONDITIONNEMENT
                         . ", " . FtaConditionnementModel::FIELDNAME_NOMBRE_COUCHE_FTA_CONDITIONNEMENT . ", " . FtaConditionnementModel::FIELDNAME_HAUTEUR_FTA_CONDITIONNEMENT
@@ -445,8 +432,6 @@ class FtaModel extends AbstractModel {
                             , $return[FtaConditionnementModel::UVC_EMBALLAGE]
             );
 
-
-
             //Calcul du poids de Emballages du Colis
             $return[FtaConditionnementModel::COLIS_EMBALLAGE] = FtaConditionnementModel::getCalculPoidsEmballage(
                             $rows[FtaConditionnementModel::FIELDNAME_POIDS_FTA_CONDITIONNEMENT]
@@ -456,8 +441,6 @@ class FtaModel extends AbstractModel {
 
             //Calcul du poids de Emballages du Colis
             $return[FtaConditionnementModel::COLIS_EMBALLAGE] = $return[FtaConditionnementModel::COLIS_EMBALLAGE] * $return[FtaModel::FIELDNAME_PCB];
-
-
 
             //Les Calculs de la table composant        
             $arrayComposant = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
@@ -474,8 +457,6 @@ class FtaModel extends AbstractModel {
                                 , $rowsComposant[FtaComposantModel::FIELDNAME_POIDS_UNITAIRE_CODIFICATION]
                 );
             }
-
-
 
             // Calcul du Poids net du colis
             $return[FtaConditionnementModel::COLIS_EMBALLAGE_NET] = $return[FtaConditionnementModel::COLIS_EMBALLAGE_NET] / 1000; //Conversion en g --> Kg
@@ -532,8 +513,6 @@ class FtaModel extends AbstractModel {
                             $rows[FtaConditionnementModel::FIELDNAME_HAUTEUR_FTA_CONDITIONNEMENT]
                             , $return[FtaConditionnementModel::PALETTE_NOMBRE_DE_COUCHE]
             );
-
-
 
             //Calcul du nombre total de Carton par palette:
             $return[FtaConditionnementModel::PALETTE_NOMBRE_TOTAL_PAR_CARTON] = FtaConditionnementModel::getCalculGenericMultiplication(

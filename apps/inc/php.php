@@ -47,6 +47,7 @@ require_once("../lib/class/database/DatabaseRecord.php");
 
 // Modèles des tables en base de données
 require_once("../lib/class/model/AbstractModel.php");
+require_once("../lib/class/model/AnnexeAgrologicArticleCodificationModel.php");
 require_once("../lib/class/model/AnnexeEmballageModel.php");
 require_once("../lib/class/model/AnnexeEmballageGroupeModel.php");
 require_once("../lib/class/model/AnnexeEmballageGroupeTypeModel.php");

@@ -451,7 +451,7 @@ class FtaView {
         $htmlHauteurColisUVC = new HtmlInputText();
 
         $htmlHauteurColisUVC->setLabel(DatabaseDescription::getFieldDocLabel(FtaConditionnementModel::TABLENAME, FtaConditionnementModel::FIELDNAME_HAUTEUR_FTA_CONDITIONNEMENT));
-        $htmlHauteurColisUVC->getAttributes()->getValue()->setValue($return[FtaConditionnementModel::FIELDNAME_HAUTEUR_FTA_CONDITIONNEMENT]);
+        $htmlHauteurColisUVC->getAttributes()->getValue()->setValue($return[FtaConditionnementModel::COLIS_EMBALLAGE_HAUTEUR]);
         $htmlHauteurColisUVC->setIsEditable(FALSE);
 
         return $htmlHauteurColisUVC->getHtmlResult();
@@ -504,7 +504,7 @@ class FtaView {
 
         $htmlCouchePalettisationUVC = new HtmlInputText();
 
-        $htmlCouchePalettisationUVC->setLabel(DatabaseDescription::getFieldDocLabel(FtaConditionnementModel::TABLENAME, FtaConditionnementModel::FIELDNAME_NOMBRE_COUCHE_FTA_CONDITIONNEMENT));
+        $htmlCouchePalettisationUVC->setLabel(FtaConditionnementModel::PALETTE_EMBALLAGE_HAUTEUR_LABEL);
         $htmlCouchePalettisationUVC->getAttributes()->getValue()->setValue($return[FtaConditionnementModel::PALETTE_NOMBRE_DE_COUCHE]);
         $htmlCouchePalettisationUVC->setIsEditable(FALSE);
 

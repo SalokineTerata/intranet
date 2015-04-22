@@ -154,7 +154,7 @@ class Chapitre {
 
     protected static function buildChapitreCore() {
         $return = "";
-        switch (self::$recordChapitre->getFieldValue("nom_fta_chapitre")) {
+        switch (self::$recordChapitre->getFieldValue(FtaChapitreModel::FIELDNAME_NOM_CHAPITRE)) {
             case "identite":
                 self::$html_chapitre_identite = self::buildChapitreIdentite();
                 $return = self::$html_chapitre_identite;
@@ -625,7 +625,7 @@ class Chapitre {
         return $bloc;
     }
 
-    public function buildChapitreDictionnaireDeDonnees() {
+    public static function buildChapitreDictionnaireDeDonnees() {
 
         $bloc = "";
         $id_fta = self::$id_fta;
@@ -792,8 +792,122 @@ class Chapitre {
         //Code Article LDC
         $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_CODE_ARTICLE_LDC);
 
-        //Site d'expédition
-        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_SITE_EXPEDITION_FTA);
+
+        $bloc.="<tr class=titre_principal><td class>Etiquettes</td></tr>";
+
+        $bloc.="<tr class=titre_principal><td class>Gestion des étiquettes</td></tr>";
+
+
+        //Activer le système d'impression Base Etiquette Codesoft
+        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_ACTIVATION_CODESOFT);
+
+        $bloc.="<tr class=titre_principal><td class>Etiquettes Colis</td></tr>";
+
+        //Laisser l'informatique gérer la désignation ?:
+        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_VERROUILLAGE_LIBELLE_ETIQUETTE);
+
+        //Libellé etiquette carton:
+        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_LIBELLE_CLIENT);
+
+        //Modèle d'étiquette
+        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_ETIQUETTE_CODESOFT);
+
+        $bloc.="<tr class=titre_principal><td class>Etiquettes Composition</td></tr>";
+
+        //Composition Etiquette (1er paragraphe)
+        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_COMPOSITION1);
+
+        //Composition Etiquette (2nd paragraphe)
+        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_COMPOSITION2);
+
+        //Libellé Code Douane 
+        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_LIBELLE_MULTILANGUE);
+
+        $bloc.="<tr class=titre_principal><td class>Identité</td></tr>";
+
+        $bloc.="<tr class=titre_principal><td class>Demandeur</td></tr>";
+
+        //Nom du demandeur
+        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_NOM_DEMANDEUR);
+
+        //Société du demandeur
+        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_SOCIETE_DEMANDEUR);
+
+        //Date de la demande
+        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_DATE_DEMANDEUR);
+
+        //Echéance du demandeur
+        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_ECHEANCE_DEMANDEUR);
+
+        $bloc.="<tr class=titre_principal><td class>Classification</td></tr>";
+
+        //Nom du client du demandeur
+        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_NOM_CLIENT_DEMANDEUR);
+
+        //Circuit du client
+        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_CIRCUIT_CLIENT);
+
+        //Réseau du client
+        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_RESEAU_CLIENT);
+
+
+        //Segment du client
+        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_SEGMENT_CLIENT);
+
+        $bloc.="<tr class=titre_principal><td class>Estimations</td></tr>";
+
+
+        //Quantité estimée en poids ou pièce par semaine
+        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_QUANTITE_HEBDOMADAIRE_ESTIMEE_COMMANDE);
+
+        //Fréquence estimée de commande par semaine
+        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_FREQUENCE_HEBDOMADAIRE_ESTIMEE_COMMANDE);
+
+
+        $bloc.="<tr class=titre_principal><td class>Caractéristiques générales du produit</td></tr>";
+
+        //Désignation commerciale
+        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_DESIGNATION_COMMERCIALE);
+
+        //Environnement de conservation
+        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_ENVIRONNEMENT_CONSERVATION_GROUPE);
+
+        //Type d'emballage
+
+        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_ARCADIA_EMBALLAGE_TYPE);
+
+        //Unité de facturation et Poids élémentaire
+        $bloc.=$ftaView->getHtmlUniteFacturationWithPoidsElementaire();
+        
+        
+        
+        /*
+         * todo manque la correction du PCB
+         */
+        
+        $bloc.="<tr class=titre_principal><td class>Caractéristiques FTA</td></tr>";
+
+        //Créateur
+        $bloc.=$ftaView->getHtmlCreateurFta();
+
+        //Catégorie de FTA
+        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_CATEGORIE_FTA);
+
+        //Besoin de la fiche technique ?
+        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_BESOIN_FICHE_TECHNIQUE);
+
+        //Etude de prix ?
+        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_ETUDE_PRIX_FTA);
+
+        //Calibre par défaut
+        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_CALIBRE_DEFAUT);
+
+        $bloc.="<tr class=titre_principal><td class>Echéances</td></tr>";
+
+        //Date d'échéance des processus
+        $bloc.=$ftaView->getHtmlEcheancesProcessus();
+
+
 
         return $bloc;
     }
@@ -936,6 +1050,10 @@ class Chapitre {
         //  $bloc.=$ftaView->getHtmlDataField(FtaComposantModel::FIELDNAME_ETAT_FTA_CODIFICATION);
 
         $bloc.="<tr> <td>Environnement de conservation</td><td> not implement(sous table)</td></tr>";
+
+        //Recap Mail
+
+        $bloc.="<tr> <td>Recap Mail</td><td> not implement(sous table)</td></tr>";
 
         return $bloc;
     }
@@ -1290,16 +1408,15 @@ class Chapitre {
         $isEditable = self::$is_editable;
         $isEditable = TRUE;
 
-        $bloc.="<tr class=titre_principal><td class>Etiquettes</td></tr>";
-
-        $bloc.="<tr class=titre_principal><td class>Gestion des étiquettes</td></tr>";
-
         //Identifiant FTA
         $ftaModel = new FtaModel($id_fta);
         $ftaView = new FtaView($ftaModel);
         $ftaView->setIsEditable($isEditable);
         $ftaView->setFtaChapitreModelById(self::ID_CHAPITRE_IDENTITE);
 
+        $bloc.="<tr class=titre_principal><td class>Etiquettes</td></tr>";
+
+        $bloc.="<tr class=titre_principal><td class>Gestion des étiquettes</td></tr>";
 
 
         //Activer le système d'impression Base Etiquette Codesoft
@@ -1307,6 +1424,7 @@ class Chapitre {
 
         $bloc.="<tr class=titre_principal><td class>Etiquettes Colis</td></tr>";
 
+        //Laisser l'informatique gérer la désignation ?:
         $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_VERROUILLAGE_LIBELLE_ETIQUETTE);
 
         //Libellé etiquette carton:
@@ -1351,7 +1469,7 @@ class Chapitre {
         $synthese_action = self::$synthese_action;
         $isEditable = self::$is_editable;
 
-        $bloc.="<tr class=titre_principal><td class>Demandeur</td></tr>";
+
         //$objectFta = new ObjectFta($id_fta);
         //Identifiant FTA
         $ftaModel = new FtaModel($id_fta);
@@ -1359,6 +1477,7 @@ class Chapitre {
         $ftaView->setIsEditable($isEditable);
         $ftaView->setFtaChapitreModelById(self::ID_CHAPITRE_IDENTITE);
 
+        $bloc.="<tr class=titre_principal><td class>Demandeur</td></tr>";
 
         //Nom du demandeur
         $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_NOM_DEMANDEUR);

@@ -42,6 +42,7 @@ class FtaConditionnementModel extends AbstractModel {
     const PALETTE_EMBALLAGE_NET = "palette_net";
     const PALETTE_EMBALLAGE_BRUT = "palette_brut";
     const PALETTE_EMBALLAGE_HAUTEUR = "hauteur_palette";
+    const PALETTE_EMBALLAGE_HAUTEUR_LABEL = "Hauteur (en m)";
     const PALETTE_NOMBRE_DE_COUCHE = "couche_palette";
     const PALETTE_NOMBRE_COLIS_PAR_COUCHE = "colis_couche";
     const PALETTE_NOMBRE_TOTAL_PAR_CARTON = "total_colis";
@@ -91,7 +92,7 @@ class FtaConditionnementModel extends AbstractModel {
         if ($paramDimensionEmballageLargeur < $paramDimensionEmballageLargeurRow) {
             $paramDimensionEmballageLargeur = $paramDimensionEmballageLargeurRow;
         }
-        return $paramDimensionEmballageLongueur . "x" . $paramDimensionEmballageLargeur . "x" . $paramDimensionEmballageHauteur . "Longueur x Largeur x Hauteur";
+        return $paramDimensionEmballageLongueur . "x" . $paramDimensionEmballageLargeur . "x" . $paramDimensionEmballageHauteur . " (Longueur x Largeur x Hauteur)";
     }
 
     static function getCalculHauteurEmballagePalette($paramHauteurFtaConditionnement, $paramCouchePalette) {

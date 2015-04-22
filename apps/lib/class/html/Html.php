@@ -12,7 +12,6 @@
  */
 class Html {
 
-    
     const DEFAULT_HTML_IMAGE_FAILED = AttributesGlobal::DEFAULT_HTML_IMAGE_FAILED;
     const DEFAULT_HTML_IMAGE_LOADING = AttributesGlobal::DEFAULT_HTML_IMAGE_LOADING;
     const DEFAULT_HTML_IMAGE_OK = AttributesGlobal::DEFAULT_HTML_IMAGE_OK;
@@ -171,18 +170,6 @@ class Html {
             default:
             case Html::TYPE_OF_OBJECT_TEXTAREA:
                 $htmlObject = new DataFieldToHtmlTextArea($paramDataField);
-                break;
-            default:
-            case Html::TYPE_OF_OBJECT_UNITE_AFFICHAGE:
-                $htmlObject = new DataFieldToHtmlListUniteAffichage($paramDataField);
-                break;
-            default:
-            case Html::TYPE_OF_OBJECT_UNITE_FACTURATION:
-                $htmlObject = new DataFieldToHtmlListUniteFacturation($paramDataField);
-                break;
-            default:
-            case Html::TYPE_OF_OBJECT_COLIS_COMPOSITION:
-                $htmlObject = new DataFieldToHtmlListColisComposition($paramDataField);
                 break;
             default:
                 throw new Exception("Type d'objet <b>$TypeOfHtmlObject</b> inconnu." . " Champs concerné:" . $paramDataField->getFieldName() . " ");

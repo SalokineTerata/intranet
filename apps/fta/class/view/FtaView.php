@@ -127,7 +127,7 @@ class FtaView {
 
     public function getHtmlUniteFacturationWithPoidsElementaire() {
 
-//Initialisation des variables locales
+        //Initialisation des variables locales
         $htmlReturn = NULL;
         $htmlObjectUniteFacturation = new DataFieldToHtmlList(
                 $this->getModel()->getDataField(FtaModel::FIELDNAME_UNITE_FACTURATION)
@@ -138,7 +138,7 @@ class FtaView {
 
 
 
-//Unité de facturation
+        //Unité de facturation
         $htmlObjectUniteFacturation->setIsEditable($this->getIsEditable());
         $htmlObjectUniteFacturation->getEventsForm()->setCallbackJavaScriptFunctionOnChange(self::JAVASCRIPT_CALLBACK_POIDS_ELEM);
         $callbackJavaScriptFunctionOnChangeParameters = $htmlObjectUniteFacturation->getAttributesGlobal()->getId()->getValue()
@@ -149,7 +149,7 @@ class FtaView {
 
         $htmlReturn.=$htmlObjectUniteFacturation->getHtmlResult();
 
-//Poids élémentaire
+        //Poids élémentaire
         $htmlObjectPoidsElementaire->setIsEditable($this->getIsEditable());
 
         if ($htmlObjectUniteFacturation->getDataField()->getFieldValue() == FtaModel::ID_POIDS_VARIABLE) {
@@ -175,38 +175,63 @@ class FtaView {
     public function getHtmlEcheancesProcessus() {
         if ($this->getModel()->getDataField(FtaModel::FIELDNAME_DATE_ECHEANCE_FTA)) {
 
+            //Date d'échéance de la FTA
+            $dataField = $this->getModel()->getDataField(FtaModel::FIELDNAME_DATE_ECHEANCE_FTA);
+            $htmlElement = new DataFieldToHtmlInputCalendar($dataField);
+            $htmlElement->setIsEditable($this->getIsEditable());
+
+            $bloc .=$htmlElement->getHtmlResult();
+            $bloc .= self::showDatesEcheanceProcessus();
+
+            $bloc = "";
+
             /**
              * Informations d'entrées
              * ----------------------
              */
-            $paramSubFormModelClassName = "FtaProcessusDelaiModel";
-            $tableNameRN = FtaProcessusDelaiModel::TABLENAME;
-            $tableNameR1 = FtaModel::TABLENAME;
             $foreignKeyValue = $this->getModel()->getKeyValue();
-            $arrayFieldsNameToDisplay = array(FtaProcessusDelaiModel::FIELDNAME_ID_FTA_PROCESSUS
-                , FtaProcessusDelaiModel::FIELDNAME_DATE_ECHEANCE_PROCESSUS);
-            $arrayFieldsNameToLock = array(FtaProcessusDelaiModel::FIELDNAME_ID_FTA_PROCESSUS);
-            $arrayFieldsNameOrder = array(FtaProcessusDelaiModel::FIELDNAME_DATE_ECHEANCE_PROCESSUS);
-
-            $isEditable = $this->getIsEditable();
-            $rightToAdd = FALSE;
+            $foreignFieldName = FtaProcessusDelaiModel::FIELDNAME_ID_FTA;
+            $tableName = FtaProcessusDelaiModel::TABLENAME;
+            $fieldsNameToDisplay = "id_fta_processus,date_echeance_processus";
+            $rightToAdd = TRUE;
             $statusValidation = FALSE;
+            /**
+             * Informations à déterminer
+             * -------------------------
+             * Liaison entre les deux tables = fta_processus_delai.id_fta=DatabaseDescription .id_fta
+             */
+            $sqlRelationship = $tableName . "." . $foreignFieldName . " = "
+                    . DatabaseDescription::getFieldDocForeignTable($tableName, $foreignFieldName)
+                    . "."
+                    . DatabaseDescription::getFieldDocForeignKey($tableName, $foreignFieldName)
+            ;
+            /**
+             * 
+             * 
+             */
+            $tableDescription = new DatabaseDescriptionTable($tableName);
+            $keyName = $tableDescription->getKeyName();
+            $paramSelectClause = $keyName . "," . $fieldsNameToDisplay;
+            $paramTableClause = $tableName;
+            $paramWhereClause = $foreignFieldName . " = " . $foreignKeyValue;
+            $paramOrderClause = FtaProcessusDelaiModel::FIELDNAME_DATE_ECHEANCE_PROCESSUS;
+
+            $req = "SELECT " . $paramSelectClause
+                    . " FROM " . $paramTableClause
+                    . " WHERE " . $paramWhereClause
+                    . " ORDER BY " . $paramOrderClause
+            ;
 
             $paramTitle = "Echéances des processus";
+            $paramDivId = "echeance_processus";
+            $paramSubFormModelClassName = "FtaProcessusDelaiModel";
 
-            $subFormDateEcheance = new DataFieldToHtmlSubform(
-                    $paramSubFormModelClassName
-                    , $paramTitle
-                    , $tableNameRN
-                    , $tableNameR1
-                    , $foreignKeyValue
-                    , $arrayFieldsNameToDisplay
-                    , $arrayFieldsNameToLock
-                    , $arrayFieldsNameOrder
-                    , $isEditable
-                    , $rightToAdd
-                    , $statusValidation
+            $paramArrayContent = DatabaseOperation::convertSqlResultWithKeyAsFirstFieldToArray(
+                            DatabaseOperation::query($req)
             );
+
+            $subFormDateEcheance = new HtmlSubForm($paramArrayContent, $paramSubFormModelClassName, $paramTitle, $paramDivId);
+            $subFormDateEcheance->setIsEditable(TRUE);
             $bloc = $subFormDateEcheance->getHtmlResult();
         }
         return $bloc;
@@ -218,10 +243,10 @@ class FtaView {
         $blocEcheanceLignes = "";
         $modelFtaProcessusDelai = new FtaProcessusDelaiModel();
 
-//Parcours et construction de toutes les échéances
+        //Parcours et construction de toutes les échéances
         foreach ($this->getModel()->getArrayDataFieldEcheancesForProcessusCycle() as $modelFtaProcessusDelai) {
 
-//Construction des objets HTML de date
+            //Construction des objets HTML de date
             $recordsetProcessus = new FtaProcessusModel($modelFtaProcessusDelai->getDataField(FtaProcessusDelaiModel::FIELDNAME_ID_FTA_PROCESSUS)->getFieldValue());
             $labelEcheance = "Echéance pour " . $recordsetProcessus->getDataField(FtaProcessusModel::FIELDNAME_NOM)->getFieldValue() . ": ";
             $dataFieldEcheance = $modelFtaProcessusDelai->getDataField(FtaProcessusDelaiModel::FIELDNAME_DATE_ECHEANCE_PROCESSUS);
@@ -236,7 +261,6 @@ class FtaView {
 
     public function getHtmlCommentaireChapitre() {
         $return = NULL;
-
 
         $idFtaSuiviProjet = FtaSuiviProjetModel::getIdFtaSuiviProjetByIdFtaAndIdChapitre(
                         $this->ftaModel->getDataField(FtaModel::KEYNAME)->getFieldValue()
@@ -288,7 +312,7 @@ class FtaView {
     function getHtmlCNUDPreparerPar() {
 
         return Html::convertDataFieldToHtml(
-                        $this->getModel()->getModelSiteExpediton()->getDataField(GeoModel::FIELDNAME_GEO_CNUD_PREPARER_PAR)
+                        $this->getModel()->getModelSiteExpedition()->getDataField(GeoModel::FIELDNAME_GEO_CNUD_PREPARER_PAR)
                         , false
         );
     }
@@ -296,16 +320,16 @@ class FtaView {
     function getHtmlSiteAgrement() {
 
         return Html::convertDataFieldToHtml(
-                        $this->getModel()->getModelSiteExpediton()->getDataField(GeoModel::FIELDNAME_SITE_AGREMENT_CE)
+                        $this->getModel()->getModelSiteExpedition()->getDataField(GeoModel::FIELDNAME_SITE_AGREMENT_CE)
                         , false
         );
     }
 
-    /**
+     /**
      * 
      * @return FtaConditionnementModel
      */
-//similaire à getModel
+    //similaire à getModel
     public function getFtaConditionnementModel() {
         return $this->ftaConditionnementModel;
     }
@@ -318,7 +342,7 @@ class FtaView {
 
     function getHtmlPoidsEmballageUVC() {
 
-        $return = $this->getModel()->getArrayEmballageTypePalette();
+        $return = $this->getModel()->getArrayEmballageTypeUVC();
 
         $htmlPoidsUVC = new HtmlInputText();
 
@@ -330,12 +354,12 @@ class FtaView {
 
     function getHtmlPoidsNetEmballageUVC() {
 
-        $return = $this->getModel()->getArrayFta();
+        $return = $this->getModel()->getArrayEmballageTypeUVC();
 
         $htmlPoidsNetUVC = new HtmlInputText();
 
-        $htmlPoidsNetUVC->setLabel(DatabaseDescription::getFieldDocLabel("fta", "poids_net_uvc_fta"));
-        $htmlPoidsNetUVC->getAttributes()->getValue()->setValue($return["uvc_net"]);
+        $htmlPoidsNetUVC->setLabel(DatabaseDescription::getFieldDocLabel(FtaModel::TABLENAME, FtaModel::FIELDNAME_POIDS_NET_UVC));
+        $htmlPoidsNetUVC->getAttributes()->getValue()->setValue($return[FtaConditionnementModel::UVC_EMBALLAGE_NET]);
         $htmlPoidsNetUVC->setIsEditable(FALSE);
 
         return $htmlPoidsNetUVC->getHtmlResult();
@@ -343,54 +367,12 @@ class FtaView {
 
     function getHtmlPoidsBrutEmballageUVC() {
 
-        $return .= $this->getModel()->getArrayFta();
-        $return .= $this->getModel()->getArrayEmballageTypeUVC();
+        $return = $this->getModel()->getArrayEmballageTypeUVC();
 
-//Calcul du Poid Net Emballage (g)        
-//        $req = "SELECT * FROM fta";
-//        $result = DatabaseOperation::query($req);
-//
-//        //Remplacer par getHtmlValueToGramme($value)
-//        $return["uvc_net"] = mysql_result($result, 0, "Poids_ELEM") * 1000;
-//        $req = "SELECT  * FROM " . FtaConditionnementModel::TABLENAME . "," . AnnexeEmballageGroupeModel::TABLENAME . "," . AnnexeEmballageGroupeType::TABLENAME . " "
-//                . "WHERE " . FtaConditionnementModel::FIELDNAME_ID_FTA . "="
-//                . FtaModel::KEYNAME . " "
-//                . "AND " . AnnexeEmballageGroupeType::KEYNAME . "=" . $paramgroupetype . " "
-//                . "AND " . FtaConditionnementModel::FIELDNAME_ID_ANNEXE_EMBALLAGE_GROUPE_TYPE . "=" . AnnexeEmballageGroupeModel::KEYNAME . " "
-//                . "AND ( "
-//                . "( " . FtaConditionnementModel::FIELDNAME_ID_ANNEXE_EMBALLAGE_GROUPE_TYPE . " IS NOT NULL AND " . FtaConditionnementModel::FIELDNAME_ID_ANNEXE_EMBALLAGE_GROUPE_TYPE . "=" . AnnexeEmballageGroupeType::KEYNAME . ")"
-//                . " OR "
-//                . "( " . FtaConditionnementModel::FIELDNAME_ID_ANNEXE_EMBALLAGE_GROUPE_TYPE . " IS NULL AND " . AnnexeEmballageGroupeModel::FIELDNAME_ID_ANNEXE_EMBALLAGE_GROUPE_CONFIGURATION . "=" . AnnexeEmballageGroupeType::KEYNAME . ")"
-//                . "    ) "
-//                . " ORDER BY " . AnnexeEmballageGroupeType::FIELDNAME_NOM_ANNEXE_EMBALLAGE_GROUPE_TYPE
-//        ;
-//
-//
-//
-//        $result = DatabaseOperation::query($req);
-//        if (mysql_num_rows($result)) {
-//            while ($rows = mysql_fetch_array($result)) {
-//                //Calcul du poids
-//                $return[FtaModel::UVC_EMBALLAGE] = $rows[FtaConditionnementModel::FIELDNAME_POIDS_FTA_CONDITIONNEMENT] * $rows[FtaConditionnementModel::FIELDNAME_QUANTITE_PAR_COUCHE_FTA_CONDITIONNEMENT] * $rows[FtaConditionnement::FIELDNAME_NOMBRE_COUCHE_FTA_CONDITIONNEMENT];
-//
-//                //Calcul des dimension (on recherche la taille la plus grande
-//                if ($return[FtaModel::UVC_EMBALLAGE_DIMENSION_HAUTEUR] < $rows[FtaConditionnementModel::FIELDNAME_HAUTEUR_FTA_CONDITIONNEMENT]) {
-//                    $return[FtaModel::UVC_EMBALLAGE_DIMENSION_HAUTEUR] = $rows[FtaConditionnementModel::FIELDNAME_HAUTEUR_FTA_CONDITIONNEMENT];
-//                }
-//                if ($return[FtaModel::UVC_EMBALLAGE_DIMENSION_LONGEUR] < $rows[FtaConditionnementModel::FIELDNAME_LONGUEUR_FTA_CONDITIONNEMENT]) {
-//                    $return[FtaModel::UVC_EMBALLAGE_DIMENSION_LONGEUR] = $rows[FtaConditionnementModel::FIELDNAME_LONGUEUR_FTA_CONDITIONNEMENT];
-//                }
-//                if ($return[FtaModel::UVC_EMBALLAGE_DIMENSION_LARGEUR] < $rows[FtaConditionnementModel::FIELDNAME_LARGEUR_FTA_CONDITIONNEMENT]) {
-//                    $return[FtaModel::UVC_EMBALLAGE_DIMENSION_LARGEUR] = $rows[FtaConditionnementModel::FIELDNAME_LARGEUR_FTA_CONDITIONNEMENT];
-//                }
-//            }
-//        }
-//
-//        $return[FtaModel::UVC_EMBALLAGE_BRUT] = $return[FtaModel::UVC_EMBALLAGE_NET] + $return[FtaModel::UVC_EMBALLAGE];
         $htmlPoidsBrutUVC = new HtmlInputText();
 
-        $htmlPoidsBrutUVC->setLabel(DatabaseDescription::getFieldDocLabel("fta", "poids_brut_uvc_fta"));
-        $htmlPoidsBrutUVC->getAttributes()->getValue()->setValue($return["uvc_brut"]);
+        $htmlPoidsBrutUVC->setLabel(DatabaseDescription::getFieldDocLabel(FtaModel::TABLENAME, FtaModel::FIELDNAME_POIDS_BRUT_UVC));
+        $htmlPoidsBrutUVC->getAttributes()->getValue()->setValue($return[FtaConditionnementModel::UVC_EMBALLAGE_BRUT]);
         $htmlPoidsBrutUVC->setIsEditable(FALSE);
 
         return $htmlPoidsBrutUVC->getHtmlResult();
@@ -398,52 +380,12 @@ class FtaView {
 
     function getHtmlDimensionEmballageUVC() {
 
-        $return .= $this->getModel()->getArrayEmballageTypeUVC();
-
-//        $req = "SELECT  * FROM " . FtaConditionnement::TABLENAME . "," . AnnexeEmballageGroupeModel::TABLENAME . "," . AnnexeEmballageGroupeTypeModel::TABLENAME . " "
-//                . "WHERE " . FtaConditionnement::FIELDNAME_ID_FTA . "="
-//                . FtaModel::KEYNAME . " "
-//                . "AND " . AnnexeEmballageGroupeTypeModel::KEYNAME . "=" . $paramgroupetype . " "
-//                . "AND " . FtaConditionnement::FIELDNAME_ID_ANNEXE_EMBALLAGE_GROUPE_TYPE . "=" . AnnexeEmballageGroupeModel::KEYNAME . " "
-//                . "AND ( "
-//                . "( " . FtaConditionnement::FIELDNAME_ID_ANNEXE_EMBALLAGE_GROUPE_TYPE . " IS NOT NULL AND " . FtaConditionnement::FIELDNAME_ID_ANNEXE_EMBALLAGE_GROUPE_TYPE . "=" . AnnexeEmballageGroupeTypeModel::KEYNAME . ")"
-//                . " OR "
-//                . "( " . FtaConditionnement::FIELDNAME_ID_ANNEXE_EMBALLAGE_GROUPE_TYPE . " IS NULL AND " . AnnexeEmballageGroupeModel::FIELDNAME_ID_ANNEXE_EMBALLAGE_GROUPE_CONFIGURATION . "=" . AnnexeEmballageGroupeTypeModel::KEYNAME . ")"
-//                . "    ) "
-//                . " ORDER BY " . AnnexeEmballageGroupeTypeModel::FIELDNAME_NOM_ANNEXE_EMBALLAGE_GROUPE_TYPE
-//        ;
-//
-//
-//
-//        $result = DatabaseOperation::query($req);
-//        if (mysql_num_rows($result)) {
-//            while ($rows = mysql_fetch_array($result)) {
-//                //Calcul du poids
-//                $return[FtaModel::UVC_EMBALLAGE] = $rows[FtaConditionnement::FIELDNAME_POIDS_FTA_CONDITIONNEMENT] * $rows[FtaConditionnement::FIELDNAME_QUANTITE_PAR_COUCHE_FTA_CONDITIONNEMENT] * $rows[FtaConditionnement::FIELDNAME_NOMBRE_COUCHE_FTA_CONDITIONNEMENT];
-//
-//                //Calcul des dimension (on recherche la taille la plus grande
-//                if ($return[FtaModel::UVC_EMBALLAGE_DIMENSION_HAUTEUR] < $rows[FtaConditionnement::FIELDNAME_HAUTEUR_FTA_CONDITIONNEMENT]) {
-//                    $return[FtaModel::UVC_EMBALLAGE_DIMENSION_HAUTEUR] = $rows[FtaConditionnement::FIELDNAME_HAUTEUR_FTA_CONDITIONNEMENT];
-//                }
-//                if ($return[FtaModel::UVC_EMBALLAGE_DIMENSION_LONGEUR] < $rows[FtaConditionnement::FIELDNAME_LONGUEUR_FTA_CONDITIONNEMENT]) {
-//                    $return[FtaModel::UVC_EMBALLAGE_DIMENSION_LONGEUR] = $rows[FtaConditionnement::FIELDNAME_LONGUEUR_FTA_CONDITIONNEMENT];
-//                }
-//                if ($return[FtaModel::UVC_EMBALLAGE_DIMENSION_LARGEUR] < $rows[FtaConditionnement::FIELDNAME_LARGEUR_FTA_CONDITIONNEMENT]) {
-//                    $return[FtaModel::UVC_EMBALLAGE_DIMENSION_LARGEUR] = $rows[FtaConditionnement::FIELDNAME_LARGEUR_FTA_CONDITIONNEMENT];
-//                }
-//            }
-//        }
-//        $return[FtaModel::UVC_EMBALLAGE_DIMENSION] = $return[FtaModel::UVC_EMBALLAGE_DIMENSION_LONGEUR] . "x" . $return[FtaModel::UVC_EMBALLAGE_DIMENSION_LARGEUR];
-//
-//        //Si la hauteur n'est pas nulle, on l'intègre.
-//        if ($return[FtaModel::UVC_EMBALLAGE_DIMENSION_HAUTEUR]) {
-//            $return[FtaModel::UVC_EMBALLAGE_DIMENSION] = $return[FtaModel::UVC_EMBALLAGE_DIMENSION] . "x" . $return[FtaModel::UVC_EMBALLAGE_DIMENSION_HAUTEUR];
-//        }
+        $return = $this->getModel()->getArrayEmballageTypeUVC();
 
         $htmlDimensionUVC = new HtmlInputText();
 
-        $htmlDimensionUVC->setLabel("Dimension de l'UVC (en mm): (Longueur x Largeur x Hauteur)");
-        $htmlDimensionUVC->getAttributes()->getValue()->setValue($return["dimension_uvc"]);
+        $htmlDimensionUVC->setLabel(FtaConditionnementModel::UVC_EMBALLAGE_DIMENSION_LABEL);
+        $htmlDimensionUVC->getAttributes()->getValue()->setValue($return[FtaConditionnementModel::UVC_EMBALLAGE_DIMENSION]);
         $htmlDimensionUVC->setIsEditable(FALSE);
 
 
@@ -452,16 +394,12 @@ class FtaView {
 
     function getHtmlNombreColisUVC() {
 
-        $return = $this->getModel()->getArrayFta();
-//        //Calcul du PCB
-//        $req = "SELECT * FROM fta";
-//        $result = DatabaseOperation::query($req);
-//        $return["pcb"] = mysql_result($result, 0, "NB_UNIT_ELEM");
+        $return = $this->getModel()->getArrayEmballageTypeDuColis();
 
         $htmlNombreColisUVC = new HtmlInputText();
 
-        $htmlNombreColisUVC->setLabel(DatabaseDescription::getFieldDocLabel("fta", "NB_UNIT_ELEM"));
-        $htmlNombreColisUVC->getAttributes()->getValue()->setValue($return["pcb"]);
+        $htmlNombreColisUVC->setLabel(DatabaseDescription::getFieldDocLabel(FtaModel::TABLENAME, FtaModel::FIELDNAME_NOMBRE_UVC_PAR_CARTON));
+        $htmlNombreColisUVC->getAttributes()->getValue()->setValue($return[FtaModel::FIELDNAME_PCB]);
         $htmlNombreColisUVC->setIsEditable(FALSE);
 
         return $htmlNombreColisUVC->getHtmlResult();
@@ -469,43 +407,12 @@ class FtaView {
 
     function getHtmlPoidsColisUVC() {
 
-        $return .= $this->getModel()->getArrayFta();
-        $return .= $this->getModel()->getArrayEmballageTypeParColis();
-//        //Calcul du PCB
-//        $req = "SELECT * FROM fta";
-//        $result = DatabaseOperation::query($req);
-//        $return["pcb"] = mysql_result($result, 0, "NB_UNIT_ELEM");
-//        //Calcul du poids de Emballages par Colis
-//        $req = "SELECT  * 
-//                    FROM fta_conditionnement, annexe_emballage_groupe, annexe_emballage_groupe_type 
-//                    WHERE id_fta="
-//                . FtaModel::KEYNAME . " "
-//                . "AND annexe_emballage_groupe_type.id_annexe_emballage_groupe_type=" . 2 . " "
-//                . "AND fta_conditionnement.id_annexe_emballage_groupe=annexe_emballage_groupe.id_annexe_emballage_groupe "
-//                . "AND ( "
-//                . "( fta_conditionnement.id_annexe_emballage_groupe_type IS NOT NULL AND fta_conditionnement.id_annexe_emballage_groupe_type=annexe_emballage_groupe_type.id_annexe_emballage_groupe_type )"
-//                . " OR "
-//                . "( fta_conditionnement.id_annexe_emballage_groupe_type IS NULL AND annexe_emballage_groupe.id_annexe_emballage_groupe_configuration=annexe_emballage_groupe_type.id_annexe_emballage_groupe_type )"
-//                . "    ) "
-//                . "ORDER BY nom_annexe_emballage_groupe_type "
-//        ;
-//
-//        $result = DatabaseOperation::query($req);
-//        if (mysql_num_rows($result)) {
-//            while ($rows = mysql_fetch_array($result)) {
-//                //Calcul du poids
-//
-//                $return["colis_emballage"] = $rows["poids_fta_conditionnement"] * $rows["quantite_par_couche_fta_conditionnement"] * $rows["nombre_couche_fta_conditionnement"];
-//            }
-//        }
-//
-//        $return["colis_emballage"] = $return["colis_emballage"] * $return["pcb"];
-
+        $return = $this->getModel()->getArrayEmballageTypeDuColis();
 
         $htmlPoidColisUVC = new HtmlInputText();
 
-        $htmlPoidColisUVC->setLabel(DatabaseDescription::getFieldDocLabel("fta", "poids_emballages_uvc_fta"));
-        $htmlPoidColisUVC->getAttributes()->getValue()->setValue($return["colis_emballage"]);
+        $htmlPoidColisUVC->setLabel(DatabaseDescription::getFieldDocLabel(FtaModel::TABLENAME, FtaModel::FIELDNAME_POIDS_EMBALLAGES_UVC));
+        $htmlPoidColisUVC->getAttributes()->getValue()->setValue($return[FtaConditionnementModel::COLIS_EMBALLAGE]);
         $htmlPoidColisUVC->setIsEditable(FALSE);
 
         return $htmlPoidColisUVC->getHtmlResult();
@@ -513,28 +420,11 @@ class FtaView {
 
     function getHtmlPoidsNetColisUVC() {
 
-        $return .= $this->getModel()->getArrayComposant();
-        $return .= $this->getModel()->getArrayEmballageTypeUVC();
-
-//        //Calcul du poids net du colis en Kg
-//        $req = "SELECT * FROM fta_composant WHERE id_fta='" . FtaModel::KEYNAME . "' AND is_composition_fta_composant=1 ";
-//        $result = DatabaseOperation::query($req);
-//
-//        //Remplacer par getHtmlValueToGramme($value)
-//        while ($rows = mysql_fetch_array($result)) {
-//            $return["colis_net"] = $return["colis_net"] + ($rows["quantite_fta_composition"] * $rows["poids_fta_composition"]);
-//        }
-//        $return["colis_net"] = $return["colis_net"] / 1000; //Conversion en g --> Kg
-//        if (!$return["colis_net"]) {
-//            $req = "SELECT * FROM fta ";
-//            $result = mysql_query($req);
-//            $return["colis_net"] = mysql_result($result, 0, "Poids_ELEM") * mysql_result($result, 0, "NB_UNIT_ELEM");
-//        }
-
+        $return = $this->getModel()->getArrayEmballageTypeDuColis();
 
         $htmlPoidsNetColisUVC = new HtmlInputText();
 
-        $htmlPoidsNetColisUVC->setLabel(DatabaseDescription::getFieldDocLabel("fta", "Poids_ELEM"));
+        $htmlPoidsNetColisUVC->setLabel(DatabaseDescription::getFieldDocLabel(FtaModel::TABLENAME, FtaModel::FIELDNAME_NOMBRE_UVC_PAR_CARTON));
         $htmlPoidsNetColisUVC->getAttributes()->getValue()->setValue($return["colis_net"]);
         $htmlPoidsNetColisUVC->setIsEditable(FALSE);
 
@@ -543,63 +433,12 @@ class FtaView {
 
     function getHtmlPoidsBrutColisUVC() {
 
-        $return .= $this->getModel()->getArrayFta();
-        $return .= $this->getModel()->getArrayEmballageTypeParColis();
-        $return .= $this->getModel()->getArrayComposant();
-
-
-//        //Calcul du PCB
-//        $req = "SELECT * FROM fta";
-//        $result = DatabaseOperation::query($req);
-//        $return["pcb"] = mysql_result($result, 0, "NB_UNIT_ELEM");
-//
-//        //Calcul du poids de Emballages par Colis
-//        $req = "SELECT  * 
-//                    FROM fta_conditionnement, annexe_emballage_groupe, annexe_emballage_groupe_type 
-//                    WHERE id_fta="
-//                . FtaModel::KEYNAME . " "
-//                . "AND annexe_emballage_groupe_type.id_annexe_emballage_groupe_type=" . 3 . " "
-//                . "AND fta_conditionnement.id_annexe_emballage_groupe=annexe_emballage_groupe.id_annexe_emballage_groupe "
-//                . "AND ( "
-//                . "( fta_conditionnement.id_annexe_emballage_groupe_type IS NOT NULL AND fta_conditionnement.id_annexe_emballage_groupe_type=annexe_emballage_groupe_type.id_annexe_emballage_groupe_type )"
-//                . " OR "
-//                . "( fta_conditionnement.id_annexe_emballage_groupe_type IS NULL AND annexe_emballage_groupe.id_annexe_emballage_groupe_configuration=annexe_emballage_groupe_type.id_annexe_emballage_groupe_type )"
-//                . "    ) "
-//                . "ORDER BY nom_annexe_emballage_groupe_type "
-//        ;
-//
-//        $result = DatabaseOperation::query($req);
-//        if (mysql_num_rows($result)) {
-//            while ($rows = mysql_fetch_array($result)) {
-//                //Calcul du poids d'emballage par colis
-//                $return[FtaModel::COLIS_EMBALLAGE] = $rows[FtaConditionnement::FIELDNAME_POIDS_FTA_CONDITIONNEMENT] * $rows[FtaConditionnement::FIELDNAME_QUANTITE_PAR_COUCHE_FTA_CONDITIONNEMENT] * $rows[FtaConditionnement::FIELDNAME_NOMBRE_COUCHE_FTA_CONDITIONNEMENT];
-//            }
-//        }
-//
-//        $return[FtaModel::COLIS_EMBALLAGE] = $return[FtaModel::COLIS_EMBALLAGE] * $return[FtaModel::FIELDNAME_PCB];
-//
-//        //Calcul du poids net du colis en Kg
-//        $req = "SELECT * FROM fta_composant WHERE id_fta='" . FtaModel::KEYNAME . "' AND is_composition_fta_composant=1 ";
-//        $result = DatabaseOperation::query($req);
-//
-//        //Remplacer par getHtmlValueToGramme($value)
-//        while ($rows = mysql_fetch_array($result)) {
-//            $return["colis_net"] = $return["colis_net"] + ($rows["quantite_fta_composition"] * $rows["poids_fta_composition"]);
-//        }
-//        $return["colis_net"] = $return["colis_net"] / 1000; //Conversion en g --> Kg
-//        if (!$return["colis_net"]) {
-//            $req = "SELECT * FROM fta ";
-//            $result = mysql_query($req);
-//            $return["colis_net"] = mysql_result($result, 0, "Poids_ELEM") * mysql_result($result, 0, "NB_UNIT_ELEM");
-//        }
-//
-//        //Calcul du poids brut du Colis en Kg
-//        $return["colis_brut"] = $return["colis_net"] + ($return["colis_emballage"] / 1000);
+        $return = $this->getModel()->getArrayEmballageTypeDuColis();
 
         $htmlPoidsBrutColisUVC = new HtmlInputText();
 
-        $htmlPoidsBrutColisUVC->setLabel(DatabaseDescription::getFieldDocLabel("fta", "poids_brut_uvc_fta"));
-        $htmlPoidsBrutColisUVC->getAttributes()->getValue()->setValue($return["colis_brut"]);
+        $htmlPoidsBrutColisUVC->setLabel(DatabaseDescription::getFieldDocLabel(FtaModel::TABLENAME, FtaModel::FIELDNAME_POIDS_BRUT_UVC));
+        $htmlPoidsBrutColisUVC->getAttributes()->getValue()->setValue($return[FtaConditionnementModel::COLIS_EMBALLAGE_BRUT]);
         $htmlPoidsBrutColisUVC->setIsEditable(FALSE);
 
         return $htmlPoidsBrutColisUVC->getHtmlResult();
@@ -607,19 +446,12 @@ class FtaView {
 
     function getHtmlHauteurColisUVC() {
 
-
-        $return .= $this->getModel()->getArrayConditionnement();
-
-//        //Calcul de la hauteur en mm du Colis
-//        $req = "SELECT * FROM fta_conditionnement WHERE id_fta=" . FtaModel::KEYNAME;
-//        $result = DatabaseOperation::query($req);
-//        $return["hauteur_colis"] = mysql_result($result, 0, "hauteur_fta_conditionnement");
-
+        $return = $this->getModel()->getArrayEmballageTypeDuColis();
 
         $htmlHauteurColisUVC = new HtmlInputText();
 
-        $htmlHauteurColisUVC->setLabel(DatabaseDescription::getFieldDocLabel("fta_conditionnement", "hauteur_fta_conditionnement"));
-        $htmlHauteurColisUVC->getAttributes()->getValue()->setValue($return[FtaConditionnementModel::FIELDNAME_HAUTEUR_FTA_CONDITIONNEMENT]);
+        $htmlHauteurColisUVC->setLabel(DatabaseDescription::getFieldDocLabel(FtaConditionnementModel::TABLENAME, FtaConditionnementModel::FIELDNAME_HAUTEUR_FTA_CONDITIONNEMENT));
+        $htmlHauteurColisUVC->getAttributes()->getValue()->setValue($return[FtaConditionnementModel::COLIS_EMBALLAGE_HAUTEUR]);
         $htmlHauteurColisUVC->setIsEditable(FALSE);
 
         return $htmlHauteurColisUVC->getHtmlResult();
@@ -627,48 +459,14 @@ class FtaView {
 
     function getHtmlPoidsNetPaletteUVC() {
 
-//Calcul du poids de Emballages par Palette
-//
-//        $req = "SELECT  * 
-//                    FROM fta_conditionnement, annexe_emballage_groupe, annexe_emballage_groupe_type 
-//                    WHERE id_fta="
-//                . FtaModel::KEYNAME . " "
-//                . "AND annexe_emballage_groupe_type.id_annexe_emballage_groupe_type=" . 4 . " "
-//                . "AND fta_conditionnement.id_annexe_emballage_groupe=annexe_emballage_groupe.id_annexe_emballage_groupe "
-//                . "AND ( "
-//                . "( fta_conditionnement.id_annexe_emballage_groupe_type IS NOT NULL AND fta_conditionnement.id_annexe_emballage_groupe_type=annexe_emballage_groupe_type.id_annexe_emballage_groupe_type )"
-//                . " OR "
-//                . "( fta_conditionnement.id_annexe_emballage_groupe_type IS NULL AND annexe_emballage_groupe.id_annexe_emballage_groupe_configuration=annexe_emballage_groupe_type.id_annexe_emballage_groupe_type )"
-//                . "    ) "
-//                . "ORDER BY nom_annexe_emballage_groupe_type "
-//        ;
-//
-//        $result = DatabaseOperation::query($req);
-//        if (mysql_num_rows($result)) {
-//            while ($rows = mysql_fetch_array($result)) {
-//                //Calcul du poids de l'emballage par palette
-//                $return[FtaModel::PALETTE_NOMBRE_DE_COUCHE] = $rows[FtaConditionnement::FIELDNAME_NOMBRE_COUCHE_FTA_CONDITIONNEMENT];
-//                $return[FtaModel::PALETTE_NOMBRE_COLIS_PAR_COUCHE] = $rows[FtaConditionnement::FIELDNAME_QUANTITE_PAR_COUCHE_FTA_CONDITIONNEMENT];
-//                $return[FtaModel::PALETTE_EMBALLAGE] = ($rows[FtaConditionnement::FIELDNAME_POIDS_FTA_CONDITIONNEMENT] / 1000) * $return[FtaModel::PALETTE_NOMBRE_COLIS_PAR_COUCHE] * $return[FtaModel::PALETTE_NOMBRE_DE_COUCHE];
-//                $return[FtaModel::PALETTE_EMBALLAGE_HAUTEUR] = (($rows[FtaConditionnement::FIELDNAME_HAUTEUR_FTA_CONDITIONNEMENT] * $return[FtaModel::PALETTE_NOMBRE_DE_COUCHE]) + $rows[FtaConditionnement::FIELDNAME_HAUTEUR_FTA_CONDITIONNEMENT]) / 1000;
-//            }
-//        }
-//
-//        $return[FtaModel::PALETTE_EMBALLAGE] = $return[FtaModel::PALETTE_EMBALLAGE] * ($rows[FtaConditionnement::FIELDNAME_QUANTITE_PAR_COUCHE_FTA_CONDITIONNEMENT] * $rows[FtaConditionnement::FIELDNAME_NOMBRE_COUCHE_FTA_CONDITIONNEMENT]);
-//     //Calcul Poids Net (en Kg) d'une Palette:
-//        $return["palette_net"] = $return["colis_net"] * ($rows["quantite_par_couche_fta_conditionnement"] * $rows["nombre_couche_fta_conditionnement"]);
+        //Calcul du poids de Emballages par Palette
 
-
-        $return .= $this->getModel()->getArrayEmballageTypePalette();
-        $return .= $this->getModel()->getArrayComposant();
-
-
+        $return = $this->getModel()->getArrayEmballageTypePalette();
 
         $htmlPoidsNetPalettisationUVC = new HtmlInputText();
 
-        $htmlPoidsNetPalettisationUVC->setLabel(DatabaseDescription::getFieldDocLabel("fta", "Poids_ELEM"));
-        $htmlPoidsNetPalettisationUVC->getAttributes()->getName()->setValue("Poids_Net_Palette");
-        $htmlPoidsNetPalettisationUVC->getAttributes()->getValue()->setValue($return["palette_net"]);
+        $htmlPoidsNetPalettisationUVC->setLabel(DatabaseDescription::getFieldDocLabel(FtaModel::TABLENAME, FtaModel::FIELDNAME_NOMBRE_UVC_PAR_CARTON));
+        $htmlPoidsNetPalettisationUVC->getAttributes()->getValue()->setValue($return[FtaConditionnementModel::PALETTE_EMBALLAGE_NET]);
         $htmlPoidsNetPalettisationUVC->setIsEditable(FALSE);
 
         return $htmlPoidsNetPalettisationUVC->getHtmlResult();
@@ -676,51 +474,12 @@ class FtaView {
 
     function getHtmlPoidsBrutPaletteUVC() {
 
-        $return .= $this->getModel()->getArrayEmballageTypePalette();
-        $return .= $this->getModel()->getArrayComposant();
-
-
-
-//        //Calcul du poids de Emballages par Palette
-//
-//        $req = "SELECT  * 
-//                    FROM fta_conditionnement, annexe_emballage_groupe, annexe_emballage_groupe_type 
-//                    WHERE id_fta="
-//                . FtaModel::KEYNAME . " "
-//                . "AND annexe_emballage_groupe_type.id_annexe_emballage_groupe_type=" . 4 . " "
-//                . "AND fta_conditionnement.id_annexe_emballage_groupe=annexe_emballage_groupe.id_annexe_emballage_groupe "
-//                . "AND ( "
-//                . "( fta_conditionnement.id_annexe_emballage_groupe_type IS NOT NULL AND fta_conditionnement.id_annexe_emballage_groupe_type=annexe_emballage_groupe_type.id_annexe_emballage_groupe_type )"
-//                . " OR "
-//                . "( fta_conditionnement.id_annexe_emballage_groupe_type IS NULL AND annexe_emballage_groupe.id_annexe_emballage_groupe_configuration=annexe_emballage_groupe_type.id_annexe_emballage_groupe_type )"
-//                . "    ) "
-//                . "ORDER BY nom_annexe_emballage_groupe_type "
-//        ;
-//
-//        $result = DatabaseOperation::query($req);
-//        if (mysql_num_rows($result)) {
-//            while ($rows = mysql_fetch_array($result)) {
-//                //Calcul du poids
-//                $return["couche_palette"] = $rows["nombre_couche_fta_conditionnement"];
-//                $return["colis_couche"] = $rows["quantite_par_couche_fta_conditionnement"];
-//                $return["palette_emballage"] = ($rows["poids_fta_conditionnement"] / 1000) * $return["colis_couche"] * $return["couche_palette"];
-//                $return["hauteur_palette"] = (($rows["hauteur_fta_conditionnement"] * $return["couche_palette"]) + $rows["hauteur_fta_conditionnement"]) / 1000;
-//            }
-//        }
-//
-//        $return["palette_emballage"] = $return["palette_emballage"] * ($rows["quantite_par_couche_fta_conditionnement"] * $rows["nombre_couche_fta_conditionnement"]);
-//
-//        //Calcul Poids Net (en Kg) d'une Palette:
-//        $return["palette_net"] = $return["colis_net"] * ($rows["quantite_par_couche_fta_conditionnement"] * $rows["nombre_couche_fta_conditionnement"]);
-//
-//        //Calcul Poids Brut (en Kg) d'une Palette:
-//        $return[FtaModel::PALETTE_EMBALLAGE_BRUT] = $return[FtaModel::PALETTE_EMBALLAGE_NET] + $return[FtaModel::PALETTE_EMBALLAGE];
+        $return = $this->getModel()->getArrayEmballageTypePalette();
 
         $htmlPoidsBrutPalettisationUVC = new HtmlInputText();
 
-        $htmlPoidsBrutPalettisationUVC->setLabel(DatabaseDescription::getFieldDocLabel("fta", "poids_brut_uvc_fta"));
-        $htmlPoidsBrutPalettisationUVC->getAttributes()->getName()->setValue("Poids_Brut_Palette");
-        $htmlPoidsBrutPalettisationUVC->getAttributes()->getValue()->setValue($return["palette_brut"]);
+        $htmlPoidsBrutPalettisationUVC->setLabel(DatabaseDescription::getFieldDocLabel(FtaModel::TABLENAME, FtaModel::FIELDNAME_POIDS_BRUT_UVC));
+        $htmlPoidsBrutPalettisationUVC->getAttributes()->getValue()->setValue($return[FtaConditionnementModel::PALETTE_EMBALLAGE_BRUT]);
         $htmlPoidsBrutPalettisationUVC->setIsEditable(FALSE);
 
         return $htmlPoidsBrutPalettisationUVC->getHtmlResult();
@@ -728,41 +487,12 @@ class FtaView {
 
     function getHtmlHauteurPaletteUVC() {
 
-//Calcul du poids de Emballages par Palette
-//        $req = "SELECT  * 
-//                    FROM fta_conditionnement, annexe_emballage_groupe, annexe_emballage_groupe_type 
-//                    WHERE id_fta="
-//                . FtaModel::KEYNAME . " "
-//                . "AND annexe_emballage_groupe_type.id_annexe_emballage_groupe_type=" . 4 . " "
-//                . "AND fta_conditionnement.id_annexe_emballage_groupe=annexe_emballage_groupe.id_annexe_emballage_groupe "
-//                . "AND ( "
-//                . "( fta_conditionnement.id_annexe_emballage_groupe_type IS NOT NULL AND fta_conditionnement.id_annexe_emballage_groupe_type=annexe_emballage_groupe_type.id_annexe_emballage_groupe_type )"
-//                . " OR "
-//                . "( fta_conditionnement.id_annexe_emballage_groupe_type IS NULL AND annexe_emballage_groupe.id_annexe_emballage_groupe_configuration=annexe_emballage_groupe_type.id_annexe_emballage_groupe_type )"
-//                . "    ) "
-//                . "ORDER BY nom_annexe_emballage_groupe_type "
-//        ;
-//
-//        $result = DatabaseOperation::query($req);
-//        if (mysql_num_rows($result)) {
-//            while ($rows = mysql_fetch_array($result)) {
-//                //Calcul du poids
-//                $return["couche_palette"] = $rows["nombre_couche_fta_conditionnement"];
-//                $return["colis_couche"] = $rows["quantite_par_couche_fta_conditionnement"];
-//                $return["palette_emballage"] = ($rows["poids_fta_conditionnement"] / 1000) * $return["colis_couche"] * $return["couche_palette"];
-//                $return["hauteur_palette"] = (($rows["hauteur_fta_conditionnement"] * $return["couche_palette"]) + $rows["hauteur_fta_conditionnement"]) / 1000;
-//            }
-//        }
-
-
         $return = $this->getModel()->getArrayEmballageTypePalette();
-
 
         $htmlHauteurPalettisationUVC = new HtmlInputText();
 
-        $htmlHauteurPalettisationUVC->setLabel(DatabaseDescription::getFieldDocLabel("fta_conditionnement", "hauteur_fta_conditionnement"));
-        $htmlHauteurPalettisationUVC->getAttributes()->getName()->setValue("Hauteur_Palette");
-        $htmlHauteurPalettisationUVC->getAttributes()->getValue()->setValue($return["hauteur_palette"]);
+        $htmlHauteurPalettisationUVC->setLabel(DatabaseDescription::getFieldDocLabel(FtaConditionnementModel::TABLENAME, FtaConditionnementModel::FIELDNAME_HAUTEUR_FTA_CONDITIONNEMENT));
+        $htmlHauteurPalettisationUVC->getAttributes()->getValue()->setValue($return[FtaConditionnementModel::PALETTE_EMBALLAGE_HAUTEUR]);
         $htmlHauteurPalettisationUVC->setIsEditable(FALSE);
 
         return $htmlHauteurPalettisationUVC->getHtmlResult();
@@ -770,41 +500,12 @@ class FtaView {
 
     function getHtmlNombrePaletteUVC() {
 
-//Calcul du poids de Emballages par Palette
-//        $req = "SELECT  * 
-//                    FROM fta_conditionnement, annexe_emballage_groupe, annexe_emballage_groupe_type 
-//                    WHERE id_fta="
-//                . FtaModel::KEYNAME . " "
-//                . "AND annexe_emballage_groupe_type.id_annexe_emballage_groupe_type=" . 4 . " "
-//                . "AND fta_conditionnement.id_annexe_emballage_groupe=annexe_emballage_groupe.id_annexe_emballage_groupe "
-//                . "AND ( "
-//                . "( fta_conditionnement.id_annexe_emballage_groupe_type IS NOT NULL AND fta_conditionnement.id_annexe_emballage_groupe_type=annexe_emballage_groupe_type.id_annexe_emballage_groupe_type )"
-//                . " OR "
-//                . "( fta_conditionnement.id_annexe_emballage_groupe_type IS NULL AND annexe_emballage_groupe.id_annexe_emballage_groupe_configuration=annexe_emballage_groupe_type.id_annexe_emballage_groupe_type )"
-//                . "    ) "
-//                . "ORDER BY nom_annexe_emballage_groupe_type "
-//        ;
-//
-//        $result = DatabaseOperation::query($req);
-//        if (mysql_num_rows($result)) {
-//            while ($rows = mysql_fetch_array($result)) {
-//                //Calcul du poids
-//                $return["couche_palette"] = $rows["nombre_couche_fta_conditionnement"];
-//                $return["colis_couche"] = $rows["quantite_par_couche_fta_conditionnement"];
-//                $return["palette_emballage"] = ($rows["poids_fta_conditionnement"] / 1000) * $return["colis_couche"] * $return["couche_palette"];
-//                $return["hauteur_palette"] = (($rows["hauteur_fta_conditionnement"] * $return["couche_palette"]) + $rows["hauteur_fta_conditionnement"]) / 1000;
-//            }
-//        }
-
-
         $return = $this->getModel()->getArrayEmballageTypePalette();
-
 
         $htmlCouchePalettisationUVC = new HtmlInputText();
 
-        $htmlCouchePalettisationUVC->setLabel(DatabaseDescription::getFieldDocLabel("fta_conditionnement", "nombre_couche_fta_conditionnement"));
-        $htmlCouchePalettisationUVC->getAttributes()->getName()->setValue("Hauteur_Palette");
-        $htmlCouchePalettisationUVC->getAttributes()->getValue()->setValue($return["couche_palette"]);
+        $htmlCouchePalettisationUVC->setLabel(FtaConditionnementModel::PALETTE_EMBALLAGE_HAUTEUR_LABEL);
+        $htmlCouchePalettisationUVC->getAttributes()->getValue()->setValue($return[FtaConditionnementModel::PALETTE_NOMBRE_DE_COUCHE]);
         $htmlCouchePalettisationUVC->setIsEditable(FALSE);
 
         return $htmlCouchePalettisationUVC->getHtmlResult();
@@ -812,39 +513,12 @@ class FtaView {
 
     function getHtmlColisCouchePaletteUVC() {
 
-//Calcul du poids de Emballages par Palette
-//        $req = "SELECT  * 
-//                    FROM fta_conditionnement, annexe_emballage_groupe, annexe_emballage_groupe_type 
-//                    WHERE id_fta="
-//                . FtaModel::KEYNAME . " "
-//                . "AND annexe_emballage_groupe_type.id_annexe_emballage_groupe_type=" . 4 . " "
-//                . "AND fta_conditionnement.id_annexe_emballage_groupe=annexe_emballage_groupe.id_annexe_emballage_groupe "
-//                . "AND ( "
-//                . "( fta_conditionnement.id_annexe_emballage_groupe_type IS NOT NULL AND fta_conditionnement.id_annexe_emballage_groupe_type=annexe_emballage_groupe_type.id_annexe_emballage_groupe_type )"
-//                . " OR "
-//                . "( fta_conditionnement.id_annexe_emballage_groupe_type IS NULL AND annexe_emballage_groupe.id_annexe_emballage_groupe_configuration=annexe_emballage_groupe_type.id_annexe_emballage_groupe_type )"
-//                . "    ) "
-//                . "ORDER BY nom_annexe_emballage_groupe_type "
-//        ;
-//
-//        $result = DatabaseOperation::query($req);
-//        if (mysql_num_rows($result)) {
-//            while ($rows = mysql_fetch_array($result)) {
-//                //Calcul du poids
-//                $return["couche_palette"] = $rows["nombre_couche_fta_conditionnement"];
-//                $return["colis_couche"] = $rows["quantite_par_couche_fta_conditionnement"];
-//                $return["palette_emballage"] = ($rows["poids_fta_conditionnement"] / 1000) * $return["colis_couche"] * $return["couche_palette"];
-//                $return["hauteur_palette"] = (($rows["hauteur_fta_conditionnement"] * $return["couche_palette"]) + $rows["hauteur_fta_conditionnement"]) / 1000;
-//            }
-//        }
-
         $return = $this->getModel()->getArrayEmballageTypePalette();
 
         $htmlColisCouchePalettisationUVC = new HtmlInputText();
 
-        $htmlColisCouchePalettisationUVC->setLabel(DatabaseDescription::getFieldDocLabel("fta_conditionnement", "quantite_par_couche_fta_conditionnement"));
-        $htmlColisCouchePalettisationUVC->getAttributes()->getName()->setValue("Quantite_Palette");
-        $htmlColisCouchePalettisationUVC->getAttributes()->getValue()->setValue($return["colis_couche"]);
+        $htmlColisCouchePalettisationUVC->setLabel(DatabaseDescription::getFieldDocLabel(FtaConditionnementModel::TABLENAME, FtaConditionnementModel::FIELDNAME_QUANTITE_PAR_COUCHE_FTA_CONDITIONNEMENT));
+        $htmlColisCouchePalettisationUVC->getAttributes()->getValue()->setValue($return[FtaConditionnementModel::PALETTE_NOMBRE_COLIS_PAR_COUCHE]);
         $htmlColisCouchePalettisationUVC->setIsEditable(FALSE);
 
         return $htmlColisCouchePalettisationUVC->getHtmlResult();
@@ -852,43 +526,12 @@ class FtaView {
 
     function getHtmlColisTotalUVC() {
 
-//Calcul du poids de Emballages par Palette
-//        $req = "SELECT  * 
-//                    FROM fta_conditionnement, annexe_emballage_groupe, annexe_emballage_groupe_type 
-//                    WHERE id_fta="
-//                . FtaModel::KEYNAME . " "
-//                . "AND annexe_emballage_groupe_type.id_annexe_emballage_groupe_type=" . 4 . " "
-//                . "AND fta_conditionnement.id_annexe_emballage_groupe=annexe_emballage_groupe.id_annexe_emballage_groupe "
-//                . "AND ( "
-//                . "( fta_conditionnement.id_annexe_emballage_groupe_type IS NOT NULL AND fta_conditionnement.id_annexe_emballage_groupe_type=annexe_emballage_groupe_type.id_annexe_emballage_groupe_type )"
-//                . " OR "
-//                . "( fta_conditionnement.id_annexe_emballage_groupe_type IS NULL AND annexe_emballage_groupe.id_annexe_emballage_groupe_configuration=annexe_emballage_groupe_type.id_annexe_emballage_groupe_type )"
-//                . "    ) "
-//                . "ORDER BY nom_annexe_emballage_groupe_type "
-//        ;
-//
-//        $result = DatabaseOperation::query($req);
-//        if (mysql_num_rows($result)) {
-//            while ($rows = mysql_fetch_array($result)) {
-//                //Calcul du poids
-//                $return["couche_palette"] = $rows["nombre_couche_fta_conditionnement"];
-//                $return["colis_couche"] = $rows["quantite_par_couche_fta_conditionnement"];
-//                $return["palette_emballage"] = ($rows["poids_fta_conditionnement"] / 1000) * $return["colis_couche"] * $return["couche_palette"];
-//                $return["hauteur_palette"] = (($rows["hauteur_fta_conditionnement"] * $return["couche_palette"]) + $rows["hauteur_fta_conditionnement"]) / 1000;
-//            }
-//        }
-//
-//        //Calcul du nombre total de Carton par palette:
-//        $return[FtaModel::PALETTE_NOMBRE_TOTAL_PAR_CARTON] = $return[FtaModel::PALETTE_NOMBRE_COLIS_PAR_COUCHE] * $return[FtaModel::PALETTE_NOMBRE_DE_COUCHE];
-
-
         $return = $this->getModel()->getArrayEmballageTypePalette();
 
         $htmlTotalColisPalettisationUVC = new HtmlInputText();
 
-        $htmlTotalColisPalettisationUVC->setLabel("Nombre total de Carton par palette");
-        $htmlTotalColisPalettisationUVC->getAttributes()->getName()->setValue("total_Palette");
-        $htmlTotalColisPalettisationUVC->getAttributes()->getValue()->setValue($return["total_colis"]);
+        $htmlTotalColisPalettisationUVC->setLabel(FtaConditionnementModel::PALETTE_NOMBRE_TOTAL_PAR_CARTON_LABEL);
+        $htmlTotalColisPalettisationUVC->getAttributes()->getValue()->setValue($return[FtaConditionnementModel::PALETTE_NOMBRE_TOTAL_PAR_CARTON]);
         $htmlTotalColisPalettisationUVC->setIsEditable(FALSE);
 
         return $htmlTotalColisPalettisationUVC->getHtmlResult();

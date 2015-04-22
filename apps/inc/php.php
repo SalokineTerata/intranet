@@ -47,6 +47,7 @@ require_once("../lib/class/database/DatabaseRecord.php");
 
 // Modèles des tables en base de données
 require_once("../lib/class/model/AbstractModel.php");
+require_once("../lib/class/model/AnnexeAgrologicArticleCodificationModel.php");
 require_once("../lib/class/model/AnnexeEmballageModel.php");
 require_once("../lib/class/model/AnnexeEmballageGroupeModel.php");
 require_once("../lib/class/model/AnnexeEmballageGroupeTypeModel.php");
@@ -153,18 +154,12 @@ require_once("../lib/class/html/HtmlInputCalendar.php");
 require_once("../lib/class/html/AbstractHtmlSelect.php");
 require_once("../lib/class/html/HtmlList.php");
 require_once("../lib/class/html/HtmlListBoolean.php");
-require_once("../lib/class/html/HtmlListColisComposition.php");
-require_once("../lib/class/html/HtmlListUniteAffichage.php");
-require_once("../lib/class/html/HtmlListUniteFacturation.php");
 require_once("../lib/class/html/HtmlTextArea.php");
 require_once("../lib/class/html/HtmlCheckbox.php");
 require_once("../lib/class/html/TraitDataFieldToHtml.php");
 require_once("../lib/class/html/DataFieldToHtmlInputText.php");
 require_once("../lib/class/html/DataFieldToHtmlList.php");
 require_once("../lib/class/html/DataFieldToHtmlListBoolean.php");
-require_once("../lib/class/html/DataFieldToHtmlListColisComposition.php");
-require_once("../lib/class/html/DataFieldToHtmlListUniteAffichage.php");
-require_once("../lib/class/html/DataFieldToHtmlListUniteFacturation.php");
 require_once("../lib/class/html/DataFieldToHtmlInputCalendar.php");
 require_once("../lib/class/html/DataFieldToHtmlTextArea.php");
 require_once("../lib/class/html/HtmlSubForm.php");

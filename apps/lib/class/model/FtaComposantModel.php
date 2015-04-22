@@ -10,6 +10,7 @@ class FtaComposantModel extends AbstractModel {
 
     const TABLENAME = "fta_composant";
     const KEYNAME = "id_fta_composant";
+    const FIELDNAME_CODE_PRODUIT_AGROLOGIC_FTA_NOMENCLATURE = "code_produit_agrologic_fta_nomenclature";
     const FIELDNAME_DESIGNATION_CODIFICATION = "nom_fta_nomenclature";
     const FIELDNAME_ENVIRONNEMENT_DE_CONSERVATION_CODIFICATION = "poids_fta_nomenclature";
     const FIELDNAME_ETAT_FTA_CODIFICATION = "etat_fta_nomenclature";
@@ -50,7 +51,7 @@ class FtaComposantModel extends AbstractModel {
     }
 
        //Calcul du poids de l'emballage  par UVC
-    static function getCalculPoidsNetEmballageParColis($paramPoidsEmballageUnitaire, $paramQuantiteCouche, $paramNombreCouche) {
+    static function getCalculPoidsNetEmballageDuColis($paramPoidsEmballageUnitaire, $paramQuantiteCouche, $paramNombreCouche) {
         return $paramPoidsEmballageUnitaire * $paramQuantiteCouche * $paramNombreCouche;
     }
 

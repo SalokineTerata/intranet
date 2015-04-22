@@ -20,3 +20,5 @@ PARTIE 1: Construction des interfaces utilisateurs (v1) --> Pas de sous table po
 
 [ ] Chapitre Emballage
 
+[ ] Exporter la liste des classifications existantes.
+

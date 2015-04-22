@@ -262,7 +262,7 @@ class Chapitre {
                 ObjectFta::TABLE_CATEGORIE_NAME, "nom_fta_categorie"
                 ), $default_value = 1, $is_editable, $warning_update = ${"diff_" . $table_name}[$field_name]
         );
-        $bloc.=$htmlObject->getHtmlResult();
+        $bloc.=$htmlObject->getHtmlResultSubForm();
 
         //Désignation Commerciale de l'Article
         $htmlObject = new htmlInputText(
@@ -638,7 +638,7 @@ class Chapitre {
                 $field_table = "arcadia_poste", $field_name = "nom_arcadia_poste", $field_value = $data_field->getValue()
                 ), $default_value = 1, $is_editable, $warning_update = ${"diff_" . $table_name}[$field_name]
         );
-        $bloc.=$htmlObject->getHtmlResult();
+        $bloc.=$htmlObject->getHtmlResultSubForm();
 
         //Atelier
         $htmlObject = new OldHtmlList(
@@ -648,7 +648,7 @@ class Chapitre {
                 $field_table = "arcadia_atelier", $field_name = "nom_arcadia_atelier", $field_value = $data_field->getValue()
                 ), $default_value = 1, $is_editable, $warning_update = ${"diff_" . $table_name}[$field_name]
         );
-        $bloc.=$htmlObject->getHtmlResult();
+        $bloc.=$htmlObject->getHtmlResultSubForm();
 
         //Machine
         $htmlObject = new htmlInputText(
@@ -1229,7 +1229,7 @@ class Chapitre {
 
 
         //PCB
-        $bloc.=$ftaView->getHtmlDataField(FtaConditionnementModel::FIELDNAME_PCB_FTA_CONDITIONNEMENT);
+        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_PCB);
 
 
         $bloc.="<tr class=titre_principal><td class>Caractéristiques FTA</td></tr>";
@@ -1241,10 +1241,10 @@ class Chapitre {
         $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_CATEGORIE_FTA);
 
         //Besoin de la fiche technique ?
-        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_BESOIN_FICHE_TECHNIQUE);
+        //$bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_BESOIN_FICHE_TECHNIQUE);
 
         //Etude de prix ?
-        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_ETUDE_PRIX_FTA);
+        //$bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_ETUDE_PRIX_FTA);
 
         //Calibre par défaut
         $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_CALIBRE_DEFAUT);

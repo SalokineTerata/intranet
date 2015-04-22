@@ -24,14 +24,60 @@
  */
 class AttributesGlobal extends StandardGlobalAttributes {
 
-    const DEFAULT_HTML_IMAGE_OK = "<img src=../lib/images/bouton_valide.png width=22  border=0 valign=middle halign=right />";
-    const DEFAULT_HTML_IMAGE_UNDO = "<img src=../lib/images/undo.png width=22  border=0 valign=middle halign=right />";
+    const DEFAULT_HTML_IMAGE_ADD = "<img src=../lib/images/plus.png width=22  border=0 valign=middle halign=right />";
     const DEFAULT_HTML_IMAGE_FAILED = "<img src=../lib/images/bouton_croix_rouge.png width=22  border=0 valign=middle halign=right />";
     const DEFAULT_HTML_IMAGE_LOADING = "<img src=../lib/images/loading.gif width=22  border=0 valign=middle halign=right />";
+    const DEFAULT_HTML_IMAGE_NEXT = "<img src=../lib/images/next.png width=22  border=0 valign=middle halign=right />";
+    const DEFAULT_HTML_IMAGE_OK = "<img src=../lib/images/bouton_valide.png width=22  border=0 valign=middle halign=right />";
+    const DEFAULT_HTML_IMAGE_UNDO = "<img src=../lib/images/undo.png width=22  border=0 valign=middle halign=right />";
     const PREFIXE_ID_ROW = "ROW";
     const PREFIXE_ID_DATA = "DATA";
+    const PREFIXE_ID_ICON_ADD = "ADD";
+    const PREFIXE_ID_ICON_NEXT = "NEXT";
     const PREFIXE_ID_ICON_STATUS = "STATUS";
     const PREFIXE_ID_ICON_UNDO = "ICON_UNDO";
+
+    /**
+     * Le bouton d'ajout est-il activé ?
+     * @var boolean 
+     */
+    private $isIconAddEnabled;
+
+    /**
+     * Le bouton "suivant" est-il activé ?
+     * @var boolean 
+     */
+    private $isIconNextEnabled;
+
+    public function __construct() {
+        parent::__construct();
+        $this->setIsIconAddEnabledToFalse();
+        $this->setIsIconNextEnabledToFalse();
+    }
+
+    function getIsIconAddEnabled() {
+        return $this->isIconAddEnabled;
+    }
+
+    function setIsIconAddEnabledToTrue() {
+        $this->isIconAddEnabled = TRUE;
+    }
+
+    function setIsIconAddEnabledToFalse() {
+        $this->isIconAddEnabled = FALSE;
+    }
+
+    function getIsIconNextEnabled() {
+        return $this->isIconNextEnabled;
+    }
+
+    function setIsIconNextEnabledToTrue() {
+        $this->isIconNextEnabled = TRUE;
+    }
+
+    function setIsIconNextEnabledToFalse() {
+        $this->isIconNextEnabled = FALSE;
+    }
 
     public function getIdData() {
         return self::PREFIXE_ID_DATA . "_" . $this->getId()->getValue();
@@ -39,6 +85,14 @@ class AttributesGlobal extends StandardGlobalAttributes {
 
     public function getIdRow() {
         return self::PREFIXE_ID_ROW . "_" . $this->getId()->getValue();
+    }
+
+    public function getIdAdd() {
+        return self::PREFIXE_ID_ICON_ADD . "_" . $this->getId()->getValue();
+    }
+
+    public function getIdNext() {
+        return self::PREFIXE_ID_ICON_NEXT . "_" . $this->getId()->getValue();
     }
 
     public function getIdStatus() {
@@ -63,6 +117,20 @@ class AttributesGlobal extends StandardGlobalAttributes {
         );
     }
 
+    public function getIdAddToHtml() {
+        return Html::getHtmlParameter(
+                        $this->getId()->getName()
+                        , $this->getIdAdd()
+        );
+    }
+
+    public function getIdNextToHtml() {
+        return Html::getHtmlParameter(
+                        $this->getId()->getName()
+                        , $this->getIdNext()
+        );
+    }
+
     public function getIdStatusToHtml() {
         return Html::getHtmlParameter(
                         $this->getId()->getName()
@@ -81,11 +149,29 @@ class AttributesGlobal extends StandardGlobalAttributes {
      * Retourne le code HTML affichant les icones d'action en fin de champs de saisie.
      * @param string
      */
+    public function getIconAddToHtml() {
+        return "<a href=\"...\" title=\"Not implemented\">"
+                . "<span " . $this->getIdAddToHtml() . ">" . self::DEFAULT_HTML_IMAGE_ADD . "</span>"
+                . "</a>"
+        ;
+    }
+
+    public function getIconNextToHtml() {
+        return "<a href=\"...\" title=\"Not implemented\">"
+                . "<span " . $this->getIdNextToHtml() . ">" . self::DEFAULT_HTML_IMAGE_NEXT . "</span>"
+                . "</a>"
+        ;
+    }
+
     public function getIconMenuToHtml() {
 
-        $return = "<span " . $this->getIdStatusToHtml() . ">" . self::DEFAULT_HTML_IMAGE_OK . "</span>"
-                //. "<span " . $this->getIdUndoToHtml() . ">" . self::DEFAULT_HTML_IMAGE_UNDO . "</span>"
-        ;
+        $return = "<span " . $this->getIdStatusToHtml() . ">" . self::DEFAULT_HTML_IMAGE_OK . "</span>";
+        if ($this->getIsIconAddEnabled()) {
+            $return.=$this->getIconAddToHtml();
+        }
+        if ($this->getIsIconNextEnabled()) {
+            $return.=$this->getIconNextToHtml();
+        }
 
         return $return;
     }

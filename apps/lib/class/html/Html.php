@@ -30,6 +30,7 @@ class Html {
     const TYPE_OF_OBJECT_COLIS_COMPOSITION = "COLISCOMPOSITION";
     const TYPE_OF_OBJECT_INPUTTEXT = "INPUTTEXT";
     const TYPE_OF_OBJECT_LIST = "LIST";
+    const TYPE_OF_OBJECT_SUBFORM_R1N = "SUBFORM_R1N";
     const TYPE_OF_OBJECT_TEXTAREA = "TEXTAREA";
     const TYPE_OF_OBJECT_UNITE_AFFICHAGE = "UNITEAFFICHAGE";
     const TYPE_OF_OBJECT_UNITE_FACTURATION = "UNITEFACTURATION";
@@ -184,7 +185,7 @@ class Html {
                 $htmlObject = new DataFieldToHtmlListColisComposition($paramDataField);
                 break;
             default:
-                throw new Exception("Type d'objet inconnu." . " Champs concerné:" . $paramDataField->getFieldName() . " ");
+                throw new Exception("Type d'objet <b>$TypeOfHtmlObject</b> inconnu." . " Champs concerné:" . $paramDataField->getFieldName() . " ");
         }
 
         return $htmlObject;

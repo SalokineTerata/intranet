@@ -17,6 +17,7 @@ class EnvironmentCod extends EnvironmentAbstract {
     const APPLICATION_LOGO = "logo_developpeur.gif";
     const APPLICATION_NAME = "intranet";
     const EXECUTION_ENVIRONMENT = EnvironmentConf::ENV_COD;
+    const EXECUTION_TIME_LIMIT = 60;
     const IS_DEBUG_EXEC_ENVIRONMENT_ENABLED = TRUE;
 
     /**
@@ -51,6 +52,7 @@ class EnvironmentCod extends EnvironmentAbstract {
          * Partie 1 :
          */
         $this->setConf(new EnvironmentConf);
+        set_time_limit(self::EXECUTION_TIME_LIMIT);
 
         /*
          * Partie 2 : Bloc de variables pouvant être

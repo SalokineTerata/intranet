@@ -553,13 +553,79 @@ class DatabaseOperation {
     $paramSelectClause
     , $paramTableClause
     , $paramWhereClause
+    , $paramOrderClause = NULL
     ) {
+        $orderClauseToAdd = NULL;
+        if ($paramOrderClause != NULL) {
+            $orderClauseToAdd = " ORDER BY " . $paramOrderClause;
+        }
+
         return DatabaseOperation::query(
-                        "SELECT $paramSelectClause FROM " . $paramTableClause . " "
-                        . $paramWhereClause
+                        "SELECT " . $paramSelectClause
+                        . " FROM " . $paramTableClause
+                        . " WHERE " . $paramWhereClause
+                        . $orderClauseToAdd
+        );
+    }
+
+    /**
+     * Retourne un tableau contenant la liste des enregsitrements que les deux
+     * tables ont en relation.
+     * Ces tables doivent être en relation N:1 et configuré dans la base
+     * de données des informations des schémas:
+     *   - Voir INFORMATION_SCHEMA > KEY_COLUMN_USAGE dans MySQL
+     * 
+     * La valeur de retour est un tableau associatif sous la forme
+     * self::convertSqlResultWithKeyAsFirstFieldToArray()
+     * 
+     * En cas d'ambiguïté de nom de champs à sélectionner, préciser le nom
+     * de la table.
+     * Par exemple, si les table R1 et RN ont toutes les deux un champs nommé
+     * "nom", alors préciser "R1.nom" ou "R2.nom" dans $arrayFieldsNameToDisplay
+     *
+     * @param string $tableNameRN Nom de la table de relation N
+     * @param string $tableNameR1 Nom de la table de relation 1
+     * @param mixed $foreignKeyValue Valeur la clef étrangère
+     * @param array $arrayFieldsNameToDisplay Liste des champs à sélectionner.
+     * @param array $arrayFieldsNameOrder Liste des champs à classer.
+     * @return array de type self::convertSqlResultWithKeyAsFirstFieldToArray()
+     */
+    public static function getArrayFieldsNameFromForeignKeyRelationNtoOne(
+    $tableNameRN
+    , $tableNameR1
+    , $foreignKeyValue
+    , $arrayFieldsNameToDisplay
+    , $arrayFieldsNameOrder = NULL
+    ) {
+
+        /**
+         * Nom de la clef de la table N.
+         */
+        $tableDescriptionRN = new DatabaseDescriptionTable($tableNameRN);
+        $keyNameRN = $tableDescriptionRN->getKeyName();
+
+
+        /**
+         * Détermination des noms des champs constituant la relation N:1
+         */
+        $arrayRelationshipKeyName = DatabaseDescription::getFieldNameOfTableRelationRN($tableNameRN, $tableNameR1);
+        $foreignKeyNameRN = implode(array_keys($arrayRelationshipKeyName));
+        $foreignKeyNameR1 = implode($arrayRelationshipKeyName);
+
+        /**
+         * Construction de la requête SQL
+         */
+        $paramSelectClause = $tableNameRN . "." . $keyNameRN . "," . implode(",", $arrayFieldsNameToDisplay);
+        $paramTableClause = $tableNameRN . "," . $tableNameR1;
+        $paramWhereClauseRelationship = $tableNameRN . "." . $foreignKeyNameRN . " = " . $tableNameR1 . "." . $foreignKeyNameR1;
+        $paramWhereClause = $tableNameRN . "." . $foreignKeyNameRN . " = " . $foreignKeyValue . " AND " . $paramWhereClauseRelationship;
+        if ($arrayFieldsNameOrder) {
+            $paramOrderClause = implode(",", $arrayFieldsNameOrder);
+        }
+
+        return DatabaseOperation::convertSqlResultWithKeyAsFirstFieldToArray(
+                        self::doSqlSelect($paramSelectClause, $paramTableClause, $paramWhereClause, $paramOrderClause)
         );
     }
 
 }
-
-?>

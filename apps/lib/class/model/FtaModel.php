@@ -123,7 +123,7 @@ class FtaModel extends AbstractModel {
     public function __construct($paramId = NULL, $paramIsCreateRecordsetInDatabaseIfKeyDoesntExist = AbstractModel::DEFAULT_IS_CREATE_RECORDSET_IN_DATABASE_IF_KEY_DOESNT_EXIST) {
         parent::__construct($paramId, $paramIsCreateRecordsetInDatabaseIfKeyDoesntExist);
 
-        // Tables filles
+        // Tables filles (Relation 1:N, la clef étrangère dans la table actuelle)
         $this->setModelCreateur(
                 new UserModel($this->getDataField(self::FIELDNAME_CREATEUR)->getFieldValue()
                 , DatabaseRecord::VALUE_DONT_CREATE_RECORD_IN_DATABASE_IF_KEY_DOESNT_EXIST)
@@ -141,6 +141,8 @@ class FtaModel extends AbstractModel {
                 new GeoModel($this->getDataField(self::FIELDNAME_SITE_EXPEDITION_FTA)->getFieldValue()
                 , DatabaseRecord::VALUE_DONT_CREATE_RECORD_IN_DATABASE_IF_KEY_DOESNT_EXIST)
         );
+
+        //Tables mères (Relation N:1, la clef étrangère dans la table mère)
     }
 
     /**
@@ -551,7 +553,4 @@ class FtaModel extends AbstractModel {
             );
         }
     }
-
 }
-
-?>

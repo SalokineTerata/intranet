@@ -31,8 +31,8 @@
  *                    [ContentSql]   => Requête liste(Ex: "SELECT * FROM TABLE1;")
  *                    [ContentArray] => Array        (Ex: array("clef1" => "donnee1", "clef2" => "donnee2")
  *                    [TypeOfHtmlObject] => type HTML(Ex: CALENDAR, INPUTTEXT, LIST, SUBFORM ...)
- *                    [ForeignKey] => jointure SQL   (Ex: "fta_processus_delai.id_fta=fta.id_fta")
- *                    [ForeignTable] => Table jointe (Ex: "fta")
+ *                    [ForeignKey] => champs joint   (Ex: "id_fta" si on se situe sur la table fta_processus_delai)
+ *                    [ForeignTable] => Table jointe (Ex: "fta"  si on se situe sur la table fta_processus_delai)
  *                )
  *        )
  *    )
@@ -54,6 +54,11 @@ class DatabaseDescription {
      * Nom du tableau contenant les caractéristiques SQL d'un champ
      */
     const ARRAY_NAME_SQL = "Sql";
+
+    /**
+     * Nom du tableau contenant les caractéristiques de schéma
+     */
+    const ARRAY_NAME_SCHEMA = "Schema";
 
     /**
      * Nom du tableau contenant la liste des champs d'une table
@@ -136,10 +141,34 @@ class DatabaseDescription {
     const ARRAY_NAME_SQL_DEFAULT = "Default";
 
     /**
-     * Nom de la variable contenant les inforamtions
+     * Nom de la variable contenant les informations
      * complémentaires (défini par MySQL)
      */
     const ARRAY_NAME_SQL_EXTRA = "Extra";
+
+    /**
+     * Nom de la variable contenant les informations du schéma relationnel
+     * Nom de la table
+     */
+    const MYSQL_INFORMATION_SCHEMA_KEY_COLUMN_USAGE_TABLE_NAME = "TABLE_NAME";
+
+    /**
+     * Nom de la variable contenant les informations du schéma relationnel
+     * Nom du champs
+     */
+    const MYSQL_INFORMATION_SCHEMA_KEY_COLUMN_USAGE_COLUMN_NAME = "COLUMN_NAME";
+
+    /**
+     * Nom de la variable contenant les informations du schéma relationnel
+     * Nom du champs étranger
+     */
+    const MYSQL_INFORMATION_SCHEMA_KEY_COLUMN_USAGE_REFERENCED_COLUMN_NAME = "REFERENCED_COLUMN_NAME";
+
+    /**
+     * Nom de la variable contenant les informations du schéma relationnel
+     * Nom de la table étrangère
+     */
+    const MYSQL_INFORMATION_SCHEMA_KEY_COLUMN_USAGE_REFERENCED_TABLE_NAME = "REFERENCED_TABLE_NAME";
 
     /**
      * Tableau de résultat stocké dans $_SESSION
@@ -159,12 +188,6 @@ class DatabaseDescription {
      * @param mixed $paramDatabaseName
      */
     public static function buildDatabaseDescription($paramDatabaseName) {
-
-        /**
-         * Récupération de la configuration de la base de données
-         */
-        self::setDatabaseName($paramDatabaseName);
-
         /**
          * Dans le cas où l'objet est sauvegardé dans la session, destruction de cet objet
          */
@@ -172,6 +195,34 @@ class DatabaseDescription {
             unset($_SESSION[get_class()]);
         }
 
+        /**
+         * Récupération de la configuration de la base de données
+         */
+        self::setDatabaseName($paramDatabaseName);
+
+        /**
+         * Récupération des caractéristiques SQL de chaque champs de chaque table
+         */
+        self::buildSqlDescription();
+
+        /**
+         * Recherche de la documentation des champs
+         */
+        self::buildApplicationDocumentationDescription();
+
+        /**
+         * Récupération des relations des tables dans le schéma de la
+         * base de données.
+         */
+        self::buildSchemaRelationshipDescription();
+
+        /**
+         * Enregistrement du résultat final en session PHP $_SESSION
+         */
+        $_SESSION[get_class()] = self::$resultInSession;
+    }
+
+    public static function buildSqlDescription() {
         /**
          * Récupération des caractéristiques SQL de chaque champs de chaque table
          */
@@ -207,14 +258,13 @@ class DatabaseDescription {
                  */
             }//Fin WHILE de parcours des champs
         }//Fin WHILE de parcours des tables
+    }
 
+    public static function buildApplicationDocumentationDescription() {
         /**
          * Recherche de la documentation des champs
          */
-        $resultDoc = DatabaseOperation::query("SELECT id_intranet_column_info, table_name_intranet_column_info, "
-                        . "column_name_intranet_column_info, "
-                        . "label_intranet_column_info, explication_intranet_column_info, sql_request_content_intranet_column_info, type_of_html_object_intranet_column_info "
-                        . "FROM  `intranet_column_info` ");
+        $resultDoc = DatabaseOperation::query("SELECT * FROM  `intranet_column_info` ");
         /**
          * Parcours du résultat de la recherche
          */
@@ -229,6 +279,8 @@ class DatabaseDescription {
                             DatabaseOperation::query($contentSql)
             );
             $TypeOfHtmlObject = $rowsDoc["type_of_html_object_intranet_column_info"];
+            $foreignTable = $rowsDoc["referenced_table_name"];
+            $foreignKey = $rowsDoc["referenced_column_name"];
 
 
             /**
@@ -241,10 +293,14 @@ class DatabaseDescription {
                 self::ARRAY_NAME_DOC_HELP => $help,
                 self::ARRAY_NAME_DOC_CONTENT_SQL => $contentSql,
                 self::ARRAY_NAME_DOC_CONTENT_ARRAY => $contentArray,
-                self::ARRAY_NAME_DOC_TYPE_OF_HTML_OBJECT => $TypeOfHtmlObject
+                self::ARRAY_NAME_DOC_TYPE_OF_HTML_OBJECT => $TypeOfHtmlObject,
+                self::ARRAY_NAME_DOC_FOREIGN_TABLE => $foreignTable,
+                self::ARRAY_NAME_DOC_FOREIGN_KEY => $foreignKey
             );
         }
+    }
 
+    public static function buildSchemaRelationshipDescription() {
         /**
          * Récupération des relations des tables
          */
@@ -252,21 +308,17 @@ class DatabaseDescription {
 
         foreach ($tableRelationship as $value) {
 
-            $paramTableName = $value["TABLE_NAME"];
-            $paramFieldName = $value["COLUMN_NAME"];
-            $paramForeignKey = $value["REFERENCED_COLUMN_NAME"];
-            $paramForeignTable = $value["REFERENCED_TABLE_NAME"];
+            $paramTableName = $value[self::MYSQL_INFORMATION_SCHEMA_KEY_COLUMN_USAGE_TABLE_NAME];
+            $paramFieldName = $value[self::MYSQL_INFORMATION_SCHEMA_KEY_COLUMN_USAGE_COLUMN_NAME];
+            $paramForeignKey = $value[self::MYSQL_INFORMATION_SCHEMA_KEY_COLUMN_USAGE_REFERENCED_COLUMN_NAME];
+            $paramForeignTable = $value[self::MYSQL_INFORMATION_SCHEMA_KEY_COLUMN_USAGE_REFERENCED_TABLE_NAME];
+
             self::$resultInSession[$paramTableName][self::ARRAY_NAME_FIELDS]
-                    [$paramFieldName][self::ARRAY_NAME_DOC][self::ARRAY_NAME_DOC_FOREIGN_KEY] = $paramForeignKey;
-            self::$resultInSession[$paramTableName][self::ARRAY_NAME_FIELDS]
-                    [$paramFieldName][self::ARRAY_NAME_DOC][self::ARRAY_NAME_DOC_FOREIGN_TABLE] = $paramForeignTable;
+                    [$paramFieldName][self::ARRAY_NAME_SCHEMA] = array(
+                self::ARRAY_NAME_DOC_FOREIGN_KEY => $paramForeignKey,
+                self::ARRAY_NAME_DOC_FOREIGN_TABLE => $paramForeignTable
+            );
         }
-
-
-        /**
-         * Enregistrement du résultat final en session PHP $_SESSION
-         */
-        $_SESSION[get_class()] = self::$resultInSession;
     }
 
     /**
@@ -459,6 +511,15 @@ class DatabaseDescription {
         return DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray($paramSql);
     }
 
-}
+    public static function getFieldNameOfTableRelationRN($paramTableNameRN, $paramTableNameR1) {
+        foreach ($_SESSION[get_class()][$paramTableNameR1][self::ARRAY_NAME_FIELDS] as $fieldOfTableR1) {
 
-?>
+            if ($fieldOfTableR1[self::ARRAY_NAME_DOC][self::ARRAY_NAME_DOC_FOREIGN_TABLE] == $paramTableNameRN) {
+                $foreignKeyName = $fieldOfTableR1[self::ARRAY_NAME_DOC][self::ARRAY_NAME_DOC_FOREIGN_KEY];
+                $referencedKeyName = self::getTableKeyName($paramTableNameR1);
+            }
+        }
+        return array($foreignKeyName => $referencedKeyName);
+    }
+
+}

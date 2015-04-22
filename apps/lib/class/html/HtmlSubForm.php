@@ -29,7 +29,7 @@
  *
  * @author bs4300280
  */
-class HtmlSubForm {
+class HtmlSubForm extends AbstractHtmlGlobalElement {
 
     /**
      * Tableau PHP stockant le résultat de la requête sur laquelle est basée
@@ -39,54 +39,41 @@ class HtmlSubForm {
     private $arrayContent = NULL;
 
     /**
-     * Titre du sous formulaire.
-     * @var mixed
-     */
-    private $title = NULL;
-
-    /**
-     * Identifiant de la balise HTML <DIV>
-     * @var mixed 
-     */
-    private $divId = NULL;
-
-    /**
      * Nom de la classe désignat le model de base de données utilisé
      * @var mixed 
      */
     private $subFormModelClassName = NULL;
 
     /**
-     * L'élément est-il modifiable ?
-     * @var boolean
+     * Quels sont les éléments du sous formulaire qui sont vérrouillés ?
+     *   - Si l'attribut $isEditable du sous-formulaire est FALSE,
+     *     Cet attribut n'apporte aucune modification car tous les champs du
+     *     sous-formulaire sont déjà vérouillés.
+     *   - Si l'attribut $isEditable du sous-formulaire est TRUE,
+     *     Cet attribut de type tableau contient la liste des champs qu'il faut
+     *     tout de même vérouiller.
+     * @var array
      */
-    private $isEditable;
+    private $arrayContentLocked;
 
-    function __construct($paramArrayContent, $paramSubFormModelClassName, $paramTitle = NULL, $paramDivId = NULL) {
-
+    function __construct($paramArrayContent, $paramSubFormModelClassName, $paramLabel) {
+        parent::__construct();
+        parent::setLabel($paramLabel);
         $this->setArrayContent($paramArrayContent);
         $this->setSubFormModelClassName($paramSubFormModelClassName);
-        $this->setTitle($paramTitle);
-        $this->setDivId($paramDivId);
-    }
-    function getIsEditable() {
-        return $this->isEditable;
     }
 
-    function setIsEditable($isEditable) {
-        $this->isEditable = $isEditable;
+    function getArrayContentLocked() {
+        return $this->arrayContentLocked;
     }
 
-        /**
-     * 
-     * @param boolean $paramIsEditable
-     * @return string
-     */
-    function getHtmlResult() {
+    function setArrayContentLocked($arrayContentLocked) {
+        $this->arrayContentLocked = $arrayContentLocked;
+    }
+
+    private function getHtmlResultSubForm() {
         $return = NULL;
-        $return .= "<table><tr><td><fieldset>";
-        $return .= "<legend>" . $this->getTitle() . "</legend>";
-        $return .= "<div id=\"" . $this->getDivId() . "\">";
+        $return .= "<table><tr><td>";
         $return .="<table>";
         $subFormModelClassName = $this->getSubFormModelClassName();
         foreach ($this->getArrayContent() as $key => $valueArray) {
@@ -100,27 +87,37 @@ class HtmlSubForm {
                 $dataField = $modelSubForm->getDataField($fieldName);
                 $dataField->setLabelCustom(NULL);
                 $htmlField = Html::getHtmlObjectFromDataField($dataField);
-                $htmlField->setIsEditable($this->getIsEditable());
+
+                //Si le sous-formulaire est modifiable par l'utilisateur
+                //et que le champs ne fait pas partie de la liste des champs
+                //vérrouillés, alors le champs sera modifiable par l'utilisateur.
+                if (parent::getIsEditable() && !in_array($fieldName, $this->getArrayContentLocked())) {
+                    //Le champs est modifiable.
+                    $htmlField->setIsEditable(TRUE);
+                } else {
+                    //Le champs n'est pas modifiable.
+                    $htmlField->setIsEditable(FALSE);
+                }
                 $htmlField->setHtmlRenderToTable();
+                $htmlField->getAttributesGlobal()->setIsIconNextEnabledToTrue();
                 $return.=$htmlField->getHtmlResult();
             }
             $return.= "</tr>";
         }
+        if (parent::getIsEditable()) {
+
+            $return.="<tr><td>"
+                    . $this->getAttributesGlobal()->getIconAddToHtml()
+                    . "<a href=\"...\" title=\"Not implemented\"> Ajouter</a></td></tr>"
+            ;
+        }
         $return .= "</table>";
-        $return .= "</div></fieldset></td></tr></table>";
+        $return .= "</div></td></tr></table>";
         return $return;
     }
 
     function getArrayContent() {
         return $this->arrayContent;
-    }
-
-    function getTitle() {
-        return $this->title;
-    }
-
-    function getDivId() {
-        return $this->divId;
     }
 
     function getSubFormModelClassName() {
@@ -131,16 +128,16 @@ class HtmlSubForm {
         $this->arrayContent = $arrayContent;
     }
 
-    function setTitle($title) {
-        $this->title = $title;
-    }
-
-    function setDivId($divId) {
-        $this->divId = $divId;
-    }
-
     function setSubFormModelClassName($subFormModelClassName) {
         $this->subFormModelClassName = $subFormModelClassName;
+    }
+
+    public function getHtmlEditableContent() {
+        return $this->getHtmlResultSubForm();
+    }
+
+    public function getHtmlViewedContent() {
+        return $this->getHtmlResultSubForm();
     }
 
 }

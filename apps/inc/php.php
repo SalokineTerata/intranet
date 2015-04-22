@@ -168,6 +168,7 @@ require_once("../lib/class/html/DataFieldToHtmlListUniteFacturation.php");
 require_once("../lib/class/html/DataFieldToHtmlInputCalendar.php");
 require_once("../lib/class/html/DataFieldToHtmlTextArea.php");
 require_once("../lib/class/html/HtmlSubForm.php");
+require_once("../lib/class/html/DataFieldToHtmlSubform.php");
 
 // Session utilisateur
 require_once("../lib/session.php");

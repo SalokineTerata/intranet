@@ -383,6 +383,7 @@ class Chapitre {
          * @todo Non implementé
          */
         //Remise sur factures
+        //"fta_tarif", "conditions_commerciales_fta_tarif"
         $bloc.="<tr> <td>Remise sur factures</td><td> not implement(sous table)</td></tr>";
         /**
          * @todo Non implementé
@@ -632,14 +633,18 @@ class Chapitre {
         $synthese_action = self::$synthese_action;
         $isEditable = self::$is_editable;
         //$isEditable = TRUE;
-
-        $bloc.="<tr class=titre_principal><td class>Logistique</td></tr>";
-
         //Identifiant FTA
         $ftaModel = new FtaModel($id_fta);
         $ftaView = new FtaView($ftaModel);
         $ftaView->setIsEditable($isEditable);
         $ftaView->setFtaChapitreModelById(self::ID_CHAPITRE_IDENTITE);
+
+        $bloc.="<tr class=titre_principal><td class>Activation des Produits</td></tr>";
+
+        //Codification
+        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_SUFFIXE_AGROLOGIC_FTA);
+
+        $bloc.="<tr class=titre_principal><td class>Logistique</td></tr>";
 
         //Site d'assemblage
         $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_SITE_ASSEMBLAGE);
@@ -878,13 +883,13 @@ class Chapitre {
 
         //Unité de facturation et Poids élémentaire
         $bloc.=$ftaView->getHtmlUniteFacturationWithPoidsElementaire();
-        
-        
-        
+
+
+
         /*
          * todo manque la correction du PCB
          */
-        
+
         $bloc.="<tr class=titre_principal><td class>Caractéristiques FTA</td></tr>";
 
         //Créateur
@@ -904,9 +909,42 @@ class Chapitre {
 
         $bloc.="<tr class=titre_principal><td class>Echéances</td></tr>";
 
+
+
+        $bloc.="<tr class=titre_principal><td class>Commerce</td></tr>";
+
+        /**
+         * @todo Non implementé
+         */
+        //Remise sur factures
+        //"fta_tarif", "conditions_commerciales_fta_tarif"
+        $bloc.="<tr> <td>Remise sur factures</td><td> not implement(sous table)</td></tr>";
+
+        //Libellé du code article chez le client
+        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_LIBELLE_CODE_ARTICLE_CLIENT);
+
+        //Valeur du code article chez le client
+        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_CODE_ARTICLE_CLIENT);
+
+        //PVC de l'article:
+        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_PVC_ARTICLE);
+
+        //Prix / KG
+        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_PVC_ARTICLE_KG);
+
+        //Durée de vie garantie client (en jours)
+        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_DUREE_DE_VIE);
+
+        //Nombre de portion
+        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_NOMBRE_PORTION_FTA);
+
+        //Service consommateur
+        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_SERVICE_CONSOMMATEUR);
+
+        $bloc.="<tr class=titre_principal><td class>Identité Suite</td></tr>";
+
         //Date d'échéance des processus
         $bloc.=$ftaView->getHtmlEcheancesProcessus();
-
 
 
         return $bloc;
@@ -1025,8 +1063,6 @@ class Chapitre {
         $ftaView->setFtaChapitreModelById(self::ID_CHAPITRE_IDENTITE);
 
         $bloc.="<tr class=titre_principal><td class>Activation des Produits</td></tr>";
-
-
 
         //Codification
         $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_SUFFIXE_AGROLOGIC_FTA);

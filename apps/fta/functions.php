@@ -963,7 +963,6 @@ function devalidation_chapitre($id_fta, $id_fta_processus) {
         DatabaseOperation::query($req);
 
         if (mysql_affected_rows()) { //Si le processus a été dévalidé, alors on informe
-
             //Dénotification
             $req = "UPDATE `fta_chapitre`, `fta_suivi_projet` "
                     . "SET notification_fta_suivi_projet=0 "

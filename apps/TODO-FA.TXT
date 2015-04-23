@@ -20,8 +20,9 @@ PARTIE 1: Construction des interfaces utilisateurs (v1) --> Pas de sous table po
 
 [V] Phase Final du chapitre paletisation partie Model
 
-[V] Chapitre dictionnaire de donnée
+[V] Chapitre dictionnaire de donnée (en cours)
 [V] Modifiaction des objets créés.
+[ ] Reproduction du menu de v2 en objet.
 
 
 [ ] Chapitre Emballage

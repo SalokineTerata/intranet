@@ -64,6 +64,7 @@ require_once("../lib/class/model/FtaSuiviProjetModel.php");
 require_once("../lib/class/model/FtaProcessusMultisiteModel.php");
 require_once("../lib/class/model/FtaProcessusDelaiModel.php");
 require_once("../lib/class/model/GeoModel.php");
+require_once("../lib/class/model/SalariesModel.php");
 
 // Standard HTML
 require_once("../lib/class/html/Html.php");

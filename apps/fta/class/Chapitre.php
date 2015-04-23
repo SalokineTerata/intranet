@@ -327,7 +327,7 @@ class Chapitre {
         $id_fta = self::$id_fta;
         $synthese_action = self::$synthese_action;
         $isEditable = self::$is_editable;
-        $isEditable = TRUE;
+        //$isEditable = TRUE;
         //
         //Identifiant FTA
         $idFta = $id_fta;
@@ -362,7 +362,7 @@ class Chapitre {
         $id_fta = self::$id_fta;
         $synthese_action = self::$synthese_action;
         $isEditable = self::$is_editable;
-        $isEditable = TRUE;
+        //$isEditable = TRUE;
         //
         //Identifiant FTA
         $idFta = $id_fta;
@@ -448,7 +448,7 @@ class Chapitre {
         $id_fta = self::$id_fta;
         $synthese_action = self::$synthese_action;
         $isEditable = self::$is_editable;
-        $isEditable = TRUE;
+        //$isEditable = TRUE;
         //
         //Identifiant FTA
         $idFta = $id_fta;
@@ -1138,7 +1138,7 @@ class Chapitre {
         $id_fta = self::$id_fta;
         $synthese_action = self::$synthese_action;
         $isEditable = self::$is_editable;
-        $isEditable = FALSE;
+        //$isEditable = FALSE;
 
         //Identifiant FTA
         $ftaModel = new FtaModel($id_fta);
@@ -1166,7 +1166,7 @@ class Chapitre {
         $id_fta = self::$id_fta;
         $synthese_action = self::$synthese_action;
         $isEditable = self::$is_editable;
-        $isEditable = TRUE;
+        //$isEditable = TRUE;
         //
         //Identifiant FTA
         $ftaModel = new FtaModel($id_fta);
@@ -1442,7 +1442,7 @@ class Chapitre {
         $id_fta = self::$id_fta;
         $synthese_action = self::$synthese_action;
         $isEditable = self::$is_editable;
-        $isEditable = TRUE;
+        //$isEditable = TRUE;
 
         //Identifiant FTA
         $ftaModel = new FtaModel($id_fta);
@@ -1602,7 +1602,7 @@ class Chapitre {
         $id_fta = self::$id_fta;
         $synthese_action = self::$synthese_action;
         $isEditable = self::$is_editable;
-        $isEditable = TRUE;
+        //$isEditable = TRUE;
         //
         //Identifiant FTA
         $ftaModel = new FtaModel($id_fta);

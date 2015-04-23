@@ -80,6 +80,10 @@ if ($$module_consultation <> 1 and $nom_fta_chapitre_encours == "tarif") {
 $navigue = afficher_navigation($id_fta, $id_fta_chapitre_encours, $synthese_action, $comeback);
 
 
+//Navigation::initNavigation($id_fta, $id_fta_chapitre_encours, $synthese_action, $comeback);
+//
+//$bloc.= Navigation::getHtmlNavigationBar();
+
 /*
   Création des Fonctions JavaScript
  */

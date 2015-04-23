@@ -10,7 +10,7 @@
  *
  * @author bs4300280
  */
-class HtmlListBoolean extends HtmlList {
+class HtmlListBoolean extends HtmlListSelect {
 
     const YES_LABEL = "Oui";
     const YES_VALUE = 1;

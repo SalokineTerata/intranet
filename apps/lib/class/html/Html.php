@@ -161,7 +161,7 @@ class Html {
                 break;
 
             case Html::TYPE_OF_OBJECT_LIST:
-                $htmlObject = new DataFieldToHtmlList($paramDataField);
+                $htmlObject = new DataFieldToHtmlListSelect($paramDataField);
                 break;
             default:
             case Html::TYPE_OF_OBJECT_BOOLEAN:

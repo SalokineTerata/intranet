@@ -76,12 +76,16 @@ class DatabaseDescriptionField {
         return DatabaseDescription::isFieldPrimaryKey($this->getTableName(), $this->getFieldName());
     }
 
+    private function getTable() {
+        return $this->table;
+    }
+
     /**
      * Renvoi le nom de la table à laquelle appartient le champs
      * @return string
      */
     public function getTableName() {
-        return $this->table->getTableName();
+        return $this->getTable()->getTableName();
     }
 
     /**
@@ -134,6 +138,14 @@ class DatabaseDescriptionField {
         ;
     }
 
-}
+    public function getReferencedTableName() {
+        return DatabaseDescription::getFieldDocForeignTable
+                        ($this->getTableName(), $this->getFieldName());
+    }
 
-?>
+    public function getReferencedFieldName() {
+        return DatabaseDescription::getFieldDocForeignKey
+                        ($this->getTableName(), $this->getFieldName());
+    }
+
+}

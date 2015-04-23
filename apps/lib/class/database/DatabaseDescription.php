@@ -104,6 +104,17 @@ class DatabaseDescription {
     const ARRAY_NAME_DOC_TYPE_OF_HTML_OBJECT = "TypeOfHtmlObject";
 
     /**
+     * Type de stockage de la donnée.
+     * La donnée peut être réellement stockée en base de données : REAL
+     * Elle peut etre virtuelle dans le cas de sous-table : VIRTUAL
+     * Elle peut être calculée : CALCULATE.
+     */
+    const ARRAY_NAME_DOC_TYPE_OF_STORAGE = "TypeOfStorage";
+    const TYPE_OF_STORAGE_REAL = "REAL";
+    const TYPE_OF_STORAGE_VIRTUAL = "VIRTUAL";
+    const TYPE_OF_STORAGE_CALCULATE = "CALCULATE";
+
+    /**
      * Nom de la clé étrangère dans la table étrangère
      */
     const ARRAY_NAME_DOC_FOREIGN_KEY = "ForeignKey";
@@ -278,7 +289,8 @@ class DatabaseDescription {
             $contentArray = DatabaseOperation::convertSqlResultKeyAndOneFieldToArray(
                             DatabaseOperation::query($contentSql)
             );
-            $TypeOfHtmlObject = $rowsDoc["type_of_html_object_intranet_column_info"];
+            $typeOfHtmlObject = $rowsDoc["type_of_html_object_intranet_column_info"];
+            $typeOfStorage = $rowsDoc["type_of_storage"];
             $foreignTable = $rowsDoc["referenced_table_name"];
             $foreignKey = $rowsDoc["referenced_column_name"];
 
@@ -293,7 +305,8 @@ class DatabaseDescription {
                 self::ARRAY_NAME_DOC_HELP => $help,
                 self::ARRAY_NAME_DOC_CONTENT_SQL => $contentSql,
                 self::ARRAY_NAME_DOC_CONTENT_ARRAY => $contentArray,
-                self::ARRAY_NAME_DOC_TYPE_OF_HTML_OBJECT => $TypeOfHtmlObject,
+                self::ARRAY_NAME_DOC_TYPE_OF_HTML_OBJECT => $typeOfHtmlObject,
+                self::ARRAY_NAME_DOC_TYPE_OF_STORAGE => $typeOfStorage,
                 self::ARRAY_NAME_DOC_FOREIGN_TABLE => $foreignTable,
                 self::ARRAY_NAME_DOC_FOREIGN_KEY => $foreignKey
             );
@@ -415,6 +428,17 @@ class DatabaseDescription {
     public static function getFieldDocTypeOfHtmlObject($paramTableName, $paramFieldName) {
         return $_SESSION[get_class()][$paramTableName][self::ARRAY_NAME_FIELDS]
                 [$paramFieldName][self::ARRAY_NAME_DOC][self::ARRAY_NAME_DOC_TYPE_OF_HTML_OBJECT];
+    }
+
+    /**
+     * Retourne le type de stockage de la données en base de données.
+     * @param string $paramTableName Nom de la table
+     * @param string $paramFieldName Nom du champs
+     * @return string Type de stockage
+     */
+    public static function getFieldDocTypeOfStorage($paramTableName, $paramFieldName) {
+        return $_SESSION[get_class()][$paramTableName][self::ARRAY_NAME_FIELDS]
+                [$paramFieldName][self::ARRAY_NAME_DOC][self::ARRAY_NAME_DOC_TYPE_OF_STORAGE];
     }
 
     /**

@@ -66,7 +66,7 @@ if ($id_fta) {
 }
 
 //Catégorie de FTA
-$listCategorie = new HtmlList(
+$listCategorie = new HtmlListSelect(
                 $data_field = new DatabaseDescriptionField(
                         $field_table = ObjectFta::TABLE_FTA_NAME,
                         $field_name = "id_fta_categorie"

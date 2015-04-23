@@ -129,7 +129,7 @@ class FtaView {
 
         //Initialisation des variables locales
         $htmlReturn = NULL;
-        $htmlObjectUniteFacturation = new DataFieldToHtmlList(
+        $htmlObjectUniteFacturation = new DataFieldToHtmlListSelect(
                 $this->getModel()->getDataField(FtaModel::FIELDNAME_UNITE_FACTURATION)
         );
         $htmlObjectPoidsElementaire = new DataFieldToHtmlInputText(
@@ -175,38 +175,34 @@ class FtaView {
     public function getHtmlEcheancesProcessus() {
         if ($this->getModel()->getDataField(FtaModel::FIELDNAME_DATE_ECHEANCE_FTA)) {
 
+
+
             /**
              * Informations d'entrées
              * ----------------------
              */
-            $paramSubFormModelClassName = "FtaProcessusDelaiModel";
-            $tableNameRN = FtaProcessusDelaiModel::TABLENAME;
-            $tableNameR1 = FtaModel::TABLENAME;
-            $foreignKeyValue = $this->getModel()->getKeyValue();
-            $arrayFieldsNameToDisplay = array(FtaProcessusDelaiModel::FIELDNAME_ID_FTA_PROCESSUS
+            $paramArrayFieldsNameToDisplay = array(FtaProcessusDelaiModel::FIELDNAME_ID_FTA_PROCESSUS
                 , FtaProcessusDelaiModel::FIELDNAME_DATE_ECHEANCE_PROCESSUS);
-            $arrayFieldsNameToLock = array(FtaProcessusDelaiModel::FIELDNAME_ID_FTA_PROCESSUS);
-            $arrayFieldsNameOrder = array(FtaProcessusDelaiModel::FIELDNAME_DATE_ECHEANCE_PROCESSUS);
+            $paramArrayFieldsNameToLock = array(FtaProcessusDelaiModel::FIELDNAME_ID_FTA_PROCESSUS);
+            $paramArrayFieldsNameOrder = array(FtaProcessusDelaiModel::FIELDNAME_DATE_ECHEANCE_PROCESSUS);
 
-            $isEditable = $this->getIsEditable();
-            $rightToAdd = FALSE;
-            $statusValidation = FALSE;
+            $paramLabel = "Echéances des processus";
 
-            $paramTitle = "Echéances des processus";
-
+            $dataField = $this->getModel()->getDataField(FtaModel::FIELDNAME_VIRTUAL_FTA_PROCESSUS_DELAI);
+            $referencedTableName = $dataField->getReferencedTableName();
+            $tableName = $dataField->getTableName();
+            $fieldValue = $dataField->getFieldValue();
             $subFormDateEcheance = new DataFieldToHtmlSubform(
-                    $paramSubFormModelClassName
-                    , $paramTitle
-                    , $tableNameRN
-                    , $tableNameR1
-                    , $foreignKeyValue
-                    , $arrayFieldsNameToDisplay
-                    , $arrayFieldsNameToLock
-                    , $arrayFieldsNameOrder
-                    , $isEditable
-                    , $rightToAdd
-                    , $statusValidation
+                    $paramLabel
+                    , $referencedTableName
+                    , $tableName
+                    , $fieldValue
+                    , $paramArrayFieldsNameToDisplay
+                    , $paramArrayFieldsNameToLock
+                    , $paramArrayFieldsNameOrder
             );
+            $subFormDateEcheance->setIsEditable($this->getIsEditable());
+            $subFormDateEcheance->setIsRightToAddToTrue();
             $bloc = $subFormDateEcheance->getHtmlResult();
         }
         return $bloc;

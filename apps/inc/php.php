@@ -37,6 +37,7 @@ require_once("../conf/EnvironmentConf.php");
 require_once("../conf/EnvironmentAbstract.php");
 require_once("../conf/EnvironmentCod.php");
 
+
 // Moteur de base de données
 require_once("../lib/class/database/DatabaseOperation.php");
 require_once("../lib/class/database/DatabaseDescription.php");
@@ -44,6 +45,10 @@ require_once("../lib/class/database/DatabaseDescriptionField.php");
 require_once("../lib/class/database/DatabaseDescriptionTable.php");
 require_once("../lib/class/database/DatabaseDataField.php");
 require_once("../lib/class/database/DatabaseRecord.php");
+
+// Configuration des models de base de données
+require_once("../lib/class/model/DatabaseTableModelAssociation.php");
+
 
 // Modèles des tables en base de données
 require_once("../lib/class/model/AbstractModel.php");
@@ -151,14 +156,14 @@ require_once("../lib/class/html/HtmlInputText.php");
 require_once("../lib/class/html/HtmlInputNumber.php");
 require_once("../lib/class/html/HtmlInputKg.php");
 require_once("../lib/class/html/HtmlInputCalendar.php");
-require_once("../lib/class/html/AbstractHtmlSelect.php");
-require_once("../lib/class/html/HtmlList.php");
+require_once("../lib/class/html/AbstractHtmlList.php");
+require_once("../lib/class/html/HtmlListSelect.php");
 require_once("../lib/class/html/HtmlListBoolean.php");
 require_once("../lib/class/html/HtmlTextArea.php");
 require_once("../lib/class/html/HtmlCheckbox.php");
 require_once("../lib/class/html/TraitDataFieldToHtml.php");
 require_once("../lib/class/html/DataFieldToHtmlInputText.php");
-require_once("../lib/class/html/DataFieldToHtmlList.php");
+require_once("../lib/class/html/DataFieldToHtmlListSelect.php");
 require_once("../lib/class/html/DataFieldToHtmlListBoolean.php");
 require_once("../lib/class/html/DataFieldToHtmlInputCalendar.php");
 require_once("../lib/class/html/DataFieldToHtmlTextArea.php");
@@ -186,4 +191,4 @@ if ($module != "lib") {
     require_once ("../$module/functions.php");
 }
 $globalConfig = $_SESSION["globalConfig"];
-?>
+

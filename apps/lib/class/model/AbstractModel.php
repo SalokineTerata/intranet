@@ -22,6 +22,10 @@ class AbstractModel {
         $this->setKeyValue($this->getRecord()->getKeyValue());
     }
 
+    public static function getClassName() {
+        return get_called_class();
+    }
+
     public function getIsEditable() {
         return $this->isEditable;
     }

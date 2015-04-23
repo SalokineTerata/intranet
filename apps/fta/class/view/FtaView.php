@@ -175,63 +175,38 @@ class FtaView {
     public function getHtmlEcheancesProcessus() {
         if ($this->getModel()->getDataField(FtaModel::FIELDNAME_DATE_ECHEANCE_FTA)) {
 
-            //Date d'échéance de la FTA
-            $dataField = $this->getModel()->getDataField(FtaModel::FIELDNAME_DATE_ECHEANCE_FTA);
-            $htmlElement = new DataFieldToHtmlInputCalendar($dataField);
-            $htmlElement->setIsEditable($this->getIsEditable());
-
-            $bloc .=$htmlElement->getHtmlResult();
-            $bloc .= self::showDatesEcheanceProcessus();
-
-            $bloc = "";
-
             /**
              * Informations d'entrées
              * ----------------------
              */
+            $paramSubFormModelClassName = "FtaProcessusDelaiModel";
+            $tableNameRN = FtaProcessusDelaiModel::TABLENAME;
+            $tableNameR1 = FtaModel::TABLENAME;
             $foreignKeyValue = $this->getModel()->getKeyValue();
-            $foreignFieldName = FtaProcessusDelaiModel::FIELDNAME_ID_FTA;
-            $tableName = FtaProcessusDelaiModel::TABLENAME;
-            $fieldsNameToDisplay = "id_fta_processus,date_echeance_processus";
-            $rightToAdd = TRUE;
-            $statusValidation = FALSE;
-            /**
-             * Informations à déterminer
-             * -------------------------
-             * Liaison entre les deux tables = fta_processus_delai.id_fta=DatabaseDescription .id_fta
-             */
-            $sqlRelationship = $tableName . "." . $foreignFieldName . " = "
-                    . DatabaseDescription::getFieldDocForeignTable($tableName, $foreignFieldName)
-                    . "."
-                    . DatabaseDescription::getFieldDocForeignKey($tableName, $foreignFieldName)
-            ;
-            /**
-             * 
-             * 
-             */
-            $tableDescription = new DatabaseDescriptionTable($tableName);
-            $keyName = $tableDescription->getKeyName();
-            $paramSelectClause = $keyName . "," . $fieldsNameToDisplay;
-            $paramTableClause = $tableName;
-            $paramWhereClause = $foreignFieldName . " = " . $foreignKeyValue;
-            $paramOrderClause = FtaProcessusDelaiModel::FIELDNAME_DATE_ECHEANCE_PROCESSUS;
+            $arrayFieldsNameToDisplay = array(FtaProcessusDelaiModel::FIELDNAME_ID_FTA_PROCESSUS
+                , FtaProcessusDelaiModel::FIELDNAME_DATE_ECHEANCE_PROCESSUS);
+            $arrayFieldsNameToLock = array(FtaProcessusDelaiModel::FIELDNAME_ID_FTA_PROCESSUS);
+            $arrayFieldsNameOrder = array(FtaProcessusDelaiModel::FIELDNAME_DATE_ECHEANCE_PROCESSUS);
 
-            $req = "SELECT " . $paramSelectClause
-                    . " FROM " . $paramTableClause
-                    . " WHERE " . $paramWhereClause
-                    . " ORDER BY " . $paramOrderClause
-            ;
+            $isEditable = $this->getIsEditable();
+            $rightToAdd = FALSE;
+            $statusValidation = FALSE;
 
             $paramTitle = "Echéances des processus";
-            $paramDivId = "echeance_processus";
-            $paramSubFormModelClassName = "FtaProcessusDelaiModel";
 
-            $paramArrayContent = DatabaseOperation::convertSqlResultWithKeyAsFirstFieldToArray(
-                            DatabaseOperation::query($req)
+            $subFormDateEcheance = new DataFieldToHtmlSubform(
+                    $paramSubFormModelClassName
+                    , $paramTitle
+                    , $tableNameRN
+                    , $tableNameR1
+                    , $foreignKeyValue
+                    , $arrayFieldsNameToDisplay
+                    , $arrayFieldsNameToLock
+                    , $arrayFieldsNameOrder
+                    , $isEditable
+                    , $rightToAdd
+                    , $statusValidation
             );
-
-            $subFormDateEcheance = new HtmlSubForm($paramArrayContent, $paramSubFormModelClassName, $paramTitle, $paramDivId);
-            $subFormDateEcheance->setIsEditable(TRUE);
             $bloc = $subFormDateEcheance->getHtmlResult();
         }
         return $bloc;
@@ -325,7 +300,7 @@ class FtaView {
         );
     }
 
-     /**
+    /**
      * 
      * @return FtaConditionnementModel
      */

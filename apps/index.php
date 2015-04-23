@@ -4,4 +4,4 @@
  * and open the template in the editor.
  */
 header("Location: lib/index.php");
-?>
+

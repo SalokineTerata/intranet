@@ -608,7 +608,7 @@ class DatabaseOperation {
         /**
          * Détermination des noms des champs constituant la relation N:1
          */
-        $arrayRelationshipKeyName = DatabaseDescription::getFieldNameOfTableRelationRN($tableNameRN, $tableNameR1);
+        $arrayRelationshipKeyName = DatabaseDescription::getFieldNameOfTableRelationR1NByTablesName($tableNameRN, $tableNameR1);
         $foreignKeyNameRN = implode(array_keys($arrayRelationshipKeyName));
         $foreignKeyNameR1 = implode($arrayRelationshipKeyName);
 

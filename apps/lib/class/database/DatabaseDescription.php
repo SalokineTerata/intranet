@@ -497,8 +497,9 @@ class DatabaseDescription {
         return $arrayResult;
     }
 
-    public static function getArrayAllForeignKey() {
-        $paramSql = "SELECT k.TABLE_NAME, "
+    private static function getQueryForeignKey() {
+
+        return "SELECT k.TABLE_NAME, "
                 . "k.COLUMN_NAME, k.REFERENCED_TABLE_NAME, "
                 . "k.REFERENCED_COLUMN_NAME "
                 . "FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE AS k "
@@ -507,11 +508,21 @@ class DatabaseDescription {
                 . "AND k.CONSTRAINT_NAME = c.CONSTRAINT_NAME "
                 . "WHERE c.CONSTRAINT_TYPE =  'FOREIGN KEY' AND k.CONSTRAINT_SCHEMA = '" . self::getDatabaseName() . "'"
         ;
+    }
 
+    public static function getArrayAllForeignKey() {
+        $paramSql = self::getQueryForeignKey();
         return DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray($paramSql);
     }
 
-    public static function getFieldNameOfTableRelationRN($paramTableNameRN, $paramTableNameR1) {
+    public static function getArrayAllTableRNForOneTableR1($paramTableR1) {
+        $paramSql = self::getQueryForeignKey()
+                . "AND `REFERENCED_TABLE_NAME` = '" . $paramTableR1 . "'"
+        ;
+        return DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray($paramSql);
+    }
+
+    public static function getFieldNameOfTableRelationR1NByTablesName($paramTableNameRN, $paramTableNameR1) {
         foreach ($_SESSION[get_class()][$paramTableNameR1][self::ARRAY_NAME_FIELDS] as $fieldOfTableR1) {
 
             if ($fieldOfTableR1[self::ARRAY_NAME_DOC][self::ARRAY_NAME_DOC_FOREIGN_TABLE] == $paramTableNameRN) {

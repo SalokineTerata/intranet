@@ -33,6 +33,9 @@
  *                    [TypeOfHtmlObject] => type HTML(Ex: CALENDAR, INPUTTEXT, LIST, SUBFORM ...)
  *                    [ForeignKey] => champs joint   (Ex: "id_fta" si on se situe sur la table fta_processus_delai)
  *                    [ForeignTable] => Table jointe (Ex: "fta"  si on se situe sur la table fta_processus_delai)
+ *                    [FieldsToDisplay] => liste de champs (Ex: "id_fta_processus,date_echeance_processus")
+ *                    [FieldsToLock] => liste de champs    (Ex: "id_fta_processus")
+ *                    [FieldsToOrder] => liste de champs   (Ex: "date_echeance_processus")
  *                )
  *        )
  *    )
@@ -123,6 +126,26 @@ class DatabaseDescription {
      * Nom de la table étrangère
      */
     const ARRAY_NAME_DOC_FOREIGN_TABLE = "ForeignTable";
+
+    /**
+     * Dans le cas d'une liste, champs à afficher
+     */
+    const ARRAY_NAME_DOC_FIELDS_TO_DISPLAY = "FieldsToDisplay";
+
+    /**
+     * Dans le cas d'une liste, champs à verrouiller
+     */
+    const ARRAY_NAME_DOC_FIELDS_TO_LOCK = "FieldsToLock";
+
+    /**
+     * Dans le cas d'une liste, classement des colonnes
+     */
+    const ARRAY_NAME_DOC_FIELDS_TO_ORDER = "FieldsToOrder";
+
+    /**
+     * Dans le cas d'une liste, droit d'ajouter une nouvelle ligne
+     */
+    const ARRAY_NAME_DOC_RIGHT_TO_ADD = "RightsToAdd";
 
     /**
      * Nom de la variable contenant le nom du champ (défini par MySQL)
@@ -275,7 +298,7 @@ class DatabaseDescription {
         /**
          * Recherche de la documentation des champs
          */
-        $resultDoc = DatabaseOperation::query("SELECT * FROM  `intranet_column_info` ");
+        $resultDoc = DatabaseOperation::query("SELECT * FROM `intranet_column_info` ");
         /**
          * Parcours du résultat de la recherche
          */
@@ -293,6 +316,10 @@ class DatabaseDescription {
             $typeOfStorage = $rowsDoc["type_of_storage"];
             $foreignTable = $rowsDoc["referenced_table_name"];
             $foreignKey = $rowsDoc["referenced_column_name"];
+            $fieldsToDisplay = $rowsDoc["fields_to_display"];
+            $fieldsToLock = $rowsDoc["fields_to_lock"];
+            $fieldsToOrder = $rowsDoc["fields_to_order"];
+            $rightToAdd = $rowsDoc["right_to_add"];
 
 
             /**
@@ -308,7 +335,11 @@ class DatabaseDescription {
                 self::ARRAY_NAME_DOC_TYPE_OF_HTML_OBJECT => $typeOfHtmlObject,
                 self::ARRAY_NAME_DOC_TYPE_OF_STORAGE => $typeOfStorage,
                 self::ARRAY_NAME_DOC_FOREIGN_TABLE => $foreignTable,
-                self::ARRAY_NAME_DOC_FOREIGN_KEY => $foreignKey
+                self::ARRAY_NAME_DOC_FOREIGN_KEY => $foreignKey,
+                self::ARRAY_NAME_DOC_FIELDS_TO_DISPLAY => $fieldsToDisplay,
+                self::ARRAY_NAME_DOC_FIELDS_TO_LOCK => $fieldsToLock,
+                self::ARRAY_NAME_DOC_FIELDS_TO_ORDER => $fieldsToOrder,
+                self::ARRAY_NAME_DOC_RIGHT_TO_ADD => $rightToAdd
             );
         }
     }
@@ -479,6 +510,50 @@ class DatabaseDescription {
     public static function getFieldDocHelp($paramTableName, $paramFieldName) {
         return $_SESSION[get_class()][$paramTableName][self::ARRAY_NAME_FIELDS]
                 [$paramFieldName][self::ARRAY_NAME_DOC][self::ARRAY_NAME_DOC_HELP];
+    }
+
+    /**
+     * Retourne la liste des champs à afficher
+     * @param string $paramTableName Nom de la table
+     * @param string $paramFieldName Nom du champs
+     * @return string liste des champs à afficher
+     */
+    public static function getFieldsToDisplay($paramTableName, $paramFieldName) {
+        return $_SESSION[get_class()][$paramTableName][self::ARRAY_NAME_FIELDS]
+                [$paramFieldName][self::ARRAY_NAME_DOC][self::ARRAY_NAME_DOC_FIELDS_TO_DISPLAY];
+    }
+
+    /**
+     * Retourne la liste des champs à verrouiller
+     * @param string $paramTableName Nom de la table
+     * @param string $paramFieldName Nom du champs
+     * @return string liste des champs à verrouiller
+     */
+    public static function getFieldsToLock($paramTableName, $paramFieldName) {
+        return $_SESSION[get_class()][$paramTableName][self::ARRAY_NAME_FIELDS]
+                [$paramFieldName][self::ARRAY_NAME_DOC][self::ARRAY_NAME_DOC_FIELDS_TO_LOCK];
+    }
+
+    /**
+     * Retourne la liste des champs à ordonner
+     * @param string $paramTableName Nom de la table
+     * @param string $paramFieldName Nom du champs
+     * @return string liste des champs à ordonner
+     */
+    public static function getFieldsToOrder($paramTableName, $paramFieldName) {
+        return $_SESSION[get_class()][$paramTableName][self::ARRAY_NAME_FIELDS]
+                [$paramFieldName][self::ARRAY_NAME_DOC][self::ARRAY_NAME_DOC_FIELDS_TO_ORDER];
+    }
+
+    /**
+     * Retourne le droit d'ajouter une nouvelle ligne dans une liste
+     * @param string $paramTableName Nom de la table
+     * @param string $paramFieldName Nom du champs
+     * @return string droit d'ajouter une nouvelle ligne dans une liste
+     */
+    public static function getRightToAdd($paramTableName, $paramFieldName) {
+        return $_SESSION[get_class()][$paramTableName][self::ARRAY_NAME_FIELDS]
+                [$paramFieldName][self::ARRAY_NAME_DOC][self::ARRAY_NAME_DOC_RIGHT_TO_ADD];
     }
 
     /**

@@ -35,6 +35,10 @@ abstract class AbstractHtmlList extends AbstractHtmlGlobalElement {
         return $this->isRightToAdd;
     }
 
+    protected function setIsRightToAdd($paramIsRightToAdd) {
+        return $this->isRightToAdd = $paramIsRightToAdd;
+    }
+
     function setIsRightToAddToFalse() {
         $this->isRightToAdd = FALSE;
     }

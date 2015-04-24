@@ -148,4 +148,23 @@ class DatabaseDescriptionField {
                         ($this->getTableName(), $this->getFieldName());
     }
 
+    public function getFieldsToDisplay() {
+        return DatabaseDescription::getFieldsToDisplay
+                        ($this->getTableName(), $this->getFieldName());
+    }
+
+    public function getFieldsToLock() {
+        return DatabaseDescription::getFieldsToLock
+                        ($this->getTableName(), $this->getFieldName());
+    }
+
+    public function getFieldsToOrder() {
+        return DatabaseDescription::getFieldsToOrder
+                        ($this->getTableName(), $this->getFieldName());
+    }
+    public function getRightToAdd() {
+        return DatabaseDescription::getRightToAdd
+                        ($this->getTableName(), $this->getFieldName());
+    }
+
 }

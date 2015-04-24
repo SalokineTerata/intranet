@@ -24,27 +24,24 @@
  */
 class DataFieldToHtmlSubform extends HtmlSubForm {
 
-    public function __construct(
-    $paramLabel
-    , $paramTableNameRN
-    , $paramTableNameR1
-    , $paramForeignKeyValue
-    , $paramArrayFieldsNameToDisplay
-    , $paramArrayFieldsNameToLock = NULL
-    , $paramArrayFieldsNameOrder = NULL
-    ) {
+    /**
+     * Créé un sous-formulaire HTML à partir d'un DataField
+     * @param DatabaseDataField $paramDataField
+     */
+    public function __construct(DatabaseDataField $paramDataField) {
         $paramArrayContent = DatabaseOperation::getArrayFieldsNameFromForeignKeyRelationNtoOne(
-                        $paramTableNameRN
-                        , $paramTableNameR1
-                        , $paramForeignKeyValue
-                        , $paramArrayFieldsNameToDisplay
-                        , $paramArrayFieldsNameOrder
+                        $paramDataField->getReferencedTableName()
+                        , $paramDataField->getTableName()
+                        , $paramDataField->getFieldValue()
+                        , explode(",", $paramDataField->getFieldsToDisplay())
+                        , explode(",", $paramDataField->getFieldsToOrder())
         );
         parent::__construct($paramArrayContent
-                , DatabaseTableModelAssociation::getModelName($paramTableNameRN)
-                , $paramLabel
+                , DatabaseTableModelAssociation::getModelName($paramDataField->getReferencedTableName())
+                , $paramDataField->getFieldLabel()
         );
-        $this->setArrayContentLocked($paramArrayFieldsNameToLock);
+        $this->setArrayContentLocked(explode(",", $paramDataField->getFieldsToLock()));
+        $this->setIsRightToAdd($paramDataField->getRightToAdd());
     }
 
 }

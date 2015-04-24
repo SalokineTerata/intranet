@@ -122,7 +122,7 @@ class Chapitre {
         );
         self::$is_owner = self::buildIsOwner();
         self::$is_editable = self::buildIsEditable();
-        self::$is_correctable = self::buildIsCorrectable();
+         self::$is_correctable = self::buildIsCorrectable();
         self::$taux_validation_processus = self::buildTauxValidationProcessus();
         self::$html_submit_button = self::buildHtmlSubmitButton();
         self::$html_correct_button = self::buildHtmlCorrectButton();

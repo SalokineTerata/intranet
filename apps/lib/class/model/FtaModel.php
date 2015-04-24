@@ -12,7 +12,8 @@ class FtaModel extends AbstractModel {
     const KEYNAME = "id_fta";
     const KEYNAME_CREATEUR = "id_user";
     const FIELDNAME_ACTIVATION_CODESOFT = "activation_codesoft_arti2";
-    const FIELDNAME_ARCADIA_EMBALLAGE_TYPE = "id_arcadia_emballage_type";
+    const FIELDNAME_ARCADIA_EMBALLAGE_TYPE = "id_arcadia_emballage_type";    
+    const FIELDNAME_ARTICLE_AGROLOGIC = "id_article_agrologic";
     const FIELDNAME_BESOIN_FICHE_TECHNIQUE = "besoin_fiche_technique";
     const FIELDNAME_CALIBRE_DEFAUT = "calibre_defaut";
     const FIELDNAME_CATEGORIE_FTA = "id_fta_categorie";
@@ -36,6 +37,7 @@ class FtaModel extends AbstractModel {
     const FIELDNAME_DESCRIPTION_TECHNIQUE_INTERNE = "synoptique_experimental_fta";
     const FIELDNAME_DESCRIPTION_EMBALLAGE = "description_emballage";
     const FIELDNAME_DESIGNATION_COMMERCIALE = "designation_commerciale_fta";
+    const FIELDNAME_DOSSIER_FTA = "id_dossier_fta";
     const FIELDNAME_DUREE_DE_VIE = "Duree_de_vie";
     const FIELDNAME_DUREE_DE_VIE_TECHNIQUE_PRODUCTION = "Duree_de_vie_technique";
     const FIELDNAME_DUREE_DE_VIE_TECHNIQUE_MAXIMALE = "duree_vie_technique_fta";
@@ -83,6 +85,7 @@ class FtaModel extends AbstractModel {
     const FIELDNAME_UNITE_AFFICHAGE = "unite_affichage_fta";
     const FIELDNAME_UNITE_FACTURATION = "id_annexe_unite_facturation";
     const FIELDNAME_VERROUILLAGE_LIBELLE_ETIQUETTE = "verrouillage_libelle_etiquette_fta";
+    const FIELDNAME_VERSION_DOSSIER_FTA = "id_version_dossier_fta";
     const FIELDNAME_VIRTUAL_FTA_PROCESSUS_DELAI = "VIRTUAL_fta_processus_delai";
     const ID_POIDS_VARIABLE = "3";
 

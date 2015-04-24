@@ -115,18 +115,9 @@ class FtaConditionnementModel extends AbstractModel {
         return $param * $paramb;
     }
 
-    public function getArrayConditionnement() {
 
-        //Les calculs pour la table conditionnment
-        $array = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray("SELECT " . FtaConditionnementModel::FIELDNAME_HAUTEUR_FTA_CONDITIONNEMENT . " FROM " . FtaConditionnementModel::TABLENAME
-                        . "WHERE " . FtaConditionnementModel::FIELDNAME_ID_FTA . "=" . FtaModel::KEYNAME
-        );
-
-        foreach ($array as $rows) {
-
-            $return[FtaModel::COLIS_EMBALLAGE_HAUTEUR] = $rows[FtaConditionnementModel::FIELDNAME_HAUTEUR_FTA_CONDITIONNEMENT];
-        }
-    }
+            
+      
 
 }
 

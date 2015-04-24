@@ -53,16 +53,6 @@ function afficher_navigation($id_fta, $id_fta_chapitre_encours, $synthese_action
         $createur = mysql_result($result, 0, "prenom") . " " . mysql_result($result, 0, "nom");
     }
 
-//    $req = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
-//                    "SELECT " . SalariesModel::FIELDNAME_PRENOM . "," . SalariesModel::FIELDNAME_NOM
-//                    . " FROM " . SalariesModel::TABLENAME
-//                    . " WHERE " . SalariesModel::KEYNAME
-//                    . "='" . $_SESSION[FtaModel::FIELDNAME_CREATEUR] . "' ");
-//
-//    foreach ($req as $rows) {
-//
-//        $createur = $rows[SalariesModel::FIELDNAME_PRENOM] . " " . $rows[SalariesModel::FIELDNAME_NOM];
-//    }
 
     //Construction du Menu
     if ($_SESSION["id_article_agrologic"]) {

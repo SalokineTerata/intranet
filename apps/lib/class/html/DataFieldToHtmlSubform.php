@@ -24,28 +24,27 @@
  */
 class DataFieldToHtmlSubform extends HtmlSubForm {
 
-    public function __construct($paramSubFormModelClassName
-    , $paramLabel
-    , $tableNameRN
-    , $tableNameR1
-    , $foreignKeyValue
-    , $arrayFieldsNameToDisplay
-    , $arrayFieldsNameToLock = NULL
-    , $arrayFieldsNameOrder = NULL
-    , $isEditable = TRUE
-    , $rightToAdd = TRUE
-    , $statusValidation = FALSE
+    public function __construct(
+    $paramLabel
+    , $paramTableNameRN
+    , $paramTableNameR1
+    , $paramForeignKeyValue
+    , $paramArrayFieldsNameToDisplay
+    , $paramArrayFieldsNameToLock = NULL
+    , $paramArrayFieldsNameOrder = NULL
     ) {
         $paramArrayContent = DatabaseOperation::getArrayFieldsNameFromForeignKeyRelationNtoOne(
-                        $tableNameRN
-                        , $tableNameR1
-                        , $foreignKeyValue
-                        , $arrayFieldsNameToDisplay
-                        , $arrayFieldsNameOrder
+                        $paramTableNameRN
+                        , $paramTableNameR1
+                        , $paramForeignKeyValue
+                        , $paramArrayFieldsNameToDisplay
+                        , $paramArrayFieldsNameOrder
         );
-        parent::__construct($paramArrayContent, $paramSubFormModelClassName, $paramLabel);
-        $this->setArrayContentLocked($arrayFieldsNameToLock);
-        $this->setIsEditable($isEditable);
+        parent::__construct($paramArrayContent
+                , DatabaseTableModelAssociation::getModelName($paramTableNameRN)
+                , $paramLabel
+        );
+        $this->setArrayContentLocked($paramArrayFieldsNameToLock);
     }
 
 }

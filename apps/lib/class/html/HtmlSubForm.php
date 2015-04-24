@@ -29,7 +29,7 @@
  *
  * @author bs4300280
  */
-class HtmlSubForm extends AbstractHtmlGlobalElement {
+class HtmlSubForm extends AbstractHtmlList {
 
     /**
      * Tableau PHP stockant le résultat de la requête sur laquelle est basée
@@ -71,48 +71,100 @@ class HtmlSubForm extends AbstractHtmlGlobalElement {
         $this->arrayContentLocked = $arrayContentLocked;
     }
 
-    private function getHtmlResultSubForm() {
+    private function getHtmlResultSubFormBegin() {
+        return "<table><tr><td><table>";
+    }
+
+    private function getHtmlResultSubFormEnd() {
+        return "</table></td></tr></table>";
+    }
+
+    private function getHtmlResultSubFormAddNewLine() {
         $return = NULL;
-        $return .= "<table><tr><td>";
-        $return .="<table>";
-        $subFormModelClassName = $this->getSubFormModelClassName();
-        foreach ($this->getArrayContent() as $key => $valueArray) {
-
-
-            $modelSubForm = new $subFormModelClassName($key);
-            $valueArrayKeys = array_keys($valueArray);
-
-            $return.= "<tr class=contenu>";
-            foreach ($valueArrayKeys as $fieldName) {
-                $dataField = $modelSubForm->getDataField($fieldName);
-                $dataField->setLabelCustom(NULL);
-                $htmlField = Html::getHtmlObjectFromDataField($dataField);
-
-                //Si le sous-formulaire est modifiable par l'utilisateur
-                //et que le champs ne fait pas partie de la liste des champs
-                //vérrouillés, alors le champs sera modifiable par l'utilisateur.
-                if (parent::getIsEditable() && !in_array($fieldName, $this->getArrayContentLocked())) {
-                    //Le champs est modifiable.
-                    $htmlField->setIsEditable(TRUE);
-                } else {
-                    //Le champs n'est pas modifiable.
-                    $htmlField->setIsEditable(FALSE);
-                }
-                $htmlField->setHtmlRenderToTable();
-                $htmlField->getAttributesGlobal()->setIsIconNextEnabledToTrue();
-                $return.=$htmlField->getHtmlResult();
-            }
-            $return.= "</tr>";
-        }
-        if (parent::getIsEditable()) {
-
-            $return.="<tr><td>"
+        if ($this->getIsRightToAdd()) {
+            $return = "<tr><td>"
                     . $this->getAttributesGlobal()->getIconAddToHtml()
-                    . "<a href=\"...\" title=\"Not implemented\"> Ajouter</a></td></tr>"
+                    . "<a href=\"...\" title=\"Not implemented\"> Ajouter</a>"
+                    . "</td></tr>"
             ;
         }
-        $return .= "</table>";
-        $return .= "</div></td></tr></table>";
+        return $return;
+    }
+
+    /**
+     * Retourne le rendu HTML du coeur du sous-formulaire
+     * @return string
+     */
+    private function getHtmlResultSubFormMiddle() {
+
+        /**
+         * Récupération du model de table à utiliser pour représenter
+         * les données du sous-formulaire.
+         */
+        $subFormModelClassName = $this->getSubFormModelClassName();
+
+        /**
+         * Parcours de la liste des clefs à représenter
+         */
+        foreach ($this->getArrayContent() as $key => $valueArray) {
+
+            /**
+             * Création de la ligne HTML
+             */
+            $return.= "<tr class=contenu>";
+
+            /**
+             * Chargement de l'enregistrement
+             */
+            $modelSubForm = new $subFormModelClassName($key);
+
+            /**
+             * Récupération de la liste des champs à représenter
+             */
+            $valueArrayKeys = array_keys($valueArray);
+
+            /**
+             * Parcours des nom des champs à afficher
+             */
+            foreach ($valueArrayKeys as $fieldName) {
+
+                /**
+                 * Chargement du DataField correspondant au champs concerné.
+                 */
+                $dataField = $modelSubForm->getDataField($fieldName);
+
+                /**
+                 * Conversion du DataField en HtmlField
+                 */
+                $htmlField = Html::getHtmlObjectFromDataField($dataField);
+                $htmlField->setHtmlRenderToTable();
+                $htmlField->getAttributesGlobal()->setIsIconNextEnabledToTrue();
+
+                /**
+                 * Si le sous-formulaire est modifiable par l'utilisateur
+                 * et que le champs ne fait pas partie de la liste des champs
+                 * vérrouillés, alors le champs sera modifiable par l'utilisateur.
+                 */
+                if (parent::getIsEditable() && !in_array($fieldName, $this->getArrayContentLocked())) {
+
+                    /**
+                     * Le champs est modifiable.
+                     */
+                    $htmlField->setIsEditable(TRUE);
+                } else {
+
+                    /**
+                     * Le champs n'est pas modifiable.
+                     */
+                    $htmlField->setIsEditable(FALSE);
+                }
+                $return.=$htmlField->getHtmlResult();
+            }
+            /**
+             * Fermeture de la ligne HTML
+             */
+            $return.= "</tr>";
+        }
         return $return;
     }
 
@@ -133,11 +185,18 @@ class HtmlSubForm extends AbstractHtmlGlobalElement {
     }
 
     public function getHtmlEditableContent() {
-        return $this->getHtmlResultSubForm();
+        return $this->getHtmlResultSubFormBegin()
+                . $this->getHtmlResultSubFormMiddle()
+                . $this->getHtmlResultSubFormAddNewLine()
+                . $this->getHtmlResultSubFormEnd()
+        ;
     }
 
     public function getHtmlViewedContent() {
-        return $this->getHtmlResultSubForm();
+        return $this->getHtmlResultSubFormBegin()
+                . $this->getHtmlResultSubFormMiddle()
+                . $this->getHtmlResultSubFormEnd()
+        ;
     }
 
 }

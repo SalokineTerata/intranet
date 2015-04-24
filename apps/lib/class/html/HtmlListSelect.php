@@ -1,17 +1,30 @@
 <?php
 
 /*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
+ * Copyright (C) 2015 bs4300280
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
 /**
- * Description of AbstractHtmlList
- *
+ * Description of HtmlListSelect
+ * Représentation HTML de la balise <SELECT>
+ * 
  * @author bs4300280
  */
-abstract class AbstractHtmlSelect extends AbstractHtmlGlobalElement {
-
+class HtmlListSelect extends AbstractHtmlList {
+    
     /**
      * Object manipulant les attributs possible pour cet élément HTML
      * @var AttributesSelect
@@ -41,6 +54,8 @@ abstract class AbstractHtmlSelect extends AbstractHtmlGlobalElement {
      * @var mixed $defaultValue
      */
     private $defaultValue;
+    
+    
 
     const LIST_EMPTY_VALUE = -1;
     const LIST_EMPTY_MESSAGE = "Aucun élément présent dans cette liste.";
@@ -274,6 +289,5 @@ abstract class AbstractHtmlSelect extends AbstractHtmlGlobalElement {
         $this->setArrayHtmlTagOption($array);
     }
 
-}
 
-?>
+}

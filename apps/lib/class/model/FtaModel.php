@@ -83,6 +83,7 @@ class FtaModel extends AbstractModel {
     const FIELDNAME_UNITE_AFFICHAGE = "unite_affichage_fta";
     const FIELDNAME_UNITE_FACTURATION = "id_annexe_unite_facturation";
     const FIELDNAME_VERROUILLAGE_LIBELLE_ETIQUETTE = "verrouillage_libelle_etiquette_fta";
+    const FIELDNAME_VIRTUAL_FTA_PROCESSUS_DELAI = "VIRTUAL_fta_processus_delai";
     const ID_POIDS_VARIABLE = "3";
 
     /**

@@ -100,6 +100,12 @@ abstract class AbstractHtmlGlobalElement {
     private $label;
 
     /**
+     * Doit-on affiche le label ?
+     * @var boolean
+     */
+    private $showLabel;
+
+    /**
      * Image à afficher en cas de modification de valeur
      * @var mixed 
      */
@@ -110,6 +116,7 @@ abstract class AbstractHtmlGlobalElement {
          * Par défaut l'élément est représenté sous forme de formulaire.
          */
         $this->setHtmlRenderToForm();
+        $this->setShowLabelToTrue();
         $this->setEventsForm(new EventsForm());
         $this->setEventsMouse(new EventsMouse());
         $this->setStyleCSS(new CustomStyleCSS());
@@ -125,6 +132,18 @@ abstract class AbstractHtmlGlobalElement {
         $this->setLabel($paramLabel);
         $this->setIsWarningUpdate($paramIsWarningUpdate);
         $this->getAttributesGlobal()->getId()->setValue($paramId);
+    }
+
+    function getShowLabel() {
+        return $this->showLabel;
+    }
+
+    function setShowLabelToFalse() {
+        $this->showLabel = FALSE;
+    }
+
+    function setShowLabelToTrue() {
+        $this->showLabel = TRUE;
     }
 
     /**
@@ -248,9 +267,16 @@ abstract class AbstractHtmlGlobalElement {
         $image_modif = "";
         $color_modif = "";
         $html_result = "";
-        $label = $this->getLabel();
+        $label = NULL;
         $idRow = $this->getAttributesGlobal()->getIdRowToHtml();
         $style = $this->getStyleCSS()->getStyleAttribute();
+
+        /**
+         * Doit-on afficher le label ?
+         */
+        if ($this->getShowLabel()) {
+            $label = $this->getLabel();
+        }
 
         //Traitement du Warning Update
         if ($this->getIsWarningUpdate()) {

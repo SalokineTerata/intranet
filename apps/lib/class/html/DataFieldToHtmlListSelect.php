@@ -5,7 +5,7 @@
  *
  * @author bs4300280
  */
-class DataFieldToHtmlList extends HtmlList {
+class DataFieldToHtmlListSelect extends HtmlListSelect {
 
     use TraitDataFieldToHtml;
 

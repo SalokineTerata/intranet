@@ -63,7 +63,7 @@ class DatabaseRecord extends SessionSaveAndRestoreAbstract {
      * Par défaut, si la clef n'existe pas, doit-on créer l'enregistrement
      * en base de donnée ?
      */
-    const DEFAULT_IS_CREATE_RECORD_IN_DATABASE_IF_KEY_DOESNT_EXIST = self::VALUE_CREATE_RECORD_IN_DATABASE_IF_KEY_DOESNT_EXIST;
+    const DEFAULT_IS_CREATE_RECORD_IN_DATABASE_IF_KEY_DOESNT_EXIST = self::VALUE_DONT_CREATE_RECORD_IN_DATABASE_IF_KEY_DOESNT_EXIST;
 
     /**
      * Par défaut, si la clef n'existe pas, doit-on créer l'enregistrement
@@ -507,14 +507,35 @@ class DatabaseRecord extends SessionSaveAndRestoreAbstract {
         return $this->getArrayFieldNameFieldValueInMemory();
     }
 
+    public function getFieldTypeOfStorage($paramFieldName) {
+        return DatabaseDescription::getFieldDocTypeOfStorage($this->getTableName(), $paramFieldName);
+    }
+
     /**
      * Retourne la valeur d'un champ
      * @param string $paramFieldName
      * @return mixed Valeur du champ dans le recordset
      */
     public function getFieldValue($paramFieldName) {
-        $array = $this->getArrayFieldNameFieldValueInMemory();
-        return $array[$paramFieldName];
+        $return = NULL;
+        switch ($this->getFieldTypeOfStorage($paramFieldName)) {
+            case DatabaseDescription::TYPE_OF_STORAGE_REAL:
+                $array = $this->getArrayFieldNameFieldValueInMemory();
+                $return = $array[$paramFieldName];
+                break;
+
+            case DatabaseDescription::TYPE_OF_STORAGE_VIRTUAL:
+                $return = $this->getKeyValue();
+                break;
+            case DatabaseDescription::TYPE_OF_STORAGE_CALCULATE:
+                //Not implemented
+                break;
+
+            default :
+                $array = $this->getArrayFieldNameFieldValueInMemory();
+                $return = $array[$paramFieldName];
+        }
+        return $return;
     }
 
     /**

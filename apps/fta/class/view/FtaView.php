@@ -172,42 +172,6 @@ class FtaView {
         return $htmlObject->getHtmlResult();
     }
 
-    public function getHtmlEcheancesProcessus() {
-        if ($this->getModel()->getDataField(FtaModel::FIELDNAME_DATE_ECHEANCE_FTA)) {
-
-
-
-            /**
-             * Informations d'entrées
-             * ----------------------
-             */
-            $paramArrayFieldsNameToDisplay = array(FtaProcessusDelaiModel::FIELDNAME_ID_FTA_PROCESSUS
-                , FtaProcessusDelaiModel::FIELDNAME_DATE_ECHEANCE_PROCESSUS);
-            $paramArrayFieldsNameToLock = array(FtaProcessusDelaiModel::FIELDNAME_ID_FTA_PROCESSUS);
-            $paramArrayFieldsNameOrder = array(FtaProcessusDelaiModel::FIELDNAME_DATE_ECHEANCE_PROCESSUS);
-
-            $paramLabel = "Echéances des processus";
-
-            $dataField = $this->getModel()->getDataField(FtaModel::FIELDNAME_VIRTUAL_FTA_PROCESSUS_DELAI);
-            $referencedTableName = $dataField->getReferencedTableName();
-            $tableName = $dataField->getTableName();
-            $fieldValue = $dataField->getFieldValue();
-            $subFormDateEcheance = new DataFieldToHtmlSubform(
-                    $paramLabel
-                    , $referencedTableName
-                    , $tableName
-                    , $fieldValue
-                    , $paramArrayFieldsNameToDisplay
-                    , $paramArrayFieldsNameToLock
-                    , $paramArrayFieldsNameOrder
-            );
-            $subFormDateEcheance->setIsEditable($this->getIsEditable());
-            $subFormDateEcheance->setIsRightToAddToTrue();
-            $bloc = $subFormDateEcheance->getHtmlResult();
-        }
-        return $bloc;
-    }
-
     public function showDatesEcheanceProcessus() {
 
         //Variables locales
@@ -509,5 +473,3 @@ class FtaView {
     }
 
 }
-
-?>

@@ -163,14 +163,19 @@ class Html {
             case Html::TYPE_OF_OBJECT_LIST:
                 $htmlObject = new DataFieldToHtmlListSelect($paramDataField);
                 break;
-            default:
+
             case Html::TYPE_OF_OBJECT_BOOLEAN:
                 $htmlObject = new DataFieldToHtmlListBoolean($paramDataField);
                 break;
-            default:
+
             case Html::TYPE_OF_OBJECT_TEXTAREA:
                 $htmlObject = new DataFieldToHtmlTextArea($paramDataField);
                 break;
+
+            case Html::TYPE_OF_OBJECT_SUBFORM_R1N:
+                $htmlObject = new DataFieldToHtmlSubform($paramDataField);
+                break;
+
             default:
                 throw new Exception("Type d'objet <b>$TypeOfHtmlObject</b> inconnu." . " Champs concerné:" . $paramDataField->getFieldName() . " ");
         }

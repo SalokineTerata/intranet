@@ -15,7 +15,7 @@ $connect = new PDO('mysql:host=dev-intranet.agis.fr;dbname=intranet_v3_0_dev;cha
 table, td, th {
    font-size : 12px; 
   font-family : Verdana, arial, helvetica, sans-serif; 
- 
+  border: 1px solid green;
   background-color : #d6d3ce; 
 }
 

@@ -56,6 +56,75 @@ $connect = new PDO('mysql:host=dev-intranet.agis.fr;dbname=intranet_v3_0_dev;cha
             </tr>
         </tfoot>
 
+
+
+        <?php
+        $table_req = 'classification_arborescence_article,classification_arborescence_article_categorie_contenu,classification_fta';                                      //nom de la table contenant l'association "Père" / "Fils"
+        $champ_valeur = 'nom_classification_arborescence_article_categorie_contenu';                            //nom du champ contenant la valeur à afficher (sans le "underscore" et le nom de la table)
+        $champ_fta = 'id_fta';                            //nom du champ contenant la valeur à afficher (sans le "underscore" et le nom de la table)
+        $champ_id_fils = 'classification_arborescence_article.id_classification_arborescence_article';         //nom du champ fils contenant l'id (sans le "underscore" et le nom de la table)
+        $champ_id_pere = 'ascendant_classification_arborescence_article_categorie_contenu';  //nom du champ père contenant l'id (sans le "underscore" et le nom de la table)
+        $id_recherche = 1;
+
+
+        $requete_principale = " SELECT " . $champ_id_fils . "," . $champ_id_pere . "," . $champ_fta . "," . $champ_valeur . " "
+                . " FROM " . $table_req . ""
+                . " WHERE classification_arborescence_article.id_classification_arborescence_article_categorie_contenu=classification_arborescence_article_categorie_contenu.id_classification_arborescence_article_categorie_contenu "
+                . "AND classification_arborescence_article.id_classification_arborescence_article=classification_fta.id_classification_arborescence_article "
+                . "ORDER BY `classification_fta`.`id_fta` ASC";
+
+        $resultat = $connect->query($requete_principale);
+        foreach ($resultat as $rip) {
+            $valeur_pere = $rip["id_classification_arborescence_article"];
+            $mark = recursif($resultat, $id_recherche, $valeur_pere);
+        }
+
+//        "SELECT ascendant_classification_arborescence_article_categorie_contenu, classification_arborescence_article.id_classification_arborescence_article, nom_classification_arborescence_article_categorie_contenu, id_fta 
+//    FROM classification_arborescence_article,classification_arborescence_article_categorie_contenu, classification_fta 
+//    WHERE classification_arborescence_article.id_classification_arborescence_article_categorie_contenu=classification_arborescence_article_categorie_contenu.id_classification_arborescence_article_categorie_contenu 
+//    AND classification_arborescence_article.id_classification_arborescence_article=classification_fta.id_classification_arborescence_article 
+//    ORDER BY `classification_arborescence_article`.`id_classification_arborescence_article` ASC
+//";
+
+        function recursif($resultat, $id_recherche, $champ_id_pere) {
+            //Compteur de la boucle
+            $nombre_ligne = $resultat->rowCount();
+            $i = 0;
+            $return[$i] = null;
+            while ($i < ($nombre_ligne)) {
+                foreach ($resultat as $rows) {
+                    if ($rows[$champ_id_pere] == $id_recherche) {
+                        //Enregistrement des informations
+                        //echo "test".$extension[3];
+                        //Structure
+                        //$return[0] .= $tab_return . $tab_espace;
+                    }
+                }
+
+                $i = $i + 1;
+            }
+        }
+
+        function recurse_tree($paramParent, $i, $result) {
+
+            $nombre_ligne = $result->rowCount();
+            $franck = array();
+            while ($i < ($nombre_ligne)) {
+                foreach ($result as $rows) {
+                    if ($paramParent == $rows['id_classification_arborescence_article']) {
+                        $franck[] = array(
+                            'id_fta' => $rows['id_fta'],
+                            'nom_classification_arborescence_article_categorie_contenu' => $rows['nom_classification_arborescence_article_categorie_contenu'],
+                            'classification_arborescence_article.id_classification_arborescence_article' => recurse_tree($rows['classification_arborescence_article.id_classification_arborescence_article'], ($i + 1), $result)
+                        );
+                    }
+                }
+                return $franck;
+            }
+        }
+
+        print_r($mark);
+        ?>
         <tbody> <!-- Corps du tableau -->
 
             <tr>
@@ -68,7 +137,8 @@ $connect = new PDO('mysql:host=dev-intranet.agis.fr;dbname=intranet_v3_0_dev;cha
                             ?>
                             <OPTION value="<?php echo $proprietaire["id_classification_arborescence_article_categorie_contenu"] ?>"> <?php echo $proprietaire["nom_classification_arborescence_article_categorie_contenu"]; ?>
                                 <?php
-                            }  
+                            }
+                            ;
                             ?>
                     </SELECT>
                 </td>

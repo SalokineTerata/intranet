@@ -1176,8 +1176,7 @@ function afficher_requete_en_liste_deroulante($requete, $id_defaut, $nom_defaut)
 }
 
 //Fonction récursive
-function recursif($resultat, $id_recherche, $champ_id_pere, $champ_id_fils, $champ_valeur, $tab_fils, $tab_arborescence, $tab_espace, $return, $nombre_ligne, $extension
-) {
+function recursif($resultat, $id_recherche, $champ_id_pere, $champ_id_fils, $champ_valeur, $tab_fils, $tab_arborescence, $tab_espace, $return, $nombre_ligne, $extension) {
     //Afficher le niveau dans lequel on est:
     //echo $id_recherche;
     //echo $champ_id_pere;

@@ -227,7 +227,7 @@ class Navigation {
             //    afficher_message($titre, $message, $redirection);
             //}//Fin de suivi de projet
             //Recherche des processus en cours
-            //Balayage des cycles des processus (en exclant les processus déjà validés)
+            //Balayage des cycles des processus (en excluant les processus déjà validés)
             $req = "SELECT DISTINCT id_next_fta_processus "
                     . "FROM fta_processus_cycle, fta_processus, intranet_actions, intranet_droits_acces, intranet_modules "
                     . "WHERE 1 AND ( 1 "
@@ -235,14 +235,9 @@ class Navigation {
             $separator = "AND";
 
             //creer  une fonction pou ne pas a separer la requete sql 
+            //Supprimmer les reqètes d'addition req .=
             //Suppression des processus déjà validé
-            if ($t_processus_visible) {
-                foreach ($t_processus_visible as $value) {
-
-                    $req .= $separator . " id_next_fta_processus<>" . $value . " ";
-                    $separator = "AND";
-                }
-            }
+            $req .=  $this->DeleteValidProcess($t_processus_visible);
 
             //Vérification des droits d'accès de l'utilisateur en cours
             $req .=") "
@@ -270,13 +265,7 @@ class Navigation {
                 ;
                 $separator = "AND";
                 //Ajout de la restriction des processus validé
-                if ($t_processus_visible) {
-                    foreach ($t_processus_visible as $value) {
-
-                        $req .= $separator . " id_init_fta_processus<>" . $value . " ";
-                        $separator = "AND";
-                    }
-                }
+                $req .=$this->AddValidProcess($t_processus_visible);
 
                 //Recherche dans le cycle correspondant à l'état en cours de la fiche
                 $req_etat = "SELECT `fta_etat`.`abreviation_fta_etat` "
@@ -456,6 +445,27 @@ class Navigation {
         }//Fin du controle de $synthese_action
 
         return;
+    }
+
+    //rajouter id_fta_processus dans le select des fonctiopns
+    //Suppression des processus déjà validé
+    protected static function DeleteValidProcess($paramProcessusVisible) {
+        if ($paramProcessusVisible) {
+            foreach ($paramProcessusVisible as $value) {
+                $req = " AND " . " " . FtaProcessusCycleModel::FIELDNAME_PROCESSUS_NEXT . "<>" . $value . " ";
+            }
+        }
+        return $req;
+    }
+    
+    //Ajout de la restriction des processus validé
+    protected static function AddValidProcess($paramProcessusVisible) {
+        if ($paramProcessusVisible) {
+            foreach ($paramProcessusVisible as $value) {
+                $req = " AND " . " " . FtaProcessusCycleModel::FIELDNAME_PROCESSUS_INIT . "<>" . $value . " ";
+            }
+        }
+        return $req;
     }
 
 }

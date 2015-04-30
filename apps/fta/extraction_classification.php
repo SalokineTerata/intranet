@@ -83,13 +83,11 @@ $resultTableClassifRoot = DatabaseOperation::query($reqTableClassifRoot);
 $arrayTableClassifRoot = DatabaseOperation::convertSqlResultWithoutKeyToArray($resultTableClassifRoot);
 foreach ($arrayTableClassifRoot as $value) {
     $rootValue = 1;
-    $i = 0;
-
     $id_pere = $value["ascendant_classification_arborescence_article_categorie_contenu"];
     $id_fils = $value["id_classification_arborescence_article"];
     $id_nom = $value["nom_classification_arborescence_article_categorie_contenu"];
     $id_type = $value["nom_classification_arborescence_article_categorie"];
-    $return = recursif2($rootValue, $id_fils, $return, $fieldProprietaire, $fieldMarque, $fieldActivite, $fieldRayon, $fieldReseau, $fieldEnvironnement, $fieldSaisonalite, $fieldExport, $i);
+    $return = recursif2($rootValue, $id_fils, $return, $fieldProprietaire, $fieldMarque, $fieldActivite, $fieldRayon, $fieldReseau, $fieldEnvironnement, $fieldSaisonalite, $fieldExport);
 }
 
 //$return = recursif2($rootValue, $fieldProprietaire, $fieldMarque, $fieldActivite, $fieldRayon, $fieldReseau, $fieldEnvironnement, $fieldSaisonalite, $fieldExport, $return);
@@ -113,7 +111,7 @@ foreach ($arrayTableClassifRoot as $value) {
 
 //Récurrsive
 //function recursif2($paramRootValue, $fieldProprietaire, $fieldMarque, $fieldActivite, $fieldRayon, $fieldReseau, $fieldEnvironnement, $fieldSaisonalite, $fieldExport, $return) {
-function recursif2($paramPere, $paramFils, $paramReturn, $paramfieldProprietaire, $paramfieldMarque, $paramfieldActivite, $paramfieldRayon, $paramfieldReseau, $paramfieldEnvironnement, $paramfieldSaisonalite, $paramfieldExport, $i) {
+function recursif2($paramPere, $paramFils, $paramReturn, $paramfieldProprietaire, $paramfieldMarque, $paramfieldActivite, $paramfieldRayon, $paramfieldReseau, $paramfieldEnvironnement, $paramfieldSaisonalite, $paramfieldExport) {
 
 
     /**
@@ -137,10 +135,10 @@ function recursif2($paramPere, $paramFils, $paramReturn, $paramfieldProprietaire
 
 
     $resultTableClassif = DatabaseOperation::query($reqTableClassif);
-    $arrayTableClassif[] = DatabaseOperation::convertSqlResultWithoutKeyToArray($resultTableClassif);
-    $nb_ligne = mysql_num_rows($resultTableClassif);
-    while ($i < ($nb_ligne)) {
-        foreach ($arrayTableClassif[$i] as $value) {
+    $arrayTableClassif = DatabaseOperation::convertSqlResultWithoutKeyToArray($resultTableClassif);
+   // $nb_ligne = mysql_num_rows($resultTableClassif);
+   // while ($i < ($nb_ligne)) {
+        foreach ($arrayTableClassif as $value) {
 
             //Est-ce qu'il est propriétaire ?
             //si Oui
@@ -213,11 +211,9 @@ function recursif2($paramPere, $paramFils, $paramReturn, $paramfieldProprietaire
         
                 <tr><td>" . $paramFils . " </td> <td> " . $paramfieldProprietaire . " </td> <td> " . $paramfieldMarque . " </td> <td> " . $paramfieldActivite . " </td><td> " . $paramfieldRayon . "</td> <td> " . $paramfieldReseau . "</td> <td> " . $paramfieldEnvironnement . "</td> <td> " . $paramfieldSaisonalite . "</td> <td> " . $paramfieldExport . "</td></tr></table>";
         };
-        $paramReturn = recursif2($paramPere, $paramFils, $paramReturn, $fieldProprietaire, $fieldMarque, $fieldActivite, $fieldRayon, $fieldReseau, $fieldEnvironnement, $fieldSaisonalite, $fieldExport, $i);
-    
-        $i=$i+1;
-                                        }
-    
+        $paramReturn = recursif2($paramPere, $paramFils, $paramReturn, $fieldProprietaire, $fieldMarque, $fieldActivite, $fieldRayon, $fieldReseau, $fieldEnvironnement, $fieldSaisonalite, $fieldExport);
+ //   }
+
 
     return $paramReturn;
 }

@@ -70,44 +70,86 @@ $fieldExport = "";
  */
 
 /**
+ * Tableau de retour:
+ * 
+ * array(
+ *      "bofrost(propriétaire)" => array(
+ *                                      "bofrost (marque)" => array(
+ *                                                                 asiatique => ...,
+ *                                                                 traiteur => ..
+ *                                      "TDA" (marque)" => array(
+ *                                                                 ...
+ *      "Carrefour" => array (...etc                        
+ */
+/**
  * Code * 
  */
 //Démarrage
+//Initialisation première boucle:
+$i = 0;
+$startValue = 30;
+$return = array();
 
-$reqTableClassifRoot = "SELECT classification_arborescence_article.id_classification_arborescence_article, ascendant_classification_arborescence_article_categorie_contenu, nom_classification_arborescence_article_categorie_contenu, nom_classification_arborescence_article_categorie "
-        . "FROM classification_arborescence_article, classification_arborescence_article_categorie_contenu, classification_arborescence_article_categorie "
-        . "WHERE classification_arborescence_article.id_classification_arborescence_article_categorie_contenu = classification_arborescence_article_categorie_contenu.id_classification_arborescence_article_categorie_contenu "
-;
+$hmltResult = new HtmlResult();
 
-$resultTableClassifRoot = DatabaseOperation::query($reqTableClassifRoot);
-$arrayTableClassifRoot = DatabaseOperation::convertSqlResultWithoutKeyToArray($resultTableClassifRoot);
-foreach ($arrayTableClassifRoot as $value) {
-    $rootValue = 1;
-    $id_pere = $value["ascendant_classification_arborescence_article_categorie_contenu"];
-    $id_fils = $value["id_classification_arborescence_article"];
-    $id_nom = $value["nom_classification_arborescence_article_categorie_contenu"];
-    $id_type = $value["nom_classification_arborescence_article_categorie"];
-    $return = recursif2($rootValue, $id_fils, $return, $fieldProprietaire, $fieldMarque, $fieldActivite, $fieldRayon, $fieldReseau, $fieldEnvironnement, $fieldSaisonalite, $fieldExport);
-}
+$returnFull = recursifOne($paramStartValue = $startValue, $hmltResult);
 
-//$return = recursif2($rootValue, $fieldProprietaire, $fieldMarque, $fieldActivite, $fieldRayon, $fieldReseau, $fieldEnvironnement, $fieldSaisonalite, $fieldExport, $return);
-
-/*
- * structure du résultat
+/**
  * 
- * $return
- *          $[idClassification]
- * 
- *              $[propriétaire] => "LDC , truc "
- * 
- *              $[marque] => "rouge"
- * 
- *              $[...] => ".."
- * 
- * 
- * 
+ * @param mixed $paramStartValue
+ * @param HtmlResult $hmltResult
+ * @return mixed
  */
+function recursifOne($paramStartValue, $hmltResult) {
+    $reqTableClassifRoot = getQuery($paramStartValue);
 
+    $resultTableClassifRoot = DatabaseOperation::query($reqTableClassifRoot);
+    $arrayTableClassifRoot = DatabaseOperation::convertSqlResultWithoutKeyToArray($resultTableClassifRoot);
+
+    if ($arrayTableClassifRoot != NULL) {
+        foreach ($arrayTableClassifRoot as $value) {
+
+            $id_fils = $value["id_classification_arborescence_article"];
+            $id_pere = $value["ascendant_classification_arborescence_article_categorie_contenu"];
+            $nom_contenu = $value["nom_classification_arborescence_article_categorie_contenu"];
+            $nom_type = $value["nom_classification_arborescence_article_categorie"];
+
+            switch ($nom_type) {
+                case "Propriétaire":
+                    $HtmlResult->setProprietaire($nom_contenu);
+                    break;
+                    
+                    //....
+                
+                default:
+                    break;
+            }
+
+            $j = $nom_type . $i++;
+            $return[$j] = array(
+                $nom_type => $nom_contenu,
+                "id" . $nom_type => $id_fils
+            );
+            $subReturn = recursifOne($id_fils, $hmltResult);
+            if ($subReturn != NULL) {
+                $return[$j][] = $subReturn;
+            } else {
+                $HtmlResult->setHtmlResult("<tr>" . "<td>" . $HtmlResult->getProprietaire() . "</td>"
+                        . "<td>" . $HtmlResult->getMarque() . "</td>"
+                        . "<td>" . $HtmlResult->Activité() . "</td>"
+                        . "<td>" . $HtmlResult->Rayon() . "</td>"
+                        . "<td>" . $HtmlResult->Réseau() . "</td>"
+                        . "<td>" . $HtmlResult->Environnement() . "</td>"
+                        . "<td>" . $HtmlResult->Saisonalité() . "</td>"
+                        . "</tr>"
+                );
+            }
+        }
+        return $return;
+    } else {
+        return NULL;
+    }
+}
 
 //Récurrsive
 //function recursif2($paramRootValue, $fieldProprietaire, $fieldMarque, $fieldActivite, $fieldRayon, $fieldReseau, $fieldEnvironnement, $fieldSaisonalite, $fieldExport, $return) {
@@ -136,41 +178,40 @@ function recursif2($paramPere, $paramFils, $paramReturn, $paramfieldProprietaire
 
     $resultTableClassif = DatabaseOperation::query($reqTableClassif);
     $arrayTableClassif = DatabaseOperation::convertSqlResultWithoutKeyToArray($resultTableClassif);
-   // $nb_ligne = mysql_num_rows($resultTableClassif);
-   // while ($i < ($nb_ligne)) {
-        foreach ($arrayTableClassif as $value) {
+// $nb_ligne = mysql_num_rows($resultTableClassif);
+// while ($i < ($nb_ligne)) {
+    foreach ($arrayTableClassif as $value) {
 
-            //Est-ce qu'il est propriétaire ?
-            //si Oui
-            if ($value["nom_classification_arborescence_article_categorie"] == "Propriétaire") {
-                $paramfieldProprietaire .= $value["nom_classification_arborescence_article_categorie_contenu"];
+//Est-ce qu'il est propriétaire ?
+//si Oui
+        if ($value["nom_classification_arborescence_article_categorie"] == "Propriétaire") {
+            $paramfieldProprietaire .= $value["nom_classification_arborescence_article_categorie_contenu"];
+            ;
+        } else {
+            if ($value["nom_classification_arborescence_article_categorie"] == "Marque") {
+                $paramfieldMarque .= $value["nom_classification_arborescence_article_categorie_contenu"];
                 ;
             } else {
-                if ($value["nom_classification_arborescence_article_categorie"] == "Marque") {
-                    $paramfieldMarque .= $value["nom_classification_arborescence_article_categorie_contenu"];
+                if ($value["nom_classification_arborescence_article_categorie"] == "Activité") {
+                    $paramfieldActivite .= $value["nom_classification_arborescence_article_categorie_contenu"];
                     ;
                 } else {
-                    if ($value["nom_classification_arborescence_article_categorie"] == "Activité") {
-                        $paramfieldActivite .= $value["nom_classification_arborescence_article_categorie_contenu"];
+                    if ($value["nom_classification_arborescence_article_categorie"] == "Rayon") {
+                        $paramfieldRayon .= $value["nom_classification_arborescence_article_categorie_contenu"];
                         ;
                     } else {
-                        if ($value["nom_classification_arborescence_article_categorie"] == "Rayon") {
-                            $paramfieldRayon .= $value["nom_classification_arborescence_article_categorie_contenu"];
+                        if ($value["nom_classification_arborescence_article_categorie"] == "Réseau") {
+                            $paramfieldReseau .= $value["nom_classification_arborescence_article_categorie_contenu"];
                             ;
                         } else {
-                            if ($value["nom_classification_arborescence_article_categorie"] == "Réseau") {
-                                $paramfieldReseau .= $value["nom_classification_arborescence_article_categorie_contenu"];
-                                ;
+                            if ($value["nom_classification_arborescence_article_categorie"] == "Environnement") {
+                                $paramfieldEnvironnement .= $value["nom_classification_arborescence_article_categorie_contenu"];
                             } else {
-                                if ($value["nom_classification_arborescence_article_categorie"] == "Environnement") {
-                                    $paramfieldEnvironnement .= $value["nom_classification_arborescence_article_categorie_contenu"];
+                                if ($value["nom_classification_arborescence_article_categorie"] == "Saisonalité") {
+                                    $paramfieldSaisonalite .= $value["nom_classification_arborescence_article_categorie_contenu"];
                                 } else {
-                                    if ($value["nom_classification_arborescence_article_categorie"] == "Saisonalité") {
-                                        $paramfieldSaisonalite .= $value["nom_classification_arborescence_article_categorie_contenu"];
-                                    } else {
-                                        if ($value["nom_classification_arborescence_article_categorie"] == "Export") {
-                                            $paramfieldExport .= $value["nom_classification_arborescence_article_categorie_contenu"];
-                                        }
+                                    if ($value["nom_classification_arborescence_article_categorie"] == "Export") {
+                                        $paramfieldExport .= $value["nom_classification_arborescence_article_categorie_contenu"];
                                     }
                                 }
                             }
@@ -178,21 +219,22 @@ function recursif2($paramPere, $paramFils, $paramReturn, $paramfieldProprietaire
                     }
                 }
             }
+        }
 
-            ///Au passage définitivement au champs marque
-            //appel récursif , mai start value  $value["id_classification_arborescence_article"];
-            $paramPere = $paramFils;
-            $paramFils = $value["id_classification_arborescence_article"];
-            $fieldProprietaire = $paramfieldProprietaire;
-            $fieldMarque = $paramfieldMarque;
-            $fieldActivite = $paramfieldActivite;
-            $fieldRayon = $paramfieldRayon;
-            $fieldReseau = $paramfieldReseau;
-            $fieldEnvironnement = $paramfieldEnvironnement;
-            $fieldSaisonalite = $paramfieldSaisonalite;
-            $fieldExport = $paramfieldExport;
+///Au passage définitivement au champs marque
+//appel récursif , mai start value  $value["id_classification_arborescence_article"];
+        $paramPere = $paramFils;
+        $paramFils = $value["id_classification_arborescence_article"];
+        $fieldProprietaire = $paramfieldProprietaire;
+        $fieldMarque = $paramfieldMarque;
+        $fieldActivite = $paramfieldActivite;
+        $fieldRayon = $paramfieldRayon;
+        $fieldReseau = $paramfieldReseau;
+        $fieldEnvironnement = $paramfieldEnvironnement;
+        $fieldSaisonalite = $paramfieldSaisonalite;
+        $fieldExport = $paramfieldExport;
 
-            $paramReturn .= "<table> <caption>Classification Agis</caption>
+        $paramReturn .= "<table> <caption>Classification Agis</caption>
 
         <thead> <!-- En-tête du tableau -->
             <tr>
@@ -210,16 +252,35 @@ function recursif2($paramPere, $paramFils, $paramReturn, $paramfieldProprietaire
 
         
                 <tr><td>" . $paramFils . " </td> <td> " . $paramfieldProprietaire . " </td> <td> " . $paramfieldMarque . " </td> <td> " . $paramfieldActivite . " </td><td> " . $paramfieldRayon . "</td> <td> " . $paramfieldReseau . "</td> <td> " . $paramfieldEnvironnement . "</td> <td> " . $paramfieldSaisonalite . "</td> <td> " . $paramfieldExport . "</td></tr></table>";
-        };
-        $paramReturn = recursif2($paramPere, $paramFils, $paramReturn, $fieldProprietaire, $fieldMarque, $fieldActivite, $fieldRayon, $fieldReseau, $fieldEnvironnement, $fieldSaisonalite, $fieldExport);
- //   }
+    };
+    $paramReturn = recursif2($paramPere, $paramFils, $paramReturn, $fieldProprietaire, $fieldMarque, $fieldActivite, $fieldRayon, $fieldReseau, $fieldEnvironnement, $fieldSaisonalite, $fieldExport);
+//   }
 
 
     return $paramReturn;
 }
 
 $bloc = "Résultat<br>";
+$bloc.= "<pre>";
+$bloc.= print_r($returnFull);
+$bloc.= "</pre>";
 
+$bloc.= "<table>" . $HtmlResult->getHtlkResult() . "</table>";
+
+function getQuery($paramStartValue) {
+    return $reqTableClassifRoot = "SELECT classification_arborescence_article.id_classification_arborescence_article, "
+            . "ascendant_classification_arborescence_article_categorie_contenu, nom_classification_arborescence_article_categorie_contenu, "
+            . "nom_classification_arborescence_article_categorie "
+            . "FROM classification_arborescence_article, classification_arborescence_article_categorie_contenu, "
+            . "classification_arborescence_article_categorie "
+            . "WHERE classification_arborescence_article.id_classification_arborescence_article_categorie_contenu = "
+            . "classification_arborescence_article_categorie_contenu.id_classification_arborescence_article_categorie_contenu "
+            . "AND classification_arborescence_article_categorie.id_classification_arborescence_article_categorie = "
+            . "classification_arborescence_article_categorie_contenu.id_classification_arborescence_article_categorie "
+            . "AND ascendant_classification_arborescence_article_categorie_contenu = $paramStartValue "
+            . "ORDER BY classification_arborescence_article.id_classification_arborescence_article "
+    ;
+}
 
 /**
  * Rendu HTML
@@ -241,11 +302,12 @@ echo "
      <$html_table>
      <tr><td>
 
-         $bloc
+              $bloc
 
      </td></tr>
      </table>
      </form>
+
      ";
 
 //$recordSetFta = new FtaModel($id_fta);

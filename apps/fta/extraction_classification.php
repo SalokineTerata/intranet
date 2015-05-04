@@ -81,26 +81,171 @@ $fieldExport = "";
  *                                                                 ...
  *      "Carrefour" => array (...etc                        
  */
+
 /**
  * Code * 
  */
+//Mise en forme du tableau
+
+class HtmlResult {
+
+    private $htmlResult;
+    private $idArborescence;
+    private $proprietaire;
+    private $proprietaire2;
+    private $marque;
+    private $activite;
+    private $rayon;
+    private $reseau;
+    private $environnement;
+    private $saisonalite;
+    private $export;
+
+    function getProprietaire() {
+        return $this->proprietaire;
+    }
+
+    function getMarque() {
+        return $this->marque;
+    }
+
+    function getActivite() {
+        return $this->activite;
+    }
+
+    function getRayon() {
+        return $this->rayon;
+    }
+
+    function getReseau() {
+        return $this->reseau;
+    }
+
+    function getEnvironnement() {
+        return $this->environnement;
+    }
+
+    function getSaisonalite() {
+        return $this->saisonalite;
+    }
+
+    function setProprietaire($proprietaire) {
+        $this->proprietaire = $proprietaire;
+    }
+
+    function setMarque($marque) {
+        $this->marque = $marque;
+    }
+
+    function setActivite($activite) {
+        $this->activite = $activite;
+    }
+
+    function setRayon($rayon) {
+        $this->rayon = $rayon;
+    }
+
+    function setReseau($reseau) {
+        $this->reseau = $reseau;
+    }
+
+    function setEnvironnement($environnement) {
+        $this->environnement = $environnement;
+    }
+
+    function setSaisonalite($saisonalite) {
+        $this->saisonalite = $saisonalite;
+    }
+
+    function getIdArborescence() {
+        return $this->idArborescence;
+    }
+
+    function setIdArborescence($idArborescence) {
+        $this->idArborescence = $idArborescence;
+    }
+
+    function getProprietaire2() {
+        return $this->proprietaire2;
+    }
+
+    function setProprietaire2($proprietaire2) {
+        $this->proprietaire2 = $proprietaire2;
+    }
+
+    function getExport() {
+        return $this->export;
+    }
+
+    function setExport($export) {
+        $this->export = $export;
+    }
+
+//    function getHtmlResult() {
+//        $html_result = "";
+//        $propri = $this->getProprietaire();
+//        $marq = $this->getMarque();
+//        $activ = $this->getActivite();
+//        $rayon = $this->getRayon();
+//        $reseau = $this->getReseau();
+//        $enviro = $this->getEnvironnement();
+//        $saison = $this->getSaisonalite();
+//
+//
+//        $html_result .= "<tr>" . "<td>" . $propri . "</td>"
+//                . "<td>" . $marq . "</td>"
+//                . "<td>" . $activ . "</td>"
+//                . "<td>" . $rayon . "</td>"
+//                . "<td>" . $reseau . "</td>"
+//                . "<td>" . $enviro . "</td>"
+//                . "<td>" . $saison . "</td>"
+//                . "</tr>";
+//
+//        return $html_result;
+//    }
+
+    function getHtmlResult() {
+        return $this->htmlResult;
+    }
+
+    function setHtmlResult($htmlResult) {
+        $this->htmlResult = $htmlResult;
+    }
+
+}
+
+function getQuery($paramStartValue) {
+    return $reqTableClassifRoot = "SELECT classification_arborescence_article.id_classification_arborescence_article, "
+            . "ascendant_classification_arborescence_article_categorie_contenu, nom_classification_arborescence_article_categorie_contenu, "
+            . "nom_classification_arborescence_article_categorie "
+            . "FROM classification_arborescence_article, classification_arborescence_article_categorie_contenu, "
+            . "classification_arborescence_article_categorie "
+            . "WHERE classification_arborescence_article.id_classification_arborescence_article_categorie_contenu = "
+            . "classification_arborescence_article_categorie_contenu.id_classification_arborescence_article_categorie_contenu "
+            . "AND classification_arborescence_article_categorie.id_classification_arborescence_article_categorie = "
+            . "classification_arborescence_article_categorie_contenu.id_classification_arborescence_article_categorie "
+            . "AND ascendant_classification_arborescence_article_categorie_contenu = $paramStartValue "
+            . "ORDER BY classification_arborescence_article.id_classification_arborescence_article "
+    ;
+}
+
 //Démarrage
 //Initialisation première boucle:
 $i = 0;
-$startValue = 30;
+$startValue = 1;
 $return = array();
 
-$hmltResult = new HtmlResult();
+$HtmlResult = new HtmlResult();
 
-$returnFull = recursifOne($paramStartValue = $startValue, $hmltResult);
+$returnFull = recursifOne($paramStartValue = $startValue, $HtmlResult);
 
 /**
  * 
  * @param mixed $paramStartValue
- * @param HtmlResult $hmltResult
+ * @param HtmlResult $htmlResult
  * @return mixed
  */
-function recursifOne($paramStartValue, $hmltResult) {
+function recursifOne($paramStartValue, $htmlResult) {
     $reqTableClassifRoot = getQuery($paramStartValue);
 
     $resultTableClassifRoot = DatabaseOperation::query($reqTableClassifRoot);
@@ -115,12 +260,44 @@ function recursifOne($paramStartValue, $hmltResult) {
             $nom_type = $value["nom_classification_arborescence_article_categorie"];
 
             switch ($nom_type) {
+//& $htmlResult->getProprietaire() != "Carrefour(Groupe)"
                 case "Propriétaire":
-                    $HtmlResult->setProprietaire($nom_contenu);
+//                    if ($htmlResult->getProprietaire() == TRUE) {
+//                        $tmp = $nom_contenu;
+//                        $htmlResult->setProprietaire2($nom_contenu);
+//                        if ($htmlResult->getProprietaire2() == true ) {
+//                            $htmlResult->setProprietaire($tmp);
+//                        }
+//                    } else {
+//                        $htmlResult->setProprietaire(NULL);
+                        $htmlResult->setProprietaire($nom_contenu);
+//                    }
+                    ;
                     break;
-                    
-                    //....
-                
+                case "Marque":
+                    $htmlResult->setMarque($nom_contenu);
+                    break;
+                case "Activité":
+                    $htmlResult->setActivite($nom_contenu);
+                    break;
+                case "Rayon":
+                    $htmlResult->setRayon($nom_contenu);
+                    break;
+                case "Environnement":
+                    $htmlResult->setEnvironnement($nom_contenu);
+                    break;
+                case "Réseau":
+                    $htmlResult->setReseau($nom_contenu);
+                    break;
+                case "Saisonalité":
+                    $htmlResult->setSaisonalite($nom_contenu);
+                    break;
+                case "Export":
+                    $htmlResult->setExport($nom_contenu);
+                    break;
+
+                //....
+
                 default:
                     break;
             }
@@ -130,19 +307,23 @@ function recursifOne($paramStartValue, $hmltResult) {
                 $nom_type => $nom_contenu,
                 "id" . $nom_type => $id_fils
             );
-            $subReturn = recursifOne($id_fils, $hmltResult);
+            $subReturn = recursifOne($id_fils, $htmlResult);
             if ($subReturn != NULL) {
                 $return[$j][] = $subReturn;
             } else {
-                $HtmlResult->setHtmlResult("<tr>" . "<td>" . $HtmlResult->getProprietaire() . "</td>"
-                        . "<td>" . $HtmlResult->getMarque() . "</td>"
-                        . "<td>" . $HtmlResult->Activité() . "</td>"
-                        . "<td>" . $HtmlResult->Rayon() . "</td>"
-                        . "<td>" . $HtmlResult->Réseau() . "</td>"
-                        . "<td>" . $HtmlResult->Environnement() . "</td>"
-                        . "<td>" . $HtmlResult->Saisonalité() . "</td>"
+                $htmlResult->setHtmlResult("<tr>" . "<td>" . $htmlResult->getProprietaire() . " / " . $htmlResult->getProprietaire2() . "</td>"
+                        . "<td>" . $htmlResult->getMarque() . "</td>"
+                        . "<td>" . $htmlResult->getActivite() . "</td>"
+                        . "<td>" . $htmlResult->getRayon() . "</td>"
+                        . "<td>" . $htmlResult->getEnvironnement() . "</td>"
+                        . "<td>" . $htmlResult->getReseau() . "</td>"
+                        . "<td>" . $htmlResult->getSaisonalite() . "</td>"
+                        . "<td>" . $htmlResult->getExport() . "</td>"
+                        . "<td>" . $htmlResult->getIdArborescence() . "</td>"
                         . "</tr>"
                 );
+                $htmlResult->setIdArborescence($id_fils);
+                return $htmlResult->getHtmlResult();
             }
         }
         return $return;
@@ -265,22 +446,8 @@ $bloc.= "<pre>";
 $bloc.= print_r($returnFull);
 $bloc.= "</pre>";
 
-$bloc.= "<table>" . $HtmlResult->getHtlkResult() . "</table>";
+//$bloc.= "<table>" . $HtmlResult->getHtlkResult() . "</table>";
 
-function getQuery($paramStartValue) {
-    return $reqTableClassifRoot = "SELECT classification_arborescence_article.id_classification_arborescence_article, "
-            . "ascendant_classification_arborescence_article_categorie_contenu, nom_classification_arborescence_article_categorie_contenu, "
-            . "nom_classification_arborescence_article_categorie "
-            . "FROM classification_arborescence_article, classification_arborescence_article_categorie_contenu, "
-            . "classification_arborescence_article_categorie "
-            . "WHERE classification_arborescence_article.id_classification_arborescence_article_categorie_contenu = "
-            . "classification_arborescence_article_categorie_contenu.id_classification_arborescence_article_categorie_contenu "
-            . "AND classification_arborescence_article_categorie.id_classification_arborescence_article_categorie = "
-            . "classification_arborescence_article_categorie_contenu.id_classification_arborescence_article_categorie "
-            . "AND ascendant_classification_arborescence_article_categorie_contenu = $paramStartValue "
-            . "ORDER BY classification_arborescence_article.id_classification_arborescence_article "
-    ;
-}
 
 /**
  * Rendu HTML

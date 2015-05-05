@@ -447,7 +447,7 @@ $donnee = mysql_pconnect($hostname_connect, $username_connect, $password_connect
 
 foreach ($returnFull as $value) {
     $idArborescence = $value[HtmlResult::ID_ARBORESCENCE];
-    $proprietaire = implode("/", $value["Proprietaire"]);
+    $proprietaire = implode("/", $value[HtmlResult::PROPRIETAIRE]);
     $marque = $value[HtmlResult::MARQUE];
     $activite = $value[HtmlResult::ACTIVITE];
     $rayon = $value[HtmlResult::RAYON];

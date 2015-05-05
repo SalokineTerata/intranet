@@ -42,7 +42,6 @@ $page_pdf = $page_default . "_pdf.php";
 $action = 'valider';                       //Action proposée à la page _post.php
 $method = 'method=post';                   //Pour une url > 2000 caractères, ne pas utiliser utiliser GET
 $html_table = "table "                     //Permet d'harmoniser les tableaux
-        . "border=0 "
         . "width=100% "
         . "class=titre "
 ;
@@ -100,6 +99,7 @@ class HtmlResult {
     private $environnement;
     private $saisonalite;
     private $export;
+    private $tmp;
 
     function getProprietaire() {
         return $this->proprietaire;
@@ -130,7 +130,26 @@ class HtmlResult {
     }
 
     function setProprietaire($proprietaire) {
-        $this->proprietaire = $proprietaire;
+        if ($this->getTmp() != $proprietaire) {
+            if ($this->getProprietaire() === $this->getTmp() & $this->getProprietaire() == !NULL ) {
+                $this->setProprietaire2($proprietaire);
+            } elseif ($this->getProprietaire() != $proprietaire) {
+                if ($this->getProprietaire() != NULL) {
+                    if ($this->getProprietaire() === $this->getTmp()) {
+                        $this->setProprietaire2($proprietaire);
+                    }
+                    $this->setTmp($proprietaire);
+                    if ($this->getProprietaire2() === NULL) {
+                        $this->proprietaire = $this->getTmp();
+                    }
+                } elseif ($this->getProprietaire() != $this->getTmp()) {
+                    $this->proprietaire = $this->getTmp();
+                }
+                if ($this->getProprietaire() == NULL) {
+                    $this->proprietaire = $proprietaire;
+                }
+            }
+        }
     }
 
     function setMarque($marque) {
@@ -179,6 +198,14 @@ class HtmlResult {
 
     function setExport($export) {
         $this->export = $export;
+    }
+
+    function getTmp() {
+        return $this->tmp;
+    }
+
+    function setTmp($tmp) {
+        $this->tmp = $tmp;
     }
 
 //    function getHtmlResult() {
@@ -262,16 +289,9 @@ function recursifOne($paramStartValue, $htmlResult) {
             switch ($nom_type) {
 //& $htmlResult->getProprietaire() != "Carrefour(Groupe)"
                 case "Propriétaire":
-//                    if ($htmlResult->getProprietaire() == TRUE) {
-//                        $tmp = $nom_contenu;
-//                        $htmlResult->setProprietaire2($nom_contenu);
-//                        if ($htmlResult->getProprietaire2() == true ) {
-//                            $htmlResult->setProprietaire($tmp);
-//                        }
-//                    } else {
-//                        $htmlResult->setProprietaire(NULL);
-                        $htmlResult->setProprietaire($nom_contenu);
-//                    }
+
+                    $htmlResult->setProprietaire($nom_contenu);
+
                     ;
                     break;
                 case "Marque":

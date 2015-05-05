@@ -89,6 +89,14 @@ $fieldExport = "";
 class HtmlResult {
 
     const ROOT_VALUE = 1;
+    const ID_ARBORESCENCE = "IdArborescence";
+    const PROPRIETAIRE = "Proprietaire";
+    const MARQUE = "Marque";
+    const ACTIVITE = "Activite";
+    const RAYON = "Rayon";
+    const RESEAU = "Reseau";
+    const ENVIRONNEMENT = "Environnement";
+    const SAISONALITE = "Saisonnalite";
 
     private $isProprietaireEnd;
     private $arrayResult;
@@ -410,7 +418,7 @@ function recursifOne($paramStartValue, $htmlResult) {
                 return $htmlResult;
             }
         }
-        return $return;
+        return $htmlResult->getArrayResult();
     } else {
         return NULL;
     }
@@ -428,13 +436,46 @@ function recursifOne($paramStartValue, $htmlResult) {
 //                        . "</tr>"
 //                );
 
+$hostname_connect = "dev-intranet.agis.fr"; //nom du serveur MySQL de connection � la base de donn�e
+$database_connect = "intranet_v3_0_dev"; //nom de la base de donn�e sur votre serveur MySQL
+$username_connect = "root"; //login de la base MySQL
+$tablename_connect = "salaries"; //table login de la base MySQL
+$password_connect = "8ale!ne"; //mot de passe de la base MySQL
+//$connect = new PDO($hostname_connect, $username_connect, $password_connect); //connection � la base de donn�e si sa echoue sa retourne une erreur. 
 
-$bloc = "Résultat<br>";
-$bloc.= "<pre>";
-$bloc.= print_r($returnFull);
-$bloc.= "</pre>";
+$donnee = mysql_pconnect($hostname_connect, $username_connect, $password_connect) or die("connexion impossible");
 
-//$bloc.= "<table>" . $HtmlResult->getHtlkResult() . "</table>";
+foreach ($returnFull as $value) {
+    $idArborescence = $value[HtmlResult::ID_ARBORESCENCE];
+    $proprietaire = implode("/", $value["Proprietaire"]);
+    $marque = $value[HtmlResult::MARQUE];
+    $activite = $value[HtmlResult::ACTIVITE];
+    $rayon = $value[HtmlResult::RAYON];
+    $environnement = $value[HtmlResult::ENVIRONNEMENT];
+    $reseau = $value[HtmlResult::RESEAU];
+    $saisonalite = $value[HtmlResult::SAISONALITE];
+
+    $sql_inter = "INSERT INTO  `intranet_v3_0_dev`
+    .`migration_V2_vers_V3_classification_fta` (
+    `Proprietaire` ,
+    `Marque` ,
+    `Activite` ,
+    `Rayon` ,
+    `Environnement` ,
+    `Reseau` ,
+    `Saisonnalite` ,
+    `id_fta`)
+    VALUES ('$proprietaire',  '$marque',  '$activite',  '$rayon',  '$environnement',  '$reseau',  '$saisonalite',  '$idArborescence'
+)";
+
+    mysql_query("SET NAMES 'utf8'");
+    $resultquery = mysql_query($sql_inter);
+    
+   
+}
+
+ mysql_close();
+
 
 
 /**

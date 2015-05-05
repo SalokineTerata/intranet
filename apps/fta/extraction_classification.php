@@ -470,13 +470,11 @@ foreach ($returnFull as $value) {
 
     mysql_query("SET NAMES 'utf8'");
     $resultquery = mysql_query($sql_inter);
-    
-   
 }
 
- mysql_close();
+mysql_close();
 
-
+$bloc .="Vous avez bien envoyer les données dans la table :  migration_V2_vers_V3_classification_fta";
 
 /**
  * Rendu HTML

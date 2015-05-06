@@ -1,15 +1,15 @@
-<?php
+<?
 /***********
 AUTORISATION
 ***********/
 /*
 Autorisation de consulter le module:
-En effet cette page est chargée par toutes les pages de ce module
+En effet cette page est chargÃ©e par toutes les pages de ce module
 */
 
     $module_consultation = $module. "_consultation";
 
-    if ($_SESSION[$module_consultation]=="0")
+    if ($$module_consultation=="0")
     {
         header ("Location: index.php");
     }
@@ -28,7 +28,7 @@ VARIABLES GLOBALES DU MODULE
 FONCTIONS GLOBALES DU MODULE
 ***************************/
 
-/*Exemple de déclaration de fonctions
+/*Exemple de dÃ©claration de fonctions
 ************************************/
 //function fonction1($variable1,$variable2, $variable3, $variable4)
 {
@@ -51,7 +51,7 @@ DEBUT DES FONCTIONS
 
 
 /*
-Include de développement
+Include de dÃ©veloppement
 Une optimisation serait d'utiliser CVS !!
 */
 if($module)

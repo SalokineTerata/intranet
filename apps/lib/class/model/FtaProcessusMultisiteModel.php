@@ -6,7 +6,7 @@
  *
  * @author franckwastaken
  */
-class FtaProcessusMultisite extends AbstractModel {
+class FtaProcessusMultisiteModel extends AbstractModel {
 
     const TABLENAME = "fta_processus_multisite";
     const KEYNAME = "id_fta_processus_multisite";

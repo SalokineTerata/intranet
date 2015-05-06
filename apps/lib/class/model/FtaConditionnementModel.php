@@ -57,13 +57,16 @@ class FtaConditionnementModel extends AbstractModel {
     public function __construct($paramId = NULL, $paramIsCreateRecordsetInDatabaseIfKeyDoesntExist = AbstractModel::DEFAULT_IS_CREATE_RECORDSET_IN_DATABASE_IF_KEY_DOESNT_EXIST) {
         parent::__construct($paramId, $paramIsCreateRecordsetInDatabaseIfKeyDoesntExist);
 
-        $this->setModelFtaById($this->getDataField(self::FIELDNAME_ID_FTA)->getFieldValue());
+        $this->setModelFtaById(
+                $this->getDataField(self::FIELDNAME_ID_FTA)->getFieldValue());
     }
 
     public function setModelFtaById($id) {
         $this->getDataField(self::FIELDNAME_ID_FTA)->setFieldValue($id);
         $this->setModelFta(
-                new FtaModel($this->getDataField(self::FIELDNAME_ID_FTA)->getFieldValue(), DatabaseRecord::VALUE_DONT_CREATE_RECORD_IN_DATABASE_IF_KEY_DOESNT_EXIST)
+                new FtaModel(
+                $this->getDataField(self::FIELDNAME_ID_FTA)->getFieldValue()
+                , DatabaseRecord::VALUE_DONT_CREATE_RECORD_IN_DATABASE_IF_KEY_DOESNT_EXIST)
         );
     }
 
@@ -114,10 +117,6 @@ class FtaConditionnementModel extends AbstractModel {
     static function getCalculGenericMultiplication($param, $paramb) {
         return $param * $paramb;
     }
-
-
-            
-      
 
 }
 

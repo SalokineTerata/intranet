@@ -1342,12 +1342,9 @@ function arborescence_construction($table, $champ_valeur, $champ_id_fils, $champ
     //Configuration du tri de l'arborescence
     switch ($extension[2]) {
 
-        case 0:$tri = $champ_valeur;
-            break;
-        case 1:$tri = $champ_id_fils;
-            break;
-        case 2:$tri = $champ_id_pere;
-            break;
+        case 0  :   $tri = $champ_valeur;  break;
+        case 1  :   $tri = $champ_id_fils; break;
+        case 2  :   $tri = $champ_id_pere; break;
     }
 
 

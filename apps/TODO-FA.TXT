@@ -22,10 +22,13 @@ PARTIE 1: Construction des interfaces utilisateurs (v1) --> Pas de sous table po
 
 [V] Chapitre dictionnaire de donnée (en cours)
 [V] Modifiaction des objets créés.
-[ ] Reproduction du menu de v2 en objet.
+            /// LIEU_GEO ET ID_USER DANS LA TABLE SALARIES RECUPERER LES VALAURS TEL QUE SESSION
 
+[V] Reproduction du menu de v2 en objet.
 
+[v] Exporter la liste des classifications existantes.
+[]Création d'un objet pour les operations du chap Palettisation
 [ ] Chapitre Emballage
 
-[ ] Exporter la liste des classifications existantes.
+
 

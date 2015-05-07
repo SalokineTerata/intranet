@@ -19,7 +19,17 @@ class SalariesModel extends AbstractModel {
     const FIELDNAME_DATE_CREATION_SALARIES = "date_creation_salaries";
     const FIELDNAME_ASENDANT_ID_SALARIES = "ascendant_id_salaries";
     const FIELDNAME_PORTAIL_WIKI_SALARIES = "portail_wiki_salaries";
+    const FIELDNAME_LIEU_GEO = "lieu_geo";
 
+    /*
+     * ratée
+     */
+
+    //Utilisateur actuellement connecté
+    public function getConnectUserId($paramKey) {
+        return $this->getDataField(
+                        $paramKey)->getFieldValue();
+    }
 
 }
 ?>

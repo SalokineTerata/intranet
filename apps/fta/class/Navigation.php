@@ -164,7 +164,7 @@ class Navigation {
 
             //Suppression des processus déjà validé
             $req .= self::DeleteValidProcess($t_processus_visible);
-
+            
             //Vérification des droits d'accès de l'utilisateur en cours
             $req .=") "
                     . " AND " . FtaProcessusCycleModel::TABLENAME . "." . FtaProcessusCycleModel::FIELDNAME_PROCESSUS_NEXT

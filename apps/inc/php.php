@@ -37,6 +37,15 @@ require_once("../conf/EnvironmentConf.php");
 require_once("../conf/EnvironmentAbstract.php");
 require_once("../conf/EnvironmentCod.php");
 
+// Fta (Model)
+require_once("../fta/class/Navigation.php");
+require_once("../fta/class/Chapitre.php");
+require_once("../fta/class/ObjectFta.php");
+
+// Fta View
+require_once("../fta/class/view/FtaView.php");
+require_once("../fta/class/view/FtaProcessusDelaiView.php");
+require_once("../fta/class/ObjectFta.php");
 
 // Moteur de base de données
 require_once("../lib/class/database/DatabaseOperation.php");
@@ -69,6 +78,9 @@ require_once("../lib/class/model/FtaSuiviProjetModel.php");
 require_once("../lib/class/model/FtaProcessusMultisiteModel.php");
 require_once("../lib/class/model/FtaProcessusDelaiModel.php");
 require_once("../lib/class/model/GeoModel.php");
+require_once("../lib/class/model/IntranetActionsModel.php");
+require_once("../lib/class/model/IntranetDroitsAccesModel.php");
+require_once("../lib/class/model/IntranetModulesModel.php");
 require_once("../lib/class/model/SalariesModel.php");
 
 // Standard HTML

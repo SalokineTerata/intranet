@@ -122,7 +122,7 @@ class Chapitre {
         );
         self::$is_owner = self::buildIsOwner();
         self::$is_editable = self::buildIsEditable();
-         self::$is_correctable = self::buildIsCorrectable();
+        self::$is_correctable = self::buildIsCorrectable();
         self::$taux_validation_processus = self::buildTauxValidationProcessus();
         self::$html_submit_button = self::buildHtmlSubmitButton();
         self::$html_correct_button = self::buildHtmlCorrectButton();
@@ -728,10 +728,8 @@ class Chapitre {
 
         $bloc.="<tr class=titre_principal><td class>Composition</td></tr>";
 
-
         //Agrément CE
         $bloc.=$ftaView->getHtmlSiteAgrement();
-
 
         //Produit Transformé en France
         $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_PRODUIT_TRANSFORME);
@@ -909,6 +907,8 @@ class Chapitre {
 
         $bloc.="<tr class=titre_principal><td class>Echéances</td></tr>";
 
+        //Date d'échéance des processus
+        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_VIRTUAL_FTA_PROCESSUS_DELAI);
 
 
         $bloc.="<tr class=titre_principal><td class>Commerce</td></tr>";
@@ -940,12 +940,6 @@ class Chapitre {
 
         //Service consommateur
         $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_SERVICE_CONSOMMATEUR);
-
-        $bloc.="<tr class=titre_principal><td class>Identité Suite</td></tr>";
-
-        //Date d'échéance des processus
-        $bloc.=$ftaView->getHtmlEcheancesProcessus();
-
 
         return $bloc;
     }
@@ -1139,7 +1133,6 @@ class Chapitre {
         $synthese_action = self::$synthese_action;
         $isEditable = self::$is_editable;
         //$isEditable = FALSE;
-
         //Identifiant FTA
         $ftaModel = new FtaModel($id_fta);
         $ftaView = new FtaView($ftaModel);
@@ -1443,7 +1436,6 @@ class Chapitre {
         $synthese_action = self::$synthese_action;
         $isEditable = self::$is_editable;
         //$isEditable = TRUE;
-
         //Identifiant FTA
         $ftaModel = new FtaModel($id_fta);
         $ftaView = new FtaView($ftaModel);
@@ -1581,10 +1573,8 @@ class Chapitre {
 
         //Besoin de la fiche technique ?
         //$bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_BESOIN_FICHE_TECHNIQUE);
-
         //Etude de prix ?
         //$bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_ETUDE_PRIX_FTA);
-
         //Calibre par défaut
         $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_CALIBRE_DEFAUT);
 

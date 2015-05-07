@@ -1,11 +1,5 @@
 <?php
 
-//require_once ("../$module/class/recordset/fta.php");
-require_once ("../$module/class/ObjectFta.php");
-require_once ("../$module/class/Chapitre.php");
-require_once ("../$module/class/view/FtaView.php");
-require_once ("../$module/class/view/FtaProcessusDelaiView.php");
-
 /* * *********
   AUTORISATION
  * ********* */
@@ -5155,15 +5149,4 @@ function afficher_navigation($id_fta, $id_fta_chapitre_encours, $synthese_action
     return $menu_navigation;
 }
 
-/*
-  Include de développement
-  Une optimisation serait d'utiliser CVS !!
- */
-if ($module) {
-    $chemin_functions_personalise = "../" . $module;
-} else
-    $chemin_functions_personalise = ".";
-
-//include ("$chemin_functions_personalise/functions_sm.php");
-//include ("$chemin_functions_personalise/functions_bs.php");
 ?>

@@ -147,7 +147,7 @@ class FtaModel extends AbstractModel {
         /**
          * Génération des données d'emballage
          */
-        $this->buildArrayEmballage();
+//        $this->buildArrayEmballage();
     }
 
     /**
@@ -384,15 +384,15 @@ class FtaModel extends AbstractModel {
         return $this->getArrayEmballages(FtaConditionnementModel::EMBALLAGES_PALETTE);
     }
 
-    public function buildArrayEmballage() {
-
-        //... génération des tableaux de résulats
-
-        $this->setArrayEmballageUVC($result1);
-        $this->setArrayEmballageDuColis($result2);
-        $this->setArrayEmballageParColis($result3);
-        $this->setArrayEmballagePalette($result4);
-    }
+//    public function buildArrayEmballage() {
+//
+//        //... génération des tableaux de résulats
+//
+//        $this->setArrayEmballageUVC($result1);
+//        $this->setArrayEmballageDuColis($result2);
+//        $this->setArrayEmballageParColis($result3);
+//        $this->setArrayEmballagePalette($result4);
+//    }
 
     public function getArrayEmballages($paramGroupeType) {
 

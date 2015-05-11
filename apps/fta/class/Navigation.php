@@ -6,19 +6,12 @@
  * @author tp4300008
  */
 class Navigation {
-
-    /**
-     * Utilisateur connecté
-     * @var SalariesModel
-     */
-    private $modelUser;
-    
+   
     /**
      *
      * FPDF@var <ObjectFta>
      */
     protected static $id_fta;
-    protected static $id_user;
     protected static $comeback;
     protected static $html_navigation_bar;
     protected static $html_navigation_core;
@@ -48,22 +41,6 @@ class Navigation {
         self::$html_navigation_bar = self::buildNavigationBar();
     }
 
-    /**
-     * Retourne l'utilisateur connecté
-     * @return  SalariesModel
-     */
-    function getModelUser() {
-        return $this->modelUser;
-    }
-
-    /**
-     * Défini l'utilisateur connecté
-     * @param SalariesModel
-     */
-    function setModelUser(SalariesModel $modelUser) {
-        $this->modelUser = $modelUser;
-    }
-
     protected static function buildNavigationBar() {
         //configurer le setteur du ModelUser lien avec les identifiant inscrit par l'utilisateur
         // récuperer son identifiant et la conservé dans cette classe objet ou une autre.
@@ -79,7 +56,6 @@ class Navigation {
                 . "class=contenu "
         ;
         //Récupère la page en cours
-        //$page_default=substr(strrchr($_SERVER["PHP_SELF"], '/'), '1', '-4');
         $arrayFtaEtatAndFta = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
                         "SELECT " . FtaModel::KEYNAME . ", " . FtaModel::FIELDNAME_CREATEUR
                         . ", " . FtaModel::FIELDNAME_ARTICLE_AGROLOGIC . ", " . FtaModel::FIELDNAME_DOSSIER_FTA
@@ -95,12 +71,12 @@ class Navigation {
             $rowsFtaEtatAndFta[FtaModel::KEYNAME] = self::$id_fta;
             //Nom de l'assistante de projet responsable:
             $array = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
-                            "SELECT " . SalariesModel::FIELDNAME_PRENOM . "," . SalariesModel::FIELDNAME_NOM
-                            . " FROM " . SalariesModel::TABLENAME
-                            . " WHERE " . SalariesModel::KEYNAME
+                            "SELECT " . UserModel::FIELDNAME_PRENOM . "," . UserModel::FIELDNAME_NOM
+                            . " FROM " . UserModel::TABLENAME
+                            . " WHERE " . UserModel::KEYNAME
                             . "='" . $rowsFtaEtatAndFta[FtaModel::FIELDNAME_CREATEUR] . "' ");
             foreach ($array as $rows) {
-                $createur = $rows[SalariesModel::FIELDNAME_PRENOM] . " " . $rows[SalariesModel::FIELDNAME_NOM];
+                $createur = $rows[UserModel::FIELDNAME_PRENOM] . " " . $rows[UserModel::FIELDNAME_NOM];
             }
 
             //Construction du Menu
@@ -126,10 +102,7 @@ class Navigation {
         //Si une action est donnée, alors construction du menu des chapitres    
         $menu_navigation .= self::CheckSyntheseAction();
         //Lien de retour rapide
-        /* $menu_navigation.= "</td></tr><tr><td>
-          <a href=index.php?id_fta_etat=".$_SESSION["id_fta_etat"]."&nom_fta_etat=".$_SESSION["abreviation_fta_etat"]."&synthese_action=$synthese_action>Retour vers la synthèse</a>
-          "; */
-        if (self::$comeback == 1) {
+         if (self::$comeback == 1) {
             $_SESSION["comeback_url"] = $_SERVER["HTTP_REFERER"];
             $_GLOBALS["comeback_url"] = $_SESSION["comeback_url"];
         }
@@ -152,6 +125,7 @@ class Navigation {
         $t_processus_visible = array();
         $globalconfig = new GlobalConfig();
         $id_user = $globalconfig->getAuthenticatedUser()->getKeyValue();
+ //       $lieu_geo = $globalconfig->getLieuGeoUser()->getLieuGeo();
 
 
         //self objet fta ne marche pas a corriger
@@ -364,7 +338,7 @@ class Navigation {
                     }//Fin du test public
                 }//Fin de la colorisation
 
-                if ($num == 0 and $_SESSION["synthese_action"] === "attente") {
+                if ($num == 0 and self::$synthese_action === "attente") {
                     
                 } else {
                     $menu_navigation .= "<a href=$page_default.php?id_fta=" . self::$id_fta . "&id_fta_chapitre_encours=$id_fta_chapitre&synthese_action=" . self::$synthese_action . ">$b"

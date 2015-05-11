@@ -124,7 +124,7 @@ if ($login) {
             $id_user = $rows["id_user"];
             $id_catsopro = $rows["id_catsopro"];
             $id_service = $rows["id_service"];
-            $id_type = $rows["id_type"];
+            $nom_type = $rows["id_type"];
             $nom_famille_ses = $rows["nom"];
             $mail_user = $rows["mail"];
             $lieu_geo = $rows["lieu_geo"];
@@ -137,13 +137,21 @@ if ($login) {
             $_SESSION["id_user"] = $id_user;
             $_SESSION["id_catsopro"] = $id_catsopro;
             $_SESSION["id_service"] = $id_service;
-            $_SESSION["id_type"] = $id_type;
+            $_SESSION["id_type"] = $nom_type;
             $_SESSION["num_log"] = $num_log;
             $_SESSION["position"] = $position;
             //$_SESSION["bdd"]=$bdd;
             $_SESSION["mail_user"] = $mail_user;
             $_SESSION["lieu_geo"] = $lieu_geo;
             $_SESSION["portail_wiki_salaries"] = $portail_wiki_salaries;
+
+            /**
+             * Enregistrement de l'utilisateur authentifié
+             */
+            $authenticatedUser = new UserModel($id_user);
+            $globalConfig = new GlobalConfig();
+            $globalConfig->setAuthenticatedUser($authenticatedUser);
+            GlobalConfig::saveGlobalConfToPhpSession($globalConfig);
 
             /* --------------------------------------------------------------
               Appel de la page qui définit les droits d'accès de l'utilisateur

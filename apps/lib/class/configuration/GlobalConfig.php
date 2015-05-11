@@ -25,6 +25,12 @@ class GlobalConfig {
     private $conf = NULL;
     private $needBuildConf = NULL;
 
+    /**
+     * Utilisateur actuellement authentifié sur le site.
+     * @var UserModel 
+     */
+    private $authenticatedUser = NULL;
+
     function __construct() {
 
         /**
@@ -45,6 +51,13 @@ class GlobalConfig {
              * dans la session PHP
              */
             $this->setConf($_SESSION[self::VARNAME_GLOBALCONFIG_IN_PHP_SESSION]->getConf());
+
+            if ($_SESSION[self::VARNAME_GLOBALCONFIG_IN_PHP_SESSION]->getAuthenticatedUser() == NULL) {
+
+                $this->setAuthenticatedUser(new UserModel);
+            } else {
+                $this->setAuthenticatedUser($_SESSION[self::VARNAME_GLOBALCONFIG_IN_PHP_SESSION]->getAuthenticatedUser());
+            }
 
             /**
              * Si le mode Debug de session est activé, on reconstruit
@@ -167,6 +180,22 @@ class GlobalConfig {
 
         //Sauvegarde de la configuration dans la session:
         $this->setConfIsInitializedToTrue();
+    }
+
+    /**
+     * 
+     * @return UserModel
+     */
+    function getAuthenticatedUser() {
+        return $this->authenticatedUser;
+    }
+
+    /**
+     * 
+     * @param UserModel $authenticatedUser
+     */
+    function setAuthenticatedUser(UserModel $authenticatedUser) {
+        $this->authenticatedUser = $authenticatedUser;
     }
 
     function getNeedBuildConf() {

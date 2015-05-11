@@ -12,7 +12,7 @@ class FtaModel extends AbstractModel {
     const KEYNAME = "id_fta";
     const KEYNAME_CREATEUR = "id_user";
     const FIELDNAME_ACTIVATION_CODESOFT = "activation_codesoft_arti2";
-    const FIELDNAME_ARCADIA_EMBALLAGE_TYPE = "id_arcadia_emballage_type";    
+    const FIELDNAME_ARCADIA_EMBALLAGE_TYPE = "id_arcadia_emballage_type";
     const FIELDNAME_ARTICLE_AGROLOGIC = "id_article_agrologic";
     const FIELDNAME_BESOIN_FICHE_TECHNIQUE = "besoin_fiche_technique";
     const FIELDNAME_CALIBRE_DEFAUT = "calibre_defaut";
@@ -107,7 +107,6 @@ class FtaModel extends AbstractModel {
      */
     private $modelFtaCategorie;
 
-
     /**
      * Model de donnée d'une FTA
      * @var FtaProcessusDelaiModel
@@ -143,6 +142,12 @@ class FtaModel extends AbstractModel {
         );
 
         //Tables mères (Relation N:1, la clef étrangère dans la table mère)
+
+
+        /**
+         * Génération des données d'emballage
+         */
+        $this->buildArrayEmballage();
     }
 
     /**
@@ -358,7 +363,7 @@ class FtaModel extends AbstractModel {
 
         return $arrayDataFieldEcheancesForProcessusCycle;
     }
-    
+
     public function getArrayEmballageTypeUVC() {
 
         return $this->getArrayEmballages(FtaConditionnementModel::EMBALLAGES_UVC);
@@ -377,6 +382,16 @@ class FtaModel extends AbstractModel {
     public function getArrayEmballageTypePalette() {
 
         return $this->getArrayEmballages(FtaConditionnementModel::EMBALLAGES_PALETTE);
+    }
+
+    public function buildArrayEmballage() {
+
+        //... génération des tableaux de résulats
+
+        $this->setArrayEmballageUVC($result1);
+        $this->setArrayEmballageDuColis($result2);
+        $this->setArrayEmballageParColis($result3);
+        $this->setArrayEmballagePalette($result4);
     }
 
     public function getArrayEmballages($paramGroupeType) {
@@ -529,4 +544,5 @@ class FtaModel extends AbstractModel {
 
         return $return;
     }
+
 }

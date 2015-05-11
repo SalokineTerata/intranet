@@ -125,6 +125,9 @@ class Navigation {
 
         $t_processus_encours = array();
         $t_processus_visible = array();
+        $globalconfig = new GlobalConfig();
+        $id_user = $globalconfig->getAuthenticatedUser()->getKeyValue();
+
 
         //self objet fta ne marche pas a corriger
         //Si une action est donnée, alors construction du menu des chapitres
@@ -164,7 +167,7 @@ class Navigation {
 
             //Suppression des processus déjà validé
             $req .= self::DeleteValidProcess($t_processus_visible);
-            
+
             //Vérification des droits d'accès de l'utilisateur en cours
             $req .=") "
                     . " AND " . FtaProcessusCycleModel::TABLENAME . "." . FtaProcessusCycleModel::FIELDNAME_PROCESSUS_NEXT
@@ -175,7 +178,7 @@ class Navigation {
                     . "=" . IntranetDroitsAccesModel::TABLENAME . "." . IntranetDroitsAccesModel::FIELDNAME_ID_INTRANET_ACTIONS  //Jointure
                     . " AND " . IntranetDroitsAccesModel::TABLENAME . "." . IntranetDroitsAccesModel::FIELDNAME_ID_INTRANET_MODULES
                     . "=" . IntranetModulesModel::TABLENAME . "." . IntranetModulesModel::KEYNAME  //Jointure
-                    . " AND " . IntranetDroitsAccesModel::FIELDNAME_ID_USER . "=" . $_SESSION["id_user"] //Utilisateur actuellement connecté
+                    . " AND " . IntranetDroitsAccesModel::FIELDNAME_ID_USER . "=" . $id_user //Utilisateur actuellement connecté
                     . " AND " . IntranetModulesModel::FIELDNAME_NOM_INTRANET_MODULES . "='" . FtaModel::TABLENAME
                     . "' AND " . IntranetDroitsAccesModel::FIELDNAME_NIVEAU_INTRANET_DROITS_ACCES . "=1"  //L'utilisateur est propriétaire
                     . " AND " . FtaProcessusCycleModel::FIELDNAME_FTA_ETAT . "='" . self::$objectFta->getFieldValue(ObjectFta::TABLE_ETAT_NAME, "abreviation_fta_etat") . "' "

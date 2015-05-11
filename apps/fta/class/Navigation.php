@@ -8,10 +8,17 @@
 class Navigation {
 
     /**
+     * Utilisateur connecté
+     * @var SalariesModel
+     */
+    private $modelUser;
+    
+    /**
      *
      * FPDF@var <ObjectFta>
      */
     protected static $id_fta;
+    protected static $id_user;
     protected static $comeback;
     protected static $html_navigation_bar;
     protected static $html_navigation_core;
@@ -25,8 +32,6 @@ class Navigation {
     protected static $objectFta;
     protected static $synthese_action;
     protected static $id_fta_processus;
-    protected static $delete_valid_process;
-    protected static $add_valid_process;
 
     public static function getHtmlNavigationBar() {
         return self::$html_navigation_bar;
@@ -38,12 +43,32 @@ class Navigation {
         self::$id_fta_chapitre_encours = $id_fta_chapitre_encours;
         self::$synthese_action = $synthese_action;
         self::$comeback = $comeback;
-
+        
         self::$objectFta = new ObjectFta(self::$id_fta);
         self::$html_navigation_bar = self::buildNavigationBar();
     }
 
+    /**
+     * Retourne l'utilisateur connecté
+     * @return  SalariesModel
+     */
+    function getModelUser() {
+        return $this->modelUser;
+    }
+
+    /**
+     * Défini l'utilisateur connecté
+     * @param SalariesModel
+     */
+    function setModelUser(SalariesModel $modelUser) {
+        $this->modelUser = $modelUser;
+    }
+
     protected static function buildNavigationBar() {
+        //configurer le setteur du ModelUser lien avec les identifiant inscrit par l'utilisateur
+        // récuperer son identifiant et la conservé dans cette classe objet ou une autre.
+        
+       //$this->getModelUser()->getConnectUserId();
 
         //Action: "consultation" ou "modification"
         //Barre de navigation de la Fiche Tehnique Article

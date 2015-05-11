@@ -26,9 +26,11 @@ class SalariesModel extends AbstractModel {
      */
 
     //Utilisateur actuellement connecté
-    public function getConnectUserId($paramKey) {
-        return $this->getDataField(
-                        $paramKey)->getFieldValue();
+    public function getConnectUserId() {
+        return $this->getDataField(SalariesModel::KEYNAME)->getFieldValue();
+    }
+    public function getLieuGeo() {
+        return $this->getDataField(SalariesModel::FIELDNAME_LIEU_GEO)->getFieldValue();
     }
 
 }

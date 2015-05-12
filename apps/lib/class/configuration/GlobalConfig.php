@@ -31,11 +31,6 @@ class GlobalConfig {
      */
     private $authenticatedUser = NULL;
 
-    /**
-     * Lieu Geo de l'utilisateur actuellement authentifié sur le site.
-     * @var UserModel 
-     */
-    private $lieuGeoUser;
 
     function __construct() {
 
@@ -61,7 +56,7 @@ class GlobalConfig {
             if ($_SESSION[self::VARNAME_GLOBALCONFIG_IN_PHP_SESSION]->getAuthenticatedUser() == NULL) {
 
                 $this->setAuthenticatedUser(new UserModel);
-              //  $this->setLieuGeoUser(new UserModel);
+
             } else {
                 $this->setAuthenticatedUser($_SESSION[self::VARNAME_GLOBALCONFIG_IN_PHP_SESSION]->getAuthenticatedUser());
             }
@@ -205,21 +200,7 @@ class GlobalConfig {
         $this->authenticatedUser = $authenticatedUser;
     }
 
-    /**
-     * 
-     * @return UserModel
-     */
-    function getLieuGeoUser() {
-        return $this->lieuGeoUser;
-    }
 
-    /**
-     * 
-     * @param UserModel $lieuGeoUser
-     */
-    function setLieuGeoUser(UserModel $lieuGeoUser) {
-        $this->lieuGeoUser = $lieuGeoUser;
-    }
 
     function getNeedBuildConf() {
         return $this->needBuildConf;

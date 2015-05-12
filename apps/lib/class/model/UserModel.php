@@ -28,13 +28,8 @@ class UserModel extends AbstractModel {
         return $value;
     }
 
-    public function getIdConnectUser() {
-        return $this->getKeyValue();
-    }
-
     public function getLieuGeo() {
-        $value = $this->getDataField(UserModel::FIELDNAME_LIEU_GEO)->getFieldValue();
-        return $value;
+        return $this->getDataField(UserModel::FIELDNAME_LIEU_GEO)->getFieldValue();
     }
 
 }

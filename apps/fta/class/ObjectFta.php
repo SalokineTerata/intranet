@@ -317,7 +317,7 @@ class ObjectFta {
 
     public function checkMandatoryFields($nom_fta_chapitre) {
         $recordFta = &$this->records[self::TABLE_FTA_NAME];
-        $recordArti = &$this->records[self::TABLE_ARTI_NAME];
+   //     $recordArti = &$this->records[self::TABLE_ARTI_NAME];
         $nom_fta_chapitre_encours = $nom_fta_chapitre;
         $return = false; //false = echec du contrôle / true = réussite du contrôle
         //Vérification des saisies obligatoires avant validation du chapitre

@@ -46,7 +46,7 @@ $synthese_action = Lib::getParameterFromRequest("synthese_action");
 $societe_demandeur_fta = Lib::getParameterFromRequest("societe_demandeur_fta");
 //$id_classification_fta = Lib::getParameterFromRequest("id_classification_fta");
 $signature_validation_suivi_projet = Lib::getParameterFromRequest(FtaSuiviProjetModel::FIELDNAME_SIGNATURE_VALIDATION_SUIVI_PROJET);
-
+//eventuellemnt init valeur tel que chap et naviga
 switch ($action) {
 
     /*
@@ -87,26 +87,28 @@ switch ($action) {
 
         //Définition des variables locales  ***********************************************
         //$id_fta = Lib::getParameterFromRequest("id_fta");
-        //$objectFta = new ObjectFta($id_fta);
+        $objectFta = new ObjectFta($id_fta);
         $modelFta = new FtaModel($id_fta);
-        
+        $recordChapitre = new DatabaseRecord(
+                $table_name = "fta_chapitre", $key_value = $id_fta_chapitre_encours);
         //$objectFta = ObjectFta::restoreSession($id_fta);
         //$objectFta->updatePropertiesFromHttpRequest();
         $modelFta->saveToDatabase();
         
-        //$date_echeance_fta = $objectFta->getFieldValue(ObjectFta::TABLE_FTA_NAME, "date_echeance_fta");
+        $date_echeance_fta = $objectFta->getFieldValue(ObjectFta::TABLE_FTA_NAME, "date_echeance_fta");
         //$date_echeance_fta = $modelFta->getDataField(FtaModel::FIELDNAME_DATE_ECHEANCE_FTA)->getFieldValue();
         
-        //$abreviation_fta_etat = $objectFta->getFieldValue(ObjectFta::TABLE_ETAT_NAME, "abreviation_fta_etat");
+        $abreviation_fta_etat = $objectFta->getFieldValue(ObjectFta::TABLE_ETAT_NAME, "abreviation_fta_etat");
         //$abreviation_fta_etat = $modelFta->getModelFtaEtat()->getDataField(FtaEtatModel::FIELDNAME_ABREVIATION);
         
         //$id_fta_chapitre_encours = $objectFta->getFieldValue(ObjectFta::TABLE_SUIVI_PROJET_NAME, "id_fta_chapitre");
         
-        //$signature_validation_suivi_projet = $objectFta->getFieldValue(ObjectFta::TABLE_SUIVI_PROJET_NAME, "signature_validation_suivi_projet");
+        $signature_validation_suivi_projet = $objectFta->getFieldValue(ObjectFta::TABLE_SUIVI_PROJET_NAME, "signature_validation_suivi_projet");
 
         //$id_fta_chapitre = $id_fta_chapitre_encours;
 //        $recordChapitre = new DatabaseRecord("fta_chapitre", $id_fta_chapitre_encours);
 //        $id_fta_processus_encours = $recordChapitre->getFieldValue("id_fta_processus");
+        $nom_fta_chapitre_encours = $recordChapitre->getFieldValue(FtaChapitreModel::FIELDNAME_NOM_CHAPITRE);
 //        $nom_fta_chapitre_encours = $recordChapitre->getFieldValue("nom_fta_chapitre");
 
 
@@ -408,21 +410,21 @@ switch ($action) {
         mysql_table_operation($table, $operation);
 
 //Controle des donnée et access_arti2
-        if ($objectFta->getFieldValue(ObjectFta::TABLE_ARTI_NAME, "LIBELLE")) {
+        if ($objectFta->getFieldValue(ObjectFta::TABLE_FTA_NAME, "LIBELLE")) {
             $objectFta->setFieldValue(
-                    ObjectFta::TABLE_ARTI_NAME, "LIBELLE", mb_convert_case(
+                    ObjectFta::TABLE_FTA_NAME, "LIBELLE", mb_convert_case(
                             stripslashes(
                                     $objectFta->getFieldValue(
-                                            ObjectFta::TABLE_ARTI_NAME, "LIBELLE")
+                                            ObjectFta::TABLE_FTA_NAME, "LIBELLE")
                             ), MB_CASE_UPPER, "utf-8")
             );
         }
 
         //Nom de l'étiquette par défaut si on enregistre sur le chapitre Gestion des articles (cf. table fta_chapitre)
-        if (($objectFta->getFieldValue(ObjectFta::TABLE_ARTI_NAME, "LIBELLE_CLIENT") == null) and ($nom_fta_chapitre == "activation_article")) {
-            $objectFta->setFieldValue(ObjectFta::TABLE_ARTI_NAME, "LIBELLE_CLIENT", $objectFta->getFieldValue(ObjectFta::TABLE_ARTI_NAME, "LIBELLE"));
+        if (($objectFta->getFieldValue(ObjectFta::TABLE_FTA_NAME, "LIBELLE_CLIENT") == null) and ($nom_fta_chapitre == "activation_article")) {
+            $objectFta->setFieldValue(ObjectFta::TABLE_FTA_NAME, "LIBELLE_CLIENT", $objectFta->getFieldValue(ObjectFta::TABLE_FTA_NAME, "LIBELLE"));
         }
-        $table = "access_arti2";
+        $table = "fta";
         $operation = "update";
         mysql_table_operation($table, $operation);
         mysql_table_load($table);
@@ -447,16 +449,21 @@ switch ($action) {
 
         //Cohérence du Code LDC
         // ************** GESTION MULTI PCB POUR MEME CODE GROUPE
-        if ($objectFta->getFieldValue(ObjectFta::TABLE_ARTI_NAME, "code_article_ldc") and ModuleConfig::CODE_LDC_UNIQUE) {
+        if ($objectFta->getFieldValue(ObjectFta::TABLE_FTA_NAME, "code_article_ldc") and ModuleConfig::CODE_LDC_UNIQUE) {
             //if($code_article_ldc and false)
-            $req = "SELECT `fta`.`id_fta` FROM `fta`, `access_arti2`, fta_etat "
-                    . "WHERE `fta`.`id_access_arti2` = `access_arti2`.`id_access_arti2` "
-                    . "AND `fta`.`id_fta` = `access_arti2`.`id_fta`  "
-                    . "AND  `access_arti2`.`code_article_ldc` = '" . $objectFta->getFieldValue(ObjectFta::TABLE_ARTI_NAME, "code_article_ldc") . "' "
-                    . "AND `fta`.`id_dossier_fta` <> '" . $objectFta->getFieldValue(ObjectFta::TABLE_FTA_NAME, "id_dossier_fta") . "' "
+            $req = "SELECT `fta`.`id_fta` FROM `fta`, fta_etat "
+                    . "WHERE `fta`.`id_dossier_fta` <> '" . $objectFta->getFieldValue(ObjectFta::TABLE_FTA_NAME, "id_dossier_fta") . "' "
                     . "AND fta_etat.id_fta_etat=fta.id_fta_etat "
                     . "AND abreviation_fta_etat<>'R' "
             ;
+//            $req = "SELECT `fta`.`id_fta` FROM `fta`, `access_arti2`, fta_etat "
+//                    . "WHERE `fta`.`id_access_arti2` = `access_arti2`.`id_access_arti2` "
+//                    . "AND `fta`.`id_fta` = `access_arti2`.`id_fta`  "
+//                    . "AND  `access_arti2`.`code_article_ldc` = '" . $objectFta->getFieldValue(ObjectFta::TABLE_ARTI_NAME, "code_article_ldc") . "' "
+//                    . "AND `fta`.`id_dossier_fta` <> '" . $objectFta->getFieldValue(ObjectFta::TABLE_FTA_NAME, "id_dossier_fta") . "' "
+//                    . "AND fta_etat.id_fta_etat=fta.id_fta_etat "
+//                    . "AND abreviation_fta_etat<>'R' "
+//            ;
             $result = DatabaseOperation::query($req);
             if (mysql_num_rows($result)) {//Si le code est déjà affecté à une autre FTA, on informe, et on suppime l'affectation sur la FTA en cours
                 $titre = "Code Article déjà affecté";

@@ -277,7 +277,7 @@ class FtaView {
 
     function getHtmlPoidsEmballageUVC() {
 
-        $return = $this->getModel()->getArrayEmballageTypeUVC();
+        $return = $this->getModel()->buildArrayEmballageTypeUVC();
 
         $htmlPoidsUVC = new HtmlInputText();
 
@@ -289,7 +289,7 @@ class FtaView {
 
     function getHtmlPoidsNetEmballageUVC() {
 
-        $return = $this->getModel()->getArrayEmballageTypeUVC();
+        $return = $this->getModel()->buildArrayEmballageTypeUVC();
 
         $htmlPoidsNetUVC = new HtmlInputText();
 
@@ -302,7 +302,7 @@ class FtaView {
 
     function getHtmlPoidsBrutEmballageUVC() {
 
-        $return = $this->getModel()->getArrayEmballageTypeUVC();
+        $return = $this->getModel()->buildArrayEmballageTypeUVC();
 
         $htmlPoidsBrutUVC = new HtmlInputText();
 
@@ -315,7 +315,7 @@ class FtaView {
 
     function getHtmlDimensionEmballageUVC() {
 
-        $return = $this->getModel()->getArrayEmballageTypeUVC();
+        $return = $this->getModel()->buildArrayEmballageTypeUVC();
 
         $htmlDimensionUVC = new HtmlInputText();
 
@@ -329,7 +329,7 @@ class FtaView {
 
     function getHtmlNombreColisUVC() {
 
-        $return = $this->getModel()->getArrayEmballageTypeDuColis();
+        $return = $this->getModel()->buildArrayEmballageTypeDuColis();
 
         $htmlNombreColisUVC = new HtmlInputText();
 
@@ -342,7 +342,7 @@ class FtaView {
 
     function getHtmlPoidsColisUVC() {
 
-        $return = $this->getModel()->getArrayEmballageTypeDuColis();
+        $return = $this->getModel()->buildArrayEmballageTypeDuColis();
 
         $htmlPoidColisUVC = new HtmlInputText();
 
@@ -355,7 +355,7 @@ class FtaView {
 
     function getHtmlPoidsNetColisUVC() {
 
-        $return = $this->getModel()->getArrayEmballageTypeDuColis();
+        $return = $this->getModel()->buildArrayEmballageTypeDuColis();
 
         $htmlPoidsNetColisUVC = new HtmlInputText();
 
@@ -368,7 +368,7 @@ class FtaView {
 
     function getHtmlPoidsBrutColisUVC() {
 
-        $return = $this->getModel()->getArrayEmballageTypeDuColis();
+        $return = $this->getModel()->buildArrayEmballageTypeDuColis();
 
         $htmlPoidsBrutColisUVC = new HtmlInputText();
 
@@ -381,7 +381,7 @@ class FtaView {
 
     function getHtmlHauteurColisUVC() {
 
-        $return = $this->getModel()->getArrayEmballageTypeDuColis();
+        $return = $this->getModel()->buildArrayEmballageTypeDuColis();
 
         $htmlHauteurColisUVC = new HtmlInputText();
 
@@ -396,7 +396,7 @@ class FtaView {
 
         //Calcul du poids de Emballages par Palette
 
-        $return = $this->getModel()->getArrayEmballageTypePalette();
+        $return = $this->getModel()->buildArrayEmballageTypePalette();
 
         $htmlPoidsNetPalettisationUVC = new HtmlInputText();
 
@@ -409,7 +409,7 @@ class FtaView {
 
     function getHtmlPoidsBrutPaletteUVC() {
 
-        $return = $this->getModel()->getArrayEmballageTypePalette();
+        $return = $this->getModel()->buildArrayEmballageTypePalette();
 
         $htmlPoidsBrutPalettisationUVC = new HtmlInputText();
 
@@ -422,7 +422,7 @@ class FtaView {
 
     function getHtmlHauteurPaletteUVC() {
 
-        $return = $this->getModel()->getArrayEmballageTypePalette();
+        $return = $this->getModel()->buildArrayEmballageTypePalette();
 
         $htmlHauteurPalettisationUVC = new HtmlInputText();
 
@@ -435,7 +435,7 @@ class FtaView {
 
     function getHtmlNombrePaletteUVC() {
 
-        $return = $this->getModel()->getArrayEmballageTypePalette();
+        $return = $this->getModel()->buildArrayEmballageTypePalette();
 
         $htmlCouchePalettisationUVC = new HtmlInputText();
 
@@ -448,7 +448,7 @@ class FtaView {
 
     function getHtmlColisCouchePaletteUVC() {
 
-        $return = $this->getModel()->getArrayEmballageTypePalette();
+        $return = $this->getModel()->buildArrayEmballageTypePalette();
 
         $htmlColisCouchePalettisationUVC = new HtmlInputText();
 
@@ -461,7 +461,7 @@ class FtaView {
 
     function getHtmlColisTotalUVC() {
 
-        $return = $this->getModel()->getArrayEmballageTypePalette();
+        $return = $this->getModel()->buildArrayEmballageTypePalette();
 
         $htmlTotalColisPalettisationUVC = new HtmlInputText();
 

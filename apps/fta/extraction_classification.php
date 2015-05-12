@@ -248,29 +248,6 @@ class HtmlResult {
         $this->tmp = $tmp;
     }
 
-//    function getHtmlResult() {
-//        $html_result = "";
-//        $propri = $this->getProprietaire();
-//        $marq = $this->getMarque();
-//        $activ = $this->getActivite();
-//        $rayon = $this->getRayon();
-//        $reseau = $this->getReseau();
-//        $enviro = $this->getEnvironnement();
-//        $saison = $this->getSaisonalite();
-//
-//
-//        $html_result .= "<tr>" . "<td>" . $propri . "</td>"
-//                . "<td>" . $marq . "</td>"
-//                . "<td>" . $activ . "</td>"
-//                . "<td>" . $rayon . "</td>"
-//                . "<td>" . $reseau . "</td>"
-//                . "<td>" . $enviro . "</td>"
-//                . "<td>" . $saison . "</td>"
-//                . "</tr>";
-//
-//        return $html_result;
-//    }
-
     function getHtmlResult() {
         return $this->htmlResult;
     }

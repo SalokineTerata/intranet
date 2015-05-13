@@ -46,7 +46,7 @@ $synthese_action = Lib::getParameterFromRequest("synthese_action");
 $societe_demandeur_fta = Lib::getParameterFromRequest("societe_demandeur_fta");
 //$id_classification_fta = Lib::getParameterFromRequest("id_classification_fta");
 $signature_validation_suivi_projet = Lib::getParameterFromRequest(FtaSuiviProjetModel::FIELDNAME_SIGNATURE_VALIDATION_SUIVI_PROJET);
-//eventuellemnt init valeur tel que chap et naviga
+
 switch ($action) {
 
     /*
@@ -103,11 +103,11 @@ switch ($action) {
         
         //$id_fta_chapitre_encours = $objectFta->getFieldValue(ObjectFta::TABLE_SUIVI_PROJET_NAME, "id_fta_chapitre");
         
-        $signature_validation_suivi_projet = $objectFta->getFieldValue(ObjectFta::TABLE_SUIVI_PROJET_NAME, "signature_validation_suivi_projet");
+        //$signature_validation_suivi_projet = $objectFta->getFieldValue(ObjectFta::TABLE_SUIVI_PROJET_NAME, "signature_validation_suivi_projet");
 
         //$id_fta_chapitre = $id_fta_chapitre_encours;
 //        $recordChapitre = new DatabaseRecord("fta_chapitre", $id_fta_chapitre_encours);
-//        $id_fta_processus_encours = $recordChapitre->getFieldValue("id_fta_processus");
+        $id_fta_processus_encours = $recordChapitre->getFieldValue("id_fta_processus");
         $nom_fta_chapitre_encours = $recordChapitre->getFieldValue(FtaChapitreModel::FIELDNAME_NOM_CHAPITRE);
 //        $nom_fta_chapitre_encours = $recordChapitre->getFieldValue("nom_fta_chapitre");
 
@@ -118,9 +118,9 @@ switch ($action) {
         //Fin de Définition des variables locales ***********************************************
         //Les champs obligatoires ont-ils été saisie ?
         //Ce contrôle n'est effectué que si le chapitre doit être validé
-        if ($signature_validation_suivi_projet) {
-            $signature_validation_suivi_projet = $objectFta->checkMandatoryFields($nom_fta_chapitre_encours);
-        }
+//        if ($signature_validation_suivi_projet) {
+//            $signature_validation_suivi_projet = $objectFta->checkMandatoryFields($nom_fta_chapitre_encours);
+//        }
 
         //Controle de cohérence
 //        if ($poids_net_colis != null) {
@@ -438,7 +438,7 @@ switch ($action) {
 
 
         //Cohérence des durées de vie (restrictino du message uniquement au niveau du processus Qualité)
-        if ($objectFta->getFieldValue(ObjectFta::TABLE_FTA_NAME, "duree_vie_technique_fta") and ($objectFta->getFieldValue(ObjectFta::TABLE_FTA_NAME, "duree_vie_technique_fta") < $objectFta->getFieldValue(ObjectFta::TABLE_ARTI_NAME, "Duree_de_vie_technique") and ($id_fta_chapitre_encours == 100))) {
+        if ($objectFta->getFieldValue(ObjectFta::TABLE_FTA_NAME, "duree_vie_technique_fta") < $objectFta->getFieldValue(ObjectFta::TABLE_FTA_NAME, "Duree_de_vie_technique") and ($id_fta_chapitre_encours == 100)) {
 
             $titre = "Différences dans les Durées de vie";
             $message = "Votre <b>" . mysql_field_desc("fta", "duree_vie_technique_fta") . "</b> est inférieure à la <b>" . mysql_field_desc("access_arti2", "Durée_de_vie_technique") . "</b>.<br>"
@@ -589,10 +589,10 @@ switch ($action) {
 }
 
 //if(!$erreur and !$noredirection) header ("Location: modification_fiche.php?id_fta=$id_fta&id_fta_chapitre_encours=$id_fta_chapitre_encours&synthese_action=$synthese_action");
-if (!$erreur)
+if (!$erreur){
     header("Location: modification_fiche.php?id_fta=$id_fta&id_fta_chapitre_encours=$id_fta_chapitre_encours&synthese_action=$synthese_action");
-
+}
 //include ("./action_bs.php");
 //include ("./action_sm.php");
-?>
+
 

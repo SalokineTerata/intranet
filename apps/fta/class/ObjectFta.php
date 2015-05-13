@@ -177,7 +177,7 @@ class ObjectFta {
         return
                 $this->records[self::TABLE_FTA_NAME]->getFieldsToSqlStatement()
                 . DatabaseOperation::SQL_SEPARATOR_LIST
-                . $this->records[self::TABLE_ARTI_NAME]->getFieldsToSqlStatement()
+               // . $this->records[self::TABLE_ARTI_NAME]->getFieldsToSqlStatement()
         ;
     }
 
@@ -257,7 +257,7 @@ class ObjectFta {
     public function updateDatabaseOnly() {
         //Mise à jour des recordsets
         $this->records[self::TABLE_FTA_NAME]->saveToDatabase();
-        $this->records[self::TABLE_ARTI_NAME]->saveToDatabase();
+      //  $this->records[self::TABLE_ARTI_NAME]->saveToDatabase();
         $this->records[self::TABLE_SUIVI_PROJET_NAME]->saveToDatabase();
     }
 

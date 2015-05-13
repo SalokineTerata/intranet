@@ -257,7 +257,8 @@ class ObjectFta {
     public function updateDatabaseOnly() {
         //Mise à jour des recordsets
         $this->records[self::TABLE_FTA_NAME]->saveToDatabase();
-      //  $this->records[self::TABLE_ARTI_NAME]->saveToDatabase();
+        //  $this->records[self::TABLE_ARTI_NAME]->saveToDatabase();
+       // $this->collections[self::TABLE_SUIVI_PROJET_NAME][11]->saveToDatabase();
         $this->records[self::TABLE_SUIVI_PROJET_NAME]->saveToDatabase();
     }
 

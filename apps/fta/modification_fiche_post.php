@@ -87,10 +87,10 @@ switch ($action) {
 
         //Définition des variables locales  ***********************************************
         //$id_fta = Lib::getParameterFromRequest("id_fta");
-        //$objectFta = new ObjectFta($id_fta);
+        $objectFta = new ObjectFta($paramIdFta);
         $modelFta = new FtaModel($paramIdFta);
-//        $recordChapitre = new DatabaseRecord(
-//                $table_name = "fta_chapitre", $key_value = $id_fta_chapitre_encours);
+        $recordChapitre = new DatabaseRecord(
+                $table_name = "fta_chapitre", $key_value = $id_fta_chapitre_encours);
         //$objectFta = ObjectFta::restoreSession($id_fta);
         //$objectFta->updatePropertiesFromHttpRequest();
         $modelFta->saveToDatabase();
@@ -104,18 +104,20 @@ switch ($action) {
         $signature_validation_suivi_projet;
         $idFtaSuiviProjet = FtaSuiviProjetModel::getIdFtaSuiviProjetByIdFtaAndIdChapitre($paramIdFta, $paramIdFtaChapitre);
         $modeFtaSuiviProjet = new FtaSuiviProjetModel($idFtaSuiviProjet);
-        $modeFtaSuiviProjet->getDataField(FtaSuiviProjetModel::FIELDNAME_SIGNATURE_VALIDATION_SUIVI_PROJET)->setFieldValue($signature_validation_suivi_projet);
+//        $modeFtaEtat = new FtaEtatModel();
+//        $modeFtaProcessusDelai = new FtaProcessusDelaiModel();
+        $modeFtaSuiviProjet->getDataField(FtaSuiviProjetModel::FIELDNAME_SIGNATURE_VALIDATION_SUIVI_PROJET)->setFieldValue($signature_validation_suivi_projet);     
         
-        
-        $date_echeance_fta = $objectFta->getFieldValue(ObjectFta::TABLE_FTA_NAME, "date_echeance_fta");
-        //$date_echeance_fta = $modelFta->getDataField(FtaModel::FIELDNAME_DATE_ECHEANCE_FTA)->getFieldValue();
+        //$date_echeance_fta = $objectFta->getFieldValue(ObjectFta::TABLE_FTA_NAME, "date_echeance_fta");
+        $date_echeance_fta = $modelFta->getDataField(FtaModel::FIELDNAME_DATE_ECHEANCE_FTA)->getFieldValue();
 
         $abreviation_fta_etat = $objectFta->getFieldValue(ObjectFta::TABLE_ETAT_NAME, "abreviation_fta_etat");
-        //$abreviation_fta_etat = $modelFta->getModelFtaEtat()->getDataField(FtaEtatModel::FIELDNAME_ABREVIATION);
+        //$abreviation_fta_etat = $modeFtaEtat->getDataField(FtaEtatModel::FIELDNAME_ABREVIATION)->getFieldValue();
         //$id_fta_chapitre_encours = $objectFta->getFieldValue(ObjectFta::TABLE_SUIVI_PROJET_NAME, "id_fta_chapitre");
         //$signature_validation_suivi_projet = $objectFta->getFieldValue(ObjectFta::TABLE_SUIVI_PROJET_NAME, "signature_validation_suivi_projet");
         //$id_fta_chapitre = $id_fta_chapitre_encours;
 //        $recordChapitre = new DatabaseRecord("fta_chapitre", $id_fta_chapitre_encours);
+       // $id_fta_processus_encours = $modeFtaProcessusDelai->getDataField("id_fta_processus")->getFieldValue();
         $id_fta_processus_encours = $recordChapitre->getFieldValue("id_fta_processus");
         $nom_fta_chapitre_encours = $recordChapitre->getFieldValue(FtaChapitreModel::FIELDNAME_NOM_CHAPITRE);
 //        $nom_fta_chapitre_encours = $recordChapitre->getFieldValue("nom_fta_chapitre");
@@ -526,7 +528,7 @@ switch ($action) {
         }
 
         //Sauvegarde des enregistrements dans la base de données.
-        $objectFta->updateDatabaseOnly();
+        $modeFtaSuiviProjet->saveToDatabase();
 
         break;
 

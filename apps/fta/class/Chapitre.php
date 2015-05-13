@@ -1,12 +1,25 @@
 <?php
 
 /*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
+ * Copyright (C) 2015 bs4300280
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
 /**
- * Description of chapitre
+ * Description of Chapitre
+ * Génère toute la partie HTML des chapitres.
  *
  * @author bs4300280
  */
@@ -449,7 +462,6 @@ class Chapitre {
         $synthese_action = self::$synthese_action;
         $isEditable = self::$is_editable;
         //$isEditable = TRUE;
-        //
         //Identifiant FTA
         $idFta = $id_fta;
         $ftaModel = new FtaModel($idFta);
@@ -458,6 +470,9 @@ class Chapitre {
         $ftaView->setFtaChapitreModelById(self::ID_CHAPITRE_IDENTITE);
 
         $bloc.="<tr class=titre_principal><td class>Composition</td></tr>";
+
+        //Liste des composants
+        $bloc.= $ftaView->getHtmlDataField(FtaModel::FIELDNAME_VIRTUAL_FTA_COMPOSANT);
 
         //Agrément CE
         $bloc.=$ftaView->getHtmlSiteAgrement();

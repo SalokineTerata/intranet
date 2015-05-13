@@ -119,9 +119,31 @@ class HtmlSubForm extends AbstractHtmlList {
             $modelSubForm = new $subFormModelClassName($key);
 
             /**
+             * Création du lien de détail
+             */
+            $hrefDetail = GlobalConfig::DISPATCHER_SCRIPTNAME."?";
+            $hrefDetailToHtml = "<a href=\"" . $hrefDetail . "\" title=\"Détail\">"
+                    . self::DEFAULT_HTML_IMAGE_NEXT . " Détail"
+                    . "</a>"
+            ;
+
+            /**
              * Récupération de la liste des champs à représenter
              */
             $valueArrayKeys = array_keys($valueArray);
+
+            /**
+             * Récupération de l'icone pour accéder à l'enregistrement de la
+             * sous-table.
+             * Ce flag permet de ne récupérer que le premier champs.
+             */
+            $isFirstField = TRUE;
+
+            /**
+             * Contenu HTML du lien pointant vers le détail de la sous-table.
+             */
+            $htmlUrlToSubFormDetail = NULL;
+
 
             /**
              * Parcours des nom des champs à afficher
@@ -137,8 +159,20 @@ class HtmlSubForm extends AbstractHtmlList {
                  * Conversion du DataField en HtmlField
                  */
                 $htmlField = Html::getHtmlObjectFromDataField($dataField);
+
+                /**
+                 * Dans le cas du premier champ de la ligne, on récupère
+                 * le lien pointant vers le détail du sous-formulaire
+                 */
+                if ($isFirstField) {
+                    $htmlField->getAttributesGlobal()->setIsIconNextEnabledToTrue();
+                    $htmlUrlToSubFormDetail = $htmlField->getAttributesGlobal()->getIconNextToHtml();
+                    $isFirstField = FALSE;
+                }
+                $htmlField->getAttributesGlobal()->setIsIconNextEnabledToFalse();
+
+
                 $htmlField->setHtmlRenderToTable();
-                $htmlField->getAttributesGlobal()->setIsIconNextEnabledToTrue();
 
                 /**
                  * Si le sous-formulaire est modifiable par l'utilisateur
@@ -160,6 +194,13 @@ class HtmlSubForm extends AbstractHtmlList {
                 }
                 $return.=$htmlField->getHtmlResult();
             }
+
+            /**
+             * Ajout du lien d'accès au détail du sous-formulaire
+             */
+            $return.="<td>" . $htmlUrlToSubFormDetail . "</td>";
+
+
             /**
              * Fermeture de la ligne HTML
              */

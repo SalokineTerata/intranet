@@ -14,6 +14,9 @@ class FtaComposantModel extends AbstractModel {
     const FIELDNAME_DESIGNATION_CODIFICATION = "nom_fta_nomenclature";
     const FIELDNAME_ENVIRONNEMENT_DE_CONSERVATION_CODIFICATION = "poids_fta_nomenclature";
     const FIELDNAME_ETAT_FTA_CODIFICATION = "etat_fta_nomenclature";
+    const FIELDNAME_ETIQUETTE = "etiquette_fta_composition";
+    const FIELDNAME_ETIQUETTE_LIBELLE_FTA_COMPOSITION = "etiquette_libelle_fta_composition";
+    const FIELDNAME_ETIQUETTE_POIDS_FTA_COMPOSITION = "etiquette_poids_fta_composition";
     const FIELDNAME_ID_ANNEXE_AGRO_ART_CODIFICATION = "id_annexe_agrologic_article_codification";
     const FIELDNAME_ID_ANNEXE_UNITE = "id_annexe_unite";
     const FIELDNAME_ID_CODIFICATION = "id_fta_nomenclature";

@@ -12,6 +12,12 @@
  */
 class GlobalConfig {
 
+    /**
+     * Nom du script PHP chargé de répartir les post-traotements.
+     */
+    const DISPATCHER_SCRIPTNAME = "dispatcher";
+    const DISPATCHER_VARNAME = "dispatcher";
+    const DISPATCHER_ACTION_VIEW_RECORD = "view_record";
     const INITIALIZED_TRUE = TRUE;
     const INITIALIZED_FALSE = FALSE;
     const VARNAME_EXEC_DEBUG_TIME_START = "exec_debug_time_start";

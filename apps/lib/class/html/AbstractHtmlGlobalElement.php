@@ -134,7 +134,7 @@ abstract class AbstractHtmlGlobalElement {
         $this->getAttributesGlobal()->getId()->setValue($paramId);
     }
 
-    function getShowLabel() {
+        function getShowLabel() {
         return $this->showLabel;
     }
 

@@ -86,6 +86,7 @@ class FtaModel extends AbstractModel {
     const FIELDNAME_UNITE_FACTURATION = "id_annexe_unite_facturation";
     const FIELDNAME_VERROUILLAGE_LIBELLE_ETIQUETTE = "verrouillage_libelle_etiquette_fta";
     const FIELDNAME_VERSION_DOSSIER_FTA = "id_version_dossier_fta";
+    const FIELDNAME_VIRTUAL_FTA_COMPOSANT = "VIRTUAL_fta_composant";
     const FIELDNAME_VIRTUAL_FTA_PROCESSUS_DELAI = "VIRTUAL_fta_processus_delai";
     const ID_POIDS_VARIABLE = "3";
 
@@ -387,11 +388,10 @@ class FtaModel extends AbstractModel {
     public function buildArrayEmballage() {
 
         //... génération des tableaux de résulats
-
-        $this->setArrayEmballageUVC($result1);
-        $this->setArrayEmballageDuColis($result2);
-        $this->setArrayEmballageParColis($result3);
-        $this->setArrayEmballagePalette($result4);
+//        $this->setArrayEmballageUVC($result1);
+//        $this->setArrayEmballageDuColis($result2);
+//        $this->setArrayEmballageParColis($result3);
+//        $this->setArrayEmballagePalette($result4);
     }
 
     public function getArrayEmballages($paramGroupeType) {

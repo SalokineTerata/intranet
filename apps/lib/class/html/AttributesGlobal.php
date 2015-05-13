@@ -49,10 +49,23 @@ class AttributesGlobal extends StandardGlobalAttributes {
      */
     private $isIconNextEnabled;
 
+    /**
+     * Lien lorsqu'on clique sur suivant.
+     */
+    private $hrefNextValue;
+
     public function __construct() {
         parent::__construct();
         $this->setIsIconAddEnabledToFalse();
         $this->setIsIconNextEnabledToFalse();
+    }
+
+    function getHrefNextValue() {
+        return $this->hrefNextValue;
+    }
+
+    function setHrefNextValue($hrefNextValue) {
+        $this->hrefNextValue = $hrefNextValue;
     }
 
     function getIsIconAddEnabled() {
@@ -150,15 +163,15 @@ class AttributesGlobal extends StandardGlobalAttributes {
      * @param string
      */
     public function getIconAddToHtml() {
-        return "<a href=\"...\" title=\"Not implemented\">"
+        return "<a href=\"dispatcher.php\" title=\"Not implemented\">"
                 . "<span " . $this->getIdAddToHtml() . ">" . self::DEFAULT_HTML_IMAGE_ADD . "</span>"
                 . "</a>"
         ;
     }
 
     public function getIconNextToHtml() {
-        return "<a href=\"...\" title=\"Not implemented\">"
-                . "<span " . $this->getIdNextToHtml() . ">" . self::DEFAULT_HTML_IMAGE_NEXT . "</span>"
+        return "<a href=\"" . $this->getHrefNextValue() . "\" title=\"Détail\">"
+                . "<span " . $this->getIdNextToHtml() . ">" . self::DEFAULT_HTML_IMAGE_NEXT . " Détail</span>"
                 . "</a>"
         ;
     }

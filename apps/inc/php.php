@@ -56,7 +56,7 @@ require_once("../lib/class/database/DatabaseDataField.php");
 require_once("../lib/class/database/DatabaseRecord.php");
 
 // Configuration des models de base de données
-require_once("../lib/class/model/DatabaseTableModelAssociation.php");
+require_once("../lib/class/model/ModelTableAssociation.php");
 
 
 // Modèles des tables en base de données

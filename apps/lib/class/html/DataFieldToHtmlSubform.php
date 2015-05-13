@@ -37,7 +37,7 @@ class DataFieldToHtmlSubform extends HtmlSubForm {
                         , explode(",", $paramDataField->getFieldsToOrder())
         );
         parent::__construct($paramArrayContent
-                , DatabaseTableModelAssociation::getModelName($paramDataField->getReferencedTableName())
+                , ModelTableAssociation::getModelName($paramDataField->getReferencedTableName())
                 , $paramDataField->getFieldLabel()
         );
         $this->setArrayContentLocked(explode(",", $paramDataField->getFieldsToLock()));

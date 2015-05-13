@@ -24,7 +24,7 @@
  * 
  * @author bs4300280
  */
-class DatabaseTableModelAssociation {
+class ModelTableAssociation {
 
     /**
      * Tableau associatif PHP de type clé/valeur où:
@@ -35,7 +35,8 @@ class DatabaseTableModelAssociation {
     static private $arrayTableNameToModelName = array(
         //Classer la liste des clefs par ordre alphabétique.
         "fta" => "FtaModel",
-        "fta_processus_delai" => "FtaProcessusDelaiModel"
+        "fta_processus_delai" => "FtaProcessusDelaiModel",
+        "fta_composant" => "FtaComposantModel",
     );
 
     static public function getModelName($paramTableName) {

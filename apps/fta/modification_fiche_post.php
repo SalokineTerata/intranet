@@ -37,8 +37,8 @@ require_once '../inc/main.php';
  */
 $action = Lib::getParameterFromRequest("action");
 $new_correction_fta_suivi_projet = Lib::getParameterFromRequest("new_correction_fta_suivi_projet");
-$id_fta = Lib::getParameterFromRequest("id_fta");
-$id_fta_chapitre_encours = Lib::getParameterFromRequest("id_fta_chapitre_encours");
+$paramIdFta = Lib::getParameterFromRequest("id_fta");
+$paramIdFtaChapitre = Lib::getParameterFromRequest("id_fta_chapitre_encours");
 $temp_colis_activation_codesoft_arti2 = Lib::getParameterFromRequest("temp_colis_activation_codesoft_arti2");
 $temp_composition_activation_codesoft_arti2 = Lib::getParameterFromRequest("temp_composition_activation_codesoft_arti2");
 $conditionnement_expedition = Lib::getParameterFromRequest("conditionnement_expedition");
@@ -63,9 +63,9 @@ switch ($action) {
     case 'correction':
 
         if ($new_correction_fta_suivi_projet) {
-            $id_chapitre = $id_fta_chapitre_encours;
+            $id_chapitre = $paramIdFtaChapitre;
             $option["correction_fta_suivi_projet"] = $new_correction_fta_suivi_projet;
-            $noredirection = correction_chapitre($id_fta, $id_chapitre, $option);
+            $noredirection = correction_chapitre($paramIdFta, $id_chapitre, $option);
         } else {
             $titre = "Informations manquantes";
             $message = "Vous devez spécifier l'objet de votre correction.";
@@ -87,31 +87,38 @@ switch ($action) {
 
         //Définition des variables locales  ***********************************************
         //$id_fta = Lib::getParameterFromRequest("id_fta");
-        $objectFta = new ObjectFta($id_fta);
-        $modelFta = new FtaModel($id_fta);
-        $recordChapitre = new DatabaseRecord(
-                $table_name = "fta_chapitre", $key_value = $id_fta_chapitre_encours);
+        //$objectFta = new ObjectFta($id_fta);
+        $modelFta = new FtaModel($paramIdFta);
+//        $recordChapitre = new DatabaseRecord(
+//                $table_name = "fta_chapitre", $key_value = $id_fta_chapitre_encours);
         //$objectFta = ObjectFta::restoreSession($id_fta);
         //$objectFta->updatePropertiesFromHttpRequest();
         $modelFta->saveToDatabase();
+
+
+        /**
+         * Enregistrement de la signature
+         */
+        $modelFta;
+        $paramIdFtaChapitre;
+        $signature_validation_suivi_projet;
+        $idFtaSuiviProjet = FtaSuiviProjetModel::getIdFtaSuiviProjetByIdFtaAndIdChapitre($paramIdFta, $paramIdFtaChapitre);
+        $modeFtaSuiviProjet = new FtaSuiviProjetModel($idFtaSuiviProjet);
+        $modeFtaSuiviProjet->getDataField(FtaSuiviProjetModel::FIELDNAME_SIGNATURE_VALIDATION_SUIVI_PROJET)->setFieldValue($signature_validation_suivi_projet);
+        
         
         $date_echeance_fta = $objectFta->getFieldValue(ObjectFta::TABLE_FTA_NAME, "date_echeance_fta");
         //$date_echeance_fta = $modelFta->getDataField(FtaModel::FIELDNAME_DATE_ECHEANCE_FTA)->getFieldValue();
-        
+
         $abreviation_fta_etat = $objectFta->getFieldValue(ObjectFta::TABLE_ETAT_NAME, "abreviation_fta_etat");
         //$abreviation_fta_etat = $modelFta->getModelFtaEtat()->getDataField(FtaEtatModel::FIELDNAME_ABREVIATION);
-        
         //$id_fta_chapitre_encours = $objectFta->getFieldValue(ObjectFta::TABLE_SUIVI_PROJET_NAME, "id_fta_chapitre");
-        
         //$signature_validation_suivi_projet = $objectFta->getFieldValue(ObjectFta::TABLE_SUIVI_PROJET_NAME, "signature_validation_suivi_projet");
-
         //$id_fta_chapitre = $id_fta_chapitre_encours;
 //        $recordChapitre = new DatabaseRecord("fta_chapitre", $id_fta_chapitre_encours);
         $id_fta_processus_encours = $recordChapitre->getFieldValue("id_fta_processus");
         $nom_fta_chapitre_encours = $recordChapitre->getFieldValue(FtaChapitreModel::FIELDNAME_NOM_CHAPITRE);
 //        $nom_fta_chapitre_encours = $recordChapitre->getFieldValue("nom_fta_chapitre");
-
-
         //Calcul des éléments de palettisation (tout est issu de cette fonction)
         //$palettisation = calcul_palettisation_fta($id_fta);
         //$poids_net_colis = $palettisation["colis_net"];
@@ -121,7 +128,6 @@ switch ($action) {
 //        if ($signature_validation_suivi_projet) {
 //            $signature_validation_suivi_projet = $objectFta->checkMandatoryFields($nom_fta_chapitre_encours);
 //        }
-
         //Controle de cohérence
 //        if ($poids_net_colis != null) {
 //            if ($poids_net_colis > ModuleConfig::MAX_POIDS_NET_COLIS
@@ -136,7 +142,6 @@ switch ($action) {
 //                $noredirection = 1;
 //            }
 //        }
-
 //        if ($objectFta->getFieldValue(ObjectFta::TABLE_FTA_NAME, "designation_commerciale_fta")) {
 //            $objectFta->setFieldValue(
 //                    ObjectFta::TABLE_FTA_NAME, "designation_commerciale_fta", strtoupper(
@@ -144,7 +149,6 @@ switch ($action) {
 //                                    ObjectFta::TABLE_FTA_NAME, "designation_commerciale_fta"
 //            )));
 //        }
-
         //echo $date_validation_suivi_projet;
         //Récupération des dates MySQL
 //        $tab_date = array(array("name" => "date_echeance_fta"
@@ -282,7 +286,6 @@ switch ($action) {
 //        if ($id_fta_chapitre_encours == 101) { //Chapitre Etiquette
 //            $objectFta->setFieldValue(ObjectFta::TABLE_ARTI_NAME, "activation_codesoft_arti2", $temp_colis_activation_codesoft_arti2 + $temp_composition_activation_codesoft_arti2);
 //        }
-
         //Gestion des délais (Attention, uniquement sur le chapitre identité)
         //echo $nom_fta_chapitre_encours;
         //echo $proprietaire;
@@ -359,7 +362,7 @@ switch ($action) {
                 //echo $id_fta." - ".$rows["id_init_fta_processus"]." - ".$$champ_date_echeance_processus."<br>";
                 //Recherche d'enregistrement déjà existant pour mise à jour, sinon insertion
                 $req = "SELECT id_fta_processus_delai FROM fta_processus_delai "
-                        . "WHERE id_fta='" . $id_fta . "' "
+                        . "WHERE id_fta='" . $paramIdFta . "' "
                         . "AND id_fta_processus = '" . $rows["id_init_fta_processus"] . "' "
                 ;
                 $result_fta_processus_delai = DatabaseOperation::query($req);
@@ -380,11 +383,11 @@ switch ($action) {
                 mysql_table_operation($table, $operation);
 
                 //Mise à jour de la validation de l'échéance
-                fta_processus_validation_delai($id_fta, $id_fta_processus);
+                fta_processus_validation_delai($paramIdFta, $id_fta_processus);
             }//Fin du parcours des échéances par processus
         }//Si non, désactivation de la gestion des échéances au niveau processus
 //Enregistrement des informations
-        $id_fta; //Valeur donnée en URL
+        $paramIdFta; //Valeur donnée en URL
         $operation = "update";
         $table = "fta";
         //$objectFta->setFieldValue(ObjectFta::TABLE_FTA_NAME, "societe_demandeur_fta", $societe_demandeur_fta);
@@ -396,20 +399,20 @@ switch ($action) {
           mysql_table_operation($table, $operation);
           mysql_table_load($table); */
 
-//Suivi de dossier
+        //Suivi de dossier
         if ($id_fta_suivi_projet) {
             $operation = "update";
         } else {
             $operation = "insert";
         }
-        $id_fta_chapitre = $id_fta_chapitre_encours;
+        $id_fta_chapitre = $paramIdFtaChapitre;
         if (!$signature_validation_suivi_projet) {
             $signature_validation_suivi_projet = 0;
         }
         $table = "fta_suivi_projet";
         mysql_table_operation($table, $operation);
 
-//Controle des donnée et access_arti2
+        //Controle des donnée et access_arti2
         if ($objectFta->getFieldValue(ObjectFta::TABLE_FTA_NAME, "LIBELLE")) {
             $objectFta->setFieldValue(
                     ObjectFta::TABLE_FTA_NAME, "LIBELLE", mb_convert_case(
@@ -421,7 +424,7 @@ switch ($action) {
         }
 
         //Nom de l'étiquette par défaut si on enregistre sur le chapitre Gestion des articles (cf. table fta_chapitre)
-        if (($objectFta->getFieldValue(ObjectFta::TABLE_FTA_NAME, "LIBELLE_CLIENT") == null) and ($nom_fta_chapitre == "activation_article")) {
+        if (($objectFta->getFieldValue(ObjectFta::TABLE_FTA_NAME, "LIBELLE_CLIENT") == null) and ( $nom_fta_chapitre == "activation_article")) {
             $objectFta->setFieldValue(ObjectFta::TABLE_FTA_NAME, "LIBELLE_CLIENT", $objectFta->getFieldValue(ObjectFta::TABLE_FTA_NAME, "LIBELLE"));
         }
         $table = "fta";
@@ -438,7 +441,7 @@ switch ($action) {
 
 
         //Cohérence des durées de vie (restrictino du message uniquement au niveau du processus Qualité)
-        if ($objectFta->getFieldValue(ObjectFta::TABLE_FTA_NAME, "duree_vie_technique_fta") < $objectFta->getFieldValue(ObjectFta::TABLE_FTA_NAME, "Duree_de_vie_technique") and ($id_fta_chapitre_encours == 100)) {
+        if ($objectFta->getFieldValue(ObjectFta::TABLE_FTA_NAME, "duree_vie_technique_fta") < $objectFta->getFieldValue(ObjectFta::TABLE_FTA_NAME, "Duree_de_vie_technique") and ( $paramIdFtaChapitre == 100)) {
 
             $titre = "Différences dans les Durées de vie";
             $message = "Votre <b>" . mysql_field_desc("fta", "duree_vie_technique_fta") . "</b> est inférieure à la <b>" . mysql_field_desc("access_arti2", "Durée_de_vie_technique") . "</b>.<br>"
@@ -500,15 +503,15 @@ switch ($action) {
 
         if (!$erreur) {
             //Mise à jour de la validation de l'échéance
-            $id_fta;
+            $paramIdFta;
             $id_fta_processus = $id_fta_processus_encours;
             //echo $id_fta_processus."<br>";
             //$id_fta_processus=5;
-            fta_processus_validation_delai($id_fta, $id_fta_processus);
+            fta_processus_validation_delai($paramIdFta, $id_fta_processus);
 
             //Notification de l'état d'Avancement de la FTA
             //afficher_message("Information de l'état d'avancement du Projet", "Les intervenants ont été informer du nouvel état d'avancement.", "");
-            $liste_user = notification_suivi_projet($id_fta);
+            $liste_user = notification_suivi_projet($paramIdFta);
 
             if ($liste_user) {
                 $noredirection = 1;
@@ -531,7 +534,7 @@ switch ($action) {
 
         //Variables passées en URL
         $id_fta_tarif;
-        $id_fta;
+        $paramIdFta;
         mysql_table_operation("fta_tarif", "delete");
 
         //header ("Location: modification_fiche.php?id_fta=$id_fta&id_fta_chapitre_encours=$id_fta_chapitre_encours&synthese_action=$synthese_action");
@@ -540,7 +543,7 @@ switch ($action) {
     case 'suppression_conditionnement':
 
         //Variables passées en URL
-        $id_fta = Lib::getParameterFromRequest("id_fta");
+        $paramIdFta = Lib::getParameterFromRequest("id_fta");
         $id_fta_conditionnement = Lib::getParameterFromRequest("id_fta_conditionnement");
 
         //Suppression du conditionnement
@@ -556,7 +559,7 @@ switch ($action) {
     case 'suppression_palettisation':
 
 //Variables passées en URL
-        $id_fta;
+        $paramIdFta;
         $id_fta_conditionnement;
         mysql_table_operation("fta_conditionnement", "delete");
 
@@ -589,8 +592,8 @@ switch ($action) {
 }
 
 //if(!$erreur and !$noredirection) header ("Location: modification_fiche.php?id_fta=$id_fta&id_fta_chapitre_encours=$id_fta_chapitre_encours&synthese_action=$synthese_action");
-if (!$erreur){
-    header("Location: modification_fiche.php?id_fta=$id_fta&id_fta_chapitre_encours=$id_fta_chapitre_encours&synthese_action=$synthese_action");
+if (!$erreur) {
+    header("Location: modification_fiche.php?id_fta=$paramIdFta&id_fta_chapitre_encours=$paramIdFtaChapitre&synthese_action=$synthese_action");
 }
 //include ("./action_bs.php");
 //include ("./action_sm.php");

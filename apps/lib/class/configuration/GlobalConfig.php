@@ -24,6 +24,14 @@ class GlobalConfig {
     const VARNAME_GLOBALCONFIG_IN_PHP_SESSION = "globalConfig";
     const VARNAME_IS_GLOBALCONFIG_INITIALIZED = "isGlobalConfigInitialized";
     const VARNAME_IS_DATABASE_INITIALIZED = "isDatabaseInitialized";
+    const APPS_LOG_DIR = "log";
+    const APPS_LOG_FILE_MAIL_TRANSACTION = "mail-transactions";
+    const APPS_LOG_HISTORY_DIR = "log/history";
+
+    /**
+     * Le fichier est sous la forme "mail-S" + N°de la semaine du 2 digit + ".log"
+     */
+    const APPS_LOG_HISTORY_FILE_MAIL = "mail";
 
     /**
      * @var EnvironmentConf
@@ -36,7 +44,6 @@ class GlobalConfig {
      * @var UserModel 
      */
     private $authenticatedUser = NULL;
-
 
     function __construct() {
 
@@ -62,7 +69,6 @@ class GlobalConfig {
             if ($_SESSION[self::VARNAME_GLOBALCONFIG_IN_PHP_SESSION]->getAuthenticatedUser() == NULL) {
 
                 $this->setAuthenticatedUser(new UserModel);
-
             } else {
                 $this->setAuthenticatedUser($_SESSION[self::VARNAME_GLOBALCONFIG_IN_PHP_SESSION]->getAuthenticatedUser());
             }
@@ -205,8 +211,6 @@ class GlobalConfig {
     function setAuthenticatedUser(UserModel $authenticatedUser) {
         $this->authenticatedUser = $authenticatedUser;
     }
-
-
 
     function getNeedBuildConf() {
         return $this->needBuildConf;

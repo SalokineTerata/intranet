@@ -82,7 +82,11 @@ function envoismail($sujetmail, $text, $destinataire, $expediteur, $conf = null)
     if ($conf == null) {
         $conf = $_SESSION["globalConfig"];
     }
-    if ($conf->smtp_service_enable == true) {
+    
+    $globalConfig = new GlobalConfig();
+    
+    
+    if ($globalConfig->getConf()->getSmtpServiceEnable()) {
 
         /*
          * Dans le l'environnement développement, 
@@ -108,7 +112,35 @@ function envoismail($sujetmail, $text, $destinataire, $expediteur, $conf = null)
         $mail->setText($text);
         //$result = $mail->send(array($adresse_to), 'smtp');
         //$result = $mail->send(array($destinataire), 'smtp');
-        $result = $mail->send(array($destinataire), 'smtp');
+        
+        /**
+         * Enregistrement des transactions mail dans le fichier log
+         * 
+         * "date heure : $login : $module : $expediteur : $destinataire : $sujetmail
+         * 
+         */
+        $filename = GlobalConfig::APPS_LOG_DIR."/".GlobalConfig::APPS_LOG_FILE ;
+        $file += "ajout des logs....";
+        
+        /**
+         * Enregistrement de l'historique des mails dans le fichier log
+         * 
+         * "========================================================="
+         * "date heure : $login : $module : $expediteur : $destinataire : $sujetmail"
+         * "$text"
+         * 
+         */
+        $filename = GlobalConfig::APPS_LOG_HISTORY_DIR."/".GlobalConfig::APPS_LOG_HISTORY_FILE_MAIL."-S".num_semaine() ;
+        $file += "ajout des logs....";
+        
+        
+        /**
+         * L'envoi réel du mail n'est pas réalisé en environnement Codeur
+         */
+        if ($globalConfig->getConf()->getExecEnvironment() != EnvironmentConf::ENV_COD){
+            $result = $mail->send(array($destinataire), 'smtp');
+        }
+        
 
         if (!$result) {
             print_r($mail->errors);

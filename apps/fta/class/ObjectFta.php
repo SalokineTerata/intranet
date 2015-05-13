@@ -177,7 +177,7 @@ class ObjectFta {
         return
                 $this->records[self::TABLE_FTA_NAME]->getFieldsToSqlStatement()
                 . DatabaseOperation::SQL_SEPARATOR_LIST
-               // . $this->records[self::TABLE_ARTI_NAME]->getFieldsToSqlStatement()
+        // . $this->records[self::TABLE_ARTI_NAME]->getFieldsToSqlStatement()
         ;
     }
 
@@ -211,21 +211,23 @@ class ObjectFta {
         $this->records[self::TABLE_SUIVI_PROJET_NAME] = &$this->collections[self::TABLE_SUIVI_PROJET_NAME][$this->current_id_fta_suivi_projet];
     }
 
-    public function loadCurrentSuiviProjectByChapter($id_fta_chapitre) {
-        $request = "SELECT " . self::ID_SUIVI_PROJET_NAME . " FROM " . self::TABLE_SUIVI_PROJET_NAME . " "
-                . "WHERE `" . self::ID_FTA_NAME . "`='" . $this->getIdFta() . "' "
-                . "AND `" . self::ID_CHAPITRE_NAME . "`='" . $id_fta_chapitre . "' "
-        ;
-        $result = DatabaseOperation::query($request);
+    public function loadCurrentSuiviProjectByChapter($paramIdFtaChapitre) {
+//        $request = "SELECT " . self::ID_SUIVI_PROJET_NAME . " FROM " . self::TABLE_SUIVI_PROJET_NAME . " "
+//                . "WHERE `" . self::ID_FTA_NAME . "`='" . $this->getIdFta() . "' "
+//                . "AND `" . self::ID_CHAPITRE_NAME . "`='" . $id_fta_chapitre . "' "
+//        ;
+//        $result = DatabaseOperation::query($request);
+        $result = FtaSuiviProjetModel::getIdFtaSuiviProjetByIdFtaAndIdChapitre($this->getIdFta(), $paramIdFtaChapitre);
+        
         if (mysql_num_rows($result)) {
             $this->loadCurrentSuiviProjectById(mysql_result($result, 0, self::ID_SUIVI_PROJET_NAME));
         } else {
             $req = "INSERT " . self::TABLE_SUIVI_PROJET_NAME . " "
                     . "SET `" . self::ID_FTA_NAME . "`='" . $this->getIdFta() . "', "
-                    . "`" . self::ID_CHAPITRE_NAME . "`='" . $id_fta_chapitre . "' "
+                    . "`" . self::ID_CHAPITRE_NAME . "`='" . $paramIdFtaChapitre . "' "
             ;
             $result = DatabaseOperation::query($req);
-            $this->loadCurrentSuiviProjectByChapter($id_fta_chapitre);
+            $this->loadCurrentSuiviProjectByChapter($paramIdFtaChapitre);
         }
     }
 
@@ -258,7 +260,7 @@ class ObjectFta {
         //Mise à jour des recordsets
         $this->records[self::TABLE_FTA_NAME]->saveToDatabase();
         //  $this->records[self::TABLE_ARTI_NAME]->saveToDatabase();
-       // $this->collections[self::TABLE_SUIVI_PROJET_NAME][11]->saveToDatabase();
+        // $this->collections[self::TABLE_SUIVI_PROJET_NAME][11]->saveToDatabase();
         $this->records[self::TABLE_SUIVI_PROJET_NAME]->saveToDatabase();
     }
 
@@ -318,7 +320,7 @@ class ObjectFta {
 
     public function checkMandatoryFields($nom_fta_chapitre) {
         $recordFta = &$this->records[self::TABLE_FTA_NAME];
-   //     $recordArti = &$this->records[self::TABLE_ARTI_NAME];
+        //     $recordArti = &$this->records[self::TABLE_ARTI_NAME];
         $nom_fta_chapitre_encours = $nom_fta_chapitre;
         $return = false; //false = echec du contrôle / true = réussite du contrôle
         //Vérification des saisies obligatoires avant validation du chapitre
@@ -379,7 +381,6 @@ class ObjectFta {
             return $NB_UV_PAR_US1;
         }
     }
-
 
     public static function showClassification(
     $id_fta, $id_version_dossier_fta, $last_id_fta, $FAMILLE_ARTICLE, $FAMILLE_MKTG, $id_access_familles_gammes, $is_editable, $synthese_action

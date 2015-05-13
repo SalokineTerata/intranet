@@ -29,8 +29,8 @@ class Chapitre {
     const ID_CHAPITRE_IDENTITE = 1;
 
     /**
-     *
-     * FPDF@var <ObjectFta>
+     * Valeur de la clef de l'enregistrement FTA
+     * @var mixed 
      */
     protected static $id_fta;
 
@@ -1741,7 +1741,6 @@ class Chapitre {
         $taux_validation_processus = self::$taux_validation_processus;
         $proprietaire = $is_editable;
         self::$objectFta->loadCurrentSuiviProjectByChapter($id_fta_chapitre);
-
         $bloc_suivi = "";
 
         //Si le chapitre en cours n'est pas public

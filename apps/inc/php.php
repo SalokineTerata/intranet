@@ -81,7 +81,6 @@ require_once("../lib/class/model/GeoModel.php");
 require_once("../lib/class/model/IntranetActionsModel.php");
 require_once("../lib/class/model/IntranetDroitsAccesModel.php");
 require_once("../lib/class/model/IntranetModulesModel.php");
-require_once("../lib/class/model/SalariesModel.php");
 
 // Standard HTML
 require_once("../lib/class/html/Html.php");

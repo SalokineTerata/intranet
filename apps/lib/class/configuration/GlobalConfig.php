@@ -37,6 +37,7 @@ class GlobalConfig {
      */
     private $authenticatedUser = NULL;
 
+
     function __construct() {
 
         /**
@@ -61,6 +62,7 @@ class GlobalConfig {
             if ($_SESSION[self::VARNAME_GLOBALCONFIG_IN_PHP_SESSION]->getAuthenticatedUser() == NULL) {
 
                 $this->setAuthenticatedUser(new UserModel);
+
             } else {
                 $this->setAuthenticatedUser($_SESSION[self::VARNAME_GLOBALCONFIG_IN_PHP_SESSION]->getAuthenticatedUser());
             }
@@ -203,6 +205,8 @@ class GlobalConfig {
     function setAuthenticatedUser(UserModel $authenticatedUser) {
         $this->authenticatedUser = $authenticatedUser;
     }
+
+
 
     function getNeedBuildConf() {
         return $this->needBuildConf;

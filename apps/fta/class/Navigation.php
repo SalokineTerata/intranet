@@ -13,6 +13,7 @@ class Navigation {
      */
     protected static $id_fta;
     protected static $comeback;
+    protected static $comeback_url;
     protected static $html_navigation_bar;
     protected static $html_navigation_core;
     //protected static $id_fta_chapitre;
@@ -25,8 +26,6 @@ class Navigation {
     protected static $objectFta;
     protected static $synthese_action;
     protected static $id_fta_processus;
-    protected static $delete_valid_process;
-    protected static $add_valid_process;
 
     public static function getHtmlNavigationBar() {
         return self::$html_navigation_bar;
@@ -44,8 +43,6 @@ class Navigation {
     }
 
     protected static function buildNavigationBar() {
-
-        //Action: "consultation" ou "modification"
         //Barre de navigation de la Fiche Tehnique Article
         //Variables
         $html_table = "table "              //Permet d'harmoniser les tableaux
@@ -54,7 +51,6 @@ class Navigation {
                 . "class=contenu "
         ;
         //Récupère la page en cours
-        //$page_default=substr(strrchr($_SERVER["PHP_SELF"], '/'), '1', '-4');
         $arrayFtaEtatAndFta = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
                         "SELECT " . FtaModel::KEYNAME . ", " . FtaModel::FIELDNAME_CREATEUR
                         . ", " . FtaModel::FIELDNAME_ARTICLE_AGROLOGIC . ", " . FtaModel::FIELDNAME_DOSSIER_FTA
@@ -70,12 +66,12 @@ class Navigation {
             $rowsFtaEtatAndFta[FtaModel::KEYNAME] = self::$id_fta;
             //Nom de l'assistante de projet responsable:
             $array = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
-                            "SELECT " . SalariesModel::FIELDNAME_PRENOM . "," . SalariesModel::FIELDNAME_NOM
-                            . " FROM " . SalariesModel::TABLENAME
-                            . " WHERE " . SalariesModel::KEYNAME
+                            "SELECT " . UserModel::FIELDNAME_PRENOM . "," . UserModel::FIELDNAME_NOM
+                            . " FROM " . UserModel::TABLENAME
+                            . " WHERE " . UserModel::KEYNAME
                             . "='" . $rowsFtaEtatAndFta[FtaModel::FIELDNAME_CREATEUR] . "' ");
             foreach ($array as $rows) {
-                $createur = $rows[SalariesModel::FIELDNAME_PRENOM] . " " . $rows[SalariesModel::FIELDNAME_NOM];
+                $createur = $rows[UserModel::FIELDNAME_PRENOM] . " " . $rows[UserModel::FIELDNAME_NOM];
             }
 
             //Construction du Menu
@@ -101,15 +97,11 @@ class Navigation {
         //Si une action est donnée, alors construction du menu des chapitres    
         $menu_navigation .= self::CheckSyntheseAction();
         //Lien de retour rapide
-        /* $menu_navigation.= "</td></tr><tr><td>
-          <a href=index.php?id_fta_etat=".$_SESSION["id_fta_etat"]."&nom_fta_etat=".$_SESSION["abreviation_fta_etat"]."&synthese_action=$synthese_action>Retour vers la synthèse</a>
-          "; */
         if (self::$comeback == 1) {
-            $_SESSION["comeback_url"] = $_SERVER["HTTP_REFERER"];
-            $_GLOBALS["comeback_url"] = $_SESSION["comeback_url"];
+            self::$comeback_url = $_SERVER["HTTP_REFERER"];
         }
         $menu_navigation.= "</td></tr><tr><td>
-    <a href=" . $_SESSION["comeback_url"] . "><img src=../lib/images/bouton_retour.png alt=\"\" title=\"Retour à la synthèse\" width=\"18\" height=\"15\" border=\"0\" /> Retour vers la synthèse</a> |
+    <a href=" . self::$comeback_url . "><img src=../lib/images/bouton_retour.png alt=\"\" title=\"Retour à la synthèse\" width=\"18\" height=\"15\" border=\"0\" /> Retour vers la synthèse</a> |
     ";
         //Corps du menu
         $menu_navigation.="
@@ -181,8 +173,8 @@ class Navigation {
                     . " AND " . IntranetDroitsAccesModel::FIELDNAME_ID_USER . "=" . $id_user //Utilisateur actuellement connecté
                     . " AND " . IntranetModulesModel::FIELDNAME_NOM_INTRANET_MODULES . "='" . FtaModel::TABLENAME
                     . "' AND " . IntranetDroitsAccesModel::FIELDNAME_NIVEAU_INTRANET_DROITS_ACCES . "=1"  //L'utilisateur est propriétaire
-                    . " AND " . FtaProcessusCycleModel::FIELDNAME_FTA_ETAT . "='" . self::$objectFta->getFieldValue(ObjectFta::TABLE_ETAT_NAME, "abreviation_fta_etat") . "' "
-                    . " AND " . FtaModel::FIELDNAME_CATEGORIE_FTA . "= '" . self::$objectFta->getFieldValue(ObjectFta::TABLE_FTA_NAME, "id_fta_categorie") . "' "
+                    . " AND " . FtaProcessusCycleModel::FIELDNAME_FTA_ETAT . "='" . self::$objectFta->getFieldValue(ObjectFta::TABLE_ETAT_NAME, FtaEtatModel::FIELDNAME_ABREVIATION) . "' "
+                    . " AND " . FtaModel::FIELDNAME_CATEGORIE_FTA . "= '" . self::$objectFta->getFieldValue(ObjectFta::TABLE_FTA_NAME, FtaModel::FIELDNAME_CATEGORIE_FTA) . "' "
             ;
 
             //Finalisation de la requête
@@ -313,7 +305,7 @@ class Navigation {
                         $b = "<font color=\"#8977A9\">";
                     } else {
                         //Le chapitre est-il validé ?
-                        $req1 = "SELECT id_fta_suivi_projet "
+                        $req1 = "SELECT " . FtaSuiviProjetModel::KEYNAME
                                 . " FROM " . FtaSuiviProjetModel::TABLENAME
                                 . " WHERE " . FtaSuiviProjetModel::FIELDNAME_ID_FTA . "=" . self::$id_fta
                                 . " AND " . FtaSuiviProjetModel::FIELDNAME_ID_FTA_CHAPITRE . "=" . $id_fta_chapitre
@@ -339,7 +331,7 @@ class Navigation {
                     }//Fin du test public
                 }//Fin de la colorisation
 
-                if ($num == 0 and $_SESSION["synthese_action"] === "attente") {
+                if ($num == 0 and self::$synthese_action === "attente") {
                     
                 } else {
                     $menu_navigation .= "<a href=$page_default.php?id_fta=" . self::$id_fta . "&id_fta_chapitre_encours=$id_fta_chapitre&synthese_action=" . self::$synthese_action . ">$b"
@@ -374,6 +366,8 @@ class Navigation {
     }
 
     protected static function CheckMultiSite($paramRows, $paramT_Processus_Encours) {
+        $globalconfig = new GlobalConfig();
+        $paramLieuGeo = $globalconfig->getAuthenticatedUser()->getLieuGeo();
         //Existe-il une configuration de gestion forcée pour ce processus et ce site d'assemblage ?
         $resultGestion = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
                         "SELECT " . FtaProcessusMultisiteModel::FIELDNAME_ID_SITE_PROCESSUS_FTA_PROCESSUS_MULTISITE
@@ -404,7 +398,7 @@ class Navigation {
                     }
                 }
             }
-            if ($id_geo == $_SESSION["lieu_geo"]) {
+            if ($id_geo == $paramLieuGeo) {
                 //L'égalité est respecté, donc ce processus est bien en cours
                 $paramT_Processus_Encours[] = $paramRows[FtaProcessusCycleModel::FIELDNAME_PROCESSUS_NEXT];
             }

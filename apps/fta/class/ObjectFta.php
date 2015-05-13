@@ -177,7 +177,7 @@ class ObjectFta {
         return
                 $this->records[self::TABLE_FTA_NAME]->getFieldsToSqlStatement()
                 . DatabaseOperation::SQL_SEPARATOR_LIST
-                . $this->records[self::TABLE_ARTI_NAME]->getFieldsToSqlStatement()
+               // . $this->records[self::TABLE_ARTI_NAME]->getFieldsToSqlStatement()
         ;
     }
 
@@ -257,7 +257,8 @@ class ObjectFta {
     public function updateDatabaseOnly() {
         //Mise à jour des recordsets
         $this->records[self::TABLE_FTA_NAME]->saveToDatabase();
-        $this->records[self::TABLE_ARTI_NAME]->saveToDatabase();
+        //  $this->records[self::TABLE_ARTI_NAME]->saveToDatabase();
+       // $this->collections[self::TABLE_SUIVI_PROJET_NAME][11]->saveToDatabase();
         $this->records[self::TABLE_SUIVI_PROJET_NAME]->saveToDatabase();
     }
 
@@ -317,7 +318,7 @@ class ObjectFta {
 
     public function checkMandatoryFields($nom_fta_chapitre) {
         $recordFta = &$this->records[self::TABLE_FTA_NAME];
-        $recordArti = &$this->records[self::TABLE_ARTI_NAME];
+   //     $recordArti = &$this->records[self::TABLE_ARTI_NAME];
         $nom_fta_chapitre_encours = $nom_fta_chapitre;
         $return = false; //false = echec du contrôle / true = réussite du contrôle
         //Vérification des saisies obligatoires avant validation du chapitre

@@ -25,9 +25,14 @@ PARTIE 1: Construction des interfaces utilisateurs (v1) --> Pas de sous table po
             /// LIEU_GEO ET ID_USER DANS LA TABLE SALARIES RECUPERER LES VALAURS TEL QUE SESSION
 
 [V] Reproduction du menu de v2 en objet.
+[] Mise en fonction de la validation d'un chapitre.
+[] Mise en fonction de la gestion de validation d'un chapitre.
 
 [v] Exporter la liste des classifications existantes.
-[]Création d'un objet pour les operations du chap Palettisation
+[V]Création de parametres d'une la classe objet pour les operations du chap Palettisation
+
+
+
 [ ] Chapitre Emballage
 
 

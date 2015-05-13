@@ -1471,7 +1471,7 @@ function notification_suivi_projet($id_fta) {
     //Récupération des informations de la FTA
     $_SESSION["id_fta"] = $id_fta;
     mysql_table_load("fta");
-    mysql_table_load("access_arti2");
+//    mysql_table_load("access_arti2");
     mysql_table_load("fta_etat");
 
     //Récupération des Processus

@@ -119,6 +119,10 @@ class FtaModel extends AbstractModel {
      * @var GeoModel
      */
     private $modelSiteExpedition;
+    private $donneeEmballageUVC;
+    private $donneeEmballageParColis;
+    private $donneeEmballageDuColis;
+    private $donneeEmballagePallette;
 
     public function __construct($paramId = NULL, $paramIsCreateRecordsetInDatabaseIfKeyDoesntExist = AbstractModel::DEFAULT_IS_CREATE_RECORDSET_IN_DATABASE_IF_KEY_DOESNT_EXIST) {
         parent::__construct($paramId, $paramIsCreateRecordsetInDatabaseIfKeyDoesntExist);
@@ -148,7 +152,7 @@ class FtaModel extends AbstractModel {
         /**
          * Génération des données d'emballage
          */
-        $this->buildArrayEmballage();
+//        $this->buildArrayEmballage();
     }
 
     /**
@@ -213,6 +217,38 @@ class FtaModel extends AbstractModel {
 
     private function setModelFtaCategorie(FtaCategorieModel $modelFtaCategorie) {
         $this->modelFtaCategorie = $modelFtaCategorie;
+    }
+
+    function getDonneeEmballageUVC() {
+        return $this->donneeEmballageUVC;
+    }
+
+    function getDonneeEmballageParColis() {
+        return $this->donneeEmballageParColis;
+    }
+
+    function getDonneeEmballageDuColis() {
+        return $this->donneeEmballageDuColis;
+    }
+
+    function getDonneeEmballagePallette() {
+        return $this->donneeEmballagePallette;
+    }
+
+    function setDonneeEmballageUVC($donneeEmballageUVC) {
+        $this->donneeEmballageUVC = $donneeEmballageUVC;
+    }
+
+    function setDonneeEmballageParColis($donneeEmballageParColis) {
+        $this->donneeEmballageParColis = $donneeEmballageParColis;
+    }
+
+    function setDonneeEmballageDuColis($donneeEmballageDuColis) {
+        $this->donneeEmballageDuColis = $donneeEmballageDuColis;
+    }
+
+    function setDonneeEmballagePallette($donneeEmballagePallette) {
+        $this->donneeEmballagePallette = $donneeEmballagePallette;
     }
 
     /**
@@ -366,35 +402,50 @@ class FtaModel extends AbstractModel {
     }
 
     public function getArrayEmballageTypeUVC() {
-
-        return $this->getArrayEmballages(FtaConditionnementModel::EMBALLAGES_UVC);
+        $this->setDonneeEmballageUVC($this->ArrayEmballages(FtaConditionnementModel::EMBALLAGES_UVC));
     }
 
     public function getArrayEmballageTypeParColis() {
-
-        return $this->getArrayEmballages(FtaConditionnementModel::EMBALLAGES_PAR_COLIS);
+        $this->setDonneeEmballageParColis($this->ArrayEmballages(FtaConditionnementModel::EMBALLAGES_PAR_COLIS));
     }
 
     public function getArrayEmballageTypeDuColis() {
-
-        return $this->getArrayEmballages(FtaConditionnementModel::EMBALLAGES_DU_COLIS);
+        $this->setDonneeEmballageDuColis($this->ArrayEmballages(FtaConditionnementModel::EMBALLAGES_DU_COLIS));
     }
 
     public function getArrayEmballageTypePalette() {
-
-        return $this->getArrayEmballages(FtaConditionnementModel::EMBALLAGES_PALETTE);
+        $this->setDonneeEmballagePallette($this->ArrayEmballages(FtaConditionnementModel::EMBALLAGES_PALETTE));
     }
 
-    public function buildArrayEmballage() {
-
-        //... génération des tableaux de résulats
-//        $this->setArrayEmballageUVC($result1);
-//        $this->setArrayEmballageDuColis($result2);
-//        $this->setArrayEmballageParColis($result3);
-//        $this->setArrayEmballagePalette($result4);
+    public function buildArrayEmballageTypeUVC() {
+        if (!$this->getDonneeEmballageUVC()) {
+            $this->getArrayEmballageTypeUVC();
+        }
+        return $this->getDonneeEmballageUVC();
     }
 
-    public function getArrayEmballages($paramGroupeType) {
+    public function buildArrayEmballageTypeParColis() {
+        if (!$this->getDonneeEmballageParColis()) {
+            $this->getArrayEmballageTypeParColis();
+        }
+        return $this->getDonneeEmballageParColis();
+    }
+
+    public function buildArrayEmballageTypeDuColis() {
+        if (!$this->getDonneeEmballageDuColis()) {
+            $this->getArrayEmballageTypeDuColis();
+        }
+        return $this->getDonneeEmballageDuColis();
+    }
+
+    public function buildArrayEmballageTypePalette() {
+        if (!$this->getDonneeEmballagePallette()) {
+            $this->getArrayEmballageTypePalette();
+        }
+        return $this->getDonneeEmballagePallette();
+    }
+
+    public function ArrayEmballages($paramGroupeType) {
 
         //Les calculs pour Emballages
         $array = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
@@ -402,7 +453,7 @@ class FtaModel extends AbstractModel {
                         . ", " . FtaConditionnementModel::FIELDNAME_NOMBRE_COUCHE_FTA_CONDITIONNEMENT . ", " . FtaConditionnementModel::FIELDNAME_HAUTEUR_FTA_CONDITIONNEMENT
                         . ", " . FtaConditionnementModel::FIELDNAME_LONGUEUR_FTA_CONDITIONNEMENT . ", " . FtaConditionnementModel::FIELDNAME_LARGEUR_FTA_CONDITIONNEMENT
                         . "  FROM " . FtaConditionnementModel::TABLENAME . ", " . AnnexeEmballageGroupeModel::TABLENAME . ", " . AnnexeEmballageGroupeTypeModel::TABLENAME . " "
-                        . " WHERE " . FtaConditionnementModel::TABLENAME . "." . FtaConditionnementModel::FIELDNAME_ID_FTA . "=" . $this->getKeyValue() . " "
+                        . " WHERE " . FtaConditionnementModel::TABLENAME . "." . FtaConditionnementModel::FIELDNAME_ID_FTA . "=" . $this->getKeyValue() . " "//peut etre remplacer par new objetfta, qui fait appelle à la fonction getIdFta
                         . " AND " . AnnexeEmballageGroupeTypeModel::TABLENAME . "." . AnnexeEmballageGroupeTypeModel::KEYNAME . "=" . $paramGroupeType . " "
                         . " AND " . FtaConditionnementModel::TABLENAME . "." . FtaConditionnementModel::FIELDNAME_ID_ANNEXE_EMBALLAGE_GROUPE . "=" . AnnexeEmballageGroupeModel::TABLENAME . "." . AnnexeEmballageGroupeModel::KEYNAME . " "
                         . " AND ( "

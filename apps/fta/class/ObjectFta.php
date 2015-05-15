@@ -212,12 +212,12 @@ class ObjectFta {
     }
 
     public function loadCurrentSuiviProjectByChapter($paramIdFtaChapitre) {
-//        $request = "SELECT " . self::ID_SUIVI_PROJET_NAME . " FROM " . self::TABLE_SUIVI_PROJET_NAME . " "
-//                . "WHERE `" . self::ID_FTA_NAME . "`='" . $this->getIdFta() . "' "
-//                . "AND `" . self::ID_CHAPITRE_NAME . "`='" . $id_fta_chapitre . "' "
-//        ;
-//        $result = DatabaseOperation::query($request);
-        $result = FtaSuiviProjetModel::getIdFtaSuiviProjetByIdFtaAndIdChapitre($this->getIdFta(), $paramIdFtaChapitre);
+        $request = "SELECT " . self::ID_SUIVI_PROJET_NAME . " FROM " . self::TABLE_SUIVI_PROJET_NAME . " "
+                . "WHERE `" . self::ID_FTA_NAME . "`='" . $this->getIdFta() . "' "
+                . "AND `" . self::ID_CHAPITRE_NAME . "`='" . $paramIdFtaChapitre . "' "
+        ;
+        $result = DatabaseOperation::query($request);
+        //$result = FtaSuiviProjetModel::getIdFtaSuiviProjetByIdFtaAndIdChapitre($this->getIdFta(), $paramIdFtaChapitre);
         
         if (mysql_num_rows($result)) {
             $this->loadCurrentSuiviProjectById(mysql_result($result, 0, self::ID_SUIVI_PROJET_NAME));

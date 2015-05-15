@@ -568,9 +568,9 @@ function mysql_table_operation($nom_table, $operation) {
      */
 
     //$bdd = $_SESSION["mysql_database_name"];                //Variable Globale definit dans /lib/session.php et
-    $conf = new GlobalConfig();
+    $globalConfig = new GlobalConfig();
     //$conf = $_SESSION["globalConfig"];
-    $bdd = $conf->getConf()->getMysqlDatabaseName();
+    $bdd = $globalConfig->getConf()->getMysqlDatabaseName();
     //$bdd = $conf->mysql_database_name;
     //represente le nom de la base de donnees
     $nom_table;                            //Nom de la table e charger

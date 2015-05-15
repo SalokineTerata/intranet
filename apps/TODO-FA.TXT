@@ -25,7 +25,7 @@ PARTIE 1: Construction des interfaces utilisateurs (v1) --> Pas de sous table po
             /// LIEU_GEO ET ID_USER DANS LA TABLE SALARIES RECUPERER LES VALAURS TEL QUE SESSION
 
 [V] Reproduction du menu de v2 en objet.
-[] Mise en fonction de la validation d'un chapitre.
+[V] Mise en fonction de la validation d'un chapitre.
 [] Mise en fonction de la gestion de validation d'un chapitre.
 
 [v] Exporter la liste des classifications existantes.

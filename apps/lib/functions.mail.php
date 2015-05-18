@@ -77,27 +77,28 @@
   Script situé dans "lib/htmlMimeMail-2.5.1/htmlMimeMail.php"
  */
 
-function envoismail($sujetmail, $text, $destinataire, $expediteur, $conf = null) {
+function envoismail($sujetmail, $text, $destinataire, $expediteur,$paramIdFta , $conf = null) {
 
     if ($conf == null) {
-        $conf = $_SESSION["globalConfig"];
+        $globalConfig = new GlobalConfig();
+        $modelFta = new FtaModel($paramIdFta);
     }
     
-    $globalConfig = new GlobalConfig();
     
     
-    if ($globalConfig->getConf()->getSmtpServiceEnable()) {
+    
+    if ($globalConfig->getConf()->getSmtpServiceEnable() == False) {
 
         /*
          * Dans le l'environnement développement, 
          * Toutes les adresses emails sont redirigées vers utilisateurs.fta@ldc.fr
          */
-        if ($conf->exec_environnement == EnvironmentConf::ENV_DEV) {
+        if ($globalConfig->getConf()->getExecEnvironment() == EnvironmentConf::ENV_DEV) {
             $destinataire_orig = $destinataire;
-            $destinataire = $conf->smtp_developemnent_email_user_redirection;
+            $destinataire = $globalConfig->getConf()->getSmtpEmailRedirectionUser();
 
             $sujetmail_orig = $sujetmail;
-            $sujetmail = "[Environnement " . $conf->exec_environnement . "] " . $sujetmail_orig;
+            $sujetmail = "[Environnement " . $globalConfig->getConf()->getExecEnvironment() . "] " . $sujetmail_orig;
 
             $text_orig = $text;
             $text = explode(",", $destinataire_orig) . "\n" . $text_orig;
@@ -112,6 +113,7 @@ function envoismail($sujetmail, $text, $destinataire, $expediteur, $conf = null)
         $mail->setText($text);
         //$result = $mail->send(array($adresse_to), 'smtp');
         //$result = $mail->send(array($destinataire), 'smtp');
+       
         
         /**
          * Enregistrement des transactions mail dans le fichier log
@@ -119,7 +121,12 @@ function envoismail($sujetmail, $text, $destinataire, $expediteur, $conf = null)
          * "date heure : $login : $module : $expediteur : $destinataire : $sujetmail
          * 
          */
-        $filename = GlobalConfig::APPS_LOG_DIR."/".GlobalConfig::APPS_LOG_FILE ;
+        $logMail = new LoggerClass('D:/weblocal/intranet-v3/log/');
+        $etat_fta = $modelFta->getModelFtaEtat()->getDataField(FtaEtatModel::FIELDNAME_NOM_FTA_ETAT)->getFieldValue();
+        
+        $logMail->log("fta" , $text, "mail-transactions", $expediteur, $destinataire, $sujetmail , 0, $etat_fta);
+        
+        $filename = GlobalConfig::APPS_LOG_DIR."/".GlobalConfig::APPS_LOG_FILE_MAIL_TRANSACTION ;
         $file += "ajout des logs....";
         
         /**
@@ -130,9 +137,12 @@ function envoismail($sujetmail, $text, $destinataire, $expediteur, $conf = null)
          * "$text"
          * 
          */
-        $filename = GlobalConfig::APPS_LOG_HISTORY_DIR."/".GlobalConfig::APPS_LOG_HISTORY_FILE_MAIL."-S".num_semaine() ;
+         
+        $logMail->log("fta" ,$text , "historique", $expediteur, $destinataire, $sujetmail, 1);
+
+       // $filename = GlobalConfig::APPS_LOG_HISTORY_DIR."/".GlobalConfig::APPS_LOG_HISTORY_FILE_MAIL."-S".num_semaine() ;
         $file += "ajout des logs....";
-        
+      
         
         /**
          * L'envoi réel du mail n'est pas réalisé en environnement Codeur

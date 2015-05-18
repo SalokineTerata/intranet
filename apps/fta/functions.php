@@ -1461,7 +1461,7 @@ function duplication_fta($id_fta, $action, $option) {
 //Fin de la fonction duplication_fta()
 //******************************************************************************
 
-function notification_suivi_projet($id_fta) {
+function notification_suivi_projet($id_fta, $paramIdChapitre) {
     /*
       Cette fonction notifie les processus en fonction de l'état d'avancement du suivi du projet.
       Cet état d'avancement est géré par la table fta_suivi_projet
@@ -1625,11 +1625,14 @@ function notification_suivi_projet($id_fta) {
                     }//Fin de la recherche des utilisateurs à informer
                 }//Fin du controle de désactivation de mail
                 //Envoi du mail de notification
+                $idFtaSuiviProjet = FtaSuiviProjetModel::getIdFtaSuiviProjetByIdFtaAndIdChapitre($id_fta, $paramIdChapitre);
+                $modelFtaSuiviProjet = new FtaSuiviProjetModel($idFtaSuiviProjet);
+                $modelFta = new FtaModel($id_fta);
                 if ($liste_mail and ! $no_mail) {
                     foreach ($liste_mail as $adresse_email) {
-                        $sujetmail = "FTA/" . $_SESSION["designation_commerciale_fta"];
+                        $sujetmail = "FTA/" . $modelFta->getDataField(FtaModel::FIELDNAME_DESIGNATION_COMMERCIALE)->getFieldValue();
                         $text = "Démarrage du processus: " . $rows_processus["nom_fta_processus"] . "\n"
-                                . "Etat de la FTA: " . $_SESSION["nom_fta_etat"] . "\n\n"
+                                . "Etat de la FTA: " . $modelFta->getModelFtaEtat()->getDataField(FtaEtatModel::FIELDNAME_NOM_FTA_ETAT)->getFieldValue() . "\n\n"
                                 . "Vous pouvez consulter l'Etat d'avancenement du dossier directement sur le site http://intranet.agis.fr .\n"
                                 . "\n"
                                 . "Bonne journée.\n"
@@ -1637,8 +1640,9 @@ function notification_suivi_projet($id_fta) {
                         ;
                         $destinataire = $adresse_email;
                         $expediteur = $_SESSION["prenom"] . " " . $_SESSION["nom_famille_ses"] . " <" . $_SESSION["mail_user"] . ">";
-                        if ($_SESSION["notification_suivi_projet"]) {
-                            envoismail($sujetmail, $text, $destinataire, $expediteur);
+                        //if ($_SESSION["notification_fta_suivi_projet"]) {
+                        if ($modelFtaSuiviProjet->getDataField(FtaSuiviProjetModel::FIELDNAME_NOTIFICATION_FTA_SUIVI_PROJET)->getFieldValue()) {
+                            envoismail($sujetmail, $text, $destinataire, $expediteur, $id_fta);
                         }
                     }
                 }//Fin des envois de mail

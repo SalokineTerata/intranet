@@ -456,7 +456,7 @@ switch ($action) {
         if ($modelFta->getDataField(FtaModel::FIELDNAME_DUREE_DE_VIE_TECHNIQUE_MAXIMALE)->getFieldValue() < $modelFta->getDataField(FtaModel::FIELDNAME_DUREE_DE_VIE_TECHNIQUE_PRODUCTION)->getFieldValue() and ( $paramIdFtaChapitre == 100)) {
 
             $titre = "Différences dans les Durées de vie";
-            $message = "Votre <b>" . mysql_field_desc("fta", "duree_vie_technique_fta") . "</b> est inférieure à la <b>" . mysql_field_desc("access_arti2", "Durée_de_vie_technique") . "</b>.<br>"
+            $message = "Votre <b>" . mysql_field_desc(FtaModel::TABLENAME, FtaModel::FIELDNAME_DUREE_DE_VIE_TECHNIQUE_MAXIMALE) . "</b> est inférieure à la <b>" . mysql_field_desc("access_arti2", "Durée_de_vie_technique") . "</b>.<br>"
             ;
             afficher_message($titre, $message, $redirection);
             $erreur = 1;
@@ -467,7 +467,7 @@ switch ($action) {
         if ($modelFta->getDataField(FtaModel::FIELDNAME_CODE_ARTICLE_LDC)->getFieldValue() and ModuleConfig::CODE_LDC_UNIQUE) {
             //if($code_article_ldc and false)
             $req = "SELECT " . FtaModel::TABLENAME . "." . FtaModel::KEYNAME  
-                    . " FROM " .FtaModel::TABLENAME . "," . FtaEtatModel::TABLENAME
+                    . " FROM " . FtaModel::TABLENAME . "," . FtaEtatModel::TABLENAME
                     . " WHERE " . FtaModel::TABLENAME . "." . FtaModel::FIELDNAME_DOSSIER_FTA . " <> '" . $modelFta->getDataField(FtaModel::FIELDNAME_DOSSIER_FTA)->getFieldValue() . "' "
                     . " AND " . FtaEtatModel::TABLENAME . "." . FtaEtatModel::KEYNAME . "=" . FtaModel::TABLENAME . "." . FtaModel::FIELDNAME_ID_FTA_ETAT
                     .  "AND " . FtaEtatModel::FIELDNAME_ABREVIATION . "<>'R' "
@@ -494,10 +494,11 @@ switch ($action) {
 
         //Cohérence du Code Agrologic
         if ($modelFta->getDataField(FtaModel::FIELDNAME_ARTICLE_AGROLOGIC)->getFieldValue()) {
-            $req = "SELECT `fta`.`id_fta` FROM `fta` "
-                    . "WHERE `fta`.`id_article_agrologic` = '" . $modelFta->getDataField(FtaModel::FIELDNAME_ARTICLE_AGROLOGIC)->getFieldValue() . "' "
-                    . "AND `fta`.`id_dossier_fta` <> '" . $modelFta->getDataField(FtaModel::FIELDNAME_DOSSIER_FTA)->getFieldValue() . "' "
-                    . "AND (`fta`.id_fta_etat=1 OR `fta`.id_fta_etat=3) "
+            $req = "SELECT " . FtaModel::TABLENAME . "." . FtaModel::KEYNAME 
+                    . " FROM " . FtaModel::TABLENAME
+                    . " WHERE " . FtaModel::TABLENAME . "." . FtaModel::FIELDNAME_ARTICLE_AGROLOGIC . "= '" . $modelFta->getDataField(FtaModel::FIELDNAME_ARTICLE_AGROLOGIC)->getFieldValue() . "' "
+                    . " AND " . FtaModel::TABLENAME . "." . FtaModel::FIELDNAME_DOSSIER_FTA . " <> '" . $modelFta->getDataField(FtaModel::FIELDNAME_DOSSIER_FTA)->getFieldValue() . "' "
+                    . " AND (" . FtaModel::TABLENAME . "." . FtaModel::KEYNAME . "=1 OR " . FtaModel::TABLENAME . "." . FtaModel::FIELDNAME_ID_FTA_ETAT . "=3) "
             ;
             $result = DatabaseOperation::query($req);
             if (mysql_num_rows($result)) {//Si le code est déjà affecté à une autre FTA, on informe, et on suppime l'affectation sur la FTA en cours
@@ -524,7 +525,7 @@ switch ($action) {
 
             //Notification de l'état d'Avancement de la FTA
             //afficher_message("Information de l'état d'avancement du Projet", "Les intervenants ont été informer du nouvel état d'avancement.", "");
-            $liste_user = notification_suivi_projet($paramIdFta);
+            $liste_user = notification_suivi_projet($paramIdFta, $paramIdFtaChapitre);
 
             if ($liste_user) {
                 $noredirection = 1;

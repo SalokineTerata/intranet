@@ -11,6 +11,7 @@ class FtaEtatModel extends AbstractModel {
     const TABLENAME = "fta_etat";
     const KEYNAME = "id_fta_etat";
     const FIELDNAME_ABREVIATION = "abreviation_fta_etat";
+    const FIELDNAME_NOM_FTA_ETAT = "nom_fta_etat";
 
 }
 

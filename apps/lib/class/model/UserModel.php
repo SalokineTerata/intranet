@@ -10,6 +10,7 @@ class UserModel extends AbstractModel {
 
     const TABLENAME = "salaries";
     const KEYNAME = "id_user";
+    const FIELDNAME_ACTIF = "actif";
     const FIELDNAME_NOM = "nom";
     const FIELDNAME_PRENOM = "prenom";
     const FIELDNAME_ID_SERVICE = "id_service";

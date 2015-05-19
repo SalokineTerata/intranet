@@ -7,10 +7,7 @@
  */
 class Navigation {
 
-    /**
-     *
-     * FPDF@var <ObjectFta>
-     */
+
     protected static $id_fta;
     protected static $comeback;
     protected static $comeback_url;
@@ -19,11 +16,7 @@ class Navigation {
     //protected static $id_fta_chapitre;
     protected static $id_fta_chapitre_encours;
 
-    /**
-     * Objet FTA
-     * @var ObjectFta 
-     */
-    protected static $objectFta;
+
     protected static $synthese_action;
     protected static $id_fta_processus;
 
@@ -38,7 +31,6 @@ class Navigation {
         self::$synthese_action = $synthese_action;
         self::$comeback = $comeback;
 
-        self::$objectFta = new ObjectFta(self::$id_fta);
         self::$html_navigation_bar = self::buildNavigationBar();
     }
 
@@ -118,10 +110,12 @@ class Navigation {
         $t_processus_encours = array();
         $t_processus_visible = array();
         $globalconfig = new GlobalConfig();
+        $modelFta = new FtaModel(self::$id_fta);
         $id_user = $globalconfig->getAuthenticatedUser()->getKeyValue();
 
 
-        //self objet fta ne marche pas a corriger
+
+        
         //Si une action est donnée, alors construction du menu des chapitres
         if (self::$synthese_action) {
             //Etat d'avancement de la FTA et Recherche des processus validés (et donc en lecture-seule)
@@ -133,7 +127,7 @@ class Navigation {
                             . "=" . FtaProcessusModel::TABLENAME . "." . FtaProcessusModel::KEYNAME
                             . " AND " . FtaProcessusCycleModel::FIELDNAME_FTA_ETAT . "='I'"
                             . " AND " . FtaProcessusCycleModel::FIELDNAME_CATEGORIE
-                            . "='" . self::$objectFta->getFieldValue(ObjectFta::TABLE_FTA_NAME, FtaModel::FIELDNAME_CATEGORIE_FTA) . "' "
+                            . "='" . $modelFta->getDataField(FtaModel::FIELDNAME_CATEGORIE_FTA)->getFieldValue() . "' "
             );
 
             //Balayage de tous les processus
@@ -173,8 +167,8 @@ class Navigation {
                     . " AND " . IntranetDroitsAccesModel::FIELDNAME_ID_USER . "=" . $id_user //Utilisateur actuellement connecté
                     . " AND " . IntranetModulesModel::FIELDNAME_NOM_INTRANET_MODULES . "='" . FtaModel::TABLENAME
                     . "' AND " . IntranetDroitsAccesModel::FIELDNAME_NIVEAU_INTRANET_DROITS_ACCES . "=1"  //L'utilisateur est propriétaire
-                    . " AND " . FtaProcessusCycleModel::FIELDNAME_FTA_ETAT . "='" . self::$objectFta->getFieldValue(ObjectFta::TABLE_ETAT_NAME, FtaEtatModel::FIELDNAME_ABREVIATION) . "' "
-                    . " AND " . FtaModel::FIELDNAME_CATEGORIE_FTA . "= '" . self::$objectFta->getFieldValue(ObjectFta::TABLE_FTA_NAME, FtaModel::FIELDNAME_CATEGORIE_FTA) . "' "
+                    . " AND " . FtaProcessusCycleModel::FIELDNAME_FTA_ETAT . "='" . $modelFta->getModelFtaEtat()->getDataField(FtaEtatModel::FIELDNAME_ABREVIATION)->getFieldValue() . "' "
+                    . " AND " . FtaModel::FIELDNAME_CATEGORIE_FTA . "= '" . $modelFta->getDataField(FtaModel::FIELDNAME_CATEGORIE_FTA)->getFieldValue(). "' "
             ;
 
             //Finalisation de la requête

@@ -77,11 +77,11 @@
   Script situé dans "lib/htmlMimeMail-2.5.1/htmlMimeMail.php"
  */
 
-function envoismail($sujetmail, $text, $destinataire, $expediteur,$paramIdFta , $conf = null) {
+function envoismail($sujetmail, $text, $destinataire, $expediteur , $conf = null) {
 
     if ($conf == null) {
         $globalConfig = new GlobalConfig();
-        $modelFta = new FtaModel($paramIdFta);
+        
     }
     
     
@@ -122,12 +122,12 @@ function envoismail($sujetmail, $text, $destinataire, $expediteur,$paramIdFta , 
          * 
          */
         $logMail = new LoggerClass('D:/weblocal/intranet-v3/log/');
-        $etat_fta = $modelFta->getModelFtaEtat()->getDataField(FtaEtatModel::FIELDNAME_NOM_FTA_ETAT)->getFieldValue();
         
-        $logMail->log("fta" , $text, "mail-transactions", $expediteur, $destinataire, $sujetmail , 0, $etat_fta);
         
-        $filename = GlobalConfig::APPS_LOG_DIR."/".GlobalConfig::APPS_LOG_FILE_MAIL_TRANSACTION ;
-        $file += "ajout des logs....";
+        $logMail->log("fta" , $text, "mail-transactions", $expediteur, $destinataire, $sujetmail , 0);
+        
+       // $filename = GlobalConfig::APPS_LOG_DIR."/".GlobalConfig::APPS_LOG_FILE_MAIL_TRANSACTION ;
+        //$file += "ajout des logs....";
         
         /**
          * Enregistrement de l'historique des mails dans le fichier log
@@ -141,7 +141,7 @@ function envoismail($sujetmail, $text, $destinataire, $expediteur,$paramIdFta , 
         $logMail->log("fta" ,$text , "historique", $expediteur, $destinataire, $sujetmail, 1);
 
        // $filename = GlobalConfig::APPS_LOG_HISTORY_DIR."/".GlobalConfig::APPS_LOG_HISTORY_FILE_MAIL."-S".num_semaine() ;
-        $file += "ajout des logs....";
+       // $file += "ajout des logs....";
       
         
         /**

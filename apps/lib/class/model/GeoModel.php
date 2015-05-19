@@ -22,7 +22,7 @@ class GeoModel extends AbstractModel {
     const FIELDNAME_FAX_GEO = "fax_geo";
     const FIELDNAME_FAX_COMMERCIAL_GEO = "fax_commercial_geo";
     const FIELDNAME_GEO_CNUD_PREPARER_PAR = "geo_cnud_preparer_par";
-    const FIELDNAME_ID_SITE = "is_site";
+    const FIELDNAME_ID_SITE = "id_site";
     const FIELDNAME_ASSEMBLAGE = "assemblage";
     const FIELDNAME_SITE_CODE_EMBALLEUR = "site_code_emballeur";
     const FIELDNAME_SITE_AGREMENT_CE = "site_agrement_ce";

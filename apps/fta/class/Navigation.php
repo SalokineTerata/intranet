@@ -167,8 +167,8 @@ class Navigation {
                     . " AND " . IntranetDroitsAccesModel::FIELDNAME_ID_USER . "=" . $id_user //Utilisateur actuellement connecté
                     . " AND " . IntranetModulesModel::FIELDNAME_NOM_INTRANET_MODULES . "='" . FtaModel::TABLENAME
                     . "' AND " . IntranetDroitsAccesModel::FIELDNAME_NIVEAU_INTRANET_DROITS_ACCES . "=1"  //L'utilisateur est propriétaire
-                    . " AND " . FtaProcessusCycleModel::FIELDNAME_FTA_ETAT . "='" . $modelFta->getModelFtaEtat()->getDataField(FtaEtatModel::FIELDNAME_ABREVIATION)->getFieldValue() . "' "
-                    . " AND " . FtaModel::FIELDNAME_CATEGORIE_FTA . "= '" . $modelFta->getDataField(FtaModel::FIELDNAME_CATEGORIE_FTA)->getFieldValue(). "' "
+                   // . " AND " . FtaProcessusCycleModel::FIELDNAME_FTA_ETAT . "='" . $modelFta->getModelFtaEtat()->getDataField(FtaEtatModel::FIELDNAME_ABREVIATION)->getFieldValue() . "' "
+                   // . " AND " . FtaModel::FIELDNAME_CATEGORIE_FTA . "= '" . $modelFta->getDataField(FtaModel::FIELDNAME_CATEGORIE_FTA)->getFieldValue(). "' "
             ;
 
             //Finalisation de la requête

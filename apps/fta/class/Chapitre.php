@@ -49,16 +49,27 @@ class Chapitre {
     protected static $html_chapitre_conditionnement_piece_entiere;
     protected static $html_chapitre_core;
     protected static $html_chapitre_decoupe;
-    protected static $html_dictionnaire_de_donnees;
+    protected static $html_chapitre_dictionnaire_de_donnees;
     protected static $html_chapitre_emballage;
+    protected static $html_chapitre_emballage_colis;
+    protected static $html_chapitre_emballage_complementaire;
+    protected static $html_chapitre_emballage_primaire;
     protected static $html_chapitre_etiquette;
+    protected static $html_chapitre_etiquette_article;
+    protected static $html_chapitre_etiquette_client;
+    protected static $html_chapitre_etiquette_composant;
+    protected static $html_chapitre_etiquette_r_d;
     protected static $html_chapitre_expedition;
+    protected static $html_chapitre_exigence_client;
     protected static $html_chapitre_identite;
     protected static $html_chapitre_need_rebuild;
     protected static $html_chapitre_nomenclature;
     protected static $html_chapitre_palettisation;
+    protected static $html_chapitre_pcb;
     protected static $html_chapitre_production;
     protected static $html_chapitre_qualite;
+    protected static $html_chapitre_site_expedition;
+    protected static $html_chapitre_site_production;
     protected static $html_correct_button;
     protected static $html_submit_button;
     protected static $html_suivi_dossier;
@@ -237,8 +248,63 @@ class Chapitre {
                 $return = self::$html_chapitre_palettisation;
                 break;
             case "dictionnaire_de_donnees":
-                self::$html_dictionnaire_de_donnees = self::buildChapitreDictionnaireDeDonnees();
-                $return = self::$html_dictionnaire_de_donnees;
+                self::$html_chapitre_dictionnaire_de_donnees = self::buildChapitreDictionnaireDeDonnees();
+                $return = self::$html_chapitre_dictionnaire_de_donnees;
+                break;
+            default:
+            case "site_expedition":
+                self::$html_chapitre_site_expedition = self::buildChapitreSiteExpedition();
+                $return = self::$html_chapitre_site_expedition;
+                break;
+            default:
+            case "site_production":
+                self::$html_chapitre_site_production = self::buildChapitreSiteProduction();
+                $return = self::$html_chapitre_site_production;
+                break;
+            default:
+            case "exigence_client":
+                self::$html_chapitre_exigence_client = self::buildChapitreExigenceClient();
+                $return = self::$html_chapitre_exigence_client;
+                break;
+            default:
+            case "etiquette_client":
+                self::$html_chapitre_etiquette_client = self::buildChapitreEtiquetteClient();
+                $return = self::$html_chapitre_etiquette_client;
+                break;
+            default:
+            case "pcb":
+                self::$html_chapitre_pcb = self::buildChapitrePcb();
+                $return = self::$html_chapitre_pcb;
+                break;
+            default:
+            case "emballage_primaire":
+                self::$html_chapitre_emballage_primaire = self::buildChapitreEmballagePrimaire();
+                $return = self::$html_chapitre_emballage_primaire;
+                break;
+            default:
+            case "emballage_complementaires":
+                self::$html_chapitre_emballage_complementaires = self::buildChapitreEmballageComplementaire();
+                $return = self::$html_chapitre_emballage_complementaires;
+                break;
+            default:
+            case "emballage_colis":
+                self::$html_chapitre_emballage_colis = self::buildChapitreEmballageDuColis();
+                $return = self::$html_chapitre_emballage_colis;
+                break;
+            default:
+            case "etiquette_r_d":
+                self::$html_chapitre_etiquette_r_d = self::buildChapitreEtiquetteRD();
+                $return = self::$html_chapitre_etiquette_r_d;
+                break;
+            default:
+            case "etiquette_article":
+                self::$html_chapitre_etiquette_article = self::buildChapitreEtiquetteArticle();
+                $return = self::$html_chapitre_etiquette_article;
+                break;
+            default:
+            case "etiquette_composant":
+                self::$html_chapitre_etiquette_composant = self::buildChapitreEtiquetteComposant();
+                $return = self::$html_chapitre_etiquette_composant;
                 break;
             default:
         }
@@ -432,14 +498,18 @@ class Chapitre {
         //PVC de l'article:
         $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_PVC_ARTICLE);
 
+        //Nombre de portion
+        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_NOMBRE_PORTION_FTA);
+
+        //Service consommateur
+        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_SERVICE_CONSOMMATEUR);
+
         //Prix / KG
         $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_PVC_ARTICLE_KG);
 
         //Durée de vie garantie client (en jours)
         $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_DUREE_DE_VIE);
 
-        //Nombre de portion
-        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_NOMBRE_PORTION_FTA);
 
         //Description du produit
         $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_DESCRIPTION_DU_PRODUIT);
@@ -448,8 +518,6 @@ class Chapitre {
         $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_CONSEIL_DE_PRESENTATION);
 
 
-        //Service consommateur
-        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_SERVICE_CONSOMMATEUR);
 
 
         return $bloc;
@@ -588,6 +656,297 @@ class Chapitre {
 
 
         //$bloc .= "</table>";
+        return $bloc;
+    }
+
+    public static function buildChapitreSiteExpedition() {
+
+        $bloc = "";
+        $id_fta = self::$id_fta;
+        $synthese_action = self::$synthese_action;
+        $isEditable = self::$is_editable;
+
+        //Identifiant FTA
+        $ftaModel = new FtaModel($id_fta);
+        $ftaView = new FtaView($ftaModel);
+        $ftaView->setIsEditable($isEditable);
+        $ftaView->setFtaChapitreModelById(self::ID_CHAPITRE_IDENTITE);
+
+        //Site d'expedition
+        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_SITE_EXPEDITION_FTA);
+
+        return $bloc;
+    }
+
+    public static function buildChapitreSiteProduction() {
+
+        $bloc = "";
+        $id_fta = self::$id_fta;
+        $synthese_action = self::$synthese_action;
+        $isEditable = self::$is_editable;
+
+        //Identifiant FTA
+        $ftaModel = new FtaModel($id_fta);
+        $ftaView = new FtaView($ftaModel);
+        $ftaView->setIsEditable($isEditable);
+        $ftaView->setFtaChapitreModelById(self::ID_CHAPITRE_IDENTITE);
+
+        //Site d'assemblage
+        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_SITE_ASSEMBLAGE);
+
+        return $bloc;
+    }
+
+    public static function buildChapitreExigenceClient() {
+
+        $bloc = "";
+        $id_fta = self::$id_fta;
+        $synthese_action = self::$synthese_action;
+        $isEditable = self::$is_editable;
+
+        //Identifiant FTA
+        $ftaModel = new FtaModel($id_fta);
+        $ftaView = new FtaView($ftaModel);
+        $ftaView->setIsEditable($isEditable);
+        $ftaView->setFtaChapitreModelById(self::ID_CHAPITRE_IDENTITE);
+
+        //Durée de vie garantie client (en jours)
+        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_DUREE_DE_VIE);
+
+        return $bloc;
+    }
+
+    public static function buildChapitrePcb() {
+
+        $bloc = "";
+        $id_fta = self::$id_fta;
+        $synthese_action = self::$synthese_action;
+        $isEditable = self::$is_editable;
+
+        //Identifiant FTA
+        $ftaModel = new FtaModel($id_fta);
+        $ftaView = new FtaView($ftaModel);
+        $ftaView->setIsEditable($isEditable);
+        $ftaView->setFtaChapitreModelById(self::ID_CHAPITRE_IDENTITE);
+
+        //PCB
+        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_PCB);
+
+        return $bloc;
+    }
+
+    public static function buildChapitreEmballagePrimaire() {
+
+        $bloc = "";
+        $id_fta = self::$id_fta;
+        $synthese_action = self::$synthese_action;
+        $isEditable = self::$is_editable;
+
+        //Identifiant FTA
+        $ftaModel = new FtaModel($id_fta);
+        $ftaView = new FtaView($ftaModel);
+        $ftaView->setIsEditable($isEditable);
+        $ftaView->setFtaChapitreModelById(self::ID_CHAPITRE_IDENTITE);
+
+        //Emballage primaire uniquement ref FTE
+        // $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_PCB);
+
+        return $bloc;
+    }
+
+    public static function buildChapitreEmballageComplementaire() {
+
+        $bloc = "";
+        $id_fta = self::$id_fta;
+        $synthese_action = self::$synthese_action;
+        $isEditable = self::$is_editable;
+
+        //Identifiant FTA
+        $ftaModel = new FtaModel($id_fta);
+        $ftaView = new FtaView($ftaModel);
+        $ftaView->setIsEditable($isEditable);
+        $ftaView->setFtaChapitreModelById(self::ID_CHAPITRE_IDENTITE);
+
+        //Référence Arcadia
+        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_ARCADIA_EMBALLAGE_TYPE);
+
+        $bloc.="<tr> <td>Il manque deux données :
+            • la Quantité par colis
+            • la Quantité par UVC</td></tr>";
+
+
+
+        return $bloc;
+    }
+
+    public static function buildChapitreEmballageDuColis() {
+
+        $bloc = "";
+        $id_fta = self::$id_fta;
+        $synthese_action = self::$synthese_action;
+        $isEditable = self::$is_editable;
+
+        //Identifiant FTA
+        $ftaModel = new FtaModel($id_fta);
+        $ftaView = new FtaView($ftaModel);
+        $ftaView->setIsEditable($isEditable);
+        $ftaView->setFtaChapitreModelById(self::ID_CHAPITRE_IDENTITE);
+
+
+        $bloc.="<tr> <td>Il manque quatre données :
+            •Référence Colis Arcadia
+            •Quantité par couche
+            •Couche par palette
+            •Référence Palette</td></tr>";
+
+        return $bloc;
+    }
+
+    public static function buildChapitreEtiquetteClient() {
+
+        $bloc = "";
+        $id_fta = self::$id_fta;
+        $synthese_action = self::$synthese_action;
+        $isEditable = self::$is_editable;
+
+        //Identifiant FTA
+        $ftaModel = new FtaModel($id_fta);
+        $ftaView = new FtaView($ftaModel);
+        $ftaView->setIsEditable($isEditable);
+        $ftaView->setFtaChapitreModelById(self::ID_CHAPITRE_IDENTITE);
+
+
+        //Libellé du code article chez le client
+        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_LIBELLE_CODE_ARTICLE_CLIENT);
+
+
+        //Valeur du code article chez le client
+        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_CODE_ARTICLE_CLIENT);
+
+        //PVC de l'article:
+        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_PVC_ARTICLE);
+
+        //Nombre de portion
+        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_NOMBRE_PORTION_FTA);
+
+        //Service consommateur
+        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_SERVICE_CONSOMMATEUR);
+
+        //Produit Transformé en France
+        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_PRODUIT_TRANSFORME);
+
+        //Logo éco-emballage
+        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_LOGO_ECO_EMBALLAGE);
+
+
+        $bloc.="<tr> <td>Logo spécifique étiquette manquant choix possible en dessous ?</td></tr>";
+
+        //Libellé etiquette carton:
+        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_LIBELLE_CLIENT);
+
+        //Modèle d'étiquette
+        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_ETIQUETTE_CODESOFT);
+
+
+
+        return $bloc;
+    }
+
+    public static function buildChapitreEtiquetteRD() {
+
+        $bloc = "";
+        $id_fta = self::$id_fta;
+        $synthese_action = self::$synthese_action;
+        $isEditable = self::$is_editable;
+
+        //Identifiant FTA
+        $ftaModel = new FtaModel($id_fta);
+        $ftaView = new FtaView($ftaModel);
+        $ftaView->setIsEditable($isEditable);
+        $ftaView->setFtaChapitreModelById(self::ID_CHAPITRE_IDENTITE);
+
+        //Conseil de Réchauffage Validé
+        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_CONSEIL_DE_RECHAUFFAGE);
+
+        return $bloc;
+    }
+
+    public static function buildChapitreEtiquetteArticle() {
+
+        $bloc = "";
+        $id_fta = self::$id_fta;
+        $synthese_action = self::$synthese_action;
+        $isEditable = self::$is_editable;
+
+        //Identifiant FTA
+        $ftaModel = new FtaModel($id_fta);
+        $ftaView = new FtaView($ftaModel);
+        $ftaView->setIsEditable($isEditable);
+        $ftaView->setFtaChapitreModelById(self::ID_CHAPITRE_IDENTITE);
+
+
+        //Origine des Matières Premières
+        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_ORIGINE_MATIERE_PREMIERE);
+
+        //Listes des Allergènes
+        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_LISTE_ALLERGENE);
+
+        //Conseil après ouverture
+        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_CONSEIL_APRES_OUVERTURE);
+
+        //Conditionné sous atmosphère protectrice
+        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_CONDITION_SOUS_ATMOSPHERE);
+
+        return $bloc;
+    }
+
+    public static function buildChapitreEtiquetteComposant() {
+
+        $bloc = "";
+        $id_fta = self::$id_fta;
+        $synthese_action = self::$synthese_action;
+        $isEditable = self::$is_editable;
+
+        //Identifiant FTA
+        $ftaModel = new FtaModel($id_fta);
+        $ftaView = new FtaView($ftaModel);
+        $ftaView->setIsEditable($isEditable);
+        $ftaView->setFtaChapitreModelById(self::ID_CHAPITRE_IDENTITE);
+
+
+        $bloc.="<tr> <td>Lequelle choisir  pour la durré de vie ?</td></tr>";
+
+        //Durée de vie Production (en jours)
+        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_DUREE_DE_VIE_TECHNIQUE_PRODUCTION);
+
+        //Durée de Vie Maximale (en jour)
+        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_DUREE_DE_VIE_TECHNIQUE_MAXIMALE);
+
+        $bloc.="<tr> <td>Poids net étiqueté</td></tr>";
+
+        $bloc.="<tr> <td>Quantité par colis</td></tr>";
+
+        $bloc.="<tr> <td>Dénomination commerciale de ventes</td></tr>";
+
+        $bloc.="<tr> <td>Dénomination légale de ventes</td></tr>";
+
+        //Composition Etiquette (1er paragraphe)
+        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_COMPOSITION1);
+
+        //Composition Etiquette (2nd paragraphe)
+        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_COMPOSITION2);
+
+
+        //Information complémentaire recto
+        $bloc.="<tr> <td>Information complémentaire recto ? Possible choix remarque ?</td></tr>";
+        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_REMARQUE);
+
+        $bloc.="<tr> <td>Décomposition du poids</td></tr>";
+
+        $bloc.="<tr> <td>Taille des ingrédients</td></tr>";
+
+        $bloc.="<tr> <td>Valeurs nutrionnelles</td></tr>";
+
         return $bloc;
     }
 

@@ -77,16 +77,15 @@
   Script situé dans "lib/htmlMimeMail-2.5.1/htmlMimeMail.php"
  */
 
-function envoismail($sujetmail, $text, $destinataire, $expediteur , $conf = null) {
+function envoismail($sujetmail, $text, $destinataire, $expediteur, $paramTypeMail, $conf = null) {
 
     if ($conf == null) {
         $globalConfig = new GlobalConfig();
-        
     }
-    
-    
-    
-    
+
+    $logMail = new LoggerClass('D:/weblocal/intranet-v3/log/');
+
+
     if ($globalConfig->getConf()->getSmtpServiceEnable() == False) {
 
         /*
@@ -113,44 +112,84 @@ function envoismail($sujetmail, $text, $destinataire, $expediteur , $conf = null
         $mail->setText($text);
         //$result = $mail->send(array($adresse_to), 'smtp');
         //$result = $mail->send(array($destinataire), 'smtp');
-       
-        
-        /**
-         * Enregistrement des transactions mail dans le fichier log
-         * 
-         * "date heure : $login : $module : $expediteur : $destinataire : $sujetmail
-         * 
-         */
-        $logMail = new LoggerClass('D:/weblocal/intranet-v3/log/');
-        
-        
-        $logMail->log("fta" , $text, "mail-transactions", $expediteur, $destinataire, $sujetmail , 0);
-        
-       // $filename = GlobalConfig::APPS_LOG_DIR."/".GlobalConfig::APPS_LOG_FILE_MAIL_TRANSACTION ;
-        //$file += "ajout des logs....";
-        
-        /**
-         * Enregistrement de l'historique des mails dans le fichier log
-         * 
-         * "========================================================="
-         * "date heure : $login : $module : $expediteur : $destinataire : $sujetmail"
-         * "$text"
-         * 
-         */
-         
-        $logMail->log("fta" ,$text , "historique", $expediteur, $destinataire, $sujetmail, 1);
 
-       // $filename = GlobalConfig::APPS_LOG_HISTORY_DIR."/".GlobalConfig::APPS_LOG_HISTORY_FILE_MAIL."-S".num_semaine() ;
-       // $file += "ajout des logs....";
-      
-        
+        switch ($paramTypeMail) {
+
+            case "mail-transactions" :
+                /**
+                 * Enregistrement des envoies de transactions mail dans le fichier log
+                 * 
+                 * "date heure : $login : $module : $expediteur : $destinataire : $sujetmail
+                 * 
+                 */
+                $logMail->log("fta", $text, $paramTypeMail, $expediteur, $destinataire, $sujetmail, 1);
+
+                /**
+                 * Enregistrement de l'historique des mails dans le fichier log
+                 * 
+                 * "========================================================="
+                 * "date heure : $login : $module : $expediteur : $destinataire : $sujetmail"
+                 * "$text"
+                 * 
+                 */
+                $logMail->log("fta", $text, "historique", $expediteur, $destinataire, $sujetmail, 0);
+                break;
+
+            case "Correction" :
+
+                /**
+                 * Enregistrement des envoies de correction des mails dans le fichier log
+                 * 
+                 * "========================================================="
+                 * "date heure : $login : $module : $expediteur : $destinataire : $sujetmail"
+                 * "$text"
+                 * 
+                 */
+                $logMail->log("fta", $text, $paramTypeMail, $expediteur, $destinataire, $sujetmail, 1);
+                /**
+                 * Enregistrement de l'historique des mails dans le fichier log
+                 * 
+                 * "========================================================="
+                 * "date heure : $login : $module : $expediteur : $destinataire : $sujetmail"
+                 * "$text"
+                 * 
+                 */
+                $logMail->log("fta", $text, "historique", $expediteur, $destinataire, $sujetmail, 0);
+                break;
+            
+            case "Validation" :
+                
+                /**
+                 * Enregistrement des envoies de validation des mails dans le fichier log
+                 * 
+                 * "========================================================="
+                 * "date heure : $login : $module : $expediteur : $destinataire : $sujetmail"
+                 * "$text"
+                 * 
+                 */
+                $logMail->log("fta", $text, $paramTypeMail, $expediteur, $destinataire, $sujetmail, 1);
+                /**
+                 * Enregistrement de l'historique des mails dans le fichier log
+                 * 
+                 * "========================================================="
+                 * "date heure : $login : $module : $expediteur : $destinataire : $sujetmail"
+                 * "$text"
+                 * 
+                 */
+                $logMail->log("fta", $text, "historique", $expediteur, $destinataire, $sujetmail, 0);
+                break;
+                
+        }
+
+
+
         /**
          * L'envoi réel du mail n'est pas réalisé en environnement Codeur
          */
-        if ($globalConfig->getConf()->getExecEnvironment() != EnvironmentConf::ENV_COD){
+        if ($globalConfig->getConf()->getExecEnvironment() != EnvironmentConf::ENV_COD) {
             $result = $mail->send(array($destinataire), 'smtp');
         }
-        
+
 
         if (!$result) {
             print_r($mail->errors);

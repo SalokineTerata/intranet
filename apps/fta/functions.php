@@ -277,6 +277,7 @@ function envoi_mail_detail($id_fta, $liste_diffusion, $commentaire) {
     $text.= "Bonne journée à tous.\n"
             . "Ce message a été envoyé automatiquement par le module Intranet - Fiche Technique Article.\n"
     ;
+    $typeMail = "Validation";
 //echo $text;
 //Envoi du mail d'information
     foreach ($liste_diffusion as $mail_validation) {
@@ -288,9 +289,9 @@ function envoi_mail_detail($id_fta, $liste_diffusion, $commentaire) {
                 . $destinataire
                 . "\n"
         ;
-        $expediteur = $_SESSION["prenom"] . " " . $_SESSION["nom_famille_ses"] . " <" . $_SESSION["mail_user"] . ">";
+        $expediteur = $_SESSION["prenom"] . " " . $_SESSION["nom_famille_ses"] . " <" . $_SESSION["mail_user"] . ">";       
         if ($_SESSION["notification_suivi_projet"]) {
-            envoismail($sujetmail, $text, $destinataire, $expediteur);
+            envoismail($sujetmail, $text, $destinataire, $expediteur, $typeMail);
         }
     }
 
@@ -309,7 +310,7 @@ function envoi_mail_detail($id_fta, $liste_diffusion, $commentaire) {
 //if ($_SESSION["notification_suivi_projet"])
     {
         $expediteur = $_SESSION["prenom"] . " " . $_SESSION["nom_famille_ses"] . " <" . $_SESSION["mail_user"] . ">";
-        envoismail($sujetmail, $corp, $_SESSION["mail_user"], $expediteur);
+        envoismail($sujetmail, $corp, $_SESSION["mail_user"], $expediteur, $typeMail);
     }
 }
 
@@ -847,8 +848,9 @@ function correction_chapitre($id_fta, $id_fta_chapitre, $option) {
                     . "OBJET DE LA CORRECTION:\n"
                     . "\t" . stripslashes($option["correction_fta_suivi_projet"])
             ;
+            $typeMail = "Correction";
             if ($_SESSION["notification_suivi_projet"]) {
-                envoismail($sujetmail, $text, $destinataire, $expediteur);
+                envoismail($sujetmail, $text, $destinataire, $expediteur, $typeMail);
             }
         }
     }//Fin du traitement des processus suivants

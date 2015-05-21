@@ -116,13 +116,13 @@ class LoggerClass {
             $paramDate .= "\n";
         }
         if ($paramCheckText == 1) {
-            $this->write($logfile, $paramText, $paramDate, $paramExpediteur, $paramDestinataire, $paramSujetMail);
+            $this->writeWithText($logfile, $paramText, $paramDate, $paramExpediteur, $paramDestinataire, $paramSujetMail);
         } else {
             $this->writeWithoutText($logfile, $paramDate, $paramExpediteur, $paramDestinataire, $paramSujetMail);
         }
     }
 
-    private function write($paramLogFile, $paramText, $date, $expediteur, $destinataire, $sujetmail) {
+    private function writeWithText($paramLogFile, $paramText, $date, $expediteur, $destinataire, $sujetmail) {
         if (!$this->ready) {
             return false;
         }

@@ -294,9 +294,10 @@ class FtaSuiviProjetModel extends AbstractModel {
                             $expediteur = $modelFta->getModelCreateur()->getDataField(UserModel::FIELDNAME_PRENOM)->getFieldValue()
                                     . " " . $modelFta->getModelCreateur()->getDataField(UserModel::FIELDNAME_NOM)->getFieldValue()
                                     . " <" . $modelFta->getModelCreateur()->getDataField(UserModel::FIELDNAME_MAIL)->getFieldValue() . ">";
+                            $typeMail = "mail-transactions";
                             //if ($_SESSION["notification_fta_suivi_projet"]) {
                             if ($modelFtaSuiviProjet->getDataField(FtaSuiviProjetModel::FIELDNAME_NOTIFICATION_FTA_SUIVI_PROJET)->getFieldValue()) {
-                                envoismail($sujetmail, $text, $destinataire, $expediteur);
+                                envoismail($sujetmail, $text, $destinataire, $expediteur, $typeMail);
                             }
                         }
                     }//Fin des envois de mail

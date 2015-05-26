@@ -13,7 +13,7 @@ class FtaProcessusCycleModel extends AbstractModel {
     const FIELDNAME_PROCESSUS_INIT = "id_init_fta_processus";
     const FIELDNAME_PROCESSUS_NEXT = "id_next_fta_processus";
     const FIELDNAME_FTA_ETAT = "id_etat_fta_processus_cycle";
-    const FIELDNAME_CATEGORIE = "id_fta_categorie";
+    const FIELDNAME_WORKFLOW = "id_fta_workflow";
     const FIELDNAME_DELAI = "delai_semaine_depuis_origine";
 
     /**
@@ -36,9 +36,9 @@ class FtaProcessusCycleModel extends AbstractModel {
 
     /**
      * Etat de la FTA
-     * @var FtaCategorieModel
+     * @var FtaWorkflowModel
      */
-    private $modelFtaCategorie;
+    private $modelFtaWorkflowModel;
 
     public function __construct($paramId = NULL, $paramIsCreateRecordsetInDatabaseIfKeyDoesntExist = AbstractModel::DEFAULT_IS_CREATE_RECORDSET_IN_DATABASE_IF_KEY_DOESNT_EXIST) {
         parent::__construct($paramId, $paramIsCreateRecordsetInDatabaseIfKeyDoesntExist);
@@ -61,9 +61,9 @@ class FtaProcessusCycleModel extends AbstractModel {
                 , DatabaseRecord::VALUE_DONT_CREATE_RECORD_IN_DATABASE_IF_KEY_DOESNT_EXIST
                 )
         );
-        $this->setModelFtaCategorie(
-                new FtaCategorieModel(
-                $this->getDataField(self::FIELDNAME_CATEGORIE)->getFieldValue()
+        $this->setModelFtaWorkflowModel(
+                new FtaWorkflowModel(
+                $this->getDataField(self::FIELDNAME_WORKFLOW)->getFieldValue()
                 , DatabaseRecord::VALUE_DONT_CREATE_RECORD_IN_DATABASE_IF_KEY_DOESNT_EXIST
                 )
         );
@@ -81,8 +81,8 @@ class FtaProcessusCycleModel extends AbstractModel {
         return $this->modelFtaEtat;
     }
 
-    public function getModelFtaCategorie() {
-        return $this->modelFtaCategorie;
+    function getModelFtaWorkflowModel() {
+        return $this->modelFtaWorkflowModel;
     }
 
     private function setModelProcessusInit(FtaProcessusModel $modelProcessusInit) {
@@ -97,8 +97,8 @@ class FtaProcessusCycleModel extends AbstractModel {
         $this->modelFtaEtat = $modelFtaEtat;
     }
 
-    private function setModelFtaCategorie(FtaCategorieModel $modelFtaCategorie) {
-        $this->modelFtaCategorie = $modelFtaCategorie;
+    function setModelFtaWorkflowModel(FtaWorkflowModel $modelFtaWorkflowModel) {
+        $this->modelFtaWorkflowModel = $modelFtaWorkflowModel;
     }
 
 }

@@ -16,7 +16,6 @@ class FtaModel extends AbstractModel {
     const FIELDNAME_ARTICLE_AGROLOGIC = "id_article_agrologic";
     const FIELDNAME_BESOIN_FICHE_TECHNIQUE = "besoin_fiche_technique";
     const FIELDNAME_CALIBRE_DEFAUT = "calibre_defaut";
-    const FIELDNAME_CATEGORIE_FTA = "id_fta_categorie";
     const FIELDNAME_CIRCUIT_CLIENT = "id_arcadia_client_circuit";
     const FIELDNAME_CODE_ARTICLE_CLIENT = "code_article_client";
     const FIELDNAME_CODE_ARTICLE_LDC = "code_article_ldc";
@@ -88,6 +87,7 @@ class FtaModel extends AbstractModel {
     const FIELDNAME_VERSION_DOSSIER_FTA = "id_version_dossier_fta";
     const FIELDNAME_VIRTUAL_FTA_COMPOSANT = "VIRTUAL_fta_composant";
     const FIELDNAME_VIRTUAL_FTA_PROCESSUS_DELAI = "VIRTUAL_fta_processus_delai";
+    const FIELDNAME_WORKFLOW = "id_fta_workflow";
     const ID_POIDS_VARIABLE = "3";
 
     /**
@@ -104,9 +104,9 @@ class FtaModel extends AbstractModel {
 
     /**
      * Catégorie de la FTA
-     * @var FtaCategorieModel
+     * @var FtaWorkflowModel
      */
-    private $modelFtaCategorie;
+    private $modelFtaWorkflow;
 
     /**
      * Model de donnée d'une FTA
@@ -136,8 +136,8 @@ class FtaModel extends AbstractModel {
                 new FtaEtatModel($this->getDataField(self::FIELDNAME_ID_FTA_ETAT)->getFieldValue()
                 , DatabaseRecord::VALUE_DONT_CREATE_RECORD_IN_DATABASE_IF_KEY_DOESNT_EXIST)
         );
-        $this->setModelFtaCategorie(
-                new FtaCategorieModel($this->getDataField(self::FIELDNAME_CATEGORIE_FTA)->getFieldValue()
+        $this->setModelFtaWorkflow(
+                new FtaWorkflowModel($this->getDataField(self::FIELDNAME_WORKFLOW)->getFieldValue()
                 , DatabaseRecord::VALUE_DONT_CREATE_RECORD_IN_DATABASE_IF_KEY_DOESNT_EXIST)
         );
 
@@ -146,13 +146,6 @@ class FtaModel extends AbstractModel {
                 , DatabaseRecord::VALUE_DONT_CREATE_RECORD_IN_DATABASE_IF_KEY_DOESNT_EXIST)
         );
 
-        //Tables mères (Relation N:1, la clef étrangère dans la table mère)
-
-
-        /**
-         * Génération des données d'emballage
-         */
-//        $this->buildArrayEmballage();
     }
 
     /**
@@ -211,12 +204,12 @@ class FtaModel extends AbstractModel {
         $this->modelFtaEtat = $modelFtaEtat;
     }
 
-    public function getModelFtaCategorie() {
-        return $this->modelFtaCategorie;
+    function getModelFtaWorkflow() {
+        return $this->modelFtaWorkflow;
     }
 
-    private function setModelFtaCategorie(FtaCategorieModel $modelFtaCategorie) {
-        $this->modelFtaCategorie = $modelFtaCategorie;
+    function setModelFtaWorkflow(FtaWorkflowModel $modelFtaWorkflow) {
+        $this->modelFtaWorkflow = $modelFtaWorkflow;
     }
 
     function getDonneeEmballageUVC() {
@@ -271,7 +264,7 @@ class FtaModel extends AbstractModel {
                         . ", " . FtaProcessusCycleModel::FIELDNAME_DELAI . " "
                         . "FROM " . FtaProcessusCycleModel::TABLENAME . ", " . FtaProcessusModel::TABLENAME . " "
                         . "WHERE " . FtaProcessusCycleModel::FIELDNAME_FTA_ETAT . "=" . $sqlDataEtatAbreviationValue . " "
-                        . "AND " . FtaCategorieModel::KEYNAME . "=" . $sqlDataIdFtaCategorieValue . " "
+                        . "AND " . FtaWorkflowModel::KEYNAME . "=" . $sqlDataIdFtaCategorieValue . " "
                         . "AND " . FtaProcessusCycleModel::FIELDNAME_PROCESSUS_INIT . "=" . FtaProcessusModel::KEYNAME . " "
                         . "ORDER BY " . FtaProcessusCycleModel::FIELDNAME_PROCESSUS_INIT
         );

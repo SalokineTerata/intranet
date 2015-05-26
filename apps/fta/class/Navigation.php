@@ -16,6 +16,7 @@ class Navigation {
     protected static $id_fta_chapitre_encours;
     protected static $synthese_action;
     protected static $id_fta_processus;
+    protected static $id_fta_workflow;
 
     public static function getHtmlNavigationBar() {
         return self::$html_navigation_bar;
@@ -27,7 +28,9 @@ class Navigation {
         self::$id_fta_chapitre_encours = $id_fta_chapitre_encours;
         self::$synthese_action = $synthese_action;
         self::$comeback = $comeback;
-
+        $ftaModel = new FtaModel(self::$id_fta);
+        self::$id_fta_workflow = $ftaModel->getDataField(FtaModel::FIELDNAME_WORKFLOW)->getFieldValue();
+        
         self::$html_navigation_bar = self::buildNavigationBar();
     }
 
@@ -52,7 +55,7 @@ class Navigation {
 
         foreach ($arrayFtaEtatAndFta as $rowsFtaEtatAndFta) {
             //Récupération des informations préalables
-            $rowsFtaEtatAndFta[FtaModel::KEYNAME] = self::$id_fta;
+//            $rowsFtaEtatAndFta[FtaModel::KEYNAME] = self::$id_fta;
             //Nom de l'assistante de projet responsable:
             $array = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
                             "SELECT " . UserModel::FIELDNAME_PRENOM . "," . UserModel::FIELDNAME_NOM
@@ -123,8 +126,8 @@ class Navigation {
                             . " WHERE " . FtaProcessusCycleModel::TABLENAME . "." . FtaProcessusCycleModel::FIELDNAME_PROCESSUS_INIT
                             . "=" . FtaProcessusModel::TABLENAME . "." . FtaProcessusModel::KEYNAME
                             . " AND " . FtaProcessusCycleModel::FIELDNAME_FTA_ETAT . "='I'"
-                            . " AND " . FtaProcessusCycleModel::FIELDNAME_CATEGORIE
-                            . "='" . $modelFta->getDataField(FtaModel::FIELDNAME_CATEGORIE_FTA)->getFieldValue() . "' "
+                            . " AND " . FtaProcessusCycleModel::FIELDNAME_WORKFLOW
+                            . "='" . self::$id_fta_workflow . "' "
             );
 
             //Balayage de tous les processus
@@ -149,6 +152,7 @@ class Navigation {
             $req = "SELECT DISTINCT " . FtaProcessusCycleModel::FIELDNAME_PROCESSUS_NEXT
                     . " FROM " . FtaProcessusCycleModel::TABLENAME
                     . "," . FtaProcessusModel::TABLENAME
+                    . "," . FtaWorkflowModel::TABLENAME
                     . "," . IntranetActionsModel::TABLENAME
                     . "," . IntranetDroitsAccesModel::TABLENAME
                     . "," . IntranetModulesModel::TABLENAME
@@ -161,23 +165,33 @@ class Navigation {
             //Suppression des processus déjà validé
             $req .= self::DeleteValidProcess($t_processus_visible);
 
-            //Vérification des droits d'accès de l'utilisateur en cours
+            //Vérification des droits d'accès de l'utilisateur en cours par Workflow
             $req .=") "
+//                    . " AND " . FtaProcessusCycleModel::TABLENAME . "." . FtaProcessusCycleModel::FIELDNAME_PROCESSUS_NEXT
+//                    . "=" . FtaProcessusModel::TABLENAME . "." . FtaProcessusModel::KEYNAME        //Jointure
+//                    . " AND " . FtaProcessusModel::TABLENAME . "." . FtaProcessusModel::FIELDNAME_ID_INTRANET_ACTIONS
+//                    . "=" . IntranetActionsModel::TABLENAME . "." . IntranetActionsModel::KEYNAME          //Jointure
+//                    . " AND " . IntranetActionsModel::TABLENAME . "." . IntranetActionsModel::KEYNAME
+//                    . "=" . IntranetDroitsAccesModel::TABLENAME . "." . IntranetDroitsAccesModel::FIELDNAME_ID_INTRANET_ACTIONS  //Jointure
+//                    . " AND " . IntranetDroitsAccesModel::TABLENAME . "." . IntranetDroitsAccesModel::FIELDNAME_ID_INTRANET_MODULES
+//                    . "=" . IntranetModulesModel::TABLENAME . "." . IntranetModulesModel::KEYNAME  //Jointure
                     . " AND " . FtaProcessusCycleModel::TABLENAME . "." . FtaProcessusCycleModel::FIELDNAME_PROCESSUS_NEXT
                     . "=" . FtaProcessusModel::TABLENAME . "." . FtaProcessusModel::KEYNAME        //Jointure
-                    . " AND " . FtaProcessusModel::TABLENAME . "." . FtaProcessusModel::FIELDNAME_ID_INTRANET_ACTIONS
+                    . " AND " . FtaProcessusCycleModel::TABLENAME . "." . FtaProcessusCycleModel::FIELDNAME_WORKFLOW
+                    . "=" .  self::$id_fta_workflow       //Jointure
+                    . " AND " . FtaWorkflowModel::TABLENAME . "." . FtaWorkflowModel::FIELDNAME_ID_INTRANET_ACTIONS
                     . "=" . IntranetActionsModel::TABLENAME . "." . IntranetActionsModel::KEYNAME          //Jointure
                     . " AND " . IntranetActionsModel::TABLENAME . "." . IntranetActionsModel::KEYNAME
                     . "=" . IntranetDroitsAccesModel::TABLENAME . "." . IntranetDroitsAccesModel::FIELDNAME_ID_INTRANET_ACTIONS  //Jointure
                     . " AND " . IntranetDroitsAccesModel::TABLENAME . "." . IntranetDroitsAccesModel::FIELDNAME_ID_INTRANET_MODULES
                     . "=" . IntranetModulesModel::TABLENAME . "." . IntranetModulesModel::KEYNAME  //Jointure
-                   // . " AND " . FtaModel::TABLENAME . "." . FtaModel::KEYNAME
+                    // . " AND " . FtaModel::TABLENAME . "." . FtaModel::KEYNAME
                     //. "=" . FtaSuiviProjetModel::TABLENAME . "." . FtaSuiviProjetModel::FIELDNAME_ID_FTA  //Jointure
                     //. " AND " . FtaChapitreModel::TABLENAME . "." . FtaChapitreModel::KEYNAME
                     //. "=" . FtaSuiviProjetModel::TABLENAME . "." . FtaSuiviProjetModel::FIELDNAME_ID_FTA_CHAPITRE  //Jointure
-                   // . " AND " . FtaChapitreModel::TABLENAME . "." . FtaChapitreModel::FIELDNAME_ID_PROCESSUS
-                   // . "=" . FtaProcessusCycleModel::TABLENAME . "." . FtaProcessusCycleModel::FIELDNAME_PROCESSUS_INIT  //Jointure
-                   // . " AND " . FtaSuiviProjetModel::FIELDNAME_SIGNATURE_VALIDATION_SUIVI_PROJET . "<>0" //chapitre validé
+                    // . " AND " . FtaChapitreModel::TABLENAME . "." . FtaChapitreModel::FIELDNAME_ID_PROCESSUS
+                    // . "=" . FtaProcessusCycleModel::TABLENAME . "." . FtaProcessusCycleModel::FIELDNAME_PROCESSUS_INIT  //Jointure
+                    // . " AND " . FtaSuiviProjetModel::FIELDNAME_SIGNATURE_VALIDATION_SUIVI_PROJET . "<>0" //chapitre validé
                     . " AND " . IntranetDroitsAccesModel::FIELDNAME_ID_USER . "=" . $id_user //Utilisateur actuellement connecté
                     . " AND " . IntranetModulesModel::FIELDNAME_NOM_INTRANET_MODULES . "='" . FtaModel::TABLENAME
                     . "' AND " . IntranetDroitsAccesModel::FIELDNAME_NIVEAU_INTRANET_DROITS_ACCES . "=1"  //L'utilisateur est propriétaire
@@ -260,6 +274,7 @@ class Navigation {
                             . "." . FtaProcessusCycleModel::FIELDNAME_PROCESSUS_NEXT
                             . " WHERE " . FtaProcessusCycleModel::TABLENAME
                             . "." . FtaProcessusCycleModel::FIELDNAME_PROCESSUS_NEXT . " IS NULL"
+                            . " AND " . FtaProcessusCycleModel::FIELDNAME_WORKFLOW . "=" . self::$id_fta_workflow
             );
 
             foreach ($resultAddProces as $rowsAddProcess) {

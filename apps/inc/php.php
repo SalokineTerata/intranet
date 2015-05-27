@@ -67,6 +67,8 @@ require_once("../lib/class/model/AnnexeEmballageModel.php");
 require_once("../lib/class/model/AnnexeEmballageGroupeModel.php");
 require_once("../lib/class/model/AnnexeEmballageGroupeTypeModel.php");
 require_once("../lib/class/model/UserModel.php");
+require_once("../lib/class/model/FtaActionRoleModel.php");
+require_once("../lib/class/model/FtaActionSiteModel.php");
 require_once("../lib/class/model/FtaConditionnementModel.php");
 require_once("../lib/class/model/FtaComposantModel.php");
 require_once("../lib/class/model/FtaProcessusCycleModel.php");

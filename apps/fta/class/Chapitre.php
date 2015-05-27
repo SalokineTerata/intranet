@@ -71,7 +71,7 @@ class Chapitre {
     protected static $html_chapitre_dictionnaire_de_donnees;
     protected static $html_chapitre_emballage;
     protected static $html_chapitre_emballage_colis;
-    protected static $html_chapitre_emballage_complementaire;
+    protected static $html_chapitre_emballage_complementaires;
     protected static $html_chapitre_emballage_primaire;
     protected static $html_chapitre_etiquette;
     protected static $html_chapitre_etiquette_article;
@@ -160,8 +160,8 @@ class Chapitre {
         self::$id_fta_chapitre = $id_fta_chapitre;
         self::$ftaModel = new FtaModel(self::$id_fta);
         self::$ftaChapitreModel = new FtaChapitreModel(self::$id_fta_chapitre);
-        self::$ftaWorkflowModel = new FtaWorkflowModel(self::$id_fta_workflow);
         self::$id_fta_workflow = self::$ftaModel->getDataField(FtaModel::FIELDNAME_WORKFLOW)->getFieldValue();
+        self::$ftaWorkflowModel = new FtaWorkflowModel(self::$id_fta_workflow);
         self::$synthese_action = $synthese_action;
 
         self::$objectFta = new ObjectFta(self::$id_fta);
@@ -169,11 +169,12 @@ class Chapitre {
 
         self::$id_fta_workflow_structure = FtaWorkflowStructureModel::getIdFtaWorkflowStructureByIdFtaAndIdChapitre(self::$id_fta, self::$id_fta_chapitre);
         self::$ftaWorkflowStructureModel = new FtaWorkflowStructureModel(self::$id_fta_workflow_structure);
-
         self::$id_fta_processus = self::$ftaWorkflowStructureModel->getDataField(FtaWorkflowStructureModel::FIELDNAME_ID_FTA_PROCESSUS)->getFieldValue();
-
-        self::$id_intranet_actions = self::$ftaWorkflowModel->getDataField(FtaWorkflowModel::FIELDNAME_ID_INTRANET_ACTIONS)->getFieldValue();
+        //self::$id_intranet_actions = self::$ftaWorkflowModel->getDataField(FtaWorkflowModel::FIELDNAME_ID_INTRANET_ACTIONS)->getFieldValue();
+        self::$id_intranet_actions = IntranetActionsModel::getIdIntranetActionsFromIdParentAction(
+                self::$ftaWorkflowModel->getDataField(FtaWorkflowModel::FIELDNAME_ID_INTRANET_ACTIONS)->getFieldValue());
         self::$moduleIntranetActionsModel = new IntranetActionsModel(self::$id_intranet_actions);
+
         self::$is_owner = self::buildIsOwner();
         self::$is_editable = self::buildIsEditable();
         self::$is_correctable = self::buildIsCorrectable();
@@ -373,7 +374,7 @@ class Chapitre {
                 $data_field = self::$objectFta->getFieldDescription(
                 ObjectFta::TABLE_FTA_NAME, "id_fta_categorie"
                 ), $content_label_field = self::$objectFta->getFieldDescription(
-                ObjectFta::TABLE_CATEGORIE_NAME, "nom_fta_categorie"
+                ObjectFta::TABLE_WORKFLOW_NAME, "nom_fta_categorie"
                 ), $default_value = 1, $is_editable, $warning_update = ${"diff_" . $table_name}[$field_name]
         );
         $bloc.=$htmlObject->getHtmlResultSubForm();
@@ -2282,7 +2283,7 @@ class Chapitre {
 
         //Recherche du droit d'accès correspondant
         if (
-                $_SESSION["fta_" . self::$moduleIntranetActionsModel->getDataField("nom_intranet_actions")->getFieldValue()]
+                $_SESSION["fta_" . self::$moduleIntranetActionsModel->getDataField(IntranetActionsModel::FIELDNAME_NOM_INTRANET_ACTIONS)->getFieldValue()]
         ) {
             $return = true;
         } else {

@@ -37,8 +37,8 @@ class ObjectFta {
 
     const TABLE_CREATEUR_NAME = "salaries";
     const ID_CREATEUR_NAME = "id_user";
-    const TABLE_CATEGORIE_NAME = "fta_categorie";
-    const ID_CATEGORIE_NAME = "id_fta_categorie";
+    const TABLE_WORKFLOW_NAME = "fta_workflow";
+    const ID_WORKFLOW_NAME = "id_fta_workflow";
     const TABLE_ETAT_NAME = "fta_etat";
     const ID_ETAT_NAME = "id_fta_etat";
     const TABLE_SUIVI_PROJET_NAME = "fta_suivi_projet";
@@ -70,8 +70,8 @@ class ObjectFta {
             $this->records[self::TABLE_CREATEUR_NAME] = new DatabaseRecord(
                     self::TABLE_CREATEUR_NAME, $this->records[self::TABLE_FTA_NAME]->getFieldValue("createur_fta")
             );
-            $this->records[self::TABLE_CATEGORIE_NAME] = new DatabaseRecord(
-                    self::TABLE_CATEGORIE_NAME, $this->records[self::TABLE_FTA_NAME]->getFieldValue(self::ID_CATEGORIE_NAME)
+            $this->records[self::TABLE_WORKFLOW_NAME] = new DatabaseRecord(
+                    self::TABLE_WORKFLOW_NAME, $this->records[self::TABLE_FTA_NAME]->getFieldValue(self::ID_WORKFLOW_NAME)
             );
             $this->records[self::TABLE_ETAT_NAME] = new DatabaseRecord(
                     self::TABLE_ETAT_NAME, $this->records[self::TABLE_FTA_NAME]->getFieldValue(self::ID_ETAT_NAME)

@@ -59,7 +59,7 @@ class FtaWorkflowStructureModel extends AbstractModel {
 //        $this->setModelFtaWorkflow(
 //                new FtaWorkflowModel($this->getDataField(self::FIELDNAME_ID_FTA_WORKFLOW)->getFieldValue()
 //                , DatabaseRecord::VALUE_DONT_CREATE_RECORD_IN_DATABASE_IF_KEY_DOESNT_EXIST)
-//        );
+//        );s
     }
     
     static public function getIdFtaWorkflowStructureByIdFtaAndIdChapitre($paramIdFta, $paramIdChapitre) {

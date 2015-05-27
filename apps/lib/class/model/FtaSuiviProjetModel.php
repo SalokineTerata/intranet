@@ -84,7 +84,7 @@ class FtaSuiviProjetModel extends AbstractModel {
         $this->modelFtaChapitre = $modelFtaChapitre;
     }
 
-    static public function getNotificationSuiviProjet($paramIdFta, $paramIdChapitre) {
+    static public function getListeUsersAndNotificationSuiviProjet($paramIdFta, $paramIdChapitre) {
 
         /*
           Cette fonction notifie les processus en fonction de l'état d'avancement du suivi du projet.

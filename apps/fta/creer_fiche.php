@@ -72,7 +72,7 @@ $listCategorie = new HtmlListSelect(
                         $field_name = "id_fta_categorie"
                 ),
                 $content_label_field = new DatabaseDescriptionField(
-                        $field_table = ObjectFta::TABLE_CATEGORIE_NAME,
+                        $field_table = ObjectFta::TABLE_WORKFLOW_NAME,
                         $field_name = "nom_fta_categorie"
                 ),
                 $default_value = 1,

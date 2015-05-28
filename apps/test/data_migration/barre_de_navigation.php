@@ -104,7 +104,7 @@ function afficher_navigation($id_fta, $id_fta_chapitre_encours, $synthese_action
         } else {
             //La table des processus est vide
             $titre = "Erreur de configuration du module FTA";
-            $message = "Cette FTA n'a pas de cycle \"Initialisation\" défini pour la catégorie " . $objectFta->getFieldValue(ObjectFta::TABLE_CATEGORIE_NAME, "nom_fta_categorie") . " <i>(Voir la table fta_processus_cycle)</i> ";
+            $message = "Cette FTA n'a pas de cycle \"Initialisation\" défini pour la catégorie " . $objectFta->getFieldValue(ObjectFta::TABLE_WORKFLOW_NAME, "nom_fta_categorie") . " <i>(Voir la table fta_processus_cycle)</i> ";
             afficher_message($titre, $message, $redirection);
         }//Fin de suivi de projet
         //Recherche des processus en cours

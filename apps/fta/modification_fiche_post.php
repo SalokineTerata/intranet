@@ -85,13 +85,7 @@ switch ($action) {
 
     case 'valider':
 
-        //Définition des variables locales  ***********************************************
-        //$id_fta = Lib::getParameterFromRequest("id_fta");
-        //$objectFta = new ObjectFta($paramIdFta);        
-        //$recordChapitre = new DatabaseRecord(
-        //        $table_name = "fta_chapitre", $key_value = $paramIdFtaChapitre);
-        //$objectFta = ObjectFta::restoreSession($id_fta);
-        //$objectFta->updatePropertiesFromHttpRequest();
+
         $modelFta = new FtaModel($paramIdFta);
         $modelFta->saveToDatabase();
 
@@ -103,26 +97,15 @@ switch ($action) {
         $modelFtaSuiviProjet = new FtaSuiviProjetModel($idFtaSuiviProjet);
         $modeChapitre = new FtaChapitreModel($paramIdFtaChapitre);
 
-//        $modeFtaProcessusDelai = new FtaProcessusDelaiModel();
         $modelFtaSuiviProjet->getDataField(FtaSuiviProjetModel::FIELDNAME_SIGNATURE_VALIDATION_SUIVI_PROJET)->setFieldValue($paramSignatureValidationSuiviProjet);
 
-        //$date_echeance_fta = $objectFta->getFieldValue(ObjectFta::TABLE_FTA_NAME, "date_echeance_fta");
         $date_echeance_fta = $modelFta->getDataField(FtaModel::FIELDNAME_DATE_ECHEANCE_FTA)->getFieldValue();
 
-        //$abreviation_fta_etat = $objectFta->getFieldValue(ObjectFta::TABLE_ETAT_NAME, "abreviation_fta_etat");
         $abreviation_fta_etat = $modelFta->getModelFtaEtat()->getDataField(FtaEtatModel::FIELDNAME_ABREVIATION)->getFieldValue();
-        //$id_fta_chapitre_encours = $objectFta->getFieldValue(ObjectFta::TABLE_SUIVI_PROJET_NAME, "id_fta_chapitre");
-        //$signature_validation_suivi_projet = $objectFta->getFieldValue(ObjectFta::TABLE_SUIVI_PROJET_NAME, "signature_validation_suivi_projet");
-        //$id_fta_chapitre = $id_fta_chapitre_encours;
-//        $recordChapitre = new DatabaseRecord("fta_chapitre", $id_fta_chapitre_encours);
-        // $id_fta_processus_encours = $modeFtaProcessusDelai->getDataField("id_fta_processus")->getFieldValue();
-        // $id_fta_processus_encours = $recordChapitre->getFieldValue("id_fta_processus");
-        // identité jobtiens 4 alors que je devrais avoir 0
+
         $id_fta_processus_encours = $modeChapitre->getDataField(FtaChapitreModel::FIELDNAME_ID_PROCESSUS)->getFieldValue();
 
         $nom_fta_chapitre_encours = $modeChapitre->getDataField(FtaChapitreModel::FIELDNAME_NOM_CHAPITRE)->getFieldValue();
-        //$nom_fta_chapitre_encours = $recordChapitre->getFieldValue(FtaChapitreModel::FIELDNAME_NOM_CHAPITRE);
-//        $nom_fta_chapitre_encours = $recordChapitre->getFieldValue("nom_fta_chapitre");
         /**
          * Calcul des éléments de palettisation (tout est issu de cette fonction)
          * $palettisation = calcul_palettisation_fta($id_fta);
@@ -293,9 +276,8 @@ switch ($action) {
           }
 
          */
-        //Gestion des délais (Attention, uniquement sur le chapitre identité)
-        //echo $nom_fta_chapitre_encours;
-        //echo $proprietaire;
+        
+//Gestion des délais (Attention, uniquement sur le chapitre identité)
         if ($nom_fta_chapitre_encours == "identite") {
             // //Si oui, dans ce cas, Récupération de la liste des processus affectés
             $arrayFtaProcessusAndCycle = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
@@ -531,7 +513,7 @@ switch ($action) {
             //Notification de l'état d'Avancement de la FTA
             //afficher_message("Information de l'état d'avancement du Projet", "Les intervenants ont été informer du nouvel état d'avancement.", "");
             //$liste_user = notification_suivi_projet($paramIdFta, $paramIdFtaChapitre);
-            $liste_user = FtaSuiviProjetModel::getNotificationSuiviProjet($paramIdFta, $paramIdFtaChapitre);
+            $liste_user = FtaSuiviProjetModel::getListeUsersAndNotificationSuiviProjet($paramIdFta, $paramIdFtaChapitre);
 
             if ($liste_user) {
                 $noredirection = 1;

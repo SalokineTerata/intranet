@@ -95,12 +95,28 @@ class FtaSuiviProjetModel extends AbstractModel {
         $modelFtaSuiviProjet = new FtaSuiviProjetModel($idFtaSuiviProjet, $paramIdChapitre);
         $modelFta = new FtaModel($paramIdFta, $paramIdChapitre);
 
+        $id_fta_workflow = $modelFta->getDataField(FtaModel::FIELDNAME_WORKFLOW)->getFieldValue();
+        $ftaWorkflowModel = new FtaWorkflowModel($id_fta_workflow);
+        $id_parent_intranet_actions = $ftaWorkflowModel->getDataField(FtaWorkflowModel::FIELDNAME_ID_INTRANET_ACTIONS)->getFieldValue();
+        IntranetActionsModel::getIdIntranetActionsFromIdParentAction($id_parent_intranet_actions);
         //Récupération des Processus
         $arrayProcessus = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
-                        "SELECT " . FtaProcessusModel::KEYNAME . ", " . FtaProcessusModel::FIELDNAME_ID_INTRANET_ACTIONS
+                        "SELECT DISTINCT " . FtaProcessusModel::TABLENAME . "." . FtaProcessusModel::KEYNAME . ", " . FtaWorkflowModel::FIELDNAME_ID_INTRANET_ACTIONS
                         . ", " . FtaProcessusModel::FIELDNAME_MULTISITE_FTA_PROCESSUS . ", " . FtaProcessusModel::FIELDNAME_INFO_CHEF_PROJET
                         . ", " . FtaProcessusModel::FIELDNAME_NOM
-                        . " FROM " . FtaProcessusModel::TABLENAME);
+                        . " FROM " . FtaProcessusModel::TABLENAME . "," . FtaWorkflowStructureModel::TABLENAME . "," . FtaWorkflowModel::TABLENAME
+                        . " WHERE " . FtaWorkflowStructureModel::TABLENAME . "." . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_WORKFLOW
+                        . "=" . FtaWorkflowModel::TABLENAME . "." . FtaWorkflowModel::KEYNAME
+                        . " AND " . FtaWorkflowStructureModel::TABLENAME . "." . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_PROCESSUS
+                        . "=" . FtaProcessusModel::TABLENAME . "." . FtaProcessusModel::KEYNAME
+                        . " AND " . FtaWorkflowStructureModel::TABLENAME . "." . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_WORKFLOW
+                        . "=" . $id_fta_workflow
+        );
+//        $arrayProcessus = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
+//                        "SELECT " . FtaProcessusModel::KEYNAME . ", " . FtaProcessusModel::FIELDNAME_ID_INTRANET_ACTIONS
+//                        . ", " . FtaProcessusModel::FIELDNAME_MULTISITE_FTA_PROCESSUS . ", " . FtaProcessusModel::FIELDNAME_INFO_CHEF_PROJET
+//                        . ", " . FtaProcessusModel::FIELDNAME_NOM
+//                        . " FROM " . FtaProcessusModel::TABLENAME);
 
         foreach ($arrayProcessus as $rowsProcessus) {
 
@@ -108,7 +124,7 @@ class FtaSuiviProjetModel extends AbstractModel {
             $arrayIntranetActionProcessus = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
                             "SELECT " . IntranetActionsModel::FIELDNAME_NOM_INTRANET_ACTIONS
                             . " FROM " . IntranetActionsModel::TABLENAME
-                            . " WHERE " . IntranetActionsModel::KEYNAME . "='" . $rowsProcessus[FtaProcessusModel::FIELDNAME_ID_INTRANET_ACTIONS] . "' "
+                            . " WHERE " . IntranetActionsModel::KEYNAME . "='" . $rowsProcessus[FtaActionRoleModel::FIELDNAME_ID_INTRANET_ACTIONS] . "' "
             );
             if ($arrayIntranetActionProcessus) {
                 foreach ($arrayIntranetActionProcessus as $rowsIntranetActionProcessus) {
@@ -132,12 +148,14 @@ class FtaSuiviProjetModel extends AbstractModel {
                 $arraySuiviProjetChapitreProcessus = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
                                 "SELECT " . FtaSuiviProjetModel::FIELDNAME_NOTIFICATION_FTA_SUIVI_PROJET
                                 . " FROM " . FtaSuiviProjetModel::TABLENAME . ", " . FtaChapitreModel::TABLENAME
-                                . ", " . FtaProcessusModel::TABLENAME
+                                . ", " . FtaProcessusModel::TABLENAME . ", " . FtaWorkflowStructureModel::TABLENAME
                                 . " WHERE (" . FtaSuiviProjetModel::TABLENAME . "." . FtaSuiviProjetModel::FIELDNAME_ID_FTA_CHAPITRE
                                 . "=" . FtaChapitreModel::TABLENAME . "." . FtaChapitreModel::KEYNAME          //jointure
                                 . " AND " . FtaProcessusModel::TABLENAME . "." . FtaProcessusModel::KEYNAME
-                                . " = " . FtaChapitreModel::TABLENAME . "." . FtaChapitreModel::FIELDNAME_ID_PROCESSUS //jointure
-                                . ") AND " . FtaChapitreModel::TABLENAME . "." . FtaChapitreModel::FIELDNAME_ID_PROCESSUS
+                                . " = " . FtaWorkflowStructureModel::TABLENAME . "." . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_PROCESSUS //jointure
+                                . " AND " . FtaChapitreModel::TABLENAME . "." . FtaChapitreModel::KEYNAME
+                                . " = " . FtaWorkflowStructureModel::TABLENAME . "." . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_CHAPITRE //jointure
+                                . ") AND " . FtaWorkflowStructureModel::TABLENAME . "." . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_PROCESSUS
                                 . "=" . $rowsProcessus[FtaProcessusModel::KEYNAME] . " "
                                 . "AND " . FtaSuiviProjetModel::TABLENAME . "." . FtaSuiviProjetModel::FIELDNAME_ID_FTA
                                 . "=" . $paramIdFta . " "
@@ -201,18 +219,19 @@ class FtaSuiviProjetModel extends AbstractModel {
                                                 . ", " . UserModel::TABLENAME . "." . UserModel::FIELDNAME_LOGIN . ", " . UserModel::TABLENAME . "." . UserModel::FIELDNAME_NOM
                                                 . ", " . UserModel::TABLENAME . "." . UserModel::FIELDNAME_PRENOM . ", " . FtaProcessusModel::TABLENAME . "." . FtaProcessusModel::KEYNAME
                                                 . " FROM " . UserModel::TABLENAME . "," . IntranetActionsModel::TABLENAME
-                                                . ", " . IntranetModulesModel::TABLENAME . "," . IntranetDroitsAccesModel::TABLENAME . ", " . FtaProcessusModel::TABLENAME
+                                                . ", " . IntranetModulesModel::TABLENAME . "," . IntranetDroitsAccesModel::TABLENAME
+                                                . ", " . FtaProcessusModel::TABLENAME . ", " . FtaActionRoleModel::TABLENAME
                                                 . " WHERE ( " . UserModel::TABLENAME . "." . UserModel::KEYNAME
                                                 . "=" . IntranetDroitsAccesModel::TABLENAME . "." . IntranetDroitsAccesModel::FIELDNAME_ID_USER                                   //Liaison
                                                 . " AND " . UserModel::FIELDNAME_ACTIF . "= 'oui' "                                                                      //maj 2007-08-13 sm                                            . "AND `intranet_droits_acces`.`id_intranet_modules` = `intranet_modules`.`id_intranet_modules` "        //Liaison
                                                 . " AND " . IntranetActionsModel::TABLENAME . "." . IntranetActionsModel::KEYNAME
                                                 . "=" . IntranetDroitsAccesModel::TABLENAME . "." . IntranetDroitsAccesModel::FIELDNAME_ID_INTRANET_ACTIONS        //Liaison
                                                 . " AND " . IntranetActionsModel::TABLENAME . "." . IntranetActionsModel::KEYNAME
-                                                . "=" . FtaProcessusModel::TABLENAME . "." . FtaProcessusModel::FIELDNAME_ID_INTRANET_ACTIONS . ") "              //Liaison
+                                                . "=" . FtaActionRoleModel::TABLENAME . "." . FtaActionRoleModel::FIELDNAME_ID_INTRANET_ACTIONS . ") "              //Liaison
                                                 . " AND ( ( " . IntranetDroitsAccesModel::TABLENAME . "." . IntranetDroitsAccesModel::FIELDNAME_NIVEAU_INTRANET_DROITS_ACCES . " <> 0 "                                 //Obtention du droit d'accès
                                                 . " AND " . FtaProcessusModel::TABLENAME . "." . FtaProcessusModel::KEYNAME . " = " . $rowsProcessus[FtaProcessusModel::KEYNAME]                  //Processus en cours
                                                 . " AND " . FtaProcessusModel::TABLENAME . "." . FtaProcessusModel::FIELDNAME_MULTISITE_FTA_PROCESSUS . " = 0 "                                 //Processus Monosite
-                                                . " AND " . IntranetModulesModel::TABLENAME . "." . IntranetModulesModel::FIELDNAME_NOM_INTRANET_MODULES . "` = 'fta' ) )"
+                                                . " AND " . IntranetModulesModel::TABLENAME . "." . IntranetModulesModel::FIELDNAME_NOM_INTRANET_MODULES . " = 'fta' ) )"
                                                 . " AND " . UserModel::TABLENAME . "." . UserModel::KEYNAME . "<>'" . $modelFta->getModelCreateur()->getDataField(UserModel::KEYNAME)->getFieldValue() . "'"
                                                 . $where
                                 );
@@ -251,13 +270,14 @@ class FtaSuiviProjetModel extends AbstractModel {
                                                 . " FROM " . UserModel::TABLENAME . "," . IntranetActionsModel::TABLENAME
                                                 . ", " . IntranetModulesModel::TABLENAME . "," . IntranetDroitsAccesModel::TABLENAME
                                                 . ", " . FtaProcessusModel::TABLENAME . ", " . GeoModel::TABLENAME
+                                                . ", " . FtaActionRoleModel::TABLENAME
                                                 . " WHERE ( " . UserModel::TABLENAME . "." . UserModel::KEYNAME
                                                 . "=" . IntranetDroitsAccesModel::TABLENAME . "." . IntranetDroitsAccesModel::FIELDNAME_ID_USER                                   //Liaison
                                                 . " AND " . UserModel::FIELDNAME_ACTIF . "= 'oui' "                                                                      //maj 2007-08-13 sm                                            . "AND `intranet_droits_acces`.`id_intranet_modules` = `intranet_modules`.`id_intranet_modules` "        //Liaison
                                                 . " AND " . IntranetActionsModel::TABLENAME . "." . IntranetActionsModel::KEYNAME
                                                 . "=" . IntranetDroitsAccesModel::TABLENAME . "." . IntranetDroitsAccesModel::FIELDNAME_ID_INTRANET_ACTIONS             //Liaison
                                                 . " AND " . IntranetActionsModel::TABLENAME . "." . IntranetActionsModel::KEYNAME
-                                                . "=" . FtaProcessusModel::TABLENAME . "." . FtaProcessusModel::FIELDNAME_ID_INTRANET_ACTIONS             //Liaison
+                                                . "=" . IntranetActionsModel::getIdIntranetActionsFromIdParentAction($id_parent_intranet_actions)            //Liaison                                                
                                                 . " AND " . GeoModel::TABLENAME . "." . GeoModel::KEYNAME . "=" . UserModel::TABLENAME . "." . UserModel::FIELDNAME_LIEU_GEO . ") "                                                         //Liaison
                                                 . " AND ( ( " . IntranetDroitsAccesModel::TABLENAME . "." . IntranetDroitsAccesModel::FIELDNAME_NIVEAU_INTRANET_DROITS_ACCES . " <> 0 "                                 //Obtention du droit d'accès
                                                 . " AND " . FtaProcessusModel::TABLENAME . "." . FtaProcessusModel::KEYNAME . " = " . $rowsProcessus[FtaProcessusModel::KEYNAME]                  //Processus en cours
@@ -339,13 +359,13 @@ class FtaSuiviProjetModel extends AbstractModel {
             }//Fin de la vérification des processus validés
         }//Fin du parcours des processsu
         //Message d'Information
-        if ($liste_user) {
-            $liste_user_html = implode("<br>", $liste_user);
-            $titre = "Information communiquée par Mail";
-            $message = "Les personnes suivantes viennent d'être informées par mail de la validation de tous vos chapitres."
-                    . "<br><br>" . $liste_user_html;
-            afficher_message($titre, $message, $redirection);
-        }
+//        if ($liste_user) {
+//            $liste_user_html = implode("<br>", $liste_user);
+//            $titre = "Information communiquée par Mail";
+//            $message = "Les personnes suivantes viennent d'être informées par mail de la validation de tous vos chapitres."
+//                    . "<br><br>" . $liste_user_html;
+//            afficher_message($titre, $message, $redirection);
+//        }
 
 
         //Retour de la fonction

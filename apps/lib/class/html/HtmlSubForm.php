@@ -122,10 +122,10 @@ class HtmlSubForm extends AbstractHtmlList {
              * Création du lien de détail
              */
             $hrefDetail = GlobalConfig::DISPATCHER_SCRIPTNAME."?";
-            $hrefDetailToHtml = "<a href=\"" . $hrefDetail . "\" title=\"Détail\">"
-                    . self::DEFAULT_HTML_IMAGE_NEXT . " Détail"
-                    . "</a>"
-            ;
+//            $hrefDetailToHtml = "<a href=\"" . $hrefDetail . "\" title=\"Détail\">"
+//                    . self::DEFAULT_HTML_IMAGE_NEXT . " Détail"
+//                    . "</a>"
+//            ;
 
             /**
              * Récupération de la liste des champs à représenter

@@ -10,7 +10,7 @@ $password_connect = "8ale!ne"; //mot de passe de la base MySQL
 
 $connect = new PDO('mysql:host=dev-intranet.agis.fr;dbname=intranet_v3_0_dev;charset=utf8', 'root', '8ale!ne') or die("connexion impossible");
 
-$table_req = 'classification_arborescence_article,classification_arborescence_article_categorie_contenu,classification_fta';                                      //nom de la table contenant l'association "Père" / "Fils"
+$table_req = 'classification_arborescence_article,classification_arborescence_article_categorie_contenu';                                      //nom de la table contenant l'association "Père" / "Fils"
 $champ_valeur = 'nom_classification_arborescence_article_categorie_contenu';                            //nom du champ contenant la valeur à afficher (sans le "underscore" et le nom de la table)
 $champ_id_fils = 'classification_arborescence_article.id_classification_arborescence_article';         //nom du champ fils contenant l'id (sans le "underscore" et le nom de la table)
 $champ_id_pere = 'ascendant_classification_arborescence_article_categorie_contenu';  //nom du champ père contenant l'id (sans le "underscore" et le nom de la table)
@@ -18,10 +18,9 @@ $id_racine = 1;
 
 
 
-$requete_principale = " SELECT " . $champ_id_fils . "," . $champ_id_pere . "," . $champ_fta . "," . $champ_valeur . " "
+$requete_principale = " SELECT " . $champ_id_fils . "," . $champ_id_pere . "," . $champ_valeur . " "
         . " FROM " . $table_req . ""
         . " WHERE classification_arborescence_article.id_classification_arborescence_article_categorie_contenu=classification_arborescence_article_categorie_contenu.id_classification_arborescence_article_categorie_contenu "
-        . "AND classification_arborescence_article.id_classification_arborescence_article=classification_fta.id_classification_arborescence_article "
         ;
 
 $resultat = $connect->query($requete_principale);

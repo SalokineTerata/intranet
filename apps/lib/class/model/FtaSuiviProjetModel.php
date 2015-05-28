@@ -84,6 +84,15 @@ class FtaSuiviProjetModel extends AbstractModel {
         $this->modelFtaChapitre = $modelFtaChapitre;
     }
 
+    /**
+     *  Cette fonction notifie les processus en fonction de l'état d'avancement du suivi du projet.
+     *  Cet état d'avancement est géré par la table fta_suivi_projet
+     *  Elle ne fait que de l'information, et ne modifie pas l'état de la fiche mais uniquement son suivi
+     *
+     * @param type $paramIdFta
+     * @param type $paramIdChapitre
+     * @return string/*
+     */
     static public function getNotificationSuiviProjet($paramIdFta, $paramIdChapitre) {
 
         /*

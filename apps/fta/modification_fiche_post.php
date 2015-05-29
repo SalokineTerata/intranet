@@ -276,7 +276,6 @@ switch ($action) {
           }
 
          */
-        
 //Gestion des délais (Attention, uniquement sur le chapitre identité)
         if ($nom_fta_chapitre_encours == "identite") {
             // //Si oui, dans ce cas, Récupération de la liste des processus affectés
@@ -455,14 +454,7 @@ switch ($action) {
                             . " AND " . FtaEtatModel::TABLENAME . "." . FtaEtatModel::KEYNAME . "=" . FtaModel::TABLENAME . "." . FtaModel::FIELDNAME_ID_FTA_ETAT
                             . "AND " . FtaEtatModel::FIELDNAME_ABREVIATION . "<>'R' "
             );
-//            $req = "SELECT `fta`.`id_fta` FROM `fta`, `access_arti2`, fta_etat "
-//                    . "WHERE `fta`.`id_access_arti2` = `access_arti2`.`id_access_arti2` "
-//                    . "AND `fta`.`id_fta` = `access_arti2`.`id_fta`  "
-//                    . "AND  `access_arti2`.`code_article_ldc` = '" . $objectFta->getFieldValue(ObjectFta::TABLE_ARTI_NAME, "code_article_ldc") . "' "
-//                    . "AND `fta`.`id_dossier_fta` <> '" . $objectFta->getFieldValue(ObjectFta::TABLE_FTA_NAME, "id_dossier_fta") . "' "
-//                    . "AND fta_etat.id_fta_etat=fta.id_fta_etat "
-//                    . "AND abreviation_fta_etat<>'R' "
-//            ;
+
 
             if ($arrayCoherenceLDC) {//Si le code est déjà affecté à une autre FTA, on informe, et on suppime l'affectation sur la FTA en cours
                 foreach ($arrayCoherenceLDC as $rowsCoherenceLDC) {
@@ -495,8 +487,6 @@ switch ($action) {
                 }
                 afficher_message($titre, $message, $redirection);
 
-//                $req = "UPDATE fta SET id_article_agrologic = NULL WHERE id_fta='" . $id_fta . "'  ";
-//                DatabaseOperation::query($req);
                 $modelFta->getDataField(FtaModel::FIELDNAME_ARTICLE_AGROLOGIC)->setFieldValue(null);
                 $erreur = 1;
             }
@@ -506,24 +496,17 @@ switch ($action) {
             //Mise à jour de la validation de l'échéance
             $paramIdFta;
             $id_fta_processus = $id_fta_processus_encours;
-            //echo $id_fta_processus."<br>";
-            //$id_fta_processus=5;
+
             fta_processus_validation_delai($paramIdFta, $id_fta_processus);
 
             //Notification de l'état d'Avancement de la FTA
             //afficher_message("Information de l'état d'avancement du Projet", "Les intervenants ont été informer du nouvel état d'avancement.", "");
-            //$liste_user = notification_suivi_projet($paramIdFta, $paramIdFtaChapitre);
             $liste_user = FtaSuiviProjetModel::getListeUsersAndNotificationSuiviProjet($paramIdFta, $paramIdFtaChapitre);
 
             if ($liste_user) {
                 $noredirection = 1;
             }
-
-            //Redirection
-            //header ("Location: modification_fiche.php?id_fta=$id_fta&id_fta_chapitre_encours=$id_fta_chapitre_encours&synthese_action=$synthese_action");
         } else {
-//            $req = "UPDATE fta_suivi_projet SET signature_validation_suivi_projet=0 WHERE id_fta_suivi_projet=$id_fta_suivi_projet";
-//            DatabaseOperation::query($req);
             $modelFtaSuiviProjet->getDataField(FtaSuiviProjetModel::FIELDNAME_SIGNATURE_VALIDATION_SUIVI_PROJET)->setFieldValue(0);
         }
 

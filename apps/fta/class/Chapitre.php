@@ -48,6 +48,12 @@ class Chapitre {
 
     /**
      * 
+     * @var FtaSuiviProjetModel 
+     */
+    protected static $ftaSuiviProjetModel;
+
+    /**
+     * 
      * @var FtaWorkflowModel 
      */
     protected static $ftaWorkflowModel;
@@ -164,7 +170,7 @@ class Chapitre {
         self::$ftaWorkflowModel = new FtaWorkflowModel(self::$id_fta_workflow);
         self::$synthese_action = $synthese_action;
 
-        self::$objectFta = new ObjectFta(self::$id_fta);
+        self::$objectFta = new ObjectFta(self::$id_fta); //cela genère un id fta_suivie projet de trop
         self::$objectFta->loadCurrentSuiviProjectByChapter(self::$id_fta_chapitre);
 
         self::$id_fta_workflow_structure = FtaWorkflowStructureModel::getIdFtaWorkflowStructureByIdFtaAndIdChapitre(self::$id_fta, self::$id_fta_chapitre);
@@ -172,7 +178,7 @@ class Chapitre {
         self::$id_fta_processus = self::$ftaWorkflowStructureModel->getDataField(FtaWorkflowStructureModel::FIELDNAME_ID_FTA_PROCESSUS)->getFieldValue();
         //self::$id_intranet_actions = self::$ftaWorkflowModel->getDataField(FtaWorkflowModel::FIELDNAME_ID_INTRANET_ACTIONS)->getFieldValue();
         self::$id_intranet_actions = IntranetActionsModel::getIdIntranetActionsFromIdParentAction(
-                self::$ftaWorkflowModel->getDataField(FtaWorkflowModel::FIELDNAME_ID_INTRANET_ACTIONS)->getFieldValue());
+                        self::$ftaWorkflowModel->getDataField(FtaWorkflowModel::FIELDNAME_ID_INTRANET_ACTIONS)->getFieldValue());
         self::$moduleIntranetActionsModel = new IntranetActionsModel(self::$id_intranet_actions);
 
         self::$is_owner = self::buildIsOwner();
@@ -2126,6 +2132,9 @@ class Chapitre {
         $ftaView->setIsEditable($isEditable);
         $ftaView->setFtaChapitreModelById(self::$id_fta_chapitre);
         $id_fta_chapitre = self::$id_fta_chapitre;
+//        if (self::$id_fta_processus == NULL) {
+//            self::$id_fta_processus = 0;
+//        }
         $id_fta_processus = self::$id_fta_processus;
         $is_editable = self::$is_editable;
         $taux_validation_processus = self::$taux_validation_processus;
@@ -2259,11 +2268,13 @@ class Chapitre {
     }
 
     protected static function buildIsEditable() {
-
+        $idFtaSuiviProjet = FtaSuiviProjetModel::getIdFtaSuiviProjetByIdFtaAndIdChapitre(self::$id_fta, self::$id_fta_chapitre);
+        self::$ftaSuiviProjetModel = new FtaSuiviProjetModel($idFtaSuiviProjet);
         //Recherche du droit d'accès correspondant
         if (
                 self::$is_owner == true and (
-                (self::$objectFta->getFieldValue(ObjectFta::TABLE_SUIVI_PROJET_NAME, "signature_validation_suivi_projet") == 0 ) or ( self::$objectFta->getFieldValue(ObjectFta::TABLE_SUIVI_PROJET_NAME, "signature_validation_suivi_projet") == null)
+                (self::$ftaSuiviProjetModel->getDataField(FtaSuiviProjetModel::FIELDNAME_SIGNATURE_VALIDATION_SUIVI_PROJET)->getFieldValue() == 0 )
+                or ( self::$ftaSuiviProjetModel->getDataField(FtaSuiviProjetModel::FIELDNAME_SIGNATURE_VALIDATION_SUIVI_PROJET)->getFieldValue() == null)
                 )
         ) {
             $is_editable = true;
@@ -2325,11 +2336,11 @@ class Chapitre {
 
         $return = false;
 //Recherche du droit d'accès correspondant
-        $req = "SELECT `fta_chapitre`.`id_fta_chapitre`, `fta_processus_cycle`.`id_etat_fta_processus_cycle` "
-                . "FROM `fta_processus`, `fta_chapitre`, `fta_processus_cycle` "
-                . "WHERE ( `fta_processus`.`id_fta_processus` = `fta_chapitre`.`id_fta_processus` "
+        $req = "SELECT `fta_workflow_structure`.`id_fta_chapitre`, `fta_processus_cycle`.`id_etat_fta_processus_cycle` "
+                . "FROM `fta_processus`, `fta_workflow_structure`, `fta_processus_cycle` "
+                . "WHERE ( `fta_processus`.`id_fta_processus` = `fta_workflow_structure`.`id_fta_processus` "
                 . "AND `fta_processus_cycle`.`id_init_fta_processus` = `fta_processus`.`id_fta_processus` ) "
-                . "AND ( ( `fta_chapitre`.`id_fta_chapitre` ='" . self::$id_fta_chapitre . "' "
+                . "AND ( ( `fta_workflow_structure`.`id_fta_chapitre` ='" . self::$id_fta_chapitre . "' "
                 . "AND `fta_processus_cycle`.`id_etat_fta_processus_cycle` = '" . self::$objectFta->getFieldValue(ObjectFta::TABLE_ETAT_NAME, "abreviation_fta_etat") . "' ) ) "
         ;
         $cycle_en_cours = mysql_num_rows(DatabaseOperation::query($req));

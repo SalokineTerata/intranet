@@ -2879,18 +2879,31 @@ function fta_processus_validation($id_fta, $id_fta_processus) {
 //echo "FTA: ".$id_fta."<br>";
 //Corps de la fonction
     //Pour le processus en cours, détermination de nombre de chapitre qu'il contient(total)
-    $req = "SELECT * FROM fta_chapitre, fta_processus "
-            . "WHERE fta_chapitre.id_fta_processus=fta_processus.id_fta_processus "  //Jointure
-            . "AND fta_processus.id_fta_processus=" . $id_fta_processus . " "
+//    $req = "SELECT * FROM fta_chapitre, fta_processus "
+//            . "WHERE fta_chapitre.id_fta_processus=fta_processus.id_fta_processus "  //Jointure
+//            . "AND fta_processus.id_fta_processus=" . $id_fta_processus . " "
+//    ;
+    $req = "SELECT * FROM fta_workflow_structure, fta_processus "
+            . "WHERE fta_workflow_structure.id_fta_processus=fta_processus.id_fta_processus "  //Jointure
+            . " AND fta_workflow_structure.id_fta_role=fta_processus.id_fta_role "
+            . " AND fta_processus.id_fta_processus=" . $id_fta_processus . " "
     ;
     $result_temp = DatabaseOperation::query($req);
     $nombre_total_chapitre_processus = mysql_num_rows($result_temp);
 
     //Pour chaque processus, détermination de nombre de chapitre qu'il contient(validé)
-    $req = "SELECT * FROM fta, fta_suivi_projet, fta_chapitre, fta_processus "
+//    $req = "SELECT * FROM fta, fta_suivi_projet, fta_chapitre, fta_processus "
+//            . "WHERE fta.id_fta=fta_suivi_projet.id_fta "                          //Jointure
+//            . "AND fta_suivi_projet.id_fta_chapitre=fta_chapitre.id_fta_chapitre " //Jointure
+//            . "AND fta_chapitre.id_fta_processus=fta_processus.id_fta_processus "  //Jointure
+//            . "AND fta.id_fta=" . $id_fta . " "                                        //FTA en cours
+//            . "AND fta_suivi_projet.signature_validation_suivi_projet<>0 "         //Chapitre validé
+//            . "AND fta_processus.id_fta_processus=" . $id_fta_processus . " "         //Processus en cours de balayage
+//    ;
+    $req = "SELECT * FROM fta, fta_suivi_projet, fta_workflow_structure, fta_processus "
             . "WHERE fta.id_fta=fta_suivi_projet.id_fta "                          //Jointure
-            . "AND fta_suivi_projet.id_fta_chapitre=fta_chapitre.id_fta_chapitre " //Jointure
-            . "AND fta_chapitre.id_fta_processus=fta_processus.id_fta_processus "  //Jointure
+            . "AND fta_suivi_projet.id_fta_chapitre=fta_workflow_structure.id_fta_chapitre " //Jointure
+            . "AND fta_workflow_structure.id_fta_processus=fta_processus.id_fta_processus "  //Jointure
             . "AND fta.id_fta=" . $id_fta . " "                                        //FTA en cours
             . "AND fta_suivi_projet.signature_validation_suivi_projet<>0 "         //Chapitre validé
             . "AND fta_processus.id_fta_processus=" . $id_fta_processus . " "         //Processus en cours de balayage

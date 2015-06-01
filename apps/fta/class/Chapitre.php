@@ -173,12 +173,13 @@ class Chapitre {
         self::$objectFta = new ObjectFta(self::$id_fta); //cela genère un id fta_suivie projet de trop
         self::$objectFta->loadCurrentSuiviProjectByChapter(self::$id_fta_chapitre);
 
-        self::$id_fta_workflow_structure = FtaWorkflowStructureModel::getIdFtaWorkflowStructureByIdFtaAndIdChapitre(self::$id_fta, self::$id_fta_chapitre);
+        self::$id_fta_workflow_structure = FtaWorkflowStructureModel::getIdFtaWorkflowStructureByIdFtaAndIdChapitre(
+                        self::$id_fta, self::$id_fta_chapitre);
         self::$ftaWorkflowStructureModel = new FtaWorkflowStructureModel(self::$id_fta_workflow_structure);
         self::$id_fta_processus = self::$ftaWorkflowStructureModel->getDataField(FtaWorkflowStructureModel::FIELDNAME_ID_FTA_PROCESSUS)->getFieldValue();
-        //self::$id_intranet_actions = self::$ftaWorkflowModel->getDataField(FtaWorkflowModel::FIELDNAME_ID_INTRANET_ACTIONS)->getFieldValue();
         self::$id_intranet_actions = IntranetActionsModel::getIdIntranetActionsFromIdParentAction(
-                        self::$ftaWorkflowModel->getDataField(FtaWorkflowModel::FIELDNAME_ID_INTRANET_ACTIONS)->getFieldValue());
+                        self::$ftaWorkflowModel->getDataField(FtaWorkflowModel::FIELDNAME_ID_INTRANET_ACTIONS)->getFieldValue()
+                        , self::$id_fta_chapitre, self::$id_fta_workflow);
         self::$moduleIntranetActionsModel = new IntranetActionsModel(self::$id_intranet_actions);
 
         self::$is_owner = self::buildIsOwner();

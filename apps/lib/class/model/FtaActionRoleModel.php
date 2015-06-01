@@ -12,21 +12,24 @@ class FtaActionRoleModel extends AbstractModel {
     const KEYNAME = "id_fta_action_role";
     const FIELDNAME_ID_FTA_ROLE = "id_fta_role";
     const FIELDNAME_ID_INTRANET_ACTIONS = "id_intranet_actions";
+    const FIELDNAME_ID_FTA_WROKFLOW = "id_fta_workflow";
 
     public function __construct($paramId = NULL, $paramIsCreateRecordsetInDatabaseIfKeyDoesntExist = AbstractModel::DEFAULT_IS_CREATE_RECORDSET_IN_DATABASE_IF_KEY_DOESNT_EXIST) {
         parent::__construct($paramId, $paramIsCreateRecordsetInDatabaseIfKeyDoesntExist);
     }
 
     public static function getIdFtaActionRoleFromIdIntranetAtions($paramIdIntranetActions) {
-        foreach ($paramIdIntranetActions as $rowsIdIntranetActions){
-        $arrayIdFtaActionRole = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
-                        "SELECT id_fta_action_role "
-                        . " FROM `fta_action_role` "
-                        . " WHERE `id_intranet_actions`=$rowsIdIntranetActions "
-        );
+        foreach ($paramIdIntranetActions as $rowsIdIntranetActions) {
+            $arrayIdFtaActionRole = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
+                            "SELECT id_fta_action_role "
+                            . " FROM `fta_action_role` "
+                            . " WHERE `id_intranet_actions`=$rowsIdIntranetActions "
+            );
         }
-        foreach ($arrayIdFtaActionRole as $value) {
-            return $value["id_fta_action_role"];
+        if ($arrayIdFtaActionRole) {
+            foreach ($arrayIdFtaActionRole as $value) {
+                return $value["id_fta_action_role"];
+            }
         }
     }
 

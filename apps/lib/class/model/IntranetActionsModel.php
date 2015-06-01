@@ -20,30 +20,92 @@ class IntranetActionsModel extends AbstractModel {
         parent::__construct($paramId, $paramIsCreateRecordsetInDatabaseIfKeyDoesntExist);
     }
 
-    public static function getIdIntranetActionsFromIdParentAction($paramIdParent) {
+    /*
+     * Nous obtenons les id intranet actions selon son identifiant parents
+     *  dont l'ulisateur est le propiétaire .
+     */
+
+    public static function getIdIntranetActionsFromIdParentAction($paramIdParent, $paramChapitre, $paramFtaWorkflow) {
         $globalconfig = new GlobalConfig();
         $id_user = $globalconfig->getAuthenticatedUser()->getKeyValue();
 
         $arrayIdActions = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
-                        "SELECT intranet_actions.id_intranet_actions "
-                        . " FROM `intranet_actions`, fta_workflow "
-                        . " WHERE `parent_intranet_actions`=fta_workflow.id_intranet_actions "
-                        . " AND tag_intranet_actions =  'role' "
-                        . " AND fta_workflow.id_intranet_actions=$paramIdParent "
+                        "SELECT " . IntranetActionsModel::TABLENAME . "." . IntranetActionsModel::KEYNAME
+                        . " FROM " . IntranetActionsModel::TABLENAME . "," . FtaWorkflowModel::TABLENAME
+                        . " WHERE " . IntranetActionsModel::FIELDNAME_PARENT_INTRANET_ACTIONS
+                        . "=" . FtaWorkflowModel::TABLENAME . "." . FtaWorkflowModel::FIELDNAME_ID_INTRANET_ACTIONS
+                        . " AND " . IntranetActionsModel::FIELDNAME_TAG_INTRANET_ACTIONS . "=  'role' "
+                        . " AND " . FtaWorkflowModel::TABLENAME . "." . FtaWorkflowModel::FIELDNAME_ID_INTRANET_ACTIONS . "=" . $paramIdParent
+        );
+        if ($arrayIdActions) {
+            foreach ($arrayIdActions as $rowsIdActions) {
+
+                $arrayIdAction = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
+                                "SELECT " . FtaActionRoleModel::TABLENAME . "." . FtaActionRoleModel::FIELDNAME_ID_INTRANET_ACTIONS
+                                . " FROM " . IntranetActionsModel::TABLENAME . ", " . FtaWorkflowStructureModel::TABLENAME
+                                . ", " . IntranetDroitsAccesModel::TABLENAME . "," . FtaActionRoleModel::TABLENAME
+                                . " WHERE " . FtaWorkflowStructureModel::TABLENAME
+                                . "." . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_CHAPITRE . "=" . $paramChapitre
+                                . " AND " . FtaWorkflowStructureModel::TABLENAME
+                                . "." . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_WORKFLOW . "=" . $paramFtaWorkflow
+                                . " AND " . FtaWorkflowStructureModel::TABLENAME  . "." . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_ROLE
+                                . "=" . FtaActionRoleModel::TABLENAME . "." . FtaActionRoleModel::FIELDNAME_ID_FTA_ROLE
+                                . " AND " . FtaWorkflowStructureModel::TABLENAME  . "." . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_WORKFLOW
+                                . "=" . FtaActionRoleModel::TABLENAME . "." . FtaActionRoleModel::FIELDNAME_ID_FTA_WROKFLOW
+                                . " AND " . IntranetActionsModel::TABLENAME . "." . IntranetActionsModel::KEYNAME
+                                . "=" . IntranetDroitsAccesModel::TABLENAME . "." . IntranetDroitsAccesModel::FIELDNAME_ID_INTRANET_ACTIONS
+                                . " AND " . IntranetDroitsAccesModel::TABLENAME . "." . IntranetDroitsAccesModel::FIELDNAME_ID_INTRANET_ACTIONS
+                                . "=" . $rowsIdActions[IntranetActionsModel::KEYNAME]
+                                . " AND " . IntranetDroitsAccesModel::FIELDNAME_ID_USER
+                                . "=" . $id_user
+                                . " AND " . IntranetDroitsAccesModel::TABLENAME . "." . IntranetDroitsAccesModel::FIELDNAME_NIVEAU_INTRANET_DROITS_ACCES
+                                . "=1"
+                );
+                if ($arrayIdAction) {
+                    foreach ($arrayIdAction as $idAction) {
+                        
+                        
+                        return $idAction[IntranetActionsModel::KEYNAME];
+                    }
+                }
+            }
+        }
+    }
+
+    /*
+     * Nous obtenons les id intranet actions selon son identifiant parents.
+     */
+
+    public static function getIdIntranetActionsFromIdParentActionNavigation($paramIdParent) {
+        $globalconfig = new GlobalConfig();
+        $id_user = $globalconfig->getAuthenticatedUser()->getKeyValue();
+
+        $arrayIdActions = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
+                        "SELECT " . IntranetActionsModel::TABLENAME . "." . IntranetActionsModel::KEYNAME
+                        . " FROM " . IntranetActionsModel::TABLENAME . "," . FtaWorkflowModel::TABLENAME
+                        . " WHERE " . IntranetActionsModel::FIELDNAME_PARENT_INTRANET_ACTIONS
+                        . "=" . FtaWorkflowModel::TABLENAME . "." . FtaWorkflowModel::FIELDNAME_ID_INTRANET_ACTIONS
+                        . " AND " . IntranetActionsModel::FIELDNAME_TAG_INTRANET_ACTIONS . "=  'role' "
+                        . " AND " . FtaWorkflowModel::TABLENAME . "." . FtaWorkflowModel::FIELDNAME_ID_INTRANET_ACTIONS . "=" . $paramIdParent
         );
         if ($arrayIdActions) {
             foreach ($arrayIdActions as $rowsIdActions) {
                 $arrayIdAction = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
-                                "SELECT intranet_actions.id_intranet_actions "
-                                . "FROM intranet_actions, intranet_droits_acces"
-                                . " WHERE intranet_droits_acces.id_intranet_actions = intranet_actions.id_intranet_actions "
-                                . " AND intranet_droits_acces.id_intranet_actions = " . $rowsIdActions["id_intranet_actions"] 
-                                . " AND niveau_intranet_droits_acces='1' "
-                                . " AND id_user=" . $id_user
+                                "SELECT " . IntranetActionsModel::TABLENAME . "." . IntranetActionsModel::KEYNAME
+                                . " FROM " . IntranetActionsModel::TABLENAME . ", " . IntranetDroitsAccesModel::TABLENAME
+                                . " WHERE " . IntranetActionsModel::TABLENAME . "." . IntranetActionsModel::KEYNAME
+                                . "=" . IntranetDroitsAccesModel::TABLENAME . "." . IntranetDroitsAccesModel::FIELDNAME_ID_INTRANET_ACTIONS
+                                . " AND " . IntranetDroitsAccesModel::TABLENAME . "." . IntranetDroitsAccesModel::FIELDNAME_ID_INTRANET_ACTIONS
+                                . "=" . $rowsIdActions[IntranetActionsModel::KEYNAME]
+                                . " AND " . IntranetDroitsAccesModel::FIELDNAME_ID_USER
+                                . "=" . $id_user
+                                . " AND " . IntranetDroitsAccesModel::TABLENAME . "." . IntranetDroitsAccesModel::FIELDNAME_NIVEAU_INTRANET_DROITS_ACCES
+                                . "=1"
                 );
+
                 if ($arrayIdAction) {
                     foreach ($arrayIdAction as $idAction) {
-                        return $idAction["id_intranet_actions"];
+                        return $idAction[IntranetActionsModel::KEYNAME];
                     }
                 }
             }

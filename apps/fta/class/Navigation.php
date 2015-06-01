@@ -111,26 +111,29 @@ class Navigation {
 
     protected static function CheckSyntheseAction() {
 
-        $t_processus_encours = array();
-        $t_processus_role_visible = array();
-        $t_processus_visible = array();
-        $t_processus_lecture = array();
+        $ProcessusEncoursVisible = array();
+        $ProcessusPrecedentVisible = array();
+        $ProcessusValide = array();
+        $ProcessusEnLecture = array();
         $globalconfig = new GlobalConfig();
         $modelFta = new FtaModel(self::$id_fta);
         $id_user = $globalconfig->getAuthenticatedUser()->getKeyValue();
         $id_fta_workflow = $modelFta->getDataField(FtaModel::FIELDNAME_WORKFLOW)->getFieldValue();
         $ftaWorkflowModel = new FtaWorkflowModel($id_fta_workflow);
         $id_parent_intranet_actions = $ftaWorkflowModel->getDataField(FtaWorkflowModel::FIELDNAME_ID_INTRANET_ACTIONS)->getFieldValue();
-        $id_intranet_actions[] = IntranetActionsModel::getIdIntranetActionsFromIdParentAction($id_parent_intranet_actions);
+        $id_intranet_actions[] = IntranetActionsModel::getIdIntranetActionsFromIdParentActionNavigation($id_parent_intranet_actions);
         $id_actions_role = FtaActionRoleModel::getIdFtaActionRoleFromIdIntranetAtions($id_intranet_actions);
         $ftaActionRoleModel = new FtaActionRoleModel($id_actions_role);
 
         //Si une action est donnée, alors construction du menu des chapitres
         if (self::$synthese_action) {
-            //Etat d'avancement de la FTA et Recherche des processus validés (et donc en lecture-seule)
-            // //Vérification que l'utilisateur à les droits d'accès sur les processus visibles 
             /*
-             * 
+             * Etat d'avancement de la FTA et Recherche des processus validés (et donc en lecture-seule)             * 
+             */
+
+
+            /*
+             * Nous récuperons les processus en cours.
              */
             $req = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
                             "SELECT DISTINCT " . FtaProcessusModel::TABLENAME
@@ -166,9 +169,8 @@ class Navigation {
                             . " AND " . IntranetModulesModel::FIELDNAME_NOM_INTRANET_MODULES . "='" . FtaModel::TABLENAME
                             . "' AND " . IntranetDroitsAccesModel::FIELDNAME_NIVEAU_INTRANET_DROITS_ACCES . "=1"  //L'utilisateur est propriétaire
             );
-            //foreach ($req as $rowsProcessusEncours) {
-            // $idFtaEncours = $rowsProcessusEncours[FtaProcessusModel::KEYNAME];
-            $arrayProcessusVisible = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
+
+            $arrayProcessusValide = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
                             "SELECT DISTINCT " . FtaProcessusModel::TABLENAME
                             . ".* FROM " . FtaProcessusModel::TABLENAME
                             . ", " . FtaProcessusCycleModel::TABLENAME
@@ -177,77 +179,43 @@ class Navigation {
                             . " AND " . FtaProcessusCycleModel::FIELDNAME_FTA_ETAT . "='I'"
                             . " AND " . FtaProcessusCycleModel::FIELDNAME_WORKFLOW
                             . "='" . self::$id_fta_workflow . "' "
-//                                . " AND " . FtaProcessusCycleModel::FIELDNAME_PROCESSUS_NEXT
-//                                . "='" . $idFtaEncours . "' "
-//                );
-//                            "SELECT DISTINCT " . FtaProcessusModel::TABLENAME
-//                            . ".* FROM " . FtaProcessusModel::TABLENAME
-//                            . ", " . FtaProcessusCycleModel::TABLENAME
-//                            . " WHERE " . FtaProcessusCycleModel::TABLENAME . "." . FtaProcessusCycleModel::FIELDNAME_PROCESSUS_INIT
-//                            . "=" . FtaProcessusModel::TABLENAME . "." . FtaProcessusModel::KEYNAME
-//                            . " AND " . FtaProcessusCycleModel::FIELDNAME_FTA_ETAT . "='I'"
-//                            . " AND " . FtaProcessusCycleModel::FIELDNAME_WORKFLOW
-//                            . "='" . self::$id_fta_workflow . "' "
             );
-            if ($req AND $arrayProcessusVisible) {
-                //Balayage de tous les processus
-                foreach ($arrayProcessusVisible as $rowsProcessusVisible) {
-                    self::$id_fta_processus = $rowsProcessusVisible[FtaProcessusModel::KEYNAME];
-                    $taux_validation_processus = fta_processus_validation(self::$id_fta, self::$id_fta_processus);
-                    if ($taux_validation_processus == 1) {
-                        //foreach ($req as $rowsProcessusEncours) {
-                        //$idFtaEncours = $rowsProcessusEncours[FtaProcessusModel::KEYNAME];
-                        /*
-                         * Nous verifions si tous les processus précedents du chapitre que l'utilisateur à les droits d'accès
-                         * sont validé et donc visible -- erreur pour le cas de codification les proceesus sontvisible dès qu'il sont valide
-                         */
-//                        foreach ($req as $rowsProcessusEncours) {
-//                            $idFtaEncours = $rowsProcessusEncours[FtaProcessusModel::KEYNAME];
-//                            $arrayDonnees = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
-//                                            "SELECT id_init_fta_processus "
-//                                            . "FROM fta_processus_cycle "
-//                                            . "WHERE id_next_fta_processus = " . $idFtaEncours
-//                            );
-//                        }
-//                            $idDonnees = $donnees[0];
-//                            $idDonnees = $idDonnees[FtaProcessusCycleModel::FIELDNAME_PROCESSUS_INIT];
-//                            $idDonnees1 = $donnees[1];
-//                            $idDonnees1 = $idDonnees1[FtaProcessusCycleModel::FIELDNAME_PROCESSUS_INIT];
-//                            $idDonnees2 = $donnees[2];
-//                            $idDonnees2 = $idDonnees2[FtaProcessusCycleModel::FIELDNAME_PROCESSUS_INIT];
-//                            $idDonnees3 = $donnees[3];
-//                            $idDonnees3 = $idDonnees3[FtaProcessusCycleModel::FIELDNAME_PROCESSUS_INIT];
-//                            if ($rowsProcessusVisible[FtaProcessusModel::KEYNAME] == $idDonnees
-//                                    and $rowsProcessusVisible[FtaProcessusModel::KEYNAME] == $idDonnees1
-//                                    and $rowsProcessusVisible[FtaProcessusModel::KEYNAME] == $idDonnees2
-//                                    and $rowsProcessusVisible[FtaProcessusModel::KEYNAME] == $idDonnees3) {
-//                        if ($arrayProcessusVisible[FtaProcessusModel::KEYNAME] == $arrayDonnees[FtaProcessusCycleModel::FIELDNAME_PROCESSUS_INIT]) {
-                        $t_processus_visible[] = $rowsProcessusVisible[FtaProcessusModel::KEYNAME];
-                    }
-                }
-
-
-
+            if ($req AND $arrayProcessusValide) {
                 /*
-                 * Nous récupérons les processus précédent qui sont validé dans le role
+                 * Nous récupérons les processus précédent du processus en cours si ils sont tous validé
                  */
                 foreach ($req as $rows) {
                     self::$id_fta_processus = $rows[FtaProcessusModel::KEYNAME];
-                    $taux_validation_processus = fta_processus_validation(self::$id_fta, self::$id_fta_processus);
+                    /*
+                     * Nous verifions si tous les processus précedents du chapitre que l'utilisateur à les droits d'accès
+                     * sont validé ou non et donc visible ou non
+                     */
+                    $taux_validation_processus = FtaProcessusModel::getFtaProcessusNonValide(self::$id_fta, self::$id_fta_processus);
 
                     //Liste des processus visible(lecture-seule)
-                    if ($taux_validation_processus == 1) {
-                        $t_processus_role_visible[] = $rows[FtaProcessusModel::KEYNAME];
+                    if ($taux_validation_processus == 1 or $taux_validation_processus === NULL) {
+                        $ProcessusPrecedentVisible[] = $rows[FtaProcessusModel::KEYNAME];
                     }
                 }//Fin du balayage
+
+                if ($ProcessusPrecedentVisible) {
+                    /*
+                     * Nous récupérons tous les processus validé pour vérifier plus tard si nous devons les affichers
+                     */
+                    foreach ($arrayProcessusValide as $rowsProcessusValide) {
+                        self::$id_fta_processus = $rowsProcessusValide[FtaProcessusModel::KEYNAME];
+                        $taux_validation_processus = fta_processus_validation(self::$id_fta, self::$id_fta_processus);
+                        if ($taux_validation_processus == 1) {
+
+                            $ProcessusValide[] = $rowsProcessusValide[FtaProcessusModel::KEYNAME];
+                        }
+                    }
+                }
             }
-
-            //Recherche des processus en cours
-            //Balayage des cycles des processus (en excluant les processus déjà validés)
-
-
             /*
-             *  Nous récuperons la liste des processus non valider par workflow  et par role 
+             * Nous récuperons la liste des processus non valider  qui sont en cours
+             * par la vérification des droits d'accès de l'utilisateur en cours par Workflow par role 
+             * et un balayage  des cycles des processus
              */
             $req = "SELECT DISTINCT " . FtaProcessusCycleModel::FIELDNAME_PROCESSUS_NEXT
                     . " FROM " . FtaProcessusCycleModel::TABLENAME
@@ -260,16 +228,7 @@ class Navigation {
                     . "," . FtaActionRoleModel::TABLENAME
                     . "," . FtaRoleModel::TABLENAME
                     . "," . FtaSuiviProjetModel::TABLENAME
-                    . " WHERE 1 AND ( 1 "
-            ;
-
-            //Suppression des processus déjà validé
-            $req .= self::DeleteValidProcess($t_processus_role_visible);
-            $req .= self::DeleteValidProcess($t_processus_visible);
-
-            //Vérification des droits d'accès de l'utilisateur en cours par Workflow par role
-            $req .=") "
-                    . " AND " . FtaProcessusCycleModel::TABLENAME . "." . FtaProcessusCycleModel::FIELDNAME_PROCESSUS_NEXT
+                    . " WHERE " . FtaProcessusCycleModel::TABLENAME . "." . FtaProcessusCycleModel::FIELDNAME_PROCESSUS_NEXT
                     . "=" . FtaProcessusModel::TABLENAME . "." . FtaProcessusModel::KEYNAME        //Jointure
                     . " AND " . FtaProcessusCycleModel::TABLENAME . "." . FtaProcessusCycleModel::FIELDNAME_WORKFLOW
                     . "=" . self::$id_fta_workflow       //Jointure
@@ -301,6 +260,7 @@ class Navigation {
             $result = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray($req);
             if ($result) {
                 foreach ($result as $rows) {
+                    $idFtaProcessusCyle = NULL;
                     //Pour chaque processus, on vérifie que tous ces précédents sont validés
                     $req = "SELECT " . FtaProcessusCycleModel::KEYNAME . " FROM " . FtaProcessusCycleModel::TABLENAME
                             . " WHERE " . FtaProcessusCycleModel::FIELDNAME_PROCESSUS_NEXT
@@ -309,8 +269,7 @@ class Navigation {
                     ;
 
                     //Ajout de la restriction des processus validé
-                    $req .=self::AddValidProcess($t_processus_role_visible);
-                    $req .=self::AddValidProcess($t_processus_visible);
+                    $req .=self::AddValidProcess($ProcessusValide);
 
                     //Recherche dans le cycle correspondant à l'état en cours de la fiche
                     $req_etat = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
@@ -334,14 +293,15 @@ class Navigation {
                     //Finalisation de la requête
                     //Si la requête a un résultat c'est que tous les processus précédents sont validés
                     /*
-                     * Nous récupérons tous les processus que l'utilisateur à besoin pour remplir les champ de son(ses) chapitres
+                     * Nous récupérons tous les processus que l'utilisateur verra en lecture(seule) 
+                     * afin qu'ils puissent remplir les données des champs de leurs chapitres
                      */
                     $arrayIdFtaProcessusCyle = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray($req);
                     if ($arrayIdFtaProcessusCyle) {
                         foreach ($arrayIdFtaProcessusCyle as $rowsIdFtaProcessusCycle) {
                             $idFtaProcessusCyle = $rowsIdFtaProcessusCycle[FtaProcessusCycleModel::KEYNAME];
                             $ftaProcessusCycleModel = new FtaProcessusCycleModel($idFtaProcessusCyle);
-                            $t_processus_lecture[] = $ftaProcessusCycleModel->getDataField(FtaProcessusCycleModel::FIELDNAME_PROCESSUS_INIT)->getFieldValue();
+                            $ProcessusEnLecture[] = $ftaProcessusCycleModel->getDataField(FtaProcessusCycleModel::FIELDNAME_PROCESSUS_INIT)->getFieldValue();
                         }
                     }
                     if ($idFtaProcessusCyle) {
@@ -357,38 +317,18 @@ class Navigation {
                         }
                         if ($multisite_fta_processus) {
                             //Oui, il s'agit d'un Processus répartie sur les sites d'assemblage
-                            $t_processus_encours = self::CheckMultiSite($rows, $t_processus_encours);
+                            $ProcessusEncoursVisible = self::CheckMultiSite($rows, $ProcessusEncoursVisible);
                         } else {
                             //Enregistrement du processus en tant que processus en cours
-                            $t_processus_encours[] = $rows[FtaProcessusCycleModel::FIELDNAME_PROCESSUS_NEXT];
+                            $ProcessusEncoursVisible[] = $rows[FtaProcessusCycleModel::FIELDNAME_PROCESSUS_NEXT];
                         }
                     }
                 }//Fin du balayage des processus non-validés
             }
             //Recherche des processus Publics
             //Création de la liste des processus dans la barre de navigation          
-            $t_liste_processus = array_merge($t_processus_encours, $t_processus_role_visible, $t_processus_lecture);
+            $t_liste_processus = array_merge($ProcessusEncoursVisible, $ProcessusPrecedentVisible, $ProcessusEnLecture);
 
-
-            /*
-             * cette requête de focntionne plus puisqu'elle ne prends pas en compte les workflows
-             */
-//            $resultAddProces = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
-//                            "SELECT " . FtaChapitreModel::TABLENAME . "." . FtaChapitreModel::KEYNAME
-//                            . ", " . FtaChapitreModel::TABLENAME . "." . FtaChapitreModel::FIELDNAME_NOM_USUEL_CHAPITRE
-//                            . ", " . FtaWorkflowStructureModel::TABLENAME . "." . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_PROCESSUS
-//                            . " FROM " . FtaChapitreModel::TABLENAME . " LEFT JOIN " . FtaWorkflowStructureModel::TABLENAME
-//                            . " ON " . FtaWorkflowStructureModel::TABLENAME . "." . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_CHAPITRE
-//                            . "=" . FtaChapitreModel::TABLENAME . "." . FtaChapitreModel::KEYNAME
-//                            . " WHERE " . FtaWorkflowStructureModel::TABLENAME . "." . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_CHAPITRE . " IS NULL"
-//            );
-//            if ($resultAddProces) {
-//                foreach ($resultAddProces as $rowsAddProcess) {
-//                    if ($rowsAddProcess[FtaProcessusModel::KEYNAME] == NULL) {
-//                        $t_liste_processus[] = 0;
-//                    }
-//                }
-//            }
             //Récupération des Chapitres accessible dans le menu de naviguation
             $menu_navigation = self::RecupChapitre($t_liste_processus);
             //Fin du controle de $synthese_action
@@ -409,10 +349,10 @@ class Navigation {
                 . "=" . FtaChapitreModel::TABLENAME . "." . FtaChapitreModel::KEYNAME
                 . " WHERE ( "
                 . FtaWorkflowStructureModel::TABLENAME . "." . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_CHAPITRE . " IS NULL"                          //Chapitre public
-        //. " AND " .  FtaWorkflowStructureModel::TABLENAME . "." . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_WORKFLOW . "=" . self::$id_fta_workflow                          //Chapitre public
         ;
         foreach ($paramT_Liste_Processus as $value) {
-            $reqRecup .= " OR " . FtaWorkflowStructureModel::TABLENAME . "." . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_PROCESSUS . "=" . $value . " ";
+            $reqRecup .= " OR " . FtaWorkflowStructureModel::TABLENAME . "." . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_PROCESSUS
+                    . "=" . $value . " ";
         }
         $reqRecup .=" ) ORDER BY " . FtaChapitreModel::TABLENAME . "." . FtaChapitreModel::KEYNAME;
         $arrayRecup = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray($reqRecup);

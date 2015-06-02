@@ -60,9 +60,6 @@ $show_help = 1;                              //Activer l'aide en ligne Pop-up
  */
 
 
-/**
- * @todo Problème d'initialisation de la valeur par défaut.
- */
 
 //Paramètre d'URL
 $id_fta = Lib::getParameterFromRequest("id_fta");

@@ -38,7 +38,7 @@ require_once '../inc/main.php';
 $action = Lib::getParameterFromRequest("action");
 $new_correction_fta_suivi_projet = Lib::getParameterFromRequest("new_correction_fta_suivi_projet");
 $paramIdFta = Lib::getParameterFromRequest(FtaModel::KEYNAME);
-$paramIdFtaChapitre = Lib::getParameterFromRequest("id_fta_chapitre_encours");
+$paramIdFtaChapitreEncours = Lib::getParameterFromRequest("id_fta_chapitre_encours");
 $temp_colis_activation_codesoft_arti2 = Lib::getParameterFromRequest("temp_colis_activation_codesoft_arti2");
 $temp_composition_activation_codesoft_arti2 = Lib::getParameterFromRequest("temp_composition_activation_codesoft_arti2");
 $conditionnement_expedition = Lib::getParameterFromRequest("conditionnement_expedition");
@@ -63,9 +63,9 @@ switch ($action) {
     case 'correction':
 
         if ($new_correction_fta_suivi_projet) {
-            $id_chapitre = $paramIdFtaChapitre;
+            $paramIdFtaChapitre = $paramIdFtaChapitreEncours;
             $option["correction_fta_suivi_projet"] = $new_correction_fta_suivi_projet;
-            $noredirection = correction_chapitre($paramIdFta, $id_chapitre, $option);
+            $noredirection = Chapitre::BuildCorrectionChapitre($paramIdFta, $paramIdFtaChapitre, $option);
         } else {
             $titre = "Informations manquantes";
             $message = "Vous devez spécifier l'objet de votre correction.";
@@ -93,9 +93,9 @@ switch ($action) {
         /**
          * Enregistrement de la signature
          */
-        $idFtaSuiviProjet = FtaSuiviProjetModel::getIdFtaSuiviProjetByIdFtaAndIdChapitre($paramIdFta, $paramIdFtaChapitre);
+        $idFtaSuiviProjet = FtaSuiviProjetModel::getIdFtaSuiviProjetByIdFtaAndIdChapitre($paramIdFta, $paramIdFtaChapitreEncours);
         $modelFtaSuiviProjet = new FtaSuiviProjetModel($idFtaSuiviProjet);
-        $modeChapitre = new FtaChapitreModel($paramIdFtaChapitre);
+        $modeChapitre = new FtaChapitreModel($paramIdFtaChapitreEncours);
 
         $modelFtaSuiviProjet->getDataField(FtaSuiviProjetModel::FIELDNAME_SIGNATURE_VALIDATION_SUIVI_PROJET)->setFieldValue($paramSignatureValidationSuiviProjet);
 
@@ -398,7 +398,7 @@ switch ($action) {
         } else {
             $operation = "insert";
         }
-        $id_fta_chapitre = $paramIdFtaChapitre;
+        $id_fta_chapitre = $paramIdFtaChapitreEncours;
         if (!$paramSignatureValidationSuiviProjet) {
             $paramSignatureValidationSuiviProjet = 0;
         }
@@ -434,7 +434,7 @@ switch ($action) {
 
 
         //Cohérence des durées de vie (restrictino du message uniquement au niveau du processus Qualité)
-        if ($modelFta->getDataField(FtaModel::FIELDNAME_DUREE_DE_VIE_TECHNIQUE_MAXIMALE)->getFieldValue() < $modelFta->getDataField(FtaModel::FIELDNAME_DUREE_DE_VIE_TECHNIQUE_PRODUCTION)->getFieldValue() and ( $paramIdFtaChapitre == 100)) {
+        if ($modelFta->getDataField(FtaModel::FIELDNAME_DUREE_DE_VIE_TECHNIQUE_MAXIMALE)->getFieldValue() < $modelFta->getDataField(FtaModel::FIELDNAME_DUREE_DE_VIE_TECHNIQUE_PRODUCTION)->getFieldValue() and ( $paramIdFtaChapitreEncours == 100)) {
 
             $titre = "Différences dans les Durées de vie";
             $message = "Votre <b>" . mysql_field_desc(FtaModel::TABLENAME, FtaModel::FIELDNAME_DUREE_DE_VIE_TECHNIQUE_MAXIMALE) . "</b> est inférieure à la <b>" . mysql_field_desc("access_arti2", "Durée_de_vie_technique") . "</b>.<br>"
@@ -501,7 +501,7 @@ switch ($action) {
 
             //Notification de l'état d'Avancement de la FTA
             //afficher_message("Information de l'état d'avancement du Projet", "Les intervenants ont été informer du nouvel état d'avancement.", "");
-            $liste_user = FtaSuiviProjetModel::getListeUsersAndNotificationSuiviProjet($paramIdFta, $paramIdFtaChapitre);
+            $liste_user = FtaSuiviProjetModel::getListeUsersAndNotificationSuiviProjet($paramIdFta, $paramIdFtaChapitreEncours);
 
             if ($liste_user) {
                 $noredirection = 1;
@@ -578,7 +578,7 @@ switch ($action) {
 
 //if(!$erreur and !$noredirection) header ("Location: modification_fiche.php?id_fta=$id_fta&id_fta_chapitre_encours=$id_fta_chapitre_encours&synthese_action=$synthese_action");
 if (!$erreur) {
-    header("Location: modification_fiche.php?id_fta=$paramIdFta&id_fta_chapitre_encours=$paramIdFtaChapitre&synthese_action=$paramSyntheseAction");
+    header("Location: modification_fiche.php?id_fta=$paramIdFta&id_fta_chapitre_encours=$paramIdFtaChapitreEncours&synthese_action=$paramSyntheseAction");
 }
 //include ("./action_bs.php");
 //include ("./action_sm.php");

@@ -21,14 +21,14 @@ class FtaActionRoleModel extends AbstractModel {
     public static function getIdFtaActionRoleFromIdIntranetAtions($paramIdIntranetActions) {
         foreach ($paramIdIntranetActions as $rowsIdIntranetActions) {
             $arrayIdFtaActionRole = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
-                            "SELECT id_fta_action_role "
-                            . " FROM `fta_action_role` "
-                            . " WHERE `id_intranet_actions`=$rowsIdIntranetActions "
+                            "SELECT " . FtaActionRoleModel::KEYNAME
+                            . " FROM  " . FtaActionRoleModel::TABLENAME
+                            . " WHERE " . FtaActionRoleModel::FIELDNAME_ID_INTRANET_ACTIONS . "=" . $rowsIdIntranetActions 
             );
         }
         if ($arrayIdFtaActionRole) {
             foreach ($arrayIdFtaActionRole as $value) {
-                return $value["id_fta_action_role"];
+                return $value[FtaActionRoleModel::KEYNAME];
             }
         }
     }

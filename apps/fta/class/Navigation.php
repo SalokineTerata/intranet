@@ -116,8 +116,8 @@ class Navigation {
         $ProcessusValide = array();
         $ProcessusEnLecture = array();
         $globalconfig = new GlobalConfig();
-        $modelFta = new FtaModel(self::$id_fta);
         $id_user = $globalconfig->getAuthenticatedUser()->getKeyValue();
+        $modelFta = new FtaModel(self::$id_fta);
         $id_fta_workflow = $modelFta->getDataField(FtaModel::FIELDNAME_WORKFLOW)->getFieldValue();
         $ftaWorkflowModel = new FtaWorkflowModel($id_fta_workflow);
         $id_parent_intranet_actions = $ftaWorkflowModel->getDataField(FtaWorkflowModel::FIELDNAME_ID_INTRANET_ACTIONS)->getFieldValue();
@@ -140,7 +140,6 @@ class Navigation {
                             . ".* FROM " . FtaProcessusModel::TABLENAME
                             . ", " . FtaProcessusCycleModel::TABLENAME
                             . "," . FtaWorkflowModel::TABLENAME
-                            . "," . FtaWorkflowStructureModel::TABLENAME
                             . "," . IntranetActionsModel::TABLENAME
                             . "," . IntranetDroitsAccesModel::TABLENAME
                             . "," . IntranetModulesModel::TABLENAME
@@ -419,32 +418,8 @@ class Navigation {
     }
 
 //Fin de la création des chapitres
-//    public static function getProcessusVisibleByCheckingDroitsAcces($paramProcessusVisible) {
-//
-//        $arrayProcessusVisible = . " AND " . FtaProcessusCycleModel::TABLENAME . "." . FtaProcessusCycleModel::FIELDNAME_PROCESSUS_NEXT
-//        . "=" . FtaProcessusModel::TABLENAME . "." . FtaProcessusModel::KEYNAME        //Jointure
-//        . " AND " . FtaProcessusCycleModel::TABLENAME . "." . FtaProcessusCycleModel::FIELDNAME_WORKFLOW
-//        . "=" . self::$id_fta_workflow       //Jointure
-//        . " AND " . FtaProcessusCycleModel::TABLENAME . "." . FtaProcessusCycleModel::FIELDNAME_WORKFLOW
-//        . "=" . FtaWorkflowModel::TABLENAME . "." . FtaWorkflowModel::KEYNAME        //Jointure                            
-//        . " AND " . FtaProcessusModel::TABLENAME . "." . FtaProcessusModel::FIELDNAME_ID_FTA_ROLE
-//        . "=" . FtaRoleModel::TABLENAME . "." . FtaRoleModel::KEYNAME        //Jointure
-//        . " AND " . FtaRoleModel::TABLENAME . "." . FtaRoleModel::KEYNAME
-//        . "=" . FtaActionRoleModel::TABLENAME . "." . FtaActionRoleModel::FIELDNAME_ID_FTA_ROLE
-//        . " AND " . FtaActionRoleModel::TABLENAME . "." . FtaActionRoleModel::FIELDNAME_ID_FTA_ROLE
-//        . "=" . IntranetActionsModel::TABLENAME . "." . IntranetActionsModel::KEYNAME
-//        . " AND " . FtaActionRoleModel::TABLENAME . "." . FtaActionRoleModel::FIELDNAME_ID_FTA_ROLE
-//        . "=" . $ftaActionRoleModel->getDataField(FtaActionRoleModel::FIELDNAME_ID_FTA_ROLE)->getFieldValue()
-//        . " AND " . IntranetActionsModel::TABLENAME . "." . IntranetActionsModel::KEYNAME
-//        . "=" . IntranetDroitsAccesModel::TABLENAME . "." . IntranetDroitsAccesModel::FIELDNAME_ID_INTRANET_ACTIONS  //Jointure
-//        . " AND " . IntranetDroitsAccesModel::TABLENAME . "." . IntranetDroitsAccesModel::FIELDNAME_ID_INTRANET_MODULES
-//        . "=" . IntranetModulesModel::TABLENAME . "." . IntranetModulesModel::KEYNAME  //Jointure
-//        . " AND " . IntranetDroitsAccesModel::FIELDNAME_ID_USER . "=" . $id_user //Utilisateur actuellement connecté
-//        . " AND " . IntranetModulesModel::FIELDNAME_NOM_INTRANET_MODULES . "='" . FtaModel::TABLENAME
-//        . "' AND " . IntranetDroitsAccesModel::FIELDNAME_NIVEAU_INTRANET_DROITS_ACCES . "=1"  //L'utilisateur est propriétaire;
-//
-//        return $paramProcessusVisible;
-//    }
+
+   
     //Suppression des processus déjà validé
     protected static function DeleteValidProcess($paramProcessusVisible) {
         if ($paramProcessusVisible) {

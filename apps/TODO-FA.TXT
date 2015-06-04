@@ -1,8 +1,8 @@
 
 *tp4300008
 
-[] Corriger le isEditable = false pour les différents chapitre 
-[] Terminner le chapitre codification(nomenclature).
+[V] Corriger le isEditable = false pour les différents chapitre 
+[V] Terminner le chapitre codification(nomenclature).
 
 PARTIE 1: Construction des interfaces utilisateurs (v1) --> Pas de sous table pour le moment.
 
@@ -27,8 +27,10 @@ PARTIE 1: Construction des interfaces utilisateurs (v1) --> Pas de sous table po
 [V] Reproduction du menu de v2 en objet.
 [V] Mise en fonction de la validation d'un chapitre.
 [V] Mise en fonction de la gestion de validation d'un chapitre.
-[V] Création d'un workflow exemple: Création des champs de chaque chapitre []
-[V] modifie le model ftaactionRole []
+[V] Création d'un workflow exemple: Création des champs de chaque chapitre [V]
+[V] Implementation des notion workflow et role
+[V] Mise en fonction de la gestion de dévalidation d'un chapitre et des chapitre qui le suivent
+[V] modifie le model ftaactionRole 
 
 [v] Exporter la liste des classifications existantes.
 [V]Création de parametres d'une la classe objet pour les operations du chap Palettisation

@@ -29,6 +29,7 @@ class FtaModel extends AbstractModel {
     const FIELDNAME_CONSEIL_DE_RECHAUFFAGE_DEVELOPPEMENT = "conseil_rechauffage_experimentale_fta";
     const FIELDNAME_CONSEIL_DE_PRESENTATION = "presentation_fta";
     const FIELDNAME_CREATEUR = "createur_fta";
+    const FIELDNAME_DATE_CREATION = "date_creation";
     const FIELDNAME_DATE_DEMANDEUR = "date_demandeur_fta";
     const FIELDNAME_DATE_ECHEANCE_FTA = "date_echeance_fta";
     const FIELDNAME_DATE_PREVISONNELLE_TRANSFERT_INDUSTRIEL = "date_transfert_industriel";

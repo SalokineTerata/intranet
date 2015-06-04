@@ -55,7 +55,7 @@ class FtaChapitreModel extends AbstractModel {
         $this->modelFtaProcessus = $modelFtaProcessus;
     }
 
-    /**********************
+    /*     * ********************
       Correction d'une FTA
      * ******************** */
 
@@ -123,7 +123,15 @@ class FtaChapitreModel extends AbstractModel {
         //Dévalidation des processus suivants
         $return = FtaChapitreModel::BuildDevalidationChapitre($paramIdFta, $idFtaProcessus, $HtmlResult);
         //print_r($return["mail"]);      //Tableau contenant les adresses emails des personnes concernées par la dévalidation
-        $return["processus"]; //Tableau contenant les identifiants des processus dévalidés
+        if (count($return) > 1) {
+            $return["processus"] = array_unique($return["processus"]);   //Tableau contenant les identifiants des processus dévalidés unique     
+        }
+        if (is_string($return["processus"])) {
+            $return["processus"] = array(
+                "processus" => $return["processus"]
+            );
+        }
+
         //Informations
         if ($return) {
             foreach ($return["processus"] as $id_Fta_Processus) {
@@ -171,6 +179,7 @@ class FtaChapitreModel extends AbstractModel {
                 }
             }
         }//Fin du traitement des processus suivants
+
         return 1;
     }
 
@@ -375,6 +384,4 @@ class FtaChapitreModel extends AbstractModel {
         return $htmlResult->getHtmlResult();
     }
 
-    
-    
 }

@@ -25,10 +25,17 @@ require_once '../inc/main.php';
 print_page_begin($disable_full_page, $menu_file);
 
 
+
+/*
+ * Initilisation
+ */
+$globalConfig = new GlobalConfig();
+$id_user = $globalConfig->getAuthenticatedUser()->getKeyValue();
+
 /* * ***********
   Début Code PHP
  * *********** */
-if ($_SESSION["id_user"]) {
+if ($id_user) {
     /*
       Initialisation des variables
      */
@@ -133,13 +140,16 @@ if ($_SESSION["id_user"]) {
     }
 
     //L'utilisateur possède-t-il au moins un processus monosite ?
-    if ($_SESSION["id_user"]) {
+    if ($id_user) {
         $req_multisite = "SELECT `intranet_droits_acces`.`id_user` "
-                . "FROM `intranet_modules`, `intranet_droits_acces`, `intranet_actions`, `fta_processus` "
+                . "FROM `intranet_modules`, `intranet_droits_acces`, `intranet_actions`, `fta_processus`, fta_action_role, fta_workflow_structure "
                 . "WHERE ( `intranet_modules`.`id_intranet_modules` = `intranet_droits_acces`.`id_intranet_modules` "
                 . "AND `intranet_actions`.`id_intranet_actions` = `intranet_droits_acces`.`id_intranet_actions` "
-                . "AND `intranet_actions`.`id_intranet_actions` = `fta_processus`.`id_intranet_actions` ) "
-                . "AND ( ( `intranet_droits_acces`.`id_user` = " . $_SESSION["id_user"] . " "
+                . "AND `fta_workflow_structure`.`id_fta_role` = `fta_processus`.`id_fta_role` "
+                . "AND `fta_workflow_structure`.`id_fta_processus` = `fta_processus`.`id_fta_processus` "
+                . "AND `fta_workflow_structure`.`id_fta_role` = `fta_action_role`.`id_fta_role` "
+                . "AND `intranet_actions`.`id_intranet_actions` = `fta_action_role`.`id_intranet_actions` ) "
+                . "AND ( ( `intranet_droits_acces`.`id_user` = " . $id_user . " "
                 . "AND `fta_processus`.`multisite_fta_processus` = 0 "
                 . "AND `intranet_droits_acces`.`niveau_intranet_droits_acces` > 0 ) )"
         ;

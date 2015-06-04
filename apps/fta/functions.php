@@ -289,7 +289,7 @@ function envoi_mail_detail($id_fta, $liste_diffusion, $commentaire) {
                 . $destinataire
                 . "\n"
         ;
-        $expediteur = $_SESSION["prenom"] . " " . $_SESSION["nom_famille_ses"] . " <" . $_SESSION["mail_user"] . ">";       
+        $expediteur = $_SESSION["prenom"] . " " . $_SESSION["nom_famille_ses"] . " <" . $_SESSION["mail_user"] . ">";
         if ($_SESSION["notification_suivi_projet"]) {
             envoismail($sujetmail, $text, $destinataire, $expediteur, $typeMail);
         }
@@ -1755,6 +1755,11 @@ function visualiser_fiches($id_fta_etat, $choix, $isLimit, $order_common) {
     $javascript = Lib::isDefined("javascript");
 
 //echo $_SESSION["id_fta"]=$id_fta;
+    /*
+     * Initilisation
+     */
+    $globalConfig = new GlobalConfig();
+    $id_user = $globalConfig->getAuthenticatedUser()->getKeyValue();
     $synthese_action = Lib::isDefined("synthese_action");
 
     $id_fta_etat;    //Attention, double signification, si choix = 0 ou -1, alors il s'agit en fait de $id_fta
@@ -1767,11 +1772,11 @@ function visualiser_fiches($id_fta_etat, $choix, $isLimit, $order_common) {
 //$_SESSION["id_fta"]=$id_fta_etat;
 //mysql_table_load("fta_etat");
     $abreviation_fta_etat = $_SESSION["abreviation_fta_etat"];
-     
+
     $modelfta = new FtaModel("4");
-    
-    
-    
+
+
+
     /*
       Sélection de la requête source en fonction du choix de visualisation
       --------------------------------------------------------------------
@@ -1808,7 +1813,7 @@ function visualiser_fiches($id_fta_etat, $choix, $isLimit, $order_common) {
             $where_processus_cycle = "AND ( ";
             $where_processus_OP = "";    //Opérateur SQL
 
-             $where_Site_de_production = "( Site_de_production=$id_site "
+            $where_Site_de_production = "( Site_de_production=$id_site "
                     //. "OR Site_de_production IS NULL "
                     . "OR Site_de_production=0 "
             //. "OR Site_de_production=\"\" "
@@ -1818,12 +1823,14 @@ function visualiser_fiches($id_fta_etat, $choix, $isLimit, $order_common) {
             //$where_Site_de_production_OK=0;
 
 
-            $req = "SELECT id_fta_processus, multisite_fta_processus "
-                    . "FROM `intranet_modules`, `intranet_droits_acces`, `intranet_actions`, `fta_processus` "
+            $req = "SELECT DISTINCT fta_processus.id_fta_processus, multisite_fta_processus "
+                    . "FROM `intranet_modules`, `intranet_droits_acces`, `intranet_actions`, `fta_processus` , fta_action_role, fta_workflow_structure "
                     . "WHERE ( `intranet_modules`.`id_intranet_modules` = `intranet_droits_acces`.`id_intranet_modules` " //Liaison
-                    . "AND `intranet_actions`.`id_intranet_actions` = `intranet_droits_acces`.`id_intranet_actions` "     //Liaison
-                    . "AND `intranet_actions`.`id_intranet_actions` = `fta_processus`.`id_intranet_actions` ) "           //Liaison
-                    . "AND ( ( `intranet_droits_acces`.`id_user` = " . $_SESSION["id_user"] . " "
+                    . "AND `fta_workflow_structure`.`id_fta_role` = `fta_processus`.`id_fta_role` "
+                    . "AND `fta_workflow_structure`.`id_fta_processus` = `fta_processus`.`id_fta_processus` "
+                    . "AND `fta_workflow_structure`.`id_fta_role` = `fta_action_role`.`id_fta_role` "
+                    . "AND `intranet_actions`.`id_intranet_actions` = `fta_action_role`.`id_intranet_actions` ) "       //Liaison
+                    . "AND ( ( `intranet_droits_acces`.`id_user` = " . $id_user . " "
                     . "AND `intranet_droits_acces`.`niveau_intranet_droits_acces` > 0 ))"
             ;
             //echo $req;
@@ -1838,7 +1845,7 @@ function visualiser_fiches($id_fta_etat, $choix, $isLimit, $order_common) {
                     $where_processus_before .= $where_processus_OP_before . " chapitre_precedent.id_fta_processus<>" . $rows["id_fta_processus"] . " ";
                     $where_processus_cycle .= "$where_processus_OP id_next_fta_processus=" . $rows["id_fta_processus"] . " ";
                     $where_processus_OP = "OR";    //Opérateur SQL
-                   
+
                     $isMonoSite = 0;       //Permet de savoir si il y a aumoins un processus mono site
                     //echo $test;
                     //echo "test1: ".$rows["multisite_fta_processus"]." / ".$isMonoSite."<br>";
@@ -1930,7 +1937,7 @@ function visualiser_fiches($id_fta_etat, $choix, $isLimit, $order_common) {
             $where_common = "AND fta.id_fta_etat=fta_etat.id_fta_etat "
                     //. "AND fta.id_fta=access_arti2.id_fta "
                     . "AND fta.id_fta_etat=\"" . $_SESSION["id_fta_etat"] . "\" "
-                    . "AND `fta`.`id_fta_categorie`=`fta_processus_cycle`.`id_fta_categorie` "
+                    . "AND `fta`.`id_fta_workflow`=`fta_processus_cycle`.`id_fta_workflow` "
                     . "AND `fta_processus_cycle`.`id_init_fta_processus`=`fta_processus`.`id_fta_processus` "
             ;
             //$where_common="fta.id_fta=access_arti2.id_fta";
@@ -1961,7 +1968,7 @@ function visualiser_fiches($id_fta_etat, $choix, $isLimit, $order_common) {
                             . "FROM fta_suivi_projet as suivi_encours, "
                             . "fta_chapitre as chapitre_encours, "
                             . "fta_suivi_projet as suivi_precedent, "
-                            . "fta_chapitre as chapitre_precedent, "
+                            . "fta_workflow_structure as chapitre_precedent, "
                             . "`fta_processus`, "
                             //. "access_arti2, "
                             //. "fta_processus_cycle "
@@ -1983,7 +1990,7 @@ function visualiser_fiches($id_fta_etat, $choix, $isLimit, $order_common) {
                             //. "AND abreviation_fta_etat=\"".$_SESSION["abreviation_fta_etat"]."\" "
                             //. "AND suivi_encours.id_fta_suivi_projet=suivi_precedent.id_fta_suivi_projet "
                             //. "AND suivi_precedent.signature_validation_suivi_projet<>0 "
-                            . "AND ($where_processus_before)"
+                            . "AND (1 $where_processus_before)"
                             . "GROUP BY fta.id_fta  "
                             . $having
                             //. "GROUP BY suivi_encours.id_fta_suivi_projet "
@@ -2134,10 +2141,9 @@ function visualiser_fiches($id_fta_etat, $choix, $isLimit, $order_common) {
             $synthese_action = $_SESSION["synthese_action"];
 
             //$req = "SELECT *, fta.id_fta AS id_fta FROM fta, fta_etat, access_arti2 "
-            $req = "SELECT fta.id_fta AS id_fta FROM fta, fta_etat, access_arti2 "
+            $req = "SELECT fta.id_fta AS id_fta FROM fta, fta_etat "
                     . "WHERE $where "
                     . "AND fta.id_fta_etat = fta_etat.id_fta_etat "
-                    . "AND fta.id_access_arti2=access_arti2.id_access_arti2 "
                     . "ORDER BY id_article_agrologic, designation_commerciale_fta ASC "
             ;
             //echo $req;
@@ -2712,14 +2718,14 @@ function fta_taux_validation_fast($id_fta) {
       ;
      */
     $req = "SELECT DISTINCT fta_suivi_projet.id_fta_chapitre "
-            . "FROM fta_suivi_projet, fta_chapitre, fta_processus_cycle, fta_etat "
+            . "FROM fta_suivi_projet, fta_workflow_structure, fta_processus_cycle, fta_etat "
             . "WHERE `fta_suivi_projet`.`id_fta` = $id_fta "
             . "AND signature_validation_suivi_projet<>0 "
-            . "AND `fta_chapitre`.`id_fta_chapitre`= `fta_suivi_projet`.`id_fta_chapitre` "
-            . "AND `fta_chapitre`.`id_fta_processus`=`fta_processus_cycle`.`id_init_fta_processus` "
+            . "AND `fta_workflow_structure`.`id_fta_chapitre`= `fta_suivi_projet`.`id_fta_chapitre` "
+            . "AND `fta_workflow_structure`.`id_fta_processus`=`fta_processus_cycle`.`id_init_fta_processus` "
             . "AND `fta_processus_cycle`.`id_etat_fta_processus_cycle`=`fta_etat`.`abreviation_fta_etat` "
             . "AND `fta_etat`.`id_fta_etat`='" . $recordFta->getFieldValue("fta", "id_fta_etat") . "' "
-            . "AND `fta_processus_cycle`.`id_fta_categorie`='" . $recordFta->getFieldValue("fta", "id_fta_categorie") . "' "
+            . "AND `fta_processus_cycle`.`id_fta_workflow`='" . $recordFta->getFieldValue("fta", "id_fta_workflow") . "' "
     ;
     //echo $req."<br>";
     $result = DatabaseOperation::query($req);
@@ -2729,11 +2735,11 @@ function fta_taux_validation_fast($id_fta) {
      * Liste complète des chapitres de ce cycle pour cette catégorie
      */
     $req = "SELECT DISTINCT id_fta_chapitre "
-            . "FROM fta_chapitre, fta_processus_cycle, fta_etat "
-            . "WHERE `fta_chapitre`.`id_fta_processus`=`fta_processus_cycle`.`id_init_fta_processus` "
+            . "FROM fta_workflow_structure, fta_processus_cycle, fta_etat "
+            . "WHERE `fta_workflow_structure`.`id_fta_processus`=`fta_processus_cycle`.`id_init_fta_processus` "
             . "AND `fta_processus_cycle`.`id_etat_fta_processus_cycle`=`fta_etat`.`abreviation_fta_etat` "
             . "AND `fta_etat`.`id_fta_etat`='" . $recordFta->getFieldValue("fta", "id_fta_etat") . "' "
-            . "AND `fta_processus_cycle`.`id_fta_categorie`='" . $recordFta->getFieldValue("fta", "id_fta_categorie") . "' "
+            . "AND `fta_processus_cycle`.`id_fta_workflow`='" . $recordFta->getFieldValue("fta", "id_fta_workflow") . "' "
     ;
     //echo $req."<br>";
     $result = DatabaseOperation::query($req);

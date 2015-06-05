@@ -384,4 +384,25 @@ class FtaChapitreModel extends AbstractModel {
         return $htmlResult->getHtmlResult();
     }
 
+    public static function getChapitreDefautByWorkflow($paramId) {
+        $ftaModel = new FtaModel($paramId);
+        $IdWorkflow = $ftaModel->getDataField(FtaModel::FIELDNAME_WORKFLOW)->getFieldValue();
+/*
+ * Non fonctionnelle
+ */
+        $rarrayChapitreDefaut = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
+                        "SELECT DISTINCT " . FtaProcessusModel::TABLENAME . "." . FtaProcessusModel::KEYNAME
+                        . " FROM " . FtaProcessusModel::TABLENAME
+                        . "LEFT JOIN " . FtaProcessusCycleModel::TABLENAME
+                        . " ON " . FtaProcessusCycleModel::TABLENAME . "." . FtaProcessusCycleModel::FIELDNAME_PROCESSUS_NEXT
+                        . "=" . FtaProcessusModel::TABLENAME . "." . FtaProcessusModel::KEYNAME
+                        . " WHERE " . FtaProcessusCycleModel::TABLENAME . "." . FtaProcessusCycleModel::FIELDNAME_WORKFLOW
+                        . "=" . $IdWorkflow      //Jointure
+        );
+
+        foreach ($rarrayChapitreDefaut as $rowsChapitreDefaut) {
+            return $rowsChapitreDefaut[FtaProcessusModel::KEYNAME];
+        }
+    }
+
 }

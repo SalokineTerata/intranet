@@ -120,12 +120,12 @@ if ($id_user) {
 
 
     $id_fta_etat_encours = $id_fta_etat;
-    $recordsetFtaEtat = new DatabaseRecord("fta_etat", $id_fta_etat);
+    $ftaEtatModel = new FtaEtatModel($id_fta_etat);
 
 //$receivedKey["id_fta_etat"] = $id_fta_etat;
 //$record_fta_etat = new Database("fta_etat", $receivedKey);
 //$nom_fta_etat=$record_fta_etat->getValue("nom_fta_etat");
-    $nom_fta_etat_encours = $recordsetFtaEtat->getFieldValue("nom_fta_etat");
+    $nom_fta_etat_encours = $ftaEtatModel->getDataField(FtaEtatModel::FIELDNAME_NOM_FTA_ETAT)->getFieldValue();
 
 //echo $nom_fta_etat;
 //Suivant le droit d'acces de l'utilisateur
@@ -138,154 +138,13 @@ if ($id_user) {
     if ($fta_modification) {
         $req_where = "";
     }
+    /*******************************************************************************
+      TABLEAU DE SYNTHESE
+     ****************************************************************************** */
 
-    //L'utilisateur possède-t-il au moins un processus monosite ?
-    if ($id_user) {
-        $req_multisite = "SELECT `intranet_droits_acces`.`id_user` "
-                . "FROM `intranet_modules`, `intranet_droits_acces`, `intranet_actions`, `fta_processus`, fta_action_role, fta_workflow_structure "
-                . "WHERE ( `intranet_modules`.`id_intranet_modules` = `intranet_droits_acces`.`id_intranet_modules` "
-                . "AND `intranet_actions`.`id_intranet_actions` = `intranet_droits_acces`.`id_intranet_actions` "
-                . "AND `fta_workflow_structure`.`id_fta_role` = `fta_processus`.`id_fta_role` "
-                . "AND `fta_workflow_structure`.`id_fta_processus` = `fta_processus`.`id_fta_processus` "
-                . "AND `fta_workflow_structure`.`id_fta_role` = `fta_action_role`.`id_fta_role` "
-                . "AND `intranet_actions`.`id_intranet_actions` = `fta_action_role`.`id_intranet_actions` ) "
-                . "AND ( ( `intranet_droits_acces`.`id_user` = " . $id_user . " "
-                . "AND `fta_processus`.`multisite_fta_processus` = 0 "
-                . "AND `intranet_droits_acces`.`niveau_intranet_droits_acces` > 0 ) )"
-        ;
-        $result_multisite = DatabaseOperation::query($req_multisite);
-
-        //Si ce n'est pas le cas, la vision de l'utilisateur est restreint à son site de rattachement.
-        if (!mysql_num_rows($result_multisite)) {
-            $_SESSION["id_geo"] = $_SESSION["lieu_geo"];
-            mysql_table_load("geo");
-            $id_site = $_SESSION["id_site"];
-            $req_where .= " AND (access_arti2.Site_de_production = $id_site OR Site_de_production=0 ";
-
-            //Ajout des délégations de processus cf. fta_processus_multisite
-            //Selection des processus multisite où l'utilisateur à accès
-            $req_deleg = "SELECT id_site_assemblage_fta_processus_multisite "
-                    . "FROM `intranet_modules`, `intranet_droits_acces`, `intranet_actions`, `fta_processus`, "
-                    . "fta_processus_multisite "
-                    . "WHERE ( `intranet_modules`.`id_intranet_modules` = `intranet_droits_acces`.`id_intranet_modules` "
-                    . "AND `intranet_actions`.`id_intranet_actions` = `intranet_droits_acces`.`id_intranet_actions` "
-                    . "AND `intranet_actions`.`id_intranet_actions` = `fta_processus`.`id_intranet_actions` ) "
-                    . "AND ( ( `intranet_droits_acces`.`id_user` = " . $_SESSION["id_user"] . " "
-                    . "AND `fta_processus`.`multisite_fta_processus` = 1 "
-                    . "AND `intranet_droits_acces`.`niveau_intranet_droits_acces` > 0 ) )"
-                    . "AND id_processus_fta_processus_multisite=id_fta_processus "
-                    . "AND id_site_processus_fta_processus_multisite= $id_site "
-            ;
-            $result_deleg = DatabaseOperation::query($req_deleg);
-            while ($rows = mysql_fetch_array($result_deleg)) {
-                $req_where .= "OR access_arti2.Site_de_production = " . $rows["id_site_assemblage_fta_processus_multisite"] . " ";
-            }
-
-            $req_where .= ") ";
-        }
-    }
+    $tableau_synthese.=AccueilFta::getTableauSythese($req_where);
 
 
-    /*
-     * @todo: filtrer par catégorie de FTA
-     */
-
-    $req = "SELECT COUNT(fta.id_fta) AS nombre_fiche, abreviation_fta_etat, "
-            . "nom_fta_etat, fta.id_fta_etat, access_arti2.Site_de_production "
-            . "FROM fta, fta_etat, access_arti2 "
-            . "WHERE fta_etat.id_fta_etat=fta.id_fta_etat "
-            . "AND fta.id_fta=access_arti2.id_fta "
-            . "$req_where"
-            . "GROUP BY fta.id_fta_etat"
-    ;
-
-//}
-
-    $result = DatabaseOperation::query($req);
-    $compteur = 1; //permet de tester si on est sur le premier enregistrement de la requète
-
-    $tableau_synthese = "<table class=contenu   width=100% border=0>";
-    while ($rows = mysql_fetch_array($result)) {
-        //construction du lien d'action visualisation
-        $lien = "<a "
-                . "href=index.php"
-                . "?id_fta_etat=" . $rows["id_fta_etat"]
-                . "&nom_fta_etat=" . $rows["abreviation_fta_etat"]
-                . "&synthese_action=encours"
-                . ">En cours"
-                . "</a>"
-        ;
-        //Cet etat, a-t-il un cycle de vie
-        $req = "SELECT id_etat_fta_processus_cycle FROM fta_processus_cycle "
-                . "WHERE id_etat_fta_processus_cycle='" . $rows["abreviation_fta_etat"] . "' "
-        ;
-        $result_cycle = DatabaseOperation::query($req);
-        if (mysql_num_rows($result_cycle)) {
-            $lien .= " / <a "
-                    . "href=index.php"
-                    . "?id_fta_etat=" . $rows["id_fta_etat"]
-                    . "&nom_fta_etat=" . $rows["abreviation_fta_etat"]
-                    . "&synthese_action=attente"
-                    . ">En attente"
-                    . "</a>"
-                    . " / <a "
-                    . "href=index.php"
-                    . "?id_fta_etat=" . $rows["id_fta_etat"]
-                    . "&nom_fta_etat=" . $rows["abreviation_fta_etat"]
-                    . "&synthese_action=correction"
-                    . ">Effectuées"
-                    . "</a>"
-            ;
-        } else {
-            $lien = "<a "
-                    . "href=index.php"
-                    . "?id_fta_etat=" . $rows["id_fta_etat"]
-                    . "&nom_fta_etat=" . $rows["abreviation_fta_etat"]
-                    . "&synthese_action=all"
-                    . "&isLimit=30"
-                    . ">Voir"
-                    . "</a>"
-            ;
-        }
-
-        //construction des lignes et des colonnes
-        if ($compteur == 1) {
-            $tableau_synthese .="<tr>  <td> A ce jour, il y a :  </td> <td> <b>";
-
-            //Difficulté à mettre à oeuvre pour le Cas I (demande beaucoup de calcul et reisque de ralentissement alors que ce n'est pas vital)
-            //if($rows["abreviation_fta_etat"]<> "I") {
-            $tableau_synthese .=$rows["nombre_fiche"];
-
-            $tableau_synthese .= "</b> fiches en état "
-                    . $rows["nom_fta_etat"]
-                    . " <td> &nbsp &nbsp &nbsp $lien </td></td></tr>"
-            ;
-            $compteur = 2;
-        } else {
-            $tableau_synthese .="<tr>  <td>                      </td> <td> <b>"
-                    . $rows["nombre_fiche"]
-                    . " </b> fiches en état "
-                    . $rows["nom_fta_etat"]
-                    . " <td> &nbsp &nbsp &nbsp $lien </td></td></tr>"
-            ;
-        }
-    } //fin tant que tableau_synthese
-    //Recherche des fiches incorrectes
-    $req = "SELECT COUNT(id_fta) AS fiche_incorrecte "
-            . "FROM fta "
-            . "WHERE id_fta_etat=0 "
-    ;
-    $nombre_incorrecte = DatabaseOperation::query($req);
-    while ($rows = mysql_fetch_array($nombre_incorrecte)) {
-        if ($rows['fiche_incorrecte']) {
-            $tableau_synthese .="<tr><td></td><td bgColor=#FF0000 align=center valign=middle><center><h3><b><b>"
-                    . $rows['fiche_incorrecte']
-                    . " fiche(s) incorrecte(s) "
-                    . " <br>Contacter le service informatique</b></h3></td></td></tr>"
-            ;
-        }
-    }
-    $tableau_synthese.="</table>";
 
 
 
@@ -347,7 +206,7 @@ if ($id_user) {
         </table>
 ";
 
-    if ($synthese_action and !$requete_resultat) {
+    if ($synthese_action and ! $requete_resultat) {
         echo "
           <table width=100% border=1>
               <tr>

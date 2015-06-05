@@ -63,6 +63,12 @@ $show_help = 1;                              //Activer l'aide en ligne Pop-up
 
 //Paramètre d'URL
 $id_fta = Lib::getParameterFromRequest("id_fta");
+/*
+ * Nous recuperons le chapitre auquel ultisateur verra par défaut selon ces droits d'accès 
+ * lorsqu'il regarde la liste de ces fta 
+ */
+//$chapitreParDefaut = FtaChapitreModel::getChapitreDefautByWorkflow($id_fta);
+
 $id_fta_chapitre_encours = Lib::getParameterFromRequest("id_fta_chapitre_encours", 1);
 $synthese_action = Lib::getParameterFromRequest("synthese_action");
 $comeback = Lib::getParameterFromRequest("comeback");
@@ -134,13 +140,6 @@ echo "
      </form>
      ";
 
-//$recordSetFta = new FtaModel($id_fta);
-//$test = $recordSetFta->getFieldNomDemandeur();
-//
-//echo "<pre>";
-//print_r ($_SESSION);
-////print_r($recordSetFta);
-//echo "</pre>";
 
 /* * **********
   Fin Code HTML

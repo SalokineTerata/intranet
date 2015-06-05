@@ -22,6 +22,10 @@ class UserModel extends AbstractModel {
     const FIELDNAME_PORTAIL_WIKI_SALARIES = "portail_wiki_salaries";
     const FIELDNAME_LIEU_GEO = "lieu_geo";
 
+    public function __construct($paramId = NULL, $paramIsCreateRecordsetInDatabaseIfKeyDoesntExist = AbstractModel::DEFAULT_IS_CREATE_RECORDSET_IN_DATABASE_IF_KEY_DOESNT_EXIST) {
+        parent::__construct($paramId, $paramIsCreateRecordsetInDatabaseIfKeyDoesntExist);
+    }
+
     public function getPrenomNom() {
         $prenom = $this->getDataField(UserModel::FIELDNAME_PRENOM)->getFieldValue();
         $nom = $this->getDataField(UserModel::FIELDNAME_NOM)->getFieldValue();

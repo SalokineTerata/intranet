@@ -98,7 +98,6 @@ class FtaSuiviProjetModel extends AbstractModel {
         $id_fta_workflow = $modelFta->getDataField(FtaModel::FIELDNAME_WORKFLOW)->getFieldValue();
         $ftaWorkflowModel = new FtaWorkflowModel($id_fta_workflow);
         $id_parent_intranet_actions = $ftaWorkflowModel->getDataField(FtaWorkflowModel::FIELDNAME_ID_INTRANET_ACTIONS)->getFieldValue();
-        IntranetActionsModel::getIdIntranetActionsFromIdParentAction($id_parent_intranet_actions);
         //Récupération des Processus
         $arrayProcessus = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
                         "SELECT DISTINCT " . FtaProcessusModel::TABLENAME . "." . FtaProcessusModel::KEYNAME . ", " . FtaWorkflowModel::FIELDNAME_ID_INTRANET_ACTIONS
@@ -272,7 +271,7 @@ class FtaSuiviProjetModel extends AbstractModel {
                                                 . " AND " . IntranetActionsModel::TABLENAME . "." . IntranetActionsModel::KEYNAME
                                                 . "=" . IntranetDroitsAccesModel::TABLENAME . "." . IntranetDroitsAccesModel::FIELDNAME_ID_INTRANET_ACTIONS             //Liaison
                                                 . " AND " . IntranetActionsModel::TABLENAME . "." . IntranetActionsModel::KEYNAME
-                                                . "=" . IntranetActionsModel::getIdIntranetActionsFromIdParentAction($id_parent_intranet_actions)            //Liaison                                                
+                                                . "=" . IntranetActionsModel::getIdIntranetActionsFromIdParentActionNavigation($id_parent_intranet_actions)            //Liaison                                                
                                                 . " AND " . GeoModel::TABLENAME . "." . GeoModel::KEYNAME . "=" . UserModel::TABLENAME . "." . UserModel::FIELDNAME_LIEU_GEO . ") "                                                         //Liaison
                                                 . " AND ( ( " . IntranetDroitsAccesModel::TABLENAME . "." . IntranetDroitsAccesModel::FIELDNAME_NIVEAU_INTRANET_DROITS_ACCES . " <> 0 "                                 //Obtention du droit d'accès
                                                 . " AND " . FtaProcessusModel::TABLENAME . "." . FtaProcessusModel::KEYNAME . " = " . $rowsProcessus[FtaProcessusModel::KEYNAME]                  //Processus en cours
@@ -283,12 +282,13 @@ class FtaSuiviProjetModel extends AbstractModel {
                                 );
 
                                 //echo $rows_processus["multisite_fta_processus"]."<br>".$req."<br><br>";
-
-                                foreach ($arraySalarieProcessusMulti as $rowsSalarieProcessusMulti) {
-                                    //Remplissage du tableau des destinataires (mail + identifiant)
-                                    $liste_mail[] = $rowsSalarieProcessusMulti[UserModel::FIELDNAME_MAIL];
-                                    $liste_user[] = "- " . $rowsSalarieProcessusMulti[UserModel::FIELDNAME_PRENOM] . " " . $rowsSalarieProcessusMulti[UserModel::FIELDNAME_NOM];
-                                }
+                                if ($arraySalarieProcessusMulti) {
+                                    foreach ($arraySalarieProcessusMulti as $rowsSalarieProcessusMulti) {
+                                        //Remplissage du tableau des destinataires (mail + identifiant)
+                                        $liste_mail[] = $rowsSalarieProcessusMulti[UserModel::FIELDNAME_MAIL];
+                                        $liste_user[] = "- " . $rowsSalarieProcessusMulti[UserModel::FIELDNAME_PRENOM] . " " . $rowsSalarieProcessusMulti[UserModel::FIELDNAME_NOM];
+                                    }
+                                }                                 
                                 break;
                         }//Fin de la recherche des utilisateurs à informer
                     }//Fin du controle de désactivation de mail
@@ -353,7 +353,6 @@ class FtaSuiviProjetModel extends AbstractModel {
                 }//Fin de la vérification par chapitre et du traitement de la notification
             }//Fin de la vérification des processus validés
         }//Fin du parcours des processsu
-        
         //Retour de la fonction
         return $liste_user;
     }

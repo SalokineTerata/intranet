@@ -72,8 +72,6 @@ $id_fta = Lib::getParameterFromRequest("id_fta");
 $id_fta_chapitre_encours = Lib::getParameterFromRequest("id_fta_chapitre_encours", 1);
 $synthese_action = Lib::getParameterFromRequest("synthese_action");
 $comeback = Lib::getParameterFromRequest("comeback");
-//$id_fta_workflow_structure_encours = Lib::getParameterFromRequest("id_fta_workflow_structure_encours");
-//$id_fta_workflow_structure = $id_fta_workflow_structure_encours;
 $id_fta_chapitre = $id_fta_chapitre_encours;
 $module_consultation = $_SESSION["module"] . "_consultation";
 

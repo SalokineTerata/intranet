@@ -31,6 +31,7 @@ class FtaModel extends AbstractModel {
     const FIELDNAME_CREATEUR = "createur_fta";
     const FIELDNAME_DATE_CREATION = "date_creation";
     const FIELDNAME_DATE_DEMANDEUR = "date_demandeur_fta";
+    const FIELDNAME_DATE_DERNIERE_MAJ_FTA = "date_derniere_maj_fta";
     const FIELDNAME_DATE_ECHEANCE_FTA = "date_echeance_fta";
     const FIELDNAME_DATE_PREVISONNELLE_TRANSFERT_INDUSTRIEL = "date_transfert_industriel";
     const FIELDNAME_DESCRIPTION_DU_PRODUIT = "synoptique_valide_fta";

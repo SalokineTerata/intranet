@@ -23,7 +23,7 @@ class FtaActionRoleModel extends AbstractModel {
             $arrayIdFtaActionRole = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
                             "SELECT " . FtaActionRoleModel::KEYNAME
                             . " FROM  " . FtaActionRoleModel::TABLENAME
-                            . " WHERE " . FtaActionRoleModel::FIELDNAME_ID_INTRANET_ACTIONS . "=" . $rowsIdIntranetActions 
+                            . " WHERE " . FtaActionRoleModel::FIELDNAME_ID_INTRANET_ACTIONS . "=" . $rowsIdIntranetActions
             );
         }
         if ($arrayIdFtaActionRole) {

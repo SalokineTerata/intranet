@@ -189,7 +189,7 @@ class Navigation {
                      * Nous verifions si tous les processus précedents du chapitre que l'utilisateur à les droits d'accès
                      * sont validé ou non et donc visible ou non
                      */
-                    $taux_validation_processus = FtaProcessusModel::getFtaProcessusNonValide(self::$id_fta, self::$id_fta_processus);
+                    $taux_validation_processus = FtaProcessusModel::getFtaProcessusNonValidePrecedent(self::$id_fta, self::$id_fta_processus);
 
                     //Liste des processus visible(lecture-seule)
                     if ($taux_validation_processus == 1 or $taux_validation_processus === NULL) {

@@ -67,23 +67,7 @@ class FtaSuiviProjetModel extends AbstractModel {
         //Retourne uniquement la première valeur
         return $array[0][$keyName];
     }
-
-    public function getModelFta() {
-        return $this->modelFta;
-    }
-
-    public function getModelFtaChapitre() {
-        return $this->modelFtaChapitre;
-    }
-
-    private function setModelFta(FtaModel $modelFta) {
-        $this->modelFta = $modelFta;
-    }
-
-    private function setModelFtaChapitre(FtaChapitreModel $modelFtaChapitre) {
-        $this->modelFtaChapitre = $modelFtaChapitre;
-    }
-
+    
     static public function getListeUsersAndNotificationSuiviProjet($paramIdFta, $paramIdChapitre) {
 
         /*
@@ -264,7 +248,6 @@ class FtaSuiviProjetModel extends AbstractModel {
                                                 . " FROM " . UserModel::TABLENAME . "," . IntranetActionsModel::TABLENAME
                                                 . ", " . IntranetModulesModel::TABLENAME . "," . IntranetDroitsAccesModel::TABLENAME
                                                 . ", " . FtaProcessusModel::TABLENAME . ", " . GeoModel::TABLENAME
-                                                . ", " . FtaActionRoleModel::TABLENAME
                                                 . " WHERE ( " . UserModel::TABLENAME . "." . UserModel::KEYNAME
                                                 . "=" . IntranetDroitsAccesModel::TABLENAME . "." . IntranetDroitsAccesModel::FIELDNAME_ID_USER                                   //Liaison
                                                 . " AND " . UserModel::FIELDNAME_ACTIF . "= 'oui' "                                                                      //maj 2007-08-13 sm                                            . "AND `intranet_droits_acces`.`id_intranet_modules` = `intranet_modules`.`id_intranet_modules` "        //Liaison
@@ -288,7 +271,7 @@ class FtaSuiviProjetModel extends AbstractModel {
                                         $liste_mail[] = $rowsSalarieProcessusMulti[UserModel::FIELDNAME_MAIL];
                                         $liste_user[] = "- " . $rowsSalarieProcessusMulti[UserModel::FIELDNAME_PRENOM] . " " . $rowsSalarieProcessusMulti[UserModel::FIELDNAME_NOM];
                                     }
-                                }                                 
+                                }
                                 break;
                         }//Fin de la recherche des utilisateurs à informer
                     }//Fin du controle de désactivation de mail
@@ -356,6 +339,65 @@ class FtaSuiviProjetModel extends AbstractModel {
         //Retour de la fonction
         return $liste_user;
     }
+    
+        static public function initFtaSuiviProjet($paramIdFta) {
+
+        $ftaModel = new FtaModel($paramIdFta);
+        $idFtaWorlflow = $ftaModel->getDataField(FtaModel::FIELDNAME_WORKFLOW)->getFieldValue();
+
+        $arrayChapitre = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
+                        "SELECT " . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_CHAPITRE
+                        . " FROM " . FtaWorkflowStructureModel::TABLENAME
+                        . " WHERE " . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_WORKFLOW
+                        . "=" . $idFtaWorlflow
+        );
+
+        foreach ($arrayChapitre as $rowsChapitre) {
+            $arrayCheckIdSuiviProjet = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
+                            "SELECT " . FtaSuiviProjetModel::KEYNAME
+                            . " FROM " . FtaSuiviProjetModel::TABLENAME
+                            . " WHERE " . FtaSuiviProjetModel::FIELDNAME_ID_FTA
+                            . "=" . $paramIdFta
+                            . " AND " . FtaSuiviProjetModel::FIELDNAME_ID_FTA_CHAPITRE
+                            . "=" . $rowsChapitre[FtaSuiviProjetModel::FIELDNAME_ID_FTA_CHAPITRE]
+            );
+            if (!$arrayCheckIdSuiviProjet) {
+                DatabaseOperation::query(
+                        "INSERT INTO " . FtaSuiviProjetModel::TABLENAME
+                        . "(" . FtaSuiviProjetModel::FIELDNAME_ID_FTA
+                        . ", " . FtaSuiviProjetModel::FIELDNAME_ID_FTA_CHAPITRE
+                        . ", " . FtaSuiviProjetModel::FIELDNAME_SIGNATURE_VALIDATION_SUIVI_PROJET
+                        . ") VALUES (" . $paramIdFta
+                        . ", " . $rowsChapitre[FtaWorkflowStructureModel::FIELDNAME_ID_FTA_CHAPITRE]
+                        . ", 0 )"
+                );
+            }
+        }
+    }
+
+//    public static function CheckIdFtaProcessusValide() {
+//        $req="select fta.id_fta from fta, fta_suivi_projet"
+//                . " WHERE fta.id_fta=fta_suivi_projet.id_fta"
+//                . " AND fta_suivi_projet.signature_validation_suivi_projet<>0"
+//    }
+
+    public function getModelFta() {
+        return $this->modelFta;
+    }
+
+    public function getModelFtaChapitre() {
+        return $this->modelFtaChapitre;
+    }
+
+    private function setModelFta(FtaModel $modelFta) {
+        $this->modelFta = $modelFta;
+    }
+
+    private function setModelFtaChapitre(FtaChapitreModel $modelFtaChapitre) {
+        $this->modelFtaChapitre = $modelFtaChapitre;
+    }
+
+
 
 }
 

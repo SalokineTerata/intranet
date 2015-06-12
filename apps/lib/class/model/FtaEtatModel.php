@@ -31,11 +31,19 @@ class FtaEtatModel extends AbstractModel {
                         . " AND " . FtaModel::TABLENAME . "." . FtaModel::FIELDNAME_ID_FTA_ETAT . "=" . FtaEtatModel::TABLENAME . "." . FtaEtatModel::KEYNAME
         );
         foreach ($arrayFtaEtatAndName as $rowsFtaEtatAndName) {
-            $value[FtaEtatModel::FIELDNAME_NOM_FTA_ETAT] = $rowsFtaEtatAndName[FtaEtatModel::FIELDNAME_NOM_FTA_ETAT];
             $value[FtaEtatModel::FIELDNAME_ABREVIATION] = $rowsFtaEtatAndName[FtaEtatModel::FIELDNAME_ABREVIATION];
+            $value[FtaEtatModel::FIELDNAME_NOM_FTA_ETAT] = $rowsFtaEtatAndName[FtaEtatModel::FIELDNAME_NOM_FTA_ETAT];
+
+            for ($i = 1; $i <= sizeof($arrayFtaEtatAndName); $i++) {
+                $arrayFtaEtat = array(
+                    $i => $value
+                );
+            }
         }
 
-        return $value;
+
+
+        return $arrayFtaEtat;
     }
 
 }

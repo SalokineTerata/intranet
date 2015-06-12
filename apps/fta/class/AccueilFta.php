@@ -143,28 +143,32 @@ class AccueilFta {
              */
 
             $idFtaRole = FtaRoleModel::getIdFtaRoleByIdUser($id_user);
-            
-            $tableau_synthese = "<table class = contenu width = 100% border = 0>";
+
             /*
              * On affiche dans la barre de navigation de la page d'accauil les roles possible
              * Swich case pour tous les roles
              */
-            
-            
+            // $idFtaRole[] = $idFtaRole[FtaRoleModel::KEYNAME];
+            $nomFtaRole[] = $idFtaRole[FtaRoleModel::FIELDNAME_DESCRIPTION_FTA_ROLE];
+
             /*
-             * Selon le role choisi nous cherchons c'est etat. 
+             * Selon le role choisi en ajax(performence nous cherchons c'est etat. 
              * On ne recupere plus à se niveau le nombre Fta
              */
-            
-            $arrayFtaEtat =  FtaEtatModel::getFtaEtatAndNameByRole(4);
-            
+
+
+
+
+            $arrayFtaEtat[] = FtaEtatModel::getFtaEtatAndNameByRole(4);
+
+
             /*
              * On affiche dans la barre de navigation de la page d'accauil les etats possible
              */
 
             $compteur = 1; //permet de tester si on est sur le premier enregistrement de la requète
 
-            
+
             if ($arrayFtaEtat) {
                 foreach ($arrayFtaEtat as $rowsFtaEtat) {
                     //construction du lien d'action visualisation
@@ -393,6 +397,145 @@ class AccueilFta {
             }
             $tableau_synthese.="</table>";
         }
+
+        $arrayFtaEtat = array(
+            1 => $arrayFtaEtat,
+            2 => $arrayFtaEtat
+        );
+
+        $tableau_synthese = AccueilFta::getHtmlTableauSythese($idFtaRole, $arrayFtaEtat);
+        return $tableau_synthese;
+    }
+
+    public static function getHtmlTableauSythese($paramRole, $paramEtat) {
+
+//        if($paramRole[FtaRoleModel::KEYNAME])
+//        foreach ($paramRole as $rowsFtaRole) {
+//
+//            switch ($rowsFtaRole) {
+//                
+//            }
+//        }
+        $tableau_synthese = "";
+
+        foreach ($paramEtat as $rowsEtat) {
+            switch ($rowsEtat[FtaEtatModel::FIELDNAME_ABREVIATION]) {
+                case "I":
+                    $lien = "<a href=index.php?id_fta_etat=&nom_fta_etat="
+                            . $rowsEtat[FtaEtatModel::FIELDNAME_NOM_FTA_ETAT] . "&synthese_action=attente>En attente</a>";
+                    $lien2 = " <a href=index.php?id_fta_etat=&nom_fta_etat="
+                            . $rowsEtat[FtaEtatModel::FIELDNAME_NOM_FTA_ETAT] . "&synthese_action=encours>En cours</a>";
+                    $lien3 = "<a href=index.php?id_fta_etat=&nom_fta_etat="
+                            . $rowsEtat[FtaEtatModel::FIELDNAME_NOM_FTA_ETAT] . "&synthese_action=correction>Effectuées</a>";
+                    break;
+                case "V":
+                    $lien = "<a href=index.php?id_fta_etat=&nom_fta_etat="
+                            . $rowsEtat[FtaEtatModel::FIELDNAME_NOM_FTA_ETAT] . "&synthese_action=all>Voir</a>";
+                    $lien2 = "";
+                    $lien3 = "";
+                    break;
+                case "A":
+                    $lien = "<a href=index.php?id_fta_etat=&nom_fta_etat="
+                            . $rowsEtat[FtaEtatModel::FIELDNAME_NOM_FTA_ETAT] . "&synthese_action=all>Voir</a>";
+                    $lien2 = "";
+                    $lien3 = "";
+                    break;
+                case "R":
+                    $lien = "<a href=index.php?id_fta_etat=&nom_fta_etat="
+                            . $rowsEtat[FtaEtatModel::FIELDNAME_NOM_FTA_ETAT] . "&synthese_action=all>Voir</a>";
+                    $lien2 = "";
+                    $lien3 = "";
+                    break;
+                case "P":
+                    $lien = "<a href=index.php?id_fta_etat=&nom_fta_etat="
+                            . $rowsEtat[FtaEtatModel::FIELDNAME_NOM_FTA_ETAT] . "&synthese_action=attente>En attente</a>";
+                    $lien2 = " <a href=index.php?id_fta_etat=&nom_fta_etat="
+                            . $rowsEtat[FtaEtatModel::FIELDNAME_NOM_FTA_ETAT] . "&synthese_action=encours>En cours</a>";
+                    $lien3 = "<a href=index.php?id_fta_etat=&nom_fta_etat="
+                            . $rowsEtat[FtaEtatModel::FIELDNAME_NOM_FTA_ETAT] . "&synthese_action=correction>Effectuées</a>";
+
+                    break;
+            }
+        }
+
+        //foreach ($paramWorkflow[FtaWorkflowModel::KEYNAME] as $rows[FtaWorkflowModel::KEYNAME]){
+        switch ($paramWorkflow[FtaWorkflowModel::KEYNAME]) {
+            case "1":
+                $lienWF1 = "<a href="
+                        . $paramWorkflow[FtaWorkflowModel::FIELDNAME_DESCRIPTION_FTA_WORKFLOW] . ">"
+                        . $paramWorkflow[FtaWorkflowModel::FIELDNAME_DESCRIPTION_FTA_WORKFLOW] . "</a>";
+                break;
+            case "2":
+                $lienWF2 = "<a href="
+                        . $paramWorkflow[FtaWorkflowModel::FIELDNAME_DESCRIPTION_FTA_WORKFLOW] . ">"
+                        . $paramWorkflow[FtaWorkflowModel::FIELDNAME_DESCRIPTION_FTA_WORKFLOW] . "</a>";
+                $lien2 = "";
+                $lien3 = "";
+                break;
+            case "3":
+                $lienWF3 = "<a href="
+                        . $paramWorkflow[FtaWorkflowModel::FIELDNAME_DESCRIPTION_FTA_WORKFLOW] . ">"
+                        . $paramWorkflow[FtaWorkflowModel::FIELDNAME_DESCRIPTION_FTA_WORKFLOW] . "</a>";
+                $lien3 = "";
+                break;
+            case "4":
+                $lienWF4 = "<a href="
+                        . $paramWorkflow[FtaWorkflowModel::FIELDNAME_DESCRIPTION_FTA_WORKFLOW] . ">"
+                        . $paramWorkflow[FtaWorkflowModel::FIELDNAME_DESCRIPTION_FTA_WORKFLOW] . "</a>";
+                break;
+            case "5":
+                $lienWF5 = "<a href="
+                        . $paramWorkflow[FtaWorkflowModel::FIELDNAME_DESCRIPTION_FTA_WORKFLOW] . ">"
+                        . $paramWorkflow[FtaWorkflowModel::FIELDNAME_DESCRIPTION_FTA_WORKFLOW] . "</a>";
+
+                break;
+
+            case "6":
+                $lienWF6 = "<a href="
+                        . $paramWorkflow[FtaWorkflowModel::FIELDNAME_DESCRIPTION_FTA_WORKFLOW] . ">"
+                        . $paramWorkflow[FtaWorkflowModel::FIELDNAME_DESCRIPTION_FTA_WORKFLOW] . "</a>";
+
+                break;
+        }
+
+
+        /*
+         * Tableau vide prédéfinie et rempli et changeant au fur à mesusre des donné rentrés
+         */
+        $tableau_synthese = "<table class = contenu width = 100% border = 0>"
+                . "<TR>"
+                . "<TH>Role </TH> <TH>Etat FTA</TH> <TH>Etat d'Avancement</TH><TH>Espace de Travail</TH>"
+                . "</TR>"
+                . "<TR>"
+                . "<td>" . $paramRole[FtaRoleModel::FIELDNAME_DESCRIPTION_FTA_ROLE] . "</td>  "
+                . "<td>" . $rowsEtat[FtaEtatModel::FIELDNAME_NOM_FTA_ETAT] . "<td>"
+                . "<td>$lien</td>"
+                . "<td></td>"
+                . "</TR>"
+                . "<TR>"
+                . "<td></td> "
+                . "<td>" . $rowsEtat[2] . "</td>"
+                . "<td>$lien2 </td>"
+                . "<td></td>"
+                . "</TR>"
+                . "<TR>"
+                . "<td></td>"
+                . "<td>" . $rowsEtat[3] . "</td>"
+                . "<td>$lien3 </td>"
+                . "<td></td>"
+                . "</TR>"
+                . "<TR>"
+                . "<td></td> "
+                . " <td>" . $rowsEtat[5] . "</td>"
+                . " <td></td>"
+                . " <td></td>"
+                . "</TR>"
+                . "<TR>"
+                . "<td></td>  "
+                . "<td>" . $rowsEtat[6] . "</td>"
+                . "<td></td>"
+                . "<td></td>"
+                . "</TR>";
 
         return $tableau_synthese;
     }

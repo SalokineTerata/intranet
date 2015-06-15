@@ -31,11 +31,7 @@ class FtaRoleModel extends AbstractModel {
                         . "=" . FtaRoleModel::TABLENAME . "." . FtaRoleModel::KEYNAME
         );
 
-        foreach ($arrayIdFtaRole as $rowsIdFtaRole) {
-            $value[FtaRoleModel::KEYNAME] = $rowsIdFtaRole[FtaRoleModel::KEYNAME];
-            $value[FtaRoleModel::FIELDNAME_DESCRIPTION_FTA_ROLE] = $rowsIdFtaRole[FtaRoleModel::FIELDNAME_DESCRIPTION_FTA_ROLE];
-        }
-        return $value;
+        return $arrayIdFtaRole;
     }
 
 }

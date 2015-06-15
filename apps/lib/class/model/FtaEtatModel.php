@@ -18,6 +18,7 @@ class FtaEtatModel extends AbstractModel {
         $arrayFtaEtatAndName = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
                         "SELECT DISTINCT " . FtaEtatModel::FIELDNAME_NOM_FTA_ETAT
                         . "," . FtaEtatModel::FIELDNAME_ABREVIATION
+                        . "," . FtaModel::TABLENAME . "." . FtaModel::FIELDNAME_ID_FTA_ETAT
                         . " FROM " . FtaEtatModel::TABLENAME
                         . "," . FtaRoleModel::TABLENAME . "," . FtaModel::TABLENAME
                         . "," . FtaWorkflowModel::TABLENAME . "," . FtaWorkflowStructureModel::TABLENAME
@@ -30,20 +31,7 @@ class FtaEtatModel extends AbstractModel {
                         . "=" . FtaModel::TABLENAME . "." . FtaModel::FIELDNAME_WORKFLOW
                         . " AND " . FtaModel::TABLENAME . "." . FtaModel::FIELDNAME_ID_FTA_ETAT . "=" . FtaEtatModel::TABLENAME . "." . FtaEtatModel::KEYNAME
         );
-        foreach ($arrayFtaEtatAndName as $rowsFtaEtatAndName) {
-            $value[FtaEtatModel::FIELDNAME_ABREVIATION] = $rowsFtaEtatAndName[FtaEtatModel::FIELDNAME_ABREVIATION];
-            $value[FtaEtatModel::FIELDNAME_NOM_FTA_ETAT] = $rowsFtaEtatAndName[FtaEtatModel::FIELDNAME_NOM_FTA_ETAT];
-
-            for ($i = 1; $i <= sizeof($arrayFtaEtatAndName); $i++) {
-                $arrayFtaEtat = array(
-                    $i => $value
-                );
-            }
-        }
-
-
-
-        return $arrayFtaEtat;
+        return $arrayFtaEtatAndName;
     }
 
 }

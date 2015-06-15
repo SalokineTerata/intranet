@@ -67,7 +67,7 @@ class FtaSuiviProjetModel extends AbstractModel {
         //Retourne uniquement la première valeur
         return $array[0][$keyName];
     }
-    
+
     static public function getListeUsersAndNotificationSuiviProjet($paramIdFta, $paramIdChapitre) {
 
         /*
@@ -266,11 +266,11 @@ class FtaSuiviProjetModel extends AbstractModel {
 
                                 //echo $rows_processus["multisite_fta_processus"]."<br>".$req."<br><br>";
                                 if ($arraySalarieProcessusMulti) {
-                                    foreach ($arraySalarieProcessusMulti as $rowsSalarieProcessusMulti) {
-                                        //Remplissage du tableau des destinataires (mail + identifiant)
-                                        $liste_mail[] = $rowsSalarieProcessusMulti[UserModel::FIELDNAME_MAIL];
-                                        $liste_user[] = "- " . $rowsSalarieProcessusMulti[UserModel::FIELDNAME_PRENOM] . " " . $rowsSalarieProcessusMulti[UserModel::FIELDNAME_NOM];
-                                    }
+                                foreach ($arraySalarieProcessusMulti as $rowsSalarieProcessusMulti) {
+                                    //Remplissage du tableau des destinataires (mail + identifiant)
+                                    $liste_mail[] = $rowsSalarieProcessusMulti[UserModel::FIELDNAME_MAIL];
+                                    $liste_user[] = "- " . $rowsSalarieProcessusMulti[UserModel::FIELDNAME_PRENOM] . " " . $rowsSalarieProcessusMulti[UserModel::FIELDNAME_NOM];
+                                }
                                 }
                                 break;
                         }//Fin de la recherche des utilisateurs à informer
@@ -339,7 +339,7 @@ class FtaSuiviProjetModel extends AbstractModel {
         //Retour de la fonction
         return $liste_user;
     }
-    
+
         static public function initFtaSuiviProjet($paramIdFta) {
 
         $ftaModel = new FtaModel($paramIdFta);
@@ -371,7 +371,7 @@ class FtaSuiviProjetModel extends AbstractModel {
                         . ", " . $rowsChapitre[FtaWorkflowStructureModel::FIELDNAME_ID_FTA_CHAPITRE]
                         . ", 0 )"
                 );
-            }
+}
         }
     }
 

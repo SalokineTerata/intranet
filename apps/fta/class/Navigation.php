@@ -54,7 +54,7 @@ class Navigation {
                         . ", " . FtaModel::FIELDNAME_DESIGNATION_COMMERCIALE . ", " . FtaModel::FIELDNAME_CODE_ARTICLE_LDC
                         . " FROM " . FtaModel::TABLENAME . "," . FtaEtatModel::TABLENAME
                         . " WHERE " . FtaModel::KEYNAME . "=" . self::$id_fta
-                        . " AND " . FtaEtatModel::TABLENAME . "." . FtaEtatModel::KEYNAME . "=" . FtaModel::TABLENAME . "." . FtaModel::KEYNAME
+                        . " AND " . FtaEtatModel::TABLENAME . "." . FtaEtatModel::KEYNAME . "=" . FtaModel::TABLENAME . "." . FtaModel::FIELDNAME_ID_FTA_ETAT
         );
 
         foreach ($arrayFtaEtatAndFta as $rowsFtaEtatAndFta) {

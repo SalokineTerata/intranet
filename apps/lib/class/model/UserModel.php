@@ -37,6 +37,36 @@ class UserModel extends AbstractModel {
         return $this->getDataField(UserModel::FIELDNAME_LIEU_GEO)->getFieldValue();
     }
 
+    public static function getIdFtaByUserAndWorkflow($paramArrayIdFta) {
+
+
+        if ($paramArrayIdFta) {
+            foreach ($paramArrayIdFta as $rowsArrayIdFta) {
+                $idFta[] = $rowsArrayIdFta[FtaModel::KEYNAME];
+            }
+
+
+            $req = "SELECT DISTINCT " . FtaModel::KEYNAME
+                    . " FROM " . FtaModel::TABLENAME . "," . UserModel::TABLENAME
+                    . " WHERE ( 0 ";
+
+            $req .= FtaModel::AddIdFTaValidProcess($idFta);
+
+            $req .= ")";
+
+            $req .= " AND " . FtaModel::TABLENAME . "." . FtaModel::FIELDNAME_CREATEUR
+                    . "=" . UserModel::TABLENAME . "." . UserModel::KEYNAME
+                    . " ORDER BY " . FtaModel::FIELDNAME_WORKFLOW
+                    . "," . FtaModel::FIELDNAME_DATE_ECHEANCE_FTA
+                    . "," . UserModel::FIELDNAME_PRENOM . " ASC"
+            ;
+
+
+            $array = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray($req);
+        }
+        return $array;
+    }
+
 }
 
 ?>

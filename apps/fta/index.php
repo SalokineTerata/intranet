@@ -72,18 +72,17 @@ if ($id_user) {
     //2008-07-28 - BS Par défaut, les utilisateurs participant aux processus arrivent sur leur page "Fiche En cours"
     //Par défaut, tout le monde arrive sur la liste des FTA en cours de modification.
     //id_fta_etat=1&nom_fta_etat=I&synthese_action=encours
-    if (!$id_fta_etat) {
-        $isIndex = 1;  //On est sur l'index donc chargement des vues par défaut suivant le profile utilisateur
-        $id_fta_etat = "1";
-        $nom_fta_etat = "I";
-        $abreviation_fta_etat = $nom_fta_etat;
-        if ($fta_modification) {
-            $synthese_action = "encours";
-        } else {
-            $synthese_action = "attente";
-        }
-    }
-
+//    if (!$id_fta_etat) {
+//        $isIndex = 1;  //On est sur l'index donc chargement des vues par défaut suivant le profile utilisateur
+//        $id_fta_etat = "1";
+//        $nom_fta_etat = "I";
+//        $abreviation_fta_etat = $nom_fta_etat;
+//        if ($fta_modification) {
+//            $synthese_action = "encours";
+//        } else {
+//            $synthese_action = "attente";
+//        }
+//    }
 //echo "id_fta_etat=$id_fta_etat / nom_fta_etat=$nom_fta_etat / synthese_action=$synthese_action <br>";
 
     /*
@@ -138,9 +137,9 @@ if ($id_user) {
     if ($fta_modification) {
         $req_where = "";
     }
-    /*******************************************************************************
+    /*     * *****************************************************************************
       TABLEAU DE SYNTHESE
-     ****************************************************************************** */
+     * ***************************************************************************** */
 
     $tableau_synthese.=AccueilFta::getTableauSythese($req_where);
 
@@ -163,7 +162,8 @@ if ($id_user) {
         $choix = 1;
         if ($synthese_action) {
             //echo $id_fta_etat;
-            $tableau_fiche = AccueilFta::getTableauFiche($id_fta_etat, $choix, $isLimit, $order_common);
+            //$tableau_fiche = AccueilFta::getTableauFiche($id_fta_etat, $choix, $isLimit, $order_common);
+            $tableau_fiche = AccueilFta::getHtmlTableauFiche($nom_fta_etat);
         }
 
         if ($isLimit) {
@@ -208,7 +208,7 @@ if ($id_user) {
 
     if ($synthese_action and ! $requete_resultat) {
         echo "
-          <table width=100% border=1>
+          <table width=100% border=0>
               <tr>
                   <td class=titre_principal> <br> $titre_tableau <br></td>
               </tr>

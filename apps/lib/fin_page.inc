@@ -31,9 +31,17 @@ echo "</html>";
     <table width=100%>
         <tr align="right">
             <td>
-                <small>Intranet LDC - 2011 <?php echo $debug_info; ?> </small>
+                <small>
+                    <a href="#">Haut de page<?php echo $debug_info; ?></a>
+                </small>
             </td>
         </tr>
+        <tr align="right">
+            <td>
+                <small>Intranet LDC - 2015 <?php echo $debug_info; ?> </small>
+            </td>
+        </tr>
+
     </table>
 </html>
 

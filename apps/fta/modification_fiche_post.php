@@ -96,6 +96,8 @@ switch ($action) {
         $idFtaSuiviProjet = FtaSuiviProjetModel::getIdFtaSuiviProjetByIdFtaAndIdChapitre($paramIdFta, $paramIdFtaChapitreEncours);
         $modelFtaSuiviProjet = new FtaSuiviProjetModel($idFtaSuiviProjet);
         $modeChapitre = new FtaChapitreModel($paramIdFtaChapitreEncours);
+        $idFtaWorkflowStruture = FtaWorkflowStructureModel::getIdFtaWorkflowStructureByIdFtaAndIdChapitre($paramIdFta, $paramIdFtaChapitreEncours);
+        $modelFtaWorkflowStruture = new FtaWorkflowStructureModel($idFtaWorkflowStruture);
 
         $modelFtaSuiviProjet->getDataField(FtaSuiviProjetModel::FIELDNAME_SIGNATURE_VALIDATION_SUIVI_PROJET)->setFieldValue($paramSignatureValidationSuiviProjet);
 
@@ -103,7 +105,7 @@ switch ($action) {
 
         $abreviation_fta_etat = $modelFta->getModelFtaEtat()->getDataField(FtaEtatModel::FIELDNAME_ABREVIATION)->getFieldValue();
 
-        $id_fta_processus_encours = $modeChapitre->getDataField(FtaChapitreModel::FIELDNAME_ID_PROCESSUS)->getFieldValue();
+        $id_fta_processus_encours = $modelFtaWorkflowStruture->getDataField(FtaWorkflowStructureModel::FIELDNAME_ID_FTA_PROCESSUS)->getFieldValue();
 
         $nom_fta_chapitre_encours = $modeChapitre->getDataField(FtaChapitreModel::FIELDNAME_NOM_CHAPITRE)->getFieldValue();
 

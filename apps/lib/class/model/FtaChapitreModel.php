@@ -26,7 +26,6 @@ class FtaChapitreModel extends AbstractModel {
 
     const TABLENAME = "fta_chapitre";
     const KEYNAME = "id_fta_chapitre";
-    const FIELDNAME_ID_PROCESSUS = "id_fta_processus";
     const FIELDNAME_NOM_CHAPITRE = "nom_fta_chapitre";
     const FIELDNAME_NOM_USUEL_CHAPITRE = "nom_usuel_fta_chapitre";
 
@@ -39,12 +38,7 @@ class FtaChapitreModel extends AbstractModel {
     public function __construct($paramId = NULL, $paramIsCreateRecordsetInDatabaseIfKeyDoesntExist = AbstractModel::DEFAULT_IS_CREATE_RECORDSET_IN_DATABASE_IF_KEY_DOESNT_EXIST) {
         parent::__construct($paramId, $paramIsCreateRecordsetInDatabaseIfKeyDoesntExist);
 
-        $this->setModelFtaProcessus(
-                new FtaProcessusModel(
-                $this->getDataField(self::FIELDNAME_ID_PROCESSUS)->getFieldValue()
-                , DatabaseRecord::VALUE_DONT_CREATE_RECORD_IN_DATABASE_IF_KEY_DOESNT_EXIST
-                )
-        );
+   
     }
 
     public function getModelFtaProcessus() {
@@ -269,7 +263,7 @@ class FtaChapitreModel extends AbstractModel {
                 ;
                 DatabaseOperation::query($reqDevalidation);
 
-                if (mysql_affected_rows()) { //Si le processus a été dévalidé, alors on informe
+                if ($reqDevalidation) { //Si le processus a été dévalidé, alors on informe
                     //Dénotification
                     $reqDenotification = "UPDATE " . FtaWorkflowStructureModel::TABLENAME . "," . FtaSuiviProjetModel::TABLENAME
                             . " SET " . FtaSuiviProjetModel::FIELDNAME_NOTIFICATION_FTA_SUIVI_PROJET . "=0 "

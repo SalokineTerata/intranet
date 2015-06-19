@@ -1,4 +1,4 @@
-/* Définition des styles par défaut*/
+/* Dï¿½finition des styles par dï¿½faut*/
 @media print {
 
        .display_none {
@@ -24,7 +24,7 @@ table {
 
 
 
-/* Classes Personnalisées*/
+/* Classes Personnalisï¿½es*/
 .logFFCC66 {  font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 10px; font-style: normal; font-weight: normal; color: #663300; background-color: #FFCC66; background-position: center center; text-align: center; vertical-align: middle; font-variant: normal}
 .rollmarron { font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 9px; font-style: normal; font-weight: normal; color: #FFFFFF; background-color: #996633; text-decoration: none; background-position: left top }
 a:link {  }

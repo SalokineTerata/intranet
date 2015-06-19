@@ -92,7 +92,9 @@ class FtaWorkflowModel extends AbstractModel {
                         }
                     }
                 }
-                $req = "SELECT DISTINCT " . FtaWorkflowModel::FIELDNAME_DESCRIPTION_FTA_WORKFLOW . "," . FtaWorkflowModel::FIELDNAME_NOM_FTA_WORKFLOW
+                $req = "SELECT DISTINCT " . FtaWorkflowModel::FIELDNAME_DESCRIPTION_FTA_WORKFLOW
+                        . "," . FtaWorkflowModel::FIELDNAME_NOM_FTA_WORKFLOW
+                        . "," . FtaWorkflowModel::TABLENAME . "." . FtaWorkflowModel::KEYNAME
                         . " FROM " . FtaModel::TABLENAME . "," . FtaWorkflowModel::TABLENAME
                         . " WHERE ( 0 ";
 
@@ -164,7 +166,7 @@ class FtaWorkflowModel extends AbstractModel {
                         }
                     }
                 }
-                $req = "SELECT DISTINCT " . FtaWorkflowModel::FIELDNAME_DESCRIPTION_FTA_WORKFLOW 
+                $req = "SELECT DISTINCT " . FtaWorkflowModel::FIELDNAME_DESCRIPTION_FTA_WORKFLOW
                         . "," . FtaWorkflowModel::FIELDNAME_NOM_FTA_WORKFLOW
                         . "," . FtaWorkflowModel::KEYNAME
                         . " FROM " . FtaModel::TABLENAME . "," . FtaWorkflowModel::TABLENAME

@@ -32,7 +32,7 @@ class EnvironmentCod extends EnvironmentAbstract {
      * TRUE: Initialisation systématique.
      * FALSE: l'initialisation n'est réalisée qu'une seule fois pas session.
      */
-    const IS_DEBUG_SESSION_ENABLED = TRUE;
+    const IS_DEBUG_SESSION_ENABLED = FALSE;
     const IS_SERVICE_LDAP_ENABLED = FALSE;
     const IS_SERVICE_SMTP_ENABLED = FALSE;
     const LDAP_SERVER_NAME = EnvironmentConf::LDAP_SERVER_NAME;

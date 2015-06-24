@@ -62,6 +62,7 @@ class FtaEtatModel extends AbstractModel {
                                 . " , " . FtaRoleModel::TABLENAME . " , " . FtaSuiviProjetModel::TABLENAME . " , " . FtaModel::TABLENAME
                                 . " WHERE " . FtaProcessusCycleModel::TABLENAME . "." . FtaProcessusCycleModel::FIELDNAME_PROCESSUS_NEXT
                                 . "=" . FtaProcessusModel::TABLENAME . "." . FtaProcessusModel::KEYNAME
+//                                . " AND " . FtaProcessusCycleModel::TABLENAME . "." . FtaProcessusCycleModel::FIELDNAME_WORKFLOW . "=1" //ICI nous déterminons le workflow choisie
                                 . " AND " . FtaProcessusCycleModel::TABLENAME . "." . FtaProcessusCycleModel::FIELDNAME_WORKFLOW
                                 . "=" . FtaWorkflowModel::TABLENAME . "." . FtaWorkflowModel::KEYNAME
                                 . " AND " . FtaProcessusModel::TABLENAME . "." . FtaProcessusModel::FIELDNAME_ID_FTA_ROLE
@@ -116,7 +117,8 @@ class FtaEtatModel extends AbstractModel {
                                 . " AND " . FtaActionRoleModel::TABLENAME . "." . FtaActionRoleModel::FIELDNAME_ID_FTA_ROLE . "=$paramRole" // Nous recuperons le type de role pour l'utilisateur
                                 . " AND " . IntranetActionsModel::TABLENAME . "." . IntranetActionsModel::KEYNAME
                                 . "=" . IntranetDroitsAccesModel::TABLENAME . "." . IntranetDroitsAccesModel::FIELDNAME_ID_INTRANET_ACTIONS
-                                . " AND " . IntranetDroitsAccesModel::TABLENAME . "." . IntranetDroitsAccesModel::FIELDNAME_ID_INTRANET_MODULES . "=" . IntranetModulesModel::TABLENAME . "." . IntranetModulesModel::KEYNAME
+                                . " AND " . IntranetDroitsAccesModel::TABLENAME . "." . IntranetDroitsAccesModel::FIELDNAME_ID_INTRANET_MODULES
+                                . "=" . IntranetModulesModel::TABLENAME . "." . IntranetModulesModel::KEYNAME
                                 . " AND " . IntranetDroitsAccesModel::FIELDNAME_ID_USER . "=" . $id_user // L'utilisateur connecté
                                 . " AND " . IntranetDroitsAccesModel::TABLENAME . "." . IntranetDroitsAccesModel::FIELDNAME_NIVEAU_INTRANET_DROITS_ACCES . "=1"
                                 . " AND " . FtaWorkflowStructureModel::TABLENAME . "." . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_CHAPITRE
@@ -135,7 +137,7 @@ class FtaEtatModel extends AbstractModel {
                         }
                     }
                 }
-                $req = "SELECT DISTINCT id_fta FROM fta WHERE ( 0 ";
+                $req = "SELECT DISTINCT " . FtaModel::KEYNAME . " FROM fta WHERE ( 0 ";
 
                 $req .= FtaModel::AddIdFTaValidProcess($idFtaEffectue);
 
@@ -197,7 +199,7 @@ class FtaEtatModel extends AbstractModel {
                         }
                     }
                 }
-                $req = "SELECT DISTINCT id_fta FROM fta WHERE ( 0 ";
+                $req = "SELECT DISTINCT " . FtaModel::KEYNAME . " FROM fta WHERE ( 0 ";
 
                 $req .= FtaModel::AddIdFTaValidProcess($idFtaEffectue);
 

@@ -21,6 +21,7 @@ class FtaModel extends AbstractModel {
     const FIELDNAME_CODE_ARTICLE_LDC = "code_article_ldc";
     const FIELDNAME_CODE_DOUANE_FTA = "code_douane_fta";
     const FIELDNAME_CODE_DOUANE_LIBELLE_FTA = "code_douane_libelle_fta";
+    const FIELDNAME_COMMENTAIRE = "commentaire";
     const FIELDNAME_COMPOSITION1 = "Composition";
     const FIELDNAME_COMPOSITION2 = "composition1";
     const FIELDNAME_CONDITION_SOUS_ATMOSPHERE = "atmosphere_protectrice";
@@ -516,13 +517,17 @@ class FtaModel extends AbstractModel {
                                 . " AND " . FtaComposantModel::FIELDNAME_IS_COMPOSITION_FTA_COMPOSANT . "=" . FtaConditionnementModel::EMBALLAGES_UVC
                 );
 
-                foreach ($arrayComposant as $rowsComposant) {
+                if ($arrayComposant) {
+                    foreach ($arrayComposant as $rowsComposant) {
 
-                    // Calcul du Poids net du colis
-                    $return[FtaConditionnementModel::COLIS_EMBALLAGE_NET] = FtaConditionnementModel::getCalculGenericMultiplication(
-                                    $rowsComposant[FtaComposantModel::FIELDNAME_QUANTITE_FTA_COMPOSITION]
-                                    , $rowsComposant[FtaComposantModel::FIELDNAME_POIDS_UNITAIRE_CODIFICATION]
-                    );
+                        // Calcul du Poids net du colis
+                        $return[FtaConditionnementModel::COLIS_EMBALLAGE_NET] = FtaConditionnementModel::getCalculGenericMultiplication(
+                                        $rowsComposant[FtaComposantModel::FIELDNAME_QUANTITE_FTA_COMPOSITION]
+                                        , $rowsComposant[FtaComposantModel::FIELDNAME_POIDS_UNITAIRE_CODIFICATION]
+                        );
+                    }
+                } else {
+                    $return[FtaConditionnementModel::COLIS_EMBALLAGE_NET] = 0;
                 }
 
                 // Calcul du Poids net du colis

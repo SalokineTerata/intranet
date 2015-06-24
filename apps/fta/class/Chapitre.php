@@ -67,6 +67,7 @@ class Chapitre {
     protected static $html_chapitre_all;
     protected static $html_chapitre_codification;
     protected static $html_chapitre_codification_externe;
+    protected static $html_chapitre_codification_w1;
     protected static $html_chapitre_commentaire;
     protected static $html_chapitre_commerce;
     protected static $html_chapitre_composition;
@@ -75,6 +76,7 @@ class Chapitre {
     protected static $html_chapitre_core;
     protected static $html_chapitre_decoupe;
     protected static $html_chapitre_dictionnaire_de_donnees;
+    protected static $html_chapitre_donnees_clients_w1;
     protected static $html_chapitre_emballage;
     protected static $html_chapitre_emballage_colis;
     protected static $html_chapitre_emballage_complementaires;
@@ -87,6 +89,7 @@ class Chapitre {
     protected static $html_chapitre_expedition;
     protected static $html_chapitre_exigence_client;
     protected static $html_chapitre_identite;
+    protected static $html_chapitre_identite_w1;
     protected static $html_chapitre_need_rebuild;
     protected static $html_chapitre_nomenclature;
     protected static $html_chapitre_palettisation;
@@ -343,6 +346,21 @@ class Chapitre {
             case "etiquette_composant":
                 self::$html_chapitre_etiquette_composant = self::buildChapitreEtiquetteComposant();
                 $return = self::$html_chapitre_etiquette_composant;
+                break;
+            default:
+            case "identite_w1":
+                self::$html_chapitre_identite_w1 = self::buildChapitreIdentite();
+                $return = self::$html_chapitre_identite_w1;
+                break;
+            default:
+            case "donnees_clients_w1":
+                self::$html_chapitre_donnees_clients_w1 = self::buildChapitreCommerce();
+                $return = self::$html_chapitre_donnees_clients_w1;
+                break;
+            default:
+            case "codification_w1":
+                self::$html_chapitre_codification_w1 = self::buildChapitreCodification();
+                $return = self::$html_chapitre_codification_w1;
                 break;
             default:
         }
@@ -2353,7 +2371,6 @@ class Chapitre {
         return $return;
     }
 
-    
 }
 
 ?>

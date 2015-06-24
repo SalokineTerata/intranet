@@ -1,6 +1,6 @@
 <?php
 
-class FtaTransition {
+class FtaTransitionModel {
 
     const TABLENAME = "fta_transition";
     const FIELDNAME_ABREVIATION_FTA_ETAT = "abreviation_fta_etat";

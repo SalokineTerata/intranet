@@ -333,8 +333,7 @@ class FtaSuiviProjetModel extends AbstractModel {
 
                             break;
                     }
-                    //echo $req;
-                    //echo "<br>";
+                  
                 }//Fin de la vérification par chapitre et du traitement de la notification
             }//Fin de la vérification des processus validés
         }//Fin du parcours des processsu

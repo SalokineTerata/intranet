@@ -163,7 +163,7 @@ if ($id_user) {
         if ($synthese_action) {
             //echo $id_fta_etat;
             //$tableau_fiche = AccueilFta::getTableauFiche($id_fta_etat, $choix, $isLimit, $order_common);
-            $tableau_fiche = AccueilFta::getHtmlTableauFiche($nom_fta_etat);
+           $tableau_fiche = AccueilFta::getHtmlTableauFiche($nom_fta_etat);
         }
 
         if ($isLimit) {

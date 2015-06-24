@@ -15,7 +15,7 @@ class FtaRoleModel extends AbstractModel {
 
     public static function getIdFtaRoleByIdUser($paramIdUser) {
         $arrayIdFtaRole = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
-                        "SELECT DISTINCT " . FtaRoleModel::TABLENAME . "." . FtaRoleModel::KEYNAME . "," . FtaRoleModel::FIELDNAME_DESCRIPTION_FTA_ROLE
+                        "SELECT DISTINCT " . FtaRoleModel::TABLENAME . ".*" 
                         . " FROM " . FtaActionRoleModel::TABLENAME . "," . UserModel::TABLENAME
                         . "," . IntranetDroitsAccesModel::TABLENAME . "," . IntranetActionsModel::TABLENAME
                         . "," . FtaRoleModel::TABLENAME

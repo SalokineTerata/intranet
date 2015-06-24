@@ -21,6 +21,7 @@ class FtaModel extends AbstractModel {
     const FIELDNAME_CODE_ARTICLE_LDC = "code_article_ldc";
     const FIELDNAME_CODE_DOUANE_FTA = "code_douane_fta";
     const FIELDNAME_CODE_DOUANE_LIBELLE_FTA = "code_douane_libelle_fta";
+    const FIELDNAME_COMMENTAIRE = "commentaire";
     const FIELDNAME_COMPOSITION1 = "Composition";
     const FIELDNAME_COMPOSITION2 = "composition1";
     const FIELDNAME_CONDITION_SOUS_ATMOSPHERE = "atmosphere_protectrice";
@@ -29,7 +30,9 @@ class FtaModel extends AbstractModel {
     const FIELDNAME_CONSEIL_DE_RECHAUFFAGE_DEVELOPPEMENT = "conseil_rechauffage_experimentale_fta";
     const FIELDNAME_CONSEIL_DE_PRESENTATION = "presentation_fta";
     const FIELDNAME_CREATEUR = "createur_fta";
+    const FIELDNAME_DATE_CREATION = "date_creation";
     const FIELDNAME_DATE_DEMANDEUR = "date_demandeur_fta";
+    const FIELDNAME_DATE_DERNIERE_MAJ_FTA = "date_derniere_maj_fta";
     const FIELDNAME_DATE_ECHEANCE_FTA = "date_echeance_fta";
     const FIELDNAME_DATE_PREVISONNELLE_TRANSFERT_INDUSTRIEL = "date_transfert_industriel";
     const FIELDNAME_DESCRIPTION_DU_PRODUIT = "synoptique_valide_fta";
@@ -145,7 +148,6 @@ class FtaModel extends AbstractModel {
                 new GeoModel($this->getDataField(self::FIELDNAME_SITE_EXPEDITION_FTA)->getFieldValue()
                 , DatabaseRecord::VALUE_DONT_CREATE_RECORD_IN_DATABASE_IF_KEY_DOESNT_EXIST)
         );
-
     }
 
     /**
@@ -457,136 +459,301 @@ class FtaModel extends AbstractModel {
                         . " ORDER BY " . AnnexeEmballageGroupeTypeModel::FIELDNAME_NOM_ANNEXE_EMBALLAGE_GROUPE_TYPE
         );
 
-        foreach ($array as $rows) {
+        if ($array) {
+            foreach ($array as $rows) {
 
-            // Calcul du poids de l'emballage  par UVC  
-            $return[FtaConditionnementModel::UVC_EMBALLAGE] = FtaConditionnementModel::getCalculPoidsEmballage(
-                            $rows[FtaConditionnementModel::FIELDNAME_POIDS_FTA_CONDITIONNEMENT]
-                            , $rows[FtaConditionnementModel::FIELDNAME_QUANTITE_PAR_COUCHE_FTA_CONDITIONNEMENT]
-                            , $rows[FtaConditionnementModel::FIELDNAME_NOMBRE_COUCHE_FTA_CONDITIONNEMENT]
-            );
+                // Calcul du poids de l'emballage  par UVC  
+                $return[FtaConditionnementModel::UVC_EMBALLAGE] = FtaConditionnementModel::getCalculPoidsEmballage(
+                                $rows[FtaConditionnementModel::FIELDNAME_POIDS_FTA_CONDITIONNEMENT]
+                                , $rows[FtaConditionnementModel::FIELDNAME_QUANTITE_PAR_COUCHE_FTA_CONDITIONNEMENT]
+                                , $rows[FtaConditionnementModel::FIELDNAME_NOMBRE_COUCHE_FTA_CONDITIONNEMENT]
+                );
 
-            //Calcul des dimensions de l'emballage par UVC 
-            $return[FtaConditionnementModel::UVC_EMBALLAGE_DIMENSION] = FtaConditionnementModel::getCalculDimensionEmballageUvc(
-                            $return[FtaConditionnementModel::UVC_EMBALLAGE_DIMENSION_HAUTEUR] = 0
-                            , $rows[FtaConditionnementModel::FIELDNAME_HAUTEUR_FTA_CONDITIONNEMENT]
-                            , $return[FtaConditionnementModel::UVC_EMBALLAGE_DIMENSION_LONGEUR] = 0
-                            , $rows[FtaConditionnementModel::FIELDNAME_LONGUEUR_FTA_CONDITIONNEMENT]
-                            , $return[FtaConditionnementModel::UVC_EMBALLAGE_DIMENSION_LARGEUR] = 0
-                            , $rows[FtaConditionnementModel::FIELDNAME_LARGEUR_FTA_CONDITIONNEMENT]
-            );
+                //Calcul des dimensions de l'emballage par UVC 
+                $return[FtaConditionnementModel::UVC_EMBALLAGE_DIMENSION] = FtaConditionnementModel::getCalculDimensionEmballageUvc(
+                                $return[FtaConditionnementModel::UVC_EMBALLAGE_DIMENSION_HAUTEUR] = 0
+                                , $rows[FtaConditionnementModel::FIELDNAME_HAUTEUR_FTA_CONDITIONNEMENT]
+                                , $return[FtaConditionnementModel::UVC_EMBALLAGE_DIMENSION_LONGEUR] = 0
+                                , $rows[FtaConditionnementModel::FIELDNAME_LONGUEUR_FTA_CONDITIONNEMENT]
+                                , $return[FtaConditionnementModel::UVC_EMBALLAGE_DIMENSION_LARGEUR] = 0
+                                , $rows[FtaConditionnementModel::FIELDNAME_LARGEUR_FTA_CONDITIONNEMENT]
+                );
 
-            //Les Calculs de la table fta
-            $arrayFta = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
-                            "SELECT DISTINCT " . FtaModel::FIELDNAME_PCB . "," . FtaModel::FIELDNAME_POIDS_ELEMENTAIRE
-                            . " FROM " . FtaModel::TABLENAME . " "
-                            . " WHERE " . FtaModel::KEYNAME . "=" . $this->getKeyValue()
-            );
+                //Les Calculs de la table fta
+                $arrayFta = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
+                                "SELECT DISTINCT " . FtaModel::FIELDNAME_PCB . "," . FtaModel::FIELDNAME_POIDS_ELEMENTAIRE
+                                . " FROM " . FtaModel::TABLENAME . " "
+                                . " WHERE " . FtaModel::KEYNAME . "=" . $this->getKeyValue()
+                );
 
-            foreach ($arrayFta as $rowsFta) {
+                foreach ($arrayFta as $rowsFta) {
 
-                //Calcul du Poids net par UVC
-                $return[FtaConditionnementModel::UVC_EMBALLAGE_NET] = $rowsFta[FtaModel::FIELDNAME_POIDS_ELEMENTAIRE];
+                    //Calcul du Poids net par UVC
+                    $return[FtaConditionnementModel::UVC_EMBALLAGE_NET] = $rowsFta[FtaModel::FIELDNAME_POIDS_ELEMENTAIRE];
 
-                //Calcul du PCB du colis
-                $return[FtaModel::FIELDNAME_PCB] = $rowsFta[FtaModel::FIELDNAME_PCB];
-            }
-            //Calcul du poids brut par UVC en g
-            $return[FtaConditionnementModel::UVC_EMBALLAGE_BRUT] = FtaConditionnementModel::getCalculPoidsBrutEmballage(
-                            $return[FtaConditionnementModel::UVC_EMBALLAGE_NET]
-                            , $return[FtaConditionnementModel::UVC_EMBALLAGE]
-            );
+                    //Calcul du PCB du colis
+                    $return[FtaModel::FIELDNAME_PCB] = $rowsFta[FtaModel::FIELDNAME_PCB];
+                }
+                //Calcul du poids brut par UVC en g
+                $return[FtaConditionnementModel::UVC_EMBALLAGE_BRUT] = FtaConditionnementModel::getCalculPoidsBrutEmballage(
+                                $return[FtaConditionnementModel::UVC_EMBALLAGE_NET]
+                                , $return[FtaConditionnementModel::UVC_EMBALLAGE]
+                );
 
-            //Calcul du poids de Emballages du Colis
-            $return[FtaConditionnementModel::COLIS_EMBALLAGE] = FtaConditionnementModel::getCalculPoidsEmballage(
-                            $rows[FtaConditionnementModel::FIELDNAME_POIDS_FTA_CONDITIONNEMENT]
-                            , $rows[FtaConditionnementModel::FIELDNAME_QUANTITE_PAR_COUCHE_FTA_CONDITIONNEMENT]
-                            , $rows[FtaConditionnementModel::FIELDNAME_NOMBRE_COUCHE_FTA_CONDITIONNEMENT]
-            );
+                //Calcul du poids de Emballages du Colis
+                $return[FtaConditionnementModel::COLIS_EMBALLAGE] = FtaConditionnementModel::getCalculPoidsEmballage(
+                                $rows[FtaConditionnementModel::FIELDNAME_POIDS_FTA_CONDITIONNEMENT]
+                                , $rows[FtaConditionnementModel::FIELDNAME_QUANTITE_PAR_COUCHE_FTA_CONDITIONNEMENT]
+                                , $rows[FtaConditionnementModel::FIELDNAME_NOMBRE_COUCHE_FTA_CONDITIONNEMENT]
+                );
 
-            //Calcul du poids de Emballages du Colis
-            $return[FtaConditionnementModel::COLIS_EMBALLAGE] = $return[FtaConditionnementModel::COLIS_EMBALLAGE] * $return[FtaModel::FIELDNAME_PCB];
+                //Calcul du poids de Emballages du Colis
+                $return[FtaConditionnementModel::COLIS_EMBALLAGE] = $return[FtaConditionnementModel::COLIS_EMBALLAGE] * $return[FtaModel::FIELDNAME_PCB];
 
-            //Les Calculs de la table composant        
-            $arrayComposant = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
-                            "SELECT " . FtaComposantModel::FIELDNAME_QUANTITE_FTA_COMPOSITION . "," . FtaComposantModel::FIELDNAME_IS_COMPOSITION_FTA_COMPOSANT . "," . FtaComposantModel::FIELDNAME_POIDS_UNITAIRE_CODIFICATION . " FROM " . FtaComposantModel::TABLENAME
-                            . " WHERE " . FtaComposantModel::FIELDNAME_ID_FTA . "=" . $this->getKeyValue()
-                            . " AND " . FtaComposantModel::FIELDNAME_IS_COMPOSITION_FTA_COMPOSANT . "=" . FtaConditionnementModel::EMBALLAGES_UVC
-            );
+                //Les Calculs de la table composant        
+                $arrayComposant = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
+                                "SELECT " . FtaComposantModel::FIELDNAME_QUANTITE_FTA_COMPOSITION . "," . FtaComposantModel::FIELDNAME_IS_COMPOSITION_FTA_COMPOSANT . "," . FtaComposantModel::FIELDNAME_POIDS_UNITAIRE_CODIFICATION . " FROM " . FtaComposantModel::TABLENAME
+                                . " WHERE " . FtaComposantModel::FIELDNAME_ID_FTA . "=" . $this->getKeyValue()
+                                . " AND " . FtaComposantModel::FIELDNAME_IS_COMPOSITION_FTA_COMPOSANT . "=" . FtaConditionnementModel::EMBALLAGES_UVC
+                );
 
-            foreach ($arrayComposant as $rowsComposant) {
+                if ($arrayComposant) {
+                    foreach ($arrayComposant as $rowsComposant) {
+
+                        // Calcul du Poids net du colis
+                        $return[FtaConditionnementModel::COLIS_EMBALLAGE_NET] = FtaConditionnementModel::getCalculGenericMultiplication(
+                                        $rowsComposant[FtaComposantModel::FIELDNAME_QUANTITE_FTA_COMPOSITION]
+                                        , $rowsComposant[FtaComposantModel::FIELDNAME_POIDS_UNITAIRE_CODIFICATION]
+                        );
+                    }
+                } else {
+                    $return[FtaConditionnementModel::COLIS_EMBALLAGE_NET] = 0;
+                }
 
                 // Calcul du Poids net du colis
-                $return[FtaConditionnementModel::COLIS_EMBALLAGE_NET] = FtaConditionnementModel::getCalculGenericMultiplication(
-                                $rowsComposant[FtaComposantModel::FIELDNAME_QUANTITE_FTA_COMPOSITION]
-                                , $rowsComposant[FtaComposantModel::FIELDNAME_POIDS_UNITAIRE_CODIFICATION]
+                $return[FtaConditionnementModel::COLIS_EMBALLAGE_NET] = $return[FtaConditionnementModel::COLIS_EMBALLAGE_NET] / 1000; //Conversion en g --> Kg
+                if (!$return[FtaConditionnementModel::COLIS_EMBALLAGE_NET]) {
+                    $return[FtaConditionnementModel::COLIS_EMBALLAGE_NET] = FtaConditionnementModel::getCalculGenericMultiplication(
+                                    $rowsFta[FtaModel::FIELDNAME_POIDS_ELEMENTAIRE]
+                                    , $rowsFta[FtaModel::FIELDNAME_PCB]
+                    );
+                }
+
+                //Calcul du poids brut du Colis en Kg
+                $return[FtaConditionnementModel::COLIS_EMBALLAGE_BRUT] = FtaConditionnementModel::getCalculPoidsBrutEmballageColis(
+                                $return[FtaConditionnementModel::COLIS_EMBALLAGE_NET]
+                                , $return[FtaConditionnementModel::COLIS_EMBALLAGE]
+                );
+
+                //Hauteur du colis
+                $return[FtaConditionnementModel::COLIS_EMBALLAGE_HAUTEUR] = $rows[FtaConditionnementModel::FIELDNAME_HAUTEUR_FTA_CONDITIONNEMENT];
+
+
+                //Calcul du nombre de colis par couche
+                $return[FtaConditionnementModel::PALETTE_NOMBRE_COLIS_PAR_COUCHE] = $rows[FtaConditionnementModel::FIELDNAME_QUANTITE_PAR_COUCHE_FTA_CONDITIONNEMENT];
+
+
+                //Calcul du nombre de couche par palette
+                $return[FtaConditionnementModel::PALETTE_NOMBRE_DE_COUCHE] = $rows[FtaConditionnementModel::FIELDNAME_NOMBRE_COUCHE_FTA_CONDITIONNEMENT];
+
+                //Calcul du poids de l'emballage par palette
+
+                $return[FtaConditionnementModel::PALETTE_EMBALLAGE] = FtaConditionnementModel::getCalculPoidsEmballagePalette(
+                                $rows[FtaConditionnementModel::FIELDNAME_POIDS_FTA_CONDITIONNEMENT]
+                                , $return[FtaConditionnementModel::PALETTE_NOMBRE_COLIS_PAR_COUCHE]
+                                , $return[FtaConditionnementModel::PALETTE_NOMBRE_DE_COUCHE]
+                                , $rows[FtaConditionnementModel::FIELDNAME_QUANTITE_PAR_COUCHE_FTA_CONDITIONNEMENT]
+                                , $rows[FtaConditionnementModel::FIELDNAME_NOMBRE_COUCHE_FTA_CONDITIONNEMENT]
+                );
+
+
+                //Calcul du Poids net par Palette
+                $return[FtaConditionnementModel::PALETTE_EMBALLAGE_NET] = FtaConditionnementModel::getCalculPoidsEmballage(
+                                $return[FtaConditionnementModel::COLIS_EMBALLAGE_NET]
+                                , $rows[FtaConditionnementModel::FIELDNAME_QUANTITE_PAR_COUCHE_FTA_CONDITIONNEMENT]
+                                , $rows[FtaConditionnementModel::FIELDNAME_NOMBRE_COUCHE_FTA_CONDITIONNEMENT])
+                ;
+
+                //Calcul Poids Brut  d'une Palette en Kg
+                $return[FtaConditionnementModel::PALETTE_EMBALLAGE_BRUT] = FtaConditionnementModel::getCalculPoidsBrutEmballage(
+                                $return[FtaConditionnementModel::PALETTE_EMBALLAGE_NET]
+                                , $return[FtaConditionnementModel::PALETTE_EMBALLAGE]
+                );
+
+                //Calcul de la hauteur par palette
+                $return[FtaConditionnementModel::PALETTE_EMBALLAGE_HAUTEUR] = FtaConditionnementModel::getCalculHauteurEmballagePalette(
+                                $rows[FtaConditionnementModel::FIELDNAME_HAUTEUR_FTA_CONDITIONNEMENT]
+                                , $return[FtaConditionnementModel::PALETTE_NOMBRE_DE_COUCHE]
+                );
+
+                //Calcul du nombre total de Carton par palette:
+                $return[FtaConditionnementModel::PALETTE_NOMBRE_TOTAL_PAR_CARTON] = FtaConditionnementModel::getCalculGenericMultiplication(
+                                $return[FtaConditionnementModel::PALETTE_NOMBRE_COLIS_PAR_COUCHE]
+                                , $return[FtaConditionnementModel::PALETTE_NOMBRE_DE_COUCHE]
                 );
             }
+        }
+        return $return;
+    }
 
-            // Calcul du Poids net du colis
-            $return[FtaConditionnementModel::COLIS_EMBALLAGE_NET] = $return[FtaConditionnementModel::COLIS_EMBALLAGE_NET] / 1000; //Conversion en g --> Kg
-            if (!$return[FtaConditionnementModel::COLIS_EMBALLAGE_NET]) {
-                $return[FtaConditionnementModel::COLIS_EMBALLAGE_NET] = FtaConditionnementModel::getCalculGenericMultiplication(
-                                $rowsFta[FtaModel::FIELDNAME_POIDS_ELEMENTAIRE]
-                                , $rowsFta[FtaModel::FIELDNAME_PCB]
-                );
+    public static function AddIdFTaValidProcess($paramIdEffectue) {
+        if ($paramIdEffectue) {
+            foreach ($paramIdEffectue as $value) {
+                $req .= " OR " . " " . FtaModel::KEYNAME . "=" . $value . " ";
             }
+        }
+        return $req;
+    }
 
-            //Calcul du poids brut du Colis en Kg
-            $return[FtaConditionnementModel::COLIS_EMBALLAGE_BRUT] = FtaConditionnementModel::getCalculPoidsBrutEmballageColis(
-                            $return[FtaConditionnementModel::COLIS_EMBALLAGE_NET]
-                            , $return[FtaConditionnementModel::COLIS_EMBALLAGE]
-            );
+    public static function getIdFtaAndIdWorkflowByIdFtaRoleAndEtatAvancement($paramRole, $paramEtatAvancement) {
+        $globalConfig = new GlobalConfig();
+        $id_user = $globalConfig->getAuthenticatedUser()->getKeyValue();
 
-            //Hauteur du colis
-            $return[FtaConditionnementModel::COLIS_EMBALLAGE_HAUTEUR] = $rows[FtaConditionnementModel::FIELDNAME_HAUTEUR_FTA_CONDITIONNEMENT];
+        switch ($paramEtatAvancement) {
+            case "I";
+
+                $arrayTmp = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
+                                "SELECT DISTINCT " . FtaModel::KEYNAME . "," . FtaProcessusModel::KEYNAME
+                                . " FROM " . FtaSuiviProjetModel::TABLENAME . ", " . FtaWorkflowStructureModel::TABLENAME
+                                . ", " . FtaProcessusCycleModel::TABLENAME
+                                . " WHERE " . FtaWorkflowStructureModel::TABLENAME . "." . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_PROCESSUS
+                                . " in (SELECT DISTINCT " . FtaProcessusCycleModel::FIELDNAME_PROCESSUS_INIT
+                                . " FROM " . FtaProcessusCycleModel::TABLENAME . ", " . FtaProcessusModel::TABLENAME
+                                . ", " . FtaWorkflowModel::TABLENAME . ", " . FtaWorkflowStructureModel::TABLENAME
+                                . ", " . IntranetActionsModel::TABLENAME . ", " . IntranetDroitsAccesModel::TABLENAME . ", " . IntranetModulesModel::TABLENAME
+                                . ", " . FtaActionRoleModel::TABLENAME . ", " . FtaRoleModel::TABLENAME
+                                . ", " . FtaSuiviProjetModel::TABLENAME . ", " . FtaModel::TABLENAME
+                                . " WHERE " . FtaProcessusCycleModel::TABLENAME . "." . FtaProcessusCycleModel::FIELDNAME_PROCESSUS_NEXT
+                                . "=" . FtaProcessusModel::TABLENAME . "." . FtaProcessusModel::KEYNAME
+                                . " AND " . FtaProcessusCycleModel::TABLENAME . "." . FtaProcessusCycleModel::FIELDNAME_WORKFLOW . "=1 " // nous déterminons le type de workflow qu'il s'agit pour le moment par défaut v3 test
+                                . " AND " . FtaProcessusCycleModel::TABLENAME . "." . FtaProcessusCycleModel::FIELDNAME_WORKFLOW
+                                . "=" . FtaWorkflowModel::TABLENAME . "." . FtaWorkflowModel::KEYNAME
+                                . " AND " . FtaProcessusModel::TABLENAME . "." . FtaProcessusModel::FIELDNAME_ID_FTA_ROLE
+                                . "=" . FtaRoleModel::TABLENAME . "." . FtaRoleModel::KEYNAME
+                                . " AND " . FtaRoleModel::TABLENAME . "." . FtaRoleModel::KEYNAME
+                                . "=" . FtaActionRoleModel::TABLENAME . "." . FtaActionRoleModel::FIELDNAME_ID_FTA_ROLE
+                                . " AND " . FtaActionRoleModel::TABLENAME . "." . FtaActionRoleModel::FIELDNAME_ID_INTRANET_ACTIONS
+                                . "=" . IntranetActionsModel::TABLENAME . "." . IntranetActionsModel::KEYNAME
+                                . " AND " . FtaActionRoleModel::TABLENAME . "." . FtaActionRoleModel::FIELDNAME_ID_FTA_ROLE . "=" . $paramRole // Nous recuperons le type de role pour l'utilisateur
+                                . " AND " . IntranetActionsModel::TABLENAME . "." . IntranetActionsModel::KEYNAME
+                                . "=" . IntranetDroitsAccesModel::TABLENAME . "." . IntranetDroitsAccesModel::FIELDNAME_ID_INTRANET_ACTIONS
+                                . " AND " . IntranetDroitsAccesModel::TABLENAME . "." . IntranetDroitsAccesModel::FIELDNAME_ID_INTRANET_MODULES
+                                . "=" . IntranetModulesModel::TABLENAME . "." . IntranetModulesModel::KEYNAME
+                                . " AND " . IntranetDroitsAccesModel::FIELDNAME_ID_USER . "=" . $id_user // L'utilisateur connecté
+                                . " AND " . IntranetDroitsAccesModel::TABLENAME . "." . IntranetDroitsAccesModel::FIELDNAME_NIVEAU_INTRANET_DROITS_ACCES . "=1"
+                                . " AND " . FtaWorkflowStructureModel::TABLENAME . "." . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_CHAPITRE
+                                . "=" . FtaSuiviProjetModel::TABLENAME . "." . FtaSuiviProjetModel::FIELDNAME_ID_FTA_CHAPITRE
+                                . " AND " . FtaSuiviProjetModel::FIELDNAME_SIGNATURE_VALIDATION_SUIVI_PROJET . "<>0)"
+                                . " AND " . FtaSuiviProjetModel::FIELDNAME_SIGNATURE_VALIDATION_SUIVI_PROJET . "<>0"
+                                . " AND " . FtaProcessusCycleModel::FIELDNAME_FTA_ETAT . "='" . $paramEtatAvancement
+                                . "' AND " . FtaWorkflowStructureModel::TABLENAME . "." . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_CHAPITRE
+                                . "=" . FtaSuiviProjetModel::TABLENAME . "." . FtaSuiviProjetModel::FIELDNAME_ID_FTA_CHAPITRE
+                );
+
+                if ($arrayTmp) {
+                    foreach ($arrayTmp as $rows) {
+                        $tauxDeValidadation = FtaProcessusModel::getFtaProcessusNonValideSuivant($rows[FtaModel::KEYNAME], $rows[FtaProcessusModel::KEYNAME]);
+                        if ($tauxDeValidadation <> 1) {
+                            $idFtaEffectue[] = $rows[FtaModel::KEYNAME];
+                        }
+                    }
+                }
+                $req = "SELECT DISTINCT " . FtaModel::KEYNAME
+                        . "," . FtaWorkflowModel::FIELDNAME_DESCRIPTION_FTA_WORKFLOW
+                        . "," . FtaWorkflowModel::FIELDNAME_NOM_FTA_WORKFLOW
+                        . " FROM " . FtaModel::TABLENAME . "," . FtaWorkflowModel::TABLENAME
+                        . " WHERE ( 0 ";
+
+                $req .= FtaModel::AddIdFTaValidProcess($idFtaEffectue);
+
+                $req .= ")";
+
+                $req .= " AND " . FtaModel::TABLENAME . "." . FtaModel::FIELDNAME_WORKFLOW
+                        . "=" . FtaWorkflowModel::TABLENAME . "." . FtaWorkflowModel::KEYNAME;
 
 
-            //Calcul du nombre de colis par couche
-            $return[FtaConditionnementModel::PALETTE_NOMBRE_COLIS_PAR_COUCHE] = $rows[FtaConditionnementModel::FIELDNAME_QUANTITE_PAR_COUCHE_FTA_CONDITIONNEMENT];
+                $array = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray($req);
 
 
-            //Calcul du nombre de couche par palette
-            $return[FtaConditionnementModel::PALETTE_NOMBRE_DE_COUCHE] = $rows[FtaConditionnementModel::FIELDNAME_NOMBRE_COUCHE_FTA_CONDITIONNEMENT];
+                break;
+            case "V":
+                /*
+                 * Recuperer la requete pour des fta attente 
+                 */
+                break;
+            case "A":
+                break;
+            case "R":
+                break;
+            case "P":
 
-            //Calcul du poids de l'emballage par palette
 
-            $return[FtaConditionnementModel::PALETTE_EMBALLAGE] = FtaConditionnementModel::getCalculPoidsEmballagePalette(
-                            $rows[FtaConditionnementModel::FIELDNAME_POIDS_FTA_CONDITIONNEMENT]
-                            , $return[FtaConditionnementModel::PALETTE_NOMBRE_COLIS_PAR_COUCHE]
-                            , $return[FtaConditionnementModel::PALETTE_NOMBRE_DE_COUCHE]
-                            , $rows[FtaConditionnementModel::FIELDNAME_QUANTITE_PAR_COUCHE_FTA_CONDITIONNEMENT]
-                            , $rows[FtaConditionnementModel::FIELDNAME_NOMBRE_COUCHE_FTA_CONDITIONNEMENT]
-            );
+                $arrayTmp = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
+                                "SELECT DISTINCT " . FtaModel::KEYNAME . "," . FtaProcessusModel::KEYNAME
+                                . " FROM " . FtaSuiviProjetModel::TABLENAME . ", " . FtaWorkflowStructureModel::TABLENAME
+                                . ", " . FtaProcessusCycleModel::TABLENAME
+                                . " WHERE " . FtaWorkflowStructureModel::TABLENAME . "." . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_PROCESSUS
+                                . " in (SELECT DISTINCT " . FtaProcessusCycleModel::FIELDNAME_PROCESSUS_INIT
+                                . " FROM " . FtaProcessusCycleModel::TABLENAME . ", " . FtaProcessusModel::TABLENAME
+                                . ", " . FtaWorkflowModel::TABLENAME . ", " . FtaWorkflowStructureModel::TABLENAME
+                                . ", " . IntranetActionsModel::TABLENAME . ", " . IntranetDroitsAccesModel::TABLENAME . ", " . IntranetModulesModel::TABLENAME
+                                . ", " . FtaActionRoleModel::TABLENAME . ", " . FtaRoleModel::TABLENAME
+                                . ", " . FtaSuiviProjetModel::TABLENAME . ", " . FtaModel::TABLENAME
+                                . " WHERE " . FtaProcessusCycleModel::TABLENAME . "." . FtaProcessusCycleModel::FIELDNAME_PROCESSUS_NEXT
+                                . "=" . FtaProcessusModel::TABLENAME . "." . FtaProcessusModel::KEYNAME
+                                . " AND " . FtaProcessusCycleModel::TABLENAME . "." . FtaProcessusCycleModel::FIELDNAME_WORKFLOW
+                                . "=" . FtaWorkflowModel::TABLENAME . "." . FtaWorkflowModel::KEYNAME
+                                . " AND " . FtaProcessusModel::TABLENAME . "." . FtaProcessusModel::FIELDNAME_ID_FTA_ROLE
+                                . "=" . FtaRoleModel::TABLENAME . "." . FtaRoleModel::KEYNAME
+                                . " AND " . FtaRoleModel::TABLENAME . "." . FtaRoleModel::KEYNAME
+                                . "=" . FtaActionRoleModel::TABLENAME . "." . FtaActionRoleModel::FIELDNAME_ID_FTA_ROLE
+                                . " AND " . FtaActionRoleModel::TABLENAME . "." . FtaActionRoleModel::FIELDNAME_ID_INTRANET_ACTIONS
+                                . "=" . IntranetActionsModel::TABLENAME . "." . IntranetActionsModel::KEYNAME
+                                . " AND " . FtaActionRoleModel::TABLENAME . "." . FtaActionRoleModel::FIELDNAME_ID_FTA_ROLE . "=" . $paramRole // Nous recuperons le type de role pour l'utilisateur
+                                . " AND " . IntranetActionsModel::TABLENAME . "." . IntranetActionsModel::KEYNAME
+                                . "=" . IntranetDroitsAccesModel::TABLENAME . "." . IntranetDroitsAccesModel::FIELDNAME_ID_INTRANET_ACTIONS
+                                . " AND " . IntranetDroitsAccesModel::TABLENAME . "." . IntranetDroitsAccesModel::FIELDNAME_ID_INTRANET_MODULES
+                                . "=" . IntranetModulesModel::TABLENAME . "." . IntranetModulesModel::KEYNAME
+                                . " AND " . IntranetDroitsAccesModel::FIELDNAME_ID_USER . "=" . $id_user // L'utilisateur connecté
+                                . " AND " . IntranetDroitsAccesModel::TABLENAME . "." . IntranetDroitsAccesModel::FIELDNAME_NIVEAU_INTRANET_DROITS_ACCES . "=1"
+                                . " AND " . FtaWorkflowStructureModel::TABLENAME . "." . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_CHAPITRE
+                                . "=" . FtaSuiviProjetModel::TABLENAME . "." . FtaSuiviProjetModel::FIELDNAME_ID_FTA_CHAPITRE
+                                . " AND " . FtaSuiviProjetModel::FIELDNAME_SIGNATURE_VALIDATION_SUIVI_PROJET . "<>0)"
+                                . " AND " . FtaSuiviProjetModel::FIELDNAME_SIGNATURE_VALIDATION_SUIVI_PROJET . "<>0"
+                                . " AND " . FtaProcessusCycleModel::FIELDNAME_FTA_ETAT . "='" . $paramEtatAvancement
+                                . "' AND " . FtaWorkflowStructureModel::TABLENAME . "." . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_CHAPITRE
+                                . "=" . FtaSuiviProjetModel::TABLENAME . "." . FtaSuiviProjetModel::FIELDNAME_ID_FTA_CHAPITRE
+                );
 
+                if ($arrayTmp) {
+                    foreach ($arrayTmp as $rows) {
+                        $tauxDeValidadation = FtaProcessusModel::getFtaProcessusNonValideSuivant($rows[FtaModel::KEYNAME], $rows[FtaProcessusModel::KEYNAME]);
+                        if ($tauxDeValidadation <> 1) {
+                            $idFtaEffectue[] = $rows[FtaModel::KEYNAME];
+                        }
+                    }
+                }
+                $req = "SELECT DISTINCT " . FtaModel::KEYNAME
+                        . "," . FtaWorkflowModel::FIELDNAME_DESCRIPTION_FTA_WORKFLOW
+                        . "," . FtaWorkflowModel::FIELDNAME_NOM_FTA_WORKFLOW
+                        . "," . FtaWorkflowModel::KEYNAME
+                        . " FROM " . FtaModel::TABLENAME . "," . FtaWorkflowModel::TABLENAME
+                        . " WHERE ( 0 ";
 
-            //Calcul du Poids net par Palette
-            $return[FtaConditionnementModel::PALETTE_EMBALLAGE_NET] = FtaConditionnementModel::getCalculPoidsEmballage(
-                            $return[FtaConditionnementModel::COLIS_EMBALLAGE_NET]
-                            , $rows[FtaConditionnementModel::FIELDNAME_QUANTITE_PAR_COUCHE_FTA_CONDITIONNEMENT]
-                            , $rows[FtaConditionnementModel::FIELDNAME_NOMBRE_COUCHE_FTA_CONDITIONNEMENT])
-            ;
+                $req .= FtaModel::AddIdFTaValidProcess($idFtaEffectue);
 
-            //Calcul Poids Brut  d'une Palette en Kg
-            $return[FtaConditionnementModel::PALETTE_EMBALLAGE_BRUT] = FtaConditionnementModel::getCalculPoidsBrutEmballage(
-                            $return[FtaConditionnementModel::PALETTE_EMBALLAGE_NET]
-                            , $return[FtaConditionnementModel::PALETTE_EMBALLAGE]
-            );
+                $req .= ")";
 
-            //Calcul de la hauteur par palette
-            $return[FtaConditionnementModel::PALETTE_EMBALLAGE_HAUTEUR] = FtaConditionnementModel::getCalculHauteurEmballagePalette(
-                            $rows[FtaConditionnementModel::FIELDNAME_HAUTEUR_FTA_CONDITIONNEMENT]
-                            , $return[FtaConditionnementModel::PALETTE_NOMBRE_DE_COUCHE]
-            );
+                $req .= " AND " . FtaModel::TABLENAME . "." . FtaModel::FIELDNAME_WORKFLOW
+                        . "=" . FtaWorkflowModel::TABLENAME . "." . FtaWorkflowModel::KEYNAME;
 
-            //Calcul du nombre total de Carton par palette:
-            $return[FtaConditionnementModel::PALETTE_NOMBRE_TOTAL_PAR_CARTON] = FtaConditionnementModel::getCalculGenericMultiplication(
-                            $return[FtaConditionnementModel::PALETTE_NOMBRE_COLIS_PAR_COUCHE]
-                            , $return[FtaConditionnementModel::PALETTE_NOMBRE_DE_COUCHE]
-            );
+                $array = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray($req);
+
+                break;
         }
 
-        return $return;
+
+        return $array;
     }
 
 }

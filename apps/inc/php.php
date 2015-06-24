@@ -39,8 +39,9 @@ require_once("../conf/EnvironmentAbstract.php");
 require_once("../conf/EnvironmentCod.php");
 
 // Fta (Model)
-require_once("../fta/class/Navigation.php");
+require_once("../fta/class/AccueilFta.php");
 require_once("../fta/class/Chapitre.php");
+require_once("../fta/class/Navigation.php");
 require_once("../fta/class/ObjectFta.php");
 
 // Fta View
@@ -66,6 +67,10 @@ require_once("../lib/class/model/AnnexeAgrologicArticleCodificationModel.php");
 require_once("../lib/class/model/AnnexeEmballageModel.php");
 require_once("../lib/class/model/AnnexeEmballageGroupeModel.php");
 require_once("../lib/class/model/AnnexeEmballageGroupeTypeModel.php");
+require_once("../lib/class/model/ClassificationArborescenceArticleCategorieContenuModel.php");
+require_once("../lib/class/model/ClassificationArborescenceArticleCategorieModel.php");
+require_once("../lib/class/model/ClassificationArborescenceArticleModel.php");
+require_once("../lib/class/model/ClassificationFtaModel.php");
 require_once("../lib/class/model/UserModel.php");
 require_once("../lib/class/model/FtaActionRoleModel.php");
 require_once("../lib/class/model/FtaActionSiteModel.php");
@@ -80,6 +85,7 @@ require_once("../lib/class/model/FtaSuiviProjetModel.php");
 require_once("../lib/class/model/FtaProcessusDelaiModel.php");
 require_once("../lib/class/model/FtaProcessusMultisiteModel.php");
 require_once("../lib/class/model/FtaRoleModel.php");
+require_once("../lib/class/model/FtaTransitionModel.php");
 require_once("../lib/class/model/FtaWorkflowModel.php");
 require_once("../lib/class/model/FtaWorkflowStructureModel.php");
 require_once("../lib/class/model/GeoModel.php");

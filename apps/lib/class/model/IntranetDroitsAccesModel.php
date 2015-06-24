@@ -6,7 +6,6 @@
  *
  * @author tp4300001
  */
-
 class IntranetDroitsAccesModel {
 
     const TABLENAME = "intranet_droits_acces";

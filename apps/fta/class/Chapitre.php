@@ -2011,7 +2011,7 @@ class Chapitre {
         $bloc.="<tr class=titre_principal><td class>Echéances</td></tr>";
 
         //Date d'échéance des processus
-        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_VIRTUAL_FTA_PROCESSUS_DELAI);
+        //$bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_VIRTUAL_FTA_PROCESSUS_DELAI);
         /**        */
         return $bloc;
     }

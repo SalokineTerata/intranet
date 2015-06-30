@@ -39,11 +39,11 @@ class FtaWorkflowModel extends AbstractModel {
         $this->modelIntranetActions = $modelIntranetActions;
     }
 
-    public static function getNameWorkflowByIdFtaRoleAndEtatAvancement($paramRole, $paramEtatAvancement) {
+    public static function getNameWorkflowByIdFtaRoleAndEtat($paramRole, $paramEtat) {
         $globalConfig = new GlobalConfig();
         $id_user = $globalConfig->getAuthenticatedUser()->getKeyValue();
 
-        switch ($paramEtatAvancement) {
+        switch ($paramEtat) {
             case "I";
 
                 $arrayTmp = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
@@ -53,33 +53,29 @@ class FtaWorkflowModel extends AbstractModel {
                                 . " WHERE " . FtaWorkflowStructureModel::TABLENAME . "." . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_PROCESSUS
                                 . " in (SELECT DISTINCT " . FtaProcessusCycleModel::FIELDNAME_PROCESSUS_INIT
                                 . " FROM " . FtaProcessusCycleModel::TABLENAME . ", " . FtaProcessusModel::TABLENAME
-                                . ", " . FtaWorkflowModel::TABLENAME . ", " . FtaWorkflowStructureModel::TABLENAME
-                                . ", " . IntranetActionsModel::TABLENAME . ", " . IntranetDroitsAccesModel::TABLENAME . ", " . IntranetModulesModel::TABLENAME
-                                . ", " . FtaActionRoleModel::TABLENAME . ", " . FtaRoleModel::TABLENAME
+                                . ", " . IntranetActionsModel::TABLENAME . ", " . IntranetDroitsAccesModel::TABLENAME
+                                . ", " . FtaActionRoleModel::TABLENAME . ", " . FtaWorkflowStructureModel::TABLENAME
                                 . ", " . FtaSuiviProjetModel::TABLENAME . ", " . FtaModel::TABLENAME
                                 . " WHERE " . FtaProcessusCycleModel::TABLENAME . "." . FtaProcessusCycleModel::FIELDNAME_PROCESSUS_NEXT
                                 . "=" . FtaProcessusModel::TABLENAME . "." . FtaProcessusModel::KEYNAME
                                 . " AND " . FtaProcessusCycleModel::TABLENAME . "." . FtaProcessusCycleModel::FIELDNAME_WORKFLOW . "=1 " // nous déterminons le type de workflow qu'il s'agit pour le moment par défaut v3 test
                                 . " AND " . FtaProcessusCycleModel::TABLENAME . "." . FtaProcessusCycleModel::FIELDNAME_WORKFLOW
-                                . "=" . FtaWorkflowModel::TABLENAME . "." . FtaWorkflowModel::KEYNAME
+                                . "=" . FtaWorkflowStructureModel::TABLENAME . "." . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_WORKFLOW
                                 . " AND " . FtaProcessusModel::TABLENAME . "." . FtaProcessusModel::FIELDNAME_ID_FTA_ROLE
-                                . "=" . FtaRoleModel::TABLENAME . "." . FtaRoleModel::KEYNAME
-                                . " AND " . FtaRoleModel::TABLENAME . "." . FtaRoleModel::KEYNAME
                                 . "=" . FtaActionRoleModel::TABLENAME . "." . FtaActionRoleModel::FIELDNAME_ID_FTA_ROLE
                                 . " AND " . FtaActionRoleModel::TABLENAME . "." . FtaActionRoleModel::FIELDNAME_ID_INTRANET_ACTIONS
                                 . "=" . IntranetActionsModel::TABLENAME . "." . IntranetActionsModel::KEYNAME
                                 . " AND " . FtaActionRoleModel::TABLENAME . "." . FtaActionRoleModel::FIELDNAME_ID_FTA_ROLE . "=" . $paramRole // Nous recuperons le type de role pour l'utilisateur
                                 . " AND " . IntranetActionsModel::TABLENAME . "." . IntranetActionsModel::KEYNAME
                                 . "=" . IntranetDroitsAccesModel::TABLENAME . "." . IntranetDroitsAccesModel::FIELDNAME_ID_INTRANET_ACTIONS
-                                . " AND " . IntranetDroitsAccesModel::TABLENAME . "." . IntranetDroitsAccesModel::FIELDNAME_ID_INTRANET_MODULES
-                                . "=" . IntranetModulesModel::TABLENAME . "." . IntranetModulesModel::KEYNAME
+                                . " AND " . IntranetDroitsAccesModel::TABLENAME . "." . IntranetDroitsAccesModel::FIELDNAME_ID_INTRANET_MODULES . "=19"
                                 . " AND " . IntranetDroitsAccesModel::FIELDNAME_ID_USER . "=" . $id_user // L'utilisateur connecté
                                 . " AND " . IntranetDroitsAccesModel::TABLENAME . "." . IntranetDroitsAccesModel::FIELDNAME_NIVEAU_INTRANET_DROITS_ACCES . "=1"
                                 . " AND " . FtaWorkflowStructureModel::TABLENAME . "." . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_CHAPITRE
                                 . "=" . FtaSuiviProjetModel::TABLENAME . "." . FtaSuiviProjetModel::FIELDNAME_ID_FTA_CHAPITRE
                                 . " AND " . FtaSuiviProjetModel::FIELDNAME_SIGNATURE_VALIDATION_SUIVI_PROJET . "<>0)"
                                 . " AND " . FtaSuiviProjetModel::FIELDNAME_SIGNATURE_VALIDATION_SUIVI_PROJET . "<>0"
-                                . " AND " . FtaProcessusCycleModel::FIELDNAME_FTA_ETAT . "='" . $paramEtatAvancement
+                                . " AND " . FtaProcessusCycleModel::FIELDNAME_FTA_ETAT . "='" . $paramEtat
                                 . "' AND " . FtaWorkflowStructureModel::TABLENAME . "." . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_CHAPITRE
                                 . "=" . FtaSuiviProjetModel::TABLENAME . "." . FtaSuiviProjetModel::FIELDNAME_ID_FTA_CHAPITRE
                 );
@@ -113,10 +109,91 @@ class FtaWorkflowModel extends AbstractModel {
                 /*
                  * Recuperer la requete pour des fta attente 
                  */
+
+                $array = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
+                                "SELECT DISTINCT " . FtaModel::KEYNAME
+                                . " FROM " . FtaProcessusCycleModel::TABLENAME . " , " . FtaProcessusModel::TABLENAME
+                                . " , " . FtaWorkflowStructureModel::TABLENAME . " , " . IntranetActionsModel::TABLENAME
+                                . " , " . IntranetDroitsAccesModel::TABLENAME . " , " . IntranetModulesModel::TABLENAME
+                                . " , " . FtaActionRoleModel::TABLENAME . " , " . FtaRoleModel::TABLENAME
+                                . " , " . FtaModel::TABLENAME
+                                . " WHERE " . FtaProcessusCycleModel::TABLENAME . "." . FtaProcessusCycleModel::FIELDNAME_PROCESSUS_NEXT
+                                . "=" . FtaProcessusModel::TABLENAME . "." . FtaProcessusModel::KEYNAME
+                                . " AND " . FtaProcessusCycleModel::TABLENAME . "." . FtaProcessusCycleModel::FIELDNAME_WORKFLOW
+                                . "=" . FtaWorkflowModel::TABLENAME . "." . FtaWorkflowModel::KEYNAME
+                                . " AND " . FtaProcessusModel::TABLENAME . "." . FtaProcessusModel::FIELDNAME_ID_FTA_ROLE
+                                . "=" . FtaRoleModel::TABLENAME . "." . FtaRoleModel::KEYNAME
+                                . " AND " . FtaRoleModel::TABLENAME . "." . FtaRoleModel::KEYNAME
+                                . "=" . FtaActionRoleModel::TABLENAME . "." . FtaActionRoleModel::FIELDNAME_ID_FTA_ROLE
+                                . " AND " . FtaActionRoleModel::TABLENAME . "." . FtaActionRoleModel::FIELDNAME_ID_INTRANET_ACTIONS
+                                . "=" . IntranetActionsModel::TABLENAME . "." . IntranetActionsModel::KEYNAME
+                                . " AND " . FtaActionRoleModel::TABLENAME . "." . FtaActionRoleModel::FIELDNAME_ID_FTA_ROLE . "=$paramRole" // Nous recuperons le type de role pour l'utilisateur
+                                . " AND " . IntranetActionsModel::TABLENAME . "." . IntranetActionsModel::KEYNAME
+                                . "=" . IntranetDroitsAccesModel::TABLENAME . "." . IntranetDroitsAccesModel::FIELDNAME_ID_INTRANET_ACTIONS
+                                . " AND " . IntranetDroitsAccesModel::TABLENAME . "." . IntranetDroitsAccesModel::FIELDNAME_ID_INTRANET_MODULES
+                                . "=" . IntranetModulesModel::TABLENAME . "." . IntranetModulesModel::KEYNAME
+                                . " AND " . IntranetDroitsAccesModel::FIELDNAME_ID_USER . " =" . $id_user
+                                . " AND " . IntranetDroitsAccesModel::FIELDNAME_NIVEAU_INTRANET_DROITS_ACCES . "=1"
+                                . " AND " . FtaProcessusCycleModel::FIELDNAME_FTA_ETAT . "='" . $paramEtat
+                );
+
                 break;
             case "A":
+
+                $array = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
+                                "SELECT DISTINCT " . FtaModel::KEYNAME
+                                . " FROM " . FtaProcessusCycleModel::TABLENAME . " , " . FtaProcessusModel::TABLENAME
+                                . " , " . FtaWorkflowStructureModel::TABLENAME . " , " . IntranetActionsModel::TABLENAME
+                                . " , " . IntranetDroitsAccesModel::TABLENAME . " , " . IntranetModulesModel::TABLENAME
+                                . " , " . FtaActionRoleModel::TABLENAME . " , " . FtaRoleModel::TABLENAME
+                                . " , " . FtaModel::TABLENAME
+                                . " WHERE " . FtaProcessusCycleModel::TABLENAME . "." . FtaProcessusCycleModel::FIELDNAME_PROCESSUS_NEXT
+                                . "=" . FtaProcessusModel::TABLENAME . "." . FtaProcessusModel::KEYNAME
+                                . " AND " . FtaProcessusCycleModel::TABLENAME . "." . FtaProcessusCycleModel::FIELDNAME_WORKFLOW
+                                . "=" . FtaWorkflowModel::TABLENAME . "." . FtaWorkflowModel::KEYNAME
+                                . " AND " . FtaProcessusModel::TABLENAME . "." . FtaProcessusModel::FIELDNAME_ID_FTA_ROLE
+                                . "=" . FtaRoleModel::TABLENAME . "." . FtaRoleModel::KEYNAME
+                                . " AND " . FtaRoleModel::TABLENAME . "." . FtaRoleModel::KEYNAME
+                                . "=" . FtaActionRoleModel::TABLENAME . "." . FtaActionRoleModel::FIELDNAME_ID_FTA_ROLE
+                                . " AND " . FtaActionRoleModel::TABLENAME . "." . FtaActionRoleModel::FIELDNAME_ID_INTRANET_ACTIONS
+                                . "=" . IntranetActionsModel::TABLENAME . "." . IntranetActionsModel::KEYNAME
+                                . " AND " . FtaActionRoleModel::TABLENAME . "." . FtaActionRoleModel::FIELDNAME_ID_FTA_ROLE . "=$paramRole" // Nous recuperons le type de role pour l'utilisateur
+                                . " AND " . IntranetActionsModel::TABLENAME . "." . IntranetActionsModel::KEYNAME
+                                . "=" . IntranetDroitsAccesModel::TABLENAME . "." . IntranetDroitsAccesModel::FIELDNAME_ID_INTRANET_ACTIONS
+                                . " AND " . IntranetDroitsAccesModel::TABLENAME . "." . IntranetDroitsAccesModel::FIELDNAME_ID_INTRANET_MODULES
+                                . "=" . IntranetModulesModel::TABLENAME . "." . IntranetModulesModel::KEYNAME
+                                . " AND " . IntranetDroitsAccesModel::FIELDNAME_ID_USER . " =" . $id_user
+                                . " AND " . IntranetDroitsAccesModel::FIELDNAME_NIVEAU_INTRANET_DROITS_ACCES . "=1"
+                                . " AND " . FtaProcessusCycleModel::FIELDNAME_FTA_ETAT . "='" . $paramEtat
+                );
                 break;
             case "R":
+                $array = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
+                                "SELECT DISTINCT " . FtaModel::KEYNAME
+                                . " FROM " . FtaProcessusCycleModel::TABLENAME . " , " . FtaProcessusModel::TABLENAME
+                                . " , " . FtaWorkflowStructureModel::TABLENAME . " , " . IntranetActionsModel::TABLENAME
+                                . " , " . IntranetDroitsAccesModel::TABLENAME . " , " . IntranetModulesModel::TABLENAME
+                                . " , " . FtaActionRoleModel::TABLENAME . " , " . FtaRoleModel::TABLENAME
+                                . " , " . FtaModel::TABLENAME
+                                . " WHERE " . FtaProcessusCycleModel::TABLENAME . "." . FtaProcessusCycleModel::FIELDNAME_PROCESSUS_NEXT
+                                . "=" . FtaProcessusModel::TABLENAME . "." . FtaProcessusModel::KEYNAME
+                                . " AND " . FtaProcessusCycleModel::TABLENAME . "." . FtaProcessusCycleModel::FIELDNAME_WORKFLOW
+                                . "=" . FtaWorkflowModel::TABLENAME . "." . FtaWorkflowModel::KEYNAME
+                                . " AND " . FtaProcessusModel::TABLENAME . "." . FtaProcessusModel::FIELDNAME_ID_FTA_ROLE
+                                . "=" . FtaRoleModel::TABLENAME . "." . FtaRoleModel::KEYNAME
+                                . " AND " . FtaRoleModel::TABLENAME . "." . FtaRoleModel::KEYNAME
+                                . "=" . FtaActionRoleModel::TABLENAME . "." . FtaActionRoleModel::FIELDNAME_ID_FTA_ROLE
+                                . " AND " . FtaActionRoleModel::TABLENAME . "." . FtaActionRoleModel::FIELDNAME_ID_INTRANET_ACTIONS
+                                . "=" . IntranetActionsModel::TABLENAME . "." . IntranetActionsModel::KEYNAME
+                                . " AND " . FtaActionRoleModel::TABLENAME . "." . FtaActionRoleModel::FIELDNAME_ID_FTA_ROLE . "=$paramRole" // Nous recuperons le type de role pour l'utilisateur
+                                . " AND " . IntranetActionsModel::TABLENAME . "." . IntranetActionsModel::KEYNAME
+                                . "=" . IntranetDroitsAccesModel::TABLENAME . "." . IntranetDroitsAccesModel::FIELDNAME_ID_INTRANET_ACTIONS
+                                . " AND " . IntranetDroitsAccesModel::TABLENAME . "." . IntranetDroitsAccesModel::FIELDNAME_ID_INTRANET_MODULES
+                                . "=" . IntranetModulesModel::TABLENAME . "." . IntranetModulesModel::KEYNAME
+                                . " AND " . IntranetDroitsAccesModel::FIELDNAME_ID_USER . " =" . $id_user
+                                . " AND " . IntranetDroitsAccesModel::FIELDNAME_NIVEAU_INTRANET_DROITS_ACCES . "=1"
+                                . " AND " . FtaProcessusCycleModel::FIELDNAME_FTA_ETAT . "='" . $paramEtat
+                );
                 break;
             case "P":
 
@@ -153,7 +230,7 @@ class FtaWorkflowModel extends AbstractModel {
                                 . "=" . FtaSuiviProjetModel::TABLENAME . "." . FtaSuiviProjetModel::FIELDNAME_ID_FTA_CHAPITRE
                                 . " AND " . FtaSuiviProjetModel::FIELDNAME_SIGNATURE_VALIDATION_SUIVI_PROJET . "<>0)"
                                 . " AND " . FtaSuiviProjetModel::FIELDNAME_SIGNATURE_VALIDATION_SUIVI_PROJET . "<>0"
-                                . " AND " . FtaProcessusCycleModel::FIELDNAME_FTA_ETAT . "='" . $paramEtatAvancement
+                                . " AND " . FtaProcessusCycleModel::FIELDNAME_FTA_ETAT . "='" . $paramEtat
                                 . "' AND " . FtaWorkflowStructureModel::TABLENAME . "." . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_CHAPITRE
                                 . "=" . FtaSuiviProjetModel::TABLENAME . "." . FtaSuiviProjetModel::FIELDNAME_ID_FTA_CHAPITRE
                 );

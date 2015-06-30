@@ -49,8 +49,8 @@ class FtaEtatModel extends AbstractModel {
                  * Marche pour tous les cas sauf qualité
                  * Nous recupérons les Fta en attente selon son rôle et workflow
                  */
-                $array = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
-                                "SELECT DISTINCT " . FtaModel::KEYNAME
+                $arrayTmp = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
+                                "SELECT DISTINCT " . FtaModel::KEYNAME . "," . FtaWorkflowStructureModel::TABLENAME . "." . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_WORKFLOW
                                 . " FROM " . FtaSuiviProjetModel::TABLENAME . "," . FtaWorkflowStructureModel::TABLENAME
                                 . ", " . FtaProcessusCycleModel::TABLENAME
                                 . " WHERE " . FtaWorkflowStructureModel::TABLENAME . "." . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_PROCESSUS
@@ -86,7 +86,27 @@ class FtaEtatModel extends AbstractModel {
                                 . "' AND " . FtaWorkflowStructureModel::TABLENAME . "." . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_CHAPITRE
                                 . "=" . FtaSuiviProjetModel::TABLENAME . "." . FtaSuiviProjetModel::FIELDNAME_ID_FTA_CHAPITRE
                 );
+
+                if ($arrayTmp) {
+                    foreach ($arrayTmp as $rows) {
+                        $tauxDeValidadation = FtaProcessusModel::getNonValideIdFtaByRoleWorkflowProcessus($rows[FtaModel::KEYNAME], $paramRole, $rows[FtaWorkflowStructureModel::FIELDNAME_ID_FTA_WORKFLOW]);
+                        if ($tauxDeValidadation == 1) {
+                            $idFtaEffectue[] = $rows[FtaModel::KEYNAME];
+                        }
+                    }
+                }
+                $req = "SELECT DISTINCT " . FtaModel::KEYNAME . " FROM fta WHERE ( 0 ";
+
+                $req .= FtaModel::AddIdFTaValidProcess($idFtaEffectue);
+
+                $req .= ")";
+
+                $array = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray($req);
+
+
+
                 break;
+
 
             case "encours":
 

@@ -51,7 +51,7 @@ class FtaProcessusModel extends AbstractModel {
 
         return $return;
     }
-    
+
     public static function getFtaProcessusNonValideSuivant($paramIdFta, $paramProcessusEncours) {
         /*
          * Nombres total de processus précedent pour le chapitre en cours
@@ -84,6 +84,39 @@ class FtaProcessusModel extends AbstractModel {
         $return = $tauxValidationProcessusEncours;
 
         return $return;
+    }
+
+    public static function getNonValideIdFtaByRoleWorkflowProcessus($paramIdFta, $paramIdRole, $paramIdWorkflow) {
+
+        $arrayChapitreTotal = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
+                        "SELECT * FROM fta_workflow_structure, fta_processus "
+                        . "WHERE fta_workflow_structure.id_fta_processus=fta_processus.id_fta_processus "  //Jointure
+                        . " AND fta_workflow_structure.id_fta_role=fta_processus.id_fta_role "
+                        . " AND fta_workflow_structure.id_fta_workflow=" . $paramIdWorkflow
+                        . " AND fta_processus.id_fta_role=" . $paramIdRole
+        );
+
+        $nombre_total_chapitre_processus = count($arrayChapitreTotal);
+
+        $arrayChapitreValide = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
+                        "SELECT * FROM fta, fta_suivi_projet, fta_workflow_structure, fta_processus "
+                        . " WHERE fta.id_fta=fta_suivi_projet.id_fta "                          //Jointure
+                        . " AND fta_suivi_projet.id_fta_chapitre=fta_workflow_structure.id_fta_chapitre " //Jointure
+                        . " AND fta_workflow_structure.id_fta_processus=fta_processus.id_fta_processus "  //Jointure
+                        . " AND fta_workflow_structure.id_fta_workflow=" . $paramIdWorkflow              //Workflow en cours
+                        . " AND fta.id_fta=" . $paramIdFta . " "                                        //FTA en cours
+                        . " AND fta_suivi_projet.signature_validation_suivi_projet=0 "         //Chapitre validé
+                        . " AND fta_processus.id_fta_role=" . $paramIdRole        //Processus en cours de balayage
+        );
+        $nombre_valide_chapitre_processus = count($arrayChapitreValide);
+
+        //Calcul du taux de validation du processus
+        $taux_validation_processus = 0;
+        if ($nombre_total_chapitre_processus != 0) {
+            $taux_validation_processus = $nombre_valide_chapitre_processus / $nombre_total_chapitre_processus;
+        }
+
+        return $taux_validation_processus;
     }
 
 }

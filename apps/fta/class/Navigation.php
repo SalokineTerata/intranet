@@ -54,7 +54,8 @@ class Navigation {
                         . ", " . FtaModel::FIELDNAME_DESIGNATION_COMMERCIALE . ", " . FtaModel::FIELDNAME_CODE_ARTICLE_LDC
                         . " FROM " . FtaModel::TABLENAME . "," . FtaEtatModel::TABLENAME
                         . " WHERE " . FtaModel::KEYNAME . "=" . self::$id_fta
-                        . " AND " . FtaEtatModel::TABLENAME . "." . FtaEtatModel::KEYNAME . "=" . FtaModel::TABLENAME . "." . FtaModel::FIELDNAME_ID_FTA_ETAT
+                        . " AND " . FtaEtatModel::TABLENAME . "." . FtaEtatModel::KEYNAME
+                        . "=" . FtaModel::TABLENAME . "." . FtaModel::FIELDNAME_ID_FTA_ETAT
         );
 
         foreach ($arrayFtaEtatAndFta as $rowsFtaEtatAndFta) {
@@ -210,9 +211,8 @@ class Navigation {
                         if ($multisite_fta_processus) {
                             //Oui, il s'agit d'un Processus répartie sur les sites d'assemblage
                             $ProcessusPrecedentVisibleTmp[] = self::CheckMultiSite($ProcessusPrecedentVisibleCheckMulti);
-                             $ProcessusPrecedentVisible = $ProcessusPrecedentVisibleTmp;
+                            $ProcessusPrecedentVisible = $ProcessusPrecedentVisibleTmp;
                         }
-                       
                     }
                 }//Fin du balayage
 

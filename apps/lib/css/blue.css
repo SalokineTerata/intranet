@@ -18,6 +18,10 @@ body {
     background-color: #AAAAFF;
 }
 
+.tableauFiche.table.td:hover{
+    background-color: #AAAAFF;
+}
+
 table {
     font-size: 11px;
 }

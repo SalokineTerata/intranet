@@ -36,6 +36,7 @@ PARTIE 1: Construction des interfaces utilisateurs (v1) --> Pas de sous table po
 [V]Création de parametres d'une la classe objet pour les operations du chap Palettisation
 
 
+[]Ajax caractère spéciaux à modifier
 
 [ ] Chapitre Emballage
 

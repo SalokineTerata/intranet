@@ -64,7 +64,7 @@ if ($id_user) {
     $tableau_fiche = Lib::isDefined("tableau_fiche");
     $visualiser_fiche_total_fta = Lib::isDefined("visualiser_fiche_total_fta");
     $order_common = Lib::isDefined("order_common");
-
+    $idFtaRoleEncours = Lib::isDefined(FtaRoleModel::KEYNAME);
 
     /*
       Récupération des données MySQL
@@ -72,17 +72,19 @@ if ($id_user) {
     //2008-07-28 - BS Par défaut, les utilisateurs participant aux processus arrivent sur leur page "Fiche En cours"
     //Par défaut, tout le monde arrive sur la liste des FTA en cours de modification.
     //id_fta_etat=1&nom_fta_etat=I&synthese_action=encours
-//    if (!$id_fta_etat) {
-//        $isIndex = 1;  //On est sur l'index donc chargement des vues par défaut suivant le profile utilisateur
-//        $id_fta_etat = "1";
-//        $nom_fta_etat = "I";
-//        $abreviation_fta_etat = $nom_fta_etat;
-//        if ($fta_modification) {
-//            $synthese_action = "encours";
-//        } else {
-//            $synthese_action = "attente";
-//        }
-//    }
+    if (!$id_fta_etat) {
+        $isIndex = 1;  //On est sur l'index donc chargement des vues par défaut suivant le profile utilisateur
+        $id_fta_etat = "1";
+        $nom_fta_etat = "I";
+        $abreviation_fta_etat = $nom_fta_etat;
+        $arrayFtaRole = FtaRoleModel::getIdFtaRoleByIdUser($id_user);
+        $idFtaRoleEncours = $arrayFtaRole[0][FtaRoleModel::KEYNAME];
+        if ($fta_modification) {
+            $synthese_action = "encours";
+        } else {
+            $synthese_action = "attente";
+        }
+    }
 //echo "id_fta_etat=$id_fta_etat / nom_fta_etat=$nom_fta_etat / synthese_action=$synthese_action <br>";
 
     /*
@@ -141,7 +143,7 @@ if ($id_user) {
       TABLEAU DE SYNTHESE
      * ***************************************************************************** */
 
-    $tableau_synthese.=AccueilFta::getTableauSythese($req_where);
+    $tableau_synthese.=AccueilFta::getTableauSythese($req_where,$idFtaRoleEncours);
 
 
 
@@ -163,22 +165,23 @@ if ($id_user) {
         if ($synthese_action) {
             //echo $id_fta_etat;
             //$tableau_fiche = AccueilFta::getTableauFiche($id_fta_etat, $choix, $isLimit, $order_common);
-           $tableau_fiche = AccueilFta::getHtmlTableauFiche($nom_fta_etat);
+            $tableau_fiche = AccueilFta::getHtmlTableauFiche($nom_fta_etat);
+            $fileAriane = AccueilFta::getFileAriane($idFtaRoleEncours, $id_fta_etat, $synthese_action);
         }
-
-        if ($isLimit) {
-            $titre_tableau = "<h4>Listes des " . $_SESSION["visualiser_fiche_total_fta"] . " dernières fiches en état $nom_fta_etat_encours </h4><br>"
-                    . "<i><a href=index.php"
-                    . "?id_fta_etat=$id_fta_etat"
-                    . "&nom_fta_etat=$abreviation_fta_etat"
-                    . "&synthese_action=all"
-                    . "&isLimit=0"
-                    . ">Voir toutes les fiches"
-                    . "</a></i><br>"
-            ;
-        } else {
-            $titre_tableau = "Listes des fiches : état $nom_fta_etat_encours <br>Il a actuellement " . $_SESSION["visualiser_fiche_total_fta"] . " fiches";
-        }
+        /*
+          //        if ($isLimit) {
+          //            $titre_tableau = "<h4>Listes des " . $_SESSION["visualiser_fiche_total_fta"] . " dernières fiches en état $nom_fta_etat_encours </h4><br>"
+          //                    . "<i><a href=index.php"
+          //                    . "?id_fta_etat=$id_fta_etat"
+          //                    . "&nom_fta_etat=$abreviation_fta_etat"
+          //                    . "&synthese_action=all"
+          //                    . "&isLimit=0"
+          //                    . ">Voir toutes les fiches"
+          //                    . "</a></i><br>"
+          //            ;
+          //        } else {
+          //            $titre_tableau = "Listes des fiches : état $nom_fta_etat_encours <br>Il a actuellement " . $_SESSION["visualiser_fiche_total_fta"] . " fiches";
+          //        } */
     }
 
 
@@ -189,29 +192,19 @@ if ($id_user) {
         <input type=hidden name=nom_fta_etat value=$nom_fta_etat_encours>
         <table width=100% border=1 valign=top cellspacing=0>
             <tr>
-                <td class=titre_principal> <br>
-                        <img src=../lib/images/s7.gif>&nbsp;<img src=../lib/images/s7.gif>&nbsp;<img src=../lib/images/s7.gif>&nbsp;<img src=../lib/images/s7.gif>&nbsp;<img src=../lib/images/s7.gif>&nbsp;<img src=../lib/images/s7.gif>&nbsp;<img src=../lib/images/s7.gif>&nbsp;<img src=../lib/images/s7.gif>&nbsp;<img src=../lib/images/s7.gif>&nbsp;<img src=../lib/images/s7.gif>&nbsp;<img src=../lib/images/s7.gif>&nbsp;<img src=../lib/images/s7.gif>&nbsp;<img src=../lib/images/s7.gif>&nbsp;<img src=../lib/images/s7.gif>&nbsp;<img src=../lib/images/s7.gif>&nbsp;<img src=../lib/images/s7.gif>&nbsp;<img src=../lib/images/s7.gif>&nbsp;<img src=../lib/images/s7.gif>&nbsp;
-                        <br>
-                        <br>
-                        Index des Fiches Techniques Articles (FTA)
-                        <br>
-                        <br>
-                        <img src=../lib/images/s7.gif>&nbsp;<img src=../lib/images/s7.gif>&nbsp;<img src=../lib/images/s7.gif>&nbsp;<img src=../lib/images/s7.gif>&nbsp;<img src=../lib/images/s7.gif>&nbsp;<img src=../lib/images/s7.gif>&nbsp;<img src=../lib/images/s7.gif>&nbsp;<img src=../lib/images/s7.gif>&nbsp;<img src=../lib/images/s7.gif>&nbsp;<img src=../lib/images/s7.gif>&nbsp;<img src=../lib/images/s7.gif>&nbsp;<img src=../lib/images/s7.gif>&nbsp;<img src=../lib/images/s7.gif>&nbsp;<img src=../lib/images/s7.gif>&nbsp;<img src=../lib/images/s7.gif>&nbsp;<img src=../lib/images/s7.gif>&nbsp;<img src=../lib/images/s7.gif>&nbsp;<img src=../lib/images/s7.gif>&nbsp;
-
-                         <br><br></td>
+                 <td class=titre_principal valign=\"middle\" > <br>$fileAriane  <br></td>
             </tr>
             <tr>
                 <td> $tableau_synthese </td>
             </tr>
         </table>
+        
 ";
 
     if ($synthese_action and ! $requete_resultat) {
         echo "
           <table width=100% border=0>
-              <tr>
-                  <td class=titre_principal> <br> $titre_tableau <br></td>
-              </tr>
+              
               <tr><td valign=\"middle\">  $tableau_fiche </td></tr>
           </table>
           ";

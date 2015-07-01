@@ -337,7 +337,7 @@ class AccueilFta {
 
         $tableau_synthese .= AccueilFta::getLienByEtatFta($paramEtat[0][FtaEtatModel::FIELDNAME_ABREVIATION], $paramEtat [0][FtaEtatModel::FIELDNAME_ABREVIATION]);
 
-        $tableau_synthese .="</a>" . $paramRole[2][FtaRoleModel::FIELDNAME_DESCRIPTION_FTA_ROLE] . "</td>"
+        $tableau_synthese .=$paramRole[2][FtaRoleModel::FIELDNAME_DESCRIPTION_FTA_ROLE] . "</a></td>"
                 . "<td id='" . $paramEtat[2][FtaEtatModel::FIELDNAME_ABREVIATION] . "'><a href=index.php?id_fta_etat=" . $paramEtat[2][FtaEtatModel::KEYNAME]
                 . "&nom_fta_etat=" . $paramEtat[1][FtaEtatModel::FIELDNAME_ABREVIATION]
                 . "&id_fta_role=" . $idFtaRole
@@ -1244,9 +1244,7 @@ class AccueilFta {
             $arrayIdFtaAndIdWorkflow = FtaEtatModel::getIdFtaByEtatAvancement($syntheseAction, $paramAbrevationFtaEtat, $idFtaRole);
         } else {
             $arrayFtaEtat = FtaEtatModel::getFtaEtatAndNameByRole($arrayFtaRole[0][FtaRoleModel::KEYNAME]);
-                        /*
-             * requete à améliorer
-             */
+
             $arrayFtaWorkflow = FtaWorkflowModel::getNameWorkflowByIdFtaRoleAndEtat(
                             $arrayFtaRole[0][FtaRoleModel::KEYNAME]
                             , $arrayFtaEtat[0][FtaEtatModel::FIELDNAME_ABREVIATION]);
@@ -1264,34 +1262,43 @@ class AccueilFta {
         $tableauFiche = "<table id=tableauFiche  align=middle class=titre width=100% >"
                 . "<thead><tr class=titre_principal><th></th>"
         ;
-        $tableauFiche .= "<th><a href=url&order_common=Site_de_production><img src=../lib/images/order-AZ.png title=\"mini_fleche_centre\"  border=\"0\" /></a>"
+        
+        //Définition des fonctionnalité de classement
+            //Par N°de Dossier - version
+            $order_common = "id_fta";
+
+            //Contrôle pour savoir si on est sur l'index du module
+            $URL = $_SERVER["REQUEST_URI"];
+            $franck=substr($URL, -1);
+            if (substr($URL, -1) == "p") {
+                $URL = $URL . "?";
+            }
+        $tableauFiche .= "<th><a href=" . $URL . "&order_common=Site_de_production><img src=../lib/images/order-AZ.png title=\"mini_fleche_centre\"  border=\"0\" /></a>"
                 . "Site"
                 . "</th><th>"
-                . "<a href=url&order_common=id_classification_arborescence_article><img src=../lib/images/order-AZ.png title=\"mini_fleche_centre\"  border=\"0\" /></a>"
+                . "<a href=" . $URL . "&order_common=id_classification_arborescence_article><img src=../lib/images/order-AZ.png title=\"mini_fleche_centre\"  border=\"0\" /></a>"
                 . "Client"
                 . "</th><th>"
-                . "<a href=url&order_common=LIBELLE><img src=../lib/images/order-AZ.png title=\"mini_fleche_centre\"  border=\"0\" /></a>"
+                . "<a href=" . $URL . "&order_common=LIBELLE><img src=../lib/images/order-AZ.png title=\"mini_fleche_centre\"  border=\"0\" /></a>"
                 . "Produits"
                 . "</th><th>"
-                . "<a href=url&order_common=id_fta><img src=../lib/images/order-AZ.png title=\"mini_fleche_centre\"  border=\"0\" /></a>"
+                . "<a href=" . $URL . "&order_common=id_fta><img src=../lib/images/order-AZ.png title=\"mini_fleche_centre\"  border=\"0\" /></a>"
                 . "Dossier FTA"
                 . "</th><th>"
-                . "<a href=url&order_common=code_article_ldc><img src=../lib/images/order-AZ.png title=\"mini_fleche_centre\"  border=\"0\" /></a>"
+                . "<a href=" . $URL . "&order_common=code_article_ldc><img src=../lib/images/order-AZ.png title=\"mini_fleche_centre\"  border=\"0\" /></a>"
                 . "Code Regate"
                 . "</th><th>"
-                . "<a href=url&order_common=id_fta_role><img src=../lib/images/order-AZ.png title=\"mini_fleche_centre\"  border=\"0\" /></a>"
+                . "<a href=" . $URL . "&order_common=id_fta_role><img src=../lib/images/order-AZ.png title=\"mini_fleche_centre\"  border=\"0\" /></a>"
                 . "Service"
                 . "</th><th>"
-                . "<a href=url&order_common=date_echeance_fta><img src=../lib/images/order-AZ.png title=\"mini_fleche_centre\"  border=\"0\" /></a>"
+                . "<a href=" . $URL . "&order_common=date_echeance_fta><img src=../lib/images/order-AZ.png title=\"mini_fleche_centre\"  border=\"0\" /></a>"
                 . "Echéance de validation"
                 . "</th><th>"
-                . "<a href=url><img src=../lib/images/order-AZ.png title=\"mini_fleche_centre\"  border=\"0\" /></a>"
+                . "<a href=" . $URL . "><img src=../lib/images/order-AZ.png title=\"mini_fleche_centre\"  border=\"0\" /></a>"
                 . "% Avancement FTA"
-                . "</th><th>"
-                . "<a href=url&order_common=date_echeance_fta><img src=../lib/images/order-AZ.png title=\"mini_fleche_centre\"  border=\"0\" /></a>"
+                . "</th><th>"                
                 . "Actions"
-                . "</th><th>"
-                . "<a href=url></a>"
+                . "</th><th>"                
                 . "Commentaires"
                 . "</th>";
 
@@ -1645,7 +1652,7 @@ class AccueilFta {
                                             . "<td $bgcolor align=center >$service</td>"; //Service               
 
                                     if ($abreviationFtaEtat == "I") {
-                                        $tableauFiche.="<td $bgcolor $largeur_html_C3 align=center>" . $HTML_date_echeance_fta["HTML_synthese"] . "</td>"; //% d'avancement
+                                        $tableauFiche.="<td $bgcolor $largeur_html_C3 align=center>" . $HTML_date_echeance_fta["HTML_synthese"] . "</td>"; //échance de validation
                                     } else {
                                         $tableauFiche.="<td></td>";
                                     }
@@ -1664,7 +1671,7 @@ class AccueilFta {
                                             . "<td $bgcolor align=center >$service</td>"; //Service               
 
                                     if ($abreviationFtaEtat == "I") {
-                                        $tableauFiche.="<td $bgcolor $largeur_html_C3 align=center>" . $HTML_date_echeance_fta["HTML_synthese"] . "</td>"; //% d'avancement
+                                        $tableauFiche.="<td $bgcolor $largeur_html_C3 align=center>" . $HTML_date_echeance_fta["HTML_synthese"] . "</td>"; //échance de validation
                                     } else {
                                         $tableauFiche.="<td></td>";
                                     }

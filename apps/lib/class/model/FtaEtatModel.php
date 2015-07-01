@@ -56,18 +56,15 @@ class FtaEtatModel extends AbstractModel {
                                 . " WHERE " . FtaWorkflowStructureModel::TABLENAME . "." . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_PROCESSUS
                                 . " in (SELECT DISTINCT " . FtaProcessusCycleModel::FIELDNAME_PROCESSUS_INIT
                                 . " FROM " . FtaProcessusCycleModel::TABLENAME . " , " . FtaProcessusModel::TABLENAME
-                                . " , " . FtaWorkflowModel::TABLENAME . " , " . FtaWorkflowStructureModel::TABLENAME
+                                . " , " . FtaWorkflowStructureModel::TABLENAME
                                 . " , " . IntranetActionsModel::TABLENAME . " , " . IntranetDroitsAccesModel::TABLENAME
                                 . " , " . IntranetModulesModel::TABLENAME . " , " . FtaActionRoleModel::TABLENAME
-                                . " , " . FtaRoleModel::TABLENAME . " , " . FtaSuiviProjetModel::TABLENAME . " , " . FtaModel::TABLENAME
+                                . " , " . FtaSuiviProjetModel::TABLENAME . " , " . FtaModel::TABLENAME
                                 . " WHERE " . FtaProcessusCycleModel::TABLENAME . "." . FtaProcessusCycleModel::FIELDNAME_PROCESSUS_NEXT
                                 . "=" . FtaProcessusModel::TABLENAME . "." . FtaProcessusModel::KEYNAME
-//                                . " AND " . FtaProcessusCycleModel::TABLENAME . "." . FtaProcessusCycleModel::FIELDNAME_WORKFLOW . "=1" //ICI nous déterminons le workflow choisie
                                 . " AND " . FtaProcessusCycleModel::TABLENAME . "." . FtaProcessusCycleModel::FIELDNAME_WORKFLOW
-                                . "=" . FtaWorkflowModel::TABLENAME . "." . FtaWorkflowModel::KEYNAME
+                                . "=" . FtaWorkflowStructureModel::TABLENAME . "." . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_WORKFLOW
                                 . " AND " . FtaProcessusModel::TABLENAME . "." . FtaProcessusModel::FIELDNAME_ID_FTA_ROLE
-                                . "=" . FtaRoleModel::TABLENAME . "." . FtaRoleModel::KEYNAME
-                                . " AND " . FtaRoleModel::TABLENAME . "." . FtaRoleModel::KEYNAME
                                 . "=" . FtaActionRoleModel::TABLENAME . "." . FtaActionRoleModel::FIELDNAME_ID_FTA_ROLE
                                 . " AND " . FtaActionRoleModel::TABLENAME . "." . FtaActionRoleModel::FIELDNAME_ID_INTRANET_ACTIONS
                                 . "=" . IntranetActionsModel::TABLENAME . "." . IntranetActionsModel::KEYNAME
@@ -120,17 +117,15 @@ class FtaEtatModel extends AbstractModel {
                                 . " WHERE " . FtaWorkflowStructureModel::TABLENAME . "." . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_PROCESSUS
                                 . " in (SELECT DISTINCT " . FtaProcessusCycleModel::FIELDNAME_PROCESSUS_NEXT
                                 . " FROM " . FtaProcessusCycleModel::TABLENAME . ", " . FtaProcessusModel::TABLENAME
-                                . ", " . FtaWorkflowModel::TABLENAME . ", " . FtaWorkflowStructureModel::TABLENAME
+                                . ", " . FtaWorkflowStructureModel::TABLENAME
                                 . ", " . IntranetActionsModel::TABLENAME . ", " . IntranetDroitsAccesModel::TABLENAME . ", " . IntranetModulesModel::TABLENAME
-                                . ", " . FtaActionRoleModel::TABLENAME . ", " . FtaRoleModel::TABLENAME
+                                . ", " . FtaActionRoleModel::TABLENAME
                                 . ", " . FtaSuiviProjetModel::TABLENAME . ", " . FtaModel::TABLENAME
                                 . " WHERE " . FtaProcessusCycleModel::TABLENAME . "." . FtaProcessusCycleModel::FIELDNAME_PROCESSUS_NEXT
                                 . "=" . FtaProcessusModel::TABLENAME . "." . FtaProcessusModel::KEYNAME
                                 . " AND " . FtaProcessusCycleModel::TABLENAME . "." . FtaProcessusCycleModel::FIELDNAME_WORKFLOW
-                                . "=" . FtaWorkflowModel::TABLENAME . "." . FtaWorkflowModel::KEYNAME
+                                . "=" . FtaWorkflowStructureModel::TABLENAME . "." . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_WORKFLOW
                                 . " AND " . FtaProcessusModel::TABLENAME . "." . FtaProcessusModel::FIELDNAME_ID_FTA_ROLE
-                                . "=" . FtaRoleModel::TABLENAME . "." . FtaRoleModel::KEYNAME
-                                . " AND " . FtaRoleModel::TABLENAME . "." . FtaRoleModel::KEYNAME
                                 . "=" . FtaActionRoleModel::TABLENAME . "." . FtaActionRoleModel::FIELDNAME_ID_FTA_ROLE
                                 . " AND " . FtaActionRoleModel::TABLENAME . "." . FtaActionRoleModel::FIELDNAME_ID_INTRANET_ACTIONS
                                 . "=" . IntranetActionsModel::TABLENAME . "." . IntranetActionsModel::KEYNAME
@@ -181,17 +176,15 @@ class FtaEtatModel extends AbstractModel {
                                 . " WHERE " . FtaWorkflowStructureModel::TABLENAME . "." . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_PROCESSUS
                                 . " in (SELECT DISTINCT " . FtaProcessusCycleModel::FIELDNAME_PROCESSUS_INIT
                                 . " FROM " . FtaProcessusCycleModel::TABLENAME . ", " . FtaProcessusModel::TABLENAME
-                                . ", " . FtaWorkflowModel::TABLENAME . ", " . FtaWorkflowStructureModel::TABLENAME
+                                 . ", " . FtaWorkflowStructureModel::TABLENAME
                                 . ", " . IntranetActionsModel::TABLENAME . ", " . IntranetDroitsAccesModel::TABLENAME . ", " . IntranetModulesModel::TABLENAME
                                 . ", " . FtaActionRoleModel::TABLENAME . ", " . FtaRoleModel::TABLENAME
                                 . ", " . FtaSuiviProjetModel::TABLENAME . ", " . FtaModel::TABLENAME
                                 . " WHERE " . FtaProcessusCycleModel::TABLENAME . "." . FtaProcessusCycleModel::FIELDNAME_PROCESSUS_NEXT
                                 . "=" . FtaProcessusModel::TABLENAME . "." . FtaProcessusModel::KEYNAME
                                 . " AND " . FtaProcessusCycleModel::TABLENAME . "." . FtaProcessusCycleModel::FIELDNAME_WORKFLOW
-                                . "=" . FtaWorkflowModel::TABLENAME . "." . FtaWorkflowModel::KEYNAME
+                                . "=" . FtaWorkflowStructureModel::TABLENAME . "." . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_WORKFLOW
                                 . " AND " . FtaProcessusModel::TABLENAME . "." . FtaProcessusModel::FIELDNAME_ID_FTA_ROLE
-                                . "=" . FtaRoleModel::TABLENAME . "." . FtaRoleModel::KEYNAME
-                                . " AND " . FtaRoleModel::TABLENAME . "." . FtaRoleModel::KEYNAME
                                 . "=" . FtaActionRoleModel::TABLENAME . "." . FtaActionRoleModel::FIELDNAME_ID_FTA_ROLE
                                 . " AND " . FtaActionRoleModel::TABLENAME . "." . FtaActionRoleModel::FIELDNAME_ID_INTRANET_ACTIONS
                                 . "=" . IntranetActionsModel::TABLENAME . "." . IntranetActionsModel::KEYNAME                       //  type de role pour l'utilisateur  peut etre plusieur ainsi il doit vedrifier le quel il choisit

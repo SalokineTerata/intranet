@@ -333,7 +333,6 @@ class FtaSuiviProjetModel extends AbstractModel {
 
                             break;
                     }
-                  
                 }//Fin de la vérification par chapitre et du traitement de la notification
             }//Fin de la vérification des processus validés
         }//Fin du parcours des processsu
@@ -348,21 +347,14 @@ class FtaSuiviProjetModel extends AbstractModel {
 
         $arrayChapitre = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
                         "SELECT " . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_CHAPITRE
+                        . ", " . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_PROCESSUS
                         . " FROM " . FtaWorkflowStructureModel::TABLENAME
                         . " WHERE " . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_WORKFLOW
                         . "=" . $idFtaWorlflow
         );
 
         foreach ($arrayChapitre as $rowsChapitre) {
-            $arrayCheckIdSuiviProjet = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
-                            "SELECT " . FtaSuiviProjetModel::KEYNAME
-                            . " FROM " . FtaSuiviProjetModel::TABLENAME
-                            . " WHERE " . FtaSuiviProjetModel::FIELDNAME_ID_FTA
-                            . "=" . $paramIdFta
-                            . " AND " . FtaSuiviProjetModel::FIELDNAME_ID_FTA_CHAPITRE
-                            . "=" . $rowsChapitre[FtaSuiviProjetModel::FIELDNAME_ID_FTA_CHAPITRE]
-            );
-            if (!$arrayCheckIdSuiviProjet) {
+            if ($rowsChapitre[FtaWorkflowStructureModel::FIELDNAME_ID_FTA_PROCESSUS] == 0) {
                 DatabaseOperation::query(
                         "INSERT INTO " . FtaSuiviProjetModel::TABLENAME
                         . "(" . FtaSuiviProjetModel::FIELDNAME_ID_FTA
@@ -370,8 +362,37 @@ class FtaSuiviProjetModel extends AbstractModel {
                         . ", " . FtaSuiviProjetModel::FIELDNAME_SIGNATURE_VALIDATION_SUIVI_PROJET
                         . ") VALUES (" . $paramIdFta
                         . ", " . $rowsChapitre[FtaWorkflowStructureModel::FIELDNAME_ID_FTA_CHAPITRE]
-                        . ", 0 )"
+                        . ", 1 )"
                 );
+            } else {
+                $arrayCheckIdSuiviProjet = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
+                                "SELECT " . FtaSuiviProjetModel::KEYNAME
+                                . " FROM " . FtaSuiviProjetModel::TABLENAME
+                                . " WHERE " . FtaSuiviProjetModel::FIELDNAME_ID_FTA
+                                . "=" . $paramIdFta
+                                . " AND " . FtaSuiviProjetModel::FIELDNAME_ID_FTA_CHAPITRE
+                                . "=" . $rowsChapitre[FtaSuiviProjetModel::FIELDNAME_ID_FTA_CHAPITRE]
+                );
+                if (!$arrayCheckIdSuiviProjet) {
+                    DatabaseOperation::query(
+                            "INSERT INTO " . FtaSuiviProjetModel::TABLENAME
+                            . "(" . FtaSuiviProjetModel::FIELDNAME_ID_FTA
+                            . ", " . FtaSuiviProjetModel::FIELDNAME_ID_FTA_CHAPITRE
+                            . ", " . FtaSuiviProjetModel::FIELDNAME_SIGNATURE_VALIDATION_SUIVI_PROJET
+                            . ") VALUES (" . $paramIdFta
+                            . ", " . $rowsChapitre[FtaWorkflowStructureModel::FIELDNAME_ID_FTA_CHAPITRE]
+                            . ", 0 )"
+                    );
+
+                    $arrayCheckIdSuiviProjet = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
+                                    "SELECT " . FtaSuiviProjetModel::TABLENAME . ".*"
+                                    . " FROM " . FtaSuiviProjetModel::TABLENAME
+                                    . " WHERE " . FtaSuiviProjetModel::FIELDNAME_ID_FTA
+                                    . "=" . $paramIdFta
+                                    . " AND " . FtaSuiviProjetModel::FIELDNAME_ID_FTA_CHAPITRE
+                                    . "=" . $rowsChapitre[FtaSuiviProjetModel::FIELDNAME_ID_FTA_CHAPITRE]
+                    );
+                }
             }
         }
     }

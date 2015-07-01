@@ -148,7 +148,6 @@ if ($id_user) {
 
 
 
-
     //Tableau des FTA
     //Suivant si on est sur l'index ou pas, on charge une vue différentes,
     //et dans le cas des utilisateurs n'ayant que les droits en consultation

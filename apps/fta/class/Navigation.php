@@ -370,53 +370,53 @@ class Navigation {
                 }//Fin du balayage des processus non-validés
             }
             //Recherche des processus valide ayant un lien dans processus cycle
-            foreach ($ProcessusValide as $rowsProcessusValide2){
+            foreach ($ProcessusValide as $rowsProcessusValide2) {
                 //Pour chaque processus, on vérifie que tous ces précédents sont validés
-                    $req = "SELECT " . FtaProcessusCycleModel::KEYNAME . " FROM " . FtaProcessusCycleModel::TABLENAME
-                            . " WHERE " . FtaProcessusCycleModel::FIELDNAME_PROCESSUS_NEXT
-                            . "=" . $rowsProcessusValide2
-                            . " AND ( " . FtaProcessusCycleModel::FIELDNAME_PROCESSUS_INIT . "=0 "
-                    ;
+                $req = "SELECT " . FtaProcessusCycleModel::KEYNAME . " FROM " . FtaProcessusCycleModel::TABLENAME
+                        . " WHERE " . FtaProcessusCycleModel::FIELDNAME_PROCESSUS_NEXT
+                        . "=" . $rowsProcessusValide2
+                        . " AND ( " . FtaProcessusCycleModel::FIELDNAME_PROCESSUS_INIT . "=0 "
+                ;
 
-                    //Ajout de la restriction des processus validé
-                    $req .=self::AddValidProcess($ProcessusValide);
+                //Ajout de la restriction des processus validé
+                $req .=self::AddValidProcess($ProcessusValide);
 
-                    //Recherche dans le cycle correspondant à l'état en cours de la fiche
-                    $req_etat = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
-                                    "SELECT " . FtaEtatModel::TABLENAME . "." . FtaEtatModel::FIELDNAME_ABREVIATION
-                                    . " FROM " . FtaEtatModel::TABLENAME . "," . FtaModel::TABLENAME
-                                    . " WHERE " . FtaEtatModel::TABLENAME . "." . FtaEtatModel::KEYNAME
-                                    . "=" . FtaModel::TABLENAME . "." . FtaModel::FIELDNAME_ID_FTA_ETAT
-                                    . " AND " . FtaModel::TABLENAME . "." . FtaModel::KEYNAME
-                                    . "= '" . self::$id_fta . "'"
-                    );
+                //Recherche dans le cycle correspondant à l'état en cours de la fiche
+                $req_etat = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
+                                "SELECT " . FtaEtatModel::TABLENAME . "." . FtaEtatModel::FIELDNAME_ABREVIATION
+                                . " FROM " . FtaEtatModel::TABLENAME . "," . FtaModel::TABLENAME
+                                . " WHERE " . FtaEtatModel::TABLENAME . "." . FtaEtatModel::KEYNAME
+                                . "=" . FtaModel::TABLENAME . "." . FtaModel::FIELDNAME_ID_FTA_ETAT
+                                . " AND " . FtaModel::TABLENAME . "." . FtaModel::KEYNAME
+                                . "= '" . self::$id_fta . "'"
+                );
 
-                    foreach ($req_etat as $rowsEtat) {
-                        $abreviation_fta_etat = $rowsEtat[FtaEtatModel::FIELDNAME_ABREVIATION];
+                foreach ($req_etat as $rowsEtat) {
+                    $abreviation_fta_etat = $rowsEtat[FtaEtatModel::FIELDNAME_ABREVIATION];
+                }
+
+                $req .= ") AND " . FtaProcessusCycleModel::FIELDNAME_FTA_ETAT
+                        . "='" . $abreviation_fta_etat
+                        . "' AND " . FtaProcessusCycleModel::FIELDNAME_WORKFLOW . " = " . self::$id_fta_workflow;
+
+                //Filtrage par catégorie
+                //Finalisation de la requête
+                //Si la requête a un résultat c'est que tous les processus précédents sont validés
+                /*
+                 * Nous récupérons tous les processus que l'utilisateur verra en lecture(seule) 
+                 * afin qu'ils puissent remplir les données des champs de leurs chapitres
+                 */
+                $arrayIdFtaProcessusCyle = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray($req);
+                if ($arrayIdFtaProcessusCyle) {
+                    foreach ($arrayIdFtaProcessusCyle as $rowsIdFtaProcessusCycle) {
+                        $idFtaProcessusCyle = $rowsIdFtaProcessusCycle[FtaProcessusCycleModel::KEYNAME];
+                        $ftaProcessusCycleModel = new FtaProcessusCycleModel($idFtaProcessusCyle);
+                        $ProcessusEnLecture[] = $ftaProcessusCycleModel->getDataField(FtaProcessusCycleModel::FIELDNAME_PROCESSUS_INIT)->getFieldValue();
                     }
-
-                    $req .= ") AND " . FtaProcessusCycleModel::FIELDNAME_FTA_ETAT
-                            . "='" . $abreviation_fta_etat
-                            . "' AND " . FtaProcessusCycleModel::FIELDNAME_WORKFLOW . " = " . self::$id_fta_workflow;
-
-                    //Filtrage par catégorie
-                    //Finalisation de la requête
-                    //Si la requête a un résultat c'est que tous les processus précédents sont validés
-                    /*
-                     * Nous récupérons tous les processus que l'utilisateur verra en lecture(seule) 
-                     * afin qu'ils puissent remplir les données des champs de leurs chapitres
-                     */
-                    $arrayIdFtaProcessusCyle = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray($req);
-                    if ($arrayIdFtaProcessusCyle) {
-                        foreach ($arrayIdFtaProcessusCyle as $rowsIdFtaProcessusCycle) {
-                            $idFtaProcessusCyle = $rowsIdFtaProcessusCycle[FtaProcessusCycleModel::KEYNAME];
-                            $ftaProcessusCycleModel = new FtaProcessusCycleModel($idFtaProcessusCyle);
-                            $ProcessusEnLecture[] = $ftaProcessusCycleModel->getDataField(FtaProcessusCycleModel::FIELDNAME_PROCESSUS_INIT)->getFieldValue();
-                        }
-                    }
+                }
             }
-            
-            
+
+
             //Création de la liste des processus dans la barre de navigation          
             $t_liste_processus = array_merge($ProcessusEncoursVisible, $ProcessusPrecedentVisible, $ProcessusEnLecture);
 
@@ -439,13 +439,14 @@ class Navigation {
                 . " ON " . FtaWorkflowStructureModel::TABLENAME . "." . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_CHAPITRE
                 . "=" . FtaChapitreModel::TABLENAME . "." . FtaChapitreModel::KEYNAME
                 . " WHERE ( "
-                . FtaWorkflowStructureModel::TABLENAME . "." . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_CHAPITRE . " IS NULL"                          //Chapitre public
+                . FtaWorkflowStructureModel::TABLENAME . "." . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_PROCESSUS . " =0"                          //Chapitre public
         ;
         foreach ($paramT_Liste_Processus as $value) {
             $reqRecup .= " OR " . FtaWorkflowStructureModel::TABLENAME . "." . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_PROCESSUS
                     . "=" . $value . " ";
         }
-        $reqRecup .=" ) ORDER BY " . FtaChapitreModel::TABLENAME . "." . FtaChapitreModel::KEYNAME;
+        $reqRecup .=" ) AND " . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_WORKFLOW . "=" . self::$id_fta_workflow
+                . " ORDER BY " . FtaChapitreModel::TABLENAME . "." . FtaChapitreModel::KEYNAME;
         $arrayRecup = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray($reqRecup);
 
         //Balyage des chapitres trouvés

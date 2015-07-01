@@ -118,7 +118,7 @@ class FtaEtatModel extends AbstractModel {
                                 . " FROM " . FtaSuiviProjetModel::TABLENAME . ", " . FtaWorkflowStructureModel::TABLENAME
                                 . ", " . FtaProcessusCycleModel::TABLENAME
                                 . " WHERE " . FtaWorkflowStructureModel::TABLENAME . "." . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_PROCESSUS
-                                . " in (SELECT DISTINCT " . FtaProcessusCycleModel::FIELDNAME_PROCESSUS_INIT
+                                . " in (SELECT DISTINCT " . FtaProcessusCycleModel::FIELDNAME_PROCESSUS_NEXT
                                 . " FROM " . FtaProcessusCycleModel::TABLENAME . ", " . FtaProcessusModel::TABLENAME
                                 . ", " . FtaWorkflowModel::TABLENAME . ", " . FtaWorkflowStructureModel::TABLENAME
                                 . ", " . IntranetActionsModel::TABLENAME . ", " . IntranetDroitsAccesModel::TABLENAME . ", " . IntranetModulesModel::TABLENAME
@@ -144,15 +144,15 @@ class FtaEtatModel extends AbstractModel {
                                 . " AND " . FtaWorkflowStructureModel::TABLENAME . "." . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_CHAPITRE
                                 . "=" . FtaSuiviProjetModel::TABLENAME . "." . FtaSuiviProjetModel::FIELDNAME_ID_FTA_CHAPITRE
                                 . " AND " . FtaSuiviProjetModel::FIELDNAME_SIGNATURE_VALIDATION_SUIVI_PROJET . "<>0)"
-                                . " AND " . FtaSuiviProjetModel::FIELDNAME_SIGNATURE_VALIDATION_SUIVI_PROJET . "<>0"
+                                . " AND " . FtaSuiviProjetModel::FIELDNAME_SIGNATURE_VALIDATION_SUIVI_PROJET . "=0"
                                 . " AND " . FtaProcessusCycleModel::FIELDNAME_FTA_ETAT . "='" . $paramEtat
                                 . "' AND " . FtaWorkflowStructureModel::TABLENAME . "." . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_CHAPITRE
                                 . "=" . FtaSuiviProjetModel::TABLENAME . "." . FtaSuiviProjetModel::FIELDNAME_ID_FTA_CHAPITRE
                 );
                 if ($arrayTmp) {
                     foreach ($arrayTmp as $rows) {
-                        $tauxDeValidadation = FtaProcessusModel::getFtaProcessusNonValideSuivant($rows[FtaModel::KEYNAME], $rows[FtaProcessusModel::KEYNAME]);
-                        if ($tauxDeValidadation <> 1) {
+                        $tauxDeValidadation = FtaProcessusModel::getFtaProcessusNonValidePrecedent($rows[FtaModel::KEYNAME], $rows[FtaProcessusModel::KEYNAME]);
+                        if ($tauxDeValidadation == 1) {
                             $idFtaEffectue[] = $rows[FtaModel::KEYNAME];
                         }
                     }
@@ -172,8 +172,10 @@ class FtaEtatModel extends AbstractModel {
 
             case "correction":
 
+                //Récupération de la liste fta pour le role concernés 
+
                 $arrayTmp = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
-                                "SELECT DISTINCT " . FtaModel::KEYNAME . "," . FtaProcessusModel::KEYNAME
+                                "SELECT DISTINCT " . FtaModel::KEYNAME . "," . FtaWorkflowStructureModel::TABLENAME . "." . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_WORKFLOW
                                 . " FROM " . FtaSuiviProjetModel::TABLENAME . ", " . FtaWorkflowStructureModel::TABLENAME
                                 . ", " . FtaProcessusCycleModel::TABLENAME
                                 . " WHERE " . FtaWorkflowStructureModel::TABLENAME . "." . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_PROCESSUS
@@ -209,11 +211,11 @@ class FtaEtatModel extends AbstractModel {
                 );
 
                 /*
-                 * On obtient les ftas à vérifié si tous les chapitre sont valide
+                 * On obtient les fta à vérifié dont tous les chapitres sont validés
                  */
                 if ($arrayTmp) {
                     foreach ($arrayTmp as $rows) {
-                        $tauxDeValidadation = FtaProcessusModel::getFtaProcessusNonValideSuivant($rows[FtaModel::KEYNAME], $rows[FtaProcessusModel::KEYNAME]);
+                        $tauxDeValidadation = FtaProcessusModel::getValideIdFtaByRoleWorkflowProcessus($rows[FtaModel::KEYNAME], $paramRole, $rows[FtaModel::FIELDNAME_WORKFLOW]);
                         if ($tauxDeValidadation == 1) {
                             $idFtaEffectue[] = $rows[FtaModel::KEYNAME];
                         }

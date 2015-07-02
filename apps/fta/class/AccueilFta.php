@@ -19,7 +19,14 @@
 
 class AccueilFta {
 
-    public static function getTableauSythese($paramWhere, $paramRole) {
+    const VALUE_0 = 0;
+    const VALUE_1 = 1;
+    const VALUE_2 = 2;
+    const VALUE_3 = 3;
+    const VALUE_4 = 4;
+    const VALUE_5 = 5;
+
+    public static function getTableauSythese($paramWhere, $paramRole, $paramNomEtat, $paramSyntheseAction) {
 
         /*
          * Initilisation
@@ -28,7 +35,6 @@ class AccueilFta {
         $id_user = $globalConfig->getAuthenticatedUser()->getKeyValue();
         $userModel = new UserModel($id_user);
         $lieuGeo = $userModel->getDataField(UserModel::FIELDNAME_LIEU_GEO)->getFieldValue();
-        $nomFtaEtat = Lib::isDefined(FtaEtatModel::FIELDNAME_NOM_FTA_ETAT);
 
         //L'utilisateur possède-t-il au moins un processus monosite ?
         if ($id_user) {
@@ -159,12 +165,12 @@ class AccueilFta {
              */
             $arrayFtaWorkflow = FtaWorkflowModel::getNameWorkflowByIdFtaRoleAndEtat(
                             $paramRole
-                            , $nomFtaEtat);
+                            , $paramNomEtat);
         }
 
 
 
-        $tableau_synthese = AccueilFta::getHtmlTableauSythese($arrayFtaRole, $arrayFtaEtat, $arrayFtaWorkflow);
+        $tableau_synthese = AccueilFta::getHtmlTableauSythese($arrayFtaRole, $arrayFtaEtat, $arrayFtaWorkflow, $paramNomEtat, $paramRole, $paramSyntheseAction);
         return $tableau_synthese;
     }
 
@@ -177,94 +183,67 @@ class AccueilFta {
         return $tableau_synthese;
     }
 
-    public static function getHtmlTableauSythese($paramRole, $paramEtat, $paramWorkflow) {
-        /*
-         * Initialisation
-         */
-        $idFtaRole = Lib::isDefined(FtaRoleModel::KEYNAME);
-        if ($idFtaRole == NULL) {
-            $idFtaRole = $paramRole[0][FtaRoleModel::KEYNAME];
-        }
-        $nomFtaEtat = Lib::isDefined(FtaEtatModel::FIELDNAME_NOM_FTA_ETAT);
+    public static function getHtmlTableauSythese($paramRole, $paramEtat, $paramWorkflow, $paramNomEtat, $paramIdFtaRole, $paramSyntheseAction) {
 
         $javascript = " onclick = \"changerCouleur(this)\"";
-
-        /*
-         * Fond de couleur suivant le chemin de l'url
-         */
-
-        /*
-         * Rôle
-         */
-
-
-        /*
-         * Etat Fta
-         */
-
-        /*
-         * Etat d'avancement
-         */
-
-        /*
-         * Workflow
-         */
-
-
+        $idKeyNameFtaEtat = AccueilFta::VALUE_0;
         $tableau_synthese = "";
 
-        switch ($nomFtaEtat) {
-            case "I":
-                $lien = "<a href=index.php?id_fta_etat=" . $paramEtat[0][FtaEtatModel::KEYNAME]
-                        . "&nom_fta_etat=" . $paramEtat[0][FtaEtatModel::FIELDNAME_ABREVIATION]
-                        . "&id_fta_role=" . $idFtaRole
-                        . "&synthese_action=attente $javascript >En attente</a>";
-                $lien2 = " <a href=index.php?id_fta_etat=" . $paramEtat[0][FtaEtatModel::KEYNAME]
-                        . "&nom_fta_etat=" . $paramEtat[0][FtaEtatModel::FIELDNAME_ABREVIATION]
-                        . "&id_fta_role=" . $idFtaRole
-                        . "&synthese_action=encours $javascript>En cours</a>";
-                $lien3 = "<a href=index.php?id_fta_etat=" . $paramEtat[0][FtaEtatModel::KEYNAME]
-                        . "&nom_fta_etat=" . $paramEtat[0][FtaEtatModel::FIELDNAME_ABREVIATION]
-                        . "&id_fta_role=" . $idFtaRole
-                        . "&synthese_action=correction $javascript>Effectuées</a>";
+
+
+
+        switch ($paramNomEtat) {
+            case FtaEtatModel::ETAT_ABREVIATION_VALUE_MODIFICATION:
+                $lien[AccueilFta::VALUE_0] = "<a href=index.php?id_fta_etat=" . $paramEtat[$idKeyNameFtaEtat][FtaEtatModel::KEYNAME]
+                        . "&nom_fta_etat=" . $paramEtat[$idKeyNameFtaEtat][FtaEtatModel::FIELDNAME_ABREVIATION]
+                        . "&id_fta_role=" . $paramIdFtaRole
+                        . "&synthese_action=attente >En attente</a>";
+                $lien[AccueilFta::VALUE_1] = " <a href=index.php?id_fta_etat=" . $paramEtat[$idKeyNameFtaEtat][FtaEtatModel::KEYNAME]
+                        . "&nom_fta_etat=" . $paramEtat[$idKeyNameFtaEtat][FtaEtatModel::FIELDNAME_ABREVIATION]
+                        . "&id_fta_role=" . $paramIdFtaRole
+                        . "&synthese_action=encours >En cours</a>";
+                $lien[AccueilFta::VALUE_2] = "<a href=index.php?id_fta_etat=" . $paramEtat[$idKeyNameFtaEtat][FtaEtatModel::KEYNAME]
+                        . "&nom_fta_etat=" . $paramEtat[$idKeyNameFtaEtat][FtaEtatModel::FIELDNAME_ABREVIATION]
+                        . "&id_fta_role=" . $paramIdFtaRole
+                        . "&synthese_action=correction >Effectuées</a>";
                 break;
-            case "V":
-                $lien = "<a href=index.php?id_fta_etat=" . $paramEtat[0][FtaEtatModel::KEYNAME]
-                        . "&nom_fta_etat=" . $paramEtat[0][FtaEtatModel::FIELDNAME_ABREVIATION]
-                        . "&id_fta_role=" . $idFtaRole
-                        . "&synthese_action=all $javascript>Voir</a>";
-                $lien2 = "";
-                $lien3 = "";
+            case FtaEtatModel::ETAT_ABREVIATION_VALUE_VALIDE:
+                $lien[AccueilFta::VALUE_0] = "<a href=index.php?id_fta_etat=" . $paramEtat[$idKeyNameFtaEtat][FtaEtatModel::KEYNAME]
+                        . "&nom_fta_etat=" . $paramEtat[$idKeyNameFtaEtat][FtaEtatModel::FIELDNAME_ABREVIATION]
+                        . "&id_fta_role=" . $paramIdFtaRole
+                        . "&synthese_action=all >Voir</a>";
+                $lien[AccueilFta::VALUE_1] = "";
+                $lien[AccueilFta::VALUE_2] = "";
                 break;
-            case "A":
-                $lien = "<a href=index.php?id_fta_etat=" . $paramEtat[0][FtaEtatModel::KEYNAME]
-                        . "&nom_fta_etat=" . $paramEtat[0][FtaEtatModel::FIELDNAME_ABREVIATION]
-                        . "&id_fta_role=" . $idFtaRole
-                        . "&synthese_action=all $javascript>Voir</a>";
-                $lien2 = "";
-                $lien3 = "";
+            case FtaEtatModel::ETAT_ABREVIATION_VALUE_ARCHIVE:
+                $$lien[AccueilFta::VALUE_0] = "<a href=index.php?id_fta_etat=" . $paramEtat[$idKeyNameFtaEtat][FtaEtatModel::KEYNAME]
+                        . "&nom_fta_etat=" . $paramEtat[$idKeyNameFtaEtat][FtaEtatModel::FIELDNAME_ABREVIATION]
+                        . "&id_fta_role=" . $paramIdFtaRole
+                        . "&synthese_action=all >Voir</a>";
+                $lien[AccueilFta::VALUE_1] = "";
+                $lien[AccueilFta::VALUE_2] = "";
                 break;
-            case "R":
-                $lien = "<a href=index.php?id_fta_etat=" . $paramEtat[0][FtaEtatModel::KEYNAME]
-                        . "&nom_fta_etat=" . $paramEtat[0][FtaEtatModel::FIELDNAME_ABREVIATION]
-                        . "&id_fta_role=" . $idFtaRole
-                        . "&synthese_action=all $javascript>Voir</a>";
-                $lien2 = "";
-                $lien3 = "";
+            case FtaEtatModel::ETAT_ABREVIATION_VALUE_RETIRE:
+                $lien[AccueilFta::VALUE_0] = "<a href=index.php?id_fta_etat=" . $paramEtat[$idKeyNameFtaEtat][FtaEtatModel::KEYNAME]
+                        . "&nom_fta_etat=" . $paramEtat[$idKeyNameFtaEtat][FtaEtatModel::FIELDNAME_ABREVIATION]
+                        . "&id_fta_role=" . $paramIdFtaRole
+                        . "&synthese_action=all >Voir</a>";
+                $lien[AccueilFta::VALUE_1] = "";
+                $lien[AccueilFta::VALUE_2] = "";
                 break;
-            case "P":
-                $lien = "<a href=index.php?id_fta_etat=" . $paramEtat[0][FtaEtatModel::KEYNAME]
-                        . "&nom_fta_etat=" . $paramEtat[0][FtaEtatModel::FIELDNAME_ABREVIATION]
-                        . "&id_fta_role=" . $idFtaRole
-                        . "&synthese_action=attente $javascript>En attente</a>";
-                $lien2 = " <a href=index.php?id_fta_etat=" . $paramEtat[0][FtaEtatModel::KEYNAME]
-                        . "&nom_fta_etat=" . $paramEtat[0][FtaEtatModel::FIELDNAME_ABREVIATION]
-                        . "&id_fta_role=" . $idFtaRole
-                        . "&synthese_action=encours $javascript>En cours</a>";
-                $lien3 = "<a href=index.php?id_fta_etat=" . $paramEtat[0][FtaEtatModel::KEYNAME]
-                        . "&nom_fta_etat=" . $paramEtat[0][FtaEtatModel::FIELDNAME_ABREVIATION]
-                        . "&id_fta_role=" . $idFtaRole
-                        . "&synthese_action=correction $javascript>Effectuées</a>";
+            case FtaEtatModel::ETAT_ABREVIATION_VALUE_PRESENTATION:
+                $lien[AccueilFta::VALUE_0] = "<a href=index.php?id_fta_etat=" . $paramEtat[$idKeyNameFtaEtat][FtaEtatModel::KEYNAME]
+                        . "&nom_fta_etat=" . $paramEtat[$idKeyNameFtaEtat][FtaEtatModel::FIELDNAME_ABREVIATION]
+                        . "&id_fta_role=" . $paramIdFtaRole
+                        . "&synthese_action=attente >En attente</a>";
+                $lien[AccueilFta::VALUE_1] = " <a href=index.php?id_fta_etat=" . $paramEtat[$idKeyNameFtaEtat][FtaEtatModel::KEYNAME]
+                        . "&nom_fta_etat=" . $paramEtat[$idKeyNameFtaEtat][FtaEtatModel::FIELDNAME_ABREVIATION]
+                        . "&id_fta_role=" . $paramIdFtaRole
+                        . "&synthese_action=encours >En cours</a>";
+                $lien[AccueilFta::VALUE_2] = "<a href=index.php?id_fta_etat=" . $paramEtat[$idKeyNameFtaEtat][FtaEtatModel::KEYNAME]
+                        . "&nom_fta_etat=" . $paramEtat[$idKeyNameFtaEtat][FtaEtatModel::FIELDNAME_ABREVIATION]
+                        . "&id_fta_role=" . $paramIdFtaRole
+                        . "&synthese_action=correction >Effectuées</a>";
 
                 break;
         }
@@ -278,198 +257,84 @@ class AccueilFta {
                  * Entête de la barre de navigation de la page d'accueil
                  */
                 . "<TR>"
-                . "<TH>Role </TH> <TH>Etat FTA</TH> <TH>Etat d'Avancement</TH><TH>Espace de Travail</TH>"
-                . "</TR>"
-                /*
-                 * Données du tableau
-                 */
-
-//                self::getLineSynthese($javascript, $paramRole, $paramEtat, $idFtaRole, $lien, $paramWorkflow, $idFieldNomFtaRole=0, $idKeyNameFtaEtat=1);
-//                
-//                self::getLineSynthese($javascript, $paramRole, $paramEtat, $idFtaRole, $lien, $paramWorkflow, $idFieldNomFtaRole=0, $idKeyNameFtaEtat=1);
-//                
-//                self::getLineSynthese($javascript, $paramRole, $paramEtat, $idFtaRole, $lien, $paramWorkflow, $idFieldNomFtaRole=0, $idKeyNameFtaEtat=1);
-//                
-//                self::getLineSynthese($javascript, $paramRole, $paramEtat, $idFtaRole, $lien, $paramWorkflow, $idFieldNomFtaRole=0, $idKeyNameFtaEtat=1);
-//                
-//                self::getLineSynthese($javascript, $paramRole, $paramEtat, $idFtaRole, $lien, $paramWorkflow, $idFieldNomFtaRole=0, $idKeyNameFtaEtat=1);
-//                
-//                self::getLineSynthese($javascript, $paramRole, $paramEtat, $idFtaRole, $lien, $paramWorkflow, $idFieldNomFtaRole=0, $idKeyNameFtaEtat=1);
-                . "<TR>"
-                . "<td $javascript id='" . $paramRole[0][FtaRoleModel::FIELDNAME_NOM_FTA_ROLE] . "'> <a href=index.php?id_fta_etat=" . $paramEtat[0][FtaEtatModel::KEYNAME]
-                . "&nom_fta_etat=" . $paramEtat[0][FtaEtatModel::FIELDNAME_ABREVIATION]
-                . "&id_fta_role=" . $paramRole[0][FtaRoleModel::KEYNAME]
-                . "&synthese_action=";
-
-        $tableau_synthese .= AccueilFta::getLienByEtatFta($paramEtat[0][FtaEtatModel::FIELDNAME_ABREVIATION], $paramEtat [0][FtaEtatModel::FIELDNAME_ABREVIATION]);
-
-        $tableau_synthese .= $paramRole[0][FtaRoleModel::FIELDNAME_DESCRIPTION_FTA_ROLE] . "</a></td>"
-                . "<td $javascript id='" . $paramEtat[0][FtaEtatModel::FIELDNAME_ABREVIATION] . "'>  <a href=index.php?id_fta_etat=" . $paramEtat[0][FtaEtatModel::KEYNAME]
-                . "&nom_fta_etat=" . $paramEtat[0][FtaEtatModel::FIELDNAME_ABREVIATION]
-                . "&id_fta_role=" . $idFtaRole
-                . "&synthese_action=";
-
-        $tableau_synthese .= AccueilFta::getLienByEtatFta($paramEtat[0][FtaEtatModel::FIELDNAME_ABREVIATION], $paramEtat [0][FtaEtatModel::FIELDNAME_ABREVIATION]);
-
-
-        $tableau_synthese .= $paramEtat[0][FtaEtatModel::FIELDNAME_NOM_FTA_ETAT] . "</a></td>"
-                . "<td  >" . $lien . "</td>"
-                . "<td >" . "<a href=#"
-                . $paramWorkflow[0][FtaWorkflowModel::FIELDNAME_NOM_FTA_WORKFLOW] . "  >"
-                . $paramWorkflow[0][FtaWorkflowModel::FIELDNAME_DESCRIPTION_FTA_WORKFLOW] . "</a>" . "</td>"
-                . "</TR>"
-                //
-                . "<TR>"
-                . "<td id='" . $paramRole[1][FtaRoleModel::FIELDNAME_NOM_FTA_ROLE] . "'><a href=index.php?id_fta_etat=" . $paramEtat[0][FtaEtatModel::KEYNAME]
-                . "&nom_fta_etat=" . $paramEtat[0][FtaEtatModel::FIELDNAME_ABREVIATION]
-                . "&id_fta_role=" . $paramRole[1][FtaRoleModel::KEYNAME]
-                . "&synthese_action=";
-
-        $tableau_synthese .= AccueilFta::getLienByEtatFta($paramEtat[0][FtaEtatModel::FIELDNAME_ABREVIATION], $paramEtat [0][FtaEtatModel::FIELDNAME_ABREVIATION]);
-
-        $tableau_synthese .= $paramRole[1][FtaRoleModel::FIELDNAME_DESCRIPTION_FTA_ROLE] . "</a></td>"
-                . "<td id='" . $paramEtat[1][FtaEtatModel::FIELDNAME_ABREVIATION] . "'>  <a href=index.php?id_fta_etat=" . $paramEtat[1][FtaEtatModel::KEYNAME]
-                . "&nom_fta_etat=" . $paramEtat[0][FtaEtatModel::FIELDNAME_ABREVIATION]
-                . "&id_fta_role=" . $idFtaRole
-                . "&synthese_action=";
-        $tableau_synthese .= AccueilFta::getLienByEtatFta($paramEtat[1][FtaEtatModel::FIELDNAME_ABREVIATION], $paramEtat [1][FtaEtatModel::FIELDNAME_ABREVIATION]);
-
-        $tableau_synthese .= $paramEtat[1][FtaEtatModel::FIELDNAME_NOM_FTA_ETAT] . "</a></td>"
-                . "<td>" . $lien2 . " </td>"
-                . "<td>" . "<a href=#"
-                . $paramWorkflow[1][FtaWorkflowModel::FIELDNAME_NOM_FTA_WORKFLOW] . "  >"
-                . $paramWorkflow[1][FtaWorkflowModel::FIELDNAME_DESCRIPTION_FTA_WORKFLOW] . "</a>" . "</td>"
-                . "</TR>"
-                //
-                . "<TR>"
-                . "<td id='" . $paramRole[2][FtaRoleModel::FIELDNAME_NOM_FTA_ROLE] . "'><a href=index.php?id_fta_etat=" . $paramEtat[0][FtaEtatModel::KEYNAME]
-                . "&nom_fta_etat=" . $paramEtat[0][FtaEtatModel::FIELDNAME_ABREVIATION]
-                . "&id_fta_role=" . $paramRole[2][FtaRoleModel::KEYNAME]
-                . "&synthese_action=";
-
-        $tableau_synthese .= AccueilFta::getLienByEtatFta($paramEtat[0][FtaEtatModel::FIELDNAME_ABREVIATION], $paramEtat [0][FtaEtatModel::FIELDNAME_ABREVIATION]);
-
-        $tableau_synthese .=$paramRole[2][FtaRoleModel::FIELDNAME_DESCRIPTION_FTA_ROLE] . "</a></td>"
-                . "<td id='" . $paramEtat[2][FtaEtatModel::FIELDNAME_ABREVIATION] . "'><a href=index.php?id_fta_etat=" . $paramEtat[2][FtaEtatModel::KEYNAME]
-                . "&nom_fta_etat=" . $paramEtat[1][FtaEtatModel::FIELDNAME_ABREVIATION]
-                . "&id_fta_role=" . $idFtaRole
-                . "&synthese_action=";
-
-        $tableau_synthese .= AccueilFta::getLienByEtatFta($paramEtat[2][FtaEtatModel::FIELDNAME_ABREVIATION], $paramEtat [2][FtaEtatModel::FIELDNAME_ABREVIATION]);
-
-        $tableau_synthese .= $paramEtat[2][FtaEtatModel::FIELDNAME_NOM_FTA_ETAT] . "</a></td>"
-                . "<td>" . $lien3 . "</td>"
-                . "<td>" . "<a href=#"
-                . $paramWorkflow[2][FtaWorkflowModel::FIELDNAME_NOM_FTA_WORKFLOW] . "  >"
-                . $paramWorkflow[2][FtaWorkflowModel::FIELDNAME_DESCRIPTION_FTA_WORKFLOW] . "</a>" . "</td>"
-                . "</TR>"
-                //
-                . "<TR>"
-                . "<td id='" . $paramRole[3][FtaRoleModel::FIELDNAME_NOM_FTA_ROLE] . "'><a href=index.php?id_fta_etat=" . $paramEtat[0][FtaEtatModel::KEYNAME]
-                . "&nom_fta_etat=" . $paramEtat[0][FtaEtatModel::FIELDNAME_ABREVIATION]
-                . "&id_fta_role=" . $paramRole[3][FtaRoleModel::KEYNAME]
-                . "&synthese_action=";
-
-        $tableau_synthese .= AccueilFta::getLienByEtatFta($paramEtat[0][FtaEtatModel::FIELDNAME_ABREVIATION], $paramEtat [0][FtaEtatModel::FIELDNAME_ABREVIATION]);
-
-        $tableau_synthese .= $paramRole[3][FtaRoleModel::FIELDNAME_DESCRIPTION_FTA_ROLE] . "</a></td> "
-                . "<td id='" . $paramEtat[3][FtaEtatModel::FIELDNAME_ABREVIATION] . "'> <a href=index.php?id_fta_etat=" . $paramEtat[3][FtaEtatModel::KEYNAME]
-                . "&nom_fta_etat=" . $paramEtat[2][FtaEtatModel::FIELDNAME_ABREVIATION]
-                . "&id_fta_role=" . $idFtaRole
-                . "&synthese_action=";
-
-        $tableau_synthese .= AccueilFta::getLienByEtatFta($paramEtat[3][FtaEtatModel::FIELDNAME_ABREVIATION], $paramEtat [3][FtaEtatModel::FIELDNAME_ABREVIATION]);
-
-        $tableau_synthese .= $paramEtat[3][FtaEtatModel::FIELDNAME_NOM_FTA_ETAT] . "</a></td>"
-                . " <td></td>"
-                . " <td>"
-                . "<a href=#"
-                . $paramWorkflow[3][FtaWorkflowModel::FIELDNAME_NOM_FTA_WORKFLOW] . " >"
-                . $paramWorkflow[3][FtaWorkflowModel::FIELDNAME_DESCRIPTION_FTA_WORKFLOW] . "</a>" . "</td>"
-                . "</TR>"
-                //
-                . "<TR>"
-                . "<td id='" . $paramRole[4][FtaRoleModel::FIELDNAME_NOM_FTA_ROLE] . "'><a href=index.php?id_fta_etat=" . $paramEtat[0][FtaEtatModel::KEYNAME]
-                . "&nom_fta_etat=" . $paramEtat[0][FtaEtatModel::FIELDNAME_ABREVIATION]
-                . "&id_fta_role=" . $paramRole[4][FtaRoleModel::KEYNAME]
-                . "&synthese_action=";
-
-        $tableau_synthese .= AccueilFta::getLienByEtatFta($paramEtat[0][FtaEtatModel::FIELDNAME_ABREVIATION], $paramEtat [0][FtaEtatModel::FIELDNAME_ABREVIATION]);
-
-        $tableau_synthese .= $paramRole[4][FtaRoleModel::FIELDNAME_DESCRIPTION_FTA_ROLE] . "</a></td> "
-                . "<td id='" . $paramEtat[4][FtaEtatModel::FIELDNAME_ABREVIATION] . "'>  <a href=index.php?id_fta_etat=" . $paramEtat[4][FtaEtatModel::KEYNAME]
-                . "&nom_fta_etat=" . $paramEtat[3][FtaEtatModel::FIELDNAME_ABREVIATION]
-                . "&id_fta_role=" . $idFtaRole
-                . "&synthese_action=";
-
-        $tableau_synthese .= AccueilFta::getLienByEtatFta($paramEtat[4][FtaEtatModel::FIELDNAME_ABREVIATION], $paramEtat [4][FtaEtatModel::FIELDNAME_ABREVIATION]);
-
-        $tableau_synthese .= $paramEtat[4][FtaEtatModel::FIELDNAME_NOM_FTA_ETAT] . "</a></td>"
-                . " <td></td>"
-                . " <td>" . "<a href=#"
-                . $paramWorkflow[4][FtaWorkflowModel::FIELDNAME_NOM_FTA_WORKFLOW] . " >"
-                . $paramWorkflow[4][FtaWorkflowModel::FIELDNAME_DESCRIPTION_FTA_WORKFLOW] . "</a>" . "</td>"
-                . "</TR>"
-                //
-                . "<TR>"
-                . "<td id='" . $paramRole[5][FtaRoleModel::FIELDNAME_NOM_FTA_ROLE] . "'><a href=index.php?id_fta_etat=" . $paramEtat[0][FtaEtatModel::KEYNAME]
-                . "&nom_fta_etat=" . $paramEtat[0][FtaEtatModel::FIELDNAME_ABREVIATION]
-                . "&id_fta_role=" . $paramRole[5][FtaRoleModel::KEYNAME]
-                . "&synthese_action=";
-
-        $tableau_synthese .= AccueilFta::getLienByEtatFta($paramEtat[0][FtaEtatModel::FIELDNAME_ABREVIATION], $paramEtat [0][FtaEtatModel::FIELDNAME_ABREVIATION]);
-
-        $tableau_synthese .= $paramRole[5][FtaRoleModel::FIELDNAME_DESCRIPTION_FTA_ROLE] . "</a></td> "
-                . "<td id='" . $paramEtat[5][FtaEtatModel::FIELDNAME_ABREVIATION] . "'><a href=index.php?id_fta_etat=" . $paramEtat[5][FtaEtatModel::KEYNAME]
-                . "&nom_fta_etat=" . $paramEtat[4][FtaEtatModel::FIELDNAME_ABREVIATION]
-                . "&id_fta_role=" . $idFtaRole
-                . "&synthese_action=";
-
-        $tableau_synthese .= AccueilFta::getLienByEtatFta($paramEtat[5][FtaEtatModel::FIELDNAME_ABREVIATION], $paramEtat [5][FtaEtatModel::FIELDNAME_ABREVIATION]);
-
-        $tableau_synthese .= $paramEtat[5][FtaEtatModel::FIELDNAME_NOM_FTA_ETAT] . "</a></td>"
-                . " <td></td>"
-                . " <td>" . "<a href=#"
-                . $paramWorkflow[5][FtaWorkflowModel::FIELDNAME_NOM_FTA_WORKFLOW] . "  >"
-                . $paramWorkflow[5][FtaWorkflowModel::FIELDNAME_DESCRIPTION_FTA_WORKFLOW] . "</a>" . "</td>"
+                . "<TH>Role </TH> <TH>Etat FTA</TH> <TH>Etat d'Avancement</TH><TH $bgcolor>Espace de Travail</TH>"
                 . "</TR>";
+        /*
+         * Données du tableau
+         */
+
+        $tableau_synthese .= self::getLineSynthese($paramRole, $paramEtat, $paramIdFtaRole, $paramNomEtat, $paramSyntheseAction, $lien, $paramWorkflow, $idFieldNomFtaRole = AccueilFta::VALUE_0, $idKeyNameFtaEtat = AccueilFta::VALUE_0, $idKeyValueFtaEtatAvancement = AccueilFta::VALUE_0, $idKeyNameFtaWorkflow = AccueilFta::VALUE_0);
+        $tableau_synthese .= self::getLineSynthese($paramRole, $paramEtat, $paramIdFtaRole, $paramNomEtat, $paramSyntheseAction, $lien, $paramWorkflow, $idFieldNomFtaRole = AccueilFta::VALUE_1, $idKeyNameFtaEtat = AccueilFta::VALUE_1, $idKeyValueFtaEtatAvancement = AccueilFta::VALUE_1, $idKeyNameFtaWorkflow = AccueilFta::VALUE_1);
+        $tableau_synthese .= self::getLineSynthese($paramRole, $paramEtat, $paramIdFtaRole, $paramNomEtat, $paramSyntheseAction, $lien, $paramWorkflow, $idFieldNomFtaRole = AccueilFta::VALUE_2, $idKeyNameFtaEtat = AccueilFta::VALUE_2, $idKeyValueFtaEtatAvancement = AccueilFta::VALUE_2, $idKeyNameFtaWorkflow = AccueilFta::VALUE_2);
+        $tableau_synthese .= self::getLineSynthese($paramRole, $paramEtat, $paramIdFtaRole, $paramNomEtat, $paramSyntheseAction, $lien, $paramWorkflow, $idFieldNomFtaRole = AccueilFta::VALUE_3, $idKeyNameFtaEtat = AccueilFta::VALUE_3, $idKeyValueFtaEtatAvancement = AccueilFta::VALUE_3, $idKeyNameFtaWorkflow = AccueilFta::VALUE_3);
+        $tableau_synthese .= self::getLineSynthese($paramRole, $paramEtat, $paramIdFtaRole, $paramNomEtat, $paramSyntheseAction, $lien, $paramWorkflow, $idFieldNomFtaRole = AccueilFta::VALUE_4, $idKeyNameFtaEtat = AccueilFta::VALUE_4, $idKeyValueFtaEtatAvancement = AccueilFta::VALUE_3, $idKeyNameFtaWorkflow = AccueilFta::VALUE_4);
+        $tableau_synthese .= self::getLineSynthese($paramRole, $paramEtat, $paramIdFtaRole, $paramNomEtat, $paramSyntheseAction, $lien, $paramWorkflow, $idFieldNomFtaRole = AccueilFta::VALUE_5, $idKeyNameFtaEtat = AccueilFta::VALUE_5, $idKeyValueFtaEtatAvancement = AccueilFta::VALUE_3, $idKeyNameFtaWorkflow = AccueilFta::VALUE_5);
 
         return $tableau_synthese;
     }
 
     private static function getLineSynthese(
-    $javascript, $paramRole, $paramEtat, $idFtaRole, $lien, $paramWorkflow, $idFieldNomFtaRole, $idKeyNameFtaEtat
+    $paramArrayRole, $paramArrayEtat, $idFtaRole, $nomFtaEtat, $paramSyntheseAction, $lien, $paramArrayWorkflow, $idFieldNomFtaRole, $idKeyNameFtaEtat, $idKeyValueFtaEtatAvancement, $idKeyNameFtaWorkflow
     ) {
-
+        $bgcolor = "bgcolor = #3CDA31 ";
         $color = "";
-        if ($paramRole[$idFieldNomFtaRole][FtaRoleModel::FIELDNAME_NOM_FTA_ROLE] == $idFtaRole ){
-            $color = "background=#00000";
+        $color1 = "";
+        $color2 = "";
+        if ($paramArrayRole[$idFieldNomFtaRole][FtaRoleModel::KEYNAME] == $idFtaRole) {
+            $color = "bgcolor=#AAAAFF";
         }
-        
+        if ($paramArrayEtat[$idKeyNameFtaEtat][FtaEtatModel::FIELDNAME_ABREVIATION] == $nomFtaEtat) {
+            $color1 = "bgcolor=#AAAAFF";
+        }
+
+        switch ($idKeyValueFtaEtatAvancement) {
+            case AccueilFta::VALUE_0:
+                $ligneEtatAvancement = "attente";
+                if ($lien[AccueilFta::VALUE_2] == NULL) {
+                    $ligneEtatAvancement = "all";
+                }
+                break;
+
+            case AccueilFta::VALUE_1:
+                $ligneEtatAvancement = "encours";
+                break;
+
+            case AccueilFta::VALUE_2:
+                $ligneEtatAvancement = "correction";
+                break;
+        }
+        if ($paramSyntheseAction == $ligneEtatAvancement) {
+            $color2 = "bgcolor=#AAAAFF";
+        }
+
 
         return "<TR>"
-                . "<td $color $javascript id='" . $paramRole[$idFieldNomFtaRole][FtaRoleModel::FIELDNAME_NOM_FTA_ROLE] . "'> "
-                . "<a href=index.php?id_fta_etat=" . $paramEtat[$idKeyNameFtaEtat][FtaEtatModel::KEYNAME]
-                    . "&nom_fta_etat=" . $paramEtat[0][FtaEtatModel::FIELDNAME_ABREVIATION]
-                    . "&id_fta_role=" . $paramRole[0][FtaRoleModel::KEYNAME]
-                    . "&synthese_action="
-                    . AccueilFta::getLienByEtatFta($paramEtat[0][FtaEtatModel::FIELDNAME_ABREVIATION], $paramEtat [0][FtaEtatModel::FIELDNAME_ABREVIATION])
-                    . $paramRole[0][FtaRoleModel::FIELDNAME_DESCRIPTION_FTA_ROLE] 
+                . "<td $color  id='" . $paramArrayRole[$idFieldNomFtaRole][FtaRoleModel::FIELDNAME_NOM_FTA_ROLE] . "'> "
+                . "<a href=index.php?id_fta_etat=" . $paramArrayEtat[AccueilFta::VALUE_0][FtaEtatModel::KEYNAME]
+                . "&nom_fta_etat=" . $paramArrayEtat[AccueilFta::VALUE_0][FtaEtatModel::FIELDNAME_ABREVIATION]
+                . "&id_fta_role=" . $paramArrayRole[$idFieldNomFtaRole][FtaRoleModel::KEYNAME]
+                . "&synthese_action="
+                . AccueilFta::getLienByEtatFta($paramArrayEtat[AccueilFta::VALUE_0][FtaEtatModel::FIELDNAME_ABREVIATION], $paramArrayEtat [AccueilFta::VALUE_0][FtaEtatModel::FIELDNAME_ABREVIATION])
+                . $paramArrayRole[$idFieldNomFtaRole][FtaRoleModel::FIELDNAME_DESCRIPTION_FTA_ROLE]
                 . "</a>"
                 . "</td>"
-                . "<td $javascript id='" . $paramEtat[0][FtaEtatModel::FIELDNAME_ABREVIATION] . "'>  <a href=index.php?id_fta_etat=" . $paramEtat[$idKeyNameFtaEtat][FtaEtatModel::KEYNAME]
-                . "&nom_fta_etat=" . $paramEtat[0][FtaEtatModel::FIELDNAME_ABREVIATION]
+                . "<td $color1 id='" . $paramArrayEtat[$idKeyNameFtaEtat][FtaEtatModel::FIELDNAME_ABREVIATION] . "'>  "
+                . "<a href=index.php?id_fta_etat=" . $paramArrayEtat[$idKeyNameFtaEtat][FtaEtatModel::KEYNAME]
+                . "&nom_fta_etat=" . $paramArrayEtat[AccueilFta::VALUE_0][FtaEtatModel::FIELDNAME_ABREVIATION]
                 . "&id_fta_role=" . $idFtaRole
-                . "&synthese_action=";
-
-        $tableau_synthese .= AccueilFta::getLienByEtatFta($paramEtat[0][FtaEtatModel::FIELDNAME_ABREVIATION], $paramEtat [0][FtaEtatModel::FIELDNAME_ABREVIATION]);
-
-
-        $tableau_synthese .= $paramEtat[0][FtaEtatModel::FIELDNAME_NOM_FTA_ETAT] . "</a></td>"
-                . "<td  >" . $lien . "</td>"
-                . "<td >" . "<a href=#"
-                . $paramWorkflow[0][FtaWorkflowModel::FIELDNAME_NOM_FTA_WORKFLOW] . "  >"
-                . $paramWorkflow[0][FtaWorkflowModel::FIELDNAME_DESCRIPTION_FTA_WORKFLOW] . "</a>" . "</td>"
+                . "&synthese_action="
+                . AccueilFta::getLienByEtatFta($paramArrayEtat[$idKeyNameFtaEtat][FtaEtatModel::FIELDNAME_ABREVIATION], $paramArrayEtat [$idKeyNameFtaEtat][FtaEtatModel::FIELDNAME_ABREVIATION])
+                . $paramArrayEtat[$idKeyNameFtaEtat][FtaEtatModel::FIELDNAME_NOM_FTA_ETAT]
+                . "</a>"
+                . "</td>"
+                . "<td $color2 >" . $lien[$idKeyValueFtaEtatAvancement]
+                . "</td>"
+                . "<td $bgcolor >"
+                . "<a href=#"
+                . $paramArrayWorkflow[$idKeyNameFtaWorkflow][FtaWorkflowModel::FIELDNAME_NOM_FTA_WORKFLOW] . "  >"
+                . $paramArrayWorkflow[$idKeyNameFtaWorkflow][FtaWorkflowModel::FIELDNAME_DESCRIPTION_FTA_WORKFLOW]
+                . "</a>"
+                . "</td>"
                 . "</TR>"
         ;
     }
@@ -1261,46 +1126,27 @@ class AccueilFta {
         return $tableau_fiches;
     }
 
-    public static function getHtmlTableauFiche($paramAbrevationFtaEtat, $paramOrderBy) {
+    public static function getHtmlTableauFiche($paramIdFtaRole, $paramAbrevationFtaEtat, $paramSyntheseAction, $paramOrderBy) {
 
         /*
          * Initialisation 
          * 
          */
-        $idFtaChapitreEncours = Lib::isDefined("id_fta_chapitre_encours");
-        $syntheseAction = Lib::isDefined("synthese_action");
         $globalConfig = new GlobalConfig();
         $id_user = $globalConfig->getAuthenticatedUser()->getKeyValue();
-        $idFtaRole = Lib::isDefined(FtaRoleModel::KEYNAME);
-        $nomFtaEtat = Lib::isDefined(FtaEtatModel::FIELDNAME_NOM_FTA_ETAT);
-        $arrayFtaRole = FtaRoleModel::getIdFtaRoleByIdUser($id_user);
 
+        /*
+         * Selon le role et l'état  nous cherchons les workflow. 
+         * 
+         */
+        $arrayFtaWorkflow = FtaWorkflowModel::getNameWorkflowByIdFtaRoleAndEtat(
+                        $paramIdFtaRole
+                        , $paramAbrevationFtaEtat);
+        $arrayIdFtaAndIdWorkflow = FtaEtatModel::getIdFtaByEtatAvancement($paramSyntheseAction, $paramAbrevationFtaEtat, $paramIdFtaRole);
 
-        if ($idFtaRole) {
-            /*
-             * Selon le role  nous cherchons ces etats. 
-             * 
-             */
-            $arrayFtaEtat = FtaEtatModel::getFtaEtatAndNameByRole($idFtaRole);
-
-            /*
-             * Selon le role et l'état  nous cherchons les workflow. 
-             * 
-             */
-            $arrayFtaWorkflow = FtaWorkflowModel::getNameWorkflowByIdFtaRoleAndEtat(
-                            $idFtaRole
-                            , $nomFtaEtat);
-            $arrayIdFtaAndIdWorkflow = FtaEtatModel::getIdFtaByEtatAvancement($syntheseAction, $paramAbrevationFtaEtat, $idFtaRole);
-        } else {
-            $arrayFtaEtat = FtaEtatModel::getFtaEtatAndNameByRole($arrayFtaRole[0][FtaRoleModel::KEYNAME]);
-
-            $arrayFtaWorkflow = FtaWorkflowModel::getNameWorkflowByIdFtaRoleAndEtat(
-                            $arrayFtaRole[0][FtaRoleModel::KEYNAME]
-                            , $arrayFtaEtat[0][FtaEtatModel::FIELDNAME_ABREVIATION]);
-            $arrayIdFtaAndIdWorkflow = FtaEtatModel::getIdFtaByEtatAvancement($syntheseAction, $paramAbrevationFtaEtat, $arrayFtaRole[0][FtaRoleModel::KEYNAME]);
-        }
 
         $arrayIdFtaByUserAndWorkflow = UserModel::getIdFtaByUserAndWorkflow($arrayIdFtaAndIdWorkflow);
+        //$arrayIdFtaByUserAndWorkflow2 = UserModel::getIdFtaByUserAndWorkflow2($arrayIdFtaAndIdWorkflow);
 
         $largeur_html_C1 = "width=15%"; // largeur cellule type
         $largeur_html_C3 = "width=16%"; // largeur cellule type
@@ -1314,11 +1160,10 @@ class AccueilFta {
 
         //Définition des fonctionnalité de classement
         //Par N°de Dossier - version
-        $order_common = "id_fta";
+        $paramOrderBy = "id_fta";
 
         //Contrôle pour savoir si on est sur l'index du module
         $URL = $_SERVER["REQUEST_URI"];
-        $franck = substr($URL, -1);
         if (substr($URL, -1) == "p") {
             $URL = $URL . "?";
         }
@@ -1337,14 +1182,11 @@ class AccueilFta {
                 . "<a href=" . $URL . "&order_common=code_article_ldc><img src=../lib/images/order-AZ.png title=\"mini_fleche_centre\"  border=\"0\" /></a>"
                 . "Code Regate"
                 . "</th><th>"
-                . "<a href=" . $URL . "&order_common=id_fta_role><img src=../lib/images/order-AZ.png title=\"mini_fleche_centre\"  border=\"0\" /></a>"
-                . "Service"
-                . "</th><th>"
-                . "<a href=" . $URL . "&order_common=date_echeance_fta><img src=../lib/images/order-AZ.png title=\"mini_fleche_centre\"  border=\"0\" /></a>"
                 . "Echéance de validation"
                 . "</th><th>"
-                . "<a href=" . $URL . "><img src=../lib/images/order-AZ.png title=\"mini_fleche_centre\"  border=\"0\" /></a>"
                 . "% Avancement FTA"
+                . "</th><th>"
+                . "Service"
                 . "</th><th>"
                 . "Actions"
                 . "</th><th>"
@@ -1462,23 +1304,23 @@ class AccueilFta {
                             /*
                              * Definition de la couleur de la cellule selon l'état d'avancement
                              */
-                            switch ($syntheseAction) {
-                                case "attente":
+                            switch ($paramSyntheseAction) {
+                                case FtaEtatModel::ETAT_AVANCEMENT_VALUE_ATTENTE:
                                     $ok = 0;
                                     $bgcolor = "bgcolor=#A5A5CE ";
 
                                     break;
-                                case "encours":
+                                case FtaEtatModel::ETAT_AVANCEMENT_VALUE_EN_COURS:
                                     $ok = 1;
                                     $bgcolor = "";
 
                                     break;
-                                case "correction":
+                                case FtaEtatModel::ETAT_AVANCEMENT_VALUE_EFFECTUES:
                                     $ok = 2;
                                     $bgcolor = "bgcolor=#AFFF5A";
                                     break;
 
-                                case "all":
+                                case FtaEtatModel::ETAT_AVANCEMENT_VALUE_ALL:
                                     $bgcolor = "bgcolor=#AFFF5A";
                                     break;
                             }
@@ -1496,11 +1338,11 @@ class AccueilFta {
                             //    Contient le code source HTML utilisé pour la fonction visualiser_fiches()
                             //echo $HTML_date_echeance_fta["status"];
                             switch ($HTML_date_echeance_fta["status"]) {
-                                case 1:
+                                case AccueilFta::VALUE_1:
                                     $bgcolor_header = $bgcolor;
                                     $icon_header = "<img src=../lib/images/exclamation.png title='Certaines échéances sont dépassées !' width=30 height=27 border=0 />";
                                     break;
-                                case 2:
+                                case AccueilFta::VALUE_2:
                                     $bgcolor_header = "class=couleur_rouge";
                                     $icon_header = "<img src=../lib/images/exclamation.png title='Certaines échéances sont dépassées !' width=30 height=27 border=0 />";
                                     break;
@@ -1569,7 +1411,7 @@ class AccueilFta {
                                 $actions = "<a "
                                         . "href=modification_fiche.php"
                                         . "?id_fta=$idFta"
-                                        . "&synthese_action=$syntheseAction"
+                                        . "&synthese_action=$paramSyntheseAction"
                                         . "&comeback=1"
                                         . " /><img src=../lib/images/next.png alt=\"\" title=\"Voir la FTA\" width=\"30\" height=\"25\" border=\"0\" />"
                                         . "</a>"
@@ -1603,12 +1445,10 @@ class AccueilFta {
                                     )
                                     or ( $ok == 2 and $_SESSION["fta_article"]) and (
                                     $abreviationFtaEtat == 'I' or
-                                    $abreviationFtaEtat == 'M' or
-                                    $abreviationFtaEtat == 'T'
+                                    $abreviationFtaEtat == 'M' 
                                     )or ( $ok == 2 and $_SESSION["fta_referentiel"]) and (
                                     $abreviationFtaEtat == 'I' or
-                                    $abreviationFtaEtat == 'M' or
-                                    $abreviationFtaEtat == 'T'
+                                    $abreviationFtaEtat == 'M' 
                                     )
                             ) {
                                 $actions .= "<a "
@@ -1618,7 +1458,7 @@ class AccueilFta {
                                         . "</a>"
                                 ;
 
-                                if ($syntheseAction == "correction") {
+                                if ($paramSyntheseAction == "correction") {
                                     $selection = "<input type=\"checkbox\" name=selection_fta[] value=\"" . $idFta . "\" checked />";
                                     $traitement_masse = 1;
                                     $selection_width = "2%";
@@ -1644,7 +1484,7 @@ class AccueilFta {
                                    {
                                    if(confirm('Etes vous certain de vouloir retirer cette Fiche Technique ? Les autres fiches du dossier resteront indem.'))
                                    {
-                                       location.href =\"transiter.php?id_fta=" . $idFta . "&id_fta_chapitre_encours=$idFtaChapitreEncours&synthese_action=$syntheseAction&action=correction&demande_abreviation_fta_transition=R\"
+                                       location.href =\"transiter.php?id_fta=" . $idFta . "&id_fta_chapitre_encours=$idFtaChapitreEncours&synthese_action=$paramSyntheseAction&action=correction&demande_abreviation_fta_transition=R\"
                                    }
                                     else{}
                                    }
@@ -1697,15 +1537,15 @@ class AccueilFta {
                                             . "<td $bgcolor width=6%>" . $classification . "</td>"//Client
                                             . "<td $bgcolor $largeur_html_C1><a title=$createur_link />" . $din . "</a></td>"// Produits
                                             . "<td $bgcolor width=3%>" . $idFta . "v" . $idVersionDossierFta . "</td>"//Dossier Fta
-                                            . "<td $bgcolor width=\"6%\"> <b><font size=\"2\" color=\"#0000FF\">" . $codeArticleLdc . "</font></b></td>"//Code regate
-                                            . "<td $bgcolor align=center >$service</td>"; //Service               
+                                            . "<td $bgcolor width=\"6%\"> <b><font size=\"2\" color=\"#0000FF\">" . $codeArticleLdc . "</font></b></td>"; //Code regate
 
-                                    if ($abreviationFtaEtat == "I") {
+                                    if ($abreviationFtaEtat == FtaEtatModel::ETAT_ABREVIATION_VALUE_MODIFICATION) {
                                         $tableauFiche.="<td $bgcolor $largeur_html_C3 align=center>" . $HTML_date_echeance_fta["HTML_synthese"] . "</td>"; //échance de validation
                                     } else {
                                         $tableauFiche.="<td></td>";
                                     }
                                     $tableauFiche .= "<td $bgcolor width=10% align=center>$recap[$idFta]</td>"//% Avancement FTA
+                                            . "<td $bgcolor align=center >$service</td>" //Service               
                                             . "<td $bgcolor align=center >$actions</td>"// Actions
                                             . "$commentaire</tr >"; // Commentaires
                                     $createurTmp = $createurFta;
@@ -1716,15 +1556,15 @@ class AccueilFta {
                                             . "<td $bgcolor width=6%>" . $classification . "</td>"//Client
                                             . "<td $bgcolor $largeur_html_C1><a title=$createur_link />" . $din . "</a></td>"// Produits
                                             . "<td $bgcolor width=3%>" . $idFta . "v" . $idVersionDossierFta . "</td>"//Dossier Fta
-                                            . "<td $bgcolor width=\"6%\"> <b><font size=\"2\" color=\"#0000FF\">" . $codeArticleLdc . "</font></b></td>"//Code regate
-                                            . "<td $bgcolor align=center >$service</td>"; //Service               
+                                            . "<td $bgcolor width=\"6%\"> <b><font size=\"2\" color=\"#0000FF\">" . $codeArticleLdc . "</font></b></td>"; //Code regate
 
-                                    if ($abreviationFtaEtat == "I") {
+                                    if ($abreviationFtaEtat == FtaEtatModel::ETAT_ABREVIATION_VALUE_MODIFICATION) {
                                         $tableauFiche.="<td $bgcolor $largeur_html_C3 align=center>" . $HTML_date_echeance_fta["HTML_synthese"] . "</td>"; //échance de validation
                                     } else {
                                         $tableauFiche.="<td></td>";
                                     }
                                     $tableauFiche .= "<td $bgcolor width=10% align=center>$recap[$idFta]</td>"//% Avancement FTA
+                                            . "<td $bgcolor align=center >$service</td>" //Service               
                                             . "<td $bgcolor align=center >$actions</td>"// Actions
                                             . "$commentaire</tr >"; // Commentaires
                                 }
@@ -1749,15 +1589,15 @@ class AccueilFta {
                                             . "<td $bgcolor width=6%>" . $classification . "</td>"//Client
                                             . "<td $bgcolor $largeur_html_C1><a title=$createur_link />" . $din . "</a></td>"// Produits
                                             . "<td $bgcolor width=3%>" . $idFta . "v" . $idVersionDossierFta . "</td>"//Dossier Fta
-                                            . "<td $bgcolor width=\"6%\"> <b><font size=\"2\" color=\"#0000FF\">" . $codeArticleLdc . "</font></b></td>"//Code regate
-                                            . "<td $bgcolor align=center >$service</td>"; //Service               
+                                            . "<td $bgcolor width=\"6%\"> <b><font size=\"2\" color=\"#0000FF\">" . $codeArticleLdc . "</font></b></td>"; //Code regate
 
-                                    if ($abreviationFtaEtat == "I") {
+                                    if ($abreviationFtaEtat == FtaEtatModel::ETAT_ABREVIATION_VALUE_MODIFICATION) {
                                         $tableauFicheTmp.="<td $bgcolor $largeur_html_C3 align=center>" . $HTML_date_echeance_fta["HTML_synthese"] . "</td>"; //% d'avancement
                                     } else {
                                         $tableauFicheTmp.="<td></td>";
                                     }
                                     $tableauFicheTmp .= "<td $bgcolor width=10% align=center>$recap[$idFta]</td>"//% Avancement FTA
+                                            . "<td $bgcolor align=center >$service</td>" //Service               
                                             . "<td $bgcolor align=center >$actions</td>"// Actions
                                             . "$commentaire</tr >"; // Commentaires
                                     $createurTmp = $createurFta;
@@ -1768,15 +1608,15 @@ class AccueilFta {
                                             . "<td $bgcolor width=6%>" . $classification . "</td>"//Client
                                             . "<td $bgcolor $largeur_html_C1><a title=$createur_link />" . $din . "</a></td>"// Produits
                                             . "<td $bgcolor width=3%>" . $idFta . "v" . $idVersionDossierFta . "</td>"//Dossier Fta
-                                            . "<td $bgcolor width=\"6%\"> <b><font size=\"2\" color=\"#0000FF\">" . $codeArticleLdc . "</font></b></td>"//Code regate
-                                            . "<td $bgcolor align=center>$service</td>"; //Service               
+                                            . "<td $bgcolor width=\"6%\"> <b><font size=\"2\" color=\"#0000FF\">" . $codeArticleLdc . "</font></b></td>"; //Code regate
 
-                                    if ($abreviationFtaEtat == "I") {
+                                    if ($abreviationFtaEtat == FtaEtatModel::ETAT_ABREVIATION_VALUE_MODIFICATION) {
                                         $tableauFicheTmp.="<td $bgcolor $largeur_html_C3 align=center>" . $HTML_date_echeance_fta["HTML_synthese"] . "</td>"; //% d'avancement
                                     } else {
                                         $tableauFicheTmp.="<td></td>";
                                     }
                                     $tableauFicheTmp .= "<td $bgcolor width=10% align=center>$recap[$idFta]</td>"//% Avancement FTA
+                                            . "<td $bgcolor align=center>$service</td>" //Service               
                                             . "<td $bgcolor align=center >$actions</td>"// Actions
                                             . "$commentaire</tr >"; // Commentaires
                                 }
@@ -1798,54 +1638,34 @@ class AccueilFta {
     }
 
     public static function getFileAriane($paramIdRole, $paramIdEtat, $paramEtatAvancement) {
-        /**
-         * 
-         * Après avoir récupérer l'id (balise) choisie par l'utisateur on vérifie du quel rôle il s'agit
-         */
-        if ($paramIdRole) {
-            $arrayRole = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
-                            "SELECT " . FtaRoleModel::FIELDNAME_DESCRIPTION_FTA_ROLE
-                            . " FROM " . FtaRoleModel::TABLENAME
-                            . " WHERE " . FtaRoleModel::KEYNAME . "=" . $paramIdRole
-            );
 
+        switch ($paramEtatAvancement) {
+            case FtaEtatModel::ETAT_AVANCEMENT_VALUE_ATTENTE:
 
-            $arrayIdEtat = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
-                            "SELECT " . FtaEtatModel::FIELDNAME_NOM_FTA_ETAT
-                            . " FROM " . FtaEtatModel::TABLENAME
-                            . " WHERE " . FtaEtatModel::KEYNAME . "=" . $paramIdEtat
-            );
+                $EtatAvancement = "En attente";
 
-            switch ($paramEtatAvancement) {
-                case "attente":
+                break;
+            case FtaEtatModel::ETAT_AVANCEMENT_VALUE_EN_COURS:
+                $EtatAvancement = "En cours";
 
-                    $EtatAvancement = "En attente";
+                break;
+            case FtaEtatModel::ETAT_AVANCEMENT_VALUE_EFFECTUES:
+                $EtatAvancement = "Effectuées";
+                break;
 
-                    break;
-                case "encours":
-                    $EtatAvancement = "En cours";
-
-                    break;
-                case "correction":
-                    $EtatAvancement = "Effectuées";
-                    break;
-
-                case "all":
-                    $EtatAvancement = "Voir";
-                    break;
-            }
-
-            $workflow = Lib::isDefined("id=#");
-
-
-            $fileAriane = "<table class=titre width=100%  ><tr>"
-                    . "<td>" . $arrayRole[0][FtaRoleModel::FIELDNAME_DESCRIPTION_FTA_ROLE] . "</td>"
-                    . "<td> > </td>"
-                    . "<td>" . $arrayIdEtat[0][FtaEtatModel::FIELDNAME_NOM_FTA_ETAT] . "</td>"
-                    . "<td> > </td>"
-                    . "<td>" . $EtatAvancement . "</td>"
-                    . "</tr></table>";
+            case FtaEtatModel::ETAT_AVANCEMENT_VALUE_ALL:
+                $EtatAvancement = "Voir";
+                break;
         }
+
+        $fileAriane = "<table class=titre width=100%  ><tr>"
+                . "<td>" . FtaRoleModel::getNameRoleByIdRole($paramIdRole) . "</td>"
+                . "<td> > </td>"
+                . "<td>" . FtaEtatModel::getNameEtatByIdEtat($paramIdEtat) . "</td>"
+                . "<td> > </td>"
+                . "<td>" . $EtatAvancement . "</td>"
+                . "</tr></table>";
+
         return $fileAriane;
     }
 

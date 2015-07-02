@@ -125,5 +125,16 @@ class FtaRoleModel extends AbstractModel {
         }
         return $req;
     }
+    public static function getNameRoleByIdRole($paramIdRole) {
+        $arrayRole = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
+                            "SELECT " . FtaRoleModel::FIELDNAME_DESCRIPTION_FTA_ROLE
+                            . " FROM " . FtaRoleModel::TABLENAME
+                            . " WHERE " . FtaRoleModel::KEYNAME . "=" . $paramIdRole
+            );
+        
+        
+        return $arrayRole[0][FtaRoleModel::FIELDNAME_DESCRIPTION_FTA_ROLE];
+    }
+    
 
 }

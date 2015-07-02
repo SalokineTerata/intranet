@@ -12,6 +12,15 @@ class FtaEtatModel extends AbstractModel {
     const KEYNAME = "id_fta_etat";
     const FIELDNAME_ABREVIATION = "abreviation_fta_etat";
     const FIELDNAME_NOM_FTA_ETAT = "nom_fta_etat";
+    const ETAT_ABREVIATION_VALUE_ARCHIVE = "A";
+    const ETAT_ABREVIATION_VALUE_MODIFICATION = "I";
+    const ETAT_ABREVIATION_VALUE_PRESENTATION = "P";
+    const ETAT_ABREVIATION_VALUE_RETIRE = "R";
+    const ETAT_ABREVIATION_VALUE_VALIDE = "V";
+    const ETAT_AVANCEMENT_VALUE_ALL = "all";
+    const ETAT_AVANCEMENT_VALUE_ATTENTE = "attente";
+    const ETAT_AVANCEMENT_VALUE_EFFECTUES = "correction";
+    const ETAT_AVANCEMENT_VALUE_EN_COURS = "encours";
 
     public static function getFtaEtatAndNameByRole($paramIdFtaRole) {
 
@@ -41,7 +50,7 @@ class FtaEtatModel extends AbstractModel {
 
         switch ($paramSyntheseAction) {
 
-            case "attente":
+            case FtaEtatModel::ETAT_AVANCEMENT_VALUE_ATTENTE:
 
                 //Distinction entre le En cours et le En attente
                 //Par rapport aux suivi de projets gérés, récupération des processus
@@ -105,7 +114,7 @@ class FtaEtatModel extends AbstractModel {
                 break;
 
 
-            case "encours":
+            case FtaEtatModel::ETAT_AVANCEMENT_VALUE_EN_COURS:
 
                 //Récupération des suivis de projet gérés par l'utilisateur et non validé
 
@@ -165,7 +174,7 @@ class FtaEtatModel extends AbstractModel {
 
 
 
-            case "correction":
+            case FtaEtatModel::ETAT_AVANCEMENT_VALUE_EFFECTUES:
 
                 //Récupération de la liste fta pour le role concernés 
 
@@ -176,7 +185,7 @@ class FtaEtatModel extends AbstractModel {
                                 . " WHERE " . FtaWorkflowStructureModel::TABLENAME . "." . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_PROCESSUS
                                 . " in (SELECT DISTINCT " . FtaProcessusCycleModel::FIELDNAME_PROCESSUS_INIT
                                 . " FROM " . FtaProcessusCycleModel::TABLENAME . ", " . FtaProcessusModel::TABLENAME
-                                 . ", " . FtaWorkflowStructureModel::TABLENAME
+                                . ", " . FtaWorkflowStructureModel::TABLENAME
                                 . ", " . IntranetActionsModel::TABLENAME . ", " . IntranetDroitsAccesModel::TABLENAME . ", " . IntranetModulesModel::TABLENAME
                                 . ", " . FtaActionRoleModel::TABLENAME . ", " . FtaRoleModel::TABLENAME
                                 . ", " . FtaSuiviProjetModel::TABLENAME . ", " . FtaModel::TABLENAME
@@ -214,7 +223,7 @@ class FtaEtatModel extends AbstractModel {
                         }
                     }
                 }
-                $req = "SELECT DISTINCT " . FtaModel::KEYNAME . " FROM fta WHERE ( 0 ";
+                $req = "SELECT DISTINCT " . FtaModel::KEYNAME . " FROM " . FtaModel::TABLENAME . " WHERE ( 0 ";
 
                 $req .= FtaModel::AddIdFTaValidProcess($idFtaEffectue);
 
@@ -226,26 +235,28 @@ class FtaEtatModel extends AbstractModel {
                 break;
 
 
-            case "all": //Toutes les fiches de l'état sélectionné
-
-                $select = "SELECT DISTINCT " . FtaModel::TABLENAME . "." . FtaModel::KEYNAME . " AS " . FtaModel::KEYNAME
-                        . "," . FtaModel::FIELDNAME_DATE_DERNIERE_MAJ_FTA;
-                $from = " FROM " . FtaProcessusModel::TABLENAME
-                        . " , " . $from_common;
-                $where = " WHERE 1 "     //Liaison
-                        . $where_common
-                        . $AND_where_Site_de_production
-                ;
-                $order = " ORDER BY $order_common ";
-                $limit;
+            case FtaEtatModel::ETAT_AVANCEMENT_VALUE_ALL: //Toutes les fiches de l'état sélectionné
 
                 $array = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
-                                $select . $from . $where . $order . $limit
+                                "SELECT DISTINCT " . FtaModel::KEYNAME
+                                . " FROM " . FtaModel::TABLENAME
+                                . " WHERE " . FtaModel::FIELDNAME_ID_FTA_ETAT . "=" . $paramEtat   //Liaison
                 );
                 break;
         }
 
         return $array;
+    }
+
+    public static function getNameEtatByIdEtat($paramIdEtat) {
+        $arrayIdEtat = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
+                        "SELECT " . FtaEtatModel::FIELDNAME_NOM_FTA_ETAT
+                        . " FROM " . FtaEtatModel::TABLENAME
+                        . " WHERE " . FtaEtatModel::KEYNAME . "=" . $paramIdEtat
+        );
+
+
+        return $arrayIdEtat[0][FtaEtatModel::FIELDNAME_NOM_FTA_ETAT];
     }
 
 }

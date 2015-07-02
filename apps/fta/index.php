@@ -146,7 +146,7 @@ if ($id_user) {
       TABLEAU DE SYNTHESE
      * ***************************************************************************** */
 
-    $tableau_synthese.=AccueilFta::getTableauSythese($req_where,$idFtaRoleEncours);
+    $tableau_synthese.=AccueilFta::getTableauSythese($req_where,$idFtaRoleEncours,$nom_fta_etat,$synthese_action);
 
 
 
@@ -167,7 +167,7 @@ if ($id_user) {
         if ($synthese_action) {
             //echo $id_fta_etat;
             //$tableau_fiche = AccueilFta::getTableauFiche($id_fta_etat, $choix, $isLimit, $order_common);
-            $tableau_fiche = AccueilFta::getHtmlTableauFiche($nom_fta_etat);
+            $tableau_fiche = AccueilFta::getHtmlTableauFiche($idFtaRoleEncours,$nom_fta_etat,$synthese_action,$order_common);
             $fileAriane = AccueilFta::getFileAriane($idFtaRoleEncours, $id_fta_etat, $synthese_action);
         }
         /*

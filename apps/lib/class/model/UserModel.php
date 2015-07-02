@@ -68,6 +68,46 @@ class UserModel extends AbstractModel {
         return $array;
     }
 
+    public static function getIdFtaByUserAndWorkflow2($paramArrayIdFta) {
+
+
+        if ($paramArrayIdFta) {
+            foreach ($paramArrayIdFta as $rowsArrayIdFta) {
+                $idFta[] = $rowsArrayIdFta[FtaModel::KEYNAME];
+            }
+
+
+            $req = "SELECT DISTINCT " . FtaModel::KEYNAME . "," . FtaModel::FIELDNAME_WORKFLOW
+                    . " FROM " . FtaModel::TABLENAME . "," . UserModel::TABLENAME
+                    . " WHERE ( 0 ";
+
+            $req .= FtaModel::AddIdFTaValidProcess($idFta);
+
+            $req .= ")";
+
+            $req .= " AND " . FtaModel::TABLENAME . "." . FtaModel::FIELDNAME_CREATEUR
+                    . "=" . UserModel::TABLENAME . "." . UserModel::KEYNAME
+                    . " ORDER BY " . FtaModel::FIELDNAME_WORKFLOW
+                    . "," . FtaModel::FIELDNAME_DATE_ECHEANCE_FTA
+                    . "," . UserModel::FIELDNAME_PRENOM . " ASC"
+            ;
+
+
+            $arrayTmp = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray($req);
+            $franck = array();
+            foreach ($arrayTmp as $rows) {
+
+                $array = array(
+                    $rows[FtaModel::FIELDNAME_WORKFLOW] =>
+                    $rows[FtaModel::KEYNAME]
+                );
+                $array = array_merge($array);
+                $francktmp = $franck;
+            }
+        }
+        return $francktmp;
+    }
+
 }
 
 ?>

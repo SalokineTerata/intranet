@@ -283,6 +283,18 @@ class AccueilFta {
                 /*
                  * Données du tableau
                  */
+
+//                self::getLineSynthese($javascript, $paramRole, $paramEtat, $idFtaRole, $lien, $paramWorkflow, $idFieldNomFtaRole=0, $idKeyNameFtaEtat=1);
+//                
+//                self::getLineSynthese($javascript, $paramRole, $paramEtat, $idFtaRole, $lien, $paramWorkflow, $idFieldNomFtaRole=0, $idKeyNameFtaEtat=1);
+//                
+//                self::getLineSynthese($javascript, $paramRole, $paramEtat, $idFtaRole, $lien, $paramWorkflow, $idFieldNomFtaRole=0, $idKeyNameFtaEtat=1);
+//                
+//                self::getLineSynthese($javascript, $paramRole, $paramEtat, $idFtaRole, $lien, $paramWorkflow, $idFieldNomFtaRole=0, $idKeyNameFtaEtat=1);
+//                
+//                self::getLineSynthese($javascript, $paramRole, $paramEtat, $idFtaRole, $lien, $paramWorkflow, $idFieldNomFtaRole=0, $idKeyNameFtaEtat=1);
+//                
+//                self::getLineSynthese($javascript, $paramRole, $paramEtat, $idFtaRole, $lien, $paramWorkflow, $idFieldNomFtaRole=0, $idKeyNameFtaEtat=1);
                 . "<TR>"
                 . "<td $javascript id='" . $paramRole[0][FtaRoleModel::FIELDNAME_NOM_FTA_ROLE] . "'> <a href=index.php?id_fta_etat=" . $paramEtat[0][FtaEtatModel::KEYNAME]
                 . "&nom_fta_etat=" . $paramEtat[0][FtaEtatModel::FIELDNAME_ABREVIATION]
@@ -423,6 +435,43 @@ class AccueilFta {
                 . "</TR>";
 
         return $tableau_synthese;
+    }
+
+    private static function getLineSynthese(
+    $javascript, $paramRole, $paramEtat, $idFtaRole, $lien, $paramWorkflow, $idFieldNomFtaRole, $idKeyNameFtaEtat
+    ) {
+
+        $color = "";
+        if ($paramRole[$idFieldNomFtaRole][FtaRoleModel::FIELDNAME_NOM_FTA_ROLE] == $idFtaRole ){
+            $color = "background=#00000";
+        }
+        
+
+        return "<TR>"
+                . "<td $color $javascript id='" . $paramRole[$idFieldNomFtaRole][FtaRoleModel::FIELDNAME_NOM_FTA_ROLE] . "'> "
+                . "<a href=index.php?id_fta_etat=" . $paramEtat[$idKeyNameFtaEtat][FtaEtatModel::KEYNAME]
+                    . "&nom_fta_etat=" . $paramEtat[0][FtaEtatModel::FIELDNAME_ABREVIATION]
+                    . "&id_fta_role=" . $paramRole[0][FtaRoleModel::KEYNAME]
+                    . "&synthese_action="
+                    . AccueilFta::getLienByEtatFta($paramEtat[0][FtaEtatModel::FIELDNAME_ABREVIATION], $paramEtat [0][FtaEtatModel::FIELDNAME_ABREVIATION])
+                    . $paramRole[0][FtaRoleModel::FIELDNAME_DESCRIPTION_FTA_ROLE] 
+                . "</a>"
+                . "</td>"
+                . "<td $javascript id='" . $paramEtat[0][FtaEtatModel::FIELDNAME_ABREVIATION] . "'>  <a href=index.php?id_fta_etat=" . $paramEtat[$idKeyNameFtaEtat][FtaEtatModel::KEYNAME]
+                . "&nom_fta_etat=" . $paramEtat[0][FtaEtatModel::FIELDNAME_ABREVIATION]
+                . "&id_fta_role=" . $idFtaRole
+                . "&synthese_action=";
+
+        $tableau_synthese .= AccueilFta::getLienByEtatFta($paramEtat[0][FtaEtatModel::FIELDNAME_ABREVIATION], $paramEtat [0][FtaEtatModel::FIELDNAME_ABREVIATION]);
+
+
+        $tableau_synthese .= $paramEtat[0][FtaEtatModel::FIELDNAME_NOM_FTA_ETAT] . "</a></td>"
+                . "<td  >" . $lien . "</td>"
+                . "<td >" . "<a href=#"
+                . $paramWorkflow[0][FtaWorkflowModel::FIELDNAME_NOM_FTA_WORKFLOW] . "  >"
+                . $paramWorkflow[0][FtaWorkflowModel::FIELDNAME_DESCRIPTION_FTA_WORKFLOW] . "</a>" . "</td>"
+                . "</TR>"
+        ;
     }
 
     public static function getTableauFiche($id_fta_etat, $choix, $isLimit, $order_common) {
@@ -1212,7 +1261,7 @@ class AccueilFta {
         return $tableau_fiches;
     }
 
-    public static function getHtmlTableauFiche($paramAbrevationFtaEtat) {
+    public static function getHtmlTableauFiche($paramAbrevationFtaEtat, $paramOrderBy) {
 
         /*
          * Initialisation 

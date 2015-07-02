@@ -46,6 +46,7 @@ class UserModel extends AbstractModel {
             }
 
 
+            //$req = "SELECT DISTINCT " . FtaModel::KEYNAME, WF + liste des champs à afficher sur la page d'accueil
             $req = "SELECT DISTINCT " . FtaModel::KEYNAME
                     . " FROM " . FtaModel::TABLENAME . "," . UserModel::TABLENAME
                     . " WHERE ( 0 ";

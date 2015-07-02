@@ -64,7 +64,7 @@ if ($id_user) {
     $tableau_fiche = Lib::isDefined("tableau_fiche");
     $visualiser_fiche_total_fta = Lib::isDefined("visualiser_fiche_total_fta");
     $order_common = Lib::isDefined("order_common");
-    $idFtaRoleEncours = Lib::isDefined(FtaRoleModel::KEYNAME);
+ 
 
     /*
       Récupération des données MySQL
@@ -77,14 +77,17 @@ if ($id_user) {
         $id_fta_etat = "1";
         $nom_fta_etat = "I";
         $abreviation_fta_etat = $nom_fta_etat;
-        $arrayFtaRole = FtaRoleModel::getIdFtaRoleByIdUser($id_user);
-        $idFtaRoleEncours = $arrayFtaRole[0][FtaRoleModel::KEYNAME];
+        //$arrayFtaRole = FtaRoleModel::getIdFtaRoleByIdUser($id_user);
+        $idFtaRoleEncoursDefault = FtaRoleModel::getKeyNameOfFirstRoleByIdUser($id_user);
         if ($fta_modification) {
             $synthese_action = "encours";
         } else {
             $synthese_action = "attente";
         }
     }
+    
+       $idFtaRoleEncours = Lib::isDefined(FtaRoleModel::KEYNAME, $idFtaRoleEncoursDefault);
+    
 //echo "id_fta_etat=$id_fta_etat / nom_fta_etat=$nom_fta_etat / synthese_action=$synthese_action <br>";
 
     /*

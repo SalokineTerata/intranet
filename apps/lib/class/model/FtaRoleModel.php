@@ -13,6 +13,12 @@ class FtaRoleModel extends AbstractModel {
     const FIELDNAME_DESCRIPTION_FTA_ROLE = "description_fta_role";
     const FIELDNAME_NOM_FTA_ROLE = "nom_fta_role";
 
+    public static function getKeyNameOfFirstRoleByIdUser($paramIdUser) {
+
+        $arrayFtaRole = FtaRoleModel::getIdFtaRoleByIdUser($paramIdUser);
+        return $arrayFtaRole[0][FtaRoleModel::KEYNAME];
+    }
+
     public static function getIdFtaRoleByIdUser($paramIdUser) {
         $arrayIdFtaRole = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
                         "SELECT DISTINCT " . FtaRoleModel::TABLENAME . ".*"

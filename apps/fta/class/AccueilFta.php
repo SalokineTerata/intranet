@@ -188,7 +188,7 @@ class AccueilFta {
         $nomFtaEtat = Lib::isDefined(FtaEtatModel::FIELDNAME_NOM_FTA_ETAT);
 
         $javascript = " onclick = \"changerCouleur(this)\"";
-        
+
         /*
          * Fond de couleur suivant le chemin de l'url
          */
@@ -1262,17 +1262,17 @@ class AccueilFta {
         $tableauFiche = "<table id=tableauFiche  align=middle class=titre width=100% >"
                 . "<thead><tr class=titre_principal><th></th>"
         ;
-        
-        //Définition des fonctionnalité de classement
-            //Par N°de Dossier - version
-            $order_common = "id_fta";
 
-            //Contrôle pour savoir si on est sur l'index du module
-            $URL = $_SERVER["REQUEST_URI"];
-            $franck=substr($URL, -1);
-            if (substr($URL, -1) == "p") {
-                $URL = $URL . "?";
-            }
+        //Définition des fonctionnalité de classement
+        //Par N°de Dossier - version
+        $order_common = "id_fta";
+
+        //Contrôle pour savoir si on est sur l'index du module
+        $URL = $_SERVER["REQUEST_URI"];
+        $franck = substr($URL, -1);
+        if (substr($URL, -1) == "p") {
+            $URL = $URL . "?";
+        }
         $tableauFiche .= "<th><a href=" . $URL . "&order_common=Site_de_production><img src=../lib/images/order-AZ.png title=\"mini_fleche_centre\"  border=\"0\" /></a>"
                 . "Site"
                 . "</th><th>"
@@ -1296,9 +1296,9 @@ class AccueilFta {
                 . "</th><th>"
                 . "<a href=" . $URL . "><img src=../lib/images/order-AZ.png title=\"mini_fleche_centre\"  border=\"0\" /></a>"
                 . "% Avancement FTA"
-                . "</th><th>"                
+                . "</th><th>"
                 . "Actions"
-                . "</th><th>"                
+                . "</th><th>"
                 . "Commentaires"
                 . "</th>";
 
@@ -1640,7 +1640,7 @@ class AccueilFta {
                                 if ($createurFta <> $createurTmp) {
 
                                     $tableauFiche .= "<tr class=contenu>"
-                                            . "<td   COLSPAN=11 >" . $createurPrenom . " " . $createurNom . " </td>"
+                                            . "<td COLSPAN=11 ><font size=2 >" . $createurPrenom . " " . $createurNom . " </td>"
                                             . "</tr>"
                                             . "<tr class=contenu >"
                                             . "<td $bgcolor_header width=\"" . $selection_width . "\" > $icon_header $selection</td>"//Ordre de priorisation
@@ -1692,7 +1692,7 @@ class AccueilFta {
                                      * Nouvelle ligne pour créateur
                                      */
                                     $tableauFicheTmp .= "<tr class=contenu>"
-                                            . "<td   COLSPAN=11 >" . $createurPrenom . " " . $createurNom . " </td>"
+                                            . "<td COLSPAN=11 > <font size=2 >" . $createurPrenom . " " . $createurNom . " </td>"
                                             . "</tr>"
                                             . "<tr class=contenu >"
                                             . "<td $bgcolor_header width=\"" . $selection_width . "\" > $icon_header $selection</td>"//Ordre de priorisation

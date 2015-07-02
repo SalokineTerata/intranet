@@ -203,7 +203,7 @@ if ($id_user) {
     if ($synthese_action and ! $requete_resultat) {
         echo "
           <table width=100% border=0>
-              
+             
               <tr><td valign=\"middle\">  $tableau_fiche </td></tr>
           </table>
           ";

@@ -70,9 +70,9 @@ class UserModel extends AbstractModel {
                     . "=" . FtaEtatModel::TABLENAME . "." . FtaEtatModel::KEYNAME
                     . " AND " . FtaWorkflowModel::TABLENAME . "." . FtaWorkflowModel::KEYNAME
                     . "=" . FtaModel::TABLENAME . "." . FtaModel::FIELDNAME_WORKFLOW
-                    . " ORDER BY ". FtaModel::TABLENAME . "." . FtaModel::FIELDNAME_WORKFLOW
+                    . " ORDER BY " . FtaModel::TABLENAME . "." . FtaModel::FIELDNAME_WORKFLOW . "," . $paramOrderBy
                     . "," . FtaModel::FIELDNAME_DATE_ECHEANCE_FTA
-                    . "," . UserModel::FIELDNAME_PRENOM . " ASC," . $paramOrderBy 
+                    . "," . UserModel::FIELDNAME_PRENOM . " ASC"
             ;
 
 

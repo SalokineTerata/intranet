@@ -17,12 +17,6 @@
     }
 
 
-
-    function changerCouleur(tableauFiche)
-    {
-        tableauFiche.style.backgroundColor = '#AAAAFF';
-    }
-
 $(document).ready(function changerCouleur() {
   $("#tableauFiche").on("click", "td", function changerCouleur(tableauFiche) {
     // Gestionnaire d'évènement unique pour l'ensemble des <td>

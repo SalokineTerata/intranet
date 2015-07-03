@@ -37,7 +37,7 @@ class UserModel extends AbstractModel {
         return $this->getDataField(UserModel::FIELDNAME_LIEU_GEO)->getFieldValue();
     }
 
-    public static function getIdFtaByUserAndWorkflow($paramArrayIdFta) {
+    public static function getIdFtaByUserAndWorkflow($paramArrayIdFta, $paramOrderBy) {
 
 
         if ($paramArrayIdFta) {
@@ -46,9 +46,18 @@ class UserModel extends AbstractModel {
             }
 
 
-            //$req = "SELECT DISTINCT " . FtaModel::KEYNAME, WF + liste des champs à afficher sur la page d'accueil
-            $req = "SELECT DISTINCT " . FtaModel::KEYNAME
+            $req = "SELECT DISTINCT " . FtaModel::TABLENAME . "." . FtaModel::KEYNAME
+                    . ", " . FtaEtatModel::FIELDNAME_ABREVIATION . ", " . FtaModel::FIELDNAME_LIBELLE
+                    . ", " . FtaWorkflowModel::FIELDNAME_DESCRIPTION_FTA_WORKFLOW . ", " . FtaWorkflowModel::FIELDNAME_NOM_FTA_WORKFLOW
+                    . ", " . FtaModel::FIELDNAME_PCB . ", " . FtaModel::FIELDNAME_POIDS_ELEMENTAIRE
+                    . ", " . FtaModel::FIELDNAME_SUFFIXE_AGROLOGIC_FTA . ", " . FtaModel::FIELDNAME_DESIGNATION_COMMERCIALE
+                    . ", " . FtaModel::FIELDNAME_DOSSIER_FTA . ", " . FtaModel::FIELDNAME_VERSION_DOSSIER_FTA
+                    . ", " . FtaModel::FIELDNAME_ARTICLE_AGROLOGIC . ", " . FtaModel::FIELDNAME_CODE_ARTICLE_LDC
+                    . ", " . FtaModel::FIELDNAME_DATE_ECHEANCE_FTA . ", " . FtaModel::FIELDNAME_CREATEUR
+                    . ", " . FtaModel::FIELDNAME_SITE_ASSEMBLAGE
                     . " FROM " . FtaModel::TABLENAME . "," . UserModel::TABLENAME
+                    . ", " . FtaEtatModel::TABLENAME
+                    . ", " . FtaWorkflowModel::TABLENAME
                     . " WHERE ( 0 ";
 
             $req .= FtaModel::AddIdFTaValidProcess($idFta);
@@ -57,55 +66,20 @@ class UserModel extends AbstractModel {
 
             $req .= " AND " . FtaModel::TABLENAME . "." . FtaModel::FIELDNAME_CREATEUR
                     . "=" . UserModel::TABLENAME . "." . UserModel::KEYNAME
-                    . " ORDER BY " . FtaModel::FIELDNAME_WORKFLOW
+                    . " AND " . FtaModel::TABLENAME . "." . FtaModel::FIELDNAME_ID_FTA_ETAT
+                    . "=" . FtaEtatModel::TABLENAME . "." . FtaEtatModel::KEYNAME
+                    . " AND " . FtaWorkflowModel::TABLENAME . "." . FtaWorkflowModel::KEYNAME
+                    . "=" . FtaModel::TABLENAME . "." . FtaModel::FIELDNAME_WORKFLOW
+                    . " ORDER BY ". FtaModel::TABLENAME . "." . FtaModel::FIELDNAME_WORKFLOW
                     . "," . FtaModel::FIELDNAME_DATE_ECHEANCE_FTA
-                    . "," . UserModel::FIELDNAME_PRENOM . " ASC"
+                    . "," . UserModel::FIELDNAME_PRENOM . " ASC," . $paramOrderBy 
             ;
 
 
             $array = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray($req);
+
+            return $array;
         }
-        return $array;
-    }
-
-    public static function getIdFtaByUserAndWorkflow2($paramArrayIdFta) {
-
-
-        if ($paramArrayIdFta) {
-            foreach ($paramArrayIdFta as $rowsArrayIdFta) {
-                $idFta[] = $rowsArrayIdFta[FtaModel::KEYNAME];
-            }
-
-
-            $req = "SELECT DISTINCT " . FtaModel::KEYNAME . "," . FtaModel::FIELDNAME_WORKFLOW
-                    . " FROM " . FtaModel::TABLENAME . "," . UserModel::TABLENAME
-                    . " WHERE ( 0 ";
-
-            $req .= FtaModel::AddIdFTaValidProcess($idFta);
-
-            $req .= ")";
-
-            $req .= " AND " . FtaModel::TABLENAME . "." . FtaModel::FIELDNAME_CREATEUR
-                    . "=" . UserModel::TABLENAME . "." . UserModel::KEYNAME
-                    . " ORDER BY " . FtaModel::FIELDNAME_WORKFLOW
-                    . "," . FtaModel::FIELDNAME_DATE_ECHEANCE_FTA
-                    . "," . UserModel::FIELDNAME_PRENOM . " ASC"
-            ;
-
-
-            $arrayTmp = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray($req);
-            $franck = array();
-            foreach ($arrayTmp as $rows) {
-
-                $array = array(
-                    $rows[FtaModel::FIELDNAME_WORKFLOW] =>
-                    $rows[FtaModel::KEYNAME]
-                );
-                $array = array_merge($array);
-                $francktmp = $franck;
-            }
-        }
-        return $francktmp;
     }
 
 }

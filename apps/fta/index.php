@@ -63,8 +63,8 @@ if ($id_user) {
     $synthese_action = Lib::isDefined("synthese_action");
     $tableau_fiche = Lib::isDefined("tableau_fiche");
     $visualiser_fiche_total_fta = Lib::isDefined("visualiser_fiche_total_fta");
-    $order_common = Lib::isDefined("order_common");
- 
+    $order_common = Lib::isDefined("order_common",  FtaModel::FIELDNAME_DATE_ECHEANCE_FTA);
+
 
     /*
       Récupération des données MySQL
@@ -85,9 +85,9 @@ if ($id_user) {
             $synthese_action = "attente";
         }
     }
-    
-       $idFtaRoleEncours = Lib::isDefined(FtaRoleModel::KEYNAME, $idFtaRoleEncoursDefault);
-    
+
+    $idFtaRoleEncours = Lib::isDefined(FtaRoleModel::KEYNAME, $idFtaRoleEncoursDefault);
+
 //echo "id_fta_etat=$id_fta_etat / nom_fta_etat=$nom_fta_etat / synthese_action=$synthese_action <br>";
 
     /*
@@ -146,9 +146,15 @@ if ($id_user) {
       TABLEAU DE SYNTHESE
      * ***************************************************************************** */
 
-    $tableau_synthese.=AccueilFta::getTableauSythese($req_where,$idFtaRoleEncours,$nom_fta_etat,$synthese_action);
-
-
+    /*
+     * Initialisation des valeurs
+     */
+    AccueilFta::initAccueil($id_user, $id_fta_etat, $nom_fta_etat, $synthese_action, $idFtaRoleEncours,$order_common);
+    
+    /*
+     * Génération de la barre de navigation de la page d'accueil
+     */
+    $tableau_synthese.=AccueilFta::getTableauSythese($req_where);
 
 
     //Tableau des FTA
@@ -167,8 +173,8 @@ if ($id_user) {
         if ($synthese_action) {
             //echo $id_fta_etat;
             //$tableau_fiche = AccueilFta::getTableauFiche($id_fta_etat, $choix, $isLimit, $order_common);
-            $tableau_fiche = AccueilFta::getHtmlTableauFiche($idFtaRoleEncours,$nom_fta_etat,$synthese_action,$order_common);
-            $fileAriane = AccueilFta::getFileAriane($idFtaRoleEncours, $id_fta_etat, $synthese_action);
+            $tableau_fiche = AccueilFta::getHtmlTableauFiche();
+            $fileAriane = AccueilFta::getFileAriane();
         }
         /*
           //        if ($isLimit) {

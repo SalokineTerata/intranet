@@ -599,7 +599,7 @@ class FtaModel extends AbstractModel {
     public static function AddIdFTaValidProcess($paramIdEffectue) {
         if ($paramIdEffectue) {
             foreach ($paramIdEffectue as $value) {
-                $req .= " OR " . " " . FtaModel::KEYNAME . "=" . $value . " ";
+                $req .= " OR " . FtaModel::TABLENAME . "." . FtaModel::KEYNAME . "=" . $value . " ";
             }
         }
         return $req;

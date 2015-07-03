@@ -469,6 +469,7 @@ class Navigation {
                 //Ce chapitre est-il public?
                 if ($rowsRecup[FtaProcessusModel::KEYNAME] == 0) {
                     $b = "<font color=\"#8977A9\">";
+                    $num = 1;
                 } else {
                     //Le chapitre est-il validé ?
                     $req1 = "SELECT " . FtaSuiviProjetModel::KEYNAME

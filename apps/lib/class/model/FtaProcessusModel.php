@@ -127,8 +127,8 @@ class FtaProcessusModel extends AbstractModel {
 
     public static function getValideIdFtaByRoleWorkflowProcessus($paramIdFta, $paramIdRole, $paramIdWorkflow) {
 
-        $arrayChapitreTotal = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
-                        "SELECT * FROM " . FtaWorkflowStructureModel::TABLENAME . "," . FtaProcessusModel::TABLENAME
+        $arrayProcessusTotal = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
+                        "SELECT " . FtaWorkflowStructureModel::TABLENAME . "." . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_PROCESSUS . " FROM " . FtaWorkflowStructureModel::TABLENAME . "," . FtaProcessusModel::TABLENAME
                         . " WHERE " . FtaWorkflowStructureModel::TABLENAME . "." . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_PROCESSUS
                         . "=" . FtaProcessusModel::TABLENAME . "." . FtaProcessusModel::KEYNAME  //Jointure                
                         . " AND " . FtaWorkflowStructureModel::TABLENAME . "." . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_ROLE
@@ -137,11 +137,11 @@ class FtaProcessusModel extends AbstractModel {
                         . " AND " . FtaProcessusModel::TABLENAME . "." . FtaProcessusModel::FIELDNAME_ID_FTA_ROLE . "=" . $paramIdRole
         );
 
-        $nombreTotalProcessus = count($arrayChapitreTotal);
+        $nombreTotalProcessus = count($arrayProcessusTotal);
 
 
-        $arrayChapitreValide = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
-                        "SELECT * FROM " . FtaModel::TABLENAME . "," . FtaSuiviProjetModel::TABLENAME
+        $arrayProcessusValide = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
+                        "SELECT " . FtaWorkflowStructureModel::TABLENAME . "." . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_PROCESSUS . " FROM " . FtaModel::TABLENAME . "," . FtaSuiviProjetModel::TABLENAME
                         . "," . FtaWorkflowStructureModel::TABLENAME . "," . FtaProcessusModel::TABLENAME
                         . " WHERE " . FtaModel::TABLENAME . "." . FtaModel::KEYNAME
                         . "=" . FtaSuiviProjetModel::TABLENAME . "." . FtaSuiviProjetModel::FIELDNAME_ID_FTA            //Jointure
@@ -154,7 +154,7 @@ class FtaProcessusModel extends AbstractModel {
                         . " AND " . FtaSuiviProjetModel::FIELDNAME_SIGNATURE_VALIDATION_SUIVI_PROJET . "<>0 "         //Chapitre validé
                         . " AND " . FtaProcessusModel::TABLENAME . "." . FtaProcessusModel::FIELDNAME_ID_FTA_ROLE . "=" . $paramIdRole        //Processus en cours de balayage
         );
-        $nombreValideProcessus = count($arrayChapitreValide);
+        $nombreValideProcessus = count($arrayProcessusValide);
 
         //Calcul du taux de validation du processus
         $taux_validation_processus = 0;

@@ -43,10 +43,7 @@ class FtaEtatModel extends AbstractModel {
         return $arrayFtaEtatAndName;
     }
 
-    public static function getIdFtaByEtatAvancement($paramSyntheseAction, $paramEtat, $paramRole) {
-        $globalConfig = new GlobalConfig();
-        $id_user = $globalConfig->getAuthenticatedUser()->getKeyValue();
-
+    public static function getIdFtaByEtatAvancement($paramSyntheseAction, $paramEtat, $paramRole, $paramIdUser) {
 
         switch ($paramSyntheseAction) {
 
@@ -82,7 +79,7 @@ class FtaEtatModel extends AbstractModel {
                                 . "=" . IntranetDroitsAccesModel::TABLENAME . "." . IntranetDroitsAccesModel::FIELDNAME_ID_INTRANET_ACTIONS
                                 . " AND " . IntranetDroitsAccesModel::TABLENAME . "." . IntranetDroitsAccesModel::FIELDNAME_ID_INTRANET_MODULES
                                 . "=" . IntranetModulesModel::TABLENAME . "." . IntranetModulesModel::KEYNAME
-                                . " AND " . IntranetDroitsAccesModel::FIELDNAME_ID_USER . " =" . $id_user
+                                . " AND " . IntranetDroitsAccesModel::FIELDNAME_ID_USER . " =" . $paramIdUser
                                 . " AND " . IntranetDroitsAccesModel::FIELDNAME_NIVEAU_INTRANET_DROITS_ACCES . "=1"
                                 . " AND " . FtaWorkflowStructureModel::TABLENAME . "." . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_CHAPITRE
                                 . "=" . FtaSuiviProjetModel::TABLENAME . "." . FtaSuiviProjetModel::FIELDNAME_ID_FTA_CHAPITRE
@@ -101,15 +98,29 @@ class FtaEtatModel extends AbstractModel {
                         }
                     }
                 }
-                $req = "SELECT DISTINCT " . FtaModel::KEYNAME . " FROM fta WHERE ( 0 ";
+                $req = "SELECT DISTINCT " . FtaModel::KEYNAME . " FROM " . FtaModel::TABLENAME . " WHERE ( 0 ";
 
                 $req .= FtaModel::AddIdFTaValidProcess($idFtaEffectue);
 
                 $req .= ")";
 
-                $array = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray($req);
 
+                $array[AccueilFta::VALUE_1] = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray($req);
 
+                $req = "SELECT DISTINCT " . FtaWorkflowModel::FIELDNAME_DESCRIPTION_FTA_WORKFLOW
+                        . "," . FtaWorkflowModel::FIELDNAME_NOM_FTA_WORKFLOW
+                        . "," . FtaWorkflowModel::TABLENAME . "." . FtaWorkflowModel::KEYNAME
+                        . " FROM " . FtaModel::TABLENAME . "," . FtaWorkflowModel::TABLENAME
+                        . " WHERE ( 0 ";
+
+                $req .= FtaModel::AddIdFTaValidProcess($idFtaEffectue);
+
+                $req .= ")";
+
+                $req .= " AND " . FtaModel::TABLENAME . "." . FtaModel::FIELDNAME_WORKFLOW
+                        . "=" . FtaWorkflowModel::TABLENAME . "." . FtaWorkflowModel::KEYNAME;
+
+                $array[AccueilFta::VALUE_2] = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray($req);
 
                 break;
 
@@ -143,7 +154,7 @@ class FtaEtatModel extends AbstractModel {
                                 . "=" . IntranetDroitsAccesModel::TABLENAME . "." . IntranetDroitsAccesModel::FIELDNAME_ID_INTRANET_ACTIONS
                                 . " AND " . IntranetDroitsAccesModel::TABLENAME . "." . IntranetDroitsAccesModel::FIELDNAME_ID_INTRANET_MODULES
                                 . "=" . IntranetModulesModel::TABLENAME . "." . IntranetModulesModel::KEYNAME
-                                . " AND " . IntranetDroitsAccesModel::FIELDNAME_ID_USER . "=" . $id_user // L'utilisateur connecté
+                                . " AND " . IntranetDroitsAccesModel::FIELDNAME_ID_USER . "=" . $paramIdUser // L'utilisateur connecté
                                 . " AND " . IntranetDroitsAccesModel::TABLENAME . "." . IntranetDroitsAccesModel::FIELDNAME_NIVEAU_INTRANET_DROITS_ACCES . "=1"
                                 . " AND " . FtaWorkflowStructureModel::TABLENAME . "." . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_CHAPITRE
                                 . "=" . FtaSuiviProjetModel::TABLENAME . "." . FtaSuiviProjetModel::FIELDNAME_ID_FTA_CHAPITRE
@@ -167,8 +178,23 @@ class FtaEtatModel extends AbstractModel {
 
                 $req .= ")";
 
-                $array = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray($req);
+                $array[AccueilFta::VALUE_1] = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray($req);
 
+
+                $req = "SELECT DISTINCT " . FtaWorkflowModel::FIELDNAME_DESCRIPTION_FTA_WORKFLOW
+                        . "," . FtaWorkflowModel::FIELDNAME_NOM_FTA_WORKFLOW
+                        . "," . FtaWorkflowModel::TABLENAME . "." . FtaWorkflowModel::KEYNAME
+                        . " FROM " . FtaModel::TABLENAME . "," . FtaWorkflowModel::TABLENAME
+                        . " WHERE ( 0 ";
+
+                $req .= FtaModel::AddIdFTaValidProcess($idFtaEffectue);
+
+                $req .= ")";
+
+                $req .= " AND " . FtaModel::TABLENAME . "." . FtaModel::FIELDNAME_WORKFLOW
+                        . "=" . FtaWorkflowModel::TABLENAME . "." . FtaWorkflowModel::KEYNAME;
+
+                $array[AccueilFta::VALUE_2] = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray($req);
 
                 break;
 
@@ -200,8 +226,9 @@ class FtaEtatModel extends AbstractModel {
                                 . " AND " . FtaActionRoleModel::TABLENAME . "." . FtaActionRoleModel::FIELDNAME_ID_FTA_ROLE . "=$paramRole" // Nous recuperons le type de role pour l'utilisateur 
                                 . " AND " . IntranetActionsModel::TABLENAME . "." . IntranetActionsModel::KEYNAME
                                 . "=" . IntranetDroitsAccesModel::TABLENAME . "." . IntranetDroitsAccesModel::FIELDNAME_ID_INTRANET_ACTIONS
-                                . " AND " . IntranetDroitsAccesModel::TABLENAME . "." . IntranetDroitsAccesModel::FIELDNAME_ID_INTRANET_MODULES . "=" . IntranetModulesModel::TABLENAME . "." . IntranetModulesModel::KEYNAME
-                                . " AND " . IntranetDroitsAccesModel::FIELDNAME_ID_USER . "=" . $id_user // L'utilisateur connecté
+                                . " AND " . IntranetDroitsAccesModel::TABLENAME . "." . IntranetDroitsAccesModel::FIELDNAME_ID_INTRANET_MODULES
+                                . "=" . IntranetModulesModel::TABLENAME . "." . IntranetModulesModel::KEYNAME
+                                . " AND " . IntranetDroitsAccesModel::FIELDNAME_ID_USER . "=" . $paramIdUser // L'utilisateur connecté
                                 . " AND " . IntranetDroitsAccesModel::TABLENAME . "." . IntranetDroitsAccesModel::FIELDNAME_NIVEAU_INTRANET_DROITS_ACCES . "=1"
                                 . " AND " . FtaWorkflowStructureModel::TABLENAME . "." . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_CHAPITRE
                                 . "=" . FtaSuiviProjetModel::TABLENAME . "." . FtaSuiviProjetModel::FIELDNAME_ID_FTA_CHAPITRE
@@ -229,7 +256,22 @@ class FtaEtatModel extends AbstractModel {
 
                 $req .= ")";
 
-                $array = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray($req);
+                $array[AccueilFta::VALUE_1] = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray($req);
+
+                $req = "SELECT DISTINCT " . FtaWorkflowModel::FIELDNAME_DESCRIPTION_FTA_WORKFLOW
+                        . "," . FtaWorkflowModel::FIELDNAME_NOM_FTA_WORKFLOW
+                        . "," . FtaWorkflowModel::TABLENAME . "." . FtaWorkflowModel::KEYNAME
+                        . " FROM " . FtaModel::TABLENAME . "," . FtaWorkflowModel::TABLENAME
+                        . " WHERE ( 0 ";
+
+                $req .= FtaModel::AddIdFTaValidProcess($idFtaEffectue);
+
+                $req .= ")";
+
+                $req .= " AND " . FtaModel::TABLENAME . "." . FtaModel::FIELDNAME_WORKFLOW
+                        . "=" . FtaWorkflowModel::TABLENAME . "." . FtaWorkflowModel::KEYNAME;
+
+                $array[AccueilFta::VALUE_2] = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray($req);
 
 
                 break;
@@ -237,10 +279,21 @@ class FtaEtatModel extends AbstractModel {
 
             case FtaEtatModel::ETAT_AVANCEMENT_VALUE_ALL: //Toutes les fiches de l'état sélectionné
 
-                $array = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
+                $array[AccueilFta::VALUE_1] = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
                                 "SELECT DISTINCT " . FtaModel::KEYNAME
                                 . " FROM " . FtaModel::TABLENAME
                                 . " WHERE " . FtaModel::FIELDNAME_ID_FTA_ETAT . "=" . $paramEtat   //Liaison
+                );
+
+
+                $array[AccueilFta::VALUE_2] = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
+                                "SELECT DISTINCT " . FtaWorkflowModel::FIELDNAME_DESCRIPTION_FTA_WORKFLOW
+                                . "," . FtaWorkflowModel::FIELDNAME_NOM_FTA_WORKFLOW
+                                . "," . FtaWorkflowModel::TABLENAME . "." . FtaWorkflowModel::KEYNAME
+                                . " FROM " . FtaModel::TABLENAME . "," . FtaWorkflowModel::TABLENAME
+                                . " WHERE " . FtaModel::FIELDNAME_ID_FTA_ETAT . "=" . $paramEtat
+                                . " AND " . FtaModel::TABLENAME . "." . FtaModel::FIELDNAME_WORKFLOW
+                                . "=" . FtaWorkflowModel::TABLENAME . "." . FtaWorkflowModel::KEYNAME//Liaison
                 );
                 break;
         }

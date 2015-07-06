@@ -59,7 +59,6 @@ class AccueilFta {
 
         self::$arrayFtaRole = FtaRoleModel::getIdFtaRoleByIdUser(self::$idUser);
 
-
         /*
          * Selon le role  nous cherchons ces etats. 
          * 
@@ -67,16 +66,12 @@ class AccueilFta {
         self::$arrayFtaEtat = FtaEtatModel::getFtaEtatAndNameByRole(self::$idFtaRole);
 
         /*
-         * Selon le role et l'état  nous cherchons les workflow. 
-         * 
+         * $arrayIdFtaAndIdWorkflow[1] sont les id_fta
+         * $arrayIdFtaAndIdWorkflow[2] sont les nom des workflows correspondant aux  id_fta
          */
-        self::$arrayFtaWorkflow = FtaWorkflowModel::getNameWorkflowByIdFtaRoleAndEtat(
-                        self::$idFtaRole
-                        , self::$abrevationFtaEtat);
+        self::$arrayIdFtaAndIdWorkflow = FtaEtatModel::getIdFtaByEtatAvancement(self::$syntheseAction, self::$abrevationFtaEtat, self::$idFtaRole,  self::$idUser);
 
-        self::$arrayIdFtaAndIdWorkflow = FtaEtatModel::getIdFtaByEtatAvancement(self::$syntheseAction, self::$abrevationFtaEtat, self::$idFtaRole);
-
-        self::$arrayIdFtaByUserAndWorkflow = UserModel::getIdFtaByUserAndWorkflow(self::$arrayIdFtaAndIdWorkflow, self::$orderBy);
+        self::$arrayIdFtaByUserAndWorkflow = UserModel::getIdFtaByUserAndWorkflow(self::$arrayIdFtaAndIdWorkflow[AccueilFta::VALUE_1], self::$orderBy);
 
         self::$nombreFta = count(self::$arrayIdFtaByUserAndWorkflow);
     }
@@ -199,7 +194,7 @@ class AccueilFta {
 //            );
         }
 
-        $tableau_synthese = AccueilFta::getHtmlTableauSythese(self::$arrayFtaRole, self::$arrayFtaEtat, self::$arrayFtaWorkflow, self::$abrevationFtaEtat, self::$idFtaRole, self::$syntheseAction);
+        $tableau_synthese = AccueilFta::getHtmlTableauSythese(self::$arrayFtaRole, self::$arrayFtaEtat, self::$arrayIdFtaAndIdWorkflow[AccueilFta::VALUE_2], self::$abrevationFtaEtat, self::$idFtaRole, self::$syntheseAction);
         return $tableau_synthese;
     }
 
@@ -383,7 +378,6 @@ class AccueilFta {
         ;
     }
 
-
     public static function getHtmlTableauFiche() {
 
 
@@ -402,22 +396,22 @@ class AccueilFta {
 
         switch (self::$syntheseAction) {
             case FtaEtatModel::ETAT_AVANCEMENT_VALUE_ATTENTE:
-                $URL = substr($URL, 0, strpos($URL, self::$syntheseAction) + 7);
+                $URL = substr($URL, AccueilFta::VALUE_0, strpos($URL, self::$syntheseAction) + AccueilFta::VALUE_7);
 
                 break;
             case FtaEtatModel::ETAT_AVANCEMENT_VALUE_EN_COURS:
-                $URL = substr($URL, 0, strpos($URL, self::$syntheseAction) + 7);
+                $URL = substr($URL, AccueilFta::VALUE_0, strpos($URL, self::$syntheseAction) + AccueilFta::VALUE_7);
                 break;
             case FtaEtatModel::ETAT_AVANCEMENT_VALUE_EFFECTUES:
-                $URL = substr($URL, 0, strpos($URL, self::$syntheseAction) + 10);
+                $URL = substr($URL, AccueilFta::VALUE_0, strpos($URL, self::$syntheseAction) + AccueilFta::VALUE_10);
                 break;
 
             case FtaEtatModel::ETAT_AVANCEMENT_VALUE_ALL:
-                $URL = substr($URL, 0, strpos($URL, self::$syntheseAction) + 3);
+                $URL = substr($URL, AccueilFta::VALUE_0, strpos($URL, self::$syntheseAction) + AccueilFta::VALUE_3);
                 break;
-        }
-        if (substr($URL, -1) == "p") {
-            $URL = $URL . "?";
+        }        
+        if (substr($URL, -2) == "in") {
+            $URL = $URL . "tranet/apps/fta/index.php?";
         }
         $tableauFiche .= "<th><a href=" . $URL . "&order_common=Site_de_production><img src=../lib/images/order-AZ.png title=\"mini_fleche_centre\"  border=\"0\" /></a>"
                 . "Site"
@@ -521,17 +515,17 @@ class AccueilFta {
                  */
                 switch (self::$syntheseAction) {
                     case FtaEtatModel::ETAT_AVANCEMENT_VALUE_ATTENTE:
-                        $ok = 0;
+                        $ok = AccueilFta::VALUE_0;
                         $bgcolor = "bgcolor=#A5A5CE ";
 
                         break;
                     case FtaEtatModel::ETAT_AVANCEMENT_VALUE_EN_COURS:
-                        $ok = 1;
+                        $ok = AccueilFta::VALUE_1;
                         $bgcolor = "";
 
                         break;
                     case FtaEtatModel::ETAT_AVANCEMENT_VALUE_EFFECTUES:
-                        $ok = 2;
+                        $ok = AccueilFta::VALUE_2;
                         $bgcolor = "bgcolor=#AFFF5A";
                         break;
 
@@ -585,7 +579,7 @@ class AccueilFta {
                  * Designation commerciale
                  */
                 if (strlen($designationCommercialeFta) > 55) {
-                    $designationCommercialeFta = substr($designationCommercialeFta, 0, 52) . "...";
+                    $designationCommercialeFta = substr($designationCommercialeFta, AccueilFta::VALUE_0, 52) . "...";
                 }
                 if ($LIBELLE) {
                     $din = $LIBELLE;
@@ -613,7 +607,7 @@ class AccueilFta {
                  */
 
                 $taux_temp = FtaSuiviProjetModel::getFtaTauxValidation($idFta);
-                $recap[$idFta] = round($taux_temp[0] * 100, 0) . "%";
+                $recap[$idFta] = round($taux_temp[AccueilFta::VALUE_0] * 100, AccueilFta::VALUE_0) . "%";
 
                 /*
                  * Droit de consultation standard HTML
@@ -658,10 +652,10 @@ class AccueilFta {
                         $abreviationFtaEtat == 'R' or
                         $abreviationFtaEtat == 'P'
                         )
-                        or ( $ok == 2 and $_SESSION["fta_article"]) and (
+                        or ( $ok == AccueilFta::VALUE_2 and $_SESSION["fta_article"]) and (
                         $abreviationFtaEtat == 'I' or
                         $abreviationFtaEtat == 'M'
-                        )or ( $ok == 2 and $_SESSION["fta_referentiel"]) and (
+                        )or ( $ok == AccueilFta::VALUE_2 and $_SESSION["fta_referentiel"]) and (
                         $abreviationFtaEtat == 'I' or
                         $abreviationFtaEtat == 'M'
                         )

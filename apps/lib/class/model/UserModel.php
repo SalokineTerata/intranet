@@ -54,7 +54,7 @@ class UserModel extends AbstractModel {
                     . ", " . FtaModel::FIELDNAME_DOSSIER_FTA . ", " . FtaModel::FIELDNAME_VERSION_DOSSIER_FTA
                     . ", " . FtaModel::FIELDNAME_ARTICLE_AGROLOGIC . ", " . FtaModel::FIELDNAME_CODE_ARTICLE_LDC
                     . ", " . FtaModel::FIELDNAME_DATE_ECHEANCE_FTA . ", " . FtaModel::FIELDNAME_CREATEUR
-                    . ", " . FtaModel::FIELDNAME_SITE_ASSEMBLAGE
+                    . ", " . FtaModel::FIELDNAME_SITE_ASSEMBLAGE . ", " . FtaModel::TABLENAME . ". " . FtaModel::FIELDNAME_WORKFLOW
                     . " FROM " . FtaModel::TABLENAME . "," . UserModel::TABLENAME
                     . ", " . FtaEtatModel::TABLENAME
                     . ", " . FtaWorkflowModel::TABLENAME
@@ -71,8 +71,8 @@ class UserModel extends AbstractModel {
                     . "=" . FtaEtatModel::TABLENAME . "." . FtaEtatModel::KEYNAME
                     . " AND " . FtaWorkflowModel::TABLENAME . "." . FtaWorkflowModel::KEYNAME
                     . "=" . FtaModel::TABLENAME . "." . FtaModel::FIELDNAME_WORKFLOW
-                    . " ORDER BY " . FtaModel::TABLENAME . "." . FtaModel::FIELDNAME_WORKFLOW 
-                    . "," . $paramOrderBy 
+                    . " ORDER BY " . FtaModel::TABLENAME . "." . FtaModel::FIELDNAME_WORKFLOW
+                    . "," . $paramOrderBy
                     . "," . FtaModel::FIELDNAME_DATE_ECHEANCE_FTA
                     . "," . UserModel::FIELDNAME_PRENOM . " ASC"
             ;

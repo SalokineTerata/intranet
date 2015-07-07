@@ -69,7 +69,7 @@ $id_fta = Lib::getParameterFromRequest("id_fta");
  */
 //$chapitreParDefaut = FtaChapitreModel::getChapitreDefautByWorkflow($id_fta);
 
-$id_fta_chapitre_encours = Lib::getParameterFromRequest("id_fta_chapitre_encours");
+$id_fta_chapitre_encours = Lib::getParameterFromRequest("id_fta_chapitre_encours",  AccueilFta::VALUE_1);
 $synthese_action = Lib::getParameterFromRequest("synthese_action");
 $comeback = Lib::getParameterFromRequest("comeback");
 $id_fta_chapitre = $id_fta_chapitre_encours;

@@ -40,33 +40,30 @@ class FtaRoleModel extends AbstractModel {
         return $arrayIdFtaRole;
     }
 
-    public static function getNameRoleEncoursByIdFta($paramIdFta) {
+    public static function getNameRoleEncoursByIdFta($paramIdFta, $paramIdWorkflow) {
 
         /*
          * Nous récuperons les processus en cours.
          */
 
-
-
         $arrayProcessusEncours = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
                         "SELECT DISTINCT " . FtaProcessusModel::TABLENAME
-                        . ".* FROM " . FtaProcessusModel::TABLENAME
+                        . ".*," . FtaProcessusCycleModel::TABLENAME . "." . FtaProcessusCycleModel::FIELDNAME_WORKFLOW
+                        . " FROM " . FtaProcessusModel::TABLENAME
                         . ", " . FtaProcessusCycleModel::TABLENAME
                         . "," . FtaWorkflowModel::TABLENAME
                         . "," . FtaModel::TABLENAME
                         . "," . FtaActionRoleModel::TABLENAME
-                        . "," . FtaRoleModel::TABLENAME
                         . " WHERE " . FtaProcessusCycleModel::TABLENAME . "." . FtaProcessusCycleModel::FIELDNAME_PROCESSUS_INIT
                         . "=" . FtaProcessusModel::TABLENAME . "." . FtaProcessusModel::KEYNAME
                         . " AND " . FtaProcessusCycleModel::FIELDNAME_FTA_ETAT . "='I'"
                         . " AND " . FtaProcessusCycleModel::TABLENAME . "." . FtaProcessusCycleModel::FIELDNAME_WORKFLOW
                         . "=" . FtaWorkflowModel::TABLENAME . "." . FtaWorkflowModel::KEYNAME        //Jointure                            
                         . " AND " . FtaModel::KEYNAME . "=" . $paramIdFta
+                        . " AND " . FtaModel::TABLENAME . "." . FtaModel::FIELDNAME_WORKFLOW . "=" . $paramIdWorkflow
                         . " AND " . FtaModel::TABLENAME . "." . FtaModel::FIELDNAME_WORKFLOW
                         . "=" . FtaWorkflowModel::TABLENAME . "." . FtaWorkflowModel::KEYNAME        //Jointure                            
                         . " AND " . FtaProcessusModel::TABLENAME . "." . FtaProcessusModel::FIELDNAME_ID_FTA_ROLE
-                        . "=" . FtaRoleModel::TABLENAME . "." . FtaRoleModel::KEYNAME        //Jointure
-                        . " AND " . FtaRoleModel::TABLENAME . "." . FtaRoleModel::KEYNAME
                         . "=" . FtaActionRoleModel::TABLENAME . "." . FtaActionRoleModel::FIELDNAME_ID_FTA_ROLE
         );
 
@@ -84,12 +81,12 @@ class FtaRoleModel extends AbstractModel {
                  * Nous verifions si tous les processus précedents du chapitre que l'utilisateur à les droits d'accès
                  * sont validé ou non et donc visible ou non
                  */
-                $taux_validation_processus = FtaProcessusModel::getFtaProcessusNonValidePrecedent($paramIdFta, $rowsProcessusEncours[FtaProcessusModel::KEYNAME]);
+                $taux_validation_processus = FtaProcessusModel::getFtaProcessusNonValidePrecedent($paramIdFta, $rowsProcessusEncours[FtaProcessusModel::KEYNAME], $rowsProcessusEncours[FtaProcessusCycleModel::FIELDNAME_WORKFLOW]);
                 if ($taux_validation_processus == 1 or $taux_validation_processus === NULL) {
                     /*
                      * Nous récupérons tous les processus validé pour vérifier plus tard si nous devons les affichers
                      */
-                    $taux_validation_processus = fta_processus_validation($paramIdFta, $rowsProcessusEncours[FtaProcessusModel::KEYNAME]);
+                    $taux_validation_processus = FtaProcessusModel::getValideProcessusEncours($paramIdFta, $rowsProcessusEncours[FtaProcessusModel::KEYNAME], $rowsProcessusEncours[FtaProcessusCycleModel::FIELDNAME_WORKFLOW]);
                     if ($taux_validation_processus <> 1) {
                         $arrayIdRole = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
                                         "SELECT DISTINCT " . FtaRoleModel::TABLENAME . "." . FtaRoleModel::KEYNAME
@@ -106,7 +103,8 @@ class FtaRoleModel extends AbstractModel {
                 }
             }
         }
-        $req = "SELECT DISTINCT " . FtaRoleModel::FIELDNAME_DESCRIPTION_FTA_ROLE . " FROM " . FtaRoleModel::TABLENAME . " WHERE ( 0 ";
+        $req = "SELECT DISTINCT " . FtaRoleModel::FIELDNAME_DESCRIPTION_FTA_ROLE
+                . " FROM " . FtaRoleModel::TABLENAME . " WHERE ( 0 ";
 
         $req .= FtaRoleModel::AddIdRole($IdRole);
 
@@ -125,16 +123,16 @@ class FtaRoleModel extends AbstractModel {
         }
         return $req;
     }
+
     public static function getNameRoleByIdRole($paramIdRole) {
         $arrayRole = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
-                            "SELECT " . FtaRoleModel::FIELDNAME_DESCRIPTION_FTA_ROLE
-                            . " FROM " . FtaRoleModel::TABLENAME
-                            . " WHERE " . FtaRoleModel::KEYNAME . "=" . $paramIdRole
-            );
-        
-        
+                        "SELECT " . FtaRoleModel::FIELDNAME_DESCRIPTION_FTA_ROLE
+                        . " FROM " . FtaRoleModel::TABLENAME
+                        . " WHERE " . FtaRoleModel::KEYNAME . "=" . $paramIdRole
+        );
+
+
         return $arrayRole[0][FtaRoleModel::FIELDNAME_DESCRIPTION_FTA_ROLE];
     }
-    
 
 }

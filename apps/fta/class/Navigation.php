@@ -187,7 +187,7 @@ class Navigation {
                      * Nous verifions si tous les processus précedents du chapitre que l'utilisateur à les droits d'accès
                      * sont validé ou non et donc visible ou non
                      */
-                    $taux_validation_processus = FtaProcessusModel::getFtaProcessusNonValidePrecedent(self::$id_fta, self::$id_fta_processus);
+                    $taux_validation_processus = FtaProcessusModel::getFtaProcessusNonValidePrecedent(self::$id_fta, self::$id_fta_processus, self::$id_fta_workflow);
 
                     //Liste des processus visible(lecture-seule)
                     if ($taux_validation_processus == 1 or $taux_validation_processus === NULL) {
@@ -220,7 +220,7 @@ class Navigation {
                      */
                     foreach ($arrayProcessusValide as $rowsProcessusValide) {
                         self::$id_fta_processus = $rowsProcessusValide[FtaProcessusModel::KEYNAME];
-                        $taux_validation_processus = fta_processus_validation(self::$id_fta, self::$id_fta_processus);
+                        $taux_validation_processus = FtaProcessusModel::getValideProcessusEncours(self::$id_fta, self::$id_fta_processus, self::$id_fta_workflow);
                         if ($taux_validation_processus == 1) {
 
                             $ProcessusValide[] = $rowsProcessusValide[FtaProcessusModel::KEYNAME];
@@ -332,7 +332,8 @@ class Navigation {
                             . "=" . FtaProcessusCycleModel::TABLENAME . "." . FtaProcessusCycleModel::FIELDNAME_PROCESSUS_NEXT
                             . " AND " . FtaWorkflowStructureModel::TABLENAME . "." . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_ROLE
                             . "=" . FtaProcessusModel::TABLENAME . "." . FtaProcessusModel::FIELDNAME_ID_FTA_ROLE
-                            . " AND " . FtaProcessusModel::TABLENAME . "." . FtaProcessusModel::KEYNAME . "=" . $rows[FtaProcessusCycleModel::FIELDNAME_PROCESSUS_NEXT];
+                            . " AND " . FtaProcessusModel::TABLENAME . "." . FtaProcessusModel::KEYNAME . "=" . $rows[FtaProcessusCycleModel::FIELDNAME_PROCESSUS_NEXT]
+                            . " AND " . FtaProcessusCycleModel::TABLENAME . "." . FtaProcessusCycleModel::FIELDNAME_WORKFLOW . " = " . self::$id_fta_workflow;
                     $array = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray($req);
 
                     if ($array) {
@@ -341,7 +342,7 @@ class Navigation {
                          */
                         foreach ($array as $rows) {
 
-                            $tauxValidationProcessus = fta_processus_validation(self::$id_fta, $rows[FtaProcessusCycleModel::FIELDNAME_PROCESSUS_INIT]);
+                            $tauxValidationProcessus = FtaProcessusModel::getValideProcessusEncours(self::$id_fta, $rows[FtaProcessusCycleModel::FIELDNAME_PROCESSUS_INIT], self::$id_fta_workflow);
                             if ($tauxValidationProcessus != 0) {
                                 $ProcessusEnLecture[] = $rows[FtaProcessusCycleModel::FIELDNAME_PROCESSUS_INIT];
                             }
@@ -352,7 +353,7 @@ class Navigation {
                                         "SELECT " . FtaProcessusModel::FIELDNAME_MULTISITE_FTA_PROCESSUS
                                         . " FROM " . FtaProcessusModel::TABLENAME
                                         . " WHERE " . FtaProcessusModel::KEYNAME
-                                        . "=" . $rows[FtaProcessusCycleModel::FIELDNAME_PROCESSUS_NEXT]
+                                        . "=" . $rows[FtaProcessusCycleModel::FIELDNAME_PROCESSUS_INIT]
                         );
                         if ($reqType) {
                             foreach ($reqType as $rowsType) {
@@ -360,10 +361,10 @@ class Navigation {
                             }
                             if ($multisite_fta_processus) {
                                 //Oui, il s'agit d'un Processus répartie sur les sites d'assemblage
-                                $ProcessusEncoursVisible[] = self::CheckMultiSite($rows[FtaProcessusCycleModel::FIELDNAME_PROCESSUS_NEXT]);
+                                $ProcessusEncoursVisible[] = self::CheckMultiSite($rows[FtaProcessusCycleModel::FIELDNAME_PROCESSUS_INIT]);
                             } else {
                                 //Enregistrement du processus en tant que processus en cours
-                                $ProcessusEncoursVisible[] = $rows[FtaProcessusCycleModel::FIELDNAME_PROCESSUS_NEXT];
+                                $ProcessusEncoursVisible[] = $rows[FtaProcessusCycleModel::FIELDNAME_PROCESSUS_INIT];
                             }
                         }
                     }

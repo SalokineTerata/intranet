@@ -55,7 +55,7 @@ INSERT INTO `fta` (`id_fta`, `id_access_arti2`, `numft`, `id_fta_workflow`, `TRA
  `commentaire_maj_fta`, `date_echeance_fta`, `duree_apres_dernier_processus_fta`, `periode_commercialisation_fta`, 
 `code_douane_fta`, `code_douane_libelle_fta`, `poids_emballages_uvc_fta`, `poids_brut_uvc_fta`, `poids_net_uvc_fta`, 
 `suffixe_agrologic_fta`, `synoptique_valide_fta`, `origine_transformation_fta`, `remarque_fta`, `presentation_fta`,
- `apres_ouverture_fta`, `conseil_rechauffage_valide_fta`, `reference_externe_fta`, `duree_vie_technique_fta`, 
+ `apres_ouverture_fta`, `conseil_rechauffage_valide_fta`, `reference_externe_fta`, `DEPRECATED_duree_vie_technique_fta`, 
 `designation_commerciale_fta`, `nom_abrege_fta`, `site_expedition_fta`, `conseil_rechauffage_experimentale_fta`, 
 `synoptique_experimental_fta`, `unite_affichage_fta`, `signature_validation_fta`, `old_gamdesc`, `old_segdesc`, 
 `old_condition`, `old_conservation`, `id_article_agrologic`, `id_annexe_environnement_conservation`, `origine_matiere_fta`,

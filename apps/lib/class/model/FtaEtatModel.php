@@ -56,9 +56,10 @@ class FtaEtatModel extends AbstractModel {
                  * Nous recupérons les Fta en attente selon son rôle et workflow
                  */
                 $arrayTmp = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
-                                "SELECT DISTINCT " . FtaModel::KEYNAME . "," . FtaWorkflowStructureModel::TABLENAME . "." . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_WORKFLOW
+                                "SELECT DISTINCT " . FtaModel::TABLENAME . "." . FtaModel::KEYNAME
+                                . "," . FtaModel::TABLENAME . "." . FtaModel::FIELDNAME_WORKFLOW
                                 . " FROM " . FtaSuiviProjetModel::TABLENAME . "," . FtaWorkflowStructureModel::TABLENAME
-                                . ", " . FtaProcessusCycleModel::TABLENAME
+                                . ", " . FtaProcessusCycleModel::TABLENAME . ", " . FtaModel::TABLENAME
                                 . " WHERE " . FtaWorkflowStructureModel::TABLENAME . "." . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_PROCESSUS
                                 . " in (SELECT DISTINCT " . FtaProcessusCycleModel::FIELDNAME_PROCESSUS_INIT
                                 . " FROM " . FtaProcessusCycleModel::TABLENAME . " , " . FtaProcessusModel::TABLENAME
@@ -88,6 +89,10 @@ class FtaEtatModel extends AbstractModel {
                                 . " AND " . FtaProcessusCycleModel::FIELDNAME_FTA_ETAT . "='" . $paramEtat
                                 . "' AND " . FtaWorkflowStructureModel::TABLENAME . "." . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_CHAPITRE
                                 . "=" . FtaSuiviProjetModel::TABLENAME . "." . FtaSuiviProjetModel::FIELDNAME_ID_FTA_CHAPITRE
+                                . " AND " . FtaModel::TABLENAME . "." . FtaModel::KEYNAME
+                                . "=" . FtaSuiviProjetModel::TABLENAME . "." . FtaSuiviProjetModel::FIELDNAME_ID_FTA
+                                . " AND " . FtaModel::TABLENAME . "." . FtaModel::FIELDNAME_WORKFLOW
+                                . "=" . FtaWorkflowStructureModel::TABLENAME . "." . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_WORKFLOW
                 );
 
                 if ($arrayTmp) {
@@ -131,16 +136,18 @@ class FtaEtatModel extends AbstractModel {
 
 
                 $arrayTmp = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
-                                "SELECT DISTINCT " . FtaModel::KEYNAME . "," . FtaProcessusModel::KEYNAME
+                                "SELECT DISTINCT " . FtaModel::TABLENAME . "." . FtaModel::KEYNAME
+                                . "," . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_PROCESSUS
+                                . "," . FtaModel::TABLENAME . "." . FtaModel::FIELDNAME_WORKFLOW
                                 . " FROM " . FtaSuiviProjetModel::TABLENAME . ", " . FtaWorkflowStructureModel::TABLENAME
-                                . ", " . FtaProcessusCycleModel::TABLENAME
+                                . ", " . FtaProcessusCycleModel::TABLENAME . ", " . FtaModel::TABLENAME
                                 . " WHERE " . FtaWorkflowStructureModel::TABLENAME . "." . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_PROCESSUS
                                 . " in (SELECT DISTINCT " . FtaProcessusCycleModel::FIELDNAME_PROCESSUS_NEXT
                                 . " FROM " . FtaProcessusCycleModel::TABLENAME . ", " . FtaProcessusModel::TABLENAME
                                 . ", " . FtaWorkflowStructureModel::TABLENAME
                                 . ", " . IntranetActionsModel::TABLENAME . ", " . IntranetDroitsAccesModel::TABLENAME . ", " . IntranetModulesModel::TABLENAME
                                 . ", " . FtaActionRoleModel::TABLENAME
-                                . ", " . FtaSuiviProjetModel::TABLENAME . ", " . FtaModel::TABLENAME
+                                . ", " . FtaSuiviProjetModel::TABLENAME
                                 . " WHERE " . FtaProcessusCycleModel::TABLENAME . "." . FtaProcessusCycleModel::FIELDNAME_PROCESSUS_NEXT
                                 . "=" . FtaProcessusModel::TABLENAME . "." . FtaProcessusModel::KEYNAME
                                 . " AND " . FtaProcessusCycleModel::TABLENAME . "." . FtaProcessusCycleModel::FIELDNAME_WORKFLOW
@@ -163,10 +170,14 @@ class FtaEtatModel extends AbstractModel {
                                 . " AND " . FtaProcessusCycleModel::FIELDNAME_FTA_ETAT . "='" . $paramEtat
                                 . "' AND " . FtaWorkflowStructureModel::TABLENAME . "." . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_CHAPITRE
                                 . "=" . FtaSuiviProjetModel::TABLENAME . "." . FtaSuiviProjetModel::FIELDNAME_ID_FTA_CHAPITRE
+                                . " AND " . FtaModel::TABLENAME . "." . FtaModel::KEYNAME
+                                . "=" . FtaSuiviProjetModel::TABLENAME . "." . FtaSuiviProjetModel::FIELDNAME_ID_FTA
+                                . " AND " . FtaModel::TABLENAME . "." . FtaModel::FIELDNAME_WORKFLOW
+                                . "=" . FtaWorkflowStructureModel::TABLENAME . "." . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_WORKFLOW
                 );
                 if ($arrayTmp) {
                     foreach ($arrayTmp as $rows) {
-                        $tauxDeValidadation = FtaProcessusModel::getFtaProcessusNonValidePrecedent($rows[FtaModel::KEYNAME], $rows[FtaProcessusModel::KEYNAME]);
+                        $tauxDeValidadation = FtaProcessusModel::getFtaProcessusNonValidePrecedent($rows[FtaModel::KEYNAME], $rows[FtaProcessusModel::KEYNAME], $rows[FtaWorkflowStructureModel::FIELDNAME_ID_FTA_WORKFLOW]);
                         if ($tauxDeValidadation == 1) {
                             $idFtaEffectue[] = $rows[FtaModel::KEYNAME];
                         }
@@ -205,16 +216,18 @@ class FtaEtatModel extends AbstractModel {
                 //Récupération de la liste fta pour le role concernés 
 
                 $arrayTmp = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
-                                "SELECT DISTINCT " . FtaModel::KEYNAME . "," . FtaWorkflowStructureModel::TABLENAME . "." . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_WORKFLOW
+                                "SELECT DISTINCT " . FtaModel::TABLENAME . "." . FtaModel::KEYNAME
+                                . "," . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_PROCESSUS
+                                . "," . FtaModel::TABLENAME . "." . FtaModel::FIELDNAME_WORKFLOW
                                 . " FROM " . FtaSuiviProjetModel::TABLENAME . ", " . FtaWorkflowStructureModel::TABLENAME
-                                . ", " . FtaProcessusCycleModel::TABLENAME
+                                . ", " . FtaProcessusCycleModel::TABLENAME . ", " . FtaModel::TABLENAME
                                 . " WHERE " . FtaWorkflowStructureModel::TABLENAME . "." . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_PROCESSUS
                                 . " in (SELECT DISTINCT " . FtaProcessusCycleModel::FIELDNAME_PROCESSUS_INIT
                                 . " FROM " . FtaProcessusCycleModel::TABLENAME . ", " . FtaProcessusModel::TABLENAME
                                 . ", " . FtaWorkflowStructureModel::TABLENAME
                                 . ", " . IntranetActionsModel::TABLENAME . ", " . IntranetDroitsAccesModel::TABLENAME . ", " . IntranetModulesModel::TABLENAME
                                 . ", " . FtaActionRoleModel::TABLENAME . ", " . FtaRoleModel::TABLENAME
-                                . ", " . FtaSuiviProjetModel::TABLENAME . ", " . FtaModel::TABLENAME
+                                . ", " . FtaSuiviProjetModel::TABLENAME
                                 . " WHERE " . FtaProcessusCycleModel::TABLENAME . "." . FtaProcessusCycleModel::FIELDNAME_PROCESSUS_NEXT
                                 . "=" . FtaProcessusModel::TABLENAME . "." . FtaProcessusModel::KEYNAME
                                 . " AND " . FtaProcessusCycleModel::TABLENAME . "." . FtaProcessusCycleModel::FIELDNAME_WORKFLOW
@@ -237,6 +250,10 @@ class FtaEtatModel extends AbstractModel {
                                 . " AND " . FtaProcessusCycleModel::FIELDNAME_FTA_ETAT . "='" . $paramEtat
                                 . "' AND " . FtaWorkflowStructureModel::TABLENAME . "." . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_CHAPITRE
                                 . "=" . FtaSuiviProjetModel::TABLENAME . "." . FtaSuiviProjetModel::FIELDNAME_ID_FTA_CHAPITRE
+                                . " AND " . FtaModel::TABLENAME . "." . FtaModel::KEYNAME
+                                . "=" . FtaSuiviProjetModel::TABLENAME . "." . FtaSuiviProjetModel::FIELDNAME_ID_FTA
+                                . " AND " . FtaModel::TABLENAME . "." . FtaModel::FIELDNAME_WORKFLOW
+                                . "=" . FtaWorkflowStructureModel::TABLENAME . "." . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_WORKFLOW
                 );
 
                 /*
@@ -244,7 +261,7 @@ class FtaEtatModel extends AbstractModel {
                  */
                 if ($arrayTmp) {
                     foreach ($arrayTmp as $rows) {
-                        $tauxDeValidadation = FtaProcessusModel::getValideIdFtaByRoleWorkflowProcessus($rows[FtaModel::KEYNAME], $paramRole, $rows[FtaModel::FIELDNAME_WORKFLOW]);
+                        $tauxDeValidadation = FtaProcessusModel::getValideIdFtaByRoleWorkflowProcessus($rows[FtaModel::KEYNAME], $paramRole, $rows[FtaWorkflowStructureModel::FIELDNAME_ID_FTA_WORKFLOW]);
                         if ($tauxDeValidadation == 1) {
                             $idFtaEffectue[] = $rows[FtaModel::KEYNAME];
                         }

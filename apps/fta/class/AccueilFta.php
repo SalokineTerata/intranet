@@ -69,7 +69,7 @@ class AccueilFta {
          * $arrayIdFtaAndIdWorkflow[1] sont les id_fta
          * $arrayIdFtaAndIdWorkflow[2] sont les nom des workflows correspondant aux  id_fta
          */
-        self::$arrayIdFtaAndIdWorkflow = FtaEtatModel::getIdFtaByEtatAvancement(self::$syntheseAction, self::$abrevationFtaEtat, self::$idFtaRole,  self::$idUser);
+        self::$arrayIdFtaAndIdWorkflow = FtaEtatModel::getIdFtaByEtatAvancement(self::$syntheseAction, self::$abrevationFtaEtat, self::$idFtaRole, self::$idUser);
 
         self::$arrayIdFtaByUserAndWorkflow = UserModel::getIdFtaByUserAndWorkflow(self::$arrayIdFtaAndIdWorkflow[AccueilFta::VALUE_1], self::$orderBy);
 
@@ -121,6 +121,7 @@ class AccueilFta {
             if (!$arrayDroitAcces) {
                 $arrayIdSite = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
                                 "SELECT " . GeoModel::FIELDNAME_ID_SITE
+                                . " FROM " . GeoModel::TABLENAME
                                 . " WHERE " . GeoModel::KEYNAME . "=" . $lieuGeo
                 );
                 foreach ($arrayIdSite as $rowsIsSite) {
@@ -137,7 +138,7 @@ class AccueilFta {
                                     . ", " . FtaActionRoleModel::TABLENAME
                                     . ", " . FtaWorkflowStructureModel::TABLENAME
                                     . ", " . FtaProcessusMultisiteModel::TABLENAME
-                                    . "WHERE ( " . IntranetModulesModel::TABLENAME . "." . IntranetModulesModel::KEYNAME
+                                    . " WHERE ( " . IntranetModulesModel::TABLENAME . "." . IntranetModulesModel::KEYNAME
                                     . " = " . IntranetDroitsAccesModel::TABLENAME . "." . IntranetDroitsAccesModel::FIELDNAME_ID_INTRANET_MODULES
                                     . " AND " . IntranetActionsModel::TABLENAME . "." . IntranetActionsModel::KEYNAME
                                     . " = " . IntranetDroitsAccesModel::TABLENAME . "." . IntranetDroitsAccesModel::FIELDNAME_ID_INTRANET_ACTIONS
@@ -153,11 +154,14 @@ class AccueilFta {
                                     . "=" . self::$idUser . " "
                                     . " AND " . FtaProcessusModel::TABLENAME . "." . FtaProcessusModel::FIELDNAME_MULTISITE_FTA_PROCESSUS . "= 0 "
                                     . " AND " . IntranetDroitsAccesModel::TABLENAME . "." . IntranetDroitsAccesModel::FIELDNAME_NIVEAU_INTRANET_DROITS_ACCES . " > 0 ) )"
-                                    . " AND " . FtaProcessusMultisiteModel::TABLENAME . "." . FtaProcessusMultisiteModel::FIELDNAME_ID_PROCESSUS_FTA_PROCESSUS_MULTISITE . "=" . FtaProcessusModel::KEYNAME
-                                    . " AND id_site_processus_fta_processus_multisite =" . $rowsIsSite
+                                    . " AND " . FtaProcessusMultisiteModel::TABLENAME . "." . FtaProcessusMultisiteModel::FIELDNAME_ID_PROCESSUS_FTA_PROCESSUS_MULTISITE
+                                    . "=" . FtaProcessusModel::TABLENAME . "." . FtaProcessusModel::KEYNAME
+                                    . " AND id_site_processus_fta_processus_multisite =" . $rowsIsSite[GeoModel::FIELDNAME_ID_SITE]
                     );
-                    foreach ($arrayDeleg as $rowsFtaEtat) {
-                        $paramWhere .= "OR " . FtaModel::TABLENAME . "." . FtaModel::FIELDNAME_SITE_ASSEMBLAGE . "=" . $rowsFtaEtat["id_site_assemblage_fta_processus_multisite"] . " ";
+                    if ($arrayDeleg) {
+                        foreach ($arrayDeleg as $rowsFtaEtat) {
+                            $paramWhere .= "OR " . FtaModel::TABLENAME . "." . FtaModel::FIELDNAME_SITE_ASSEMBLAGE . "=" . $rowsFtaEtat["id_site_assemblage_fta_processus_multisite"] . " ";
+                        }
                     }
 
                     $paramWhere .= " ) ";
@@ -409,7 +413,7 @@ class AccueilFta {
             case FtaEtatModel::ETAT_AVANCEMENT_VALUE_ALL:
                 $URL = substr($URL, AccueilFta::VALUE_0, strpos($URL, self::$syntheseAction) + AccueilFta::VALUE_3);
                 break;
-        }        
+        }
         if (substr($URL, -2) == "in") {
             $URL = $URL . "tranet/apps/fta/index.php?";
         }
@@ -419,14 +423,14 @@ class AccueilFta {
                 . "<a href=" . $URL . "&order_common=id_classification_arborescence_article><img src=../lib/images/order-AZ.png title=\"mini_fleche_centre\"  border=\"0\" /></a>"
                 . "Client"
                 . "</th><th>"
-                . "<a href=" . $URL . "&order_common=LIBELLE><img src=../lib/images/order-AZ.png title=\"mini_fleche_centre\"  border=\"0\" /></a>"
+                . "<a href=" . $URL . "&order_common=designation_commerciale_fta><img src=../lib/images/order-AZ.png title=\"mini_fleche_centre\"  border=\"0\" /></a>"
                 . "Produits"
                 . "</th><th>"
                 . "<a href=" . $URL . "&order_common=id_dossier_fta><img src=../lib/images/order-AZ.png title=\"mini_fleche_centre\"  border=\"0\" /></a>"
                 . "Dossier FTA"
                 . "</th><th>"
                 . "<a href=" . $URL . "&order_common=code_article_ldc><img src=../lib/images/order-AZ.png title=\"mini_fleche_centre\"  border=\"0\" /></a>"
-                . "Code Regate"
+                . "Code Arcadia"
                 . "</th><th>"
                 . "Echéance de validation"
                 . "</th><th>"
@@ -468,6 +472,7 @@ class AccueilFta {
                 $dateEcheanceFta = $rowsDetail[FtaModel::FIELDNAME_DATE_ECHEANCE_FTA];
                 $createurFta = $rowsDetail[FtaModel::FIELDNAME_CREATEUR];
                 $siteProduction = $rowsDetail[FtaModel::FIELDNAME_SITE_ASSEMBLAGE];
+                $idWorkflowFtaEncours = $rowsDetail[FtaModel::FIELDNAME_WORKFLOW];
 
                 /*
                  * Initialisation des valeurs pour un 
@@ -717,7 +722,7 @@ class AccueilFta {
                  * Noms des services dans lequel la Fta se trouve
                  */
 
-                $arrayService = FtaRoleModel::getNameRoleEncoursByIdFta($idFta);
+                $arrayService = FtaRoleModel::getNameRoleEncoursByIdFta($idFta,$idWorkflowFtaEncours);
                 if ($arrayService) {
                     foreach ($arrayService as $rowsService) {
                         $service .= $rowsService[FtaRoleModel::FIELDNAME_DESCRIPTION_FTA_ROLE] . "<br>";

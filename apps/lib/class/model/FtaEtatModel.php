@@ -43,7 +43,7 @@ class FtaEtatModel extends AbstractModel {
         return $arrayFtaEtatAndName;
     }
 
-    public static function getIdFtaByEtatAvancement($paramSyntheseAction, $paramEtat, $paramRole, $paramIdUser) {
+    public static function getIdFtaByEtatAvancement($paramSyntheseAction, $paramEtat, $paramRole, $paramIdUser, $paramLieuGeo) {
 
         switch ($paramSyntheseAction) {
 
@@ -60,13 +60,15 @@ class FtaEtatModel extends AbstractModel {
                                 . "," . FtaModel::TABLENAME . "." . FtaModel::FIELDNAME_WORKFLOW
                                 . " FROM " . FtaSuiviProjetModel::TABLENAME . "," . FtaWorkflowStructureModel::TABLENAME
                                 . ", " . FtaProcessusCycleModel::TABLENAME . ", " . FtaModel::TABLENAME
+                                . " , " . GeoModel::TABLENAME . " , " . FtaActionSiteModel::TABLENAME
+                                . " , " . IntranetActionsModel::TABLENAME
                                 . " WHERE " . FtaWorkflowStructureModel::TABLENAME . "." . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_PROCESSUS
                                 . " in (SELECT DISTINCT " . FtaProcessusCycleModel::FIELDNAME_PROCESSUS_INIT
                                 . " FROM " . FtaProcessusCycleModel::TABLENAME . " , " . FtaProcessusModel::TABLENAME
                                 . " , " . FtaWorkflowStructureModel::TABLENAME
                                 . " , " . IntranetActionsModel::TABLENAME . " , " . IntranetDroitsAccesModel::TABLENAME
                                 . " , " . IntranetModulesModel::TABLENAME . " , " . FtaActionRoleModel::TABLENAME
-                                . " , " . FtaSuiviProjetModel::TABLENAME . " , " . FtaModel::TABLENAME
+                                . " , " . FtaSuiviProjetModel::TABLENAME
                                 . " WHERE " . FtaProcessusCycleModel::TABLENAME . "." . FtaProcessusCycleModel::FIELDNAME_PROCESSUS_NEXT
                                 . "=" . FtaProcessusModel::TABLENAME . "." . FtaProcessusModel::KEYNAME
                                 . " AND " . FtaProcessusCycleModel::TABLENAME . "." . FtaProcessusCycleModel::FIELDNAME_WORKFLOW
@@ -76,6 +78,8 @@ class FtaEtatModel extends AbstractModel {
                                 . " AND " . FtaActionRoleModel::TABLENAME . "." . FtaActionRoleModel::FIELDNAME_ID_INTRANET_ACTIONS
                                 . "=" . IntranetActionsModel::TABLENAME . "." . IntranetActionsModel::KEYNAME
                                 . " AND " . FtaActionRoleModel::TABLENAME . "." . FtaActionRoleModel::FIELDNAME_ID_FTA_ROLE . "=$paramRole" // Nous recuperons le type de role pour l'utilisateur
+                                . " AND " . FtaActionRoleModel::TABLENAME . "." . FtaActionRoleModel::FIELDNAME_ID_FTA_WROKFLOW
+                                . "=" . FtaWorkflowStructureModel::TABLENAME . "." . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_WORKFLOW
                                 . " AND " . IntranetActionsModel::TABLENAME . "." . IntranetActionsModel::KEYNAME
                                 . "=" . IntranetDroitsAccesModel::TABLENAME . "." . IntranetDroitsAccesModel::FIELDNAME_ID_INTRANET_ACTIONS
                                 . " AND " . IntranetDroitsAccesModel::TABLENAME . "." . IntranetDroitsAccesModel::FIELDNAME_ID_INTRANET_MODULES
@@ -93,6 +97,12 @@ class FtaEtatModel extends AbstractModel {
                                 . "=" . FtaSuiviProjetModel::TABLENAME . "." . FtaSuiviProjetModel::FIELDNAME_ID_FTA
                                 . " AND " . FtaModel::TABLENAME . "." . FtaModel::FIELDNAME_WORKFLOW
                                 . "=" . FtaWorkflowStructureModel::TABLENAME . "." . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_WORKFLOW
+                                . " AND " . FtaActionSiteModel::TABLENAME . "." . FtaActionSiteModel::FIELDNAME_ID_SITE . "=" . GeoModel::KEYNAME
+                                . " AND " . IntranetActionsModel::TABLENAME . "." . IntranetActionsModel::KEYNAME
+                                . " AND " . FtaActionSiteModel::TABLENAME . "." . FtaActionSiteModel::FIELDNAME_ID_INTRANET_ACTIONS
+                                . "=" . IntranetActionsModel::TABLENAME . "." . IntranetActionsModel::KEYNAME
+                                . " AND " . FtaActionSiteModel::TABLENAME . "." . FtaActionSiteModel::FIELDNAME_ID_SITE . "=" . $paramLieuGeo // Nous recuperons la localisation de l'utilisateur
+                                . " AND " . GeoModel::KEYNAME . "=" . FtaModel::FIELDNAME_SITE_ASSEMBLAGE
                 );
 
                 if ($arrayTmp) {
@@ -141,6 +151,8 @@ class FtaEtatModel extends AbstractModel {
                                 . "," . FtaModel::TABLENAME . "." . FtaModel::FIELDNAME_WORKFLOW
                                 . " FROM " . FtaSuiviProjetModel::TABLENAME . ", " . FtaWorkflowStructureModel::TABLENAME
                                 . ", " . FtaProcessusCycleModel::TABLENAME . ", " . FtaModel::TABLENAME
+                                . " , " . GeoModel::TABLENAME . " , " . FtaActionSiteModel::TABLENAME
+                                . " , " . IntranetActionsModel::TABLENAME
                                 . " WHERE " . FtaWorkflowStructureModel::TABLENAME . "." . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_PROCESSUS
                                 . " in (SELECT DISTINCT " . FtaProcessusCycleModel::FIELDNAME_PROCESSUS_NEXT
                                 . " FROM " . FtaProcessusCycleModel::TABLENAME . ", " . FtaProcessusModel::TABLENAME
@@ -157,6 +169,8 @@ class FtaEtatModel extends AbstractModel {
                                 . " AND " . FtaActionRoleModel::TABLENAME . "." . FtaActionRoleModel::FIELDNAME_ID_INTRANET_ACTIONS
                                 . "=" . IntranetActionsModel::TABLENAME . "." . IntranetActionsModel::KEYNAME
                                 . " AND " . FtaActionRoleModel::TABLENAME . "." . FtaActionRoleModel::FIELDNAME_ID_FTA_ROLE . "=$paramRole" // Nous recuperons le type de role pour l'utilisateur
+                                . " AND " . FtaActionRoleModel::TABLENAME . "." . FtaActionRoleModel::FIELDNAME_ID_FTA_WROKFLOW
+                                . "=" . FtaWorkflowStructureModel::TABLENAME . "." . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_WORKFLOW
                                 . " AND " . IntranetActionsModel::TABLENAME . "." . IntranetActionsModel::KEYNAME
                                 . "=" . IntranetDroitsAccesModel::TABLENAME . "." . IntranetDroitsAccesModel::FIELDNAME_ID_INTRANET_ACTIONS
                                 . " AND " . IntranetDroitsAccesModel::TABLENAME . "." . IntranetDroitsAccesModel::FIELDNAME_ID_INTRANET_MODULES
@@ -174,6 +188,12 @@ class FtaEtatModel extends AbstractModel {
                                 . "=" . FtaSuiviProjetModel::TABLENAME . "." . FtaSuiviProjetModel::FIELDNAME_ID_FTA
                                 . " AND " . FtaModel::TABLENAME . "." . FtaModel::FIELDNAME_WORKFLOW
                                 . "=" . FtaWorkflowStructureModel::TABLENAME . "." . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_WORKFLOW
+                                . " AND " . FtaActionSiteModel::TABLENAME . "." . FtaActionSiteModel::FIELDNAME_ID_SITE . "=" . GeoModel::KEYNAME
+                                . " AND " . IntranetActionsModel::TABLENAME . "." . IntranetActionsModel::KEYNAME
+                                . " AND " . FtaActionSiteModel::TABLENAME . "." . FtaActionSiteModel::FIELDNAME_ID_INTRANET_ACTIONS
+                                . "=" . IntranetActionsModel::TABLENAME . "." . IntranetActionsModel::KEYNAME
+                                . " AND " . FtaActionSiteModel::TABLENAME . "." . FtaActionSiteModel::FIELDNAME_ID_SITE . "=" . $paramLieuGeo // Nous recuperons la localisation de l'utilisateur
+                                . " AND " . GeoModel::KEYNAME . "=" . FtaModel::FIELDNAME_SITE_ASSEMBLAGE
                 );
                 if ($arrayTmp) {
                     foreach ($arrayTmp as $rows) {
@@ -221,6 +241,8 @@ class FtaEtatModel extends AbstractModel {
                                 . "," . FtaModel::TABLENAME . "." . FtaModel::FIELDNAME_WORKFLOW
                                 . " FROM " . FtaSuiviProjetModel::TABLENAME . ", " . FtaWorkflowStructureModel::TABLENAME
                                 . ", " . FtaProcessusCycleModel::TABLENAME . ", " . FtaModel::TABLENAME
+                                . " , " . GeoModel::TABLENAME . " , " . FtaActionSiteModel::TABLENAME
+                                . " , " . IntranetActionsModel::TABLENAME
                                 . " WHERE " . FtaWorkflowStructureModel::TABLENAME . "." . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_PROCESSUS
                                 . " in (SELECT DISTINCT " . FtaProcessusCycleModel::FIELDNAME_PROCESSUS_INIT
                                 . " FROM " . FtaProcessusCycleModel::TABLENAME . ", " . FtaProcessusModel::TABLENAME
@@ -237,6 +259,8 @@ class FtaEtatModel extends AbstractModel {
                                 . " AND " . FtaActionRoleModel::TABLENAME . "." . FtaActionRoleModel::FIELDNAME_ID_INTRANET_ACTIONS
                                 . "=" . IntranetActionsModel::TABLENAME . "." . IntranetActionsModel::KEYNAME                       //  type de role pour l'utilisateur  peut etre plusieur ainsi il doit vedrifier le quel il choisit
                                 . " AND " . FtaActionRoleModel::TABLENAME . "." . FtaActionRoleModel::FIELDNAME_ID_FTA_ROLE . "=$paramRole" // Nous recuperons le type de role pour l'utilisateur 
+                                . " AND " . FtaActionRoleModel::TABLENAME . "." . FtaActionRoleModel::FIELDNAME_ID_FTA_WROKFLOW
+                                . "=" . FtaWorkflowStructureModel::TABLENAME . "." . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_WORKFLOW
                                 . " AND " . IntranetActionsModel::TABLENAME . "." . IntranetActionsModel::KEYNAME
                                 . "=" . IntranetDroitsAccesModel::TABLENAME . "." . IntranetDroitsAccesModel::FIELDNAME_ID_INTRANET_ACTIONS
                                 . " AND " . IntranetDroitsAccesModel::TABLENAME . "." . IntranetDroitsAccesModel::FIELDNAME_ID_INTRANET_MODULES
@@ -254,6 +278,12 @@ class FtaEtatModel extends AbstractModel {
                                 . "=" . FtaSuiviProjetModel::TABLENAME . "." . FtaSuiviProjetModel::FIELDNAME_ID_FTA
                                 . " AND " . FtaModel::TABLENAME . "." . FtaModel::FIELDNAME_WORKFLOW
                                 . "=" . FtaWorkflowStructureModel::TABLENAME . "." . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_WORKFLOW
+                                . " AND " . FtaActionSiteModel::TABLENAME . "." . FtaActionSiteModel::FIELDNAME_ID_SITE . "=" . GeoModel::KEYNAME
+                                . " AND " . IntranetActionsModel::TABLENAME . "." . IntranetActionsModel::KEYNAME
+                                . " AND " . FtaActionSiteModel::TABLENAME . "." . FtaActionSiteModel::FIELDNAME_ID_INTRANET_ACTIONS
+                                . "=" . IntranetActionsModel::TABLENAME . "." . IntranetActionsModel::KEYNAME
+                                . " AND " . FtaActionSiteModel::TABLENAME . "." . FtaActionSiteModel::FIELDNAME_ID_SITE . "=" . $paramLieuGeo // Nous recuperons la localisation de l'utilisateur
+                                . " AND " . GeoModel::KEYNAME . "=" . FtaModel::FIELDNAME_SITE_ASSEMBLAGE
                 );
 
                 /*

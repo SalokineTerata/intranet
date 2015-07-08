@@ -118,6 +118,29 @@ class FtaConditionnementModel extends AbstractModel {
         return $param * $paramb;
     }
 
+    public static function getIdFtaConditionnement($paramIdAnnexeEmballage, $paramIdFta) {
+
+        $req = "SELECT DISTINCT " . FtaConditionnementModel::KEYNAME
+                . " FROM " . FtaConditionnementModel::TABLENAME
+                . " WHERE ( 0 ";
+
+        $req .=AnnexeEmballageModel::AddIdAnnexeEmballage($paramIdAnnexeEmballage);
+
+        $req .= ") AND " . FtaConditionnementModel::FIELDNAME_ID_FTA . "=" . $paramIdFta
+        ;
+
+        $arrayIdFtaConditionnement = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray($req);
+        if ($arrayIdFtaConditionnement) {
+            foreach ($arrayIdFtaConditionnement as $rowsIdFtaConditionnement) {
+                $IdFtaConditionnement = $rowsIdFtaConditionnement[FtaConditionnementModel::KEYNAME];
+            }
+        } else {
+            $IdFtaConditionnement = 0;
+        }
+
+        return $IdFtaConditionnement;
+    }
+
 }
 
 ?>

@@ -193,22 +193,14 @@ class Navigation {
                     if ($taux_validation_processus == 1 or $taux_validation_processus === NULL) {
                         $ProcessusPrecedentVisible[] = $rows[FtaProcessusModel::KEYNAME];
 
-                        foreach ($ProcessusPrecedentVisible as $ProcessusPrecedentVisibleCheckMulti) {
-                            //Ce processus en cours, est-il du type repartie ou centralisé ?
-                            $reqType = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
-                                            "SELECT " . FtaProcessusModel::FIELDNAME_MULTISITE_FTA_PROCESSUS
-                                            . " FROM " . FtaProcessusModel::TABLENAME
-                                            . " WHERE " . FtaProcessusModel::KEYNAME
-                                            . "=" . $ProcessusPrecedentVisibleCheckMulti
-                            );
-                        }
-                        foreach ($reqType as $rowsType) {
-                            $multisite_fta_processus = $rowsType[FtaProcessusModel::FIELDNAME_MULTISITE_FTA_PROCESSUS];
-                        }
-                        if ($multisite_fta_processus) {
-                            //Oui, il s'agit d'un Processus répartie sur les sites d'assemblage
-                            $ProcessusPrecedentVisibleTmp[] = self::CheckMultiSite($ProcessusPrecedentVisibleCheckMulti);
-                            $ProcessusPrecedentVisible = $ProcessusPrecedentVisibleTmp;
+                        foreach ($ProcessusPrecedentVisible as $rowsProcessusVisible) {
+                            $multisite_fta_processus = FtaProcessusModel::CheckProcessusMultiSite($rowsProcessusVisible);
+
+                            if ($multisite_fta_processus) {
+                                //Oui, il s'agit d'un Processus répartie sur les sites d'assemblage
+                                $ProcessusPrecedentVisibleTmp[] = self::CheckMultiSite($rowsProcessusVisible);
+                                $ProcessusPrecedentVisible = $ProcessusPrecedentVisibleTmp;
+                            }
                         }
                     }
                 }//Fin du balayage

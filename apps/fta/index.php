@@ -31,6 +31,7 @@ print_page_begin($disable_full_page, $menu_file);
  */
 $globalConfig = new GlobalConfig();
 $id_user = $globalConfig->getAuthenticatedUser()->getKeyValue();
+$lieuGeo = $globalConfig->getAuthenticatedUser()->getLieuGeo();
 
 /* * ***********
   Début Code PHP
@@ -149,7 +150,7 @@ if ($id_user) {
     /*
      * Initialisation des valeurs
      */
-    AccueilFta::initAccueil($id_user, $id_fta_etat, $nom_fta_etat, $synthese_action, $idFtaRoleEncours,$order_common);
+    AccueilFta::initAccueil($id_user, $id_fta_etat, $nom_fta_etat, $synthese_action, $idFtaRoleEncours,$order_common,$lieuGeo);
     
     /*
      * Génération de la barre de navigation de la page d'accueil

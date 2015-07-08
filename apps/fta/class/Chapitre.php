@@ -77,6 +77,7 @@ class Chapitre {
     protected static $html_chapitre_decoupe;
     protected static $html_chapitre_dictionnaire_de_donnees;
     protected static $html_chapitre_donnees_clients_w1;
+    protected static $html_chapitre_duree_de_vie;
     protected static $html_chapitre_emballage;
     protected static $html_chapitre_emballage_colis;
     protected static $html_chapitre_etiquette;
@@ -197,7 +198,7 @@ class Chapitre {
 //Taux de validation du processus
         $return = "";
         if (self::$id_fta_processus != 0) {
-            $return = FtaProcessusModel::getValideProcessusEncours(self::$id_fta, self::$id_fta_processus,  self::$id_fta_workflow);
+            $return = FtaProcessusModel::getValideProcessusEncours(self::$id_fta, self::$id_fta_processus, self::$id_fta_workflow);
         }
         return $return;
     }
@@ -346,6 +347,11 @@ class Chapitre {
                 $return = self::$html_chapitre_codification_w1;
                 break;
             default:
+            case "duree_de_vie":
+                self::$html_chapitre_duree_de_vie = self::buildChapitreDureeDeVie();
+                $return = self::$html_chapitre_duree_de_vie;
+                break;
+            default:
         }
         return $return;
     }
@@ -489,32 +495,6 @@ class Chapitre {
         $ftaView->setIsEditable($isEditable);
         $ftaView->setFtaChapitreModelById(self::ID_CHAPITRE_IDENTITE);
 
-        $bloc.="<tr class=titre_principal><td class>Commerce</td></tr>";
-
-
-        /**
-         * @todo Non implementé
-         */
-        //Désignation de l'enseigne
-        $bloc.="<tr> <td>Désignation de l'enseigne</td><td> not implement(sous table)</td></tr>";
-        /**
-         * @todo Non implementé
-         */
-        //Remise sur factures
-        //"fta_tarif", "conditions_commerciales_fta_tarif"
-        $bloc.="<tr> <td>Remise sur factures</td><td> not implement(sous table)</td></tr>";
-        /**
-         * @todo Non implementé
-         */
-        //Ristournes
-        $bloc.="<tr><td>Ristournes</td> <td> not implement(sous table)</td></tr>";
-
-
-        //Période de commercialisation
-        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_PERIODE_DE_COMMERCIALISATION);
-
-
-
         //Unité de Facturation
         $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_UNITE_FACTURATION);
 
@@ -526,39 +506,6 @@ class Chapitre {
 
         //Gencod EAN Palette
         $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_EAN_PALETTE);
-
-
-        //Libellé du code article chez le client
-        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_LIBELLE_CODE_ARTICLE_CLIENT);
-
-        //Valeur du code article chez le client
-        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_CODE_ARTICLE_CLIENT);
-
-        //PVC de l'article:
-        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_PVC_ARTICLE);
-
-        //Nombre de portion
-        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_NOMBRE_PORTION_FTA);
-
-        //Service consommateur
-        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_SERVICE_CONSOMMATEUR);
-
-        //Prix / KG
-        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_PVC_ARTICLE_KG);
-
-        //Durée de vie garantie client (en jours)
-        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_DUREE_DE_VIE);
-
-
-        //Description du produit
-        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_DESCRIPTION_DU_PRODUIT);
-
-        //Conseil de Présentation
-        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_CONSEIL_DE_PRESENTATION);
-
-
-
-
         return $bloc;
     }
 
@@ -768,8 +715,11 @@ class Chapitre {
         $ftaView->setIsEditable($isEditable);
         $ftaView->setFtaChapitreModelById(self::ID_CHAPITRE_IDENTITE);
 
-        //PCB
-        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_PCB);
+        //Poids net de l’UVF
+        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_POIDS_ELEMENTAIRE);
+
+        //Nombre d’UVC par colis
+        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_NOMBRE_UVC_PAR_CARTON);
 
         return $bloc;
     }
@@ -780,6 +730,7 @@ class Chapitre {
         $id_fta = self::$id_fta;
         $synthese_action = self::$synthese_action;
         $isEditable = self::$is_editable;
+        AnnexeEmballageGroupeTypeModel::initEmballage($id_fta);
 
         //Identifiant FTA
         $ftaModel = new FtaModel($id_fta);
@@ -800,6 +751,7 @@ class Chapitre {
         $bloc.="<tr class=titre_principal><td class>Emballage</td></tr>";
 
         $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_DESCRIPTION_EMBALLAGE);
+        $bloc.=$ftaView->getHtmlEmballagePalette();
         /*
           //Selection de tous les types de groupe d'emballage
           $req = "SELECT * FROM annexe_emballage_groupe_type ORDER BY ordre_emballage_groupe_type";
@@ -1722,24 +1674,32 @@ class Chapitre {
 
         $bloc.="<tr class=titre_principal><td class>Codification</td></tr>";
 
-
-        //Unité de Poids d'affichage:
-        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_UNITE_AFFICHAGE);
-
-        //Désignation Abrégée
-        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_NOM_ABREGE);
-
         //Désignation Interne Agis
         $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_LIBELLE);
 
-        //Désignation Etiquette
-        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_LIBELLE_CLIENT);
-
-        //Code Article LDC
+        //Code Article LDC, code arcadia
         $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_CODE_ARTICLE_LDC);
 
-        //Site d'expédition
-        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_SITE_EXPEDITION_FTA);
+        return $bloc;
+    }
+
+    public static function buildChapitreDureeDeVie() {
+
+        $bloc = "";
+        $id_fta = self::$id_fta;
+        $synthese_action = self::$synthese_action;
+        $isEditable = self::$is_editable;
+        //$isEditable = TRUE;
+        //
+        //Identifiant FTA
+        $ftaModel = new FtaModel($id_fta);
+        $ftaView = new FtaView($ftaModel);
+        $ftaView->setIsEditable($isEditable);
+        $ftaView->setFtaChapitreModelById(self::ID_CHAPITRE_IDENTITE);
+
+
+        //Durée de vie totale
+        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_DUREE_DE_VIE_TECHNIQUE_MAXIMALE);
 
         return $bloc;
     }
@@ -1883,63 +1843,85 @@ class Chapitre {
         $ftaView->setIsEditable($isEditable);
         $ftaView->setFtaChapitreModelById(self::ID_CHAPITRE_IDENTITE);
 
-        $bloc.="<tr class=titre_principal><td class>Demandeur</td></tr>";
-
-        //Nom du demandeur
-        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_NOM_DEMANDEUR);
-
-        //Société du demandeur
-        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_SOCIETE_DEMANDEUR);
-
-        //Date de la demande
-        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_DATE_DEMANDEUR);
-
-        //Echéance du demandeur
-        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_ECHEANCE_DEMANDEUR);
+//        $bloc.="<tr class=titre_principal><td class>Demandeur</td></tr>";
+//
+//        //Nom du demandeur
+//        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_NOM_DEMANDEUR);
+//
+//        //Société du demandeur
+//        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_SOCIETE_DEMANDEUR);
+//
+//        //Date de la demande
+//        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_DATE_DEMANDEUR);
+//
+//        //Echéance du demandeur
+//        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_ECHEANCE_DEMANDEUR);
 
         $bloc.="<tr class=titre_principal><td class>Classification</td></tr>";
 
-        //Nom du client du demandeur
-        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_NOM_CLIENT_DEMANDEUR);
-
-        //Circuit du client
-        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_CIRCUIT_CLIENT);
-
-        //Réseau du client
-        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_RESEAU_CLIENT);
-
-
-        //Segment du client
-        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_SEGMENT_CLIENT);
-
-        $bloc.="<tr class=titre_principal><td class>Estimations</td></tr>";
+//        //Nom du client du demandeur
+//        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_NOM_CLIENT_DEMANDEUR);
+//
+//        //Circuit du client
+//        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_CIRCUIT_CLIENT);
+//
+//        //Réseau du client
+//        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_RESEAU_CLIENT);
 
 
-        //Quantité estimée en poids ou pièce par semaine
-        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_QUANTITE_HEBDOMADAIRE_ESTIMEE_COMMANDE);
+        /*
+         * @todo Ajax : n'affiche pas les valeurs de la liste déroulante
+         */
+        
+        //Propriétaire
+        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_CLASSIFICATION_PROPRIETAIRE);
 
-        //Fréquence estimée de commande par semaine
-        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_FREQUENCE_HEBDOMADAIRE_ESTIMEE_COMMANDE);
+        //Marque
+        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_CLASSIFICATION_MARQUE);
+
+        //Activité
+        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_CLASSIFICATION_ACTIVITE);
+
+        //Rayon
+        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_CLASSIFICATION_RAYON);
+
+        //Reseau
+        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_CLASSIFICATION_RESEAU);
+
+        //Environnement
+        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_CLASSIFICATION_ENVIRONNEMENT);
+
+        //Saisonnalité
+        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_CLASSIFICATION_SAISONNALITE);
+
+//        $bloc.="<tr class=titre_principal><td class>Estimations</td></tr>";
+//
+//
+//        //Quantité estimée en poids ou pièce par semaine
+//        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_QUANTITE_HEBDOMADAIRE_ESTIMEE_COMMANDE);
+//
+//        //Fréquence estimée de commande par semaine
+//        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_FREQUENCE_HEBDOMADAIRE_ESTIMEE_COMMANDE);
 
         $bloc.="<tr class=titre_principal><td class>Caractéristiques générales du produit</td></tr>";
 
         //Désignation commerciale
         $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_DESIGNATION_COMMERCIALE);
 
-        //Environnement de conservation
-        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_ENVIRONNEMENT_CONSERVATION_GROUPE);
-
-        //Type d'emballage
-
-        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_ARCADIA_EMBALLAGE_TYPE);
-
-        //Unité de facturation et Poids élémentaire
-        $bloc.=$ftaView->getHtmlUniteFacturationWithPoidsElementaire();
-
-
-        //PCB
-        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_PCB);
-
+//        //Environnement de conservation
+//        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_ENVIRONNEMENT_CONSERVATION_GROUPE);
+//
+//        //Type d'emballage
+//
+//        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_ARCADIA_EMBALLAGE_TYPE);
+//
+//        //Unité de facturation et Poids élémentaire
+//        $bloc.=$ftaView->getHtmlUniteFacturationWithPoidsElementaire();
+//
+//
+//        //PCB
+//        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_NOMBRE_UVC_PAR_CARTON);
+//
 
         $bloc.="<tr class=titre_principal><td class>Caractéristiques FTA</td></tr>";
 
@@ -1953,11 +1935,11 @@ class Chapitre {
         //$bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_BESOIN_FICHE_TECHNIQUE);
         //Etude de prix ?
         //$bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_ETUDE_PRIX_FTA);
-        //Calibre par défaut
-        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_CALIBRE_DEFAUT);
-
-        $bloc.="<tr class=titre_principal><td class>Echéances</td></tr>";
-
+//        //Calibre par défaut
+//        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_CALIBRE_DEFAUT);
+//
+//        $bloc.="<tr class=titre_principal><td class>Echéances</td></tr>";
+//
         //Date d'échéance des processus
         //$bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_VIRTUAL_FTA_PROCESSUS_DELAI);
         /**        */

@@ -23,6 +23,37 @@ class AnnexeEmballageModel extends AbstractModel {
     const FIELDNAME_NOMBRE_COUCHE_ANNEXE_EMBALLAGE = "nombre_couche_annexe_emballage";
     const FIELDNAME_DATE_MAJ_ANNEXE_EMBALLAGE = "date_maj_annexe_emballage";
 
+    public static function getIdAnnexeEmballage($paramIdEmballageGroupe) {
+
+        $req = "SELECT DISTINCT " . AnnexeEmballageModel::TABLENAME . "." . AnnexeEmballageModel::KEYNAME
+                . " FROM " . AnnexeEmballageGroupeModel::TABLENAME . "," . AnnexeEmballageModel::TABLENAME . " WHERE ( 0 ";
+
+        $req .= AnnexeEmballageGroupeModel::AddIdAnnexeEmballageGroupe($paramIdEmballageGroupe);
+
+        $req .= ") AND " . AnnexeEmballageGroupeModel::TABLENAME . "." . AnnexeEmballageGroupeModel::KEYNAME
+                . "=" . AnnexeEmballageModel::TABLENAME . "." . AnnexeEmballageModel::FIELDNAME_ID_ANNEXE_EMBALLAGE_GROUPE;
+
+        $arrayIdAnnexeEmballage = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray($req);
+       if($arrayIdAnnexeEmballage){
+        foreach ($arrayIdAnnexeEmballage as $rowsIdAnnexeEmballage) {
+            $IdAnnexeEmballage[] = $rowsIdAnnexeEmballage[AnnexeEmballageModel::KEYNAME];
+        }
+       }else {
+           $IdAnnexeEmballage=0;
+       }
+
+        return $IdAnnexeEmballage;
+    }
+
+    public static function AddIdAnnexeEmballage($paramIdEmballage) {
+        if ($paramIdEmballage) {
+            foreach ($paramIdEmballage as $value) {
+                $req .= " OR "  . AnnexeEmballageModel::KEYNAME . "=" . $value . " ";
+            }
+        }
+        return $req;
+    }
+
 }
 
 ?>

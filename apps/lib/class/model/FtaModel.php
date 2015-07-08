@@ -17,6 +17,13 @@ class FtaModel extends AbstractModel {
     const FIELDNAME_BESOIN_FICHE_TECHNIQUE = "besoin_fiche_technique";
     const FIELDNAME_CALIBRE_DEFAUT = "calibre_defaut";
     const FIELDNAME_CIRCUIT_CLIENT = "id_arcadia_client_circuit";
+    const FIELDNAME_CLASSIFICATION_ACTIVITE = "classification_fta_activite";
+    const FIELDNAME_CLASSIFICATION_ENVIRONNEMENT = "classification_fta_environnement";
+    const FIELDNAME_CLASSIFICATION_MARQUE = "classification_fta_marque";
+    const FIELDNAME_CLASSIFICATION_PROPRIETAIRE = "classification_fta_proprietaire";
+    const FIELDNAME_CLASSIFICATION_RAYON = "classification_fta_rayon";
+    const FIELDNAME_CLASSIFICATION_RESEAU = "classification_fta_reseau";
+    const FIELDNAME_CLASSIFICATION_SAISONNALITE = "classification_fta_saisonnalite";
     const FIELDNAME_CODE_ARTICLE_CLIENT = "code_article_client";
     const FIELDNAME_CODE_ARTICLE_LDC = "code_article_ldc";
     const FIELDNAME_CODE_DOUANE_FTA = "code_douane_fta";
@@ -65,7 +72,6 @@ class FtaModel extends AbstractModel {
     const FIELDNAME_NOMBRE_PORTION_FTA = "nombre_portion_fta";
     const FIELDNAME_NOMBRE_UVC_PAR_CARTON = "NB_UNIT_ELEM";
     const FIELDNAME_ORIGINE_MATIERE_PREMIERE = "origine_matiere_fta";
-    const FIELDNAME_PCB = "NB_UNIT_ELEM";
     const FIELDNAME_PERIODE_DE_COMMERCIALISATION = "periode_commercialisation_fta";
     const FIELDNAME_POIDS_ELEMENTAIRE = "Poids_ELEM";
     const FIELDNAME_POIDS_BRUT_UVC = "poids_brut_uvc_fta";
@@ -481,7 +487,7 @@ class FtaModel extends AbstractModel {
 
                 //Les Calculs de la table fta
                 $arrayFta = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
-                                "SELECT DISTINCT " . FtaModel::FIELDNAME_PCB . "," . FtaModel::FIELDNAME_POIDS_ELEMENTAIRE
+                                "SELECT DISTINCT " . FtaModel::FIELDNAME_NOMBRE_UVC_PAR_CARTON . "," . FtaModel::FIELDNAME_POIDS_ELEMENTAIRE
                                 . " FROM " . FtaModel::TABLENAME . " "
                                 . " WHERE " . FtaModel::KEYNAME . "=" . $this->getKeyValue()
                 );
@@ -492,7 +498,7 @@ class FtaModel extends AbstractModel {
                     $return[FtaConditionnementModel::UVC_EMBALLAGE_NET] = $rowsFta[FtaModel::FIELDNAME_POIDS_ELEMENTAIRE];
 
                     //Calcul du PCB du colis
-                    $return[FtaModel::FIELDNAME_PCB] = $rowsFta[FtaModel::FIELDNAME_PCB];
+                    $return[FtaModel::FIELDNAME_NOMBRE_UVC_PAR_CARTON] = $rowsFta[FtaModel::FIELDNAME_NOMBRE_UVC_PAR_CARTON];
                 }
                 //Calcul du poids brut par UVC en g
                 $return[FtaConditionnementModel::UVC_EMBALLAGE_BRUT] = FtaConditionnementModel::getCalculPoidsBrutEmballage(
@@ -508,7 +514,7 @@ class FtaModel extends AbstractModel {
                 );
 
                 //Calcul du poids de Emballages du Colis
-                $return[FtaConditionnementModel::COLIS_EMBALLAGE] = $return[FtaConditionnementModel::COLIS_EMBALLAGE] * $return[FtaModel::FIELDNAME_PCB];
+                $return[FtaConditionnementModel::COLIS_EMBALLAGE] = $return[FtaConditionnementModel::COLIS_EMBALLAGE] * $return[FtaModel::FIELDNAME_NOMBRE_UVC_PAR_CARTON];
 
                 //Les Calculs de la table composant        
                 $arrayComposant = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
@@ -535,7 +541,7 @@ class FtaModel extends AbstractModel {
                 if (!$return[FtaConditionnementModel::COLIS_EMBALLAGE_NET]) {
                     $return[FtaConditionnementModel::COLIS_EMBALLAGE_NET] = FtaConditionnementModel::getCalculGenericMultiplication(
                                     $rowsFta[FtaModel::FIELDNAME_POIDS_ELEMENTAIRE]
-                                    , $rowsFta[FtaModel::FIELDNAME_PCB]
+                                    , $rowsFta[FtaModel::FIELDNAME_NOMBRE_UVC_PAR_CARTON]
                     );
                 }
 
@@ -604,6 +610,5 @@ class FtaModel extends AbstractModel {
         }
         return $req;
     }
-
 
 }

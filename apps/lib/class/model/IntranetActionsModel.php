@@ -48,9 +48,9 @@ class IntranetActionsModel extends AbstractModel {
                                 . "." . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_CHAPITRE . "=" . $paramChapitre
                                 . " AND " . FtaWorkflowStructureModel::TABLENAME
                                 . "." . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_WORKFLOW . "=" . $paramFtaWorkflow
-                                . " AND " . FtaWorkflowStructureModel::TABLENAME  . "." . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_ROLE
+                                . " AND " . FtaWorkflowStructureModel::TABLENAME . "." . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_ROLE
                                 . "=" . FtaActionRoleModel::TABLENAME . "." . FtaActionRoleModel::FIELDNAME_ID_FTA_ROLE
-                                . " AND " . FtaWorkflowStructureModel::TABLENAME  . "." . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_WORKFLOW
+                                . " AND " . FtaWorkflowStructureModel::TABLENAME . "." . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_WORKFLOW
                                 . "=" . FtaActionRoleModel::TABLENAME . "." . FtaActionRoleModel::FIELDNAME_ID_FTA_WROKFLOW
                                 . " AND " . IntranetActionsModel::TABLENAME . "." . IntranetActionsModel::KEYNAME
                                 . "=" . IntranetDroitsAccesModel::TABLENAME . "." . IntranetDroitsAccesModel::FIELDNAME_ID_INTRANET_ACTIONS
@@ -63,8 +63,8 @@ class IntranetActionsModel extends AbstractModel {
                 );
                 if ($arrayIdAction) {
                     foreach ($arrayIdAction as $idAction) {
-                        
-                        
+
+
                         return $idAction[IntranetActionsModel::KEYNAME];
                     }
                 }

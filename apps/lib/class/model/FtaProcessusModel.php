@@ -18,7 +18,7 @@ class FtaProcessusModel extends AbstractModel {
     const FIELDNAME_MULTISITE_FTA_PROCESSUS = "multisite_fta_processus";
     const PROCESSUS_PUBLIC = 0;
 
-    public static function getFtaProcessusNonValidePrecedent($paramIdFta, $paramProcessusEncours,$paramIdWorkflowEncours) {
+    public static function getFtaProcessusNonValidePrecedent($paramIdFta, $paramProcessusEncours, $paramIdWorkflowEncours) {
         /*
          * Nombres total de processus précedent pour le processus en cours
          */
@@ -172,6 +172,66 @@ class FtaProcessusModel extends AbstractModel {
         $return = $taux_validation_processus;
 
         return $return;
+    }
+
+    public static function CheckProcessusMultiSite($paramRows) {
+
+        //Ce processus en cours, est-il du type repartie ou centralisé ?
+        $reqType = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
+                        "SELECT " . FtaProcessusModel::FIELDNAME_MULTISITE_FTA_PROCESSUS
+                        . " FROM " . FtaProcessusModel::TABLENAME
+                        . " WHERE " . FtaProcessusModel::KEYNAME
+                        . "=" . $paramRows
+        );
+
+        foreach ($reqType as $rowsType) {
+            $multisiteFtaProcessus = $rowsType[FtaProcessusModel::FIELDNAME_MULTISITE_FTA_PROCESSUS];
+        }
+        return $multisiteFtaProcessus;
+    }
+
+    public static function CheckProcessusSiteOrSociete($paramRows,$paramIdFta) {
+        $globalconfig = new GlobalConfig();
+        $idUser = $globalconfig->getAuthenticatedUser()->getKeyValue();
+        $paramLieuGeo = $globalconfig->getAuthenticatedUser()->getLieuGeo();
+//Existe-il une configuration de gestion forcée pour ce processus et ce site d'assemblage ?
+
+        foreach ($paramRows as $rowsSiteSociete) {
+            $arrayGestion = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
+                            "SELECT " . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_PROCESSUS
+                            . " FROM " . GeoModel::TABLENAME
+                            . "," . FtaModel::TABLENAME
+                            . "," . FtaActionSiteModel::TABLENAME
+                            . "," . IntranetActionsModel::TABLENAME
+                            . "," . FtaWorkflowStructureModel::TABLENAME
+                            . " WHERE " . GeoModel::KEYNAME . "=" . FtaModel::FIELDNAME_SITE_ASSEMBLAGE
+                            . " AND " . FtaActionSiteModel::FIELDNAME_ID_SITE . "=" . GeoModel::KEYNAME
+                            . " AND " . IntranetActionsModel::TABLENAME . "." . IntranetActionsModel::KEYNAME
+                            . "=" . IntranetDroitsAccesModel::TABLENAME . "." . IntranetDroitsAccesModel::FIELDNAME_ID_INTRANET_ACTIONS
+                            . " AND " . IntranetDroitsAccesModel::TABLENAME . "." . IntranetDroitsAccesModel::FIELDNAME_ID_INTRANET_MODULES
+                            . "=" . IntranetModulesModel::TABLENAME . "." . IntranetModulesModel::KEYNAME
+                            . " AND " . IntranetDroitsAccesModel::FIELDNAME_ID_USER . " =" . $idUser
+                            . " AND " . IntranetDroitsAccesModel::FIELDNAME_NIVEAU_INTRANET_DROITS_ACCES . "=1"
+                            . " AND " . FtaActionSiteModel::TABLENAME . "." . FtaActionSiteModel::FIELDNAME_ID_INTRANET_ACTIONS
+                            . "=" . IntranetActionsModel::TABLENAME . "." . IntranetActionsModel::KEYNAME
+                            . " AND " . FtaActionSiteModel::TABLENAME . "." . FtaActionSiteModel::FIELDNAME_ID_SITE . "=" . $paramLieuGeo // Nous recuperons la localisation de l'utilisateur
+                            . " AND " . FtaModel::KEYNAME . "=" . $paramIdFta
+            );
+
+            if ($arrayGestion) {
+                foreach ($arrayGestion as $rowsGestion) {
+                    $id_geo = $rowsGestion[FtaProcessusMultisiteModel::FIELDNAME_ID_SITE_PROCESSUS_FTA_PROCESSUS_MULTISITE];
+                }
+
+                if ($id_geo == $paramLieuGeo) {
+                    //L'égalité est respecté, donc ce processus est bien en cours
+                    $paramT_Processus_Encours = $paramRows;
+                } else {
+                    $paramT_Processus_Encours = 0;
+                }
+            }
+        }
+        return $paramT_Processus_Encours;
     }
 
 }

@@ -49,7 +49,7 @@ class UserModel extends AbstractModel {
             $req = "SELECT DISTINCT " . FtaModel::TABLENAME . "." . FtaModel::KEYNAME
                     . ", " . FtaEtatModel::FIELDNAME_ABREVIATION . ", " . FtaModel::FIELDNAME_LIBELLE
                     . ", " . FtaWorkflowModel::FIELDNAME_DESCRIPTION_FTA_WORKFLOW . ", " . FtaWorkflowModel::FIELDNAME_NOM_FTA_WORKFLOW
-                    . ", " . FtaModel::FIELDNAME_PCB . ", " . FtaModel::FIELDNAME_POIDS_ELEMENTAIRE
+                    . ", " . FtaModel::FIELDNAME_NOMBRE_UVC_PAR_CARTON . ", " . FtaModel::FIELDNAME_POIDS_ELEMENTAIRE
                     . ", " . FtaModel::FIELDNAME_SUFFIXE_AGROLOGIC_FTA . ", " . FtaModel::FIELDNAME_DESIGNATION_COMMERCIALE
                     . ", " . FtaModel::FIELDNAME_DOSSIER_FTA . ", " . FtaModel::FIELDNAME_VERSION_DOSSIER_FTA
                     . ", " . FtaModel::FIELDNAME_ARTICLE_AGROLOGIC . ", " . FtaModel::FIELDNAME_CODE_ARTICLE_LDC

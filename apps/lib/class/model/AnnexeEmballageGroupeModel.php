@@ -13,7 +13,29 @@ class AnnexeEmballageGroupeModel extends AbstractModel {
     const FIELDNAME_NOM_ANNEXE_EMBALLAGE_GROUPE = "nom_annexe_emballage_groupe";
     const FIELDNAME_ID_ANNEXE_EMBALLAGE_GROUPE_CONFIGURATION = "id_annexe_emballage_groupe_configuration";
     const FIELDNAME_POIDS_VARIABLE_FTA_EMBALLAGE_GROUPE = "poids_variable_fta_emballage_groupe";
-    
+
+    public static function getIdAnnexeEmballageGroupe($paramEmballageGroupeType) {
+        $arrayEmballageGroupeType = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
+                        "SELECT DISTINCT " . AnnexeEmballageGroupeModel::KEYNAME
+                        . " FROM " . AnnexeEmballageGroupeModel::TABLENAME . "," . AnnexeEmballageGroupeTypeModel::TABLENAME
+                        . " WHERE " . AnnexeEmballageGroupeModel::FIELDNAME_ID_ANNEXE_EMBALLAGE_GROUPE_CONFIGURATION . "=" . $paramEmballageGroupeType
+        );
+        foreach ($arrayEmballageGroupeType as $rowsEmballageGroupeType) {
+            $IdAnnexeEmballageGroupe[] = $rowsEmballageGroupeType[AnnexeEmballageGroupeModel::KEYNAME];
+        }
+
+        return $IdAnnexeEmballageGroupe;
+    }
+
+    public static function AddIdAnnexeEmballageGroupe($paramAnnexeEmballageGroupe) {
+        if ($paramAnnexeEmballageGroupe) {
+            foreach ($paramAnnexeEmballageGroupe as $value) {
+                $req .= " OR " . AnnexeEmballageGroupeModel::TABLENAME . ". " . AnnexeEmballageGroupeModel::KEYNAME . "=" . $value . " ";
+            }
+        }
+        return $req;
+    }
+
 }
 
 ?>

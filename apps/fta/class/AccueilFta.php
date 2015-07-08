@@ -40,11 +40,12 @@ class AccueilFta {
     protected static $idFtaRole;
     protected static $idFtaEtat;
     protected static $idUser;
+    protected static $lieuGeo;
     protected static $nombreFta;
     protected static $orderBy;
     protected static $syntheseAction;
 
-    public static function initAccueil($id_user, $idFtaEtat, $abrevationFtaEtat, $syntheseAction, $IdFtaRole, $OrderBy) {
+    public static function initAccueil($id_user, $idFtaEtat, $abrevationFtaEtat, $syntheseAction, $IdFtaRole, $OrderBy, $lieuGeo) {
 
         self::$idUser = $id_user;
         self::$abrevationFtaEtat = $abrevationFtaEtat;
@@ -52,6 +53,7 @@ class AccueilFta {
         self::$idFtaRole = $IdFtaRole;
         self::$idFtaEtat = $idFtaEtat;
         self::$orderBy = $OrderBy;
+        self::$lieuGeo = $lieuGeo;
 
         /*
          * On recherche les roles auxquelles l'utilisateur à les droits d'acces
@@ -69,7 +71,7 @@ class AccueilFta {
          * $arrayIdFtaAndIdWorkflow[1] sont les id_fta
          * $arrayIdFtaAndIdWorkflow[2] sont les nom des workflows correspondant aux  id_fta
          */
-        self::$arrayIdFtaAndIdWorkflow = FtaEtatModel::getIdFtaByEtatAvancement(self::$syntheseAction, self::$abrevationFtaEtat, self::$idFtaRole, self::$idUser);
+        self::$arrayIdFtaAndIdWorkflow = FtaEtatModel::getIdFtaByEtatAvancement(self::$syntheseAction, self::$abrevationFtaEtat, self::$idFtaRole, self::$idUser, self::$lieuGeo);
 
         self::$arrayIdFtaByUserAndWorkflow = UserModel::getIdFtaByUserAndWorkflow(self::$arrayIdFtaAndIdWorkflow[AccueilFta::VALUE_1], self::$orderBy);
 

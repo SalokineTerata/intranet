@@ -194,6 +194,33 @@ class FtaView {
         return $blocEcheanceLignes;
     }
 
+    public function getHtmlEmballageParUVC() {
+        $annexeEmballageGroupeTypeModel = new AnnexeEmballageGroupeTypeModel();
+        $idFtaConditionnment = $annexeEmballageGroupeTypeModel->getEmballageGroupeUVC();
+        $ftaConditionnmentModel = new FtaConditionnementModel($idFtaConditionnment);
+        $franck = $annexeEmballageGroupeTypeModel->getEmballageGroupeUVC();
+        $htmlEmballageUVC = new HtmlSubForm();
+
+        $htmlEmballageUVC->setArrayContent($idFtaConditionnment);
+
+
+        return $htmlEmballageUVC->getHtmlViewedContent()
+        ;
+    }
+    public function getHtmlEmballagePalette() {
+        $annexeEmballageGroupeTypeModel = new AnnexeEmballageGroupeTypeModel(4);
+        $idFtaConditionnment = $annexeEmballageGroupeTypeModel->getEmballageGroupePalette();
+        $ftaConditionnmentModel = new FtaConditionnementModel($idFtaConditionnment);
+        $className=$ftaConditionnmentModel->getClassName();
+        $label=$annexeEmballageGroupeTypeModel->getDataField(AnnexeEmballageGroupeTypeModel::FIELDNAME_NOM_ANNEXE_EMBALLAGE_GROUPE_TYPE)->getFieldValue();
+        $htmlEmballagePalette = new HtmlSubForm($idFtaConditionnment,$className,$label);
+
+
+
+        return $htmlEmballagePalette->getHtmlViewedContent()
+        ;
+    }
+
     public function getHtmlCommentaireChapitre() {
         $return = NULL;
 
@@ -334,7 +361,7 @@ class FtaView {
         $htmlNombreColisUVC = new HtmlInputText();
 
         $htmlNombreColisUVC->setLabel(DatabaseDescription::getFieldDocLabel(FtaModel::TABLENAME, FtaModel::FIELDNAME_NOMBRE_UVC_PAR_CARTON));
-        $htmlNombreColisUVC->getAttributes()->getValue()->setValue($return[FtaModel::FIELDNAME_PCB]);
+        $htmlNombreColisUVC->getAttributes()->getValue()->setValue($return[FtaModel::FIELDNAME_NOMBRE_UVC_PAR_CARTON]);
         $htmlNombreColisUVC->setIsEditable(FALSE);
 
         return $htmlNombreColisUVC->getHtmlResult();

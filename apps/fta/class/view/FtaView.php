@@ -207,13 +207,17 @@ class FtaView {
         return $htmlEmballageUVC->getHtmlViewedContent()
         ;
     }
+
     public function getHtmlEmballagePalette() {
         $annexeEmballageGroupeTypeModel = new AnnexeEmballageGroupeTypeModel(4);
         $idFtaConditionnment = $annexeEmballageGroupeTypeModel->getEmballageGroupePalette();
+       // $arrayEmballage = $annexeEmballageGroupeTypeModel->getArrayEmballageGroupePalette();
         $ftaConditionnmentModel = new FtaConditionnementModel($idFtaConditionnment);
-        $className=$ftaConditionnmentModel->getClassName();
-        $label=$annexeEmballageGroupeTypeModel->getDataField(AnnexeEmballageGroupeTypeModel::FIELDNAME_NOM_ANNEXE_EMBALLAGE_GROUPE_TYPE)->getFieldValue();
-        $htmlEmballagePalette = new HtmlSubForm($idFtaConditionnment,$className,$label);
+        $arrayFtaConditionnement = FtaConditionnementModel::getArrayFtaConditonnement($idFtaConditionnment);
+        $className = $ftaConditionnmentModel->getClassName();
+       // $className = $annexeEmballageGroupeTypeModel->getClassNameAnnexeEmballage();
+        $label = $annexeEmballageGroupeTypeModel->getDataField(AnnexeEmballageGroupeTypeModel::FIELDNAME_NOM_ANNEXE_EMBALLAGE_GROUPE_TYPE)->getFieldValue();
+        $htmlEmballagePalette = new HtmlSubForm($arrayFtaConditionnement, $className, $label);
 
 
 

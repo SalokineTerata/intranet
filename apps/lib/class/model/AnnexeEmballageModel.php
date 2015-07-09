@@ -34,21 +34,60 @@ class AnnexeEmballageModel extends AbstractModel {
                 . "=" . AnnexeEmballageModel::TABLENAME . "." . AnnexeEmballageModel::FIELDNAME_ID_ANNEXE_EMBALLAGE_GROUPE;
 
         $arrayIdAnnexeEmballage = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray($req);
-       if($arrayIdAnnexeEmballage){
-        foreach ($arrayIdAnnexeEmballage as $rowsIdAnnexeEmballage) {
-            $IdAnnexeEmballage[] = $rowsIdAnnexeEmballage[AnnexeEmballageModel::KEYNAME];
+        if ($arrayIdAnnexeEmballage) {
+            foreach ($arrayIdAnnexeEmballage as $rowsIdAnnexeEmballage) {
+                $IdAnnexeEmballage[] = $rowsIdAnnexeEmballage[AnnexeEmballageModel::KEYNAME];
+            }
+        } else {
+            $IdAnnexeEmballage = 0;
         }
-       }else {
-           $IdAnnexeEmballage=0;
-       }
 
         return $IdAnnexeEmballage;
+    }
+
+    public static function getArrayFtaConditonnement($paramIdFtaConditionnement) {
+
+        $result = DatabaseOperation::query(
+                        "SELECT " . FtaConditionnementModel::FIELDNAME_HAUTEUR_EMBALLAGE_FTA_CONDITIONNEMENT
+                        . "," . FtaConditionnementModel::FIELDNAME_NOMBRE_COUCHE_FTA_CONDITIONNEMENT
+                        . "," . FtaConditionnementModel::FIELDNAME_LARGEUR_FTA_CONDITIONNEMENT
+                        . "," . FtaConditionnementModel::FIELDNAME_LONGUEUR_FTA_CONDITIONNEMENT
+                        . "," . FtaConditionnementModel::FIELDNAME_POIDS_FTA_CONDITIONNEMENT
+                        . "," . FtaConditionnementModel::FIELDNAME_QUANTITE_PAR_COUCHE_FTA_CONDITIONNEMENT
+                        . " FROM " . FtaConditionnementModel::TABLENAME
+                        . " WHERE " . FtaConditionnementModel::KEYNAME . "=" . $paramIdFtaConditionnement);
+
+
+
+        return $array;
+    }
+
+    public static function getIdAnnexeEmballage2($paramIdEmballageGroupe) {
+
+        $req = "SELECT DISTINCT " . AnnexeEmballageModel::KEYNAME
+                . "," . AnnexeEmballageModel::FIELDNAME_LARGEUR_ANNEXE_EMBALLAGE
+                . "," . AnnexeEmballageModel::FIELDNAME_HAUTEUR_ANNEXE_EMBALLAGE
+                . "," . AnnexeEmballageModel::FIELDNAME_NOMBRE_COUCHE_ANNEXE_EMBALLAGE
+                . "," . AnnexeEmballageModel::FIELDNAME_POIDS_ANNEXE_EMBALLAGE
+                . "," . AnnexeEmballageModel::TABLENAME . "." . AnnexeEmballageModel::FIELDNAME_ID_ANNEXE_EMBALLAGE_GROUPE
+                . "," . AnnexeEmballageModel::FIELDNAME_QUANTITE_PAR_COUCHE_ANNEXE_EMBALLAGE
+                . " FROM " . AnnexeEmballageGroupeModel::TABLENAME . "," . AnnexeEmballageModel::TABLENAME . " WHERE ( 0 ";
+
+        $req .= AnnexeEmballageGroupeModel::AddIdAnnexeEmballageGroupe($paramIdEmballageGroupe);
+
+        $req .= ") AND " . AnnexeEmballageGroupeModel::TABLENAME . "." . AnnexeEmballageGroupeModel::KEYNAME
+                . "=" . AnnexeEmballageModel::TABLENAME . "." . AnnexeEmballageModel::FIELDNAME_ID_ANNEXE_EMBALLAGE_GROUPE;
+
+        $result = DatabaseOperation::query($req);
+        $array = DatabaseOperation::convertSqlResultWithKeyAsFirstFieldToArray($result);
+
+        return $array;
     }
 
     public static function AddIdAnnexeEmballage($paramIdEmballage) {
         if ($paramIdEmballage) {
             foreach ($paramIdEmballage as $value) {
-                $req .= " OR "  . AnnexeEmballageModel::KEYNAME . "=" . $value . " ";
+                $req .= " OR " . AnnexeEmballageModel::KEYNAME . "=" . $value . " ";
             }
         }
         return $req;

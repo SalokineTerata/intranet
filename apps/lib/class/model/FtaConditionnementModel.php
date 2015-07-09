@@ -141,6 +141,23 @@ class FtaConditionnementModel extends AbstractModel {
         return $IdFtaConditionnement;
     }
 
+    public static function getArrayFtaConditonnement($paramIdFtaConditionnement) {
+
+        $result = DatabaseOperation::query(
+                        "SELECT " . FtaConditionnementModel::FIELDNAME_HAUTEUR_EMBALLAGE_FTA_CONDITIONNEMENT
+                        . "," . FtaConditionnementModel::FIELDNAME_NOMBRE_COUCHE_FTA_CONDITIONNEMENT
+                        . "," . FtaConditionnementModel::FIELDNAME_LARGEUR_FTA_CONDITIONNEMENT
+                        . "," . FtaConditionnementModel::FIELDNAME_LONGUEUR_FTA_CONDITIONNEMENT
+                        . "," . FtaConditionnementModel::FIELDNAME_POIDS_FTA_CONDITIONNEMENT
+                        . "," . FtaConditionnementModel::FIELDNAME_QUANTITE_PAR_COUCHE_FTA_CONDITIONNEMENT
+                        . " FROM " . FtaConditionnementModel::TABLENAME
+                        . " WHERE " . FtaConditionnementModel::KEYNAME . "=" . $paramIdFtaConditionnement);
+        
+        $array = DatabaseOperation::convertSqlResultWithKeyAsFirstFieldToArray($result);
+
+        return $array;
+    }
+
 }
 
 ?>

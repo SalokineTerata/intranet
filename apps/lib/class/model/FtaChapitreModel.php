@@ -188,7 +188,7 @@ class FtaChapitreModel extends AbstractModel {
         $id_fta_workflow = $modelFta->getDataField(FtaModel::FIELDNAME_WORKFLOW)->getFieldValue();
         $ftaWorkflowModel = new FtaWorkflowModel($id_fta_workflow);
         $id_parent_intranet_actions = $ftaWorkflowModel->getDataField(FtaWorkflowModel::FIELDNAME_ID_INTRANET_ACTIONS)->getFieldValue();
-        $id_intranet_actions[] = IntranetActionsModel::getIdIntranetActionsFromIdParentActionNavigation($id_parent_intranet_actions);
+        $id_intranet_actions[] = IntranetActionsModel::getIdIntranetActionsRoleFromIdParentActionNavigation($id_parent_intranet_actions);
         $id_actions_role = FtaActionRoleModel::getIdFtaActionRoleFromIdIntranetAtions($id_intranet_actions);
         $ftaActionRoleModel = new FtaActionRoleModel($id_actions_role);
 

@@ -61,7 +61,7 @@ class FtaEtatModel extends AbstractModel {
                                 . " FROM " . FtaSuiviProjetModel::TABLENAME . "," . FtaWorkflowStructureModel::TABLENAME
                                 . ", " . FtaProcessusCycleModel::TABLENAME . ", " . FtaModel::TABLENAME
                                 . " , " . GeoModel::TABLENAME . " , " . FtaActionSiteModel::TABLENAME
-                                . " , " . IntranetActionsModel::TABLENAME
+                                . " , " . IntranetActionsModel::TABLENAME . " , " . IntranetDroitsAccesModel::TABLENAME
                                 . " WHERE " . FtaWorkflowStructureModel::TABLENAME . "." . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_PROCESSUS
                                 . " in (SELECT DISTINCT " . FtaProcessusCycleModel::FIELDNAME_PROCESSUS_INIT
                                 . " FROM " . FtaProcessusCycleModel::TABLENAME . " , " . FtaProcessusModel::TABLENAME
@@ -101,7 +101,10 @@ class FtaEtatModel extends AbstractModel {
                                 . " AND " . IntranetActionsModel::TABLENAME . "." . IntranetActionsModel::KEYNAME
                                 . " AND " . FtaActionSiteModel::TABLENAME . "." . FtaActionSiteModel::FIELDNAME_ID_INTRANET_ACTIONS
                                 . "=" . IntranetActionsModel::TABLENAME . "." . IntranetActionsModel::KEYNAME
-                                . " AND " . FtaActionSiteModel::TABLENAME . "." . FtaActionSiteModel::FIELDNAME_ID_SITE . "=" . $paramLieuGeo // Nous recuperons la localisation de l'utilisateur
+                                . " AND " . IntranetActionsModel::TABLENAME . "." . IntranetActionsModel::KEYNAME
+                                . "=" . IntranetDroitsAccesModel::TABLENAME . "." . IntranetDroitsAccesModel::FIELDNAME_ID_INTRANET_ACTIONS
+                                . " AND " . IntranetDroitsAccesModel::FIELDNAME_ID_USER . "=" . $paramIdUser // L'utilisateur connecté
+                                . " AND " . IntranetDroitsAccesModel::TABLENAME . "." . IntranetDroitsAccesModel::FIELDNAME_NIVEAU_INTRANET_DROITS_ACCES . "=1"
                                 . " AND " . GeoModel::KEYNAME . "=" . FtaModel::FIELDNAME_SITE_ASSEMBLAGE
                 );
 
@@ -122,9 +125,7 @@ class FtaEtatModel extends AbstractModel {
 
                 $array[AccueilFta::VALUE_1] = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray($req);
 
-                $req = "SELECT DISTINCT " . FtaWorkflowModel::FIELDNAME_DESCRIPTION_FTA_WORKFLOW
-                        . "," . FtaWorkflowModel::FIELDNAME_NOM_FTA_WORKFLOW
-                        . "," . FtaWorkflowModel::TABLENAME . "." . FtaWorkflowModel::KEYNAME
+                $req = "SELECT DISTINCT " . FtaWorkflowModel::TABLENAME . ".*"
                         . " FROM " . FtaModel::TABLENAME . "," . FtaWorkflowModel::TABLENAME
                         . " WHERE ( 0 ";
 
@@ -152,7 +153,7 @@ class FtaEtatModel extends AbstractModel {
                                 . " FROM " . FtaSuiviProjetModel::TABLENAME . ", " . FtaWorkflowStructureModel::TABLENAME
                                 . ", " . FtaProcessusCycleModel::TABLENAME . ", " . FtaModel::TABLENAME
                                 . " , " . GeoModel::TABLENAME . " , " . FtaActionSiteModel::TABLENAME
-                                . " , " . IntranetActionsModel::TABLENAME
+                                . " , " . IntranetActionsModel::TABLENAME . " , " . IntranetDroitsAccesModel::TABLENAME
                                 . " WHERE " . FtaWorkflowStructureModel::TABLENAME . "." . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_PROCESSUS
                                 . " in (SELECT DISTINCT " . FtaProcessusCycleModel::FIELDNAME_PROCESSUS_NEXT
                                 . " FROM " . FtaProcessusCycleModel::TABLENAME . ", " . FtaProcessusModel::TABLENAME
@@ -192,7 +193,10 @@ class FtaEtatModel extends AbstractModel {
                                 . " AND " . IntranetActionsModel::TABLENAME . "." . IntranetActionsModel::KEYNAME
                                 . " AND " . FtaActionSiteModel::TABLENAME . "." . FtaActionSiteModel::FIELDNAME_ID_INTRANET_ACTIONS
                                 . "=" . IntranetActionsModel::TABLENAME . "." . IntranetActionsModel::KEYNAME
-                                . " AND " . FtaActionSiteModel::TABLENAME . "." . FtaActionSiteModel::FIELDNAME_ID_SITE . "=" . $paramLieuGeo // Nous recuperons la localisation de l'utilisateur
+                                . " AND " . IntranetActionsModel::TABLENAME . "." . IntranetActionsModel::KEYNAME
+                                . "=" . IntranetDroitsAccesModel::TABLENAME . "." . IntranetDroitsAccesModel::FIELDNAME_ID_INTRANET_ACTIONS
+                                . " AND " . IntranetDroitsAccesModel::FIELDNAME_ID_USER . "=" . $paramIdUser // L'utilisateur connecté
+                                . " AND " . IntranetDroitsAccesModel::TABLENAME . "." . IntranetDroitsAccesModel::FIELDNAME_NIVEAU_INTRANET_DROITS_ACCES . "=1"
                                 . " AND " . GeoModel::KEYNAME . "=" . FtaModel::FIELDNAME_SITE_ASSEMBLAGE
                 );
                 if ($arrayTmp) {
@@ -212,9 +216,7 @@ class FtaEtatModel extends AbstractModel {
                 $array[AccueilFta::VALUE_1] = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray($req);
 
 
-                $req = "SELECT DISTINCT " . FtaWorkflowModel::FIELDNAME_DESCRIPTION_FTA_WORKFLOW
-                        . "," . FtaWorkflowModel::FIELDNAME_NOM_FTA_WORKFLOW
-                        . "," . FtaWorkflowModel::TABLENAME . "." . FtaWorkflowModel::KEYNAME
+                $req = "SELECT DISTINCT " . FtaWorkflowModel::TABLENAME . ".*"
                         . " FROM " . FtaModel::TABLENAME . "," . FtaWorkflowModel::TABLENAME
                         . " WHERE ( 0 ";
 
@@ -242,7 +244,7 @@ class FtaEtatModel extends AbstractModel {
                                 . " FROM " . FtaSuiviProjetModel::TABLENAME . ", " . FtaWorkflowStructureModel::TABLENAME
                                 . ", " . FtaProcessusCycleModel::TABLENAME . ", " . FtaModel::TABLENAME
                                 . " , " . GeoModel::TABLENAME . " , " . FtaActionSiteModel::TABLENAME
-                                . " , " . IntranetActionsModel::TABLENAME
+                                . " , " . IntranetActionsModel::TABLENAME . " , " . IntranetDroitsAccesModel::TABLENAME
                                 . " WHERE " . FtaWorkflowStructureModel::TABLENAME . "." . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_PROCESSUS
                                 . " in (SELECT DISTINCT " . FtaProcessusCycleModel::FIELDNAME_PROCESSUS_INIT
                                 . " FROM " . FtaProcessusCycleModel::TABLENAME . ", " . FtaProcessusModel::TABLENAME
@@ -282,7 +284,10 @@ class FtaEtatModel extends AbstractModel {
                                 . " AND " . IntranetActionsModel::TABLENAME . "." . IntranetActionsModel::KEYNAME
                                 . " AND " . FtaActionSiteModel::TABLENAME . "." . FtaActionSiteModel::FIELDNAME_ID_INTRANET_ACTIONS
                                 . "=" . IntranetActionsModel::TABLENAME . "." . IntranetActionsModel::KEYNAME
-                                . " AND " . FtaActionSiteModel::TABLENAME . "." . FtaActionSiteModel::FIELDNAME_ID_SITE . "=" . $paramLieuGeo // Nous recuperons la localisation de l'utilisateur
+                                . " AND " . IntranetActionsModel::TABLENAME . "." . IntranetActionsModel::KEYNAME
+                                . "=" . IntranetDroitsAccesModel::TABLENAME . "." . IntranetDroitsAccesModel::FIELDNAME_ID_INTRANET_ACTIONS
+                                . " AND " . IntranetDroitsAccesModel::FIELDNAME_ID_USER . "=" . $paramIdUser // L'utilisateur connecté
+                                . " AND " . IntranetDroitsAccesModel::TABLENAME . "." . IntranetDroitsAccesModel::FIELDNAME_NIVEAU_INTRANET_DROITS_ACCES . "=1"
                                 . " AND " . GeoModel::KEYNAME . "=" . FtaModel::FIELDNAME_SITE_ASSEMBLAGE
                 );
 
@@ -305,9 +310,7 @@ class FtaEtatModel extends AbstractModel {
 
                 $array[AccueilFta::VALUE_1] = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray($req);
 
-                $req = "SELECT DISTINCT " . FtaWorkflowModel::FIELDNAME_DESCRIPTION_FTA_WORKFLOW
-                        . "," . FtaWorkflowModel::FIELDNAME_NOM_FTA_WORKFLOW
-                        . "," . FtaWorkflowModel::TABLENAME . "." . FtaWorkflowModel::KEYNAME
+                $req = "SELECT DISTINCT " . FtaWorkflowModel::TABLENAME . ".*"
                         . " FROM " . FtaModel::TABLENAME . "," . FtaWorkflowModel::TABLENAME
                         . " WHERE ( 0 ";
 
@@ -334,9 +337,7 @@ class FtaEtatModel extends AbstractModel {
 
 
                 $array[AccueilFta::VALUE_2] = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
-                                "SELECT DISTINCT " . FtaWorkflowModel::FIELDNAME_DESCRIPTION_FTA_WORKFLOW
-                                . "," . FtaWorkflowModel::FIELDNAME_NOM_FTA_WORKFLOW
-                                . "," . FtaWorkflowModel::TABLENAME . "." . FtaWorkflowModel::KEYNAME
+                                "SELECT DISTINCT " . FtaWorkflowModel::TABLENAME . ".*"
                                 . " FROM " . FtaModel::TABLENAME . "," . FtaWorkflowModel::TABLENAME
                                 . " WHERE " . FtaModel::FIELDNAME_ID_FTA_ETAT . "=" . $paramEtat
                                 . " AND " . FtaModel::TABLENAME . "." . FtaModel::FIELDNAME_WORKFLOW

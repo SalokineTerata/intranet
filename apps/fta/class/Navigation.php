@@ -122,7 +122,7 @@ class Navigation {
         $id_fta_workflow = $modelFta->getDataField(FtaModel::FIELDNAME_WORKFLOW)->getFieldValue();
         $ftaWorkflowModel = new FtaWorkflowModel($id_fta_workflow);
         $id_parent_intranet_actions = $ftaWorkflowModel->getDataField(FtaWorkflowModel::FIELDNAME_ID_INTRANET_ACTIONS)->getFieldValue();
-        $id_intranet_actions[] = IntranetActionsModel::getIdIntranetActionsFromIdParentActionNavigation($id_parent_intranet_actions);
+        $id_intranet_actions[] = IntranetActionsModel::getIdIntranetActionsRoleFromIdParentActionNavigation($id_parent_intranet_actions);
         $id_actions_role = FtaActionRoleModel::getIdFtaActionRoleFromIdIntranetAtions($id_intranet_actions);
         $ftaActionRoleModel = new FtaActionRoleModel($id_actions_role);
 
@@ -192,16 +192,20 @@ class Navigation {
                     //Liste des processus visible(lecture-seule)
                     if ($taux_validation_processus == 1 or $taux_validation_processus === NULL) {
                         $ProcessusPrecedentVisible[] = $rows[FtaProcessusModel::KEYNAME];
+                        /*
+                         * Il s'agit du controle des processus multisite,
+                         * les droits d'accès à cette Fta étatn controlé précédement je désactive la focntion
+                         */
 
-                        foreach ($ProcessusPrecedentVisible as $rowsProcessusVisible) {
-                            $multisite_fta_processus = FtaProcessusModel::CheckProcessusMultiSite($rowsProcessusVisible);
-
-                            if ($multisite_fta_processus) {
-                                //Oui, il s'agit d'un Processus répartie sur les sites d'assemblage
-                                $ProcessusPrecedentVisibleTmp[] = self::CheckMultiSite($rowsProcessusVisible);
-                                $ProcessusPrecedentVisible = $ProcessusPrecedentVisibleTmp;
-                            }
-                        }
+//                        foreach ($ProcessusPrecedentVisible as $rowsProcessusVisible) {
+//                            $multisite_fta_processus = FtaProcessusModel::CheckProcessusMultiSite($rowsProcessusVisible);
+//
+//                            if ($multisite_fta_processus) {
+//                                //Oui, il s'agit d'un Processus répartie sur les sites d'assemblage
+//                                $ProcessusPrecedentVisibleTmp[] = self::CheckMultiSite($rowsProcessusVisible);
+//                                $ProcessusPrecedentVisible = $ProcessusPrecedentVisibleTmp;
+//                            }
+//                        }
                     }
                 }//Fin du balayage
 
@@ -525,50 +529,53 @@ class Navigation {
         return $req;
     }
 
-    protected static function CheckMultiSite($paramRows) {
-        $globalconfig = new GlobalConfig();
-        $paramLieuGeo = $globalconfig->getAuthenticatedUser()->getLieuGeo();
-//Existe-il une configuration de gestion forcée pour ce processus et ce site d'assemblage ?
-        $arrayGestion = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
-                        "SELECT " . FtaProcessusMultisiteModel::FIELDNAME_ID_SITE_PROCESSUS_FTA_PROCESSUS_MULTISITE
-                        . " FROM " . FtaProcessusMultisiteModel::TABLENAME
-                        . "," . FtaModel::TABLENAME
-                        . " WHERE " . FtaProcessusMultisiteModel::FIELDNAME_ID_SITE_ASSEMBLAGE_FTA_PROCESSUS_MULTISITE
-                        . "=" . FtaModel::FIELDNAME_SITE_ASSEMBLAGE
-                        . " AND " . FtaProcessusMultisiteModel::FIELDNAME_ID_SITE_PROCESSUS_FTA_PROCESSUS_MULTISITE
-                        . "= '" . $paramRows . "' "
-                        . " AND " . FtaModel::KEYNAME . "=" . self::$id_fta
-        );
+    /*
+     * Il s'agit du controle des processus multisite,
+     * les droits d'accès à cette Fta étatn controlé précédement je désactive la focntion
+     */
+    /* protected static function CheckMultiSite($paramRows) {
+      $globalconfig = new GlobalConfig();
+      $paramLieuGeo = $globalconfig->getAuthenticatedUser()->getLieuGeo();
+      //Existe-il une configuration de gestion forcée pour ce processus et ce site d'assemblage ?
+      $arrayGestion = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
+      "SELECT " . FtaProcessusMultisiteModel::FIELDNAME_ID_SITE_PROCESSUS_FTA_PROCESSUS_MULTISITE
+      . " FROM " . FtaProcessusMultisiteModel::TABLENAME
+      . "," . FtaModel::TABLENAME
+      . " WHERE " . FtaProcessusMultisiteModel::FIELDNAME_ID_SITE_ASSEMBLAGE_FTA_PROCESSUS_MULTISITE
+      . "=" . FtaModel::FIELDNAME_SITE_ASSEMBLAGE
+      . " AND " . FtaProcessusMultisiteModel::FIELDNAME_ID_SITE_PROCESSUS_FTA_PROCESSUS_MULTISITE
+      . "= '" . $paramRows . "' "
+      . " AND " . FtaModel::KEYNAME . "=" . self::$id_fta
+      );
 
-        if ($arrayGestion) {
-            foreach ($arrayGestion as $rowsGestion) {
-                $id_geo = $rowsGestion[FtaProcessusMultisiteModel::FIELDNAME_ID_SITE_PROCESSUS_FTA_PROCESSUS_MULTISITE];
-            }
-        } else {
-            //Sinon, Vérification de l'égalité entre le site d'assemblage de la FTA et le site de Localisation de l'utilisateur
-            $arrayEgalite = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
-                            "SELECT " . GeoModel::KEYNAME
-                            . " FROM " . FtaModel::TABLENAME
-                            . "," . GeoModel::TABLENAME
-                            . " WHERE " . FtaModel::KEYNAME
-                            . "=" . self::$id_fta
-                            . " AND " . FtaModel::FIELDNAME_SITE_ASSEMBLAGE
-                            . "=" . GeoModel::FIELDNAME_ID_SITE
-            );
+      if ($arrayGestion) {
+      foreach ($arrayGestion as $rowsGestion) {
+      $id_geo = $rowsGestion[FtaProcessusMultisiteModel::FIELDNAME_ID_SITE_PROCESSUS_FTA_PROCESSUS_MULTISITE];
+      }
+      } else {
+      //Sinon, Vérification de l'égalité entre le site d'assemblage de la FTA et le site de Localisation de l'utilisateur
+      $arrayEgalite = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
+      "SELECT " . GeoModel::KEYNAME
+      . " FROM " . FtaModel::TABLENAME
+      . "," . GeoModel::TABLENAME
+      . " WHERE " . FtaModel::KEYNAME
+      . "=" . self::$id_fta
+      . " AND " . FtaModel::FIELDNAME_SITE_ASSEMBLAGE
+      . "=" . GeoModel::FIELDNAME_ID_SITE
+      );
 
-            if ($arrayEgalite) {
-                foreach ($arrayEgalite as $rowsEgalite) {
-                    $id_geo = $rowsEgalite [GeoModel::KEYNAME];
-                }
-            }
-            if ($id_geo == $paramLieuGeo) {
-                //L'égalité est respecté, donc ce processus est bien en cours
-                $paramT_Processus_Encours = $paramRows;
-            } else {
-                $paramT_Processus_Encours = 0;
-            }
-        }
-        return $paramT_Processus_Encours;
-    }
-
+      if ($arrayEgalite) {
+      foreach ($arrayEgalite as $rowsEgalite) {
+      $id_geo = $rowsEgalite [GeoModel::KEYNAME];
+      }
+      }
+      if ($id_geo == $paramLieuGeo) {
+      //L'égalité est respecté, donc ce processus est bien en cours
+      $paramT_Processus_Encours = $paramRows;
+      } else {
+      $paramT_Processus_Encours = 0;
+      }
+      }
+      return $paramT_Processus_Encours;
+      } */
 }

@@ -174,6 +174,11 @@ class FtaProcessusModel extends AbstractModel {
         return $return;
     }
 
+    /*
+     * Il s'agit du controle des processus multisite,
+     * les droits d'accès à cette Fta étatn controlé précédement je désactive la focntion
+     */
+
     public static function CheckProcessusMultiSite($paramRows) {
 
         //Ce processus en cours, est-il du type repartie ou centralisé ?
@@ -190,7 +195,13 @@ class FtaProcessusModel extends AbstractModel {
         return $multisiteFtaProcessus;
     }
 
-    public static function CheckProcessusSiteOrSociete($paramRows,$paramIdFta) {
+    /*
+     * Il s'agit du controle des processus multisite,
+     * les droits d'accès à cette Fta étatn controlé précédement je désactive la focntion
+     * Cette focntion est imcomplète, il manque la notion de controle des processus
+     */
+
+    public static function CheckProcessusSiteOrSociete($paramRows, $paramIdFta) {
         $globalconfig = new GlobalConfig();
         $idUser = $globalconfig->getAuthenticatedUser()->getKeyValue();
         $paramLieuGeo = $globalconfig->getAuthenticatedUser()->getLieuGeo();

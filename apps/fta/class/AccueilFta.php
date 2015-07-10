@@ -30,6 +30,8 @@ class AccueilFta {
     const VALUE_8 = 8;
     const VALUE_9 = 9;
     const VALUE_10 = 10;
+    const VALUE_11 = 11;
+    const VALUE_12 = 12;
 
     protected static $abrevationFtaEtat;
     protected static $arrayFtaEtat;
@@ -37,6 +39,7 @@ class AccueilFta {
     protected static $arrayFtaWorkflow;
     protected static $arrayIdFtaAndIdWorkflow;
     protected static $arrayIdFtaByUserAndWorkflow;
+    protected static $arraNameSiteByWorkflow;
     protected static $idFtaRole;
     protected static $idFtaEtat;
     protected static $idUser;
@@ -75,132 +78,16 @@ class AccueilFta {
 
         self::$arrayIdFtaByUserAndWorkflow = UserModel::getIdFtaByUserAndWorkflow(self::$arrayIdFtaAndIdWorkflow[AccueilFta::VALUE_1], self::$orderBy);
 
+        self::$arraNameSiteByWorkflow = IntranetActionsModel::getNameSiteByWorkflow(self::$idUser, self::$arrayIdFtaAndIdWorkflow[AccueilFta::VALUE_2]);
+
         self::$nombreFta = count(self::$arrayIdFtaByUserAndWorkflow);
     }
 
-    public static function getTableauSythese($paramWhere) {
+    public static function getTableauSythese() {
 
-        /*
-         * Initilisation
-         */
-        $globalConfig = new GlobalConfig();
-        self::$idUser = $globalConfig->getAuthenticatedUser()->getKeyValue();
-        $userModel = new UserModel(self::$idUser);
-        $lieuGeo = $userModel->getDataField(UserModel::FIELDNAME_LIEU_GEO)->getFieldValue();
-
-        //L'utilisateur possède-t-il au moins un processus monosite ?
-        if (self::$idUser) {
-            $arrayDroitAcces = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
-                            "SELECT DISTINCT " . IntranetDroitsAccesModel::TABLENAME . "." . IntranetDroitsAccesModel::FIELDNAME_ID_USER
-                            . " FROM " . IntranetModulesModel::TABLENAME
-                            . ", " . IntranetDroitsAccesModel::TABLENAME
-                            . ", " . IntranetActionsModel::TABLENAME
-                            . ", " . FtaProcessusModel::TABLENAME
-                            . ", " . FtaActionRoleModel::TABLENAME
-                            . ", " . FtaWorkflowStructureModel::TABLENAME
-                            . " WHERE ( " . IntranetModulesModel::TABLENAME . "." . IntranetModulesModel::KEYNAME
-                            . "=" . IntranetDroitsAccesModel::TABLENAME . "." . IntranetDroitsAccesModel::FIELDNAME_ID_INTRANET_MODULES
-                            . " AND " . IntranetActionsModel::TABLENAME . "." . IntranetActionsModel::KEYNAME
-                            . "=" . IntranetDroitsAccesModel::TABLENAME . "." . IntranetDroitsAccesModel::FIELDNAME_ID_INTRANET_ACTIONS
-                            . " AND " . FtaWorkflowStructureModel::TABLENAME . "." . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_ROLE
-                            . "=" . FtaProcessusModel::TABLENAME . "." . FtaProcessusModel::FIELDNAME_ID_FTA_ROLE
-                            . " AND " . FtaWorkflowStructureModel::TABLENAME . "." . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_PROCESSUS
-                            . "=" . FtaProcessusModel::TABLENAME . "." . FtaProcessusModel::KEYNAME
-                            . " AND " . FtaWorkflowStructureModel::TABLENAME . "." . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_ROLE
-                            . "=" . FtaActionRoleModel::TABLENAME . "." . FtaActionRoleModel::FIELDNAME_ID_FTA_ROLE
-                            . " AND " . IntranetActionsModel::TABLENAME . "." . IntranetActionsModel::KEYNAME
-                            . "=" . FtaActionRoleModel::TABLENAME . "." . FtaActionRoleModel::FIELDNAME_ID_INTRANET_ACTIONS . " ) "
-                            . " AND ( ( " . IntranetDroitsAccesModel::TABLENAME . "." . IntranetDroitsAccesModel::FIELDNAME_ID_USER
-                            . "=" . self::$idUser . " "
-                            . " AND " . FtaProcessusModel::TABLENAME . "." . FtaProcessusModel::FIELDNAME_MULTISITE_FTA_PROCESSUS . "= 0 "
-                            . " AND " . IntranetDroitsAccesModel::TABLENAME . "." . IntranetDroitsAccesModel::FIELDNAME_NIVEAU_INTRANET_DROITS_ACCES . " > 0 ) )"
-            );
-
-            /*
-             * a tester avec la qualité
-             */
-            //Si ce n'est pas le cas, la vision de l'utilisateur est restreint à son site de rattachement.
-            if (!$arrayDroitAcces) {
-                $arrayIdSite = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
-                                "SELECT " . GeoModel::FIELDNAME_ID_SITE
-                                . " FROM " . GeoModel::TABLENAME
-                                . " WHERE " . GeoModel::KEYNAME . "=" . $lieuGeo
-                );
-                foreach ($arrayIdSite as $rowsIsSite) {
-                    $paramWhere .= " AND (" . FtaModel::TABLENAME . "." . FtaModel::FIELDNAME_SITE_ASSEMBLAGE . "=" . $rowsIsSite . " OR " . FtaModel::FIELDNAME_SITE_ASSEMBLAGE . " = 0 ";
-
-                    //Ajout des délégations de processus cf. fta_processus_multisite
-                    //Selection des processus multisite où l'utilisateur à accès
-                    $arrayDeleg = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
-                                    "SELECT id_site_assemblage_fta_processus_multisite "
-                                    . " FROM " . IntranetModulesModel::TABLENAME
-                                    . ", " . IntranetDroitsAccesModel::TABLENAME
-                                    . ", " . IntranetActionsModel::TABLENAME
-                                    . ", " . FtaProcessusModel::TABLENAME
-                                    . ", " . FtaActionRoleModel::TABLENAME
-                                    . ", " . FtaWorkflowStructureModel::TABLENAME
-                                    . ", " . FtaProcessusMultisiteModel::TABLENAME
-                                    . " WHERE ( " . IntranetModulesModel::TABLENAME . "." . IntranetModulesModel::KEYNAME
-                                    . " = " . IntranetDroitsAccesModel::TABLENAME . "." . IntranetDroitsAccesModel::FIELDNAME_ID_INTRANET_MODULES
-                                    . " AND " . IntranetActionsModel::TABLENAME . "." . IntranetActionsModel::KEYNAME
-                                    . " = " . IntranetDroitsAccesModel::TABLENAME . "." . IntranetDroitsAccesModel::FIELDNAME_ID_INTRANET_ACTIONS
-                                    . " AND " . FtaWorkflowStructureModel::TABLENAME . "." . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_ROLE
-                                    . " = " . FtaProcessusModel::TABLENAME . "." . FtaProcessusModel::FIELDNAME_ID_FTA_ROLE
-                                    . " AND " . FtaWorkflowStructureModel::TABLENAME . "." . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_PROCESSUS
-                                    . " = " . FtaProcessusModel::TABLENAME . "." . FtaProcessusModel::KEYNAME
-                                    . " AND " . FtaWorkflowStructureModel::TABLENAME . "." . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_ROLE
-                                    . " = " . FtaActionRoleModel::TABLENAME . "." . FtaActionRoleModel::FIELDNAME_ID_FTA_ROLE
-                                    . " AND " . IntranetActionsModel::TABLENAME . "." . IntranetActionsModel::KEYNAME
-                                    . " = " . FtaActionRoleModel::TABLENAME . "." . FtaActionRoleModel::FIELDNAME_ID_INTRANET_ACTIONS . ") "
-                                    . " AND ( ( " . IntranetDroitsAccesModel::TABLENAME . "." . IntranetDroitsAccesModel::FIELDNAME_ID_USER
-                                    . "=" . self::$idUser . " "
-                                    . " AND " . FtaProcessusModel::TABLENAME . "." . FtaProcessusModel::FIELDNAME_MULTISITE_FTA_PROCESSUS . "= 0 "
-                                    . " AND " . IntranetDroitsAccesModel::TABLENAME . "." . IntranetDroitsAccesModel::FIELDNAME_NIVEAU_INTRANET_DROITS_ACCES . " > 0 ) )"
-                                    . " AND " . FtaProcessusMultisiteModel::TABLENAME . "." . FtaProcessusMultisiteModel::FIELDNAME_ID_PROCESSUS_FTA_PROCESSUS_MULTISITE
-                                    . "=" . FtaProcessusModel::TABLENAME . "." . FtaProcessusModel::KEYNAME
-                                    . " AND id_site_processus_fta_processus_multisite =" . $rowsIsSite[GeoModel::FIELDNAME_ID_SITE]
-                    );
-                    if ($arrayDeleg) {
-                        foreach ($arrayDeleg as $rowsFtaEtat) {
-                            $paramWhere .= "OR " . FtaModel::TABLENAME . "." . FtaModel::FIELDNAME_SITE_ASSEMBLAGE . "=" . $rowsFtaEtat["id_site_assemblage_fta_processus_multisite"] . " ";
-                        }
-                    }
-
-                    $paramWhere .= " ) ";
-                }
-            }
-
-            /*
-             * Liste des fta dont l'utilisateur à accès selon ces droits et sa position géographique
-             */
-//            $arrayFta = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
-//                            "SELECT COUNT( DISTINCT " . FtaModel::TABLENAME . "." . FtaModel::KEYNAME . " ) AS nombre_fiche "
-//                            . "," . FtaEtatModel::FIELDNAME_ABREVIATION . "," . FtaEtatModel::FIELDNAME_NOM_FTA_ETAT
-//                            . "," . FtaModel::TABLENAME . "." . FtaModel::FIELDNAME_ID_FTA_ETAT . "," . FtaModel::TABLENAME . "." . FtaModel::FIELDNAME_SITE_ASSEMBLAGE
-//                            . " FROM " . FtaModel::TABLENAME
-//                            . "," . FtaEtatModel::TABLENAME
-//                            . "," . FtaWorkflowModel::TABLENAME
-//                            . "," . GeoModel::TABLENAME
-//                            . "," . FtaActionSiteModel::TABLENAME
-//                            . "," . IntranetActionsModel::TABLENAME
-//                            . " WHERE " . FtaEtatModel::TABLENAME . "." . FtaEtatModel::KEYNAME
-//                            . "=" . FtaModel::TABLENAME . "." . FtaModel::FIELDNAME_ID_FTA_ETAT
-//                            . " AND " . FtaWorkflowModel::TABLENAME . "." . FtaWorkflowModel::KEYNAME
-//                            . "=" . FtaModel::TABLENAME . "." . FtaModel::FIELDNAME_WORKFLOW
-//                            . " AND " . FtaWorkflowModel::TABLENAME . "." . FtaWorkflowModel::FIELDNAME_ID_INTRANET_ACTIONS
-//                            . "=" . IntranetActionsModel::TABLENAME . "." . IntranetActionsModel::FIELDNAME_PARENT_INTRANET_ACTIONS
-//                            . " AND " . IntranetActionsModel::TABLENAME . "." . IntranetActionsModel::KEYNAME
-//                            . "=" . FtaActionSiteModel::TABLENAME . "." . FtaActionSiteModel::FIELDNAME_ID_INTRANET_ACTIONS
-//                            . " AND " . GeoModel::TABLENAME . "." . GeoModel::FIELDNAME_ID_SITE
-//                            . "=" . FtaActionSiteModel::TABLENAME . "." . FtaActionSiteModel::FIELDNAME_ID_SITE
-////                            . " AND " . GeoModel::TABLENAME . "." . GeoModel::FIELDNAME_ID_SITE
-////                            . "=" . $lieuGeo
-//                            . "$paramWhere"
-//                            . " GROUP BY " . FtaModel::TABLENAME . "." . FtaModel::FIELDNAME_ID_FTA_ETAT
-//            );
-        }
-
-        $tableau_synthese = AccueilFta::getHtmlTableauSythese(self::$arrayFtaRole, self::$arrayFtaEtat, self::$arrayIdFtaAndIdWorkflow[AccueilFta::VALUE_2], self::$abrevationFtaEtat, self::$idFtaRole, self::$syntheseAction);
+        $tableau_synthese = AccueilFta::getHtmlTableauSythese(self::$arrayFtaRole, self::$arrayFtaEtat, self::$abrevationFtaEtat, self::$idFtaRole, self::$syntheseAction);
+        $tableau_syntheseWorkflow = AccueilFta::getHtmlTableauSytheseWorkflow(self::$arrayIdFtaAndIdWorkflow[AccueilFta::VALUE_2], self::$arraNameSiteByWorkflow);
+        $tableau_synthese.=$tableau_syntheseWorkflow;
         return $tableau_synthese;
     }
 
@@ -213,7 +100,7 @@ class AccueilFta {
         return $tableau_synthese;
     }
 
-    public static function getHtmlTableauSythese($paramRole, $paramEtat, $paramWorkflow, $paramNomEtat, $paramIdFtaRole, $paramSyntheseAction) {
+    private static function getHtmlTableauSythese($paramRole, $paramEtat, $paramNomEtat, $paramIdFtaRole, $paramSyntheseAction) {
 
         $idKeyNameFtaEtat = AccueilFta::VALUE_0;
         $tableau_synthese = "";
@@ -298,35 +185,100 @@ class AccueilFta {
                  * Entête de la barre de navigation de la page d'accueil
                  */
                 . "<TR>"
-                . "<TH>Role </TH> <TH>Etat FTA</TH> <TH>Etat d'Avancement</TH><TH >Espace de Travail</TH>"
+                . "<TH>Role </TH> <TH>Etat FTA</TH> <TH>Etat d'Avancement</TH>"
                 . "</TR>";
         /*
          * Données du tableau
          */
-        $tableau_synthese .= self::getLineSynthese($paramRole, $paramEtat, $paramIdFtaRole, $paramNomEtat, $paramSyntheseAction, $lien, $paramWorkflow, $idFieldNomFtaRole = AccueilFta::VALUE_0, $idKeyNameFtaEtat = AccueilFta::VALUE_0, $idKeyValueFtaEtatAvancement = AccueilFta::VALUE_0, $idKeyNameFtaWorkflow = AccueilFta::VALUE_0);
-        $tableau_synthese .= self::getLineSynthese($paramRole, $paramEtat, $paramIdFtaRole, $paramNomEtat, $paramSyntheseAction, $lien, $paramWorkflow, $idFieldNomFtaRole = AccueilFta::VALUE_1, $idKeyNameFtaEtat = AccueilFta::VALUE_1, $idKeyValueFtaEtatAvancement = AccueilFta::VALUE_1, $idKeyNameFtaWorkflow = AccueilFta::VALUE_1);
-        $tableau_synthese .= self::getLineSynthese($paramRole, $paramEtat, $paramIdFtaRole, $paramNomEtat, $paramSyntheseAction, $lien, $paramWorkflow, $idFieldNomFtaRole = AccueilFta::VALUE_2, $idKeyNameFtaEtat = AccueilFta::VALUE_2, $idKeyValueFtaEtatAvancement = AccueilFta::VALUE_2, $idKeyNameFtaWorkflow = AccueilFta::VALUE_2);
-        $tableau_synthese .= self::getLineSynthese($paramRole, $paramEtat, $paramIdFtaRole, $paramNomEtat, $paramSyntheseAction, $lien, $paramWorkflow, $idFieldNomFtaRole = AccueilFta::VALUE_3, $idKeyNameFtaEtat = AccueilFta::VALUE_3, $idKeyValueFtaEtatAvancement = AccueilFta::VALUE_3, $idKeyNameFtaWorkflow = AccueilFta::VALUE_3);
-        $tableau_synthese .= self::getLineSynthese($paramRole, $paramEtat, $paramIdFtaRole, $paramNomEtat, $paramSyntheseAction, $lien, $paramWorkflow, $idFieldNomFtaRole = AccueilFta::VALUE_4, $idKeyNameFtaEtat = AccueilFta::VALUE_4, $idKeyValueFtaEtatAvancement = AccueilFta::VALUE_3, $idKeyNameFtaWorkflow = AccueilFta::VALUE_4);
-        $tableau_synthese .= self::getLineSynthese($paramRole, $paramEtat, $paramIdFtaRole, $paramNomEtat, $paramSyntheseAction, $lien, $paramWorkflow, $idFieldNomFtaRole = AccueilFta::VALUE_5, $idKeyNameFtaEtat = AccueilFta::VALUE_5, $idKeyValueFtaEtatAvancement = AccueilFta::VALUE_3, $idKeyNameFtaWorkflow = AccueilFta::VALUE_5);
+        $tableau_synthese .= self::getLineSynthese($paramRole, $paramEtat, $paramIdFtaRole, $paramNomEtat, $paramSyntheseAction, $lien, $idFieldNomFtaRole = AccueilFta::VALUE_0, $idKeyNameFtaEtat = AccueilFta::VALUE_0, $idKeyValueFtaEtatAvancement = AccueilFta::VALUE_0);
+        $tableau_synthese .= self::getLineSynthese($paramRole, $paramEtat, $paramIdFtaRole, $paramNomEtat, $paramSyntheseAction, $lien, $idFieldNomFtaRole = AccueilFta::VALUE_1, $idKeyNameFtaEtat = AccueilFta::VALUE_1, $idKeyValueFtaEtatAvancement = AccueilFta::VALUE_1);
+        $tableau_synthese .= self::getLineSynthese($paramRole, $paramEtat, $paramIdFtaRole, $paramNomEtat, $paramSyntheseAction, $lien, $idFieldNomFtaRole = AccueilFta::VALUE_2, $idKeyNameFtaEtat = AccueilFta::VALUE_2, $idKeyValueFtaEtatAvancement = AccueilFta::VALUE_2);
+        $tableau_synthese .= self::getLineSynthese($paramRole, $paramEtat, $paramIdFtaRole, $paramNomEtat, $paramSyntheseAction, $lien, $idFieldNomFtaRole = AccueilFta::VALUE_3, $idKeyNameFtaEtat = AccueilFta::VALUE_3, $idKeyValueFtaEtatAvancement = AccueilFta::VALUE_3);
+        $tableau_synthese .= self::getLineSynthese($paramRole, $paramEtat, $paramIdFtaRole, $paramNomEtat, $paramSyntheseAction, $lien, $idFieldNomFtaRole = AccueilFta::VALUE_4, $idKeyNameFtaEtat = AccueilFta::VALUE_4, $idKeyValueFtaEtatAvancement = AccueilFta::VALUE_3);
+        $tableau_synthese .= self::getLineSynthese($paramRole, $paramEtat, $paramIdFtaRole, $paramNomEtat, $paramSyntheseAction, $lien, $idFieldNomFtaRole = AccueilFta::VALUE_5, $idKeyNameFtaEtat = AccueilFta::VALUE_5, $idKeyValueFtaEtatAvancement = AccueilFta::VALUE_3);
 
         return $tableau_synthese;
     }
 
+    private static function getHtmlTableauSytheseWorkflow($paramWorkflow, $paramNameSiteByWorkflow) {
+        $bgcolor = "bgcolor = #3CDA31 ";
+
+        /*
+         * Debut de la ligne
+         */
+        $tableau_synthese = "<TABLE $bgcolor width=100%>"
+                . "<TR   >"
+                . "<td> Espace de Travail :</td>";
+
+        /*
+         * Infobulle affichant le noms des sites de production des fta par workflow
+         */
+        $paramNameSite0 = self::getNameSiteByWorkflow($paramNameSiteByWorkflow, $idKeyNameFtaSite = AccueilFta::VALUE_0);
+        $paramNameSite1 = self::getNameSiteByWorkflow($paramNameSiteByWorkflow, $idKeyNameFtaSite = AccueilFta::VALUE_1);
+        $paramNameSite2 = self::getNameSiteByWorkflow($paramNameSiteByWorkflow, $idKeyNameFtaSite = AccueilFta::VALUE_2);
+        $paramNameSite3 = self::getNameSiteByWorkflow($paramNameSiteByWorkflow, $idKeyNameFtaSite = AccueilFta::VALUE_3);
+        $paramNameSite4 = self::getNameSiteByWorkflow($paramNameSiteByWorkflow, $idKeyNameFtaSite = AccueilFta::VALUE_4);
+        $paramNameSite5 = self::getNameSiteByWorkflow($paramNameSiteByWorkflow, $idKeyNameFtaSite = AccueilFta::VALUE_5);
+
+        $paramNameSite = array_merge($paramNameSite0, $paramNameSite1, $paramNameSite2, $paramNameSite3, $paramNameSite4, $paramNameSite5);
+
+        /**
+         * Element de la ligne
+         */
+        $tableau_synthese .=self::getLineSyntheseWorkflow($paramWorkflow, $idKeyNameFtaWorkflow = AccueilFta::VALUE_0, $paramNameSite, $idKeyNameFtaSite = AccueilFta::VALUE_0);
+        $tableau_synthese .=self::getLineSyntheseWorkflow($paramWorkflow, $idKeyNameFtaWorkflow = AccueilFta::VALUE_1, $paramNameSite, $idKeyNameFtaSite = AccueilFta::VALUE_1);
+        $tableau_synthese .=self::getLineSyntheseWorkflow($paramWorkflow, $idKeyNameFtaWorkflow = AccueilFta::VALUE_2, $paramNameSite, $idKeyNameFtaSite = AccueilFta::VALUE_2);
+        $tableau_synthese .=self::getLineSyntheseWorkflow($paramWorkflow, $idKeyNameFtaWorkflow = AccueilFta::VALUE_3, $paramNameSite, $idKeyNameFtaSite = AccueilFta::VALUE_3);
+        $tableau_synthese .=self::getLineSyntheseWorkflow($paramWorkflow, $idKeyNameFtaWorkflow = AccueilFta::VALUE_4, $paramNameSite, $idKeyNameFtaSite = AccueilFta::VALUE_4);
+        $tableau_synthese .=self::getLineSyntheseWorkflow($paramWorkflow, $idKeyNameFtaWorkflow = AccueilFta::VALUE_5, $paramNameSite, $idKeyNameFtaSite = AccueilFta::VALUE_5);
+        $tableau_synthese .= "<TR >"
+                . "</TABLE>";
+
+        return $tableau_synthese;
+    }
+
+    /*
+     * fonction de mise e forme recuperant tous les nom des site dont l'utilisateur à les droits d'accès par workflow
+     */
+
+    private static function getNameSiteByWorkflow($paramNameSiteByWorkflow, $idKeyNameFtaSite) {
+        $codeSautDeLigne = "&#013";
+        if ($paramNameSiteByWorkflow[$idKeyNameFtaSite]) {
+            $paramNameSiteByWorkflow = $paramNameSiteByWorkflow[$idKeyNameFtaSite];
+        } else {
+            $paramNameSiteByWorkflow;
+        }
+        for ($i = 0; $i < count($paramNameSiteByWorkflow); $i++) {
+            $paramNameSite[$idKeyNameFtaSite] .= $paramNameSiteByWorkflow[$i][IntranetActionsModel::FIELDNAME_DESCRIPTION_INTRANET_ACTIONS] . $codeSautDeLigne;
+        }
+        return $paramNameSite;
+    }
+
+    private static function getLineSyntheseWorkflow($paramArrayWorkflow, $idKeyNameFtaWorkflow, $paramNameSiteByWorkflow, $idKeyNameFtaSite) {
+
+        return "<td>"
+                . "<a href=#"
+                . $paramArrayWorkflow[$idKeyNameFtaWorkflow][FtaWorkflowModel::FIELDNAME_NOM_FTA_WORKFLOW]
+                . " title= " . $paramNameSiteByWorkflow[$idKeyNameFtaSite] . " >"
+                . $paramArrayWorkflow[$idKeyNameFtaWorkflow][FtaWorkflowModel::FIELDNAME_DESCRIPTION_FTA_WORKFLOW]
+                . "</a>"
+                . "</td>"
+
+        ;
+    }
+
     private static function getLineSynthese(
-    $paramArrayRole, $paramArrayEtat, $idFtaRole, $nomFtaEtat, $paramSyntheseAction, $lien, $paramArrayWorkflow, $idFieldNomFtaRole, $idKeyNameFtaEtat, $idKeyValueFtaEtatAvancement, $idKeyNameFtaWorkflow
+    $paramArrayRole, $paramArrayEtat, $idFtaRole, $nomFtaEtat, $paramSyntheseAction, $lien, $idFieldNomFtaRole, $idKeyNameFtaEtat, $idKeyValueFtaEtatAvancement
     ) {
-        $bgcolor = " ";
         $color = "";
         $color1 = "";
         $color2 = "";
-        if ($paramArrayRole[$idFieldNomFtaRole][FtaRoleModel::KEYNAME]) {
-            $bgcolor = "bgcolor = #3CDA31 ";
 
-            if ($paramArrayRole[$idFieldNomFtaRole][FtaRoleModel::KEYNAME] == $idFtaRole) {
-                $color = "bgcolor=#AAAAFF";
-            }
+
+        if ($paramArrayRole[$idFieldNomFtaRole][FtaRoleModel::KEYNAME] == $idFtaRole) {
+            $color = "bgcolor=#AAAAFF";
         }
+
         if ($paramArrayEtat[$idKeyNameFtaEtat][FtaEtatModel::FIELDNAME_ABREVIATION] == $nomFtaEtat) {
             $color1 = "bgcolor=#AAAAFF";
         }
@@ -354,7 +306,7 @@ class AccueilFta {
 
 
         return "<TR>"
-                . "<td $color  id='" . $paramArrayRole[$idFieldNomFtaRole][FtaRoleModel::FIELDNAME_NOM_FTA_ROLE] . "'> "
+                . "<td $color w id='" . $paramArrayRole[$idFieldNomFtaRole][FtaRoleModel::FIELDNAME_NOM_FTA_ROLE] . "'> "
                 . "<a href=index.php?id_fta_etat=" . $paramArrayEtat[AccueilFta::VALUE_0][FtaEtatModel::KEYNAME]
                 . "&nom_fta_etat=" . $paramArrayEtat[AccueilFta::VALUE_0][FtaEtatModel::FIELDNAME_ABREVIATION]
                 . "&id_fta_role=" . $paramArrayRole[$idFieldNomFtaRole][FtaRoleModel::KEYNAME]
@@ -373,12 +325,6 @@ class AccueilFta {
                 . "</a>"
                 . "</td>"
                 . "<td $color2 >" . $lien[$idKeyValueFtaEtatAvancement]
-                . "</td>"
-                . "<td $bgcolor >"
-                . "<a href=#"
-                . $paramArrayWorkflow[$idKeyNameFtaWorkflow][FtaWorkflowModel::FIELDNAME_NOM_FTA_WORKFLOW] . "  >"
-                . $paramArrayWorkflow[$idKeyNameFtaWorkflow][FtaWorkflowModel::FIELDNAME_DESCRIPTION_FTA_WORKFLOW]
-                . "</a>"
                 . "</td>"
                 . "</TR>"
         ;
@@ -422,8 +368,11 @@ class AccueilFta {
         $tableauFiche .= "<th><a href=" . $URL . "&order_common=Site_de_production><img src=../lib/images/order-AZ.png title=\"mini_fleche_centre\"  border=\"0\" /></a>"
                 . "Site"
                 . "</th><th>"
-                . "<a href=" . $URL . "&order_common=id_classification_arborescence_article><img src=../lib/images/order-AZ.png title=\"mini_fleche_centre\"  border=\"0\" /></a>"
+                . "<a href=" . $URL . "&order_common=id_fta><img src=../lib/images/order-AZ.png title=\"mini_fleche_centre\"  border=\"0\" /></a>"
                 . "Client"
+                . "</th><th>"
+                . "<a href=" . $URL . "&order_common=suffixe_agrologic_fta><img src=../lib/images/order-AZ.png title=\"mini_fleche_centre\"  border=\"0\" /></a>"
+                . "Class."
                 . "</th><th>"
                 . "<a href=" . $URL . "&order_common=designation_commerciale_fta><img src=../lib/images/order-AZ.png title=\"mini_fleche_centre\"  border=\"0\" /></a>"
                 . "Produits"
@@ -453,10 +402,10 @@ class AccueilFta {
                 $workflowName = $rowsDetail[FtaWorkflowModel::FIELDNAME_NOM_FTA_WORKFLOW];
 
                 if ($tmp <> $workflowDescription) {
-
+                    $nombreDeCellule = AccueilFta::VALUE_12;
                     $tableauFiche .= "<tbody  id='" . $workflowName . "' >"
                             . "<tr class=contenu>"
-                            . "<td  class=titre COLSPAN=11>" . $workflowDescription . "</td>"
+                            . "<td  class=titre COLSPAN=" . $nombreDeCellule . ">" . $workflowDescription . "</td>"
                             . "</tr>";
                     $tmp = $rowsDetail[FtaWorkflowModel::FIELDNAME_DESCRIPTION_FTA_WORKFLOW];
                 }
@@ -597,11 +546,9 @@ class AccueilFta {
                 /*
                  * Classification
                  */
-                if (!$suffixeAgrologicFta) {
-                    $classification = $temp2[2];
-                } else {
-                    $classification = $suffixeAgrologicFta;
-                }
+
+                $classification = $temp2[2];
+
 
                 /*
                  * Nom de l'assistante de projet responsable:
@@ -724,7 +671,7 @@ class AccueilFta {
                  * Noms des services dans lequel la Fta se trouve
                  */
 
-                $arrayService = FtaRoleModel::getNameRoleEncoursByIdFta($idFta,$idWorkflowFtaEncours);
+                $arrayService = FtaRoleModel::getNameRoleEncoursByIdFta($idFta, $idWorkflowFtaEncours);
                 if ($arrayService) {
                     foreach ($arrayService as $rowsService) {
                         $service .= $rowsService[FtaRoleModel::FIELDNAME_DESCRIPTION_FTA_ROLE] . "<br>";
@@ -745,12 +692,13 @@ class AccueilFta {
                     if ($createurFta <> $createurTmp) {
 
                         $tableauFiche .= "<tr class=contenu>"
-                                . "<td COLSPAN=11 ><font size=2 >" . $createurPrenom . " " . $createurNom . " </td>"
+                                . "<td COLSPAN=" . $nombreDeCellule . " ><font size=2 >" . $createurPrenom . " " . $createurNom . " </td>"
                                 . "</tr>"
                                 . "<tr class=contenu >"
                                 . "<td $bgcolor_header width=\"" . $selection_width . "\" > $icon_header $selection</td>"//Ordre de priorisation
                                 . "<td $bgcolor width=8%>" . $nomSiteProduction . "</td>"//Site
                                 . "<td $bgcolor width=6%>" . $classification . "</td>"//Client
+                                . "<td $bgcolor width=6%>" . $suffixeAgrologicFta . "</td>"//Class.
                                 . "<td $bgcolor $largeur_html_C1><a title=$createur_link />" . $din . "</a></td>"// Produits
                                 . "<td $bgcolor width=3%>" . $idDossierFta . "v" . $idVersionDossierFta . "</td>"//Dossier Fta
                                 . "<td $bgcolor width=\"6%\"> <b><font size=\"2\" color=\"#0000FF\">" . $codeArticleLdc . "</font></b></td>"; //Code regate
@@ -770,6 +718,7 @@ class AccueilFta {
                                 . "<td $bgcolor_header width=\"" . $selection_width . "\" > $icon_header $selection</td>"//Ordre de priorisation
                                 . "<td $bgcolor width=8%>" . $nomSiteProduction . "</td>"//Site
                                 . "<td $bgcolor width=6%>" . $classification . "</td>"//Client
+                                . "<td $bgcolor width=6%>" . $suffixeAgrologicFta . "</td>"//Class.
                                 . "<td $bgcolor $largeur_html_C1><a title=$createur_link />" . $din . "</a></td>"// Produits
                                 . "<td $bgcolor width=3%>" . $idDossierFta . "v" . $idVersionDossierFta . "</td>"//Dossier Fta
                                 . "<td $bgcolor width=\"6%\"> <b><font size=\"2\" color=\"#0000FF\">" . $codeArticleLdc . "</font></b></td>"; //Code regate
@@ -797,12 +746,13 @@ class AccueilFta {
                          * Nouvelle ligne pour créateur
                          */
                         $tableauFicheTmp .= "<tr class=contenu>"
-                                . "<td COLSPAN=11 > <font size=2 >" . $createurPrenom . " " . $createurNom . " </td>"
+                                . "<td COLSPAN=" . $nombreDeCellule . " > <font size=2 >" . $createurPrenom . " " . $createurNom . " </td>"
                                 . "</tr>"
                                 . "<tr class=contenu >"
                                 . "<td $bgcolor_header width=\"" . $selection_width . "\" > $icon_header $selection</td>"//Ordre de priorisation
                                 . "<td $bgcolor width=8%>" . $nomSiteProduction . "</td>"//Site
                                 . "<td $bgcolor width=6%>" . $classification . "</td>"//Client
+                                . "<td $bgcolor width=6%>" . $suffixeAgrologicFta . "</td>"//Class
                                 . "<td $bgcolor $largeur_html_C1><a title=$createur_link />" . $din . "</a></td>"// Produits
                                 . "<td $bgcolor width=3%>" . $idDossierFta . "v" . $idVersionDossierFta . "</td>"//Dossier Fta
                                 . "<td $bgcolor width=\"6%\"> <b><font size=\"2\" color=\"#0000FF\">" . $codeArticleLdc . "</font></b></td>"; //Code regate
@@ -822,6 +772,7 @@ class AccueilFta {
                                 . "<td $bgcolor_header width=\"" . $selection_width . "\" > $icon_header $selection</td>"//Ordre de priorisation
                                 . "<td $bgcolor width=8% >" . $nomSiteProduction . "</td>"//Site
                                 . "<td $bgcolor width=6%>" . $classification . "</td>"//Client
+                                . "<td $bgcolor width=6%>" . $suffixeAgrologicFta . "</td>"//Class
                                 . "<td $bgcolor $largeur_html_C1><a title=$createur_link />" . $din . "</a></td>"// Produits
                                 . "<td $bgcolor width=3%>" . $idDossierFta . "v" . $idVersionDossierFta . "</td>"//Dossier Fta
                                 . "<td $bgcolor width=\"6%\"> <b><font size=\"2\" color=\"#0000FF\">" . $codeArticleLdc . "</font></b></td>"; //Code regate

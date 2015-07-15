@@ -212,7 +212,7 @@ class DatabaseOperation {
                 $keys = array_keys($rows);
                 $key_value = $rows[$keys[0]];
 
-                //Suppression de la clef dans la liste des champs
+//Suppression de la clef dans la liste des champs
                 unset($rows[$keys[0]]);
                 $return[$key_value] = $rows;
                 $i++;
@@ -628,10 +628,91 @@ class DatabaseOperation {
         );
     }
 
+    /**
+     * Retourne un tableau contenant la liste des enregsitrements que les 
+     * tables ont en relation.
+     * Ces tables doivent être en relation N:N et configuré dans la base
+     * de données des informations des schémas:
+     *   - Voir INFORMATION_SCHEMA > KEY_COLUMN_USAGE dans MySQL
+     * 
+     * La valeur de retour est un tableau associatif sous la forme
+     * self::convertSqlResultWithKeyAsFirstFieldToArray()
+     * 
+     * En cas d'ambiguïté de nom de champs à sélectionner, préciser le nom
+     * de la table.
+     * Par exemple, si les table RN et RN ont toutes les deux un champs nommé
+     * "nom", alors préciser "R1.nom" ou "R2.nom" dans $arrayFieldsNameToDisplay
+     *
+     * @param string $primaryTableNameRN Nom de la table primaire de relation N
+     * @param array $secondaryTablesNamesAndidKeyValueRN Noms des tables secondaires de relation N et valeur des clefs étrangères
+     * @param string $arrayFieldsNameToDisplay Liste des champs à sélectionner.
+     * @param array $arrayFieldsNameOrder Liste des champs à classer.
+     * @return array de type self::convertSqlResultWithKeyAsFirstFieldToArray()
+     */
+    public static function getArrayFieldsNameFromForeignKeyRelationNtoN(
+    $primaryTableNameRN
+    , $secondaryTablesNamesAndidKeyValueRN
+    , $arrayFieldsNameToDisplay
+    , $arrayFieldsNameOrder = NULL
+    ) {
+
+        /**
+         * Nom de la clef de la table primaire N.
+         */
+        $tableDescriptionRN = new DatabaseDescriptionTable($primaryTableNameRN);
+        $keyNameRN = $tableDescriptionRN->getKeyName();
+
+
+        /**
+         * Construction de la requête SQL
+         */
+        $paramSelectClause = $primaryTableNameRN . "." . $keyNameRN . "," . $arrayFieldsNameToDisplay;
+        $paramTableClause = $primaryTableNameRN . DatabaseOperation::tableClauseRelationshipNtoN($secondaryTablesNamesAndidKeyValueRN);
+        $paramWhereClauseRelationship = " 1 " . DatabaseOperation::whereClauseRelationshipNtoN($primaryTableNameRN, $secondaryTablesNamesAndidKeyValueRN);
+
+        if ($arrayFieldsNameOrder) {
+            $paramOrderClause = implode(",", $arrayFieldsNameOrder);
+        }
+
+        return DatabaseOperation::convertSqlResultWithKeyAsFirstFieldToArray(
+                        self::doSqlSelect($paramSelectClause, $paramTableClause, $paramWhereClauseRelationship, $paramOrderClause)
+        );
+    }
+
     static public function createDatabaseConnection() {
         $ini_array = parse_ini_file("config_env_cod.ini");
         print_r($ini_array);
-        //$pdo = new PDO($dsn, $username, $passwd, $options);
+//$pdo = new PDO($dsn, $username, $passwd, $options);
+    }
+
+    static private function whereClauseRelationshipNtoN($paramPrimaryTableName, $paramSecondaryTableNamesAndIdKeyValue) {
+        if ($paramSecondaryTableNamesAndIdKeyValue) {
+            foreach ($paramSecondaryTableNamesAndIdKeyValue as $value) {
+                /**
+                 * Détermination des noms des champs  et de leur valeur constituant la relation N:1
+                 */
+                $secondaryTableName = $value[0];
+                $primaryTableForeignKeyNameRN = $value[1];
+                $ForeignKeyValue = $value[2];
+                /**
+                 * Nom de la clef de la table primaire N.
+                 */
+                $secondaryableDescriptionRN = new DatabaseDescriptionTable($value[0]);
+                $secondaryTableKeyNameRN = $secondaryableDescriptionRN->getKeyName();
+                $req .= " AND " . $paramPrimaryTableName . "." . $primaryTableForeignKeyNameRN . "=" . $secondaryTableName . "." . $secondaryTableKeyNameRN
+                        . " AND " . $secondaryTableName . "." . $secondaryTableKeyNameRN . "=" . $ForeignKeyValue;
+            }
+        }
+        return $req;
+    }
+
+    static private function tableClauseRelationshipNtoN($paramSecondaryTableNamesAndIdKeyValue) {
+        if ($paramSecondaryTableNamesAndIdKeyValue) {
+            foreach ($paramSecondaryTableNamesAndIdKeyValue as $value) {
+                $req .= " , " . $value[0];
+            }
+        }
+        return $req;
     }
 
 }

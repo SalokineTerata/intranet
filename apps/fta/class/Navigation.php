@@ -344,25 +344,28 @@ class Navigation {
                             }
                         }
 
-                        //Ce processus en cours, est-il du type repartie ou centralisé ?
-                        $reqType = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
-                                        "SELECT " . FtaProcessusModel::FIELDNAME_MULTISITE_FTA_PROCESSUS
-                                        . " FROM " . FtaProcessusModel::TABLENAME
-                                        . " WHERE " . FtaProcessusModel::KEYNAME
-                                        . "=" . $rows[FtaProcessusCycleModel::FIELDNAME_PROCESSUS_INIT]
-                        );
-                        if ($reqType) {
-                            foreach ($reqType as $rowsType) {
-                                $multisite_fta_processus = $rowsType[FtaProcessusModel::FIELDNAME_MULTISITE_FTA_PROCESSUS];
-                            }
-                            if ($multisite_fta_processus) {
-                                //Oui, il s'agit d'un Processus répartie sur les sites d'assemblage
-                                $ProcessusEncoursVisible[] = self::CheckMultiSite($rows[FtaProcessusCycleModel::FIELDNAME_PROCESSUS_INIT]);
-                            } else {
-                                //Enregistrement du processus en tant que processus en cours
-                                $ProcessusEncoursVisible[] = $rows[FtaProcessusCycleModel::FIELDNAME_PROCESSUS_INIT];
-                            }
-                        }
+                        /*
+                         * Désactivation des check de multisite voir FtaProcessusmodel::CheckMultisite
+                         */
+//                        //Ce processus en cours, est-il du type repartie ou centralisé ?
+//                        $reqType = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
+//                                        "SELECT " . FtaProcessusModel::FIELDNAME_MULTISITE_FTA_PROCESSUS
+//                                        . " FROM " . FtaProcessusModel::TABLENAME
+//                                        . " WHERE " . FtaProcessusModel::KEYNAME
+//                                        . "=" . $rows[FtaProcessusCycleModel::FIELDNAME_PROCESSUS_INIT]
+//                        );
+//                        if ($reqType) {
+//                            foreach ($reqType as $rowsType) {
+//                                $multisite_fta_processus = $rowsType[FtaProcessusModel::FIELDNAME_MULTISITE_FTA_PROCESSUS];
+//                            }
+//                            if ($multisite_fta_processus) {
+//                                //Oui, il s'agit d'un Processus répartie sur les sites d'assemblage
+//                                $ProcessusEncoursVisible[] = self::CheckMultiSite($rows[FtaProcessusCycleModel::FIELDNAME_PROCESSUS_INIT]);
+//                            } else {
+                        //Enregistrement du processus en tant que processus en cours
+                        $ProcessusEncoursVisible[] = $rows[FtaProcessusCycleModel::FIELDNAME_PROCESSUS_INIT];
+//                            }
+//                        }
                     }
                 }//Fin du balayage des processus non-validés
             }

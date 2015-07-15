@@ -190,8 +190,10 @@ require_once("../lib/class/html/DataFieldToHtmlListSelect.php");
 require_once("../lib/class/html/DataFieldToHtmlListBoolean.php");
 require_once("../lib/class/html/DataFieldToHtmlInputCalendar.php");
 require_once("../lib/class/html/DataFieldToHtmlTextArea.php");
-require_once("../lib/class/html/HtmlSubForm.php");
-require_once("../lib/class/html/DataFieldToHtmlSubform.php");
+require_once("../lib/class/html/HtmlSubForm_R1N.php");
+require_once("../lib/class/html/HtmlSubForm_RNN.php");
+require_once("../lib/class/html/DataFieldToHtmlSubForm_R1N.php");
+require_once("../lib/class/html/DataFieldToHtmlSubForm_RNN.php");
 
 // Session utilisateur
 require_once("../lib/session.php");

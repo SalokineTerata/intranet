@@ -206,7 +206,7 @@ class AccueilFta {
         /*
          * Debut de la ligne
          */
-        $tableau_synthese = "<TABLE $bgcolor width=100%>"
+        $tableau_synthese = "<TABLE  $bgcolor width=100%>"
                 . "<TR   >"
                 . "<td> Espace de Travail :</td>";
 
@@ -335,7 +335,6 @@ class AccueilFta {
 
         $largeur_html_C1 = "width=15%"; // largeur cellule type
         $largeur_html_C3 = "width=16%"; // largeur cellule type
-        $compteur_ligne = 1;
         $selection_width = "1%";
 
         $tableauFiche = "";
@@ -365,24 +364,25 @@ class AccueilFta {
         if (substr($URL, -2) == "in") {
             $URL = $URL . "tranet/apps/fta/index.php?";
         }
-        $tableauFiche .= "<th><a href=" . $URL . "&order_common=Site_de_production><img src=../lib/images/order-AZ.png title=\"mini_fleche_centre\"  border=\"0\" /></a>"
+        $tableauFiche .= "<th><a href=" . $URL . "&order_common=Site_de_production><img src=../lib/images/order-AZ.png title=\"Ordonné par Nom de Site de Production\"  border=\"0\" /></a>"
                 . "Site"
                 . "</th><th>"
-                . "<a href=" . $URL . "&order_common=id_fta><img src=../lib/images/order-AZ.png title=\"mini_fleche_centre\"  border=\"0\" /></a>"
+                . "<a href=" . $URL . "&order_common=id_fta><img src=../lib/images/order-AZ.png title=\"Ordonné par Nom du Propriétaire\"  border=\"0\" /></a>"
                 . "Client"
                 . "</th><th>"
-                . "<a href=" . $URL . "&order_common=suffixe_agrologic_fta><img src=../lib/images/order-AZ.png title=\"mini_fleche_centre\"  border=\"0\" /></a>"
+                . "<a href=" . $URL . "&order_common=suffixe_agrologic_fta><img src=../lib/images/order-AZ.png title=\"Ordonné par Nom de Classification\"  border=\"0\" /></a>"
                 . "Class."
                 . "</th><th>"
-                . "<a href=" . $URL . "&order_common=designation_commerciale_fta><img src=../lib/images/order-AZ.png title=\"mini_fleche_centre\"  border=\"0\" /></a>"
+                . "<a href=" . $URL . "&order_common=designation_commerciale_fta><img src=../lib/images/order-AZ.png title=\"Ordonné par Noms du Produit\"  border=\"0\" /></a>"
                 . "Produits"
                 . "</th><th>"
-                . "<a href=" . $URL . "&order_common=id_dossier_fta><img src=../lib/images/order-AZ.png title=\"mini_fleche_centre\"  border=\"0\" /></a>"
+                . "<a href=" . $URL . "&order_common=id_dossier_fta><img src=../lib/images/order-AZ.png title=\"Ordonné par code Fta\"  border=\"0\" /></a>"
                 . "Dossier FTA"
                 . "</th><th>"
-                . "<a href=" . $URL . "&order_common=code_article_ldc><img src=../lib/images/order-AZ.png title=\"mini_fleche_centre\"  border=\"0\" /></a>"
+                . "<a href=" . $URL . "&order_common=code_article_ldc><img src=../lib/images/order-AZ.png title=\"Ordonné par code arcadia\"  border=\"0\" /></a>"
                 . "Code Arcadia"
                 . "</th><th>"
+                 . "<a href=" . $URL . "&order_common=date_echeance_fta><img src=../lib/images/order-AZ.png title=\"Ordonné par Date\"  border=\"0\" /></a>"
                 . "Echéance de validation"
                 . "</th><th>"
                 . "% Avancement FTA"

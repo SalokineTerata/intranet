@@ -18,7 +18,7 @@
  */
 
 /**
- * Description of HtmlSubForm
+ * Description of HtmlSubForm_R1N
  * 
  * Permet de créer un sous formulaire dans un formulaire HTML.
  * Le sous formulaire est basé sur une requête dont le résultat retourne
@@ -29,7 +29,7 @@
  *
  * @author bs4300280
  */
-class HtmlSubForm extends AbstractHtmlList {
+class HtmlSubForm_R1N extends AbstractHtmlList {
 
     /**
      * Tableau PHP stockant le résultat de la requête sur laquelle est basée
@@ -231,6 +231,9 @@ class HtmlSubForm extends AbstractHtmlList {
                 . $this->getHtmlResultSubFormAddNewLine()
                 . $this->getHtmlResultSubFormEnd()
         ;
+    }
+    public function getHtmlAddContent() {
+        return ;
     }
 
     public function getHtmlViewedContent() {

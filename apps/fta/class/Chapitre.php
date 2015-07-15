@@ -730,6 +730,7 @@ class Chapitre {
         $id_fta = self::$id_fta;
         $synthese_action = self::$synthese_action;
         $isEditable = self::$is_editable;
+        $idChapitre = self::$id_fta_chapitre;
         AnnexeEmballageGroupeTypeModel::initEmballage($id_fta);
 
         //Identifiant FTA
@@ -751,7 +752,9 @@ class Chapitre {
         $bloc.="<tr class=titre_principal><td class>Emballage</td></tr>";
 
         $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_DESCRIPTION_EMBALLAGE);
-        $bloc.=$ftaView->getHtmlEmballagePalette();
+        $bloc.=$ftaView->getHtmlEmballageUVC($id_fta, $idChapitre,$synthese_action);
+        $bloc.=$ftaView->getHtmlEmballageParColis($id_fta,$idChapitre,$synthese_action);
+        $bloc.=$ftaView->getHtmlEmballagePalette($id_fta,$idChapitre,$synthese_action);
         /*
           //Selection de tous les types de groupe d'emballage
           $req = "SELECT * FROM annexe_emballage_groupe_type ORDER BY ordre_emballage_groupe_type";
@@ -981,6 +984,9 @@ class Chapitre {
         $id_fta = self::$id_fta;
         $synthese_action = self::$synthese_action;
         $isEditable = self::$is_editable;
+        $idChapitre = self::$id_fta_chapitre;
+        AnnexeEmballageGroupeTypeModel::initEmballage($id_fta);
+
 
         //Identifiant FTA
         $ftaModel = new FtaModel($id_fta);
@@ -994,6 +1000,8 @@ class Chapitre {
             •Quantité par couche
             •Couche par palette
             •Référence Palette</td></tr>";
+
+        $bloc.=$ftaView->getHtmlEmballageDuColis($id_fta,$idChapitre,$synthese_action);
 
         return $bloc;
     }
@@ -1872,7 +1880,7 @@ class Chapitre {
         /*
          * @todo Ajax : n'affiche pas les valeurs de la liste déroulante
          */
-        
+
         //Propriétaire
         $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_CLASSIFICATION_PROPRIETAIRE);
 
@@ -1893,7 +1901,7 @@ class Chapitre {
 
         //Saisonnalité
         $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_CLASSIFICATION_SAISONNALITE);
-        
+
 //        $bloc.="<tr class=titre_principal><td class>Estimations</td></tr>";
 //
 //
@@ -1941,7 +1949,7 @@ class Chapitre {
 //        $bloc.="<tr class=titre_principal><td class>Echéances</td></tr>";
 //
         //Date d'échéance des processus
-       $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_VIRTUAL_FTA_PROCESSUS_DELAI);
+        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_VIRTUAL_FTA_PROCESSUS_DELAI);
         /**        */
         return $bloc;
     }

@@ -37,6 +37,10 @@ class ModelTableAssociation {
         "fta" => "FtaModel",
         "fta_processus_delai" => "FtaProcessusDelaiModel",
         "fta_composant" => "FtaComposantModel",
+        "fta_conditionnement" => "FtaConditionnementModel",
+        "annexe_emballage_groupe" => "AnnexeEmballageGroupeModel",
+        "annexe_emballage_groupe_type" => "AnnexeEmballageGroupeTypeModel",
+        "annexe_emballage" => "AnnexeEmballageModel",
     );
 
     static public function getModelName($paramTableName) {

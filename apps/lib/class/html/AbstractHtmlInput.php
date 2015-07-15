@@ -55,6 +55,9 @@ abstract class AbstractHtmlInput extends AbstractHtmlGlobalElement {
     public function getHtmlViewedContent() {
         return Html::showValue($this->getAttributes()->getValue()->getValue());
     }
+    public function getHtmlAddContent() {
+        return ;
+    }
 
     function getHtmlEditableContent() {
 

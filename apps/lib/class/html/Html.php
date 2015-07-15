@@ -30,6 +30,7 @@ class Html {
     const TYPE_OF_OBJECT_INPUTTEXT = "INPUTTEXT";
     const TYPE_OF_OBJECT_LIST = "LIST";
     const TYPE_OF_OBJECT_SUBFORM_R1N = "SUBFORM_R1N";
+    const TYPE_OF_OBJECT_SUBFORM_RNN = "SUBFORM_RNN";
     const TYPE_OF_OBJECT_TEXTAREA = "TEXTAREA";
     const TYPE_OF_OBJECT_UNITE_AFFICHAGE = "UNITEAFFICHAGE";
     const TYPE_OF_OBJECT_UNITE_FACTURATION = "UNITEFACTURATION";
@@ -144,9 +145,10 @@ class Html {
     /**
      * Retourne l'objet Html associé au champ DataField
      * @param DatabaseDataField $paramDataField
+     * @param  $param
      * @return AbstractHtmlGlobalElement
      */
-    public static function getHtmlObjectFromDataField(DatabaseDataField $paramDataField) {
+    public static function getHtmlObjectFromDataField(DatabaseDataField $paramDataField, $param = FALSE ) {
         $htmlObject = NULL;
         $TypeOfHtmlObject = $paramDataField->getFieldTypeOfHtmlObject();
 
@@ -173,7 +175,11 @@ class Html {
                 break;
 
             case Html::TYPE_OF_OBJECT_SUBFORM_R1N:
-                $htmlObject = new DataFieldToHtmlSubform($paramDataField);
+                $htmlObject = new DataFieldToHtmlSubform_R1N($paramDataField);
+                break;
+
+            case Html::TYPE_OF_OBJECT_SUBFORM_RNN:
+                $htmlObject = new DataFieldToHtmlSubform_RNN($paramDataField, $param);
                 break;
 
             default:

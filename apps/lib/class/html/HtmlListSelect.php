@@ -24,7 +24,7 @@
  * @author bs4300280
  */
 class HtmlListSelect extends AbstractHtmlList {
-    
+
     /**
      * Object manipulant les attributs possible pour cet élément HTML
      * @var AttributesSelect
@@ -54,8 +54,6 @@ class HtmlListSelect extends AbstractHtmlList {
      * @var mixed $defaultValue
      */
     private $defaultValue;
-    
-    
 
     const LIST_EMPTY_VALUE = -1;
     const LIST_EMPTY_MESSAGE = "Aucun élément présent dans cette liste.";
@@ -96,6 +94,11 @@ class HtmlListSelect extends AbstractHtmlList {
             $return = self::LIST_NO_SELECTION_VALUE;
         }
         return $return;
+    }
+
+    public function getHtmlAddContent() {
+
+        return;
     }
 
     public function getHtmlEditableContent() {
@@ -288,6 +291,5 @@ class HtmlListSelect extends AbstractHtmlList {
          */
         $this->setArrayHtmlTagOption($array);
     }
-
 
 }

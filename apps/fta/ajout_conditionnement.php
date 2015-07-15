@@ -527,7 +527,7 @@ switch ($output) {
              <input type=\"hidden\" name=\"type_emballage_groupe\" value=\"$type_emballage_groupe\" />
              <input type=\"hidden\" name=\"id_annexe_emballage\" value=\"$id_annexe_emballage\" />
              <input type=\"hidden\" name=\"id_annexe_emballage_groupe\" value=\"$id_annexe_emballage_groupe\" />
-             <input type=\"hidden\" name=\"dimension_uvc_fta_confitionnement\" value=\"$dimension_uvc_fta_confitionnement\" />
+             <input type=\"hidden\" name=\"dimension_uvc_fta_confitionnement\" value=\"$dimension_uvc_fta_conditionnement\" />
 
              <$html_table>
              <tr class=titre_principal><td>

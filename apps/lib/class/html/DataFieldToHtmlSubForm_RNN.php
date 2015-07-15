@@ -1,7 +1,7 @@
 <?php
 
 /*
- * Copyright (C) 2015 bs4300280
+ * Copyright (C) 2015 tp4300001
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -18,30 +18,31 @@
  */
 
 /**
- * Description of TableRelationshipToHtmlSubform
+ * Description of TableRelationshipToHtmlSubform_RNN
  *
- * @author bs4300280
+ * @author tp4300001
  */
-class DataFieldToHtmlSubform extends HtmlSubForm {
+class DataFieldToHtmlSubform_RNN extends HtmlSubForm_RNN {
 
     /**
      * Créé un sous-formulaire HTML à partir d'un DataField
      * @param DatabaseDataField $paramDataField
+     * @param $paramSecondaryTableNamesAndIdKeyValue
      */
-    public function __construct(DatabaseDataField $paramDataField) {
-        $paramArrayContent = DatabaseOperation::getArrayFieldsNameFromForeignKeyRelationNtoOne(
-                        $paramDataField->getReferencedTableName()
-                        , $paramDataField->getTableName()
-                        , $paramDataField->getFieldValue()
-                        , explode(",", $paramDataField->getFieldsToDisplay())
-                        , explode(",", $paramDataField->getFieldsToOrder())
+    public function __construct(DatabaseDataField $paramDataField, $paramSecondaryTableNamesAndIdKeyValue) {
+        $paramArrayContent = DatabaseOperation::getArrayFieldsNameFromForeignKeyRelationNtoN(
+                        $paramDataField->getTableName()
+                        , $paramSecondaryTableNamesAndIdKeyValue
+                        , $paramDataField->getFieldsToDisplay()
+                        , explode(",", $paramDataField->getFieldsToOrder())//Modifiable
         );
         parent::__construct($paramArrayContent
-                , ModelTableAssociation::getModelName($paramDataField->getReferencedTableName())
+                , ModelTableAssociation::getModelName($paramDataField->getTableName())
                 , $paramDataField->getFieldLabel()
+                , $paramSecondaryTableNamesAndIdKeyValue
         );
-        $this->setArrayContentLocked(explode(",", $paramDataField->getFieldsToLock()));
         $this->setIsRightToAdd($paramDataField->getRightToAdd());
+
     }
 
 }

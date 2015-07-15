@@ -43,10 +43,10 @@
          {
            if($type_emballage_groupe==2)
            {
-               $dimension_uvc_fta_confitionnement=1;
+               $dimension_uvc_fta_conditionnement=1;
            }
            $bloc.= "
-                   <a href=ajout_conditionnement.php?id_fta=$id_fta&type_emballage_groupe=$type_emballage_groupe&id_fta_chapitre_encours=$id_fta_chapitre_encours&synthese_action=$synthese_action&dimension_uvc_fta_confitionnement=$dimension_uvc_fta_confitionnement>
+                   <a href=ajout_conditionnement.php?id_fta=$id_fta&type_emballage_groupe=$type_emballage_groupe&id_fta_chapitre_encours=$id_fta_chapitre_encours&synthese_action=$synthese_action&dimension_uvc_fta_confitionnement=$dimension_uvc_fta_conditionnement>
                    (Ajouter)
                    </a>
                    ";

@@ -106,6 +106,12 @@ abstract class AbstractHtmlGlobalElement {
     private $showLabel;
 
     /**
+     * Peut-on ajouter une donnée ?
+     * @var boolean
+     */
+    private $rightToAdd;
+
+    /**
      * Image à afficher en cas de modification de valeur
      * @var mixed 
      */
@@ -134,7 +140,7 @@ abstract class AbstractHtmlGlobalElement {
         $this->getAttributesGlobal()->getId()->setValue($paramId);
     }
 
-        function getShowLabel() {
+    function getShowLabel() {
         return $this->showLabel;
     }
 
@@ -187,6 +193,11 @@ abstract class AbstractHtmlGlobalElement {
      * Exemple de valeur de retour:
      */
     abstract public function getHtmlEditableContent();
+
+    /**
+     * Implémente le contenu HTML de l'objet lorsqu'il n'y a pas de donnée
+     */
+    abstract public function getHtmlAddContent();
 
     /**
      * Implémente le contenu HTML de l'objet lorsqu'il n'est pas éditable
@@ -261,6 +272,14 @@ abstract class AbstractHtmlGlobalElement {
         $this->label = $paramLabel;
     }
 
+    function getRightToAdd() {
+        return $this->rightToAdd;
+    }
+
+    function setRightToAdd($rightToAdd) {
+        $this->rightToAdd = $rightToAdd;
+    }
+
     public function getHtmlResult() {
 
         //Définition des variables locales
@@ -298,7 +317,11 @@ abstract class AbstractHtmlGlobalElement {
 
         //Contenu
         if ($this->getIsEditable()) {
-            $html_result .= $this->getHtmlEditableContent();
+            if ($this->getRightToAdd()) {
+                $html_result .= $this->getHtmlAddContent();
+            } else {
+                $html_result .= $this->getHtmlEditableContent();
+            }
         } else {
             $html_result .= $this->getHtmlViewedContent();
         }

@@ -382,7 +382,7 @@ class AccueilFta {
                 . "<a href=" . $URL . "&order_common=code_article_ldc><img src=../lib/images/order-AZ.png title=\"Ordonné par code arcadia\"  border=\"0\" /></a>"
                 . "Code Arcadia"
                 . "</th><th>"
-                 . "<a href=" . $URL . "&order_common=date_echeance_fta><img src=../lib/images/order-AZ.png title=\"Ordonné par Date\"  border=\"0\" /></a>"
+                . "<a href=" . $URL . "&order_common=date_echeance_fta><img src=../lib/images/order-AZ.png title=\"Ordonné par Date\"  border=\"0\" /></a>"
                 . "Echéance de validation"
                 . "</th><th>"
                 . "% Avancement FTA"
@@ -832,6 +832,44 @@ class AccueilFta {
                 . "</tr></table>";
 
         return $fileAriane;
+    }
+
+    /*
+      Fonction de création d'une liste déroulante basée sur une requete SQL
+      le premier champ retourné par la requête est désigné comme Clef de la liste
+      le second alimente le contenu de la liste déroulante
+     */
+
+    public static function afficherRequeteEnListeDeroulante($paramRequeteSQL, $paramIdDefaut, $paramNomDefaut) {
+        //Recherche de la clef
+        $result = DatabaseOperation::query($paramRequeteSQL);
+        $table =  mysql_fetch_array($result);
+        if (!$table) {//Si la liste est vide
+            $html_liste = "<i>(vide)</i>";
+        } else {
+            $key = array_keys($table);
+            if (!$paramNomDefaut) {
+            $paramNomDefaut = $key[1];
+            }
+
+            //Création de la liste déroulante
+            $html_liste = "<select name=$paramNomDefaut onChange=" . $paramNomDefaut . "_js()>";
+
+            //Création du contenu de la liste
+            $result = DatabaseOperation::query($paramRequeteSQL);
+            while ($rows = mysql_fetch_array($result)) {
+                if ($rows[0] == $paramIdDefaut) {
+                    $selected = " selected";
+                } else {
+                    $selected = "";
+                }
+
+                $html_liste .= "<option value=$rows[0]$selected>$rows[1]</option>";
+            }
+            $html_liste .= "</select>";
+        }//Fin de la construction de la liste
+
+        return $html_liste;
     }
 
     //function visualiser_fiches */

@@ -1,19 +1,5 @@
 <?php
 
-/*
-  Module d'appartenance (valeur obligatoire)
-  Par défaut, le nom du module est le répertoire courant
- */
-//   $module=substr(strrchr(`pwd`, '/'), 1);
-//   $module=trim($module);
-
-
-/*
-  Si la page peut être appelée depuis n'importe quel module,
-  décommentez la ligne suivante
- */
-
-//   $module='';
 //Sélection du mode de visualisation de la page
 switch ($output) {
 
@@ -37,14 +23,6 @@ switch ($output) {
         //include ("../lib/debut_page.php");      //Construction d'une nouvelle
         require_once '../inc/main.php';
         print_page_begin($disable_full_page, $menu_file);
-//        if (isset($menu))                       //Si existant, utilisation du menu demandé
-//        {                                       //en variable
-//           include ("./$menu");
-//        }
-//        else
-//        {
-//           include ("./menu_principal.inc");    //Sinon, menu par défaut
-//        }
 }//Fin de la sélection du mode d'affichage de la page
 
 
@@ -65,16 +43,29 @@ $html_table = "table "              //Permet d'harmoniser les tableaux
         . "width=100% "
         . "class=contenu "
 ;
+$idFta = Lib::getParameterFromRequest("id_fta");
+$idAnnexeEmballageGroupeType = Lib::getParameterFromRequest("id_annexe_emballage_groupe_type");
+$idAnnexeEmballageGroupe = Lib::getParameterFromRequest("id_annexe_emballage_groupe");
+$idAnnexeEmballage = Lib::getParameterFromRequest("id_annexe_emballage");
+$idFtaChapitreEncours = Lib::getParameterFromRequest("id_fta_chapitre");
+$syntheseAction = Lib::getParameterFromRequest("synthese_action");
+$action = Lib::getParameterFromRequest("action");
+$page_reload = Lib::getParameterFromRequest("page_reload");
+
+//Initialisation des modele
+$ftaModel = new FtaModel($idFta);
+$annexeEmballageGroupeTypeModel = new AnnexeEmballageGroupeTypeModel($idAnnexeEmballageGroupeType);
+$annexeEmballageGroupeModel = new AnnexeEmballageGroupeModel($idAnnexeEmballageGroupe);
+$annexeEmballageModel = new AnnexeEmballageModel($idAnnexeEmballage);
+
 
 /*
   Récupération des données MySQL
  */
-$id_annexe_emballage_groupe_type = $type_emballage_groupe;
+$id_annexe_emballage_groupe_type = $idAnnexeEmballageGroupeType;
 
-//echo $id_annexe_emballage_groupe_type;
 
-mysql_table_load("annexe_emballage_groupe_type");
-mysql_table_load("fta");
+
 
 $bloc = ""; //Bloc de saisie
 //Adaptation du formulaire en fonction des informations déjà saisie
@@ -84,342 +75,58 @@ if (!$action) {                    //Si aucun groupe d'emballage n'a était sél
 
 switch ($action) {
     case "etape1": //Sélection du groupe d'emballage
-        //$action="saisie_manuel";
         //Dans le cas d'emballage UVC, on peut avoir de l'emballage primaire
-        if ($type_emballage_groupe == 2) {
+        if ($idAnnexeEmballageGroupeType == 2) {
             $op = "<=";
         } else {
             $op = "=";
         }
 
         //Type d'emballage
-        $nom_liste = "id_annexe_emballage_groupe";
-        $requete = "SELECT id_annexe_emballage_groupe, nom_annexe_emballage_groupe "
-                . "FROM annexe_emballage_groupe "
-                . "WHERE id_annexe_emballage_groupe_configuration" . $op . $type_emballage_groupe . " " //Emballage Primaire et UVC
-                . "ORDER BY nom_annexe_emballage_groupe "
+        $nom_liste = AnnexeEmballageGroupeModel::KEYNAME;
+        $requete = "SELECT " . AnnexeEmballageGroupeModel::KEYNAME . "," . AnnexeEmballageGroupeModel::FIELDNAME_NOM_ANNEXE_EMBALLAGE_GROUPE
+                . " FROM " . AnnexeEmballageGroupeModel::TABLENAME
+                . " WHERE " . AnnexeEmballageGroupeModel::FIELDNAME_ID_ANNEXE_EMBALLAGE_GROUPE_CONFIGURATION . $op . $idAnnexeEmballageGroupeType //Emballage Primaire et UVC
+                . " ORDER BY " . AnnexeEmballageGroupeModel::FIELDNAME_NOM_ANNEXE_EMBALLAGE_GROUPE
         ;
-        //$id_defaut = $id_annexe_emballage_groupe;
+
         $id_defaut = "";
         $nom_defaut = "";
-        $liste_emballage_groupe = mysql_field_desc("annexe_emballage_groupe", "nom_annexe_emballage_groupe")
+        $liste_emballage_groupe = DatabaseDescription::getFieldDocLabel(AnnexeEmballageGroupeModel::TABLENAME, AnnexeEmballageGroupeModel::FIELDNAME_NOM_ANNEXE_EMBALLAGE_GROUPE)
                 . "</td><td>"
-                . afficher_requete_en_liste_deroulante($requete, $id_defaut, $nom_defaut)
-        //. "&nbsp;<input type=\"checkbox\" name=\"modele\" value=\"1\" />"
-        //. "Utiliser la liste des modèles&nbsp;&nbsp;<input type=submit value='>>'>"
-        ;
+                . AccueilFta::afficherRequeteEnListeDeroulante($requete, $id_defaut, $nom_defaut);
+
+
         $bloc.=$liste_emballage_groupe . "</tr></table><$html_table><tr class=titre_principal><td width=\"50%\">";
 
-        /*            <$html_table><tr class=titre_principal><td width=\"50%\">
-          <$html_table>
-          <tr class=titre_principal> <td width=\"40%\"> Valeur Personnalisées</td>
-          </tr>";
-         */
-
-        break;
-
-    case "etape3": //Personnalisation de la FTE
-
-        $is_editable = true;
-        $is_editable_false = false;
-
-        $id_fta_conditionnement = Lib::getParameterFromRequest("id_fta_conditionnement");
-        $id_fta = Lib::getParameterFromRequest("id_fta");
-
-
-
-
-        if ($id_fta_conditionnement) {
-            // //Cas d'une modification d'un conditionnement existant
-            //mysql_table_load("fta_conditionnement");
-            $recordConditionnement = new DatabaseRecord(
-                            "fta_conditionnement",
-                            $id_fta_conditionnement
-            );
-            $id_annexe_emballage = Lib::getParameterFromRequest(
-                            "id_annexe_emballage", $recordConditionnement->getFieldValue("id_annexe_emballage")
-            );
-            $id_annexe_emballage_groupe_type = Lib::getParameterFromRequest(
-                            "type_emballage_groupe", $recordConditionnement->getFieldValue("id_annexe_emballage_groupe_type")
-            );
-        } else {
-            //Cas d'une création
-            $id_annexe_emballage = Lib::getParameterFromRequest("id_annexe_emballage");
-            $id_annexe_emballage_groupe_type = Lib::getParameterFromRequest("type_emballage_groupe");
-        }
-
-        //mysql_table_load("annexe_emballage");
-        $recordEmballage = new DatabaseRecord(
-                        "annexe_emballage",
-                        $id_annexe_emballage
-        );
-
-        $id_annexe_emballage_groupe = Lib::getParameterFromRequest(
-                        "id_annexe_emballage_groupe", $recordEmballage->getFieldValue("id_annexe_emballage_groupe")
-        );
-        //mysql_table_load("annexe_emballage_groupe");
-        $recordEmballageGroupe = new DatabaseRecord(
-                        "annexe_emballage_groupe",
-                        "$id_annexe_emballage_groupe"
-        );
-
-        //mysql_table_load("annexe_emballage_groupe_type");
-        $recordEmballageGroupeType = new DatabaseRecord(
-                        "annexe_emballage_groupe_type",
-                        $id_annexe_emballage_groupe_type
-        );
-
-        $objectFta = new ObjectFta($id_fta);
-
-        //mysql_table_load("fta");
-        //mysql_table_load("access_arti2");
-        //Longueur de l'emballage
-        //$champ = "longueur_fta_conditionnement";
-        $field_name = "longueur_fta_conditionnement";
-        $table_name = "fta_conditionnement";
-        if ($id_fta_conditionnement) {
-            $value = $recordConditionnement->getFieldValue($field_name);
-        } else {
-            $value = $recordEmballage->getFieldValue("longueur_annexe_emballage");
-        }
-
-
-        if ($recordEmballageGroupeType->getKeyValue() == 4) {
-            // //Affectation par défaut pour les palettes
-//            $bloc .= "<tr><td>" . mysql_field_desc("fta_conditionnement", $champ) . ":</td><td>";
-//            $bloc .= "<input type=text name=" . $champ . " value=1200 size=20 readonly>";
-//            $bloc.="</td></tr>";
-            $htmlObject = new htmlInputText(
-                            $field_name,
-                            $table_name,
-                            $value = "1200",
-                            $is_editable_false,
-                            $warning_update = ${"diff_" . $table_name}[$field_name]
-            );
-            $bloc.=$htmlObject->getHtmlResult();
-        } else {
-//            $bloc .= "<tr><td>" . mysql_field_desc("fta_conditionnement", $champ) . ":</td><td>";
-//            $bloc .= "<input type=text name=" . $champ . " value=`" . $longueur_annexe_emballage . "` size=20/>";
-//            $bloc.="</td></tr>";
-            $htmlObject = new htmlInputText(
-                            $field_name,
-                            $table_name,
-                            $value,
-                            $is_editable,
-                            $warning_update = ${"diff_" . $table_name}[$field_name]
-            );
-            $bloc.=$htmlObject->getHtmlResult();
-        }
-
-        //Largeur de l'emballage
-        //$champ = "largeur_fta_conditionnement";
-        $field_name = "largeur_fta_conditionnement";
-        $table_name = "fta_conditionnement";
-        if ($id_fta_conditionnement) {
-            $value = $recordConditionnement->getFieldValue($field_name);
-        } else {
-            $value = $recordEmballage->getFieldValue("largeur_annexe_emballage");
-        }
-
-        if ($recordEmballageGroupeType->getKeyValue() == 4) { //Affectation par défaut pour les palettes
-//            $bloc .= "<tr><td>" . mysql_field_desc("fta_conditionnement", $champ) . ":</td><td>";
-//            $bloc .= "<input type=text name=" . $champ . " value=800 size=20 readonly>";
-//            $bloc.="</td></tr>";
-            $htmlObject = new htmlInputText(
-                            $field_name,
-                            $table_name,
-                            $value = "800",
-                            $is_editable_false,
-                            $warning_update = ${"diff_" . $table_name}[$field_name]
-            );
-            $bloc.=$htmlObject->getHtmlResult();
-        } else {
-//            $bloc .= "<tr><td>" . mysql_field_desc("fta_conditionnement", $champ) . ":</td><td>";
-//            $bloc .= "<input type=text name=" . $champ . " value=`" . $largeur_annexe_emballage . "` size=20/>";
-//            $bloc.="</td></tr>";
-            $htmlObject = new htmlInputText(
-                            $field_name,
-                            $table_name,
-                            $value,
-                            $is_editable,
-                            $warning_update = ${"diff_" . $table_name}[$field_name]
-            );
-            $bloc.=$htmlObject->getHtmlResult();
-        }
-        //Hauteur de l'emballage
-        $field_name = "hauteur_fta_conditionnement";
-        $table_name = "fta_conditionnement";
-        if ($id_fta_conditionnement) {
-            $value = $recordConditionnement->getFieldValue($field_name);
-        } else {
-            $value = $recordEmballage->getFieldValue("hauteur_annexe_emballage");
-        }
-        if ($recordEmballageGroupeType->getKeyValue() == 4) {
-            // //Affectation par défaut pour les palettes
-//            $bloc .= "<tr><td>" . mysql_field_desc("fta_conditionnement", $champ) . ":</td><td>";
-//            $bloc .= "<input type=text name=" . $champ . " value=150 size=20 readonly>";
-//            $bloc.="</td></tr>";
-            $htmlObject = new htmlInputText(
-                            $field_name,
-                            $table_name,
-                            $value = "150",
-                            $is_editable_false,
-                            $warning_update = ${"diff_" . $table_name}[$field_name]
-            );
-            $bloc.=$htmlObject->getHtmlResult();
-        } else {
-            $htmlObject = new htmlInputText(
-                            $field_name,
-                            $table_name,
-                            $value,
-                            $is_editable,
-                            $warning_update = ${"diff_" . $table_name}[$field_name]
-            );
-            $bloc.=$htmlObject->getHtmlResult();
-//            $bloc .= "<tr><td>" . mysql_field_desc("fta_conditionnement", $champ) . ":</td><td>";
-//            $bloc .= "<input type=text name=" . $champ . " value=`" . $hauteur_annexe_emballage . "` size=20/>";
-//            $bloc.="</td></tr>";
-        }
-
-        //Poids de l'emballage
-        //$champ = "poids_fta_conditionnement";
-        $field_name = "poids_fta_conditionnement";
-        $table_name = "fta_conditionnement";
-        if ($id_fta_conditionnement) {
-            $value = $recordConditionnement->getFieldValue($field_name);
-        } else {
-            $value = $recordEmballage->getFieldValue("poids_annexe_emballage");
-        }
-        if ($recordEmballageGroupeType->getKeyValue() == 4) {
-            // //Affectation par défaut pour les palettes
-//            $bloc .= "<tr><td>" . mysql_field_desc("fta_conditionnement", $champ) . ":</td><td>";
-//            $bloc .= "<input type=text name=" . $champ . " value=23000 size=20 readonly>";
-//            $bloc.="</td></tr>";
-            $htmlObject = new htmlInputText(
-                            $field_name,
-                            $table_name,
-                            $value = "23000",
-                            $is_editable_false,
-                            $warning_update = ${"diff_" . $table_name}[$field_name]
-            );
-            $bloc.=$htmlObject->getHtmlResult();
-        } else {
-//            $bloc .= "<tr><td>" . mysql_field_desc("fta_conditionnement", $champ) . ":</td><td>";
-//            $bloc .= "<input type=text name=" . $champ . " value=`" . $poids_annexe_emballage . "` size=20/>";
-//            $bloc.="</td></tr>";
-            $htmlObject = new htmlInputText(
-                            $field_name,
-                            $table_name,
-                            $value,
-                            $is_editable,
-                            $warning_update = ${"diff_" . $table_name}[$field_name]
-            );
-            $bloc.=$htmlObject->getHtmlResult();
-        }
-        //Cet emballage represente-il les dimensions de l'UVC ?
-        /* if($type_emballage_groupe==2)
-          {
-          $dimension_uvc_fta_confitionnement=1;
-          $champ="dimension_uvc_fta_confitionnement";
-          $bloc .= "<tr><td>".mysql_field_desc("fta_conditionnement", $champ).":</td><td>"
-          . "<input type=hidden name=dimension_uvc_fta_confitionnement value=1>"
-          ;
-          $bloc .= "<input type=\"checkbox\" checked disabled />";
-          $bloc.="</td></tr>";
-          } */
-
-
-        //Nombre d'emballage présent
-        if ($id_fta_conditionnement) {
-            if (!$recordConditionnement->getFieldValue("quantite_par_couche_fta_conditionnement")) {
-                $recordConditionnement->setFieldValue("quantite_par_couche_fta_conditionnement", $objectFta->getFieldValue(ObjectFta::TABLE_ARTI_NAME, "NB_UNIT_ELEM"));
-            }
-            if (!$recordConditionnement->getFieldValue("nombre_couche_fta_conditionnement")) {
-                $recordConditionnement->setFieldValue("nombre_couche_fta_conditionnement", 1);
-            }
-            if (!$recordConditionnement->getFieldValue("pcb_fta_conditionnement")) {
-                $recordConditionnement->setFieldValue("pcb_fta_conditionnement", 1);
-            }
-            $quantite_par_couche_fta_conditionnement = $recordConditionnement->getFieldValue("quantite_par_couche_fta_conditionnement");
-            $nombre_couche_fta_conditionnement = $recordConditionnement->getFieldValue("nombre_couche_fta_conditionnement");
-            $pcb_fta_conditionnement = $recordConditionnement->getFieldValue("pcb_fta_conditionnement");
-            
-        } else {
-            $quantite_par_couche_fta_conditionnement = 1;
-            $nombre_couche_fta_conditionnement = 1;
-            $pcb_fta_conditionnement = 1;
-        }
-        
-        switch ($recordEmballageGroupe->getFieldValue("id_annexe_emballage_groupe_configuration")) {
-            case 1:
-                $champ = "nombre_couche_fta_conditionnement";
-                //$dimension_uvc_fta_confitionnement;
-                if ($recordEmballageGroupeType->getKeyValue() == 2) {
-                    $nb_emballage .="<tr><td>Quantité par Colis:</td><td>";
-                } else {
-                    $nb_emballage .= "<tr><td>Quantité par UVC:</td><td>";
-                    $nombre_couche_fta_conditionnement = 1;
-                }
-                $nb_emballage .= "<input type=text name=quantite_par_couche_fta_conditionnement value=\"" . $quantite_par_couche_fta_conditionnement . "\" size=20/>";
-                $nb_emballage .="</td></tr>";
-
-                $nb_emballage .= "<input type=hidden name=nombre_couche_fta_conditionnement value=1 size=20/>";
-                $nb_emballage .="</td></tr>";
-
-                break;
-            case 3:
-                $champ = "quantite_par_couche_fta_conditionnement";
-                $nb_emballage .= "<tr><td>" . DatabaseDescription::getColumnLabel("fta_conditionnement", "quantite_par_couche_fta_conditionnement") . ":</td><td>";
-                $nb_emballage .= "<input type=text name=" . $champ . " value=`" . $quantite_par_couche_fta_conditionnement . "` size=20/>";
-                $nb_emballage .="</td></tr>";
-
-                $champ = "nombre_couche_fta_conditionnement";
-                $nb_emballage .= "<tr><td>" . mysql_field_desc("fta_conditionnement", $champ) . ":</td><td>";
-                $nb_emballage .= "<input type=text name=" . $champ . " value=`" . $nombre_couche_fta_conditionnement . "` size=20/>";
-                $nb_emballage .="</td></tr>";
-                
-                $champ = "pcb_fta_conditionnement";
-                $nb_emballage .= "<tr><td>" . mysql_field_desc("fta_conditionnement", $champ) . ":</td><td>";
-                $nb_emballage .= "<input type=text name=" . $champ . " value=`" . ${$champ} . "` size=20/>";
-                $nb_emballage .="</td></tr>";
-                
-                break;
-            case 4:
-                $nb_emballage .= "<input type=hidden name=quantite_par_couche_fta_conditionnement value=1 size=20/>";
-                $nb_emballage .= "<input type=hidden name=nombre_couche_fta_conditionnement value=1 size=20/>";
-                break;
-        }
         break;
 
     case "etape2": //Sélection d'une FTE
         //Création de la liste prédéfini des Emballages
-        /* $bloc .="</table></td><td>
-          <table><tr><td width=\"100%\"> Liste des emballages:<br>
-          "; */
-
         //Recherche du site de production de la fta actuelle
-        $id_fta;
-        mysql_table_load("access_arti2");
-
         //Construction des éléments de requêtes communs
-        $common_select = "SELECT DISTINCT annexe_emballage.id_annexe_emballage, "
-                . "CONCAT_WS('',nom_fte_fournisseur,' : ', reference_fournisseur_annexe_emballage, "
-                . "' (', longueur_annexe_emballage,'x',largeur_annexe_emballage,'x',hauteur_annexe_emballage, ')' ) AS INTITULE "
+        $common_select = "SELECT DISTINCT " . AnnexeEmballageModel::TABLENAME . "." . AnnexeEmballageModel::KEYNAME
+                . ", CONCAT_WS('', " . FteFournisseurModel::FIELDNAME_NOM_FTE_FOURNISSEUR . ", ' : '," . AnnexeEmballageModel::FIELDNAME_REFERENCE_FOURNISSEUR_ANNEXE_EMBALLAGE
+                . ",' (', " . AnnexeEmballageModel::FIELDNAME_HAUTEUR_ANNEXE_EMBALLAGE
+                . ", 'x', " . AnnexeEmballageModel::FIELDNAME_LONGUEUR_ANNEXE_EMBALLAGE
+                . ", 'x', " . AnnexeEmballageModel::FIELDNAME_LARGEUR_ANNEXE_EMBALLAGE . ", ')' ) AS INTITULE "
         ;
-        $common_from = "FROM annexe_emballage, fte_fournisseur";
-        $common_where = "WHERE annexe_emballage.id_annexe_emballage_groupe ='" . $id_annexe_emballage_groupe . "' "
-                . "AND annexe_emballage.id_fte_fournisseur=fte_fournisseur.id_fte_fournisseur "
+        $common_from = " FROM " . AnnexeEmballageModel::TABLENAME . "," . FteFournisseurModel::TABLENAME;
+        $common_where = " WHERE " . AnnexeEmballageModel::TABLENAME . "." . AnnexeEmballageModel::FIELDNAME_ID_ANNEXE_EMBALLAGE_GROUPE
+                . " = '" . $idAnnexeEmballageGroupe . "' "
+                . " AND " . AnnexeEmballageModel::TABLENAME . "." . AnnexeEmballageModel::FIELDNAME_ID_FTE_FOURNISSEUR
+                . "=" . FteFournisseurModel::TABLENAME . "." . FteFournisseurModel::KEYNAME
         ;
-        $common_order = "ORDER BY nom_fte_fournisseur, reference_fournisseur_annexe_emballage";
+        $common_order = " ORDER BY " . FteFournisseurModel::FIELDNAME_NOM_FTE_FOURNISSEUR . "," . AnnexeEmballageModel::FIELDNAME_REFERENCE_FOURNISSEUR_ANNEXE_EMBALLAGE;
 
         //Selection Partielle ou totale ?
         switch ($page_reload) {
             case 1: //Voir toutes les FTE
                 $title = "Liste des toutes les Fiches Techniques Emballages (FTE)";
                 $req_liste_emballage = $common_select
-                        . "$common_from "
-                        . "$common_where "
-                        . "$common_order "
+                        . $common_from
+                        . $common_where
+                        . $common_order
                 ;
                 $checked = "checked";
                 $page_reload = 0;
@@ -429,33 +136,86 @@ switch ($action) {
             default:
                 $title = "Liste des Fiches Techniques Emballages (FTE) déjà utilisées dans des Fiches Techniques Articles validées pour le site";
                 $req_liste_emballage = $common_select
-                        . "$common_from, fta_conditionnement, access_arti2 "
-                        . "$common_where "
-                        . "AND annexe_emballage.id_annexe_emballage = fta_conditionnement.id_annexe_emballage "
-                        . "AND access_arti2.id_fta = fta_conditionnement.id_fta "
-                        . "AND access_arti2.CODE_ARTICLE IS NOT NULL "
-                        . "AND Site_de_production =" . $Site_de_production . " "
-                        . "$common_order "
+                        . $common_from . "," . FtaConditionnementModel::TABLENAME . ", " . FtaModel::TABLENAME
+                        . $common_where
+                        . " AND " . AnnexeEmballageModel::TABLENAME . "." . AnnexeEmballageModel::KEYNAME
+                        . "=" . FtaConditionnementModel::TABLENAME . "." . FtaConditionnementModel::FIELDNAME_ID_ANNEXE_EMBALLAGE
+                        . " AND " . FtaModel::TABLENAME . "." . FtaModel::KEYNAME
+                        . "=" . FtaConditionnementModel::TABLENAME . "." . FtaConditionnementModel::FIELDNAME_ID_FTA
+                        . $common_order
                 ;
                 $checked = "";
                 $page_reload = 1;
         }
 
-        $nom_liste = "id_annexe_emballage";
-        $id_defaut = $$nom_liste;
+        $nom_liste = AnnexeEmballageModel::KEYNAME;
+        $id_defaut = $nom_liste;
         $req_liste_emballage;
         $bloc .=$title
                 . ": <br><br>"
-                . afficher_requete_en_liste_deroulante($req_liste_emballage, $id_defaut, $nom_liste);
+                . AccueilFta::afficherRequeteEnListeDeroulante($req_liste_emballage, $id_defaut, $nom_liste);
         $bloc .="</td><tr>";
 
         $bloc .="<tr><td>"
-                . "<input type=\"checkbox\" onClick=\"js_page_reload()\" value=\"1\" $checked /> Voir toutes les Fiches Techniques Emballages (FTE)?"
+                . "<input type = \"checkbox\" onClick=\"js_page_reload()\" value=\"1\" $checked /> Voir toutes les Fiches Techniques Emballages (FTE)?"
                 . "<input type=hidden name=page_reload value=$page_reload>"
                 . "</td></tr>"
         ;
 
         break;
+
+    case "etape3": //Personnalisation de la FTE
+        $is_editable = true;
+
+
+        $annexeEmballageModel->setIsEditable($is_editable);
+
+        //Hauteur de l'emballage
+        $bloc.=$annexeEmballageModel->getHtmlDataField(AnnexeEmballageModel::FIELDNAME_HAUTEUR_ANNEXE_EMBALLAGE);
+        //Longueur de l'emballage
+        $bloc.=$annexeEmballageModel->getHtmlDataField(AnnexeEmballageModel::FIELDNAME_LONGUEUR_ANNEXE_EMBALLAGE);
+        //Largeur de l'emballage
+        $bloc.=$annexeEmballageModel->getHtmlDataField(AnnexeEmballageModel::FIELDNAME_LARGEUR_ANNEXE_EMBALLAGE);
+        //Poids de l'emballage           
+        $bloc.=$annexeEmballageModel->getHtmlDataField(AnnexeEmballageModel::FIELDNAME_POIDS_ANNEXE_EMBALLAGE);
+
+        //Nombre d'emballage présent
+        switch ($annexeEmballageGroupeModel->getDataField(AnnexeEmballageGroupeModel::FIELDNAME_ID_ANNEXE_EMBALLAGE_GROUPE_CONFIGURATION)->getFieldValue()) {
+            case 1:
+                $idAnnexeEmballageGroupeTypeTmp = $annexeEmballageGroupeTypeModel->getDataField(AnnexeEmballageGroupeTypeModel::KEYNAME)->getFieldValue();
+                //Quantité par couche
+                if ($idAnnexeEmballageGroupeTypeTmp == 2) {
+
+                    $nbEmballage .="<tr><td>Quantité par Colis:</td><td>";
+                    if (!$quantite_par_couche_fta_conditionnement) {
+                        $quantite_par_couche_fta_conditionnement = $ftaModel->getDataField(FtaModel::FIELDNAME_NOMBRE_UVC_PAR_CARTON)->getFieldValue();
+                    }
+                } else {
+                    $nbEmballage .= "<tr><td>Quantité par UVC:</td><td>";
+                    $quantite_par_couche_fta_conditionnement = 0 ;
+                }
+
+                $nbEmballage .= "<input type=text name= " . FtaConditionnementModel::FIELDNAME_QUANTITE_PAR_COUCHE_FTA_CONDITIONNEMENT . " value=" . $quantite_par_couche_fta_conditionnement . " size=20/>";
+                $nbEmballage .="</td></tr>";
+
+                //Nombre de couche
+                $nbEmballage .= "<input type=hidden name=" . FtaConditionnementModel::FIELDNAME_NOMBRE_COUCHE_FTA_CONDITIONNEMENT . " value=1 size=20/>";
+                $nbEmballage .="</td></tr>";
+                break;
+            case 3:
+                //Quantité par couche
+                $nbEmballage .= $annexeEmballageModel->getHtmlDataField(AnnexeEmballageModel::FIELDNAME_QUANTITE_PAR_COUCHE_ANNEXE_EMBALLAGE);
+                //Nombre de couche
+                $nbEmballage .= $annexeEmballageModel->getHtmlDataField(AnnexeEmballageModel::FIELDNAME_NOMBRE_COUCHE_ANNEXE_EMBALLAGE);
+                break;
+
+            case 4:
+                //Quantité par couche
+                $nbEmballage .= "<input type=hidden name=" . FtaConditionnementModel::FIELDNAME_QUANTITE_PAR_COUCHE_FTA_CONDITIONNEMENT . " value=1 size=20/>";
+                //Quantité par couche
+                $nbEmballage .= "<input type=hidden name=" . FtaConditionnementModel::FIELDNAME_NOMBRE_COUCHE_FTA_CONDITIONNEMENT . " value=1 size=20/>";
+                break;
+        }
 }//Fin de la selection de la saisie en fonction de l'action.
 
 
@@ -469,10 +229,10 @@ switch ($output) {
       Début Code PDF
      * *********** */
     case "pdf":
-        //Constructeur
+//Constructeur
         $pdf = new XFPDF();
 
-        //Déclaration des variables de formatages
+//Déclaration des variables de formatages
         $police_standard = "Arial";
         $t1_police = $police_standard;
         $t1_style = "B";
@@ -493,7 +253,7 @@ switch ($output) {
         $chapitre = 0;
         $section = 0;
         include($page_pdf);
-        //$pdf->SetProtection(array("print", "copy"));
+//$pdf->SetProtection(array("print", "copy"));
         $pdf->Output(); //Read the FPDF.org manual to know the other options
 
         break;
@@ -519,24 +279,22 @@ switch ($output) {
              <input type=hidden name=action value=$action>
              <input type=hidden name=current_page value=$page_default.php>
              <input type=hidden name=current_query value=$page_query>
-             <input type=hidden name=id_fta value=$id_fta>
-             <input type=hidden name=id_fta_conditionnement value=$id_fta_conditionnement>
-             <input type=hidden name=id_fta_chapitre_encours value=$id_fta_chapitre_encours>
-             <input type=hidden name=id_annexe_emballage_groupe_type value=$id_annexe_emballage_groupe_type>
-             <input type=\"hidden\" name=\"synthese_action\" value=\"$synthese_action\" />
-             <input type=\"hidden\" name=\"type_emballage_groupe\" value=\"$type_emballage_groupe\" />
-             <input type=\"hidden\" name=\"id_annexe_emballage\" value=\"$id_annexe_emballage\" />
-             <input type=\"hidden\" name=\"id_annexe_emballage_groupe\" value=\"$id_annexe_emballage_groupe\" />
-             <input type=\"hidden\" name=\"dimension_uvc_fta_confitionnement\" value=\"$dimension_uvc_fta_conditionnement\" />
+             <input type=hidden name=id_fta value=$idFta>
+             <input type=hidden name=id_fta_chapitre value=$idFtaChapitreEncours>             
+             <input type=hidden name=id_annexe_emballage value=$idAnnexeEmballage >
+             <input type=hidden name=id_annexe_emballage_groupe value=$idAnnexeEmballageGroupe >
+             <input type=hidden name=id_annexe_emballage_groupe_type value=$idAnnexeEmballageGroupeType>
+             <input type=hidden name=synthese_action value=$syntheseAction >
 
              <$html_table>
              <tr class=titre_principal><td>
 
-                 " . $_SESSION["designation_commerciale_fta"] . " -  " . $_SESSION["id_dossier_fta"] . "v" . $_SESSION["id_version_dossier_fta"] . "
+                 " . $ftaModel->getDataField(FtaModel::FIELDNAME_DESIGNATION_COMMERCIALE)->getFieldValue()
+        . " - " . $ftaModel->getDataField(FtaModel::FIELDNAME_DOSSIER_FTA)->getFieldValue()
+        . "v" . $ftaModel->getDataField(FtaModel::FIELDNAME_VERSION_DOSSIER_FTA)->getFieldValue() . "
                  <br>
-                 Ajout d'un nouvel $nom_annexe_emballage_groupe_type
-
-             </td></tr>
+                 Ajout d'un nouvel " . $annexeEmballageGroupeTypeModel->getDataField(AnnexeEmballageGroupeTypeModel::FIELDNAME_NOM_ANNEXE_EMBALLAGE_GROUPE_TYPE)->getFieldValue()
+        . " </td></tr>
              </table>
              <$html_table>
              <tr><td width=\"20%\">
@@ -546,7 +304,7 @@ switch ($output) {
 
              <$html_table>
              <tr><td width=\"20%\">
-                 $nb_emballage
+                 $nbEmballage
              </td></tr>
              </table>
 

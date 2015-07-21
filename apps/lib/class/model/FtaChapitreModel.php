@@ -37,8 +37,6 @@ class FtaChapitreModel extends AbstractModel {
 
     public function __construct($paramId = NULL, $paramIsCreateRecordsetInDatabaseIfKeyDoesntExist = AbstractModel::DEFAULT_IS_CREATE_RECORDSET_IN_DATABASE_IF_KEY_DOESNT_EXIST) {
         parent::__construct($paramId, $paramIsCreateRecordsetInDatabaseIfKeyDoesntExist);
-
-   
     }
 
     public function getModelFtaProcessus() {
@@ -223,11 +221,17 @@ class FtaChapitreModel extends AbstractModel {
         $arrayProcessusCycle = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
                         "SELECT DISTINCT " . FtaProcessusCycleModel::FIELDNAME_PROCESSUS_NEXT . "," . FtaProcessusModel::FIELDNAME_MULTISITE_FTA_PROCESSUS
                         . " FROM " . FtaProcessusCycleModel::TABLENAME . "," . FtaProcessusModel::TABLENAME
+                        . "," . FtaSuiviProjetModel::TABLENAME . "," . FtaWorkflowStructureModel::TABLENAME
                         . " WHERE " . FtaProcessusCycleModel::FIELDNAME_FTA_ETAT . "='" . $abreviation_fta_etat . "' "
                         . " AND " . FtaProcessusModel::TABLENAME . "." . FtaProcessusModel::KEYNAME
                         . "=" . FtaProcessusCycleModel::TABLENAME . "." . FtaProcessusCycleModel::FIELDNAME_PROCESSUS_NEXT
+                        . " AND " . FtaWorkflowStructureModel::TABLENAME . "." . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_PROCESSUS
+                        . "=" . FtaProcessusCycleModel::TABLENAME . "." . FtaProcessusCycleModel::FIELDNAME_PROCESSUS_NEXT
+                        . " AND " . FtaWorkflowStructureModel::TABLENAME . "." . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_CHAPITRE
+                        . "=" . FtaSuiviProjetModel::TABLENAME . "." . FtaSuiviProjetModel::FIELDNAME_ID_FTA_CHAPITRE
                         . " AND " . FtaProcessusCycleModel::FIELDNAME_PROCESSUS_INIT . "='" . $paramIdProcessus . "' "
                         . " AND " . FtaProcessusCycleModel::FIELDNAME_PROCESSUS_NEXT . " IS NOT NULL"
+                        . " AND " . FtaSuiviProjetModel::FIELDNAME_SIGNATURE_VALIDATION_SUIVI_PROJET . " <> 0"
         );
 
         //Enregistrement du processus
@@ -381,9 +385,9 @@ class FtaChapitreModel extends AbstractModel {
     public static function getChapitreDefautByWorkflow($paramId) {
         $ftaModel = new FtaModel($paramId);
         $IdWorkflow = $ftaModel->getDataField(FtaModel::FIELDNAME_WORKFLOW)->getFieldValue();
-/*
- * Non fonctionnelle
- */
+        /*
+         * Non fonctionnelle
+         */
         $rarrayChapitreDefaut = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
                         "SELECT DISTINCT " . FtaProcessusModel::TABLENAME . "." . FtaProcessusModel::KEYNAME
                         . " FROM " . FtaProcessusModel::TABLENAME

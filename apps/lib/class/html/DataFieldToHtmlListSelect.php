@@ -28,8 +28,11 @@ class DataFieldToHtmlListSelect extends HtmlListSelect {
                 , $this->getDataField()->getKeyValue()
                 , $this->getDataField()->getFieldName()
         );
-    }
+    
+        $this->setContentLocked($paramDataField->getFieldsToLock());
 
+    }
+        
 }
 
 ?>

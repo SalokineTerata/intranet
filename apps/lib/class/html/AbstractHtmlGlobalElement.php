@@ -41,6 +41,7 @@ abstract class AbstractHtmlGlobalElement {
      */
     const HTML_RENDER_TO_FORM = "form";
     const HTML_RENDER_TO_TABLE = "table";
+    const HTML_RENDER_TO_TABLE_LABEL = "table_label";
 
     /**
      * L'élément est-il modifiable ?
@@ -117,6 +118,18 @@ abstract class AbstractHtmlGlobalElement {
      */
     private $ChangedImage;
 
+    /**
+     * Quels sont les éléments du sous formulaire qui sont vérrouillés ?
+     *   - Si l'attribut $isEditable du sous-formulaire est FALSE,
+     *     Cet attribut n'apporte aucune modification car tous les champs du
+     *     sous-formulaire sont déjà vérouillés.
+     *   - Si l'attribut $isEditable du sous-formulaire est TRUE,
+     *     Cet attribut de type tableau contient la liste des champs qu'il faut
+     *     tout de même vérouiller.
+     * @var string
+     */
+    private $ContentLocked;
+
     public function __construct() {
         /**
          * Par défaut l'élément est représenté sous forme de formulaire.
@@ -174,6 +187,22 @@ abstract class AbstractHtmlGlobalElement {
      */
     function setHtmlRenderToTable() {
         $this->htmlRender = self::HTML_RENDER_TO_TABLE;
+    }
+
+    /**
+     * L'élément HTML sera représenté sous forme de formluaire avec son label.
+     * @return mixed
+     */
+    function setHtmlRenderToTableLabel() {
+        $this->htmlRender = self::HTML_RENDER_TO_TABLE_LABEL;
+    }
+
+    function getContentLocked() {
+        return $this->ContentLocked;
+    }
+
+    function setContentLocked($ContentLocked) {
+        $this->ContentLocked = $ContentLocked;
     }
 
     /**
@@ -312,9 +341,18 @@ abstract class AbstractHtmlGlobalElement {
 
             case self::HTML_RENDER_TO_TABLE:
                 break;
+            case self::HTML_RENDER_TO_TABLE_LABEL:
+                $html_result .= $label;
+                break;
         }
         $html_result .= "<td style=\"$color_modif\">";
 
+//        //Titre de l'élément
+//         if ($this->getIsWarningUpdate()) {
+//           $html_result .= $this->getLabel();
+//            $color_modif = Html::DEFAULT_HTML_WARNING_UPDATE_BGCOLOR;
+//        }
+//      
         //Contenu
         if ($this->getIsEditable()) {
             if ($this->getRightToAdd()) {

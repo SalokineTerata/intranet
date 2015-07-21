@@ -195,14 +195,31 @@ class FtaView {
     }
 
     public function getHtmlEmballageUVC($paramIdFta, $paramChapitre, $paramSyntheseAction) {
-        $annexeEmballageGroupeTypeModel = new AnnexeEmballageGroupeTypeModel();
+        $annexeEmballageGroupeTypeModel = new AnnexeEmballageGroupeTypeModel(AccueilFta::VALUE_1);
         $idFtaConditionnment = $annexeEmballageGroupeTypeModel->getEmballageGroupeUVC();
+
+        /*
+         * Récuperation des clés étrangères de la table fta_conditionnement
+         */
         $idAnnexeEmballage = $annexeEmballageGroupeTypeModel->getIdAnnexeEmballageUVCFromFtaConditionnement();
-        $idAnnexeEmballageGroupeType = $annexeEmballageGroupeTypeModel->getIdAnnexeEmballageGroupeTypeUVCFromFtaConditionnement();
+        $idAnnexeEmballageGroupeType = AccueilFta::VALUE_1;
+
+        /*
+         * Initialisation des modèles 
+         */
+
         $annexeEmballageGroupeTypeModel2 = new AnnexeEmballageGroupeTypeModel(AccueilFta::VALUE_1);
         $ftaConditionnmentModel = new FtaConditionnementModel($idFtaConditionnment);
+
+        /*
+         * Tableau de données
+         */
         $arrayFtaConditionnement = FtaConditionnementModel::getArrayFtaConditonnement($idFtaConditionnment);
-        if ($arrayFtaConditionnement) {
+
+        /*
+         * Vérifie si pour la Fta en cours les données Fta conditionement sont renseigné
+         */
+        if ($arrayFtaConditionnement&& $annexeEmballageGroupeTypeModel->getIdAnnexeEmballageGroupeTypeUVCFromFtaConditionnement()==AccueilFta::VALUE_1) {
             $rightToAdd = FALSE;
         } else {
             $rightToAdd = TRUE;
@@ -225,22 +242,35 @@ class FtaView {
         $htmlEmballageUVC = new HtmlSubForm_RNN($arrayFtaConditionnement, $className, $label, $tablesNameAndIdForeignKeyOfFtaConditionnement);
         $htmlEmballageUVC->setIsEditable($this->getIsEditable());
         $htmlEmballageUVC->setRightToAdd($rightToAdd);
-        $htmlEmballageUVC->setLien(AnnexeEmballageGroupeTypeModel::getLienAddConditionnement($paramIdFta, $paramChapitre, AccueilFta::VALUE_1, $paramSyntheseAction));
+        $htmlEmballageUVC->setLien(AnnexeEmballageGroupeTypeModel::getAddLinkConditionnement($paramIdFta, $paramChapitre, AccueilFta::VALUE_1, $paramSyntheseAction));
+        $htmlEmballageUVC->setLienSuppression(AnnexeEmballageGroupeTypeModel::getDeleteLinkConditionnement($paramIdFta, $paramChapitre, $idFtaConditionnment, $paramSyntheseAction));
 
 
         return $htmlEmballageUVC->getHtmlResult();
-        ;
     }
 
     public function getHtmlEmballageParColis($paramIdFta, $paramChapitre, $paramSyntheseAction) {
-        $annexeEmballageGroupeTypeModel = new AnnexeEmballageGroupeTypeModel();
+        $annexeEmballageGroupeTypeModel = new AnnexeEmballageGroupeTypeModel(AccueilFta::VALUE_2);
         $idFtaConditionnment = $annexeEmballageGroupeTypeModel->getEmballageGroupeParColis();
+
+        /*
+         * Récuperation des clés étrangères de la table fta_conditionnement
+         */
         $idAnnexeEmballage = $annexeEmballageGroupeTypeModel->getIdAnnexeEmballageParColisFromFtaConditionnement();
-        $idAnnexeEmballageGroupeType = $annexeEmballageGroupeTypeModel->getIdAnnexeEmballageGroupeTypeParColisFromFtaConditionnement();
+        $idAnnexeEmballageGroupeType = AccueilFta::VALUE_2;
+        /*
+         * Initialisation des modèles 
+         */
         $annexeEmballageGroupeTypeModel2 = new AnnexeEmballageGroupeTypeModel(AccueilFta::VALUE_2);
         $ftaConditionnmentModel = new FtaConditionnementModel($idFtaConditionnment);
+        /*
+         * Tableau de données
+         */
         $arrayFtaConditionnement = FtaConditionnementModel::getArrayFtaConditonnement($idFtaConditionnment);
-        if ($arrayFtaConditionnement) {
+        /*
+         * Vérifie si pour la Fta en cours les données Fta conditionement sont renseigné
+         */
+        if ($arrayFtaConditionnement ) {
             $rightToAdd = FALSE;
         } else {
             $rightToAdd = TRUE;
@@ -263,21 +293,35 @@ class FtaView {
         $htmlEmballageParColis = new HtmlSubForm_RNN($arrayFtaConditionnement, $className, $label, $tablesNameAndIdForeignKeyOfFtaConditionnement);
         $htmlEmballageParColis->setIsEditable($this->getIsEditable());
         $htmlEmballageParColis->setRightToAdd($rightToAdd);
-        $htmlEmballageParColis->setLien(AnnexeEmballageGroupeTypeModel::getLienAddConditionnement($paramIdFta, $paramChapitre, AccueilFta::VALUE_2, $paramSyntheseAction));
+        $htmlEmballageParColis->setLien(AnnexeEmballageGroupeTypeModel::getAddLinkConditionnement($paramIdFta, $paramChapitre, AccueilFta::VALUE_2, $paramSyntheseAction));
+        $htmlEmballageParColis->setLienSuppression(AnnexeEmballageGroupeTypeModel::getDeleteLinkConditionnement($paramIdFta, $paramChapitre, $idFtaConditionnment, $paramSyntheseAction));
 
         return $htmlEmballageParColis->getHtmlResult();
-        ;
     }
 
     public function getHtmlEmballageDuColis($paramIdFta, $paramChapitre, $paramSyntheseAction) {
         $annexeEmballageGroupeTypeModel = new AnnexeEmballageGroupeTypeModel();
         $idFtaConditionnment = $annexeEmballageGroupeTypeModel->getEmballageGroupeDuColis();
+
+        /*
+         * Récuperation des clés étrangères de la table fta_conditionnement
+         */
         $idAnnexeEmballage = $annexeEmballageGroupeTypeModel->getIdAnnexeEmballageDuColisFromFtaConditionnement();
         $idAnnexeEmballageGroupeType = $annexeEmballageGroupeTypeModel->getIdAnnexeEmballageGroupeTypeDuColisFromFtaConditionnement();
+        /*
+         * Initialisation des modèles 
+         */
         $annexeEmballageGroupeTypeModel2 = new AnnexeEmballageGroupeTypeModel(AccueilFta::VALUE_3);
         $ftaConditionnmentModel = new FtaConditionnementModel($idFtaConditionnment);
-        $arrayFtaConditionnement = FtaConditionnementModel::getArrayFtaConditonnement($idFtaConditionnment);
 
+        /*
+         * Tableau de données
+         */
+        $arrayFtaConditionnement = FtaConditionnementModel::getArrayFtaConditonnementDuColis($idFtaConditionnment);
+
+        /*
+         * Vérifie si pour la Fta en cours les données Fta conditionement sont renseigné
+         */
         if ($arrayFtaConditionnement) {
             $rightToAdd = FALSE;
         } else {
@@ -301,21 +345,35 @@ class FtaView {
         $htmlEmballageDuColis = new HtmlSubForm_RNN($arrayFtaConditionnement, $className, $label, $tablesNameAndIdForeignKeyOfFtaConditionnement);
         $htmlEmballageDuColis->setIsEditable($this->getIsEditable());
         $htmlEmballageDuColis->setRightToAdd($rightToAdd);
-        $htmlEmballageDuColis->setLien(AnnexeEmballageGroupeTypeModel::getLienAddConditionnement($paramIdFta, $paramChapitre, AccueilFta::VALUE_3, $paramSyntheseAction));
-
+        $htmlEmballageDuColis->setLien(AnnexeEmballageGroupeTypeModel::getAddLinkConditionnement($paramIdFta, $paramChapitre, AccueilFta::VALUE_3, $paramSyntheseAction));
+        $htmlEmballageDuColis->setLienSuppression(AnnexeEmballageGroupeTypeModel::getDeleteLinkConditionnement($paramIdFta, $paramChapitre, $idFtaConditionnment, $paramSyntheseAction));
         return $htmlEmballageDuColis->getHtmlResult();
-        ;
     }
 
     public function getHtmlEmballagePalette($paramIdFta, $paramChapitre, $paramSyntheseAction) {
         $annexeEmballageGroupeTypeModel = new AnnexeEmballageGroupeTypeModel();
         $idFtaConditionnment = $annexeEmballageGroupeTypeModel->getEmballageGroupePalette();
+
+        /*
+         * Récuperation des clés étrangères de la table fta_conditionnement
+         */
         $idAnnexeEmballage = $annexeEmballageGroupeTypeModel->getIdAnnexeEmballagePaletteFromFtaConditionnement();
         $idAnnexeEmballageGroupeType = $annexeEmballageGroupeTypeModel->getIdAnnexeEmballageGroupeTypePaletteFromFtaConditionnement();
+
+        /*
+         * Initialisation des modèles 
+         */
+
         $annexeEmballageGroupeTypeModel2 = new AnnexeEmballageGroupeTypeModel(AccueilFta::VALUE_4);
         $ftaConditionnmentModel = new FtaConditionnementModel($idFtaConditionnment);
+        /*
+         * Tableau de données
+         */
         $arrayFtaConditionnement = FtaConditionnementModel::getArrayFtaConditonnement($idFtaConditionnment);
 
+        /*
+         * Vérifie si pour la Fta en cours les données Fta conditionement sont renseigné
+         */
         if ($arrayFtaConditionnement) {
             $rightToAdd = FALSE;
         } else {
@@ -339,10 +397,10 @@ class FtaView {
         $htmlEmballagePalette = new HtmlSubForm_RNN($arrayFtaConditionnement, $className, $label, $tablesNameAndIdForeignKeyOfFtaConditionnement);
         $htmlEmballagePalette->setIsEditable($this->getIsEditable());
         $htmlEmballagePalette->setRightToAdd($rightToAdd);
-        $htmlEmballagePalette->setLien(AnnexeEmballageGroupeTypeModel::getLienAddConditionnement($paramIdFta, $paramChapitre, AccueilFta::VALUE_4, $paramSyntheseAction));
+        $htmlEmballagePalette->setLien(AnnexeEmballageGroupeTypeModel::getAddLinkConditionnement($paramIdFta, $paramChapitre, AccueilFta::VALUE_4, $paramSyntheseAction));
+        $htmlEmballagePalette->setLienSuppression(AnnexeEmballageGroupeTypeModel::getDeleteLinkConditionnement($paramIdFta, $paramChapitre, $idFtaConditionnment, $paramSyntheseAction));
 
         return $htmlEmballagePalette->getHtmlResult();
-        ;
     }
 
     public function getHtmlCommentaireChapitre() {

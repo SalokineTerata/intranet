@@ -49,12 +49,20 @@ class HtmlSubForm_RNN extends AbstractHtmlList {
      * @var array 
      */
     private $secondaryTableNamesAndIdKeyValue = NULL;
-    
+
     /**
      * Lien ajouter
      * @var string
      */
     private $Lien;
+
+    /**
+     * Lien de supresssion
+     * @var string
+     */
+    private $LienSuppression;
+
+    const VIRTUAL = "VIRTUAL";
 
     function __construct($paramArrayPrimaryContent = NULL, $paramSubFormPrimaryModelClassName = NULL, $paramPrimaryLabel = NULL, $secondaryTableNamesAndIdKeyValue = NULL) {
         parent::__construct();
@@ -87,7 +95,7 @@ class HtmlSubForm_RNN extends AbstractHtmlList {
     function setSecondaryTableNamesAndIdKeyValue($secondaryTableNamesAndIdKeyValue) {
         $this->secondaryTableNamesAndIdKeyValue = $secondaryTableNamesAndIdKeyValue;
     }
-        
+
     function getLien() {
         return $this->Lien;
     }
@@ -96,8 +104,16 @@ class HtmlSubForm_RNN extends AbstractHtmlList {
         $this->Lien = $Lien;
     }
 
-        private function getHtmlResultSubFormBegin() {
-        return "<table><tr><td><table>";
+    function getLienSuppression() {
+        return $this->LienSuppression;
+    }
+
+    function setLienSuppression($LienSuppression) {
+        $this->LienSuppression = $LienSuppression;
+    }
+
+    private function getHtmlResultSubFormBegin() {
+        return "<table><tr><td><table border=1 frame=hsides rules=rows>";
     }
 
     private function getHtmlResultSubFormEnd() {
@@ -178,20 +194,18 @@ class HtmlSubForm_RNN extends AbstractHtmlList {
                      */
                     if ($isFirstField) {
                         $htmlField->getAttributesGlobal()->setIsIconNextEnabledToTrue();
-                        $htmlUrlToSubFormDetail = $htmlField->getAttributesGlobal()->getIconNextToHtml();
                         $isFirstField = FALSE;
                     }
                     $htmlField->getAttributesGlobal()->setIsIconNextEnabledToFalse();
 
 
-                    $htmlField->setHtmlRenderToTable();
-
+                    $htmlField->setHtmlRenderToTableLabel();
                     /**
                      * Si le sous-formulaire est modifiable par l'utilisateur
                      * et que le champs ne fait pas partie de la liste des champs
                      * vérrouillés, alors le champs sera modifiable par l'utilisateur.
                      */
-                    if (parent::getIsEditable()) {
+                    if (parent::getIsEditable() && $htmlField->getContentLocked() == NULL) {
 
                         /**
                          * Le champs est modifiable.
@@ -207,11 +221,12 @@ class HtmlSubForm_RNN extends AbstractHtmlList {
                     $return.=$htmlField->getHtmlResult();
                 }
 
-                /**
-                 * Ajout du lien d'accès au détail du sous-formulaire
-                 */
-                $return.="<td>" . $htmlUrlToSubFormDetail . "</td>";
-
+                if (parent::getIsEditable()) {
+                    /**
+                     * Ajout d'un lien de suppression
+                     */
+                    $return.="<td>" . $this->getLienSuppression() . "</td>";
+                }
 
                 /**
                  * Fermeture de la ligne HTML
@@ -229,6 +244,7 @@ class HtmlSubForm_RNN extends AbstractHtmlList {
                 . $this->getHtmlResultSubFormEnd()
         ;
     }
+
     public function getHtmlAddContent() {
         return $this->getHtmlResultSubFormBegin()
                 . $this->getHtmlResultSubFormAddNewLine()

@@ -40,7 +40,7 @@ class DataFieldToHtmlSubform_R1N extends HtmlSubForm_R1N {
                 , ModelTableAssociation::getModelName($paramDataField->getReferencedTableName())
                 , $paramDataField->getFieldLabel()
         );
-        $this->setArrayContentLocked(explode(",", $paramDataField->getFieldsToLock()));
+        $this->setContentLocked(explode(",", $paramDataField->getFieldsToLock()));
         $this->setIsRightToAdd($paramDataField->getRightToAdd());
     }
 

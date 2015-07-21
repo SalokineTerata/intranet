@@ -31,6 +31,15 @@ require_once '../inc/main.php';
   fonction située dans le fichier "functions.php"
 
  */
+
+
+$action = Lib::getParameterFromRequest("action");
+$idAnnexeEmballageGroupeType = Lib::getParameterFromRequest("id_annexe_emballage_groupe_type");
+$idFta = Lib::getParameterFromRequest("id_fta"); //Identifiant de la fiche technique article
+$idAnnexeEmballageGroupe = Lib::getParameterFromRequest("id_annexe_emballage_groupe");
+$idAnnexeEmballage = Lib::getParameterFromRequest("id_annexe_emballage"); //Identifiant de l'emballage
+$idFtaChapitreEncours = Lib::getParameterFromRequest("id_fta_chapitre");
+$syntheseAction = Lib::getParameterFromRequest("synthese_action");
 switch ($action) {
 
     /*
@@ -43,77 +52,55 @@ switch ($action) {
         break;
     case 'etape1': //Un groupe d'emballage a été sélectionné
         //Renvoi sur la page d'ajout avec cette nouvelle information de groupe d'emballage sélectionné
-        header("Location: ajout_conditionnement.php?id_fta=$id_fta&type_emballage_groupe=$type_emballage_groupe&id_annexe_emballage_groupe=$id_annexe_emballage_groupe&action=etape2&id_fta_chapitre_encours=$id_fta_chapitre_encours&synthese_action=$synthese_action");
+        header("Location: ajout_conditionnement.php?id_fta=$idFta"
+                . "&id_annexe_emballage_groupe_type=$idAnnexeEmballageGroupeType"
+                . "&id_annexe_emballage_groupe=$idAnnexeEmballageGroupe"
+                . "&action=etape2&id_fta_chapitre=$idFtaChapitreEncours"
+                . "&synthese_action=$syntheseAction");
+
         break;
 
     case 'etape2': //Un emballage précis a été sélectionné
         //Renvoi sur la page d'ajout avec cette nouvelle information de groupe d'emballage sélectionné
-        header("Location: ajout_conditionnement.php?id_fta=$id_fta&type_emballage_groupe=$type_emballage_groupe&id_annexe_emballage_groupe=$id_annexe_emballage_groupe&id_annexe_emballage=$id_annexe_emballage&action=etape3&id_fta_chapitre_encours=$id_fta_chapitre_encours&synthese_action=$synthese_action");
+        header("Location: ajout_conditionnement.php?id_fta=$idFta"
+                . "&id_annexe_emballage_groupe_type=$idAnnexeEmballageGroupeType"
+                . "&id_annexe_emballage_groupe=$idAnnexeEmballageGroupe"
+                . "&id_annexe_emballage=$idAnnexeEmballage"
+                . "&action=etape3&id_fta_chapitre=$idFtaChapitreEncours"
+                . "&synthese_action=$syntheseAction");
+
         break;
 
     case 'etape3': //Un emballage a été sélectionné
     case 'saisie_manuel':
 
-        //Enregistrement de l'emballage affecter à cette FTA
-        $_SESSION["id_fta_conditionnement"] = Lib::getParameterFromRequest("id_fta_conditionnement");
-        $_SESSION["id_annexe_emballage"] = Lib::getParameterFromRequest("id_annexe_emballage");                   //Identifiant de l'emballage
-        $_SESSION["id_fta"] = Lib::getParameterFromRequest("id_fta");                                 //Identifiant de la fiche technique article
-        $_SESSION["nombre_couche_fta_conditionnement"] = Lib::getParameterFromRequest("nombre_couche_fta_conditionnement");      //Une seule couche par UVC
-        $_SESSION["hauteur_fta_conditionnement"] = Lib::getParameterFromRequest("hauteur_fta_conditionnement");
-        $_SESSION["longueur_fta_conditionnement"] = Lib::getParameterFromRequest("longueur_fta_conditionnement");
-        $_SESSION["largeur_fta_conditionnement"] = Lib::getParameterFromRequest("largeur_fta_conditionnement");
-        $_SESSION["poids_fta_conditionnement"] = Lib::getParameterFromRequest("poids_fta_conditionnement");               //Poids des emballages qui ont peuvent varier selon les articles (comme des films)
-        $_SESSION["quantite_par_couche_fta_conditionnement"] = Lib::getParameterFromRequest("quantite_par_couche_fta_conditionnement");  //Quantité par UVC
-        $_SESSION["pcb_fta_conditionnement"] = Lib::getParameterFromRequest("pcb_fta_conditionnement");  //Quantité par UVC
-        $_SESSION["dimension_uvc_fta_confitionnement"] = Lib::getParameterFromRequest("dimension_uvc_fta_confitionnement");        //Dimension du conditionnement=Dimension de l'UVC ?
-        $_SESSION["id_annexe_emballage_groupe_type"] = Lib::getParameterFromRequest("id_annexe_emballage_groupe_type");
-        $_SESSION["id_annexe_emballage_groupe"] = Lib::getParameterFromRequest("id_annexe_emballage_groupe");
-
-        //Si ce conditionnement est utilisé pour définir la dimension de l'UVC,
-        /* if($dimension_uvc_fta_confitionnement)
-          {
-
-          //on désactive les autres conditionnements de la FTA
-          $req = "UPDATE fta_conditionnement "
-          . "SET dimension_uvc_fta_confitionnement=0 "
-          . "WHERE id_fta=$id_fta "
-          ;
-          DatabaseOperation::query($req);
-
-          //on actualise la table access_arti2
-          $id_fta;
-          mysql_table_load("fta");
-          mysql_table_load("access_arti2");
-          $id_access_arti2; //Clef récupérée
-
-          $req = "UPDATE access_arti2 "
-          . "SET NB_UNIT_ELEM=$quantite_par_couche_fta_conditionnement "
-          . "WHERE id_access_arti2=$id_access_arti2; "
-          ;
-          DatabaseOperation::query($req);
-          } */
-
-        //Si ce conditionnement est de type Colis, il ne peut y en avoir plus d'un
-        /* if($id_annexe_emballage_groupe_type==3 or $id_annexe_emballage_groupe_type==4)
-          {
-          $req = "DELETE fta_conditionnement FROM fta_conditionnement, annexe_emballage_groupe "
-          . "WHERE id_fta=$id_fta AND id_annexe_emballage_groupe_type=$id_annexe_emballage_groupe_type "
-          . "AND fta_conditionnement.id_annexe_emballage_groupe=annexe_emballage_groupe.id_annexe_emballage_groupe "
-          ;
-          DatabaseOperation::query($req);
-
-          } */
-        if ($id_fta_conditionnement) {//Cas d'une modification
-            $operation = "update";
-        } else { //Cas d'une création
-            $operation = "insert";
+        /*
+         * Initialisation du modele
+         */
+        $annexeEmballageModel = new AnnexeEmballageModel($idAnnexeEmballage);
+        /*
+         * Enregistrement de l'emballage affecter à cette FTA
+         */
+        //Récuperation des données
+        $nbCoucheFtaConditionnement = Lib::getParameterFromRequest(FtaConditionnementModel::FIELDNAME_NOMBRE_COUCHE_FTA_CONDITIONNEMENT);//Une seule couche par UVC
+        $hauteurFtaConditionnement = $annexeEmballageModel->getDataField(AnnexeEmballageModel::FIELDNAME_HAUTEUR_ANNEXE_EMBALLAGE)->getFieldValue();
+        $longeurFtaConditionnement = $annexeEmballageModel->getDataField(AnnexeEmballageModel::FIELDNAME_LONGUEUR_ANNEXE_EMBALLAGE)->getFieldValue();
+        $largeurFtaConditionnement = $annexeEmballageModel->getDataField(AnnexeEmballageModel::FIELDNAME_LARGEUR_ANNEXE_EMBALLAGE)->getFieldValue();
+        $poidsFtaConditionnement = $annexeEmballageModel->getDataField(AnnexeEmballageModel::FIELDNAME_POIDS_ANNEXE_EMBALLAGE)->getFieldValue();             //Poids des emballages qui ont peuvent varier selon les articles (comme des films)
+        $qteCoucheFtaConditionnement = Lib::getParameterFromRequest(FtaConditionnementModel::FIELDNAME_QUANTITE_PAR_COUCHE_FTA_CONDITIONNEMENT); //Quantité par UVC
+        if ($idAnnexeEmballageGroupeType == 3) {
+            $qteCoucheFtaConditionnement = $annexeEmballageModel->getDataField(AnnexeEmballageModel::FIELDNAME_QUANTITE_PAR_COUCHE_ANNEXE_EMBALLAGE)->getFieldValue();
+            $nbCoucheFtaConditionnement = $annexeEmballageModel->getDataField(AnnexeEmballageModel::FIELDNAME_NOMBRE_COUCHE_ANNEXE_EMBALLAGE)->getFieldValue();   
         }
-        mysql_table_operation("fta_conditionnement", $operation);
 
-        //Mise à jour des poids de l'UVC
-        //calcul_poids_fta($id_fta);
-        //Renvoi sur la page d'ajout avec cette nouvelle information de groupe d'emballage sélectionné
-        header("Location: modification_fiche.php?id_fta=$id_fta&id_fta_chapitre_encours=$id_fta_chapitre_encours&synthese_action=modification");
+      
+        FtaConditionnementModel::addFtaConditionnement($idFta, $idAnnexeEmballage, $idAnnexeEmballageGroupe, $idAnnexeEmballageGroupeType, $hauteurFtaConditionnement, $longeurFtaConditionnement
+                , $largeurFtaConditionnement, $poidsFtaConditionnement, $nbCoucheFtaConditionnement, $qteCoucheFtaConditionnement);
+
+
+
+
+        header("Location: modification_fiche.php?id_fta=$idFta&id_fta_chapitre_encours=$idFtaChapitreEncours&synthese_action=encours");
         break;
 
 

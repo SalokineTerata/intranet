@@ -15,10 +15,15 @@ class AnnexeEmballageGroupeModel extends AbstractModel {
     const FIELDNAME_POIDS_VARIABLE_FTA_EMBALLAGE_GROUPE = "poids_variable_fta_emballage_groupe";
 
     public static function getIdAnnexeEmballageGroupe($paramEmballageGroupeType) {
+        if ($paramEmballageGroupeType == 2 ){
+            $op = "<=";
+        }else{
+            $op= "=";
+        }
         $arrayEmballageGroupeType = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
                         "SELECT DISTINCT " . AnnexeEmballageGroupeModel::KEYNAME
                         . " FROM " . AnnexeEmballageGroupeModel::TABLENAME . "," . AnnexeEmballageGroupeTypeModel::TABLENAME
-                        . " WHERE " . AnnexeEmballageGroupeModel::FIELDNAME_ID_ANNEXE_EMBALLAGE_GROUPE_CONFIGURATION . "=" . $paramEmballageGroupeType
+                        . " WHERE " . AnnexeEmballageGroupeModel::FIELDNAME_ID_ANNEXE_EMBALLAGE_GROUPE_CONFIGURATION . $op . $paramEmballageGroupeType
         );
         foreach ($arrayEmballageGroupeType as $rowsEmballageGroupeType) {
             $IdAnnexeEmballageGroupe[] = $rowsEmballageGroupeType[AnnexeEmballageGroupeModel::KEYNAME];

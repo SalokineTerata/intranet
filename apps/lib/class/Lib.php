@@ -58,7 +58,12 @@ class Lib {
         exit;
         //include ("../lib/fin_page.inc");
     }
-
+/**
+ * IsDefine n'est plus à utiliser pour récuperer les éléments de l'url
+ * @param type $variable_name
+ * @param type $variable_default_value
+ * @return type
+ */
     public static function isDefined($variable_name, $variable_default_value = null) {
 //$result = (isset($_REQUEST[$variable_name]) && $_REQUEST["$variable_name"] != '') ? $_REQUEST["$variable_name"] : "$variable_default_value";
         $result = "";

@@ -28,6 +28,8 @@ class FtaConditionnementModel extends AbstractModel {
     const FIELDNAME_VIRTUAL_NOMBRE_COUCHE_FTA_CONDITIONNEMENT = "VIRTUAL_nombre_couche_fta_conditionnement";
     const FIELDNAME_VIRTUAL_POIDS_FTA_CONDITIONNEMENT = "VIRTUAL_poids_fta_conditionnement";
     const FIELDNAME_VIRTUAL_QUANTITE_PAR_COUCHE_FTA_CONDITIONNEMENT = "VIRTUAL_quantite_par_couche_fta_conditionnement";
+    const FIELDNAME_VIRTUAL_REFERENCE_FOURNISSEUR_FTA_CONDITIONNEMENT = "VIRTUAL_reference_fournisseur_fta_conditionnement";
+    const FIELDNAME_VIRTUAL_NOM_FTA_CONDITIONNEMENT_GROUPE = "VIRTUAL_nom_fta_conditionnement_groupe";
     const EMBALLAGES_UVC = "1";
     const EMBALLAGES_PAR_COLIS = "2";
     const EMBALLAGES_DU_COLIS = "3";
@@ -84,11 +86,27 @@ class FtaConditionnementModel extends AbstractModel {
         $this->modelFta = $modelFta;
     }
 
-    //Calcul du poids de l'emballage  par UVC
+    /**
+     * Calcul du poids de l'emballage  par UVC
+     * @param type $paramPoidsEmballageUnitaire
+     * @param type $paramQuantiteCouche
+     * @param type $paramNombreCouche
+     * @return type
+     */
     static function getCalculPoidsEmballage($paramPoidsEmballageUnitaire, $paramQuantiteCouche, $paramNombreCouche) {
         return $paramPoidsEmballageUnitaire * $paramQuantiteCouche * $paramNombreCouche;
     }
 
+    /**
+     * Calcul des dimensions de l'emballage  par UVC
+     * @param type $paramDimensionEmballageHauteur
+     * @param type $paramDimensionEmballageHauteurRow
+     * @param type $paramDimensionEmballageLongueur
+     * @param type $paramDimensionEmballageLongueurRow
+     * @param type $paramDimensionEmballageLargeur
+     * @param type $paramDimensionEmballageLargeurRow
+     * @return type
+     */
     static function getCalculDimensionEmballageUvc($paramDimensionEmballageHauteur, $paramDimensionEmballageHauteurRow, $paramDimensionEmballageLongueur, $paramDimensionEmballageLongueurRow, $paramDimensionEmballageLargeur, $paramDimensionEmballageLargeurRow) {
 
         //Calcul des dimension de l'emballage par UVC  (on recherche la taille la plus grande)
@@ -104,27 +122,66 @@ class FtaConditionnementModel extends AbstractModel {
         return $paramDimensionEmballageLongueur . "x" . $paramDimensionEmballageLargeur . "x" . $paramDimensionEmballageHauteur . " (Longueur x Largeur x Hauteur)";
     }
 
+    /**
+     * Calcul de la hauteur de l'emballage  par Palette
+     * @param type $paramHauteurFtaConditionnement
+     * @param type $paramCouchePalette
+     * @return type
+     */
     static function getCalculHauteurEmballagePalette($paramHauteurFtaConditionnement, $paramCouchePalette) {
         return (($paramHauteurFtaConditionnement * $paramCouchePalette) + $paramHauteurFtaConditionnement ) / 1000;
     }
 
+    /**
+     * Calcul du poids brut de l'emballage
+     * @param type $paramPoidsNet
+     * @param type $paramPoidsEmballage
+     * @return type
+     */
     static function getCalculPoidsBrutEmballage($paramPoidsNet, $paramPoidsEmballage) {
         return $paramPoidsNet + $paramPoidsEmballage;
     }
 
+    /**
+     * Calcul du poids brut de l'emballage Colis
+     * @param type $paramPoidsNet
+     * @param type $paramPoidsEmballage
+     * @return type
+     */
     static function getCalculPoidsBrutEmballageColis($paramPoidsNet, $paramPoidsEmballage) {
         return $paramPoidsNet + ($paramPoidsEmballage / 1000);
     }
 
+    /**
+     * Calcul du poids de l'emballage par palette
+     * @param type $paramPoidsFta
+     * @param type $paramNombreColisCouche
+     * @param type $paramNombreCouchePalette
+     * @param type $paramQuantiteCouche
+     * @param type $paramNombreCouche
+     * @return type
+     */
     static function getCalculPoidsEmballagePalette($paramPoidsFta, $paramNombreColisCouche, $paramNombreCouchePalette, $paramQuantiteCouche, $paramNombreCouche) {
         return ($paramPoidsFta / 1000) * $paramNombreColisCouche * $paramNombreCouchePalette * ($paramQuantiteCouche * $paramNombreCouche);
     }
 
+    /**
+     * Multiplication
+     * @param type $param
+     * @param type $paramb
+     * @return type
+     */
     static function getCalculGenericMultiplication($param, $paramb) {
         return $param * $paramb;
     }
 
-    public static function getIdFtaConditionnement($paramIdAnnexeEmballage, $paramIdFta) {
+    /**
+     * On obtient les id Fta Conditionnement selon le type d'emballage
+     * @param type $paramIdAnnexeEmballage
+     * @param type $paramIdFta
+     * @return int
+     */
+    public static function getIdFtaConditionnement($paramIdAnnexeEmballage, $paramIdFta, $paramIdEmballageGroupeType) {
 
         $req = "SELECT DISTINCT " . FtaConditionnementModel::KEYNAME
                 . " FROM " . FtaConditionnementModel::TABLENAME
@@ -133,6 +190,7 @@ class FtaConditionnementModel extends AbstractModel {
         $req .=AnnexeEmballageModel::AddIdAnnexeEmballage($paramIdAnnexeEmballage);
 
         $req .= ") AND " . FtaConditionnementModel::FIELDNAME_ID_FTA . "=" . $paramIdFta
+                . " AND " . FtaConditionnementModel::FIELDNAME_ID_ANNEXE_EMBALLAGE_GROUPE_TYPE . "=" . $paramIdEmballageGroupeType
         ;
 
         $arrayIdFtaConditionnement = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray($req);
@@ -147,6 +205,12 @@ class FtaConditionnementModel extends AbstractModel {
         return $IdFtaConditionnement;
     }
 
+    /**
+     *  On obtient l' id Annexe Emballage de type UVC selon l'id fta et id fta conditionnement
+     * @param type $paramIdFtaConditionnement
+     * @param type $paramIdFta
+     * @return int
+     */
     public static function getIdAnnexeEmballageFromFtaConditionnement($paramIdFtaConditionnement, $paramIdFta) {
 
         $req = "SELECT DISTINCT " . FtaConditionnementModel::FIELDNAME_ID_ANNEXE_EMBALLAGE
@@ -167,6 +231,12 @@ class FtaConditionnementModel extends AbstractModel {
         return $IdAnnexeEmballage;
     }
 
+    /**
+     * On obtient l' id Annexe Emballage groupe type de type UVC selon l'id fta et id fta conditionnement
+     * @param type $paramIdFtaConditionnement
+     * @param type $paramIdFta
+     * @return int
+     */
     public static function getIdAnnexeEmballageGroupeTypeFromFtaConditionnement($paramIdFtaConditionnement, $paramIdFta) {
 
         $req = "SELECT DISTINCT " . FtaConditionnementModel::FIELDNAME_ID_ANNEXE_EMBALLAGE_GROUPE_TYPE
@@ -187,11 +257,56 @@ class FtaConditionnementModel extends AbstractModel {
         return $IdAnnexeEmballageGroupe;
     }
 
+    /**
+     * Tableau de données, convertie le nom des champs des données aux noms des champs virtuel qui leur corresponds
+     * @param type $paramIdFtaConditionnement
+     * @return int
+     */
     public static function getArrayFtaConditonnement($paramIdFtaConditionnement) {
 
         $result = DatabaseOperation::query(
                         "SELECT " . FtaConditionnementModel::KEYNAME
-                        . "," . FtaConditionnementModel::FIELDNAME_HAUTEUR_EMBALLAGE_FTA_CONDITIONNEMENT
+                        . "," . FtaConditionnementModel::FIELDNAME_ID_ANNEXE_EMBALLAGE_GROUPE
+                        . "," . FtaConditionnementModel::FIELDNAME_ID_ANNEXE_EMBALLAGE
+                        . "," . FtaConditionnementModel::FIELDNAME_HAUTEUR_FTA_CONDITIONNEMENT
+                        . "," . FtaConditionnementModel::FIELDNAME_LONGUEUR_FTA_CONDITIONNEMENT
+                        . "," . FtaConditionnementModel::FIELDNAME_LARGEUR_FTA_CONDITIONNEMENT
+                        . "," . FtaConditionnementModel::FIELDNAME_POIDS_FTA_CONDITIONNEMENT
+                        . "," . FtaConditionnementModel::FIELDNAME_QUANTITE_PAR_COUCHE_FTA_CONDITIONNEMENT
+                        . " FROM " . FtaConditionnementModel::TABLENAME
+                        . " WHERE " . FtaConditionnementModel::KEYNAME . "=" . $paramIdFtaConditionnement);
+
+        $arrayTmp = DatabaseOperation::convertSqlResultWithKeyAsFirstFieldToArray($result);
+        if ($arrayTmp) {
+            foreach ($arrayTmp as $key => $rows) {
+                $array[$key] = array(
+                    FtaConditionnementModel::FIELDNAME_VIRTUAL_NOM_FTA_CONDITIONNEMENT_GROUPE => $rows[FtaConditionnementModel::FIELDNAME_ID_ANNEXE_EMBALLAGE_GROUPE],
+                    FtaConditionnementModel::FIELDNAME_VIRTUAL_REFERENCE_FOURNISSEUR_FTA_CONDITIONNEMENT => $rows[FtaConditionnementModel::FIELDNAME_ID_ANNEXE_EMBALLAGE],
+                    FtaConditionnementModel::FIELDNAME_VIRTUAL_HAUTEUR_FTA_CONDITIONNEMENT => $rows[FtaConditionnementModel::FIELDNAME_HAUTEUR_FTA_CONDITIONNEMENT],
+                    FtaConditionnementModel::FIELDNAME_VIRTUAL_LONGUEUR_FTA_CONDITIONNEMENT => $rows[FtaConditionnementModel::FIELDNAME_LONGUEUR_FTA_CONDITIONNEMENT],
+                    FtaConditionnementModel::FIELDNAME_VIRTUAL_LARGEUR_FTA_CONDITIONNEMENT => $rows[FtaConditionnementModel::FIELDNAME_LARGEUR_FTA_CONDITIONNEMENT],
+                    FtaConditionnementModel::FIELDNAME_VIRTUAL_POIDS_FTA_CONDITIONNEMENT => $rows[FtaConditionnementModel::FIELDNAME_POIDS_FTA_CONDITIONNEMENT],
+                    FtaConditionnementModel::FIELDNAME_VIRTUAL_QUANTITE_PAR_COUCHE_FTA_CONDITIONNEMENT => $rows[FtaConditionnementModel::FIELDNAME_QUANTITE_PAR_COUCHE_FTA_CONDITIONNEMENT]
+                );
+            }
+        } else {
+            $array = 0;
+        }
+        return $array;
+    }
+
+    /**
+     * Tableau de données, convertie le nom des champs des données aux noms des champs virtuel qui leur corresponds
+     * @param type $paramIdFtaConditionnement
+     * @return int
+     */
+    public static function getArrayFtaConditonnementDuColis($paramIdFtaConditionnement) {
+
+        $result = DatabaseOperation::query(
+                        "SELECT " . FtaConditionnementModel::KEYNAME
+                        . "," . FtaConditionnementModel::FIELDNAME_ID_ANNEXE_EMBALLAGE_GROUPE
+                        . "," . FtaConditionnementModel::FIELDNAME_ID_ANNEXE_EMBALLAGE
+                        . "," . FtaConditionnementModel::FIELDNAME_HAUTEUR_FTA_CONDITIONNEMENT
                         . "," . FtaConditionnementModel::FIELDNAME_LONGUEUR_FTA_CONDITIONNEMENT
                         . "," . FtaConditionnementModel::FIELDNAME_LARGEUR_FTA_CONDITIONNEMENT
                         . "," . FtaConditionnementModel::FIELDNAME_POIDS_FTA_CONDITIONNEMENT
@@ -204,7 +319,9 @@ class FtaConditionnementModel extends AbstractModel {
         if ($arrayTmp) {
             foreach ($arrayTmp as $key => $rows) {
                 $array[$key] = array(
-                    FtaConditionnementModel::FIELDNAME_VIRTUAL_HAUTEUR_FTA_CONDITIONNEMENT => $rows[FtaConditionnementModel::FIELDNAME_HAUTEUR_EMBALLAGE_FTA_CONDITIONNEMENT],
+                    FtaConditionnementModel::FIELDNAME_VIRTUAL_NOM_FTA_CONDITIONNEMENT_GROUPE => $rows[FtaConditionnementModel::FIELDNAME_ID_ANNEXE_EMBALLAGE_GROUPE],
+                    FtaConditionnementModel::FIELDNAME_VIRTUAL_REFERENCE_FOURNISSEUR_FTA_CONDITIONNEMENT => $rows[FtaConditionnementModel::FIELDNAME_ID_ANNEXE_EMBALLAGE],
+                    FtaConditionnementModel::FIELDNAME_VIRTUAL_HAUTEUR_FTA_CONDITIONNEMENT => $rows[FtaConditionnementModel::FIELDNAME_HAUTEUR_FTA_CONDITIONNEMENT],
                     FtaConditionnementModel::FIELDNAME_VIRTUAL_LONGUEUR_FTA_CONDITIONNEMENT => $rows[FtaConditionnementModel::FIELDNAME_LONGUEUR_FTA_CONDITIONNEMENT],
                     FtaConditionnementModel::FIELDNAME_VIRTUAL_LARGEUR_FTA_CONDITIONNEMENT => $rows[FtaConditionnementModel::FIELDNAME_LARGEUR_FTA_CONDITIONNEMENT],
                     FtaConditionnementModel::FIELDNAME_VIRTUAL_POIDS_FTA_CONDITIONNEMENT => $rows[FtaConditionnementModel::FIELDNAME_POIDS_FTA_CONDITIONNEMENT],
@@ -216,6 +333,58 @@ class FtaConditionnementModel extends AbstractModel {
             $array = 0;
         }
         return $array;
+    }
+
+    /**
+     * Fonction qui ajoute un nouvel conditionnement
+     * @param type $paramIdFta
+     * @param type $paramIdAnnexeEmballage
+     * @param type $paramIdAnnexeEmballageGroupe
+     * @param type $paramIdAnnexeEmballageGroupeType
+     * @param type $paramHauteurFtaConditionnement
+     * @param type $paramLongeurFtaConditionnement
+     * @param type $paramLargeurFtaConditionnement
+     * @param type $paramPoidsFtaConditionnement
+     * @param type $paramNbCoucheFtaConditionnement
+     * @param type $paramQteCoucheFtaConditionnement
+     * @return type
+     */
+    public static function addFtaConditionnement($paramIdFta, $paramIdAnnexeEmballage, $paramIdAnnexeEmballageGroupe, $paramIdAnnexeEmballageGroupeType, $paramHauteurFtaConditionnement, $paramLongeurFtaConditionnement, $paramLargeurFtaConditionnement, $paramPoidsFtaConditionnement, $paramNbCoucheFtaConditionnement, $paramQteCoucheFtaConditionnement) {
+
+        return DatabaseOperation::query(
+                        "INSERT INTO " . FtaConditionnementModel::TABLENAME
+                        . "(" . FtaConditionnementModel::FIELDNAME_ID_FTA
+                        . ", " . FtaConditionnementModel::FIELDNAME_ID_ANNEXE_EMBALLAGE
+                        . ", " . FtaConditionnementModel::FIELDNAME_ID_ANNEXE_EMBALLAGE_GROUPE
+                        . ", " . FtaConditionnementModel::FIELDNAME_ID_ANNEXE_EMBALLAGE_GROUPE_TYPE
+                        . ", " . FtaConditionnementModel::FIELDNAME_HAUTEUR_FTA_CONDITIONNEMENT
+                        . ", " . FtaConditionnementModel::FIELDNAME_LONGUEUR_FTA_CONDITIONNEMENT
+                        . ", " . FtaConditionnementModel::FIELDNAME_LARGEUR_FTA_CONDITIONNEMENT
+                        . ", " . FtaConditionnementModel::FIELDNAME_POIDS_FTA_CONDITIONNEMENT
+                        . ", " . FtaConditionnementModel::FIELDNAME_NOMBRE_COUCHE_FTA_CONDITIONNEMENT
+                        . ", " . FtaConditionnementModel::FIELDNAME_QUANTITE_PAR_COUCHE_FTA_CONDITIONNEMENT
+                        . ") VALUES (" . $paramIdFta
+                        . ", " . $paramIdAnnexeEmballage
+                        . ", " . $paramIdAnnexeEmballageGroupe
+                        . ", " . $paramIdAnnexeEmballageGroupeType
+                        . ", " . $paramHauteurFtaConditionnement
+                        . ", " . $paramLongeurFtaConditionnement
+                        . ", " . $paramLargeurFtaConditionnement
+                        . ", " . $paramPoidsFtaConditionnement
+                        . ", " . $paramNbCoucheFtaConditionnement
+                        . ", " . $paramQteCoucheFtaConditionnement . " )"
+        );
+    }
+
+    /**
+     * Suppression d'une donnée de la table Fta conditionnement par son identifiant
+     * @param type $paramIdFtaConditionnement
+     * @return type
+     */
+    public static function deleteFtaConditionnement($paramIdFtaConditionnement) {
+        return DatabaseOperation::query(
+                        " DELETE FROM " . FtaConditionnementModel::TABLENAME . " WHERE " .
+                        FtaConditionnementModel::KEYNAME . "=" . $paramIdFtaConditionnement);
     }
 
 }

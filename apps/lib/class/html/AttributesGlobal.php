@@ -163,7 +163,7 @@ class AttributesGlobal extends StandardGlobalAttributes {
      * @param string
      */
     public function getIconAddToHtml() {
-        return "<a href=\"dispatcher.php\" title=\"Not implemented\">"
+        return "<a href=\"dispatcher.php\" >"
                 . "<span " . $this->getIdAddToHtml() . ">" . self::DEFAULT_HTML_IMAGE_ADD . "</span>"
                 . "</a>"
         ;

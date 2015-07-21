@@ -346,16 +346,14 @@ switch ($action) {
 
         //Variables passées en URL
         $paramIdFta = Lib::getParameterFromRequest("id_fta");
-        $id_fta_conditionnement = Lib::getParameterFromRequest("id_fta_conditionnement");
+        $id_fta_conditionnement = Lib::isDefined(FtaConditionnementModel::KEYNAME);
 
-        //Suppression du conditionnement
-        //mysql_table_operation("fta_conditionnement", "delete");
+        /*
+         * Suppression du conditionnement
+         */
 
-        ObjectFta::deleteConditionnement($id_fta_conditionnement);
+        FtaConditionnementModel::deleteFtaConditionnement($id_fta_conditionnement);
 
-//Mise à jour des poids de l'UVC
-//calcul_poids_fta($id_fta);
-//header ("Location: modification_fiche.php?id_fta=$id_fta&id_fta_chapitre_encours=$id_fta_chapitre_encours&synthese_action=$synthese_action");
         break;
 
     case 'suppression_palettisation':

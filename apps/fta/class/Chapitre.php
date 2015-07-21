@@ -82,8 +82,14 @@ class Chapitre {
     protected static $html_chapitre_emballage_colis;
     protected static $html_chapitre_etiquette;
     protected static $html_chapitre_etiquette_article;
+    protected static $html_chapitre_etiquette_article_MDDAvecEtiq;
+    protected static $html_chapitre_etiquette_article_FEAvecEtiq;
     protected static $html_chapitre_etiquette_client;
+    protected static $html_chapitre_etiquette_client_MDDAvecEtiq;
+    protected static $html_chapitre_etiquette_client_FEAvecEtiq;
     protected static $html_chapitre_etiquette_composant;
+    protected static $html_chapitre_etiquette_composant_MDDAvecEtiq;
+    protected static $html_chapitre_etiquette_composant_FEAvecEtiq;
     protected static $html_chapitre_etiquette_r_d;
     protected static $html_chapitre_expedition;
     protected static $html_chapitre_exigence_client;
@@ -307,6 +313,16 @@ class Chapitre {
                 $return = self::$html_chapitre_etiquette_client;
                 break;
             default:
+            case "etiquette_client_FEAvecEtiq":
+                self::$html_chapitre_etiquette_client_FEAvecEtiq = self::buildChapitreEtiquetteClient_FEAvecEtiq();
+                $return = self::$html_chapitre_etiquette_client_FEAvecEtiq;
+                break;
+            default:
+            case "etiquette_client_MDDAvecEtiq":
+                self::$html_chapitre_etiquette_client_MDDAvecEtiq = self::buildChapitreEtiquetteClient_MDDAvecEtiq();
+                $return = self::$html_chapitre_etiquette_client_MDDAvecEtiq;
+                break;
+            default:
             case "pcb":
                 self::$html_chapitre_pcb = self::buildChapitrePcb();
                 $return = self::$html_chapitre_pcb;
@@ -332,9 +348,29 @@ class Chapitre {
                 $return = self::$html_chapitre_etiquette_article;
                 break;
             default:
+            case "etiquette_article_FEAvecEtiq":
+                self::$html_chapitre_etiquette_article_FEAvecEtiq = self::buildChapitreEtiquetteArticle_FEAvecEtiq();
+                $return = self::$html_chapitre_etiquette_article_FEAvecEtiq;
+                break;
+            default:
+            case "etiquette_article_MDDAvecEtiq":
+                self::$html_chapitre_etiquette_article_MDDAvecEtiq = self::buildChapitreEtiquetteArticle_MDDAvecEtiq();
+                $return = self::$html_chapitre_etiquette_article_MDDAvecEtiq;
+                break;
+            default:
             case "etiquette_composant":
                 self::$html_chapitre_etiquette_composant = self::buildChapitreEtiquetteComposant();
                 $return = self::$html_chapitre_etiquette_composant;
+                break;
+            default:
+            case "etiquette_composant_FEAvecEtiq":
+                self::$html_chapitre_etiquette_composant_FEAvecEtiq = self::buildChapitreEtiquetteComposant_FEAvecEtiq();
+                $return = self::$html_chapitre_etiquette_composant_FEAvecEtiq;
+                break;
+            default:
+            case "etiquette_composant_MDDAvecEtiq":
+                self::$html_chapitre_etiquette_composant_MDDAvecEtiq = self::buildChapitreEtiquetteComposant_MDDAvecEtiq();
+                $return = self::$html_chapitre_etiquette_composant_MDDAvecEtiq;
                 break;
             default:
             case "donnees_clients":
@@ -738,243 +774,18 @@ class Chapitre {
         $ftaView = new FtaView($ftaModel);
         $ftaView->setIsEditable($isEditable);
         $ftaView->setFtaChapitreModelById(self::ID_CHAPITRE_IDENTITE);
-
-        //Emballage primaire uniquement ref FTE
-        // $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_PCB);
-        //Référence Arcadia
-        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_ARCADIA_EMBALLAGE_TYPE);
-
-        $bloc.="<tr> <td>Il manque deux données :
-            • la Quantité par colis
-            • la Quantité par UVC</td></tr>";
-
-
-        $bloc.="<tr class=titre_principal><td class>Emballage</td></tr>";
-
+ 
         $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_DESCRIPTION_EMBALLAGE);
-        $bloc.=$ftaView->getHtmlEmballageUVC($id_fta, $idChapitre,$synthese_action);
-        $bloc.=$ftaView->getHtmlEmballageParColis($id_fta,$idChapitre,$synthese_action);
-        $bloc.=$ftaView->getHtmlEmballagePalette($id_fta,$idChapitre,$synthese_action);
-        /*
-          //Selection de tous les types de groupe d'emballage
-          $req = "SELECT * FROM annexe_emballage_groupe_type ORDER BY ordre_emballage_groupe_type";
-          //$req = "SELECT * FROM annexe_emballage_groupe_type WHERE `id_annexe_emballage_groupe_type`='1' ORDER BY ordre_emballage_groupe_type";
-          $result1 = DatabaseOperation::query($req);
-          while ($rows1 = mysql_fetch_array($result1)) {
+        
+        //Emballages par UVC
+        $bloc.=$ftaView->getHtmlEmballageUVC($id_fta, $idChapitre, $synthese_action);
+        
+        //Emballages par Colis
+        $bloc.=$ftaView->getHtmlEmballageParColis($id_fta, $idChapitre, $synthese_action);
+        
+        //Palette
+        $bloc.=$ftaView->getHtmlEmballagePalette($id_fta, $idChapitre, $synthese_action);
 
-
-          //Sélection du bon groupe d'emballage
-          $type_emballage_groupe = $rows1["id_annexe_emballage_groupe_type"]; //Emballe pour l'UVC
-          $id_annexe_emballage_groupe_type = $type_emballage_groupe;
-          $titre = $rows1["nom_annexe_emballage_groupe_type"];
-
-          // $bloc.="<tr><td><br></td></tr><" . Html::$DEFAULT_HTML_TABLE_CONTENU . "><tr class=titre_principal><td align=left>$titre";
-
-          //Ajouter un nouveau Conditionement
-          if ($is_editable) {
-          if ($type_emballage_groupe == 2) {
-          $dimension_uvc_fta_confitionnement = 1;
-          }
-          $bloc.= "
-          <a href=ajout_conditionnement.php?id_fta=$id_fta&type_emballage_groupe=$type_emballage_groupe&id_fta_chapitre_encours=$id_fta_chapitre_encours&synthese_action=$synthese_action&dimension_uvc_fta_confitionnement=$dimension_uvc_fta_confitionnement>
-          (Ajouter)
-          </a>
-          ";
-          }
-          $bloc.= "</td></tr>";
-
-          //Intitulé des quantité
-          $intitule_quantite = "Quantité par ";
-          switch ($id_annexe_emballage_groupe_type) {
-          case 1: $intitule_quantite .= "UVC";
-          break;
-          case 2: $intitule_quantite .= "Colis";
-          break;
-          case 3: $intitule_quantite .= "Palette";
-          break;
-          case 4: $intitule_quantite = "Quantité";
-          break;
-          }
-          //Tableau récapitulatif du conditionnement
-          $recap_conditionnement = "
-          <" . Html::$DEFAULT_HTML_TABLE_CONTENU . ">
-          <tr class=contenu>
-          <td>
-          Type
-          </td>
-          <td>
-          Longeur x Largeur x Hauteur (en mm)
-          </td>
-          <td>
-          Poids (en g)
-          </td>
-          <td>
-          $intitule_quantite
-          </td>";
-          if ($id_annexe_emballage_groupe_type == 3) {
-          $recap_conditionnement .="<td>PCB</td>";
-          }
-          if ($is_editable) {
-          $recap_conditionnement.="<td><small><i>Actions</i></small></td>";
-          }
-          $recap_conditionnement.="</tr>";
-
-          $req = "SELECT id_fta_conditionnement, fta_conditionnement.id_annexe_emballage_groupe "
-          . "FROM fta_conditionnement, annexe_emballage_groupe "
-          . "WHERE id_fta=$id_fta "
-          . "AND ( "
-          . "id_annexe_emballage_groupe_type=$type_emballage_groupe "
-          //. "OR ( fta_conditionnement.id_annexe_emballage_groupe = annexe_emballage_groupe.id_annexe_emballage_groupe "
-          //. "AND id_annexe_emballage_groupe_configuration =$type_emballage_groupe )"
-          . " )"
-          . "AND fta_conditionnement.id_annexe_emballage_groupe=annexe_emballage_groupe.id_annexe_emballage_groupe "
-          . "ORDER BY nom_annexe_emballage_groupe, poids_fta_conditionnement "
-          ;
-
-          $result = DatabaseOperation::query($req);
-          if (mysql_num_rows($result)) {
-          while ($rows = mysql_fetch_array($result)) {
-          $id_fta_conditionnement = $rows["id_fta_conditionnement"];
-          $last_id_fta_conditionnement = $rows["last_id_fta_conditionnement"];
-          //$table = "fta_conditionnement";
-          //                    mysql_table_load($table);
-          //                    mysql_table_load("annexe_emballage");
-          //                    mysql_table_load("annexe_emballage_groupe");
-          $recordConditionnement = new DatabaseRecord(
-          "fta_conditionnement", $id_fta_conditionnement)
-          ;
-          $recordEmballage = new DatabaseRecord(
-          "annexe_emballage", $recordConditionnement->getFieldValue("id_annexe_emballage"))
-          ;
-          $recordEmballageGroupe = new DatabaseRecord(
-          "annexe_emballage_groupe", $recordEmballage->getFieldValue("id_annexe_emballage_groupe"))
-          ;
-
-          //Récupération du différenciel de version
-          $table = "fta_conditionnement";
-          $table_name_1 = $table;
-          $id_1 = $id_fta_conditionnement;
-          $table_name_2 = $table;
-          $id_2 = $last_id_fta_conditionnement;
-          //$debug=1;
-          ${"diff_" . $table_name_1} = DatabaseOperation::getArrayFieldsNameForDiffRecords($table_name_1, $id_1, $id_2);
-          $image_modif = "";
-
-          //Groupe d'emballage
-          //$champ = "id_annexe_emballage_groupe";
-          //$table = "fta_conditionnement";
-          //Versionning
-          $color_modif = "";
-          if (${"diff_" . $table}[$champ]) {
-          $image_modif = $html_image_modif;
-          $color_modif = $html_color_modif;
-          }
-          //$champ = "nom_annexe_emballage_groupe";
-          $recap_conditionnement .= "<tr class=contenu ><td $color_modif width=\"20%\">" . $recordEmballageGroupe->getFieldValue("nom_annexe_emballage_groupe") . "<br>&nbsp;&nbsp;" . $recordEmballage->getFieldValue("reference_fournisseur_annexe_emballage") . "</td>";
-
-          //Dimensions
-          $color_modif = "";
-          $table = "fta_conditionnement";
-
-          //Versionning
-          //$champ="hauteur_fta_conditionnement";
-          if (${"diff_" . $table}["hauteur_fta_conditionnement"] or $ {"diff_" . $table}["longueur_fta_conditionnement"] or $ {"diff_" . $table}["largeur_fta_conditionnement"]
-          ) {
-          $image_modif = $html_image_modif;
-          $color_modif = $html_color_modif;
-          }
-
-          $champ = "Longeur x Largeur x Hauteur (en mm)";
-          $recap_conditionnement .= "<td $color_modif width=\"20%\">"
-          . $recordConditionnement->getFieldValue("longueur_fta_conditionnement")
-          . " x "
-          . $recordConditionnement->getFieldValue("largeur_fta_conditionnement")
-          . " x "
-          . $recordConditionnement->getFieldValue("hauteur_fta_conditionnement")
-          . "</td>"
-          ;
-
-          //Poids
-          //                    $champ = "poids_fta_conditionnement";
-          //                    $table = "fta_conditionnement";
-          //Versionning
-          $color_modif = "";
-          if (${"diff_" . $table}[$champ]) {
-          $image_modif = $html_image_modif;
-          $color_modif = $html_color_modif;
-          }
-          $recap_conditionnement .= "<td $color_modif width=\"20%\">" . $recordConditionnement->getFieldValue("poids_fta_conditionnement") . "</td>";
-
-          //Versionning
-          $champ = "quantite_par_couche_fta_conditionnement";
-          $table = "fta_conditionnement";
-          $color_modif = "";
-          if (${"diff_" . $table}[$champ]) {
-          $image_modif = $html_image_modif;
-          $color_modif = $html_color_modif;
-          }
-
-          if ($recordConditionnement->getFieldValue("nombre_couche_fta_conditionnement") == 1) {
-
-          $recap_conditionnement .= "<td $color_modif width=\"20%\" align=\"center\">" . $recordConditionnement->getFieldValue("quantite_par_couche_fta_conditionnement") . "</td>";
-          } else {
-          //Versionning
-          $champ = "nombre_couche_fta_conditionnement";
-          $table = "fta_conditionnement";
-          //$color_modif="";
-          if (${"diff_" . $table}[$champ]) {
-          $image_modif = $html_image_modif;
-          $color_modif = $html_color_modif;
-          }
-          $recap_conditionnement .= "<td $color_modif width=\"20%\">" . $recordConditionnement->getFieldValue("quantite_par_couche_fta_conditionnement") . " colis x " . $recordConditionnement->getFieldValue("nombre_couche_fta_conditionnement") . " couches</td>";
-          $recap_conditionnement .= "<td $color_modif width=\"20%\"><big><b>" . $recordConditionnement->getFieldValue("pcb_fta_conditionnement") . "</b></big></td>";
-          }
-
-
-
-          //Action
-          $color_modif = "";
-          if ($image_modif) {
-          $color_modif = $html_color_modif;
-          }
-          $recap_conditionnement .= "<td $color_modif width=\"1%\">";
-          if ($is_editable) {
-          $recap_conditionnement .= "
-          <a href=modification_fiche_post.php?id_fta=$id_fta&id_fta_conditionnement=$id_fta_conditionnement&action=suppression_conditionnement&id_fta_chapitre_encours=$id_fta_chapitre_encours&synthese_action=$synthese_action>
-          <img src=../lib/images/supprimer.png width=15 height=15 border=0/>
-          </a><br>
-          <a href=ajout_conditionnement.php?id_fta=$id_fta&id_fta_conditionnement=$id_fta_conditionnement&action=etape3&id_fta_chapitre_encours=$id_fta_chapitre_encours&synthese_action=$synthese_action>
-          <img src=../lib/images/next.png width=15 height=15 border=0/></a>
-          ";
-          }
-          $recap_conditionnement.="$image_modif</td>";
-          }//Fin du While
-          }//Fin du If
-
-          $recap_conditionnement.="</tr>";
-          $bloc.= $recap_conditionnement;
-          } */
-
-//        $bloc.="</table><".Html::$DEFAULT_HTML_TABLE_CONTENU.">";
-//
-//        //Synoptic
-//        $champ = "description_emballage";
-//        $table = "fta";
-//
-//        //Versionning
-//        $color_modif = "";
-//        if (${"diff_" . $table}[$champ]) {
-//            $image_modif = $html_image_modif;
-//            $color_modif = $html_color_modif;
-//        }
-//        $bloc .= "<tr class=contenu><td $color_modif>" . mysql_field_desc("fta", $champ) . "</td><td $color_modif>";
-//        if ($is_editable) {
-//            $bloc .= "<textarea name=" . $champ . " rows=8 cols=75>${$champ}</textarea>";
-//        } else {
-//            $bloc .=html_view_txt(${$champ});
-//        }
-//        $bloc.="$image_modif</td></tr>";
-        //$bloc .= "</table>";
         return $bloc;
     }
 
@@ -994,14 +805,7 @@ class Chapitre {
         $ftaView->setIsEditable($isEditable);
         $ftaView->setFtaChapitreModelById(self::ID_CHAPITRE_IDENTITE);
 
-
-        $bloc.="<tr> <td>Il manque quatre données :
-            •Référence Colis Arcadia
-            •Quantité par couche
-            •Couche par palette
-            •Référence Palette</td></tr>";
-
-        $bloc.=$ftaView->getHtmlEmballageDuColis($id_fta,$idChapitre,$synthese_action);
+        $bloc.=$ftaView->getHtmlEmballageDuColis($id_fta, $idChapitre, $synthese_action);
 
         return $bloc;
     }
@@ -1056,6 +860,107 @@ class Chapitre {
         return $bloc;
     }
 
+    public static function buildChapitreEtiquetteClient_FEAvecEtiq() {
+
+        $bloc = "";
+        $id_fta = self::$id_fta;
+        $synthese_action = self::$synthese_action;
+        $isEditable = self::$is_editable;
+
+        //Identifiant FTA
+        $ftaModel = new FtaModel($id_fta);
+        $ftaView = new FtaView($ftaModel);
+        $ftaView->setIsEditable($isEditable);
+        $ftaView->setFtaChapitreModelById(self::ID_CHAPITRE_IDENTITE);
+
+
+        //Libellé du code article chez le client
+        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_LIBELLE_CODE_ARTICLE_CLIENT);
+
+
+        //Valeur du code article chez le client
+        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_CODE_ARTICLE_CLIENT);
+
+        //Prix de ventes consommateur
+        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_PVC_ARTICLE);
+
+        //Nombre de portion
+        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_NOMBRE_PORTION_FTA);
+
+        //Service consommateur
+        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_SERVICE_CONSOMMATEUR);
+
+        //Produit Transformé en France
+        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_PRODUIT_TRANSFORME);
+
+        //Logo éco-emballage
+        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_LOGO_ECO_EMBALLAGE);
+
+
+        $bloc.="<tr> <td>Logo spécifique étiquette manquant choix possible en dessous ?</td></tr>";
+
+        //Libellé etiquette carton:
+        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_LIBELLE_CLIENT);
+
+        //Modèle d'étiquette
+        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_ETIQUETTE_CODESOFT);
+
+
+        $bloc.="<tr> <td>Masque étiquette UVC recto</td></tr>";
+
+
+        $bloc.="<tr> <td>Masque étiquette UVC verso</td></tr>";
+
+
+        $bloc.="<tr> <td>Masque colis</td></tr>";
+
+
+        return $bloc;
+    }
+
+    public static function buildChapitreEtiquetteClient_MDDAvecEtiq() {
+
+        $bloc = "";
+        $id_fta = self::$id_fta;
+        $synthese_action = self::$synthese_action;
+        $isEditable = self::$is_editable;
+
+        //Identifiant FTA
+        $ftaModel = new FtaModel($id_fta);
+        $ftaView = new FtaView($ftaModel);
+        $ftaView->setIsEditable($isEditable);
+        $ftaView->setFtaChapitreModelById(self::ID_CHAPITRE_IDENTITE);
+
+        //Service consommateur
+        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_SERVICE_CONSOMMATEUR);
+
+        //Produit Transformé en France
+        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_PRODUIT_TRANSFORME);
+
+
+        //Logo éco-emballage
+        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_LOGO_ECO_EMBALLAGE);
+
+        $bloc.="<tr> <td>Logo spécifique étiquette manquant choix possible en dessous ?</td></tr>";
+
+        //Libellé etiquette carton:
+        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_LIBELLE_CLIENT);
+
+        //Modèle d'étiquette
+        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_ETIQUETTE_CODESOFT);
+
+        //Libellé du code article chez le client
+        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_LIBELLE_CODE_ARTICLE_CLIENT);
+
+
+        $bloc.="<tr> <td>Masque étiquette UVC recto</td></tr>";
+
+
+        $bloc.="<tr> <td>Masque colis</td></tr>";
+
+        return $bloc;
+    }
+
     public static function buildChapitreEtiquetteRD() {
 
         $bloc = "";
@@ -1104,7 +1009,168 @@ class Chapitre {
         return $bloc;
     }
 
+    public static function buildChapitreEtiquetteArticle_MDDAvecEtiq() {
+
+        $bloc = "";
+        $id_fta = self::$id_fta;
+        $synthese_action = self::$synthese_action;
+        $isEditable = self::$is_editable;
+
+        //Identifiant FTA
+        $ftaModel = new FtaModel($id_fta);
+        $ftaView = new FtaView($ftaModel);
+        $ftaView->setIsEditable($isEditable);
+        $ftaView->setFtaChapitreModelById(self::ID_CHAPITRE_IDENTITE);
+
+
+        //Origine des Matières Premières
+        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_ORIGINE_MATIERE_PREMIERE);
+
+        //Listes des Allergènes
+        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_LISTE_ALLERGENE);
+
+        //Conseil après ouverture
+        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_CONSEIL_APRES_OUVERTURE);
+
+        //Forcer libellé étiquette colis
+        $bloc.="<tr> <td>Forcer libellé étiquette colis ?</td></tr>";
+
+        //Conditionné sous atmosphère protectrice
+        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_CONDITION_SOUS_ATMOSPHERE);
+
+        return $bloc;
+    }
+
+    public static function buildChapitreEtiquetteArticle_FEAvecEtiq() {
+
+        $bloc = "";
+        $id_fta = self::$id_fta;
+        $synthese_action = self::$synthese_action;
+        $isEditable = self::$is_editable;
+
+        //Identifiant FTA
+        $ftaModel = new FtaModel($id_fta);
+        $ftaView = new FtaView($ftaModel);
+        $ftaView->setIsEditable($isEditable);
+        $ftaView->setFtaChapitreModelById(self::ID_CHAPITRE_IDENTITE);
+
+
+        //Origine des Matières Premières
+        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_ORIGINE_MATIERE_PREMIERE);
+
+        //Listes des Allergènes
+        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_LISTE_ALLERGENE);
+
+        //Conseil après ouverture
+        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_CONSEIL_APRES_OUVERTURE);
+
+        //Conditionné sous atmosphère protectrice
+        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_CONDITION_SOUS_ATMOSPHERE);
+
+        return $bloc;
+    }
+
     public static function buildChapitreEtiquetteComposant() {
+
+        $bloc = "";
+        $id_fta = self::$id_fta;
+        $synthese_action = self::$synthese_action;
+        $isEditable = self::$is_editable;
+
+        //Identifiant FTA
+        $ftaModel = new FtaModel($id_fta);
+        $ftaView = new FtaView($ftaModel);
+        $ftaView->setIsEditable($isEditable);
+        $ftaView->setFtaChapitreModelById(self::ID_CHAPITRE_IDENTITE);
+
+
+        $bloc.="<tr> <td>Lequelle choisir  pour la durré de vie ?</td></tr>";
+
+        //Durée de vie Production (en jours)
+        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_DUREE_DE_VIE_TECHNIQUE_PRODUCTION);
+
+        //Durée de Vie Maximale (en jour)
+        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_DUREE_DE_VIE_TECHNIQUE_MAXIMALE);
+
+        $bloc.="<tr> <td>Poids net étiqueté</td></tr>";
+
+        $bloc.="<tr> <td>Quantité par colis</td></tr>";
+
+        $bloc.="<tr> <td>Dénomination commerciale de ventes</td></tr>";
+
+        $bloc.="<tr> <td>Dénomination légale de ventes</td></tr>";
+
+        //Composition Etiquette (1er paragraphe)
+        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_COMPOSITION1);
+
+        //Composition Etiquette (2nd paragraphe)
+        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_COMPOSITION2);
+
+
+        //Information complémentaire recto
+        $bloc.="<tr> <td>Information complémentaire recto ? Possible choix remarque ?</td></tr>";
+        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_REMARQUE);
+
+        $bloc.="<tr> <td>Décomposition du poids</td></tr>";
+
+        $bloc.="<tr> <td>Taille des ingrédients</td></tr>";
+
+        $bloc.="<tr> <td>Valeurs nutrionnelles</td></tr>";
+
+        return $bloc;
+    }
+
+    public static function buildChapitreEtiquetteComposant_FEAvecEtiq() {
+
+        $bloc = "";
+        $id_fta = self::$id_fta;
+        $synthese_action = self::$synthese_action;
+        $isEditable = self::$is_editable;
+
+        //Identifiant FTA
+        $ftaModel = new FtaModel($id_fta);
+        $ftaView = new FtaView($ftaModel);
+        $ftaView->setIsEditable($isEditable);
+        $ftaView->setFtaChapitreModelById(self::ID_CHAPITRE_IDENTITE);
+
+
+        $bloc.="<tr> <td>Lequelle choisir  pour la durré de vie ?</td></tr>";
+
+        //Durée de vie Production (en jours)
+        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_DUREE_DE_VIE_TECHNIQUE_PRODUCTION);
+
+        //Durée de Vie Maximale (en jour)
+        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_DUREE_DE_VIE_TECHNIQUE_MAXIMALE);
+
+        $bloc.="<tr> <td>Poids net étiqueté</td></tr>";
+
+        $bloc.="<tr> <td>Quantité par colis</td></tr>";
+
+        $bloc.="<tr> <td>Dénomination commerciale de ventes</td></tr>";
+
+        $bloc.="<tr> <td>Dénomination légale de ventes</td></tr>";
+
+        //Composition Etiquette (1er paragraphe)
+        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_COMPOSITION1);
+
+        //Composition Etiquette (2nd paragraphe)
+        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_COMPOSITION2);
+
+
+        //Information complémentaire recto
+        $bloc.="<tr> <td>Information complémentaire recto ? Possible choix remarque ?</td></tr>";
+        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_REMARQUE);
+
+        $bloc.="<tr> <td>Décomposition du poids</td></tr>";
+
+        $bloc.="<tr> <td>Taille des ingrédients</td></tr>";
+
+        $bloc.="<tr> <td>Valeurs nutrionnelles</td></tr>";
+
+        return $bloc;
+    }
+
+    public static function buildChapitreEtiquetteComposant_MDDAvecEtiq() {
 
         $bloc = "";
         $id_fta = self::$id_fta;

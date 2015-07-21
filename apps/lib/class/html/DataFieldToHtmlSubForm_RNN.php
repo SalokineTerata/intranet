@@ -42,7 +42,6 @@ class DataFieldToHtmlSubform_RNN extends HtmlSubForm_RNN {
                 , $paramSecondaryTableNamesAndIdKeyValue
         );
         $this->setIsRightToAdd($paramDataField->getRightToAdd());
-
     }
 
 }

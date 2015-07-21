@@ -44,18 +44,6 @@ class HtmlSubForm_R1N extends AbstractHtmlList {
      */
     private $subFormModelClassName = NULL;
 
-    /**
-     * Quels sont les éléments du sous formulaire qui sont vérrouillés ?
-     *   - Si l'attribut $isEditable du sous-formulaire est FALSE,
-     *     Cet attribut n'apporte aucune modification car tous les champs du
-     *     sous-formulaire sont déjà vérouillés.
-     *   - Si l'attribut $isEditable du sous-formulaire est TRUE,
-     *     Cet attribut de type tableau contient la liste des champs qu'il faut
-     *     tout de même vérouiller.
-     * @var array
-     */
-    private $arrayContentLocked;
-
     function __construct($paramArrayContent, $paramSubFormModelClassName, $paramLabel) {
         parent::__construct();
         parent::setLabel($paramLabel);
@@ -63,16 +51,8 @@ class HtmlSubForm_R1N extends AbstractHtmlList {
         $this->setSubFormModelClassName($paramSubFormModelClassName);
     }
 
-    function getArrayContentLocked() {
-        return $this->arrayContentLocked;
-    }
-
-    function setArrayContentLocked($arrayContentLocked) {
-        $this->arrayContentLocked = $arrayContentLocked;
-    }
-
     private function getHtmlResultSubFormBegin() {
-        return "<table><tr><td><table>";
+        return "<table><tr><td><table border=1 frame=hsides rules=rows>";
     }
 
     private function getHtmlResultSubFormEnd() {
@@ -171,7 +151,6 @@ class HtmlSubForm_R1N extends AbstractHtmlList {
                 }
                 $htmlField->getAttributesGlobal()->setIsIconNextEnabledToFalse();
 
-
                 $htmlField->setHtmlRenderToTable();
 
                 /**
@@ -179,7 +158,7 @@ class HtmlSubForm_R1N extends AbstractHtmlList {
                  * et que le champs ne fait pas partie de la liste des champs
                  * vérrouillés, alors le champs sera modifiable par l'utilisateur.
                  */
-                if (parent::getIsEditable() && !in_array($fieldName, $this->getArrayContentLocked())) {
+                if (parent::getIsEditable() && !in_array($fieldName, $this->getContentLocked())) {
 
                     /**
                      * Le champs est modifiable.

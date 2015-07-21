@@ -88,6 +88,7 @@ require_once("../lib/class/model/FtaRoleModel.php");
 require_once("../lib/class/model/FtaTransitionModel.php");
 require_once("../lib/class/model/FtaWorkflowModel.php");
 require_once("../lib/class/model/FtaWorkflowStructureModel.php");
+require_once("../lib/class/model/FteFournisseurModel.php");
 require_once("../lib/class/model/GeoModel.php");
 require_once("../lib/class/model/IntranetActionsModel.php");
 require_once("../lib/class/model/IntranetDroitsAccesModel.php");

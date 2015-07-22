@@ -53,18 +53,18 @@ if ($id_user) {
     ;
     $isIndex = 0;                //Variable booléenne disant si oui ou non on est sur l'index
 
-    $abreviation_fta_etat = Lib::isDefined("abreviation_fta_etat");
+    $abreviation_fta_etat = Lib::getParameterFromRequest("abreviation_fta_etat");
     $fta_consultation = Lib::isDefined("fta_consultation");
     $fta_modification = Lib::isDefined("fta_modification");
-    $id_fta_etat = Lib::isDefined("id_fta_etat");
+    $id_fta_etat = Lib::getParameterFromRequest("id_fta_etat");
     $isLimit = $_SESSION["limit_affichage_fta_index"];
-    $nom_fta_etat = Lib::isDefined("nom_fta_etat");
-    $nombre_fiche = Lib::isDefined("nombre_fiche");
-    $requete_resultat = Lib::isDefined("requete_resultat");
-    $synthese_action = Lib::isDefined("synthese_action");
-    $tableau_fiche = Lib::isDefined("tableau_fiche");
-    $visualiser_fiche_total_fta = Lib::isDefined("visualiser_fiche_total_fta");
-    $order_common = Lib::isDefined("order_common",  FtaModel::FIELDNAME_DATE_ECHEANCE_FTA);
+    $nom_fta_etat = Lib::getParameterFromRequest("nom_fta_etat");
+    $nombre_fiche = Lib::getParameterFromRequest("nombre_fiche");
+    $requete_resultat = Lib::getParameterFromRequest("requete_resultat");
+    $synthese_action = Lib::getParameterFromRequest("synthese_action");
+    $tableau_fiche = Lib::getParameterFromRequest("tableau_fiche");
+    $visualiser_fiche_total_fta = Lib::getParameterFromRequest("visualiser_fiche_total_fta");
+    $order_common = Lib::getParameterFromRequest("order_common", FtaModel::FIELDNAME_DATE_ECHEANCE_FTA);
 
 
     /*
@@ -87,7 +87,7 @@ if ($id_user) {
         }
     }
 
-    $idFtaRoleEncours = Lib::isDefined(FtaRoleModel::KEYNAME, $idFtaRoleEncoursDefault);
+    $idFtaRoleEncours = Lib::getParameterFromRequest(FtaRoleModel::KEYNAME, $idFtaRoleEncoursDefault);
     FtaSuiviProjetModel::initFtaSuiviProjet(30);
 //echo "id_fta_etat=$id_fta_etat / nom_fta_etat=$nom_fta_etat / synthese_action=$synthese_action <br>";
 
@@ -150,8 +150,8 @@ if ($id_user) {
     /*
      * Initialisation des valeurs
      */
-    AccueilFta::initAccueil($id_user, $id_fta_etat, $nom_fta_etat, $synthese_action, $idFtaRoleEncours,$order_common,$lieuGeo);
-    
+    AccueilFta::initAccueil($id_user, $id_fta_etat, $nom_fta_etat, $synthese_action, $idFtaRoleEncours, $order_common, $lieuGeo);
+
     /*
      * Génération de la barre de navigation de la page d'accueil
      */

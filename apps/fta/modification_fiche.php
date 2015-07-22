@@ -72,6 +72,9 @@ $id_fta = Lib::getParameterFromRequest("id_fta");
 $id_fta_chapitre_encours = Lib::getParameterFromRequest("id_fta_chapitre_encours",  AccueilFta::VALUE_1);
 $synthese_action = Lib::getParameterFromRequest("synthese_action");
 $comeback = Lib::getParameterFromRequest("comeback");
+$idFtaEtat = Lib::getParameterFromRequest("id_fta_etat");
+$abreviationFtaEtat = Lib::getParameterFromRequest("abrevation_fta_etat");
+$idFtaRole = Lib::getParameterFromRequest("id_fta_role");
 $id_fta_chapitre = $id_fta_chapitre_encours;
 $module_consultation = $_SESSION["module"] . "_consultation";
 
@@ -83,7 +86,7 @@ if ($$module_consultation <> 1 and $nom_fta_chapitre_encours == "tarif") {
 //$navigue = afficher_navigation($id_fta, $id_fta_chapitre_encours, $synthese_action, $comeback);
 
 
-Navigation::initNavigation($id_fta, $id_fta_chapitre_encours, $synthese_action, $comeback);
+Navigation::initNavigation($id_fta, $id_fta_chapitre_encours, $synthese_action, $comeback, $idFtaEtat,$abreviationFtaEtat,$idFtaRole);
 
 $navigue= Navigation::getHtmlNavigationBar();
 
@@ -126,7 +129,7 @@ echo "
      <input type=\"hidden\" name=\"synthese_action\" value=\"$synthese_action\" />
      <input type=\"hidden\" name=\"nom_fta_chapitre_encours\" value=\"$nom_fta_chapitre_encours\" />
      <input type=\"hidden\" name=\"comeback\" value=\"$comeback\" />
-
+    
      $javascript
      <$html_table>
      <tr><td>

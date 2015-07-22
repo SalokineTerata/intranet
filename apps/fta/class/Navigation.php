@@ -7,7 +7,10 @@
  */
 class Navigation {
 
+    protected static $abrevation_etat;
     protected static $id_fta;
+    protected static $id_fta_etat;
+    protected static $id_fta_role;
     protected static $comeback;
     protected static $comeback_url;
     protected static $html_navigation_bar;
@@ -23,12 +26,15 @@ class Navigation {
         return self::$html_navigation_bar;
     }
 
-    public static function initNavigation($id_fta, $id_fta_chapitre_encours, $synthese_action, $comeback) {
+    public static function initNavigation($id_fta, $id_fta_chapitre_encours, $synthese_action, $comeback, $id_fta_etat, $abrevation_etat, $id_fta_role) {
 
         self::$id_fta = $id_fta;
         self::$id_fta_chapitre_encours = $id_fta_chapitre_encours;
         self::$synthese_action = $synthese_action;
         self::$comeback = $comeback;
+        self::$id_fta_etat = $id_fta_etat;
+        self::$abrevation_etat = $abrevation_etat;
+        self::$id_fta_role = $id_fta_role;
         $ftaModel = new FtaModel(self::$id_fta);
         self::$id_fta_workflow = $ftaModel->getDataField(FtaModel::FIELDNAME_WORKFLOW)->getFieldValue();
         $ftaWorkflowModel = new FtaWorkflowModel(self::$id_fta_workflow);
@@ -94,9 +100,9 @@ class Navigation {
         //Si une action est donnée, alors construction du menu des chapitres    
         $menu_navigation .= self::CheckSyntheseAction();
         //Lien de retour rapide
-        if (self::$comeback == 1) {
-            self::$comeback_url = $_SERVER["HTTP_REFERER"];
-        }
+
+        self::$comeback_url = "index.php?id_fta_etat=" . self::$id_fta_etat . "&nom_fta_etat=" . self::$abrevation_etat . "&id_fta_role=" . self::$id_fta_role . "&synthese_action=" . self::$synthese_action;
+
         $menu_navigation.= "</td></tr><tr><td>
     <a href=" . self::$comeback_url . "><img src=../lib/images/bouton_retour.png alt=\"\" title=\"Retour à la synthèse\" width=\"18\" height=\"15\" border=\"0\" /> Retour vers la synthèse</a> |
     ";
@@ -501,7 +507,9 @@ class Navigation {
             if ($num == 0 and self::$synthese_action === "attente") {
                 
             } else {
-                $menu_navigation .= "<a href=$page_default.php?id_fta=" . self::$id_fta . "&id_fta_chapitre_encours=$id_fta_chapitre&synthese_action=" . self::$synthese_action . ">$b"
+                $menu_navigation .= "<a href=$page_default.php?id_fta=" . self::$id_fta . "&id_fta_chapitre_encours=$id_fta_chapitre&synthese_action=" . self::$synthese_action . "&id_fta_etat=" . self::$id_fta_etat
+                            . "&abrevation_fta_etat=" . self::$abrevation_etat
+                            . "&id_fta_role=" . self::$id_fta_role .">$b"
                         . $image1 . $nom_usuel_fta_chapitre . $image2
                         . "</a>"
                         . "</b></font> "

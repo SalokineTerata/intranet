@@ -196,7 +196,7 @@ class FtaConditionnementModel extends AbstractModel {
         $arrayIdFtaConditionnement = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray($req);
         if ($arrayIdFtaConditionnement) {
             foreach ($arrayIdFtaConditionnement as $rowsIdFtaConditionnement) {
-                $IdFtaConditionnement = $rowsIdFtaConditionnement[FtaConditionnementModel::KEYNAME];
+                $IdFtaConditionnement[] = $rowsIdFtaConditionnement[FtaConditionnementModel::KEYNAME];
             }
         } else {
             $IdFtaConditionnement = 0;
@@ -237,24 +237,19 @@ class FtaConditionnementModel extends AbstractModel {
      * @param type $paramIdFta
      * @return int
      */
-    public static function getIdAnnexeEmballageGroupeTypeFromFtaConditionnement($paramIdFtaConditionnement, $paramIdFta) {
+    public static function getIdAnnexeEmballageAndGroupeTypeAndGroupeAndIdFtaConditionnementFromFtaConditionnement($paramIdFtaConditionnement, $paramIdFta) {
 
-        $req = "SELECT DISTINCT " . FtaConditionnementModel::FIELDNAME_ID_ANNEXE_EMBALLAGE_GROUPE_TYPE
+        $req = "SELECT DISTINCT " . FtaConditionnementModel::KEYNAME
+                . "," . FtaConditionnementModel::FIELDNAME_ID_ANNEXE_EMBALLAGE
+                . "," . FtaConditionnementModel::FIELDNAME_ID_ANNEXE_EMBALLAGE_GROUPE_TYPE
                 . " FROM " . FtaConditionnementModel::TABLENAME
-                . " WHERE " . FtaConditionnementModel::KEYNAME . "=" . $paramIdFtaConditionnement
-                . "  AND " . FtaConditionnementModel::FIELDNAME_ID_FTA . "=" . $paramIdFta
+                . " WHERE ( 0 " . FtaConditionnementModel::addIdFtaConditionnement($paramIdFtaConditionnement)
+                . " ) AND " . FtaConditionnementModel::FIELDNAME_ID_FTA . "=" . $paramIdFta
         ;
 
         $arrayIdAnnexeEmballageGroupe = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray($req);
-        if ($arrayIdAnnexeEmballageGroupe) {
-            foreach ($arrayIdAnnexeEmballageGroupe as $rowsIdAnnexeEmballageGroupe) {
-                $IdAnnexeEmballageGroupe = $rowsIdAnnexeEmballageGroupe[FtaConditionnementModel::FIELDNAME_ID_ANNEXE_EMBALLAGE_GROUPE_TYPE];
-            }
-        } else {
-            $IdAnnexeEmballageGroupe = 0;
-        }
 
-        return $IdAnnexeEmballageGroupe;
+        return $arrayIdAnnexeEmballageGroupe;
     }
 
     /**
@@ -385,6 +380,15 @@ class FtaConditionnementModel extends AbstractModel {
         return DatabaseOperation::query(
                         " DELETE FROM " . FtaConditionnementModel::TABLENAME . " WHERE " .
                         FtaConditionnementModel::KEYNAME . "=" . $paramIdFtaConditionnement);
+    }
+
+    public static function addIdFtaConditionnement($paramIdFtaConditionnement) {
+        if ($paramIdFtaConditionnement) {
+            foreach ($paramIdFtaConditionnement as $value) {
+                $req .= " OR " . FtaConditionnementModel::TABLENAME . "." . FtaConditionnementModel::KEYNAME . "=" . $value . " ";
+            }
+        }
+        return $req;
     }
 
 }

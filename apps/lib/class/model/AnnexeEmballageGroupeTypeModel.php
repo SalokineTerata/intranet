@@ -29,10 +29,6 @@ class AnnexeEmballageGroupeTypeModel extends AbstractModel {
     protected static $idAnnexeEmballageParColis;
     protected static $idAnnexeEmballageDuColis;
     protected static $idAnnexeEmballagePalette;
-    protected static $idAnnexeEmballageUVCByIdFtaConditionnement;
-    protected static $idAnnexeEmballageParColisByIdFtaConditionnement;
-    protected static $idAnnexeEmballageDuColisByIdFtaConditionnement;
-    protected static $idAnnexeEmballagePaletteByIdFtaConditionnement;
     protected static $idAnnexeEmballageGroupeTypeUVCByIdFtaConditionnement;
     protected static $idAnnexeEmballageGroupeTypeParColisByIdFtaConditionnement;
     protected static $idAnnexeEmballageGroupeTypeDuColisByIdFtaConditionnement;
@@ -80,22 +76,6 @@ class AnnexeEmballageGroupeTypeModel extends AbstractModel {
 
     function getClassNameAnnexeEmballage() {
         return self::$classNameAnnexeEmballage;
-    }
-
-    function getIdAnnexeEmballageUVCFromFtaConditionnement() {
-        return self::$idAnnexeEmballageUVCByIdFtaConditionnement;
-    }
-
-    function getIdAnnexeEmballageParColisFromFtaConditionnement() {
-        return self::$idAnnexeEmballageParColisByIdFtaConditionnement;
-    }
-
-    function getIdAnnexeEmballageDuColisFromFtaConditionnement() {
-        return self::$idAnnexeEmballageDuColisByIdFtaConditionnement;
-    }
-
-    function getIdAnnexeEmballagePaletteFromFtaConditionnement() {
-        return self::$idAnnexeEmballagePaletteByIdFtaConditionnement;
     }
 
     function getIdAnnexeEmballageGroupeTypeUVCFromFtaConditionnement() {
@@ -170,8 +150,7 @@ class AnnexeEmballageGroupeTypeModel extends AbstractModel {
          * On obtient l' id Annexe Emballage groupe type de type UVC selon l'id fta et id fta conditionnement
          */
         self::$idFtaConditionnemntUVC = FtaConditionnementModel::getIdFtaConditionnement(self::$idAnnexeEmballageUVC, $paramIdFta, self::$emballageUVC);
-        self::$idAnnexeEmballageUVCByIdFtaConditionnement = FtaConditionnementModel::getIdAnnexeEmballageFromFtaConditionnement(self::$idFtaConditionnemntUVC, $paramIdFta);
-        self::$idAnnexeEmballageGroupeTypeUVCByIdFtaConditionnement = FtaConditionnementModel::getIdAnnexeEmballageGroupeTypeFromFtaConditionnement(self::$idFtaConditionnemntUVC, $paramIdFta);
+        self::$idAnnexeEmballageGroupeTypeUVCByIdFtaConditionnement = FtaConditionnementModel::getIdAnnexeEmballageAndGroupeTypeAndGroupeAndIdFtaConditionnementFromFtaConditionnement(self::$idFtaConditionnemntUVC, $paramIdFta);
 
         /*
          * On obtient les id Fta Conditionnement par Colis
@@ -179,8 +158,7 @@ class AnnexeEmballageGroupeTypeModel extends AbstractModel {
          * On obtient l' id Annexe Emballage groupe type par Colis selon l'id fta et id fta conditionnement
          */
         self::$idFtaConditionnemntParColis = FtaConditionnementModel::getIdFtaConditionnement(self::$idAnnexeEmballageParColis, $paramIdFta, self::$emballageParColis);
-        self::$idAnnexeEmballageParColisByIdFtaConditionnement = FtaConditionnementModel::getIdAnnexeEmballageFromFtaConditionnement(self::$idFtaConditionnemntParColis, $paramIdFta);
-        self::$idAnnexeEmballageGroupeTypeParColisByIdFtaConditionnement = FtaConditionnementModel::getIdAnnexeEmballageGroupeTypeFromFtaConditionnement(self::$idFtaConditionnemntParColis, $paramIdFta);
+        self::$idAnnexeEmballageGroupeTypeParColisByIdFtaConditionnement = FtaConditionnementModel::getIdAnnexeEmballageAndGroupeTypeAndGroupeAndIdFtaConditionnementFromFtaConditionnement(self::$idFtaConditionnemntParColis, $paramIdFta);
 
 
         /*
@@ -189,8 +167,7 @@ class AnnexeEmballageGroupeTypeModel extends AbstractModel {
          * On obtient l' id Annexe Emballage groupe type du Colis selon l'id fta et id fta conditionnement
          */
         self::$idFtaConditionnemntDuColis = FtaConditionnementModel::getIdFtaConditionnement(self::$idAnnexeEmballageDuColis, $paramIdFta, self::$emballageDuColis);
-        self::$idAnnexeEmballageDuColisByIdFtaConditionnement = FtaConditionnementModel::getIdAnnexeEmballageFromFtaConditionnement(self::$idFtaConditionnemntDuColis, $paramIdFta);
-        self::$idAnnexeEmballageGroupeTypeDuColisByIdFtaConditionnement = FtaConditionnementModel::getIdAnnexeEmballageGroupeTypeFromFtaConditionnement(self::$idFtaConditionnemntDuColis, $paramIdFta);
+        self::$idAnnexeEmballageGroupeTypeDuColisByIdFtaConditionnement = FtaConditionnementModel::getIdAnnexeEmballageAndGroupeTypeAndGroupeAndIdFtaConditionnementFromFtaConditionnement(self::$idFtaConditionnemntDuColis, $paramIdFta);
 
         /*
          * On obtient les id Fta Conditionnement de type Palette
@@ -198,17 +175,25 @@ class AnnexeEmballageGroupeTypeModel extends AbstractModel {
          * On obtient l' id Annexe Emballage groupe type de type Palette selon l'id fta et id fta conditionnement
          */
         self::$idFtaConditionnemntPalette = FtaConditionnementModel::getIdFtaConditionnement(self::$idAnnexeEmballagePalette, $paramIdFta, self::$emballagePalette);
-        self::$idAnnexeEmballagePaletteByIdFtaConditionnement = FtaConditionnementModel::getIdAnnexeEmballageFromFtaConditionnement(self::$idFtaConditionnemntPalette, $paramIdFta);
-        self::$idAnnexeEmballageGroupeTypePaletteByIdFtaConditionnement = FtaConditionnementModel::getIdAnnexeEmballageGroupeTypeFromFtaConditionnement(self::$idFtaConditionnemntPalette, $paramIdFta);
+        self::$idAnnexeEmballageGroupeTypePaletteByIdFtaConditionnement = FtaConditionnementModel::getIdAnnexeEmballageAndGroupeTypeAndGroupeAndIdFtaConditionnementFromFtaConditionnement(self::$idFtaConditionnemntPalette, $paramIdFta);
     }
 
-    public static function getAddLinkConditionnement($paramIdFta, $paramIdChapitre, $paramTypeEmballage, $paramSyntheseAction) {
+    public static function getAddLinkBeforeConditionnement($paramIdFta, $paramIdChapitre, $paramTypeEmballage, $paramSyntheseAction) {
         return "ajout_conditionnement.php?"
                 . "id_fta=" . $paramIdFta
                 . "&id_annexe_emballage_groupe_type=" . $paramTypeEmballage
                 . "&id_fta_chapitre=" . $paramIdChapitre
                 . "&synthese_action=" . $paramSyntheseAction
         ;
+    }
+
+    public static function getAddLinkAfterConditionnement($paramIdFta, $paramIdChapitre, $paramTypeEmballage, $paramSyntheseAction) {
+        return "<a href=ajout_conditionnement.php?"
+                . "id_fta=" . $paramIdFta
+                . "&id_annexe_emballage_groupe_type=" . $paramTypeEmballage
+                . "&id_fta_chapitre=" . $paramIdChapitre
+                . "&synthese_action=" . $paramSyntheseAction . "><img src=../lib/images/plus.png width=22  border=0 valign=middle halign=right />"
+                . "</a><br>";
     }
 
     public static function getDeleteLinkConditionnement($paramIdFta, $paramIdChapitre, $paramIdFtaConditionnement, $paramSyntheseAction) {
@@ -218,7 +203,7 @@ class AnnexeEmballageGroupeTypeModel extends AbstractModel {
                 . "&action=suppression_conditionnement"
                 . "&id_fta_chapitre_encours=$paramIdChapitre"
                 . "&synthese_action=$paramSyntheseAction>
-                                <img src=../lib/images/supprimer.png width=15 height=15 border=0/>
+                                <img src=../lib/images/supprimer.png width=22  border=0/>
                                 </a><br>";
     }
 

@@ -342,7 +342,7 @@ abstract class AbstractHtmlGlobalElement {
             case self::HTML_RENDER_TO_TABLE:
                 break;
             case self::HTML_RENDER_TO_TABLE_LABEL:
-                $html_result .= $label;
+                $html_result .="<td class=titre_tableau>" . $label . "</td>";
                 break;
         }
         $html_result .= "<td style=\"$color_modif\">";

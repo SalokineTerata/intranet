@@ -48,6 +48,16 @@ class AccueilFta {
     protected static $orderBy;
     protected static $syntheseAction;
 
+    /**
+     * Initialisation des données de la page d'accueil
+     * @param type $id_user
+     * @param type $idFtaEtat
+     * @param type $abrevationFtaEtat
+     * @param type $syntheseAction
+     * @param type $IdFtaRole
+     * @param type $OrderBy
+     * @param type $lieuGeo
+     */
     public static function initAccueil($id_user, $idFtaEtat, $abrevationFtaEtat, $syntheseAction, $IdFtaRole, $OrderBy, $lieuGeo) {
 
         self::$idUser = $id_user;
@@ -91,6 +101,12 @@ class AccueilFta {
         return $tableau_synthese;
     }
 
+    /**
+     * 
+     * @param type $paramAbrevation1
+     * @param type $paramAbrevation2
+     * @return string
+     */
     private static function getLienByEtatFta($paramAbrevation1, $paramAbrevation2) {
         if ($paramAbrevation1 == "I" or $paramAbrevation2 == "P") {
             $tableau_synthese .= "encours>";
@@ -100,6 +116,15 @@ class AccueilFta {
         return $tableau_synthese;
     }
 
+    /**
+     * Affichage HTTML de la barre de navigation du la page d'accueil
+     * @param type $paramRole
+     * @param type $paramEtat
+     * @param type $paramNomEtat
+     * @param type $paramIdFtaRole
+     * @param type $paramSyntheseAction
+     * @return type
+     */
     private static function getHtmlTableauSythese($paramRole, $paramEtat, $paramNomEtat, $paramIdFtaRole, $paramSyntheseAction) {
 
         $idKeyNameFtaEtat = AccueilFta::VALUE_0;
@@ -200,6 +225,13 @@ class AccueilFta {
         return $tableau_synthese;
     }
 
+    /**
+     * Tableau Html affichant les noms des espaces de travail auxquel l'utilisateur aura les droits d'accès 
+     * et le noms des sites de production correspondant en info-bulles
+     * @param type $paramWorkflow
+     * @param type $paramNameSiteByWorkflow
+     * @return string
+     */
     private static function getHtmlTableauSytheseWorkflow($paramWorkflow, $paramNameSiteByWorkflow) {
         $bgcolor = "bgcolor = #3CDA31 ";
 
@@ -241,12 +273,16 @@ class AccueilFta {
      * fonction de mise e forme recuperant tous les nom des site dont l'utilisateur à les droits d'accès par workflow
      */
 
+    /**
+     * Mise en forme des noms de site auxquel l'utilisateur aura les drotis d'accès en info-bulle
+     * @param type $paramNameSiteByWorkflow
+     * @param type $idKeyNameFtaSite
+     * @return string
+     */
     private static function getNameSiteByWorkflow($paramNameSiteByWorkflow, $idKeyNameFtaSite) {
         $codeSautDeLigne = "&#013";
         if ($paramNameSiteByWorkflow[$idKeyNameFtaSite]) {
             $paramNameSiteByWorkflow = $paramNameSiteByWorkflow[$idKeyNameFtaSite];
-        } else {
-            $paramNameSiteByWorkflow;
         }
         for ($i = 0; $i < count($paramNameSiteByWorkflow); $i++) {
             $paramNameSite[$idKeyNameFtaSite] .= $paramNameSiteByWorkflow[$i][IntranetActionsModel::FIELDNAME_DESCRIPTION_INTRANET_ACTIONS] . $codeSautDeLigne;
@@ -254,6 +290,14 @@ class AccueilFta {
         return $paramNameSite;
     }
 
+    /**
+     * Affiche les lignes concernant les worflows de la barre de navigation de la page d'accueil
+     * @param type $paramArrayWorkflow
+     * @param type $idKeyNameFtaWorkflow
+     * @param type $paramNameSiteByWorkflow
+     * @param type $idKeyNameFtaSite
+     * @return type
+     */
     private static function getLineSyntheseWorkflow($paramArrayWorkflow, $idKeyNameFtaWorkflow, $paramNameSiteByWorkflow, $idKeyNameFtaSite) {
 
         return "<td>"
@@ -267,6 +311,19 @@ class AccueilFta {
         ;
     }
 
+    /**
+     * Affiches les lignes de la barre de navigation de la page d'accueil
+     * @param type $paramArrayRole
+     * @param type $paramArrayEtat
+     * @param type $idFtaRole
+     * @param type $nomFtaEtat
+     * @param type $paramSyntheseAction
+     * @param type $lien
+     * @param type $idFieldNomFtaRole
+     * @param type $idKeyNameFtaEtat
+     * @param type $idKeyValueFtaEtatAvancement
+     * @return type
+     */
     private static function getLineSynthese(
     $paramArrayRole, $paramArrayEtat, $idFtaRole, $nomFtaEtat, $paramSyntheseAction, $lien, $idFieldNomFtaRole, $idKeyNameFtaEtat, $idKeyValueFtaEtatAvancement
     ) {
@@ -330,6 +387,10 @@ class AccueilFta {
         ;
     }
 
+    /**
+     * Tableau Html affichant la liste des Fta
+     * @return string
+     */
     public static function getHtmlTableauFiche() {
 
 
@@ -802,6 +863,10 @@ class AccueilFta {
         return $tableauFiche;
     }
 
+    /**
+     * Génère le file d'ariane en entête de la page d'accueil
+     * @return string
+     */
     public static function getFileAriane() {
 
         switch (self::$syntheseAction) {
@@ -834,22 +899,25 @@ class AccueilFta {
         return $fileAriane;
     }
 
-    /*
-      Fonction de création d'une liste déroulante basée sur une requete SQL
+    /**
+     *       Fonction de création d'une liste déroulante basée sur une requete SQL
       le premier champ retourné par la requête est désigné comme Clef de la liste
       le second alimente le contenu de la liste déroulante
+     * @param type $paramRequeteSQL
+     * @param type $paramIdDefaut
+     * @param type $paramNomDefaut
+     * @return string
      */
-
     public static function afficherRequeteEnListeDeroulante($paramRequeteSQL, $paramIdDefaut, $paramNomDefaut) {
         //Recherche de la clef
         $result = DatabaseOperation::query($paramRequeteSQL);
-        $table =  mysql_fetch_array($result);
+        $table = mysql_fetch_array($result);
         if (!$table) {//Si la liste est vide
             $html_liste = "<i>(vide)</i>";
         } else {
             $key = array_keys($table);
             if (!$paramNomDefaut) {
-            $paramNomDefaut = $key[1];
+                $paramNomDefaut = $key[1];
             }
 
             //Création de la liste déroulante
@@ -872,5 +940,4 @@ class AccueilFta {
         return $html_liste;
     }
 
-    //function visualiser_fiches */
 }

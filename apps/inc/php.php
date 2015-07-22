@@ -183,6 +183,9 @@ require_once("../lib/class/html/HtmlInputCalendar.php");
 require_once("../lib/class/html/AbstractHtmlList.php");
 require_once("../lib/class/html/HtmlListSelect.php");
 require_once("../lib/class/html/HtmlListBoolean.php");
+require_once("../lib/class/html/HtmlSubForm.php");
+require_once("../lib/class/html/HtmlSubForm_R1N.php");
+require_once("../lib/class/html/HtmlSubForm_RNN.php");
 require_once("../lib/class/html/HtmlTextArea.php");
 require_once("../lib/class/html/HtmlCheckbox.php");
 require_once("../lib/class/html/TraitDataFieldToHtml.php");
@@ -191,8 +194,6 @@ require_once("../lib/class/html/DataFieldToHtmlListSelect.php");
 require_once("../lib/class/html/DataFieldToHtmlListBoolean.php");
 require_once("../lib/class/html/DataFieldToHtmlInputCalendar.php");
 require_once("../lib/class/html/DataFieldToHtmlTextArea.php");
-require_once("../lib/class/html/HtmlSubForm_R1N.php");
-require_once("../lib/class/html/HtmlSubForm_RNN.php");
 require_once("../lib/class/html/DataFieldToHtmlSubForm_R1N.php");
 require_once("../lib/class/html/DataFieldToHtmlSubForm_RNN.php");
 

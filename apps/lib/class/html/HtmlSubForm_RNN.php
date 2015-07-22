@@ -29,7 +29,7 @@
  * 
  * @author tp4300001
  */
-class HtmlSubForm_RNN extends AbstractHtmlList {
+class HtmlSubForm_RNN extends HtmlSubForm {
 
     /**
      * Tableau PHP stockant le résultat de la requête sur laquelle est basée
@@ -51,10 +51,16 @@ class HtmlSubForm_RNN extends AbstractHtmlList {
     private $secondaryTableNamesAndIdKeyValue = NULL;
 
     /**
-     * Lien ajouter
+     * Lien ajouter en début d'édition
      * @var string
      */
     private $Lien;
+
+    /**
+     * Lien ajouter en fin d'édition
+     * @var string
+     */
+    private $LienAjouter;
 
     /**
      * Lien de supresssion
@@ -96,6 +102,14 @@ class HtmlSubForm_RNN extends AbstractHtmlList {
         $this->secondaryTableNamesAndIdKeyValue = $secondaryTableNamesAndIdKeyValue;
     }
 
+    function getLienAjouter() {
+        return $this->LienAjouter;
+    }
+
+    function setLienAjouter($LienAjouter) {
+        $this->LienAjouter = $LienAjouter;
+    }
+
     function getLien() {
         return $this->Lien;
     }
@@ -110,26 +124,6 @@ class HtmlSubForm_RNN extends AbstractHtmlList {
 
     function setLienSuppression($LienSuppression) {
         $this->LienSuppression = $LienSuppression;
-    }
-
-    private function getHtmlResultSubFormBegin() {
-        return "<table><tr><td><table border=1 frame=hsides rules=rows>";
-    }
-
-    private function getHtmlResultSubFormEnd() {
-        return "</table></td></tr></table>";
-    }
-
-    private function getHtmlResultSubFormAddNewLine() {
-        $return = NULL;
-        if ($this->getRightToAdd()) {
-            $return = "<tr><td>"
-                    . $this->getAttributesGlobal()->getIconAddToHtml()
-                    . "<a href=" . $this->getLien() . " > Ajouter</a>"
-                    . "</td></tr>"
-            ;
-        }
-        return $return;
     }
 
     /**
@@ -154,7 +148,7 @@ class HtmlSubForm_RNN extends AbstractHtmlList {
                 /**
                  * Création de la ligne HTML
                  */
-                $return.= "<tr class=contenu>";
+                $return.= "<tr >";
 
                 /**
                  * Chargement de l'enregistrement
@@ -226,6 +220,10 @@ class HtmlSubForm_RNN extends AbstractHtmlList {
                      * Ajout d'un lien de suppression
                      */
                     $return.="<td>" . $this->getLienSuppression() . "</td>";
+                    /**
+                     * Ajout d'un lien d'ajout
+                     */
+                    $return.="<td>" . $this->getLienAjouter() . "</td>";
                 }
 
                 /**
@@ -254,7 +252,7 @@ class HtmlSubForm_RNN extends AbstractHtmlList {
 
     public function getHtmlViewedContent() {
         return $this->getHtmlResultSubFormBegin()
-                . $this->getHtmlResultSubFormMiddle()
+                . $this->getHtmlResultMiddle()
                 . $this->getHtmlResultSubFormEnd()
         ;
     }

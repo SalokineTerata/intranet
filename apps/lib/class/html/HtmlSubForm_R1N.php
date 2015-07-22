@@ -29,7 +29,7 @@
  *
  * @author bs4300280
  */
-class HtmlSubForm_R1N extends AbstractHtmlList {
+class HtmlSubForm_R1N extends HtmlSubForm {
 
     /**
      * Tableau PHP stockant le résultat de la requête sur laquelle est basée
@@ -51,26 +51,6 @@ class HtmlSubForm_R1N extends AbstractHtmlList {
         $this->setSubFormModelClassName($paramSubFormModelClassName);
     }
 
-    private function getHtmlResultSubFormBegin() {
-        return "<table><tr><td><table border=1 frame=hsides rules=rows>";
-    }
-
-    private function getHtmlResultSubFormEnd() {
-        return "</table></td></tr></table>";
-    }
-
-    private function getHtmlResultSubFormAddNewLine() {
-        $return = NULL;
-        if ($this->getIsRightToAdd()) {
-            $return = "<tr><td>"
-                    . $this->getAttributesGlobal()->getIconAddToHtml()
-                    . "<a href=\"...\" title=\"Not implemented\"> Ajouter</a>"
-                    . "</td></tr>"
-            ;
-        }
-        return $return;
-    }
-
     /**
      * Retourne le rendu HTML du coeur du sous-formulaire
      * @return string
@@ -86,100 +66,95 @@ class HtmlSubForm_R1N extends AbstractHtmlList {
         /**
          * Parcours de la liste des clefs à représenter
          */
-        foreach ($this->getArrayContent() as $key => $valueArray) {
-
-            /**
-             * Création de la ligne HTML
-             */
-            $return.= "<tr class=contenu>";
-
-            /**
-             * Chargement de l'enregistrement
-             */
-            $modelSubForm = new $subFormModelClassName($key);
-
-            /**
-             * Création du lien de détail
-             */
-            $hrefDetail = GlobalConfig::DISPATCHER_SCRIPTNAME."?";
-//            $hrefDetailToHtml = "<a href=\"" . $hrefDetail . "\" title=\"Détail\">"
-//                    . self::DEFAULT_HTML_IMAGE_NEXT . " Détail"
-//                    . "</a>"
-//            ;
-
-            /**
-             * Récupération de la liste des champs à représenter
-             */
-            $valueArrayKeys = array_keys($valueArray);
-
-            /**
-             * Récupération de l'icone pour accéder à l'enregistrement de la
-             * sous-table.
-             * Ce flag permet de ne récupérer que le premier champs.
-             */
-            $isFirstField = TRUE;
-
-            /**
-             * Contenu HTML du lien pointant vers le détail de la sous-table.
-             */
-            $htmlUrlToSubFormDetail = NULL;
-
-
-            /**
-             * Parcours des nom des champs à afficher
-             */
-            foreach ($valueArrayKeys as $fieldName) {
+        if ($this->getArrayContent()) {
+            foreach ($this->getArrayContent() as $key => $valueArray) {
 
                 /**
-                 * Chargement du DataField correspondant au champs concerné.
+                 * Création de la ligne HTML
                  */
-                $dataField = $modelSubForm->getDataField($fieldName);
+                $return.= "<tr class=contenu>";
 
                 /**
-                 * Conversion du DataField en HtmlField
+                 * Chargement de l'enregistrement
                  */
-                $htmlField = Html::getHtmlObjectFromDataField($dataField);
+                $modelSubForm = new $subFormModelClassName($key);
+
 
                 /**
-                 * Dans le cas du premier champ de la ligne, on récupère
-                 * le lien pointant vers le détail du sous-formulaire
+                 * Récupération de la liste des champs à représenter
                  */
-                if ($isFirstField) {
-                    $htmlField->getAttributesGlobal()->setIsIconNextEnabledToTrue();
-                    $htmlUrlToSubFormDetail = $htmlField->getAttributesGlobal()->getIconNextToHtml();
-                    $isFirstField = FALSE;
-                }
-                $htmlField->getAttributesGlobal()->setIsIconNextEnabledToFalse();
-
-                $htmlField->setHtmlRenderToTable();
+                $valueArrayKeys = array_keys($valueArray);
 
                 /**
-                 * Si le sous-formulaire est modifiable par l'utilisateur
-                 * et que le champs ne fait pas partie de la liste des champs
-                 * vérrouillés, alors le champs sera modifiable par l'utilisateur.
+                 * Récupération de l'icone pour accéder à l'enregistrement de la
+                 * sous-table.
+                 * Ce flag permet de ne récupérer que le premier champs.
                  */
-                if (parent::getIsEditable() && !in_array($fieldName, $this->getContentLocked())) {
+                $isFirstField = TRUE;
+
+                /**
+                 * Contenu HTML du lien pointant vers le détail de la sous-table.
+                 */
+                $htmlUrlToSubFormDetail = NULL;
+
+
+                /**
+                 * Parcours des nom des champs à afficher
+                 */
+                foreach ($valueArrayKeys as $fieldName) {
 
                     /**
-                     * Le champs est modifiable.
+                     * Chargement du DataField correspondant au champs concerné.
                      */
-                    $htmlField->setIsEditable(TRUE);
-                } else {
+                    $dataField = $modelSubForm->getDataField($fieldName);
 
                     /**
-                     * Le champs n'est pas modifiable.
+                     * Conversion du DataField en HtmlField
                      */
-                    $htmlField->setIsEditable(FALSE);
+                    $htmlField = Html::getHtmlObjectFromDataField($dataField);
+
+                    /**
+                     * Dans le cas du premier champ de la ligne, on récupère
+                     * le lien pointant vers le détail du sous-formulaire
+                     */
+                    if ($isFirstField) {
+                        $htmlField->getAttributesGlobal()->setIsIconNextEnabledToTrue();
+                        /**
+                         * Création du lien de détail
+                         */
+                        $htmlUrlToSubFormDetail = $htmlField->getAttributesGlobal()->getIconNextToHtml();
+                        $isFirstField = FALSE;
+                    }
+                    $htmlField->getAttributesGlobal()->setIsIconNextEnabledToFalse();
+
+                    $htmlField->setHtmlRenderToTable();
+
+                    /**
+                     * Si le sous-formulaire est modifiable par l'utilisateur
+                     * et que le champs ne fait pas partie de la liste des champs
+                     * vérrouillés, alors le champs sera modifiable par l'utilisateur.
+                     */
+                    if (parent::getIsEditable() && !in_array($fieldName, $this->getContentLocked())) {
+
+                        /**
+                         * Le champs est modifiable.
+                         */
+                        $htmlField->setIsEditable(TRUE);
+                    } else {
+
+                        /**
+                         * Le champs n'est pas modifiable.
+                         */
+                        $htmlField->setIsEditable(FALSE);
+                    }
+                    $return.=$htmlField->getHtmlResult();
                 }
-                $return.=$htmlField->getHtmlResult();
+
+                /**
+                 * Ajout du lien d'accès au détail du sous-formulaire
+                 */
+                $return.="<td>" . $htmlUrlToSubFormDetail . "</td>";
             }
-
-            /**
-             * Ajout du lien d'accès au détail du sous-formulaire
-             */
-            $return.="<td>" . $htmlUrlToSubFormDetail . "</td>";
-
-
             /**
              * Fermeture de la ligne HTML
              */
@@ -211,8 +186,9 @@ class HtmlSubForm_R1N extends AbstractHtmlList {
                 . $this->getHtmlResultSubFormEnd()
         ;
     }
+
     public function getHtmlAddContent() {
-        return ;
+        return;
     }
 
     public function getHtmlViewedContent() {

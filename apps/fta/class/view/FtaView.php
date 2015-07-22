@@ -196,211 +196,254 @@ class FtaView {
 
     public function getHtmlEmballageUVC($paramIdFta, $paramChapitre, $paramSyntheseAction) {
         $annexeEmballageGroupeTypeModel = new AnnexeEmballageGroupeTypeModel(AccueilFta::VALUE_1);
-        $idFtaConditionnment = $annexeEmballageGroupeTypeModel->getEmballageGroupeUVC();
 
         /*
-         * Récuperation des clés étrangères de la table fta_conditionnement
+         * Récuperation des élements clé de la table fta_conditionnement
          */
-        $idAnnexeEmballage = $annexeEmballageGroupeTypeModel->getIdAnnexeEmballageUVCFromFtaConditionnement();
-        $idAnnexeEmballageGroupeType = AccueilFta::VALUE_1;
+        $FtaConditionnement = $annexeEmballageGroupeTypeModel->getIdAnnexeEmballageGroupeTypeUVCFromFtaConditionnement();
 
-        /*
-         * Initialisation des modèles 
-         */
+        foreach ($FtaConditionnement as $rowsFtaConditionnement) {
+            $idFtaCondtionnement = $rowsFtaConditionnement[FtaConditionnementModel::KEYNAME];
+            $idAnnexeEmballage = $rowsFtaConditionnement[FtaConditionnementModel::FIELDNAME_ID_ANNEXE_EMBALLAGE];
+            $idAnnexeEmballageGroupeType = $rowsFtaConditionnement[FtaConditionnementModel::FIELDNAME_ID_ANNEXE_EMBALLAGE_GROUPE_TYPE];
 
-        $annexeEmballageGroupeTypeModel2 = new AnnexeEmballageGroupeTypeModel(AccueilFta::VALUE_1);
-        $ftaConditionnmentModel = new FtaConditionnementModel($idFtaConditionnment);
 
-        /*
-         * Tableau de données
-         */
-        $arrayFtaConditionnement = FtaConditionnementModel::getArrayFtaConditonnement($idFtaConditionnment);
+            /*
+             * Initialisation des modèles 
+             */
 
-        /*
-         * Vérifie si pour la Fta en cours les données Fta conditionement sont renseigné
-         */
-        if ($arrayFtaConditionnement&& $annexeEmballageGroupeTypeModel->getIdAnnexeEmballageGroupeTypeUVCFromFtaConditionnement()==AccueilFta::VALUE_1) {
-            $rightToAdd = FALSE;
-        } else {
-            $rightToAdd = TRUE;
+            $annexeEmballageGroupeTypeModel2 = new AnnexeEmballageGroupeTypeModel(AccueilFta::VALUE_1);
+
+            $ftaConditionnmentModel = new FtaConditionnementModel($idFtaCondtionnement);
+
+            /*
+             * Tableau de données
+             */
+            $arrayFtaConditionnement = FtaConditionnementModel::getArrayFtaConditonnement($idFtaCondtionnement);
+
+            /*
+             * Vérifie si pour la Fta en cours les données Fta conditionement sont renseigné
+             */
+            if ($arrayFtaConditionnement && $idAnnexeEmballageGroupeType == AccueilFta::VALUE_1) {
+                $rightToAdd = FALSE;
+            } else {
+                $rightToAdd = TRUE;
+            }
+            $className = $ftaConditionnmentModel->getClassName();
+            $label = $annexeEmballageGroupeTypeModel2->getDataField(AnnexeEmballageGroupeTypeModel::FIELDNAME_NOM_ANNEXE_EMBALLAGE_GROUPE_TYPE)->getFieldValue();
+
+            /*
+             * Cette array doit être utilisé de cette manière 
+             * Array (
+             * nom de table,
+             * clé étrangère de la table présenté
+             * valeur de la clé étrangère);
+             */
+            $tablesNameAndIdForeignKeyOfFtaConditionnement = array(
+                array(AnnexeEmballageModel::TABLENAME, FtaConditionnementModel::FIELDNAME_ID_ANNEXE_EMBALLAGE, $idAnnexeEmballage),
+                array(AnnexeEmballageGroupeTypeModel::TABLENAME, FtaConditionnementModel::FIELDNAME_ID_ANNEXE_EMBALLAGE_GROUPE_TYPE, $idAnnexeEmballageGroupeType),
+                array(FtaModel::TABLENAME, FtaConditionnementModel::FIELDNAME_ID_FTA, $paramIdFta),
+            );
+            $htmlEmballageUVC = new HtmlSubForm_RNN($arrayFtaConditionnement, $className, $label, $tablesNameAndIdForeignKeyOfFtaConditionnement);
+            $htmlEmballageUVC->setIsEditable($this->getIsEditable());
+            $htmlEmballageUVC->setRightToAdd($rightToAdd);
+            $htmlEmballageUVC->setLienAjouter(AnnexeEmballageGroupeTypeModel::getAddLinkAfterConditionnement($paramIdFta, $paramChapitre, AccueilFta::VALUE_1, $paramSyntheseAction));
+            $htmlEmballageUVC->setLien(AnnexeEmballageGroupeTypeModel::getAddLinkBeforeConditionnement($paramIdFta, $paramChapitre, AccueilFta::VALUE_1, $paramSyntheseAction));
+            $htmlEmballageUVC->setLienSuppression(AnnexeEmballageGroupeTypeModel::getDeleteLinkConditionnement($paramIdFta, $paramChapitre, $idFtaCondtionnement, $paramSyntheseAction));
+
+            $return .= $htmlEmballageUVC->getHtmlResult();
         }
-        $className = $ftaConditionnmentModel->getClassName();
-        $label = $annexeEmballageGroupeTypeModel2->getDataField(AnnexeEmballageGroupeTypeModel::FIELDNAME_NOM_ANNEXE_EMBALLAGE_GROUPE_TYPE)->getFieldValue();
-
-        /*
-         * Cette array doit être utilisé de cette manière 
-         * Array (
-         * nom de table,
-         * clé étrangère de la table présenté
-         * valeur de la clé étrangère);
-         */
-        $tablesNameAndIdForeignKeyOfFtaConditionnement = array(
-            array(AnnexeEmballageModel::TABLENAME, FtaConditionnementModel::FIELDNAME_ID_ANNEXE_EMBALLAGE, $idAnnexeEmballage),
-            array(AnnexeEmballageGroupeTypeModel::TABLENAME, FtaConditionnementModel::FIELDNAME_ID_ANNEXE_EMBALLAGE_GROUPE_TYPE, $idAnnexeEmballageGroupeType),
-            array(FtaModel::TABLENAME, FtaConditionnementModel::FIELDNAME_ID_FTA, $paramIdFta),
-        );
-        $htmlEmballageUVC = new HtmlSubForm_RNN($arrayFtaConditionnement, $className, $label, $tablesNameAndIdForeignKeyOfFtaConditionnement);
-        $htmlEmballageUVC->setIsEditable($this->getIsEditable());
-        $htmlEmballageUVC->setRightToAdd($rightToAdd);
-        $htmlEmballageUVC->setLien(AnnexeEmballageGroupeTypeModel::getAddLinkConditionnement($paramIdFta, $paramChapitre, AccueilFta::VALUE_1, $paramSyntheseAction));
-        $htmlEmballageUVC->setLienSuppression(AnnexeEmballageGroupeTypeModel::getDeleteLinkConditionnement($paramIdFta, $paramChapitre, $idFtaConditionnment, $paramSyntheseAction));
-
-
-        return $htmlEmballageUVC->getHtmlResult();
+        return $return;
     }
 
     public function getHtmlEmballageParColis($paramIdFta, $paramChapitre, $paramSyntheseAction) {
         $annexeEmballageGroupeTypeModel = new AnnexeEmballageGroupeTypeModel(AccueilFta::VALUE_2);
-        $idFtaConditionnment = $annexeEmballageGroupeTypeModel->getEmballageGroupeParColis();
+        /*
+         * Récuperation des élements clé de la table fta_conditionnement
+         */
+        $FtaConditionnement = $annexeEmballageGroupeTypeModel->getIdAnnexeEmballageGroupeTypeParColisFromFtaConditionnement();
+        if ($FtaConditionnement) {
+            foreach ($FtaConditionnement as $rowsFtaConditionnement) {
+                $idFtaCondtionnement = $rowsFtaConditionnement[FtaConditionnementModel::KEYNAME];
+                $idAnnexeEmballage = $rowsFtaConditionnement[FtaConditionnementModel::FIELDNAME_ID_ANNEXE_EMBALLAGE];
+                $idAnnexeEmballageGroupeType = $rowsFtaConditionnement[FtaConditionnementModel::FIELDNAME_ID_ANNEXE_EMBALLAGE_GROUPE_TYPE];
 
-        /*
-         * Récuperation des clés étrangères de la table fta_conditionnement
-         */
-        $idAnnexeEmballage = $annexeEmballageGroupeTypeModel->getIdAnnexeEmballageParColisFromFtaConditionnement();
-        $idAnnexeEmballageGroupeType = AccueilFta::VALUE_2;
-        /*
-         * Initialisation des modèles 
-         */
-        $annexeEmballageGroupeTypeModel2 = new AnnexeEmballageGroupeTypeModel(AccueilFta::VALUE_2);
-        $ftaConditionnmentModel = new FtaConditionnementModel($idFtaConditionnment);
-        /*
-         * Tableau de données
-         */
-        $arrayFtaConditionnement = FtaConditionnementModel::getArrayFtaConditonnement($idFtaConditionnment);
-        /*
-         * Vérifie si pour la Fta en cours les données Fta conditionement sont renseigné
-         */
-        if ($arrayFtaConditionnement ) {
-            $rightToAdd = FALSE;
+
+                /*
+                 * Initialisation des modèles 
+                 */
+                $annexeEmballageGroupeTypeModel2 = new AnnexeEmballageGroupeTypeModel(AccueilFta::VALUE_2);
+
+
+                $ftaConditionnmentModel = new FtaConditionnementModel($idFtaCondtionnement);
+                /*
+                 * Tableau de données
+                 */
+                $arrayFtaConditionnement = FtaConditionnementModel::getArrayFtaConditonnement($idFtaCondtionnement);
+                /*
+                 * Vérifie si pour la Fta en cours les données Fta conditionement sont renseigné
+                 */
+                if ($arrayFtaConditionnement) {
+                    $rightToAdd = FALSE;
+                } else {
+                    $rightToAdd = TRUE;
+                }
+                $className = $ftaConditionnmentModel->getClassName();
+                $label = $annexeEmballageGroupeTypeModel2->getDataField(AnnexeEmballageGroupeTypeModel::FIELDNAME_NOM_ANNEXE_EMBALLAGE_GROUPE_TYPE)->getFieldValue();
+
+                /*
+                 * Cette array doit être utilisé de cette manière 
+                 * Array (
+                 * nom de table,
+                 * clé étrangère de la table présenté
+                 * valeur de la clé étrangère);
+                 */
+                $tablesNameAndIdForeignKeyOfFtaConditionnement = array(
+                    array(AnnexeEmballageModel::TABLENAME, FtaConditionnementModel::FIELDNAME_ID_ANNEXE_EMBALLAGE, $idAnnexeEmballage),
+                    array(AnnexeEmballageGroupeTypeModel::TABLENAME, FtaConditionnementModel::FIELDNAME_ID_ANNEXE_EMBALLAGE_GROUPE_TYPE, $idAnnexeEmballageGroupeType),
+                    array(FtaModel::TABLENAME, FtaConditionnementModel::FIELDNAME_ID_FTA, $paramIdFta),
+                );
+                $htmlEmballageParColis = new HtmlSubForm_RNN($arrayFtaConditionnement, $className, $label, $tablesNameAndIdForeignKeyOfFtaConditionnement);
+                $htmlEmballageParColis->setIsEditable($this->getIsEditable());
+                $htmlEmballageParColis->setRightToAdd($rightToAdd);
+                $htmlEmballageParColis->setLienAjouter(AnnexeEmballageGroupeTypeModel::getAddLinkAfterConditionnement($paramIdFta, $paramChapitre, AccueilFta::VALUE_2, $paramSyntheseAction));
+                $htmlEmballageParColis->setLien(AnnexeEmballageGroupeTypeModel::getAddLinkBeforeConditionnement($paramIdFta, $paramChapitre, AccueilFta::VALUE_2, $paramSyntheseAction));
+                $htmlEmballageParColis->setLienSuppression(AnnexeEmballageGroupeTypeModel::getDeleteLinkConditionnement($paramIdFta, $paramChapitre, $idFtaCondtionnement, $paramSyntheseAction));
+                $return .= $htmlEmballageParColis->getHtmlResult();
+            }
         } else {
-            $rightToAdd = TRUE;
+            /*
+             * Initialisation des modèles 
+             */
+            $annexeEmballageGroupeTypeModel2 = new AnnexeEmballageGroupeTypeModel(AccueilFta::VALUE_2);
+            $label = $annexeEmballageGroupeTypeModel2->getDataField(AnnexeEmballageGroupeTypeModel::FIELDNAME_NOM_ANNEXE_EMBALLAGE_GROUPE_TYPE)->getFieldValue();
+
+            $htmlEmballageParColis = new HtmlSubForm_RNN($arrayFtaConditionnement, $className, $label, $tablesNameAndIdForeignKeyOfFtaConditionnement);
+            $htmlEmballageParColis->setIsEditable($this->getIsEditable());
+            $htmlEmballageParColis->setRightToAdd(TRUE);
+            $htmlEmballageParColis->setLien(AnnexeEmballageGroupeTypeModel::getAddLinkBeforeConditionnement($paramIdFta, $paramChapitre, AccueilFta::VALUE_2, $paramSyntheseAction));
+            $return .= $htmlEmballageParColis->getHtmlResult();
         }
-        $className = $ftaConditionnmentModel->getClassName();
-        $label = $annexeEmballageGroupeTypeModel2->getDataField(AnnexeEmballageGroupeTypeModel::FIELDNAME_NOM_ANNEXE_EMBALLAGE_GROUPE_TYPE)->getFieldValue();
-
-        /*
-         * Cette array doit être utilisé de cette manière 
-         * Array (
-         * nom de table,
-         * clé étrangère de la table présenté
-         * valeur de la clé étrangère);
-         */
-        $tablesNameAndIdForeignKeyOfFtaConditionnement = array(
-            array(AnnexeEmballageModel::TABLENAME, FtaConditionnementModel::FIELDNAME_ID_ANNEXE_EMBALLAGE, $idAnnexeEmballage),
-            array(AnnexeEmballageGroupeTypeModel::TABLENAME, FtaConditionnementModel::FIELDNAME_ID_ANNEXE_EMBALLAGE_GROUPE_TYPE, $idAnnexeEmballageGroupeType),
-            array(FtaModel::TABLENAME, FtaConditionnementModel::FIELDNAME_ID_FTA, $paramIdFta),
-        );
-        $htmlEmballageParColis = new HtmlSubForm_RNN($arrayFtaConditionnement, $className, $label, $tablesNameAndIdForeignKeyOfFtaConditionnement);
-        $htmlEmballageParColis->setIsEditable($this->getIsEditable());
-        $htmlEmballageParColis->setRightToAdd($rightToAdd);
-        $htmlEmballageParColis->setLien(AnnexeEmballageGroupeTypeModel::getAddLinkConditionnement($paramIdFta, $paramChapitre, AccueilFta::VALUE_2, $paramSyntheseAction));
-        $htmlEmballageParColis->setLienSuppression(AnnexeEmballageGroupeTypeModel::getDeleteLinkConditionnement($paramIdFta, $paramChapitre, $idFtaConditionnment, $paramSyntheseAction));
-
-        return $htmlEmballageParColis->getHtmlResult();
+        return $return;
     }
 
     public function getHtmlEmballageDuColis($paramIdFta, $paramChapitre, $paramSyntheseAction) {
         $annexeEmballageGroupeTypeModel = new AnnexeEmballageGroupeTypeModel();
-        $idFtaConditionnment = $annexeEmballageGroupeTypeModel->getEmballageGroupeDuColis();
 
         /*
-         * Récuperation des clés étrangères de la table fta_conditionnement
+         * Récuperation des élements clé de la table fta_conditionnement
          */
-        $idAnnexeEmballage = $annexeEmballageGroupeTypeModel->getIdAnnexeEmballageDuColisFromFtaConditionnement();
-        $idAnnexeEmballageGroupeType = $annexeEmballageGroupeTypeModel->getIdAnnexeEmballageGroupeTypeDuColisFromFtaConditionnement();
-        /*
-         * Initialisation des modèles 
-         */
-        $annexeEmballageGroupeTypeModel2 = new AnnexeEmballageGroupeTypeModel(AccueilFta::VALUE_3);
-        $ftaConditionnmentModel = new FtaConditionnementModel($idFtaConditionnment);
+        $FtaConditionnement = $annexeEmballageGroupeTypeModel->getIdAnnexeEmballageGroupeTypeDuColisFromFtaConditionnement();
+        foreach ($FtaConditionnement as $rowsFtaConditionnement) {
+            $idFtaCondtionnement = $rowsFtaConditionnement[FtaConditionnementModel::KEYNAME];
+            $idAnnexeEmballage = $rowsFtaConditionnement[FtaConditionnementModel::FIELDNAME_ID_ANNEXE_EMBALLAGE];
+            $idAnnexeEmballageGroupeType = $rowsFtaConditionnement[FtaConditionnementModel::FIELDNAME_ID_ANNEXE_EMBALLAGE_GROUPE_TYPE];
 
-        /*
-         * Tableau de données
-         */
-        $arrayFtaConditionnement = FtaConditionnementModel::getArrayFtaConditonnementDuColis($idFtaConditionnment);
+            /*
+             * Initialisation des modèles 
+             */
+            $annexeEmballageGroupeTypeModel2 = new AnnexeEmballageGroupeTypeModel(AccueilFta::VALUE_3);
 
-        /*
-         * Vérifie si pour la Fta en cours les données Fta conditionement sont renseigné
-         */
-        if ($arrayFtaConditionnement) {
-            $rightToAdd = FALSE;
-        } else {
-            $rightToAdd = TRUE;
+            $ftaConditionnmentModel = new FtaConditionnementModel($idFtaCondtionnement);
+
+            /*
+             * Tableau de données
+             */
+            $arrayFtaConditionnement = FtaConditionnementModel::getArrayFtaConditonnementDuColis($idFtaCondtionnement);
+
+            /*
+             * Vérifie si pour la Fta en cours les données Fta conditionement sont renseigné
+             */
+            if ($arrayFtaConditionnement) {
+                $rightToAdd = FALSE;
+            } else {
+                $rightToAdd = TRUE;
+            }
+            $className = $ftaConditionnmentModel->getClassName();
+            $label = $annexeEmballageGroupeTypeModel2->getDataField(AnnexeEmballageGroupeTypeModel::FIELDNAME_NOM_ANNEXE_EMBALLAGE_GROUPE_TYPE)->getFieldValue();
+
+            /*
+             * Cette array doit être utilisé de cette manière 
+             * Array (
+             * nom de table,
+             * clé étrangère de la table présenté
+             * valeur de la clé étrangère);
+             */
+            $tablesNameAndIdForeignKeyOfFtaConditionnement = array(
+                array(AnnexeEmballageModel::TABLENAME, FtaConditionnementModel::FIELDNAME_ID_ANNEXE_EMBALLAGE, $idAnnexeEmballage),
+                array(AnnexeEmballageGroupeTypeModel::TABLENAME, FtaConditionnementModel::FIELDNAME_ID_ANNEXE_EMBALLAGE_GROUPE_TYPE, $idAnnexeEmballageGroupeType),
+                array(FtaModel::TABLENAME, FtaConditionnementModel::FIELDNAME_ID_FTA, $paramIdFta),
+            );
+            $htmlEmballageDuColis = new HtmlSubForm_RNN($arrayFtaConditionnement, $className, $label, $tablesNameAndIdForeignKeyOfFtaConditionnement);
+            $htmlEmballageDuColis->setIsEditable($this->getIsEditable());
+            $htmlEmballageDuColis->setRightToAdd($rightToAdd);
+            $htmlEmballageDuColis->setLienAjouter(AnnexeEmballageGroupeTypeModel::getAddLinkAfterConditionnement($paramIdFta, $paramChapitre, AccueilFta::VALUE_3, $paramSyntheseAction));
+            $htmlEmballageDuColis->setLien(AnnexeEmballageGroupeTypeModel::getAddLinkBeforeConditionnement($paramIdFta, $paramChapitre, AccueilFta::VALUE_3, $paramSyntheseAction));
+            $htmlEmballageDuColis->setLienSuppression(AnnexeEmballageGroupeTypeModel::getDeleteLinkConditionnement($paramIdFta, $paramChapitre, $idFtaCondtionnement, $paramSyntheseAction));
+
+            $return.= $htmlEmballageDuColis->getHtmlResult();
         }
-        $className = $ftaConditionnmentModel->getClassName();
-        $label = $annexeEmballageGroupeTypeModel2->getDataField(AnnexeEmballageGroupeTypeModel::FIELDNAME_NOM_ANNEXE_EMBALLAGE_GROUPE_TYPE)->getFieldValue();
-
-        /*
-         * Cette array doit être utilisé de cette manière 
-         * Array (
-         * nom de table,
-         * clé étrangère de la table présenté
-         * valeur de la clé étrangère);
-         */
-        $tablesNameAndIdForeignKeyOfFtaConditionnement = array(
-            array(AnnexeEmballageModel::TABLENAME, FtaConditionnementModel::FIELDNAME_ID_ANNEXE_EMBALLAGE, $idAnnexeEmballage),
-            array(AnnexeEmballageGroupeTypeModel::TABLENAME, FtaConditionnementModel::FIELDNAME_ID_ANNEXE_EMBALLAGE_GROUPE_TYPE, $idAnnexeEmballageGroupeType),
-            array(FtaModel::TABLENAME, FtaConditionnementModel::FIELDNAME_ID_FTA, $paramIdFta),
-        );
-        $htmlEmballageDuColis = new HtmlSubForm_RNN($arrayFtaConditionnement, $className, $label, $tablesNameAndIdForeignKeyOfFtaConditionnement);
-        $htmlEmballageDuColis->setIsEditable($this->getIsEditable());
-        $htmlEmballageDuColis->setRightToAdd($rightToAdd);
-        $htmlEmballageDuColis->setLien(AnnexeEmballageGroupeTypeModel::getAddLinkConditionnement($paramIdFta, $paramChapitre, AccueilFta::VALUE_3, $paramSyntheseAction));
-        $htmlEmballageDuColis->setLienSuppression(AnnexeEmballageGroupeTypeModel::getDeleteLinkConditionnement($paramIdFta, $paramChapitre, $idFtaConditionnment, $paramSyntheseAction));
-        return $htmlEmballageDuColis->getHtmlResult();
+        return $return;
     }
 
     public function getHtmlEmballagePalette($paramIdFta, $paramChapitre, $paramSyntheseAction) {
         $annexeEmballageGroupeTypeModel = new AnnexeEmballageGroupeTypeModel();
-        $idFtaConditionnment = $annexeEmballageGroupeTypeModel->getEmballageGroupePalette();
-
         /*
-         * Récuperation des clés étrangères de la table fta_conditionnement
+         * Récuperation des élements clé de la table fta_conditionnement
          */
-        $idAnnexeEmballage = $annexeEmballageGroupeTypeModel->getIdAnnexeEmballagePaletteFromFtaConditionnement();
-        $idAnnexeEmballageGroupeType = $annexeEmballageGroupeTypeModel->getIdAnnexeEmballageGroupeTypePaletteFromFtaConditionnement();
+        $FtaConditionnement = $annexeEmballageGroupeTypeModel->getIdAnnexeEmballageGroupeTypePaletteFromFtaConditionnement();
+        foreach ($FtaConditionnement as $rowsFtaConditionnement) {
+            $idFtaCondtionnement = $rowsFtaConditionnement[FtaConditionnementModel::KEYNAME];
+            $idAnnexeEmballage = $rowsFtaConditionnement[FtaConditionnementModel::FIELDNAME_ID_ANNEXE_EMBALLAGE];
+            $idAnnexeEmballageGroupeType = $rowsFtaConditionnement[FtaConditionnementModel::FIELDNAME_ID_ANNEXE_EMBALLAGE_GROUPE_TYPE];
 
-        /*
-         * Initialisation des modèles 
-         */
 
-        $annexeEmballageGroupeTypeModel2 = new AnnexeEmballageGroupeTypeModel(AccueilFta::VALUE_4);
-        $ftaConditionnmentModel = new FtaConditionnementModel($idFtaConditionnment);
-        /*
-         * Tableau de données
-         */
-        $arrayFtaConditionnement = FtaConditionnementModel::getArrayFtaConditonnement($idFtaConditionnment);
 
-        /*
-         * Vérifie si pour la Fta en cours les données Fta conditionement sont renseigné
-         */
-        if ($arrayFtaConditionnement) {
-            $rightToAdd = FALSE;
-        } else {
-            $rightToAdd = TRUE;
+            /*
+             * Initialisation des modèles 
+             */
+
+            $annexeEmballageGroupeTypeModel2 = new AnnexeEmballageGroupeTypeModel(AccueilFta::VALUE_4);
+
+
+            $ftaConditionnmentModel = new FtaConditionnementModel($idFtaCondtionnement);
+            /*
+             * Tableau de données
+             */
+            $arrayFtaConditionnement = FtaConditionnementModel::getArrayFtaConditonnement($idFtaCondtionnement);
+
+            /*
+             * Vérifie si pour la Fta en cours les données Fta conditionement sont renseigné
+             */
+            if ($arrayFtaConditionnement) {
+                $rightToAdd = FALSE;
+            } else {
+                $rightToAdd = TRUE;
+            }
+            $className = $ftaConditionnmentModel->getClassName();
+            $label = $annexeEmballageGroupeTypeModel2->getDataField(AnnexeEmballageGroupeTypeModel::FIELDNAME_NOM_ANNEXE_EMBALLAGE_GROUPE_TYPE)->getFieldValue();
+
+            /*
+             * Cette array doit être utilisé de cette manière 
+             * Array (
+             * nom de table,
+             * clé étrangère de la table présenté
+             * valeur de la clé étrangère);
+             */
+            $tablesNameAndIdForeignKeyOfFtaConditionnement = array(
+                array(AnnexeEmballageModel::TABLENAME, FtaConditionnementModel::FIELDNAME_ID_ANNEXE_EMBALLAGE, $idAnnexeEmballage),
+                array(AnnexeEmballageGroupeTypeModel::TABLENAME, FtaConditionnementModel::FIELDNAME_ID_ANNEXE_EMBALLAGE_GROUPE_TYPE, $idAnnexeEmballageGroupeType),
+                array(FtaModel::TABLENAME, FtaConditionnementModel::FIELDNAME_ID_FTA, $paramIdFta),
+            );
+            $htmlEmballagePalette = new HtmlSubForm_RNN($arrayFtaConditionnement, $className, $label, $tablesNameAndIdForeignKeyOfFtaConditionnement);
+            $htmlEmballagePalette->setIsEditable($this->getIsEditable());
+            $htmlEmballagePalette->setRightToAdd($rightToAdd);
+            $htmlEmballagePalette->setLienAjouter(AnnexeEmballageGroupeTypeModel::getAddLinkAfterConditionnement($paramIdFta, $paramChapitre, AccueilFta::VALUE_4, $paramSyntheseAction));
+            $htmlEmballagePalette->setLien(AnnexeEmballageGroupeTypeModel::getAddLinkBeforeConditionnement($paramIdFta, $paramChapitre, AccueilFta::VALUE_4, $paramSyntheseAction));
+            $htmlEmballagePalette->setLienSuppression(AnnexeEmballageGroupeTypeModel::getDeleteLinkConditionnement($paramIdFta, $paramChapitre, $idFtaCondtionnement, $paramSyntheseAction));
+            $return .= $htmlEmballagePalette->getHtmlResult();
         }
-        $className = $ftaConditionnmentModel->getClassName();
-        $label = $annexeEmballageGroupeTypeModel2->getDataField(AnnexeEmballageGroupeTypeModel::FIELDNAME_NOM_ANNEXE_EMBALLAGE_GROUPE_TYPE)->getFieldValue();
-
-        /*
-         * Cette array doit être utilisé de cette manière 
-         * Array (
-         * nom de table,
-         * clé étrangère de la table présenté
-         * valeur de la clé étrangère);
-         */
-        $tablesNameAndIdForeignKeyOfFtaConditionnement = array(
-            array(AnnexeEmballageModel::TABLENAME, FtaConditionnementModel::FIELDNAME_ID_ANNEXE_EMBALLAGE, $idAnnexeEmballage),
-            array(AnnexeEmballageGroupeTypeModel::TABLENAME, FtaConditionnementModel::FIELDNAME_ID_ANNEXE_EMBALLAGE_GROUPE_TYPE, $idAnnexeEmballageGroupeType),
-            array(FtaModel::TABLENAME, FtaConditionnementModel::FIELDNAME_ID_FTA, $paramIdFta),
-        );
-        $htmlEmballagePalette = new HtmlSubForm_RNN($arrayFtaConditionnement, $className, $label, $tablesNameAndIdForeignKeyOfFtaConditionnement);
-        $htmlEmballagePalette->setIsEditable($this->getIsEditable());
-        $htmlEmballagePalette->setRightToAdd($rightToAdd);
-        $htmlEmballagePalette->setLien(AnnexeEmballageGroupeTypeModel::getAddLinkConditionnement($paramIdFta, $paramChapitre, AccueilFta::VALUE_4, $paramSyntheseAction));
-        $htmlEmballagePalette->setLienSuppression(AnnexeEmballageGroupeTypeModel::getDeleteLinkConditionnement($paramIdFta, $paramChapitre, $idFtaConditionnment, $paramSyntheseAction));
-
-        return $htmlEmballagePalette->getHtmlResult();
+        return $return;
     }
 
     public function getHtmlCommentaireChapitre() {

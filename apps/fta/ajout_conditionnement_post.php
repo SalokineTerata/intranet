@@ -40,6 +40,10 @@ $idAnnexeEmballageGroupe = Lib::getParameterFromRequest("id_annexe_emballage_gro
 $idAnnexeEmballage = Lib::getParameterFromRequest("id_annexe_emballage"); //Identifiant de l'emballage
 $idFtaChapitreEncours = Lib::getParameterFromRequest("id_fta_chapitre");
 $syntheseAction = Lib::getParameterFromRequest("synthese_action");
+$abreviation_fta_etat = Lib::getParameterFromRequest("abreviation_fta_etat");
+$idFtaEtat = Lib::getParameterFromRequest("id_fta_etat");
+$idFtaRole = Lib::getParameterFromRequest("id_fta_role");
+$comeback = Lib::getParameterFromRequest("comeback");
 switch ($action) {
 
     /*
@@ -56,7 +60,11 @@ switch ($action) {
                 . "&id_annexe_emballage_groupe_type=$idAnnexeEmballageGroupeType"
                 . "&id_annexe_emballage_groupe=$idAnnexeEmballageGroupe"
                 . "&action=etape2&id_fta_chapitre=$idFtaChapitreEncours"
-                . "&synthese_action=$syntheseAction");
+                . "&synthese_action=$syntheseAction"
+                . "&comeback=" . $comeback
+                . "&id_fta_etat=" . $idFtaEtat
+                . "&abrevation_fta_etat=" . $abreviation_fta_etat
+                . "&id_fta_role=" . $idFtaRole);
 
         break;
 
@@ -67,7 +75,11 @@ switch ($action) {
                 . "&id_annexe_emballage_groupe=$idAnnexeEmballageGroupe"
                 . "&id_annexe_emballage=$idAnnexeEmballage"
                 . "&action=etape3&id_fta_chapitre=$idFtaChapitreEncours"
-                . "&synthese_action=$syntheseAction");
+                . "&synthese_action=$syntheseAction"
+                . "&comeback=" . $comeback
+                . "&id_fta_etat=" . $idFtaEtat
+                . "&abrevation_fta_etat=" . $abreviation_fta_etat
+                . "&id_fta_role=" . $idFtaRole);
 
         break;
 
@@ -82,7 +94,7 @@ switch ($action) {
          * Enregistrement de l'emballage affecter à cette FTA
          */
         //Récuperation des données
-        $nbCoucheFtaConditionnement = Lib::getParameterFromRequest(FtaConditionnementModel::FIELDNAME_NOMBRE_COUCHE_FTA_CONDITIONNEMENT);//Une seule couche par UVC
+        $nbCoucheFtaConditionnement = Lib::getParameterFromRequest(FtaConditionnementModel::FIELDNAME_NOMBRE_COUCHE_FTA_CONDITIONNEMENT); //Une seule couche par UVC
         $hauteurFtaConditionnement = $annexeEmballageModel->getDataField(AnnexeEmballageModel::FIELDNAME_HAUTEUR_ANNEXE_EMBALLAGE)->getFieldValue();
         $longeurFtaConditionnement = $annexeEmballageModel->getDataField(AnnexeEmballageModel::FIELDNAME_LONGUEUR_ANNEXE_EMBALLAGE)->getFieldValue();
         $largeurFtaConditionnement = $annexeEmballageModel->getDataField(AnnexeEmballageModel::FIELDNAME_LARGEUR_ANNEXE_EMBALLAGE)->getFieldValue();
@@ -90,17 +102,17 @@ switch ($action) {
         $qteCoucheFtaConditionnement = Lib::getParameterFromRequest(FtaConditionnementModel::FIELDNAME_QUANTITE_PAR_COUCHE_FTA_CONDITIONNEMENT); //Quantité par UVC
         if ($idAnnexeEmballageGroupeType == 3) {
             $qteCoucheFtaConditionnement = $annexeEmballageModel->getDataField(AnnexeEmballageModel::FIELDNAME_QUANTITE_PAR_COUCHE_ANNEXE_EMBALLAGE)->getFieldValue();
-            $nbCoucheFtaConditionnement = $annexeEmballageModel->getDataField(AnnexeEmballageModel::FIELDNAME_NOMBRE_COUCHE_ANNEXE_EMBALLAGE)->getFieldValue();   
+            $nbCoucheFtaConditionnement = $annexeEmballageModel->getDataField(AnnexeEmballageModel::FIELDNAME_NOMBRE_COUCHE_ANNEXE_EMBALLAGE)->getFieldValue();
         }
 
-      
+
         FtaConditionnementModel::addFtaConditionnement($idFta, $idAnnexeEmballage, $idAnnexeEmballageGroupe, $idAnnexeEmballageGroupeType, $hauteurFtaConditionnement, $longeurFtaConditionnement
                 , $largeurFtaConditionnement, $poidsFtaConditionnement, $nbCoucheFtaConditionnement, $qteCoucheFtaConditionnement);
 
 
 
 
-        header("Location: modification_fiche.php?id_fta=$idFta&id_fta_chapitre_encours=$idFtaChapitreEncours&synthese_action=encours");
+        header("Location: modification_fiche.php?id_fta=$idFta&id_fta_chapitre_encours=$idFtaChapitreEncours&synthese_action=encours&comeback=$comeback&id_fta_etat=$idFtaEtat&abrevation_fta_etat=$abreviation_fta_etat&id_fta_role=$idFtaRole");
         break;
 
 

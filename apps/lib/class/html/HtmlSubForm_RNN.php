@@ -252,7 +252,7 @@ class HtmlSubForm_RNN extends HtmlSubForm {
 
     public function getHtmlViewedContent() {
         return $this->getHtmlResultSubFormBegin()
-                . $this->getHtmlResultMiddle()
+                . $this->getHtmlResultSubFormMiddle()
                 . $this->getHtmlResultSubFormEnd()
         ;
     }

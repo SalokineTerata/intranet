@@ -478,18 +478,11 @@ class FtaSuiviProjetModel extends AbstractModel {
         $arrayChapitre = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
                         "SELECT DISTINCT " . FtaSuiviProjetModel::TABLENAME . "." . FtaSuiviProjetModel::FIELDNAME_ID_FTA_CHAPITRE
                         . " FROM " . FtaSuiviProjetModel::TABLENAME . "," . FtaWorkflowStructureModel::TABLENAME
-                        . "," . FtaProcessusCycleModel::TABLENAME . ", " . FtaEtatModel::TABLENAME
                         . " WHERE " . FtaSuiviProjetModel::TABLENAME . "." . FtaSuiviProjetModel::FIELDNAME_ID_FTA . "= $paramIdFta "
                         . " AND " . FtaSuiviProjetModel::FIELDNAME_SIGNATURE_VALIDATION_SUIVI_PROJET . "<>0 "
                         . " AND " . FtaWorkflowStructureModel::TABLENAME . "." . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_CHAPITRE
                         . "=" . FtaSuiviProjetModel::TABLENAME . "." . FtaSuiviProjetModel::FIELDNAME_ID_FTA_CHAPITRE
-                        . " AND " . FtaWorkflowStructureModel::TABLENAME . "." . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_PROCESSUS
-                        . "=" . FtaProcessusCycleModel::TABLENAME . "." . FtaProcessusCycleModel::FIELDNAME_PROCESSUS_INIT
-                        . " AND " . FtaProcessusCycleModel::TABLENAME . "." . FtaProcessusCycleModel::FIELDNAME_FTA_ETAT
-                        . "=" . FtaEtatModel::TABLENAME . "." . FtaEtatModel::FIELDNAME_ABREVIATION
-                        . " AND " . FtaEtatModel::TABLENAME . "." . FtaEtatModel::KEYNAME
-                        . "='" . $ftaModel->getDataField(FtaModel::FIELDNAME_ID_FTA_ETAT)->getFieldValue() . "' "
-                        . " AND " . FtaProcessusCycleModel::TABLENAME . "." . FtaProcessusCycleModel::FIELDNAME_WORKFLOW
+                        . " AND " . FtaWorkflowStructureModel::TABLENAME . "." . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_WORKFLOW
                         . "='" . $ftaModel->getDataField(FtaModel::FIELDNAME_WORKFLOW)->getFieldValue() . "' "
         );
         $currentChapitre = count($arrayChapitre);
@@ -500,14 +493,7 @@ class FtaSuiviProjetModel extends AbstractModel {
         $arrayChapitreTotal = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
                         "SELECT DISTINCT " . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_CHAPITRE
                         . " FROM " . FtaWorkflowStructureModel::TABLENAME
-                        . "," . FtaProcessusCycleModel::TABLENAME . ", " . FtaEtatModel::TABLENAME
-                        . " WHERE  " . FtaWorkflowStructureModel::TABLENAME . "." . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_PROCESSUS
-                        . "=" . FtaProcessusCycleModel::TABLENAME . "." . FtaProcessusCycleModel::FIELDNAME_PROCESSUS_INIT
-                        . " AND " . FtaProcessusCycleModel::TABLENAME . "." . FtaProcessusCycleModel::FIELDNAME_FTA_ETAT
-                        . "=" . FtaEtatModel::TABLENAME . "." . FtaEtatModel::FIELDNAME_ABREVIATION
-                        . " AND " . FtaEtatModel::TABLENAME . "." . FtaEtatModel::KEYNAME
-                        . "='" . $ftaModel->getDataField(FtaModel::FIELDNAME_ID_FTA_ETAT)->getFieldValue() . "' "
-                        . " AND " . FtaProcessusCycleModel::TABLENAME . "." . FtaProcessusCycleModel::FIELDNAME_WORKFLOW
+                        . " WHERE  " . FtaWorkflowStructureModel::TABLENAME . "." . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_WORKFLOW
                         . "='" . $ftaModel->getDataField(FtaModel::FIELDNAME_WORKFLOW)->getFieldValue() . "' "
         );
         $totalChapitre = count($arrayChapitreTotal);

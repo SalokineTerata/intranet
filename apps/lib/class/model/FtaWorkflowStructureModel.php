@@ -61,28 +61,6 @@ class FtaWorkflowStructureModel extends AbstractModel {
 //                , DatabaseRecord::VALUE_DONT_CREATE_RECORD_IN_DATABASE_IF_KEY_DOESNT_EXIST)
 //        );s
     }
-    
-    static public function getIdFtaWorkflowStructureByIdFtaAndIdChapitre($paramIdFta, $paramIdChapitre) {
-
-        //Géneration de id_fta_workflow
-        $modelFta = new FtaModel($paramIdFta);
-        $idFtaWorkflow = $modelFta->getDataField(FtaModel::FIELDNAME_WORKFLOW)->getFieldValue();
-        
-        //Récupération du tableau de résultat
-        $keyName = FtaWorkflowStructureModel::KEYNAME;
-        $tableName = FtaWorkflowStructureModel::TABLENAME;
-        $idFtaWorkflowName = FtaWorkflowStructureModel::FIELDNAME_ID_FTA_WORKFLOW;
-        $idFtaChapitreName = FtaWorkflowStructureModel::FIELDNAME_ID_FTA_CHAPITRE;
-        $sql = "SELECT " . $keyName . " "
-                . "FROM " . $tableName . " "
-                . "WHERE " . $idFtaWorkflowName . "=" . $idFtaWorkflow . " "
-                . "AND " . $idFtaChapitreName . "=" . $paramIdChapitre . " "
-        ;
-        $array = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray($sql);
-
-        //Retourne uniquement la première valeur
-        return $array[0][$keyName];
-    }
 
     function getModelFtaWorkflow() {
         return $this->modelFtaWorkflow;
@@ -114,6 +92,47 @@ class FtaWorkflowStructureModel extends AbstractModel {
 
     function setModelFtaChapitre(FtaChapitre $modelFtaChapitre) {
         $this->modelFtaChapitre = $modelFtaChapitre;
+    }
+
+    static public function getIdFtaWorkflowStructureByIdFtaAndIdChapitre($paramIdFta, $paramIdChapitre) {
+
+        //Géneration de id_fta_workflow
+        $modelFta = new FtaModel($paramIdFta);
+        $idFtaWorkflow = $modelFta->getDataField(FtaModel::FIELDNAME_WORKFLOW)->getFieldValue();
+
+        //Récupération du tableau de résultat
+        $keyName = FtaWorkflowStructureModel::KEYNAME;
+        $tableName = FtaWorkflowStructureModel::TABLENAME;
+        $idFtaWorkflowName = FtaWorkflowStructureModel::FIELDNAME_ID_FTA_WORKFLOW;
+        $idFtaChapitreName = FtaWorkflowStructureModel::FIELDNAME_ID_FTA_CHAPITRE;
+        $sql = "SELECT " . $keyName . " "
+                . "FROM " . $tableName . " "
+                . "WHERE " . $idFtaWorkflowName . "=" . $idFtaWorkflow . " "
+                . "AND " . $idFtaChapitreName . "=" . $paramIdChapitre . " "
+        ;
+        $array = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray($sql);
+
+        //Retourne uniquement la première valeur
+        return $array[0][$keyName];
+    }
+
+    /**
+     * Listes des processus auxquel l'utilisateur connecté à les droits d'accès
+     * @param type $paramIdRole
+     * @param type $paramIdWorkflow
+     * @return type
+     */
+    public static function getArrayProcessusByRoleAndWorkflow($paramIdRole, $paramIdWorkflow) {
+        $arrayProcessusAcces = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
+                        "SELECT DISTINCT " . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_PROCESSUS
+                        . " FROM " . FtaWorkflowStructureModel::TABLENAME
+                        . " WHERE " . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_WORKFLOW . "=" . $paramIdWorkflow
+                        . " AND " . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_ROLE . "=" . $paramIdRole
+        );
+        foreach ($arrayProcessusAcces as $rowsProcessusAcces) {
+            $idProcessus[] = $rowsProcessusAcces[FtaWorkflowStructureModel::FIELDNAME_ID_FTA_PROCESSUS];
+        }
+        return $idProcessus;
     }
 
 }

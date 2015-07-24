@@ -50,6 +50,10 @@ $idAnnexeEmballage = Lib::getParameterFromRequest("id_annexe_emballage");
 $idFtaChapitreEncours = Lib::getParameterFromRequest("id_fta_chapitre");
 $syntheseAction = Lib::getParameterFromRequest("synthese_action");
 $action = Lib::getParameterFromRequest("action");
+$abreviation_fta_etat = Lib::getParameterFromRequest("abrevation_fta_etat");
+$idFtaEtat = Lib::getParameterFromRequest("id_fta_etat");
+$idFtaRole = Lib::getParameterFromRequest("id_fta_role");
+$comeback = Lib::getParameterFromRequest("comeback");
 $page_reload = Lib::getParameterFromRequest("page_reload");
 
 //Initialisation des modele
@@ -284,6 +288,10 @@ switch ($output) {
              <input type=hidden name=id_annexe_emballage value=$idAnnexeEmballage >
              <input type=hidden name=id_annexe_emballage_groupe value=$idAnnexeEmballageGroupe >
              <input type=hidden name=id_annexe_emballage_groupe_type value=$idAnnexeEmballageGroupeType>
+             <input type=hidden name=id_fta_role value=$idFtaRole>
+             <input type=hidden name=id_fta_etat value=$idFtaEtat>
+             <input type=\"hidden\" name=\"comeback\" value=\"$comeback\" />
+             <input type=hidden name=abreviation_fta_etat value=$abreviation_fta_etat>
              <input type=hidden name=synthese_action value=$syntheseAction >
 
              <$html_table>

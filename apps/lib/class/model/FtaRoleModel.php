@@ -12,6 +12,7 @@ class FtaRoleModel extends AbstractModel {
     const KEYNAME = "id_fta_role";
     const FIELDNAME_DESCRIPTION_FTA_ROLE = "description_fta_role";
     const FIELDNAME_NOM_FTA_ROLE = "nom_fta_role";
+    const FIELDNAME_IS_GESTIONNAIRE = "is_gestionnaire";
 
     public static function getKeyNameOfFirstRoleByIdUser($paramIdUser) {
 
@@ -133,6 +134,19 @@ class FtaRoleModel extends AbstractModel {
 
 
         return $arrayRole[0][FtaRoleModel::FIELDNAME_DESCRIPTION_FTA_ROLE];
+    }
+
+    public static function getValueIsGestionnaire($paramIdRole) {
+        $arrayIsGestionnaire = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
+                        "SELECT " . FtaRoleModel::FIELDNAME_IS_GESTIONNAIRE
+                        . " FROM " . FtaRoleModel::TABLENAME
+                        . " WHERE " . FtaRoleModel::KEYNAME . "=" . $paramIdRole
+        );
+        foreach ($arrayIsGestionnaire as $rowsIsGestionnaire) {
+            $valueIsGestionnaire = $rowsIsGestionnaire[FtaRoleModel::FIELDNAME_IS_GESTIONNAIRE];
+        }
+
+        return $valueIsGestionnaire;
     }
 
 }

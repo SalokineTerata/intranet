@@ -46,6 +46,9 @@ $paramSyntheseAction = Lib::getParameterFromRequest("synthese_action");
 $societe_demandeur_fta = Lib::getParameterFromRequest("societe_demandeur_fta");
 //$id_classification_fta = Lib::getParameterFromRequest("id_classification_fta");
 $paramSignatureValidationSuiviProjet = Lib::getParameterFromRequest(FtaSuiviProjetModel::FIELDNAME_SIGNATURE_VALIDATION_SUIVI_PROJET);
+$idFtaRole = Lib::getParameterFromRequest(FtaRoleModel::KEYNAME);
+$idFtaEtat = Lib::getParameterFromRequest(FtaEtatModel::KEYNAME);
+$comeback = Lib::getParameterFromRequest(FtaEtatModel::KEYNAME);
 
 switch ($action) {
 
@@ -393,7 +396,7 @@ switch ($action) {
 
 //if(!$erreur and !$noredirection) header ("Location: modification_fiche.php?id_fta=$id_fta&id_fta_chapitre_encours=$id_fta_chapitre_encours&synthese_action=$synthese_action");
 if (!$erreur) {
-    header("Location: modification_fiche.php?id_fta=$paramIdFta&id_fta_chapitre_encours=$paramIdFtaChapitreEncours&synthese_action=$paramSyntheseAction");
+    header("Location: modification_fiche.php?id_fta=$paramIdFta&id_fta_chapitre_encours=$paramIdFtaChapitreEncours&synthese_action=$paramSyntheseAction&comeback=$comeback&id_fta_etat=$idFtaEtat&abrevation_fta_etat=$abreviation_fta_etat&id_fta_role=$idFtaRole");
 }
 //include ("./action_bs.php");
 //include ("./action_sm.php");

@@ -22,6 +22,11 @@ class FtaEtatModel extends AbstractModel {
     const ETAT_AVANCEMENT_VALUE_EFFECTUES = "correction";
     const ETAT_AVANCEMENT_VALUE_EN_COURS = "encours";
 
+    /**
+     * Récupération du nom et de l'abrévation de l'état de la fta selon son rôle
+     * @param type $paramIdFtaRole
+     * @return type
+     */
     public static function getFtaEtatAndNameByRole($paramIdFtaRole) {
 
         $arrayFtaEtatAndName = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
@@ -43,6 +48,15 @@ class FtaEtatModel extends AbstractModel {
         return $arrayFtaEtatAndName;
     }
 
+    /**
+     * Liste des id Fta selon l'état d'avancement en exécution
+     * @param type $paramSyntheseAction
+     * @param type $paramEtat
+     * @param type $paramRole
+     * @param type $paramIdUser
+     * @param type $paramLieuGeo
+     * @return type
+     */
     public static function getIdFtaByEtatAvancement($paramSyntheseAction, $paramEtat, $paramRole, $paramIdUser, $paramLieuGeo) {
 
         switch ($paramSyntheseAction) {
@@ -207,7 +221,7 @@ class FtaEtatModel extends AbstractModel {
                         }
                     }
                 }
-                $req = "SELECT DISTINCT " . FtaModel::KEYNAME . " FROM fta WHERE ( 0 ";
+                $req = "SELECT DISTINCT " . FtaModel::KEYNAME . " FROM " . FtaModel::TABLENAME . " WHERE ( 0 ";
 
                 $req .= FtaModel::AddIdFTaValidProcess($idFtaEffectue);
 

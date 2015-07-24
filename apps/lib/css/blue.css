@@ -52,7 +52,7 @@ A:hover.link1
 .loginFFCC66Centre { font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 10px; font-style: normal; font-weight: bold; color: #000000; background-color: #FFCC66; text-decoration: none; text-align: center; vertical-align: middle; font-variant: normal }
 .contours {  font-family: Arial, Helvetica, sans-serif; font-size: 10px; background-color: #FFE5B2; border-top-width: 1px; border-right-width: 1px; border-bottom-width: 1px; border-left-width: 1px; line-height: 12px; color: #000000}
 .titre_principal { text-align: center; vertical-align: middle; font-size: 13px; font-weight: bold; background-color: #CCCCFF; vertical-align: middle; text-align: center;}
-.titre_tableau { text-align: center; vertical-align: middle; font-size: 12px; font-weight: bold; background-color: #CCCCFF; text-align: center;}
+.titre_tableau {   font-weight: bold; }
 .titre { text-align: center; vertical-align: middle; font-size: 11px; font-weight: bold;  vertical-align: middle; text-align: center;}
 .titresynthese { font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 20px; clip: rect( ) }
 .contenu {

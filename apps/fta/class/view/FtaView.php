@@ -194,7 +194,7 @@ class FtaView {
         return $blocEcheanceLignes;
     }
 
-    public function getHtmlEmballageUVC($paramIdFta, $paramChapitre, $paramSyntheseAction) {
+    public function getHtmlEmballageUVC($paramIdFta, $paramChapitre, $paramSyntheseAction,$paramComeback,$paramIdFtaEtat,$paramAbreviationEtat,$paramIdFtaRole) {
         $annexeEmballageGroupeTypeModel = new AnnexeEmballageGroupeTypeModel(AccueilFta::VALUE_1);
 
         /*
@@ -247,8 +247,8 @@ class FtaView {
                 $htmlEmballageUVC = new HtmlSubForm_RNN($arrayFtaConditionnement, $className, $label, $tablesNameAndIdForeignKeyOfFtaConditionnement);
                 $htmlEmballageUVC->setIsEditable($this->getIsEditable());
                 $htmlEmballageUVC->setRightToAdd($rightToAdd);
-                $htmlEmballageUVC->setLienAjouter(AnnexeEmballageGroupeTypeModel::getAddLinkAfterConditionnement($paramIdFta, $paramChapitre, AccueilFta::VALUE_1, $paramSyntheseAction));
-                $htmlEmballageUVC->setLien(AnnexeEmballageGroupeTypeModel::getAddLinkBeforeConditionnement($paramIdFta, $paramChapitre, AccueilFta::VALUE_1, $paramSyntheseAction));
+                $htmlEmballageUVC->setLienAjouter(AnnexeEmballageGroupeTypeModel::getAddLinkAfterConditionnement($paramIdFta, $paramChapitre, AccueilFta::VALUE_1, $paramSyntheseAction,$paramComeback,$paramIdFtaEtat,$paramAbreviationEtat,$paramIdFtaRole));
+                $htmlEmballageUVC->setLien(AnnexeEmballageGroupeTypeModel::getAddLinkBeforeConditionnement($paramIdFta, $paramChapitre, AccueilFta::VALUE_1, $paramSyntheseAction,$paramComeback,$paramIdFtaEtat,$paramAbreviationEtat,$paramIdFtaRole));
                 $htmlEmballageUVC->setLienSuppression(AnnexeEmballageGroupeTypeModel::getDeleteLinkConditionnement($paramIdFta, $paramChapitre, $idFtaCondtionnement, $paramSyntheseAction));
 
                 $return .= $htmlEmballageUVC->getHtmlResult();
@@ -263,13 +263,13 @@ class FtaView {
             $htmlEmballageUVC = new HtmlSubForm_RNN($arrayFtaConditionnement, $className, $label, $tablesNameAndIdForeignKeyOfFtaConditionnement);
             $htmlEmballageUVC->setIsEditable($this->getIsEditable());
             $htmlEmballageUVC->setRightToAdd(TRUE);
-            $htmlEmballageUVC->setLien(AnnexeEmballageGroupeTypeModel::getAddLinkBeforeConditionnement($paramIdFta, $paramChapitre, AccueilFta::VALUE_1, $paramSyntheseAction));
+            $htmlEmballageUVC->setLien(AnnexeEmballageGroupeTypeModel::getAddLinkBeforeConditionnement($paramIdFta, $paramChapitre, AccueilFta::VALUE_1, $paramSyntheseAction,$paramComeback,$paramIdFtaEtat,$paramAbreviationEtat,$paramIdFtaRole));
             $return .= $htmlEmballageUVC->getHtmlResult();
         }
         return $return;
     }
 
-    public function getHtmlEmballageParColis($paramIdFta, $paramChapitre, $paramSyntheseAction) {
+    public function getHtmlEmballageParColis($paramIdFta, $paramChapitre, $paramSyntheseAction,$paramComeback,$paramIdFtaEtat,$paramAbreviationEtat,$paramIdFtaRole) {
         $annexeEmballageGroupeTypeModel = new AnnexeEmballageGroupeTypeModel(AccueilFta::VALUE_2);
         /*
          * Récuperation des élements clé de la table fta_conditionnement
@@ -319,8 +319,8 @@ class FtaView {
                 $htmlEmballageParColis = new HtmlSubForm_RNN($arrayFtaConditionnement, $className, $label, $tablesNameAndIdForeignKeyOfFtaConditionnement);
                 $htmlEmballageParColis->setIsEditable($this->getIsEditable());
                 $htmlEmballageParColis->setRightToAdd($rightToAdd);
-                $htmlEmballageParColis->setLienAjouter(AnnexeEmballageGroupeTypeModel::getAddLinkAfterConditionnement($paramIdFta, $paramChapitre, AccueilFta::VALUE_2, $paramSyntheseAction));
-                $htmlEmballageParColis->setLien(AnnexeEmballageGroupeTypeModel::getAddLinkBeforeConditionnement($paramIdFta, $paramChapitre, AccueilFta::VALUE_2, $paramSyntheseAction));
+                $htmlEmballageParColis->setLienAjouter(AnnexeEmballageGroupeTypeModel::getAddLinkAfterConditionnement($paramIdFta, $paramChapitre, AccueilFta::VALUE_2, $paramSyntheseAction,$paramComeback,$paramIdFtaEtat,$paramAbreviationEtat,$paramIdFtaRole));
+                $htmlEmballageParColis->setLien(AnnexeEmballageGroupeTypeModel::getAddLinkBeforeConditionnement($paramIdFta, $paramChapitre, AccueilFta::VALUE_2, $paramSyntheseAction,$paramComeback,$paramIdFtaEtat,$paramAbreviationEtat,$paramIdFtaRole));
                 $htmlEmballageParColis->setLienSuppression(AnnexeEmballageGroupeTypeModel::getDeleteLinkConditionnement($paramIdFta, $paramChapitre, $idFtaCondtionnement, $paramSyntheseAction));
                 $return .= $htmlEmballageParColis->getHtmlResult();
             }
@@ -334,14 +334,14 @@ class FtaView {
             $htmlEmballageParColis = new HtmlSubForm_RNN($arrayFtaConditionnement, $className, $label, $tablesNameAndIdForeignKeyOfFtaConditionnement);
             $htmlEmballageParColis->setIsEditable($this->getIsEditable());
             $htmlEmballageParColis->setRightToAdd(TRUE);
-            $htmlEmballageParColis->setLien(AnnexeEmballageGroupeTypeModel::getAddLinkBeforeConditionnement($paramIdFta, $paramChapitre, AccueilFta::VALUE_2, $paramSyntheseAction));
+            $htmlEmballageParColis->setLien(AnnexeEmballageGroupeTypeModel::getAddLinkBeforeConditionnement($paramIdFta, $paramChapitre, AccueilFta::VALUE_2, $paramSyntheseAction,$paramComeback,$paramIdFtaEtat,$paramAbreviationEtat,$paramIdFtaRole));
             $return .= $htmlEmballageParColis->getHtmlResult();
         }
         return $return;
     }
 
-    public function getHtmlEmballageDuColis($paramIdFta, $paramChapitre, $paramSyntheseAction) {
-        $annexeEmballageGroupeTypeModel = new AnnexeEmballageGroupeTypeModel();
+    public function getHtmlEmballageDuColis($paramIdFta, $paramChapitre, $paramSyntheseAction,$paramComeback,$paramIdFtaEtat,$paramAbreviationEtat,$paramIdFtaRole) {
+        $annexeEmballageGroupeTypeModel = new AnnexeEmballageGroupeTypeModel(AccueilFta::VALUE_3);
 
         /*
          * Récuperation des élements clé de la table fta_conditionnement
@@ -391,11 +391,11 @@ class FtaView {
                 $htmlEmballageDuColis = new HtmlSubForm_RNN($arrayFtaConditionnement, $className, $label, $tablesNameAndIdForeignKeyOfFtaConditionnement);
                 $htmlEmballageDuColis->setIsEditable($this->getIsEditable());
                 $htmlEmballageDuColis->setRightToAdd($rightToAdd);
-                $htmlEmballageDuColis->setLienAjouter(AnnexeEmballageGroupeTypeModel::getAddLinkAfterConditionnement($paramIdFta, $paramChapitre, AccueilFta::VALUE_3, $paramSyntheseAction));
-                $htmlEmballageDuColis->setLien(AnnexeEmballageGroupeTypeModel::getAddLinkBeforeConditionnement($paramIdFta, $paramChapitre, AccueilFta::VALUE_3, $paramSyntheseAction));
+                $htmlEmballageDuColis->setLienAjouter(AnnexeEmballageGroupeTypeModel::getAddLinkAfterConditionnement($paramIdFta, $paramChapitre, AccueilFta::VALUE_3, $paramSyntheseAction,$paramComeback,$paramIdFtaEtat,$paramAbreviationEtat,$paramIdFtaRole));
+                $htmlEmballageDuColis->setLien(AnnexeEmballageGroupeTypeModel::getAddLinkBeforeConditionnement($paramIdFta, $paramChapitre, AccueilFta::VALUE_3, $paramSyntheseAction,$paramComeback,$paramIdFtaEtat,$paramAbreviationEtat,$paramIdFtaRole));
                 $htmlEmballageDuColis->setLienSuppression(AnnexeEmballageGroupeTypeModel::getDeleteLinkConditionnement($paramIdFta, $paramChapitre, $idFtaCondtionnement, $paramSyntheseAction));
 
-                $return.= $htmlEmballageDuColis->getHtmlResult();
+                $return .= $htmlEmballageDuColis->getHtmlResult();
             }
         } else {
             /*
@@ -407,13 +407,13 @@ class FtaView {
             $htmlEmballageDuColis = new HtmlSubForm_RNN($arrayFtaConditionnement, $className, $label, $tablesNameAndIdForeignKeyOfFtaConditionnement);
             $htmlEmballageDuColis->setIsEditable($this->getIsEditable());
             $htmlEmballageDuColis->setRightToAdd(TRUE);
-            $htmlEmballageDuColis->setLien(AnnexeEmballageGroupeTypeModel::getAddLinkBeforeConditionnement($paramIdFta, $paramChapitre, AccueilFta::VALUE_3, $paramSyntheseAction));
+            $htmlEmballageDuColis->setLien(AnnexeEmballageGroupeTypeModel::getAddLinkBeforeConditionnement($paramIdFta, $paramChapitre, AccueilFta::VALUE_3, $paramSyntheseAction,$paramComeback,$paramIdFtaEtat,$paramAbreviationEtat,$paramIdFtaRole));
             $return .= $htmlEmballageDuColis->getHtmlResult();
         }
         return $return;
     }
 
-    public function getHtmlEmballagePalette($paramIdFta, $paramChapitre, $paramSyntheseAction) {
+    public function getHtmlEmballagePalette($paramIdFta, $paramChapitre, $paramSyntheseAction,$paramComeback,$paramIdFtaEtat,$paramAbreviationEtat,$paramIdFtaRole) {
         $annexeEmballageGroupeTypeModel = new AnnexeEmballageGroupeTypeModel();
         /*
          * Récuperation des élements clé de la table fta_conditionnement
@@ -466,8 +466,8 @@ class FtaView {
                 $htmlEmballagePalette = new HtmlSubForm_RNN($arrayFtaConditionnement, $className, $label, $tablesNameAndIdForeignKeyOfFtaConditionnement);
                 $htmlEmballagePalette->setIsEditable($this->getIsEditable());
                 $htmlEmballagePalette->setRightToAdd($rightToAdd);
-                $htmlEmballagePalette->setLienAjouter(AnnexeEmballageGroupeTypeModel::getAddLinkAfterConditionnement($paramIdFta, $paramChapitre, AccueilFta::VALUE_4, $paramSyntheseAction));
-                $htmlEmballagePalette->setLien(AnnexeEmballageGroupeTypeModel::getAddLinkBeforeConditionnement($paramIdFta, $paramChapitre, AccueilFta::VALUE_4, $paramSyntheseAction));
+                $htmlEmballagePalette->setLienAjouter(AnnexeEmballageGroupeTypeModel::getAddLinkAfterConditionnement($paramIdFta, $paramChapitre, AccueilFta::VALUE_4, $paramSyntheseAction,$paramComeback,$paramIdFtaEtat,$paramAbreviationEtat,$paramIdFtaRole));
+                $htmlEmballagePalette->setLien(AnnexeEmballageGroupeTypeModel::getAddLinkBeforeConditionnement($paramIdFta, $paramChapitre, AccueilFta::VALUE_4, $paramSyntheseAction,$paramComeback,$paramIdFtaEtat,$paramAbreviationEtat,$paramIdFtaRole));
                 $htmlEmballagePalette->setLienSuppression(AnnexeEmballageGroupeTypeModel::getDeleteLinkConditionnement($paramIdFta, $paramChapitre, $idFtaCondtionnement, $paramSyntheseAction));
                 $return .= $htmlEmballagePalette->getHtmlResult();
             }
@@ -481,7 +481,7 @@ class FtaView {
             $htmlEmballagePalette = new HtmlSubForm_RNN($arrayFtaConditionnement, $className, $label, $tablesNameAndIdForeignKeyOfFtaConditionnement);
             $htmlEmballagePalette->setIsEditable($this->getIsEditable());
             $htmlEmballagePalette->setRightToAdd(TRUE);
-            $htmlEmballagePalette->setLien(AnnexeEmballageGroupeTypeModel::getAddLinkBeforeConditionnement($paramIdFta, $paramChapitre, AccueilFta::VALUE_4, $paramSyntheseAction));
+            $htmlEmballagePalette->setLien(AnnexeEmballageGroupeTypeModel::getAddLinkBeforeConditionnement($paramIdFta, $paramChapitre, AccueilFta::VALUE_4, $paramSyntheseAction,$paramComeback,$paramIdFtaEtat,$paramAbreviationEtat,$paramIdFtaRole));
             $return .= $htmlEmballagePalette->getHtmlResult();
         }
         return $return;

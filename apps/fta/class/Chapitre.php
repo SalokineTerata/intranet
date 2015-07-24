@@ -62,6 +62,8 @@ class Chapitre {
      * 
      * @var FtaWorkflowStructureModel 
      */
+    protected static$abrevation_etat;
+    protected static$comeback;
     protected static $ftaWorkflowStructureModel;
     protected static $html_chapitre_activation_des_produits;
     protected static $html_chapitre_all;
@@ -106,7 +108,9 @@ class Chapitre {
     protected static $html_submit_button;
     protected static $html_suivi_dossier;
     protected static $id_fta_chapitre;
+    protected static$id_fta_etat;
     protected static $id_fta_processus;
+    protected static$id_fta_role;
     protected static $id_fta_workflow;
     protected static $id_fta_workflow_structure;
     protected static $id_intranet_actions;
@@ -167,9 +171,13 @@ class Chapitre {
         return self::$html_chapitre_all;
     }
 
-    public static function initChapitre($id_fta, $id_fta_chapitre, $synthese_action) {
+    public static function initChapitre($id_fta, $id_fta_chapitre, $synthese_action, $comeback, $idFtaEtat, $abreviationFtaEtat, $idFtaRole) {
 
         self::$id_fta = $id_fta;
+        self::$comeback = $comeback;
+        self::$id_fta_etat = $idFtaEtat;
+        self::$abrevation_etat = $abreviationFtaEtat;
+        self::$id_fta_role = $idFtaRole;
         self::$id_fta_chapitre = $id_fta_chapitre;
         self::$ftaModel = new FtaModel(self::$id_fta);
         self::$ftaChapitreModel = new FtaChapitreModel(self::$id_fta_chapitre);
@@ -779,15 +787,15 @@ class Chapitre {
 
         //Emballages par UVC
         $bloc.="<tr class=titre_principal><td class>Emballages par UVC</td></tr>";
-        $bloc.=$ftaView->getHtmlEmballageUVC($id_fta, $idChapitre, $synthese_action);
+        $bloc.=$ftaView->getHtmlEmballageUVC($id_fta, $idChapitre, $synthese_action, self::$comeback, self::$id_fta_etat, self::$abrevation_etat, self::$id_fta_role);
 
         //Emballages par Colis
         $bloc.="<tr class=titre_principal><td class>Emballages par Colis</td></tr>";
-        $bloc.=$ftaView->getHtmlEmballageParColis($id_fta, $idChapitre, $synthese_action);
+        $bloc.=$ftaView->getHtmlEmballageParColis($id_fta, $idChapitre, $synthese_action, self::$comeback, self::$id_fta_etat, self::$abrevation_etat, self::$id_fta_role);
 
         //Palette
         $bloc.="<tr class=titre_principal><td class>Emballages Palette</td></tr>";
-        $bloc.=$ftaView->getHtmlEmballagePalette($id_fta, $idChapitre, $synthese_action);
+        $bloc.=$ftaView->getHtmlEmballagePalette($id_fta, $idChapitre, $synthese_action, self::$comeback, self::$id_fta_etat, self::$abrevation_etat, self::$id_fta_role);
 
         return $bloc;
     }
@@ -810,7 +818,7 @@ class Chapitre {
 
         //Emballages du Colis
         $bloc.="<tr class=titre_principal><td class>Emballages du Colis</td></tr>";
-        $bloc.=$ftaView->getHtmlEmballageDuColis($id_fta, $idChapitre, $synthese_action);
+        $bloc.=$ftaView->getHtmlEmballageDuColis($id_fta, $idChapitre, $synthese_action, self::$comeback, self::$id_fta_etat, self::$abrevation_etat, self::$id_fta_role);
 
         return $bloc;
     }

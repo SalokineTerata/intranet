@@ -44,15 +44,15 @@ $html_table = "table "              //Permet d'harmoniser les tableaux
         . "class=contenu "
 ;
 $idFta = Lib::getParameterFromRequest("id_fta");
-$idAnnexeEmballageGroupeType = Lib::getParameterFromRequest("id_annexe_emballage_groupe_type");
-$idAnnexeEmballageGroupe = Lib::getParameterFromRequest("id_annexe_emballage_groupe");
-$idAnnexeEmballage = Lib::getParameterFromRequest("id_annexe_emballage");
-$idFtaChapitreEncours = Lib::getParameterFromRequest("id_fta_chapitre");
+$idAnnexeEmballageGroupeType = Lib::getParameterFromRequest(AnnexeEmballageGroupeTypeModel::KEYNAME);
+$idAnnexeEmballageGroupe = Lib::getParameterFromRequest(AnnexeEmballageGroupeModel::KEYNAME);
+$idAnnexeEmballage = Lib::getParameterFromRequest(AnnexeEmballageModel::KEYNAME);
+$idFtaChapitreEncours = Lib::getParameterFromRequest(FtaChapitreModel::KEYNAME);
 $syntheseAction = Lib::getParameterFromRequest("synthese_action");
 $action = Lib::getParameterFromRequest("action");
-$abreviation_fta_etat = Lib::getParameterFromRequest("abrevation_fta_etat");
-$idFtaEtat = Lib::getParameterFromRequest("id_fta_etat");
-$idFtaRole = Lib::getParameterFromRequest("id_fta_role");
+$abreviationFtaEtat = Lib::getParameterFromRequest(FtaEtatModel::FIELDNAME_ABREVIATION);
+$idFtaEtat = Lib::getParameterFromRequest(FtaEtatModel::KEYNAME);
+$idFtaRole = Lib::getParameterFromRequest(FtaRoleModel::KEYNAME);
 $comeback = Lib::getParameterFromRequest("comeback");
 $page_reload = Lib::getParameterFromRequest("page_reload");
 
@@ -196,7 +196,7 @@ switch ($action) {
                     }
                 } else {
                     $nbEmballage .= "<tr><td>Quantité par UVC:</td><td>";
-                    $quantite_par_couche_fta_conditionnement = 0 ;
+                    $quantite_par_couche_fta_conditionnement = 0;
                 }
 
                 $nbEmballage .= "<input type=text name= " . FtaConditionnementModel::FIELDNAME_QUANTITE_PAR_COUCHE_FTA_CONDITIONNEMENT . " value=" . $quantite_par_couche_fta_conditionnement . " size=20/>";
@@ -291,7 +291,7 @@ switch ($output) {
              <input type=hidden name=id_fta_role value=$idFtaRole>
              <input type=hidden name=id_fta_etat value=$idFtaEtat>
              <input type=\"hidden\" name=\"comeback\" value=\"$comeback\" />
-             <input type=hidden name=abreviation_fta_etat value=$abreviation_fta_etat>
+             <input type=hidden name=abreviation_fta_etat value=$abreviationFtaEtat>
              <input type=hidden name=synthese_action value=$syntheseAction >
 
              <$html_table>

@@ -106,9 +106,10 @@ switch ($action) {
 
         $date_echeance_fta = $modelFta->getDataField(FtaModel::FIELDNAME_DATE_ECHEANCE_FTA)->getFieldValue();
 
-        $abreviation_fta_etat = $modelFta->getModelFtaEtat()->getDataField(FtaEtatModel::FIELDNAME_ABREVIATION)->getFieldValue();
+        $abreviationFtaEtat = $modelFta->getModelFtaEtat()->getDataField(FtaEtatModel::FIELDNAME_ABREVIATION)->getFieldValue();
 
-        $id_fta_processus_encours = $modelFtaWorkflowStruture->getDataField(FtaWorkflowStructureModel::FIELDNAME_ID_FTA_PROCESSUS)->getFieldValue();
+        $idFtaProcessusEncours = $modelFtaWorkflowStruture->getDataField(FtaWorkflowStructureModel::FIELDNAME_ID_FTA_PROCESSUS)->getFieldValue();
+        $idFtaWorkflowEncours = $modelFtaWorkflowStruture->getDataField(FtaWorkflowStructureModel::FIELDNAME_ID_FTA_WORKFLOW)->getFieldValue();
 
         $nom_fta_chapitre_encours = $modeChapitre->getDataField(FtaChapitreModel::FIELDNAME_NOM_CHAPITRE)->getFieldValue();
 
@@ -118,7 +119,7 @@ switch ($action) {
             $arrayFtaProcessusAndCycle = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
                             "SELECT DISTINCT " . FtaProcessusCycleModel::FIELDNAME_PROCESSUS_INIT . ", " . FtaProcessusModel::FIELDNAME_NOM . ", " . FtaProcessusModel::FIELDNAME_DELAI
                             . " FROM " . FtaProcessusCycleModel::TABLENAME . ", " . FtaProcessusModel::TABLENAME
-                            . " WHERE " . FtaProcessusCycleModel::FIELDNAME_FTA_ETAT . "='" . $abreviation_fta_etat . "'"
+                            . " WHERE " . FtaProcessusCycleModel::FIELDNAME_FTA_ETAT . "='" . $abreviationFtaEtat . "'"
                             . " AND " . FtaProcessusCycleModel::FIELDNAME_PROCESSUS_INIT . "=" . FtaProcessusModel::KEYNAME
                             . " ORDER BY " . FtaProcessusCycleModel::FIELDNAME_PROCESSUS_INIT
             );
@@ -142,7 +143,7 @@ switch ($action) {
                         $arrayFtaProcessusAndCyclePrecedent = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
                                         "SELECT DISTINCT " . FtaProcessusCycleModel::FIELDNAME_PROCESSUS_INIT . ", " . FtaProcessusModel::FIELDNAME_NOM . ", " . FtaProcessusModel::FIELDNAME_DELAI
                                         . " FROM " . FtaProcessusCycleModel::TABLENAME . ", " . FtaProcessusModel::TABLENAME
-                                        . " WHERE " . FtaProcessusCycleModel::FIELDNAME_FTA_ETAT . "='" . $abreviation_fta_etat . "'"
+                                        . " WHERE " . FtaProcessusCycleModel::FIELDNAME_FTA_ETAT . "='" . $abreviationFtaEtat . "'"
                                         . " AND " . FtaProcessusCycleModel::FIELDNAME_PROCESSUS_INIT . "=" . FtaProcessusModel::KEYNAME
                                         . "AND " . FtaProcessusCycleModel::FIELDNAME_PROCESSUS_NEXT . "=" . $rowsArrayFtaProcessusAndCycle[FtaProcessusCycleModel::FIELDNAME_PROCESSUS_INIT] . " "
                                         . " ORDER BY " . FtaProcessusCycleModel::FIELDNAME_PROCESSUS_INIT
@@ -211,7 +212,7 @@ switch ($action) {
                 mysql_table_operation($table, $operation);
 
                 //Mise à jour de la validation de l'échéance
-                fta_processus_validation_delai($paramIdFta, $id_fta_processus);
+                FtaProcessusDelaiModel::BuildFtaProcessusValidationDelai($paramIdFta, $id_fta_processus, $idFtaWorkflowEncours);
             }//Fin du parcours des échéances par processus
         }//Si non, désactivation de la gestion des échéances au niveau processus
 //Enregistrement des informations
@@ -315,9 +316,9 @@ switch ($action) {
         if (!$erreur) {
             //Mise à jour de la validation de l'échéance
             $paramIdFta;
-            $id_fta_processus = $id_fta_processus_encours;
+            $id_fta_processus = $idFtaProcessusEncours;
 
-            fta_processus_validation_delai($paramIdFta, $id_fta_processus);
+            FtaProcessusDelaiModel::BuildFtaProcessusValidationDelai($paramIdFta, $id_fta_processus, $idFtaWorkflowEncours);
 
             //Notification de l'état d'Avancement de la FTA
             //afficher_message("Information de l'état d'avancement du Projet", "Les intervenants ont été informer du nouvel état d'avancement.", "");
@@ -396,7 +397,7 @@ switch ($action) {
 
 //if(!$erreur and !$noredirection) header ("Location: modification_fiche.php?id_fta=$id_fta&id_fta_chapitre_encours=$id_fta_chapitre_encours&synthese_action=$synthese_action");
 if (!$erreur) {
-    header("Location: modification_fiche.php?id_fta=$paramIdFta&id_fta_chapitre_encours=$paramIdFtaChapitreEncours&synthese_action=$paramSyntheseAction&comeback=$comeback&id_fta_etat=$idFtaEtat&abrevation_fta_etat=$abreviation_fta_etat&id_fta_role=$idFtaRole");
+    header("Location: modification_fiche.php?id_fta=$paramIdFta&id_fta_chapitre_encours=$paramIdFtaChapitreEncours&synthese_action=$paramSyntheseAction&comeback=$comeback&id_fta_etat=$idFtaEtat&abrevation_fta_etat=$abreviationFtaEtat&id_fta_role=$idFtaRole");
 }
 //include ("./action_bs.php");
 //include ("./action_sm.php");

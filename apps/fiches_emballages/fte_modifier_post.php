@@ -171,11 +171,11 @@ switch ($action)
 
                  $operator="";
                  $text_article="";
-                 while(list($key, $id_fta) = each($tab_fta))
+                 while(list($key, $idFta) = each($tab_fta))
                  {
-                      if($id_fta)
+                      if($idFta)
                       {
-                         $req .="$operator fta.id_fta='".$id_fta."' ";
+                         $req .="$operator fta.id_fta='".$idFta."' ";
                          $operator="OR";
                       }
                  }

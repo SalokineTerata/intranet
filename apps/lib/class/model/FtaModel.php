@@ -11,6 +11,7 @@ class FtaModel extends AbstractModel {
     const TABLENAME = "fta";
     const KEYNAME = "id_fta";
     const KEYNAME_CREATEUR = "id_user";
+    const FIELDNAME_ACTIF = "actif";
     const FIELDNAME_ACTIVATION_CODESOFT = "activation_codesoft_arti2";
     const FIELDNAME_ARCADIA_EMBALLAGE_TYPE = "id_arcadia_emballage_type";
     const FIELDNAME_ARTICLE_AGROLOGIC = "id_article_agrologic";
@@ -24,11 +25,13 @@ class FtaModel extends AbstractModel {
     const FIELDNAME_CLASSIFICATION_RAYON = "classification_fta_rayon";
     const FIELDNAME_CLASSIFICATION_RESEAU = "classification_fta_reseau";
     const FIELDNAME_CLASSIFICATION_SAISONNALITE = "classification_fta_saisonnalite";
+    const FIELDNAME_CODE_ARTICLE = "CODE_ARTICLE";
     const FIELDNAME_CODE_ARTICLE_CLIENT = "code_article_client";
     const FIELDNAME_CODE_ARTICLE_LDC = "code_article_ldc";
     const FIELDNAME_CODE_DOUANE_FTA = "code_douane_fta";
     const FIELDNAME_CODE_DOUANE_LIBELLE_FTA = "code_douane_libelle_fta";
     const FIELDNAME_COMMENTAIRE = "commentaire";
+    const FIELDNAME_COMMENTAIRE_MAJ_FTA = "commentaire_maj_fta";
     const FIELDNAME_COMPOSITION1 = "Composition";
     const FIELDNAME_COMPOSITION2 = "composition1";
     const FIELDNAME_CONDITION_SOUS_ATMOSPHERE = "atmosphere_protectrice";
@@ -65,6 +68,7 @@ class FtaModel extends AbstractModel {
     const FIELDNAME_LIBELLE_CODE_ARTICLE_CLIENT = "libelle_code_article_client";
     const FIELDNAME_LIBELLE_MULTILANGUE = "libelle_multilangue";
     const FIELDNAME_LISTE_ALLERGENE = "allergenes_matiere_fta";
+    const FIELDNAME_LISTE_CHAPITRE_MAJ_FTA = "liste_chapitre_maj_fta";
     const FIELDNAME_LOGO_ECO_EMBALLAGE = "image_eco_emballage";
     const FIELDNAME_NOM_CLIENT_DEMANDEUR = "nom_client_demandeur";
     const FIELDNAME_NOM_ABREGE = "nom_abrege_fta";
@@ -609,6 +613,467 @@ class FtaModel extends AbstractModel {
             }
         }
         return $req;
+    }
+
+    /**
+      Cette fonction permet de dupliquer une Fiche Technique Article pour faire les actions suivantes:
+
+      $action
+      -------
+      "totale":       Créer un nouveau dossier en recopiant l'intégralité de la fiche d'origine
+      "selective":(pas géré)    Créer un nouveau dossier en ne recopiant que certains processus
+      "version":      Créer une nouvelle fiche au sein du même dossier
+
+      $option:
+      --------
+      - Dans le cas d'une duplication "selective", cette variable contient le tableau des id_processus des processus sélectionnés
+      - Dans le cas d'une duplication "version", cette variable contient le nouvel état de la FTA (I, A, ...).
+      Si vide, alors l'état par défaut sera de type I, initialisation
+
+      Retour de la fonction:
+      ----------------------
+      La fonction renvoi l'id_fta nouvellement créé.
+     * @param type $paramIdFta
+     * @param type $paramAction
+     * @param type $paramOption
+     * @return type
+     */
+    public static function BuildDuplicationFta($paramIdFta, $paramAction, $paramOption, $paramIdFtaRole, $paramIdFtaWorkflow) {
+
+        /*         * ****************************************
+          Déclaration et initialisation des variables
+         * **************************************** */
+        $globalConfig = new GlobalConfig();
+        $idUser = $globalConfig->getAuthenticatedUser()->getKeyValue();
+        $ftaModelOrig = new FtaModel($paramIdFta);              //Identifiant de la fiche technique article à dupliquer
+        $idFtaVersion = $ftaModelOrig->getDataField(FIELDNAME_VERSION_DOSSIER_FTA)->getFieldValue();
+        $idFtaOriginal = $paramIdFta;                //Sauvegarde de la clef initiale.
+        $paramOption["abreviation_etat_destination"]; //Etat vers lequel doit aller la FTA
+        $paramOption["selection_chapitre"];           //Tableau contenant les id_fta_chapitre des chapitres à corriger
+        $paramOption["designation_commerciale_fta"];  //Nouveau nom commerciale de la FTA
+        $paramOption["nouveau_maj_fta"];              //Nouveau commentaire de la nouvelle FTA
+//print_r($option["selection_chapitre"]);
+
+        switch ($paramAction) {
+            case "version":
+
+                //récupération de l'identifiant de l'état
+                if ($paramOption["abreviation_etat_destination"] == "") {
+                    //Si aucun Etat n'a été donné, l'état   Intialisation est choisi par défaut
+                    $paramOption["abreviation_etat_destination"] = "I";
+                }
+                $arrayIdFtaEtat = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
+                                "SELECT " . FtaEtatModel::KEYNAME
+                                . " FROM " . FtaEtatModel::TABLENAME
+                                . " WHERE " . FtaEtatModel::FIELDNAME_ABREVIATION . "='" . $paramOption["abreviation_etat_destination"] . "'"
+                );
+                foreach ($arrayIdFtaEtat as $value) {
+                    $idFtaEtatNew = $value[FtaEtatModel::KEYNAME];
+                }
+        }
+
+        /*         * *****************************************************************************
+          Traitement Principal
+         * ****************************************************************************** */
+
+
+
+        /*         * *************************
+          Traitement de la table "fta"
+         * ************************* */
+
+
+        $idFtaNew = FtaModel::BuildDuplicateIdFta($paramIdFta);            //Récupération de la nouvelle clef
+        $ftaModel = new FtaModel($idFtaNew);
+        /*
+         * Enregsitrement des mises à jour
+         */
+
+        $ftaModel->getDataField(FtaModel::FIELDNAME_DATE_ECHEANCE_FTA)->setFieldValue("");                 //La date d'échéance sera à redéfinir
+        $ftaModel->getDataField(FtaModel::FIELDNAME_DATE_CREATION)->setFieldValue(date("Y-m-d"));                //Date de la création de cet Article
+        $ftaModel->getDataField(FtaModel::FIELDNAME_ACTIF)->setFieldValue(0);                //Date de la création de cet Article
+        $ftaModel->getDataField(FtaModel::FIELDNAME_CODE_ARTICLE)->setFieldValue(NULL);                //Date de la création de cet Article
+        $ftaModel->getDataField(FtaModel::FIELDNAME_DATE_CREATION)->setFieldValue(date("Y-m-d"));                //Date de la création de cet Article
+
+        switch ($paramAction) {                                   //Suivant l'action, certaines données sont à mettre à jour
+            case "totale":                                //Création d'un nouveau dossier
+                $ftaModel->getDataField(FtaModel::FIELDNAME_DOSSIER_FTA)->setFieldValue($idFtaNew);         //Dans le cas d'un nouveau dossier, son identifiant correspond à l'identifiant de sa première FTA
+                $ftaModel->getDataField(FtaModel::FIELDNAME_VERSION_DOSSIER_FTA)->setFieldValue(0);                   //La première FTA commence en version "0"
+                $ftaModel->getDataField(FtaModel::FIELDNAME_ID_FTA_ETAT)->setFieldValue(1);                            //La première FTA commence en état "Initialisation"  (cf. table fta_etat)
+                $ftaModel->getDataField(FtaModel::FIELDNAME_ARTICLE_AGROLOGIC)->setFieldValue(0);
+                $ftaModel->getDataField(FtaModel::FIELDNAME_DESIGNATION_COMMERCIALE)->setFieldValue($paramOption["designation_commerciale_fta"]); //Renommage de la nouvelle FTA
+                $ftaModel->getDataField(FtaModel::FIELDNAME_NOM_ABREGE)->setFieldValue("");                              //Le nom abrégé est réinitilisé
+                $ftaModel->getDataField(FtaModel::FIELDNAME_LIBELLE)->setFieldValue(NULL);                               //Dans le cas d'un nouveau dossier, son identifiant correspond à l'identifiant de sa première FTA
+                $ftaModel->getDataField(FtaModel::FIELDNAME_CODE_ARTICLE_LDC)->setFieldValue(NULL);                             //Suppression Code LDC
+                $ftaModel->getDataField(FtaModel::FIELDNAME_EAN_COLIS)->setFieldValue(NUll);                              //Suppression EAN Colis
+                $ftaModel->getDataField(FtaModel::FIELDNAME_EAN_UVC)->setFieldValue(NULL);                             //Suppression EAN Article
+                $ftaModel->getDataField(FtaModel::FIELDNAME_EAN_PALETTE)->setFieldValue(NULL);                               //Suppression EAN Palette
+
+                break;
+            case "version":                                //Création d'une nouvelle version de la FTA
+                $ftaModel->getDataField(FtaModel::FIELDNAME_VERSION_DOSSIER_FTA)->setFieldValue($idFtaVersion++);                      //La première FTA commence en version "0"
+                $ftaModel->getDataField(FtaModel::FIELDNAME_ID_FTA_ETAT)->setFieldValue($idFtaEtatNew);               //Nouvel éta de la FTA données par l'argument $option de la fonction (cf. table fta_etat)
+                break;
+        }
+        $ftaModel->getDataField(FtaModel::FIELDNAME_CREATEUR)->setFieldValue($idUser);
+
+
+
+        /*         * ***************************
+          Traitement des tables esclaves
+         * *************************** */
+
+        /*         * ******************************************************************************************
+          Les tables esclaves sont des tables contenant le champ "id_fta" dans la liste de leurs champs
+         * ****************************************************************************************** */
+
+        $tablename_slave = array(
+            ClassificationFtaModel::TABLENAME,
+            FtaConditionnementModel::TABLENAME,
+            FtaComposantModel::TABLENAME,
+            //   "fta_tarif",
+            FtaSuiviProjetModel::TABLENAME
+        );
+
+        foreach ($tablename_slave as $nom_table) {//Parcours des tables esclaves
+            //Restauration de la clef initiale.
+            $_SESSION['id_fta'] = $idFtaOriginal;                  //Restauration de la clef initiale.
+            //Récupération des informations
+            $nom_clef = 'id_' . $nom_table;                         //Identification de la clef
+            $array = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
+                            "SELECT * "
+                            . " FROM " . $nom_table
+                            . " WHERE " . FtaModel::TABLENAME . "=" . $idFtaOriginal
+            );
+
+            if ($array) {
+                foreach ($array as $rows_fta) {
+
+
+                    //Chargement des données d'origine
+                    $_SESSION[$nom_clef] = $rows_fta[$nom_clef];        //Chargement de la clef d'origine
+
+                    $_SESSION[$nom_clef] = "";                          //Effacement de la clef de l'enregistrement pour générer un INSERT
+                    $_SESSION['id_fta'] = $idFtaNew;                  //Restauration de la nouvelle clef FTA.
+                    $_SESSION['last_' . $nom_clef] = $rows_fta[$nom_clef];
+                    $t = mysql_table_operation($nom_table, "insert");     //Enregistrement du nouvel enregsitrement
+                }
+            }
+        }//Fin du parcours des tables esclaves
+
+
+
+        /*
+          - Récupérér les composants de la nouvelle FTA
+          - Pour chaque produit (id_fta_nomenclature)
+          - Récupérer l'identifiant de la version précédente (noté: [last_id_fta_nomenclature])
+          - Sur la FTA précédente, retrouver l'identifiant composant associé à cette ancienne version du produit (noté: [last_id_fta_composant])
+          - Sur le nouvelle FTA, retrouver l'identifiant composant associé à ce [last_id_fta_composant]
+          - Sur ce nouveau composant, remplacer l'association nomenclature par [id_fta_nomenclature]
+         */
+
+        /*         * *****************************************************************************
+          Traitement POST
+         * ****************************************************************************** */
+        switch ($paramAction) {
+            case "version":
+                $newAbreviationFtaEtat = $paramOption["abreviation_etat_destination"]; //Nouvel état
+                //Récupération de la liste des chapitres a dévalider
+                $selection_chapitre = $paramOption["selection_chapitre"];
+                $paramOption["no_message_ecran"] = 1;
+                if ($selection_chapitre) {
+                    foreach ($selection_chapitre as $id_fta_chapitre) {
+
+                        //Correction des chapitres
+
+                        $paramOption["correction_fta_suivi_projet"] = $paramOption["nouveau_maj_fta"];
+                        FtaChapitreModel::BuildCorrectionChapitre($idFtaNew, $id_fta_chapitre, $paramOption);
+                    }
+                }
+
+                /*
+                 * Cettefonction est mise en pause car elle nécessite la création de processus cycle pour chaque workflow,
+                 * questionnement à boris.
+                 */
+                if ($newAbreviationFtaEtat == "I" and ! $selection_chapitre) {//Suppression des validations
+                    //Recherche des chapitres affectés au cycle de vie correspondant à l'état
+                    $arrayCycle = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
+                                    "SELECT DISTINCT " . FtaProcessusCycleModel::FIELDNAME_PROCESSUS_INIT . "," . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_CHAPITRE
+                                    . " FROM " . FtaProcessusCycleModel::TABLENAME . ", " . FtaWorkflowStructureModel::TABLENAME
+                                    . " WHERE " . FtaProcessusCycleModel::FIELDNAME_FTA_ETAT . "='" . $newAbreviationFtaEtat               //Etat du cycle
+                                    . "' AND " . FtaWorkflowStructureModel::TABLENAME . "." . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_PROCESSUS
+                                    . "=" . FtaProcessusCycleModel::TABLENAME . "." . FtaProcessusCycleModel::FIELDNAME_PROCESSUS_INIT   //Jointure
+                                    . " AND " . FtaWorkflowStructureModel::TABLENAME . "." . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_WORKFLOW
+                                    . "=" . FtaProcessusCycleModel::TABLENAME . "." . FtaProcessusCycleModel::FIELDNAME_WORKFLOW     //Jointure
+                                    . " AND " . FtaWorkflowStructureModel::TABLENAME . "." . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_WORKFLOW . "=" . $paramIdFtaWorkflow
+                    );
+
+                    if ($arrayCycle) {  //Si ce cycle de vie necessite l'intervention de processus, alors                            //On supprime la validation du suivi de projet des processus concernés
+                        $req = "DELETE FROM " . FtaSuiviProjetModel::TABLENAME . " WHERE ";
+                        $or = " ";
+                        foreach ($arrayCycle as $rowsCycle) {
+
+                            //Vérification qu'il ne s'agissent pas du processus initiateur du nouveau cycle de vie
+                            $arrayFirst = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
+                                            "SELECT " . FtaSuiviProjetModel::KEYNAME
+                                            . " FROM " . FtaProcessusCycleModel::TABLENAME . ", " . FtaWorkflowStructureModel::TABLENAME . ", " . FtaSuiviProjetModel::TABLENAME
+                                            . " WHERE " . FtaProcessusCycleModel::FIELDNAME_FTA_ETAT . "='" . $newAbreviationFtaEtat        //Etat du cycle
+                                            . "' AND " . FtaWorkflowStructureModel::TABLENAME . "." . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_PROCESSUS
+                                            . "=" . FtaProcessusCycleModel::TABLENAME . "." . FtaProcessusCycleModel::FIELDNAME_PROCESSUS_INIT     //Jointure
+                                            . " AND " . FtaSuiviProjetModel::TABLENAME . "." . FtaSuiviProjetModel::FIELDNAME_ID_FTA_CHAPITRE
+                                            . "=" . FtaWorkflowStructureModel::TABLENAME . "." . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_CHAPITRE              //Jointure
+                                            . " AND " . FtaSuiviProjetModel::TABLENAME . "." . FtaSuiviProjetModel::FIELDNAME_ID_FTA . "='" . $idFtaNew . "' "                                  //Nouvelle FTA
+                                            . " AND " . FtaProcessusCycleModel::TABLENAME . "." . FtaProcessusCycleModel::FIELDNAME_PROCESSUS_NEXT . "='" . $rowsCycle[FtaProcessusCycleModel::FIELDNAME_PROCESSUS_INIT] . "' "//Est-ce le premier processus ?
+                            );
+
+                            if ($arrayFirst) {//Si il ne s'agit pas du chapitre appartenant au processus initial, on supprime
+                                $req.=$or . "(" . FtaSuiviProjetModel::FIELDNAME_ID_FTA_CHAPITRE . "='" . $rowsCycle[FtaWorkflowStructureModel::FIELDNAME_ID_FTA_CHAPITRE]
+                                        . "' AND " . FtaSuiviProjetModel::FIELDNAME_ID_FTA . "='" . $idFtaNew . "') ";
+                                $or = " OR ";
+                            } else {
+
+                                //Sinon, Supprimer uniquement la validation et on notifie les chapitres
+                                $req_update = "UPDATE " . FtaSuiviProjetModel::TABLENAME
+                                        . " SET " . FtaSuiviProjetModel::FIELDNAME_SIGNATURE_VALIDATION_SUIVI_PROJET . "=''"
+                                        . ", " . FtaSuiviProjetModel::FIELDNAME_DATE_VALIDATION_SUIVI_PROJET . "=''"
+                                        . ", " . FtaSuiviProjetModel::FIELDNAME_DATE_DEMARRAGE_CHAPITRE_FTA_SUIVI_PROJET . "=''"
+                                        . ", " . FtaSuiviProjetModel::FIELDNAME_NOTIFICATION_FTA_SUIVI_PROJET . "='1' "
+                                        . " WHERE (" . FtaSuiviProjetModel::FIELDNAME_ID_FTA_CHAPITRE . "='" . $rowsCycle[FtaWorkflowStructureModel::FIELDNAME_ID_FTA_CHAPITRE]
+                                        . "' AND " . FtaSuiviProjetModel::FIELDNAME_ID_FTA . "='" . $idFtaNew . "') "
+                                ;
+                                DatabaseOperation::query($req_update);
+                            }
+                        }
+                        DatabaseOperation::query($req);
+                    }
+                    //Fin de Recherche des notifications relatives aux processus trouvées
+                }//Fin de la dévalidation suite à une initialisation
+                //Vérrouillage des chapitre ne correspondant pas au cycle de vie.
+                if ($newAbreviationFtaEtat == "P") {
+                    //Condition where
+                    $where = "";
+
+                    //Récupération des chapitres concernés par ce cycle de vie
+                    $arrayCycle2 = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
+                                    "SELECT DISTINCT " . FtaProcessusCycleModel::FIELDNAME_PROCESSUS_INIT
+                                    . " FROM " . FtaProcessusCycleModel::TABLENAME
+                                    . " WHERE " . FtaProcessusCycleModel::FIELDNAME_FTA_ETAT . " = '" . $newAbreviationFtaEtat . "' "
+                    );
+
+                    foreach ($arrayCycle2 as $rowsCycle2) {
+                        $where .= " AND " . FtaProcessusModel::TABLENAME . "." . FtaProcessusModel::KEYNAME . " <> " . $rowsCycle2[FtaProcessusCycleModel::FIELDNAME_PROCESSUS_INIT];
+                    }
+
+                    //Récupération des chapitres à vérrouiller
+                    $arrayChapitreVerrouiller = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
+                                    "SELECT DISTINCT  " . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_CHAPITRE
+                                    . " FROM " . FtaProcessusModel::TABLENAME . ", " . FtaWorkflowStructureModel::TABLENAME
+                                    . " WHERE ( " . FtaProcessusModel::TABLENAME . "." . FtaProcessusModel::KEYNAME
+                                    . " = " . FtaWorkflowStructureModel::TABLENAME . "." . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_CHAPITRE . " ) "
+                                    . " AND ( (  " . FtaProcessusModel::TABLENAME . "." . FtaProcessusModel::KEYNAME
+                                    . " <>1 $where ) )"
+                                    . " AND " . FtaWorkflowStructureModel::TABLENAME . "." . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_WORKFLOW . " = " . $paramIdFtaWorkflow
+                    );
+
+                    foreach ($arrayChapitreVerrouiller as $rowsChapitreVerrouiller) {
+                        //Le suivi existe-il déjà ?
+                        $arrayFtaSuiviProjet = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
+                                        "SELECT " . FtaSuiviProjetModel::KEYNAME . ", " . FtaSuiviProjetModel::FIELDNAME_SIGNATURE_VALIDATION_SUIVI_PROJET
+                                        . " FROM " . FtaSuiviProjetModel::TABLENAME
+                                        . " WHERE " . FtaSuiviProjetModel::FIELDNAME_ID_FTA . "='" . $idFtaNew
+                                        . "' AND " . FtaSuiviProjetModel::FIELDNAME_ID_FTA_CHAPITRE . "='" . $rowsChapitreVerrouiller[FtaWorkflowStructureModel::FIELDNAME_ID_FTA_CHAPITRE] . "' "
+                        );
+
+                        if ($arrayFtaSuiviProjet) {
+                            //Mise à jour de l'existant si il n'y a pas de vérrou existant
+                            foreach ($arrayFtaSuiviProjet as $rowsFtaSuiviProjet) {
+                                if (!$rowsFtaSuiviProjet[FtaSuiviProjetModel::FIELDNAME_SIGNATURE_VALIDATION_SUIVI_PROJET]) {
+                                    $idFtaSuiviProjet = $rowsFtaSuiviProjet[FtaSuiviProjetModel::KEYNAME];
+                                    $req = "UPDATE " . FtaSuiviProjetModel::TABLENAME
+                                            . "SET " . FtaSuiviProjetModel::FIELDNAME_SIGNATURE_VALIDATION_SUIVI_PROJET . "='-1' "
+                                            . "WHERE " . FtaSuiviProjetModel::KEYNAME . "='" . $idFtaSuiviProjet . "' "
+                                    ;
+                                    DatabaseOperation::query($req);
+                                }
+                            }
+                        } else {
+
+                            //Création des suivi
+                            $req = "INSERT " . FtaSuiviProjetModel::TABLENAME
+                                    . " SET " . FtaSuiviProjetModel::FIELDNAME_ID_FTA_CHAPITRE . "='" . $rowsChapitreVerrouiller[FtaWorkflowStructureModel::FIELDNAME_ID_FTA_CHAPITRE]
+                                    . "', " . FtaSuiviProjetModel::FIELDNAME_ID_FTA . "='" . $idFtaNew
+                                    . "', " . FtaSuiviProjetModel::FIELDNAME_SIGNATURE_VALIDATION_SUIVI_PROJET . "='-1' "
+                            ;
+                            DatabaseOperation::query($req);
+                        }
+                    }
+                }
+
+                break;
+//Fin du post-traitement dans le cas d'une duplication de type "version"
+
+            case "totale":
+
+                $newAbreviationFtaEtat = $paramOption["abreviation_etat_destination"]; //Nouvel état
+                //Suppression de tout le suivi de dossier
+                $req = "DELETE FROM " . FtaSuiviProjetModel::TABLENAME
+                        . " WHERE " . FtaSuiviProjetModel::TABLENAME . "." . FtaSuiviProjetModel::FIELDNAME_ID_FTA . "='" . $idFtaNew . "' "                                  //Nouvelle FTA
+                ;
+                DatabaseOperation::query($req);
+
+                break;
+        }//Fin du post-traitement dans le cas d'une duplication de type "totale"
+        return $idFtaNew;
+    }
+
+    public static function BuildDuplicateIdFta($paramIdFta) {
+        DatabaseOperation::query(
+                " INSERT INTO " . FtaModel::TABLENAME . " (`id_access_arti2`, `numft`, `id_fta_workflow`,"
+                . " `commentaire`, `TRASH_id_fta_palettisation`, `id_dossier_fta`, "
+                . "`id_version_dossier_fta`, `champ_maj_fta`, `id_fta_etat`, "
+                . "`createur_fta`, `date_derniere_maj_fta`, `commentaire_maj_fta`,"
+                . " `date_echeance_fta`, `duree_apres_dernier_processus_fta`, "
+                . "`periode_commercialisation_fta`, `code_douane_fta`, "
+                . "`code_douane_libelle_fta`, `poids_emballages_uvc_fta`, "
+                . "`poids_brut_uvc_fta`, `poids_net_uvc_fta`, `suffixe_agrologic_fta`,"
+                . " `synoptique_valide_fta`, `origine_transformation_fta`,"
+                . " `remarque_fta`, `presentation_fta`, `apres_ouverture_fta`, "
+                . "`conseil_rechauffage_valide_fta`, `reference_externe_fta`, "
+                . "`DEPRECATED_duree_vie_technique_fta`, `designation_commerciale_fta`,"
+                . " `nom_abrege_fta`, `site_expedition_fta`, `conseil_rechauffage_experimentale_fta`,"
+                . " `synoptique_experimental_fta`, `unite_affichage_fta`, `signature_validation_fta`,"
+                . " `old_gamdesc`, `old_segdesc`, `old_condition`, `old_conservation`,"
+                . " `id_article_agrologic`, `id_annexe_environnement_conservation`, "
+                . "`origine_matiere_fta`, `allergenes_matiere_fta`, `description_emballage`, "
+                . "`date_transfert_industriel`, `liste_chapitre_maj_fta`,"
+                . " `verrouillage_libelle_etiquette_fta`, `nombre_portion_fta`, "
+                . "`last_id_fta`, `id_arcadia_type_calibre`, `nom_client_demandeur`, "
+                . "`besoin_fiche_technique`, `echeance_demandeur`, `besoin_compostage_fta`, "
+                . "`calibre_defaut`, `id_arcadia_emballage_type`, `id_arcadia_client_segment`,"
+                . " `quantite_hebdomadaire_estime_commande`, `nom_machine_fta`,"
+                . " `frequence_hebdomadaire_estime_commande`, `tare_fta`, `perte_matiere_fta`,"
+                . " `besoin_fiche_rendement`, `nom_demandeur_fta`, `id_arcadia_atelier`, "
+                . "`id_arcadia_client_circuit`, `id_annexe_environnement_conservation_groupe`,"
+                . " `societe_demandeur_fta`, `type_marinade_fta`, `besoin_fiche_productivite_fta`,"
+                . " `id_arcadia_poste`, `date_demandeur_fta`, `id_annexe_unite_facturation`,"
+                . " `type_minerai`, `id_arcadia_client_reseau`, `id_arcadia_maquette_etiquette`, "
+                . "`etude_prix_fta`, `bon_fabrication_atelier`, `date_creation`, `CODE_ARTICLE`, "
+                . "`code_article_client`, `code_article_ldc`, `LIBELLE`, `LIBELLE_CLIENT`, "
+                . "`NB_UNIT_ELEM`, `NB_UV_PAR_US1`, `Poids_ELEM`, `REGROUPEMENT`, `UL2`, `RGR2`,"
+                . " `Unite_Facturation`, `Rayon`, `actif`, `Site_de_production`, `Duree_de_vie`,"
+                . " `Duree_de_vie_technique`, `code_barre_specifique`, `transfert_PF`, `Zone_picking`,"
+                . " `fiche_palette_specifique`, `TARIF`, `pvc_article`, `pvc_article_kg`, "
+                . "`FAMILLE_BUDGET`, `FAMILLE_ARTICLE`, `id_access_familles_gammes`, `Cout_Denree`,"
+                . " `Cout_Emballage`, `Cout_Autre`, `Cout_PF`, `FAMILLE_MKTG`, `Composition`, "
+                . "`composition1`, `libelle_multilangue`, `K_etat`, `EAN_UVC`, `EAN_COLIS`, "
+                . "`EAN_PALETTE`, `nouvel_article`, `k_gestion_lot`, `activation_codesoft_arti2`,"
+                . " `id_etiquette_codesoft_arti2`, `atmosphere_protectrice`, `image_eco_emballage`, "
+                . "`libelle_code_article_client`, `id_service_consommateur`, `nom_societe`, "
+                . "`classification_fta_proprietaire`, `classification_fta_marque`, "
+                . "`classification_fta_activite`, `classification_fta_rayon`, `classification_fta_reseau`,"
+                . " `classification_fta_environnement`, `classification_fta_saisonnalite`)"
+                . " SELECT`id_access_arti2`, `numft`, `id_fta_workflow`,"
+                . " `commentaire`, `TRASH_id_fta_palettisation`, `id_dossier_fta`, "
+                . "`id_version_dossier_fta`, `champ_maj_fta`, `id_fta_etat`, "
+                . "`createur_fta`, `date_derniere_maj_fta`, `commentaire_maj_fta`,"
+                . " `date_echeance_fta`, `duree_apres_dernier_processus_fta`, "
+                . "`periode_commercialisation_fta`, `code_douane_fta`, "
+                . "`code_douane_libelle_fta`, `poids_emballages_uvc_fta`, "
+                . "`poids_brut_uvc_fta`, `poids_net_uvc_fta`, `suffixe_agrologic_fta`,"
+                . " `synoptique_valide_fta`, `origine_transformation_fta`,"
+                . " `remarque_fta`, `presentation_fta`, `apres_ouverture_fta`, "
+                . "`conseil_rechauffage_valide_fta`, `reference_externe_fta`, "
+                . "`DEPRECATED_duree_vie_technique_fta`, `designation_commerciale_fta`,"
+                . " `nom_abrege_fta`, `site_expedition_fta`, `conseil_rechauffage_experimentale_fta`,"
+                . " `synoptique_experimental_fta`, `unite_affichage_fta`, `signature_validation_fta`,"
+                . " `old_gamdesc`, `old_segdesc`, `old_condition`, `old_conservation`,"
+                . " `id_article_agrologic`, `id_annexe_environnement_conservation`, "
+                . "`origine_matiere_fta`, `allergenes_matiere_fta`, `description_emballage`, "
+                . "`date_transfert_industriel`, `liste_chapitre_maj_fta`,"
+                . " `verrouillage_libelle_etiquette_fta`, `nombre_portion_fta`, "
+                . "`last_id_fta`, `id_arcadia_type_calibre`, `nom_client_demandeur`, "
+                . "`besoin_fiche_technique`, `echeance_demandeur`, `besoin_compostage_fta`, "
+                . "`calibre_defaut`, `id_arcadia_emballage_type`, `id_arcadia_client_segment`,"
+                . " `quantite_hebdomadaire_estime_commande`, `nom_machine_fta`,"
+                . " `frequence_hebdomadaire_estime_commande`, `tare_fta`, `perte_matiere_fta`,"
+                . " `besoin_fiche_rendement`, `nom_demandeur_fta`, `id_arcadia_atelier`, "
+                . "`id_arcadia_client_circuit`, `id_annexe_environnement_conservation_groupe`,"
+                . " `societe_demandeur_fta`, `type_marinade_fta`, `besoin_fiche_productivite_fta`,"
+                . " `id_arcadia_poste`, `date_demandeur_fta`, `id_annexe_unite_facturation`,"
+                . " `type_minerai`, `id_arcadia_client_reseau`, `id_arcadia_maquette_etiquette`, "
+                . "`etude_prix_fta`, `bon_fabrication_atelier`, `date_creation`, `CODE_ARTICLE`, "
+                . "`code_article_client`, `code_article_ldc`, `LIBELLE`, `LIBELLE_CLIENT`, "
+                . "`NB_UNIT_ELEM`, `NB_UV_PAR_US1`, `Poids_ELEM`, `REGROUPEMENT`, `UL2`, `RGR2`,"
+                . " `Unite_Facturation`, `Rayon`, `actif`, `Site_de_production`, `Duree_de_vie`,"
+                . " `Duree_de_vie_technique`, `code_barre_specifique`, `transfert_PF`, `Zone_picking`,"
+                . " `fiche_palette_specifique`, `TARIF`, `pvc_article`, `pvc_article_kg`, "
+                . "`FAMILLE_BUDGET`, `FAMILLE_ARTICLE`, `id_access_familles_gammes`, `Cout_Denree`,"
+                . " `Cout_Emballage`, `Cout_Autre`, `Cout_PF`, `FAMILLE_MKTG`, `Composition`, "
+                . "`composition1`, `libelle_multilangue`, `K_etat`, `EAN_UVC`, `EAN_COLIS`, "
+                . "`EAN_PALETTE`, `nouvel_article`, `k_gestion_lot`, `activation_codesoft_arti2`,"
+                . " `id_etiquette_codesoft_arti2`, `atmosphere_protectrice`, `image_eco_emballage`, "
+                . "`libelle_code_article_client`, `id_service_consommateur`, `nom_societe`, "
+                . "`classification_fta_proprietaire`, `classification_fta_marque`, "
+                . "`classification_fta_activite`, `classification_fta_rayon`, `classification_fta_reseau`,"
+                . " `classification_fta_environnement`, `classification_fta_saisonnalite` "
+                . " FROM " . FtaModel::TABLENAME
+                . " WHERE " . FtaModel::KEYNAME . "=" . $paramIdFta
+        );
+        $key = mysql_insert_id();
+        return $key;
+    }
+
+
+    /**
+     * Cette fonction retourne le nom DIN, Désignation Interne Normalisée d'une FTA
+     * @param type $paramIdFta
+     * @return type
+     */
+    public static function ShowDin($paramIdFta) {
+
+        /*
+         * Déclaration des variables
+         */
+        $ftaModel = new FtaModel($paramIdFta);
+        $IdArticleAgrocologic = $ftaModel->getDataField(FtaModel::FIELDNAME_ARTICLE_AGROLOGIC)->getFieldValue();
+        $IdDossierFta = $ftaModel->getDataField(FtaModel::FIELDNAME_DOSSIER_FTA)->getFieldValue();
+        $IdVersionDossierFta = $ftaModel->getDataField(FtaModel::FIELDNAME_VERSION_DOSSIER_FTA)->getFieldValue();
+        $Libelle = $ftaModel->getDataField(FtaModel::FIELDNAME_LIBELLE)->getFieldValue();
+        $designationCommercialeFta = $ftaModel->getDataField(FtaModel::FIELDNAME_DESIGNATION_COMMERCIALE)->getFieldValue();
+
+
+        /*
+         * Règle d'intégrité
+         */
+        $din = "";
+
+        /*
+         * Code
+         */
+        if ($IdArticleAgrocologic) {
+            $din.= $IdArticleAgrocologic;
+        } else {
+            $din.= $IdDossierFta . "v" . $IdVersionDossierFta;
+        }
+
+        $din.=" - ";
+
+        /*
+         * Désignation
+         */
+        if (!$Libelle) {
+            /*
+             * Il manque des informaions necessaires à la construction du DIN
+             */
+            $din.= $designationCommercialeFta;
+        } else {
+            /*
+             * DIN - Désignation Interne Normalisée
+             */
+            $din.= $Libelle;
+        }
+
+        return $din;
     }
 
 }

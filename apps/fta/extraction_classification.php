@@ -461,7 +461,7 @@ echo "
      <form $method action=\"$page_action\" name=\"form_action\" method=\"post\">
      <input type=hidden name=action value=$action>
      <input type=hidden name=id_fta value=$id_fta>
-     <input type=hidden name=abreviation_fta_etat value=$abreviation_fta_etat>
+     <input type=hidden name=abreviation_fta_etat value=$abreviationFtaEtat>
      <input type=hidden name=id_fta_chapitre_encours value=$id_fta_chapitre_encours>
      <input type=hidden name=id_fta_chapitre value=$id_fta_chapitre>
      <input type=hidden name=id_fta_suivi_projet value=$id_fta_suivi_projet>

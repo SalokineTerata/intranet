@@ -40,7 +40,7 @@ $idAnnexeEmballageGroupe = Lib::getParameterFromRequest("id_annexe_emballage_gro
 $idAnnexeEmballage = Lib::getParameterFromRequest("id_annexe_emballage"); //Identifiant de l'emballage
 $idFtaChapitreEncours = Lib::getParameterFromRequest("id_fta_chapitre");
 $syntheseAction = Lib::getParameterFromRequest("synthese_action");
-$abreviation_fta_etat = Lib::getParameterFromRequest("abreviation_fta_etat");
+$abreviationFtaEtat = Lib::getParameterFromRequest("abreviation_fta_etat");
 $idFtaEtat = Lib::getParameterFromRequest("id_fta_etat");
 $idFtaRole = Lib::getParameterFromRequest("id_fta_role");
 $comeback = Lib::getParameterFromRequest("comeback");
@@ -63,7 +63,7 @@ switch ($action) {
                 . "&synthese_action=$syntheseAction"
                 . "&comeback=" . $comeback
                 . "&id_fta_etat=" . $idFtaEtat
-                . "&abrevation_fta_etat=" . $abreviation_fta_etat
+                . "&abrevation_fta_etat=" . $abreviationFtaEtat
                 . "&id_fta_role=" . $idFtaRole);
 
         break;
@@ -78,7 +78,7 @@ switch ($action) {
                 . "&synthese_action=$syntheseAction"
                 . "&comeback=" . $comeback
                 . "&id_fta_etat=" . $idFtaEtat
-                . "&abrevation_fta_etat=" . $abreviation_fta_etat
+                . "&abrevation_fta_etat=" . $abreviationFtaEtat
                 . "&id_fta_role=" . $idFtaRole);
 
         break;
@@ -112,7 +112,7 @@ switch ($action) {
 
 
 
-        header("Location: modification_fiche.php?id_fta=$idFta&id_fta_chapitre_encours=$idFtaChapitreEncours&synthese_action=encours&comeback=$comeback&id_fta_etat=$idFtaEtat&abrevation_fta_etat=$abreviation_fta_etat&id_fta_role=$idFtaRole");
+        header("Location: modification_fiche.php?id_fta=$idFta&id_fta_chapitre_encours=$idFtaChapitreEncours&synthese_action=encours&comeback=$comeback&id_fta_etat=$idFtaEtat&abrevation_fta_etat=$abreviationFtaEtat&id_fta_role=$idFtaRole");
         break;
 
 

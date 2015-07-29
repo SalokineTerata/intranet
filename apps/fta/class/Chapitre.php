@@ -519,7 +519,7 @@ class Chapitre {
         //Historique des mises à jour de la FTA
         $bloc.="<tr class=titre_principal><td>Historique des actions effectuées sur le Fiche Technique Article</td></tr>";
 
-        $bloc.="<tr> <td>Historique des mises à jour de la FTA:</td><td> not implement(champ inconnu)</td></tr>";
+        $bloc.=$ftaModel->getHtmlDataField(FtaModel::FIELDNAME_COMMENTAIRE_MAJ_FTA);
 
         return $bloc;
     }

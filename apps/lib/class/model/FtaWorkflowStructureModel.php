@@ -94,6 +94,12 @@ class FtaWorkflowStructureModel extends AbstractModel {
         $this->modelFtaChapitre = $modelFtaChapitre;
     }
 
+    /**
+     * 
+     * @param type $paramIdFta
+     * @param type $paramIdChapitre
+     * @return type
+     */
     static public function getIdFtaWorkflowStructureByIdFtaAndIdChapitre($paramIdFta, $paramIdChapitre) {
 
         //Géneration de id_fta_workflow

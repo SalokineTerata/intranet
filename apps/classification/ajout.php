@@ -75,7 +75,7 @@ $add_id_classification_arborescence_article_categorie=$id_classification_arbores
     if ($id_classification_arborescence_article)
     {
 
-       $extension["lien"]=$page_default.".php?id_fta=$id_fta";
+       $extension["lien"]=$page_default.".php?id_fta=$idFta";
        $chemin_en_cours=affichage_classification_chemin($id_classification_arborescence_article, $extension);
 
 

@@ -184,7 +184,7 @@ function envoi_mail_global($selection_fta, $liste_diffusion, $subject) {
 }
 
 //Envoi un mail d'information détaillé (pour une FTA uniquement)
-function envoi_mail_detail($id_fta, $liste_diffusion, $commentaire) {
+function BuildEnvoiMailDetail($id_fta, $liste_diffusion, $commentaire) {
 
 //Déclaration des variables
     $liste_diffusion; //Tableau contenant les adresses emails et les nom des destinataires
@@ -811,7 +811,7 @@ function correction_chapitre($id_fta, $id_fta_chapitre, $option) {
     //Mise à jour de la validation de l'échéance du processus
     $id_fta = $_SESSION["id_fta"];
     $id_fta_processus = $_SESSION["id_fta_processus"];
-    fta_processus_validation_delai($id_fta, $id_fta_processus);
+    BuildFtaProcessusValidationDelai($id_fta, $id_fta_processus);
 
 
     //Dévalidation des processus suivants
@@ -1020,7 +1020,7 @@ function devalidation_chapitre($id_fta, $id_fta_processus) {
         //Mise à jour de la validation de l'échéance du processus
         $id_fta;
         $id_fta_processus;
-        fta_processus_validation_delai($id_fta, $id_fta_processus);
+        BuildFtaProcessusValidationDelai($id_fta, $id_fta_processus);
 
         //Appel récursif de la fonction pour continuer à dévalider les processus suivants
         $sub_return = devalidation_chapitre($id_fta, $id_fta_processus);
@@ -2824,7 +2824,7 @@ function fta_processus_delai_etat($id_fta) {
     return $return;
 }
 
-function fta_processus_validation_delai($id_fta, $id_fta_processus) {
+function BuildFtaProcessusValidationDelai($id_fta, $id_fta_processus) {
     /*     * *****************************************************************************
       Contrôle et corrige l'état de validation de l'échéance fixé à un processus
       Si le processus à validé tous ses chapitre, le délai est validé

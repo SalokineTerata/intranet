@@ -18,6 +18,13 @@ class FtaProcessusModel extends AbstractModel {
     const FIELDNAME_MULTISITE_FTA_PROCESSUS = "multisite_fta_processus";
     const PROCESSUS_PUBLIC = 0;
 
+    /**
+     * 
+     * @param type $paramIdFta
+     * @param type $paramProcessusEncours
+     * @param type $paramIdWorkflowEncours
+     * @return type
+     */
     public static function getFtaProcessusNonValidePrecedent($paramIdFta, $paramProcessusEncours, $paramIdWorkflowEncours) {
         /*
          * Nombres total de processus précedent pour le processus en cours
@@ -54,6 +61,13 @@ class FtaProcessusModel extends AbstractModel {
         return $return;
     }
 
+    /**
+     * 
+     * @param type $paramIdFta
+     * @param type $paramIdRole
+     * @param type $paramIdWorkflow
+     * @return type
+     */
     public static function getNonValideIdFtaByRoleWorkflowProcessus($paramIdFta, $paramIdRole, $paramIdWorkflow) {
 
         $arrayChapitreTotal = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
@@ -93,6 +107,13 @@ class FtaProcessusModel extends AbstractModel {
         return $taux_validation_processus;
     }
 
+    /**
+     * 
+     * @param type $paramIdFta
+     * @param type $paramIdRole
+     * @param type $paramIdWorkflow
+     * @return type
+     */
     public static function getValideIdFtaByRoleWorkflowProcessus($paramIdFta, $paramIdRole, $paramIdWorkflow) {
 
         $arrayProcessusTotal = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
@@ -133,6 +154,13 @@ class FtaProcessusModel extends AbstractModel {
         return $taux_validation_processus;
     }
 
+    /**
+     * Fonction informe de l'état de validation d'un processus sur une Fiche Technique Article
+     * @param type $paramIdFta
+     * @param type $paramProcessusEncours
+     * @param type $paramIdWorkflow
+     * @return type
+     */
     public static function getValideProcessusEncours($paramIdFta, $paramProcessusEncours, $paramIdWorkflow) {
         $arrayNombreTotalChapitre = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
                         "SELECT " . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_CHAPITRE
@@ -174,11 +202,12 @@ class FtaProcessusModel extends AbstractModel {
         return $return;
     }
 
-    /*
+    /**
      * Il s'agit du controle des processus multisite,
      * les droits d'accès à cette Fta étatn controlé précédement je désactive la focntion
+     * @param type $paramRows
+     * @return type
      */
-
     public static function CheckProcessusMultiSite($paramRows) {
 
         //Ce processus en cours, est-il du type repartie ou centralisé ?
@@ -195,12 +224,14 @@ class FtaProcessusModel extends AbstractModel {
         return $multisiteFtaProcessus;
     }
 
-    /*
+    /**
      * Il s'agit du controle des processus multisite,
      * les droits d'accès à cette Fta étatn controlé précédement je désactive la focntion
      * Cette focntion est imcomplète, il manque la notion de controle des processus
+     * @param type $paramRows
+     * @param type $paramIdFta
+     * @return int
      */
-
     public static function CheckProcessusSiteOrSociete($paramRows, $paramIdFta) {
         $globalconfig = new GlobalConfig();
         $idUser = $globalconfig->getAuthenticatedUser()->getKeyValue();

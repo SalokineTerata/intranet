@@ -480,6 +480,7 @@ class FtaSuiviProjetModel extends AbstractModel {
                         . " FROM " . FtaSuiviProjetModel::TABLENAME . "," . FtaWorkflowStructureModel::TABLENAME
                         . " WHERE " . FtaSuiviProjetModel::TABLENAME . "." . FtaSuiviProjetModel::FIELDNAME_ID_FTA . "= $paramIdFta "
                         . " AND " . FtaSuiviProjetModel::FIELDNAME_SIGNATURE_VALIDATION_SUIVI_PROJET . "<>0 "
+                        . " AND " . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_PROCESSUS . "<>0 "
                         . " AND " . FtaWorkflowStructureModel::TABLENAME . "." . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_CHAPITRE
                         . "=" . FtaSuiviProjetModel::TABLENAME . "." . FtaSuiviProjetModel::FIELDNAME_ID_FTA_CHAPITRE
                         . " AND " . FtaWorkflowStructureModel::TABLENAME . "." . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_WORKFLOW
@@ -495,6 +496,7 @@ class FtaSuiviProjetModel extends AbstractModel {
                         . " FROM " . FtaWorkflowStructureModel::TABLENAME
                         . " WHERE  " . FtaWorkflowStructureModel::TABLENAME . "." . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_WORKFLOW
                         . "='" . $ftaModel->getDataField(FtaModel::FIELDNAME_WORKFLOW)->getFieldValue() . "' "
+                        . " AND " . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_PROCESSUS . "<>0 "
         );
         $totalChapitre = count($arrayChapitreTotal);
 

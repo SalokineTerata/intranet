@@ -47,22 +47,26 @@ class FtaChapitreModel extends AbstractModel {
         $this->modelFtaProcessus = $modelFtaProcessus;
     }
 
-    /*     * ********************
-      Correction d'une FTA
-     * ******************** */
-
-    //Pour une FTA données, correction d'un chapitre et dévalidation des processus suivants
+    /**
+     * Correction d'une FTA
+     * Pour une FTA données, correction d'un chapitre et dévalidation des processus suivants
+     * @param type $paramIdFta
+     * @param type $paramIdChapitre
+     * @param type $option
+     * @return int
+     */
     public static function BuildCorrectionChapitre($paramIdFta, $paramIdChapitre, $option) {
         $option["no_message_ecran"];                       //0=affichage à l'ecran, 1=rien
         $option["correction_fta_suivi_projet"];            //Commentaire justifiant la correction du chapitre
         $HtmlResult = new HtmlResult2();
 
         $globalconfig = new GlobalConfig();
-        $id_user = $globalconfig->getAuthenticatedUser()->getKeyValue();
-        $id_fta_workflow_structure = FtaWorkflowStructureModel::getIdFtaWorkflowStructureByIdFtaAndIdChapitre(
+        $idUser = $globalconfig->getAuthenticatedUser()->getKeyValue();
+        $idFtaWorkflowStructure = FtaWorkflowStructureModel::getIdFtaWorkflowStructureByIdFtaAndIdChapitre(
                         $paramIdFta, $paramIdChapitre);
-        $ftaWorkflowStructureModel = new FtaWorkflowStructureModel($id_fta_workflow_structure, $paramIdChapitre);
+        $ftaWorkflowStructureModel = new FtaWorkflowStructureModel($idFtaWorkflowStructure, $paramIdChapitre);
         $idFtaProcessus = $ftaWorkflowStructureModel->getDataField(FtaWorkflowStructureModel::FIELDNAME_ID_FTA_PROCESSUS)->getFieldValue();
+        $idFtaWorkflow = $ftaWorkflowStructureModel->getDataField(FtaWorkflowStructureModel::FIELDNAME_ID_FTA_WORKFLOW)->getFieldValue();
 
 
         //Récupération des informations préalables
@@ -72,7 +76,7 @@ class FtaChapitreModel extends AbstractModel {
                         . ", " . UserModel::FIELDNAME_MAIL
                         . " FROM " . UserModel::TABLENAME
                         . " WHERE " . UserModel::KEYNAME
-                        . "='" . $id_user . "' ");
+                        . "='" . $idUser . "' ");
         foreach ($array as $rows) {
             $prenom = $rows[UserModel::FIELDNAME_PRENOM];
             $nom = $rows[UserModel::FIELDNAME_NOM];
@@ -92,24 +96,24 @@ class FtaChapitreModel extends AbstractModel {
             }
         }
         //Intégration du commentaire de la correction
-        $new_correction_fta_suivi_projet.= $current_correction_fta_suivi_projet . "\n\n" . date("Y-m-d") . ": "
+        $newCorrectionFtaSuiviProjet.= $current_correction_fta_suivi_projet . "\n\n" . date("Y-m-d") . ": "
                 . $prenom . " " . $nom . ": "//table salaries
                 . $option[FtaSuiviProjetModel::FIELDNAME_CORRECTION_FTA_SUIVI_PROJET]
         ;
-        $new_correction_fta_suivi_projet = mysql_real_escape_string($new_correction_fta_suivi_projet);
+        $newCorrectionFtaSuiviProjet = mysql_real_escape_string($newCorrectionFtaSuiviProjet);
 
         //Dévalidation du chapitre en cours
         $reqDevelidationChapitre = "UPDATE " . FtaSuiviProjetModel::TABLENAME
                 . " SET " . FtaSuiviProjetModel::FIELDNAME_SIGNATURE_VALIDATION_SUIVI_PROJET . "=0, "
-                . FtaSuiviProjetModel::FIELDNAME_CORRECTION_FTA_SUIVI_PROJET . "=\"" . $new_correction_fta_suivi_projet . "\" "
+                . FtaSuiviProjetModel::FIELDNAME_CORRECTION_FTA_SUIVI_PROJET . "=\"" . $newCorrectionFtaSuiviProjet . "\" "
                 . "WHERE " . FtaModel::KEYNAME . "=" . $paramIdFta
-                . " AND " . FtaSuiviProjetModel::FIELDNAME_ID_FTA_CHAPITRE . "=" . $paramIdChapitre . " "
+                . " AND " . FtaSuiviProjetModel::FIELDNAME_ID_FTA_CHAPITRE . "=" . $paramIdChapitre
         ;
         DatabaseOperation::query($reqDevelidationChapitre);
 
         //Mise à jour de la validation de l'échéance du processus
 
-        fta_processus_validation_delai($paramIdFta, $idFtaProcessus);
+        FtaProcessusDelaiModel::BuildFtaProcessusValidationDelai($paramIdFta, $idFtaProcessus, $idFtaWorkflow);
 
 
         //Dévalidation des processus suivants
@@ -151,23 +155,25 @@ class FtaChapitreModel extends AbstractModel {
             }
 
             //Envoi des mails
-            $show_din = show_din($paramIdFta);
+            $show_din = FtaModel::ShowDin($paramIdFta);
             $name = $show_din;
 
-            foreach ($return["mail"] as $mail) {
-                $sujetmail = "FTA/Correction: $name";
-                $destinataire = $mail;
-                $expediteur = $prenom . " " . $nom . " <" . $mail . ">";
-                $text = "Vos chapitres viennent d'être dévalidés suite à une correction apportée par "
-                        . $prenom
-                        . " "
-                        . $nom . ".\n\n"
-                        . "OBJET DE LA CORRECTION:\n"
-                        . "\t" . stripslashes($option[FtaSuiviProjetModel::FIELDNAME_CORRECTION_FTA_SUIVI_PROJET])
-                ;
-                $typeMail = "Correction";
-                if ($notificationFtaSuiviProjet) {
-                    envoismail($sujetmail, $text, $destinataire, $expediteur, $typeMail);
+            if ($return["mail"]) {
+                foreach ($return["mail"] as $mail) {
+                    $sujetmail = "FTA/Correction: $name";
+                    $destinataire = $mail;
+                    $expediteur = $prenom . " " . $nom . " <" . $mail . ">";
+                    $text = "Vos chapitres viennent d'être dévalidés suite à une correction apportée par "
+                            . $prenom
+                            . " "
+                            . $nom . ".\n\n"
+                            . "OBJET DE LA CORRECTION:\n"
+                            . "\t" . stripslashes($option[FtaSuiviProjetModel::FIELDNAME_CORRECTION_FTA_SUIVI_PROJET])
+                    ;
+                    $typeMail = "Correction";
+                    if ($notificationFtaSuiviProjet) {
+                        envoismail($sujetmail, $text, $destinataire, $expediteur, $typeMail);
+                    }
                 }
             }
         }//Fin du traitement des processus suivants
@@ -372,7 +378,7 @@ class FtaChapitreModel extends AbstractModel {
                     }
                 }//Fin de l'information de la dévalidation
                 //Mise à jour de la validation de l'échéance du processus
-                fta_processus_validation_delai($paramIdFta, $paramIdProcessus);
+                BuildFtaProcessusValidationDelai($paramIdFta, $paramIdProcessus);
 
                 //Appel récursif de la fonction pour continuer à dévalider les processus suivants
                 FtaChapitreModel::BuildDevalidationChapitre($paramIdFta, $paramIdProcessus, $htmlResult);

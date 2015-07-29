@@ -53,12 +53,12 @@ if ($id_user) {
     ;
     $isIndex = 0;                //Variable booléenne disant si oui ou non on est sur l'index
 
-    $abreviation_fta_etat = Lib::getParameterFromRequest("abreviation_fta_etat");
+    $abreviationFtaEtat = Lib::getParameterFromRequest("abreviation_fta_etat");
     $fta_consultation = Lib::isDefined("fta_consultation");
     $fta_modification = Lib::isDefined("fta_modification");
     $id_fta_etat = Lib::getParameterFromRequest("id_fta_etat");
     $isLimit = $_SESSION["limit_affichage_fta_index"];
-    $nom_fta_etat = Lib::getParameterFromRequest("nom_fta_etat");
+    $nomFtaEtat = Lib::getParameterFromRequest("nom_fta_etat");
     $nombre_fiche = Lib::getParameterFromRequest("nombre_fiche");
     $requete_resultat = Lib::getParameterFromRequest("requete_resultat");
     $synthese_action = Lib::getParameterFromRequest("synthese_action");
@@ -76,8 +76,8 @@ if ($id_user) {
     if (!$id_fta_etat) {
         $isIndex = 1;  //On est sur l'index donc chargement des vues par défaut suivant le profile utilisateur
         $id_fta_etat = "1";
-        $nom_fta_etat = "I";
-        $abreviation_fta_etat = $nom_fta_etat;
+        $nomFtaEtat = "I";
+        $abreviationFtaEtat = $nomFtaEtat;
         //$arrayFtaRole = FtaRoleModel::getIdFtaRoleByIdUser($id_user);
         $idFtaRoleEncoursDefault = FtaRoleModel::getKeyNameOfFirstRoleByIdUser($id_user);
         if ($fta_modification) {
@@ -150,7 +150,7 @@ if ($id_user) {
     /*
      * Initialisation des valeurs
      */
-    AccueilFta::initAccueil($id_user, $id_fta_etat, $nom_fta_etat, $synthese_action, $idFtaRoleEncours, $order_common, $lieuGeo);
+    AccueilFta::initAccueil($id_user, $id_fta_etat, $nomFtaEtat, $synthese_action, $idFtaRoleEncours, $order_common, $lieuGeo);
 
     /*
      * Génération de la barre de navigation de la page d'accueil

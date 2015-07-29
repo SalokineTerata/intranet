@@ -57,7 +57,7 @@ class FtaEtatModel extends AbstractModel {
      * @param type $paramLieuGeo
      * @return type
      */
-    public static function getIdFtaByEtatAvancement($paramSyntheseAction, $paramEtat, $paramRole, $paramIdUser, $paramLieuGeo) {
+    public static function getIdFtaByEtatAvancement($paramSyntheseAction, $paramEtat, $paramRole, $paramIdUser, $paramIdFtaEtat) {
 
         switch ($paramSyntheseAction) {
 
@@ -120,6 +120,7 @@ class FtaEtatModel extends AbstractModel {
                                 . " AND " . IntranetDroitsAccesModel::FIELDNAME_ID_USER . "=" . $paramIdUser // L'utilisateur connecté
                                 . " AND " . IntranetDroitsAccesModel::TABLENAME . "." . IntranetDroitsAccesModel::FIELDNAME_NIVEAU_INTRANET_DROITS_ACCES . "=1"
                                 . " AND " . GeoModel::KEYNAME . "=" . FtaModel::FIELDNAME_SITE_ASSEMBLAGE
+                                . " AND " . FtaModel::TABLENAME . "." . FtaModel::FIELDNAME_ID_FTA_ETAT . "=" . $paramIdFtaEtat
                 );
 
                 if ($arrayTmp) {
@@ -212,6 +213,7 @@ class FtaEtatModel extends AbstractModel {
                                 . " AND " . IntranetDroitsAccesModel::FIELDNAME_ID_USER . "=" . $paramIdUser // L'utilisateur connecté
                                 . " AND " . IntranetDroitsAccesModel::TABLENAME . "." . IntranetDroitsAccesModel::FIELDNAME_NIVEAU_INTRANET_DROITS_ACCES . "=1"
                                 . " AND " . GeoModel::KEYNAME . "=" . FtaModel::FIELDNAME_SITE_ASSEMBLAGE
+                                . " AND " . FtaModel::TABLENAME . "." . FtaModel::FIELDNAME_ID_FTA_ETAT . "=" . $paramIdFtaEtat
                 );
                 if ($arrayTmp) {
                     foreach ($arrayTmp as $rows) {
@@ -303,6 +305,7 @@ class FtaEtatModel extends AbstractModel {
                                 . " AND " . IntranetDroitsAccesModel::FIELDNAME_ID_USER . "=" . $paramIdUser // L'utilisateur connecté
                                 . " AND " . IntranetDroitsAccesModel::TABLENAME . "." . IntranetDroitsAccesModel::FIELDNAME_NIVEAU_INTRANET_DROITS_ACCES . "=1"
                                 . " AND " . GeoModel::KEYNAME . "=" . FtaModel::FIELDNAME_SITE_ASSEMBLAGE
+                                . " AND " . FtaModel::TABLENAME . "." . FtaModel::FIELDNAME_ID_FTA_ETAT . "=" . $paramIdFtaEtat
                 );
 
                 /*
@@ -337,7 +340,6 @@ class FtaEtatModel extends AbstractModel {
 
                 $array[AccueilFta::VALUE_2] = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray($req);
 
-
                 break;
 
 
@@ -346,17 +348,18 @@ class FtaEtatModel extends AbstractModel {
                 $array[AccueilFta::VALUE_1] = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
                                 "SELECT DISTINCT " . FtaModel::KEYNAME
                                 . " FROM " . FtaModel::TABLENAME
-                                . " WHERE " . FtaModel::FIELDNAME_ID_FTA_ETAT . "=" . $paramEtat   //Liaison
+                                . " WHERE " . FtaModel::FIELDNAME_ID_FTA_ETAT . "=" . $paramIdFtaEtat   //Liaison
                 );
 
 
                 $array[AccueilFta::VALUE_2] = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
                                 "SELECT DISTINCT " . FtaWorkflowModel::TABLENAME . ".*"
                                 . " FROM " . FtaModel::TABLENAME . "," . FtaWorkflowModel::TABLENAME
-                                . " WHERE " . FtaModel::FIELDNAME_ID_FTA_ETAT . "=" . $paramEtat
+                                . " WHERE " . FtaModel::FIELDNAME_ID_FTA_ETAT . "='" . $paramIdFtaEtat
                                 . " AND " . FtaModel::TABLENAME . "." . FtaModel::FIELDNAME_WORKFLOW
                                 . "=" . FtaWorkflowModel::TABLENAME . "." . FtaWorkflowModel::KEYNAME//Liaison
                 );
+
                 break;
         }
 

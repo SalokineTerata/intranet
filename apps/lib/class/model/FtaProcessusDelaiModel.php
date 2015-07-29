@@ -170,6 +170,58 @@ class FtaProcessusDelaiModel extends AbstractModel {
         return $return;
     }
 
+    /**
+     * Contrôle et corrige l'état de validation de l'échéance fixé à un processus
+     * Si le processus à validé tous ses chapitre, le délai est validé
+     * Sinon, le délai reste en attente de réalisation
+     * 
+     * Retour de la fonction:
+     * 0: Rien n'a été fait car le processus ne dispose pas d'enregistrement d'échéance
+     * 1: Mise à jour effecftuée
+     * @param type $paramIdFta
+     * @param type $paramIdFtaProcessus
+     * @return int
+     */
+    public static function BuildFtaProcessusValidationDelai($paramIdFta, $paramIdFtaProcessus, $paramIdFtaWorkflow) {
+        $valideFtaProcessusDelai = NULL;       //L'échéance est-elle validée ? (Oui=1, Non=0)
+        $return = 0;
+        $etatEcheance = FtaProcessusModel::getValideProcessusEncours($paramIdFta, $paramIdFtaProcessus, $paramIdFtaWorkflow);
+        switch ($etatEcheance) {
+            case 1: //Le processus à validé tous ses chapitres
+                $valideFtaProcessusDelai = 1;
+                break;
+            default://Sinon, il reste encore des chapitres à valider
+                $valideFtaProcessusDelai = 0;
+        }
+
+        //Existe-il déjà un enregistrement sur ce délai ?
+        //Recherche d'enregistrement déjà existant pour mise à jour, sinon insertion
+        $arrayProcessusDelai = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
+                        "SELECT " . FtaProcessusDelaiModel::KEYNAME . ", " . FtaProcessusDelaiModel::FIELDNAME_VALIDE
+                        . " FROM " . FtaProcessusDelaiModel::TABLENAME
+                        . " WHERE " . FtaProcessusDelaiModel::FIELDNAME_ID_FTA . "='" . $paramIdFta
+                        . "' AND " . FtaProcessusDelaiModel::FIELDNAME_ID_FTA_PROCESSUS . " = '" . $paramIdFtaProcessus . "' "
+        );
+
+        if ($arrayProcessusDelai) {   //Si l'enregistrement existe, alors mise à jour des informations
+            //Si l'état enregistré en différent de celui contrôlé, alors mise à jour
+            foreach ($arrayProcessusDelai as $rowsProcessusDelai) {
+                $valideFtaProcessusDelaiRecorded = $rowsProcessusDelai[FtaProcessusDelaiModel::FIELDNAME_VALIDE];
+                if ($valideFtaProcessusDelai <> $valideFtaProcessusDelaiRecorded) {
+                    //Récupération de l'identifiant pour permettre la mise à jour de celui-ci
+                    $idFtaProcessusDelai = $rowsProcessusDelai[FtaProcessusDelaiModel::KEYNAME];
+                    $req = "UPDATE " . FtaProcessusDelaiModel::TABLENAME
+                            . "SET " . FtaProcessusDelaiModel::FIELDNAME_VALIDE . " = '" . $valideFtaProcessusDelai . "' "
+                            . "WHERE " . FtaProcessusDelaiModel::KEYNAME . " ='" . $idFtaProcessusDelai . "' "
+                    ;
+                    DatabaseOperation::query($req);
+                    $return = 1;
+                }
+            }
+        }
+        return $return;
+    }
+
 }
 
 ?>

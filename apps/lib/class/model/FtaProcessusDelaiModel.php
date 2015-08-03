@@ -174,7 +174,7 @@ class FtaProcessusDelaiModel extends AbstractModel {
      * Contrôle et corrige l'état de validation de l'échéance fixé à un processus
      * Si le processus à validé tous ses chapitre, le délai est validé
      * Sinon, le délai reste en attente de réalisation
-     * 
+     * Fonction n'est plus utilisé
      * Retour de la fonction:
      * 0: Rien n'a été fait car le processus ne dispose pas d'enregistrement d'échéance
      * 1: Mise à jour effecftuée

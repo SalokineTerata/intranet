@@ -50,6 +50,34 @@ class FtaSuiviProjetModel extends AbstractModel {
         );
     }
 
+    /**
+     * 
+     * @param type $paramIdFta
+     */
+    public static function DuplicateFtaSuiviProjetByIdFta($paramIdFtaOrig, $paramIdFtaNew) {
+        DatabaseOperation::query(
+                " INSERT INTO " . FtaSuiviProjetModel::TABLENAME
+                . " (" . FtaSuiviProjetModel::FIELDNAME_COMMENTAIRE_SUIVI_PROJET
+                . ", " . FtaSuiviProjetModel::FIELDNAME_ID_FTA_CHAPITRE
+                . ", " . FtaSuiviProjetModel::FIELDNAME_DATE_VALIDATION_SUIVI_PROJET
+                . ", " . FtaSuiviProjetModel::FIELDNAME_SIGNATURE_VALIDATION_SUIVI_PROJET
+                . ", " . FtaSuiviProjetModel::FIELDNAME_DATE_DEMARRAGE_CHAPITRE_FTA_SUIVI_PROJET
+                . ", " . FtaSuiviProjetModel::FIELDNAME_CORRECTION_FTA_SUIVI_PROJET
+                . ", " . FtaSuiviProjetModel::FIELDNAME_ID_FTA
+                . ", " . FtaSuiviProjetModel::FIELDNAME_NOTIFICATION_FTA_SUIVI_PROJET . ")"
+                . " SELECT " . FtaSuiviProjetModel::FIELDNAME_COMMENTAIRE_SUIVI_PROJET
+                . ", " . FtaSuiviProjetModel::FIELDNAME_ID_FTA_CHAPITRE
+                . ", " . FtaSuiviProjetModel::FIELDNAME_DATE_VALIDATION_SUIVI_PROJET
+                . ", " . FtaSuiviProjetModel::FIELDNAME_SIGNATURE_VALIDATION_SUIVI_PROJET
+                . ", " . FtaSuiviProjetModel::FIELDNAME_DATE_DEMARRAGE_CHAPITRE_FTA_SUIVI_PROJET
+                . ", " . FtaSuiviProjetModel::FIELDNAME_CORRECTION_FTA_SUIVI_PROJET
+                . ", " . $paramIdFtaNew
+                . ", " . FtaSuiviProjetModel::FIELDNAME_NOTIFICATION_FTA_SUIVI_PROJET
+                . " FROM " . FtaSuiviProjetModel::TABLENAME
+                . " WHERE " . FtaSuiviProjetModel::FIELDNAME_ID_FTA . "=" . $paramIdFtaOrig
+        );
+    }
+
     static public function getIdFtaSuiviProjetByIdFtaAndIdChapitre($paramIdFta, $paramIdChapitre) {
 
         //Récupération du tableau de résultat
@@ -68,13 +96,16 @@ class FtaSuiviProjetModel extends AbstractModel {
         return $array[0][$keyName];
     }
 
-    static public function getListeUsersAndNotificationSuiviProjet($paramIdFta, $paramIdChapitre) {
+    /**
+     * Cette fonction notifie les processus en fonction de l'état d'avancement du suivi du projet.
+     * Cet état d'avancement est géré par la table fta_suivi_projet
+     * Elle ne fait que de l'information, et ne modifie pas l'état de la fiche mais uniquement son suivi
+     * @param type $paramIdFta
+     * @param type $paramIdChapitre
+     * @return string
+     */
+    public static function getListeUsersAndNotificationSuiviProjet($paramIdFta, $paramIdChapitre) {
 
-        /*
-          Cette fonction notifie les processus en fonction de l'état d'avancement du suivi du projet.
-          Cet état d'avancement est géré par la table fta_suivi_projet
-          Elle ne fait que de l'information, et ne modifie pas l'état de la fiche mais uniquement son suivi
-         */
         $idFtaSuiviProjet = FtaSuiviProjetModel::getIdFtaSuiviProjetByIdFtaAndIdChapitre($paramIdFta, $paramIdChapitre);
         $modelFtaSuiviProjet = new FtaSuiviProjetModel($idFtaSuiviProjet, $paramIdChapitre);
         $modelFta = new FtaModel($paramIdFta, $paramIdChapitre);
@@ -110,7 +141,7 @@ class FtaSuiviProjetModel extends AbstractModel {
                 }
             }
 //echo      "fta_".$nom_intranet_actions.": ".$GLOBALS{"fta_".$nom_intranet_actions}."<br>";
-            if ($GLOBALS{"fta_" . $nom_intranet_actions}) {
+            if ($_SESSION{"fta_" . $nom_intranet_actions}) {
                 $no_mail = 1; //Désactivation du mail pour ce processus
             } else {
                 $no_mail = 0; //Activation du mail
@@ -118,7 +149,8 @@ class FtaSuiviProjetModel extends AbstractModel {
 
 
             //Ce processus est-il un processus en cours ?
-            if (fta_processus_etat($paramIdFta, $rowsProcessus[FtaProcessusModel::KEYNAME]) == 2) {
+            if (FtaProcessusModel::getValideProcessusEncours($paramIdFta, $rowsProcessus[FtaProcessusModel::KEYNAME], $id_fta_workflow) <> 0 
+                    AND FtaProcessusModel::getValideProcessusEncours($paramIdFta, $rowsProcessus[FtaProcessusModel::KEYNAME], $id_fta_workflow) <> 1) {
 
                 //Activation du mail
                 //$no_mail=0;
@@ -173,7 +205,7 @@ class FtaSuiviProjetModel extends AbstractModel {
 
                                     //Rechercher du service du chef de projet
                                     /**
-                                     * Pour cette requête le chapitre clé est test identité le 31
+                                     * Pour cette requête le chapitre clé est test identité le 1
                                      */
                                     $arraySuiviProjetSalaries = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
                                                     "SELECT " . UserModel::FIELDNAME_ID_SERVICE
@@ -182,7 +214,7 @@ class FtaSuiviProjetModel extends AbstractModel {
                                                     . "=" . UserModel::TABLENAME . "." . UserModel::FIELDNAME_ID_SERVICE
                                                     . ") AND ( (" . FtaSuiviProjetModel::TABLENAME . "." . FtaSuiviProjetModel::FIELDNAME_ID_FTA
                                                     . "= " . $paramIdFta
-                                                    . "AND " . FtaSuiviProjetModel::TABLENAME . "." . FtaSuiviProjetModel::FIELDNAME_ID_FTA_CHAPITRE . "= 31 ) ) "
+                                                    . "AND " . FtaSuiviProjetModel::TABLENAME . "." . FtaSuiviProjetModel::FIELDNAME_ID_FTA_CHAPITRE . "= 1 ) ) "
                                     );
                                     foreach ($arraySuiviProjetSalaries as $rowsSuiviProjetSalaries) {
                                         $where = " AND " . UserModel::TABLENAME . "." . UserModel::FIELDNAME_ID_SERVICE . "=" . $rowsSuiviProjetSalaries[UserModel::FIELDNAME_ID_SERVICE];

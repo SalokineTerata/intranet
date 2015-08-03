@@ -117,6 +117,7 @@ class Chapitre {
     protected static $is_correctable;
     protected static $is_editable;
     protected static $is_owner;
+    protected static $idUser;
 
     /**
      * 
@@ -184,9 +185,12 @@ class Chapitre {
         self::$id_fta_workflow = self::$ftaModel->getDataField(FtaModel::FIELDNAME_WORKFLOW)->getFieldValue();
         self::$ftaWorkflowModel = new FtaWorkflowModel(self::$id_fta_workflow);
         self::$synthese_action = $synthese_action;
-
-        self::$objectFta = new ObjectFta(self::$id_fta); //cela genère un id fta_suivie projet de trop
-        self::$objectFta->loadCurrentSuiviProjectByChapter(self::$id_fta_chapitre);
+        $globalConfig = new GlobalConfig();
+        self::$idUser = $globalConfig->getAuthenticatedUser()->getKeyValue();
+        $idFtaSuiviProjet = FtaSuiviProjetModel::getIdFtaSuiviProjetByIdFtaAndIdChapitre(self::$id_fta, self::$id_fta_chapitre);
+        self::$ftaSuiviProjetModel = new FtaSuiviProjetModel($idFtaSuiviProjet);
+//        self::$objectFta = new ObjectFta(self::$id_fta); //cela genère un id fta_suivie projet de trop
+//        self::$objectFta->loadCurrentSuiviProjectByChapter(self::$id_fta_chapitre);
 
         self::$id_fta_workflow_structure = FtaWorkflowStructureModel::getIdFtaWorkflowStructureByIdFtaAndIdChapitre(
                         self::$id_fta, self::$id_fta_chapitre);
@@ -1715,8 +1719,6 @@ class Chapitre {
 
         $bloc.="<tr class=titre_principal><td class>Activation des Produits</td></tr>";
 
-        //Codification
-        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_SUFFIXE_AGROLOGIC_FTA);
 
         //Code Produit Agrologic
         //  $bloc.=$ftaView->getHtmlDataField(FtaComposantModel::FIELDNAME_CODE_PRODUIT_AGROLOGIC_FTA_NOMENCLATURE);
@@ -1958,6 +1960,11 @@ class Chapitre {
         //Saisonnalité
         $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_CLASSIFICATION_SAISONNALITE);
 
+        /*
+         * Deviendra une liste deroulante dépendante des donné choisie dans la classification
+         */
+        //Codification
+        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_SUFFIXE_AGROLOGIC_FTA);
 
         $bloc.="<tr class=titre_principal><td class>Caractéristiques générales du produit</td></tr>";
 
@@ -1972,9 +1979,12 @@ class Chapitre {
 
         //Workflow de FTA
         $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_WORKFLOW);
+        
+        //Date d'échéance de la FTA
+        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_DATE_ECHEANCE_FTA);
 
-        //Date d'échéance des processus
-        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_VIRTUAL_FTA_PROCESSUS_DELAI);
+//        //Date d'échéance des processus
+//        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_VIRTUAL_FTA_PROCESSUS_DELAI);
         /**        */
         return $bloc;
     }
@@ -2121,7 +2131,6 @@ class Chapitre {
         $is_editable = self::$is_editable;
         $taux_validation_processus = self::$taux_validation_processus;
         $proprietaire = $is_editable;
-        self::$objectFta->loadCurrentSuiviProjectByChapter($id_fta_chapitre);
         $bloc_suivi = "";
 
         //Si le chapitre en cours n'est pas public
@@ -2146,7 +2155,7 @@ class Chapitre {
         //$id_fta_processus = $id_fta_processus_encours;
         $req = "SELECT date_echeance_processus "
                 . "FROM fta_processus_delai "
-                . "WHERE id_fta='" . self::$objectFta->getIdFta() . "' AND id_fta_processus='" . $id_fta_processus . "' "
+                . "WHERE id_fta='" . $idFta . "' AND id_fta_processus='" . $id_fta_processus . "' "
         ;
         $result = DatabaseOperation::query($req);
         if (mysql_num_rows($result)) {
@@ -2161,11 +2170,12 @@ class Chapitre {
             $blod = "";
             $blod_end = "";
         }
-        $bloc_suivi .= "<tr class=contenu><td>" . DatabaseDescription::getFieldDocLabel("fta_processus_delai", $champ) . "</td><td $bgcolor>";
+        
+      //  $bloc_suivi .= "<tr class=contenu><td>" . DatabaseDescription::getFieldDocLabel("fta_processus_delai", $champ) . "</td><td $bgcolor>";
         //$bloc_suivi .="$blod ${$champ} $blod_end";
-        $bloc_suivi .="$blod " . $ftaModel->getEcheanceByIdProcessus($id_fta_processus) . " $blod_end";
-        $bloc_suivi .="<input type=hidden name=$champ value=${$champ}>";
-        $bloc_suivi.="</td></tr>";
+        //$bloc_suivi .="$blod " . $ftaModel->getEcheanceByIdProcessus($id_fta_processus) . " $blod_end";
+     //   $bloc_suivi .="<input type=hidden name=$champ value=${$champ}>";
+     //   $bloc_suivi.="</td></tr>";
 
         //$bloc_suivi .= $ftaView->getFtaSuiviProjetModel()->getDataField(FtaSuiviprojetmodel::FIELDNAME_DATE_VALIDATION_SUIVI_PROJET)->getFieldValue();
         $bloc_suivi .= $ftaView->getFtaSuiviProjetModel()->getHtmlDataField(FtaSuiviprojetmodel::FIELDNAME_DATE_VALIDATION_SUIVI_PROJET);
@@ -2201,7 +2211,8 @@ class Chapitre {
         //Signature / Vérrouillage
         $field_name = "signature_validation_suivi_projet";
         $table_name = "fta_suivi_projet";
-        if (self::$objectFta->getFieldValue($table_name, $field_name)) {
+
+        if (self::$ftaSuiviProjetModel->getDataField(FtaSuiviProjetModel::FIELDNAME_SIGNATURE_VALIDATION_SUIVI_PROJET)->getFieldValue()) {
             $checked = "checked";
         } else {
             $checked = "";
@@ -2213,18 +2224,24 @@ class Chapitre {
         }
         if ($proprietaire) {
             $bloc_suivi .= "<tr class=contenu><td>" . DatabaseDescription::getFieldDocLabel("fta_suivi_projet", $field_name) . "</td><td>";
-            $bloc_suivi .= "<input type=checkbox name=$field_name value=" . $_SESSION["id_user"] . " $checked $disabled/>";
+            $bloc_suivi .= "<input type=checkbox name=$field_name value=" . self::$idUser . " $checked $disabled/>";
         } else {
 
             //Recherche de la personnes ayant signé ce chapitre
-            if (self::$objectFta->getFieldValue($table_name, $field_name)) { //Le chapitre est signé
-                $req = "SELECT prenom, nom FROM salaries WHERE id_user=" . self::$objectFta->getFieldValue($table_name, $field_name);
-                $result = DatabaseOperation::query($req);
-                if (mysql_num_rows($result)) {
-                    $validateur = mysql_result($result, 0, "prenom")
-                            . " "
-                            . mysql_result($result, 0, "nom")
-                    ;
+            if (self::$ftaSuiviProjetModel->getDataField(FtaSuiviProjetModel::FIELDNAME_SIGNATURE_VALIDATION_SUIVI_PROJET)->getFieldValue()) { //Le chapitre est signé
+                $arrayUser = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
+                                "SELECT " . UserModel::FIELDNAME_NOM . ", " . UserModel::FIELDNAME_PRENOM
+                                . " FROM " . UserModel::TABLENAME
+                                . " WHERE " . UserModel::KEYNAME . "=" . self::$ftaSuiviProjetModel->getDataField(FtaSuiviProjetModel::FIELDNAME_SIGNATURE_VALIDATION_SUIVI_PROJET)->getFieldValue()
+                );
+
+                if ($arrayUser) {//Le chapitre est signé
+                    foreach ($arrayUser as $rowsUser) {
+                        $validateur = $rowsUser[UserModel::FIELDNAME_PRENOM]
+                                . " "
+                                . $rowsUser[UserModel::FIELDNAME_NOM]
+                        ;
+                    }
                 }
 //Mode Debug
 //if($conf->exec_debug or (${$module."_".$nom_intranet_actionss} and $synthese_action=="modification" and $signature_validation_suivi_projet))
@@ -2250,8 +2267,7 @@ class Chapitre {
     }
 
     protected static function buildIsEditable() {
-        $idFtaSuiviProjet = FtaSuiviProjetModel::getIdFtaSuiviProjetByIdFtaAndIdChapitre(self::$id_fta, self::$id_fta_chapitre);
-        self::$ftaSuiviProjetModel = new FtaSuiviProjetModel($idFtaSuiviProjet);
+
         //Recherche du droit d'accès correspondant
         if (
                 self::$is_owner == true and (
@@ -2315,7 +2331,7 @@ class Chapitre {
     }
 
     protected static function buildIsCorrectable() {
-
+        $ftaEtatModel = new FtaEtatModel(self::$id_fta_etat);
         $return = false;
 //Recherche du droit d'accès correspondant
         $req = "SELECT `fta_workflow_structure`.`id_fta_chapitre`, `fta_processus_cycle`.`id_etat_fta_processus_cycle` "
@@ -2323,7 +2339,7 @@ class Chapitre {
                 . "WHERE ( `fta_processus`.`id_fta_processus` = `fta_workflow_structure`.`id_fta_processus` "
                 . "AND `fta_processus_cycle`.`id_init_fta_processus` = `fta_processus`.`id_fta_processus` ) "
                 . "AND ( ( `fta_workflow_structure`.`id_fta_chapitre` ='" . self::$id_fta_chapitre . "' "
-                . "AND `fta_processus_cycle`.`id_etat_fta_processus_cycle` = '" . self::$objectFta->getFieldValue(ObjectFta::TABLE_ETAT_NAME, "abreviation_fta_etat") . "' ) ) "
+                . "AND `fta_processus_cycle`.`id_etat_fta_processus_cycle` = '" . $ftaEtatModel->getDataField(FtaEtatModel::FIELDNAME_ABREVIATION)->getFieldValue() . "' ) ) "
         ;
         $cycle_en_cours = mysql_num_rows(DatabaseOperation::query($req));
         if (self::$is_owner == true and self::$is_editable == false and $cycle_en_cours) {

@@ -15,9 +15,10 @@ class FtaTransitionModel {
      * @param type $paramCommentaireMajFta
      * @param type $paramIdRole
      * @param type $paramIdWorkflow
+     * @param type $paramListeChapitres
      * @return int
      */
-    public static function BuildTransitionFta($paramIdFta, $paramAbreviationFtaTransition, $paramCommentaireMajFta, $paramIdRole, $paramIdWorkflow) {
+    public static function BuildTransitionFta($paramIdFta, $paramAbreviationFtaTransition, $paramCommentaireMajFta, $paramIdRole, $paramIdWorkflow, $paramListeChapitres) {
         /*
          * Codes de retour de la fonction:
          */
@@ -35,6 +36,7 @@ class FtaTransitionModel {
         $idFtaEtatByIdFta = $ftaModel->getDataField(FtaModel::FIELDNAME_ID_FTA_ETAT)->getFieldValue();
         $idDossierFta = $ftaModel->getDataField(FtaModel::FIELDNAME_DOSSIER_FTA)->getFieldValue();
         $idArticleAgrologic = $ftaModel->getDataField(FtaModel::FIELDNAME_ARTICLE_AGROLOGIC)->getFieldValue();
+        $siteDeProduction = $ftaModel->getDataField(FtaModel::FIELDNAME_SITE_ASSEMBLAGE)->getFieldValue();
         $ftaEtatModel = new FtaEtatModel($idFtaEtatByIdFta);
         $initial_abreviation_fta_etat = $ftaEtatModel->getDataField(FtaEtatModel::FIELDNAME_ABREVIATION)->getFieldValue();
         $globalConfig = new GlobalConfig();
@@ -61,6 +63,7 @@ class FtaTransitionModel {
                 $req = "UPDATE " . FtaModel::TABLENAME
                         . " SET " . FtaModel::FIELDNAME_ID_FTA_ETAT . "='6'" //Identifiant de "retirer"
                         . " WHERE " . FtaModel::FIELDNAME_DOSSIER_FTA . "='" . $idDossierFta . "' "
+                        . " AND " . FtaModel::KEYNAME . "='" . $paramIdFta . "' "
                 ;
                 $result = DatabaseOperation::query($req);
 
@@ -101,20 +104,12 @@ class FtaTransitionModel {
                 }
 
                 //Dans le cas d'une mise à jour, récupération des Chapitres à corriger.
-                $arrayChapitre = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
-                                "SELECT " . FtaChapitreModel::KEYNAME
-                                . " FROM " . FtaChapitreModel::TABLENAME
-                                . " ORDER BY " . FtaChapitreModel::FIELDNAME_NOM_USUEL_CHAPITRE);
+
                 $liste_chapitre_maj_fta = ";";
-                foreach ($arrayChapitre as $rowsChapitre) {
+                foreach ($paramListeChapitres as $rowsChapitre) {
                     //Parcours des chapitres
                     //Si le chapitre a été sélectionné, on l'enregistre dans le tableau de résultat
-                    $current_chapter_name = FtaChapitreModel::FIELDNAME_NOM_CHAPITRE . "-" . $rowsChapitre[FtaChapitreModel::KEYNAME];
-                    $current_chapter_value = Lib::getParameterFromRequest($current_chapter_name);
-                    if ($current_chapter_value == 1) {
-                        $selection_chapitre[] = $rowsChapitre[FtaChapitreModel::KEYNAME];
-                        $liste_chapitre_maj_fta.=$rowsChapitre[FtaChapitreModel::KEYNAME] . ";";
-                    }
+                    $liste_chapitre_maj_fta.=$rowsChapitre . ";";
                 }
 
 
@@ -133,8 +128,9 @@ class FtaTransitionModel {
                 $id_fta_original = $paramIdFta;
                 $action_duplication = "version";
                 $option_duplication["abreviation_etat_destination"] = $paramAbreviationFtaTransition;
-                $option_duplication["selection_chapitre"] = $selection_chapitre;
+                $option_duplication["selection_chapitre"] = $paramListeChapitres;
                 $option_duplication["nouveau_maj_fta"] = $nouveau_maj_fta;
+                $option_duplication["site_de_production"] = $siteDeProduction;
                 $idFtaNew = FtaModel::BuildDuplicationFta($id_fta_original, $action_duplication, $option_duplication, $paramIdRole, $paramIdWorkflow);
                 $ftaModel = new FtaModel($idFtaNew);
                 $idArticleAgrologic = $ftaModel->getDataField(FtaModel::FIELDNAME_ARTICLE_AGROLOGIC)->getFieldValue();
@@ -159,12 +155,12 @@ class FtaTransitionModel {
         foreach ($arrayIdFtaEtat as $value) {
             $idFtaEtat = $value[FtaEtatModel::KEYNAME];
         }
-        $ftaModel->getDataField(FtaModel::FIELDNAME_COMMENTAIRE_MAJ_FTA)->setFieldValue($nouveau_maj_fta);
 
         //$_SESSION["signature_validation_fta"] = $_SESSION["id_user"];
         $req = "UPDATE " . FtaModel::TABLENAME
                 . " SET " . FtaModel::FIELDNAME_ID_FTA_ETAT . "=" . $idFtaEtat //Identifiant de "retirer"
-                . " WHERE " . FtaModel::KEYNAME . "='" . $paramIdFta . "' "
+                . ", " . FtaModel::FIELDNAME_COMMENTAIRE_MAJ_FTA . "='" . $nouveau_maj_fta //Identifiant de "retirer"
+                . "' WHERE " . FtaModel::KEYNAME . "='" . $paramIdFta . "' "
         ;
         DatabaseOperation::query($req);
         //Fin Traitement Commun
@@ -175,12 +171,19 @@ class FtaTransitionModel {
 
         switch ($paramAbreviationFtaTransition) {
             case 'I':
+                //Enregistrement des chapitres concernés par la mise à jour
+                $req = "UPDATE " . FtaModel::TABLENAME
+                        . " SET " . FtaModel::FIELDNAME_LISTE_CHAPITRE_MAJ_FTA . "='" . $liste_chapitre_maj_fta . "' "
+                        . " WHERE " . FtaModel::KEYNAME . "='" . $paramIdFta . "' "
+                ;
+                DatabaseOperation::query($req);
             case 'V':
 
                 //Désactivation de l'ancien Code Article Agrologic
                 $req = "UPDATE " . FtaModel::TABLENAME
                         . " SET " . FtaModel::FIELDNAME_CODE_ARTICLE . "=NULL"
                         . " WHERE " . FtaModel::FIELDNAME_CODE_ARTICLE . "='" . $idArticleAgrologic . "' "
+                        . " AND " . FtaModel::KEYNAME . "='" . $paramIdFta . "' "
                 ;
                 DatabaseOperation::query($req);
 

@@ -39,4 +39,24 @@ class FtaWorkflowModel extends AbstractModel {
         $this->modelIntranetActions = $modelIntranetActions;
     }
 
+    public static function ShowListeDeroulanteNomWorkflowByAcces($paramIdUser) {
+        $requete = "SELECT DISTINCT " . FtaWorkflowModel::KEYNAME . "," . FtaWorkflowModel::FIELDNAME_DESCRIPTION_FTA_WORKFLOW
+                . " FROM " . FtaWorkflowModel::TABLENAME
+                . ", " . IntranetDroitsAccesModel::TABLENAME
+                . " WHERE " . FtaWorkflowModel::FIELDNAME_DESCRIPTION_FTA_WORKFLOW . "<>''"
+                . " AND " . FtaWorkflowModel::TABLENAME . "." . FtaWorkflowModel::FIELDNAME_ID_INTRANET_ACTIONS
+                . "=" . IntranetDroitsAccesModel::TABLENAME . "." . IntranetDroitsAccesModel::FIELDNAME_ID_INTRANET_ACTIONS
+                . " AND " . IntranetDroitsAccesModel::FIELDNAME_ID_USER . "=" . $paramIdUser // L'utilisateur connecté
+                . " AND " . IntranetDroitsAccesModel::TABLENAME . "." . IntranetDroitsAccesModel::FIELDNAME_NIVEAU_INTRANET_DROITS_ACCES . "=1"
+                . " ORDER BY " . FtaWorkflowModel::FIELDNAME_DESCRIPTION_FTA_WORKFLOW
+        ;
+        $nom_defaut = FtaWorkflowModel::KEYNAME;
+        $id_defaut = FtaWorkflowModel::KEYNAME;
+        $listeSiteWorkflow = DatabaseDescription::getFieldDocLabel(FtaWorkflowModel::TABLENAME, FtaWorkflowModel::FIELDNAME_DESCRIPTION_FTA_WORKFLOW)
+                . "</td><td>"
+                . AccueilFta::afficherRequeteEnListeDeroulante($requete, $id_defaut, $nom_defaut);
+
+        return $listeSiteWorkflow;
+    }
+
 }

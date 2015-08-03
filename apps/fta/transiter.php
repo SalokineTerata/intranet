@@ -84,6 +84,7 @@ $arrayFta = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
                 . "," . FtaEtatModel::FIELDNAME_NOM_FTA_ETAT
                 . "," . FtaEtatModel::FIELDNAME_ABREVIATION
                 . "," . FtaModel::FIELDNAME_WORKFLOW
+                . "," . FtaModel::FIELDNAME_VERSION_DOSSIER_FTA
                 . " FROM " . FtaModel::TABLENAME . "," . FtaEtatModel::TABLENAME
                 . " WHERE " . FtaModel::KEYNAME . "=" . $idFta
                 . " AND " . FtaModel::TABLENAME . "." . FtaModel::FIELDNAME_ID_FTA_ETAT
@@ -92,6 +93,7 @@ $arrayFta = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
 //Information de la fiche sélectionnée
 foreach ($arrayFta as $rowsFta) {
     $idDossierFta = $rowsFta[FtaModel::FIELDNAME_DOSSIER_FTA];                       //Identifiant de toutes les fiches de cette matière
+    $idDossierVersionFta = $rowsFta[FtaModel::FIELDNAME_VERSION_DOSSIER_FTA];                       //Identifiant de version
     $nomFtaEtat = $rowsFta[FtaEtatModel::FIELDNAME_NOM_FTA_ETAT];                         //Etat actuel de la fiche
     $designationCommercialeFta = $rowsFta[FtaModel::FIELDNAME_DESIGNATION_COMMERCIALE];          //Nom
     $commentaireMajFta = $rowsFta[FtaModel::FIELDNAME_COMMENTAIRE_MAJ_FTA];                  //Historiques des commentaire de mise à jour
@@ -164,11 +166,10 @@ if ($action == "I") {
                     . " AND " . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_PROCESSUS . "<>0"
                     . " ORDER BY " . FtaChapitreModel::FIELDNAME_NOM_USUEL_CHAPITRE
     );
-    $result = DatabaseOperation::query($req);
     foreach ($arrrayFtaChapitre as $rowsChapitre) {
         $tableau_chapitre.= "<tr>"
-                . "<td><input type=checkbox name=nom_fta_chapitre-" . $rowsChapitre["id_fta_chapitre"] . " value=1 /></td>"
-                . "<td>" . $rowsChapitre["nom_usuel_fta_chapitre"] . "</td>"
+                . "<td><input type=checkbox name=nom_fta_chapitre-" . $rowsChapitre[FtaChapitreModel::KEYNAME] . " value=1 /></td>"
+                . "<td>" . $rowsChapitre[FtaChapitreModel::FIELDNAME_NOM_USUEL_CHAPITRE] . "</td>"
                 . "</tr>"
         ;
     }
@@ -196,7 +197,7 @@ $selection_date_derniere_maj_fta;
  * ************ */
 echo "
 
-     <form $method action=\"$page_action\" name=\"form_action\">
+<form $method action=\"$page_action\" name=\"form_action\">
      <!input type=hidden name=action value=$action>
      <input type=hidden name=abreviation_fta_etat value=$abreviationFtaEtat>
      <input type=hidden name=id_fta value=$idFta>
@@ -204,7 +205,7 @@ echo "
      <input type=hidden name=id_fta_workflow value=$idFtaWorkflow>
      <input type=hidden name=id_dossier_fta value=$idDossierFta>
      <input type=hidden name=commentaire_maj_fta value=`$commentaireMajFta`>
-     <$html_table>
+    <$html_table>
         <tr class=titre_principal>
             <td>
 
@@ -239,7 +240,7 @@ echo "
             <td>
 
              Identifiant de la Fiche Technique Article: $idFta<br>
-             Identifiant du Dossier Technique: $idDossierFta-v$id_version_dossier_fta<br>
+             Identifiant du Dossier Technique: " . $idDossierFta . "v" . $idDossierVersionFta . "<br>
              Etat actuel de la fiche: $nomFtaEtat<br>
              Désignation Commerciale: $designationCommercialeFta<br>
              Désignation Interne Normaliée (DIN): " . $LIBELLE . "<br>
@@ -289,7 +290,7 @@ echo "
         </tr>   
     </table>
 
-     </form>
+</form>
      ";
 
 /* * **********

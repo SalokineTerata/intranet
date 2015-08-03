@@ -616,7 +616,7 @@ class FtaModel extends AbstractModel {
     }
 
     /**
-      Cette fonction permet de dupliquer une Fiche Technique Article pour faire les actions suivantes:
+     * Cette fonction permet de dupliquer une Fiche Technique Article pour faire les actions suivantes:
 
       $action
       -------
@@ -636,9 +636,10 @@ class FtaModel extends AbstractModel {
      * @param type $paramIdFta
      * @param type $paramAction
      * @param type $paramOption
+     * @param type $paramIdFtaWorkflow
      * @return type
      */
-    public static function BuildDuplicationFta($paramIdFta, $paramAction, $paramOption, $paramIdFtaRole, $paramIdFtaWorkflow) {
+    public static function BuildDuplicationFta($paramIdFta, $paramAction, $paramOption, $paramIdFtaWorkflow) {
 
         /*         * ****************************************
           Déclaration et initialisation des variables
@@ -646,13 +647,13 @@ class FtaModel extends AbstractModel {
         $globalConfig = new GlobalConfig();
         $idUser = $globalConfig->getAuthenticatedUser()->getKeyValue();
         $ftaModelOrig = new FtaModel($paramIdFta);              //Identifiant de la fiche technique article à dupliquer
-        $idFtaVersion = $ftaModelOrig->getDataField(FIELDNAME_VERSION_DOSSIER_FTA)->getFieldValue();
+        $idFtaVersion = $ftaModelOrig->getDataField(FtaModel::FIELDNAME_VERSION_DOSSIER_FTA)->getFieldValue();
         $idFtaOriginal = $paramIdFta;                //Sauvegarde de la clef initiale.
         $paramOption["abreviation_etat_destination"]; //Etat vers lequel doit aller la FTA
         $paramOption["selection_chapitre"];           //Tableau contenant les id_fta_chapitre des chapitres à corriger
         $paramOption["designation_commerciale_fta"];  //Nouveau nom commerciale de la FTA
+        $paramOption["site_de_production"];  //Nouveau site de production de la FTA
         $paramOption["nouveau_maj_fta"];              //Nouveau commentaire de la nouvelle FTA
-//print_r($option["selection_chapitre"]);
 
         switch ($paramAction) {
             case "version":
@@ -683,39 +684,61 @@ class FtaModel extends AbstractModel {
          * ************************* */
 
 
-        $idFtaNew = FtaModel::BuildDuplicateIdFta($paramIdFta);            //Récupération de la nouvelle clef
-        $ftaModel = new FtaModel($idFtaNew);
+        $idFtaNew = FtaModel::DuplicationIdFta($paramIdFta);                                                                                    //Récupération de la nouvelle clef
         /*
          * Enregsitrement des mises à jour
          */
 
-        $ftaModel->getDataField(FtaModel::FIELDNAME_DATE_ECHEANCE_FTA)->setFieldValue("");                 //La date d'échéance sera à redéfinir
-        $ftaModel->getDataField(FtaModel::FIELDNAME_DATE_CREATION)->setFieldValue(date("Y-m-d"));                //Date de la création de cet Article
-        $ftaModel->getDataField(FtaModel::FIELDNAME_ACTIF)->setFieldValue(0);                //Date de la création de cet Article
-        $ftaModel->getDataField(FtaModel::FIELDNAME_CODE_ARTICLE)->setFieldValue(NULL);                //Date de la création de cet Article
-        $ftaModel->getDataField(FtaModel::FIELDNAME_DATE_CREATION)->setFieldValue(date("Y-m-d"));                //Date de la création de cet Article
+        if (!$paramOption["site_de_production"]) {
+            $paramOption["site_de_production"] = "NULL";
+        }
+        DatabaseOperation::query(
+                "UPDATE " . FtaModel::TABLENAME
+                . " SET " . FtaModel::FIELDNAME_DATE_ECHEANCE_FTA . "=" . "0000-00-00"                                                                   //La date d'échéance sera à redéfinir
+                . ", " . FtaModel::FIELDNAME_DATE_CREATION . "='" . date("Y-m-d")                                                               //Date de la création de cet Article
+                . "', " . FtaModel::FIELDNAME_ACTIF . "=" . 0                                                                                   //Tant que la fiche n'est pas activée, la flag reste à 0.
+                . ", " . FtaModel::FIELDNAME_CODE_ARTICLE . "=" . 'NULL'                                                                         //Le Code Article Agrologic ne peut être présent 2 fois (index unique)
+                . ", " . FtaModel::FIELDNAME_CREATEUR . "=" . $idUser
+                . ", " . FtaModel::FIELDNAME_WORKFLOW . "=" . $paramIdFtaWorkflow
+                . ", " . FtaModel::FIELDNAME_SITE_ASSEMBLAGE . "=" . $paramOption["site_de_production"]
+                . " WHERE " . FtaModel::KEYNAME . "=" . $idFtaNew
+        );
+        switch ($paramAction) {                                                                                                                 //Suivant l'action, certaines données sont à mettre à jour
+            /*
+             * //Création d'un nouveau dossier
+             */
+            case "totale":
 
-        switch ($paramAction) {                                   //Suivant l'action, certaines données sont à mettre à jour
-            case "totale":                                //Création d'un nouveau dossier
-                $ftaModel->getDataField(FtaModel::FIELDNAME_DOSSIER_FTA)->setFieldValue($idFtaNew);         //Dans le cas d'un nouveau dossier, son identifiant correspond à l'identifiant de sa première FTA
-                $ftaModel->getDataField(FtaModel::FIELDNAME_VERSION_DOSSIER_FTA)->setFieldValue(0);                   //La première FTA commence en version "0"
-                $ftaModel->getDataField(FtaModel::FIELDNAME_ID_FTA_ETAT)->setFieldValue(1);                            //La première FTA commence en état "Initialisation"  (cf. table fta_etat)
-                $ftaModel->getDataField(FtaModel::FIELDNAME_ARTICLE_AGROLOGIC)->setFieldValue(0);
-                $ftaModel->getDataField(FtaModel::FIELDNAME_DESIGNATION_COMMERCIALE)->setFieldValue($paramOption["designation_commerciale_fta"]); //Renommage de la nouvelle FTA
-                $ftaModel->getDataField(FtaModel::FIELDNAME_NOM_ABREGE)->setFieldValue("");                              //Le nom abrégé est réinitilisé
-                $ftaModel->getDataField(FtaModel::FIELDNAME_LIBELLE)->setFieldValue(NULL);                               //Dans le cas d'un nouveau dossier, son identifiant correspond à l'identifiant de sa première FTA
-                $ftaModel->getDataField(FtaModel::FIELDNAME_CODE_ARTICLE_LDC)->setFieldValue(NULL);                             //Suppression Code LDC
-                $ftaModel->getDataField(FtaModel::FIELDNAME_EAN_COLIS)->setFieldValue(NUll);                              //Suppression EAN Colis
-                $ftaModel->getDataField(FtaModel::FIELDNAME_EAN_UVC)->setFieldValue(NULL);                             //Suppression EAN Article
-                $ftaModel->getDataField(FtaModel::FIELDNAME_EAN_PALETTE)->setFieldValue(NULL);                               //Suppression EAN Palette
-
+                DatabaseOperation::query(
+                        "UPDATE " . FtaModel::TABLENAME
+                        . " SET " . FtaModel::FIELDNAME_DOSSIER_FTA . "=" . $idFtaNew                                                           //Dans le cas d'un nouveau dossier, son identifiant correspond à l'identifiant de sa première FTA
+                        . ", " . FtaModel::FIELDNAME_VERSION_DOSSIER_FTA . "=" . 0                                                              //La première FTA commence en version "0"
+                        . ", " . FtaModel::FIELDNAME_ID_FTA_ETAT . "=" . 1                                                                      //La première FTA commence en état "Initialisation"  (cf. table fta_etat)
+                        . ", " . FtaModel::FIELDNAME_ARTICLE_AGROLOGIC . "=" . 0
+                        . ", " . FtaModel::FIELDNAME_DESIGNATION_COMMERCIALE . "=\"" . $paramOption["designation_commerciale_fta"]                //Renommage de la nouvelle FTA
+                        . "\", " . FtaModel::FIELDNAME_NOM_ABREGE . "=" . "NULL"                                                                  //Le nom abrégé est réinitilisé
+                        . ", " . FtaModel::FIELDNAME_LIBELLE . "=" . "NULL"                                                                       //Dans le cas d'un nouveau dossier, son identifiant correspond à l'identifiant de sa première FTA
+                        . ", " . FtaModel::FIELDNAME_CODE_ARTICLE_LDC . "=" . "NULL"                                                              //Suppression Code LDC
+                        . ", " . FtaModel::FIELDNAME_EAN_COLIS . "=" . "NULL"                                                                     //Suppression EAN Colis
+                        . ", " . FtaModel::FIELDNAME_EAN_UVC . "=" . "NULL"                                                                       //Suppression EAN Article
+                        . ", " . FtaModel::FIELDNAME_EAN_PALETTE . "=" . "NULL"                                                                   //Suppression EAN Palette
+                        . " WHERE " . FtaModel::KEYNAME . "=" . $idFtaNew
+                );
                 break;
-            case "version":                                //Création d'une nouvelle version de la FTA
-                $ftaModel->getDataField(FtaModel::FIELDNAME_VERSION_DOSSIER_FTA)->setFieldValue($idFtaVersion++);                      //La première FTA commence en version "0"
-                $ftaModel->getDataField(FtaModel::FIELDNAME_ID_FTA_ETAT)->setFieldValue($idFtaEtatNew);               //Nouvel éta de la FTA données par l'argument $option de la fonction (cf. table fta_etat)
+            /*
+             *  //Création d'une nouvelle version de la FTA
+             */
+            case "version":
+                $idFtaVersion = $idFtaVersion + 1;
+                DatabaseOperation::query(
+                        "UPDATE " . FtaModel::TABLENAME
+                        . " SET " . FtaModel::FIELDNAME_DOSSIER_FTA . "=" . $idFtaVersion                                                       //La première FTA commence en version "0"
+                        . ", " . FtaModel::FIELDNAME_ID_FTA_ETAT . "=" . $idFtaEtatNew                                                          //Nouvel éta de la FTA données par l'argument $option de la fonction (cf. table fta_etat)
+                        . " WHERE " . FtaModel::KEYNAME . "=" . $idFtaNew
+                );
                 break;
         }
-        $ftaModel->getDataField(FtaModel::FIELDNAME_CREATEUR)->setFieldValue($idUser);
+
 
 
 
@@ -727,40 +750,10 @@ class FtaModel extends AbstractModel {
           Les tables esclaves sont des tables contenant le champ "id_fta" dans la liste de leurs champs
          * ****************************************************************************************** */
 
-        $tablename_slave = array(
-            ClassificationFtaModel::TABLENAME,
-            FtaConditionnementModel::TABLENAME,
-            FtaComposantModel::TABLENAME,
-            //   "fta_tarif",
-            FtaSuiviProjetModel::TABLENAME
-        );
-
-        foreach ($tablename_slave as $nom_table) {//Parcours des tables esclaves
-            //Restauration de la clef initiale.
-            $_SESSION['id_fta'] = $idFtaOriginal;                  //Restauration de la clef initiale.
-            //Récupération des informations
-            $nom_clef = 'id_' . $nom_table;                         //Identification de la clef
-            $array = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
-                            "SELECT * "
-                            . " FROM " . $nom_table
-                            . " WHERE " . FtaModel::TABLENAME . "=" . $idFtaOriginal
-            );
-
-            if ($array) {
-                foreach ($array as $rows_fta) {
-
-
-                    //Chargement des données d'origine
-                    $_SESSION[$nom_clef] = $rows_fta[$nom_clef];        //Chargement de la clef d'origine
-
-                    $_SESSION[$nom_clef] = "";                          //Effacement de la clef de l'enregistrement pour générer un INSERT
-                    $_SESSION['id_fta'] = $idFtaNew;                  //Restauration de la nouvelle clef FTA.
-                    $_SESSION['last_' . $nom_clef] = $rows_fta[$nom_clef];
-                    $t = mysql_table_operation($nom_table, "insert");     //Enregistrement du nouvel enregsitrement
-                }
-            }
-        }//Fin du parcours des tables esclaves
-
+        FtaComposantModel::DuplicateFtaComposantByIdFta($idFtaOriginal, $idFtaNew);
+        FtaConditionnementModel::DuplicateFtaConditionnementByIdFta($idFtaOriginal, $idFtaNew);
+        FtaSuiviProjetModel::DuplicateFtaSuiviProjetByIdFta($idFtaOriginal, $idFtaNew);
+       // ClassificationFtaModel::DuplicateFtaClassificationByIdFta($idFtaOriginal, $idFtaNew);
 
 
         /*
@@ -926,7 +919,7 @@ class FtaModel extends AbstractModel {
         return $idFtaNew;
     }
 
-    public static function BuildDuplicateIdFta($paramIdFta) {
+    public static function DuplicationIdFta($paramIdFta) {
         DatabaseOperation::query(
                 " INSERT INTO " . FtaModel::TABLENAME . " (`id_access_arti2`, `numft`, `id_fta_workflow`,"
                 . " `commentaire`, `TRASH_id_fta_palettisation`, `id_dossier_fta`, "
@@ -972,7 +965,7 @@ class FtaModel extends AbstractModel {
                 . "`classification_fta_proprietaire`, `classification_fta_marque`, "
                 . "`classification_fta_activite`, `classification_fta_rayon`, `classification_fta_reseau`,"
                 . " `classification_fta_environnement`, `classification_fta_saisonnalite`)"
-                . " SELECT`id_access_arti2`, `numft`, `id_fta_workflow`,"
+                . " SELECT `id_access_arti2`, `numft`, `id_fta_workflow`,"
                 . " `commentaire`, `TRASH_id_fta_palettisation`, `id_dossier_fta`, "
                 . "`id_version_dossier_fta`, `champ_maj_fta`, `id_fta_etat`, "
                 . "`createur_fta`, `date_derniere_maj_fta`, `commentaire_maj_fta`,"
@@ -1022,7 +1015,6 @@ class FtaModel extends AbstractModel {
         $key = mysql_insert_id();
         return $key;
     }
-
 
     /**
      * Cette fonction retourne le nom DIN, Désignation Interne Normalisée d'une FTA
@@ -1074,6 +1066,63 @@ class FtaModel extends AbstractModel {
         }
 
         return $din;
+    }
+
+    /**
+     * Fonction d"insertion d'une Fta
+     * @param type $paramIdCreateur
+     * @param type $paramIdFtaEtat
+     * @param type $paramIdFtaWorkflow
+     * @param type $paramDesignationCommerciale
+     * @param type $paramDateCreation
+     * @param type $paramSiteDeProduction
+     * @return type
+     */
+    public static function CreateFta($paramIdCreateur, $paramIdFtaEtat, $paramIdFtaWorkflow, $paramDesignationCommerciale, $paramDateCreation, $paramSiteDeProduction) {
+        DatabaseOperation::query(
+                "INSERT INTO `intranet_v3_0_dev`." . FtaModel::TABLENAME
+                . " ( " . FtaModel::FIELDNAME_CREATEUR
+                . "," . FtaModel::FIELDNAME_ID_FTA_ETAT
+                . "," . FtaModel::FIELDNAME_DESIGNATION_COMMERCIALE
+                . "," . FtaModel::FIELDNAME_DATE_CREATION
+                . "," . FtaModel::FIELDNAME_SITE_ASSEMBLAGE
+                . "," . FtaModel::FIELDNAME_WORKFLOW . ")"
+                . " VALUES (" . $paramIdCreateur
+                . ", " . $paramIdFtaEtat
+                . ", '" . $paramDesignationCommerciale
+                . "', " . $paramDateCreation
+                . ", " . $paramSiteDeProduction
+                . ", " . $paramIdFtaWorkflow . ")"
+        );
+        $key = mysql_insert_id();
+        return $key;
+    }
+
+    public static function ClassificationFta($paramIdFta) {
+        $arrayClassif = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
+                        "SELECT " . FtaModel::FIELDNAME_CLASSIFICATION_ACTIVITE
+                        . "," . FtaModel::FIELDNAME_CLASSIFICATION_ENVIRONNEMENT
+                        . "," . FtaModel::FIELDNAME_CLASSIFICATION_MARQUE
+                        . "," . FtaModel::FIELDNAME_CLASSIFICATION_PROPRIETAIRE
+                        . "," . FtaModel::FIELDNAME_CLASSIFICATION_RAYON
+                        . "," . FtaModel::FIELDNAME_CLASSIFICATION_RESEAU
+                        . "," . FtaModel::FIELDNAME_CLASSIFICATION_SAISONNALITE
+                        . " FROM " . FtaModel::TABLENAME
+                        . " WHERE " . FtaModel::KEYNAME . "=" . $paramIdFta
+        );
+        foreach ($arrayClassif as $rowsClassif) {
+            $arrayIdClassif = array(
+                FtaModel::FIELDNAME_CLASSIFICATION_ACTIVITE => $rowsClassif[FtaModel::FIELDNAME_CLASSIFICATION_ACTIVITE],
+                FtaModel::FIELDNAME_CLASSIFICATION_ENVIRONNEMENT => $rowsClassif[FtaModel::FIELDNAME_CLASSIFICATION_ENVIRONNEMENT],
+                FtaModel::FIELDNAME_CLASSIFICATION_MARQUE => $rowsClassif[FtaModel::FIELDNAME_CLASSIFICATION_MARQUE],
+                FtaModel::FIELDNAME_CLASSIFICATION_PROPRIETAIRE => $rowsClassif[FtaModel::FIELDNAME_CLASSIFICATION_PROPRIETAIRE],
+                FtaModel::FIELDNAME_CLASSIFICATION_RAYON => $rowsClassif[FtaModel::FIELDNAME_CLASSIFICATION_RAYON],
+                FtaModel::FIELDNAME_CLASSIFICATION_RESEAU => $rowsClassif[FtaModel::FIELDNAME_CLASSIFICATION_RESEAU],
+                FtaModel::FIELDNAME_CLASSIFICATION_SAISONNALITE => $rowsClassif[FtaModel::FIELDNAME_CLASSIFICATION_SAISONNALITE]
+            );
+        }
+
+        return $arrayIdClassif;
     }
 
 }

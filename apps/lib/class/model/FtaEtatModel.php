@@ -44,6 +44,7 @@ class FtaEtatModel extends AbstractModel {
                         . " AND " . FtaWorkflowModel::TABLENAME . "." . FtaWorkflowModel::KEYNAME
                         . "=" . FtaModel::TABLENAME . "." . FtaModel::FIELDNAME_WORKFLOW
                         . " AND " . FtaModel::TABLENAME . "." . FtaModel::FIELDNAME_ID_FTA_ETAT . "=" . FtaEtatModel::TABLENAME . "." . FtaEtatModel::KEYNAME
+                        . " ORDER BY " . FtaEtatModel::TABLENAME . "." . FtaEtatModel::KEYNAME
         );
         return $arrayFtaEtatAndName;
     }
@@ -54,7 +55,7 @@ class FtaEtatModel extends AbstractModel {
      * @param type $paramEtat
      * @param type $paramRole
      * @param type $paramIdUser
-     * @param type $paramLieuGeo
+     * @param type $paramIdFtaEtat
      * @return type
      */
     public static function getIdFtaByEtatAvancement($paramSyntheseAction, $paramEtat, $paramRole, $paramIdUser, $paramIdFtaEtat) {
@@ -65,10 +66,6 @@ class FtaEtatModel extends AbstractModel {
 
                 //Distinction entre le En cours et le En attente
                 //Par rapport aux suivi de projets gérés, récupération des processus
-                /*
-                 * Marche pour tous les cas sauf qualité
-                 * Nous recupérons les Fta en attente selon son rôle et workflow
-                 */
                 $arrayTmp = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
                                 "SELECT DISTINCT " . FtaModel::TABLENAME . "." . FtaModel::KEYNAME
                                 . "," . FtaModel::TABLENAME . "." . FtaModel::FIELDNAME_WORKFLOW
@@ -356,7 +353,7 @@ class FtaEtatModel extends AbstractModel {
                                 "SELECT DISTINCT " . FtaWorkflowModel::TABLENAME . ".*"
                                 . " FROM " . FtaModel::TABLENAME . "," . FtaWorkflowModel::TABLENAME
                                 . " WHERE " . FtaModel::FIELDNAME_ID_FTA_ETAT . "='" . $paramIdFtaEtat
-                                . " AND " . FtaModel::TABLENAME . "." . FtaModel::FIELDNAME_WORKFLOW
+                                . "' AND " . FtaModel::TABLENAME . "." . FtaModel::FIELDNAME_WORKFLOW
                                 . "=" . FtaWorkflowModel::TABLENAME . "." . FtaWorkflowModel::KEYNAME//Liaison
                 );
 

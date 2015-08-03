@@ -62,7 +62,7 @@ $show_help = 1;                              //Activer l'aide en ligne Pop-up
 
 
 //Paramètre d'URL
-$id_fta = Lib::getParameterFromRequest("id_fta");
+$idFta = Lib::getParameterFromRequest(FtaModel::KEYNAME);
 /*
  * Nous recuperons le chapitre auquel ultisateur verra par défaut selon ces droits d'accès 
  * lorsqu'il regarde la liste de ces fta 
@@ -72,9 +72,9 @@ $id_fta = Lib::getParameterFromRequest("id_fta");
 $id_fta_chapitre_encours = Lib::getParameterFromRequest("id_fta_chapitre_encours",  AccueilFta::VALUE_1);
 $synthese_action = Lib::getParameterFromRequest("synthese_action");
 $comeback = Lib::getParameterFromRequest("comeback");
-$idFtaEtat = Lib::getParameterFromRequest("id_fta_etat");
-$abreviationFtaEtat = Lib::getParameterFromRequest("abrevation_fta_etat");
-$idFtaRole = Lib::getParameterFromRequest("id_fta_role");
+$idFtaEtat = Lib::getParameterFromRequest(FtaEtatModel::KEYNAME);
+$abreviationFtaEtat = Lib::getParameterFromRequest(FtaEtatModel::FIELDNAME_ABREVIATION);
+$idFtaRole = Lib::getParameterFromRequest(FtaRoleModel::KEYNAME);
 $id_fta_chapitre = $id_fta_chapitre_encours;
 $module_consultation = $_SESSION["module"] . "_consultation";
 
@@ -86,7 +86,7 @@ if ($$module_consultation <> 1 and $nom_fta_chapitre_encours == "tarif") {
 //$navigue = afficher_navigation($id_fta, $id_fta_chapitre_encours, $synthese_action, $comeback);
 
 
-Navigation::initNavigation($id_fta, $id_fta_chapitre_encours, $synthese_action, $comeback, $idFtaEtat,$abreviationFtaEtat,$idFtaRole);
+Navigation::initNavigation($idFta, $id_fta_chapitre_encours, $synthese_action, $comeback, $idFtaEtat,$abreviationFtaEtat,$idFtaRole);
 
 $navigue= Navigation::getHtmlNavigationBar();
 
@@ -102,7 +102,7 @@ $javascript = "
         i = document.form_action.correction_fta_suivi_projet.value
         if(confirm('Etes vous certain de vouloir corriger ce chapitre ?'))
         {
-            location.href = \"modification_fiche_post.php?id_fta=" . $id_fta . "&id_fta_chapitre_encours=" . $id_fta_chapitre_encours . "&synthese_action=" . $synthese_action . "&action=correction&new_correction_fta_suivi_projet=\" + i
+            location.href = \"modification_fiche_post.php?id_fta=" . $idFta . "&id_fta_chapitre_encours=" . $id_fta_chapitre_encours . "&synthese_action=" . $synthese_action . "&action=correction&new_correction_fta_suivi_projet=\" + i
              
         }
          else{}
@@ -111,7 +111,7 @@ $javascript = "
 ";
 
 
-Chapitre::initChapitre($id_fta, $id_fta_chapitre, $synthese_action, $comeback, $idFtaEtat,$abreviationFtaEtat,$idFtaRole);
+Chapitre::initChapitre($idFta, $id_fta_chapitre, $synthese_action, $comeback, $idFtaEtat,$abreviationFtaEtat,$idFtaRole);
 
 $bloc.= Chapitre::getHtmlChapitreAll();
 
@@ -121,7 +121,7 @@ echo "
      $navigue
      <form $method action=\"$page_action\" name=\"form_action\" method=\"post\">
      <input type=hidden name=action value=$action>
-     <input type=hidden name=id_fta value=$id_fta>
+     <input type=hidden name=id_fta value=$idFta>
      <input type=hidden name=abreviation_fta_etat value=$abreviationFtaEtat>
      <input type=hidden name=id_fta_chapitre_encours value=$id_fta_chapitre_encours>
      <input type=hidden name=id_fta_chapitre value=$id_fta_chapitre>

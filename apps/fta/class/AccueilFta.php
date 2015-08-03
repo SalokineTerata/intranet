@@ -689,9 +689,11 @@ class AccueilFta {
                     ;
 
                     if (self::$syntheseAction == FtaEtatModel::ETAT_AVANCEMENT_VALUE_EFFECTUES) {
-                        $selection = "<input type=\"checkbox\" name=selection_fta[] value=\"" . $idFta . "\" checked />";
+                        $selection = "<input type=\"checkbox\" name=selection_fta value=\"" . $idFta . "\" checked />";
                         $traitementDeMasse = AccueilFta::VALUE_1;
                         $selection_width = "2%";
+                        $StringFta .= $idFta . ",";
+                        $tableauFiche .= "<input type=hidden name=arrayFta value=$StringFta>";
                     }
                 }
 
@@ -728,6 +730,7 @@ class AccueilFta {
                             . "href=creer_fiche.php"
                             . "?action=dupliquer_fiche"
                             . "&id_fta=" . $idFta
+                            . "&id_fta_role=" . self::$idFtaRole
                             . "><img src=../lib/images/copie.png alt=\"\" title=\"Dupliquer\" width=\"30\" height=\"30\" border=\"0\" />"
                             . "</a>"
                     ;
@@ -967,8 +970,8 @@ class AccueilFta {
                 }
 
                 $tableauFicheTr.=$tableauFicheN . $tableauFicheTrTmp . $tableauFicheTmp;
-                $tableauFicheTrTmp = NULL;
 
+                $tableauFicheTrTmp = NULL;
                 $tableauFicheN = NULL;
                 $tableauFicheTmp = NULL;
                 $service = NULL;
@@ -979,6 +982,7 @@ class AccueilFta {
         }
 
         $tableauFiche .= $tableauFicheTr . $javascript . "</tbody></table>";
+
 
         //Ajoute de la fonction de traitement de masse
         if ($traitementDeMasse) {

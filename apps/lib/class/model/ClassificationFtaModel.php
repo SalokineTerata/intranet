@@ -13,6 +13,29 @@ class ClassificationFtaModel extends AbstractModel {
     const FIELDNAME_ID_CLASSIFICATION_ARBORESCENCE_ARTICLE = "id_classification_arborescence_article";
     const FIELDNAME_ID_FTA = "id_fta";
 
+    /**
+     * 
+     * @param type $paramIdFta
+     */
+    public static function DuplicateFtaClassificationByIdFta($paramIdFtaOrig, $paramIdFtaNew) {
+        DatabaseOperation::query(
+                " INSERT INTO " . ClassificationFtaModel::TABLENAME
+                . " (" . ClassificationFtaModel::FIELDNAME_ID_CLASSIFICATION_ARBORESCENCE_ARTICLE
+                . "," . ClassificationFtaModel::FIELDNAME_ID_FTA . ")"
+                . " SELECT " . ClassificationFtaModel::FIELDNAME_ID_CLASSIFICATION_ARBORESCENCE_ARTICLE
+                . "," . $paramIdFtaNew
+                . " FROM " . ClassificationFtaModel::TABLENAME
+                . " WHERE " . ClassificationFtaModel::FIELDNAME_ID_FTA . "=" . $paramIdFtaOrig
+        );
+    }
+
+    /**
+     * Non fonctionnelle
+     * @param type $paramIdFta
+     * @param type $paramIdElement
+     * @param type $paramExtension
+     * @return int
+     */
     public static function getElementClassificationFta($paramIdFta, $paramIdElement, $paramExtension) {
         /*
           Dictionnaire des variables:
@@ -64,7 +87,7 @@ class ClassificationFtaModel extends AbstractModel {
             $titre = "Classification de l'article";
             $message = "Cet article n'a pas de classification";
             $redirection;
-           // afficher_message($titre, $message, $redirection);
+            // afficher_message($titre, $message, $redirection);
         } else {
             //Récupération de toutes les classifications
             foreach ($arrayClassification as $rowsClassification) {
@@ -140,92 +163,97 @@ class ClassificationFtaModel extends AbstractModel {
 
         return $return;
     }
-public static function getClassificationName($table, $champ_valeur, $champ_id_fils, $champ_id_pere, $id_racine, $sql_where, $extension) {
-    /*
-      Déclaration des variables:
-     */
-    /*     $table='matiere_premiere_composant';                       //nom de la table contenant l'association "Père" / "Fils"
-      $champ_valeur='nom_matiere_premiere_composant';            //nom du champ contenant la valeur à afficher (sans le "underscore" et le nom de la table)
-      $champ_id_fils='id_matiere_premiere_composant';            //nom du champ fils contenant l'id (sans le "underscore" et le nom de la table)
-      $champ_id_pere='id_ascendant_matiere_premiere_composant';  //nom du champ père contenant l'id (sans le "underscore" et le nom de la table)
-     */
-    $table;                    //nom de la table contenant l'association "Père" / "Fils"
-    //Peux aussi être une liste de table séparé par une virgule ex: "table1,table2"
-    $champ_valeur;             //nom du champ contenant la valeur à afficher
-    $champ_id_fils;            //nom du champ fils contenant l'id
-    $champ_id_pere;            //nom du champ père contenant l'id
 
-    $id_racine;                //Identifiant de l'enregistrement père racine (le premier)
-    $id_recherche = $id_racine;  //Identifiant en cours de recherche
-    $id_fils;                  //Identifiant du fils en cours de traitement
-    $id_pere;                  //Identifiant du pre en cours de traitement
-    $tab;                      //Nombre de tabulation permettant un affichage en cascade de l'arborescence
-    $tab_init = '    ';          //Representation de la tabulation
-    $sql_where;                //Permet de personnaliser la clause SQL "WHERE" comme pour insérer une jointure par exemple
-    $return = '';                //Valeur retourne par la fonction
-    //$return[1] --> liste de éléments séparé par une virgule
-    //$return[2] --> Réprésentation de l'arborescence au format texte
+    public static function getClassificationName($table, $champ_valeur, $champ_id_fils, $champ_id_pere, $id_racine, $sql_where, $extension) {
+        /*
+          Déclaration des variables:
+         */
+        /*     $table='matiere_premiere_composant';                       //nom de la table contenant l'association "Père" / "Fils"
+          $champ_valeur='nom_matiere_premiere_composant';            //nom du champ contenant la valeur à afficher (sans le "underscore" et le nom de la table)
+          $champ_id_fils='id_matiere_premiere_composant';            //nom du champ fils contenant l'id (sans le "underscore" et le nom de la table)
+          $champ_id_pere='id_ascendant_matiere_premiere_composant';  //nom du champ père contenant l'id (sans le "underscore" et le nom de la table)
+         */
+        $table;                    //nom de la table contenant l'association "Père" / "Fils"
+        //Peux aussi être une liste de table séparé par une virgule ex: "table1,table2"
+        $champ_valeur;             //nom du champ contenant la valeur à afficher
+        $champ_id_fils;            //nom du champ fils contenant l'id
+        $champ_id_pere;            //nom du champ père contenant l'id
+
+        $id_racine;                //Identifiant de l'enregistrement père racine (le premier)
+        $id_recherche = $id_racine;  //Identifiant en cours de recherche
+        $id_fils;                  //Identifiant du fils en cours de traitement
+        $id_pere;                  //Identifiant du pre en cours de traitement
+        $tab;                      //Nombre de tabulation permettant un affichage en cascade de l'arborescence
+        $tab_init = '    ';          //Representation de la tabulation
+        $sql_where;                //Permet de personnaliser la clause SQL "WHERE" comme pour insérer une jointure par exemple
+        $return = '';                //Valeur retourne par la fonction
+        //$return[1] --> liste de éléments séparé par une virgule
+        //$return[2] --> Réprésentation de l'arborescence au format texte
 
 
-    $extension = Lib::isDefined("extension");                //Tableau d'argument optionnelle de la fonction
+        $extension = Lib::isDefined("extension");                //Tableau d'argument optionnelle de la fonction
 //    $extension[0];             //Code HTML qui sera ajouter à la fin de la valeur dans la représentation graphique
 //    $extension[1];             //0 ou 1. Permet de terminer le code HTML créé par $extension[0] avec l'id de l'objet en cours
 //    $extension[2];             //Ordre tri: 0=Valeur, 1=Clefs Fils et 2=Clef Père
 //    $extension[3];             //Liste des id à développer, si NULL, alors tout est développé
 //    $extension[4];             //Lien lorqu'on clic sur un élément de l'arborescence (terminé par l'id)
-    $tri;                      //Champ à trier
+        $tri;                      //Champ à trier
 
-    /*
-      Initialisation des variables
-     */
-    //$champ_valeur .= "_".$table;
-    //$champ_id_fils.= "_".$table;
-    //$champ_id_pere.= "_".$table;
-    $id_pere = $id_racine;
-    $tab_arborescence = '|';       //Signe Nouvelle Arborescence
-    $tab_fils = '---> ';           //Signe Nouveau Fils
-    $tab_espace = '----->';         //Espace de décalage
-    if ($sql_where) {
-        $sql_where = "WHERE " . $sql_where;
+        /*
+          Initialisation des variables
+         */
+        //$champ_valeur .= "_".$table;
+        //$champ_id_fils.= "_".$table;
+        //$champ_id_pere.= "_".$table;
+        $id_pere = $id_racine;
+        $tab_arborescence = '|';       //Signe Nouvelle Arborescence
+        $tab_fils = '---> ';           //Signe Nouveau Fils
+        $tab_espace = '----->';         //Espace de décalage
+        if ($sql_where) {
+            $sql_where = "WHERE " . $sql_where;
+        }
+
+        if (!$extension[2]) {
+            $extension[2] = 1;  //Tri par défaut
+        }
+
+        //Configuration du tri de l'arborescence
+        switch ($extension[2]) {
+
+            case 0 : $tri = $champ_valeur;
+                break;
+            case 1 : $tri = $champ_id_fils;
+                break;
+            case 2 : $tri = $champ_id_pere;
+                break;
+        }
+
+
+        $requete_principale = "SELECT $champ_id_pere, $champ_id_fils, $champ_valeur FROM $table "
+                . "$sql_where "
+                . "ORDER BY $tri ASC "
+        ;
+
+        //echo $requete_principale;
+        $resultat = DatabaseOperation::query($requete_principale);
+        $nombre_ligne = mysql_num_rows($resultat);
+
+        /*
+          Corps de la fonction
+         */
+
+
+
+        //Lancement de la fonction
+        //Appel recursif de la fonction
+        $i = 1;    //Affiche le niveau dans lequel on est
+
+        $return = recursif(
+                $resultat, $id_recherche, $champ_id_pere, $champ_id_fils, $champ_valeur, $tab_fils, $tab_arborescence, $tab_espace, $return, $nombre_ligne, $extension
+        );
+
+        //var_dump($return);
+        return $return;
     }
 
-    if (!$extension[2]) {
-        $extension[2] = 1;  //Tri par défaut
-    }
-
-    //Configuration du tri de l'arborescence
-    switch ($extension[2]) {
-
-        case 0  :   $tri = $champ_valeur;  break;
-        case 1  :   $tri = $champ_id_fils; break;
-        case 2  :   $tri = $champ_id_pere; break;
-    }
-
-
-    $requete_principale = "SELECT $champ_id_pere, $champ_id_fils, $champ_valeur FROM $table "
-            . "$sql_where "
-            . "ORDER BY $tri ASC "
-    ;
-
-    //echo $requete_principale;
-    $resultat = DatabaseOperation::query($requete_principale);
-    $nombre_ligne = mysql_num_rows($resultat);
-
-    /*
-      Corps de la fonction
-     */
-
-
-
-    //Lancement de la fonction
-    //Appel recursif de la fonction
-    $i = 1;    //Affiche le niveau dans lequel on est
-
-    $return = recursif(
-            $resultat, $id_recherche, $champ_id_pere, $champ_id_fils, $champ_valeur, $tab_fils, $tab_arborescence, $tab_espace, $return, $nombre_ligne, $extension
-    );
-
-    //var_dump($return);
-    return $return;
-}
 }

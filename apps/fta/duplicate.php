@@ -49,6 +49,13 @@ switch($output)
 
 }//Fin de la sélection du mode d'affichage de la page
 
+
+$id_fta_new= Lib::getParameterFromRequest("id_fta_new");
+$id_fta_original= Lib::getParameterFromRequest("id_fta_original");
+$idFtaRole= Lib::getParameterFromRequest("id_fta_role");
+
+$ftaNewModel= new FtaModel($id_fta_new);
+$ftaOrigModel= new FtaModel($id_fta_original);
 /*************
 Début Code PHP
 *************/
@@ -72,23 +79,16 @@ Début Code PHP
   Récupération des données MySQL
 */
 
-  //Chargement de l'ancienne fiche
-  $id_fta=$id_fta_original;
-  mysql_table_load("fta");
-
   //Informations de la Fiche Originale
-  $id_fta_original=$id_fta;
-  $id_dossier_fta_original=$id_dossier_fta;
-  $id_version_dossier_fta_original=$id_version_dossier_fta;
+  
+  $id_dossier_fta_original=$ftaOrigModel->getDataField(FtaModel::FIELDNAME_DOSSIER_FTA)->getFieldValue();
+  $id_version_dossier_fta_original=$ftaOrigModel->getDataField(FtaModel::FIELDNAME_VERSION_DOSSIER_FTA)->getFieldValue();
 
-  //Chargement de la nouvelle fiche
-  $id_fta=$id_fta_new;
-  mysql_table_load("fta");
-
+ 
   //Informations de la Fiche Originale
-  $id_fta_new=$id_fta;
-  $id_dossier_fta_new=$id_dossier_fta;
-  $id_version_dossier_fta_new=$id_version_dossier_fta;
+  
+  $id_dossier_fta_new=$ftaNewModel->getDataField(FtaModel::FIELDNAME_DOSSIER_FTA)->getFieldValue();
+  $id_version_dossier_fta_new=$ftaNewModel->getDataField(FtaModel::FIELDNAME_VERSION_DOSSIER_FTA)->getFieldValue();
 
 
 /*
@@ -129,10 +129,9 @@ echo "
      <tr><td>
 
          <center>
-         <a href=modification_fiche.php?id_fta=$id_fta&id_fta_chapitre_encours=$id_fta_chapitre_encours&synthese_action=modification>
+         <a href=modification_fiche.php?id_fta=$id_fta_new&comeback=1&synthese_action=encours&id_fta_etat=1&abrevation_fta_etat=I&id_fta_role=$idFtaRole>
          <font size=\"3\">Suivant >></font></a>
          </center>
-
      </td></tr>
      </table>
 

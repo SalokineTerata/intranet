@@ -17,11 +17,20 @@ require_once '../inc/main.php';
 $globalConfig = new GlobalConfig();
 
 $action = Lib::getParameterFromRequest("action");
+if ($action == "transition_groupe") {
+    $action = Lib::getParameterFromRequest("abreviation_fta_transition");
+}
 $idFta = Lib::getParameterFromRequest("id_fta");
+if (!$idFta) {
+    $idFtaArray = Lib::getParameterFromRequest("arrayFta");
+    $idFta = explode(",", $idFtaArray);
+}
 $idFtaRole = Lib::getParameterFromRequest("id_fta_role");
 $idFtaWorkflow = Lib::getParameterFromRequest("id_fta_workflow");
 $new_commentaire_maj_fta = Lib::getParameterFromRequest("fta_commentaire_maj_fta_$idFta");
-
+if (!$new_commentaire_maj_fta) {
+    $new_commentaire_maj_fta = Lib::getParameterFromRequest("subject");
+}
 if (!$action) {
     $titre = "Erreur";
     $message = "Vous devez choisir une transition";
@@ -51,7 +60,11 @@ if (!$action) {
 //Dans le cas où il n'y aurait qu'une seule FTA a valider,
 //Le tableau est rempli avec cette unique valeur.
     if (!$selection_fta) {
-        $selection_fta[] = $idFta;
+        if (!is_array($idFta)) {
+            $selection_fta[] = $idFta;
+        } else {
+            $selection_fta = $idFta;
+        }
         $envoi_mail_detail = 1;    //Permet d'envoi un mail en mode "détaillé"
         $abreviation_fta_transition = $action;
     }
@@ -81,7 +94,8 @@ if (!$action) {
                         . " ORDER BY " . FtaChapitreModel::FIELDNAME_NOM_USUEL_CHAPITRE);
         $ok = 0;
         foreach ($arrayChapitre as $rowsChapitre) {
-            if (${FtaChapitreModel::FIELDNAME_NOM_CHAPITRE . "-" . $rowsChapitre[FtaChapitreModel::KEYNAME]} == 1) {
+            if (Lib::getParameterFromRequest(FtaChapitreModel::FIELDNAME_NOM_CHAPITRE . "-" . $rowsChapitre[FtaChapitreModel::KEYNAME]) == 1) {
+                $ListeDesChapitres[] =$rowsChapitre[FtaChapitreModel::KEYNAME];
                 $ok = 1;
             }
         }
@@ -105,7 +119,7 @@ if (!$action) {
             $commentaire_maj_fta = $new_commentaire_maj_fta;
             //echo $abreviation_fta_transition;
 //echo $id_fta;
-            $t = FtaTransitionModel::BuildTransitionFta($idFta, $abreviation_fta_transition, $commentaire_maj_fta,$idFtaRole,$idFtaWorkflow);
+            $t = FtaTransitionModel::BuildTransitionFta($idFta, $abreviation_fta_transition, $commentaire_maj_fta, $idFtaRole, $idFtaWorkflow,$ListeDesChapitres);
             //Codes de retour de la fonction:
             //   0: FTA correctement transitée
             //   1: FTA non transité car risque de doublon

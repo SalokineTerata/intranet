@@ -103,19 +103,20 @@ class FtaChapitreModel extends AbstractModel {
         $newCorrectionFtaSuiviProjet = mysql_real_escape_string($newCorrectionFtaSuiviProjet);
 
         //Dévalidation du chapitre en cours
-        $reqDevelidationChapitre = "UPDATE " . FtaSuiviProjetModel::TABLENAME
+        $reqDevelidationChapitre = " UPDATE " . FtaSuiviProjetModel::TABLENAME
                 . " SET " . FtaSuiviProjetModel::FIELDNAME_SIGNATURE_VALIDATION_SUIVI_PROJET . "=0, "
                 . FtaSuiviProjetModel::FIELDNAME_CORRECTION_FTA_SUIVI_PROJET . "=\"" . $newCorrectionFtaSuiviProjet . "\" "
-                . "WHERE " . FtaModel::KEYNAME . "=" . $paramIdFta
+                . " WHERE " . FtaModel::KEYNAME . "=" . $paramIdFta
                 . " AND " . FtaSuiviProjetModel::FIELDNAME_ID_FTA_CHAPITRE . "=" . $paramIdChapitre
         ;
         DatabaseOperation::query($reqDevelidationChapitre);
 
-        //Mise à jour de la validation de l'échéance du processus
+        /*
+         * Mise à jour de la validation de l'échéance du processus
+         * fonction non utilisé
+         */
 
-        FtaProcessusDelaiModel::BuildFtaProcessusValidationDelai($paramIdFta, $idFtaProcessus, $idFtaWorkflow);
-
-
+        // FtaProcessusDelaiModel::BuildFtaProcessusValidationDelai($paramIdFta, $idFtaProcessus, $idFtaWorkflow);
         //Dévalidation des processus suivants
         $return = FtaChapitreModel::BuildDevalidationChapitre($paramIdFta, $idFtaProcessus, $HtmlResult);
         //print_r($return["mail"]);      //Tableau contenant les adresses emails des personnes concernées par la dévalidation
@@ -183,8 +184,10 @@ class FtaChapitreModel extends AbstractModel {
 
     /**
      * 
-     * @param HtmlResult2 $htmlResult
-     * @return mixed
+     * @param type $paramIdFta
+     * @param type $paramIdProcessus
+     * @param type $htmlResult
+     * @return type
      */
     public static function BuildDevalidationChapitre($paramIdFta, $paramIdProcessus, $htmlResult) {
         //Déclarion des variables
@@ -238,6 +241,7 @@ class FtaChapitreModel extends AbstractModel {
                         . " AND " . FtaProcessusCycleModel::FIELDNAME_PROCESSUS_INIT . "='" . $paramIdProcessus . "' "
                         . " AND " . FtaProcessusCycleModel::FIELDNAME_PROCESSUS_NEXT . " IS NOT NULL"
                         . " AND " . FtaSuiviProjetModel::FIELDNAME_SIGNATURE_VALIDATION_SUIVI_PROJET . " <> 0"
+                        . " AND " . FtaSuiviProjetModel::FIELDNAME_ID_FTA . "=" . $paramIdFta
         );
 
         //Enregistrement du processus

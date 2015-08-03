@@ -1,38 +1,37 @@
 <?php
+
 /*
-Module d'appartenance (valeur obligatoire)
-Par défaut, le nom du module est le répertoire courant
-*/
+  Module d'appartenance (valeur obligatoire)
+  Par défaut, le nom du module est le répertoire courant
+ */
 //   $module=substr(strrchr(`pwd`, '/'), 1);
 //   $module=trim($module);
 
 
 /*
-Si la page peut être appelée depuis n'importe quel module,
-décommentez la ligne suivante
-*/
+  Si la page peut être appelée depuis n'importe quel module,
+  décommentez la ligne suivante
+ */
 
 //   $module='';
-
 //Sélection du mode de visualisation de la page
-switch($output)
-{
+switch ($output) {
 
-  case 'visualiser':
-       //Inclusions
-       include ("../lib/session.php");         //Récupération des variables de sessions
-       include ("../lib/functions.php");       //On inclus seulement les fonctions sans construire de page
-       include ("functions.php");              //Fonctions du module
-       echo "
+    case 'visualiser':
+        //Inclusions
+        include ("../lib/session.php");         //Récupération des variables de sessions
+        include ("../lib/functions.php");       //On inclus seulement les fonctions sans construire de page
+        include ("functions.php");              //Fonctions du module
+        echo "
             <link rel=stylesheet type=text/css href=../lib/css/intra01.css />
             <link rel=stylesheet type=text/css href=visualiser.css />
        ";
 
-  //break;
-  case 'pdf':
-  break;
+    //break;
+    case 'pdf':
+        break;
 
-  default:
+    default:
         //Inclusions
 //        include ("../lib/session.php");         //Récupération des variables de sessions
 //        include ("../lib/debut_page.php");      //Construction d'une nouvelle
@@ -47,116 +46,117 @@ switch($output)
 //        {
 //           include ("./menu_principal.inc");    //Sinon, menu par défaut
 //        }
-
 }//Fin de la sélection du mode d'affichage de la page
 
 
-/*************
-Début Code PHP
-*************/
+/* * ***********
+  Début Code PHP
+ * *********** */
 
 /*
-    Initialisation des variables
-*/
-   $page_default=substr(strrchr($_SERVER["PHP_SELF"], '/'), '1', '-4');
-   $page_action=$page_default."_post.php";
-   $page_pdf=$page_default."_pdf.php";
-   $action = 'valider';                       //Action proposée à la page _post.php
-   $method = 'POST';             //Pour une url > 2000 caractères, ne pas utiliser utiliser GET
-   $html_table = "table "              //Permet d'harmoniser les tableaux
-               . "border=1 "
-               . "width=100% "
-               . "class=contenu "
-               ;
+  Initialisation des variables
+ */
+$page_default = substr(strrchr($_SERVER["PHP_SELF"], '/'), '1', '-4');
+$page_action = $page_default . "_post.php";
+$page_pdf = $page_default . "_pdf.php";
+$action = 'valider';                       //Action proposée à la page _post.php
+$method = 'POST';             //Pour une url > 2000 caractères, ne pas utiliser utiliser GET
+$html_table = "table "              //Permet d'harmoniser les tableaux
+        . "border=1 "
+        . "width=100% "
+        . "class=contenu "
+;
 
 /*
-    Récupération des données MySQL
-*/
-mysql_table_load('fta');
-//echo $id_fta;
-//echo $id_access_arti2;
-//mysql_table_load('access_arti2');
-
-
+  Récupération des données MySQL
+ */
+$new_designation_commerciale_fta = Lib::getParameterFromRequest("new_designation_commerciale_fta");
+$abreviationEtatDestination = Lib::getParameterFromRequest("abreviation_etat_destination");
+$idFta = Lib::getParameterFromRequest("id_fta");
+$idFtaWorkflow = Lib::getParameterFromRequest("id_fta_workflow");
+$idFtaRole= Lib::getParameterFromRequest("id_fta_role");
+$siteDeProduction = Lib::getParameterFromRequest("site_de_production");
+$ftaModel = new FtaModel($idFta);
 
 /*
-     Sélection du mode d'affichage
-*/
-switch ($output)
-{
+  Sélection du mode d'affichage
+ */
+switch ($output) {
 
-/*************
-Début Code PDF
-*************/
-case "pdf":
-         //Constructeur
-         $pdf=new XFPDF();
+    /*     * ***********
+      Début Code PDF
+     * *********** */
+    case "pdf":
+        //Constructeur
+        $pdf = new XFPDF();
 
-         //Déclaration des variables de formatages
-         $police_standard="Arial";
-         $t1_police=$police_standard;
-         $t1_style="B";
-         $t1_size="12";
+        //Déclaration des variables de formatages
+        $police_standard = "Arial";
+        $t1_police = $police_standard;
+        $t1_style = "B";
+        $t1_size = "12";
 
-         $t2_police=$police_standard;
-         $t2_style="B";
-         $t2_size="11";
+        $t2_police = $police_standard;
+        $t2_style = "B";
+        $t2_size = "11";
 
-         $t3_police=$police_standard;
-         $t3_style="BIU";
-         $t3_size="10";
+        $t3_police = $police_standard;
+        $t3_style = "BIU";
+        $t3_size = "10";
 
-         $contenu_police=$police_standard;
-         $contenu_style="";
-         $contenu_size="8";
+        $contenu_police = $police_standard;
+        $contenu_style = "";
+        $contenu_size = "8";
 
-         $chapitre=0;
-         $section=0;
-         include($page_pdf);
-         //$pdf->SetProtection(array("print", "copy"));
-         $pdf->Output(); //Read the FPDF.org manual to know the other options
+        $chapitre = 0;
+        $section = 0;
+        include($page_pdf);
+        //$pdf->SetProtection(array("print", "copy"));
+        $pdf->Output(); //Read the FPDF.org manual to know the other options
 
-break;
-/***********
-Fin Code PDF
-***********/
+        break;
+    /*     * *********
+      Fin Code PDF
+     * ********* */
 
-default:
-/*
-    Création des objets HTML (listes déroulante, cases à cocher ...etc.)
-*/
+    default:
+        /*
+          Création des objets HTML (listes déroulante, cases à cocher ...etc.)
+         */
 
-$bloc="";
+        $bloc = "";
 
-//Marque
-$id_element="2"; //Recherche de la Marque
-$extension[0]=1; //Passage en mode recherche d'une catégorie
-$champ = recherche_element_classification_fta($id_fta, $id_element, $extension);
-$champ[2];
-$bloc .= "Marque(s) <i>(anciennement gamme)</i>:";
-$bloc .= "$champ[2]";
-$bloc.="<br>";
+        /*
+         * Marque
+         */
+        $arrayIdClassification = FtaModel::ClassificationFta($idFta);
+        $classificationMarque = ClassificationArborescenceArticleCategorieContenuModel::getElementClassificationFta($arrayIdClassification[FtaModel::FIELDNAME_CLASSIFICATION_MARQUE]);
+        $bloc .= "Marque(s) <i>(anciennement gamme)</i>:";
+        $bloc .= $classificationMarque;
+        $bloc.="<br>";
 
-//Activité
-$id_element="3"; //Recherche de l'Activité
-$extension[0]=1; //Passage en mode recherche d'une catégorie
-$champ = recherche_element_classification_fta($id_fta, $id_element, $extension);
-$champ[2];
-$bloc .= "Activité(s) <i>(anciennement ségment)</i>:";
-$bloc .= "$champ[2]";
-$bloc.="<br>";
+        /*
+         * Activité
+         */
+        $classificationActivite = ClassificationArborescenceArticleCategorieContenuModel::getElementClassificationFta($arrayIdClassification[FtaModel::FIELDNAME_CLASSIFICATION_ACTIVITE]);
+        $bloc .= "Activité(s) <i>(anciennement ségment)</i>:";
+        $bloc .= $classificationActivite;
+        $bloc.="<br>";
 
 
-/**************
-Début Code HTML
-**************/
+        /*         * ************
+          Début Code HTML
+         * ************ */
 
 
         echo "
              <form method=$method action=$page_action>
-             <input type=\"hidden\" name=\"id_fta\" value=\"$id_fta\" />
-             <input type=\"hidden\" name=\"abreviation_etat_destination\" value=\"$abreviation_etat_destination\" />
+             <input type=\"hidden\" name=\"id_fta\" value=\"$idFta\" />
+             <input type=\"hidden\" name=\"abreviation_etat_destination\" value=\"$abreviationEtatDestination\" />
              <input type=\"hidden\" name=\"new_designation_commerciale_fta\" value=\"$new_designation_commerciale_fta\" />
+             <input type=\"hidden\" name=\"id_fta_workflow\" value=\"$idFtaWorkflow\" />
+             <input type=\"hidden\" name=\"site_de_production\" value=\"$siteDeProduction\" />
+             <input type=\"hidden\" name=\"id_fta_role\" value=\"$idFtaRole\" />
              <$html_table>
              <tr><td>
 
@@ -165,8 +165,8 @@ Début Code HTML
                  <br>
                      <$html_table>
                      <tr class=titre_principal><td align=left>
-                         <br>
-                         $NOM_designation_commerciale_fta: $designation_commerciale_fta<br>
+                         <br>"
+        . $ftaModel->getDataField(FtaModel::FIELDNAME_DESIGNATION_COMMERCIALE)->getFieldLabel() . ": " . $ftaModel->getDataField(FtaModel::FIELDNAME_DESIGNATION_COMMERCIALE)->getFieldValue() . "<br>
                          <br>
                          $bloc
 
@@ -202,15 +202,13 @@ Début Code HTML
 
 
 
-/***********************
-Inclusion de fin de page
-***********************/
-include ("../lib/fin_page.inc");
+        /*         * *********************
+          Inclusion de fin de page
+         * ********************* */
+        include ("../lib/fin_page.inc");
 
-/************
-Fin Code HTML
-************/
-
+    /*     * **********
+      Fin Code HTML
+     * ********** */
 }//Fin du switch de sélection du mode d'affichage
-
 ?>

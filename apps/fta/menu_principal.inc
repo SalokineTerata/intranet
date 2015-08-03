@@ -6,7 +6,7 @@ $module = Lib::getModule();
 
 $module_consultation = $module . "_consultation";
 $module_modification = $module . "_modification";
-
+$idFtaRole=  Lib::getParameterFromRequest("id_fta_role");
 $fta_definition = Lib::isDefined("fta_definition");
 $fta_composition = Lib::isDefined("fta_composition");
 
@@ -57,7 +57,7 @@ if (
 ) {
     //Créer une nouvelle Fiche Technique Article
     echo "<br>";
-    echo "<a href=creer_fiche.php><img src=../lib/images/bouton_menu-creer_une_fiche.png border=0></a>";
+    echo "<a href=creer_fiche.php?id_fta_role=$idFtaRole><img src=../lib/images/bouton_menu-creer_une_fiche.png border=0></a>";
 
     //Mettre à jour une Fiche Technique Article existante
     //echo "<br>";

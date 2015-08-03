@@ -2564,9 +2564,9 @@ function visualiser_fiches($id_fta_etat, $choix, $isLimit, $order_common) {
 
 
 
-/* * ***********************************************************************************
+/*************************************************************************************
   Fonction donnant l'état actuel d'un processus pour une fiche technique article données
- * *********************************************************************************** */
+ ************************************************************************************ */
 
 function fta_processus_etat($id_fta, $id_fta_processus) {
 //Définition des variables

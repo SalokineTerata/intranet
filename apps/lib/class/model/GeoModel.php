@@ -32,6 +32,36 @@ class GeoModel extends AbstractModel {
     const FIELDNAME_K_SOCIETE = "k_societe";
     const FIELDNAME_TAG_APPLICATION_GEO = "tag_application_geo";
 
+    public function __construct($paramId = NULL, $paramIsCreateRecordsetInDatabaseIfKeyDoesntExist = AbstractModel::DEFAULT_IS_CREATE_RECORDSET_IN_DATABASE_IF_KEY_DOESNT_EXIST) {
+        parent::__construct($paramId, $paramIsCreateRecordsetInDatabaseIfKeyDoesntExist);
+    }
+
+    public static function ShowListeDeroulanteSiteProdByAcces($paramIdUser) {
+        $requete = "SELECT DISTINCT " . GeoModel::KEYNAME . "," . GeoModel::FIELDNAME_GEO
+                . " FROM " . GeoModel::TABLENAME
+                . ", " . FtaActionSiteModel::TABLENAME
+                . ", " . IntranetActionsModel::TABLENAME
+                . ", " . IntranetDroitsAccesModel::TABLENAME
+                . " WHERE " . GeoModel::FIELDNAME_GEO . "<>''"
+                . " AND " . FtaActionSiteModel::TABLENAME . "." . FtaActionSiteModel::FIELDNAME_ID_SITE . "=" . GeoModel::KEYNAME
+                . " AND " . IntranetActionsModel::TABLENAME . "." . IntranetActionsModel::KEYNAME
+                . " AND " . FtaActionSiteModel::TABLENAME . "." . FtaActionSiteModel::FIELDNAME_ID_INTRANET_ACTIONS
+                . "=" . IntranetActionsModel::TABLENAME . "." . IntranetActionsModel::KEYNAME
+                . " AND " . IntranetActionsModel::TABLENAME . "." . IntranetActionsModel::KEYNAME
+                . "=" . IntranetDroitsAccesModel::TABLENAME . "." . IntranetDroitsAccesModel::FIELDNAME_ID_INTRANET_ACTIONS
+                . " AND " . IntranetDroitsAccesModel::FIELDNAME_ID_USER . "=" . $paramIdUser // L'utilisateur connecté
+                . " AND " . IntranetDroitsAccesModel::TABLENAME . "." . IntranetDroitsAccesModel::FIELDNAME_NIVEAU_INTRANET_DROITS_ACCES . "=1"
+                . " ORDER BY " . GeoModel::FIELDNAME_GEO
+        ;
+        $nom_defaut = GeoModel::KEYNAME;
+        $id_defaut = GeoModel::KEYNAME;
+        $listSiteProduction = DatabaseDescription::getFieldDocLabel(GeoModel::TABLENAME, GeoModel::FIELDNAME_GEO)
+                . "</td><td>"
+                . AccueilFta::afficherRequeteEnListeDeroulante($requete, $id_defaut, $nom_defaut);
+        
+        return $listSiteProduction;
+    }
+
 }
 ?>
 

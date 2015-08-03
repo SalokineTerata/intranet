@@ -19,8 +19,8 @@ class AbstractModel {
     public function __construct($paramId = NULL, $paramIsCreateRecordsetInDatabaseIfKeyDoesntExist = self::DEFAULT_IS_CREATE_RECORDSET_IN_DATABASE_IF_KEY_DOESNT_EXIST) {
 
         $this->setRecord(new DatabaseRecord(static::TABLENAME, $paramId, NULL, NULL, $paramIsCreateRecordsetInDatabaseIfKeyDoesntExist));
-        $this->setKeyValue($this->getRecord()->getKeyValue());
-    }
+            $this->setKeyValue($this->getRecord()->getKeyValue());
+        }
 
     public static function getClassName() {
         return get_called_class();

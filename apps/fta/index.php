@@ -88,7 +88,6 @@ if ($id_user) {
     }
 
     $idFtaRoleEncours = Lib::getParameterFromRequest(FtaRoleModel::KEYNAME, $idFtaRoleEncoursDefault);
-    FtaSuiviProjetModel::initFtaSuiviProjet(30);
 //echo "id_fta_etat=$id_fta_etat / nom_fta_etat=$nom_fta_etat / synthese_action=$synthese_action <br>";
 
     /*

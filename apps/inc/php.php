@@ -182,6 +182,7 @@ require_once("../lib/class/html/HtmlInputKg.php");
 require_once("../lib/class/html/HtmlInputCalendar.php");
 require_once("../lib/class/html/AbstractHtmlList.php");
 require_once("../lib/class/html/HtmlListSelect.php");
+require_once("../lib/class/html/HtmlListSelectTagName.php");
 require_once("../lib/class/html/HtmlListBoolean.php");
 require_once("../lib/class/html/HtmlSubForm.php");
 require_once("../lib/class/html/HtmlSubForm_R1N.php");

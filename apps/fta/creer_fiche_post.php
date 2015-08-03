@@ -33,16 +33,14 @@ require_once '../inc/main.php';
 
  */
 $action = Lib::getParameterFromRequest("action");
-$id_fta = Lib::getParameterFromRequest("id_fta");
-$id_fta_categorie = Lib::getParameterFromRequest("id_fta_categorie");
-$designation_commerciale_fta = Lib::getParameterFromRequest("designation_commerciale_fta");
-$abreviation_fta_etat = Lib::getParameterFromRequest("abreviation_fta_etat");
+$idFtaRole = Lib::getParameterFromRequest(FtaRoleModel::KEYNAME);
+$id_fta = Lib::getParameterFromRequest(FtaModel::KEYNAME);
+$idFtaWorkflow = Lib::getParameterFromRequest(FtaWorkflowModel::KEYNAME);
+$designationCommercialeFta = Lib::getParameterFromRequest(FtaModel::FIELDNAME_DESIGNATION_COMMERCIALE);
+$abreviationFtaEtat = Lib::getParameterFromRequest(FtaEtatModel::FIELDNAME_ABREVIATION);
+$siteDeProduction = Lib::getParameterFromRequest(GeoModel::KEYNAME);
 
-$_SESSION["id_fta"] = $id_fta;
-$_SESSION["id_fta_categorie"] = $id_fta_categorie;
-$_SESSION["designation_commerciale_fta"] = $designation_commerciale_fta;
-$_SESSION["createur_fta"] = $_SESSION["id_user"];
-$_SESSION["abreviation_fta_etat"] = $abreviation_fta_etat;
+
 
 switch ($action) {
 
@@ -50,118 +48,107 @@ switch ($action) {
       S'il n'y a pas d'actions défini
      */
     case 1: //Création d'une FTA Vierge
+//        $idFta = null;
 
-        $_SESSION["id_access_arti2"] = null;
-        $_SESSION["id_fta"] = null;
-        
-        $req = "SELECT id_fta_etat FROM fta_etat WHERE abreviation_fta_etat='" . $_SESSION["abreviation_fta_etat"] . "' ";
-        $result = mysql_query($req);
-        $_SESSION["id_fta_etat"] = mysql_result($result, 0, "id_fta_etat");
+        $arrayIdEtat = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
+                        "SELECT " . FtaEtatModel::KEYNAME
+                        . " FROM " . FtaEtatModel::TABLENAME
+                        . " WHERE " . FtaEtatModel::FIELDNAME_ABREVIATION . "='" . $abreviationFtaEtat . "' "
+        );
 
-        //Initialisation de l'enregistrement de la Table FTA
-        $_SESSION["id_fta"] = null;
-        mysql_table_operation("fta", "insert");
-        $test = $_SESSION["id_fta"];
+        foreach ($arrayIdEtat as $rowsIdEtat) {
+            $idFtaEtat = $rowsIdEtat[FtaEtatModel::KEYNAME];
+        }
 
-        //Initialisation de l'enregistrement de la Table access_arti2
-        $_SESSION["date_creation"] = date("Y-m-d");
-        mysql_table_operation("access_arti2", "insert");
-        $test = $_SESSION["id_access_arti2"];
+        /*
+         * Initialisation de l'enregistrement de la Table FTA
+         */
+        $globalConfig = new GlobalConfig();
+        $idUser = $globalConfig->getAuthenticatedUser()->getKeyValue();
 
-        //Actualisation des données FTA
-        $_SESSION["id_dossier_fta"] = $_SESSION["id_fta"];
-        $_SESSION["id_access_arti2"];           //Connexion entre FTA et ARTI2
-        mysql_table_operation("fta", "update");
+        $idFta = FtaModel::CreateFta($idUser, $idFtaEtat, $idFtaWorkflow, $designationCommercialeFta, date("Y-m-d"), $siteDeProduction);
 
-        //Création de la palette par défaut
-        $test = $_SESSION["id_fta"];
-        $_SESSION["id_annexe_emballage_groupe"] = 10;
-        $_SESSION["id_annexe_emballage_groupe_type"] = 4;
-        $_SESSION["quantite_par_couche_fta_conditionnement"] = 1;
-        $_SESSION["nombre_couche_fta_conditionnement"] = 1;
-        $_SESSION["poids_fta_conditionnement"] = 23000;
-        $_SESSION["dimension_uvc_fta_confitionnement"] = 0;
-        $_SESSION["longueur_fta_conditionnement"] = 1200;
-        $_SESSION["largeur_fta_conditionnement"] = 800;
-        $_SESSION["hauteur_fta_conditionnement"] = 150;
-        $_SESSION["id_annexe_emballage"] = 126;    //Correspond à la palette EUROPE
-        mysql_table_operation("fta_conditionnement", "insert");
+        DatabaseOperation::query(
+                "UPDATE " . FtaModel::TABLENAME
+                . " SET " . FtaModel::FIELDNAME_DOSSIER_FTA . "=" . $idFta
+                . " WHERE " . FtaModel::KEYNAME . "=" . $idFta
+        );
 
-        //Initialisation des notifications pour le suivi de projet
-//        $id_fta;
-//        $notification_fta_suivi_projet = 1;
-//
-//        //Chapitre Identité
-//        $id_fta_chapitre = 1;
-//        mysql_table_operation("fta_suivi_projet", "insert");
-//
-//        //Chapitre Logistique
-//        $id_fta_chapitre = 40;
-//        mysql_table_operation("fta_suivi_projet", "insert");
+
+        FtaSuiviProjetModel::initFtaSuiviProjet($idFta);
+
         //Cas d'une fiche Présentation
-        if ($_SESSION["abreviation_fta_etat"] == "P") {
+        if ($abreviationFtaEtat == "P") {
             //Condition where
             $where = "";
 
             //Récupération des chapitres concernés par ce cycle de vie
-            $req = "SELECT `id_etat_fta_processus_cycle`, `id_init_fta_processus`, `id_next_fta_processus` "
-                    . "FROM `fta_processus_cycle` "
-                    . "WHERE `id_etat_fta_processus_cycle` = '" . $_SESSION["abreviation_fta_etat"] . "' AND id_next_fta_processus IS NOT NULL"
-            ;
-            $result = DatabaseOperation::query($req);
-            while ($rows = mysql_fetch_array($result)) {
-                $where .= " AND fta_processus.id_fta_processus <> " . $rows["id_next_fta_processus"] . " ";
+            $arrayChapitreCycle = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
+                            "SELECT " . FtaProcessusCycleModel::FIELDNAME_FTA_ETAT
+                            . ", " . FtaProcessusCycleModel::FIELDNAME_PROCESSUS_INIT
+                            . ", " . FtaProcessusCycleModel::FIELDNAME_PROCESSUS_NEXT
+                            . " FROM " . FtaProcessusCycleModel::TABLENAME
+                            . " WHERE " . FtaProcessusCycleModel::FIELDNAME_FTA_ETAT . " = '" . $abreviationFtaEtat
+                            . "' AND " . FtaProcessusCycleModel::FIELDNAME_PROCESSUS_NEXT . " IS NOT NULL"
+            );
+
+            foreach ($arrayChapitreCycle as $rowsChapitreCycle) {
+                $where .= " AND " . FtaProcessusModel::TABLENAME . "." . FtaProcessusModel::KEYNAME . " <> " . $rowsChapitreCycle[FtaProcessusCycleModel::FIELDNAME_PROCESSUS_NEXT];
             }
 
             //Récupération des chapitres à vérrouiller
-            $req = "SELECT DISTINCT id_fta_chapitre "
-                    . "FROM `fta_processus`, `fta_chapitre` "
-                    . "WHERE ( `fta_processus`.`id_fta_processus` = `fta_chapitre`.`id_fta_processus` ) "
-                    . "AND ( ( fta_processus.id_fta_processus <>1 $where ) )"
-            ;
-            $result = DatabaseOperation::query($req);
-            while ($rows = mysql_fetch_array($result)) {
-                //Le suivi existe-il déjà ?
-                $req = "SELECT id_fta_suivi_projet FROM fta_suivi_projet "
-                        . "WHERE id_fta='" . $_SESSION["id_fta"] . "' AND id_fta_chapitre='" . $rows["id_fta_chapitre"] . "' "
-                ;
-                //echo "<br>".$req;
-                $result_existe = DatabaseOperation::query($req);
-                if (mysql_num_rows($result_existe)) {
-                    //Mise à jour de l'existant
-                    $id_fta_suivi_projet = mysql_result($result_existe, 0, "id_fta_suivi_projet");
-                    $rows["id_fta_chapitre"];
-                    $_SESSION["id_fta"];
-                    $req = "UPDATE fta_suivi_projet "
-                            . "SET signature_validation_suivi_projet='-1' "
-                            . "WHERE id_fta_suivi_projet='" . $_SESSION["id_fta_suivi_projet"] . "' "
-                    ;
-                    //echo "<br>".$req;
-                    DatabaseOperation::query($req);
-                } else {
+            $arrayChapitreVerrou = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
+                            "SELECT DISTINCT " . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_CHAPITRE
+                            . " FROM " . FtaProcessusModel::TABLENAME . ", " . FtaWorkflowStructureModel::TABLENAME
+                            . " WHERE ( " . FtaProcessusModel::TABLENAME . "." . FtaProcessusModel::KEYNAME
+                            . " = " . FtaWorkflowStructureModel::TABLENAME . "." . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_PROCESSUS . " ) "
+                            . " AND ( ( " . FtaProcessusModel::TABLENAME . "." . FtaProcessusModel::KEYNAME . " <>1 $where ) )"
+            );
 
+            foreach ($arrayChapitreVerrou as $rowsChapitreVerrou) {
+                //Le suivi existe-il déjà ?
+                $arrayFtaSuiviProjet = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
+                                "SELECT " . FtaSuiviProjetModel::KEYNAME
+                                . " FROM " . FtaSuiviProjetModel::TABLENAME
+                                . " WHERE " . FtaSuiviProjetModel::FIELDNAME_ID_FTA . "='" . $idFta
+                                . "' AND " . FtaSuiviProjetModel::FIELDNAME_ID_FTA_CHAPITRE . "='" . $rowsChapitreVerrou[FtaWorkflowStructureModel::FIELDNAME_ID_FTA_CHAPITRE] . "' "
+                );
+                if ($arrayFtaSuiviProjet) {
+                    //Mise à jour de l'existant
+                    foreach ($arrayFtaSuiviProjet as $rowsFtaSuiviProjet) {
+                        $idFtaSuiviProjet = $rowsFtaSuiviProjet[FtaSuiviProjetModel::KEYNAME];
+                        $req = "UPDATE " . FtaSuiviProjetModel::KEYNAME
+                                . " SET " . FtaSuiviProjetModel::FIELDNAME_SIGNATURE_VALIDATION_SUIVI_PROJET . "='-1' "
+                                . " WHERE " . FtaSuiviProjetModel::KEYNAME . "='" . $idFtaSuiviProjet . "' "
+                        ;
+                        DatabaseOperation::query($req);
+                    }
+                } else {
                     //Création des suivi
-                    $rows["id_fta_chapitre"];
-                    $id_fta;
-                    $req = "INSERT fta_suivi_projet "
-                            . "SET id_fta_chapitre='" . $rows["id_fta_chapitre"] . "', "
-                            . "id_fta='" . $_SESSION["id_fta"] . "', "
-                            . "signature_validation_suivi_projet='-1' "
+                    $req = "INSERT " . FtaSuiviProjetModel::TABLENAME
+                            . " SET " . FtaSuiviProjetModel::FIELDNAME_ID_FTA_CHAPITRE . "='" . $rowsChapitreVerrou[FtaWorkflowStructureModel::FIELDNAME_ID_FTA_CHAPITRE]
+                            . "', " . FtaSuiviProjetModel::FIELDNAME_ID_FTA . "='" . $idFta
+                            . "', " . FtaSuiviProjetModel::FIELDNAME_SIGNATURE_VALIDATION_SUIVI_PROJET . "='-1' "
                     ;
-                    //echo "<br>".$req;
                     DatabaseOperation::query($req);
                 }
             }
         }
 
         //Redirection
-        header("Location: modification_fiche.php?id_fta=" . $_SESSION["id_fta"] . "&synthese_action=modification");
+        header("Location: modification_fiche.php?id_fta=" . $idFta . "&synthese_action=encours&comeback=1&id_fta_etat=$idFtaEtat&abreviation_fta_etat=$abreviationFtaEtat&id_fta_role=$idFtaRole");
 
         break;
 
     case 2: //Duplication d'une Fiche Technique Article
         //Redirection
-        header("Location: duplication_fiche.php?id_fta=" . $_SESSION["id_fta"] . "&synthese_action=modification&abreviation_etat_destination=" . $_SESSION["abreviation_fta_etat"] . "&new_designation_commerciale_fta=" . $_SESSION["designation_commerciale_fta"] . " ");
+        header("Location: duplication_fiche.php?"
+                . "id_fta=" . $id_fta
+                . "&synthese_action=modification&abreviation_etat_destination=" . $abreviationFtaEtat
+                . "&new_designation_commerciale_fta=" . $designationCommercialeFta
+                . "&site_de_production=" . $siteDeProduction
+                . "&id_fta_role=" . $idFtaRole
+                . "&id_fta_workflow=" . $idFtaWorkflow);
 
         break;
 

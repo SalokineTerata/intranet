@@ -182,7 +182,7 @@ abstract class AbstractHtmlGlobalElement {
     }
 
     /**
-     * L'élément HTML sera représenté sous forme de formluaire.
+     * L'élément HTML sera représenté sous forme d'un tableau.
      * @return mixed
      */
     function setHtmlRenderToTable() {

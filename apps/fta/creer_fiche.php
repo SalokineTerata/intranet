@@ -56,7 +56,10 @@ $html_table = "table "                     //Permet d'harmoniser les tableaux
 /*
   Création des objets HTML (listes déroulante, cases à cocher ...etc.)
  */
-$id_fta = Lib::getParameterFromRequest("id_fta");
+$id_fta = Lib::getParameterFromRequest(FtaModel::KEYNAME);
+$idFtaRole = Lib::getParameterFromRequest(FtaRoleModel::KEYNAME);
+$globalConfig = new GlobalConfig();
+$idUser = $globalConfig->getAuthenticatedUser()->getKeyValue();
 $checked_vierge = "";
 $checked_duplicate = "";
 if ($id_fta) {
@@ -64,22 +67,21 @@ if ($id_fta) {
 } else {
     $checked_vierge = "checked";
 }
+$HtmlList = new HtmlListSelectTagName();
 
-//Catégorie de FTA
-$listCategorie = new HtmlListSelect(
-                $data_field = new DatabaseDescriptionField(
-                        $field_table = ObjectFta::TABLE_FTA_NAME,
-                        $field_name = "id_fta_categorie"
-                ),
-                $content_label_field = new DatabaseDescriptionField(
-                        $field_table = ObjectFta::TABLE_WORKFLOW_NAME,
-                        $field_name = "nom_fta_categorie"
-                ),
-                $default_value = 1,
-                $is_editable=true,
-                $warning_update = ${"diff_" . $table_name}[$field_name]
-);
-$htmlListCategorie = $listCategorie->getHtmlResult();
+/*
+ * Worflow de FTA
+ */
+$listeWorkflow = FtaWorkflowModel::ShowListeDeroulanteNomWorkflowByAcces($idUser,$HtmlList);
+
+
+
+/*
+ * Site de production FTA
+ */
+
+$listeSiteProduction = GeoModel::ShowListeDeroulanteSiteProdByAcces($idUser,$HtmlList);
+
 
 
 /* * *********
@@ -94,6 +96,7 @@ $htmlListCategorie = $listCategorie->getHtmlResult();
 echo "
      <form $method action=$page_action>
      <!input type=hidden name=action value=$action>
+     <input type=hidden name=id_fta_role value=$idFtaRole>
 
      <$html_table>
      <tr class=titre_principal><td>
@@ -130,8 +133,12 @@ echo "
              <tr class=contenu><td align=\"left\">
                  " . mysql_field_desc("fta", "designation_commerciale_fta") . ":</td><td><input type=\"text\" name=\"designation_commerciale_fta\" size=\"20\" />
              </td></tr>
-            $htmlListCategorie
-         </table>
+
+                    $listeWorkflow
+
+                    $listeSiteProduction
+
+</table>
 
 
      </td></tr>

@@ -508,7 +508,7 @@ class Navigation {
                 
             } else {
                 $menu_navigation .= "<a href=$page_default.php?id_fta=" . self::$id_fta . "&id_fta_chapitre_encours=$id_fta_chapitre&synthese_action=" . self::$synthese_action . "&id_fta_etat=" . self::$id_fta_etat
-                        . "&abrevation_fta_etat=" . self::$abrevation_etat
+                        . "&abreviation_fta_etat=" . self::$abrevation_etat
                         . "&comeback=" . self::$comeback
                         . "&id_fta_role=" . self::$id_fta_role . ">$b"
                         . $image1 . $nom_usuel_fta_chapitre . $image2

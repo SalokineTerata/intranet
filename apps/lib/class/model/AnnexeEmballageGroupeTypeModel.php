@@ -186,7 +186,7 @@ class AnnexeEmballageGroupeTypeModel extends AbstractModel {
                 . "&synthese_action=" . $paramSyntheseAction
                 . "&comeback=" . $paramComeback
                 . "&id_fta_etat=" . $paramIdFtaEtat
-                . "&abrevation_fta_etat=" . $paramAbreviationEtat
+                . "&abreviation_fta_etat=" . $paramAbreviationEtat
                 . "&id_fta_role=" . $paramIdFtaRole
         ;
     }
@@ -199,7 +199,7 @@ class AnnexeEmballageGroupeTypeModel extends AbstractModel {
                 . "&synthese_action=" . $paramSyntheseAction
                 . "&comeback=" . $paramComeback
                 . "&id_fta_etat=" . $paramIdFtaEtat
-                . "&abrevation_fta_etat=" . $paramAbreviationEtat
+                . "&abreviation_fta_etat=" . $paramAbreviationEtat
                 . "&id_fta_role=" . $paramIdFtaRole . "><img src=../lib/images/plus.png width=22  border=0 valign=middle halign=right />"
                 . "</a><br>";
     }

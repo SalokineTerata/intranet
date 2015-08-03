@@ -643,7 +643,7 @@ class AccueilFta {
                             . "&synthese_action=" . self::$syntheseAction
                             . "&comeback=1"
                             . "&id_fta_etat=" . self::$idFtaEtat
-                            . "&abrevation_fta_etat=" . self::$abrevationFtaEtat
+                            . "&abreviation_fta_etat=" . self::$abrevationFtaEtat
                             . "&id_fta_role=" . self::$idFtaRole
                             . " /><img src=../lib/images/next.png alt=\"\" title=\"Voir la FTA\" width=\"30\" height=\"25\" border=\"0\" />"
                             . "</a>"

@@ -63,7 +63,7 @@ switch ($action) {
                 . "&synthese_action=$syntheseAction"
                 . "&comeback=" . $comeback
                 . "&id_fta_etat=" . $idFtaEtat
-                . "&abrevation_fta_etat=" . $abreviationFtaEtat
+                . "&abreviation_fta_etat=" . $abreviationFtaEtat
                 . "&id_fta_role=" . $idFtaRole);
 
         break;
@@ -78,7 +78,7 @@ switch ($action) {
                 . "&synthese_action=$syntheseAction"
                 . "&comeback=" . $comeback
                 . "&id_fta_etat=" . $idFtaEtat
-                . "&abrevation_fta_etat=" . $abreviationFtaEtat
+                . "&abreviation_fta_etat=" . $abreviationFtaEtat
                 . "&id_fta_role=" . $idFtaRole);
 
         break;
@@ -112,7 +112,7 @@ switch ($action) {
 
 
 
-        header("Location: modification_fiche.php?id_fta=$idFta&id_fta_chapitre_encours=$idFtaChapitreEncours&synthese_action=encours&comeback=$comeback&id_fta_etat=$idFtaEtat&abrevation_fta_etat=$abreviationFtaEtat&id_fta_role=$idFtaRole");
+        header("Location: modification_fiche.php?id_fta=$idFta&id_fta_chapitre_encours=$idFtaChapitreEncours&synthese_action=encours&comeback=$comeback&id_fta_etat=$idFtaEtat&abreviation_fta_etat=$abreviationFtaEtat&id_fta_role=$idFtaRole");
         break;
 
 

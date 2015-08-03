@@ -125,6 +125,10 @@ class FtaView {
         );
     }
 
+    /**
+     * 
+     * @return type
+     */
     public function getHtmlUniteFacturationWithPoidsElementaire() {
 
         //Initialisation des variables locales
@@ -163,6 +167,10 @@ class FtaView {
         return $htmlReturn;
     }
 
+    /**
+     * 
+     * @return type
+     */
     public function getHtmlCreateurFta() {
 
         $htmlObject = new htmlInputText();
@@ -172,6 +180,10 @@ class FtaView {
         return $htmlObject->getHtmlResult();
     }
 
+    /**
+     * 
+     * @return type
+     */
     public function showDatesEcheanceProcessus() {
 
         //Variables locales
@@ -193,8 +205,23 @@ class FtaView {
         }
         return $blocEcheanceLignes;
     }
+    
+    public function ListeWorkflowByAcces($paramIdUser){
+        
+    }
 
-    public function getHtmlEmballageUVC($paramIdFta, $paramChapitre, $paramSyntheseAction,$paramComeback,$paramIdFtaEtat,$paramAbreviationEtat,$paramIdFtaRole) {
+    /**
+     * 
+     * @param type $paramIdFta
+     * @param type $paramChapitre
+     * @param type $paramSyntheseAction
+     * @param type $paramComeback
+     * @param type $paramIdFtaEtat
+     * @param type $paramAbreviationEtat
+     * @param type $paramIdFtaRole
+     * @return type
+     */
+    public function getHtmlEmballageUVC($paramIdFta, $paramChapitre, $paramSyntheseAction, $paramComeback, $paramIdFtaEtat, $paramAbreviationEtat, $paramIdFtaRole) {
         $annexeEmballageGroupeTypeModel = new AnnexeEmballageGroupeTypeModel(AccueilFta::VALUE_1);
 
         /*
@@ -247,8 +274,8 @@ class FtaView {
                 $htmlEmballageUVC = new HtmlSubForm_RNN($arrayFtaConditionnement, $className, $label, $tablesNameAndIdForeignKeyOfFtaConditionnement);
                 $htmlEmballageUVC->setIsEditable($this->getIsEditable());
                 $htmlEmballageUVC->setRightToAdd($rightToAdd);
-                $htmlEmballageUVC->setLienAjouter(AnnexeEmballageGroupeTypeModel::getAddLinkAfterConditionnement($paramIdFta, $paramChapitre, AccueilFta::VALUE_1, $paramSyntheseAction,$paramComeback,$paramIdFtaEtat,$paramAbreviationEtat,$paramIdFtaRole));
-                $htmlEmballageUVC->setLien(AnnexeEmballageGroupeTypeModel::getAddLinkBeforeConditionnement($paramIdFta, $paramChapitre, AccueilFta::VALUE_1, $paramSyntheseAction,$paramComeback,$paramIdFtaEtat,$paramAbreviationEtat,$paramIdFtaRole));
+                $htmlEmballageUVC->setLienAjouter(AnnexeEmballageGroupeTypeModel::getAddLinkAfterConditionnement($paramIdFta, $paramChapitre, AccueilFta::VALUE_1, $paramSyntheseAction, $paramComeback, $paramIdFtaEtat, $paramAbreviationEtat, $paramIdFtaRole));
+                $htmlEmballageUVC->setLien(AnnexeEmballageGroupeTypeModel::getAddLinkBeforeConditionnement($paramIdFta, $paramChapitre, AccueilFta::VALUE_1, $paramSyntheseAction, $paramComeback, $paramIdFtaEtat, $paramAbreviationEtat, $paramIdFtaRole));
                 $htmlEmballageUVC->setLienSuppression(AnnexeEmballageGroupeTypeModel::getDeleteLinkConditionnement($paramIdFta, $paramChapitre, $idFtaCondtionnement, $paramSyntheseAction));
 
                 $return .= $htmlEmballageUVC->getHtmlResult();
@@ -263,13 +290,24 @@ class FtaView {
             $htmlEmballageUVC = new HtmlSubForm_RNN($arrayFtaConditionnement, $className, $label, $tablesNameAndIdForeignKeyOfFtaConditionnement);
             $htmlEmballageUVC->setIsEditable($this->getIsEditable());
             $htmlEmballageUVC->setRightToAdd(TRUE);
-            $htmlEmballageUVC->setLien(AnnexeEmballageGroupeTypeModel::getAddLinkBeforeConditionnement($paramIdFta, $paramChapitre, AccueilFta::VALUE_1, $paramSyntheseAction,$paramComeback,$paramIdFtaEtat,$paramAbreviationEtat,$paramIdFtaRole));
+            $htmlEmballageUVC->setLien(AnnexeEmballageGroupeTypeModel::getAddLinkBeforeConditionnement($paramIdFta, $paramChapitre, AccueilFta::VALUE_1, $paramSyntheseAction, $paramComeback, $paramIdFtaEtat, $paramAbreviationEtat, $paramIdFtaRole));
             $return .= $htmlEmballageUVC->getHtmlResult();
         }
         return $return;
     }
 
-    public function getHtmlEmballageParColis($paramIdFta, $paramChapitre, $paramSyntheseAction,$paramComeback,$paramIdFtaEtat,$paramAbreviationEtat,$paramIdFtaRole) {
+    /**
+     * 
+     * @param type $paramIdFta
+     * @param type $paramChapitre
+     * @param type $paramSyntheseAction
+     * @param type $paramComeback
+     * @param type $paramIdFtaEtat
+     * @param type $paramAbreviationEtat
+     * @param type $paramIdFtaRole
+     * @return type
+     */
+    public function getHtmlEmballageParColis($paramIdFta, $paramChapitre, $paramSyntheseAction, $paramComeback, $paramIdFtaEtat, $paramAbreviationEtat, $paramIdFtaRole) {
         $annexeEmballageGroupeTypeModel = new AnnexeEmballageGroupeTypeModel(AccueilFta::VALUE_2);
         /*
          * Récuperation des élements clé de la table fta_conditionnement
@@ -319,8 +357,8 @@ class FtaView {
                 $htmlEmballageParColis = new HtmlSubForm_RNN($arrayFtaConditionnement, $className, $label, $tablesNameAndIdForeignKeyOfFtaConditionnement);
                 $htmlEmballageParColis->setIsEditable($this->getIsEditable());
                 $htmlEmballageParColis->setRightToAdd($rightToAdd);
-                $htmlEmballageParColis->setLienAjouter(AnnexeEmballageGroupeTypeModel::getAddLinkAfterConditionnement($paramIdFta, $paramChapitre, AccueilFta::VALUE_2, $paramSyntheseAction,$paramComeback,$paramIdFtaEtat,$paramAbreviationEtat,$paramIdFtaRole));
-                $htmlEmballageParColis->setLien(AnnexeEmballageGroupeTypeModel::getAddLinkBeforeConditionnement($paramIdFta, $paramChapitre, AccueilFta::VALUE_2, $paramSyntheseAction,$paramComeback,$paramIdFtaEtat,$paramAbreviationEtat,$paramIdFtaRole));
+                $htmlEmballageParColis->setLienAjouter(AnnexeEmballageGroupeTypeModel::getAddLinkAfterConditionnement($paramIdFta, $paramChapitre, AccueilFta::VALUE_2, $paramSyntheseAction, $paramComeback, $paramIdFtaEtat, $paramAbreviationEtat, $paramIdFtaRole));
+                $htmlEmballageParColis->setLien(AnnexeEmballageGroupeTypeModel::getAddLinkBeforeConditionnement($paramIdFta, $paramChapitre, AccueilFta::VALUE_2, $paramSyntheseAction, $paramComeback, $paramIdFtaEtat, $paramAbreviationEtat, $paramIdFtaRole));
                 $htmlEmballageParColis->setLienSuppression(AnnexeEmballageGroupeTypeModel::getDeleteLinkConditionnement($paramIdFta, $paramChapitre, $idFtaCondtionnement, $paramSyntheseAction));
                 $return .= $htmlEmballageParColis->getHtmlResult();
             }
@@ -334,13 +372,24 @@ class FtaView {
             $htmlEmballageParColis = new HtmlSubForm_RNN($arrayFtaConditionnement, $className, $label, $tablesNameAndIdForeignKeyOfFtaConditionnement);
             $htmlEmballageParColis->setIsEditable($this->getIsEditable());
             $htmlEmballageParColis->setRightToAdd(TRUE);
-            $htmlEmballageParColis->setLien(AnnexeEmballageGroupeTypeModel::getAddLinkBeforeConditionnement($paramIdFta, $paramChapitre, AccueilFta::VALUE_2, $paramSyntheseAction,$paramComeback,$paramIdFtaEtat,$paramAbreviationEtat,$paramIdFtaRole));
+            $htmlEmballageParColis->setLien(AnnexeEmballageGroupeTypeModel::getAddLinkBeforeConditionnement($paramIdFta, $paramChapitre, AccueilFta::VALUE_2, $paramSyntheseAction, $paramComeback, $paramIdFtaEtat, $paramAbreviationEtat, $paramIdFtaRole));
             $return .= $htmlEmballageParColis->getHtmlResult();
         }
         return $return;
     }
 
-    public function getHtmlEmballageDuColis($paramIdFta, $paramChapitre, $paramSyntheseAction,$paramComeback,$paramIdFtaEtat,$paramAbreviationEtat,$paramIdFtaRole) {
+    /**
+     * 
+     * @param type $paramIdFta
+     * @param type $paramChapitre
+     * @param type $paramSyntheseAction
+     * @param type $paramComeback
+     * @param type $paramIdFtaEtat
+     * @param type $paramAbreviationEtat
+     * @param type $paramIdFtaRole
+     * @return type
+     */
+    public function getHtmlEmballageDuColis($paramIdFta, $paramChapitre, $paramSyntheseAction, $paramComeback, $paramIdFtaEtat, $paramAbreviationEtat, $paramIdFtaRole) {
         $annexeEmballageGroupeTypeModel = new AnnexeEmballageGroupeTypeModel(AccueilFta::VALUE_3);
 
         /*
@@ -391,8 +440,8 @@ class FtaView {
                 $htmlEmballageDuColis = new HtmlSubForm_RNN($arrayFtaConditionnement, $className, $label, $tablesNameAndIdForeignKeyOfFtaConditionnement);
                 $htmlEmballageDuColis->setIsEditable($this->getIsEditable());
                 $htmlEmballageDuColis->setRightToAdd($rightToAdd);
-                $htmlEmballageDuColis->setLienAjouter(AnnexeEmballageGroupeTypeModel::getAddLinkAfterConditionnement($paramIdFta, $paramChapitre, AccueilFta::VALUE_3, $paramSyntheseAction,$paramComeback,$paramIdFtaEtat,$paramAbreviationEtat,$paramIdFtaRole));
-                $htmlEmballageDuColis->setLien(AnnexeEmballageGroupeTypeModel::getAddLinkBeforeConditionnement($paramIdFta, $paramChapitre, AccueilFta::VALUE_3, $paramSyntheseAction,$paramComeback,$paramIdFtaEtat,$paramAbreviationEtat,$paramIdFtaRole));
+                $htmlEmballageDuColis->setLienAjouter(AnnexeEmballageGroupeTypeModel::getAddLinkAfterConditionnement($paramIdFta, $paramChapitre, AccueilFta::VALUE_3, $paramSyntheseAction, $paramComeback, $paramIdFtaEtat, $paramAbreviationEtat, $paramIdFtaRole));
+                $htmlEmballageDuColis->setLien(AnnexeEmballageGroupeTypeModel::getAddLinkBeforeConditionnement($paramIdFta, $paramChapitre, AccueilFta::VALUE_3, $paramSyntheseAction, $paramComeback, $paramIdFtaEtat, $paramAbreviationEtat, $paramIdFtaRole));
                 $htmlEmballageDuColis->setLienSuppression(AnnexeEmballageGroupeTypeModel::getDeleteLinkConditionnement($paramIdFta, $paramChapitre, $idFtaCondtionnement, $paramSyntheseAction));
 
                 $return .= $htmlEmballageDuColis->getHtmlResult();
@@ -407,13 +456,24 @@ class FtaView {
             $htmlEmballageDuColis = new HtmlSubForm_RNN($arrayFtaConditionnement, $className, $label, $tablesNameAndIdForeignKeyOfFtaConditionnement);
             $htmlEmballageDuColis->setIsEditable($this->getIsEditable());
             $htmlEmballageDuColis->setRightToAdd(TRUE);
-            $htmlEmballageDuColis->setLien(AnnexeEmballageGroupeTypeModel::getAddLinkBeforeConditionnement($paramIdFta, $paramChapitre, AccueilFta::VALUE_3, $paramSyntheseAction,$paramComeback,$paramIdFtaEtat,$paramAbreviationEtat,$paramIdFtaRole));
+            $htmlEmballageDuColis->setLien(AnnexeEmballageGroupeTypeModel::getAddLinkBeforeConditionnement($paramIdFta, $paramChapitre, AccueilFta::VALUE_3, $paramSyntheseAction, $paramComeback, $paramIdFtaEtat, $paramAbreviationEtat, $paramIdFtaRole));
             $return .= $htmlEmballageDuColis->getHtmlResult();
         }
         return $return;
     }
 
-    public function getHtmlEmballagePalette($paramIdFta, $paramChapitre, $paramSyntheseAction,$paramComeback,$paramIdFtaEtat,$paramAbreviationEtat,$paramIdFtaRole) {
+    /**
+     * 
+     * @param type $paramIdFta
+     * @param type $paramChapitre
+     * @param type $paramSyntheseAction
+     * @param type $paramComeback
+     * @param type $paramIdFtaEtat
+     * @param type $paramAbreviationEtat
+     * @param type $paramIdFtaRole
+     * @return type
+     */
+    public function getHtmlEmballagePalette($paramIdFta, $paramChapitre, $paramSyntheseAction, $paramComeback, $paramIdFtaEtat, $paramAbreviationEtat, $paramIdFtaRole) {
         $annexeEmballageGroupeTypeModel = new AnnexeEmballageGroupeTypeModel();
         /*
          * Récuperation des élements clé de la table fta_conditionnement
@@ -466,8 +526,8 @@ class FtaView {
                 $htmlEmballagePalette = new HtmlSubForm_RNN($arrayFtaConditionnement, $className, $label, $tablesNameAndIdForeignKeyOfFtaConditionnement);
                 $htmlEmballagePalette->setIsEditable($this->getIsEditable());
                 $htmlEmballagePalette->setRightToAdd($rightToAdd);
-                $htmlEmballagePalette->setLienAjouter(AnnexeEmballageGroupeTypeModel::getAddLinkAfterConditionnement($paramIdFta, $paramChapitre, AccueilFta::VALUE_4, $paramSyntheseAction,$paramComeback,$paramIdFtaEtat,$paramAbreviationEtat,$paramIdFtaRole));
-                $htmlEmballagePalette->setLien(AnnexeEmballageGroupeTypeModel::getAddLinkBeforeConditionnement($paramIdFta, $paramChapitre, AccueilFta::VALUE_4, $paramSyntheseAction,$paramComeback,$paramIdFtaEtat,$paramAbreviationEtat,$paramIdFtaRole));
+                $htmlEmballagePalette->setLienAjouter(AnnexeEmballageGroupeTypeModel::getAddLinkAfterConditionnement($paramIdFta, $paramChapitre, AccueilFta::VALUE_4, $paramSyntheseAction, $paramComeback, $paramIdFtaEtat, $paramAbreviationEtat, $paramIdFtaRole));
+                $htmlEmballagePalette->setLien(AnnexeEmballageGroupeTypeModel::getAddLinkBeforeConditionnement($paramIdFta, $paramChapitre, AccueilFta::VALUE_4, $paramSyntheseAction, $paramComeback, $paramIdFtaEtat, $paramAbreviationEtat, $paramIdFtaRole));
                 $htmlEmballagePalette->setLienSuppression(AnnexeEmballageGroupeTypeModel::getDeleteLinkConditionnement($paramIdFta, $paramChapitre, $idFtaCondtionnement, $paramSyntheseAction));
                 $return .= $htmlEmballagePalette->getHtmlResult();
             }
@@ -481,12 +541,16 @@ class FtaView {
             $htmlEmballagePalette = new HtmlSubForm_RNN($arrayFtaConditionnement, $className, $label, $tablesNameAndIdForeignKeyOfFtaConditionnement);
             $htmlEmballagePalette->setIsEditable($this->getIsEditable());
             $htmlEmballagePalette->setRightToAdd(TRUE);
-            $htmlEmballagePalette->setLien(AnnexeEmballageGroupeTypeModel::getAddLinkBeforeConditionnement($paramIdFta, $paramChapitre, AccueilFta::VALUE_4, $paramSyntheseAction,$paramComeback,$paramIdFtaEtat,$paramAbreviationEtat,$paramIdFtaRole));
+            $htmlEmballagePalette->setLien(AnnexeEmballageGroupeTypeModel::getAddLinkBeforeConditionnement($paramIdFta, $paramChapitre, AccueilFta::VALUE_4, $paramSyntheseAction, $paramComeback, $paramIdFtaEtat, $paramAbreviationEtat, $paramIdFtaRole));
             $return .= $htmlEmballagePalette->getHtmlResult();
         }
         return $return;
     }
 
+    /**
+     * 
+     * @return type
+     */
     public function getHtmlCommentaireChapitre() {
         $return = NULL;
 
@@ -506,6 +570,10 @@ class FtaView {
         return $return;
     }
 
+    /**
+     * 
+     * @return type
+     */
     public function getHtmlCorrectionChapitre() {
         $return = NULL;
 
@@ -526,6 +594,10 @@ class FtaView {
         return $return;
     }
 
+    /**
+     * 
+     * @return \FtaSuiviProjetModel
+     */
     function getFtaSuiviProjetModel() {
 
         $idFtaChapitre = $this->getFtaChapitreModel()->getKeyValue();
@@ -537,6 +609,10 @@ class FtaView {
         return $ftaSuiviProjetModel;
     }
 
+    /**
+     * 
+     * @return type
+     */
     function getHtmlCNUDPreparerPar() {
 
         return Html::convertDataFieldToHtml(
@@ -545,6 +621,10 @@ class FtaView {
         );
     }
 
+    /**
+     * 
+     * @return type
+     */
     function getHtmlSiteAgrement() {
 
         return Html::convertDataFieldToHtml(
@@ -568,6 +648,10 @@ class FtaView {
         }
     }
 
+    /**
+     * 
+     * @return type
+     */
     function getHtmlPoidsEmballageUVC() {
 
         $return = $this->getModel()->buildArrayEmballageTypeUVC();
@@ -580,6 +664,10 @@ class FtaView {
         return $htmlPoidsUVC->getHtmlResult();
     }
 
+    /**
+     * 
+     * @return type
+     */
     function getHtmlPoidsNetEmballageUVC() {
 
         $return = $this->getModel()->buildArrayEmballageTypeUVC();
@@ -593,6 +681,10 @@ class FtaView {
         return $htmlPoidsNetUVC->getHtmlResult();
     }
 
+    /**
+     * 
+     * @return type
+     */
     function getHtmlPoidsBrutEmballageUVC() {
 
         $return = $this->getModel()->buildArrayEmballageTypeUVC();
@@ -606,6 +698,10 @@ class FtaView {
         return $htmlPoidsBrutUVC->getHtmlResult();
     }
 
+    /**
+     * 
+     * @return type
+     */
     function getHtmlDimensionEmballageUVC() {
 
         $return = $this->getModel()->buildArrayEmballageTypeUVC();
@@ -620,6 +716,10 @@ class FtaView {
         return $htmlDimensionUVC->getHtmlResult();
     }
 
+    /**
+     * 
+     * @return type
+     */
     function getHtmlNombreColisUVC() {
 
         $return = $this->getModel()->buildArrayEmballageTypeDuColis();
@@ -633,6 +733,10 @@ class FtaView {
         return $htmlNombreColisUVC->getHtmlResult();
     }
 
+    /**
+     * 
+     * @return type
+     */
     function getHtmlPoidsColisUVC() {
 
         $return = $this->getModel()->buildArrayEmballageTypeDuColis();
@@ -646,6 +750,10 @@ class FtaView {
         return $htmlPoidColisUVC->getHtmlResult();
     }
 
+    /**
+     * 
+     * @return type
+     */
     function getHtmlPoidsNetColisUVC() {
 
         $return = $this->getModel()->buildArrayEmballageTypeDuColis();
@@ -659,6 +767,10 @@ class FtaView {
         return $htmlPoidsNetColisUVC->getHtmlResult();
     }
 
+    /**
+     * 
+     * @return type
+     */
     function getHtmlPoidsBrutColisUVC() {
 
         $return = $this->getModel()->buildArrayEmballageTypeDuColis();
@@ -672,6 +784,10 @@ class FtaView {
         return $htmlPoidsBrutColisUVC->getHtmlResult();
     }
 
+    /**
+     * 
+     * @return type
+     */
     function getHtmlHauteurColisUVC() {
 
         $return = $this->getModel()->buildArrayEmballageTypeDuColis();
@@ -685,6 +801,10 @@ class FtaView {
         return $htmlHauteurColisUVC->getHtmlResult();
     }
 
+    /**
+     * 
+     * @return type
+     */
     function getHtmlPoidsNetPaletteUVC() {
 
         //Calcul du poids de Emballages par Palette
@@ -700,6 +820,10 @@ class FtaView {
         return $htmlPoidsNetPalettisationUVC->getHtmlResult();
     }
 
+    /**
+     * 
+     * @return type
+     */
     function getHtmlPoidsBrutPaletteUVC() {
 
         $return = $this->getModel()->buildArrayEmballageTypePalette();
@@ -713,6 +837,10 @@ class FtaView {
         return $htmlPoidsBrutPalettisationUVC->getHtmlResult();
     }
 
+    /**
+     * 
+     * @return type
+     */
     function getHtmlHauteurPaletteUVC() {
 
         $return = $this->getModel()->buildArrayEmballageTypePalette();
@@ -726,6 +854,10 @@ class FtaView {
         return $htmlHauteurPalettisationUVC->getHtmlResult();
     }
 
+    /**
+     * 
+     * @return type
+     */
     function getHtmlNombrePaletteUVC() {
 
         $return = $this->getModel()->buildArrayEmballageTypePalette();
@@ -739,6 +871,10 @@ class FtaView {
         return $htmlCouchePalettisationUVC->getHtmlResult();
     }
 
+    /**
+     * 
+     * @return type
+     */
     function getHtmlColisCouchePaletteUVC() {
 
         $return = $this->getModel()->buildArrayEmballageTypePalette();
@@ -752,6 +888,10 @@ class FtaView {
         return $htmlColisCouchePalettisationUVC->getHtmlResult();
     }
 
+    /**
+     * 
+     * @return type
+     */
     function getHtmlColisTotalUVC() {
 
         $return = $this->getModel()->buildArrayEmballageTypePalette();

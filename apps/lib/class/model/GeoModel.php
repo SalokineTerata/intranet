@@ -36,30 +36,37 @@ class GeoModel extends AbstractModel {
         parent::__construct($paramId, $paramIsCreateRecordsetInDatabaseIfKeyDoesntExist);
     }
 
-    public static function ShowListeDeroulanteSiteProdByAcces($paramIdUser) {
-        $requete = "SELECT DISTINCT " . GeoModel::KEYNAME . "," . GeoModel::FIELDNAME_GEO
-                . " FROM " . GeoModel::TABLENAME
-                . ", " . FtaActionSiteModel::TABLENAME
-                . ", " . IntranetActionsModel::TABLENAME
-                . ", " . IntranetDroitsAccesModel::TABLENAME
-                . " WHERE " . GeoModel::FIELDNAME_GEO . "<>''"
-                . " AND " . FtaActionSiteModel::TABLENAME . "." . FtaActionSiteModel::FIELDNAME_ID_SITE . "=" . GeoModel::KEYNAME
-                . " AND " . IntranetActionsModel::TABLENAME . "." . IntranetActionsModel::KEYNAME
-                . " AND " . FtaActionSiteModel::TABLENAME . "." . FtaActionSiteModel::FIELDNAME_ID_INTRANET_ACTIONS
-                . "=" . IntranetActionsModel::TABLENAME . "." . IntranetActionsModel::KEYNAME
-                . " AND " . IntranetActionsModel::TABLENAME . "." . IntranetActionsModel::KEYNAME
-                . "=" . IntranetDroitsAccesModel::TABLENAME . "." . IntranetDroitsAccesModel::FIELDNAME_ID_INTRANET_ACTIONS
-                . " AND " . IntranetDroitsAccesModel::FIELDNAME_ID_USER . "=" . $paramIdUser // L'utilisateur connecté
-                . " AND " . IntranetDroitsAccesModel::TABLENAME . "." . IntranetDroitsAccesModel::FIELDNAME_NIVEAU_INTRANET_DROITS_ACCES . "=1"
-                . " ORDER BY " . GeoModel::FIELDNAME_GEO
-        ;
-        $nom_defaut = GeoModel::KEYNAME;
-        $id_defaut = GeoModel::KEYNAME;
-        $listSiteProduction = DatabaseDescription::getFieldDocLabel(GeoModel::TABLENAME, GeoModel::FIELDNAME_GEO)
-                . "</td><td>"
-                . AccueilFta::afficherRequeteEnListeDeroulante($requete, $id_defaut, $nom_defaut);
-        
-        return $listSiteProduction;
+    /**
+     * 
+     * @param type $paramIdUser
+     * @param type $paramObjet
+     * @return types
+     */
+    public static function ShowListeDeroulanteSiteProdByAcces($paramIdUser, $paramObjet) {
+        $arraySite = DatabaseOperation::convertSqlQueryWithKeyAsFirstFieldToArray(
+                        "SELECT DISTINCT " . GeoModel::KEYNAME . "," . GeoModel::FIELDNAME_GEO
+                        . " FROM " . GeoModel::TABLENAME
+                        . ", " . FtaActionSiteModel::TABLENAME
+                        . ", " . IntranetActionsModel::TABLENAME
+                        . ", " . IntranetDroitsAccesModel::TABLENAME
+                        . " WHERE " . GeoModel::FIELDNAME_GEO . "<>''"
+                        . " AND " . FtaActionSiteModel::TABLENAME . "." . FtaActionSiteModel::FIELDNAME_ID_SITE . "=" . GeoModel::KEYNAME
+                        . " AND " . IntranetActionsModel::TABLENAME . "." . IntranetActionsModel::KEYNAME
+                        . " AND " . FtaActionSiteModel::TABLENAME . "." . FtaActionSiteModel::FIELDNAME_ID_INTRANET_ACTIONS
+                        . "=" . IntranetActionsModel::TABLENAME . "." . IntranetActionsModel::KEYNAME
+                        . " AND " . IntranetActionsModel::TABLENAME . "." . IntranetActionsModel::KEYNAME
+                        . "=" . IntranetDroitsAccesModel::TABLENAME . "." . IntranetDroitsAccesModel::FIELDNAME_ID_INTRANET_ACTIONS
+                        . " AND " . IntranetDroitsAccesModel::FIELDNAME_ID_USER . "=" . $paramIdUser // L'utilisateur connecté
+                        . " AND " . IntranetDroitsAccesModel::TABLENAME . "." . IntranetDroitsAccesModel::FIELDNAME_NIVEAU_INTRANET_DROITS_ACCES . "=1"
+                        . " ORDER BY " . GeoModel::FIELDNAME_GEO
+        );
+        $paramObjet->setArrayListContent($arraySite);
+        $paramObjet->getAttributes()->getName()->setValue(GeoModel::KEYNAME);
+        $paramObjet->setLabel(DatabaseDescription::getFieldDocLabel(GeoModel::TABLENAME, GeoModel::FIELDNAME_GEO));
+        $paramObjet->setIsEditable(TRUE);
+        $listeSiteProduction = $paramObjet->getHtmlResult();
+
+        return $listeSiteProduction;
     }
 
 }

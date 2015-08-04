@@ -72,7 +72,7 @@ $HtmlList = new HtmlListSelectTagName();
 /*
  * Worflow de FTA
  */
-$listeWorkflow = FtaWorkflowModel::ShowListeDeroulanteNomWorkflowByAcces($idUser,$HtmlList);
+$listeWorkflow = FtaWorkflowModel::ShowListeDeroulanteNomWorkflowByAcces($idUser,$HtmlList,TRUE);
 
 
 
@@ -80,7 +80,7 @@ $listeWorkflow = FtaWorkflowModel::ShowListeDeroulanteNomWorkflowByAcces($idUser
  * Site de production FTA
  */
 
-$listeSiteProduction = GeoModel::ShowListeDeroulanteSiteProdByAcces($idUser,$HtmlList);
+$listeSiteProduction = GeoModel::ShowListeDeroulanteSiteProdByAcces($idUser,$HtmlList,TRUE);
 
 
 

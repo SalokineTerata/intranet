@@ -726,7 +726,7 @@ class Chapitre {
         $ftaView->setFtaChapitreModelById(self::ID_CHAPITRE_IDENTITE);
 
         //Site d'assemblage
-        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_SITE_ASSEMBLAGE);
+        $bloc.=$ftaView->ListeSiteByAcces(self::$idUser,$isEditable,$id_fta);
 
         return $bloc;
     }
@@ -1978,7 +1978,7 @@ class Chapitre {
         $bloc.=$ftaView->getHtmlCreateurFta();
 
         //Workflow de FTA
-        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_WORKFLOW);
+        $bloc.=$ftaView->ListeWorkflowByAcces(self::$idUser,$isEditable,$id_fta);
         
         //Date d'échéance de la FTA
         $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_DATE_ECHEANCE_FTA);

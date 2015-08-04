@@ -205,9 +205,37 @@ class FtaView {
         }
         return $blocEcheanceLignes;
     }
-    
-    public function ListeWorkflowByAcces($paramIdUser){
-        
+
+    /**
+     * Affiche la liste des espaces de travail pour lesquel l'utilisateur connecté à les droits d'accès
+     * @param type $paramIdUser
+     * @param type $paramIsEditable
+     * @param type $paramIdFta
+     * @return type
+     */
+    public function ListeWorkflowByAcces($paramIdUser, $paramIsEditable, $paramIdFta) {
+        $HtmlList = new HtmlListSelect();
+
+        /*
+         * Worflow de FTA
+         */
+        return FtaWorkflowModel::ShowListeDeroulanteNomWorkflowByAccesAndIdFta($paramIdUser, $HtmlList, $paramIsEditable, $paramIdFta);
+    }
+
+    /**
+     * Affiche la liste des site de production pour lesquel l'utilisateur connecté à les droits d'accès
+     * @param type $paramIdUser
+     * @param type $paramIsEditable
+     * @param type $paramIdFta
+     * @return type
+     */
+    public function ListeSiteByAcces($paramIdUser, $paramIsEditable, $paramIdFta) {
+        $HtmlList = new HtmlListSelect();
+
+        /*
+         * Site de production FTA
+         */
+        return GeoModel::ShowListeDeroulanteSiteProdByAccesAndIdFta($paramIdUser, $HtmlList, $paramIsEditable, $paramIdFta);
     }
 
     /**

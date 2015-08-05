@@ -68,7 +68,7 @@ class GlobalConfig {
 
             if ($_SESSION[self::VARNAME_GLOBALCONFIG_IN_PHP_SESSION]->getAuthenticatedUser() == NULL) {
 
-                $this->setAuthenticatedUser(new UserModel);
+//                $this->setAuthenticatedUser(new UserModel);
             } else {
                 $this->setAuthenticatedUser($_SESSION[self::VARNAME_GLOBALCONFIG_IN_PHP_SESSION]->getAuthenticatedUser());
             }

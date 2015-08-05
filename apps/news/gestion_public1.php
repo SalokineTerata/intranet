@@ -9,7 +9,7 @@
 // Pour la modification on efface toutes les lignes existantes
 // dans la table DIFFUSION et on reinsere les nouvelles lignes
 
-    $req="delete from publicateur where id_user='$sal_user'";
+    $req="delete from publicateur where id_user='$idUser'";
     $result=DatabaseOperation::query($req);
 
 // traitement des valeurs recupérées
@@ -29,7 +29,7 @@
           if ($id_servicete==$numser)
           {
 // Insertion dans la table PUBLICATEUR
-            $req2="insert into publicateur values ('$sal_user', '$numser', '$admin')";
+            $req2="insert into publicateur values ('$idUser', '$numser', '$admin')";
             $result2=DatabaseOperation::query($req2);
           }
       $i++;

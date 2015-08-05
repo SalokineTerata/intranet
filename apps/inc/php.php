@@ -44,8 +44,9 @@ require_once("../fta/class/Chapitre.php");
 require_once("../fta/class/Navigation.php");
 require_once("../fta/class/ObjectFta.php");
 
-// Fta View
+// View
 require_once("../fta/class/view/FtaView.php");
+require_once("../fta/class/view/UserView.php");
 require_once("../fta/class/view/FtaProcessusDelaiView.php");
 require_once("../fta/class/ObjectFta.php");
 
@@ -67,10 +68,12 @@ require_once("../lib/class/model/AnnexeAgrologicArticleCodificationModel.php");
 require_once("../lib/class/model/AnnexeEmballageModel.php");
 require_once("../lib/class/model/AnnexeEmballageGroupeModel.php");
 require_once("../lib/class/model/AnnexeEmballageGroupeTypeModel.php");
+require_once("../lib/class/model/CatsoproModel.php");
 require_once("../lib/class/model/ClassificationArborescenceArticleCategorieContenuModel.php");
 require_once("../lib/class/model/ClassificationArborescenceArticleCategorieModel.php");
 require_once("../lib/class/model/ClassificationArborescenceArticleModel.php");
 require_once("../lib/class/model/ClassificationFtaModel.php");
+require_once("../lib/class/model/DroitftModel.php");
 require_once("../lib/class/model/UserModel.php");
 require_once("../lib/class/model/FtaActionRoleModel.php");
 require_once("../lib/class/model/FtaActionSiteModel.php");
@@ -93,6 +96,9 @@ require_once("../lib/class/model/GeoModel.php");
 require_once("../lib/class/model/IntranetActionsModel.php");
 require_once("../lib/class/model/IntranetDroitsAccesModel.php");
 require_once("../lib/class/model/IntranetModulesModel.php");
+require_once("../lib/class/model/ModesModel.php");
+require_once("../lib/class/model/ServicesModel.php");
+require_once("../lib/class/model/TypeModel.php");
 
 // Standard HTML
 require_once("../lib/class/html/Html.php");

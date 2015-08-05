@@ -13,10 +13,16 @@ class UserModel extends AbstractModel {
     const FIELDNAME_ACTIF = "actif";
     const FIELDNAME_NOM = "nom";
     const FIELDNAME_PRENOM = "prenom";
+    const FIELDNAME_ID_CATSOPRO = "id_catsopro";
     const FIELDNAME_ID_SERVICE = "id_service";
+    const FIELDNAME_ID_TYPE = "id_type";
     const FIELDNAME_LOGIN = "login";
     const FIELDNAME_PASSWORD = "pass";
     const FIELDNAME_MAIL = "mail";
+    const FIELDNAME_ECRITURE = "ecriture";
+    const FIELDNAME_MEMBRE_CE = "membre_ce";
+    const FIELDNAME_NEWSDEFIL = "newsdefil";
+    const FIELDNAME_BLOCAGE = "blocage";
     const FIELDNAME_DATE_CREATION_SALARIES = "date_creation_salaries";
     const FIELDNAME_ASENDANT_ID_SALARIES = "ascendant_id_salaries";
     const FIELDNAME_PORTAIL_WIKI_SALARIES = "portail_wiki_salaries";
@@ -73,9 +79,9 @@ class UserModel extends AbstractModel {
                     . " AND " . FtaWorkflowModel::TABLENAME . "." . FtaWorkflowModel::KEYNAME
                     . "=" . FtaModel::TABLENAME . "." . FtaModel::FIELDNAME_WORKFLOW
                     . " ORDER BY " . FtaModel::TABLENAME . "." . FtaModel::FIELDNAME_WORKFLOW
-                     . "," . UserModel::FIELDNAME_PRENOM . " ASC"
                     . "," . $paramOrderBy
-                    . "," . FtaModel::FIELDNAME_DATE_ECHEANCE_FTA                   
+                    . "," . UserModel::FIELDNAME_PRENOM . " ASC"
+                    . "," . FtaModel::FIELDNAME_DATE_ECHEANCE_FTA
             ;
 
 

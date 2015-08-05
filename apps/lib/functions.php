@@ -153,7 +153,7 @@ function identification1($mysql_table_authentification, $login, $pass, GlobalCon
     $return = TRUE;         //On part du principe que l'authentification doit fonctionner
     $mysql_passwd = "";     //On part du principe que l'authentification MySQL ne sera pas nécessaire.
     if ($globalConfig == null) {
-        $globalConfig = $_SESSION["globalConfig"];
+        $globalConfig = new GlobalConfig();
     }
     $ldap_active = $globalConfig->getConf()->getLdapServiceEnable();
     $ldap_server = $globalConfig->getConf()->getLdapServerName();
@@ -910,12 +910,14 @@ function jointure($champ_sel, $url_page_depart, $module) {
   ----------------------------- */
 
 function timeout($id_user) {
-//$requete = DatabaseOperation::query("select * from perso where id_user = $id_user");
-//$rows = mysql_fetch_array($requete);
-//$time = $rows[timeout] * 60;
-//if (!$time){$time = 900;}
-//return ($time);
-    return 900;
+    $requete = DatabaseOperation::query("select * from perso where id_user = $id_user");
+    $rows = mysql_fetch_array($requete);
+    $time = $rows[timeout] * 60;
+    if (!$time) {
+        $time = 900;
+    }
+
+    return ($time);
 }
 
 /*
@@ -1342,9 +1344,12 @@ function arborescence_construction($table, $champ_valeur, $champ_id_fils, $champ
     //Configuration du tri de l'arborescence
     switch ($extension[2]) {
 
-        case 0  :   $tri = $champ_valeur;  break;
-        case 1  :   $tri = $champ_id_fils; break;
-        case 2  :   $tri = $champ_id_pere; break;
+        case 0 : $tri = $champ_valeur;
+            break;
+        case 1 : $tri = $champ_id_fils;
+            break;
+        case 2 : $tri = $champ_id_pere;
+            break;
     }
 
 

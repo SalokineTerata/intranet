@@ -3,6 +3,11 @@
 //  include("functions.php");
 //  include("../lib/functions.php");
       require_once '../inc/main.php';
+$globalConfig = new GlobalConfig();
+$login = $globalConfig->getAuthenticatedUser()->getKeyValue();
+$id_user = $globalConfig->getAuthenticatedUser()->getKeyValue();
+$pass = $globalConfig->getAuthenticatedUser()->getDataField(UserModel::FIELDNAME_PASSWORD)->getFieldValue();
+$id_type = $globalConfig->getAuthenticatedUser()->getDataField(UserModel::FIELDNAME_ID_TYPE)->getFieldValue();
 
 identification1("salaries", $login, $pass);
 

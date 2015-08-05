@@ -6,14 +6,14 @@ require_once '../inc/main.php';
   securadmin(4, $id_type);
 
 /* Recherche des valeurs a afficher*/
-    $req="select nom, prenom from salaries where id_user='$sal_user'";
+    $req="select nom, prenom from salaries where id_user='$idUser'";
     $result=DatabaseOperation::query($req);
     if ($result==false)
       echo ("il y a un probleme de lecture dans la table publicateur");
     else
     {
       $sal_nom=mysql_result($result, 0, nom);
-      $sal_prenom=mysql_result($result, 0, prenom);
+      $userPrenom=mysql_result($result, 0, prenom);
     }
 ?>
 <html>
@@ -59,7 +59,7 @@ function StartTimer(delai) {
           <td width="50%" class="loginFFFFFF">Nom du publicateur : </td>
           <td class="loginFFCC66">
             <?php
-  echo ("$sal_prenom $sal_nom\n");
+  echo ("$userPrenom $sal_nom\n");
 ?>
           </td>
         </tr>
@@ -73,7 +73,7 @@ function StartTimer(delai) {
     where id_type>2 order by nom";
     $result=DatabaseOperation::query($req);
 /* Recherche du nom de l'administrateur de la personne */
-    $req2="select * from publicateur where id_user='$sal_user'";
+    $req2="select * from publicateur where id_user='$idUser'";
     $result2=DatabaseOperation::query($req2);
     $num2=mysql_num_rows($result2);
     if ($num2==false)
@@ -121,7 +121,7 @@ function StartTimer(delai) {
       $id_servicete=mysql_result($result, $i, "K_service");
 
       $intitule_ser=stripslashes($intitule_ser);
-      $req2="select * from publicateur where id_user='$sal_user' and id_service='$id_servicete'";
+      $req2="select * from publicateur where id_user='$idUser' and id_service='$id_servicete'";
       $res2 = mysql_query ($req2);
       $num2=mysql_num_rows($res2);
 
@@ -148,7 +148,7 @@ function StartTimer(delai) {
             </div>
             <input type="hidden" name="mod" value="mod">
             <?php
-  echo ("<input type=\"hidden\" name=\"sal_user\" value=\"$sal_user\">");
+  echo ("<input type=\"hidden\" name=\"sal_user\" value=\"$idUser\">");
 ?>
           </td>
         </tr>

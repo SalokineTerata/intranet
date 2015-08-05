@@ -3,6 +3,25 @@
 //  include("functions.php");
 //  include("../lib/functions.php");
 require_once '../inc/main.php';
+
+$globalConfig = new GlobalConfig();
+$login = $globalConfig->getAuthenticatedUser()->getKeyValue();
+$idUser = $globalConfig->getAuthenticatedUser()->getKeyValue();
+$userLogin = $globalConfig->getAuthenticatedUser()->getDataField(UserModel::FIELDNAME_LOGIN)->getFieldValue();
+$pass = $globalConfig->getAuthenticatedUser()->getDataField(UserModel::FIELDNAME_PASSWORD)->getFieldValue();
+$userNom = $globalConfig->getAuthenticatedUser()->getDataField(UserModel::FIELDNAME_NOM)->getFieldValue();
+$userPrenom = $globalConfig->getAuthenticatedUser()->getDataField(UserModel::FIELDNAME_PRENOM)->getFieldValue();
+$id_type = $globalConfig->getAuthenticatedUser()->getDataField(UserModel::FIELDNAME_ID_TYPE)->getFieldValue();
+$userCatsopro = $globalConfig->getAuthenticatedUser()->getDataField(UserModel::FIELDNAME_ID_CATSOPRO)->getFieldValue();
+$userService = $globalConfig->getAuthenticatedUser()->getDataField(UserModel::FIELDNAME_ID_SERVICE)->getFieldValue();
+$dateCreationUser = $globalConfig->getAuthenticatedUser()->getDataField(UserModel::FIELDNAME_DATE_CREATION_SALARIES)->getFieldValue();
+$ascendantIdSalaries = $globalConfig->getAuthenticatedUser()->getDataField(UserModel::FIELDNAME_ASENDANT_ID_SALARIES)->getFieldValue();
+$newsDefil = $globalConfig->getAuthenticatedUser()->getDataField(UserModel::FIELDNAME_NEWSDEFIL)->getFieldValue();
+$newLieuGeo = $globalConfig->getAuthenticatedUser()->getDataField(UserModel::FIELDNAME_LIEU_GEO)->getFieldValue();
+$membreCe = $globalConfig->getAuthenticatedUser()->getDataField(UserModel::FIELDNAME_MEMBRE_CE)->getFieldValue();
+$ecriture = $globalConfig->getAuthenticatedUser()->getDataField(UserModel::FIELDNAME_ECRITURE)->getFieldValue();
+$userMail = $globalConfig->getAuthenticatedUser()->getDataField(UserModel::FIELDNAME_MAIL)->getFieldValue();
+$modifier= Lib::getParameterFromRequest("modifier");
 identification1("salaries", $login, $pass);
   securadmin(4, $id_type);
 
@@ -12,35 +31,35 @@ identification1("salaries", $login, $pass);
   if ($modifier=='modifier')
   {
     //*********************** SALARIES ***********************//
-    $sal_nom=addslashes($sal_nom);
-    $sal_prenom=addslashes($sal_prenom);
-    $sal_nom=strtoupper($sal_nom);
+    $userNom=addslashes($userNom);
+    $userPrenom=addslashes($userPrenom);
+    $userNom=strtoupper($userNom);
     $req = "update salaries set "
-         . "nom='$sal_nom', "
-         . "prenom='$sal_prenom', "
-         . "id_catsopro='$sal_catsopro', "
-         . "id_service='$sal_service', "
+         . "nom='$userNom', "
+         . "prenom='$userPrenom', "
+         . "id_catsopro='$userCatsopro', "
+         . "id_service='$userService', "
          . "id_type='$sal_type', "
-         . "login='$sal_login', "
+         . "login='$userLogin', "
          ;
     if($sal_pass)
     {
         $req .= "pass=PASSWORD('$sal_pass'), ";
     }
-    $req .= "mail='$sal_mail', "
+    $req .= "mail='$userMail', "
          . "ecriture='$ecriture', "
-         . "membre_ce='$membre_ce', "
-         . "lieu_geo='$new_lieu_geo', "
-         . "newsdefil='$newsdefil', "
-         . "ascendant_id_salaries='$ascendant_id_salaries', "
-         . "date_creation_salaries='$date_creation_salaries' "
-         . "where id_user='$sal_user' "
+         . "membre_ce='$membreCe', "
+         . "lieu_geo='$newLieuGeo', "
+         . "newsdefil='$newsDefil', "
+         . "ascendant_id_salaries='$ascendantIdSalaries', "
+         . "date_creation_salaries='$dateCreationUser' "
+         . "where id_user='$idUser' "
          ;
     //echo $req;
     $result=DatabaseOperation::query($req);
 
     $req="update droitft set ecritureft='$ecritureft', lectureft='$lectureft', creation_ft='$creation_ft',
-    creation_fiche_produit='$creation_fiche_produit', validft='$validft', droitstat='$droitstat' where id_user='$sal_user'";
+    creation_fiche_produit='$creation_fiche_produit', validft='$validft', droitstat='$droitstat' where id_user='$idUser'";
     $result=DatabaseOperation::query($req);
 
     //************************ MODES ************************//
@@ -59,10 +78,10 @@ identification1("salaries", $login, $pass);
         $text= $$toto;
         $niveau=$$text;
 // Update dans la table pour chaque service
-        $req2="update modes set serv_conf=$niveau where id_user='$sal_user' and id_service='$service'";
+        $req2="update modes set serv_conf=$niveau where id_user='$idUser' and id_service='$service'";
         $result2=DatabaseOperation::query($req2);
         if ($result==false)
-          echo ("Update impossible pour le service $service pour le salarie $sal_user");
+          echo ("Update impossible pour le service $service pour le salarie $idUser");
         $i++;
       }
     }
@@ -98,7 +117,7 @@ while ($rows=mysql_fetch_array($result))
   //Suppression des anciens accès
   $req = "DELETE FROM intranet_droits_acces "
        . "WHERE id_intranet_modules='$id_intranet_modules' "
-       . "AND id_user='$sal_user' "
+       . "AND id_user='$idUser' "
        . "AND id_intranet_actions='$id_intranet_actions' "
        ;
   DatabaseOperation::query($req);
@@ -110,7 +129,7 @@ while ($rows=mysql_fetch_array($result))
      //Réécriture du droits d'accès
      $req = "INSERT INTO intranet_droits_acces "
           . "SET id_intranet_modules='$id_intranet_modules' "
-          . ", id_user='$sal_user' "
+          . ", id_user='$idUser' "
           . ", id_intranet_actions='$id_intranet_actions' "
           . ", niveau_intranet_droits_acces='$niveau_intranet_droits_acces' "
           ;
@@ -188,7 +207,7 @@ while ($rows=mysql_fetch_array($result))
 // Suppression de l'utilisateur
 if($modifier=='supprimer')
 {
-   $f1=suppression_intranet_utilisateur($sal_user);
+   $f1=suppression_intranet_utilisateur($idUser);
 }
 ?>
 <html>
@@ -307,13 +326,13 @@ include ("cadrehautent.php");
     $i=0;
     while ($i<$num)
     {
-      $sal_prenom=mysql_result($result, $i, prenom);
-      $sal_nom=mysql_result($result, $i, nom);
+      $userPrenom=mysql_result($result, $i, prenom);
+      $userNom=mysql_result($result, $i, nom);
       $intitule_ser=mysql_result($result, $i, "nom_service");
       $intitule_cat=mysql_result($result, $i, intitule_cat);
 
       echo ("<tr>\n");
-      echo ("<td class=\"loginFFFFFF\">$sal_prenom $sal_nom</td>\n");
+      echo ("<td class=\"loginFFFFFF\">$userPrenom $userNom</td>\n");
       echo ("<td class=\"loginFFFFFF\">$intitule_ser</td>\n");
       echo ("<td class=\"loginFFFFFF\">$intitule_cat</td>\n");
       echo ("</tr>\n");
@@ -340,13 +359,13 @@ include ("cadrehautent.php");
     $i=0;
     while ($i<$num)
     {
-      $sal_prenom=mysql_result($result, $i, prenom);
-      $sal_nom=mysql_result($result, $i, nom);
+      $userPrenom=mysql_result($result, $i, prenom);
+      $userNom=mysql_result($result, $i, nom);
       $intitule_ser=mysql_result($result, $i, "nom_service");
       $intitule_cat=mysql_result($result, $i, intitule_cat);
 
       echo ("<tr>\n");
-      echo ("<td class=\"loginFFFFFF\">$sal_prenom $sal_nom</td>\n");
+      echo ("<td class=\"loginFFFFFF\">$userPrenom $userNom</td>\n");
       echo ("<td class=\"loginFFFFFF\">$intitule_ser</td>\n");
       echo ("<td class=\"loginFFFFFF\">$intitule_cat</td>\n");
       echo ("</tr>\n");
@@ -373,13 +392,13 @@ include ("cadrehautent.php");
     $i=0;
     while ($i<$num)
     {
-      $sal_prenom=mysql_result($result, $i, prenom);
-      $sal_nom=mysql_result($result, $i, nom);
+      $userPrenom=mysql_result($result, $i, prenom);
+      $userNom=mysql_result($result, $i, nom);
       $intitule_ser=mysql_result($result, $i, "nom_service");
       $intitule_cat=mysql_result($result, $i, intitule_cat);
 
       echo ("<tr>\n");
-      echo ("<td class=\"loginFFFFFF\">$sal_prenom $sal_nom</td>\n");
+      echo ("<td class=\"loginFFFFFF\">$userPrenom $userNom</td>\n");
       echo ("<td class=\"loginFFFFFF\">$intitule_ser</td>\n");
       echo ("<td class=\"loginFFFFFF\">$intitule_cat</td>\n");
       echo ("</tr>\n");
@@ -406,13 +425,13 @@ include ("cadrehautent.php");
     $i=0;
     while ($i<$num)
     {
-      $sal_prenom=mysql_result($result, $i, prenom);
-      $sal_nom=mysql_result($result, $i, nom);
+      $userPrenom=mysql_result($result, $i, prenom);
+      $userNom=mysql_result($result, $i, nom);
       $intitule_ser=mysql_result($result, $i, "nom_service");
       $intitule_cat=mysql_result($result, $i, intitule_cat);
 
       echo ("<tr>\n");
-      echo ("<td class=\"loginFFFFFF\">$sal_prenom $sal_nom</td>\n");
+      echo ("<td class=\"loginFFFFFF\">$userPrenom $userNom</td>\n");
       echo ("<td class=\"loginFFFFFF\">$intitule_ser</td>\n");
       echo ("<td class=\"loginFFFFFF\">$intitule_cat</td>\n");
       echo ("</tr>\n");

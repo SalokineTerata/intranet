@@ -752,6 +752,7 @@ class AccueilFta {
                                 . "<tr class=contenu>"
                                 . "<td  class=titre COLSPAN=" . $nombreDeCellule . ">" . $workflowDescription . "</td>"
                                 . "</tr>";
+                        $workflowTmp= $tmp;
                         $tmp = $rowsDetail[FtaWorkflowModel::FIELDNAME_DESCRIPTION_FTA_WORKFLOW];
                     }
                 } else {
@@ -846,6 +847,7 @@ class AccueilFta {
                                     . "$commentaire</tr >"; // Commentaires
                             $createurTmp = $createurFta;
                         } else {
+
                             $tableauFicheTr .= "<tr class=contenu >"
                                     . "<td $bgcolor_header width=\"" . $selection_width . "\" > $icon_header $selection</td>"//Ordre de priorisation
                                     . "<td $bgcolor width=8%>" . $nomSiteProduction . "</td>"//Site

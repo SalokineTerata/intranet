@@ -3,6 +3,25 @@
 //  include("functions.php");
 //  include("../lib/functions.php");
 require_once '../inc/main.php';
+$globalConfig = new GlobalConfig();
+$login = $globalConfig->getAuthenticatedUser()->getKeyValue();
+$id_user = $globalConfig->getAuthenticatedUser()->getKeyValue();
+$idUser = $globalConfig->getAuthenticatedUser()->getKeyValue();
+$userLogin = $globalConfig->getAuthenticatedUser()->getKeyValue();
+$pass = $globalConfig->getAuthenticatedUser()->getDataField(UserModel::FIELDNAME_PASSWORD)->getFieldValue();
+$userNom = $globalConfig->getAuthenticatedUser()->getDataField(UserModel::FIELDNAME_NOM)->getFieldValue();
+$userPrenom = $globalConfig->getAuthenticatedUser()->getDataField(UserModel::FIELDNAME_PRENOM)->getFieldValue();
+$id_type = $globalConfig->getAuthenticatedUser()->getDataField(UserModel::FIELDNAME_ID_TYPE)->getFieldValue();
+$userCatsopro = $globalConfig->getAuthenticatedUser()->getDataField(UserModel::FIELDNAME_ID_CATSOPRO)->getFieldValue();
+$userService = $globalConfig->getAuthenticatedUser()->getDataField(UserModel::FIELDNAME_ID_SERVICE)->getFieldValue();
+$dateCreationUser = $globalConfig->getAuthenticatedUser()->getDataField(UserModel::FIELDNAME_DATE_CREATION_SALARIES)->getFieldValue();
+$ascendantIdSalaries = $globalConfig->getAuthenticatedUser()->getDataField(UserModel::FIELDNAME_ASENDANT_ID_SALARIES)->getFieldValue();
+$newsDefil = $globalConfig->getAuthenticatedUser()->getDataField(UserModel::FIELDNAME_NEWSDEFIL)->getFieldValue();
+$newLieuGeo = $globalConfig->getAuthenticatedUser()->getDataField(UserModel::FIELDNAME_LIEU_GEO)->getFieldValue();
+$membreCe = $globalConfig->getAuthenticatedUser()->getDataField(UserModel::FIELDNAME_MEMBRE_CE)->getFieldValue();
+$ecriture = $globalConfig->getAuthenticatedUser()->getDataField(UserModel::FIELDNAME_ECRITURE)->getFieldValue();
+$userMail = $globalConfig->getAuthenticatedUser()->getDataField(UserModel::FIELDNAME_MAIL)->getFieldValue();
+$modifier= Lib::getParameterFromRequest("modifier");
   identification1("salaries", $login, $pass);
   securadmin(4, $id_type);
 
@@ -12,17 +31,17 @@ require_once '../inc/main.php';
     if ($sal_pass != $sal_pass2)
     {
       header("location:gestion_salaries1.php?erreur=pass");
-      break 2;
+      
     }
 
 
 /* Insertion dans la table SALARIES*/
-    $sal_nom=strtoupper($sal_nom);
-    $sal_nom=addslashes($sal_nom);
-    $sal_prenom=addslashes($sal_prenom);
+    $userNom=strtoupper($userNom);
+    $userNom=addslashes($userNom);
+    $userPrenom=addslashes($userPrenom);
 
-    $req="select * from salaries where nom='$sal_nom' and prenom='$sal_prenom'
-    and mail='$sal_mail' and id_type='$sal_type' and actif='oui'";
+    $req="select * from salaries where nom='$userNom' and prenom='$userPrenom'
+    and mail='$userMail' and id_type='$sal_type' and actif='oui'";
     $result=DatabaseOperation::query($req);
     $num=mysql_num_rows($result);
     if ($num != 0)
@@ -34,8 +53,8 @@ require_once '../inc/main.php';
 //echo "$date_creation_salaries";
       $req="insert into salaries (nom, prenom, ascendant_id_salaries, date_creation_salaries, id_catsopro, id_service, id_type, login, pass, mail,
       ecriture, membre_ce, lieu_geo, newsdefil)
-      values ('$sal_nom', '$sal_prenom', '$ascendant_id_salaries', '$date_creation_salaries', '$catsopro', '$service', '$sal_type', '$sal_login', PASSWORD('$sal_pass'),
-      '$sal_mail', '$ecriture', '$membre_ce', '$lieu_geo', '$newsdefil')";
+      values ('$userNom', '$userPrenom', '$ascendantIdSalaries', '$dateCreationUser', '$catsopro', '$service', '$sal_type', '$userLogin', PASSWORD('$sal_pass'),
+      '$userMail', '$ecriture', '$membreCe', '$lieu_geo', '$newsDefil')";
 //echo"$req";
       $result=DatabaseOperation::query($req);
       if ($result == false)
@@ -45,13 +64,13 @@ require_once '../inc/main.php';
 //      $req="select id_user from salaries where nom='$sal_nom' and prenom='$sal_prenom'
 //      and login='$sal_login' and id_catsopro='$catsopro' and id_service='$service'
 //      and id_type='$sal_type' and mail='$sal_mail'";
-    $req="select id_user from salaries where login='$sal_login' ";
+    $req="select id_user from salaries where login='$userLogin' ";
 
       $result=DatabaseOperation::query($req);
       if ($result== false)
         echo ("La requete de recherche de l'ID salarie a echoue");
       else
-        $sal_user=mysql_result($result, 0, id_user);
+        $idUser=mysql_result($result, 0, id_user);
 
 /********************************************
 Insertion des droits d'accès de l'utilisateur
@@ -101,24 +120,24 @@ while ($rows_modules=mysql_fetch_array($result_modules))
 //        echo ("L'insertion dans la table DROITFT n'a pas reussie");
     }
     /* Recuperation des données pour affichage */
-    $req="select * from salaries where id_user='$sal_user'";
+    $req="select * from salaries where id_user='$idUser'";
     $result=DatabaseOperation::query($req);
     if ($result != false)
     {
-      $sal_nom=mysql_result($result, 0, nom);
-      $sal_prenom=mysql_result($result, 0, prenom);
+      $userNom=mysql_result($result, 0, nom);
+      $userPrenom=mysql_result($result, 0, prenom);
       $id_catsopro=mysql_result($result, 0, id_catsopro);
       $id_service=mysql_result($result, 0, id_service);
       $sal_type=mysql_result($result, 0, id_type);
-      $sal_login=mysql_result($result, 0, login);
+      $userLogin=mysql_result($result, 0, login);
       $sal_pass=mysql_result($result, 0, pass);
-      $sal_mail=mysql_result($result, 0, mail);
+      $userMail=mysql_result($result, 0, mail);
       $ecriture==mysql_result($result, 0, ecriture);
-      $newsdefil==mysql_result($result, 0, newsdefil);
-      $membre_ce==mysql_result($result, 0, membre_ce);
+      $newsDefil==mysql_result($result, 0, newsdefil);
+      $membreCe==mysql_result($result, 0, membre_ce);
       $lieu_geo==mysql_result($result, 0, lieu_geo);
-      $sal_nom=stripslashes($sal_nom);
-      $sal_prenom=stripslashes($sal_prenom);
+      $userNom=stripslashes($userNom);
+      $userPrenom=stripslashes($userPrenom);
     }
 
 //    $req="select * from droitft where id_user='$sal_user'";
@@ -177,13 +196,13 @@ while ($rows_modules=mysql_fetch_array($result_modules))
   $sujet="Inscription Intranet Agis";
   $corpsmail="Bonjour,\n";
   $corpsmail.="Votre profil vient d'être créé dans l'intranet AGIS.\n";
-  $corpsmail.="Votre login est : $sal_login\n";
+  $corpsmail.="Votre login est : $userLogin\n";
   //$corpsmail.="Votre mot de passe est : $sal_pass\n";
   $corpsmail.="\nL'administrateur Agis.\n";
 
   //envoi_mail($corpsmail, 'postmaster@agis-sa.fr', $sal_mail, $sujet);
   //envoismail($sujet, $corpsmail, 'postmaster@agis-sa.fr', $sal_mail);
-  envoismail($sujet, $corpsmail, $sal_mail, 'postmaster@agis-sa.fr');
+  envoismail($sujet, $corpsmail, $userMail, 'postmaster@agis-sa.fr');
 ?>
 <html>
 <head>
@@ -234,13 +253,13 @@ include ("cadrehautent.php");
                     <td class="loginFFCC66droit" width="20%"><b>Nom :</b></td>
                     <td class="loginFFCC66" width="35%">
                       <?php
-  echo ("$sal_nom");
+  echo ("$userNom");
 ?>
                     </td>
                     <td class="loginFFCC66droit" width="33%"><b>Login :<b></td>
                     <td class="loginFFCC66" width="53%">
                       <?php
-  echo ("$sal_login");
+  echo ("$userLogin");
 ?>
                     </td>
                     <td width="15%" class="loginFFCC66">&nbsp;</td>
@@ -249,7 +268,7 @@ include ("cadrehautent.php");
                     <td class="loginFFCC66droit" width="20%"><b>Pr&eacute;nom :</b></td>
                     <td class="loginFFCC66" width="35%">
                       <?php
-  echo ("$sal_prenom");
+  echo ("$userPrenom");
 ?>
                     </td>
                     <td class="loginFFCC66droit" width="33%"><b>&nbsp;</b></td>
@@ -266,7 +285,7 @@ include ("cadrehautent.php");
                     <td class="loginFFCC66droit" width="33%"><b>Mail :</b></td>
                     <td class="loginFFCC66" width="53%">
                       <?php
-  echo ("$sal_mail");
+  echo ("$userMail");
 ?>
                     </td>
                     <td width="15%">&nbsp; </td>
@@ -419,7 +438,7 @@ include ("cadrehautent.php");
                       <center>
                 Ecriture News d&eacute;filante<br>
 <?php
-    echo ("$newsdefil");
+    echo ("$newsDefil");
 ?>
               <br>
 
@@ -432,7 +451,7 @@ include ("cadrehautent.php");
                       <center>
                 Membre CE<br>
 <?php
-    echo ("$membre_ce");
+    echo ("$membreCe");
 ?>
 
 
@@ -528,7 +547,7 @@ while ($rows_modules=mysql_fetch_array($result_modules))
         $req_droits_acces.= "niveau_intranet_droits_acces) ";
         $req_droits_acces.= "VALUES (";
         $req_droits_acces.= "$id_intranet_modules, ";
-        $req_droits_acces.= "$sal_user, ";
+        $req_droits_acces.= "$idUser, ";
         $req_droits_acces.= "$id_intranet_actions, ";
         $req_droits_acces.= "$niveau_intranet_droits_acces) ";
         $result_droits_acces=DatabaseOperation::query($req_droits_acces);
@@ -539,7 +558,7 @@ while ($rows_modules=mysql_fetch_array($result_modules))
         $req_niveau_specifique.= "WHERE intranet_niveau_acces.id_intranet_modules=intranet_droits_acces.id_intranet_modules ";
         $req_niveau_specifique.= "AND intranet_niveau_acces.id_intranet_actions=intranet_droits_acces.id_intranet_actions ";
         $req_niveau_specifique.= "AND intranet_niveau_acces.id_intranet_niveau_acces=intranet_droits_acces.niveau_intranet_droits_acces ";
-        $req_niveau_specifique.= "AND intranet_droits_acces.id_user=$sal_user ";
+        $req_niveau_specifique.= "AND intranet_droits_acces.id_user=$idUser ";
         $req_niveau_specifique.= "AND intranet_droits_acces.id_intranet_modules=$id_intranet_modules ";
         $req_niveau_specifique.= "AND intranet_droits_acces.id_intranet_actions=$id_intranet_actions ";
         $req_niveau_specifique.= "AND intranet_droits_acces.niveau_intranet_droits_acces=$niveau_intranet_droits_acces";
@@ -563,7 +582,7 @@ while ($rows_modules=mysql_fetch_array($result_modules))
                 $req_niveau_defaut.= "WHERE intranet_niveau_acces.id_intranet_niveau_acces=intranet_droits_acces.niveau_intranet_droits_acces ";
                 $req_niveau_defaut.= "AND intranet_niveau_acces.id_intranet_actions='0' ";
                 $req_niveau_defaut.= "AND intranet_niveau_acces.id_intranet_modules='0' ";
-                $req_niveau_defaut.= "AND intranet_droits_acces.id_user=$sal_user ";
+                $req_niveau_defaut.= "AND intranet_droits_acces.id_user=$idUser ";
                 $req_niveau_defaut.= "AND intranet_droits_acces.id_intranet_modules=$id_intranet_modules ";
                 $req_niveau_defaut.= "AND intranet_droits_acces.id_intranet_actions=$id_intranet_actions ";
                 $req_niveau_defaut.= "AND intranet_droits_acces.niveau_intranet_droits_acces=$niveau_intranet_droits_acces";

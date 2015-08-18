@@ -193,42 +193,41 @@
         targetElement.style.display = "none";
     }
 
-    function Change($paramIdWorkflow) {
-        if ((document.getElementById('consultation').checked)) {
-            var x = $paramIdWorkflow;
-            for (var i = 0; i < x.length; i++)
-            {
-                var idFtaWorkflow = 'id_fta_workflow_' + x[i];
+    function Change() {
 
-                idFtaWorkflow = "[" + idFtaWorkflow + "]";
-                var siteFtaWorkflow = 'site_' + x[i];
-                var roleFtaWorkflow = 'role_' + x[i];
-                document.write(idFtaWorkflow);
+        if ((document.getElementById('consultation').checked)) {
+            var elems = document.getElementsByClassName("site");
+            for (var i = 0; i < elems.length; i++) {
+                elems[i].style.visibility = 'visible';
+            }
+            var elems2 = document.getElementsByClassName("id_fta_workflow");
+            for (var i = 0; i < elems2.length; i++) {
+                elems2[i].style.visibility = "visible";
+            }
+
+        } else {
+            var elems = document.getElementsByClassName("site");
+            for (var i = 0; i < elems.length; i++) {
+                elems[i].style.visibility = 'hidden';
+            }
+            var elems2 = document.getElementsByClassName("id_fta_workflow");
+            for (var i = 0; i < elems2.length; i++) {
+                elems2[i].style.visibility = "hidden";
+            }
+        }
+        if ((document.getElementById('modification').checked)) {
+            var elem3 = document.getElementsByClassName("role");
+            for (var i = 0; i < elem3.length; i++) {
+                elem3[i].style.visibility = "visible";
+            }
+        }
+        else {
+            var elem3 = document.getElementsByClassName("role");
+            for (var i = 0; i < elem3.length; i++) {
+                elem3[i].style.visibility = "hidden";
             }
         }
 
-        /*
-         for (var j in arrayIdWorkflow) {
-         var idFtaWorkflow = 'id_fta_workflow_' + arrayIdWorkflow[j];
-         var siteFtaWorkflow = 'site_' + arrayIdWorkflow[j];
-         var roleFtaWorkflow = 'role_' + arrayIdWorkflow[j];
-         if ((document.getElementById('consultation').checked)) {
-         document.write(arrayIdWorkflow[j]);
-         document.getElementById(siteFtaWorkflow).style.visibility = "visible";
-         document.getElementById(idFtaWorkflow).style.visibility = "visible";
-         
-         }
-         else {
-         document.getElementById(idFtaWorkflow).style.visibility = "hidden";
-         document.getElementById(siteFtaWorkflow).style.visibility = "hidden";
-         }
-         if ((document.getElementById('modification').checked)) {
-         document.getElementById(roleFtaWorkflow).style.visibility = "visible";
-         }
-         else {
-         document.getElementById(roleFtaWorkflow).style.visibility = "hidden";
-         }
-         }*/
     }
 
 

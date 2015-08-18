@@ -151,7 +151,7 @@ class IntranetActionsModel extends AbstractModel {
         return $idActionT;
     }
 
-    private static function AddIdIntranetAction($paramIdIntranetActions) {
+    public static function AddIdIntranetAction($paramIdIntranetActions) {
         if ($paramIdIntranetActions) {
             foreach ($paramIdIntranetActions as $value) {
                 $req .= " OR " . IntranetActionsModel::TABLENAME . "." . IntranetActionsModel::KEYNAME . "=" . $value . " ";

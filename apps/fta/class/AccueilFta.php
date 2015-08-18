@@ -723,9 +723,7 @@ class AccueilFta {
                                    }
                            </SCRIPT>
                            ";
-                    /*
-                     * Noms des services dans lequel la Fta se trouve
-                     */
+
                     $actions .= "<a "
                             . "href=creer_fiche.php"
                             . "?action=dupliquer_fiche"
@@ -737,7 +735,9 @@ class AccueilFta {
                 }
 
 
-
+                /*
+                 * Noms des services dans lequel la Fta se trouve
+                 */
                 $arrayService = FtaRoleModel::getNameRoleEncoursByIdFta($idFta, $idWorkflowFtaEncours);
                 if ($arrayService) {
                     foreach ($arrayService as $rowsService) {
@@ -752,7 +752,7 @@ class AccueilFta {
                                 . "<tr class=contenu>"
                                 . "<td  class=titre COLSPAN=" . $nombreDeCellule . ">" . $workflowDescription . "</td>"
                                 . "</tr>";
-                        $workflowTmp= $tmp;
+                        $workflowTmp = $tmp;
                         $tmp = $rowsDetail[FtaWorkflowModel::FIELDNAME_DESCRIPTION_FTA_WORKFLOW];
                     }
                 } else {

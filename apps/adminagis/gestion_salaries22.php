@@ -16,18 +16,18 @@ $globalConfig = new GlobalConfig();
 $login = $globalConfig->getAuthenticatedUser()->getKeyValue();
 $pass = $globalConfig->getAuthenticatedUser()->getDataField(UserModel::FIELDNAME_PASSWORD)->getFieldValue();
 $id_type = $globalConfig->getAuthenticatedUser()->getDataField(UserModel::FIELDNAME_ID_TYPE)->getFieldValue();
-$id_user = Lib::getParameterFromRequest("sal_user");
-$userModel = new UserModel($id_user);
+$paramIdUser = Lib::getParameterFromRequest("sal_user");
+$paramRech = Lib::getParameterFromRequest("rech");
+$userModel = new UserModel($paramIdUser);
 $userView = new UserView($userModel);
 $userView->setIsEditable(TRUE);
 identification1("salaries", $login, $pass);
 securadmin(4, $id_type);
-$rech = 1;
-if ($rech == '1') {
+if ($paramRech == '1') {
     /* Recherche des infos sur le salarie */
     $arrayUserDetail = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
                     "SELECT * FROM " . UserModel::TABLENAME
-                    . " WHERE " . UserModel::KEYNAME . "='$id_user'"
+                    . " WHERE " . UserModel::KEYNAME . "='$paramIdUser'"
     );
     if (!$arrayUserDetail)
         echo ("La requete de recherche de l'ID salarie a echoue");
@@ -61,7 +61,7 @@ if ($rech == '1') {
                         . "," . DroitftModel::FIELDNAME_LECTUREFT
                         . "," . DroitftModel::FIELDNAME_VALIDFT
                         . " FROM " . DroitftModel::TABLENAME
-                        . " WHERE " . DroitftModel::FIELDNAME_ID_USER . "='$id_user'"
+                        . " WHERE " . DroitftModel::FIELDNAME_ID_USER . "='$paramIdUser'"
         );
         if ($arrayDroitftDetail) {
             foreach ($arrayDroitftDetail as $rowsDroitftDetail) {
@@ -83,7 +83,6 @@ if ($rech == '1') {
     <head>
         <title>Gestion des salari&eacute;s</title>
         <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
-        <link rel="stylesheet" href="../lib/css/admin_intra01.css" type="text/css">
         <script language="JavaScript">
             <!--
             function MM_openBrWindow(theURL, winName, features) { //v2.0
@@ -108,14 +107,13 @@ if ($rech == '1') {
                 }
                 else {
                 }
-            }
+            }         
         </SCRIPT>
-        <link rel="stylesheet" href="../lib/css/admin_intra01.css" type="text/css">
-        <link rel="stylesheet" href=../lib/css/admin_newspopup.css type="text/css">
+
     </head>
 
     <body onLoad="StartTimer(<?php
-    $time = timeout($id_user);
+    $time = timeout($paramIdUser);
     echo "$time";
     ?>)" bgcolor="#FFCC66" text="#000000" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
               <?php
@@ -170,16 +168,18 @@ if ($rech == '1') {
                              * Identifiant
                              */
                             $bloc .="<tr><td align=right>"
-                                    . mysql_field_desc("salaries", "id_user")
-                                    . "</td><td align=left>$id_user"
+                                    . DatabaseDescription::getFieldDocLabel(UserModel::TABLENAME
+                                            , UserModel::KEYNAME)
+                                    . "</td><td align=left>$paramIdUser"
                                     . "</td></tr>"
                             ;
-
                             /*
                              * Affichage
                              */
                             echo $bloc . "</table></td></tr>";
+                            IntranetDroitsAccesModel::BuildHtmlDroitsAcces($paramIdUser);
                             ?>
+
                             <tr>
                                 <td class="loginFFFFFF">
                                     <div align="center"><img src=../lib/images/espaceur.gif width="10" height="20">
@@ -246,17 +246,17 @@ if ($rech == '1') {
                                                 <?php
                                                 echo ("<select name=\"sal_catsopro\">\n");
                                                 /* Constitution de la liste déroulante des noms des csp */
-                                                $resultCatsopro = DatabaseOperation::query(
+                                                $arrayCatsopro = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
                                                                 "SELECT " . CatsoproModel::KEYNAME . "," . CatsoproModel::FIELDNAME_INTITULE_CAT
                                                                 . " FROM " . CatsoproModel::TABLENAME
                                                                 . " ORDER BY " . CatsoproModel::FIELDNAME_INTITULE_CAT
                                                 );
-                                                if ($resultCatsopro) {
-                                                    while ($row = mysql_fetch_row($resultCatsopro)) {
-                                                        echo ("<option value=\"$row[0]\"");
-                                                        if ($row[0] == $userCatsopro)
+                                                if ($arrayCatsopro) {
+                                                    foreach ($arrayCatsopro as $rowsCatsopro) {
+                                                        echo ("<option value=\"" . $rowsCatsopro[CatsoproModel::KEYNAM] . "\"");
+                                                        if ($rowsCatsopro[CatsoproModel::KEYNAM] == $userCatsopro)
                                                             echo ("selected");
-                                                        echo (">$row[1]</option>");
+                                                        echo (">" . $rowsCatsopro[CatsoproModel::FIELDNAME_INTITULE_CAT] . "</option>");
                                                     }
                                                 }
                                                 echo ("</select>\n");
@@ -286,7 +286,7 @@ if ($rech == '1') {
                                               echo ("</select>\n");
                                              */
 
-                                            //Service de l'utilisateur
+//Service de l'utilisateur
                                             $nom_liste = "sal_service";
                                             $liste = "<td align=right><center><br>" . mysql_field_desc("access_materiel_service", "nom_service") . " ";
                                             $req_liste = "SELECT K_service, nom_service "
@@ -311,16 +311,14 @@ if ($rech == '1') {
                                                 <?php
                                                 echo ("<select name=\"sal_type\">\n");
                                                 /* Constitution de la liste déroulante des noms des types */
-                                                $req = "SELECT " . TypesModel::KEYNAME
-                                                        . ", " . TypesModel::FIELDNAME_INTITULE_TYP
-                                                        . " FROM " . TypesModel::TABLENAME;
-                                                $result = DatabaseOperation::query($req);
-                                                if ($result != false) {
-                                                    while ($row = mysql_fetch_row($result)) {
-                                                        echo ("<option value=\"$row[0]\"");
-                                                        if ($row[0] == $sal_type)
-                                                            echo ("selected");
-                                                        echo (">$row[1]</option>");
+                                                $arrayType = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
+                                                                "SELECT " . TypesModel::KEYNAME
+                                                                . ", " . TypesModel::FIELDNAME_INTITULE_TYP
+                                                                . " FROM " . TypesModel::TABLENAME
+                                                );
+                                                if ($arrayType) {
+                                                    foreach ($arrayType as $rowType) {
+                                                        echo ("<option value=\"" . $rowType[TypesModel::KEYNAME] . "\">" . $rowType[TypesModel::FIELDNAME_INTITULE_TYP] . "</option>");
                                                     }
                                                 }
                                                 echo ("</select>\n");
@@ -409,7 +407,7 @@ if ($rech == '1') {
                                             <tr>
                                                 <td class="logFFE5B2">
                                             <center>
-                                                statistiques
+                                                Statistiques
                                             </center>
                                             </td>
                                             </tr>
@@ -459,14 +457,19 @@ if ($rech == '1') {
                                                 <?php
                                                 echo ("<select name=\"new_lieu_geo\">\n");
                                                 /* Constitution de la liste déroulante des noms des groupes */
-                                                $req = "select * from geo where site_actif = 1 order by geo";
-                                                $result = DatabaseOperation::query($req);
-                                                if ($result != false) {
-                                                    while ($row = mysql_fetch_row($result)) {
-                                                        if ($row[0] == $lieu_geo)
-                                                            echo ("<option value=\"$row[0]\" selected>$row[1]</option>");
-                                                        else
-                                                            echo ("<option value=\"$row[0]\">$row[1]</option>");
+                                                $arrayGeo = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
+                                                                "SELECT " . GeoModel::KEYNAME . "," . GeoModel::FIELDNAME_GEO
+                                                                . " FROM " . GeoModel::TABLENAME
+                                                                . " WHERE " . GeoModel::FIELDNAME_SITE_ACTIF . " = 1"
+                                                                . " ORDER BY " . GeoModel::FIELDNAME_GEO
+                                                );
+                                                if ($arrayGeo) {
+                                                    foreach ($arrayGeo as $rowsGeo) {
+                                                        if ($rowsGeo[GeoModel::KEYNAME] == $lieu_geo) {
+                                                            echo ("<option value=\"" . $rowsGeo[GeoModel::KEYNAME] . "\" selected>" . $rowsGeo[GeoModel::FIELDNAME_GEO] . "</option>");
+                                                        } else {
+                                                            echo ("<option value=\"" . $rowsGeo[GeoModel::KEYNAME] . "\">" . $rowsGeo[GeoModel::FIELDNAME_GEO] . "</option>");
+                                                        }
                                                     }
                                                 }
                                                 echo ("</select>\n");
@@ -475,8 +478,9 @@ if ($rech == '1') {
                                                 /*                                                 * ***************************************************
                                                   Construction des droits d'accès pour tous les modules:
                                                  * ***************************Boris Sanègre 2003.03.25 */
-                                                require ('droits_acces.inc');
+                                                // require ('droits_acces.inc');                                              
                                                 ?>
+
                                                 <tr>
                                                     <td>
                                                         <div align="center"><img src="../images_pop/affectation_droits.gif" width="500" height="30"></div>
@@ -499,7 +503,7 @@ if ($rech == '1') {
                                                                 <td class="LOGINFFFFFFCENTRE"><img src=../lib/images/espaceur.gif width="10" height="20"></td>
                                                                 <?php
                                                                 echo ("<input type=\"hidden\" name=\"modifier\" value=\"modifier\">\n");
-                                                                echo ("<input type=\"hidden\" name=\"sal_user\" value=\"$id_user\">\n");
+                                                                echo ("<input type=\"hidden\" name=\"sal_user\" value=\"$paramIdUser\">\n");
                                                                 ?>
                                                                 <td class="LOGINFFFFFFCENTRE">&nbsp;</td>
                                                             </tr>
@@ -514,26 +518,29 @@ if ($rech == '1') {
 
                                                             <?php
                                                             /* Lecture de la table MODES et affichage de l'intitule des services avec les niveaux */
-                                                            $req = "select * from services order by intitule_ser";
-                                                            $result = DatabaseOperation::query($req);
-                                                            if ($result != false) {
-                                                                $num = mysql_num_rows($result);
-                                                                $i = 0;
-                                                                while ($i < $num) {
-                                                                    $intitule_ser = mysql_result($result, $i, intitule_ser);
-                                                                    $service = mysql_result($result, $i, id_service);
-                                                                    $intitule_ser = stripslashes($intitule_ser);
+                                                            $arrayService = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
+                                                                            "SELECT " . ServicesModel::FIELDNAME_INTITULE_SER . "," . ServicesModel::KEYNAME
+                                                                            . " FROM " . ServicesModel::TABLENAME
+                                                                            . " ORDER BY " . ServicesModel::FIELDNAME_INTITULE_SER
+                                                            );
+
+                                                            if ($arrayService) {
+                                                                foreach ($arrayService as $rowsService) {
+                                                                    $intituleSer = $rowsService[ServicesModel::FIELDNAME_INTITULE_SER];
+                                                                    $idService = $rowsService[ServicesModel::KEYNAME];
+                                                                    $intituleSer = stripslashes($intituleSer);
                                                                     /* Pour chaque service on recherche dans la table mode */
-                                                                    $req2 = "select * from modes where id_user='$id_user' and id_service='$service'";
-                                                                    $result2 = DatabaseOperation::query($req2);
-                                                                    if ($result2) {
-                                                                        $num2 = mysql_num_rows($result2);
-                                                                        if ($num2 != 0)
-                                                                            $serv_conf = mysql_result($result2, 0, serv_conf);
-                                                                        else
-                                                                            $serv_conf = 0;
-                                                                    }
-                                                                    else {
+                                                                    $arrayServiceConf = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
+                                                                                    "SELECT " . ModesModel::FIELDNAME_SERV_CONF . " FROM " . ModesModel::TABLENAME
+                                                                                    . " WHERE " . ModesModel::FIELDNAME_ID_USER . "=" . $paramIdUser
+                                                                                    . " AND " . ModesModel::FIELDNAME_ID_SERVICE . "=" . $idService
+                                                                    );
+
+                                                                    if ($arrayServiceConf) {
+                                                                        foreach ($arrayServiceConf as $rowsServiceConf) {
+                                                                            $serv_conf = $rowsServiceConf[ModesModel::FIELDNAME_SERV_CONF];
+                                                                        }
+                                                                    } else {
                                                                         $serv_conf = 0;
                                                                     }
                                                                     echo ("<tr>\n");
@@ -541,12 +548,11 @@ if ($rech == '1') {
                                                                     echo ("  <td width=\"50%\">&nbsp;</td>\n");
                                                                     echo ("</tr>\n");
                                                                     echo ("<tr>\n");
-                                                                    echo ("<td>$intitule_ser&nbsp;</td>\n");
+                                                                    echo ("<td>$intituleSer&nbsp;</td>\n");
                                                                     echo ("<td class=\"loginFFCC66droit\" width=\"50%\" align=\"center\">\n");
-                                                                    echo ("<input type=\"text\" name=\"$service\" value=\"$serv_conf\" maxlength=\"2\">\n");
+                                                                    echo ("<input type=\"text\" name=\"$idService\" value=\"$serv_conf\" maxlength=\"2\">\n");
                                                                     echo ("</td>\n");
                                                                     echo ("</tr>\n");
-                                                                    $i++;
                                                                 }
                                                             }
                                                             ?>

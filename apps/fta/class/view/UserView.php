@@ -5,15 +5,15 @@
  *
  * @author franckwastaken
  */
-class UserView  {
+class UserView {
 
     /**
      * Model de donnée d'un Salarie
      * @var UserModel
      */
     private $UserModel;
-    
-     /**
+
+    /**
      * La vue est-elle modifiable par l'utilisateur (saisie) ou simplement
      * en consultation ?
      * @var boolean
@@ -28,24 +28,25 @@ class UserView  {
         $this->setUserModel($ParamUserModel);
     }
 
-    function getUserModel() {
+    private function getUserModel() {
         return $this->UserModel;
     }
 
-    function setUserModel(UserModel $UserModel) {
+    private function setUserModel(UserModel $UserModel) {
         if ($UserModel instanceof UserModel) {
             $this->UserModel = $UserModel;
         }
     }
-    function getIsEditable() {
+
+    public function getIsEditable() {
         return $this->isEditable;
     }
 
-    function setIsEditable($isEditable) {
+    public function setIsEditable($isEditable) {
+        $this->getUserModel()->setIsEditable($isEditable);
         $this->isEditable = $isEditable;
     }
 
-        
     public function getHtmlDataField($paramFieldName) {
         return Html::convertDataFieldToHtml(
                         $this->getUserModel()->getDataField($paramFieldName)

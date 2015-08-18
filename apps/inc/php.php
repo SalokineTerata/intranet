@@ -96,6 +96,7 @@ require_once("../lib/class/model/GeoModel.php");
 require_once("../lib/class/model/IntranetActionsModel.php");
 require_once("../lib/class/model/IntranetDroitsAccesModel.php");
 require_once("../lib/class/model/IntranetModulesModel.php");
+require_once("../lib/class/model/IntranetNiveauAccesModel.php");
 require_once("../lib/class/model/ModesModel.php");
 require_once("../lib/class/model/ServicesModel.php");
 require_once("../lib/class/model/TypeModel.php");

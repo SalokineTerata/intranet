@@ -53,12 +53,12 @@ if ($id_user) {
     ;
     $isIndex = 0;                //Variable booléenne disant si oui ou non on est sur l'index
 
-    $abreviationFtaEtat = Lib::getParameterFromRequest("abreviation_fta_etat");
+    $abreviationFtaEtat = Lib::getParameterFromRequest(FtaEtatModel::FIELDNAME_ABREVIATION);
     $fta_consultation = Lib::isDefined("fta_consultation");
     $fta_modification = Lib::isDefined("fta_modification");
-    $id_fta_etat = Lib::getParameterFromRequest("id_fta_etat");
+    $id_fta_etat = Lib::getParameterFromRequest(FtaEtatModel::KEYNAME);
     $isLimit = $_SESSION["limit_affichage_fta_index"];
-    $nomFtaEtat = Lib::getParameterFromRequest("nom_fta_etat");
+    $nomFtaEtat = Lib::getParameterFromRequest(FtaEtatModel::FIELDNAME_NOM_FTA_ETAT);
     $nombre_fiche = Lib::getParameterFromRequest("nombre_fiche");
     $requete_resultat = Lib::getParameterFromRequest("requete_resultat");
     $synthese_action = Lib::getParameterFromRequest("synthese_action");
@@ -81,9 +81,9 @@ if ($id_user) {
         //$arrayFtaRole = FtaRoleModel::getIdFtaRoleByIdUser($id_user);
         $idFtaRoleEncoursDefault = FtaRoleModel::getKeyNameOfFirstRoleByIdUser($id_user);
         if ($fta_modification) {
-            $synthese_action = "encours";
+            $synthese_action = FtaEtatModel::ETAT_AVANCEMENT_VALUE_EN_COURS;
         } else {
-            $synthese_action = "attente";
+            $synthese_action = FtaEtatModel::ETAT_AVANCEMENT_VALUE_ATTENTE;
         }
     }
 
@@ -135,13 +135,13 @@ if ($id_user) {
 //Suivant le droit d'acces de l'utilisateur
 //Si l'utilisateur  des droits d'acces defini pout ce module
 //if($fta_consultation or $fta_modification)
-//{
-    $req_where = " AND (fta_etat.abreviation_fta_etat='V' OR fta_etat.abreviation_fta_etat='A' OR fta_etat.abreviation_fta_etat='I') ";
-
-    //Si l'utilisateur a les droits de modification, il voit l'ensemble des etats
-    if ($fta_modification) {
-        $req_where = "";
-    }
+////{
+//    $req_where = " AND (fta_etat.abreviation_fta_etat='V' OR fta_etat.abreviation_fta_etat='A' OR fta_etat.abreviation_fta_etat='I') ";
+//
+//    //Si l'utilisateur a les droits de modification, il voit l'ensemble des etats
+//    if ($fta_modification) {
+//        $req_where = "";
+//    }
     /*     * *****************************************************************************
       TABLEAU DE SYNTHESE
      * ***************************************************************************** */
@@ -154,7 +154,7 @@ if ($id_user) {
     /*
      * Génération de la barre de navigation de la page d'accueil
      */
-    $tableau_synthese.=AccueilFta::getTableauSythese($req_where);
+    $tableau_synthese.=AccueilFta::getTableauSythese();
 
 
     //Tableau des FTA

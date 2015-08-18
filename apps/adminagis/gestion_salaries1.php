@@ -49,7 +49,8 @@ if ($modifier == 'modifier') {
      *  Requete pour lire tous les champs text nommes avec le numero du service
      */
     $arrayService = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
-                    "SELECT DISTINCT " . ServicesModel::KEYNAME . "," . ServicesModel::FIELDNAME_INTITULE_SER
+                    "SELECT DISTINCT " . ServicesModel::KEYNAME
+                    . "," . ServicesModel::FIELDNAME_INTITULE_SER
                     . " FROM " . ServicesModel::TABLENAME
                     . " ORDER BY " . ServicesModel::KEYNAME
     );
@@ -83,8 +84,7 @@ if ($modifier == 'modifier') {
     <head>
         <title>Gestion des salari&eacute;s</title>
         <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
-        <link rel="stylesheet" href="../lib/css/admin_intra01.css" type="text/css">
-        <link rel="stylesheet" href=../lib/css/admin_newspopup.css type="text/css">
+
         <SCRIPT LANGUAGE="JavaScript">
             function Popup(page, options) {
                 document.location.href = "../index.php?action=delog";
@@ -138,16 +138,29 @@ if ($modifier == 'modifier') {
                 /*
                  * Date de création de l'utlisateur
                  */
-
-                $bloc .=$userView->getHtmlDataField(UserModel::FIELDNAME_DATE_CREATION_SALARIES);
-
+                $bloc .="<tr><td align=right>"
+                        . DatabaseDescription::getFieldDocLabel(UserModel::TABLENAME, UserModel::FIELDNAME_DATE_CREATION_SALARIES)
+                        . "</td><td align=left><input type=text name=" . UserModel::FIELDNAME_DATE_CREATION_SALARIES . " size=15  value="
+                        . date("Y-m-d") . " />"
+                        . "</td></tr>"
+                ;
 
                 /*
                  * Association à un groupe d'utilisateur
                  */
-             
-                $bloc .= $userView->getHtmlDataField(UserModel::FIELDNAME_ASENDANT_ID_SALARIES);
-                
+                $HtmlList = new HtmlListSelectTagName();
+                $arrayAscendant = DatabaseOperation::convertSqlQueryWithKeyAsFirstFieldToArray(
+                                "SELECT " . UserModel::KEYNAME . ", " . UserModel::FIELDNAME_LOGIN
+                                . " FROM " . UserModel::TABLENAME
+                                . " ORDER BY " . UserModel::FIELDNAME_LOGIN
+                );
+                $HtmlList->setArrayListContent($arrayAscendant);
+                $HtmlList->getAttributes()->getName()->setValue(UserModel::FIELDNAME_ASENDANT_ID_SALARIES);
+                $HtmlList->setLabel(DatabaseDescription::getFieldDocLabel(UserModel::TABLENAME
+                                , UserModel::FIELDNAME_ASENDANT_ID_SALARIES));
+                $HtmlList->setIsEditable(TRUE);
+                $listeAscendant = $HtmlList->getHtmlResult();
+                $bloc .=$listeAscendant;
 
                 /*
                  * Affichage
@@ -210,11 +223,15 @@ if ($modifier == 'modifier') {
                         /*
                          *  Constitution de la liste déroulante des noms des groupes 
                          */
-                        $req = "select id_catsopro, intitule_cat from catsopro order by id_catsopro";
-                        $result = DatabaseOperation::query($req);
-                        if ($result != false) {
-                            while ($row = mysql_fetch_row($result)) {
-                                echo ("<option value=\"$row[0]\">$row[1]</option>");
+                        $arrayCatsopro = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
+                                        "SELECT " . CatsoproModel::KEYNAME
+                                        . ", " . CatsoproModel::FIELDNAME_INTITULE_CAT
+                                        . " FROM " . CatsoproModel::TABLENAME
+                                        . " ORDER BY " . CatsoproModel::KEYNAME
+                        );
+                        if ($arrayCatsopro) {
+                            foreach ($arrayCatsopro as $rowsCatsopro) {
+                                echo ("<option value=\"" . $rowsCatsopro[CatsoproModel::KEYNAME] . "\">" . $rowsCatsopro[CatsoproModel::FIELDNAME_INTITULE_CAT] . "</option>");
                             }
                         }
 
@@ -230,11 +247,16 @@ if ($modifier == 'modifier') {
                         /*
                          * Constitution de la liste déroulante des noms des groupes 
                          */
-                        $req = "select id_service, intitule_ser from services order by intitule_ser";
-                        $result = DatabaseOperation::query($req);
-                        if ($result != false) {
-                            while ($row = mysql_fetch_row($result)) {
-                                echo ("<option value=\"$row[0]\">$row[1]</option>");
+                        $arrayService = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
+                                        "SELECT " . ServicesModel::KEYNAME
+                                        . ", " . ServicesModel::FIELDNAME_INTITULE_SER
+                                        . " FROM " . ServicesModel::TABLENAME
+                                        . " ORDER BY " . ServicesModel::FIELDNAME_INTITULE_SER
+                        );
+
+                        if ($arrayService) {
+                            foreach ($arrayService as $rowsService) {
+                                echo ("<option value=\"" . $rowsService[ServicesModel::KEYNAME] . "\">" . $rowsService[ServicesModel::FIELDNAME_INTITULE_SER] . "</option>");
                             }
                         }
                         echo ("</select>\n");
@@ -249,11 +271,14 @@ if ($modifier == 'modifier') {
                         /*
                          * Constitution de la liste déroulante des noms des groupes 
                          */
-                        $req = "select * from types";
-                        $result = DatabaseOperation::query($req);
-                        if ($result != false) {
-                            while ($row = mysql_fetch_row($result)) {
-                                echo ("<option value=\"$row[0]\">$row[1]</option>");
+                        $arrayType = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
+                                        "SELECT " . TypesModel::KEYNAME
+                                        . ", " . TypesModel::FIELDNAME_INTITULE_TYP
+                                        . " FROM " . TypesModel::TABLENAME
+                        );
+                        if ($arrayType) {
+                            foreach ($arrayType as $rowType) {
+                                echo ("<option value=\"" . $rowType[TypesModel::KEYNAME] . "\">" . $rowType[TypesModel::FIELDNAME_INTITULE_TYP] . "</option>");
                             }
                         }
                         echo ("</select>\n");
@@ -341,7 +366,7 @@ if ($modifier == 'modifier') {
                     <tr>
                         <td class="logFFE5B2">
                     <center>
-                        statistiques
+                        Statistiques
                     </center>
                     </td>
                     </tr>

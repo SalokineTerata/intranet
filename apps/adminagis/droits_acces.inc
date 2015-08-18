@@ -1,5 +1,7 @@
 <?php
 
+//$paramIdUser = Lib::getParameterFromRequest("sal_user");
+$paramIdUser = 320;
 /* * ***************************************************
   Construction des droits d'accès pour tous les modules:
  * ***************************Boris Sanègre 2003.03.25 */
@@ -18,144 +20,248 @@ echo "<br>";
 echo "</td>";
 echo "</tr>";
 
-$req_modules = "SELECT * FROM intranet_modules ";
-$req_modules.= "ORDER BY nom_usuel_intranet_modules ASC";
-$result_modules = DatabaseOperation::query($req_modules);
+$arrayModule = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
+                "SELECT " . IntranetModulesModel::KEYNAME . "," . IntranetModulesModel::FIELDNAME_NOM_USUEL_INTRANET_MODULES
+                . " FROM " . IntranetModulesModel::TABLENAME
+                . " ORDER BY " . IntranetModulesModel::FIELDNAME_NOM_USUEL_INTRANET_MODULES . " ASC");
 $colonne = 6;
 
-while ($rows_modules = mysql_fetch_array($result_modules)) {
-    //Préparation des variables
-    $nom_usuel_intranet_modules = $rows_modules[nom_usuel_intranet_modules];
-    $id_intranet_modules = $rows_modules[id_intranet_modules];
+foreach ($arrayModule as $rowsModules) {
+    /*
+     * Préparation des variables
+     */
+    $nomUsuelIntranetModules = $rowsModules[IntranetModulesModel::FIELDNAME_NOM_USUEL_INTRANET_MODULES];
+    $idIntranetModules = $rowsModules[IntranetModulesModel::KEYNAME];
 
+    /*
+     * Contruction du tableau pour les Fta
+     */
+    if ($idIntranetModules == 19) {
+        echo "<br>";
+        echo "<table width=500 border=1 cellspacing=1 cellpadding=3 align=center>";
 
-    //Construction du tableau
-    echo "<br>";
-    echo "<table width=500 border=1 cellspacing=1 cellpadding=3 align=center>";
+        // Nom du module
+        echo "<tr>";
+        echo "<td bgcolor=\"#FF8000\">";
+        echo "<center>";
+        echo "<h3>" . $nomUsuelIntranetModules . "";
+        echo "</center>";
+        echo "</td>";
+        echo "</tr>";
 
-    // Nom du module
-    echo "<tr>";
-    echo "<td bgcolor=\"#FF8000\">";
-    echo "<center>";
-    echo "<h3>" . $nom_usuel_intranet_modules . "";
-    echo "</center>";
-    echo "</td>";
-    echo "</tr>";
-
-    //Droits d'accès du module
-    //Recherche des droits d'accès globaux
-    $req_actions = "SELECT DISTINCT * "
-            . "FROM intranet_modules, intranet_actions "
-            . "WHERE intranet_modules.id_intranet_modules=$id_intranet_modules "
-            . "AND (module_intranet_actions='0' OR module_intranet_actions=$id_intranet_modules)"
-    ;
-
-    $result_actions = DatabaseOperation::query($req_actions);
-
-    //Tableau de définitions des droits d'accès
-    echo "<tr align=center><td><table border=0><tr>";
-    $current_colonne = 0;
-    while ($rows_actions = mysql_fetch_array($result_actions)) {
-        //Préparation des variables
-        $id_intranet_actions = $rows_actions[id_intranet_actions];
-        $nom_intranet_actions = $rows_actions[nom_intranet_actions];
-        $description_intranet_actions = $rows_actions[description_intranet_actions];
-
-
-
-        //Construction de la liste déroulante des niveaux d'accès
-        //Recherche de niveaux spécifiques
-        $req_niveau_specifique = "SELECT * FROM intranet_niveau_acces "
-                . "WHERE id_intranet_modules=$id_intranet_modules "
-                . "AND id_intranet_actions=$id_intranet_actions "
-        ;
-        $result_niveau_specifique = DatabaseOperation::query($req_niveau_specifique);
-
-        $compte_niveau_specifique = mysql_num_rows($result_niveau_specifique);
-        if ($compte_niveau_specifique) {
-            //S'il existe des niveaux personnalisés, alors ceux-ci sont utilisés
-            $result_niveau = $result_niveau_specifique;
-        } else {
-            $req_niveau_defaut = "SELECT * FROM intranet_niveau_acces ";
-            $req_niveau_defaut.= "WHERE id_intranet_modules=0 ";
-            $req_niveau_defaut.= "AND id_intranet_actions=0";
-            $result_niveau_defaut = DatabaseOperation::query($req_niveau_defaut);
-            $result_niveau = $result_niveau_defaut;
-        }
-
-        //Liste déroulante montrant les différents niveaux d'accès pour le droit d'accès
-        $nb = mysql_num_rows($result_niveau);
-        if ($nb > 1) { // Si il y a plus d'une possibilité, alors liste déroulante
-            //Construction du tableau
-//echo $current_colonne;
-            if ($current_colonne == $colonne) {
-                echo "</tr><tr>";
-                $current_colonne = 0;
-            }
-            $current_colonne++;
-            echo "<td class=loginFFFFFFdroit valign=top width=172>";
-            echo "<center>";
-            echo "$description_intranet_actions<br>";
-
-            $list1 = "<select name=module" . $id_intranet_modules . "_action" . $id_intranet_actions . ">";
-            while ($rows_niveau = mysql_fetch_array($result_niveau)) {
-                //Création des variables necessaires à la liste
-                $id_intranet_niveau_acces = $rows_niveau[id_intranet_niveau_acces];
-                $nom_intranet_niveau_acces = $rows_niveau[nom_intranet_niveau_acces];
-
-                /*
-                  Si l'utilisateur n'existe pas (lors d'une création)
-                  alors on prend les droits de
-                  l'utilisateur système: "template"
-                 */
-
-                if (!$sal_user) {
-                    $req_template = "SELECT id_user FROM salaries "
-                            . "WHERE prenom='template'"
-                    ;
-                    $result_template = DatabaseOperation::query($req_template);
-                    if ($result_template) {
-                        $sal_user = mysql_result($result_template, 0, "id_user");
+        //Droits d'accès du module
+        //Recherche des droits d'accès globaux
+        $arrayActionsWorkflow = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
+                        "SELECT DISTINCT " . IntranetActionsModel::KEYNAME
+                        . "," . IntranetActionsModel::FIELDNAME_DESCRIPTION_INTRANET_ACTIONS
+                        . "," . IntranetActionsModel::FIELDNAME_NOM_INTRANET_ACTIONS
+                        . " FROM " . IntranetActionsModel::TABLENAME
+                        . " WHERE " . IntranetActionsModel::FIELDNAME_MODULE_INTRANET_ACTIONS . "=" . $idIntranetModules
+                        . " AND " . IntranetActionsModel::FIELDNAME_PARENT_INTRANET_ACTIONS . "=0"
+        );
+        foreach ($arrayActionsWorkflow as $rowsActionsWorkflow) {
+            $arrayActions = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
+                            "SELECT DISTINCT " . IntranetActionsModel::KEYNAME
+                            . ", " . IntranetActionsModel::FIELDNAME_NOM_INTRANET_ACTIONS
+                            . ", " . IntranetActionsModel::FIELDNAME_DESCRIPTION_INTRANET_ACTIONS
+                            . ", " . IntranetActionsModel::FIELDNAME_TAG_INTRANET_ACTIONS
+                            . " FROM " . IntranetActionsModel::TABLENAME
+                            . " WHERE " . IntranetActionsModel::FIELDNAME_PARENT_INTRANET_ACTIONS . "=" . $rowsActionsWorkflow[IntranetActionsModel::KEYNAME]
+            );
+            $SiteDeProduction = NULL;
+            $Role = NULL;
+            if ($arrayActions) {
+                $arrayNiveauAcces = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
+                                " SELECT " . IntranetDroitsAccesModel::FIELDNAME_NIVEAU_INTRANET_DROITS_ACCES
+                                . " FROM " . IntranetDroitsAccesModel::TABLENAME
+                                . " WHERE " . IntranetDroitsAccesModel::FIELDNAME_ID_USER . "=" . $paramIdUser
+                                . " AND " . IntranetDroitsAccesModel::FIELDNAME_ID_INTRANET_ACTIONS . "=" . $rowsActionsWorkflow[IntranetActionsModel::KEYNAME]
+                );
+                if ($arrayNiveauAcces) {
+                    foreach ($arrayNiveauAcces as $rowsNiveauAcces) {
+                        $niveauAcces = $rowsNiveauAcces[IntranetDroitsAccesModel::FIELDNAME_NIVEAU_INTRANET_DROITS_ACCES];
                     }
+                } else {
+                    $niveauAcces = 0;
+                }
+                if ($niveauAcces == 1) {
+                    $checked = "checked";
+                } else {
+                    $checked = "";
                 }
 
-                //Est-ce que l'utilisateur à ce niveau d'accès
-                if
-                (
-                        isset($id_intranet_modules)
-                        and isset($id_intranet_actions)
-                        and isset($id_intranet_niveau_acces)
-                        and isset($sal_user)
-                ) {
-                    $req_droits_acces = "SELECT * FROM intranet_droits_acces ";
-                    $req_droits_acces.= "WHERE id_intranet_modules=$id_intranet_modules ";
-                    $req_droits_acces.= "AND id_intranet_actions=$id_intranet_actions ";
-                    $req_droits_acces.= "AND niveau_intranet_droits_acces=$id_intranet_niveau_acces ";
-                    $req_droits_acces.= "AND id_user=$sal_user";
-                    $result_droits_acces = DatabaseOperation::query($req_droits_acces);
+                $ftaDroitsAcces .= "<tr><td rowspan=2><input type=checkbox name=" . $rowsActionsWorkflow[IntranetActionsModel::FIELDNAME_NOM_INTRANET_ACTIONS]
+                        . " value=" . $rowsActionsWorkflow[IntranetActionsModel::KEYNAME] . " $checked />" . $rowsActionsWorkflow[IntranetActionsModel::FIELDNAME_DESCRIPTION_INTRANET_ACTIONS]."<td>";
 
-                    //Si oui, alors il est pris par défaut
-                    $nb_droits_acces = mysql_num_rows($result_droits_acces);
-                    if ($nb_droits_acces) {
-                        $selected = "selected";
+                foreach ($arrayActions as $rowsActions) {
+                    if ($rowsActions[IntranetActionsModel::FIELDNAME_TAG_INTRANET_ACTIONS] == "site") {
+                        $SiteDeProduction[] = $rowsActions[IntranetActionsModel::FIELDNAME_DESCRIPTION_INTRANET_ACTIONS];
                     } else {
-                        $selected = "";
+                        $Role[] = $rowsActions[IntranetActionsModel::FIELDNAME_DESCRIPTION_INTRANET_ACTIONS];
                     }
                 }
-                //Création de la liste
-                $list1.="<option value=$id_intranet_niveau_acces $selected>";
-                $list1.="$nom_intranet_niveau_acces";
-                $list1.="</option>";
             }
-            $list1.="</select>";
-            echo $list1;
-            echo "<br>";
-            echo "</center>";
-            echo "</td>";
-        }//Fin de la liste déroulante
+        }
+    } else {
+
+        /*
+         * Construction du tableau
+         */
+        echo "<br>";
+        echo "<table width=700 border=1 cellspacing=1 cellpadding=3 align=center>";
+
+        // Nom du module
+        echo "<tr>";
+        echo "<td bgcolor=\"#FF8000\">";
+        echo "<center>";
+        echo "<h3>" . $nomUsuelIntranetModules . "";
+        echo "</center>";
+        echo "</td>";
+        echo "</tr>";
+
+        //Droits d'accès du module
+        //Recherche des droits d'accès globaux
+        $arrayActions = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
+                        "SELECT DISTINCT " . IntranetActionsModel::KEYNAME
+                        . ", " . IntranetActionsModel::FIELDNAME_NOM_INTRANET_ACTIONS
+                        . ", " . IntranetActionsModel::FIELDNAME_DESCRIPTION_INTRANET_ACTIONS
+                        . " FROM " . IntranetModulesModel::TABLENAME . "," . IntranetActionsModel::TABLENAME
+                        . " WHERE " . IntranetModulesModel::TABLENAME . "." . IntranetModulesModel::KEYNAME
+                        . "=" . $idIntranetModules
+                        . " AND (" . IntranetActionsModel::FIELDNAME_MODULE_INTRANET_ACTIONS . "='0'"
+                        . " OR " . IntranetActionsModel::FIELDNAME_MODULE_INTRANET_ACTIONS . "=$idIntranetModules)"
+        );
+
+
+        /*
+         * Tableau de définitions des droits d'accès
+         */
+        echo "<tr align=center><td><table border=0><tr>";
+        $current_colonne = 0;
+        foreach ($arrayActions as $rowsActions) {
+            //Préparation des variables
+            $idIntranetActions = $rowsActions[IntranetActionsModel::KEYNAME];
+            $nomIntranetActions = $rowsActions[IntranetActionsModel::FIELDNAME_NOM_INTRANET_ACTIONS];
+            $descriptionIntranetActions = $rowsActions[IntranetActionsModel::FIELDNAME_DESCRIPTION_INTRANET_ACTIONS];
+
+
+
+            /*
+             * Construction de la liste déroulante des niveaux d'accès
+             */
+            /*
+             * Recherche de niveaux spécifiques
+             */
+            $arrayNiveauSpecAcces = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
+                            "SELECT " . IntranetNiveauAccesModel::FIELDNAME_ID_INTRANET_NIVEAU_ACCES
+                            . "," . IntranetNiveauAccesModel::FIELDNAME_NOM_INTRANET_NIVEAU_ACCES
+                            . " FROM " . IntranetNiveauAccesModel::TABLENAME
+                            . " WHERE " . IntranetNiveauAccesModel::FIELDNAME_ID_INTRANET_MODULES . "=" . $idIntranetModules
+                            . " AND " . IntranetNiveauAccesModel::FIELDNAME_ID_INTRANET_ACTIONS . "=" . $idIntranetActions
+            );
+
+            $compte_niveau_specifique = count($arrayNiveauSpecAcces);
+            if ($compte_niveau_specifique) {
+                /*
+                 * S'il existe des niveaux personnalisés, alors ceux-ci sont utilisés
+                 */
+                $arrayNiveauAcces = $arrayNiveauSpecAcces;
+            } else {
+
+                $arrayNiveauAcces = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
+                                "SELECT " . IntranetNiveauAccesModel::FIELDNAME_ID_INTRANET_NIVEAU_ACCES
+                                . "," . IntranetNiveauAccesModel::FIELDNAME_NOM_INTRANET_NIVEAU_ACCES
+                                . " FROM " . IntranetNiveauAccesModel::TABLENAME
+                                . " WHERE " . IntranetNiveauAccesModel::FIELDNAME_ID_INTRANET_MODULES . "=0"
+                                . " AND " . IntranetNiveauAccesModel::FIELDNAME_ID_INTRANET_ACTIONS . "=0");
+            }
+
+            /*
+             * Liste déroulante montrant les différents niveaux d'accès pour le droit d'accès
+             */
+            $nb = count($arrayNiveauAcces);
+            if ($nb > 1) { /*
+             * Si il y a plus d'une possibilité, alors liste déroulante
+             * Construction du tableau
+             */
+                if ($current_colonne == $colonne) {
+                    echo "</tr><tr>";
+                    $current_colonne = 0;
+                }
+                $current_colonne++;
+                echo "<td class=loginFFFFFFdroit valign=top width=172>";
+                echo "<center>";
+                echo "$descriptionIntranetActions<br>";
+
+                $list1 = "<select name=module" . $idIntranetModules . "_action" . $idIntranetActions . ">";
+                foreach ($arrayNiveauAcces as $rowsNiveau) {
+                    /*
+                     * Création des variables necessaires à la liste
+                     */
+                    $idIntranetNiveauAcces = $rowsNiveau[IntranetNiveauAccesModel::FIELDNAME_ID_INTRANET_NIVEAU_ACCES];
+                    $nomIntranetNiveauAcces = $rowsNiveau[IntranetNiveauAccesModel::FIELDNAME_NOM_INTRANET_NIVEAU_ACCES];
+
+                    /*
+                      Si l'utilisateur n'existe pas (lors d'une création)
+                      alors on prend les droits de
+                      l'utilisateur système: "template"
+                     */
+
+                    if (!$sal_user) {
+                        $arrayUser = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
+                                        "SELECT " . UserModel::KEYNAME
+                                        . " FROM " . UserModel::TABLENAME
+                                        . " WHERE " . UserModel::FIELDNAME_PRENOM . "='template'"
+                        );
+                        if ($arrayUser) {
+                            foreach ($arrayUser as $value) {
+                                $idUser = $value[UserModel::KEYNAME];
+                            }
+                        }
+                    }
+
+                    //Est-ce que l'utilisateur à ce niveau d'accès
+                    if
+                    (
+                            isset($idIntranetModules)
+                            and isset($idIntranetActions)
+                            and isset($idIntranetNiveauAcces)
+                            and isset($sal_user)
+                    ) {
+
+                        $arrayDroitsAcces = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
+                                        "SELECT " . IntranetDroitsAccesModel::FIELDNAME_ID_INTRANET_ACTIONS
+                                        . " FROM " . IntranetDroitsAccesModel::TABLENAME
+                                        . " WHERE " . IntranetDroitsAccesModel::FIELDNAME_ID_INTRANET_MODULES . "=" . $idIntranetModules
+                                        . " AND " . IntranetDroitsAccesModel::FIELDNAME_ID_INTRANET_ACTIONS . "= " . $idIntranetActions
+                                        . " AND " . IntranetDroitsAccesModel::FIELDNAME_NIVEAU_INTRANET_DROITS_ACCES . "=" . $idIntranetNiveauAcces
+                                        . " AND " . IntranetDroitsAccesModel::FIELDNAME_ID_USER . "=" . $idUser
+                        );
+
+                        /*
+                         * Si oui, alors il est pris par défaut
+                         */
+                        if ($arrayDroitsAcces) {
+                            $selected = "selected";
+                        } else {
+                            $selected = "";
+                        }
+                    }
+                    //Création de la liste
+                    $list1.="<option value=$idIntranetNiveauAcces $selected>";
+                    $list1.="$nomIntranetNiveauAcces";
+                    $list1.="</option>";
+                }
+                $list1.="</select>";
+                echo $list1;
+                echo "<br>";
+                echo "</center>";
+                echo "</td>";
+            }//Fin de la liste déroulante
+        }
+        echo "</td></tr></table></tr>";
+        echo "</table>";
     }
-    echo "</td></tr></table></tr>";
-    echo "</table>";
 }
 echo "<br>";
 ?>

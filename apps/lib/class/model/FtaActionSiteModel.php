@@ -12,5 +12,6 @@ class FtaActionSiteModel extends AbstractModel {
     const KEYNAME = "id_fta_action_site";
     const FIELDNAME_ID_SITE = "id_site";
     const FIELDNAME_ID_INTRANET_ACTIONS = "id_intranet_actions";
+    const FIELDNAME_ID_FTA_WROKFLOW = "id_fta_workflow";
 
 }

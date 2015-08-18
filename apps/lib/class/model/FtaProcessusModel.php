@@ -19,6 +19,50 @@ class FtaProcessusModel extends AbstractModel {
     const PROCESSUS_PUBLIC = 0;
 
     /**
+     * Selon le proccessus en cours nous verifions si les proceesus suivant sont validés
+     * @param type $paramIdFta
+     * @param type $paramProcessusEncours
+     * @param type $paramIdWorkflowEncours
+     * @return type
+     */
+    public static function getNonValideProcessusSuivant($paramIdFta, $paramProcessusEncours, $paramIdWorkflowEncours) {
+
+        /*
+         * Nombres total de processus suivant pour le processus en cours
+         */
+        $array = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
+                        "SELECT DISTINCT " . FtaProcessusCycleModel::FIELDNAME_PROCESSUS_NEXT . "," . FtaProcessusCycleModel::TABLENAME . "." . FtaProcessusCycleModel::FIELDNAME_WORKFLOW
+                        . " FROM " . FtaWorkflowStructureModel::TABLENAME . "," . FtaProcessusModel::TABLENAME
+                        . "," . FtaProcessusCycleModel::TABLENAME
+                        . " WHERE " . FtaWorkflowStructureModel::TABLENAME . "." . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_PROCESSUS
+                        . "=" . FtaProcessusModel::TABLENAME . "." . FtaProcessusModel::KEYNAME
+                        . " AND " . FtaProcessusModel::TABLENAME . "." . FtaProcessusModel::KEYNAME
+                        . "=" . FtaProcessusCycleModel::TABLENAME . "." . FtaProcessusCycleModel::FIELDNAME_PROCESSUS_INIT
+                        . " AND " . FtaWorkflowStructureModel::TABLENAME . "." . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_ROLE
+                        . "=" . FtaProcessusModel::TABLENAME . "." . FtaProcessusModel::FIELDNAME_ID_FTA_ROLE
+                        . " AND " . FtaProcessusModel::TABLENAME . "." . FtaProcessusModel::KEYNAME . "=" . $paramProcessusEncours
+                        . " AND " . FtaProcessusCycleModel::TABLENAME . "." . FtaProcessusCycleModel::FIELDNAME_WORKFLOW . "=" . $paramIdWorkflowEncours
+        );
+
+        $nombre_total_processus_precedent = count($array);
+        if ($array) {
+            /*
+             * Vérifie si tous les processus précédent du processus en cours a des chapitres non validé
+             */
+            foreach ($array as $rows) {
+                $tauxValidationProcessusEncours = 0;
+                $tauxValidationProcessus += FtaProcessusModel::getValideProcessusEncours($paramIdFta, $rows[FtaProcessusCycleModel::FIELDNAME_PROCESSUS_NEXT], $rows[FtaProcessusCycleModel::FIELDNAME_WORKFLOW]);
+                if ($tauxValidationProcessus != 0) {
+                    $tauxValidationProcessusEncours = $tauxValidationProcessus / $nombre_total_processus_precedent;
+                }
+            }
+        }
+        $return = $tauxValidationProcessusEncours;
+
+        return $return;
+    }
+
+    /**
      * 
      * @param type $paramIdFta
      * @param type $paramProcessusEncours
@@ -71,7 +115,8 @@ class FtaProcessusModel extends AbstractModel {
     public static function getNonValideIdFtaByRoleWorkflowProcessus($paramIdFta, $paramIdRole, $paramIdWorkflow) {
 
         $arrayChapitreTotal = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
-                        "SELECT * FROM " . FtaWorkflowStructureModel::TABLENAME . "," . FtaProcessusModel::TABLENAME
+                        "SELECT " . FtaWorkflowStructureModel::KEYNAME
+                        . " FROM " . FtaWorkflowStructureModel::TABLENAME . "," . FtaProcessusModel::TABLENAME
                         . " WHERE " . FtaWorkflowStructureModel::TABLENAME . "." . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_PROCESSUS
                         . "=" . FtaProcessusModel::TABLENAME . "." . FtaProcessusModel::KEYNAME  //Jointure                
                         . " AND " . FtaWorkflowStructureModel::TABLENAME . "." . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_ROLE
@@ -83,7 +128,8 @@ class FtaProcessusModel extends AbstractModel {
         $nombreTotalProcessus = count($arrayChapitreTotal);
 
         $arrayChapitreValide = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
-                        "SELECT * FROM " . FtaModel::TABLENAME . "," . FtaSuiviProjetModel::TABLENAME
+                        "SELECT " . FtaWorkflowStructureModel::KEYNAME
+                        . " FROM " . FtaModel::TABLENAME . "," . FtaSuiviProjetModel::TABLENAME
                         . "," . FtaWorkflowStructureModel::TABLENAME . "," . FtaProcessusModel::TABLENAME
                         . " WHERE " . FtaModel::TABLENAME . "." . FtaModel::KEYNAME
                         . "=" . FtaSuiviProjetModel::TABLENAME . "." . FtaSuiviProjetModel::FIELDNAME_ID_FTA            //Jointure

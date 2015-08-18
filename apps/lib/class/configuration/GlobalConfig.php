@@ -20,6 +20,8 @@ class GlobalConfig {
     const DISPATCHER_ACTION_VIEW_RECORD = "view_record";
     const INITIALIZED_TRUE = TRUE;
     const INITIALIZED_FALSE = FALSE;
+    const MYSQL_HOST = "mysql:host=";
+    const MYSQL_DBNAME = ";dbname=";
     const VARNAME_EXEC_DEBUG_TIME_START = "exec_debug_time_start";
     const VARNAME_GLOBALCONFIG_IN_PHP_SESSION = "globalConfig";
     const VARNAME_IS_GLOBALCONFIG_INITIALIZED = "isGlobalConfigInitialized";
@@ -44,6 +46,12 @@ class GlobalConfig {
      * @var UserModel 
      */
     private $authenticatedUser = NULL;
+
+    /**
+     * Connexion à la base de donnée
+     * 
+     */
+    private $databaseConnexion;
 
     function __construct() {
 
@@ -99,10 +107,28 @@ class GlobalConfig {
         $_SESSION[GlobalConfig::VARNAME_GLOBALCONFIG_IN_PHP_SESSION] = $paramGlobalConfig;
     }
 
+    /**
+     * Ouverture de la connexion MySQL  
+     */
+    /*
+      function openDatabaseConnexion() {
+
+      $this->setDatabaseConnexion(new PDO(GlobalConfig::MYSQL_HOST . $this->getConf()->getMysqlServerName()
+      . GlobalConfig::MYSQL_DBNAME . $this->getConf()->getMysqlDatabaseName()
+      , $this->getConf()->getMysqlDatabaseAuthentificationUsername()
+      , $this->getConf()->getMysqlDatabaseAuthentificationPassword()
+      ));
+
+      $pdostatement= $this->getDatabaseConnexion()->query("SET NAMES utf8");
+      PDOStatement::execute($pdostatement);
+      }
+     */
+
+    /**
+     * Ouverture de la connexion MySQL  
+     */
     function openDatabaseConnexion() {
-        /**
-         * Ouverture de la connexion MySQL  
-         */
+
         mysql_connect($this->getConf()->getMysqlServerName()
                 , $this->getConf()->getMysqlDatabaseAuthentificationUsername()
                 , $this->getConf()->getMysqlDatabaseAuthentificationPassword()
@@ -218,6 +244,14 @@ class GlobalConfig {
 
     function setNeedBuildConf($needBuildConf) {
         $this->needBuildConf = $needBuildConf;
+    }
+
+    function getDatabaseConnexion() {
+        return $this->databaseConnexion;
+    }
+
+    function setDatabaseConnexion($databaseConnexion) {
+        $this->databaseConnexion = $databaseConnexion;
     }
 
     static function getIsGlobalConfigExistInPhpSession() {

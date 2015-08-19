@@ -4,7 +4,7 @@
       require_once '../inc/main.php';
 
 identification1("salaries", $login, $pass);
-  securadmin(2, $id_type);
+  UserModel::securadmin(2, $id_type);
 
 //  include("functions.php");
 //  include("functions.js");

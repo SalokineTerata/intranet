@@ -30,7 +30,7 @@ class IntranetDroitsAccesModel {
                         . " AND " . IntranetDroitsAccesModel::FIELDNAME_ID_USER . "=" . $paramIdUser
                         . " AND " . IntranetDroitsAccesModel::FIELDNAME_NIVEAU_INTRANET_DROITS_ACCES . " =1"
         );
-       
+
         if ($arrayIdIntranetActions) {
             foreach ($arrayIdIntranetActions as $rowsIdIntranetActions) {
                 $IdIntranetActions[] = $rowsIdIntranetActions[IntranetDroitsAccesModel::FIELDNAME_ID_INTRANET_ACTIONS];
@@ -45,7 +45,7 @@ class IntranetDroitsAccesModel {
      * Franck Amofa 2015.08.07
      * @param type $paramSalUser
      */
-    public static function BuildHtmlDroitsAcces($paramSalUser) {
+    public static function BuildHtmlDroitsAcces($paramSalUser = NULL) {
         echo "<br>";
         echo "</center>";
         echo "</td>";
@@ -123,20 +123,20 @@ class IntranetDroitsAccesModel {
                         $checked = IntranetDroitsAccesModel::CheckValueByNiveauAcces($paramSalUser, $rowsActionsWorkflow[IntranetActionsModel::KEYNAME]);
 
 
-                        $ftaDroitsAcces .= "<table border=1 width=500 ><td class=id_fta_workflow style=visibility:hidden align=left width=100><input type=checkbox name=" . $rowsActionsWorkflow[IntranetActionsModel::FIELDNAME_NOM_INTRANET_ACTIONS]
-                                . " value=" . $rowsActionsWorkflow[IntranetActionsModel::KEYNAME] . " $checked />" . $rowsActionsWorkflow[IntranetActionsModel::FIELDNAME_DESCRIPTION_INTRANET_ACTIONS] . "</td>"
+                        $ftaDroitsAcces .= "<table border=1 width=500 ><td class=id_fta_workflow style=visibility:hidden align=left width=100><input type=checkbox name=" . $rowsActionsWorkflow[IntranetActionsModel::FIELDNAME_NOM_INTRANET_ACTIONS] . "_" . $rowsActionsWorkflow[IntranetActionsModel::KEYNAME]
+                                . " value=1 $checked />" . $rowsActionsWorkflow[IntranetActionsModel::FIELDNAME_DESCRIPTION_INTRANET_ACTIONS] . "</td>"
                                 . "<td align=left class=site  style=visibility:hidden ><table >";
 
                         foreach ($arrayActions as $rowsActions) {
                             if ($rowsActions[IntranetActionsModel::FIELDNAME_TAG_INTRANET_ACTIONS] == "site") {
                                 $checked = IntranetDroitsAccesModel::CheckValueByNiveauAcces($paramSalUser, $rowsActions[IntranetActionsModel::KEYNAME]);
                                 $SiteDeProduction .="<tr  align=left><td  class=loginFFFFFFdroit valign=top width=172>"
-                                        . "<input type=checkbox name=" . $rowsActions[IntranetActionsModel::FIELDNAME_NOM_INTRANET_ACTIONS]
-                                        . " value=" . $rowsActions[IntranetActionsModel::KEYNAME] . " $checked />" . $rowsActions[IntranetActionsModel::FIELDNAME_DESCRIPTION_INTRANET_ACTIONS] . "</td></tr></td>";
+                                        . "<input type=checkbox name=" . $rowsActions[IntranetActionsModel::FIELDNAME_NOM_INTRANET_ACTIONS] . "_" . $rowsActions[IntranetActionsModel::KEYNAME]
+                                        . " value=1 $checked />" . $rowsActions[IntranetActionsModel::FIELDNAME_DESCRIPTION_INTRANET_ACTIONS] . "</td></tr></td>";
                             } else {
                                 $checked = IntranetDroitsAccesModel::CheckValueByNiveauAcces($paramSalUser, $rowsActions[IntranetActionsModel::KEYNAME]);
-                                $Role .= "<tr align=left><td  class=loginFFFFFFdroit valign=top width=172><input type=checkbox name=" . $rowsActions[IntranetActionsModel::FIELDNAME_NOM_INTRANET_ACTIONS]
-                                        . " value=" . $rowsActions[IntranetActionsModel::KEYNAME] . " $checked />" . $rowsActions[IntranetActionsModel::FIELDNAME_DESCRIPTION_INTRANET_ACTIONS] . "</td></tr></td>";
+                                $Role .= "<tr align=left><td  class=loginFFFFFFdroit valign=top width=172><input type=checkbox name=" . $rowsActions[IntranetActionsModel::FIELDNAME_NOM_INTRANET_ACTIONS] . "_" . $rowsActions[IntranetActionsModel::KEYNAME]
+                                        . " value=1  $checked />" . $rowsActions[IntranetActionsModel::FIELDNAME_DESCRIPTION_INTRANET_ACTIONS] . "</td></tr></td>";
                             }
                         }
                         $ftaDroitsAcces .=$SiteDeProduction . "</table></td><td class=role style=visibility:hidden ><table >" . $Role . "</table></td></table>";
@@ -149,6 +149,7 @@ class IntranetDroitsAccesModel {
                                 "SELECT DISTINCT " . IntranetActionsModel::KEYNAME
                                 . ", " . IntranetActionsModel::FIELDNAME_NOM_INTRANET_ACTIONS
                                 . ", " . IntranetActionsModel::FIELDNAME_DESCRIPTION_INTRANET_ACTIONS
+                                . ", " . IntranetActionsModel::FIELDNAME_MODULE_INTRANET_ACTIONS
                                 . " FROM " . IntranetActionsModel::TABLENAME
                                 . " WHERE " . IntranetActionsModel::FIELDNAME_MODULE_INTRANET_ACTIONS . "='0'"
                 );
@@ -156,11 +157,10 @@ class IntranetDroitsAccesModel {
                 foreach ($arrayActionsGlobaux as $rowsActionsGlobaux) {
 
                     $checked = IntranetDroitsAccesModel::CheckValueByNiveauAcces($paramSalUser, $rowsActionsGlobaux[IntranetActionsModel::KEYNAME]);
-                    $franck = json_encode($idWorkflow);
                     $ftaDroitsAccesGlobaux .="<td  align=left width=100><input type=checkbox onclick=Change()"
                             . " id=" . $rowsActionsGlobaux[IntranetActionsModel::FIELDNAME_NOM_INTRANET_ACTIONS]
-                            . " name=" . $rowsActionsGlobaux[IntranetActionsModel::FIELDNAME_NOM_INTRANET_ACTIONS]
-                            . " value=" . $rowsActionsGlobaux[IntranetActionsModel::KEYNAME] . " $checked />" . $rowsActionsGlobaux[IntranetActionsModel::FIELDNAME_DESCRIPTION_INTRANET_ACTIONS] . "</td>"
+                            . " name=" . $rowsActionsGlobaux[IntranetActionsModel::FIELDNAME_NOM_INTRANET_ACTIONS] . "_" . $rowsActionsGlobaux[IntranetActionsModel::KEYNAME]
+                            . " value=1 $checked />" . $rowsActionsGlobaux[IntranetActionsModel::FIELDNAME_DESCRIPTION_INTRANET_ACTIONS] . "</td>"
                     ;
                 }
 
@@ -271,18 +271,18 @@ class IntranetDroitsAccesModel {
                               l'utilisateur système: "template"
                              */
 
-                            if (!$sal_user) {
-                                $arrayUser = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
-                                                "SELECT " . UserModel::KEYNAME
-                                                . " FROM " . UserModel::TABLENAME
-                                                . " WHERE " . UserModel::FIELDNAME_PRENOM . "='template'"
-                                );
-                                if ($arrayUser) {
-                                    foreach ($arrayUser as $value) {
-                                        $idUser = $value[UserModel::KEYNAME];
-                                    }
-                                }
-                            }
+//                            if (!$paramSalUser) {
+//                                $arrayUser = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
+//                                                "SELECT " . UserModel::KEYNAME
+//                                                . " FROM " . UserModel::TABLENAME
+//                                                . " WHERE " . UserModel::FIELDNAME_PRENOM . "='template'"
+//                                );
+//                                if ($arrayUser) {
+//                                    foreach ($arrayUser as $value) {
+//                                        $idUser = $value[UserModel::KEYNAME];
+//                                    }
+//                                }
+//                            }
 
                             //Est-ce que l'utilisateur à ce niveau d'accès
                             if
@@ -290,16 +290,16 @@ class IntranetDroitsAccesModel {
                                     isset($idIntranetModules)
                                     and isset($idIntranetActions)
                                     and isset($idIntranetNiveauAcces)
-                                    and isset($sal_user)
+                                    and isset($paramSalUser)
                             ) {
 
                                 $arrayDroitsAcces = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
-                                                "SELECT " . IntranetDroitsAccesModel::KEYNAME
+                                                "SELECT " . IntranetDroitsAccesModel::FIELDNAME_ID_INTRANET_ACTIONS
                                                 . " FROM " . IntranetDroitsAccesModel::TABLENAME
                                                 . " WHERE " . IntranetDroitsAccesModel::FIELDNAME_ID_INTRANET_MODULES . "=" . $idIntranetModules
                                                 . " AND " . IntranetDroitsAccesModel::FIELDNAME_ID_INTRANET_ACTIONS . "= " . $idIntranetActions
                                                 . " AND " . IntranetDroitsAccesModel::FIELDNAME_NIVEAU_INTRANET_DROITS_ACCES . "=" . $idIntranetNiveauAcces
-                                                . " AND " . IntranetDroitsAccesModel::FIELDNAME_ID_USER . "=" . $idUser
+                                                . " AND " . IntranetDroitsAccesModel::FIELDNAME_ID_USER . "=" . $paramSalUser
                                 );
 
                                 /*

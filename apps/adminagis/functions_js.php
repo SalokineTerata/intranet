@@ -230,6 +230,17 @@
 
     }
 
+    function confirmation(paramIdUser) {
+        var idUser = paramIdUser;
+        {
+            if (confirm('vous etes sur le point de supprimer un utilisateur'))
+            {
+                location.href = "gestion_salaries11.php?modifier=supprimer&sal_user=" + idUser;
+            }
+            else {
+            }
+        }
 
+    }
 </script>
 

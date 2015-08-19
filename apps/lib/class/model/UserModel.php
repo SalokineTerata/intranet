@@ -43,6 +43,12 @@ class UserModel extends AbstractModel {
         return $this->getDataField(UserModel::FIELDNAME_LIEU_GEO)->getFieldValue();
     }
 
+    /**
+     * 
+     * @param type $paramArrayIdFta
+     * @param type $paramOrderBy
+     * @return type
+     */
     public static function getIdFtaByUserAndWorkflow($paramArrayIdFta, $paramOrderBy) {
 
 
@@ -88,6 +94,52 @@ class UserModel extends AbstractModel {
             $array = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray($req);
 
             return $array;
+        }
+    }
+
+    /**
+     * Suppression d'un salarié de l'intranet
+     * @param type $paramIdSalaries
+     */
+    public static function suppressionIntranetUtilisateur($paramIdSalaries) {
+        DatabaseOperation::query(
+                "DELETE FROM " . ModesModel::TABLENAME
+                . " WHERE " . ModesModel::FIELDNAME_ID_USER . "=" . $paramIdSalaries
+        );
+        DatabaseOperation::query(
+                "DELETE FROM " . DroitftModel::TABLENAME
+                . " WHERE " . DroitftModel::FIELDNAME_ID_USER . "=" . $paramIdSalaries
+        );
+        DatabaseOperation::query(
+                "DELETE FROM " . UserModel::TABLENAME
+                . " WHERE " . UserModel::KEYNAME . "=" . $paramIdSalaries
+        );
+        DatabaseOperation::query(
+                "DELETE FROM " . IntranetDroitsAccesModel::TABLENAME
+                . " WHERE " . IntranetDroitsAccesModel::FIELDNAME_ID_USER . "=" . $paramIdSalaries
+        );
+        DatabaseOperation::query(
+                "DELETE FROM " . LuModel::TABLENAME
+                . " WHERE " . LuModel::FILEDNAME_ID_USER . "=" . $paramIdSalaries);
+        DatabaseOperation::query(
+                "DELETE FROM " . PlanningPresenceDetailModel::TABLENAME
+                . " WHERE " . PlanningPresenceDetailModel::FILEDNAME_ID_USER . "=" . $paramIdSalaries);
+        DatabaseOperation::query(
+                "DELETE FROM " . PersoModel::TABLENAME
+                . " WHERE " . PersoModel::KEYNAME . "=" . $paramIdSalaries);
+    }
+
+    /**
+     * Verification du bon droits d'utilisateur pour les pages admin
+     * @param type $paramTypePag
+     * @param type $paramIdType
+     */
+    public static function securadmin($paramTypePag, $paramIdType) {
+        if ($paramTypePag > $paramIdType) {
+            header("Location: ../index.php?action=delog");
+        }
+        if (!$paramIdType) {
+            header("Location: ../index.php?action=delog");
         }
     }
 

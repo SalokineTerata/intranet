@@ -4,7 +4,7 @@
       require_once '../inc/main.php';
       
   identification1("salaries", $login, $pass);
-  securadmin(3, $id_type);
+  UserModel::securadmin(3, $id_type);
 
   if ($mod=="mod")
   {

@@ -6,301 +6,277 @@ require_once '../inc/main.php';
 
 $globalConfig = new GlobalConfig();
 $login = $globalConfig->getAuthenticatedUser()->getKeyValue();
-$idUser = $globalConfig->getAuthenticatedUser()->getKeyValue();
-$userLogin = $globalConfig->getAuthenticatedUser()->getDataField(UserModel::FIELDNAME_LOGIN)->getFieldValue();
 $pass = $globalConfig->getAuthenticatedUser()->getDataField(UserModel::FIELDNAME_PASSWORD)->getFieldValue();
-$userNom = $globalConfig->getAuthenticatedUser()->getDataField(UserModel::FIELDNAME_NOM)->getFieldValue();
-$userPrenom = $globalConfig->getAuthenticatedUser()->getDataField(UserModel::FIELDNAME_PRENOM)->getFieldValue();
 $id_type = $globalConfig->getAuthenticatedUser()->getDataField(UserModel::FIELDNAME_ID_TYPE)->getFieldValue();
-$userCatsopro = $globalConfig->getAuthenticatedUser()->getDataField(UserModel::FIELDNAME_ID_CATSOPRO)->getFieldValue();
-$userService = $globalConfig->getAuthenticatedUser()->getDataField(UserModel::FIELDNAME_ID_SERVICE)->getFieldValue();
-$dateCreationUser = $globalConfig->getAuthenticatedUser()->getDataField(UserModel::FIELDNAME_DATE_CREATION_SALARIES)->getFieldValue();
-$ascendantIdSalaries = $globalConfig->getAuthenticatedUser()->getDataField(UserModel::FIELDNAME_ASENDANT_ID_SALARIES)->getFieldValue();
-$newsDefil = $globalConfig->getAuthenticatedUser()->getDataField(UserModel::FIELDNAME_NEWSDEFIL)->getFieldValue();
-$newLieuGeo = $globalConfig->getAuthenticatedUser()->getDataField(UserModel::FIELDNAME_LIEU_GEO)->getFieldValue();
-$membreCe = $globalConfig->getAuthenticatedUser()->getDataField(UserModel::FIELDNAME_MEMBRE_CE)->getFieldValue();
-$ecriture = $globalConfig->getAuthenticatedUser()->getDataField(UserModel::FIELDNAME_ECRITURE)->getFieldValue();
-$userMail = $globalConfig->getAuthenticatedUser()->getDataField(UserModel::FIELDNAME_MAIL)->getFieldValue();
-$modifier= Lib::getParameterFromRequest("modifier");
+
+$idUser = Lib::getParameterFromRequest("sal_user");
+/**
+ * Initialisation
+ */
+$userModel = new UserModel($idUser);
+$paramUserLogin = $userModel->getDataField(UserModel::FIELDNAME_LOGIN)->getFieldValue();
+$paramUserNom = $userModel->getDataField(UserModel::FIELDNAME_NOM)->getFieldValue();
+$paramUserPrenom = $userModel->getDataField(UserModel::FIELDNAME_PRENOM)->getFieldValue();
+$paramUserCatsopro = $userModel->getDataField(UserModel::FIELDNAME_ID_CATSOPRO)->getFieldValue();
+$paramUserService = $userModel->getDataField(UserModel::FIELDNAME_ID_SERVICE)->getFieldValue();
+$paramDateCreationUser = $userModel->getDataField(UserModel::FIELDNAME_DATE_CREATION_SALARIES)->getFieldValue();
+$paramAscendantIdSalaries = $userModel->getDataField(UserModel::FIELDNAME_ASENDANT_ID_SALARIES)->getFieldValue();
+$paramNewsDefil = $userModel->getDataField(UserModel::FIELDNAME_NEWSDEFIL)->getFieldValue();
+$paramNewLieuGeo = $userModel->getDataField(UserModel::FIELDNAME_LIEU_GEO)->getFieldValue();
+$paramMembreCe = $userModel->getDataField(UserModel::FIELDNAME_MEMBRE_CE)->getFieldValue();
+$paramEcriture = $userModel->getDataField(UserModel::FIELDNAME_ECRITURE)->getFieldValue();
+$paramUserMail = $userModel->getDataField(UserModel::FIELDNAME_MAIL)->getFieldValue();
+$paramModifier = Lib::getParameterFromRequest("modifier");
+$paramLectureft = Lib::getParameterFromRequest("lectureft");
+$paramValidft = Lib::getParameterFromRequest("validft");
+$paramCreationft = Lib::getParameterFromRequest("creation_ft");
+$paramEcritureft = Lib::getParameterFromRequest("ecritureft");
+$paramCreationFicheProduit = Lib::getParameterFromRequest("creation_fiche_produit");
+$paramDroitstat = Lib::getParameterFromRequest("droitstat");
 identification1("salaries", $login, $pass);
-  securadmin(4, $id_type);
+UserModel::securadmin(4, $id_type);
 
 
-//echo $ascendant_id_salaries;
-
-  if ($modifier=='modifier')
-  {
+/*
+ *  Modification de l'utilisateur
+ */
+if ($paramModifier == 'modifier') {
     //*********************** SALARIES ***********************//
-    $userNom=addslashes($userNom);
-    $userPrenom=addslashes($userPrenom);
-    $userNom=strtoupper($userNom);
-    $req = "update salaries set "
-         . "nom='$userNom', "
-         . "prenom='$userPrenom', "
-         . "id_catsopro='$userCatsopro', "
-         . "id_service='$userService', "
-         . "id_type='$sal_type', "
-         . "login='$userLogin', "
-         ;
-    if($sal_pass)
-    {
-        $req .= "pass=PASSWORD('$sal_pass'), ";
+    $paramUserPrenom = addslashes($paramUserPrenom);
+    $paramUserNom = strtoupper($paramUserNom);
+    $req = "UPDATE " . UserModel::TABLENAME
+            . " SET " . UserModel::FIELDNAME_NOM . "='$paramUserNom'"
+            . ", " . UserModel::FIELDNAME_PRENOM . "='$paramUserPrenom'"
+            . ", " . UserModel::FIELDNAME_ID_CATSOPRO . "='$paramUserCatsopro'"
+            . ", " . UserModel::FIELDNAME_ID_SERVICE . "='$paramUserService'"
+            . ", " . UserModel::FIELDNAME_ID_TYPE . "='$sal_type'"
+            . ", " . UserModel::FIELDNAME_LOGIN . "='$paramUserLogin', "
+    ;
+    if ($paramUserPass) {
+        $req .= UserModel::FIELDNAME_PASSWORD . "=PASSWORD('" . $paramUserPass . "'), ";
     }
-    $req .= "mail='$userMail', "
-         . "ecriture='$ecriture', "
-         . "membre_ce='$membreCe', "
-         . "lieu_geo='$newLieuGeo', "
-         . "newsdefil='$newsDefil', "
-         . "ascendant_id_salaries='$ascendantIdSalaries', "
-         . "date_creation_salaries='$dateCreationUser' "
-         . "where id_user='$idUser' "
-         ;
-    //echo $req;
-    $result=DatabaseOperation::query($req);
+    $req .= UserModel::FIELDNAME_MAIL . "='$paramUserMail'"
+            . ", " . UserModel::FIELDNAME_ECRITURE . "='$paramEcriture'"
+            . ", " . UserModel::FIELDNAME_MEMBRE_CE . "='" . $paramMembreCe . "'"
+            . ", " . UserModel::FIELDNAME_LIEU_GEO . "='" . $paramNewLieuGeo . "'"
+            . ", " . UserModel::FIELDNAME_NEWSDEFIL . "='" . $paramNewsDefil . "'"
+            . ", " . UserModel::FIELDNAME_ASENDANT_ID_SALARIES . "='" . $paramAscendantIdSalaries . "'"
+            . ", " . UserModel::FIELDNAME_DATE_CREATION_SALARIES . "='" . $paramDateCreationUser . "'"
+            . " WHERE " . UserModel::KEYNAME . "=" . $idUser
+    ;
 
-    $req="update droitft set ecritureft='$ecritureft', lectureft='$lectureft', creation_ft='$creation_ft',
-    creation_fiche_produit='$creation_fiche_produit', validft='$validft', droitstat='$droitstat' where id_user='$idUser'";
-    $result=DatabaseOperation::query($req);
+    DatabaseOperation::query($req);
+
+    DatabaseOperation::query(
+            "UPDATE " . DroitftModel::TABLENAME
+            . " SET " . DroitftModel::FIELDNAME_ECRITUREFT . "='" . $paramEcritureft
+            . "', " . DroitftModel::FIELDNAME_LECTUREFT . "='" . $paramLectureft
+            . "', " . DroitftModel::FIELDNAME_CREATION_FT . "='" . $paramCreationft
+            . "', " . DroitftModel::FIELDNAME_CREATION_FICHE_PRODUIT . "='" . $paramCreationFicheProduit
+            . "', " . DroitftModel::FIELDNAME_VALIDFT . "='" . $paramValidft
+            . "', " . DroitftModel::FIELDNAME_DROITSTAT . "='" . $paramDroitstat
+            . "' WHERE " . DroitftModel::FIELDNAME_ID_USER . "=" . $idUser
+    );
 
     //************************ MODES ************************//
-    // Requete pour lire tous les champs text nommes avec le numero du service
-    $req="select distinct id_service from services order by id_service";
-    $result=DatabaseOperation::query($req);
-    if ($result!=false)
-    {
-      $num=mysql_num_rows($result);
-      $i=0;
-      while ($i<$num)
-      {
-      // Recuperation du service et du niveau a affecter
-        $service=mysql_result($result, $i, id_service);
-        $toto="service";
-        $text= $$toto;
-        $niveau=$$text;
-// Update dans la table pour chaque service
-        $req2="update modes set serv_conf=$niveau where id_user='$idUser' and id_service='$service'";
-        $result2=DatabaseOperation::query($req2);
-        if ($result==false)
-          echo ("Update impossible pour le service $service pour le salarie $idUser");
-        $i++;
-      }
+    /*
+     *  Requete pour lire tous les champs text nommes avec le numero du service
+     */
+    $arrayService = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
+                    "SELECT DISTINCT " . ServicesModel::KEYNAME
+                    . " FROM " . ServicesModel::TABLENAME
+                    . " ORDER BY " . ServicesModel::KEYNAME
+    );
+
+    if ($arrayService) {
+
+        foreach ($arrayService as $rowsService) {
+            /*
+             *  Recuperation du service et du niveau a affecter
+             */
+            $service = $rowsService[ServicesModel::KEYNAME];
+            $toto = "service";
+            $text = $$toto;
+            $niveau = $$text;
+            /*
+             *  Update dans la table pour chaque service
+             */
+            $result2 = DatabaseOperation::query("UPDATE " . ModesModel::TABLENAME
+                            . " SET " . ModesModel::FIELDNAME_SERV_CONF . " =$niveau"
+                            . " WHERE " . ModesModel::FIELDNAME_ID_USER . " =" . $idUser
+                            . " AND " . ModesModel::FIELDNAME_ID_SERVICE . " =" . $service
+            );
+            if ($result2 == false) {
+                echo ("Update impossible pour le service $service pour le salarie $idUser <br>");
+            }
+        }
     }
 
-    /**********************************************
-    Mise à jour des droits d'accès de l'utilisateur
-    *********************Boris Sanègre 2003.03.28**
-    *********************Boris Sanègre 2007.01.09*/
+    /*     * ********************************************
+      Mise à jour des droits d'accès de l'utilisateur
+     * ********************Boris Sanègre 2003.03.28**
+     * ********************Boris Sanègre 2007.01.09 */
 
-//Récupération des droits d'accès faisable dans l'Intranet
-$req = "SELECT `intranet_modules`.*, `intranet_actions`.* "
-     . "FROM `intranet_actions`, `intranet_modules` "
-     . "WHERE ( "
-     . "`intranet_actions`.`module_intranet_actions` = `intranet_modules`.`id_intranet_modules` "
-     . "OR  `intranet_actions`.`module_intranet_actions` = 0 "
-     . ")"
-     ;
-$result= DatabaseOperation::query($req);
-while ($rows=mysql_fetch_array($result))
-{
+    /*
+     * Récupération des droits d'accès faisable dans l'Intranet
+     */
 
-  //Déclaration du droits d'accès fourni par droits_acces.inc et récupération de son niveau d'accès
-  $nom_niveau_intranet_droits_acces="module".$rows["id_intranet_modules"]."_action".$rows["id_intranet_actions"];
-  $niveau_intranet_droits_acces=$$nom_niveau_intranet_droits_acces;
+    $arrayModule = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
+                    "SELECT " . IntranetModulesModel::TABLENAME . ".*"
+                    . ", " . IntranetActionsModel::TABLENAME . ".*"
+                    . " FROM " . IntranetActionsModel::TABLENAME . ", " . IntranetModulesModel::TABLENAME
+                    . " WHERE (" . IntranetActionsModel::TABLENAME . "." . IntranetActionsModel::FIELDNAME_MODULE_INTRANET_ACTIONS
+                    . "=" . IntranetModulesModel::TABLENAME . "." . IntranetModulesModel::KEYNAME
+                    . " OR " . IntranetActionsModel::TABLENAME . "." . IntranetActionsModel::FIELDNAME_MODULE_INTRANET_ACTIONS . "=0 )"
+    );
+    foreach ($arrayModule as $rowsModule) {
 
-  //Enregistrement/Suppression du droit d'accès
-  $id_user_recup = $id_user; //sauvegarde de votre "$id_user"
-  //$id_user = $sal_user;
-  $id_intranet_modules=$rows["id_intranet_modules"];
-  $id_intranet_actions=$rows["id_intranet_actions"];
-  //echo  $niveau_intranet_droits_acces;
+        /*
+         * Déclaration du droits d'accès fourni par droits_acces.inc et récupération de son niveau d'accès
+         */
+        if ($rowsModule[IntranetModulesModel::KEYNAME] <> 19) {
+            $nom_niveau_intranet_droits_acces = "module" . $rowsModule[IntranetModulesModel::KEYNAME] . "_action" . $rowsModule[IntranetActionsModel::KEYNAME];
+        } else {
+            $nom_niveau_intranet_droits_acces = $rowsModule[IntranetActionsModel::FIELDNAME_NOM_INTRANET_ACTIONS]. "_" . $rowsModule[IntranetActionsModel::KEYNAME];
+        }
+        $niveau_intranet_droits_acces = Lib::getParameterFromRequest($nom_niveau_intranet_droits_acces);
 
-  //Suppression des anciens accès
-  $req = "DELETE FROM intranet_droits_acces "
-       . "WHERE id_intranet_modules='$id_intranet_modules' "
-       . "AND id_user='$idUser' "
-       . "AND id_intranet_actions='$id_intranet_actions' "
-       ;
-  DatabaseOperation::query($req);
+        /*
+         * Enregistrement/Suppression du droit d'accès
+         */
+        $id_intranet_modules = $rowsModule[IntranetModulesModel::KEYNAME];
+        $id_intranet_actions = $rowsModule[IntranetActionsModel::KEYNAME];
+        /*
+         * Suppression des anciens accès
+         */
+        DatabaseOperation::query(
+                "DELETE FROM " . IntranetDroitsAccesModel::TABLENAME
+                . " WHERE " . IntranetDroitsAccesModel::FIELDNAME_ID_INTRANET_MODULES . "=" . $id_intranet_modules
+                . " AND " . IntranetDroitsAccesModel::FIELDNAME_ID_USER . "=" . $idUser
+                . " AND " . IntranetDroitsAccesModel::FIELDNAME_ID_INTRANET_ACTIONS . "=" . $id_intranet_actions
+        );
 
-  if($niveau_intranet_droits_acces)
-  {
-
-
-     //Réécriture du droits d'accès
-     $req = "INSERT INTO intranet_droits_acces "
-          . "SET id_intranet_modules='$id_intranet_modules' "
-          . ", id_user='$idUser' "
-          . ", id_intranet_actions='$id_intranet_actions' "
-          . ", niveau_intranet_droits_acces='$niveau_intranet_droits_acces' "
-          ;
-     DatabaseOperation::query($req);
-
-     //mysql_table_operation('intranet_droits_acces', 'rewrite');
-  }
-/*
-  else
-  {
-     //Suppression
-     mysql_table_operation('intranet_droits_acces', 'delete');
-
-  }
-*/
-  $id_user = $id_user_recup; //Récupération du votre "$id_user"
-
+        if ($niveau_intranet_droits_acces) {
+            /*
+             * Réécriture du droits d'accès
+             */
+            DatabaseOperation::query(
+                    "INSERT INTO " . IntranetDroitsAccesModel::TABLENAME
+                    . " SET " . IntranetDroitsAccesModel::FIELDNAME_ID_INTRANET_MODULES . "=" . $id_intranet_modules
+                    . ", " . IntranetDroitsAccesModel::FIELDNAME_ID_USER . "=" . $idUser
+                    . ", " . IntranetDroitsAccesModel::FIELDNAME_ID_INTRANET_ACTIONS . "=" . $id_intranet_actions
+                    . ", " . IntranetDroitsAccesModel::FIELDNAME_NIVEAU_INTRANET_DROITS_ACCES . "=" . $niveau_intranet_droits_acces
+            );
+        }
+    }
 }
 
-/*    $req_modules = "SELECT * FROM intranet_modules ";
-    $req_modules.= "ORDER BY nom_usuel_intranet_modules ASC";
-    $result_modules = DatabaseOperation::query($req_modules);
-    while ($rows_modules=mysql_fetch_array($result_modules))
-    {
-          //Préparation des variables
-          $nom_usuel_intranet_modules=$rows_modules[nom_usuel_intranet_modules];
-          $id_intranet_modules=$rows_modules[id_intranet_modules];
-
-          //Droits d'accès du module
-          //Recherche des droits d'accès
-          $req_actions = "SELECT DISTINCT * ";
-          $req_actions.= "FROM intranet_modules, intranet_actions ";
-          $req_actions.= "WHERE intranet_modules.id_intranet_modules=$id_intranet_modules";
-          $result_actions=DatabaseOperation::query($req_actions);
-
-          //Tableau de définitions des droits d'accès
-          while ($rows_actions=mysql_fetch_array($result_actions))
-          {
-                //Préparation des variables
-                $nom_intranet_actions=$rows_actions[nom_intranet_actions];
-                $id_intranet_actions=$rows_actions[id_intranet_actions];
-
-                //Création des variables necessaires
-                $txt1="module".$id_intranet_modules."_action".$id_intranet_actions;
-                $nom_niveau_intranet_droits_acces="$txt1";
-                $niveau_intranet_droits_acces=$$nom_niveau_intranet_droits_acces;
-
-                //Mise à jour des droit d'accès
-                $id_user_recup = $id_user_recup; //sauvegarde de votre "$id_user"
-                $id_user = $sal_user;
-                mysql_table_operation('intranet_droits_acces', 'rewrite');
-                $id_user = $id_user_recup; //Récupération du votre "$id_user"
-*/
 
 /*
-                $req_droits_acces = "UPDATE intranet_droits_acces SET "
-                                  . "niveau_intranet_droits_acces=$niveau_intranet_droits_acces "
-                                  . "WHERE id_intranet_modules=$id_intranet_modules "
-                                  . "AND id_user=$sal_user "
-                                  . "AND id_intranet_actions=$id_intranet_actions"
-                                  ;
-                $result_droits_acces=DatabaseOperation::query($req_droits_acces);
-*/
+ * Fin de if($modifier=='modifier')
+ */
 /*
-          }
-    }//Fin de la mise à jour des droit d'accès MySQL
-*/
-    //Mise à jour des droits d'accès Squid
-    //include ('../acces_internet/functions.php');
-    //squid_login_sync();
-
-
-}//Fin de if($modifier=='modifier')
-
-// Suppression de l'utilisateur
-if($modifier=='supprimer')
-{
-   $f1=suppression_intranet_utilisateur($idUser);
+ *  Suppression de l'utilisateur
+ */
+if ($paramModifier == 'supprimer') {
+    UserModel::suppressionIntranetUtilisateur($idUser);
 }
 ?>
 <html>
-<head>
-<title>Gestion des salari&eacute;s</title>
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
-<link rel="stylesheet" href="../lib/css/intra01.css" type="text/css">
-<script language="JavaScript">
-<!--
-function MM_openBrWindow(theURL,winName,features) { //v2.0
-  window.open(theURL,winName,features);
-}
-//-->
-</script>
-<SCRIPT LANGUAGE="JavaScript">
-function Popup(page,options) {
-  document.location.href="../index.php?action=delog" ;
-}
-function StartTimer(delai) {
-  // Déclenche le timer à la fin du chargement de la page (delai est en secondes)
-  setTimeout("Popup()",delai*1000);
-}
-</SCRIPT>
-<link rel="stylesheet" href="../lib/css/admin_intra01.css" type="text/css">
-<link rel="stylesheet" href=../lib/css/admin_newspopup.css type="text/css">
-</head>
+    <head>
+        <title>Gestion des salari&eacute;s</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+        <script language="JavaScript">
+            <!--
+            function MM_openBrWindow(theURL, winName, features) { //v2.0
+                window.open(theURL, winName, features);
+            }
+            //-->
+        </script>
+        <SCRIPT LANGUAGE="JavaScript">
+            function Popup(page, options) {
+                document.location.href = "../index.php?action=delog";
+            }
+            function StartTimer(delai) {
+                // Déclenche le timer à la fin du chargement de la page (delai est en secondes)
+                setTimeout("Popup()", delai * 1000);
+            }
+        </SCRIPT>
+    </head>
 
-<body onLoad="StartTimer(<?php $time=timeout($id_user); echo "$time"; ?>)" bgcolor="#FFCC66" text="#000000" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+    <body onLoad="StartTimer(<?php
+$time = timeout($id_user);
+echo "$time";
+?>)" bgcolor="#FFCC66" text="#000000" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+    <?php
+          include ("cadrehautent.php");
+          ?>
+        <form name="rechnom" method="post" action="gestion_salaries22.php">
+            <table width="620" border="0" cellspacing="0" cellpadding="0">
+                <tr>
+                    <td>
+                        <table border="0" cellspacing="0" cellpadding="0" width="600">
+                            <tr>
+                                <td><img src="../images_pop/etape1_salaries.gif" height="62"></td>
+                                <td><img src="../images_pop/gestion_salaries.gif" width="500" height="62"></td>
+                                <td><a href="../aide.php#entreprise" target="_blank"><img src=../lib/images/bandeau_aide_point_interrogation.gif width="28" height="62" border="0"></a></td>
+                            </tr>
+                        </table>
+                        <table width="600" border="0" cellspacing="0" cellpadding="0" align="center">
+                            <tr>
+                                <td><img src=../lib/images/espaceur.gif width="10" height="20"></td>
+                            </tr>
+                            <tr>
+                                <td class="loginFFFFFF">
+                                    <div align="center"><img src="../images_pop/modif_sal.gif" width="500" height="30"></div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="loginFFFFFF">
+                                    <div align="center"><br>
+                                        Nom du salari&eacute; &agrave; modifier
 <?php
-include ("cadrehautent.php");
-  ?>
-<form name="rechnom" method="post" action="gestion_salaries22.php">
-<table width="620" border="0" cellspacing="0" cellpadding="0">
-  <tr>
-    <td>
-      <table border="0" cellspacing="0" cellpadding="0" width="600">
-        <tr>
-          <td><img src="../images_pop/etape1_salaries.gif" height="62"></td>
-          <td><img src="../images_pop/gestion_salaries.gif" width="500" height="62"></td>
-          <td><a href="../aide.php#entreprise" target="_blank"><img src=../lib/images/bandeau_aide_point_interrogation.gif width="28" height="62" border="0"></a></td>
-        </tr>
-      </table>
-      <table width="600" border="0" cellspacing="0" cellpadding="0" align="center">
-        <tr>
-          <td><img src=../lib/images/espaceur.gif width="10" height="20"></td>
-        </tr>
-        <tr>
-          <td class="loginFFFFFF">
-            <div align="center"><img src="../images_pop/modif_sal.gif" width="500" height="30"></div>
-          </td>
-        </tr>
-        <tr>
-          <td class="loginFFFFFF">
-            <div align="center"><br>
-              Nom du salari&eacute; &agrave; modifier
-<?php
-    echo "</td>";
-    echo "</tr>";
-    echo "<tr>";
-    echo "<td>";
+echo "</td>";
+echo "</tr>";
+echo "<tr>";
+echo "<td>";
 
-    echo "<div align=center>";
-    echo ("<select name=\"sal_user\" size=20>\n");
+echo "<div align=center>";
+echo ("<select name=\"sal_user\" size=20>\n");
 /* Constitution de la liste déroulante des noms */
-    $req="select id_user, nom, prenom from salaries where actif='oui' order by nom";
-    $result=DatabaseOperation::query($req);
-    if ($result!= false)
-    {
-      while ($row=mysql_fetch_row($result))
-      {
-        echo ("<option value=\"$row[0]\">$row[1] $row[2]</option>");
-      }
+$arrayIdUser = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
+                "SELECT " . UserModel::KEYNAME
+                . ", " . UserModel::FIELDNAME_NOM
+                . ", " . UserModel::FIELDNAME_PRENOM
+                . " FROM " . UserModel::TABLENAME
+                . " WHERE " . UserModel::FIELDNAME_ACTIF . "='oui'"
+                . " ORDER BY " . UserModel::FIELDNAME_NOM
+);
+if ($arrayIdUser) {
+    foreach ($arrayIdUser as $rowIdUser) {
+        echo ("<option value=" . $rowIdUser[UserModel::KEYNAME] . ">" . $rowIdUser[UserModel::FIELDNAME_NOM] . " " . $rowIdUser[UserModel::FIELDNAME_PRENOM] . "</option>");
     }
-    echo ("</select>\n");
+}
+echo ("</select>\n");
 ?>
-            </div>
-          </td>
-        </tr>
-        <tr>
-          <td><img src=../lib/images/espaceur.gif width="10" height="10"></td>
-        </tr>
-        <tr>
-          <td>
-            <div align="center"><input type="image" src="../images_pop/chercher.gif" width="130" height="20"></div>
-            <input type="hidden" name="rech" value="1">
-          </td>
-        </tr>
-        <tr>
-          <td align="center" valign="top"><img src=../lib/images/espaceur.gif width="10" height="30">
-            <table width="80%" border="1" cellspacing="0" cellpadding="0" bordercolor="#FFE5B2">
-              <tr>
-                <td colspan="3"><b>SUPER ADMINISTRATEUR</b></td>
-              </tr>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><img src=../lib/images/espaceur.gif width="10" height="10"></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div align="center"><input type="image" src="../images_pop/chercher.gif" width="130" height="20"></div>
+                                    <input type="hidden" name="rech" value="1">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td align="center" valign="top"><img src=../lib/images/espaceur.gif width="10" height="30">
+                                    <table width="80%" border="1" cellspacing="0" cellpadding="0" bordercolor="#FFE5B2">
+                                        <tr>
+                                            <td colspan="3"><b>SUPER ADMINISTRATEUR</b></td>
+                                        </tr>
 
 <?php
 /* Recherche des salaries qui sont super admin */
@@ -312,146 +288,140 @@ include ("cadrehautent.php");
   and actif='oui' order by nom";
  */
 
-  $type=4;
-  $req="select nom, prenom, intitule_cat, nom_service
-  from access_materiel_service, salaries, catsopro
-  where salaries.id_type=$type and
-  salaries.id_service=access_materiel_service.K_service
-  and salaries.id_catsopro=catsopro.id_catsopro
-  and actif='oui' order by nom";
-  $result=DatabaseOperation::query($req);
-  $num=mysql_num_rows($result);
-  if ($num!=0)
-  {
-    $i=0;
-    while ($i<$num)
-    {
-      $userPrenom=mysql_result($result, $i, prenom);
-      $userNom=mysql_result($result, $i, nom);
-      $intitule_ser=mysql_result($result, $i, "nom_service");
-      $intitule_cat=mysql_result($result, $i, intitule_cat);
+$type4 = 4;
+$arrayUserType4 = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
+                "SELECT " . UserModel::FIELDNAME_NOM . ", " . UserModel::FIELDNAME_PRENOM
+                . ", " . CatsoproModel::FIELDNAME_INTITULE_CAT . ", " . AccessMaterielServiceModel::FIELDNAME_NOM_SERVICE
+                . " FROM " . AccessMaterielServiceModel::TABLENAME . "," . UserModel::TABLENAME
+                . ", " . CatsoproModel::TABLENAME
+                . " WHERE " . UserModel::TABLENAME . "." . UserModel::FIELDNAME_ID_TYPE . "=" . $type4
+                . " AND " . UserModel::TABLENAME . "." . UserModel::FIELDNAME_ID_SERVICE . "=" . AccessMaterielServiceModel::TABLENAME . "." . AccessMaterielServiceModel::FIELDNAME_K_SERVICE
+                . " AND " . UserModel::TABLENAME . "." . UserModel::FIELDNAME_ID_CATSOPRO . "=" . CatsoproModel::TABLENAME . "." . CatsoproModel::KEYNAME
+                . " AND " . UserModel::FIELDNAME_ACTIF . "='oui' ORDER BY " . UserModel::FIELDNAME_NOM);
+if ($arrayUserType4) {
 
-      echo ("<tr>\n");
-      echo ("<td class=\"loginFFFFFF\">$userPrenom $userNom</td>\n");
-      echo ("<td class=\"loginFFFFFF\">$intitule_ser</td>\n");
-      echo ("<td class=\"loginFFFFFF\">$intitule_cat</td>\n");
-      echo ("</tr>\n");
-      $i++;
+    foreach ($arrayUserType4 as $rowsUser) {
+        $paramUserPrenom = $rowsUser[UserModel::FIELDNAME_PRENOM];
+        $paramUserNom = $rowsUser[UserModel::FIELDNAME_NOM];
+        $intitule_ser = $rowsUser[AccessMaterielServiceModel::FIELDNAME_NOM_SERVICE];
+        $intitule_cat = $rowsUser[CatsoproModel::FIELDNAME_INTITULE_CAT];
+
+        echo ("<tr>\n");
+        echo ("<td class=\"loginFFFFFF\">$paramUserPrenom $paramUserNom</td>\n");
+        echo ("<td class=\"loginFFFFFF\">$intitule_ser</td>\n");
+        echo ("<td class=\"loginFFFFFF\">$intitule_cat</td>\n");
+        echo ("</tr>\n");
     }
-  }
+}
 ?>
-              <tr>
-                <td colspan="3"><b>ADMINISTRATEUR</b></td>
-              </tr>
+                                        <tr>
+                                            <td colspan="3"><b>ADMINISTRATEUR</b></td>
+                                        </tr>
 <?php
 /* Recherche des salaries qui sont super admin */
-  $type=3;
-  $req="select nom, prenom, intitule_cat, nom_service
-  from access_materiel_service, salaries, catsopro
-  where salaries.id_type=$type and
-  salaries.id_service=access_materiel_service.K_service
-  and salaries.id_catsopro=catsopro.id_catsopro
-  and actif='oui' order by nom";
-  $result=DatabaseOperation::query($req);
-  $num=mysql_num_rows($result);
-  if ($num!=0)
-  {
-    $i=0;
-    while ($i<$num)
-    {
-      $userPrenom=mysql_result($result, $i, prenom);
-      $userNom=mysql_result($result, $i, nom);
-      $intitule_ser=mysql_result($result, $i, "nom_service");
-      $intitule_cat=mysql_result($result, $i, intitule_cat);
+$type3 = 3;
+$arrayUserType3 = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
+                "SELECT " . UserModel::FIELDNAME_NOM . ", " . UserModel::FIELDNAME_PRENOM
+                . ", " . CatsoproModel::FIELDNAME_INTITULE_CAT . ", " . AccessMaterielServiceModel::FIELDNAME_NOM_SERVICE
+                . " FROM " . AccessMaterielServiceModel::TABLENAME . "," . UserModel::TABLENAME
+                . ", " . CatsoproModel::TABLENAME
+                . " WHERE " . UserModel::TABLENAME . "." . UserModel::FIELDNAME_ID_TYPE . "=" . $type3
+                . " AND " . UserModel::TABLENAME . "." . UserModel::FIELDNAME_ID_SERVICE . "=" . AccessMaterielServiceModel::TABLENAME . "." . AccessMaterielServiceModel::FIELDNAME_K_SERVICE
+                . " AND " . UserModel::TABLENAME . "." . UserModel::FIELDNAME_ID_CATSOPRO . "=" . CatsoproModel::TABLENAME . "." . CatsoproModel::KEYNAME
+                . " AND " . UserModel::FIELDNAME_ACTIF . "='oui' ORDER BY " . UserModel::FIELDNAME_NOM);
+if ($arrayUserType3) {
 
-      echo ("<tr>\n");
-      echo ("<td class=\"loginFFFFFF\">$userPrenom $userNom</td>\n");
-      echo ("<td class=\"loginFFFFFF\">$intitule_ser</td>\n");
-      echo ("<td class=\"loginFFFFFF\">$intitule_cat</td>\n");
-      echo ("</tr>\n");
-      $i++;
+    foreach ($arrayUserType3 as $rowsUser) {
+        $paramUserPrenom = $rowsUser[UserModel::FIELDNAME_PRENOM];
+        $paramUserNom = $rowsUser[UserModel::FIELDNAME_NOM];
+        $intitule_ser = $rowsUser[AccessMaterielServiceModel::FIELDNAME_NOM_SERVICE];
+        $intitule_cat = $rowsUser[CatsoproModel::FIELDNAME_INTITULE_CAT];
+
+
+        echo ("<tr>\n");
+        echo ("<td class=\"loginFFFFFF\">$paramUserPrenom $paramUserNom</td>\n");
+        echo ("<td class=\"loginFFFFFF\">$intitule_ser</td>\n");
+        echo ("<td class=\"loginFFFFFF\">$intitule_cat</td>\n");
+        echo ("</tr>\n");
     }
-  }
+}
 ?>
-              <tr>
-                <td colspan="3"><b>PUBLICATEUR-MODIFICATEUR</b></td>
-              </tr>
+                                        <tr>
+                                            <td colspan="3"><b>PUBLICATEUR-MODIFICATEUR</b></td>
+                                        </tr>
 <?php
 /* Recherche des salaries qui sont super admin */
-  $type=2;
-  $req="select nom, prenom, intitule_cat, nom_service
-  from access_materiel_service, salaries, catsopro
-  where salaries.id_type=$type and
-  salaries.id_service=access_materiel_service.K_service
-  and salaries.id_catsopro=catsopro.id_catsopro
-  and actif='oui' order by nom";
-  $result=DatabaseOperation::query($req);
-  $num=mysql_num_rows($result);
-  if ($num!=0)
-  {
-    $i=0;
-    while ($i<$num)
-    {
-      $userPrenom=mysql_result($result, $i, prenom);
-      $userNom=mysql_result($result, $i, nom);
-      $intitule_ser=mysql_result($result, $i, "nom_service");
-      $intitule_cat=mysql_result($result, $i, intitule_cat);
+$type2 = 2;
+$arrayUserType2 = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
+                "SELECT " . UserModel::FIELDNAME_NOM . ", " . UserModel::FIELDNAME_PRENOM
+                . ", " . CatsoproModel::FIELDNAME_INTITULE_CAT . ", " . AccessMaterielServiceModel::FIELDNAME_NOM_SERVICE
+                . " FROM " . AccessMaterielServiceModel::TABLENAME . "," . UserModel::TABLENAME
+                . ", " . CatsoproModel::TABLENAME
+                . " WHERE " . UserModel::TABLENAME . "." . UserModel::FIELDNAME_ID_TYPE . "=" . $type2
+                . " AND " . UserModel::TABLENAME . "." . UserModel::FIELDNAME_ID_SERVICE . "=" . AccessMaterielServiceModel::TABLENAME . "." . AccessMaterielServiceModel::FIELDNAME_K_SERVICE
+                . " AND " . UserModel::TABLENAME . "." . UserModel::FIELDNAME_ID_CATSOPRO . "=" . CatsoproModel::TABLENAME . "." . CatsoproModel::KEYNAME
+                . " AND " . UserModel::FIELDNAME_ACTIF . "='oui' ORDER BY " . UserModel::FIELDNAME_NOM);
+if ($arrayUserType2) {
 
-      echo ("<tr>\n");
-      echo ("<td class=\"loginFFFFFF\">$userPrenom $userNom</td>\n");
-      echo ("<td class=\"loginFFFFFF\">$intitule_ser</td>\n");
-      echo ("<td class=\"loginFFFFFF\">$intitule_cat</td>\n");
-      echo ("</tr>\n");
-      $i++;
+    foreach ($arrayUserType2 as $rowsUser) {
+        $paramUserPrenom = $rowsUser[UserModel::FIELDNAME_PRENOM];
+        $paramUserNom = $rowsUser[UserModel::FIELDNAME_NOM];
+        $intitule_ser = $rowsUser[AccessMaterielServiceModel::FIELDNAME_NOM_SERVICE];
+        $intitule_cat = $rowsUser[CatsoproModel::FIELDNAME_INTITULE_CAT];
+
+
+        echo ("<tr>\n");
+        echo ("<td class=\"loginFFFFFF\">$paramUserPrenom $paramUserNom</td>\n");
+        echo ("<td class=\"loginFFFFFF\">$intitule_ser</td>\n");
+        echo ("<td class=\"loginFFFFFF\">$intitule_cat</td>\n");
+        echo ("</tr>\n");
     }
-  }
+}
 ?>
-              <tr>
-                <td colspan="3"><b>LECTEUR</b></td>
-              </tr>
+                                        <tr>
+                                            <td colspan="3"><b>LECTEUR</b></td>
+                                        </tr>
 <?php
 /* Recherche des salaries qui sont super admin */
-  $type=1;
-  $req="select nom, prenom, intitule_cat, nom_service
-  from access_materiel_service, salaries, catsopro
-  where salaries.id_type=$type and
-  salaries.id_service=access_materiel_service.K_service
-  and salaries.id_catsopro=catsopro.id_catsopro
-  and actif='oui' order by nom";
-  $result=DatabaseOperation::query($req);
-  $num=mysql_num_rows($result);
-  if ($num!=0)
-  {
-    $i=0;
-    while ($i<$num)
-    {
-      $userPrenom=mysql_result($result, $i, prenom);
-      $userNom=mysql_result($result, $i, nom);
-      $intitule_ser=mysql_result($result, $i, "nom_service");
-      $intitule_cat=mysql_result($result, $i, intitule_cat);
+$type1 = 1;
+$arrayUserType1 = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
+                "SELECT " . UserModel::FIELDNAME_NOM . ", " . UserModel::FIELDNAME_PRENOM
+                . ", " . CatsoproModel::FIELDNAME_INTITULE_CAT . ", " . AccessMaterielServiceModel::FIELDNAME_NOM_SERVICE
+                . " FROM " . AccessMaterielServiceModel::TABLENAME . "," . UserModel::TABLENAME
+                . ", " . CatsoproModel::TABLENAME
+                . " WHERE " . UserModel::TABLENAME . "." . UserModel::FIELDNAME_ID_TYPE . "=" . $type1
+                . " AND " . UserModel::TABLENAME . "." . UserModel::FIELDNAME_ID_SERVICE . "=" . AccessMaterielServiceModel::TABLENAME . "." . AccessMaterielServiceModel::FIELDNAME_K_SERVICE
+                . " AND " . UserModel::TABLENAME . "." . UserModel::FIELDNAME_ID_CATSOPRO . "=" . CatsoproModel::TABLENAME . "." . CatsoproModel::KEYNAME
+                . " AND " . UserModel::FIELDNAME_ACTIF . "='oui' ORDER BY " . UserModel::FIELDNAME_NOM);
+if ($arrayUserType1) {
 
-      echo ("<tr>\n");
-      echo ("<td class=\"loginFFFFFF\">$userPrenom $userNom</td>\n");
-      echo ("<td class=\"loginFFFFFF\">$intitule_ser</td>\n");
-      echo ("<td class=\"loginFFFFFF\">$intitule_cat</td>\n");
-      echo ("</tr>\n");
-      $i++;
+    foreach ($arrayUserType1 as $rowsUser) {
+        $paramUserPrenom = $rowsUser[UserModel::FIELDNAME_PRENOM];
+        $paramUserNom = $rowsUser[UserModel::FIELDNAME_NOM];
+        $intitule_ser = $rowsUser[AccessMaterielServiceModel::FIELDNAME_NOM_SERVICE];
+        $intitule_cat = $rowsUser[CatsoproModel::FIELDNAME_INTITULE_CAT];
+
+        echo ("<tr>\n");
+        echo ("<td class=\"loginFFFFFF\">$paramUserPrenom $paramUserNom</td>\n");
+        echo ("<td class=\"loginFFFFFF\">$intitule_ser</td>\n");
+        echo ("<td class=\"loginFFFFFF\">$intitule_cat</td>\n");
+        echo ("</tr>\n");
     }
-  }
+}
 ?>
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div align="center"></div>
+                                </td>
+                            </tr>
+                        </table>
+
+                    </td>
+                </tr>
             </table>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <div align="center"></div>
-          </td>
-        </tr>
-      </table>
-
-    </td>
-  </tr>
-</table>
-<?php  include ("../adminagis/cadrebas.php"); ?>
-</body>
+<?php include ("../adminagis/cadrebas.php"); ?>
+    </body>
 </html>

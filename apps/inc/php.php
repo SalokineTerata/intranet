@@ -64,6 +64,7 @@ require_once("../lib/class/model/ModelTableAssociation.php");
 
 // Modèles des tables en base de données
 require_once("../lib/class/model/AbstractModel.php");
+require_once("../lib/class/model/AccessMaterielServiceModel.php");
 require_once("../lib/class/model/AnnexeAgrologicArticleCodificationModel.php");
 require_once("../lib/class/model/AnnexeEmballageModel.php");
 require_once("../lib/class/model/AnnexeEmballageGroupeModel.php");
@@ -97,7 +98,11 @@ require_once("../lib/class/model/IntranetActionsModel.php");
 require_once("../lib/class/model/IntranetDroitsAccesModel.php");
 require_once("../lib/class/model/IntranetModulesModel.php");
 require_once("../lib/class/model/IntranetNiveauAccesModel.php");
+require_once("../lib/class/model/LogModel.php");
+require_once("../lib/class/model/LuModel.php");
 require_once("../lib/class/model/ModesModel.php");
+require_once("../lib/class/model/PersoModel.php");
+require_once("../lib/class/model/PlanningPresenceDetailModel.php");
 require_once("../lib/class/model/ServicesModel.php");
 require_once("../lib/class/model/TypeModel.php");
 

@@ -200,14 +200,14 @@ function identification1($mysql_table_authentification, $login, $pass, GlobalCon
         ;
         $req_authentification = $req_authentification_main . $mysql_passwd;
 
-        $q1 = mysql_query($req_authentification);
-        $mysql_result = mysql_numrows($q1);
+        $q1 = DatabaseOperation::query($req_authentification);
+        $mysql_result = DatabaseOperation::getSqlNumRows($q1);
         if (!$mysql_result) {
 
             $mysql_passwd = "AND (pass=OLD_PASSWORD('$pass'))";
             $req_authentification = $req_authentification_main . $mysql_passwd;
-            $q1 = mysql_query($req_authentification);
-            $mysql_result = mysql_numrows($q1);
+            $q1 = DatabaseOperation::query($req_authentification);
+            $mysql_result = DatabaseOperation::getSqlNumRows($q1);
             if (!$mysql_result) {
                 $return = 0;
             }

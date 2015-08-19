@@ -5,7 +5,7 @@
 
 
 identification1("salaries", $login, $pass);
-  securadmin(4, $id_type);
+  UserModel::securadmin(4, $id_type);
 
 //  include("functions.php");
 //  include("functions.js");

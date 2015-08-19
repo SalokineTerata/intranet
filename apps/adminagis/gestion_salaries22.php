@@ -22,7 +22,7 @@ $userModel = new UserModel($paramIdUser);
 $userView = new UserView($userModel);
 $userView->setIsEditable(TRUE);
 identification1("salaries", $login, $pass);
-securadmin(4, $id_type);
+UserModel::securadmin(4, $id_type);
 if ($paramRech == '1') {
     /* Recherche des infos sur le salarie */
     $arrayUserDetail = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
@@ -99,15 +99,7 @@ if ($paramRech == '1') {
                 setTimeout("Popup()", delai * 1000);
             }
 
-            function confirmation()
-            {
-                if (confirm('vous etes sur le point de supprimer un utilisateur'))
-                {
-                    location.href = "gestion_salaries11.php?modifier=supprimer&sal_user=".$sal_user;
-                }
-                else {
-                }
-            }         
+
         </SCRIPT>
 
     </head>
@@ -177,7 +169,6 @@ if ($paramRech == '1') {
                              * Affichage
                              */
                             echo $bloc . "</table></td></tr>";
-                            IntranetDroitsAccesModel::BuildHtmlDroitsAcces($paramIdUser);
                             ?>
 
                             <tr>
@@ -253,8 +244,8 @@ if ($paramRech == '1') {
                                                 );
                                                 if ($arrayCatsopro) {
                                                     foreach ($arrayCatsopro as $rowsCatsopro) {
-                                                        echo ("<option value=\"" . $rowsCatsopro[CatsoproModel::KEYNAM] . "\"");
-                                                        if ($rowsCatsopro[CatsoproModel::KEYNAM] == $userCatsopro)
+                                                        echo ("<option value=\"" . $rowsCatsopro[CatsoproModel::KEYNAME] . "\"");
+                                                        if ($rowsCatsopro[CatsoproModel::KEYNAME] == $userCatsopro)
                                                             echo ("selected");
                                                         echo (">" . $rowsCatsopro[CatsoproModel::FIELDNAME_INTITULE_CAT] . "</option>");
                                                     }
@@ -478,7 +469,8 @@ if ($paramRech == '1') {
                                                 /*                                                 * ***************************************************
                                                   Construction des droits d'accès pour tous les modules:
                                                  * ***************************Boris Sanègre 2003.03.25 */
-                                                // require ('droits_acces.inc');                                              
+                                                // require ('droits_acces.inc');  
+                                                IntranetDroitsAccesModel::BuildHtmlDroitsAcces($paramIdUser);
                                                 ?>
 
                                                 <tr>
@@ -494,7 +486,7 @@ if ($paramRech == '1') {
                                                         <table width="350" border="0" cellspacing="0" cellpadding="0" align="center">
                                                             <tr>
                                                                 <td colspan="2">
-                                                                    <div align="center"><input type="image" src="../zimages/modifier-j.gif" width="130" height="20">&nbsp;&nbsp;<a href="#" onClick="confirmation();"><img src="../images-index/supprimer.gif" border=0></a></div>
+                                                                    <div align="center"><input type="image" src="../zimages/modifier-j.gif" width="130" height="20">&nbsp;&nbsp;<a href="#" onClick="confirmation(<?php echo $paramIdUser; ?>);"><img src="../images-index/supprimer.gif" border=0></a></div>
 
                                                                     <input type="hidden" name="modifier" value="modifier">
                                                                 </td>

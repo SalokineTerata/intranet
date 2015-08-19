@@ -30,7 +30,7 @@ $paramUserMail = Lib::getParameterFromRequest("sal_mail");
 $paramModifier = Lib::getParameterFromRequest("modifier");
 $paramValider = Lib::getParameterFromRequest("valider");
 identification1("salaries", $login, $pass);
-securadmin(4, $id_type);
+UserModel::securadmin(4, $id_type);
 
 if ($paramValider == 'valider') {
 
@@ -236,8 +236,8 @@ $corpsmail = "Bonjour,\n "
         . "Votre profil vient d'être créé dans l'intranet AGIS.\n"
         . "Votre login est : $paramUserLogin\n"
         . "\nL'administrateur Agis.\n";
-
-envoismail($sujet, $corpsmail, $paramUserMail, 'postmaster@agis-sa.fr');
+$typeMail="";
+envoismail($sujet, $corpsmail, $paramUserMail, 'postmaster@agis-sa.fr',$typeMail);
 ?>
 <html>
     <head>
@@ -272,6 +272,9 @@ envoismail($sujet, $corpsmail, $paramUserMail, 'postmaster@agis-sa.fr');
               include ("cadrehautent.php");
               ?>
         <form name="salarie" method="post" action="gestion_salaries1.php">
+            <input type=hidden name=sal_user value=<?php $idUser ?>>
+
+
             <table width="620" border="0" cellspacing="0" cellpadding="0" height="178">
                 <tr>
                     <td>
@@ -550,117 +553,53 @@ envoismail($sujet, $corpsmail, $paramUserMail, 'postmaster@agis-sa.fr');
                                                                     echo "</td>";
                                                                     echo "</tr>";
 
+
+                                                                    //Droits d'accès du module
+                                                                    /*
+                                                                     * Récupération des droits d'accès faisable dans l'Intranet
+                                                                     */
+
                                                                     $arrayModule = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
-                                                                                    "SELECT " . IntranetModulesModel::KEYNAME
-                                                                                    . ", " . IntranetModulesModel::FIELDNAME_NOM_USUEL_INTRANET_MODULES
-                                                                                    . " FROM " . IntranetModulesModel::TABLENAME
-                                                                                    . " ORDER BY " . IntranetModulesModel::FIELDNAME_NOM_USUEL_INTRANET_MODULES . " ASC"
+                                                                                    "SELECT " . IntranetModulesModel::TABLENAME . ".*"
+                                                                                    . ", " . IntranetActionsModel::TABLENAME . ".*"
+                                                                                    . " FROM " . IntranetActionsModel::TABLENAME . ", " . IntranetModulesModel::TABLENAME
+                                                                                    . " WHERE (" . IntranetActionsModel::TABLENAME . "." . IntranetActionsModel::FIELDNAME_MODULE_INTRANET_ACTIONS
+                                                                                    . "=" . IntranetModulesModel::TABLENAME . "." . IntranetModulesModel::KEYNAME
+                                                                                    . " OR " . IntranetActionsModel::TABLENAME . "." . IntranetActionsModel::FIELDNAME_MODULE_INTRANET_ACTIONS . "=0 )"
                                                                     );
                                                                     foreach ($arrayModule as $rowsModule) {
-                                                                        //Préparation des variables
-                                                                        $nom_usuel_intranet_modules = $rowsModule[IntranetModulesModel::FIELDNAME_NOM_USUEL_INTRANET_MODULES];
-                                                                        $id_intranet_modules = $rowsModule[IntranetModulesModel::KEYNAME];
-
-
-                                                                        //Construction du tableau
-//    echo "<br>";
-//    echo "<table width=500 border=1 cellspacing=1 cellpadding=3 align=center>";
-//
-//    // Nom du module
-//    echo "<tr>";
-//    echo "<td class=logFFE5B2 colspan=3>";
-//    echo "<center>";
-//    echo $nom_usuel_intranet_modules;
-//    echo "</center>";
-//    echo "</td>";
-//    echo "</tr>";
-                                                                        //Droits d'accès du module
-                                                                        //Recherche des droits d'accès
-                                                                        $arrayActions = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
-                                                                                        "SELECT DISTINCT " . IntranetActionsModel::FIELDNAME_NOM_INTRANET_ACTIONS
-                                                                                        . ", " . IntranetActionsModel::KEYNAME
-                                                                                        . " FROM " . IntranetModulesModel::TABLENAME . ", " . IntranetActionsModel::TABLENAME
-                                                                                        . " WHERE " . IntranetModulesModel::TABLENAME . "." . IntranetModulesModel::KEYNAME . "=" . $id_intranet_modules
-                                                                        );
 
                                                                         /*
-                                                                         * Tableau de définitions des droits d'accès
+                                                                         * Déclaration du droits d'accès fourni par droits_acces.inc et récupération de son niveau d'accès
                                                                          */
-                                                                        foreach ($arrayActions as $rowsActions) {
+                                                                        if ($rowsModule[IntranetModulesModel::KEYNAME] <> 19) {
+                                                                            $nom_niveau_intranet_droits_acces = "module" . $rowsModule[IntranetModulesModel::KEYNAME] . "_action" . $rowsModule[IntranetActionsModel::KEYNAME];
+                                                                        } else {
+                                                                            $nom_niveau_intranet_droits_acces = $rowsModule[IntranetActionsModel::FIELDNAME_NOM_INTRANET_ACTIONS] . "_" . $rowsModule[IntranetActionsModel::KEYNAME];
+                                                                        }
+                                                                        $niveau_intranet_droits_acces = Lib::getParameterFromRequest($nom_niveau_intranet_droits_acces);
+
+                                                                        /*
+                                                                         * Enregistrement/Suppression du droit d'accès
+                                                                         */
+                                                                        $id_intranet_modules = $rowsModule[IntranetModulesModel::KEYNAME];
+                                                                        $id_intranet_actions = $rowsModule[IntranetActionsModel::KEYNAME];
+                                                                       
+
+                                                                        if ($niveau_intranet_droits_acces) {
                                                                             /*
-                                                                             * Préparation des variables
-                                                                             */
-                                                                            $nom_intranet_actions = $rowsActions[IntranetActionsModel::FIELDNAME_NOM_INTRANET_ACTIONS];
-                                                                            $id_intranet_actions = $rowsActions[IntranetActionsModel::KEYNAME];
-
-
-                                                                            //Création des variables necessaires
-                                                                            $txt1 = "module" . $id_intranet_modules . "_action" . $id_intranet_actions;
-                                                                            $nom_niveau_intranet_droits_acces = "$txt1";
-                                                                            $niveau_intranet_droits_acces = $$nom_niveau_intranet_droits_acces;
-
-                                                                            /*
-                                                                             * Insertion du droit d'accès
+                                                                             * Réécriture du droits d'accès
                                                                              */
                                                                             DatabaseOperation::query(
                                                                                     "INSERT INTO " . IntranetDroitsAccesModel::TABLENAME
-                                                                                    . " (" . IntranetDroitsAccesModel::FIELDNAME_ID_INTRANET_MODULES
-                                                                                    . ", " . IntranetDroitsAccesModel::FIELDNAME_ID_USER
-                                                                                    . ", " . IntranetDroitsAccesModel::FIELDNAME_ID_INTRANET_ACTIONS
-                                                                                    . ", " . IntranetDroitsAccesModel::FIELDNAME_NIVEAU_INTRANET_DROITS_ACCES
-                                                                                    . ") VALUES (" . $id_intranet_modules . "," . $idUser
-                                                                                    . "," . $id_intranet_actions . "," . $niveau_intranet_droits_acces . ")"
+                                                                                    . " SET " . IntranetDroitsAccesModel::FIELDNAME_ID_INTRANET_MODULES . "=" . $id_intranet_modules
+                                                                                    . ", " . IntranetDroitsAccesModel::FIELDNAME_ID_USER . "=" . $idUser
+                                                                                    . ", " . IntranetDroitsAccesModel::FIELDNAME_ID_INTRANET_ACTIONS . "=" . $id_intranet_actions
+                                                                                    . ", " . IntranetDroitsAccesModel::FIELDNAME_NIVEAU_INTRANET_DROITS_ACCES . "=" . $niveau_intranet_droits_acces
                                                                             );
-/*
-                                                                            //Affichage du droit d'accès
-                                                                            //Recherche de niveaux spécifiques
-                                                                            $req_niveau_specifique = "SELECT * FROM intranet_niveau_acces, intranet_droits_acces ";
-                                                                            $req_niveau_specifique.= "WHERE intranet_niveau_acces.id_intranet_modules=intranet_droits_acces.id_intranet_modules ";
-                                                                            $req_niveau_specifique.= "AND intranet_niveau_acces.id_intranet_actions=intranet_droits_acces.id_intranet_actions ";
-                                                                            $req_niveau_specifique.= "AND intranet_niveau_acces.id_intranet_niveau_acces=intranet_droits_acces.niveau_intranet_droits_acces ";
-                                                                            $req_niveau_specifique.= "AND intranet_droits_acces.id_user=$idUser ";
-                                                                            $req_niveau_specifique.= "AND intranet_droits_acces.id_intranet_modules=$id_intranet_modules ";
-                                                                            $req_niveau_specifique.= "AND intranet_droits_acces.id_intranet_actions=$id_intranet_actions ";
-                                                                            $req_niveau_specifique.= "AND intranet_droits_acces.niveau_intranet_droits_acces=$niveau_intranet_droits_acces";
-                                                                            $result_niveau_specifique = DatabaseOperation::query($req_niveau_specifique);
-
-                                                                            //S'il existe des niveaux personnalisés, alors ceux-ci sont utilisés
-                                                                            if ($result_niveau_specifique) {
-                                                                                $compte_niveau_specifique = mysql_num_rows($result_niveau_specifique);
-                                                                                if ($compte_niveau_specifique) {
-
-                                                                                    $result_niveau = $result_niveau_specifique;
-                                                                                }
-
-
-                                                                                //Sinon on reprend ceux définit par défaut
-                                                                                else {
-                                                                                    $req_niveau_defaut = "SELECT * FROM intranet_niveau_acces, intranet_droits_acces ";
-                                                                                    $req_niveau_defaut.= "WHERE intranet_niveau_acces.id_intranet_niveau_acces=intranet_droits_acces.niveau_intranet_droits_acces ";
-                                                                                    $req_niveau_defaut.= "AND intranet_niveau_acces.id_intranet_actions='0' ";
-                                                                                    $req_niveau_defaut.= "AND intranet_niveau_acces.id_intranet_modules='0' ";
-                                                                                    $req_niveau_defaut.= "AND intranet_droits_acces.id_user=$idUser ";
-                                                                                    $req_niveau_defaut.= "AND intranet_droits_acces.id_intranet_modules=$id_intranet_modules ";
-                                                                                    $req_niveau_defaut.= "AND intranet_droits_acces.id_intranet_actions=$id_intranet_actions ";
-                                                                                    $req_niveau_defaut.= "AND intranet_droits_acces.niveau_intranet_droits_acces=$niveau_intranet_droits_acces";
-                                                                                    $result_niveau_defaut = DatabaseOperation::query($req_niveau_defaut);
-                                                                                    $result_niveau = $result_niveau_defaut;
-                                                                                }
-                                                                            }
-                                                                            //Affichage du droit d'accès
-//        if($result_niveau){
-//            while ($rows_niveau=mysql_fetch_array($result_niveau))
-//            {
-//                  $nom_intranet_niveau_acces=$rows_niveau[nom_intranet_niveau_acces];
-//                  echo "$nom_intranet_niveau_acces";
-//            }
-//        }
-//        echo "<br>";
-//        echo "</center>";
-//        echo "</td>";
-                                                                            */
                                                                         }
-//    echo "</tr>";
+
+    echo "</tr>";
 //    echo "</table>";
                                                                     }
                                                                     echo "<br>";

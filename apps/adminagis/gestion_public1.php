@@ -3,7 +3,7 @@
 //  include("../lib/functions.php");
 require_once '../inc/main.php';
 identification1("salaries", $login, $pass);
-  securadmin(4, $id_type);
+  UserModel::securadmin(4, $id_type);
 
   if ($mod=="mod")
   {

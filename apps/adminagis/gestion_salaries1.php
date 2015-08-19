@@ -25,7 +25,7 @@ $userModel = new UserModel($idUser);
 $userView = new UserView($userModel);
 $userView->setIsEditable(TRUE);
 identification1("salaries", $idUser, $pass);
-securadmin(4, $id_type);
+UserModel::securadmin(4, $id_type);
 //  include("functions.php");
 //  include("functions.js");
 
@@ -428,7 +428,8 @@ if ($modifier == 'modifier') {
                         /*                         * ***************************************************
                           Construction des droits d'accès pour tous les modules:
                          * ***************************Boris Sanègre 2003.03.25 */
-                        require ('droits_acces.inc');
+                        //require ('droits_acces.inc');
+                        IntranetDroitsAccesModel::BuildHtmlDroitsAcces();
 
 // Fin de la page
 

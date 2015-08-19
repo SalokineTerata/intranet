@@ -2,7 +2,7 @@
   require("../lib/session.php");
   include("../lib/functions.php");
     identification1("salaries", $login, $pass);
-    securadmin(2, $id_type);
+    UserModel::securadmin(2, $id_type);
   include("functions.php");
 
 

@@ -71,7 +71,7 @@ class FtaChapitreModel extends AbstractModel {
 
         //Récupération des informations préalables
         //Nom de l'assistante de projet responsable:
-        $array = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
+        $array = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
                         "SELECT " . UserModel::FIELDNAME_PRENOM . "," . UserModel::FIELDNAME_NOM
                         . ", " . UserModel::FIELDNAME_MAIL
                         . " FROM " . UserModel::TABLENAME
@@ -83,7 +83,7 @@ class FtaChapitreModel extends AbstractModel {
             $mail = $rows[UserModel::FIELDNAME_MAIL];
         }
 
-        $arrayFtaSuiviCorrection = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
+        $arrayFtaSuiviCorrection = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
                         "SELECT " . FtaSuiviProjetModel::FIELDNAME_CORRECTION_FTA_SUIVI_PROJET . "," . FtaSuiviProjetModel::FIELDNAME_NOTIFICATION_FTA_SUIVI_PROJET
                         . " FROM " . FtaSuiviProjetModel::TABLENAME
                         . "WHERE " . FtaModel::KEYNAME . "=" . $paramIdFta .
@@ -133,7 +133,7 @@ class FtaChapitreModel extends AbstractModel {
         if ($return) {
             foreach ($return["processus"] as $id_Fta_Processus) {
                 $idFtaProcessus = $id_Fta_Processus;
-                $arrayFtaProcessus = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
+                $arrayFtaProcessus = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
                                 "SELECT DISTINCT " . FtaProcessusModel::FIELDNAME_NOM
                                 . " FROM " . FtaProcessusModel::TABLENAME
                                 . ", " . FtaWorkflowStructureModel::TABLENAME
@@ -202,7 +202,7 @@ class FtaChapitreModel extends AbstractModel {
         $return[UserModel::FIELDNAME_MAIL];        //Tableau contenant les adresses email des utilisateurs concerné par la dévalidation.
         $return["processus"];   //Tableau contenant la liste des identifiants des processus dévalidés
         //Récupération des données
-        $arrayFtaEtatAndFta = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
+        $arrayFtaEtatAndFta = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
                         "SELECT " . FtaEtatModel::FIELDNAME_ABREVIATION
                         . " FROM " . FtaModel::TABLENAME . "," . FtaEtatModel::TABLENAME
                         . " WHERE " . FtaModel::KEYNAME . "=" . $paramIdFta
@@ -227,7 +227,7 @@ class FtaChapitreModel extends AbstractModel {
         DatabaseOperation::query($reqDenotification);
 
         //Recherches des processus suivants
-        $arrayProcessusCycle = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
+        $arrayProcessusCycle = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
                         "SELECT DISTINCT " . FtaProcessusCycleModel::FIELDNAME_PROCESSUS_NEXT . "," . FtaProcessusModel::FIELDNAME_MULTISITE_FTA_PROCESSUS
                         . " FROM " . FtaProcessusCycleModel::TABLENAME . "," . FtaProcessusModel::TABLENAME
                         . "," . FtaSuiviProjetModel::TABLENAME . "," . FtaWorkflowStructureModel::TABLENAME
@@ -369,7 +369,7 @@ class FtaChapitreModel extends AbstractModel {
                             break;
                     }
                     //Enregistrement de la liste des utilisateur à informer
-                    $arrayMail = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray($req);
+                    $arrayMail = DatabaseOperation::convertSqlStatementWithoutKeyToArray($req);
                     if ($arrayMail) {
                         foreach ($arrayMail as $rowsMail) {
                             $return[UserModel::FIELDNAME_MAIL][] = $rowsMail[UserModel::FIELDNAME_MAIL];
@@ -398,7 +398,7 @@ class FtaChapitreModel extends AbstractModel {
         /*
          * Non fonctionnelle
          */
-        $rarrayChapitreDefaut = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
+        $rarrayChapitreDefaut = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
                         "SELECT DISTINCT " . FtaProcessusModel::TABLENAME . "." . FtaProcessusModel::KEYNAME
                         . " FROM " . FtaProcessusModel::TABLENAME
                         . "LEFT JOIN " . FtaProcessusCycleModel::TABLENAME

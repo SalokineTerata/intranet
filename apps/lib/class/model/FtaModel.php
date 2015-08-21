@@ -271,7 +271,7 @@ class FtaModel extends AbstractModel {
         );
 
         //Sélection de tous les processus appartenant au cycle de vie de la FTA
-        return DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
+        return DatabaseOperation::convertSqlStatementWithoutKeyToArray(
                         "SELECT DISTINCT " . FtaProcessusCycleModel::FIELDNAME_PROCESSUS_INIT . " AS " . FtaProcessusModel::KEYNAME . " "
                         . ", " . FtaProcessusCycleModel::FIELDNAME_DELAI . " "
                         . "FROM " . FtaProcessusCycleModel::TABLENAME . ", " . FtaProcessusModel::TABLENAME . " "
@@ -287,7 +287,7 @@ class FtaModel extends AbstractModel {
         //Sélection de tous les processus appartenant au cycle de vie de la FTA
         $sqlDataIdFtaValue = $this->getKeyValue();
 
-        return DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
+        return DatabaseOperation::convertSqlStatementWithoutKeyToArray(
                         "SELECT " . FtaProcessusDelaiModel::FIELDNAME_ID_FTA_PROCESSUS . " FROM " . FtaProcessusDelaiModel::TABLENAME . " "
                         . "WHERE " . FtaProcessusDelaiModel::FIELDNAME_ID_FTA . "=" . $sqlDataIdFtaValue . " "
         );
@@ -298,7 +298,7 @@ class FtaModel extends AbstractModel {
         //Sélection de tous les processus appartenant au cycle de vie de la FTA
         $sqlDataIdFtaValue = $this->getKeyValue();
 
-        $returnArray = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
+        $returnArray = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
                         "SELECT " . FtaProcessusDelaiModel::FIELDNAME_DATE_ECHEANCE_PROCESSUS . " FROM " . FtaProcessusDelaiModel::TABLENAME . " "
                         . "WHERE " . FtaProcessusDelaiModel::FIELDNAME_ID_FTA . "=" . $sqlDataIdFtaValue . " "
                         . "AND " . FtaProcessusDelaiModel::FIELDNAME_ID_FTA_PROCESSUS . "=" . $paramIdProcessus . " "
@@ -453,7 +453,7 @@ class FtaModel extends AbstractModel {
     public function ArrayEmballages($paramGroupeType) {
 
         //Les calculs pour Emballages
-        $array = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
+        $array = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
                         "SELECT " . FtaConditionnementModel::FIELDNAME_POIDS_FTA_CONDITIONNEMENT . ", " . FtaConditionnementModel::FIELDNAME_QUANTITE_PAR_COUCHE_FTA_CONDITIONNEMENT
                         . ", " . FtaConditionnementModel::FIELDNAME_NOMBRE_COUCHE_FTA_CONDITIONNEMENT . ", " . FtaConditionnementModel::FIELDNAME_HAUTEUR_FTA_CONDITIONNEMENT
                         . ", " . FtaConditionnementModel::FIELDNAME_LONGUEUR_FTA_CONDITIONNEMENT . ", " . FtaConditionnementModel::FIELDNAME_LARGEUR_FTA_CONDITIONNEMENT
@@ -490,7 +490,7 @@ class FtaModel extends AbstractModel {
                 );
 
                 //Les Calculs de la table fta
-                $arrayFta = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
+                $arrayFta = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
                                 "SELECT DISTINCT " . FtaModel::FIELDNAME_NOMBRE_UVC_PAR_CARTON . "," . FtaModel::FIELDNAME_POIDS_ELEMENTAIRE
                                 . " FROM " . FtaModel::TABLENAME . " "
                                 . " WHERE " . FtaModel::KEYNAME . "=" . $this->getKeyValue()
@@ -521,7 +521,7 @@ class FtaModel extends AbstractModel {
                 $return[FtaConditionnementModel::COLIS_EMBALLAGE] = $return[FtaConditionnementModel::COLIS_EMBALLAGE] * $return[FtaModel::FIELDNAME_NOMBRE_UVC_PAR_CARTON];
 
                 //Les Calculs de la table composant        
-                $arrayComposant = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
+                $arrayComposant = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
                                 "SELECT " . FtaComposantModel::FIELDNAME_QUANTITE_FTA_COMPOSITION . "," . FtaComposantModel::FIELDNAME_IS_COMPOSITION_FTA_COMPOSANT . "," . FtaComposantModel::FIELDNAME_POIDS_UNITAIRE_CODIFICATION . " FROM " . FtaComposantModel::TABLENAME
                                 . " WHERE " . FtaComposantModel::FIELDNAME_ID_FTA . "=" . $this->getKeyValue()
                                 . " AND " . FtaComposantModel::FIELDNAME_IS_COMPOSITION_FTA_COMPOSANT . "=" . FtaConditionnementModel::EMBALLAGES_UVC
@@ -663,7 +663,7 @@ class FtaModel extends AbstractModel {
                     //Si aucun Etat n'a été donné, l'état   Intialisation est choisi par défaut
                     $paramOption["abreviation_etat_destination"] = "I";
                 }
-                $arrayIdFtaEtat = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
+                $arrayIdFtaEtat = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
                                 "SELECT " . FtaEtatModel::KEYNAME
                                 . " FROM " . FtaEtatModel::TABLENAME
                                 . " WHERE " . FtaEtatModel::FIELDNAME_ABREVIATION . "='" . $paramOption["abreviation_etat_destination"] . "'"
@@ -790,7 +790,7 @@ class FtaModel extends AbstractModel {
                  */
                 if ($newAbreviationFtaEtat == "I" and ! $selection_chapitre) {//Suppression des validations
                     //Recherche des chapitres affectés au cycle de vie correspondant à l'état
-                    $arrayCycle = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
+                    $arrayCycle = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
                                     "SELECT DISTINCT " . FtaProcessusCycleModel::FIELDNAME_PROCESSUS_INIT . "," . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_CHAPITRE
                                     . " FROM " . FtaProcessusCycleModel::TABLENAME . ", " . FtaWorkflowStructureModel::TABLENAME
                                     . " WHERE " . FtaProcessusCycleModel::FIELDNAME_FTA_ETAT . "='" . $newAbreviationFtaEtat               //Etat du cycle
@@ -807,7 +807,7 @@ class FtaModel extends AbstractModel {
                         foreach ($arrayCycle as $rowsCycle) {
 
                             //Vérification qu'il ne s'agissent pas du processus initiateur du nouveau cycle de vie
-                            $arrayFirst = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
+                            $arrayFirst = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
                                             "SELECT " . FtaSuiviProjetModel::KEYNAME
                                             . " FROM " . FtaProcessusCycleModel::TABLENAME . ", " . FtaWorkflowStructureModel::TABLENAME . ", " . FtaSuiviProjetModel::TABLENAME
                                             . " WHERE " . FtaProcessusCycleModel::FIELDNAME_FTA_ETAT . "='" . $newAbreviationFtaEtat        //Etat du cycle
@@ -834,10 +834,10 @@ class FtaModel extends AbstractModel {
                                         . " WHERE (" . FtaSuiviProjetModel::FIELDNAME_ID_FTA_CHAPITRE . "='" . $rowsCycle[FtaWorkflowStructureModel::FIELDNAME_ID_FTA_CHAPITRE]
                                         . "' AND " . FtaSuiviProjetModel::FIELDNAME_ID_FTA . "='" . $idFtaNew . "') "
                                 ;
-                                DatabaseOperation::query($req_update);
+                                DatabaseOperation::execute($req_update);
                             }
                         }
-                        DatabaseOperation::query($req);
+                        DatabaseOperation::execute($req);
                     }
                     //Fin de Recherche des notifications relatives aux processus trouvées
                 }//Fin de la dévalidation suite à une initialisation
@@ -847,7 +847,7 @@ class FtaModel extends AbstractModel {
                     $where = "";
 
                     //Récupération des chapitres concernés par ce cycle de vie
-                    $arrayCycle2 = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
+                    $arrayCycle2 = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
                                     "SELECT DISTINCT " . FtaProcessusCycleModel::FIELDNAME_PROCESSUS_INIT
                                     . " FROM " . FtaProcessusCycleModel::TABLENAME
                                     . " WHERE " . FtaProcessusCycleModel::FIELDNAME_FTA_ETAT . " = '" . $newAbreviationFtaEtat . "' "
@@ -858,7 +858,7 @@ class FtaModel extends AbstractModel {
                     }
 
                     //Récupération des chapitres à vérrouiller
-                    $arrayChapitreVerrouiller = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
+                    $arrayChapitreVerrouiller = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
                                     "SELECT DISTINCT  " . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_CHAPITRE
                                     . " FROM " . FtaProcessusModel::TABLENAME . ", " . FtaWorkflowStructureModel::TABLENAME
                                     . " WHERE ( " . FtaProcessusModel::TABLENAME . "." . FtaProcessusModel::KEYNAME
@@ -870,7 +870,7 @@ class FtaModel extends AbstractModel {
 
                     foreach ($arrayChapitreVerrouiller as $rowsChapitreVerrouiller) {
                         //Le suivi existe-il déjà ?
-                        $arrayFtaSuiviProjet = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
+                        $arrayFtaSuiviProjet = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
                                         "SELECT " . FtaSuiviProjetModel::KEYNAME . ", " . FtaSuiviProjetModel::FIELDNAME_SIGNATURE_VALIDATION_SUIVI_PROJET
                                         . " FROM " . FtaSuiviProjetModel::TABLENAME
                                         . " WHERE " . FtaSuiviProjetModel::FIELDNAME_ID_FTA . "='" . $idFtaNew
@@ -886,7 +886,7 @@ class FtaModel extends AbstractModel {
                                             . "SET " . FtaSuiviProjetModel::FIELDNAME_SIGNATURE_VALIDATION_SUIVI_PROJET . "='-1' "
                                             . "WHERE " . FtaSuiviProjetModel::KEYNAME . "='" . $idFtaSuiviProjet . "' "
                                     ;
-                                    DatabaseOperation::query($req);
+                                    DatabaseOperation::execute($req);
                                 }
                             }
                         } else {
@@ -897,7 +897,7 @@ class FtaModel extends AbstractModel {
                                     . "', " . FtaSuiviProjetModel::FIELDNAME_ID_FTA . "='" . $idFtaNew
                                     . "', " . FtaSuiviProjetModel::FIELDNAME_SIGNATURE_VALIDATION_SUIVI_PROJET . "='-1' "
                             ;
-                            DatabaseOperation::query($req);
+                            DatabaseOperation::execute($req);
                         }
                     }
                 }
@@ -912,7 +912,7 @@ class FtaModel extends AbstractModel {
                 $req = "DELETE FROM " . FtaSuiviProjetModel::TABLENAME
                         . " WHERE " . FtaSuiviProjetModel::TABLENAME . "." . FtaSuiviProjetModel::FIELDNAME_ID_FTA . "='" . $idFtaNew . "' "                                  //Nouvelle FTA
                 ;
-                DatabaseOperation::query($req);
+                DatabaseOperation::execute($req);
 
                 break;
         }//Fin du post-traitement dans le cas d'une duplication de type "totale"
@@ -920,7 +920,7 @@ class FtaModel extends AbstractModel {
     }
 
     public static function DuplicationIdFta($paramIdFta) {
-        DatabaseOperation::query(
+        DatabaseOperation::execute(
                 " INSERT INTO " . FtaModel::TABLENAME . " (`id_access_arti2`, `numft`, `id_fta_workflow`,"
                 . " `commentaire`, `TRASH_id_fta_palettisation`, `id_dossier_fta`, "
                 . "`id_version_dossier_fta`, `champ_maj_fta`, `id_fta_etat`, "
@@ -1079,7 +1079,7 @@ class FtaModel extends AbstractModel {
      * @return type
      */
     public static function CreateFta($paramIdCreateur, $paramIdFtaEtat, $paramIdFtaWorkflow, $paramDesignationCommerciale, $paramDateCreation, $paramSiteDeProduction) {
-        DatabaseOperation::query(
+        DatabaseOperation::execute(
                 "INSERT INTO `intranet_v3_0_dev`." . FtaModel::TABLENAME
                 . " ( " . FtaModel::FIELDNAME_CREATEUR
                 . "," . FtaModel::FIELDNAME_ID_FTA_ETAT
@@ -1094,12 +1094,12 @@ class FtaModel extends AbstractModel {
                 . ", " . $paramSiteDeProduction
                 . ", " . $paramIdFtaWorkflow . ")"
         );
-        $key = mysql_insert_id();
+        $key = PDO::lastInsertId();
         return $key;
     }
 
     public static function ClassificationFta($paramIdFta) {
-        $arrayClassif = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
+        $arrayClassif = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
                         "SELECT " . FtaModel::FIELDNAME_CLASSIFICATION_ACTIVITE
                         . "," . FtaModel::FIELDNAME_CLASSIFICATION_ENVIRONNEMENT
                         . "," . FtaModel::FIELDNAME_CLASSIFICATION_MARQUE

@@ -438,7 +438,7 @@ class DatabaseRecord extends SessionSaveAndRestoreAbstract {
      * Supprime le record de la base de donnée
      */
     public function delete() {
-        return DatabaseOperation::query(
+        return DatabaseOperation::execute(
                         "DELETE FROM " . $this->getTableNameForSqlClause() . " " . $this->getKeyToSqlStatement()
         );
     }

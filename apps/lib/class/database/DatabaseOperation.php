@@ -173,29 +173,127 @@ class DatabaseOperation {
     }
 
     /**
-     * Convertie un résultat SQL (un seul enregistrement) en tableau PHP
-     * @param resource $paramResult
+     * La requête PDO query réalise la requete SQL (SELECT) afin de récupérer des données de la BDD
+     * @param type $paramRequest
+     * @return type
      */
-    public static function convertSqlResultFirstRowToArray($paramResult) {
-        return mysql_fetch_assoc($paramResult);
+    public static function queryPDO($paramRequest) {
+        $firstTime = microtime(true);
+        $result = DatabaseOperation::databaseAcces()->query($paramRequest);
+        $time = round(microtime(true) - $firstTime, 4);
+        self::setQueriesInfo($paramRequest, $time, self::IncrementQueryCount());
+        return $result;
+    }
+
+    /**
+     * La requête PDO execute réalise les requ$etes SQL (INSERT, DELETE et UPDATE) 
+     * @param type $paramRequest
+     * @return type
+     */
+    public static function execute($paramRequest) {
+        $firstTime = microtime(true);
+        $result = DatabaseOperation::databaseAcces()->prepare($paramRequest)->exec();
+        $time = round(microtime(true) - $firstTime, 4);
+        self::setQueriesInfo($paramRequest, $time, self::IncrementQueryCount());
+
+        return $result;
+    }
+
+    /**
+     * Permet l'acces aux fonctions d'execution de PDO
+     * @return type
+     */
+    public static function databaseAcces() {
+        $dataConnexion = GlobalConfig::getDatabaseConnexion();
+        return $dataConnexion;
+    }
+
+    /**
+     * Cloture l'acces aux fonctions d'execution de PDO
+     * @return type
+     */
+    public static function closeDatabaseAcces() {
+        $globalConfig = new GlobalConfig();
+        $globalConfig->getDatabaseConnexion();
+        return;
+    }
+
+    /**
+     * Convertie un statement SQL (un seul enregistrement) en tableau PHP
+     * @param type $paramStatement
+     * @return type
+     */
+    public static function convertSqlStatementFirstRowToArray($paramStatement) {
+        $statement = DatabaseOperation::queryPDO($paramStatement);
+        if ($statement) {
+            $return = $statement->fetch(PDO::FETCH_ASSOC);
+        }
+        return $return;
+    }
+
+    /**
+     * Convertie un statement SQL en tableau PHP
+     * @param type $paramStatement
+     * @return type
+     */
+    public static function convertSqlStatementWithoutKeyToArray($paramStatement) {
+
+        $statement = DatabaseOperation::queryPDO($paramStatement);
+        if ($statement) {
+            $return = $statement->fetchall(PDO::FETCH_ASSOC);
+        }
+
+        return $return;
+    }
+
+    /**
+     * Mise en pause 
+     * @param type $paramStatement
+     * @return type
+     */
+    public static function convertSqlStatementWithKeyAsFirstFieldToArray($paramStatement) {
+        $return = NULL;
+        $i = 0;
+        if ($paramStatement <> NULL) {
+            $rows = DatabaseOperation::queryPDO($paramStatement)->fetchall(PDO::FETCH_ASSOC);
+            $keys = array_keys($rows);
+            $key_value = $rows[$keys[0]];
+
+//Suppression de la clef dans la liste des champs
+            unset($rows[$keys[0]]);
+            $return[$key_value] = $rows;
+            $i++;
+        }
+        return $return;
+    }
+
+    /**
+     *  Convertie un résultat SQL en tableau PHP
+     * La clef du tableau sera celle de la première colonne du résultat SQL
+     * @param type $paramStatement
+     * @return type
+     */
+    public static function convertSqlStatementKeyAndOneFieldToArray($paramStatement) {
+        if ($paramStatement <> NULL) {
+            $rows = DatabaseOperation::queryPDO($paramStatement)->fetchall(PDO::FETCH_NUM);
+            return $rows;
+        }
     }
 
     /**
      * Convertie un résultat SQL en tableau PHP
-     * La clef du tableau sera générée car asbente dans le résultat SQL
+     * La clef du tableau sera celle de la première colonne du résultat SQL
      * @param resource $paramResult
-     * @return array Tableau
+     * @return array Tableau PHP
      */
-    public static function convertSqlResultWithoutKeyToArray($paramResult) {
+    public static function convertSqlResultKeyAndOneFieldToArray($paramResult) {
         $return = NULL;
-        $i = 0;
         if ($paramResult <> NULL) {
-            while ($rows = mysql_fetch_array($paramResult, MYSQL_ASSOC)) {
-                $return[$i] = $rows;
-                $i++;
+            while ($rows = mysql_fetch_array($paramResult, MYSQL_NUM)) {
+                $return[$rows[0]] = $rows[1];
             }
+            return $return;
         }
-        return $return;
     }
 
     /**
@@ -223,14 +321,44 @@ class DatabaseOperation {
 
     /**
      * Convertie un résultat SQL en tableau PHP
+     * La clef du tableau sera générée car asbente dans le résultat SQL
+     * @param resource $paramResult
+     * @return array Tableau
+     */
+    public static function convertSqlResultWithoutKeyToArray($paramResult) {
+        $return = NULL;
+        $i = 0;
+        if ($paramResult <> NULL) {
+            while ($rows = mysql_fetch_array($paramResult, MYSQL_ASSOC)) {
+                $return[$i] = $rows;
+                $i++;
+            }
+        }
+        return $return;
+    }
+
+    /**
+     * Convertie un résultat SQL (un seul enregistrement) en tableau PHP
+     * @param resource $paramResult
+     */
+    /*
+     * fetch(PDO::FETCH_ASSOC)
+     */
+    public static function convertSqlResultFirstRowToArray($paramResult) {
+        return mysql_fetch_assoc($paramResult);
+    }
+
+    /**
+     * Convertie un résultat SQL en tableau PHP
      * La clef du tableau sera celle de la première colonne du résultat SQL
      * @param resource $paramResult
      * @return array Tableau PHP
      */
-    public static function convertSqlResultKeyAndOneFieldToArray($paramResult) {
+    public static function convertSqlResultKeyAndOneFieldToArray2($paramResult) {
         $return = NULL;
         if ($paramResult <> NULL) {
-            while ($rows = mysql_fetch_array($paramResult, MYSQL_NUM)) {
+            $paramResult->setFetchMode(PDO::FETCH_OBJ);
+            while ($rows = $paramResult->fetch()) {
                 $return[$rows[0]] = $rows[1];
             }
             return $return;
@@ -247,6 +375,15 @@ class DatabaseOperation {
 
         return DatabaseOperation::convertSqlResultKeyAndOneFieldToArray(
                         DatabaseOperation::query(
+                                $paramRequest
+                        )
+        );
+    }
+
+    public static function convertSqlQueryWithKeyAsFirstFieldToArray2($paramRequest) {
+
+        return DatabaseOperation::convertSqlResultKeyAndOneFieldToArray2(
+                        DatabaseOperation::query2(
                                 $paramRequest
                         )
         );
@@ -514,7 +651,7 @@ class DatabaseOperation {
      * @return boolean TRUE si Ok, FALSE si erreur. 
      */
     public static function doSqlUpdate($paramTableClause, $paramSetClause, $paramWhereClause) {
-        return DatabaseOperation::query(
+        return DatabaseOperation::execute(
                         "UPDATE " . $paramTableClause
                         . " SET " . $paramSetClause
                         . " WHERE (" . $paramWhereClause . " )"
@@ -536,7 +673,7 @@ class DatabaseOperation {
      * @return boolean TRUE si Ok, FALSE si erreur. 
      */
     public static function doSqlDelete($paramTableClause, $paramWhereClause) {
-        return DatabaseOperation::query(
+        return DatabaseOperation::execute(
                         "DELETE FROM " . $paramTableClause . " "
                         . $paramWhereClause
         );

@@ -82,7 +82,7 @@ if ($paramModifier == 'modifier') {
     /*
      *  Requete pour lire tous les champs text nommes avec le numero du service
      */
-    $arrayService = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
+    $arrayService = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
                     "SELECT DISTINCT " . ServicesModel::KEYNAME
                     . " FROM " . ServicesModel::TABLENAME
                     . " ORDER BY " . ServicesModel::KEYNAME
@@ -121,7 +121,7 @@ if ($paramModifier == 'modifier') {
      * Récupération des droits d'accès faisable dans l'Intranet
      */
 
-    $arrayModule = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
+    $arrayModule = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
                     "SELECT " . IntranetModulesModel::TABLENAME . ".*"
                     . ", " . IntranetActionsModel::TABLENAME . ".*"
                     . " FROM " . IntranetActionsModel::TABLENAME . ", " . IntranetModulesModel::TABLENAME
@@ -244,7 +244,7 @@ echo "<td>";
 echo "<div align=center>";
 echo ("<select name=\"sal_user\" size=20>\n");
 /* Constitution de la liste déroulante des noms */
-$arrayIdUser = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
+$arrayIdUser = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
                 "SELECT " . UserModel::KEYNAME
                 . ", " . UserModel::FIELDNAME_NOM
                 . ", " . UserModel::FIELDNAME_PRENOM
@@ -289,7 +289,7 @@ echo ("</select>\n");
  */
 
 $type4 = 4;
-$arrayUserType4 = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
+$arrayUserType4 = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
                 "SELECT " . UserModel::FIELDNAME_NOM . ", " . UserModel::FIELDNAME_PRENOM
                 . ", " . CatsoproModel::FIELDNAME_INTITULE_CAT . ", " . AccessMaterielServiceModel::FIELDNAME_NOM_SERVICE
                 . " FROM " . AccessMaterielServiceModel::TABLENAME . "," . UserModel::TABLENAME
@@ -320,7 +320,7 @@ if ($arrayUserType4) {
 <?php
 /* Recherche des salaries qui sont super admin */
 $type3 = 3;
-$arrayUserType3 = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
+$arrayUserType3 = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
                 "SELECT " . UserModel::FIELDNAME_NOM . ", " . UserModel::FIELDNAME_PRENOM
                 . ", " . CatsoproModel::FIELDNAME_INTITULE_CAT . ", " . AccessMaterielServiceModel::FIELDNAME_NOM_SERVICE
                 . " FROM " . AccessMaterielServiceModel::TABLENAME . "," . UserModel::TABLENAME
@@ -352,7 +352,7 @@ if ($arrayUserType3) {
 <?php
 /* Recherche des salaries qui sont super admin */
 $type2 = 2;
-$arrayUserType2 = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
+$arrayUserType2 = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
                 "SELECT " . UserModel::FIELDNAME_NOM . ", " . UserModel::FIELDNAME_PRENOM
                 . ", " . CatsoproModel::FIELDNAME_INTITULE_CAT . ", " . AccessMaterielServiceModel::FIELDNAME_NOM_SERVICE
                 . " FROM " . AccessMaterielServiceModel::TABLENAME . "," . UserModel::TABLENAME
@@ -384,7 +384,7 @@ if ($arrayUserType2) {
 <?php
 /* Recherche des salaries qui sont super admin */
 $type1 = 1;
-$arrayUserType1 = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
+$arrayUserType1 = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
                 "SELECT " . UserModel::FIELDNAME_NOM . ", " . UserModel::FIELDNAME_PRENOM
                 . ", " . CatsoproModel::FIELDNAME_INTITULE_CAT . ", " . AccessMaterielServiceModel::FIELDNAME_NOM_SERVICE
                 . " FROM " . AccessMaterielServiceModel::TABLENAME . "," . UserModel::TABLENAME

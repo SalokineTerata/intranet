@@ -81,7 +81,7 @@ class FtaTransitionModel {
             case $paramAbreviationFtaTransition == FtaEtatModel::ETAT_ABREVIATION_VALUE_MODIFICATION: //Passer en Initialisation
             case $paramAbreviationFtaTransition == FtaEtatModel::ETAT_ABREVIATION_VALUE_PRESENTATION: //Passer en Fiche Présentation
                 //Vérification que le dossier n'a pas une fiche déjà en Mise à jour
-                $array = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
+                $array = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
                                 "SELECT " . FtaModel::KEYNAME
                                 . " FROM " . FtaModel::TABLENAME . "," . FtaEtatModel::TABLENAME
                                 . " WHERE " . FtaModel::FIELDNAME_DOSSIER_FTA . "=" . $idDossierFta . " "
@@ -147,7 +147,7 @@ class FtaTransitionModel {
          * ***************************************************************************** */
 
         //Récupération du nouvel état de la fiche
-        $arrayIdFtaEtat = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
+        $arrayIdFtaEtat = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
                         "SELECT " . FtaEtatModel::KEYNAME
                         . " FROM " . FtaEtatModel::TABLENAME
                         . " WHERE " . FtaEtatModel::FIELDNAME_ABREVIATION . "='$paramAbreviationFtaTransition'"
@@ -234,7 +234,7 @@ class FtaTransitionModel {
                 . "=" . FtaModel::TABLENAME . "." . FtaModel::FIELDNAME_ID_FTA_ETAT        //Liaison
         ;
         $logTransition .= "\n\nLISTE DIFFUSION\n" . $req;
-        $arrayFta = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray($req);
+        $arrayFta = DatabaseOperation::convertSqlStatementWithoutKeyToArray($req);
 
         foreach ($arrayFta as $rowsFta) {
 
@@ -256,7 +256,7 @@ class FtaTransitionModel {
                         . "=" . FtaProcessusCycleModel::TABLENAME . "." . FtaProcessusCycleModel::FIELDNAME_WORKFLOW
                 ;
                 $logTransition.="\n\n" . $req;
-                $arrayIdChapitreInitiateur = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray($req);
+                $arrayIdChapitreInitiateur = DatabaseOperation::convertSqlStatementWithoutKeyToArray($req);
 
                 //L'un des chapitres initiateurs est-il dans la liste des chapitres mis à jour sur la fta ?
                 foreach ($arrayIdChapitreInitiateur as $rowsInitiateur) {
@@ -337,7 +337,7 @@ class FtaTransitionModel {
                     . " GROUP BY " . UserModel::FIELDNAME_ID_SERVICE . ", " . UserModel::FIELDNAME_LIEU_GEO
             ;
             $logTransition.="\n\n" . $req;
-            $arrayServiceFta = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray($req);
+            $arrayServiceFta = DatabaseOperation::convertSqlStatementWithoutKeyToArray($req);
             $where = " AND ( ";
             $where_operator = "";
 
@@ -394,7 +394,7 @@ class FtaTransitionModel {
                         . $where                                  //Restriction au niveau du service et site de rattachement
                 ;
                 $logTransition.="\n\n" . $req . "\nFIN DIFFUSION";
-                $r_liste_destinataire = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray($req);
+                $r_liste_destinataire = DatabaseOperation::convertSqlStatementWithoutKeyToArray($req);
                 foreach ($r_liste_destinataire as $rows_destinataire) {
                     $return[$rows_destinataire[UserModel::KEYNAME]]["mail"] = $rows_destinataire[UserModel::FIELDNAME_MAIL];
                     $return[$rows_destinataire[UserModel::KEYNAME]]["prenom_nom"] = $rows_destinataire[UserModel::FIELDNAME_NOM] . " " . $rows_destinataire[UserModel::FIELDNAME_PRENOM];
@@ -442,7 +442,7 @@ class FtaTransitionModel {
         /*
          * Récupération de la notification d'un chapitre
          */
-        $arrayFtaSuiviProjetNoti = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
+        $arrayFtaSuiviProjetNoti = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
                         "SELECT " . FtaSuiviProjetModel::FIELDNAME_NOTIFICATION_FTA_SUIVI_PROJET
                         . " FROM " . FtaSuiviProjetModel::TABLENAME
                         . " WHERE " . FtaSuiviProjetModel::FIELDNAME_ID_FTA . " = " . $paramIdFta
@@ -455,7 +455,7 @@ class FtaTransitionModel {
         /*
          * Récupération du nom du site d'assemblage
          */
-        $arrayGeoSite = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
+        $arrayGeoSite = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
                         "SELECT " . GeoModel::FIELDNAME_LIBELLE_SITE_AGIS
                         . " FROM " . GeoModel::TABLENAME
                         . " WHERE " . GeoModel::FIELDNAME_ID_SITE . " = " . $SiteDeProduction
@@ -477,7 +477,7 @@ class FtaTransitionModel {
                 . " ORDER BY " . AnnexeAgrologicArticleCodificationModel::FIELDNAME_PREFIXE_ANNEXE_AGRO_ART_COD . " ASC, " . FtaComposantModel::FIELDNAME_DESIGNATION_CODIFICATION . ""
         ;
         $logTransition = "\n\n" . $req;
-        $arrayProd = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray($req);
+        $arrayProd = DatabaseOperation::convertSqlStatementWithoutKeyToArray($req);
         if ($arrayProd) {
             $text_prod = "";
             foreach ($arrayProd as $rowsProd) {

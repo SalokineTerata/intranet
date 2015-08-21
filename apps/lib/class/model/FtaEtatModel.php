@@ -29,7 +29,7 @@ class FtaEtatModel extends AbstractModel {
      */
     public static function getFtaEtatAndNameByRole($paramIdFtaRole) {
 
-        $arrayFtaEtatAndName = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
+        $arrayFtaEtatAndName = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
                         "SELECT DISTINCT " . FtaEtatModel::FIELDNAME_NOM_FTA_ETAT
                         . "," . FtaEtatModel::FIELDNAME_ABREVIATION
                         . "," . FtaModel::TABLENAME . "." . FtaModel::FIELDNAME_ID_FTA_ETAT
@@ -111,7 +111,7 @@ class FtaEtatModel extends AbstractModel {
                 /*
                  * On obtient les fta à vérifié dont tous les chapitres ne sont pas validés
                  */
-                $arrayTmp = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray($reqTmp);
+                $arrayTmp = DatabaseOperation::convertSqlStatementWithoutKeyToArray($reqTmp);
                 if ($paramRole == AccueilFta::VALUE_1) {
                     $arrayTmp = NULL;
                 }
@@ -130,7 +130,7 @@ class FtaEtatModel extends AbstractModel {
                 $req .= ")";
 
 
-                $array[AccueilFta::VALUE_1] = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray($req);
+                $array[AccueilFta::VALUE_1] = DatabaseOperation::convertSqlStatementWithoutKeyToArray($req);
 
                 $req = "SELECT DISTINCT " . FtaWorkflowModel::TABLENAME . ".*"
                         . " FROM " . FtaModel::TABLENAME . "," . FtaWorkflowModel::TABLENAME
@@ -143,7 +143,7 @@ class FtaEtatModel extends AbstractModel {
                 $req .= " AND " . FtaModel::TABLENAME . "." . FtaModel::FIELDNAME_WORKFLOW
                         . "=" . FtaWorkflowModel::TABLENAME . "." . FtaWorkflowModel::KEYNAME;
 
-                $array[AccueilFta::VALUE_2] = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray($req);
+                $array[AccueilFta::VALUE_2] = DatabaseOperation::convertSqlStatementWithoutKeyToArray($req);
 
                 break;
 
@@ -198,7 +198,7 @@ class FtaEtatModel extends AbstractModel {
                 /*
                  * On obtient les fta à vérifié dont tous les chapitres ne sont pas validés
                  */
-                $arrayTmp = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray($reqTmp);
+                $arrayTmp = DatabaseOperation::convertSqlStatementWithoutKeyToArray($reqTmp);
                 if ($arrayTmp) {
                     foreach ($arrayTmp as $rows) {
                         $tauxDeValidadation = FtaProcessusModel::getFtaProcessusNonValidePrecedent($rows[FtaModel::KEYNAME], $rows[FtaProcessusModel::KEYNAME], $rows[FtaWorkflowStructureModel::FIELDNAME_ID_FTA_WORKFLOW]);
@@ -221,7 +221,7 @@ class FtaEtatModel extends AbstractModel {
 
                 $req .= ")";
 
-                $array[AccueilFta::VALUE_1] = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray($req);
+                $array[AccueilFta::VALUE_1] = DatabaseOperation::convertSqlStatementWithoutKeyToArray($req);
 
 
                 $req = "SELECT DISTINCT " . FtaWorkflowModel::TABLENAME . ".*"
@@ -235,7 +235,7 @@ class FtaEtatModel extends AbstractModel {
                 $req .= " AND " . FtaModel::TABLENAME . "." . FtaModel::FIELDNAME_WORKFLOW
                         . "=" . FtaWorkflowModel::TABLENAME . "." . FtaWorkflowModel::KEYNAME;
 
-                $array[AccueilFta::VALUE_2] = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray($req);
+                $array[AccueilFta::VALUE_2] = DatabaseOperation::convertSqlStatementWithoutKeyToArray($req);
 
                 break;
 
@@ -289,7 +289,7 @@ class FtaEtatModel extends AbstractModel {
                 /*
                  * On obtient les fta à vérifié dont tous les chapitres sont validés
                  */
-                $arrayTmp = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray($reqTmp);
+                $arrayTmp = DatabaseOperation::convertSqlStatementWithoutKeyToArray($reqTmp);
 
                 if ($arrayTmp) {
                     foreach ($arrayTmp as $rows) {
@@ -305,7 +305,7 @@ class FtaEtatModel extends AbstractModel {
 
                 $req .= ")";
 
-                $array[AccueilFta::VALUE_1] = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray($req);
+                $array[AccueilFta::VALUE_1] = DatabaseOperation::convertSqlStatementWithoutKeyToArray($req);
 
                 $req = "SELECT DISTINCT " . FtaWorkflowModel::TABLENAME . ".*"
                         . " FROM " . FtaModel::TABLENAME . "," . FtaWorkflowModel::TABLENAME
@@ -318,14 +318,14 @@ class FtaEtatModel extends AbstractModel {
                 $req .= " AND " . FtaModel::TABLENAME . "." . FtaModel::FIELDNAME_WORKFLOW
                         . "=" . FtaWorkflowModel::TABLENAME . "." . FtaWorkflowModel::KEYNAME;
 
-                $array[AccueilFta::VALUE_2] = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray($req);
+                $array[AccueilFta::VALUE_2] = DatabaseOperation::convertSqlStatementWithoutKeyToArray($req);
 
                 break;
 
 
             case FtaEtatModel::ETAT_AVANCEMENT_VALUE_ALL: //Toutes les fiches de l'état sélectionné
 
-                $array[AccueilFta::VALUE_1] = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
+                $array[AccueilFta::VALUE_1] = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
                                 "SELECT DISTINCT " . FtaModel::KEYNAME
                                 . " FROM " . FtaModel::TABLENAME . "," . IntranetDroitsAccesModel::TABLENAME
                                 . "," . FtaWorkflowModel::TABLENAME . "," . IntranetActionsModel::TABLENAME
@@ -341,7 +341,7 @@ class FtaEtatModel extends AbstractModel {
                 );
 
 
-                $array[AccueilFta::VALUE_2] = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
+                $array[AccueilFta::VALUE_2] = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
                                 "SELECT DISTINCT " . FtaWorkflowModel::TABLENAME . ".*"
                                 . " FROM " . FtaModel::TABLENAME . "," . FtaWorkflowModel::TABLENAME
                                 . "," . IntranetDroitsAccesModel::TABLENAME . "," . IntranetActionsModel::TABLENAME
@@ -363,7 +363,7 @@ class FtaEtatModel extends AbstractModel {
     }
 
     public static function getNameEtatByIdEtat($paramIdEtat) {
-        $arrayIdEtat = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
+        $arrayIdEtat = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
                         "SELECT " . FtaEtatModel::FIELDNAME_NOM_FTA_ETAT
                         . " FROM " . FtaEtatModel::TABLENAME
                         . " WHERE " . FtaEtatModel::KEYNAME . "=" . $paramIdEtat

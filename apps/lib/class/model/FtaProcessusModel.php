@@ -30,7 +30,7 @@ class FtaProcessusModel extends AbstractModel {
         /*
          * Nombres total de processus suivant pour le processus en cours
          */
-        $array = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
+        $array = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
                         "SELECT DISTINCT " . FtaProcessusCycleModel::FIELDNAME_PROCESSUS_NEXT . "," . FtaProcessusCycleModel::TABLENAME . "." . FtaProcessusCycleModel::FIELDNAME_WORKFLOW
                         . " FROM " . FtaWorkflowStructureModel::TABLENAME . "," . FtaProcessusModel::TABLENAME
                         . "," . FtaProcessusCycleModel::TABLENAME
@@ -73,7 +73,7 @@ class FtaProcessusModel extends AbstractModel {
         /*
          * Nombres total de processus précedent pour le processus en cours
          */
-        $array = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
+        $array = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
                         "SELECT DISTINCT " . FtaProcessusCycleModel::FIELDNAME_PROCESSUS_INIT . "," . FtaProcessusCycleModel::TABLENAME . "." . FtaProcessusCycleModel::FIELDNAME_WORKFLOW
                         . " FROM " . FtaWorkflowStructureModel::TABLENAME . "," . FtaProcessusModel::TABLENAME
                         . "," . FtaProcessusCycleModel::TABLENAME
@@ -114,7 +114,7 @@ class FtaProcessusModel extends AbstractModel {
      */
     public static function getNonValideIdFtaByRoleWorkflowProcessus($paramIdFta, $paramIdRole, $paramIdWorkflow) {
 
-        $arrayChapitreTotal = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
+        $arrayChapitreTotal = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
                         "SELECT " . FtaWorkflowStructureModel::KEYNAME
                         . " FROM " . FtaWorkflowStructureModel::TABLENAME . "," . FtaProcessusModel::TABLENAME
                         . " WHERE " . FtaWorkflowStructureModel::TABLENAME . "." . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_PROCESSUS
@@ -127,7 +127,7 @@ class FtaProcessusModel extends AbstractModel {
 
         $nombreTotalProcessus = count($arrayChapitreTotal);
 
-        $arrayChapitreValide = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
+        $arrayChapitreValide = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
                         "SELECT " . FtaWorkflowStructureModel::KEYNAME
                         . " FROM " . FtaModel::TABLENAME . "," . FtaSuiviProjetModel::TABLENAME
                         . "," . FtaWorkflowStructureModel::TABLENAME . "," . FtaProcessusModel::TABLENAME
@@ -162,7 +162,7 @@ class FtaProcessusModel extends AbstractModel {
      */
     public static function getValideIdFtaByRoleWorkflowProcessus($paramIdFta, $paramIdRole, $paramIdWorkflow) {
 
-        $arrayProcessusTotal = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
+        $arrayProcessusTotal = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
                         "SELECT " . FtaWorkflowStructureModel::TABLENAME . "." . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_PROCESSUS . " FROM " . FtaWorkflowStructureModel::TABLENAME . "," . FtaProcessusModel::TABLENAME
                         . " WHERE " . FtaWorkflowStructureModel::TABLENAME . "." . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_PROCESSUS
                         . "=" . FtaProcessusModel::TABLENAME . "." . FtaProcessusModel::KEYNAME  //Jointure                
@@ -175,7 +175,7 @@ class FtaProcessusModel extends AbstractModel {
         $nombreTotalProcessus = count($arrayProcessusTotal);
 
 
-        $arrayProcessusValide = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
+        $arrayProcessusValide = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
                         "SELECT " . FtaWorkflowStructureModel::TABLENAME . "." . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_PROCESSUS . " FROM " . FtaModel::TABLENAME . "," . FtaSuiviProjetModel::TABLENAME
                         . "," . FtaWorkflowStructureModel::TABLENAME . "," . FtaProcessusModel::TABLENAME
                         . " WHERE " . FtaModel::TABLENAME . "." . FtaModel::KEYNAME
@@ -208,7 +208,7 @@ class FtaProcessusModel extends AbstractModel {
      * @return type
      */
     public static function getValideProcessusEncours($paramIdFta, $paramProcessusEncours, $paramIdWorkflow) {
-        $arrayNombreTotalChapitre = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
+        $arrayNombreTotalChapitre = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
                         "SELECT " . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_CHAPITRE
                         . " FROM " . FtaWorkflowStructureModel::TABLENAME . "," . FtaProcessusModel::TABLENAME
                         . " WHERE " . FtaWorkflowStructureModel::TABLENAME . "." . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_PROCESSUS
@@ -218,7 +218,7 @@ class FtaProcessusModel extends AbstractModel {
         );
         $nombreTotalChapitre = count($arrayNombreTotalChapitre);
 
-        $arrayNombreTotalChapitreValide = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
+        $arrayNombreTotalChapitreValide = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
                         "SELECT " . FtaWorkflowStructureModel::TABLENAME . "." . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_CHAPITRE
                         . " FROM " . FtaModel::TABLENAME . "," . FtaSuiviProjetModel::TABLENAME
                         . "," . FtaWorkflowStructureModel::TABLENAME . "," . FtaProcessusModel::TABLENAME
@@ -257,7 +257,7 @@ class FtaProcessusModel extends AbstractModel {
     public static function CheckProcessusMultiSite($paramRows) {
 
         //Ce processus en cours, est-il du type repartie ou centralisé ?
-        $reqType = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
+        $reqType = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
                         "SELECT " . FtaProcessusModel::FIELDNAME_MULTISITE_FTA_PROCESSUS
                         . " FROM " . FtaProcessusModel::TABLENAME
                         . " WHERE " . FtaProcessusModel::KEYNAME
@@ -285,7 +285,7 @@ class FtaProcessusModel extends AbstractModel {
 //Existe-il une configuration de gestion forcée pour ce processus et ce site d'assemblage ?
 
         foreach ($paramRows as $rowsSiteSociete) {
-            $arrayGestion = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
+            $arrayGestion = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
                             "SELECT " . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_PROCESSUS
                             . " FROM " . GeoModel::TABLENAME
                             . "," . FtaModel::TABLENAME

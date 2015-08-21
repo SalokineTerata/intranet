@@ -25,7 +25,7 @@ identification1("salaries", $login, $pass);
 UserModel::securadmin(4, $id_type);
 if ($paramRech == '1') {
     /* Recherche des infos sur le salarie */
-    $arrayUserDetail = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
+    $arrayUserDetail = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
                     "SELECT * FROM " . UserModel::TABLENAME
                     . " WHERE " . UserModel::KEYNAME . "='$paramIdUser'"
     );
@@ -53,7 +53,7 @@ if ($paramRech == '1') {
             $lieu_geo = $rowsUserDetail[UserModel::FIELDNAME_LIEU_GEO];
             $newsDefil = $rowsUserDetail[UserModel::FIELDNAME_NEWSDEFIL];
         }
-        $arrayDroitftDetail = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
+        $arrayDroitftDetail = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
                         "SELECT " . DroitftModel::FIELDNAME_CREATION_FICHE_PRODUIT
                         . "," . DroitftModel::FIELDNAME_CREATION_FT
                         . "," . DroitftModel::FIELDNAME_DROITSTAT
@@ -237,7 +237,7 @@ if ($paramRech == '1') {
                                                 <?php
                                                 echo ("<select name=\"sal_catsopro\">\n");
                                                 /* Constitution de la liste déroulante des noms des csp */
-                                                $arrayCatsopro = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
+                                                $arrayCatsopro = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
                                                                 "SELECT " . CatsoproModel::KEYNAME . "," . CatsoproModel::FIELDNAME_INTITULE_CAT
                                                                 . " FROM " . CatsoproModel::TABLENAME
                                                                 . " ORDER BY " . CatsoproModel::FIELDNAME_INTITULE_CAT
@@ -302,7 +302,7 @@ if ($paramRech == '1') {
                                                 <?php
                                                 echo ("<select name=\"sal_type\">\n");
                                                 /* Constitution de la liste déroulante des noms des types */
-                                                $arrayType = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
+                                                $arrayType = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
                                                                 "SELECT " . TypesModel::KEYNAME
                                                                 . ", " . TypesModel::FIELDNAME_INTITULE_TYP
                                                                 . " FROM " . TypesModel::TABLENAME
@@ -448,7 +448,7 @@ if ($paramRech == '1') {
                                                 <?php
                                                 echo ("<select name=\"new_lieu_geo\">\n");
                                                 /* Constitution de la liste déroulante des noms des groupes */
-                                                $arrayGeo = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
+                                                $arrayGeo = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
                                                                 "SELECT " . GeoModel::KEYNAME . "," . GeoModel::FIELDNAME_GEO
                                                                 . " FROM " . GeoModel::TABLENAME
                                                                 . " WHERE " . GeoModel::FIELDNAME_SITE_ACTIF . " = 1"
@@ -510,7 +510,7 @@ if ($paramRech == '1') {
 
                                                             <?php
                                                             /* Lecture de la table MODES et affichage de l'intitule des services avec les niveaux */
-                                                            $arrayService = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
+                                                            $arrayService = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
                                                                             "SELECT " . ServicesModel::FIELDNAME_INTITULE_SER . "," . ServicesModel::KEYNAME
                                                                             . " FROM " . ServicesModel::TABLENAME
                                                                             . " ORDER BY " . ServicesModel::FIELDNAME_INTITULE_SER
@@ -522,7 +522,7 @@ if ($paramRech == '1') {
                                                                     $idService = $rowsService[ServicesModel::KEYNAME];
                                                                     $intituleSer = stripslashes($intituleSer);
                                                                     /* Pour chaque service on recherche dans la table mode */
-                                                                    $arrayServiceConf = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
+                                                                    $arrayServiceConf = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
                                                                                     "SELECT " . ModesModel::FIELDNAME_SERV_CONF . " FROM " . ModesModel::TABLENAME
                                                                                     . " WHERE " . ModesModel::FIELDNAME_ID_USER . "=" . $paramIdUser
                                                                                     . " AND " . ModesModel::FIELDNAME_ID_SERVICE . "=" . $idService

@@ -53,7 +53,7 @@ class Navigation {
                 . "class=contenu "
         ;
         //Récupère la page en cours
-        $arrayFtaEtatAndFta = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
+        $arrayFtaEtatAndFta = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
                         "SELECT " . FtaModel::KEYNAME . ", " . FtaModel::FIELDNAME_CREATEUR
                         . ", " . FtaModel::FIELDNAME_ARTICLE_AGROLOGIC . ", " . FtaModel::FIELDNAME_DOSSIER_FTA
                         . ", " . FtaModel::FIELDNAME_VERSION_DOSSIER_FTA . ", " . FtaModel::FIELDNAME_LIBELLE
@@ -68,7 +68,7 @@ class Navigation {
             //Récupération des informations préalables
 //            $rowsFtaEtatAndFta[FtaModel::KEYNAME] = self::$id_fta;
             //Nom de l'assistante de projet responsable:
-            $array = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
+            $array = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
                             "SELECT " . UserModel::FIELDNAME_PRENOM . "," . UserModel::FIELDNAME_NOM
                             . " FROM " . UserModel::TABLENAME
                             . " WHERE " . UserModel::KEYNAME
@@ -142,7 +142,7 @@ class Navigation {
             /*
              * Nous récuperons les processus en cours.
              */
-            $req = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
+            $req = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
                             "SELECT DISTINCT " . FtaProcessusModel::TABLENAME
                             . ".* FROM " . FtaProcessusModel::TABLENAME
                             . ", " . FtaProcessusCycleModel::TABLENAME
@@ -173,7 +173,7 @@ class Navigation {
                             . "' AND " . IntranetDroitsAccesModel::FIELDNAME_NIVEAU_INTRANET_DROITS_ACCES . "=1"  //L'utilisateur est propriétaire
             );
 
-            $arrayProcessusValide = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
+            $arrayProcessusValide = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
                             "SELECT DISTINCT " . FtaProcessusModel::TABLENAME
                             . ".* FROM " . FtaProcessusModel::TABLENAME
                             . ", " . FtaProcessusCycleModel::TABLENAME
@@ -275,7 +275,7 @@ class Navigation {
             //Finalisation de la requête
             $req .="";
 
-            $result = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray($req);
+            $result = DatabaseOperation::convertSqlStatementWithoutKeyToArray($req);
             if ($result) {
                 foreach ($result as $rows) {
 
@@ -290,7 +290,7 @@ class Navigation {
                     $req .=self::AddValidProcess($ProcessusValide);
 
                     //Recherche dans le cycle correspondant à l'état en cours de la fiche
-                    $req_etat = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
+                    $req_etat = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
                                     "SELECT " . FtaEtatModel::TABLENAME . "." . FtaEtatModel::FIELDNAME_ABREVIATION
                                     . " FROM " . FtaEtatModel::TABLENAME . "," . FtaModel::TABLENAME
                                     . " WHERE " . FtaEtatModel::TABLENAME . "." . FtaEtatModel::KEYNAME
@@ -314,7 +314,7 @@ class Navigation {
                      * Nous récupérons tous les processus que l'utilisateur verra en lecture(seule) 
                      * afin qu'ils puissent remplir les données des champs de leurs chapitres
                      */
-                    $arrayIdFtaProcessusCyle = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray($req);
+                    $arrayIdFtaProcessusCyle = DatabaseOperation::convertSqlStatementWithoutKeyToArray($req);
                     if ($arrayIdFtaProcessusCyle) {
                         foreach ($arrayIdFtaProcessusCyle as $rowsIdFtaProcessusCycle) {
                             $idFtaProcessusCyle = $rowsIdFtaProcessusCycle[FtaProcessusCycleModel::KEYNAME];
@@ -336,7 +336,7 @@ class Navigation {
                             . "=" . FtaProcessusModel::TABLENAME . "." . FtaProcessusModel::FIELDNAME_ID_FTA_ROLE
                             . " AND " . FtaProcessusModel::TABLENAME . "." . FtaProcessusModel::KEYNAME . "=" . $rows[FtaProcessusCycleModel::FIELDNAME_PROCESSUS_NEXT]
                             . " AND " . FtaProcessusCycleModel::TABLENAME . "." . FtaProcessusCycleModel::FIELDNAME_WORKFLOW . " = " . self::$id_fta_workflow;
-                    $array = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray($req);
+                    $array = DatabaseOperation::convertSqlStatementWithoutKeyToArray($req);
 
                     if ($array) {
                         /*
@@ -388,7 +388,7 @@ class Navigation {
                 $req .=self::AddValidProcess($ProcessusValide);
 
                 //Recherche dans le cycle correspondant à l'état en cours de la fiche
-                $req_etat = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
+                $req_etat = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
                                 "SELECT " . FtaEtatModel::TABLENAME . "." . FtaEtatModel::FIELDNAME_ABREVIATION
                                 . " FROM " . FtaEtatModel::TABLENAME . "," . FtaModel::TABLENAME
                                 . " WHERE " . FtaEtatModel::TABLENAME . "." . FtaEtatModel::KEYNAME
@@ -412,7 +412,7 @@ class Navigation {
                  * Nous récupérons tous les processus que l'utilisateur verra en lecture(seule) 
                  * afin qu'ils puissent remplir les données des champs de leurs chapitres
                  */
-                $arrayIdFtaProcessusCyle = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray($req);
+                $arrayIdFtaProcessusCyle = DatabaseOperation::convertSqlStatementWithoutKeyToArray($req);
                 if ($arrayIdFtaProcessusCyle) {
                     foreach ($arrayIdFtaProcessusCyle as $rowsIdFtaProcessusCycle) {
                         $idFtaProcessusCyle = $rowsIdFtaProcessusCycle[FtaProcessusCycleModel::KEYNAME];
@@ -453,7 +453,7 @@ class Navigation {
         }
         $reqRecup .=" ) AND " . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_WORKFLOW . "=" . self::$id_fta_workflow
                 . " ORDER BY " . FtaChapitreModel::TABLENAME . "." . FtaChapitreModel::KEYNAME;
-        $arrayRecup = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray($reqRecup);
+        $arrayRecup = DatabaseOperation::convertSqlStatementWithoutKeyToArray($reqRecup);
 
         //Balyage des chapitres trouvés
         foreach ($arrayRecup as $rowsRecup) {

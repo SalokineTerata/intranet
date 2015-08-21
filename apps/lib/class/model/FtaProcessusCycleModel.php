@@ -107,7 +107,7 @@ class FtaProcessusCycleModel extends AbstractModel {
      * @return type
      */
     public static function getArrayProcessusValidationFTA($paramIdWorkflow){
-        $arrayProcessusValidation = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
+        $arrayProcessusValidation = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
                                 "SELECT DISTINCT t1 ." . FtaProcessusCycleModel::FIELDNAME_PROCESSUS_INIT
                                 . " FROM " . FtaProcessusCycleModel::TABLENAME . " as t1"
                                 . " LEFT OUTER JOIN " . FtaProcessusCycleModel::TABLENAME . " as t2"

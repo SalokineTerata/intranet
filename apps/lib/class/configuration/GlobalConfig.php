@@ -110,23 +110,6 @@ class GlobalConfig {
     /**
      * Ouverture de la connexion MySQL  
      */
-    /*
-      function openDatabaseConnexion() {
-
-      $this->setDatabaseConnexion(new PDO(GlobalConfig::MYSQL_HOST . $this->getConf()->getMysqlServerName()
-      . GlobalConfig::MYSQL_DBNAME . $this->getConf()->getMysqlDatabaseName()
-      , $this->getConf()->getMysqlDatabaseAuthentificationUsername()
-      , $this->getConf()->getMysqlDatabaseAuthentificationPassword()
-      ));
-
-      $pdostatement= $this->getDatabaseConnexion()->query("SET NAMES utf8");
-      PDOStatement::execute($pdostatement);
-      }
-     */
-
-    /**
-     * Ouverture de la connexion MySQL  
-     */
     function openDatabaseConnexion() {
 
         mysql_connect($this->getConf()->getMysqlServerName()
@@ -246,12 +229,19 @@ class GlobalConfig {
         $this->needBuildConf = $needBuildConf;
     }
 
-    function getDatabaseConnexion() {
-        return $this->databaseConnexion;
-    }
-
-    function setDatabaseConnexion($databaseConnexion) {
-        $this->databaseConnexion = $databaseConnexion;
+    /**
+     * Ouverture de la connexion MySQL  
+     */
+    static function getDatabaseConnexion() {
+        $globalConfig = new GlobalConfig();
+        $db = new PDO(GlobalConfig::MYSQL_HOST . $globalConfig->getConf()->getMysqlServerName()
+                . GlobalConfig::MYSQL_DBNAME . $globalConfig->getConf()->getMysqlDatabaseName()
+                , $globalConfig->getConf()->getMysqlDatabaseAuthentificationUsername()
+                , $globalConfig->getConf()->getMysqlDatabaseAuthentificationPassword()
+        );
+        $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING);
+        $db->exec("SET NAMES utf8");
+        return $db;
     }
 
     static function getIsGlobalConfigExistInPhpSession() {

@@ -2229,7 +2229,7 @@ class Chapitre {
 
             //Recherche de la personnes ayant signé ce chapitre
             if (self::$ftaSuiviProjetModel->getDataField(FtaSuiviProjetModel::FIELDNAME_SIGNATURE_VALIDATION_SUIVI_PROJET)->getFieldValue()) { //Le chapitre est signé
-                $arrayUser = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
+                $arrayUser = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
                                 "SELECT " . UserModel::FIELDNAME_NOM . ", " . UserModel::FIELDNAME_PRENOM
                                 . " FROM " . UserModel::TABLENAME
                                 . " WHERE " . UserModel::KEYNAME . "=" . self::$ftaSuiviProjetModel->getDataField(FtaSuiviProjetModel::FIELDNAME_SIGNATURE_VALIDATION_SUIVI_PROJET)->getFieldValue()

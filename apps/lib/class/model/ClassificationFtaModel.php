@@ -74,7 +74,7 @@ class ClassificationFtaModel extends AbstractModel {
             return 0;
         }
         //Recherche des chemins de classification de l'Article
-        $arrayClassification = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
+        $arrayClassification = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
                         "SELECT " . ClassificationArborescenceArticleModel::KEYNAME
                         . "," . ClassificationFtaModel::TABLENAME . "." . ClassificationFtaModel::FIELDNAME_ID_CLASSIFICATION_ARBORESCENCE_ARTICLE
                         . " FROM " . ClassificationFtaModel::TABLENAME . "," . ClassificationArborescenceArticleModel::TABLENAME
@@ -132,7 +132,7 @@ class ClassificationFtaModel extends AbstractModel {
             $req .= ") ";
 
 
-            $arrayNomClassification = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray($req);
+            $arrayNomClassification = DatabaseOperation::convertSqlStatementWithoutKeyToArray($req);
 
 
             //Si il y a des résultat

@@ -611,14 +611,14 @@ class DatabaseDescription {
 
     public static function getArrayAllForeignKey() {
         $paramSql = self::getQueryForeignKey();
-        return DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray($paramSql);
+        return DatabaseOperation::convertSqlStatementWithoutKeyToArray($paramSql);
     }
 
     public static function getArrayAllTableRNForOneTableR1($paramTableR1) {
         $paramSql = self::getQueryForeignKey()
                 . "AND `REFERENCED_TABLE_NAME` = '" . $paramTableR1 . "'"
         ;
-        return DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray($paramSql);
+        return DatabaseOperation::convertSqlStatementWithoutKeyToArray($paramSql);
     }
 
     public static function getFieldNameOfTableRelationR1NByTablesName($paramTableNameRN, $paramTableNameR1) {

@@ -194,7 +194,7 @@ class FtaConditionnementModel extends AbstractModel {
                 . " AND " . FtaConditionnementModel::FIELDNAME_ID_ANNEXE_EMBALLAGE_GROUPE_TYPE . "=" . $paramIdEmballageGroupeType
         ;
 
-        $arrayIdFtaConditionnement = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray($req);
+        $arrayIdFtaConditionnement = DatabaseOperation::convertSqlStatementWithoutKeyToArray($req);
         if ($arrayIdFtaConditionnement) {
             foreach ($arrayIdFtaConditionnement as $rowsIdFtaConditionnement) {
                 $IdFtaConditionnement[] = $rowsIdFtaConditionnement[FtaConditionnementModel::KEYNAME];
@@ -220,7 +220,7 @@ class FtaConditionnementModel extends AbstractModel {
                 . "  AND " . FtaConditionnementModel::FIELDNAME_ID_FTA . "=" . $paramIdFta
         ;
 
-        $arrayIdAnnexeEmballage = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray($req);
+        $arrayIdAnnexeEmballage = DatabaseOperation::convertSqlStatementWithoutKeyToArray($req);
         if ($arrayIdAnnexeEmballage) {
             foreach ($arrayIdAnnexeEmballage as $rowsIdAnnexeEmballage) {
                 $IdAnnexeEmballage = $rowsIdAnnexeEmballage[FtaConditionnementModel::FIELDNAME_ID_ANNEXE_EMBALLAGE];
@@ -248,7 +248,7 @@ class FtaConditionnementModel extends AbstractModel {
                 . " ) AND " . FtaConditionnementModel::FIELDNAME_ID_FTA . "=" . $paramIdFta
         ;
 
-        $arrayIdAnnexeEmballageGroupe = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray($req);
+        $arrayIdAnnexeEmballageGroupe = DatabaseOperation::convertSqlStatementWithoutKeyToArray($req);
 
         return $arrayIdAnnexeEmballageGroupe;
     }
@@ -347,7 +347,7 @@ class FtaConditionnementModel extends AbstractModel {
      */
     public static function addFtaConditionnement($paramIdFta, $paramIdAnnexeEmballage, $paramIdAnnexeEmballageGroupe, $paramIdAnnexeEmballageGroupeType, $paramHauteurFtaConditionnement, $paramLongeurFtaConditionnement, $paramLargeurFtaConditionnement, $paramPoidsFtaConditionnement, $paramNbCoucheFtaConditionnement, $paramQteCoucheFtaConditionnement) {
 
-        return DatabaseOperation::query(
+        return DatabaseOperation::execute(
                         "INSERT INTO " . FtaConditionnementModel::TABLENAME
                         . "(" . FtaConditionnementModel::FIELDNAME_ID_FTA
                         . ", " . FtaConditionnementModel::FIELDNAME_ID_ANNEXE_EMBALLAGE
@@ -378,7 +378,7 @@ class FtaConditionnementModel extends AbstractModel {
      * @return type
      */
     public static function deleteFtaConditionnement($paramIdFtaConditionnement) {
-        return DatabaseOperation::query(
+        return DatabaseOperation::execute(
                         " DELETE FROM " . FtaConditionnementModel::TABLENAME . " WHERE " .
                         FtaConditionnementModel::KEYNAME . "=" . $paramIdFtaConditionnement);
     }
@@ -402,7 +402,7 @@ class FtaConditionnementModel extends AbstractModel {
      * @param type $paramIdFta
      */
     public static function DuplicateFtaConditionnementByIdFta($paramIdFtaOrig, $paramIdFtaNew) {
-        DatabaseOperation::query(
+        DatabaseOperation::execute(
                 " INSERT INTO " . FtaConditionnementModel::TABLENAME
                 . " (" . FtaConditionnementModel::FIELDNAME_HAUTEUR_EMBALLAGE_FTA_CONDITIONNEMENT
                 . ", " . FtaConditionnementModel::FIELDNAME_HAUTEUR_FTA_CONDITIONNEMENT

@@ -88,7 +88,7 @@ if (!$action) {
     //Tableau des chapitres
     //echo $action;
     if ($action == "I") {
-        $arrayChapitre = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
+        $arrayChapitre = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
                         "SELECT " . FtaChapitreModel::KEYNAME
                         . " FROM " . FtaChapitreModel::TABLENAME
                         . " ORDER BY " . FtaChapitreModel::FIELDNAME_NOM_USUEL_CHAPITRE);

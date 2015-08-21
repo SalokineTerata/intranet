@@ -116,7 +116,7 @@ class FtaWorkflowStructureModel extends AbstractModel {
                 . "WHERE " . $idFtaWorkflowName . "=" . $idFtaWorkflow . " "
                 . "AND " . $idFtaChapitreName . "=" . $paramIdChapitre . " "
         ;
-        $array = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray($sql);
+        $array = DatabaseOperation::convertSqlStatementWithoutKeyToArray($sql);
 
         //Retourne uniquement la première valeur
         return $array[0][$keyName];
@@ -129,7 +129,7 @@ class FtaWorkflowStructureModel extends AbstractModel {
      * @return type
      */
     public static function getArrayProcessusByRoleAndWorkflow($paramIdRole, $paramIdWorkflow) {
-        $arrayProcessusAcces = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
+        $arrayProcessusAcces = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
                         "SELECT DISTINCT " . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_PROCESSUS
                         . " FROM " . FtaWorkflowStructureModel::TABLENAME
                         . " WHERE " . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_WORKFLOW . "=" . $paramIdWorkflow

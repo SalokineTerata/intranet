@@ -31,7 +31,7 @@ class IntranetActionsModel extends AbstractModel {
         $globalconfig = new GlobalConfig();
         $id_user = $globalconfig->getAuthenticatedUser()->getKeyValue();
 
-        $arrayIdActions = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
+        $arrayIdActions = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
                         "SELECT " . IntranetActionsModel::TABLENAME . "." . IntranetActionsModel::KEYNAME
                         . " FROM " . IntranetActionsModel::TABLENAME . "," . FtaWorkflowModel::TABLENAME
                         . " WHERE " . IntranetActionsModel::FIELDNAME_PARENT_INTRANET_ACTIONS
@@ -42,7 +42,7 @@ class IntranetActionsModel extends AbstractModel {
         if ($arrayIdActions) {
             foreach ($arrayIdActions as $rowsIdActions) {
 
-                $arrayIdAction = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
+                $arrayIdAction = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
                                 "SELECT " . FtaActionRoleModel::TABLENAME . "." . FtaActionRoleModel::FIELDNAME_ID_INTRANET_ACTIONS
                                 . " FROM " . IntranetActionsModel::TABLENAME . ", " . FtaWorkflowStructureModel::TABLENAME
                                 . ", " . IntranetDroitsAccesModel::TABLENAME . "," . FtaActionRoleModel::TABLENAME
@@ -82,7 +82,7 @@ class IntranetActionsModel extends AbstractModel {
         $globalconfig = new GlobalConfig();
         $id_user = $globalconfig->getAuthenticatedUser()->getKeyValue();
 
-        $arrayIdActions = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
+        $arrayIdActions = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
                         "SELECT " . IntranetActionsModel::TABLENAME . "." . IntranetActionsModel::KEYNAME
                         . " FROM " . IntranetActionsModel::TABLENAME . "," . FtaWorkflowModel::TABLENAME
                         . " WHERE " . IntranetActionsModel::FIELDNAME_PARENT_INTRANET_ACTIONS
@@ -92,7 +92,7 @@ class IntranetActionsModel extends AbstractModel {
         );
         if ($arrayIdActions) {
             foreach ($arrayIdActions as $rowsIdActions) {
-                $arrayIdAction = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
+                $arrayIdAction = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
                                 "SELECT " . IntranetActionsModel::TABLENAME . "." . IntranetActionsModel::KEYNAME
                                 . " FROM " . IntranetActionsModel::TABLENAME . ", " . IntranetDroitsAccesModel::TABLENAME
                                 . " WHERE " . IntranetActionsModel::TABLENAME . "." . IntranetActionsModel::KEYNAME
@@ -118,7 +118,7 @@ class IntranetActionsModel extends AbstractModel {
         $globalconfig = new GlobalConfig();
         $id_user = $globalconfig->getAuthenticatedUser()->getKeyValue();
 
-        $arrayIdActions = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
+        $arrayIdActions = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
                         "SELECT " . IntranetActionsModel::TABLENAME . "." . IntranetActionsModel::KEYNAME
                         . " FROM " . IntranetActionsModel::TABLENAME . "," . FtaWorkflowModel::TABLENAME
                         . " WHERE " . IntranetActionsModel::FIELDNAME_PARENT_INTRANET_ACTIONS
@@ -128,7 +128,7 @@ class IntranetActionsModel extends AbstractModel {
         );
         if ($arrayIdActions) {
             foreach ($arrayIdActions as $rowsIdActions) {
-                $arrayIdAction = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
+                $arrayIdAction = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
                                 "SELECT " . IntranetActionsModel::TABLENAME . "." . IntranetActionsModel::KEYNAME
                                 . " FROM " . IntranetActionsModel::TABLENAME . ", " . IntranetDroitsAccesModel::TABLENAME
                                 . " WHERE " . IntranetActionsModel::TABLENAME . "." . IntranetActionsModel::KEYNAME
@@ -180,7 +180,7 @@ class IntranetActionsModel extends AbstractModel {
 
                 $req .= ")";
 
-                $array = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray($req);
+                $array = DatabaseOperation::convertSqlStatementWithoutKeyToArray($req);
 
                 $arrayFull[] = $array;
             }

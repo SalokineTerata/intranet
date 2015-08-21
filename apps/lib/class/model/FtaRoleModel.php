@@ -21,7 +21,7 @@ class FtaRoleModel extends AbstractModel {
     }
 
     public static function getIdFtaRoleByIdUser($paramIdUser) {
-        $arrayIdFtaRole = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
+        $arrayIdFtaRole = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
                         "SELECT DISTINCT " . FtaRoleModel::TABLENAME . "." . FtaRoleModel::KEYNAME
                         . "," . FtaRoleModel::FIELDNAME_NOM_FTA_ROLE
                         . "," . FtaRoleModel::FIELDNAME_DESCRIPTION_FTA_ROLE
@@ -49,7 +49,7 @@ class FtaRoleModel extends AbstractModel {
          * Nous récuperons les processus en cours.
          */
 
-        $arrayProcessusEncours = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
+        $arrayProcessusEncours = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
                         "SELECT DISTINCT " . FtaProcessusModel::TABLENAME
                         . ".*," . FtaProcessusCycleModel::TABLENAME . "." . FtaProcessusCycleModel::FIELDNAME_WORKFLOW
                         . " FROM " . FtaProcessusModel::TABLENAME
@@ -91,7 +91,7 @@ class FtaRoleModel extends AbstractModel {
                      */
                     $taux_validation_processus = FtaProcessusModel::getValideProcessusEncours($paramIdFta, $rowsProcessusEncours[FtaProcessusModel::KEYNAME], $rowsProcessusEncours[FtaProcessusCycleModel::FIELDNAME_WORKFLOW]);
                     if ($taux_validation_processus <> 1) {
-                        $arrayIdRole = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
+                        $arrayIdRole = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
                                         "SELECT DISTINCT " . FtaRoleModel::TABLENAME . "." . FtaRoleModel::KEYNAME
                                         . " FROM " . FtaProcessusModel::TABLENAME . "," . FtaRoleModel::TABLENAME
                                         . " WHERE " . FtaProcessusModel::TABLENAME . "." . FtaProcessusModel::KEYNAME
@@ -113,7 +113,7 @@ class FtaRoleModel extends AbstractModel {
 
         $req .= ")";
 
-        $array = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray($req);
+        $array = DatabaseOperation::convertSqlStatementWithoutKeyToArray($req);
 
         return $array;
     }
@@ -128,7 +128,7 @@ class FtaRoleModel extends AbstractModel {
     }
 
     public static function getNameRoleByIdRole($paramIdRole) {
-        $arrayRole = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
+        $arrayRole = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
                         "SELECT " . FtaRoleModel::FIELDNAME_DESCRIPTION_FTA_ROLE
                         . " FROM " . FtaRoleModel::TABLENAME
                         . " WHERE " . FtaRoleModel::KEYNAME . "=" . $paramIdRole
@@ -139,7 +139,7 @@ class FtaRoleModel extends AbstractModel {
     }
 
     public static function getValueIsGestionnaire($paramIdRole) {
-        $arrayIsGestionnaire = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
+        $arrayIsGestionnaire = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
                         "SELECT " . FtaRoleModel::FIELDNAME_IS_GESTIONNAIRE
                         . " FROM " . FtaRoleModel::TABLENAME
                         . " WHERE " . FtaRoleModel::KEYNAME . "=" . $paramIdRole

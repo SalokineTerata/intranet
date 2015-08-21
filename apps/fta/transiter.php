@@ -76,7 +76,7 @@ $NOM_commentaire_maj_fta = $htmlFieldCommentaire->getHtmlResult();
 /**
  * Recupération des élement de la Fta en cours
  */
-$arrayFta = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
+$arrayFta = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
                 "SELECT " . FtaModel::FIELDNAME_DOSSIER_FTA
                 . "," . FtaModel::FIELDNAME_DESIGNATION_COMMERCIALE
                 . "," . FtaModel::FIELDNAME_COMMENTAIRE_MAJ_FTA
@@ -124,7 +124,7 @@ if ($demande_abreviation_fta_transition) {
     $req.= " AND " . FtaTransitionModel::FIELDNAME_ABREVIATION_FTA_TRANSITION . "='" . $demande_abreviation_fta_transition . "' ";
 }
 $req .=" ORDER BY " . FtaTransitionModel::FIELDNAME_ABREVIATION_FTA_TRANSITION . " DESC ";
-$arrayFtaTransition = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray($req);
+$arrayFtaTransition = DatabaseOperation::convertSqlStatementWithoutKeyToArray($req);
 
 $flag_selection_chapitre = 0;    //Peut-on sélectionner un chapitre à mettre à jour ?
 
@@ -157,7 +157,7 @@ if ($action == "I") {
             . "<tr><td><$html_table>"
     ;
 
-    $arrrayFtaChapitre = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
+    $arrrayFtaChapitre = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
                     "SELECT " . FtaWorkflowStructureModel::TABLENAME . "." . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_CHAPITRE . "," . FtaChapitreModel::FIELDNAME_NOM_USUEL_CHAPITRE
                     . " FROM " . FtaChapitreModel::TABLENAME . "," . FtaWorkflowStructureModel::TABLENAME
                     . " WHERE " . FtaWorkflowStructureModel::TABLENAME . "." . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_CHAPITRE

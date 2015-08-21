@@ -33,7 +33,7 @@ class AnnexeEmballageModel extends AbstractModel {
         $req .= ") AND " . AnnexeEmballageGroupeModel::TABLENAME . "." . AnnexeEmballageGroupeModel::KEYNAME
                 . "=" . AnnexeEmballageModel::TABLENAME . "." . AnnexeEmballageModel::FIELDNAME_ID_ANNEXE_EMBALLAGE_GROUPE;
 
-        $arrayIdAnnexeEmballage = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray($req);
+        $arrayIdAnnexeEmballage = DatabaseOperation::convertSqlStatementWithoutKeyToArray($req);
         if ($arrayIdAnnexeEmballage) {
             foreach ($arrayIdAnnexeEmballage as $rowsIdAnnexeEmballage) {
                 $IdAnnexeEmballage[] = $rowsIdAnnexeEmballage[AnnexeEmballageModel::KEYNAME];

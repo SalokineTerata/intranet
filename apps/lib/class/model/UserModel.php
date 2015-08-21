@@ -91,7 +91,7 @@ class UserModel extends AbstractModel {
             ;
 
 
-            $array = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray($req);
+            $array = DatabaseOperation::convertSqlStatementWithoutKeyToArray($req);
 
             return $array;
         }
@@ -102,29 +102,29 @@ class UserModel extends AbstractModel {
      * @param type $paramIdSalaries
      */
     public static function suppressionIntranetUtilisateur($paramIdSalaries) {
-        DatabaseOperation::query(
+        DatabaseOperation::execute(
                 "DELETE FROM " . ModesModel::TABLENAME
                 . " WHERE " . ModesModel::FIELDNAME_ID_USER . "=" . $paramIdSalaries
         );
-        DatabaseOperation::query(
+        DatabaseOperation::execute(
                 "DELETE FROM " . DroitftModel::TABLENAME
                 . " WHERE " . DroitftModel::FIELDNAME_ID_USER . "=" . $paramIdSalaries
         );
-        DatabaseOperation::query(
+        DatabaseOperation::execute(
                 "DELETE FROM " . UserModel::TABLENAME
                 . " WHERE " . UserModel::KEYNAME . "=" . $paramIdSalaries
         );
-        DatabaseOperation::query(
+        DatabaseOperation::execute(
                 "DELETE FROM " . IntranetDroitsAccesModel::TABLENAME
                 . " WHERE " . IntranetDroitsAccesModel::FIELDNAME_ID_USER . "=" . $paramIdSalaries
         );
-        DatabaseOperation::query(
+        DatabaseOperation::execute(
                 "DELETE FROM " . LuModel::TABLENAME
                 . " WHERE " . LuModel::FILEDNAME_ID_USER . "=" . $paramIdSalaries);
-        DatabaseOperation::query(
+        DatabaseOperation::execute(
                 "DELETE FROM " . PlanningPresenceDetailModel::TABLENAME
                 . " WHERE " . PlanningPresenceDetailModel::FILEDNAME_ID_USER . "=" . $paramIdSalaries);
-        DatabaseOperation::query(
+        DatabaseOperation::execute(
                 "DELETE FROM " . PersoModel::TABLENAME
                 . " WHERE " . PersoModel::KEYNAME . "=" . $paramIdSalaries);
     }

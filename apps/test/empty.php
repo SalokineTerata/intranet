@@ -41,7 +41,7 @@ public function getHtmlEcheancesProcessus() {
     
                 //foreach ($req as $rowsProcessusEncours) {
             // $idFtaEncours = $rowsProcessusEncours[FtaProcessusModel::KEYNAME];
-            $arrayProcessusVisible = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
+            $arrayProcessusVisible = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
                             "SELECT DISTINCT " . FtaProcessusModel::TABLENAME
                             . ".* FROM " . FtaProcessusModel::TABLENAME
                             . ", " . FtaProcessusCycleModel::TABLENAME
@@ -76,7 +76,7 @@ public function getHtmlEcheancesProcessus() {
                          */
                         foreach ($req as $rowsProcessusEncours) {
                             $idFtaEncours = $rowsProcessusEncours[FtaProcessusModel::KEYNAME];
-                            $arrayDonnees = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
+                            $arrayDonnees = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
                                             "SELECT id_init_fta_processus "
                                             . "FROM fta_processus_cycle "
                                             . "WHERE id_next_fta_processus = " . $idFtaEncours

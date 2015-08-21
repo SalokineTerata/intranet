@@ -20,7 +20,7 @@ class AnnexeEmballageGroupeModel extends AbstractModel {
         }else{
             $op= "=";
         }
-        $arrayEmballageGroupeType = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
+        $arrayEmballageGroupeType = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
                         "SELECT DISTINCT " . AnnexeEmballageGroupeModel::KEYNAME
                         . " FROM " . AnnexeEmballageGroupeModel::TABLENAME . "," . AnnexeEmballageGroupeTypeModel::TABLENAME
                         . " WHERE " . AnnexeEmballageGroupeModel::FIELDNAME_ID_ANNEXE_EMBALLAGE_GROUPE_CONFIGURATION . $op . $paramEmballageGroupeType

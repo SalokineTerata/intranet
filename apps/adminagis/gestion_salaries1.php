@@ -48,7 +48,7 @@ if ($modifier == 'modifier') {
     /*
      *  Requete pour lire tous les champs text nommes avec le numero du service
      */
-    $arrayService = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
+    $arrayService = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
                     "SELECT DISTINCT " . ServicesModel::KEYNAME
                     . "," . ServicesModel::FIELDNAME_INTITULE_SER
                     . " FROM " . ServicesModel::TABLENAME
@@ -223,7 +223,7 @@ if ($modifier == 'modifier') {
                         /*
                          *  Constitution de la liste déroulante des noms des groupes 
                          */
-                        $arrayCatsopro = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
+                        $arrayCatsopro = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
                                         "SELECT " . CatsoproModel::KEYNAME
                                         . ", " . CatsoproModel::FIELDNAME_INTITULE_CAT
                                         . " FROM " . CatsoproModel::TABLENAME
@@ -247,7 +247,7 @@ if ($modifier == 'modifier') {
                         /*
                          * Constitution de la liste déroulante des noms des groupes 
                          */
-                        $arrayService = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
+                        $arrayService = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
                                         "SELECT " . ServicesModel::KEYNAME
                                         . ", " . ServicesModel::FIELDNAME_INTITULE_SER
                                         . " FROM " . ServicesModel::TABLENAME
@@ -271,7 +271,7 @@ if ($modifier == 'modifier') {
                         /*
                          * Constitution de la liste déroulante des noms des groupes 
                          */
-                        $arrayType = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
+                        $arrayType = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
                                         "SELECT " . TypesModel::KEYNAME
                                         . ", " . TypesModel::FIELDNAME_INTITULE_TYP
                                         . " FROM " . TypesModel::TABLENAME

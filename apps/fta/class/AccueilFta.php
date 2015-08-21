@@ -509,7 +509,7 @@ class AccueilFta {
                 /*
                  * Récuperation du nom de site de production
                  */
-                $arrayNomSiteProduction = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
+                $arrayNomSiteProduction = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
                                 "SELECT " . GeoModel::FIELDNAME_GEO
                                 . " FROM " . GeoModel::TABLENAME
                                 . " WHERE " . GeoModel::FIELDNAME_ID_SITE
@@ -526,7 +526,7 @@ class AccueilFta {
                  * Récupération du nom du créateur de la fta
                  */
 
-                $arrayNomCreateur = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
+                $arrayNomCreateur = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
                                 "SELECT " . UserModel::FIELDNAME_NOM . "," . UserModel::FIELDNAME_PRENOM
                                 . " FROM " . UserModel::TABLENAME
                                 . " WHERE " . UserModel::KEYNAME . "='" . $createurFta . "' "
@@ -546,9 +546,9 @@ class AccueilFta {
                  * Recuperation du proprietaire
                  */
 
-
-                $classification = ClassificationArborescenceArticleCategorieContenuModel::getElementClassificationFta($idclassification);
-
+                if ($idclassification) {
+                    $classification = ClassificationArborescenceArticleCategorieContenuModel::getElementClassificationFta($idclassification);
+                }
 
                 /*
                  * Designation commerciale
@@ -1072,7 +1072,10 @@ class AccueilFta {
 
             //Création de la liste déroulante
             $html_liste = "<select name=$paramNomDefaut onChange=" . $paramNomDefaut . "_js()>";
-
+            /*
+             * PDO::FETCH_BOTH
+             * Retourne la ligne suivante en tant qu'un tableau indexé par le nom et le numéro de la colonne
+             */
             //Création du contenu de la liste
             $result = DatabaseOperation::query($paramRequeteSQL);
             while ($rows = mysql_fetch_array($result)) {

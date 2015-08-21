@@ -50,7 +50,7 @@ switch ($action) {
     case 1: //Création d'une FTA Vierge
 //        $idFta = null;
 
-        $arrayIdEtat = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
+        $arrayIdEtat = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
                         "SELECT " . FtaEtatModel::KEYNAME
                         . " FROM " . FtaEtatModel::TABLENAME
                         . " WHERE " . FtaEtatModel::FIELDNAME_ABREVIATION . "='" . $abreviationFtaEtat . "' "
@@ -68,7 +68,7 @@ switch ($action) {
 
         $idFta = FtaModel::CreateFta($idUser, $idFtaEtat, $idFtaWorkflow, $designationCommercialeFta, date("Y-m-d"), $siteDeProduction);
 
-        DatabaseOperation::query(
+        DatabaseOperation::execute(
                 "UPDATE " . FtaModel::TABLENAME
                 . " SET " . FtaModel::FIELDNAME_DOSSIER_FTA . "=" . $idFta
                 . " WHERE " . FtaModel::KEYNAME . "=" . $idFta
@@ -83,7 +83,7 @@ switch ($action) {
             $where = "";
 
             //Récupération des chapitres concernés par ce cycle de vie
-            $arrayChapitreCycle = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
+            $arrayChapitreCycle = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
                             "SELECT " . FtaProcessusCycleModel::FIELDNAME_FTA_ETAT
                             . ", " . FtaProcessusCycleModel::FIELDNAME_PROCESSUS_INIT
                             . ", " . FtaProcessusCycleModel::FIELDNAME_PROCESSUS_NEXT
@@ -97,7 +97,7 @@ switch ($action) {
             }
 
             //Récupération des chapitres à vérrouiller
-            $arrayChapitreVerrou = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
+            $arrayChapitreVerrou = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
                             "SELECT DISTINCT " . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_CHAPITRE
                             . " FROM " . FtaProcessusModel::TABLENAME . ", " . FtaWorkflowStructureModel::TABLENAME
                             . " WHERE ( " . FtaProcessusModel::TABLENAME . "." . FtaProcessusModel::KEYNAME
@@ -107,7 +107,7 @@ switch ($action) {
 
             foreach ($arrayChapitreVerrou as $rowsChapitreVerrou) {
                 //Le suivi existe-il déjà ?
-                $arrayFtaSuiviProjet = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
+                $arrayFtaSuiviProjet = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
                                 "SELECT " . FtaSuiviProjetModel::KEYNAME
                                 . " FROM " . FtaSuiviProjetModel::TABLENAME
                                 . " WHERE " . FtaSuiviProjetModel::FIELDNAME_ID_FTA . "='" . $idFta
@@ -121,7 +121,7 @@ switch ($action) {
                                 . " SET " . FtaSuiviProjetModel::FIELDNAME_SIGNATURE_VALIDATION_SUIVI_PROJET . "='-1' "
                                 . " WHERE " . FtaSuiviProjetModel::KEYNAME . "='" . $idFtaSuiviProjet . "' "
                         ;
-                        DatabaseOperation::query($req);
+                        DatabaseOperation::execute($req);
                     }
                 } else {
                     //Création des suivi
@@ -130,7 +130,7 @@ switch ($action) {
                             . "', " . FtaSuiviProjetModel::FIELDNAME_ID_FTA . "='" . $idFta
                             . "', " . FtaSuiviProjetModel::FIELDNAME_SIGNATURE_VALIDATION_SUIVI_PROJET . "='-1' "
                     ;
-                    DatabaseOperation::query($req);
+                    DatabaseOperation::execute($req);
                 }
             }
         }

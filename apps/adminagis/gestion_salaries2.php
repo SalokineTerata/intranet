@@ -43,7 +43,7 @@ if ($paramValider == 'valider') {
     $paramUserNom = strtoupper($paramUserNom);
     $paramUserPrenom = addslashes($paramUserPrenom);
 
-    $arrayIdUserExist = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
+    $arrayIdUserExist = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
                     "SELECT " . UserModel::KEYNAME
                     . " FROM " . UserModel::TABLENAME
                     . " WHERE " . UserModel::FIELDNAME_NOM . "='" . $paramUserNom
@@ -82,7 +82,7 @@ if ($paramValider == 'valider') {
          * Recherche de l'id du nouveau salarie 
          */
 
-        $arrayIdUser = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
+        $arrayIdUser = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
                         "SELECT " . UserModel::KEYNAME
                         . " FROM " . UserModel::TABLENAME
                         . " WHERE " . UserModel::FIELDNAME_LOGIN . "='" . $paramUserLogin . "' ");
@@ -137,7 +137,7 @@ if ($paramValider == 'valider') {
     /*
      * Recuperation des données pour affichage
      */
-    $arrayUserDetail = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
+    $arrayUserDetail = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
                     "SELECT " . UserModel::FIELDNAME_ECRITURE
                     . ", " . UserModel::FIELDNAME_ID_CATSOPRO
                     . ", " . UserModel::FIELDNAME_ID_SERVICE
@@ -184,7 +184,7 @@ if ($paramValider == 'valider') {
     /*
      * Recherche des niveaux de references dans la table CATSOPRO 
      */
-    $arrayCatsopro = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
+    $arrayCatsopro = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
                     "SELECT " . CatsoproModel::FIELDNAME_NIVO_GLO
                     . ", " . CatsoproModel::FIELDNAME_NIVO_PRO
                     . " FROM " . CatsoproModel::TABLENAME
@@ -347,7 +347,7 @@ envoismail($sujet, $corpsmail, $paramUserMail, 'postmaster@agis-sa.fr',$typeMail
                                                                         /*
                                                                          * Affichage de l'intitule de la CSP
                                                                          */
-                                                                        $arrayCatsopro = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
+                                                                        $arrayCatsopro = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
                                                                                         "SELECT " . CatsoproModel::FIELDNAME_INTITULE_CAT
                                                                                         . " FROM " . CatsoproModel::TABLENAME
                                                                                         . " WHERE " . CatsoproModel::KEYNAME . "=" . $paramUserCatsopro
@@ -368,7 +368,7 @@ envoismail($sujet, $corpsmail, $paramUserMail, 'postmaster@agis-sa.fr',$typeMail
                                                                     <p>
                                                                         <?php
                                                                         /* Affichage de l'intitule du service */
-                                                                        $arrayService = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
+                                                                        $arrayService = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
                                                                                         "SELECT " . ServicesModel::FIELDNAME_INTITULE_SER
                                                                                         . " FROM " . ServicesModel::TABLENAME
                                                                                         . " WHERE " . ServicesModel::KEYNAME . "=" . $id_service
@@ -391,7 +391,7 @@ envoismail($sujet, $corpsmail, $paramUserMail, 'postmaster@agis-sa.fr',$typeMail
                                                                         /*
                                                                          * Affichage de l'intitule du service 
                                                                          */
-                                                                        $arrayType = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
+                                                                        $arrayType = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
                                                                                         "SELECT " . TypesModel::FIELDNAME_INTITULE_TYP
                                                                                         . " FROM " . TypesModel::TABLENAME
                                                                                         . " WHERE " . TypesModel::KEYNAME . "=" . $paramUserType
@@ -521,7 +521,7 @@ envoismail($sujet, $corpsmail, $paramUserMail, 'postmaster@agis-sa.fr',$typeMail
                                                                 <center>
                                                                     Localisation<br>
                                                                     <?php
-                                                                    $arrayGeo = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
+                                                                    $arrayGeo = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
                                                                                     "SELECT " . GeoModel::FIELDNAME_GEO
                                                                                     . " FROM " . GeoModel::TABLENAME
                                                                                     . " WHERE " . GeoModel::KEYNAME . "=" . $lieu_geo
@@ -559,7 +559,7 @@ envoismail($sujet, $corpsmail, $paramUserMail, 'postmaster@agis-sa.fr',$typeMail
                                                                      * Récupération des droits d'accès faisable dans l'Intranet
                                                                      */
 
-                                                                    $arrayModule = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
+                                                                    $arrayModule = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
                                                                                     "SELECT " . IntranetModulesModel::TABLENAME . ".*"
                                                                                     . ", " . IntranetActionsModel::TABLENAME . ".*"
                                                                                     . " FROM " . IntranetActionsModel::TABLENAME . ", " . IntranetModulesModel::TABLENAME

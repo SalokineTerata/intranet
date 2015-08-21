@@ -15,7 +15,7 @@ class IntranetDroitsAccesModel {
     const FIELDNAME_NIVEAU_INTRANET_DROITS_ACCES = "niveau_intranet_droits_acces";
 
     public static function getIdIntranetActionsByRoleANDSiteFromUser($paramIdUser, $paramIdFtaRole) {
-        $arrayIdIntranetActions = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
+        $arrayIdIntranetActions = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
                         "SELECT " . FtaActionRoleModel::TABLENAME . "." . FtaActionRoleModel::FIELDNAME_ID_INTRANET_ACTIONS
                         . " FROM " . IntranetDroitsAccesModel::TABLENAME . ", " . FtaActionRoleModel::TABLENAME
                         . " WHERE " . FtaActionRoleModel::TABLENAME . "." . FtaActionRoleModel::FIELDNAME_ID_INTRANET_ACTIONS
@@ -60,7 +60,7 @@ class IntranetDroitsAccesModel {
         echo "</td>";
         echo "</tr>";
 
-        $arrayModule = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
+        $arrayModule = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
                         "SELECT " . IntranetModulesModel::KEYNAME . "," . IntranetModulesModel::FIELDNAME_NOM_USUEL_INTRANET_MODULES
                         . " FROM " . IntranetModulesModel::TABLENAME
                         . " ORDER BY " . IntranetModulesModel::FIELDNAME_NOM_USUEL_INTRANET_MODULES . " ASC");
@@ -96,7 +96,7 @@ class IntranetDroitsAccesModel {
                  * Recherche des droits d'accès par workflow
                  */
 
-                $arrayActionsWorkflow = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
+                $arrayActionsWorkflow = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
                                 "SELECT DISTINCT " . IntranetActionsModel::KEYNAME
                                 . "," . IntranetActionsModel::FIELDNAME_DESCRIPTION_INTRANET_ACTIONS
                                 . "," . IntranetActionsModel::FIELDNAME_NOM_INTRANET_ACTIONS
@@ -106,7 +106,7 @@ class IntranetDroitsAccesModel {
                 );
 
                 foreach ($arrayActionsWorkflow as $rowsActionsWorkflow) {
-                    $arrayActions = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
+                    $arrayActions = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
                                     "SELECT DISTINCT " . IntranetActionsModel::KEYNAME
                                     . ", " . IntranetActionsModel::FIELDNAME_NOM_INTRANET_ACTIONS
                                     . ", " . IntranetActionsModel::FIELDNAME_DESCRIPTION_INTRANET_ACTIONS
@@ -145,7 +145,7 @@ class IntranetDroitsAccesModel {
                 /*
                  * Recherche des droits d'accès globaux
                  */
-                $arrayActionsGlobaux = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
+                $arrayActionsGlobaux = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
                                 "SELECT DISTINCT " . IntranetActionsModel::KEYNAME
                                 . ", " . IntranetActionsModel::FIELDNAME_NOM_INTRANET_ACTIONS
                                 . ", " . IntranetActionsModel::FIELDNAME_DESCRIPTION_INTRANET_ACTIONS
@@ -186,7 +186,7 @@ class IntranetDroitsAccesModel {
 
                 //Droits d'accès du module
                 //Recherche des droits d'accès globaux
-                $arrayActions = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
+                $arrayActions = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
                                 "SELECT DISTINCT " . IntranetActionsModel::KEYNAME
                                 . ", " . IntranetActionsModel::FIELDNAME_NOM_INTRANET_ACTIONS
                                 . ", " . IntranetActionsModel::FIELDNAME_DESCRIPTION_INTRANET_ACTIONS
@@ -216,7 +216,7 @@ class IntranetDroitsAccesModel {
                     /*
                      * Recherche de niveaux spécifiques
                      */
-                    $arrayNiveauSpecAcces = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
+                    $arrayNiveauSpecAcces = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
                                     "SELECT " . IntranetNiveauAccesModel::FIELDNAME_ID_INTRANET_NIVEAU_ACCES
                                     . "," . IntranetNiveauAccesModel::FIELDNAME_NOM_INTRANET_NIVEAU_ACCES
                                     . " FROM " . IntranetNiveauAccesModel::TABLENAME
@@ -232,7 +232,7 @@ class IntranetDroitsAccesModel {
                         $arrayNiveauAcces = $arrayNiveauSpecAcces;
                     } else {
 
-                        $arrayNiveauAcces = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
+                        $arrayNiveauAcces = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
                                         "SELECT " . IntranetNiveauAccesModel::FIELDNAME_ID_INTRANET_NIVEAU_ACCES
                                         . "," . IntranetNiveauAccesModel::FIELDNAME_NOM_INTRANET_NIVEAU_ACCES
                                         . " FROM " . IntranetNiveauAccesModel::TABLENAME
@@ -293,7 +293,7 @@ class IntranetDroitsAccesModel {
                                     and isset($paramSalUser)
                             ) {
 
-                                $arrayDroitsAcces = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
+                                $arrayDroitsAcces = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
                                                 "SELECT " . IntranetDroitsAccesModel::FIELDNAME_ID_INTRANET_ACTIONS
                                                 . " FROM " . IntranetDroitsAccesModel::TABLENAME
                                                 . " WHERE " . IntranetDroitsAccesModel::FIELDNAME_ID_INTRANET_MODULES . "=" . $idIntranetModules
@@ -337,7 +337,7 @@ class IntranetDroitsAccesModel {
      * @return string
      */
     private static function CheckValueByNiveauAcces($paramIdUser, $paramIdIntranetActions) {
-        $arrayNiveauAcces = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
+        $arrayNiveauAcces = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
                         " SELECT " . IntranetDroitsAccesModel::FIELDNAME_NIVEAU_INTRANET_DROITS_ACCES
                         . " FROM " . IntranetDroitsAccesModel::TABLENAME
                         . " WHERE " . IntranetDroitsAccesModel::FIELDNAME_ID_USER . "=" . $paramIdUser

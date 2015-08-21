@@ -275,7 +275,7 @@ switch ($action) {
 // ************** GESTION MULTI PCB POUR MEME CODE GROUPE
         if ($modelFta->getDataField(FtaModel::FIELDNAME_CODE_ARTICLE_LDC)->getFieldValue() and ModuleConfig::CODE_LDC_UNIQUE) {
             //if($code_article_ldc and false)
-            $arrayCoherenceLDC = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
+            $arrayCoherenceLDC = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
                             "SELECT " . FtaModel::TABLENAME . "." . FtaModel::KEYNAME
                             . " FROM " . FtaModel::TABLENAME . "," . FtaEtatModel::TABLENAME
                             . " WHERE " . FtaModel::TABLENAME . "." . FtaModel::FIELDNAME_DOSSIER_FTA . " <> '" . $modelFta->getDataField(FtaModel::FIELDNAME_DOSSIER_FTA)->getFieldValue() . "' "
@@ -299,7 +299,7 @@ switch ($action) {
 
 //Cohérence du Code Agrologic
         if ($modelFta->getDataField(FtaModel::FIELDNAME_ARTICLE_AGROLOGIC)->getFieldValue()) {
-            $arrayCoherenceCodeAgro = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray("SELECT " . FtaModel::TABLENAME . "." . FtaModel::KEYNAME
+            $arrayCoherenceCodeAgro = DatabaseOperation::convertSqlStatementWithoutKeyToArray("SELECT " . FtaModel::TABLENAME . "." . FtaModel::KEYNAME
                             . " FROM " . FtaModel::TABLENAME
                             . " WHERE " . FtaModel::TABLENAME . "." . FtaModel::FIELDNAME_ARTICLE_AGROLOGIC . "= '" . $modelFta->getDataField(FtaModel::FIELDNAME_ARTICLE_AGROLOGIC)->getFieldValue() . "' "
                             . " AND " . FtaModel::TABLENAME . "." . FtaModel::FIELDNAME_DOSSIER_FTA . " <> '" . $modelFta->getDataField(FtaModel::FIELDNAME_DOSSIER_FTA)->getFieldValue() . "' "

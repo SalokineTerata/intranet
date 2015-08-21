@@ -116,19 +116,19 @@ class FtaProcessusDelaiModel extends AbstractModel {
         /*
          * Liste des rôles non validés qui ont dépassé leur échéances 
          */
-        $arrayFtaDateProcessus = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
-                        "SELECT " . FtaProcessusModel::KEYNAME
+        $arrayFtaDateProcessus = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
+                        "SELECT " . FtaProcessusModel::TABLENAME . "." . FtaProcessusModel::KEYNAME
                         . ", " . FtaProcessusDelaiModel::FIELDNAME_DATE_ECHEANCE_PROCESSUS
                         . "," . FtaRoleModel::FIELDNAME_DESCRIPTION_FTA_ROLE
                         . " FROM " . FtaProcessusDelaiModel::TABLENAME . ", " . FtaProcessusModel::TABLENAME . "," . FtaRoleModel::TABLENAME
-                        . "WHERE " . FtaProcessusDelaiModel::FIELDNAME_ID_FTA . "='" . $paramIdFta . "' "
-                        . "AND " . FtaProcessusModel::TABLENAME . "." . FtaProcessusModel::KEYNAME
+                        . " WHERE " . FtaProcessusDelaiModel::FIELDNAME_ID_FTA . "='" . $paramIdFta . "' "
+                        . " AND " . FtaProcessusModel::TABLENAME . "." . FtaProcessusModel::KEYNAME
                         . "=" . FtaProcessusDelaiModel::TABLENAME . "." . FtaProcessusDelaiModel::FIELDNAME_ID_FTA_PROCESSUS
-                        . "AND " . FtaProcessusModel::TABLENAME . "." . FtaProcessusModel::FIELDNAME_ID_FTA_ROLE
+                        . " AND " . FtaProcessusModel::TABLENAME . "." . FtaProcessusModel::FIELDNAME_ID_FTA_ROLE
                         . "=" . FtaRoleModel::TABLENAME . "." . FtaRoleModel::KEYNAME
-                        . " AND " . FtaProcessusDelaiModel::FIELDNAME_DATE_ECHEANCE_PROCESSUS . " < CURDATE()  k"
-                        . " AND " . FtaProcessusDelaiModel::FIELDNAME_VALIDE . "=0  "
-                        . "ORDER BY " . FtaProcessusDelaiModel::FIELDNAME_DATE_ECHEANCE_PROCESSUS
+                        . " AND " . FtaProcessusDelaiModel::FIELDNAME_DATE_ECHEANCE_PROCESSUS . " < CURDATE()"
+                        . " AND " . FtaProcessusDelaiModel::FIELDNAME_VALIDE . "=0"
+                        . " ORDER BY " . FtaProcessusDelaiModel::FIELDNAME_DATE_ECHEANCE_PROCESSUS
         );
         if ($arrayFtaDateProcessus) {
             $return["status"] = 1;
@@ -145,7 +145,7 @@ class FtaProcessusDelaiModel extends AbstractModel {
         /*
          * Recherche du dépassement de la date d'échéance de validation de fta
          */
-        $arrayIdFtaDate = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
+        $arrayIdFtaDate = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
                         "SELECT " . FtaModel::FIELDNAME_DATE_ECHEANCE_FTA
                         . " FROM " . FtaModel::TABLENAME
                         . " WHERE " . FtaModel::KEYNAME . "='" . $paramIdFta . "' ");
@@ -196,7 +196,7 @@ class FtaProcessusDelaiModel extends AbstractModel {
 
         //Existe-il déjà un enregistrement sur ce délai ?
         //Recherche d'enregistrement déjà existant pour mise à jour, sinon insertion
-        $arrayProcessusDelai = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
+        $arrayProcessusDelai = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
                         "SELECT " . FtaProcessusDelaiModel::KEYNAME . ", " . FtaProcessusDelaiModel::FIELDNAME_VALIDE
                         . " FROM " . FtaProcessusDelaiModel::TABLENAME
                         . " WHERE " . FtaProcessusDelaiModel::FIELDNAME_ID_FTA . "='" . $paramIdFta

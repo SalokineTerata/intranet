@@ -120,8 +120,8 @@ Sinon, accéder à l'<a href=index.php> intranet en vous authentifiant ici</a><b
           $erreur=0;
          */
         /* creation de la ligne user dans la table log */
-        $req = DatabaseOperation::query("insert into log (id_user, date) values('$id_user', NOW())");
-        $ng = DatabaseOperation::query("select * from log");
+        $req = DatabaseOperation::execute("insert into log (id_user, date) values('$id_user', NOW())");
+        $ng = DatabaseOperation::execute("select * from log");
         $num_log = mysql_num_rows($ng);
 
         /* --- redirection si ok sur groupe et service propre --- */

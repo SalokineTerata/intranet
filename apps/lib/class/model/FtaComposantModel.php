@@ -83,7 +83,7 @@ class FtaComposantModel extends AbstractModel {
      * @param type $paramIdFta
      */
     public static function DuplicateFtaComposantByIdFta($paramIdFtaOrig, $paramIdFtaNew) {
-        DatabaseOperation::query(
+        DatabaseOperation::execute(
                 " INSERT INTO " . FtaComposantModel::TABLENAME
                 . " (" . FtaComposantModel::FIELDNAME_ASCENDANT_FTA_NOMENCLATURE
                 . ", " . FtaComposantModel::FIELDNAME_CODE_PRODUIT_AGROLOGIC_FTA_NOMENCLATURE

@@ -55,7 +55,7 @@ class FtaSuiviProjetModel extends AbstractModel {
      * @param type $paramIdFta
      */
     public static function DuplicateFtaSuiviProjetByIdFta($paramIdFtaOrig, $paramIdFtaNew) {
-        DatabaseOperation::query(
+        DatabaseOperation::execute(
                 " INSERT INTO " . FtaSuiviProjetModel::TABLENAME
                 . " (" . FtaSuiviProjetModel::FIELDNAME_COMMENTAIRE_SUIVI_PROJET
                 . ", " . FtaSuiviProjetModel::FIELDNAME_ID_FTA_CHAPITRE
@@ -90,7 +90,7 @@ class FtaSuiviProjetModel extends AbstractModel {
                 . "WHERE " . $idFtaName . "=" . $paramIdFta . " "
                 . "AND " . $idFtaChapitreName . "=" . $paramIdChapitre . " "
         ;
-        $array = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray($sql);
+        $array = DatabaseOperation::convertSqlStatementWithoutKeyToArray($sql);
 
         //Retourne uniquement la première valeur
         return $array[0][$keyName];
@@ -114,7 +114,7 @@ class FtaSuiviProjetModel extends AbstractModel {
         $ftaWorkflowModel = new FtaWorkflowModel($id_fta_workflow);
         $id_parent_intranet_actions = $ftaWorkflowModel->getDataField(FtaWorkflowModel::FIELDNAME_ID_INTRANET_ACTIONS)->getFieldValue();
         //Récupération des Processus
-        $arrayProcessus = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
+        $arrayProcessus = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
                         "SELECT DISTINCT " . FtaProcessusModel::TABLENAME . "." . FtaProcessusModel::KEYNAME . ", " . FtaWorkflowModel::FIELDNAME_ID_INTRANET_ACTIONS
                         . ", " . FtaProcessusModel::FIELDNAME_MULTISITE_FTA_PROCESSUS . ", " . FtaProcessusModel::FIELDNAME_INFO_CHEF_PROJET
                         . ", " . FtaProcessusModel::FIELDNAME_NOM
@@ -130,7 +130,7 @@ class FtaSuiviProjetModel extends AbstractModel {
         foreach ($arrayProcessus as $rowsProcessus) {
 
             //Si l'utilisateur appartient au processus, il n'est pas necessaire d'informer tous son service par mail
-            $arrayIntranetActionProcessus = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
+            $arrayIntranetActionProcessus = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
                             "SELECT " . IntranetActionsModel::FIELDNAME_NOM_INTRANET_ACTIONS
                             . " FROM " . IntranetActionsModel::TABLENAME
                             . " WHERE " . IntranetActionsModel::KEYNAME . "='" . $rowsProcessus[FtaActionRoleModel::FIELDNAME_ID_INTRANET_ACTIONS] . "' "
@@ -155,7 +155,7 @@ class FtaSuiviProjetModel extends AbstractModel {
                 //Activation du mail
                 //$no_mail=0;
                 //Recherche des Notifications des chapitres
-                $arraySuiviProjetChapitreProcessus = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
+                $arraySuiviProjetChapitreProcessus = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
                                 "SELECT " . FtaSuiviProjetModel::FIELDNAME_NOTIFICATION_FTA_SUIVI_PROJET
                                 . " FROM " . FtaSuiviProjetModel::TABLENAME . ", " . FtaChapitreModel::TABLENAME
                                 . ", " . FtaProcessusModel::TABLENAME . ", " . FtaWorkflowStructureModel::TABLENAME
@@ -207,7 +207,7 @@ class FtaSuiviProjetModel extends AbstractModel {
                                     /**
                                      * Pour cette requête le chapitre clé est test identité le 1
                                      */
-                                    $arraySuiviProjetSalaries = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
+                                    $arraySuiviProjetSalaries = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
                                                     "SELECT " . UserModel::FIELDNAME_ID_SERVICE
                                                     . " FROM " . FtaSuiviProjetModel::TABLENAME . ", " . UserModel::TABLENAME
                                                     . " WHERE (" . FtaSuiviProjetModel::TABLENAME . "." . FtaSuiviProjetModel::FIELDNAME_SIGNATURE_VALIDATION_SUIVI_PROJET
@@ -224,7 +224,7 @@ class FtaSuiviProjetModel extends AbstractModel {
                                 }
 
                                 //tableau des utilisateurs selon leur accès aux processus
-                                $arraySalarieProcessusMono = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
+                                $arraySalarieProcessusMono = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
                                                 "SELECT DISTINCT " . UserModel::TABLENAME . "." . UserModel::KEYNAME . ", " . UserModel::TABLENAME . "." . UserModel::FIELDNAME_MAIL
                                                 . ", " . UserModel::TABLENAME . "." . UserModel::FIELDNAME_LOGIN . ", " . UserModel::TABLENAME . "." . UserModel::FIELDNAME_NOM
                                                 . ", " . UserModel::TABLENAME . "." . UserModel::FIELDNAME_PRENOM . ", " . FtaProcessusModel::TABLENAME . "." . FtaProcessusModel::KEYNAME
@@ -258,7 +258,7 @@ class FtaSuiviProjetModel extends AbstractModel {
                                 //2. Cas de processus multi-site
                                 //------------------------------
                                 //Existe-t-il un processus d'un autre site qui gère ce site d'assemblage ?
-                                $arrayMultisiteProcessus = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
+                                $arrayMultisiteProcessus = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
                                                 "SELECT " . FtaProcessusMultisiteModel::FIELDNAME_ID_SITE_PROCESSUS_FTA_PROCESSUS_MULTISITE
                                                 . " FROM  " . FtaProcessusMultisiteModel::TABLENAME
                                                 . " WHERE " . FtaProcessusMultisiteModel::FIELDNAME_ID_SITE_ASSEMBLAGE_FTA_PROCESSUS_MULTISITE . "=" . $modelFta->getDataField(FtaModel::FIELDNAME_SITE_ASSEMBLAGE)->getFieldValue()
@@ -273,7 +273,7 @@ class FtaSuiviProjetModel extends AbstractModel {
                                     $site_gestionnaire = $modelFta->getDataField(FtaModel::FIELDNAME_SITE_ASSEMBLAGE)->getFieldValue();
                                 }
 
-                                $arraySalarieProcessusMulti = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
+                                $arraySalarieProcessusMulti = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
                                                 "SELECT DISTINCT " . UserModel::TABLENAME . "." . UserModel::KEYNAME . ", " . UserModel::TABLENAME . "." . UserModel::FIELDNAME_MAIL
                                                 . ", " . UserModel::TABLENAME . "." . UserModel::FIELDNAME_LOGIN . ", " . UserModel::TABLENAME . "." . UserModel::FIELDNAME_NOM
                                                 . ", " . UserModel::TABLENAME . "." . UserModel::FIELDNAME_PRENOM . ", " . FtaProcessusModel::TABLENAME . "." . FtaProcessusModel::KEYNAME
@@ -342,12 +342,12 @@ class FtaSuiviProjetModel extends AbstractModel {
                                     . "=" . $rowsProcessus[FtaProcessusModel::KEYNAME]
                                     . " AND " . FtaSuiviProjetModel::TABLENAME . "." . FtaSuiviProjetModel::FIELDNAME_ID_FTA . "=" . $paramIdFta
                             ;
-                            DatabaseOperation::query($update);
+                            DatabaseOperation::execute($update);
                             break;
 
                         case -1: //Création du suivi
                             //Récupération des chapitres du processus
-                            $arrayChapitre = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
+                            $arrayChapitre = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
                                             "SELECT " . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_CHAPITRE
                                             . " FROM " . FtaWorkflowStructureModel::TABLENAME
                                             . " WHERE " . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_PROCESSUS
@@ -360,7 +360,7 @@ class FtaSuiviProjetModel extends AbstractModel {
                                         . ", " . FtaSuiviProjetModel::FIELDNAME_ID_FTA . "='" . $paramIdFta . "'"
                                         . ", " . FtaChapitreModel::KEYNAME . "='" . $rowsChapitre[FtaChapitreModel::KEYNAME];
                                 ;
-                                DatabaseOperation::query($insert);
+                                DatabaseOperation::execute($insert);
                             }
 
                             break;
@@ -377,7 +377,7 @@ class FtaSuiviProjetModel extends AbstractModel {
         $ftaModel = new FtaModel($paramIdFta);
         $idFtaWorlflow = $ftaModel->getDataField(FtaModel::FIELDNAME_WORKFLOW)->getFieldValue();
         if ($idFtaWorlflow) {
-            $arrayChapitre = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
+            $arrayChapitre = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
                             "SELECT " . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_CHAPITRE
                             . ", " . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_PROCESSUS
                             . " FROM " . FtaWorkflowStructureModel::TABLENAME
@@ -387,7 +387,7 @@ class FtaSuiviProjetModel extends AbstractModel {
 
 
             foreach ($arrayChapitre as $rowsChapitre) {
-                $arrayCheckIdSuiviProjet = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
+                $arrayCheckIdSuiviProjet = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
                                 "SELECT " . FtaSuiviProjetModel::KEYNAME
                                 . " FROM " . FtaSuiviProjetModel::TABLENAME
                                 . " WHERE " . FtaSuiviProjetModel::FIELDNAME_ID_FTA
@@ -397,7 +397,7 @@ class FtaSuiviProjetModel extends AbstractModel {
                 );
                 if (!$arrayCheckIdSuiviProjet) {
                     if ($rowsChapitre[FtaWorkflowStructureModel::FIELDNAME_ID_FTA_PROCESSUS] == 0) {
-                        DatabaseOperation::query(
+                        DatabaseOperation::execute(
                                 "INSERT INTO " . FtaSuiviProjetModel::TABLENAME
                                 . "(" . FtaSuiviProjetModel::FIELDNAME_ID_FTA
                                 . ", " . FtaSuiviProjetModel::FIELDNAME_ID_FTA_CHAPITRE
@@ -407,7 +407,7 @@ class FtaSuiviProjetModel extends AbstractModel {
                                 . ", 1 )"
                         );
                     } else {
-                        DatabaseOperation::query(
+                        DatabaseOperation::execute(
                                 "INSERT INTO " . FtaSuiviProjetModel::TABLENAME
                                 . "(" . FtaSuiviProjetModel::FIELDNAME_ID_FTA
                                 . ", " . FtaSuiviProjetModel::FIELDNAME_ID_FTA_CHAPITRE
@@ -430,7 +430,7 @@ class FtaSuiviProjetModel extends AbstractModel {
         $ftaModel = new FtaModel($paramIdFta);
         $idFtaWorlflow = $ftaModel->getDataField(FtaModel::FIELDNAME_WORKFLOW)->getFieldValue();
 
-        $arrayChapitre = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
+        $arrayChapitre = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
                         "SELECT " . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_CHAPITRE
                         . ", " . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_PROCESSUS
                         . " FROM " . FtaWorkflowStructureModel::TABLENAME
@@ -442,7 +442,7 @@ class FtaSuiviProjetModel extends AbstractModel {
          * On supprime de la table fta_suivi_projet tous les chapitres de l'ancien workflow 
          * sauf les chapitres du processus identidé.
          */
-        DatabaseOperation::query(
+        DatabaseOperation::execute(
                 "DELETE FROM " . FtaSuiviProjetModel::TABLENAME
                 . " WHERE " . FtaSuiviProjetModel::FIELDNAME_ID_FTA . "=" . $paramIdFta
                 . " AND " . FtaSuiviProjetModel::FIELDNAME_ID_FTA_CHAPITRE . "<>1"
@@ -453,7 +453,7 @@ class FtaSuiviProjetModel extends AbstractModel {
         );
         foreach ($arrayChapitre as $rowsChapitre) {
             if ($rowsChapitre[FtaWorkflowStructureModel::FIELDNAME_ID_FTA_PROCESSUS] == 0) {
-                DatabaseOperation::query(
+                DatabaseOperation::execute(
                         "INSERT INTO " . FtaSuiviProjetModel::TABLENAME
                         . "(" . FtaSuiviProjetModel::FIELDNAME_ID_FTA
                         . ", " . FtaSuiviProjetModel::FIELDNAME_ID_FTA_CHAPITRE
@@ -463,7 +463,7 @@ class FtaSuiviProjetModel extends AbstractModel {
                         . ", 1 )"
                 );
             } else {
-                $arrayCheckIdSuiviProjet = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
+                $arrayCheckIdSuiviProjet = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
                                 "SELECT " . FtaSuiviProjetModel::KEYNAME
                                 . " FROM " . FtaSuiviProjetModel::TABLENAME
                                 . " WHERE " . FtaSuiviProjetModel::FIELDNAME_ID_FTA
@@ -472,7 +472,7 @@ class FtaSuiviProjetModel extends AbstractModel {
                                 . "=" . $rowsChapitre[FtaSuiviProjetModel::FIELDNAME_ID_FTA_CHAPITRE]
                 );
                 if (!$arrayCheckIdSuiviProjet) {
-                    DatabaseOperation::query(
+                    DatabaseOperation::execute(
                             "INSERT INTO " . FtaSuiviProjetModel::TABLENAME
                             . "(" . FtaSuiviProjetModel::FIELDNAME_ID_FTA
                             . ", " . FtaSuiviProjetModel::FIELDNAME_ID_FTA_CHAPITRE
@@ -507,7 +507,7 @@ class FtaSuiviProjetModel extends AbstractModel {
          * Sélection des processus contenu dans le cycle de vie de l'état de la FTA
          */
 
-        $arrayChapitre = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
+        $arrayChapitre = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
                         "SELECT DISTINCT " . FtaSuiviProjetModel::TABLENAME . "." . FtaSuiviProjetModel::FIELDNAME_ID_FTA_CHAPITRE
                         . " FROM " . FtaSuiviProjetModel::TABLENAME . "," . FtaWorkflowStructureModel::TABLENAME
                         . " WHERE " . FtaSuiviProjetModel::TABLENAME . "." . FtaSuiviProjetModel::FIELDNAME_ID_FTA . "= $paramIdFta "
@@ -523,7 +523,7 @@ class FtaSuiviProjetModel extends AbstractModel {
         /**
          * Liste complète des chapitres de ce cycle pour cette catégorie
          */
-        $arrayChapitreTotal = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
+        $arrayChapitreTotal = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
                         "SELECT DISTINCT " . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_CHAPITRE
                         . " FROM " . FtaWorkflowStructureModel::TABLENAME
                         . " WHERE  " . FtaWorkflowStructureModel::TABLENAME . "." . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_WORKFLOW

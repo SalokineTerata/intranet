@@ -16,12 +16,6 @@
         parent.location.href = url;
     }
 
-
-$(document).ready(function changerCouleur() {
-  $("#tableauFiche").on("click", "td", function changerCouleur(tableauFiche) {
-    // Gestionnaire d'évènement unique pour l'ensemble des <td>
-  });
-});
     /**
      * AjaxAutosave
      * Gère les mises à jour de données AJAX en arrière plan.

@@ -119,9 +119,9 @@ class IntranetDroitsAccesModel {
                     $SiteDeProduction = NULL;
                     $Role = NULL;
                     if ($arrayActions) {
-
-                        $checked = IntranetDroitsAccesModel::CheckValueByNiveauAcces($paramSalUser, $rowsActionsWorkflow[IntranetActionsModel::KEYNAME]);
-
+                        if ($paramSalUser) {
+                            $checked = IntranetDroitsAccesModel::CheckValueByNiveauAcces($paramSalUser, $rowsActionsWorkflow[IntranetActionsModel::KEYNAME]);
+                        }
 
                         $ftaDroitsAcces .= "<table border=1 width=500 ><td class=id_fta_workflow style=visibility:hidden align=left width=100><input type=checkbox name=" . $rowsActionsWorkflow[IntranetActionsModel::FIELDNAME_NOM_INTRANET_ACTIONS] . "_" . $rowsActionsWorkflow[IntranetActionsModel::KEYNAME]
                                 . " value=1 $checked />" . $rowsActionsWorkflow[IntranetActionsModel::FIELDNAME_DESCRIPTION_INTRANET_ACTIONS] . "</td>"
@@ -129,12 +129,16 @@ class IntranetDroitsAccesModel {
 
                         foreach ($arrayActions as $rowsActions) {
                             if ($rowsActions[IntranetActionsModel::FIELDNAME_TAG_INTRANET_ACTIONS] == "site") {
-                                $checked = IntranetDroitsAccesModel::CheckValueByNiveauAcces($paramSalUser, $rowsActions[IntranetActionsModel::KEYNAME]);
+                                if ($paramSalUser) {
+                                    $checked = IntranetDroitsAccesModel::CheckValueByNiveauAcces($paramSalUser, $rowsActions[IntranetActionsModel::KEYNAME]);
+                                }
                                 $SiteDeProduction .="<tr  align=left><td  class=loginFFFFFFdroit valign=top width=172>"
                                         . "<input type=checkbox name=" . $rowsActions[IntranetActionsModel::FIELDNAME_NOM_INTRANET_ACTIONS] . "_" . $rowsActions[IntranetActionsModel::KEYNAME]
                                         . " value=1 $checked />" . $rowsActions[IntranetActionsModel::FIELDNAME_DESCRIPTION_INTRANET_ACTIONS] . "</td></tr></td>";
                             } else {
-                                $checked = IntranetDroitsAccesModel::CheckValueByNiveauAcces($paramSalUser, $rowsActions[IntranetActionsModel::KEYNAME]);
+                                if ($paramSalUser) {
+                                    $checked = IntranetDroitsAccesModel::CheckValueByNiveauAcces($paramSalUser, $rowsActions[IntranetActionsModel::KEYNAME]);
+                                }
                                 $Role .= "<tr align=left><td  class=loginFFFFFFdroit valign=top width=172><input type=checkbox name=" . $rowsActions[IntranetActionsModel::FIELDNAME_NOM_INTRANET_ACTIONS] . "_" . $rowsActions[IntranetActionsModel::KEYNAME]
                                         . " value=1  $checked />" . $rowsActions[IntranetActionsModel::FIELDNAME_DESCRIPTION_INTRANET_ACTIONS] . "</td></tr></td>";
                             }
@@ -155,8 +159,9 @@ class IntranetDroitsAccesModel {
                 );
                 $ftaDroitsAccesGlobaux = "<table width=500 border=1>";
                 foreach ($arrayActionsGlobaux as $rowsActionsGlobaux) {
-
-                    $checked = IntranetDroitsAccesModel::CheckValueByNiveauAcces($paramSalUser, $rowsActionsGlobaux[IntranetActionsModel::KEYNAME]);
+                    if ($paramSalUser) {
+                        $checked = IntranetDroitsAccesModel::CheckValueByNiveauAcces($paramSalUser, $rowsActionsGlobaux[IntranetActionsModel::KEYNAME]);
+                    }
                     $ftaDroitsAccesGlobaux .="<td  align=left width=100><input type=checkbox onclick=Change()"
                             . " id=" . $rowsActionsGlobaux[IntranetActionsModel::FIELDNAME_NOM_INTRANET_ACTIONS]
                             . " name=" . $rowsActionsGlobaux[IntranetActionsModel::FIELDNAME_NOM_INTRANET_ACTIONS] . "_" . $rowsActionsGlobaux[IntranetActionsModel::KEYNAME]
@@ -283,7 +288,6 @@ class IntranetDroitsAccesModel {
 //                                    }
 //                                }
 //                            }
-
                             //Est-ce que l'utilisateur à ce niveau d'accès
                             if
                             (

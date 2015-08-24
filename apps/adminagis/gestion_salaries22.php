@@ -290,7 +290,7 @@ if ($paramRech == '1') {
                                                 $id_defaut = "";
                                             }
 
-                                            $liste .= "<br>" . afficher_requete_en_liste_deroulante($req_liste, $id_defaut, $nom_liste);
+                                            $liste .= "<br>" . AccueilFta::afficherRequeteEnListeDeroulante($req_liste, $id_defaut, $nom_liste);
                                             $liste.= "</td>";
                                             echo $liste;
                                             ?>
@@ -525,7 +525,7 @@ if ($paramRech == '1') {
                                                                     $arrayServiceConf = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
                                                                                     "SELECT " . ModesModel::FIELDNAME_SERV_CONF . " FROM " . ModesModel::TABLENAME
                                                                                     . " WHERE " . ModesModel::FIELDNAME_ID_USER . "=" . $paramIdUser
-                                                                                    . " AND " . ModesModel::FIELDNAME_ID_SERVICE . "=" . $idService
+                                                                                    . " AND " . ModesModel::FIELDNAME_ID_SERVICE . "='" . $idService ."'"
                                                                     );
 
                                                                     if ($arrayServiceConf) {

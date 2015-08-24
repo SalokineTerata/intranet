@@ -3,14 +3,16 @@
 //Barre de navigation du module
 //Récupération des droits d'accès necessaire
 $module = Lib::getModule();
+$globalConfig = new GlobalConfig();
+$id_user = $globalConfig->getAuthenticatedUser()->getKeyValue();
 
 $module_consultation = $module . "_consultation";
 $module_modification = $module . "_modification";
-$idFtaRole=  Lib::getParameterFromRequest("id_fta_role");
+$idFtaRoleEncoursDefault = FtaRoleModel::getKeyNameOfFirstRoleByIdUser($id_user);
+$idFtaRole = Lib::getParameterFromRequest(FtaRoleModel::KEYNAME, $idFtaRoleEncoursDefault);
 $fta_definition = Lib::isDefined("fta_definition");
 $fta_composition = Lib::isDefined("fta_composition");
 
-$globalConfig = new GlobalConfig();
 /*
   Menu accessible pour les utilisateurs ayant les droits
   en consultation sur ce module

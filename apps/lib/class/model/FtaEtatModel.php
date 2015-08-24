@@ -35,13 +35,11 @@ class FtaEtatModel extends AbstractModel {
                         . "," . FtaModel::TABLENAME . "." . FtaModel::FIELDNAME_ID_FTA_ETAT
                         . " FROM " . FtaEtatModel::TABLENAME
                         . "," . FtaRoleModel::TABLENAME . "," . FtaModel::TABLENAME
-                        . "," . FtaWorkflowModel::TABLENAME . "," . FtaWorkflowStructureModel::TABLENAME
+                        . "," . FtaWorkflowStructureModel::TABLENAME
                         . " WHERE " . FtaRoleModel::TABLENAME . "." . FtaRoleModel::KEYNAME . "=" . $paramIdFtaRole
                         . " AND " . FtaRoleModel::TABLENAME . "." . FtaRoleModel::KEYNAME
                         . "=" . FtaWorkflowStructureModel::TABLENAME . "." . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_ROLE
                         . " AND " . FtaWorkflowStructureModel::TABLENAME . "." . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_WORKFLOW
-                        . "=" . FtaWorkflowModel::TABLENAME . "." . FtaWorkflowModel::KEYNAME
-                        . " AND " . FtaWorkflowModel::TABLENAME . "." . FtaWorkflowModel::KEYNAME
                         . "=" . FtaModel::TABLENAME . "." . FtaModel::FIELDNAME_WORKFLOW
                         . " AND " . FtaModel::TABLENAME . "." . FtaModel::FIELDNAME_ID_FTA_ETAT . "=" . FtaEtatModel::TABLENAME . "." . FtaEtatModel::KEYNAME
                         . " ORDER BY " . FtaEtatModel::TABLENAME . "." . FtaEtatModel::KEYNAME

@@ -726,7 +726,7 @@ class Chapitre {
         $ftaView->setFtaChapitreModelById(self::ID_CHAPITRE_IDENTITE);
 
         //Site d'assemblage
-        $bloc.=$ftaView->ListeSiteByAcces(self::$idUser,$isEditable,$id_fta);
+        $bloc.=$ftaView->ListeSiteByAcces(self::$idUser, $isEditable, $id_fta);
 
         return $bloc;
     }
@@ -1978,8 +1978,8 @@ class Chapitre {
         $bloc.=$ftaView->getHtmlCreateurFta();
 
         //Workflow de FTA
-        $bloc.=$ftaView->ListeWorkflowByAcces(self::$idUser,$isEditable,$id_fta);
-        
+        $bloc.=$ftaView->ListeWorkflowByAcces(self::$idUser, $isEditable, $id_fta);
+
         //Date d'échéance de la FTA
         $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_DATE_ECHEANCE_FTA);
 
@@ -2157,9 +2157,11 @@ class Chapitre {
                 . "FROM fta_processus_delai "
                 . "WHERE id_fta='" . $idFta . "' AND id_fta_processus='" . $id_fta_processus . "' "
         ;
-        $result = DatabaseOperation::query($req);
-        if (mysql_num_rows($result)) {
-            $$champ = mysql_result($result, 0, "date_echeance_processus");
+        $array = DatabaseOperation::convertSqlStatementWithoutKeyToArray($req);
+        if ($array) {
+            foreach ($array as $rows) {
+                $$champ = $rows[FtaProcessusDelaiModel::FIELDNAME_DATE_ECHEANCE_PROCESSUS];
+            }
         }
         if ($proprietaire and ( $$champ < date("Y-m-d"))) {
             $bgcolor = "class=couleur_rouge";
@@ -2170,13 +2172,12 @@ class Chapitre {
             $blod = "";
             $blod_end = "";
         }
-        
-      //  $bloc_suivi .= "<tr class=contenu><td>" . DatabaseDescription::getFieldDocLabel("fta_processus_delai", $champ) . "</td><td $bgcolor>";
+
+        //  $bloc_suivi .= "<tr class=contenu><td>" . DatabaseDescription::getFieldDocLabel("fta_processus_delai", $champ) . "</td><td $bgcolor>";
         //$bloc_suivi .="$blod ${$champ} $blod_end";
         //$bloc_suivi .="$blod " . $ftaModel->getEcheanceByIdProcessus($id_fta_processus) . " $blod_end";
-     //   $bloc_suivi .="<input type=hidden name=$champ value=${$champ}>";
-     //   $bloc_suivi.="</td></tr>";
-
+        //   $bloc_suivi .="<input type=hidden name=$champ value=${$champ}>";
+        //   $bloc_suivi.="</td></tr>";
         //$bloc_suivi .= $ftaView->getFtaSuiviProjetModel()->getDataField(FtaSuiviprojetmodel::FIELDNAME_DATE_VALIDATION_SUIVI_PROJET)->getFieldValue();
         $bloc_suivi .= $ftaView->getFtaSuiviProjetModel()->getHtmlDataField(FtaSuiviprojetmodel::FIELDNAME_DATE_VALIDATION_SUIVI_PROJET);
 
@@ -2341,7 +2342,7 @@ class Chapitre {
                 . "AND ( ( `fta_workflow_structure`.`id_fta_chapitre` ='" . self::$id_fta_chapitre . "' "
                 . "AND `fta_processus_cycle`.`id_etat_fta_processus_cycle` = '" . $ftaEtatModel->getDataField(FtaEtatModel::FIELDNAME_ABREVIATION)->getFieldValue() . "' ) ) "
         ;
-        $cycle_en_cours = mysql_num_rows(DatabaseOperation::query($req));
+        $cycle_en_cours = DatabaseOperation::convertSqlStatementWithoutKeyToArray($req);
         if (self::$is_owner == true and self::$is_editable == false and $cycle_en_cours) {
             $return = true;
         }

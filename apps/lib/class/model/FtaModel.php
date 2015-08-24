@@ -1078,8 +1078,8 @@ class FtaModel extends AbstractModel {
      * @param type $paramSiteDeProduction
      * @return type
      */
-    public static function CreateFta($paramIdCreateur, $paramIdFtaEtat, $paramIdFtaWorkflow, $paramDesignationCommerciale, $paramDateCreation, $paramSiteDeProduction) {
-        DatabaseOperation::execute(
+    public  function CreateFta($paramIdCreateur, $paramIdFtaEtat, $paramIdFtaWorkflow, $paramDesignationCommerciale, $paramDateCreation, $paramSiteDeProduction) {
+       $Id = DatabaseOperation::execute(
                 "INSERT INTO `intranet_v3_0_dev`." . FtaModel::TABLENAME
                 . " ( " . FtaModel::FIELDNAME_CREATEUR
                 . "," . FtaModel::FIELDNAME_ID_FTA_ETAT
@@ -1094,7 +1094,7 @@ class FtaModel extends AbstractModel {
                 . ", " . $paramSiteDeProduction
                 . ", " . $paramIdFtaWorkflow . ")"
         );
-        $key = PDO::lastInsertId();
+        $key = $Id->lastInsertId();
         return $key;
     }
 

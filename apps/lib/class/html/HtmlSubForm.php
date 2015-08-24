@@ -20,11 +20,11 @@
 class HtmlSubForm extends AbstractHtmlList {
 
     public function getHtmlResultSubFormBegin() {
-        return "<table>";
+        return "<table><tr>";
     }
 
     public function getHtmlResultSubFormEnd() {
-        return "</table>";
+        return "</tr></table>";
     }
 
     public function getHtmlResultSubFormAddNewLine() {

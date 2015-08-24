@@ -67,7 +67,7 @@ if ($modifier == 'modifier') {
             /*
              *  Update dans la table pour chaque service
              */
-            $resultUpdateService = DatabaseOperation::query(
+            $resultUpdateService = DatabaseOperation::execute(
                             "UPDATE " . ModesModel::TABLENAME
                             . " SET " . ModesModel::FIELDNAME_SERV_CONF . "=" . $niveau
                             . " WHERE " . ModesModel::FIELDNAME_ID_USER . "=' " . $idUser
@@ -149,7 +149,7 @@ if ($modifier == 'modifier') {
                  * Association à un groupe d'utilisateur
                  */
                 $HtmlList = new HtmlListSelectTagName();
-                $arrayAscendant = DatabaseOperation::convertSqlQueryWithKeyAsFirstFieldToArray(
+                $arrayAscendant = DatabaseOperation::convertSqlStatementWithKeyAsFirstFieldToArray(
                                 "SELECT " . UserModel::KEYNAME . ", " . UserModel::FIELDNAME_LOGIN
                                 . " FROM " . UserModel::TABLENAME
                                 . " ORDER BY " . UserModel::FIELDNAME_LOGIN
@@ -290,7 +290,12 @@ if ($modifier == 'modifier') {
                         Droit d'&eacute;criture <?php
                         $ecriture = 'oui';
                         //echo ("test database = $mysql_database");
-                        echo ("<select name=\"ecriture\">" . makeSelectList($mysql_database, 'salaries', 'ecriture') . "</select>");
+                        echo ("<select name=\"ecriture\">");
+                        /*
+                         * Affichage
+                         */
+                        echo makeSelectList($mysql_database, 'salaries', 'ecriture');
+                        echo ("</select>");
                         ?>
                     </center>
                     </td>
@@ -417,10 +422,10 @@ if ($modifier == 'modifier') {
                         echo ("<select name=\"lieu_geo\">\n");
                         /* Constitution de la liste déroulante des noms des groupes */
                         $req = "select * from geo where site_actif = 1 order by geo";
-                        $result = DatabaseOperation::query($req);
-                        if ($result != false) {
-                            while ($row = mysql_fetch_row($result)) {
-                                echo ("<option value=\"$row[0]\">$row[1]</option>");
+                        $arrayGeo = DatabaseOperation::convertSqlStatementKeyAndOneFieldToArray($req);
+                        if ($arrayGeo) {
+                            foreach ($arrayGeo as $rowGeo) {
+                                echo ("<option value=\"$rowGeo[0]\">$rowGeo[1]</option>");
                             }
                         }
                         echo ("</select>\n");

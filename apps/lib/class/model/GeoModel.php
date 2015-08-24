@@ -50,7 +50,7 @@ class GeoModel extends AbstractModel {
      * @return type
      */
     public static function ShowListeDeroulanteSiteProdByAcces($paramIdUser, $paramObjet, $paramIsEditable) {
-        $arraySite = DatabaseOperation::convertSqlQueryWithKeyAsFirstFieldToArray(
+        $arraySite = DatabaseOperation::convertSqlStatementWithKeyAsFirstFieldToArray(
                         "SELECT DISTINCT " . GeoModel::KEYNAME . "," . GeoModel::FIELDNAME_GEO
                         . " FROM " . GeoModel::TABLENAME
                         . ", " . FtaActionSiteModel::TABLENAME
@@ -87,7 +87,7 @@ class GeoModel extends AbstractModel {
  */
     public static function ShowListeDeroulanteSiteProdByAccesAndIdFta($paramIdUser, $paramObjet, $paramIsEditable, $paramIdFta) {
         $ftaModel = new FtaModel($paramIdFta);
-        $arraySite = DatabaseOperation::convertSqlQueryWithKeyAsFirstFieldToArray(
+        $arraySite = DatabaseOperation::convertSqlStatementWithKeyAsFirstFieldToArray(
                         "SELECT DISTINCT " . GeoModel::KEYNAME . "," . GeoModel::FIELDNAME_GEO
                         . " FROM " . GeoModel::TABLENAME
                         . ", " . FtaActionSiteModel::TABLENAME

@@ -149,7 +149,7 @@ class FtaSuiviProjetModel extends AbstractModel {
 
 
             //Ce processus est-il un processus en cours ?
-            if (FtaProcessusModel::getValideProcessusEncours($paramIdFta, $rowsProcessus[FtaProcessusModel::KEYNAME], $id_fta_workflow) <> 0 
+            if (FtaProcessusModel::getValideProcessusEncours($paramIdFta, $rowsProcessus[FtaProcessusModel::KEYNAME], $id_fta_workflow) <> 0
                     AND FtaProcessusModel::getValideProcessusEncours($paramIdFta, $rowsProcessus[FtaProcessusModel::KEYNAME], $id_fta_workflow) <> 1) {
 
                 //Activation du mail
@@ -490,9 +490,9 @@ class FtaSuiviProjetModel extends AbstractModel {
 
 //Dictionnaire des données
         $return;        //Tableau de résultat
-        $return[0];     //Pourcentage globale de la validation
-        $return[1];     //Tableau de résultat par id_fta_processus des taux de validation
-        $return[2];     //Tableau de résultat par id_fta_processus des état des processus (Terminé, En cours, En attente)
+        $return[AccueilFta::VALUE_0];     //Pourcentage globale de la validation
+        $return[AccueilFta::VALUE_1];     //Tableau de résultat par id_fta_processus des taux de validation
+        $return[AccueilFta::VALUE_2];     //Tableau de résultat par id_fta_processus des état des processus (Terminé, En cours, En attente)
 
         /*
          * Récupération du l'état de la FTA pour connatire le cycle de vie en cours
@@ -531,10 +531,11 @@ class FtaSuiviProjetModel extends AbstractModel {
                         . " AND " . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_PROCESSUS . "<>0 "
         );
         $totalChapitre = count($arrayChapitreTotal);
-
-        $return[0] = $currentChapitre / $totalChapitre;
-
-
+        if ($currentChapitre) {
+            $return[AccueilFta::VALUE_0] = $currentChapitre / $totalChapitre;
+        } else {
+            $return[AccueilFta::VALUE_0] = AccueilFta::VALUE_0;
+        }
         return $return;
     }
 

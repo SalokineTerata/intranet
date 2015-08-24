@@ -31,7 +31,7 @@ GlobalConfig::saveGlobalConfToPhpSession($globalConfig);
 /**
  * Ouverture de la connexion à la base de données.
  */
-$globalConfig->openDatabaseConnexion();
+//GlobalConfig::saveDatabaseConnexionToPhpSession($globalConfig->openDatabaseConnexion2($globalConfig));
 
 /**
  * Construction de la description de la base de données et 

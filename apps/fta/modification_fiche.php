@@ -69,7 +69,7 @@ $idFta = Lib::getParameterFromRequest(FtaModel::KEYNAME);
  */
 //$chapitreParDefaut = FtaChapitreModel::getChapitreDefautByWorkflow($id_fta);
 
-$id_fta_chapitre_encours = Lib::getParameterFromRequest("id_fta_chapitre_encours",  AccueilFta::VALUE_1);
+$id_fta_chapitre_encours = Lib::getParameterFromRequest("id_fta_chapitre_encours", AccueilFta::VALUE_1);
 $synthese_action = Lib::getParameterFromRequest("synthese_action");
 $comeback = Lib::getParameterFromRequest("comeback");
 $idFtaEtat = Lib::getParameterFromRequest(FtaEtatModel::KEYNAME);
@@ -86,9 +86,9 @@ if ($$module_consultation <> 1 and $nom_fta_chapitre_encours == "tarif") {
 //$navigue = afficher_navigation($id_fta, $id_fta_chapitre_encours, $synthese_action, $comeback);
 
 
-Navigation::initNavigation($idFta, $id_fta_chapitre_encours, $synthese_action, $comeback, $idFtaEtat,$abreviationFtaEtat,$idFtaRole);
+Navigation::initNavigation($idFta, $id_fta_chapitre_encours, $synthese_action, $comeback, $idFtaEtat, $abreviationFtaEtat, $idFtaRole);
 
-$navigue= Navigation::getHtmlNavigationBar();
+$navigue = Navigation::getHtmlNavigationBar();
 
 /*
   Création des Fonctions JavaScript
@@ -111,7 +111,7 @@ $javascript = "
 ";
 
 
-Chapitre::initChapitre($idFta, $id_fta_chapitre, $synthese_action, $comeback, $idFtaEtat,$abreviationFtaEtat,$idFtaRole);
+Chapitre::initChapitre($idFta, $id_fta_chapitre, $synthese_action, $comeback, $idFtaEtat, $abreviationFtaEtat, $idFtaRole);
 
 $bloc.= Chapitre::getHtmlChapitreAll();
 

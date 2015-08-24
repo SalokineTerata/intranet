@@ -484,7 +484,7 @@ class Navigation {
                             . " AND " . FtaSuiviProjetModel::FIELDNAME_ID_FTA_CHAPITRE . "=" . $id_fta_chapitre
                             . " AND " . FtaSuiviProjetModel::FIELDNAME_SIGNATURE_VALIDATION_SUIVI_PROJET . "<>0 "
                     ;
-                    $result1 = DatabaseOperation::query($req1);
+                    $result1 = DatabaseOperation::queryPDO($req1);
                     $num = DatabaseOperation::getSqlNumRows($result1);
                     switch ($num) {
                         case 0:  //Chapiter pas encore validé

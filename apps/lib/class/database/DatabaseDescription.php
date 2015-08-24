@@ -260,11 +260,11 @@ class DatabaseDescription {
         /**
          * Récupération des caractéristiques SQL de chaque champs de chaque table
          */
-        $result = DatabaseOperation::query("SHOW TABLES");
-        while ($rowsTables = mysql_fetch_array($result)) {
+        $array = DatabaseOperation::convertSqlStatementKeyAndOneFieldToArray("SHOW TABLES");
+        foreach ($array as $rowsTables) {
             $tableName = $rowsTables[0];
-            $tableDescription = DatabaseOperation::convertSqlResultWithoutKeyToArray(
-                            DatabaseOperation::query("DESC " . DatabaseOperation::convertNameToSqlClause($tableName))
+            $tableDescription = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
+                            "DESC " . DatabaseOperation::convertNameToSqlClause($tableName)
             );
 
             /**
@@ -298,20 +298,24 @@ class DatabaseDescription {
         /**
          * Recherche de la documentation des champs
          */
-        $resultDoc = DatabaseOperation::query("SELECT * FROM `intranet_column_info` ");
+        $arrayDoc = DatabaseOperation::convertSqlStatementWithoutKeyToArray("SELECT * FROM `intranet_column_info` ");
         /**
          * Parcours du résultat de la recherche
          */
-        while ($rowsDoc = mysql_fetch_array($resultDoc)) {
+        foreach ($arrayDoc as $rowsDoc) {
             $tableName = $rowsDoc["table_name_intranet_column_info"];
             $columnName = $rowsDoc["column_name_intranet_column_info"];
             $label = $rowsDoc["label_intranet_column_info"];
             $help = $rowsDoc["explication_intranet_column_info"];
             $idDoc = $rowsDoc["id_intranet_column_info"];
             $contentSql = $rowsDoc["sql_request_content_intranet_column_info"];
-            $contentArray = DatabaseOperation::convertSqlResultKeyAndOneFieldToArray(
-                            DatabaseOperation::query($contentSql)
-            );
+            if ($contentSql) {
+                $contentArray = DatabaseOperation::convertSqlStatementWithKeyAsFirstFieldToArray(
+                                $contentSql
+                );
+            } else {
+                $contentArray = NULL;
+            }
             $typeOfHtmlObject = $rowsDoc["type_of_html_object_intranet_column_info"];
             $typeOfStorage = $rowsDoc["type_of_storage"];
             $foreignTable = $rowsDoc["referenced_table_name"];

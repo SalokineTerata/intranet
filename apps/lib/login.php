@@ -15,9 +15,9 @@ $_SERVER["REQUEST_METHOD"];   //Méthode d'envoi des informations: la méthode G
 //Variables envoyées par la page d'appel
 $bdd = $globalConfig->getConf()->getMysqlDatabaseName();
 $id_user = Lib::isDefined("id_user");
-$login = Lib::isDefined("login");
+$login = Lib::getParameterFromRequest("login");
 $num_log = Lib::isDefined("num_log");
-$pass = Lib::isDefined("pass");
+$pass = Lib::getParameterFromRequest("pass");
 $position = Lib::isDefined("position");
 $session = Lib::isDefined("session");
 $session_id = session_id();
@@ -37,7 +37,7 @@ if (empty($session_id))
 
 if ($session == "logout") {
 
-    DatabaseOperation::query("update log set date = now() where ((num_log='$num_log') and (id_user='$id_user'))");
+    DatabaseOperation::execute("update log set date = now() where ((num_log='$num_log') and (id_user='$id_user'))");
     $pass = "";
     $id_user = "";
     $login = "";
@@ -74,8 +74,8 @@ if ($login) {
         if ($identite == "$login") {
             $tentative++;
             if ($tentative >= 3) {
-                $unique = DatabaseOperation::query("select * from salaries where login='$identite' and blocage='oui'");
-                $reponse = mysql_num_rows($unique);
+                $unique = DatabaseOperation::convertSqlStatementWithoutKeyToArray("SELECT * FROM salaries WHERE login='$identite' AND blocage='oui'");
+                $reponse = count($unique);
                 if ($reponse != 1) {
 
                     /* envois du mail d'information à l'utilisateur concerné */
@@ -83,19 +83,24 @@ if ($login) {
                     $corpsmail.="avec un mot de passe invalide.<br>";
                     $corpsmail.="Contactez un Administrateur pour réactiver votre compte.<br>";
 
-                    $mailadmin = DatabaseOperation::query("select mail from salaries where id_type=4 and actif='oui'");
-                    while ($rowsmail = mysql_fetch_array($mailadmin)) {
-                        $corpsmail.=" - $rowsmail[mail] <br>";
+                    $arrayMailAdmin = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
+                                    "SELECT " . UserModel::FIELDNAME_MAIL
+                                    . " FROM " . UserModel::TABLENAME
+                                    . " WHERE " . UserModel::FIELDNAME_ID_TYPE . " =4"
+                                    . " AND " . UserModel::FIELDNAME_ACTIF . " ='oui'");
+                    foreach ($arrayMailAdmin as $rowsmail) {
+                        $corpsmail.=" - " . $rowsmail[UserModel::FIELDNAME_MAIL] . " <br>";
                     }
 
                     $adrfrom = "postmaster@agis-sa.fr";
-                    $recupmail = DatabaseOperation::query("select mail from salaries where login='$identite'");
-                    $colonnemail = mysql_fetch_array($recupmail);
-                    $adrTo = $colonnemail[mail];
+                    $recupmail = DatabaseOperation::convertSqlStatementWithoutKeyToArray("select mail from salaries where login='$identite'");
+                    foreach ($recupmail as $colonnemail) {
+                        $adrTo = $colonnemail[UserModel::FIELDNAME_MAIL];
+                    }
                     $sujet = "connexion intranet Agis";
                     /* Constition du corps du mail */
                     $rep = envoismail($sujet, $corpsmail, $adrTo, $adrfrom);
-                    $titou = DatabaseOperation::query("update salaries set blocage='oui' where (login='$identite')");
+                    $titou = DatabaseOperation::execute("update salaries set blocage='oui' where (login='$identite')");
                 }
             }
         } else {
@@ -112,23 +117,23 @@ if ($login) {
         //Création des variables une fois l'authentification terminé
         if (!$id_user) {
 
-            $req1 = "SELECT * FROM salaries WHERE ( "
-                    . "(login = '$login') AND "
-                    . "(blocage='non') AND "
-                    . "(actif='oui') "
-                    . ")"
-            ;
-            $q1 = DatabaseOperation::query($req1);
-            $rows = mysql_fetch_array($q1);
-            $prenom = $rows["prenom"];
-            $id_user = $rows["id_user"];
-            $id_catsopro = $rows["id_catsopro"];
-            $id_service = $rows["id_service"];
-            $nom_type = $rows["id_type"];
-            $nom_famille_ses = $rows["nom"];
-            $mail_user = $rows["mail"];
-            $lieu_geo = $rows["lieu_geo"];
-            $portail_wiki_salaries = $rows["portail_wiki_salaries"];
+            $arrayR1 = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
+                            "SELECT * FROM salaries WHERE ( "
+                            . "(login = '$login') AND "
+                            . "(blocage='non') AND "
+                            . "(actif='oui') "
+                            . ")");
+            foreach ($arrayR1 as $rows) {
+                $prenom = $rows["prenom"];
+                $id_user = $rows["id_user"];
+                $id_catsopro = $rows["id_catsopro"];
+                $id_service = $rows["id_service"];
+                $nom_type = $rows["id_type"];
+                $nom_famille_ses = $rows["nom"];
+                $mail_user = $rows["mail"];
+                $lieu_geo = $rows["lieu_geo"];
+                $portail_wiki_salaries = $rows["portail_wiki_salaries"];
+            }
 
             $_SESSION["pass"] = $pass;
             $_SESSION["nom_famille_ses"] = $nom_famille_ses;

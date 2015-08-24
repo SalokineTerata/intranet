@@ -103,6 +103,65 @@ class AccueilFta {
     }
 
     /**
+     * Fonction de pagination des résultats
+     *
+     * Retourne le code HTML des liens de pagination
+     *
+     * @param integer nombre de résultats total
+     * @param integer nombre de résultats par page
+     * @param integer numéro de la page courante
+     * @param integer nombre de pages avant la page courante
+     * @param integer nombre de pages après la page courante
+     * @param integer afficher le lien vers la première page (1=oui / 0=non)
+     * @param integer afficher le lien vers la dernière page (1=oui / 0=non)
+     * @return string code HTML des liens de pagination
+     * */
+    function paginer($nb_results, $nb_results_p_page, $numero_page_courante, $nb_avant, $nb_apres, $premiere, $derniere) {
+        // Initialisation de la variable a retourner
+        $resultat = '';
+
+        // nombre total de pages
+        $nb_pages = ceil($nb_results / $nb_results_p_page);
+        // nombre de pages avant
+        $avant = $numero_page_courante > ($nb_avant + 1) ? $nb_avant : $numero_page_courante - 1;
+        // nombre de pages apres
+        $apres = $numero_page_courante <= $nb_pages - $nb_apres ? $nb_apres : $nb_pages - $numero_page_courante;
+
+        // premiere page
+        if ($premiere && $numero_page_courante - $avant > 1) {
+            $resultat .= '<a href="' . htmlspecialchars($_SERVER['PHP_SELF']) . '?numeroPage=1" title="Première page">&laquo;&laquo;</a>&nbsp;';
+        }
+
+        // page precedente
+        if ($numero_page_courante > 1) {
+            $resultat .= '<a href="' . htmlspecialchars($_SERVER['PHP_SELF']) . '?numeroPage=' . ($numero_page_courante - 1) . '" title="Page précédente ' . ($numero_page_courante - 1) . '">&laquo;</a>&nbsp;';
+        }
+
+        // affichage des numeros de page
+        for ($i = $numero_page_courante - $avant; $i <= $numero_page_courante + $apres; $i++) {
+            // page courante
+            if ($i == $numero_page_courante) {
+                $resultat .= '&nbsp;[<strong>' . $i . '</strong>]&nbsp;';
+            } else {
+                $resultat .= '&nbsp;[<a href="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES) . '?numeroPage=' . $i . '" title="Consulter la page ' . $i . '">' . $i . '</a>]&nbsp;';
+            }
+        }
+
+        // page suivante
+        if ($numero_page_courante < $nb_pages) {
+            $resultat .= '<a href="' . htmlspecialchars($_SERVER['PHP_SELF']) . '?numeroPage=' . ($numero_page_courante + 1) . '" title="Consulter la page ' . ($numero_page_courante + 1) . ' !">&raquo;</a>&nbsp;';
+        }
+
+        // derniere page     
+        if ($derniere && ($numero_page_courante + $apres) < $nb_pages) {
+            $resultat .= '<a href="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES) . '?numeroPage=' . $nb_pages . '" title="Dernière page">&raquo;&raquo;</a>&nbsp;';
+        }
+
+        // On retourne le resultat
+        return $resultat;
+    }
+
+    /**
      * 
      * @param type $paramAbrevation1
      * @param type $paramAbrevation2
@@ -977,6 +1036,7 @@ class AccueilFta {
                 $tableauFicheN = NULL;
                 $tableauFicheTmp = NULL;
                 $service = NULL;
+                $classification = NULL;
                 $selection = NULL;
             }
         } else {
@@ -1060,8 +1120,7 @@ class AccueilFta {
      */
     public static function afficherRequeteEnListeDeroulante($paramRequeteSQL, $paramIdDefaut, $paramNomDefaut) {
         //Recherche de la clef
-        $result = DatabaseOperation::query($paramRequeteSQL);
-        $table = mysql_fetch_array($result);
+        $table = DatabaseOperation::convertSqlStatementKeyAndOneFieldToArray($paramRequeteSQL);
         if (!$table) {//Si la liste est vide
             $html_liste = "<i>(vide)</i>";
         } else {
@@ -1077,8 +1136,8 @@ class AccueilFta {
              * Retourne la ligne suivante en tant qu'un tableau indexé par le nom et le numéro de la colonne
              */
             //Création du contenu de la liste
-            $result = DatabaseOperation::query($paramRequeteSQL);
-            while ($rows = mysql_fetch_array($result)) {
+            $array = DatabaseOperation::convertSqlStatementKeyAndOneFieldToArray($paramRequeteSQL);
+            foreach ($array as $rows) {
                 if ($rows[0] == $paramIdDefaut) {
                     $selected = " selected";
                 } else {

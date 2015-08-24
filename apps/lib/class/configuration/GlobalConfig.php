@@ -22,6 +22,7 @@ class GlobalConfig {
     const INITIALIZED_FALSE = FALSE;
     const MYSQL_HOST = "mysql:host=";
     const MYSQL_DBNAME = ";dbname=";
+    const VARNAME_DATABASE_CONNEXION = "DatabaseConnexion";
     const VARNAME_EXEC_DEBUG_TIME_START = "exec_debug_time_start";
     const VARNAME_GLOBALCONFIG_IN_PHP_SESSION = "globalConfig";
     const VARNAME_IS_GLOBALCONFIG_INITIALIZED = "isGlobalConfigInitialized";
@@ -51,7 +52,7 @@ class GlobalConfig {
      * Connexion à la base de donnée
      * 
      */
-    private $databaseConnexion;
+    private $databaseconnexion;
 
     function __construct() {
 
@@ -108,6 +109,14 @@ class GlobalConfig {
     }
 
     /**
+     * Sauvegarde de la connexion à la base de donnée dans la session PHP
+     * @param type $paramDatabaseConnexion
+     */
+    static function saveDatabaseConnexionToPhpSession($paramDatabaseConnexion) {
+        $_SESSION[GlobalConfig::VARNAME_DATABASE_CONNEXION] = $paramDatabaseConnexion;
+    }
+
+    /**
      * Ouverture de la connexion MySQL  
      */
     function openDatabaseConnexion() {
@@ -130,34 +139,33 @@ class GlobalConfig {
      */
     function buildDatabaseDescription() {
 
-        if (!GlobalConfig::getDatabaseDescriptionIsInitialized() ||
-                $this->getConf()->getSessionDebugEnable()
-        ) {
+//        if (!GlobalConfig::getDatabaseDescriptionIsInitialized()
+////                ||                $this->getConf()->getSessionDebugEnable()
+//        ) {
             DatabaseDescription::buildDatabaseDescription($this->getConf()->getMysqlDatabaseName());
 
             /**
              * Liste des modules public
              */
-            $req = "SELECT * FROM intranet_modules "
-                    . "WHERE public_intranet_modules='1' "
-                    . "ORDER BY classement_intranet_modules DESC"
-            ;
-            $_SESSION["intranet_module_public"] = DatabaseOperation::convertSqlResultWithoutKeyToArray(DatabaseOperation::query($req));
+            $_SESSION["intranet_module_public"] = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
+                            "SELECT * FROM " . IntranetModulesModel::TABLENAME
+                            . " WHERE " . IntranetModulesModel::FIELDNAME_PUBLIC_INTRANET_MODULES . "='1' "
+                            . " ORDER BY " . IntranetModulesModel::FIELDNAME_CLASSEMENT_INTRANET_MODULES . " DESC"
+            );
 
-            $req = "SELECT * FROM intranet_modules";
-            $result = DatabaseOperation::query($req);
-            while ($rows = mysql_fetch_array($result)) {
-                $_SESSION["intranet_modules"][$rows["nom_intranet_modules"]]["id_intranet_modules"] = $rows["id_intranet_modules"];
-                $_SESSION["intranet_modules"][$rows["nom_intranet_modules"]]["nom_intranet_modules"] = $rows["nom_intranet_modules"];
-                $_SESSION["intranet_modules"][$rows["nom_intranet_modules"]]["nom_usuel_intranet_modules"] = $rows["nom_usuel_intranet_modules"];
-                $_SESSION["intranet_modules"][$rows["nom_intranet_modules"]]["version_intranet_modules"] = $rows["version_intranet_modules"];
-                $_SESSION["intranet_modules"][$rows["nom_intranet_modules"]]["visible_intranet_modules"] = $rows["visible_intranet_modules"];
-                $_SESSION["intranet_modules"][$rows["nom_intranet_modules"]]["classement_intranet_modules"] = $rows["classement_intranet_modules"];
-                $_SESSION["intranet_modules"][$rows["nom_intranet_modules"]]["public_intranet_modules"] = $rows["public_intranet_modules"];
-                $_SESSION["intranet_modules"][$rows["nom_intranet_modules"]]["css_intranet_module"] = $rows["css_intranet_module"];
+            $array = DatabaseOperation::convertSqlStatementWithoutKeyToArray("SELECT * FROM " . IntranetModulesModel::TABLENAME);
+            foreach ($array as $rows) {
+                $_SESSION[IntranetModulesModel::TABLENAME][$rows[IntranetModulesModel::FIELDNAME_NOM_INTRANET_MODULES]]["id_intranet_modules"] = $rows["id_intranet_modules"];
+                $_SESSION[IntranetModulesModel::TABLENAME][$rows[IntranetModulesModel::FIELDNAME_NOM_INTRANET_MODULES]]["nom_intranet_modules"] = $rows["nom_intranet_modules"];
+                $_SESSION[IntranetModulesModel::TABLENAME][$rows[IntranetModulesModel::FIELDNAME_NOM_INTRANET_MODULES]]["nom_usuel_intranet_modules"] = $rows["nom_usuel_intranet_modules"];
+                $_SESSION[IntranetModulesModel::TABLENAME][$rows[IntranetModulesModel::FIELDNAME_NOM_INTRANET_MODULES]]["version_intranet_modules"] = $rows["version_intranet_modules"];
+                $_SESSION[IntranetModulesModel::TABLENAME][$rows[IntranetModulesModel::FIELDNAME_NOM_INTRANET_MODULES]]["visible_intranet_modules"] = $rows["visible_intranet_modules"];
+                $_SESSION[IntranetModulesModel::TABLENAME][$rows[IntranetModulesModel::FIELDNAME_NOM_INTRANET_MODULES]]["classement_intranet_modules"] = $rows["classement_intranet_modules"];
+                $_SESSION[IntranetModulesModel::TABLENAME][$rows[IntranetModulesModel::FIELDNAME_NOM_INTRANET_MODULES]]["public_intranet_modules"] = $rows["public_intranet_modules"];
+                $_SESSION[IntranetModulesModel::TABLENAME][$rows[IntranetModulesModel::FIELDNAME_NOM_INTRANET_MODULES]]["css_intranet_module"] = $rows["css_intranet_module"];
             }
             $this->setDatabaseIsInitializedToTrue();
-        } //Fin des enregistrements MySQL en session
+//        } //Fin des enregistrements MySQL en session
     }
 
     function buildEnvironmentConf() {
@@ -232,16 +240,20 @@ class GlobalConfig {
     /**
      * Ouverture de la connexion MySQL  
      */
-    static function getDatabaseConnexion() {
-        $globalConfig = new GlobalConfig();
-        $db = new PDO(GlobalConfig::MYSQL_HOST . $globalConfig->getConf()->getMysqlServerName()
-                . GlobalConfig::MYSQL_DBNAME . $globalConfig->getConf()->getMysqlDatabaseName()
-                , $globalConfig->getConf()->getMysqlDatabaseAuthentificationUsername()
-                , $globalConfig->getConf()->getMysqlDatabaseAuthentificationPassword()
+    private static function openDatabaseConnexion2($paramGlobalConfig) {
+        $db = new PDO(GlobalConfig::MYSQL_HOST . $paramGlobalConfig->getConf()->getMysqlServerName()
+                . GlobalConfig::MYSQL_DBNAME . $paramGlobalConfig->getConf()->getMysqlDatabaseName()
+                , $paramGlobalConfig->getConf()->getMysqlDatabaseAuthentificationUsername()
+                , $paramGlobalConfig->getConf()->getMysqlDatabaseAuthentificationPassword()
         );
         $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING);
         $db->exec("SET NAMES utf8");
         return $db;
+    }
+
+    static function getDatabaseConnexion() {
+        //return Lib::isDefined(self::VARNAME_DATABASE_CONNEXION);
+        return GlobalConfig::openDatabaseConnexion2(new GlobalConfig());
     }
 
     static function getIsGlobalConfigExistInPhpSession() {

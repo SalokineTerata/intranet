@@ -48,7 +48,7 @@ class FtaWorkflowModel extends AbstractModel {
      */
     public static function ShowListeDeroulanteNomWorkflowByAcces($paramIdUser, $paramObjetList, $paramIsEditable) {
 
-        $arrayWorkflow = DatabaseOperation::convertSqlQueryWithKeyAsFirstFieldToArray(
+        $arrayWorkflow = DatabaseOperation::convertSqlStatementWithKeyAsFirstFieldToArray(
                         "SELECT DISTINCT " . FtaWorkflowModel::KEYNAME . "," . FtaWorkflowModel::FIELDNAME_DESCRIPTION_FTA_WORKFLOW
                         . " FROM " . FtaWorkflowModel::TABLENAME
                         . ", " . IntranetDroitsAccesModel::TABLENAME
@@ -81,7 +81,7 @@ class FtaWorkflowModel extends AbstractModel {
     public static function ShowListeDeroulanteNomWorkflowByAccesAndIdFta($paramIdUser, $paramObjetList, $paramIsEditable, $paramIdFta) {
 
         $ftaModel = new FtaModel($paramIdFta);
-        $arrayWorkflow = DatabaseOperation::convertSqlQueryWithKeyAsFirstFieldToArray(
+        $arrayWorkflow = DatabaseOperation::convertSqlStatementWithKeyAsFirstFieldToArray(
                         "SELECT DISTINCT " . FtaWorkflowModel::KEYNAME . "," . FtaWorkflowModel::FIELDNAME_DESCRIPTION_FTA_WORKFLOW
                         . " FROM " . FtaWorkflowModel::TABLENAME
                         . ", " . IntranetDroitsAccesModel::TABLENAME

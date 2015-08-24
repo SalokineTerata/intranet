@@ -150,7 +150,7 @@ class DatabaseRecord extends SessionSaveAndRestoreAbstract {
                  * Stockage de l'enregistrement en mémoire dans l'objet Recordset
                  */
                 $this->setArrayFieldNameFieldValueInMemory(
-                        DatabaseOperation::convertSqlResultFirstRowToArray(
+                        DatabaseOperation::convertSqlStatementFirstRowToArray(
                                 $sqlResultRecordFromDatabase
                         )
                 );

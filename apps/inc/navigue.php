@@ -58,19 +58,21 @@ foreach ($intranet_module_public as $rows1) {
  * ************************************** */
 if ($id_user) {//Si l'utilisateur est connecté
     //Requête selectionnant les modules de l'intranet visible par l'utilisateur pouvant consulter le droit d'accès:
-    $req1 = "SELECT * FROM intranet_modules, intranet_droits_acces "
-            . "WHERE (intranet_modules.id_intranet_modules=intranet_droits_acces.id_intranet_modules "
-            . "AND visible_intranet_modules='1' "
-            . "AND id_intranet_actions='1' "
-            . "AND intranet_droits_acces.id_user=" . $id_user . " "
-            . "AND intranet_droits_acces.niveau_intranet_droits_acces='1') "
-            . "ORDER BY classement_intranet_modules DESC"
-    ;
-    $result1 = DatabaseOperation::query($req1);
+    $arrayModule = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
+                    " SELECT " . IntranetModulesModel::FIELDNAME_NOM_INTRANET_MODULES . "," . IntranetModulesModel::FIELDNAME_NOM_USUEL_INTRANET_MODULES
+                    . " FROM " . IntranetModulesModel::TABLENAME . ", " . IntranetDroitsAccesModel::TABLENAME
+                    . " WHERE (" . IntranetModulesModel::TABLENAME . "." . IntranetModulesModel::KEYNAME
+                    . "=" . IntranetDroitsAccesModel::TABLENAME . "." . IntranetDroitsAccesModel::FIELDNAME_ID_INTRANET_MODULES
+                    . " AND " . IntranetModulesModel::FIELDNAME_VISIBLE_INTRANET_MODULES . "='1' "
+                    . " AND " . IntranetDroitsAccesModel::FIELDNAME_ID_INTRANET_ACTIONS . "='1' "
+                    . " AND " . IntranetDroitsAccesModel::TABLENAME . "." . IntranetDroitsAccesModel::FIELDNAME_ID_USER . "=" . $id_user . " "
+                    . " AND " . IntranetDroitsAccesModel::TABLENAME . "." . IntranetDroitsAccesModel::FIELDNAME_NIVEAU_INTRANET_DROITS_ACCES . "='1') "
+                    . " ORDER BY " . IntranetModulesModel::FIELDNAME_CLASSEMENT_INTRANET_MODULES . " DESC"
+    );
 
-    while ($rows1 = mysql_fetch_array($result1)) {
-        $nom_intranet_modules = $rows1["nom_intranet_modules"];
-        $nom_usuel_intranet_modules = $rows1["nom_usuel_intranet_modules"];
+    foreach ($arrayModule as $rowsModule) {
+        $nom_intranet_modules = $rowsModule[IntranetModulesModel::FIELDNAME_NOM_INTRANET_MODULES];
+        $nom_usuel_intranet_modules = $rowsModule[IntranetModulesModel::FIELDNAME_NOM_USUEL_INTRANET_MODULES];
         if ($i > $limite_colonne) {
             echo "</tr>";
             $i = 1;

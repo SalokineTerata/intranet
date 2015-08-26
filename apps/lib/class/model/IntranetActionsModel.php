@@ -159,6 +159,14 @@ class IntranetActionsModel extends AbstractModel {
         }
         return $req;
     }
+    public static function AddIdIntranetActionParent($paramIdIntranetActionsParent) {
+        if ($paramIdIntranetActionsParent) {
+            foreach ($paramIdIntranetActionsParent as $value) {
+                $req .= " OR " . IntranetActionsModel::TABLENAME . "." . IntranetActionsModel::FIELDNAME_PARENT_INTRANET_ACTIONS . "=" . $value . " ";
+            }
+        }
+        return $req;
+    }
 
     public static function getNameSiteByWorkflow($paramIdUser, $paramArrayIdWorkflow) {
         if ($paramArrayIdWorkflow) {

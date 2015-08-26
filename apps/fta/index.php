@@ -29,8 +29,10 @@ print_page_begin($disable_full_page, $menu_file);
  * Initilisation
  */
 $globalConfig = new GlobalConfig();
-$id_user = $globalConfig->getAuthenticatedUser()->getKeyValue();
-$lieuGeo = $globalConfig->getAuthenticatedUser()->getLieuGeo();
+if ($globalConfig->getAuthenticatedUser()) {
+    $id_user = $globalConfig->getAuthenticatedUser()->getKeyValue();
+    $lieuGeo = $globalConfig->getAuthenticatedUser()->getLieuGeo();
+}
 
 /* * ***********
   Début Code PHP

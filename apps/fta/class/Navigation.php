@@ -124,15 +124,24 @@ class Navigation {
         $ProcessusEnLecture = array();
         $globalconfig = new GlobalConfig();
         $id_user = $globalconfig->getAuthenticatedUser()->getKeyValue();
-        $modelFta = new FtaModel(self::$id_fta);
-        $id_fta_workflow = $modelFta->getDataField(FtaModel::FIELDNAME_WORKFLOW)->getFieldValue();
-        $ftaWorkflowModel = new FtaWorkflowModel($id_fta_workflow);
-        $id_parent_intranet_actions = $ftaWorkflowModel->getDataField(FtaWorkflowModel::FIELDNAME_ID_INTRANET_ACTIONS)->getFieldValue();
-        $id_intranet_actions[] = IntranetActionsModel::getIdIntranetActionsRoleFromIdParentActionNavigation($id_parent_intranet_actions);
-        $id_actions_role = FtaActionRoleModel::getIdFtaActionRoleFromIdIntranetAtions($id_intranet_actions);
-        $ftaActionRoleModel = new FtaActionRoleModel($id_actions_role);
+        $idFtaRole = self::$id_fta_role;
+        /**
+         * Cette partie n'est plus utilisé car le but était de récupérer le rôle corespondant à l'utilisateur connecter
+         * mais désormais id_fta_role est récupé dans l'URL
+         */
+        /*
+         * $modelFta = new FtaModel(self::$id_fta);
+         * $id_fta_workflow = $modelFta->getDataField(FtaModel::FIELDNAME_WORKFLOW)->getFieldValue();
+         * $ftaWorkflowModel = new FtaWorkflowModel($id_fta_workflow);
+         * $id_parent_intranet_actions = $ftaWorkflowModel->getDataField(FtaWorkflowModel::FIELDNAME_ID_INTRANET_ACTIONS)->getFieldValue();
+         * $id_intranet_actions[] = IntranetActionsModel::getIdIntranetActionsRoleFromIdParentActionNavigation($id_parent_intranet_actions);
+         * $id_actions_role = FtaActionRoleModel::getIdFtaActionRoleFromIdIntranetAtions($id_intranet_actions);
+         * $ftaActionRoleModel = new FtaActionRoleModel($id_actions_role);
+         */
 
-        //Si une action est donnée, alors construction du menu des chapitres
+        /*
+         * Si une action est donnée, alors construction du menu des chapitres
+         */
         if (self::$synthese_action) {
             /*
              * Etat d'avancement de la FTA et Recherche des processus validés (et donc en lecture-seule)             * 
@@ -163,7 +172,7 @@ class Navigation {
                             . " AND " . FtaActionRoleModel::TABLENAME . "." . FtaActionRoleModel::FIELDNAME_ID_INTRANET_ACTIONS
                             . "=" . IntranetActionsModel::TABLENAME . "." . IntranetActionsModel::KEYNAME
                             . " AND " . FtaActionRoleModel::TABLENAME . "." . FtaActionRoleModel::FIELDNAME_ID_FTA_ROLE
-                            . "=" . $ftaActionRoleModel->getDataField(FtaActionRoleModel::FIELDNAME_ID_FTA_ROLE)->getFieldValue()
+                            . "=" . $idFtaRole
                             . " AND " . IntranetActionsModel::TABLENAME . "." . IntranetActionsModel::KEYNAME
                             . "=" . IntranetDroitsAccesModel::TABLENAME . "." . IntranetDroitsAccesModel::FIELDNAME_ID_INTRANET_ACTIONS  //Jointure
                             . " AND " . IntranetDroitsAccesModel::TABLENAME . "." . IntranetDroitsAccesModel::FIELDNAME_ID_INTRANET_MODULES
@@ -259,7 +268,7 @@ class Navigation {
                     . " AND " . FtaActionRoleModel::TABLENAME . "." . FtaActionRoleModel::FIELDNAME_ID_INTRANET_ACTIONS
                     . "=" . IntranetActionsModel::TABLENAME . "." . IntranetActionsModel::KEYNAME
                     . " AND " . FtaActionRoleModel::TABLENAME . "." . FtaActionRoleModel::FIELDNAME_ID_FTA_ROLE
-                    . "=" . $ftaActionRoleModel->getDataField(FtaActionRoleModel::FIELDNAME_ID_FTA_ROLE)->getFieldValue()
+                    . "=" . $idFtaRole
                     . " AND " . IntranetActionsModel::TABLENAME . "." . IntranetActionsModel::KEYNAME
                     . "=" . IntranetDroitsAccesModel::TABLENAME . "." . IntranetDroitsAccesModel::FIELDNAME_ID_INTRANET_ACTIONS  //Jointure
                     . " AND " . IntranetDroitsAccesModel::TABLENAME . "." . IntranetDroitsAccesModel::FIELDNAME_ID_INTRANET_MODULES

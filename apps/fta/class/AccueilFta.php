@@ -32,6 +32,7 @@ class AccueilFta {
     const VALUE_10 = 10;
     const VALUE_11 = 11;
     const VALUE_12 = 12;
+    const VALUE_100 = 100;
     const VALUE_100_POURCENTAGE = "100%";
 
     protected static $abrevationFtaEtat;
@@ -632,7 +633,7 @@ class AccueilFta {
                  */
 
                 $taux_temp = FtaSuiviProjetModel::getFtaTauxValidation($idFta);
-                $recap[$idFta] = round($taux_temp[AccueilFta::VALUE_0] * 100, AccueilFta::VALUE_0) . "%";
+                $recap[$idFta] = round($taux_temp[AccueilFta::VALUE_0] * AccueilFta::VALUE_100, AccueilFta::VALUE_0) . "%";
 
                 /*
                  * Definition de la couleur de la cellule selon l'état d'avancement

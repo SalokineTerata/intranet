@@ -4,11 +4,13 @@
 //Récupération des droits d'accès necessaire
 $module = Lib::getModule();
 $globalConfig = new GlobalConfig();
-$id_user = $globalConfig->getAuthenticatedUser()->getKeyValue();
-
+if ($globalConfig->getAuthenticatedUser()) {
+    $id_user = $globalConfig->getAuthenticatedUser()->getKeyValue();
+    $idFtaRoleEncoursDefault = FtaRoleModel::getKeyNameOfFirstRoleByIdUser($id_user);
+}
 $module_consultation = $module . "_consultation";
 $module_modification = $module . "_modification";
-$idFtaRoleEncoursDefault = FtaRoleModel::getKeyNameOfFirstRoleByIdUser($id_user);
+
 $idFtaRole = Lib::getParameterFromRequest(FtaRoleModel::KEYNAME, $idFtaRoleEncoursDefault);
 $fta_definition = Lib::isDefined("fta_definition");
 $fta_composition = Lib::isDefined("fta_composition");

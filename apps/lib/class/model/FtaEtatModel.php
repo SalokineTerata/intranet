@@ -66,6 +66,12 @@ class FtaEtatModel extends AbstractModel {
                  *  Nous recuperons la liste des identifiant intranet actions selon le role et l'utilisateur connecté
                  */
                 $idIntranetActions = IntranetDroitsAccesModel::getIdIntranetActionsByRoleANDSiteFromUser($paramIdUser, $paramRole);
+                /**
+                 * Nous avons un tableau des id intranet actions pour lesquels l'utilisateur à accès pour tel rôle
+                 */
+                $checkIdIntranetActions = IntranetDroitsAccesModel::checkIdIntranetActionsByRoleANDSiteFromUser($paramIdUser, $paramRole);
+
+                $idIntranetActionsValide = array_intersect($idIntranetActions, $checkIdIntranetActions);
 
                 $reqTmp = "SELECT DISTINCT " . FtaModel::TABLENAME . "." . FtaModel::KEYNAME
                         . "," . FtaProcessusCycleModel::TABLENAME . "." . FtaProcessusCycleModel::FIELDNAME_PROCESSUS_INIT
@@ -100,11 +106,9 @@ class FtaEtatModel extends AbstractModel {
                         . " AND " . IntranetDroitsAccesModel::FIELDNAME_ID_USER . "=" . $paramIdUser                                                  // Nous recuperons l'identifiant de l'utilisateur connecté
                         . " AND " . FtaModel::FIELDNAME_ID_FTA_ETAT . "=" . $paramIdFtaEtat                                                           // Nous recuperons l'identifiant de l'etat de la Fta
                         . " AND " . FtaWorkflowStructureModel::TABLENAME . "." . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_ROLE . "=" . $paramRole // Nous recuperons le type de role pour l'utilisateur
-                        . " AND " . FtaProcessusCycleModel::FIELDNAME_FTA_ETAT . "='" . $paramEtat . "'";                                             // Nous recuperons l'abréviation de l'etat de la Fta
+                        . " AND " . FtaProcessusCycleModel::FIELDNAME_FTA_ETAT . "='" . $paramEtat . "'"                                            // Nous recuperons l'abréviation de l'etat de la Fta
+                        . " AND ( 0 " . IntranetActionsModel::AddIdIntranetAction($idIntranetActionsValide) . ")";
 
-                $reqTmp.= " AND ( 0 " . IntranetActionsModel::AddIdIntranetAction($idIntranetActions);
-
-                $reqTmp .= ")";
 
                 /*
                  * On obtient les fta à vérifié dont tous les chapitres ne sont pas validés
@@ -150,6 +154,12 @@ class FtaEtatModel extends AbstractModel {
 
                 //Récupération des suivis de projet gérés par l'utilisateur et non validé
                 $idIntranetActions = IntranetDroitsAccesModel::getIdIntranetActionsByRoleANDSiteFromUser($paramIdUser, $paramRole);
+                /**
+                 * Nous avons un tableau des id intranet actions pour lesquels l'utilisateur à accès pour tel rôle
+                 */
+                $checkIdIntranetActions = IntranetDroitsAccesModel::checkIdIntranetActionsByRoleANDSiteFromUser($paramIdUser, $paramRole);
+
+                $idIntranetActionsValide = array_intersect($idIntranetActions, $checkIdIntranetActions);
 
                 /*
                  * Rajouter une condition limitant fta action site voir exemple chef de projet en tant que qualité n'a le droit de voir que les fta workflow 2
@@ -188,10 +198,9 @@ class FtaEtatModel extends AbstractModel {
                         . " AND " . IntranetDroitsAccesModel::FIELDNAME_ID_USER . "=" . $paramIdUser                                                    // Nous recuperons l'identifiant de l'utilisateur connecté
                         . " AND " . FtaModel::FIELDNAME_ID_FTA_ETAT . "=" . $paramIdFtaEtat                                                             // Nous recuperons l'identifiant de l'etat de la Fta
                         . " AND " . FtaWorkflowStructureModel::TABLENAME . "." . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_ROLE . "=" . $paramRole    // Nous recuperons le type de role pour l'utilisateur
-                        . " AND " . FtaProcessusCycleModel::FIELDNAME_FTA_ETAT . "='" . $paramEtat . "'";                                               // Nous recuperons l'abréviation de l'etat de la Fta
-                $reqTmp.= " AND ( 0 " . IntranetActionsModel::AddIdIntranetAction($idIntranetActions);
+                        . " AND " . FtaProcessusCycleModel::FIELDNAME_FTA_ETAT . "='" . $paramEtat . "'"                                               // Nous recuperons l'abréviation de l'etat de la Fta
+                        . " AND ( 0 " . IntranetActionsModel::AddIdIntranetAction($idIntranetActionsValide) . ")";
 
-                $reqTmp .= ")";
 
                 /*
                  * On obtient les fta à vérifié dont tous les chapitres ne sont pas validés
@@ -245,6 +254,13 @@ class FtaEtatModel extends AbstractModel {
                  *  Nous recuperons la liste des identifiant intranet actions selon le role et l'utilisateur connecté
                  */
                 $idIntranetActions = IntranetDroitsAccesModel::getIdIntranetActionsByRoleANDSiteFromUser($paramIdUser, $paramRole);
+                /**
+                 * Nous avons un tableau des id intranet actions pour lesquels l'utilisateur à accès pour tel rôle
+                 */
+                $checkIdIntranetActions = IntranetDroitsAccesModel::checkIdIntranetActionsByRoleANDSiteFromUser($paramIdUser, $paramRole);
+
+                $idIntranetActionsValide = array_intersect($idIntranetActions, $checkIdIntranetActions);
+
 
                 $reqTmp = "SELECT DISTINCT " . FtaModel::TABLENAME . "." . FtaModel::KEYNAME
                         . "," . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_PROCESSUS
@@ -278,11 +294,9 @@ class FtaEtatModel extends AbstractModel {
                         . " AND " . IntranetDroitsAccesModel::FIELDNAME_ID_USER . "=" . $paramIdUser                                                  // Nous recuperons l'identifiant de l'utilisateur connecté
                         . " AND " . FtaModel::FIELDNAME_ID_FTA_ETAT . "=" . $paramIdFtaEtat                                                           // Nous recuperons l'identifiant de l'etat de la Fta
                         . " AND " . FtaWorkflowStructureModel::TABLENAME . "." . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_ROLE . "=" . $paramRole // Nous recuperons le type de role pour l'utilisateur
-                        . " AND " . FtaProcessusCycleModel::FIELDNAME_FTA_ETAT . "='" . $paramEtat . "'";                                             // Nous recuperons l'abréviation de l'etat de la Fta
+                        . " AND " . FtaProcessusCycleModel::FIELDNAME_FTA_ETAT . "='" . $paramEtat . "'"                                             // Nous recuperons l'abréviation de l'etat de la Fta
+                        . " AND ( 0 " . IntranetActionsModel::AddIdIntranetAction($idIntranetActionsValide) . ")";
 
-                $reqTmp.= " AND ( 0 " . IntranetActionsModel::AddIdIntranetAction($idIntranetActions);
-
-                $reqTmp .= ")";
 
                 /*
                  * On obtient les fta à vérifié dont tous les chapitres sont validés

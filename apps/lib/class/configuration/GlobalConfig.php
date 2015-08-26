@@ -142,29 +142,29 @@ class GlobalConfig {
 //        if (!GlobalConfig::getDatabaseDescriptionIsInitialized()
 ////                ||                $this->getConf()->getSessionDebugEnable()
 //        ) {
-            DatabaseDescription::buildDatabaseDescription($this->getConf()->getMysqlDatabaseName());
+        DatabaseDescription::buildDatabaseDescription($this->getConf()->getMysqlDatabaseName());
 
-            /**
-             * Liste des modules public
-             */
-            $_SESSION["intranet_module_public"] = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
-                            "SELECT * FROM " . IntranetModulesModel::TABLENAME
-                            . " WHERE " . IntranetModulesModel::FIELDNAME_PUBLIC_INTRANET_MODULES . "='1' "
-                            . " ORDER BY " . IntranetModulesModel::FIELDNAME_CLASSEMENT_INTRANET_MODULES . " DESC"
-            );
+        /**
+         * Liste des modules public
+         */
+        $_SESSION["intranet_module_public"] = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
+                        "SELECT * FROM " . IntranetModulesModel::TABLENAME
+                        . " WHERE " . IntranetModulesModel::FIELDNAME_PUBLIC_INTRANET_MODULES . "='1' "
+                        . " ORDER BY " . IntranetModulesModel::FIELDNAME_CLASSEMENT_INTRANET_MODULES . " DESC"
+        );
 
-            $array = DatabaseOperation::convertSqlStatementWithoutKeyToArray("SELECT * FROM " . IntranetModulesModel::TABLENAME);
-            foreach ($array as $rows) {
-                $_SESSION[IntranetModulesModel::TABLENAME][$rows[IntranetModulesModel::FIELDNAME_NOM_INTRANET_MODULES]]["id_intranet_modules"] = $rows["id_intranet_modules"];
-                $_SESSION[IntranetModulesModel::TABLENAME][$rows[IntranetModulesModel::FIELDNAME_NOM_INTRANET_MODULES]]["nom_intranet_modules"] = $rows["nom_intranet_modules"];
-                $_SESSION[IntranetModulesModel::TABLENAME][$rows[IntranetModulesModel::FIELDNAME_NOM_INTRANET_MODULES]]["nom_usuel_intranet_modules"] = $rows["nom_usuel_intranet_modules"];
-                $_SESSION[IntranetModulesModel::TABLENAME][$rows[IntranetModulesModel::FIELDNAME_NOM_INTRANET_MODULES]]["version_intranet_modules"] = $rows["version_intranet_modules"];
-                $_SESSION[IntranetModulesModel::TABLENAME][$rows[IntranetModulesModel::FIELDNAME_NOM_INTRANET_MODULES]]["visible_intranet_modules"] = $rows["visible_intranet_modules"];
-                $_SESSION[IntranetModulesModel::TABLENAME][$rows[IntranetModulesModel::FIELDNAME_NOM_INTRANET_MODULES]]["classement_intranet_modules"] = $rows["classement_intranet_modules"];
-                $_SESSION[IntranetModulesModel::TABLENAME][$rows[IntranetModulesModel::FIELDNAME_NOM_INTRANET_MODULES]]["public_intranet_modules"] = $rows["public_intranet_modules"];
-                $_SESSION[IntranetModulesModel::TABLENAME][$rows[IntranetModulesModel::FIELDNAME_NOM_INTRANET_MODULES]]["css_intranet_module"] = $rows["css_intranet_module"];
-            }
-            $this->setDatabaseIsInitializedToTrue();
+        $array = DatabaseOperation::convertSqlStatementWithoutKeyToArray("SELECT * FROM " . IntranetModulesModel::TABLENAME);
+        foreach ($array as $rows) {
+            $_SESSION[IntranetModulesModel::TABLENAME][$rows[IntranetModulesModel::FIELDNAME_NOM_INTRANET_MODULES]]["id_intranet_modules"] = $rows["id_intranet_modules"];
+            $_SESSION[IntranetModulesModel::TABLENAME][$rows[IntranetModulesModel::FIELDNAME_NOM_INTRANET_MODULES]]["nom_intranet_modules"] = $rows["nom_intranet_modules"];
+            $_SESSION[IntranetModulesModel::TABLENAME][$rows[IntranetModulesModel::FIELDNAME_NOM_INTRANET_MODULES]]["nom_usuel_intranet_modules"] = $rows["nom_usuel_intranet_modules"];
+            $_SESSION[IntranetModulesModel::TABLENAME][$rows[IntranetModulesModel::FIELDNAME_NOM_INTRANET_MODULES]]["version_intranet_modules"] = $rows["version_intranet_modules"];
+            $_SESSION[IntranetModulesModel::TABLENAME][$rows[IntranetModulesModel::FIELDNAME_NOM_INTRANET_MODULES]]["visible_intranet_modules"] = $rows["visible_intranet_modules"];
+            $_SESSION[IntranetModulesModel::TABLENAME][$rows[IntranetModulesModel::FIELDNAME_NOM_INTRANET_MODULES]]["classement_intranet_modules"] = $rows["classement_intranet_modules"];
+            $_SESSION[IntranetModulesModel::TABLENAME][$rows[IntranetModulesModel::FIELDNAME_NOM_INTRANET_MODULES]]["public_intranet_modules"] = $rows["public_intranet_modules"];
+            $_SESSION[IntranetModulesModel::TABLENAME][$rows[IntranetModulesModel::FIELDNAME_NOM_INTRANET_MODULES]]["css_intranet_module"] = $rows["css_intranet_module"];
+        }
+        $this->setDatabaseIsInitializedToTrue();
 //        } //Fin des enregistrements MySQL en session
     }
 
@@ -244,15 +244,18 @@ class GlobalConfig {
         $db = new PDO(GlobalConfig::MYSQL_HOST . $paramGlobalConfig->getConf()->getMysqlServerName()
                 . GlobalConfig::MYSQL_DBNAME . $paramGlobalConfig->getConf()->getMysqlDatabaseName()
                 , $paramGlobalConfig->getConf()->getMysqlDatabaseAuthentificationUsername()
-                , $paramGlobalConfig->getConf()->getMysqlDatabaseAuthentificationPassword()
+                , $paramGlobalConfig->getConf()->getMysqlDatabaseAuthentificationPassword()                
         );
-        $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING);
+        /**
+         * PDO définit simplement le code d'erreur à inspecter
+         * et il émettra un message E_WARNING traditionnel
+         */
+        $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_SILENT);
         $db->exec("SET NAMES utf8");
         return $db;
     }
 
     static function getDatabaseConnexion() {
-        //return Lib::isDefined(self::VARNAME_DATABASE_CONNEXION);
         return GlobalConfig::openDatabaseConnexion2(new GlobalConfig());
     }
 

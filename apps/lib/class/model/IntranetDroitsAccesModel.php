@@ -14,6 +14,12 @@ class IntranetDroitsAccesModel {
     const FIELDNAME_ID_INTRANET_ACTIONS = "id_intranet_actions";
     const FIELDNAME_NIVEAU_INTRANET_DROITS_ACCES = "niveau_intranet_droits_acces";
 
+    /**
+     * Récupération de Id intranet actions par utilisateur et par site
+     * @param type $paramIdUser
+     * @param type $paramIdFtaRole
+     * @return type
+     */
     public static function getIdIntranetActionsByRoleANDSiteFromUser($paramIdUser, $paramIdFtaRole) {
         $arrayIdIntranetActions = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
                         "SELECT " . FtaActionRoleModel::TABLENAME . "." . FtaActionRoleModel::FIELDNAME_ID_INTRANET_ACTIONS
@@ -34,6 +40,38 @@ class IntranetDroitsAccesModel {
         if ($arrayIdIntranetActions) {
             foreach ($arrayIdIntranetActions as $rowsIdIntranetActions) {
                 $IdIntranetActions[] = $rowsIdIntranetActions[IntranetDroitsAccesModel::FIELDNAME_ID_INTRANET_ACTIONS];
+            }
+        }
+        return $IdIntranetActions;
+    }
+
+    public static function checkIdIntranetActionsByRoleANDSiteFromUser($paramIdUser, $paramIdFtaRole) {
+        $arrayIdIntranetActionsParent = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
+                        "SELECT DISTINCT " . IntranetActionsModel::TABLENAME . "." . IntranetActionsModel::FIELDNAME_PARENT_INTRANET_ACTIONS
+                        . " FROM " . IntranetDroitsAccesModel::TABLENAME . ", " . FtaActionRoleModel::TABLENAME
+                        . ", " . IntranetActionsModel::TABLENAME
+                        . " WHERE " . FtaActionRoleModel::TABLENAME . "." . FtaActionRoleModel::FIELDNAME_ID_INTRANET_ACTIONS
+                        . " = " . IntranetDroitsAccesModel::TABLENAME . "." . IntranetDroitsAccesModel::FIELDNAME_ID_INTRANET_ACTIONS
+                        . " AND " . FtaActionRoleModel::TABLENAME . "." . FtaActionRoleModel::FIELDNAME_ID_FTA_ROLE . "=" . $paramIdFtaRole
+                        . " AND " . IntranetDroitsAccesModel::FIELDNAME_ID_USER . "=" . $paramIdUser
+                        . " AND " . IntranetDroitsAccesModel::FIELDNAME_NIVEAU_INTRANET_DROITS_ACCES . " =1"
+                        . " AND " . IntranetActionsModel::TABLENAME . "." . IntranetActionsModel::KEYNAME
+                        . " = " . IntranetDroitsAccesModel::TABLENAME . "." . IntranetDroitsAccesModel::FIELDNAME_ID_INTRANET_ACTIONS
+        );
+
+        if ($arrayIdIntranetActionsParent) {
+            foreach ($arrayIdIntranetActionsParent as $rowsIdIntranetActionsParent) {
+                $IdIntranetActionsParent[] = $rowsIdIntranetActionsParent[IntranetActionsModel::FIELDNAME_PARENT_INTRANET_ACTIONS];
+            }
+            $arrayIdIntranetActions = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
+                            "SELECT DISTINCT " . IntranetActionsModel::TABLENAME . "." . IntranetActionsModel::KEYNAME
+                            . " FROM " . IntranetActionsModel::TABLENAME
+                            . " WHERE ( 0 " . IntranetActionsModel::AddIdIntranetActionParent($IdIntranetActionsParent) . " )");
+
+            if ($arrayIdIntranetActions) {
+                foreach ($arrayIdIntranetActions as $rowsIdIntranetActions) {
+                    $IdIntranetActions[] = $rowsIdIntranetActions[IntranetDroitsAccesModel::FIELDNAME_ID_INTRANET_ACTIONS];
+                }
             }
         }
         return $IdIntranetActions;

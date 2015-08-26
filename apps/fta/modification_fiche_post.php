@@ -118,108 +118,108 @@ switch ($action) {
          * Gestion des délais (Attention, uniquement sur le chapitre identité)
          */
         /**
-        if ($nom_fta_chapitre_encours == "identite") {
-            // //Si oui, dans ce cas, Récupération de la liste des processus affectés
-            $arrayFtaProcessusAndCycle = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
-                            "SELECT DISTINCT " . FtaProcessusCycleModel::FIELDNAME_PROCESSUS_INIT . ", " . FtaProcessusModel::FIELDNAME_NOM . ", " . FtaProcessusModel::FIELDNAME_DELAI
-                            . " FROM " . FtaProcessusCycleModel::TABLENAME . ", " . FtaProcessusModel::TABLENAME
-                            . " WHERE " . FtaProcessusCycleModel::FIELDNAME_FTA_ETAT . "='" . $abreviationFtaEtat . "'"
-                            . " AND " . FtaProcessusCycleModel::FIELDNAME_PROCESSUS_INIT . "=" . FtaProcessusModel::KEYNAME
-                            . " ORDER BY " . FtaProcessusCycleModel::FIELDNAME_PROCESSUS_INIT
-            );
+          if ($nom_fta_chapitre_encours == "identite") {
+          // //Si oui, dans ce cas, Récupération de la liste des processus affectés
+          $arrayFtaProcessusAndCycle = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
+          "SELECT DISTINCT " . FtaProcessusCycleModel::FIELDNAME_PROCESSUS_INIT . ", " . FtaProcessusModel::FIELDNAME_NOM . ", " . FtaProcessusModel::FIELDNAME_DELAI
+          . " FROM " . FtaProcessusCycleModel::TABLENAME . ", " . FtaProcessusModel::TABLENAME
+          . " WHERE " . FtaProcessusCycleModel::FIELDNAME_FTA_ETAT . "='" . $abreviationFtaEtat . "'"
+          . " AND " . FtaProcessusCycleModel::FIELDNAME_PROCESSUS_INIT . "=" . FtaProcessusModel::KEYNAME
+          . " ORDER BY " . FtaProcessusCycleModel::FIELDNAME_PROCESSUS_INIT
+          );
 
 
 
-            $date_echeance_processus_last = $date_echeance_fta;
-            foreach ($arrayFtaProcessusAndCycle as $rowsArrayFtaProcessusAndCycle) {
+          $date_echeance_processus_last = $date_echeance_fta;
+          foreach ($arrayFtaProcessusAndCycle as $rowsArrayFtaProcessusAndCycle) {
 
-                //Construction de la liste de processus
-                $html_date.="";
-                $champ_date_echeance_processus = "date_echeance_processus_" . $rowsArrayFtaProcessusAndCycle[FtaProcessusCycleModel::FIELDNAME_PROCESSUS_INIT];
+          //Construction de la liste de processus
+          $html_date.="";
+          $champ_date_echeance_processus = "date_echeance_processus_" . $rowsArrayFtaProcessusAndCycle[FtaProcessusCycleModel::FIELDNAME_PROCESSUS_INIT];
 
-                //Une date d'échéance pour la FTA a-t-elle été saisie ?
-                if ($date_echeance_fta) {
-                    //Dans ce cas on cherche à renregistrer la date d'échéance des processus
-                    $$champ_date_echeance_processus = Lib::getParameterFromRequest($champ_date_echeance_processus);
+          //Une date d'échéance pour la FTA a-t-elle été saisie ?
+          if ($date_echeance_fta) {
+          //Dans ce cas on cherche à renregistrer la date d'échéance des processus
+          $$champ_date_echeance_processus = Lib::getParameterFromRequest($champ_date_echeance_processus);
 
-                    //Une date a-t-elle été saisie ?
-                    if ($$champ_date_echeance_processus) {
-                        //Controle de cohérence
-                        //Récupération de la liste des processus précédent pour ce cycle de vie
-                        $arrayFtaProcessusAndCyclePrecedent = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
-                                        "SELECT DISTINCT " . FtaProcessusCycleModel::FIELDNAME_PROCESSUS_INIT . ", " . FtaProcessusModel::FIELDNAME_NOM . ", " . FtaProcessusModel::FIELDNAME_DELAI
-                                        . " FROM " . FtaProcessusCycleModel::TABLENAME . ", " . FtaProcessusModel::TABLENAME
-                                        . " WHERE " . FtaProcessusCycleModel::FIELDNAME_FTA_ETAT . "='" . $abreviationFtaEtat . "'"
-                                        . " AND " . FtaProcessusCycleModel::FIELDNAME_PROCESSUS_INIT . "=" . FtaProcessusModel::KEYNAME
-                                        . "AND " . FtaProcessusCycleModel::FIELDNAME_PROCESSUS_NEXT . "=" . $rowsArrayFtaProcessusAndCycle[FtaProcessusCycleModel::FIELDNAME_PROCESSUS_INIT] . " "
-                                        . " ORDER BY " . FtaProcessusCycleModel::FIELDNAME_PROCESSUS_INIT
-                        );
+          //Une date a-t-elle été saisie ?
+          if ($$champ_date_echeance_processus) {
+          //Controle de cohérence
+          //Récupération de la liste des processus précédent pour ce cycle de vie
+          $arrayFtaProcessusAndCyclePrecedent = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
+          "SELECT DISTINCT " . FtaProcessusCycleModel::FIELDNAME_PROCESSUS_INIT . ", " . FtaProcessusModel::FIELDNAME_NOM . ", " . FtaProcessusModel::FIELDNAME_DELAI
+          . " FROM " . FtaProcessusCycleModel::TABLENAME . ", " . FtaProcessusModel::TABLENAME
+          . " WHERE " . FtaProcessusCycleModel::FIELDNAME_FTA_ETAT . "='" . $abreviationFtaEtat . "'"
+          . " AND " . FtaProcessusCycleModel::FIELDNAME_PROCESSUS_INIT . "=" . FtaProcessusModel::KEYNAME
+          . "AND " . FtaProcessusCycleModel::FIELDNAME_PROCESSUS_NEXT . "=" . $rowsArrayFtaProcessusAndCycle[FtaProcessusCycleModel::FIELDNAME_PROCESSUS_INIT] . " "
+          . " ORDER BY " . FtaProcessusCycleModel::FIELDNAME_PROCESSUS_INIT
+          );
 
-                        if ($arrayFtaProcessusAndCyclePrecedent) {
-                            foreach ($arrayFtaProcessusAndCyclePrecedent as $rowsArrayFtaProcessusAndCyclePrecedent) {
-                                $champ_previous = "date_echeance_processus_" . $rowsArrayFtaProcessusAndCyclePrecedent[FtaProcessusCycleModel::FIELDNAME_PROCESSUS_INIT];
-                                if ($$champ_previous > $$champ_date_echeance_processus) {
-                                    //echo ": ".$rows_last_processus["nom_fta_processus"]."=".$$champ_previous." vs ".$rows["nom_fta_processus"]."=".$$champ."<br>";
-                                    $titre = "Erreur de date d'échéance";
-                                    $message = "Date d'échéance pour " . $rowsArrayFtaProcessusAndCycle[FtaProcessusModel::FIELDNAME_NOM] . "=" . $$champ_date_echeance_processus
-                                            . "<br>Date d'échéance pour " . $rowsArrayFtaProcessusAndCyclePrecedent[FtaProcessusModel::FIELDNAME_NOM] . "=" . $$champ_previous
-                                            . "<br><br>Le processus " . $rowsArrayFtaProcessusAndCycle[FtaProcessusModel::FIELDNAME_NOM] . " doit être validé <b>APRES</b> le processus " . $rowsArrayFtaProcessusAndCyclePrecedent[FtaProcessusModel::FIELDNAME_NOM]
-                                    ;
-                                    afficher_message($titre, $message, $redirection);
-                                }
-                            }
-                        } else {
-                            //Il s'agit du dernier processus, controler directement avec la date d'échéanc de la FTA
-                            if ($$champ_date_echeance_processus > $date_echeance_fta) {
-                                $titre = "Erreur de date d'échéance";
-                                $message = "La date d'échéance pour le processus " . $rowsArrayFtaProcessusAndCycle[FtaProcessusModel::FIELDNAME_NOM] . " est trop courte";
-                                afficher_message($titre, $message, $redirection);
-                            }
-                        }
-                    } else {
-                        //Calculer les dates théoriques automatiquement à partir de la date d'échéance de validation
+          if ($arrayFtaProcessusAndCyclePrecedent) {
+          foreach ($arrayFtaProcessusAndCyclePrecedent as $rowsArrayFtaProcessusAndCyclePrecedent) {
+          $champ_previous = "date_echeance_processus_" . $rowsArrayFtaProcessusAndCyclePrecedent[FtaProcessusCycleModel::FIELDNAME_PROCESSUS_INIT];
+          if ($$champ_previous > $$champ_date_echeance_processus) {
+          //echo ": ".$rows_last_processus["nom_fta_processus"]."=".$$champ_previous." vs ".$rows["nom_fta_processus"]."=".$$champ."<br>";
+          $titre = "Erreur de date d'échéance";
+          $message = "Date d'échéance pour " . $rowsArrayFtaProcessusAndCycle[FtaProcessusModel::FIELDNAME_NOM] . "=" . $$champ_date_echeance_processus
+          . "<br>Date d'échéance pour " . $rowsArrayFtaProcessusAndCyclePrecedent[FtaProcessusModel::FIELDNAME_NOM] . "=" . $$champ_previous
+          . "<br><br>Le processus " . $rowsArrayFtaProcessusAndCycle[FtaProcessusModel::FIELDNAME_NOM] . " doit être validé <b>APRES</b> le processus " . $rowsArrayFtaProcessusAndCyclePrecedent[FtaProcessusModel::FIELDNAME_NOM]
+          ;
+          afficher_message($titre, $message, $redirection);
+          }
+          }
+          } else {
+          //Il s'agit du dernier processus, controler directement avec la date d'échéanc de la FTA
+          if ($$champ_date_echeance_processus > $date_echeance_fta) {
+          $titre = "Erreur de date d'échéance";
+          $message = "La date d'échéance pour le processus " . $rowsArrayFtaProcessusAndCycle[FtaProcessusModel::FIELDNAME_NOM] . " est trop courte";
+          afficher_message($titre, $message, $redirection);
+          }
+          }
+          } else {
+          //Calculer les dates théoriques automatiquement à partir de la date d'échéance de validation
 
-                        $annee_date_echeance_fta = substr($date_echeance_fta, 0, 4);
-                        $mois_date_echeance_fta = substr($date_echeance_fta, 5, 2);
-                        $jour_date_echeance_fta = substr($date_echeance_fta, 8, 2);
-                        $delai_jour = $rowsArrayFtaProcessusAndCycle[FtaProcessusModel::FIELDNAME_DELAI] * 7;
-                        $timestamp_date_echeance_fta = mktime(0, 0, 0, $mois_date_echeance_fta, $jour_date_echeance_fta - $delai_jour, $annee_date_echeance_fta);
-                        $$champ_date_echeance_processus = date("Y-m-d", $timestamp_date_echeance_fta);
-                        //echo  ${$champ}."<br>";
-                    }
-                } else {
-                    //Si il n'y a pas de date d'échéance de validation de la FTA, on efface les éventuelles anciennes saisies
-                    $$champ_date_echeance_processus = "0000-00-00";
-                }
-                //Enregistrement des délais de processus
-                //Recherche d'enregistrement déjà existant pour mise à jour, sinon insertion
-                $arrayFtaProcessusDelai = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray("SELECT " . FtaProcessusDelaiModel::KEYNAME
-                                . " FROM " . FtaProcessusDelaiModel::TABLENAME
-                                . " WHERE " . FtaModel::KEYNAME . "='" . $paramIdFta . "'"
-                                . " AND " . FtaProcessusModel::KEYNAME . "= '" . $rowsArrayFtaProcessusAndCycle[FtaProcessusCycleModel::FIELDNAME_PROCESSUS_INIT] . "' "
-                );
+          $annee_date_echeance_fta = substr($date_echeance_fta, 0, 4);
+          $mois_date_echeance_fta = substr($date_echeance_fta, 5, 2);
+          $jour_date_echeance_fta = substr($date_echeance_fta, 8, 2);
+          $delai_jour = $rowsArrayFtaProcessusAndCycle[FtaProcessusModel::FIELDNAME_DELAI] * 7;
+          $timestamp_date_echeance_fta = mktime(0, 0, 0, $mois_date_echeance_fta, $jour_date_echeance_fta - $delai_jour, $annee_date_echeance_fta);
+          $$champ_date_echeance_processus = date("Y-m-d", $timestamp_date_echeance_fta);
+          //echo  ${$champ}."<br>";
+          }
+          } else {
+          //Si il n'y a pas de date d'échéance de validation de la FTA, on efface les éventuelles anciennes saisies
+          $$champ_date_echeance_processus = "0000-00-00";
+          }
+          //Enregistrement des délais de processus
+          //Recherche d'enregistrement déjà existant pour mise à jour, sinon insertion
+          $arrayFtaProcessusDelai = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray("SELECT " . FtaProcessusDelaiModel::KEYNAME
+          . " FROM " . FtaProcessusDelaiModel::TABLENAME
+          . " WHERE " . FtaModel::KEYNAME . "='" . $paramIdFta . "'"
+          . " AND " . FtaProcessusModel::KEYNAME . "= '" . $rowsArrayFtaProcessusAndCycle[FtaProcessusCycleModel::FIELDNAME_PROCESSUS_INIT] . "' "
+          );
 
-                if ($arrayFtaProcessusDelai) {
-                    foreach ($arrayFtaProcessusDelai as $rowsArrayFtaProcessusDelai) {
-                        //Si l'enregistrement existe, alors mise à jour des informations
-                        $operation = "update";
+          if ($arrayFtaProcessusDelai) {
+          foreach ($arrayFtaProcessusDelai as $rowsArrayFtaProcessusDelai) {
+          //Si l'enregistrement existe, alors mise à jour des informations
+          $operation = "update";
 
-                        //Récupération de l'identifiant pour permettre la mise à jour de celui-ci
-                        $id_fta_processus_delai = $rowsArrayFtaProcessusDelai[FtaProcessusDelaiModel::KEYNAME];
-                    }
-                } else {
-                    //Sinon insertion d'un nouvel enregistrement
-                    $operation = "insert";
-                }
-                //Opération d'enregistrement des informations
-                $id_fta_processus = $rowsArrayFtaProcessusAndCycle[FtaProcessusCycleModel::FIELDNAME_PROCESSUS_INIT];
-                $date_echeance_processus = $$champ_date_echeance_processus;
-                $table = "fta_processus_delai";
-                mysql_table_operation($table, $operation);
-                FtaProcessusDelaiModel::BuildFtaProcessusValidationDelai($paramIdFta, $id_fta_processus, $idFtaWorkflowEncours);
-                
-            }//Fin du parcours des échéances par processus
-        }//Si non, désactivation de la gestion des échéances au niveau processus
+          //Récupération de l'identifiant pour permettre la mise à jour de celui-ci
+          $id_fta_processus_delai = $rowsArrayFtaProcessusDelai[FtaProcessusDelaiModel::KEYNAME];
+          }
+          } else {
+          //Sinon insertion d'un nouvel enregistrement
+          $operation = "insert";
+          }
+          //Opération d'enregistrement des informations
+          $id_fta_processus = $rowsArrayFtaProcessusAndCycle[FtaProcessusCycleModel::FIELDNAME_PROCESSUS_INIT];
+          $date_echeance_processus = $$champ_date_echeance_processus;
+          $table = "fta_processus_delai";
+          mysql_table_operation($table, $operation);
+          FtaProcessusDelaiModel::BuildFtaProcessusValidationDelai($paramIdFta, $id_fta_processus, $idFtaWorkflowEncours);
+
+          }//Fin du parcours des échéances par processus
+          }//Si non, désactivation de la gestion des échéances au niveau processus
          * */
          
 //Enregistrement des informations

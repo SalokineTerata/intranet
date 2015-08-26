@@ -910,9 +910,10 @@ function jointure($champ_sel, $url_page_depart, $module) {
   ----------------------------- */
 
 function timeout($id_user) {
-    $requete = DatabaseOperation::query("select * from perso where id_user = $id_user");
-    $rows = mysql_fetch_array($requete);
-    $time = $rows[timeout] * 60;
+    $array = DatabaseOperation::convertSqlStatementWithoutKeyToArray("select * from perso where id_user = $id_user");
+    foreach ($array as $rows) {
+        $time = $rows[timeout] * 60;
+    }
     if (!$time) {
         $time = 900;
     }
@@ -952,10 +953,11 @@ function securadmin($typepag, $id_type) {
 
 function securce($id_user, $id_type) {
     if ($id_type != 4) {
-        $coco = DatabaseOperation::query("select membre_ce from salaries where id_user = $id_user");
-        $reponse = mysql_fetch_array($coco);
-        if ($reponse[membre_ce] != "oui") {
-            header("Location: ../index.php?action=delog");
+        $coco = DatabaseOperation::convertSqlStatementWithoutKeyToArray("select membre_ce from salaries where id_user = $id_user");
+        foreach ($coco as $reponse) {
+            if ($reponse[membre_ce] != "oui") {
+                header("Location: ../index.php?action=delog");
+            }
         }
     }
 }
@@ -966,15 +968,15 @@ function securce($id_user, $id_type) {
   ------------------------------------------------------------- */
 
 function etatnivo($servauteur) {
-    $home1 = DatabaseOperation::query("select * from articles where id_art_serv='$servauteur' and homepage='1' and nivo_conf='1' and date_modif!='0'");
-    $ng1 = mysql_num_rows($home1);
+    $home1 = DatabaseOperation::convertSqlStatementWithoutKeyToArray("select * from articles where id_art_serv='$servauteur' and homepage='1' and nivo_conf='1' and date_modif!='0'");
+    $ng1 = count($home1);
 
-    $home2 = DatabaseOperation::query("select * from articles where id_art_serv='$servauteur' and homepage='2' and nivo_conf='1' and date_modif!='0'");
-    $ng2 = mysql_num_rows($home2);
-    $home3 = DatabaseOperation::query("select * from articles where id_art_serv='$servauteur' and homepage='3' and nivo_conf='1' and date_modif!='0'");
-    $ng3 = mysql_num_rows($home3);
-    $home4 = DatabaseOperation::query("select * from articles where id_art_serv='$servauteur' and homepage='4' and nivo_conf='1' and date_modif!='0'");
-    $ng4 = mysql_num_rows($home4);
+    $home2 = DatabaseOperation::convertSqlStatementWithoutKeyToArray("select * from articles where id_art_serv='$servauteur' and homepage='2' and nivo_conf='1' and date_modif!='0'");
+    $ng2 = count($home2);
+    $home3 = DatabaseOperation::convertSqlStatementWithoutKeyToArray("select * from articles where id_art_serv='$servauteur' and homepage='3' and nivo_conf='1' and date_modif!='0'");
+    $ng3 = count($home3);
+    $home4 = DatabaseOperation::convertSqlStatementWithoutKeyToArray("select * from articles where id_art_serv='$servauteur' and homepage='4' and nivo_conf='1' and date_modif!='0'");
+    $ng4 = count($home4);
 
     $infohome = array("$ng1", "$ng2", "$ng3", "$ng4");
     return($infohome);

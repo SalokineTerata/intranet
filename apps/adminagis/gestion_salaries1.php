@@ -161,11 +161,18 @@ if ($modifier == 'modifier') {
                 $HtmlList->setIsEditable(TRUE);
                 $listeAscendant = $HtmlList->getHtmlResult();
                 $bloc .=$listeAscendant;
+                /*
+                  $HtmlListBoolen = new HtmlListBoolean();
+                  $HtmlListBoolen->getAttributes()->getName()->setValue(UserModel::FIELDNAME_ECRITURE);
+                  $HtmlListBoolen->setLabel("Droit d'&eacute;criture");
+                  $HtmlListBoolen->setIsEditable(TRUE);
+                  $listeEcriture = $HtmlListBoolen->getHtmlResult();
+                 * */
 
                 /*
                  * Affichage
                  */
-                echo $bloc . "</table></td></tr>";
+                echo $bloc . $listeEcriture . "</table></td></tr>";
                 ?>
                 <table width="500" border="0" cellspacing="4" cellpadding="0" align="center">
                     <tr>

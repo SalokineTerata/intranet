@@ -378,7 +378,7 @@ class DatabaseRecord extends SessionSaveAndRestoreAbstract {
         /**
          * Mise à jour de la base de données 
          */
-        DatabaseOperation::query(
+        DatabaseOperation::execute(
                 "UPDATE " . $this->getTableNameForSqlClause()
                 . " SET " . $this->getFieldsToSqlClauseSet()
                 . " WHERE " . $this->getKeyToSqlStatement() . " "

@@ -65,7 +65,7 @@ class FtaTransitionModel {
                         . " WHERE " . FtaModel::FIELDNAME_DOSSIER_FTA . "='" . $idDossierFta . "' "
                         . " AND " . FtaModel::KEYNAME . "='" . $paramIdFta . "' "
                 ;
-                $result = DatabaseOperation::query($req);
+                $result = DatabaseOperation::execute($req);
 
                 //Mise à jour de la date de validation
                 $ftaModel->getDataField(FtaModel::FIELDNAME_DATE_DERNIERE_MAJ_FTA)->setFieldValue(date('Y-m-d'));
@@ -121,7 +121,7 @@ class FtaTransitionModel {
                             . " SET " . FtaModel::FIELDNAME_ID_FTA_ETAT . "='6'" //Identifiant de "retirer"
                             . "WHERE id_fta='" . $paramIdFta . "' "
                     ;
-                    $result = DatabaseOperation::query($req);
+                    $result = DatabaseOperation::execute($req);
                 }
 
                 //Duplication de la fiche
@@ -162,7 +162,7 @@ class FtaTransitionModel {
                 . ", " . FtaModel::FIELDNAME_COMMENTAIRE_MAJ_FTA . "='" . $nouveau_maj_fta //Identifiant de "retirer"
                 . "' WHERE " . FtaModel::KEYNAME . "='" . $paramIdFta . "' "
         ;
-        DatabaseOperation::query($req);
+        DatabaseOperation::execute($req);
         //Fin Traitement Commun
 
         /*         * *****************************************************************************
@@ -176,7 +176,7 @@ class FtaTransitionModel {
                         . " SET " . FtaModel::FIELDNAME_LISTE_CHAPITRE_MAJ_FTA . "='" . $liste_chapitre_maj_fta . "' "
                         . " WHERE " . FtaModel::KEYNAME . "='" . $paramIdFta . "' "
                 ;
-                DatabaseOperation::query($req);
+                DatabaseOperation::execute($req);
             case 'V':
 
                 //Désactivation de l'ancien Code Article Agrologic
@@ -185,14 +185,14 @@ class FtaTransitionModel {
                         . " WHERE " . FtaModel::FIELDNAME_CODE_ARTICLE . "='" . $idArticleAgrologic . "' "
                         . " AND " . FtaModel::KEYNAME . "='" . $paramIdFta . "' "
                 ;
-                DatabaseOperation::query($req);
+                DatabaseOperation::execute($req);
 
                 //Activation du nouvel Article
                 $req = "UPDATE " . FtaModel::TABLENAME
                         . " SET " . FtaModel::FIELDNAME_CODE_ARTICLE . "='" . $idArticleAgrologic . "', actif='-1' "
                         . " WHERE " . FtaModel::KEYNAME . "='" . $paramIdFta . "' "
                 ;
-                DatabaseOperation::query($req);
+                DatabaseOperation::execute($req);
 
                 break;
 
@@ -203,7 +203,7 @@ class FtaTransitionModel {
                         . " SET " . FtaModel::FIELDNAME_ACTIF . "=0"
                         . " WHERE " . FtaModel::KEYNAME . "='" . $paramIdFta . "' "
                 ;
-                DatabaseOperation::query($req);
+                DatabaseOperation::execute($req);
 
 
                 break;

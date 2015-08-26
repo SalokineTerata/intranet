@@ -55,7 +55,7 @@ $html_table = "table "              //Permet d'harmoniser les tableaux
 
 $idFta = Lib::getParameterFromRequest("id_fta");
 $idFtaRole = Lib::getParameterFromRequest("id_fta_role");
-$action = Lib::getParameterFromRequest("action", I);
+$action = Lib::getParameterFromRequest("action");
 
 
 /*
@@ -168,7 +168,7 @@ if ($action == "I") {
     );
     foreach ($arrrayFtaChapitre as $rowsChapitre) {
         $tableau_chapitre.= "<tr>"
-                . "<td><input type=checkbox name=nom_fta_chapitre-" . $rowsChapitre[FtaChapitreModel::KEYNAME] . " value=1 /></td>"
+                . "<td><input type=checkbox name=" . FtaChapitreModel::FIELDNAME_NOM_CHAPITRE . "-" . $rowsChapitre[FtaChapitreModel::KEYNAME] . " value=1 /></td>"
                 . "<td>" . $rowsChapitre[FtaChapitreModel::FIELDNAME_NOM_USUEL_CHAPITRE] . "</td>"
                 . "</tr>"
         ;

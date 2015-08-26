@@ -753,7 +753,7 @@ class FtaModel extends AbstractModel {
         FtaComposantModel::DuplicateFtaComposantByIdFta($idFtaOriginal, $idFtaNew);
         FtaConditionnementModel::DuplicateFtaConditionnementByIdFta($idFtaOriginal, $idFtaNew);
         FtaSuiviProjetModel::DuplicateFtaSuiviProjetByIdFta($idFtaOriginal, $idFtaNew);
-       // ClassificationFtaModel::DuplicateFtaClassificationByIdFta($idFtaOriginal, $idFtaNew);
+        // ClassificationFtaModel::DuplicateFtaClassificationByIdFta($idFtaOriginal, $idFtaNew);
 
 
         /*
@@ -920,99 +920,99 @@ class FtaModel extends AbstractModel {
     }
 
     public static function DuplicationIdFta($paramIdFta) {
-        DatabaseOperation::execute(
-                " INSERT INTO " . FtaModel::TABLENAME . " (`id_access_arti2`, `numft`, `id_fta_workflow`,"
-                . " `commentaire`, `TRASH_id_fta_palettisation`, `id_dossier_fta`, "
-                . "`id_version_dossier_fta`, `champ_maj_fta`, `id_fta_etat`, "
-                . "`createur_fta`, `date_derniere_maj_fta`, `commentaire_maj_fta`,"
-                . " `date_echeance_fta`, `duree_apres_dernier_processus_fta`, "
-                . "`periode_commercialisation_fta`, `code_douane_fta`, "
-                . "`code_douane_libelle_fta`, `poids_emballages_uvc_fta`, "
-                . "`poids_brut_uvc_fta`, `poids_net_uvc_fta`, `suffixe_agrologic_fta`,"
-                . " `synoptique_valide_fta`, `origine_transformation_fta`,"
-                . " `remarque_fta`, `presentation_fta`, `apres_ouverture_fta`, "
-                . "`conseil_rechauffage_valide_fta`, `reference_externe_fta`, "
-                . "`DEPRECATED_duree_vie_technique_fta`, `designation_commerciale_fta`,"
-                . " `nom_abrege_fta`, `site_expedition_fta`, `conseil_rechauffage_experimentale_fta`,"
-                . " `synoptique_experimental_fta`, `unite_affichage_fta`, `signature_validation_fta`,"
-                . " `old_gamdesc`, `old_segdesc`, `old_condition`, `old_conservation`,"
-                . " `id_article_agrologic`, `id_annexe_environnement_conservation`, "
-                . "`origine_matiere_fta`, `allergenes_matiere_fta`, `description_emballage`, "
-                . "`date_transfert_industriel`, `liste_chapitre_maj_fta`,"
-                . " `verrouillage_libelle_etiquette_fta`, `nombre_portion_fta`, "
-                . "`last_id_fta`, `id_arcadia_type_calibre`, `nom_client_demandeur`, "
-                . "`besoin_fiche_technique`, `echeance_demandeur`, `besoin_compostage_fta`, "
-                . "`calibre_defaut`, `id_arcadia_emballage_type`, `id_arcadia_client_segment`,"
-                . " `quantite_hebdomadaire_estime_commande`, `nom_machine_fta`,"
-                . " `frequence_hebdomadaire_estime_commande`, `tare_fta`, `perte_matiere_fta`,"
-                . " `besoin_fiche_rendement`, `nom_demandeur_fta`, `id_arcadia_atelier`, "
-                . "`id_arcadia_client_circuit`, `id_annexe_environnement_conservation_groupe`,"
-                . " `societe_demandeur_fta`, `type_marinade_fta`, `besoin_fiche_productivite_fta`,"
-                . " `id_arcadia_poste`, `date_demandeur_fta`, `id_annexe_unite_facturation`,"
-                . " `type_minerai`, `id_arcadia_client_reseau`, `id_arcadia_maquette_etiquette`, "
-                . "`etude_prix_fta`, `bon_fabrication_atelier`, `date_creation`, `CODE_ARTICLE`, "
-                . "`code_article_client`, `code_article_ldc`, `LIBELLE`, `LIBELLE_CLIENT`, "
-                . "`NB_UNIT_ELEM`, `NB_UV_PAR_US1`, `Poids_ELEM`, `REGROUPEMENT`, `UL2`, `RGR2`,"
-                . " `Unite_Facturation`, `Rayon`, `actif`, `Site_de_production`, `Duree_de_vie`,"
-                . " `Duree_de_vie_technique`, `code_barre_specifique`, `transfert_PF`, `Zone_picking`,"
-                . " `fiche_palette_specifique`, `TARIF`, `pvc_article`, `pvc_article_kg`, "
-                . "`FAMILLE_BUDGET`, `FAMILLE_ARTICLE`, `id_access_familles_gammes`, `Cout_Denree`,"
-                . " `Cout_Emballage`, `Cout_Autre`, `Cout_PF`, `FAMILLE_MKTG`, `Composition`, "
-                . "`composition1`, `libelle_multilangue`, `K_etat`, `EAN_UVC`, `EAN_COLIS`, "
-                . "`EAN_PALETTE`, `nouvel_article`, `k_gestion_lot`, `activation_codesoft_arti2`,"
-                . " `id_etiquette_codesoft_arti2`, `atmosphere_protectrice`, `image_eco_emballage`, "
-                . "`libelle_code_article_client`, `id_service_consommateur`, `nom_societe`, "
-                . "`classification_fta_proprietaire`, `classification_fta_marque`, "
-                . "`classification_fta_activite`, `classification_fta_rayon`, `classification_fta_reseau`,"
-                . " `classification_fta_environnement`, `classification_fta_saisonnalite`)"
-                . " SELECT `id_access_arti2`, `numft`, `id_fta_workflow`,"
-                . " `commentaire`, `TRASH_id_fta_palettisation`, `id_dossier_fta`, "
-                . "`id_version_dossier_fta`, `champ_maj_fta`, `id_fta_etat`, "
-                . "`createur_fta`, `date_derniere_maj_fta`, `commentaire_maj_fta`,"
-                . " `date_echeance_fta`, `duree_apres_dernier_processus_fta`, "
-                . "`periode_commercialisation_fta`, `code_douane_fta`, "
-                . "`code_douane_libelle_fta`, `poids_emballages_uvc_fta`, "
-                . "`poids_brut_uvc_fta`, `poids_net_uvc_fta`, `suffixe_agrologic_fta`,"
-                . " `synoptique_valide_fta`, `origine_transformation_fta`,"
-                . " `remarque_fta`, `presentation_fta`, `apres_ouverture_fta`, "
-                . "`conseil_rechauffage_valide_fta`, `reference_externe_fta`, "
-                . "`DEPRECATED_duree_vie_technique_fta`, `designation_commerciale_fta`,"
-                . " `nom_abrege_fta`, `site_expedition_fta`, `conseil_rechauffage_experimentale_fta`,"
-                . " `synoptique_experimental_fta`, `unite_affichage_fta`, `signature_validation_fta`,"
-                . " `old_gamdesc`, `old_segdesc`, `old_condition`, `old_conservation`,"
-                . " `id_article_agrologic`, `id_annexe_environnement_conservation`, "
-                . "`origine_matiere_fta`, `allergenes_matiere_fta`, `description_emballage`, "
-                . "`date_transfert_industriel`, `liste_chapitre_maj_fta`,"
-                . " `verrouillage_libelle_etiquette_fta`, `nombre_portion_fta`, "
-                . "`last_id_fta`, `id_arcadia_type_calibre`, `nom_client_demandeur`, "
-                . "`besoin_fiche_technique`, `echeance_demandeur`, `besoin_compostage_fta`, "
-                . "`calibre_defaut`, `id_arcadia_emballage_type`, `id_arcadia_client_segment`,"
-                . " `quantite_hebdomadaire_estime_commande`, `nom_machine_fta`,"
-                . " `frequence_hebdomadaire_estime_commande`, `tare_fta`, `perte_matiere_fta`,"
-                . " `besoin_fiche_rendement`, `nom_demandeur_fta`, `id_arcadia_atelier`, "
-                . "`id_arcadia_client_circuit`, `id_annexe_environnement_conservation_groupe`,"
-                . " `societe_demandeur_fta`, `type_marinade_fta`, `besoin_fiche_productivite_fta`,"
-                . " `id_arcadia_poste`, `date_demandeur_fta`, `id_annexe_unite_facturation`,"
-                . " `type_minerai`, `id_arcadia_client_reseau`, `id_arcadia_maquette_etiquette`, "
-                . "`etude_prix_fta`, `bon_fabrication_atelier`, `date_creation`, `CODE_ARTICLE`, "
-                . "`code_article_client`, `code_article_ldc`, `LIBELLE`, `LIBELLE_CLIENT`, "
-                . "`NB_UNIT_ELEM`, `NB_UV_PAR_US1`, `Poids_ELEM`, `REGROUPEMENT`, `UL2`, `RGR2`,"
-                . " `Unite_Facturation`, `Rayon`, `actif`, `Site_de_production`, `Duree_de_vie`,"
-                . " `Duree_de_vie_technique`, `code_barre_specifique`, `transfert_PF`, `Zone_picking`,"
-                . " `fiche_palette_specifique`, `TARIF`, `pvc_article`, `pvc_article_kg`, "
-                . "`FAMILLE_BUDGET`, `FAMILLE_ARTICLE`, `id_access_familles_gammes`, `Cout_Denree`,"
-                . " `Cout_Emballage`, `Cout_Autre`, `Cout_PF`, `FAMILLE_MKTG`, `Composition`, "
-                . "`composition1`, `libelle_multilangue`, `K_etat`, `EAN_UVC`, `EAN_COLIS`, "
-                . "`EAN_PALETTE`, `nouvel_article`, `k_gestion_lot`, `activation_codesoft_arti2`,"
-                . " `id_etiquette_codesoft_arti2`, `atmosphere_protectrice`, `image_eco_emballage`, "
-                . "`libelle_code_article_client`, `id_service_consommateur`, `nom_societe`, "
-                . "`classification_fta_proprietaire`, `classification_fta_marque`, "
-                . "`classification_fta_activite`, `classification_fta_rayon`, `classification_fta_reseau`,"
-                . " `classification_fta_environnement`, `classification_fta_saisonnalite` "
-                . " FROM " . FtaModel::TABLENAME
-                . " WHERE " . FtaModel::KEYNAME . "=" . $paramIdFta
+        $pdo = DatabaseOperation::execute(
+                        " INSERT INTO " . FtaModel::TABLENAME . " (`id_access_arti2`, `numft`, `id_fta_workflow`,"
+                        . " `commentaire`, `TRASH_id_fta_palettisation`, `id_dossier_fta`, "
+                        . "`id_version_dossier_fta`, `champ_maj_fta`, `id_fta_etat`, "
+                        . "`createur_fta`, `date_derniere_maj_fta`, `commentaire_maj_fta`,"
+                        . " `date_echeance_fta`, `duree_apres_dernier_processus_fta`, "
+                        . "`periode_commercialisation_fta`, `code_douane_fta`, "
+                        . "`code_douane_libelle_fta`, `poids_emballages_uvc_fta`, "
+                        . "`poids_brut_uvc_fta`, `poids_net_uvc_fta`, `suffixe_agrologic_fta`,"
+                        . " `synoptique_valide_fta`, `origine_transformation_fta`,"
+                        . " `remarque_fta`, `presentation_fta`, `apres_ouverture_fta`, "
+                        . "`conseil_rechauffage_valide_fta`, `reference_externe_fta`, "
+                        . "`DEPRECATED_duree_vie_technique_fta`, `designation_commerciale_fta`,"
+                        . " `nom_abrege_fta`, `site_expedition_fta`, `conseil_rechauffage_experimentale_fta`,"
+                        . " `synoptique_experimental_fta`, `unite_affichage_fta`, `signature_validation_fta`,"
+                        . " `old_gamdesc`, `old_segdesc`, `old_condition`, `old_conservation`,"
+                        . " `id_article_agrologic`, `id_annexe_environnement_conservation`, "
+                        . "`origine_matiere_fta`, `allergenes_matiere_fta`, `description_emballage`, "
+                        . "`date_transfert_industriel`, `liste_chapitre_maj_fta`,"
+                        . " `verrouillage_libelle_etiquette_fta`, `nombre_portion_fta`, "
+                        . "`last_id_fta`, `id_arcadia_type_calibre`, `nom_client_demandeur`, "
+                        . "`besoin_fiche_technique`, `echeance_demandeur`, `besoin_compostage_fta`, "
+                        . "`calibre_defaut`, `id_arcadia_emballage_type`, `id_arcadia_client_segment`,"
+                        . " `quantite_hebdomadaire_estime_commande`, `nom_machine_fta`,"
+                        . " `frequence_hebdomadaire_estime_commande`, `tare_fta`, `perte_matiere_fta`,"
+                        . " `besoin_fiche_rendement`, `nom_demandeur_fta`, `id_arcadia_atelier`, "
+                        . "`id_arcadia_client_circuit`, `id_annexe_environnement_conservation_groupe`,"
+                        . " `societe_demandeur_fta`, `type_marinade_fta`, `besoin_fiche_productivite_fta`,"
+                        . " `id_arcadia_poste`, `date_demandeur_fta`, `id_annexe_unite_facturation`,"
+                        . " `type_minerai`, `id_arcadia_client_reseau`, `id_arcadia_maquette_etiquette`, "
+                        . "`etude_prix_fta`, `bon_fabrication_atelier`, `date_creation`, `CODE_ARTICLE`, "
+                        . "`code_article_client`, `code_article_ldc`, `LIBELLE`, `LIBELLE_CLIENT`, "
+                        . "`NB_UNIT_ELEM`, `NB_UV_PAR_US1`, `Poids_ELEM`, `REGROUPEMENT`, `UL2`, `RGR2`,"
+                        . " `Unite_Facturation`, `Rayon`, `actif`, `Site_de_production`, `Duree_de_vie`,"
+                        . " `Duree_de_vie_technique`, `code_barre_specifique`, `transfert_PF`, `Zone_picking`,"
+                        . " `fiche_palette_specifique`, `TARIF`, `pvc_article`, `pvc_article_kg`, "
+                        . "`FAMILLE_BUDGET`, `FAMILLE_ARTICLE`, `id_access_familles_gammes`, `Cout_Denree`,"
+                        . " `Cout_Emballage`, `Cout_Autre`, `Cout_PF`, `FAMILLE_MKTG`, `Composition`, "
+                        . "`composition1`, `libelle_multilangue`, `K_etat`, `EAN_UVC`, `EAN_COLIS`, "
+                        . "`EAN_PALETTE`, `nouvel_article`, `k_gestion_lot`, `activation_codesoft_arti2`,"
+                        . " `id_etiquette_codesoft_arti2`, `atmosphere_protectrice`, `image_eco_emballage`, "
+                        . "`libelle_code_article_client`, `id_service_consommateur`, `nom_societe`, "
+                        . "`classification_fta_proprietaire`, `classification_fta_marque`, "
+                        . "`classification_fta_activite`, `classification_fta_rayon`, `classification_fta_reseau`,"
+                        . " `classification_fta_environnement`, `classification_fta_saisonnalite`)"
+                        . " SELECT `id_access_arti2`, `numft`, `id_fta_workflow`,"
+                        . " `commentaire`, `TRASH_id_fta_palettisation`, `id_dossier_fta`, "
+                        . "`id_version_dossier_fta`, `champ_maj_fta`, `id_fta_etat`, "
+                        . "`createur_fta`, `date_derniere_maj_fta`, `commentaire_maj_fta`,"
+                        . " `date_echeance_fta`, `duree_apres_dernier_processus_fta`, "
+                        . "`periode_commercialisation_fta`, `code_douane_fta`, "
+                        . "`code_douane_libelle_fta`, `poids_emballages_uvc_fta`, "
+                        . "`poids_brut_uvc_fta`, `poids_net_uvc_fta`, `suffixe_agrologic_fta`,"
+                        . " `synoptique_valide_fta`, `origine_transformation_fta`,"
+                        . " `remarque_fta`, `presentation_fta`, `apres_ouverture_fta`, "
+                        . "`conseil_rechauffage_valide_fta`, `reference_externe_fta`, "
+                        . "`DEPRECATED_duree_vie_technique_fta`, `designation_commerciale_fta`,"
+                        . " `nom_abrege_fta`, `site_expedition_fta`, `conseil_rechauffage_experimentale_fta`,"
+                        . " `synoptique_experimental_fta`, `unite_affichage_fta`, `signature_validation_fta`,"
+                        . " `old_gamdesc`, `old_segdesc`, `old_condition`, `old_conservation`,"
+                        . " `id_article_agrologic`, `id_annexe_environnement_conservation`, "
+                        . "`origine_matiere_fta`, `allergenes_matiere_fta`, `description_emballage`, "
+                        . "`date_transfert_industriel`, `liste_chapitre_maj_fta`,"
+                        . " `verrouillage_libelle_etiquette_fta`, `nombre_portion_fta`, "
+                        . "`last_id_fta`, `id_arcadia_type_calibre`, `nom_client_demandeur`, "
+                        . "`besoin_fiche_technique`, `echeance_demandeur`, `besoin_compostage_fta`, "
+                        . "`calibre_defaut`, `id_arcadia_emballage_type`, `id_arcadia_client_segment`,"
+                        . " `quantite_hebdomadaire_estime_commande`, `nom_machine_fta`,"
+                        . " `frequence_hebdomadaire_estime_commande`, `tare_fta`, `perte_matiere_fta`,"
+                        . " `besoin_fiche_rendement`, `nom_demandeur_fta`, `id_arcadia_atelier`, "
+                        . "`id_arcadia_client_circuit`, `id_annexe_environnement_conservation_groupe`,"
+                        . " `societe_demandeur_fta`, `type_marinade_fta`, `besoin_fiche_productivite_fta`,"
+                        . " `id_arcadia_poste`, `date_demandeur_fta`, `id_annexe_unite_facturation`,"
+                        . " `type_minerai`, `id_arcadia_client_reseau`, `id_arcadia_maquette_etiquette`, "
+                        . "`etude_prix_fta`, `bon_fabrication_atelier`, `date_creation`, `CODE_ARTICLE`, "
+                        . "`code_article_client`, `code_article_ldc`, `LIBELLE`, `LIBELLE_CLIENT`, "
+                        . "`NB_UNIT_ELEM`, `NB_UV_PAR_US1`, `Poids_ELEM`, `REGROUPEMENT`, `UL2`, `RGR2`,"
+                        . " `Unite_Facturation`, `Rayon`, `actif`, `Site_de_production`, `Duree_de_vie`,"
+                        . " `Duree_de_vie_technique`, `code_barre_specifique`, `transfert_PF`, `Zone_picking`,"
+                        . " `fiche_palette_specifique`, `TARIF`, `pvc_article`, `pvc_article_kg`, "
+                        . "`FAMILLE_BUDGET`, `FAMILLE_ARTICLE`, `id_access_familles_gammes`, `Cout_Denree`,"
+                        . " `Cout_Emballage`, `Cout_Autre`, `Cout_PF`, `FAMILLE_MKTG`, `Composition`, "
+                        . "`composition1`, `libelle_multilangue`, `K_etat`, `EAN_UVC`, `EAN_COLIS`, "
+                        . "`EAN_PALETTE`, `nouvel_article`, `k_gestion_lot`, `activation_codesoft_arti2`,"
+                        . " `id_etiquette_codesoft_arti2`, `atmosphere_protectrice`, `image_eco_emballage`, "
+                        . "`libelle_code_article_client`, `id_service_consommateur`, `nom_societe`, "
+                        . "`classification_fta_proprietaire`, `classification_fta_marque`, "
+                        . "`classification_fta_activite`, `classification_fta_rayon`, `classification_fta_reseau`,"
+                        . " `classification_fta_environnement`, `classification_fta_saisonnalite` "
+                        . " FROM " . FtaModel::TABLENAME
+                        . " WHERE " . FtaModel::KEYNAME . "=" . $paramIdFta
         );
-        $key = mysql_insert_id();
+        $key = $pdo->lastInsertId();
         return $key;
     }
 
@@ -1078,21 +1078,21 @@ class FtaModel extends AbstractModel {
      * @param type $paramSiteDeProduction
      * @return type
      */
-    public  function CreateFta($paramIdCreateur, $paramIdFtaEtat, $paramIdFtaWorkflow, $paramDesignationCommerciale, $paramDateCreation, $paramSiteDeProduction) {
-       $Id = DatabaseOperation::execute(
-                "INSERT INTO `intranet_v3_0_dev`." . FtaModel::TABLENAME
-                . " ( " . FtaModel::FIELDNAME_CREATEUR
-                . "," . FtaModel::FIELDNAME_ID_FTA_ETAT
-                . "," . FtaModel::FIELDNAME_DESIGNATION_COMMERCIALE
-                . "," . FtaModel::FIELDNAME_DATE_CREATION
-                . "," . FtaModel::FIELDNAME_SITE_ASSEMBLAGE
-                . "," . FtaModel::FIELDNAME_WORKFLOW . ")"
-                . " VALUES (" . $paramIdCreateur
-                . ", " . $paramIdFtaEtat
-                . ", '" . $paramDesignationCommerciale
-                . "', " . $paramDateCreation
-                . ", " . $paramSiteDeProduction
-                . ", " . $paramIdFtaWorkflow . ")"
+    public function CreateFta($paramIdCreateur, $paramIdFtaEtat, $paramIdFtaWorkflow, $paramDesignationCommerciale, $paramDateCreation, $paramSiteDeProduction) {
+        $Id = DatabaseOperation::execute(
+                        "INSERT INTO `intranet_v3_0_dev`." . FtaModel::TABLENAME
+                        . " ( " . FtaModel::FIELDNAME_CREATEUR
+                        . "," . FtaModel::FIELDNAME_ID_FTA_ETAT
+                        . "," . FtaModel::FIELDNAME_DESIGNATION_COMMERCIALE
+                        . "," . FtaModel::FIELDNAME_DATE_CREATION
+                        . "," . FtaModel::FIELDNAME_SITE_ASSEMBLAGE
+                        . "," . FtaModel::FIELDNAME_WORKFLOW . ")"
+                        . " VALUES (" . $paramIdCreateur
+                        . ", " . $paramIdFtaEtat
+                        . ", '" . $paramDesignationCommerciale
+                        . "', " . $paramDateCreation
+                        . ", " . $paramSiteDeProduction
+                        . ", " . $paramIdFtaWorkflow . ")"
         );
         $key = $Id->lastInsertId();
         return $key;

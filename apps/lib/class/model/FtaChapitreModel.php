@@ -29,22 +29,9 @@ class FtaChapitreModel extends AbstractModel {
     const FIELDNAME_NOM_CHAPITRE = "nom_fta_chapitre";
     const FIELDNAME_NOM_USUEL_CHAPITRE = "nom_usuel_fta_chapitre";
 
-    /**
-     * Processus associé à ce chapitre
-     * @var FtaProcessusModel
-     */
-    private $modelFtaProcessus;
 
     public function __construct($paramId = NULL, $paramIsCreateRecordsetInDatabaseIfKeyDoesntExist = AbstractModel::DEFAULT_IS_CREATE_RECORDSET_IN_DATABASE_IF_KEY_DOESNT_EXIST) {
         parent::__construct($paramId, $paramIsCreateRecordsetInDatabaseIfKeyDoesntExist);
-    }
-
-    public function getModelFtaProcessus() {
-        return $this->modelFtaProcessus;
-    }
-
-    private function setModelFtaProcessus(FtaProcessusModel $modelFtaProcessus) {
-        $this->modelFtaProcessus = $modelFtaProcessus;
     }
 
     /**
@@ -66,7 +53,6 @@ class FtaChapitreModel extends AbstractModel {
                         $paramIdFta, $paramIdChapitre);
         $ftaWorkflowStructureModel = new FtaWorkflowStructureModel($idFtaWorkflowStructure, $paramIdChapitre);
         $idFtaProcessus = $ftaWorkflowStructureModel->getDataField(FtaWorkflowStructureModel::FIELDNAME_ID_FTA_PROCESSUS)->getFieldValue();
-        $idFtaWorkflow = $ftaWorkflowStructureModel->getDataField(FtaWorkflowStructureModel::FIELDNAME_ID_FTA_WORKFLOW)->getFieldValue();
 
 
         //Récupération des informations préalables
@@ -109,7 +95,7 @@ class FtaChapitreModel extends AbstractModel {
                 . " WHERE " . FtaModel::KEYNAME . "=" . $paramIdFta
                 . " AND " . FtaSuiviProjetModel::FIELDNAME_ID_FTA_CHAPITRE . "=" . $paramIdChapitre
         ;
-        DatabaseOperation::query($reqDevelidationChapitre);
+        DatabaseOperation::execute($reqDevelidationChapitre);
 
         /*
          * Mise à jour de la validation de l'échéance du processus
@@ -183,7 +169,7 @@ class FtaChapitreModel extends AbstractModel {
     }
 
     /**
-     * 
+     * Devalidation d'un chapitre
      * @param type $paramIdFta
      * @param type $paramIdProcessus
      * @param type $htmlResult
@@ -224,7 +210,7 @@ class FtaChapitreModel extends AbstractModel {
                 . " = '" . $paramIdProcessus . "' "
                 . " AND `" . FtaSuiviProjetModel::TABLENAME . "." . FtaSuiviProjetModel::FIELDNAME_ID_FTA . " = '" . $paramIdFta . "' ) )"
         ;
-        DatabaseOperation::query($reqDenotification);
+        DatabaseOperation::execute($reqDenotification);
 
         //Recherches des processus suivants
         $arrayProcessusCycle = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
@@ -275,7 +261,7 @@ class FtaChapitreModel extends AbstractModel {
                         . " = '" . $paramIdProcessus . "' "
                         . " AND " . FtaSuiviProjetModel::TABLENAME . "." . FtaSuiviProjetModel::FIELDNAME_ID_FTA . " = '" . $paramIdFta . "' ) )"
                 ;
-                DatabaseOperation::query($reqDevalidation);
+                DatabaseOperation::execute($reqDevalidation);
 
                 if ($reqDevalidation) { //Si le processus a été dévalidé, alors on informe
                     //Dénotification
@@ -287,7 +273,7 @@ class FtaChapitreModel extends AbstractModel {
                             . " = '" . $paramIdProcessus . "' "
                             . " AND " . FtaSuiviProjetModel::TABLENAME . "." . FtaSuiviProjetModel::FIELDNAME_ID_FTA . " = '" . $paramIdFta . "' ) )"
                     ;
-                    DatabaseOperation::query($reqDenotification);
+                    DatabaseOperation::execute($reqDenotification);
 
                     //echo "Dévalidation FTA n°".$id_fta." / Processus n°".$id_fta_processus."... OK.<br>";
                     //Récupération de l'adresse mail de la dévalidation du processus (en fonction d'un processus multisite)

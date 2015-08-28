@@ -8,17 +8,17 @@
  */
 class ClassificationArborescenceArticleCategorieContenuModel extends AbstractModel {
 
-    const TABLENAME = "classification_arborescence_article_categorie_contenu";
-    const KEYNAME = "id_classification_arborescence_article_categorie_contenu";
-    const FIELDNAME_ID_CLASSIFICATION_ARBORESCENCE_ARTICLE_CATEGORIE_CONTENU = "id_classification_arborescence_article_categorie";
-    const FIELDNAME_NOM_CLASSIFICATION_ARBORESCENCE_ARTICLE_CATEGORIE_CONTENU = "nom_classification_arborescence_article_categorie_contenu";
+    const TABLENAME = 'classification_arborescence_article_categorie_contenu';
+    const KEYNAME = 'id_classification_arborescence_article_categorie_contenu';
+    const FIELDNAME_ID_CLASSIFICATION_ARBORESCENCE_ARTICLE_CATEGORIE_CONTENU = 'id_classification_arborescence_article_categorie';
+    const FIELDNAME_NOM_CLASSIFICATION_ARBORESCENCE_ARTICLE_CATEGORIE_CONTENU = 'nom_classification_arborescence_article_categorie_contenu';
 
     public static function getElementClassificationFta($paramIdClassif) {
 
         $array = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
-                        "SELECT " . ClassificationArborescenceArticleCategorieContenuModel::FIELDNAME_NOM_CLASSIFICATION_ARBORESCENCE_ARTICLE_CATEGORIE_CONTENU
-                        . " FROM " . ClassificationArborescenceArticleCategorieContenuModel::TABLENAME
-                        . " WHERE " . ClassificationArborescenceArticleCategorieContenuModel::KEYNAME . "=" . addslashes($paramIdClassif)
+                        'SELECT ' . ClassificationArborescenceArticleCategorieContenuModel::FIELDNAME_NOM_CLASSIFICATION_ARBORESCENCE_ARTICLE_CATEGORIE_CONTENU
+                        . ' FROM ' . ClassificationArborescenceArticleCategorieContenuModel::TABLENAME
+                        . ' WHERE ' . ClassificationArborescenceArticleCategorieContenuModel::KEYNAME . '=' . addslashes($paramIdClassif)
         );
         if ($array) {
             foreach ($array as $rows) {

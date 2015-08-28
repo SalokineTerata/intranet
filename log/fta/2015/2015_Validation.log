@@ -920,4 +920,229 @@ INFORMATIONS DE DEBUGGAGE:
 
 
 SELECT code_produit_agrologic_fta_nomenclature,prefixe_annexe_agrologic_article_codification FROM fta_composant, annexe_agrologic_article_codification WHERE fta_composant.id_fta=284 AND is_composition_fta_composant=1  AND fta_composant.id_annexe_agrologic_article_codification=annexe_agrologic_article_codification.id_annexe_agrologic_article_codification ORDER BY prefixe_annexe_agrologic_article_codification ASC, nom_fta_nomenclature 
- 
+ 28/08/2015 16:39:51\nFranck AMOFA <test@gmail.com> : test@gmail.com : FTA/Information "0 - " \n DESTINATAIRES:
+GASTAL Annabel: annabel.gastal@agis-sa.fr
+MORIN stephane: stephane.morin@agis-sa.fr
+BRIFFA Annelise: annelise.briffa@agis-sa.fr
+MIRAMANT David: david.miramant@agis-sa.fr
+ALBEROLA Christine: christine.alberola@agis-sa.fr
+BORD isabelle: isabelle.bord@agis-sa.fr
+VOLAY franck: franck.volay@agis-sa.fr
+SYSTEM superviseur: InformatiqueSupport.AVIGNON@agis-sa.fr
+AVIGNON expedition: expedition.avignon@agis-sa.fr
+BOURDELIN sylvie: sylvie.bourdelin@agis-sa.fr
+TARARE expedition: agis@agis-sa.fr
+LACROIX magali: magali.lacroix@agis-sa.fr
+WINTZER patrick: patrick.wintzer@agis-sa.fr
+VARILLON christelle: christelle.varillon@agis-sa.fr
+SEDDIKI hafsa: hafsa.seddiki@agis-sa.fr
+ROCHETTE Cathy: cathy.rochette@agis-sa.fr
+GUILLARME sylvie: sylvie.guillarme@agis-sa.fr
+PLAGIAU jean-claude: jean-claude.plagiau@agis-sa.fr
+TRIOMPHE rodolphe: rodolphe.triomphe@agis-sa.fr
+DUBUY pascal: pascal.dubuy@agis-sa.fr
+WEYMULLER julie: julie.weymuller@agis-sa.fr
+CASANOVA Cécile: cecile.casanova@agis-sa.fr
+BLARD Catherine: catherine.blard@agis-sa.fr
+FARGEOT Ginette: ginette.fargeot@agis-sa.fr
+CHAUVEAU helene: helene.chauveau@agis-sa.fr
+RIZET Gilles: gilles.rizet@agis-sa.fr
+COUSTON Jasmine: jasmine.couston@agis-sa.fr
+DESPREZ Caroline: caroline.desprez@agis-sa.fr
+AVIGNON preparation: preparation.avignon@agis-sa.fr
+RUQUIER dominique: dominique.ruquier@ldc.fr
+AVIGNON qualite: animatricequalite.avignon@agis-sa.fr
+DURAND alexis: alexis.durand@agis-sa.fr
+PLAGIAU axel: axel.plagiau@agis-sa.fr
+TARDY lise: lise.tardy@agis-sa.fr
+PONCET valerie: valerie.poncet@agis-sa.fr
+FTA Création FTA: InformatiqueSupport.AVIGNON@agis-sa.fr
+CHEIREZY Fabienne: fabienne.cheirezy@agis-sa.fr
+PAPILLON David: David.PAPILLON@agis-sa.fr
+STOSCHECK Guillaume: guillaume.STOSCHECK@agis-sa.fr
+SYSTEM installer: installer@ldc.fr
+
+
+Message envoyé:
+
+La Fiche Technique Article "0 - " vient d'être validée.
+Cet Article est maintenant actif et disponible dans l'ensemble de notre système informatique.
+
+INFORMATIONS PRINCIPALES:
+Site d'assemblage: FEYZIN
+Identifiant dans Agrologic: 0
+
+Listes des produits créés:
+
+
+INFORMATIONS SUPPLEMENTAIRES:
+Code Article LDC: 
+Gencod EAN Article: 
+Gencod EAN Colis: 
+Nombre d'UVC par colis: 3
+Poids net de l'unité de vente facturée (en Kg): 2
+Identifiant du Dossier Technique: 1-v0
+Unité de facturation: 
+Durée de vie garantie client (en jours): 
+Durée de vie Production (en jours): 
+Désignation Commerciale: TEST VOLAILLE PE
+
+
+COMMENTAIRE:
+test groupé
+
+Bonne journée à tous.
+Ce message a été envoyé automatiquement par le module Intranet - Fiche Technique Article.
+
+INFORMATIONS DE DEBUGGAGE:
+
+
+SELECT code_produit_agrologic_fta_nomenclature,prefixe_annexe_agrologic_article_codification FROM fta_composant, annexe_agrologic_article_codification WHERE fta_composant.id_fta=285 AND is_composition_fta_composant=1  AND fta_composant.id_annexe_agrologic_article_codification=annexe_agrologic_article_codification.id_annexe_agrologic_article_codification ORDER BY prefixe_annexe_agrologic_article_codification ASC, nom_fta_nomenclature \n 28/08/2015 16:39:51\nFranck AMOFA <test@gmail.com> : test@gmail.com : FTA/Information "0 - " \n DESTINATAIRES:
+GASTAL Annabel: annabel.gastal@agis-sa.fr
+BRIFFA Annelise: annelise.briffa@agis-sa.fr
+MIRAMANT David: david.miramant@agis-sa.fr
+ALBEROLA Christine: christine.alberola@agis-sa.fr
+BORD isabelle: isabelle.bord@agis-sa.fr
+VOLAY franck: franck.volay@agis-sa.fr
+AVIGNON expedition: expedition.avignon@agis-sa.fr
+BOURDELIN sylvie: sylvie.bourdelin@agis-sa.fr
+TARARE expedition: agis@agis-sa.fr
+LACROIX magali: magali.lacroix@agis-sa.fr
+WINTZER patrick: patrick.wintzer@agis-sa.fr
+VARILLON christelle: christelle.varillon@agis-sa.fr
+SEDDIKI hafsa: hafsa.seddiki@agis-sa.fr
+ROCHETTE Cathy: cathy.rochette@agis-sa.fr
+GUILLARME sylvie: sylvie.guillarme@agis-sa.fr
+PLAGIAU jean-claude: jean-claude.plagiau@agis-sa.fr
+TRIOMPHE rodolphe: rodolphe.triomphe@agis-sa.fr
+DUBUY pascal: pascal.dubuy@agis-sa.fr
+WEYMULLER julie: julie.weymuller@agis-sa.fr
+CASANOVA Cécile: cecile.casanova@agis-sa.fr
+BLARD Catherine: catherine.blard@agis-sa.fr
+FARGEOT Ginette: ginette.fargeot@agis-sa.fr
+CHAUVEAU helene: helene.chauveau@agis-sa.fr
+RIZET Gilles: gilles.rizet@agis-sa.fr
+COUSTON Jasmine: jasmine.couston@agis-sa.fr
+DESPREZ Caroline: caroline.desprez@agis-sa.fr
+AVIGNON preparation: preparation.avignon@agis-sa.fr
+RUQUIER dominique: dominique.ruquier@ldc.fr
+AVIGNON qualite: animatricequalite.avignon@agis-sa.fr
+PLAGIAU axel: axel.plagiau@agis-sa.fr
+TARDY lise: lise.tardy@agis-sa.fr
+PONCET valerie: valerie.poncet@agis-sa.fr
+FTA Création FTA: InformatiqueSupport.AVIGNON@agis-sa.fr
+CHEIREZY Fabienne: fabienne.cheirezy@agis-sa.fr
+PAPILLON David: David.PAPILLON@agis-sa.fr
+STOSCHECK Guillaume: guillaume.STOSCHECK@agis-sa.fr
+SYSTEM installer: installer@ldc.fr
+
+
+Message envoyé:
+
+La Fiche Technique Article "0 - " vient d'être validée.
+Cet Article est maintenant actif et disponible dans l'ensemble de notre système informatique.
+
+INFORMATIONS PRINCIPALES:
+Site d'assemblage: FEYZIN
+Identifiant dans Agrologic: 0
+
+Listes des produits créés:
+
+
+INFORMATIONS SUPPLEMENTAIRES:
+Code Article LDC: 
+Gencod EAN Article: 
+Gencod EAN Colis: 
+Nombre d'UVC par colis: 3
+Poids net de l'unité de vente facturée (en Kg): 2
+Identifiant du Dossier Technique: 1-v0
+Unité de facturation: 
+Durée de vie garantie client (en jours): 
+Durée de vie Production (en jours): 
+Désignation Commerciale: TEST VOLAILLE PE
+
+
+COMMENTAIRE:
+test groupé
+
+Bonne journée à tous.
+Ce message a été envoyé automatiquement par le module Intranet - Fiche Technique Article.
+
+INFORMATIONS DE DEBUGGAGE:
+
+
+SELECT code_produit_agrologic_fta_nomenclature,prefixe_annexe_agrologic_article_codification FROM fta_composant, annexe_agrologic_article_codification WHERE fta_composant.id_fta=286 AND is_composition_fta_composant=1  AND fta_composant.id_annexe_agrologic_article_codification=annexe_agrologic_article_codification.id_annexe_agrologic_article_codification ORDER BY prefixe_annexe_agrologic_article_codification ASC, nom_fta_nomenclature \n 28/08/2015 16:39:52\nFranck AMOFA <test@gmail.com> : test@gmail.com : FTA/Information "0 - " \n DESTINATAIRES:
+GASTAL Annabel: annabel.gastal@agis-sa.fr
+BRIFFA Annelise: annelise.briffa@agis-sa.fr
+MIRAMANT David: david.miramant@agis-sa.fr
+ALBEROLA Christine: christine.alberola@agis-sa.fr
+BORD isabelle: isabelle.bord@agis-sa.fr
+VOLAY franck: franck.volay@agis-sa.fr
+AVIGNON expedition: expedition.avignon@agis-sa.fr
+BOURDELIN sylvie: sylvie.bourdelin@agis-sa.fr
+TARARE expedition: agis@agis-sa.fr
+LACROIX magali: magali.lacroix@agis-sa.fr
+WINTZER patrick: patrick.wintzer@agis-sa.fr
+VARILLON christelle: christelle.varillon@agis-sa.fr
+SEDDIKI hafsa: hafsa.seddiki@agis-sa.fr
+ROCHETTE Cathy: cathy.rochette@agis-sa.fr
+GUILLARME sylvie: sylvie.guillarme@agis-sa.fr
+PLAGIAU jean-claude: jean-claude.plagiau@agis-sa.fr
+TRIOMPHE rodolphe: rodolphe.triomphe@agis-sa.fr
+DUBUY pascal: pascal.dubuy@agis-sa.fr
+WEYMULLER julie: julie.weymuller@agis-sa.fr
+CASANOVA Cécile: cecile.casanova@agis-sa.fr
+BLARD Catherine: catherine.blard@agis-sa.fr
+FARGEOT Ginette: ginette.fargeot@agis-sa.fr
+CHAUVEAU helene: helene.chauveau@agis-sa.fr
+RIZET Gilles: gilles.rizet@agis-sa.fr
+COUSTON Jasmine: jasmine.couston@agis-sa.fr
+DESPREZ Caroline: caroline.desprez@agis-sa.fr
+AVIGNON preparation: preparation.avignon@agis-sa.fr
+RUQUIER dominique: dominique.ruquier@ldc.fr
+AVIGNON qualite: animatricequalite.avignon@agis-sa.fr
+PLAGIAU axel: axel.plagiau@agis-sa.fr
+TARDY lise: lise.tardy@agis-sa.fr
+PONCET valerie: valerie.poncet@agis-sa.fr
+FTA Création FTA: InformatiqueSupport.AVIGNON@agis-sa.fr
+CHEIREZY Fabienne: fabienne.cheirezy@agis-sa.fr
+PAPILLON David: David.PAPILLON@agis-sa.fr
+STOSCHECK Guillaume: guillaume.STOSCHECK@agis-sa.fr
+SYSTEM installer: installer@ldc.fr
+
+
+Message envoyé:
+
+La Fiche Technique Article "0 - " vient d'être validée.
+Cet Article est maintenant actif et disponible dans l'ensemble de notre système informatique.
+
+INFORMATIONS PRINCIPALES:
+Site d'assemblage: FEYZIN
+Identifiant dans Agrologic: 0
+
+Listes des produits créés:
+
+
+INFORMATIONS SUPPLEMENTAIRES:
+Code Article LDC: 
+Gencod EAN Article: 
+Gencod EAN Colis: 
+Nombre d'UVC par colis: 3
+Poids net de l'unité de vente facturée (en Kg): 2
+Identifiant du Dossier Technique: 1-v0
+Unité de facturation: 
+Durée de vie garantie client (en jours): 
+Durée de vie Production (en jours): 
+Désignation Commerciale: TEST VOLAILLE PE
+
+
+COMMENTAIRE:
+test groupé
+
+Bonne journée à tous.
+Ce message a été envoyé automatiquement par le module Intranet - Fiche Technique Article.
+
+INFORMATIONS DE DEBUGGAGE:
+
+
+SELECT code_produit_agrologic_fta_nomenclature,prefixe_annexe_agrologic_article_codification FROM fta_composant, annexe_agrologic_article_codification WHERE fta_composant.id_fta=304 AND is_composition_fta_composant=1  AND fta_composant.id_annexe_agrologic_article_codification=annexe_agrologic_article_codification.id_annexe_agrologic_article_codification ORDER BY prefixe_annexe_agrologic_article_codification ASC, nom_fta_nomenclature \n 

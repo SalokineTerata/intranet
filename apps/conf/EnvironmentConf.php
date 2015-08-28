@@ -12,21 +12,21 @@
  */
 class EnvironmentConf {
 
-    const ENV_COD = "codeur";
-    const ENV_DEV = "developpement";
-    const ENV_REC = "recette";
-    const ENV_PRD = "production";
-    const SITE_COD = "127.0.0.1";
-    const SITE_DEV = "dev-intranet.agis.fr";
-    const SITE_REC = "rec-fta05401.grpldc.com";
-    const SITE_PRD = "prd-fta05401.grpldc.com";
-    const SITE_TITLE = "Intranet Groupe LDC";
-    const LDAP_SERVER_NAME = "ldap05401.grpldc.com";
+    const ENV_COD = 'codeur';
+    const ENV_DEV = 'developpement';
+    const ENV_REC = 'recette';
+    const ENV_PRD = 'production';
+    const SITE_COD = '127.0.0.1';
+    const SITE_DEV = 'dev-intranet.agis.fr';
+    const SITE_REC = 'rec-fta05401.grpldc.com';
+    const SITE_PRD = 'prd-fta05401.grpldc.com';
+    const SITE_TITLE = 'Intranet Groupe LDC';
+    const LDAP_SERVER_NAME = 'ldap05401.grpldc.com';
     const LDAP_DEBUG = false;
-    const URL_PROTOCOL = "http";
-    const DOC_APIGEN_DIR = "doc/apigen";
-    const URL_EASYPHP = "http://127.0.0.1/home";
-    const ENVIRONMENT_DONT_EXIST_MESSAGE = "L'environnement d'exécution n'a pas pu être trouvé. Vérifiez les fichiers conf/Environment*.php";
+    const URL_PROTOCOL = 'http';
+    const DOC_APIGEN_DIR = 'doc/apigen';
+    const URL_EASYPHP = 'http://127.0.0.1/home';
+    const ENVIRONMENT_DONT_EXIST_MESSAGE = 'L\'environnement d\'exécution n\'a pas pu être trouvé. Vérifiez les fichiers conf/Environment*.php';
 
     //Variables
     //A classer par ordre alphabérique
@@ -70,9 +70,9 @@ class EnvironmentConf {
     }
 
     public function getUrlFullRoot() {
-        return $this->getUrlProtocol() . "://"
-                . $this->getUrlServer() . "/"
-                . $this->getUrlRoot() . "/"
+        return $this->getUrlProtocol() . '://'
+                . $this->getUrlServer() . '/'
+                . $this->getUrlRoot() . '/'
                 . $this->getUrlSubdir()
         ;
     }
@@ -86,11 +86,11 @@ class EnvironmentConf {
     }
 
     public function getHtmlUrlDoc() {
-        return "<a href=\"" . $this->getUrlFullRoot() . "/"
-                . self::DOC_APIGEN_DIR . "\" target=\"_blank\"><img src=../lib/images/apigen.jpeg width=15  border=0> - Doc ApiGen</a>"
-                . "<br>"
-                . "<a href=\"" 
-                . self::URL_EASYPHP . "\" target=\"_blank\"><img src=../lib/images/pma_icone.png width=15  border=0> - Administration EasyPHP</a>"
+        return '<a href=\'' . $this->getUrlFullRoot() . '/'
+                . self::DOC_APIGEN_DIR . '\' target=\'_blank\'><img src=../lib/images/apigen.jpeg width=15  border=0> - Doc ApiGen</a>'
+                . '<br>'
+                . '<a href=\'' 
+                . self::URL_EASYPHP . '\' target=\'_blank\'><img src=../lib/images/pma_icone.png width=15  border=0> - Administration EasyPHP</a>'
         ;
     }
 

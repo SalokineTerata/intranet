@@ -36,11 +36,11 @@ class HtmlListSelectTagName extends HtmlListSelect {
 
         $oneSelected = FALSE;
         if ($this->getArrayListContent()) {
-            $return .= "<" . $this->getAttributes()->getTagName()
+            $return .= '<' . $this->getAttributes()->getTagName()
                     . parent::getAttributesGlobal()->getAllHtmlParametersWithSpaceBefore()
                     . parent::getEventsForm()->getAllHtmlParametersWithSpaceBefore()
                     . $this->getAttributes()->getAllHtmlParametersWithSpaceBefore()
-                    . "/>"
+                    . '/>'
             ;
             $Tagtmp = $this->getAttributes()->getAllHtmlParametersWithSpaceBefore();
             //Création du contenu de la liste
@@ -57,28 +57,28 @@ class HtmlListSelectTagName extends HtmlListSelect {
                     $option->getAttributes()->getSelected()->setFalse();
                 }
 
-                $return .= "<"
+                $return .= '<'
                         . $option->getAttributes()->getTagName()
                         . $Tagtmp
-                        . $option->getAttributes()->getAllHtmlParametersWithSpaceBefore() . ">"
+                        . $option->getAttributes()->getAllHtmlParametersWithSpaceBefore() . '>'
                         . $option->getDiplayValueToHtml()
-                        . "</" . $option->getAttributes()->getTagName() . ">";
+                        . '</' . $option->getAttributes()->getTagName() . '>';
             }
             if ($oneSelected == FALSE) {
                 $option = new HtmlTagOption();
                 $option->getAttributes()->getValue()->setValue(self::LIST_EMPTY_VALUE);
                 $option->setDiplayValue(self::LIST_NO_VALID_SELECTION_MESSAGE);
                 $option->getAttributes()->getSelected()->setTrue();
-                $return .= "<"
+                $return .= '<'
                         . $option->getAttributes()->getTagName()
                         . $Tagtmp
-                        . $option->getAttributes()->getAllHtmlParametersWithSpaceBefore() . ">"
+                        . $option->getAttributes()->getAllHtmlParametersWithSpaceBefore() . '>'
                         . $option->getDiplayValueToHtml()
-                        . "</" . $option->getAttributes()->getTagName() . ">";
+                        . '</' . $option->getAttributes()->getTagName() . '>';
             }
-            $return .= "</" . $this->getAttributes()->getTagName() . ">" . parent::getAttributesGlobal()->getIconMenuToHtml();
+            $return .= '</' . $this->getAttributes()->getTagName() . '>' . parent::getAttributesGlobal()->getIconMenuToHtml();
         } else {
-            $return .= "<i>" . Html::showValue(self::LIST_EMPTY_MESSAGE) . "</i>";
+            $return .= '<i>' . Html::showValue(self::LIST_EMPTY_MESSAGE) . '</i>';
         }
         return $return;
     }

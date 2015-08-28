@@ -20,20 +20,20 @@
 class HtmlSubForm extends AbstractHtmlList {
 
     public function getHtmlResultSubFormBegin() {
-        return "<table><tr>";
+        return '<table><tr>';
     }
 
     public function getHtmlResultSubFormEnd() {
-        return "</tr></table>";
+        return '</tr></table>';
     }
 
     public function getHtmlResultSubFormAddNewLine() {
         $return = NULL;
         if ($this->getRightToAdd()) {
-            $return = "<td>"
+            $return = '<td>'
                     . $this->getAttributesGlobal()->getIconAddToHtml()
-                    . "<a href=" . $this->getLien() . " > Ajouter</a>"
-                    . "</td>"
+                    . '<a href=' . $this->getLien() . ' > Ajouter</a>'
+                    . '</td>'
             ;
         }
         return $return;

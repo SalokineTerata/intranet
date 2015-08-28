@@ -25,7 +25,7 @@
  */
 class HtmlStandardTagTextArea extends AbstractAllHtmlParameters implements InterfaceHtmlStandardTag {
 
-    const TAG_NAME = "textarea";
+    const TAG_NAME = 'textarea';
 
     /**
      *

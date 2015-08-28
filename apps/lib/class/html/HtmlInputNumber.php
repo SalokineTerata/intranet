@@ -42,7 +42,7 @@ class HtmlInputNumber extends AbstractHtmlInput {
     }
 
     function getHtmlEditableContent() {
-        return "<input type=text name=" . $this->fieldName . " value=" . Html::inputValue($this->attributeValue) . " />";
+        return '<input type=text name=' . $this->fieldName . ' value=' . Html::inputValue($this->attributeValue) . ' />';
     }
 
 }

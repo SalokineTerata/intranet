@@ -12,10 +12,10 @@
  */
 class EnvironmentCod extends EnvironmentAbstract {
 
-    const APPLICATION_HTML_MESSAGE_BEGIN = "<CENTER><BR><FONT SIZE=4><marquee>Environnement développeur</marquee></FONT>";
-    const APPLICATION_HTML_MESSAGE_END = "</CENTER>";
-    const APPLICATION_LOGO = "logo_developpeur.gif";
-    const APPLICATION_NAME = "intranet";
+    const APPLICATION_HTML_MESSAGE_BEGIN = '<CENTER><BR><FONT SIZE=4><marquee>Environnement développeur</marquee></FONT>';
+    const APPLICATION_HTML_MESSAGE_END = '</CENTER>';
+    const APPLICATION_LOGO = 'logo_developpeur.gif';
+    const APPLICATION_NAME = 'intranet';
     const EXECUTION_ENVIRONMENT = EnvironmentConf::ENV_COD;
 
     /**
@@ -36,19 +36,19 @@ class EnvironmentCod extends EnvironmentAbstract {
     const IS_SERVICE_LDAP_ENABLED = FALSE;
     const IS_SERVICE_SMTP_ENABLED = FALSE;
     const LDAP_SERVER_NAME = EnvironmentConf::LDAP_SERVER_NAME;
-    const MYSQL_AUTHENTIFICATION_PASSWORD = "8ale!ne";
-    const MYSQL_AUTHENTIFICATION_TABLE_NAME = "salaries";
-    const MYSQL_AUTHENTIFICATION_USER_NAME = "root";
-    const MYSQL_DATABASE_NAME = "intranet_v3_0_dev";
-    const MYSQL_SERVER_NAME = "dev-intranet.agis.fr";
+    const MYSQL_AUTHENTIFICATION_PASSWORD = '8ale!ne';
+    const MYSQL_AUTHENTIFICATION_TABLE_NAME = 'salaries';
+    const MYSQL_AUTHENTIFICATION_USER_NAME = 'root';
+    const MYSQL_DATABASE_NAME = 'intranet_v3_0_dev';
+    const MYSQL_SERVER_NAME = 'dev-intranet.agis.fr';
     const SITE_TITLE = EnvironmentConf::SITE_TITLE;
-    const SMTP_EMAIL_REDIRECTION_ADMIN = "administrateurs.fta@ldc.fr";
-    const SMTP_EMAIL_REDIRECTION_USER = "utilisateurs.fta@ldc.fr";
-    const SMTP_SERVER_NAME = "smtp05401.grpldc.com";
-    const URL_PROTOCOL = "http";
-    const URL_ROOT_DIR = "dev-intranet";
+    const SMTP_EMAIL_REDIRECTION_ADMIN = 'administrateurs.fta@ldc.fr';
+    const SMTP_EMAIL_REDIRECTION_USER = 'utilisateurs.fta@ldc.fr';
+    const SMTP_SERVER_NAME = 'smtp05401.grpldc.com';
+    const URL_PROTOCOL = 'http';
+    const URL_ROOT_DIR = 'dev-intranet';
     const URL_SERVEUR_NAME = EnvironmentConf::SITE_COD;
-    const URL_SUBDIR = "apps";
+    const URL_SUBDIR = 'apps';
 
     function __construct() {
 

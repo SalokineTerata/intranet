@@ -140,15 +140,15 @@ class Chapitre {
 
     public static function NOT_IMPLEMENTED_saveObject() {
 
-        $_SESSION["Chapitre"]["objectFta"] = self::$objectFta;
-        $_SESSION["Chapitre"]["html_chapitre_identite"] = self::$html_chapitre_identite;
-        $_SESSION["Chapitre"]["html_chapitre_need_rebuild"] = self::$html_chapitre_need_rebuild;
+        $_SESSION['Chapitre']['objectFta'] = self::$objectFta;
+        $_SESSION['Chapitre']['html_chapitre_identite'] = self::$html_chapitre_identite;
+        $_SESSION['Chapitre']['html_chapitre_need_rebuild'] = self::$html_chapitre_need_rebuild;
     }
 
     public static function NOT_IMPLEMENTED_restoreObject() {
-        self::$objectFta = $_SESSION["Chapitre"]["objectFta"];
-        self::$html_chapitre_identite = $_SESSION["Chapitre"]["html_chapitre_identite"];
-        self::$html_chapitre_need_rebuild = $_SESSION["Chapitre"]["html_chapitre_need_rebuild"];
+        self::$objectFta = $_SESSION['Chapitre']['objectFta'];
+        self::$html_chapitre_identite = $_SESSION['Chapitre']['html_chapitre_identite'];
+        self::$html_chapitre_need_rebuild = $_SESSION['Chapitre']['html_chapitre_need_rebuild'];
     }
 
     public static function NOT_IMPLEMENTED_buildHtml($id_fta, $synthese_action, $is_editable = false, $need_rebuild = true) {
@@ -214,7 +214,7 @@ class Chapitre {
 
     protected static function buildTauxValidationProcessus() {
 //Taux de validation du processus
-        $return = "";
+        $return = '';
         if (self::$id_fta_processus != 0) {
             $return = FtaProcessusModel::getValideProcessusEncours(self::$id_fta, self::$id_fta_processus, self::$id_fta_workflow);
         }
@@ -234,168 +234,168 @@ class Chapitre {
     }
 
     protected static function buildChapitreCore() {
-        $return = "";
+        $return = '';
         switch (self::$ftaChapitreModel->getDataField(FtaChapitreModel::FIELDNAME_NOM_CHAPITRE)->getFieldValue()) {
-            case "identite":
+            case 'identite':
                 self::$html_chapitre_identite = self::buildChapitreIdentite();
                 $return = self::$html_chapitre_identite;
                 break;
-            case "commerce":
+            case 'commerce':
                 self::$html_chapitre_commerce = self::buildChapitreCommerce();
                 $return = self::$html_chapitre_commerce;
                 break;
-            case "production":
+            case 'production':
                 self::$html_chapitre_production = self::buildChapitreProduction();
                 $return = self::$html_chapitre_production;
                 break;
-            case "qualite":
+            case 'qualite':
                 self::$html_chapitre_qualite = self::buildChapitreQualite();
                 $return = self::$html_chapitre_qualite;
                 break;
-            case "decoupe":
+            case 'decoupe':
                 self::$html_chapitre_decoupe = self::buildChapitreDecoupe();
                 $return = self::$html_chapitre_decoupe;
                 break;
-            case "conditionnement_piece_entiere":
+            case 'conditionnement_piece_entiere':
                 self::$html_chapitre_conditionnement_piece_entiere = self::buildChapitreConditionnementPieceEntiere();
                 $return = self::$html_chapitre_conditionnement_piece_entiere;
                 break;
-            case "conditionnement_decoupe":
+            case 'conditionnement_decoupe':
                 self::$html_chapitre_conditionnement_decoupe = self::buildChapitreConditionnementDecoupe();
                 $return = self::$html_chapitre_conditionnement_decoupe;
                 break;
-            case "codification":
+            case 'codification':
                 self::$html_chapitre_codification = self::buildChapitreCodification();
                 $return = self::$html_chapitre_codification;
                 break;
-            case "codification_externe":
+            case 'codification_externe':
                 self::$html_chapitre_codification_externe = self::buildChapitreCodificationExterne();
                 $return = self::$html_chapitre_codification_externe;
                 break;
-            case "etiquette":
+            case 'etiquette':
                 self::$html_chapitre_etiquette = self::buildChapitreEtiquette();
                 $return = self::$html_chapitre_etiquette;
                 break;
-            case "expedition":
+            case 'expedition':
                 self::$html_chapitre_expedition = self::buildChapitreExpedition();
                 $return = self::$html_chapitre_expedition;
                 break;
-            case "composition":
+            case 'composition':
                 self::$html_chapitre_composition = self::buildChapitreComposition();
                 $return = self::$html_chapitre_composition;
                 break;
-            case "activation_des_produits":
+            case 'activation_des_produits':
                 self::$html_chapitre_activation_des_produits = self::buildChapitreActivationDesProduits();
                 $return = self::$html_chapitre_activation_des_produits;
                 break;
-            case "nomenclature":
+            case 'nomenclature':
                 self::$html_chapitre_nomenclature = self::buildChapitreNomenclature();
                 $return = self::$html_chapitre_nomenclature;
                 break;
-            case "commentaire":
+            case 'commentaire':
                 self::$html_chapitre_commentaire = self::buildChapitreCommentaire();
                 $return = self::$html_chapitre_commentaire;
                 break;
-            case "palettisation":
+            case 'palettisation':
                 self::$html_chapitre_palettisation = self::buildChapitrePalettisation();
                 $return = self::$html_chapitre_palettisation;
                 break;
-            case "dictionnaire_de_donnees":
+            case 'dictionnaire_de_donnees':
                 self::$html_chapitre_dictionnaire_de_donnees = self::buildChapitreDictionnaireDeDonnees();
                 $return = self::$html_chapitre_dictionnaire_de_donnees;
                 break;
             default:
-            case "site_expedition":
+            case 'site_expedition':
                 self::$html_chapitre_site_expedition = self::buildChapitreSiteExpedition();
                 $return = self::$html_chapitre_site_expedition;
                 break;
             default:
-            case "site_production":
+            case 'site_production':
                 self::$html_chapitre_site_production = self::buildChapitreSiteProduction();
                 $return = self::$html_chapitre_site_production;
                 break;
             default:
-            case "exigence_client":
+            case 'exigence_client':
                 self::$html_chapitre_exigence_client = self::buildChapitreExigenceClient();
                 $return = self::$html_chapitre_exigence_client;
                 break;
             default:
-            case "etiquette_client":
+            case 'etiquette_client':
                 self::$html_chapitre_etiquette_client = self::buildChapitreEtiquetteClient();
                 $return = self::$html_chapitre_etiquette_client;
                 break;
             default:
-            case "etiquette_client_FEAvecEtiq":
+            case 'etiquette_client_FEAvecEtiq':
                 self::$html_chapitre_etiquette_client_FEAvecEtiq = self::buildChapitreEtiquetteClient_FEAvecEtiq();
                 $return = self::$html_chapitre_etiquette_client_FEAvecEtiq;
                 break;
             default:
-            case "etiquette_client_MDDAvecEtiq":
+            case 'etiquette_client_MDDAvecEtiq':
                 self::$html_chapitre_etiquette_client_MDDAvecEtiq = self::buildChapitreEtiquetteClient_MDDAvecEtiq();
                 $return = self::$html_chapitre_etiquette_client_MDDAvecEtiq;
                 break;
             default:
-            case "pcb":
+            case 'pcb':
                 self::$html_chapitre_pcb = self::buildChapitrePcb();
                 $return = self::$html_chapitre_pcb;
                 break;
             default:
-            case "emballage":
+            case 'emballage':
                 self::$html_chapitre_emballage = self::buildChapitreEmballage();
                 $return = self::$html_chapitre_emballage;
                 break;
             default:
-            case "emballage_colis":
+            case 'emballage_colis':
                 self::$html_chapitre_emballage_colis = self::buildChapitreEmballageDuColis();
                 $return = self::$html_chapitre_emballage_colis;
                 break;
             default:
-            case "etiquette_r_d":
+            case 'etiquette_r_d':
                 self::$html_chapitre_etiquette_r_d = self::buildChapitreEtiquetteRD();
                 $return = self::$html_chapitre_etiquette_r_d;
                 break;
             default:
-            case "etiquette_article":
+            case 'etiquette_article':
                 self::$html_chapitre_etiquette_article = self::buildChapitreEtiquetteArticle();
                 $return = self::$html_chapitre_etiquette_article;
                 break;
             default:
-            case "etiquette_article_FEAvecEtiq":
+            case 'etiquette_article_FEAvecEtiq':
                 self::$html_chapitre_etiquette_article_FEAvecEtiq = self::buildChapitreEtiquetteArticle_FEAvecEtiq();
                 $return = self::$html_chapitre_etiquette_article_FEAvecEtiq;
                 break;
             default:
-            case "etiquette_article_MDDAvecEtiq":
+            case 'etiquette_article_MDDAvecEtiq':
                 self::$html_chapitre_etiquette_article_MDDAvecEtiq = self::buildChapitreEtiquetteArticle_MDDAvecEtiq();
                 $return = self::$html_chapitre_etiquette_article_MDDAvecEtiq;
                 break;
             default:
-            case "etiquette_composant":
+            case 'etiquette_composant':
                 self::$html_chapitre_etiquette_composant = self::buildChapitreEtiquetteComposant();
                 $return = self::$html_chapitre_etiquette_composant;
                 break;
             default:
-            case "etiquette_composant_FEAvecEtiq":
+            case 'etiquette_composant_FEAvecEtiq':
                 self::$html_chapitre_etiquette_composant_FEAvecEtiq = self::buildChapitreEtiquetteComposant_FEAvecEtiq();
                 $return = self::$html_chapitre_etiquette_composant_FEAvecEtiq;
                 break;
             default:
-            case "etiquette_composant_MDDAvecEtiq":
+            case 'etiquette_composant_MDDAvecEtiq':
                 self::$html_chapitre_etiquette_composant_MDDAvecEtiq = self::buildChapitreEtiquetteComposant_MDDAvecEtiq();
                 $return = self::$html_chapitre_etiquette_composant_MDDAvecEtiq;
                 break;
             default:
-            case "donnees_clients":
+            case 'donnees_clients':
                 self::$html_chapitre_donnees_clients_w1 = self::buildChapitreCommerce();
                 $return = self::$html_chapitre_donnees_clients_w1;
                 break;
             default:
-            case "codification":
+            case 'codification':
                 self::$html_chapitre_codification_w1 = self::buildChapitreCodification();
                 $return = self::$html_chapitre_codification_w1;
                 break;
             default:
-            case "duree_de_vie":
+            case 'duree_de_vie':
                 self::$html_chapitre_duree_de_vie = self::buildChapitreDureeDeVie();
                 $return = self::$html_chapitre_duree_de_vie;
                 break;
@@ -406,7 +406,7 @@ class Chapitre {
 
     public static function buildChapitreIdentiteTraiteur() {
 
-        $bloc = "";
+        $bloc = '';
         $id_fta = self::$id_fta;
         $synthese_action = self::$synthese_action;
         $is_editable = self::$is_editable;
@@ -419,73 +419,73 @@ class Chapitre {
 //Classification
         $bloc .= ObjectFta::showClassification(
                         $id_fta, $id_version_dossier_fta = self::$objectFta->getFieldValue(
-                        ObjectFta::TABLE_FTA_NAME, "id_version_dossier_fta"
+                        ObjectFta::TABLE_FTA_NAME, 'id_version_dossier_fta'
                         ), $last_id_fta = self::$objectFta->getFieldValue(
-                        ObjectFta::TABLE_FTA_NAME, "last_id_fta"
+                        ObjectFta::TABLE_FTA_NAME, 'last_id_fta'
                         ), $FAMILLE_ARTICLE = self::$objectFta->getFieldValue(
-                        ObjectFta::TABLE_ARTI_NAME, "FAMILLE_ARTICLE"
+                        ObjectFta::TABLE_ARTI_NAME, 'FAMILLE_ARTICLE'
                         ), $FAMILLE_MKTG = self::$objectFta->getFieldValue(
-                        ObjectFta::TABLE_ARTI_NAME, "FAMILLE_MKTG"
+                        ObjectFta::TABLE_ARTI_NAME, 'FAMILLE_MKTG'
                         ), $id_access_familles_gammes = self::$objectFta->getFieldValue(
-                        ObjectFta::TABLE_ARTI_NAME, "id_access_familles_gammes"
+                        ObjectFta::TABLE_ARTI_NAME, 'id_access_familles_gammes'
                         ), $is_editable, $synthese_action
         );
 
         //Type de FTA
         $htmlObject = new OldHtmlList(
                 $data_field = self::$objectFta->getFieldDescription(
-                ObjectFta::TABLE_FTA_NAME, "id_fta_categorie"
+                ObjectFta::TABLE_FTA_NAME, 'id_fta_categorie'
                 ), $content_label_field = self::$objectFta->getFieldDescription(
-                ObjectFta::TABLE_WORKFLOW_NAME, "nom_fta_categorie"
-                ), $default_value = 1, $is_editable, $warning_update = ${"diff_" . $table_name}[$field_name]
+                ObjectFta::TABLE_WORKFLOW_NAME, 'nom_fta_categorie'
+                ), $default_value = 1, $is_editable, $warning_update = ${'diff_' . $table_name}[$field_name]
         );
         $bloc.=$htmlObject->getHtmlResultSubForm();
 
         //Désignation Commerciale de l'Article
         $htmlObject = new htmlInputText(
-                $field_name = "designation_commerciale_fta", $table_name = ObjectFta::TABLE_FTA_NAME, $value = self::$objectFta->getFieldValue($table_name, $field_name), $is_editable, $warning_update = ${"diff_" . $table_name}[$field_name], $size = 110, $maxlength = 150
+                $field_name = 'designation_commerciale_fta', $table_name = ObjectFta::TABLE_FTA_NAME, $value = self::$objectFta->getFieldValue($table_name, $field_name), $is_editable, $warning_update = ${'diff_' . $table_name}[$field_name], $size = 110, $maxlength = 150
         );
         $bloc.=$htmlObject->getHtmlResult();
 
         //Poids élémentaire
         $htmlObject = new htmlInputKg(
-                $field_name = "Poids_ELEM", $table_name = ObjectFta::TABLE_ARTI_NAME, $value = self::$objectFta->getFieldValue($table_name, $field_name), $is_editable, $warning_update = ${"diff_" . $table_name}[$field_name], $size = 20, $maxlength = 150
+                $field_name = 'Poids_ELEM', $table_name = ObjectFta::TABLE_ARTI_NAME, $value = self::$objectFta->getFieldValue($table_name, $field_name), $is_editable, $warning_update = ${'diff_' . $table_name}[$field_name], $size = 20, $maxlength = 150
         );
         $bloc.=$htmlObject->getHtmlResult();
 
         //PCB
         $htmlObject = new htmlInputText(
-                $field_name = "NB_UNIT_ELEM", $table_name = ObjectFta::TABLE_ARTI_NAME, $value = self::$objectFta->getFieldValue($table_name, $field_name), $is_editable, $warning_update = ${"diff_" . $table_name}[$field_name]
+                $field_name = 'NB_UNIT_ELEM', $table_name = ObjectFta::TABLE_ARTI_NAME, $value = self::$objectFta->getFieldValue($table_name, $field_name), $is_editable, $warning_update = ${'diff_' . $table_name}[$field_name]
         );
         $bloc.=$htmlObject->getHtmlResult();
 
         //Durée de vie Garantie Client
         $htmlObject = new htmlInputNumber(
-                $field_name = "Duree_de_vie", $table_name = ObjectFta::TABLE_ARTI_NAME, $value = self::$objectFta->getFieldValue($table_name, $field_name), $is_editable, $warning_update = ${"diff_" . $table_name}[$field_name]
+                $field_name = 'Duree_de_vie', $table_name = ObjectFta::TABLE_ARTI_NAME, $value = self::$objectFta->getFieldValue($table_name, $field_name), $is_editable, $warning_update = ${'diff_' . $table_name}[$field_name]
         );
         $bloc.=$htmlObject->getHtmlResult();
 
         //Créateur
         $htmlObject = new htmlInputText(
-                $field_name = "createur_fta", $table_name = ObjectFta::TABLE_CREATEUR_NAME, $value = self::$objectFta->getFieldValue($table_name, "prenom") . " " . strtoupper(self::$objectFta->getFieldValue($table_name, "nom")), $is_editable_false, $warning_update = ${"diff_" . $table_name}[$field_name], $size = 110, $maxlength = 150
+                $field_name = 'createur_fta', $table_name = ObjectFta::TABLE_CREATEUR_NAME, $value = self::$objectFta->getFieldValue($table_name, 'prenom') . ' ' . strtoupper(self::$objectFta->getFieldValue($table_name, 'nom')), $is_editable_false, $warning_update = ${'diff_' . $table_name}[$field_name], $size = 110, $maxlength = 150
         );
         $bloc.=$htmlObject->getHtmlResult();
 
         //Date d'échéance de la FTA
         $htmlObject = new HtmlInputCalendar(
-                $field_name = "date_echeance_fta", $table_name = ObjectFta::TABLE_FTA_NAME, $value = self::$objectFta->getFieldValue($table_name, $field_name), $is_editable, $warning_update = ${"diff_" . $table_name}[$field_name]
+                $field_name = 'date_echeance_fta', $table_name = ObjectFta::TABLE_FTA_NAME, $value = self::$objectFta->getFieldValue($table_name, $field_name), $is_editable, $warning_update = ${'diff_' . $table_name}[$field_name]
         );
         $bloc .= $htmlObject->getHtmlResult();
 
         //Date d'échéance des processus
         $bloc .= ObjectFta::showDatesEcheanceProcessus(
                         $id_fta, $abreviation_fta_etat = self::$objectFta->getFieldValue(
-                        ObjectFta::TABLE_ETAT_NAME, "abreviation_fta_etat"
+                        ObjectFta::TABLE_ETAT_NAME, 'abreviation_fta_etat'
                         ), $date_echeance_fta = self::$objectFta->getFieldValue(
-                        ObjectFta::TABLE_FTA_NAME, "date_echeance_fta"
+                        ObjectFta::TABLE_FTA_NAME, 'date_echeance_fta'
                         ), $is_editable
         );
-        $bloc .= "</table>";
+        $bloc .= '</table>';
         return $bloc;
     }
 
@@ -495,7 +495,7 @@ class Chapitre {
 
     public static function buildChapitreCommentaire() {
 
-        $bloc = "";
+        $bloc = '';
         $id_fta = self::$id_fta;
         $synthese_action = self::$synthese_action;
         $isEditable = self::$is_editable;
@@ -508,20 +508,20 @@ class Chapitre {
         $ftaView->setIsEditable($isEditable);
         $ftaView->setFtaChapitreModelById(self::ID_CHAPITRE_IDENTITE);
 
-        $bloc.="<tr class=titre_principal><td class>Commentaire</td></tr>";
+        $bloc.='<tr class=titre_principal><td class>Commentaire</td></tr>';
 
         //Liste des corrections apportées
-        $bloc.="<tr class=titre_principal><td>Récapitulatif des corrections</td></tr>";
+        $bloc.='<tr class=titre_principal><td>Récapitulatif des corrections</td></tr>';
 
         $bloc.=$ftaView->getHtmlCorrectionChapitre();
 
         //Liste de tous les commentaires des chapitres
-        $bloc.="<tr class=titre_principal><td>Récapitulatif des commentaires</td></tr>";
+        $bloc.='<tr class=titre_principal><td>Récapitulatif des commentaires</td></tr>';
 
         $bloc.=$ftaView->getHtmlCommentaireChapitre();
 
         //Historique des mises à jour de la FTA
-        $bloc.="<tr class=titre_principal><td>Historique des actions effectuées sur le Fiche Technique Article</td></tr>";
+        $bloc.='<tr class=titre_principal><td>Historique des actions effectuées sur le Fiche Technique Article</td></tr>';
 
         $bloc.=$ftaModel->getHtmlDataField(FtaModel::FIELDNAME_COMMENTAIRE_MAJ_FTA);
 
@@ -530,7 +530,7 @@ class Chapitre {
 
     public static function buildChapitreCommerce() {
 
-        $bloc = "";
+        $bloc = '';
         $id_fta = self::$id_fta;
         $synthese_action = self::$synthese_action;
         $isEditable = self::$is_editable;
@@ -559,7 +559,7 @@ class Chapitre {
 
     public static function buildChapitreComposition() {
 
-        $bloc = "";
+        $bloc = '';
         $id_fta = self::$id_fta;
         $synthese_action = self::$synthese_action;
         $isEditable = self::$is_editable;
@@ -571,7 +571,7 @@ class Chapitre {
         $ftaView->setIsEditable($isEditable);
         $ftaView->setFtaChapitreModelById(self::ID_CHAPITRE_IDENTITE);
 
-        $bloc.="<tr class=titre_principal><td class>Composition</td></tr>";
+        $bloc.='<tr class=titre_principal><td class>Composition</td></tr>';
 
         //Liste des composants
         $bloc.= $ftaView->getHtmlDataField(FtaModel::FIELDNAME_VIRTUAL_FTA_COMPOSANT);
@@ -632,70 +632,70 @@ class Chapitre {
 
     public static function buildChapitreProduction() {
 
-        $bloc = "";
+        $bloc = '';
         $id_fta = self::$id_fta;
         $synthese_action = self::$synthese_action;
         $is_editable = self::$is_editable;
         $is_editable_false = false;
 
-        $bloc.="<tr class=titre_principal><td class>Demandeur</td></tr>";
+        $bloc.='<tr class=titre_principal><td class>Demandeur</td></tr>';
 
-        //$bloc .= "</table>";
+        //$bloc .= '</table>';
         return $bloc;
     }
 
     public static function buildChapitreQualite() {
 
-        $bloc = "";
+        $bloc = '';
         $id_fta = self::$id_fta;
         $synthese_action = self::$synthese_action;
         $is_editable = self::$is_editable;
         $is_editable_false = false;
 
-        $bloc.="<tr class=titre_principal><td class>Demandeur</td></tr>";
+        $bloc.='<tr class=titre_principal><td class>Demandeur</td></tr>';
 
         //Durée de vie Garantie Client
         $htmlObject = new htmlInputNumber(
-                $field_name = "Duree_de_vie", $table_name = ObjectFta::TABLE_ARTI_NAME, $value = self::$objectFta->getFieldValue($table_name, $field_name), $is_editable, $warning_update = ${"diff_" . $table_name}[$field_name]
+                $field_name = 'Duree_de_vie', $table_name = ObjectFta::TABLE_ARTI_NAME, $value = self::$objectFta->getFieldValue($table_name, $field_name), $is_editable, $warning_update = ${'diff_' . $table_name}[$field_name]
         );
         $bloc.=$htmlObject->getHtmlResult();
 
         //Durée de vie Production
         $htmlObject = new htmlInputNumber(
-                $field_name = "duree_vie_technique_fta", $table_name = ObjectFta::TABLE_FTA_NAME, $value = self::$objectFta->getFieldValue($table_name, $field_name), $is_editable, $warning_update = ${"diff_" . $table_name}[$field_name]
+                $field_name = 'duree_vie_technique_fta', $table_name = ObjectFta::TABLE_FTA_NAME, $value = self::$objectFta->getFieldValue($table_name, $field_name), $is_editable, $warning_update = ${'diff_' . $table_name}[$field_name]
         );
         $bloc.=$htmlObject->getHtmlResult();
 
         //Liste des ingrédients
         $htmlObject = new HtmlTextArea(
-                $field = "Composition", $table = ObjectFta::TABLE_ARTI_NAME, $value = self::$objectFta->getFieldValue($table, $field), $is_editable, $warning_update = ${"diff_" . $table_name}[$field_name]
+                $field = 'Composition', $table = ObjectFta::TABLE_ARTI_NAME, $value = self::$objectFta->getFieldValue($table, $field), $is_editable, $warning_update = ${'diff_' . $table_name}[$field_name]
         );
         $bloc .= $htmlObject->getHtmlResult();
 
 
         //Température de conservation
-//        $force_content_request = "SELECT id_annexe_environnement_conservation_groupe, CONCAT(nom_annexe_environnement_conservation_groupe, ': ', temperature_par_defaut_annexe_environnement_conservation_groupe)"
-//                . "FROM annexe_environnement_conservation_groupe "
-//                . "ORDER BY CONCAT(nom_annexe_environnement_conservation_groupe, temperature_par_defaut_annexe_environnement_conservation_groupe) ";
+//        $force_content_request = 'SELECT id_annexe_environnement_conservation_groupe, CONCAT(nom_annexe_environnement_conservation_groupe, ': ', temperature_par_defaut_annexe_environnement_conservation_groupe)'
+//                . 'FROM annexe_environnement_conservation_groupe '
+//                . 'ORDER BY CONCAT(nom_annexe_environnement_conservation_groupe, temperature_par_defaut_annexe_environnement_conservation_groupe) ';
 
 
         $htmlObject = new OldHtmlList(
                 $data_field = self::$objectFta->getFieldDescription(
-                ObjectFta::TABLE_ARTI_NAME, "K_etat"
+                ObjectFta::TABLE_ARTI_NAME, 'K_etat'
                 ), $content_label_field = new DatabaseDescriptionField(
-                $field_table = "annexe_environnement_conservation_groupe", $field_name = "temperature_par_defaut_annexe_environnement_conservation_groupe", $field_value = $data_field->getValue()
-                ), $default_value = 1, $is_editable, $warning_update = ${"diff_" . $table_name}[$field_name]
+                $field_table = 'annexe_environnement_conservation_groupe', $field_name = 'temperature_par_defaut_annexe_environnement_conservation_groupe', $field_value = $data_field->getValue()
+                ), $default_value = 1, $is_editable, $warning_update = ${'diff_' . $table_name}[$field_name]
         );
         $bloc.=$htmlObject->getHtmlResult();
 
 
-        //$bloc .= "</table>";
+        //$bloc .= '</table>';
         return $bloc;
     }
 
     public static function buildChapitreSiteExpedition() {
 
-        $bloc = "";
+        $bloc = '';
         $id_fta = self::$id_fta;
         $synthese_action = self::$synthese_action;
         $isEditable = self::$is_editable;
@@ -714,7 +714,7 @@ class Chapitre {
 
     public static function buildChapitreSiteProduction() {
 
-        $bloc = "";
+        $bloc = '';
         $id_fta = self::$id_fta;
         $synthese_action = self::$synthese_action;
         $isEditable = self::$is_editable;
@@ -733,7 +733,7 @@ class Chapitre {
 
     public static function buildChapitreExigenceClient() {
 
-        $bloc = "";
+        $bloc = '';
         $id_fta = self::$id_fta;
         $synthese_action = self::$synthese_action;
         $isEditable = self::$is_editable;
@@ -752,7 +752,7 @@ class Chapitre {
 
     public static function buildChapitrePcb() {
 
-        $bloc = "";
+        $bloc = '';
         $id_fta = self::$id_fta;
         $synthese_action = self::$synthese_action;
         $isEditable = self::$is_editable;
@@ -774,7 +774,7 @@ class Chapitre {
 
     public static function buildChapitreEmballage() {
 
-        $bloc = "";
+        $bloc = '';
         $id_fta = self::$id_fta;
         $synthese_action = self::$synthese_action;
         $isEditable = self::$is_editable;
@@ -790,15 +790,15 @@ class Chapitre {
         $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_DESCRIPTION_EMBALLAGE);
 
         //Emballages par UVC
-        $bloc.="<tr class=titre_principal><td class>Emballages par UVC</td></tr>";
+        $bloc.='<tr class=titre_principal><td class>Emballages par UVC</td></tr>';
         $bloc.=$ftaView->getHtmlEmballageUVC($id_fta, $idChapitre, $synthese_action, self::$comeback, self::$id_fta_etat, self::$abrevation_etat, self::$id_fta_role);
 
         //Emballages par Colis
-        $bloc.="<tr class=titre_principal><td class>Emballages par Colis</td></tr>";
+        $bloc.='<tr class=titre_principal><td class>Emballages par Colis</td></tr>';
         $bloc.=$ftaView->getHtmlEmballageParColis($id_fta, $idChapitre, $synthese_action, self::$comeback, self::$id_fta_etat, self::$abrevation_etat, self::$id_fta_role);
 
         //Palette
-        $bloc.="<tr class=titre_principal><td class>Emballages Palette</td></tr>";
+        $bloc.='<tr class=titre_principal><td class>Emballages Palette</td></tr>';
         $bloc.=$ftaView->getHtmlEmballagePalette($id_fta, $idChapitre, $synthese_action, self::$comeback, self::$id_fta_etat, self::$abrevation_etat, self::$id_fta_role);
 
         return $bloc;
@@ -806,7 +806,7 @@ class Chapitre {
 
     public static function buildChapitreEmballageDuColis() {
 
-        $bloc = "";
+        $bloc = '';
         $id_fta = self::$id_fta;
         $synthese_action = self::$synthese_action;
         $isEditable = self::$is_editable;
@@ -821,7 +821,7 @@ class Chapitre {
         $ftaView->setFtaChapitreModelById(self::ID_CHAPITRE_IDENTITE);
 
         //Emballages du Colis
-        $bloc.="<tr class=titre_principal><td class>Emballages du Colis</td></tr>";
+        $bloc.='<tr class=titre_principal><td class>Emballages du Colis</td></tr>';
         $bloc.=$ftaView->getHtmlEmballageDuColis($id_fta, $idChapitre, $synthese_action, self::$comeback, self::$id_fta_etat, self::$abrevation_etat, self::$id_fta_role);
 
         return $bloc;
@@ -829,7 +829,7 @@ class Chapitre {
 
     public static function buildChapitreEtiquetteClient() {
 
-        $bloc = "";
+        $bloc = '';
         $id_fta = self::$id_fta;
         $synthese_action = self::$synthese_action;
         $isEditable = self::$is_editable;
@@ -864,7 +864,7 @@ class Chapitre {
         $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_LOGO_ECO_EMBALLAGE);
 
 
-        $bloc.="<tr> <td>Logo spécifique étiquette manquant choix possible en dessous ?</td></tr>";
+        $bloc.='<tr> <td>Logo spécifique étiquette manquant choix possible en dessous ?</td></tr>';
 
         //Libellé etiquette carton:
         $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_LIBELLE_CLIENT);
@@ -879,7 +879,7 @@ class Chapitre {
 
     public static function buildChapitreEtiquetteClient_FEAvecEtiq() {
 
-        $bloc = "";
+        $bloc = '';
         $id_fta = self::$id_fta;
         $synthese_action = self::$synthese_action;
         $isEditable = self::$is_editable;
@@ -914,7 +914,7 @@ class Chapitre {
         $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_LOGO_ECO_EMBALLAGE);
 
 
-        $bloc.="<tr> <td>Logo spécifique étiquette manquant choix possible en dessous ?</td></tr>";
+        $bloc.='<tr> <td>Logo spécifique étiquette manquant choix possible en dessous ?</td></tr>';
 
         //Libellé etiquette carton:
         $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_LIBELLE_CLIENT);
@@ -923,13 +923,13 @@ class Chapitre {
         $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_ETIQUETTE_CODESOFT);
 
 
-        $bloc.="<tr> <td>Masque étiquette UVC recto</td></tr>";
+        $bloc.='<tr> <td>Masque étiquette UVC recto</td></tr>';
 
 
-        $bloc.="<tr> <td>Masque étiquette UVC verso</td></tr>";
+        $bloc.='<tr> <td>Masque étiquette UVC verso</td></tr>';
 
 
-        $bloc.="<tr> <td>Masque colis</td></tr>";
+        $bloc.='<tr> <td>Masque colis</td></tr>';
 
 
         return $bloc;
@@ -937,7 +937,7 @@ class Chapitre {
 
     public static function buildChapitreEtiquetteClient_MDDAvecEtiq() {
 
-        $bloc = "";
+        $bloc = '';
         $id_fta = self::$id_fta;
         $synthese_action = self::$synthese_action;
         $isEditable = self::$is_editable;
@@ -958,7 +958,7 @@ class Chapitre {
         //Logo éco-emballage
         $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_LOGO_ECO_EMBALLAGE);
 
-        $bloc.="<tr> <td>Logo spécifique étiquette manquant choix possible en dessous ?</td></tr>";
+        $bloc.='<tr> <td>Logo spécifique étiquette manquant choix possible en dessous ?</td></tr>';
 
         //Libellé etiquette carton:
         $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_LIBELLE_CLIENT);
@@ -970,17 +970,17 @@ class Chapitre {
         $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_LIBELLE_CODE_ARTICLE_CLIENT);
 
 
-        $bloc.="<tr> <td>Masque étiquette UVC recto</td></tr>";
+        $bloc.='<tr> <td>Masque étiquette UVC recto</td></tr>';
 
 
-        $bloc.="<tr> <td>Masque colis</td></tr>";
+        $bloc.='<tr> <td>Masque colis</td></tr>';
 
         return $bloc;
     }
 
     public static function buildChapitreEtiquetteRD() {
 
-        $bloc = "";
+        $bloc = '';
         $id_fta = self::$id_fta;
         $synthese_action = self::$synthese_action;
         $isEditable = self::$is_editable;
@@ -999,7 +999,7 @@ class Chapitre {
 
     public static function buildChapitreEtiquetteArticle() {
 
-        $bloc = "";
+        $bloc = '';
         $id_fta = self::$id_fta;
         $synthese_action = self::$synthese_action;
         $isEditable = self::$is_editable;
@@ -1028,7 +1028,7 @@ class Chapitre {
 
     public static function buildChapitreEtiquetteArticle_MDDAvecEtiq() {
 
-        $bloc = "";
+        $bloc = '';
         $id_fta = self::$id_fta;
         $synthese_action = self::$synthese_action;
         $isEditable = self::$is_editable;
@@ -1050,7 +1050,7 @@ class Chapitre {
         $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_CONSEIL_APRES_OUVERTURE);
 
         //Forcer libellé étiquette colis
-        $bloc.="<tr> <td>Forcer libellé étiquette colis ?</td></tr>";
+        $bloc.='<tr> <td>Forcer libellé étiquette colis ?</td></tr>';
 
         //Conditionné sous atmosphère protectrice
         $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_CONDITION_SOUS_ATMOSPHERE);
@@ -1060,7 +1060,7 @@ class Chapitre {
 
     public static function buildChapitreEtiquetteArticle_FEAvecEtiq() {
 
-        $bloc = "";
+        $bloc = '';
         $id_fta = self::$id_fta;
         $synthese_action = self::$synthese_action;
         $isEditable = self::$is_editable;
@@ -1089,7 +1089,7 @@ class Chapitre {
 
     public static function buildChapitreEtiquetteComposant() {
 
-        $bloc = "";
+        $bloc = '';
         $id_fta = self::$id_fta;
         $synthese_action = self::$synthese_action;
         $isEditable = self::$is_editable;
@@ -1101,7 +1101,7 @@ class Chapitre {
         $ftaView->setFtaChapitreModelById(self::ID_CHAPITRE_IDENTITE);
 
 
-        $bloc.="<tr> <td>Lequelle choisir  pour la durré de vie ?</td></tr>";
+        $bloc.='<tr> <td>Lequelle choisir  pour la durré de vie ?</td></tr>';
 
         //Durée de vie Production (en jours)
         $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_DUREE_DE_VIE_TECHNIQUE_PRODUCTION);
@@ -1109,13 +1109,13 @@ class Chapitre {
         //Durée de Vie Maximale (en jour)
         $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_DUREE_DE_VIE_TECHNIQUE_MAXIMALE);
 
-        $bloc.="<tr> <td>Poids net étiqueté</td></tr>";
+        $bloc.='<tr> <td>Poids net étiqueté</td></tr>';
 
-        $bloc.="<tr> <td>Quantité par colis</td></tr>";
+        $bloc.='<tr> <td>Quantité par colis</td></tr>';
 
-        $bloc.="<tr> <td>Dénomination commerciale de ventes</td></tr>";
+        $bloc.='<tr> <td>Dénomination commerciale de ventes</td></tr>';
 
-        $bloc.="<tr> <td>Dénomination légale de ventes</td></tr>";
+        $bloc.='<tr> <td>Dénomination légale de ventes</td></tr>';
 
         //Composition Etiquette (1er paragraphe)
         $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_COMPOSITION1);
@@ -1125,21 +1125,21 @@ class Chapitre {
 
 
         //Information complémentaire recto
-        $bloc.="<tr> <td>Information complémentaire recto ? Possible choix remarque ?</td></tr>";
+        $bloc.='<tr> <td>Information complémentaire recto ? Possible choix remarque ?</td></tr>';
         $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_REMARQUE);
 
-        $bloc.="<tr> <td>Décomposition du poids</td></tr>";
+        $bloc.='<tr> <td>Décomposition du poids</td></tr>';
 
-        $bloc.="<tr> <td>Taille des ingrédients</td></tr>";
+        $bloc.='<tr> <td>Taille des ingrédients</td></tr>';
 
-        $bloc.="<tr> <td>Valeurs nutrionnelles</td></tr>";
+        $bloc.='<tr> <td>Valeurs nutrionnelles</td></tr>';
 
         return $bloc;
     }
 
     public static function buildChapitreEtiquetteComposant_FEAvecEtiq() {
 
-        $bloc = "";
+        $bloc = '';
         $id_fta = self::$id_fta;
         $synthese_action = self::$synthese_action;
         $isEditable = self::$is_editable;
@@ -1151,7 +1151,7 @@ class Chapitre {
         $ftaView->setFtaChapitreModelById(self::ID_CHAPITRE_IDENTITE);
 
 
-        $bloc.="<tr> <td>Lequelle choisir  pour la durré de vie ?</td></tr>";
+        $bloc.='<tr> <td>Lequelle choisir  pour la durré de vie ?</td></tr>';
 
         //Durée de vie Production (en jours)
         $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_DUREE_DE_VIE_TECHNIQUE_PRODUCTION);
@@ -1159,13 +1159,13 @@ class Chapitre {
         //Durée de Vie Maximale (en jour)
         $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_DUREE_DE_VIE_TECHNIQUE_MAXIMALE);
 
-        $bloc.="<tr> <td>Poids net étiqueté</td></tr>";
+        $bloc.='<tr> <td>Poids net étiqueté</td></tr>';
 
-        $bloc.="<tr> <td>Quantité par colis</td></tr>";
+        $bloc.='<tr> <td>Quantité par colis</td></tr>';
 
-        $bloc.="<tr> <td>Dénomination commerciale de ventes</td></tr>";
+        $bloc.='<tr> <td>Dénomination commerciale de ventes</td></tr>';
 
-        $bloc.="<tr> <td>Dénomination légale de ventes</td></tr>";
+        $bloc.='<tr> <td>Dénomination légale de ventes</td></tr>';
 
         //Composition Etiquette (1er paragraphe)
         $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_COMPOSITION1);
@@ -1175,21 +1175,21 @@ class Chapitre {
 
 
         //Information complémentaire recto
-        $bloc.="<tr> <td>Information complémentaire recto ? Possible choix remarque ?</td></tr>";
+        $bloc.='<tr> <td>Information complémentaire recto ? Possible choix remarque ?</td></tr>';
         $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_REMARQUE);
 
-        $bloc.="<tr> <td>Décomposition du poids</td></tr>";
+        $bloc.='<tr> <td>Décomposition du poids</td></tr>';
 
-        $bloc.="<tr> <td>Taille des ingrédients</td></tr>";
+        $bloc.='<tr> <td>Taille des ingrédients</td></tr>';
 
-        $bloc.="<tr> <td>Valeurs nutrionnelles</td></tr>";
+        $bloc.='<tr> <td>Valeurs nutrionnelles</td></tr>';
 
         return $bloc;
     }
 
     public static function buildChapitreEtiquetteComposant_MDDAvecEtiq() {
 
-        $bloc = "";
+        $bloc = '';
         $id_fta = self::$id_fta;
         $synthese_action = self::$synthese_action;
         $isEditable = self::$is_editable;
@@ -1201,7 +1201,7 @@ class Chapitre {
         $ftaView->setFtaChapitreModelById(self::ID_CHAPITRE_IDENTITE);
 
 
-        $bloc.="<tr> <td>Lequelle choisir  pour la durré de vie ?</td></tr>";
+        $bloc.='<tr> <td>Lequelle choisir  pour la durré de vie ?</td></tr>';
 
         //Durée de vie Production (en jours)
         $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_DUREE_DE_VIE_TECHNIQUE_PRODUCTION);
@@ -1209,13 +1209,13 @@ class Chapitre {
         //Durée de Vie Maximale (en jour)
         $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_DUREE_DE_VIE_TECHNIQUE_MAXIMALE);
 
-        $bloc.="<tr> <td>Poids net étiqueté</td></tr>";
+        $bloc.='<tr> <td>Poids net étiqueté</td></tr>';
 
-        $bloc.="<tr> <td>Quantité par colis</td></tr>";
+        $bloc.='<tr> <td>Quantité par colis</td></tr>';
 
-        $bloc.="<tr> <td>Dénomination commerciale de ventes</td></tr>";
+        $bloc.='<tr> <td>Dénomination commerciale de ventes</td></tr>';
 
-        $bloc.="<tr> <td>Dénomination légale de ventes</td></tr>";
+        $bloc.='<tr> <td>Dénomination légale de ventes</td></tr>';
 
         //Composition Etiquette (1er paragraphe)
         $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_COMPOSITION1);
@@ -1225,71 +1225,71 @@ class Chapitre {
 
 
         //Information complémentaire recto
-        $bloc.="<tr> <td>Information complémentaire recto ? Possible choix remarque ?</td></tr>";
+        $bloc.='<tr> <td>Information complémentaire recto ? Possible choix remarque ?</td></tr>';
         $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_REMARQUE);
 
-        $bloc.="<tr> <td>Décomposition du poids</td></tr>";
+        $bloc.='<tr> <td>Décomposition du poids</td></tr>';
 
-        $bloc.="<tr> <td>Taille des ingrédients</td></tr>";
+        $bloc.='<tr> <td>Taille des ingrédients</td></tr>';
 
-        $bloc.="<tr> <td>Valeurs nutrionnelles</td></tr>";
+        $bloc.='<tr> <td>Valeurs nutrionnelles</td></tr>';
 
         return $bloc;
     }
 
     public static function buildChapitreDecoupe() {
 
-        $bloc = "";
+        $bloc = '';
         $id_fta = self::$id_fta;
         $synthese_action = self::$synthese_action;
         $is_editable = self::$is_editable;
         $is_editable_false = false;
 
-        $bloc.="<tr class=titre_principal><td class>Demandeur</td></tr>";
+        $bloc.='<tr class=titre_principal><td class>Demandeur</td></tr>';
 
         //Nom du demandeur
         $htmlObject = new htmlInputText(
-                $field_name = "type_minerai", $table_name = ObjectFta::TABLE_FTA_NAME, $value = self::$objectFta->getFieldValue($table_name, $field_name), $is_editable, $warning_update = ${"diff_" . $table_name}[$field_name]
+                $field_name = 'type_minerai', $table_name = ObjectFta::TABLE_FTA_NAME, $value = self::$objectFta->getFieldValue($table_name, $field_name), $is_editable, $warning_update = ${'diff_' . $table_name}[$field_name]
         );
         $bloc.=$htmlObject->getHtmlResult();
 
         //Besoin de la fiche technique ?
         $htmlObject = new HtmlListBoolean(
                 $data_field = self::$objectFta->getFieldDescription(
-                ObjectFta::TABLE_FTA_NAME, "bon_fabrication_atelier"), $default_value = HtmlListBoolean::NO_VALUE, $is_editable, $warning_update = ${"diff_" . $table_name}[$field_name]
+                ObjectFta::TABLE_FTA_NAME, 'bon_fabrication_atelier'), $default_value = HtmlListBoolean::NO_VALUE, $is_editable, $warning_update = ${'diff_' . $table_name}[$field_name]
         );
         $bloc.=$htmlObject->getHtmlResult();
 
         //Calibre
         $htmlObject = new OldHtmlList(
                 $data_field = self::$objectFta->getFieldDescription(
-                ObjectFta::TABLE_FTA_NAME, "id_arcadia_type_calibre"
+                ObjectFta::TABLE_FTA_NAME, 'id_arcadia_type_calibre'
                 ), $content_label_field = new DatabaseDescriptionField(
-                $field_table = "arcadia_type_calibre", $field_name = "nom_arcadia_type_calibre", $field_value = $data_field->getValue()
-                ), $default_value = 1, $is_editable, $warning_update = ${"diff_" . $table_name}[$field_name]
+                $field_table = 'arcadia_type_calibre', $field_name = 'nom_arcadia_type_calibre', $field_value = $data_field->getValue()
+                ), $default_value = 1, $is_editable, $warning_update = ${'diff_' . $table_name}[$field_name]
         );
         $bloc.=$htmlObject->getHtmlResult();
 
         //Nom du demandeur
         $htmlObject = new htmlInputText(
-                $field_name = "calibre_defaut", $table_name = ObjectFta::TABLE_FTA_NAME, $value = self::$objectFta->getFieldValue($table_name, $field_name), $is_editable, $warning_update = ${"diff_" . $table_name}[$field_name]
+                $field_name = 'calibre_defaut', $table_name = ObjectFta::TABLE_FTA_NAME, $value = self::$objectFta->getFieldValue($table_name, $field_name), $is_editable, $warning_update = ${'diff_' . $table_name}[$field_name]
         );
         $bloc.=$htmlObject->getHtmlResult();
 
         //Besoin de la fiche technique ?
         $htmlObject = new HtmlListBoolean(
                 $data_field = self::$objectFta->getFieldDescription(
-                ObjectFta::TABLE_FTA_NAME, "besoin_fiche_rendement"), $default_value = HtmlListBoolean::NO_VALUE, $is_editable, $warning_update = ${"diff_" . $table_name}[$field_name]
+                ObjectFta::TABLE_FTA_NAME, 'besoin_fiche_rendement'), $default_value = HtmlListBoolean::NO_VALUE, $is_editable, $warning_update = ${'diff_' . $table_name}[$field_name]
         );
         $bloc.=$htmlObject->getHtmlResult();
 
-        //$bloc .= "</table>";
+        //$bloc .= '</table>';
         return $bloc;
     }
 
     public static function buildChapitreDictionnaireDeDonnees() {
 
-        $bloc = "";
+        $bloc = '';
         $id_fta = self::$id_fta;
         $synthese_action = self::$synthese_action;
         $isEditable = self::$is_editable;
@@ -1300,12 +1300,12 @@ class Chapitre {
         $ftaView->setIsEditable($isEditable);
         $ftaView->setFtaChapitreModelById(self::ID_CHAPITRE_IDENTITE);
 
-        $bloc.="<tr class=titre_principal><td class>Activation des Produits</td></tr>";
+        $bloc.='<tr class=titre_principal><td class>Activation des Produits</td></tr>';
 
         //Codification
         $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_SUFFIXE_AGROLOGIC_FTA);
 
-        $bloc.="<tr class=titre_principal><td class>Logistique</td></tr>";
+        $bloc.='<tr class=titre_principal><td class>Logistique</td></tr>';
 
         //Site d'assemblage
         $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_SITE_ASSEMBLAGE);
@@ -1316,9 +1316,9 @@ class Chapitre {
         //Code Douane 
         $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_CODE_DOUANE_FTA);
 
-        $bloc.="<tr class=titre_principal><td class>Palettisasion</td></tr>";
+        $bloc.='<tr class=titre_principal><td class>Palettisasion</td></tr>';
 
-        $bloc.="<tr class=titre_principal><td class>Informations Générales de l'UVC</td></tr>";
+        $bloc.='<tr class=titre_principal><td class>Informations Générales de l\'UVC</td></tr>';
 
         $bloc.=$ftaView->getHtmlPoidsEmballageUVC();
 
@@ -1333,7 +1333,7 @@ class Chapitre {
 
         $bloc.=$ftaView->getHtmlDimensionEmballageUVC();
 
-        $bloc.="<tr class=titre_principal> <td>Informations Générales du Colis</td></tr>";
+        $bloc.='<tr class=titre_principal> <td>Informations Générales du Colis</td></tr>';
 
         //Nombre d'UVC du colis:
 
@@ -1358,7 +1358,7 @@ class Chapitre {
 
         $bloc.=$ftaView->getHtmlHauteurColisUVC();
 
-        $bloc.="<tr class=titre_principal> <td>Informations Générales d'une Palette</td></tr>";
+        $bloc.='<tr class=titre_principal> <td>Informations Générales d\'une Palette</td></tr>';
 
         //Poids Net (en Kg) d'une Palette:
 
@@ -1387,7 +1387,7 @@ class Chapitre {
 
         $bloc.=$ftaView->getHtmlColisTotalUVC();
 
-        $bloc.="<tr class=titre_principal><td class>Composition</td></tr>";
+        $bloc.='<tr class=titre_principal><td class>Composition</td></tr>';
 
         //Agrément CE
         $bloc.=$ftaView->getHtmlSiteAgrement();
@@ -1428,7 +1428,7 @@ class Chapitre {
         //Code douane
         $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_CODE_DOUANE_FTA);
 
-        $bloc.="<tr class=titre_principal><td class>Codification Standard Externe</td></tr><tr><td>";
+        $bloc.='<tr class=titre_principal><td class>Codification Standard Externe</td></tr><tr><td>';
 
         //Gencod EAN Article
         $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_EAN_COLIS);
@@ -1439,7 +1439,7 @@ class Chapitre {
         //Gencod EAN Palette
         $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_EAN_PALETTE);
 
-        $bloc.="<tr class=titre_principal><td class>Codification</td></tr>";
+        $bloc.='<tr class=titre_principal><td class>Codification</td></tr>';
 
         //Unité de Poids d'affichage:
         $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_UNITE_AFFICHAGE);
@@ -1457,15 +1457,15 @@ class Chapitre {
         $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_CODE_ARTICLE_LDC);
 
 
-        $bloc.="<tr class=titre_principal><td class>Etiquettes</td></tr>";
+        $bloc.='<tr class=titre_principal><td class>Etiquettes</td></tr>';
 
-        $bloc.="<tr class=titre_principal><td class>Gestion des étiquettes</td></tr>";
+        $bloc.='<tr class=titre_principal><td class>Gestion des étiquettes</td></tr>';
 
 
         //Activer le système d'impression Base Etiquette Codesoft
         $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_ACTIVATION_CODESOFT);
 
-        $bloc.="<tr class=titre_principal><td class>Etiquettes Colis</td></tr>";
+        $bloc.='<tr class=titre_principal><td class>Etiquettes Colis</td></tr>';
 
         //Laisser l'informatique gérer la désignation ?:
         $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_VERROUILLAGE_LIBELLE_ETIQUETTE);
@@ -1476,7 +1476,7 @@ class Chapitre {
         //Modèle d'étiquette
         $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_ETIQUETTE_CODESOFT);
 
-        $bloc.="<tr class=titre_principal><td class>Etiquettes Composition</td></tr>";
+        $bloc.='<tr class=titre_principal><td class>Etiquettes Composition</td></tr>';
 
         //Composition Etiquette (1er paragraphe)
         $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_COMPOSITION1);
@@ -1487,9 +1487,9 @@ class Chapitre {
         //Libellé Code Douane 
         $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_LIBELLE_MULTILANGUE);
 
-        $bloc.="<tr class=titre_principal><td class>Identité</td></tr>";
+        $bloc.='<tr class=titre_principal><td class>Identité</td></tr>';
 
-        $bloc.="<tr class=titre_principal><td class>Demandeur</td></tr>";
+        $bloc.='<tr class=titre_principal><td class>Demandeur</td></tr>';
 
         //Nom du demandeur
         $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_NOM_DEMANDEUR);
@@ -1503,7 +1503,7 @@ class Chapitre {
         //Echéance du demandeur
         $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_ECHEANCE_DEMANDEUR);
 
-        $bloc.="<tr class=titre_principal><td class>Classification</td></tr>";
+        $bloc.='<tr class=titre_principal><td class>Classification</td></tr>';
 
         //Nom du client du demandeur
         $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_NOM_CLIENT_DEMANDEUR);
@@ -1518,7 +1518,7 @@ class Chapitre {
         //Segment du client
         $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_SEGMENT_CLIENT);
 
-        $bloc.="<tr class=titre_principal><td class>Estimations</td></tr>";
+        $bloc.='<tr class=titre_principal><td class>Estimations</td></tr>';
 
 
         //Quantité estimée en poids ou pièce par semaine
@@ -1528,7 +1528,7 @@ class Chapitre {
         $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_FREQUENCE_HEBDOMADAIRE_ESTIMEE_COMMANDE);
 
 
-        $bloc.="<tr class=titre_principal><td class>Caractéristiques générales du produit</td></tr>";
+        $bloc.='<tr class=titre_principal><td class>Caractéristiques générales du produit</td></tr>';
 
         //Désignation commerciale
         $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_DESIGNATION_COMMERCIALE);
@@ -1549,7 +1549,7 @@ class Chapitre {
          * todo manque la correction du PCB
          */
 
-        $bloc.="<tr class=titre_principal><td class>Caractéristiques FTA</td></tr>";
+        $bloc.='<tr class=titre_principal><td class>Caractéristiques FTA</td></tr>';
 
         //Créateur
         $bloc.=$ftaView->getHtmlCreateurFta();
@@ -1566,20 +1566,20 @@ class Chapitre {
         //Calibre par défaut
         $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_CALIBRE_DEFAUT);
 
-        $bloc.="<tr class=titre_principal><td class>Echéances</td></tr>";
+        $bloc.='<tr class=titre_principal><td class>Echéances</td></tr>';
 
         //Date d'échéance des processus
         $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_VIRTUAL_FTA_PROCESSUS_DELAI);
 
 
-        $bloc.="<tr class=titre_principal><td class>Commerce</td></tr>";
+        $bloc.='<tr class=titre_principal><td class>Commerce</td></tr>';
 
         /**
          * @todo Non implementé
          */
         //Remise sur factures
-        //"fta_tarif", "conditions_commerciales_fta_tarif"
-        $bloc.="<tr> <td>Remise sur factures</td><td> not implement(sous table)</td></tr>";
+        //'fta_tarif', 'conditions_commerciales_fta_tarif'
+        $bloc.='<tr> <td>Remise sur factures</td><td> not implement(sous table)</td></tr>';
 
         //Libellé du code article chez le client
         $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_LIBELLE_CODE_ARTICLE_CLIENT);
@@ -1607,79 +1607,79 @@ class Chapitre {
 
     public static function buildChapitreConditionnementPieceEntiere() {
 
-        $bloc = "";
+        $bloc = '';
         $id_fta = self::$id_fta;
         $synthese_action = self::$synthese_action;
         $is_editable = self::$is_editable;
         $is_editable_false = false;
 
-        $bloc.="<tr class=titre_principal><td class>Demandeur</td></tr>";
+        $bloc.='<tr class=titre_principal><td class>Demandeur</td></tr>';
 
         //Poste
         $htmlObject = new OldHtmlList(
                 $data_field = self::$objectFta->getFieldDescription(
-                ObjectFta::TABLE_FTA_NAME, "id_arcadia_poste"
+                ObjectFta::TABLE_FTA_NAME, 'id_arcadia_poste'
                 ), $content_label_field = new DatabaseDescriptionField(
-                $field_table = "arcadia_poste", $field_name = "nom_arcadia_poste", $field_value = $data_field->getValue()
-                ), $default_value = 1, $is_editable, $warning_update = ${"diff_" . $table_name}[$field_name]
+                $field_table = 'arcadia_poste', $field_name = 'nom_arcadia_poste', $field_value = $data_field->getValue()
+                ), $default_value = 1, $is_editable, $warning_update = ${'diff_' . $table_name}[$field_name]
         );
         $bloc.=$htmlObject->getHtmlResultSubForm();
 
         //Atelier
         $htmlObject = new OldHtmlList(
                 $data_field = self::$objectFta->getFieldDescription(
-                ObjectFta::TABLE_FTA_NAME, "id_arcadia_atelier"
+                ObjectFta::TABLE_FTA_NAME, 'id_arcadia_atelier'
                 ), $content_label_field = new DatabaseDescriptionField(
-                $field_table = "arcadia_atelier", $field_name = "nom_arcadia_atelier", $field_value = $data_field->getValue()
-                ), $default_value = 1, $is_editable, $warning_update = ${"diff_" . $table_name}[$field_name]
+                $field_table = 'arcadia_atelier', $field_name = 'nom_arcadia_atelier', $field_value = $data_field->getValue()
+                ), $default_value = 1, $is_editable, $warning_update = ${'diff_' . $table_name}[$field_name]
         );
         $bloc.=$htmlObject->getHtmlResultSubForm();
 
         //Machine
         $htmlObject = new htmlInputText(
-                $field_name = "nom_machine_fta", $table_name = ObjectFta::TABLE_FTA_NAME, $value = self::$objectFta->getFieldValue($table_name, $field_name), $is_editable, $warning_update = ${"diff_" . $table_name}[$field_name]
+                $field_name = 'nom_machine_fta', $table_name = ObjectFta::TABLE_FTA_NAME, $value = self::$objectFta->getFieldValue($table_name, $field_name), $is_editable, $warning_update = ${'diff_' . $table_name}[$field_name]
         );
         $bloc.=$htmlObject->getHtmlResult();
 
         //Tare
         $htmlObject = new htmlInputKg(
-                $field_name = "tare_fta", $table_name = ObjectFta::TABLE_FTA_NAME, $value = self::$objectFta->getFieldValue($table_name, $field_name), $is_editable, $warning_update = ${"diff_" . $table_name}[$field_name], $size = 20, $maxlength = 150
+                $field_name = 'tare_fta', $table_name = ObjectFta::TABLE_FTA_NAME, $value = self::$objectFta->getFieldValue($table_name, $field_name), $is_editable, $warning_update = ${'diff_' . $table_name}[$field_name], $size = 20, $maxlength = 150
         );
         $bloc.=$htmlObject->getHtmlResult();
 
         //Besoin de la fiche productivité ?
         $htmlObject = new HtmlListBoolean(
                 $data_field = self::$objectFta->getFieldDescription(
-                ObjectFta::TABLE_FTA_NAME, "besoin_fiche_productivite_fta"), $default_value = HtmlListBoolean::NO_VALUE, $is_editable, $warning_update = ${"diff_" . $table_name}[$field_name]
+                ObjectFta::TABLE_FTA_NAME, 'besoin_fiche_productivite_fta'), $default_value = HtmlListBoolean::NO_VALUE, $is_editable, $warning_update = ${'diff_' . $table_name}[$field_name]
         );
         $bloc.=$htmlObject->getHtmlResult();
 
         //perte_matiere_fta
         $htmlObject = new HtmlListBoolean(
                 $data_field = self::$objectFta->getFieldDescription(
-                ObjectFta::TABLE_FTA_NAME, "perte_matiere_fta"), $default_value = HtmlListBoolean::NO_VALUE, $is_editable, $warning_update = ${"diff_" . $table_name}[$field_name]
+                ObjectFta::TABLE_FTA_NAME, 'perte_matiere_fta'), $default_value = HtmlListBoolean::NO_VALUE, $is_editable, $warning_update = ${'diff_' . $table_name}[$field_name]
         );
         $bloc.=$htmlObject->getHtmlResult();
 
         //Longueur
         $htmlObject = new htmlInputText(
-                $field_name = "longueur_dimension_fta", $table_name = ObjectFta::TABLE_FTA_NAME, $value = self::$objectFta->getFieldValue($table_name, $field_name), $is_editable, $warning_update = ${"diff_" . $table_name}[$field_name]
+                $field_name = 'longueur_dimension_fta', $table_name = ObjectFta::TABLE_FTA_NAME, $value = self::$objectFta->getFieldValue($table_name, $field_name), $is_editable, $warning_update = ${'diff_' . $table_name}[$field_name]
         );
         $bloc.=$htmlObject->getHtmlResult();
 
         //Largeur
         $htmlObject = new htmlInputText(
-                $field_name = "largeur_dimension_fta", $table_name = ObjectFta::TABLE_FTA_NAME, $value = self::$objectFta->getFieldValue($table_name, $field_name), $is_editable, $warning_update = ${"diff_" . $table_name}[$field_name]
+                $field_name = 'largeur_dimension_fta', $table_name = ObjectFta::TABLE_FTA_NAME, $value = self::$objectFta->getFieldValue($table_name, $field_name), $is_editable, $warning_update = ${'diff_' . $table_name}[$field_name]
         );
         $bloc.=$htmlObject->getHtmlResult();
 
         //Hauteur
         $htmlObject = new htmlInputText(
-                $field_name = "hauteur_dimension_fta", $table_name = ObjectFta::TABLE_FTA_NAME, $value = self::$objectFta->getFieldValue($table_name, $field_name), $is_editable, $warning_update = ${"diff_" . $table_name}[$field_name]
+                $field_name = 'hauteur_dimension_fta', $table_name = ObjectFta::TABLE_FTA_NAME, $value = self::$objectFta->getFieldValue($table_name, $field_name), $is_editable, $warning_update = ${'diff_' . $table_name}[$field_name]
         );
         $bloc.=$htmlObject->getHtmlResult();
 
-        //$bloc .= "</table>";
+        //$bloc .= '</table>';
         return $bloc;
     }
 
@@ -1691,20 +1691,20 @@ class Chapitre {
         $is_editable = self::$is_editable;
         $is_editable_false = false;
 
-        //$bloc.="<tr class=titre_principal><td class>Demandeur</td></tr>";
+        //$bloc.='<tr class=titre_principal><td class>Demandeur</td></tr>';
         //Type Marinade
         $htmlObject = new htmlInputText(
-                $field_name = "type_marinade_fta", $table_name = ObjectFta::TABLE_FTA_NAME, $value = self::$objectFta->getFieldValue($table_name, $field_name), $is_editable, $warning_update = ${"diff_" . $table_name}[$field_name]
+                $field_name = 'type_marinade_fta', $table_name = ObjectFta::TABLE_FTA_NAME, $value = self::$objectFta->getFieldValue($table_name, $field_name), $is_editable, $warning_update = ${'diff_' . $table_name}[$field_name]
         );
         $bloc.=$htmlObject->getHtmlResult();
 
-        //$bloc .= "</table>";
+        //$bloc .= '</table>';
         return $bloc;
     }
 
     public static function buildChapitreActivationDesProduits() {
 
-        $bloc = "";
+        $bloc = '';
         $id_fta = self::$id_fta;
         $synthese_action = self::$synthese_action;
         $isEditable = self::$is_editable;
@@ -1717,39 +1717,39 @@ class Chapitre {
         $ftaView->setIsEditable($isEditable);
         $ftaView->setFtaChapitreModelById(self::ID_CHAPITRE_IDENTITE);
 
-        $bloc.="<tr class=titre_principal><td class>Activation des Produits</td></tr>";
+        $bloc.='<tr class=titre_principal><td class>Activation des Produits</td></tr>';
 
 
         //Code Produit Agrologic
         //  $bloc.=$ftaView->getHtmlDataField(FtaComposantModel::FIELDNAME_CODE_PRODUIT_AGROLOGIC_FTA_NOMENCLATURE);
 
-        $bloc.="<tr> <td>Code Produit Agrologic</td><td> not implement(sous table)</td></tr>";
+        $bloc.='<tr> <td>Code Produit Agrologic</td><td> not implement(sous table)</td></tr>';
 
         //Désignation (Format DIN)
         //   $bloc.=$ftaView->getHtmlDataField(FtaComposantModel::FIELDNAME_DESIGNATION_CODIFICATION);
 
-        $bloc.="<tr> <td>Désignation (Format DIN)</td><td> not implement(sous table)</td></tr>";
+        $bloc.='<tr> <td>Désignation (Format DIN)</td><td> not implement(sous table)</td></tr>';
 
         //Site de Production
         //  $bloc.=$ftaView->getHtmlDataField(FtaComposantModel::FIELDNAME_SITE_PRODUCTION_FTA_CODIFICATION);
 
-        $bloc.="<tr> <td>Site de Production</td><td> not implement(sous table)</td></tr>";
+        $bloc.='<tr> <td>Site de Production</td><td> not implement(sous table)</td></tr>';
 
         //Environnement de conservation
         //  $bloc.=$ftaView->getHtmlDataField(FtaComposantModel::FIELDNAME_ETAT_FTA_CODIFICATION);
 
-        $bloc.="<tr> <td>Environnement de conservation</td><td> not implement(sous table)</td></tr>";
+        $bloc.='<tr> <td>Environnement de conservation</td><td> not implement(sous table)</td></tr>';
 
         //Recap Mail
 
-        $bloc.="<tr> <td>Recap Mail</td><td> not implement(sous table)</td></tr>";
+        $bloc.='<tr> <td>Recap Mail</td><td> not implement(sous table)</td></tr>';
 
         return $bloc;
     }
 
     public static function buildChapitreCodification() {
 
-        $bloc = "";
+        $bloc = '';
         $id_fta = self::$id_fta;
         $synthese_action = self::$synthese_action;
         $isEditable = self::$is_editable;
@@ -1761,7 +1761,7 @@ class Chapitre {
         $ftaView->setIsEditable($isEditable);
         $ftaView->setFtaChapitreModelById(self::ID_CHAPITRE_IDENTITE);
 
-        $bloc.="<tr class=titre_principal><td class>Codification</td></tr>";
+        $bloc.='<tr class=titre_principal><td class>Codification</td></tr>';
 
         //Désignation Interne Agis
         $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_LIBELLE);
@@ -1774,7 +1774,7 @@ class Chapitre {
 
     public static function buildChapitreDureeDeVie() {
 
-        $bloc = "";
+        $bloc = '';
         $id_fta = self::$id_fta;
         $synthese_action = self::$synthese_action;
         $isEditable = self::$is_editable;
@@ -1795,7 +1795,7 @@ class Chapitre {
 
     public static function buildChapitreCodificationExterne() {
 
-        $bloc = "";
+        $bloc = '';
         $id_fta = self::$id_fta;
         $synthese_action = self::$synthese_action;
         $isEditable = self::$is_editable;
@@ -1806,7 +1806,7 @@ class Chapitre {
         $ftaView->setIsEditable($isEditable);
         $ftaView->setFtaChapitreModelById(self::ID_CHAPITRE_IDENTITE);
 
-        $bloc.="<tr class=titre_principal><td class>Codification Standard Externe</td></tr><tr><td>";
+        $bloc.='<tr class=titre_principal><td class>Codification Standard Externe</td></tr><tr><td>';
 
         //Gencod EAN Article
         $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_EAN_COLIS);
@@ -1822,13 +1822,13 @@ class Chapitre {
 
     public static function buildChapitreExpedition() {
 
-        $bloc = "";
+        $bloc = '';
         $id_fta = self::$id_fta;
         $synthese_action = self::$synthese_action;
         $isEditable = self::$is_editable;
         //$isEditable = TRUE;
 
-        $bloc.="<tr class=titre_principal><td class>Logistique</td></tr>";
+        $bloc.='<tr class=titre_principal><td class>Logistique</td></tr>';
 
         //Identifiant FTA
         $ftaModel = new FtaModel($id_fta);
@@ -1858,7 +1858,7 @@ class Chapitre {
 
     public static function buildChapitreEtiquette() {
 
-        $bloc = "";
+        $bloc = '';
         $id_fta = self::$id_fta;
         $synthese_action = self::$synthese_action;
         $isEditable = self::$is_editable;
@@ -1869,15 +1869,15 @@ class Chapitre {
         $ftaView->setIsEditable($isEditable);
         $ftaView->setFtaChapitreModelById(self::ID_CHAPITRE_IDENTITE);
 
-        $bloc.="<tr class=titre_principal><td class>Etiquettes</td></tr>";
+        $bloc.='<tr class=titre_principal><td class>Etiquettes</td></tr>';
 
-        $bloc.="<tr class=titre_principal><td class>Gestion des étiquettes</td></tr>";
+        $bloc.='<tr class=titre_principal><td class>Gestion des étiquettes</td></tr>';
 
 
         //Activer le système d'impression Base Etiquette Codesoft
         $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_ACTIVATION_CODESOFT);
 
-        $bloc.="<tr class=titre_principal><td class>Etiquettes Colis</td></tr>";
+        $bloc.='<tr class=titre_principal><td class>Etiquettes Colis</td></tr>';
 
         //Laisser l'informatique gérer la désignation ?:
         $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_VERROUILLAGE_LIBELLE_ETIQUETTE);
@@ -1888,7 +1888,7 @@ class Chapitre {
         //Modèle d'étiquette
         $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_ETIQUETTE_CODESOFT);
 
-        $bloc.="<tr class=titre_principal><td class>Etiquettes Composition</td></tr>";
+        $bloc.='<tr class=titre_principal><td class>Etiquettes Composition</td></tr>';
 
         //Composition Etiquette (1er paragraphe)
         $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_COMPOSITION1);
@@ -1905,21 +1905,21 @@ class Chapitre {
 
     private static function buildChapitreTemplate() {
 
-        $bloc = "";
+        $bloc = '';
         $id_fta = self::$id_fta;
         $synthese_action = self::$synthese_action;
         $is_editable = self::$is_editable;
         $is_editable_false = false;
 
-        $bloc.="<tr class=titre_principal><td class>Demandeur</td></tr>";
+        $bloc.='<tr class=titre_principal><td class>Demandeur</td></tr>';
 
-        //$bloc .= "</table>";
+        //$bloc .= '</table>';
         return $bloc;
     }
 
     public static function buildChapitreIdentiteVolaille() {
 
-        $bloc = "";
+        $bloc = '';
         $id_fta = self::$id_fta;
         $synthese_action = self::$synthese_action;
         $isEditable = self::$is_editable;
@@ -1933,7 +1933,7 @@ class Chapitre {
         $ftaView->setFtaChapitreModelById(self::ID_CHAPITRE_IDENTITE);
 
 
-        $bloc.="<tr class=titre_principal><td class>Classification</td></tr>";
+        $bloc.='<tr class=titre_principal><td class>Classification</td></tr>';
 
         /*
          * @todo Ajax : n'affiche pas les valeurs de la liste déroulante
@@ -1966,13 +1966,13 @@ class Chapitre {
         //Codification
         $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_SUFFIXE_AGROLOGIC_FTA);
 
-        $bloc.="<tr class=titre_principal><td class>Caractéristiques générales du produit</td></tr>";
+        $bloc.='<tr class=titre_principal><td class>Caractéristiques générales du produit</td></tr>';
 
         //Désignation commerciale
         $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_DESIGNATION_COMMERCIALE);
 
 
-        $bloc.="<tr class=titre_principal><td class>Caractéristiques FTA</td></tr>";
+        $bloc.='<tr class=titre_principal><td class>Caractéristiques FTA</td></tr>';
 
         //Créateur
         $bloc.=$ftaView->getHtmlCreateurFta();
@@ -1991,7 +1991,7 @@ class Chapitre {
 
     public static function buildChapitreNomenclature() {
 
-        $bloc = "";
+        $bloc = '';
         $id_fta = self::$id_fta;
         $synthese_action = self::$synthese_action;
         $isEditable = self::$is_editable;
@@ -2003,13 +2003,13 @@ class Chapitre {
         $ftaView->setIsEditable($isEditable);
         $ftaView->setFtaChapitreModelById(self::ID_CHAPITRE_IDENTITE);
 
-        $bloc.="<tr class=titre_principal><td class>Nomenclature</td></tr>";
+        $bloc.='<tr class=titre_principal><td class>Nomenclature</td></tr>';
 
         /**
          * @todo Non implementé
          */
         //Codification /Désignation /Poids Unitaire /Unité du poids /Site de Production	/Carton Vrac
-        $bloc.="<tr> <td>Codification | Désignation | Poids Unitaire | Unité du poids | Site de Production | Carton Vrac</td><td> not implement(sous table)</td></tr>";
+        $bloc.='<tr> <td>Codification | Désignation | Poids Unitaire | Unité du poids | Site de Production | Carton Vrac</td><td> not implement(sous table)</td></tr>';
 
         //Description technique interne
         $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_DESCRIPTION_TECHNIQUE_INTERNE);
@@ -2028,7 +2028,7 @@ class Chapitre {
 
     public static function buildChapitrePalettisation() {
 
-        $bloc = "";
+        $bloc = '';
         $id_fta = self::$id_fta;
         $synthese_action = self::$synthese_action;
         $isEditable = self::$is_editable;
@@ -2040,9 +2040,9 @@ class Chapitre {
         $ftaView->setIsEditable($isEditable);
         $ftaView->setFtaChapitreModelById(self::ID_CHAPITRE_IDENTITE);
 
-        $bloc.="<tr class=titre_principal><td class>Palettisasion</td></tr>";
+        $bloc.='<tr class=titre_principal><td class>Palettisasion</td></tr>';
 
-        $bloc.="<tr class=titre_principal><td class>Informations Générales de l'UVC</td></tr>";
+        $bloc.='<tr class=titre_principal><td class>Informations Générales de l\'UVC</td></tr>';
 
         $bloc.=$ftaView->getHtmlPoidsEmballageUVC();
 
@@ -2057,7 +2057,7 @@ class Chapitre {
 
         $bloc.=$ftaView->getHtmlDimensionEmballageUVC();
 
-        $bloc.="<tr class=titre_principal> <td>Informations Générales du Colis</td></tr>";
+        $bloc.='<tr class=titre_principal> <td>Informations Générales du Colis</td></tr>';
 
         //Nombre d'UVC du colis:
 
@@ -2082,7 +2082,7 @@ class Chapitre {
 
         $bloc.=$ftaView->getHtmlHauteurColisUVC();
 
-        $bloc.="<tr class=titre_principal> <td>Informations Générales d'une Palette</td></tr>";
+        $bloc.='<tr class=titre_principal> <td>Informations Générales d\'une Palette</td></tr>';
 
         //Poids Net (en Kg) d'une Palette:
 
@@ -2131,13 +2131,13 @@ class Chapitre {
         $is_editable = self::$is_editable;
         $taux_validation_processus = self::$taux_validation_processus;
         $proprietaire = $is_editable;
-        $bloc_suivi = "";
+        $bloc_suivi = '';
 
         //Si le chapitre en cours n'est pas public
-        $bloc_suivi .= "<" . Html::DEFAULT_HTML_TABLE_CONTENU . ">"
-                . "<tr class=titre_principal><td class>"
-                . "Suivi de dossier"
-                . "</td></tr><tr><td><" . Html::DEFAULT_HTML_TABLE_CONTENU . ">"
+        $bloc_suivi .= '<' . Html::DEFAULT_HTML_TABLE_CONTENU . '>'
+                . '<tr class=titre_principal><td class>'
+                . 'Suivi de dossier'
+                . '</td></tr><tr><td><' . Html::DEFAULT_HTML_TABLE_CONTENU . '>'
         ;
         if ($id_fta_processus <> FtaProcessusModel::PROCESSUS_PUBLIC) {
 
@@ -2145,17 +2145,17 @@ class Chapitre {
             //$bloc_suivi .= $ftaView->getHtmlCommentaireChapitre();
             $bloc_suivi .= $ftaView->getFtaSuiviProjetModel()->getHtmlDataField(FtaSuiviprojetmodel::FIELDNAME_COMMENTAIRE_SUIVI_PROJET);
             if (!$value) {
-                $value = date("Y-m-d");
+                $value = date('Y-m-d');
             }
         }
-        $bloc_suivi.="</td></tr>";
+        $bloc_suivi.='</td></tr>';
 
         //Date d'échéance
-        $champ = "date_echeance_processus";
+        $champ = 'date_echeance_processus';
         //$id_fta_processus = $id_fta_processus_encours;
-        $req = "SELECT date_echeance_processus "
-                . "FROM fta_processus_delai "
-                . "WHERE id_fta='" . $idFta . "' AND id_fta_processus='" . $id_fta_processus . "' "
+        $req = 'SELECT date_echeance_processus '
+                . 'FROM fta_processus_delai '
+                . 'WHERE id_fta=\'' . $idFta . '\' AND id_fta_processus=\'' . $id_fta_processus . '\' '
         ;
         $array = DatabaseOperation::convertSqlStatementWithoutKeyToArray($req);
         if ($array) {
@@ -2163,107 +2163,107 @@ class Chapitre {
                 $$champ = $rows[FtaProcessusDelaiModel::FIELDNAME_DATE_ECHEANCE_PROCESSUS];
             }
         }
-        if ($proprietaire and ( $$champ < date("Y-m-d"))) {
-            $bgcolor = "class=couleur_rouge";
-            $blod = "<b>";
-            $blod_end = "</b>";
+        if ($proprietaire and ( $$champ < date('Y-m-d'))) {
+            $bgcolor = 'class=couleur_rouge';
+            $blod = '<b>';
+            $blod_end = '</b>';
         } else {
-            $bgcolor = "";
-            $blod = "";
-            $blod_end = "";
+            $bgcolor = '';
+            $blod = '';
+            $blod_end = '';
         }
 
-        //  $bloc_suivi .= "<tr class=contenu><td>" . DatabaseDescription::getFieldDocLabel("fta_processus_delai", $champ) . "</td><td $bgcolor>";
-        //$bloc_suivi .="$blod ${$champ} $blod_end";
-        //$bloc_suivi .="$blod " . $ftaModel->getEcheanceByIdProcessus($id_fta_processus) . " $blod_end";
-        //   $bloc_suivi .="<input type=hidden name=$champ value=${$champ}>";
-        //   $bloc_suivi.="</td></tr>";
+        //  $bloc_suivi .= '<tr class=contenu><td>' . DatabaseDescription::getFieldDocLabel('fta_processus_delai', $champ) . '</td><td $bgcolor>';
+        //$bloc_suivi .='$blod ${$champ} $blod_end';
+        //$bloc_suivi .='$blod ' . $ftaModel->getEcheanceByIdProcessus($id_fta_processus) . ' $blod_end';
+        //   $bloc_suivi .='<input type=hidden name=$champ value=${$champ}>';
+        //   $bloc_suivi.='</td></tr>';
         //$bloc_suivi .= $ftaView->getFtaSuiviProjetModel()->getDataField(FtaSuiviprojetmodel::FIELDNAME_DATE_VALIDATION_SUIVI_PROJET)->getFieldValue();
         $bloc_suivi .= $ftaView->getFtaSuiviProjetModel()->getHtmlDataField(FtaSuiviprojetmodel::FIELDNAME_DATE_VALIDATION_SUIVI_PROJET);
 
 //        $htmlObject = new HtmlInputCalendar(
-//                $field_name = "date_validation_suivi_projet", $table_name = "fta_suivi_projet", $value = self::$objectFta->getFieldValue($table_name, $field_name), $is_editable_false, $warning_update = ${"diff_" . $table_name}[$field_name]
+//                $field_name = 'date_validation_suivi_projet', $table_name = 'fta_suivi_projet', $value = self::$objectFta->getFieldValue($table_name, $field_name), $is_editable_false, $warning_update = ${'diff_' . $table_name}[$field_name]
 //        );
 //        $bloc_suivi .= $htmlObject->getHtmlResult();
 //Date de validation
-//        $champ = "date_validation_suivi_projet";
-//        $bloc_suivi .= "<tr class=contenu><td>" . DatabaseDescription::getFieldDocLabel("fta_suivi_projet", $champ) . "</td><td>";
+//        $champ = 'date_validation_suivi_projet';
+//        $bloc_suivi .= '<tr class=contenu><td>' . DatabaseDescription::getFieldDocLabel('fta_suivi_projet', $champ) . '</td><td>';
 //        if ($proprietaire) {
 //
 //            //$bloc_suivi .= calendrier($champ, ${$champ});
-//            ${$champ} = date("Y-m-d");
+//            ${$champ} = date('Y-m-d');
 //        } else {
-//            $bloc_suivi .="${$champ}";
-//            $bloc_suivi .="<input type=hidden name=$champ value=${$champ}>";
+//            $bloc_suivi .='${$champ}';
+//            $bloc_suivi .='<input type=hidden name=$champ value=${$champ}>';
 //        }
-//        $bloc_suivi.="</td></tr>";
-//        $field_name = "date_validation_suivi_projet";
-//        $table_name = "fta_suivi_projet";
+//        $bloc_suivi.='</td></tr>';
+//        $field_name = 'date_validation_suivi_projet';
+//        $table_name = 'fta_suivi_projet';
 //        if ($is_editable) {
-//            $value = date("Y-m-d");
+//            $value = date('Y-m-d');
 //        } else {
 //            $value = self::$objectFta->getFieldValue($table_name, $field_name);
 //        }
 //
 //        $htmlObject = new HtmlInputCalendar(
-//                $field_name, $table_name, $value, $is_editable_false, $warning_update = ${"diff_" . $table_name}[$field_name]
+//                $field_name, $table_name, $value, $is_editable_false, $warning_update = ${'diff_' . $table_name}[$field_name]
 //        );
 //        $bloc_suivi .= $htmlObject->getHtmlResult();
         //Signature / Vérrouillage
-        $field_name = "signature_validation_suivi_projet";
-        $table_name = "fta_suivi_projet";
+        $field_name = 'signature_validation_suivi_projet';
+        $table_name = 'fta_suivi_projet';
 
         if (self::$ftaSuiviProjetModel->getDataField(FtaSuiviProjetModel::FIELDNAME_SIGNATURE_VALIDATION_SUIVI_PROJET)->getFieldValue()) {
-            $checked = "checked";
+            $checked = 'checked';
         } else {
-            $checked = "";
+            $checked = '';
         }
         if ($taux_validation_processus == 1) {
-            $disabled = "disabled";
+            $disabled = 'disabled';
         } else {
-            $disabled = "";
+            $disabled = '';
         }
         if ($proprietaire) {
-            $bloc_suivi .= "<tr class=contenu><td>" . DatabaseDescription::getFieldDocLabel("fta_suivi_projet", $field_name) . "</td><td>";
-            $bloc_suivi .= "<input type=checkbox name=$field_name value=" . self::$idUser . " $checked $disabled/>";
+            $bloc_suivi .= '<tr class=contenu><td>' . DatabaseDescription::getFieldDocLabel('fta_suivi_projet', $field_name) . '</td><td>';
+            $bloc_suivi .= '<input type=checkbox name=' . $field_name . ' value=' . self::$idUser . ' $checked $disabled/>';
         } else {
 
             //Recherche de la personnes ayant signé ce chapitre
             if (self::$ftaSuiviProjetModel->getDataField(FtaSuiviProjetModel::FIELDNAME_SIGNATURE_VALIDATION_SUIVI_PROJET)->getFieldValue()) { //Le chapitre est signé
                 $arrayUser = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
-                                "SELECT " . UserModel::FIELDNAME_NOM . ", " . UserModel::FIELDNAME_PRENOM
-                                . " FROM " . UserModel::TABLENAME
-                                . " WHERE " . UserModel::KEYNAME . "=" . self::$ftaSuiviProjetModel->getDataField(FtaSuiviProjetModel::FIELDNAME_SIGNATURE_VALIDATION_SUIVI_PROJET)->getFieldValue()
+                                'SELECT ' . UserModel::FIELDNAME_NOM . ', ' . UserModel::FIELDNAME_PRENOM
+                                . ' FROM ' . UserModel::TABLENAME
+                                . ' WHERE ' . UserModel::KEYNAME . '=' . self::$ftaSuiviProjetModel->getDataField(FtaSuiviProjetModel::FIELDNAME_SIGNATURE_VALIDATION_SUIVI_PROJET)->getFieldValue()
                 );
 
                 if ($arrayUser) {//Le chapitre est signé
                     foreach ($arrayUser as $rowsUser) {
                         $validateur = $rowsUser[UserModel::FIELDNAME_PRENOM]
-                                . " "
+                                . ' '
                                 . $rowsUser[UserModel::FIELDNAME_NOM]
                         ;
                     }
                 }
 //Mode Debug
-//if($conf->exec_debug or (${$module."_".$nom_intranet_actionss} and $synthese_action=="modification" and $signature_validation_suivi_projet))
+//if($conf->exec_debug or (${$module.'_'.$nom_intranet_actionss} and $synthese_action=='modification' and $signature_validation_suivi_projet))
 //                if($conf->exec_debug)
 //                {
-//                    $temp_disabled="";
-//                    //$deverouillage="<input type=submit value='Corriger'";
+//                    $temp_disabled='';
+//                    //$deverouillage='<input type=submit value='Corriger'';
 //                }else
 //                {
-                $deverouillage = "";
-                $temp_disabled = "disabled";
+                $deverouillage = '';
+                $temp_disabled = 'disabled';
 //                }
 
-                $bloc_suivi .= "<tr class=contenu><td>" . DatabaseDescription::getFieldDocLabel("fta_suivi_projet", $champ) . "</td><td>";
-                $bloc_suivi .= "<input type=checkbox name=$champ value=$$champ $checked $temp_disabled/>$validateur";
+                $bloc_suivi .= '<tr class=contenu><td>' . DatabaseDescription::getFieldDocLabel('fta_suivi_projet', $champ) . '</td><td>';
+                $bloc_suivi .= '<input type=checkbox name=' . $champ . ' value=' . $$amp . ' ' . $checked . ' ' . $temp_disabled . '/>' . $validateur;
             }
         }
-        $champ = "signature_validation_suivi_projet";
-        $bloc_suivi.="</td></tr>";
+        $champ = 'signature_validation_suivi_projet';
+        $bloc_suivi.='</td></tr>';
 
-        $bloc_suivi .="</table>";
+        $bloc_suivi .='</table>';
         return $bloc_suivi;
     }
 
@@ -2277,13 +2277,13 @@ class Chapitre {
                 )
         ) {
             $is_editable = true;
-//            $data_readonly = "";
-//            $data_disabled = "";
+//            $data_readonly = '';
+//            $data_disabled = '';
 //            $edit_allow = 1;    //Permet de modifier
         } else {
             $is_editable = false;
-//            $data_readonly = "readonly";
-//            $data_disabled = "disabled";
+//            $data_readonly = 'readonly';
+//            $data_disabled = 'disabled';
         }
 
         return $is_editable;
@@ -2293,7 +2293,7 @@ class Chapitre {
 
         //Recherche du droit d'accès correspondant
         if (
-                $_SESSION["fta_" . self::$moduleIntranetActionsModel->getDataField(IntranetActionsModel::FIELDNAME_NOM_INTRANET_ACTIONS)->getFieldValue()]
+                $_SESSION['fta_' . self::$moduleIntranetActionsModel->getDataField(IntranetActionsModel::FIELDNAME_NOM_INTRANET_ACTIONS)->getFieldValue()]
         ) {
             $return = true;
         } else {
@@ -2304,28 +2304,28 @@ class Chapitre {
     }
 
     protected static function buildHtmlSubmitButton() {
-        $return = "";
+        $return = '';
         if (self::$is_editable == true) {
-            $return = "<table><tr><td><center><input type=submit value=\"Enregistrer les informations saisies\"></center></td></tr></table>";
+            $return = '<table><tr><td><center><input type=submit value=\'Enregistrer les informations saisies\'></center></td></tr></table>';
         }
         return $return;
     }
 
     protected static function buildHtmlCorrectButton() {
-        $return = "";
+        $return = '';
         if (self::$is_correctable == true) {
-            $return = "<br><br><br><br><br><table width=\"30%\" align=\"right\"><tr align=\"right\"><td class=titre_principal>"
-                    . DatabaseDescription::getFieldDocLabel("fta_suivi_projet", "correction_fta_suivi_projet") . "</td></tr><tr align=\"right\"><td>"
-                    . "<textarea name=correction_fta_suivi_projet rows=3 cols=40></textarea></td></tr><tr align=\"right\"><td>"
-                    . "<a "
-                    . "href=# "
-                    . "onClick=confirmation_correction_fta(); "
-                    . "/>"
-                    . "<img src=../lib/images/correction.png alt=\"Gérer une Erreur\" width=\"50\" height=\"47\" border=\"0\" />"
-                    . "Corriger une erreur"
-                    . "</a>"
-                    . "</td></tr>"
-                    . "</table>"
+            $return = '<br><br><br><br><br><table width=\'30%\' align=\'right\'><tr align=\'right\'><td class=titre_principal>'
+                    . DatabaseDescription::getFieldDocLabel('fta_suivi_projet', 'correction_fta_suivi_projet') . '</td></tr><tr align=\'right\'><td>'
+                    . '<textarea name=correction_fta_suivi_projet rows=3 cols=40></textarea></td></tr><tr align=\'right\'><td>'
+                    . '<a '
+                    . 'href=# '
+                    . 'onClick=confirmation_correction_fta(); '
+                    . '/>'
+                    . '<img src=../lib/images/correction.png alt=\'Gérer une Erreur\' width=\'50\' height=\'47\' border=\'0\' />'
+                    . 'Corriger une erreur'
+                    . '</a>'
+                    . '</td></tr>'
+                    . '</table>'
             ;
         }
         return $return;
@@ -2335,12 +2335,12 @@ class Chapitre {
         $ftaEtatModel = new FtaEtatModel(self::$id_fta_etat);
         $return = false;
 //Recherche du droit d'accès correspondant
-        $req = "SELECT `fta_workflow_structure`.`id_fta_chapitre`, `fta_processus_cycle`.`id_etat_fta_processus_cycle` "
-                . "FROM `fta_processus`, `fta_workflow_structure`, `fta_processus_cycle` "
-                . "WHERE ( `fta_processus`.`id_fta_processus` = `fta_workflow_structure`.`id_fta_processus` "
-                . "AND `fta_processus_cycle`.`id_init_fta_processus` = `fta_processus`.`id_fta_processus` ) "
-                . "AND ( ( `fta_workflow_structure`.`id_fta_chapitre` ='" . self::$id_fta_chapitre . "' "
-                . "AND `fta_processus_cycle`.`id_etat_fta_processus_cycle` = '" . $ftaEtatModel->getDataField(FtaEtatModel::FIELDNAME_ABREVIATION)->getFieldValue() . "' ) ) "
+        $req = 'SELECT `fta_workflow_structure`.`id_fta_chapitre`, `fta_processus_cycle`.`id_etat_fta_processus_cycle` '
+                . 'FROM `fta_processus`, `fta_workflow_structure`, `fta_processus_cycle` '
+                . 'WHERE ( `fta_processus`.`id_fta_processus` = `fta_workflow_structure`.`id_fta_processus` '
+                . 'AND `fta_processus_cycle`.`id_init_fta_processus` = `fta_processus`.`id_fta_processus` ) '
+                . 'AND ( ( `fta_workflow_structure`.`id_fta_chapitre` =\'' . self::$id_fta_chapitre . '\' '
+                . 'AND `fta_processus_cycle`.`id_etat_fta_processus_cycle` = \'' . $ftaEtatModel->getDataField(FtaEtatModel::FIELDNAME_ABREVIATION)->getFieldValue() . '\' ) ) '
         ;
         $cycle_en_cours = DatabaseOperation::convertSqlStatementWithoutKeyToArray($req);
         if (self::$is_owner == true and self::$is_editable == false and $cycle_en_cours) {

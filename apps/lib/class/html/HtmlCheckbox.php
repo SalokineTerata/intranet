@@ -17,8 +17,8 @@ class HtmlCheckbox extends AbstractHtmlInput {
     protected $html_checked;
     protected $html_disabled;
 
-    const CHECKED = "checked";
-    const DISABLED = "disabled";
+    const CHECKED = 'checked';
+    const DISABLED = 'disabled';
 
     public function initHtmlCheckbox(
     $field_name, $table_name, $default_value = null, $is_editable = false, $warning_update = null, $is_checked = null, $label = null, $viewed_content = null) {
@@ -36,7 +36,7 @@ class HtmlCheckbox extends AbstractHtmlInput {
         if ($this->is_checked) {
             $this->html_checked = self::CHECKED;
         } else {
-            $this->html_checked = "";
+            $this->html_checked = '';
         }
 
         return $this->is_checked;
@@ -52,15 +52,15 @@ class HtmlCheckbox extends AbstractHtmlInput {
         if ($this->is_disabled) {
             $this->html_disabled = self::DISABLED;
         } else {
-            $this->html_disabled = "";
+            $this->html_disabled = '';
         }
 
         return $this->is_disabled;
     }
 
     function getHtmlEditableContent() {
-        //return "<textarea name=" . $this->field . " rows=" . $this->rows_size . " cols=" . $this->cols_size . ">" . Html::showValue($this->value) . "</textarea>";
-        return "<input type=checkbox name=" . $this->fieldName . " value=" . Html::showValue($this->attributeValue) . " $this->html_checked $this->html_disabled/>";
+        //return '<textarea name=' . $this->field . ' rows=' . $this->rows_size . ' cols=' . $this->cols_size . '>' . Html::showValue($this->value) . '</textarea>';
+        return '<input type=checkbox name=' . $this->fieldName . ' value=' . Html::showValue($this->attributeValue) . ' $this->html_checked $this->html_disabled/>';
     }
 
 }

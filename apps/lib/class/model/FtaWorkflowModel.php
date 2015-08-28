@@ -8,11 +8,11 @@
  */
 class FtaWorkflowModel extends AbstractModel {
 
-    const TABLENAME = "fta_workflow";
-    const KEYNAME = "id_fta_workflow";
-    const FIELDNAME_DESCRIPTION_FTA_WORKFLOW = "description_fta_workflow";
-    const FIELDNAME_ID_INTRANET_ACTIONS = "id_intranet_actions";
-    const FIELDNAME_NOM_FTA_WORKFLOW = "nom_fta_workflow";
+    const TABLENAME = 'fta_workflow';
+    const KEYNAME = 'id_fta_workflow';
+    const FIELDNAME_DESCRIPTION_FTA_WORKFLOW = 'description_fta_workflow';
+    const FIELDNAME_ID_INTRANET_ACTIONS = 'id_intranet_actions';
+    const FIELDNAME_NOM_FTA_WORKFLOW = 'nom_fta_workflow';
 
     /**
      * Site d'expedition de la FTA
@@ -48,16 +48,16 @@ class FtaWorkflowModel extends AbstractModel {
      */
     public static function ShowListeDeroulanteNomWorkflowByAcces($paramIdUser, $paramObjetList, $paramIsEditable) {
 
-        $arrayWorkflow = DatabaseOperation::convertSqlStatementWithKeyAsFirstFieldToArray(
-                        "SELECT DISTINCT " . FtaWorkflowModel::KEYNAME . "," . FtaWorkflowModel::FIELDNAME_DESCRIPTION_FTA_WORKFLOW
-                        . " FROM " . FtaWorkflowModel::TABLENAME
-                        . ", " . IntranetDroitsAccesModel::TABLENAME
-                        . " WHERE " . FtaWorkflowModel::FIELDNAME_DESCRIPTION_FTA_WORKFLOW . "<>''"
-                        . " AND " . FtaWorkflowModel::TABLENAME . "." . FtaWorkflowModel::FIELDNAME_ID_INTRANET_ACTIONS
-                        . "=" . IntranetDroitsAccesModel::TABLENAME . "." . IntranetDroitsAccesModel::FIELDNAME_ID_INTRANET_ACTIONS
-                        . " AND " . IntranetDroitsAccesModel::FIELDNAME_ID_USER . "=" . $paramIdUser // L'utilisateur connecté
-                        . " AND " . IntranetDroitsAccesModel::TABLENAME . "." . IntranetDroitsAccesModel::FIELDNAME_NIVEAU_INTRANET_DROITS_ACCES . "=1"
-                        . " ORDER BY " . FtaWorkflowModel::FIELDNAME_DESCRIPTION_FTA_WORKFLOW
+        $arrayWorkflow = DatabaseOperation::convertSqlStatementWithKeyAndOneFieldToArray(
+                        'SELECT DISTINCT ' . FtaWorkflowModel::KEYNAME . ',' . FtaWorkflowModel::FIELDNAME_DESCRIPTION_FTA_WORKFLOW
+                        . ' FROM ' . FtaWorkflowModel::TABLENAME
+                        . ', ' . IntranetDroitsAccesModel::TABLENAME
+                        . ' WHERE ' . FtaWorkflowModel::FIELDNAME_DESCRIPTION_FTA_WORKFLOW . '<>\'\''
+                        . ' AND ' . FtaWorkflowModel::TABLENAME . '.' . FtaWorkflowModel::FIELDNAME_ID_INTRANET_ACTIONS
+                        . '=' . IntranetDroitsAccesModel::TABLENAME . '.' . IntranetDroitsAccesModel::FIELDNAME_ID_INTRANET_ACTIONS
+                        . ' AND ' . IntranetDroitsAccesModel::FIELDNAME_ID_USER . '=' . $paramIdUser // L'utilisateur connecté
+                        . ' AND ' . IntranetDroitsAccesModel::TABLENAME . '.' . IntranetDroitsAccesModel::FIELDNAME_NIVEAU_INTRANET_DROITS_ACCES . '=' . AccueilFta::VALUE_1
+                        . ' ORDER BY ' . FtaWorkflowModel::FIELDNAME_DESCRIPTION_FTA_WORKFLOW
         );
         $paramObjetList->setArrayListContent($arrayWorkflow);
         $paramObjetList->getAttributes()->getName()->setValue(FtaWorkflowModel::KEYNAME);
@@ -81,22 +81,22 @@ class FtaWorkflowModel extends AbstractModel {
     public static function ShowListeDeroulanteNomWorkflowByAccesAndIdFta($paramIdUser, $paramObjetList, $paramIsEditable, $paramIdFta) {
 
         $ftaModel = new FtaModel($paramIdFta);
-        $arrayWorkflow = DatabaseOperation::convertSqlStatementWithKeyAsFirstFieldToArray(
-                        "SELECT DISTINCT " . FtaWorkflowModel::KEYNAME . "," . FtaWorkflowModel::FIELDNAME_DESCRIPTION_FTA_WORKFLOW
-                        . " FROM " . FtaWorkflowModel::TABLENAME
-                        . ", " . IntranetDroitsAccesModel::TABLENAME
-                        . " WHERE " . FtaWorkflowModel::FIELDNAME_DESCRIPTION_FTA_WORKFLOW . "<>''"
-                        . " AND " . FtaWorkflowModel::TABLENAME . "." . FtaWorkflowModel::FIELDNAME_ID_INTRANET_ACTIONS
-                        . "=" . IntranetDroitsAccesModel::TABLENAME . "." . IntranetDroitsAccesModel::FIELDNAME_ID_INTRANET_ACTIONS
-                        . " AND " . IntranetDroitsAccesModel::FIELDNAME_ID_USER . "=" . $paramIdUser // L'utilisateur connecté
-                        . " AND " . IntranetDroitsAccesModel::TABLENAME . "." . IntranetDroitsAccesModel::FIELDNAME_NIVEAU_INTRANET_DROITS_ACCES . "=1"
-                        . " ORDER BY " . FtaWorkflowModel::FIELDNAME_DESCRIPTION_FTA_WORKFLOW
+        $arrayWorkflow = DatabaseOperation::convertSqlStatementWithKeyAndOneFieldToArray(
+                        'SELECT DISTINCT ' . FtaWorkflowModel::KEYNAME . ',' . FtaWorkflowModel::FIELDNAME_DESCRIPTION_FTA_WORKFLOW
+                        . ' FROM ' . FtaWorkflowModel::TABLENAME
+                        . ', ' . IntranetDroitsAccesModel::TABLENAME
+                        . ' WHERE ' . FtaWorkflowModel::FIELDNAME_DESCRIPTION_FTA_WORKFLOW . '<>\'\''
+                        . ' AND ' . FtaWorkflowModel::TABLENAME . '.' . FtaWorkflowModel::FIELDNAME_ID_INTRANET_ACTIONS
+                        . '=' . IntranetDroitsAccesModel::TABLENAME . '.' . IntranetDroitsAccesModel::FIELDNAME_ID_INTRANET_ACTIONS
+                        . ' AND ' . IntranetDroitsAccesModel::FIELDNAME_ID_USER . '=' . $paramIdUser // L'utilisateur connecté
+                        . ' AND ' . IntranetDroitsAccesModel::TABLENAME . '.' . IntranetDroitsAccesModel::FIELDNAME_NIVEAU_INTRANET_DROITS_ACCES . '=' . AccueilFta::VALUE_1
+                        . ' ORDER BY ' . FtaWorkflowModel::FIELDNAME_DESCRIPTION_FTA_WORKFLOW
         );
         $paramObjetList->setArrayListContent($arrayWorkflow);
         $HtmlTableName = FtaModel::TABLENAME
-                . "_"
+                . '_'
                 . FtaModel::FIELDNAME_WORKFLOW
-                . "_"
+                . '_'
                 . $paramIdFta
         ;
         $paramObjetList->getAttributes()->getName()->setValue(FtaModel::FIELDNAME_WORKFLOW);

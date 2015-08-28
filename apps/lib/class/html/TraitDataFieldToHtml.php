@@ -45,9 +45,9 @@ trait TraitDataFieldToHtml {
 
     public function getHtmlName() {
         return $this->getDataField()->getTableName()
-                . "_"
+                . '_'
                 . $this->getDataField()->getFieldName()
-                . "_"
+                . '_'
                 . $this->getDataField()->getKeyValue()
         ;
     }

@@ -50,7 +50,7 @@ class EventsForm extends HtmlStandardEventsForm {
     , $paramKeyValue
     , $paramFieldName
     ) {
-        //Neutralisation de la mise à jour automatique de "OnChange"
+        //Neutralisation de la mise à jour automatique de 'OnChange'
         $paramUpdateOnChange = TRUE;
 
         //Mise à jour des attributs

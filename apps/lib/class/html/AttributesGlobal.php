@@ -44,7 +44,7 @@ class AttributesGlobal extends StandardGlobalAttributes {
     private $isIconAddEnabled;
 
     /**
-     * Le bouton "suivant" est-il activé ?
+     * Le bouton 'suivant' est-il activé ?
      * @var boolean 
      */
     private $isIconNextEnabled;
@@ -93,27 +93,27 @@ class AttributesGlobal extends StandardGlobalAttributes {
     }
 
     public function getIdData() {
-        return self::PREFIXE_ID_DATA . "_" . $this->getId()->getValue();
+        return self::PREFIXE_ID_DATA . '_' . $this->getId()->getValue();
     }
 
     public function getIdRow() {
-        return self::PREFIXE_ID_ROW . "_" . $this->getId()->getValue();
+        return self::PREFIXE_ID_ROW . '_' . $this->getId()->getValue();
     }
 
     public function getIdAdd() {
-        return self::PREFIXE_ID_ICON_ADD . "_" . $this->getId()->getValue();
+        return self::PREFIXE_ID_ICON_ADD . '_' . $this->getId()->getValue();
     }
 
     public function getIdNext() {
-        return self::PREFIXE_ID_ICON_NEXT . "_" . $this->getId()->getValue();
+        return self::PREFIXE_ID_ICON_NEXT . '_' . $this->getId()->getValue();
     }
 
     public function getIdStatus() {
-        return self::PREFIXE_ID_ICON_STATUS . "_" . $this->getId()->getValue();
+        return self::PREFIXE_ID_ICON_STATUS . '_' . $this->getId()->getValue();
     }
 
     public function getIdUndo() {
-        return self::PREFIXE_ID_ICON_UNDO . "_" . $this->getId()->getValue();
+        return self::PREFIXE_ID_ICON_UNDO . '_' . $this->getId()->getValue();
     }
 
     public function getIdDataToHtml() {

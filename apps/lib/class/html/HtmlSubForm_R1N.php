@@ -72,7 +72,7 @@ class HtmlSubForm_R1N extends HtmlSubForm {
                 /**
                  * Création de la ligne HTML
                  */
-                $return.= "<tr class=contenu>";
+                $return.= '<tr class=contenu>';
 
                 /**
                  * Chargement de l'enregistrement
@@ -153,12 +153,12 @@ class HtmlSubForm_R1N extends HtmlSubForm {
                 /**
                  * Ajout du lien d'accès au détail du sous-formulaire
                  */
-                $return.="<td>" . $htmlUrlToSubFormDetail . "</td>";
+                $return.='<td>' . $htmlUrlToSubFormDetail . '</td>';
             }
             /**
              * Fermeture de la ligne HTML
              */
-            $return.= "</tr>";
+            $return.= '</tr>';
         }
         return $return;
     }

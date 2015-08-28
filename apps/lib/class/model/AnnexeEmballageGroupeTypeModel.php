@@ -8,10 +8,10 @@
  */
 class AnnexeEmballageGroupeTypeModel extends AbstractModel {
 
-    const TABLENAME = "annexe_emballage_groupe_type";
-    const KEYNAME = "id_annexe_emballage_groupe_type";
-    const FIELDNAME_NOM_ANNEXE_EMBALLAGE_GROUPE_TYPE = "nom_annexe_emballage_groupe_type";
-    const FIELDNAME_ORDRE_ANNEXE_EMBALLAGE_GROUPE_TYPE = "ordre_emballage_groupe_type";
+    const TABLENAME = 'annexe_emballage_groupe_type';
+    const KEYNAME = 'id_annexe_emballage_groupe_type';
+    const FIELDNAME_NOM_ANNEXE_EMBALLAGE_GROUPE_TYPE = 'nom_annexe_emballage_groupe_type';
+    const FIELDNAME_ORDRE_ANNEXE_EMBALLAGE_GROUPE_TYPE = 'ordre_emballage_groupe_type';
 
     protected static $emballageUVC = 1;
     protected static $emballageParColis = 2;
@@ -178,41 +178,41 @@ class AnnexeEmballageGroupeTypeModel extends AbstractModel {
         self::$idAnnexeEmballageGroupeTypePaletteByIdFtaConditionnement = FtaConditionnementModel::getIdAnnexeEmballageAndGroupeTypeAndGroupeAndIdFtaConditionnementFromFtaConditionnement(self::$idFtaConditionnemntPalette, $paramIdFta);
     }
 
-    public static function getAddLinkBeforeConditionnement($paramIdFta, $paramIdChapitre, $paramTypeEmballage, $paramSyntheseAction,$paramComeback,$paramIdFtaEtat,$paramAbreviationEtat,$paramIdFtaRole) {
-        return "ajout_conditionnement.php?"
-                . "id_fta=" . $paramIdFta
-                . "&id_annexe_emballage_groupe_type=" . $paramTypeEmballage
-                . "&id_fta_chapitre=" . $paramIdChapitre
-                . "&synthese_action=" . $paramSyntheseAction
-                . "&comeback=" . $paramComeback
-                . "&id_fta_etat=" . $paramIdFtaEtat
-                . "&abreviation_fta_etat=" . $paramAbreviationEtat
-                . "&id_fta_role=" . $paramIdFtaRole
+    public static function getAddLinkBeforeConditionnement($paramIdFta, $paramIdChapitre, $paramTypeEmballage, $paramSyntheseAction, $paramComeback, $paramIdFtaEtat, $paramAbreviationEtat, $paramIdFtaRole) {
+        return 'ajout_conditionnement.php?'
+                . 'id_fta=' . $paramIdFta
+                . '&id_annexe_emballage_groupe_type=' . $paramTypeEmballage
+                . '&id_fta_chapitre=' . $paramIdChapitre
+                . '&synthese_action=' . $paramSyntheseAction
+                . '&comeback=' . $paramComeback
+                . '&id_fta_etat=' . $paramIdFtaEtat
+                . '&abreviation_fta_etat=' . $paramAbreviationEtat
+                . '&id_fta_role=' . $paramIdFtaRole
         ;
     }
 
-    public static function getAddLinkAfterConditionnement($paramIdFta, $paramIdChapitre, $paramTypeEmballage, $paramSyntheseAction,$paramComeback,$paramIdFtaEtat,$paramAbreviationEtat,$paramIdFtaRole) {
-        return "<a href=ajout_conditionnement.php?"
-                . "id_fta=" . $paramIdFta
-                . "&id_annexe_emballage_groupe_type=" . $paramTypeEmballage
-                . "&id_fta_chapitre=" . $paramIdChapitre
-                . "&synthese_action=" . $paramSyntheseAction
-                . "&comeback=" . $paramComeback
-                . "&id_fta_etat=" . $paramIdFtaEtat
-                . "&abreviation_fta_etat=" . $paramAbreviationEtat
-                . "&id_fta_role=" . $paramIdFtaRole . "><img src=../lib/images/plus.png width=22  border=0 valign=middle halign=right />"
-                . "</a><br>";
+    public static function getAddLinkAfterConditionnement($paramIdFta, $paramIdChapitre, $paramTypeEmballage, $paramSyntheseAction, $paramComeback, $paramIdFtaEtat, $paramAbreviationEtat, $paramIdFtaRole) {
+        return '<a href=ajout_conditionnement.php?'
+                . 'id_fta=' . $paramIdFta
+                . '&id_annexe_emballage_groupe_type=' . $paramTypeEmballage
+                . '&id_fta_chapitre=' . $paramIdChapitre
+                . '&synthese_action=' . $paramSyntheseAction
+                . '&comeback=' . $paramComeback
+                . '&id_fta_etat=' . $paramIdFtaEtat
+                . '&abreviation_fta_etat=' . $paramAbreviationEtat
+                . '&id_fta_role=' . $paramIdFtaRole . '><img src=../lib/images/plus.png width=22  border=0 valign=middle halign=right />'
+                . '</a><br>';
     }
 
     public static function getDeleteLinkConditionnement($paramIdFta, $paramIdChapitre, $paramIdFtaConditionnement, $paramSyntheseAction) {
-        return "<a href=modification_fiche_post.php?"
-                . "id_fta=$paramIdFta"
-                . "&id_fta_conditionnement=$paramIdFtaConditionnement"
-                . "&action=suppression_conditionnement"
-                . "&id_fta_chapitre_encours=$paramIdChapitre"
-                . "&synthese_action=$paramSyntheseAction>
+        return '<a href=modification_fiche_post.php?'
+                . 'id_fta=' . $paramIdFta
+                . '&id_fta_conditionnement=' . $paramIdFtaConditionnement
+                . '&action=suppression_conditionnement'
+                . '&id_fta_chapitre_encours=' . $paramIdChapitre
+                . '&synthese_action=' . $paramSyntheseAction . '>
                                 <img src=../lib/images/supprimer.png width=22  border=0/>
-                                </a><br>";
+                                </a><br>';
     }
 
 }

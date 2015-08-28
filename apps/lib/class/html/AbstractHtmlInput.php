@@ -62,12 +62,12 @@ abstract class AbstractHtmlInput extends AbstractHtmlGlobalElement {
     function getHtmlEditableContent() {
 
 
-        return "<" . $this->getAttributes()->getTagName()
+        return '<' . $this->getAttributes()->getTagName()
                 . parent::getAttributesGlobal()->getAllHtmlParametersWithSpaceBefore()
                 . parent::getEventsForm()->getAllHtmlParametersWithSpaceBefore()
                 . parent::getEventsMouse()->getAllHtmlParametersWithSpaceBefore()
                 . $this->getAttributes()->getAllHtmlParametersWithSpaceBefore()
-                . "/>"
+                . '/>'
                 . parent::getAttributesGlobal()->getIconMenuToHtml()
 
         ;

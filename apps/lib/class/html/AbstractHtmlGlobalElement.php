@@ -39,9 +39,9 @@ abstract class AbstractHtmlGlobalElement {
      *      - La représentation sera de type table.
      *      - Le label ne sera pas affiché.
      */
-    const HTML_RENDER_TO_FORM = "form";
-    const HTML_RENDER_TO_TABLE = "table";
-    const HTML_RENDER_TO_TABLE_LABEL = "table_label";
+    const HTML_RENDER_TO_FORM = 'form';
+    const HTML_RENDER_TO_TABLE = 'table';
+    const HTML_RENDER_TO_TABLE_LABEL = 'table_label';
 
     /**
      * L'élément est-il modifiable ?
@@ -312,9 +312,9 @@ abstract class AbstractHtmlGlobalElement {
     public function getHtmlResult() {
 
         //Définition des variables locales
-        $image_modif = "";
-        $color_modif = "";
-        $html_result = "";
+        $image_modif = '';
+        $color_modif = '';
+        $html_result = '';
         $label = NULL;
         $idRow = $this->getAttributesGlobal()->getIdRowToHtml();
         $style = $this->getStyleCSS()->getStyleAttribute();
@@ -335,17 +335,17 @@ abstract class AbstractHtmlGlobalElement {
         //Rendu HTML - début encapsulation
         switch ($this->getHtmlRender()) {
             case self::HTML_RENDER_TO_FORM:
-                $html_result .= "<tr " . $idRow . " " . $style . "class=contenu>";
-                $html_result .= "<td style=\"$color_modif\">$label</td>";
+                $html_result .= '<tr ' . $idRow . ' ' . $style . 'class=contenu>';
+                $html_result .= '<td style=\'' . $color_modif . '\'>' . $label . '</td>';
                 break;
 
             case self::HTML_RENDER_TO_TABLE:
                 break;
             case self::HTML_RENDER_TO_TABLE_LABEL:
-                $html_result .="<td class=titre_tableau>" . $label . "</td>";
+                $html_result .='<td class=titre_tableau>' . $label . '</td>';
                 break;
         }
-        $html_result .= "<td style=\"$color_modif\">";
+        $html_result .= '<td style=\'' . $color_modif . '\'>';
 
 //        //Titre de l'élément
 //         if ($this->getIsWarningUpdate()) {
@@ -364,17 +364,17 @@ abstract class AbstractHtmlGlobalElement {
             $html_result .= $this->getHtmlViewedContent();
         }
         if ($this->getAdditionnalTextInfo() != null) {
-            $html_result.= "<i>&nbsp;" . Html::showValue($this->getAdditionnalTextInfo()) . "</i>";
+            $html_result.= '<i>&nbsp;' . Html::showValue($this->getAdditionnalTextInfo()) . '</i>';
         }
 
         //Rendu HTML - fin encapsulation
         switch ($this->getHtmlRender()) {
             case self::HTML_RENDER_TO_FORM:
-                $html_result.= $image_modif . "</td></tr>";
+                $html_result.= $image_modif . '</td></tr>';
                 break;
 
             case self::HTML_RENDER_TO_TABLE:
-                $html_result.= $image_modif . "</td>";
+                $html_result.= $image_modif . '</td>';
                 break;
         }
 

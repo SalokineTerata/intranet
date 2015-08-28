@@ -125,6 +125,7 @@ class FtaTransitionModel {
                 }
 
                 //Duplication de la fiche
+                $nouveau_maj_fta = addslashes($nouveau_maj_fta);
                 $id_fta_original = $paramIdFta;
                 $action_duplication = "version";
                 $option_duplication["abreviation_etat_destination"] = $paramAbreviationFtaTransition;
@@ -233,7 +234,7 @@ class FtaTransitionModel {
                 . " AND " . FtaEtatModel::TABLENAME . "." . FtaEtatModel::KEYNAME
                 . "=" . FtaModel::TABLENAME . "." . FtaModel::FIELDNAME_ID_FTA_ETAT        //Liaison
         ;
-        $logTransition .= "\n\nLISTE DIFFUSION\n" . $req;
+        $logTransition .= "\n\nLISTE DIFFUSION\n" . $req . "\n";
         $arrayFta = DatabaseOperation::convertSqlStatementWithoutKeyToArray($req);
 
         foreach ($arrayFta as $rowsFta) {
@@ -255,7 +256,7 @@ class FtaTransitionModel {
                         . " AND " . FtaWorkflowStructureModel::TABLENAME . "." . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_WORKFLOW
                         . "=" . FtaProcessusCycleModel::TABLENAME . "." . FtaProcessusCycleModel::FIELDNAME_WORKFLOW
                 ;
-                $logTransition.="\n\n" . $req;
+                $logTransition.="\n\n" . $req . "\n";
                 $arrayIdChapitreInitiateur = DatabaseOperation::convertSqlStatementWithoutKeyToArray($req);
 
                 //L'un des chapitres initiateurs est-il dans la liste des chapitres mis à jour sur la fta ?
@@ -336,7 +337,7 @@ class FtaTransitionModel {
                     . $where_chapitre                                                       //Restriction dans le cas d'une mise à jour
                     . " GROUP BY " . UserModel::FIELDNAME_ID_SERVICE . ", " . UserModel::FIELDNAME_LIEU_GEO
             ;
-            $logTransition.="\n\n" . $req;
+            $logTransition.="\n\n" . $req. "\n";
             $arrayServiceFta = DatabaseOperation::convertSqlStatementWithoutKeyToArray($req);
             $where = " AND ( ";
             $where_operator = "";
@@ -393,7 +394,7 @@ class FtaTransitionModel {
                         //Début Droits d'accès de diffusion
                         . $where                                  //Restriction au niveau du service et site de rattachement
                 ;
-                $logTransition.="\n\n" . $req . "\nFIN DIFFUSION";
+                $logTransition.="\n\n" . $req . "\nFIN DIFFUSION\n";
                 $r_liste_destinataire = DatabaseOperation::convertSqlStatementWithoutKeyToArray($req);
                 foreach ($r_liste_destinataire as $rows_destinataire) {
                     $return[$rows_destinataire[UserModel::KEYNAME]]["mail"] = $rows_destinataire[UserModel::FIELDNAME_MAIL];

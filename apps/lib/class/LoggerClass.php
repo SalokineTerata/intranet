@@ -33,7 +33,7 @@ class LoggerClass {
 
         // Si le dépôt n'existe pas
         if (!is_dir($path)) {
-            trigger_error("<code>$path</code> n'existe pas", E_USER_WARNING);
+            trigger_error('<code>' . $path . '</code> n\'existe pas', E_USER_WARNING);
             return false;
         }
 
@@ -45,13 +45,13 @@ class LoggerClass {
     public function path($paramModule, $paramLogfileName, $granularity = self::GRAN_YEAR) {
         // On vérifie que le logger est prêt (et donc que le dossier de dépôt existe
         if (!$this->ready) {
-            trigger_error("Logger is not ready", E_USER_WARNING);
+            trigger_error('Logger is not ready', E_USER_WARNING);
             return false;
         }
 
         // Contrôle des arguments
         if (!isset($paramModule) || empty($paramLogfileName)) {
-            trigger_error("Paramètres incorrects", E_USER_WARNING);
+            trigger_error('Paramètres incorrects', E_USER_WARNING);
             return false;
         }
 
@@ -85,7 +85,7 @@ class LoggerClass {
             }
             $logfile = $paramModule_path_year . '/' . $current_year . '_' . $paramLogfileName . '.log';
         } else {
-            trigger_error("Granularité '$granularity' non prise en charge", E_USER_WARNING);
+            trigger_error('Granularité ' . $granularity . ' non prise en charge', E_USER_WARNING);
             return false;
         }
 
@@ -96,14 +96,14 @@ class LoggerClass {
     public function log($paramModule, $paramText, $paramLogfileName, $paramExpediteur, $paramDestinataire, $paramSujetMail, $paramCheckText, $paramGranularity = self::GRAN_YEAR) {
         // Contrôle des arguments
         if (!isset($paramModule) || empty($paramText) || empty($paramExpediteur) || empty($paramDestinataire) || empty($paramSujetMail)) {
-            trigger_error("Paramètres incorrects", E_USER_WARNING);
+            trigger_error('Paramètres incorrects', E_USER_WARNING);
             return false;
         }
 
         $logfile = $this->path($paramModule, $paramLogfileName, $paramGranularity);
 
         if ($logfile === false) {
-            trigger_error("Impossible d'enregistrer le log", E_USER_WARNING);
+            trigger_error('Impossible d\'enregistrer le log', E_USER_WARNING);
             return false;
         }
 
@@ -113,7 +113,7 @@ class LoggerClass {
 
         // Ajout du retour chariot de fin de ligne si il n'y en a pas
         if (!preg_match('#\n$#', $paramDate)) {
-            $paramDate .= "\n";
+            $paramDate .= '\n';
         }
         if ($paramCheckText == 1) {
             $this->writeWithText($logfile, $paramText, $paramDate, $paramExpediteur, $paramDestinataire, $paramSujetMail);
@@ -128,13 +128,13 @@ class LoggerClass {
         }
 
         if (empty($paramLogFile)) {
-            trigger_error("<code>$paramLogFile</code> est vide", E_USER_WARNING);
+            trigger_error('<code>' . $paramLogFile . '</code> est vide', E_USER_WARNING);
             return false;
         }
 
         $fichier = fopen($paramLogFile, 'a+');
 
-        $string = $date . $expediteur . " : " . $destinataire . " : " . $sujetmail . " \n " . $paramText . " \n ";
+        $string = $date . $expediteur . ' : ' . $destinataire . ' : ' . $sujetmail . ' \n ' . $paramText . ' \n ';
 
         fputs($fichier, $string);
         fclose($fichier);
@@ -146,12 +146,12 @@ class LoggerClass {
         }
 
         if (empty($paramLogFile)) {
-            trigger_error("<code>$paramLogFile</code> est vide", E_USER_WARNING);
+            trigger_error('<code>' . $paramLogFile . '</code> est vide', E_USER_WARNING);
             return false;
         }
 
         $fichier = fopen($paramLogFile, 'a+');
-        $string = $date . $expediteur . " : " . $destinataire . " : " . $sujetmail . " \n ";
+        $string = $date . $expediteur . ' : ' . $destinataire . ' : ' . $sujetmail . ' \n ';
         fputs($fichier, $string);
         fclose($fichier);
     }

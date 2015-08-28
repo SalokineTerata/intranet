@@ -1220,58 +1220,58 @@ function recursif($resultat, $id_recherche, $champ_id_pere, $champ_id_fils, $cha
 //$id_recherche;
 
         if (mysql_result($resultat, $i, $champ_id_pere) == $id_recherche) {
-            //Enregistrement des informations
-            //echo "test".$extension[3];
-            //Structure
-            $return[0] .= $tab_return . $tab_espace;
+                //Enregistrement des informations
+                //echo "test".$extension[3];
+                //Structure
+                $return[0] .= $tab_return . $tab_espace;
 
-            //Liens
-            if ($extension[1]) {
-                $deploy = $extension[0]
-                        //. $extension[1]
+                //Liens
+                if ($extension[1]) {
+                    $deploy = $extension[0]
+                            //. $extension[1]
                         . mysql_result($resultat, $i, $champ_id_fils)
-                        . $extension[2]
-                ;
-            }
-            if ($extension[4]) {
-                $html_link_1 = "<a href="
-                        . $extension[4]
+                            . $extension[2]
+                    ;
+                }
+                if ($extension[4]) {
+                    $html_link_1 = "<a href="
+                            . $extension[4]
                         . mysql_result($resultat, $i, $champ_id_fils)
-                        . " >"
-                ;
-                $html_link_2 = "</a>";
-            }
+                            . " >"
+                    ;
+                    $html_link_2 = "</a>";
+                }
 
-            //Données
+                //Données
             if (isset($return[1]) and mysql_result($resultat, $i, $champ_id_fils)) {
-                $return[1] .= ",";
-            }
+                    $return[1] .= ",";
+                }
             $return[1] .= mysql_result($resultat, $i, $champ_id_fils);
 
-            //Structure et Données
-            $return[2] .= $tab_return . $tab_espace . $deploy . " " . $html_link_1 . stripslashes(mysql_result($resultat, $i, $champ_valeur)) . $html_link_2;
+                //Structure et Données
+                $return[2] .= $tab_return . $tab_espace . $deploy . " " . $html_link_1 . stripslashes(mysql_result($resultat, $i, $champ_valeur)) . $html_link_2;
 
 
-            $id_recherche_ancien = $id_recherche;
+                $id_recherche_ancien = $id_recherche;
             $id_recherche = mysql_result($resultat, $i, $champ_id_fils);
 
-            //Appel recursif de la fonction
-            //echo "<br>".$id_recherche." ".$extension[3]." --- ". strstr($extension[3], ",".$id_recherche.",")."<br>";
-            //echo strstr("123456", "2");
-            //$test = strstr($extension[3], ",".$id_recherche.",");
-            $liste_id = $extension[3];
-            $dont_explore = $return[2];    //Permet de ne deployer tous les dossiers HTML tout en parcourant l'ensemble de l'arboresence.
-            $return = recursif(
-                    $resultat, $id_recherche, $champ_id_pere, $champ_id_fils, $champ_valeur, $tab_fils, $tab_arborescence, $tab_espace, $return, $nombre_ligne, $extension
-            );
+                //Appel recursif de la fonction
+                //echo "<br>".$id_recherche." ".$extension[3]." --- ". strstr($extension[3], ",".$id_recherche.",")."<br>";
+                //echo strstr("123456", "2");
+                //$test = strstr($extension[3], ",".$id_recherche.",");
+                $liste_id = $extension[3];
+                $dont_explore = $return[2];    //Permet de ne deployer tous les dossiers HTML tout en parcourant l'ensemble de l'arboresence.
+                $return = recursif(
+                        $resultat, $id_recherche, $champ_id_pere, $champ_id_fils, $champ_valeur, $tab_fils, $tab_arborescence, $tab_espace, $return, $nombre_ligne, $extension
+                );
 
-            if ($_SESSION["module"] <> "fiches_mp_achats") { //A optimiser !!
-                if (!strstr($liste_id, "," . $id_recherche . ",")) {
-                    $return[2] = $dont_explore;
+                if ($_SESSION["module"] <> "fiches_mp_achats") { //A optimiser !!
+                    if (!strstr($liste_id, "," . $id_recherche . ",")) {
+                        $return[2] = $dont_explore;
+                    }
                 }
+                $id_recherche = $id_recherche_ancien;
             }
-            $id_recherche = $id_recherche_ancien;
-        }
 
         $i = $i + 1;
     }

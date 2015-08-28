@@ -8,14 +8,14 @@
  */
 class FtaProcessusModel extends AbstractModel {
 
-    const TABLENAME = "fta_processus";
-    const KEYNAME = "id_fta_processus";
-    const FIELDNAME_NOM = "nom_fta_processus";
-    const FIELDNAME_DELAI = "delai_fta_processus";
-    const FIELDNAME_INFO_CHEF_PROJET = "information_service_chef_projet_fta_processus";
-    const FIELDNAME_SERVICE = "service_fta_processus";
-    const FIELDNAME_ID_FTA_ROLE = "id_fta_role";
-    const FIELDNAME_MULTISITE_FTA_PROCESSUS = "multisite_fta_processus";
+    const TABLENAME = 'fta_processus';
+    const KEYNAME = 'id_fta_processus';
+    const FIELDNAME_NOM = 'nom_fta_processus';
+    const FIELDNAME_DELAI = 'delai_fta_processus';
+    const FIELDNAME_INFO_CHEF_PROJET = 'information_service_chef_projet_fta_processus';
+    const FIELDNAME_SERVICE = 'service_fta_processus';
+    const FIELDNAME_ID_FTA_ROLE = 'id_fta_role';
+    const FIELDNAME_MULTISITE_FTA_PROCESSUS = 'multisite_fta_processus';
     const PROCESSUS_PUBLIC = 0;
 
     /**
@@ -31,21 +31,15 @@ class FtaProcessusModel extends AbstractModel {
          * Nombres total de processus suivant pour le processus en cours
          */
         $array = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
-                        "SELECT DISTINCT " . FtaProcessusCycleModel::FIELDNAME_PROCESSUS_NEXT . "," . FtaProcessusCycleModel::TABLENAME . "." . FtaProcessusCycleModel::FIELDNAME_WORKFLOW
-                        . " FROM " . FtaWorkflowStructureModel::TABLENAME . "," . FtaProcessusModel::TABLENAME
-                        . "," . FtaProcessusCycleModel::TABLENAME
-                        . " WHERE " . FtaWorkflowStructureModel::TABLENAME . "." . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_PROCESSUS
-                        . "=" . FtaProcessusModel::TABLENAME . "." . FtaProcessusModel::KEYNAME
-                        . " AND " . FtaProcessusModel::TABLENAME . "." . FtaProcessusModel::KEYNAME
-                        . "=" . FtaProcessusCycleModel::TABLENAME . "." . FtaProcessusCycleModel::FIELDNAME_PROCESSUS_INIT
-                        . " AND " . FtaWorkflowStructureModel::TABLENAME . "." . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_ROLE
-                        . "=" . FtaProcessusModel::TABLENAME . "." . FtaProcessusModel::FIELDNAME_ID_FTA_ROLE
-                        . " AND " . FtaProcessusModel::TABLENAME . "." . FtaProcessusModel::KEYNAME . "=" . $paramProcessusEncours
-                        . " AND " . FtaProcessusCycleModel::TABLENAME . "." . FtaProcessusCycleModel::FIELDNAME_WORKFLOW . "=" . $paramIdWorkflowEncours
+                        'SELECT DISTINCT ' . FtaProcessusCycleModel::FIELDNAME_PROCESSUS_NEXT . ',' . FtaProcessusCycleModel::TABLENAME . '.' . FtaProcessusCycleModel::FIELDNAME_WORKFLOW
+                        . ' FROM ' . FtaProcessusCycleModel::TABLENAME
+                        . ' WHERE ' . FtaProcessusCycleModel::TABLENAME . '.' . FtaProcessusCycleModel::FIELDNAME_PROCESSUS_INIT . '=' . $paramProcessusEncours
+                        . ' AND ' . FtaProcessusCycleModel::TABLENAME . '.' . FtaProcessusCycleModel::FIELDNAME_WORKFLOW . '=' . $paramIdWorkflowEncours
         );
 
         $nombre_total_processus_precedent = count($array);
         if ($array) {
+            $tauxValidationProcessus = 0;
             /*
              * Vérifie si tous les processus précédent du processus en cours a des chapitres non validé
              */
@@ -74,19 +68,10 @@ class FtaProcessusModel extends AbstractModel {
          * Nombres total de processus précedent pour le processus en cours
          */
         $array = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
-                        "SELECT DISTINCT " . FtaProcessusCycleModel::FIELDNAME_PROCESSUS_INIT . "," . FtaProcessusCycleModel::TABLENAME . "." . FtaProcessusCycleModel::FIELDNAME_WORKFLOW
-                        . " FROM " . FtaWorkflowStructureModel::TABLENAME . "," . FtaProcessusModel::TABLENAME
-                        . "," . FtaProcessusCycleModel::TABLENAME
-                        . " WHERE " . FtaWorkflowStructureModel::TABLENAME . "." . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_PROCESSUS
-                        . "=" . FtaProcessusModel::TABLENAME . "." . FtaProcessusModel::KEYNAME
-                        . " AND " . FtaProcessusModel::TABLENAME . "." . FtaProcessusModel::KEYNAME
-                        . "=" . FtaProcessusCycleModel::TABLENAME . "." . FtaProcessusCycleModel::FIELDNAME_PROCESSUS_NEXT
-                        . " AND " . FtaWorkflowStructureModel::TABLENAME . "." . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_WORKFLOW
-                        . "=" . FtaProcessusCycleModel::TABLENAME . "." . FtaProcessusCycleModel::FIELDNAME_WORKFLOW
-                        . " AND " . FtaWorkflowStructureModel::TABLENAME . "." . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_ROLE
-                        . "=" . FtaProcessusModel::TABLENAME . "." . FtaProcessusModel::FIELDNAME_ID_FTA_ROLE
-                        . " AND " . FtaProcessusModel::TABLENAME . "." . FtaProcessusModel::KEYNAME . "=" . $paramProcessusEncours
-                        . " AND " . FtaProcessusCycleModel::TABLENAME . "." . FtaProcessusCycleModel::FIELDNAME_WORKFLOW . "=" . $paramIdWorkflowEncours
+                        'SELECT DISTINCT ' . FtaProcessusCycleModel::FIELDNAME_PROCESSUS_INIT . ',' . FtaProcessusCycleModel::TABLENAME . '.' . FtaProcessusCycleModel::FIELDNAME_WORKFLOW
+                        . ' FROM ' . FtaProcessusCycleModel::TABLENAME
+                        . ' WHERE ' . FtaProcessusCycleModel::TABLENAME . '.' . FtaProcessusCycleModel::FIELDNAME_PROCESSUS_NEXT . '=' . $paramProcessusEncours
+                        . ' AND ' . FtaProcessusCycleModel::TABLENAME . '.' . FtaProcessusCycleModel::FIELDNAME_WORKFLOW . '=' . $paramIdWorkflowEncours
         );
 
         $nombre_total_processus_precedent = count($array);
@@ -117,32 +102,28 @@ class FtaProcessusModel extends AbstractModel {
     public static function getNonValideIdFtaByRoleWorkflowProcessus($paramIdFta, $paramIdRole, $paramIdWorkflow) {
 
         $arrayChapitreTotal = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
-                        "SELECT " . FtaWorkflowStructureModel::KEYNAME
-                        . " FROM " . FtaWorkflowStructureModel::TABLENAME . "," . FtaProcessusModel::TABLENAME
-                        . " WHERE " . FtaWorkflowStructureModel::TABLENAME . "." . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_PROCESSUS
-                        . "=" . FtaProcessusModel::TABLENAME . "." . FtaProcessusModel::KEYNAME  //Jointure                
-                        . " AND " . FtaWorkflowStructureModel::TABLENAME . "." . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_ROLE
-                        . "=" . FtaProcessusModel::TABLENAME . "." . FtaProcessusModel::FIELDNAME_ID_FTA_ROLE  //Jointure                        
-                        . " AND " . FtaWorkflowStructureModel::TABLENAME . "." . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_WORKFLOW . "=" . $paramIdWorkflow
-                        . " AND " . FtaProcessusModel::TABLENAME . "." . FtaProcessusModel::FIELDNAME_ID_FTA_ROLE . "=" . $paramIdRole
+                        'SELECT DISTINCT ' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_CHAPITRE
+                        . ' FROM ' . FtaWorkflowStructureModel::TABLENAME
+                        . ' WHERE ' . FtaWorkflowStructureModel::TABLENAME . '.' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_WORKFLOW . '=' . $paramIdWorkflow
+                        . ' AND ' . FtaWorkflowStructureModel::TABLENAME . '.' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_ROLE . '=' . $paramIdRole
         );
 
         $nombreTotalProcessus = count($arrayChapitreTotal);
 
         $arrayChapitreValide = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
-                        "SELECT " . FtaWorkflowStructureModel::KEYNAME
-                        . " FROM " . FtaModel::TABLENAME . "," . FtaSuiviProjetModel::TABLENAME
-                        . "," . FtaWorkflowStructureModel::TABLENAME . "," . FtaProcessusModel::TABLENAME
-                        . " WHERE " . FtaModel::TABLENAME . "." . FtaModel::KEYNAME
-                        . "=" . FtaSuiviProjetModel::TABLENAME . "." . FtaSuiviProjetModel::FIELDNAME_ID_FTA            //Jointure
-                        . " AND " . FtaSuiviProjetModel::TABLENAME . "." . FtaSuiviProjetModel::FIELDNAME_ID_FTA_CHAPITRE
-                        . "=" . FtaWorkflowStructureModel::TABLENAME . "." . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_CHAPITRE     //Jointure
-                        . " AND " . FtaProcessusModel::TABLENAME . "." . FtaProcessusModel::KEYNAME
-                        . "=" . FtaWorkflowStructureModel::TABLENAME . "." . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_PROCESSUS  //Jointure
-                        . " AND " . FtaWorkflowStructureModel::TABLENAME . "." . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_WORKFLOW . "=" . $paramIdWorkflow              //Workflow en cours
-                        . " AND " . FtaModel::TABLENAME . "." . FtaModel::KEYNAME . "=" . $paramIdFta                                    //FTA en cours
-                        . " AND " . FtaSuiviProjetModel::FIELDNAME_SIGNATURE_VALIDATION_SUIVI_PROJET . "=0 "         //Chapitre validé
-                        . " AND " . FtaProcessusModel::TABLENAME . "." . FtaProcessusModel::FIELDNAME_ID_FTA_ROLE . "=" . $paramIdRole        //Processus en cours de balayage
+                        'SELECT DISTINCT ' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_CHAPITRE
+                        . ' FROM ' . FtaModel::TABLENAME . ',' . FtaSuiviProjetModel::TABLENAME
+                        . ',' . FtaWorkflowStructureModel::TABLENAME
+                        . ' WHERE ' . FtaModel::TABLENAME . '.' . FtaModel::KEYNAME
+                        . '=' . FtaSuiviProjetModel::TABLENAME . '.' . FtaSuiviProjetModel::FIELDNAME_ID_FTA            //Jointure
+                        . ' AND ' . FtaSuiviProjetModel::TABLENAME . '.' . FtaSuiviProjetModel::FIELDNAME_ID_FTA_CHAPITRE
+                        . '=' . FtaWorkflowStructureModel::TABLENAME . '.' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_CHAPITRE     //Jointure
+                        . ' AND ' . FtaModel::TABLENAME . '.' . FtaModel::FIELDNAME_WORKFLOW
+                        . '=' . FtaWorkflowStructureModel::TABLENAME . '.' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_WORKFLOW  //Jointure
+                        . ' AND ' . FtaWorkflowStructureModel::TABLENAME . '.' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_WORKFLOW . '=' . $paramIdWorkflow              //Workflow en cours
+                        . ' AND ' . FtaModel::TABLENAME . '.' . FtaModel::KEYNAME . '=' . $paramIdFta                                    //FTA en cours
+                        . ' AND ' . FtaSuiviProjetModel::FIELDNAME_SIGNATURE_VALIDATION_SUIVI_PROJET . '=0 '         //Chapitre validé
+                        . ' AND ' . FtaWorkflowStructureModel::TABLENAME . '.' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_ROLE . '=' . $paramIdRole        //Processus en cours de balayage
         );
         $nombreValideProcessus = count($arrayChapitreValide);
 
@@ -165,31 +146,29 @@ class FtaProcessusModel extends AbstractModel {
     public static function getValideIdFtaByRoleWorkflowProcessus($paramIdFta, $paramIdRole, $paramIdWorkflow) {
 
         $arrayProcessusTotal = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
-                        "SELECT " . FtaWorkflowStructureModel::TABLENAME . "." . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_PROCESSUS . " FROM " . FtaWorkflowStructureModel::TABLENAME . "," . FtaProcessusModel::TABLENAME
-                        . " WHERE " . FtaWorkflowStructureModel::TABLENAME . "." . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_PROCESSUS
-                        . "=" . FtaProcessusModel::TABLENAME . "." . FtaProcessusModel::KEYNAME  //Jointure                
-                        . " AND " . FtaWorkflowStructureModel::TABLENAME . "." . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_ROLE
-                        . "=" . FtaProcessusModel::TABLENAME . "." . FtaProcessusModel::FIELDNAME_ID_FTA_ROLE  //Jointure                        
-                        . " AND " . FtaWorkflowStructureModel::TABLENAME . "." . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_WORKFLOW . "=" . $paramIdWorkflow
-                        . " AND " . FtaProcessusModel::TABLENAME . "." . FtaProcessusModel::FIELDNAME_ID_FTA_ROLE . "=" . $paramIdRole
+                        'SELECT DISTINCT ' . FtaWorkflowStructureModel::TABLENAME . '.' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_PROCESSUS
+                        . ' FROM ' . FtaWorkflowStructureModel::TABLENAME
+                        . ' WHERE ' . FtaWorkflowStructureModel::TABLENAME . '.' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_WORKFLOW . '=' . $paramIdWorkflow
+                        . ' AND ' . FtaWorkflowStructureModel::TABLENAME . '.' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_ROLE . '=' . $paramIdRole
         );
 
         $nombreTotalProcessus = count($arrayProcessusTotal);
 
 
         $arrayProcessusValide = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
-                        "SELECT " . FtaWorkflowStructureModel::TABLENAME . "." . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_PROCESSUS . " FROM " . FtaModel::TABLENAME . "," . FtaSuiviProjetModel::TABLENAME
-                        . "," . FtaWorkflowStructureModel::TABLENAME . "," . FtaProcessusModel::TABLENAME
-                        . " WHERE " . FtaModel::TABLENAME . "." . FtaModel::KEYNAME
-                        . "=" . FtaSuiviProjetModel::TABLENAME . "." . FtaSuiviProjetModel::FIELDNAME_ID_FTA            //Jointure
-                        . " AND " . FtaSuiviProjetModel::TABLENAME . "." . FtaSuiviProjetModel::FIELDNAME_ID_FTA_CHAPITRE
-                        . "=" . FtaWorkflowStructureModel::TABLENAME . "." . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_CHAPITRE     //Jointure
-                        . " AND " . FtaProcessusModel::TABLENAME . "." . FtaProcessusModel::KEYNAME
-                        . "=" . FtaWorkflowStructureModel::TABLENAME . "." . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_PROCESSUS  //Jointure
-                        . " AND " . FtaWorkflowStructureModel::TABLENAME . "." . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_WORKFLOW . "=" . $paramIdWorkflow              //Workflow en cours
-                        . " AND " . FtaModel::TABLENAME . "." . FtaModel::KEYNAME . "=" . $paramIdFta                                    //FTA en cours
-                        . " AND " . FtaSuiviProjetModel::FIELDNAME_SIGNATURE_VALIDATION_SUIVI_PROJET . "<>0 "         //Chapitre validé
-                        . " AND " . FtaProcessusModel::TABLENAME . "." . FtaProcessusModel::FIELDNAME_ID_FTA_ROLE . "=" . $paramIdRole        //Processus en cours de balayage
+                        'SELECT DISTINCT ' . FtaWorkflowStructureModel::TABLENAME . '.' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_PROCESSUS
+                        . ' FROM ' . FtaModel::TABLENAME . ',' . FtaSuiviProjetModel::TABLENAME
+                        . ',' . FtaWorkflowStructureModel::TABLENAME
+                        . ' WHERE ' . FtaModel::TABLENAME . '.' . FtaModel::KEYNAME
+                        . '=' . FtaSuiviProjetModel::TABLENAME . '.' . FtaSuiviProjetModel::FIELDNAME_ID_FTA            //Jointure
+                        . ' AND ' . FtaSuiviProjetModel::TABLENAME . '.' . FtaSuiviProjetModel::FIELDNAME_ID_FTA_CHAPITRE
+                        . '=' . FtaWorkflowStructureModel::TABLENAME . '.' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_CHAPITRE     //Jointure
+                        . ' AND ' . FtaModel::TABLENAME . '.' . FtaModel::FIELDNAME_WORKFLOW
+                        . '=' . FtaWorkflowStructureModel::TABLENAME . '.' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_WORKFLOW     //Jointure
+                        . ' AND ' . FtaWorkflowStructureModel::TABLENAME . '.' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_WORKFLOW . '=' . $paramIdWorkflow              //Workflow en cours
+                        . ' AND ' . FtaModel::TABLENAME . '.' . FtaModel::KEYNAME . '=' . $paramIdFta                                    //FTA en cours
+                        . ' AND ' . FtaSuiviProjetModel::FIELDNAME_SIGNATURE_VALIDATION_SUIVI_PROJET . '<>0 '         //Chapitre validé
+                        . ' AND ' . FtaWorkflowStructureModel::TABLENAME . '.' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_ROLE . '=' . $paramIdRole        //Processus en cours de balayage
         );
         $nombreValideProcessus = count($arrayProcessusValide);
 
@@ -211,33 +190,27 @@ class FtaProcessusModel extends AbstractModel {
      */
     public static function getValideProcessusEncours($paramIdFta, $paramProcessusEncours, $paramIdWorkflow) {
         $arrayNombreTotalChapitre = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
-                        "SELECT DISTINCT " . FtaWorkflowStructureModel::TABLENAME . "." . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_CHAPITRE
-                        . " FROM " . FtaWorkflowStructureModel::TABLENAME . "," . FtaProcessusModel::TABLENAME
-                        . " WHERE " . FtaWorkflowStructureModel::TABLENAME . "." . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_PROCESSUS
-                        . "=" . FtaProcessusModel::TABLENAME . "." . FtaProcessusModel::KEYNAME
-                        . " AND " . FtaWorkflowStructureModel::TABLENAME . "." . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_ROLE
-                        . "=" . FtaProcessusModel::TABLENAME . "." . FtaProcessusModel::FIELDNAME_ID_FTA_ROLE
-                        . " AND " . FtaWorkflowStructureModel::TABLENAME . "." . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_WORKFLOW . "=" . $paramIdWorkflow              //Workflow en cours
-                        . " AND " . FtaProcessusModel::TABLENAME . "." . FtaProcessusModel::KEYNAME . "=" . $paramProcessusEncours
+                        'SELECT DISTINCT ' . FtaWorkflowStructureModel::TABLENAME . '.' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_CHAPITRE
+                        . ' FROM ' . FtaWorkflowStructureModel::TABLENAME
+                        . ' WHERE ' . FtaWorkflowStructureModel::TABLENAME . '.' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_WORKFLOW . '=' . $paramIdWorkflow              //Workflow en cours
+                        . ' AND ' . FtaWorkflowStructureModel::TABLENAME . '.' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_PROCESSUS . '=' . $paramProcessusEncours
         );
         $nombreTotalChapitre = count($arrayNombreTotalChapitre);
 
         $arrayNombreTotalChapitreValide = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
-                        "SELECT " . FtaWorkflowStructureModel::TABLENAME . "." . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_CHAPITRE
-                        . " FROM " . FtaModel::TABLENAME . "," . FtaSuiviProjetModel::TABLENAME
-                        . "," . FtaWorkflowStructureModel::TABLENAME . "," . FtaProcessusModel::TABLENAME
-                        . " WHERE " . FtaModel::TABLENAME . "." . FtaModel::KEYNAME
-                        . " = " . FtaSuiviProjetModel::TABLENAME . "." . FtaSuiviProjetModel::FIELDNAME_ID_FTA                        //Jointure
-                        . " AND " . FtaSuiviProjetModel::TABLENAME . "." . FtaSuiviProjetModel::FIELDNAME_ID_FTA_CHAPITRE                        //Jointure
-                        . "= " . FtaWorkflowStructureModel::TABLENAME . "." . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_CHAPITRE
-                        . " AND " . FtaWorkflowStructureModel::TABLENAME . "." . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_PROCESSUS
-                        . "=" . FtaProcessusModel::TABLENAME . "." . FtaProcessusModel::KEYNAME  //Jointure
-                        . " AND " . FtaWorkflowStructureModel::TABLENAME . "." . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_ROLE
-                        . "=" . FtaProcessusModel::TABLENAME . "." . FtaProcessusModel::FIELDNAME_ID_FTA_ROLE  //Jointure
-                        . " AND " . FtaWorkflowStructureModel::TABLENAME . "." . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_WORKFLOW . "=" . $paramIdWorkflow              //Workflow en cours
-                        . " AND " . FtaModel::TABLENAME . "." . FtaModel::KEYNAME . "= " . $paramIdFta                                  //FTA en cours
-                        . " AND " . FtaSuiviProjetModel::TABLENAME . "." . FtaSuiviProjetModel::FIELDNAME_SIGNATURE_VALIDATION_SUIVI_PROJET . "<>0 "         //Chapitre validé
-                        . " AND " . FtaProcessusModel::TABLENAME . "." . FtaProcessusModel::KEYNAME . "=" . $paramProcessusEncours         //Processus en cours de balayage
+                        'SELECT  DISTINCT ' . FtaWorkflowStructureModel::TABLENAME . '.' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_CHAPITRE
+                        . ' FROM ' . FtaModel::TABLENAME . ',' . FtaSuiviProjetModel::TABLENAME
+                        . ',' . FtaWorkflowStructureModel::TABLENAME
+                        . ' WHERE ' . FtaModel::TABLENAME . '.' . FtaModel::KEYNAME
+                        . ' = ' . FtaSuiviProjetModel::TABLENAME . '.' . FtaSuiviProjetModel::FIELDNAME_ID_FTA                        //Jointure
+                        . ' AND ' . FtaSuiviProjetModel::TABLENAME . '.' . FtaSuiviProjetModel::FIELDNAME_ID_FTA_CHAPITRE                        //Jointure
+                        . '= ' . FtaWorkflowStructureModel::TABLENAME . '.' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_CHAPITRE
+                        . ' AND ' . FtaModel::TABLENAME . '.' . FtaModel::FIELDNAME_WORKFLOW
+                        . '=' . FtaWorkflowStructureModel::TABLENAME . '.' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_WORKFLOW     //Jointure
+                        . ' AND ' . FtaWorkflowStructureModel::TABLENAME . '.' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_WORKFLOW . '=' . $paramIdWorkflow              //Workflow en cours
+                        . ' AND ' . FtaModel::TABLENAME . '.' . FtaModel::KEYNAME . '= ' . $paramIdFta                                  //FTA en cours
+                        . ' AND ' . FtaSuiviProjetModel::TABLENAME . '.' . FtaSuiviProjetModel::FIELDNAME_SIGNATURE_VALIDATION_SUIVI_PROJET . '<>0 '         //Chapitre validé
+                        . ' AND ' . FtaWorkflowStructureModel::TABLENAME . '.' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_PROCESSUS . '=' . $paramProcessusEncours         //Processus en cours de balayage
         );
         if ($arrayNombreTotalChapitreValide) {
             $nombreChapitreValide = count($arrayNombreTotalChapitreValide);
@@ -264,10 +237,10 @@ class FtaProcessusModel extends AbstractModel {
 
         //Ce processus en cours, est-il du type repartie ou centralisé ?
         $reqType = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
-                        "SELECT " . FtaProcessusModel::FIELDNAME_MULTISITE_FTA_PROCESSUS
-                        . " FROM " . FtaProcessusModel::TABLENAME
-                        . " WHERE " . FtaProcessusModel::KEYNAME
-                        . "=" . $paramRows
+                        'SELECT ' . FtaProcessusModel::FIELDNAME_MULTISITE_FTA_PROCESSUS
+                        . ' FROM ' . FtaProcessusModel::TABLENAME
+                        . ' WHERE ' . FtaProcessusModel::KEYNAME
+                        . '=' . $paramRows
         );
 
         foreach ($reqType as $rowsType) {
@@ -292,24 +265,24 @@ class FtaProcessusModel extends AbstractModel {
 
         foreach ($paramRows as $rowsSiteSociete) {
             $arrayGestion = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
-                            "SELECT " . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_PROCESSUS
-                            . " FROM " . GeoModel::TABLENAME
-                            . "," . FtaModel::TABLENAME
-                            . "," . FtaActionSiteModel::TABLENAME
-                            . "," . IntranetActionsModel::TABLENAME
-                            . "," . FtaWorkflowStructureModel::TABLENAME
-                            . " WHERE " . GeoModel::KEYNAME . "=" . FtaModel::FIELDNAME_SITE_ASSEMBLAGE
-                            . " AND " . FtaActionSiteModel::FIELDNAME_ID_SITE . "=" . GeoModel::KEYNAME
-                            . " AND " . IntranetActionsModel::TABLENAME . "." . IntranetActionsModel::KEYNAME
-                            . "=" . IntranetDroitsAccesModel::TABLENAME . "." . IntranetDroitsAccesModel::FIELDNAME_ID_INTRANET_ACTIONS
-                            . " AND " . IntranetDroitsAccesModel::TABLENAME . "." . IntranetDroitsAccesModel::FIELDNAME_ID_INTRANET_MODULES
-                            . "=" . IntranetModulesModel::TABLENAME . "." . IntranetModulesModel::KEYNAME
-                            . " AND " . IntranetDroitsAccesModel::FIELDNAME_ID_USER . " =" . $idUser
-                            . " AND " . IntranetDroitsAccesModel::FIELDNAME_NIVEAU_INTRANET_DROITS_ACCES . "=1"
-                            . " AND " . FtaActionSiteModel::TABLENAME . "." . FtaActionSiteModel::FIELDNAME_ID_INTRANET_ACTIONS
-                            . "=" . IntranetActionsModel::TABLENAME . "." . IntranetActionsModel::KEYNAME
-                            . " AND " . FtaActionSiteModel::TABLENAME . "." . FtaActionSiteModel::FIELDNAME_ID_SITE . "=" . $paramLieuGeo // Nous recuperons la localisation de l'utilisateur
-                            . " AND " . FtaModel::KEYNAME . "=" . $paramIdFta
+                            'SELECT ' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_PROCESSUS
+                            . ' FROM ' . GeoModel::TABLENAME
+                            . ',' . FtaModel::TABLENAME
+                            . ',' . FtaActionSiteModel::TABLENAME
+                            . ',' . IntranetActionsModel::TABLENAME
+                            . ',' . FtaWorkflowStructureModel::TABLENAME
+                            . ' WHERE ' . GeoModel::KEYNAME . '=' . FtaModel::FIELDNAME_SITE_ASSEMBLAGE
+                            . ' AND ' . FtaActionSiteModel::FIELDNAME_ID_SITE . '=' . GeoModel::KEYNAME
+                            . ' AND ' . IntranetActionsModel::TABLENAME . '.' . IntranetActionsModel::KEYNAME
+                            . '=' . IntranetDroitsAccesModel::TABLENAME . '.' . IntranetDroitsAccesModel::FIELDNAME_ID_INTRANET_ACTIONS
+                            . ' AND ' . IntranetDroitsAccesModel::TABLENAME . '.' . IntranetDroitsAccesModel::FIELDNAME_ID_INTRANET_MODULES
+                            . '=' . IntranetModulesModel::TABLENAME . '.' . IntranetModulesModel::KEYNAME
+                            . ' AND ' . IntranetDroitsAccesModel::FIELDNAME_ID_USER . ' =' . $idUser
+                            . ' AND ' . IntranetDroitsAccesModel::FIELDNAME_NIVEAU_INTRANET_DROITS_ACCES . '=1'
+                            . ' AND ' . FtaActionSiteModel::TABLENAME . '.' . FtaActionSiteModel::FIELDNAME_ID_INTRANET_ACTIONS
+                            . '=' . IntranetActionsModel::TABLENAME . '.' . IntranetActionsModel::KEYNAME
+                            . ' AND ' . FtaActionSiteModel::TABLENAME . '.' . FtaActionSiteModel::FIELDNAME_ID_SITE . '=' . $paramLieuGeo // Nous recuperons la localisation de l'utilisateur
+                            . ' AND ' . FtaModel::KEYNAME . '=' . $paramIdFta
             );
 
             if ($arrayGestion) {

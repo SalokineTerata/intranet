@@ -7,7 +7,7 @@ function stacktrace_error_handler($errno, $message, $file, $line, $context) {
     return false; // to execute the regular error handler
 }
 
-set_error_handler("stacktrace_error_handler");
+set_error_handler('stacktrace_error_handler');
 
-require_once("../inc/php.php");
+require_once('../inc/php.php');
 ?>

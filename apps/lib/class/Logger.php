@@ -24,21 +24,21 @@
  */
 class Logger {
 
-    const OUTPUT_TAB = "\t";
-    const OUTPUT_CHR = "\n";
-    const OUTPUT_FILE = "../../output.log";
+    const OUTPUT_TAB = '\t';
+    const OUTPUT_CHR = '\n';
+    const OUTPUT_FILE = '../../output.log';
     
     static public function Add($paramLog) {
         // DECLARATION DES VARIABLES LOCALES
         $outputContent = NULL;
-        $outputContentResource = fopen(self::OUTPUT_FILE, "a+");
+        $outputContentResource = fopen(self::OUTPUT_FILE, 'a+');
 
         // Données à exporter
         $dataToExport = $paramLog;
 
 
         // Données contextuelle
-        $outputContext = "\nLOG: ";
+        $outputContext = '\nLOG: ';
 
         // Construction de la ligne de log
         $outputContent = $outputContext . $dataToExport;

@@ -10,9 +10,9 @@
 //
 //
 ////Inclusions
-//include ("../lib/session.php");
-//include ("../lib/functions.php");
-//include ("./functions.php");
+//include ('../lib/session.php');
+//include ('../lib/functions.php');
+//include ('./functions.php');
 require_once '../inc/main.php';
 
 /*
@@ -24,26 +24,26 @@ require_once '../inc/main.php';
   -----------------------------------
 
   Cette page est appelée pour effectuer un traitement particulier
-  en fonction de la variable "$action". Ensuite elle redirige le
+  en fonction de la variable '$action'. Ensuite elle redirige le
   résultat vers une autre page.
 
   Le plus souvent, le traitement est délocalisé sous forme de
-  fonction située dans le fichier "functions.php"
+  fonction située dans le fichier 'functions.php'
 
  */
 
 
-$action = Lib::getParameterFromRequest("action");
-$idAnnexeEmballageGroupeType = Lib::getParameterFromRequest("id_annexe_emballage_groupe_type");
-$idFta = Lib::getParameterFromRequest("id_fta"); //Identifiant de la fiche technique article
-$idAnnexeEmballageGroupe = Lib::getParameterFromRequest("id_annexe_emballage_groupe");
-$idAnnexeEmballage = Lib::getParameterFromRequest("id_annexe_emballage"); //Identifiant de l'emballage
-$idFtaChapitreEncours = Lib::getParameterFromRequest("id_fta_chapitre");
-$syntheseAction = Lib::getParameterFromRequest("synthese_action");
-$abreviationFtaEtat = Lib::getParameterFromRequest("abreviation_fta_etat");
-$idFtaEtat = Lib::getParameterFromRequest("id_fta_etat");
-$idFtaRole = Lib::getParameterFromRequest("id_fta_role");
-$comeback = Lib::getParameterFromRequest("comeback");
+$action = Lib::getParameterFromRequest('action');
+$idAnnexeEmballageGroupeType = Lib::getParameterFromRequest('id_annexe_emballage_groupe_type');
+$idFta = Lib::getParameterFromRequest('id_fta'); //Identifiant de la fiche technique article
+$idAnnexeEmballageGroupe = Lib::getParameterFromRequest('id_annexe_emballage_groupe');
+$idAnnexeEmballage = Lib::getParameterFromRequest('id_annexe_emballage'); //Identifiant de l'emballage
+$idFtaChapitreEncours = Lib::getParameterFromRequest('id_fta_chapitre');
+$syntheseAction = Lib::getParameterFromRequest('synthese_action');
+$abreviationFtaEtat = Lib::getParameterFromRequest('abreviation_fta_etat');
+$idFtaEtat = Lib::getParameterFromRequest('id_fta_etat');
+$idFtaRole = Lib::getParameterFromRequest('id_fta_role');
+$comeback = Lib::getParameterFromRequest('comeback');
 switch ($action) {
 
     /*
@@ -51,35 +51,35 @@ switch ($action) {
      */
     case '':
         //Redirection
-        header("Location: index.php");
+        header('Location: index.php');
 
         break;
     case 'etape1': //Un groupe d'emballage a été sélectionné
         //Renvoi sur la page d'ajout avec cette nouvelle information de groupe d'emballage sélectionné
-        header("Location: ajout_conditionnement.php?id_fta=$idFta"
-                . "&id_annexe_emballage_groupe_type=$idAnnexeEmballageGroupeType"
-                . "&id_annexe_emballage_groupe=$idAnnexeEmballageGroupe"
-                . "&action=etape2&id_fta_chapitre=$idFtaChapitreEncours"
-                . "&synthese_action=$syntheseAction"
-                . "&comeback=" . $comeback
-                . "&id_fta_etat=" . $idFtaEtat
-                . "&abreviation_fta_etat=" . $abreviationFtaEtat
-                . "&id_fta_role=" . $idFtaRole);
+        header('Location: ajout_conditionnement.php?id_fta=' . $idFta
+                . '&id_annexe_emballage_groupe_type=' . $idAnnexeEmballageGroupeType
+                . '&id_annexe_emballage_groupe=' . $idAnnexeEmballageGroupe
+                . '&action=etape2&id_fta_chapitre=' . $idFtaChapitreEncours
+                . '&synthese_action=' . $syntheseAction
+                . '&comeback=' . $comeback
+                . '&id_fta_etat=' . $idFtaEtat
+                . '&abreviation_fta_etat=' . $abreviationFtaEtat
+                . '&id_fta_role=' . $idFtaRole);
 
         break;
 
     case 'etape2': //Un emballage précis a été sélectionné
         //Renvoi sur la page d'ajout avec cette nouvelle information de groupe d'emballage sélectionné
-        header("Location: ajout_conditionnement.php?id_fta=$idFta"
-                . "&id_annexe_emballage_groupe_type=$idAnnexeEmballageGroupeType"
-                . "&id_annexe_emballage_groupe=$idAnnexeEmballageGroupe"
-                . "&id_annexe_emballage=$idAnnexeEmballage"
-                . "&action=etape3&id_fta_chapitre=$idFtaChapitreEncours"
-                . "&synthese_action=$syntheseAction"
-                . "&comeback=" . $comeback
-                . "&id_fta_etat=" . $idFtaEtat
-                . "&abreviation_fta_etat=" . $abreviationFtaEtat
-                . "&id_fta_role=" . $idFtaRole);
+        header('Location: ajout_conditionnement.php?id_fta=' . $idFta
+                . '&id_annexe_emballage_groupe_type=' . $idAnnexeEmballageGroupeType
+                . '&id_annexe_emballage_groupe=' . $idAnnexeEmballageGroupe
+                . '&id_annexe_emballage=' . $idAnnexeEmballage
+                . '&action=etape3&id_fta_chapitre=' . $idFtaChapitreEncours
+                . '&synthese_action=' . $syntheseAction
+                . '&comeback=' . $comeback
+                . '&id_fta_etat=' . $idFtaEtat
+                . '&abreviation_fta_etat=' . $abreviationFtaEtat
+                . '&id_fta_role=' . $idFtaRole);
 
         break;
 
@@ -112,7 +112,7 @@ switch ($action) {
 
 
 
-        header("Location: modification_fiche.php?id_fta=$idFta&id_fta_chapitre_encours=$idFtaChapitreEncours&synthese_action=encours&comeback=$comeback&id_fta_etat=$idFtaEtat&abreviation_fta_etat=$abreviationFtaEtat&id_fta_role=$idFtaRole");
+        header('Location: modification_fiche.php?id_fta=' . $idFta . '&id_fta_chapitre_encours=' . $idFtaChapitreEncours . '&synthese_action=encours&comeback=' . $comeback . '&id_fta_etat=' . $idFtaEtat . '&abreviation_fta_etat=' . $abreviationFtaEtat . '&id_fta_role=' . $idFtaRole);
         break;
 
 
@@ -120,7 +120,7 @@ switch ($action) {
       Fin de switch
      * ********** */
 }
-//include ("./action_bs.php");
-//include ("./action_sm.php");
+//include ('./action_bs.php');
+//include ('./action_sm.php');
 ?>
 

@@ -1,4 +1,4 @@
-<script language="php">
+<script language='php'>
 
 /**
  * Un objet record est un enregistrement dans le sens base de données.
@@ -146,7 +146,7 @@ class DatabaseRecord extends SessionSaveAndRestoreAbstract {
                  */
                 /**
                  * Conversion du résultat SQL en simple tableau PHP:
-                 * array("Nom du champ" => "valeur")
+                 * array('Nom du champ' => 'valeur')
                  * Stockage de l'enregistrement en mémoire dans l'objet Recordset
                  */
                 $this->setArrayFieldNameFieldValueInMemory(
@@ -379,9 +379,9 @@ class DatabaseRecord extends SessionSaveAndRestoreAbstract {
          * Mise à jour de la base de données 
          */
         DatabaseOperation::execute(
-                "UPDATE " . $this->getTableNameForSqlClause()
-                . " SET " . $this->getFieldsToSqlClauseSet()
-                . " WHERE " . $this->getKeyToSqlStatement() . " "
+                'UPDATE ' . $this->getTableNameForSqlClause()
+                . ' SET ' . $this->getFieldsToSqlClauseSet()
+                . ' WHERE ' . $this->getKeyToSqlStatement() . ' '
         );
 
         /**
@@ -439,7 +439,7 @@ class DatabaseRecord extends SessionSaveAndRestoreAbstract {
      */
     public function delete() {
         return DatabaseOperation::execute(
-                        "DELETE FROM " . $this->getTableNameForSqlClause() . " " . $this->getKeyToSqlStatement()
+                        'DELETE FROM ' . $this->getTableNameForSqlClause() . ' ' . $this->getKeyToSqlStatement()
         );
     }
 
@@ -475,7 +475,7 @@ class DatabaseRecord extends SessionSaveAndRestoreAbstract {
     /**
      * Met à jour et retourne le record à partir des champs trouvés
      * dans $_REQUEST (Variables de requête HTTP)
-     * @todo Migrer vers une utilisation de "filter_input_array" (voir valeur ajoutée)
+     * @todo Migrer vers une utilisation de 'filter_input_array' (voir valeur ajoutée)
      */
     public function updateFromHttpRequest() {
         $this->updatePropertiesOnly($_REQUEST);

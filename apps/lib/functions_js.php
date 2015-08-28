@@ -21,7 +21,7 @@
         }
         else if (window.ActiveXObject)
         { // Internet Explorer
-            http = new ActiveXObject("Microsoft.XMLHTTP");
+            http = new ActiveXObject('Microsoft.XMLHTTP');
         }
         return http;
     }

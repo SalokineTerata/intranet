@@ -1,3 +1,5 @@
+<?php $id_service=  Lib::isDefined("id_service");   ?>
+
 <TABLE WIDTH="150" BORDER="0" CELLPADDING="0" CELLSPACING="0" valign="top"  bgcolor="FFE5B2">
   <TR  bgcolor="FFCC66">
     <TD WIDTH="10" HEIGHT="1"  bgcolor="FFCC66"><img src=../lib/images/espaceur.gif width="1" height="1" >

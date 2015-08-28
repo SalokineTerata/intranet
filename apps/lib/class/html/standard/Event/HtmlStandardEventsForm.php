@@ -39,7 +39,7 @@ class HtmlStandardEventsForm extends AbstractAllHtmlParameters {
      */
     protected $OnBlur;
 
-    const EVENT_ONBLUR = "onblur";
+    const EVENT_ONBLUR = 'onblur';
 
     /**
      * Form Event onchange
@@ -50,7 +50,7 @@ class HtmlStandardEventsForm extends AbstractAllHtmlParameters {
      */
     protected $OnChange;
 
-    const EVENT_ONCHANGE = "onchange";
+    const EVENT_ONCHANGE = 'onchange';
 
     /**
      * Form Event oncontextmenu
@@ -61,7 +61,7 @@ class HtmlStandardEventsForm extends AbstractAllHtmlParameters {
      */
     protected $OnContextMenu;
 
-    const EVENT_ONCONTEXTMENU = "oncontextmenu";
+    const EVENT_ONCONTEXTMENU = 'oncontextmenu';
 
     /**
      * Form Event onfocus
@@ -71,7 +71,7 @@ class HtmlStandardEventsForm extends AbstractAllHtmlParameters {
      */
     protected $OnFocus;
 
-    const EVENT_ONFOCUS = "onfocus";
+    const EVENT_ONFOCUS = 'onfocus';
 
     /**
      * Form Event onformchange
@@ -82,7 +82,7 @@ class HtmlStandardEventsForm extends AbstractAllHtmlParameters {
      */
     protected $OnFormChange;
 
-    const EVENT_ONFORMCHANGE = "onformchange";
+    const EVENT_ONFORMCHANGE = 'onformchange';
 
     /**
      * Form Event onforminput
@@ -93,7 +93,7 @@ class HtmlStandardEventsForm extends AbstractAllHtmlParameters {
      */
     protected $OnFormInput;
 
-    const EVENT_ONFORMINPUT = "onforminput";
+    const EVENT_ONFORMINPUT = 'onforminput';
 
     /**
      * Form Event oninput
@@ -104,7 +104,7 @@ class HtmlStandardEventsForm extends AbstractAllHtmlParameters {
      */
     protected $OnInput;
 
-    const EVENT_ONINPUT = "oninput";
+    const EVENT_ONINPUT = 'oninput';
 
     /**
      * Form Event onivalid
@@ -115,19 +115,19 @@ class HtmlStandardEventsForm extends AbstractAllHtmlParameters {
      */
     protected $OnInvalid;
 
-    const EVENT_ONINVALID = "oninvalid";
+    const EVENT_ONINVALID = 'oninvalid';
 
     /**
      * Form Event onselect
      * Fires after some text has been selected in an element
-     * The onselect attribute can be used within: <input type="file">,
-     * <input type="password">, <input type="text">, <keygen>, and <textarea>
+     * The onselect attribute can be used within: <input type='file'>,
+     * <input type='password'>, <input type='text'>, <keygen>, and <textarea>
      * @link http://www.w3schools.com/tags/ev_onselect.asp Documentation
      * @var mixed script
      */
     protected $OnSelect;
 
-    const EVENT_ONSELECT = "onselect";
+    const EVENT_ONSELECT = 'onselect';
 
     /**
      * Form Event onsubmit
@@ -137,7 +137,7 @@ class HtmlStandardEventsForm extends AbstractAllHtmlParameters {
      */
     protected $OnSubmit;
 
-    const EVENT_ONSUBMIT = "onsubmit";
+    const EVENT_ONSUBMIT = 'onsubmit';
 
     public function getAllHtmlParameters() {
 

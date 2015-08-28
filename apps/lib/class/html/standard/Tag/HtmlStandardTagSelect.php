@@ -25,7 +25,7 @@
  */
 class HtmlStandardTagSelect extends AbstractAllHtmlParameters implements InterfaceHtmlStandardTag {
 
-    const TAG_NAME = "select";
+    const TAG_NAME = 'select';
 
     /**
      *

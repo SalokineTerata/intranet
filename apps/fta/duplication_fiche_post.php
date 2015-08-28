@@ -21,7 +21,8 @@ $idFtaRole = Lib::getParameterFromRequest("id_fta_role");
 
 $idFtaWorkflow = Lib::getParameterFromRequest("id_fta_workflow");
 $abreviation_etat_destination = Lib::getParameterFromRequest("abreviation_etat_destination");
-$new_designation_commerciale_fta = Lib::getParameterFromRequest("new_designation_commerciale_fta");
+$new_designation_commerciale_ftaTMP = Lib::getParameterFromRequest("new_designation_commerciale_fta");
+$new_designation_commerciale_fta = addslashes($new_designation_commerciale_ftaTMP);
 $siteDeProduction = Lib::getParameterFromRequest("site_de_production");
 $action = Lib::getParameterFromRequest("action");
 

@@ -39,7 +39,7 @@ class HtmlStandardEventsMouse extends AbstractAllHtmlParameters {
      */
     protected $OnClick;
 
-    const EVENT_ONCLICK = "onclick";
+    const EVENT_ONCLICK = 'onclick';
 
     /**
      * Retourne le nom de script défini pour l'évènement onclick

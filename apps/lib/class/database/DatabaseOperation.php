@@ -20,59 +20,59 @@ class DatabaseOperation {
      * Liste des requêtes exécutées
      * @var string Liste des requêtes exécutées
      */
-    protected static $queryRequest = "";
+    protected static $queryRequest = '';
 
     /**
-     * Tableau contenant une colonne "request", une colonne "time" et une colonne backtrace
+     * Tableau contenant une colonne 'request', une colonne 'time' et une colonne backtrace
      * @var array 
      */
     protected static $queriesInfo = array();
 
     /**
-     * La fonction mysql_query retourne un résultat de type "resource"
+     * La fonction mysql_query retourne un résultat de type 'resource'
      */
-    const QUERY_RETURN_TYPE_RESOURCE = "RESOURCE";
+    const QUERY_RETURN_TYPE_RESOURCE = 'RESOURCE';
 
     /**
-     * La fonction mysql_query retourne un résultat de type "array"
+     * La fonction mysql_query retourne un résultat de type 'array'
      */
-    const QUERY_RETURN_TYPE_ARRAY = "ARRAY";
+    const QUERY_RETURN_TYPE_ARRAY = 'ARRAY';
 
     /**
      * Opérateur SQL AND
      */
-    const SQL_OPERATOR_AND = "AND";
+    const SQL_OPERATOR_AND = 'AND';
 
     /**
      * Séparateur SQL virgule
      */
-    const SQL_SEPARATOR_LIST = ",";
+    const SQL_SEPARATOR_LIST = ',';
 
     /**
      * Nom du la clef du tableau self::queriesInfo contenant la requête
      */
-    const QUERIES_INFO_ARRAY_NAME_REQUEST = "request";
+    const QUERIES_INFO_ARRAY_NAME_REQUEST = 'request';
 
     /**
      * Nom du la clef du tableau self::queriesInfo contenant la horodatage
      */
-    const QUERIES_INFO_ARRAY_NAME_TIME = "time";
+    const QUERIES_INFO_ARRAY_NAME_TIME = 'time';
 
     /**
      * Nom du la clef du tableau self::queriesInfo contenant les traces
      */
-    const QUERIES_INFO_ARRAY_NAME_BACKTRACE = "backtrace";
+    const QUERIES_INFO_ARRAY_NAME_BACKTRACE = 'backtrace';
 
     /**
      * Permet de convertir un tableau de donnée pour être intégré dans<br>
      * une clause SQL WHERE<br>
      * <br>
      * <b>Exemple:</b><br>
-     * $table_name = "table1"<br>
+     * $table_name = 'table1'<br>
      * $keys = array(champs1 => 1234 ,champs2 => 4321)<br>
      * <br>
      * <b>retourne:</b><br>
-     * return " `table1.champs1` = '1234' AND `table1.champs2` = '4321' "<br>
+     * return ' `table1.champs1` = '1234' AND `table1.champs2` = '4321' '<br>
      * @param string $paramTableName Nom de la table
      * @param array $paramValues tableau clef/donnee où clef est le champs et donnée sa valeur
      * @return string Partie prête à être insérée dans le WHERE d'une requête SQL
@@ -86,11 +86,11 @@ class DatabaseOperation {
      * une clause SQL SET<br>
      * <br>
      * <b>Exemple:</b><br>
-     * $table_name = "table1"<br>
+     * $table_name = 'table1'<br>
      * $keys = array(champs1 => 1234 ,champs2 => 4321)<br>
      * <br>
      * <b>retourne:</b><br>
-     * return " `table1.champs1` = '1234', `table1.champs2` = '4321' "<br>
+     * return ' `table1.champs1` = '1234', `table1.champs2` = '4321' '<br>
      * @param string $paramTableName Nom de la table
      * @param array $paramValues tableau clef/donnee où clef est le champs et donnée sa valeur
      * @return string Partie prête à être insérée dans le WHERE d'une requête SQL
@@ -138,7 +138,7 @@ class DatabaseOperation {
     }
 
     /**
-     * Tableau contenant une colonne "request", une colonne "time" et une colonne backtrace
+     * Tableau contenant une colonne 'request', une colonne 'time' et une colonne backtrace
      * @return array
      */
     public static function getQueriesInfo() {
@@ -197,7 +197,6 @@ class DatabaseOperation {
         $result->closeCursor();
         $result->execute();
         $time = round(microtime(true) - $firstTime, 4);
-        DatabaseOperation::databaseAcces()->beginTransaction();
         self::setQueriesInfo($paramRequest, $time, self::IncrementQueryCount());
 
         return $pdo;
@@ -257,7 +256,7 @@ class DatabaseOperation {
      * La clef du tableau sera celle de la première colonne du résultat SQL
      * @param mixed $paramStatement
      * @return array Tableau PHP
-     */ public static function convertSqlStatementWithKeyAsFirstFieldToArray($paramStatement) {
+     */ public static function convertSqlStatementWithKeyAndOneFieldToArray($paramStatement) {
         $array = DatabaseOperation::convertSqlStatementKeyAndOneFieldToArray($paramStatement);
         foreach ($array as $rows) {
             $return[$rows[0]] = $rows[1];
@@ -276,6 +275,22 @@ class DatabaseOperation {
             $statement = DatabaseOperation::queryPDO($paramStatement);
             $rows = $statement->fetchall(PDO::FETCH_NUM);
             $statement->closeCursor();
+            return $rows;
+        }
+    }
+
+    /**
+     * Convertie un résultat SQL en tableau PHP
+     * La clef du tableau sera générée car asbente dans le résultat SQL
+     * @param type $paramStatement
+     * @return type
+     */
+    public static function convertSqlStatementWithKeyAsFirstFieldToArray($paramStatement) {
+        $return = NULL;
+        if ($paramStatement <> NULL) {
+            $statement = DatabaseOperation::queryPDO($paramStatement);
+            $rows = $statement->fetchAll(PDO::FETCH_UNIQUE|PDO::FETCH_ASSOC);
+            $statement->closeCursor();            
             return $rows;
         }
     }
@@ -415,7 +430,7 @@ class DatabaseOperation {
      */
     public static function convertDataForQuery($paramPhpData) {
         /**
-         * Une valeur PHP "vide" est interprétée comme NULL en MySQL
+         * Une valeur PHP 'vide' est interprétée comme NULL en MySQL
          */
         $sqlData = "";
         if ($paramPhpData == "") {
@@ -452,7 +467,7 @@ class DatabaseOperation {
 
     /**
      * Retourne l'enregistrement de la base de données.
-     * Attention, ne gère que les tables "mono-clef"
+     * Attention, ne gère que les tables 'mono-clef'
      * @param string $paramTableName Nom de la table
      * @param mixed $paramKeyValue Valeur de la clef
      * @return resource Résultat SQL
@@ -466,7 +481,7 @@ class DatabaseOperation {
 
     /**
      * Retourne la requete SQL à partir d'un crière sur la clef
-     * Attention, ne gère que les tables "mono-clef"
+     * Attention, ne gère que les tables 'mono-clef'
      * @param string $paramTableName Nom de la table
      * @param mixed $paramKeyValue Valeur de la clef
      * @return mixed requête SQL
@@ -478,7 +493,7 @@ class DatabaseOperation {
 
     /**
      * Retourne la requete SQL à partir d'un crière sur un champs
-     * Attention, ne gère que les tables "mono-clef"
+     * Attention, ne gère que les tables 'mono-clef'
      * @param type $paramTableName
      * @param type $paramFieldName
      * @param type $paramFieldValue
@@ -486,13 +501,13 @@ class DatabaseOperation {
      */
     public static function getSqlQueryFromOneField($paramTableName, $paramFieldName, $paramFieldValue) {
 
-        return "SELECT * FROM "
+        return 'SELECT * FROM '
                 . self::convertTableNameToSqlClause($paramTableName)
-                . " WHERE ("
+                . ' WHERE ('
                 . DatabaseOperation::convertArrayToSqlClauseWhere(
                         $paramTableName, array($paramFieldName => $paramFieldValue)
                 )
-                . ")"
+                . ')'
         ;
     }
 
@@ -512,9 +527,9 @@ class DatabaseOperation {
      * @return mixed Valeur de la clef réservée
      */
     public static function reserveKeyDatabase($paramTableName) {
-        $sqlReq = "INSERT $paramTableName VALUES()";
-        $sqlResult = DatabaseOperation::query($sqlReq);
-        $return = mysql_insert_id();
+        $sqlReq = 'INSERT ' . $paramTableName . ' VALUES()';
+        $sqlResult = DatabaseOperation::execute($sqlReq);
+        $return = $sqlResult->lastInsertId();
         return $return;
     }
 
@@ -533,7 +548,7 @@ class DatabaseOperation {
         $keyName = DatabaseDescription::getTableKeyName($paramTableName);
         $whereClause = self::convertArrayToSqlClauseWhere($paramTableName, array($paramFieldName => $paramFieldValue));
         $result = DatabaseOperation::doSqlSelect($keyName, $paramTableName, $whereClause);
-        $return = DatabaseOperation::convertSqlResultKeyAndOneFieldToArray($result);
+        $return = DatabaseOperation::convertSqlStatementKeyAndOneFieldToArray($result);
         return $return;
     }
 
@@ -587,8 +602,8 @@ class DatabaseOperation {
          */
         $fieldsArray1 = self::convertSqlStatementFirstRowToArray(
                         self::queryPDO(
-                                "SELECT * FROM " . $paramTableName1
-                                . " WHERE " . DatabaseDescription::getTableKeyName($paramTableName1) . "=" . $paramKeyValueTable1
+                                'SELECT * FROM ' . $paramTableName1
+                                . ' WHERE ' . DatabaseDescription::getTableKeyName($paramTableName1) . '=' . $paramKeyValueTable1
                         )
         );
 
@@ -597,8 +612,8 @@ class DatabaseOperation {
          */
         $fieldsArray2 = self::convertSqlStatementFirstRowToArray(
                         self::queryPDO(
-                                "SELECT * FROM " . $paramTableName2
-                                . " WHERE " . DatabaseDescription::getTableKeyName($paramTableName2) . "=" . $paramKeyValueTable2
+                                'SELECT * FROM ' . $paramTableName2
+                                . ' WHERE ' . DatabaseDescription::getTableKeyName($paramTableName2) . '=' . $paramKeyValueTable2
                         )
         );
 
@@ -643,16 +658,16 @@ class DatabaseOperation {
      */
     public static function doSqlUpdate($paramTableClause, $paramSetClause, $paramWhereClause) {
         return DatabaseOperation::execute(
-                        "UPDATE " . $paramTableClause
-                        . " SET " . $paramSetClause
-                        . " WHERE (" . $paramWhereClause . " )"
+                        'UPDATE ' . $paramTableClause
+                        . ' SET ' . $paramSetClause
+                        . ' WHERE (' . $paramWhereClause . ' )'
         );
     }
 
     public static function doSqlUpdateFromOneField($paramTableName, $paramKeyName, $paramKeyValue, $paramFieldName, $paramFieldValue) {
-        $TableClause = "`" . $paramTableName . "` ";
-        $SetClause = "`" . $paramFieldName . "` =  " . self::convertDataForQuery($paramFieldValue);
-        $WhereClause = "`" . $paramTableName . "`.`" . $paramKeyName . "` =  '" . $paramKeyValue . "'";
+        $TableClause = '`' . $paramTableName . '` ';
+        $SetClause = '`' . $paramFieldName . '` =  ' . self::convertDataForQuery($paramFieldValue);
+        $WhereClause = '`' . $paramTableName . '`.`' . $paramKeyName . '` =  \'' . $paramKeyValue . '\'';
 
         DatabaseOperation::doSqlUpdate($TableClause, $SetClause, $WhereClause);
     }
@@ -665,7 +680,7 @@ class DatabaseOperation {
      */
     public static function doSqlDelete($paramTableClause, $paramWhereClause) {
         return DatabaseOperation::execute(
-                        "DELETE FROM " . $paramTableClause . " "
+                        'DELETE FROM ' . $paramTableClause . ' '
                         . $paramWhereClause
         );
     }
@@ -685,15 +700,15 @@ class DatabaseOperation {
     ) {
         $orderClauseToAdd = NULL;
         if ($paramOrderClause != NULL) {
-            $orderClauseToAdd = " ORDER BY " . $paramOrderClause;
+            $orderClauseToAdd = ' ORDER BY ' . $paramOrderClause;
         }
 
-        return DatabaseOperation::query(
-                        "SELECT " . $paramSelectClause
-                        . " FROM " . $paramTableClause
-                        . " WHERE " . $paramWhereClause
-                        . $orderClauseToAdd
-        );
+        return
+                'SELECT ' . $paramSelectClause
+                . ' FROM ' . $paramTableClause
+                . ' WHERE ' . $paramWhereClause
+                . $orderClauseToAdd
+        ;
     }
 
     /**
@@ -709,7 +724,7 @@ class DatabaseOperation {
      * En cas d'ambiguïté de nom de champs à sélectionner, préciser le nom
      * de la table.
      * Par exemple, si les table R1 et RN ont toutes les deux un champs nommé
-     * "nom", alors préciser "R1.nom" ou "R2.nom" dans $arrayFieldsNameToDisplay
+     * 'nom', alors préciser 'R1.nom' ou 'R2.nom' dans $arrayFieldsNameToDisplay
      *
      * @param string $tableNameRN Nom de la table de relation N
      * @param string $tableNameR1 Nom de la table de relation 1
@@ -743,15 +758,15 @@ class DatabaseOperation {
         /**
          * Construction de la requête SQL
          */
-        $paramSelectClause = $tableNameRN . "." . $keyNameRN . "," . implode(",", $arrayFieldsNameToDisplay);
-        $paramTableClause = $tableNameRN . "," . $tableNameR1;
-        $paramWhereClauseRelationship = $tableNameRN . "." . $foreignKeyNameRN . " = " . $tableNameR1 . "." . $foreignKeyNameR1;
-        $paramWhereClause = $tableNameRN . "." . $foreignKeyNameRN . " = " . $foreignKeyValue . " AND " . $paramWhereClauseRelationship;
+        $paramSelectClause = $tableNameRN . '.' . $keyNameRN . ',' . implode(',', $arrayFieldsNameToDisplay);
+        $paramTableClause = $tableNameRN . ',' . $tableNameR1;
+        $paramWhereClauseRelationship = $tableNameRN . '.' . $foreignKeyNameRN . ' = ' . $tableNameR1 . '.' . $foreignKeyNameR1;
+        $paramWhereClause = $tableNameRN . '.' . $foreignKeyNameRN . ' = ' . $foreignKeyValue . ' AND ' . $paramWhereClauseRelationship;
         if ($arrayFieldsNameOrder) {
-            $paramOrderClause = implode(",", $arrayFieldsNameOrder);
+            $paramOrderClause = implode(',', $arrayFieldsNameOrder);
         }
 
-        return DatabaseOperation::convertSqlResultWithKeyAsFirstFieldToArray(
+        return DatabaseOperation::convertSqlStatementWithKeyAsFirstFieldToArray(
                         self::doSqlSelect($paramSelectClause, $paramTableClause, $paramWhereClause, $paramOrderClause)
         );
     }
@@ -769,7 +784,7 @@ class DatabaseOperation {
      * En cas d'ambiguïté de nom de champs à sélectionner, préciser le nom
      * de la table.
      * Par exemple, si les table RN et RN ont toutes les deux un champs nommé
-     * "nom", alors préciser "R1.nom" ou "R2.nom" dans $arrayFieldsNameToDisplay
+     * 'nom', alors préciser 'R1.nom' ou 'R2.nom' dans $arrayFieldsNameToDisplay
      *
      * @param string $primaryTableNameRN Nom de la table primaire de relation N
      * @param array $secondaryTablesNamesAndidKeyValueRN Noms des tables secondaires de relation N et valeur des clefs étrangères
@@ -794,21 +809,21 @@ class DatabaseOperation {
         /**
          * Construction de la requête SQL
          */
-        $paramSelectClause = $primaryTableNameRN . "." . $keyNameRN . "," . $arrayFieldsNameToDisplay;
+        $paramSelectClause = $primaryTableNameRN . '.' . $keyNameRN . ',' . $arrayFieldsNameToDisplay;
         $paramTableClause = $primaryTableNameRN . DatabaseOperation::tableClauseRelationshipNtoN($secondaryTablesNamesAndidKeyValueRN);
-        $paramWhereClauseRelationship = " 1 " . DatabaseOperation::whereClauseRelationshipNtoN($primaryTableNameRN, $secondaryTablesNamesAndidKeyValueRN);
+        $paramWhereClauseRelationship = ' 1 ' . DatabaseOperation::whereClauseRelationshipNtoN($primaryTableNameRN, $secondaryTablesNamesAndidKeyValueRN);
 
         if ($arrayFieldsNameOrder) {
-            $paramOrderClause = implode(",", $arrayFieldsNameOrder);
+            $paramOrderClause = implode(',', $arrayFieldsNameOrder);
         }
 
-        return DatabaseOperation::convertSqlResultWithKeyAsFirstFieldToArray(
+        return DatabaseOperation::convertSqlStatementWithKeyAsFirstFieldToArray(
                         self::doSqlSelect($paramSelectClause, $paramTableClause, $paramWhereClauseRelationship, $paramOrderClause)
         );
     }
 
     static public function createDatabaseConnection() {
-        $ini_array = parse_ini_file("config_env_cod.ini");
+        $ini_array = parse_ini_file('config_env_cod.ini');
         print_r($ini_array);
 //$pdo = new PDO($dsn, $username, $passwd, $options);
     }
@@ -827,8 +842,8 @@ class DatabaseOperation {
                  */
                 $secondaryableDescriptionRN = new DatabaseDescriptionTable($value[0]);
                 $secondaryTableKeyNameRN = $secondaryableDescriptionRN->getKeyName();
-                $req .= " AND " . $paramPrimaryTableName . "." . $primaryTableForeignKeyNameRN . "=" . $secondaryTableName . "." . $secondaryTableKeyNameRN
-                        . " AND " . $secondaryTableName . "." . $secondaryTableKeyNameRN . "=" . $ForeignKeyValue;
+                $req .= ' AND ' . $paramPrimaryTableName . '.' . $primaryTableForeignKeyNameRN . '=' . $secondaryTableName . '.' . $secondaryTableKeyNameRN
+                        . ' AND ' . $secondaryTableName . '.' . $secondaryTableKeyNameRN . '=' . $ForeignKeyValue;
             }
         }
         return $req;
@@ -837,7 +852,7 @@ class DatabaseOperation {
     static private function tableClauseRelationshipNtoN($paramSecondaryTableNamesAndIdKeyValue) {
         if ($paramSecondaryTableNamesAndIdKeyValue) {
             foreach ($paramSecondaryTableNamesAndIdKeyValue as $value) {
-                $req .= " , " . $value[0];
+                $req .= ' , ' . $value[0];
             }
         }
         return $req;

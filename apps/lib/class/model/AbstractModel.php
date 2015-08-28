@@ -8,8 +8,8 @@
  */
 class AbstractModel {
 
-    const TABLENAME = "undefined";
-    const KEYNAME = "undefined";
+    const TABLENAME = 'undefined';
+    const KEYNAME = 'undefined';
     const DEFAULT_IS_CREATE_RECORDSET_IN_DATABASE_IF_KEY_DOESNT_EXIST = DatabaseRecord::DEFAULT_IS_CREATE_RECORD_IN_DATABASE_IF_KEY_DOESNT_EXIST;
 
     private $keyvalue;

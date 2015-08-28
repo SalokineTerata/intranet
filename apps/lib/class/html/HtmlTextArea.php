@@ -72,14 +72,14 @@ class HtmlTextArea extends AbstractHtmlGlobalElement {
 
     function getHtmlEditableContent() {
 
-        return "<" . $this->getAttributes()->getTagName()
+        return '<' . $this->getAttributes()->getTagName()
                 . parent::getAttributesGlobal()->getAllHtmlParametersWithSpaceBefore()
                 . parent::getEventsForm()->getAllHtmlParametersWithSpaceBefore()
                 . parent::getEventsMouse()->getAllHtmlParametersWithSpaceBefore()
                 . $this->getAttributes()->getAllHtmlParametersWithSpaceBefore()
-                . "/>"
+                . '/>'
                 . $this->getTextAreaContent()
-                . "</" . $this->getAttributes()->getTagName() . ">"
+                . '</' . $this->getAttributes()->getTagName() . '>'
                 . parent::getAttributesGlobal()->getIconMenuToHtml()
         ;
     }

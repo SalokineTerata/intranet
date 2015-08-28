@@ -8,12 +8,12 @@
  */
 class FtaWorkflowStructureModel extends AbstractModel {
 
-    const TABLENAME = "fta_workflow_structure";
-    const KEYNAME = "id_fta_workflow_structure";
-    const FIELDNAME_ID_FTA_CHAPITRE = "id_fta_chapitre";
-    const FIELDNAME_ID_FTA_PROCESSUS = "id_fta_processus";
-    const FIELDNAME_ID_FTA_ROLE = "id_fta_role";
-    const FIELDNAME_ID_FTA_WORKFLOW = "id_fta_workflow";
+    const TABLENAME = 'fta_workflow_structure';
+    const KEYNAME = 'id_fta_workflow_structure';
+    const FIELDNAME_ID_FTA_CHAPITRE = 'id_fta_chapitre';
+    const FIELDNAME_ID_FTA_PROCESSUS = 'id_fta_processus';
+    const FIELDNAME_ID_FTA_ROLE = 'id_fta_role';
+    const FIELDNAME_ID_FTA_WORKFLOW = 'id_fta_workflow';
 
     /**
      * Chapitre du workflow de la FTA
@@ -111,10 +111,10 @@ class FtaWorkflowStructureModel extends AbstractModel {
         $tableName = FtaWorkflowStructureModel::TABLENAME;
         $idFtaWorkflowName = FtaWorkflowStructureModel::FIELDNAME_ID_FTA_WORKFLOW;
         $idFtaChapitreName = FtaWorkflowStructureModel::FIELDNAME_ID_FTA_CHAPITRE;
-        $sql = "SELECT " . $keyName . " "
-                . "FROM " . $tableName . " "
-                . "WHERE " . $idFtaWorkflowName . "=" . $idFtaWorkflow . " "
-                . "AND " . $idFtaChapitreName . "=" . $paramIdChapitre . " "
+        $sql = 'SELECT ' . $keyName . ' '
+                . 'FROM ' . $tableName . ' '
+                . 'WHERE ' . $idFtaWorkflowName . '=' . $idFtaWorkflow . ' '
+                . 'AND ' . $idFtaChapitreName . '=' . $paramIdChapitre . ' '
         ;
         $array = DatabaseOperation::convertSqlStatementWithoutKeyToArray($sql);
 
@@ -130,10 +130,10 @@ class FtaWorkflowStructureModel extends AbstractModel {
      */
     public static function getArrayProcessusByRoleAndWorkflow($paramIdRole, $paramIdWorkflow) {
         $arrayProcessusAcces = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
-                        "SELECT DISTINCT " . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_PROCESSUS
-                        . " FROM " . FtaWorkflowStructureModel::TABLENAME
-                        . " WHERE " . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_WORKFLOW . "=" . $paramIdWorkflow
-                        . " AND " . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_ROLE . "=" . $paramIdRole
+                        'SELECT DISTINCT ' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_PROCESSUS
+                        . ' FROM ' . FtaWorkflowStructureModel::TABLENAME
+                        . ' WHERE ' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_WORKFLOW . '=' . $paramIdWorkflow
+                        . ' AND ' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_ROLE . '=' . $paramIdRole
         );
         foreach ($arrayProcessusAcces as $rowsProcessusAcces) {
             $idProcessus[] = $rowsProcessusAcces[FtaWorkflowStructureModel::FIELDNAME_ID_FTA_PROCESSUS];

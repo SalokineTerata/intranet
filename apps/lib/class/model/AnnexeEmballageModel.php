@@ -8,30 +8,30 @@
  */
 class AnnexeEmballageModel extends AbstractModel {
 
-    const TABLENAME = "annexe_emballage";
-    const KEYNAME = "id_annexe_emballage";
-    const FIELDNAME_ID_FTE_FOURNISSEUR = "id_fte_fournisseur";
-    const FIELDNAME_ID_ANNEXE_EMBALLAGE_GROUPE = "id_annexe_emballage_groupe";
-    const FIELDNAME_REFERENCE_FOURNISSEUR_ANNEXE_EMBALLAGE = "reference_fournisseur_annexe_emballage";
-    const FIELDNAME_POIDS_ANNEXE_EMBALLAGE = "poids_annexe_emballage";
-    const FIELDNAME_LONGUEUR_ANNEXE_EMBALLAGE = "longueur_annexe_emballage";
-    const FIELDNAME_LARGEUR_ANNEXE_EMBALLAGE = "largeur_annexe_emballage";
-    const FIELDNAME_HAUTEUR_ANNEXE_EMBALLAGE = "hauteur_annexe_emballage";
-    const FIELDNAME_EPAISSEUR_ANNEXE_EMBALLAGE = "epaisseur_annexe_emballage";
-    const FIELDNAME_ACTIF_ANNEXE_EMBALLAGE = "actif_annexe_emballage";
-    const FIELDNAME_QUANTITE_PAR_COUCHE_ANNEXE_EMBALLAGE = "quantite_par_couche_annexe_emballage";
-    const FIELDNAME_NOMBRE_COUCHE_ANNEXE_EMBALLAGE = "nombre_couche_annexe_emballage";
-    const FIELDNAME_DATE_MAJ_ANNEXE_EMBALLAGE = "date_maj_annexe_emballage";
+    const TABLENAME = 'annexe_emballage';
+    const KEYNAME = 'id_annexe_emballage';
+    const FIELDNAME_ID_FTE_FOURNISSEUR = 'id_fte_fournisseur';
+    const FIELDNAME_ID_ANNEXE_EMBALLAGE_GROUPE = 'id_annexe_emballage_groupe';
+    const FIELDNAME_REFERENCE_FOURNISSEUR_ANNEXE_EMBALLAGE = 'reference_fournisseur_annexe_emballage';
+    const FIELDNAME_POIDS_ANNEXE_EMBALLAGE = 'poids_annexe_emballage';
+    const FIELDNAME_LONGUEUR_ANNEXE_EMBALLAGE = 'longueur_annexe_emballage';
+    const FIELDNAME_LARGEUR_ANNEXE_EMBALLAGE = 'largeur_annexe_emballage';
+    const FIELDNAME_HAUTEUR_ANNEXE_EMBALLAGE = 'hauteur_annexe_emballage';
+    const FIELDNAME_EPAISSEUR_ANNEXE_EMBALLAGE = 'epaisseur_annexe_emballage';
+    const FIELDNAME_ACTIF_ANNEXE_EMBALLAGE = 'actif_annexe_emballage';
+    const FIELDNAME_QUANTITE_PAR_COUCHE_ANNEXE_EMBALLAGE = 'quantite_par_couche_annexe_emballage';
+    const FIELDNAME_NOMBRE_COUCHE_ANNEXE_EMBALLAGE = 'nombre_couche_annexe_emballage';
+    const FIELDNAME_DATE_MAJ_ANNEXE_EMBALLAGE = 'date_maj_annexe_emballage';
 
     public static function getIdAnnexeEmballage($paramIdEmballageGroupe) {
 
-        $req = "SELECT DISTINCT " . AnnexeEmballageModel::TABLENAME . "." . AnnexeEmballageModel::KEYNAME
-                . " FROM " . AnnexeEmballageGroupeModel::TABLENAME . "," . AnnexeEmballageModel::TABLENAME . " WHERE ( 0 ";
+        $req = 'SELECT DISTINCT ' . AnnexeEmballageModel::TABLENAME . '.' . AnnexeEmballageModel::KEYNAME
+                . ' FROM ' . AnnexeEmballageGroupeModel::TABLENAME . ',' . AnnexeEmballageModel::TABLENAME . ' WHERE ( 0 ';
 
         $req .= AnnexeEmballageGroupeModel::AddIdAnnexeEmballageGroupe($paramIdEmballageGroupe);
 
-        $req .= ") AND " . AnnexeEmballageGroupeModel::TABLENAME . "." . AnnexeEmballageGroupeModel::KEYNAME
-                . "=" . AnnexeEmballageModel::TABLENAME . "." . AnnexeEmballageModel::FIELDNAME_ID_ANNEXE_EMBALLAGE_GROUPE;
+        $req .= ') AND ' . AnnexeEmballageGroupeModel::TABLENAME . '.' . AnnexeEmballageGroupeModel::KEYNAME
+                . '=' . AnnexeEmballageModel::TABLENAME . '.' . AnnexeEmballageModel::FIELDNAME_ID_ANNEXE_EMBALLAGE_GROUPE;
 
         $arrayIdAnnexeEmballage = DatabaseOperation::convertSqlStatementWithoutKeyToArray($req);
         if ($arrayIdAnnexeEmballage) {
@@ -47,22 +47,22 @@ class AnnexeEmballageModel extends AbstractModel {
 
     public static function getArrayAnnexeEmballage($paramIdEmballageGroupe) {
 
-        $req = "SELECT DISTINCT " . AnnexeEmballageModel::KEYNAME
-                . "," . AnnexeEmballageModel::FIELDNAME_LARGEUR_ANNEXE_EMBALLAGE
-                . "," . AnnexeEmballageModel::FIELDNAME_HAUTEUR_ANNEXE_EMBALLAGE
-                . "," . AnnexeEmballageModel::FIELDNAME_NOMBRE_COUCHE_ANNEXE_EMBALLAGE
-                . "," . AnnexeEmballageModel::FIELDNAME_POIDS_ANNEXE_EMBALLAGE
-                . "," . AnnexeEmballageModel::TABLENAME . "." . AnnexeEmballageModel::FIELDNAME_ID_ANNEXE_EMBALLAGE_GROUPE
-                . "," . AnnexeEmballageModel::FIELDNAME_QUANTITE_PAR_COUCHE_ANNEXE_EMBALLAGE
-                . " FROM " . AnnexeEmballageGroupeModel::TABLENAME . "," . AnnexeEmballageModel::TABLENAME . " WHERE ( 0 ";
+        $req = 'SELECT DISTINCT ' . AnnexeEmballageModel::KEYNAME
+                . ',' . AnnexeEmballageModel::FIELDNAME_LARGEUR_ANNEXE_EMBALLAGE
+                . ',' . AnnexeEmballageModel::FIELDNAME_HAUTEUR_ANNEXE_EMBALLAGE
+                . ',' . AnnexeEmballageModel::FIELDNAME_NOMBRE_COUCHE_ANNEXE_EMBALLAGE
+                . ',' . AnnexeEmballageModel::FIELDNAME_POIDS_ANNEXE_EMBALLAGE
+                . ',' . AnnexeEmballageModel::TABLENAME . '.' . AnnexeEmballageModel::FIELDNAME_ID_ANNEXE_EMBALLAGE_GROUPE
+                . ',' . AnnexeEmballageModel::FIELDNAME_QUANTITE_PAR_COUCHE_ANNEXE_EMBALLAGE
+                . ' FROM ' . AnnexeEmballageGroupeModel::TABLENAME . ',' . AnnexeEmballageModel::TABLENAME . ' WHERE ( 0 ';
 
         $req .= AnnexeEmballageGroupeModel::AddIdAnnexeEmballageGroupe($paramIdEmballageGroupe);
 
-        $req .= ") AND " . AnnexeEmballageGroupeModel::TABLENAME . "." . AnnexeEmballageGroupeModel::KEYNAME
-                . "=" . AnnexeEmballageModel::TABLENAME . "." . AnnexeEmballageModel::FIELDNAME_ID_ANNEXE_EMBALLAGE_GROUPE;
+        $req .= ') AND ' . AnnexeEmballageGroupeModel::TABLENAME . '.' . AnnexeEmballageGroupeModel::KEYNAME
+                . '=' . AnnexeEmballageModel::TABLENAME . '.' . AnnexeEmballageModel::FIELDNAME_ID_ANNEXE_EMBALLAGE_GROUPE;
 
-        $result = DatabaseOperation::query($req);
-        $array = DatabaseOperation::convertSqlResultWithKeyAsFirstFieldToArray($result);
+       
+        $array = DatabaseOperation::convertSqlStatementWithKeyAsFirstFieldToArray($req);
 
         return $array;
     }
@@ -70,7 +70,7 @@ class AnnexeEmballageModel extends AbstractModel {
     public static function AddIdAnnexeEmballage($paramIdEmballage) {
         if ($paramIdEmballage) {
             foreach ($paramIdEmballage as $value) {
-                $req .= " OR " . AnnexeEmballageModel::KEYNAME . "=" . $value . " ";
+                $req .= ' OR ' . AnnexeEmballageModel::KEYNAME . '=' . $value . ' ';
             }
         }
         return $req;

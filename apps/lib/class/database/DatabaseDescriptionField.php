@@ -129,11 +129,11 @@ class DatabaseDescriptionField {
 
     public function getHtmlPropertyId() {
         return AbstractHtmlGlobalElement::HTML_PROPERTY_NAME_ID
-                . "="
+                . '='
                 . Html::$PREFIXE_ID_DATA
-                . "_"
+                . '_'
                 . $this->getDataField()->getTableName()
-                . "_"
+                . '_'
                 . $this->getDataField()->getFieldName()
         ;
     }

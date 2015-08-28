@@ -25,7 +25,7 @@
  */
 class HtmlStandardTagInput extends AbstractAllHtmlParameters implements InterfaceHtmlStandardTag {
 
-    const TAG_NAME = "input";
+    const TAG_NAME = 'input';
 
     /**
      *

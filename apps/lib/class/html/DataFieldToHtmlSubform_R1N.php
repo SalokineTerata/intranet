@@ -33,14 +33,14 @@ class DataFieldToHtmlSubform_R1N extends HtmlSubForm_R1N {
                         $paramDataField->getReferencedTableName()
                         , $paramDataField->getTableName()
                         , $paramDataField->getFieldValue()
-                        , explode(",", $paramDataField->getFieldsToDisplay())
-                        , explode(",", $paramDataField->getFieldsToOrder())
+                        , explode(',', $paramDataField->getFieldsToDisplay())
+                        , explode(',', $paramDataField->getFieldsToOrder())
         );
         parent::__construct($paramArrayContent
                 , ModelTableAssociation::getModelName($paramDataField->getReferencedTableName())
                 , $paramDataField->getFieldLabel()
         );
-        $this->setContentLocked(explode(",", $paramDataField->getFieldsToLock()));
+        $this->setContentLocked(explode(',', $paramDataField->getFieldsToLock()));
         $this->setIsRightToAdd($paramDataField->getRightToAdd());
     }
 

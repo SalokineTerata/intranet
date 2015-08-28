@@ -9,32 +9,34 @@
 //$module=trim($module);
 //
 ////Inclusions
-//include ("../lib/session.php");
-//include ("../lib/functions.php");
-//include ("./functions.php");
+//include ('../lib/session.php');
+//include ('../lib/functions.php');
+//include ('./functions.php');
 require_once '../inc/main.php';
 
 $globalConfig = new GlobalConfig();
 
-$action = Lib::getParameterFromRequest("action");
-if ($action == "transition_groupe") {
-    $action = Lib::getParameterFromRequest("abreviation_fta_transition");
+$action = Lib::getParameterFromRequest('action');
+if ($action == 'transition_groupe') {
+    $action = Lib::getParameterFromRequest('abreviation_fta_transition');
 }
-$idFta = Lib::getParameterFromRequest("id_fta");
+$idFta = Lib::getParameterFromRequest('id_fta');
 if (!$idFta) {
-    $idFtaArray = Lib::getParameterFromRequest("arrayFta");
-    $idFta = explode(",", $idFtaArray);
+    $idFtaArray = Lib::getParameterFromRequest('arrayFta');
+    $idFta = explode(',', $idFtaArray);
 }
-$idFtaRole = Lib::getParameterFromRequest("id_fta_role");
-$idFtaWorkflow = Lib::getParameterFromRequest("id_fta_workflow");
-$new_commentaire_maj_fta = Lib::getParameterFromRequest("fta_commentaire_maj_fta_$idFta");
+$idFtaRole = Lib::getParameterFromRequest('id_fta_role');
+$idFtaWorkflow = Lib::getParameterFromRequest('id_fta_workflow');
+$new_commentaire_maj_ftatmp = Lib::getParameterFromRequest('fta_commentaire_maj_fta_$idFta');
+$new_commentaire_maj_fta = addslashes($new_commentaire_maj_ftatmp);
+
 if (!$new_commentaire_maj_fta) {
-    $new_commentaire_maj_fta = Lib::getParameterFromRequest("subject");
+    $new_commentaire_maj_fta = Lib::getParameterFromRequest('subject');
 }
 if (!$action) {
-    $titre = "Erreur";
-    $message = "Vous devez choisir une transition";
-    $redirection = "";
+    $titre = 'Erreur';
+    $message = 'Vous devez choisir une transition';
+    $redirection = '';
     afficher_message($titre, $message, $redirection);
 } else {
 
@@ -47,14 +49,14 @@ if (!$action) {
       -----------------------------------
 
       Cette page est appelée pour effectuer un traitement particulier
-      en fonction de la variable "$action". Ensuite elle redirige le
+      en fonction de la variable '$action'. Ensuite elle redirige le
       résultat vers une autre page.
 
       Le plus souvent, le traitement est délocalisé sous forme de
-      fonction située dans le fichier "functions.php"
+      fonction située dans le fichier 'functions.php'
 
      */
-    //echo $action."<br>".$id_fta."<br>".$new_commentaire_maj_fta."<br>";
+    //echo $action.'<br>'.$id_fta.'<br>'.$new_commentaire_maj_fta.'<br>';
 //echo $abreviation_fta_transition;
     $liste_global = array();    //Tableau contenant les emails et le nom des destinataire (cf fonction liste_diffusion_transition() )
 //Dans le cas où il n'y aurait qu'une seule FTA a valider,
@@ -65,7 +67,7 @@ if (!$action) {
         } else {
             $selection_fta = $idFta;
         }
-        $envoi_mail_detail = 1;    //Permet d'envoi un mail en mode "détaillé"
+        $envoi_mail_detail = 1;    //Permet d'envoi un mail en mode 'détaillé'
         $abreviation_fta_transition = $action;
     }
 
@@ -74,34 +76,34 @@ if (!$action) {
     if (
             (
             !$new_commentaire_maj_fta
-            or substr($new_commentaire_maj_fta, 0, 1) == " "
+            or substr($new_commentaire_maj_fta, 0, 1) == ' '
             )
             and
-            $abreviation_fta_transition <> "V"
+            $abreviation_fta_transition <> 'V'
     ) {
-        $titre = "Informations manquantes";
-        $message = "Vous devez spécifier un commentaire sur la mise à jour.";
+        $titre = 'Informations manquantes';
+        $message = 'Vous devez spécifier un commentaire sur la mise à jour.';
         afficher_message($titre, $message, $redirection);
         $error = 1;
     }
 
     //Tableau des chapitres
     //echo $action;
-    if ($action == "I") {
+    if ($action == 'I') {
         $arrayChapitre = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
-                        "SELECT " . FtaChapitreModel::KEYNAME
-                        . " FROM " . FtaChapitreModel::TABLENAME
-                        . " ORDER BY " . FtaChapitreModel::FIELDNAME_NOM_USUEL_CHAPITRE);
+                        'SELECT ' . FtaChapitreModel::KEYNAME
+                        . ' FROM ' . FtaChapitreModel::TABLENAME
+                        . ' ORDER BY ' . FtaChapitreModel::FIELDNAME_NOM_USUEL_CHAPITRE);
         $ok = 0;
         foreach ($arrayChapitre as $rowsChapitre) {
-            if (Lib::getParameterFromRequest(FtaChapitreModel::FIELDNAME_NOM_CHAPITRE . "-" . $rowsChapitre[FtaChapitreModel::KEYNAME]) == 1) {
-                $ListeDesChapitres[] =$rowsChapitre[FtaChapitreModel::KEYNAME];
+            if (Lib::getParameterFromRequest(FtaChapitreModel::FIELDNAME_NOM_CHAPITRE . '-' . $rowsChapitre[FtaChapitreModel::KEYNAME]) == 1) {
+                $ListeDesChapitres[] = $rowsChapitre[FtaChapitreModel::KEYNAME];
                 $ok = 1;
             }
         }
         if (!$ok) {
-            $titre = "Informations manquantes";
-            $message = "Vous devez sélectionner au moins un chapitre à mettre à jour.";
+            $titre = 'Informations manquantes';
+            $message = 'Vous devez sélectionner au moins un chapitre à mettre à jour.';
             afficher_message($titre, $message, $redirection);
             $error = 1;
         }
@@ -111,7 +113,7 @@ if (!$action) {
 //Si pas d'erreur, lancement de la transition
     if (!$error) {
 
-        $_SESSION["log_transition"] = "";
+        $_SESSION['log_transition'] = '';
 
         foreach ($selection_fta as $idFta) {
             //Transition de la FTA
@@ -119,13 +121,13 @@ if (!$action) {
             $commentaire_maj_fta = $new_commentaire_maj_fta;
             //echo $abreviation_fta_transition;
 //echo $id_fta;
-            $t = FtaTransitionModel::BuildTransitionFta($idFta, $abreviation_fta_transition, $commentaire_maj_fta, $idFtaRole, $idFtaWorkflow,$ListeDesChapitres);
+            $t = FtaTransitionModel::BuildTransitionFta($idFta, $abreviation_fta_transition, $commentaire_maj_fta, $idFtaRole, $idFtaWorkflow, $ListeDesChapitres);
             //Codes de retour de la fonction:
             //   0: FTA correctement transitée
             //   1: FTA non transité car risque de doublon
             //   3: Erreur autre
 
-            if ($abreviation_fta_transition == "V") { //Seules les FTA validées entrent dans un système de diffusion
+            if ($abreviation_fta_transition == 'V') { //Seules les FTA validées entrent dans un système de diffusion
                 switch ($t) {
                     case 0:
                         //Récupération de la liste diffusion
@@ -144,23 +146,23 @@ if (!$action) {
                         break;
 
                     case 1:
-                        $titre = "Action vérrouillée";
-                        $message = "Cette fiche est déjà en cours de modification.";
-                        $redirection = "";
+                        $titre = 'Action vérrouillée';
+                        $message = 'Cette fiche est déjà en cours de modification.';
+                        $redirection = '';
                         afficher_message($titre, $message, $redirection);
                         break;
 
                     case 3:
-                        $titre = "Erreur sur la FTA $idFta";
-                        $message = "Impossible de valider cette FTA";
-                        $redirection = "";
+                        $titre = 'Erreur sur la FTA $idFta';
+                        $message = 'Impossible de valider cette FTA';
+                        $redirection = '';
                         afficher_message($titre, $message, $redirection);
                         break;
                 }
             }//Fin de la diffusion des FTA Validée
         }//Fin du parcours de la selection des FTA
         //Envoi du mail global d'information (uniquement pour les FTA Validée
-        if (!$envoi_mail_detail and $abreviation_fta_transition == "V") {
+        if (!$envoi_mail_detail and $abreviation_fta_transition == 'V') {
             $selection_fta;
             $liste_diffusion = $liste_global;
             $commentaire = $new_commentaire_maj_fta;
@@ -169,18 +171,18 @@ if (!$action) {
 
 
         //Lancement de la passerelle de synchronisation
-        if ($abreviation_fta_transition == "V") {
+        if ($abreviation_fta_transition == 'V') {
             //Ouverture de la base ERP Data sync
             if ($globalConfig->getConf()->getExecEnvironment() != EnvironmentConf::ENV_PRD) {
-                $extension = "mdb";
+                $extension = 'mdb';
             } else {
-                $extension = "agismde";
+                $extension = 'agismde';
             }
-            $open_erpdatasync = "../access/base_erp_datasync/erp_datasync." . $extension;
-            header("Location: open_erpdatasync.php?open_erpdatasync=$open_erpdatasync");
+            $open_erpdatasync = '../access/base_erp_datasync/erp_datasync.' . $extension;
+            header('Location: open_erpdatasync.php?open_erpdatasync=$open_erpdatasync');
         } else {
             if ($t <> 1) {
-                header("Location: index.php");
+                header('Location: index.php');
             }
         }
     }//Fin du traitement
@@ -189,7 +191,7 @@ if (!$action) {
       Fin de switch
      * ********** */
 }//Fin de l'exécution de la page
-//include ("./action_bs.php");
-//include ("./action_sm.php");
+//include ('./action_bs.php');
+//include ('./action_sm.php');
 ?>
 

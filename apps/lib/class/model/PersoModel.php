@@ -8,7 +8,7 @@
  */
 class PersoModel extends AbstractModel {
 
-    const TABLENAME = "perso";
-    const KEYNAME = "id_user";
+    const TABLENAME = 'perso';
+    const KEYNAME = 'id_user';
 
 }

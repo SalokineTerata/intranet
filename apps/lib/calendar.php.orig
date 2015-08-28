@@ -11,19 +11,19 @@ require_once('../lib/phpmyadmin/grab_globals.lib.php');
 //require_once('../lib/phpmyadmin/header_http.inc.php');
 
 ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<?php echo $GLOBALS['available_languages'][$GLOBALS['lang']][2]; ?>" lang="<?php echo $GLOBALS['available_languages'][$GLOBALS['lang']][2]; ?>" dir="<?php echo $GLOBALS['text_dir']; ?>">
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN'
+    'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<html xmlns='http://www.w3.org/1999/xhtml' xml:lang='<?php echo $GLOBALS['available_languages'][$GLOBALS['lang']][2]; ?>' lang='<?php echo $GLOBALS['available_languages'][$GLOBALS['lang']][2]; ?>' dir='<?php echo $GLOBALS['text_dir']; ?>'>
 
 <head>
 <title><?php echo $strCalendar;?></title>
-<meta http-equiv="Content-Type" content="text/html; charset=<?php echo $GLOBALS['charset']; ?>" />
+<meta http-equiv='Content-Type' content='text/html; charset=<?php echo $GLOBALS['charset']; ?>' />
 <?php
 if (!empty($GLOBALS['cfg']['PmaAbsoluteUri'])) {
-    echo '<base href="' . $GLOBALS['cfg']['PmaAbsoluteUri'] . '" />' . "\n";
+    echo '<base href='' . $GLOBALS['cfg']['PmaAbsoluteUri'] . '' />' . '\n';
 }
 ?>
-<script language="JavaScript" type="text/javascript">
+<script language='JavaScript' type='text/javascript'>
 <!--
     /* added 2004-06-10 by Michael Keck
      *       we need this for Backwards-Compatibility and resolving problems
@@ -53,22 +53,22 @@ if (!empty($GLOBALS['cfg']['PmaAbsoluteUri'])) {
             }
         } // end if... else if...
     } // end if
-    document.writeln('<link rel="stylesheet" type="text/css" href="<?php echo defined('PMA_PATH_TO_BASEDIR') ? PMA_PATH_TO_BASEDIR : './'; ?>css/phpmyadmin.css.php?lang=<?php echo $GLOBALS['lang']; ?>&amp;js_frame=right&amp;js_isDOM=' + isDOM + '" />');
+    document.writeln('<link rel='stylesheet' type='text/css' href='<?php echo defined('PMA_PATH_TO_BASEDIR') ? PMA_PATH_TO_BASEDIR : './'; ?>css/phpmyadmin.css.php?lang=<?php echo $GLOBALS['lang']; ?>&amp;js_frame=right&amp;js_isDOM=' + isDOM + '' />');
 //-->
 </script>
 <noscript>
-    <link rel="stylesheet" type="text/css" href="<?php echo defined('PMA_PATH_TO_BASEDIR') ? PMA_PATH_TO_BASEDIR : './'; ?>css/phpmyadmin.css.php?lang=<?php echo $GLOBALS['lang']; ?>&amp;js_frame=right" />
+    <link rel='stylesheet' type='text/css' href='<?php echo defined('PMA_PATH_TO_BASEDIR') ? PMA_PATH_TO_BASEDIR : './'; ?>css/phpmyadmin.css.php?lang=<?php echo $GLOBALS['lang']; ?>&amp;js_frame=right' />
 </noscript>
-<script type="text/javascript" src="../lib/phpmyadmin/tbl_change.js"></script>
-<script type="text/javascript">
+<script type='text/javascript' src='../lib/phpmyadmin/tbl_change.js'></script>
+<script type='text/javascript'>
 <!--
-var month_names = new Array("<?php echo implode('","', $month); ?>");
-var day_names = new Array("<?php echo implode('","', $day_of_week); ?>");
+var month_names = new Array('<?php echo implode('','', $month); ?>');
+var day_names = new Array('<?php echo implode('','', $day_of_week); ?>');
 //-->
 </script>
 </head>
-<body onload="initCalendar();">
-<div id="calendar_data"></div>
-<div id="clock_data"></div>
+<body onload='initCalendar();'>
+<div id='calendar_data'></div>
+<div id='clock_data'></div>
 </body>
 </html>

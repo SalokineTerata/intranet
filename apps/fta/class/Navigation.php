@@ -47,21 +47,21 @@ class Navigation {
         //Barre de navigation de la Fiche Tehnique Article
         //Variables
 
-        $html_table = "table "              //Permet d'harmoniser les tableaux
-                . "border=1 "
-                . "width=100% "
-                . "class=contenu "
+        $html_table = 'table '              //Permet d'harmoniser les tableaux
+                . 'border=1 '
+                . 'width=100% '
+                . 'class=contenu '
         ;
         //Récupère la page en cours
         $arrayFtaEtatAndFta = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
-                        "SELECT " . FtaModel::KEYNAME . ", " . FtaModel::FIELDNAME_CREATEUR
-                        . ", " . FtaModel::FIELDNAME_ARTICLE_AGROLOGIC . ", " . FtaModel::FIELDNAME_DOSSIER_FTA
-                        . ", " . FtaModel::FIELDNAME_VERSION_DOSSIER_FTA . ", " . FtaModel::FIELDNAME_LIBELLE
-                        . ", " . FtaModel::FIELDNAME_DESIGNATION_COMMERCIALE . ", " . FtaModel::FIELDNAME_CODE_ARTICLE_LDC
-                        . " FROM " . FtaModel::TABLENAME . "," . FtaEtatModel::TABLENAME
-                        . " WHERE " . FtaModel::KEYNAME . "=" . self::$id_fta
-                        . " AND " . FtaEtatModel::TABLENAME . "." . FtaEtatModel::KEYNAME
-                        . "=" . FtaModel::TABLENAME . "." . FtaModel::FIELDNAME_ID_FTA_ETAT
+                        'SELECT ' . FtaModel::KEYNAME . ', ' . FtaModel::FIELDNAME_CREATEUR
+                        . ', ' . FtaModel::FIELDNAME_ARTICLE_AGROLOGIC . ', ' . FtaModel::FIELDNAME_DOSSIER_FTA
+                        . ', ' . FtaModel::FIELDNAME_VERSION_DOSSIER_FTA . ', ' . FtaModel::FIELDNAME_LIBELLE
+                        . ', ' . FtaModel::FIELDNAME_DESIGNATION_COMMERCIALE . ', ' . FtaModel::FIELDNAME_CODE_ARTICLE_LDC
+                        . ' FROM ' . FtaModel::TABLENAME . ',' . FtaEtatModel::TABLENAME
+                        . ' WHERE ' . FtaModel::KEYNAME . '=' . self::$id_fta
+                        . ' AND ' . FtaEtatModel::TABLENAME . '.' . FtaEtatModel::KEYNAME
+                        . '=' . FtaModel::TABLENAME . '.' . FtaModel::FIELDNAME_ID_FTA_ETAT
         );
 
         foreach ($arrayFtaEtatAndFta as $rowsFtaEtatAndFta) {
@@ -69,49 +69,49 @@ class Navigation {
 //            $rowsFtaEtatAndFta[FtaModel::KEYNAME] = self::$id_fta;
             //Nom de l'assistante de projet responsable:
             $array = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
-                            "SELECT " . UserModel::FIELDNAME_PRENOM . "," . UserModel::FIELDNAME_NOM
-                            . " FROM " . UserModel::TABLENAME
-                            . " WHERE " . UserModel::KEYNAME
-                            . "='" . $rowsFtaEtatAndFta[FtaModel::FIELDNAME_CREATEUR] . "' ");
+                            'SELECT ' . UserModel::FIELDNAME_PRENOM . ',' . UserModel::FIELDNAME_NOM
+                            . ' FROM ' . UserModel::TABLENAME
+                            . ' WHERE ' . UserModel::KEYNAME
+                            . '=\'' . $rowsFtaEtatAndFta[FtaModel::FIELDNAME_CREATEUR] . '\' ');
             foreach ($array as $rows) {
-                $createur = $rows[UserModel::FIELDNAME_PRENOM] . " " . $rows[UserModel::FIELDNAME_NOM];
+                $createur = $rows[UserModel::FIELDNAME_PRENOM] . ' ' . $rows[UserModel::FIELDNAME_NOM];
             }
 
             //Construction du Menu
             if ($rowsFtaEtatAndFta[FtaModel::FIELDNAME_ARTICLE_AGROLOGIC]) {
                 $identifiant = $rowsFtaEtatAndFta[FtaModel::FIELDNAME_ARTICLE_AGROLOGIC];
             } else {
-                $identifiant = $rowsFtaEtatAndFta[FtaModel::FIELDNAME_DOSSIER_FTA] . "v" . $rowsFtaEtatAndFta[FtaModel::FIELDNAME_VERSION_DOSSIER_FTA];
+                $identifiant = $rowsFtaEtatAndFta[FtaModel::FIELDNAME_DOSSIER_FTA] . 'v' . $rowsFtaEtatAndFta[FtaModel::FIELDNAME_VERSION_DOSSIER_FTA];
             }
             if ($rowsFtaEtatAndFta[FtaModel::FIELDNAME_LIBELLE]) {
                 $nom = $rowsFtaEtatAndFta[FtaModel::FIELDNAME_LIBELLE];
             } else {
                 $nom = $rowsFtaEtatAndFta[FtaModel::FIELDNAME_DESIGNATION_COMMERCIALE];
             }
-            $menu_navigation = "
-                     <$html_table>
-                     <tr><td class=titre_principal> <div align=\"left\">
-                           $identifiant (LDC: <b><font size=\"2\" color=\"#0000FF\">" . $rowsFtaEtatAndFta[FtaModel::FIELDNAME_CODE_ARTICLE_LDC] . "</font></b>) - $nom &nbsp;&nbsp;&nbsp;&nbsp;<i>(gérée par $createur)</i>
+            $menu_navigation = '
+                     <' . $html_table . '>
+                     <tr><td class=titre_principal> <div align=\'left\'>
+                           ' . $identifiant . '(LDC: <b><font size=\'2\' color=\'#0000FF\'>' . $rowsFtaEtatAndFta[FtaModel::FIELDNAME_CODE_ARTICLE_LDC] . '</font></b>) - ' . $nom . ' &nbsp;&nbsp;&nbsp;&nbsp;<i>(gérée par ' . $createur . ')</i>
                            </div>
                      </td></tr>
                      <tr class=titre><td>
-                     ";
+                     ';
         }
         //Si une action est donnée, alors construction du menu des chapitres    
         $menu_navigation .= self::CheckSyntheseAction();
         //Lien de retour rapide
 
-        self::$comeback_url = "index.php?id_fta_etat=" . self::$id_fta_etat . "&nom_fta_etat=" . self::$abrevation_etat . "&id_fta_role=" . self::$id_fta_role . "&synthese_action=" . self::$synthese_action;
+        self::$comeback_url = 'index.php?id_fta_etat=' . self::$id_fta_etat . '&nom_fta_etat=' . self::$abrevation_etat . '&id_fta_role=' . self::$id_fta_role . '&synthese_action=' . self::$synthese_action;
 
-        $menu_navigation.= "</td></tr><tr><td>
-    <a href=" . self::$comeback_url . "><img src=../lib/images/bouton_retour.png alt=\"\" title=\"Retour à la synthèse\" width=\"18\" height=\"15\" border=\"0\" /> Retour vers la synthèse</a> |
-    ";
+        $menu_navigation.= '</td></tr><tr><td>
+    <a href=' . self::$comeback_url . '><img src=../lib/images/bouton_retour.png alt=\'\' title=\'Retour à la synthèse\' width=\'18\' height=\'15\' border=\'0\' /> Retour vers la synthèse</a> |
+    ';
         //Corps du menu
-        $menu_navigation.="
-                    <a href=historique.php?id_fta=" . self::$id_fta . "><img src=./images/graphique.png alt=\"\" title=\"Etat d'avancement\" width=\"18\" height=\"15\" border=\"0\" /> Etat d'avancement</a>
+        $menu_navigation.='
+                    <a href=historique.php?id_fta=' . self::$id_fta . '><img src=./images/graphique.png alt=\'\' title=\'Etat d\'avancement\' width=\'18\' height=\'15\' border=\'0\' /> Etat d\'avancement</a>
                        </td></tr>
                        </table>
-                       ";
+                       ';
         return $menu_navigation;
         //return $return raplacera menu_navigation;
     }
@@ -152,45 +152,41 @@ class Navigation {
              * Nous récuperons les processus en cours.
              */
             $req = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
-                            "SELECT DISTINCT " . FtaProcessusModel::TABLENAME
-                            . ".* FROM " . FtaProcessusModel::TABLENAME
-                            . ", " . FtaProcessusCycleModel::TABLENAME
-                            . "," . FtaWorkflowModel::TABLENAME
-                            . "," . IntranetActionsModel::TABLENAME
-                            . "," . IntranetDroitsAccesModel::TABLENAME
-                            . "," . IntranetModulesModel::TABLENAME
-                            . "," . FtaActionRoleModel::TABLENAME
-                            . " WHERE " . FtaProcessusCycleModel::TABLENAME . "." . FtaProcessusCycleModel::FIELDNAME_PROCESSUS_INIT
-                            . "=" . FtaProcessusModel::TABLENAME . "." . FtaProcessusModel::KEYNAME
-                            . " AND " . FtaProcessusCycleModel::FIELDNAME_FTA_ETAT . "='I'"
-                            . " AND " . FtaProcessusCycleModel::TABLENAME . "." . FtaProcessusCycleModel::FIELDNAME_WORKFLOW
-                            . "=" . self::$id_fta_workflow       //Jointure
-                            . " AND " . FtaProcessusCycleModel::TABLENAME . "." . FtaProcessusCycleModel::FIELDNAME_WORKFLOW
-                            . "=" . FtaWorkflowModel::TABLENAME . "." . FtaWorkflowModel::KEYNAME        //Jointure                            
-                            . " AND " . FtaProcessusModel::TABLENAME . "." . FtaProcessusModel::FIELDNAME_ID_FTA_ROLE
-                            . "=" . FtaActionRoleModel::TABLENAME . "." . FtaActionRoleModel::FIELDNAME_ID_FTA_ROLE  //Jointure  
-                            . " AND " . FtaActionRoleModel::TABLENAME . "." . FtaActionRoleModel::FIELDNAME_ID_INTRANET_ACTIONS
-                            . "=" . IntranetActionsModel::TABLENAME . "." . IntranetActionsModel::KEYNAME
-                            . " AND " . FtaActionRoleModel::TABLENAME . "." . FtaActionRoleModel::FIELDNAME_ID_FTA_ROLE
-                            . "=" . $idFtaRole
-                            . " AND " . IntranetActionsModel::TABLENAME . "." . IntranetActionsModel::KEYNAME
-                            . "=" . IntranetDroitsAccesModel::TABLENAME . "." . IntranetDroitsAccesModel::FIELDNAME_ID_INTRANET_ACTIONS  //Jointure
-                            . " AND " . IntranetDroitsAccesModel::TABLENAME . "." . IntranetDroitsAccesModel::FIELDNAME_ID_INTRANET_MODULES
-                            . "=" . IntranetModulesModel::TABLENAME . "." . IntranetModulesModel::KEYNAME  //Jointure
-                            . " AND " . IntranetDroitsAccesModel::FIELDNAME_ID_USER . "=" . $id_user //Utilisateur actuellement connecté
-                            . " AND " . IntranetModulesModel::FIELDNAME_NOM_INTRANET_MODULES . "='" . FtaModel::TABLENAME
-                            . "' AND " . IntranetDroitsAccesModel::FIELDNAME_NIVEAU_INTRANET_DROITS_ACCES . "=1"  //L'utilisateur est propriétaire
+                            'SELECT DISTINCT ' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_PROCESSUS
+                            . ' FROM ' . FtaWorkflowStructureModel::TABLENAME
+                            . ', ' . FtaProcessusCycleModel::TABLENAME
+                            . ',' . IntranetActionsModel::TABLENAME
+                            . ',' . IntranetDroitsAccesModel::TABLENAME
+                            . ',' . IntranetModulesModel::TABLENAME
+                            . ',' . FtaActionRoleModel::TABLENAME
+                            . ' WHERE ' . FtaProcessusCycleModel::TABLENAME . '.' . FtaProcessusCycleModel::FIELDNAME_PROCESSUS_INIT
+                            . '=' . FtaWorkflowStructureModel::TABLENAME . '.' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_PROCESSUS
+                            . ' AND ' . FtaProcessusCycleModel::FIELDNAME_FTA_ETAT . '=\'I\''
+                            . ' AND ' . FtaProcessusCycleModel::TABLENAME . '.' . FtaProcessusCycleModel::FIELDNAME_WORKFLOW
+                            . '=' . self::$id_fta_workflow       //Jointure
+                            . ' AND ' . FtaProcessusCycleModel::TABLENAME . '.' . FtaProcessusCycleModel::FIELDNAME_WORKFLOW
+                            . '=' . FtaWorkflowStructureModel::TABLENAME . '.' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_WORKFLOW        //Jointure                            
+                            . ' AND ' . FtaWorkflowStructureModel::TABLENAME . '.' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_ROLE
+                            . '=' . FtaActionRoleModel::TABLENAME . '.' . FtaActionRoleModel::FIELDNAME_ID_FTA_ROLE  //Jointure  
+                            . ' AND ' . FtaActionRoleModel::TABLENAME . '.' . FtaActionRoleModel::FIELDNAME_ID_INTRANET_ACTIONS
+                            . '=' . IntranetActionsModel::TABLENAME . '.' . IntranetActionsModel::KEYNAME
+                            . ' AND ' . FtaActionRoleModel::TABLENAME . '.' . FtaActionRoleModel::FIELDNAME_ID_FTA_ROLE
+                            . '=' . $idFtaRole
+                            . ' AND ' . IntranetActionsModel::TABLENAME . '.' . IntranetActionsModel::KEYNAME
+                            . '=' . IntranetDroitsAccesModel::TABLENAME . '.' . IntranetDroitsAccesModel::FIELDNAME_ID_INTRANET_ACTIONS  //Jointure
+                            . ' AND ' . IntranetDroitsAccesModel::TABLENAME . '.' . IntranetDroitsAccesModel::FIELDNAME_ID_INTRANET_MODULES
+                            . '=' . IntranetModulesModel::TABLENAME . '.' . IntranetModulesModel::KEYNAME  //Jointure
+                            . ' AND ' . IntranetDroitsAccesModel::FIELDNAME_ID_USER . '=' . $id_user //Utilisateur actuellement connecté
+                            . ' AND ' . IntranetModulesModel::FIELDNAME_NOM_INTRANET_MODULES . '=\'' . FtaModel::TABLENAME
+                            . '\' AND ' . IntranetDroitsAccesModel::FIELDNAME_NIVEAU_INTRANET_DROITS_ACCES . '=1'  //L'utilisateur est propriétaire
             );
 
             $arrayProcessusValide = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
-                            "SELECT DISTINCT " . FtaProcessusModel::TABLENAME
-                            . ".* FROM " . FtaProcessusModel::TABLENAME
-                            . ", " . FtaProcessusCycleModel::TABLENAME
-                            . " WHERE " . FtaProcessusCycleModel::TABLENAME . "." . FtaProcessusCycleModel::FIELDNAME_PROCESSUS_INIT
-                            . "=" . FtaProcessusModel::TABLENAME . "." . FtaProcessusModel::KEYNAME
-                            . " AND " . FtaProcessusCycleModel::FIELDNAME_FTA_ETAT . "='I'"
-                            . " AND " . FtaProcessusCycleModel::FIELDNAME_WORKFLOW
-                            . "='" . self::$id_fta_workflow . "' "
+                            'SELECT DISTINCT ' . FtaProcessusCycleModel::FIELDNAME_PROCESSUS_INIT . ' as ' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_PROCESSUS
+                            . ' FROM ' . FtaProcessusCycleModel::TABLENAME
+                            . ' WHERE ' . FtaProcessusCycleModel::FIELDNAME_FTA_ETAT . '=\'I\''
+                            . ' AND ' . FtaProcessusCycleModel::FIELDNAME_WORKFLOW
+                            . '=\'' . self::$id_fta_workflow . '\' '
             );
             if ($req AND $arrayProcessusValide) {
                 /*
@@ -244,55 +240,50 @@ class Navigation {
              * par la vérification des droits d'accès de l'utilisateur en cours par Workflow par role 
              * et un balayage  des cycles des processus
              */
-            $req = "SELECT DISTINCT " . FtaProcessusCycleModel::FIELDNAME_PROCESSUS_NEXT
-                    . " FROM " . FtaProcessusCycleModel::TABLENAME
-                    . "," . FtaProcessusModel::TABLENAME
-                    . "," . FtaWorkflowModel::TABLENAME
-                    . "," . FtaWorkflowStructureModel::TABLENAME
-                    . "," . IntranetActionsModel::TABLENAME
-                    . "," . IntranetDroitsAccesModel::TABLENAME
-                    . "," . IntranetModulesModel::TABLENAME
-                    . "," . FtaActionRoleModel::TABLENAME
-                    . "," . FtaRoleModel::TABLENAME
-                    . "," . FtaSuiviProjetModel::TABLENAME
-                    . " WHERE " . FtaProcessusCycleModel::TABLENAME . "." . FtaProcessusCycleModel::FIELDNAME_PROCESSUS_NEXT
-                    . "=" . FtaProcessusModel::TABLENAME . "." . FtaProcessusModel::KEYNAME        //Jointure
-                    . " AND " . FtaProcessusCycleModel::TABLENAME . "." . FtaProcessusCycleModel::FIELDNAME_WORKFLOW
-                    . "=" . self::$id_fta_workflow       //Jointure
-                    . " AND " . FtaProcessusCycleModel::TABLENAME . "." . FtaProcessusCycleModel::FIELDNAME_WORKFLOW
-                    . "=" . FtaWorkflowModel::TABLENAME . "." . FtaWorkflowModel::KEYNAME        //Jointure                            
-                    . " AND " . FtaProcessusModel::TABLENAME . "." . FtaProcessusModel::FIELDNAME_ID_FTA_ROLE
-                    . "=" . FtaRoleModel::TABLENAME . "." . FtaRoleModel::KEYNAME        //Jointure
-                    . " AND " . FtaRoleModel::TABLENAME . "." . FtaRoleModel::KEYNAME
-                    . "=" . FtaActionRoleModel::TABLENAME . "." . FtaActionRoleModel::FIELDNAME_ID_FTA_ROLE
-                    . " AND " . FtaActionRoleModel::TABLENAME . "." . FtaActionRoleModel::FIELDNAME_ID_INTRANET_ACTIONS
-                    . "=" . IntranetActionsModel::TABLENAME . "." . IntranetActionsModel::KEYNAME
-                    . " AND " . FtaActionRoleModel::TABLENAME . "." . FtaActionRoleModel::FIELDNAME_ID_FTA_ROLE
-                    . "=" . $idFtaRole
-                    . " AND " . IntranetActionsModel::TABLENAME . "." . IntranetActionsModel::KEYNAME
-                    . "=" . IntranetDroitsAccesModel::TABLENAME . "." . IntranetDroitsAccesModel::FIELDNAME_ID_INTRANET_ACTIONS  //Jointure
-                    . " AND " . IntranetDroitsAccesModel::TABLENAME . "." . IntranetDroitsAccesModel::FIELDNAME_ID_INTRANET_MODULES
-                    . "=" . IntranetModulesModel::TABLENAME . "." . IntranetModulesModel::KEYNAME  //Jointure
-                    . " AND " . IntranetDroitsAccesModel::FIELDNAME_ID_USER . "=" . $id_user //Utilisateur actuellement connecté
-                    . " AND " . IntranetModulesModel::FIELDNAME_NOM_INTRANET_MODULES . "='" . FtaModel::TABLENAME
-                    . "' AND " . IntranetDroitsAccesModel::FIELDNAME_NIVEAU_INTRANET_DROITS_ACCES . "=1"  //L'utilisateur est propriétaire
-                    . " AND " . FtaWorkflowStructureModel::TABLENAME . "." . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_CHAPITRE
-                    . "=" . FtaSuiviProjetModel::TABLENAME . "." . FtaSuiviProjetModel::FIELDNAME_ID_FTA_CHAPITRE  //Jointure
-                    . " AND " . FtaSuiviProjetModel::FIELDNAME_SIGNATURE_VALIDATION_SUIVI_PROJET . "<>0" //chapitre validé
+            $req = 'SELECT DISTINCT ' . FtaProcessusCycleModel::FIELDNAME_PROCESSUS_NEXT
+                    . ' FROM ' . FtaProcessusCycleModel::TABLENAME
+                    . ',' . FtaWorkflowStructureModel::TABLENAME
+                    . ',' . IntranetActionsModel::TABLENAME
+                    . ',' . IntranetDroitsAccesModel::TABLENAME
+                    . ',' . IntranetModulesModel::TABLENAME
+                    . ',' . FtaActionRoleModel::TABLENAME
+                    . ',' . FtaSuiviProjetModel::TABLENAME
+                    . ' WHERE ' . FtaProcessusCycleModel::TABLENAME . '.' . FtaProcessusCycleModel::FIELDNAME_PROCESSUS_NEXT
+                    . '=' . FtaWorkflowStructureModel::TABLENAME . '.' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_PROCESSUS        //Jointure
+                    . ' AND ' . FtaProcessusCycleModel::TABLENAME . '.' . FtaProcessusCycleModel::FIELDNAME_WORKFLOW
+                    . '=' . self::$id_fta_workflow       //Jointure
+                    . ' AND ' . FtaProcessusCycleModel::TABLENAME . '.' . FtaProcessusCycleModel::FIELDNAME_WORKFLOW
+                    . '=' . FtaWorkflowStructureModel::TABLENAME . '.' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_WORKFLOW        //Jointure                            
+                    . ' AND ' . FtaWorkflowStructureModel::TABLENAME . '.' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_ROLE
+                    . '=' . FtaActionRoleModel::TABLENAME . '.' . FtaActionRoleModel::FIELDNAME_ID_FTA_ROLE
+                    . ' AND ' . FtaActionRoleModel::TABLENAME . '.' . FtaActionRoleModel::FIELDNAME_ID_INTRANET_ACTIONS
+                    . '=' . IntranetActionsModel::TABLENAME . '.' . IntranetActionsModel::KEYNAME
+                    . ' AND ' . FtaActionRoleModel::TABLENAME . '.' . FtaActionRoleModel::FIELDNAME_ID_FTA_ROLE
+                    . '=' . $idFtaRole
+                    . ' AND ' . IntranetActionsModel::TABLENAME . '.' . IntranetActionsModel::KEYNAME
+                    . '=' . IntranetDroitsAccesModel::TABLENAME . '.' . IntranetDroitsAccesModel::FIELDNAME_ID_INTRANET_ACTIONS  //Jointure
+                    . ' AND ' . IntranetDroitsAccesModel::TABLENAME . '.' . IntranetDroitsAccesModel::FIELDNAME_ID_INTRANET_MODULES
+                    . '=' . IntranetModulesModel::TABLENAME . '.' . IntranetModulesModel::KEYNAME  //Jointure
+                    . ' AND ' . IntranetDroitsAccesModel::FIELDNAME_ID_USER . '=' . $id_user //Utilisateur actuellement connecté
+                    . ' AND ' . IntranetModulesModel::FIELDNAME_NOM_INTRANET_MODULES . '=\'' . FtaModel::TABLENAME
+                    . '\' AND ' . IntranetDroitsAccesModel::FIELDNAME_NIVEAU_INTRANET_DROITS_ACCES . '=1'  //L'utilisateur est propriétaire
+                    . ' AND ' . FtaWorkflowStructureModel::TABLENAME . '.' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_CHAPITRE
+                    . '=' . FtaSuiviProjetModel::TABLENAME . '.' . FtaSuiviProjetModel::FIELDNAME_ID_FTA_CHAPITRE  //Jointure
+                    . ' AND ' . FtaSuiviProjetModel::FIELDNAME_SIGNATURE_VALIDATION_SUIVI_PROJET . '<>0' //chapitre validé
             ;
 
             //Finalisation de la requête
-            $req .="";
+            $req .='';
 
             $result = DatabaseOperation::convertSqlStatementWithoutKeyToArray($req);
             if ($result) {
                 foreach ($result as $rows) {
 
                     //Pour chaque processus, on vérifie que tous ces précédents sont validés
-                    $req = "SELECT " . FtaProcessusCycleModel::KEYNAME . " FROM " . FtaProcessusCycleModel::TABLENAME
-                            . " WHERE " . FtaProcessusCycleModel::FIELDNAME_PROCESSUS_NEXT
-                            . "=" . $rows[FtaProcessusCycleModel::FIELDNAME_PROCESSUS_NEXT]
-                            . " AND ( " . FtaProcessusCycleModel::FIELDNAME_PROCESSUS_INIT . "=0 "
+                    $req = 'SELECT ' . FtaProcessusCycleModel::KEYNAME . ' FROM ' . FtaProcessusCycleModel::TABLENAME
+                            . ' WHERE ' . FtaProcessusCycleModel::FIELDNAME_PROCESSUS_NEXT
+                            . '=' . $rows[FtaProcessusCycleModel::FIELDNAME_PROCESSUS_NEXT]
+                            . ' AND ( ' . FtaProcessusCycleModel::FIELDNAME_PROCESSUS_INIT . '=0 '
                     ;
 
                     //Ajout de la restriction des processus validé
@@ -300,21 +291,21 @@ class Navigation {
 
                     //Recherche dans le cycle correspondant à l'état en cours de la fiche
                     $req_etat = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
-                                    "SELECT " . FtaEtatModel::TABLENAME . "." . FtaEtatModel::FIELDNAME_ABREVIATION
-                                    . " FROM " . FtaEtatModel::TABLENAME . "," . FtaModel::TABLENAME
-                                    . " WHERE " . FtaEtatModel::TABLENAME . "." . FtaEtatModel::KEYNAME
-                                    . "=" . FtaModel::TABLENAME . "." . FtaModel::FIELDNAME_ID_FTA_ETAT
-                                    . " AND " . FtaModel::TABLENAME . "." . FtaModel::KEYNAME
-                                    . "= '" . self::$id_fta . "'"
+                                    'SELECT ' . FtaEtatModel::TABLENAME . '.' . FtaEtatModel::FIELDNAME_ABREVIATION
+                                    . ' FROM ' . FtaEtatModel::TABLENAME . ',' . FtaModel::TABLENAME
+                                    . ' WHERE ' . FtaEtatModel::TABLENAME . '.' . FtaEtatModel::KEYNAME
+                                    . '=' . FtaModel::TABLENAME . '.' . FtaModel::FIELDNAME_ID_FTA_ETAT
+                                    . ' AND ' . FtaModel::TABLENAME . '.' . FtaModel::KEYNAME
+                                    . '= ' . self::$id_fta
                     );
 
                     foreach ($req_etat as $rowsEtat) {
                         $abreviation_fta_etat = $rowsEtat[FtaEtatModel::FIELDNAME_ABREVIATION];
                     }
 
-                    $req .= ") AND " . FtaProcessusCycleModel::FIELDNAME_FTA_ETAT
-                            . "='" . $abreviation_fta_etat
-                            . "' AND " . FtaProcessusCycleModel::FIELDNAME_WORKFLOW . " = " . self::$id_fta_workflow;
+                    $req .= ') AND ' . FtaProcessusCycleModel::FIELDNAME_FTA_ETAT
+                            . '=\'' . $abreviation_fta_etat
+                            . '\' AND ' . FtaProcessusCycleModel::FIELDNAME_WORKFLOW . ' = ' . self::$id_fta_workflow;
 
                     //Filtrage par catégorie
                     //Finalisation de la requête
@@ -334,17 +325,17 @@ class Navigation {
                     /*
                      * Nombres total de processus précedent pour le processus en cours
                      */
-                    $req = "SELECT DISTINCT " . FtaProcessusCycleModel::FIELDNAME_PROCESSUS_INIT
-                            . " FROM " . FtaWorkflowStructureModel::TABLENAME . "," . FtaProcessusModel::TABLENAME
-                            . "," . FtaProcessusCycleModel::TABLENAME
-                            . " WHERE " . FtaWorkflowStructureModel::TABLENAME . "." . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_PROCESSUS
-                            . "=" . FtaProcessusModel::TABLENAME . "." . FtaProcessusModel::KEYNAME
-                            . " AND " . FtaProcessusModel::TABLENAME . "." . FtaProcessusModel::KEYNAME
-                            . "=" . FtaProcessusCycleModel::TABLENAME . "." . FtaProcessusCycleModel::FIELDNAME_PROCESSUS_NEXT
-                            . " AND " . FtaWorkflowStructureModel::TABLENAME . "." . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_ROLE
-                            . "=" . FtaProcessusModel::TABLENAME . "." . FtaProcessusModel::FIELDNAME_ID_FTA_ROLE
-                            . " AND " . FtaProcessusModel::TABLENAME . "." . FtaProcessusModel::KEYNAME . "=" . $rows[FtaProcessusCycleModel::FIELDNAME_PROCESSUS_NEXT]
-                            . " AND " . FtaProcessusCycleModel::TABLENAME . "." . FtaProcessusCycleModel::FIELDNAME_WORKFLOW . " = " . self::$id_fta_workflow;
+                    $req = 'SELECT DISTINCT ' . FtaProcessusCycleModel::FIELDNAME_PROCESSUS_INIT
+                            . ' FROM ' . FtaWorkflowStructureModel::TABLENAME . ',' . FtaProcessusModel::TABLENAME
+                            . ',' . FtaProcessusCycleModel::TABLENAME
+                            . ' WHERE ' . FtaWorkflowStructureModel::TABLENAME . '.' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_PROCESSUS
+                            . '=' . FtaProcessusModel::TABLENAME . '.' . FtaProcessusModel::KEYNAME
+                            . ' AND ' . FtaProcessusModel::TABLENAME . '.' . FtaProcessusModel::KEYNAME
+                            . '=' . FtaProcessusCycleModel::TABLENAME . '.' . FtaProcessusCycleModel::FIELDNAME_PROCESSUS_NEXT
+                            . ' AND ' . FtaWorkflowStructureModel::TABLENAME . '.' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_ROLE
+                            . '=' . FtaProcessusModel::TABLENAME . '.' . FtaProcessusModel::FIELDNAME_ID_FTA_ROLE
+                            . ' AND ' . FtaProcessusModel::TABLENAME . '.' . FtaProcessusModel::KEYNAME . '=' . $rows[FtaProcessusCycleModel::FIELDNAME_PROCESSUS_NEXT]
+                            . ' AND ' . FtaProcessusCycleModel::TABLENAME . '.' . FtaProcessusCycleModel::FIELDNAME_WORKFLOW . ' = ' . self::$id_fta_workflow;
                     $array = DatabaseOperation::convertSqlStatementWithoutKeyToArray($req);
 
                     if ($array) {
@@ -364,10 +355,10 @@ class Navigation {
                          */
 //                        //Ce processus en cours, est-il du type repartie ou centralisé ?
 //                        $reqType = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
-//                                        "SELECT " . FtaProcessusModel::FIELDNAME_MULTISITE_FTA_PROCESSUS
-//                                        . " FROM " . FtaProcessusModel::TABLENAME
-//                                        . " WHERE " . FtaProcessusModel::KEYNAME
-//                                        . "=" . $rows[FtaProcessusCycleModel::FIELDNAME_PROCESSUS_INIT]
+//                                        'SELECT ' . FtaProcessusModel::FIELDNAME_MULTISITE_FTA_PROCESSUS
+//                                        . ' FROM ' . FtaProcessusModel::TABLENAME
+//                                        . ' WHERE ' . FtaProcessusModel::KEYNAME
+//                                        . '=' . $rows[FtaProcessusCycleModel::FIELDNAME_PROCESSUS_INIT]
 //                        );
 //                        if ($reqType) {
 //                            foreach ($reqType as $rowsType) {
@@ -387,10 +378,10 @@ class Navigation {
             //Recherche des processus valide ayant un lien dans processus cycle
             foreach ($ProcessusValide as $rowsProcessusValide2) {
                 //Pour chaque processus, on vérifie que tous ces précédents sont validés
-                $req = "SELECT " . FtaProcessusCycleModel::KEYNAME . " FROM " . FtaProcessusCycleModel::TABLENAME
-                        . " WHERE " . FtaProcessusCycleModel::FIELDNAME_PROCESSUS_NEXT
-                        . "=" . $rowsProcessusValide2
-                        . " AND ( " . FtaProcessusCycleModel::FIELDNAME_PROCESSUS_INIT . "=0 "
+                $req = 'SELECT ' . FtaProcessusCycleModel::KEYNAME . ' FROM ' . FtaProcessusCycleModel::TABLENAME
+                        . ' WHERE ' . FtaProcessusCycleModel::FIELDNAME_PROCESSUS_NEXT
+                        . '=' . $rowsProcessusValide2
+                        . ' AND ( ' . FtaProcessusCycleModel::FIELDNAME_PROCESSUS_INIT . '=0 '
                 ;
 
                 //Ajout de la restriction des processus validé
@@ -398,21 +389,21 @@ class Navigation {
 
                 //Recherche dans le cycle correspondant à l'état en cours de la fiche
                 $req_etat = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
-                                "SELECT " . FtaEtatModel::TABLENAME . "." . FtaEtatModel::FIELDNAME_ABREVIATION
-                                . " FROM " . FtaEtatModel::TABLENAME . "," . FtaModel::TABLENAME
-                                . " WHERE " . FtaEtatModel::TABLENAME . "." . FtaEtatModel::KEYNAME
-                                . "=" . FtaModel::TABLENAME . "." . FtaModel::FIELDNAME_ID_FTA_ETAT
-                                . " AND " . FtaModel::TABLENAME . "." . FtaModel::KEYNAME
-                                . "= '" . self::$id_fta . "'"
+                                'SELECT ' . FtaEtatModel::TABLENAME . '.' . FtaEtatModel::FIELDNAME_ABREVIATION
+                                . ' FROM ' . FtaEtatModel::TABLENAME . ',' . FtaModel::TABLENAME
+                                . ' WHERE ' . FtaEtatModel::TABLENAME . '.' . FtaEtatModel::KEYNAME
+                                . '=' . FtaModel::TABLENAME . '.' . FtaModel::FIELDNAME_ID_FTA_ETAT
+                                . ' AND ' . FtaModel::TABLENAME . '.' . FtaModel::KEYNAME
+                                . '= ' . self::$id_fta
                 );
 
                 foreach ($req_etat as $rowsEtat) {
                     $abreviation_fta_etat = $rowsEtat[FtaEtatModel::FIELDNAME_ABREVIATION];
                 }
 
-                $req .= ") AND " . FtaProcessusCycleModel::FIELDNAME_FTA_ETAT
-                        . "='" . $abreviation_fta_etat
-                        . "' AND " . FtaProcessusCycleModel::FIELDNAME_WORKFLOW . " = " . self::$id_fta_workflow;
+                $req .= ') AND ' . FtaProcessusCycleModel::FIELDNAME_FTA_ETAT
+                        . '=\'' . $abreviation_fta_etat
+                        . '\' AND ' . FtaProcessusCycleModel::FIELDNAME_WORKFLOW . ' = ' . self::$id_fta_workflow;
 
                 //Filtrage par catégorie
                 //Finalisation de la requête
@@ -431,9 +422,21 @@ class Navigation {
                 }
             }
 
+            if (self::$id_fta_etat == AccueilFta::VALUE_1) {
 
-            //Création de la liste des processus dans la barre de navigation          
-            $t_liste_processus = array_merge($ProcessusEncoursVisible, $ProcessusPrecedentVisible, $ProcessusEnLecture);
+                //Création de la liste des processus dans la barre de navigation          
+                $t_liste_processus = array_merge($ProcessusEncoursVisible, $ProcessusPrecedentVisible, $ProcessusEnLecture);
+            } else {
+                $arrayProcessusByWorkflow = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
+                                'SELECT DISTINCT ' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_PROCESSUS
+                                . ' FROM ' . FtaWorkflowStructureModel::TABLENAME
+                                . ' WHERE ' . FtaWorkflowStructureModel::TABLENAME . '.' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_WORKFLOW
+                                . '=' . self::$id_fta_workflow
+                );
+                foreach ($arrayProcessusByWorkflow as $rowsProcessusByWorkflow) {
+                    $t_liste_processus[] .=$rowsProcessusByWorkflow[FtaWorkflowStructureModel::FIELDNAME_ID_FTA_PROCESSUS];
+                }
+            }
 
             //Récupération des Chapitres accessible dans le menu de naviguation
             $menu_navigation = self::RecupChapitre($t_liste_processus);
@@ -447,21 +450,21 @@ class Navigation {
         /*
          *  Nous récupérons les chapitres obligatoirement présent ce qui implique que les autre chapitres doivent être attribués.
          */
-        $reqRecup = "SELECT " . FtaChapitreModel::TABLENAME . "." . FtaChapitreModel::KEYNAME
-                . ", " . FtaChapitreModel::TABLENAME . "." . FtaChapitreModel::FIELDNAME_NOM_USUEL_CHAPITRE
-                . ", " . FtaWorkflowStructureModel::TABLENAME . "." . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_PROCESSUS
-                . " FROM " . FtaChapitreModel::TABLENAME . " LEFT JOIN " . FtaWorkflowStructureModel::TABLENAME
-                . " ON " . FtaWorkflowStructureModel::TABLENAME . "." . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_CHAPITRE
-                . "=" . FtaChapitreModel::TABLENAME . "." . FtaChapitreModel::KEYNAME
-                . " WHERE ( "
-                . FtaWorkflowStructureModel::TABLENAME . "." . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_PROCESSUS . " =0"                          //Chapitre public
+        $reqRecup = 'SELECT ' . FtaChapitreModel::TABLENAME . '.' . FtaChapitreModel::KEYNAME
+                . ', ' . FtaChapitreModel::TABLENAME . '.' . FtaChapitreModel::FIELDNAME_NOM_USUEL_CHAPITRE
+                . ', ' . FtaWorkflowStructureModel::TABLENAME . '.' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_PROCESSUS
+                . ' FROM ' . FtaChapitreModel::TABLENAME . ' LEFT JOIN ' . FtaWorkflowStructureModel::TABLENAME
+                . ' ON ' . FtaWorkflowStructureModel::TABLENAME . '.' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_CHAPITRE
+                . '=' . FtaChapitreModel::TABLENAME . '.' . FtaChapitreModel::KEYNAME
+                . ' WHERE ( '
+                . FtaWorkflowStructureModel::TABLENAME . '.' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_PROCESSUS . ' =0'                          //Chapitre public
         ;
         foreach ($paramT_Liste_Processus as $value) {
-            $reqRecup .= " OR " . FtaWorkflowStructureModel::TABLENAME . "." . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_PROCESSUS
-                    . "=" . $value . " ";
+            $reqRecup .= ' OR ' . FtaWorkflowStructureModel::TABLENAME . '.' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_PROCESSUS
+                    . '=' . $value . ' ';
         }
-        $reqRecup .=" ) AND " . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_WORKFLOW . "=" . self::$id_fta_workflow
-                . " ORDER BY " . FtaChapitreModel::TABLENAME . "." . FtaChapitreModel::KEYNAME;
+        $reqRecup .=' ) AND ' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_WORKFLOW . '=' . self::$id_fta_workflow
+                . ' ORDER BY ' . FtaChapitreModel::TABLENAME . '.' . FtaChapitreModel::KEYNAME;
         $arrayRecup = DatabaseOperation::convertSqlStatementWithoutKeyToArray($reqRecup);
 
         //Balyage des chapitres trouvés
@@ -474,55 +477,55 @@ class Navigation {
                 self::$id_fta_chapitre_encours = $id_fta_chapitre;
             }
             if (self::$id_fta_chapitre_encours == $id_fta_chapitre) {
-                $b = "<font size = 3 color = #5494EE><b>";
-                $image1 = "[>";
-                $image2 = "<]";
+                $b = '<font size = 3 color = #5494EE><b>';
+                $image1 = '[>';
+                $image2 = '<]';
                 $num = 1;
             } else {
-                $image1 = "[>";
-                $image2 = "<]";
+                $image1 = '[>';
+                $image2 = '<]';
                 //Ce chapitre est-il public?
                 if ($rowsRecup[FtaProcessusModel::KEYNAME] == 0) {
-                    $b = "<font color=\"#8977A9\">";
+                    $b = '<font color=\'#8977A9\'>';
                     $num = 1;
                 } else {
                     //Le chapitre est-il validé ?
-                    $req1 = "SELECT " . FtaSuiviProjetModel::KEYNAME
-                            . " FROM " . FtaSuiviProjetModel::TABLENAME
-                            . " WHERE " . FtaSuiviProjetModel::FIELDNAME_ID_FTA . "=" . self::$id_fta
-                            . " AND " . FtaSuiviProjetModel::FIELDNAME_ID_FTA_CHAPITRE . "=" . $id_fta_chapitre
-                            . " AND " . FtaSuiviProjetModel::FIELDNAME_SIGNATURE_VALIDATION_SUIVI_PROJET . "<>0 "
+                    $req1 = 'SELECT ' . FtaSuiviProjetModel::KEYNAME
+                            . ' FROM ' . FtaSuiviProjetModel::TABLENAME
+                            . ' WHERE ' . FtaSuiviProjetModel::FIELDNAME_ID_FTA . '=' . self::$id_fta
+                            . ' AND ' . FtaSuiviProjetModel::FIELDNAME_ID_FTA_CHAPITRE . '=' . $id_fta_chapitre
+                            . ' AND ' . FtaSuiviProjetModel::FIELDNAME_SIGNATURE_VALIDATION_SUIVI_PROJET . '<>0 '
                     ;
                     $result1 = DatabaseOperation::queryPDO($req1);
                     $num = DatabaseOperation::getSqlNumRows($result1);
                     switch ($num) {
                         case 0:  //Chapiter pas encore validé
-                            $b = "<font color=\"#FF0000\">";
+                            $b = '<font color=\'#FF0000\'>';
                             break;
 
                         case 1:  //Chapitre validé
-                            $b = "<font color=\"#00B300\">";
+                            $b = '<font color=\'#00B300\'>';
                             break;
 
                         default: //Anomalie
-                            $titre = "Erreur Grave !";
-                            $message = "La fonction afficher_navigation() vient de trouver des doublons de validation des chapitres dans la table fta_suivi_projet";
+                            $titre = 'Erreur Grave !';
+                            $message = 'La fonction afficher_navigation() vient de trouver des doublons de validation des chapitres dans la table fta_suivi_projet';
                             afficher_message($titre, $message, $redirection);
                             break;
                     }
                 }//Fin du test public
             }//Fin de la colorisation
 
-            if ($num == 0 and self::$synthese_action === "attente") {
+            if ($num == 0 and self::$synthese_action === 'attente') {
                 
             } else {
-                $menu_navigation .= "<a href=$page_default.php?id_fta=" . self::$id_fta . "&id_fta_chapitre_encours=$id_fta_chapitre&synthese_action=" . self::$synthese_action . "&id_fta_etat=" . self::$id_fta_etat
-                        . "&abreviation_fta_etat=" . self::$abrevation_etat
-                        . "&comeback=" . self::$comeback
-                        . "&id_fta_role=" . self::$id_fta_role . ">$b"
+                $menu_navigation .= '<a href=' . $page_default . '.php?id_fta=' . self::$id_fta . '&id_fta_chapitre_encours=' . $id_fta_chapitre . '&synthese_action=' . self::$synthese_action . '&id_fta_etat=' . self::$id_fta_etat
+                        . '&abreviation_fta_etat=' . self::$abrevation_etat
+                        . '&comeback=' . self::$comeback
+                        . '&id_fta_role=' . self::$id_fta_role . '>' . $b . ''
                         . $image1 . $nom_usuel_fta_chapitre . $image2
-                        . "</a>"
-                        . "</b></font> "
+                        . '</a>'
+                        . '</b></font> '
                 ;
             }
         }
@@ -534,7 +537,7 @@ class Navigation {
     protected static function DeleteValidProcess($paramProcessusVisible) {
         if ($paramProcessusVisible) {
             foreach ($paramProcessusVisible as $value) {
-                $req .= " AND " . " " . FtaProcessusCycleModel::FIELDNAME_PROCESSUS_NEXT . "<>" . $value . " ";
+                $req .= ' AND ' . ' ' . FtaProcessusCycleModel::FIELDNAME_PROCESSUS_NEXT . '<>' . $value . ' ';
             }
         }
         return $req;
@@ -544,7 +547,7 @@ class Navigation {
     protected static function AddValidProcess($paramProcessusVisible) {
         if ($paramProcessusVisible) {
             foreach ($paramProcessusVisible as $value) {
-                $req .= " OR " . " " . FtaProcessusCycleModel::FIELDNAME_PROCESSUS_INIT . "=" . $value . " ";
+                $req .= ' OR ' . ' ' . FtaProcessusCycleModel::FIELDNAME_PROCESSUS_INIT . '=' . $value . ' ';
             }
         }
         return $req;
@@ -559,14 +562,14 @@ class Navigation {
       $paramLieuGeo = $globalconfig->getAuthenticatedUser()->getLieuGeo();
       //Existe-il une configuration de gestion forcée pour ce processus et ce site d'assemblage ?
       $arrayGestion = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
-      "SELECT " . FtaProcessusMultisiteModel::FIELDNAME_ID_SITE_PROCESSUS_FTA_PROCESSUS_MULTISITE
-      . " FROM " . FtaProcessusMultisiteModel::TABLENAME
-      . "," . FtaModel::TABLENAME
-      . " WHERE " . FtaProcessusMultisiteModel::FIELDNAME_ID_SITE_ASSEMBLAGE_FTA_PROCESSUS_MULTISITE
-      . "=" . FtaModel::FIELDNAME_SITE_ASSEMBLAGE
-      . " AND " . FtaProcessusMultisiteModel::FIELDNAME_ID_SITE_PROCESSUS_FTA_PROCESSUS_MULTISITE
-      . "= '" . $paramRows . "' "
-      . " AND " . FtaModel::KEYNAME . "=" . self::$id_fta
+      'SELECT ' . FtaProcessusMultisiteModel::FIELDNAME_ID_SITE_PROCESSUS_FTA_PROCESSUS_MULTISITE
+      . ' FROM ' . FtaProcessusMultisiteModel::TABLENAME
+      . ',' . FtaModel::TABLENAME
+      . ' WHERE ' . FtaProcessusMultisiteModel::FIELDNAME_ID_SITE_ASSEMBLAGE_FTA_PROCESSUS_MULTISITE
+      . '=' . FtaModel::FIELDNAME_SITE_ASSEMBLAGE
+      . ' AND ' . FtaProcessusMultisiteModel::FIELDNAME_ID_SITE_PROCESSUS_FTA_PROCESSUS_MULTISITE
+      . '= '' . $paramRows . '' '
+      . ' AND ' . FtaModel::KEYNAME . '=' . self::$id_fta
       );
 
       if ($arrayGestion) {
@@ -576,13 +579,13 @@ class Navigation {
       } else {
       //Sinon, Vérification de l'égalité entre le site d'assemblage de la FTA et le site de Localisation de l'utilisateur
       $arrayEgalite = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
-      "SELECT " . GeoModel::KEYNAME
-      . " FROM " . FtaModel::TABLENAME
-      . "," . GeoModel::TABLENAME
-      . " WHERE " . FtaModel::KEYNAME
-      . "=" . self::$id_fta
-      . " AND " . FtaModel::FIELDNAME_SITE_ASSEMBLAGE
-      . "=" . GeoModel::FIELDNAME_ID_SITE
+      'SELECT ' . GeoModel::KEYNAME
+      . ' FROM ' . FtaModel::TABLENAME
+      . ',' . GeoModel::TABLENAME
+      . ' WHERE ' . FtaModel::KEYNAME
+      . '=' . self::$id_fta
+      . ' AND ' . FtaModel::FIELDNAME_SITE_ASSEMBLAGE
+      . '=' . GeoModel::FIELDNAME_ID_SITE
       );
 
       if ($arrayEgalite) {

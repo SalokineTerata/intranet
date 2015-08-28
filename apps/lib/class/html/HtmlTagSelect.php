@@ -20,23 +20,23 @@ class HtmlTagSelect  {
      * Specifies that the drop-down list should automatically
      * get focus when the page loads
      * @link http://www.w3schools.com/tags/att_select_autofocus.asp Documentation
-     * @var mixed autofocus="autofocus" | ""
+     * @var mixed autofocus='autofocus' | ''
      */
     protected $attributeAutofocus;
 
-    const ATTRIBUTE_AUTOFOCUS_NAME = "autofocus";
-    const ATTRIBUTE_AUTOFOCUS_VALUE = "autofocus";
+    const ATTRIBUTE_AUTOFOCUS_NAME = 'autofocus';
+    const ATTRIBUTE_AUTOFOCUS_VALUE = 'autofocus';
 
     /**
      * Attribut disabled 
      * Specifies that a drop-down list should be disabled
      * @link http://www.w3schools.com/tags/att_select_disabled.asp Documentation
-     * @var mixed disabled="disabled" | ""
+     * @var mixed disabled='disabled' | ''
      */
     protected $attributeDisabled;
 
-    const ATTRIBUTE_DISABLED_NAME = "disabled";
-    const ATTRIBUTE_DISABLED_VALUE = "disabled";
+    const ATTRIBUTE_DISABLED_NAME = 'disabled';
+    const ATTRIBUTE_DISABLED_VALUE = 'disabled';
 
     /**
      * Attribut form
@@ -47,18 +47,18 @@ class HtmlTagSelect  {
      */
     protected $attributeForm;
 
-    const ATTRIBUTE_FORM_NAME = "form";
+    const ATTRIBUTE_FORM_NAME = 'form';
 
     /**
      * Attribut multiple
      * Specifies that multiple options can be selected at once
      * @link http://www.w3schools.com/tags/att_select_multiple.asp Documentation
-     * @var mixed multiple="multiple" | ""
+     * @var mixed multiple='multiple' | ''
      */
     protected $attributeMultiple;
 
-    const ATTRIBUTE_MULTIPLE_NAME = "multiple";
-    const ATTRIBUTE_MULTIPLE_VALUE = "multiple";
+    const ATTRIBUTE_MULTIPLE_NAME = 'multiple';
+    const ATTRIBUTE_MULTIPLE_VALUE = 'multiple';
 
     /**
      * Attribut name
@@ -68,7 +68,7 @@ class HtmlTagSelect  {
      */
     protected $attributeName;
 
-    const ATTRIBUTE_NAME_NAME = "name";
+    const ATTRIBUTE_NAME_NAME = 'name';
 
     /**
      * Attribut Required
@@ -76,22 +76,22 @@ class HtmlTagSelect  {
      * Specifies that the user is required to select a value before
      * submitting the form
      * @link http://www.w3schools.com/tags/att_select_required.asp Documentation
-     * @var mixed required="required" | ""
+     * @var mixed required='required' | ''
      */
     protected $attributeRequired;
 
-    const ATTRIBUTE_REQUIRED_NAME = "required";
-    const ATTRIBUTE_REQUIRED_VALUE = "required";
+    const ATTRIBUTE_REQUIRED_NAME = 'required';
+    const ATTRIBUTE_REQUIRED_VALUE = 'required';
 
     /**
      * Attribut size
      * Defines the number of visible options in a drop-down list
      * @link http://www.w3schools.com/tags/att_select_size.asp Documentation
-     * @var mixed size="number" | ""
+     * @var mixed size='number' | ''
      */
     protected $attributeSize;
 
-    const ATTRIBUTE_SIZE_NAME = "size";
+    const ATTRIBUTE_SIZE_NAME = 'size';
 
     /**
      * Tableau de tag option
@@ -104,16 +104,16 @@ class HtmlTagSelect  {
      */
     public function getHtmlResult() {
 
-        $return = "<select ";
+        $return = '<select ';
         $return .= parent::getAllGlobalHtmlParameters();
         $return .= $this->getAllHtmlParameters();
-        $return .= ">";
+        $return .= '>';
 
         $value = new HtmlTagOption();
         foreach ($this->getArrayHtmlTagOption() as $value) {
             $return.= $value->getHtmlResult();
         }
-        $return .= "</select>";
+        $return .= '</select>';
         return $return;
     }
 
@@ -154,7 +154,7 @@ class HtmlTagSelect  {
         $data = $this->getAllHtmlParameters();
         $return = NULL;
         if ($data != NULL) {
-            $return = " " . $data;
+            $return = ' ' . $data;
         }
 
         return $return;
@@ -181,7 +181,7 @@ class HtmlTagSelect  {
 
     /**
      * Retourne l'attribut autofocus pour être inséré dans du code HTML
-     * @return mixed name="value"
+     * @return mixed name='value'
      */
     public function getAutofocusForHtmlParameter() {
         return Html::getHtmlParameter(self::ATTRIBUTE_AUTOFOCUS_NAME, $this->getAttributeAutofocus());
@@ -211,7 +211,7 @@ class HtmlTagSelect  {
 
     /**
      * Retourne l'attribut disabled pour être inséré dans du code HTML
-     * @return mixed name="value"
+     * @return mixed name='value'
      */
     public function getDisabledForHtmlParameter() {
         return Html::getHtmlParameter(self::ATTRIBUTE_DISABLED_NAME, $this->getAttributeDisabled());
@@ -241,7 +241,7 @@ class HtmlTagSelect  {
 
     /**
      * Retourne l'attribut forme pour être inséré dans du code HTML
-     * @return mixed name="value"
+     * @return mixed name='value'
      */
     public function getFormForHtmlParameter() {
         return Html::getHtmlParameter(self::ATTRIBUTE_FORM_NAME, $this->getAttributeForm());
@@ -264,7 +264,7 @@ class HtmlTagSelect  {
 
     /**
      * Retourne la veleur de l'attribut multiple
-     * @return mixed "multiple" | ""
+     * @return mixed 'multiple' | ''
      */
     public function getAttributeMultiple() {
         return $this->attributeMultiple;
@@ -272,7 +272,7 @@ class HtmlTagSelect  {
 
     /**
      * Retourne l'attribut muliple pour être inséré dans du code HTML
-     * @return mixed name="value"
+     * @return mixed name='value'
      */
     public function getMultipleForHtmlParameter() {
         return Html::getHtmlParameter(self::ATTRIBUTE_MULTIPLE_NAME, $this->getAttributeMultiple());
@@ -302,7 +302,7 @@ class HtmlTagSelect  {
 
     /**
      * Retourne l'attribut name pour être inséré dans du code HTML
-     * @return mixed name="value"
+     * @return mixed name='value'
      */
     public function getNameForHtmlParameter() {
         return Html::getHtmlParameter(self::ATTRIBUTE_NAME_NAME, $this->getAttributeName());
@@ -317,7 +317,7 @@ class HtmlTagSelect  {
         if (is_string($paramAttributeName)) {
             $this->attributeName = $paramAttributeName;
         }else {
-            trigger_error("L'attribut \"name\" doit être de type String.", E_USER_ERROR);
+            trigger_error('L\'attribut \'name\' doit être de type String.', E_USER_ERROR);
         }
             
     }
@@ -331,7 +331,7 @@ class HtmlTagSelect  {
 
     /**
      * Retourne la valeur de l'attribut required
-     * @return mixed "required" | ""
+     * @return mixed 'required' | ''
      */
     public function getAttributeRequired() {
         return $this->attributeRequired;
@@ -339,7 +339,7 @@ class HtmlTagSelect  {
 
     /**
      * Retourne l'attribut required pour être inséré dans du code HTML
-     * @return mixed name="value"
+     * @return mixed name='value'
      */
     public function getRequiredForHtmlParameter() {
         return Html::getHtmlParameter(self::ATTRIBUTE_REQUIRED_NAME, $this->getAttributeRequired());
@@ -369,7 +369,7 @@ class HtmlTagSelect  {
 
     /**
      * Retourne l'attribut size pour être inséré dans du code HTML
-     * @return mixed name="value"
+     * @return mixed name='value'
      */
     public function getSizeForHtmlParameter() {
         return Html::getHtmlParameter(self::ATTRIBUTE_SIZE_NAME, $this->getAttributeSize());

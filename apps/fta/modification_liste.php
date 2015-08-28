@@ -90,7 +90,7 @@ $req = "SELECT id_fta FROM fta, access_arti2 "
 $result=DatabaseOperation::query($req);
 
 //Création du tableau de présentation des fiches en cours de modification
-$liste_fta="<$html_table>";
+$liste_fta="<".$html_table.">";
 $liste_fta_entete=0; //Indication comme quoi il faudra créer l'entête du tableau
 while ($rows=mysql_fetch_array($result))
 {

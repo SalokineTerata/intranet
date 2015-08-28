@@ -8,25 +8,25 @@
  */
 class UserModel extends AbstractModel {
 
-    const TABLENAME = "salaries";
-    const KEYNAME = "id_user";
-    const FIELDNAME_ACTIF = "actif";
-    const FIELDNAME_NOM = "nom";
-    const FIELDNAME_PRENOM = "prenom";
-    const FIELDNAME_ID_CATSOPRO = "id_catsopro";
-    const FIELDNAME_ID_SERVICE = "id_service";
-    const FIELDNAME_ID_TYPE = "id_type";
-    const FIELDNAME_LOGIN = "login";
-    const FIELDNAME_PASSWORD = "pass";
-    const FIELDNAME_MAIL = "mail";
-    const FIELDNAME_ECRITURE = "ecriture";
-    const FIELDNAME_MEMBRE_CE = "membre_ce";
-    const FIELDNAME_NEWSDEFIL = "newsdefil";
-    const FIELDNAME_BLOCAGE = "blocage";
-    const FIELDNAME_DATE_CREATION_SALARIES = "date_creation_salaries";
-    const FIELDNAME_ASENDANT_ID_SALARIES = "ascendant_id_salaries";
-    const FIELDNAME_PORTAIL_WIKI_SALARIES = "portail_wiki_salaries";
-    const FIELDNAME_LIEU_GEO = "lieu_geo";
+    const TABLENAME = 'salaries';
+    const KEYNAME = 'id_user';
+    const FIELDNAME_ACTIF = 'actif';
+    const FIELDNAME_NOM = 'nom';
+    const FIELDNAME_PRENOM = 'prenom';
+    const FIELDNAME_ID_CATSOPRO = 'id_catsopro';
+    const FIELDNAME_ID_SERVICE = 'id_service';
+    const FIELDNAME_ID_TYPE = 'id_type';
+    const FIELDNAME_LOGIN = 'login';
+    const FIELDNAME_PASSWORD = 'pass';
+    const FIELDNAME_MAIL = 'mail';
+    const FIELDNAME_ECRITURE = 'ecriture';
+    const FIELDNAME_MEMBRE_CE = 'membre_ce';
+    const FIELDNAME_NEWSDEFIL = 'newsdefil';
+    const FIELDNAME_BLOCAGE = 'blocage';
+    const FIELDNAME_DATE_CREATION_SALARIES = 'date_creation_salaries';
+    const FIELDNAME_ASENDANT_ID_SALARIES = 'ascendant_id_salaries';
+    const FIELDNAME_PORTAIL_WIKI_SALARIES = 'portail_wiki_salaries';
+    const FIELDNAME_LIEU_GEO = 'lieu_geo';
 
     public function __construct($paramId = NULL, $paramIsCreateRecordsetInDatabaseIfKeyDoesntExist = AbstractModel::DEFAULT_IS_CREATE_RECORDSET_IN_DATABASE_IF_KEY_DOESNT_EXIST) {
         parent::__construct($paramId, $paramIsCreateRecordsetInDatabaseIfKeyDoesntExist);
@@ -35,7 +35,7 @@ class UserModel extends AbstractModel {
     public function getPrenomNom() {
         $prenom = $this->getDataField(UserModel::FIELDNAME_PRENOM)->getFieldValue();
         $nom = $this->getDataField(UserModel::FIELDNAME_NOM)->getFieldValue();
-        $value = $prenom . " " . strtoupper($nom);
+        $value = $prenom . ' ' . strtoupper($nom);
         return $value;
     }
 
@@ -58,36 +58,36 @@ class UserModel extends AbstractModel {
             }
 
 
-            $req = "SELECT DISTINCT " . FtaModel::TABLENAME . "." . FtaModel::KEYNAME
-                    . ", " . FtaEtatModel::FIELDNAME_ABREVIATION . ", " . FtaModel::FIELDNAME_LIBELLE
-                    . ", " . FtaWorkflowModel::FIELDNAME_DESCRIPTION_FTA_WORKFLOW . ", " . FtaWorkflowModel::FIELDNAME_NOM_FTA_WORKFLOW
-                    . ", " . FtaModel::FIELDNAME_NOMBRE_UVC_PAR_CARTON . ", " . FtaModel::FIELDNAME_POIDS_ELEMENTAIRE
-                    . ", " . FtaModel::FIELDNAME_SUFFIXE_AGROLOGIC_FTA . ", " . FtaModel::FIELDNAME_DESIGNATION_COMMERCIALE
-                    . ", " . FtaModel::FIELDNAME_DOSSIER_FTA . ", " . FtaModel::FIELDNAME_VERSION_DOSSIER_FTA
-                    . ", " . FtaModel::FIELDNAME_ARTICLE_AGROLOGIC . ", " . FtaModel::FIELDNAME_CODE_ARTICLE_LDC
-                    . ", " . FtaModel::FIELDNAME_DATE_ECHEANCE_FTA . ", " . FtaModel::FIELDNAME_CREATEUR
-                    . ", " . FtaModel::FIELDNAME_CLASSIFICATION_PROPRIETAIRE
-                    . ", " . FtaModel::FIELDNAME_SITE_ASSEMBLAGE . ", " . FtaModel::TABLENAME . ". " . FtaModel::FIELDNAME_WORKFLOW
-                    . " FROM " . FtaModel::TABLENAME . "," . UserModel::TABLENAME
-                    . ", " . FtaEtatModel::TABLENAME
-                    . ", " . FtaWorkflowModel::TABLENAME
-                    . ", " . ClassificationFtaModel::TABLENAME
-                    . " WHERE ( 0 ";
+            $req = 'SELECT DISTINCT ' . FtaModel::TABLENAME . '.' . FtaModel::KEYNAME
+                    . ', ' . FtaEtatModel::FIELDNAME_ABREVIATION . ', ' . FtaModel::FIELDNAME_LIBELLE
+                    . ', ' . FtaWorkflowModel::FIELDNAME_DESCRIPTION_FTA_WORKFLOW . ', ' . FtaWorkflowModel::FIELDNAME_NOM_FTA_WORKFLOW
+                    . ', ' . FtaModel::FIELDNAME_NOMBRE_UVC_PAR_CARTON . ', ' . FtaModel::FIELDNAME_POIDS_ELEMENTAIRE
+                    . ', ' . FtaModel::FIELDNAME_SUFFIXE_AGROLOGIC_FTA . ', ' . FtaModel::FIELDNAME_DESIGNATION_COMMERCIALE
+                    . ', ' . FtaModel::FIELDNAME_DOSSIER_FTA . ', ' . FtaModel::FIELDNAME_VERSION_DOSSIER_FTA
+                    . ', ' . FtaModel::FIELDNAME_ARTICLE_AGROLOGIC . ', ' . FtaModel::FIELDNAME_CODE_ARTICLE_LDC
+                    . ', ' . FtaModel::FIELDNAME_DATE_ECHEANCE_FTA . ', ' . FtaModel::FIELDNAME_CREATEUR
+                    . ', ' . FtaModel::FIELDNAME_CLASSIFICATION_PROPRIETAIRE
+                    . ', ' . FtaModel::FIELDNAME_SITE_ASSEMBLAGE . ', ' . FtaModel::TABLENAME . '. ' . FtaModel::FIELDNAME_WORKFLOW
+                    . ' FROM ' . FtaModel::TABLENAME . ',' . UserModel::TABLENAME
+                    . ', ' . FtaEtatModel::TABLENAME
+                    . ', ' . FtaWorkflowModel::TABLENAME
+                    . ', ' . ClassificationFtaModel::TABLENAME
+                    . ' WHERE ( 0 ';
 
             $req .= FtaModel::AddIdFTaValidProcess($idFta);
 
-            $req .= ")";
+            $req .= ')';
 
-            $req .= " AND " . FtaModel::TABLENAME . "." . FtaModel::FIELDNAME_CREATEUR
-                    . "=" . UserModel::TABLENAME . "." . UserModel::KEYNAME
-                    . " AND " . FtaModel::TABLENAME . "." . FtaModel::FIELDNAME_ID_FTA_ETAT
-                    . "=" . FtaEtatModel::TABLENAME . "." . FtaEtatModel::KEYNAME
-                    . " AND " . FtaWorkflowModel::TABLENAME . "." . FtaWorkflowModel::KEYNAME
-                    . "=" . FtaModel::TABLENAME . "." . FtaModel::FIELDNAME_WORKFLOW
-                    . " ORDER BY " . FtaModel::TABLENAME . "." . FtaModel::FIELDNAME_WORKFLOW
-                    . "," . UserModel::FIELDNAME_PRENOM . " ASC"
-                    . "," . $paramOrderBy
-                    . "," . FtaModel::FIELDNAME_DATE_ECHEANCE_FTA
+            $req .= ' AND ' . FtaModel::TABLENAME . '.' . FtaModel::FIELDNAME_CREATEUR
+                    . '=' . UserModel::TABLENAME . '.' . UserModel::KEYNAME
+                    . ' AND ' . FtaModel::TABLENAME . '.' . FtaModel::FIELDNAME_ID_FTA_ETAT
+                    . '=' . FtaEtatModel::TABLENAME . '.' . FtaEtatModel::KEYNAME
+                    . ' AND ' . FtaWorkflowModel::TABLENAME . '.' . FtaWorkflowModel::KEYNAME
+                    . '=' . FtaModel::TABLENAME . '.' . FtaModel::FIELDNAME_WORKFLOW
+                    . ' ORDER BY ' . FtaModel::TABLENAME . '.' . FtaModel::FIELDNAME_WORKFLOW
+                    . ',' . UserModel::FIELDNAME_PRENOM . ' ASC'
+                    . ',' . $paramOrderBy
+                    . ',' . FtaModel::FIELDNAME_DATE_ECHEANCE_FTA
             ;
 
 
@@ -103,30 +103,30 @@ class UserModel extends AbstractModel {
      */
     public static function suppressionIntranetUtilisateur($paramIdSalaries) {
         DatabaseOperation::execute(
-                "DELETE FROM " . ModesModel::TABLENAME
-                . " WHERE " . ModesModel::FIELDNAME_ID_USER . "=" . $paramIdSalaries
+                'DELETE FROM ' . ModesModel::TABLENAME
+                . ' WHERE ' . ModesModel::FIELDNAME_ID_USER . '=' . $paramIdSalaries
         );
         DatabaseOperation::execute(
-                "DELETE FROM " . DroitftModel::TABLENAME
-                . " WHERE " . DroitftModel::FIELDNAME_ID_USER . "=" . $paramIdSalaries
+                'DELETE FROM ' . DroitftModel::TABLENAME
+                . ' WHERE ' . DroitftModel::FIELDNAME_ID_USER . '=' . $paramIdSalaries
         );
         DatabaseOperation::execute(
-                "DELETE FROM " . UserModel::TABLENAME
-                . " WHERE " . UserModel::KEYNAME . "=" . $paramIdSalaries
+                'DELETE FROM ' . UserModel::TABLENAME
+                . ' WHERE ' . UserModel::KEYNAME . '=' . $paramIdSalaries
         );
         DatabaseOperation::execute(
-                "DELETE FROM " . IntranetDroitsAccesModel::TABLENAME
-                . " WHERE " . IntranetDroitsAccesModel::FIELDNAME_ID_USER . "=" . $paramIdSalaries
+                'DELETE FROM ' . IntranetDroitsAccesModel::TABLENAME
+                . ' WHERE ' . IntranetDroitsAccesModel::FIELDNAME_ID_USER . '=' . $paramIdSalaries
         );
         DatabaseOperation::execute(
-                "DELETE FROM " . LuModel::TABLENAME
-                . " WHERE " . LuModel::FILEDNAME_ID_USER . "=" . $paramIdSalaries);
+                'DELETE FROM ' . LuModel::TABLENAME
+                . ' WHERE ' . LuModel::FILEDNAME_ID_USER . '=' . $paramIdSalaries);
         DatabaseOperation::execute(
-                "DELETE FROM " . PlanningPresenceDetailModel::TABLENAME
-                . " WHERE " . PlanningPresenceDetailModel::FILEDNAME_ID_USER . "=" . $paramIdSalaries);
+                'DELETE FROM ' . PlanningPresenceDetailModel::TABLENAME
+                . ' WHERE ' . PlanningPresenceDetailModel::FILEDNAME_ID_USER . '=' . $paramIdSalaries);
         DatabaseOperation::execute(
-                "DELETE FROM " . PersoModel::TABLENAME
-                . " WHERE " . PersoModel::KEYNAME . "=" . $paramIdSalaries);
+                'DELETE FROM ' . PersoModel::TABLENAME
+                . ' WHERE ' . PersoModel::KEYNAME . '=' . $paramIdSalaries);
     }
 
     /**
@@ -136,10 +136,10 @@ class UserModel extends AbstractModel {
      */
     public static function securadmin($paramTypePag, $paramIdType) {
         if ($paramTypePag > $paramIdType) {
-            header("Location: ../index.php?action=delog");
+            header('Location: ../index.php?action=delog');
         }
         if (!$paramIdType) {
-            header("Location: ../index.php?action=delog");
+            header('Location: ../index.php?action=delog');
         }
     }
 

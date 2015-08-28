@@ -7,35 +7,35 @@
  * <pre>
  * $_SESSION[getclass()] => Array
  * (
- *    ["Nom de la table"] => Array                   (Ex: access_arti2)
+ *    ['Nom de la table'] => Array                   (Ex: access_arti2)
  *    (
- *        [Key] = "Nom du champ représentant la clef de la table"
+ *        [Key] = 'Nom du champ représentant la clef de la table'
  *        [Fields] => Array
  *        (
- *            ["Nom du champ"] => Array              (Ex: id_access_arti2)
+ *            ['Nom du champ'] => Array              (Ex: id_access_arti2)
  *            (
  *                [Sql] => Array                     //Caractéristiques SQL Standards
  *                (
- *                    [Field]  => "Nom du champ"     (Ex: id_access_arti2)
- *                    [Type]   => "type de donnée"   (Ex: int(11))
- *                    [Null]   => "Peut-il être Nul?"(Ex: NO)
- *                    [Key]    => "Type de clef"     (Ex: PRI) 
- *                    [Default]=> "Valeur par défaut (Ex: -1)
- *                    [Extra]  => "Supplément"       (Ex: auto_increment)
+ *                    [Field]  => 'Nom du champ'     (Ex: id_access_arti2)
+ *                    [Type]   => 'type de donnée'   (Ex: int(11))
+ *                    [Null]   => 'Peut-il être Nul?'(Ex: NO)
+ *                    [Key]    => 'Type de clef'     (Ex: PRI) 
+ *                    [Default]=> 'Valeur par défaut (Ex: -1)
+ *                    [Extra]  => 'Supplément'       (Ex: auto_increment)
  *                )
  *                [Doc] => Array                      //Caractéristiques Personnalisés
  *                (
- *                    [IdDoc]  => "Id Désignation"   (Ex: 2452)
- *                    [Label]  => "Désignation"      (Ex: Clef de la table)
- *                    [Help]   => "Aide"             (Ex: Cette clef est unique)                  
- *                    [ContentSql]   => Requête liste(Ex: "SELECT * FROM TABLE1;")
- *                    [ContentArray] => Array        (Ex: array("clef1" => "donnee1", "clef2" => "donnee2")
+ *                    [IdDoc]  => 'Id Désignation'   (Ex: 2452)
+ *                    [Label]  => 'Désignation'      (Ex: Clef de la table)
+ *                    [Help]   => 'Aide'             (Ex: Cette clef est unique)                  
+ *                    [ContentSql]   => Requête liste(Ex: 'SELECT * FROM TABLE1;')
+ *                    [ContentArray] => Array        (Ex: array('clef1' => 'donnee1', 'clef2' => 'donnee2')
  *                    [TypeOfHtmlObject] => type HTML(Ex: CALENDAR, INPUTTEXT, LIST, SUBFORM ...)
- *                    [ForeignKey] => champs joint   (Ex: "id_fta" si on se situe sur la table fta_processus_delai)
- *                    [ForeignTable] => Table jointe (Ex: "fta"  si on se situe sur la table fta_processus_delai)
- *                    [FieldsToDisplay] => liste de champs (Ex: "id_fta_processus,date_echeance_processus")
- *                    [FieldsToLock] => liste de champs    (Ex: "id_fta_processus")
- *                    [FieldsToOrder] => liste de champs   (Ex: "date_echeance_processus")
+ *                    [ForeignKey] => champs joint   (Ex: 'id_fta' si on se situe sur la table fta_processus_delai)
+ *                    [ForeignTable] => Table jointe (Ex: 'fta'  si on se situe sur la table fta_processus_delai)
+ *                    [FieldsToDisplay] => liste de champs (Ex: 'id_fta_processus,date_echeance_processus')
+ *                    [FieldsToLock] => liste de champs    (Ex: 'id_fta_processus')
+ *                    [FieldsToOrder] => liste de champs   (Ex: 'date_echeance_processus')
  *                )
  *        )
  *    )
@@ -260,11 +260,11 @@ class DatabaseDescription {
         /**
          * Récupération des caractéristiques SQL de chaque champs de chaque table
          */
-        $array = DatabaseOperation::convertSqlStatementKeyAndOneFieldToArray("SHOW TABLES");
+        $array = DatabaseOperation::convertSqlStatementKeyAndOneFieldToArray('SHOW TABLES');
         foreach ($array as $rowsTables) {
             $tableName = $rowsTables[0];
             $tableDescription = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
-                            "DESC " . DatabaseOperation::convertNameToSqlClause($tableName)
+                            'DESC ' . DatabaseOperation::convertNameToSqlClause($tableName)
             );
 
             /**
@@ -273,18 +273,18 @@ class DatabaseDescription {
              */
             foreach ($tableDescription as $rowsField) {
 
-                if ($rowsField["Key"] == "PRI") {
+                if ($rowsField['Key'] == 'PRI') {
                     /**
                      * Enregistrement du l'information de la clef dans le résultat final:
                      */
-                    self::$resultInSession[$tableName][self::ARRAY_NAME_KEY] = $rowsField["Field"];
+                    self::$resultInSession[$tableName][self::ARRAY_NAME_KEY] = $rowsField['Field'];
                 }
 
                 /**
                  * Enregistrement du champs dans le résultat final: 
                  */
                 self::$resultInSession[$tableName][self::ARRAY_NAME_FIELDS]
-                        [$rowsField["Field"]][self::ARRAY_NAME_SQL] = $rowsField;
+                        [$rowsField['Field']][self::ARRAY_NAME_SQL] = $rowsField;
 
                 /**
                  * Est-ce que ce champ est une clef ?
@@ -298,32 +298,32 @@ class DatabaseDescription {
         /**
          * Recherche de la documentation des champs
          */
-        $arrayDoc = DatabaseOperation::convertSqlStatementWithoutKeyToArray("SELECT * FROM `intranet_column_info` ");
+        $arrayDoc = DatabaseOperation::convertSqlStatementWithoutKeyToArray('SELECT * FROM `intranet_column_info` ');
         /**
          * Parcours du résultat de la recherche
          */
         foreach ($arrayDoc as $rowsDoc) {
-            $tableName = $rowsDoc["table_name_intranet_column_info"];
-            $columnName = $rowsDoc["column_name_intranet_column_info"];
-            $label = $rowsDoc["label_intranet_column_info"];
-            $help = $rowsDoc["explication_intranet_column_info"];
-            $idDoc = $rowsDoc["id_intranet_column_info"];
-            $contentSql = $rowsDoc["sql_request_content_intranet_column_info"];
+            $tableName = $rowsDoc['table_name_intranet_column_info'];
+            $columnName = $rowsDoc['column_name_intranet_column_info'];
+            $label = $rowsDoc['label_intranet_column_info'];
+            $help = $rowsDoc['explication_intranet_column_info'];
+            $idDoc = $rowsDoc['id_intranet_column_info'];
+            $contentSql = $rowsDoc['sql_request_content_intranet_column_info'];
             if ($contentSql) {
-                $contentArray = DatabaseOperation::convertSqlStatementWithKeyAsFirstFieldToArray(
+                $contentArray = DatabaseOperation::convertSqlStatementWithKeyAndOneFieldToArray(
                                 $contentSql
                 );
             } else {
                 $contentArray = NULL;
             }
-            $typeOfHtmlObject = $rowsDoc["type_of_html_object_intranet_column_info"];
-            $typeOfStorage = $rowsDoc["type_of_storage"];
-            $foreignTable = $rowsDoc["referenced_table_name"];
-            $foreignKey = $rowsDoc["referenced_column_name"];
-            $fieldsToDisplay = $rowsDoc["fields_to_display"];
-            $fieldsToLock = $rowsDoc["fields_to_lock"];
-            $fieldsToOrder = $rowsDoc["fields_to_order"];
-            $rightToAdd = $rowsDoc["right_to_add"];
+            $typeOfHtmlObject = $rowsDoc['type_of_html_object_intranet_column_info'];
+            $typeOfStorage = $rowsDoc['type_of_storage'];
+            $foreignTable = $rowsDoc['referenced_table_name'];
+            $foreignKey = $rowsDoc['referenced_column_name'];
+            $fieldsToDisplay = $rowsDoc['fields_to_display'];
+            $fieldsToLock = $rowsDoc['fields_to_lock'];
+            $fieldsToOrder = $rowsDoc['fields_to_order'];
+            $rightToAdd = $rowsDoc['right_to_add'];
 
 
             /**
@@ -602,14 +602,14 @@ class DatabaseDescription {
 
     private static function getQueryForeignKey() {
 
-        return "SELECT k.TABLE_NAME, "
-                . "k.COLUMN_NAME, k.REFERENCED_TABLE_NAME, "
-                . "k.REFERENCED_COLUMN_NAME "
-                . "FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE AS k "
-                . "INNER JOIN INFORMATION_SCHEMA.TABLE_CONSTRAINTS AS c ON "
-                . "k.CONSTRAINT_SCHEMA = c.CONSTRAINT_SCHEMA "
-                . "AND k.CONSTRAINT_NAME = c.CONSTRAINT_NAME "
-                . "WHERE c.CONSTRAINT_TYPE =  'FOREIGN KEY' AND k.CONSTRAINT_SCHEMA = '" . self::getDatabaseName() . "'"
+        return 'SELECT k.TABLE_NAME, '
+                . 'k.COLUMN_NAME, k.REFERENCED_TABLE_NAME, '
+                . 'k.REFERENCED_COLUMN_NAME '
+                . 'FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE AS k '
+                . 'INNER JOIN INFORMATION_SCHEMA.TABLE_CONSTRAINTS AS c ON '
+                . 'k.CONSTRAINT_SCHEMA = c.CONSTRAINT_SCHEMA '
+                . 'AND k.CONSTRAINT_NAME = c.CONSTRAINT_NAME '
+                . 'WHERE c.CONSTRAINT_TYPE =  \'FOREIGN KEY\' AND k.CONSTRAINT_SCHEMA = \'' . self::getDatabaseName() . '\''
         ;
     }
 
@@ -620,7 +620,7 @@ class DatabaseDescription {
 
     public static function getArrayAllTableRNForOneTableR1($paramTableR1) {
         $paramSql = self::getQueryForeignKey()
-                . "AND `REFERENCED_TABLE_NAME` = '" . $paramTableR1 . "'"
+                . 'AND `REFERENCED_TABLE_NAME` = \'' . $paramTableR1 . '\''
         ;
         return DatabaseOperation::convertSqlStatementWithoutKeyToArray($paramSql);
     }

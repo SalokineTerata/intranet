@@ -68,7 +68,7 @@ class HtmlSubForm_RNN extends HtmlSubForm {
      */
     private $LienSuppression;
 
-    const VIRTUAL = "VIRTUAL";
+    const VIRTUAL = 'VIRTUAL';
 
     function __construct($paramArrayPrimaryContent = NULL, $paramSubFormPrimaryModelClassName = NULL, $paramPrimaryLabel = NULL, $secondaryTableNamesAndIdKeyValue = NULL) {
         parent::__construct();

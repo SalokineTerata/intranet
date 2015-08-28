@@ -19,7 +19,7 @@
 
 /**
  * Description of DatabaseRepresentation
- * Cette classe permet de savoir quelle classe "Model" implémente une
+ * Cette classe permet de savoir quelle classe 'Model' implémente une
  * table donnée.
  * 
  * @author bs4300280
@@ -34,13 +34,13 @@ class ModelTableAssociation {
      */
     static private $arrayTableNameToModelName = array(
         //Classer la liste des clefs par ordre alphabétique.
-        "fta" => "FtaModel",
-        "fta_processus_delai" => "FtaProcessusDelaiModel",
-        "fta_composant" => "FtaComposantModel",
-        "fta_conditionnement" => "FtaConditionnementModel",
-        "annexe_emballage_groupe" => "AnnexeEmballageGroupeModel",
-        "annexe_emballage_groupe_type" => "AnnexeEmballageGroupeTypeModel",
-        "annexe_emballage" => "AnnexeEmballageModel",
+        'fta' => 'FtaModel',
+        'fta_processus_delai' => 'FtaProcessusDelaiModel',
+        'fta_composant' => 'FtaComposantModel',
+        'fta_conditionnement' => 'FtaConditionnementModel',
+        'annexe_emballage_groupe' => 'AnnexeEmballageGroupeModel',
+        'annexe_emballage_groupe_type' => 'AnnexeEmballageGroupeTypeModel',
+        'annexe_emballage' => 'AnnexeEmballageModel',
     );
 
     static public function getModelName($paramTableName) {

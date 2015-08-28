@@ -31,7 +31,7 @@ class DataFieldToHtmlListBoolean extends HtmlListBoolean {
     }
 
     public function getHtmlViewedContent() {
-        $return = "";
+        $return = '';
         if ($this->selected_value) {
             $return = Html::showValue(self::YES_LABEL);
         } else {

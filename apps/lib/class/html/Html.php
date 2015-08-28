@@ -52,7 +52,7 @@ class Html {
     }
 
     public static function inputValue($value) {
-        return "\"" . htmlspecialchars($value) . "\"";
+        return '\'' . htmlspecialchars($value) . '\'';
     }
 
     public static function showValue($value) {
@@ -80,8 +80,8 @@ class Html {
                 . $hrefPopup
                 . "?popup_name=" . $paramPopupName
                 . "&edit_allow=false"
-                . "&title=$title"
-                . "&special_page=$paramSpecialPage"
+                . "&title=" . $title
+                . "&special_page=" . $paramSpecialPage
                 . $hrefJavascriptEnd
                 . "  CLASS=link1 />"
                 . $ParamLink
@@ -119,21 +119,21 @@ class Html {
         if ($result_explication == "") {
             //Génération du manuel
             $explication_intranet_description = $default_message;
-            $request = "UPDATE $nom_table "
-                    . "SET `explication_intranet_column_info`='" . $explication_intranet_description . "' "
-                    . "WHERE `id_intranet_column_info`='" . $id_intranet_description . "' ";
-            DatabaseOperation::query($request);
+            $request = "UPDATE " . $nom_table
+                    . " SET `explication_intranet_column_info`='" . $explication_intranet_description . "' "
+                    . " WHERE `id_intranet_column_info`='" . $id_intranet_description . "' ";
+            DatabaseOperation::execute($request);
         }
         //Ajout des liens hypertextes
-        $return .="<a title=\"$explication_intranet_description\" "
+        $return .="<a title=\"" . $explication_intranet_description . "\" "
                 . "href="
                 . $href_javascript_begin
                 . $href_popup
                 . "?id_intranet_description=" . $id_intranet_description
                 . "&disable_full_page=1"
-                . "&nom_intranet_actions=$nom_intranet_actions"
-                . "&module=$module"
-                . "&champ_intranet_description=$nom_variable"
+                . "&nom_intranet_actions=" . $nom_intranet_actions
+                . "&module=" . $module
+                . "&champ_intranet_description=" . $nom_variable
                 . $href_javascript_end
                 . "  CLASS=link1 />"
                 . $comment
@@ -148,7 +148,7 @@ class Html {
      * @param  $param
      * @return AbstractHtmlGlobalElement
      */
-    public static function getHtmlObjectFromDataField(DatabaseDataField $paramDataField, $param = FALSE ) {
+    public static function getHtmlObjectFromDataField(DatabaseDataField $paramDataField, $param = FALSE) {
         $htmlObject = NULL;
         $TypeOfHtmlObject = $paramDataField->getFieldTypeOfHtmlObject();
 
@@ -183,7 +183,7 @@ class Html {
                 break;
 
             default:
-                throw new Exception("Type d'objet <b>$TypeOfHtmlObject</b> inconnu." . " Champs concerné:" . $paramDataField->getFieldName() . " ");
+                throw new Exception("Type d'objet <b>" . $TypeOfHtmlObject . "</b> inconnu." . " Champs concerné:" . $paramDataField->getFieldName() . " ");
         }
 
         return $htmlObject;

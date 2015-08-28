@@ -12,9 +12,9 @@
  */
 class HtmlListBoolean extends HtmlListSelect {
 
-    const YES_LABEL = "Oui";
+    const YES_LABEL = 'Oui';
     const YES_VALUE = 1;
-    const NO_LABEL = "Non";
+    const NO_LABEL = 'Non';
     const NO_VALUE = 0;
 
     public function __construct() {
@@ -23,7 +23,7 @@ class HtmlListBoolean extends HtmlListSelect {
     }
 
     public function getHtmlViewedContent() {
-        $return = "";
+        $return = '';
         if ($this->selected_value) {
             $return = Html::showValue(self::YES_LABEL);
         } else {

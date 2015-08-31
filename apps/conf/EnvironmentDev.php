@@ -29,6 +29,7 @@ class EnvironmentDev extends EnvironmentAbstract {
         $this->getConf()->setMysqlDatabaseAuthentificationUsername("root");
         $this->getConf()->setMysqlDatabaseAuthentificationPassword("");
         $this->getConf()->setMysqlDatabaseAuthentificationTableName("salaries");
+        $this->getConf()->setMysqlDatabaseConnectionOldMethode(TRUE);
         $this->getConf()->setSessionDebugEnable(FALSE);
         $this->getConf()->setSmtpServerName("smtp05401.grpldc.com");
         $this->getConf()->setSmtpServiceEnable(FALSE);

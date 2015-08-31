@@ -42,6 +42,12 @@ class EnvironmentConf {
     private $mysqlDatabaseAuthentificationPassword = null; //Suivant environnement
     private $mysqlDatabaseAuthentificationTableName = null;
     private $mysqlDatabaseAuthentificationUsername = null; //Suivant environnement
+
+    /**
+     * A-t-on le droit d'utiliser l'ancienne méthode de connexion MySQL ?
+     * @var boolean 
+     */
+    private $mysqlDatabaseConnectionOldMethode = null;
     private $mysqlServerName = null;  //Suivant environnement
     private $sessionDebugEnable = null;
     private $smtpEmailRedirectionAdmin = null;
@@ -52,6 +58,18 @@ class EnvironmentConf {
     private $urlRoot = null;       //Suivant environnement
     private $urlServer = null;
     private $urlSubdir = null;
+
+    /**
+     * A-t-on le droit d'utiliser l'ancienne méthode de connexion MySQL ?
+     * @var boolean 
+     */
+    function getMysqlDatabaseConnectionOldMethode() {
+        return $this->mysqlDatabaseConnectionOldMethode;
+    }
+
+    function setMysqlDatabaseConnectionOldMethode($mysqlDatabaseConnectionOldMethode) {
+        $this->mysqlDatabaseConnectionOldMethode = $mysqlDatabaseConnectionOldMethode;
+    }
 
     function getApplicationLogoMessage() {
         return $this->applicationLogoMessage;
@@ -89,7 +107,7 @@ class EnvironmentConf {
         return "<a href=\"" . $this->getUrlFullRoot() . "/"
                 . self::DOC_APIGEN_DIR . "\" target=\"_blank\"><img src=../lib/images/apigen.jpeg width=15  border=0> - Doc ApiGen</a>"
                 . "<br>"
-                . "<a href=\"" 
+                . "<a href=\""
                 . self::URL_EASYPHP . "\" target=\"_blank\"><img src=../lib/images/pma_icone.png width=15  border=0> - Administration EasyPHP</a>"
         ;
     }

@@ -863,17 +863,19 @@ function calcul_poids_net_colis($id_fta) {
     $poids_net_colis = 0;    //Poids net du colis en gramme
     //Corps de la fonction
     //$req = "SELECT * FROM fta_composition WHERE id_fta='".$id_fta."' ";
-    $req = "SELECT * FROM fta_composant WHERE id_fta='" . $id_fta . "' AND is_composition_fta_composant=1 ";
-    $result = DatabaseOperation::query($req);
-    while ($rows = mysql_fetch_array($result)) {
+    $req = "SELECT quantite_fta_composition,poids_fta_composition FROM fta_composant WHERE id_fta='" . $id_fta . "' AND is_composition_fta_composant=1 ";
+    $arrayComposition = DatabaseOperation::convertSqlStatementWithoutKeyToArray($req);
+    foreach ($arrayComposition as $rows) {
         $poids_net_colis = $poids_net_colis + ($rows["quantite_fta_composition"] * $rows["poids_fta_composition"]);
     }
     $poids_net_colis = $poids_net_colis / 1000; //Conversion en g --> Kg
     if (!$poids_net_colis) {
-        $req = "SELECT * FROM access_arti2 WHERE id_fta='" . $id_fta . "' ";
-        $result = DatabaseOperation::query($req);
-        $Poids_ELEM = mysql_result($result, 0, "Poids_ELEM");
-        $NB_UNIT_ELEM = mysql_result($result, 0, "NB_UNIT_ELEM");
+        $req = "SELECT Poids_ELEM,NB_UNIT_ELEM FROM fta WHERE id_fta='" . $id_fta . "' ";
+        $arrayFta = DatabaseOperation::convertSqlStatementWithoutKeyToArray($req);
+        foreach ($arrayFta as $rows) {
+            $Poids_ELEM = $rows["Poids_ELEM"];
+            $NB_UNIT_ELEM = $rows["NB_UNIT_ELEM"];
+        }
         $poids_net_colis = $Poids_ELEM * $NB_UNIT_ELEM;
     }
     return $poids_net_colis;
@@ -2564,9 +2566,9 @@ function visualiser_fiches($id_fta_etat, $choix, $isLimit, $order_common) {
 
 
 
-/*************************************************************************************
+/* * ***********************************************************************************
   Fonction donnant l'état actuel d'un processus pour une fiche technique article données
- ************************************************************************************ */
+ * *********************************************************************************** */
 
 function fta_processus_etat($id_fta, $id_fta_processus) {
 //Définition des variables
@@ -2970,12 +2972,12 @@ function recherche_element_classification_fta($id_fta, $id_element, $extension) 
     }
     //Recherche des chemins de classification de l'Article
     $req = "SELECT id_classification_arborescence_article_categorie_contenu, classification_fta.id_classification_arborescence_article "
-            . "FROM classification_fta, classification_arborescence_article "
-            . "WHERE id_fta=$id_fta "
-            . "AND classification_fta.id_classification_arborescence_article=classification_arborescence_article.id_classification_arborescence_article "
+            . " FROM classification_fta, classification_arborescence_article "
+            . " WHERE id_fta=" . $id_fta
+            . " AND classification_fta.id_classification_arborescence_article=classification_arborescence_article.id_classification_arborescence_article "
     ;
-    $result = DatabaseOperation::query($req);
-    if (!mysql_num_rows($result)) {//Vérification de l'existance de chemin de classifications
+    $array = DatabaseOperation::convertSqlStatementWithoutKeyToArray($req);
+    if (!$array) {//Vérification de l'existance de chemin de classifications
         //L'article n'a pas de classification
         $titre = "Classification de l'article";
         $message = "Cet article n'a pas de classification";
@@ -2983,7 +2985,7 @@ function recherche_element_classification_fta($id_fta, $id_element, $extension) 
         //afficher_message($titre, $message, $redirection);
     } else {
         //Récupération de toutes les classifications
-        while ($rows = mysql_fetch_array($result)) {
+        foreach ($array as $rows) {
             $table = "classification_arborescence_article";
             $champ_valeur = "id_classification_arborescence_article_categorie_contenu";
             $champ_id_fils = "ascendant_classification_arborescence_article_categorie_contenu";
@@ -3021,17 +3023,17 @@ function recherche_element_classification_fta($id_fta, $id_element, $extension) 
         $req .= ") ";
 
         //Recupération des données
-        $result = DatabaseOperation::query($req);
+        $result = DatabaseOperation::convertSqlStatementWithoutKeyToArray($req);
         //echo $req;
         //Si il y a des résultat
-        if (mysql_num_rows($result)) {
+        if ($result) {
             //Il y a au moins 1 résultat
             $return[0] = 1;
 
             $virg_enable = 0;
             $return[1] = "";
             $return[2] = "";
-            while ($rows = mysql_fetch_array($result)) {
+            foreach ($result as $rows) {
                 if ($rows["id_classification_arborescence_article_categorie_contenu"] <> 0) {
                     if ($virg_enable) {
                         $virg = ",";
@@ -3307,9 +3309,11 @@ function calcul_palettisation_fta($id_fta) {
     //PCB
     $return["pcb"] = $temp_nb_uvc_dans_colis;
     if (!$return["pcb"]) {
-        $req = "SELECT * FROM access_arti2 WHERE id_fta='" . $id_fta . "' ";
-        $result = DatabaseOperation::query($req);
-        $NB_UNIT_ELEM = mysql_result($result, 0, "NB_UNIT_ELEM");
+        $req = "SELECT NB_UNIT_ELEM FROM fta WHERE id_fta='" . $id_fta . "' ";
+        $result = DatabaseOperation::convertSqlStatementWithoutKeyToArray($req);
+        foreach ($result as $value) {
+            $NB_UNIT_ELEM = $value["NB_UNIT_ELEM"];
+        }
         $return["pcb"] = $NB_UNIT_ELEM;
     }
 
@@ -3318,20 +3322,20 @@ function calcul_palettisation_fta($id_fta) {
     $description_annexe_emballage_groupe_type = "uvc_emballage";
 
     $req = "SELECT * "
-            . "FROM fta_conditionnement, annexe_emballage_groupe, annexe_emballage_groupe_type "
-            . "WHERE id_fta=$id_fta "
-            . "AND annexe_emballage_groupe_type.id_annexe_emballage_groupe_type=$id_annexe_emballage_groupe_type "
-            . "AND fta_conditionnement.id_annexe_emballage_groupe=annexe_emballage_groupe.id_annexe_emballage_groupe "
-            . "AND ( "
+            . " FROM fta_conditionnement, annexe_emballage_groupe, annexe_emballage_groupe_type "
+            . " WHERE id_fta=" . $id_fta
+            . " AND annexe_emballage_groupe_type.id_annexe_emballage_groupe_type=" . $id_annexe_emballage_groupe_type
+            . " AND fta_conditionnement.id_annexe_emballage_groupe=annexe_emballage_groupe.id_annexe_emballage_groupe "
+            . " AND ( "
             . "( fta_conditionnement.id_annexe_emballage_groupe_type IS NOT NULL AND fta_conditionnement.id_annexe_emballage_groupe_type=annexe_emballage_groupe_type.id_annexe_emballage_groupe_type )"
             . " OR "
             . "( fta_conditionnement.id_annexe_emballage_groupe_type IS NULL AND annexe_emballage_groupe.id_annexe_emballage_groupe_configuration=annexe_emballage_groupe_type.id_annexe_emballage_groupe_type )"
             . "    ) "
-            . "ORDER BY nom_annexe_emballage_groupe_type "
+            . " ORDER BY nom_annexe_emballage_groupe_type "
     ;
-    $result = DatabaseOperation::query($req);
-    if (mysql_num_rows($result)) {
-        while ($rows = mysql_fetch_array($result)) {
+    $arrayType1 = DatabaseOperation::convertSqlStatementWithoutKeyToArray($req);
+    if ($arrayType1) {
+        foreach ($arrayType1 as $rows) {
             //Calcul du poids
             $return["$description_annexe_emballage_groupe_type"]+=$rows["poids_fta_conditionnement"] * $rows["quantite_par_couche_fta_conditionnement"] * $rows["nombre_couche_fta_conditionnement"];
 
@@ -3374,21 +3378,21 @@ function calcul_palettisation_fta($id_fta) {
       ;
      */
     $req = "SELECT * "
-            . "FROM fta_conditionnement, annexe_emballage_groupe, annexe_emballage_groupe_type "
-            . "WHERE id_fta=$id_fta "
-            . "AND annexe_emballage_groupe_type.id_annexe_emballage_groupe_type=$id_annexe_emballage_groupe_type "
-            . "AND fta_conditionnement.id_annexe_emballage_groupe=annexe_emballage_groupe.id_annexe_emballage_groupe "
-            . "AND ( "
+            . " FROM fta_conditionnement, annexe_emballage_groupe, annexe_emballage_groupe_type "
+            . " WHERE id_fta=" . $id_fta
+            . " AND annexe_emballage_groupe_type.id_annexe_emballage_groupe_type=" . $id_annexe_emballage_groupe_type
+            . " AND fta_conditionnement.id_annexe_emballage_groupe=annexe_emballage_groupe.id_annexe_emballage_groupe "
+            . " AND ( "
             . "( fta_conditionnement.id_annexe_emballage_groupe_type IS NOT NULL AND fta_conditionnement.id_annexe_emballage_groupe_type=annexe_emballage_groupe_type.id_annexe_emballage_groupe_type )"
             . " OR "
             . "( fta_conditionnement.id_annexe_emballage_groupe_type IS NULL AND annexe_emballage_groupe.id_annexe_emballage_groupe_configuration=annexe_emballage_groupe_type.id_annexe_emballage_groupe_type )"
             . "    ) "
-            . "ORDER BY nom_annexe_emballage_groupe_type "
+            . " ORDER BY nom_annexe_emballage_groupe_type "
     ;
 
-    $result = DatabaseOperation::query($req);
-    if (mysql_num_rows($result)) {
-        while ($rows = mysql_fetch_array($result)) { {
+    $arrayType2 = DatabaseOperation::convertSqlStatementWithoutKeyToArray($req);
+    if ($arrayType2) {
+        foreach ($arrayType2 as $rows) { {
                 $return["$description_annexe_emballage_groupe_type"]+=$rows["poids_fta_conditionnement"] * $rows["quantite_par_couche_fta_conditionnement"] * $rows["nombre_couche_fta_conditionnement"];
             }
         }
@@ -3414,32 +3418,32 @@ function calcul_palettisation_fta($id_fta) {
       ;
      */
     $req = "SELECT * "
-            . "FROM fta_conditionnement, annexe_emballage_groupe, annexe_emballage_groupe_type "
-            . "WHERE id_fta=$id_fta "
-            . "AND annexe_emballage_groupe_type.id_annexe_emballage_groupe_type=$id_annexe_emballage_groupe_type "
-            . "AND fta_conditionnement.id_annexe_emballage_groupe=annexe_emballage_groupe.id_annexe_emballage_groupe "
-            . "AND ( "
+            . " FROM fta_conditionnement, annexe_emballage_groupe, annexe_emballage_groupe_type "
+            . " WHERE id_fta=" . $id_fta
+            . " AND annexe_emballage_groupe_type.id_annexe_emballage_groupe_type=" . $id_annexe_emballage_groupe_type
+            . " AND fta_conditionnement.id_annexe_emballage_groupe=annexe_emballage_groupe.id_annexe_emballage_groupe "
+            . " AND ( "
             . "( fta_conditionnement.id_annexe_emballage_groupe_type IS NOT NULL AND fta_conditionnement.id_annexe_emballage_groupe_type=annexe_emballage_groupe_type.id_annexe_emballage_groupe_type )"
             . " OR "
             . "( fta_conditionnement.id_annexe_emballage_groupe_type IS NULL AND annexe_emballage_groupe.id_annexe_emballage_groupe_configuration=annexe_emballage_groupe_type.id_annexe_emballage_groupe_type )"
             . "    ) "
-            . "ORDER BY nom_annexe_emballage_groupe_type "
+            . " ORDER BY nom_annexe_emballage_groupe_type "
     ;
 
-    $result = DatabaseOperation::query($req);
-    if (mysql_num_rows($result) > 1) {
+    $arrayType3 = DatabaseOperation::convertSqlStatementWithoutKeyToArray($req);
+    if (count($arrayType3) > 1) {
         $titre = "Cas non géré";
         $message = "Il ne doit y avoir qu'un seul emballage Colis";
         afficher_message($titre, $message, $redirection);
     } else {
         //Il ne doit exister qu'un seul emballage Colis
-        if (mysql_num_rows($result)) {
+        if ($arrayType3) {
 
-            while ($rows = mysql_fetch_array($result)) {
+            foreach ($arrayType3 as $rows) {
 //echo   "Emballage du colis: ".$rows["poids_fta_conditionnement"]."<br>";
 //echo   "Emballage du colis: ".$return["colis_emballage"]."<br>";
 //echo $return["colis_emballage"];
-                $return["hauteur_colis"] = mysql_result($result, 0, "hauteur_fta_conditionnement");
+                $return["hauteur_colis"] = $rows["hauteur_fta_conditionnement"];
                 $return["colis_emballage"]+=$rows["poids_fta_conditionnement"];
                 $return["couche_palette"] = $rows["nombre_couche_fta_conditionnement"];
                 $return["colis_couche"] = $rows["quantite_par_couche_fta_conditionnement"];
@@ -3486,27 +3490,27 @@ function calcul_palettisation_fta($id_fta) {
       ;
      */
     $req = "SELECT * "
-            . "FROM fta_conditionnement, annexe_emballage_groupe, annexe_emballage_groupe_type "
-            . "WHERE id_fta=$id_fta "
-            . "AND annexe_emballage_groupe_type.id_annexe_emballage_groupe_type=$id_annexe_emballage_groupe_type "
-            . "AND fta_conditionnement.id_annexe_emballage_groupe=annexe_emballage_groupe.id_annexe_emballage_groupe "
-            . "AND ( "
+            . " FROM fta_conditionnement, annexe_emballage_groupe, annexe_emballage_groupe_type "
+            . " WHERE id_fta=" . $id_fta
+            . " AND annexe_emballage_groupe_type.id_annexe_emballage_groupe_type=" . $id_annexe_emballage_groupe_type
+            . " AND fta_conditionnement.id_annexe_emballage_groupe=annexe_emballage_groupe.id_annexe_emballage_groupe "
+            . " AND ( "
             . "( fta_conditionnement.id_annexe_emballage_groupe_type IS NOT NULL AND fta_conditionnement.id_annexe_emballage_groupe_type=annexe_emballage_groupe_type.id_annexe_emballage_groupe_type )"
             . " OR "
             . "( fta_conditionnement.id_annexe_emballage_groupe_type IS NULL AND annexe_emballage_groupe.id_annexe_emballage_groupe_configuration=annexe_emballage_groupe_type.id_annexe_emballage_groupe_type )"
             . "    ) "
-            . "ORDER BY nom_annexe_emballage_groupe_type "
+            . " ORDER BY nom_annexe_emballage_groupe_type "
     ;
 
-    $result = DatabaseOperation::query($req);
-    if (mysql_num_rows($result) > 1) {
+    $arrayType4 = DatabaseOperation::convertSqlStatementWithoutKeyToArray($req);
+    if (count($arrayType4) > 1) {
         $titre = "Cas non géré";
         $message = "Il ne doit y avoir qu'une seule Palette";
         afficher_message($titre, $message, $redirection);
     } else {
         //Il ne doit exister qu'une seule Palette
-        if (mysql_num_rows($result)) {
-            while ($rows = mysql_fetch_array($result)) {
+        if ($arrayType4) {
+            foreach ($arrayType4 as $rows) {
                 $return["palette_emballage"]+=($rows["poids_fta_conditionnement"] / 1000); //Converstion de gramme en Kilo
                 $return["dimension_palette"] = $rows["longueur_fta_conditionnement"]
                         . "x"
@@ -3526,9 +3530,8 @@ function calcul_palettisation_fta($id_fta) {
     }
 
     //Calcul des poids net
-    $req = "SELECT * FROM access_arti2 WHERE id_fta=$id_fta";
-    $result = DatabaseOperation::query($req);
-    $return["uvc_net"] = mysql_result($result, 0, "Poids_ELEM") * 1000;        //Conversion de Kg en Gramme
+    $ftaModel = new FtaModel($id_fta);
+    $return["uvc_net"] = $ftaModel->getDataField("Poids_ELEM")->getFieldValue() * 1000;        //Conversion de Kg en Gramme
     //Le calcul du poids net colis est fonction de la composition colis
     //$return["colis_net"]=$return["pcb"] * $return["uvc_net"] / 1000;      //Conversion de g en Kg
     $return["colis_net"] = calcul_poids_net_colis($id_fta);

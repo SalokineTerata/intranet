@@ -139,7 +139,7 @@ echo '
         ' . $bloc . '
 
      </td></tr>
-     </table>
+     </table>      
      </form>
      ';
 

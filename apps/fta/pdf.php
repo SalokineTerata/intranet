@@ -58,54 +58,51 @@ $disabled = "disabled";
  */
 $id_fta = Lib::getParameterFromRequest("id_fta"); //Variable passé en URL
 //$id_fta=1;
-
-
-
 //Conditionnement
 /*
-$arrayCommentaireEmballage = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
-                "SELECT " . FtaSuiviProjetModel::FIELDNAME_COMMENTAIRE_SUIVI_PROJET
-                . " FROM " . FtaSuiviProjetModel::TABLENAME . ", " . FtaChapitreModel::TABLENAME . " "
-                . " WHERE ( " . FtaSuiviProjetModel::TABLENAME . "." . FtaSuiviProjetModel::FIELDNAME_ID_FTA_CHAPITRE
-                . " = " . FtaChapitreModel::TABLENAME . "." . FtaChapitreModel::KEYNAME . " ) "
-                . " AND ( ( " . FtaSuiviProjetModel::TABLENAME . "." . FtaSuiviProjetModel::FIELDNAME_ID_FTA . " = '" . $id_fta . "' "
-                . " AND (" . FtaChapitreModel::TABLENAME . "." . FtaChapitreModel::FIELDNAME_NOM_CHAPITRE . " = 'emballage' "
-                . " OR " . FtaChapitreModel::TABLENAME . "." . FtaChapitreModel::FIELDNAME_NOM_CHAPITRE . " = 'emballage_colis' "
-                . " ) )"
-);
-if ($arrayCommentaireEmballage){
-    
-    $commentaire_emballage = mysql_result($result, 0, "commentaire_suivi_projet");
-}
+  $arrayCommentaireEmballage = DatabaseOperation::convertSqlQueryWithAutomaticKeyToArray(
+  "SELECT " . FtaSuiviProjetModel::FIELDNAME_COMMENTAIRE_SUIVI_PROJET
+  . " FROM " . FtaSuiviProjetModel::TABLENAME . ", " . FtaChapitreModel::TABLENAME . " "
+  . " WHERE ( " . FtaSuiviProjetModel::TABLENAME . "." . FtaSuiviProjetModel::FIELDNAME_ID_FTA_CHAPITRE
+  . " = " . FtaChapitreModel::TABLENAME . "." . FtaChapitreModel::KEYNAME . " ) "
+  . " AND ( ( " . FtaSuiviProjetModel::TABLENAME . "." . FtaSuiviProjetModel::FIELDNAME_ID_FTA . " = '" . $id_fta . "' "
+  . " AND (" . FtaChapitreModel::TABLENAME . "." . FtaChapitreModel::FIELDNAME_NOM_CHAPITRE . " = 'emballage' "
+  . " OR " . FtaChapitreModel::TABLENAME . "." . FtaChapitreModel::FIELDNAME_NOM_CHAPITRE . " = 'emballage_colis' "
+  . " ) )"
+  );
+  if ($arrayCommentaireEmballage){
 
-//Conservation
-if ($id_annexe_environnement_conservation) {
-    mysql_table_load("annexe_environnement_conservation");
-    $conservation = $nom_annexe_environnement_conservation . ": " . $temperature_annexe_environnement_conservation;
-}
+  $commentaire_emballage = mysql_result($result, 0, "commentaire_suivi_projet");
+  }
 
-//Agrément CE
-$id_site = $Site_de_production;
-$req = "SELECT id_geo FROM access_arti2, geo "
-        . "WHERE id_fta=" . $id_fta . " "
-        . "AND Site_de_production=id_site "
-;
-$result_temp = DatabaseOperation::query($req);
-$id_geo = mysql_result($result_temp, 0, "id_geo");
-mysql_table_load("geo");
-$site_agrement_ce;
+  //Conservation
+  if ($id_annexe_environnement_conservation) {
+  mysql_table_load("annexe_environnement_conservation");
+  $conservation = $nom_annexe_environnement_conservation . ": " . $temperature_annexe_environnement_conservation;
+  }
+
+  //Agrément CE
+  $id_site = $Site_de_production;
+  $req = "SELECT id_geo FROM access_arti2, geo "
+  . "WHERE id_fta=" . $id_fta . " "
+  . "AND Site_de_production=id_site "
+  ;
+  $result_temp = DatabaseOperation::query($req);
+  $id_geo = mysql_result($result_temp, 0, "id_geo");
+  mysql_table_load("geo");
+  $site_agrement_ce;
 
 
-//Produit Transformé en France
-$champ = "origine_transformation_fta";
-switch (${$champ}) {
-    case 2:
-        $description_origine_transformation_fta = "Oui";
-        break;
-    default:
-        $description_origine_transformation_fta = "Non";
-}
-*/
+  //Produit Transformé en France
+  $champ = "origine_transformation_fta";
+  switch (${$champ}) {
+  case 2:
+  $description_origine_transformation_fta = "Oui";
+  break;
+  default:
+  $description_origine_transformation_fta = "Non";
+  }
+ */
 
 /* * ***********
   Début Code PDF
@@ -126,9 +123,12 @@ class temp_xfpdf extends xfpdf {
         //           . "\nTel: 04.90.80.99.99 - Fax: 04.90.80.99.80 - Fax Gestion des Ventes: 04.74.05.32.68"
         //         ;
         //Commentaire de bas de page dynamique
-        $_SESSION["id_geo"] = 5;
-        mysql_table_load("geo");
-        $commentaire = $_SESSION["adresse_geo"] . "\nTel: " . $_SESSION["telephone_geo"] . " - Fax : " . $_SESSION["fax_geo"] . " - Fax Gestion des Ventes : " . $_SESSION["fax_commercial_geo"]
+        $geoModel = new GeoModel(5);
+        $adresseGeo = $geoModel->getDataField(GeoModel::FIELDNAME_ADRESSE_GEO)->getFieldValue();
+        $telephoneGeo = $geoModel->getDataField(GeoModel::FIELDNAME_TELEPHONE_GEO)->getFieldValue();
+        $faxGeo = $geoModel->getDataField(GeoModel::FIELDNAME_FAX_GEO)->getFieldValue();
+        $faxCommercialeGeo = $geoModel->getDataField(GeoModel::FIELDNAME_FAX_COMMERCIAL_GEO)->getFieldValue();
+        $commentaire = $adresseGeo . "\nTel: " . $telephoneGeo . " - Fax : " . $faxGeo . " - Fax Gestion des Ventes : " . $faxCommercialeGeo
                 . "\nInformations susceptibles d'être modifiées, seule l'étiquette fait foi";
 
         //Numéro de page centré

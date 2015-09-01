@@ -24,11 +24,12 @@ class EnvironmentDev extends EnvironmentAbstract {
         $this->getConf()->setExecEnvironnement(EnvironmentConf::ENV_DEV);
         $this->getConf()->setLdapServerName(EnvironmentConf::LDAP_SERVER_NAME);
         $this->getConf()->setLdapServiceEnable(FALSE);
-        $this->getConf()->setMysqlServerName('dev-intranet.agis.fr');
-        $this->getConf()->setMysqlDatabaseName('intranet_V3_0');
-        $this->getConf()->setMysqlDatabaseAuthentificationUsername('root');
-        $this->getConf()->setMysqlDatabaseAuthentificationPassword('');
-        $this->getConf()->setMysqlDatabaseAuthentificationTableName('salaries');
+        $this->getConf()->setMysqlServerName("dev-intranet.agis.fr");
+        $this->getConf()->setMysqlDatabaseName("intranet_V3_0");
+        $this->getConf()->setMysqlDatabaseAuthentificationUsername("root");
+        $this->getConf()->setMysqlDatabaseAuthentificationPassword("");
+        $this->getConf()->setMysqlDatabaseAuthentificationTableName("salaries");
+        $this->getConf()->setMysqlDatabaseConnectionOldMethode(TRUE);
         $this->getConf()->setSessionDebugEnable(FALSE);
         $this->getConf()->setSmtpServerName('smtp05401.grpldc.com');
         $this->getConf()->setSmtpServiceEnable(FALSE);

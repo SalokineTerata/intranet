@@ -6,8 +6,7 @@
  *
  * @author tp4300001
  */
-
-class IntranetModulesModel  {
+class IntranetModulesModel extends AbstractModel {
 
     const TABLENAME = 'intranet_modules';
     const KEYNAME = 'id_intranet_modules';
@@ -17,6 +16,5 @@ class IntranetModulesModel  {
     const FIELDNAME_VERSION_INTRANET_MODULES = 'version_intranet_modules';
     const FIELDNAME_VISIBLE_INTRANET_MODULES = 'visible_intranet_modules';
     const FIELDNAME_PUBLIC_INTRANET_MODULES = 'public_intranet_modules';
-
 
 }

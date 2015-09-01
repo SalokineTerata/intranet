@@ -69,6 +69,7 @@ if ($id_user) {
     $tableau_fiche = Lib::getParameterFromRequest('tableau_fiche');
     $visualiser_fiche_total_fta = Lib::getParameterFromRequest('visualiser_fiche_total_fta');
     $order_common = Lib::getParameterFromRequest('order_common', FtaModel::FIELDNAME_DATE_ECHEANCE_FTA);
+    $numeroDePageCourante = Lib::getParameterFromRequest('numeroPage',  AccueilFta::VALUE_1);
 
 
     /*
@@ -179,6 +180,7 @@ if ($id_user) {
             //$tableau_fiche = AccueilFta::getTableauFiche($id_fta_etat, $choix, $isLimit, $order_common);
             $tableau_fiche = AccueilFta::getHtmlTableauFiche();
             $fileAriane = AccueilFta::getFileAriane();
+            //$pagination = AccueilFta::paginer(AccueilFta::VALUE_MAX_PAR_PAGE, $numeroDePageCourante, AccueilFta::VALUE_4, AccueilFta::VALUE_4, AccueilFta::VALUE_1, AccueilFta::VALUE_1);
         }
         /*
           //        if ($isLimit) {
@@ -199,7 +201,7 @@ if ($id_user) {
 
 //Construction de la page <td>&nbsp</td>
     echo '
-    <form method=post action='.$page_action.'>
+    <form method=post action=' . $page_action . '>
         <input type=hidden name=id_fta_etat value=' . $id_fta_etat_encours . '>
         <input type=hidden name=nom_fta_etat value=' . $nom_fta_etat_encours . '>
         <table width=100% border=1 valign=top cellspacing=0>

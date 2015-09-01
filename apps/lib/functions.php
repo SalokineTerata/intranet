@@ -331,7 +331,7 @@ function recuperation_donnees_recherche($module, $url_page_depart, $module_table
                                FROM $t
                                WHERE priorite_moteur_de_recherche = 1
                                order by nom_champ_usuel_moteur_de_recherche ";
-            $resultat = DatabaseOperation::query($desc) or die('Erreur SQL !' . $desc . '<br>' . mysql_error());
+            $resultat = DatabaseOperation::convertSqlStatementKeyAndOneFieldToArray($desc) or die('Erreur SQL !' . $desc . '<br>' . mysql_error());
 
             if (!strstr($url_page_depart, '?'))
                 $lien = $url . "?url_page_depart=$url_page_depart&nb_limite_resultat=$nb_limite_resultat&champ_recherche=$champ_recherche_aux&operateur_recherche=$operateur_recherche_aux&texte_recherche=$texte_recherche_aux&nbligne=$nbligne&nbcol=$nbcol&nb_col_courant=$cpt_col&nb_ligne_courant=$cpt_ligne&champ_courant=";
@@ -341,7 +341,7 @@ function recuperation_donnees_recherche($module, $url_page_depart, $module_table
             // remplissage de la première liste déroulante
             $liste_champ.="<option value" . $lien;
             $liste_champ.="=>Selectionnez </option>";
-            while ($enr = mysql_fetch_array($resultat, MYSQL_NUM)) {
+            foreach ($resultat as $enr) {
                 if ($champ_recherche[$cpt_ligne][$cpt_col] != '') {   // Si la categorie est déja selectionnée
                     if ($enr[0] == $champ_recherche[$cpt_ligne][$cpt_col])
                         $selected = 'selected';
@@ -360,9 +360,9 @@ function recuperation_donnees_recherche($module, $url_page_depart, $module_table
                                FROM $t
                                WHERE priorite_moteur_de_recherche = 0
                                order by nom_champ_usuel_moteur_de_recherche";
-            $resultat = DatabaseOperation::query($desc) or die('Erreur SQL !' . $desc . '<br>' . mysql_error());
+            $resultat = DatabaseOperation::convertSqlStatementKeyAndOneFieldToArray($desc) or die('Erreur SQL !' . $desc . '<br>' . mysql_error());
 
-            while ($enr = mysql_fetch_array($resultat, MYSQL_NUM)) {
+            foreach ($resultat as $enr) {
                 if ($champ_recherche[$cpt_ligne][$cpt_col] != '') {   // Si la categorie est déja selectionnée
                     if ($enr[0] == $champ_recherche[$cpt_ligne][$cpt_col])
                         $selected = 'selected';
@@ -415,8 +415,10 @@ function recuperation_donnees_recherche($module, $url_page_depart, $module_table
                                   WHERE
                                   $aux3 = '$aux4'";
 
-                $result1 = DatabaseOperation::query($desc5) or die('Erreur SQL !' . $desc5 . '<br>' . mysql_error());
-                $aux5 = mysql_fetch_array($result1, MYSQL_NUM);
+                $result1 = DatabaseOperation::convertSqlStatementKeyAndOneFieldToArray($desc5) or die('Erreur SQL !' . $desc5 . '<br>' . mysql_error());
+                foreach ($result1 as $rows1) {
+                    $aux5 = $rows1;
+                }
 
                 $nom_table = $aux5[0];
                 $nom_champ = $aux5[1];
@@ -425,17 +427,24 @@ function recuperation_donnees_recherche($module, $url_page_depart, $module_table
 
                 $rech_type = " SELECT $nom_champ
                                       FROM $nom_table";
-                $rech_type_res = DatabaseOperation::query($rech_type) or die('Erreur SQL !' . $rech_type . '<br>' . mysql_error());
+                $rech_type_res = DatabaseOperation::queryPDO($rech_type) or die('Erreur SQL !' . $rech_type . '<br>' . mysql_error());
 
                 // type du champ sur lequel on fait la recherche
-                $type = mysql_field_type($rech_type_res, 0);
+                $type = $rech_type_res->getColumnMeta(0);
+
+                /**
+                 * le type de champs diffère entre PDO et Mysql modifier la table intranet_moteur_de_recherche_type_de_champ
+                 */
 
                 // recherche de l'identifiant du type :
                 $rech_id_type = " SELECT  id_intranet_moteur_de_recherche_type_de_champ
                                     FROM intranet_moteur_de_recherche_type_de_champ
-                                    WHERE type_intranet_moteur_de_recherche_type_de_champ = '$type'";
-                $rech_id_type_res = DatabaseOperation::query($rech_id_type) or die('Erreur SQL !' . $rech_id_type . '<br>' . mysql_error());
-                $tmp = mysql_fetch_array($rech_id_type_res, MYSQL_NUM);
+                                    WHERE type_intranet_moteur_de_recherche_type_de_champ = '" . $type["native_type"] . "'";
+                $rech_id_type_res = DatabaseOperation::convertSqlStatementKeyAndOneFieldToArray($rech_id_type) or die('Erreur SQL !' . $rech_id_type . '<br>' . mysql_error());
+                foreach ($rech_id_type_res as $rowsrech_id_type_res) {
+                    $tmp = $rowsrech_id_type_res;
+                }
+
 
                 // identifiant du type du champ sur lequel on fait la recheche
                 $id_type = $tmp[0];
@@ -445,19 +454,20 @@ function recuperation_donnees_recherche($module, $url_page_depart, $module_table
                 $sql = " SELECT op_intranet_moteur_de_recherche_association_type_operateur
                               FROM intranet_moteur_de_recherche_association_type_operateur
                               WHERE type_intranet_moteur_de_recherche_association_type_operateur ='$id_type'";
-                $resultat2 = DatabaseOperation::query($sql) or die('Erreur SQL !' . $sql . '<br>' . mysql_error());
+                $resultat2 = DatabaseOperation::convertSqlStatementKeyAndOneFieldToArray($sql) or die('Erreur SQL !' . $sql . '<br>' . mysql_error());
 
-                while ($enr2 = mysql_fetch_array($resultat2, MYSQL_NUM)) {
+                foreach ($resultat2 as $enr2) {
                     $sql2 = " SELECT *
                                       FROM intranet_moteur_de_recherche_operateur_sur_champ
                                       WHERE  id_intranet_moteur_de_recherche_operateur_sur_champ='$enr2[0]'";
-                    $resultat3 = DatabaseOperation::query($sql2) or die('Erreur SQL !' . $sql2 . '<br>' . mysql_error());
-                    $enr3 = mysql_fetch_array($resultat3, MYSQL_NUM);
-                    if ($operateur_recherche[$cpt_ligne][$cpt_col] != '') {
-                        if ($enr3[0] == $operateur_recherche[$cpt_ligne][$cpt_col])
-                            $selected = 'selected';
-                        else
-                            $selected = '';
+                    $resultat3 = DatabaseOperation::convertSqlStatementKeyAndOneFieldToArray($sql2) or die('Erreur SQL !' . $sql2 . '<br>' . mysql_error());
+                    foreach ($resultat3 as $enr3) {
+                        if ($operateur_recherche[$cpt_ligne][$cpt_col] != '') {
+                            if ($enr3[0] == $operateur_recherche[$cpt_ligne][$cpt_col])
+                                $selected = 'selected';
+                            else
+                                $selected = '';
+                        }
                     }
                     // remplissage de la deuxieme liste deroulante
                     if (!strstr($url_page_depart, '?'))
@@ -488,11 +498,11 @@ function recuperation_donnees_recherche($module, $url_page_depart, $module_table
                     case $operateur_recherche[$cpt_ligne][$cpt_col] == 9 : //Liste
 
                         $req_temp = "SELECT DISTINCT $nom_champ FROM $nom_table ORDER BY $nom_champ";
-                        $result_temp = DatabaseOperation::query($req_temp);
+                        $result_temp = DatabaseOperation::convertSqlStatementWithoutKeyToArray($req_temp);
                         $saisie_utilisateur = "<select size=1 name=$name_val value=$temp>";
                         $verrou = 0;
                         $oui_non = 1;
-                        while ($rows = mysql_fetch_array($result_temp)) {
+                        foreach ($result_temp as $rows) {
 
                             if ("$rows[0]" == "$temp") {
                                 //echo "$temp";
@@ -1218,8 +1228,8 @@ function recursif($resultat, $id_recherche, $champ_id_pere, $champ_id_fils, $cha
     $return[$i] = null;
     while ($i < ($nombre_ligne)) {
 //$id_recherche;
-
-        if (mysql_result($resultat, $i, $champ_id_pere) == $id_recherche) {
+        foreach ($resultat as $value) {
+            if ($value[$champ_id_pere] == $id_recherche) {
                 //Enregistrement des informations
                 //echo "test".$extension[3];
                 //Structure
@@ -1229,31 +1239,31 @@ function recursif($resultat, $id_recherche, $champ_id_pere, $champ_id_fils, $cha
                 if ($extension[1]) {
                     $deploy = $extension[0]
                             //. $extension[1]
-                        . mysql_result($resultat, $i, $champ_id_fils)
+                            . $value[$champ_id_fils]
                             . $extension[2]
                     ;
                 }
                 if ($extension[4]) {
                     $html_link_1 = "<a href="
                             . $extension[4]
-                        . mysql_result($resultat, $i, $champ_id_fils)
+                            . $value[$champ_id_fils]
                             . " >"
                     ;
                     $html_link_2 = "</a>";
                 }
 
                 //Données
-            if (isset($return[1]) and mysql_result($resultat, $i, $champ_id_fils)) {
+                if (isset($return[1]) and $value[$champ_id_fils]) {
                     $return[1] .= ",";
                 }
-            $return[1] .= mysql_result($resultat, $i, $champ_id_fils);
+                $return[1] .= $value[$champ_id_fils];
 
                 //Structure et Données
-                $return[2] .= $tab_return . $tab_espace . $deploy . " " . $html_link_1 . stripslashes(mysql_result($resultat, $i, $champ_valeur)) . $html_link_2;
+                $return[2] .= $tab_return . $tab_espace . $deploy . " " . $html_link_1 . stripslashes($value[$champ_valeur]) . $html_link_2;
 
 
                 $id_recherche_ancien = $id_recherche;
-            $id_recherche = mysql_result($resultat, $i, $champ_id_fils);
+                $id_recherche = $value[$champ_id_fils];
 
                 //Appel recursif de la fonction
                 //echo "<br>".$id_recherche." ".$extension[3]." --- ". strstr($extension[3], ",".$id_recherche.",")."<br>";
@@ -1272,7 +1282,7 @@ function recursif($resultat, $id_recherche, $champ_id_pere, $champ_id_fils, $cha
                 }
                 $id_recherche = $id_recherche_ancien;
             }
-
+        }
         $i = $i + 1;
     }
 
@@ -1361,8 +1371,8 @@ function arborescence_construction($table, $champ_valeur, $champ_id_fils, $champ
     ;
 
     //echo $requete_principale;
-    $resultat = DatabaseOperation::query($requete_principale);
-    $nombre_ligne = mysql_num_rows($resultat);
+    $resultat = DatabaseOperation::convertSqlStatementWithoutKeyToArray($requete_principale);
+    $nombre_ligne = count($resultat);
 
     /*
       Corps de la fonction

@@ -29,7 +29,6 @@ class FtaChapitreModel extends AbstractModel {
     const FIELDNAME_NOM_CHAPITRE = 'nom_fta_chapitre';
     const FIELDNAME_NOM_USUEL_CHAPITRE = 'nom_usuel_fta_chapitre';
 
-
     public function __construct($paramId = NULL, $paramIsCreateRecordsetInDatabaseIfKeyDoesntExist = AbstractModel::DEFAULT_IS_CREATE_RECORDSET_IN_DATABASE_IF_KEY_DOESNT_EXIST) {
         parent::__construct($paramId, $paramIsCreateRecordsetInDatabaseIfKeyDoesntExist);
     }
@@ -72,8 +71,8 @@ class FtaChapitreModel extends AbstractModel {
         $arrayFtaSuiviCorrection = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
                         'SELECT ' . FtaSuiviProjetModel::FIELDNAME_CORRECTION_FTA_SUIVI_PROJET . ',' . FtaSuiviProjetModel::FIELDNAME_NOTIFICATION_FTA_SUIVI_PROJET
                         . ' FROM ' . FtaSuiviProjetModel::TABLENAME
-                        . 'WHERE ' . FtaModel::KEYNAME . '=' . $paramIdFta .
-                        ' AND ' . FtaSuiviProjetModel::FIELDNAME_ID_FTA_CHAPITRE . '=' . $paramIdChapitre . ' '
+                        . ' WHERE ' . FtaModel::KEYNAME . '=' . $paramIdFta
+                        . ' AND ' . FtaSuiviProjetModel::FIELDNAME_ID_FTA_CHAPITRE . '=' . $paramIdChapitre . ' '
         );
         if ($arrayFtaSuiviCorrection) {
             foreach ($arrayFtaSuiviCorrection as $rowsFtaSuiviCorrection) {
@@ -208,7 +207,7 @@ class FtaChapitreModel extends AbstractModel {
                 . '=' . FtaSuiviProjetModel::TABLENAME . '.' . FtaSuiviProjetModel::FIELDNAME_ID_FTA_CHAPITRE . ' ) '
                 . ' AND ( ( ' . FtaWorkflowStructureModel::TABLENAME . '.' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_PROCESSUS
                 . ' = \'' . $paramIdProcessus . '\' '
-                . ' AND `' . FtaSuiviProjetModel::TABLENAME . '.' . FtaSuiviProjetModel::FIELDNAME_ID_FTA . ' = \'' . $paramIdFta . '\' ) )'
+                . ' AND ' . FtaSuiviProjetModel::TABLENAME . '.' . FtaSuiviProjetModel::FIELDNAME_ID_FTA . ' = \'' . $paramIdFta . '\' ) )'
         ;
         DatabaseOperation::execute($reqDenotification);
 

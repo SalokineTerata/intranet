@@ -102,7 +102,15 @@ function afficher_message($titre, $message, $redirection) {
  * *******************************************************************************
  */
 
-function afficher_moteur_recherche($module, $id_recherche, $etat_table, $id_recherche_etat, $abreviation_recherche_etat, $nom_recherche_recherche_etat, $image_bordure, $image_recherche, $champ_retour, $nb_limite_resultat, $url_page_depart, $QUERY_STRING, $PHP_SELF, $nbligne, $nbcol, $champ_recherche, $operateur_recherche, $texte_recherche, $champ_courant, $operateur_courant, $texte_courant, $nb_col_courant, $ajout_col, $requete_resultat, $tab_resultat
+function afficher_moteur_recherche($module
+, $id_recherche, $etat_table, $id_recherche_etat
+, $abreviation_recherche_etat, $nom_recherche_recherche_etat, $image_bordure
+, $image_recherche, $champ_retour, $nb_limite_resultat
+, $url_page_depart, $QUERY_STRING, $PHP_SELF
+, $nbligne, $nbcol, $champ_recherche
+, $operateur_recherche, $texte_recherche, $champ_courant
+, $operateur_courant, $texte_courant, $nb_col_courant
+, $ajout_col, $requete_resultat, $tab_resultat
 ) {
     /*
       Définition des Variables
@@ -159,13 +167,19 @@ function afficher_moteur_recherche($module, $id_recherche, $etat_table, $id_rech
      <center>
      <table width=100% border=1 valign=top cellspacing=0>
      <tr>
-     <td class=titre_principal><img src=$image_recherche WIDTH=70 HEIGHT=50 align=left> <br> Recherche <br><br></td>
+     <td class=titre_principal><img src=" . $image_recherche . " WIDTH=70 HEIGHT=50 align=left> <br> Recherche <br><br></td>
      </tr>
      <tr>
      <td colspan=3> ";
 
 
-    $return.=recuperation_donnees_recherche($module, $url_page_depart, $module_table, $champ_retour, $nb_limite_resultat, $nbligne, $nbcol, $champ_recherche, $operateur_recherche, $texte_recherche, $champ_courant, $operateur_courant, $texte_courant, $nb_col_courant, $nb_ligne_courant, $ajout_col
+    $return.=recuperation_donnees_recherche(
+            $module, $url_page_depart, $module_table
+            , $champ_retour, $nb_limite_resultat, $nbligne
+            , $nbcol, $champ_recherche, $operateur_recherche
+            , $texte_recherche, $champ_courant, $operateur_courant
+            , $texte_courant, $nb_col_courant, $nb_ligne_courant
+            , $ajout_col
     );
 
     $return.= "</td>
@@ -191,8 +205,8 @@ function afficher_moteur_recherche($module, $id_recherche, $etat_table, $id_rech
     if ($requete_resultat) {
 
         //On vérifie si le résultat n'est pas nul
-        $result_requete_resultat = DatabaseOperation::query($requete_resultat);
-        if (!mysql_num_rows($result_requete_resultat)) {
+        $result_requete_resultat = DatabaseOperation::convertSqlStatementWithoutKeyToArray($requete_resultat);
+        if (!$result_requete_resultat) {
             $titre = 'Moteur de Recherche';
             $message = 'Vos critères de recherche ne donnent aucun résultat.';
             afficher_message($titre, $message, $redirection);
@@ -209,22 +223,22 @@ function afficher_moteur_recherche($module, $id_recherche, $etat_table, $id_rech
             $req.= "WHERE " . $abreviation_recherche_etat . "='V' OR " . $abreviation_recherche_etat . "='E' ";
         }
 
-        $result = DatabaseOperation::query($req);
+        $result = DatabaseOperation::convertSqlStatementWithoutKeyToArray($req);
 
-        while ($rows = mysql_fetch_array($result)) {
+        foreach ($result as $rows) {
             //Construction de la reqûete de resultat propre à cet Etat
             $req1 = "$requete_resultat AND " . $id_recherche_etat . "=" . $rows[$id_recherche_etat];
-            $result1 = DatabaseOperation::query($req1);
+            $result1 = DatabaseOperation::convertSqlStatementWithoutKeyToArray($req1);
 
             //Si il y a des résltat on commence la construction du tableau
-            if (mysql_num_rows($result1)) {
+            if ($result1) {
 
                 //Affichage de l'en-tête de regroupement
 
                 $return.= "<tr><td class=titre>" . $rows["nom_" . $etat_table] . "</td></tr>";
 
                 //Affichage des fiches
-                while ($rows1 = mysql_fetch_array($result1)) {
+                foreach ($result1 as $rows1) {
 
                     //echo $choix;
                     $return.= "<tr><td>"
@@ -319,11 +333,11 @@ function affichage_classification_article($id_fta, $extension = null) {
 
 
     //Recherche des classifications
-    $req = "SELECT * FROM classification_fta WHERE id_fta=$id_fta";
-    $result = DatabaseOperation::query($req);
-    $num = mysql_num_rows($result);
-    if ($num) {//Il existe des classification
-        while ($rows = mysql_fetch_array($result)) {//Parcours des classifications
+    $array = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
+                    "SELECT * FROM classification_fta WHERE id_fta=" . $id_fta
+    );
+    if ($array) {//Il existe des classification
+        foreach ($array as $rows) {//Parcours des classifications
             //Préparation de la boucle pour récupérer le chemin
             $return[$i][0] = $rows["id_classification_fta"];
             $id_classification_arborescence_article = $rows["id_classification_arborescence_article"];
@@ -394,10 +408,14 @@ function affichage_classification_chemin($id_classification_arborescence_article
                 . "AND `classification_arborescence_article_categorie`.`id_classification_arborescence_article_categorie` = `classification_arborescence_article_categorie_contenu`.`id_classification_arborescence_article_categorie` )"
                 . "AND id_classification_arborescence_article=$id_classification_arborescence_article "
         ;
-        $result = DatabaseOperation::query($req);
-        $nom_classification_arborescence_article_categorie_contenu = mysql_result($result, 0, "nom_classification_arborescence_article_categorie_contenu");
-        $nom_classification_arborescence_article_categorie = mysql_result($result, 0, "nom_classification_arborescence_article_categorie");
-        $ascendant_classification_arborescence_article_categorie_contenu = mysql_result($result, 0, "ascendant_classification_arborescence_article_categorie_contenu");
+        $array = DatabaseOperation::convertSqlStatementWithoutKeyToArray($req);
+        if ($array) {
+            foreach ($array as $rows) {
+                $nom_classification_arborescence_article_categorie_contenu = $rows["nom_classification_arborescence_article_categorie_contenu"];
+                $nom_classification_arborescence_article_categorie = $rows["nom_classification_arborescence_article_categorie"];
+                $ascendant_classification_arborescence_article_categorie_contenu = $rows["ascendant_classification_arborescence_article_categorie_contenu"];
+            }
+        }
 
         //Création du lien hypertexte
         if ($extension["lien"]) {

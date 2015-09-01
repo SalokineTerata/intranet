@@ -110,8 +110,10 @@ class Lib {
     public static function getModuleId() {
 
         $req = 'SELECT id_intranet_modules FROM intranet_modules WHERE nom_intranet_modules = \'' . Lib::$module . '\'';
-        $result = DatabaseOperation::query($req, 'table');
-        $return = $result[0]['id_intranet_modules'];
+        $result = DatabaseOperation::convertSqlStatementWithoutKeyToArray($req, 'table');
+        foreach ($result as $rows) {
+            $return = $rows['id_intranet_modules'];
+        }
 //print_r ($return);
         return $return;
     }

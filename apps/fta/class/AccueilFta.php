@@ -1,22 +1,10 @@
 <?php
 
-/*
- * Copyright (C) 2015 tp4300001
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+/**
+ * Page d'accueil
+ * 
+ * @author Franckwastaken
  */
-
 class AccueilFta {
 
     const VALUE_0 = 0;
@@ -34,6 +22,7 @@ class AccueilFta {
     const VALUE_12 = 12;
     const VALUE_100 = 100;
     const VALUE_100_POURCENTAGE = '100%';
+    const VALUE_MAX_PAR_PAGE = 15;
 
     protected static $abrevationFtaEtat;
     protected static $arrayFtaEtat;
@@ -107,8 +96,7 @@ class AccueilFta {
      * Fonction de pagination des résultats
      *
      * Retourne le code HTML des liens de pagination
-     *
-     * @param integer nombre de résultats total
+     *    
      * @param integer nombre de résultats par page
      * @param integer numéro de la page courante
      * @param integer nombre de pages avant la page courante
@@ -117,12 +105,12 @@ class AccueilFta {
      * @param integer afficher le lien vers la dernière page (1=oui / 0=non)
      * @return string code HTML des liens de pagination
      * */
-    function paginer($nb_results, $nb_results_p_page, $numero_page_courante, $nb_avant, $nb_apres, $premiere, $derniere) {
+    public static function paginer($nb_results_p_page, $numero_page_courante, $nb_avant, $nb_apres, $premiere, $derniere) {
         // Initialisation de la variable a retourner
         $resultat = '';
 
         // nombre total de pages
-        $nb_pages = ceil($nb_results / $nb_results_p_page);
+        $nb_pages = ceil(self::$nombreFta / $nb_results_p_page);
         // nombre de pages avant
         $avant = $numero_page_courante > ($nb_avant + 1) ? $nb_avant : $numero_page_courante - 1;
         // nombre de pages apres

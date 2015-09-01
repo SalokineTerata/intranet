@@ -489,16 +489,16 @@ class FtaSuiviProjetModel extends AbstractModel {
     public static function getFtaTauxValidation($paramIdFta) {
 
 //Dictionnaire des données
-        $return;        //Tableau de résultat
         $return[AccueilFta::VALUE_0];     //Pourcentage globale de la validation
         $return[AccueilFta::VALUE_1];     //Tableau de résultat par id_fta_processus des taux de validation
         $return[AccueilFta::VALUE_2];     //Tableau de résultat par id_fta_processus des état des processus (Terminé, En cours, En attente)
-
         /*
          * Récupération du l'état de la FTA pour connatire le cycle de vie en cours
          */
         $ftaModel = new FtaModel($paramIdFta);
-
+        $idFtaEtat = $ftaModel->getDataField(FtaModel::FIELDNAME_ID_FTA_ETAT)->getFieldValue();
+        $ftaEtatModel = new FtaEtatModel($idFtaEtat);
+        $abreviation_fta_etat = $ftaEtatModel->getDataField(FtaEtatModel::FIELDNAME_ABREVIATION)->getFieldValue();
         /*
           Corps de la fonction
          */
@@ -536,6 +536,21 @@ class FtaSuiviProjetModel extends AbstractModel {
         } else {
             $return[AccueilFta::VALUE_0] = AccueilFta::VALUE_0;
         }
+        $arrayCycle = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
+                        'SELECT DISTINCT ' . FtaProcessusCycleModel::FIELDNAME_PROCESSUS_INIT
+                        . ' FROM ' . FtaProcessusCycleModel::TABLENAME
+                        . ' WHERE ' . FtaProcessusCycleModel::FIELDNAME_FTA_ETAT . '=\'' . $abreviation_fta_etat
+                        . '\' AND ' . FtaProcessusCycleModel::FIELDNAME_WORKFLOW . '=' . $ftaModel->getDataField(FtaModel::FIELDNAME_WORKFLOW)->getFieldValue()
+        );
+        foreach ($arrayCycle as $rowsCycle) {
+            $id_fta_processus = $rowsCycle[FtaProcessusCycleModel::FIELDNAME_PROCESSUS_INIT];
+            $taux_validation_processus = FtaProcessusModel::getValideProcessusEncours($paramIdFta, $id_fta_processus, $ftaModel->getDataField(FtaModel::FIELDNAME_WORKFLOW)->getFieldValue());
+
+            //Détail par processus
+            $return[1][$id_fta_processus] = $taux_validation_processus;
+        }//Fin du balayage
+
+
         return $return;
     }
 

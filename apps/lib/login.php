@@ -74,7 +74,7 @@ if ($login) {
         if ($identite == $login) {
             $tentative++;
             if ($tentative >= 3) {
-                $unique = DatabaseOperation::convertSqlStatementWithoutKeyToArray('SELECT * FROM salaries WHERE login=' . $identite . ' AND blocage=\'oui\'');
+                $unique = DatabaseOperation::convertSqlStatementWithoutKeyToArray('SELECT id_user FROM salaries WHERE login=' . $identite . ' AND blocage=\'oui\'');
                 $reponse = count($unique);
                 if ($reponse != 1) {
 
@@ -111,14 +111,24 @@ if ($login) {
         }
 
         /* fin nouvelles fonctions tests tentatives */
-        header('Location: '.$page);
+        header('Location: ' . $page);
     } else {
 
         //Création des variables une fois l'authentification terminé
         if (!$id_user) {
 
             $arrayR1 = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
-                            'SELECT * FROM salaries WHERE ( '
+                            'SELECT prenom'
+                            . ',id_catsopro'
+                            . ',id_user'
+                            . ',id_catsopro'
+                            . ',id_service'
+                            . ',id_type'
+                            . ',nom'
+                            . ',mail'
+                            . ',lieu_geo'
+                            . ',portail_wiki_salaries'
+                            . ' FROM salaries WHERE ( '
                             . '(login = \'' . $login . '\') AND '
                             . '(blocage=\'non\') AND '
                             . '(actif=\'oui\') '
@@ -194,7 +204,7 @@ if ($login) {
             /* --- redirection si ok sur groupe et service propre --- */
             //$q1 = DatabaseOperation::query('SELECT * FROM $mysql_table_authentification WHERE ((login = '$login') AND (pass = '$pass'))');
             //Page par défaut après un login réussi
-            header('Location: '.$page);
+            header('Location: ' . $page);
         }
     }
 }

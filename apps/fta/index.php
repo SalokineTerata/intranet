@@ -24,7 +24,7 @@
 require_once '../inc/main.php';
 print_page_begin($disable_full_page, $menu_file);
 
-
+echo DatabaseOperation::databaseAcces()->getAttribute(PDO::ATTR_SERVER_INFO);
 /*
  * Initilisation
  */
@@ -156,6 +156,9 @@ if ($id_user) {
      */
     AccueilFta::initAccueil($id_user, $id_fta_etat, $nomFtaEtat, $synthese_action, $idFtaRoleEncours, $order_common, $lieuGeo);
 
+
+'ALTER TABLE fta_action_role ADD FOREIGN KEY (id_fta_role) references fta_role(id_fta_role);
+';
     /*
      * Génération de la barre de navigation de la page d'accueil
      */

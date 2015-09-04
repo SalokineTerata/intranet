@@ -22,11 +22,24 @@ $userModel = new UserModel($paramIdUser);
 $userView = new UserView($userModel);
 $userView->setIsEditable(TRUE);
 identification1('salaries', $login, $pass);
-UserModel::securadmin(4, $id_type);
 if ($paramRech == '1') {
     /* Recherche des infos sur le salarie */
     $arrayUserDetail = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
-                    'SELECT * FROM ' . UserModel::TABLENAME
+                    'SELECT ' . UserModel::FIELDNAME_NOM
+                    . ',' . UserModel::FIELDNAME_PRENOM
+                    . ',' . UserModel::FIELDNAME_ID_CATSOPRO
+                    . ',' . UserModel::FIELDNAME_ID_SERVICE
+                    . ',' . UserModel::FIELDNAME_ID_TYPE
+                    . ',' . UserModel::FIELDNAME_LOGIN
+                    . ',' . UserModel::FIELDNAME_PASSWORD
+                    . ',' . UserModel::FIELDNAME_ASENDANT_ID_SALARIES
+                    . ',' . UserModel::FIELDNAME_MAIL
+                    . ',' . UserModel::FIELDNAME_ECRITURE
+                    . ',' . UserModel::FIELDNAME_MEMBRE_CE
+                    . ',' . UserModel::FIELDNAME_LIEU_GEO
+                    . ',' . UserModel::FIELDNAME_NEWSDEFIL
+                    . ',' . UserModel::FIELDNAME_DATE_CREATION_SALARIES
+                    . ' FROM ' . UserModel::TABLENAME
                     . ' WHERE ' . UserModel::KEYNAME . '=' . $paramIdUser
     );
     if (!$arrayUserDetail)
@@ -140,22 +153,8 @@ if ($paramRech == '1') {
                             /*
                              * Association à un groupe d'utilisateur
                              */
-//                            $nom_liste = 'ascendant_id_salaries';
-//                            $liste = '<tr><td <td align=right>' . mysql_field_desc('salaries', '$nom_liste') . ' ';
-//                            $req_liste = 'SELECT id_user, login '
-//                                    . 'FROM salaries '
-//                                    . 'ORDER BY login '
-//                            ;
-//                            if (${'sal_' . $nom_liste}) {
-//                                $id_defaut = ${'sal_' . $nom_liste};
-//                            } else {
-//                                $id_defaut = $id_user;
-//                            }
-//
-//                            $liste .= '</td><td align=left>' . afficher_requete_en_liste_deroulante($req_liste, $id_defaut, $nom_liste);
-//                            $liste.= '</td></tr>';
-//                            $bloc .=$liste;
-                            $bloc .= $userView->getHtmlDataField(UserModel::FIELDNAME_ASENDANT_ID_SALARIES);
+
+//                            $bloc .= $userView->getHtmlDataField(UserModel::FIELDNAME_ASENDANT_ID_SALARIES);
 
                             /*
                              * Identifiant
@@ -256,47 +255,7 @@ if ($paramRech == '1') {
                                             </center>
                                             </td>
 
-                                            <?php
-                                            /*      echo '<td  class=loginFFFFFFdroit>
-                                              <center><br>
-                                              Service <br><select name=\'sal_service\'>\n';
-                                             */
-                                            /* Constitution de la liste déroulante des noms des services */
-                                            /*
-                                              $req='select id_service, intitule_ser from services order by intitule_ser';
-                                              $result=DatabaseOperation::query($req);
-                                              if ($result!= false)
-                                              {
-                                              while ($row=mysql_fetch_row($result))
-                                              {
-                                              echo ('<option value=\'$row[0]\'');
-                                              if ($row[0]==$sal_service)
-                                              echo ('selected');
-                                              echo ('>$row[1]</option>');
-                                              }
-                                              }
-                                              echo ('</select>\n');
-                                             */
 
-//Service de l'utilisateur
-                                            $nom_liste = 'sal_service';
-                                            $liste = '<td align=right><center><br>' . mysql_field_desc('access_materiel_service', 'nom_service') . ' ';
-                                            $req_liste = 'SELECT K_service, nom_service '
-                                                    . 'FROM access_materiel_service '
-                                                    . 'ORDER BY nom_service '
-                                            ;
-                                            if (${$nom_liste}) {
-                                                $id_defaut = ${$nom_liste};
-                                            } else {
-                                                $id_defaut = '';
-                                            }
-
-                                            $liste .= '<br>' . AccueilFta::afficherRequeteEnListeDeroulante($req_liste, $id_defaut, $nom_liste);
-                                            $liste.= '</td>';
-                                            echo $liste;
-                                            ?>
-                                            </center>
-                                            </td>
                                             <td  class='loginFFFFFFdroit'>
                                             <center><br>
                                                 Type<br>
@@ -317,246 +276,52 @@ if ($paramRech == '1') {
                                                 ?>
                                             </center>
                                             </td>
-                                            <td  class='loginFFFFFFdroit'>
-                                            <center>
-                                                Droit d'&eacute;criture
-                                                <?php
-                                                echo ('<select name=\'ecriture\'>' . makeSelectListChecked($mysql_database, 'salaries', 'ecriture', $ecriture) . '</select>');
-                                                ?>
-                                            </center>
-                                            </td>
-                                            </tr>
-                                        </table>
 
-
-                                        <table width='500' border='1' cellspacing='1' cellpadding='3' align='center'>
-
+                                        </table>  
+                                        <br>                 
+                                        <?php
+                                        /*                                         * ***************************************************
+                                          Construction des droits d'accès pour tous les modules:
+                                         * ***************************Boris Sanègre 2003.03.25 */
+                                        // require ('droits_acces.inc');  
+                                        IntranetDroitsAccesModel::BuildHtmlDroitsAcces($paramIdUser);
+                                        ?>
+                                        <table width='500' border='0' cellspacing='4' cellpadding='0' align='center'>
                                             <tr>
-                                                <td class='logFFE5B2' colspan='8'>
-                                            <center>
-                                                Fiches techniques - Fiche Identité Produit (FIP)
-                                            </center>
-                                            </td>
-                                            </tr>
-
-                                            <tr>
-                                                <td class='loginFFFFFFdroit' valign='top' width='172'>
-                                            <center>
-                                                Ecriture<br>
-                                                <?php
-// si rajout d'un droit dans la table droift => mettre à jour le fichier gestion_salarie11.php
-                                                echo ('<select name=\'ecritureft\'>' . makeSelectListChecked($mysql_database, 'droitft', 'ecritureft', $ecritureft) . '</select>');
-                                                ?>
-                                                <br>
-                                            </center>
-                                            </td>
-
-                                            <td class='loginFFFFFFdroit' valign='top' width='153'>
-                                            <center>
-                                                Creation<br>
-                                                <?php
-                                                echo ('<select name=\'creation_ft\'>' . makeSelectListChecked($mysql_database, 'droitft', 'creation_ft', $creation_ft) . '</select>');
-                                                ?>
-                                                <br>
-                                            </center>
-                                            </td>
-
-
-                                            <td class='loginFFFFFFdroit' valign='top' width='153'>
-                                            <center>
-                                                Creation FIP<br>
-                                                <?php
-                                                echo ('<select name=\'creation_fiche_produit\'>' . makeSelectListChecked($mysql_database, 'droitft', 'creation_fiche_produit', $creation_fiche_produit) . '</select>');
-                                                ?>
-                                                <br>
-                                            </center>
-                                            </td>
-
-                                            <td class='loginFFFFFFdroit' valign='top' width='153'>
-                                            <center>
-                                                Lecture<br>
-                                                <?php
-                                                echo ('<select name=\'lectureft\'>' . makeSelectListChecked($mysql_database, 'droitft', 'lectureft', $lectureft) . '</select>');
-                                                ?>
-                                                <br>
-                                            </center>
-                                            </td>
-
-                                            <td class='loginFFFFFFdroit' valign='top' colspan='4' width='159'>
-                                            <center>
-                                                Validation<br>
-                                                <?php
-                                                echo ('<select name=\'validft\'>' . makeSelectListChecked($mysql_database, 'droitft', 'validft', $validft) . '</select>');
-                                                ?>
-
-                                            </center>
-                                            </td>
-                                            </tr>
-                                        </table>
-
-                                        <br>
-                                        <table width='500' border='1' cellspacing='1' cellpadding='3' align='center'>
-                                            <tr>
-                                                <td class='logFFE5B2'>
-                                            <center>
-                                                Statistiques
-                                            </center>
-                                            </td>
+                                                <td>
+                                                    <div align='center'><img src='../images_pop/affectation_droits.gif' width='500' height='30'></div>
+                                                </td>
                                             </tr>
                                             <tr>
-                                                <td class='loginFFFFFFdroit' valign='top' align='center'>
-                                            <center>
-                                                Droit d'acc&egrave;s au module statistiques<br>
-                                                <?php
-                                                echo ('<select name=\'droitstat\'>' . makeSelectListChecked($mysql_database, 'droitft', 'droitstat', $droitstat) . '</select>');
-                                                ?>
-                                            </center>
-                                            </td>
-                                            </tr>
-                                        </table>
-
-                                        <br>
-
-                                        <table width='500' border='1' cellspacing='1' cellpadding='3' align='center'>
-                                            <tr>
-                                                <td class='logFFE5B2' colspan='3'>
-                                            <center>
-                                                Divers
-                                            </center>
-                                            </td>
+                                                <td><img src=../lib/images/espaceur.gif width='10' height='10'></td>
                                             </tr>
                                             <tr>
-                                                <td class='loginFFFFFFdroit' valign='top' width='172'>
-                                            <center>
-                                                Ecriture News d&eacute;filante<br>
-                                                <?php
-                                                echo ('<select name=\'newsdefil\'>' . makeSelectListChecked($mysql_database, 'salaries', 'newsdefil', $newsDefil) . '</select>');
-                                                ?>
-                                                <br>
-                                            </center>
-                                            </td>
-                                            <td class='loginFFFFFFdroit' valign='top' width='154'>
-                                            <center>
-                                                Membre CE<br>
-                                                <?php
-                                                echo ('<select name=\'membre_ce\'>' . makeSelectListChecked($mysql_database, 'salaries', 'membre_ce', $membreCe) . '</select>');
-                                                ?>
-                                            </center>
-                                            </td>
-                                            <td class='loginFFFFFFdroit' valign='top' width='158'>
-                                            <center>
-                                                Localisation<br>
-                                                <?php
-                                                echo ('<select name=\'new_lieu_geo\'>');
-                                                /* Constitution de la liste déroulante des noms des groupes */
-                                                $arrayGeo = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
-                                                                'SELECT ' . GeoModel::KEYNAME . ',' . GeoModel::FIELDNAME_GEO
-                                                                . ' FROM ' . GeoModel::TABLENAME
-                                                                . ' WHERE ' . GeoModel::FIELDNAME_SITE_ACTIF . ' = 1'
-                                                                . ' ORDER BY ' . GeoModel::FIELDNAME_GEO
-                                                );
-                                                if ($arrayGeo) {
-                                                    foreach ($arrayGeo as $rowsGeo) {
-                                                        if ($rowsGeo[GeoModel::KEYNAME] == $lieu_geo) {
-                                                            echo ('<option value=\'' . $rowsGeo[GeoModel::KEYNAME] . '\' selected>' . $rowsGeo[GeoModel::FIELDNAME_GEO] . '</option>');
-                                                        } else {
-                                                            echo ('<option value=\'' . $rowsGeo[GeoModel::KEYNAME] . '\'>' . $rowsGeo[GeoModel::FIELDNAME_GEO] . '</option>');
-                                                        }
-                                                    }
-                                                }
-                                                echo ('</select>');
+                                                <td>
+                                                    <table width='350' border='0' cellspacing='0' cellpadding='0' align='center'>
+                                                        <tr>
+                                                            <td colspan='2'>
+                                                                <div align='center'><input type='image' src='../zimages/modifier-j.gif' width='130' height='20'>&nbsp;&nbsp;<a href='#' onClick='confirmation(<?php echo $paramIdUser; ?>);'><img src='../images-index/supprimer.gif' border=0></a></div>
 
-
-                                                /*                                                 * ***************************************************
-                                                  Construction des droits d'accès pour tous les modules:
-                                                 * ***************************Boris Sanègre 2003.03.25 */
-                                                // require ('droits_acces.inc');  
-                                                IntranetDroitsAccesModel::BuildHtmlDroitsAcces($paramIdUser);
-                                                ?>
-
-                                                <tr>
-                                                    <td>
-                                                        <div align='center'><img src='../images_pop/affectation_droits.gif' width='500' height='30'></div>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td><img src=../lib/images/espaceur.gif width='10' height='10'></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <table width='350' border='0' cellspacing='0' cellpadding='0' align='center'>
-                                                            <tr>
-                                                                <td colspan='2'>
-                                                                    <div align='center'><input type='image' src='../zimages/modifier-j.gif' width='130' height='20'>&nbsp;&nbsp;<a href='#' onClick='confirmation(<?php echo $paramIdUser; ?>);'><img src='../images-index/supprimer.gif' border=0></a></div>
-
-                                                                    <input type='hidden' name='modifier' value='modifier'>
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td class='LOGINFFFFFFCENTRE'><img src=../lib/images/espaceur.gif width='10' height='20'></td>
-                                                                <?php
-                                                                echo ('<input type=\'hidden\' name=\'modifier\' value=\'modifier\'>');
-                                                                echo ('<input type=\'hidden\' name=\'sal_user\' value=\'' . $paramIdUser . '\'>');
-                                                                ?>
-                                                                <td class='LOGINFFFFFFCENTRE'>&nbsp;</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td class='LOGINFFFFFFCENTRE'>
-                                                                    <div align='center'>Service</div>
-                                                                </td>
-                                                                <td class='LOGINFFFFFFCENTRE'>
-                                                                    <div align='center'>Niveau</div>
-                                                                </td>
-                                                            </tr>
-
+                                                                <input type='hidden' name='modifier' value='modifier'>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class='LOGINFFFFFFCENTRE'><img src=../lib/images/espaceur.gif width='10' height='20'></td>
                                                             <?php
-                                                            /* Lecture de la table MODES et affichage de l'intitule des services avec les niveaux */
-                                                            $arrayService = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
-                                                                            'SELECT ' . ServicesModel::FIELDNAME_INTITULE_SER . ',' . ServicesModel::KEYNAME
-                                                                            . ' FROM ' . ServicesModel::TABLENAME
-                                                                            . ' ORDER BY ' . ServicesModel::FIELDNAME_INTITULE_SER
-                                                            );
-
-                                                            if ($arrayService) {
-                                                                foreach ($arrayService as $rowsService) {
-                                                                    $intituleSer = $rowsService[ServicesModel::FIELDNAME_INTITULE_SER];
-                                                                    $idService = $rowsService[ServicesModel::KEYNAME];
-                                                                   
-                                                                    /* Pour chaque service on recherche dans la table mode */
-                                                                    $arrayServiceConf = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
-                                                                                    'SELECT ' . ModesModel::FIELDNAME_SERV_CONF . ' FROM ' . ModesModel::TABLENAME
-                                                                                    . ' WHERE ' . ModesModel::FIELDNAME_ID_USER . '=' . $paramIdUser
-                                                                                    . ' AND ' . ModesModel::FIELDNAME_ID_SERVICE . '=\'' . $idService . '\''
-                                                                    );
-
-                                                                    if ($arrayServiceConf) {
-                                                                        foreach ($arrayServiceConf as $rowsServiceConf) {
-                                                                            $serv_conf = $rowsServiceConf[ModesModel::FIELDNAME_SERV_CONF];
-                                                                        }
-                                                                    } else {
-                                                                        $serv_conf = 0;
-                                                                    }
-                                                                    echo ('<tr>');
-                                                                    echo ('  <td class=\'loginFFCC66droit\' width=\'50%\'><img src=../lib/images/espaceur.png width=\'10\' height=\'10\'></td>');
-                                                                    echo ('  <td width=\'50%\'>&nbsp;</td>');
-                                                                    echo ('</tr>');
-                                                                    echo ('<tr>');
-                                                                    echo ('<td>' . stripslashes($intituleSer) . '&nbsp;</td>');
-                                                                    echo ('<td class=\'loginFFCC66droit\' width=\'50%\' align=\'center\'>');
-                                                                    echo ('<input type=\'text\' name=\'' . $idService . '\' value=\'' . $serv_conf . '\' maxlength=\'2\'>');
-                                                                    echo ('</td>');
-                                                                    echo ('</tr>');
-                                                                }
-                                                            }
+                                                            echo ('<input type=\'hidden\' name=\'modifier\' value=\'modifier\'>');
+                                                            echo ('<input type=\'hidden\' name=\'sal_user\' value=\'' . $paramIdUser . '\'>');
                                                             ?>
-                                                        </table>
-                                                    </td>
-                                                </tr>
+                                                            <td class='LOGINFFFFFFCENTRE'>&nbsp;</td>
+                                                        </tr>                                                                                           
+                                                    </table>
+                                                </td>
+                                            </tr>    
                                         </table>
-                                </td>
-                            </tr>
                         </table>
-                        </form>
-                        <?php include ('../adminagis/cadrebas.php'); ?>
-                        </body>
-                        </html>
+                    </td>
+                </tr>
+            </table>
+        </form>
+        <?php include ('../adminagis/cadrebas.php'); ?>
+    </body>
+</html>

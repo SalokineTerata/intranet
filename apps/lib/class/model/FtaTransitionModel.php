@@ -228,7 +228,10 @@ class FtaTransitionModel {
         $logTransition = "";
 //Déclaration des variables
 //Chargement des données Articles
-        $req = "SELECT *"
+        $req = "SELECT " . FtaModel::FIELDNAME_LISTE_CHAPITRE_MAJ_FTA
+                . ", " . FtaModel::FIELDNAME_WORKFLOW
+                . ", " . FtaModel::FIELDNAME_VERSION_DOSSIER_FTA
+                . ", " . FtaModel::KEYNAME
                 . " FROM " . FtaModel::TABLENAME . ",  " . FtaEtatModel::TABLENAME
                 . " WHERE " . FtaModel::TABLENAME . "." . FtaModel::KEYNAME . "='" . $id_fta . "' "
                 . " AND " . FtaEtatModel::TABLENAME . "." . FtaEtatModel::KEYNAME
@@ -337,7 +340,7 @@ class FtaTransitionModel {
                     . $where_chapitre                                                       //Restriction dans le cas d'une mise à jour
                     . " GROUP BY " . UserModel::FIELDNAME_ID_SERVICE . ", " . UserModel::FIELDNAME_LIEU_GEO
             ;
-            $logTransition.="\n\n" . $req. "\n";
+            $logTransition.="\n\n" . $req . "\n";
             $arrayServiceFta = DatabaseOperation::convertSqlStatementWithoutKeyToArray($req);
             $where = " AND ( ";
             $where_operator = "";
@@ -570,10 +573,29 @@ class FtaTransitionModel {
                 . "\n"
                 . "INFORMATIONS DE DEBUGGAGE:\n"
                 . $logTransition
-        ; {
+        ;
+        {
             $expediteur = $prenom . " " . $nom . " <" . $mail . ">";
             envoismail($sujetmail, $corp, $mail, $expediteur, $typeMail);
         }
+    }
+
+    /**
+     * Ajoute de la fonction de traitement de masse
+     * @param type $paramAbreviationFtaEtat
+     * @return string
+     */
+    public static function getListeFtaGrouper($paramAbreviationFtaEtat) {
+        $requete = 'SELECT ' . FtaTransitionModel::FIELDNAME_ABREVIATION_FTA_TRANSITION . ',' . FtaEtatModel::FIELDNAME_NOM_FTA_ETAT
+                . ' FROM ' . FtaTransitionModel::TABLENAME . ',' . FtaEtatModel::TABLENAME
+                . ' WHERE ' . FtaTransitionModel::TABLENAME . '.' . FtaTransitionModel::FIELDNAME_ABREVIATION_FTA_ETAT
+                . '=\'' . $paramAbreviationFtaEtat . '\' '
+                . ' AND ' . FtaEtatModel::TABLENAME . '.' . FtaEtatModel::FIELDNAME_ABREVIATION
+                . '=' . FtaTransitionModel::TABLENAME . '.' . FtaTransitionModel::FIELDNAME_ABREVIATION_FTA_TRANSITION    //Liaison
+        ;
+        $nom_defaut = FtaTransitionModel::FIELDNAME_ABREVIATION_FTA_TRANSITION;
+        $id_defaut = FtaEtatModel::ETAT_ABREVIATION_VALUE_VALIDE;
+        return $liste_action_groupe = AccueilFta::afficherRequeteEnListeDeroulante($requete, $id_defaut, $nom_defaut);
     }
 
 //Fin de la vérification que la FTA est bien validé

@@ -34,7 +34,6 @@ $paramEcritureft = Lib::getParameterFromRequest('ecritureft');
 $paramCreationFicheProduit = Lib::getParameterFromRequest('creation_fiche_produit');
 $paramDroitstat = Lib::getParameterFromRequest('droitstat');
 identification1('salaries', $id_user, $pass);
-UserModel::securadmin(4, $id_type);
 
 
 /*
@@ -96,8 +95,8 @@ if ($paramModifier == 'modifier') {
              */
             $service = $rowsService[ServicesModel::KEYNAME];
             $toto = 'service';
-            $text = $$toto;
-            $niveau = $$text;
+            $text = Lib::getParameterFromRequest($toto);
+            $niveau = Lib::getParameterFromRequest($text);
             /*
              *  Update dans la table pour chaque service
              */
@@ -107,7 +106,7 @@ if ($paramModifier == 'modifier') {
                             . ' AND ' . ModesModel::FIELDNAME_ID_SERVICE . ' =\'' . $service . '\''
             );
             if ($result2 == false) {
-                echo ('Update impossible pour le service $service pour le salarie $idUser </br>');
+                echo ('Update impossible pour le service ' . $service . 'pour le salarie ' . $idUser . ' </br>');
             }
         }
     }

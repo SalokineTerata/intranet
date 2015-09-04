@@ -72,48 +72,46 @@ class FtaEtatModel extends AbstractModel {
                 $checkIdIntranetActions = IntranetDroitsAccesModel::checkIdIntranetActionsByRoleANDSiteFromUser($paramIdUser, $paramRole);
 
                 $idIntranetActionsValide = array_intersect($idIntranetActions, $checkIdIntranetActions);
-
-                $reqTmp = 'SELECT DISTINCT ' . FtaModel::TABLENAME . '.' . FtaModel::KEYNAME
-                        . ',' . FtaProcessusCycleModel::TABLENAME . '.' . FtaProcessusCycleModel::FIELDNAME_PROCESSUS_INIT
-                        . ',' . FtaProcessusCycleModel::TABLENAME . '.' . FtaProcessusCycleModel::FIELDNAME_PROCESSUS_NEXT
-                        . ',' . FtaModel::TABLENAME . '.' . FtaModel::FIELDNAME_WORKFLOW
-                        . ' FROM ' . FtaWorkflowModel::TABLENAME . ', ' . FtaWorkflowStructureModel::TABLENAME
-                        . ', ' . FtaProcessusCycleModel::TABLENAME . ', ' . FtaSuiviProjetModel::TABLENAME
-                        . ' , ' . FtaActionSiteModel::TABLENAME . ' , ' . FtaModel::TABLENAME
-                        . ' , ' . IntranetDroitsAccesModel::TABLENAME . ' , ' . IntranetActionsModel::TABLENAME
-                        . ' WHERE ' . FtaProcessusCycleModel::TABLENAME . '.' . FtaProcessusCycleModel::FIELDNAME_PROCESSUS_NEXT
-                        . '=' . FtaWorkflowStructureModel::TABLENAME . '.' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_PROCESSUS
-                        . ' AND ' . FtaProcessusCycleModel::TABLENAME . '.' . FtaProcessusCycleModel::FIELDNAME_WORKFLOW
-                        . '=' . FtaWorkflowStructureModel::TABLENAME . '.' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_WORKFLOW
-                        . ' AND ' . FtaWorkflowModel::TABLENAME . '.' . FtaWorkflowModel::KEYNAME
-                        . '=' . FtaWorkflowStructureModel::TABLENAME . '.' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_WORKFLOW
-                        . ' AND ' . FtaModel::TABLENAME . '.' . FtaModel::FIELDNAME_WORKFLOW
-                        . '=' . FtaWorkflowStructureModel::TABLENAME . '.' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_WORKFLOW
-                        . ' AND ' . FtaSuiviProjetModel::TABLENAME . '.' . FtaSuiviProjetModel::FIELDNAME_ID_FTA_CHAPITRE
-                        . '=' . FtaWorkflowStructureModel::TABLENAME . '.' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_CHAPITRE
-                        . ' AND ' . FtaActionSiteModel::TABLENAME . '.' . FtaActionSiteModel::FIELDNAME_ID_SITE
-                        . '=' . FtaModel::TABLENAME . '.' . FtaModel::FIELDNAME_SITE_ASSEMBLAGE
-                        . ' AND ' . FtaSuiviProjetModel::TABLENAME . '.' . FtaSuiviProjetModel::FIELDNAME_ID_FTA
-                        . '=' . FtaModel::TABLENAME . '.' . FtaModel::KEYNAME
-                        . ' AND ' . FtaWorkflowModel::TABLENAME . '.' . FtaWorkflowModel::FIELDNAME_ID_INTRANET_ACTIONS
-                        . '=' . IntranetActionsModel::TABLENAME . '.' . IntranetActionsModel::FIELDNAME_PARENT_INTRANET_ACTIONS
-                        . ' AND ' . IntranetDroitsAccesModel::TABLENAME . '.' . IntranetDroitsAccesModel::FIELDNAME_ID_INTRANET_ACTIONS
-                        . '=' . IntranetActionsModel::TABLENAME . '.' . IntranetActionsModel::KEYNAME
-                        . ' AND ' . FtaActionSiteModel::TABLENAME . '.' . FtaActionSiteModel::FIELDNAME_ID_INTRANET_ACTIONS
-                        . ' IN (' . IntranetActionsModel::TABLENAME . '.' . IntranetActionsModel::KEYNAME . ')'
-                        . ' AND ' . FtaSuiviProjetModel::FIELDNAME_SIGNATURE_VALIDATION_SUIVI_PROJET . '=' . AccueilFta::VALUE_0
-                        . ' AND ' . IntranetDroitsAccesModel::FIELDNAME_NIVEAU_INTRANET_DROITS_ACCES . '=' . AccueilFta::VALUE_1
-                        . ' AND ' . IntranetDroitsAccesModel::FIELDNAME_ID_USER . '=' . $paramIdUser                                                  // Nous recuperons l'identifiant de l'utilisateur connecté
-                        . ' AND ' . FtaModel::FIELDNAME_ID_FTA_ETAT . '=' . $paramIdFtaEtat                                                           // Nous recuperons l'identifiant de l'etat de la Fta
-                        . ' AND ' . FtaWorkflowStructureModel::TABLENAME . '.' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_ROLE . '=' . $paramRole // Nous recuperons le type de role pour l'utilisateur
-                        . ' AND ' . FtaProcessusCycleModel::FIELDNAME_FTA_ETAT . '=\'' . $paramEtat . '\''                                            // Nous recuperons l'abréviation de l'etat de la Fta
-                        . ' AND ( 0 ' . IntranetActionsModel::AddIdIntranetAction($idIntranetActionsValide) . ')';
-
-
                 /*
                  * On obtient les fta à vérifié dont tous les chapitres ne sont pas validés
                  */
-                $arrayTmp = DatabaseOperation::convertSqlStatementWithoutKeyToArray($reqTmp);
+                $arrayTmp = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
+                                'SELECT DISTINCT ' . FtaModel::TABLENAME . '.' . FtaModel::KEYNAME
+                                . ',' . FtaProcessusCycleModel::TABLENAME . '.' . FtaProcessusCycleModel::FIELDNAME_PROCESSUS_INIT
+                                . ',' . FtaProcessusCycleModel::TABLENAME . '.' . FtaProcessusCycleModel::FIELDNAME_PROCESSUS_NEXT
+                                . ',' . FtaModel::TABLENAME . '.' . FtaModel::FIELDNAME_WORKFLOW
+                                . ' FROM ' . FtaWorkflowModel::TABLENAME . ', ' . FtaWorkflowStructureModel::TABLENAME
+                                . ', ' . FtaProcessusCycleModel::TABLENAME . ', ' . FtaSuiviProjetModel::TABLENAME
+                                . ' , ' . FtaActionSiteModel::TABLENAME . ' , ' . FtaModel::TABLENAME
+                                . ' , ' . IntranetDroitsAccesModel::TABLENAME . ' , ' . IntranetActionsModel::TABLENAME
+                                . ' WHERE ' . FtaProcessusCycleModel::TABLENAME . '.' . FtaProcessusCycleModel::FIELDNAME_PROCESSUS_NEXT
+                                . '=' . FtaWorkflowStructureModel::TABLENAME . '.' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_PROCESSUS
+                                . ' AND ' . FtaProcessusCycleModel::TABLENAME . '.' . FtaProcessusCycleModel::FIELDNAME_WORKFLOW
+                                . '=' . FtaWorkflowStructureModel::TABLENAME . '.' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_WORKFLOW
+                                . ' AND ' . FtaWorkflowModel::TABLENAME . '.' . FtaWorkflowModel::KEYNAME
+                                . '=' . FtaWorkflowStructureModel::TABLENAME . '.' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_WORKFLOW
+                                . ' AND ' . FtaModel::TABLENAME . '.' . FtaModel::FIELDNAME_WORKFLOW
+                                . '=' . FtaWorkflowStructureModel::TABLENAME . '.' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_WORKFLOW
+                                . ' AND ' . FtaSuiviProjetModel::TABLENAME . '.' . FtaSuiviProjetModel::FIELDNAME_ID_FTA_CHAPITRE
+                                . '=' . FtaWorkflowStructureModel::TABLENAME . '.' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_CHAPITRE
+                                . ' AND ' . FtaActionSiteModel::TABLENAME . '.' . FtaActionSiteModel::FIELDNAME_ID_SITE
+                                . '=' . FtaModel::TABLENAME . '.' . FtaModel::FIELDNAME_SITE_ASSEMBLAGE
+                                . ' AND ' . FtaSuiviProjetModel::TABLENAME . '.' . FtaSuiviProjetModel::FIELDNAME_ID_FTA
+                                . '=' . FtaModel::TABLENAME . '.' . FtaModel::KEYNAME
+                                . ' AND ' . FtaWorkflowModel::TABLENAME . '.' . FtaWorkflowModel::FIELDNAME_ID_INTRANET_ACTIONS
+                                . '=' . IntranetActionsModel::TABLENAME . '.' . IntranetActionsModel::FIELDNAME_PARENT_INTRANET_ACTIONS
+                                . ' AND ' . IntranetDroitsAccesModel::TABLENAME . '.' . IntranetDroitsAccesModel::FIELDNAME_ID_INTRANET_ACTIONS
+                                . '=' . IntranetActionsModel::TABLENAME . '.' . IntranetActionsModel::KEYNAME
+                                . ' AND ' . FtaActionSiteModel::TABLENAME . '.' . FtaActionSiteModel::FIELDNAME_ID_INTRANET_ACTIONS
+                                . ' IN (' . IntranetActionsModel::TABLENAME . '.' . IntranetActionsModel::KEYNAME . ')'
+                                . ' AND ' . FtaSuiviProjetModel::FIELDNAME_SIGNATURE_VALIDATION_SUIVI_PROJET . '=' . AccueilFta::VALUE_0
+                                . ' AND ' . IntranetDroitsAccesModel::FIELDNAME_NIVEAU_INTRANET_DROITS_ACCES . '=' . AccueilFta::VALUE_1
+                                . ' AND ' . IntranetDroitsAccesModel::FIELDNAME_ID_USER . '=' . $paramIdUser                                                  // Nous recuperons l'identifiant de l'utilisateur connecté
+                                . ' AND ' . FtaModel::FIELDNAME_ID_FTA_ETAT . '=' . $paramIdFtaEtat                                                           // Nous recuperons l'identifiant de l'etat de la Fta
+                                . ' AND ' . FtaWorkflowStructureModel::TABLENAME . '.' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_ROLE . '=' . $paramRole // Nous recuperons le type de role pour l'utilisateur
+                                . ' AND ' . FtaProcessusCycleModel::FIELDNAME_FTA_ETAT . '=\'' . $paramEtat . '\''                                            // Nous recuperons l'abréviation de l'etat de la Fta
+                                . ' AND ( 0 ' . IntranetActionsModel::AddIdIntranetAction($idIntranetActionsValide) . ')'
+                );
                 if ($paramRole == AccueilFta::VALUE_1 or $paramRole == AccueilFta::VALUE_6) {
                     $arrayTmp = NULL;
                 }
@@ -125,28 +123,19 @@ class FtaEtatModel extends AbstractModel {
                         }
                     }
                 }
-                $req = 'SELECT DISTINCT ' . FtaModel::KEYNAME . ' FROM ' . FtaModel::TABLENAME . ' WHERE ( ' . AccueilFta::VALUE_0 . ' ';
+                $array[AccueilFta::VALUE_1] = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
+                                'SELECT DISTINCT ' . FtaModel::KEYNAME
+                                . ' FROM ' . FtaModel::TABLENAME
+                                . ' WHERE ( ' . AccueilFta::VALUE_0
+                                . ' ' . FtaModel::AddIdFTaValidProcess($idFtaEffectue) . ')');
 
-                $req .= FtaModel::AddIdFTaValidProcess($idFtaEffectue);
-
-                $req .= ')';
-
-
-                $array[AccueilFta::VALUE_1] = DatabaseOperation::convertSqlStatementWithoutKeyToArray($req);
-
-                $req = 'SELECT DISTINCT ' . FtaWorkflowModel::TABLENAME . '.*'
-                        . ' FROM ' . FtaModel::TABLENAME . ',' . FtaWorkflowModel::TABLENAME
-                        . ' WHERE ( ' . AccueilFta::VALUE_0 . ' ';
-
-                $req .= FtaModel::AddIdFTaValidProcess($idFtaEffectue);
-
-                $req .= ')';
-
-                $req .= ' AND ' . FtaModel::TABLENAME . '.' . FtaModel::FIELDNAME_WORKFLOW
-                        . '=' . FtaWorkflowModel::TABLENAME . '.' . FtaWorkflowModel::KEYNAME;
-
-                $array[AccueilFta::VALUE_2] = DatabaseOperation::convertSqlStatementWithoutKeyToArray($req);
-
+                $array[AccueilFta::VALUE_2] = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
+                                'SELECT DISTINCT ' . FtaWorkflowModel::TABLENAME . '.*'
+                                . ' FROM ' . FtaModel::TABLENAME . ',' . FtaWorkflowModel::TABLENAME
+                                . ' WHERE ( ' . AccueilFta::VALUE_0 . ' ' . FtaModel::AddIdFTaValidProcess($idFtaEffectue) . ')'
+                                . ' AND ' . FtaModel::TABLENAME . '.' . FtaModel::FIELDNAME_WORKFLOW
+                                . '=' . FtaWorkflowModel::TABLENAME . '.' . FtaWorkflowModel::KEYNAME
+                );
                 break;
 
 
@@ -160,52 +149,47 @@ class FtaEtatModel extends AbstractModel {
                 $checkIdIntranetActions = IntranetDroitsAccesModel::checkIdIntranetActionsByRoleANDSiteFromUser($paramIdUser, $paramRole);
 
                 $idIntranetActionsValide = array_intersect($idIntranetActions, $checkIdIntranetActions);
-
-                /*
-                 * Rajouter une condition limitant fta action site voir exemple chef de projet en tant que qualité n'a le droit de voir que les fta workflow 2
-                 */
-                $reqTmp = 'SELECT DISTINCT ' . FtaModel::TABLENAME . '.' . FtaModel::KEYNAME
-                        . ',' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_PROCESSUS
-                        . ',' . FtaModel::TABLENAME . '.' . FtaModel::FIELDNAME_WORKFLOW
-                        . ' FROM ' . FtaWorkflowModel::TABLENAME . ', ' . FtaWorkflowStructureModel::TABLENAME
-                        . ', ' . FtaProcessusCycleModel::TABLENAME . ', ' . FtaSuiviProjetModel::TABLENAME
-                        . ' , ' . FtaActionSiteModel::TABLENAME . ' , ' . FtaModel::TABLENAME
-                        . ' , ' . IntranetDroitsAccesModel::TABLENAME . ' , ' . IntranetActionsModel::TABLENAME
-                        . ' WHERE ' . FtaProcessusCycleModel::TABLENAME . '.' . FtaProcessusCycleModel::FIELDNAME_PROCESSUS_NEXT
-                        . '=' . FtaWorkflowStructureModel::TABLENAME . '.' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_PROCESSUS
-                        . ' AND ' . FtaProcessusCycleModel::TABLENAME . '.' . FtaProcessusCycleModel::FIELDNAME_WORKFLOW
-                        . '=' . FtaWorkflowStructureModel::TABLENAME . '.' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_WORKFLOW
-                        . ' AND ' . FtaWorkflowModel::TABLENAME . '.' . FtaWorkflowModel::KEYNAME
-                        . '=' . FtaWorkflowStructureModel::TABLENAME . '.' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_WORKFLOW
-                        . ' AND ' . FtaActionSiteModel::TABLENAME . '.' . FtaActionSiteModel::FIELDNAME_ID_FTA_WROKFLOW
-                        . '=' . FtaWorkflowStructureModel::TABLENAME . '.' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_WORKFLOW
-                        . ' AND ' . FtaModel::TABLENAME . '.' . FtaModel::FIELDNAME_WORKFLOW
-                        . '=' . FtaWorkflowStructureModel::TABLENAME . '.' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_WORKFLOW
-                        . ' AND ' . FtaSuiviProjetModel::TABLENAME . '.' . FtaSuiviProjetModel::FIELDNAME_ID_FTA_CHAPITRE
-                        . '=' . FtaWorkflowStructureModel::TABLENAME . '.' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_CHAPITRE
-                        . ' AND ' . FtaActionSiteModel::TABLENAME . '.' . FtaActionSiteModel::FIELDNAME_ID_SITE
-                        . '=' . FtaModel::TABLENAME . '.' . FtaModel::FIELDNAME_SITE_ASSEMBLAGE
-                        . ' AND ' . FtaSuiviProjetModel::TABLENAME . '.' . FtaSuiviProjetModel::FIELDNAME_ID_FTA
-                        . '=' . FtaModel::TABLENAME . '.' . FtaModel::KEYNAME
-                        . ' AND ' . FtaWorkflowModel::TABLENAME . '.' . FtaWorkflowModel::FIELDNAME_ID_INTRANET_ACTIONS
-                        . '=' . IntranetActionsModel::TABLENAME . '.' . IntranetActionsModel::FIELDNAME_PARENT_INTRANET_ACTIONS
-                        . ' AND ' . IntranetDroitsAccesModel::TABLENAME . '.' . IntranetDroitsAccesModel::FIELDNAME_ID_INTRANET_ACTIONS
-                        . '=' . IntranetActionsModel::TABLENAME . '.' . IntranetActionsModel::KEYNAME
-                        . ' AND ' . FtaActionSiteModel::TABLENAME . '.' . FtaActionSiteModel::FIELDNAME_ID_INTRANET_ACTIONS
-                        . ' IN (' . IntranetActionsModel::TABLENAME . '.' . IntranetActionsModel::KEYNAME . ')'
-                        . ' AND ' . FtaSuiviProjetModel::FIELDNAME_SIGNATURE_VALIDATION_SUIVI_PROJET . '=' . AccueilFta::VALUE_0
-                        . ' AND ' . IntranetDroitsAccesModel::FIELDNAME_NIVEAU_INTRANET_DROITS_ACCES . '=' . AccueilFta::VALUE_1
-                        . ' AND ' . IntranetDroitsAccesModel::FIELDNAME_ID_USER . '=' . $paramIdUser                                                    // Nous recuperons l'identifiant de l'utilisateur connecté
-                        . ' AND ' . FtaModel::FIELDNAME_ID_FTA_ETAT . '=' . $paramIdFtaEtat                                                             // Nous recuperons l'identifiant de l'etat de la Fta
-                        . ' AND ' . FtaWorkflowStructureModel::TABLENAME . '.' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_ROLE . '=' . $paramRole    // Nous recuperons le type de role pour l'utilisateur
-                        . ' AND ' . FtaProcessusCycleModel::FIELDNAME_FTA_ETAT . '=\'' . $paramEtat . '\''                                               // Nous recuperons l'abréviation de l'etat de la Fta
-                        . ' AND ( 0 ' . IntranetActionsModel::AddIdIntranetAction($idIntranetActionsValide) . ')';
-
-
                 /*
                  * On obtient les fta à vérifié dont tous les chapitres ne sont pas validés
                  */
-                $arrayTmp = DatabaseOperation::convertSqlStatementWithoutKeyToArray($reqTmp);
+                $arrayTmp = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
+                                'SELECT DISTINCT ' . FtaModel::TABLENAME . '.' . FtaModel::KEYNAME
+                                . ',' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_PROCESSUS
+                                . ',' . FtaModel::TABLENAME . '.' . FtaModel::FIELDNAME_WORKFLOW
+                                . ' FROM ' . FtaWorkflowModel::TABLENAME . ', ' . FtaWorkflowStructureModel::TABLENAME
+                                . ', ' . FtaProcessusCycleModel::TABLENAME . ', ' . FtaSuiviProjetModel::TABLENAME
+                                . ' , ' . FtaActionSiteModel::TABLENAME . ' , ' . FtaModel::TABLENAME
+                                . ' , ' . IntranetDroitsAccesModel::TABLENAME . ' , ' . IntranetActionsModel::TABLENAME
+                                . ' WHERE ' . FtaProcessusCycleModel::TABLENAME . '.' . FtaProcessusCycleModel::FIELDNAME_PROCESSUS_NEXT
+                                . '=' . FtaWorkflowStructureModel::TABLENAME . '.' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_PROCESSUS
+                                . ' AND ' . FtaProcessusCycleModel::TABLENAME . '.' . FtaProcessusCycleModel::FIELDNAME_WORKFLOW
+                                . '=' . FtaWorkflowStructureModel::TABLENAME . '.' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_WORKFLOW
+                                . ' AND ' . FtaWorkflowModel::TABLENAME . '.' . FtaWorkflowModel::KEYNAME
+                                . '=' . FtaWorkflowStructureModel::TABLENAME . '.' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_WORKFLOW
+                                . ' AND ' . FtaActionSiteModel::TABLENAME . '.' . FtaActionSiteModel::FIELDNAME_ID_FTA_WROKFLOW
+                                . '=' . FtaWorkflowStructureModel::TABLENAME . '.' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_WORKFLOW
+                                . ' AND ' . FtaModel::TABLENAME . '.' . FtaModel::FIELDNAME_WORKFLOW
+                                . '=' . FtaWorkflowStructureModel::TABLENAME . '.' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_WORKFLOW
+                                . ' AND ' . FtaSuiviProjetModel::TABLENAME . '.' . FtaSuiviProjetModel::FIELDNAME_ID_FTA_CHAPITRE
+                                . '=' . FtaWorkflowStructureModel::TABLENAME . '.' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_CHAPITRE
+                                . ' AND ' . FtaActionSiteModel::TABLENAME . '.' . FtaActionSiteModel::FIELDNAME_ID_SITE
+                                . '=' . FtaModel::TABLENAME . '.' . FtaModel::FIELDNAME_SITE_ASSEMBLAGE
+                                . ' AND ' . FtaSuiviProjetModel::TABLENAME . '.' . FtaSuiviProjetModel::FIELDNAME_ID_FTA
+                                . '=' . FtaModel::TABLENAME . '.' . FtaModel::KEYNAME
+                                . ' AND ' . FtaWorkflowModel::TABLENAME . '.' . FtaWorkflowModel::FIELDNAME_ID_INTRANET_ACTIONS
+                                . '=' . IntranetActionsModel::TABLENAME . '.' . IntranetActionsModel::FIELDNAME_PARENT_INTRANET_ACTIONS
+                                . ' AND ' . IntranetDroitsAccesModel::TABLENAME . '.' . IntranetDroitsAccesModel::FIELDNAME_ID_INTRANET_ACTIONS
+                                . '=' . IntranetActionsModel::TABLENAME . '.' . IntranetActionsModel::KEYNAME
+                                . ' AND ' . FtaActionSiteModel::TABLENAME . '.' . FtaActionSiteModel::FIELDNAME_ID_INTRANET_ACTIONS
+                                . ' IN (' . IntranetActionsModel::TABLENAME . '.' . IntranetActionsModel::KEYNAME . ')'
+                                . ' AND ' . FtaSuiviProjetModel::FIELDNAME_SIGNATURE_VALIDATION_SUIVI_PROJET . '=' . AccueilFta::VALUE_0
+                                . ' AND ' . IntranetDroitsAccesModel::FIELDNAME_NIVEAU_INTRANET_DROITS_ACCES . '=' . AccueilFta::VALUE_1
+                                . ' AND ' . IntranetDroitsAccesModel::FIELDNAME_ID_USER . '=' . $paramIdUser                                                    // Nous recuperons l'identifiant de l'utilisateur connecté
+                                . ' AND ' . FtaModel::FIELDNAME_ID_FTA_ETAT . '=' . $paramIdFtaEtat                                                             // Nous recuperons l'identifiant de l'etat de la Fta
+                                . ' AND ' . FtaWorkflowStructureModel::TABLENAME . '.' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_ROLE . '=' . $paramRole    // Nous recuperons le type de role pour l'utilisateur
+                                . ' AND ' . FtaProcessusCycleModel::FIELDNAME_FTA_ETAT . '=\'' . $paramEtat . '\''                                               // Nous recuperons l'abréviation de l'etat de la Fta
+                                . ' AND ( 0 ' . IntranetActionsModel::AddIdIntranetAction($idIntranetActionsValide) . ')'
+                );
                 if ($arrayTmp) {
                     foreach ($arrayTmp as $rows) {
                         $tauxDeValidadation = FtaProcessusModel::getFtaProcessusNonValidePrecedent($rows[FtaModel::KEYNAME], $rows[FtaProcessusModel::KEYNAME], $rows[FtaWorkflowStructureModel::FIELDNAME_ID_FTA_WORKFLOW]);
@@ -222,27 +206,19 @@ class FtaEtatModel extends AbstractModel {
                         }
                     }
                 }
-                $req = 'SELECT DISTINCT ' . FtaModel::KEYNAME . ' FROM ' . FtaModel::TABLENAME . ' WHERE ( ' . AccueilFta::VALUE_0 . ' ';
+                $array[AccueilFta::VALUE_1] = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
+                                'SELECT DISTINCT ' . FtaModel::KEYNAME
+                                . ' FROM ' . FtaModel::TABLENAME
+                                . ' WHERE ( ' . AccueilFta::VALUE_0
+                                . ' ' . FtaModel::AddIdFTaValidProcess($idFtaEffectue) . ')');
 
-                $req .= FtaModel::AddIdFTaValidProcess($idFtaEffectue);
-
-                $req .= ')';
-
-                $array[AccueilFta::VALUE_1] = DatabaseOperation::convertSqlStatementWithoutKeyToArray($req);
-
-
-                $req = 'SELECT DISTINCT ' . FtaWorkflowModel::TABLENAME . '.*'
-                        . ' FROM ' . FtaModel::TABLENAME . ', ' . FtaWorkflowModel::TABLENAME
-                        . ' WHERE ( ' . AccueilFta::VALUE_0 . ' ';
-
-                $req .= FtaModel::AddIdFTaValidProcess($idFtaEffectue);
-
-                $req .= ')';
-
-                $req .= ' AND ' . FtaModel::TABLENAME . '.' . FtaModel::FIELDNAME_WORKFLOW
-                        . ' = ' . FtaWorkflowModel::TABLENAME . '.' . FtaWorkflowModel::KEYNAME;
-
-                $array[AccueilFta::VALUE_2] = DatabaseOperation::convertSqlStatementWithoutKeyToArray($req);
+                $array[AccueilFta::VALUE_2] = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
+                                'SELECT DISTINCT ' . FtaWorkflowModel::TABLENAME . '.*'
+                                . ' FROM ' . FtaModel::TABLENAME . ',' . FtaWorkflowModel::TABLENAME
+                                . ' WHERE ( ' . AccueilFta::VALUE_0 . ' ' . FtaModel::AddIdFTaValidProcess($idFtaEffectue) . ')'
+                                . ' AND ' . FtaModel::TABLENAME . '.' . FtaModel::FIELDNAME_WORKFLOW
+                                . '=' . FtaWorkflowModel::TABLENAME . '.' . FtaWorkflowModel::KEYNAME
+                );
 
                 break;
 
@@ -261,47 +237,45 @@ class FtaEtatModel extends AbstractModel {
 
                 $idIntranetActionsValide = array_intersect($idIntranetActions, $checkIdIntranetActions);
 
-
-                $reqTmp = 'SELECT DISTINCT ' . FtaModel::TABLENAME . '.' . FtaModel::KEYNAME
-                        . ',' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_PROCESSUS
-                        . ',' . FtaModel::TABLENAME . '.' . FtaModel::FIELDNAME_WORKFLOW
-                        . ' FROM ' . FtaWorkflowModel::TABLENAME . ', ' . FtaWorkflowStructureModel::TABLENAME
-                        . ', ' . FtaProcessusCycleModel::TABLENAME . ', ' . FtaSuiviProjetModel::TABLENAME
-                        . ' , ' . FtaActionSiteModel::TABLENAME . ' , ' . FtaModel::TABLENAME
-                        . ' , ' . IntranetDroitsAccesModel::TABLENAME . ' , ' . IntranetActionsModel::TABLENAME
-                        . ' WHERE ' . FtaProcessusCycleModel::TABLENAME . '.' . FtaProcessusCycleModel::FIELDNAME_PROCESSUS_NEXT
-                        . '=' . FtaWorkflowStructureModel::TABLENAME . '.' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_PROCESSUS
-                        . ' AND ' . FtaProcessusCycleModel::TABLENAME . '.' . FtaProcessusCycleModel::FIELDNAME_WORKFLOW
-                        . '=' . FtaWorkflowStructureModel::TABLENAME . '.' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_WORKFLOW
-                        . ' AND ' . FtaWorkflowModel::TABLENAME . '.' . FtaWorkflowModel::KEYNAME
-                        . '=' . FtaWorkflowStructureModel::TABLENAME . '.' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_WORKFLOW
-                        . ' AND ' . FtaModel::TABLENAME . '.' . FtaModel::FIELDNAME_WORKFLOW
-                        . '=' . FtaWorkflowStructureModel::TABLENAME . '.' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_WORKFLOW
-                        . ' AND ' . FtaSuiviProjetModel::TABLENAME . '.' . FtaSuiviProjetModel::FIELDNAME_ID_FTA_CHAPITRE
-                        . '=' . FtaWorkflowStructureModel::TABLENAME . '.' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_CHAPITRE
-                        . ' AND ' . FtaActionSiteModel::TABLENAME . '.' . FtaActionSiteModel::FIELDNAME_ID_SITE
-                        . '=' . FtaModel::TABLENAME . '.' . FtaModel::FIELDNAME_SITE_ASSEMBLAGE
-                        . ' AND ' . FtaSuiviProjetModel::TABLENAME . '.' . FtaSuiviProjetModel::FIELDNAME_ID_FTA
-                        . '=' . FtaModel::TABLENAME . '.' . FtaModel::KEYNAME
-                        . ' AND ' . FtaWorkflowModel::TABLENAME . '.' . FtaWorkflowModel::FIELDNAME_ID_INTRANET_ACTIONS
-                        . '=' . IntranetActionsModel::TABLENAME . '.' . IntranetActionsModel::FIELDNAME_PARENT_INTRANET_ACTIONS
-                        . ' AND ' . IntranetDroitsAccesModel::TABLENAME . '.' . IntranetDroitsAccesModel::FIELDNAME_ID_INTRANET_ACTIONS
-                        . '=' . IntranetActionsModel::TABLENAME . '.' . IntranetActionsModel::KEYNAME
-                        . ' AND ' . FtaActionSiteModel::TABLENAME . '.' . FtaActionSiteModel::FIELDNAME_ID_INTRANET_ACTIONS
-                        . ' IN (' . IntranetActionsModel::TABLENAME . '.' . IntranetActionsModel::KEYNAME . ')'
-                        . ' AND ' . FtaSuiviProjetModel::FIELDNAME_SIGNATURE_VALIDATION_SUIVI_PROJET . '<>' . AccueilFta::VALUE_0
-                        . ' AND ' . IntranetDroitsAccesModel::FIELDNAME_NIVEAU_INTRANET_DROITS_ACCES . '=' . AccueilFta::VALUE_1
-                        . ' AND ' . IntranetDroitsAccesModel::FIELDNAME_ID_USER . '=' . $paramIdUser                                                  // Nous recuperons l'identifiant de l'utilisateur connecté
-                        . ' AND ' . FtaModel::FIELDNAME_ID_FTA_ETAT . '=' . $paramIdFtaEtat                                                           // Nous recuperons l'identifiant de l'etat de la Fta
-                        . ' AND ' . FtaWorkflowStructureModel::TABLENAME . '.' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_ROLE . '=' . $paramRole // Nous recuperons le type de role pour l'utilisateur
-                        . ' AND ' . FtaProcessusCycleModel::FIELDNAME_FTA_ETAT . '=\'' . $paramEtat . '\''                                             // Nous recuperons l'abréviation de l'etat de la Fta
-                        . ' AND ( 0 ' . IntranetActionsModel::AddIdIntranetAction($idIntranetActionsValide) . ')';
-
-
                 /*
                  * On obtient les fta à vérifié dont tous les chapitres sont validés
                  */
-                $arrayTmp = DatabaseOperation::convertSqlStatementWithoutKeyToArray($reqTmp);
+                $arrayTmp = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
+                                'SELECT DISTINCT ' . FtaModel::TABLENAME . '.' . FtaModel::KEYNAME
+                                . ',' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_PROCESSUS
+                                . ',' . FtaModel::TABLENAME . '.' . FtaModel::FIELDNAME_WORKFLOW
+                                . ' FROM ' . FtaWorkflowModel::TABLENAME . ', ' . FtaWorkflowStructureModel::TABLENAME
+                                . ', ' . FtaProcessusCycleModel::TABLENAME . ', ' . FtaSuiviProjetModel::TABLENAME
+                                . ' , ' . FtaActionSiteModel::TABLENAME . ' , ' . FtaModel::TABLENAME
+                                . ' , ' . IntranetDroitsAccesModel::TABLENAME . ' , ' . IntranetActionsModel::TABLENAME
+                                . ' WHERE ' . FtaProcessusCycleModel::TABLENAME . '.' . FtaProcessusCycleModel::FIELDNAME_PROCESSUS_NEXT
+                                . '=' . FtaWorkflowStructureModel::TABLENAME . '.' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_PROCESSUS
+                                . ' AND ' . FtaProcessusCycleModel::TABLENAME . '.' . FtaProcessusCycleModel::FIELDNAME_WORKFLOW
+                                . '=' . FtaWorkflowStructureModel::TABLENAME . '.' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_WORKFLOW
+                                . ' AND ' . FtaWorkflowModel::TABLENAME . '.' . FtaWorkflowModel::KEYNAME
+                                . '=' . FtaWorkflowStructureModel::TABLENAME . '.' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_WORKFLOW
+                                . ' AND ' . FtaModel::TABLENAME . '.' . FtaModel::FIELDNAME_WORKFLOW
+                                . '=' . FtaWorkflowStructureModel::TABLENAME . '.' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_WORKFLOW
+                                . ' AND ' . FtaSuiviProjetModel::TABLENAME . '.' . FtaSuiviProjetModel::FIELDNAME_ID_FTA_CHAPITRE
+                                . '=' . FtaWorkflowStructureModel::TABLENAME . '.' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_CHAPITRE
+                                . ' AND ' . FtaActionSiteModel::TABLENAME . '.' . FtaActionSiteModel::FIELDNAME_ID_SITE
+                                . '=' . FtaModel::TABLENAME . '.' . FtaModel::FIELDNAME_SITE_ASSEMBLAGE
+                                . ' AND ' . FtaSuiviProjetModel::TABLENAME . '.' . FtaSuiviProjetModel::FIELDNAME_ID_FTA
+                                . '=' . FtaModel::TABLENAME . '.' . FtaModel::KEYNAME
+                                . ' AND ' . FtaWorkflowModel::TABLENAME . '.' . FtaWorkflowModel::FIELDNAME_ID_INTRANET_ACTIONS
+                                . '=' . IntranetActionsModel::TABLENAME . '.' . IntranetActionsModel::FIELDNAME_PARENT_INTRANET_ACTIONS
+                                . ' AND ' . IntranetDroitsAccesModel::TABLENAME . '.' . IntranetDroitsAccesModel::FIELDNAME_ID_INTRANET_ACTIONS
+                                . '=' . IntranetActionsModel::TABLENAME . '.' . IntranetActionsModel::KEYNAME
+                                . ' AND ' . FtaActionSiteModel::TABLENAME . '.' . FtaActionSiteModel::FIELDNAME_ID_INTRANET_ACTIONS
+                                . ' IN (' . IntranetActionsModel::TABLENAME . '.' . IntranetActionsModel::KEYNAME . ')'
+                                . ' AND ' . FtaSuiviProjetModel::FIELDNAME_SIGNATURE_VALIDATION_SUIVI_PROJET . '<>' . AccueilFta::VALUE_0
+                                . ' AND ' . IntranetDroitsAccesModel::FIELDNAME_NIVEAU_INTRANET_DROITS_ACCES . '=' . AccueilFta::VALUE_1
+                                . ' AND ' . IntranetDroitsAccesModel::FIELDNAME_ID_USER . '=' . $paramIdUser                                                  // Nous recuperons l'identifiant de l'utilisateur connecté
+                                . ' AND ' . FtaModel::FIELDNAME_ID_FTA_ETAT . '=' . $paramIdFtaEtat                                                           // Nous recuperons l'identifiant de l'etat de la Fta
+                                . ' AND ' . FtaWorkflowStructureModel::TABLENAME . '.' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_ROLE . '=' . $paramRole // Nous recuperons le type de role pour l'utilisateur
+                                . ' AND ' . FtaProcessusCycleModel::FIELDNAME_FTA_ETAT . '=\'' . $paramEtat . '\''                                             // Nous recuperons l'abréviation de l'etat de la Fta
+                                . ' AND ( 0 ' . IntranetActionsModel::AddIdIntranetAction($idIntranetActionsValide) . ')'
+                );
 
                 if ($arrayTmp) {
                     foreach ($arrayTmp as $rows) {
@@ -311,26 +285,19 @@ class FtaEtatModel extends AbstractModel {
                         }
                     }
                 }
-                $req = 'SELECT DISTINCT ' . FtaModel::KEYNAME . ' FROM ' . FtaModel::TABLENAME . ' WHERE ( ' . AccueilFta::VALUE_0 . ' ';
+                $array[AccueilFta::VALUE_1] = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
+                                'SELECT DISTINCT ' . FtaModel::KEYNAME
+                                . ' FROM ' . FtaModel::TABLENAME
+                                . ' WHERE ( ' . AccueilFta::VALUE_0
+                                . ' ' . FtaModel::AddIdFTaValidProcess($idFtaEffectue) . ')');
 
-                $req .= FtaModel::AddIdFTaValidProcess($idFtaEffectue);
-
-                $req .= ')';
-
-                $array[AccueilFta::VALUE_1] = DatabaseOperation::convertSqlStatementWithoutKeyToArray($req);
-
-                $req = 'SELECT DISTINCT ' . FtaWorkflowModel::TABLENAME . '.*'
-                        . ' FROM ' . FtaModel::TABLENAME . ',' . FtaWorkflowModel::TABLENAME
-                        . ' WHERE ( ' . AccueilFta::VALUE_0 . ' ';
-
-                $req .= FtaModel::AddIdFTaValidProcess($idFtaEffectue);
-
-                $req .= ')';
-
-                $req .= ' AND ' . FtaModel::TABLENAME . '.' . FtaModel::FIELDNAME_WORKFLOW
-                        . '=' . FtaWorkflowModel::TABLENAME . '.' . FtaWorkflowModel::KEYNAME;
-
-                $array[AccueilFta::VALUE_2] = DatabaseOperation::convertSqlStatementWithoutKeyToArray($req);
+                $array[AccueilFta::VALUE_2] = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
+                                'SELECT DISTINCT ' . FtaWorkflowModel::TABLENAME . '.*'
+                                . ' FROM ' . FtaModel::TABLENAME . ',' . FtaWorkflowModel::TABLENAME
+                                . ' WHERE ( ' . AccueilFta::VALUE_0 . ' ' . FtaModel::AddIdFTaValidProcess($idFtaEffectue) . ')'
+                                . ' AND ' . FtaModel::TABLENAME . '.' . FtaModel::FIELDNAME_WORKFLOW
+                                . '=' . FtaWorkflowModel::TABLENAME . '.' . FtaWorkflowModel::KEYNAME
+                );
 
                 break;
 

@@ -207,10 +207,11 @@ class DatabaseOperation {
      * @return type
      */
     public static function databaseAcces() {
-        // $globalConfig = new GlobalConfig();
-        $dataConnexion = GlobalConfig::getDatabaseConnexion();
+        $DatabaseConnection = new DatabaseConnection();
+//        $dataConnexion = $DatabaseConnection->getPdoObjet();
+        //$dataConnexion = $_SESSION[GlobalConfig::VARNAME_DATABASE_CONNEXION];
         // $dataConnexion = GlobalConfig::openDatabaseConnexion2($globalConfig);
-        return $dataConnexion;
+        return $DatabaseConnection;
     }
 
     /**
@@ -289,8 +290,8 @@ class DatabaseOperation {
         $return = NULL;
         if ($paramStatement <> NULL) {
             $statement = DatabaseOperation::queryPDO($paramStatement);
-            $rows = $statement->fetchAll(PDO::FETCH_UNIQUE|PDO::FETCH_ASSOC);
-            $statement->closeCursor();            
+            $rows = $statement->fetchAll(PDO::FETCH_UNIQUE | PDO::FETCH_ASSOC);
+            $statement->closeCursor();
             return $rows;
         }
     }

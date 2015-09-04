@@ -298,7 +298,22 @@ class DatabaseDescription {
         /**
          * Recherche de la documentation des champs
          */
-        $arrayDoc = DatabaseOperation::convertSqlStatementWithoutKeyToArray('SELECT * FROM `intranet_column_info` ');
+        $arrayDoc = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
+                        'SELECT table_name_intranet_column_info'
+                        . ',column_name_intranet_column_info'
+                        . ',label_intranet_column_info'
+                        . ',explication_intranet_column_info'
+                        . ',id_intranet_column_info'
+                        . ',sql_request_content_intranet_column_info'
+                        . ',type_of_html_object_intranet_column_info'
+                        . ',type_of_storage'
+                        . ',referenced_table_name'
+                        . ',referenced_column_name'
+                        . ',fields_to_display'
+                        . ',fields_to_lock'
+                        . ',fields_to_order'
+                        . ',right_to_add'
+                        . ' FROM `intranet_column_info` ');
         /**
          * Parcours du résultat de la recherche
          */

@@ -36,12 +36,24 @@ class GeoModel extends AbstractModel {
         parent::__construct($paramId, $paramIsCreateRecordsetInDatabaseIfKeyDoesntExist);
     }
 
-    /**
-     * 
-     * @param type $paramIdUser
-     * @param type $paramObjet
-     * @return types
+    /*
+     * Récuperation du nom de site de production
      */
+
+    public static function getProductionSiteName($paramIdSite) {
+        $arrayNomSiteProduction = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
+                        'SELECT ' . GeoModel::FIELDNAME_GEO
+                        . ' FROM ' . GeoModel::TABLENAME
+                        . ' WHERE ' . GeoModel::FIELDNAME_ID_SITE
+                        . '= \'' . $paramIdSite . '\''
+        );
+        if ($arrayNomSiteProduction) {
+            foreach ($arrayNomSiteProduction as $rowsNomSiteProduction) {
+                $nomSiteProduction = $rowsNomSiteProduction[GeoModel::FIELDNAME_GEO];
+            }
+        }
+        return $nomSiteProduction;
+    }
 
     /**
      * Affiche la liste des site de production pour lesquel l'utilisateur connecté à les droits d'accès

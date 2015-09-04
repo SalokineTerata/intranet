@@ -39,6 +39,8 @@ class EnvironmentCod extends EnvironmentAbstract {
     const MYSQL_AUTHENTIFICATION_PASSWORD = '8ale!ne';
     const MYSQL_AUTHENTIFICATION_TABLE_NAME = 'salaries';
     const MYSQL_AUTHENTIFICATION_USER_NAME = 'root';
+    const MYSQL_OLD_CONNECTION_TRUE = TRUE;
+    const MYSQL_OLD_CONNECTION_FALSE = FALSE;
     const MYSQL_DATABASE_NAME = 'intranet_v3_0_dev';
     const MYSQL_SERVER_NAME = 'dev-intranet.agis.fr';
     const SITE_TITLE = EnvironmentConf::SITE_TITLE;
@@ -83,6 +85,7 @@ class EnvironmentCod extends EnvironmentAbstract {
         $this->getConf()->setMysqlDatabaseAuthentificationUsername(self::MYSQL_AUTHENTIFICATION_USER_NAME);
         $this->getConf()->setMysqlDatabaseAuthentificationPassword(self::MYSQL_AUTHENTIFICATION_PASSWORD);
         $this->getConf()->setMysqlDatabaseAuthentificationTableName(self::MYSQL_AUTHENTIFICATION_TABLE_NAME);
+        $this->getConf()->setMysqlDatabaseConnectionOldMethode(self::MYSQL_OLD_CONNECTION_TRUE);
         $this->getConf()->setSessionDebugEnable(self::IS_DEBUG_SESSION_ENABLED);
         $this->getConf()->setSmtpServerName(self::SMTP_SERVER_NAME);
         $this->getConf()->setSmtpServiceEnable(self::IS_SERVICE_SMTP_ENABLED);

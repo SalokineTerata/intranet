@@ -3,7 +3,7 @@
 //  include("../lib/functions.php");
 require_once '../inc/main.php';
   identification1("salaries", $login, $pass);
-  UserModel::securadmin(4, $id_type);
+   
 
 /* Recherche des valeurs a afficher*/
     $req="select nom, prenom from salaries where id_user='$idUser'";

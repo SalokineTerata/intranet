@@ -51,6 +51,7 @@ require_once('../fta/class/view/FtaProcessusDelaiView.php');
 require_once('../fta/class/ObjectFta.php');
 
 // Moteur de base de données
+require_once('../lib/class/database/DatabaseConnection.php');
 require_once('../lib/class/database/DatabaseOperation.php');
 require_once('../lib/class/database/DatabaseDescription.php');
 require_once('../lib/class/database/DatabaseDescriptionField.php');
@@ -223,7 +224,7 @@ $module = Lib::getModule();
 if ($module != 'lib') {
 
     //Inclusion de la configuration propre au module
-    $module_conf_file = '../$module/class/ModuleConfig.php';
+    $module_conf_file = '../' . $module . '/class/ModuleConfig.php';
 
     if (file_exists($module_conf_file)) {
         require_once ($module_conf_file);

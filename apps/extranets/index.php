@@ -53,17 +53,17 @@ Début Code PHP
 
 // parcours de la table des liens pour affichage
 
-   $req1 = "SELECT * FROM extranets_table_des_liens "
+   $req1 = "SELECT chemin_extranets_table_des_liens,nom_logo_extranets_table_des_liens,nom_site_extranets_table_des_liens FROM extranets_table_des_liens "
         . "WHERE actif_extranets_table_des_liens = 1 "
         . "ORDER BY code_regroupement_extranets_table_des_liens ASC "
         ;
 
-$result=DatabaseOperation::query($req1);
+$result=DatabaseOperation::convertSqlStatementWithoutKeyToArray($req1);
 
 if($result)
 {
 
-    while ($rows=mysql_fetch_array($result))
+    foreach  ($result as $rows)
     {
 
       $tableau .= "<tr><td>

@@ -139,33 +139,44 @@ class GlobalConfig {
      */
     function buildDatabaseDescription() {
 
-//        if (!GlobalConfig::getDatabaseDescriptionIsInitialized()
-////                ||                $this->getConf()->getSessionDebugEnable()
-//        ) {
-        DatabaseDescription::buildDatabaseDescription($this->getConf()->getMysqlDatabaseName());
+        if (GlobalConfig::getDatabaseDescriptionIsInitialized() == NULL
+//                ||                $this->getConf()->getSessionDebugEnable()
+        ) {
+            DatabaseDescription::buildDatabaseDescription($this->getConf()->getMysqlDatabaseName());
 
-        /**
-         * Liste des modules public
-         */
-        $_SESSION['intranet_module_public'] = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
-                        'SELECT * FROM ' . IntranetModulesModel::TABLENAME
-                        . ' WHERE ' . IntranetModulesModel::FIELDNAME_PUBLIC_INTRANET_MODULES . '=' . AccueilFta::VALUE_1 . ' '
-                        . ' ORDER BY ' . IntranetModulesModel::FIELDNAME_CLASSEMENT_INTRANET_MODULES . ' DESC'
-        );
+            /**
+             * Liste des modules public
+             */
+            $_SESSION['intranet_module_public'] = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
+                            'SELECT ' . IntranetModulesModel::FIELDNAME_NOM_USUEL_INTRANET_MODULES
+                            . ', ' . IntranetModulesModel::FIELDNAME_NOM_INTRANET_MODULES
+                            . ' FROM ' . IntranetModulesModel::TABLENAME
+                            . ' WHERE ' . IntranetModulesModel::FIELDNAME_PUBLIC_INTRANET_MODULES . '=' . AccueilFta::VALUE_1 . ' '
+                            . ' ORDER BY ' . IntranetModulesModel::FIELDNAME_CLASSEMENT_INTRANET_MODULES . ' DESC'
+            );
 
-        $array = DatabaseOperation::convertSqlStatementWithoutKeyToArray('SELECT * FROM ' . IntranetModulesModel::TABLENAME);
-        foreach ($array as $rows) {
-            $_SESSION[IntranetModulesModel::TABLENAME][$rows[IntranetModulesModel::FIELDNAME_NOM_INTRANET_MODULES]]['id_intranet_modules'] = $rows['id_intranet_modules'];
-            $_SESSION[IntranetModulesModel::TABLENAME][$rows[IntranetModulesModel::FIELDNAME_NOM_INTRANET_MODULES]]['nom_intranet_modules'] = $rows['nom_intranet_modules'];
-            $_SESSION[IntranetModulesModel::TABLENAME][$rows[IntranetModulesModel::FIELDNAME_NOM_INTRANET_MODULES]]['nom_usuel_intranet_modules'] = $rows['nom_usuel_intranet_modules'];
-            $_SESSION[IntranetModulesModel::TABLENAME][$rows[IntranetModulesModel::FIELDNAME_NOM_INTRANET_MODULES]]['version_intranet_modules'] = $rows['version_intranet_modules'];
-            $_SESSION[IntranetModulesModel::TABLENAME][$rows[IntranetModulesModel::FIELDNAME_NOM_INTRANET_MODULES]]['visible_intranet_modules'] = $rows['visible_intranet_modules'];
-            $_SESSION[IntranetModulesModel::TABLENAME][$rows[IntranetModulesModel::FIELDNAME_NOM_INTRANET_MODULES]]['classement_intranet_modules'] = $rows['classement_intranet_modules'];
-            $_SESSION[IntranetModulesModel::TABLENAME][$rows[IntranetModulesModel::FIELDNAME_NOM_INTRANET_MODULES]]['public_intranet_modules'] = $rows['public_intranet_modules'];
-            $_SESSION[IntranetModulesModel::TABLENAME][$rows[IntranetModulesModel::FIELDNAME_NOM_INTRANET_MODULES]]['css_intranet_module'] = $rows['css_intranet_module'];
-        }
-        $this->setDatabaseIsInitializedToTrue();
-//        } //Fin des enregistrements MySQL en session
+            $array = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
+                            'SELECT ' . IntranetModulesModel::FIELDNAME_NOM_USUEL_INTRANET_MODULES
+                            . ', ' . IntranetModulesModel::FIELDNAME_NOM_INTRANET_MODULES
+                            . ', ' . IntranetModulesModel::FIELDNAME_CLASSEMENT_INTRANET_MODULES
+                            . ', ' . IntranetModulesModel::FIELDNAME_PUBLIC_INTRANET_MODULES
+                            . ', ' . IntranetModulesModel::FIELDNAME_VERSION_INTRANET_MODULES
+                            . ', ' . IntranetModulesModel::FIELDNAME_VISIBLE_INTRANET_MODULES
+                            . ', ' . IntranetModulesModel::FIELDNAME_CSS_INTRANET_MODULES
+                            . ', ' . IntranetModulesModel::KEYNAME
+                            . ' FROM ' . IntranetModulesModel::TABLENAME);
+            foreach ($array as $rows) {
+                $_SESSION[IntranetModulesModel::TABLENAME][$rows[IntranetModulesModel::FIELDNAME_NOM_INTRANET_MODULES]][IntranetModulesModel::KEYNAME] = $rows[IntranetModulesModel::KEYNAME];
+                $_SESSION[IntranetModulesModel::TABLENAME][$rows[IntranetModulesModel::FIELDNAME_NOM_INTRANET_MODULES]][IntranetModulesModel::FIELDNAME_NOM_INTRANET_MODULES] = $rows[IntranetModulesModel::FIELDNAME_NOM_INTRANET_MODULES];
+                $_SESSION[IntranetModulesModel::TABLENAME][$rows[IntranetModulesModel::FIELDNAME_NOM_INTRANET_MODULES]][IntranetModulesModel::FIELDNAME_NOM_USUEL_INTRANET_MODULES] = $rows[IntranetModulesModel::FIELDNAME_NOM_USUEL_INTRANET_MODULES];
+                $_SESSION[IntranetModulesModel::TABLENAME][$rows[IntranetModulesModel::FIELDNAME_NOM_INTRANET_MODULES]][IntranetModulesModel::FIELDNAME_VERSION_INTRANET_MODULES] = $rows[IntranetModulesModel::FIELDNAME_VERSION_INTRANET_MODULES];
+                $_SESSION[IntranetModulesModel::TABLENAME][$rows[IntranetModulesModel::FIELDNAME_NOM_INTRANET_MODULES]][IntranetModulesModel::FIELDNAME_VISIBLE_INTRANET_MODULES] = $rows[IntranetModulesModel::FIELDNAME_VISIBLE_INTRANET_MODULES];
+                $_SESSION[IntranetModulesModel::TABLENAME][$rows[IntranetModulesModel::FIELDNAME_NOM_INTRANET_MODULES]][IntranetModulesModel::FIELDNAME_CLASSEMENT_INTRANET_MODULES] = $rows[IntranetModulesModel::FIELDNAME_CLASSEMENT_INTRANET_MODULES];
+                $_SESSION[IntranetModulesModel::TABLENAME][$rows[IntranetModulesModel::FIELDNAME_NOM_INTRANET_MODULES]][IntranetModulesModel::FIELDNAME_PUBLIC_INTRANET_MODULES] = $rows[IntranetModulesModel::FIELDNAME_PUBLIC_INTRANET_MODULES];
+                $_SESSION[IntranetModulesModel::TABLENAME][$rows[IntranetModulesModel::FIELDNAME_NOM_INTRANET_MODULES]][IntranetModulesModel::FIELDNAME_CSS_INTRANET_MODULES] = $rows[IntranetModulesModel::FIELDNAME_CSS_INTRANET_MODULES];
+            }
+            $this->setDatabaseIsInitializedToTrue();
+        } //Fin des enregistrements MySQL en session
     }
 
     function buildEnvironmentConf() {
@@ -173,22 +184,22 @@ class GlobalConfig {
           Initialisation des variables de sessions et de connexions:
          */
 
-        //Variables relatives aux environnements:
+//Variables relatives aux environnements:
         switch (filter_input(INPUT_SERVER, 'SERVER_NAME')) {
 
-            //Environnement Codeur
+//Environnement Codeur
             case EnvironmentConf::SITE_COD:
 
                 $envToInit = new EnvironmentCod();
                 break;
 
-            //Environnement Développement
+//Environnement Développement
             Case EnvironmentConf::SITE_DEV:
 
                 $envToInit = null;
                 break;
 
-            //Environnement Production
+//Environnement Production
             Case EnvironmentConf::SITE_PRD:
 
                 $envToInit = null;
@@ -198,7 +209,7 @@ class GlobalConfig {
                 echo EnvironmentConf::ENVIRONMENT_DONT_EXIST_MESSAGE;
                 $envToInit = null;
         }
-        //Initialisation de la configuration
+//Initialisation de la configuration
         $this->setConf($envToInit->getConf());
 
         /**
@@ -209,7 +220,7 @@ class GlobalConfig {
             $_SESSION[GlobalConfig::VARNAME_EXEC_DEBUG_TIME_START] = microtime(true);
         }
 
-        //Sauvegarde de la configuration dans la session:
+//Sauvegarde de la configuration dans la session:
         $this->setConfIsInitializedToTrue();
     }
 
@@ -241,19 +252,21 @@ class GlobalConfig {
      * Ouverture de la connexion MySQL  
      */
     private static function openDatabaseConnexion2($paramGlobalConfig) {
-        $db = new PDO(GlobalConfig::MYSQL_HOST . $paramGlobalConfig->getConf()->getMysqlServerName()
-                . GlobalConfig::MYSQL_DBNAME . $paramGlobalConfig->getConf()->getMysqlDatabaseName()
-                , $paramGlobalConfig->getConf()->getMysqlDatabaseAuthentificationUsername()
-                , $paramGlobalConfig->getConf()->getMysqlDatabaseAuthentificationPassword()
-                , $options
-        );
-
-        /**
-         * PDO définit simplement le code d'erreur à inspecter
-         * et il émettra un message E_WARNING traditionnel
-         */
-        $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING);
-        $db->exec('SET NAMES utf8');
+        try {
+            $db = new PDO(GlobalConfig::MYSQL_HOST . $paramGlobalConfig->getConf()->getMysqlServerName()
+                    . GlobalConfig::MYSQL_DBNAME . $paramGlobalConfig->getConf()->getMysqlDatabaseName()
+                    , $paramGlobalConfig->getConf()->getMysqlDatabaseAuthentificationUsername()
+                    , $paramGlobalConfig->getConf()->getMysqlDatabaseAuthentificationPassword()
+            );
+            /**
+             * PDO définit simplement le code d'erreur à inspecter
+             * et il émettra un message E_WARNING traditionnel
+             */
+            $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            $db->exec('SET NAMES utf8');
+        } catch (PDOException $e) {
+            die('Erreur : ' . $e->getMessage());
+        }
         return $db;
     }
 
@@ -318,7 +331,7 @@ class GlobalConfig {
         $this->conf = $conf;
     }
 
-    //Constantes
+//Constantes
 //    const ENV_COD = 'developpeur';
 //    const ENV_DEV = 'developpement';
 //    const ENV_REC = 'recette';
@@ -330,8 +343,8 @@ class GlobalConfig {
 //    const SITE_TITLE = 'Intranet Groupe LDC';
 //    const LDAP_DEBUG = false;
 //    const DOC_APIGEN_DIR = 'doc/apigen';
-    //Variables
-    //A classer par ordre alphabérique
+//Variables
+//A classer par ordre alphabérique
 //    public $session_debug = false;
 //    public $exec_debug = false;
 //    public $exec_environnement = null;

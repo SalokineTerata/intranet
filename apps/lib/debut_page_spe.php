@@ -14,17 +14,18 @@ if ($module) {
     //include ('../$module/functions.php');
     //include ('../$module/functions.js');
 
-    $req = 'SELECT * FROM intranet_modules '
-            . 'WHERE nom_intranet_modules=\'' . $module . '\'';
-    ;
-    $array = DatabaseOperation::convertSqlStatementWithoutKeyToArray($req);
+    $array = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
+                    'SELECT ' . IntranetModulesModel::FIELDNAME_NOM_USUEL_INTRANET_MODULES . ',' . IntranetModulesModel::FIELDNAME_VERSION_INTRANET_MODULES
+                    . ' FROM ' . IntranetModulesModel::TABLENAME
+                    . ' WHERE ' . IntranetModulesModel::FIELDNAME_NOM_INTRANET_MODULES . '=\'' . $module . '\''
+    );
 
     foreach ($array as $rows) {
         $nom_usuel_intranet_modules = $rows[IntranetModulesModel::FIELDNAME_NOM_USUEL_INTRANET_MODULES];
         $version_intranet_modules = $rows[IntranetModulesModel::FIELDNAME_VERSION_INTRANET_MODULES];
     }
 
-    $title .= ' - $nom_usuel_intranet_modules - Version $version_intranet_modules';
+    $title .= ' - ' . $nom_usuel_intranet_modules . ' - Version ' . $version_intranet_modules;
 }
 
 //Intégrer le $printable dans le <body> de la page

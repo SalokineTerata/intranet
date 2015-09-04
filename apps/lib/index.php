@@ -64,7 +64,8 @@ Sinon, accéder à l\'<a href=index.php> intranet en vous authentifiant ici</a><
     echo '</head>';
 //} else {
 
-    $req = 'SELECT * FROM ' . $globalConfig->getConf()->getMysqlDatabaseAuthentificationTableName() . ' WHERE (login = ' . $autologin . ')';
+    $req = 'SELECT prenom,id_user,id_catsopro,id_service,id_type,nom,mail,lieu_geo,portail_wiki_salaries'
+            . ' FROM ' . $globalConfig->getConf()->getMysqlDatabaseAuthentificationTableName() . ' WHERE (login = ' . $autologin . ')';
     //echo $req;
     $q1 = DatabaseOperation::query($req);
     //'$autologin TEST'.mysql_num_rows($q1);
@@ -120,7 +121,6 @@ Sinon, accéder à l\'<a href=index.php> intranet en vous authentifiant ici</a><
         /* creation de la ligne user dans la table log */
         $req = DatabaseOperation::execute('insert into log (id_user, date) values(' . $id_user . ', NOW())');
         $ng = DatabaseOperation::execute('select * from log');
-        $num_log = mysql_num_rows($ng);
 
         /* --- redirection si ok sur groupe et service propre --- */
         //$q1 = DatabaseOperation::query('SELECT * FROM $mysql_table_authentification WHERE ((login = '$login') AND (pass = '$pass'))');

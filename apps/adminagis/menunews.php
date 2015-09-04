@@ -59,7 +59,7 @@
     </TD>
   </TR>
 
-  <?php if($id_type==4){
+  <?php 
 echo"<TR>";
 echo"<TD COLSPAN=5><img src=../lib/images/espaceur.png width=\"10\" height=\"27\">";
 echo"</TD>";
@@ -69,9 +69,9 @@ echo"<TD COLSPAN=3>";
 echo"<a href=../adminagis/gestion_public1.php><IMG SRC=\"../images-index/publicateurs.gif\" WIDTH=\"130\" HEIGHT=\"20\" border=0></a></TD>";
 echo"<TD><IMG SRC=../lib/images/espaceur.png WIDTH=10 HEIGHT=20></TD>";
 echo"</TR>";
-}?>
+?>
 
-<?php if($id_type>=3){
+<?php 
 echo"<TR>";
 echo"<TD COLSPAN=5><img src=../lib/images/espaceur.png width=\"10\" height=\"15\">";
 echo"</TD>";
@@ -82,9 +82,9 @@ echo"<TD COLSPAN=3><a href=\"../adminagis/liste_diffusion.php\"><IMG SRC=\"../im
 echo"<TD><IMG SRC=../lib/images/espaceur.png WIDTH=10 HEIGHT=20></TD>";
 echo"</TR>";
 
-} ?>
+ ?>
 
-<?php if($id_type>=3){
+<?php 
 echo"<TR>";
 echo"<TD COLSPAN=5><img src=../lib/images/espaceur.png width=\"10\" height=\"15\">";
 echo"</TD>";
@@ -94,9 +94,9 @@ echo"<TD><IMG SRC=../lib/images/espaceur.png WIDTH=10 HEIGHT=20></TD>";
 echo"<TD COLSPAN=3><a href=\"../adminagis/mod_diffusion.php\"><IMG SRC=\"../images-index/listes_diff2.gif\" WIDTH=\"130\" HEIGHT=\"20\" border=\"0\"></a></TD>";
 echo"<TD><IMG SRC=../lib/images/espaceur.png WIDTH=10 HEIGHT=20></TD>";
 echo"</TR>";
-} ?>
+ ?>
 
-<?php if($id_type>=3){
+<?php 
 echo"<TR>";
 echo"<TD COLSPAN=5><img src=../lib/images/espaceur.png width=\"10\" height=\"15\">";
 echo"</TD>";
@@ -106,7 +106,7 @@ echo"<TD><IMG SRC=../lib/images/espaceur.png WIDTH=10 HEIGHT=20></TD>";
 echo"<TD COLSPAN=3><a href=\"../adminagis/gestion_mots_inter.php\"><IMG SRC=\"../images-index/censure.gif\" WIDTH=130 HEIGHT=20 border=0></a></TD>";
 echo"<TD><IMG SRC=../lib/images/espaceur.png WIDTH=10 HEIGHT=20></TD>";
 echo"</TR>";
-} ?>
+ ?>
 
   <TR>
     <TD COLSPAN=5> <IMG SRC="../lib/images/espaceur.gif" WIDTH=150 HEIGHT=15></TD>
@@ -171,7 +171,6 @@ echo"  </TR>\n";
 $tilt = DatabaseOperation::query("select distinct * from articles, publicateur, modes where publicateur.id_user = $id_user and publicateur.id_service = articles.id_art_serv and articles.archive = 'oui' and modes.id_user=$id_user and modes.id_service=articles.id_art_serv and modes.serv_conf >= articles.nivo_conf");
 $tilt2 = mysql_num_rows($tilt);
 
-if($id_type>=2){
 echo "<TR>\n";
 echo "    <TD WIDTH=\"150\" HEIGHT=\"15\" COLSPAN=\"5\"> <IMG SRC=../lib/images/espaceur.png></TD>\n";
 echo "  </TR>\n";
@@ -198,10 +197,10 @@ echo"      </div>\n";
 echo"    </TD>\n";
 echo"    <TD WIDTH=\"11\">&nbsp;</TD>\n";
 echo"  </TR>\n";
-}
+
 ?>
 
-<?php if($id_type<>3){
+<?php 
 echo"<TR>";
 echo"<TD COLSPAN=5><img src=../lib/images/espaceur.png width=\"10\" height=\"20\">";
 echo"</TD>";
@@ -211,9 +210,9 @@ echo"<TD><IMG SRC=../lib/images/espaceur.png WIDTH=10 HEIGHT=20></TD>";
 echo"<TD COLSPAN=\"3\"><a href=\"../adminagis/article_desarchiver.php\"><IMG SRC=\"../images-index/gerer_archives.gif\" WIDTH=\"130\" HEIGHT=\"20\" border=0></a></TD>";
 echo"<TD><IMG SRC=../lib/images/espaceur.png WIDTH=10 HEIGHT=20></TD>";
 echo"</TR>";
-} ?>
+ ?>
 
-  <?php if($id_type==4){
+  <?php 
 echo"<TR>";
 echo"<TD COLSPAN=5><img src=../lib/images/espaceur.png width=\"10\" height=\"27\">";
 echo"</TD>";
@@ -223,7 +222,7 @@ echo"<TD COLSPAN=3>";
 echo"<a href=\"../adminagis/article_supprimer.php\"><IMG SRC=\"../images-index/gestion_supp.gif\" WIDTH=\"130\" HEIGHT=\"20\" border=0></a></TD>";
 echo"<TD><IMG SRC=../lib/images/espaceur.png WIDTH=10 HEIGHT=20></TD>";
 echo"</TR>";
-}?>
+?>
   <TR>
     <TD COLSPAN=5> <IMG SRC="../lib/images/espaceur.gif" WIDTH=150 HEIGHT=15></TD>
   </TR>

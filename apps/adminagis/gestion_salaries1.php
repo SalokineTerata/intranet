@@ -28,7 +28,6 @@ $userModel = new UserModel($idUser);
 $userView = new UserView($userModel);
 $userView->setIsEditable(TRUE);
 identification1('salaries', $idUser, $pass);
-UserModel::securadmin(4, $id_type);
 //  include('functions.php');
 //  include('functions.js');
 
@@ -151,19 +150,19 @@ if ($modifier == 'modifier') {
                 /*
                  * Association à un groupe d'utilisateur
                  */
-                $HtmlList = new HtmlListSelectTagName();
-                $arrayAscendant = DatabaseOperation::convertSqlStatementWithKeyAndOneFieldToArray(
-                                'SELECT ' . UserModel::KEYNAME . ', ' . UserModel::FIELDNAME_LOGIN
-                                . ' FROM ' . UserModel::TABLENAME
-                                . ' ORDER BY ' . UserModel::FIELDNAME_LOGIN
-                );
-                $HtmlList->setArrayListContent($arrayAscendant);
-                $HtmlList->getAttributes()->getName()->setValue(UserModel::FIELDNAME_ASENDANT_ID_SALARIES);
-                $HtmlList->setLabel(DatabaseDescription::getFieldDocLabel(UserModel::TABLENAME
-                                , UserModel::FIELDNAME_ASENDANT_ID_SALARIES));
-                $HtmlList->setIsEditable(TRUE);
-                $listeAscendant = $HtmlList->getHtmlResult();
-                $bloc .=$listeAscendant;
+//                $HtmlList = new HtmlListSelectTagName();
+//                $arrayAscendant = DatabaseOperation::convertSqlStatementWithKeyAndOneFieldToArray(
+//                                'SELECT ' . UserModel::KEYNAME . ', ' . UserModel::FIELDNAME_LOGIN
+//                                . ' FROM ' . UserModel::TABLENAME
+//                                . ' ORDER BY ' . UserModel::FIELDNAME_LOGIN
+//                );
+//                $HtmlList->setArrayListContent($arrayAscendant);
+//                $HtmlList->getAttributes()->getName()->setValue(UserModel::FIELDNAME_ASENDANT_ID_SALARIES);
+//                $HtmlList->setLabel(DatabaseDescription::getFieldDocLabel(UserModel::TABLENAME
+//                                , UserModel::FIELDNAME_ASENDANT_ID_SALARIES));
+//                $HtmlList->setIsEditable(TRUE);
+//                $listeAscendant = $HtmlList->getHtmlResult();
+//                $bloc .=$listeAscendant;
                 /*
                   $HtmlListBoolen = new HtmlListBoolean();
                   $HtmlListBoolen->getAttributes()->getName()->setValue(UserModel::FIELDNAME_ECRITURE);
@@ -249,30 +248,6 @@ if ($modifier == 'modifier') {
                         ?>
                     </center>
                     </td>
-                    <td  class='loginFFFFFFdroit' colspan='2'>
-                    <center><br>
-                        Service <br>
-                        <?php
-                        echo ('<select name=\'service\'>\n');
-                        /*
-                         * Constitution de la liste déroulante des noms des groupes 
-                         */
-                        $arrayService = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
-                                        'SELECT ' . ServicesModel::KEYNAME
-                                        . ', ' . ServicesModel::FIELDNAME_INTITULE_SER
-                                        . ' FROM ' . ServicesModel::TABLENAME
-                                        . ' ORDER BY ' . ServicesModel::FIELDNAME_INTITULE_SER
-                        );
-
-                        if ($arrayService) {
-                            foreach ($arrayService as $rowsService) {
-                                echo ('<option value=\'' . $rowsService[ServicesModel::KEYNAME] . '\'>' . $rowsService[ServicesModel::FIELDNAME_INTITULE_SER] . '</option>');
-                            }
-                        }
-                        echo ('</select>');
-                        ?>
-                    </center>
-                    </td>
                     <td  class='loginFFFFFFdroit'>
                     <center><br>
                         Type<br>
@@ -295,174 +270,33 @@ if ($modifier == 'modifier') {
                         ?>
                     </center>
                     </td>
-                    <td  class='loginFFFFFFdroit' colspan='2'>
-                    <center>
-                        Droit d'&eacute;criture <?php
-                        $ecriture = 'oui';
-                        //echo ('test database = $mysql_database');
-                        echo ('<select name=\'ecriture\'>');
-                        /*
-                         * Affichage
-                         */
-                        echo makeSelectList($mysql_database, 'salaries', 'ecriture');
-                        echo ('</select>');
-                        ?>
-                    </center>
-                    </td>
+
                     </tr>
                 </table><br>
-                <table width='500' border='1' cellspacing='1' cellpadding='3' align='center'>
-
-                    <tr>
-                        <td class='logFFE5B2' colspan='8'>
-                    <center>
-                        Fiches techniques - Fiche Identié Produit (FIP)
-                    </center>
-                    </td>
-                    </tr>
-
-                    <tr>
-                        <td class='loginFFFFFFdroit' valign='top' width='172'>
-                    <center>
-                        Ecriture<br>
-                        <?php
-                        echo ('<select name=\'ecritureft\'>' . makeSelectList($mysql_database, 'droitft', 'ecritureft') . '</select>');
-                        ?>
-                        <br>
-                    </center>
-                    </td>
-
-                    <td class='loginFFFFFFdroit' valign='top' width='153'>
-                    <center>
-                        Création FT<br>
-                        <?php
-                        echo ('<select name=\'creation_ft\'>' . makeSelectListChecked($mysql_database, 'droitft', 'creation_ft', 'non') . '</select>');
-                        ?>
-                        <br>
-                    </center>
-                    </td>
-
-                    <td class='loginFFFFFFdroit' valign='top' width='153'>
-                    <center>
-                        Création FIP<br>
-                        <?php
-                        echo ('<select name=\'creation_fiche_produit\'>' . makeSelectListChecked($mysql_database, 'droitft', 'creation_fiche_produit', 'non') . '</select>');
-                        ?>
-                        <br>
-                    </center>
-                    </td>
-
-
-                    <td class='loginFFFFFFdroit' valign='top' width='153'>
-                    <center>
-                        Lecture<br>
-                        <?php
-                        echo ('<select name=\'lectureft\'>' . makeSelectList($mysql_database, 'droitft', 'lectureft') . '</select>');
-                        ?>
-                        <br>
-                    </center>
-                    </td>
-
-                    <td class='loginFFFFFFdroit' valign='top' colspan='4' width='159'>
-                    <center>
-                        Validation<br>
-                        <?php
-                        echo ('<select name=\'validft\'>' . makeSelectList($mysql_database, 'droitft', 'validft') . '</select>');
-                        ?>
-
-                    </center>
-                    </td>
-                    </tr>
-                </table>
-
-                <br>
-
-                <table width='500' border='1' cellspacing='1' cellpadding='3' align='center'>
-                    <tr>
-                        <td class='logFFE5B2'>
-                    <center>
-                        Statistiques
-                    </center>
-                    </td>
-                    </tr>
-                    <tr>
-                        <td class='loginFFFFFFdroit' valign='top' align='center'>
-                    <center>
-                        Droit d'acc&egrave;s au module statistiques<br>
-                        <?php
-                        echo ('<select name=\'droitstat\'>' . makeSelectList($mysql_database, 'droitft', 'droitstat') . '</select>');
-                        ?>
-                    </center>
-                    </td>
-                    </tr>
-                </table>
-
-                <br>
-
-                <table width='500' border='1' cellspacing='1' cellpadding='3' align='center'>
-                    <tr>
-                        <td class='logFFE5B2' colspan='3'>
-                    <center>
-                        Divers
-                    </center>
-                    </td>
-                    </tr>
-                    <tr>
-                        <td class='loginFFFFFFdroit' valign='top' width='172'>
-                    <center>
-                        Ecriture News d&eacute;filante<br>
-                        <?php
-                        echo ('<select name=\'newsdefil\'>' . makeSelectList($mysql_database, 'salaries', 'newsdefil') . '</select>');
-                        ?>
-                        <br>
-                    </center>
-                    </td>
-                    <td class='loginFFFFFFdroit' valign='top' width='154'>
-                    <center>
-                        Membre CE<br>
-                        <?php
-                        echo ('<select name=\'membre_ce\'>' . makeSelectList($mysql_database, 'salaries', 'membre_ce') . '</select>');
-                        ?>
-                    </center>
-                    </td>
-                    <td class='loginFFFFFFdroit' valign='top' width='158'>
-                    <center>
-                        Localisation<br>
-                        <?php
-                        echo ('<select name=\'lieu_geo\'>\n');
-                        /* Constitution de la liste déroulante des noms des groupes */
-                        $req = 'select * from geo where site_actif = 1 order by geo';
-                        $arrayGeo = DatabaseOperation::convertSqlStatementKeyAndOneFieldToArray($req);
-                        if ($arrayGeo) {
-                            foreach ($arrayGeo as $rowGeo) {
-                                echo ('<option value=\'$rowGeo[0]\'>' . $rowGeo[1] . '</option>');
-                            }
-                        }
-                        echo ('</select>');
-
-                        /*                         * ***************************************************
-                          Construction des droits d'accès pour tous les modules:
-                         * ***************************Boris Sanègre 2003.03.25 */
-                        //require ('droits_acces.inc');
-                        IntranetDroitsAccesModel::BuildHtmlDroitsAcces();
+                <?php
+                /*
+                 * Construction des droits d'accès pour tous les modules:
+                 * Boris Sanègre 2003.03.25                
+                 */
+                IntranetDroitsAccesModel::BuildHtmlDroitsAcces();
 
 // Fin de la page
 
-                        echo '<center>';
-                        echo '<a href=# onClick=nonvide();><img src=../zimages/valider-j.gif width=130 height=20 border=0 alt=`Enregistrement d\'un salarié`></a>';
-                        echo '<input type=hidden name=valider value=valider>';
-                        echo '</center>';
-                        echo '</td>';
-                        echo '</tr>';
-                        echo '<tr>';
-                        echo '<td>&nbsp;</td>';
-                        echo '</tr>';
-                        echo '</table>';
-                        echo '</form>';
+                echo '<center>';
+                echo '<a href=# onClick=nonvide();><img src=../zimages/valider-j.gif width=130 height=20 border=0 alt=`Enregistrement d\'un salarié`></a>';
+                echo '<input type=hidden name=valider value=valider>';
+                echo '</center>';
+                echo '</td>';
+                echo '</tr>';
+                echo '<tr>';
+                echo '<td>&nbsp;</td>';
+                echo '</tr>';
+                echo '</table>';
+                echo '</form>';
 
-                        include ('../adminagis/cadrebas.php');
-                        echo '</body>';
-                        echo '</html>';
+                include ('../adminagis/cadrebas.php');
+                echo '</body>';
+                echo '</html>';
 
-                        include ('../inc/footer.php');
-                        
+                include ('../inc/footer.php');
+                

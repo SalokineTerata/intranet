@@ -2,9 +2,9 @@
     <tr>
         <td width="150" valign="top">
             <?php
-            if ($id_type == 4) {
+           
                 include("menuent.php");
-            }
+           
             ?>
             <?php
             /*

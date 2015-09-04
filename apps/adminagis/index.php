@@ -172,15 +172,9 @@ switch ($output) {
   <tr>
     <td width=150 valign=top bgcolor=#FFCC66>
 ';
-        if ($id_type == 1) {
-            include('menunews.php');
-        }
-        if ($id_type == 2) {
-            include('menunews.php');
-        }
-        if ($id_type == 3) {
-            include('menunews.php');
-        }
+
+        include('menunews.php');
+
 
         echo '
       &nbsp; </td>
@@ -194,34 +188,34 @@ switch ($output) {
         <tr>
           <td width=33% height=80>
 ';
-        if ($id_type == 4) {
-            echo '<div align=center>
+
+        echo '<div align=center>
       <a href=gestion_salaries1.php?repere=1>
       <img src=../images-index/grosadmin.gif width=197 height=54 border=0>
       </a>
       </div>
       ';
-        }
+
 
         echo '</td>
      <td width=34%>
 ';
-        if ($id_type == 4) {
-            echo '<div align=center><a href=gestion_public1.php?repere=2>
+
+        echo '<div align=center><a href=gestion_public1.php?repere=2>
       <img src=../images-index/grosadmin2.gif width=197 height=54 border=0>
       </a></div>
       ';
-        }
+
         echo '</td>
      <td width=33%>
      ';
 
-        if ($id_type == 4) {
-            echo '<div align=center><a href=../news/crea_articlece.php?repere=3>
+
+        echo '<div align=center><a href=../news/crea_articlece.php?repere=3>
       <img src=../images-index/grosadmin2.gif width=197 height=54 border=0>
       </a></div>
       ';
-        }
+
 
         echo '
            </td>

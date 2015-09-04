@@ -16,5 +16,6 @@ class IntranetModulesModel extends AbstractModel {
     const FIELDNAME_VERSION_INTRANET_MODULES = 'version_intranet_modules';
     const FIELDNAME_VISIBLE_INTRANET_MODULES = 'visible_intranet_modules';
     const FIELDNAME_PUBLIC_INTRANET_MODULES = 'public_intranet_modules';
+    const FIELDNAME_CSS_INTRANET_MODULES = 'css_intranet_module';
 
 }

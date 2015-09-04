@@ -30,7 +30,6 @@ $paramUserMail = Lib::getParameterFromRequest('sal_mail');
 $paramModifier = Lib::getParameterFromRequest('modifier');
 $paramValider = Lib::getParameterFromRequest('valider');
 identification1('salaries', $login, $pass);
-UserModel::securadmin(4, $id_type);
 
 if ($paramValider == 'valider') {
 
@@ -138,16 +137,16 @@ if ($paramValider == 'valider') {
      * Recuperation des données pour affichage
      */
     $arrayUserDetail = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
-    'SELECT ' . UserModel::FIELDNAME_ECRITURE
-    . ', ' . UserModel::FIELDNAME_ID_CATSOPRO
-    . ', ' . UserModel::FIELDNAME_ID_SERVICE
-    . ', ' . UserModel::FIELDNAME_LIEU_GEO
-    . ', ' . UserModel::FIELDNAME_MAIL
-    . ', ' . UserModel::FIELDNAME_MEMBRE_CE
-    . ', ' . UserModel::FIELDNAME_NEWSDEFIL
-    . ', ' . UserModel::FIELDNAME_PASSWORD
-    . ' FROM ' . UserModel::TABLENAME
-    . ' WHERE ' . UserModel::KEYNAME . '=\'' . $idUser . '\''
+                    'SELECT ' . UserModel::FIELDNAME_ECRITURE
+                    . ', ' . UserModel::FIELDNAME_ID_CATSOPRO
+                    . ', ' . UserModel::FIELDNAME_ID_SERVICE
+                    . ', ' . UserModel::FIELDNAME_LIEU_GEO
+                    . ', ' . UserModel::FIELDNAME_MAIL
+                    . ', ' . UserModel::FIELDNAME_MEMBRE_CE
+                    . ', ' . UserModel::FIELDNAME_NEWSDEFIL
+                    . ', ' . UserModel::FIELDNAME_PASSWORD
+                    . ' FROM ' . UserModel::TABLENAME
+                    . ' WHERE ' . UserModel::KEYNAME . '=\'' . $idUser . '\''
     );
     if ($arrayUserDetail) {
         foreach ($arrayUserDetail as $rowsUserDetail) {
@@ -210,7 +209,7 @@ if ($paramValider == 'valider') {
 //    if ($result== false)
 //      echo ('L'insertion dans la table MODES non reussie');
 
-        /* Parcours de la table service (exclu le service du salarie) pour inserer les autres modes */
+    /* Parcours de la table service (exclu le service du salarie) pour inserer les autres modes */
 //    $req='select distinct id_service from services where id_service <> '$service'';
 //    $result=DatabaseOperation::query($req);
 //    if ($result != false)
@@ -227,23 +226,23 @@ if ($paramValider == 'valider') {
 //        $i++;
 //      }
 //    }
-    }
-    /*
-     * Quand un salarie est cree, envoi d'un mail pour lui donner son profil
-     */
-    $sujet = 'Inscription Intranet Agis';
-    $corpsmail = 'Bonjour,\n '
-    . 'Votre profil vient d\'être créé dans l\'intranet AGIS.\n'
-    . 'Votre login est : $paramUserLogin\n'
-    . '\nL\'administrateur Agis.\n';
-$typeMail='';
-envoismail($sujet, $corpsmail, $paramUserMail, 'postmaster@agis-sa.fr',$typeMail);
+}
+/*
+ * Quand un salarie est cree, envoi d'un mail pour lui donner son profil
+ */
+$sujet = 'Inscription Intranet Agis';
+$corpsmail = 'Bonjour,\n '
+        . 'Votre profil vient d\'être créé dans l\'intranet AGIS.\n'
+        . 'Votre login est : $paramUserLogin\n'
+        . '\nL\'administrateur Agis.\n';
+$typeMail = '';
+envoismail($sujet, $corpsmail, $paramUserMail, 'postmaster@agis-sa.fr', $typeMail);
 ?>
 <html>
     <head>
         <title>Gestion des salari&eacute;s</title>
         <meta http-equiv='Content-Type' content='text / html;
-    charset = iso-8859-1'>
+              charset = iso-8859-1'>
         <link rel='stylesheet' href='../lib/css/intra01.css' type='text/css'>
         <script language='JavaScript'>
             <!--
@@ -269,344 +268,199 @@ envoismail($sujet, $corpsmail, $paramUserMail, 'postmaster@agis-sa.fr',$typeMail
     $time = timeout($login);
     echo '$time';
     ?>)' bgcolor='#FFCC66' text='#000000' leftmargin='0' topmargin='0' marginwidth='0' marginheight='0'>
-    <?php
-    include ('cadrehautent.php');
-    ?>
-    <form name='salarie' method='post' action='gestion_salaries1.php'>
-        <input type=hidden name=sal_user value=<?php $idUser ?>>
+              <?php
+              include ('cadrehautent.php');
+              ?>
+        <form name='salarie' method='post' action='gestion_salaries1.php'>
+            <input type=hidden name=sal_user value=<?php $idUser ?>>
 
 
-        <table width='620' border='0' cellspacing='0' cellpadding='0' height='178'>
-            <tr>
-                <td>
-                    <table border='0' cellspacing='0' cellpadding='0' width='600'>
-                        <tr>
-                            <td><img src='../images_pop/etape2_salaries.gif' height='62'></td>
-                            <td><img src='../images_pop/gestion_salaries.gif' height='62'></td>
-                            <td><a href='../aide.php#entreprise' target='_blank'><img src=../lib/images/bandeau_aide_point_interrogation.gif width='28' height='62' border='0'></a></td>
-                        </tr>
-                    </table>
-                    <table width='100%' border='0' cellspacing='0' cellpadding='0'>
-                        <tr>
-                            <td class='loginFFFFFF'>
-                                <div align='center'><img src=../lib/images/espaceur.gif width='10' height='20'>
-                                    <table width='500' border='0' cellspacing='4' cellpadding='0' align='center'>
-                                        <tr>
-                                            <td class='loginFFCC66droit' width='20%'><b>Nom :</b></td>
-                                            <td class='loginFFCC66' width='35%'>
-                                                <?php
-                                                echo ('$paramUserNom');
-                                                ?>
-                                            </td>
-                                            <td class='loginFFCC66droit' width='33%'><b>Login :<b></td>
-                                                        <td class='loginFFCC66' width='53%'>
-                                                            <?php
-                                                            echo ('$paramUserLogin');
-                                                            ?>
-                                                        </td>
-                                                        <td width='15%' class='loginFFCC66'>&nbsp;</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td class='loginFFCC66droit' width='20%'><b>Pr&eacute;nom :</b></td>
-                                                            <td class='loginFFCC66' width='35%'>
-                                                                <?php
-                                                                echo ('$paramUserPrenom');
-                                                                ?>
-                                                            </td>
-                                                            <td class='loginFFCC66droit' width='33%'><b>&nbsp;</b></td>
-                                                            <td class='loginFFCC66' width='53%'>&nbsp;</td>
-                                                            <td class='loginFFCC66' width='15%'>&nbsp;</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td class='loginFFFFFFdroit' width='20%'>
-                                                                <div align='center'></div>
-                                                            </td>
-                                                            <td class='loginFFFFFF' width='35%'>
-                                                                <div align='right'> </div>
-                                                            </td>
-                                                            <td class='loginFFCC66droit' width='33%'><b>Mail :</b></td>
+            <table width='620' border='0' cellspacing='0' cellpadding='0' height='178'>
+                <tr>
+                    <td>
+                        <table border='0' cellspacing='0' cellpadding='0' width='600'>
+                            <tr>
+                                <td><img src='../images_pop/etape2_salaries.gif' height='62'></td>
+                                <td><img src='../images_pop/gestion_salaries.gif' height='62'></td>
+                                <td><a href='../aide.php#entreprise' target='_blank'><img src=../lib/images/bandeau_aide_point_interrogation.gif width='28' height='62' border='0'></a></td>
+                            </tr>
+                        </table>
+                        <table width='100%' border='0' cellspacing='0' cellpadding='0'>
+                            <tr>
+                                <td class='loginFFFFFF'>
+                                    <div align='center'><img src=../lib/images/espaceur.gif width='10' height='20'>
+                                        <table width='500' border='0' cellspacing='4' cellpadding='0' align='center'>
+                                            <tr>
+                                                <td class='loginFFCC66droit' width='20%'><b>Nom :</b></td>
+                                                <td class='loginFFCC66' width='35%'>
+                                                    <?php
+                                                    echo ($paramUserNom);
+                                                    ?>
+                                                </td>
+                                                <td class='loginFFCC66droit' width='33%'><b>Login :<b></td>
                                                             <td class='loginFFCC66' width='53%'>
                                                                 <?php
-                                                                echo ('$paramUserMail');
+                                                                echo ($paramUserLogin);
                                                                 ?>
                                                             </td>
-                                                            <td width='15%'>&nbsp; </td>
-                                                        </tr>
-                                                        </table>
-                                                        <table width='500' border='1' cellspacing='2' cellpadding='0' align='center'>
-                                                            <tr>
-                                                                <td  class='loginFFFFFFCENTRE'><b>CSP</b> </td>
-                                                                <td  class='loginFFFFFFCENTRE'><b>Service</b> </td>
-                                                                <td  class='loginFFFFFFCENTRE'><b>Type</b></td>
-                                                                <td  class='loginFFFFFFCENTRE'><b>Droit d'&eacute;criture</b> </td>
+                                                            <td width='15%' class='loginFFCC66'>&nbsp;</td>
                                                             </tr>
                                                             <tr>
-                                                                <td  class='loginFFCC66' height='22'>
-                                                            <center>
-                                                                <p>
+                                                                <td class='loginFFCC66droit' width='20%'><b>Pr&eacute;nom :</b></td>
+                                                                <td class='loginFFCC66' width='35%'>
                                                                     <?php
-                                                                    /*
-                                                                     * Affichage de l'intitule de la CSP
-                                                                     */
-                                                                    $arrayCatsopro = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
-                                                                                    'SELECT ' . CatsoproModel::FIELDNAME_INTITULE_CAT
-                                                                                    . ' FROM ' . CatsoproModel::TABLENAME
-                                                                                    . ' WHERE ' . CatsoproModel::KEYNAME . '=' . $paramUserCatsopro
-                                                                    );
-                                                                    if ($arrayCatsopro) {
-                                                                        foreach ($arrayCatsopro as $rowsCatsopro) {
-                                                                            $intitule_cat = $rowsCatsopro[CatsoproModel::FIELDNAME_INTITULE_CAT];
-                                                                        }
-                                                                        $intitule_cat = stripslashes($intitule_cat);
-                                                                        echo ('$intitule_cat\n');
-                                                                    }
+                                                                    echo ($paramUserPrenom);
                                                                     ?>
-                                                                </p>
-                                                            </center>
-                                                            </td>
-                                                            <td  class='loginFFCC66' height='22'>
-                                                            <center>
-                                                                <p>
+                                                                </td>
+                                                                <td class='loginFFCC66droit' width='33%'><b>&nbsp;</b></td>
+                                                                <td class='loginFFCC66' width='53%'>&nbsp;</td>
+                                                                <td class='loginFFCC66' width='15%'>&nbsp;</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class='loginFFFFFFdroit' width='20%'>
+                                                                    <div align='center'></div>
+                                                                </td>
+                                                                <td class='loginFFFFFF' width='35%'>
+                                                                    <div align='right'> </div>
+                                                                </td>
+                                                                <td class='loginFFCC66droit' width='33%'><b>Mail :</b></td>
+                                                                <td class='loginFFCC66' width='53%'>
                                                                     <?php
-                                                                    /* Affichage de l'intitule du service */
-                                                                    $arrayService = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
-                                                                    'SELECT ' . ServicesModel::FIELDNAME_INTITULE_SER
-                                                                    . ' FROM ' . ServicesModel::TABLENAME
-                                                                    . ' WHERE ' . ServicesModel::KEYNAME . '=\'' . $id_service.'\''
-                                                                    );
-                                                                    if ($arrayService) {
-                                                                        foreach ($arrayService as $rowsService) {
-                                                                            $intitule_ser = $rowsService[ServicesModel::FIELDNAME_INTITULE_SER];
-                                                                        }
-                                                                        $intitule_ser = stripslashes($intitule_ser);
-                                                                        echo ('$intitule_ser\n');
-                                                                    }
+                                                                    echo ($paramUserMail);
                                                                     ?>
-                                                                </p>
-                                                            </center>
-                                                            </td>
-                                                            <td  class='loginFFCC66' height='22'>
-                                                            <center>
-                                                                <p>
-                                                                    <?php
-                                                                    /*
-                                                                     * Affichage de l'intitule du service 
-                                                                     */
-                                                                    $arrayType = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
-                                                                    'SELECT ' . TypesModel::FIELDNAME_INTITULE_TYP
-                                                                    . ' FROM ' . TypesModel::TABLENAME
-                                                                    . ' WHERE ' . TypesModel::KEYNAME . '=\'' . $paramUserType.'\''
-                                                                    );
-                                                                    if ($arrayType) {
-                                                                        foreach ($arrayType as $rowsType) {
-                                                                            $intitule_typ = $rowsType[TypesModel::FIELDNAME_INTITULE_TYP];
-                                                                        }
-                                                                        $intitule_typ = stripslashes($intitule_typ);
-                                                                        echo ('$intitule_typ\n');
-                                                                    }
-                                                                    ?>
-                                                                </p>
-                                                            </center>
-                                                            </td>
-                                                            <td  class='loginFFCC66' height='22'>
-                                                            <center>
-                                                                <p>
-                                                                    <?php
-                                                                    echo ('$paramEcriture');
-                                                                    ?>
-                                                                </p>
-                                                            </center>
-                                                            </td>
+                                                                </td>
+                                                                <td width='15%'>&nbsp; </td>
                                                             </tr>
-                                                        </table>
-                                                        <table width='500' border='1' cellspacing='2' cellpadding='0' align='center'>
-
-                                                            <tr>
-
-                                                                <td class='loginFFFFFFdroit' colspan='6'>
-
-                                                            <center>
-                                                                Fiches techniques
-
-                                                            </center>
-                                                            </td>
-                                                            </tr>
-
-                                                            <tr>
-
-                                                                <td class='loginFFFFFFdroit' valign='top' width='172'>
-
-                                                            <center>
-                                                                Ecriture<br>
-                                                                <?php
-                                                                echo ('$paramEcritureft');
-                                                                ?>
-                                                                <br>
-
-                                                            </center>
-                                                            </td>
-                                                            <td class='loginFFFFFFdroit' valign='top' width='153'>
-
-                                                            <center>
-                                                                Lecture<br>
-                                                                <?php
-                                                                echo ('$paramLectureft');
-                                                                ?>
-                                                                <br>
-
-                                                            </center>
-                                                            </td>
-                                                            <td class='loginFFFFFFdroit' valign='top' colspan='4' width='159'>
-
-                                                            <center>
-                                                                Validation<br>
-                                                                <?php
-                                                                echo ('$paramValidft');
-                                                                ?>
-
-                                                            </center>
-                                                            </td>
-                                                            </tr>
-
-                                                        </table>
-                                                        <table width='500' border='1' cellspacing='2' cellpadding='0' align='center'>
-
-
-                                                            <tr>
-
-
-                                                                <td class='loginFFFFFFdroit' colspan='3'>
-
-
-                                                            <center>
-                                                                Divers
-
-
-                                                            </center>
-                                                            </td>
-                                                            </tr>
-
-
-                                                            <tr>
-
-
-                                                                <td class='loginFFFFFFdroit' valign='top' width='172'>
-
-
-                                                            <center>
-                                                                Ecriture News d&eacute;filante<br>
-                                                                <?php
-                                                                echo ('$paramNewsDefil');
-                                                                ?>
-                                                                <br>
-
-
-                                                            </center>
-                                                            </td>
-                                                            <td class='loginFFFFFFdroit' valign='top' width='154'>
-
-
-                                                            <center>
-                                                                Membre CE<br>
-                                                                <?php
-                                                                echo ('$paramMembreCe');
-                                                                ?>
-
-
-
-                                                            </center>
-                                                            </td>
-                                                            <td class='loginFFFFFFdroit' valign='top' width='158'>
-
-
-                                                            <center>
-                                                                Localisation<br>
-                                                                <?php
-                                                                $arrayGeo = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
-                                                                                'SELECT ' . GeoModel::FIELDNAME_GEO
-                                                                                . ' FROM ' . GeoModel::TABLENAME
-                                                                                . ' WHERE ' . GeoModel::KEYNAME . '=' . $lieu_geo
-                                                                );
-
-                                                                if ($arrayGeo)
-                                                                    foreach ($arrayGeo as $rowsGeo) {
-                                                                        $geo = $rowsGeo[GeoModel::FIELDNAME_GEO];
-                                                                    }
-                                                                echo ('$geo');
-
-
-
-                                                                /*                                                                 * ******************************************
-                                                                  Insertion des droits d'accès de l'utilisateur
-                                                                 * ******************Boris Sanègre 2003.03.28 */
-
-                                                                echo '<br>';
-                                                                echo '</center>';
-                                                                echo '</td>';
-                                                                echo '</tr>';
-                                                                echo '</table>';
-                                                                echo '</div>';
-                                                                echo '</td>';
-                                                                echo '</tr>';
-                                                                echo '<tr>';
-                                                                echo '<td>';
-                                                                echo '<br>';
-                                                                echo '</td>';
-                                                                echo '</tr>';
-
-
-                                                                //Droits d'accès du module
-                                                                /*
-                                                                 * Récupération des droits d'accès faisable dans l'Intranet
-                                                                 */
-
-                                                                $arrayModule = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
-                                                                                'SELECT ' . IntranetModulesModel::TABLENAME . '.*'
-                                                                                . ', ' . IntranetActionsModel::TABLENAME . '.*'
-                                                                                . ' FROM ' . IntranetActionsModel::TABLENAME . ', ' . IntranetModulesModel::TABLENAME
-                                                                                . ' WHERE (' . IntranetActionsModel::TABLENAME . '.' . IntranetActionsModel::FIELDNAME_MODULE_INTRANET_ACTIONS
-                                                                                . '=' . IntranetModulesModel::TABLENAME . '.' . IntranetModulesModel::KEYNAME
-                                                                                . ' OR ' . IntranetActionsModel::TABLENAME . '.' . IntranetActionsModel::FIELDNAME_MODULE_INTRANET_ACTIONS . '=0 )'
-                                                                );
-                                                                foreach ($arrayModule as $rowsModule) {
-
-                                                                    /*
-                                                                     * Déclaration du droits d'accès fourni par droits_acces.inc et récupération de son niveau d'accès
-                                                                     */
-                                                                    if ($rowsModule[IntranetModulesModel::KEYNAME] <> 19) {
-                                                                        $nom_niveau_intranet_droits_acces = 'module' . $rowsModule[IntranetModulesModel::KEYNAME] . '_action' . $rowsModule[IntranetActionsModel::KEYNAME];
-                                                                    } else {
-                                                                        $nom_niveau_intranet_droits_acces = $rowsModule[IntranetActionsModel::FIELDNAME_NOM_INTRANET_ACTIONS] . '_' . $rowsModule[IntranetActionsModel::KEYNAME];
-                                                                    }
-                                                                    $niveau_intranet_droits_acces = Lib::getParameterFromRequest($nom_niveau_intranet_droits_acces);
-
-                                                                    /*
-                                                                     * Enregistrement/Suppression du droit d'accès
-                                                                     */
-                                                                    $id_intranet_modules = $rowsModule[IntranetModulesModel::KEYNAME];
-                                                                    $id_intranet_actions = $rowsModule[IntranetActionsModel::KEYNAME];
-
-
-                                                                    if ($niveau_intranet_droits_acces) {
+                                                            </table>
+                                                            <table width='500' border='1' cellspacing='2' cellpadding='0' align='center'>
+                                                                <tr>
+                                                                    <td  class='loginFFFFFFCENTRE'><b>CSP</b> </td>
+                                                                    <td  class='loginFFFFFFCENTRE'><b>Service</b> </td>
+                                                                    <td  class='loginFFFFFFCENTRE'><b>Type</b></td>
+                                                                    <td  class='loginFFFFFFCENTRE'><b>Droit d'&eacute;criture</b> </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td  class='loginFFCC66' height='22'>
+                                                                <center>
+                                                                    <p>
+                                                                        <?php
                                                                         /*
-                                                                         * Réécriture du droits d'accès
+                                                                         * Affichage de l'intitule de la CSP
                                                                          */
-                                                                        DatabaseOperation::execute(
-                                                                                'INSERT INTO ' . IntranetDroitsAccesModel::TABLENAME
-                                                                                . ' SET ' . IntranetDroitsAccesModel::FIELDNAME_ID_INTRANET_MODULES . '=' . $id_intranet_modules
-                                                                                . ', ' . IntranetDroitsAccesModel::FIELDNAME_ID_USER . '=' . $idUser
-                                                                                . ', ' . IntranetDroitsAccesModel::FIELDNAME_ID_INTRANET_ACTIONS . '=' . $id_intranet_actions
-                                                                                . ', ' . IntranetDroitsAccesModel::FIELDNAME_NIVEAU_INTRANET_DROITS_ACCES . '=' . $niveau_intranet_droits_acces
+                                                                        $arrayCatsopro = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
+                                                                                        'SELECT ' . CatsoproModel::FIELDNAME_INTITULE_CAT
+                                                                                        . ' FROM ' . CatsoproModel::TABLENAME
+                                                                                        . ' WHERE ' . CatsoproModel::KEYNAME . '=' . $paramUserCatsopro
                                                                         );
-                                                                    }
+                                                                        if ($arrayCatsopro) {
+                                                                            foreach ($arrayCatsopro as $rowsCatsopro) {
+                                                                                $intitule_cat = $rowsCatsopro[CatsoproModel::FIELDNAME_INTITULE_CAT];
+                                                                            }
+                                                                            $intitule_cat = stripslashes($intitule_cat);
+                                                                            echo ($intitule_cat);
+                                                                        }
+                                                                        ?>
+                                                                    </p>
+                                                                </center>
+                                                                </td>
 
-                                                                    echo '</tr>';
-//    echo '</table>';
+                                                                <td  class='loginFFCC66' height='22'>
+                                                                <center>
+                                                                    <p>
+                                                                        <?php
+                                                                        /*
+                                                                         * Affichage de l'intitule du service 
+                                                                         */
+                                                                        $arrayType = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
+                                                                                        'SELECT ' . TypesModel::FIELDNAME_INTITULE_TYP
+                                                                                        . ' FROM ' . TypesModel::TABLENAME
+                                                                                        . ' WHERE ' . TypesModel::KEYNAME . '=\'' . $paramUserType . '\''
+                                                                        );
+                                                                        if ($arrayType) {
+                                                                            foreach ($arrayType as $rowsType) {
+                                                                                $intitule_typ = $rowsType[TypesModel::FIELDNAME_INTITULE_TYP];
+                                                                            }
+                                                                            $intitule_typ = stripslashes($intitule_typ);
+                                                                            echo ($intitule_typ);
+                                                                        }
+                                                                        ?>
+                                                                    </p>
+                                                                </center>
+                                                                </td>
+                                                                </tr>
+                                                            </table>
+                                                            <?php
+                                                            /**                                                             
+                                                             * Insertion des droits d'accès de l'utilisateur
+                                                             * Boris Sanègre 2003.03.28
+                                                             */
+                                                            echo '<br>';
+                                                            echo '</center>';
+                                                            echo '</td>';
+                                                            echo '</tr>';
+                                                            echo '</table>';
+                                                            echo '</div>';
+                                                            echo '</td>';
+                                                            echo '</tr>';
+                                                            echo '<tr>';
+                                                            echo '<td>';
+                                                            echo '<br>';
+                                                            echo '</td>';
+                                                            echo '</tr>';
+
+
+                                                            //Droits d'accès du module
+                                                            /*
+                                                             * Récupération des droits d'accès faisable dans l'Intranet
+                                                             */
+
+                                                            $arrayModule = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
+                                                                            'SELECT ' . IntranetModulesModel::TABLENAME . '.*'
+                                                                            . ', ' . IntranetActionsModel::TABLENAME . '.*'
+                                                                            . ' FROM ' . IntranetActionsModel::TABLENAME . ', ' . IntranetModulesModel::TABLENAME
+                                                                            . ' WHERE (' . IntranetActionsModel::TABLENAME . '.' . IntranetActionsModel::FIELDNAME_MODULE_INTRANET_ACTIONS
+                                                                            . '=' . IntranetModulesModel::TABLENAME . '.' . IntranetModulesModel::KEYNAME
+                                                                            . ' OR ' . IntranetActionsModel::TABLENAME . '.' . IntranetActionsModel::FIELDNAME_MODULE_INTRANET_ACTIONS . '=0 )'
+                                                            );
+                                                            foreach ($arrayModule as $rowsModule) {
+
+                                                                /*
+                                                                 * Déclaration du droits d'accès fourni par droits_acces.inc et récupération de son niveau d'accès
+                                                                 */
+                                                                if ($rowsModule[IntranetModulesModel::KEYNAME] <> 19) {
+                                                                    $nom_niveau_intranet_droits_acces = 'module' . $rowsModule[IntranetModulesModel::KEYNAME] . '_action' . $rowsModule[IntranetActionsModel::KEYNAME];
+                                                                } else {
+                                                                    $nom_niveau_intranet_droits_acces = $rowsModule[IntranetActionsModel::FIELDNAME_NOM_INTRANET_ACTIONS] . '_' . $rowsModule[IntranetActionsModel::KEYNAME];
                                                                 }
-                                                                echo '<br>';
-                                                                ?>
-                                                                </table>
-                                                                </form>
-                                                                <?php include ('../adminagis/cadrebas.php'); ?>
+                                                                $niveau_intranet_droits_acces = Lib::getParameterFromRequest($nom_niveau_intranet_droits_acces);
+
+                                                                /*
+                                                                 * Enregistrement/Suppression du droit d'accès
+                                                                 */
+                                                                $id_intranet_modules = $rowsModule[IntranetModulesModel::KEYNAME];
+                                                                $id_intranet_actions = $rowsModule[IntranetActionsModel::KEYNAME];
+
+
+                                                                if ($niveau_intranet_droits_acces) {
+                                                                    /*
+                                                                     * Réécriture du droits d'accès
+                                                                     */
+                                                                    DatabaseOperation::execute(
+                                                                            'INSERT INTO ' . IntranetDroitsAccesModel::TABLENAME
+                                                                            . ' SET ' . IntranetDroitsAccesModel::FIELDNAME_ID_INTRANET_MODULES . '=' . $id_intranet_modules
+                                                                            . ', ' . IntranetDroitsAccesModel::FIELDNAME_ID_USER . '=' . $idUser
+                                                                            . ', ' . IntranetDroitsAccesModel::FIELDNAME_ID_INTRANET_ACTIONS . '=' . $id_intranet_actions
+                                                                            . ', ' . IntranetDroitsAccesModel::FIELDNAME_NIVEAU_INTRANET_DROITS_ACCES . '=' . $niveau_intranet_droits_acces
+                                                                    );
+                                                                }
+
+                                                                echo '</tr>';
+//    echo '</table>';
+                                                            }
+                                                            echo '<br>';
+                                                            ?>
+                                                            </table>
+                                                            </form>
+                                                            <?php include ('../adminagis/cadrebas.php'); ?>
                                                             </body>
                                                             </html>

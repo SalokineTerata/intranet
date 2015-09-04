@@ -154,44 +154,41 @@ switch ($output) {
         echo "         <tr>
           <td width=33% height=80>
 ";
-        $globalConfig = new GlobalConfig();
-        $id_type = $globalConfig->getAuthenticatedUser()->getDataField(UserModel::FIELDNAME_ID_TYPE)->getFieldValue();
-        if ($id_type == 4) {
-            echo "<div align=center>
+
+        echo "<div align=center>
       <a href=gestion_salaries1.php?repere=1>
       <img src=../images-index/grosadmin.gif width=197 height=54 border=0>
       </a>
       </div>
       ";
-        }
+
 
         echo "</td>
      <td width=34%>
 ";
-        if ($id_type >= 3) {
-            echo "<div align=center><a href=gestion_public1.php?repere=2>
+
+        echo "<div align=center><a href=gestion_public1.php?repere=2>
       <img src=../images-index/grosadmin2.gif width=197 height=54 border=0>
       </a></div>
       ";
-        }
+
         echo "</td>
      <td width=33%>
      ";
 
-        if ($id_type == 4) {
-            echo "<div align=center><a href=../news/crea_articlece.php?repere=3>
+
+        echo "<div align=center><a href=../news/crea_articlece.php?repere=3>
       <img src=../images-index/grosadmin3.gif width=197 height=54 border=0>
       </a></div>
       ";
-        }
 
         echo "
            </td>
         </tr>
       </table>
 ";
-        if ($id_type == 4) {
-            echo "
+
+        echo "
 <" . $html_table . ">
              <tr class=titre_principal><td>
 
@@ -251,7 +248,7 @@ switch ($output) {
              </td></tr>
              </table>
 ";
-        }
+
         echo "
              </form>
 ";

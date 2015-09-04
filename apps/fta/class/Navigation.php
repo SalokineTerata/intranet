@@ -462,7 +462,7 @@ class Navigation {
                 . ' ON ' . FtaWorkflowStructureModel::TABLENAME . '.' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_CHAPITRE
                 . '=' . FtaChapitreModel::TABLENAME . '.' . FtaChapitreModel::KEYNAME
                 . ' WHERE ( '
-                . FtaWorkflowStructureModel::TABLENAME . '.' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_PROCESSUS . ' =0'                          //Chapitre public
+                . FtaWorkflowStructureModel::TABLENAME . '.' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_ROLE . ' =0'                          //Chapitre public
         ;
         foreach ($paramT_Liste_Processus as $value) {
             $reqRecup .= ' OR ' . FtaWorkflowStructureModel::TABLENAME . '.' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_PROCESSUS

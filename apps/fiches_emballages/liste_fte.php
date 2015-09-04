@@ -114,9 +114,9 @@ $recherche.="<td> Groupe: "
            . "<select name=selection_groupe onChange=lien_selection_goupe()>"
            . "<option value=-1 >Tous</option>"
            ;
-$req = "SELECT * FROM annexe_emballage_groupe ORDER BY nom_annexe_emballage_groupe";
-$result_groupe = DatabaseOperation::query($req);
-while($rows_groupe=mysql_fetch_array($result_groupe))
+$req = "SELECT id_annexe_emballage_groupe,nom_annexe_emballage_groupe FROM annexe_emballage_groupe ORDER BY nom_annexe_emballage_groupe";
+$result_groupe = DatabaseOperation::convertSqlStatementWithoutKeyToArray($req);
+foreach ($result_groupe as $rows_groupe)
 {
      if ($rows_groupe["id_annexe_emballage_groupe"]==$selection_groupe)
      {
@@ -127,7 +127,7 @@ while($rows_groupe=mysql_fetch_array($result_groupe))
          $selected="";
      }
      $recherche .="<option value=".$rows_groupe["id_annexe_emballage_groupe"]
-                . "$selected>".$rows_groupe["nom_annexe_emballage_groupe"]
+                . "$selected>".  $rows_groupe["nom_annexe_emballage_groupe"]
                 . "</option>";
 }
 $recherche .="</select></td>";
@@ -138,8 +138,8 @@ $recherche .="<td> Fournisseur: "
            . "<option value=-1 >Tous</option>"
            ;
 $req = "SELECT * FROM fte_fournisseur ORDER BY nom_fte_fournisseur";
-$result_groupe = DatabaseOperation::query($req);
-while($rows_groupe=mysql_fetch_array($result_groupe))
+$result_groupe = DatabaseOperation::convertSqlStatementWithoutKeyToArray($req);
+foreach ($result_groupe as $rows_groupe)
 {
      if ($rows_groupe["id_fte_fournisseur"]==$selection_fournisseur)
      {
@@ -183,8 +183,8 @@ if($selection_fournisseur<>-1)
 }
 $req .="ORDER BY fte_fournisseur.nom_fte_fournisseur, reference_fournisseur_annexe_emballage ";
 //echo $req;
-$result_fte=DatabaseOperation::query($req);
-if(mysql_num_rows($result_fte))
+$result_fte=DatabaseOperation::convertSqlStatementWithoutKeyToArray($req);
+if($result_fte)
 {
     //Spécialisation suivant le type
     $id_annexe_emballage_groupe = $selection_groupe;
@@ -205,7 +205,7 @@ if(mysql_num_rows($result_fte))
     $bloc .="<td></td></tr>";
 
     //Construction du la liste des FTE
-    while($rows_fte=mysql_fetch_array($result_fte))
+    foreach ($result_fte as $rows_fte)
     {
          if($rows_fte["actif_annexe_emballage"]==0)
          {
@@ -266,10 +266,10 @@ if(mysql_num_rows($result_fte))
                  . "AND `fta_conditionnement`.`id_annexe_emballage` = '".$rows_fte["id_annexe_emballage"]."' "
                  //. "AND abreviation_fta_etat='V' "
                  ;
-             $result = DatabaseOperation::query($req);
+             $result = DatabaseOperation::convertSqlStatementWithoutKeyToArray($req);
 
              //Si il n'y a PAS de FTA associée, permettre la suppression
-             if(!mysql_num_rows($result))
+             if(!$result)
              {
                  //Il n'est possible de supprimer que des FTE qui ne sont pas utilisées par des FTA
                  $url = "liste_fte_post.php?action=supprimer&id_annexe_emballage=".$rows_fte["id_annexe_emballage"]

@@ -16,6 +16,7 @@ session_cache_limiter('nocache');     // Configure le délai d'expiration à X m
  * Reprise de la session ou création si inexsitante.
  */
 session_start();
+//phpinfo();
 
 /**
  * Restauration de la session si précédemment initialisée
@@ -31,8 +32,7 @@ GlobalConfig::saveGlobalConfToPhpSession($globalConfig);
 /**
  * Ouverture de la connexion à la base de données.
  */
-//GlobalConfig::saveDatabaseConnexionToPhpSession($globalConfig->openDatabaseConnexion2($globalConfig));
-
+$globalConfig->openDatabaseConnexion();
 /**
  * Construction de la description de la base de données et 
  * stockage en session PHP

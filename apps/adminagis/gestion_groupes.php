@@ -4,7 +4,7 @@
       require_once '../inc/main.php';
 
   identification1("salaries", $login, $pass);
-  UserModel::securadmin(4, $id_type);
+   
 
   if ($valider == 'groupes')
   {

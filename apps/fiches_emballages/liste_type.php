@@ -78,7 +78,7 @@ Début Code PHP
 
      $req = "SELECT `annexe_emballage_groupe`.*, `annexe_emballage_groupe_type`.*, `annexe_emballage_groupe_type`.`id_annexe_emballage_groupe_type` "
           . "FROM `annexe_emballage_groupe_type`, `annexe_emballage_groupe` "
-          . "WHERE ( `annexe_emballage_groupe_type`.`id_annexe_emballage_groupe_type` = `annexe_emballage_groupe`.`id_annexe_emballage_groupe_type` ) "
+          . "WHERE ( `annexe_emballage_groupe_type`.`id_annexe_emballage_groupe_type` = `annexe_emballage_groupe`.`id_annexe_emballage_groupe_configuration` ) "
           . "ORDER BY `annexe_emballage_groupe_type`.`id_annexe_emballage_groupe_type` ASC "
           ;
      $result=DatabaseOperation::query($req);

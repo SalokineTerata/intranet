@@ -106,14 +106,10 @@ class FtaRoleModel extends AbstractModel {
                 }
             }
         }
-        $req = 'SELECT DISTINCT ' . FtaRoleModel::FIELDNAME_DESCRIPTION_FTA_ROLE
-                . ' FROM ' . FtaRoleModel::TABLENAME . ' WHERE ( 0 ';
-
-        $req .= FtaRoleModel::AddIdRole($IdRole);
-
-        $req .= ')';
-
-        $array = DatabaseOperation::convertSqlStatementWithoutKeyToArray($req);
+        $array = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
+                        'SELECT DISTINCT ' . FtaRoleModel::FIELDNAME_DESCRIPTION_FTA_ROLE
+                        . ' FROM ' . FtaRoleModel::TABLENAME
+                        . ' WHERE ( 0 ' . FtaRoleModel::AddIdRole($IdRole) . ')');
 
         return $array;
     }

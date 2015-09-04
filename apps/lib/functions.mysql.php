@@ -401,7 +401,7 @@ function selection_date_pour_mysql($nom_date, $date_defaut) {
  * @param string $paramTableName nom de la table dont il faut charger le recordset
  */
 function mysql_table_load($paramTableName) {
-    $KeyValue = $GLOBALS[DatabaseDescription::getTableKeyName($paramTableName)];
+    $KeyValue = $_SESSION[DatabaseDescription::getTableKeyName($paramTableName)];
     $recordset = new DatabaseRecord($paramTableName, $KeyValue);
 
     $fields = $recordset->getFieldsArray();

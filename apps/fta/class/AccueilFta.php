@@ -362,8 +362,8 @@ class AccueilFta {
 
     /**
      * Affiches les lignes de la barre de navigation de la page d'accueil
-     * @param type $paramArrayRole
-     * @param type $paramArrayEtat
+     * @param array $paramArrayRole
+     * @param array $paramArrayEtat
      * @param type $idFtaRole
      * @param type $nomFtaEtat
      * @param type $paramSyntheseAction
@@ -371,7 +371,7 @@ class AccueilFta {
      * @param type $idFieldNomFtaRole
      * @param type $idKeyNameFtaEtat
      * @param type $idKeyValueFtaEtatAvancement
-     * @return type
+     * @return string
      */
     private static function getLineSynthese(
     $paramArrayRole, $paramArrayEtat, $idFtaRole, $nomFtaEtat, $paramSyntheseAction, $lien, $idFieldNomFtaRole, $idKeyNameFtaEtat, $idKeyValueFtaEtatAvancement
@@ -442,7 +442,7 @@ class AccueilFta {
      */
     public static function getHtmlTableauFiche() {
 
-
+        $tableauFicheN = '';
         $largeur_html_C1 = ' width=15% '; // largeur cellule type
         $largeur_html_C3 = ' width=16% '; // largeur cellule type
         $selection_width = '1%';
@@ -557,17 +557,9 @@ class AccueilFta {
                 /*
                  * Récuperation du nom de site de production
                  */
-                $arrayNomSiteProduction = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
-                                'SELECT ' . GeoModel::FIELDNAME_GEO
-                                . ' FROM ' . GeoModel::TABLENAME
-                                . ' WHERE ' . GeoModel::FIELDNAME_ID_SITE
-                                . '= \'' . $siteProduction . '\''
-                );
-                if ($arrayNomSiteProduction) {
-                    foreach ($arrayNomSiteProduction as $rowsNomSiteProduction) {
-                        $nomSiteProduction = $rowsNomSiteProduction[GeoModel::FIELDNAME_GEO];
-                    }
-                }
+
+                $nomSiteProduction = GeoModel::getProductionSiteName($siteProduction);
+
 
                 /*
                  * Récupération du nom du créateur de la fta
@@ -625,6 +617,7 @@ class AccueilFta {
                 /*
                  * Definition de la couleur de la cellule selon l'état d'avancement
                  */
+
                 switch (self::$syntheseAction) {
                     case FtaEtatModel::ETAT_AVANCEMENT_VALUE_ATTENTE:
                         $ok = AccueilFta::VALUE_0;
@@ -649,6 +642,7 @@ class AccueilFta {
                         $bgcolor = 'bgcolor=#AFFF5A';
                         break;
                 }
+
                 $HTML_date_echeance_fta = FtaProcessusDelaiModel::getFtaDelaiAvancement($idFta);
                 //$return['status']
                 //    0: Aucun dépassement des échéances
@@ -683,17 +677,19 @@ class AccueilFta {
                 /**
                  * Modification
                  */
-                $fta_modification = IntranetDroitsAccesModel::getFtaModification(self::$idUser);
+                if (!$one) {
+                    $fta_modification = IntranetDroitsAccesModel::getFtaModification(self::$idUser);
 
-                /**
-                 * Consultation
-                 */
-                $fta_consultation = IntranetDroitsAccesModel::getFtaConsultation(self::$idUser);
+                    /**
+                     * Consultation
+                     */
+                    $fta_consultation = IntranetDroitsAccesModel::getFtaConsultation(self::$idUser);
 
-                /**
-                 * Impression
-                 */
-                $fta_impression = IntranetDroitsAccesModel::getFtaImpression(self::$idUser);
+                    /**
+                     * Impression
+                     */
+                    $fta_impression = IntranetDroitsAccesModel::getFtaImpression(self::$idUser);
+                }
 
                 if (
                         ($fta_modification)
@@ -762,7 +758,7 @@ class AccueilFta {
                 /*
                  * Retirer une FTA en cours de modification
                  */
-                if ($valueIsGestionnaire == 1) {
+                if ($valueIsGestionnaire == AccueilFta::VALUE_1) {
                     $actions .= '<a '
                             . 'href=# '
                             . 'onClick=confirmation_correction_fta' . $idFta . '(); '
@@ -804,25 +800,18 @@ class AccueilFta {
                     }
                 }
 
-                if ($recap[$idFta] <> AccueilFta::VALUE_100_POURCENTAGE) {
-                    if ($tmp <> $workflowDescription) {
-                        $nombreDeCellule = AccueilFta::VALUE_12;
-                        $tableauFicheTr .= '<tbody  id=\'' . $workflowName . '\' >'
-                                . '<tr class=contenu>'
-                                . '<td  class=titre COLSPAN=' . $nombreDeCellule . '>' . $workflowDescription . '</td>'
-                                . '</tr>';
-                        $workflowTmp = $tmp;
-                        $tmp = $rowsDetail[FtaWorkflowModel::FIELDNAME_DESCRIPTION_FTA_WORKFLOW];
-                    }
-                } else {
-                    if ($tmp <> $workflowDescription) {
-                        $nombreDeCellule = AccueilFta::VALUE_12;
-                        $tableauFicheN .= '<tbody  id=\'' . $workflowName . '\' >'
-                                . '<tr class=contenu>'
-                                . '<td  class=titre COLSPAN=' . $nombreDeCellule . '>' . $workflowDescription . '</td>'
-                                . '</tr>';
-                        $tmp = $rowsDetail[FtaWorkflowModel::FIELDNAME_DESCRIPTION_FTA_WORKFLOW];
-                    }
+                if ($tmp <> $workflowDescription) {
+
+                    $tableauFiche2 .= $tableauFicheWork . $tableauFicheN . $tableauFicheTr;
+                    $nombreDeCellule = AccueilFta::VALUE_12;
+                    $tableauFicheWork = '<tbody  id=\'' . $workflowName . '\' >'
+                            . '<tr class=contenu>'
+                            . '<td  class=titre COLSPAN=' . $nombreDeCellule . '>' . $workflowDescription . '</td>'
+                            . '</tr>';
+                    $workflowTmp = $tmp;
+                    $tableauFicheTr = NULL;
+                    $tableauFicheN = NULL;
+                    $tmp = $rowsDetail[FtaWorkflowModel::FIELDNAME_DESCRIPTION_FTA_WORKFLOW];
                 }
 
                 if (self::$idUser == $createurFta) {
@@ -835,7 +824,7 @@ class AccueilFta {
                      */
                     $htmlField->setIsEditable(TRUE);
                     $commentaire = $htmlField->getHtmlResult();
-                    if ($recap[$idFta] <> AccueilFta::VALUE_100_POURCENTAGE) {
+                    if ($recap[$idFta] == AccueilFta::VALUE_100_POURCENTAGE) {
                         if ($createurFta <> $createurTmp) {
 
                             $tableauFicheN = '<tr class=contenu>'
@@ -1032,35 +1021,25 @@ class AccueilFta {
                     }
                 }
 
-                $tableauFicheTr.=$tableauFicheN . $tableauFicheTrTmp . $tableauFicheTmp;
-
+                $tableauFicheN.= $tableauFicheTmp;
+                $tableauFicheTr .= $tableauFicheTrTmp;
                 $tableauFicheTrTmp = NULL;
-                $tableauFicheN = NULL;
                 $tableauFicheTmp = NULL;
                 $service = NULL;
                 $classification = NULL;
                 $selection = NULL;
+                $one = 1;
             }
         } else {
             $tableauFiche .= '<tr class=contenu><td>Aucune Fta identifié</td></tr>';
         }
-
-        $tableauFiche .= $tableauFicheTr . $javascript . '</tbody></table>';
+        $tableauFiche2.= $tableauFicheN . $tableauFicheTr;
+        $tableauFiche .= $tableauFiche2 . $javascript . '</tbody></table>';
 
 
         //Ajoute de la fonction de traitement de masse
         if ($traitementDeMasse) {
-
-            $requete = 'SELECT ' . FtaTransitionModel::FIELDNAME_ABREVIATION_FTA_TRANSITION . ',' . FtaEtatModel::FIELDNAME_NOM_FTA_ETAT
-                    . ' FROM ' . FtaTransitionModel::TABLENAME . ',' . FtaEtatModel::TABLENAME
-                    . ' WHERE ' . FtaTransitionModel::TABLENAME . '.' . FtaTransitionModel::FIELDNAME_ABREVIATION_FTA_ETAT
-                    . '=\'' . self::$abrevationFtaEtat . '\' '
-                    . ' AND ' . FtaEtatModel::TABLENAME . '.' . FtaEtatModel::FIELDNAME_ABREVIATION
-                    . '=' . FtaTransitionModel::TABLENAME . '.' . FtaTransitionModel::FIELDNAME_ABREVIATION_FTA_TRANSITION    //Liaison
-            ;
-            $nom_defaut = FtaTransitionModel::FIELDNAME_ABREVIATION_FTA_TRANSITION;
-            $id_defaut = FtaEtatModel::ETAT_ABREVIATION_VALUE_VALIDE;
-            $liste_action_groupe = AccueilFta::afficherRequeteEnListeDeroulante($requete, $id_defaut, $nom_defaut);
+            $liste_action_groupe = FtaTransitionModel::getListeFtaGrouper(self::$abrevationFtaEtat);
 
             $tableauFiche.= '&nbsp;
             <img src = ../lib/images/fleche_gauche_et_haut.png width = 38 height = 22 border = 0 />
@@ -1128,7 +1107,7 @@ class AccueilFta {
         } else {
             $key = array_keys($table);
             if (!$paramNomDefaut) {
-                $paramNomDefaut = $key[1];
+                $paramNomDefaut = $key[AccueilFta::VALUE_1];
             }
 
             //Création de la liste déroulante
@@ -1140,13 +1119,13 @@ class AccueilFta {
             //Création du contenu de la liste
             $array = DatabaseOperation::convertSqlStatementKeyAndOneFieldToArray($paramRequeteSQL);
             foreach ($array as $rows) {
-                if ($rows[0] == $paramIdDefaut) {
+                if ($rows[AccueilFta::VALUE_0] == $paramIdDefaut) {
                     $selected = ' selected';
                 } else {
                     $selected = '';
                 }
 
-                $html_liste .= '<option value=' . $rows[0] . '  ' . $selected . '>' . $rows[1] . '</option>';
+                $html_liste .= '<option value=' . $rows[AccueilFta::VALUE_0] . '  ' . $selected . '>' . $rows[AccueilFta::VALUE_1] . '</option>';
             }
             $html_liste .= '</select>';
         }//Fin de la construction de la liste

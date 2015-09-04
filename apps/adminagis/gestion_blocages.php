@@ -9,7 +9,7 @@ $pass = $globalConfig->getAuthenticatedUser()->getDataField(UserModel::FIELDNAME
 $id_type = $globalConfig->getAuthenticatedUser()->getDataField(UserModel::FIELDNAME_ID_TYPE)->getFieldValue();
 
 identification1("salaries", $login, $pass);
-  UserModel::securadmin(4, $id_type);
+   
 
   if($action=="debloquer"){
   DatabaseOperation::query("update salaries set blocage='non' where (id_user='$quidonc')");

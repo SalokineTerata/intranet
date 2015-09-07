@@ -208,7 +208,7 @@
         } else {
             var elems = document.getElementsByClassName("site");
             for (var i = 0; i < elems.length; i++) {
-                elems[i].style.visibility = 'hidden';
+                elems[i].style.visibility = 'hidden';              
             }
             var elems2 = document.getElementsByClassName("id_fta_workflow");
             for (var i = 0; i < elems2.length; i++) {

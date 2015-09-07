@@ -7,6 +7,7 @@ include('../inc/php.php');
 
 $autologin = Lib::isDefined('autologin');
 $enable_autologin = Lib::isDefined('autologin');
+$num_log = Lib::isDefined('num_log');
 
 $globalConfig = new GlobalConfig();
 
@@ -120,7 +121,7 @@ Sinon, accéder à l\'<a href=index.php> intranet en vous authentifiant ici</a><
          */
         /* creation de la ligne user dans la table log */
         $req = DatabaseOperation::execute('insert into log (id_user, date) values(' . $id_user . ', NOW())');
-        $ng = DatabaseOperation::execute('select * from log');
+//        $ng = DatabaseOperation::execute('select * from log');
 
         /* --- redirection si ok sur groupe et service propre --- */
         //$q1 = DatabaseOperation::query('SELECT * FROM $mysql_table_authentification WHERE ((login = '$login') AND (pass = '$pass'))');

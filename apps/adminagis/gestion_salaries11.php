@@ -14,6 +14,8 @@ $idUser = Lib::getParameterFromRequest('sal_user');
  * Initialisation
  */
 $userModel = new UserModel($idUser);
+$paramConsultation = Lib::getParameterFromRequest('consultation_1');
+$paramModification = Lib::getParameterFromRequest('modification_2');
 $paramUserLogin = $userModel->getDataField(UserModel::FIELDNAME_LOGIN)->getFieldValue();
 $paramUserNom = $userModel->getDataField(UserModel::FIELDNAME_NOM)->getFieldValue();
 $paramUserPrenom = $userModel->getDataField(UserModel::FIELDNAME_PRENOM)->getFieldValue();
@@ -87,29 +89,29 @@ if ($paramModifier == 'modifier') {
                     . ' ORDER BY ' . ServicesModel::KEYNAME
     );
 
-    if ($arrayService) {
-
-        foreach ($arrayService as $rowsService) {
-            /*
-             *  Recuperation du service et du niveau a affecter
-             */
-            $service = $rowsService[ServicesModel::KEYNAME];
-            $toto = 'service';
-            $text = Lib::getParameterFromRequest($toto);
-            $niveau = Lib::getParameterFromRequest($text);
-            /*
-             *  Update dans la table pour chaque service
-             */
-            $result2 = DatabaseOperation::execute('UPDATE ' . ModesModel::TABLENAME
-                            . ' SET ' . ModesModel::FIELDNAME_SERV_CONF . ' = \'' . $niveau . '\''
-                            . ' WHERE ' . ModesModel::FIELDNAME_ID_USER . ' =' . $idUser
-                            . ' AND ' . ModesModel::FIELDNAME_ID_SERVICE . ' =\'' . $service . '\''
-            );
-            if ($result2 == false) {
-                echo ('Update impossible pour le service ' . $service . 'pour le salarie ' . $idUser . ' </br>');
-            }
-        }
-    }
+//    if ($arrayService) {
+//
+//        foreach ($arrayService as $rowsService) {
+//            /*
+//             *  Recuperation du service et du niveau a affecter
+//             */
+//            $service = $rowsService[ServicesModel::KEYNAME];
+//            $toto = 'service';
+//            $text = Lib::getParameterFromRequest($toto);
+//            $niveau = Lib::getParameterFromRequest($text);
+//            /*
+//             *  Update dans la table pour chaque service
+//             */
+//            $result2 = DatabaseOperation::execute('UPDATE ' . ModesModel::TABLENAME
+//                            . ' SET ' . ModesModel::FIELDNAME_SERV_CONF . ' = \'' . $niveau . '\''
+//                            . ' WHERE ' . ModesModel::FIELDNAME_ID_USER . ' =' . $idUser
+//                            . ' AND ' . ModesModel::FIELDNAME_ID_SERVICE . ' =\'' . $service . '\''
+//            );
+//            if ($result2 == false) {
+//                echo ('Update impossible pour le service ' . $service . 'pour le salarie ' . $idUser . ' </br>');
+//            }
+//        }
+//    }
 
     /*     * ********************************************
       Mise à jour des droits d'accès de l'utilisateur
@@ -137,6 +139,20 @@ if ($paramModifier == 'modifier') {
             $nom_niveau_intranet_droits_acces = 'module' . $rowsModule[IntranetModulesModel::KEYNAME] . '_action' . $rowsModule[IntranetActionsModel::KEYNAME];
         } else {
             $nom_niveau_intranet_droits_acces = $rowsModule[IntranetActionsModel::FIELDNAME_NOM_INTRANET_ACTIONS] . '_' . $rowsModule[IntranetActionsModel::KEYNAME];
+
+            if (!$paramConsultation) {
+                if ($rowsModule[IntranetActionsModel::FIELDNAME_TAG_INTRANET_ACTIONS] == IntranetActionsModel::VALUE_SITE) {
+                    $nom_niveau_intranet_droits_acces = Null;
+                }
+                if ($rowsModule[IntranetActionsModel::FIELDNAME_TAG_INTRANET_ACTIONS] == IntranetActionsModel::VALUE_WORKFLOW) {
+                    $nom_niveau_intranet_droits_acces = Null;
+                }
+            }
+            if (!$paramModification) {
+                if ($rowsModule[IntranetActionsModel::FIELDNAME_TAG_INTRANET_ACTIONS] == IntranetActionsModel::VALUE_ROLE) {
+                    $nom_niveau_intranet_droits_acces = Null;
+                }
+            }
         }
         $niveau_intranet_droits_acces = Lib::getParameterFromRequest($nom_niveau_intranet_droits_acces);
 

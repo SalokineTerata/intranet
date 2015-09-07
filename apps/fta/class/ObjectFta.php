@@ -325,7 +325,7 @@ class ObjectFta {
         $return = false; //false = echec du contrôle / true = réussite du contrôle
         //Vérification des saisies obligatoires avant validation du chapitre
         $erreur_saisie_obligatoire = false;
-        $req = "SELECT * FROM fta_saisie_obligatoire "
+        $req = "SELECT nom_table_fta_saisie_obligatoire,nom_champ_fta_saisie_obligatoire FROM fta_saisie_obligatoire "
                 . "WHERE nom_chapitre_fta_saisie_obligatoire='" . $nom_fta_chapitre_encours . "' "
         ;
         $result = DatabaseOperation::query($req);

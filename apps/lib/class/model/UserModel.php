@@ -70,8 +70,7 @@ class  UserModel extends AbstractModel {
                             . ', ' . FtaModel::FIELDNAME_SITE_ASSEMBLAGE . ', ' . FtaModel::TABLENAME . '. ' . FtaModel::FIELDNAME_WORKFLOW
                             . ' FROM ' . FtaModel::TABLENAME . ',' . UserModel::TABLENAME
                             . ', ' . FtaEtatModel::TABLENAME
-                            . ', ' . FtaWorkflowModel::TABLENAME
-                            . ', ' . ClassificationFtaModel::TABLENAME
+                            . ', ' . FtaWorkflowModel::TABLENAME                           
                             . ' WHERE ( 0 ' . FtaModel::AddIdFTaValidProcess($idFta) . ')'
                             . ' AND ' . FtaModel::TABLENAME . '.' . FtaModel::FIELDNAME_CREATEUR
                             . '=' . UserModel::TABLENAME . '.' . UserModel::KEYNAME

@@ -2225,7 +2225,7 @@ class Chapitre {
         }
         if ($proprietaire) {
             $bloc_suivi .= '<tr class=contenu><td>' . DatabaseDescription::getFieldDocLabel('fta_suivi_projet', $field_name) . '</td><td>';
-            $bloc_suivi .= '<input type=checkbox name=' . $field_name . ' value=' . self::$idUser . ' $checked $disabled/>';
+            $bloc_suivi .= '<input type=checkbox name=' . $field_name . ' value=' . self::$idUser . ' ' . $checked . ' ' . $disabled . '/>';
         } else {
 
             //Recherche de la personnes ayant signé ce chapitre
@@ -2257,7 +2257,7 @@ class Chapitre {
 //                }
 
                 $bloc_suivi .= '<tr class=contenu><td>' . DatabaseDescription::getFieldDocLabel('fta_suivi_projet', $champ) . '</td><td>';
-                $bloc_suivi .= '<input type=checkbox name=' . $champ . ' value=' . $$amp . ' ' . $checked . ' ' . $temp_disabled . '/>' . $validateur;
+                $bloc_suivi .= '<input type=checkbox name=' . $champ . ' value=' . $$champ . ' ' . $checked . ' ' . $temp_disabled . '/>' . $validateur;
             }
         }
         $champ = 'signature_validation_suivi_projet';

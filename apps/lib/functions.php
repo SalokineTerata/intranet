@@ -457,7 +457,7 @@ function recuperation_donnees_recherche($module, $url_page_depart, $module_table
                 $resultat2 = DatabaseOperation::convertSqlStatementKeyAndOneFieldToArray($sql) or die('Erreur SQL !' . $sql . '<br>' . mysql_error());
 
                 foreach ($resultat2 as $enr2) {
-                    $sql2 = " SELECT *
+                    $sql2 = " SELECT intranet_moteur_de_recherche_operateur_sur_champ.*
                                       FROM intranet_moteur_de_recherche_operateur_sur_champ
                                       WHERE  id_intranet_moteur_de_recherche_operateur_sur_champ='$enr2[0]'";
                     $resultat3 = DatabaseOperation::convertSqlStatementKeyAndOneFieldToArray($sql2) or die('Erreur SQL !' . $sql2 . '<br>' . mysql_error());
@@ -978,14 +978,14 @@ function securce($id_user, $id_type) {
   ------------------------------------------------------------- */
 
 function etatnivo($servauteur) {
-    $home1 = DatabaseOperation::convertSqlStatementWithoutKeyToArray("select * from articles where id_art_serv='$servauteur' and homepage='1' and nivo_conf='1' and date_modif!='0'");
+    $home1 = DatabaseOperation::convertSqlStatementWithoutKeyToArray("select num_article from articles where id_art_serv='$servauteur' and homepage='1' and nivo_conf='1' and date_modif!='0'");
     $ng1 = count($home1);
 
-    $home2 = DatabaseOperation::convertSqlStatementWithoutKeyToArray("select * from articles where id_art_serv='$servauteur' and homepage='2' and nivo_conf='1' and date_modif!='0'");
+    $home2 = DatabaseOperation::convertSqlStatementWithoutKeyToArray("select num_article from articles where id_art_serv='$servauteur' and homepage='2' and nivo_conf='1' and date_modif!='0'");
     $ng2 = count($home2);
-    $home3 = DatabaseOperation::convertSqlStatementWithoutKeyToArray("select * from articles where id_art_serv='$servauteur' and homepage='3' and nivo_conf='1' and date_modif!='0'");
+    $home3 = DatabaseOperation::convertSqlStatementWithoutKeyToArray("select num_article from articles where id_art_serv='$servauteur' and homepage='3' and nivo_conf='1' and date_modif!='0'");
     $ng3 = count($home3);
-    $home4 = DatabaseOperation::convertSqlStatementWithoutKeyToArray("select * from articles where id_art_serv='$servauteur' and homepage='4' and nivo_conf='1' and date_modif!='0'");
+    $home4 = DatabaseOperation::convertSqlStatementWithoutKeyToArray("select num_article from articles where id_art_serv='$servauteur' and homepage='4' and nivo_conf='1' and date_modif!='0'");
     $ng4 = count($home4);
 
     $infohome = array("$ng1", "$ng2", "$ng3", "$ng4");

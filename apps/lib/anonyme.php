@@ -11,7 +11,7 @@ fonctions de navigation et sortie d'infos en mode non connecté. donc infos de n
   si deja connecté alors on retourne dans partie securisée
 -------------------------------------------------------------*/
 function redirection_securite($login, $pass, $service){
-$q1 = DatabaseOperation::query("SELECT * FROM salaries WHERE ((login = '$login') AND (pass = '$pass'))");
+$q1 = DatabaseOperation::query("SELECT id_user FROM salaries WHERE ((login = '$login') AND (pass = '$pass'))");
 $nb1 = mysql_numrows($q1);
 /* si le nomre de champ est null, alors.. on stop le prog  */
 if (!$nb1){ header("Location: ../index.php?action=delog"); }

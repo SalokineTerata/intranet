@@ -93,7 +93,7 @@ class FtaProcessusModel extends AbstractModel {
          * Nombres total de processus précedent pour le processus en cours
          */
         $array = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
-                        'SELECT DISTINCT ' . FtaProcessusCycleModel::FIELDNAME_PROCESSUS_INIT . ',' . FtaProcessusCycleModel::FIELDNAME_WORKFLOW
+                        'SELECT ' . FtaProcessusCycleModel::FIELDNAME_PROCESSUS_INIT . ',' . FtaProcessusCycleModel::FIELDNAME_WORKFLOW
                         . ' FROM ' . FtaProcessusCycleModel::TABLENAME
                         . ' WHERE ' . FtaProcessusCycleModel::FIELDNAME_PROCESSUS_NEXT . '=' . $paramProcessusEncours
                         . ' AND ' . FtaProcessusCycleModel::FIELDNAME_WORKFLOW . '=' . $paramIdWorkflowEncours
@@ -215,7 +215,7 @@ class FtaProcessusModel extends AbstractModel {
      */
     public static function getValideProcessusEncours($paramIdFta, $paramProcessusEncours, $paramIdWorkflow) {
         $arrayNombreTotalChapitre = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
-                        'SELECT DISTINCT ' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_CHAPITRE
+                        'SELECT ' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_CHAPITRE
                         . ' FROM ' . FtaWorkflowStructureModel::TABLENAME
                         . ' WHERE '  . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_WORKFLOW . '=' . $paramIdWorkflow              //Workflow en cours
                         . ' AND '  . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_PROCESSUS . '=' . $paramProcessusEncours
@@ -223,7 +223,7 @@ class FtaProcessusModel extends AbstractModel {
         $nombreTotalChapitre = count($arrayNombreTotalChapitre);
 
         $arrayNombreTotalChapitreValide = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
-                        'SELECT  DISTINCT ' . FtaWorkflowStructureModel::TABLENAME . '.' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_CHAPITRE
+                        'SELECT ' . FtaWorkflowStructureModel::TABLENAME . '.' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_CHAPITRE
                         . ' FROM ' . FtaModel::TABLENAME . ',' . FtaSuiviProjetModel::TABLENAME
                         . ',' . FtaWorkflowStructureModel::TABLENAME
                         . ' WHERE ' . FtaModel::TABLENAME . '.' . FtaModel::KEYNAME

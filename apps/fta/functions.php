@@ -2891,7 +2891,7 @@ function fta_processus_validation($id_fta, $id_fta_processus) {
 //            . "WHERE fta_chapitre.id_fta_processus=fta_processus.id_fta_processus "  //Jointure
 //            . "AND fta_processus.id_fta_processus=" . $id_fta_processus . " "
 //    ;
-    $req = "SELECT * FROM fta_workflow_structure, fta_processus "
+    $req = "SELECT id_fta_chapitre FROM fta_workflow_structure, fta_processus "
             . "WHERE fta_workflow_structure.id_fta_processus=fta_processus.id_fta_processus "  //Jointure
             . " AND fta_workflow_structure.id_fta_role=fta_processus.id_fta_role "
             . " AND fta_processus.id_fta_processus=" . $id_fta_processus . " "

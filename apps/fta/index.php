@@ -69,7 +69,7 @@ if ($id_user) {
     $tableau_fiche = Lib::getParameterFromRequest('tableau_fiche');
     $visualiser_fiche_total_fta = Lib::getParameterFromRequest('visualiser_fiche_total_fta');
     $order_common = Lib::getParameterFromRequest('order_common', FtaModel::FIELDNAME_DATE_ECHEANCE_FTA);
-    $numeroDePageCourante = Lib::getParameterFromRequest('numeroPage',  AccueilFta::VALUE_1);
+    $numeroDePageCourante = Lib::getParameterFromRequest('numeroPage', AccueilFta::VALUE_1);
 
 
     /*
@@ -157,8 +157,7 @@ if ($id_user) {
     AccueilFta::initAccueil($id_user, $id_fta_etat, $nomFtaEtat, $synthese_action, $idFtaRoleEncours, $order_common, $lieuGeo);
 
 
-'ALTER TABLE fta_action_role ADD FOREIGN KEY (id_fta_role) references fta_role(id_fta_role);
-';
+
     /*
      * Génération de la barre de navigation de la page d'accueil
      */

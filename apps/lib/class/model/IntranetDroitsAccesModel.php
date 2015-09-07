@@ -160,28 +160,45 @@ class IntranetDroitsAccesModel {
                         if ($paramSalUser) {
                             $checked = IntranetDroitsAccesModel::CheckValueByNiveauAcces($paramSalUser, $rowsActionsWorkflow[IntranetActionsModel::KEYNAME]);
                         }
+                        if ($checked) {
+                            $visible = 'visibility';
+                        } else {
+                            $visible = 'hidden';
+                        }
 
-                        $ftaDroitsAcces .= '<table border=1 width=500 ><td class=id_fta_workflow style=visibility:hidden align=left width=100><input type=checkbox name=' . $rowsActionsWorkflow[IntranetActionsModel::FIELDNAME_NOM_INTRANET_ACTIONS] . '_' . $rowsActionsWorkflow[IntranetActionsModel::KEYNAME]
+
+                        $ftaDroitsAcces .= '<table border=1 width=500 ><td class=id_fta_workflow style=' . $visible . ' align=left width=100><input type=checkbox name=' . $rowsActionsWorkflow[IntranetActionsModel::FIELDNAME_NOM_INTRANET_ACTIONS] . '_' . $rowsActionsWorkflow[IntranetActionsModel::KEYNAME]
                                 . ' value=1 ' . $checked . '/>' . $rowsActionsWorkflow[IntranetActionsModel::FIELDNAME_DESCRIPTION_INTRANET_ACTIONS] . '</td>'
-                                . '<td align=left class=site  style=visibility:hidden ><table >';
+                                . '<td align=left class=site  style=' . $visible . ' ><table >';
 
                         foreach ($arrayActions as $rowsActions) {
                             if ($rowsActions[IntranetActionsModel::FIELDNAME_TAG_INTRANET_ACTIONS] == 'site') {
                                 if ($paramSalUser) {
                                     $checked = IntranetDroitsAccesModel::CheckValueByNiveauAcces($paramSalUser, $rowsActions[IntranetActionsModel::KEYNAME]);
                                 }
-                                $SiteDeProduction .='<tr  align=left><td  class=loginFFFFFFdroit valign=top width=172>'
+                                if ($checked) {
+                                    $visible = 'visibility';
+                                } else {
+                                    $visible = 'hidden';
+                                }
+                                $SiteDeProduction .= '<tr  align=left><td  class=loginFFFFFFdroit valign=top width=172>'
                                         . '<input type=checkbox name=' . $rowsActions[IntranetActionsModel::FIELDNAME_NOM_INTRANET_ACTIONS] . '_' . $rowsActions[IntranetActionsModel::KEYNAME]
                                         . ' value=1 ' . $checked . '/>' . $rowsActions[IntranetActionsModel::FIELDNAME_DESCRIPTION_INTRANET_ACTIONS] . '</td></tr></td>';
                             } else {
                                 if ($paramSalUser) {
                                     $checked = IntranetDroitsAccesModel::CheckValueByNiveauAcces($paramSalUser, $rowsActions[IntranetActionsModel::KEYNAME]);
                                 }
+                                if ($checked) {
+                                    $visible = 'visibility';
+                                } else {
+                                    $visible = 'hidden';
+                                }
                                 $Role .= '<tr align=left><td  class=loginFFFFFFdroit valign=top width=172><input type=checkbox name=' . $rowsActions[IntranetActionsModel::FIELDNAME_NOM_INTRANET_ACTIONS] . '_' . $rowsActions[IntranetActionsModel::KEYNAME]
                                         . ' value=1 ' . $checked . '/>' . $rowsActions[IntranetActionsModel::FIELDNAME_DESCRIPTION_INTRANET_ACTIONS] . '</td></tr></td>';
                             }
                         }
-                        $ftaDroitsAcces .=$SiteDeProduction . '</table></td><td class=role style=visibility:hidden ><table >' . $Role . '</table></td></table>';
+
+                        $ftaDroitsAcces .=$SiteDeProduction . '</table></td><td class=role style=' . $visible . ' ><table >' . $Role . '</table></td></table>';
                     }
                 }
                 /*

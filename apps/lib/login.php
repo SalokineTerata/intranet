@@ -27,8 +27,9 @@ $identite = Lib::isDefined('identite ');
 $mysql_table_authentification = $globalConfig->getConf()->getMysqlDatabaseAuthentificationTableName();
 
 //Démarrage de la session si celle-ci n'a pas été démarrée.
-if (empty($session_id))
+if (empty($session_id)) {
     session_start();
+}
 
 
 /* ---------------------------------
@@ -37,7 +38,11 @@ if (empty($session_id))
 
 if ($session == 'logout') {
 
-    DatabaseOperation::execute('update log set date = now() where ((num_log=' . $num_log . ') and (id_user=' . $id_user . '))');
+    DatabaseOperation::execute(
+            'UPDATE ' . LogModel::TABLENAME . ' SET ' . LogModel::FIELDNAME_DATE . ' = now()'
+            . ' WHERE ((' . LogModel::KEYNAME . '=\'' . $num_log . '\')'
+            . ' AND (' . LogModel::FIELDNAME_ID_USER . '=' . $id_user . '))'
+    );
     $pass = '';
     $id_user = '';
     $login = '';

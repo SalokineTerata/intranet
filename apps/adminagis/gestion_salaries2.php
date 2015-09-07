@@ -390,7 +390,7 @@ envoismail($sujet, $corpsmail, $paramUserMail, 'postmaster@agis-sa.fr', $typeMai
                                                                 </tr>
                                                             </table>
                                                             <?php
-                                                            /**                                                             
+                                                            /**
                                                              * Insertion des droits d'accès de l'utilisateur
                                                              * Boris Sanègre 2003.03.28
                                                              */

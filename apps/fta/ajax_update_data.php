@@ -29,7 +29,7 @@ $fieldValue = Lib::getParameterFromRequest("FieldValue");
 /*
  * Mise à jour de la donnée demandée.
  */
-DatabaseOperation::doSqlUpdateFromOneField($tableName, $keyName, $keyValue, $fieldName, $fieldValue);
+DatabaseOperation::doSqlUpdateFromOneField($tableName, $keyName, $keyValue, $fieldName, addslashes($fieldValue));
 
 //Logger::Add($fieldValue);
 

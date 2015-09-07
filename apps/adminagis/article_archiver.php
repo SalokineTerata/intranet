@@ -35,7 +35,7 @@
 
 /* Recuperation de toutes les variables de l'enregistrement et recopie dans
    archives puis effacement dans articles*/
-           $req2="select * from articles where num_article='$num_article'";
+           $req2="select articles.* from articles where num_article='$num_article'";
            $result2=DatabaseOperation::query($req2);
            $taille=mysql_result($result2, 0, taille);
            $id_art_group=mysql_result($result2, 0, id_art_group);
@@ -134,7 +134,7 @@
              $req4="delete from articles where num_article='$num_article'";
              $result4=DatabaseOperation::query($req4);
 /* On archive les commentaires */
-             $req4="select * from comment where id_art='$num_article'";
+             $req4="select id_user,commentaire,id_comment,date from comment where id_art='$num_article'";
              $result4=DatabaseOperation::query($req4);
              $num4=mysql_num_rows($result4);
              if ($num4 != 0)
@@ -154,7 +154,7 @@
                $result4=DatabaseOperation::query($req4);
              }
 /* on archive la table lu */
-             $req4="select * from lu where id_art='$num_article'";
+             $req4="select id_user,date from lu where id_art='$num_article'";
              $result4=DatabaseOperation::query($req4);
              $num4=mysql_num_rows($result4);
              if ($num4 != 0)

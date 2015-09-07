@@ -633,11 +633,11 @@ class FtaModel extends AbstractModel {
       Retour de la fonction:
       ----------------------
       La fonction renvoi l'id_fta nouvellement créé.
-     * @param type $paramIdFta
-     * @param type $paramAction
-     * @param type $paramOption
-     * @param type $paramIdFtaWorkflow
-     * @return type
+     * @param int $paramIdFta
+     * @param string $paramAction
+     * @param array $paramOption
+     * @param int $paramIdFtaWorkflow
+     * @return int
      */
     public static function BuildDuplicationFta($paramIdFta, $paramAction, $paramOption, $paramIdFtaWorkflow) {
 
@@ -919,6 +919,11 @@ class FtaModel extends AbstractModel {
         return $idFtaNew;
     }
 
+    /**
+     * Duplication d'une Fta
+     * @param int $paramIdFta
+     * @return int
+     */
     public static function DuplicationIdFta($paramIdFta) {
         $pdo = DatabaseOperation::execute(
                         " INSERT INTO " . FtaModel::TABLENAME . " (`id_access_arti2`, `numft`, `id_fta_workflow`,"
@@ -1070,13 +1075,13 @@ class FtaModel extends AbstractModel {
 
     /**
      * Fonction d"insertion d'une Fta
-     * @param type $paramIdCreateur
-     * @param type $paramIdFtaEtat
-     * @param type $paramIdFtaWorkflow
-     * @param type $paramDesignationCommerciale
-     * @param type $paramDateCreation
-     * @param type $paramSiteDeProduction
-     * @return type
+     * @param int $paramIdCreateur
+     * @param int $paramIdFtaEtat
+     * @param int $paramIdFtaWorkflow
+     * @param string $paramDesignationCommerciale
+     * @param date $paramDateCreation
+     * @param int $paramSiteDeProduction
+     * @return int
      */
     public static function CreateFta($paramIdCreateur, $paramIdFtaEtat, $paramIdFtaWorkflow, $paramDesignationCommerciale, $paramDateCreation, $paramSiteDeProduction) {
         $Id = DatabaseOperation::execute(
@@ -1089,7 +1094,7 @@ class FtaModel extends AbstractModel {
                         . "," . FtaModel::FIELDNAME_WORKFLOW . ")"
                         . " VALUES (" . $paramIdCreateur
                         . ", " . $paramIdFtaEtat
-                        . ", '" . $paramDesignationCommerciale
+                        . ", '" . addslashes($paramDesignationCommerciale)
                         . "', " . $paramDateCreation
                         . ", " . $paramSiteDeProduction
                         . ", " . $paramIdFtaWorkflow . ")"
@@ -1098,6 +1103,11 @@ class FtaModel extends AbstractModel {
         return $key;
     }
 
+    /**
+     * 
+     * @param int $paramIdFta
+     * @return array
+     */
     public static function ClassificationFta($paramIdFta) {
         $arrayClassif = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
                         "SELECT " . FtaModel::FIELDNAME_CLASSIFICATION_ACTIVITE

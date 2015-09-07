@@ -36,10 +36,9 @@ $action = Lib::getParameterFromRequest('action');
 $idFtaRole = Lib::getParameterFromRequest(FtaRoleModel::KEYNAME);
 $id_fta = Lib::getParameterFromRequest(FtaModel::KEYNAME);
 $idFtaWorkflow = Lib::getParameterFromRequest(FtaWorkflowModel::KEYNAME);
-$designationCommercialeFtaTMP = Lib::getParameterFromRequest(FtaModel::FIELDNAME_DESIGNATION_COMMERCIALE);
+$designationCommercialeFta = Lib::getParameterFromRequest(FtaModel::FIELDNAME_DESIGNATION_COMMERCIALE);
 $abreviationFtaEtat = Lib::getParameterFromRequest(FtaEtatModel::FIELDNAME_ABREVIATION);
 $siteDeProduction = Lib::getParameterFromRequest(GeoModel::KEYNAME);
-$designationCommercialeFta = addslashes($designationCommercialeFtaTMP);
 
 
 switch ($action) {

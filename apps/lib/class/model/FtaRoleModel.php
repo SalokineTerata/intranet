@@ -50,24 +50,20 @@ class FtaRoleModel extends AbstractModel {
          */
 
         $arrayProcessusEncours = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
-                        'SELECT DISTINCT ' . FtaProcessusModel::TABLENAME
-                        . '.*,' . FtaProcessusCycleModel::TABLENAME . '.' . FtaProcessusCycleModel::FIELDNAME_WORKFLOW
-                        . ' FROM ' . FtaProcessusModel::TABLENAME
+                        'SELECT DISTINCT ' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_PROCESSUS
+                        . ',' . FtaWorkflowStructureModel::TABLENAME . '.' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_WORKFLOW
+                        . ' FROM ' . FtaWorkflowStructureModel::TABLENAME
                         . ', ' . FtaProcessusCycleModel::TABLENAME
-                        . ',' . FtaWorkflowModel::TABLENAME
                         . ',' . FtaModel::TABLENAME
-                        . ',' . FtaActionRoleModel::TABLENAME
                         . ' WHERE ' . FtaProcessusCycleModel::TABLENAME . '.' . FtaProcessusCycleModel::FIELDNAME_PROCESSUS_INIT
-                        . '=' . FtaProcessusModel::TABLENAME . '.' . FtaProcessusModel::KEYNAME
+                        . '=' . FtaWorkflowStructureModel::TABLENAME . '.' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_PROCESSUS
                         . ' AND ' . FtaProcessusCycleModel::FIELDNAME_FTA_ETAT . '=\'I\''
                         . ' AND ' . FtaProcessusCycleModel::TABLENAME . '.' . FtaProcessusCycleModel::FIELDNAME_WORKFLOW
-                        . '=' . FtaWorkflowModel::TABLENAME . '.' . FtaWorkflowModel::KEYNAME        //Jointure                            
+                        . '=' . FtaWorkflowStructureModel::TABLENAME . '.' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_WORKFLOW        //Jointure                            
                         . ' AND ' . FtaModel::KEYNAME . '=' . $paramIdFta
                         . ' AND ' . FtaModel::TABLENAME . '.' . FtaModel::FIELDNAME_WORKFLOW . '=' . $paramIdWorkflow
                         . ' AND ' . FtaModel::TABLENAME . '.' . FtaModel::FIELDNAME_WORKFLOW
-                        . '=' . FtaWorkflowModel::TABLENAME . '.' . FtaWorkflowModel::KEYNAME        //Jointure                            
-                        . ' AND ' . FtaProcessusModel::TABLENAME . '.' . FtaProcessusModel::FIELDNAME_ID_FTA_ROLE
-                        . '=' . FtaActionRoleModel::TABLENAME . '.' . FtaActionRoleModel::FIELDNAME_ID_FTA_ROLE
+                        . '=' . FtaWorkflowStructureModel::TABLENAME . '.' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_WORKFLOW        //Jointure                            
         );
 
         /*
@@ -84,23 +80,23 @@ class FtaRoleModel extends AbstractModel {
                  * Nous verifions si tous les processus précedents du chapitre que l'utilisateur à les droits d'accès
                  * sont validé ou non et donc visible ou non
                  */
-                $taux_validation_processus = FtaProcessusModel::getFtaProcessusNonValidePrecedent($paramIdFta, $rowsProcessusEncours[FtaProcessusModel::KEYNAME], $rowsProcessusEncours[FtaProcessusCycleModel::FIELDNAME_WORKFLOW]);
+                $taux_validation_processus = FtaProcessusModel::getFtaProcessusNonValidePrecedent($paramIdFta, $rowsProcessusEncours[FtaWorkflowStructureModel::FIELDNAME_ID_FTA_PROCESSUS], $rowsProcessusEncours[FtaWorkflowStructureModel::FIELDNAME_ID_FTA_WORKFLOW]);
                 if ($taux_validation_processus == 1 or $taux_validation_processus === NULL) {
                     /*
                      * Nous récupérons tous les processus validé pour vérifier plus tard si nous devons les affichers
                      */
-                    $taux_validation_processus = FtaProcessusModel::getValideProcessusEncours($paramIdFta, $rowsProcessusEncours[FtaProcessusModel::KEYNAME], $rowsProcessusEncours[FtaProcessusCycleModel::FIELDNAME_WORKFLOW]);
+                    $taux_validation_processus = FtaProcessusModel::getValideProcessusEncours($paramIdFta, $rowsProcessusEncours[FtaWorkflowStructureModel::FIELDNAME_ID_FTA_PROCESSUS], $rowsProcessusEncours[FtaWorkflowStructureModel::FIELDNAME_ID_FTA_WORKFLOW]);
                     if ($taux_validation_processus <> 1) {
                         $arrayIdRole = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
-                                        'SELECT DISTINCT ' . FtaRoleModel::TABLENAME . '.' . FtaRoleModel::KEYNAME
-                                        . ' FROM ' . FtaProcessusModel::TABLENAME . ',' . FtaRoleModel::TABLENAME
-                                        . ' WHERE ' . FtaProcessusModel::TABLENAME . '.' . FtaProcessusModel::KEYNAME
-                                        . '=' . $rowsProcessusEncours[FtaProcessusModel::KEYNAME]
-                                        . ' AND ' . FtaProcessusModel::TABLENAME . '.' . FtaProcessusModel::FIELDNAME_ID_FTA_ROLE
-                                        . '=' . FtaRoleModel::TABLENAME . '.' . FtaRoleModel::KEYNAME
+                                        'SELECT DISTINCT ' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_ROLE
+                                        . ' FROM ' . FtaWorkflowStructureModel::TABLENAME
+                                        . ' WHERE ' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_PROCESSUS
+                                        . '=' . $rowsProcessusEncours[FtaWorkflowStructureModel::FIELDNAME_ID_FTA_PROCESSUS]
+                                        . ' AND ' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_WORKFLOW
+                                        . '=' . $rowsProcessusEncours[FtaWorkflowStructureModel::FIELDNAME_ID_FTA_WORKFLOW]
                         );
                         foreach ($arrayIdRole as $rowsIdRole) {
-                            $IdRole[] = $rowsIdRole[FtaRoleModel::KEYNAME];
+                            $IdRole[] = $rowsIdRole[FtaWorkflowStructureModel::FIELDNAME_ID_FTA_ROLE];
                         }
                     }
                 }

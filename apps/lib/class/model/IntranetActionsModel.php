@@ -17,6 +17,7 @@ class IntranetActionsModel extends AbstractModel {
     const FIELDNAME_PARENT_INTRANET_ACTIONS = 'parent_intranet_actions';
     const VALUE_ROLE = 'role';
     const VALUE_SITE = 'site';
+    const VALUE_WORKFLOW = 'workflow';
 
     public function __construct($paramId = NULL, $paramIsCreateRecordsetInDatabaseIfKeyDoesntExist = AbstractModel::DEFAULT_IS_CREATE_RECORDSET_IN_DATABASE_IF_KEY_DOESNT_EXIST) {
         parent::__construct($paramId, $paramIsCreateRecordsetInDatabaseIfKeyDoesntExist);

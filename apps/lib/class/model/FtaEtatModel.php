@@ -207,7 +207,7 @@ class FtaEtatModel extends AbstractModel {
                     }
                 }
                 $array[AccueilFta::VALUE_1] = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
-                                'SELECT DISTINCT ' . FtaModel::KEYNAME
+                                'SELECT ' . FtaModel::KEYNAME
                                 . ' FROM ' . FtaModel::TABLENAME
                                 . ' WHERE ( ' . AccueilFta::VALUE_0
                                 . ' ' . FtaModel::AddIdFTaValidProcess($idFtaEffectue) . ')');

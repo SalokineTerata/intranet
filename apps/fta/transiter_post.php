@@ -27,7 +27,7 @@ if (!$idFta) {
 }
 $idFtaRole = Lib::getParameterFromRequest('id_fta_role');
 $idFtaWorkflow = Lib::getParameterFromRequest('id_fta_workflow');
-$new_commentaire_maj_ftatmp = Lib::getParameterFromRequest('fta_commentaire_maj_fta_$idFta');
+$new_commentaire_maj_ftatmp = Lib::getParameterFromRequest('fta_commentaire_maj_fta_' . $idFta);
 $new_commentaire_maj_fta = addslashes($new_commentaire_maj_ftatmp);
 
 if (!$new_commentaire_maj_fta) {

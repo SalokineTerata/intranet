@@ -502,7 +502,7 @@ class DatabaseOperation {
      */
     public static function getSqlQueryFromOneField($paramTableName, $paramFieldName, $paramFieldValue) {
 
-        return 'SELECT * FROM '
+        return 'SELECT ' . $paramTableName . '.* FROM '
                 . self::convertTableNameToSqlClause($paramTableName)
                 . ' WHERE ('
                 . DatabaseOperation::convertArrayToSqlClauseWhere(
@@ -603,7 +603,7 @@ class DatabaseOperation {
          */
         $fieldsArray1 = self::convertSqlStatementFirstRowToArray(
                         self::queryPDO(
-                                'SELECT * FROM ' . $paramTableName1
+                                'SELECT ' . $paramTableName1 . '.* FROM ' . $paramTableName1
                                 . ' WHERE ' . DatabaseDescription::getTableKeyName($paramTableName1) . '=' . $paramKeyValueTable1
                         )
         );
@@ -613,7 +613,7 @@ class DatabaseOperation {
          */
         $fieldsArray2 = self::convertSqlStatementFirstRowToArray(
                         self::queryPDO(
-                                'SELECT * FROM ' . $paramTableName2
+                                'SELECT ' . $paramTableName2 . '. FROM ' . $paramTableName2
                                 . ' WHERE ' . DatabaseDescription::getTableKeyName($paramTableName2) . '=' . $paramKeyValueTable2
                         )
         );

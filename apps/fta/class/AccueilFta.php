@@ -443,6 +443,8 @@ class AccueilFta {
     public static function getHtmlTableauFiche() {
 
         $tableauFicheN = '';
+        $tableauFicheNWork = '';
+        $tableauFicheTrWork = '';
         $largeur_html_C1 = ' width=15% '; // largeur cellule type
         $largeur_html_C3 = ' width=16% '; // largeur cellule type
         $selection_width = '1%';
@@ -799,20 +801,32 @@ class AccueilFta {
                         $service .= $rowsService[FtaRoleModel::FIELDNAME_DESCRIPTION_FTA_ROLE] . '<br>';
                     }
                 }
-
-                if ($tmp <> $workflowDescription) {
-
-                    $tableauFiche2 .= $tableauFicheWork . $tableauFicheN . $tableauFicheTr;
-                    $nombreDeCellule = AccueilFta::VALUE_12;
-                    $tableauFicheWork = '<tbody  id=\'' . $workflowName . '\' >'
-                            . '<tr class=contenu>'
-                            . '<td  class=titre COLSPAN=' . $nombreDeCellule . '>' . $workflowDescription . '</td>'
-                            . '</tr>';
-                    $workflowTmp = $tmp;
-                    $tableauFicheTr = NULL;
-                    $tableauFicheN = NULL;
-                    $tmp = $rowsDetail[FtaWorkflowModel::FIELDNAME_DESCRIPTION_FTA_WORKFLOW];
+ 
+                $diffWorkflow=$tmp <> $workflowDescription; 
+                if ($diffWorkflow) {
+                    if ($recap[$idFta] <> AccueilFta::VALUE_100_POURCENTAGE) {
+                        $tableauFicheTr2 .= $tableauFicheTrWork . $tableauFicheTr;
+                        $nombreDeCellule = AccueilFta::VALUE_12;
+                        $tableauFicheTrWork = '<tbody  id=\'' . $workflowName . '\' >'
+                                . '<tr class=contenu>'
+                                . '<td  class=titre COLSPAN=' . $nombreDeCellule . '>' . $workflowDescription . '</td>'
+                                . '</tr>';
+                        $workflowTmp = $tmp;
+                        $tableauFicheTr = NULL;
+                        $tmp = $rowsDetail[FtaWorkflowModel::FIELDNAME_DESCRIPTION_FTA_WORKFLOW];
+                    } else {
+                        $tableauFicheN2.= $tableauFicheNWork . $tableauFicheN;
+                        $nombreDeCellule = AccueilFta::VALUE_12;
+                        $tableauFicheNWork = '<tbody  id=\'' . $workflowName . '\' >'
+                                . '<tr class=contenu>'
+                                . '<td  class=titre COLSPAN=' . $nombreDeCellule . '>' . $workflowDescription . '</td>'
+                                . '</tr>';
+                        $workflowTmp = $tmp;
+                        $tableauFicheN = NULL;
+                        $tmp = $rowsDetail[FtaWorkflowModel::FIELDNAME_DESCRIPTION_FTA_WORKFLOW];
+                    }
                 }
+
 
                 if (self::$idUser == $createurFta) {
                     /*
@@ -825,7 +839,7 @@ class AccueilFta {
                     $htmlField->setIsEditable(TRUE);
                     $commentaire = $htmlField->getHtmlResult();
                     if ($recap[$idFta] == AccueilFta::VALUE_100_POURCENTAGE) {
-                        if ($createurFta <> $createurTmp) {
+                        if ($createurFta <> $createurTmp or $diffWorkflow) {
 
                             $tableauFicheN = '<tr class=contenu>'
                                     . '<td COLSPAN=' . $nombreDeCellule . ' ><font size=2 >' . $createurPrenom . ' ' . $createurNom . ' </td>'
@@ -870,7 +884,7 @@ class AccueilFta {
                                     . $commentaire . '</tr >'; // Commentaires
                         }
                     } else {
-                        if ($createurFta <> $createurTmp) {
+                        if ($createurFta <> $createurTmp or $diffWorkflow) {
 
                             $tableauFicheTr .= '<tr class=contenu>'
                                     . '<td COLSPAN=' . $nombreDeCellule . ' ><font size=2 >' . $createurPrenom . ' ' . $createurNom . ' </td>'
@@ -918,7 +932,7 @@ class AccueilFta {
                     }
                 } else {
 
-                    if ($createurFta != $createurTmp) {
+                    if ($createurFta != $createurTmp or $diffWorkflow) {
                         /*
                          * Commentaire de la Fta
                          */
@@ -1028,14 +1042,16 @@ class AccueilFta {
                 $service = NULL;
                 $classification = NULL;
                 $selection = NULL;
-                $one = 1;
+                $one = AccueilFta::VALUE_1;
             }
         } else {
             $tableauFiche .= '<tr class=contenu><td>Aucune Fta identifié</td></tr>';
         }
-        $tableauFiche2.= $tableauFicheN . $tableauFicheTr;
-        $tableauFiche .= $tableauFiche2 . $javascript . '</tbody></table>';
-
+//        $tableauFiche2.= $tableauFicheN . $tableauFicheTr;
+//        $tableauFiche .= $tableauFiche2 . $javascript . '</tbody></table>';
+        $tableauFicheN2.= $tableauFicheNWork . $tableauFicheN;
+        $tableauFicheTr2 .= $tableauFicheTrWork . $tableauFicheTr;
+        $tableauFiche .= $tableauFicheN2 . $tableauFicheTr2 . $javascript . '</tbody></table>';
 
         //Ajoute de la fonction de traitement de masse
         if ($traitementDeMasse) {

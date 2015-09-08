@@ -1,7 +1,7 @@
 <?php
-include ("../lib/session.php");
-require ("../lib/functions.php");
-require ("functions.php");
+
+require_once '../inc/main.php';
+$service = Lib::getParameterFromRequest('service');
 if(!$service)
 {
    header ("Location: entreprise.php?service=1");

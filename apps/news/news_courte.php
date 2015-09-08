@@ -1,10 +1,20 @@
 <?php
-  require ("../lib/session.php");
-  require("../lib/functions.php");
+//  require ("../lib/session.php");
+//  require("../lib/functions.php");
+  require_once ("../inc/main.php");
+$login = Lib::isDefined('login');
+$pass = Lib::isDefined('pass');
+$id_user = Lib::isDefined('id_user');
+$insertion = Lib::isDefined('insertion');
+$lien_1_type = Lib::isDefined('lien_1_type');
+$lien_2_type = Lib::isDefined('lien_2_type');
+$lien_3_type = Lib::isDefined('lien_3_type');
+$id_service = Lib::isDefined('id_service');
+$choixconf = Lib::isDefined('choixconf');
   identification1("salaries", $login, $pass);
 
-  require ("functions.php");
-  require ("functions.js");
+//  require ("functions.php");
+//  require ("functions.js");
   if ($insertion=='insertion')
   {
 // Recherche du plus grand numéro d'article dans la table afin de pouvoir

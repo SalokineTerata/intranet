@@ -1,6 +1,6 @@
 <?
 //Barre de navigation du module
-
+$planning_presence_modification = Lib::isDefined('planning_presence_modification');
 //Consulter
 echo "<br>";
 echo "<a href=./index.php>Consulter le planning des presences</a>";

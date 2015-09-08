@@ -1,9 +1,13 @@
 <?php
-  require("../lib/session.php");
-  include("../lib/functions.php");
+//  require("../lib/session.php");
+//  include("../lib/functions.php");
+require_once ("../inc/main.php");
+$login = Lib::isDefined('login');
+$pass = Lib::isDefined('pass');
+$id_user = Lib::isDefined('id_user');
   identification1("salaries", $login, $pass);
-  include("functions.php");
-  include("functions.js");
+//  include("functions.php");
+//  include("functions.js");
 
 
 ?>

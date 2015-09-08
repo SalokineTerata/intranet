@@ -3,7 +3,7 @@
 Module d'appartenance (valeur obligatoire)
 Par défaut, le nom du module est le répertoire courant
 */
-   $module = substr(strrchr(`pwd`, '/'), 1);
+//   $module = substr(strrchr(`pwd`, '/'), 1);
 
 /*
 Si la page peut être appelée depuis n'importe quel module,
@@ -15,14 +15,39 @@ décommentez la ligne suivante
 /*********
 Inclusions
 *********/
-include ("../lib/session.php");         //Récupération des variables de sessions
-include ("../lib/debut_page.php");      //Affichage des éléments commun à l'Intranet
-include ("functions.php");              //Inclusion des fonctions propres au module
+switch($output)
+{
 
-if (isset($menu))                       //Si existant, utilisation du menu demandé
-   {include ("./$menu");}               //en variable
-else
-   {include ("./menu_principal.inc");}  //Sinon, menu par défaut
+  case 'visualiser':
+       //Inclusions
+       include ("../lib/session.php");         //Récupération des variables de sessions
+       include ("../lib/functions.php");       //On inclus seulement les fonctions sans construire de page
+       include ("functions.php");              //Fonctions du module
+       echo "
+            <link rel=stylesheet type=text/css href=../lib/css/intra01.css />
+            <link rel=stylesheet type=text/css href=visualiser.css />
+       ";
+
+  //break;
+  case 'pdf':
+  break;
+
+  default:
+        //Inclusions
+//        include ("../lib/session.php");         //Récupération des variables de sessions
+//        include ("../lib/debut_page.php");      //Construction d'une nouvelle
+//        if (isset($menu))                       //Si existant, utilisation du menu demandé
+//        {                                       //en variable
+//           include ("./$menu");
+//        }
+//        else
+//        {
+//           include ("./menu_principal.inc");    //Sinon, menu par défaut
+//        }
+      require_once '../inc/main.php';
+      print_page_begin($disable_full_page, $menu_file);
+}//Fin de la sélection du mode d'affichage de la page
+
 
 
 /*************

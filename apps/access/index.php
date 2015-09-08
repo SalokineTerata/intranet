@@ -1,115 +1,121 @@
 <?
-/*
-Module d'appartenance (valeur obligatoire)
-Par défaut, le nom du module est le répetoire courant
-*/
-   $module = substr(strrchr(`pwd`, '/'), 1);
-   $module = trim($module);
 
 /*
-Si la page peut être appelée depuis n'importe quel module,
-décommentez la ligne suivante
-*/
+  Module d'appartenance (valeur obligatoire)
+  Par défaut, le nom du module est le répetoire courant
+ */
+//   $module = substr(strrchr(`pwd`, '/'), 1);
+//   $module = trim($module);
+
+/*
+  Si la page peut être appelée depuis n'importe quel module,
+  décommentez la ligne suivante
+ */
 
 //   $module='';
 
-/*********
-Inclusions
-*********/
-include ("../lib/session.php");         //Récupération des variables de sessions
-//include ("../lib/functions.php");         //Timeout de déconnexion
-include ("../lib/debut_page.php");      //Affichage des éléments commun à l'Intranet
+/* * *******
+  Inclusions
+ * ******* */
+switch($output)
+{
 
-if (isset($menu))                       //Si existant, utilisation du menu demandé
-   {include ("./$menu");}               //en variable
-else
-   {include ("./menu_principal.inc");}  //Sinon, menu par défaut
+  case 'visualiser':
+       //Inclusions
+       include ("../lib/session.php");         //Récupération des variables de sessions
+       include ("../lib/functions.php");       //On inclus seulement les fonctions sans construire de page
+       include ("functions.php");              //Fonctions du module
+       echo "
+            <link rel=stylesheet type=text/css href=../lib/css/intra01.css />
+            <link rel=stylesheet type=text/css href=visualiser.css />
+       ";
 
+  //break;
+  case 'pdf':
+  break;
 
-/*************
-Début Code PHP
-*************/
+  default:
+        //Inclusions
+//        include ("../lib/session.php");         //Récupération des variables de sessions
+//        include ("../lib/debut_page.php");      //Construction d'une nouvelle
+//        if (isset($menu))                       //Si existant, utilisation du menu demandé
+//        {                                       //en variable
+//           include ("./$menu");
+//        }
+//        else
+//        {
+//           include ("./menu_principal.inc");    //Sinon, menu par défaut
+//        }
+      require_once '../inc/main.php';
+      print_page_begin($disable_full_page, $menu_file);
+}//Fin de la sélection du mode d'affichage de la page
+
+//print_page_begin($disable_full_page, $menu_file);
+/* * ***********
+  Début Code PHP
+ * *********** */
+$id_user = Lib::isDefined('id_user');
+/*
+  Initialisation des variables
+ */
+$action = '';                       //Action proposée à la page action.php
+$method = 'method=post';             //Pour une url > 2000 caractères, utiliser POST
+$html_table = "table "              //Permet d'harmoniser les tableaux
+        . "border=1 "
+        . "width=100% "
+        . "class=contenu "
+;
 
 /*
-    Initialisation des variables
-*/
-   $action = '';                       //Action proposée à la page action.php
-   $method = 'method=post';             //Pour une url > 2000 caractères, utiliser POST
-   $html_table = "table "              //Permet d'harmoniser les tableaux
-               . "border=1 "
-               . "width=100% "
-               . "class=contenu "
-               ;
-
-/*
-    Récupération des données MySQL
-*/
+  Récupération des données MySQL
+ */
 
 
 /*
-    Création des objets HTML (listes déroulante, cases à cocher ...etc.)
-*/
+  Création des objets HTML (listes déroulante, cases à cocher ...etc.)
+ */
 
 //Recherches des bases Access accessible par l'utilisateur
 
-   $req1 = "SELECT * FROM intranet_actions, intranet_droits_acces "
+$req1 = "SELECT nom_intranet_actions,description_intranet_actions"
+        . " FROM intranet_actions, intranet_droits_acces "
         . "WHERE intranet_actions.id_intranet_actions=intranet_droits_acces.id_intranet_actions "
         . "AND intranet_actions.module_intranet_actions=intranet_droits_acces.id_intranet_modules "
         . "AND intranet_droits_acces.id_intranet_modules=13 "
         . "AND intranet_droits_acces.niveau_intranet_droits_acces>=1 "
         . "AND intranet_droits_acces.id_user=$id_user "
         . "ORDER BY nom_intranet_actions ASC "
-        ;
+;
 
-$result=mysql_query($req1);
+$result = DatabaseOperation::convertSqlStatementWithoutKeyToArray($req1);
 
-if($result){
+if ($result) {
 
 
-    if ($site_dev){
+    if ($site_dev) {
 
-       $extension="mdb";
+        $extension = "mdb";
+    } else {
 
+        $extension = "agismde";
     }
-    else{
+    $extension_local = $extension;
 
-       $extension="agismde";
+    foreach ($result as $rows) {
+        //Chemin
 
-    }
-    $extension_local=$extension;
-      
-
-
-    while ($rows=mysql_fetch_array($result))
-    {
-      //Chemin
-      if ($rows[chemin_acces_intranet_actions]){
-
-         $chemin=$rows[chemin_acces_intranet_actions];
-         //Retour au mdb, meme en exploitation !!!
-         //$extension_local="mdb";
-
-      }
-      else{
-
-         $chemin="base_".$rows[nom_intranet_actions];
-
-      }
-
-      //Fichier
-      if ($rows[file_acces_intranet_actions]){
-
-         $file=$rows[file_acces_intranet_actions];
-      }
-      else{
-         $file=$rows[nom_intranet_actions].".".$extension_local;
-
-      }
+        $chemin = "base_" . $rows[nom_intranet_actions];
 
 
-      $tableau .= "<tr><td>
+        //Fichier
 
-                      <a href=".$chemin."/".$file.">
+        $file = $rows[nom_intranet_actions] . "." . $extension_local;
+
+
+
+        $tableau .= "<tr><td>
+
+                      <a href=" . $chemin . "/" . $file . ">
                          <img src=base_$rows[nom_intranet_actions]/bouton.png border=0 width=34 height=34 />
                          $rows[description_intranet_actions]
                          </a>
@@ -117,42 +123,41 @@ if($result){
                    </td></tr>
                   ";
     }
-
 }
 
 
 
-/***********
-Fin Code PHP
-***********/
+/* * *********
+  Fin Code PHP
+ * ********* */
 
 
-/**************
-Début Code HTML
-**************/
+/* * ************
+  Début Code HTML
+ * ************ */
 echo "
-     <form $method action=action.php>
-     <input type=hidden name=action value=$action>
+     <form " . $method . " action=action.php>
+     <input type=hidden name=action value=" . $action . ">
 
-     <$html_table>
+     <" . $html_table . ">
      <tr class=titre_principal><td>
 
          Sommaire des applications Access disponibles <br>
 
      </td></tr>
-     $tableau
-     </table>
+     " . $tableau . "
+</table>
 
-     </form>
-     ";
+</form>
+";
 
-/************
-Fin Code HTML
-************/
+/* * **********
+  Fin Code HTML
+ * ********** */
 
-/***********************
-Inclusion de fin de page
-***********************/
+/* * *********************
+  Inclusion de fin de page
+ * ********************* */
 include ("../lib/fin_page.inc");
 ?>
 

@@ -402,18 +402,20 @@ function selection_date_pour_mysql($nom_date, $date_defaut) {
  */
 function mysql_table_load($paramTableName) {
     $KeyValue = $_SESSION[DatabaseDescription::getTableKeyName($paramTableName)];
-    $recordset = new DatabaseRecord($paramTableName, $KeyValue);
+    if ($KeyValue) {
+        $recordset = new DatabaseRecord($paramTableName, $KeyValue);
 
-    $fields = $recordset->getFieldsArray();
-    foreach ($fields as $key => $value) {
-        /**
-         * Exportation de la valeur de la variable dans
-         * Une variable globale accessible hors de la fonction
-         * Formatage des données pour préparation à intégration dans MySQL
-         * 
-         * TRES TRES SALE !!
-         */
+        $fields = $recordset->getFieldsArray();
+        foreach ($fields as $key => $value) {
+            /**
+             * Exportation de la valeur de la variable dans
+             * Une variable globale accessible hors de la fonction
+             * Formatage des données pour préparation à intégration dans MySQL
+             * 
+             * TRES TRES SALE !!
+             */
         $GLOBALS[$key] = $value;
+        }
     }
 
     return $recordset;

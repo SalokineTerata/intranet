@@ -3,8 +3,10 @@
 Module d'appartenance (valeur obligatoire)
 Par défaut, le nom du module est le répertoire courant
 */
-   $module=substr(strrchr(`pwd`, '/'), 1);
-   $module=trim($module);
+//   $module=substr(strrchr(`pwd`, '/'), 1);
+//   $module=trim($module);
+
+
 
 
 /*
@@ -36,18 +38,26 @@ switch($output)
 
   default:
         //Inclusions
-        include ("../lib/session.php");         //Récupération des variables de sessions
-        include ("../lib/debut_page.php");      //Construction d'une nouvelle
-        if (isset($menu))                       //Si existant, utilisation du menu demandé
-        {                                       //en variable
-           include ("./$menu");
-        }
-        else
-        {
-           include ("./menu_principal.inc");    //Sinon, menu par défaut
-        }
-
+//        include ("../lib/session.php");         //Récupération des variables de sessions
+//        include ("../lib/debut_page.php");      //Construction d'une nouvelle
+//        if (isset($menu))                       //Si existant, utilisation du menu demandé
+//        {                                       //en variable
+//           include ("./$menu");
+//        }
+//        else
+//        {
+//           include ("./menu_principal.inc");    //Sinon, menu par défaut
+//        }
+      require_once '../inc/main.php';
+      print_page_begin($disable_full_page, $menu_file);
 }//Fin de la sélection du mode d'affichage de la page
+
+
+$planning_presence_modification=  Lib::isDefined('planning_presence_modification');
+$id_salaries=  Lib::getParameterFromRequest('id_salaries');
+$id_jour=  Lib::getParameterFromRequest('id_jour');
+$id_semaine=  Lib::getParameterFromRequest('id_semaine');
+$annee=  Lib::getParameterFromRequest('annee');
 
 //Autorisation de d'accéder à cette page:
 if ($planning_presence_modification==0)
@@ -87,7 +97,7 @@ $lieu2:                    Lieu pour un Après-midi
 */
 
 //Détermination des informations du salarié dont le planning est en cours de modification
-$req1 = "SELECT * FROM salaries ";
+$req1 = "SELECT prenom,nom FROM salaries ";
 $req1.= "WHERE id_user=$id_salaries";
 $result1=mysql_query($req1);
 $prenom_salaries_slashes=mysql_result($result1, 0, prenom);
@@ -107,13 +117,14 @@ while ($test1==0)
 }
 $semaine_en_cours=$id_semaine;
 $annee_en_cours=$annee;
-$req1 = "SELECT * FROM annexe_jours_semaine ";
+$req1 = "SELECT nom_annexe_jours_semaine FROM annexe_jours_semaine ";
 $req1.= "WHERE id_annexe_jours_semaine=$id_jour";
 $result1=mysql_query($req1);
 $jour_en_cours=mysql_result($result1, 0, nom_annexe_jours_semaine);
 
 //Caratéristiques de la journée en cours de modifications
-$req1 = "SELECT * FROM planning_presence_detail ";
+$req1 = "SELECT jour_type_planning_presence_detail,lieu_1_planning_presence_detail,lieu_2_planning_presence_detail"
+        . " FROM planning_presence_detail ";
 $req1.= "WHERE id_salaries=$id_salaries ";
 $req1.= "AND id_planning_presence_semaine_visible=$semaine_en_cours ";
 $req1.= "AND annee_planning_presence_semaine_visible=$annee_en_cours ";

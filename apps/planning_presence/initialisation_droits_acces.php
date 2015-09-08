@@ -3,8 +3,8 @@
 Module d'appartenance (valeur obligatoire)
 Par défaut, le nom du module est le répertoire courant
 */
-   $module=substr(strrchr(`pwd`, '/'), 1);
-   $module=trim($module);
+//   $module=substr(strrchr(`pwd`, '/'), 1);
+//   $module=trim($module);
 
 
 /*
@@ -36,23 +36,24 @@ switch($output)
 
   default:
         //Inclusions
-        include ("../lib/session.php");         //Récupération des variables de sessions
-        include ("../lib/debut_page.php");      //Construction d'une nouvelle
-        if (isset($menu))                       //Si existant, utilisation du menu demandé
-        {                                       //en variable
-           include ("./$menu");
-        }
-        else
-        {
-           include ("./menu_principal.inc");    //Sinon, menu par défaut
-        }
-
+//        include ("../lib/session.php");         //Récupération des variables de sessions
+//        include ("../lib/debut_page.php");      //Construction d'une nouvelle
+//        if (isset($menu))                       //Si existant, utilisation du menu demandé
+//        {                                       //en variable
+//           include ("./$menu");
+//        }
+//        else
+//        {
+//           include ("./menu_principal.inc");    //Sinon, menu par défaut
+//        }
+      require_once '../inc/main.php';
+      print_page_begin($disable_full_page, $menu_file);
 }//Fin de la sélection du mode d'affichage de la page
 
 //Initialisation des droits d'accès du module planning_presence
 echo "<center>";
 echo "Initialisation des droits d'accès par défaut<br><br>";
-$req1 = "SELECT * FROM salaries ";
+$req1 = "SELECT id_user,prenom,nom FROM salaries ";
 $req1.= "ORDER BY prenom ASC, nom ASC";
 $result1 = mysql_query($req1);
 while ($rows1=mysql_fetch_array($result1))
@@ -66,16 +67,15 @@ while ($rows1=mysql_fetch_array($result1))
       $id_intranet_actions=1;          //Module concerné
 
       //Recherche de droits d'accès existants
-      $req_recuperation_droits_acces = "SELECT * FROM intranet_droits_acces ";
+      $req_recuperation_droits_acces = "SELECT id_intranet_droits_acces FROM intranet_droits_acces ";
       $req_recuperation_droits_acces.= "WHERE id_intranet_modules=$id_intranet_modules ";
       $req_recuperation_droits_acces.= "AND id_intranet_actions=$id_intranet_actions ";
       $req_recuperation_droits_acces.= "AND id_user=$id_salaries";
-      $result_recuperation_droits_acces=mysql_query($req_recuperation_droits_acces);
-      $compte_recuperation_droits_acces=mysql_num_rows($result_recuperation_droits_acces);
+      $result_recuperation_droits_acces=  DatabaseOperation::convertSqlStatementWithoutKeyToArray($req_recuperation_droits_acces);
 
 
       //S'il n'y a pas de droits, alors insertions du droit par défaut
-      if (!$compte_recuperation_droits_acces)
+      if (!$result_recuperation_droits_acces)
       {
          $req_droits_acces = "INSERT INTO intranet_droits_acces (";
          $req_droits_acces.= "niveau_intranet_droits_acces, ";

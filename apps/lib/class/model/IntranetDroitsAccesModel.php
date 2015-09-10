@@ -101,6 +101,7 @@ class IntranetDroitsAccesModel {
         $arrayModule = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
                         'SELECT ' . IntranetModulesModel::KEYNAME . ',' . IntranetModulesModel::FIELDNAME_NOM_USUEL_INTRANET_MODULES
                         . ' FROM ' . IntranetModulesModel::TABLENAME
+                        . ' WHERE ' . IntranetModulesModel::FIELDNAME_VISIBLE_INTRANET_MODULES . '=' . AccueilFta::VALUE_1
                         . ' ORDER BY ' . IntranetModulesModel::FIELDNAME_NOM_USUEL_INTRANET_MODULES . ' ASC');
         $colonne = 6;
 
@@ -140,7 +141,6 @@ class IntranetDroitsAccesModel {
                                 . ',' . IntranetActionsModel::FIELDNAME_NOM_INTRANET_ACTIONS
                                 . ' FROM ' . IntranetActionsModel::TABLENAME
                                 . ' WHERE ' . IntranetActionsModel::FIELDNAME_MODULE_INTRANET_ACTIONS . '=' . $idIntranetModules
-                                . ' AND ' . IntranetActionsModel::FIELDNAME_PARENT_INTRANET_ACTIONS . '=0'
                 );
 
                 foreach ($arrayActionsWorkflow as $rowsActionsWorkflow) {

@@ -100,7 +100,7 @@ if ($modifier == 'modifier') {
 
     <body onLoad='StartTimer(<?php
     $time = timeout($idUser);
-    echo '$time';
+    echo $time;
     ?>)' bgcolor='#FFCC66' text='#000000' leftmargin='0' topmargin='0' marginwidth='0' marginheight='0'>
               <?php
               include ('cadrehautent.php');
@@ -248,29 +248,6 @@ if ($modifier == 'modifier') {
                         ?>
                     </center>
                     </td>
-                    <td  class='loginFFFFFFdroit'>
-                    <center><br>
-                        Type<br>
-                        <?php
-                        echo ('<select name=\'sal_type\'>\n');
-                        /*
-                         * Constitution de la liste déroulante des noms des groupes 
-                         */
-                        $arrayType = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
-                                        'SELECT ' . TypesModel::KEYNAME
-                                        . ', ' . TypesModel::FIELDNAME_INTITULE_TYP
-                                        . ' FROM ' . TypesModel::TABLENAME
-                        );
-                        if ($arrayType) {
-                            foreach ($arrayType as $rowType) {
-                                echo ('<option value=\'' . $rowType[TypesModel::KEYNAME] . '\'>' . $rowType[TypesModel::FIELDNAME_INTITULE_TYP] . '</option>');
-                            }
-                        }
-                        echo ('</select>');
-                        ?>
-                    </center>
-                    </td>
-
                     </tr>
                 </table><br>
                 <?php

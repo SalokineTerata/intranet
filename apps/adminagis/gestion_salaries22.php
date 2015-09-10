@@ -28,16 +28,9 @@ if ($paramRech == '1') {
                     'SELECT ' . UserModel::FIELDNAME_NOM
                     . ',' . UserModel::FIELDNAME_PRENOM
                     . ',' . UserModel::FIELDNAME_ID_CATSOPRO
-                    . ',' . UserModel::FIELDNAME_ID_SERVICE
-                    . ',' . UserModel::FIELDNAME_ID_TYPE
                     . ',' . UserModel::FIELDNAME_LOGIN
                     . ',' . UserModel::FIELDNAME_PASSWORD
-                    . ',' . UserModel::FIELDNAME_ASENDANT_ID_SALARIES
                     . ',' . UserModel::FIELDNAME_MAIL
-                    . ',' . UserModel::FIELDNAME_ECRITURE
-                    . ',' . UserModel::FIELDNAME_MEMBRE_CE
-                    . ',' . UserModel::FIELDNAME_LIEU_GEO
-                    . ',' . UserModel::FIELDNAME_NEWSDEFIL
                     . ',' . UserModel::FIELDNAME_DATE_CREATION_SALARIES
                     . ' FROM ' . UserModel::TABLENAME
                     . ' WHERE ' . UserModel::KEYNAME . '=' . $paramIdUser
@@ -49,43 +42,15 @@ if ($paramRech == '1') {
             $userNom = $rowsUserDetail[UserModel::FIELDNAME_NOM];
             $userPrenom = $rowsUserDetail[UserModel::FIELDNAME_PRENOM];
             $userCatsopro = $rowsUserDetail[UserModel::FIELDNAME_ID_CATSOPRO];
-            $userService = $rowsUserDetail[UserModel::FIELDNAME_ID_SERVICE];
-            $sal_type = $rowsUserDetail[UserModel::FIELDNAME_ID_TYPE];
             $userLogin = $rowsUserDetail[UserModel::FIELDNAME_LOGIN];
             $userPass = $rowsUserDetail[UserModel::FIELDNAME_PASSWORD];
 
-            $champ = 'ascendant_id_salaries';
-            ${'sal_' . $champ} = $rowsUserDetail[UserModel::FIELDNAME_ASENDANT_ID_SALARIES];
+
             $champ = 'date_creation_salaries';
             ${'sal_' . $champ} = $rowsUserDetail[UserModel::FIELDNAME_DATE_CREATION_SALARIES];
 
             //$sal_pass=mysql_result($result, 0, pass);
             $userMail = $rowsUserDetail[UserModel::FIELDNAME_MAIL];
-            $ecriture = $rowsUserDetail[UserModel::FIELDNAME_ECRITURE];
-            $membreCe = $rowsUserDetail[UserModel::FIELDNAME_MEMBRE_CE];
-            $lieu_geo = $rowsUserDetail[UserModel::FIELDNAME_LIEU_GEO];
-            $newsDefil = $rowsUserDetail[UserModel::FIELDNAME_NEWSDEFIL];
-        }
-        $arrayDroitftDetail = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
-                        'SELECT ' . DroitftModel::FIELDNAME_CREATION_FICHE_PRODUIT
-                        . ', ' . DroitftModel::FIELDNAME_CREATION_FT
-                        . ', ' . DroitftModel::FIELDNAME_DROITSTAT
-                        . ', ' . DroitftModel::FIELDNAME_ECRITUREFT
-                        . ', ' . DroitftModel::FIELDNAME_LECTUREFT
-                        . ', ' . DroitftModel::FIELDNAME_VALIDFT
-                        . ' FROM ' . DroitftModel::TABLENAME
-                        . ' WHERE ' . DroitftModel::FIELDNAME_ID_USER . ' = ' . $paramIdUser
-        );
-        if ($arrayDroitftDetail) {
-            foreach ($arrayDroitftDetail as $rowsDroitftDetail) {
-                $validft = $rowsDroitftDetail[DroitftModel::FIELDNAME_VALIDFT];
-                $ecritureft = $rowsDroitftDetail[DroitftModel::FIELDNAME_ECRITUREFT];
-                $creation_ft = $rowsDroitftDetail[DroitftModel::FIELDNAME_CREATION_FT];
-                $creation_fiche_produit = $rowsDroitftDetail[DroitftModel::FIELDNAME_CREATION_FICHE_PRODUIT];
-                $lectureft = $rowsDroitftDetail[DroitftModel::FIELDNAME_LECTUREFT];
-                $droitstat = $rowsDroitftDetail[DroitftModel::FIELDNAME_DROITSTAT];
-                ;
-            }
         }
         $userNom = stripslashes($userNom);
         $userPrenom = stripslashes($userPrenom);
@@ -120,7 +85,7 @@ if ($paramRech == '1') {
 
     <body onLoad='StartTimer(<?php
     $time = timeout($paramIdUser);
-    echo '$time';
+    echo $time;
     ?>)' bgcolor='#FFCC66' text='#000000' leftmargin='0' topmargin='0' marginwidth='0' marginheight='0'>
               <?php
               include ('cadrehautent.php');
@@ -254,29 +219,6 @@ if ($paramRech == '1') {
                                                 ?>
                                             </center>
                                             </td>
-
-
-                                            <td  class='loginFFFFFFdroit'>
-                                            <center><br>
-                                                Type<br>
-                                                <?php
-                                                echo ('<select name=\'sal_type\'>');
-                                                /* Constitution de la liste déroulante des noms des types */
-                                                $arrayType = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
-                                                                'SELECT ' . TypesModel::KEYNAME
-                                                                . ', ' . TypesModel::FIELDNAME_INTITULE_TYP
-                                                                . ' FROM ' . TypesModel::TABLENAME
-                                                );
-                                                if ($arrayType) {
-                                                    foreach ($arrayType as $rowType) {
-                                                        echo ('<option value=\'' . $rowType[TypesModel::KEYNAME] . '\'>' . $rowType[TypesModel::FIELDNAME_INTITULE_TYP] . '</option>');
-                                                    }
-                                                }
-                                                echo ('</select>');
-                                                ?>
-                                            </center>
-                                            </td>
-
                                         </table>  
                                         <br>                 
                                         <?php

@@ -3,8 +3,8 @@
 Module d'appartenance (valeur obligatoire)
 Par défaut, le nom du module est le répertoire courant
 */
-   $module=substr(strrchr(`pwd`, '/'), 1);
-   $module=trim($module);
+//   $module=substr(strrchr(`pwd`, '/'), 1);
+//   $module=trim($module);
 
 
 /*
@@ -17,38 +17,38 @@ décommentez la ligne suivante
 //Inclusions
 
 //Sélection du mode de visualisation de la page
-switch($output)
-{
+switch ($output) {
 
-  case 'visualiser':
-       //Inclusions
-       include ("../lib/session.php");         //Récupération des variables de sessions
-       include ("../lib/functions.php");       //On inclus seulement les fonctions sans construire de page
-       include ("functions.php");              //Fonctions du module
-       echo "
+    case 'visualiser':
+        //Inclusions
+        include ("../lib/session.php");         //Récupération des variables de sessions
+        include ("../lib/functions.php");       //On inclus seulement les fonctions sans construire de page
+        include ("functions.php");              //Fonctions du module
+        echo "
             <link rel=stylesheet type=text/css href=../lib/css/intra01.css />
             <link rel=stylesheet type=text/css href=visualiser.css />
        ";
 
-  //break;
-  case 'pdf':
-  break;
+    //break;
+    case 'pdf':
+        break;
 
-  default:
+    default:
         //Inclusions
-        include ("../lib/session.php");         //Récupération des variables de sessions
-        include ("../lib/debut_page.php");      //Construction d'une nouvelle
-        if (isset($menu))                       //Si existant, utilisation du menu demandé
-        {                                       //en variable
-           include ("./$menu");
-        }
-        else
-        {
-           include ("./menu_principal.inc");    //Sinon, menu par défaut
-        }
-
+//        include ("../lib/session.php");         //Récupération des variables de sessions
+//        include ("../lib/debut_page.php");      //Construction d'une nouvelle
+//        if (isset($menu))                       //Si existant, utilisation du menu demandé
+//        {                                       //en variable
+//           include ("./$menu");
+//        }
+//        else
+//        {
+//           include ("./menu_principal.inc");    //Sinon, menu par défaut
+//        }
+        require_once '../inc/main.php';
+        print_page_begin($disable_full_page, $menu_file);
 }//Fin de la sélection du mode d'affichage de la page
-
+$planning_presence_modification = Lib::isDefined('planning_presence_modification');
 //Autorisation de d'accéder à cette page:
 if ($planning_presence_modification==0)
 {

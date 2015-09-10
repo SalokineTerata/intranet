@@ -193,7 +193,7 @@ function identification1($mysql_table_authentification, $login, $pass, GlobalCon
     //Si l'authentification LDAP échoue ou désactivée, on tente l'authentification MySQL
     if (!$ldap_result or $pass == "") {
         $mysql_passwd = "AND (pass=PASSWORD('$pass'))";
-        $req_authentification_main = "SELECT * FROM " . $mysql_table_authentification . " WHERE "
+        $req_authentification_main = "SELECT id_user FROM " . $mysql_table_authentification . " WHERE "
                 . "(login = '$login') "
                 . "AND (blocage='non') "
                 . "AND (actif='oui') "

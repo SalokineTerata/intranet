@@ -67,7 +67,7 @@ if ($id_user) {
     $synthese_action = Lib::getParameterFromRequest('synthese_action');
     $tableau_fiche = Lib::getParameterFromRequest('tableau_fiche');
     $visualiser_fiche_total_fta = Lib::getParameterFromRequest('visualiser_fiche_total_fta');
-    $order_common = Lib::getParameterFromRequest('order_common', FtaModel::FIELDNAME_DATE_ECHEANCE_FTA);
+    $order_common = Lib::getParameterFromRequest('order_common', FtaWorkflowModel::KEYNAME);
     $numeroDePageCourante = Lib::getParameterFromRequest('numeroPage', AccueilFta::VALUE_1);
 
 

@@ -79,7 +79,6 @@ class FtaTransitionModel {
                 break;
 
             case $paramAbreviationFtaTransition == FtaEtatModel::ETAT_ABREVIATION_VALUE_MODIFICATION: //Passer en Initialisation
-            case $paramAbreviationFtaTransition == FtaEtatModel::ETAT_ABREVIATION_VALUE_PRESENTATION: //Passer en Fiche Présentation
                 //Vérification que le dossier n'a pas une fiche déjà en Mise à jour
                 $array = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
                                 "SELECT " . FtaModel::KEYNAME
@@ -89,8 +88,7 @@ class FtaTransitionModel {
                                 . "=" . FtaEtatModel::TABLENAME . "." . FtaEtatModel::KEYNAME     //Liaison
                                 . " AND (" . FtaEtatModel::FIELDNAME_ABREVIATION . "<>'" . FtaEtatModel::ETAT_ABREVIATION_VALUE_VALIDE
                                 . "' AND " . FtaEtatModel::FIELDNAME_ABREVIATION . "<>'" . FtaEtatModel::ETAT_ABREVIATION_VALUE_RETIRE
-                                . "' AND " . FtaEtatModel::FIELDNAME_ABREVIATION . "<>'" . FtaEtatModel::ETAT_ABREVIATION_VALUE_PRESENTATION
-                                . "' AND " . FtaEtatModel::FIELDNAME_ABREVIATION . "<>'" . FtaEtatModel::ETAT_ABREVIATION_VALUE_ARCHIVE . ") "
+                                . "' AND " . FtaEtatModel::FIELDNAME_ABREVIATION . "<>'" . FtaEtatModel::ETAT_ABREVIATION_VALUE_ARCHIVE . "') "
                 );
                 $verrou = count($array);
                 if ($verrou and ! $_SESSION["mode_debug"]) {
@@ -220,8 +218,8 @@ class FtaTransitionModel {
      * forme du tableau suivant:
      * $return[mail]:       adresse email
      * $return[prenom_nom]: prénom et nom du destinataire
-     * @param type $id_fta
-     * @return int
+     * @param int $id_fta
+     * @return array
      */
     public static function BuildListeDiffusionTransition($id_fta) {
 
@@ -232,6 +230,7 @@ class FtaTransitionModel {
                 . ", " . FtaModel::FIELDNAME_WORKFLOW
                 . ", " . FtaModel::FIELDNAME_VERSION_DOSSIER_FTA
                 . ", " . FtaModel::KEYNAME
+                . ", " . FtaModel::FIELDNAME_SITE_ASSEMBLAGE
                 . " FROM " . FtaModel::TABLENAME . ",  " . FtaEtatModel::TABLENAME
                 . " WHERE " . FtaModel::TABLENAME . "." . FtaModel::KEYNAME . "='" . $id_fta . "' "
                 . " AND " . FtaEtatModel::TABLENAME . "." . FtaEtatModel::KEYNAME
@@ -275,127 +274,68 @@ class FtaTransitionModel {
             if ($rowsFta[FtaModel::FIELDNAME_VERSION_DOSSIER_FTA] == 0 or $ok == 1) {
                 //Log de la diffusion globale
                 $logTransition.="\n\nDiffusion Globale Activée";
-
-                //Diffusion dans le cadre d'une création (version =v0) ou processus initiateur du cycle de vie modifié
-                //Ce réfère à la requête de diffusion suivante:
-                $where_chapitre = "";
-
-                //Ajout des services et sites supplémentaires liés à une diffusion globale
-                $where_supplementaire = " geo.raccourci_site_agis='PF' "     //Plateforme
-                        //. "OR geo.raccourci_site_agis='SGE' " //Siège
-                        . " OR id_service=38  "                //Compta
-                        . " OR id_service=66  "                //Approvisionnement
-                        . " OR id_service=40  "                //Expédition
-                ;
             } else {
                 //Log de la diffusion globale
-                $logTransition.="\n\nDiffusion Globale Désactivée";
-
-                //Diffusion dans le cadre d'une mise à jour (>v0)
-                //N'informe que les chapitres étant à l'origine de la mise à jour. (cf. fta.liste_chapitre_maj_fta)
-                //Détermination des chapitres concernés
-                $tab_liste_chapitre = explode(";", $rowsFta[FtaModel::FIELDNAME_LISTE_CHAPITRE_MAJ_FTA]);
-                $where_chapitre = " AND (";
-                $where_chapitre_tmp = "";
-                $where_chapitre_operator = "";
-                foreach ($tab_liste_chapitre as $id_chapitre) {
-                    if ($id_chapitre) {
-                        $where_chapitre_tmp.=$where_chapitre_operator . FtaWorkflowStructureModel::TABLENAME . "." . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_CHAPITRE
-                                . "='" . $id_chapitre . "' ";
-                        $where_chapitre_operator = " OR ";
-                    }
-                }
-                if ($where_chapitre_tmp) {
-                    $where_chapitre.=$where_chapitre_tmp . ") ";
-                } else {
-                    $where_chapitre = "";
-                }
-
-                //Ajout des services et sites supplémentaires liés à une diffusion de mise à jour
-                //$where_supplementaire="";
-                $where_supplementaire = " id_service=66 "                    //Approvisionnement
-                        . " OR id_service=40  "                //Expédition
-                //. "OR geo.raccourci_site_agis='SGE' " //Siège
-                //. "OR id_service=38  "                //Compta
-                ;
+                $logTransition.="\n\nDiffusion Globale Désactivée";               
             }
 
 
-            //Récupération de la liste des services (et sites) étant intervenu sur la validation de la FTA
-            //et qu'il faut donc inclure dans la liste de diffusion
-            $req = "SELECT " . UserModel::FIELDNAME_ID_SERVICE . ", " . UserModel::FIELDNAME_LIEU_GEO . ", MIN(" . FtaProcessusModel::FIELDNAME_MULTISITE_FTA_PROCESSUS . ") as min_multisite_fta_processus "
-                    . " FROM " . FtaSuiviProjetModel::TABLENAME . " "
-                    . ", " . UserModel::TABLENAME . " "
-                    . ", access_materiel_service "
-                    . ", " . FtaWorkflowStructureModel::TABLENAME
-                    . ", " . FtaProcessusModel::TABLENAME
-                    . " WHERE " . FtaSuiviProjetModel::FIELDNAME_ID_FTA . "='" . $rowsFta[FtaModel::KEYNAME] . "' "
-                    . " AND " . UserModel::FIELDNAME_ACTIF . " ='oui' "                                                   //maj 2007-08-13 sm sélection des salariés actifs uniquement
-                    . " AND " . UserModel::KEYNAME . "=" . FtaSuiviProjetModel::FIELDNAME_SIGNATURE_VALIDATION_SUIVI_PROJET               //Liaison
-                    . " AND " . UserModel::FIELDNAME_ID_SERVICE . "=K_service "                                           //Liaison
-                    . " AND " . FtaSuiviProjetModel::TABLENAME . "." . FtaSuiviProjetModel::FIELDNAME_ID_FTA_CHAPITRE
-                    . "=" . FtaWorkflowStructureModel::TABLENAME . "." . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_CHAPITRE   //Liaison
-                    . " AND " . FtaWorkflowStructureModel::TABLENAME . "." . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_PROCESSUS
-                    . "=" . FtaProcessusModel::TABLENAME . "." . FtaProcessusModel::KEYNAME   //Liaison
-                    . $where_chapitre                                                       //Restriction dans le cas d'une mise à jour
-                    . " GROUP BY " . UserModel::FIELDNAME_ID_SERVICE . ", " . UserModel::FIELDNAME_LIEU_GEO
-            ;
-            $logTransition.="\n\n" . $req . "\n";
-            $arrayServiceFta = DatabaseOperation::convertSqlStatementWithoutKeyToArray($req);
-            $where = " AND ( ";
-            $where_operator = "";
-
-            if ($arrayServiceFta) {
-                $where = " AND ( ";
-                foreach ($arrayServiceFta as $rowsServiceFta) {
-                    $where.= $where_operator . "(" . UserModel::FIELDNAME_ID_SERVICE . "='" . $rowsServiceFta[UserModel::FIELDNAME_ID_SERVICE] . "' ";
-
-
-                    //Dans le cas de processus multisite on n'intègre que les personnes du site concerné
-                    if ($rowsServiceFta["min_multisite_fta_processus"]) {
-                        $where.=" AND " . UserModel::FIELDNAME_LIEU_GEO . "='" . $rowsServiceFta[UserModel::FIELDNAME_LIEU_GEO] . "' ) ";
-                    } else {
-                        $where.=")";
-                    }
-                    $where_operator = " OR ";
+            
+            $arrayIdIntranetActions = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
+                            ' SELECT ' . FtaActionSiteModel::TABLENAME . '.' . FtaActionSiteModel::FIELDNAME_ID_INTRANET_ACTIONS
+                            . ' FROM ' . FtaActionSiteModel::TABLENAME
+                            . ' WHERE ' . FtaActionSiteModel::FIELDNAME_ID_SITE . '=' . $rowsFta[FtaModel::FIELDNAME_SITE_ASSEMBLAGE]
+                            . ' AND ' . FtaActionSiteModel::FIELDNAME_ID_FTA_WROKFLOW . ' =' . $rowsFta[FtaModel::FIELDNAME_WORKFLOW]
+                    );
+                            
+            if ($arrayIdIntranetActions) {
+                foreach ($arrayIdIntranetActions as $rowsIdIntranetActions) {
+                    $IdIntranetActions[] = $rowsIdIntranetActions[IntranetDroitsAccesModel::FIELDNAME_ID_INTRANET_ACTIONS];
                 }
-                //Ajout des services et sites supplémentaires liés à une diffusion globale
-                if ($where_supplementaire) {
-                    $where.=$where_operator . $where_supplementaire;
-                }
-                $where.=")";
-            } else {
-                //Ne doit pas arriver !
-                $where = "";
             }
+
+
             /**
              * Il est impératif d'avoir une condition Where dans le requête de diffusion
              * Si ce n'est pas le cas, la diffusion s'étend à l'ensemble des utiisateurs du système Intranet !
              * Il est necessaire d'interdire celà.
              */
-            if ($where) {
+            if ($IdIntranetActions) {
+                /**
+                 * Liste des utilisateur ayant le droits de diffusion sur le module Fta
+                 */
+                $arrayListeDiffusion = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
+                        "SELECT DISTINCT " . UserModel::TABLENAME . "." . UserModel::KEYNAME
+                        . " FROM " . UserModel::TABLENAME
+                        . ", " . IntranetDroitsAccesModel::TABLENAME
+                        . " WHERE " . UserModel::TABLENAME . "." . UserModel::KEYNAME
+                        . " = " . IntranetDroitsAccesModel::TABLENAME . "." . IntranetDroitsAccesModel::FIELDNAME_ID_USER                                    
+                        . " AND " . UserModel::TABLENAME . "." . UserModel::FIELDNAME_ACTIF . " ='oui' "                                                                    
+                        . " AND " . IntranetDroitsAccesModel::TABLENAME . "." . IntranetDroitsAccesModel::FIELDNAME_ID_INTRANET_MODULES . " = 19"
+                        . " AND " . IntranetDroitsAccesModel::TABLENAME . "." . IntranetDroitsAccesModel::FIELDNAME_NIVEAU_INTRANET_DROITS_ACCES . " = 1 "                                   
+                        . ' AND ' . IntranetDroitsAccesModel::FIELDNAME_ID_INTRANET_ACTIONS . '=' . AccueilFta::VALUE_3
+                        );        
+                foreach ($arrayListeDiffusion as $value) {
+                    $idUser[] = $value[UserModel::KEYNAME];
+                }
+
                 //Création de la liste des destinataires
-                $req = "SELECT " . UserModel::TABLENAME . "." . UserModel::KEYNAME . ", " . UserModel::FIELDNAME_NOM . ", " . UserModel::FIELDNAME_PRENOM . ", " . UserModel::FIELDNAME_MAIL
+                $req = "SELECT DISTINCT " . UserModel::TABLENAME . "." . UserModel::KEYNAME . ", " . UserModel::FIELDNAME_NOM . ", " . UserModel::FIELDNAME_PRENOM . ", " . UserModel::FIELDNAME_MAIL
                         . " FROM " . UserModel::TABLENAME
                         . ", " . IntranetDroitsAccesModel::TABLENAME
                         . ", " . IntranetModulesModel::TABLENAME
                         . ", " . IntranetActionsModel::TABLENAME
-                        . ", " . GeoModel::TABLENAME
                         //Début Droits d'accès de diffusion
                         . " WHERE " . UserModel::TABLENAME . "." . UserModel::KEYNAME
-                        . " = " . IntranetDroitsAccesModel::TABLENAME . "." . IntranetDroitsAccesModel::FIELDNAME_ID_USER                                     //Liaison
-                        . " AND " . UserModel::TABLENAME . "." . UserModel::FIELDNAME_ACTIF . " ='oui' "                                                                     //maj 2007-08-13 sm sélection des salariés actifs uniquement         . "AND `intranet_droits_acces`.`id_intranet_modules` = `intranet_modules`.`id_intranet_modules` "      //Liaison
+                        . " = " . IntranetDroitsAccesModel::TABLENAME . "." . IntranetDroitsAccesModel::FIELDNAME_ID_USER                                   
+                        . " AND " . UserModel::TABLENAME . "." . UserModel::FIELDNAME_ACTIF . " ='oui' "                                                        
+                        . " AND ( 0 " . UserModel::AddIdUser($idUser) . ')'                        
                         . " AND " . IntranetDroitsAccesModel::TABLENAME . "." . IntranetDroitsAccesModel::FIELDNAME_ID_INTRANET_ACTIONS
                         . " = " . IntranetActionsModel::TABLENAME . "." . IntranetActionsModel::KEYNAME      //Liaison
-                        . " AND " . IntranetActionsModel::TABLENAME . "." . IntranetActionsModel::FIELDNAME_NOM_INTRANET_ACTIONS . " = 'diffusion' "                                       //Droits de diffusion
-                        . " AND " . IntranetDroitsAccesModel::TABLENAME . "." . IntranetDroitsAccesModel::FIELDNAME_NIVEAU_INTRANET_DROITS_ACCES . " = 1 "                                    //Droits de diffusion
-                        . " AND " . IntranetModulesModel::TABLENAME . "." . IntranetModulesModel::FIELDNAME_NOM_INTRANET_MODULES . " = 'fta' "                                             //Module FTA
-                        . " AND " . IntranetModulesModel::TABLENAME . "." . IntranetModulesModel::KEYNAME
-                        . " = " . IntranetDroitsAccesModel::TABLENAME . "." . IntranetDroitsAccesModel::FIELDNAME_ID_INTRANET_MODULES      //Lien entre le module et les droits
-                        . " AND " . GeoModel::TABLENAME . "." . GeoModel::KEYNAME
-                        . "=" . UserModel::TABLENAME . "." . UserModel::FIELDNAME_LIEU_GEO
-                        //Début Droits d'accès de diffusion
-                        . $where                                  //Restriction au niveau du service et site de rattachement
+                        . " AND " . IntranetDroitsAccesModel::TABLENAME . "." . IntranetDroitsAccesModel::FIELDNAME_NIVEAU_INTRANET_DROITS_ACCES . " = 1 "                                   
+                        . ' AND ( 0 ' . IntranetActionsModel::AddIdIntranetAction($IdIntranetActions) . ')'                                
+
+
                 ;
                 $logTransition.="\n\n" . $req . "\nFIN DIFFUSION\n";
                 $r_liste_destinataire = DatabaseOperation::convertSqlStatementWithoutKeyToArray($req);
@@ -573,8 +513,7 @@ class FtaTransitionModel {
                 . "\n"
                 . "INFORMATIONS DE DEBUGGAGE:\n"
                 . $logTransition
-        ;
-        {
+        ; {
             $expediteur = $prenom . " " . $nom . " <" . $mail . ">";
             envoismail($sujetmail, $corp, $mail, $expediteur, $typeMail);
         }

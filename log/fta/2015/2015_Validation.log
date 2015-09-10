@@ -1145,4 +1145,249 @@ Ce message a été envoyé automatiquement par le module Intranet - Fiche Techni
 INFORMATIONS DE DEBUGGAGE:
 
 
-SELECT code_produit_agrologic_fta_nomenclature,prefixe_annexe_agrologic_article_codification FROM fta_composant, annexe_agrologic_article_codification WHERE fta_composant.id_fta=304 AND is_composition_fta_composant=1  AND fta_composant.id_annexe_agrologic_article_codification=annexe_agrologic_article_codification.id_annexe_agrologic_article_codification ORDER BY prefixe_annexe_agrologic_article_codification ASC, nom_fta_nomenclature \n 
+SELECT code_produit_agrologic_fta_nomenclature,prefixe_annexe_agrologic_article_codification FROM fta_composant, annexe_agrologic_article_codification WHERE fta_composant.id_fta=304 AND is_composition_fta_composant=1  AND fta_composant.id_annexe_agrologic_article_codification=annexe_agrologic_article_codification.id_annexe_agrologic_article_codification ORDER BY prefixe_annexe_agrologic_article_codification ASC, nom_fta_nomenclature \n 10/09/2015 14:24:17\nFranck AMOFA <test@gmail.com> : test@gmail.com : FTA/Information "0 - " \n DESTINATAIRES:
+COLIN Nathan: fta_test@gmail.fr
+PAGE accueil: accueil@gmail.com
+AMOFA Franck: test@gmail.com
+SYSTEM superviseur: InformatiqueSupport.AVIGNON@agis-sa.fr
+SYSTEM FTA Chef de Projet: informatiquesupport.avignon@agis-sa.fr
+SYSTEM FTA Informatique gestion: informatiquesupport.avignon@agis-sa.fr
+SYSTEM FTA Emballage: informatiquesupport.avignon@agis-sa.fr
+SYSTEM FTA Qualité: informatiquesupport.avignon@agis-sa.fr
+
+
+Message envoyé:
+
+La Fiche Technique Article "0 - " vient d'être validée.
+Cet Article est maintenant actif et disponible dans l'ensemble de notre système informatique.
+
+INFORMATIONS PRINCIPALES:
+Site d'assemblage: AVIGNON
+Identifiant dans Agrologic: 0
+
+Listes des produits créés:
+
+
+INFORMATIONS SUPPLEMENTAIRES:
+Code Article LDC: 
+Gencod EAN Article: 
+Gencod EAN Colis: 84848484694
+Nombre d'UVC par colis: 1
+Poids net de l'unité de vente facturée (en Kg): 12
+Identifiant du Dossier Technique: 315-v0
+Unité de facturation: Pièce
+Durée de vie garantie client (en jours): 52
+Durée de vie Production (en jours): 
+Désignation Commerciale: Désignation Commerciale
+
+
+Bonne journée à tous.
+Ce message a été envoyé automatiquement par le module Intranet - Fiche Technique Article.
+
+INFORMATIONS DE DEBUGGAGE:
+
+
+SELECT code_produit_agrologic_fta_nomenclature,prefixe_annexe_agrologic_article_codification FROM fta_composant, annexe_agrologic_article_codification WHERE fta_composant.id_fta=315 AND is_composition_fta_composant=1  AND fta_composant.id_annexe_agrologic_article_codification=annexe_agrologic_article_codification.id_annexe_agrologic_article_codification ORDER BY prefixe_annexe_agrologic_article_codification ASC, nom_fta_nomenclature \n 10/09/2015 14:25:54\nFranck AMOFA <test@gmail.com> : test@gmail.com : FTA/Information "0 - " \n DESTINATAIRES:
+COLIN Nathan: fta_test@gmail.fr
+PAGE accueil: accueil@gmail.com
+AMOFA Franck: test@gmail.com
+SYSTEM superviseur: InformatiqueSupport.AVIGNON@agis-sa.fr
+SYSTEM FTA Chef de Projet: informatiquesupport.avignon@agis-sa.fr
+SYSTEM FTA R&D: informatiquesupport.avignon@agis-sa.fr
+SYSTEM FTA Qualité: informatiquesupport.avignon@agis-sa.fr
+SYSTEM FTA Emballage: informatiquesupport.avignon@agis-sa.fr
+SYSTEM FTA Informatique gestion: informatiquesupport.avignon@agis-sa.fr
+
+
+Message envoyé:
+
+La Fiche Technique Article "0 - " vient d'être validée.
+Cet Article est maintenant actif et disponible dans l'ensemble de notre système informatique.
+
+INFORMATIONS PRINCIPALES:
+Site d'assemblage: TARARE
+Identifiant dans Agrologic: 0
+
+Listes des produits créés:
+
+
+INFORMATIONS SUPPLEMENTAIRES:
+Code Article LDC: 
+Gencod EAN Article: 
+Gencod EAN Colis: 
+Nombre d'UVC par colis: 6
+Poids net de l'unité de vente facturée (en Kg): 96
+Identifiant du Dossier Technique: 328-v0
+Unité de facturation: 
+Durée de vie garantie client (en jours): 99
+Durée de vie Production (en jours): 
+Désignation Commerciale: test de creation FTa2
+
+
+Bonne journée à tous.
+Ce message a été envoyé automatiquement par le module Intranet - Fiche Technique Article.
+
+INFORMATIONS DE DEBUGGAGE:
+
+
+SELECT code_produit_agrologic_fta_nomenclature,prefixe_annexe_agrologic_article_codification FROM fta_composant, annexe_agrologic_article_codification WHERE fta_composant.id_fta=328 AND is_composition_fta_composant=1  AND fta_composant.id_annexe_agrologic_article_codification=annexe_agrologic_article_codification.id_annexe_agrologic_article_codification ORDER BY prefixe_annexe_agrologic_article_codification ASC, nom_fta_nomenclature \n 10/09/2015 14:29:10\nFranck AMOFA <test@gmail.com> : test@gmail.com : FTA/Information "0 - " \n DESTINATAIRES:
+COLIN Nathan: fta_test@gmail.fr
+PAGE accueil: accueil@gmail.com
+AMOFA Franck: test@gmail.com
+SYSTEM superviseur: InformatiqueSupport.AVIGNON@agis-sa.fr
+SYSTEM FTA Chef de Projet: informatiquesupport.avignon@agis-sa.fr
+SYSTEM FTA R&D: informatiquesupport.avignon@agis-sa.fr
+SYSTEM FTA Qualité: informatiquesupport.avignon@agis-sa.fr
+SYSTEM FTA Emballage: informatiquesupport.avignon@agis-sa.fr
+SYSTEM FTA Informatique gestion: informatiquesupport.avignon@agis-sa.fr
+
+
+Message envoyé:
+
+La Fiche Technique Article "0 - " vient d'être validée.
+Cet Article est maintenant actif et disponible dans l'ensemble de notre système informatique.
+
+INFORMATIONS PRINCIPALES:
+Site d'assemblage: ATI
+Identifiant dans Agrologic: 0
+
+Listes des produits créés:
+
+
+INFORMATIONS SUPPLEMENTAIRES:
+Code Article LDC: 
+Gencod EAN Article: 
+Gencod EAN Colis: 5143521584
+Nombre d'UVC par colis: 2
+Poids net de l'unité de vente facturée (en Kg): 14
+Identifiant du Dossier Technique: 318-v0
+Unité de facturation: Kilo
+Durée de vie garantie client (en jours): 51
+Durée de vie Production (en jours): 
+Désignation Commerciale: id_fta1
+
+
+Bonne journée à tous.
+Ce message a été envoyé automatiquement par le module Intranet - Fiche Technique Article.
+
+INFORMATIONS DE DEBUGGAGE:
+
+
+SELECT code_produit_agrologic_fta_nomenclature,prefixe_annexe_agrologic_article_codification FROM fta_composant, annexe_agrologic_article_codification WHERE fta_composant.id_fta=318 AND is_composition_fta_composant=1  AND fta_composant.id_annexe_agrologic_article_codification=annexe_agrologic_article_codification.id_annexe_agrologic_article_codification ORDER BY prefixe_annexe_agrologic_article_codification ASC, nom_fta_nomenclature \n 10/09/2015 15:24:35\nFranck AMOFA <test@gmail.com> : test@gmail.com : FTA/Information "0 - " \n DESTINATAIRES:
+AMOFA Franck: test@gmail.com
+SYSTEM superviseur: InformatiqueSupport.AVIGNON@agis-sa.fr
+SYSTEM FTA Informatique gestion: informatiquesupport.avignon@agis-sa.fr
+PAGE accueil: accueil@gmail.com
+SYSTEM FTA Chef de Projet: informatiquesupport.avignon@agis-sa.fr
+SYSTEM FTA R&D: informatiquesupport.avignon@agis-sa.fr
+SYSTEM FTA Emballage: informatiquesupport.avignon@agis-sa.fr
+SYSTEM FTA Qualité: informatiquesupport.avignon@agis-sa.fr
+
+
+Message envoyé:
+
+La Fiche Technique Article "0 - " vient d'être validée.
+Cet Article est maintenant actif et disponible dans l'ensemble de notre système informatique.
+
+INFORMATIONS PRINCIPALES:
+Site d'assemblage: TARARE
+Identifiant dans Agrologic: 0
+
+Listes des produits créés:
+
+
+INFORMATIONS SUPPLEMENTAIRES:
+Code Article LDC: 
+Gencod EAN Article: 
+Gencod EAN Colis: 
+Nombre d'UVC par colis: 6
+Poids net de l'unité de vente facturée (en Kg): 96
+Identifiant du Dossier Technique: 328-v1
+Unité de facturation: 
+Durée de vie garantie client (en jours): 99
+Durée de vie Production (en jours): 
+Désignation Commerciale: test de creation FTa2
+
+
+COMMENTAIRE:
+
+==============================
+==============================
+Date: 2015-09-10
+Login du modificateur: franckwastaken
+
+
+==============================
+==============================
+Date: 2015-09-10
+Login du modificateur: franckwastaken
+
+
+==============================
+==============================
+Date: 2015-09-10
+Login du modificateur: franckwastaken
+
+test de modif
+
+Bonne journée à tous.
+Ce message a été envoyé automatiquement par le module Intranet - Fiche Technique Article.
+
+INFORMATIONS DE DEBUGGAGE:
+
+
+SELECT code_produit_agrologic_fta_nomenclature,prefixe_annexe_agrologic_article_codification FROM fta_composant, annexe_agrologic_article_codification WHERE fta_composant.id_fta=336 AND is_composition_fta_composant=1  AND fta_composant.id_annexe_agrologic_article_codification=annexe_agrologic_article_codification.id_annexe_agrologic_article_codification ORDER BY prefixe_annexe_agrologic_article_codification ASC, nom_fta_nomenclature \n 10/09/2015 16:13:46\nFranck AMOFA <test@gmail.com> : test@gmail.com : FTA/Information "0 - " \n DESTINATAIRES:
+AMOFA Franck: test@gmail.com
+SYSTEM superviseur: InformatiqueSupport.AVIGNON@agis-sa.fr
+SYSTEM FTA R&D: informatiquesupport.avignon@agis-sa.fr
+SYSTEM FTA Emballage: informatiquesupport.avignon@agis-sa.fr
+
+
+Message envoyé:
+
+La Fiche Technique Article "0 - " vient d'être validée.
+Cet Article est maintenant actif et disponible dans l'ensemble de notre système informatique.
+
+INFORMATIONS PRINCIPALES:
+Site d'assemblage: TARARE
+Identifiant dans Agrologic: 0
+
+Listes des produits créés:
+
+
+INFORMATIONS SUPPLEMENTAIRES:
+Code Article LDC: 
+Gencod EAN Article: 
+Gencod EAN Colis: 
+Nombre d'UVC par colis: 6
+Poids net de l'unité de vente facturée (en Kg): 96
+Identifiant du Dossier Technique: 328-v2
+Unité de facturation: 
+Durée de vie garantie client (en jours): 99
+Durée de vie Production (en jours): 
+Désignation Commerciale: test de creation FTa2
+
+
+COMMENTAIRE:
+
+==============================
+==============================
+Date: 2015-09-10
+Login du modificateur: franckwastaken
+
+
+==============================
+==============================
+Date: 2015-09-10
+Login du modificateur: franckwastaken
+
+archivage
+
+
+Bonne journée à tous.
+Ce message a été envoyé automatiquement par le module Intranet - Fiche Technique Article.
+
+INFORMATIONS DE DEBUGGAGE:
+
+
+SELECT code_produit_agrologic_fta_nomenclature,prefixe_annexe_agrologic_article_codification FROM fta_composant, annexe_agrologic_article_codification WHERE fta_composant.id_fta=337 AND is_composition_fta_composant=1  AND fta_composant.id_annexe_agrologic_article_codification=annexe_agrologic_article_codification.id_annexe_agrologic_article_codification ORDER BY prefixe_annexe_agrologic_article_codification ASC, nom_fta_nomenclature \n 

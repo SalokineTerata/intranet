@@ -56,7 +56,7 @@ $html_table = 'table '              //Permet d'harmoniser les tableaux
 $idFta = Lib::getParameterFromRequest('id_fta');
 $idFtaRole = Lib::getParameterFromRequest('id_fta_role');
 $action = Lib::getParameterFromRequest('action');
-
+$demande_abreviation_fta_transition = Lib::getParameterFromRequest('demande_abreviation_fta_transition');
 
 /*
  * Initinalisation du modele Fta
@@ -138,7 +138,7 @@ foreach ($arrayFtaTransition as $rowsFtaTransition) {
         $selected = '';
     }
 
-    $tableau_transition .='<option value=\'' . $rowsFtaTransition[FtaTransitionModel::FIELDNAME_ABREVIATION_FTA_TRANSITION] . '\' $selected>'
+    $tableau_transition .='<option value=\'' . $rowsFtaTransition[FtaTransitionModel::FIELDNAME_ABREVIATION_FTA_TRANSITION] . '\' ' . $selected . '>'
             . $rowsFtaTransition[FtaTransitionModel::FIELDNAME_NOM_USUEL_FTA_TRANSITION] . '</option>'
     ;
 

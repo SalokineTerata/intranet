@@ -90,7 +90,12 @@ if ($id_annexe_emballage) {
 //  mysql_table_load("annexe_emballage_groupe_type");
 //  mysql_table_load("fte_fournisseur");
     $annexeEmballageModel = new AnnexeEmballageModel($id_annexe_emballage);
-    $id_fte_fournisseur = $annexeEmballageModel->getDataField('id_fte_fournisseur')->getFieldValue();
+    $id_fte_fournisseur = $annexeEmballageModel->getDataField(AnnexeEmballageModel::FIELDNAME_ID_FTE_FOURNISSEUR)->getFieldValue();
+    $actif_annexe_emballage = $annexeEmballageModel->getDataField(AnnexeEmballageModel::FIELDNAME_ACTIF_ANNEXE_EMBALLAGE)->getFieldValue();
+    $id_annexe_emballage_groupe = $annexeEmballageModel->getDataField(AnnexeEmballageModel::FIELDNAME_ID_ANNEXE_EMBALLAGE_GROUPE)->getFieldValue();
+    $fteFournisseurModel = new FteFournisseurModel($id_fte_fournisseur);
+    $annexeEmballageGroupeModel = new AnnexeEmballageGroupeModel($id_annexe_emballage_groupe);
+
     $action = 'rewrite';
 } else {
     $titre = "Création d'une Fiche Technique Emballage";
@@ -108,7 +113,7 @@ $bloc = "<$html_table>";
 //Activation
 $champ = "actif_annexe_emballage";
 $bloc .= "<tr class=contenu><td>" . mysql_field_desc("annexe_emballage", $champ) . "</td><td>";
-if ($$champ) {
+if ($actif_annexe_emballage) {
     $checked = "checked";
 } else {
     $checked = "";
@@ -126,7 +131,7 @@ if ($proprietaire) {
     ;
     $value = AccueilFta::afficherRequeteEnListeDeroulante($req, $id_defaut, $champ);
 } else {
-    $value = $annexeEmballageModel->getDataField($champ)->getFieldValue();
+    $value = $annexeEmballageGroupeModel->getDataField($champ)->getFieldValue();
 }
 $bloc .="<tr class=contenu><td>" . mysql_field_desc("annexe_emballage_groupe", $champ) . "</td><td>"
         . $value
@@ -144,8 +149,7 @@ if ($proprietaire) {
     ;
     $value = AccueilFta::afficherRequeteEnListeDeroulante($req, $id_defaut, $champ);
 } else {
-    $value = $annexeEmballageModel->getDataField($champ)->getFieldValue();
-    ;
+    $value = $fteFournisseurModel->getDataField($champ)->getFieldValue();
 }
 $bloc .="<tr class=contenu><td>" . mysql_field_desc($nom_table, $champ) . "</td><td>"
         . $value
@@ -159,10 +163,9 @@ if ($id_annexe_emballage) {
     $reference_fournisseur_annexe_emballage = $annexeEmballageModel->getDataField($champ)->getFieldValue();
 }
 if ($proprietaire) {
-    $value = "<input type=text name=" . $champ . " value=`" . $reference_fournisseur_annexe_emballage . "` size=50/>";
+    $value = "<input type=text name=" . $champ . " value=" . $reference_fournisseur_annexe_emballage . " size=50/>";
 } else {
     $value = $reference_fournisseur_annexe_emballage;
-    ;
 }
 
 $bloc .= $value
@@ -176,7 +179,7 @@ if ($id_annexe_emballage) {
     $poids_annexe_emballage = $annexeEmballageModel->getDataField($champ)->getFieldValue();
 }
 if ($proprietaire) {
-    $value = "<input type=text name=" . $champ . " value=`" . $poids_annexe_emballage . "` size=50/>";
+    $value = "<input type=text name=" . $champ . " value=" . $poids_annexe_emballage . " size=50/>";
 } else {
     $value = $poids_annexe_emballage;
     ;
@@ -194,7 +197,7 @@ if ($id_annexe_emballage) {
 }
 if ($proprietaire) {
 
-    $value = "<input type=text name=" . $champ . " value=`" . $longueur_annexe_emballage . "` size=50/>";
+    $value = "<input type=text name=" . $champ . " value=" . $longueur_annexe_emballage . " size=50/>";
 } else {
     $value = $longueur_annexe_emballage;
 }
@@ -210,7 +213,7 @@ if ($id_annexe_emballage) {
     $largeur_annexe_emballage = $annexeEmballageModel->getDataField($champ)->getFieldValue();
 }
 if ($proprietaire) {
-    $value = "<input type=text name=" . $champ . " value=`" . $largeur_annexe_emballage . "` size=50/>";
+    $value = "<input type=text name=" . $champ . " value=" . $largeur_annexe_emballage . " size=50/>";
 } else {
     $value = $largeur_annexe_emballage;
 }
@@ -226,7 +229,7 @@ if ($id_annexe_emballage) {
     $hauteur_annexe_emballage = $annexeEmballageModel->getDataField($champ)->getFieldValue();
 }
 if ($proprietaire) {
-    $value = "<input type=text name=" . $champ . " value=`" . $hauteur_annexe_emballage . "` size=50/>";
+    $value = "<input type=text name=" . $champ . " value=" . $hauteur_annexe_emballage . " size=50/>";
 } else {
     $value = $hauteur_annexe_emballage;
 }
@@ -242,7 +245,7 @@ if ($id_annexe_emballage) {
     $epaisseur_annexe_emballage = $annexeEmballageModel->getDataField($champ)->getFieldValue();
 }
 if ($proprietaire) {
-    $value = "<input type=text name=" . $champ . " value=`" . $epaisseur_annexe_emballage . "` size=50/>";
+    $value = "<input type=text name=" . $champ . " value=" . $epaisseur_annexe_emballage . " size=50/>";
 } else {
     $value = $epaisseur_annexe_emballage;
 }
@@ -258,7 +261,7 @@ if ($id_annexe_emballage) {
     $quantite_par_couche_annexe_emballage = $annexeEmballageModel->getDataField($champ)->getFieldValue();
 }
 if ($proprietaire) {
-    $value = "<input type=text name=" . $champ . " value=`" . $quantite_par_couche_annexe_emballage . "` size=50/>";
+    $value = "<input type=text name=" . $champ . " value=" . $quantite_par_couche_annexe_emballage . " size=50/>";
 } else {
     $value = $quantite_par_couche_annexe_emballage;
 }
@@ -274,7 +277,7 @@ if ($id_annexe_emballage) {
     $nombre_couche_annexe_emballage = $annexeEmballageModel->getDataField($champ)->getFieldValue();
 }
 if ($proprietaire) {
-    $value = "<input type=text name=" . $champ . " value=`" . $nombre_couche_annexe_emballage . "` size=50/>";
+    $value = "<input type=text name=" . $champ . " value=" . $nombre_couche_annexe_emballage . " size=50/>";
 } else {
     $value = $nombre_couche_annexe_emballage;
 }
@@ -288,7 +291,7 @@ $champ = "date_maj_annexe_emballage";
 $bloc .= "<tr class=contenu><td  width=\"20%\">" . mysql_field_desc("annexe_emballage", $champ) . "</td><td>";
 if ($id_annexe_emballage) {
     $date_maj_annexe_emballage = $annexeEmballageModel->getDataField($champ)->getFieldValue();
-}else{
+} else {
     $date_maj_annexe_emballage = "";
 }
 $bloc.= $date_maj_annexe_emballage;

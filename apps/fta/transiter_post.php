@@ -153,7 +153,7 @@ if (!$action) {
                         break;
 
                     case 3:
-                        $titre = 'Erreur sur la FTA $idFta';
+                        $titre = 'Erreur sur la FTA ' . $idFta;
                         $message = 'Impossible de valider cette FTA';
                         $redirection = '';
                         afficher_message($titre, $message, $redirection);

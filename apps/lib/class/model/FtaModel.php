@@ -732,7 +732,7 @@ class FtaModel extends AbstractModel {
                 $idFtaVersion = $idFtaVersion + 1;
                 DatabaseOperation::query(
                         "UPDATE " . FtaModel::TABLENAME
-                        . " SET " . FtaModel::FIELDNAME_DOSSIER_FTA . "=" . $idFtaVersion                                                       //La première FTA commence en version "0"
+                        . " SET " . FtaModel::FIELDNAME_VERSION_DOSSIER_FTA . "=" . $idFtaVersion                                                       //La première FTA commence en version "0"
                         . ", " . FtaModel::FIELDNAME_ID_FTA_ETAT . "=" . $idFtaEtatNew                                                          //Nouvel éta de la FTA données par l'argument $option de la fonction (cf. table fta_etat)
                         . " WHERE " . FtaModel::KEYNAME . "=" . $idFtaNew
                 );

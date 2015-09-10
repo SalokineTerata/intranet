@@ -6,7 +6,7 @@
  *
  * @author salokine
  */
-class  UserModel extends AbstractModel {
+class UserModel extends AbstractModel {
 
     const TABLENAME = 'salaries';
     const KEYNAME = 'id_user';
@@ -49,7 +49,7 @@ class  UserModel extends AbstractModel {
      * @param type $paramOrderBy
      * @return type
      */
-    public static function getIdFtaByUserAndWorkflow($paramArrayIdFta, $paramOrderBy) {
+    public static function getIdFtaByUserAndWorkflow($paramArrayIdFta, $paramOrderBy, $paramSytheseAction) {
 
 
         if ($paramArrayIdFta) {
@@ -70,7 +70,7 @@ class  UserModel extends AbstractModel {
                             . ', ' . FtaModel::FIELDNAME_SITE_ASSEMBLAGE . ', ' . FtaModel::TABLENAME . '. ' . FtaModel::FIELDNAME_WORKFLOW
                             . ' FROM ' . FtaModel::TABLENAME . ',' . UserModel::TABLENAME
                             . ', ' . FtaEtatModel::TABLENAME
-                            . ', ' . FtaWorkflowModel::TABLENAME                           
+                            . ', ' . FtaWorkflowModel::TABLENAME
                             . ' WHERE ( 0 ' . FtaModel::AddIdFTaValidProcess($idFta) . ')'
                             . ' AND ' . FtaModel::TABLENAME . '.' . FtaModel::FIELDNAME_CREATEUR
                             . '=' . UserModel::TABLENAME . '.' . UserModel::KEYNAME
@@ -78,9 +78,9 @@ class  UserModel extends AbstractModel {
                             . '=' . FtaEtatModel::TABLENAME . '.' . FtaEtatModel::KEYNAME
                             . ' AND ' . FtaWorkflowModel::TABLENAME . '.' . FtaWorkflowModel::KEYNAME
                             . '=' . FtaModel::TABLENAME . '.' . FtaModel::FIELDNAME_WORKFLOW
-                            . ' ORDER BY ' . FtaModel::TABLENAME . '.' . FtaModel::FIELDNAME_WORKFLOW
+                            . ' ORDER BY ' . $paramOrderBy
+                            . ',' . FtaModel::TABLENAME . '.' . FtaModel::FIELDNAME_WORKFLOW
                             . ',' . UserModel::FIELDNAME_PRENOM . ' ASC'
-                            . ',' . $paramOrderBy
                             . ',' . FtaModel::FIELDNAME_DATE_ECHEANCE_FTA
             );
 
@@ -132,6 +132,19 @@ class  UserModel extends AbstractModel {
         if (!$paramIdType) {
             header('Location: ../index.php?action=delog');
         }
+    }
+    /**
+     * Liste des utilisateur à ajouter
+     * @param array $paramIdUser
+     * @return string
+     */
+    public static function AddIdUser($paramIdUser) {
+        if ($paramIdUser) {
+            foreach ($paramIdUser as $value) {
+                $req .= ' OR ' . UserModel::TABLENAME . '.' . UserModel::KEYNAME . '=' . $value . ' ';
+            }
+        }
+        return $req;
     }
 
 }

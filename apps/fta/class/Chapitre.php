@@ -2257,7 +2257,7 @@ class Chapitre {
 //                }
 
                 $bloc_suivi .= '<tr class=contenu><td>' . DatabaseDescription::getFieldDocLabel('fta_suivi_projet', $champ) . '</td><td>';
-                $bloc_suivi .= '<input type=checkbox name=' . $champ . ' value=' . $$champ . ' ' . $checked . ' ' . $temp_disabled . '/>' . $validateur;
+                $bloc_suivi .= '<input type=checkbox name=' . $champ . ' value=1' . $$champ . ' ' . $checked . ' ' . $temp_disabled . '/>' . $validateur;
             }
         }
         $champ = 'signature_validation_suivi_projet';
@@ -2271,7 +2271,7 @@ class Chapitre {
 
         //Recherche du droit d'accès correspondant
         if (
-                self::$is_owner == true and (
+              self::$synthese_action == FtaEtatModel::ETAT_AVANCEMENT_VALUE_EN_COURS  and self::$is_owner == true and (
                 (self::$ftaSuiviProjetModel->getDataField(FtaSuiviProjetModel::FIELDNAME_SIGNATURE_VALIDATION_SUIVI_PROJET)->getFieldValue() == 0 )
                 or ( self::$ftaSuiviProjetModel->getDataField(FtaSuiviProjetModel::FIELDNAME_SIGNATURE_VALIDATION_SUIVI_PROJET)->getFieldValue() == null)
                 )

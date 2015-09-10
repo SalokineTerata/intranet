@@ -14,18 +14,9 @@ $paramUserNom = Lib::getParameterFromRequest('sal_nom');
 $paramUserPrenom = Lib::getParameterFromRequest('sal_prenom');
 $paramUserPass = Lib::getParameterFromRequest('sal_pass');
 $paramUserPass2 = Lib::getParameterFromRequest('sal_pass2');
-$paramUserType = Lib::getParameterFromRequest('sal_type', 1);
 $paramUserCatsopro = Lib::getParameterFromRequest('catsopro');
-$paramUserService = Lib::getParameterFromRequest('service');
 $paramDateCreationUser = Lib::getParameterFromRequest('date_creation_salaries', date('Y-m-d'));
-$paramAscendantIdSalaries = Lib::getParameterFromRequest('ascendant_id_salaries'); // rajouter un identifiant voir gestion sal 1 ou 11
 $paramNewsDefil = Lib::getParameterFromRequest('newsdefil');
-$paramLieuGeo = Lib::getParameterFromRequest('lieu_geo');
-$paramMembreCe = Lib::getParameterFromRequest('membre_ce');
-$paramEcriture = Lib::getParameterFromRequest('ecriture');
-$paramEcritureft = Lib::getParameterFromRequest('ecritureft');
-$paramLectureft = Lib::getParameterFromRequest('lectureft');
-$paramValidft = Lib::getParameterFromRequest('validft');
 $paramUserMail = Lib::getParameterFromRequest('sal_mail');
 $paramModifier = Lib::getParameterFromRequest('modifier');
 $paramValider = Lib::getParameterFromRequest('valider');
@@ -48,7 +39,6 @@ if ($paramValider == 'valider') {
                     . ' WHERE ' . UserModel::FIELDNAME_NOM . '=\'' . $paramUserNom
                     . '\' AND ' . UserModel::FIELDNAME_PRENOM . '=\'' . $paramUserPrenom
                     . '\' AND ' . UserModel::FIELDNAME_MAIL . '=\'' . $paramUserMail
-                    . '\' AND ' . UserModel::FIELDNAME_ID_TYPE . '=\'' . $paramUserType
                     . '\' AND ' . UserModel::FIELDNAME_ACTIF . '=\'oui\''
     );
     if ($arrayIdUserExist) {
@@ -57,19 +47,13 @@ if ($paramValider == 'valider') {
         $resultInsertionUser = DatabaseOperation::execute(
                         'INSERT INTO ' . UserModel::TABLENAME
                         . ' (' . UserModel::FIELDNAME_NOM . ', ' . UserModel::FIELDNAME_PRENOM
-                        . ', ' . UserModel::FIELDNAME_ASENDANT_ID_SALARIES . ', ' . UserModel::FIELDNAME_DATE_CREATION_SALARIES
-                        . ', ' . UserModel::FIELDNAME_ID_CATSOPRO . ', ' . UserModel::FIELDNAME_ID_SERVICE
-                        . ', ' . UserModel::FIELDNAME_ID_TYPE . ', ' . UserModel::FIELDNAME_LOGIN
-                        . ', ' . UserModel::FIELDNAME_PASSWORD . ', ' . UserModel::FIELDNAME_MAIL
-                        . ', ' . UserModel::FIELDNAME_ECRITURE . ', ' . UserModel::FIELDNAME_MEMBRE_CE
-                        . ', ' . UserModel::FIELDNAME_LIEU_GEO . ', ' . UserModel::FIELDNAME_NEWSDEFIL
+                        . ', ' . UserModel::FIELDNAME_DATE_CREATION_SALARIES . ', ' . UserModel::FIELDNAME_ID_CATSOPRO
+                        . ', ' . UserModel::FIELDNAME_LOGIN . ', ' . UserModel::FIELDNAME_PASSWORD
+                        . ', ' . UserModel::FIELDNAME_MAIL
                         . ') VALUES (\'' . $paramUserNom . '\', \'' . $paramUserPrenom
-                        . '\', \'' . $paramAscendantIdSalaries . '\', \'' . $paramDateCreationUser
-                        . '\', \'' . $paramUserCatsopro . '\', \'' . $paramUserService
-                        . '\', \'' . $paramUserType . '\', \'' . $paramUserLogin
-                        . '\',  PASSWORD(\'' . $paramUserPass . '\'),\'' . $paramUserMail
-                        . '\', \'' . $paramEcriture . '\', \'' . $paramMembreCe
-                        . '\', \'' . $paramLieuGeo . '\', \'' . $paramNewsDefil . '\')'
+                        . '\', \'' . $paramDateCreationUser . '\', \'' . $paramUserCatsopro
+                        . '\', \'' . $paramUserLogin . '\',  PASSWORD(\'' . $paramUserPass
+                        . '\'),\'' . $paramUserMail . '\')'
         );
         if (!$resultInsertionUser) {
             $titre = ' L\'insertion du salarié ' . $paramUserNom . ' ' . $paramUserPrenom;
@@ -151,15 +135,9 @@ if ($paramValider == 'valider') {
     if ($arrayUserDetail) {
         foreach ($arrayUserDetail as $rowsUserDetail) {
             $id_catsopro = $rowsUserDetail[UserModel::FIELDNAME_ID_CATSOPRO];
-            $id_service = $rowsUserDetail[UserModel::FIELDNAME_ID_SERVICE];
-            $paramUserType = $rowsUserDetail[UserModel::FIELDNAME_ID_TYPE];
             $paramUserLogin = $rowsUserDetail[UserModel::FIELDNAME_LOGIN];
             $paramUserPass = $rowsUserDetail[UserModel::FIELDNAME_PASSWORD];
             $paramUserMail = $rowsUserDetail[UserModel::FIELDNAME_MAIL];
-            $paramEcriture = $rowsUserDetail[UserModel::FIELDNAME_ECRITURE];
-            $paramNewsDefil = $rowsUserDetail[UserModel::FIELDNAME_NEWSDEFIL];
-            $paramMembreCe = $rowsUserDetail[UserModel::FIELDNAME_MEMBRE_CE];
-            $lieu_geo = $rowsUserDetail[UserModel::FIELDNAME_LIEU_GEO];
         }
         $paramUserNom = stripslashes($paramUserNom);
         $paramUserPrenom = stripslashes($paramUserPrenom);
@@ -233,7 +211,7 @@ if ($paramValider == 'valider') {
 $sujet = 'Inscription Intranet Agis';
 $corpsmail = 'Bonjour,\n '
         . 'Votre profil vient d\'être créé dans l\'intranet AGIS.\n'
-        . 'Votre login est : $paramUserLogin\n'
+        . 'Votre login est : ' . $paramUserLogin . '\n'
         . '\nL\'administrateur Agis.\n';
 $typeMail = '';
 envoismail($sujet, $corpsmail, $paramUserMail, 'postmaster@agis-sa.fr', $typeMail);
@@ -362,31 +340,7 @@ envoismail($sujet, $corpsmail, $paramUserMail, 'postmaster@agis-sa.fr', $typeMai
                                                                         ?>
                                                                     </p>
                                                                 </center>
-                                                                </td>
-
-                                                                <td  class='loginFFCC66' height='22'>
-                                                                <center>
-                                                                    <p>
-                                                                        <?php
-                                                                        /*
-                                                                         * Affichage de l'intitule du service 
-                                                                         */
-                                                                        $arrayType = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
-                                                                                        'SELECT ' . TypesModel::FIELDNAME_INTITULE_TYP
-                                                                                        . ' FROM ' . TypesModel::TABLENAME
-                                                                                        . ' WHERE ' . TypesModel::KEYNAME . '=\'' . $paramUserType . '\''
-                                                                        );
-                                                                        if ($arrayType) {
-                                                                            foreach ($arrayType as $rowsType) {
-                                                                                $intitule_typ = $rowsType[TypesModel::FIELDNAME_INTITULE_TYP];
-                                                                            }
-                                                                            $intitule_typ = stripslashes($intitule_typ);
-                                                                            echo ($intitule_typ);
-                                                                        }
-                                                                        ?>
-                                                                    </p>
-                                                                </center>
-                                                                </td>
+                                                                </td>                                                               
                                                                 </tr>
                                                             </table>
                                                             <?php

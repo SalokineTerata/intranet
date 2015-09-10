@@ -77,7 +77,7 @@ class AccueilFta {
          */
         self::$arrayIdFtaAndIdWorkflow = FtaEtatModel::getIdFtaByEtatAvancement(self::$syntheseAction, self::$abrevationFtaEtat, self::$idFtaRole, self::$idUser, self::$idFtaEtat);
 
-        self::$arrayIdFtaByUserAndWorkflow = UserModel::getIdFtaByUserAndWorkflow(self::$arrayIdFtaAndIdWorkflow[AccueilFta::VALUE_1], self::$orderBy);
+        self::$arrayIdFtaByUserAndWorkflow = UserModel::getIdFtaByUserAndWorkflow(self::$arrayIdFtaAndIdWorkflow[AccueilFta::VALUE_1], self::$orderBy, self::$syntheseAction);
 
         self::$arraNameSiteByWorkflow = IntranetActionsModel::getNameSiteByWorkflow(self::$idUser, self::$arrayIdFtaAndIdWorkflow[AccueilFta::VALUE_2]);
 
@@ -106,29 +106,29 @@ class AccueilFta {
      * @return string code HTML des liens de pagination
      * */
     public static function paginer($nb_results_p_page, $numero_page_courante, $nb_avant, $nb_apres, $premiere, $derniere) {
-        // Initialisation de la variable a retourner
+// Initialisation de la variable a retourner
         $resultat = '';
 
-        // nombre total de pages
+// nombre total de pages
         $nb_pages = ceil(self::$nombreFta / $nb_results_p_page);
-        // nombre de pages avant
+// nombre de pages avant
         $avant = $numero_page_courante > ($nb_avant + 1) ? $nb_avant : $numero_page_courante - 1;
-        // nombre de pages apres
+// nombre de pages apres
         $apres = $numero_page_courante <= $nb_pages - $nb_apres ? $nb_apres : $nb_pages - $numero_page_courante;
 
-        // premiere page
+// premiere page
         if ($premiere && $numero_page_courante - $avant > 1) {
             $resultat .= '<a href="' . htmlspecialchars($_SERVER['PHP_SELF']) . '?numeroPage=1" title="Première page">&laquo;&laquo;</a>&nbsp;';
         }
 
-        // page precedente
+// page precedente
         if ($numero_page_courante > 1) {
             $resultat .= '<a href="' . htmlspecialchars($_SERVER['PHP_SELF']) . '?numeroPage=' . ($numero_page_courante - 1) . '" title="Page précédente ' . ($numero_page_courante - 1) . '">&laquo;</a>&nbsp;';
         }
 
-        // affichage des numeros de page
+// affichage des numeros de page
         for ($i = $numero_page_courante - $avant; $i <= $numero_page_courante + $apres; $i++) {
-            // page courante
+// page courante
             if ($i == $numero_page_courante) {
                 $resultat .= '&nbsp;[<strong>' . $i . '</strong>]&nbsp;';
             } else {
@@ -136,17 +136,17 @@ class AccueilFta {
             }
         }
 
-        // page suivante
+// page suivante
         if ($numero_page_courante < $nb_pages) {
             $resultat .= '<a href="' . htmlspecialchars($_SERVER['PHP_SELF']) . '?numeroPage=' . ($numero_page_courante + 1) . '" title="Consulter la page ' . ($numero_page_courante + 1) . ' !">&raquo;</a>&nbsp;';
         }
 
-        // derniere page     
+// derniere page     
         if ($derniere && ($numero_page_courante + $apres) < $nb_pages) {
             $resultat .= '<a href="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES) . '?numeroPage=' . $nb_pages . '" title="Dernière page">&raquo;&raquo;</a>&nbsp;';
         }
 
-        // On retourne le resultat
+// On retourne le resultat
         return $resultat;
     }
 
@@ -455,7 +455,7 @@ class AccueilFta {
                 . '<thead><tr class=titre_principal><th></th>'
         ;
 
-        //Contrôle pour savoir si on est sur l'index du module
+//Contrôle pour savoir si on est sur l'index du module
         $URL = $_SERVER['REQUEST_URI'];
 
         switch (self::$syntheseAction) {
@@ -509,7 +509,8 @@ class AccueilFta {
 
         $tmp = null;
         if (self::$arrayIdFtaByUserAndWorkflow) {
-            $createurTmp = null;
+            $createurNTmp = null;
+            $createurTrTmp = null;
             foreach (self::$arrayIdFtaByUserAndWorkflow as $rowsDetail) {
                 $workflowDescription = $rowsDetail[FtaWorkflowModel::FIELDNAME_DESCRIPTION_FTA_WORKFLOW];
                 $workflowName = $rowsDetail[FtaWorkflowModel::FIELDNAME_NOM_FTA_WORKFLOW];
@@ -533,7 +534,7 @@ class AccueilFta {
                 $arrayProcessusAcces = FtaWorkflowStructureModel::getArrayProcessusByRoleAndWorkflow(self::$idFtaRole, $rowsDetail[FtaModel::FIELDNAME_WORKFLOW]);
                 $accesTransitionButton = is_null(array_intersect($arrayProcessusValidation, $arrayProcessusAcces));
                 $din = null;
-                //Chargement manuel des données pour optimiser les performances
+//Chargement manuel des données pour optimiser les performances
                 $idFta = $rowsDetail[FtaModel::KEYNAME];
                 $abreviationFtaEtat = $rowsDetail[FtaEtatModel::FIELDNAME_ABREVIATION];
                 $LIBELLE = $rowsDetail[FtaModel::FIELDNAME_LIBELLE];
@@ -646,18 +647,18 @@ class AccueilFta {
                 }
 
                 $HTML_date_echeance_fta = FtaProcessusDelaiModel::getFtaDelaiAvancement($idFta);
-                //$return['status']
-                //    0: Aucun dépassement des échéances
-                //    1: Au moins un processus en cours a dépassé son échéance
-                //    2: La date d'échéance de validation de la FTA est dépassée
-                //    3: Il n'y a pas de date d'échéance de validation FTA saisie
-                //$return['liste_processus_depasses'][$id_processus]
-                //    Renvoi un tableau associatif contenant:
-                //    - la listes des processus en cours ayant dépassé leur échéance
-                //    - leur date d'échéance
-                //$return['HTML_synthese']
-                //    Contient le code source HTML utilisé pour la fonction visualiser_fiches()
-                //echo $HTML_date_echeance_fta['status'];
+//$return['status']
+//    0: Aucun dépassement des échéances
+//    1: Au moins un processus en cours a dépassé son échéance
+//    2: La date d'échéance de validation de la FTA est dépassée
+//    3: Il n'y a pas de date d'échéance de validation FTA saisie
+//$return['liste_processus_depasses'][$id_processus]
+//    Renvoi un tableau associatif contenant:
+//    - la listes des processus en cours ayant dépassé leur échéance
+//    - leur date d'échéance
+//$return['HTML_synthese']
+//    Contient le code source HTML utilisé pour la fonction visualiser_fiches()
+//echo $HTML_date_echeance_fta['status'];
                 switch ($HTML_date_echeance_fta['status']) {
                     case AccueilFta::VALUE_1:
                         $bgcolor_header = $bgcolor;
@@ -668,7 +669,7 @@ class AccueilFta {
                         $icon_header = '<img src=../lib/images/exclamation.png title=\'Certaines échéances sont dépassées !\' width=30 height=27 border=0 />';
                         break;
                     default:
-                        //$bgcolor_header = $bgcolor;
+//$bgcolor_header = $bgcolor;
                         $icon_header = '';
                 }
 
@@ -730,8 +731,8 @@ class AccueilFta {
                  */
                 if (
                         (
-                        //$ok == AccueilFta::VALUE_2 and
-                        self::$idFtaRole == AccueilFta::VALUE_1
+//$ok == AccueilFta::VALUE_2 and
+                        self::$idFtaRole == AccueilFta::VALUE_1 and $recap[$idFta] == AccueilFta::VALUE_100_POURCENTAGE
 //                        and ( $abreviationFtaEtat == FtaEtatModel::ETAT_ABREVIATION_VALUE_MODIFICATION )
                         )or ( $ok == AccueilFta::VALUE_2 and $accesTransitionButton == FALSE && $recap[$idFta] == AccueilFta::VALUE_100_POURCENTAGE) and (
                         $abreviationFtaEtat == FtaEtatModel::ETAT_ABREVIATION_VALUE_MODIFICATION
@@ -801,46 +802,58 @@ class AccueilFta {
                         $service .= $rowsService[FtaRoleModel::FIELDNAME_DESCRIPTION_FTA_ROLE] . '<br>';
                     }
                 }
- 
-                $diffWorkflow=$tmp <> $workflowDescription; 
-                if ($diffWorkflow) {
-                    if ($recap[$idFta] <> AccueilFta::VALUE_100_POURCENTAGE) {
+                if ($recap[$idFta] <> AccueilFta::VALUE_100_POURCENTAGE) {
+                    $createurFtaTr = $createurFta;
+                    $workflowTR = $workflowDescription;
+                    $diffWorkflowTr = $workflowTR <> $workflowTrTmp;
+                    if ($diffWorkflowTr) {
                         $tableauFicheTr2 .= $tableauFicheTrWork . $tableauFicheTr;
                         $nombreDeCellule = AccueilFta::VALUE_12;
                         $tableauFicheTrWork = '<tbody  id=\'' . $workflowName . '\' >'
                                 . '<tr class=contenu>'
                                 . '<td  class=titre COLSPAN=' . $nombreDeCellule . '>' . $workflowDescription . '</td>'
                                 . '</tr>';
-                        $workflowTmp = $tmp;
+                        $workflowTrTmp = $rowsDetail[FtaWorkflowModel::FIELDNAME_DESCRIPTION_FTA_WORKFLOW];
                         $tableauFicheTr = NULL;
                         $tmp = $rowsDetail[FtaWorkflowModel::FIELDNAME_DESCRIPTION_FTA_WORKFLOW];
-                    } else {
+                    }
+                } else {
+                    $createurFtaN = $createurFta;
+                    $workflowN = $workflowDescription;
+                    $diffWorkflowN = $workflowN <> $workflowNTmp;
+                    if ($diffWorkflowN) {
                         $tableauFicheN2.= $tableauFicheNWork . $tableauFicheN;
                         $nombreDeCellule = AccueilFta::VALUE_12;
                         $tableauFicheNWork = '<tbody  id=\'' . $workflowName . '\' >'
                                 . '<tr class=contenu>'
                                 . '<td  class=titre COLSPAN=' . $nombreDeCellule . '>' . $workflowDescription . '</td>'
                                 . '</tr>';
-                        $workflowTmp = $tmp;
+                        $workflowNTmp = $rowsDetail[FtaWorkflowModel::FIELDNAME_DESCRIPTION_FTA_WORKFLOW];
                         $tableauFicheN = NULL;
                         $tmp = $rowsDetail[FtaWorkflowModel::FIELDNAME_DESCRIPTION_FTA_WORKFLOW];
                     }
                 }
-
-
+                /**
+                 * TableauN les idFta à 100% et tableauTr les autres
+                 * Tableau avec Tmp sont les lignes sans le noms du créateur
+                 * Conditions :
+                 * - l'utilisateur connecté est il le créateur de la Fta
+                 * - l'utilisateur précedent est il le même créateur de la Fta actuel
+                 * - la Fta actuel est-elle à 100%
+                 * - Avons-nous changer de workflow ?
+                 * - Les fta créer par l'utilisateur connectée doivent vu en priorité
+                 */
                 if (self::$idUser == $createurFta) {
                     /*
                      * Commentaire de la Fta
                      */
-
                     /*
                      * @TODO caractères spéciaux de l'encodage ajax
                      */
                     $htmlField->setIsEditable(TRUE);
                     $commentaire = $htmlField->getHtmlResult();
                     if ($recap[$idFta] == AccueilFta::VALUE_100_POURCENTAGE) {
-                        if ($createurFta <> $createurTmp or $diffWorkflow) {
-
+                        if ($createurFtaN <> $createurNTmp or $diffWorkflowN) {
                             $tableauFicheN = '<tr class=contenu>'
                                     . '<td COLSPAN=' . $nombreDeCellule . ' ><font size=2 >' . $createurPrenom . ' ' . $createurNom . ' </td>'
                                     . '</tr>'
@@ -862,7 +875,7 @@ class AccueilFta {
                                     . '<td ' . $bgcolor . ' align=center >' . $service . '</td>' //Service               
                                     . '<td ' . $bgcolor . ' align=center >' . $actions . '</td>'// Actions
                                     . $commentaire . '</tr >'; // Commentaires
-                            $createurTmp = $createurFta;
+                            $createurNTmp = $createurFtaN;
                         } else {
                             $tableauFicheN .= '<tr class=contenu >'
                                     . '<td ' . $bgcolor_header . ' width=\'' . $selection_width . '\' >' . $icon_header . $selection . '</td>'//Ordre de priorisation
@@ -884,8 +897,7 @@ class AccueilFta {
                                     . $commentaire . '</tr >'; // Commentaires
                         }
                     } else {
-                        if ($createurFta <> $createurTmp or $diffWorkflow) {
-
+                        if ($createurFtaTr <> $createurTrTmp or $diffWorkflowTr) {
                             $tableauFicheTr .= '<tr class=contenu>'
                                     . '<td COLSPAN=' . $nombreDeCellule . ' ><font size=2 >' . $createurPrenom . ' ' . $createurNom . ' </td>'
                                     . '</tr>'
@@ -907,9 +919,8 @@ class AccueilFta {
                                     . '<td ' . $bgcolor . ' align=center >' . $service . '</td>' //Service               
                                     . '<td ' . $bgcolor . ' align=center >' . $actions . '</td>'// Actions
                                     . $commentaire . '</tr >'; // Commentaires
-                            $createurTmp = $createurFta;
+                            $createurTrTmp = $createurFtaTr;
                         } else {
-
                             $tableauFicheTr .= '<tr class=contenu >'
                                     . '<td ' . $bgcolor_header . ' width=\'' . $selection_width . '\' >' . $icon_header . $selection . '</td>'//Ordre de priorisation
                                     . '<td ' . $bgcolor . ' width=8%>' . $nomSiteProduction . '</td>'//Site
@@ -931,19 +942,18 @@ class AccueilFta {
                         }
                     }
                 } else {
+                    /*
+                     * Commentaire de la Fta
+                     */
 
-                    if ($createurFta != $createurTmp or $diffWorkflow) {
-                        /*
-                         * Commentaire de la Fta
-                         */
+                    $htmlField->setIsEditable(FALSE);
+                    $commentaire = $htmlField->getHtmlResult();
 
-                        $htmlField->setIsEditable(FALSE);
-                        $commentaire = $htmlField->getHtmlResult();
-
-                        /*
-                         * Nouvelle ligne pour créateur
-                         */
-                        if ($recap[$idFta] == AccueilFta::VALUE_100_POURCENTAGE) {
+                    /*
+                     * Nouvelle ligne pour créateur
+                     */
+                    if ($recap[$idFta] == AccueilFta::VALUE_100_POURCENTAGE) {
+                        if ($createurFtaN <> $createurNTmp or $diffWorkflowN) {
                             $tableauFicheTmp .= '<tr class=contenu>'
                                     . '<td COLSPAN=' . $nombreDeCellule . ' > <font size=2 >' . $createurPrenom . ' ' . $createurNom . ' </td>'
                                     . '</tr>'
@@ -965,8 +975,30 @@ class AccueilFta {
                                     . '<td ' . $bgcolor . ' align=center >' . $service . '</td>' //Service               
                                     . '<td ' . $bgcolor . ' align=center >' . $actions . '</td>'// Actions
                                     . $commentaire . '</tr >'; // Commentaires
-                            $createurTmp = $createurFta;
+                            $createurNTmp = $createurFtaN;
                         } else {
+                            $tableauFicheTmp .= '<tr class=contenu >'
+                                    . '<td ' . $bgcolor_header . ' width=\'' . $selection_width . '\' >' . $icon_header . $selection . '</td>'//Ordre de priorisation
+                                    . '<td ' . $bgcolor . ' width=8%>' . $nomSiteProduction . '</td>'//Site
+                                    . '<td ' . $bgcolor . ' width=6%>' . $classification . '</td>'//Client
+                                    . '<td ' . $bgcolor . ' width=6%>' . $suffixeAgrologicFta . '</td>'//Class.
+                                    . '<td ' . $bgcolor . $largeur_html_C1 . '><a title=' . $createur_link . '/>' . $din . '</a></td>'// Produits
+                                    . '<td ' . $bgcolor . ' width=3%>' . $idDossierFta . 'v' . $idVersionDossierFta . '</td>'//Dossier Fta
+                                    . '<td ' . $bgcolor . ' width=\'6%\'> <b><font size=\'2\' color=\'#0000FF\'>' . $codeArticleLdc . '</font></b></td>'; //Code regate
+
+
+                            if ($abreviationFtaEtat == FtaEtatModel::ETAT_ABREVIATION_VALUE_MODIFICATION) {
+                                $tableauFicheTmp.='<td ' . $bgcolor . $largeur_html_C3 . ' align=center>' . $dateEcheanceFta . '</td>'; //échance de validation
+                            } else {
+                                $tableauFicheTmp.='<td ' . $bgcolor . ' ></td>';
+                            }
+                            $tableauFicheTmp .='<td ' . $bgcolor . ' width=10% align=center>' . $recap[$idFta] . '</td>'//% Avancement FTA
+                                    . '<td ' . $bgcolor . ' align=center >' . $service . '</td>' //Service               
+                                    . '<td ' . $bgcolor . ' align=center >' . $actions . '</td>'// Actions
+                                    . $commentaire . '</tr >'; // Commentaires
+                        }
+                    } else {
+                        if ($createurFtaTr <> $createurTrTmp or $diffWorkflowTr) {
                             $tableauFicheTrTmp .= '<tr class=contenu>'
                                     . '<td COLSPAN=' . $nombreDeCellule . ' > <font size=2 >' . $createurPrenom . ' ' . $createurNom . ' </td>'
                                     . '</tr>'
@@ -989,29 +1021,7 @@ class AccueilFta {
                                     . '<td ' . $bgcolor . ' align=center >' . $service . '</td>' //Service               
                                     . '<td ' . $bgcolor . ' align=center >' . $actions . '</td>'// Actions
                                     . $commentaire . '</tr >'; // Commentaires
-                            $createurTmp = $createurFta;
-                        }
-                    } else {
-                        if ($recap[$idFta] == AccueilFta::VALUE_100_POURCENTAGE) {
-                            $tableauFicheTmp .= '<tr class=contenu >'
-                                    . '<td ' . $bgcolor_header . ' width=\'' . $selection_width . '\' >' . $icon_header . $selection . '</td>'//Ordre de priorisation
-                                    . '<td ' . $bgcolor . ' width=8%>' . $nomSiteProduction . '</td>'//Site
-                                    . '<td ' . $bgcolor . ' width=6%>' . $classification . '</td>'//Client
-                                    . '<td ' . $bgcolor . ' width=6%>' . $suffixeAgrologicFta . '</td>'//Class.
-                                    . '<td ' . $bgcolor . $largeur_html_C1 . '><a title=' . $createur_link . '/>' . $din . '</a></td>'// Produits
-                                    . '<td ' . $bgcolor . ' width=3%>' . $idDossierFta . 'v' . $idVersionDossierFta . '</td>'//Dossier Fta
-                                    . '<td ' . $bgcolor . ' width=\'6%\'> <b><font size=\'2\' color=\'#0000FF\'>' . $codeArticleLdc . '</font></b></td>'; //Code regate
-
-
-                            if ($abreviationFtaEtat == FtaEtatModel::ETAT_ABREVIATION_VALUE_MODIFICATION) {
-                                $tableauFicheTmp.='<td ' . $bgcolor . $largeur_html_C3 . ' align=center>' . $dateEcheanceFta . '</td>'; //échance de validation
-                            } else {
-                                $tableauFicheTmp.='<td ' . $bgcolor . ' ></td>';
-                            }
-                            $tableauFicheTmp .='<td ' . $bgcolor . ' width=10% align=center>' . $recap[$idFta] . '</td>'//% Avancement FTA
-                                    . '<td ' . $bgcolor . ' align=center >' . $service . '</td>' //Service               
-                                    . '<td ' . $bgcolor . ' align=center >' . $actions . '</td>'// Actions
-                                    . $commentaire . '</tr >'; // Commentaires
+                            $createurTrTmp = $createurFtaTr;
                         } else {
                             $tableauFicheTrTmp .= '<tr class=contenu >'
                                     . '<td ' . $bgcolor_header . ' width=\'' . $selection_width . '\' >' . $icon_header . $selection . '</td>'//Ordre de priorisation
@@ -1040,8 +1050,10 @@ class AccueilFta {
                 $tableauFicheTrTmp = NULL;
                 $tableauFicheTmp = NULL;
                 $service = NULL;
+                $icon_header = NULL;
                 $classification = NULL;
                 $selection = NULL;
+                $bgcolor_header = NULL;
                 $one = AccueilFta::VALUE_1;
             }
         } else {
@@ -1053,7 +1065,7 @@ class AccueilFta {
         $tableauFicheTr2 .= $tableauFicheTrWork . $tableauFicheTr;
         $tableauFiche .= $tableauFicheN2 . $tableauFicheTr2 . $javascript . '</tbody></table>';
 
-        //Ajoute de la fonction de traitement de masse
+//Ajoute de la fonction de traitement de masse
         if ($traitementDeMasse) {
             $liste_action_groupe = FtaTransitionModel::getListeFtaGrouper(self::$abrevationFtaEtat);
 
@@ -1116,7 +1128,7 @@ class AccueilFta {
      * @return string
      */
     public static function afficherRequeteEnListeDeroulante($paramRequeteSQL, $paramIdDefaut, $paramNomDefaut) {
-        //Recherche de la clef
+//Recherche de la clef
         $table = DatabaseOperation::convertSqlStatementKeyAndOneFieldToArray($paramRequeteSQL);
         if (!$table) {//Si la liste est vide
             $html_liste = '<i>(vide)</i>';
@@ -1126,13 +1138,13 @@ class AccueilFta {
                 $paramNomDefaut = $key[AccueilFta::VALUE_1];
             }
 
-            //Création de la liste déroulante
+//Création de la liste déroulante
             $html_liste = '<select name=' . $paramNomDefaut . ' onChange=' . $paramNomDefaut . '_js()>';
             /*
              * PDO::FETCH_BOTH
              * Retourne la ligne suivante en tant qu'un tableau indexé par le nom et le numéro de la colonne
              */
-            //Création du contenu de la liste
+//Création du contenu de la liste
             $array = DatabaseOperation::convertSqlStatementKeyAndOneFieldToArray($paramRequeteSQL);
             foreach ($array as $rows) {
                 if ($rows[AccueilFta::VALUE_0] == $paramIdDefaut) {

@@ -13,28 +13,16 @@ $idUser = Lib::getParameterFromRequest('sal_user');
 /**
  * Initialisation
  */
-$userModel = new UserModel($idUser);
 $paramConsultation = Lib::getParameterFromRequest('consultation_1');
 $paramModification = Lib::getParameterFromRequest('modification_2');
-$paramUserLogin = $userModel->getDataField(UserModel::FIELDNAME_LOGIN)->getFieldValue();
-$paramUserNom = $userModel->getDataField(UserModel::FIELDNAME_NOM)->getFieldValue();
-$paramUserPrenom = $userModel->getDataField(UserModel::FIELDNAME_PRENOM)->getFieldValue();
-$paramUserCatsopro = $userModel->getDataField(UserModel::FIELDNAME_ID_CATSOPRO)->getFieldValue();
-$paramUserService = $userModel->getDataField(UserModel::FIELDNAME_ID_SERVICE)->getFieldValue();
-$paramDateCreationUser = $userModel->getDataField(UserModel::FIELDNAME_DATE_CREATION_SALARIES)->getFieldValue();
-$paramAscendantIdSalaries = $userModel->getDataField(UserModel::FIELDNAME_ASENDANT_ID_SALARIES)->getFieldValue();
-$paramNewsDefil = $userModel->getDataField(UserModel::FIELDNAME_NEWSDEFIL)->getFieldValue();
-$paramNewLieuGeo = $userModel->getDataField(UserModel::FIELDNAME_LIEU_GEO)->getFieldValue();
-$paramMembreCe = $userModel->getDataField(UserModel::FIELDNAME_MEMBRE_CE)->getFieldValue();
-$paramEcriture = $userModel->getDataField(UserModel::FIELDNAME_ECRITURE)->getFieldValue();
-$paramUserMail = $userModel->getDataField(UserModel::FIELDNAME_MAIL)->getFieldValue();
+$paramUserLogin = Lib::getParameterFromRequest('sal_login');
+$paramUserNom = Lib::getParameterFromRequest('sal_nom');
+$paramUserPrenom = Lib::getParameterFromRequest('sal_prenom');
+$paramUserPass = Lib::getParameterFromRequest('sal_pass');
+$paramUserCatsopro = Lib::getParameterFromRequest('sal_catsopro');
+$paramDateCreationUser = Lib::getParameterFromRequest(UserModel::TABLENAME . '_' . UserModel::FIELDNAME_DATE_CREATION_SALARIES . '_' . $idUser);
+$paramUserMail = Lib::getParameterFromRequest('sal_mail');
 $paramModifier = Lib::getParameterFromRequest('modifier');
-$paramLectureft = Lib::getParameterFromRequest('lectureft');
-$paramValidft = Lib::getParameterFromRequest('validft');
-$paramCreationft = Lib::getParameterFromRequest('creation_ft');
-$paramEcritureft = Lib::getParameterFromRequest('ecritureft');
-$paramCreationFicheProduit = Lib::getParameterFromRequest('creation_fiche_produit');
-$paramDroitstat = Lib::getParameterFromRequest('droitstat');
 identification1('salaries', $id_user, $pass);
 
 
@@ -49,45 +37,28 @@ if ($paramModifier == 'modifier') {
             . ' SET ' . UserModel::FIELDNAME_NOM . '=\'' . $paramUserNom . '\''
             . ', ' . UserModel::FIELDNAME_PRENOM . '=\'' . $paramUserPrenom . '\''
             . ', ' . UserModel::FIELDNAME_ID_CATSOPRO . '=\'' . $paramUserCatsopro . '\''
-            . ', ' . UserModel::FIELDNAME_ID_SERVICE . '=\'' . $paramUserService . '\''
-            . ', ' . UserModel::FIELDNAME_ID_TYPE . '=\'' . $sal_type . '\''
             . ', ' . UserModel::FIELDNAME_LOGIN . '=\'' . $paramUserLogin . '\','
     ;
     if ($paramUserPass) {
         $req .= UserModel::FIELDNAME_PASSWORD . '=PASSWORD(\'' . $paramUserPass . '\'), ';
     }
     $req .= UserModel::FIELDNAME_MAIL . '=\'' . $paramUserMail . '\''
-            . ', ' . UserModel::FIELDNAME_ECRITURE . '=\'' . $paramEcriture . '\''
-            . ', ' . UserModel::FIELDNAME_MEMBRE_CE . '=\'' . $paramMembreCe . '\''
-            . ', ' . UserModel::FIELDNAME_LIEU_GEO . '=\'' . $paramNewLieuGeo . '\''
-            . ', ' . UserModel::FIELDNAME_NEWSDEFIL . '=\'' . $paramNewsDefil . '\''
-            . ', ' . UserModel::FIELDNAME_ASENDANT_ID_SALARIES . '=\'' . $paramAscendantIdSalaries . '\''
             . ', ' . UserModel::FIELDNAME_DATE_CREATION_SALARIES . '=\'' . $paramDateCreationUser . '\''
             . ' WHERE ' . UserModel::KEYNAME . '=' . $idUser
     ;
 
     DatabaseOperation::execute($req);
 
-    DatabaseOperation::execute(
-            'UPDATE ' . DroitftModel::TABLENAME
-            . ' SET ' . DroitftModel::FIELDNAME_ECRITUREFT . '=\'' . $paramEcritureft
-            . '\', ' . DroitftModel::FIELDNAME_LECTUREFT . '=\'' . $paramLectureft
-            . '\', ' . DroitftModel::FIELDNAME_CREATION_FT . '=\'' . $paramCreationft
-            . '\', ' . DroitftModel::FIELDNAME_CREATION_FICHE_PRODUIT . '=\'' . $paramCreationFicheProduit
-            . '\', ' . DroitftModel::FIELDNAME_VALIDFT . '=\'' . $paramValidft
-            . '\', ' . DroitftModel::FIELDNAME_DROITSTAT . '=\'' . $paramDroitstat
-            . '\' WHERE ' . DroitftModel::FIELDNAME_ID_USER . '=' . $idUser
-    );
 
     //************************ MODES ************************//
     /*
      *  Requete pour lire tous les champs text nommes avec le numero du service
      */
-    $arrayService = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
-                    'SELECT DISTINCT ' . ServicesModel::KEYNAME
-                    . ' FROM ' . ServicesModel::TABLENAME
-                    . ' ORDER BY ' . ServicesModel::KEYNAME
-    );
+//    $arrayService = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
+//                    'SELECT DISTINCT ' . ServicesModel::KEYNAME
+//                    . ' FROM ' . ServicesModel::TABLENAME
+//                    . ' ORDER BY ' . ServicesModel::KEYNAME
+//    );
 
 //    if ($arrayService) {
 //

@@ -23,7 +23,7 @@ $position = Lib::isDefined('position');
 $session = Lib::isDefined('session');
 $session_id = session_id();
 $tentative = Lib::isDefined('tentative');
-$identite = Lib::isDefined('identite ');
+$identite = Lib::isDefined('identite');
 $mysql_table_authentification = $globalConfig->getConf()->getMysqlDatabaseAuthentificationTableName();
 
 //Démarrage de la session si celle-ci n'a pas été démarrée.

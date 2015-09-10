@@ -77,7 +77,7 @@
   Script situé dans "lib/htmlMimeMail-2.5.1/htmlMimeMail.php"
  */
 
-function envoismail($sujetmail, $text, $destinataire, $expediteur, $paramTypeMail, $conf = null) {
+function envoismail($sujetmail, $text, $destinataire, $expediteur, $paramTypeMail = null, $conf = null) {
 
     if ($conf == null) {
         $globalConfig = new GlobalConfig();
@@ -156,9 +156,9 @@ function envoismail($sujetmail, $text, $destinataire, $expediteur, $paramTypeMai
                  */
                 $logMail->log("fta", $text, "historique", $expediteur, $destinataire, $sujetmail, 0);
                 break;
-            
+
             case "Validation" :
-                
+
                 /**
                  * Enregistrement des envoies de validation des mails dans le fichier log
                  * 
@@ -178,7 +178,6 @@ function envoismail($sujetmail, $text, $destinataire, $expediteur, $paramTypeMai
                  */
                 $logMail->log("fta", $text, "historique", $expediteur, $destinataire, $sujetmail, 0);
                 break;
-                
         }
 
 

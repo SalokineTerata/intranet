@@ -798,6 +798,7 @@ class DatabaseOperation {
     , $secondaryTablesNamesAndidKeyValueRN
     , $arrayFieldsNameToDisplay
     , $arrayFieldsNameOrder = NULL
+    , $keyValue = NULL
     ) {
 
         /**
@@ -811,8 +812,8 @@ class DatabaseOperation {
          * Construction de la requête SQL
          */
         $paramSelectClause = $primaryTableNameRN . '.' . $keyNameRN . ',' . $arrayFieldsNameToDisplay;
-        $paramTableClause = $primaryTableNameRN . DatabaseOperation::tableClauseRelationshipNtoN($secondaryTablesNamesAndidKeyValueRN);
-        $paramWhereClauseRelationship = ' 1 ' . DatabaseOperation::whereClauseRelationshipNtoN($primaryTableNameRN, $secondaryTablesNamesAndidKeyValueRN);
+        $paramTableClause = $primaryTableNameRN . DatabaseOperation::tableClauseRelationshipNtoN($secondaryTablesNamesAndidKeyValueRN, $keyValue);
+        $paramWhereClauseRelationship = ' 1 ' . DatabaseOperation::whereClauseRelationshipNtoN($primaryTableNameRN, $secondaryTablesNamesAndidKeyValueRN, $keyValue);
 
         if ($arrayFieldsNameOrder) {
             $paramOrderClause = implode(',', $arrayFieldsNameOrder);
@@ -829,31 +830,39 @@ class DatabaseOperation {
 //$pdo = new PDO($dsn, $username, $passwd, $options);
     }
 
-    static private function whereClauseRelationshipNtoN($paramPrimaryTableName, $paramSecondaryTableNamesAndIdKeyValue) {
+    static private function whereClauseRelationshipNtoN($paramPrimaryTableName, $paramSecondaryTableNamesAndIdKeyValue, $paramKeyCheck) {
         if ($paramSecondaryTableNamesAndIdKeyValue) {
-            foreach ($paramSecondaryTableNamesAndIdKeyValue as $value) {
-                /**
-                 * Détermination des noms des champs  et de leur valeur constituant la relation N:1
-                 */
-                $secondaryTableName = $value[0];
-                $primaryTableForeignKeyNameRN = $value[1];
-                $ForeignKeyValue = $value[2];
-                /**
-                 * Nom de la clef de la table primaire N.
-                 */
-                $secondaryableDescriptionRN = new DatabaseDescriptionTable($value[0]);
-                $secondaryTableKeyNameRN = $secondaryableDescriptionRN->getKeyName();
-                $req .= ' AND ' . $paramPrimaryTableName . '.' . $primaryTableForeignKeyNameRN . '=' . $secondaryTableName . '.' . $secondaryTableKeyNameRN
-                        . ' AND ' . $secondaryTableName . '.' . $secondaryTableKeyNameRN . '=' . $ForeignKeyValue;
+            foreach ($paramSecondaryTableNamesAndIdKeyValue as $key => $value) {
+                if ($paramKeyCheck == $key) {
+                    foreach ($value as $rows) {
+                        /**
+                         * Détermination des noms des champs  et de leur valeur constituant la relation N:1
+                         */
+                        $secondaryTableName = $rows[0];
+                        $primaryTableForeignKeyNameRN = $rows[1];
+                        $ForeignKeyValue = $rows[2];
+                        /**
+                         * Nom de la clef de la table primaire N.
+                         */
+                        $secondaryableDescriptionRN = new DatabaseDescriptionTable($rows[0]);
+                        $secondaryTableKeyNameRN = $secondaryableDescriptionRN->getKeyName();
+                        $req .= ' AND ' . $paramPrimaryTableName . '.' . $primaryTableForeignKeyNameRN . '=' . $secondaryTableName . '.' . $secondaryTableKeyNameRN
+                                . ' AND ' . $secondaryTableName . '.' . $secondaryTableKeyNameRN . '=' . $ForeignKeyValue;
+                    }
+                }
             }
         }
         return $req;
     }
 
-    static private function tableClauseRelationshipNtoN($paramSecondaryTableNamesAndIdKeyValue) {
+    static private function tableClauseRelationshipNtoN($paramSecondaryTableNamesAndIdKeyValue, $paramKeyCheck) {
         if ($paramSecondaryTableNamesAndIdKeyValue) {
-            foreach ($paramSecondaryTableNamesAndIdKeyValue as $value) {
-                $req .= ' , ' . $value[0];
+            foreach ($paramSecondaryTableNamesAndIdKeyValue as $key => $value) {
+                if ($paramKeyCheck == $key) {
+                    foreach ($value as $rows) {
+                        $req .= ' , ' . $rows[0];
+                    }
+                }
             }
         }
         return $req;

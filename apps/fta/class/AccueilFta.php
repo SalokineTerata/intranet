@@ -1122,9 +1122,9 @@ class AccueilFta {
      *       Fonction de création d'une liste déroulante basée sur une requete SQL
       le premier champ retourné par la requête est désigné comme Clef de la liste
       le second alimente le contenu de la liste déroulante
-     * @param type $paramRequeteSQL
-     * @param type $paramIdDefaut
-     * @param type $paramNomDefaut
+     * @param string $paramRequeteSQL
+     * @param int $paramIdDefaut
+     * @param string $paramNomDefaut
      * @return string
      */
     public static function afficherRequeteEnListeDeroulante($paramRequeteSQL, $paramIdDefaut, $paramNomDefaut) {

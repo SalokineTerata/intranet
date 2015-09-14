@@ -78,7 +78,7 @@ $nom_usuel_intranet_modules = $intranetModulesModel->getDataField(IntranetModule
 //Lister les actions possibles sur le module
 
 $result_action = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
-                "SELECT * FROM intranet_actions "
+                "SELECT id_intranet_actions,description_intranet_actions FROM intranet_actions "
                 . " WHERE module_intranet_actions = '0' "
                 . " OR module_intranet_actions = '" . $id_intranet_modules . "' "
                 . " ORDER BY module_intranet_actions, nom_intranet_actions ");

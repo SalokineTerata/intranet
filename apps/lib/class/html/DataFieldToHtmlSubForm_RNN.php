@@ -29,12 +29,13 @@ class DataFieldToHtmlSubform_RNN extends HtmlSubForm_RNN {
      * @param DatabaseDataField $paramDataField
      * @param $paramSecondaryTableNamesAndIdKeyValue
      */
-    public function __construct(DatabaseDataField $paramDataField, $paramSecondaryTableNamesAndIdKeyValue) {
+    public function __construct(DatabaseDataField $paramDataField, $paramSecondaryTableNamesAndIdKeyValue, $keyValue) {
         $paramArrayContent = DatabaseOperation::getArrayFieldsNameFromForeignKeyRelationNtoN(
                         $paramDataField->getTableName()
                         , $paramSecondaryTableNamesAndIdKeyValue
                         , $paramDataField->getFieldsToDisplay()
                         , explode(',', $paramDataField->getFieldsToOrder())//Modifiable
+                        , $keyValue
         );
         parent::__construct($paramArrayContent
                 , ModelTableAssociation::getModelName($paramDataField->getTableName())

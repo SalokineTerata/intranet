@@ -39,6 +39,13 @@ class HtmlSubForm_RNN extends HtmlSubForm {
     private $arrayPrimaryContent = NULL;
 
     /**
+     * Tableau PHP stockant le résultat de la requête sur laquelle est basée
+     * le sous-formulaire.
+     * @var array 
+     */
+    private $arrayPrimaryContentLines = NULL;
+
+    /**
      * Nom de la classe désignat le model de base de données utilisé
      * @var mixed 
      */
@@ -68,6 +75,11 @@ class HtmlSubForm_RNN extends HtmlSubForm {
      */
     private $LienSuppression;
 
+    /**
+     * Ajout du label du tableau
+     */
+    private $tableLabel;
+
     const VIRTUAL = 'VIRTUAL';
 
     function __construct($paramArrayPrimaryContent = NULL, $paramSubFormPrimaryModelClassName = NULL, $paramPrimaryLabel = NULL, $secondaryTableNamesAndIdKeyValue = NULL) {
@@ -76,6 +88,14 @@ class HtmlSubForm_RNN extends HtmlSubForm {
         $this->setArrayPrimaryContent($paramArrayPrimaryContent);
         $this->setSubFormPrimaryModelClassName($paramSubFormPrimaryModelClassName);
         $this->setSecondaryTableNamesAndIdKeyValue($secondaryTableNamesAndIdKeyValue);
+    }
+
+    function getTableLabel() {
+        return $this->tableLabel;
+    }
+
+    function setTableLabel($tableLabel) {
+        $this->tableLabel = $tableLabel;
     }
 
     function getArrayPrimaryContent() {
@@ -146,9 +166,16 @@ class HtmlSubForm_RNN extends HtmlSubForm {
             foreach ($this->getArrayPrimaryContent() as $key => $valueArray) {
 
                 /**
+                 * Création de la ligne de label du tableau
+                 */
+                $return .= $this->getTableLabel();
+                $this->setTableLabel(NULL);
+
+
+                /**
                  * Création de la ligne HTML
                  */
-                $return.= "<tr >";
+                $return.= "<tr>";
 
                 /**
                  * Chargement de l'enregistrement
@@ -180,7 +207,7 @@ class HtmlSubForm_RNN extends HtmlSubForm {
                     /**
                      * Conversion du DataField en HtmlField
                      */
-                    $htmlField = Html::getHtmlObjectFromDataField($dataField, $this->getSecondaryTableNamesAndIdKeyValue());
+                    $htmlField = Html::getHtmlObjectFromDataField($dataField, $this->getSecondaryTableNamesAndIdKeyValue(), $key);
 
                     /**
                      * Dans le cas du premier champ de la ligne, on récupère
@@ -193,7 +220,7 @@ class HtmlSubForm_RNN extends HtmlSubForm {
                     $htmlField->getAttributesGlobal()->setIsIconNextEnabledToFalse();
 
 
-                    $htmlField->setHtmlRenderToTableLabel();
+                    $htmlField->setHtmlRenderToTable();
                     /**
                      * Si le sous-formulaire est modifiable par l'utilisateur
                      * et que le champs ne fait pas partie de la liste des champs
@@ -219,7 +246,16 @@ class HtmlSubForm_RNN extends HtmlSubForm {
                     /**
                      * Ajout d'un lien de suppression
                      */
-                    $return.="<td>" . $this->getLienSuppression() . "</td>";
+                    if ($this->getLienSuppression()) {
+                        foreach ($this->getLienSuppression() as $key2 => $rows) {
+                            if ($key2 == $key) {
+                                $lienDeSupression = $rows;
+                            }
+                        }
+                    }
+
+                    $return.="<td>" . $lienDeSupression . "</td>";
+
                     /**
                      * Ajout d'un lien d'ajout
                      */

@@ -273,8 +273,8 @@ class FtaConditionnementModel extends AbstractModel {
                         . ' WHERE ' . FtaConditionnementModel::KEYNAME . '=' . $paramIdFtaConditionnement);
 
         if ($arrayTmp) {
-            foreach ($arrayTmp as $key => $rows) {                
-                    $array[$key] = array(
+            foreach ($arrayTmp as $key => $rows) {
+                $array[$key] = array(
                     FtaConditionnementModel::FIELDNAME_VIRTUAL_NOM_FTA_CONDITIONNEMENT_GROUPE => $rows[FtaConditionnementModel::FIELDNAME_ID_ANNEXE_EMBALLAGE_GROUPE],
                     FtaConditionnementModel::FIELDNAME_VIRTUAL_REFERENCE_FOURNISSEUR_FTA_CONDITIONNEMENT => $rows[FtaConditionnementModel::FIELDNAME_ID_ANNEXE_EMBALLAGE],
                     FtaConditionnementModel::FIELDNAME_VIRTUAL_HAUTEUR_FTA_CONDITIONNEMENT => $rows[FtaConditionnementModel::FIELDNAME_HAUTEUR_FTA_CONDITIONNEMENT],
@@ -282,12 +282,58 @@ class FtaConditionnementModel extends AbstractModel {
                     FtaConditionnementModel::FIELDNAME_VIRTUAL_LARGEUR_FTA_CONDITIONNEMENT => $rows[FtaConditionnementModel::FIELDNAME_LARGEUR_FTA_CONDITIONNEMENT],
                     FtaConditionnementModel::FIELDNAME_VIRTUAL_POIDS_FTA_CONDITIONNEMENT => $rows[FtaConditionnementModel::FIELDNAME_POIDS_FTA_CONDITIONNEMENT],
                     FtaConditionnementModel::FIELDNAME_VIRTUAL_QUANTITE_PAR_COUCHE_FTA_CONDITIONNEMENT => $rows[FtaConditionnementModel::FIELDNAME_QUANTITE_PAR_COUCHE_FTA_CONDITIONNEMENT]
-                    );               
+                );
             }
         } else {
             $array = 0;
         }
         return $array;
+    }
+
+    /**
+     * 
+     * @param int $paramIdFta
+     * @param int $paramIdAnnexeEmballage
+     * @param int $paramIdAnnexeEmballageGroupeType
+     * @param int $paramIdFtaConditionnement
+     * @return array
+     */
+    public static function getTablesNameAndIdForeignKeyOfFtaConditionnement($paramIdFta, $paramIdAnnexeEmballage, $paramIdAnnexeEmballageGroupeType, $paramIdFtaConditionnement) {
+        $tablesNameAndIdForeignKeyOfFtaConditionnement[$paramIdFtaConditionnement] = array(
+            array(AnnexeEmballageModel::TABLENAME, FtaConditionnementModel::FIELDNAME_ID_ANNEXE_EMBALLAGE, $paramIdAnnexeEmballage),
+            array(AnnexeEmballageGroupeTypeModel::TABLENAME, FtaConditionnementModel::FIELDNAME_ID_ANNEXE_EMBALLAGE_GROUPE_TYPE, $paramIdAnnexeEmballageGroupeType),
+            array(FtaModel::TABLENAME, FtaConditionnementModel::FIELDNAME_ID_FTA, $paramIdFta),
+        );
+
+        return $tablesNameAndIdForeignKeyOfFtaConditionnement;
+    }
+
+    public static function getTableConditionnementLabel($paramIdFtaConditionnment) {
+        $ftaCondtionnementModel = new FtaConditionnementModel($paramIdFtaConditionnment);
+
+        return '<tr class=titre_tableau  align=center >' .
+                '<td>' . $ftaCondtionnementModel->getDataField(FtaConditionnementModel::FIELDNAME_ID_ANNEXE_EMBALLAGE_GROUPE)->getFieldLabel() . '</td>'
+                . '<td>' . $ftaCondtionnementModel->getDataField(FtaConditionnementModel::FIELDNAME_ID_ANNEXE_EMBALLAGE)->getFieldLabel() . '</td>'
+                . '<td>' . $ftaCondtionnementModel->getDataField(FtaConditionnementModel::FIELDNAME_HAUTEUR_FTA_CONDITIONNEMENT)->getFieldLabel() . '</td>'
+                . '<td>' . $ftaCondtionnementModel->getDataField(FtaConditionnementModel::FIELDNAME_LONGUEUR_FTA_CONDITIONNEMENT)->getFieldLabel() . '</td>'
+                . '<td>' . $ftaCondtionnementModel->getDataField(FtaConditionnementModel::FIELDNAME_LARGEUR_FTA_CONDITIONNEMENT)->getFieldLabel() . '</td>'
+                . '<td>' . $ftaCondtionnementModel->getDataField(FtaConditionnementModel::FIELDNAME_POIDS_FTA_CONDITIONNEMENT)->getFieldLabel() . '</td>'
+                . '<td>' . $ftaCondtionnementModel->getDataField(FtaConditionnementModel::FIELDNAME_QUANTITE_PAR_COUCHE_FTA_CONDITIONNEMENT)->getFieldLabel() . '</td>' . '</tr>';
+    }
+
+    public static function getTableConditionnementLabelDuColis($paramIdFtaConditionnment) {
+        $ftaCondtionnementModel = new FtaConditionnementModel($paramIdFtaConditionnment);
+
+        return '<tr class=titre_tableau >' .
+                '<td>' . $ftaCondtionnementModel->getDataField(FtaConditionnementModel::FIELDNAME_ID_ANNEXE_EMBALLAGE_GROUPE)->getFieldLabel() . '</td>'
+                . '<td>' . $ftaCondtionnementModel->getDataField(FtaConditionnementModel::FIELDNAME_ID_ANNEXE_EMBALLAGE)->getFieldLabel() . '</td>'
+                . '<td>' . $ftaCondtionnementModel->getDataField(FtaConditionnementModel::FIELDNAME_HAUTEUR_FTA_CONDITIONNEMENT)->getFieldLabel() . '</td>'
+                . '<td>' . $ftaCondtionnementModel->getDataField(FtaConditionnementModel::FIELDNAME_LONGUEUR_FTA_CONDITIONNEMENT)->getFieldLabel() . '</td>'
+                . '<td>' . $ftaCondtionnementModel->getDataField(FtaConditionnementModel::FIELDNAME_LARGEUR_FTA_CONDITIONNEMENT)->getFieldLabel() . '</td>'
+                . '<td>' . $ftaCondtionnementModel->getDataField(FtaConditionnementModel::FIELDNAME_POIDS_FTA_CONDITIONNEMENT)->getFieldLabel() . '</td>'
+                . '<td>' . $ftaCondtionnementModel->getDataField(FtaConditionnementModel::FIELDNAME_QUANTITE_PAR_COUCHE_FTA_CONDITIONNEMENT)->getFieldLabel() . '</td>'
+                . '<td>' . $ftaCondtionnementModel->getDataField(FtaConditionnementModel::FIELDNAME_NOMBRE_COUCHE_FTA_CONDITIONNEMENT)->getFieldLabel() . '</td>'
+                . '</tr>';
     }
 
     /**
@@ -431,6 +477,87 @@ class FtaConditionnementModel extends AbstractModel {
                 . ' FROM ' . FtaConditionnementModel::TABLENAME
                 . ' WHERE ' . FtaConditionnementModel::FIELDNAME_ID_FTA . '=' . $paramIdFtaOrig
         );
+    }
+
+    /**
+     *  Lien d'ajout d'un Emballage de Conditionnment
+     * @param int $paramIdFta
+     * @param int $paramIdChapitre
+     * @param int $paramTypeEmballage
+     * @param string $paramSyntheseAction
+     * @param int $paramComeback
+     * @param int $paramIdFtaEtat
+     * @param string $paramAbreviationEtat
+     * @param int $paramIdFtaRole
+     * @return string
+     */
+    public static function getAddLinkBeforeConditionnement($paramIdFta, $paramIdChapitre, $paramTypeEmballage, $paramSyntheseAction, $paramComeback, $paramIdFtaEtat, $paramAbreviationEtat, $paramIdFtaRole) {
+        return 'ajout_conditionnement.php?'
+                . 'id_fta=' . $paramIdFta
+                . '&id_annexe_emballage_groupe_type=' . $paramTypeEmballage
+                . '&id_fta_chapitre=' . $paramIdChapitre
+                . '&synthese_action=' . $paramSyntheseAction
+                . '&comeback=' . $paramComeback
+                . '&id_fta_etat=' . $paramIdFtaEtat
+                . '&abreviation_fta_etat=' . $paramAbreviationEtat
+                . '&id_fta_role=' . $paramIdFtaRole
+        ;
+    }
+
+    /**
+     * Lien d'ajout d'un Emballage de Conditionnment après un autre emballage
+     * @param int $paramIdFta
+     * @param int $paramIdChapitre
+     * @param int $paramTypeEmballage
+     * @param string $paramSyntheseAction
+     * @param int $paramComeback
+     * @param int $paramIdFtaEtat
+     * @param string $paramAbreviationEtat
+     * @param int $paramIdFtaRole
+     * @return string
+     */
+    public static function getAddLinkAfterConditionnement($paramIdFta, $paramIdChapitre, $paramTypeEmballage, $paramSyntheseAction, $paramComeback, $paramIdFtaEtat, $paramAbreviationEtat, $paramIdFtaRole) {
+        return '<a href=ajout_conditionnement.php?'
+                . 'id_fta=' . $paramIdFta
+                . '&id_annexe_emballage_groupe_type=' . $paramTypeEmballage
+                . '&id_fta_chapitre=' . $paramIdChapitre
+                . '&synthese_action=' . $paramSyntheseAction
+                . '&comeback=' . $paramComeback
+                . '&id_fta_etat=' . $paramIdFtaEtat
+                . '&abreviation_fta_etat=' . $paramAbreviationEtat
+                . '&id_fta_role=' . $paramIdFtaRole . '><img src=../lib/images/plus.png width=22  border=0 valign=middle halign=right />'
+                . '</a><br>';
+    }
+
+    /**
+     * Lien se supression d'un Emballage de Conditionnment
+     * @param int $paramIdFta
+     * @param int $paramIdChapitre
+     * @param array $paramIdFtaConditionnement
+     * @param string $paramSyntheseAction
+     * @param int $paramComeback
+     * @param int $paramIdFtaEtat
+     * @param string $paramAbreviationEtat
+     * @param int $paramIdFtaRole
+     * @return string
+     */
+    public static function getDeleteLinkConditionnement($paramIdFta, $paramIdChapitre, $paramIdFtaConditionnement, $paramSyntheseAction, $paramComeback, $paramIdFtaEtat, $paramAbreviationEtat, $paramIdFtaRole) {
+        foreach ($paramIdFtaConditionnement as $rows) {
+            $return[$rows] = '<a href=modification_fiche_post.php?'
+                    . 'id_fta=' . $paramIdFta
+                    . '&id_fta_conditionnement=' . $rows
+                    . '&action=suppression_conditionnement'
+                    . '&id_fta_chapitre_encours=' . $paramIdChapitre
+                    . '&synthese_action=' . $paramSyntheseAction
+                    . '&comeback=' . $paramComeback
+                    . '&id_fta_etat=' . $paramIdFtaEtat
+                    . '&abreviation_fta_etat=' . $paramAbreviationEtat
+                    . '&id_fta_role=' . $paramIdFtaRole . '>
+                                <img src=../lib/images/supprimer.png width=22  border=0/>
+                                </a><br>';
+        }
+
+        return $return;
     }
 
 }

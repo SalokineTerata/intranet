@@ -101,10 +101,7 @@ class UserModel extends AbstractModel {
                 'DELETE FROM ' . DroitftModel::TABLENAME
                 . ' WHERE ' . DroitftModel::FIELDNAME_ID_USER . '=' . $paramIdSalaries
         );
-        DatabaseOperation::execute(
-                'DELETE FROM ' . UserModel::TABLENAME
-                . ' WHERE ' . UserModel::KEYNAME . '=' . $paramIdSalaries
-        );
+       
         DatabaseOperation::execute(
                 'DELETE FROM ' . IntranetDroitsAccesModel::TABLENAME
                 . ' WHERE ' . IntranetDroitsAccesModel::FIELDNAME_ID_USER . '=' . $paramIdSalaries
@@ -118,6 +115,11 @@ class UserModel extends AbstractModel {
         DatabaseOperation::execute(
                 'DELETE FROM ' . PersoModel::TABLENAME
                 . ' WHERE ' . PersoModel::KEYNAME . '=' . $paramIdSalaries);
+        
+         DatabaseOperation::execute(
+                'DELETE FROM ' . UserModel::TABLENAME
+                . ' WHERE ' . UserModel::KEYNAME . '=' . $paramIdSalaries
+        );
     }
 
     /**

@@ -148,7 +148,7 @@ class Html {
      * @param  $param
      * @return AbstractHtmlGlobalElement
      */
-    public static function getHtmlObjectFromDataField(DatabaseDataField $paramDataField, $param = FALSE) {
+    public static function getHtmlObjectFromDataField(DatabaseDataField $paramDataField, $param = FALSE, $param2 = FALSE) {
         $htmlObject = NULL;
         $TypeOfHtmlObject = $paramDataField->getFieldTypeOfHtmlObject();
 
@@ -179,7 +179,7 @@ class Html {
                 break;
 
             case Html::TYPE_OF_OBJECT_SUBFORM_RNN:
-                $htmlObject = new DataFieldToHtmlSubform_RNN($paramDataField, $param);
+                $htmlObject = new DataFieldToHtmlSubform_RNN($paramDataField, $param,$param2);
                 break;
 
             default:

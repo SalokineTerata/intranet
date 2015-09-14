@@ -130,6 +130,11 @@ abstract class AbstractHtmlGlobalElement {
      */
     private $ContentLocked;
 
+    /**
+     * Vérifie si il s'agit d'une nouvelle ligne à ajouter à un tableau
+     */
+    private $CheckTableForm;
+
     public function __construct() {
         /**
          * Par défaut l'élément est représenté sous forme de formulaire.
@@ -205,6 +210,14 @@ abstract class AbstractHtmlGlobalElement {
         $this->ContentLocked = $ContentLocked;
     }
 
+    function getCheckTableForm() {
+        return $this->CheckTableForm;
+    }
+
+    function setCheckTableForm($CheckTableForm) {
+        $this->CheckTableForm = $CheckTableForm;
+    }
+        
     /**
      * 
      * @return AttributesGlobal

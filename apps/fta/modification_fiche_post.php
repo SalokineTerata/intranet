@@ -354,7 +354,6 @@ switch ($action) {
     case 'suppression_conditionnement':
 
 //Variables passées en URL
-        $paramIdFta = Lib::getParameterFromRequest('id_fta');
         $id_fta_conditionnement = Lib::getParameterFromRequest(FtaConditionnementModel::KEYNAME);
 
         /*

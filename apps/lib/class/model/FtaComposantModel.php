@@ -20,9 +20,12 @@ class FtaComposantModel extends AbstractModel {
     const FIELDNAME_ETIQUETTE_DUREE_VIE_FTA_COMPOSITION = 'etiquette_duree_vie_fta_composition';
     const FIELDNAME_ETIQUETTE_ID_FTA_COMPOSITION = 'etiquette_id_fta_composition';
     const FIELDNAME_ETIQUETTE_LIBELLE_FTA_COMPOSITION = 'etiquette_libelle_fta_composition';
+    const FIELDNAME_ETIQUETTE_LIBELLE_LEGAL_FTA_COMPOSITION = 'etiquette_libelle_legal_fta_composition';
     const FIELDNAME_ETIQUETTE_POIDS_FTA_COMPOSITION = 'etiquette_poids_fta_composition';
+    const FIELDNAME_ETIQUETTE_DECOMPOSITION_POIDS_FTA_COMPOSANT = 'etiquette_decomposition_poids_fta_composant';
     const FIELDNAME_ETIQUETTE_QUANTITE_FTA_COMPOSITION = 'etiquette_quantite_fta_composition';
     const FIELDNAME_ETIQUETTE_SUPPLEMENTAIRE_FTA_COMPOSIITON = 'etiquette_supplementaire_fta_composition';
+    const FIELDNAME_ETIQUETTE_INFORMATION_COMPLEMENTAIRE_RECTO_FTA_COMPOSANT = 'etiquette_information_complementaire_recto_fta_composant';
     const FIELDNAME_ID_ACCESS_RECETTE_RECETTE = 'id_access_recette_recette';
     const FIELDNAME_ID_ANNEXE_AGRO_ART_CODIFICATION = 'id_annexe_agrologic_article_codification';
     const FIELDNAME_ID_ANNEXE_UNITE = 'id_annexe_unite';
@@ -35,6 +38,8 @@ class FtaComposantModel extends AbstractModel {
     const FIELDNAME_IS_COMPOSITION_FTA_COMPOSANT = 'is_composition_fta_composant';
     const FIELDNAME_IS_NOMENCLATURE_FTA_COMPOSANT = 'is_nomenclature_fta_composant';
     const FIELDNAME_K_ETIQUETTE_FTA_COMPOSITION = 'k_etiquette_fta_composition';
+    const FIELDNAME_K_ETIQUETTE_VERSO_FTA_COMPOSITION = 'k_etiquette_verso_fta_composition';
+    const FIELDNAME_K_CODESOFT_ETIQUETTE_LOGO = 'k_codesoft_etiquette_logo';
     const FIELDNAME_K_STYLE_PARAGRAPHE_INGREDIENT_FTA_COMPOSITION = 'k_style_paragraphe_ingredient_fta_composition';
     const FIELDNAME_LAST_ID_FTA_COMPOSANT = 'last_id_fta_composant';
     const FIELDNAME_MODE_ETIQUETTE_FTA_COMPOSITION = 'mode_etiquette_fta_composition';
@@ -50,6 +55,19 @@ class FtaComposantModel extends AbstractModel {
     const FIELDNAME_TAILLE_POLICE_INGREDIENT_FTA_COMPOSITION = 'taille_police_ingredient_fta_composition';
     const FIELDNAME_TAILLE_POLICE_NOM_FTA_COMPOSITION = 'taille_police_nom_fta_composition';
     const FIELDNAME_VERSION = '_VERSION';
+    const FIELDNAME_VAL_NUT_KCAL = 'val_nut_kcal';
+    const FIELDNAME_VAL_NUT_KJ = 'val_nut_kj';
+    const FIELDNAME_VAL_MAT_GRASSE = 'val_nut_mat_grasse';
+    const FIELDNAME_VAL_ACIDE_GRAS = 'val_nut_acide_gras';
+    const FIELDNAME_VAL_GLUCIDE = 'val_nut_glucide';
+    const FIELDNAME_VAL_SUCRE = 'val_nut_sucre';
+    const FIELDNAME_VAL_PROTEINE = 'val_nut_proteine';
+    const FIELDNAME_VAL_SEL = 'val_nut_sel';
+    const FIELDNAME_VIRTUAL_INGREDIENT_FTA_COMPOSITION = 'virtual_ingredient_fta_composition';
+    const FIELDNAME_VIRTUAL_NOM_DU_COMPOSANT = 'virtual_nom_du_composant';
+    const FIELDNAME_VIRTUAL_POIDS_FTA_COMPOSITION = 'virtual_poids_fta_composition';
+    const FIELDNAME_VIRTUAL_QUANTITE_FTA_COMPOSITION = 'virtual_quantite_fta_composition';
+    const FIELDNAME_VIRTUAL_SITE_DE_PRODUCTION = 'virtual_site_de_production';
 
     /**
      * FTA associée
@@ -170,6 +188,168 @@ class FtaComposantModel extends AbstractModel {
         );
     }
 
+    public static function getIdFtaComposant($paramIdFta) {
+        $arrayIdFtaComposant = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
+                        'SELECT ' . FtaComposantModel::KEYNAME
+                        . ' FROM ' . FtaComposantModel::TABLENAME
+                        . ' WHERE ' . FtaComposantModel::FIELDNAME_ID_FTA . '=' . $paramIdFta
+        );
+        return $arrayIdFtaComposant;
+    }
+
+    /**
+     * Tableau de données, convertie le nom des champs des données aux noms des champs virtuel qui leur corresponds
+     * @param type $paramIdFtaComposant
+     * @return int
+     */
+    public static function getArrayFtaConditonnement($paramIdFtaComposant) {
+
+        $arrayTmp = DatabaseOperation::convertSqlStatementWithKeyAsFirstFieldToArray(
+                        'SELECT ' . FtaComposantModel::KEYNAME
+                        . ',' . FtaComposantModel::FIELDNAME_NOM_FTA_COMPOSITION
+                        . ',' . FtaComposantModel::FIELDNAME_INGREDIENT_FTA_COMPOSITION
+                        . ',' . FtaComposantModel::FIELDNAME_ID_GEO
+                        . ',' . FtaComposantModel::FIELDNAME_POIDS_FTA_COMPOSITION
+                        . ',' . FtaComposantModel::FIELDNAME_QUANTITE_FTA_COMPOSITION
+                        . ' FROM ' . FtaComposantModel::TABLENAME
+                        . ' WHERE ' . FtaComposantModel::KEYNAME . '=' . $paramIdFtaComposant);
+
+        if ($arrayTmp) {
+            foreach ($arrayTmp as $key => $rows) {
+                $array[$key] = array(
+                    FtaComposantModel::FIELDNAME_VIRTUAL_NOM_DU_COMPOSANT => $rows[FtaComposantModel::FIELDNAME_NOM_FTA_COMPOSITION],
+                    FtaComposantModel::FIELDNAME_VIRTUAL_INGREDIENT_FTA_COMPOSITION => $rows[FtaComposantModel::FIELDNAME_INGREDIENT_FTA_COMPOSITION],
+                    FtaComposantModel::FIELDNAME_VIRTUAL_SITE_DE_PRODUCTION => $rows[FtaComposantModel::FIELDNAME_ID_GEO],
+                    FtaComposantModel::FIELDNAME_VIRTUAL_POIDS_FTA_COMPOSITION => $rows[FtaComposantModel::FIELDNAME_POIDS_FTA_COMPOSITION],
+                    FtaComposantModel::FIELDNAME_VIRTUAL_QUANTITE_FTA_COMPOSITION => $rows[FtaComposantModel::FIELDNAME_QUANTITE_FTA_COMPOSITION],
+                );
+            }
+        } else {
+            $array = 0;
+        }
+        return $array;
+    }
+
+    /**
+     * 
+     * @param int $paramIdFta
+     * @param int $paramIdFtaComposant
+     * @return array
+     */
+    public static function getTablesNameAndIdForeignKeyOfFtaComposant($paramIdFta, $paramIdFtaComposant) {
+        $tablesNameAndIdForeignKeyOfFtaConditionnement[$paramIdFtaComposant] = array(
+            array(FtaModel::TABLENAME, FtaComposantModel::FIELDNAME_ID_FTA, $paramIdFta),
+            array(FtaComposantModel::TABLENAME, FtaComposantModel::KEYNAME, $paramIdFtaComposant),
+        );
+
+        return $tablesNameAndIdForeignKeyOfFtaConditionnement;
+    }
+
+    public static function getAddLinkComposant($paramIdFta, $paramIdChapitre, $paramSyntheseAction, $paramComeback, $paramIdFtaEtat, $paramAbreviationEtat, $paramIdFtaRole, $paramProprietaire) {
+        return 'modifier_composition.php?id_fta=' . $paramIdFta
+                . '&id_fta_chapitre_encours=' . $paramIdChapitre
+                . '&synthese_action=' . $paramSyntheseAction
+                . '&proprietaire=' . $paramProprietaire
+                . '&comeback=' . $paramComeback
+                . '&id_fta_etat=' . $paramIdFtaEtat
+                . '&abreviation_fta_etat=' . $paramAbreviationEtat
+                . '&id_fta_role=' . $paramIdFtaRole
+        ;
+    }
+
+    public static function getAddAfterLinkComposant($paramIdFta, $paramIdChapitre, $paramSyntheseAction, $paramComeback, $paramIdFtaEtat, $paramAbreviationEtat, $paramIdFtaRole, $paramProprietaire) {
+        return 'modifier_composition.php?id_fta=' . $paramIdFta
+                . '&id_fta_chapitre_encours=' . $paramIdChapitre
+                . '&synthese_action=' . $paramSyntheseAction
+                . '&proprietaire=' . $paramProprietaire
+                . '&comeback=' . $paramComeback
+                . '&id_fta_etat=' . $paramIdFtaEtat
+                . '&abreviation_fta_etat=' . $paramAbreviationEtat
+                . '&id_fta_role=' . $paramIdFtaRole 
+        ;
+    }
+
+    public static function getTableComposantLabel($paramIdFtaConditionnment) {
+        $ftaCondtionnementModel = new FtaComposantModel($paramIdFtaConditionnment);
+
+        return '<tr class=titre_tableau  align=center >' .
+                '<td>' . $ftaCondtionnementModel->getDataField(FtaComposantModel::FIELDNAME_NOM_FTA_COMPOSITION)->getFieldLabel() . '</td>'
+                . '<td>' . $ftaCondtionnementModel->getDataField(FtaComposantModel::FIELDNAME_INGREDIENT_FTA_COMPOSITION)->getFieldLabel() . '</td>'
+                . '<td>' . $ftaCondtionnementModel->getDataField(FtaComposantModel::FIELDNAME_ID_GEO)->getFieldLabel() . '</td>'
+                . '<td>' . $ftaCondtionnementModel->getDataField(FtaComposantModel::FIELDNAME_POIDS_FTA_COMPOSITION)->getFieldLabel() . '</td>'
+//                . '<td>Répartition (en %)</td>'
+                . '<td>' . $ftaCondtionnementModel->getDataField(FtaComposantModel::FIELDNAME_QUANTITE_FTA_COMPOSITION)->getFieldLabel() . '</td>'
+                . '<td>Actions</td>'
+                . '</tr>';
+    }
+
+    public static function InsertFtaComposant($paramIdFta) {
+        $pdo = DatabaseOperation::execute(
+                        'INSERT INTO ' . FtaComposantModel::TABLENAME
+                        . '(' . FtaComposantModel::FIELDNAME_ID_FTA . ')'
+                        . 'VALUES (' . $paramIdFta . ')'
+        );
+        $key = $pdo->lastInsertId();
+
+        return $key;
+    }
+
+    /**
+     * Suppression d'une donnée de la table Fta composant par son identifiant
+     * @param type $paramIdFtaComposant
+     * @return type
+     */
+    public static function deleteFtaComposant($paramIdFtaComposant) {
+        return DatabaseOperation::execute(
+                        ' DELETE FROM ' . FtaComposantModel::TABLENAME . ' WHERE ' .
+                        FtaComposantModel::KEYNAME . '=' . $paramIdFtaComposant);
+    }
+
+    /**
+     * Lien se supression d'un Emballage de Conditionnment
+     * @param int $paramIdFta
+     * @param int $paramIdChapitre
+     * @param array $paramIdFtaComposant
+     * @param string $paramSyntheseAction
+     * @param int $paramComeback
+     * @param int $paramIdFtaEtat
+     * @param string $paramAbreviationEtat
+     * @param int $paramIdFtaRole
+     * @return string
+     */
+    public static function getDeleteLinkComposant($paramIdFta, $paramIdChapitre, $paramIdFtaComposant, $paramSyntheseAction, $paramComeback, $paramIdFtaEtat, $paramAbreviationEtat, $paramIdFtaRole) {
+        foreach ($paramIdFtaComposant as $rows) {
+            $return[$rows] = 'modification_fiche_post.php?'
+                    . 'id_fta=' . $paramIdFta
+                    . '&id_fta_composant=' . $rows
+                    . '&action=suppression_composant'
+                    . '&id_fta_chapitre_encours=' . $paramIdChapitre
+                    . '&synthese_action=' . $paramSyntheseAction
+                    . '&comeback=' . $paramComeback
+                    . '&id_fta_etat=' . $paramIdFtaEtat
+                    . '&abreviation_fta_etat=' . $paramAbreviationEtat
+                    . '&id_fta_role=' . $paramIdFtaRole ;
+        }
+
+        return $return;
+    }
+
+    public static function getDetailLinkComposant($paramIdFta, $paramIdChapitre, $paramIdFtaComposant, $paramSyntheseAction, $paramComeback, $paramIdFtaEtat, $paramAbreviationEtat, $paramIdFtaRole, $paramProprietaire) {
+        foreach ($paramIdFtaComposant as $rows) {
+            $return[$rows] = 'modifier_composition.php?'
+                    . 'id_fta=' . $paramIdFta
+                    . '&id_fta_chapitre_encours=' . $paramIdChapitre
+                    . '&id_fta_composant=' . $rows
+                    . '&synthese_action=' . $paramSyntheseAction
+                    . '&proprietaire=' . $paramProprietaire
+                    . '&comeback=' . $paramComeback
+                    . '&id_fta_etat=' . $paramIdFtaEtat
+                    . '&abreviation_fta_etat=' . $paramAbreviationEtat
+                    . '&id_fta_role=' . $paramIdFtaRole 
+            ;
+        }
+        return $return;
+    }
 }
 
 ?>

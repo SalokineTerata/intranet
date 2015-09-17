@@ -44,11 +44,80 @@ class HtmlSubForm_R1N extends HtmlSubForm {
      */
     private $subFormModelClassName = NULL;
 
+    /**
+     * Lien ajouter en début d'édition
+     * @var string
+     */
+    private $Lien;
+
+    /**
+     * Lien ajouter en fin d'édition
+     * @var string
+     */
+    private $LienAjouter;
+
+    /**
+     * Lien de supresssion
+     * @var string
+     */
+    private $LienSuppression;
+
+    /**
+     * Lien de supresssion
+     * @var string
+     */
+    private $LienDetail;
+
+    /**
+     * Ajout du label du tableau
+     */
+    private $tableLabel;
+
     function __construct($paramArrayContent, $paramSubFormModelClassName, $paramLabel) {
         parent::__construct();
         parent::setLabel($paramLabel);
         $this->setArrayContent($paramArrayContent);
         $this->setSubFormModelClassName($paramSubFormModelClassName);
+    }
+
+    function getTableLabel() {
+        return $this->tableLabel;
+    }
+
+    function setTableLabel($tableLabel) {
+        $this->tableLabel = $tableLabel;
+    }
+
+    function getLienAjouter() {
+        return $this->LienAjouter;
+    }
+
+    function setLienAjouter($LienAjouter) {
+        $this->LienAjouter = $LienAjouter;
+    }
+
+    function getLien() {
+        return $this->Lien;
+    }
+
+    function setLien($Lien) {
+        $this->Lien = $Lien;
+    }
+
+    function getLienSuppression() {
+        return $this->LienSuppression;
+    }
+
+    function setLienSuppression($LienSuppression) {
+        $this->LienSuppression = $LienSuppression;
+    }
+
+    function getLienDetail() {
+        return $this->LienDetail;
+    }
+
+    function setLienDetail($LienDetail) {
+        $this->LienDetail = $LienDetail;
     }
 
     /**
@@ -68,6 +137,12 @@ class HtmlSubForm_R1N extends HtmlSubForm {
          */
         if ($this->getArrayContent()) {
             foreach ($this->getArrayContent() as $key => $valueArray) {
+
+                /**
+                 * Création de la ligne de label du tableau
+                 */
+                $return .= $this->getTableLabel();
+                $this->setTableLabel(NULL);
 
                 /**
                  * Création de la ligne HTML
@@ -97,6 +172,15 @@ class HtmlSubForm_R1N extends HtmlSubForm {
                  */
                 $htmlUrlToSubFormDetail = NULL;
 
+                /**
+                 * Contenu HTML du lien pointant vers le détail de la sous-table.
+                 */
+                $htmlUrlToSubFormAjout = NULL;
+                /**
+                 * Contenu HTML du lien pointant vers le détail de la sous-table.
+                 */
+                $htmlUrlToSubFormSuppression = NULL;
+
 
                 /**
                  * Parcours des nom des champs à afficher
@@ -120,9 +204,29 @@ class HtmlSubForm_R1N extends HtmlSubForm {
                     if ($isFirstField) {
                         $htmlField->getAttributesGlobal()->setIsIconNextEnabledToTrue();
                         /**
-                         * Création du lien de détail
+                         * Ajout d'un lien de suppression
                          */
+                        if ($this->getLienSuppression()) {
+                            foreach ($this->getLienSuppression() as $key2 => $rows) {
+                                if ($key2 == $key) {
+                                    $htmlField->getAttributesGlobal()->setHrefDeleteValue($rows);
+                                }
+                            }
+                        }
+                        /**
+                         * Ajout d'un lien de détail
+                         */
+                        if ($this->getLienDetail()) {
+                            foreach ($this->getLienDetail() as $key2 => $rows) {
+                                if ($key2 == $key) {
+                                    $htmlField->getAttributesGlobal()->setHrefNextValue($rows);
+                                }
+                            }
+                        }
+                        $htmlField->getAttributesGlobal()->setHrefAjoutValue($this->getLienAjouter());
+                        $htmlUrlToSubFormAjout = $htmlField->getAttributesGlobal()->getIconAddToHtml();
                         $htmlUrlToSubFormDetail = $htmlField->getAttributesGlobal()->getIconNextToHtml();
+                        $htmlUrlToSubFormSuppression = $htmlField->getAttributesGlobal()->getIconDeleteToHtml();
                         $isFirstField = FALSE;
                     }
                     $htmlField->getAttributesGlobal()->setIsIconNextEnabledToFalse();
@@ -154,6 +258,16 @@ class HtmlSubForm_R1N extends HtmlSubForm {
                  * Ajout du lien d'accès au détail du sous-formulaire
                  */
                 $return.='<td>' . $htmlUrlToSubFormDetail . '</td>';
+                if (parent::getIsEditable()) {
+                    /**
+                     * Ajout du lien d'accès au détail du sous-formulaire
+                     */
+                    $return.='<td>' . $htmlUrlToSubFormSuppression . '</td>';
+                    /**
+                     * Ajout du lien d'accès au détail du sous-formulaire
+                     */
+                    $return.='<td>' . $htmlUrlToSubFormAjout . '</td>';
+                }
             }
             /**
              * Fermeture de la ligne HTML
@@ -188,7 +302,10 @@ class HtmlSubForm_R1N extends HtmlSubForm {
     }
 
     public function getHtmlAddContent() {
-        return;
+        return $this->getHtmlResultSubFormBegin()
+                . $this->getHtmlResultSubFormAddNewLine()
+                . $this->getHtmlResultSubFormEnd()
+        ;
     }
 
     public function getHtmlViewedContent() {

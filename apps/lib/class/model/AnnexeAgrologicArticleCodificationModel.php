@@ -14,13 +14,10 @@ class AnnexeAgrologicArticleCodificationModel extends AbstractModel {
     const FIELDNAME_NOM_ANNEXE_AGRO_ART_COD = 'nom_annexe_agrologic_article_codification';
     const FIELDNAME_ABREVATION_ANNEXE_AGRO_ART_COD = 'abreviation_annexe_agrologic_article_codification';
 
-    
-    
-    
-    
-    
-    
-    
+    public function __construct($paramId = NULL, $paramIsCreateRecordsetInDatabaseIfKeyDoesntExist = AbstractModel::DEFAULT_IS_CREATE_RECORDSET_IN_DATABASE_IF_KEY_DOESNT_EXIST) {
+        parent::__construct($paramId, $paramIsCreateRecordsetInDatabaseIfKeyDoesntExist);
+    }
+
 }
 
 ?>

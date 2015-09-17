@@ -951,6 +951,9 @@ class Chapitre {
         $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_PRODUIT_TRANSFORME);
 
 
+        //Activer le système d'impression Base Etiquette Codesoft
+        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_ACTIVATION_CODESOFT);
+
         //Logo éco-emballage
         $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_LOGO_ECO_EMBALLAGE);
 
@@ -1045,8 +1048,8 @@ class Chapitre {
         //Conseil après ouverture
         $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_CONSEIL_APRES_OUVERTURE);
 
-        //Forcer libellé étiquette colis
-        $bloc.='<tr> <td>Forcer libellé étiquette colis ?</td></tr>';
+        //Forcer libellé étiquette colis ?:
+        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_VERROUILLAGE_LIBELLE_ETIQUETTE);
 
         //Conditionné sous atmosphère protectrice
         $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_CONDITION_SOUS_ATMOSPHERE);
@@ -1096,7 +1099,7 @@ class Chapitre {
         $ftaView->setIsEditable($isEditable);
         $ftaView->setFtaChapitreModelById(self::ID_CHAPITRE_IDENTITE);
 
-
+        $bloc.=$ftaView->getHtmlEtiquetteComposant($id_fta, self::$id_fta_chapitre, $synthese_action, self::$comeback, self::$id_fta_etat, self::$abrevation_etat, self::$id_fta_role, self::$is_editable);
         $bloc.='<tr> <td>Lequelle choisir  pour la durré de vie ?</td></tr>';
 
         //Durée de vie Production (en jours)
@@ -1196,39 +1199,18 @@ class Chapitre {
         $ftaView->setIsEditable($isEditable);
         $ftaView->setFtaChapitreModelById(self::ID_CHAPITRE_IDENTITE);
 
+        $bloc.=$ftaView->getHtmlEtiquetteComposant($id_fta, self::$id_fta_chapitre, $synthese_action, self::$comeback, self::$id_fta_etat, self::$abrevation_etat, self::$id_fta_role, self::$is_editable);
 
-        $bloc.='<tr> <td>Lequelle choisir  pour la durré de vie ?</td></tr>';
+        //Remarque
+        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_REMARQUE);
 
         //Durée de vie Production (en jours)
         $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_DUREE_DE_VIE_TECHNIQUE_PRODUCTION);
 
-        //Durée de Vie Maximale (en jour)
-        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_DUREE_DE_VIE_TECHNIQUE_MAXIMALE);
 
-        $bloc.='<tr> <td>Poids net étiqueté</td></tr>';
+        //Code Douane 
+        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_CODE_DOUANE_FTA);
 
-        $bloc.='<tr> <td>Quantité par colis</td></tr>';
-
-        $bloc.='<tr> <td>Dénomination commerciale de ventes</td></tr>';
-
-        $bloc.='<tr> <td>Dénomination légale de ventes</td></tr>';
-
-        //Composition Etiquette (1er paragraphe)
-        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_COMPOSITION1);
-
-        //Composition Etiquette (2nd paragraphe)
-        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_COMPOSITION2);
-
-
-        //Information complémentaire recto
-        $bloc.='<tr> <td>Information complémentaire recto ? Possible choix remarque ?</td></tr>';
-        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_REMARQUE);
-
-        $bloc.='<tr> <td>Décomposition du poids</td></tr>';
-
-        $bloc.='<tr> <td>Taille des ingrédients</td></tr>';
-
-        $bloc.='<tr> <td>Valeurs nutrionnelles</td></tr>';
 
         return $bloc;
     }
@@ -1463,7 +1445,7 @@ class Chapitre {
 
         $bloc.='<tr class=titre_principal><td class>Etiquettes Colis</td></tr>';
 
-        //Laisser l'informatique gérer la désignation ?:
+        //Forcer libellé étiquette colis ?:
         $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_VERROUILLAGE_LIBELLE_ETIQUETTE);
 
         //Libellé etiquette carton:
@@ -2267,7 +2249,7 @@ class Chapitre {
 
         //Recherche du droit d'accès correspondant
         if (
-              self::$synthese_action == FtaEtatModel::ETAT_AVANCEMENT_VALUE_EN_COURS  and self::$is_owner == true and (
+                self::$synthese_action == FtaEtatModel::ETAT_AVANCEMENT_VALUE_EN_COURS and self::$is_owner == true and (
                 (self::$ftaSuiviProjetModel->getDataField(FtaSuiviProjetModel::FIELDNAME_SIGNATURE_VALIDATION_SUIVI_PROJET)->getFieldValue() == 0 )
                 or ( self::$ftaSuiviProjetModel->getDataField(FtaSuiviProjetModel::FIELDNAME_SIGNATURE_VALIDATION_SUIVI_PROJET)->getFieldValue() == null)
                 )

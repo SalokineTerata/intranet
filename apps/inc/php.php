@@ -76,6 +76,9 @@ require_once('../lib/class/model/ClassificationArborescenceArticleCategorieConte
 require_once('../lib/class/model/ClassificationArborescenceArticleCategorieModel.php');
 require_once('../lib/class/model/ClassificationArborescenceArticleModel.php');
 require_once('../lib/class/model/ClassificationFtaModel.php');
+require_once('../lib/class/model/CodesoftEtiquettesLogoModel.php');
+require_once('../lib/class/model/CodesoftEtiquettesModel.php');
+require_once('../lib/class/model/CodesoftStyleParagrapheModel.php');
 require_once('../lib/class/model/DroitftModel.php');
 require_once('../lib/class/model/UserModel.php');
 require_once('../lib/class/model/FtaActionRoleModel.php');

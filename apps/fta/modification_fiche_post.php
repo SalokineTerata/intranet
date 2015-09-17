@@ -389,8 +389,13 @@ switch ($action) {
 
 //Suppression de la nomenclature
 //$id_fta_composition;
-        $id_fta_composant;
-        mysql_table_operation('fta_composant', 'delete');
+        $id_fta_composant = Lib::getParameterFromRequest(FtaComposantModel::KEYNAME);
+
+        /*
+         * Suppression du conditionnement
+         */
+
+        FtaComposantModel::deleteFtaComposant($id_fta_composant);
 
 //header ('Location: modification_fiche.php?id_fta=$id_fta&id_fta_chapitre_encours=$id_fta_chapitre_encours&synthese_action=$synthese_action');
         break;

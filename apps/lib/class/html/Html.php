@@ -197,7 +197,7 @@ class Html {
     public static function convertDataFieldToHtml(DatabaseDataField $paramDataField, $paramIsEditable) {
 
         $htmlObject = self::getHtmlObjectFromDataField($paramDataField);
-        $htmlObject->setIsEditable($paramIsEditable);
+        $htmlObject->setIsEditable($paramIsEditable);       
 
         return $htmlObject->getHtmlResult();
     }

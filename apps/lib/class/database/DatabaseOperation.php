@@ -812,7 +812,7 @@ class DatabaseOperation {
          * Construction de la requête SQL
          */
         $paramSelectClause = $primaryTableNameRN . '.' . $keyNameRN . ',' . $arrayFieldsNameToDisplay;
-        $paramTableClause = $primaryTableNameRN . DatabaseOperation::tableClauseRelationshipNtoN($secondaryTablesNamesAndidKeyValueRN, $keyValue);
+        $paramTableClause = $primaryTableNameRN . DatabaseOperation::tableClauseRelationship($secondaryTablesNamesAndidKeyValueRN, $keyValue);
         $paramWhereClauseRelationship = ' 1 ' . DatabaseOperation::whereClauseRelationshipNtoN($primaryTableNameRN, $secondaryTablesNamesAndidKeyValueRN, $keyValue);
 
         if ($arrayFieldsNameOrder) {
@@ -855,7 +855,7 @@ class DatabaseOperation {
         return $req;
     }
 
-    static private function tableClauseRelationshipNtoN($paramSecondaryTableNamesAndIdKeyValue, $paramKeyCheck) {
+    static private function tableClauseRelationship($paramSecondaryTableNamesAndIdKeyValue, $paramKeyCheck) {
         if ($paramSecondaryTableNamesAndIdKeyValue) {
             foreach ($paramSecondaryTableNamesAndIdKeyValue as $key => $value) {
                 if ($paramKeyCheck == $key) {
@@ -867,5 +867,5 @@ class DatabaseOperation {
         }
         return $req;
     }
-
+   
 }

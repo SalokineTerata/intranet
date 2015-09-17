@@ -163,9 +163,9 @@ if ($id_annexe_emballage) {
     $reference_fournisseur_annexe_emballage = $annexeEmballageModel->getDataField($champ)->getFieldValue();
 }
 if ($proprietaire) {
-    $value = "<input type=text name=" . $champ . " value=" . $reference_fournisseur_annexe_emballage . " size=50/>";
+    $value = "<input type=text name=" . $champ . " value='" . $reference_fournisseur_annexe_emballage . "' size=50/>";
 } else {
-    $value = $reference_fournisseur_annexe_emballage;
+    $value = "'".$reference_fournisseur_annexe_emballage."'";
 }
 
 $bloc .= $value
@@ -179,9 +179,9 @@ if ($id_annexe_emballage) {
     $poids_annexe_emballage = $annexeEmballageModel->getDataField($champ)->getFieldValue();
 }
 if ($proprietaire) {
-    $value = "<input type=text name=" . $champ . " value=" . $poids_annexe_emballage . " size=50/>";
+    $value = "<input type=text name=" . $champ . " value='" . $poids_annexe_emballage . "' size=50/>";
 } else {
-    $value = $poids_annexe_emballage;
+    $value = "'".$poids_annexe_emballage."'";
     ;
 }
 
@@ -197,9 +197,9 @@ if ($id_annexe_emballage) {
 }
 if ($proprietaire) {
 
-    $value = "<input type=text name=" . $champ . " value=" . $longueur_annexe_emballage . " size=50/>";
+    $value = "<input type=text name=" . $champ . " value='" . $longueur_annexe_emballage . "' size=50/>";
 } else {
-    $value = $longueur_annexe_emballage;
+    $value = "'".$longueur_annexe_emballage."'";
 }
 
 $bloc .= $value
@@ -213,9 +213,9 @@ if ($id_annexe_emballage) {
     $largeur_annexe_emballage = $annexeEmballageModel->getDataField($champ)->getFieldValue();
 }
 if ($proprietaire) {
-    $value = "<input type=text name=" . $champ . " value=" . $largeur_annexe_emballage . " size=50/>";
+    $value = "<input type=text name=" . $champ . " value='" . $largeur_annexe_emballage . "' size=50/>";
 } else {
-    $value = $largeur_annexe_emballage;
+    $value = "'".$largeur_annexe_emballage."'";
 }
 
 $bloc .= $value
@@ -229,9 +229,9 @@ if ($id_annexe_emballage) {
     $hauteur_annexe_emballage = $annexeEmballageModel->getDataField($champ)->getFieldValue();
 }
 if ($proprietaire) {
-    $value = "<input type=text name=" . $champ . " value=" . $hauteur_annexe_emballage . " size=50/>";
+    $value = "<input type=text name=" . $champ . " value='" . $hauteur_annexe_emballage . "' size=50/>";
 } else {
-    $value = $hauteur_annexe_emballage;
+    $value = "'".$hauteur_annexe_emballage."'";
 }
 
 $bloc .= $value
@@ -245,9 +245,9 @@ if ($id_annexe_emballage) {
     $epaisseur_annexe_emballage = $annexeEmballageModel->getDataField($champ)->getFieldValue();
 }
 if ($proprietaire) {
-    $value = "<input type=text name=" . $champ . " value=" . $epaisseur_annexe_emballage . " size=50/>";
+    $value = "<input type=text name=" . $champ . " value='" . $epaisseur_annexe_emballage . "' size=50/>";
 } else {
-    $value = $epaisseur_annexe_emballage;
+    $value = "'".$epaisseur_annexe_emballage."'";
 }
 
 $bloc .= $value
@@ -261,9 +261,9 @@ if ($id_annexe_emballage) {
     $quantite_par_couche_annexe_emballage = $annexeEmballageModel->getDataField($champ)->getFieldValue();
 }
 if ($proprietaire) {
-    $value = "<input type=text name=" . $champ . " value=" . $quantite_par_couche_annexe_emballage . " size=50/>";
+    $value = "<input type=text name=" . $champ . " value='" . $quantite_par_couche_annexe_emballage . "' size=50/>";
 } else {
-    $value = $quantite_par_couche_annexe_emballage;
+    $value = "'".$quantite_par_couche_annexe_emballage."'";
 }
 
 $bloc .= $value
@@ -277,9 +277,9 @@ if ($id_annexe_emballage) {
     $nombre_couche_annexe_emballage = $annexeEmballageModel->getDataField($champ)->getFieldValue();
 }
 if ($proprietaire) {
-    $value = "<input type=text name=" . $champ . " value=" . $nombre_couche_annexe_emballage . " size=50/>";
+    $value = "<input type=text name=" . $champ . " value='" . $nombre_couche_annexe_emballage . "' size=50/>";
 } else {
-    $value = $nombre_couche_annexe_emballage;
+    $value = "'".$nombre_couche_annexe_emballage."'";
 }
 
 $bloc .= $value

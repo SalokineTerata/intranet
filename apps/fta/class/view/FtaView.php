@@ -208,10 +208,10 @@ class FtaView {
 
     /**
      * Affiche la liste des espaces de travail pour lesquel l'utilisateur connecté à les droits d'accès
-     * @param type $paramIdUser
-     * @param type $paramIsEditable
-     * @param type $paramIdFta
-     * @return type
+     * @param int $paramIdUser
+     * @param bolean $paramIsEditable
+     * @param int $paramIdFta
+     * @return string
      */
     public function ListeWorkflowByAcces($paramIdUser, $paramIsEditable, $paramIdFta) {
         $HtmlList = new HtmlListSelect();
@@ -224,10 +224,10 @@ class FtaView {
 
     /**
      * Affiche la liste des site de production pour lesquel l'utilisateur connecté à les droits d'accès
-     * @param type $paramIdUser
-     * @param type $paramIsEditable
-     * @param type $paramIdFta
-     * @return type
+     * @param int $paramIdUser
+     * @param bolean $paramIsEditable
+     * @param int $paramIdFta
+     * @return string
      */
     public function ListeSiteByAcces($paramIdUser, $paramIsEditable, $paramIdFta) {
         $HtmlList = new HtmlListSelect();
@@ -239,15 +239,15 @@ class FtaView {
     }
 
     /**
-     * 
-     * @param type $paramIdFta
-     * @param type $paramChapitre
-     * @param type $paramSyntheseAction
-     * @param type $paramComeback
-     * @param type $paramIdFtaEtat
-     * @param type $paramAbreviationEtat
-     * @param type $paramIdFtaRole
-     * @return type
+     * Tableau des emballages par UVC
+     * @param int $paramIdFta
+     * @param int $paramChapitre
+     * @param string $paramSyntheseAction
+     * @param int $paramComeback
+     * @param int $paramIdFtaEtat
+     * @param string $paramAbreviationEtat
+     * @param int $paramIdFtaRole
+     * @return string
      */
     public function getHtmlEmballageUVC($paramIdFta, $paramChapitre, $paramSyntheseAction, $paramComeback, $paramIdFtaEtat, $paramAbreviationEtat, $paramIdFtaRole) {
         $annexeEmballageGroupeTypeModel = new AnnexeEmballageGroupeTypeModel(AccueilFta::VALUE_1);
@@ -334,15 +334,15 @@ class FtaView {
     }
 
     /**
-     * 
-     * @param type $paramIdFta
-     * @param type $paramChapitre
-     * @param type $paramSyntheseAction
-     * @param type $paramComeback
-     * @param type $paramIdFtaEtat
-     * @param type $paramAbreviationEtat
-     * @param type $paramIdFtaRole
-     * @return type
+     * Tableau des emballages par Colis
+     * @param int $paramIdFta
+     * @param int $paramChapitre
+     * @param string $paramSyntheseAction
+     * @param int $paramComeback
+     * @param int $paramIdFtaEtat
+     * @param string $paramAbreviationEtat
+     * @param int $paramIdFtaRole
+     * @return string
      */
     public function getHtmlEmballageParColis($paramIdFta, $paramChapitre, $paramSyntheseAction, $paramComeback, $paramIdFtaEtat, $paramAbreviationEtat, $paramIdFtaRole) {
         $annexeEmballageGroupeTypeModel = new AnnexeEmballageGroupeTypeModel(AccueilFta::VALUE_2);
@@ -425,15 +425,15 @@ class FtaView {
     }
 
     /**
-     * 
-     * @param type $paramIdFta
-     * @param type $paramChapitre
-     * @param type $paramSyntheseAction
-     * @param type $paramComeback
-     * @param type $paramIdFtaEtat
-     * @param type $paramAbreviationEtat
-     * @param type $paramIdFtaRole
-     * @return type
+     * Tableau des emballages du Colis
+     * @param int $paramIdFta
+     * @param int $paramChapitre
+     * @param string $paramSyntheseAction
+     * @param int $paramComeback
+     * @param int $paramIdFtaEtat
+     * @param string $paramAbreviationEtat
+     * @param int $paramIdFtaRole
+     * @return string
      */
     public function getHtmlEmballageDuColis($paramIdFta, $paramChapitre, $paramSyntheseAction, $paramComeback, $paramIdFtaEtat, $paramAbreviationEtat, $paramIdFtaRole) {
         $annexeEmballageGroupeTypeModel = new AnnexeEmballageGroupeTypeModel(AccueilFta::VALUE_3);
@@ -520,15 +520,15 @@ class FtaView {
     }
 
     /**
-     * 
-     * @param type $paramIdFta
-     * @param type $paramChapitre
-     * @param type $paramSyntheseAction
-     * @param type $paramComeback
-     * @param type $paramIdFtaEtat
-     * @param type $paramAbreviationEtat
-     * @param type $paramIdFtaRole
-     * @return type
+     * Tableau des emballages par Palette
+     * @param int $paramIdFta
+     * @param int $paramChapitre
+     * @param string $paramSyntheseAction
+     * @param int $paramComeback
+     * @param int $paramIdFtaEtat
+     * @param string $paramAbreviationEtat
+     * @param int $paramIdFtaRole
+     * @return string
      */
     public function getHtmlEmballagePalette($paramIdFta, $paramChapitre, $paramSyntheseAction, $paramComeback, $paramIdFtaEtat, $paramAbreviationEtat, $paramIdFtaRole) {
         $annexeEmballageGroupeTypeModel = new AnnexeEmballageGroupeTypeModel();
@@ -544,8 +544,6 @@ class FtaView {
                 $idAnnexeEmballage = $rowsFtaConditionnement[FtaConditionnementModel::FIELDNAME_ID_ANNEXE_EMBALLAGE];
                 $idAnnexeEmballageGroupeType = $rowsFtaConditionnement[FtaConditionnementModel::FIELDNAME_ID_ANNEXE_EMBALLAGE_GROUPE_TYPE];
                 $arrayIdFtaCondtionnement[] = $idFtaCondtionnement;
-
-
 
                 /*
                  * Initialisation des modèles 
@@ -574,9 +572,9 @@ class FtaView {
 
                 $tablesNameAndIdForeignKeyOfFtaConditionnement = ($tablesNameAndIdForeignKeyOfFtaConditionnementtmp + $tablesNameAndIdForeignKeyOfFtaConditionnementTmp);
                 $tablesNameAndIdForeignKeyOfFtaConditionnementtmp = $tablesNameAndIdForeignKeyOfFtaConditionnement;
-                /*
 
-                  /*
+
+                /*
                  * Vérifie si pour la Fta en cours les données Fta conditionement sont renseigné
                  */
                 if ($arrayFtaConditionnement) {
@@ -609,6 +607,41 @@ class FtaView {
             $htmlEmballagePalette->setRightToAdd(TRUE);
             $htmlEmballagePalette->setLien(FtaConditionnementModel::getAddLinkBeforeConditionnement($paramIdFta, $paramChapitre, AccueilFta::VALUE_4, $paramSyntheseAction, $paramComeback, $paramIdFtaEtat, $paramAbreviationEtat, $paramIdFtaRole));
             $return .= $htmlEmballagePalette->getHtmlResult();
+        }
+        return $return;
+    }
+
+    public function getHtmlEtiquetteComposant($paramIdFta, $paramChapitre, $paramSyntheseAction, $paramComeback, $paramIdFtaEtat, $paramAbreviationEtat, $paramIdFtaRole, $paramEditable) {
+
+        /*
+         * Récuperation des élements clé de la table fta_composant
+         */
+        if ($paramEditable) {
+            $proprietaire = AccueilFta::VALUE_1;
+        } else {
+            $proprietaire = AccueilFta::VALUE_0;
+        }
+        $FtaComposant = FtaComposantModel::getIdFtaComposant($paramIdFta);
+        if ($FtaComposant) {
+            foreach ($FtaComposant as $rowsFtaComposant) {
+                $idFtaComposant = $rowsFtaComposant[FtaComposantModel::KEYNAME];
+                $arrayIdFtaComposant[] = $idFtaComposant;
+            }
+
+            $htmlEtiquetteComposant = Html::getHtmlObjectFromDataField($this->getModel()->getDataField(FtaModel::FIELDNAME_VIRTUAL_FTA_COMPOSANT));
+            $htmlEtiquetteComposant->setIsEditable($this->getIsEditable());
+            $htmlEtiquetteComposant->setLienAjouter(FtaComposantModel::getAddAfterLinkComposant($paramIdFta, $paramChapitre, $paramSyntheseAction, $paramComeback, $paramIdFtaEtat, $paramAbreviationEtat, $paramIdFtaRole, $proprietaire));
+            $htmlEtiquetteComposant->setLienDetail(FtaComposantModel::getDetailLinkComposant($paramIdFta, $paramChapitre, $arrayIdFtaComposant, $paramSyntheseAction, $paramComeback, $paramIdFtaEtat, $paramAbreviationEtat, $paramIdFtaRole, $proprietaire));
+            $htmlEtiquetteComposant->setLienSuppression(FtaComposantModel::getDeleteLinkComposant($paramIdFta, $paramChapitre, $arrayIdFtaComposant, $paramSyntheseAction, $paramComeback, $paramIdFtaEtat, $paramAbreviationEtat, $paramIdFtaRole));
+            $htmlEtiquetteComposant->setTableLabel(FtaComposantModel::getTableComposantLabel($idFtaComposant));
+            $return .= $htmlEtiquetteComposant->getHtmlResult();
+        } else {
+            $htmlEtiquetteComposant = Html::getHtmlObjectFromDataField($this->getModel()->getDataField(FtaModel::FIELDNAME_VIRTUAL_FTA_COMPOSANT));
+            $htmlEtiquetteComposant->setIsEditable($this->getIsEditable());
+            $htmlEtiquetteComposant->setRightToAdd(TRUE);
+            $htmlEtiquetteComposant->getAttributesGlobal()->setHrefAjoutValue(FtaComposantModel::getAddLinkComposant($paramIdFta, $paramChapitre, $paramSyntheseAction, $paramComeback, $paramIdFtaEtat, $paramAbreviationEtat, $paramIdFtaRole, $proprietaire));
+            $htmlEtiquetteComposant->setLien(FtaComposantModel::getAddLinkComposant($paramIdFta, $paramChapitre, $paramSyntheseAction, $paramComeback, $paramIdFtaEtat, $paramAbreviationEtat, $paramIdFtaRole, $proprietaire));
+            $return .= $htmlEtiquetteComposant->getHtmlResult();
         }
         return $return;
     }

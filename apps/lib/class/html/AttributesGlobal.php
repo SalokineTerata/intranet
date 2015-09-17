@@ -25,6 +25,7 @@
 class AttributesGlobal extends StandardGlobalAttributes {
 
     const DEFAULT_HTML_IMAGE_ADD = "<img src=../lib/images/plus.png width=22  border=0 valign=middle halign=right />";
+    const DEFAULT_HTML_IMAGE_DELETE = "<img src=../lib/images/supprimer.png width=22  border=0 valign=middle halign=right />";
     const DEFAULT_HTML_IMAGE_FAILED = "<img src=../lib/images/bouton_croix_rouge.png width=22  border=0 valign=middle halign=right />";
     const DEFAULT_HTML_IMAGE_LOADING = "<img src=../lib/images/loading.gif width=22  border=0 valign=middle halign=right />";
     const DEFAULT_HTML_IMAGE_NEXT = "<img src=../lib/images/next.png width=22  border=0 valign=middle halign=right />";
@@ -33,6 +34,7 @@ class AttributesGlobal extends StandardGlobalAttributes {
     const PREFIXE_ID_ROW = "ROW";
     const PREFIXE_ID_DATA = "DATA";
     const PREFIXE_ID_ICON_ADD = "ADD";
+    const PREFIXE_ID_ICON_DELETE = "DELETE";
     const PREFIXE_ID_ICON_NEXT = "NEXT";
     const PREFIXE_ID_ICON_STATUS = "STATUS";
     const PREFIXE_ID_ICON_UNDO = "ICON_UNDO";
@@ -53,6 +55,14 @@ class AttributesGlobal extends StandardGlobalAttributes {
      * Lien lorsqu'on clique sur suivant.
      */
     private $hrefNextValue;
+    /**
+     * Lien lorsqu'on clique supprime.
+     */
+    private $hrefDeleteValue;
+    /**
+     * Lien lorsqu'on clique ajout.
+     */
+    private $hrefAjoutValue;
 
     public function __construct() {
         parent::__construct();
@@ -67,7 +77,24 @@ class AttributesGlobal extends StandardGlobalAttributes {
     function setHrefNextValue($hrefNextValue) {
         $this->hrefNextValue = $hrefNextValue;
     }
+    
+    function getHrefDeleteValue() {
+        return $this->hrefDeleteValue;
+    }
 
+    function getHrefAjoutValue() {
+        return $this->hrefAjoutValue;
+    }
+
+    function setHrefDeleteValue($hrefDeleteValue) {
+        $this->hrefDeleteValue = $hrefDeleteValue;
+    }
+
+    function setHrefAjoutValue($hrefAjoutValue) {
+        $this->hrefAjoutValue = $hrefAjoutValue;
+    }
+
+    
     function getIsIconAddEnabled() {
         return $this->isIconAddEnabled;
     }
@@ -103,6 +130,9 @@ class AttributesGlobal extends StandardGlobalAttributes {
     public function getIdAdd() {
         return self::PREFIXE_ID_ICON_ADD . '_' . $this->getId()->getValue();
     }
+    public function getIdDelete() {
+        return self::PREFIXE_ID_ICON_DELETE . '_' . $this->getId()->getValue();
+    }
 
     public function getIdNext() {
         return self::PREFIXE_ID_ICON_NEXT . '_' . $this->getId()->getValue();
@@ -136,6 +166,12 @@ class AttributesGlobal extends StandardGlobalAttributes {
                         , $this->getIdAdd()
         );
     }
+    public function getIdDeleteToHtml() {
+        return Html::getHtmlParameter(
+                        $this->getId()->getName()
+                        , $this->getIdDelete()
+        );
+    }
 
     public function getIdNextToHtml() {
         return Html::getHtmlParameter(
@@ -163,8 +199,18 @@ class AttributesGlobal extends StandardGlobalAttributes {
      * @param string
      */
     public function getIconAddToHtml() {
-        return "<a href=\"dispatcher.php\" >"
+        return "<a href=\"" . $this->getHrefAjoutValue() . "\" >"
                 . "<span " . $this->getIdAddToHtml() . ">" . self::DEFAULT_HTML_IMAGE_ADD . "</span>"
+                . "</a>"
+        ;
+    }
+    /**
+     * Retourne le code HTML affichant les icones d'action en fin de champs de saisie.
+     * @param string
+     */
+    public function getIconDeleteToHtml() {
+        return "<a href=\"" . $this->getHrefDeleteValue() . "\" >"
+                . "<span " . $this->getIdAddToHtml() . ">" . self::DEFAULT_HTML_IMAGE_DELETE. "</span>"
                 . "</a>"
         ;
     }

@@ -74,6 +74,11 @@ class HtmlSubForm_RNN extends HtmlSubForm {
      * @var string
      */
     private $LienSuppression;
+    /**
+     * Lien de supresssion
+     * @var string
+     */
+    private $LienDetail;
 
     /**
      * Ajout du label du tableau
@@ -146,7 +151,15 @@ class HtmlSubForm_RNN extends HtmlSubForm {
         $this->LienSuppression = $LienSuppression;
     }
 
-    /**
+    function getLienDetail() {
+        return $this->LienDetail;
+    }
+
+    function setLienDetail($LienDetail) {
+        $this->LienDetail = $LienDetail;
+    }
+
+        /**
      * Retourne le rendu HTML du coeur du sous-formulaire
      * @return string
      */
@@ -253,6 +266,18 @@ class HtmlSubForm_RNN extends HtmlSubForm {
                             }
                         }
                     }
+                    /**
+                     * Ajout d'un lien de détail
+                     */
+                    if ($this->getLienDetail()) {
+                        foreach ($this->getLienDetail() as $key2 => $rows) {
+                            if ($key2 == $key) {
+                                $lienDetail = $rows;
+                            }
+                        }
+                    }
+
+                    $return.="<td>" . $lienDetail . "</td>";
 
                     $return.="<td>" . $lienDeSupression . "</td>";
 

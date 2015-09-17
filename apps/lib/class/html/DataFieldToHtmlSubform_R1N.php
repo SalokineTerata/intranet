@@ -42,6 +42,7 @@ class DataFieldToHtmlSubform_R1N extends HtmlSubForm_R1N {
         );
         $this->setContentLocked(explode(',', $paramDataField->getFieldsToLock()));
         $this->setIsRightToAdd($paramDataField->getRightToAdd());
+        
     }
 
 }

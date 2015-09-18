@@ -17,6 +17,7 @@ class FtaEtatModel extends AbstractModel {
     const ETAT_ABREVIATION_VALUE_PRESENTATION = 'P';
     const ETAT_ABREVIATION_VALUE_RETIRE = 'R';
     const ETAT_ABREVIATION_VALUE_VALIDE = 'V';
+    const ETAT_ABREVIATION_VALUE_WORKFLOW = 'W';
     const ETAT_AVANCEMENT_VALUE_ALL = 'all';
     const ETAT_AVANCEMENT_VALUE_ATTENTE = 'attente';
     const ETAT_AVANCEMENT_VALUE_EFFECTUES = 'correction';

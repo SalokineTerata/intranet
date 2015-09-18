@@ -77,6 +77,20 @@ class FtaTransitionModel {
                 $nouveau_maj_fta = "";
 
                 break;
+            case $paramAbreviationFtaTransition == FtaEtatModel::ETAT_ABREVIATION_VALUE_WORKFLOW:
+                //Dans le cas d'une mise à jour, récupération des Chapitres à corriger.
+
+                $liste_chapitre_maj_fta = ";";
+                foreach ($paramListeChapitres as $rowsChapitre) {
+                    //Parcours des chapitres
+                    //Si le chapitre a été sélectionné, on l'enregistre dans le tableau de résultat
+                    $liste_chapitre_maj_fta.=$rowsChapitre . ";";
+                }
+
+                //Mise à  jour de la table Fta_suivie_projet
+                FtaSuiviProjetModel::initFtaSuiviProjet($paramIdFta);
+                $paramAbreviationFtaTransition = FtaEtatModel::ETAT_ABREVIATION_VALUE_MODIFICATION;
+                break;
 
             case $paramAbreviationFtaTransition == FtaEtatModel::ETAT_ABREVIATION_VALUE_MODIFICATION: //Passer en Initialisation
                 //Vérification que le dossier n'a pas une fiche déjà en Mise à jour
@@ -276,18 +290,18 @@ class FtaTransitionModel {
                 $logTransition.="\n\nDiffusion Globale Activée";
             } else {
                 //Log de la diffusion globale
-                $logTransition.="\n\nDiffusion Globale Désactivée";               
+                $logTransition.="\n\nDiffusion Globale Désactivée";
             }
 
 
-            
+
             $arrayIdIntranetActions = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
                             ' SELECT ' . FtaActionSiteModel::TABLENAME . '.' . FtaActionSiteModel::FIELDNAME_ID_INTRANET_ACTIONS
                             . ' FROM ' . FtaActionSiteModel::TABLENAME
                             . ' WHERE ' . FtaActionSiteModel::FIELDNAME_ID_SITE . '=' . $rowsFta[FtaModel::FIELDNAME_SITE_ASSEMBLAGE]
                             . ' AND ' . FtaActionSiteModel::FIELDNAME_ID_FTA_WROKFLOW . ' =' . $rowsFta[FtaModel::FIELDNAME_WORKFLOW]
-                    );
-                            
+            );
+
             if ($arrayIdIntranetActions) {
                 foreach ($arrayIdIntranetActions as $rowsIdIntranetActions) {
                     $IdIntranetActions[] = $rowsIdIntranetActions[IntranetDroitsAccesModel::FIELDNAME_ID_INTRANET_ACTIONS];
@@ -305,16 +319,16 @@ class FtaTransitionModel {
                  * Liste des utilisateur ayant le droits de diffusion sur le module Fta
                  */
                 $arrayListeDiffusion = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
-                        "SELECT DISTINCT " . UserModel::TABLENAME . "." . UserModel::KEYNAME
-                        . " FROM " . UserModel::TABLENAME
-                        . ", " . IntranetDroitsAccesModel::TABLENAME
-                        . " WHERE " . UserModel::TABLENAME . "." . UserModel::KEYNAME
-                        . " = " . IntranetDroitsAccesModel::TABLENAME . "." . IntranetDroitsAccesModel::FIELDNAME_ID_USER                                    
-                        . " AND " . UserModel::TABLENAME . "." . UserModel::FIELDNAME_ACTIF . " ='oui' "                                                                    
-                        . " AND " . IntranetDroitsAccesModel::TABLENAME . "." . IntranetDroitsAccesModel::FIELDNAME_ID_INTRANET_MODULES . " = 19"
-                        . " AND " . IntranetDroitsAccesModel::TABLENAME . "." . IntranetDroitsAccesModel::FIELDNAME_NIVEAU_INTRANET_DROITS_ACCES . " = 1 "                                   
-                        . ' AND ' . IntranetDroitsAccesModel::FIELDNAME_ID_INTRANET_ACTIONS . '=' . AccueilFta::VALUE_3
-                        );        
+                                "SELECT DISTINCT " . UserModel::TABLENAME . "." . UserModel::KEYNAME
+                                . " FROM " . UserModel::TABLENAME
+                                . ", " . IntranetDroitsAccesModel::TABLENAME
+                                . " WHERE " . UserModel::TABLENAME . "." . UserModel::KEYNAME
+                                . " = " . IntranetDroitsAccesModel::TABLENAME . "." . IntranetDroitsAccesModel::FIELDNAME_ID_USER
+                                . " AND " . UserModel::TABLENAME . "." . UserModel::FIELDNAME_ACTIF . " ='oui' "
+                                . " AND " . IntranetDroitsAccesModel::TABLENAME . "." . IntranetDroitsAccesModel::FIELDNAME_ID_INTRANET_MODULES . " = 19"
+                                . " AND " . IntranetDroitsAccesModel::TABLENAME . "." . IntranetDroitsAccesModel::FIELDNAME_NIVEAU_INTRANET_DROITS_ACCES . " = 1 "
+                                . ' AND ' . IntranetDroitsAccesModel::FIELDNAME_ID_INTRANET_ACTIONS . '=' . AccueilFta::VALUE_3
+                );
                 foreach ($arrayListeDiffusion as $value) {
                     $idUser[] = $value[UserModel::KEYNAME];
                 }
@@ -327,13 +341,13 @@ class FtaTransitionModel {
                         . ", " . IntranetActionsModel::TABLENAME
                         //Début Droits d'accès de diffusion
                         . " WHERE " . UserModel::TABLENAME . "." . UserModel::KEYNAME
-                        . " = " . IntranetDroitsAccesModel::TABLENAME . "." . IntranetDroitsAccesModel::FIELDNAME_ID_USER                                   
-                        . " AND " . UserModel::TABLENAME . "." . UserModel::FIELDNAME_ACTIF . " ='oui' "                                                        
-                        . " AND ( 0 " . UserModel::AddIdUser($idUser) . ')'                        
+                        . " = " . IntranetDroitsAccesModel::TABLENAME . "." . IntranetDroitsAccesModel::FIELDNAME_ID_USER
+                        . " AND " . UserModel::TABLENAME . "." . UserModel::FIELDNAME_ACTIF . " ='oui' "
+                        . " AND ( 0 " . UserModel::AddIdUser($idUser) . ')'
                         . " AND " . IntranetDroitsAccesModel::TABLENAME . "." . IntranetDroitsAccesModel::FIELDNAME_ID_INTRANET_ACTIONS
                         . " = " . IntranetActionsModel::TABLENAME . "." . IntranetActionsModel::KEYNAME      //Liaison
-                        . " AND " . IntranetDroitsAccesModel::TABLENAME . "." . IntranetDroitsAccesModel::FIELDNAME_NIVEAU_INTRANET_DROITS_ACCES . " = 1 "                                   
-                        . ' AND ( 0 ' . IntranetActionsModel::AddIdIntranetAction($IdIntranetActions) . ')'                                
+                        . " AND " . IntranetDroitsAccesModel::TABLENAME . "." . IntranetDroitsAccesModel::FIELDNAME_NIVEAU_INTRANET_DROITS_ACCES . " = 1 "
+                        . ' AND ( 0 ' . IntranetActionsModel::AddIdIntranetAction($IdIntranetActions) . ')'
 
 
                 ;
@@ -513,7 +527,8 @@ class FtaTransitionModel {
                 . "\n"
                 . "INFORMATIONS DE DEBUGGAGE:\n"
                 . $logTransition
-        ; {
+        ;
+        {
             $expediteur = $prenom . " " . $nom . " <" . $mail . ">";
             envoismail($sujetmail, $corp, $mail, $expediteur, $typeMail);
         }

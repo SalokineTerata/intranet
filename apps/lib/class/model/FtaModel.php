@@ -267,7 +267,7 @@ class FtaModel extends AbstractModel {
                         $this->getModelFtaEtat()->getDataField(FtaEtatModel::FIELDNAME_ABREVIATION)->getFieldValue()
         );
         $sqlDataIdFtaCategorieValue = DatabaseOperation::convertDataForQuery(
-                        $this->getModelFtaCategorie()->getKeyValue()
+                        $this->getModelFtaWorkflow()->getKeyValue()
         );
 
         //Sélection de tous les processus appartenant au cycle de vie de la FTA

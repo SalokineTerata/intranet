@@ -63,6 +63,9 @@ $demande_abreviation_fta_transition = Lib::getParameterFromRequest('demande_abre
  * 
  */
 $ftaModel = new FtaModel($idFta);
+$globalConfig = new GlobalConfig();
+$idUser = $globalConfig->getAuthenticatedUser()->getKeyValue();
+$ftaView = new FtaView($ftaModel);
 $dataFieldCommentaire = $ftaModel->getDataField(FtaModel::FIELDNAME_COMMENTAIRE_MAJ_FTA);
 $htmlFieldCommentaire = Html::getHtmlObjectFromDataField($dataFieldCommentaire);
 $htmlFieldCommentaire->getAttributesGlobal()->setIsIconNextEnabledToFalse();
@@ -152,7 +155,7 @@ foreach ($arrayFtaTransition as $rowsFtaTransition) {
 $tableau_transition.='</select>';
 
 //Tableau des chapitres
-if ($action == 'I') {
+if ($action == 'I' or $action == 'W') {
     $tableau_chapitre = '<' . $html_table . '>'
             . '<tr class=titre><td>Liste des Chapitres pouvant être mis à jour</td></tr>'
             . '<tr><td><' . $html_table . '>'
@@ -177,6 +180,18 @@ if ($action == 'I') {
     $tableau_chapitre.= '</table></td></tr>'
             . '</table>'
     ;
+}
+//Tableau des chapitres
+if ($action == 'W') {
+    $listeDesWorkflow = '<' . $html_table . '>'
+            . '<tr class=titre><td>Liste des espaces de travail pouvant être mis à jour</td></tr>'
+            . '<tr><td><' . $html_table . '>'
+    ;
+
+    /*
+     * Worflow de FTA
+     */
+    $listeDesWorkflow.=$ftaView->ListeWorkflowByAcces($idUser, TRUE, $idFta);
 }
 
 
@@ -268,7 +283,7 @@ echo '
                  ' . $tableau_transition . '
             </td>
             <td>
-                 ' . $tableau_chapitre . '
+                 ' . $tableau_chapitre . ' ' . $listeDesWorkflow . '
             </td>
         </tr>
     </table>

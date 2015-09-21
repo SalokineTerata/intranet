@@ -8,7 +8,10 @@
 ////include ("./functions.js");
       require_once '../inc/main.php';
 
-
+$action = Lib::getParameterFromRequest('action');
+$id_classification_arborescence_article = Lib::getParameterFromRequest(ClassificationArborescenceArticleModel::KEYNAME);
+$id_classification_arborescence_article_categorie_contenu = Lib::getParameterFromRequest(ClassificationArborescenceArticleModel::FIELDNAME_ID_CLASSIFICATION_ARBORESCENCE_ARTICLE_CATEGORIE_CONTENU);
+$liste_id = Lib::getParameterFromRequest('liste_id');
 /*
 -----------------
  ACTION A TRAITER

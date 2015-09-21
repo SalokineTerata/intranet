@@ -174,15 +174,15 @@ $result_fte = DatabaseOperation::convertSqlStatementWithoutKeyToArray($req);
 if ($result_fte) {
     //Spécialisation suivant le type
     $id_annexe_emballage_groupe = $selection_groupe;
-    mysql_table_load("annexe_emballage_groupe");
-    $id_annexe_emballage_groupe_type;
+    $annexeEmballageGroupeModel = new AnnexeEmballageGroupeModel($id_annexe_emballage_groupe);
+    $id_annexe_emballage_groupe_type = $annexeEmballageGroupeModel->getDataField(AnnexeEmballageGroupeModel::FIELDNAME_ID_ANNEXE_EMBALLAGE_GROUPE_CONFIGURATION)->getFieldValue();
 
     //Construction des entête du tableau
     $bloc = "<$html_table><tr class=titre><td></td>"
-            . "<td>" . mysql_field_desc("fte_fournisseur", "nom_fte_fournisseur") . "</td>"
-            . "<td>" . mysql_field_desc("annexe_emballage", "reference_fournisseur_annexe_emballage") . "</td>"
+            . "<td>" . DatabaseDescription::getFieldDocLabel("fte_fournisseur", "nom_fte_fournisseur") . "</td>"
+            . "<td>" . DatabaseDescription::getFieldDocLabel("annexe_emballage", "reference_fournisseur_annexe_emballage") . "</td>"
             . "<td>L x l x h (en mm)</td>"
-            . "<td>" . mysql_field_desc("annexe_emballage", "poids_annexe_emballage") . "</td>"
+            . "<td>" . DatabaseDescription::getFieldDocLabel("annexe_emballage", "poids_annexe_emballage") . "</td>"
     ;
     if ($id_annexe_emballage_groupe_type == 3 or $selection_groupe == -1) {
         $bloc .="<td>Palettisation</td>";

@@ -40,6 +40,9 @@ $designationCommercialeFta = Lib::getParameterFromRequest(FtaModel::FIELDNAME_DE
 $abreviationFtaEtat = Lib::getParameterFromRequest(FtaEtatModel::FIELDNAME_ABREVIATION);
 $siteDeProduction = Lib::getParameterFromRequest(GeoModel::KEYNAME);
 
+If ($idFtaWorkflow == AccueilFta::VALUE_2 and $idFtaRole == AccueilFta::VALUE_1) {
+    $idFtaRole = AccueilFta::VALUE_6;
+}
 
 switch ($action) {
 

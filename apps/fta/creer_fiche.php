@@ -114,7 +114,7 @@ echo '
          <input type=\'radio\' name=\'action\' value=\'2\'' . $checked_duplicate . '/> A Partir d\'une Fiche Technique Article existante
          <' . $html_table . '>
              <tr class=contenu><td align=\'right\' width=\'100\'>
-                 ' . DatabaseDescription::getFieldDocLabel('fta', 'id_fta') . ':
+                 ' . DatabaseDescription::getFieldDocLabel(FtaModel::TABLENAME, FtaModel::KEYNAME) . ':
                  </td><td align=\'left\'>
                  <input type=\'text\' name=\'id_fta\' size=\'20\' value=\'' . $id_fta . '\' />
              </td></tr>
@@ -126,12 +126,10 @@ echo '
      </td></tr>
      <tr><td>
 
-
-         <' . $html_table . '>
-             <tr class=titre_principal><td>
-                 </td></tr>
+<div id="zone_de_rechargement">	
+         <' . $html_table . '>           
              <tr class=contenu><td align=\'left\'>
-                 ' . DatabaseDescription::getFieldDocLabel('fta', 'designation_commerciale_fta') . ':</td><td><input type=\'text\' name=\'designation_commerciale_fta\' size=\'20\' />
+                 ' . DatabaseDescription::getFieldDocLabel(FtaModel::TABLENAME, FtaModel::FIELDNAME_DESIGNATION_COMMERCIALE) . ':</td><td><input type=\'text\' name=\'designation_commerciale_fta\' size=\'20\' />
              </td></tr>
 
                     ' . $listeWorkflow . '
@@ -139,7 +137,7 @@ echo '
                     ' . $listeSiteProduction . '
 
 </table>
-
+</div>
 
      </td></tr>
      <br>
@@ -147,20 +145,9 @@ echo '
      <tr><td>
 
 
-         <'.$html_table.'>
-             <tr class=titre_principal><td>
-                 </td></tr>
-             <tr class=contenu><td align=\'left\'>
-                 Dans quel état doit commencer la Fiche Technique Article ? &nbsp;
-                 <input type=\'radio\' name=\'abreviation_fta_etat\' value=\'I\' checked /> Initialisation
-                 <input type=\'radio\' name=\'abreviation_fta_etat\' value=\'P\'  /> Présentation
-             </td></tr>
+         <'.$html_table.'>        
+                 <input type=hidden name=\'abreviation_fta_etat\' value=\'I\' checked /> 
          </table>
-     <br>
-     <br>
-     <br>
-     
-
          <center>
          <input type=submit value=\'Générer le nouveau dossier ...\'>
          </center>

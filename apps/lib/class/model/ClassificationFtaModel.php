@@ -111,7 +111,7 @@ class ClassificationFtaModel extends AbstractModel {
                     . ',' . ClassificationArborescenceArticleCategorieContenuModel::TABLENAME
                     . ',' . ClassificationArborescenceArticleCategorieModel::TABLENAME
                     . ' WHERE ' . ClassificationArborescenceArticleCategorieModel::TABLENAME . '.' . ClassificationArborescenceArticleCategorieModel::KEYNAME
-                    . '=' . ClassificationArborescenceArticleCategorieContenuModel::TABLENAME . '.' . ClassificationArborescenceArticleCategorieContenuModel::FIELDNAME_ID_CLASSIFICATION_ARBORESCENCE_ARTICLE_CATEGORIE_CONTENU
+                    . '=' . ClassificationArborescenceArticleCategorieContenuModel::TABLENAME . '.' . ClassificationArborescenceArticleCategorieContenuModel::FIELDNAME_ID_CLASSIFICATION_ARBORESCENCE_ARTICLE_CATEGORIE
                     . ' AND ' . ClassificationArborescenceArticleModel::TABLENAME . '.' . ClassificationArborescenceArticleModel::FIELDNAME_ID_CLASSIFICATION_ARBORESCENCE_ARTICLE_CATEGORIE_CONTENU
                     . '=' . ClassificationArborescenceArticleCategorieContenuModel::TABLENAME . '.' . ClassificationArborescenceArticleCategorieContenuModel::KEYNAME
                     . ' AND ' . $champ_recherche . '=' . $paramIdElement

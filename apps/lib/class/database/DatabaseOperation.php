@@ -252,6 +252,16 @@ class DatabaseOperation {
         return $return;
     }
 
+    public static function getRowsNumberOverLimitInSqlStatement($paramStatement) {
+        $statement = DatabaseOperation::queryPDO($paramStatement);
+        if ($statement) {
+            $statement->execute();
+            $resultFoundRows = DatabaseOperation::databaseAcces()->query('SELECT found_rows()');
+            $RowsNumber = $resultFoundRows->fetchColumn();
+        }
+        return $RowsNumber;
+    }
+
     /**
      * Exécute, puis convertie un requête SQL en tableau PHP
      * La clef du tableau sera celle de la première colonne du résultat SQL
@@ -867,5 +877,5 @@ class DatabaseOperation {
         }
         return $req;
     }
-   
+
 }

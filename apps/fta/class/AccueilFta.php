@@ -22,7 +22,7 @@ class AccueilFta {
     const VALUE_12 = 12;
     const VALUE_100 = 100;
     const VALUE_100_POURCENTAGE = '100%';
-    const VALUE_MAX_PAR_PAGE = 15;
+    const VALUE_MAX_PAR_PAGE = 5;
 
     protected static $abrevationFtaEtat;
     protected static $arrayFtaEtat;
@@ -49,7 +49,7 @@ class AccueilFta {
      * @param type $OrderBy
      * @param type $lieuGeo
      */
-    public static function initAccueil($id_user, $idFtaEtat, $abrevationFtaEtat, $syntheseAction, $IdFtaRole, $OrderBy, $lieuGeo) {
+    public static function initAccueil($id_user, $idFtaEtat, $abrevationFtaEtat, $syntheseAction, $IdFtaRole, $OrderBy, $lieuGeo, $debut) {
 
         self::$idUser = $id_user;
         self::$abrevationFtaEtat = $abrevationFtaEtat;
@@ -77,17 +77,17 @@ class AccueilFta {
          */
         self::$arrayIdFtaAndIdWorkflow = FtaEtatModel::getIdFtaByEtatAvancement(self::$syntheseAction, self::$abrevationFtaEtat, self::$idFtaRole, self::$idUser, self::$idFtaEtat);
 
-        self::$arrayIdFtaByUserAndWorkflow = UserModel::getIdFtaByUserAndWorkflow(self::$arrayIdFtaAndIdWorkflow[AccueilFta::VALUE_1], self::$orderBy, self::$syntheseAction);
+        self::$arrayIdFtaByUserAndWorkflow = UserModel::getIdFtaByUserAndWorkflow(self::$arrayIdFtaAndIdWorkflow, self::$orderBy, $debut);
 
-        self::$arraNameSiteByWorkflow = IntranetActionsModel::getNameSiteByWorkflow(self::$idUser, self::$arrayIdFtaAndIdWorkflow[AccueilFta::VALUE_2]);
+        self::$arraNameSiteByWorkflow = IntranetActionsModel::getNameSiteByWorkflow(self::$idUser, self::$arrayIdFtaByUserAndWorkflow[AccueilFta::VALUE_3]);
 
-        self::$nombreFta = count(self::$arrayIdFtaByUserAndWorkflow);
+        self::$nombreFta = self::$arrayIdFtaByUserAndWorkflow[AccueilFta::VALUE_2];
     }
 
     public static function getTableauSythese() {
 
         $tableau_synthese = AccueilFta::getHtmlTableauSythese(self::$arrayFtaRole, self::$arrayFtaEtat, self::$abrevationFtaEtat, self::$idFtaRole, self::$syntheseAction);
-        $tableau_syntheseWorkflow = AccueilFta::getHtmlTableauSytheseWorkflow(self::$arrayIdFtaAndIdWorkflow[AccueilFta::VALUE_2], self::$arraNameSiteByWorkflow);
+        $tableau_syntheseWorkflow = AccueilFta::getHtmlTableauSytheseWorkflow(self::$arrayIdFtaByUserAndWorkflow[AccueilFta::VALUE_3], self::$arraNameSiteByWorkflow);
         $tableau_synthese.=$tableau_syntheseWorkflow;
         return $tableau_synthese;
     }
@@ -118,12 +118,20 @@ class AccueilFta {
 
 // premiere page
         if ($premiere && $numero_page_courante - $avant > 1) {
-            $resultat .= '<a href="' . htmlspecialchars($_SERVER['PHP_SELF']) . '?numeroPage=1" title="Première page">&laquo;&laquo;</a>&nbsp;';
+            $resultat .= '<a href="' . htmlspecialchars($_SERVER['PHP_SELF']) . '?numeroPage=1'
+                    . '&id_fta_etat=' . self::$idFtaEtat
+                    . '&nom_fta_etat=' . self::$abrevationFtaEtat
+                    . '&id_fta_role=' . self::$idFtaRole
+                    . '&synthese_action=' . self::$syntheseAction . '" title="Première page">&laquo;&laquo;</a>&nbsp;';
         }
 
 // page precedente
         if ($numero_page_courante > 1) {
-            $resultat .= '<a href="' . htmlspecialchars($_SERVER['PHP_SELF']) . '?numeroPage=' . ($numero_page_courante - 1) . '" title="Page précédente ' . ($numero_page_courante - 1) . '">&laquo;</a>&nbsp;';
+            $resultat .= '<a href="' . htmlspecialchars($_SERVER['PHP_SELF']) . '?numeroPage=' . ($numero_page_courante - 1)
+                    . '&id_fta_etat=' . self::$idFtaEtat
+                    . '&nom_fta_etat=' . self::$abrevationFtaEtat
+                    . '&id_fta_role=' . self::$idFtaRole
+                    . '&synthese_action=' . self::$syntheseAction . '" title="Page précédente ' . ($numero_page_courante - 1) . '">&laquo;</a>&nbsp;';
         }
 
 // affichage des numeros de page
@@ -132,18 +140,29 @@ class AccueilFta {
             if ($i == $numero_page_courante) {
                 $resultat .= '&nbsp;[<strong>' . $i . '</strong>]&nbsp;';
             } else {
-                $resultat .= '&nbsp;[<a href="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES) . '?numeroPage=' . $i . '" title="Consulter la page ' . $i . '">' . $i . '</a>]&nbsp;';
+                $resultat .= '&nbsp;[<a href="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES) . '?numeroPage=' . $i
+                        . '&id_fta_etat=' . self::$idFtaEtat
+                        . '&nom_fta_etat=' . self::$abrevationFtaEtat
+                        . '&id_fta_role=' . self::$idFtaRole
+                        . '&synthese_action=' . self::$syntheseAction . '" title="Consulter la page ' . $i . '">' . $i . '</a>]&nbsp;';
             }
         }
 
 // page suivante
         if ($numero_page_courante < $nb_pages) {
-            $resultat .= '<a href="' . htmlspecialchars($_SERVER['PHP_SELF']) . '?numeroPage=' . ($numero_page_courante + 1) . '" title="Consulter la page ' . ($numero_page_courante + 1) . ' !">&raquo;</a>&nbsp;';
+            $resultat .= '<a href="' . htmlspecialchars($_SERVER['PHP_SELF']) . '?numeroPage=' . ($numero_page_courante + 1) . '&id_fta_etat=' . self::$idFtaEtat
+                    . '&nom_fta_etat=' . self::$abrevationFtaEtat
+                    . '&id_fta_role=' . self::$idFtaRole
+                    . '&synthese_action=' . self::$syntheseAction . '" title="Consulter la page ' . ($numero_page_courante + 1) . ' !">&raquo;</a>&nbsp;';
         }
 
 // derniere page     
         if ($derniere && ($numero_page_courante + $apres) < $nb_pages) {
-            $resultat .= '<a href="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES) . '?numeroPage=' . $nb_pages . '" title="Dernière page">&raquo;&raquo;</a>&nbsp;';
+            $resultat .= '<a href="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES) . '?numeroPage=' . $nb_pages
+                    . '&id_fta_etat=' . self::$idFtaEtat
+                    . '&nom_fta_etat=' . self::$abrevationFtaEtat
+                    . '&id_fta_role=' . self::$idFtaRole
+                    . '&synthese_action=' . self::$syntheseAction . '" title="Dernière page">&raquo;&raquo;</a>&nbsp;';
         }
 
 // On retourne le resultat
@@ -508,10 +527,10 @@ class AccueilFta {
                 . '</th>';
 
         $tmp = null;
-        if (self::$arrayIdFtaByUserAndWorkflow) {
+        if (self::$arrayIdFtaByUserAndWorkflow[AccueilFta::VALUE_1]) {
             $createurNTmp = null;
             $createurTrTmp = null;
-            foreach (self::$arrayIdFtaByUserAndWorkflow as $rowsDetail) {
+            foreach (self::$arrayIdFtaByUserAndWorkflow[AccueilFta::VALUE_1] as $rowsDetail) {
                 $workflowDescription = $rowsDetail[FtaWorkflowModel::FIELDNAME_DESCRIPTION_FTA_WORKFLOW];
                 $workflowName = $rowsDetail[FtaWorkflowModel::FIELDNAME_NOM_FTA_WORKFLOW];
 

@@ -28,45 +28,50 @@ function show_din_produit($id_fta_composant) {
       . "AND site_production_fta_nomenclature=id_geo "
       ;
      */
-    $req = "SELECT * FROM fta_composant, annexe_agrologic_article_codification, geo "
+    $req = "SELECT nom_fta_nomenclature,suffixe_agrologic_fta_nomenclature,"
+            . "prefixe_annexe_agrologic_article_codification,poids_fta_nomenclature,id_annexe_unite,"
+            . "raccourci_site_agis,quantite_piece_par_carton,"
+            . "abreviation_annexe_agrologic_article_codification,"
+            . " FROM fta_composant, annexe_agrologic_article_codification, geo "
             . "WHERE fta_composant.id_fta_composant=$id_fta_composant "
             . "AND annexe_agrologic_article_codification.id_annexe_agrologic_article_codification=fta_composant.id_annexe_agrologic_article_codification "
             . "AND site_production_fta_nomenclature=geo.id_geo "
     ;
-    $result = DatabaseOperation::query($req);
-    $rows = mysql_fetch_array($result);
-    $value = $rows["nom_fta_nomenclature"] . " " . $rows["suffixe_agrologic_fta_nomenclature"];
-    switch ($rows["prefixe_annexe_agrologic_article_codification"]) {
-        case "00": //Produit Fini en carton
-            //$value .= " ".round($poids_fta_nomenclature).$id_annexe_unite;
-            $value .= " " . $rows["poids_fta_nomenclature"] . $rows["id_annexe_unite"];
-            break;
+    $array = DatabaseOperation::convertSqlStatementWithoutKeyToArray($req);
+    foreach ($array as $rows) {
+        $value = $rows["nom_fta_nomenclature"] . " " . $rows["suffixe_agrologic_fta_nomenclature"];
+        switch ($rows["prefixe_annexe_agrologic_article_codification"]) {
+            case "00": //Produit Fini en carton
+                //$value .= " ".round($poids_fta_nomenclature).$id_annexe_unite;
+                $value .= " " . $rows["poids_fta_nomenclature"] . $rows["id_annexe_unite"];
+                break;
 
-        case "01": //Cuit
-        case "02": //Cru
-            //Cas Particulier de Tarare
-            if ($rows["raccourci_site_agis"] == "TAR") {
-                if ($rows["prefixe_annexe_agrologic_article_codification"] == "01") {
-                    //$value .= " ".round($poids_fta_nomenclature).$id_annexe_unite." PCE";
-                    $value .= " " . $rows["poids_fta_nomenclature"] . $rows["id_annexe_unite"] . " PCE";
+            case "01": //Cuit
+            case "02": //Cru
+                //Cas Particulier de Tarare
+                if ($rows["raccourci_site_agis"] == "TAR") {
+                    if ($rows["prefixe_annexe_agrologic_article_codification"] == "01") {
+                        //$value .= " ".round($poids_fta_nomenclature).$id_annexe_unite." PCE";
+                        $value .= " " . $rows["poids_fta_nomenclature"] . $rows["id_annexe_unite"] . " PCE";
+                    }
+                    if ($rows["prefixe_annexe_agrologic_article_codification"] == "02") {
+                        //$value .= " ".$quantite_piece_par_carton."x".round($poids_fta_nomenclature).$id_annexe_unite." SURG";
+                        $value .= " " . $rows["quantite_piece_par_carton"] . "x" . $rows["poids_fta_nomenclature"] . $rows["id_annexe_unite"] . " SURG";
+                    }
+                } else {   //Cas général
+                    //$value .= " ".round($poids_fta_nomenclature).$id_annexe_unite." ".$abreviation_annexe_agrologic_article_codification;
+                    $value .= " " . $rows["poids_fta_nomenclature"] . $rows["id_annexe_unite"] . " " . $rows["abreviation_annexe_agrologic_article_codification"];
                 }
-                if ($rows["prefixe_annexe_agrologic_article_codification"] == "02") {
-                    //$value .= " ".$quantite_piece_par_carton."x".round($poids_fta_nomenclature).$id_annexe_unite." SURG";
-                    $value .= " " . $rows["quantite_piece_par_carton"] . "x" . $rows["poids_fta_nomenclature"] . $rows["id_annexe_unite"] . " SURG";
-                }
-            } else {   //Cas général
-                //$value .= " ".round($poids_fta_nomenclature).$id_annexe_unite." ".$abreviation_annexe_agrologic_article_codification;
-                $value .= " " . $rows["poids_fta_nomenclature"] . $rows["id_annexe_unite"] . " " . $rows["abreviation_annexe_agrologic_article_codification"];
-            }
-            break;
-        case "03": //Surgelé
-            $value .= " " . $rows["quantite_piece_par_carton"] . "x" . $rows["poids_fta_nomenclature"] . $rows["id_annexe_unite"];
-            break;
-        case "05": //Sauce
-        case "06": //Farce
-        case "07": //Préparation
-            $value = $rows["abreviation_annexe_agrologic_article_codification"] . " " . $value . " " . $rows["id_annexe_unite"];
-            break;
+                break;
+            case "03": //Surgelé
+                $value .= " " . $rows["quantite_piece_par_carton"] . "x" . $rows["poids_fta_nomenclature"] . $rows["id_annexe_unite"];
+                break;
+            case "05": //Sauce
+            case "06": //Farce
+            case "07": //Préparation
+                $value = $rows["abreviation_annexe_agrologic_article_codification"] . " " . $value . " " . $rows["id_annexe_unite"];
+                break;
+        }
     }
     $value = mb_strtoupper($value);
     return $value;
@@ -86,8 +91,7 @@ function envoi_mail_global($selection_fta, $liste_diffusion, $subject) {
     }
     $req = "SELECT * FROM fta, access_arti2, geo "
             . "WHERE ( $where ) "
-            . "AND fta.id_fta=access_arti2.id_fta "
-            . "AND geo.id_site=access_arti2.Site_de_production "
+            . "AND geo.id_site=fta.Site_de_production "
             . "ORDER BY libelle_site_agis, CODE_ARTICLE "
     ;
     $_SESSION["log_transition"].="\n\n" . $req;

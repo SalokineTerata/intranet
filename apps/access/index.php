@@ -156,6 +156,6 @@ echo "
 /* * *********************
   Inclusion de fin de page
  * ********************* */
-//include ("../lib/fin_page.inc");
+include ("../lib/fin_page.inc");
 ?>
 

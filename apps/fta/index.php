@@ -149,11 +149,14 @@ if ($id_user) {
     /*     * *****************************************************************************
       TABLEAU DE SYNTHESE
      * ***************************************************************************** */
-
+    /**
+     * Calcul des enregistrements à afficher
+     */
+    $debut = ($numeroDePageCourante - AccueilFta::VALUE_1) * AccueilFta::VALUE_MAX_PAR_PAGE;
     /*
      * Initialisation des valeurs
      */
-    AccueilFta::initAccueil($id_user, $id_fta_etat, $nomFtaEtat, $synthese_action, $idFtaRoleEncours, $order_common, $lieuGeo);
+    AccueilFta::initAccueil($id_user, $id_fta_etat, $nomFtaEtat, $synthese_action, $idFtaRoleEncours, $order_common, $lieuGeo, $debut);
 
 
 
@@ -181,7 +184,7 @@ if ($id_user) {
             //$tableau_fiche = AccueilFta::getTableauFiche($id_fta_etat, $choix, $isLimit, $order_common);
             $tableau_fiche = AccueilFta::getHtmlTableauFiche();
             $fileAriane = AccueilFta::getFileAriane();
-            //$pagination = AccueilFta::paginer(AccueilFta::VALUE_MAX_PAR_PAGE, $numeroDePageCourante, AccueilFta::VALUE_4, AccueilFta::VALUE_4, AccueilFta::VALUE_1, AccueilFta::VALUE_1);
+            $pagination = AccueilFta::paginer(AccueilFta::VALUE_MAX_PAR_PAGE, $numeroDePageCourante, AccueilFta::VALUE_4, AccueilFta::VALUE_4, AccueilFta::VALUE_1, AccueilFta::VALUE_1);
         }
         /*
           //        if ($isLimit) {
@@ -221,12 +224,12 @@ if ($id_user) {
           <table width=100% border=0>
              
               <tr><td valign=\'middle\'>' . $tableau_fiche . '</td></tr>
-          </table>
+          </table>         
           ';
     }
     echo '
     </form>
-';
+' . $pagination;
 
     /*     * **********
       Fin Code HTML

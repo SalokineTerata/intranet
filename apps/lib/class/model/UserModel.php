@@ -49,7 +49,7 @@ class UserModel extends AbstractModel {
      * @param type $paramOrderBy
      * @return type
      */
-    public static function getIdFtaByUserAndWorkflow($paramArrayIdFta, $paramOrderBy, $paramSytheseAction) {
+    public static function getIdFtaByUserAndWorkflow($paramArrayIdFta, $paramOrderBy, $paramDebut) {
 
 
         if ($paramArrayIdFta) {
@@ -57,7 +57,7 @@ class UserModel extends AbstractModel {
                 $idFta[] = $rowsArrayIdFta[FtaModel::KEYNAME];
             }
 
-            $array = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
+            $array[AccueilFta::VALUE_1] = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
                             'SELECT DISTINCT ' . FtaModel::TABLENAME . '.' . FtaModel::KEYNAME
                             . ', ' . FtaEtatModel::FIELDNAME_ABREVIATION . ', ' . FtaModel::FIELDNAME_LIBELLE
                             . ', ' . FtaWorkflowModel::FIELDNAME_DESCRIPTION_FTA_WORKFLOW . ', ' . FtaWorkflowModel::FIELDNAME_NOM_FTA_WORKFLOW
@@ -82,7 +82,49 @@ class UserModel extends AbstractModel {
                             . ',' . FtaModel::TABLENAME . '.' . FtaModel::FIELDNAME_WORKFLOW
                             . ',' . UserModel::FIELDNAME_PRENOM . ' ASC'
                             . ',' . FtaModel::FIELDNAME_DATE_ECHEANCE_FTA
+                            . ' LIMIT ' . AccueilFta::VALUE_MAX_PAR_PAGE . ' OFFSET ' . $paramDebut
             );
+
+            $array[AccueilFta::VALUE_2] = DatabaseOperation::getRowsNumberOverLimitInSqlStatement(
+                            'SELECT SQL_CALC_FOUND_ROWS ' . FtaModel::TABLENAME . '.' . FtaModel::KEYNAME
+                            . ', ' . FtaEtatModel::FIELDNAME_ABREVIATION . ', ' . FtaModel::FIELDNAME_LIBELLE
+                            . ', ' . FtaWorkflowModel::FIELDNAME_DESCRIPTION_FTA_WORKFLOW . ', ' . FtaWorkflowModel::FIELDNAME_NOM_FTA_WORKFLOW
+                            . ', ' . FtaModel::FIELDNAME_NOMBRE_UVC_PAR_CARTON . ', ' . FtaModel::FIELDNAME_POIDS_ELEMENTAIRE
+                            . ', ' . FtaModel::FIELDNAME_SUFFIXE_AGROLOGIC_FTA . ', ' . FtaModel::FIELDNAME_DESIGNATION_COMMERCIALE
+                            . ', ' . FtaModel::FIELDNAME_DOSSIER_FTA . ', ' . FtaModel::FIELDNAME_VERSION_DOSSIER_FTA
+                            . ', ' . FtaModel::FIELDNAME_ARTICLE_AGROLOGIC . ', ' . FtaModel::FIELDNAME_CODE_ARTICLE_LDC
+                            . ', ' . FtaModel::FIELDNAME_DATE_ECHEANCE_FTA . ', ' . FtaModel::FIELDNAME_CREATEUR
+                            . ', ' . FtaModel::FIELDNAME_CLASSIFICATION_PROPRIETAIRE
+                            . ', ' . FtaModel::FIELDNAME_SITE_ASSEMBLAGE . ', ' . FtaModel::TABLENAME . '. ' . FtaModel::FIELDNAME_WORKFLOW
+                            . ' FROM ' . FtaModel::TABLENAME . ',' . UserModel::TABLENAME
+                            . ', ' . FtaEtatModel::TABLENAME
+                            . ', ' . FtaWorkflowModel::TABLENAME
+                            . ' WHERE ( 0 ' . FtaModel::AddIdFTaValidProcess($idFta) . ')'
+                            . ' AND ' . FtaModel::TABLENAME . '.' . FtaModel::FIELDNAME_CREATEUR
+                            . '=' . UserModel::TABLENAME . '.' . UserModel::KEYNAME
+                            . ' AND ' . FtaModel::TABLENAME . '.' . FtaModel::FIELDNAME_ID_FTA_ETAT
+                            . '=' . FtaEtatModel::TABLENAME . '.' . FtaEtatModel::KEYNAME
+                            . ' AND ' . FtaWorkflowModel::TABLENAME . '.' . FtaWorkflowModel::KEYNAME
+                            . '=' . FtaModel::TABLENAME . '.' . FtaModel::FIELDNAME_WORKFLOW
+                            . ' ORDER BY ' . $paramOrderBy
+                            . ',' . FtaModel::TABLENAME . '.' . FtaModel::FIELDNAME_WORKFLOW
+                            . ',' . UserModel::FIELDNAME_PRENOM . ' ASC'
+                            . ',' . FtaModel::FIELDNAME_DATE_ECHEANCE_FTA
+                            . ' LIMIT ' . AccueilFta::VALUE_MAX_PAR_PAGE . ' OFFSET ' . $paramDebut
+            );
+
+            foreach ($array[AccueilFta::VALUE_1] as $rowsArrayIdFta) {
+                $idFta2[] = $rowsArrayIdFta[FtaModel::KEYNAME];
+            }
+
+            $array[AccueilFta::VALUE_3] = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
+                            'SELECT DISTINCT ' . FtaWorkflowModel::TABLENAME . '.*'
+                            . ' FROM ' . FtaModel::TABLENAME . ',' . FtaWorkflowModel::TABLENAME
+                            . ' WHERE ( ' . AccueilFta::VALUE_0 . ' ' . FtaModel::AddIdFTaValidProcess($idFta2) . ')'
+                            . ' AND ' . FtaModel::TABLENAME . '.' . FtaModel::FIELDNAME_WORKFLOW
+                            . '=' . FtaWorkflowModel::TABLENAME . '.' . FtaWorkflowModel::KEYNAME
+            );
+
 
             return $array;
         }
@@ -101,7 +143,7 @@ class UserModel extends AbstractModel {
                 'DELETE FROM ' . DroitftModel::TABLENAME
                 . ' WHERE ' . DroitftModel::FIELDNAME_ID_USER . '=' . $paramIdSalaries
         );
-       
+
         DatabaseOperation::execute(
                 'DELETE FROM ' . IntranetDroitsAccesModel::TABLENAME
                 . ' WHERE ' . IntranetDroitsAccesModel::FIELDNAME_ID_USER . '=' . $paramIdSalaries
@@ -115,8 +157,8 @@ class UserModel extends AbstractModel {
         DatabaseOperation::execute(
                 'DELETE FROM ' . PersoModel::TABLENAME
                 . ' WHERE ' . PersoModel::KEYNAME . '=' . $paramIdSalaries);
-        
-         DatabaseOperation::execute(
+
+        DatabaseOperation::execute(
                 'DELETE FROM ' . UserModel::TABLENAME
                 . ' WHERE ' . UserModel::KEYNAME . '=' . $paramIdSalaries
         );
@@ -135,6 +177,7 @@ class UserModel extends AbstractModel {
             header('Location: ../index.php?action=delog');
         }
     }
+
     /**
      * Liste des utilisateur à ajouter
      * @param array $paramIdUser

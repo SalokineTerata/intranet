@@ -136,7 +136,7 @@ class LoggerClass {
 
         $string = $date . $expediteur . ' : ' . $destinataire . ' : ' . $sujetmail . ' \n ' . $paramText . ' \n ';
 
-        fputs($fichier, $string);
+        fputs($fichier, utf8_encode($string));
         fclose($fichier);
     }
 
@@ -152,7 +152,7 @@ class LoggerClass {
 
         $fichier = fopen($paramLogFile, 'a+');
         $string = $date . $expediteur . ' : ' . $destinataire . ' : ' . $sujetmail . ' \n ';
-        fputs($fichier, $string);
+        fputs($fichier, utf8_encode($string));
         fclose($fichier);
     }
 

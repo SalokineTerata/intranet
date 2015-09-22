@@ -135,8 +135,12 @@ class FtaWorkflowStructureModel extends AbstractModel {
                         . ' WHERE ' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_WORKFLOW . '=' . $paramIdWorkflow
                         . ' AND ' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_ROLE . '=' . $paramIdRole
         );
-        foreach ($arrayProcessusAcces as $rowsProcessusAcces) {
-            $idProcessus[] = $rowsProcessusAcces[FtaWorkflowStructureModel::FIELDNAME_ID_FTA_PROCESSUS];
+        if ($arrayProcessusAcces) {
+            foreach ($arrayProcessusAcces as $rowsProcessusAcces) {
+                $idProcessus[] = $rowsProcessusAcces[FtaWorkflowStructureModel::FIELDNAME_ID_FTA_PROCESSUS];
+            }
+        } else {
+            $idProcessus = array(AccueilFta::VALUE_0);
         }
         return $idProcessus;
     }

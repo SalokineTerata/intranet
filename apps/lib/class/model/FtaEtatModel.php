@@ -124,19 +124,13 @@ class FtaEtatModel extends AbstractModel {
                         }
                     }
                 }
-                $array[AccueilFta::VALUE_1] = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
+                $array = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
                                 'SELECT DISTINCT ' . FtaModel::KEYNAME
                                 . ' FROM ' . FtaModel::TABLENAME
                                 . ' WHERE ( ' . AccueilFta::VALUE_0
                                 . ' ' . FtaModel::AddIdFTaValidProcess($idFtaEffectue) . ')');
 
-                $array[AccueilFta::VALUE_2] = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
-                                'SELECT DISTINCT ' . FtaWorkflowModel::TABLENAME . '.*'
-                                . ' FROM ' . FtaModel::TABLENAME . ',' . FtaWorkflowModel::TABLENAME
-                                . ' WHERE ( ' . AccueilFta::VALUE_0 . ' ' . FtaModel::AddIdFTaValidProcess($idFtaEffectue) . ')'
-                                . ' AND ' . FtaModel::TABLENAME . '.' . FtaModel::FIELDNAME_WORKFLOW
-                                . '=' . FtaWorkflowModel::TABLENAME . '.' . FtaWorkflowModel::KEYNAME
-                );
+
                 break;
 
 
@@ -207,19 +201,13 @@ class FtaEtatModel extends AbstractModel {
                         }
                     }
                 }
-                $array[AccueilFta::VALUE_1] = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
+                $array = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
                                 'SELECT ' . FtaModel::KEYNAME
                                 . ' FROM ' . FtaModel::TABLENAME
                                 . ' WHERE ( ' . AccueilFta::VALUE_0
                                 . ' ' . FtaModel::AddIdFTaValidProcess($idFtaEffectue) . ')');
 
-                $array[AccueilFta::VALUE_2] = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
-                                'SELECT DISTINCT ' . FtaWorkflowModel::TABLENAME . '.*'
-                                . ' FROM ' . FtaModel::TABLENAME . ',' . FtaWorkflowModel::TABLENAME
-                                . ' WHERE ( ' . AccueilFta::VALUE_0 . ' ' . FtaModel::AddIdFTaValidProcess($idFtaEffectue) . ')'
-                                . ' AND ' . FtaModel::TABLENAME . '.' . FtaModel::FIELDNAME_WORKFLOW
-                                . '=' . FtaWorkflowModel::TABLENAME . '.' . FtaWorkflowModel::KEYNAME
-                );
+
 
                 break;
 
@@ -286,26 +274,18 @@ class FtaEtatModel extends AbstractModel {
                         }
                     }
                 }
-                $array[AccueilFta::VALUE_1] = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
+                $array = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
                                 'SELECT DISTINCT ' . FtaModel::KEYNAME
                                 . ' FROM ' . FtaModel::TABLENAME
                                 . ' WHERE ( ' . AccueilFta::VALUE_0
                                 . ' ' . FtaModel::AddIdFTaValidProcess($idFtaEffectue) . ')');
-
-                $array[AccueilFta::VALUE_2] = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
-                                'SELECT DISTINCT ' . FtaWorkflowModel::TABLENAME . '.*'
-                                . ' FROM ' . FtaModel::TABLENAME . ',' . FtaWorkflowModel::TABLENAME
-                                . ' WHERE ( ' . AccueilFta::VALUE_0 . ' ' . FtaModel::AddIdFTaValidProcess($idFtaEffectue) . ')'
-                                . ' AND ' . FtaModel::TABLENAME . '.' . FtaModel::FIELDNAME_WORKFLOW
-                                . '=' . FtaWorkflowModel::TABLENAME . '.' . FtaWorkflowModel::KEYNAME
-                );
 
                 break;
 
 
             case FtaEtatModel::ETAT_AVANCEMENT_VALUE_ALL: //Toutes les fiches de l'état sélectionné
 
-                $array[AccueilFta::VALUE_1] = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
+                $array = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
                                 'SELECT DISTINCT ' . FtaModel::KEYNAME
                                 . ' FROM ' . FtaModel::TABLENAME . ',' . IntranetDroitsAccesModel::TABLENAME
                                 . ',' . FtaWorkflowModel::TABLENAME . ',' . IntranetActionsModel::TABLENAME
@@ -319,23 +299,6 @@ class FtaEtatModel extends AbstractModel {
                                 . ' AND ' . FtaWorkflowModel::TABLENAME . '.' . FtaWorkflowModel::KEYNAME
                                 . '=' . FtaModel::TABLENAME . '.' . FtaModel::FIELDNAME_WORKFLOW
                 );
-
-
-                $array[AccueilFta::VALUE_2] = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
-                                'SELECT DISTINCT ' . FtaWorkflowModel::TABLENAME . '.*'
-                                . ' FROM ' . FtaModel::TABLENAME . ',' . FtaWorkflowModel::TABLENAME
-                                . ',' . IntranetDroitsAccesModel::TABLENAME . ',' . IntranetActionsModel::TABLENAME
-                                . ' WHERE ' . FtaModel::FIELDNAME_ID_FTA_ETAT . '=\'' . $paramIdFtaEtat
-                                . '\' AND ' . FtaModel::TABLENAME . '.' . FtaModel::FIELDNAME_WORKFLOW
-                                . '=' . FtaWorkflowModel::TABLENAME . '.' . FtaWorkflowModel::KEYNAME//Liaison
-                                . ' AND ' . IntranetDroitsAccesModel::FIELDNAME_NIVEAU_INTRANET_DROITS_ACCES . '=' . AccueilFta::VALUE_1
-                                . ' AND ' . IntranetDroitsAccesModel::FIELDNAME_ID_USER . '=' . $paramIdUser
-                                . ' AND ' . FtaWorkflowModel::TABLENAME . '.' . FtaWorkflowModel::FIELDNAME_ID_INTRANET_ACTIONS
-                                . '=' . IntranetActionsModel::TABLENAME . '.' . IntranetActionsModel::FIELDNAME_PARENT_INTRANET_ACTIONS
-                                . ' AND ' . IntranetDroitsAccesModel::TABLENAME . '.' . IntranetDroitsAccesModel::FIELDNAME_ID_INTRANET_ACTIONS
-                                . '=' . IntranetActionsModel::TABLENAME . '.' . IntranetActionsModel::KEYNAME
-                );
-
                 break;
         }
 

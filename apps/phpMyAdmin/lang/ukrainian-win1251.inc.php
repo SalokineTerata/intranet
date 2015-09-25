@@ -1,0 +1,351 @@
+<?php
+/* $Id: ukrainian-win1251.inc.php,v 1.20 2002/04/03 18:47:56 lem9 Exp $ */
+
+$charset = 'windows-1251';
+$text_dir = 'ltr';
+$left_font_family = 'verdana, arial, helvetica, geneva, sans-serif';
+$right_font_family = 'arial, helvetica, geneva, sans-serif';
+$number_thousands_separator = ',';
+$number_decimal_separator = '.';
+$byteUnits = array('Áàéò', 'êÁ', 'ÌÁ', 'ÃÁ');
+
+$day_of_week = array('Íä', 'Ïí', 'Âò', 'Ñð', '×ò', 'Ïò', 'Ñá');
+$month = array('Ñ³÷', 'Ëþò', 'Áåð', 'Êâò', 'Òðâ', '×ðâ', 'Ëèï', 'Ñåð', 'Âåð', 'Æîâ', 'Ëèñ', 'Ãðó');
+// See http://www.php.net/manual/en/function.strftime.php to define the
+// variable below
+$datefmt = '%B %d %Y ð., %H:%M';
+
+
+$strAccessDenied = 'Äîñòóï çàáîðîíåíî';
+$strAction = 'Ä³ÿ';
+$strAddDeleteColumn = 'Äîäàòè/çàáðàòè êîëîíêó êðèòåð³þ';
+$strAddDeleteRow = 'Äîäàòè/çàáðàòè ðÿäîê êðèòåð³þ';
+$strAddNewField = 'Äîäàòè íîâå ïîëå';
+$strAddPriv = 'Äîäàòè íîâ³ ïðèâ³ëå¿';
+$strAddPrivMessage = 'Áóëî äîäàíî íîâèé ïðèâ³ëåé';
+$strAddSearchConditions = 'Äîäàòè óìîâè ïîøóêó (ò³ëî äëÿ óìîâè "where"):';
+$strAddToIndex = 'Äîäàòè äî ³íäåêñó&nbsp;%s&nbsp;êîëîíîêó(è)';
+$strAddUser = 'Äîäàòè íîâîãî êîðèñòóâà÷à';
+$strAddUserMessage = 'Áóëî äîäàíî íîâîãî êîðèñòóâà÷à.';
+$strAffectedRows = 'Çàä³ÿí³ ðÿäêè:';
+$strAfter = 'Ï³ñëÿ %s';
+$strAfterInsertBack = 'Ïîâåðíóòèñü';
+$strAfterInsertNewInsert = 'Âñòàâèòè íîâèé çàïèñ';
+$strAll = 'Âñå';
+$strAlterOrderBy = 'Çì³íèòè ïîðÿäîê òàáëèö³';
+$strAnalyzeTable = 'Àíàë³ç òàáëèö³';
+$strAnd = '²';
+$strAnIndex = 'Áóëî äîäàíî ³íäåêñ äëÿ %s';
+$strAny = 'Äîâ³ëüíèé';
+$strAnyColumn = 'Äîâ³ëüíà êîëîíêà';
+$strAnyDatabase = 'Äîâ³ëüí áàçà äàíèõ';
+$strAnyHost = 'Äîâ³ëüíèé õîñò';
+$strAnyTable = 'Äîâ³ëüíà òàáëèöÿ';
+$strAnyUser = 'Äîâ³ëüíèé êîðèñòóâà÷';
+$strAPrimaryKey = 'Áóëî äîäàíî ïåðâèííèé êëþ÷ äî %s';
+$strAscending = 'Çðîñòàþ÷èé';
+$strAtBeginningOfTable = 'Íà ïî÷àòêó òàáëèö³';
+$strAtEndOfTable = 'Ó ê³íö³ òàáëèö³';
+$strAttr = 'Àòðèáóòè';
+
+$strBack = 'Íàçàä';
+$strBinary = ' Äâ³éêîâèé ';
+$strBinaryDoNotEdit = ' Äâ³éêîâ³ äàí³ - íå ðåäàãóþòüñÿ ';
+$strBookmarkDeleted = 'Çàêëàäêó áóëî âèäàëåíî.';
+$strBookmarkLabel = 'Ì³òêà';
+$strBookmarkQuery = 'Çàêëàäêà íà SQL-çàïèò';
+$strBookmarkThis = 'Çàêëàäêà íà äàíèé SQL-çàïèò';
+$strBookmarkView = 'Ëèøå ïåðåãëÿä';
+$strBrowse = 'Ïåðåãëÿíóòè';
+$strBzip = 'çàïàêóâàòè â "bzip"';
+
+$strCantLoadMySQL = 'ðîçøèðåííÿ MySQL íå çàâàíòàæåíî,<br />ïåðåâ³ðòå êîíô³ãóðàö³þ PHP.';
+$strCantRenameIdxToPrimary = 'Íåìîæëèâî ïåðåéìåíóâàòè ³íäåêñ â PRIMARY!';
+$strCarriage = 'Ïîâåðíåííÿ êàðåòêè: \\r';
+$strCardinality = 'Ê³ëüê³ñòü åëåìåíò³â';
+$strChange = 'Çì³íèòè';
+$strChangePassword = 'Çì³íèòè ïàðîëü';
+$strCheckAll = 'Â³äì³òèòè âñå';
+$strCheckDbPriv = 'Ïåðåâ³ðèòè ïðèâ³ëå¿ áàçè äàíèõ';
+$strCheckTable = 'Ïåðåâ³ðèòè òàáëèöþ';
+$strColumn = 'Êîëîíêà';
+$strColumnNames = 'Íàçâè êîëîíîê';
+$strCompleteInserts = 'Ïîâíà âñòàâêà';
+$strConfirm = 'Âè íàñïðàâä³ õî÷åòå öå çðîáèòè?';
+$strCookiesRequired = 'Ç öüîãî ìîìåíòó Cookies ïîâèíí³ áóòè äîçâîëåí³.';
+$strCopyTable = 'Ñêîï³þâàòè òàáëèöþ â (áàçà äàíèõ<b>.</b>òàáëèöÿ):';
+$strCopyTableOK = 'Òàáëèöþ %s áóëî ñêîï³éîâàíî â %s.';
+$strCreate = 'Ñòâîðèòè';
+$strCreateNewDatabase = 'Ñòâîðèòè íîâó ÁÄ';
+$strCreateNewTable = 'Ñòâîðèòè íîâó òàáëèöþ â ÁÄ %s';
+$strCreateIndex = 'Ñòâîðèòè ³íäåêñ íà&nbsp;%s&nbsp;êîëîíêàõ';
+$strCreateIndexTopic = 'Ñòâîðèòè íîâèé ³íäåêñ';
+$strCriteria = 'Êðèòåð³é';
+
+$strData = 'Äàí³';
+$strDatabase = 'ÁÄ ';
+$strDatabaseHasBeenDropped = 'Áàçó äàíèõ %s çíèùåíî.';
+$strDatabases = 'Áàçè Äàíèõ';
+$strDatabasesStats = 'Ñòàòèñòèêà áàç äàíèõ';
+$strDatabaseWildcard = 'Áàçà äàíèõ (äîçâîëåíî âèêîðèñòàííÿ øàáëîí³â):';
+$strDataOnly = 'Ëèøå äàí³';
+$strDefault = 'Ïî çàìîâ÷óâàííþ';
+$strDelete = 'Âèäàëèòè';
+$strDeleted = 'Ðÿäîê âèäàëåíî';
+$strDeletedRows = 'Âèäàëåíî íàñòóïí³ ðÿäêè:';
+$strDeleteFailed = 'Âèäàëåííÿ íå âäàëîñÿ!';
+$strDeleteUserMessage = 'Âèäàëåíî êîðèñòóâà÷à %s.';
+$strDescending = 'Ñïàäàþ÷èé';
+$strDisplay = 'Ïîêàçàòè';
+$strDisplayOrder = 'Ïîðÿäîê ïåðåãëÿäó:';
+$strDoAQuery = 'Âèêîíàòè "çàïèò çã³äíî ïðèêëàäó" (ñèìâîë ï³äñòàâíîâêè: "%")';
+$strDocu = 'Äîêóìåíòàö³ÿ';
+$strDoYouReally = 'Âè íàñïðàâä³ õî÷åòå ';
+$strDrop = 'Çíèùèòè';
+$strDropDB = 'Çíèùèòè ÁÄ %s';
+$strDropTable = 'Âèäàëèòè òàáëèöþ';
+$strDumpingData = 'Äàìï äàíèõ òàáëèö³';
+$strDynamic = 'äèíàì³÷íèé';
+
+$strEdit = 'Ðåäàãóâàòè';
+$strEditPrivileges = 'Ðåäàãóâàííÿ ïðèâ³ëå¿â';
+$strEffective = 'Åôåêòèâí³ñòü';
+$strEmpty = 'Î÷èñòèòè';
+$strEmptyResultSet = 'MySQL ïîâåðíóëà ïóñòèé ðåçóëüòàò (òîáòî íóëü ðÿäê³â).';
+$strEnd = 'Ê³íåöü';
+$strEnglishPrivileges = ' Çàóâàæåííÿ: ïðèâ³ëå¿ MySQL çàäàþòüñÿ ïî-àíãë³éñüêè ';
+$strError = 'Ïîìèëêà';
+$strExtendedInserts = 'Ðîçøèðåíà âñòàâêà';
+$strExtra = 'Äîäàòêîâî';
+
+$strField = 'Ïîëå';
+$strFieldHasBeenDropped = 'Ïîëå %s áóëî âèäàëåíî';
+$strFields = 'Ïîëÿ';
+$strFieldsEmpty = ' Ïîðîæí³é ïåðåë³ê ïîë³â! ';
+$strFieldsEnclosedBy = 'Ïîëÿ âçÿòî â';
+$strFieldsEscapedBy = 'Ïîëÿ åêðàíóþòüñÿ';
+$strFieldsTerminatedBy = 'Ïîëÿ ðîçä³ëåí³';
+$strFixed = 'ô³êñîâàíèé';
+$strFlushTable = 'Î÷èñòèòè êåø òàáëèö³ ("FLUSH")';
+$strFormat = 'Ôîðìàò';
+$strFormEmpty = 'Íå çàäàíî çíà÷åííÿ äëÿ ôîðìè!';
+$strFullText = 'Ïîâí³ òåêñòè';
+$strFunction = 'Ôóíêö³ÿ';
+
+$strGenTime = '×àñ ñòâîðåííÿ';
+$strGo = 'Âïåðåä';
+$strGrants = 'Ïðàâà';
+$strGzip = 'çàïàêóâàòè â "gzip"';
+
+$strHasBeenAltered = 'áóëà çì³íåíà.';
+$strHasBeenCreated = 'áóëà ñòâîðåíà.';
+$strHome = 'Íà ïî÷àòîê';
+$strHomepageOfficial = 'Îô³ö³éíà ñòîð³íêà phpMyAdmin';
+$strHomepageSourceforge = 'Çàâàíòàæåííÿ phpMyAdmin ç Sourceforge';
+$strHost = 'Õîñò';
+$strHostEmpty = 'Ïîðîæíº ³ì\'ÿ õîñòà!';
+
+$strIdxFulltext = 'ÏîâíÒåêñò';
+$strIfYouWish = 'ßêùî Âè áàæàºòå çàâàíòàæèòè ëèøå äåÿê³ êîëîíêè òàáëèö³, çàäàéòå ðîçä³ëåíèé êîìàìè ñïèñîê ïîë³â.';
+$strIgnore = '²ãíîðóðîâàòè';
+$strIndex = '²íäåêñ';
+$strIndexes = '²íäåêñè';
+$strIndexHasBeenDropped = '²íäåêñ %s áóëî çíèùåíî';
+$strIndexName = 'Íàçâà ³íäåêñà&nbsp;:';
+$strIndexType = 'Òèï ³íäåêñà&nbsp;:';
+$strInsert = 'Âñòàâèòè';
+$strInsertAsNewRow = 'Âñòàâèòè ÿê íîâèé ðÿäîê';
+$strInsertedRows = 'Äîäàí³ ðÿäêè:';
+$strInsertNewRow = 'Âñòàâèòè íîâèé ðÿäîê';
+$strInsertTextfiles = 'Âñòàâèòè òåêñòîâ³ ôàéëè â òàáëèöþ';
+$strInstructions = '²íñòðóêö³¿';
+$strInUse = 'âèêîðèñòîâóºòüñÿ';
+$strInvalidName = '"%s" - çàðåçåðâîâàíå ñëîâî, âè íå ìîæåòå âèêîðèñòîâóâàòè éîãî äëÿ íàçâè áàçè äàíèõ/òàáëèö³/ïîëÿ.';
+
+$strKeepPass = 'Íå çì³íþâàòè ïàðîëü';
+$strKeyname = '²ì\'ÿ êëþ÷à';
+$strKill = 'Âáèòè';
+
+$strLength = 'Äîâæèíà';
+$strLengthSet = 'Äîâæèíè/Çíà÷åííÿ*';
+$strLimitNumRows = 'çàïèñ³â íà ñòîð³íö³';
+$strLineFeed = 'Ñèìâîë ê³íöÿ ðÿäêà: \\n';
+$strLines = 'Ðÿäêè';
+$strLinesTerminatedBy = 'Ðÿäêè ðîçä³ëåíî';
+$strLocationTextfile = 'âêàæ³òü ðîçòàøóâàííÿ òåêñòîâîãî ôàéëó';
+$strLogin = 'Âõ³ä â ñèñòåìó';
+$strLogout = 'Âèéòè ç ñèñòåìè';
+$strLogPassword = 'Ïàðîëü:';
+$strLogUsername = '²ì\'ÿ êîðèñòóâà÷à:';
+
+$strModifications = 'Ìîäèô³êàö³¿ áóëî çáåðåæåíî';
+$strModify = 'Çì³íèòè';
+$strModifyIndexTopic = 'Çì³íèòè ³íäåêñ';
+$strMoveTable = 'Ïåðåíåñòè òàáëèöþ â (áàçà äàíèõ<b>.</b>òàáëèöÿ):';
+$strMoveTableOK = 'Òàáëèöþ %s áóëî ïåðåíåñåíî â %s.';
+$strMySQLReloaded = 'MySQL ïåðåçàâàíòàæåíî.';
+$strMySQLSaid = 'Â³äïîâ³äü MySQL: ';
+$strMySQLServerProcess = 'MySQL %pma_s1% íà %pma_s2% ÿê %pma_s3%';
+$strMySQLShowProcess = 'Ïîêàçàòè ïðîöåñè';
+$strMySQLShowStatus = 'Ïîêàçàòè ñòàí MySQL';
+$strMySQLShowVars = 'Ïîêàçàòè ñèñòåìí³ çì³íí³ MySQL';
+
+$strName = '²ì\'ÿ';
+$strNbRecords = 'ê³ëüê³ñòü çàïèñ³â';
+$strNext = 'Äàëüøå';
+$strNo = 'Í³';
+$strNoDatabases = 'ÁÄ â³äñóòí³';
+$strNoDropDatabases = 'Îïåðàòîðè "DROP DATABASE" çàáîðîíåí³.';
+$strNoFrames = 'Äëÿ ðîáîòè phpMyAdmin ïîòð³áíî áðàóçåð ç ï³äòðèìêîþ <b>ôðåéì³â</b>.';
+$strNoIndexPartsDefined = 'Íå âèçíà÷åíî ÷àñòèíè ³íäåêñà!';
+$strNoIndex = '²íäåêñ íå âèçíà÷åíî!';
+$strNoModification = 'Çì³í íåìàº';
+$strNone = 'Íåìàº';
+$strNoPassword = 'Áåç ïàðîëþ';
+$strNoPrivileges = 'Áåç ïðèâ³ëå¿â';
+$strNoQuery = 'Íå çàäàíî SQL-çàïèò!';
+$strNoRights = 'Âè äëÿ öüîãî ìàºòå íåäîñòàòíüî ïðàâ!';
+$strNoTablesFound = 'Â ÁÄ íå âèÿâëåíî òàáëèöü.';
+$strNotNumber = 'Öå íå ÷èñëî!';
+$strNotValidNumber = ' íåäîïóñòèìà ê³ëüê³ñòü ðÿäê³â!';
+$strNoUsersFound = 'Íå çíàéäåíî êîðèñòóâà÷à.';
+$strNull = 'Íóëü';
+
+$strOftenQuotation = 'Çâè÷àéíî ëàïêè. ÏÎ ÂÈÁÎÐÓ îçíà÷àº, ùî ëèøå ïîëÿ char ³ varchar áåðóòüñÿ â ëàïêè.';
+$strOptimizeTable = 'Îïòèì³çóâàòè òàáëèöþ';
+$strOptionalControls = 'Ïî âèáîðó. Êîíòðîëþº ÷èòàííÿ òà íàïèñàííÿ ñïåö³àëüíèõ ñèìâîë³â.';
+$strOptionally = 'ÏÎ ÂÈÁÎÐÓ';
+$strOr = 'àáî';
+$strOverhead = 'Íàäì³ðí³ âèäàòêè';
+
+$strPartialText = '×àñòêîâ³ òåêñòè';
+$strPassword = 'Ïàðîëü';
+$strPasswordEmpty = 'Ïîðîæí³é ïàðîëü!';
+$strPasswordNotSame = 'Ïàðîë³ íå îäíàêîâ³!';
+$strPHPVersion = 'Âåðñ³ÿ PHP';
+$strPmaDocumentation = 'Äîêóìåíòàö³ÿ ïî phpMyAdmin';
+$strPmaUriError = 'Çì³ííà <tt>$cfgPmaAbsoluteUri</tt> ÏÎÂÈÍÍÀ áóòè âñòàíîâàëåíà ó Âàøîìó êîíô³ãóðàö³éíîìó ôàéë³!';
+$strPos1 = 'Ïî÷àòîê';
+$strPrevious = 'Íàçàä';
+$strPrimary = 'Ïåðâèííèé';
+$strPrimaryKey = 'Ïåðâèííèé êëþ÷';
+$strPrimaryKeyName = '²ì\'ÿ ïåðâèííîãî êëþ÷à ïîâèííî áóòè PRIMARY!';
+$strPrimaryKeyWarning = '("PRIMARY" <b>ïîâèííî</b> áóòè ³ìåíåì <b>ëèøå</b> ïåðâèííîãî êëþ÷à!)';
+$strPrimaryKeyHasBeenDropped = 'Ïåðâèííèé êëþ÷ áóëî çíèùåíî';
+$strPrintView = 'Âåðñ³ÿ äëÿ äðóêó';
+$strPrivileges = 'Ïðèâ³ëå¿';
+$strProperties = 'Âëàñòèâîñò³';
+
+$strQBE = 'Çàïèò çã³äíî ïðèêëàäó';
+$strQBEDel = 'Âèäàëèòè';
+$strQBEIns = 'Âñòàâèòè';
+$strQueryOnDb = 'SQL-çàïèò äî ÁÄ <b>%s</b>:';
+
+$strRecords = 'Çàïèñè';
+$strReferentialIntegrity = 'Ïåðåâ³ð ö³ë³ñí³ñòü äàíèõ íà ð³âí³ ïîñèëàíü:';
+$strReloadFailed = 'Íå âäàëîñü ïåðåçàâàíòàæèòè MySQL.';
+$strReloadMySQL = 'Ïåðåçàâàíòàæèòè MySQL';
+$strRememberReload = 'Íå çàáóäüòå ïåðåçàâàíòàæèòè ñåðâåð.';
+$strRenameTable = 'Ïåðåéìåíóâàòè òàáëèöþ â';
+$strRenameTableOK = 'Òàáëèöþ %s áóëî ïåðåéìåíîâàíî â %s';
+$strRepairTable = 'Ðåìîíòóâàòè òàáëèöþ';
+$strReplace = 'Çàì³íèòè';
+$strReplaceTable = 'Çàì³íèòè äàí³ òàáëèö³ äàíèìè ç ôàéëó';
+$strReset = 'Ïåðåâñòàíîâèòè';
+$strReType = 'Ï³äòâåðäæåííÿ';
+$strRevoke = 'Â³äì³íèòè';
+$strRevokeGrant = 'Â³äì³íèòè íàäàííÿ ïðàâ';
+$strRevokeGrantMessage = 'Áóëî â³äì³íåíî íàäàííÿ ïðàâ äëÿ %s';
+$strRevokeMessage = 'Âè çì³íèëè ïðèâ³ëå¿ äëÿ %s';
+$strRevokePriv = 'Â³äì³íèòè ïðèâ³ëå¿';
+$strRowLength = 'Äîâæèíà ðÿäêà';
+$strRows = 'Ðÿäêè';
+$strRowsFrom = 'ðÿäê³â ç';
+$strRowSize = ' Ðîçì³ð ðÿäêà ';
+$strRowsModeVertical = ' âåðòèêàëüíî ';
+$strRowsModeHorizontal = ' ãîðèçîíòàëüíî ';
+$strRowsModeOptions = '-ãî %s ³ äóáëþâàòè çàãîëîâêè ÷åðåç êîæí³ %s ðÿäê³â ';
+$strRowsStatistic = 'Ñòàòèñòèêà ðÿäêà';
+$strRunning = 'íà %s';
+$strRunQuery = 'Âèêîíàòè çàïèò';
+$strRunSQLQuery = 'Âèêîíàòè SQL çàïèò(è) äî ÁÄ %³';
+
+$strSave = 'Çáåðåãòè';
+$strSelect = 'Âèáðàòè';
+$strSelectADb = 'Ïðîøó âèáðàòè áàçó äàíèõ';
+$strSelectAll = 'Â³äì³òèòè âñå';
+$strSelectFields = 'Âèáðàòè ïîëÿ (ùîíàéìåíøå îäíå):';
+$strSelectNumRows = 'ïî çàïèòó';
+$strSend = 'Â³ä³ñëàòè';
+$strServerChoice = 'Âèá³ð ñåðâåðà';
+$strServerVersion = 'Âåðñ³ÿ ñåðâåðà';
+$strSetEnumVal = 'Äëÿ òèï³â ïîëÿ "enum" òà "set", ââåä³òü çíà÷åííÿ çã³äíî òàêîãî ôîðìàòó: \'a\',\'b\',\'c\'...<br />ßêùî âàì áóäå ïîòð³áíî ââåñòè çâîðîòíþ êîñó ðèñêó ("\"") àáî ïîîäèíîê³ ëàïêè ("\'") ïîñåðåä öèõ çíà÷åíü, ïîñòàâòå ïåðåä íèìè çâîðîòíþ êîñó ðèñêó (íàïðèêëàä, \'\\\\xyz\' ÷è \'a\\\'b\').';
+$strShow = 'Ïîêàçàòè';
+$strShowAll = 'Ïîêàçàòè âñå';
+$strShowCols = 'Ïîêàçàòè êîëîíêè';
+$strShowingRecords = 'Ïîêàçàíî çàïèñè ';
+$strShowPHPInfo = 'Ïîêàçàòè ³íôîðìàö³þ ïðî PHP';
+$strShowTables = 'Ïîêàçàòè òàáëèö³';
+$strShowThisQuery = ' Ïîêàçàòè äàíèé çàïèò çíîâó ';
+$strSingly = '(îêðåìî)';
+$strSize = 'Ðîçì³ð';
+$strSort = 'Ïîñîðòóâàòè';
+$strSpaceUsage = 'Ïðîñò³ð, ùî âèêîðèñòîâóºòüñÿ';
+$strSQLQuery = 'SQL-çàïèò';
+$strStartingRecord = 'Ïî÷èíàòè ³ç çàïèñó';
+$strStatement = 'Ïàðàìåòð';
+$strStrucCSV = 'CSV äàí³';
+$strStrucData = 'Ñòðóêòóðó ³ äàí³';
+$strStrucDrop = 'Äîäàòè âèäàëåííÿ òàáëèö³';
+$strStrucExcelCSV = 'CSV äëÿ äàíèõ MS Excel';
+$strStrucOnly = 'Ëèøå ñòðóêòóðó';
+$strSubmit = 'Âèêîíàòè';
+$strSuccess = 'Âàø SQL-çàïèò áóëî óñï³øíî âèêîíàíî';
+$strSum = 'Âñüîãî';
+
+$strTable = 'òàáëèöÿ ';
+$strTableComments = 'Êîìåíòàð äî òàáëèö³';
+$strTableEmpty = 'Ïîðîæíÿ íàçâà òàáëèö³!';
+$strTableHasBeenDropped = 'Òàáëèöþ %s áóëî çíèùåíî';
+$strTableHasBeenEmptied = 'Òàáëèöþ %s áóëî î÷èùåíî';
+$strTableHasBeenFlushed = 'Áóëî î÷èùåíî êåø òàáëèö³ %s';
+$strTableMaintenance = 'Îáñëãîâóâàííÿ òàáëèö³';
+$strTables = '%s òàáëèö(³)';
+$strTableStructure = 'Ñòðóêòóðà òàáëèö³';
+$strTableType = 'Òèï òàáëèö³';
+$strTextAreaLength = ' ×åðåç âåëèêó äîâæèíó,<br /> öå ïîëå íå ìîæå áóòè â³äðåäàãîâàíî ';
+$strTheContent = 'Âì³ñò ôàéëó áóëî ³ìïîðòîâàíî.';
+$strTheContents = 'Âì³ñò ôàéëó çàì³íÿº âì³ñò òàáëèö³ äëÿ ðÿäê³â ç ³äåíòè÷íèìè ïåðâèííèì àáî óí³êàëüíèìè êëþ÷àìè.';
+$strTheTerminator = 'Ñèìâîë çàê³í÷åííÿ ïîë³â.';
+$strTotal = 'âñüîãî';
+$strType = 'Òèï';
+
+$strUncheckAll = 'Çíÿòè óñ³ â³äì³òêè';
+$strUnique = 'Óí³êàëüíå';
+$strUnselectAll = 'Çíÿòè âñ³ â³äì³òêè';
+$strUpdatePrivMessage = 'Áóëî çì³íåíî ïðèâ³ëå¿ äëÿ';
+$strUpdateProfile = 'Ïîíîâèòè ïðîô³ëü:';
+$strUpdateProfileMessage = 'Ïðîô³ëü áóëî ïîíîâëåíî.';
+$strUpdateQuery = 'Äîïîâíèòè çàïèò';
+$strUsage = 'Âèêîðèñòàííÿ';
+$strUseBackquotes = 'Çâîðîòí³ ëàïêè â íàçâàõ òàáëèöü ³ ïîë³â';
+$strUser = 'Êîðèñòóâà÷';
+$strUserEmpty = 'Ïîðîæíº ³\'ìÿ êîðèñòóâà÷à!';
+$strUserName = '²ì\'ÿ êîðèñòóâà÷à';
+$strUsers = 'Êîðèñòóâà÷³';
+$strUseTables = 'Âèêîðèñòîâóâàòè òàáëèö³';
+
+$strValue = 'Çíà÷åííÿ';
+$strViewDump = 'Ïåðåãëÿíóòè äàìï (ñõåìó) òàáëèö³';
+$strViewDumpDB = 'Ïåðåãëÿíóòè äàìï (ñõåìó) ÁÄ';
+
+$strWelcome = 'Ëàñêàâî ïðîñèìî äî %s';
+$strWithChecked = 'Ç â³äì³÷åíèìè:';
+$strWrongUser = 'Íåâ³ðíèé ëîã³í/ïàðîëü. Äîñòóï íå äîçâîëåíî.';
+
+$strYes = 'Òàê';
+
+$strZip = 'çàïàêóâàòè â "zip"';
+
+// To translate
+?>

@@ -56,7 +56,8 @@ $disabled = "disabled";
 /*
   Récupération des données MySQL
  */
-$id_fta = Lib::getParameterFromRequest("id_fta"); //Variable passé en URL
+$id_fta = Lib::getParameterFromRequest(FtaModel::KEYNAME); //Variable passé en URL
+$mode = Lib::getParameterFromRequest('mode'); //Variable passé en URL
 //$id_fta=1;
 //Conditionnement
 /*

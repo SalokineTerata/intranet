@@ -22,7 +22,7 @@ class AccueilFta {
     const VALUE_12 = 12;
     const VALUE_100 = 100;
     const VALUE_100_POURCENTAGE = '100%';
-    const VALUE_MAX_PAR_PAGE = 5;
+    const VALUE_MAX_PAR_PAGE = 15;
 
     protected static $abrevationFtaEtat;
     protected static $arrayFtaEtat;
@@ -198,6 +198,9 @@ class AccueilFta {
         $idKeyNameFtaEtat = AccueilFta::VALUE_0;
         $tableau_synthese = '';
 
+        if (!self::$nombreFta) {
+            self::$nombreFta = AccueilFta::VALUE_0;
+        }
         switch (self::$syntheseAction) {
             case FtaEtatModel::ETAT_AVANCEMENT_VALUE_ATTENTE:
                 $nombreFta1 = ' (' . self::$nombreFta . ')';
@@ -253,21 +256,6 @@ class AccueilFta {
                         . '&synthese_action=all >Voir' . $nombreFta4 . '</a>';
                 $lien[AccueilFta::VALUE_1] = '';
                 $lien[AccueilFta::VALUE_2] = '';
-                break;
-            case FtaEtatModel::ETAT_ABREVIATION_VALUE_PRESENTATION:
-                $lien[AccueilFta::VALUE_0] = '<a href=index.php?id_fta_etat=8'
-                        . '&nom_fta_etat=' . FtaEtatModel::ETAT_ABREVIATION_VALUE_PRESENTATION
-                        . '&id_fta_role=' . $paramIdFtaRole
-                        . '&synthese_action=attente >En attente' . $nombreFta1 . '</a>';
-                $lien[AccueilFta::VALUE_1] = ' <a href=index.php?id_fta_etat=8'
-                        . '&nom_fta_etat=' . FtaEtatModel::ETAT_ABREVIATION_VALUE_PRESENTATION
-                        . '&id_fta_role=' . $paramIdFtaRole
-                        . '&synthese_action=encours >En cours' . $nombreFta2 . '</a>';
-                $lien[AccueilFta::VALUE_2] = '<a href=index.php?id_fta_etat=8'
-                        . '&nom_fta_etat=' . FtaEtatModel::ETAT_ABREVIATION_VALUE_PRESENTATION
-                        . '&id_fta_role=' . $paramIdFtaRole
-                        . '&synthese_action=correction >Effectuées' . $nombreFta3 . '</a>';
-
                 break;
         }
 
@@ -733,8 +721,8 @@ class AccueilFta {
                  * Export PDF
                  */
                 if (
-                        ($fta_impression and ( $abreviationFtaEtat == FtaEtatModel::ETAT_ABREVIATION_VALUE_VALIDE or $abreviationFtaEtat == FtaEtatModel::ETAT_ABREVIATION_VALUE_PRESENTATION))
-                        or ( $_SESSION['mode_debug'] == 1)
+                        ($fta_impression and ( $abreviationFtaEtat == FtaEtatModel::ETAT_ABREVIATION_VALUE_VALIDE))
+                        or ( $_SESSION['mode_debug'] == 1) or ( $workflowName == 'presentation')
                 ) {
 
                     $actions .= '  '
@@ -755,7 +743,8 @@ class AccueilFta {
 //                        and ( $abreviationFtaEtat == FtaEtatModel::ETAT_ABREVIATION_VALUE_MODIFICATION )
                         )or ( $ok == AccueilFta::VALUE_2 and $accesTransitionButton == FALSE && $recap[$idFta] == AccueilFta::VALUE_100_POURCENTAGE) and (
                         $abreviationFtaEtat == FtaEtatModel::ETAT_ABREVIATION_VALUE_MODIFICATION
-                        )
+                        ) or ( self::$syntheseAction == FtaEtatModel::ETAT_AVANCEMENT_VALUE_ALL)
+                        or ( self::$idFtaRole == AccueilFta::VALUE_1 and self::$syntheseAction == FtaEtatModel::ETAT_AVANCEMENT_VALUE_EFFECTUES)
                 ) {
                     $actions .= '<a '
                             . 'href=transiter.php'
@@ -880,7 +869,7 @@ class AccueilFta {
                                     . '<td ' . $bgcolor_header . ' width=\'' . $selection_width . '\' > ' . $icon_header . $selection . '</td>'//Ordre de priorisation
                                     . '<td ' . $bgcolor . ' width=8%>' . $nomSiteProduction . '</td>'//Site
                                     . '<td ' . $bgcolor . ' width=6%>' . $classification . '</td>'//Client
-                                    . '<td ' . $bgcolor . ' width=6%>' . $suffixeAgrologicFta . '</td>'//Class.
+                                    . '<td ' . $bgcolor . ' width=6%>' . $suffixeAgrologicFta . '</td>'// Raccourcie Class.
                                     . '<td ' . $bgcolor . $largeur_html_C1 . '><a title=' . $createur_link . '/>' . $din . '</a></td>'// Produits
                                     . '<td ' . $bgcolor . ' width=3%>' . $idDossierFta . 'v' . $idVersionDossierFta . '</td>'//Dossier Fta
                                     . '<td ' . $bgcolor . ' width=\'6%\'> <b><font size=\'2\' color=\'#0000FF\'>' . $codeArticleLdc . '</font></b></td>'; //Code regate
@@ -900,7 +889,7 @@ class AccueilFta {
                                     . '<td ' . $bgcolor_header . ' width=\'' . $selection_width . '\' >' . $icon_header . $selection . '</td>'//Ordre de priorisation
                                     . '<td ' . $bgcolor . ' width=8%>' . $nomSiteProduction . '</td>'//Site
                                     . '<td ' . $bgcolor . ' width=6%>' . $classification . '</td>'//Client
-                                    . '<td ' . $bgcolor . ' width=6%>' . $suffixeAgrologicFta . '</td>'//Class.
+                                    . '<td ' . $bgcolor . ' width=6%>' . $suffixeAgrologicFta . '</td>'// Raccourcie Class.
                                     . '<td ' . $bgcolor . $largeur_html_C1 . '><a title=' . $createur_link . '/>' . $din . '</a></td>'// Produits
                                     . '<td ' . $bgcolor . ' width=3%>' . $idDossierFta . 'v' . $idVersionDossierFta . '</td>'//Dossier Fta
                                     . '<td ' . $bgcolor . ' width=\'6%\'> <b><font size=\'2\' color=\'#0000FF\'>' . $codeArticleLdc . '</font></b></td>'; //Code regate
@@ -924,7 +913,7 @@ class AccueilFta {
                                     . '<td ' . $bgcolor_header . ' width=\'' . $selection_width . '\' >' . $icon_header . $selection . '</td>'//Ordre de priorisation
                                     . '<td ' . $bgcolor . ' width=8%>' . $nomSiteProduction . '</td>'//Site
                                     . '<td ' . $bgcolor . ' width=6%>' . $classification . '</td>'//Client
-                                    . '<td ' . $bgcolor . ' width=6%>' . $suffixeAgrologicFta . '</td>'//Class.
+                                    . '<td ' . $bgcolor . ' width=6%>' . $suffixeAgrologicFta . '</td>'/// Raccourcie Class.
                                     . '<td ' . $bgcolor . $largeur_html_C1 . '><a title=' . $createur_link . '/>' . $din . '</a></td>'// Produits
                                     . '<td ' . $bgcolor . ' width=3%>' . $idDossierFta . 'v' . $idVersionDossierFta . '</td>'//Dossier Fta
                                     . '<td ' . $bgcolor . ' width=\'6%\'> <b><font size=\'2\' color=\'#0000FF\'>' . $codeArticleLdc . '</font></b></td>'; //Code regate
@@ -944,7 +933,7 @@ class AccueilFta {
                                     . '<td ' . $bgcolor_header . ' width=\'' . $selection_width . '\' >' . $icon_header . $selection . '</td>'//Ordre de priorisation
                                     . '<td ' . $bgcolor . ' width=8%>' . $nomSiteProduction . '</td>'//Site
                                     . '<td ' . $bgcolor . ' width=6%>' . $classification . '</td>'//Client
-                                    . '<td ' . $bgcolor . ' width=6%>' . $suffixeAgrologicFta . '</td>'//Class.
+                                    . '<td ' . $bgcolor . ' width=6%>' . $suffixeAgrologicFta . '</td>'// Raccourcie Class.
                                     . '<td ' . $bgcolor . $largeur_html_C1 . '><a title=' . $createur_link . '/>' . $din . '</a></td>'// Produits
                                     . '<td ' . $bgcolor . ' width=3%>' . $idDossierFta . 'v' . $idVersionDossierFta . '</td>'//Dossier Fta
                                     . '<td ' . $bgcolor . ' width=\'6%\'> <b><font size=\'2\' color=\'#0000FF\'>' . $codeArticleLdc . '</font></b></td>'; //Code regate
@@ -980,7 +969,7 @@ class AccueilFta {
                                     . '<td ' . $bgcolor_header . ' width=\'' . $selection_width . '\' >' . $icon_header . $selection . '</td>'//Ordre de priorisation
                                     . '<td ' . $bgcolor . ' width=8%>' . $nomSiteProduction . '</td>'//Site
                                     . '<td ' . $bgcolor . ' width=6%>' . $classification . '</td>'//Client
-                                    . '<td ' . $bgcolor . ' width=6%>' . $suffixeAgrologicFta . '</td>'//Class.
+                                    . '<td ' . $bgcolor . ' width=6%>' . $suffixeAgrologicFta . '</td>'// Raccourcie Class.
                                     . '<td ' . $bgcolor . $largeur_html_C1 . '><a title=' . $createur_link . '/>' . $din . '</a></td>'// Produits
                                     . '<td ' . $bgcolor . ' width=3%>' . $idDossierFta . 'v' . $idVersionDossierFta . '</td>'//Dossier Fta
                                     . '<td ' . $bgcolor . ' width=\'6%\'> <b><font size=\'2\' color=\'#0000FF\'>' . $codeArticleLdc . '</font></b></td>'; //Code regate
@@ -1000,7 +989,7 @@ class AccueilFta {
                                     . '<td ' . $bgcolor_header . ' width=\'' . $selection_width . '\' >' . $icon_header . $selection . '</td>'//Ordre de priorisation
                                     . '<td ' . $bgcolor . ' width=8%>' . $nomSiteProduction . '</td>'//Site
                                     . '<td ' . $bgcolor . ' width=6%>' . $classification . '</td>'//Client
-                                    . '<td ' . $bgcolor . ' width=6%>' . $suffixeAgrologicFta . '</td>'//Class.
+                                    . '<td ' . $bgcolor . ' width=6%>' . $suffixeAgrologicFta . '</td>'// Raccourcie Class.
                                     . '<td ' . $bgcolor . $largeur_html_C1 . '><a title=' . $createur_link . '/>' . $din . '</a></td>'// Produits
                                     . '<td ' . $bgcolor . ' width=3%>' . $idDossierFta . 'v' . $idVersionDossierFta . '</td>'//Dossier Fta
                                     . '<td ' . $bgcolor . ' width=\'6%\'> <b><font size=\'2\' color=\'#0000FF\'>' . $codeArticleLdc . '</font></b></td>'; //Code regate
@@ -1025,7 +1014,7 @@ class AccueilFta {
                                     . '<td ' . $bgcolor_header . ' width=\'' . $selection_width . '\' >' . $icon_header . $selection . '</td>'//Ordre de priorisation
                                     . '<td ' . $bgcolor . ' width=8%>' . $nomSiteProduction . '</td>'//Site
                                     . '<td ' . $bgcolor . ' width=6%>' . $classification . '</td>'//Client
-                                    . '<td ' . $bgcolor . ' width=6%>' . $suffixeAgrologicFta . '</td>'//Class.
+                                    . '<td ' . $bgcolor . ' width=6%>' . $suffixeAgrologicFta . '</td>'// Raccourcie Class.
                                     . '<td ' . $bgcolor . $largeur_html_C1 . '><a title=' . $createur_link . '/>' . $din . '</a></td>'// Produits
                                     . '<td ' . $bgcolor . ' width=3%>' . $idDossierFta . 'v' . $idVersionDossierFta . '</td>'//Dossier Fta
                                     . '<td ' . $bgcolor . ' width=\'6%\'> <b><font size=\'2\' color=\'#0000FF\'>' . $codeArticleLdc . '</font></b></td>'; //Code regate
@@ -1046,7 +1035,7 @@ class AccueilFta {
                                     . '<td ' . $bgcolor_header . ' width=\'' . $selection_width . '\' >' . $icon_header . $selection . '</td>'//Ordre de priorisation
                                     . '<td ' . $bgcolor . ' width=8%>' . $nomSiteProduction . '</td>'//Site
                                     . '<td ' . $bgcolor . ' width=6%>' . $classification . '</td>'//Client
-                                    . '<td ' . $bgcolor . ' width=6%>' . $suffixeAgrologicFta . '</td>'//Class.
+                                    . '<td ' . $bgcolor . ' width=6%>' . $suffixeAgrologicFta . '</td>'// Raccourcie Class.
                                     . '<td ' . $bgcolor . $largeur_html_C1 . '><a title=' . $createur_link . '/>' . $din . '</a></td>'// Produits
                                     . '<td ' . $bgcolor . ' width=3%>' . $idDossierFta . 'v' . $idVersionDossierFta . '</td>'//Dossier Fta
                                     . '<td ' . $bgcolor . ' width=\'6%\'> <b><font size=\'2\' color=\'#0000FF\'>' . $codeArticleLdc . '</font></b></td>'; //Code regate
@@ -1138,7 +1127,7 @@ class AccueilFta {
     }
 
     /**
-     *       Fonction de création d'une liste déroulante basée sur une requete SQL
+     * Fonction de création d'une liste déroulante basée sur une requete SQL
       le premier champ retourné par la requête est désigné comme Clef de la liste
       le second alimente le contenu de la liste déroulante
      * @param string $paramRequeteSQL
@@ -1151,6 +1140,11 @@ class AccueilFta {
         $table = DatabaseOperation::convertSqlStatementKeyAndOneFieldToArray($paramRequeteSQL);
         if (!$table) {//Si la liste est vide
             $html_liste = '<i>(vide)</i>';
+//            $html_liste = '<select name=' . $paramNomDefaut . ' onChange=' . $paramNomDefaut . '_js()>';
+//            if (!$paramIdDefaut) {
+//                $html_liste .='<option value=-1 >Aucun</option>';
+//                $html_liste .= '</select>';
+//            }
         } else {
             $key = array_keys($table);
             if (!$paramNomDefaut) {
@@ -1159,6 +1153,9 @@ class AccueilFta {
 
 //Création de la liste déroulante
             $html_liste = '<select name=' . $paramNomDefaut . ' onChange=' . $paramNomDefaut . '_js()>';
+
+            $html_liste .='<option value=0 >Tous</option>';
+
             /*
              * PDO::FETCH_BOTH
              * Retourne la ligne suivante en tant qu'un tableau indexé par le nom et le numéro de la colonne

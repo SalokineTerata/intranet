@@ -86,182 +86,10 @@ $fieldExport = "";
  */
 //Mise en forme du tableau
 
-class HtmlResult {
-
-    const ROOT_VALUE = 1;
-    const ID_ARBORESCENCE = "IdArborescence";
-    const PROPRIETAIRE = "Proprietaire";
-    const MARQUE = "Marque";
-    const ACTIVITE = "Activite";
-    const RAYON = "Rayon";
-    const RESEAU = "Reseau";
-    const ENVIRONNEMENT = "Environnement";
-    const SAISONALITE = "Saisonnalite";
-
-    private $isProprietaireEnd;
-    private $arrayResult;
-    private $htmlResult;
-    private $idArborescence;
-    private $proprietaire;
-    private $proprietaire2;
-    private $marque;
-    private $activite;
-    private $rayon;
-    private $reseau;
-    private $environnement;
-    private $saisonalite;
-    private $export;
-    private $tmp;
-
-    function getIsProprietaireEnd() {
-        return $this->isProprietaireEnd;
-    }
-
-    function setIsProprietaireEndToTrue() {
-        $this->isProprietaireEnd = TRUE;
-    }
-
-    function setIsProprietaireEndToFalse() {
-        $this->isProprietaireEnd = FALSE;
-    }
-
-    function unsetProprietaire() {
-        $this->proprietaire = NULL;
-    }
-
-    function cleanAll() {
-
-        $this->idArborescence = NULL;
-        $this->proprietaire = NULL;
-        $this->marque = NULL;
-        $this->activite = NULL;
-        $this->rayon = NULL;
-        $this->reseau = NULL;
-        $this->environnement = NULL;
-        $this->saisonalite = NULL;
-        $this->export = NULL;
-    }
-
-    function getArrayResult() {
-        return $this->arrayResult;
-    }
-
-    function setArrayResult($arrayResult) {
-        $this->arrayResult = $arrayResult;
-    }
-
-    function getProprietaire() {
-        return $this->proprietaire;
-    }
-
-    function getMarque() {
-        return $this->marque;
-    }
-
-    function getActivite() {
-        return $this->activite;
-    }
-
-    function getRayon() {
-        return $this->rayon;
-    }
-
-    function getReseau() {
-        return $this->reseau;
-    }
-
-    function getEnvironnement() {
-        return $this->environnement;
-    }
-
-    function getSaisonalite() {
-        return $this->saisonalite;
-    }
-
-    function removeLastProprietaire() {
-        array_pop($this->proprietaire);
-    }
-
-    function setProprietaire($proprietaire) {
-
-
-//        if ($this->getIsProprietaireEnd() == TRUE) {
-//            array_pop($this->proprietaire);
-//            $this->setIsProprietaireEndToFalse();
-//        }
-        $this->proprietaire[] = $proprietaire;
-    }
-
-    function setMarque($marque) {
-        $this->marque = $marque;
-    }
-
-    function setActivite($activite) {
-        $this->activite = $activite;
-    }
-
-    function setRayon($rayon) {
-        $this->rayon = $rayon;
-    }
-
-    function setReseau($reseau) {
-        $this->reseau = $reseau;
-    }
-
-    function setEnvironnement($environnement) {
-        $this->environnement = $environnement;
-    }
-
-    function setSaisonalite($saisonalite) {
-        $this->saisonalite = $saisonalite;
-    }
-
-    function getIdArborescence() {
-        return $this->idArborescence;
-    }
-
-    function setIdArborescence($idArborescence) {
-        $this->idArborescence = $idArborescence;
-    }
-
-    function getProprietaire2() {
-        return $this->proprietaire2;
-    }
-
-    function setProprietaire2($proprietaire2) {
-        $this->proprietaire2 = $proprietaire2;
-    }
-
-    function getExport() {
-        return $this->export;
-    }
-
-    function setExport($export) {
-        $this->export = $export;
-    }
-
-    function getTmp() {
-        return $this->tmp;
-    }
-
-    function setTmp($tmp) {
-        $this->tmp = $tmp;
-    }
-
-    function getHtmlResult() {
-        return $this->htmlResult;
-    }
-
-    function setHtmlResult($htmlResult) {
-        $this->htmlResult = $htmlResult;
-    }
-
-}
-
 function getQuery($paramStartValue) {
     return $reqTableClassifRoot = "SELECT classification_arborescence_article.id_classification_arborescence_article, "
             . "ascendant_classification_arborescence_article_categorie_contenu, nom_classification_arborescence_article_categorie_contenu, "
-            . "nom_classification_arborescence_article_categorie "
+            . "nom_classification_arborescence_article_categorie,classification_arborescence_article_categorie_contenu.id_classification_arborescence_article_categorie_contenu "
             . "FROM classification_arborescence_article, classification_arborescence_article_categorie_contenu, "
             . "classification_arborescence_article_categorie "
             . "WHERE classification_arborescence_article.id_classification_arborescence_article_categorie_contenu = "
@@ -302,6 +130,8 @@ function recursifOne($paramStartValue, $htmlResult) {
 
             $id_fils = $value["id_classification_arborescence_article"];
             $id_pere = $value["ascendant_classification_arborescence_article_categorie_contenu"];
+            $id = $value["id_classification_arborescence_article_categorie_contenu"];
+
             $nom_contenu = $value["nom_classification_arborescence_article_categorie_contenu"];
             $nom_type = $value["nom_classification_arborescence_article_categorie"];
 
@@ -309,29 +139,43 @@ function recursifOne($paramStartValue, $htmlResult) {
                 //& $htmlResult->getProprietaire() != "Carrefour(Groupe)"
                 case "Propriétaire":
                     $htmlResult->setProprietaire($nom_contenu);
+                    $htmlResult->setIdproprietaire($id);
                     break;
                 case "Marque":
                     $htmlResult->setMarque($nom_contenu);
+                    $htmlResult->setIdmarque($id);
+
                     //$htmlResult->setIsProprietaireEndToTrue();
 
                     break;
                 case "Activité":
                     $htmlResult->setActivite($nom_contenu);
+                    $htmlResult->setIdactivite($id);
                     break;
                 case "Rayon":
                     $htmlResult->setRayon($nom_contenu);
+                    $htmlResult->setIdrayon($id);
+
                     break;
                 case "Environnement":
                     $htmlResult->setEnvironnement($nom_contenu);
+                    $htmlResult->setIdenvironnement($id);
+
                     break;
                 case "Réseau":
                     $htmlResult->setReseau($nom_contenu);
+                    $htmlResult->setIdreseau($id);
+
                     break;
                 case "Saisonalité":
                     $htmlResult->setSaisonalite($nom_contenu);
+                    $htmlResult->setIdsaisonalite($id);
+
                     break;
                 case "Export":
                     $htmlResult->setExport($nom_contenu);
+                    $htmlResult->setIdexport($id);
+
                     break;
 
                 //....
@@ -355,6 +199,8 @@ function recursifOne($paramStartValue, $htmlResult) {
                 switch ($nom_type) {
                     case "Propriétaire":
                         $htmlResult->removeLastProprietaire();
+                        $htmlResult->removeLastIdProprietaire();
+
                         break;
                     case "Marque":
                         break;
@@ -382,13 +228,21 @@ function recursifOne($paramStartValue, $htmlResult) {
                 $arrayResult[$id_fils] = array(
                     "IdArborescence" => $htmlResult->getIdArborescence(),
                     "Proprietaire" => $htmlResult->getProprietaire(),
+                    "IdProprietaire" => $htmlResult->getIdproprietaire(),
                     "Marque" => $htmlResult->getMarque(),
+                    "IdMarque" => $htmlResult->getIdmarque(),
                     "Activite" => $htmlResult->getActivite(),
+                    "IdActivite" => $htmlResult->getIdactivite(),
                     "Rayon" => $htmlResult->getRayon(),
+                    "IdRayon" => $htmlResult->getIdrayon(),
                     "Environnement" => $htmlResult->getEnvironnement(),
+                    "IdEnvironnement" => $htmlResult->getIdenvironnement(),
                     "Reseau" => $htmlResult->getReseau(),
+                    "IdReseau" => $htmlResult->getIdreseau(),
                     "Saisonnalite" => $htmlResult->getSaisonalite(),
+                    "IdSaisonnalite" => $htmlResult->getIdsaisonalite(),
                     "Export" => $htmlResult->getExport(),
+                    "IdExport" => $htmlResult->getIdexport(),
                 );
                 $htmlResult->setArrayResult($arrayResult);
                 //$htmlResult->cleanAll();
@@ -423,26 +277,39 @@ $password_connect = "8ale!ne"; //mot de passe de la base MySQL
 $donnee = mysql_pconnect($hostname_connect, $username_connect, $password_connect) or die("connexion impossible");
 
 foreach ($returnFull as $value) {
+//    $idArborescence = $value[HtmlResult::ID_ARBORESCENCE];
+//    $proprietaire = implode("/", $value[HtmlResult::PROPRIETAIRE]);
+//    $marque = $value[HtmlResult::MARQUE];
+//    $activite = $value[HtmlResult::ACTIVITE];
+//    $rayon = $value[HtmlResult::RAYON];
+//    $environnement = $value[HtmlResult::ENVIRONNEMENT];
+//    $reseau = $value[HtmlResult::RESEAU];
+//    $saisonalite = $value[HtmlResult::SAISONALITE];
     $idArborescence = $value[HtmlResult::ID_ARBORESCENCE];
-    $proprietaire = implode("/", $value[HtmlResult::PROPRIETAIRE]);
-    $marque = $value[HtmlResult::MARQUE];
-    $activite = $value[HtmlResult::ACTIVITE];
-    $rayon = $value[HtmlResult::RAYON];
-    $environnement = $value[HtmlResult::ENVIRONNEMENT];
-    $reseau = $value[HtmlResult::RESEAU];
-    $saisonalite = $value[HtmlResult::SAISONALITE];
+    $proprietaire_groupe = $value['IdProprietaire'][0];
+    $proprietaire_enseige = $value['IdProprietaire'][1];
+    if(!$proprietaire_enseige){
+        $proprietaire_enseige = 0 ;
+    }
+    $marque = $value['IdMarque'];
+    $activite = $value['IdActivite'];
+    $rayon = $value['IdRayon'];
+    $environnement = $value['IdEnvironnement'];
+    $reseau = $value['IdReseau'];
+    $saisonalite = $value['IdSaisonnalite'];
 
     $sql_inter = "INSERT INTO  `intranet_v3_0_dev`
-    .`migration_V2_vers_V3_classification_fta` (
-    `Proprietaire` ,
-    `Marque` ,
-    `Activite` ,
-    `Rayon` ,
-    `Environnement` ,
-    `Reseau` ,
-    `Saisonnalite` ,
-    `id_fta`)
-    VALUES ('$proprietaire',  '$marque',  '$activite',  '$rayon',  '$environnement',  '$reseau',  '$saisonalite',  '$idArborescence'
+    .`classification_fta2` (
+    `id_Proprietaire_Groupe` ,
+    `id_Proprietaire_Enseigne` ,
+    `id_Marque` ,
+    `id_Activite` ,
+    `id_Rayon` ,
+    `id_Environnement` ,
+    `id_Reseau` ,
+    `id_Saisonnalite` ,
+    )
+    VALUES ('','$proprietaire_groupe',  '$proprietaire_enseige', '$marque',  '$activite',  '$rayon',  '$environnement',  '$reseau',  '$saisonalite',  
 )";
 
     mysql_query("SET NAMES 'utf8'");
@@ -451,7 +318,7 @@ foreach ($returnFull as $value) {
 
 mysql_close();
 
-$bloc .="Vous avez bien envoyer les données dans la table :  migration_V2_vers_V3_classification_fta";
+$bloc .="Vous avez bien envoyer les données dans la table";
 
 /**
  * Rendu HTML

@@ -53,18 +53,22 @@ $html_table = "table "              //Permet d'harmoniser les tableaux
 $url_page_depart = Lib::isDefined("url_page_depart");
 $QUERY_STRING = Lib::isDefined("QUERY_STRING");
 $PHP_SELF = Lib::isDefined("PHP_SELF");
-$nbligne = Lib::isDefined("nbligne");
-$nbcol = Lib::isDefined("nbcol");
-$champ_recherche = Lib::isDefined("champ_recherche");
-$operateur_recherche = Lib::isDefined("operateur_recherche");
-$texte_recherche = Lib::isDefined("texte_recherche");
-$champ_courant = Lib::isDefined("champ_courant");
-$operateur_courant = Lib::isDefined("operateur_courant");
-$texte_courant = Lib::isDefined("texte_courant");
-$nb_col_courant = Lib::isDefined("nb_col_courant");
-$ajout_col = Lib::isDefined("ajout_col");
+$nbligne = Lib::isDefined('nbligne');                           // Nombre de lignes totales
+$nbcol = Lib::isDefined('nbcol');                             // nombre de colonnes de la ligne courante
+$champ_recherche = Lib::isDefined('champ_recherche');         //tableau des identifiants des champs choisis
+$operateur_recherche = Lib::isDefined('operateur_recherche'); //tableau des identifiants des operateurs choisis
+$texte_recherche = Lib::isDefined('texte_recherche');         //table au des valeurs entrées par l'utilisateur
+$champ_courant = Lib::isDefined('champ_courant');             // Valeur de l'identifiant du champ qui vient juste d'etre saisie par l'utilisateur
+$operateur_courant = Lib::isDefined('operateur_courant');     // Valeur de l'identifiant de l'operateur qui vient juste d'etre saisie par l'utilisateur
+$texte_courant = Lib::isDefined('texte_courant');             // Valeur du texte qui vient juste d'etre saisie par l'utilisateur
+$nb_col_courant = Lib::isDefined('nb_col_courant');           // numero de la colonne courante
+$nb_ligne_courant = Lib::isDefined("nb_ligne_courant");       // numero de la ligne courante
+$ajout_col = Lib::isDefined('ajout_col');                     //si $ajout_col = 1 : ajout d'une colonne dans la ligne courante
 $requete_resultat = Lib::isDefined("requete_resultat");
 $tab_resultat = Lib::isDefined("tab_resultat");
+
+$module_table = Lib::isDefined('module_table');               // nom du module auquel appartient la table
+$champ_retour = Lib::isDefined('champ_retour');                // nom du champ reponse de la requete
 
 /*
   Récupération des données MySQL
@@ -91,14 +95,17 @@ $tab_resultat = Lib::isDefined("tab_resultat");
  * ***************************************************************************** */
 
 $module = "fta";
-$module_table = $module;
+if ($module_table) {
+    $module_table = $module;
+}
 $etat_table = "fta_etat";
 $id_recherche = "id_fta";
 $id_recherche_etat = "id_fta_etat";
 $abreviation_recherche_etat = "abreviation_fta_etat";
 $nom_recherche_recherche_etat = "nom_fta_etat";
-$champ_retour = 'fta.id_fta';
-
+if ($champ_retour) {
+    $champ_retour = 'fta.id_fta';
+}
 $image_bordure = "../lib/images/s7.gif";
 $image_recherche = "../lib/images/search.gif";
 $nb_limite_resultat = 1000;
@@ -108,31 +115,15 @@ $nb_limite_resultat = 1000;
 
 
 $html_search = afficher_moteur_recherche(
-                $module,
-                $id_recherche,
-                $etat_table,
-                $id_recherche_etat,
-                $abreviation_recherche_etat,
-                $nom_recherche_recherche_etat,
-                $image_bordure,
-                $image_recherche,
-                $champ_retour,
-                $nb_limite_resultat,
-                $url_page_depart,
-                $QUERY_STRING,
-                $PHP_SELF,
-                $nbligne,
-                $nbcol,
-                $champ_recherche,
-                $operateur_recherche,
-                $texte_recherche,
-                $champ_courant,
-                $operateur_courant,
-                $texte_courant,
-                $nb_col_courant,
-                $ajout_col,
-                $requete_resultat,
-                $tab_resultat
+        $module, $id_recherche, $etat_table
+        , $id_recherche_etat, $abreviation_recherche_etat
+        , $nom_recherche_recherche_etat, $image_bordure
+        , $image_recherche, $champ_retour, $nb_limite_resultat
+        , $url_page_depart, $QUERY_STRING, $PHP_SELF, $nbligne
+        , $nbcol, $champ_recherche, $operateur_recherche
+        , $texte_recherche, $champ_courant, $operateur_courant
+        , $texte_courant, $nb_col_courant, $ajout_col
+        , $requete_resultat, $tab_resultat, $module_table
 );
 echo $html_search;
 

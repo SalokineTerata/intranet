@@ -51,8 +51,9 @@ class FtaSuiviProjetModel extends AbstractModel {
     }
 
     /**
-     * 
-     * @param type $paramIdFta
+     * Duplication des données d'un Fta dans la table Suivi de Projet
+     * @param type $paramIdFtaOrig
+     * @param type $paramIdFtaNew
      */
     public static function DuplicateFtaSuiviProjetByIdFta($paramIdFtaOrig, $paramIdFtaNew) {
         DatabaseOperation::execute(
@@ -78,6 +79,12 @@ class FtaSuiviProjetModel extends AbstractModel {
         );
     }
 
+    /**
+     * 
+     * @param type $paramIdFta
+     * @param type $paramIdChapitre
+     * @return array
+     */
     static public function getIdFtaSuiviProjetByIdFtaAndIdChapitre($paramIdFta, $paramIdChapitre) {
 
         //Récupération du tableau de résultat

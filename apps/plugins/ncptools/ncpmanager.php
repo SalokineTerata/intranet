@@ -43,7 +43,7 @@ include("../session.php");
   Récupération des données MySQL
 */
     //Liste des serveurs concernés
-    $req="SELECT * FROM datasync_serveur WHERE active_datasync_serveur=1";
+    $req="SELECT nom_datasync_serveur,ip_datasync_serveur FROM datasync_serveur WHERE active_datasync_serveur=1";
     $result=DatabaseOperation::query($req);
 
     //Construction des chemins d'accès aux volumes des serveurs concernés

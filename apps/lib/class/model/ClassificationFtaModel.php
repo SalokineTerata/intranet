@@ -164,6 +164,17 @@ class ClassificationFtaModel extends AbstractModel {
         return $return;
     }
 
+    /**
+     * Non fonctionnelle
+     * @param type $table
+     * @param type $champ_valeur
+     * @param type $champ_id_fils
+     * @param type $champ_id_pere
+     * @param type $id_racine
+     * @param string $sql_where
+     * @param type $extension
+     * @return type
+     */
     public static function getClassificationName($table, $champ_valeur, $champ_id_fils, $champ_id_pere, $id_racine, $sql_where, $extension) {
         /*
           Déclaration des variables:
@@ -229,14 +240,16 @@ class ClassificationFtaModel extends AbstractModel {
         }
 
 
-        $requete_principale = 'SELECT $champ_id_pere, $champ_id_fils, $champ_valeur FROM $table '
-                . '$sql_where '
-                . 'ORDER BY $tri ASC '
-        ;
-
-        //echo $requete_principale;
-        $resultat = DatabaseOperation::query($requete_principale);
-        $nombre_ligne = mysql_num_rows($resultat);
+        $requete_principale = 'SELECT ' . $champ_id_pere . ',' . $champ_id_fils . ',' . $champ_valeur
+                . ' FROM ' . $table
+                . $sql_where
+                . ' ORDER BY ' . $tri . ' ASC ';
+        $array = DatabaseOperation::convertSqlStatementWithoutKeyToArray($requete_principale);
+        if ($array) {
+            $nombre_ligne = count($array);
+        } else {
+            $nombre_ligne = AccueilFta::VALUE_0;
+        }
 
         /*
           Corps de la fonction
@@ -255,5 +268,7 @@ class ClassificationFtaModel extends AbstractModel {
         //var_dump($return);
         return $return;
     }
+
+   
 
 }

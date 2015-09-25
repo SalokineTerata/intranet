@@ -66,7 +66,6 @@ class Navigation {
 
         foreach ($arrayFtaEtatAndFta as $rowsFtaEtatAndFta) {
             //Récupération des informations préalables
-//            $rowsFtaEtatAndFta[FtaModel::KEYNAME] = self::$id_fta;
             //Nom de l'assistante de projet responsable:
             $array = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
                             'SELECT ' . UserModel::FIELDNAME_PRENOM . ',' . UserModel::FIELDNAME_NOM
@@ -122,6 +121,10 @@ class Navigation {
         //return $return raplacera menu_navigation;
     }
 
+    /**
+     * Verification de l''état d'avancement.
+     * @return String
+     */
     protected static function CheckSyntheseAction() {
 
         $ProcessusEncoursVisible = array();
@@ -199,12 +202,12 @@ class Navigation {
                  * Nous récupérons les processus précédent du processus en cours si ils sont tous validé
                  */
                 foreach ($req as $rows) {
-                    self::$id_fta_processus = $rows[FtaProcessusModel::KEYNAME];
+                    self::$id_fta_processus = 
                     /*
                      * Nous verifions si tous les processus précedents du chapitre que l'utilisateur à les droits d'accès
                      * sont validé ou non et donc visible ou non
                      */
-                    $taux_validation_processus = FtaProcessusModel::getFtaProcessusNonValidePrecedent(self::$id_fta, self::$id_fta_processus, self::$id_fta_workflow);
+                    $taux_validation_processus = FtaProcessusModel::getFtaProcessusNonValidePrecedent(self::$id_fta, $rows[FtaProcessusModel::KEYNAME], self::$id_fta_workflow);
 
                     //Liste des processus visible(lecture-seule)
                     if ($taux_validation_processus == 1 or $taux_validation_processus === NULL) {
@@ -232,8 +235,7 @@ class Navigation {
                      * Nous récupérons tous les processus validé pour vérifier plus tard si nous devons les affichers
                      */
                     foreach ($arrayProcessusValide as $rowsProcessusValide) {
-                        self::$id_fta_processus = $rowsProcessusValide[FtaProcessusModel::KEYNAME];
-                        $taux_validation_processus = FtaProcessusModel::getValideProcessusEncours(self::$id_fta, self::$id_fta_processus, self::$id_fta_workflow);
+                        $taux_validation_processus = FtaProcessusModel::getValideProcessusEncours(self::$id_fta, $rowsProcessusValide[FtaProcessusModel::KEYNAME], self::$id_fta_workflow);
                         if ($taux_validation_processus == 1) {
 
                             $ProcessusValide[] = $rowsProcessusValide[FtaProcessusModel::KEYNAME];

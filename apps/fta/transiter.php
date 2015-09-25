@@ -108,7 +108,8 @@ foreach ($arrayFta as $rowsFta) {
 
 
 
-
+$taux_temp = FtaSuiviProjetModel::getFtaTauxValidation($idFta);
+$recap[$idFta] = round($taux_temp[AccueilFta::VALUE_0] * AccueilFta::VALUE_100, AccueilFta::VALUE_0) . '%';
 
 
 
@@ -126,6 +127,9 @@ $req = 'SELECT ' . FtaTransitionModel::FIELDNAME_NOM_USUEL_FTA_TRANSITION . ', '
 ;
 if ($demande_abreviation_fta_transition) {
     $req.= ' AND ' . FtaTransitionModel::FIELDNAME_ABREVIATION_FTA_TRANSITION . '=\'' . $demande_abreviation_fta_transition . '\' ';
+}
+if ($recap[$idFta] <> '100%') {
+    $req.= ' AND ' . FtaTransitionModel::FIELDNAME_PROCESSUS_PROPRIETAIRE_FTA_TRANSITION . '=0';
 }
 $req .=' ORDER BY ' . FtaTransitionModel::FIELDNAME_ABREVIATION_FTA_TRANSITION . ' DESC ';
 $arrayFtaTransition = DatabaseOperation::convertSqlStatementWithoutKeyToArray($req);

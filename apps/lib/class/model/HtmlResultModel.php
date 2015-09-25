@@ -26,6 +26,15 @@ class HtmlResult {
     private $saisonalite;
     private $export;
     private $tmp;
+    private $idproprietaire;
+    private $idproprietaire2;
+    private $idmarque;
+    private $idactivite;
+    private $idrayon;
+    private $idreseau;
+    private $idenvironnement;
+    private $idsaisonalite;
+    private $idexport;
 
     function getIsProprietaireEnd() {
         return $this->isProprietaireEnd;
@@ -96,6 +105,10 @@ class HtmlResult {
         array_pop($this->proprietaire);
     }
 
+    function removeLastIdProprietaire() {
+        array_pop($this->idproprietaire);
+    }
+
     function setProprietaire($proprietaire) {
 
 
@@ -152,6 +165,78 @@ class HtmlResult {
 
     function setExport($export) {
         $this->export = $export;
+    }
+
+    function getIdproprietaire() {
+        return $this->idproprietaire;
+    }
+
+    function getIdproprietaire2() {
+        return $this->idproprietaire2;
+    }
+
+    function getIdmarque() {
+        return $this->idmarque;
+    }
+
+    function getIdactivite() {
+        return $this->idactivite;
+    }
+
+    function getIdrayon() {
+        return $this->idrayon;
+    }
+
+    function getIdreseau() {
+        return $this->idreseau;
+    }
+
+    function getIdenvironnement() {
+        return $this->idenvironnement;
+    }
+
+    function getIdsaisonalite() {
+        return $this->idsaisonalite;
+    }
+
+    function getIdexport() {
+        return $this->idexport;
+    }
+
+    function setIdproprietaire($idproprietaire) {
+        $this->idproprietaire[] = $idproprietaire;
+    }
+
+    function setIdproprietaire2($idproprietaire2) {
+        $this->idproprietaire2 = $idproprietaire2;
+    }
+
+    function setIdmarque($idmarque) {
+        $this->idmarque = $idmarque;
+    }
+
+    function setIdactivite($idactivite) {
+        $this->idactivite = $idactivite;
+    }
+
+    function setIdrayon($idrayon) {
+        $this->idrayon = $idrayon;
+    }
+
+    function setIdreseau($idreseau) {
+        $this->idreseau = $idreseau;
+    }
+
+    function setIdenvironnement($idenvironnement) {
+        $this->idenvironnement = $idenvironnement;
+    }
+
+    function setIdsaisonalite($idsaisonalite) {
+        $this->idsaisonalite = $idsaisonalite;
+    }
+
+    function setIdexport($idexport) {
+        $this->idexport = $idexport;
     }
 
     function getTmp() {

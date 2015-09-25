@@ -241,7 +241,7 @@ class Chapitre {
                 $return = self::$html_chapitre_identite;
                 break;
             case 'commerce':
-                self::$html_chapitre_commerce = self::buildChapitreCommerce();
+                self::$html_chapitre_commerce = self::buildChapitreDonneClient();
                 $return = self::$html_chapitre_commerce;
                 break;
             case 'production':
@@ -326,12 +326,12 @@ class Chapitre {
                 break;
             default:
             case 'etiquette_client_FEAvecEtiq':
-                self::$html_chapitre_etiquette_client_FEAvecEtiq = self::buildChapitreEtiquetteClient_FEAvecEtiq();
+                self::$html_chapitre_etiquette_client_FEAvecEtiq = self::buildChapitreEtiquetteClient_FE();
                 $return = self::$html_chapitre_etiquette_client_FEAvecEtiq;
                 break;
             default:
             case 'etiquette_client_MDDAvecEtiq':
-                self::$html_chapitre_etiquette_client_MDDAvecEtiq = self::buildChapitreEtiquetteClient_MDDAvecEtiq();
+                self::$html_chapitre_etiquette_client_MDDAvecEtiq = self::buildChapitreEtiquetteClient_MDD();
                 $return = self::$html_chapitre_etiquette_client_MDDAvecEtiq;
                 break;
             default:
@@ -386,7 +386,7 @@ class Chapitre {
                 break;
             default:
             case 'donnees_clients':
-                self::$html_chapitre_donnees_clients_w1 = self::buildChapitreCommerce();
+                self::$html_chapitre_donnees_clients_w1 = self::buildChapitreDonneClient();
                 $return = self::$html_chapitre_donnees_clients_w1;
                 break;
             default:
@@ -528,7 +528,7 @@ class Chapitre {
         return $bloc;
     }
 
-    public static function buildChapitreCommerce() {
+    public static function buildChapitreDonneClient() {
 
         $bloc = '';
         $id_fta = self::$id_fta;
@@ -547,7 +547,7 @@ class Chapitre {
         $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_UNITE_FACTURATION);
 
         //Gencod EAN Article
-        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_EAN_COLIS);
+        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_EAN_UVC);
 
         //Gencod EAN Colis
         $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_EAN_COLIS);
@@ -837,21 +837,8 @@ class Chapitre {
         $ftaView->setFtaChapitreModelById(self::ID_CHAPITRE_IDENTITE);
 
 
-        //Libellé du code article chez le client
-        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_LIBELLE_CODE_ARTICLE_CLIENT);
-
-
-        //Valeur du code article chez le client
-        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_CODE_ARTICLE_CLIENT);
-
-        //PVC de l'article:
-        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_PVC_ARTICLE);
-
         //Nombre de portion
         $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_NOMBRE_PORTION_FTA);
-
-        //Service consommateur
-        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_SERVICE_CONSOMMATEUR);
 
         //Produit Transformé en France
         $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_PRODUIT_TRANSFORME);
@@ -859,21 +846,10 @@ class Chapitre {
         //Logo éco-emballage
         $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_LOGO_ECO_EMBALLAGE);
 
-
-        $bloc.='<tr> <td>Logo spécifique étiquette manquant choix possible en dessous ?</td></tr>';
-
-        //Libellé etiquette carton:
-        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_LIBELLE_CLIENT);
-
-        //Modèle d'étiquette
-        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_ETIQUETTE_CODESOFT);
-
-
-
         return $bloc;
     }
 
-    public static function buildChapitreEtiquetteClient_FEAvecEtiq() {
+    public static function buildChapitreEtiquetteClient_FE() {
 
         $bloc = '';
         $id_fta = self::$id_fta;
@@ -910,28 +886,18 @@ class Chapitre {
         $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_LOGO_ECO_EMBALLAGE);
 
 
-        $bloc.='<tr> <td>Logo spécifique étiquette manquant choix possible en dessous ?</td></tr>';
-
-        //Libellé etiquette carton:
-        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_LIBELLE_CLIENT);
+//        $bloc.='<tr> <td>Logo spécifique étiquette manquant choix possible en dessous ?</td></tr>';
+//
+//        //Libellé etiquette carton:
+//        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_LIBELLE_CLIENT);
 
         //Modèle d'étiquette
         $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_ETIQUETTE_CODESOFT);
 
-
-        $bloc.='<tr> <td>Masque étiquette UVC recto</td></tr>';
-
-
-        $bloc.='<tr> <td>Masque étiquette UVC verso</td></tr>';
-
-
-        $bloc.='<tr> <td>Masque colis</td></tr>';
-
-
         return $bloc;
     }
 
-    public static function buildChapitreEtiquetteClient_MDDAvecEtiq() {
+    public static function buildChapitreEtiquetteClient_MDD() {
 
         $bloc = '';
         $id_fta = self::$id_fta;
@@ -950,29 +916,18 @@ class Chapitre {
         //Produit Transformé en France
         $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_PRODUIT_TRANSFORME);
 
+        //Logo éco-emballage
+        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_LOGO_ECO_EMBALLAGE);
 
         //Activer le système d'impression Base Etiquette Codesoft
         $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_ACTIVATION_CODESOFT);
 
-        //Logo éco-emballage
-        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_LOGO_ECO_EMBALLAGE);
-
-        $bloc.='<tr> <td>Logo spécifique étiquette manquant choix possible en dessous ?</td></tr>';
-
-        //Libellé etiquette carton:
-        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_LIBELLE_CLIENT);
+//        //Libellé etiquette carton: ou Logo spécifique étiquette ?
+//        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_LIBELLE_CLIENT);
 
         //Modèle d'étiquette
         $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_ETIQUETTE_CODESOFT);
 
-        //Libellé du code article chez le client
-        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_LIBELLE_CODE_ARTICLE_CLIENT);
-
-
-        $bloc.='<tr> <td>Masque étiquette UVC recto</td></tr>';
-
-
-        $bloc.='<tr> <td>Masque colis</td></tr>';
 
         return $bloc;
     }
@@ -1204,12 +1159,6 @@ class Chapitre {
         //Remarque
         $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_REMARQUE);
 
-        //Durée de vie Production (en jours)
-        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_DUREE_DE_VIE_TECHNIQUE_PRODUCTION);
-
-
-        //Code Douane 
-        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_CODE_DOUANE_FTA);
 
 
         return $bloc;
@@ -1765,8 +1714,12 @@ class Chapitre {
         $ftaView->setFtaChapitreModelById(self::ID_CHAPITRE_IDENTITE);
 
 
-        //Durée de vie totale
-        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_DUREE_DE_VIE_TECHNIQUE_MAXIMALE);
+        //Durée de vie Production (en jours)
+        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_DUREE_DE_VIE_TECHNIQUE_PRODUCTION);
+
+
+        //Code Douane 
+        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_CODE_DOUANE_FTA);
 
         return $bloc;
     }
@@ -1956,7 +1909,7 @@ class Chapitre {
         $bloc.=$ftaView->getHtmlCreateurFta();
 
         //Workflow de FTA
-        $bloc.=$ftaView->ListeWorkflowByAcces(self::$idUser, $isEditable, $id_fta);
+        $bloc.=$ftaView->ListeWorkflowByAcces(self::$idUser, FALSE, $id_fta);
 
         //Date d'échéance de la FTA
         $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_DATE_ECHEANCE_FTA);

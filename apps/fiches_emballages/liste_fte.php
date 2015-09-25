@@ -130,7 +130,7 @@ $recherche .="<td> Fournisseur: "
         . "<select name=selection_fournisseur onChange=lien_selection_fournisseur()>"
         . "<option value=-1 >Tous</option>"
 ;
-$req = "SELECT * FROM fte_fournisseur ORDER BY nom_fte_fournisseur";
+$req = "SELECT id_fte_fournisseur,nom_fte_fournisseur FROM fte_fournisseur ORDER BY nom_fte_fournisseur";
 $result_groupe = DatabaseOperation::convertSqlStatementWithoutKeyToArray($req);
 foreach ($result_groupe as $rows_groupe) {
     if ($rows_groupe["id_fte_fournisseur"] == $selection_fournisseur) {

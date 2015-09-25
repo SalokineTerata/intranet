@@ -1,0 +1,289 @@
+----------------------
+phpMyAdmin - Changelog
+----------------------
+
+$Id: ChangeLog,v 1.960.2.82 2002/08/13 19:37:44 rabus Exp $
+$Source: /cvsroot/phpmyadmin/phpMyAdmin/ChangeLog,v $
+
+2002-08-13 Alexander M. Turek  <rabus@users.sourceforge.net>
+    * libraries/defines.lib.php3, Documentation.*, translators.html: Patch 1.
+
+2002-08-12 Alexander M. Turek  <rabus@users.sourceforge.net>
+    * sql.php3: XHTML fixes.
+
+2002-08-11 Alexander M. Turek  <rabus@users.sourceforge.net>
+    * tbl_properties.inc.php3: Tried to work around bug #590481 (By default
+      radio button for primary key).
+    * Documentation.txt: Sychronization.
+    * libraries/defines.lib.php3, Documentation.*, translators.html: Prepared
+      files for the release, removed the -dev suffix from the version number.
+    * ### 2.2.7 released ###
+
+2002-08-11 Loïc Chapeaux  <lolo@phpheaven.net>
+    * db_details.php3, tbl_change.php3, tbl_properties.php3, tbl_qbe.php3:
+      Fixed bug #592000 (dir="ltr" for textarea tags).
+
+2002-08-05 Alexander M. Turek  <rabus@users.sourceforge.net>
+    * translators.html:
+      - Added a small note in order to avoid annoying emails.
+      - Corrected the name of the Chinese translator.
+
+2002-08-04 Alexander M. Turek  <rabus@users.sourceforge.net>
+    * translators.html, libraries/select_lang.lib.php3, lang/afrikaans.inc.php3,
+      lang/slovenian.inc.php3, lang/slovenian-win1250.inc.php3:
+      Merged v2.2.7 editions of the new translations from the main branch.
+    * Documentation.html:
+      - We now have 41 languages, don't we?
+      - Merged some changes from the main branch.
+
+2002-07-13 Alexander M. Turek  <rabus@users.sourceforge.net>
+    * Documentation.html: News about bug #540671.
+
+2002-07-11 Alexander M. Turek  <rabus@users.sourceforge.net>
+    * read_dump.php3: Fixed bug #579968, thanks to Alvar Soome (finsoft).
+
+2002-07-10 Alexander M. Turek  <rabus@users.sourceforge.net>
+    * sql.php3: Restored revision 1.94.2.2 because of heavy bugs in the code.
+    * Documentation.html: Added some FAQ entries from the main branch.
+
+2002-07-02 Alexander M. Turek  <rabus@users.sourceforge.net>
+    * translators.html: Sychronization.
+
+2002-07-02 Alexander M. Turek  <rabus@users.sourceforge.net>
+    * sql.php3: Fixed bug #575867.
+
+2002-07-01 Alexander M. Turek  <rabus@users.sourceforge.net>
+    * sql.php3: merged and debugged patch #565627 for the old bug #461192 (wrong
+      query count for groups) after it has been tested in the main branch,
+      thanks to Svetlozar Kovachev (svetlio).
+
+2002-07-01 Robin Johnson  <robbat2@users.sourceforge.net>
+    * tbl_printview.php3:
+        - Fixed style="PAGE-BREAK-AFTER: always" from appearing on the
+          last <div>, to stop a blank page being printed.
+        - Moved <hr /> to just inside </div> - gets line on the same page.
+    * tbl_qbe.php3: Using * for tables fields disables
+      sorting for that field (Fix for bug #570698).
+
+2002-06-26 Alexander M. Turek  <rabus@users.sourceforge.net>
+    * index.php3, header.inc.php3, left.php3, libraries/auth/*.auth.lib.php3:
+      Fixed bug #574025 (W3C validator didn't detect character encoding).
+    * left.php3: Fixed a typo.
+
+2002-06-25 Alexander M. Turek  <rabus@users.sourceforge.net>
+    * ChangeLog: Removed 2.3.0 entries and those that were added before 2.2.6.
+
+2002-06-23 Olivier L. Müller  <om@omnis.ch>
+    * db_stats.php3: Fixed warning from mysql_free_result.
+
+2002-06-18 Alexander M. Turek  <rabus@users.sourceforge.net>
+    * Documentation.txt: Updates.
+
+2002-06-18 Alexander M. Turek  <rabus@users.sourceforge.net>
+    * Documentation.html: Merged a few changes from the main branch.
+    * lang/*.inc.php3: Updated several laguage file using the ones
+      from the main branch.
+    * translators.html: Synchronized with the main branch.
+
+2002-06-18 Marc Delisle  <lem9@users.sourceforge.net>
+    * scripts/create-release.sh: the I option in tar for bzip output
+      is deprecated and no longer works on sourceforge, use j
+
+2002-06-11 Alexander M. Turek  <rabus@users.sourceforge.net>
+    * libraries/display_tbl.lib.php3: JS fixes, thanks to
+      Richard Hornsby <rhornsby at users.sourceforge.net>.
+    * translators.html: Updated translators list.
+    * Documentation.html: Fixed a typo.
+
+2002-06-08 Alexander M. Turek  <rabus@users.sourceforge.net>
+    * Documentation.html:
+      - The textarea bug still appears in Mozilla 1.0-final;
+      - Fixed a typo;
+      - Added Laurent Dhima to the credits.
+    * lang/dutch.inc.php3: Small corrections, thanks to
+      "CaliMonk" <calimonk at gmx.net>.
+    * translators.html:
+      - Updated translators list;
+      - Changed special characters into HTML entities;
+      - Corrected the displayed version number.
+    * lang/polish.inc.php3: Small corrections, thanks again to
+      Jakub Wilk <ubanus at users.sourceforge.net>.
+    * tbl_replace.php3: Fixed bug #564741 (CURDATE doesn't need any arguments).
+
+2002-06-01 Loïc Chapeaux  <lolo@phpheaven.net>
+    * read_dump.php3, lines 245-252: improved the "open_basedir" handling.
+    * Documentation.html; main.php3; translators.html: feature request #539644
+      (Translation feedback link).
+
+2002-05-30 Alexander M. Turek  <rabus@users.sourceforge.net>
+    * lang/albanian.inc.php3: Updates, thanks again to
+      Laurent Dhima <laurenti@users.sourceforge.net>.
+
+2002-05-27 Loïc Chapeaux  <lolo@phpheaven.net>
+    * lang/czech*.inc.php3: Updated, thanks to Michal Cihaø.
+
+2002-05-27 Alexander M. Turek  <rabus@users.sourceforge.net>
+    * Documentation.html: The external global variables don't exist anymore
+      since PHP 4.2.0!
+    * README: Updated requirements.
+
+2002-05-23 Alexander M. Turek  <rabus@users.sourceforge.net>
+    * header.inc.php3: Fixed a typo.
+
+2002-05-26 Loïc Chapeaux  <lolo@phpheaven.net>
+    * scripts/create-release.sh, line 60: added the "-P" option (prune empty
+      directory) for the cvs checkout.
+    * sql.php3:
+      - fixed a warning thanks to
+        Svetlio Kovachev <svetlio at users.sourceforge.net>;
+      - handle statements with "PROC ANALYSE";
+      - coding standards.
+    * libraries/auth/cookies.auth.php3: improved a bit the detection mechanism.
+
+2002-05-25 Loïc Chapeaux  <lolo@phpheaven.net>
+    * read_dump.php3, lines 255-256: path must use "\" under winwin.
+
+2002-05-24 Loïc Chapeaux  <lolo@phpheaven.net>
+    * libraries/functions.js, lines 15-17: fixed bug #559815 - Javascript
+      problem with Opera.
+
+2002-05-23 Alexander M. Turek  <rabus@users.sourceforge.net>
+    * Documentation.html: The Mozilla textarea bug also appears in
+      Mozilla 1.0-RC2 and Netscape 7.0-PR1.
+
+2002-05-22 Loïc Chapeaux  <lolo@phpheaven.net>
+    * header.inc.php3, lines 25-26; left.php3, lines 47-48: fixed Apache 2+
+      & PHP 4.2+ HTTP header bug.
+
+2002-05-22 Marc Delisle  <lem9@users.sourceforge.net>
+    * lang/indonesian.inc.php3 updates thanks to Rachim Tamsjadi
+      (tamsjadi at icqmail.com)
+
+2002-05-21 Loïc Chapeaux  <lolo@phpheaven.net>
+    * ldi_table.php3, line 44: beautified generated html.
+
+2002-05-20 Alexander M. Turek  <rabus@users.sourceforge.net>
+    * ldi_table.php3: Added labels for checkboxes.
+
+2002-05-19 Marc Delisle  <lem9@users.sourceforge.net>
+    * read_dump.php3, bug 556105: do not execute a bookmark if asked to
+      only view it
+
+2002-05-19 Alexander M. Turek  <rabus@users.sourceforge.net>
+    * lang/german.inc.php3: Better translation.
+    * lang/albanian.inc.php3, libraries/select_lang.lib.php3:
+      New translation, thanks to Laurent Dhima <laurenti@users.sourceforge.net>.
+
+2002-05-18 Alexander M. Turek  <rabus@users.sourceforge.net>
+    * libraries/display_tbl.lib.php3, line 1006: if a binary record contains
+      some html special characters, display was not xhtml compilant.
+
+2002-05-17 Marc Delisle  <lem9@users.sourceforge.net>
+    * tbl_change.php3, bug 556296: field size for int
+
+2002-05-17 Loïc Chapeaux  <lolo@phpheaven.net>
+    * libraries/build_dump.php3, lines 70-75: fixed bug #551682 - PMA ignores
+      case of table names under winwin, thanks to
+      Pawe³ Szczepañski <pauluz at users.sourceforge.net>.
+    * libraries/display_tbl.lib.php3, line 1006: if a binary record contains
+      some html tags, display was broken. Thanks to
+      SailorMax <max at elcor.lv>.
+    * libraries/auth/cookie.auth.lib.php3: fixed bug #551898 - Cookie auth and
+      cookies refused.
+    * libraries/build_dump.lib.php3: fixed bug #552486 - row count starts at 1?
+
+2002-05-13 Loïc Chapeaux  <lolo@phpheaven.net>
+    * lang/arabic.inc.php3: updated thanks to Tarik kallida.
+
+2002-05-09 Alexander M. Turek  <rabus@users.sourceforge.net>
+    * tbl_dump.php3: corrected a condition, SQL dumps should now work again.
+
+2002-05-05 Loïc Chapeaux  <lolo@phpheaven.net>
+    * lang/thai.inc.php3: completed thanks to Arthit Suriyawongkul &
+      Warit Wanasathian.
+
+2002-05-04 Loïc Chapeaux  <lolo@phpheaven.net>
+    * lang/chinese_gb.inc.php3: updated thanks to Siu Sun.
+
+2002-05-01 Loïc Chapeaux  <lolo@phpheaven.net>
+    * db_stats.php3, lines 12-22: ensure this script can only be ran by a
+      super-user.
+    * libraries/grab_globals.lib.php3: fixed a bug with the "extact()" function
+      under php 3.0.12 thanks to Kris Wood <kris at navi.net>.
+    * libraries/common.lib.php3, line 861: fixed a warning thanks to
+      Kris Wood <kris at navi.net>.
+
+2002-04-30 Alexander M. Turek  <rabus@users.sourceforge.net>
+    * lang/german.inc.php3: Clarification ($strFlushTable).
+
+2002-04-29 Loïc Chapeaux  <lolo@phpheaven.net>
+    * lang/portuguese.inc.php3: updated thanks to usual translator.
+    * user_details.php3, line 1342: fixed bug #549887 - Db name with "\_"
+      changed when granting.
+
+2002-04-28 Alexander M. Turek  <rabus@users.sourceforge.net>
+    * tbl_dump.php3:
+      - line 221: PHP3 compatibility.
+      - lines 322-329: XHTML fixes.
+
+2002-04-28 Loïc Chapeaux  <lolo@phpheaven.net>
+    * db_details.php3, tbl_change.php3, tbl_properties.php3, user_details.php3:
+      xhtml fixes.
+    * lang/slovak-win1250.inc.php3: updated thanks to Peter Svec.
+    * tbl_addfield.php3; tbl_alter.php3: fixed bug #548495 - Alter table not
+      replicate.
+
+2002-04-27 Alexander M. Turek  <rabus@users.sourceforge.net>
+    * common.lib.php3, lines 232, 233, 505-507: Fixed bug #549570
+      (Strange error if controluser is invalid).
+
+2002-04-27 Loïc Chapeaux  <lolo@phpheaven.net>
+    * Documentation.html:
+      - xhtml fixes;
+      - added a faq entry about bug #547064 (JS error with textareas under
+        Mozilla).
+    * libraries/display_tbl.lib.php3; libraries/functions.js: better fix
+      against bug #547384 (Marker Color can't equal Pointer Color).
+    * libraries/auth/config.auth.lib.php3, line 111: fixed a header problem.
+    * scripts/create-release.sh: improved so a CVS branch tag may be used.
+    * lang/croatian-*; libraries/select_lang.lib.php3: new Croatian
+      translations thanks to Sime Essert <sime@nofrx.org>.
+
+2002-04-26 Alexander M. Turek  <rabus@users.sourceforge.net>
+    * libraries/common.lib.php3: fixed a controluser bug.
+    * libraries/display_tbl.lib.php3: fixed bug #547384 (Marker Color can't
+      equal Pointer Color).
+
+2002-04-26 Loïc Chapeaux  <lolo@phpheaven.net>
+    * ## created 2.2.7 branch into the CVS tree ##
+    * lang/nowegian.inc.php: updated thanks to Sven-Erik Andersen.
+    * lang/brazilian_portuguese.inc.php3: updated thanks to Renato Lins.
+    * sql.php3; tbl_replace.php3: patch #547030 - file_exists $goto thanks to
+      Melvyn Sopacua <nyvlem at users.sourceforge.net>.
+
+2002-04-23 Alexander M. Turek  <rabus@users.sourceforge.net>
+    * libraries/common.lib.php3: fixed bug #547605 using Loïc's patch.
+    * tbl_printview.php3: Fixed a small bug, some php and XHTML 1.0 errors and
+      beautified the generated code.
+    * Documentation.html: Changed notes concerning php 4.2.0.
+
+2002-04-22 Loïc Chapeaux  <lolo@phpheaven.net>
+    * lang/slovak-win1250.inc.php3: completed, thanks to Peter Svec.
+
+2002-04-22 Marc Delisle  <lem9@users.sourceforge.net>
+    * lang/japanese* updates, thanks to Yukihiro Kawada
+
+2002-04-22 Alexander M. Turek  <rabus@users.sourceforge.net>
+    * lang/russian-koi8.inc.php3: fixed a typo (bug #546981).
+    * lang/german.inc.php3: better syntax.
+
+2002-04-21 Loïc Chapeaux  <lolo@phpheaven.net>
+    * libraries/auth/http.auth.lib.php3: tried a fix to allow the use of http
+      authentication mode with IIS.
+
+2002-04-21 Marc Delisle  <lem9@users.sourceforge.net>
+    * ### 2.2.6 released ###
+
+
+         --- Older ChangeLogs can be found on our project website ---
+                     http://www.phpmyadmin.net/ChangeLogs/

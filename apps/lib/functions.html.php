@@ -110,7 +110,7 @@ function afficher_moteur_recherche($module
 , $nbligne, $nbcol, $champ_recherche
 , $operateur_recherche, $texte_recherche, $champ_courant
 , $operateur_courant, $texte_courant, $nb_col_courant
-, $ajout_col, $requete_resultat, $tab_resultat
+, $ajout_col, $requete_resultat, $tab_resultat,$module_table
 ) {
     /*
       Définition des Variables
@@ -132,19 +132,7 @@ function afficher_moteur_recherche($module
         else
             $url_page_depart = '(' . $PHP_SELF . ')';
     }
-    $nbligne = Lib::isDefined('nbligne');                           // Nombre de lignes totales
-    $nbcol = Lib::isDefined('nbcol');                             // nombre de colonnes de la ligne courante
-    $champ_recherche = Lib::isDefined('champ_recherche');         //tableau des identifiants des champs choisis
-    $operateur_recherche = Lib::isDefined('operateur_recherche'); //tableau des identifiants des operateurs choisis
-    $texte_recherche = Lib::isDefined('texte_recherche');         //table au des valeurs entrées par l'utilisateur
-    $champ_courant = Lib::isDefined('champ_courant');             // Valeur de l'identifiant du champ qui vient juste d'etre saisie par l'utilisateur
-    $operateur_courant = Lib::isDefined('operateur_courant');     // Valeur de l'identifiant de l'operateur qui vient juste d'etre saisie par l'utilisateur
-    $texte_courant = Lib::isDefined('texte_courant');             // Valeur du texte qui vient juste d'etre saisie par l'utilisateur
-    $nb_col_courant = Lib::isDefined('nb_col_courant');           // numero de la colonne courante
-    $nb_ligne_courant = Lib::isDefined("nb_ligne_courant");       // numero de la ligne courante
-    $ajout_col = Lib::isDefined('ajout_col');                     //si $ajout_col = 1 : ajout d'une colonne dans la ligne courante
-    $module_table = Lib::isDefined('module_table');               // nom du module auquel appartient la table
-    $champ_retour = Lib::isDefined('champ_retour');                // nom du champ reponse de la requete
+
     $return = "";
     $requete_resultat = stripcslashes($requete_resultat);
     $_SESSION['table_champ_retour'] = $module_table;  // table du champ retour

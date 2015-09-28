@@ -458,8 +458,8 @@ class IntranetDroitsAccesModel {
 
     /**
      * On obtient le droit de modification pour le module Fta de l'utilisateur connecté
-     * @param type $paramIdUser
-     * @return type
+     * @param int $paramIdUser
+     * @return int
      */
     public static function getFtaModification($paramIdUser) {
         $arrayModification = DatabaseOperation::convertSqlStatementWithoutKeyToArray(

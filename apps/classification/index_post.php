@@ -25,13 +25,26 @@
  fonction située dans le fichier "functions.php"
 
 */
-$id_fta_classification2 = Lib::getParameterFromRequest(ClassificationFta2Model::KEYNAME);
+switch ($action)
+{
 
-if ($id_fta_classification2) {
+ /*
+ S'il n'y a pas d'actions défini
+ */
+     case '':
 
-    $ClassificationFta2Model = new ClassificationFta2Model($id_fta_classification2);
+     //Redirection
+     header ("Location: index.php");
+
+     break;
+
+
+
+/************
+Fin de switch
+************/
+
 }
-
 //include ("./action_bs.php");
 //include ("./action_sm.php");
 

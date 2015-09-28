@@ -73,7 +73,9 @@ $selection_rayon = Lib::getParameterFromRequest('selection_rayon');
 $selection_environnement = Lib::getParameterFromRequest('selection_environnement');
 $selection_reseau = Lib::getParameterFromRequest('selection_reseau');
 $selection_saisonnalite = Lib::getParameterFromRequest('selection_saisonnalite');
-
+$globalConfig = new GlobalConfig();
+$idUser = $globalConfig->getAuthenticatedUser()->getKeyValue();
+$classificationModifier = ClassificationFta2Model::getClassificationModification($idUser);
 
 /*
   Récupération des données MySQL
@@ -183,9 +185,11 @@ if ($selection_proprietaire1) {
 }
 
 
-$bloc .= "<" . $html_table . "><tr class=titre>"
-        . "<td></td>"
-        . "<td>Proprietaire (Groupe)</td>"
+$bloc .= "<" . $html_table . "><tr class=titre>";
+if ($classificationModifier) {
+    $bloc .= "<td></td>";
+}
+$bloc .= "<td>Proprietaire (Groupe)</td>"
         . "<td>Proprietaire (Enseigne)</td>"
         . "<td>" . HtmlResult::MARQUE . "</td>"
         . "<td>" . HtmlResult::ACTIVITE . "</td>"
@@ -201,13 +205,28 @@ $array = ClassificationFta2Model::getArrayListeClassification();
 foreach ($array as $value) {
     $key = $value[ClassificationFta2Model::KEYNAME];
     $bloc .="<tr class=\"contenu\" name=id_fta_classification2 value=" . $key . ">";
-    $bloc.="<td>";
 //Modifier
-    $bloc.= "<a href=index_post.php?id_fta_classification2=" . $key
-            . "> "
-            . "<img src=../lib/images/next.png alt=Modifier  width=24 height=24 border=0 />"
-            . "</a>";
-    $bloc.="</td>";
+    if ($classificationModifier) {
+        $bloc.="<td><a href=classification_modifier.php?id_fta_classification2=" . $key . "&action=modifier > "
+                . "<img src=../lib/images/next.png alt=Modifier  width=24 height=24 border=0 />"
+                . "</a>";
+        $bloc.="<a href=# onClick=confirmation_correction_classification" . $key . "() > "
+                . "<img src=../lib/images/supprimer.png alt=Supprimer cette Classification  width=24 height=24 border=0 />"
+                . "</a></td>";
+
+        $javascript.='
+                           <SCRIPT LANGUAGE=JavaScript>
+                                   function confirmation_correction_classification' . $key . '()
+                                   {
+                                   if(confirm(\'Etes vous certain de vouloir supprimer cette classification ? \'))
+                                   {
+                                       location.href =\'classification_modifier_post.php?id_fta_classification2=' . $key . '&action=supprimer\'
+                                   }
+                                    else{}
+                                   }
+                           </SCRIPT>
+                           ';
+    }
 
     $bloc.= "<td >" . ClassificationFta2Model::getNameClassification($value[ClassificationFta2Model::FIELDNAME_ID_PROPRIETAIRE_GROUPE]) . "</td>"
             . "<td >" . ClassificationFta2Model::getNameClassification($value[ClassificationFta2Model::FIELDNAME_ID_PROPRIETAIRE_ENSEIGNE]) . "</td>"
@@ -311,15 +330,15 @@ switch ($output) {
                  - Articles
              </td></tr>
              <tr><td>
-             Articles:<a href=ajout.php?id_classification_arborescence_article=1><img src=\"../lib/images/plus.png\"/\" alt=\"\" width=\"10\" height=\"10\" border=\"0\" /></a>
-            " . $bloc . "
+             Ajout d'une classification:<a href=classification_modifier.php><img src=\"../lib/images/plus.png\"/\" alt=\"\" width=\"10\" height=\"10\" border=\"0\" /></a>
+            " . $bloc . $javascript . "
 
              </td></tr>
-            
-             </table>
+                
+        </table>
 
-             </form>
-             ";
+        </form>
+        ";
 
 
 

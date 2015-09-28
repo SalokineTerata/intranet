@@ -156,4 +156,50 @@ class ClassificationFta2Model extends AbstractModel {
         return $array;
     }
 
+    /**
+     * On obtient le droit de modification pour le module Classification de l'utilisateur connecté
+     * @param int $paramIdUser
+     * @return int
+     */
+    public static function getClassificationModification($paramIdUser) {
+        $arrayModification = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
+                        ' SELECT ' . IntranetDroitsAccesModel::FIELDNAME_NIVEAU_INTRANET_DROITS_ACCES
+                        . ' FROM ' . IntranetDroitsAccesModel::TABLENAME
+                        . ' WHERE ' . IntranetDroitsAccesModel::FIELDNAME_ID_USER . '=' . $paramIdUser
+                        . ' AND ' . IntranetDroitsAccesModel::FIELDNAME_ID_INTRANET_ACTIONS . '=' . AccueilFta::VALUE_2
+                        . ' AND ' . IntranetDroitsAccesModel::FIELDNAME_ID_INTRANET_MODULES . '=18'
+        );
+        foreach ($arrayModification as $rowsModifications) {
+            $fta_modification = $rowsModifications[IntranetDroitsAccesModel::FIELDNAME_NIVEAU_INTRANET_DROITS_ACCES];
+        }
+        return $fta_modification;
+    }
+
+    public static function getClassificationListeSansDependance($paramIdDefaut, $paramIdTypeClassification, $paramNomDefaut) {
+        $req = ' SELECT ' . ClassificationArborescenceArticleCategorieContenuModel::KEYNAME
+                . ',' . ClassificationArborescenceArticleCategorieContenuModel::FIELDNAME_NOM_CLASSIFICATION_ARBORESCENCE_ARTICLE_CATEGORIE_CONTENU
+                . ' FROM ' . ClassificationArborescenceArticleCategorieContenuModel::TABLENAME
+                . ' WHERE ' . ClassificationArborescenceArticleCategorieContenuModel::FIELDNAME_ID_CLASSIFICATION_ARBORESCENCE_ARTICLE_CATEGORIE . '=' . $paramIdTypeClassification
+                . ' ORDER BY ' . ClassificationArborescenceArticleCategorieContenuModel::FIELDNAME_NOM_CLASSIFICATION_ARBORESCENCE_ARTICLE_CATEGORIE_CONTENU
+        ;
+
+        return AccueilFta::afficherRequeteEnListeDeroulante($req, $paramIdDefaut, $paramNomDefaut);
+    }
+
+    public static function InsertClassification() {
+        $pdo = DatabaseOperation::execute(
+                        'INSERT INTO ' . ClassificationFta2Model::TABLENAME
+        );
+        $key = $pdo->lastInsertId();
+
+        return $key;
+    }
+
+    public static function SuppressionClassification($paramIdClassification2) {
+        DatabaseOperation::execute(
+                'DELETE FROM ' . ClassificationFta2Model::TABLENAME
+                . ' WHERE ' . ClassificationFta2Model::KEYNAME . '=' . $paramIdClassification2
+        );
+    }
+
 }

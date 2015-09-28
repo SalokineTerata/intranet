@@ -593,6 +593,7 @@ class AccueilFta {
 
                 /*
                  * Recuperation du proprietaire
+                 * à modifier
                  */
 
                 if ($idclassification) {

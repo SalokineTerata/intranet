@@ -468,7 +468,7 @@ class Navigation {
         ;
         foreach ($paramT_Liste_Processus as $value) {
             $reqRecup .= ' OR ' . FtaWorkflowStructureModel::TABLENAME . '.' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_PROCESSUS
-                    . '=' . $value . ' ';
+                    . '=\'' . $value . '\'';
         }
         $reqRecup .=' ) AND ' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_WORKFLOW . '=' . self::$id_fta_workflow
                 . ' ORDER BY ' . FtaChapitreModel::TABLENAME . '.' . FtaChapitreModel::KEYNAME;

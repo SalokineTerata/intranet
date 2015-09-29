@@ -116,7 +116,8 @@ if ($id_fta) {
       mysql_table_load('access_arti2'); */
 
     $tab = $details[$id_fta];
-    foreach ($tab as $id_fta_processus => $taux) {
+    if ($tab) {
+        foreach ($tab as $id_fta_processus => $taux) {
         //Chargement des données
 
         $ftaProcessusModel = new FtaProcessusModel($id_fta_processus);
@@ -268,7 +269,7 @@ if ($id_fta) {
 //                   &nbsp;' . $HTML_valide . '
 //                   </td>
     }
-}
+}}
 
 //Echéance de validation de la FTA
 $annee_date_echeance_fta = substr($date_echeance_fta, 0, 4);

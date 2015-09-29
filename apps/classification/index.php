@@ -272,8 +272,7 @@ switch ($output) {
 
                  Ce module permet de centraliser et d'harmoniser la classification des différents éléments suivants:<br>
                  <br>
-                 - Articles
-             </td></tr>
+               </td></tr>
              <tr><td>
              Ajout d'une classification:<a href=classification_modifier.php><img src=\"../lib/images/plus.png\"/\" alt=\"\" width=\"10\" height=\"10\" border=\"0\" /></a>
             " . $bloc . $javascript . "

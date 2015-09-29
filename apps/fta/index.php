@@ -87,7 +87,10 @@ if ($id_user) {
         if ($fta_modification) {
             $synthese_action = FtaEtatModel::ETAT_AVANCEMENT_VALUE_EN_COURS;
         } else {
-            $synthese_action = FtaEtatModel::ETAT_AVANCEMENT_VALUE_ATTENTE;
+            $synthese_action = FtaEtatModel::ETAT_AVANCEMENT_VALUE_ALL;
+            $idFtaRoleEncoursDefault ='0';
+            $nomFtaEtat = FtaEtatModel::ETAT_ABREVIATION_VALUE_VALIDE;
+            $id_fta_etat = 3;
         }
     }
 

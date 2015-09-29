@@ -38,6 +38,9 @@ class AccueilFta {
     protected static $nombreFta;
     protected static $orderBy;
     protected static $syntheseAction;
+    protected static $ftaModification;
+    protected static $ftaConsultation;
+    protected static $ftaImpression;
 
     /**
      * Initialisation des données de la page d'accueil
@@ -65,11 +68,25 @@ class AccueilFta {
 
         self::$arrayFtaRole = FtaRoleModel::getIdFtaRoleByIdUser(self::$idUser);
 
+        /**
+         * Modification
+         */
+        self::$ftaModification = IntranetDroitsAccesModel::getFtaModification(self::$idUser);
+
+        /**
+         * Consultation
+         */
+        self::$ftaConsultation = IntranetDroitsAccesModel::getFtaConsultation(self::$idUser);
+
+        /**
+         * Impression
+         */
+        self::$ftaImpression = IntranetDroitsAccesModel::getFtaImpression(self::$idUser);
         /*
          * Selon le role  nous cherchons ces etats. 
          * 
          */
-        self::$arrayFtaEtat = FtaEtatModel::getFtaEtatAndNameByRole(self::$idFtaRole);
+        self::$arrayFtaEtat = FtaEtatModel::getFtaEtatAndNameByRole(self::$idFtaRole, self::$ftaModification);
 
         /*
          * $arrayIdFtaAndIdWorkflow[1] sont les id_fta
@@ -597,7 +614,7 @@ class AccueilFta {
                  */
 
                 if ($idclassification) {
-                    $classification = ClassificationArborescenceArticleCategorieContenuModel::getElementClassificationFta($idclassification,  ClassificationFta2Model::FIELDNAME_ID_PROPRIETAIRE_GROUPE);
+                    $classification = ClassificationArborescenceArticleCategorieContenuModel::getElementClassificationFta($idclassification, ClassificationFta2Model::FIELDNAME_ID_PROPRIETAIRE_GROUPE);
                 }
 
                 /*
@@ -685,26 +702,12 @@ class AccueilFta {
                  * Droit de consultation standard HTML
                  */
                 $actions = '';
-                /**
-                 * Modification
-                 */
-                if (!$one) {
-                    $fta_modification = IntranetDroitsAccesModel::getFtaModification(self::$idUser);
 
-                    /**
-                     * Consultation
-                     */
-                    $fta_consultation = IntranetDroitsAccesModel::getFtaConsultation(self::$idUser);
 
-                    /**
-                     * Impression
-                     */
-                    $fta_impression = IntranetDroitsAccesModel::getFtaImpression(self::$idUser);
-                }
 
                 if (
-                        ($fta_modification)
-                        or ( $fta_consultation and $abreviationFtaEtat == 'V' )
+                        (self::$ftaModification)
+                        or ( self::$ftaConsultation )
                 )
                     $actions = '<a '
                             . 'href=modification_fiche.php'
@@ -722,7 +725,7 @@ class AccueilFta {
                  * Export PDF
                  */
                 if (
-                        ($fta_impression and ( $abreviationFtaEtat == FtaEtatModel::ETAT_ABREVIATION_VALUE_VALIDE))
+                        (self::$ftaImpression and ( $abreviationFtaEtat == FtaEtatModel::ETAT_ABREVIATION_VALUE_VALIDE))
                         or ( $_SESSION['mode_debug'] == 1) or ( $workflowName == 'presentation')
                 ) {
 
@@ -744,7 +747,7 @@ class AccueilFta {
 //                        and ( $abreviationFtaEtat == FtaEtatModel::ETAT_ABREVIATION_VALUE_MODIFICATION )
                         )or ( $ok == AccueilFta::VALUE_2 and $accesTransitionButton == FALSE && $recap[$idFta] == AccueilFta::VALUE_100_POURCENTAGE) and (
                         $abreviationFtaEtat == FtaEtatModel::ETAT_ABREVIATION_VALUE_MODIFICATION
-                        ) or ( self::$syntheseAction == FtaEtatModel::ETAT_AVANCEMENT_VALUE_ALL)
+                        ) or ( self::$syntheseAction == FtaEtatModel::ETAT_AVANCEMENT_VALUE_ALL ) and self::$ftaModification
                         or ( self::$idFtaRole == AccueilFta::VALUE_1 and self::$syntheseAction == FtaEtatModel::ETAT_AVANCEMENT_VALUE_EFFECTUES)
                 ) {
                     $actions .= '<a '
@@ -771,14 +774,15 @@ class AccueilFta {
                  * Retirer une FTA en cours de modification
                  */
                 if ($valueIsGestionnaire == AccueilFta::VALUE_1) {
-                    $actions .= '<a '
-                            . 'href=# '
-                            . 'onClick=confirmation_correction_fta' . $idFta . '(); '
-                            . '/>'
-                            . '<img src=../lib/images/supprimer.png alt=\'Retirer cette FTA\' width=\'25\' height=\'25\' border=\'0\' />'
-                            . '</a>'
-                    ;
-                    $javascript.='
+                    if ($abreviationFtaEtat <> FtaEtatModel::ETAT_ABREVIATION_VALUE_RETIRE) {
+                        $actions .= '<a '
+                                . 'href=# '
+                                . 'onClick=confirmation_correction_fta' . $idFta . '(); '
+                                . '/>'
+                                . '<img src=../lib/images/supprimer.png alt=\'Retirer cette FTA\' width=\'25\' height=\'25\' border=\'0\' />'
+                                . '</a>'
+                        ;
+                        $javascript.='
                            <SCRIPT LANGUAGE=JavaScript>
                                    function confirmation_correction_fta' . $idFta . '()
                                    {
@@ -790,6 +794,7 @@ class AccueilFta {
                                    }
                            </SCRIPT>
                            ';
+                    }
 
                     $actions .= '<a '
                             . 'href=creer_fiche.php'
@@ -1063,7 +1068,6 @@ class AccueilFta {
                 $classification = NULL;
                 $selection = NULL;
                 $bgcolor_header = NULL;
-                $one = AccueilFta::VALUE_1;
             }
         } else {
             $tableauFiche .= '<tr class=contenu><td>Aucune Fta identifié</td></tr>';
@@ -1148,7 +1152,7 @@ class AccueilFta {
 //                $html_liste .= '</select>';
 //            }
         } else {
-            if ($paramIsEditable <> FALSE) {
+            if ($paramIsEditable <> FALSE or $paramIsEditable == NULL) {
                 $key = array_keys($table);
                 if (!$paramNomDefaut) {
                     $paramNomDefaut = $key[AccueilFta::VALUE_1];

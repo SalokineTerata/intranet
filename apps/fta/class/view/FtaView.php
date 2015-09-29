@@ -238,6 +238,18 @@ class FtaView {
         return GeoModel::ShowListeDeroulanteSiteProdByAccesAndIdFta($paramIdUser, $HtmlList, $paramIsEditable, $paramIdFta);
     }
 
+    public function ListeClassification($paramIdFta,$paramIsEditable) {
+        $ftaModel = new FtaModel($paramIdFta);
+        $idFtaClassification2 = $ftaModel->getDataField(FtaModel::FIELDNAME_ID_FTA_CLASSIFICATION2)->getFieldValue();
+
+        $ListeCLassification = ClassificationFta2Model::ShowListeDeroulanteClassification($idFtaClassification2,$paramIsEditable);
+
+        /*
+         * Classification FTA
+         */
+        return $ListeCLassification;
+    }
+
     /**
      * Tableau des emballages par UVC
      * @param int $paramIdFta

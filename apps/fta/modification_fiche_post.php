@@ -49,6 +49,14 @@ $paramSignatureValidationSuiviProjet = Lib::getParameterFromRequest(FtaSuiviProj
 $idFtaRole = Lib::getParameterFromRequest(FtaRoleModel::KEYNAME);
 $idFtaEtat = Lib::getParameterFromRequest(FtaEtatModel::KEYNAME);
 $comeback = Lib::getParameterFromRequest(FtaEtatModel::KEYNAME);
+$selection_proprietaire1 = Lib::getParameterFromRequest('selection_proprietaire1');
+$selection_proprietaire2 = Lib::getParameterFromRequest('selection_proprietaire2');
+$selection_marque = Lib::getParameterFromRequest('selection_marque');
+$selection_activite = Lib::getParameterFromRequest('selection_activite');
+$selection_rayon = Lib::getParameterFromRequest('selection_rayon');
+$selection_environnement = Lib::getParameterFromRequest('selection_environnement');
+$selection_reseau = Lib::getParameterFromRequest('selection_reseau');
+$selection_saisonnalite = Lib::getParameterFromRequest('selection_saisonnalite');
 
 switch ($action) {
 
@@ -90,6 +98,15 @@ switch ($action) {
 
 
         $modelFta = new FtaModel($paramIdFta);
+        if ($selection_saisonnalite) {
+            //Enregistrement du nouvel éléments de classification
+            $idClassification2 = ClassificationFta2Model::getIdFtaClassification2(
+                            $selection_proprietaire1, $selection_proprietaire2
+                            , $selection_marque, $selection_activite
+                            , $selection_rayon, $selection_environnement
+                            , $selection_reseau, $selection_saisonnalite);
+            $modelFta->getDataField(FtaModel::FIELDNAME_ID_FTA_CLASSIFICATION2)->setFieldValue($idClassification2);
+        }
         $modelFta->saveToDatabase();
 
 

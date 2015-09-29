@@ -9,16 +9,18 @@ $ftaModel = new FtaModel($id_fta);
 
 //Récupération des information de classification.
 //Rayon
-$rayon = $ftaModel->getDataField(FtaModel::FIELDNAME_CLASSIFICATION_RAYON)->getFieldValue();
+$IdFtaClassification2 = $ftaModel->getDataField(FtaModel::FIELDNAME_ID_FTA_CLASSIFICATION2)->getFieldValue();
+$rayon = ClassificationArborescenceArticleCategorieContenuModel::getElementClassificationFta($IdFtaClassification2, ClassificationFta2Model::FIELDNAME_ID_RAYON);
+
 
 //Activité
-$activite = $ftaModel->getDataField(FtaModel::FIELDNAME_CLASSIFICATION_ACTIVITE)->getFieldValue();
+$activite = ClassificationArborescenceArticleCategorieContenuModel::getElementClassificationFta($IdFtaClassification2, ClassificationFta2Model::FIELDNAME_ID_ACTIVITE);
 if ($activite) {
     $activite = " / " . $activite;
 }
 
 //Marque
-$marque = $ftaModel->getDataField(FtaModel::FIELDNAME_CLASSIFICATION_RAYON)->getFieldValue();
+$marque = ClassificationArborescenceArticleCategorieContenuModel::getElementClassificationFta($IdFtaClassification2, ClassificationFta2Model::FIELDNAME_ID_MARQUE);
 if ($marque) {
     $marque = " / " . $marque;
 }

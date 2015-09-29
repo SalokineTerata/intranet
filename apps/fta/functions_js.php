@@ -150,4 +150,222 @@
             displayTrueElementById(idElementRowPoidsElem);
         }
     }
+
+    function selection_proprietaire1_js() {
+        proprietaire1 = document.form_action.selection_proprietaire1.selectedIndex;
+        idFta = document.getElementById("id_fta").value;
+        syntheseAction = document.getElementById("synthese_action").value;
+        comeback = document.getElementById("comeback").value;
+        idFtaEtat = document.getElementById("id_fta_etat").value;
+        abreviationFtaEtat = document.getElementById("abreviation_fta_etat").value;
+        idFtaRole = document.getElementById("id_fta_role").value;
+        //if (i == 0) return;
+        url = "modification_fiche.php?id_fta=" + idFta
+                + "&synthese_action=" + syntheseAction
+                + "&comeback=" + comeback
+                + "&id_fta_etat=" + idFtaEtat
+                + "&abreviation_fta_etat=" + abreviationFtaEtat
+                + "&id_fta_role=" + idFtaRole
+                + "&selection_proprietaire1=" + document.form_action.selection_proprietaire1.options[proprietaire1].value
+
+                ;
+        parent.location.href = url;
+    }
+
+    function selection_proprietaire2_js() {
+        proprietaire1 = document.form_action.selection_proprietaire1.selectedIndex;
+        proprietaire2 = document.form_action.selection_proprietaire2.selectedIndex;
+        idFta = document.getElementById("id_fta").value;
+        syntheseAction = document.getElementById("synthese_action").value;
+        comeback = document.getElementById("comeback").value;
+        idFtaEtat = document.getElementById("id_fta_etat").value;
+        abreviationFtaEtat = document.getElementById("abreviation_fta_etat").value;
+        idFtaRole = document.getElementById("id_fta_role").value;
+        //if (i == 0) return;
+        url = "modification_fiche.php?id_fta=" + idFta
+                + "&synthese_action=" + syntheseAction
+                + "&comeback=" + comeback
+                + "&id_fta_etat=" + idFtaEtat
+                + "&abreviation_fta_etat=" + abreviationFtaEtat
+                + "&id_fta_role=" + idFtaRole
+                + "&selection_proprietaire1=" + document.form_action.selection_proprietaire1.options[proprietaire1].value
+                + "&selection_proprietaire2=" + document.form_action.selection_proprietaire2.options[proprietaire2].value
+
+                ;
+        parent.location.href = url;
+    }
+    function selection_marque_js() {
+        proprietaire1 = document.form_action.selection_proprietaire1.selectedIndex;
+        proprietaire2 = document.form_action.selection_proprietaire2.selectedIndex;
+        marque = document.form_action.selection_marque.selectedIndex;
+        idFta = document.getElementById("id_fta").value;
+        syntheseAction = document.getElementById("synthese_action").value;
+        comeback = document.getElementById("comeback").value;
+        idFtaEtat = document.getElementById("id_fta_etat").value;
+        abreviationFtaEtat = document.getElementById("abreviation_fta_etat").value;
+        idFtaRole = document.getElementById("id_fta_role").value;
+
+        url = "modification_fiche.php?id_fta=" + idFta
+                + "&synthese_action=" + syntheseAction
+                + "&comeback=" + comeback
+                + "&id_fta_etat=" + idFtaEtat
+                + "&abreviation_fta_etat=" + abreviationFtaEtat
+                + "&id_fta_role=" + idFtaRole
+                + "&selection_proprietaire1=" + document.form_action.selection_proprietaire1.options[proprietaire1].value
+                + "&selection_proprietaire2=" + document.form_action.selection_proprietaire2.options[proprietaire2].value
+                + "&selection_marque=" + document.form_action.selection_marque.options[marque].value
+
+                ;
+        parent.location.href = url;
+    }
+    function selection_activite_js() {
+        proprietaire1 = document.form_action.selection_proprietaire1.selectedIndex;
+        proprietaire2 = document.form_action.selection_proprietaire2.selectedIndex;
+        marque = document.form_action.selection_marque.selectedIndex;
+        activite = document.form_action.selection_activite.selectedIndex;
+        idFta = document.getElementById("id_fta").value;
+        syntheseAction = document.getElementById("synthese_action").value;
+        comeback = document.getElementById("comeback").value;
+        idFtaEtat = document.getElementById("id_fta_etat").value;
+        abreviationFtaEtat = document.getElementById("abreviation_fta_etat").value;
+        idFtaRole = document.getElementById("id_fta_role").value;
+
+        //if (i == 0) return;
+        url = "modification_fiche.php?id_fta=" + idFta
+                + "&synthese_action=" + syntheseAction
+                + "&comeback=" + comeback
+                + "&id_fta_etat=" + idFtaEtat
+                + "&abreviation_fta_etat=" + abreviationFtaEtat
+                + "&id_fta_role=" + idFtaRole
+                + "&selection_proprietaire1=" + document.form_action.selection_proprietaire1.options[proprietaire1].value
+                + "&selection_proprietaire2=" + document.form_action.selection_proprietaire2.options[proprietaire2].value
+                + "&selection_marque=" + document.form_action.selection_marque.options[marque].value
+                + "&selection_activite=" + document.form_action.selection_activite.options[activite].value
+
+                ;
+        parent.location.href = url;
+    }
+    function selection_rayon_js() {
+        proprietaire1 = document.form_action.selection_proprietaire1.selectedIndex;
+        proprietaire2 = document.form_action.selection_proprietaire2.selectedIndex;
+        marque = document.form_action.selection_marque.selectedIndex;
+        activite = document.form_action.selection_activite.selectedIndex;
+        rayon = document.form_action.selection_rayon.selectedIndex;
+        idFta = document.getElementById("id_fta").value;
+        syntheseAction = document.getElementById("synthese_action").value;
+        comeback = document.getElementById("comeback").value;
+        idFtaEtat = document.getElementById("id_fta_etat").value;
+        abreviationFtaEtat = document.getElementById("abreviation_fta_etat").value;
+        idFtaRole = document.getElementById("id_fta_role").value;
+        //if (i == 0) return;
+        url = "modification_fiche.php?id_fta=" + idFta
+                + "&synthese_action=" + syntheseAction
+                + "&comeback=" + comeback
+                + "&id_fta_etat=" + idFtaEtat
+                + "&abreviation_fta_etat=" + abreviationFtaEtat
+                + "&id_fta_role=" + idFtaRole
+                + "&selection_proprietaire1=" + document.form_action.selection_proprietaire1.options[proprietaire1].value
+                + "&selection_proprietaire2=" + document.form_action.selection_proprietaire2.options[proprietaire2].value
+                + "&selection_marque=" + document.form_action.selection_marque.options[marque].value
+                + "&selection_activite=" + document.form_action.selection_activite.options[activite].value
+                + "&selection_rayon=" + document.form_action.selection_rayon.options[rayon].value
+
+                ;
+        parent.location.href = url;
+    }
+    function selection_environnement_js() {
+        proprietaire1 = document.form_action.selection_proprietaire1.selectedIndex;
+        proprietaire2 = document.form_action.selection_proprietaire2.selectedIndex;
+        marque = document.form_action.selection_marque.selectedIndex;
+        activite = document.form_action.selection_activite.selectedIndex;
+        rayon = document.form_action.selection_rayon.selectedIndex;
+        environnement = document.form_action.selection_environnement.selectedIndex;
+        idFta = document.getElementById("id_fta").value;
+        syntheseAction = document.getElementById("synthese_action").value;
+        comeback = document.getElementById("comeback").value;
+        idFtaEtat = document.getElementById("id_fta_etat").value;
+        abreviationFtaEtat = document.getElementById("abreviation_fta_etat").value;
+        idFtaRole = document.getElementById("id_fta_role").value;
+        //if (i == 0) return;
+        url = "modification_fiche.php?id_fta=" + idFta
+                + "&synthese_action=" + syntheseAction
+                + "&comeback=" + comeback
+                + "&id_fta_etat=" + idFtaEtat
+                + "&abreviation_fta_etat=" + abreviationFtaEtat
+                + "&id_fta_role=" + idFtaRole
+                + "&selection_proprietaire1=" + document.form_action.selection_proprietaire1.options[proprietaire1].value
+                + "&selection_proprietaire2=" + document.form_action.selection_proprietaire2.options[proprietaire2].value
+                + "&selection_marque=" + document.form_action.selection_marque.options[marque].value
+                + "&selection_activite=" + document.form_action.selection_activite.options[activite].value
+                + "&selection_rayon=" + document.form_action.selection_rayon.options[rayon].value
+                + "&selection_environnement=" + document.form_action.selection_environnement.options[environnement].value
+
+                ;
+        parent.location.href = url;
+    }
+    function selection_reseau_js() {
+        proprietaire1 = document.form_action.selection_proprietaire1.selectedIndex;
+        proprietaire2 = document.form_action.selection_proprietaire2.selectedIndex;
+        marque = document.form_action.selection_marque.selectedIndex;
+        activite = document.form_action.selection_activite.selectedIndex;
+        rayon = document.form_action.selection_rayon.selectedIndex;
+        environnement = document.form_action.selection_environnement.selectedIndex;
+        reseau = document.form_action.selection_reseau.selectedIndex;
+        idFta = document.getElementById("id_fta").value;
+        syntheseAction = document.getElementById("synthese_action").value;
+        comeback = document.getElementById("comeback").value;
+        idFtaEtat = document.getElementById("id_fta_etat").value;
+        abreviationFtaEtat = document.getElementById("abreviation_fta_etat").value;
+        idFtaRole = document.getElementById("id_fta_role").value;
+        //if (i == 0) return;
+        url = "modification_fiche.php?id_fta=" + idFta
+                + "&synthese_action=" + syntheseAction
+                + "&comeback=" + comeback
+                + "&id_fta_etat=" + idFtaEtat
+                + "&abreviation_fta_etat=" + abreviationFtaEtat
+                + "&id_fta_role=" + idFtaRole
+                + "&selection_proprietaire1=" + document.form_action.selection_proprietaire1.options[proprietaire1].value
+                + "&selection_proprietaire2=" + document.form_action.selection_proprietaire2.options[proprietaire2].value
+                + "&selection_marque=" + document.form_action.selection_marque.options[marque].value
+                + "&selection_activite=" + document.form_action.selection_activite.options[activite].value
+                + "&selection_rayon=" + document.form_action.selection_rayon.options[rayon].value
+                + "&selection_environnement=" + document.form_action.selection_environnement.options[environnement].value
+                + "&selection_reseau=" + document.form_action.selection_reseau.options[reseau].value
+
+                ;
+        parent.location.href = url;
+    }
+    function selection_saisonnalite_js() {
+        proprietaire1 = document.form_action.selection_proprietaire1.selectedIndex;
+        proprietaire2 = document.form_action.selection_proprietaire2.selectedIndex;
+        marque = document.form_action.selection_marque.selectedIndex;
+        activite = document.form_action.selection_activite.selectedIndex;
+        rayon = document.form_action.selection_rayon.selectedIndex;
+        environnement = document.form_action.selection_environnement.selectedIndex;
+        reseau = document.form_action.selection_reseau.selectedIndex;
+        saisonnalite = document.form_action.selection_saisonnalite.selectedIndex;
+        idFta = document.getElementById("id_fta").value;
+        syntheseAction = document.getElementById("synthese_action").value;
+        comeback = document.getElementById("comeback").value;
+        idFtaEtat = document.getElementById("id_fta_etat").value;
+        abreviationFtaEtat = document.getElementById("abreviation_fta_etat").value;
+        idFtaRole = document.getElementById("id_fta_role").value;
+        //if (i == 0) return;
+        url = "modification_fiche.php?id_fta=" + idFta
+                + "&synthese_action=" + syntheseAction
+                + "&comeback=" + comeback
+                + "&id_fta_etat=" + idFtaEtat
+                + "&abreviation_fta_etat=" + abreviationFtaEtat
+                + "&id_fta_role=" + idFtaRole
+                + "&selection_proprietaire1=" + document.form_action.selection_proprietaire1.options[proprietaire1].value
+                + "&selection_proprietaire2=" + document.form_action.selection_proprietaire2.options[proprietaire2].value
+                + "&selection_marque=" + document.form_action.selection_marque.options[marque].value
+                + "&selection_activite=" + document.form_action.selection_activite.options[activite].value
+                + "&selection_rayon=" + document.form_action.selection_rayon.options[rayon].value
+                + "&selection_environnement=" + document.form_action.selection_environnement.options[environnement].value
+                + "&selection_reseau=" + document.form_action.selection_reseau.options[reseau].value
+                + "&selection_saisonnalite=" + document.form_action.selection_saisonnalite.options[saisonnalite].value
+                ;
+        parent.location.href = url;
+    }
 </script>

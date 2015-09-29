@@ -65,6 +65,21 @@ class ClassificationFta2Model extends AbstractModel {
         return AccueilFta::afficherRequeteEnListeDeroulante($req, $paramIdDefaut, $paramNomDefaut);
     }
 
+    public static function getListeClassificationProprietaireGroupeLabel($paramIdDefaut, $paramIsEditable) {
+        $req = 'SELECT ' . ClassificationArborescenceArticleCategorieContenuModel::KEYNAME . ',' . ClassificationArborescenceArticleCategorieContenuModel::FIELDNAME_NOM_CLASSIFICATION_ARBORESCENCE_ARTICLE_CATEGORIE_CONTENU
+                . ' FROM ' . ClassificationArborescenceArticleCategorieContenuModel::TABLENAME
+                . ' WHERE ' . ClassificationArborescenceArticleCategorieContenuModel::FIELDNAME_ID_CLASSIFICATION_ARBORESCENCE_ARTICLE_CATEGORIE . '=' . AccueilFta::VALUE_1
+                . ' AND ' . ClassificationArborescenceArticleCategorieContenuModel::KEYNAME . '<>' . AccueilFta::VALUE_0
+                . ' ORDER BY ' . ClassificationArborescenceArticleCategorieContenuModel::FIELDNAME_NOM_CLASSIFICATION_ARBORESCENCE_ARTICLE_CATEGORIE_CONTENU;
+
+        $paramNomDefaut = 'selection_proprietaire1';
+        $listeClassification = '<td class=contenu >' . DatabaseDescription::getFieldDocLabel(ClassificationFta2Model::TABLENAME, ClassificationFta2Model::FIELDNAME_ID_PROPRIETAIRE_GROUPE)
+                . '</td><td class=contenu>'
+                . AccueilFta::afficherRequeteEnListeDeroulante($req, $paramIdDefaut, $paramNomDefaut, $paramIsEditable). '</tr>';
+
+        return $listeClassification;
+    }
+
     public static function getListeClassification($paramAscendent, $paramIdDefaut, $paramSelect, $paramOrig, $paramNomDefaut, $paramMarque2 = NULL) {
         if ($paramAscendent <> NULL) {
             $req = 'SELECT DISTINCT ' . $paramSelect
@@ -157,6 +172,37 @@ class ClassificationFta2Model extends AbstractModel {
     }
 
     /**
+     * On obtien l'identifiant de la classificationFta
+     * @param int $paramidProprietaireGroupe
+     * @param int $paramidProprietaireEnseigne
+     * @param int $paramidMarque
+     * @param int $paramidActivite
+     * @param int $paramidRayon
+     * @param int $paramidEnvironnement
+     * @param int $paramidSaisonnalite
+     * @return int
+     */
+    public static function getIdFtaClassification2($paramidProprietaireGroupe, $paramidProprietaireEnseigne, $paramidMarque, $paramidActivite, $paramidRayon, $paramidEnvironnement, $paramidReseau, $paramidSaisonnalite) {
+
+        $array = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
+                        'SELECT ' . ClassificationFta2Model::KEYNAME
+                        . ' FROM ' . ClassificationFta2Model::TABLENAME
+                        . ' WHERE ' . ClassificationFta2Model::FIELDNAME_ID_PROPRIETAIRE_GROUPE . ' = ' . $paramidProprietaireGroupe
+                        . ' AND ' . ClassificationFta2Model::FIELDNAME_ID_PROPRIETAIRE_ENSEIGNE . ' = ' . $paramidProprietaireEnseigne
+                        . ' AND ' . ClassificationFta2Model::FIELDNAME_ID_MARQUE . ' = ' . $paramidMarque
+                        . ' AND ' . ClassificationFta2Model::FIELDNAME_ID_ACTIVITE . ' = ' . $paramidActivite
+                        . ' AND ' . ClassificationFta2Model::FIELDNAME_ID_RAYON . ' = ' . $paramidRayon
+                        . ' AND ' . ClassificationFta2Model::FIELDNAME_ID_ENVIRONNEMENT . ' = ' . $paramidEnvironnement
+                        . ' AND ' . ClassificationFta2Model::FIELDNAME_ID_RESEAU . ' = ' . $paramidReseau
+                        . ' AND ' . ClassificationFta2Model::FIELDNAME_ID_SAISONNALITE . ' = ' . $paramidSaisonnalite);
+
+        foreach ($array as $rows) {
+            $idFtaClassification = $rows[ClassificationFta2Model::KEYNAME];
+        }
+        return $idFtaClassification;
+    }
+
+    /**
      * On obtient le droit de modification pour le module Classification de l'utilisateur connecté
      * @param int $paramIdUser
      * @return int
@@ -175,6 +221,13 @@ class ClassificationFta2Model extends AbstractModel {
         return $fta_modification;
     }
 
+    /**
+     * Generation de liste déroulante selon le type de classification
+     * @param int $paramIdDefaut
+     * @param int $paramIdTypeClassification
+     * @param string $paramNomDefaut
+     * @return string
+     */
     public static function getClassificationListeSansDependance($paramIdDefaut, $paramIdTypeClassification, $paramNomDefaut) {
         $req = ' SELECT ' . ClassificationArborescenceArticleCategorieContenuModel::KEYNAME
                 . ',' . ClassificationArborescenceArticleCategorieContenuModel::FIELDNAME_NOM_CLASSIFICATION_ARBORESCENCE_ARTICLE_CATEGORIE_CONTENU
@@ -186,6 +239,10 @@ class ClassificationFta2Model extends AbstractModel {
         return AccueilFta::afficherRequeteEnListeDeroulante($req, $paramIdDefaut, $paramNomDefaut);
     }
 
+    /**
+     * Création d'une nouvelle classification et retourn sont identifiant
+     * @return int
+     */
     public static function InsertClassification() {
         $pdo = DatabaseOperation::execute(
                         'INSERT INTO ' . ClassificationFta2Model::TABLENAME
@@ -195,11 +252,140 @@ class ClassificationFta2Model extends AbstractModel {
         return $key;
     }
 
+    /**
+     * Suppression d'une classification
+     * @param type $paramIdClassification2
+     */
     public static function SuppressionClassification($paramIdClassification2) {
         DatabaseOperation::execute(
                 'DELETE FROM ' . ClassificationFta2Model::TABLENAME
                 . ' WHERE ' . ClassificationFta2Model::KEYNAME . '=' . $paramIdClassification2
         );
+    }
+
+    public static function ShowListeDeroulanteClassification($paramIdFtaClassification2, $paramIsEditable) {
+        if ($paramIdFtaClassification2) {
+
+            $ClassificationFta2Model = new ClassificationFta2Model($paramIdFtaClassification2);
+            self::$idProprietaireGroupe = $ClassificationFta2Model->getDataField(ClassificationFta2Model::FIELDNAME_ID_PROPRIETAIRE_GROUPE)->getFieldValue();
+            self::$idProprietaireEnseigne = $ClassificationFta2Model->getDataField(ClassificationFta2Model::FIELDNAME_ID_PROPRIETAIRE_ENSEIGNE)->getFieldValue();
+            self::$idMarque = $ClassificationFta2Model->getDataField(ClassificationFta2Model::FIELDNAME_ID_MARQUE)->getFieldValue();
+            self::$idActivite = $ClassificationFta2Model->getDataField(ClassificationFta2Model::FIELDNAME_ID_ACTIVITE)->getFieldValue();
+            self::$idRayon = $ClassificationFta2Model->getDataField(ClassificationFta2Model::FIELDNAME_ID_RAYON)->getFieldValue();
+            self::$idEnvironnement = $ClassificationFta2Model->getDataField(ClassificationFta2Model::FIELDNAME_ID_ENVIRONNEMENT)->getFieldValue();
+            self::$idReseau = $ClassificationFta2Model->getDataField(ClassificationFta2Model::FIELDNAME_ID_RESEAU)->getFieldValue();
+            self::$idSaisonnalite = $ClassificationFta2Model->getDataField(ClassificationFta2Model::FIELDNAME_ID_SAISONNALITE)->getFieldValue();
+        }
+
+        $bloc.= ClassificationFta2Model::getListeClassificationProprietaireGroupeLabel(self::$idProprietaireGroupe, $paramIsEditable);
+
+        if (self::$idProprietaireGroupe) {
+
+            $bloc.= ClassificationFta2Model::getListeClassificationLabel(self::$idProprietaireGroupe, self::$idProprietaireEnseigne
+                            , ClassificationFta2Model::FIELDNAME_ID_PROPRIETAIRE_ENSEIGNE
+                            , ClassificationFta2Model::FIELDNAME_ID_PROPRIETAIRE_GROUPE
+                            , 'selection_proprietaire2'
+                            , $paramIsEditable
+                            , self::$idMarque
+            );
+
+            if (self::$idProprietaireEnseigne <> NULL) {
+                $bloc.= ClassificationFta2Model::getListeClassificationLabel(self::$idProprietaireEnseigne, self::$idMarque
+                                , ClassificationFta2Model::FIELDNAME_ID_MARQUE
+                                , ClassificationFta2Model::FIELDNAME_ID_PROPRIETAIRE_ENSEIGNE
+                                , 'selection_marque'
+                                , $paramIsEditable
+                );
+                if (self::$idMarque) {
+                    $bloc.=ClassificationFta2Model::getListeClassificationLabel(self::$idMarque, self::$idActivite
+                                    , ClassificationFta2Model::FIELDNAME_ID_ACTIVITE
+                                    , ClassificationFta2Model::FIELDNAME_ID_MARQUE
+                                    , 'selection_activite'
+                                    , $paramIsEditable
+                    );
+                    if (self::$idActivite) {
+                        $bloc.=ClassificationFta2Model::getListeClassificationLabel(self::$idActivite, self::$idRayon
+                                        , ClassificationFta2Model::FIELDNAME_ID_RAYON
+                                        , ClassificationFta2Model::FIELDNAME_ID_ACTIVITE
+                                        , 'selection_rayon'
+                                        , $paramIsEditable
+                        );
+                        if (self::$idRayon) {
+                            $bloc.=ClassificationFta2Model::getListeClassificationLabel(self::$idRayon, self::$idEnvironnement
+                                            , ClassificationFta2Model::FIELDNAME_ID_ENVIRONNEMENT
+                                            , ClassificationFta2Model::FIELDNAME_ID_RAYON
+                                            , 'selection_environnement'
+                                            , $paramIsEditable
+                            );
+                            if (self::$idEnvironnement) {
+                                $bloc.= ClassificationFta2Model::getListeClassificationLabel(self::$idEnvironnement, self::$idReseau
+                                                , ClassificationFta2Model::FIELDNAME_ID_RESEAU
+                                                , ClassificationFta2Model::FIELDNAME_ID_ENVIRONNEMENT
+                                                , 'selection_reseau'
+                                                , $paramIsEditable
+                                );
+                                if (self::$idReseau) {
+                                    $bloc.=ClassificationFta2Model::getListeClassificationLabel(self::$idReseau, self::$idSaisonnalite
+                                                    , ClassificationFta2Model::FIELDNAME_ID_SAISONNALITE
+                                                    , ClassificationFta2Model::FIELDNAME_ID_RESEAU
+                                                    , 'selection_saisonnalite'
+                                                    , $paramIsEditable
+                                    );
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return $bloc;
+    }
+
+    public static function getListeClassificationLabel($paramAscendent, $paramIdDefaut, $paramSelect, $paramOrig, $paramNomDefaut, $paramIsEditable, $paramMarque2 = NULL) {
+        if ($paramAscendent <> NULL) {
+            $req = 'SELECT DISTINCT ' . $paramSelect
+                    . ' FROM  ' . ClassificationFta2Model::TABLENAME
+                    . ' WHERE  ' . $paramOrig . ' = ' . $paramAscendent;
+
+            if (self::$idProprietaireGroupe) {
+                $req .= ' AND ' . ClassificationFta2Model::FIELDNAME_ID_PROPRIETAIRE_GROUPE . ' = ' . self::$idProprietaireGroupe;
+            }
+            if (self::$idProprietaireEnseigne <> NULL) {
+                $req .= ' AND ' . ClassificationFta2Model::FIELDNAME_ID_PROPRIETAIRE_ENSEIGNE . ' = ' . self::$idProprietaireEnseigne;
+            }
+            if (self::$idMarque) {
+                $req .= ' AND ' . ClassificationFta2Model::FIELDNAME_ID_MARQUE . ' = ' . self::$idMarque;
+            }
+            if (self::$idActivite) {
+                $req .= ' AND ' . ClassificationFta2Model::FIELDNAME_ID_ACTIVITE . ' = ' . self::$idActivite;
+            }
+            if (self::$idRayon) {
+                $req .= ' AND ' . ClassificationFta2Model::FIELDNAME_ID_RAYON . ' = ' . self::$idRayon;
+            }
+            if (self::$idEnvironnement) {
+                $req .= ' AND ' . ClassificationFta2Model::FIELDNAME_ID_ENVIRONNEMENT . ' = ' . self::$idEnvironnement;
+            }
+            if (self::$idSaisonnalite) {
+                $req .= ' AND ' . ClassificationFta2Model::FIELDNAME_ID_SAISONNALITE . ' = ' . self::$idSaisonnalite;
+            }
+
+            $array = DatabaseOperation::convertSqlStatementWithoutKeyToArray($req);
+
+            foreach ($array as $value) {
+                $return[] = $value[$paramSelect];
+            }
+        }
+        $reqClassification = 'SELECT ' . ClassificationArborescenceArticleCategorieContenuModel::KEYNAME . ',' . ClassificationArborescenceArticleCategorieContenuModel::FIELDNAME_NOM_CLASSIFICATION_ARBORESCENCE_ARTICLE_CATEGORIE_CONTENU
+                . ' FROM ' . ClassificationArborescenceArticleCategorieContenuModel::TABLENAME
+                . ' WHERE ( 0 ' . ClassificationFta2Model::AddIdClassificationArborescenceArticleCategorieContenu($return)
+                . ') ORDER BY ' . ClassificationArborescenceArticleCategorieContenuModel::FIELDNAME_NOM_CLASSIFICATION_ARBORESCENCE_ARTICLE_CATEGORIE_CONTENU
+        ;
+
+        $listeClassification = '<tr><td class=contenu >' . DatabaseDescription::getFieldDocLabel(ClassificationFta2Model::TABLENAME, $paramSelect)
+                . '</td><td class=contenu >'
+                . AccueilFta::afficherRequeteEnListeDeroulante($reqClassification, $paramIdDefaut, $paramNomDefaut, $paramIsEditable) . '</tr>';
+
+        return $listeClassification;
     }
 
 }

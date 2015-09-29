@@ -18,13 +18,6 @@ class FtaModel extends AbstractModel {
     const FIELDNAME_BESOIN_FICHE_TECHNIQUE = "besoin_fiche_technique";
     const FIELDNAME_CALIBRE_DEFAUT = "calibre_defaut";
     const FIELDNAME_CIRCUIT_CLIENT = "id_arcadia_client_circuit";
-    const FIELDNAME_CLASSIFICATION_ACTIVITE = "classification_fta_activite";
-    const FIELDNAME_CLASSIFICATION_ENVIRONNEMENT = "classification_fta_environnement";
-    const FIELDNAME_CLASSIFICATION_MARQUE = "classification_fta_marque";
-    const FIELDNAME_CLASSIFICATION_PROPRIETAIRE = "classification_fta_proprietaire";
-    const FIELDNAME_CLASSIFICATION_RAYON = "classification_fta_rayon";
-    const FIELDNAME_CLASSIFICATION_RESEAU = "classification_fta_reseau";
-    const FIELDNAME_CLASSIFICATION_SAISONNALITE = "classification_fta_saisonnalite";
     const FIELDNAME_CODE_ARTICLE = "CODE_ARTICLE";
     const FIELDNAME_CODE_ARTICLE_CLIENT = "code_article_client";
     const FIELDNAME_CODE_ARTICLE_LDC = "code_article_ldc";
@@ -62,6 +55,7 @@ class FtaModel extends AbstractModel {
     const FIELDNAME_ETIQUETTE_CODESOFT = "id_etiquette_codesoft_arti2";
     const FIELDNAME_ETUDE_PRIX_FTA = "etude_prix_fta";
     const FIELDNAME_FREQUENCE_HEBDOMADAIRE_ESTIMEE_COMMANDE = "frequence_hebdomadaire_estime_commande";
+    const FIELDNAME_ID_FTA_CLASSIFICATION2 = "id_fta_classification2";
     const FIELDNAME_ID_FTA_ETAT = "id_fta_etat";
     const FIELDNAME_LIBELLE = "LIBELLE";
     const FIELDNAME_LIBELLE_CLIENT = "LIBELLE_CLIENT";
@@ -1103,36 +1097,6 @@ class FtaModel extends AbstractModel {
         return $key;
     }
 
-    /**
-     * 
-     * @param int $paramIdFta
-     * @return array
-     */
-    public static function ClassificationFta($paramIdFta) {
-        $arrayClassif = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
-                        "SELECT " . FtaModel::FIELDNAME_CLASSIFICATION_ACTIVITE
-                        . "," . FtaModel::FIELDNAME_CLASSIFICATION_ENVIRONNEMENT
-                        . "," . FtaModel::FIELDNAME_CLASSIFICATION_MARQUE
-                        . "," . FtaModel::FIELDNAME_CLASSIFICATION_PROPRIETAIRE
-                        . "," . FtaModel::FIELDNAME_CLASSIFICATION_RAYON
-                        . "," . FtaModel::FIELDNAME_CLASSIFICATION_RESEAU
-                        . "," . FtaModel::FIELDNAME_CLASSIFICATION_SAISONNALITE
-                        . " FROM " . FtaModel::TABLENAME
-                        . " WHERE " . FtaModel::KEYNAME . "=" . $paramIdFta
-        );
-        foreach ($arrayClassif as $rowsClassif) {
-            $arrayIdClassif = array(
-                FtaModel::FIELDNAME_CLASSIFICATION_ACTIVITE => $rowsClassif[FtaModel::FIELDNAME_CLASSIFICATION_ACTIVITE],
-                FtaModel::FIELDNAME_CLASSIFICATION_ENVIRONNEMENT => $rowsClassif[FtaModel::FIELDNAME_CLASSIFICATION_ENVIRONNEMENT],
-                FtaModel::FIELDNAME_CLASSIFICATION_MARQUE => $rowsClassif[FtaModel::FIELDNAME_CLASSIFICATION_MARQUE],
-                FtaModel::FIELDNAME_CLASSIFICATION_PROPRIETAIRE => $rowsClassif[FtaModel::FIELDNAME_CLASSIFICATION_PROPRIETAIRE],
-                FtaModel::FIELDNAME_CLASSIFICATION_RAYON => $rowsClassif[FtaModel::FIELDNAME_CLASSIFICATION_RAYON],
-                FtaModel::FIELDNAME_CLASSIFICATION_RESEAU => $rowsClassif[FtaModel::FIELDNAME_CLASSIFICATION_RESEAU],
-                FtaModel::FIELDNAME_CLASSIFICATION_SAISONNALITE => $rowsClassif[FtaModel::FIELDNAME_CLASSIFICATION_SAISONNALITE]
-            );
-        }
 
-        return $arrayIdClassif;
-    }
 
 }

@@ -66,7 +66,7 @@ class UserModel extends AbstractModel {
                             . ', ' . FtaModel::FIELDNAME_DOSSIER_FTA . ', ' . FtaModel::FIELDNAME_VERSION_DOSSIER_FTA
                             . ', ' . FtaModel::FIELDNAME_ARTICLE_AGROLOGIC . ', ' . FtaModel::FIELDNAME_CODE_ARTICLE_LDC
                             . ', ' . FtaModel::FIELDNAME_DATE_ECHEANCE_FTA . ', ' . FtaModel::FIELDNAME_CREATEUR
-                            . ', ' . FtaModel::FIELDNAME_CLASSIFICATION_PROPRIETAIRE
+                            . ', ' . FtaModel::FIELDNAME_ID_FTA_CLASSIFICATION2
                             . ', ' . FtaModel::FIELDNAME_SITE_ASSEMBLAGE . ', ' . FtaModel::TABLENAME . '. ' . FtaModel::FIELDNAME_WORKFLOW
                             . ' FROM ' . FtaModel::TABLENAME . ',' . UserModel::TABLENAME
                             . ', ' . FtaEtatModel::TABLENAME

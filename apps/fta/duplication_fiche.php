@@ -129,8 +129,9 @@ switch ($output) {
         /*
          * Marque
          */
-        $arrayIdClassification = FtaModel::ClassificationFta($idFta);
-        $classificationMarque = ClassificationArborescenceArticleCategorieContenuModel::getElementClassificationFta($arrayIdClassification[FtaModel::FIELDNAME_CLASSIFICATION_MARQUE]);
+        
+        $IdFtaClassification2 = $ftaModel->getDataField(FtaModel::FIELDNAME_ID_FTA_CLASSIFICATION2)->getFieldValue();
+        $classificationMarque = ClassificationArborescenceArticleCategorieContenuModel::getElementClassificationFta($IdFtaClassification2,ClassificationFta2Model::FIELDNAME_ID_MARQUE);
         $bloc .= 'Marque(s) <i>(anciennement gamme)</i>:';
         $bloc .= $classificationMarque;
         $bloc.='<br>';
@@ -138,7 +139,7 @@ switch ($output) {
         /*
          * Activité
          */
-        $classificationActivite = ClassificationArborescenceArticleCategorieContenuModel::getElementClassificationFta($arrayIdClassification[FtaModel::FIELDNAME_CLASSIFICATION_ACTIVITE]);
+        $classificationActivite = ClassificationArborescenceArticleCategorieContenuModel::getElementClassificationFta($IdFtaClassification2,ClassificationFta2Model::FIELDNAME_ID_ACTIVITE);
         $bloc .= 'Activité(s) <i>(anciennement ségment)</i>:';
         $bloc .= $classificationActivite;
         $bloc.='<br>';

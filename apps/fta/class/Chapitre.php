@@ -890,7 +890,6 @@ class Chapitre {
 //
 //        //Libellé etiquette carton:
 //        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_LIBELLE_CLIENT);
-
         //Modèle d'étiquette
         $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_ETIQUETTE_CODESOFT);
 
@@ -924,7 +923,6 @@ class Chapitre {
 
 //        //Libellé etiquette carton: ou Logo spécifique étiquette ?
 //        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_LIBELLE_CLIENT);
-
         //Modèle d'étiquette
         $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_ETIQUETTE_CODESOFT);
 
@@ -1866,31 +1864,11 @@ class Chapitre {
 
         $bloc.='<tr class=titre_principal><td class>Classification</td></tr>';
 
-        /*
-         * @todo Ajax : n'affiche pas les valeurs de la liste déroulante
+        /**
+         * Classification
+         *
          */
-
-        //Propriétaire
-        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_CLASSIFICATION_PROPRIETAIRE);
-
-        //Marque
-        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_CLASSIFICATION_MARQUE);
-
-        //Activité
-        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_CLASSIFICATION_ACTIVITE);
-
-        //Rayon
-        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_CLASSIFICATION_RAYON);
-
-        //Reseau
-        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_CLASSIFICATION_RESEAU);
-
-        //Environnement
-        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_CLASSIFICATION_ENVIRONNEMENT);
-
-        //Saisonnalité
-        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_CLASSIFICATION_SAISONNALITE);
-
+        $bloc.=$ftaView->ListeClassification($id_fta,$isEditable);
         /*
          * Deviendra une liste deroulante dépendante des donné choisie dans la classification
          */

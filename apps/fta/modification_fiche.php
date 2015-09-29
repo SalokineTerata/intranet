@@ -76,6 +76,30 @@ $idFtaEtat = Lib::getParameterFromRequest(FtaEtatModel::KEYNAME);
 $abreviationFtaEtat = Lib::getParameterFromRequest(FtaEtatModel::FIELDNAME_ABREVIATION);
 $idFtaRole = Lib::getParameterFromRequest(FtaRoleModel::KEYNAME);
 $id_fta_chapitre = $id_fta_chapitre_encours;
+$ftaModel = new FtaModel($idFta);
+$idFtaClassification2 = $ftaModel->getDataField(FtaModel::FIELDNAME_ID_FTA_CLASSIFICATION2)->getFieldValue();
+if ($idFtaClassification2) {
+    $ClassificationFta2Model = new ClassificationFta2Model($idFtaClassification2);
+    $selection_proprietaire1 = $ClassificationFta2Model->getDataField(ClassificationFta2Model::FIELDNAME_ID_PROPRIETAIRE_GROUPE)->getFieldValue();
+    $selection_proprietaire2 = $ClassificationFta2Model->getDataField(ClassificationFta2Model::FIELDNAME_ID_PROPRIETAIRE_ENSEIGNE)->getFieldValue();
+    $selection_marque = $ClassificationFta2Model->getDataField(ClassificationFta2Model::FIELDNAME_ID_MARQUE)->getFieldValue();
+    $selection_activite = $ClassificationFta2Model->getDataField(ClassificationFta2Model::FIELDNAME_ID_ACTIVITE)->getFieldValue();
+    $selection_rayon = $ClassificationFta2Model->getDataField(ClassificationFta2Model::FIELDNAME_ID_RAYON)->getFieldValue();
+    $selection_environnement = $ClassificationFta2Model->getDataField(ClassificationFta2Model::FIELDNAME_ID_ENVIRONNEMENT)->getFieldValue();
+    $selection_reseau = $ClassificationFta2Model->getDataField(ClassificationFta2Model::FIELDNAME_ID_RESEAU)->getFieldValue();
+    $selection_saisonnalite = $ClassificationFta2Model->getDataField(ClassificationFta2Model::FIELDNAME_ID_SAISONNALITE)->getFieldValue();
+} else {
+    $selection_proprietaire1 = Lib::getParameterFromRequest('selection_proprietaire1');
+    $selection_proprietaire2 = Lib::getParameterFromRequest('selection_proprietaire2');
+    $selection_marque = Lib::getParameterFromRequest('selection_marque');
+    $selection_activite = Lib::getParameterFromRequest('selection_activite');
+    $selection_rayon = Lib::getParameterFromRequest('selection_rayon');
+    $selection_environnement = Lib::getParameterFromRequest('selection_environnement');
+    $selection_reseau = Lib::getParameterFromRequest('selection_reseau');
+    $selection_saisonnalite = Lib::getParameterFromRequest('selection_saisonnalite');
+}
+
+
 $module_consultation = $_SESSION['module'] . '_consultation';
 
 //Sécurisation du chapitre Tarif
@@ -110,6 +134,8 @@ $javascript = '
 </SCRIPT>
 ';
 
+ClassificationFta2Model::initClassification($selection_proprietaire1, $selection_proprietaire2, $selection_marque
+        , $selection_activite, $selection_rayon, $selection_environnement, $selection_reseau, $selection_saisonnalite);
 
 Chapitre::initChapitre($idFta, $id_fta_chapitre, $synthese_action, $comeback, $idFtaEtat, $abreviationFtaEtat, $idFtaRole);
 
@@ -119,18 +145,18 @@ $bloc.= Chapitre::getHtmlChapitreAll();
 
 echo '
      ' . $navigue . '
-     <form $method action=\'' . $page_action . '\' name=\'form_action\' method=\'post\'>
+     <form ' . $method . ' action=\'' . $page_action . '\' name=\'form_action\' method=\'post\'>
      <input type=hidden name=action value=' . $action . '>
-     <input type=hidden name=id_fta value=' . $idFta . '>
-     <input type=hidden name=abreviation_fta_etat value=' . $abreviationFtaEtat . '>
-     <input type=hidden name=id_fta_chapitre_encours value=' . $id_fta_chapitre_encours . '>
-     <input type=hidden name=id_fta_chapitre value=' . $id_fta_chapitre . '>
-     <input type=hidden name=id_fta_role value=' . $idFtaRole . '>
-     <input type=hidden name=id_fta_etat value=' . $idFtaEtat . '>
+     <input type=hidden name=id_fta id=id_fta value=' . $idFta . '>
+     <input type=hidden name=abreviation_fta_etat id=abreviation_fta_etat value=' . $abreviationFtaEtat . '>
+     <input type=hidden name=id_fta_chapitre_encours id=id_fta_chapitre_encours value=' . $id_fta_chapitre_encours . '>
+     <input type=hidden name=id_fta_chapitre  id=id_fta_chapitre value=' . $id_fta_chapitre . '>
+     <input type=hidden name=id_fta_role id=id_fta_role value=' . $idFtaRole . '>
+     <input type=hidden name=id_fta_etat id=id_fta_etat value=' . $idFtaEtat . '>
      <input type=hidden name=id_fta_suivi_projet value=' . $id_fta_suivi_projet . '>
-     <input type=\'hidden\' name=\'synthese_action\' value=\'' . $synthese_action . '\' />
+     <input type=\'hidden\' name=\'synthese_action\' id=synthese_action value=\'' . $synthese_action . '\' />
      <input type=\'hidden\' name=\'nom_fta_chapitre_encours\' value=\'' . $nom_fta_chapitre_encours . '\' />
-     <input type=\'hidden\' name=\'comeback\' value=\'' . $comeback . '\' />
+     <input type=\'hidden\' name=\'comeback\' id=comeback value=\'' . $comeback . '\' />
     
      ' . $javascript . '
      <' . $html_table . '>

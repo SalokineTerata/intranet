@@ -77,42 +77,6 @@ $globalConfig = new GlobalConfig();
 $idUser = $globalConfig->getAuthenticatedUser()->getKeyValue();
 $classificationModifier = ClassificationFta2Model::getClassificationModification($idUser);
 
-/*
-  Récupération des données MySQL
- */
-//   Exemple: mysql_table_load('nom_de_ma_table');
-
-$table = 'classification_arborescence_article,classification_arborescence_article_categorie_contenu';                                      //nom de la table contenant l'association "Père" / "Fils"
-$champ_valeur = 'nom_classification_arborescence_article_categorie_contenu';                            //nom du champ contenant la valeur à afficher (sans le "underscore" et le nom de la table)
-$champ_id_fils = 'id_classification_arborescence_article';         //nom du champ fils contenant l'id (sans le "underscore" et le nom de la table)
-$champ_id_pere = 'ascendant_classification_arborescence_article_categorie_contenu';  //nom du champ père contenant l'id (sans le "underscore" et le nom de la table)
-$id_racine = 1;                                                                     //Identifiant de l'enregistrement père racine (le premier)
-if (!$liste_id) {
-    $liste_id = "," . $id_racine . ",";
-}
-if ($add_id) {
-    $liste_id.=$add_id . ",";
-}
-//echo    $liste_id;
-//echo    $_GET;
-//    print_r(parse_url($url));
-$sql_where = "classification_arborescence_article.id_classification_arborescence_article_categorie_contenu=classification_arborescence_article_categorie_contenu.id_classification_arborescence_article_categorie_contenu";                //Permet de personnaliser la clause SQL "WHERE" comme pour insérer une jointure par exemple
-
-$extension[0] = "&nbsp<a href=index.php?liste_id=" . $liste_id . "&add_id=";         //Lien HTML
-$extension[1] = 1;                //Termine le lien par l'id de l'objet de l'arborescence
-$extension[2] = "><img src=../lib/images/plus.png width=10 height=10 border=0></a>";           //2ème bout de code rajouter en fin de ligne
-$extension[3] = $liste_id;        //Liste des id à développer, si NULL, alors tout est développé
-$extension[4] = "ajout.php?liste_id=" . $liste_id . "&id_classification_arborescence_article=";     //Lien lorsqu'on clique sur un element de classification
-//    $arbo=arborescence_construction( $table,
-//                                     $champ_valeur,
-//                                     $champ_id_fils,
-//                                     $champ_id_pere,
-//                                     $id_racine,
-//                                     $sql_where,
-//                                     $extension
-//                                     );
-//Présentation Texte
-$arbo[2];
 
 if (!$selection_proprietaire1) {
     $selection_proprietaire1 = 0;
@@ -239,25 +203,6 @@ foreach ($array as $value) {
 
     $bloc .="</tr>";
 }
-
-
-//foreach ($array as $key => $rows) {
-//
-//    $bloc .="<tr class=\"contenu\" name=id_classification_arborescence_article value=" . $key . ">";
-//    /**
-//     * Verification de la valeur selectionnée check
-//     */
-//    $bloc.= "<td >" . $rows[HtmlResult::PROPRIETAIRE][0] . "</td>";
-//    $bloc.= "<td>" . $rows[HtmlResult::PROPRIETAIRE][1] . "</td>";
-//    $bloc.= "<td>" . $rows[HtmlResult::MARQUE] . "</td>"
-//            . "<td>" . $rows[HtmlResult::ACTIVITE] . "</td>"
-//            . "<td>" . $rows[HtmlResult::RAYON] . "</td>"
-//            . "<td>" . $rows[HtmlResult::ENVIRONNEMENT] . "</td>"
-//            . "<td>" . $rows[HtmlResult::RESEAU] . "</td>"
-//            . "<td>" . $rows[HtmlResult::SAISONALITE] . "</td>"
-//    ;
-//    $bloc .="</tr>";
-//}
 
 /*
   Sélection du mode d'affichage

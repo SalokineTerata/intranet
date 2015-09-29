@@ -41,12 +41,13 @@ class FtaWorkflowModel extends AbstractModel {
 
     /**
      * Affiche la liste des espaces de travail pour lesquel l'utilisateur connecté à les droits d'accès
-     * @param type $paramIdUser
-     * @param type $paramObjetList
-     * @param type $paramIsEditable
-     * @return type
+     * @param int $paramIdUser
+     * @param objet $paramObjetList
+     * @param boolean $paramIsEditable
+     * @param int $paramIdDefault
+     * @return string
      */
-    public static function ShowListeDeroulanteNomWorkflowByAcces($paramIdUser, $paramObjetList, $paramIsEditable) {
+    public static function ShowListeDeroulanteNomWorkflowByAcces($paramIdUser, $paramObjetList, $paramIsEditable, $paramIdDefault = NULL) {
 
         $arrayWorkflow = DatabaseOperation::convertSqlStatementWithKeyAndOneFieldToArray(
                         'SELECT DISTINCT ' . FtaWorkflowModel::TABLENAME . '.' . FtaWorkflowModel::KEYNAME . ',' . FtaWorkflowModel::FIELDNAME_DESCRIPTION_FTA_WORKFLOW
@@ -66,6 +67,7 @@ class FtaWorkflowModel extends AbstractModel {
         $paramObjetList->getAttributes()->getName()->setValue(FtaWorkflowModel::KEYNAME);
         $paramObjetList->setLabel(DatabaseDescription::getFieldDocLabel(FtaWorkflowModel::TABLENAME, FtaWorkflowModel::FIELDNAME_DESCRIPTION_FTA_WORKFLOW));
         $paramObjetList->setIsEditable($paramIsEditable);
+        $paramObjetList->setSelectedValue($paramIdDefault);
 
         $listeSiteWorkflow = $paramObjetList->getHtmlResult();
 

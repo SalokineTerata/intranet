@@ -554,7 +554,7 @@ class AccueilFta {
                 $createurFta = $rowsDetail[FtaModel::FIELDNAME_CREATEUR];
                 $siteProduction = $rowsDetail[FtaModel::FIELDNAME_SITE_ASSEMBLAGE];
                 $idWorkflowFtaEncours = $rowsDetail[FtaModel::FIELDNAME_WORKFLOW];
-                $idclassification = $rowsDetail[FtaModel::FIELDNAME_CLASSIFICATION_PROPRIETAIRE];
+                $idclassification = $rowsDetail[FtaModel::FIELDNAME_ID_FTA_CLASSIFICATION2];
 
                 /*
                  * Initialisation des valeurs pour un 
@@ -597,7 +597,7 @@ class AccueilFta {
                  */
 
                 if ($idclassification) {
-                    $classification = ClassificationArborescenceArticleCategorieContenuModel::getElementClassificationFta($idclassification);
+                    $classification = ClassificationArborescenceArticleCategorieContenuModel::getElementClassificationFta($idclassification,  ClassificationFta2Model::FIELDNAME_ID_PROPRIETAIRE_GROUPE);
                 }
 
                 /*
@@ -1134,9 +1134,10 @@ class AccueilFta {
      * @param string $paramRequeteSQL
      * @param int $paramIdDefaut
      * @param string $paramNomDefaut
+     * @param boolean $paramIsEditable
      * @return string
      */
-    public static function afficherRequeteEnListeDeroulante($paramRequeteSQL, $paramIdDefaut, $paramNomDefaut) {
+    public static function afficherRequeteEnListeDeroulante($paramRequeteSQL, $paramIdDefaut, $paramNomDefaut, $paramIsEditable = NULL) {
 //Recherche de la clef
         $table = DatabaseOperation::convertSqlStatementKeyAndOneFieldToArray($paramRequeteSQL);
         if (!$table) {//Si la liste est vide
@@ -1147,34 +1148,47 @@ class AccueilFta {
 //                $html_liste .= '</select>';
 //            }
         } else {
-            $key = array_keys($table);
-            if (!$paramNomDefaut) {
-                $paramNomDefaut = $key[AccueilFta::VALUE_1];
-            }
-
-//Création de la liste déroulante
-            $html_liste = '<select name=' . $paramNomDefaut . ' onChange=' . $paramNomDefaut . '_js()>';
-
-            $html_liste .='<option value=0 >Tous</option>';
-
-            /*
-             * PDO::FETCH_BOTH
-             * Retourne la ligne suivante en tant qu'un tableau indexé par le nom et le numéro de la colonne
-             */
-//Création du contenu de la liste
-            $array = DatabaseOperation::convertSqlStatementKeyAndOneFieldToArray($paramRequeteSQL);
-            foreach ($array as $rows) {
-                if ($rows[AccueilFta::VALUE_0] == $paramIdDefaut) {
-                    $selected = ' selected';
-                } else {
-                    $selected = '';
+            if ($paramIsEditable <> FALSE) {
+                $key = array_keys($table);
+                if (!$paramNomDefaut) {
+                    $paramNomDefaut = $key[AccueilFta::VALUE_1];
                 }
 
-                $html_liste .= '<option value=' . $rows[AccueilFta::VALUE_0] . '  ' . $selected . '>' . $rows[AccueilFta::VALUE_1] . '</option>';
-            }
-            $html_liste .= '</select>';
-        }//Fin de la construction de la liste
+//Création de la liste déroulante
+                $html_liste = '<select name=' . $paramNomDefaut . ' onChange=' . $paramNomDefaut . '_js()>';
 
+                $html_liste .='<option value=0 >Tous</option>';
+
+                /*
+                 * PDO::FETCH_BOTH
+                 * Retourne la ligne suivante en tant qu'un tableau indexé par le nom et le numéro de la colonne
+                 */
+//Création du contenu de la liste
+                $array = DatabaseOperation::convertSqlStatementKeyAndOneFieldToArray($paramRequeteSQL);
+                foreach ($array as $rows) {
+                    if ($rows[AccueilFta::VALUE_0] == $paramIdDefaut) {
+                        $selected = ' selected';
+                    } else {
+                        $selected = '';
+                    }
+
+                    $html_liste .= '<option value=' . $rows[AccueilFta::VALUE_0] . '  ' . $selected . '>' . $rows[AccueilFta::VALUE_1] . '</option>';
+                }
+                $html_liste .= '</select>';
+            } else {
+                $array = DatabaseOperation::convertSqlStatementKeyAndOneFieldToArray($paramRequeteSQL);
+                foreach ($array as $rows) {
+                    if ($rows[AccueilFta::VALUE_0] == $paramIdDefaut) {
+                        $html_listeTMP = $rows[AccueilFta::VALUE_1];
+                    } else {
+                        $html_liste = NULL;
+                    }
+                    if (!$html_liste) {
+                        $html_liste = $html_listeTMP;
+                    }
+                }
+            }//Fin de la construction de la liste
+        }
         return $html_liste;
     }
 

@@ -64,6 +64,10 @@ $checked_vierge = '';
 $checked_duplicate = '';
 if ($id_fta) {
     $checked_duplicate = 'checked';
+    $ftaModel = new FtaModel($id_fta);
+    $idFtaWorkflow = $ftaModel->getDataField(FtaModel::FIELDNAME_WORKFLOW)->getFieldValue();
+    $SiteDeProduction = $ftaModel->getDataField(FtaModel::FIELDNAME_SITE_ASSEMBLAGE)->getFieldValue();
+    $designationCommercialeFta = $ftaModel->getDataField(FtaModel::FIELDNAME_DESIGNATION_COMMERCIALE)->getFieldValue();
 } else {
     $checked_vierge = 'checked';
 }
@@ -72,7 +76,7 @@ $HtmlList = new HtmlListSelectTagName();
 /*
  * Worflow de FTA
  */
-$listeWorkflow = FtaWorkflowModel::ShowListeDeroulanteNomWorkflowByAcces($idUser, $HtmlList, TRUE);
+$listeWorkflow = FtaWorkflowModel::ShowListeDeroulanteNomWorkflowByAcces($idUser, $HtmlList, TRUE, $idFtaWorkflow);
 
 
 
@@ -80,7 +84,7 @@ $listeWorkflow = FtaWorkflowModel::ShowListeDeroulanteNomWorkflowByAcces($idUser
  * Site de production FTA
  */
 
-$listeSiteProduction = GeoModel::ShowListeDeroulanteSiteProdByAcces($idUser, $HtmlList, TRUE);
+$listeSiteProduction = GeoModel::ShowListeDeroulanteSiteProdByAcces($idUser, $HtmlList, TRUE, $SiteDeProduction);
 
 
 
@@ -129,7 +133,8 @@ echo '
 <div id="zone_de_rechargement">	
          <' . $html_table . '>           
              <tr class=contenu><td align=\'left\'>
-                 ' . DatabaseDescription::getFieldDocLabel(FtaModel::TABLENAME, FtaModel::FIELDNAME_DESIGNATION_COMMERCIALE) . ':</td><td><input type=\'text\' name=\'designation_commerciale_fta\' size=\'20\' />
+                 ' . DatabaseDescription::getFieldDocLabel(FtaModel::TABLENAME, FtaModel::FIELDNAME_DESIGNATION_COMMERCIALE)
+                    . ':</td><td><input type=\'text\' name=\'designation_commerciale_fta\' size=\'20\' value=\'' . $designationCommercialeFta . '\' />
              </td></tr>
 
                     ' . $listeWorkflow . '
@@ -145,7 +150,7 @@ echo '
      <tr><td>
 
 
-         <'.$html_table.'>        
+         <' . $html_table . '>        
                  <input type=hidden name=\'abreviation_fta_etat\' value=\'I\' checked /> 
          </table>
          <center>

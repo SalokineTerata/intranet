@@ -57,12 +57,13 @@ class GeoModel extends AbstractModel {
 
     /**
      * Affiche la liste des site de production pour lesquel l'utilisateur connecté à les droits d'accès
-     * @param type $paramIdUser
-     * @param type $paramObjet
-     * @param type $paramIsEditable
-     * @return type
+     * @param int $paramIdUser
+     * @param objet $paramObjet
+     * @param boolean $paramIsEditable
+     * @param int $paramIdDefault
+     * @return string
      */
-    public static function ShowListeDeroulanteSiteProdByAcces($paramIdUser, $paramObjet, $paramIsEditable) {
+    public static function ShowListeDeroulanteSiteProdByAcces($paramIdUser, $paramObjet, $paramIsEditable, $paramIdDefault) {
         $arraySite = DatabaseOperation::convertSqlStatementWithKeyAndOneFieldToArray(
                         'SELECT DISTINCT ' . GeoModel::KEYNAME . ',' . GeoModel::FIELDNAME_GEO
                         . ' FROM ' . GeoModel::TABLENAME
@@ -85,6 +86,7 @@ class GeoModel extends AbstractModel {
         $paramObjet->getAttributes()->getName()->setValue(GeoModel::KEYNAME);
         $paramObjet->setLabel(DatabaseDescription::getFieldDocLabel(GeoModel::TABLENAME, GeoModel::FIELDNAME_GEO));
         $paramObjet->setIsEditable($paramIsEditable);
+        $paramObjet->setSelectedValue($paramIdDefault);
         $listeSiteProduction = $paramObjet->getHtmlResult();
 
         return $listeSiteProduction;

@@ -103,6 +103,24 @@ class Lib {
         return $result;
     }
 
+    /**
+     * Récupère la valeur d'un paramètre passé par SERVER (GET ou POST)
+     * @param <type> $variable_name Nom de la variable
+     * @param <type> $variable_default_value Si le paramètre n'existe pas, valeur par défaut à affecter
+     * @return <type> Retourne la valeur de la variable
+     */
+    public static function getParameterFromServer($variable_name, $variable_default_value = null) {
+
+        $result = null;
+        if (isset($_SERVER[$variable_name])) {
+            $result = $_SERVER[$variable_name];
+        } else {
+            $result = $variable_default_value;
+        }
+
+        return $result;
+    }
+
     public static function getModule() {
         return Lib::$module;
     }

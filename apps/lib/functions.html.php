@@ -123,8 +123,6 @@ function afficher_moteur_recherche($module
     //$nom_recherche_recherche_etat="nom_fta_etat";
     //$champ_retour = 'fta.id_fta';
 
-    $image_bordure = "../lib/images/s7.gif";
-    $image_recherche = "../lib/images/search.gif";
     $nb_limite_resultat = 1000;
     if ($url_page_depart == '') {
         if ($QUERY_STRING)

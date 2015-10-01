@@ -707,7 +707,7 @@ class AccueilFta {
 
                 if (
                         (self::$ftaModification)
-                        or ( self::$ftaConsultation )
+                        or ( self::$ftaConsultation and self::$abrevationFtaEtat == FtaEtatModel::ETAT_ABREVIATION_VALUE_VALIDE )
                 )
                     $actions = '<a '
                             . 'href=modification_fiche.php'
@@ -746,7 +746,7 @@ class AccueilFta {
                         self::$idFtaRole == AccueilFta::VALUE_1 and $recap[$idFta] == AccueilFta::VALUE_100_POURCENTAGE
 //                        and ( $abreviationFtaEtat == FtaEtatModel::ETAT_ABREVIATION_VALUE_MODIFICATION )
                         )or ( $ok == AccueilFta::VALUE_2 and $accesTransitionButton == FALSE && $recap[$idFta] == AccueilFta::VALUE_100_POURCENTAGE) and (
-                        $abreviationFtaEtat == FtaEtatModel::ETAT_ABREVIATION_VALUE_MODIFICATION
+                        self::$abrevationFtaEtat == FtaEtatModel::ETAT_ABREVIATION_VALUE_MODIFICATION
                         ) or ( self::$syntheseAction == FtaEtatModel::ETAT_AVANCEMENT_VALUE_ALL ) and self::$ftaModification
                         or ( self::$idFtaRole == AccueilFta::VALUE_1 and self::$syntheseAction == FtaEtatModel::ETAT_AVANCEMENT_VALUE_EFFECTUES)
                 ) {
@@ -1195,5 +1195,5 @@ class AccueilFta {
         }
         return $html_liste;
     }
-
+ 
 }

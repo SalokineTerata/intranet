@@ -7,7 +7,7 @@
 //include ("./functions.php");
 //include ("./functions.js");
 require_once '../inc/main.php';
-
+$action = Lib::getParameterFromRequest('action');
 /*
   -----------------
   ACTION A TRAITER
@@ -61,6 +61,7 @@ switch ($action) {
 
 
         // Dictionnaire des variables
+        $url_page_depart = Lib::getParameterFromRequest('url_page_depart');
         $nbligne = Lib::getParameterFromRequest('nbligne');   // Nombre de lignes totales
         $nbcol = Lib::getParameterFromRequest('nbcol');         // nombre de colonnes de la ligne courante
         $champ_recherche = Lib::getParameterFromRequest('champ_recherche'); //tableau des identifiants des champs choisis
@@ -80,6 +81,7 @@ switch ($action) {
         $join = array();
         $y = 0;
         $z = 0;
+        $nb_limite_resultat = 1000;
         $join[$y][$z][1] = false;
 
         // Découpage des tableaux
@@ -95,13 +97,19 @@ switch ($action) {
 
         // nom de la table de stockage de tous les champs
         //que l'on peut utiliser pour une recherche
-        $table_tous_champs_rech = $module_table . '_moteur_de_recherche';
-        $table_tous_champs_rech = Lib::getParameterFromRequest('table_tous_champs_rech');
-
+        if (!Lib::getParameterFromRequest('table_tous_champs_rech')) {
+            $table_tous_champs_rech = $module_table . '_moteur_de_recherche';
+        } else {
+            $table_tous_champs_rech = Lib::getParameterFromRequest('table_tous_champs_rech');
+        }
         // Nom de la table du champ retour
-        $tmp = explode('.', $champ_retour);
-        $table_champ_retour = $tmp[0];
-        $table_champ_retour = Lib::getParameterFromRequest('table_champ_retour');
+        if (!Lib::getParameterFromRequest('table_champ_retour')) {
+            $tmp = explode('.', $champ_retour);
+            $table_champ_retour = $tmp[0];
+        } else {
+            $table_champ_retour = Lib::getParameterFromRequest('table_champ_retour');
+        }
+
 
 
         // Parcours des tableaux de données pour ecrire les requetes
@@ -134,7 +142,7 @@ switch ($action) {
 //echo         $GLOBALS['table_champ_retour'];  // table du champ retour
 //echo        $GLOBALS['table_tous_champs_rech'];
 
-                    $join[$j] = jointure($champ[0], $url_page_depart, $module);
+                    $join[$j] = MoteurDeRecherche::rechercheDeJointure($champ[0], $url_page_depart, $module, $table_champ_retour, $table_tous_champs_rech);
 
                     // Recuperation de l'operateur
                     $tmp = $operateur_recherche[$i][$j];
@@ -462,33 +470,38 @@ switch ($action) {
 
     case 'ajout':
         // Dictionnaire des variables
-        $nbligne = $GLOBALS['nbligne'];   // Nombre de lignes totales
-        $nbcol = $GLOBALS['nbcol'];         // nombre de colonnes de la ligne courante
-        $champ_recherche = $GLOBALS['champ_recherche']; //tableau des identifiants des champs choisis
-        $operateur_recherche = $GLOBALS['operateur_recherche'];  //tableau des identifiants des operateurs choisis
-        $texte_recherche = $GLOBALS['texte_recherche'];  //table au des valeurs entrées par l'utilisateur
-        $champ_courant = $GLOBALS['champ_courant'];    // Valeur de l'identifiant du champ qui vient juste d'etre saisie par l'utilisateur
-        $operateur_courant = $GLOBALS['operateur_courant']; // Valeur de l'identifiant de l'operateur qui vient juste d'etre saisie par l'utilisateur
-        $texte_courant = $GLOBALS['texte_courant']; // Valeur du texte qui vient juste d'etre saisie par l'utilisateur
-        $nb_col_courant = $GLOBALS['nb_col_courant'];  // numero de la colonne courante
-        $nb_ligne_courant = $GLOBALS['nb_ligne_courant']; // numero de la ligne courante
-        $ajout_col = $GLOBALS['ajout_col'];      //si $ajout_col = 1 : ajout d'une colonne dans la ligne courante
-        $module_table = $GLOBALS['module_table'];
-        $champ_retour = $GLOBALS['champ_retour'];
+        $url_page_depart = Lib::getParameterFromRequest('url_page_depart');
+        $nbligne = Lib::getParameterFromRequest('nbligne');   // Nombre de lignes totales
+        $nbcol = Lib::getParameterFromRequest('nbcol');         // nombre de colonnes de la ligne courante
+        $champ_recherche = Lib::getParameterFromRequest('champ_recherche'); //tableau des identifiants des champs choisis
+        $operateur_recherche = Lib::getParameterFromRequest('operateur_recherche');  //tableau des identifiants des operateurs choisis
+        $texte_recherche = Lib::getParameterFromRequest('texte_recherche');  //table au des valeurs entrées par l'utilisateur
+        $champ_courant = Lib::getParameterFromRequest('champ_courant');   // Valeur de l'identifiant du champ qui vient juste d'etre saisie par l'utilisateur
+        $operateur_courant = Lib::getParameterFromRequest('operateur_courant'); // Valeur de l'identifiant de l'operateur qui vient juste d'etre saisie par l'utilisateur
+        $texte_courant = Lib::getParameterFromRequest('texte_courant'); // Valeur du texte qui vient juste d'etre saisie par l'utilisateur
+        $nb_col_courant = Lib::getParameterFromRequest('nb_col_courant');  // numero de la colonne courante
+        $nb_ligne_courant = Lib::getParameterFromRequest('nb_ligne_courant'); // numero de la ligne courante
+        $ajout_col = Lib::getParameterFromRequest('ajout_col');      //si $ajout_col = 1 : ajout d'une colonne dans la ligne courante
+        $module_table = Lib::getParameterFromRequest('module_table');  // nom du module courant
+        $champ_retour = Lib::getParameterFromRequest('champ_retour');   // nom du champ reponse de la requete
+        $name_val = Lib::getParameterFromRequest('name_val');
+        $boutton_operateur = Lib::getParameterFromRequest('boutton_operateur');
         $url = substr($url_page_depart, 1);
         $url = substr($url, 0, strlen($url) - 1);
 
         // Si la valeur entrée par l'utilisateur est une date
         $name_j = $name_val . '_jour';
-        if ($$name_j) {
+        if (Lib::getParameterFromRequest($name_j)) {
             $name_m = $name_val . '_mois';
             $name_a = $name_val . '_annee';
             //transformation de la date en YYYY-MM-DD
-            $texte_courant = $$name_a . '-' . $$name_m . '-' . $$name_j;
-        } else  // Sinon c'est un champ texte
-            $texte_courant = $$name_val;
-
-        $ajout_col = 0;
+            $texte_courant = Lib::getParameterFromRequest($name_a) . '-' . Lib::getParameterFromRequest($name_m) . '-' . Lib::getParameterFromRequest($name_j);
+        } else {  // Sinon c'est un champ texte
+            $texte_courant = Lib::getParameterFromRequest($name_val);
+        }
+        if (!$ajout_col) {
+            $ajout_col = 0;
+        }
 
         // Découpage des tableaux
         //Séparation des lignes
@@ -496,8 +509,7 @@ switch ($action) {
         $operateur_recherche_aux = explode('||', $operateur_recherche);
         $texte_recherche_aux = explode('||', $texte_recherche);
         // Séparation des colonne
-        for ($i = 0; $i < $nbligne; $i++) 
-        {
+        for ($i = 0; $i < $nbligne; $i++) {
             $champ_recherche_aux[$i] = explode(';;', $champ_recherche_aux[$i]);
             $operateur_recherche_aux[$i] = explode(';;', $operateur_recherche_aux [$i]);
             $texte_recherche_aux[$i] = explode(';;', $texte_recherche_aux[$i]);
@@ -509,20 +521,22 @@ switch ($action) {
             unset($operateur_recherche);   //suppression du tableau
             unset($texte_recherche);  //suppression du tableau
             if ($nbcol == 1) {          // Si on vient de supprimer la dernière valeur de la ligne, on supprime la ligne
-                if ($nbligne != 1)
+                if ($nbligne != 1) {
                     $nbligne--;
+                }
             }
             // transformation du tableau en chaine de caractere
             if ($nbligne == 1) {    // Si une seule ligne
-                if (isset($champ_recherche_aux[0][0]))
+                if (isset($champ_recherche_aux[0][0])) {
                     $champ_recherche = implode(';;', $champ_recherche_aux[0]);
-                if (
-                        isset($operateur_recherche_aux[0][0]))
+                }
+                if (isset($operateur_recherche_aux[0][0])) {
                     $operateur_recherche = implode(';;', $operateur_recherche_aux[0]);
-                if (isset($texte_recherche_aux[0][0]))
+                }
+                if (isset($texte_recherche_aux[0][0])) {
                     $texte_recherche = implode(';;', $texte_recherche_aux[0]);
-            }
-            else {
+                }
+            } else {
                 for ($i = 0; $i < $nbligne; $i ++) {
                     $champ_recherche .= implode(';;', $champ_recherche_aux[$i]);
                     $champ_recherche.='||';
@@ -536,11 +550,12 @@ switch ($action) {
 
 
 
-            if (!strstr($url_page_depart, '?'))
+            if (!strstr($url_page_depart, '?')) {
                 $lien = $url . '?url_page_depart=' . $url_page_depart . '&nb_limite_resultat=' . $nb_limite_resultat . '&champ_recherche=' . $champ_recherche . '&operateur_recherche=' . $operateur_recherche . '&texte_recherche=' . $texte_recherche . '&nbcol=' . $nbcol . '&nbligne=' . $nbligne . '&nb_col_courant=' . $nb_col_courant . '&nb_ligne_courant=' . $nb_ligne_courant .
                         '&ajout_col=' . $ajout_col;
-            else
+            } else {
                 $lien = $url . '&url_page_depart=' . $url_page_depart . '&nb_limite_resultat=' . $nb_limite_resultat . '&champ_recherche=' . $champ_recherche . '&operateur_recherche=' . $operateur_recherche . '&texte_recherche=' . $texte_recherche . '&nbcol=' . $nbcol . '&nbligne=' . $nbligne . '&nb_col_courant=' . $nb_col_courant . '&nb_ligne_courant=' . $nb_ligne_courant . '&ajout_col=' . $ajout_col;
+            }
             header("Location: $lien");
         } else {
             if ($champ_recherche_aux[$nb_ligne_courant][$nb_col_courant] == '') {
@@ -569,19 +584,19 @@ switch ($action) {
                                 $ajout_col = 1;     // variable qui va incrementer le nombre de colonne de la ligne courante
                                 unset($texte_recherche);    //suppression du tableau
                                 // transformation du tableau en chaine de caractere
-                                if ($nbligne == 1)
+                                if ($nbligne == 1) {
                                     $texte_recherche = implode(';;', $texte_recherche_aux[0]);
-                                else {
+                                } else {
 
                                     for ($i = 0; $i < $nbligne; $i++) {
                                         $texte_recherche.= implode(';;', $texte_recherche_aux[$i]);
                                         $texte_recherche.='||';
                                     }
-                                } if (!strstr(
-                                                $url_page_depart, '?'))
+                                } if (!strstr($url_page_depart, '?')) {
                                     $lien = $url . '?url_page_depart=' . $url_page_depart . '&nb_limite_resultat=' . $nb_limite_resultat . '&champ_recherche=' . $champ_recherche . '&operateur_recherche=' . $operateur_recherche . '&texte_recherche=' . $texte_recherche . '&nbcol=' . $nbcol . '&nbligne=' . $nbligne . '&nb_col_courant=' . $nb_col_courant . '&nb_ligne_courant=' . $nb_ligne_courant . '&ajout_col=' . $ajout_col;
-                                else
+                                } else {
                                     $lien = $url . '&url_page_depart=' . $url_page_depart . '&nb_limite_resultat=' . $nb_limite_resultat . '&champ_recherche=' . $champ_recherche . '&operateur_recherche=' . $operateur_recherche . '&texte_recherche=' . $texte_recherche . '&nbcol=' . $nbcol . '&nbligne=' . $nbligne . '&nb_col_courant=' . $nb_col_courant . '&nb_ligne_courant=' . $nb_ligne_courant . '&ajout_col=' . $ajout_col;
+                                }
                                 header("Location: $lien");
                             }
                             if ($boutton_operateur == 'ou') {
@@ -597,19 +612,19 @@ switch ($action) {
                                     }
                                 }
                                 $nbligne++;  //on incremente le nombre de lignes
-                                if (!strstr(
-                                                $url_page_depart, '?'))
+                                if (!strstr($url_page_depart, '?')) {
                                     $lien = $url . '?url_page_depart=' . $url_page_depart . '&nb_limite_resultat=' . $nb_limite_resultat . '&champ_recherche=' . $champ_recherche . '&operateur_recherche=' . $operateur_recherche . '&texte_recherche=' . $texte_recherche . '&nbcol=' . $nbcol . '&nbligne=' . $nbligne . '&nb_col_courant=' . $nb_col_courant . '&nb_ligne_courant=' . $nb_ligne_courant . '&ajout_col=' . $ajout_col;
-                                else
+                                } else {
                                     $lien = $url . '&url_page_depart=' . $url_page_depart . '&nb_limite_resultat=' . $nb_limite_resultat . '&champ_recherche=' . $champ_recherche . '&operateur_recherche=' . $operateur_recherche . '&texte_recherche=' . $texte_recherche . '&nbcol=' . $nbcol . '&nbligne=' . $nbligne . '&nb_col_courant=' . $nb_col_courant . '&nb_ligne_courant=' . $nb_ligne_courant . '&ajout_col=' . $ajout_col;
+                                }
                                 header("Location: $lien");
                             }
                             if ($boutton_operateur == 'fin') {
                                 unset($texte_recherche); //suppression du tableau
                                 // transformation du tableau en chaine de caractere
-                                if ($nbligne == 1)
+                                if ($nbligne == 1) {
                                     $texte_recherche = implode(';;', $texte_recherche_aux[0]);
-                                else {
+                                } else {
 
                                     for ($i = 0; $i < $nbligne; $i++) {
                                         $texte_recherche.= implode(';;', $texte_recherche_aux[$i]);
@@ -631,17 +646,16 @@ switch ($action) {
                                 $nbligne++;
                                 // transformation du tableau en chaine de caractere
                                 if ($nbligne == 1) {    // Si une seule ligne
-                                    if (isset(
-                                                    $champ_recherche_aux[0][0]))
+                                    if (isset($champ_recherche_aux[0][0])) {
                                         $champ_recherche = implode(';;', $champ_recherche_aux[0]);
-                                    if (isset(
-                                                    $operateur_recherche_aux[0][0]))
+                                    }
+                                    if (isset($operateur_recherche_aux[0][0])) {
                                         $operateur_recherche = implode(';;', $operateur_recherche_aux[0]);
-                                    if (isset(
-                                                    $texte_recherche_aux[0][0]))
+                                    }
+                                    if (isset($texte_recherche_aux[0][0])) {
                                         $texte_recherche = implode(';;', $texte_recherche_aux[0]);
-                                }
-                                else {
+                                    }
+                                } else {
 
                                     for ($i = 0; $i < $nbligne; $i++) {
                                         $champ_recherche .= implode(';;', $champ_recherche_aux[$i]);
@@ -653,11 +667,11 @@ switch ($action) {
                                     }
                                 }
                                 $nbcol = 1;
-                                if (!strstr(
-                                                $url_page_depart, '?'))
+                                if (!strstr($url_page_depart, '?')) {
                                     $lien = $url . '?url_page_depart=' . $url_page_depart . '&nb_limite_resultat=' . $nb_limite_resultat . '&champ_recherche=' . $champ_recherche . '&operateur_recherche=' . $operateur_recherche . '&texte_recherche=' . $texte_recherche . '&nbcol=' . $nbcol . '&nbligne=' . $nbligne . '&nb_col_courant=' . $nb_col_courant . '&nb_ligne_courant=' . $nb_ligne_courant . '&ajout_col=' . $ajout_col;
-                                else
+                                } else {
                                     $lien = $url . '&url_page_depart=' . $url_page_depart . '&nb_limite_resultat=' . $nb_limite_resultat . '&champ_recherche=' . $champ_recherche . '&operateur_recherche=' . $operateur_recherche . '&texte_recherche=' . $texte_recherche . '&nbcol=' . $nbcol . '&nbligne=' . $nbligne . '&nb_col_courant=' . $nb_col_courant . '&nb_ligne_courant=' . $nb_ligne_courant . '&ajout_col=' . $ajout_col;
+                                }
                                 header("Location: $lien");
                             }
                             if ($boutton_operateur == 'Suppr') {
@@ -673,24 +687,24 @@ switch ($action) {
                                         $operateur_recherche_aux [$i] = $operateur_recherche_aux[$i + 1];
                                         $texte_recherche_aux[$i] = $texte_recherche_aux[$i + 1];
                                     }
-                                    if ($nbligne > 1)
+                                    if ($nbligne > 1) {
                                         $nbligne--;
+                                    }
                                 }
 
 
                                 // transformation du tableau en chaine de caractere
                                 if ($nbligne == 1) {    // Si une seule ligne
-                                    if (isset($champ_recherche_aux[0][0]) OR isset(
-                                                    $champ_recherche_aux[0][1]))
+                                    if (isset($champ_recherche_aux[0][0]) OR isset($champ_recherche_aux[0][1])) {
                                         $champ_recherche = implode(';;', $champ_recherche_aux[0]);
-                                    if (isset($operateur_recherche_aux[0][0]) OR isset(
-                                                    $operateur_recherche_aux[0][1]))
+                                    }
+                                    if (isset($operateur_recherche_aux[0][0]) OR isset($operateur_recherche_aux[0][1])) {
                                         $operateur_recherche = implode(';;', $operateur_recherche_aux[0]);
-                                    if (isset($texte_recherche_aux[0][0]) OR isset(
-                                                    $texte_recherche_aux[0][1]))
+                                    }
+                                    if (isset($texte_recherche_aux[0][0]) OR isset($texte_recherche_aux[0][1])) {
                                         $texte_recherche = implode(';;', $texte_recherche_aux[0]);
-                                }
-                                else {
+                                    }
+                                } else {
 
                                     for ($i = 0; $i < $nbligne; $i++) {
                                         $champ_recherche .= implode(';;', $champ_recherche_aux[$i]);
@@ -700,30 +714,30 @@ switch ($action) {
                                         $texte_recherche .= implode(';;', $texte_recherche_aux[$i]);
                                         $texte_recherche.='||';
                                     }
-                                } if (!strstr(
-                                                $url_page_depart, '?'))
+                                } if (!strstr($url_page_depart, '?')) {
                                     $lien = $url . '?url_page_depart=' . $url_page_depart . '&nb_limite_resultat=' . $nb_limite_resultat . '&champ_recherche=' . $champ_recherche . '&operateur_recherche=' . $operateur_recherche . '&texte_recherche=' . $texte_recherche . '&nbcol=' . $nbcol . '&nbligne=' . $nbligne . '&nb_col_courant=' . $nb_col_courant . '&nb_ligne_courant=' . $nb_ligne_courant . '&ajout_col=' . $ajout_col;
-                                else
+                                } else {
                                     $lien = $url . '&url_page_depart=' . $url_page_depart . '&nb_limite_resultat=' . $nb_limite_resultat . '&champ_recherche=' . $champ_recherche . '&operateur_recherche=' . $operateur_recherche . '&texte_recherche=' . $texte_recherche . '&nbcol=' . $nbcol . '&nbligne=' . $nbligne . '&nb_col_courant=' . $nb_col_courant . '&nb_ligne_courant=' . $nb_ligne_courant . '&ajout_col=' . $ajout_col;
+                                }
                                 header("Location: $lien");
                             }
                         } else {   // Si aucune case n'est cochée, on enregiste juste la valeur entrée par l'utilisateur
                             unset($texte_recherche);
 
-                            if ($nbligne == 1)
+                            if ($nbligne == 1) {
                                 $texte_recherche = implode(';;', $texte_recherche_aux[0]);
-                            else {
+                            } else {
 
                                 for ($i = 0; $i < $nbligne; $i++) {
                                     $texte_recherche.= implode(';;', $texte_recherche_aux[$i]);
                                     $texte_recherche.='||';
                                 }
                             }
-                            if (!
-                                    strstr($url_page_depart, '?'))
+                            if (!strstr($url_page_depart, '?')) {
                                 $lien = $url . '?url_page_depart=' . $url_page_depart . '&nb_limite_resultat=' . $nb_limite_resultat . '&champ_recherche=' . $champ_recherche . '&operateur_recherche=' . $operateur_recherche . '&texte_recherche=' . $texte_recherche . '&nbcol=' . $nbcol . '&nbligne=' . $nbligne . '&nb_col_courant=' . $nb_col_courant . '&nb_ligne_courant=' . $nb_ligne_courant . '&ajout_col=' . $ajout_col;
-                            else
+                            } else {
                                 $lien = $url . '&url_page_depart=' . $url_page_depart . '&nb_limite_resultat=' . $nb_limite_resultat . '&champ_recherche=' . $champ_recherche . '&operateur_recherche=' . $operateur_recherche . '&texte_recherche=' . $texte_recherche . '&nbcol=' . $nbcol . '&nbligne=' . $nbligne . '&nb_col_courant=' . $nb_col_courant . '&nb_ligne_courant=' . $nb_ligne_courant . '&ajout_col=' . $ajout_col;
+                            }
                             header("Location: $lien");
                         }
                     }

@@ -41,6 +41,7 @@ require_once('../conf/EnvironmentCod.php');
 // Fta (Model)
 require_once('../fta/class/AccueilFta.php');
 require_once('../fta/class/Chapitre.php');
+require_once('../fta/class/MoteurDeRecherche.php');
 require_once('../fta/class/Navigation.php');
 require_once('../fta/class/ObjectFta.php');
 

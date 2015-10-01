@@ -50,25 +50,25 @@ $html_table = "table "              //Permet d'harmoniser les tableaux
         . "class=contenu "
 ;
 
-$url_page_depart = Lib::isDefined("url_page_depart");
-$QUERY_STRING = Lib::isDefined("QUERY_STRING");
-$PHP_SELF = Lib::isDefined("PHP_SELF");
-$nbligne = Lib::isDefined('nbligne');                           // Nombre de lignes totales
-$nbcol = Lib::isDefined('nbcol');                             // nombre de colonnes de la ligne courante
-$champ_recherche = Lib::isDefined('champ_recherche');         //tableau des identifiants des champs choisis
-$operateur_recherche = Lib::isDefined('operateur_recherche'); //tableau des identifiants des operateurs choisis
-$texte_recherche = Lib::isDefined('texte_recherche');         //table au des valeurs entrées par l'utilisateur
-$champ_courant = Lib::isDefined('champ_courant');             // Valeur de l'identifiant du champ qui vient juste d'etre saisie par l'utilisateur
-$operateur_courant = Lib::isDefined('operateur_courant');     // Valeur de l'identifiant de l'operateur qui vient juste d'etre saisie par l'utilisateur
-$texte_courant = Lib::isDefined('texte_courant');             // Valeur du texte qui vient juste d'etre saisie par l'utilisateur
-$nb_col_courant = Lib::isDefined('nb_col_courant');           // numero de la colonne courante
-$nb_ligne_courant = Lib::isDefined("nb_ligne_courant");       // numero de la ligne courante
-$ajout_col = Lib::isDefined('ajout_col');                     //si $ajout_col = 1 : ajout d'une colonne dans la ligne courante
-$requete_resultat = Lib::isDefined("requete_resultat");
-$tab_resultat = Lib::isDefined("tab_resultat");
+$url_page_depart = Lib::getParameterFromRequest("url_page_depart");
+$QUERY_STRING = Lib::getParameterFromServer("QUERY_STRING");
+$PHP_SELF = Lib::getParameterFromServer("PHP_SELF");
+$nbligne = Lib::getParameterFromRequest('nbligne');                           // Nombre de lignes totales
+$nbcol = Lib::getParameterFromRequest('nbcol');                             // nombre de colonnes de la ligne courante
+$champ_recherche = Lib::getParameterFromRequest('champ_recherche');         //tableau des identifiants des champs choisis
+$operateur_recherche = Lib::getParameterFromRequest('operateur_recherche'); //tableau des identifiants des operateurs choisis
+$texte_recherche = Lib::getParameterFromRequest('texte_recherche');         //table au des valeurs entrées par l'utilisateur
+$champ_courant = Lib::getParameterFromRequest('champ_courant');             // Valeur de l'identifiant du champ qui vient juste d'etre saisie par l'utilisateur
+$operateur_courant = Lib::getParameterFromRequest('operateur_courant');     // Valeur de l'identifiant de l'operateur qui vient juste d'etre saisie par l'utilisateur
+$texte_courant = Lib::getParameterFromRequest('texte_courant');             // Valeur du texte qui vient juste d'etre saisie par l'utilisateur
+$nb_col_courant = Lib::getParameterFromRequest('nb_col_courant');           // numero de la colonne courante
+$nb_ligne_courant = Lib::getParameterFromRequest("nb_ligne_courant");       // numero de la ligne courante
+$ajout_col = Lib::getParameterFromRequest('ajout_col');                     //si $ajout_col = 1 : ajout d'une colonne dans la ligne courante
+$requete_resultat = Lib::getParameterFromRequest("requete_resultat");
+$tab_resultat = Lib::getParameterFromRequest("tab_resultat");
 
-$module_table = Lib::isDefined('module_table');               // nom du module auquel appartient la table
-$champ_retour = Lib::isDefined('champ_retour');                // nom du champ reponse de la requete
+$module_table = Lib::getParameterFromRequest('module_table');               // nom du module auquel appartient la table
+$champ_retour = Lib::getParameterFromRequest('champ_retour');                // nom du champ reponse de la requete
 
 /*
   Récupération des données MySQL
@@ -95,7 +95,7 @@ $champ_retour = Lib::isDefined('champ_retour');                // nom du champ r
  * ***************************************************************************** */
 
 $module = "fta";
-if ($module_table) {
+if (!$module_table) {
     $module_table = $module;
 }
 $etat_table = "fta_etat";
@@ -103,7 +103,7 @@ $id_recherche = "id_fta";
 $id_recherche_etat = "id_fta_etat";
 $abreviation_recherche_etat = "abreviation_fta_etat";
 $nom_recherche_recherche_etat = "nom_fta_etat";
-if ($champ_retour) {
+if (!$champ_retour) {
     $champ_retour = 'fta.id_fta';
 }
 $image_bordure = "../lib/images/s7.gif";
@@ -114,16 +114,17 @@ $nb_limite_resultat = 1000;
 
 
 
-$html_search = afficher_moteur_recherche(
-        $module, $id_recherche, $etat_table
-        , $id_recherche_etat, $abreviation_recherche_etat
-        , $nom_recherche_recherche_etat, $image_bordure
-        , $image_recherche, $champ_retour, $nb_limite_resultat
-        , $url_page_depart, $QUERY_STRING, $PHP_SELF, $nbligne
-        , $nbcol, $champ_recherche, $operateur_recherche
-        , $texte_recherche, $champ_courant, $operateur_courant
-        , $texte_courant, $nb_col_courant, $ajout_col
-        , $requete_resultat, $tab_resultat, $module_table
+$html_search = MoteurDeRecherche::afficherMoteurDeRecherche(
+                $module, $id_recherche, $etat_table
+                , $id_recherche_etat, $abreviation_recherche_etat
+                , $nom_recherche_recherche_etat, $image_bordure
+                , $image_recherche, $champ_retour, $nb_limite_resultat
+                , $url_page_depart, $QUERY_STRING, $PHP_SELF, $nbligne
+                , $nbcol, $champ_recherche, $operateur_recherche
+                , $texte_recherche, $champ_courant, $operateur_courant
+                , $texte_courant, $nb_col_courant, $ajout_col
+                , $requete_resultat, $tab_resultat, $module_table
+                , $nb_ligne_courant
 );
 echo $html_search;
 

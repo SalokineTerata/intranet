@@ -87,8 +87,10 @@ if ($id_fta_classification2) {
 
 if ($action == 'modifier') {
     $titre = "Modification de la classification  identifiant n°" . $id_fta_classification2;
-}else {
+    $action = "modifier";
+} else {
     $titre = "Ajout d'une classification";
+    $action = "ajout";
 }
 $bloc .= "<" . $html_table . "><tr class=titre>"
         . "<td>Proprietaire (Groupe)</td>"

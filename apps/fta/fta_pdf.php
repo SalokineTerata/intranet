@@ -10,19 +10,21 @@ $ftaModel = new FtaModel($id_fta);
 //Récupération des information de classification.
 //Rayon
 $IdFtaClassification2 = $ftaModel->getDataField(FtaModel::FIELDNAME_ID_FTA_CLASSIFICATION2)->getFieldValue();
-$rayon = ClassificationArborescenceArticleCategorieContenuModel::getElementClassificationFta($IdFtaClassification2, ClassificationFta2Model::FIELDNAME_ID_RAYON);
+if ($IdFtaClassification2) {
+    $rayon = ClassificationArborescenceArticleCategorieContenuModel::getElementClassificationFta($IdFtaClassification2, ClassificationFta2Model::FIELDNAME_ID_RAYON);
 
 
 //Activité
-$activite = ClassificationArborescenceArticleCategorieContenuModel::getElementClassificationFta($IdFtaClassification2, ClassificationFta2Model::FIELDNAME_ID_ACTIVITE);
-if ($activite) {
-    $activite = " / " . $activite;
-}
+    $activite = ClassificationArborescenceArticleCategorieContenuModel::getElementClassificationFta($IdFtaClassification2, ClassificationFta2Model::FIELDNAME_ID_ACTIVITE);
+    if ($activite) {
+        $activite = " / " . $activite;
+    }
 
 //Marque
-$marque = ClassificationArborescenceArticleCategorieContenuModel::getElementClassificationFta($IdFtaClassification2, ClassificationFta2Model::FIELDNAME_ID_MARQUE);
-if ($marque) {
-    $marque = " / " . $marque;
+    $marque = ClassificationArborescenceArticleCategorieContenuModel::getElementClassificationFta($IdFtaClassification2, ClassificationFta2Model::FIELDNAME_ID_MARQUE);
+    if ($marque) {
+        $marque = " / " . $marque;
+    }
 }
 $classification = "$rayon $activite $marque";
 

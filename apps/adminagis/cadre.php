@@ -172,19 +172,9 @@ switch ($output) {
       </a></div>
       ";
 
-        echo "</td>
-     <td width=33%>
-     ";
-
-
-        echo "<div align=center><a href=../news/crea_articlece.php?repere=3>
-      <img src=../images-index/grosadmin3.gif width=197 height=54 border=0>
-      </a></div>
-      ";
-
-        echo "
-           </td>
-        </tr>
+        echo "</td>"
+        ;
+        echo " </tr>
       </table>
 ";
 

@@ -1,5 +1,13 @@
 <?php ?>
 <script type="text/javascript">
+
+    function lien_selection(formu, list, listsuiv)
+    {
+        i = document.forms[formu].elements[list].selectedIndex;
+        url = document.forms[formu].elements[list].options[i].value;
+        parent.location.href = url;
+    }
+
     function lien_selection_chapitre() {
         i = document.form_action.action.selectedIndex;
         if (i === "I")

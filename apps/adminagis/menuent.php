@@ -33,7 +33,7 @@
   </TR>
   <TR bgcolor="FFCC66">
     <TD WIDTH="10" HEIGHT="20" bgcolor="#FFCC66"> <IMG SRC="../lib/images/espaceur.gif" width="8" height="8"></TD>
-    <TD COLSPAN="3" bgcolor="FFCC66"><a href="../index.php?action=delog"><img src="../lib/images/bouton_deconnexion.gif" width="130" height="20" border=0></a></TD>
+    <TD COLSPAN="3" bgcolor="FFCC66"><a href="../lib/login.php?session=logout"><img src="../lib/images/bouton_deconnexion.gif" width="130" height="20" border=0></a></TD>
     <TD WIDTH="10" HEIGHT="20" bgcolor="#FFCC66"> <IMG SRC="../lib/images/espaceur.gif"></TD>
   </TR>
   <TR bgcolor="FFCC66">
@@ -41,7 +41,7 @@
   </TR>
   <TR bgcolor="FFCC66">
     <TD WIDTH="10" HEIGHT="20" bgcolor="#FFCC66"> <IMG SRC="../lib/images/espaceur.gif"></TD>
-    <TD COLSPAN="3"><a href="../news/groupe.php?service=<?php echo "$id_service"; ?>"><img src="../lib/images/bouton_retour_accueil.gif" width="130" height="20" border=0></a></TD>
+    <TD COLSPAN="3"><a href="../adminagis/index.php"><img src="../lib/images/bouton_retour_accueil.gif" width="130" height="20" border=0></a></TD>
     <TD WIDTH="10" HEIGHT="20" bgcolor="#FFCC66"> <IMG SRC="../lib/images/espaceur.gif"></TD>
   </TR>
   <TR bgcolor="FFCC66">

@@ -2323,7 +2323,7 @@ function visualiser_fiches($id_fta_etat, $choix, $isLimit, $order_common) {
         //Calcul préalable et Etat d'avancement
         //if($_SESSION["synthese_action"]<>"all")
         if ($abreviation_fta_etat == "I") {
-            $taux_temp = fta_taux_validation_fast($id_fta);
+            $taux_temp = FtaSuiviProjetModel::getFtaTauxValidation($id_fta);
             $recap[$id_fta] = round($taux_temp[0] * 100, 0) . "%";
             $lien .= "<h5>" . $recap[$id_fta] . "<a "
                     . "href=historique.php"

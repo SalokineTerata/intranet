@@ -17,7 +17,7 @@
 require_once '../inc/main.php';
 $action = lib::getParameterFromRequest('action');
 $id_fta_classification2 = Lib::getParameterFromRequest('id_fta_classification2');
-$idProprietaireGroupe = Lib::getParameterFromRequest(ClassificationFta2Model::FIELDNAME_ID_PROPRIETAIRE_GROUPE);
+$idProprietaireGroupe = Lib::getParameterFromRequest('selection_proprietaire1');
 $idProprietaireEnseigne = Lib::getParameterFromRequest(ClassificationFta2Model::FIELDNAME_ID_PROPRIETAIRE_ENSEIGNE);
 $idMarque = Lib::getParameterFromRequest(ClassificationFta2Model::FIELDNAME_ID_MARQUE);
 $idActivite = Lib::getParameterFromRequest(ClassificationFta2Model::FIELDNAME_ID_ACTIVITE);

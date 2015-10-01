@@ -75,7 +75,7 @@ class ClassificationFta2Model extends AbstractModel {
         $paramNomDefaut = 'selection_proprietaire1';
         $listeClassification = '<td class=contenu >' . DatabaseDescription::getFieldDocLabel(ClassificationFta2Model::TABLENAME, ClassificationFta2Model::FIELDNAME_ID_PROPRIETAIRE_GROUPE)
                 . '</td><td class=contenu>'
-                . AccueilFta::afficherRequeteEnListeDeroulante($req, $paramIdDefaut, $paramNomDefaut, $paramIsEditable). '</tr>';
+                . AccueilFta::afficherRequeteEnListeDeroulante($req, $paramIdDefaut, $paramNomDefaut, $paramIsEditable) . '</tr>';
 
         return $listeClassification;
     }
@@ -246,7 +246,9 @@ class ClassificationFta2Model extends AbstractModel {
     public static function InsertClassification() {
         $pdo = DatabaseOperation::execute(
                         'INSERT INTO ' . ClassificationFta2Model::TABLENAME
+                        . ' VALUES (NULL ,  \'\',  \'\',  \'\',  \'\',  \'\',  \'\',  \'\',  \'\')'
         );
+        
         $key = $pdo->lastInsertId();
 
         return $key;

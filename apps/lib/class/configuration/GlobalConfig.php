@@ -184,32 +184,37 @@ class GlobalConfig {
           Initialisation des variables de sessions et de connexions:
          */
 
-//Variables relatives aux environnements:
+        /*
+         * Chargement de la configuration
+         */
+        $initFile = parse_ini_file(EnvironmentConf::CONFIG_INI_FILE, TRUE);
+
+        //Variables relatives aux environnements:
         switch (filter_input(INPUT_SERVER, 'SERVER_NAME')) {
 
-//Environnement Codeur
-            case EnvironmentConf::SITE_COD:
+            //Environnement Codeur
+            case $initFile[EnvironmentInit::URL_SERVEUR_NAME][EnvironmentConf::ENV_COD]:
 
-                $envToInit = new EnvironmentCod();
+                $envToInit = new EnvironmentInit(EnvironmentConf::ENV_COD, $initFile);
                 break;
 
-//Environnement Développement
-            Case EnvironmentConf::SITE_DEV:
+            //Environnement Développement
+            Case $initFile[EnvironmentInit::URL_SERVEUR_NAME][EnvironmentConf::ENV_DEV]:
 
-                $envToInit = null;
+                $envToInit = new EnvironmentInit(EnvironmentConf::ENV_DEV, $initFile);
                 break;
 
-//Environnement Production
-            Case EnvironmentConf::SITE_PRD:
+            //Environnement Production
+            Case $initFile[EnvironmentInit::URL_SERVEUR_NAME][EnvironmentConf::ENV_PRD]:
 
-                $envToInit = null;
+                $envToInit = new EnvironmentInit(EnvironmentConf::ENV_PRD, $initFile);
                 break;
 
             default:
                 echo EnvironmentConf::ENVIRONMENT_DONT_EXIST_MESSAGE;
                 $envToInit = null;
         }
-//Initialisation de la configuration
+        //Initialisation de la configuration
         $this->setConf($envToInit->getConf());
 
         /**
@@ -220,7 +225,7 @@ class GlobalConfig {
             $_SESSION[GlobalConfig::VARNAME_EXEC_DEBUG_TIME_START] = microtime(true);
         }
 
-//Sauvegarde de la configuration dans la session:
+        //Sauvegarde de la configuration dans la session:
         $this->setConfIsInitializedToTrue();
     }
 

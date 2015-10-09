@@ -36,7 +36,7 @@ require_once('../lib/class/session/SessionSaveAndRestoreAbstract.php');
 // Configuration des environnements
 require_once('../conf/EnvironmentConf.php');
 require_once('../conf/EnvironmentAbstract.php');
-require_once('../conf/EnvironmentCod.php');
+require_once('../conf/EnvironmentInit.php');
 
 // Fta (Model)
 require_once('../fta/class/AccueilFta.php');

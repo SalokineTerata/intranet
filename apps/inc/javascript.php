@@ -5,17 +5,17 @@
  */
 require_once('../lib/functions_js.php');
 Lib::includeJS('../plugins/dhtmlgoodies_calendar/dhtmlgoodies_calendar/dhtmlgoodies_calendar.js');
-
+$libModule = Lib::getModule();
 if ($module != 'lib') {
     //include ('../$module/functions.js');
     //echo '<script type=\'text/javascript\' src=\''.'../$module/functions.js'.'\'></script>';
     if ($module == 'php') {
         $module = 'fta';
     }
-    if (Lib::getModule() == 'php') {
-        Lib::getModule() = 'fta';
+    if ($libModule == 'php') {
+       $libModule  = 'fta';
     }
-    require_once('../' . Lib::getModule() . '/functions_js.php');
+    require_once('../' . $libModule . '/functions_js.php');
 
     //Lib::includeJS('../'.Lib::getModule().'/functions_js.php');
 }

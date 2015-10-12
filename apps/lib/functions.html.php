@@ -110,7 +110,7 @@ function afficher_moteur_recherche($module
 , $nbligne, $nbcol, $champ_recherche
 , $operateur_recherche, $texte_recherche, $champ_courant
 , $operateur_courant, $texte_courant, $nb_col_courant
-, $ajout_col, $requete_resultat, $tab_resultat,$module_table
+, $ajout_col, $requete_resultat, $tab_resultat, $module_table
 ) {
     /*
       Définition des Variables
@@ -617,10 +617,14 @@ function print_page_begin($disable_full_page = FALSE, $menu_file = NULL, $conf =
         include("../inc/connexion.php");
         include("../inc/navigue.php");
         if ($menu_file != NULL) {                       //Si existant, utilisation du menu demandé
-            include ("./$module/$menu_file");
+            if ($module <> 'php') {
+                include ("./$module/$menu_file");
+            }
         }               //en variable
         else {
-            include ("../$module/menu_principal.inc");
+            if ($module <> 'php') {
+                include ("../$module/menu_principal.inc");
+            }
         }  //Sinon, menu par défaut
     }
 }

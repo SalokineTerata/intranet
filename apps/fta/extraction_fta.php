@@ -62,7 +62,7 @@ $bloc = "";
  */
 /**
  * Création de la base de données
- */
+ */ini_set('memory_limit', '-1');
 {
     DatabaseOperation::execute(
             "DROP DATABASE intranet_v3_0_dev;"
@@ -371,6 +371,14 @@ $bloc = "";
     DatabaseOperation::execute(
             "CREATE TABLE intranet_v3_0_dev.access_budget_marketing_mdd_section LIKE  intranet_v2_0_prod.access_budget_marketing_mdd_section;"
             . " INSERT INTO intranet_v3_0_dev.access_budget_marketing_mdd_section SELECT * FROM intranet_v2_0_prod.access_budget_marketing_mdd_section;"
+    );
+    DatabaseOperation::execute(
+            "CREATE TABLE intranet_v3_0_dev.intranet_moteur_de_recherche_association_type_operateur LIKE  intranet_v2_0_prod.intranet_moteur_de_recherche_association_type_operateur;"
+            . " INSERT INTO intranet_v3_0_dev.intranet_moteur_de_recherche_association_type_operateur SELECT * FROM intranet_v2_0_prod.intranet_moteur_de_recherche_association_type_operateur;"
+    );
+    DatabaseOperation::execute(
+            "CREATE TABLE intranet_v3_0_dev.intranet_moteur_de_recherche_operateur_sur_champ LIKE  intranet_v2_0_prod.intranet_moteur_de_recherche_operateur_sur_champ;"
+            . " INSERT INTO intranet_v3_0_dev.intranet_moteur_de_recherche_operateur_sur_champ SELECT * FROM intranet_v2_0_prod.intranet_moteur_de_recherche_operateur_sur_champ;"
     );
     DatabaseOperation::execute(
             "CREATE TABLE intranet_v3_0_dev.access_budget_marketing_mdd_sous_facturation LIKE  intranet_v2_0_prod.access_budget_marketing_mdd_sous_facturation;"
@@ -1466,6 +1474,14 @@ $bloc = "";
             "CREATE TABLE intranet_v3_0_dev.fta_workflow_structure LIKE intranet_v3_0_cod.fta_workflow_structure;"
             . " INSERT INTO intranet_v3_0_dev.fta_workflow_structure SELECT * FROM intranet_v3_0_cod.fta_workflow_structure"
     );
+    DatabaseOperation::execute(
+            "CREATE TABLE intranet_v3_0_dev.intranet_column_info LIKE intranet_v3_0_cod.intranet_column_info;"
+            . " INSERT INTO intranet_v3_0_dev.intranet_column_info SELECT * FROM intranet_v3_0_cod.intranet_column_info"
+    );
+    DatabaseOperation::execute(
+            "CREATE TABLE intranet_v3_0_dev.annexe_gestion_des_etiquettes LIKE intranet_v3_0_cod.annexe_gestion_des_etiquettes;"
+            . " INSERT INTO intranet_v3_0_dev.annexe_gestion_des_etiquettes SELECT * FROM intranet_v3_0_cod.annexe_gestion_des_etiquettes"
+    );
 }
 /**
  * Nouvelles données du jours de la prod
@@ -1564,7 +1580,13 @@ foreach ($arrayTableFta as $value) {
 
     $idDossierFta = $value[FtaModel::FIELDNAME_DOSSIER_FTA];
     $idVersionDossierFta = $value[FtaModel::FIELDNAME_VERSION_DOSSIER_FTA];
-    $idFtaEtat = $value[FtaModel::FIELDNAME_ID_FTA_ETAT];
+    $idFtaEtatTMP = $value[FtaModel::FIELDNAME_ID_FTA_ETAT];
+    if ($idFtaEtatTMP == 8) {
+        $idFtaWorkflow = 9;
+        $idFtaEtat = 1 ;
+    }else{
+        $idFtaEtat = $idFtaEtatTMP;
+    }
     $cretateurFta = $value[FtaModel::FIELDNAME_CREATEUR];
     if ($cretateurFta == 0) {
         $cretateurFta = -1;
@@ -1650,11 +1672,13 @@ foreach ($arrayTableFta as $value) {
     /**
      * Conditions de transfères
      */
-    switch ($cretateurFta) {
-        //identifiant de l'utilisateur 
-        case 486:
-            $idFtaWorkflow = 4;
-            break;
+    if ($idFtaEtat <> 8) {
+        switch ($cretateurFta) {
+            //identifiant de l'utilisateur 
+            case 486:
+                $idFtaWorkflow = 4;
+                break;
+        }
     }
 
 
@@ -1819,7 +1843,7 @@ if ($arrayChangeIdSiteProduction) {
             $resultFalse = $sql_inter;
         }
     }
-} 
+}
 $arrayChangeIdUser = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
                 "SELECT DISTINCT fta.id_fta
                 FROM intranet_v3_0_dev.fta, intranet_v3_0_dev.salaries

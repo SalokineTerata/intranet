@@ -1,4 +1,4 @@
-<?
+<?php
 
 /*
   Module d'appartenance (valeur obligatoire)

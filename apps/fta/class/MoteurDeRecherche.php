@@ -137,6 +137,10 @@ class MoteurDeRecherche {
             if (!$_SESSION[$module . "_modification"] and $_SESSION["module"] == "fiches_mp_achats") {
                 $req.= "WHERE " . $abreviation_recherche_etat . "='V' OR " . $abreviation_recherche_etat . "='E' ";
             }
+            /**
+             * Augmente le temps d'execution temporairement
+             */
+            ini_set('max_execution_time', 300);
 
             $result = DatabaseOperation::convertSqlStatementWithoutKeyToArray($req);
 

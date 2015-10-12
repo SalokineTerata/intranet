@@ -76,7 +76,7 @@ $selection_saisonnalite = Lib::getParameterFromRequest('selection_saisonnalite')
 $globalConfig = new GlobalConfig();
 $idUser = $globalConfig->getAuthenticatedUser()->getKeyValue();
 $classificationModifier = ClassificationFta2Model::getClassificationModification($idUser);
-
+$isEditable = TRUE;
 
 if (!$selection_proprietaire1) {
     $selection_proprietaire1 = 0;
@@ -93,7 +93,7 @@ $bloc .= "<" . $html_table . "><tr class=titre>"
         . "<td>" . HtmlResult::RESEAU . "</td>"
         . "<td>" . HtmlResult::SAISONALITE . "</td>"
         . "</tr>";
-$bloc.="<td>" . ClassificationFta2Model::getListeClassificationProprietaireGroupe($selection_proprietaire1) . "</td>";
+$bloc.="<td>" . ClassificationFta2Model::getListeClassificationProprietaireGroupe($selection_proprietaire1, $isEditable) . "</td>";
 
 if ($selection_proprietaire1) {
 
@@ -101,6 +101,7 @@ if ($selection_proprietaire1) {
                     , ClassificationFta2Model::FIELDNAME_ID_PROPRIETAIRE_ENSEIGNE
                     , ClassificationFta2Model::FIELDNAME_ID_PROPRIETAIRE_GROUPE
                     , 'selection_proprietaire2'
+                    , $isEditable
                     , $selection_marque2
             ) . "</td>";
 
@@ -109,36 +110,42 @@ if ($selection_proprietaire1) {
                         , ClassificationFta2Model::FIELDNAME_ID_MARQUE
                         , ClassificationFta2Model::FIELDNAME_ID_PROPRIETAIRE_ENSEIGNE
                         , 'selection_marque'
+                        , $isEditable
                 ) . "</td>";
         if ($selection_marque) {
             $bloc.="<td>" . ClassificationFta2Model::getListeClassification($selection_marque, $selection_activite
                             , ClassificationFta2Model::FIELDNAME_ID_ACTIVITE
                             , ClassificationFta2Model::FIELDNAME_ID_MARQUE
                             , 'selection_activite'
+                            , $isEditable
                     ) . "</td>";
             if ($selection_activite) {
                 $bloc.="<td>" . ClassificationFta2Model::getListeClassification($selection_activite, $selection_rayon
                                 , ClassificationFta2Model::FIELDNAME_ID_RAYON
                                 , ClassificationFta2Model::FIELDNAME_ID_ACTIVITE
                                 , 'selection_rayon'
+                                , $isEditable
                         ) . "</td>";
                 if ($selection_rayon) {
                     $bloc.="<td>" . ClassificationFta2Model::getListeClassification($selection_rayon, $selection_environnement
                                     , ClassificationFta2Model::FIELDNAME_ID_ENVIRONNEMENT
                                     , ClassificationFta2Model::FIELDNAME_ID_RAYON
                                     , 'selection_environnement'
+                                    , $isEditable
                             ) . "</td>";
                     if ($selection_environnement) {
                         $bloc.="<td>" . ClassificationFta2Model::getListeClassification($selection_environnement, $selection_reseau
                                         , ClassificationFta2Model::FIELDNAME_ID_RESEAU
                                         , ClassificationFta2Model::FIELDNAME_ID_ENVIRONNEMENT
                                         , 'selection_reseau'
+                                        , $isEditable
                                 ) . "</td>";
                         if ($selection_reseau) {
                             $bloc.="<td>" . ClassificationFta2Model::getListeClassification($selection_reseau, $selection_saisonnalite
                                             , ClassificationFta2Model::FIELDNAME_ID_SAISONNALITE
                                             , ClassificationFta2Model::FIELDNAME_ID_RESEAU
                                             , 'selection_saisonnalite'
+                                            , $isEditable
                                     ) . "</td>";
                         }
                     }

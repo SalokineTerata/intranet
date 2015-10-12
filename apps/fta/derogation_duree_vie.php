@@ -85,7 +85,7 @@ $req_liste_agrologic = "SELECT id_access_arti2"
         . "ORDER BY CODE_ARTICLE "
 ;
 $id_defaut = $id_access_arti2;
-$liste_article = AccueilFta::afficherRequeteEnListeDeroulante($req_liste_agrologic, $id_defaut, "id_access_arti2");
+$liste_article = AccueilFta::afficherRequeteEnListeDeroulante($req_liste_agrologic, $id_defaut, "id_access_arti2",TRUE);
 
 $liste_id_agrologic = $liste_article . $liste_produit;
 

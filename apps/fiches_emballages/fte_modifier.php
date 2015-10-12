@@ -129,7 +129,7 @@ if ($proprietaire) {
     $req = "SELECT id_annexe_emballage_groupe, nom_annexe_emballage_groupe FROM annexe_emballage_groupe "
             . "ORDER BY nom_annexe_emballage_groupe"
     ;
-    $value = AccueilFta::afficherRequeteEnListeDeroulante($req, $id_defaut, $champ);
+    $value = AccueilFta::afficherRequeteEnListeDeroulante($req, $id_defaut, $champ,TRUE);
 } else {
     $value = $annexeEmballageGroupeModel->getDataField($champ)->getFieldValue();
 }
@@ -147,7 +147,7 @@ if ($proprietaire) {
     $req = "SELECT id_fte_fournisseur, nom_fte_fournisseur FROM fte_fournisseur "
             . "ORDER BY nom_fte_fournisseur"
     ;
-    $value = AccueilFta::afficherRequeteEnListeDeroulante($req, $id_defaut, $champ);
+    $value = AccueilFta::afficherRequeteEnListeDeroulante($req, $id_defaut, $champ,TRUE);
 } else {
     $value = $fteFournisseurModel->getDataField($champ)->getFieldValue();
 }

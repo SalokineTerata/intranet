@@ -196,7 +196,7 @@ switch ($action) {
                 . "ORDER BY nom_classification_arborescence_article_categorie_contenu "
         ;
         $id_defaut = $id_classification_arborescence_article_categorie_contenu;
-        $bloc .= AccueilFta::afficherRequeteEnListeDeroulante($req_liste_site_assemblage, $id_defaut, $nom_liste);
+        $bloc .= AccueilFta::afficherRequeteEnListeDeroulante($req_liste_site_assemblage, $id_defaut, $nom_liste,TRUE);
         $bloc .="</td></tr>";
 
         //Classification Controle de Gestion

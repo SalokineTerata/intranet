@@ -195,7 +195,7 @@ class DatabaseOperation {
         $pdo = DatabaseOperation::databaseAcces();
         $result = $pdo->prepare($paramRequest);
         $result->closeCursor();
-        $result->execute();
+        $validation =$result->execute();
         $time = round(microtime(true) - $firstTime, 4);
         self::setQueriesInfo($paramRequest, $time, self::IncrementQueryCount());
 

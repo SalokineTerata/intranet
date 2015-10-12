@@ -23,28 +23,7 @@
  * ******* */
 //include ("../lib/session.php");         //Récupération des variables de sessions
 //include ("../lib/debut_page.php");      //Affichage des éléments commun à l'Intranet
-require_once '../inc/main.php';
-print_page_begin($disable_full_page, $menu_file);
 
-
-
-
-/* * ***********
-  Début Code PHP
- * *********** */
-
-/*
-  Initialisation des variables
- */
-$page_default = substr(strrchr($_SERVER["PHP_SELF"], '/'), '1', '-4');
-$page_action = $page_default . "_post.php";
-$page_pdf = $page_default . "_pdf.php";
-$action = 'valider';                       //Action proposée à la page _post.php
-$method = 'method=post';                   //Pour une url > 2000 caractères, ne pas utiliser utiliser GET
-$html_table = "table "                     //Permet d'harmoniser les tableaux
-        . "width=100% "
-        . "class=titre "
-;
 //$html_image_modif = "&nbsp;<img src=../lib/images/exclamation.png alt=\"\" title=\"Information mise à jour\" width=\"20\" height=\"18\" border=\"0\" />";
 //$html_color_modif = "bgcolor=#B0FFFE";
 $version_modif = 1;                        //Activer la visualisation des modifications effectuées depuis la version précédente
@@ -68,18 +47,12 @@ $fieldExport = "";
   echo htmlspecialchars($comeback);
  */
 
-/**
- * Tableau de retour:
- * 
- * array(
- *      "bofrost(propriétaire)" => array(
- *                                      "bofrost (marque)" => array(
- *                                                                 asiatique => ...,
- *                                                                 traiteur => ..
- *                                      "TDA" (marque)" => array(
- *                                                                 ...
- *      "Carrefour" => array (...etc                        
- */
+//$hostname_connect2 = "admin.agis.fr"; //nom du serveur MySQL de connection � la base de donn�e
+//$database_connect2 = "agis"; //nom de la base de donn�e sur votre serveur MySQL
+//$username_connect2 = "root"; //login de la base MySQL
+//$tablename_connect2 = "salaries"; //table login de la base MySQL
+//$password_connect2 = "8ale!ne"; //mot de passe de la base MySQL
+//$donnee2 = mysql_pconnect($hostname_connect2, $username_connect2, $password_connect2) or die("connexion impossible");
 
 /**
  * Code * 
@@ -90,8 +63,8 @@ function getQuery($paramStartValue) {
     return $reqTableClassifRoot = "SELECT classification_arborescence_article.id_classification_arborescence_article, "
             . "ascendant_classification_arborescence_article_categorie_contenu, nom_classification_arborescence_article_categorie_contenu, "
             . "nom_classification_arborescence_article_categorie,classification_arborescence_article_categorie_contenu.id_classification_arborescence_article_categorie_contenu "
-            . "FROM classification_arborescence_article, classification_arborescence_article_categorie_contenu, "
-            . "classification_arborescence_article_categorie "
+            . "FROM intranet_v2_0_prod.classification_arborescence_article, intranet_v2_0_prod.classification_arborescence_article_categorie_contenu, "
+            . "intranet_v2_0_prod.classification_arborescence_article_categorie "
             . "WHERE classification_arborescence_article.id_classification_arborescence_article_categorie_contenu = "
             . "classification_arborescence_article_categorie_contenu.id_classification_arborescence_article_categorie_contenu "
             . "AND classification_arborescence_article_categorie.id_classification_arborescence_article_categorie = "
@@ -110,7 +83,8 @@ $return = array();
 
 $HtmlResult = new HtmlResult();
 
-$returnFull = recursifOne($paramStartValue = $startValue, $HtmlResult);
+$returnFullTMP = recursifOne($paramStartValue = $startValue, $HtmlResult);
+$returnFull = $returnFullTMP->getArrayResult();
 
 /**
  * 
@@ -268,7 +242,7 @@ function recursifOne($paramStartValue, $htmlResult) {
 //                );
 
 $hostname_connect = "dev-intranet.agis.fr"; //nom du serveur MySQL de connection � la base de donn�e
-$database_connect = "intranet_v3_0_dev"; //nom de la base de donn�e sur votre serveur MySQL
+$database_connect = "intranet_v3_0_cod"; //nom de la base de donn�e sur votre serveur MySQL
 $username_connect = "root"; //login de la base MySQL
 $tablename_connect = "salaries"; //table login de la base MySQL
 $password_connect = "8ale!ne"; //mot de passe de la base MySQL
@@ -276,6 +250,10 @@ $password_connect = "8ale!ne"; //mot de passe de la base MySQL
 
 $donnee = mysql_pconnect($hostname_connect, $username_connect, $password_connect) or die("connexion impossible");
 
+
+DatabaseOperation::execute(
+        "CREATE TABLE intranet_v3_0_dev.classification_fta2 LIKE  intranet_v3_0_cod.classification_fta2;"
+);
 foreach ($returnFull as $value) {
 //    $idArborescence = $value[HtmlResult::ID_ARBORESCENCE];
 //    $proprietaire = implode("/", $value[HtmlResult::PROPRIETAIRE]);
@@ -288,8 +266,8 @@ foreach ($returnFull as $value) {
     $idArborescence = $value[HtmlResult::ID_ARBORESCENCE];
     $proprietaire_groupe = $value['IdProprietaire'][0];
     $proprietaire_enseige = $value['IdProprietaire'][1];
-    if(!$proprietaire_enseige){
-        $proprietaire_enseige = 0 ;
+    if (!$proprietaire_enseige) {
+        $proprietaire_enseige = 0;
     }
     $marque = $value['IdMarque'];
     $activite = $value['IdActivite'];
@@ -300,6 +278,7 @@ foreach ($returnFull as $value) {
 
     $sql_inter = "INSERT INTO  `intranet_v3_0_dev`
     .`classification_fta2` (
+    `id_fta_classification2` ,
     `id_Proprietaire_Groupe` ,
     `id_Proprietaire_Enseigne` ,
     `id_Marque` ,
@@ -308,46 +287,20 @@ foreach ($returnFull as $value) {
     `id_Environnement` ,
     `id_Reseau` ,
     `id_Saisonnalite` ,
+    `id_arborescence` 
     )
-    VALUES ('','$proprietaire_groupe',  '$proprietaire_enseige', '$marque',  '$activite',  '$rayon',  '$environnement',  '$reseau',  '$saisonalite',  
-)";
+    VALUES ('','$proprietaire_groupe',  '$proprietaire_enseige', '$marque',  '$activite',  '$rayon',  '$environnement',  '$reseau',  '$saisonalite',   '$idArborescence')";
 
     mysql_query("SET NAMES 'utf8'");
-    $resultquery = mysql_query($sql_inter);
+    $resultquery = mysql_query($sql_inter) or mysql_error();
 }
 
 mysql_close();
 
-$bloc .="Vous avez bien envoyer les données dans la table";
 
 /**
  * Rendu HTML
  */
-echo "
-     $navigue
-     <form $method action=\"$page_action\" name=\"form_action\" method=\"post\">
-     <input type=hidden name=action value=$action>
-     <input type=hidden name=id_fta value=$id_fta>
-     <input type=hidden name=abreviation_fta_etat value=$abreviationFtaEtat>
-     <input type=hidden name=id_fta_chapitre_encours value=$id_fta_chapitre_encours>
-     <input type=hidden name=id_fta_chapitre value=$id_fta_chapitre>
-     <input type=hidden name=id_fta_suivi_projet value=$id_fta_suivi_projet>
-     <input type=\"hidden\" name=\"synthese_action\" value=\"$synthese_action\" />
-     <input type=\"hidden\" name=\"nom_fta_chapitre_encours\" value=\"$nom_fta_chapitre_encours\" />
-     <input type=\"hidden\" name=\"comeback\" value=\"$comeback\" />
-
-     $javascript
-     <$html_table>
-     <tr><td>
-
-              $bloc
-
-     </td></tr>
-     </table>
-     </form>
-
-     ";
-
 //$recordSetFta = new FtaModel($id_fta);
 //$test = $recordSetFta->getFieldNomDemandeur();
 //
@@ -363,5 +316,4 @@ echo "
 /* * *********************
   Inclusion de fin de page
  * ********************* */
-include ("../lib/fin_page.inc");
 

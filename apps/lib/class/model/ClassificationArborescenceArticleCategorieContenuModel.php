@@ -17,20 +17,21 @@ class ClassificationArborescenceArticleCategorieContenuModel extends AbstractMod
         parent::__construct($paramId, $paramIsCreateRecordsetInDatabaseIfKeyDoesntExist);
     }
 
-    public static function getElementClassificationFta($paramIdClassif,$paramSelect) {
-        $classificationFta2 = new ClassificationFta2Model($paramIdClassif);
-        $idType = $classificationFta2->getDataField($paramSelect)->getFieldValue();
-        $array = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
-                        'SELECT ' . ClassificationArborescenceArticleCategorieContenuModel::FIELDNAME_NOM_CLASSIFICATION_ARBORESCENCE_ARTICLE_CATEGORIE_CONTENU
-                        . ' FROM ' . ClassificationArborescenceArticleCategorieContenuModel::TABLENAME
-                        . ' WHERE ' . ClassificationArborescenceArticleCategorieContenuModel::KEYNAME . '=' . addslashes($idType)
-        );
-        if ($array) {
-            foreach ($array as $rows) {
-                $value = $rows[ClassificationArborescenceArticleCategorieContenuModel::FIELDNAME_NOM_CLASSIFICATION_ARBORESCENCE_ARTICLE_CATEGORIE_CONTENU];
+    public static function getElementClassificationFta($paramIdClassif, $paramSelect) {
+        if ($paramIdClassif) {
+            $classificationFta2 = new ClassificationFta2Model($paramIdClassif);
+            $idType = $classificationFta2->getDataField($paramSelect)->getFieldValue();
+            $array = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
+                            'SELECT ' . ClassificationArborescenceArticleCategorieContenuModel::FIELDNAME_NOM_CLASSIFICATION_ARBORESCENCE_ARTICLE_CATEGORIE_CONTENU
+                            . ' FROM ' . ClassificationArborescenceArticleCategorieContenuModel::TABLENAME
+                            . ' WHERE ' . ClassificationArborescenceArticleCategorieContenuModel::KEYNAME . '=' . addslashes($idType)
+            );
+            if ($array) {
+                foreach ($array as $rows) {
+                    $value = $rows[ClassificationArborescenceArticleCategorieContenuModel::FIELDNAME_NOM_CLASSIFICATION_ARBORESCENCE_ARTICLE_CATEGORIE_CONTENU];
+                }
             }
         }
-
         return $value;
     }
 

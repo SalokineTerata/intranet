@@ -275,14 +275,14 @@ switch ($action) {
 //        $operation = 'update';
 //        mysql_table_operation($table, $operation);
 //Cohérence des durées de vie (restrictino du message uniquement au niveau du processus Qualité)
-        if ($modelFta->getDataField(FtaModel::FIELDNAME_DUREE_DE_VIE_TECHNIQUE_MAXIMALE)->getFieldValue() < $modelFta->getDataField(FtaModel::FIELDNAME_DUREE_DE_VIE_TECHNIQUE_PRODUCTION)->getFieldValue() and ( $paramIdFtaChapitreEncours == 100)) {
-
-            $titre = 'Différences dans les Durées de vie';
-            $message = 'Votre <b>' . mysql_field_desc(FtaModel::TABLENAME, FtaModel::FIELDNAME_DUREE_DE_VIE_TECHNIQUE_MAXIMALE) . '</b> est inférieure à la <b>' . mysql_field_desc('access_arti2', 'Durée_de_vie_technique') . '</b>.<br>'
-            ;
-            afficher_message($titre, $message, $redirection);
-            $erreur = 1;
-        }
+//        if ($modelFta->getDataField(FtaModel::FIELDNAME_DUREE_DE_VIE_TECHNIQUE_MAXIMALE)->getFieldValue() < $modelFta->getDataField(FtaModel::FIELDNAME_DUREE_DE_VIE_TECHNIQUE_PRODUCTION)->getFieldValue() and ( $paramIdFtaChapitreEncours == 100)) {
+//
+//            $titre = 'Différences dans les Durées de vie';
+//            $message = 'Votre <b>' . mysql_field_desc(FtaModel::TABLENAME, FtaModel::FIELDNAME_DUREE_DE_VIE_TECHNIQUE_MAXIMALE) . '</b> est inférieure à la <b>' . mysql_field_desc('access_arti2', 'Durée_de_vie_technique') . '</b>.<br>'
+//            ;
+//            afficher_message($titre, $message, $redirection);
+//            $erreur = 1;
+//        }
 
 //Cohérence du Code LDC
 // ************** GESTION MULTI PCB POUR MEME CODE GROUPE

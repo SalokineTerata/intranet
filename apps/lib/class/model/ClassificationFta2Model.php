@@ -53,7 +53,7 @@ class ClassificationFta2Model extends AbstractModel {
         return $NomClassification;
     }
 
-    public static function getListeClassificationProprietaireGroupe($paramIdDefaut) {
+    public static function getListeClassificationProprietaireGroupe($paramIdDefaut, $isEditable) {
         $req = 'SELECT ' . ClassificationArborescenceArticleCategorieContenuModel::KEYNAME . ',' . ClassificationArborescenceArticleCategorieContenuModel::FIELDNAME_NOM_CLASSIFICATION_ARBORESCENCE_ARTICLE_CATEGORIE_CONTENU
                 . ' FROM ' . ClassificationArborescenceArticleCategorieContenuModel::TABLENAME
                 . ' WHERE ' . ClassificationArborescenceArticleCategorieContenuModel::FIELDNAME_ID_CLASSIFICATION_ARBORESCENCE_ARTICLE_CATEGORIE . '=' . AccueilFta::VALUE_1
@@ -62,7 +62,7 @@ class ClassificationFta2Model extends AbstractModel {
 
         $paramNomDefaut = 'selection_proprietaire1';
 
-        return AccueilFta::afficherRequeteEnListeDeroulante($req, $paramIdDefaut, $paramNomDefaut);
+        return AccueilFta::afficherRequeteEnListeDeroulante($req, $paramIdDefaut, $paramNomDefaut, $isEditable, TRUE);
     }
 
     public static function getListeClassificationProprietaireGroupeLabel($paramIdDefaut, $paramIsEditable) {
@@ -80,7 +80,7 @@ class ClassificationFta2Model extends AbstractModel {
         return $listeClassification;
     }
 
-    public static function getListeClassification($paramAscendent, $paramIdDefaut, $paramSelect, $paramOrig, $paramNomDefaut, $paramMarque2 = NULL) {
+    public static function getListeClassification($paramAscendent, $paramIdDefaut, $paramSelect, $paramOrig, $paramNomDefaut, $isEditable, $paramMarque2 = NULL) {
         if ($paramAscendent <> NULL) {
             $req = 'SELECT DISTINCT ' . $paramSelect
                     . ' FROM  ' . ClassificationFta2Model::TABLENAME
@@ -119,7 +119,7 @@ class ClassificationFta2Model extends AbstractModel {
                 . ' WHERE ( 0 ' . ClassificationFta2Model::AddIdClassificationArborescenceArticleCategorieContenu($return)
                 . ') ORDER BY ' . ClassificationArborescenceArticleCategorieContenuModel::FIELDNAME_NOM_CLASSIFICATION_ARBORESCENCE_ARTICLE_CATEGORIE_CONTENU;
 
-        $Liste .= AccueilFta::afficherRequeteEnListeDeroulante($reqListe, $paramIdDefaut, $paramNomDefaut);
+        $Liste .= AccueilFta::afficherRequeteEnListeDeroulante($reqListe, $paramIdDefaut, $paramNomDefaut, $isEditable, TRUE);
         return $Liste;
     }
 
@@ -228,7 +228,7 @@ class ClassificationFta2Model extends AbstractModel {
      * @param string $paramNomDefaut
      * @return string
      */
-    public static function getClassificationListeSansDependance($paramIdDefaut, $paramIdTypeClassification, $paramNomDefaut) {
+    public static function getClassificationListeSansDependance($paramIdDefaut, $paramIdTypeClassification, $paramNomDefaut,$paramIsEditable) {
         $req = ' SELECT ' . ClassificationArborescenceArticleCategorieContenuModel::KEYNAME
                 . ',' . ClassificationArborescenceArticleCategorieContenuModel::FIELDNAME_NOM_CLASSIFICATION_ARBORESCENCE_ARTICLE_CATEGORIE_CONTENU
                 . ' FROM ' . ClassificationArborescenceArticleCategorieContenuModel::TABLENAME
@@ -236,7 +236,7 @@ class ClassificationFta2Model extends AbstractModel {
                 . ' ORDER BY ' . ClassificationArborescenceArticleCategorieContenuModel::FIELDNAME_NOM_CLASSIFICATION_ARBORESCENCE_ARTICLE_CATEGORIE_CONTENU
         ;
 
-        return AccueilFta::afficherRequeteEnListeDeroulante($req, $paramIdDefaut, $paramNomDefaut);
+        return AccueilFta::afficherRequeteEnListeDeroulante($req, $paramIdDefaut, $paramNomDefaut,$paramIsEditable);
     }
 
     /**
@@ -248,7 +248,7 @@ class ClassificationFta2Model extends AbstractModel {
                         'INSERT INTO ' . ClassificationFta2Model::TABLENAME
                         . ' VALUES (NULL ,  \'\',  \'\',  \'\',  \'\',  \'\',  \'\',  \'\',  \'\')'
         );
-        
+
         $key = $pdo->lastInsertId();
 
         return $key;

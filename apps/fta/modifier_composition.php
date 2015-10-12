@@ -703,7 +703,7 @@ if ($mode_etiquette_fta_composition == 1 or $mode_etiquette_fta_composition == 2
         ;
         $nom_defaut = FtaComposantModel::FIELDNAME_K_STYLE_PARAGRAPHE_INGREDIENT_FTA_COMPOSITION;
         $id_defaut = $k_style_paragraphe_ingredient_fta_composition;
-        $liste_style .= AccueilFta::afficherRequeteEnListeDeroulante($requete, $id_defaut, $nom_defaut);
+        $liste_style .= AccueilFta::afficherRequeteEnListeDeroulante($requete, $id_defaut, $nom_defaut,$editable);
         $bloc.= $liste_style;
     } else {
         if ($k_style_paragraphe_ingredient_fta_composition) {
@@ -737,7 +737,7 @@ if ($mode_etiquette_fta_composition == 1 or $mode_etiquette_fta_composition == 2
         ;
         $nom_defaut = FtaComposantModel::FIELDNAME_K_ETIQUETTE_FTA_COMPOSITION;
         $id_defaut = $k_etiquette_fta_composition;
-        $bloc.= AccueilFta::afficherRequeteEnListeDeroulante($requete, $id_defaut, $nom_defaut) . $image_modif;
+        $bloc.= AccueilFta::afficherRequeteEnListeDeroulante($requete, $id_defaut, $nom_defaut,$editable) . $image_modif;
     } else {
         if ($k_etiquette_fta_composition) {
             $k_etiquette = $k_etiquette_fta_composition;
@@ -762,6 +762,7 @@ if ($mode_etiquette_fta_composition == 1 or $mode_etiquette_fta_composition == 2
     ;
     $bloc.="<tr class=contenu><td " . $color_modif . ">" . $liste_etiquette;
     if ($proprietaire) {
+        ;
         $requete = " SELECT " . CodesoftEtiquettesModel::KEYNAME . ", " . CodesoftEtiquettesModel::FIELDNAME_DESIGNATION_CODESOFT_ETIQUETTES
                 . " FROM " . CodesoftEtiquettesModel::TABLENAME
                 . " WHERE (" . CodesoftEtiquettesModel::FIELDNAME_K_TYPE_ETIQUETTE_CODESOFT_ETIQUETTES . "=3 "
@@ -770,7 +771,7 @@ if ($mode_etiquette_fta_composition == 1 or $mode_etiquette_fta_composition == 2
         ;
         $nom_defaut = FtaComposantModel::FIELDNAME_K_ETIQUETTE_VERSO_FTA_COMPOSITION;
         $id_defaut = $k_etiquette_verso_fta_composition;
-        $bloc.= AccueilFta::afficherRequeteEnListeDeroulante($requete, $id_defaut, $nom_defaut) . $image_modif;
+        $bloc.= AccueilFta::afficherRequeteEnListeDeroulante($requete, $id_defaut, $nom_defaut,$editable) . $image_modif;
     } else {
         if ($k_etiquette_verso_fta_composition) {
             $k_etiquette = $k_etiquette_verso_fta_composition;
@@ -800,7 +801,7 @@ if ($mode_etiquette_fta_composition == 1 or $mode_etiquette_fta_composition == 2
                 . " ORDER BY " . CodesoftEtiquettesLogoModel::FIELDNAME_LOGO_NAME;
         $nom_defaut = FtaComposantModel::FIELDNAME_K_CODESOFT_ETIQUETTE_LOGO;
         $id_defaut = $k_codesoft_etiquette_logo;
-        $bloc.= AccueilFta::afficherRequeteEnListeDeroulante($requete, $id_defaut, $nom_defaut) . $image_modif;
+        $bloc.= AccueilFta::afficherRequeteEnListeDeroulante($requete, $id_defaut, $nom_defaut,$editable) . $image_modif;
     } else {
         if ($k_codesoft_etiquette_logo) {
             $id = $k_codesoft_etiquette_logo;
@@ -840,7 +841,7 @@ if ($mode_etiquette_fta_composition == 3) {
 
     $nom_defaut = FtaComposantModel::FIELDNAME_ETIQUETTE_ID_FTA_COMPOSITION;
     $id_defaut = $etiquette_id_fta_composition;
-    $bloc.= AccueilFta::afficherRequeteEnListeDeroulante($requete, $id_defaut, $nom_defaut) . $image_modif;
+    $bloc.= AccueilFta::afficherRequeteEnListeDeroulante($requete, $id_defaut, $nom_defaut,$editable) . $image_modif;
 }
 /* }else{
   $k_etiquette=$$champ;

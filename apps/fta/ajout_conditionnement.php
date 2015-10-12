@@ -98,7 +98,7 @@ switch ($action) {
         $nom_defaut = AnnexeEmballageGroupeModel::KEYNAME;
         $liste_emballage_groupe = DatabaseDescription::getFieldDocLabel(AnnexeEmballageGroupeModel::TABLENAME, AnnexeEmballageGroupeModel::FIELDNAME_NOM_ANNEXE_EMBALLAGE_GROUPE)
                 . '</td><td>'
-                . AccueilFta::afficherRequeteEnListeDeroulante($requete, $id_defaut, $nom_defaut);
+                . AccueilFta::afficherRequeteEnListeDeroulante($requete, $id_defaut, $nom_defaut,TRUE);
 
 
         $bloc.=$liste_emballage_groupe . '</tr></table><' . $html_table . '><tr class=titre_principal><td width=\'50%\'>';
@@ -157,7 +157,7 @@ switch ($action) {
         $req_liste_emballage;
         $bloc .=$title
                 . ': <br><br>'
-                . AccueilFta::afficherRequeteEnListeDeroulante($req_liste_emballage, $id_defaut, $nom_liste);
+                . AccueilFta::afficherRequeteEnListeDeroulante($req_liste_emballage, $id_defaut, $nom_liste,TRUE);
         $bloc .='</td><tr>';
 
         $bloc .='<tr><td>'

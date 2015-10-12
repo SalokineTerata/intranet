@@ -90,7 +90,7 @@ if ($id_user) {
             $synthese_action = FtaEtatModel::ETAT_AVANCEMENT_VALUE_ALL;
             $idFtaRoleEncoursDefault ='0';
             $nomFtaEtat = FtaEtatModel::ETAT_ABREVIATION_VALUE_VALIDE;
-            $id_fta_etat = 3;
+            $id_fta_etat = '3';
         }
     }
 

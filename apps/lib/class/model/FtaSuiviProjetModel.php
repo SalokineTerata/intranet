@@ -382,14 +382,14 @@ class FtaSuiviProjetModel extends AbstractModel {
     static public function initFtaSuiviProjet($paramIdFta) {
 
         $ftaModel = new FtaModel($paramIdFta);
-        $idFtaWorlflow = $ftaModel->getDataField(FtaModel::FIELDNAME_WORKFLOW)->getFieldValue();
-        if ($idFtaWorlflow) {
+        $idFtaWorkflow = $ftaModel->getDataField(FtaModel::FIELDNAME_WORKFLOW)->getFieldValue();
+        if ($idFtaWorkflow) {
             $arrayChapitre = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
                             'SELECT ' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_CHAPITRE
                             . ', ' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_PROCESSUS
                             . ' FROM ' . FtaWorkflowStructureModel::TABLENAME
                             . ' WHERE ' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_WORKFLOW
-                            . '=' . $idFtaWorlflow
+                            . '=' . $idFtaWorkflow
             );
 
 
@@ -416,6 +416,62 @@ class FtaSuiviProjetModel extends AbstractModel {
                     } else {
                         DatabaseOperation::execute(
                                 'INSERT INTO ' . FtaSuiviProjetModel::TABLENAME
+                                . '(' . FtaSuiviProjetModel::FIELDNAME_ID_FTA
+                                . ', ' . FtaSuiviProjetModel::FIELDNAME_ID_FTA_CHAPITRE
+                                . ', ' . FtaSuiviProjetModel::FIELDNAME_SIGNATURE_VALIDATION_SUIVI_PROJET
+                                . ') VALUES (' . $paramIdFta
+                                . ', ' . $rowsChapitre[FtaWorkflowStructureModel::FIELDNAME_ID_FTA_CHAPITRE]
+                                . ', 0 )'
+                        );
+                    }
+                }
+            }
+        }
+    }
+    static public function initFtaSuiviProjetV2VersV3($paramIdFta) {
+
+       $arrayIdFtaWorkflow = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
+                    "SELECT DISTINCT " . FtaModel::FIELDNAME_WORKFLOW
+                    . " FROM intranet_v3_0_dev.fta "
+                    . " WHERE id_fta = " . $paramIdFta
+    );
+
+    foreach ($arrayIdFtaWorkflow as $rowIdFtaWorkflow) {
+        $idFtaWorkflow = $rowIdFtaWorkflow[FtaModel::FIELDNAME_WORKFLOW];
+    }
+        if ($idFtaWorkflow) {
+            $arrayChapitre = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
+                            'SELECT ' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_CHAPITRE
+                            . ', ' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_PROCESSUS
+                            . ' FROM intranet_v3_0_dev.' . FtaWorkflowStructureModel::TABLENAME
+                            . ' WHERE ' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_WORKFLOW
+                            . '=' . $idFtaWorkflow
+            );
+
+
+            foreach ($arrayChapitre as $rowsChapitre) {
+                $arrayCheckIdSuiviProjet = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
+                                'SELECT ' . FtaSuiviProjetModel::KEYNAME
+                                . ' FROM intranet_v3_0_dev.' . FtaSuiviProjetModel::TABLENAME
+                                . ' WHERE ' . FtaSuiviProjetModel::FIELDNAME_ID_FTA
+                                . '=' . $paramIdFta
+                                . ' AND ' . FtaSuiviProjetModel::FIELDNAME_ID_FTA_CHAPITRE
+                                . '=' . $rowsChapitre[FtaSuiviProjetModel::FIELDNAME_ID_FTA_CHAPITRE]
+                );
+                if (!$arrayCheckIdSuiviProjet) {
+                    if ($rowsChapitre[FtaWorkflowStructureModel::FIELDNAME_ID_FTA_PROCESSUS] == 0) {
+                        DatabaseOperation::execute(
+                                'INSERT INTO intranet_v3_0_dev.' . FtaSuiviProjetModel::TABLENAME
+                                . '(' . FtaSuiviProjetModel::FIELDNAME_ID_FTA
+                                . ', ' . FtaSuiviProjetModel::FIELDNAME_ID_FTA_CHAPITRE
+                                . ', ' . FtaSuiviProjetModel::FIELDNAME_SIGNATURE_VALIDATION_SUIVI_PROJET
+                                . ') VALUES (' . $paramIdFta
+                                . ', ' . $rowsChapitre[FtaWorkflowStructureModel::FIELDNAME_ID_FTA_CHAPITRE]
+                                . ', 1 )'
+                        );
+                    } else {
+                        DatabaseOperation::execute(
+                                'INSERT INTO intranet_v3_0_dev.' . FtaSuiviProjetModel::TABLENAME
                                 . '(' . FtaSuiviProjetModel::FIELDNAME_ID_FTA
                                 . ', ' . FtaSuiviProjetModel::FIELDNAME_ID_FTA_CHAPITRE
                                 . ', ' . FtaSuiviProjetModel::FIELDNAME_SIGNATURE_VALIDATION_SUIVI_PROJET
@@ -559,6 +615,65 @@ class FtaSuiviProjetModel extends AbstractModel {
 
 
         return $return;
+    }
+
+    public static function checkChapitreV2toV3($paramIdFtaChapitre, $paramIdFtaWorkflow) {
+        switch ($paramIdFtaChapitre) {
+            case '20':
+                $paramIdFtaChapitre = '32';
+                break;
+            case '40' :
+                $paramIdFtaChapitre = '21';
+                break;
+            case '80' :
+                $paramIdFtaChapitre = '27';
+                break;
+            case '60' :
+                $paramIdFtaChapitre = '24';
+                break;
+            case '101' :
+                switch ($paramIdFtaWorkflow) {
+                    case '3':
+                    case '5':
+                        $paramIdFtaChapitre = '35';
+                        break;
+                    case '6':
+                    case '7':
+                        $paramIdFtaChapitre = '38';
+                        break;
+                    default :
+                        $paramIdFtaChapitre = '29';
+                        break;
+                }
+                break;
+            case '100':
+                switch ($paramIdFtaWorkflow) {
+                    case '3':
+                    case '5':
+                        $paramIdFtaChapitre = '36';
+                        break;
+                    case '6':
+                    case '7':
+                        $paramIdFtaChapitre = '39';
+                        break;
+                    default :
+                        $paramIdFtaChapitre = '30';
+                        break;
+                }
+
+                break;
+            case '111' :
+                $paramIdFtaChapitre = '33';
+                break;
+            case '70' :
+                $paramIdFtaChapitre = '17';
+                break;
+            case '112' :
+            case '90' :
+                $paramIdFtaChapitre = '40';
+                break;
+        }
+        return $paramIdFtaChapitre;
     }
 
     public function getModelFta() {

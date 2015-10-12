@@ -1079,7 +1079,7 @@ class FtaModel extends AbstractModel {
      */
     public static function CreateFta($paramIdCreateur, $paramIdFtaEtat, $paramIdFtaWorkflow, $paramDesignationCommerciale, $paramDateCreation, $paramSiteDeProduction) {
         $Id = DatabaseOperation::execute(
-                        "INSERT INTO `intranet_v3_0_dev`." . FtaModel::TABLENAME
+                        "INSERT INTO `intranet_v3_0_cod`." . FtaModel::TABLENAME
                         . " ( " . FtaModel::FIELDNAME_CREATEUR
                         . "," . FtaModel::FIELDNAME_ID_FTA_ETAT
                         . "," . FtaModel::FIELDNAME_DESIGNATION_COMMERCIALE
@@ -1097,6 +1097,6 @@ class FtaModel extends AbstractModel {
         return $key;
     }
 
-
+    
 
 }

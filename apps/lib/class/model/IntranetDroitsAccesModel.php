@@ -141,6 +141,7 @@ class IntranetDroitsAccesModel {
                                 . ',' . IntranetActionsModel::FIELDNAME_NOM_INTRANET_ACTIONS
                                 . ' FROM ' . IntranetActionsModel::TABLENAME
                                 . ' WHERE ' . IntranetActionsModel::FIELDNAME_MODULE_INTRANET_ACTIONS . '=' . $idIntranetModules
+                                . ' ORDER BY ' . IntranetActionsModel::FIELDNAME_DESCRIPTION_INTRANET_ACTIONS
                 );
 
                 foreach ($arrayActionsWorkflow as $rowsActionsWorkflow) {

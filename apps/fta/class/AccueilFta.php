@@ -1141,7 +1141,7 @@ class AccueilFta {
      * @param boolean $paramIsEditable
      * @return string
      */
-    public static function afficherRequeteEnListeDeroulante($paramRequeteSQL, $paramIdDefaut, $paramNomDefaut, $paramIsEditable = NULL) {
+    public static function afficherRequeteEnListeDeroulante($paramRequeteSQL, $paramIdDefaut, $paramNomDefaut, $paramIsEditable, $paramTous = NULL) {
 //Recherche de la clef
         $table = DatabaseOperation::convertSqlStatementKeyAndOneFieldToArray($paramRequeteSQL);
         if (!$table) {//Si la liste est vide
@@ -1152,7 +1152,7 @@ class AccueilFta {
 //                $html_liste .= '</select>';
 //            }
         } else {
-            if ($paramIsEditable <> FALSE or $paramIsEditable == NULL) {
+            if ($paramIsEditable <> FALSE) {
                 $key = array_keys($table);
                 if (!$paramNomDefaut) {
                     $paramNomDefaut = $key[AccueilFta::VALUE_1];
@@ -1160,8 +1160,9 @@ class AccueilFta {
 
 //Création de la liste déroulante
                 $html_liste = '<select name=' . $paramNomDefaut . ' onChange=' . $paramNomDefaut . '_js()>';
-
-                $html_liste .='<option value=0 >Tous</option>';
+                if ($paramTous) {
+                    $html_liste .='<option value=0 >Tous</option>';
+                }
 
                 /*
                  * PDO::FETCH_BOTH
@@ -1195,5 +1196,5 @@ class AccueilFta {
         }
         return $html_liste;
     }
- 
+
 }

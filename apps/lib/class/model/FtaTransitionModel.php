@@ -549,7 +549,7 @@ class FtaTransitionModel {
         ;
         $nom_defaut = FtaTransitionModel::FIELDNAME_ABREVIATION_FTA_TRANSITION;
         $id_defaut = FtaEtatModel::ETAT_ABREVIATION_VALUE_VALIDE;
-        return $liste_action_groupe = AccueilFta::afficherRequeteEnListeDeroulante($requete, $id_defaut, $nom_defaut);
+        return $liste_action_groupe = AccueilFta::afficherRequeteEnListeDeroulante($requete, $id_defaut, $nom_defaut,TRUE);
     }
 
 //Fin de la vérification que la FTA est bien validé

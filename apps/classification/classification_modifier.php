@@ -48,7 +48,7 @@ switch ($output) {
 
 $id_fta_classification2 = Lib::getParameterFromRequest(ClassificationFta2Model::KEYNAME);
 $action = Lib::getParameterFromRequest('action');
-
+$isEditable =TRUE;
 /* * ***********
   Début Code PHP
  * *********** */
@@ -102,29 +102,29 @@ $bloc .= "<" . $html_table . "><tr class=titre>"
         . "<td>" . HtmlResult::RESEAU . "</td>"
         . "<td>" . HtmlResult::SAISONALITE . "</td>"
         . "</tr>";
-$bloc.="<td>" . ClassificationFta2Model::getListeClassificationProprietaireGroupe($idProprietaireGroupe) . "</td>";
+$bloc.="<td>" . ClassificationFta2Model::getListeClassificationProprietaireGroupe($idProprietaireGroupe,$isEditable) . "</td>";
 
 
-$bloc.= "<td>" . ClassificationFta2Model::getClassificationListeSansDependance($idProprietaireEnseigne, 1, ClassificationFta2Model::FIELDNAME_ID_PROPRIETAIRE_ENSEIGNE
+$bloc.= "<td>" . ClassificationFta2Model::getClassificationListeSansDependance($idProprietaireEnseigne, 1, ClassificationFta2Model::FIELDNAME_ID_PROPRIETAIRE_ENSEIGNE,$isEditable
         ) . "</td>";
 
 $bloc.="<td>" . ClassificationFta2Model::getClassificationListeSansDependance($idMarque, 2
-                , ClassificationFta2Model::FIELDNAME_ID_MARQUE
+                , ClassificationFta2Model::FIELDNAME_ID_MARQUE,$isEditable
         ) . "</td>";
 $bloc.="<td>" . ClassificationFta2Model::getClassificationListeSansDependance($idActivite, 3
-                , ClassificationFta2Model::FIELDNAME_ID_ACTIVITE
+                , ClassificationFta2Model::FIELDNAME_ID_ACTIVITE,$isEditable
         ) . "</td>";
 $bloc.="<td>" . ClassificationFta2Model::getClassificationListeSansDependance($idRayon, 4
-                , ClassificationFta2Model::FIELDNAME_ID_RAYON
+                , ClassificationFta2Model::FIELDNAME_ID_RAYON,$isEditable
         ) . "</td>";
 $bloc.="<td>" . ClassificationFta2Model::getClassificationListeSansDependance($idEnvironnement, 51
-                , ClassificationFta2Model::FIELDNAME_ID_ENVIRONNEMENT
+                , ClassificationFta2Model::FIELDNAME_ID_ENVIRONNEMENT,$isEditable
         ) . "</td>";
 $bloc.="<td>" . ClassificationFta2Model::getClassificationListeSansDependance($idReseau, 5
-                , ClassificationFta2Model::FIELDNAME_ID_RESEAU
+                , ClassificationFta2Model::FIELDNAME_ID_RESEAU,$isEditable
         ) . "</td>";
 $bloc.="<td>" . ClassificationFta2Model::getClassificationListeSansDependance($idSaisonalite, 52
-                , ClassificationFta2Model::FIELDNAME_ID_SAISONNALITE
+                , ClassificationFta2Model::FIELDNAME_ID_SAISONNALITE,$isEditable
         ) . "</td>";
 
 

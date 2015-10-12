@@ -9,11 +9,14 @@ Lib::includeJS('../plugins/dhtmlgoodies_calendar/dhtmlgoodies_calendar/dhtmlgood
 if ($module != 'lib') {
     //include ('../$module/functions.js');
     //echo '<script type=\'text/javascript\' src=\''.'../$module/functions.js'.'\'></script>';
-    if ($module <> 'php') {
-        if (Lib::getModule() <> 'php') {
-            require_once('../' . Lib::getModule() . '/functions_js.php');
-        }
+    if ($module == 'php') {
+        $module = 'fta';
     }
+    if (Lib::getModule() == 'php') {
+        Lib::getModule() = 'fta';
+    }
+    require_once('../' . Lib::getModule() . '/functions_js.php');
+
     //Lib::includeJS('../'.Lib::getModule().'/functions_js.php');
 }
 ?>

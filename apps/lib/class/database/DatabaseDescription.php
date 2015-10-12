@@ -260,6 +260,7 @@ class DatabaseDescription {
         /**
          * Récupération des caractéristiques SQL de chaque champs de chaque table
          */
+        ini_set('memory_limit','-1');
         $array = DatabaseOperation::convertSqlStatementKeyAndOneFieldToArray('SHOW TABLES');
         foreach ($array as $rowsTables) {
             $tableName = $rowsTables[0];

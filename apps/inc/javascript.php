@@ -10,7 +10,9 @@ if ($module != 'lib') {
     //include ('../$module/functions.js');
     //echo '<script type=\'text/javascript\' src=\''.'../$module/functions.js'.'\'></script>';
     if ($module <> 'php') {
-        require_once('../' . Lib::getModule() . '/functions_js.php');
+        if (Lib::getModule() <> 'php') {
+            require_once('../' . Lib::getModule() . '/functions_js.php');
+        }
     }
     //Lib::includeJS('../'.Lib::getModule().'/functions_js.php');
 }

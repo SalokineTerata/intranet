@@ -237,9 +237,6 @@ if ($module != 'lib') {
     }
 
     //Inclusion de la librairie de fonction propre au module
-    if ($module == 'php') {
-        $module = 'fta';
-    }
     require_once ('../' . $module . '/functions.php');
 }
 $globalConfig = $_SESSION['globalConfig'];

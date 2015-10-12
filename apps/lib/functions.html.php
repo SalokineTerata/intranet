@@ -617,15 +617,9 @@ function print_page_begin($disable_full_page = FALSE, $menu_file = NULL, $conf =
         include("../inc/connexion.php");
         include("../inc/navigue.php");
         if ($menu_file != NULL) {                       //Si existant, utilisation du menu demandé
-            if ($module == 'php') {
-                $module = 'fta';
-            }
             include ("./$module/$menu_file");
         }               //en variable
         else {
-            if ($module == 'php') {
-                $module = 'fta';
-            }
             include ("../$module/menu_principal.inc");
         }  //Sinon, menu par défaut
     }

@@ -9,14 +9,7 @@ $libModule = Lib::getModule();
 if ($module != 'lib') {
     //include ('../$module/functions.js');
     //echo '<script type=\'text/javascript\' src=\''.'../$module/functions.js'.'\'></script>';
-    if ($module == 'php') {
-        $module = 'fta';
-    }
-    if ($libModule == 'php') {
-       $libModule  = 'fta';
-    }
-    require_once('../' . $libModule . '/functions_js.php');
-
+     require_once('../' . $libModule . '/functions_js.php');
     //Lib::includeJS('../'.Lib::getModule().'/functions_js.php');
 }
 ?>

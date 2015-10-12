@@ -1,4 +1,4 @@
-<?
+<?php
 //Barre de navigation du module
 $module_consultation=lib::isDefined('access_consultation');
 $module_modification=lib::isDefined('access_modification');

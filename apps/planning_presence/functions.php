@@ -1,4 +1,4 @@
-<?
+<?php
 
 //Autorisation de consulter le module:
 //En effet cette page est chargée par toutes les page de ce module

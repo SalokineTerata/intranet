@@ -1,4 +1,4 @@
-<?
+<?php
 /*
 Module d'appartenance (valeur obligatoire)
 Par défaut, le nom du module est le répertoire courant

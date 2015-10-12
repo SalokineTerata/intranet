@@ -1,4 +1,4 @@
-<?
+<?php
 //Barre de navigation du module
 $planning_presence_modification = Lib::isDefined('planning_presence_modification');
 //Consulter

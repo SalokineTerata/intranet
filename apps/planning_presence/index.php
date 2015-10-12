@@ -1,4 +1,4 @@
-  <?php
+<?php
 
 /*
   Module d'appartenance (valeur obligatoire)
@@ -6,54 +6,6 @@
  */
 //$module = substr(strrchr(`pwd`, '/'), 1);
 //$module = trim($module);
-switch($output)
-{
-
-  case 'visualiser':
-       //Inclusions
-       include ("../lib/session.php");         //Récupération des variables de sessions
-       include ("../lib/functions.php");       //On inclus seulement les fonctions sans construire de page
-       include ("functions.php");              //Fonctions du module
-       echo "
-            <link rel=stylesheet type=text/css href=../lib/css/intra01.css />
-            <link rel=stylesheet type=text/css href=visualiser.css />
-       ";
-
-  //break;
-  case 'pdf':
-  break;
-
-  default:
-        //Inclusions
-//        include ("../lib/session.php");         //Récupération des variables de sessions
-//        include ("../lib/debut_page.php");      //Construction d'une nouvelle
-//        if (isset($menu))                       //Si existant, utilisation du menu demandé
-//        {                                       //en variable
-//           include ("./$menu");
-//        }
-//        else
-//        {
-//           include ("./menu_principal.inc");    //Sinon, menu par défaut
-//        }
-      require_once '../inc/main.php';
-      print_page_begin($disable_full_page, $menu_file);
-}//Fin de la sélection du mode d'affichage de la page
-
-
-
-
-$planning_presence_modification = Lib::isDefined('planning_presence_modification');
-$selection_semaine_en_cours=  Lib::isDefined('selection_semaine_en_cours');
-
-/*
-  Si la page peut être appelée depuis n'importe quel module,
-  décommentez la ligne suivante
- */
-
-//   $module='';
-//Inclusions
-//Sélection du mode de visualisation de la page
-/*
 switch ($output) {
 
     case 'visualiser':
@@ -61,7 +13,6 @@ switch ($output) {
         include ("../lib/session.php");         //Récupération des variables de sessions
         include ("../lib/functions.php");       //On inclus seulement les fonctions sans construire de page
         include ("functions.php");              //Fonctions du module
-
         echo "
             <link rel=stylesheet type=text/css href=../lib/css/intra01.css />
             <link rel=stylesheet type=text/css href=visualiser.css />
@@ -73,15 +24,63 @@ switch ($output) {
 
     default:
         //Inclusions
-        include ("../lib/session.php");         //Récupération des variables de sessions
-        include ("../lib/debut_page.php");      //Construction d'une nouvelle
-        if (isset($menu)) {                       //Si existant, utilisation du menu demandé                                       //en variable
-            include ("./" . $menu);
-        } else {
-            include ("./menu_principal.inc");    //Sinon, menu par défaut
-        }
+//        include ("../lib/session.php");         //Récupération des variables de sessions
+//        include ("../lib/debut_page.php");      //Construction d'une nouvelle
+//        if (isset($menu))                       //Si existant, utilisation du menu demandé
+//        {                                       //en variable
+//           include ("./$menu");
+//        }
+//        else
+//        {
+//           include ("./menu_principal.inc");    //Sinon, menu par défaut
+//        }
+        require_once '../inc/main.php';
+        print_page_begin($disable_full_page, $menu_file);
 }//Fin de la sélection du mode d'affichage de la page
-*/
+
+
+
+
+$planning_presence_modification = Lib::isDefined('planning_presence_modification');
+$selection_semaine_en_cours = Lib::isDefined('selection_semaine_en_cours');
+
+/*
+  Si la page peut être appelée depuis n'importe quel module,
+  décommentez la ligne suivante
+ */
+
+//   $module='';
+//Inclusions
+//Sélection du mode de visualisation de la page
+/*
+  switch ($output) {
+
+  case 'visualiser':
+  //Inclusions
+  include ("../lib/session.php");         //Récupération des variables de sessions
+  include ("../lib/functions.php");       //On inclus seulement les fonctions sans construire de page
+  include ("functions.php");              //Fonctions du module
+
+  echo "
+  <link rel=stylesheet type=text/css href=../lib/css/intra01.css />
+  <link rel=stylesheet type=text/css href=visualiser.css />
+  ";
+
+  //break;
+  case 'pdf':
+  break;
+
+  default:
+  //Inclusions
+  include ("../lib/session.php");         //Récupération des variables de sessions
+  include ("../lib/debut_page.php");      //Construction d'une nouvelle
+  if (isset($menu)) {                       //Si existant, utilisation du menu demandé                                       //en variable
+  include ("./" . $menu);
+  } else {
+  include ("./menu_principal.inc");    //Sinon, menu par défaut
+  }
+  }//Fin de la sélection du mode d'affichage de la page
+ */
 
 
 /* include ("../lib/session.php");
@@ -198,121 +197,127 @@ echo "</tr>";
 $req1 = "select geo,id_geo from geo WHERE id_site IS NOT NULL AND ordre_planning_presence_geo<>0 AND site_actif=1 order by ordre_planning_presence_geo asc";
 $result1 = mysql_query($req1);
 echo "<table class=contenu width=100% border=1>";
-while ($rows1 = mysql_fetch_array($result1)) {
+if ($result1) {
+    while ($rows1 = mysql_fetch_array($result1)) {
 
-    echo "<tr class=titre>";
-    echo "<td>";
-    echo stripslashes($rows1["geo"]);
-    echo "</td>";
-
-    //Affichage des jours de la semaine (entête de colonne)
-    $req2 = "select nom_annexe_jours_semaine from annexe_jours_semaine where id_annexe_jours_semaine<=$maximum_jours order by id_annexe_jours_semaine asc";
-    $result2 = mysql_query($req2);
-    while ($rows2 = mysql_fetch_array($result2)) {
-        echo "<td width=15%>";
-        echo stripslashes($rows2[nom_annexe_jours_semaine]);
-        echo "</td>";
-    }
-    //Affichage de la colonne des actions sur les utilisateurs
-
-    echo "<td>";
-    //Création du lien
-    $lien1 = "<a href=ajout_salarie_semaine_en_cours.php";
-    $lien1.= "?semaine_en_cours=$semaine_en_cours";
-    $lien1.= "&annee_en_cours=$annee_en_cours";
-    $lien1.= "&id_groupe=" . $rows1["id_geo"];
-    $lien1.= " >Ajouter</a>";
-
-    //Droit d'accès
-    if ($planning_presence_modification == 1) {
-        echo "$lien1";
-    }
-    echo "</td>";
-
-
-    //Affichage des différents services
-    //$req3 = "select * from services where id_groupe=$rows1[id_groupe] order by intitule_ser asc";
-    $req3 = "SELECT `access_materiel_service`.`K_service`, `access_materiel_service`.`nom_service` "
-            . "FROM `access_materiel_service`, `salaries`, `geo`, planning_presence_detail "
-            . "WHERE ( `access_materiel_service`.`K_service` = `salaries`.`id_service` "
-            . "AND `geo`.`id_geo` = `salaries`.`lieu_geo` ) "
-            . "AND ( ( `geo`.`id_geo` = " . $rows1["id_geo"] . " ) ) "
-            . "AND salaries.id_user=planning_presence_detail.id_salaries "
-            . "AND id_planning_presence_semaine_visible='" . $semaine_en_cours . "' "
-            . "AND annee_planning_presence_semaine_visible='" . $annee_en_cours . "' "
-            . "GROUP BY `access_materiel_service`.`K_service`, `access_materiel_service`.`nom_service`"
-    ;
-    $result3 = mysql_query($req3);
-    while ($rows3 = mysql_fetch_array($result3)) {
-        echo "</tr>";
-        echo "<tr>";
+        echo "<tr class=titre>";
         echo "<td>";
+        echo stripslashes($rows1["geo"]);
         echo "</td>";
-        echo "</tr>";
-        $result4 = tableau_planning_selectionne($semaine_en_cours, $annee_en_cours, $rows3["K_service"], $rows1["id_geo"]);
-        while ($rows4 = mysql_fetch_array($result4)) {
-            echo "<tr>";
-            echo "<td>";
-            echo stripslashes($rows4[nom]) . " " . stripslashes($rows4[prenom]);
-            echo "</td>";
 
-            //Balayages des jours de la semaine
-            $i = 1;
-            while ($i <= $maximum_jours) {
-                //Détermination des lieux par journée
-                $result5 = tableau_planning_selectionne_jour($semaine_en_cours, $annee_en_cours, $rows4[id_salaries], $i);
-                $count5 = mysql_num_rows($result5);
-                $txt1 = "<a href=modification_lieu_salarie.php";
-                $txt1.= "?id_salaries=$rows4[id_salaries]";
-                $txt1.= "&id_jour=$i";
-                $txt1.= "&id_semaine=$semaine_en_cours";
-                $txt1.= "&annee=$annee_en_cours";
-                $txt1.= ">";
-                $txt3 = "</a>";
-                if ($count5 == 0) {
-                    $txt2 = "?";
-                } else {
-                    while ($rows5 = mysql_fetch_array($result5)) {
-                        $lieu_1_mysql = $rows5[lieu_1_planning_presence_detail];
-                        $lieu_2_mysql = $rows5[lieu_2_planning_presence_detail];
-                        $lieu_1 = stripslashes($lieu_1_mysql);
-                        $lieu_2 = stripslashes($lieu_2_mysql);
-                        if ($rows5[jour_type_planning_presence_detail] == 0) {
-                            $txt2 = $lieu_1;
-                        } elseif ($rows5[jour_type_planning_presence_detail] == 1) {
-                            $txt2 = $lieu_1;
-                            $txt2.= " / ";
-                            $txt2.= $lieu_2;
-                        }
-                    }
-                }
+        //Affichage des jours de la semaine (entête de colonne)
+        $req2 = "select nom_annexe_jours_semaine from annexe_jours_semaine where id_annexe_jours_semaine<=$maximum_jours order by id_annexe_jours_semaine asc";
+        $result2 = mysql_query($req2);
+        while ($rows2 = mysql_fetch_array($result2)) {
+            echo "<td width=15%>";
+            echo stripslashes($rows2[nom_annexe_jours_semaine]);
+            echo "</td>";
+        }
+        //Affichage de la colonne des actions sur les utilisateurs
+
+        echo "<td>";
+        //Création du lien
+        $lien1 = "<a href=ajout_salarie_semaine_en_cours.php";
+        $lien1.= "?semaine_en_cours=$semaine_en_cours";
+        $lien1.= "&annee_en_cours=$annee_en_cours";
+        $lien1.= "&id_groupe=" . $rows1["id_geo"];
+        $lien1.= " >Ajouter</a>";
+
+        //Droit d'accès
+        if ($planning_presence_modification == 1) {
+            echo "$lien1";
+        }
+        echo "</td>";
+
+
+        //Affichage des différents services
+        //$req3 = "select * from services where id_groupe=$rows1[id_groupe] order by intitule_ser asc";
+        $req3 = "SELECT `access_materiel_service`.`K_service`, `access_materiel_service`.`nom_service` "
+                . "FROM `access_materiel_service`, `salaries`, `geo`, planning_presence_detail "
+                . "WHERE ( `access_materiel_service`.`K_service` = `salaries`.`id_service` "
+                . "AND `geo`.`id_geo` = `salaries`.`lieu_geo` ) "
+                . "AND ( ( `geo`.`id_geo` = " . $rows1["id_geo"] . " ) ) "
+                . "AND salaries.id_user=planning_presence_detail.id_salaries "
+                . "AND id_planning_presence_semaine_visible='" . $semaine_en_cours . "' "
+                . "AND annee_planning_presence_semaine_visible='" . $annee_en_cours . "' "
+                . "GROUP BY `access_materiel_service`.`K_service`, `access_materiel_service`.`nom_service`"
+        ;
+        $result3 = mysql_query($req3);
+        if ($result3) {
+            while ($rows3 = mysql_fetch_array($result3)) {
+                echo "</tr>";
+                echo "<tr>";
+                echo "<td>";
+                echo "</td>";
+                echo "</tr>";
+                $result4 = tableau_planning_selectionne($semaine_en_cours, $annee_en_cours, $rows3["K_service"], $rows1["id_geo"]);
+                if ($result4) {
+                    while ($rows4 = mysql_fetch_array($result4)) {
+                        echo "<tr>";
+                        echo "<td>";
+                        echo stripslashes($rows4[nom]) . " " . stripslashes($rows4[prenom]);
+                        echo "</td>";
+
+                        //Balayages des jours de la semaine
+                        $i = 1;
+                        while ($i <= $maximum_jours) {
+                            //Détermination des lieux par journée
+                            $result5 = tableau_planning_selectionne_jour($semaine_en_cours, $annee_en_cours, $rows4[id_salaries], $i);
+                            $count5 = mysql_num_rows($result5);
+                            $txt1 = "<a href=modification_lieu_salarie.php";
+                            $txt1.= "?id_salaries=$rows4[id_salaries]";
+                            $txt1.= "&id_jour=$i";
+                            $txt1.= "&id_semaine=$semaine_en_cours";
+                            $txt1.= "&annee=$annee_en_cours";
+                            $txt1.= ">";
+                            $txt3 = "</a>";
+                            if ($count5 == 0) {
+                                $txt2 = "?";
+                            } else {
+                                while ($rows5 = mysql_fetch_array($result5)) {
+                                    $lieu_1_mysql = $rows5[lieu_1_planning_presence_detail];
+                                    $lieu_2_mysql = $rows5[lieu_2_planning_presence_detail];
+                                    $lieu_1 = stripslashes($lieu_1_mysql);
+                                    $lieu_2 = stripslashes($lieu_2_mysql);
+                                    if ($rows5[jour_type_planning_presence_detail] == 0) {
+                                        $txt2 = $lieu_1;
+                                    } elseif ($rows5[jour_type_planning_presence_detail] == 1) {
+                                        $txt2 = $lieu_1;
+                                        $txt2.= " / ";
+                                        $txt2.= $lieu_2;
+                                    }
+                                }
+                            }
 
 //Affichage du lieu
 //Droit d'accès sur la possibilité de pouvoir modifier le lieu défini
-                echo "<td align=center>";
-                if ($planning_presence_modification == 0) {
-                    echo $txt2;
-                }
-                if ($planning_presence_modification == 1) {
-                    echo $txt1 . $txt2 . $txt3;
-                }
-                echo "</td>";
-                $i = $i + 1;
-            }
+                            echo "<td align=center>";
+                            if ($planning_presence_modification == 0) {
+                                echo $txt2;
+                            }
+                            if ($planning_presence_modification == 1) {
+                                echo $txt1 . $txt2 . $txt3;
+                            }
+                            echo "</td>";
+                            $i = $i + 1;
+                        }
 
 //Création du lien de suppression de chaque utilisateur pour la semaine en cours
 //Droits d'accès
-            if ($planning_presence_modification == 1) {
-                echo "<td>";
-                $txt1 = "<a href=action.php";
-                $txt1.= "?action=suppression";
-                $txt1.= "&id_salaries=$rows4[id_salaries]";
-                $txt1.= "&semaine_en_cours=$semaine_en_cours";
-                $txt1.= "&annee_en_cours=$annee_en_cours";
-                $txt1.= ">Supprimer</a>";
-                echo "$txt1";
-                echo "</td>";
-                echo "</tr>";
+                        if ($planning_presence_modification == 1) {
+                            echo "<td>";
+                            $txt1 = "<a href=action.php";
+                            $txt1.= "?action=suppression";
+                            $txt1.= "&id_salaries=$rows4[id_salaries]";
+                            $txt1.= "&semaine_en_cours=$semaine_en_cours";
+                            $txt1.= "&annee_en_cours=$annee_en_cours";
+                            $txt1.= ">Supprimer</a>";
+                            echo "$txt1";
+                            echo "</td>";
+                            echo "</tr>";
+                        }
+                    }
+                }
             }
         }
     }

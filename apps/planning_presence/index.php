@@ -195,10 +195,10 @@ echo "</tr>";
 //Construction du planning
 //Affichage des différents groupes
 $req1 = "select geo,id_geo from geo WHERE id_site IS NOT NULL AND ordre_planning_presence_geo<>0 AND site_actif=1 order by ordre_planning_presence_geo asc";
-$result1 = mysql_query($req1);
+$result1 = DatabaseOperation::convertSqlStatementWithoutKeyToArray($req1);
 echo "<table class=contenu width=100% border=1>";
 if ($result1) {
-    while ($rows1 = mysql_fetch_array($result1)) {
+    foreach ($result1 as $rows1) {
 
         echo "<tr class=titre>";
         echo "<td>";
@@ -207,8 +207,8 @@ if ($result1) {
 
         //Affichage des jours de la semaine (entête de colonne)
         $req2 = "select nom_annexe_jours_semaine from annexe_jours_semaine where id_annexe_jours_semaine<=$maximum_jours order by id_annexe_jours_semaine asc";
-        $result2 = mysql_query($req2);
-        while ($rows2 = mysql_fetch_array($result2)) {
+        $result2 = DatabaseOperation::convertSqlStatementWithoutKeyToArray($req2);
+        foreach ($result2 as $rows2) {
             echo "<td width=15%>";
             echo stripslashes($rows2[nom_annexe_jours_semaine]);
             echo "</td>";
@@ -242,9 +242,9 @@ if ($result1) {
                 . "AND annee_planning_presence_semaine_visible='" . $annee_en_cours . "' "
                 . "GROUP BY `access_materiel_service`.`K_service`, `access_materiel_service`.`nom_service`"
         ;
-        $result3 = mysql_query($req3);
+        $result3 = DatabaseOperation::convertSqlStatementWithoutKeyToArray($req3);
         if ($result3) {
-            while ($rows3 = mysql_fetch_array($result3)) {
+            foreach ($result3 as $rows3) {
                 echo "</tr>";
                 echo "<tr>";
                 echo "<td>";
@@ -252,7 +252,7 @@ if ($result1) {
                 echo "</tr>";
                 $result4 = tableau_planning_selectionne($semaine_en_cours, $annee_en_cours, $rows3["K_service"], $rows1["id_geo"]);
                 if ($result4) {
-                    while ($rows4 = mysql_fetch_array($result4)) {
+                    foreach ($result4 as $rows4) {
                         echo "<tr>";
                         echo "<td>";
                         echo stripslashes($rows4[nom]) . " " . stripslashes($rows4[prenom]);

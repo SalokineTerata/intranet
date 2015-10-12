@@ -39,7 +39,7 @@ function tableau_planning_selectionne($semaine_en_cours, $annee_en_cours, $servi
 
 //echo $req1;
 //Execution de la requête SQL
-    $result1 = mysql_query($req1);
+    $result1 = DatabaseOperation::convertSqlStatementWithoutKeyToArray($req1);
     return $result1;
 }
 

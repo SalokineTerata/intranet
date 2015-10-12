@@ -6,7 +6,7 @@
 require_once('../lib/functions_js.php');
 Lib::includeJS('../plugins/dhtmlgoodies_calendar/dhtmlgoodies_calendar/dhtmlgoodies_calendar.js');
 
-if ($module != 'lib') {
+if ($module != 'lib' or $module != 'php' ) {
     //include ('../$module/functions.js');
     //echo '<script type=\'text/javascript\' src=\''.'../$module/functions.js'.'\'></script>';
     require_once('../' . Lib::getModule() . '/functions_js.php');

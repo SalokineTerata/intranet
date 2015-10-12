@@ -6,10 +6,12 @@
 require_once('../lib/functions_js.php');
 Lib::includeJS('../plugins/dhtmlgoodies_calendar/dhtmlgoodies_calendar/dhtmlgoodies_calendar.js');
 
-if ($module != 'lib' or $module != 'php' ) {
+if ($module != 'lib') {
     //include ('../$module/functions.js');
     //echo '<script type=\'text/javascript\' src=\''.'../$module/functions.js'.'\'></script>';
-    require_once('../' . Lib::getModule() . '/functions_js.php');
+    if ($module <> 'php') {
+        require_once('../' . Lib::getModule() . '/functions_js.php');
+    }
     //Lib::includeJS('../'.Lib::getModule().'/functions_js.php');
 }
 ?>

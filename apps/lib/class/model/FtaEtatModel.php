@@ -66,13 +66,6 @@ class FtaEtatModel extends AbstractModel {
      */
     public static function getIdFtaByEtatAvancement($paramSyntheseAction, $paramEtat, $paramRole, $paramIdUser, $paramIdFtaEtat) {
 
-        /**
-         * Vérification des droits de l'utilisateur connectée.
-         */
-        $fta_modification = IntranetDroitsAccesModel::getFtaModification($paramIdUser);
-
-        $fta_consultation = IntranetDroitsAccesModel::getFtaConsultation($paramIdUser);
-
         switch ($paramSyntheseAction) {
 
             case FtaEtatModel::ETAT_AVANCEMENT_VALUE_ATTENTE:

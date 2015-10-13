@@ -116,4 +116,64 @@ class FtaWorkflowModel extends AbstractModel {
         return $listeSiteWorkflow;
     }
 
+    static public function MigrationIntranetWorkflowAttribution($paramSitedeProduction, $paramIdFtaEtat, $paramCreateurFta) {
+        if ($paramIdFtaEtat <> '8') {
+            if ($paramSitedeProduction == '1' or $paramSitedeProduction == '3'or $paramSitedeProduction == '6' or $paramSitedeProduction == '11' or $paramSitedeProduction == '0') {
+                switch ($paramCreateurFta) {
+                    //identifiant de l'utilisateur 
+                    case '-2':
+                    case '-1':
+                    case '43':
+                    case '48':
+                    case '58':
+                    case '71':
+                    case '207':
+                    case '237':
+                    case '292':
+                    case '318':
+                    case '426':
+                    case '492':
+                    case '493':
+                    case '521':
+                    case '534':
+                    case '544':
+                    case '556':
+                    case '557':
+                    case '558':
+                    case '559':
+                    case '560':
+                    case '572':
+                        $idFtaWorkflow = '6';
+                        break;
+                    case '196':
+                    case '278':
+                    case '371':
+                    case '379':
+                    case '445':
+                    case '457':
+                    case '473':
+                    case '474':
+                    case '484':
+                    case '487':
+                    case '501':
+                    case '512':
+                    case '562':
+                    case '563':
+                        $idFtaWorkflow = '2';
+                        break;
+                    case '262':
+                    case '361':
+                        $idFtaWorkflow = '3';
+                        break;
+                }
+            } else {
+                $idFtaWorkflow = '8';
+            }
+        }else {
+            $idFtaWorkflow = '9';
+        }
+
+        return $idFtaWorkflow;
+    }
+
 }

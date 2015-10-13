@@ -1,32 +1,8 @@
 <?php
-
-//Redirection vers la page par défaut du module
-//header ("Location: indexft.php");
-
-/*
-  Module d'appartenance (valeur obligatoire)
-  Par défaut, le nom du module est le répetoire courant
- */
-
-//$module=substr(strrchr('pwd', '/'), 1);
-//$module=trim($module);
-
-/*
-  Si la page peut être appelée depuis n'importe quel module,
-  décommentez la ligne suivante
- */
-
-//   $module='fta';
-
 /* * *******
   Inclusions
  * ******* */
-//include ("../lib/session.php");         //Récupération des variables de sessions
-//include ("../lib/debut_page.php");      //Affichage des éléments commun à l'Intranet
-require_once '../inc/main.php';
-print_page_begin($disable_full_page, $menu_file);
-
-
+require_once './inculde2.0to3.0.php';
 
 /* * ***********
   Début Code PHP
@@ -34,35 +10,24 @@ print_page_begin($disable_full_page, $menu_file);
 
 /*
   Initialisation des variables
- */
-$page_default = substr(strrchr($_SERVER["PHP_SELF"], '/'), '1', '-4');
-$page_action = $page_default . "_post.php";
-$page_pdf = $page_default . "_pdf.php";
-$action = 'valider';                       //Action proposée à la page _post.php
-$method = 'method=post';                   //Pour une url > 2000 caractères, ne pas utiliser utiliser GET
-$html_table = "table "                     //Permet d'harmoniser les tableaux
-        . "width=100% "
-        . "class=titre "
-;
-//$html_image_modif = "&nbsp;<img src=../lib/images/exclamation.png alt=\"\" title=\"Information mise à jour\" width=\"20\" height=\"18\" border=\"0\" />";
-//$html_color_modif = "bgcolor=#B0FFFE";
-$version_modif = 1;                        //Activer la visualisation des modifications effectuées depuis la version précédente
-$show_help = 1;                              //Activer l'aide en ligne Pop-up
-$bloc = "";
+*/
 
-/**
- * @todo  règle de nommage du lancement 
- * Attention dans la version 2 de la BDD certains champs possèdent des accents
- * -fta.Unité_Facturation
- * -fta.Coût_Denrée
- * -fta.Coût_Emballage
- * -fta.Coût_Autre
- * -fta.Coût_PF
- * Lors du transfère retier les clé étrangère entre les tables
- */
+$hostname_connect = "dev-intranet.agis.fr"; //nom du serveur MySQL de connection � la base de donn�e
+$database_connect = "intranet_v3_0_dev"; //nom de la base de donn�e sur votre serveur MySQL
+$username_connect = "root"; //login de la base MySQL
+$password_connect = "8ale!ne"; //mot de passe de la base MySQL
+
+$donnee = mysql_pconnect($hostname_connect, $username_connect, $password_connect);
+mysql_select_db($database_connect);
+mysql_query('SET NAMES utf8');
+
+
 /**
  * Création de la base de données
  */
+echo "*** Requêtes SQL:\n";
+
+
 //ini_set('memory_limit', '-1'); 
 //{
 //    DatabaseOperation::execute(
@@ -78,10 +43,28 @@ $bloc = "";
 // * Recuperations des données de la V2 avec la structure de la V3
 // */ {
 //
-//    DatabaseOperation::execute(
+
+/**
+Tables basiques
+**/
+
+if(TRUE){
+
+echo "CREATE TABLE intranet_v3_0_dev.classification_arborescence_article ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.classification_arborescence_article LIKE intranet_v3_0_cod.classification_arborescence_article";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.classification_arborescence_article ...";
+$sql = "INSERT INTO intranet_v3_0_dev.classification_arborescence_article SELECT * FROM intranet_v2_0_prod.classification_arborescence_article";
+if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+}
+
+//    mysql_query(
 //            "CREATE TABLE intranet_v3_0_dev.classification_arborescence_article LIKE intranet_v3_0_cod.classification_arborescence_article ;"
 //            . " INSERT INTO intranet_v3_0_dev.classification_arborescence_article SELECT * FROM intranet_v2_0_prod.classification_arborescence_article;"
 //    );
+
 //    DatabaseOperation::execute(
 //            "CREATE TABLE intranet_v3_0_dev.classification_arborescence_article_categorie LIKE intranet_v3_0_cod.classification_arborescence_article_categorie ;"
 //            . " INSERT INTO intranet_v3_0_dev.classification_arborescence_article_categorie SELECT * FROM intranet_v2_0_prod.classification_arborescence_article_categorie;"
@@ -1568,8 +1551,7 @@ $bloc = "";
 //)");
 
 
-
-
+/*
 
 $hostname_connect = "dev-intranet.agis.fr"; //nom du serveur MySQL de connection � la base de donn�e
 $database_connect = "intranet_v3_0_dev"; //nom de la base de donn�e sur votre serveur MySQL
@@ -1580,6 +1562,9 @@ $password_connect = "8ale!ne"; //mot de passe de la base MySQL
 
 
 $donnee = mysql_pconnect($hostname_connect, $username_connect, $password_connect) or die("connexion impossible");
+
+
+*/
 
 //foreach ($arrayTableFta as $value) {
 //    /**
@@ -1955,6 +1940,9 @@ $donnee = mysql_pconnect($hostname_connect, $username_connect, $password_connect
 /**
  * Second traitment fta suivie de projet
  */
+
+/*
+
 $arrayIdFtaSuiviProjet = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
                 "SELECT DISTINCT fta_suivi_projet.id_fta,id_fta_etat,createur_fta FROM intranet_v3_0_dev.fta_suivi_projet,intranet_v3_0_dev.fta "
 );
@@ -1965,6 +1953,8 @@ foreach ($arrayIdFtaSuiviProjet as $rowsIdFtaSuiviProjet) {
 
     FtaSuiviProjetModel::initFtaSuiviProjetV2VersV3($idFta,$idFtaEtat,$createurFta);
 }
+
+*/
 
 ///**
 // * Composition
@@ -2478,13 +2468,20 @@ foreach ($arrayIdFtaSuiviProjet as $rowsIdFtaSuiviProjet) {
 //        $resultFalse = $resultquery39;
 //    }
 //}
+/*
+
 mysql_close();
 
 $bloc .="Vous avez bien envoyer les données dans la table";
 
+*/
+
+
 /**
  * Rendu HTML
  */
+/*
+
 echo "
 $navigue
 <form $method action = \"$page_action\" name=\"form_action\" method=\"post\">
@@ -2509,6 +2506,7 @@ $navigue
      </form>
 
      ";
+*/
 
 //$recordSetFta = new FtaModel($id_fta);
 //$test = $recordSetFta->getFieldNomDemandeur();
@@ -2525,7 +2523,7 @@ $navigue
 /* * *********************
   Inclusion de fin de page
  * ********************* */
-include ("../lib/fin_page.inc");
+//include ("../lib/fin_page.inc");
 
 //SELECT DISTINCT *
 //                FROM intranet_v2_0_prod.access_arti2,intranet_v2_0_prod.fta
@@ -2566,4 +2564,4 @@ include ("../lib/fin_page.inc");
 //WHERE fta_composant.id_geo = geo.id_geo
 //)
 //AND fta.id_fta = fta_composant.id_fta
-        
+ 

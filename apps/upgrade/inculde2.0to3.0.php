@@ -12,6 +12,7 @@
 /* * ***************************************************************************
   Inclusion des plugins
  * ************************************************************************** */
+/*
 require_once('../plugins/htmlMimeMail-2.5.1/htmlMimeMail.php');
 
 //Free PDF: Classe Racine
@@ -22,15 +23,17 @@ require_once ($fpdf_path . 'fpdf.php');
 
 //Extension Free PDF Import: Etend la Classe FPDF vers FPDI
 require_once ('../plugins/fpdi/fpdi.php');
+*/
 
+/*
 
 // Inclusions génériques
 require_once('../lib/class/configuration/GlobalConfig.php');
 require_once('../lib/functions.php');
-require_once('../lib/functions.mail.php');
+//require_once('../lib/functions.mail.php');
 require_once('../lib/functions.mysql.php');
-require_once('../lib/functions.pdf.php');
-require_once('../lib/functions.html.php');
+//require_once('../lib/functions.pdf.php');
+//require_once('../lib/functions.html.php');
 require_once('../lib/class/Lib.php');
 require_once('../lib/class/Logger.php');
 require_once('../lib/class/LoggerClass.php');
@@ -222,6 +225,10 @@ require_once('../lib/class/html/DataFieldToHtmlTextArea.php');
 require_once('../lib/class/html/DataFieldToHtmlSubForm_R1N.php');
 require_once('../lib/class/html/DataFieldToHtmlSubForm_RNN.php');
 
+*/
+
+
+/*
 // Session utilisateur
 require_once('../lib/session.php');
 
@@ -243,4 +250,4 @@ if ($module != 'lib') {
     require_once ('../' . $module . '/functions.php');
 }
 $globalConfig = $_SESSION['globalConfig'];
-
+*/

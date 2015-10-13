@@ -6,20 +6,34 @@
  * Attention à bien ordonner les inclusions en fonction des dépendances
  * 
  */
+/**
+ * Détermination du cas où on est en mode HTTP ou CLI
+ */
+$activeForHttpOnly = FALSE;
+if (filter_input(INPUT_SERVER, 'SERVER_NAME')) {
+    $activeForHttpOnly = TRUE;
+}
+
+
+
 /* * ***************************************************************************
   Inclusion des plugins
  * ************************************************************************** */
-require_once('../plugins/htmlMimeMail-2.5.1/htmlMimeMail.php');
+if ($activeForHttpOnly) {
 
-//Free PDF: Classe Racine
-$fpdf_path = '../plugins/fpdf/';
-define('RELATIVE_PATH', $fpdf_path);
-define('FPDF_FONTPATH', RELATIVE_PATH . 'font/');
-require_once ($fpdf_path . 'fpdf.php');
+    require_once('../plugins/htmlMimeMail-2.5.1/htmlMimeMail.php');
 
-//Extension Free PDF Import: Etend la Classe FPDF vers FPDI
-require_once ('../plugins/fpdi/fpdi.php');
 
+
+    //Free PDF: Classe Racine
+    $fpdf_path = '../plugins/fpdf/';
+    define('RELATIVE_PATH', $fpdf_path);
+    define('FPDF_FONTPATH', RELATIVE_PATH . 'font/');
+    require_once ($fpdf_path . 'fpdf.php');
+
+    //Extension Free PDF Import: Etend la Classe FPDF vers FPDI
+    require_once ('../plugins/fpdi/fpdi.php');
+}
 
 // Inclusions génériques
 require_once('../lib/class/configuration/GlobalConfig.php');

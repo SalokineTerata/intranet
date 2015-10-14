@@ -4670,12 +4670,12 @@ while ($rowsTableFtaSuiviProjet=mysql_fetch_array($resultFtaSuiviPrjet)) {
     $correction_fta_suivi_projettmp2 = str_replace('"', '', $correction_fta_suivi_projettmp);
     $correction_fta_suivi_projet = stripslashes($correction_fta_suivi_projettmp2);
 
-    $arrayIdFtaWorkflow = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
+    $arrayIdFtaWorkflow = mysql_query(
                     "SELECT DISTINCT id_fta_workflow
                      FROM intranet_v3_0_dev.fta WHERE id_fta = " . $idFta
     );
 
-    foreach ($arrayIdFtaWorkflow as $rowIdFtaWorkflow) {
+    while ($rowIdFtaWorkflow=mysql_fetch_array($arrayIdFtaWorkflow)) {
         $idFtaWorkflow = $rowIdFtaWorkflow['id_fta_workflow'];
     }
     

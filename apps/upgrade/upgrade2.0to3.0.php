@@ -4774,6 +4774,8 @@ if(TRUE){
 $arrayIdFtaSuiviProjet = mysql_query(
                 "SELECT DISTINCT fta_suivi_projet.id_fta,id_fta_etat,createur_fta FROM intranet_v3_0_dev.fta_suivi_projet,intranet_v3_0_dev.fta "
 );
+echo "SELECT DISTINCT fta_suivi_projet.id_fta,id_fta_etat,createur_fta FROM intranet_v3_0_dev.fta_suivi_projet ...";
+   if($arrayIdFtaSuiviProjet) {echo "[OK] \n";}else{echo "[FAILED] \n ";}
 
 while ( $rowsIdFtaSuiviProjet=  mysql_fetch_array($arrayIdFtaSuiviProjet)) {
     $idFta = $rowsIdFtaSuiviProjet['id_fta'];

@@ -48,7 +48,7 @@ echo "*** Requêtes SQL:\n";
 Tables basiques
 **/
 
-if(TRUE){
+if(FALSE){
 
 echo "DROP intranet_v3_0_dev.classification_arborescence_article ...";
 $sql = "DROP TABLE intranet_v3_0_dev.classification_arborescence_article";
@@ -619,7 +619,7 @@ if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
 /**
  * Création de tables de la V2 vers V3
  */ 
-if(TRUE){
+if(FALSE){
 
 echo "DROP intranet_v3_0_dev.access_base_degust_mois ...";
 $sql = "DROP TABLE intranet_v3_0_dev.access_base_degust_mois";
@@ -3771,7 +3771,7 @@ if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
 /**
  * Création de tables de la V3
  */ 
-if(TRUE){
+if(FALSE){
  
 echo "DROP intranet_v3_0_dev.fta_saisie_obligatoire ...";
 $sql = "DROP TABLE intranet_v3_0_dev.fta_saisie_obligatoire";
@@ -4178,7 +4178,7 @@ if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
  * Création des tables dépendant de id_user
  */
 
-
+if(FALSE){
 echo "DROP intranet_v3_0_dev.salaries ...";
 $sql = "DROP TABLE intranet_v3_0_dev.salaries";
 if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
@@ -4226,7 +4226,7 @@ $sql = "DROP TABLE intranet_v3_0_dev.lu";
 if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
 
 echo "CREATE TABLE intranet_v3_0_dev.lu ...";
-$sql = "CREATE TABLE intranet_v3_0_dev.lu LIKE intranet_v3_0_cod.lu";
+$sql = "CREATE TABLE intranet_v3_0_dev.lu LIKE intranet_v2_0_prod.lu";
 if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
 
 echo "INSERT INTO intranet_v3_0_dev.lu ...";
@@ -4595,51 +4595,49 @@ VALUES ( \"$idFta\", \"$idAccessArti2\", \"$numft\", \"$idFtaWorkflow\" "
 //        $resultquery2 = DatabaseOperation::execute($sql_inter);
 //    }
 }
-
+}
 /**
  * Affiliation d'un id_user au createur supprimer
  */
-//$arrayChangeIdSiteProduction = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
-//                "SELECT DISTINCT fta.id_fta
-//                FROM intranet_v3_0_dev.fta
-//                WHERE Site_de_production=0 "
-//);
-//if ($arrayChangeIdSiteProduction) {
-//    foreach ($arrayChangeIdSiteProduction as $rowsChangeIdSiteProduction) {
-//        $idFta = $rowsChangeIdSiteProduction[FtaModel::KEYNAME];
-//        $sql_inter = "UPDATE intranet_v3_0_dev." . FtaModel::TABLENAME
-//                . " SET " . FtaModel::FIELDNAME_SITE_ASSEMBLAGE . "=1"
-//                . " WHERE " . FtaModel::KEYNAME . "=" . $idFta;
-//        $resultquery = DatabaseOperation::execute($sql_inter);
-//        if (!$resultquery) {
-//            $resultFalse = $sql_inter;
-//        }
-//    }
-//}
-//$arrayChangeIdUser = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
-//                "SELECT DISTINCT fta.id_fta
-//                FROM intranet_v3_0_dev.fta, intranet_v3_0_dev.salaries
-//                WHERE createur_fta NOT 
-//                IN (
-//                SELECT DISTINCT fta.createur_fta
-//                FROM intranet_v3_0_dev.fta, intranet_v3_0_dev.salaries
-//                WHERE createur_fta = id_user
-//                )"
-//);
-//if ($arrayChangeIdUser) {
-//    foreach ($arrayChangeIdUser as $rowsChangeIdUser) {
-//        $idFta = $rowsChangeIdUser[FtaModel::KEYNAME];
-//        $sql_inter = "UPDATE intranet_v3_0_dev." . FtaModel::TABLENAME
-//                . " SET " . FtaModel::FIELDNAME_CREATEUR . "=-2"
-//                . " WHERE " . FtaModel::KEYNAME . "=" . $idFta;
-//        $resultquery = DatabaseOperation::execute($sql_inter);
-//        if (!$resultquery) {
-//            $resultFalse = $sql_inter;
-//        }
-//    }
-//} else {
-//    echo "Erreur dans le changement d'id de crétauir dans la table fta";
-//}
+
+  $sql ="SELECT DISTINCT fta.id_fta
+         FROM intranet_v3_0_dev.fta
+         WHERE Site_de_production NOT 
+         IN (SELECT id_geo FROM geo) ";
+  
+$resultSiteDEProduction =mysql_query($sql);
+if ($resultFta) {
+    while ($rowsChangeIdSiteProduction=mysql_fetch_array($result1)) {
+        $idFta = $rowsChangeIdSiteProduction[FtaModel::KEYNAME];
+        $sql_inter = "UPDATE intranet_v3_0_dev." . FtaModel::TABLENAME
+                . " SET " . FtaModel::FIELDNAME_SITE_ASSEMBLAGE . "=1"
+                . " WHERE " . FtaModel::KEYNAME . "=" . $idFta;
+    if(mysql_query($sql_inter)) {echo "[OK]\n";}else{echo "[FAILED]\n $sql_inter \n";}
+      
+    }
+}
+             $sql = "SELECT DISTINCT fta.id_fta
+                FROM intranet_v3_0_dev.fta, intranet_v3_0_dev.salaries
+                WHERE createur_fta NOT 
+                IN (
+                SELECT DISTINCT fta.createur_fta
+                FROM intranet_v3_0_dev.fta, intranet_v3_0_dev.salaries
+                WHERE createur_fta = id_user
+                )";
+$resultChangeIdUse =mysql_query($sql);
+
+if ($resultChangeIdUse) {
+    while ($rowsChangeIdUser=mysql_fetch_array($resultChangeIdUse)) {
+        $idFta = $rowsChangeIdUser[FtaModel::KEYNAME];
+        $sql_inter = "UPDATE intranet_v3_0_dev." . FtaModel::TABLENAME
+                . " SET " . FtaModel::FIELDNAME_CREATEUR . "=-2"
+                . " WHERE " . FtaModel::KEYNAME . "=" . $idFta;
+    if(mysql_query($sql_inter)) {echo "[OK]\n";}else{echo "[FAILED]\n $sql_inter \n";}
+      
+    }
+} else {
+    echo "Erreur dans le changement d'id de crétauir dans la table fta";
+}
 
 ///**
 // * Extraction Fta suivi de projet
@@ -5352,3 +5350,4 @@ $navigue
 //)
 //AND fta.id_fta = fta_composant.id_fta
  
+?>

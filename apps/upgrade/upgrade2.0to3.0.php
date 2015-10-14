@@ -4780,8 +4780,8 @@ echo "SELECT DISTINCT fta_suivi_projet.id_fta,id_fta_etat,createur_fta FROM intr
 
 while ( $rowsIdFtaSuiviProjet=  mysql_fetch_array($arrayIdFtaSuiviProjet)) {
     $idFta = $rowsIdFtaSuiviProjet['id_fta'];
-    $idFtaEtat = $rowsTableFtaSuiviProjet['id_fta_etat'];
-    $createurFta = $rowsTableFtaSuiviProjet['createur_fta'];
+    $idFtaEtat = $rowsIdFtaSuiviProjet['id_fta_etat'];
+    $createurFta = $rowsIdFtaSuiviProjet['createur_fta'];
 
     $arrayIdFtaWorkflow = mysql_query(
                         "SELECT DISTINCT id_fta_workflow

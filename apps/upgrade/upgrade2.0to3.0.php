@@ -48,7 +48,7 @@ echo "*** Requêtes SQL:\n";
 Tables basiques
 **/
 
-if(FALSE){
+if(TRUE){
 
 echo "DROP intranet_v3_0_dev.classification_arborescence_article ...";
 $sql = "DROP TABLE intranet_v3_0_dev.classification_arborescence_article";
@@ -619,7 +619,7 @@ if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
 /**
  * Création de tables de la V2 vers V3
  */ 
-if(FALSE){
+if(TRUE){
 
 echo "DROP intranet_v3_0_dev.access_base_degust_mois ...";
 $sql = "DROP TABLE intranet_v3_0_dev.access_base_degust_mois";
@@ -2086,821 +2086,2208 @@ echo "INSERT INTO intranet_v3_0_dev.access_rcp_Correspondance_mois_exercice ..."
 $sql = "INSERT INTO intranet_v3_0_dev.access_rcp_Correspondance_mois_exercice SELECT * FROM intranet_v2_0_prod.access_rcp_Correspondance_mois_exercice";
 if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
 
+echo "DROP intranet_v3_0_dev.access_rcp_Couts_a_ventiler_Articles_Saisonniers ...";
+$sql = "DROP TABLE intranet_v3_0_dev.access_rcp_Couts_a_ventiler_Articles_Saisonniers";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.access_rcp_Couts_a_ventiler_Articles_Saisonniers ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.access_rcp_Couts_a_ventiler_Articles_Saisonniers LIKE intranet_v2_0_prod.access_rcp_Couts_a_ventiler_Articles_Saisonniers";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.access_rcp_Couts_a_ventiler_Articles_Saisonniers ...";
+$sql = "INSERT INTO intranet_v3_0_dev.access_rcp_Couts_a_ventiler_Articles_Saisonniers SELECT * FROM intranet_v2_0_prod.access_rcp_Couts_a_ventiler_Articles_Saisonniers";
+if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.access_rcp_Donnees_CLIENTS_ARTICLES ...";
+$sql = "DROP TABLE intranet_v3_0_dev.access_rcp_Donnees_CLIENTS_ARTICLES";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.access_rcp_Donnees_CLIENTS_ARTICLES ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.access_rcp_Donnees_CLIENTS_ARTICLES LIKE intranet_v2_0_prod.access_rcp_Donnees_CLIENTS_ARTICLES";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.access_rcp_Donnees_CLIENTS_ARTICLES ...";
+$sql = "INSERT INTO intranet_v3_0_dev.access_rcp_Donnees_CLIENTS_ARTICLES SELECT * FROM intranet_v2_0_prod.access_rcp_Donnees_CLIENTS_ARTICLES";
+if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.access_rcp_Liste_Diffusion ...";
+$sql = "DROP TABLE intranet_v3_0_dev.access_rcp_Liste_Diffusion";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.access_rcp_Liste_Diffusion ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.access_rcp_Liste_Diffusion LIKE intranet_v2_0_prod.access_rcp_Liste_Diffusion";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.access_rcp_Liste_Diffusion ...";
+$sql = "INSERT INTO intranet_v3_0_dev.access_rcp_Liste_Diffusion SELECT * FROM intranet_v2_0_prod.access_rcp_Liste_Diffusion";
+if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.access_rcp_Mois ...";
+$sql = "DROP TABLE intranet_v3_0_dev.access_rcp_Mois";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.access_rcp_Mois ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.access_rcp_Mois LIKE intranet_v2_0_prod.access_rcp_Mois";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.access_rcp_Mois ...";
+$sql = "INSERT INTO intranet_v3_0_dev.access_rcp_Mois SELECT * FROM intranet_v2_0_prod.access_rcp_Mois";
+if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.access_recettes_multi_composition ...";
+$sql = "DROP TABLE intranet_v3_0_dev.access_recettes_multi_composition";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.access_recettes_multi_composition ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.access_recettes_multi_composition LIKE intranet_v2_0_prod.access_recettes_multi_composition";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.access_recettes_multi_composition ...";
+$sql = "INSERT INTO intranet_v3_0_dev.access_recettes_multi_composition SELECT * FROM intranet_v2_0_prod.access_recettes_multi_composition";
+if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.access_recettes_multi_cout_fab ...";
+$sql = "DROP TABLE intranet_v3_0_dev.access_recettes_multi_cout_fab";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.access_recettes_multi_cout_fab ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.access_recettes_multi_cout_fab LIKE intranet_v2_0_prod.access_recettes_multi_cout_fab";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.access_recettes_multi_cout_fab ...";
+$sql = "INSERT INTO intranet_v3_0_dev.access_recettes_multi_cout_fab SELECT * FROM intranet_v2_0_prod.access_recettes_multi_cout_fab";
+if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.access_recettes_multi_frais_de_transport ...";
+$sql = "DROP TABLE intranet_v3_0_dev.access_recettes_multi_frais_de_transport";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.access_recettes_multi_frais_de_transport ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.access_recettes_multi_frais_de_transport LIKE intranet_v2_0_prod.access_recettes_multi_frais_de_transport";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.access_recettes_multi_frais_de_transport ...";
+$sql = "INSERT INTO intranet_v3_0_dev.access_recettes_multi_frais_de_transport SELECT * FROM intranet_v2_0_prod.access_recettes_multi_frais_de_transport";
+if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.access_recettes_multi_gammes ...";
+$sql = "DROP TABLE intranet_v3_0_dev.access_recettes_multi_gammes";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.access_recettes_multi_gammes ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.access_recettes_multi_gammes LIKE intranet_v2_0_prod.access_recettes_multi_gammes";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.access_recettes_multi_gammes ...";
+$sql = "INSERT INTO intranet_v3_0_dev.access_recettes_multi_gammes SELECT * FROM intranet_v2_0_prod.access_recettes_multi_gammes";
+if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.access_recettes_multi_importation_matiere ...";
+$sql = "DROP TABLE intranet_v3_0_dev.access_recettes_multi_importation_matiere";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.access_recettes_multi_importation_matiere ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.access_recettes_multi_importation_matiere LIKE intranet_v2_0_prod.access_recettes_multi_importation_matiere";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.access_recettes_multi_importation_matiere ...";
+$sql = "INSERT INTO intranet_v3_0_dev.access_recettes_multi_importation_matiere SELECT * FROM intranet_v2_0_prod.access_recettes_multi_importation_matiere";
+if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.access_recettes_multi_importation_tarif ...";
+$sql = "DROP TABLE intranet_v3_0_dev.access_recettes_multi_importation_tarif";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.access_recettes_multi_importation_tarif ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.access_recettes_multi_importation_tarif LIKE intranet_v2_0_prod.access_recettes_multi_importation_tarif";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.access_recettes_multi_importation_tarif ...";
+$sql = "INSERT INTO intranet_v3_0_dev.access_recettes_multi_importation_tarif SELECT * FROM intranet_v2_0_prod.access_recettes_multi_importation_tarif";
+if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.access_recettes_multi_infologic_fournisseurs ...";
+$sql = "DROP TABLE intranet_v3_0_dev.access_recettes_multi_infologic_fournisseurs";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.access_recettes_multi_infologic_fournisseurs ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.access_recettes_multi_infologic_fournisseurs LIKE intranet_v2_0_prod.access_recettes_multi_infologic_fournisseurs";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.access_recettes_multi_infologic_fournisseurs ...";
+$sql = "INSERT INTO intranet_v3_0_dev.access_recettes_multi_infologic_fournisseurs SELECT * FROM intranet_v2_0_prod.access_recettes_multi_infologic_fournisseurs";
+if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.access_recettes_multi_infologic_unite ...";
+$sql = "DROP TABLE intranet_v3_0_dev.access_recettes_multi_infologic_unite";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.access_recettes_multi_infologic_unite ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.access_recettes_multi_infologic_unite LIKE intranet_v2_0_prod.access_recettes_multi_infologic_unite";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.access_recettes_multi_infologic_unite ...";
+$sql = "INSERT INTO intranet_v3_0_dev.access_recettes_multi_infologic_unite SELECT * FROM intranet_v2_0_prod.access_recettes_multi_infologic_unite";
+if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.access_recettes_multi_ingredients ...";
+$sql = "DROP TABLE intranet_v3_0_dev.access_recettes_multi_ingredients";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.access_recettes_multi_ingredients ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.access_recettes_multi_ingredients LIKE intranet_v2_0_prod.access_recettes_multi_ingredients";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.access_recettes_multi_ingredients ...";
+$sql = "INSERT INTO intranet_v3_0_dev.access_recettes_multi_ingredients SELECT * FROM intranet_v2_0_prod.access_recettes_multi_ingredients";
+if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.access_recettes_multi_recette ...";
+$sql = "DROP TABLE intranet_v3_0_dev.access_recettes_multi_recette";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.access_recettes_multi_recette ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.access_recettes_multi_recette LIKE intranet_v2_0_prod.access_recettes_multi_recette";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.access_recettes_multi_recette ...";
+$sql = "INSERT INTO intranet_v3_0_dev.access_recettes_multi_recette SELECT * FROM intranet_v2_0_prod.access_recettes_multi_recette";
+if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.access_recettes_multi_stades ...";
+$sql = "DROP TABLE intranet_v3_0_dev.access_recettes_multi_stades";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.access_recettes_multi_stades ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.access_recettes_multi_stades LIKE intranet_v2_0_prod.access_recettes_multi_stades";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.access_recettes_multi_stades ...";
+$sql = "INSERT INTO intranet_v3_0_dev.access_recettes_multi_stades SELECT * FROM intranet_v2_0_prod.access_recettes_multi_stades";
+if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.access_recettes_multi_unites ...";
+$sql = "DROP TABLE intranet_v3_0_dev.access_recettes_multi_unites";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.access_recettes_multi_unites ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.access_recettes_multi_unites LIKE intranet_v2_0_prod.access_recettes_multi_unites";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.access_recettes_multi_unites ...";
+$sql = "INSERT INTO intranet_v3_0_dev.access_recettes_multi_unites SELECT * FROM intranet_v2_0_prod.access_recettes_multi_unites";
+if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.access_regroupements ...";
+$sql = "DROP TABLE intranet_v3_0_dev.access_regroupements";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.access_regroupements ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.access_regroupements LIKE intranet_v2_0_prod.access_regroupements";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.access_regroupements ...";
+$sql = "INSERT INTO intranet_v3_0_dev.access_regroupements SELECT * FROM intranet_v2_0_prod.access_regroupements";
+if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.access_risq_pro_intranet_SITES ...";
+$sql = "DROP TABLE intranet_v3_0_dev.access_risq_pro_intranet_SITES";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.access_risq_pro_intranet_SITES ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.access_risq_pro_intranet_SITES LIKE intranet_v2_0_prod.access_risq_pro_intranet_SITES";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.access_risq_pro_intranet_SITES ...";
+$sql = "INSERT INTO intranet_v3_0_dev.access_risq_pro_intranet_SITES SELECT * FROM intranet_v2_0_prod.access_risq_pro_intranet_SITES";
+if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.access_risq_pro_intranet_etat_dossier ...";
+$sql = "DROP TABLE intranet_v3_0_dev.access_risq_pro_intranet_etat_dossier";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.access_risq_pro_intranet_etat_dossier ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.access_risq_pro_intranet_etat_dossier LIKE intranet_v2_0_prod.access_risq_pro_intranet_etat_dossier";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.access_risq_pro_intranet_etat_dossier ...";
+$sql = "INSERT INTO intranet_v3_0_dev.access_risq_pro_intranet_etat_dossier SELECT * FROM intranet_v2_0_prod.access_risq_pro_intranet_etat_dossier";
+if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.access_risq_pro_intranet_evaluation_risque ...";
+$sql = "DROP TABLE intranet_v3_0_dev.access_risq_pro_intranet_evaluation_risque";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.access_risq_pro_intranet_evaluation_risque ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.access_risq_pro_intranet_evaluation_risque LIKE intranet_v2_0_prod.access_risq_pro_intranet_evaluation_risque";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.access_risq_pro_intranet_evaluation_risque ...";
+$sql = "INSERT INTO intranet_v3_0_dev.access_risq_pro_intranet_evaluation_risque SELECT * FROM intranet_v2_0_prod.access_risq_pro_intranet_evaluation_risque";
+if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.access_risq_pro_intranet_gravites ...";
+$sql = "DROP TABLE intranet_v3_0_dev.access_risq_pro_intranet_gravites";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.access_risq_pro_intranet_gravites ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.access_risq_pro_intranet_gravites LIKE intranet_v2_0_prod.access_risq_pro_intranet_gravites";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.access_risq_pro_intranet_gravites ...";
+$sql = "INSERT INTO intranet_v3_0_dev.access_risq_pro_intranet_gravites SELECT * FROM intranet_v2_0_prod.access_risq_pro_intranet_gravites";
+if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.access_risq_pro_intranet_identification_codes_risque ...";
+$sql = "DROP TABLE intranet_v3_0_dev.access_risq_pro_intranet_identification_codes_risque";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.access_risq_pro_intranet_identification_codes_risque ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.access_risq_pro_intranet_identification_codes_risque LIKE intranet_v2_0_prod.access_risq_pro_intranet_identification_codes_risque";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.access_risq_pro_intranet_identification_codes_risque ...";
+$sql = "INSERT INTO intranet_v3_0_dev.access_risq_pro_intranet_identification_codes_risque SELECT * FROM intranet_v2_0_prod.access_risq_pro_intranet_identification_codes_risque";
+if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.access_risq_pro_intranet_matrice_risque ...";
+$sql = "DROP TABLE intranet_v3_0_dev.access_risq_pro_intranet_matrice_risque";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.access_risq_pro_intranet_matrice_risque ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.access_risq_pro_intranet_matrice_risque LIKE intranet_v2_0_prod.access_risq_pro_intranet_matrice_risque";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.access_risq_pro_intranet_matrice_risque ...";
+$sql = "INSERT INTO intranet_v3_0_dev.access_risq_pro_intranet_matrice_risque SELECT * FROM intranet_v2_0_prod.access_risq_pro_intranet_matrice_risque";
+if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.access_risq_pro_intranet_nature_risque ...";
+$sql = "DROP TABLE intranet_v3_0_dev.access_risq_pro_intranet_nature_risque";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.access_risq_pro_intranet_nature_risque ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.access_risq_pro_intranet_nature_risque LIKE intranet_v2_0_prod.access_risq_pro_intranet_nature_risque";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.access_risq_pro_intranet_nature_risque ...";
+$sql = "INSERT INTO intranet_v3_0_dev.access_risq_pro_intranet_nature_risque SELECT * FROM intranet_v2_0_prod.access_risq_pro_intranet_nature_risque";
+if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.access_risq_pro_intranet_probabilites ...";
+$sql = "DROP TABLE intranet_v3_0_dev.access_risq_pro_intranet_probabilites";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.access_risq_pro_intranet_probabilites ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.access_risq_pro_intranet_probabilites LIKE intranet_v2_0_prod.access_risq_pro_intranet_probabilites";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.access_risq_pro_intranet_probabilites ...";
+$sql = "INSERT INTO intranet_v3_0_dev.access_risq_pro_intranet_probabilites SELECT * FROM intranet_v2_0_prod.access_risq_pro_intranet_probabilites";
+if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.access_risq_pro_intranet_risques ...";
+$sql = "DROP TABLE intranet_v3_0_dev.access_risq_pro_intranet_risques";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.access_risq_pro_intranet_risques ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.access_risq_pro_intranet_risques LIKE intranet_v2_0_prod.access_risq_pro_intranet_risques";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.access_risq_pro_intranet_risques ...";
+$sql = "INSERT INTO intranet_v3_0_dev.access_risq_pro_intranet_risques SELECT * FROM intranet_v2_0_prod.access_risq_pro_intranet_risques";
+if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.access_risq_pro_intranet_secteurs ...";
+$sql = "DROP TABLE intranet_v3_0_dev.access_risq_pro_intranet_secteurs";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.access_risq_pro_intranet_secteurs ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.access_risq_pro_intranet_secteurs LIKE intranet_v2_0_prod.access_risq_pro_intranet_secteurs";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.access_risq_pro_intranet_secteurs ...";
+$sql = "INSERT INTO intranet_v3_0_dev.access_risq_pro_intranet_secteurs SELECT * FROM intranet_v2_0_prod.access_risq_pro_intranet_secteurs";
+if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.access_ruptures_commandes ...";
+$sql = "DROP TABLE intranet_v3_0_dev.access_ruptures_commandes";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.access_ruptures_commandes ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.access_ruptures_commandes LIKE intranet_v2_0_prod.access_ruptures_commandes";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.access_ruptures_commandes ...";
+$sql = "INSERT INTO intranet_v3_0_dev.access_ruptures_commandes SELECT * FROM intranet_v2_0_prod.access_ruptures_commandes";
+if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.access_ruptures_donnees_CLIENTS_ARTICLES ...";
+$sql = "DROP TABLE intranet_v3_0_dev.access_ruptures_donnees_CLIENTS_ARTICLES";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.access_ruptures_donnees_CLIENTS_ARTICLES ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.access_ruptures_donnees_CLIENTS_ARTICLES LIKE intranet_v2_0_prod.access_ruptures_donnees_CLIENTS_ARTICLES";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.access_ruptures_donnees_CLIENTS_ARTICLES ...";
+$sql = "INSERT INTO intranet_v3_0_dev.access_ruptures_donnees_CLIENTS_ARTICLES SELECT * FROM intranet_v2_0_prod.access_ruptures_donnees_CLIENTS_ARTICLES";
+if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.access_ruptures_commandes_details ...";
+$sql = "DROP TABLE intranet_v3_0_dev.access_ruptures_commandes_details";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.access_ruptures_commandes_details ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.access_ruptures_commandes_details LIKE intranet_v2_0_prod.access_ruptures_commandes_details";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.access_ruptures_commandes_details ...";
+$sql = "INSERT INTO intranet_v3_0_dev.access_ruptures_commandes_details SELECT * FROM intranet_v2_0_prod.access_ruptures_commandes_details";
+if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.access_ruptures_donnees_CLIENTS_ARTICLES_Ruptures_motif ...";
+$sql = "DROP TABLE intranet_v3_0_dev.access_ruptures_donnees_CLIENTS_ARTICLES_Ruptures_motif";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.access_ruptures_donnees_CLIENTS_ARTICLES_Ruptures_motif ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.access_ruptures_donnees_CLIENTS_ARTICLES_Ruptures_motif LIKE intranet_v2_0_prod.access_ruptures_donnees_CLIENTS_ARTICLES_Ruptures_motif";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.access_ruptures_donnees_CLIENTS_ARTICLES_Ruptures_motif ...";
+$sql = "INSERT INTO intranet_v3_0_dev.access_ruptures_donnees_CLIENTS_ARTICLES_Ruptures_motif SELECT * FROM intranet_v2_0_prod.access_ruptures_donnees_CLIENTS_ARTICLES_Ruptures_motif";
+if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.access_ruptures_export_code_langue ...";
+$sql = "DROP TABLE intranet_v3_0_dev.access_ruptures_export_code_langue";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.access_ruptures_export_code_langue ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.access_ruptures_export_code_langue LIKE intranet_v2_0_prod.access_ruptures_export_code_langue";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.access_ruptures_export_code_langue ...";
+$sql = "INSERT INTO intranet_v3_0_dev.access_ruptures_export_code_langue SELECT * FROM intranet_v2_0_prod.access_ruptures_export_code_langue";
+if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.access_ruptures_export_libelles_etrangers ...";
+$sql = "DROP TABLE intranet_v3_0_dev.access_ruptures_export_libelles_etrangers";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.access_ruptures_export_libelles_etrangers ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.access_ruptures_export_libelles_etrangers LIKE intranet_v2_0_prod.access_ruptures_export_libelles_etrangers";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.access_ruptures_export_libelles_etrangers ...";
+$sql = "INSERT INTO intranet_v3_0_dev.access_ruptures_export_libelles_etrangers SELECT * FROM intranet_v2_0_prod.access_ruptures_export_libelles_etrangers";
+if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.access_ruptures_suivi ...";
+$sql = "DROP TABLE intranet_v3_0_dev.access_ruptures_suivi";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.access_ruptures_suivi ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.access_ruptures_suivi LIKE intranet_v2_0_prod.access_ruptures_suivi";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.access_ruptures_suivi ...";
+$sql = "INSERT INTO intranet_v3_0_dev.access_ruptures_suivi SELECT * FROM intranet_v2_0_prod.access_ruptures_suivi";
+if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.access_ruptures_type_manquant ...";
+$sql = "DROP TABLE intranet_v3_0_dev.access_ruptures_type_manquant";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.access_ruptures_type_manquant ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.access_ruptures_type_manquant LIKE intranet_v2_0_prod.access_ruptures_type_manquant";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.access_ruptures_type_manquant ...";
+$sql = "INSERT INTO intranet_v3_0_dev.access_ruptures_type_manquant SELECT * FROM intranet_v2_0_prod.access_ruptures_type_manquant";
+if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.access_service_consommateur_ciliviltes ...";
+$sql = "DROP TABLE intranet_v3_0_dev.access_service_consommateur_ciliviltes";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.access_service_consommateur_ciliviltes ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.access_service_consommateur_ciliviltes LIKE intranet_v2_0_prod.access_service_consommateur_ciliviltes";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.access_service_consommateur_ciliviltes ...";
+$sql = "INSERT INTO intranet_v3_0_dev.access_service_consommateur_ciliviltes SELECT * FROM intranet_v2_0_prod.access_service_consommateur_ciliviltes";
+if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.access_service_consommateur_consommateur ...";
+$sql = "DROP TABLE intranet_v3_0_dev.access_service_consommateur_consommateur";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.access_service_consommateur_consommateur ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.access_service_consommateur_consommateur LIKE intranet_v2_0_prod.access_service_consommateur_consommateur";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.access_service_consommateur_consommateur ...";
+$sql = "INSERT INTO intranet_v3_0_dev.access_service_consommateur_consommateur SELECT * FROM intranet_v2_0_prod.access_service_consommateur_consommateur";
+if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.access_service_consommateur_lettres_types ...";
+$sql = "DROP TABLE intranet_v3_0_dev.access_service_consommateur_lettres_types";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.access_service_consommateur_lettres_types ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.access_service_consommateur_lettres_types LIKE intranet_v2_0_prod.access_service_consommateur_lettres_types";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.access_service_consommateur_lettres_types ...";
+$sql = "INSERT INTO intranet_v3_0_dev.access_service_consommateur_lettres_types SELECT * FROM intranet_v2_0_prod.access_service_consommateur_lettres_types";
+if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.access_service_consommateur_liste_diffusion ...";
+$sql = "DROP TABLE intranet_v3_0_dev.access_service_consommateur_liste_diffusion";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.access_service_consommateur_liste_diffusion ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.access_service_consommateur_liste_diffusion LIKE intranet_v2_0_prod.access_service_consommateur_liste_diffusion";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.access_service_consommateur_liste_diffusion ...";
+$sql = "INSERT INTO intranet_v3_0_dev.access_service_consommateur_liste_diffusion SELECT * FROM intranet_v2_0_prod.access_service_consommateur_liste_diffusion";
+if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.access_service_consommateur_mesure_corrective ...";
+$sql = "DROP TABLE intranet_v3_0_dev.access_service_consommateur_mesure_corrective";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.access_service_consommateur_mesure_corrective ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.access_service_consommateur_mesure_corrective LIKE intranet_v2_0_prod.access_service_consommateur_mesure_corrective";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.access_service_consommateur_mesure_corrective ...";
+$sql = "INSERT INTO intranet_v3_0_dev.access_service_consommateur_mesure_corrective SELECT * FROM intranet_v2_0_prod.access_service_consommateur_mesure_corrective";
+if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.access_service_consommateur_niveau_gravite ...";
+$sql = "DROP TABLE intranet_v3_0_dev.access_service_consommateur_niveau_gravite";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.access_service_consommateur_niveau_gravite ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.access_service_consommateur_niveau_gravite LIKE intranet_v2_0_prod.access_service_consommateur_niveau_gravite";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.access_service_consommateur_niveau_gravite ...";
+$sql = "INSERT INTO intranet_v3_0_dev.access_service_consommateur_niveau_gravite SELECT * FROM intranet_v2_0_prod.access_service_consommateur_niveau_gravite";
+if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.access_service_consommateur_reclamations ...";
+$sql = "DROP TABLE intranet_v3_0_dev.access_service_consommateur_reclamations";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.access_service_consommateur_reclamations ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.access_service_consommateur_reclamations LIKE intranet_v2_0_prod.access_service_consommateur_reclamations";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.access_service_consommateur_reclamations ...";
+$sql = "INSERT INTO intranet_v3_0_dev.access_service_consommateur_reclamations SELECT * FROM intranet_v2_0_prod.access_service_consommateur_reclamations";
+if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.access_service_consommateur_statistiques_articles ...";
+$sql = "DROP TABLE intranet_v3_0_dev.access_service_consommateur_statistiques_articles";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.access_service_consommateur_statistiques_articles ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.access_service_consommateur_statistiques_articles LIKE intranet_v2_0_prod.access_service_consommateur_statistiques_articles";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.access_service_consommateur_statistiques_articles ...";
+$sql = "INSERT INTO intranet_v3_0_dev.access_service_consommateur_statistiques_articles SELECT * FROM intranet_v2_0_prod.access_service_consommateur_statistiques_articles";
+if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.access_service_consommateur_typologies ...";
+$sql = "DROP TABLE intranet_v3_0_dev.access_service_consommateur_typologies";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.access_service_consommateur_typologies ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.access_service_consommateur_typologies LIKE intranet_v2_0_prod.access_service_consommateur_typologies";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.access_service_consommateur_typologies ...";
+$sql = "INSERT INTO intranet_v3_0_dev.access_service_consommateur_typologies SELECT * FROM intranet_v2_0_prod.access_service_consommateur_typologies";
+if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.access_type_de_facturation ...";
+$sql = "DROP TABLE intranet_v3_0_dev.access_type_de_facturation";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.access_type_de_facturation ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.access_type_de_facturation LIKE intranet_v2_0_prod.access_type_de_facturation";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.access_type_de_facturation ...";
+$sql = "INSERT INTO intranet_v3_0_dev.access_type_de_facturation SELECT * FROM intranet_v2_0_prod.access_type_de_facturation";
+if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.actiavaris ...";
+$sql = "DROP TABLE intranet_v3_0_dev.actiavaris";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.actiavaris ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.actiavaris LIKE intranet_v2_0_prod.actiavaris";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.actiavaris ...";
+$sql = "INSERT INTO intranet_v3_0_dev.actiavaris SELECT * FROM intranet_v2_0_prod.actiavaris";
+if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.actijour ...";
+$sql = "DROP TABLE intranet_v3_0_dev.actijour";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.actijour ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.actijour LIKE intranet_v2_0_prod.actijour";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.actijour ...";
+$sql = "INSERT INTO intranet_v3_0_dev.actijour SELECT * FROM intranet_v2_0_prod.actijour";
+if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.actijour_arch ...";
+$sql = "DROP TABLE intranet_v3_0_dev.actijour_arch";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.actijour_arch ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.actijour_arch LIKE intranet_v2_0_prod.actijour_arch";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.actijour_arch ...";
+$sql = "INSERT INTO intranet_v3_0_dev.actijour_arch SELECT * FROM intranet_v2_0_prod.actijour_arch";
+if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.actijour_site ...";
+$sql = "DROP TABLE intranet_v3_0_dev.actijour_site";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.actijour_site ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.actijour_site LIKE intranet_v2_0_prod.actijour_site";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.actijour_site ...";
+$sql = "INSERT INTO intranet_v3_0_dev.actijour_site SELECT * FROM intranet_v2_0_prod.actijour_site";
+if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.actijour_site_arch ...";
+$sql = "DROP TABLE intranet_v3_0_dev.actijour_site_arch";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.actijour_site_arch ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.actijour_site_arch LIKE intranet_v2_0_prod.actijour_site_arch";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.actijour_site_arch ...";
+$sql = "INSERT INTO intranet_v3_0_dev.actijour_site_arch SELECT * FROM intranet_v2_0_prod.actijour_site_arch";
+if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.actisem ...";
+$sql = "DROP TABLE intranet_v3_0_dev.actisem";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.actisem ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.actisem LIKE intranet_v2_0_prod.actisem";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.actisem ...";
+$sql = "INSERT INTO intranet_v3_0_dev.actisem SELECT * FROM intranet_v2_0_prod.actisem";
+if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.actisem_site ...";
+$sql = "DROP TABLE intranet_v3_0_dev.actisem_site";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.actisem_site ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.actisem_site LIKE intranet_v2_0_prod.actisem_site";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.actisem_site ...";
+$sql = "INSERT INTO intranet_v3_0_dev.actisem_site SELECT * FROM intranet_v2_0_prod.actisem_site";
+if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.actitempo ...";
+$sql = "DROP TABLE intranet_v3_0_dev.actitempo";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.actitempo ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.actitempo LIKE intranet_v2_0_prod.actitempo";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.actitempo ...";
+$sql = "INSERT INTO intranet_v3_0_dev.actitempo SELECT * FROM intranet_v2_0_prod.actitempo";
+if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.activite ...";
+$sql = "DROP TABLE intranet_v3_0_dev.activite";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.activite ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.activite LIKE intranet_v2_0_prod.activite";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.activite ...";
+$sql = "INSERT INTO intranet_v3_0_dev.activite SELECT * FROM intranet_v2_0_prod.activite";
+if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.analyse_log_internet ...";
+$sql = "DROP TABLE intranet_v3_0_dev.analyse_log_internet";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.analyse_log_internet ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.analyse_log_internet LIKE intranet_v2_0_prod.analyse_log_internet";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.analyse_log_internet ...";
+$sql = "INSERT INTO intranet_v3_0_dev.analyse_log_internet SELECT * FROM intranet_v2_0_prod.analyse_log_internet";
+if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.analyse_log_internet_arch ...";
+$sql = "DROP TABLE intranet_v3_0_dev.analyse_log_internet_arch";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.analyse_log_internet_arch ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.analyse_log_internet_arch LIKE intranet_v2_0_prod.analyse_log_internet_arch";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.analyse_log_internet_arch ...";
+$sql = "INSERT INTO intranet_v3_0_dev.analyse_log_internet_arch SELECT * FROM intranet_v2_0_prod.analyse_log_internet_arch";
+if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.analyse_log_internet_duree ...";
+$sql = "DROP TABLE intranet_v3_0_dev.analyse_log_internet_duree";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.analyse_log_internet_duree ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.analyse_log_internet_duree LIKE intranet_v2_0_prod.analyse_log_internet_duree";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.analyse_log_internet_duree ...";
+$sql = "INSERT INTO intranet_v3_0_dev.analyse_log_internet_duree SELECT * FROM intranet_v2_0_prod.analyse_log_internet_duree";
+if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.analyse_log_internet_duree_arch ...";
+$sql = "DROP TABLE intranet_v3_0_dev.analyse_log_internet_duree_arch";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.analyse_log_internet_duree_arch ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.analyse_log_internet_duree_arch LIKE intranet_v2_0_prod.analyse_log_internet_duree_arch";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.analyse_log_internet_duree_arch ...";
+$sql = "INSERT INTO intranet_v3_0_dev.analyse_log_internet_duree_arch SELECT * FROM intranet_v2_0_prod.analyse_log_internet_duree_arch";
+if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.analyse_log_messagerie ...";
+$sql = "DROP TABLE intranet_v3_0_dev.analyse_log_messagerie";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.analyse_log_messagerie ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.analyse_log_messagerie LIKE intranet_v2_0_prod.analyse_log_messagerie";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.analyse_log_messagerie ...";
+$sql = "INSERT INTO intranet_v3_0_dev.analyse_log_messagerie SELECT * FROM intranet_v2_0_prod.analyse_log_messagerie";
+if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.analyse_log_messagerie_arch ...";
+$sql = "DROP TABLE intranet_v3_0_dev.analyse_log_messagerie_arch";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.analyse_log_messagerie_arch ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.analyse_log_messagerie_arch LIKE intranet_v2_0_prod.analyse_log_messagerie_arch";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.analyse_log_messagerie_arch ...";
+$sql = "INSERT INTO intranet_v3_0_dev.analyse_log_messagerie_arch SELECT * FROM intranet_v2_0_prod.analyse_log_messagerie_arch";
+if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.analyse_log_num_tel ...";
+$sql = "DROP TABLE intranet_v3_0_dev.analyse_log_num_tel";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.analyse_log_num_tel ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.analyse_log_num_tel LIKE intranet_v2_0_prod.analyse_log_num_tel";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.analyse_log_num_tel ...";
+$sql = "INSERT INTO intranet_v3_0_dev.analyse_log_num_tel SELECT * FROM intranet_v2_0_prod.analyse_log_num_tel";
+if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.analyse_log_telephonie ...";
+$sql = "DROP TABLE intranet_v3_0_dev.analyse_log_telephonie";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.analyse_log_telephonie ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.analyse_log_telephonie LIKE intranet_v2_0_prod.analyse_log_telephonie";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.analyse_log_telephonie ...";
+$sql = "INSERT INTO intranet_v3_0_dev.analyse_log_telephonie SELECT * FROM intranet_v2_0_prod.analyse_log_telephonie";
+if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.analyse_log_telephonie_arch ...";
+$sql = "DROP TABLE intranet_v3_0_dev.analyse_log_telephonie_arch";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.analyse_log_telephonie_arch ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.analyse_log_telephonie_arch LIKE intranet_v2_0_prod.analyse_log_telephonie_arch";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.analyse_log_telephonie_arch ...";
+$sql = "INSERT INTO intranet_v3_0_dev.analyse_log_telephonie_arch SELECT * FROM intranet_v2_0_prod.analyse_log_telephonie_arch";
+if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.client ...";
+$sql = "DROP TABLE intranet_v3_0_dev.client";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.client ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.client LIKE intranet_v2_0_prod.client";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.client ...";
+$sql = "INSERT INTO intranet_v3_0_dev.client SELECT * FROM intranet_v2_0_prod.client";
+if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.codesoft_superviseur ...";
+$sql = "DROP TABLE intranet_v3_0_dev.codesoft_superviseur";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.codesoft_superviseur ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.codesoft_superviseur LIKE intranet_v2_0_prod.codesoft_superviseur";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.codesoft_superviseur ...";
+$sql = "INSERT INTO intranet_v3_0_dev.codesoft_superviseur SELECT * FROM intranet_v2_0_prod.codesoft_superviseur";
+if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.comment ...";
+$sql = "DROP TABLE intranet_v3_0_dev.comment";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.comment ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.comment LIKE intranet_v2_0_prod.comment";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.comment ...";
+$sql = "INSERT INTO intranet_v3_0_dev.comment SELECT * FROM intranet_v2_0_prod.comment";
+if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.compos ...";
+$sql = "DROP TABLE intranet_v3_0_dev.compos";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.compos ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.compos LIKE intranet_v2_0_prod.compos";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.compos ...";
+$sql = "INSERT INTO intranet_v3_0_dev.compos SELECT * FROM intranet_v2_0_prod.compos";
+if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.composa ...";
+$sql = "DROP TABLE intranet_v3_0_dev.composa";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.composa ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.composa LIKE intranet_v2_0_prod.composa";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.composa ...";
+$sql = "INSERT INTO intranet_v3_0_dev.composa SELECT * FROM intranet_v2_0_prod.composa";
+if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.composv ...";
+$sql = "DROP TABLE intranet_v3_0_dev.composv";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.composv ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.composv LIKE intranet_v2_0_prod.composv";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.composv ...";
+$sql = "INSERT INTO intranet_v3_0_dev.composv SELECT * FROM intranet_v2_0_prod.composv";
+if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.conserv ...";
+$sql = "DROP TABLE intranet_v3_0_dev.conserv";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.conserv ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.conserv LIKE intranet_v2_0_prod.conserv";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.conserv ...";
+$sql = "INSERT INTO intranet_v3_0_dev.conserv SELECT * FROM intranet_v2_0_prod.conserv";
+if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.conserva ...";
+$sql = "DROP TABLE intranet_v3_0_dev.conserva";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.conserva ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.conserva LIKE intranet_v2_0_prod.conserva";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.conserva ...";
+$sql = "INSERT INTO intranet_v3_0_dev.conserva SELECT * FROM intranet_v2_0_prod.conserva";
+if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.conservv ...";
+$sql = "DROP TABLE intranet_v3_0_dev.conservv";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.conservv ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.conservv LIKE intranet_v2_0_prod.conservv";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.conservv ...";
+$sql = "INSERT INTO intranet_v3_0_dev.conservv SELECT * FROM intranet_v2_0_prod.conservv";
+if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.datasync_serveur ...";
+$sql = "DROP TABLE intranet_v3_0_dev.datasync_serveur";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.datasync_serveur ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.datasync_serveur LIKE intranet_v2_0_prod.datasync_serveur";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.datasync_serveur ...";
+$sql = "INSERT INTO intranet_v3_0_dev.datasync_serveur SELECT * FROM intranet_v2_0_prod.datasync_serveur";
+if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.datasync_transfert ...";
+$sql = "DROP TABLE intranet_v3_0_dev.datasync_transfert";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.datasync_transfert ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.datasync_transfert LIKE intranet_v2_0_prod.datasync_transfert";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.datasync_transfert ...";
+$sql = "INSERT INTO intranet_v3_0_dev.datasync_transfert SELECT * FROM intranet_v2_0_prod.datasync_transfert";
+if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.diffusion ...";
+$sql = "DROP TABLE intranet_v3_0_dev.diffusion";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.diffusion ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.diffusion LIKE intranet_v2_0_prod.diffusion";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.diffusion ...";
+$sql = "INSERT INTO intranet_v3_0_dev.diffusion SELECT * FROM intranet_v2_0_prod.diffusion";
+if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.divers ...";
+$sql = "DROP TABLE intranet_v3_0_dev.divers";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.divers ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.divers LIKE intranet_v2_0_prod.divers";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.divers ...";
+$sql = "INSERT INTO intranet_v3_0_dev.divers SELECT * FROM intranet_v2_0_prod.divers";
+if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.diversa ...";
+$sql = "DROP TABLE intranet_v3_0_dev.diversa";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.diversa ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.diversa LIKE intranet_v2_0_prod.diversa";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.diversa ...";
+$sql = "INSERT INTO intranet_v3_0_dev.diversa SELECT * FROM intranet_v2_0_prod.diversa";
+if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.diversv ...";
+$sql = "DROP TABLE intranet_v3_0_dev.diversv";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.diversv ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.diversv LIKE intranet_v2_0_prod.diversv";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.diversv ...";
+$sql = "INSERT INTO intranet_v3_0_dev.diversv SELECT * FROM intranet_v2_0_prod.diversv";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.enseigne ...";
+$sql = "DROP TABLE intranet_v3_0_dev.enseigne";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.enseigne ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.enseigne LIKE intranet_v2_0_prod.enseigne";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.enseigne ...";
+$sql = "INSERT INTO intranet_v3_0_dev.enseigne SELECT * FROM intranet_v2_0_prod.enseigne";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.famille ...";
+$sql = "DROP TABLE intranet_v3_0_dev.famille";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.famille ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.famille LIKE intranet_v2_0_prod.famille";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.famille ...";
+$sql = "INSERT INTO intranet_v3_0_dev.famille SELECT * FROM intranet_v2_0_prod.famille";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.fta_palettisation ...";
+$sql = "DROP TABLE intranet_v3_0_dev.fta_palettisation";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.fta_palettisation ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.fta_palettisation LIKE intranet_v2_0_prod.fta_palettisation";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.fta_palettisation ...";
+$sql = "INSERT INTO intranet_v3_0_dev.fta_palettisation SELECT * FROM intranet_v2_0_prod.fta_palettisation";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.gamme ...";
+$sql = "DROP TABLE intranet_v3_0_dev.gamme";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.gamme ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.gamme LIKE intranet_v2_0_prod.gamme";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.gamme ...";
+$sql = "INSERT INTO intranet_v3_0_dev.gamme SELECT * FROM intranet_v2_0_prod.gamme";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.gamstat ...";
+$sql = "DROP TABLE intranet_v3_0_dev.gamstat";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.gamstat ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.gamstat LIKE intranet_v2_0_prod.gamstat";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.gamstat ...";
+$sql = "INSERT INTO intranet_v3_0_dev.gamstat SELECT * FROM intranet_v2_0_prod.gamstat";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.indicateur_productivite_unite_temps ...";
+$sql = "DROP TABLE intranet_v3_0_dev.indicateur_productivite_unite_temps";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.indicateur_productivite_unite_temps ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.indicateur_productivite_unite_temps LIKE intranet_v2_0_prod.indicateur_productivite_unite_temps";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.indicateur_productivite_unite_temps ...";
+$sql = "INSERT INTO intranet_v3_0_dev.indicateur_productivite_unite_temps SELECT * FROM intranet_v2_0_prod.indicateur_productivite_unite_temps";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.infog ...";
+$sql = "DROP TABLE intranet_v3_0_dev.infog";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.infog ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.infog LIKE intranet_v2_0_prod.infog";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.infog ...";
+$sql = "INSERT INTO intranet_v3_0_dev.infog SELECT * FROM intranet_v2_0_prod.infog";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.infoga ...";
+$sql = "DROP TABLE intranet_v3_0_dev.infoga";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.infoga ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.infoga LIKE intranet_v2_0_prod.infoga";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.infoga ...";
+$sql = "INSERT INTO intranet_v3_0_dev.infoga SELECT * FROM intranet_v2_0_prod.infoga";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.infogv ...";
+$sql = "DROP TABLE intranet_v3_0_dev.infogv";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.infogv ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.infogv LIKE intranet_v2_0_prod.infogv";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.infogv ...";
+$sql = "INSERT INTO intranet_v3_0_dev.infogv SELECT * FROM intranet_v2_0_prod.infogv";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.intranet_niveau_acces ...";
+$sql = "DROP TABLE intranet_v3_0_dev.intranet_niveau_acces";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.intranet_niveau_acces ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.intranet_niveau_acces LIKE intranet_v2_0_prod.intranet_niveau_acces";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.intranet_niveau_acces ...";
+$sql = "INSERT INTO intranet_v3_0_dev.intranet_niveau_acces SELECT * FROM intranet_v2_0_prod.intranet_niveau_acces";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.intranet_password ...";
+$sql = "DROP TABLE intranet_v3_0_dev.intranet_password";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.intranet_password ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.intranet_password LIKE intranet_v2_0_prod.intranet_password";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.intranet_password ...";
+$sql = "INSERT INTO intranet_v3_0_dev.intranet_password SELECT * FROM intranet_v2_0_prod.intranet_password";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.logft ...";
+$sql = "DROP TABLE intranet_v3_0_dev.logft";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.logft ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.logft LIKE intranet_v2_0_prod.logft";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.logft ...";
+$sql = "INSERT INTO intranet_v3_0_dev.logft SELECT * FROM intranet_v2_0_prod.logft";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.lustat ...";
+$sql = "DROP TABLE intranet_v3_0_dev.lustat";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.lustat ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.lustat LIKE intranet_v2_0_prod.lustat";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.lustat ...";
+$sql = "INSERT INTO intranet_v3_0_dev.lustat SELECT * FROM intranet_v2_0_prod.lustat";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.matiere_premiere ...";
+$sql = "DROP TABLE intranet_v3_0_dev.matiere_premiere";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.matiere_premiere ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.matiere_premiere LIKE intranet_v2_0_prod.matiere_premiere";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.matiere_premiere ...";
+$sql = "INSERT INTO intranet_v3_0_dev.matiere_premiere SELECT * FROM intranet_v2_0_prod.matiere_premiere";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.matiere_premiere_caracteristique_scientifique ...";
+$sql = "DROP TABLE intranet_v3_0_dev.matiere_premiere_caracteristique_scientifique";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.matiere_premiere_caracteristique_scientifique ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.matiere_premiere_caracteristique_scientifique LIKE intranet_v2_0_prod.matiere_premiere_caracteristique_scientifique";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.matiere_premiere_caracteristique_scientifique ...";
+$sql = "INSERT INTO intranet_v3_0_dev.matiere_premiere_caracteristique_scientifique SELECT * FROM intranet_v2_0_prod.matiere_premiere_caracteristique_scientifique";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.matiere_premiere_caracteristique_scientifique_filiere ...";
+$sql = "DROP TABLE intranet_v3_0_dev.matiere_premiere_caracteristique_scientifique_filiere";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.matiere_premiere_caracteristique_scientifique_filiere ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.matiere_premiere_caracteristique_scientifique_filiere LIKE intranet_v2_0_prod.matiere_premiere_caracteristique_scientifique_filiere";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.matiere_premiere_caracteristique_scientifique_filiere ...";
+$sql = "INSERT INTO intranet_v3_0_dev.matiere_premiere_caracteristique_scientifique_filiere SELECT * FROM intranet_v2_0_prod.matiere_premiere_caracteristique_scientifique_filiere";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.matiere_premiere_client ...";
+$sql = "DROP TABLE intranet_v3_0_dev.matiere_premiere_client";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.matiere_premiere_client ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.matiere_premiere_client LIKE intranet_v2_0_prod.matiere_premiere_client";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.matiere_premiere_client ...";
+$sql = "INSERT INTO intranet_v3_0_dev.matiere_premiere_client SELECT * FROM intranet_v2_0_prod.matiere_premiere_client";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.matiere_premiere_client_regroupement ...";
+$sql = "DROP TABLE intranet_v3_0_dev.matiere_premiere_client_regroupement";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.matiere_premiere_client_regroupement ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.matiere_premiere_client_regroupement LIKE intranet_v2_0_prod.matiere_premiere_client_regroupement";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.matiere_premiere_client_regroupement ...";
+$sql = "INSERT INTO intranet_v3_0_dev.matiere_premiere_client_regroupement SELECT * FROM intranet_v2_0_prod.matiere_premiere_client_regroupement";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.matiere_premiere_composant ...";
+$sql = "DROP TABLE intranet_v3_0_dev.matiere_premiere_composant";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.matiere_premiere_composant ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.matiere_premiere_composant LIKE intranet_v2_0_prod.matiere_premiere_composant";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.matiere_premiere_composant ...";
+$sql = "INSERT INTO intranet_v3_0_dev.matiere_premiere_composant SELECT * FROM intranet_v2_0_prod.matiere_premiere_composant";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.matiere_premiere_composant_allergene ...";
+$sql = "DROP TABLE intranet_v3_0_dev.matiere_premiere_composant_allergene";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.matiere_premiere_composant_allergene ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.matiere_premiere_composant_allergene LIKE intranet_v2_0_prod.matiere_premiere_composant_allergene";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.matiere_premiere_composant_allergene ...";
+$sql = "INSERT INTO intranet_v3_0_dev.matiere_premiere_composant_allergene SELECT * FROM intranet_v2_0_prod.matiere_premiere_composant_allergene";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.matiere_premiere_composant_arome_categorie ...";
+$sql = "DROP TABLE intranet_v3_0_dev.matiere_premiere_composant_arome_categorie";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.matiere_premiere_composant_arome_categorie ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.matiere_premiere_composant_arome_categorie LIKE intranet_v2_0_prod.matiere_premiere_composant_arome_categorie";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.matiere_premiere_composant_arome_categorie ...";
+$sql = "INSERT INTO intranet_v3_0_dev.matiere_premiere_composant_arome_categorie SELECT * FROM intranet_v2_0_prod.matiere_premiere_composant_arome_categorie";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.matiere_premiere_composant_groupe ...";
+$sql = "DROP TABLE intranet_v3_0_dev.matiere_premiere_composant_groupe";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.matiere_premiere_composant_groupe ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.matiere_premiere_composant_groupe LIKE intranet_v2_0_prod.matiere_premiere_composant_groupe";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.matiere_premiere_composant_groupe ...";
+$sql = "INSERT INTO intranet_v3_0_dev.matiere_premiere_composant_groupe SELECT * FROM intranet_v2_0_prod.matiere_premiere_composant_groupe";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.matiere_premiere_composant_nature ...";
+$sql = "DROP TABLE intranet_v3_0_dev.matiere_premiere_composant_nature";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.matiere_premiere_composant_nature ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.matiere_premiere_composant_nature LIKE intranet_v2_0_prod.matiere_premiere_composant_nature";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.matiere_premiere_composant_nature ...";
+$sql = "INSERT INTO intranet_v3_0_dev.matiere_premiere_composant_nature SELECT * FROM intranet_v2_0_prod.matiere_premiere_composant_nature";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.matiere_premiere_composant_origine ...";
+$sql = "DROP TABLE intranet_v3_0_dev.matiere_premiere_composant_origine";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.matiere_premiere_composant_origine ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.matiere_premiere_composant_origine LIKE intranet_v2_0_prod.matiere_premiere_composant_origine";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.matiere_premiere_composant_origine ...";
+$sql = "INSERT INTO intranet_v3_0_dev.matiere_premiere_composant_origine SELECT * FROM intranet_v2_0_prod.matiere_premiere_composant_origine";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.matiere_premiere_composant_regroupement_advitium ...";
+$sql = "DROP TABLE intranet_v3_0_dev.matiere_premiere_composant_regroupement_advitium";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.matiere_premiere_composant_regroupement_advitium ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.matiere_premiere_composant_regroupement_advitium LIKE intranet_v2_0_prod.matiere_premiere_composant_regroupement_advitium";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.matiere_premiere_composant_regroupement_advitium ...";
+$sql = "INSERT INTO intranet_v3_0_dev.matiere_premiere_composant_regroupement_advitium SELECT * FROM intranet_v2_0_prod.matiere_premiere_composant_regroupement_advitium";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.matiere_premiere_composant_template ...";
+$sql = "DROP TABLE intranet_v3_0_dev.matiere_premiere_composant_template";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.matiere_premiere_composant_template ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.matiere_premiere_composant_template LIKE intranet_v2_0_prod.matiere_premiere_composant_template";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.matiere_premiere_composant_template ...";
+$sql = "INSERT INTO intranet_v3_0_dev.matiere_premiere_composant_template SELECT * FROM intranet_v2_0_prod.matiere_premiere_composant_template";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.matiere_premiere_conditionnement ...";
+$sql = "DROP TABLE intranet_v3_0_dev.matiere_premiere_conditionnement";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.matiere_premiere_conditionnement ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.matiere_premiere_conditionnement LIKE intranet_v2_0_prod.matiere_premiere_conditionnement";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.matiere_premiere_conditionnement ...";
+$sql = "INSERT INTO intranet_v3_0_dev.matiere_premiere_conditionnement SELECT * FROM intranet_v2_0_prod.matiere_premiere_conditionnement";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.matiere_premiere_contaminant ...";
+$sql = "DROP TABLE intranet_v3_0_dev.matiere_premiere_contaminant";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.matiere_premiere_contaminant ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.matiere_premiere_contaminant LIKE intranet_v2_0_prod.matiere_premiere_contaminant";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.matiere_premiere_contaminant ...";
+$sql = "INSERT INTO intranet_v3_0_dev.matiere_premiere_contaminant SELECT * FROM intranet_v2_0_prod.matiere_premiere_contaminant";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.matiere_premiere_contaminant_association ...";
+$sql = "DROP TABLE intranet_v3_0_dev.matiere_premiere_contaminant_association";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.matiere_premiere_contaminant_association ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.matiere_premiere_contaminant_association LIKE intranet_v2_0_prod.matiere_premiere_contaminant_association";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.matiere_premiere_contaminant_association ...";
+$sql = "INSERT INTO intranet_v3_0_dev.matiere_premiere_contaminant_association SELECT * FROM intranet_v2_0_prod.matiere_premiere_contaminant_association";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.matiere_premiere_contamination_croisee ...";
+$sql = "DROP TABLE intranet_v3_0_dev.matiere_premiere_contamination_croisee";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.matiere_premiere_contamination_croisee ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.matiere_premiere_contamination_croisee LIKE intranet_v2_0_prod.matiere_premiere_contamination_croisee";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.matiere_premiere_contamination_croisee ...";
+$sql = "INSERT INTO intranet_v3_0_dev.matiere_premiere_contamination_croisee  SELECT * FROM intranet_v2_0_prod.matiere_premiere_contamination_croisee";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.matiere_premiere_etat ...";
+$sql = "DROP TABLE intranet_v3_0_dev.matiere_premiere_etat";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.matiere_premiere_etat ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.matiere_premiere_etat LIKE intranet_v2_0_prod.matiere_premiere_etat";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.matiere_premiere_etat ...";
+$sql = "INSERT INTO intranet_v3_0_dev.matiere_premiere_etat SELECT * FROM intranet_v2_0_prod.matiere_premiere_etat";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.matiere_premiere_ethique_client ...";
+$sql = "DROP TABLE intranet_v3_0_dev.matiere_premiere_ethique_client";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.matiere_premiere_ethique_client ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.matiere_premiere_ethique_client LIKE intranet_v2_0_prod.matiere_premiere_ethique_client";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.matiere_premiere_ethique_client ...";
+$sql = "INSERT INTO intranet_v3_0_dev.matiere_premiere_ethique_client SELECT * FROM intranet_v2_0_prod.matiere_premiere_ethique_client";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.matiere_premiere_filiere ...";
+$sql = "DROP TABLE intranet_v3_0_dev.matiere_premiere_filiere";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.matiere_premiere_filiere ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.matiere_premiere_filiere LIKE intranet_v2_0_prod.matiere_premiere_filiere";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.matiere_premiere_filiere ...";
+$sql = "INSERT INTO intranet_v3_0_dev.matiere_premiere_filiere SELECT * FROM intranet_v2_0_prod.matiere_premiere_filiere";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.matiere_premiere_fournisseur ...";
+$sql = "DROP TABLE intranet_v3_0_dev.matiere_premiere_fournisseur";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.matiere_premiere_fournisseur ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.matiere_premiere_fournisseur LIKE intranet_v2_0_prod.matiere_premiere_fournisseur";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.matiere_premiere_fournisseur ...";
+$sql = "INSERT INTO intranet_v3_0_dev.matiere_premiere_fournisseur SELECT * FROM intranet_v2_0_prod.matiere_premiere_fournisseur";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.matiere_premiere_nature ...";
+$sql = "DROP TABLE intranet_v3_0_dev.matiere_premiere_nature";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.matiere_premiere_nature ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.matiere_premiere_nature LIKE intranet_v2_0_prod.matiere_premiere_nature";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.matiere_premiere_nature ...";
+$sql = "INSERT INTO intranet_v3_0_dev.matiere_premiere_nature SELECT * FROM intranet_v2_0_prod.matiere_premiere_nature";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.matiere_premiere_origine ...";
+$sql = "DROP TABLE intranet_v3_0_dev.matiere_premiere_origine";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.matiere_premiere_origine ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.matiere_premiere_origine LIKE intranet_v2_0_prod.matiere_premiere_origine";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.matiere_premiere_origine ...";
+$sql = "INSERT INTO intranet_v3_0_dev.matiere_premiere_origine SELECT * FROM intranet_v2_0_prod.matiere_premiere_origine";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.matiere_premiere_origine_cycle ...";
+$sql = "DROP TABLE intranet_v3_0_dev.matiere_premiere_origine_cycle";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.matiere_premiere_origine_cycle ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.matiere_premiere_origine_cycle LIKE intranet_v2_0_prod.matiere_premiere_origine_cycle";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.matiere_premiere_origine_cycle ...";
+$sql = "INSERT INTO intranet_v3_0_dev.matiere_premiere_origine_cycle SELECT * FROM intranet_v2_0_prod.matiere_premiere_origine_cycle";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.matiere_premiere_origine_peche ...";
+$sql = "DROP TABLE intranet_v3_0_dev.matiere_premiere_origine_peche";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.matiere_premiere_origine_peche ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.matiere_premiere_origine_peche LIKE intranet_v2_0_prod.matiere_premiere_origine_peche";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.matiere_premiere_origine_peche ...";
+$sql = "INSERT INTO intranet_v3_0_dev.matiere_premiere_origine_peche SELECT * FROM intranet_v2_0_prod.matiere_premiere_origine_peche";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.matiere_premiere_origine_speciale ...";
+$sql = "DROP TABLE intranet_v3_0_dev.matiere_premiere_origine_speciale";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.matiere_premiere_origine_speciale ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.matiere_premiere_origine_speciale LIKE intranet_v2_0_prod.matiere_premiere_origine_speciale";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.matiere_premiere_origine_speciale ...";
+$sql = "INSERT INTO intranet_v3_0_dev.matiere_premiere_origine_speciale SELECT * FROM intranet_v2_0_prod.matiere_premiere_origine_speciale";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.matiere_premiere_surgelation ...";
+$sql = "DROP TABLE intranet_v3_0_dev.matiere_premiere_surgelation";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.matiere_premiere_surgelation ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.matiere_premiere_surgelation LIKE intranet_v2_0_prod.matiere_premiere_surgelation";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.matiere_premiere_surgelation ...";
+$sql = "INSERT INTO intranet_v3_0_dev.matiere_premiere_surgelation SELECT * FROM intranet_v2_0_prod.matiere_premiere_surgelation";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.matiere_premiere_transition ...";
+$sql = "DROP TABLE intranet_v3_0_dev.matiere_premiere_transition";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.matiere_premiere_transition ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.matiere_premiere_transition LIKE intranet_v2_0_prod.matiere_premiere_transition";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.matiere_premiere_transition ...";
+$sql = "INSERT INTO intranet_v3_0_dev.matiere_premiere_transition SELECT * FROM intranet_v2_0_prod.matiere_premiere_transition";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.matiere_premiere_zone_fao ...";
+$sql = "DROP TABLE intranet_v3_0_dev.matiere_premiere_zone_fao";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.matiere_premiere_zone_fao ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.matiere_premiere_zone_fao LIKE intranet_v2_0_prod.matiere_premiere_zone_fao";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.matiere_premiere_zone_fao ...";
+$sql = "INSERT INTO intranet_v3_0_dev.matiere_premiere_zone_fao SELECT * FROM intranet_v2_0_prod.matiere_premiere_zone_fao";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.navservavaris ...";
+$sql = "DROP TABLE intranet_v3_0_dev.navservavaris";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.navservavaris ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.navservavaris LIKE intranet_v2_0_prod.navservavaris";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.navservavaris ...";
+$sql = "INSERT INTO intranet_v3_0_dev.navservavaris SELECT * FROM intranet_v2_0_prod.navservavaris";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.navstat ...";
+$sql = "DROP TABLE intranet_v3_0_dev.navstat";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.navstat ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.navstat LIKE intranet_v2_0_prod.navstat";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.navstat ...";
+$sql = "INSERT INTO intranet_v3_0_dev.navstat SELECT * FROM intranet_v2_0_prod.navstat";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.navstatavaris ...";
+$sql = "DROP TABLE intranet_v3_0_dev.navstatavaris";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.navstatavaris ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.navstatavaris LIKE intranet_v2_0_prod.navstatavaris";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.navstatavaris ...";
+$sql = "INSERT INTO intranet_v3_0_dev.navstatavaris SELECT * FROM intranet_v2_0_prod.navstatavaris";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.netlog_log ...";
+$sql = "DROP TABLE intranet_v3_0_dev.netlog_log";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.netlog_log ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.netlog_log LIKE intranet_v2_0_prod.netlog_log";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.netlog_log ...";
+$sql = "INSERT INTO intranet_v3_0_dev.netlog_log SELECT * FROM intranet_v2_0_prod.netlog_log";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.newsdefil ...";
+$sql = "DROP TABLE intranet_v3_0_dev.newsdefil";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.newsdefil ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.newsdefil LIKE intranet_v2_0_prod.newsdefil";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.newsdefil ...";
+$sql = "INSERT INTO intranet_v3_0_dev.newsdefil SELECT * FROM intranet_v2_0_prod.newsdefil";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.palet ...";
+$sql = "DROP TABLE intranet_v3_0_dev.palet";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.palet ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.palet LIKE intranet_v2_0_prod.palet";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.palet ...";
+$sql = "INSERT INTO intranet_v3_0_dev.palet SELECT * FROM intranet_v2_0_prod.palet";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.paleta ...";
+$sql = "DROP TABLE intranet_v3_0_dev.paleta";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.paleta ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.paleta LIKE intranet_v2_0_prod.paleta";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.paleta ...";
+$sql = "INSERT INTO intranet_v3_0_dev.paleta SELECT * FROM intranet_v2_0_prod.paleta";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.paletv ...";
+$sql = "DROP TABLE intranet_v3_0_dev.paletv";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.paletv ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.paletv LIKE intranet_v2_0_prod.paletv";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.paletv ...";
+$sql = "INSERT INTO intranet_v3_0_dev.paletv SELECT * FROM intranet_v2_0_prod.paletv";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.perso ...";
+$sql = "DROP TABLE intranet_v3_0_dev.perso";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.perso ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.perso LIKE intranet_v2_0_prod.perso";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.perso ...";
+$sql = "INSERT INTO intranet_v3_0_dev.perso SELECT * FROM intranet_v2_0_prod.perso";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.publicateur ...";
+$sql = "DROP TABLE intranet_v3_0_dev.publicateur";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.publicateur ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.publicateur LIKE intranet_v2_0_prod.publicateur";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.publicateur ...";
+$sql = "INSERT INTO intranet_v3_0_dev.publicateur SELECT * FROM intranet_v2_0_prod.publicateur";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.save_client ...";
+$sql = "DROP TABLE intranet_v3_0_dev.save_client";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.save_client ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.save_client LIKE intranet_v2_0_prod.save_client";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.save_client ...";
+$sql = "INSERT INTO intranet_v3_0_dev.save_client SELECT * FROM intranet_v2_0_prod.save_client";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.segment ...";
+$sql = "DROP TABLE intranet_v3_0_dev.segment";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.segment ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.segment LIKE intranet_v2_0_prod.segment";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.segment ...";
+$sql = "INSERT INTO intranet_v3_0_dev.segment SELECT * FROM intranet_v2_0_prod.segment";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.segstat ...";
+$sql = "DROP TABLE intranet_v3_0_dev.segstat";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.segstat ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.segstat LIKE intranet_v2_0_prod.segstat";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.segstat ...";
+$sql = "INSERT INTO intranet_v3_0_dev.segstat SELECT * FROM intranet_v2_0_prod.segstat";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.servicece ...";
+$sql = "DROP TABLE intranet_v3_0_dev.servicece";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.servicece ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.servicece LIKE intranet_v2_0_prod.servicece";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.servicece ...";
+$sql = "INSERT INTO intranet_v3_0_dev.servicece SELECT * FROM intranet_v2_0_prod.servicece";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.services ...";
+$sql = "DROP TABLE intranet_v3_0_dev.services";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.services ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.services LIKE intranet_v2_0_prod.services";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.services ...";
+$sql = "INSERT INTO intranet_v3_0_dev.services SELECT * FROM intranet_v2_0_prod.services";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.societe ...";
+$sql = "DROP TABLE intranet_v3_0_dev.societe";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.societe ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.societe LIKE intranet_v2_0_prod.societe";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.societe ...";
+$sql = "INSERT INTO intranet_v3_0_dev.societe SELECT * FROM intranet_v2_0_prod.societe";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.stat_segment_site ...";
+$sql = "DROP TABLE intranet_v3_0_dev.stat_segment_site";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.stat_segment_site ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.stat_segment_site LIKE intranet_v2_0_prod.stat_segment_site";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.stat_segment_site ...";
+$sql = "INSERT INTO intranet_v3_0_dev.stat_segment_site SELECT * FROM intranet_v2_0_prod.stat_segment_site";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.types ...";
+$sql = "DROP TABLE intranet_v3_0_dev.types";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.types ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.types LIKE intranet_v2_0_prod.types";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.types ...";
+$sql = "INSERT INTO intranet_v3_0_dev.types SELECT * FROM intranet_v2_0_prod.types";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.valft ...";
+$sql = "DROP TABLE intranet_v3_0_dev.valft";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.valft ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.valft LIKE intranet_v2_0_prod.valft";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.valft ...";
+$sql = "INSERT INTO intranet_v3_0_dev.valft SELECT * FROM intranet_v2_0_prod.valft";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.words ...";
+$sql = "DROP TABLE intranet_v3_0_dev.words";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.words ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.words LIKE intranet_v2_0_prod.words";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.words ...";
+$sql = "INSERT INTO intranet_v3_0_dev.words SELECT * FROM intranet_v2_0_prod.words";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
 }
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.access_rcp_Correspondance_mois_exercice LIKE  intranet_v2_0_prod.access_rcp_Correspondance_mois_exercice;"
-//            . " INSERT INTO intranet_v3_0_dev.access_rcp_Correspondance_mois_exercice SELECT * FROM intranet_v2_0_prod.access_rcp_Correspondance_mois_exercice;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.access_rcp_Couts_a_ventiler_Articles_Saisonniers LIKE  intranet_v2_0_prod.access_rcp_Couts_a_ventiler_Articles_Saisonniers;"
-//            . " INSERT INTO intranet_v3_0_dev.access_rcp_Couts_a_ventiler_Articles_Saisonniers SELECT * FROM intranet_v2_0_prod.access_rcp_Couts_a_ventiler_Articles_Saisonniers;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.access_rcp_Donnees_CLIENTS_ARTICLES LIKE  intranet_v2_0_prod.access_rcp_Donnees_CLIENTS_ARTICLES;"
-//            . " INSERT INTO intranet_v3_0_dev.access_rcp_Donnees_CLIENTS_ARTICLES SELECT * FROM intranet_v2_0_prod.access_rcp_Donnees_CLIENTS_ARTICLES;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.access_rcp_Liste_Diffusion LIKE  intranet_v2_0_prod.access_rcp_Liste_Diffusion;"
-//            . " INSERT INTO intranet_v3_0_dev.access_rcp_Liste_Diffusion SELECT * FROM intranet_v2_0_prod.access_rcp_Liste_Diffusion;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.access_rcp_Mois LIKE  intranet_v2_0_prod.access_rcp_Mois;"
-//            . " INSERT INTO intranet_v3_0_dev.access_rcp_Mois SELECT * FROM intranet_v2_0_prod.access_rcp_Mois;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.access_recettes_multi_composition LIKE  intranet_v2_0_prod.access_recettes_multi_composition;"
-//            . " INSERT INTO intranet_v3_0_dev.access_recettes_multi_composition SELECT * FROM intranet_v2_0_prod.access_recettes_multi_composition;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.access_recettes_multi_cout_fab LIKE  intranet_v2_0_prod.access_recettes_multi_cout_fab;"
-//            . " INSERT INTO intranet_v3_0_dev.access_recettes_multi_cout_fab SELECT * FROM intranet_v2_0_prod.access_recettes_multi_cout_fab;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.access_recettes_multi_frais_de_transport LIKE  intranet_v2_0_prod.access_recettes_multi_frais_de_transport;"
-//            . " INSERT INTO intranet_v3_0_dev.access_recettes_multi_frais_de_transport SELECT * FROM intranet_v2_0_prod.access_recettes_multi_frais_de_transport;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.access_recettes_multi_gammes LIKE  intranet_v2_0_prod.access_recettes_multi_gammes;"
-//            . " INSERT INTO access_recettes_multi_gammes SELECT * FROM intranet_v2_0_prod.access_recettes_multi_gammes;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.access_recettes_multi_importation_matiere LIKE  intranet_v2_0_prod.access_recettes_multi_importation_matiere;"
-//            . " INSERT INTO intranet_v3_0_dev.access_recettes_multi_importation_matiere SELECT * FROM intranet_v2_0_prod.access_recettes_multi_importation_matiere;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.access_recettes_multi_importation_tarif LIKE  intranet_v2_0_prod.access_recettes_multi_importation_tarif;"
-//            . " INSERT INTO intranet_v3_0_dev.access_recettes_multi_importation_tarif SELECT * FROM intranet_v2_0_prod.access_recettes_multi_importation_tarif;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.access_recettes_multi_infologic_fournisseurs LIKE  intranet_v2_0_prod.access_recettes_multi_infologic_fournisseurs;"
-//            . " INSERT INTO intranet_v3_0_dev.access_recettes_multi_infologic_fournisseurs SELECT * FROM intranet_v2_0_prod.access_recettes_multi_infologic_fournisseurs;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.access_recettes_multi_infologic_unite LIKE  intranet_v2_0_prod.access_recettes_multi_infologic_unite;"
-//            . " INSERT INTO intranet_v3_0_dev.access_recettes_multi_infologic_unite SELECT * FROM intranet_v2_0_prod.access_recettes_multi_infologic_unite;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.access_recettes_multi_ingredients LIKE  intranet_v2_0_prod.access_recettes_multi_ingredients;"
-//            . " INSERT INTO intranet_v3_0_dev.access_recettes_multi_ingredients SELECT * FROM intranet_v2_0_prod.access_recettes_multi_ingredients;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.access_recettes_multi_recette LIKE  intranet_v2_0_prod.access_recettes_multi_recette;"
-//            . " INSERT INTO intranet_v3_0_dev.access_recettes_multi_recette SELECT * FROM intranet_v2_0_prod.access_recettes_multi_recette;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.access_recettes_multi_stades LIKE  intranet_v2_0_prod.access_recettes_multi_stades;"
-//            . " INSERT INTO intranet_v3_0_dev.access_recettes_multi_stades SELECT * FROM intranet_v2_0_prod.access_recettes_multi_stades;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.access_recettes_multi_unites LIKE  intranet_v2_0_prod.access_recettes_multi_unites;"
-//            . " INSERT INTO intranet_v3_0_dev.access_recettes_multi_unites SELECT * FROM intranet_v2_0_prod.access_recettes_multi_unites;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.access_regroupements LIKE  intranet_v2_0_prod.access_regroupements;"
-//            . " INSERT INTO intranet_v3_0_dev.access_regroupements SELECT * FROM intranet_v2_0_prod.access_regroupements;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.access_risq_pro_intranet_SITES LIKE  intranet_v2_0_prod.access_risq_pro_intranet_SITES;"
-//            . " INSERT INTO intranet_v3_0_dev.access_risq_pro_intranet_SITES SELECT * FROM intranet_v2_0_prod.access_risq_pro_intranet_SITES;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.access_risq_pro_intranet_etat_dossier LIKE  intranet_v2_0_prod.access_risq_pro_intranet_etat_dossier;"
-//            . " INSERT INTO intranet_v3_0_dev.access_risq_pro_intranet_etat_dossier SELECT * FROM intranet_v2_0_prod.access_risq_pro_intranet_etat_dossier;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.access_risq_pro_intranet_evaluation_risque LIKE  intranet_v2_0_prod.access_risq_pro_intranet_evaluation_risque;"
-//            . " INSERT INTO intranet_v3_0_dev.access_risq_pro_intranet_evaluation_risque SELECT * FROM intranet_v2_0_prod.access_risq_pro_intranet_evaluation_risque;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.access_risq_pro_intranet_gravites LIKE  intranet_v2_0_prod.access_risq_pro_intranet_gravites;"
-//            . " INSERT INTO intranet_v3_0_dev.access_risq_pro_intranet_gravites SELECT * FROM intranet_v2_0_prod.access_risq_pro_intranet_gravites;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.access_risq_pro_intranet_identification_codes_risque LIKE  intranet_v2_0_prod.access_risq_pro_intranet_identification_codes_risque;"
-//            . " INSERT INTO intranet_v3_0_dev.access_risq_pro_intranet_identification_codes_risque SELECT * FROM intranet_v2_0_prod.access_risq_pro_intranet_identification_codes_risque;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.access_risq_pro_intranet_matrice_risque LIKE  intranet_v2_0_prod.access_risq_pro_intranet_matrice_risque;"
-//            . " INSERT INTO intranet_v3_0_dev.access_risq_pro_intranet_matrice_risque SELECT * FROM intranet_v2_0_prod.access_risq_pro_intranet_matrice_risque;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.access_risq_pro_intranet_nature_risque LIKE  intranet_v2_0_prod.access_risq_pro_intranet_nature_risque;"
-//            . " INSERT INTO intranet_v3_0_dev.access_risq_pro_intranet_nature_risque SELECT * FROM intranet_v2_0_prod.access_risq_pro_intranet_nature_risque;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.access_risq_pro_intranet_probabilites LIKE  intranet_v2_0_prod.access_risq_pro_intranet_probabilites;"
-//            . " INSERT INTO intranet_v3_0_dev.access_risq_pro_intranet_probabilites SELECT * FROM intranet_v2_0_prod.access_risq_pro_intranet_probabilites;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.access_risq_pro_intranet_risques LIKE  intranet_v2_0_prod.access_risq_pro_intranet_risques;"
-//            . " INSERT INTO intranet_v3_0_dev.access_risq_pro_intranet_risques SELECT * FROM intranet_v2_0_prod.access_risq_pro_intranet_risques;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.access_risq_pro_intranet_secteurs LIKE  intranet_v2_0_prod.access_risq_pro_intranet_secteurs;"
-//            . " INSERT INTO intranet_v3_0_dev.access_risq_pro_intranet_secteurs SELECT * FROM intranet_v2_0_prod.access_risq_pro_intranet_secteurs;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.access_ruptures_commandes LIKE  intranet_v2_0_prod.access_ruptures_commandes;"
-//            . " INSERT INTO intranet_v3_0_dev.access_ruptures_commandes SELECT * FROM intranet_v2_0_prod.access_ruptures_commandes;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.access_ruptures_donnees_CLIENTS_ARTICLES LIKE  intranet_v2_0_prod.access_ruptures_donnees_CLIENTS_ARTICLES;"
-//            . " INSERT INTO intranet_v3_0_dev.access_ruptures_donnees_CLIENTS_ARTICLES SELECT * FROM intranet_v2_0_prod.access_ruptures_donnees_CLIENTS_ARTICLES;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.access_ruptures_commandes_details LIKE  intranet_v2_0_prod.access_ruptures_commandes_details;"
-//            . " INSERT INTO intranet_v3_0_dev.access_ruptures_commandes_details SELECT * FROM intranet_v2_0_prod.access_ruptures_commandes_details;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.access_ruptures_donnees_CLIENTS_ARTICLES_Ruptures_motif LIKE  intranet_v2_0_prod.access_ruptures_donnees_CLIENTS_ARTICLES_Ruptures_motif;"
-//            . " INSERT INTO intranet_v3_0_dev.access_ruptures_donnees_CLIENTS_ARTICLES_Ruptures_motif SELECT * FROM intranet_v2_0_prod.access_ruptures_donnees_CLIENTS_ARTICLES_Ruptures_motif;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.access_ruptures_export_code_langue LIKE  intranet_v2_0_prod.access_ruptures_export_code_langue;"
-//            . " INSERT INTO intranet_v3_0_dev.access_ruptures_export_code_langue SELECT * FROM intranet_v2_0_prod.access_ruptures_export_code_langue;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.access_ruptures_export_libelles_etrangers LIKE  intranet_v2_0_prod.access_ruptures_export_libelles_etrangers;"
-//            . " INSERT INTO intranet_v3_0_dev.access_ruptures_export_libelles_etrangers SELECT * FROM intranet_v2_0_prod.access_ruptures_export_libelles_etrangers;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.access_ruptures_suivi LIKE  intranet_v2_0_prod.access_ruptures_suivi;"
-//            . " INSERT INTO intranet_v3_0_dev.access_ruptures_suivi SELECT * FROM intranet_v2_0_prod.access_ruptures_suivi;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.access_ruptures_type_manquant LIKE  intranet_v2_0_prod.access_ruptures_type_manquant;"
-//            . " INSERT INTO intranet_v3_0_dev.access_ruptures_type_manquant SELECT * FROM intranet_v2_0_prod.access_ruptures_type_manquant;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.access_service_consommateur_ciliviltes LIKE  intranet_v2_0_prod.access_service_consommateur_ciliviltes;"
-//            . " INSERT INTO intranet_v3_0_dev.access_service_consommateur_ciliviltes SELECT * FROM intranet_v2_0_prod.access_service_consommateur_ciliviltes;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.access_service_consommateur_consommateur LIKE  intranet_v2_0_prod.access_service_consommateur_consommateur;"
-//            . " INSERT INTO intranet_v3_0_dev.access_service_consommateur_consommateur SELECT * FROM intranet_v2_0_prod.access_service_consommateur_consommateur;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.access_service_consommateur_lettres_types LIKE  intranet_v2_0_prod.access_service_consommateur_lettres_types;"
-//            . " INSERT INTO intranet_v3_0_dev.access_service_consommateur_lettres_types SELECT * FROM intranet_v2_0_prod.access_service_consommateur_lettres_types;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.access_service_consommateur_liste_diffusion LIKE  intranet_v2_0_prod.access_service_consommateur_liste_diffusion;"
-//            . " INSERT INTO intranet_v3_0_dev.access_service_consommateur_liste_diffusion SELECT * FROM intranet_v2_0_prod.access_service_consommateur_liste_diffusion;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.access_service_consommateur_mesure_corrective LIKE  intranet_v2_0_prod.access_service_consommateur_mesure_corrective;"
-//            . " INSERT INTO intranet_v3_0_dev.access_service_consommateur_mesure_corrective SELECT * FROM intranet_v2_0_prod.access_service_consommateur_mesure_corrective;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.access_service_consommateur_niveau_gravite LIKE  intranet_v2_0_prod.access_service_consommateur_niveau_gravite;"
-//            . " INSERT INTO intranet_v3_0_dev.access_service_consommateur_niveau_gravite SELECT * FROM intranet_v2_0_prod.access_service_consommateur_niveau_gravite;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.access_service_consommateur_reclamations LIKE  intranet_v2_0_prod.access_service_consommateur_reclamations;"
-//            . " INSERT INTO intranet_v3_0_dev.access_service_consommateur_reclamations SELECT * FROM intranet_v2_0_prod.access_service_consommateur_reclamations;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.access_service_consommateur_statistiques_articles LIKE  intranet_v2_0_prod.access_service_consommateur_statistiques_articles;"
-//            . " INSERT INTO intranet_v3_0_dev.access_service_consommateur_statistiques_articles SELECT * FROM intranet_v2_0_prod.access_service_consommateur_statistiques_articles;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.access_service_consommateur_typologies LIKE  intranet_v2_0_prod.access_service_consommateur_typologies;"
-//            . " INSERT INTO intranet_v3_0_dev.access_service_consommateur_typologies SELECT * FROM intranet_v2_0_prod.access_service_consommateur_typologies;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.access_type_de_facturation LIKE  intranet_v2_0_prod.access_type_de_facturation;"
-//            . " INSERT INTO intranet_v3_0_dev.access_type_de_facturation SELECT * FROM intranet_v2_0_prod.access_type_de_facturation;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.actiavaris LIKE  intranet_v2_0_prod.actiavaris;"
-//            . " INSERT INTO intranet_v3_0_dev.actiavaris SELECT * FROM intranet_v2_0_prod.actiavaris;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.actijour LIKE  intranet_v2_0_prod.actijour;"
-//            . " INSERT INTO intranet_v3_0_dev.actijour SELECT * FROM intranet_v2_0_prod.actijour;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.actijour_arch LIKE  intranet_v2_0_prod.actijour_arch;"
-//            . " INSERT INTO intranet_v3_0_dev.actijour_arch SELECT * FROM intranet_v2_0_prod.actijour_arch;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.actijour_site LIKE  intranet_v2_0_prod.actijour_site;"
-//            . " INSERT INTO intranet_v3_0_dev.actijour_site SELECT * FROM intranet_v2_0_prod.actijour_site;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.actijour_site_arch LIKE  intranet_v2_0_prod.actijour_site_arch;"
-//            . " INSERT INTO intranet_v3_0_dev.actijour_site_arch SELECT * FROM intranet_v2_0_prod.actijour_site_arch;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.actisem LIKE  intranet_v2_0_prod.actisem;"
-//            . " INSERT INTO intranet_v3_0_dev.actisem SELECT * FROM intranet_v2_0_prod.actisem;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.actisem_site LIKE  intranet_v2_0_prod.actisem_site;"
-//            . " INSERT INTO actisem_site SELECT * FROM intranet_v2_0_prod.actisem_site;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.actitempo LIKE  intranet_v2_0_prod.actitempo;"
-//            . " INSERT INTO intranet_v3_0_dev.actitempo SELECT * FROM intranet_v2_0_prod.actitempo;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.activite LIKE  intranet_v2_0_prod.activite;"
-//            . " INSERT INTO intranet_v3_0_dev.activite SELECT * FROM intranet_v2_0_prod.activite;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.analyse_log_internet LIKE  intranet_v2_0_prod.analyse_log_internet;"
-//            . " INSERT INTO intranet_v3_0_dev.analyse_log_internet SELECT * FROM intranet_v2_0_prod.analyse_log_internet;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.analyse_log_internet_arch LIKE  intranet_v2_0_prod.analyse_log_internet_arch;"
-//            . " INSERT INTO intranet_v3_0_dev.analyse_log_internet_arch SELECT * FROM intranet_v2_0_prod.analyse_log_internet_arch;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.analyse_log_internet_duree LIKE  intranet_v2_0_prod.analyse_log_internet_duree;"
-//            . " INSERT INTO intranet_v3_0_dev.analyse_log_internet_duree SELECT * FROM intranet_v2_0_prod.analyse_log_internet_duree;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.analyse_log_internet_duree_arch LIKE  intranet_v2_0_prod.analyse_log_internet_duree_arch;"
-//            . " INSERT INTO intranet_v3_0_dev.analyse_log_internet_duree_arch SELECT * FROM intranet_v2_0_prod.analyse_log_internet_duree_arch;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.analyse_log_messagerie LIKE  intranet_v2_0_prod.analyse_log_messagerie;"
-//            . " INSERT INTO intranet_v3_0_dev.analyse_log_messagerie SELECT * FROM intranet_v2_0_prod.analyse_log_messagerie;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.analyse_log_messagerie_arch LIKE  intranet_v2_0_prod.analyse_log_messagerie_arch;"
-//            . " INSERT INTO intranet_v3_0_dev.analyse_log_messagerie_arch SELECT * FROM intranet_v2_0_prod.analyse_log_messagerie_arch;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.analyse_log_num_tel LIKE  intranet_v2_0_prod.analyse_log_num_tel;"
-//            . " INSERT INTO intranet_v3_0_dev.analyse_log_num_tel SELECT * FROM intranet_v2_0_prod.analyse_log_num_tel;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.analyse_log_telephonie LIKE  intranet_v2_0_prod.analyse_log_telephonie;"
-//            . " INSERT INTO intranet_v3_0_dev.analyse_log_telephonie SELECT * FROM intranet_v2_0_prod.analyse_log_telephonie;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.analyse_log_telephonie_arch LIKE  intranet_v2_0_prod.analyse_log_telephonie_arch;"
-//            . " INSERT INTO intranet_v3_0_dev.analyse_log_telephonie_arch SELECT * FROM intranet_v2_0_prod.analyse_log_telephonie_arch;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.client LIKE  intranet_v2_0_prod.client;"
-//            . " INSERT INTO intranet_v3_0_dev.client SELECT * FROM intranet_v2_0_prod.client;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.codesoft_superviseur LIKE  intranet_v2_0_prod.codesoft_superviseur;"
-//            . " INSERT INTO intranet_v3_0_dev.codesoft_superviseur SELECT * FROM intranet_v2_0_prod.codesoft_superviseur;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.comment LIKE  intranet_v2_0_prod.comment;"
-//            . " INSERT INTO intranet_v3_0_dev.comment SELECT * FROM intranet_v2_0_prod.comment;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.compos LIKE  intranet_v2_0_prod.compos;"
-//            . " INSERT INTO intranet_v3_0_dev.compos SELECT * FROM intranet_v2_0_prod.compos;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.composa LIKE  intranet_v2_0_prod.composa;"
-//            . " INSERT INTO intranet_v3_0_dev.composa SELECT * FROM intranet_v2_0_prod.composa;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.composv LIKE  intranet_v2_0_prod.composv;"
-//            . " INSERT INTO intranet_v3_0_dev.composv SELECT * FROM intranet_v2_0_prod.composv;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.conserv LIKE  intranet_v2_0_prod.conserv;"
-//            . " INSERT INTO intranet_v3_0_dev.conserv SELECT * FROM intranet_v2_0_prod.conserv;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.conserva LIKE  intranet_v2_0_prod.conserva;"
-//            . " INSERT INTO intranet_v3_0_dev.conserva SELECT * FROM intranet_v2_0_prod.conserva;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.conservv LIKE  intranet_v2_0_prod.conservv;"
-//            . " INSERT INTO intranet_v3_0_dev.conservv SELECT * FROM intranet_v2_0_prod.conservv;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.datasync_serveur LIKE  intranet_v2_0_prod.datasync_serveur;"
-//            . " INSERT INTO intranet_v3_0_dev.datasync_serveur SELECT * FROM intranet_v2_0_prod.datasync_serveur;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.datasync_transfert LIKE  intranet_v2_0_prod.datasync_transfert;"
-//            . " INSERT INTO intranet_v3_0_dev.datasync_transfert SELECT * FROM intranet_v2_0_prod.datasync_transfert;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.diffusion LIKE  intranet_v2_0_prod.diffusion;"
-//            . " INSERT INTO intranet_v3_0_dev.diffusion SELECT * FROM intranet_v2_0_prod.diffusion;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.divers LIKE  intranet_v2_0_prod.divers;"
-//            . " INSERT INTO intranet_v3_0_dev.divers SELECT * FROM intranet_v2_0_prod.divers;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.diversa LIKE  intranet_v2_0_prod.diversa;"
-//            . " INSERT INTO intranet_v3_0_dev.diversa SELECT * FROM intranet_v2_0_prod.diversa;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.diversv LIKE  intranet_v2_0_prod.diversv;"
-//            . " INSERT INTO intranet_v3_0_dev.diversv SELECT * FROM intranet_v2_0_prod.diversv;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.enseigne LIKE  intranet_v2_0_prod.enseigne;"
-//            . " INSERT INTO intranet_v3_0_dev.enseigne SELECT * FROM intranet_v2_0_prod.enseigne;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.famille LIKE  intranet_v2_0_prod.famille;"
-//            . " INSERT INTO intranet_v3_0_dev.famille SELECT * FROM intranet_v2_0_prod.famille;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.fta_palettisation LIKE  intranet_v2_0_prod.fta_palettisation;"
-//            . " INSERT INTO intranet_v3_0_dev.fta_palettisation SELECT * FROM intranet_v2_0_prod.fta_palettisation;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.gamme LIKE  intranet_v2_0_prod.gamme;"
-//            . " INSERT INTO intranet_v3_0_dev.gamme SELECT * FROM intranet_v2_0_prod.gamme;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.gamstat LIKE  intranet_v2_0_prod.gamstat;"
-//            . " INSERT INTO intranet_v3_0_dev.gamstat SELECT * FROM intranet_v2_0_prod.gamstat;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.indicateur_productivite_unite_temps LIKE  intranet_v2_0_prod.indicateur_productivite_unite_temps;"
-//            . " INSERT INTO intranet_v3_0_dev.indicateur_productivite_unite_temps SELECT * FROM intranet_v2_0_prod.indicateur_productivite_unite_temps;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.infog LIKE  intranet_v2_0_prod.infog;"
-//            . " INSERT INTO intranet_v3_0_dev.infog SELECT * FROM intranet_v2_0_prod.infog;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.infoga LIKE  intranet_v2_0_prod.infoga;"
-//            . " INSERT INTO intranet_v3_0_dev.infoga SELECT * FROM intranet_v2_0_prod.infoga;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.infogv LIKE  intranet_v2_0_prod.infogv;"
-//            . " INSERT INTO intranet_v3_0_dev.infogv SELECT * FROM intranet_v2_0_prod.infogv;"
-//    );
-//
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.intranet_niveau_acces LIKE  intranet_v2_0_prod.intranet_niveau_acces;"
-//            . " INSERT INTO intranet_v3_0_dev.intranet_niveau_acces SELECT * FROM intranet_v2_0_prod.intranet_niveau_acces;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.intranet_password LIKE  intranet_v2_0_prod.intranet_password;"
-//            . " INSERT INTO intranet_v3_0_dev.intranet_password SELECT * FROM intranet_v2_0_prod.intranet_password;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.logft LIKE  intranet_v2_0_prod.logft;"
-//            . " INSERT INTO intranet_v3_0_dev.logft SELECT * FROM intranet_v2_0_prod.logft;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.lustat LIKE  intranet_v2_0_prod.lustat;"
-//            . " INSERT INTO intranet_v3_0_dev.lustat SELECT * FROM intranet_v2_0_prod.lustat;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.matiere_premiere LIKE  intranet_v2_0_prod.matiere_premiere;"
-//            . " INSERT INTO intranet_v3_0_dev.matiere_premiere SELECT * FROM intranet_v2_0_prod.matiere_premiere;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.matiere_premiere_caracteristique_scientifique LIKE  intranet_v2_0_prod.matiere_premiere_caracteristique_scientifique;"
-//            . " INSERT INTO intranet_v3_0_dev.matiere_premiere_caracteristique_scientifique SELECT * FROM intranet_v2_0_prod.matiere_premiere_caracteristique_scientifique;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.matiere_premiere_caracteristique_scientifique_filiere LIKE  intranet_v2_0_prod.matiere_premiere_caracteristique_scientifique_filiere;"
-//            . " INSERT INTO intranet_v3_0_dev.matiere_premiere_caracteristique_scientifique_filiere SELECT * FROM intranet_v2_0_prod.matiere_premiere_caracteristique_scientifique_filiere;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.matiere_premiere_client LIKE  intranet_v2_0_prod.matiere_premiere_client;"
-//            . " INSERT INTO intranet_v3_0_dev.matiere_premiere_client SELECT * FROM intranet_v2_0_prod.matiere_premiere_client;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.matiere_premiere_client_regroupement LIKE  intranet_v2_0_prod.matiere_premiere_client_regroupement;"
-//            . " INSERT INTO intranet_v3_0_dev.matiere_premiere_client_regroupement SELECT * FROM intranet_v2_0_prod.matiere_premiere_client_regroupement;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.matiere_premiere_composant LIKE  intranet_v2_0_prod.matiere_premiere_composant;"
-//            . " INSERT INTO intranet_v3_0_dev.matiere_premiere_composant SELECT * FROM intranet_v2_0_prod.matiere_premiere_composant;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.matiere_premiere_composant_allergene LIKE  intranet_v2_0_prod.matiere_premiere_composant_allergene;"
-//            . " INSERT INTO intranet_v3_0_dev.matiere_premiere_composant_allergene SELECT * FROM intranet_v2_0_prod.matiere_premiere_composant_allergene;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.matiere_premiere_composant_arome_categorie LIKE  intranet_v2_0_prod.matiere_premiere_composant_arome_categorie;"
-//            . " INSERT INTO intranet_v3_0_dev.matiere_premiere_composant_arome_categorie SELECT * FROM intranet_v2_0_prod.matiere_premiere_composant_arome_categorie;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.matiere_premiere_composant_groupe LIKE  intranet_v2_0_prod.matiere_premiere_composant_groupe;"
-//            . " INSERT INTO intranet_v3_0_dev.matiere_premiere_composant_groupe SELECT * FROM intranet_v2_0_prod.matiere_premiere_composant_groupe;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.matiere_premiere_composant_nature LIKE  intranet_v2_0_prod.matiere_premiere_composant_nature;"
-//            . " INSERT INTO intranet_v3_0_dev.matiere_premiere_composant_nature SELECT * FROM intranet_v2_0_prod.matiere_premiere_composant_nature;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.matiere_premiere_composant_origine LIKE  intranet_v2_0_prod.matiere_premiere_composant_origine;"
-//            . " INSERT INTO intranet_v3_0_dev.matiere_premiere_composant_origine SELECT * FROM intranet_v2_0_prod.matiere_premiere_composant_origine;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.matiere_premiere_composant_regroupement_advitium LIKE  intranet_v2_0_prod.matiere_premiere_composant_regroupement_advitium;"
-//            . " INSERT INTO intranet_v3_0_dev.matiere_premiere_composant_regroupement_advitium SELECT * FROM intranet_v2_0_prod.matiere_premiere_composant_regroupement_advitium;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.matiere_premiere_composant_template LIKE  intranet_v2_0_prod.matiere_premiere_composant_template;"
-//            . " INSERT INTO intranet_v3_0_dev.matiere_premiere_composant_template SELECT * FROM intranet_v2_0_prod.matiere_premiere_composant_template;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.matiere_premiere_conditionnement LIKE  intranet_v2_0_prod.matiere_premiere_conditionnement;"
-//            . " INSERT INTO intranet_v3_0_dev.matiere_premiere_conditionnement SELECT * FROM intranet_v2_0_prod.matiere_premiere_conditionnement;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.matiere_premiere_contaminant LIKE  intranet_v2_0_prod.matiere_premiere_contaminant;"
-//            . " INSERT INTO intranet_v3_0_dev.matiere_premiere_contaminant SELECT * FROM intranet_v2_0_prod.matiere_premiere_contaminant;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.matiere_premiere_contaminant_association LIKE  intranet_v2_0_prod.matiere_premiere_contaminant_association;"
-//            . " INSERT INTO intranet_v3_0_dev.matiere_premiere_contaminant_association SELECT * FROM intranet_v2_0_prod.matiere_premiere_contaminant_association;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.matiere_premiere_contamination_croisee LIKE  intranet_v2_0_prod.matiere_premiere_contamination_croisee;"
-//            . " INSERT INTO intranet_v3_0_dev.matiere_premiere_contamination_croisee SELECT * FROM intranet_v2_0_prod.matiere_premiere_contamination_croisee;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.matiere_premiere_etat LIKE  intranet_v2_0_prod.matiere_premiere_etat;"
-//            . " INSERT INTO intranet_v3_0_dev.matiere_premiere_etat SELECT * FROM intranet_v2_0_prod.matiere_premiere_etat;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.matiere_premiere_ethique_client LIKE  intranet_v2_0_prod.matiere_premiere_ethique_client;"
-//            . " INSERT INTO intranet_v3_0_dev.matiere_premiere_ethique_client SELECT * FROM intranet_v2_0_prod.matiere_premiere_ethique_client;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.matiere_premiere_filiere LIKE  intranet_v2_0_prod.matiere_premiere_filiere;"
-//            . " INSERT INTO intranet_v3_0_dev.matiere_premiere_filiere SELECT * FROM intranet_v2_0_prod.matiere_premiere_filiere;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.matiere_premiere_fournisseur LIKE  intranet_v2_0_prod.matiere_premiere_fournisseur;"
-//            . " INSERT INTO intranet_v3_0_dev.matiere_premiere_fournisseur SELECT * FROM intranet_v2_0_prod.matiere_premiere_fournisseur;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.matiere_premiere_nature LIKE  intranet_v2_0_prod.matiere_premiere_nature;"
-//            . " INSERT INTO intranet_v3_0_dev.matiere_premiere_nature SELECT * FROM intranet_v2_0_prod.matiere_premiere_nature;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.matiere_premiere_origine LIKE  intranet_v2_0_prod.matiere_premiere_origine;"
-//            . " INSERT INTO intranet_v3_0_dev.matiere_premiere_origine SELECT * FROM intranet_v2_0_prod.matiere_premiere_origine;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.matiere_premiere_origine_cycle LIKE  intranet_v2_0_prod.matiere_premiere_origine_cycle;"
-//            . " INSERT INTO intranet_v3_0_dev.matiere_premiere_origine_cycle SELECT * FROM intranet_v2_0_prod.matiere_premiere_origine_cycle;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.matiere_premiere_origine_peche LIKE  intranet_v2_0_prod.matiere_premiere_origine_peche;"
-//            . " INSERT INTO intranet_v3_0_dev.matiere_premiere_origine_peche SELECT * FROM intranet_v2_0_prod.matiere_premiere_origine_peche;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.matiere_premiere_origine_speciale LIKE  intranet_v2_0_prod.matiere_premiere_origine_speciale;"
-//            . " INSERT INTO intranet_v3_0_dev.matiere_premiere_origine_speciale SELECT * FROM intranet_v2_0_prod.matiere_premiere_origine_speciale;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.matiere_premiere_surgelation LIKE  intranet_v2_0_prod.matiere_premiere_surgelation;"
-//            . " INSERT INTO intranet_v3_0_dev.matiere_premiere_surgelation SELECT * FROM intranet_v2_0_prod.matiere_premiere_surgelation;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.matiere_premiere_transition LIKE  intranet_v2_0_prod.matiere_premiere_transition;"
-//            . " INSERT INTO intranet_v3_0_dev.matiere_premiere_transition SELECT * FROM intranet_v2_0_prod.matiere_premiere_transition;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.matiere_premiere_zone_fao LIKE  intranet_v2_0_prod.matiere_premiere_zone_fao;"
-//            . " INSERT INTO intranet_v3_0_dev.matiere_premiere_zone_fao SELECT * FROM intranet_v2_0_prod.matiere_premiere_zone_fao;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.navservavaris LIKE  intranet_v2_0_prod.navservavaris;"
-//            . " INSERT INTO intranet_v3_0_dev.navservavaris SELECT * FROM intranet_v2_0_prod.navservavaris;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.navstat LIKE  intranet_v2_0_prod.navstat;"
-//            . " INSERT INTO intranet_v3_0_dev.navstat SELECT * FROM intranet_v2_0_prod.navstat;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.navstatavaris LIKE  intranet_v2_0_prod.navstatavaris;"
-//            . " INSERT INTO intranet_v3_0_dev.navstatavaris SELECT * FROM intranet_v2_0_prod.navstatavaris;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.netlog_log LIKE  intranet_v2_0_prod.netlog_log;"
-//            . " INSERT INTO intranet_v3_0_dev.netlog_log SELECT * FROM intranet_v2_0_prod.netlog_log;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.newsdefil LIKE  intranet_v2_0_prod.newsdefil;"
-//            . " INSERT INTO intranet_v3_0_dev.newsdefil SELECT * FROM intranet_v2_0_prod.newsdefil;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.palet LIKE  intranet_v2_0_prod.palet;"
-//            . " INSERT INTO intranet_v3_0_dev.palet SELECT * FROM intranet_v2_0_prod.palet;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.paleta LIKE  intranet_v2_0_prod.paleta;"
-//            . " INSERT INTO intranet_v3_0_dev.paleta SELECT * FROM intranet_v2_0_prod.paleta;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.paletv LIKE  intranet_v2_0_prod.paletv;"
-//            . " INSERT INTO intranet_v3_0_dev.paletv SELECT * FROM intranet_v2_0_prod.paletv;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.perso LIKE  intranet_v2_0_prod.perso;"
-//            . " INSERT INTO intranet_v3_0_dev.perso SELECT * FROM intranet_v2_0_prod.perso;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.publicateur LIKE  intranet_v2_0_prod.publicateur;"
-//            . " INSERT INTO intranet_v3_0_dev.publicateur SELECT * FROM intranet_v2_0_prod.publicateur;"
-//    );
-//
-//
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.save_client LIKE  intranet_v2_0_prod.save_client;"
-//            . " INSERT INTO intranet_v3_0_dev.save_client SELECT * FROM intranet_v2_0_prod.save_client;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.segment LIKE  intranet_v2_0_prod.segment;"
-//            . " INSERT INTO intranet_v3_0_dev.segment SELECT * FROM intranet_v2_0_prod.segment;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.segstat LIKE  intranet_v2_0_prod.segstat;"
-//            . " INSERT INTO intranet_v3_0_dev.segstat SELECT * FROM intranet_v2_0_prod.segstat;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.servicece LIKE  intranet_v2_0_prod.servicece;"
-//            . " INSERT INTO intranet_v3_0_dev.servicece SELECT * FROM intranet_v2_0_prod.servicece;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.services LIKE  intranet_v2_0_prod.services;"
-//            . " INSERT INTO intranet_v3_0_dev.services SELECT * FROM intranet_v2_0_prod.services;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.societe LIKE  intranet_v2_0_prod.societe;"
-//            . " INSERT INTO intranet_v3_0_dev.societe SELECT * FROM intranet_v2_0_prod.societe;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.stat_segment_site LIKE  intranet_v2_0_prod.stat_segment_site;"
-//            . " INSERT INTO intranet_v3_0_dev.stat_segment_site SELECT * FROM intranet_v2_0_prod.stat_segment_site;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.types LIKE  intranet_v2_0_prod.types;"
-//            . " INSERT INTO intranet_v3_0_dev.types SELECT * FROM intranet_v2_0_prod.types;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.valft LIKE  intranet_v2_0_prod.valft;"
-//            . " INSERT INTO intranet_v3_0_dev.valft SELECT * FROM intranet_v2_0_prod.valft;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.words LIKE  intranet_v2_0_prod.words;"
-//            . " INSERT INTO intranet_v3_0_dev.words SELECT * FROM intranet_v2_0_prod.words;"
-//    );
-//}
-//
-///**
-// * Création de tables de la V3
-// */ {
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.fta_saisie_obligatoire LIKE intranet_v3_0_cod.fta_saisie_obligatoire;"
-//            . " INSERT INTO intranet_v3_0_dev.fta_saisie_obligatoire SELECT * FROM intranet_v3_0_cod.fta_saisie_obligatoire"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.intranet_actions LIKE intranet_v3_0_cod.intranet_actions;"
-//            . " INSERT INTO intranet_v3_0_dev.intranet_actions SELECT * FROM intranet_v3_0_cod.intranet_actions"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.intranet_modules LIKE intranet_v3_0_cod.intranet_modules;"
-//            . " INSERT INTO intranet_v3_0_dev.intranet_modules SELECT * FROM intranet_v3_0_cod.intranet_modules"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.intranet_moteur_de_recherche_type_de_champ LIKE intranet_v3_0_cod.intranet_moteur_de_recherche_type_de_champ;"
-//            . " INSERT INTO intranet_v3_0_dev.intranet_moteur_de_recherche_type_de_champ SELECT * FROM intranet_v3_0_cod.intranet_moteur_de_recherche_type_de_champ"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.fta_chapitre LIKE intranet_v3_0_cod.fta_chapitre;"
-//            . " INSERT INTO intranet_v3_0_dev.fta_chapitre SELECT * FROM intranet_v3_0_cod.fta_chapitre"
-//    );
-//
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.fta_etat LIKE intranet_v3_0_cod.fta_etat;"
-//            . " INSERT INTO intranet_v3_0_dev.fta_etat SELECT * FROM intranet_v3_0_cod.fta_etat"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.fta_processus_cycle LIKE intranet_v3_0_cod.fta_processus_cycle;"
-//            . " INSERT INTO intranet_v3_0_dev.fta_processus_cycle SELECT * FROM intranet_v3_0_cod.fta_processus_cycle"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.fta_processus LIKE intranet_v3_0_cod.fta_processus;"
-//            . " INSERT INTO intranet_v3_0_dev.fta_processus SELECT * FROM intranet_v3_0_cod.fta_processus"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.fta_transition LIKE intranet_v3_0_cod.fta_transition;"
-//            . " INSERT INTO intranet_v3_0_dev.fta_transition SELECT * FROM intranet_v3_0_cod.fta_transition"
-//    );
-//
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.extranets_table_des_liens LIKE intranet_v3_0_cod.extranets_table_des_liens;"
-//            . " INSERT INTO intranet_v3_0_dev.extranets_table_des_liens SELECT * FROM intranet_v3_0_cod.extranets_table_des_liens"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.fta_migration_nomenclature LIKE intranet_v3_0_cod.fta_migration_nomenclature;"
-//            . " INSERT INTO intranet_v3_0_dev.fta_migration_nomenclature SELECT * FROM intranet_v3_0_cod.fta_migration_nomenclature"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.fta_migration_produit LIKE intranet_v3_0_cod.fta_migration_produit;"
-//            . " INSERT INTO intranet_v3_0_dev.fta_migration_produit SELECT * FROM intranet_v3_0_cod.fta_migration_produit"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.fta_moteur_de_recherche LIKE intranet_v3_0_cod.fta_moteur_de_recherche;"
-//            . " INSERT INTO intranet_v3_0_dev.fta_moteur_de_recherche SELECT * FROM intranet_v3_0_cod.fta_moteur_de_recherche"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.annexe_service_consommateur LIKE intranet_v3_0_cod.annexe_service_consommateur;"
-//            . " INSERT INTO intranet_v3_0_dev.annexe_service_consommateur SELECT * FROM intranet_v3_0_cod.annexe_service_consommateur"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.annexe_unite_facturation LIKE intranet_v3_0_cod.annexe_unite_facturation;"
-//            . " INSERT INTO intranet_v3_0_dev.annexe_unite_facturation SELECT * FROM intranet_v3_0_cod.annexe_unite_facturation"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.arcadia_atelier LIKE intranet_v3_0_cod.arcadia_atelier;"
-//            . " INSERT INTO intranet_v3_0_dev.arcadia_atelier SELECT * FROM intranet_v3_0_cod.arcadia_atelier"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.arcadia_client_circuit LIKE intranet_v3_0_cod.arcadia_client_circuit;"
-//            . " INSERT INTO intranet_v3_0_dev.arcadia_client_circuit SELECT * FROM intranet_v3_0_cod.arcadia_client_circuit"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.arcadia_client_reseau LIKE intranet_v3_0_cod.arcadia_client_reseau;"
-//            . " INSERT INTO intranet_v3_0_dev.arcadia_client_reseau SELECT * FROM intranet_v3_0_cod.arcadia_client_reseau"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.arcadia_client_reseau_segment_association LIKE intranet_v3_0_cod.arcadia_client_reseau_segment_association;"
-//            . " INSERT INTO intranet_v3_0_dev.arcadia_client_reseau_segment_association SELECT * FROM intranet_v3_0_cod.arcadia_client_reseau_segment_association"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.arcadia_client_segment LIKE intranet_v3_0_cod.arcadia_client_segment;"
-//            . " INSERT INTO intranet_v3_0_dev.arcadia_client_segment SELECT * FROM intranet_v3_0_cod.arcadia_client_segment"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.arcadia_emballage_type LIKE intranet_v3_0_cod.arcadia_emballage_type;"
-//            . " INSERT INTO intranet_v3_0_dev.arcadia_emballage_type SELECT * FROM intranet_v3_0_cod.arcadia_emballage_type"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.arcadia_maquette_etiquette LIKE intranet_v3_0_cod.arcadia_maquette_etiquette;"
-//            . " INSERT INTO intranet_v3_0_dev.arcadia_maquette_etiquette SELECT * FROM intranet_v3_0_cod.arcadia_maquette_etiquette"
-//    );
-//
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.arcadia_poste LIKE intranet_v3_0_cod.arcadia_poste;"
-//            . " INSERT INTO intranet_v3_0_dev.arcadia_poste SELECT * FROM intranet_v3_0_cod.arcadia_poste"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.arcadia_site_groupe_production LIKE intranet_v3_0_cod.arcadia_site_groupe_production;"
-//            . " INSERT INTO intranet_v3_0_dev.arcadia_site_groupe_production SELECT * FROM intranet_v3_0_cod.arcadia_site_groupe_production"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.arcadia_type_calibre LIKE intranet_v3_0_cod.arcadia_type_calibre;"
-//            . " INSERT INTO intranet_v3_0_dev.arcadia_type_calibre SELECT * FROM intranet_v3_0_cod.arcadia_type_calibre"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.arcadia_type_conservation LIKE intranet_v3_0_cod.arcadia_type_conservation;"
-//            . " INSERT INTO intranet_v3_0_dev.arcadia_type_conservation SELECT * FROM intranet_v3_0_cod.arcadia_type_conservation"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.fta_action_role LIKE intranet_v3_0_cod.fta_action_role;"
-//            . " INSERT INTO intranet_v3_0_dev.fta_action_role SELECT * FROM intranet_v3_0_cod.fta_action_role"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.fta_action_site LIKE intranet_v3_0_cod.fta_action_site;"
-//            . " INSERT INTO intranet_v3_0_dev.fta_action_site SELECT * FROM intranet_v3_0_cod.fta_action_site"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.fta_role LIKE intranet_v3_0_cod.fta_role;"
-//            . " INSERT INTO intranet_v3_0_dev.fta_role SELECT * FROM intranet_v3_0_cod.fta_role"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.fta_workflow LIKE intranet_v3_0_cod.fta_workflow;"
-//            . " INSERT INTO intranet_v3_0_dev.fta_workflow SELECT * FROM intranet_v3_0_cod.fta_workflow"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.fta_workflow_structure LIKE intranet_v3_0_cod.fta_workflow_structure;"
-//            . " INSERT INTO intranet_v3_0_dev.fta_workflow_structure SELECT * FROM intranet_v3_0_cod.fta_workflow_structure"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.intranet_column_info LIKE intranet_v3_0_cod.intranet_column_info;"
-//            . " INSERT INTO intranet_v3_0_dev.intranet_column_info SELECT * FROM intranet_v3_0_cod.intranet_column_info"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.annexe_gestion_des_etiquettes LIKE intranet_v3_0_cod.annexe_gestion_des_etiquettes;"
-//            . " INSERT INTO intranet_v3_0_dev.annexe_gestion_des_etiquettes SELECT * FROM intranet_v3_0_cod.annexe_gestion_des_etiquettes"
-//    );
-//}
-///**
-// * Nouvelles données du jours de la prod
-// */
-///**
-// * Création des tables dépendant de id_user
-// */
-//DatabaseOperation::execute(
-//        "CREATE TABLE intranet_v3_0_dev.salaries LIKE intranet_v3_0_cod.salaries;"
-//        . " INSERT INTO intranet_v3_0_dev.salaries SELECT * FROM intranet_v2_0_prod.salaries"
-//);
-//DatabaseOperation::execute(
-//        "UPDATE intranet_v3_0_dev." . UserModel::TABLENAME
-//        . " SET " . UserModel::FIELDNAME_PRENOM . "='Non définie'," . UserModel::FIELDNAME_LOGIN . "='non_definie'"
-//        . " WHERE " . UserModel::KEYNAME . "=-1;"
-//        . "INSERT INTO `intranet_v3_0_dev`.`salaries` "
-//        . "(`id_user`, `ascendant_id_salaries`, `nom`, `prenom`, `date_creation_salaries`,"
-//        . " `id_catsopro`, `id_service`, `id_type`, `actif`, `libre2`, `libre3`, `libre4`,"
-//        . " `libre5`, `libre6`, `login`, `pass`, `mail`, `ecriture`, `membre_ce`, `lieu_geo`,"
-//        . " `newsdefil`, `blocage`, `portail_wiki_salaries`) "
-//        . "VALUES ('-2', '0', 'SYSTEM', 'Utilisateur supprimé', '" . date("Y-m-d") . "', '0',"
-//        . " '0', '0', 'oui', NULL, NULL, NULL, NULL, NULL, 'utilisateur_supprime',"
-//        . " NULL, NULL, 'oui', 'non', '', 'non', 'non', NULL); "
-//);
-//DatabaseOperation::execute(
-//        "CREATE TABLE intranet_v3_0_dev.log LIKE intranet_v3_0_cod.log;"
-//        . " INSERT INTO intranet_v3_0_dev.log SELECT intranet_v2_0_prod.log . * 
-//             FROM intranet_v2_0_prod.log, intranet_v3_0_dev.salaries
-//             WHERE intranet_v2_0_prod.log.id_user = intranet_v3_0_dev.salaries.id_user"
-//);
-//DatabaseOperation::execute(
-//        "CREATE TABLE intranet_v3_0_dev.lu LIKE intranet_v3_0_cod.lu;"
-//        . " INSERT INTO intranet_v3_0_dev.lu SELECT intranet_v2_0_prod.lu . * 
-//            FROM intranet_v2_0_prod.lu, intranet_v3_0_dev.salaries
-//            WHERE intranet_v2_0_prod.lu.id_user = intranet_v3_0_dev.salaries.id_user"
-//);
-//DatabaseOperation::execute(
-//        "CREATE TABLE intranet_v3_0_dev.modes LIKE intranet_v3_0_cod.modes;"
-//        . " INSERT INTO intranet_v3_0_dev.modes SELECT intranet_v2_0_prod.modes.* 
-//            FROM intranet_v2_0_prod.modes, intranet_v3_0_dev.salaries
-//            WHERE intranet_v2_0_prod.modes.id_user = intranet_v3_0_dev.salaries.id_user"
-//);
-//DatabaseOperation::execute(
-//        "CREATE TABLE intranet_v3_0_dev.planning_presence_detail LIKE intranet_v3_0_cod.planning_presence_detail;"
-//        . " INSERT INTO intranet_v3_0_dev.planning_presence_detail SELECT intranet_v2_0_prod.planning_presence_detail . * 
-//            FROM intranet_v2_0_prod.planning_presence_detail, intranet_v3_0_dev.salaries
-//            WHERE intranet_v2_0_prod.planning_presence_detail.id_salaries = intranet_v3_0_dev.salaries.id_user"
-//);
-//
-//DatabaseOperation::execute(
-//        "CREATE TABLE intranet_v3_0_dev.intranet_droits_acces LIKE intranet_v3_0_cod.intranet_droits_acces;"
-//        . " INSERT INTO intranet_v3_0_dev.intranet_droits_acces SELECT intranet_v2_0_prod.intranet_droits_acces.*
-//                FROM intranet_v2_0_prod.intranet_droits_acces,intranet_v3_0_dev.salaries,intranet_v3_0_dev.intranet_modules,intranet_v3_0_dev.intranet_actions 
-//                WHERE intranet_v2_0_prod.intranet_droits_acces.id_user=intranet_v3_0_dev.salaries.id_user 
-//                AND intranet_v2_0_prod.intranet_droits_acces.id_intranet_modules=intranet_v3_0_dev.intranet_modules.id_intranet_modules 
-//                AND intranet_v2_0_prod.intranet_droits_acces.id_intranet_actions=intranet_v3_0_dev.intranet_actions.id_intranet_actions"
-//);
+
+/**
+ * Création de tables de la V3
+ */ 
+if(TRUE){
+ 
+echo "DROP intranet_v3_0_dev.fta_saisie_obligatoire ...";
+$sql = "DROP TABLE intranet_v3_0_dev.fta_saisie_obligatoire";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.fta_saisie_obligatoire ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.fta_saisie_obligatoire LIKE intranet_v3_0_cod.fta_saisie_obligatoire";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.fta_saisie_obligatoire ...";
+$sql = "INSERT INTO intranet_v3_0_dev.fta_saisie_obligatoire SELECT * FROM intranet_v3_0_cod.fta_saisie_obligatoire";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.intranet_actions ...";
+$sql = "DROP TABLE intranet_v3_0_dev.intranet_actions";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.intranet_actions ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.intranet_actions LIKE intranet_v3_0_cod.intranet_actions";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.intranet_actions ...";
+$sql = "INSERT INTO intranet_v3_0_dev.intranet_actions SELECT * FROM intranet_v3_0_cod.intranet_actions";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.intranet_modules ...";
+$sql = "DROP TABLE intranet_v3_0_dev.intranet_modules";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.intranet_modules ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.intranet_modules LIKE intranet_v3_0_cod.intranet_modules";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.intranet_modules ...";
+$sql = "INSERT INTO intranet_v3_0_dev.intranet_modules SELECT * FROM intranet_v3_0_cod.intranet_modules";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.intranet_moteur_de_recherche_type_de_champ ...";
+$sql = "DROP TABLE intranet_v3_0_dev.intranet_moteur_de_recherche_type_de_champ";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.intranet_moteur_de_recherche_type_de_champ ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.intranet_moteur_de_recherche_type_de_champ LIKE intranet_v3_0_cod.intranet_moteur_de_recherche_type_de_champ";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.intranet_moteur_de_recherche_type_de_champ ...";
+$sql = "INSERT INTO intranet_v3_0_dev.intranet_moteur_de_recherche_type_de_champ SELECT * FROM intranet_v3_0_cod.intranet_moteur_de_recherche_type_de_champ";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.fta_chapitre ...";
+$sql = "DROP TABLE intranet_v3_0_dev.fta_chapitre";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.fta_chapitre ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.fta_chapitre LIKE intranet_v3_0_cod.fta_chapitre";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.fta_chapitre ...";
+$sql = "INSERT INTO intranet_v3_0_dev.fta_chapitre SELECT * FROM intranet_v3_0_cod.fta_chapitre";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.fta_etat ...";
+$sql = "DROP TABLE intranet_v3_0_dev.fta_etat";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.fta_etat ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.fta_etat LIKE intranet_v3_0_cod.fta_etat";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.fta_etat ...";
+$sql = "INSERT INTO intranet_v3_0_dev.fta_etat SELECT * FROM intranet_v3_0_cod.fta_etat";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.fta_processus_cycle ...";
+$sql = "DROP TABLE intranet_v3_0_dev.fta_processus_cycle";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.fta_processus_cycle ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.fta_processus_cycle LIKE intranet_v3_0_cod.fta_processus_cycle";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.fta_processus_cycle ...";
+$sql = "INSERT INTO intranet_v3_0_dev.fta_processus_cycle SELECT * FROM intranet_v3_0_cod.fta_processus_cycle";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.fta_processus ...";
+$sql = "DROP TABLE intranet_v3_0_dev.fta_processus";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.fta_processus ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.fta_processus LIKE intranet_v3_0_cod.fta_processus";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.fta_processus ...";
+$sql = "INSERT INTO intranet_v3_0_dev.fta_processus SELECT * FROM intranet_v3_0_cod.fta_processus";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.fta_transition ...";
+$sql = "DROP TABLE intranet_v3_0_dev.fta_transition";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.fta_transition ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.fta_transition LIKE intranet_v3_0_cod.fta_transition";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.fta_transition ...";
+$sql = "INSERT INTO intranet_v3_0_dev.fta_transition SELECT * FROM intranet_v3_0_cod.fta_transition";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.extranets_table_des_liens ...";
+$sql = "DROP TABLE intranet_v3_0_dev.extranets_table_des_liens";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.extranets_table_des_liens ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.extranets_table_des_liens LIKE intranet_v3_0_cod.extranets_table_des_liens";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.extranets_table_des_liens ...";
+$sql = "INSERT INTO intranet_v3_0_dev.extranets_table_des_liens SELECT * FROM intranet_v3_0_cod.extranets_table_des_liens";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.fta_migration_nomenclature ...";
+$sql = "DROP TABLE intranet_v3_0_dev.fta_migration_nomenclature";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.fta_migration_nomenclature ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.fta_migration_nomenclature LIKE intranet_v3_0_cod.fta_migration_nomenclature";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.fta_migration_nomenclature ...";
+$sql = "INSERT INTO intranet_v3_0_dev.fta_migration_nomenclature SELECT * FROM intranet_v3_0_cod.fta_migration_nomenclature";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.fta_migration_produit ...";
+$sql = "DROP TABLE intranet_v3_0_dev.fta_migration_produit";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.fta_migration_produit ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.fta_migration_produit LIKE intranet_v3_0_cod.fta_migration_produit";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.fta_migration_produit ...";
+$sql = "INSERT INTO intranet_v3_0_dev.fta_migration_produit SELECT * FROM intranet_v3_0_cod.fta_migration_produit";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.fta_moteur_de_recherche ...";
+$sql = "DROP TABLE intranet_v3_0_dev.fta_moteur_de_recherche";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.fta_moteur_de_recherche ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.fta_moteur_de_recherche LIKE intranet_v3_0_cod.fta_moteur_de_recherche";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.fta_moteur_de_recherche ...";
+$sql = "INSERT INTO intranet_v3_0_dev.fta_moteur_de_recherche SELECT * FROM intranet_v3_0_cod.fta_moteur_de_recherche";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.annexe_service_consommateur ...";
+$sql = "DROP TABLE intranet_v3_0_dev.annexe_service_consommateur";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.annexe_service_consommateur ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.annexe_service_consommateur LIKE intranet_v3_0_cod.annexe_service_consommateur";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.annexe_service_consommateur ...";
+$sql = "INSERT INTO intranet_v3_0_dev.annexe_service_consommateur SELECT * FROM intranet_v3_0_cod.annexe_service_consommateur";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.annexe_unite_facturation ...";
+$sql = "DROP TABLE intranet_v3_0_dev.annexe_unite_facturation";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.annexe_unite_facturation ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.annexe_unite_facturation LIKE intranet_v3_0_cod.annexe_unite_facturation";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.annexe_unite_facturation ...";
+$sql = "INSERT INTO intranet_v3_0_dev.annexe_unite_facturation SELECT * FROM intranet_v3_0_cod.annexe_unite_facturation";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.arcadia_atelier ...";
+$sql = "DROP TABLE intranet_v3_0_dev.arcadia_atelier";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.arcadia_atelier ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.arcadia_atelier LIKE intranet_v3_0_cod.arcadia_atelier";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.arcadia_atelier ...";
+$sql = "INSERT INTO intranet_v3_0_dev.arcadia_atelier SELECT * FROM intranet_v3_0_cod.arcadia_atelier";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.arcadia_client_circuit ...";
+$sql = "DROP TABLE intranet_v3_0_dev.arcadia_client_circuit";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.arcadia_client_circuit ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.arcadia_client_circuit LIKE intranet_v3_0_cod.arcadia_client_circuit";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.arcadia_client_circuit ...";
+$sql = "INSERT INTO intranet_v3_0_dev.arcadia_client_circuit SELECT * FROM intranet_v3_0_cod.arcadia_client_circuit";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.arcadia_client_reseau ...";
+$sql = "DROP TABLE intranet_v3_0_dev.arcadia_client_reseau";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.arcadia_client_reseau ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.arcadia_client_reseau LIKE intranet_v3_0_cod.arcadia_client_reseau";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.arcadia_client_reseau ...";
+$sql = "INSERT INTO intranet_v3_0_dev.arcadia_client_reseau SELECT * FROM intranet_v3_0_cod.arcadia_client_reseau";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.arcadia_client_reseau_segment_association ...";
+$sql = "DROP TABLE intranet_v3_0_dev.arcadia_client_reseau_segment_association";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.arcadia_client_reseau_segment_association ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.arcadia_client_reseau_segment_association LIKE intranet_v3_0_cod.arcadia_client_reseau_segment_association";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.arcadia_client_reseau_segment_association ...";
+$sql = "INSERT INTO intranet_v3_0_dev.arcadia_client_reseau_segment_association SELECT * FROM intranet_v3_0_cod.arcadia_client_reseau_segment_association";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.arcadia_client_segment ...";
+$sql = "DROP TABLE intranet_v3_0_dev.arcadia_client_segment";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.arcadia_client_segment ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.arcadia_client_segment LIKE intranet_v3_0_cod.arcadia_client_segment";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.arcadia_client_segment ...";
+$sql = "INSERT INTO intranet_v3_0_dev.arcadia_client_segment SELECT * FROM intranet_v3_0_cod.arcadia_client_segment";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.arcadia_emballage_type ...";
+$sql = "DROP TABLE intranet_v3_0_dev.arcadia_emballage_type";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.arcadia_emballage_type ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.arcadia_emballage_type LIKE intranet_v3_0_cod.arcadia_emballage_type";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.arcadia_emballage_type ...";
+$sql = "INSERT INTO intranet_v3_0_dev.arcadia_emballage_type SELECT * FROM intranet_v3_0_cod.arcadia_emballage_type";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.arcadia_maquette_etiquette ...";
+$sql = "DROP TABLE intranet_v3_0_dev.arcadia_maquette_etiquette";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.arcadia_maquette_etiquette ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.arcadia_maquette_etiquette LIKE intranet_v3_0_cod.arcadia_maquette_etiquette";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.arcadia_maquette_etiquette ...";
+$sql = "INSERT INTO intranet_v3_0_dev.arcadia_maquette_etiquette SELECT * FROM intranet_v3_0_cod.arcadia_maquette_etiquette";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.arcadia_poste ...";
+$sql = "DROP TABLE intranet_v3_0_dev.arcadia_poste";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.arcadia_poste ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.arcadia_poste LIKE intranet_v3_0_cod.arcadia_poste";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.arcadia_poste ...";
+$sql = "INSERT INTO intranet_v3_0_dev.arcadia_poste SELECT * FROM intranet_v3_0_cod.arcadia_poste";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.arcadia_site_groupe_production ...";
+$sql = "DROP TABLE intranet_v3_0_dev.arcadia_site_groupe_production";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.arcadia_site_groupe_production ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.arcadia_site_groupe_production LIKE intranet_v3_0_cod.arcadia_site_groupe_production";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.arcadia_site_groupe_production ...";
+$sql = "INSERT INTO intranet_v3_0_dev.arcadia_site_groupe_production SELECT * FROM intranet_v3_0_cod.arcadia_site_groupe_production";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.arcadia_type_calibre ...";
+$sql = "DROP TABLE intranet_v3_0_dev.arcadia_type_calibre";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.arcadia_type_calibre ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.arcadia_type_calibre LIKE intranet_v3_0_cod.arcadia_type_calibre";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.arcadia_type_calibre ...";
+$sql = "INSERT INTO intranet_v3_0_dev.arcadia_type_calibre SELECT * FROM intranet_v3_0_cod.arcadia_type_calibre";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.arcadia_type_conservation ...";
+$sql = "DROP TABLE intranet_v3_0_dev.arcadia_type_conservation";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.arcadia_type_conservation ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.arcadia_type_conservation LIKE intranet_v3_0_cod.arcadia_type_conservation";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.arcadia_type_conservation ...";
+$sql = "INSERT INTO intranet_v3_0_dev.arcadia_type_conservation SELECT * FROM intranet_v3_0_cod.arcadia_type_conservation";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.fta_action_role ...";
+$sql = "DROP TABLE intranet_v3_0_dev.fta_action_role";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.fta_action_role ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.fta_action_role LIKE intranet_v3_0_cod.fta_action_role";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.fta_action_role ...";
+$sql = "INSERT INTO intranet_v3_0_dev.fta_action_role SELECT * FROM intranet_v3_0_cod.fta_action_role";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.fta_action_site ...";
+$sql = "DROP TABLE intranet_v3_0_dev.fta_action_site";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.fta_action_site ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.fta_action_site LIKE intranet_v3_0_cod.fta_action_site";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.fta_action_site ...";
+$sql = "INSERT INTO intranet_v3_0_dev.fta_action_site SELECT * FROM intranet_v3_0_cod.fta_action_site";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.fta_role ...";
+$sql = "DROP TABLE intranet_v3_0_dev.fta_role";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.fta_role ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.fta_role LIKE intranet_v3_0_cod.fta_role";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.fta_role ...";
+$sql = "INSERT INTO intranet_v3_0_dev.fta_role SELECT * FROM intranet_v3_0_cod.fta_role";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.fta_workflow ...";
+$sql = "DROP TABLE intranet_v3_0_dev.fta_workflow";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.fta_workflow ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.fta_workflow LIKE intranet_v3_0_cod.fta_workflow";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.fta_workflow ...";
+$sql = "INSERT INTO intranet_v3_0_dev.fta_workflow SELECT * FROM intranet_v3_0_cod.fta_workflow";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.fta_workflow_structure ...";
+$sql = "DROP TABLE intranet_v3_0_dev.fta_workflow_structure";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.fta_workflow_structure ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.fta_workflow_structure LIKE intranet_v3_0_cod.fta_workflow_structure";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.fta_workflow_structure ...";
+$sql = "INSERT INTO intranet_v3_0_dev.fta_workflow_structure SELECT * FROM intranet_v3_0_cod.fta_workflow_structure";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.intranet_column_info ...";
+$sql = "DROP TABLE intranet_v3_0_dev.intranet_column_info";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.intranet_column_info ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.intranet_column_info LIKE intranet_v3_0_cod.intranet_column_info";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.intranet_column_info ...";
+$sql = "INSERT INTO intranet_v3_0_dev.intranet_column_info SELECT * FROM intranet_v3_0_cod.intranet_column_info";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.annexe_gestion_des_etiquettes ...";
+$sql = "DROP TABLE intranet_v3_0_dev.annexe_gestion_des_etiquettes";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.annexe_gestion_des_etiquettes ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.annexe_gestion_des_etiquettes LIKE intranet_v3_0_cod.annexe_gestion_des_etiquettes";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.annexe_gestion_des_etiquettes ...";
+$sql = "INSERT INTO intranet_v3_0_dev.annexe_gestion_des_etiquettes SELECT * FROM intranet_v3_0_cod.annexe_gestion_des_etiquettes";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+
+}
+/**
+ * Nouvelles données du jours de la prod
+ */
+/**
+ * Création des tables dépendant de id_user
+ */
+
+
+echo "DROP intranet_v3_0_dev.salaries ...";
+$sql = "DROP TABLE intranet_v3_0_dev.salaries";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.salaries ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.salaries LIKE intranet_v3_0_cod.salaries";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.salaries ...";
+$sql = "INSERT INTO intranet_v3_0_dev.salaries SELECT * FROM intranet_v3_0_cod.salaries";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+
+echo "UPDATE intranet_v3_0_dev.salaries ...";
+$sql = "UPDATE intranet_v3_0_dev.salaries SET prenom='Non définie', login='non_definie'"
+        . " WHERE id_user=-1;"
+        . "INSERT INTO `intranet_v3_0_dev`.`salaries` "
+        . "(`id_user`, `ascendant_id_salaries`, `nom`, `prenom`, `date_creation_salaries`,"
+        . " `id_catsopro`, `id_service`, `id_type`, `actif`, `libre2`, `libre3`, `libre4`,"
+        . " `libre5`, `libre6`, `login`, `pass`, `mail`, `ecriture`, `membre_ce`, `lieu_geo`,"
+        . " `newsdefil`, `blocage`, `portail_wiki_salaries`) "
+        . "VALUES ('-2', '0', 'SYSTEM', 'Utilisateur supprimé', '" . date("Y-m-d") . "', '0',"
+        . " '0', '0', 'oui', NULL, NULL, NULL, NULL, NULL, 'utilisateur_supprime',"
+        . " NULL, NULL, 'oui', 'non', '', 'non', 'non', NULL); ";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.log ...";
+$sql = "DROP TABLE intranet_v3_0_dev.log";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.log ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.log LIKE intranet_v3_0_cod.log";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.log ...";
+$sql = " INSERT INTO intranet_v3_0_dev.log SELECT intranet_v2_0_prod.log.* 
+             FROM intranet_v2_0_prod.log, intranet_v3_0_dev.salaries
+             WHERE intranet_v2_0_prod.log.id_user = intranet_v3_0_dev.salaries.id_user";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.lu ...";
+$sql = "DROP TABLE intranet_v3_0_dev.lu";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.lu ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.lu LIKE intranet_v3_0_cod.lu";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.lu ...";
+$sql = " INSERT INTO intranet_v3_0_dev.lu SELECT intranet_v2_0_prod.lu.* 
+             FROM intranet_v2_0_prod.lu, intranet_v3_0_dev.salaries
+             WHERE intranet_v2_0_prod.lu.id_user = intranet_v3_0_dev.salaries.id_user";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.modes ...";
+$sql = "DROP TABLE intranet_v3_0_dev.modes";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.modes ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.modes LIKE intranet_v3_0_cod.modes";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.modes ...";
+$sql = " INSERT INTO intranet_v3_0_dev.modes SELECT intranet_v2_0_prod.modes.* 
+            FROM intranet_v2_0_prod.modes, intranet_v3_0_dev.salaries
+            WHERE intranet_v2_0_prod.modes.id_user = intranet_v3_0_dev.salaries.id_user";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.planning_presence_detail ...";
+$sql = "DROP TABLE intranet_v3_0_dev.planning_presence_detail";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.planning_presence_detail ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.planning_presence_detail LIKE intranet_v3_0_cod.planning_presence_detail";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.planning_presence_detail ...";
+$sql = " INSERT INTO intranet_v3_0_dev.planning_presence_detail SELECT intranet_v2_0_prod.planning_presence_detail . * 
+            FROM intranet_v2_0_prod.planning_presence_detail, intranet_v3_0_dev.salaries
+            WHERE intranet_v2_0_prod.planning_presence_detail.id_salaries = intranet_v3_0_dev.salaries.id_user";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.intranet_droits_acces ...";
+$sql = "DROP TABLE intranet_v3_0_dev.intranet_droits_acces";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.intranet_droits_acces ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.intranet_droits_acces LIKE intranet_v3_0_cod.intranet_droits_acces";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.intranet_droits_acces ...";
+$sql = " INSERT INTO intranet_v3_0_dev.intranet_droits_acces SELECT intranet_v2_0_prod.intranet_droits_acces.*
+                FROM intranet_v2_0_prod.intranet_droits_acces,intranet_v3_0_dev.salaries,intranet_v3_0_dev.intranet_modules,intranet_v3_0_dev.intranet_actions 
+                WHERE intranet_v2_0_prod.intranet_droits_acces.id_user=intranet_v3_0_dev.salaries.id_user 
+                AND intranet_v2_0_prod.intranet_droits_acces.id_intranet_modules=intranet_v3_0_dev.intranet_modules.id_intranet_modules 
+                AND intranet_v2_0_prod.intranet_droits_acces.id_intranet_actions=intranet_v3_0_dev.intranet_actions.id_intranet_actions";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
 
 /**
  * Création des tables dépendant de id_fta
  */
-//$arrayTableFta = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
-//                "SELECT * FROM intranet_v2_0_prod.fta f JOIN intranet_v2_0_prod.access_arti2 a  ON a.id_access_arti2 = f.id_access_arti2  AND a.id_fta = f.id_fta");
-
 
 $sql = "SELECT * FROM intranet_v2_0_prod.fta f JOIN intranet_v2_0_prod.access_arti2 a  ON a.id_access_arti2 = f.id_access_arti2  AND a.id_fta = f.id_fta";
 $resultFta =mysql_query($sql);
 
-echo "CREATE TABLE intranet_v3_0_dev.fta_test ...";
-$sql = "CREATE TABLE intranet_v3_0_dev.fta_test LIKE  intranet_v3_0_cod.fta;";
+echo "CREATE TABLE intranet_v3_0_dev.fta ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.fta LIKE  intranet_v3_0_cod.fta;";
 if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
 
-
-//DatabaseOperation::execute(
-//        "CREATE TABLE intranet_v3_0_dev.fta LIKE  intranet_v3_0_cod.fta;"
-//);
-
-/**
- * seconde partie
- */
-//$arrayTableFta = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
-//                "SELECT * 
-//FROM intranet_v2_0_prod.fta f
-//JOIN intranet_v2_0_prod.access_arti2 a ON a.id_access_arti2 = f.id_access_arti2
-//AND a.id_fta = f.id_fta
-//AND a.id_fta NOT 
-//IN (
-//
-//SELECT id_fta
-//FROM intranet_v3_0_dev.fta
-//)");
-
-
-/*
-
-$hostname_connect = "dev-intranet.agis.fr"; //nom du serveur MySQL de connection � la base de donn�e
-$database_connect = "intranet_v3_0_dev"; //nom de la base de donn�e sur votre serveur MySQL
-$username_connect = "root"; //login de la base MySQL
-$tablename_connect = "salaries"; //table login de la base MySQL
-$password_connect = "8ale!ne"; //mot de passe de la base MySQL
-//$connect = new PDO($hostname_connect, $username_connect, $password_connect); //connection � la base de donn�e si sa echoue sa retourne une erreur. 
-
-
-$donnee = mysql_pconnect($hostname_connect, $username_connect, $password_connect) or die("connexion impossible");
-
-
-*/
 
 
 while ($value=mysql_fetch_array($resultFta)) {
@@ -2988,11 +4375,11 @@ while ($value=mysql_fetch_array($resultFta)) {
     /**
      * Unité_Facturation devient id_annexe_unite_facturation
      */
-    $Unité_Facturation = $value["id_annexe_unite_facturation"];
+    $Unite_Facturation = $value["Unité_Facturation"];
     $actif = $value["actif"];
     $Site_de_production = $value["Site_de_production"];
-    $DureeDeVie = $value["Duree_de_vie"];
-    $DureeDeVieTechnique = $value["Duree_de_vie_technique"];
+    $DureeDeVie = $value["Durée_de_vie"];
+    $DureeDeVieTechnique = $value["Durée_de_vie_technique"];
     $Composition = $value["Composition"];
     $Composition1 = $value["composition1"];
     $libelleMultilangue = $value["libelle_multilangue"];
@@ -3178,7 +4565,7 @@ VALUES ( \"$idFta\", \"$idAccessArti2\", \"$numft\", \"$idFtaWorkflow\" "
             . ", \"\", \"\", \"\", \"\" "
             . ", \"\", \"\", \"\", \"\" "
             . ", \"\", \"\", \"\", \"\" "
-            . ", \"\", \"\", \"$Unité_Facturation\", \"\" "
+            . ", \"\", \"\", \"$Unite_Facturation\", \"\" "
             . ", \"\", \"\", \"\", \"\" "
             . ", \"$dateCreation\", \"$CODE_ARTICLE\", \"$codeArticleClient\", \"$codeArticleLdc\" "
             . ", \"$LIBELLE\", \"$LIBELLE_CLIENT\", \"$NB_UNIT_ELEM\", \"$NB_UV_PAR_US1\" "

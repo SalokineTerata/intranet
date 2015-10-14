@@ -4608,10 +4608,10 @@ VALUES ( \"$idFta\", \"$idAccessArti2\", \"$numft\", \"$idFtaWorkflow\" "
 $resultSiteDEProduction =mysql_query($sql);
 if ($resultFta) {
     while ($rowsChangeIdSiteProduction=mysql_fetch_array($result1)) {
-        $idFta = $rowsChangeIdSiteProduction[FtaModel::KEYNAME];
-        $sql_inter = "UPDATE intranet_v3_0_dev." . FtaModel::TABLENAME
-                . " SET " . FtaModel::FIELDNAME_SITE_ASSEMBLAGE . "=1"
-                . " WHERE " . FtaModel::KEYNAME . "=" . $idFta;
+        $idFta = $rowsChangeIdSiteProduction['id_fta'];
+        $sql_inter = "UPDATE intranet_v3_0_dev.fta
+                 SET Site_de_production=1"
+                . " WHERE id_fta=" . $idFta;
     if(mysql_query($sql_inter)) {echo "[OK]\n";}else{echo "[FAILED]\n $sql_inter \n";}
       
     }
@@ -4628,10 +4628,10 @@ $resultChangeIdUse =mysql_query($sql);
 
 if ($resultChangeIdUse) {
     while ($rowsChangeIdUser=mysql_fetch_array($resultChangeIdUse)) {
-        $idFta = $rowsChangeIdUser[FtaModel::KEYNAME];
-        $sql_inter = "UPDATE intranet_v3_0_dev." . FtaModel::TABLENAME
-                . " SET " . FtaModel::FIELDNAME_CREATEUR . "=-2"
-                . " WHERE " . FtaModel::KEYNAME . "=" . $idFta;
+        $idFta = $rowsChangeIdUser['id_fta'];
+        $sql_inter = "UPDATE intranet_v3_0_dev.fta
+                 SET createur_fta=-2"
+                . " WHERE id_fta=" . $idFta;
     if(mysql_query($sql_inter)) {echo "[OK]\n";}else{echo "[FAILED]\n $sql_inter \n";}
       
     }

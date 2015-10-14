@@ -4587,7 +4587,7 @@ VALUES ( \"$idFta\", \"$idAccessArti2\", \"$numft\", \"$idFtaWorkflow\" "
             . ", \"\", NULL)";
 
     mysql_query("SET NAMES 'utf8'");
-    if(mysql_query($sql_inter)) {echo "[OK]\n";}else{echo "[FAILED]\n $sql_inter \n";}
+    if(mysql_query($sql_inter)) {echo "[OK]\n";}else{echo "[FAILED]\n $idFta \n";}
 
 //    $resultquery = mysql_query($sql_inter);
 //    if (!$resultquery) {
@@ -4613,7 +4613,7 @@ if ($resultSiteDEProduction) {
         $sql_inter = "UPDATE intranet_v3_0_dev.fta
                  SET Site_de_production=1"
                 . " WHERE id_fta=" . $idFta;
-    if(mysql_query($sql_inter)) {echo "[OK]\n";}else{echo "[FAILED]\n $sql_inter \n";}
+    if(mysql_query($sql_inter)) {echo "[OK]\n";}else{echo "[FAILED]\n $idFta \n";}
       
     }
 }
@@ -4633,7 +4633,7 @@ if ($resultChangeIdUse) {
         $sql_inter = "UPDATE intranet_v3_0_dev.fta
                  SET createur_fta=-2"
                 . " WHERE id_fta=" . $idFta;
-    if(mysql_query($sql_inter)) {echo "[OK]\n";}else{echo "[FAILED]\n $sql_inter \n";}
+    if(mysql_query($sql_inter)) {echo "[OK]\n";}else{echo "[FAILED]\n $idFta \n";}
       
     }
 } 
@@ -4733,6 +4733,9 @@ while ($rowsTableFtaSuiviProjet=mysql_fetch_array($resultFtaSuiviPrjet)) {
             case '90' :
                 $idFtaChapitre = '40';
                 break;
+                    default:
+                      $idFtaChapitre=  $idFtaChapitreTMP;
+                           break;
         }
 
     $selectInsert = " INSERT INTO intranet_v3_0_dev.`fta_suivi_projet` "
@@ -4758,7 +4761,7 @@ while ($rowsTableFtaSuiviProjet=mysql_fetch_array($resultFtaSuiviPrjet)) {
     ;
 
     mysql_query("SET NAMES 'utf8'");
-   if(mysql_query($selectInsert)) {echo "[OK]\n";}else{echo "[FAILED]\n ";}
+   if(mysql_query($selectInsert)) {echo "[OK] \n";}else{echo "[FAILED] $idFtaSuiviProjet \n ";}
    
 }
 }

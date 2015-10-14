@@ -4194,15 +4194,17 @@ if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
 
 echo "UPDATE intranet_v3_0_dev.salaries ...";
 $sql = "UPDATE intranet_v3_0_dev.salaries SET prenom='Non définie', login='non_definie'"
-        . " WHERE id_user=-1;"
-        . "INSERT INTO `intranet_v3_0_dev`.`salaries` "
+        . " WHERE id_user=-1;";       
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+echo "INSERT INTO intranet_v3_0_dev.salaries Utilisateur supprimé ...";
+$sql = "INSERT INTO `intranet_v3_0_dev`.`salaries` "
         . "(`id_user`, `ascendant_id_salaries`, `nom`, `prenom`, `date_creation_salaries`,"
         . " `id_catsopro`, `id_service`, `id_type`, `actif`, `libre2`, `libre3`, `libre4`,"
         . " `libre5`, `libre6`, `login`, `pass`, `mail`, `ecriture`, `membre_ce`, `lieu_geo`,"
         . " `newsdefil`, `blocage`, `portail_wiki_salaries`) "
         . "VALUES ('-2', '0', 'SYSTEM', 'Utilisateur supprimé', '" . date("Y-m-d") . "', '0',"
         . " '0', '0', 'oui', NULL, NULL, NULL, NULL, NULL, 'utilisateur_supprime',"
-        . " NULL, NULL, 'oui', 'non', '', 'non', 'non', NULL); ";
+        . " NULL, NULL, 'oui', 'non', '', 'non', 'non', NULL); ";       
 if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
 
 echo "DROP intranet_v3_0_dev.log ...";
@@ -4280,6 +4282,9 @@ if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
 /**
  * Création des tables dépendant de id_fta
  */
+echo "DROP intranet_v3_0_dev.fta ...";
+$sql = "DROP TABLE intranet_v3_0_dev.fta";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
 
 $sql = "SELECT * FROM intranet_v2_0_prod.fta f JOIN intranet_v2_0_prod.access_arti2 a  ON a.id_access_arti2 = f.id_access_arti2  AND a.id_fta = f.id_fta";
 $resultFta =mysql_query($sql);
@@ -4513,7 +4518,7 @@ while ($value=mysql_fetch_array($resultFta)) {
 
 
 
-    $sql_inter = "INSERT INTO intranet_v3_0_dev.fta_test (
+    $sql_inter = "INSERT INTO intranet_v3_0_dev.fta (
 id_fta, id_access_arti2, OLD_numft, id_fta_workflow,
  commentaire, OLD_id_fta_palettisation, id_dossier_fta, id_version_dossier_fta,
  OLD_champ_maj_fta, id_fta_etat, createur_fta, date_derniere_maj_fta,

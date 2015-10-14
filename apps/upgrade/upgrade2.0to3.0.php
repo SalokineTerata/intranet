@@ -4600,6 +4600,7 @@ VALUES ( \"$idFta\", \"$idAccessArti2\", \"$numft\", \"$idFtaWorkflow\" "
  * Affiliation d'un id_user au createur supprimer
  */
 
+if(FALSE){
   $sql ="SELECT DISTINCT fta.id_fta
          FROM intranet_v3_0_dev.fta
          WHERE Site_de_production NOT 
@@ -4635,93 +4636,132 @@ if ($resultChangeIdUse) {
     if(mysql_query($sql_inter)) {echo "[OK]\n";}else{echo "[FAILED]\n $sql_inter \n";}
       
     }
-} else {
-    echo "Erreur dans le changement d'id de crétauir dans la table fta";
+} 
 }
-
-///**
-// * Extraction Fta suivi de projet
-// */
-//$arrayTableFtaSuiviProjet = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
-//                "SELECT intranet_v2_0_prod.fta_suivi_projet.* FROM intranet_v2_0_prod.fta_suivi_projet,intranet_v3_0_dev.fta WHERE intranet_v2_0_prod.fta_suivi_projet.id_fta=intranet_v3_0_dev.fta.id_fta "
-//);
-
-
-//DatabaseOperation::execute(
-//        "CREATE TABLE intranet_v3_0_dev.fta_suivi_projet LIKE  intranet_v3_0_cod.fta_suivi_projet;"
-//);
-/*
- * seconde partie
+/**
+ * Extraction Fta suivi de projet
  */
-//$arrayTableFtaSuiviProjet = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
-//                "SELECT intranet_v2_0_prod.fta_suivi_projet . * 
-//FROM intranet_v2_0_prod.fta_suivi_projet, intranet_v3_0_dev.fta
-//WHERE intranet_v2_0_prod.fta_suivi_projet.id_fta = intranet_v3_0_dev.fta.id_fta
-//AND fta.id_fta NOT 
-//IN (
-//
-//SELECT id_fta
-//FROM intranet_v3_0_dev.fta_suivi_projet
-//) "
-//);
-//
-//
-//
-//foreach ($arrayTableFtaSuiviProjet as $rowsTableFtaSuiviProjet) {
-//    $idFtaSuiviProjet = $rowsTableFtaSuiviProjet[FtaSuiviProjetModel::KEYNAME];
-//    $idFta = $rowsTableFtaSuiviProjet[FtaSuiviProjetModel::FIELDNAME_ID_FTA];
-//    $idFtaChapitreTMP = $rowsTableFtaSuiviProjet[FtaSuiviProjetModel::FIELDNAME_ID_FTA_CHAPITRE];
-//    $commentaire_suivi_projettmp = $rowsTableFtaSuiviProjet[FtaSuiviProjetModel::FIELDNAME_COMMENTAIRE_SUIVI_PROJET];
-//    $commentaire_suivi_projettmp2 = str_replace('"', '', $commentaire_suivi_projettmp);
-//    $commentaire_suivi_projet = stripslashes($commentaire_suivi_projettmp2);
-//    $date_validation_suivi_projet = $rowsTableFtaSuiviProjet[FtaSuiviProjetModel::FIELDNAME_DATE_VALIDATION_SUIVI_PROJET];
-//    $signature_validation_suivi_projet = $rowsTableFtaSuiviProjet[FtaSuiviProjetModel::FIELDNAME_SIGNATURE_VALIDATION_SUIVI_PROJET];
-//    $date_demarrage_chapitre_fta_suivi_projet = $rowsTableFtaSuiviProjet[FtaSuiviProjetModel::FIELDNAME_DATE_DEMARRAGE_CHAPITRE_FTA_SUIVI_PROJET];
-//    $notification_fta_suivi_projet = $rowsTableFtaSuiviProjet[FtaSuiviProjetModel::FIELDNAME_NOTIFICATION_FTA_SUIVI_PROJET];
-//    $correction_fta_suivi_projettmp = $rowsTableFtaSuiviProjet[FtaSuiviProjetModel::FIELDNAME_CORRECTION_FTA_SUIVI_PROJET];
-//    $correction_fta_suivi_projettmp2 = str_replace('"', '', $correction_fta_suivi_projettmp);
-//    $correction_fta_suivi_projet = stripslashes($correction_fta_suivi_projettmp2);
-//
-//    $arrayIdFtaWorkflow = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
-//                    "SELECT DISTINCT " . FtaModel::FIELDNAME_WORKFLOW
-//                    . " FROM intranet_v3_0_dev.fta "
-//                    . " WHERE id_fta = " . $idFta
-//    );
-//
-//    foreach ($arrayIdFtaWorkflow as $rowIdFtaWorkflow) {
-//        $idFtaWorkflow = $rowIdFtaWorkflow[FtaModel::FIELDNAME_WORKFLOW];
-//    }
-//    $idFtaChapitre = FtaSuiviProjetModel::checkChapitreV2toV3($idFtaChapitreTMP, $idFtaWorkflow);
-//
-//    $selectInsert = " INSERT INTO intranet_v3_0_dev." . FtaSuiviProjetModel::TABLENAME
-//            . " (" . FtaSuiviProjetModel::KEYNAME
-//            . ", " . FtaSuiviProjetModel::FIELDNAME_ID_FTA
-//            . ", " . FtaSuiviProjetModel::FIELDNAME_ID_FTA_CHAPITRE
-//            . ", " . FtaSuiviProjetModel::FIELDNAME_COMMENTAIRE_SUIVI_PROJET
-//            . ", " . FtaSuiviProjetModel::FIELDNAME_DATE_VALIDATION_SUIVI_PROJET
-//            . ", " . FtaSuiviProjetModel::FIELDNAME_SIGNATURE_VALIDATION_SUIVI_PROJET
-//            . ", " . FtaSuiviProjetModel::FIELDNAME_DATE_DEMARRAGE_CHAPITRE_FTA_SUIVI_PROJET
-//            . ", " . FtaSuiviProjetModel::FIELDNAME_NOTIFICATION_FTA_SUIVI_PROJET
-//            . ", " . FtaSuiviProjetModel::FIELDNAME_CORRECTION_FTA_SUIVI_PROJET . ")"
-//            . "VALUES ("
-//            . " \"" . $idFtaSuiviProjet . "\","
-//            . " \"" . $idFta . "\","
-//            . " \"" . $idFtaChapitre . "\","
-//            . " \"" . $commentaire_suivi_projet . "\","
-//            . " \"" . $date_validation_suivi_projet . "\","
-//            . " \"" . $signature_validation_suivi_projet . "\","
-//            . " \"" . $date_demarrage_chapitre_fta_suivi_projet . "\","
-//            . " \"" . $notification_fta_suivi_projet . "\","
-//            . " \"" . $correction_fta_suivi_projet . "\")"
-//    ;
-//
-//    mysql_query("SET NAMES 'utf8'");
-//    $resultquery = DatabaseOperation::execute($selectInsert) or mysql_error();
-//    if (!$resultquery) {
-//        $sqlFalse = $selectInsert;
-//    }
-//}
+if(TRUE){
+echo "DROP intranet_v3_0_dev.fta_suivi_projet ...";
+$sql = "DROP TABLE intranet_v3_0_dev.fta_suivi_projet";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
 
+echo "CREATE TABLE intranet_v3_0_dev.fta_suivi_projet ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.fta_suivi_projet LIKE  intranet_v3_0_cod.fta_suivi_projet;";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+$sql ="SELECT intranet_v2_0_prod.fta_suivi_projet.* "
+        . " FROM intranet_v2_0_prod.fta_suivi_projet,intranet_v3_0_dev.fta"
+        . " WHERE intranet_v2_0_prod.fta_suivi_projet.id_fta=intranet_v3_0_dev.fta.id_fta ";
+$resultFtaSuiviPrjet =mysql_query($sql);
+
+while ($rowsTableFtaSuiviProjet=mysql_fetch_array($resultFtaSuiviPrjet)) {
+    $idFtaSuiviProjet = $rowsTableFtaSuiviProjet["id_fta_suivi_projet"];
+    $idFta = $rowsTableFtaSuiviProjet["id_fta"];
+    $idFtaChapitreTMP = $rowsTableFtaSuiviProjet['id_fta_chapitre'];
+    $commentaire_suivi_projettmp = $rowsTableFtaSuiviProjet['commentaire_suivi_projet'];
+    $commentaire_suivi_projettmp2 = str_replace('"', '', $commentaire_suivi_projettmp);
+    $commentaire_suivi_projet = stripslashes($commentaire_suivi_projettmp2);
+    $date_validation_suivi_projet = $rowsTableFtaSuiviProjet['date_validation_suivi_projet'];
+    $signature_validation_suivi_projet = $rowsTableFtaSuiviProjet['signature_validation_suivi_projet'];
+    $date_demarrage_chapitre_fta_suivi_projet = $rowsTableFtaSuiviProjet['date_demarrage_chapitre_fta_suivi_projet'];
+    $notification_fta_suivi_projet = $rowsTableFtaSuiviProjet['notification_fta_suivi_projet'];
+    $correction_fta_suivi_projettmp = $rowsTableFtaSuiviProjet['correction_fta_suivi_projet'];
+    $correction_fta_suivi_projettmp2 = str_replace('"', '', $correction_fta_suivi_projettmp);
+    $correction_fta_suivi_projet = stripslashes($correction_fta_suivi_projettmp2);
+
+    $arrayIdFtaWorkflow = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
+                    "SELECT DISTINCT id_fta_workflow
+                     FROM intranet_v3_0_dev.fta WHERE id_fta = " . $idFta
+    );
+
+    foreach ($arrayIdFtaWorkflow as $rowIdFtaWorkflow) {
+        $idFtaWorkflow = $rowIdFtaWorkflow['id_fta_workflow'];
+    }
+    
+    switch ($idFtaChapitreTMP) {
+            case '20':
+                $idFtaChapitre = '32';
+                break;
+            case '40' :
+                $idFtaChapitre = '21';
+                break;
+            case '80' :
+                $idFtaChapitre = '27';
+                break;
+            case '60' :
+                $idFtaChapitre = '24';
+                break;
+            case '101' :
+                switch ($idFtaWorkflow) {
+                    case '3':
+                    case '5':
+                        $idFtaChapitre = '35';
+                        break;
+                    case '6':
+                    case '7':
+                        $idFtaChapitre = '38';
+                        break;
+                    default :
+                        $idFtaChapitre = '29';
+                        break;
+                }
+                break;
+            case '100':
+                switch ($idFtaWorkflow) {
+                    case '3':
+                    case '5':
+                        $idFtaChapitre = '36';
+                        break;
+                    case '6':
+                    case '7':
+                        $idFtaChapitre = '39';
+                        break;
+                    default :
+                        $idFtaChapitre = '30';
+                        break;
+                }
+
+                break;
+            case '111' :
+                $idFtaChapitre = '33';
+                break;
+            case '70' :
+                $idFtaChapitre = '17';
+                break;
+            case '112' :
+            case '90' :
+                $idFtaChapitre = '40';
+                break;
+        }
+
+    $selectInsert = " INSERT INTO intranet_v3_0_dev.`fta_suivi_projet` "
+            . "(`id_fta_suivi_projet`, "
+            . "`id_fta`, "
+            . "`id_fta_chapitre`,"
+            . " `commentaire_suivi_projet`, "
+            . "`date_validation_suivi_projet`, "
+            . "`signature_validation_suivi_projet`,"
+            . " `date_demarrage_chapitre_fta_suivi_projet`,"
+            . " `notification_fta_suivi_projet`, "
+            . "`correction_fta_suivi_projet`)"
+            . "VALUES ("
+            . " \"" . $idFtaSuiviProjet . "\","
+            . " \"" . $idFta . "\","
+            . " \"" . $idFtaChapitre . "\","
+            . " \"" . $commentaire_suivi_projet . "\","
+            . " \"" . $date_validation_suivi_projet . "\","
+            . " \"" . $signature_validation_suivi_projet . "\","
+            . " \"" . $date_demarrage_chapitre_fta_suivi_projet . "\","
+            . " \"" . $notification_fta_suivi_projet . "\","
+            . " \"" . $correction_fta_suivi_projet . "\")"
+    ;
+
+    mysql_query("SET NAMES 'utf8'");
+   if(mysql_query($selectInsert)) {echo "[OK]\n";}else{echo "[FAILED]\n ";}
+   
+}
+}
 /**
  * Second traitment fta suivie de projet
  */

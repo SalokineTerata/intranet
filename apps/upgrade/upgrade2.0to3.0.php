@@ -48,7 +48,11 @@ echo "*** Requêtes SQL:\n";
 Tables basiques
 **/
 
-if(TRUE){
+if(FALSE){
+
+echo "DROP intranet_v3_0_dev.classification_arborescence_article ...";
+$sql = "DROP TABLE intranet_v3_0_dev.classification_arborescence_article";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
 
 echo "CREATE TABLE intranet_v3_0_dev.classification_arborescence_article ...";
 $sql = "CREATE TABLE intranet_v3_0_dev.classification_arborescence_article LIKE intranet_v3_0_cod.classification_arborescence_article";
@@ -58,707 +62,2031 @@ echo "INSERT INTO intranet_v3_0_dev.classification_arborescence_article ...";
 $sql = "INSERT INTO intranet_v3_0_dev.classification_arborescence_article SELECT * FROM intranet_v2_0_prod.classification_arborescence_article";
 if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
 
+echo "DROP intranet_v3_0_dev.classification_arborescence_article_categorie ...";
+$sql = "DROP TABLE intranet_v3_0_dev.classification_arborescence_article_categorie";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.classification_arborescence_article_categorie ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.classification_arborescence_article_categorie LIKE intranet_v3_0_cod.classification_arborescence_article_categorie";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.classification_arborescence_article ...";
+$sql = "INSERT INTO intranet_v3_0_dev.classification_arborescence_article_categorie SELECT * FROM intranet_v2_0_prod.classification_arborescence_article_categorie";
+if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.classification_arborescence_article_categorie_contenu ...";
+$sql = "DROP TABLE intranet_v3_0_dev.classification_arborescence_article_categorie_contenu";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.classification_arborescence_article_categorie_contenu ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.classification_arborescence_article_categorie_contenu LIKE intranet_v3_0_cod.classification_arborescence_article_categorie_contenu";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.classification_arborescence_article ...";
+$sql = "INSERT INTO intranet_v3_0_dev.classification_arborescence_article_categorie_contenu SELECT * FROM intranet_v2_0_prod.classification_arborescence_article_categorie_contenu";
+if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.fte_fournisseur ...";
+$sql = "DROP TABLE intranet_v3_0_dev.fte_fournisseur";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.fte_fournisseur ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.fte_fournisseur LIKE intranet_v3_0_cod.fte_fournisseur";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.fte_fournisseur ...";
+$sql = "INSERT INTO intranet_v3_0_dev.fte_fournisseur SELECT * FROM intranet_v2_0_prod.fte_fournisseur";
+if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.geo ...";
+$sql = "DROP TABLE intranet_v3_0_dev.geo";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.geo ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.geo LIKE intranet_v3_0_cod.geo";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.geo ...";
+$sql = "INSERT INTO intranet_v3_0_dev.geo SELECT * FROM intranet_v2_0_prod.geo";
+if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.geo_codesoft ...";
+$sql = "DROP TABLE intranet_v3_0_dev.geo_codesoft";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.geo_codesoft ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.geo_codesoft LIKE intranet_v3_0_cod.geo_codesoft";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.geo_codesoft ...";
+$sql = "INSERT INTO intranet_v3_0_dev.geo_codesoft SELECT * FROM intranet_v2_0_prod.geo_codesoft";
+if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.groupes ...";
+$sql = "DROP TABLE intranet_v3_0_dev.groupes";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.groupes ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.groupes LIKE intranet_v3_0_cod.groupes";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.groupes ...";
+$sql = "INSERT INTO intranet_v3_0_dev.groupes SELECT * FROM intranet_v2_0_prod.groupes";
+if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.planning_presence_semaine_visible ...";
+$sql = "DROP TABLE intranet_v3_0_dev.planning_presence_semaine_visible";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.planning_presence_semaine_visible ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.planning_presence_semaine_visible LIKE intranet_v3_0_cod.planning_presence_semaine_visible";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.planning_presence_semaine_visible ...";
+$sql = "INSERT INTO intranet_v3_0_dev.planning_presence_semaine_visible SELECT * FROM intranet_v2_0_prod.planning_presence_semaine_visible";
+if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.annexe_agrologic_article_codification ...";
+$sql = "DROP TABLE intranet_v3_0_dev.annexe_agrologic_article_codification";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.annexe_agrologic_article_codification ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.annexe_agrologic_article_codification LIKE intranet_v3_0_cod.annexe_agrologic_article_codification";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.annexe_agrologic_article_codification ...";
+$sql = "INSERT INTO intranet_v3_0_dev.annexe_agrologic_article_codification SELECT * FROM intranet_v2_0_prod.annexe_agrologic_article_codification";
+if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.annexe_allergene ...";
+$sql = "DROP TABLE intranet_v3_0_dev.annexe_allergene";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.annexe_allergene ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.annexe_allergene LIKE intranet_v3_0_cod.annexe_allergene";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.annexe_allergene ...";
+$sql = "INSERT INTO intranet_v3_0_dev.annexe_allergene SELECT * FROM intranet_v2_0_prod.annexe_allergene";
+if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.annexe_additif ...";
+$sql = "DROP TABLE intranet_v3_0_dev.annexe_additif";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.annexe_additif ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.annexe_additif LIKE intranet_v3_0_cod.annexe_additif";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.annexe_additif ...";
+$sql = "INSERT INTO intranet_v3_0_dev.annexe_additif SELECT * FROM intranet_v2_0_prod.annexe_additif";
+if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.access_materiel_service ...";
+$sql = "DROP TABLE intranet_v3_0_dev.access_materiel_service";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.access_materiel_service ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.access_materiel_service LIKE intranet_v3_0_cod.access_materiel_service";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.access_materiel_service ...";
+$sql = "INSERT INTO intranet_v3_0_dev.access_materiel_service SELECT * FROM intranet_v2_0_prod.access_materiel_service";
+if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.annexe_additif_groupe ...";
+$sql = "DROP TABLE intranet_v3_0_dev.annexe_additif_groupe";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.annexe_additif_groupe ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.annexe_additif_groupe LIKE intranet_v3_0_cod.annexe_additif_groupe";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.access_materiel_service ...";
+$sql = "INSERT INTO intranet_v3_0_dev.annexe_additif_groupe SELECT * FROM intranet_v2_0_prod.annexe_additif_groupe";
+if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.annexe_allergene_famille ...";
+$sql = "DROP TABLE intranet_v3_0_dev.annexe_allergene_famille";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.annexe_allergene_famille ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.annexe_allergene_famille LIKE intranet_v3_0_cod.annexe_allergene_famille";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.annexe_allergene_famille ...";
+$sql = "INSERT INTO intranet_v3_0_dev.annexe_allergene_famille SELECT * FROM intranet_v2_0_prod.annexe_allergene_famille";
+if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.annexe_allergene_origine ...";
+$sql = "DROP TABLE intranet_v3_0_dev.annexe_allergene_origine";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.annexe_allergene_origine ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.annexe_allergene_origine LIKE intranet_v3_0_cod.annexe_allergene_origine";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.annexe_allergene_origine ...";
+$sql = "INSERT INTO intranet_v3_0_dev.annexe_allergene_origine SELECT * FROM intranet_v2_0_prod.annexe_allergene_origine";
+if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.annexe_arome_categorie ...";
+$sql = "DROP TABLE intranet_v3_0_dev.annexe_arome_categorie";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.annexe_arome_categorie ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.annexe_arome_categorie LIKE intranet_v3_0_cod.annexe_arome_categorie";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.annexe_arome_categorie ...";
+$sql = "INSERT INTO intranet_v3_0_dev.annexe_arome_categorie SELECT * FROM intranet_v2_0_prod.annexe_arome_categorie";
+if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.annexe_caracteristique_scientifique ...";
+$sql = "DROP TABLE intranet_v3_0_dev.annexe_caracteristique_scientifique";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.annexe_caracteristique_scientifique ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.annexe_caracteristique_scientifique LIKE intranet_v3_0_cod.annexe_caracteristique_scientifique";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.annexe_caracteristique_scientifique ...";
+$sql = "INSERT INTO intranet_v3_0_dev.annexe_caracteristique_scientifique SELECT * FROM intranet_v2_0_prod.annexe_caracteristique_scientifique";
+if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.annexe_caracteristique_scientifique_groupe ...";
+$sql = "DROP TABLE intranet_v3_0_dev.annexe_caracteristique_scientifique_groupe";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.annexe_caracteristique_scientifique_groupe ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.annexe_caracteristique_scientifique_groupe LIKE intranet_v3_0_cod.annexe_caracteristique_scientifique_groupe";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.annexe_caracteristique_scientifique_groupe ...";
+$sql = "INSERT INTO intranet_v3_0_dev.annexe_caracteristique_scientifique_groupe SELECT * FROM intranet_v2_0_prod.annexe_caracteristique_scientifique_groupe";
+if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.annexe_environnement_conservation ...";
+$sql = "DROP TABLE intranet_v3_0_dev.annexe_environnement_conservation";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.annexe_environnement_conservation ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.annexe_environnement_conservation LIKE intranet_v3_0_cod.annexe_environnement_conservation";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.annexe_environnement_conservation ...";
+$sql = "INSERT INTO intranet_v3_0_dev.annexe_environnement_conservation SELECT * FROM intranet_v2_0_prod.annexe_environnement_conservation";
+if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.annexe_environnement_conservation_groupe ...";
+$sql = "DROP TABLE intranet_v3_0_dev.annexe_environnement_conservation_groupe";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.annexe_environnement_conservation_groupe ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.annexe_environnement_conservation_groupe LIKE intranet_v3_0_cod.annexe_environnement_conservation_groupe";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.annexe_environnement_conservation_groupe ...";
+$sql = "INSERT INTO intranet_v3_0_dev.annexe_environnement_conservation_groupe SELECT * FROM intranet_v2_0_prod.annexe_environnement_conservation_groupe";
+if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.annexe_pays ...";
+$sql = "DROP TABLE intranet_v3_0_dev.annexe_pays";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.annexe_pays ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.annexe_pays LIKE intranet_v3_0_cod.annexe_pays";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.annexe_pays ...";
+$sql = "INSERT INTO intranet_v3_0_dev.annexe_pays SELECT * FROM intranet_v2_0_prod.annexe_pays";
+if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.annexe_unite ...";
+$sql = "DROP TABLE intranet_v3_0_dev.annexe_unite";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.annexe_unite ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.annexe_unite LIKE intranet_v3_0_cod.annexe_unite";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.annexe_unite ...";
+$sql = "INSERT INTO intranet_v3_0_dev.annexe_unite SELECT * FROM intranet_v2_0_prod.annexe_unite";
+if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.archcomment ...";
+$sql = "DROP TABLE intranet_v3_0_dev.archcomment";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.archcomment ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.archcomment LIKE intranet_v3_0_cod.archcomment";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.archcomment ...";
+$sql = "INSERT INTO intranet_v3_0_dev.archcomment SELECT * FROM intranet_v2_0_prod.archcomment";
+if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.archlu ...";
+$sql = "DROP TABLE intranet_v3_0_dev.archlu";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.archlu ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.archlu LIKE intranet_v3_0_cod.archlu";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.archlu ...";
+$sql = "INSERT INTO intranet_v3_0_dev.archlu SELECT * FROM intranet_v2_0_prod.archlu";
+if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.articlece ...";
+$sql = "DROP TABLE intranet_v3_0_dev.articlece";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.articlece ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.articlece LIKE intranet_v3_0_cod.articlece";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.articlece ...";
+$sql = "INSERT INTO intranet_v3_0_dev.articlece SELECT * FROM intranet_v2_0_prod.articlece";
+if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.articles ...";
+$sql = "DROP TABLE intranet_v3_0_dev.articles";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.articles ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.articles LIKE intranet_v3_0_cod.articles";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.articles ...";
+$sql = "INSERT INTO intranet_v3_0_dev.articles SELECT * FROM intranet_v2_0_prod.articles";
+if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.artstat ...";
+$sql = "DROP TABLE intranet_v3_0_dev.artstat";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.artstat ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.artstat LIKE intranet_v3_0_cod.artstat";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.artstat ...";
+$sql = "INSERT INTO intranet_v3_0_dev.artstat SELECT * FROM intranet_v2_0_prod.artstat";
+if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.catsopro ...";
+$sql = "DROP TABLE intranet_v3_0_dev.catsopro";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.catsopro ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.catsopro LIKE intranet_v3_0_cod.catsopro";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.catsopro ...";
+$sql = "INSERT INTO intranet_v3_0_dev.catsopro SELECT * FROM intranet_v2_0_prod.catsopro";
+if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.classification_arborescence_client ...";
+$sql = "DROP TABLE intranet_v3_0_dev.classification_arborescence_client";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.classification_arborescence_client ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.classification_arborescence_client LIKE intranet_v3_0_cod.classification_arborescence_client";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.classification_arborescence_client ...";
+$sql = "INSERT INTO intranet_v3_0_dev.classification_arborescence_client SELECT * FROM intranet_v2_0_prod.classification_arborescence_client";
+if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.classification_arborescence_client_groupe ...";
+$sql = "DROP TABLE intranet_v3_0_dev.classification_arborescence_client_groupe";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.classification_arborescence_client_groupe ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.classification_arborescence_client_groupe LIKE intranet_v3_0_cod.classification_arborescence_client_groupe";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.classification_arborescence_client_groupe ...";
+$sql = "INSERT INTO intranet_v3_0_dev.classification_arborescence_client_groupe SELECT * FROM intranet_v2_0_prod.classification_arborescence_client_groupe";
+if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.classification_article ...";
+$sql = "DROP TABLE intranet_v3_0_dev.classification_article";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.classification_article ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.classification_article LIKE intranet_v3_0_cod.classification_article";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.classification_article ...";
+$sql = "INSERT INTO intranet_v3_0_dev.classification_article SELECT * FROM intranet_v2_0_prod.classification_article";
+if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.classification_article_rayon ...";
+$sql = "DROP TABLE intranet_v3_0_dev.classification_article_rayon";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.classification_article_rayon ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.classification_article_rayon LIKE intranet_v3_0_cod.classification_article_rayon";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.classification_article_rayon ...";
+$sql = "INSERT INTO intranet_v3_0_dev.classification_article_rayon SELECT * FROM intranet_v2_0_prod.classification_article_rayon";
+if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.codesoft_etiquettes ...";
+$sql = "DROP TABLE intranet_v3_0_dev.codesoft_etiquettes";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.codesoft_etiquettes ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.codesoft_etiquettes LIKE intranet_v3_0_cod.codesoft_etiquettes";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.codesoft_etiquettes ...";
+$sql = "INSERT INTO intranet_v3_0_dev.codesoft_etiquettes SELECT * FROM intranet_v2_0_prod.codesoft_etiquettes";
+if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.codesoft_etiquettes_logo ...";
+$sql = "DROP TABLE intranet_v3_0_dev.codesoft_etiquettes_logo";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.codesoft_etiquettes_logo ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.codesoft_etiquettes_logo LIKE intranet_v3_0_cod.codesoft_etiquettes_logo";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.codesoft_etiquettes_logo ...";
+$sql = "INSERT INTO intranet_v3_0_dev.codesoft_etiquettes_logo SELECT * FROM intranet_v2_0_prod.codesoft_etiquettes_logo";
+if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.codesoft_historique_satel ...";
+$sql = "DROP TABLE intranet_v3_0_dev.codesoft_historique_satel";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.codesoft_historique_satel ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.codesoft_historique_satel LIKE intranet_v3_0_cod.codesoft_historique_satel";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.codesoft_historique_satel ...";
+$sql = "INSERT INTO intranet_v3_0_dev.codesoft_historique_satel SELECT * FROM intranet_v2_0_prod.codesoft_historique_satel";
+if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.codesoft_imprimante ...";
+$sql = "DROP TABLE intranet_v3_0_dev.codesoft_imprimante";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.codesoft_imprimante ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.codesoft_imprimante LIKE intranet_v3_0_cod.codesoft_imprimante";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.codesoft_imprimante ...";
+$sql = "INSERT INTO intranet_v3_0_dev.codesoft_imprimante SELECT * FROM intranet_v2_0_prod.codesoft_imprimante";
+if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.codesoft_style_paragraphe ...";
+$sql = "DROP TABLE intranet_v3_0_dev.codesoft_style_paragraphe";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.codesoft_style_paragraphe ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.codesoft_style_paragraphe LIKE intranet_v3_0_cod.codesoft_style_paragraphe";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.codesoft_style_paragraphe ...";
+$sql = "INSERT INTO intranet_v3_0_dev.codesoft_style_paragraphe SELECT * FROM intranet_v2_0_prod.codesoft_style_paragraphe";
+if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.droitft ...";
+$sql = "DROP TABLE intranet_v3_0_dev.droitft";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.droitft ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.droitft LIKE intranet_v3_0_cod.droitft";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.droitft ...";
+$sql = "INSERT INTO intranet_v3_0_dev.droitft SELECT * FROM intranet_v2_0_prod.droitft";
+if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.erp_datasync ...";
+$sql = "DROP TABLE intranet_v3_0_dev.erp_datasync";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.erp_datasync ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.erp_datasync LIKE intranet_v3_0_cod.erp_datasync";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.erp_datasync ...";
+$sql = "INSERT INTO intranet_v3_0_dev.erp_datasync SELECT * FROM intranet_v2_0_prod.erp_datasync";
+if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.fiches_mp_achats_moteur_de_recherche ...";
+$sql = "DROP TABLE intranet_v3_0_dev.fiches_mp_achats_moteur_de_recherche";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.fiches_mp_achats_moteur_de_recherche ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.fiches_mp_achats_moteur_de_recherche LIKE intranet_v3_0_cod.fiches_mp_achats_moteur_de_recherche";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.fiches_mp_achats_moteur_de_recherche ...";
+$sql = "INSERT INTO intranet_v3_0_dev.fiches_mp_achats_moteur_de_recherche SELECT * FROM intranet_v2_0_prod.fiches_mp_achats_moteur_de_recherche";
+if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.fta_derogation_duree_vie ...";
+$sql = "DROP TABLE intranet_v3_0_dev.fta_derogation_duree_vie";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.fta_derogation_duree_vie ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.fta_derogation_duree_vie LIKE intranet_v3_0_cod.fta_derogation_duree_vie";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.fta_derogation_duree_vie ...";
+$sql = "INSERT INTO intranet_v3_0_dev.fta_derogation_duree_vie SELECT * FROM intranet_v2_0_prod.fta_derogation_duree_vie";
+if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.fta_duree_vie ...";
+$sql = "DROP TABLE intranet_v3_0_dev.fta_duree_vie";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.fta_duree_vie ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.fta_duree_vie LIKE intranet_v3_0_cod.fta_duree_vie";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.fta_duree_vie ...";
+$sql = "INSERT INTO intranet_v3_0_dev.fta_duree_vie SELECT * FROM intranet_v2_0_prod.fta_duree_vie";
+if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.fta_migration_import_articles_actifs ...";
+$sql = "DROP TABLE intranet_v3_0_dev.fta_migration_import_articles_actifs";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.fta_migration_import_articles_actifs ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.fta_migration_import_articles_actifs LIKE intranet_v3_0_cod.fta_migration_import_articles_actifs";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.fta_migration_import_articles_actifs ...";
+$sql = "INSERT INTO intranet_v3_0_dev.fta_migration_import_articles_actifs SELECT * FROM intranet_v2_0_prod.fta_migration_import_articles_actifs";
+if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.fta_processus_delai ...";
+$sql = "DROP TABLE intranet_v3_0_dev.fta_processus_delai";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.fta_processus_delai ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.fta_processus_delai LIKE intranet_v3_0_cod.fta_processus_delai";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.fta_processus_delai ...";
+$sql = "INSERT INTO intranet_v3_0_dev.fta_processus_delai SELECT * FROM intranet_v2_0_prod.fta_processus_delai";
+if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.fta_processus_etat ...";
+$sql = "DROP TABLE intranet_v3_0_dev.fta_processus_etat";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.fta_processus_etat ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.fta_processus_etat LIKE intranet_v3_0_cod.fta_processus_etat";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.fta_processus_etat ...";
+$sql = "INSERT INTO intranet_v3_0_dev.fta_processus_etat SELECT * FROM intranet_v2_0_prod.fta_processus_etat";
+if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.fta_processus_multisite ...";
+$sql = "DROP TABLE intranet_v3_0_dev.fta_processus_multisite";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.fta_processus_multisite ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.fta_processus_multisite LIKE intranet_v3_0_cod.fta_processus_multisite";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.fta_processus_multisite ...";
+$sql = "INSERT INTO intranet_v3_0_dev.fta_processus_multisite SELECT * FROM intranet_v2_0_prod.fta_processus_multisite";
+if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.fta_tarif ...";
+$sql = "DROP TABLE intranet_v3_0_dev.fta_tarif";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.fta_tarif ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.fta_tarif LIKE intranet_v3_0_cod.fta_tarif";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.fta_tarif ...";
+$sql = "INSERT INTO intranet_v3_0_dev.fta_tarif SELECT * FROM intranet_v2_0_prod.fta_tarif";
+if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
+
 }
 
-//    mysql_query(
-//            "CREATE TABLE intranet_v3_0_dev.classification_arborescence_article LIKE intranet_v3_0_cod.classification_arborescence_article ;"
-//            . " INSERT INTO intranet_v3_0_dev.classification_arborescence_article SELECT * FROM intranet_v2_0_prod.classification_arborescence_article;"
-//    );
+/**
+ * Création de tables de la V2 vers V3
+ */ 
+if(FALSE){
 
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.classification_arborescence_article_categorie LIKE intranet_v3_0_cod.classification_arborescence_article_categorie ;"
-//            . " INSERT INTO intranet_v3_0_dev.classification_arborescence_article_categorie SELECT * FROM intranet_v2_0_prod.classification_arborescence_article_categorie;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.classification_arborescence_article_categorie_contenu LIKE intranet_v3_0_cod.classification_arborescence_article_categorie_contenu ;"
-//            . " INSERT INTO intranet_v3_0_dev.classification_arborescence_article_categorie_contenu SELECT * FROM intranet_v2_0_prod.classification_arborescence_article_categorie_contenu;"
-//    );
-//
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.fte_fournisseur LIKE intranet_v3_0_cod.fte_fournisseur;"
-//            . " INSERT INTO intranet_v3_0_dev.fte_fournisseur SELECT * FROM intranet_v2_0_prod.fte_fournisseur;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.geo LIKE intranet_v3_0_cod.geo;"
-//            . " INSERT INTO intranet_v3_0_dev.geo SELECT * FROM intranet_v2_0_prod.geo"
-//    );
-//
-//
-//
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.geo_codesoft LIKE intranet_v3_0_cod.geo_codesoft;"
-//            . " INSERT INTO intranet_v3_0_dev.geo_codesoft SELECT * FROM intranet_v2_0_prod.geo_codesoft"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.groupes LIKE intranet_v3_0_cod.groupes;"
-//            . " INSERT INTO intranet_v3_0_dev.groupes SELECT * FROM intranet_v2_0_prod.groupes"
-//    );
-//
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.planning_presence_semaine_visible LIKE intranet_v3_0_cod.planning_presence_semaine_visible;"
-//            . " INSERT INTO intranet_v3_0_dev.planning_presence_semaine_visible SELECT * FROM intranet_v2_0_prod.planning_presence_semaine_visible"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.annexe_agrologic_article_codification LIKE intranet_v3_0_cod.annexe_agrologic_article_codification;"
-//            . " INSERT INTO intranet_v3_0_dev.annexe_agrologic_article_codification SELECT * FROM intranet_v2_0_prod.annexe_agrologic_article_codification"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.annexe_allergene LIKE intranet_v3_0_cod.annexe_allergene;"
-//            . " INSERT INTO intranet_v3_0_dev.annexe_allergene SELECT * FROM intranet_v2_0_prod.annexe_allergene"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.annexe_additif LIKE intranet_v3_0_cod.annexe_additif;"
-//            . " INSERT INTO intranet_v3_0_dev.annexe_additif SELECT * FROM intranet_v2_0_prod.annexe_additif"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.access_materiel_service LIKE intranet_v3_0_cod.access_materiel_service;"
-//            . " INSERT INTO intranet_v3_0_dev.access_materiel_service SELECT * FROM intranet_v2_0_prod.access_materiel_service"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.annexe_additif_groupe LIKE intranet_v3_0_cod.annexe_additif_groupe;"
-//            . " INSERT INTO intranet_v3_0_dev.annexe_additif_groupe SELECT * FROM intranet_v2_0_prod.annexe_additif_groupe"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.annexe_allergene_famille LIKE intranet_v3_0_cod.annexe_allergene_famille;"
-//            . " INSERT INTO intranet_v3_0_dev.annexe_allergene_famille SELECT * FROM intranet_v2_0_prod.annexe_allergene_famille"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.annexe_allergene_origine LIKE intranet_v3_0_cod.annexe_allergene_origine;"
-//            . " INSERT INTO intranet_v3_0_dev.annexe_allergene_origine SELECT * FROM intranet_v2_0_prod.annexe_allergene_origine"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.annexe_arome_categorie LIKE intranet_v3_0_cod.annexe_arome_categorie;"
-//            . " INSERT INTO intranet_v3_0_dev.annexe_arome_categorie SELECT * FROM intranet_v2_0_prod.annexe_arome_categorie"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.annexe_caracteristique_scientifique LIKE intranet_v3_0_cod.annexe_caracteristique_scientifique;"
-//            . " INSERT INTO intranet_v3_0_dev.annexe_caracteristique_scientifique SELECT * FROM intranet_v2_0_prod.annexe_caracteristique_scientifique"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.annexe_caracteristique_scientifique_groupe LIKE intranet_v3_0_cod.annexe_caracteristique_scientifique_groupe;"
-//            . " INSERT INTO intranet_v3_0_dev.annexe_caracteristique_scientifique_groupe SELECT * FROM intranet_v2_0_prod.annexe_caracteristique_scientifique_groupe"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.annexe_environnement_conservation LIKE intranet_v3_0_cod.annexe_environnement_conservation;"
-//            . " INSERT INTO intranet_v3_0_dev.annexe_environnement_conservation SELECT * FROM intranet_v2_0_prod.annexe_environnement_conservation"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.annexe_environnement_conservation_groupe LIKE intranet_v3_0_cod.annexe_environnement_conservation_groupe;"
-//            . " INSERT INTO intranet_v3_0_dev.annexe_environnement_conservation_groupe SELECT * FROM intranet_v2_0_prod.annexe_environnement_conservation_groupe"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.annexe_pays LIKE intranet_v3_0_cod.annexe_pays;"
-//            . " INSERT INTO intranet_v3_0_dev.annexe_pays SELECT * FROM intranet_v2_0_prod.annexe_pays"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.annexe_unite LIKE intranet_v3_0_cod.annexe_unite;"
-//            . " INSERT INTO intranet_v3_0_dev.annexe_unite SELECT * FROM intranet_v2_0_prod.annexe_unite"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.archcomment LIKE intranet_v3_0_cod.archcomment;"
-//            . " INSERT INTO intranet_v3_0_dev.archcomment SELECT * FROM intranet_v2_0_prod.archcomment"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.archlu LIKE intranet_v3_0_cod.archlu;"
-//            . " INSERT INTO intranet_v3_0_dev.archlu SELECT * FROM intranet_v2_0_prod.archlu"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.articlece LIKE intranet_v3_0_cod.articlece;"
-//            . " INSERT INTO intranet_v3_0_dev.articlece SELECT * FROM intranet_v2_0_prod.articlece"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.articles LIKE intranet_v3_0_cod.articles;"
-//            . " INSERT INTO intranet_v3_0_dev.articles SELECT * FROM intranet_v2_0_prod.articles"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.artstat LIKE intranet_v3_0_cod.artstat;"
-//            . " INSERT INTO intranet_v3_0_dev.artstat SELECT * FROM intranet_v2_0_prod.artstat"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.catsopro LIKE intranet_v3_0_cod.catsopro;"
-//            . " INSERT INTO intranet_v3_0_dev.catsopro SELECT * FROM intranet_v2_0_prod.catsopro"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.classification_arborescence_client LIKE intranet_v3_0_cod.classification_arborescence_client;"
-//            . " INSERT INTO intranet_v3_0_dev.classification_arborescence_client SELECT * FROM intranet_v2_0_prod.classification_arborescence_client"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.classification_arborescence_client_groupe LIKE intranet_v3_0_cod.classification_arborescence_client_groupe;"
-//            . " INSERT INTO intranet_v3_0_dev.classification_arborescence_client_groupe SELECT * FROM intranet_v2_0_prod.classification_arborescence_client_groupe"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.classification_article LIKE intranet_v3_0_cod.classification_article;"
-//            . " INSERT INTO intranet_v3_0_dev.classification_article SELECT * FROM intranet_v2_0_prod.classification_article"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.classification_article_rayon LIKE intranet_v3_0_cod.classification_article_rayon;"
-//            . " INSERT INTO intranet_v3_0_dev.classification_article_rayon SELECT * FROM intranet_v2_0_prod.classification_article_rayon"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.codesoft_etiquettes LIKE intranet_v3_0_cod.codesoft_etiquettes;"
-//            . " INSERT INTO intranet_v3_0_dev.codesoft_etiquettes SELECT * FROM intranet_v2_0_prod.codesoft_etiquettes"
-//    );
-//
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.codesoft_etiquettes_logo LIKE intranet_v3_0_cod.codesoft_etiquettes_logo;"
-//            . " INSERT INTO intranet_v3_0_dev.codesoft_etiquettes_logo SELECT * FROM intranet_v2_0_prod.codesoft_etiquettes_logo"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.codesoft_historique_satel LIKE intranet_v3_0_cod.codesoft_historique_satel;"
-//            . " INSERT INTO intranet_v3_0_dev.codesoft_historique_satel SELECT * FROM intranet_v2_0_prod.codesoft_historique_satel"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.codesoft_imprimante LIKE intranet_v3_0_cod.codesoft_imprimante;"
-//            . " INSERT INTO intranet_v3_0_dev.codesoft_imprimante SELECT * FROM intranet_v2_0_prod.codesoft_imprimante"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.codesoft_style_paragraphe LIKE intranet_v3_0_cod.codesoft_style_paragraphe;"
-//            . " INSERT INTO intranet_v3_0_dev.codesoft_style_paragraphe SELECT * FROM intranet_v2_0_prod.codesoft_style_paragraphe"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.droitft LIKE intranet_v3_0_cod.droitft;"
-//            . " INSERT INTO intranet_v3_0_dev.droitft SELECT * FROM intranet_v2_0_prod.droitft"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.erp_datasync LIKE intranet_v3_0_cod.erp_datasync;"
-//            . " INSERT INTO intranet_v3_0_dev.erp_datasync SELECT * FROM intranet_v2_0_prod.erp_datasync"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.fiches_mp_achats_moteur_de_recherche LIKE intranet_v3_0_cod.fiches_mp_achats_moteur_de_recherche;"
-//            . " INSERT INTO intranet_v3_0_dev.fiches_mp_achats_moteur_de_recherche SELECT * FROM intranet_v2_0_prod.fiches_mp_achats_moteur_de_recherche"
-//    );
-//
-//
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.fta_derogation_duree_vie LIKE intranet_v3_0_cod.fta_derogation_duree_vie;"
-//            . " INSERT INTO intranet_v3_0_dev.fta_derogation_duree_vie SELECT * FROM intranet_v2_0_prod.fta_derogation_duree_vie"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.fta_duree_vie LIKE intranet_v3_0_cod.fta_duree_vie;"
-//            . " INSERT INTO intranet_v3_0_dev.fta_duree_vie SELECT * FROM intranet_v2_0_prod.fta_duree_vie"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.fta_migration_import_articles_actifs LIKE intranet_v3_0_cod.fta_migration_import_articles_actifs;"
-//            . " INSERT INTO intranet_v3_0_dev.fta_migration_import_articles_actifs SELECT * FROM intranet_v2_0_prod.fta_migration_import_articles_actifs"
-//    );
-//
-//
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.fta_processus_delai LIKE intranet_v3_0_cod.fta_processus_delai;"
-//            . " INSERT INTO intranet_v3_0_dev.fta_processus_delai SELECT * FROM intranet_v2_0_prod.fta_processus_delai"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.fta_processus_etat LIKE intranet_v3_0_cod.fta_processus_etat;"
-//            . " INSERT INTO intranet_v3_0_dev.fta_processus_etat SELECT * FROM intranet_v2_0_prod.fta_processus_etat"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.fta_processus_multisite LIKE intranet_v3_0_cod.fta_processus_multisite;"
-//            . " INSERT INTO intranet_v3_0_dev.fta_processus_multisite SELECT * FROM intranet_v2_0_prod.fta_processus_multisite"
-//    );
-//
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.fta_tarif LIKE intranet_v3_0_cod.fta_tarif;"
-//            . " INSERT INTO intranet_v3_0_dev.fta_tarif SELECT * FROM intranet_v2_0_prod.fta_tarif"
-//    );
-//}
-//
-//
-//
-//
-///**
-// * Création de tables de la V2 vers V3
-// */ {
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.access_base_degust_mois LIKE  intranet_v2_0_prod.access_base_degust_mois;"
-//            . " INSERT INTO intranet_v3_0_dev.access_base_degust_mois SELECT * FROM intranet_v2_0_prod.access_base_degust_mois;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.access_base_degust_motifs LIKE  intranet_v2_0_prod.access_base_degust_motifs;"
-//            . " INSERT INTO intranet_v3_0_dev.access_base_degust_motifs SELECT * FROM intranet_v2_0_prod.access_base_degust_motifs;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.access_base_degust_produits LIKE  intranet_v2_0_prod.access_base_degust_produits;"
-//            . " INSERT INTO intranet_v3_0_dev.access_base_degust_produits SELECT * FROM intranet_v2_0_prod.access_base_degust_produits;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.access_base_degust_resultat LIKE  intranet_v2_0_prod.access_base_degust_resultat;"
-//            . " INSERT INTO intranet_v3_0_dev.access_base_degust_resultat SELECT * FROM intranet_v2_0_prod.access_base_degust_resultat;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.access_budget_marketing_accomptes LIKE  intranet_v2_0_prod.access_budget_marketing_accomptes;"
-//            . " INSERT INTO intranet_v3_0_dev.access_budget_marketing_accomptes SELECT * FROM intranet_v2_0_prod.access_budget_marketing_accomptes;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.access_budget_marketing_budget LIKE  intranet_v2_0_prod.access_budget_marketing_budget;"
-//            . " INSERT INTO intranet_v3_0_dev.access_budget_marketing_budget SELECT * FROM intranet_v2_0_prod.access_budget_marketing_budget;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.access_budget_marketing_facturation LIKE  intranet_v2_0_prod.access_budget_marketing_facturation;"
-//            . " INSERT INTO intranet_v3_0_dev.access_budget_marketing_facturation SELECT * FROM intranet_v2_0_prod.access_budget_marketing_facturation;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.access_budget_marketing_fournisseur LIKE  intranet_v2_0_prod.access_budget_marketing_fournisseur;"
-//            . " INSERT INTO intranet_v3_0_dev.access_budget_marketing_fournisseur SELECT * FROM intranet_v2_0_prod.access_budget_marketing_fournisseur;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.access_datasharing_data_sharing LIKE  intranet_v2_0_prod.access_datasharing_data_sharing;"
-//            . " INSERT INTO intranet_v3_0_dev.access_datasharing_data_sharing SELECT * FROM intranet_v2_0_prod.access_datasharing_data_sharing;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.access_budget_marketing_mdd_accomptes LIKE  intranet_v2_0_prod.access_budget_marketing_mdd_accomptes;"
-//            . " INSERT INTO intranet_v3_0_dev.access_budget_marketing_mdd_accomptes SELECT * FROM intranet_v2_0_prod.access_budget_marketing_mdd_accomptes;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.access_budget_marketing_mdd_budget LIKE  intranet_v2_0_prod.access_budget_marketing_mdd_budget;"
-//            . " INSERT INTO intranet_v3_0_dev.access_budget_marketing_mdd_budget SELECT * FROM intranet_v2_0_prod.access_budget_marketing_mdd_budget;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.access_budget_marketing_mdd_facturation LIKE  intranet_v2_0_prod.access_budget_marketing_mdd_facturation;"
-//            . " INSERT INTO intranet_v3_0_dev.access_budget_marketing_mdd_facturation SELECT * FROM intranet_v2_0_prod.access_budget_marketing_mdd_facturation;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.access_budget_marketing_mdd_fournisseur LIKE  intranet_v2_0_prod.access_budget_marketing_mdd_fournisseur;"
-//            . " INSERT INTO intranet_v3_0_dev.access_budget_marketing_mdd_fournisseur SELECT * FROM intranet_v2_0_prod.access_budget_marketing_mdd_fournisseur;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.access_budget_marketing_mdd_hierarchie_compta_analytique LIKE  intranet_v2_0_prod.access_budget_marketing_mdd_hierarchie_compta_analytique;"
-//            . " INSERT INTO intranet_v3_0_dev.access_budget_marketing_mdd_hierarchie_compta_analytique SELECT * FROM intranet_v2_0_prod.access_budget_marketing_mdd_hierarchie_compta_analytique;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.access_budget_marketing_mdd_intitule_base LIKE  intranet_v2_0_prod.access_budget_marketing_mdd_intitule_base;"
-//            . " INSERT INTO intranet_v3_0_dev.access_budget_marketing_mdd_intitule_base SELECT * FROM intranet_v2_0_prod.access_budget_marketing_mdd_intitule_base;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.access_budget_marketing_hierarchie_compta_analytique LIKE  intranet_v2_0_prod.access_budget_marketing_hierarchie_compta_analytique;"
-//            . " INSERT INTO intranet_v3_0_dev.access_budget_marketing_hierarchie_compta_analytique SELECT * FROM intranet_v2_0_prod.access_budget_marketing_hierarchie_compta_analytique;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.access_budget_marketing_intitule_base LIKE  intranet_v2_0_prod.access_budget_marketing_intitule_base;"
-//            . " INSERT INTO intranet_v3_0_dev.access_budget_marketing_intitule_base SELECT * FROM intranet_v2_0_prod.access_budget_marketing_intitule_base;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.access_budget_marketing_mdd_prestation LIKE  intranet_v2_0_prod.access_budget_marketing_mdd_prestation;"
-//            . " INSERT INTO intranet_v3_0_dev.access_budget_marketing_mdd_prestation SELECT * FROM intranet_v2_0_prod.access_budget_marketing_mdd_prestation;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.access_budget_marketing_mdd_provisions LIKE  intranet_v2_0_prod.access_budget_marketing_mdd_provisions;"
-//            . " INSERT INTO intranet_v3_0_dev.access_budget_marketing_mdd_provisions SELECT * FROM intranet_v2_0_prod.access_budget_marketing_mdd_provisions;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.access_budget_marketing_mdd_reglement LIKE  intranet_v2_0_prod.access_budget_marketing_mdd_reglement;"
-//            . " INSERT INTO intranet_v3_0_dev.access_budget_marketing_mdd_reglement SELECT * FROM intranet_v2_0_prod.access_budget_marketing_mdd_reglement;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.access_budget_marketing_mdd_rubrique_facturation LIKE  intranet_v2_0_prod.access_budget_marketing_mdd_rubrique_facturation;"
-//            . " INSERT INTO intranet_v3_0_dev.access_budget_marketing_mdd_rubrique_facturation SELECT * FROM intranet_v2_0_prod.access_budget_marketing_mdd_rubrique_facturation;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.access_budget_marketing_mdd_section LIKE  intranet_v2_0_prod.access_budget_marketing_mdd_section;"
-//            . " INSERT INTO intranet_v3_0_dev.access_budget_marketing_mdd_section SELECT * FROM intranet_v2_0_prod.access_budget_marketing_mdd_section;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.intranet_moteur_de_recherche_association_type_operateur LIKE  intranet_v2_0_prod.intranet_moteur_de_recherche_association_type_operateur;"
-//            . " INSERT INTO intranet_v3_0_dev.intranet_moteur_de_recherche_association_type_operateur SELECT * FROM intranet_v2_0_prod.intranet_moteur_de_recherche_association_type_operateur;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.intranet_moteur_de_recherche_operateur_sur_champ LIKE  intranet_v2_0_prod.intranet_moteur_de_recherche_operateur_sur_champ;"
-//            . " INSERT INTO intranet_v3_0_dev.intranet_moteur_de_recherche_operateur_sur_champ SELECT * FROM intranet_v2_0_prod.intranet_moteur_de_recherche_operateur_sur_champ;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.access_budget_marketing_mdd_sous_facturation LIKE  intranet_v2_0_prod.access_budget_marketing_mdd_sous_facturation;"
-//            . " INSERT INTO intranet_v3_0_dev.access_budget_marketing_mdd_sous_facturation SELECT * FROM intranet_v2_0_prod.access_budget_marketing_mdd_sous_facturation;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.access_budget_marketing_mdd_sous_section LIKE  intranet_v2_0_prod.access_budget_marketing_mdd_sous_section;"
-//            . " INSERT INTO intranet_v3_0_dev.access_budget_marketing_mdd_sous_section SELECT * FROM intranet_v2_0_prod.access_budget_marketing_mdd_sous_section;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.access_budget_marketing_mdd_temp_facture_provionnee LIKE  intranet_v2_0_prod.access_budget_marketing_mdd_temp_facture_provionnee;"
-//            . " INSERT INTO intranet_v3_0_dev.access_budget_marketing_mdd_temp_facture_provionnee SELECT * FROM intranet_v2_0_prod.access_budget_marketing_mdd_temp_facture_provionnee;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.access_budget_marketing_prestation LIKE  intranet_v2_0_prod.access_budget_marketing_prestation;"
-//            . " INSERT INTO intranet_v3_0_dev.access_budget_marketing_prestation SELECT * FROM intranet_v2_0_prod.access_budget_marketing_prestation;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.access_budget_marketing_provisions LIKE  intranet_v2_0_prod.access_budget_marketing_provisions;"
-//            . " INSERT INTO intranet_v3_0_dev.access_budget_marketing_provisions SELECT * FROM intranet_v2_0_prod.access_budget_marketing_provisions;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.access_budget_marketing_reglement LIKE  intranet_v2_0_prod.access_budget_marketing_reglement;"
-//            . " INSERT INTO intranet_v3_0_dev.access_budget_marketing_reglement SELECT * FROM intranet_v2_0_prod.access_budget_marketing_reglement;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.access_budget_marketing_rubrique_facturation LIKE  intranet_v2_0_prod.access_budget_marketing_rubrique_facturation;"
-//            . " INSERT INTO intranet_v3_0_dev.access_budget_marketing_rubrique_facturation SELECT * FROM intranet_v2_0_prod.access_budget_marketing_rubrique_facturation;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.access_budget_marketing_section LIKE  intranet_v2_0_prod.access_budget_marketing_section;"
-//            . " INSERT INTO intranet_v3_0_dev.access_budget_marketing_section SELECT * FROM intranet_v2_0_prod.access_budget_marketing_section;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.access_budget_marketing_sous_facturation LIKE  intranet_v2_0_prod.access_budget_marketing_sous_facturation;"
-//            . " INSERT INTO intranet_v3_0_dev.access_budget_marketing_sous_facturation SELECT * FROM intranet_v2_0_prod.access_budget_marketing_sous_facturation;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.access_budget_marketing_sous_section LIKE  intranet_v2_0_prod.access_budget_marketing_sous_section;"
-//            . " INSERT INTO intranet_v3_0_dev.access_budget_marketing_sous_section SELECT * FROM intranet_v2_0_prod.access_budget_marketing_sous_section;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE  intranet_v3_0_dev.access_budget_marketing_temp_facture_provionnee LIKE  intranet_v2_0_prod.access_budget_marketing_temp_facture_provionnee;"
-//            . " INSERT INTO  intranet_v3_0_dev.access_budget_marketing_temp_facture_provionnee SELECT * FROM intranet_v2_0_prod. access_budget_marketing_temp_facture_provionnee;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE  intranet_v3_0_dev.access_budget_ventes_14mois_Importation_Real_N_1 LIKE  intranet_v2_0_prod.access_budget_ventes_14mois_Importation_Real_N_1;"
-//            . " INSERT INTO  intranet_v3_0_dev.access_budget_ventes_14mois_Importation_Real_N_1 SELECT * FROM intranet_v2_0_prod.access_budget_ventes_14mois_Importation_Real_N_1;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE  intranet_v3_0_dev.access_budget_ventes_14mois_Importation_des_Realisations_N_1 LIKE  intranet_v2_0_prod.access_budget_ventes_14mois_Importation_des_Realisations_N_1;"
-//            . " INSERT INTO  intranet_v3_0_dev.access_budget_ventes_14mois_Importation_des_Realisations_N_1 SELECT * FROM intranet_v2_0_prod.access_budget_ventes_14mois_Importation_des_Realisations_N_1;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.access_budget_ventes_Importation_des_Realisations_N_1 LIKE  intranet_v2_0_prod.access_budget_ventes_Importation_des_Realisations_N_1;"
-//            . " INSERT INTO intranet_v3_0_dev.access_budget_ventes_Importation_des_Realisations_N_1 SELECT * FROM intranet_v2_0_prod.access_budget_ventes_Importation_des_Realisations_N_1;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.access_budget_ventes_arti2_dev LIKE  intranet_v2_0_prod.access_budget_ventes_arti2_dev;"
-//            . " INSERT INTO intranet_v3_0_dev.access_budget_ventes_arti2_dev SELECT * FROM intranet_v2_0_prod.access_budget_ventes_arti2_dev;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.access_budget_ventes_reseau_commercial LIKE  intranet_v2_0_prod.access_budget_ventes_reseau_commercial;"
-//            . " INSERT INTO intranet_v3_0_dev.access_budget_ventes_reseau_commercial SELECT * FROM intranet_v2_0_prod.access_budget_ventes_reseau_commercial;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.access_bugdet_ventes_14mois_table_animation LIKE  intranet_v2_0_prod.access_bugdet_ventes_14mois_table_animation;"
-//            . " INSERT INTO intranet_v3_0_dev.access_bugdet_ventes_14mois_table_animation SELECT * FROM intranet_v2_0_prod.access_bugdet_ventes_14mois_table_animation;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.access_bugdet_ventes_14mois_table_budget LIKE  intranet_v2_0_prod.access_bugdet_ventes_14mois_table_budget;"
-//            . " INSERT INTO intranet_v3_0_dev.access_bugdet_ventes_14mois_table_budget SELECT * FROM intranet_v2_0_prod.access_bugdet_ventes_14mois_table_budget;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.access_bugdet_ventes_14mois_table_realises LIKE  intranet_v2_0_prod.access_bugdet_ventes_14mois_table_realises;"
-//            . " INSERT INTO intranet_v3_0_dev.access_bugdet_ventes_14mois_table_realises SELECT * FROM intranet_v2_0_prod.access_bugdet_ventes_14mois_table_realises;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.access_bugdet_ventes_articles_cout LIKE  intranet_v2_0_prod.access_bugdet_ventes_articles_cout;"
-//            . " INSERT INTO intranet_v3_0_dev.access_bugdet_ventes_articles_cout SELECT * FROM intranet_v2_0_prod.access_bugdet_ventes_articles_cout;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.access_bugdet_ventes_articles_totalite LIKE  intranet_v2_0_prod.access_bugdet_ventes_articles_totalite;"
-//            . " INSERT INTO intranet_v3_0_dev.access_bugdet_ventes_articles_totalite SELECT * FROM intranet_v2_0_prod.access_bugdet_ventes_articles_totalite;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.access_bugdet_ventes_correspondance_famcli_fammktg LIKE  intranet_v2_0_prod.access_bugdet_ventes_correspondance_famcli_fammktg;"
-//            . " INSERT INTO intranet_v3_0_dev.access_bugdet_ventes_correspondance_famcli_fammktg SELECT * FROM intranet_v2_0_prod.access_bugdet_ventes_correspondance_famcli_fammktg;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.access_bugdet_ventes_table_animation LIKE  intranet_v2_0_prod.access_bugdet_ventes_table_animation;"
-//            . " INSERT INTO intranet_v3_0_dev.access_bugdet_ventes_table_animation SELECT * FROM intranet_v2_0_prod.access_bugdet_ventes_table_animation;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.access_bugdet_ventes_table_budget LIKE  intranet_v2_0_prod.access_bugdet_ventes_table_budget;"
-//            . " INSERT INTO intranet_v3_0_dev.access_bugdet_ventes_table_budget SELECT * FROM intranet_v2_0_prod.access_bugdet_ventes_table_budget;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.access_bugdet_ventes_table_bugdet_commentaire LIKE  intranet_v2_0_prod.access_bugdet_ventes_table_bugdet_commentaire;"
-//            . " INSERT INTO intranet_v3_0_dev.access_bugdet_ventes_table_bugdet_commentaire SELECT * FROM intranet_v2_0_prod.access_bugdet_ventes_table_bugdet_commentaire;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.access_bugdet_ventes_table_realises LIKE  intranet_v2_0_prod.access_bugdet_ventes_table_realises;"
-//            . " INSERT INTO intranet_v3_0_dev.access_bugdet_ventes_table_realises SELECT * FROM intranet_v2_0_prod.access_bugdet_ventes_table_realises;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.access_clients LIKE  intranet_v2_0_prod.access_clients;"
-//            . " INSERT INTO intranet_v3_0_dev.access_clients SELECT * FROM intranet_v2_0_prod.access_clients;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.access_clients_rayon LIKE  intranet_v2_0_prod.access_clients_rayon;"
-//            . " INSERT INTO intranet_v3_0_dev.access_clients_rayon SELECT * FROM intranet_v2_0_prod.access_clients_rayon;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.access_commerciaux LIKE  intranet_v2_0_prod.access_commerciaux;"
-//            . " INSERT INTO intranet_v3_0_dev.access_commerciaux SELECT * FROM intranet_v2_0_prod.access_commerciaux;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.access_datasharing_Nb_magasin_entrepot LIKE  intranet_v2_0_prod.access_datasharing_Nb_magasin_entrepot;"
-//            . " INSERT INTO intranet_v3_0_dev.access_datasharing_Nb_magasin_entrepot SELECT * FROM intranet_v2_0_prod.access_datasharing_Nb_magasin_entrepot;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.access_datasharing_Table_des_magasins LIKE  intranet_v2_0_prod.access_datasharing_Table_des_magasins;"
-//            . " INSERT INTO intranet_v3_0_dev.access_datasharing_Table_des_magasins SELECT * FROM intranet_v2_0_prod.access_datasharing_Table_des_magasins;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.access_etat LIKE  intranet_v2_0_prod.access_etat;"
-//            . " INSERT INTO intranet_v3_0_dev.access_etat SELECT * FROM intranet_v2_0_prod.access_etat;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.access_familles_articles LIKE  intranet_v2_0_prod.access_familles_articles;"
-//            . " INSERT INTO intranet_v3_0_dev.access_familles_articles SELECT * FROM intranet_v2_0_prod.access_familles_articles;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.access_familles_clients LIKE  intranet_v2_0_prod.access_familles_clients;"
-//            . " INSERT INTO intranet_v3_0_dev.access_familles_clients SELECT * FROM intranet_v2_0_prod.access_familles_clients;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.access_familles_gammes LIKE  intranet_v2_0_prod.access_familles_gammes;"
-//            . " INSERT INTO intranet_v3_0_dev.access_familles_gammes SELECT * FROM intranet_v2_0_prod.access_familles_gammes;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.access_familles_marketing LIKE  intranet_v2_0_prod.access_familles_marketing;"
-//            . " INSERT INTO intranet_v3_0_dev.access_familles_marketing SELECT * FROM intranet_v2_0_prod.access_familles_marketing;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.access_formation_categories_socio_professionnelles LIKE  intranet_v2_0_prod.access_formation_categories_socio_professionnelles;"
-//            . " INSERT INTO intranet_v3_0_dev.access_formation_categories_socio_professionnelles SELECT * FROM intranet_v2_0_prod.access_formation_categories_socio_professionnelles;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.access_formation_departements LIKE  intranet_v2_0_prod.access_formation_departements;"
-//            . " INSERT INTO intranet_v3_0_dev.access_formation_departements SELECT * FROM intranet_v2_0_prod.access_formation_departements;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.access_formation_fonctions LIKE  intranet_v2_0_prod.access_formation_fonctions;"
-//            . " INSERT INTO intranet_v3_0_dev.access_formation_fonctions SELECT * FROM intranet_v2_0_prod.access_formation_fonctions;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.access_formation_formation LIKE  intranet_v2_0_prod.access_formation_formation;"
-//            . " INSERT INTO intranet_v3_0_dev.access_formation_formation SELECT * FROM intranet_v2_0_prod.access_formation_formation;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.access_formation_regroupement_age LIKE  intranet_v2_0_prod.access_formation_regroupement_age;"
-//            . " INSERT INTO intranet_v3_0_dev.access_formation_regroupement_age SELECT * FROM intranet_v2_0_prod.access_formation_regroupement_age;"
-//    );
-//
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.access_formation_salarie LIKE  intranet_v2_0_prod.access_formation_salarie;"
-//            . " INSERT INTO intranet_v3_0_dev.access_formation_salarie SELECT * FROM intranet_v2_0_prod.access_formation_salarie;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.access_formation_services LIKE  intranet_v2_0_prod.access_formation_services;"
-//            . " INSERT INTO intranet_v3_0_dev.access_formation_services SELECT * FROM intranet_v2_0_prod.access_formation_services;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.access_formation_stage_informations LIKE  intranet_v2_0_prod.access_formation_stage_informations;"
-//            . " INSERT INTO intranet_v3_0_dev.access_formation_stage_informations SELECT * FROM intranet_v2_0_prod.access_formation_stage_informations;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.access_formation_stage_intitule_formation LIKE  intranet_v2_0_prod.access_formation_stage_intitule_formation;"
-//            . " INSERT INTO intranet_v3_0_dev.access_formation_stage_intitule_formation SELECT * FROM intranet_v2_0_prod.access_formation_stage_intitule_formation;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.access_formation_stage_table_des_domaines LIKE  intranet_v2_0_prod.access_formation_stage_table_des_domaines;"
-//            . " INSERT INTO intranet_v3_0_dev.access_formation_stage_table_des_domaines SELECT * FROM intranet_v2_0_prod.access_formation_stage_table_des_domaines;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.access_formation_stage_table_des_intitules LIKE  intranet_v2_0_prod.access_formation_stage_table_des_intitules;"
-//            . " INSERT INTO intranet_v3_0_dev.access_formation_stage_table_des_intitules SELECT * FROM intranet_v2_0_prod.access_formation_stage_table_des_intitules;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.access_formation_stage_table_des_organismes LIKE  intranet_v2_0_prod.access_formation_stage_table_des_organismes;"
-//            . " INSERT INTO intranet_v3_0_dev.access_formation_stage_table_des_organismes SELECT * FROM intranet_v2_0_prod.access_formation_stage_table_des_organismes;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.access_formation_table_des_Tx LIKE  intranet_v2_0_prod.access_formation_table_des_Tx;"
-//            . " INSERT INTO intranet_v3_0_dev.access_formation_table_des_Tx SELECT * FROM intranet_v2_0_prod.access_formation_table_des_Tx;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.access_formation_table_des_donnees LIKE  intranet_v2_0_prod.access_formation_table_des_donnees;"
-//            . " INSERT INTO intranet_v3_0_dev.access_formation_table_des_donnees SELECT * FROM intranet_v2_0_prod.access_formation_table_des_donnees;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.access_formation_table_des_postes_de_depenses LIKE  intranet_v2_0_prod.access_formation_table_des_postes_de_depenses;"
-//            . " INSERT INTO intranet_v3_0_dev.access_formation_table_des_postes_de_depenses SELECT * FROM intranet_v2_0_prod.access_formation_table_des_postes_de_depenses;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.access_gammes LIKE  intranet_v2_0_prod.access_gammes;"
-//            . " INSERT INTO intranet_v3_0_dev.access_gammes SELECT * FROM intranet_v2_0_prod.access_gammes;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.access_indicateur_productivite_expedition_production LIKE  intranet_v2_0_prod.access_indicateur_productivite_expedition_production;"
-//            . " INSERT INTO intranet_v3_0_dev.access_indicateur_productivite_expedition_production SELECT * FROM intranet_v2_0_prod.access_indicateur_productivite_expedition_production;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.access_indicateur_productivite_expedition_temps_travail LIKE  intranet_v2_0_prod.access_indicateur_productivite_expedition_temps_travail;"
-//            . " INSERT INTO intranet_v3_0_dev.access_indicateur_productivite_expedition_temps_travail SELECT * FROM intranet_v2_0_prod.access_indicateur_productivite_expedition_temps_travail;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.access_materiel_carte_reseau LIKE  intranet_v2_0_prod.access_materiel_carte_reseau;"
-//            . " INSERT INTO intranet_v3_0_dev.access_materiel_carte_reseau SELECT * FROM intranet_v2_0_prod.access_materiel_carte_reseau;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.access_materiel_categorie_logiciel LIKE  intranet_v2_0_prod.access_materiel_categorie_logiciel;"
-//            . " INSERT INTO intranet_v3_0_dev.access_materiel_categorie_logiciel SELECT * FROM intranet_v2_0_prod.access_materiel_categorie_logiciel;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.access_materiel_connectique LIKE  intranet_v2_0_prod.access_materiel_connectique;"
-//            . " INSERT INTO intranet_v3_0_dev.access_materiel_connectique SELECT * FROM intranet_v2_0_prod.access_materiel_connectique;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.access_materiel_contrat LIKE  intranet_v2_0_prod.access_materiel_contrat;"
-//            . " INSERT INTO intranet_v3_0_dev.access_materiel_contrat SELECT * FROM intranet_v2_0_prod.access_materiel_contrat;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.access_materiel_ecran LIKE  intranet_v2_0_prod.access_materiel_ecran;"
-//            . " INSERT INTO intranet_v3_0_dev.access_materiel_ecran SELECT * FROM intranet_v2_0_prod.access_materiel_ecran;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.access_materiel_etat_incident LIKE  intranet_v2_0_prod.access_materiel_etat_incident;"
-//            . " INSERT INTO intranet_v3_0_dev.access_materiel_etat_incident SELECT * FROM intranet_v2_0_prod.access_materiel_etat_incident;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.access_materiel_etat_materiel_detail LIKE  intranet_v2_0_prod.access_materiel_etat_materiel_detail;"
-//            . " INSERT INTO intranet_v3_0_dev.access_materiel_etat_materiel_detail SELECT * FROM intranet_v2_0_prod.access_materiel_etat_materiel_detail;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.access_materiel_fonction_prestataire LIKE  intranet_v2_0_prod.access_materiel_fonction_prestataire;"
-//            . " INSERT INTO intranet_v3_0_dev.access_materiel_fonction_prestataire SELECT * FROM intranet_v2_0_prod.access_materiel_fonction_prestataire;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.access_materiel_gestion_incident LIKE  intranet_v2_0_prod.access_materiel_gestion_incident;"
-//            . " INSERT INTO intranet_v3_0_dev.access_materiel_gestion_incident SELECT * FROM intranet_v2_0_prod.access_materiel_gestion_incident;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.access_materiel_gestion_incident_groupe LIKE  intranet_v2_0_prod.access_materiel_gestion_incident_groupe;"
-//            . " INSERT INTO intranet_v3_0_dev.access_materiel_gestion_incident_groupe SELECT * FROM intranet_v2_0_prod.access_materiel_gestion_incident_groupe;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.access_materiel_horloge_processeur LIKE  intranet_v2_0_prod.access_materiel_horloge_processeur;"
-//            . " INSERT INTO intranet_v3_0_dev.access_materiel_horloge_processeur SELECT * FROM intranet_v2_0_prod.access_materiel_horloge_processeur;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.access_materiel_imprimante LIKE  intranet_v2_0_prod.access_materiel_imprimante;"
-//            . " INSERT INTO intranet_v3_0_dev.access_materiel_imprimante SELECT * FROM intranet_v2_0_prod.access_materiel_imprimante;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.access_materiel_incident LIKE  intranet_v2_0_prod.access_materiel_incident;"
-//            . " INSERT INTO intranet_v3_0_dev.access_materiel_incident SELECT * FROM intranet_v2_0_prod.access_materiel_incident;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.access_materiel_licence LIKE  intranet_v2_0_prod.access_materiel_licence;"
-//            . " INSERT INTO intranet_v3_0_dev.access_materiel_licence SELECT * FROM intranet_v2_0_prod.access_materiel_licence;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.access_materiel_log LIKE  intranet_v2_0_prod.access_materiel_log;"
-//            . " INSERT INTO intranet_v3_0_dev.access_materiel_log SELECT * FROM intranet_v2_0_prod.access_materiel_log;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.access_materiel_logiciel LIKE  intranet_v2_0_prod.access_materiel_logiciel;"
-//            . " INSERT INTO intranet_v3_0_dev.access_materiel_logiciel SELECT * FROM intranet_v2_0_prod.access_materiel_logiciel;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.access_materiel_marque_materiel LIKE  intranet_v2_0_prod.access_materiel_marque_materiel;"
-//            . " INSERT INTO intranet_v3_0_dev.access_materiel_marque_materiel SELECT * FROM intranet_v2_0_prod.access_materiel_marque_materiel;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.access_materiel_materiel_detail LIKE  intranet_v2_0_prod.access_materiel_materiel_detail;"
-//            . " INSERT INTO intranet_v3_0_dev.access_materiel_materiel_detail SELECT * FROM intranet_v2_0_prod.access_materiel_materiel_detail;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.access_materiel_materiel_general LIKE  intranet_v2_0_prod.access_materiel_materiel_general;"
-//            . " INSERT INTO intranet_v3_0_dev.access_materiel_materiel_general SELECT * FROM intranet_v2_0_prod.access_materiel_materiel_general;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.access_materiel_modem LIKE  intranet_v2_0_prod.access_materiel_modem;"
-//            . " INSERT INTO intranet_v3_0_dev.access_materiel_modem SELECT * FROM intranet_v2_0_prod.access_materiel_modem;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.access_materiel_module LIKE  intranet_v2_0_prod.access_materiel_module;"
-//            . " INSERT INTO intranet_v3_0_dev.access_materiel_module SELECT * FROM intranet_v2_0_prod.access_materiel_module;"
-//    );
-//
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.access_materiel_nature_action LIKE  intranet_v2_0_prod.access_materiel_nature_action;"
-//            . " INSERT INTO intranet_v3_0_dev.access_materiel_nature_action SELECT * FROM intranet_v2_0_prod.access_materiel_nature_action;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.access_materiel_nature_incident LIKE  intranet_v2_0_prod.access_materiel_nature_incident;"
-//            . " INSERT INTO intranet_v3_0_dev.access_materiel_nature_incident SELECT * FROM intranet_v2_0_prod.access_materiel_nature_incident;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.access_materiel_poste LIKE  intranet_v2_0_prod.access_materiel_poste;"
-//            . " INSERT INTO intranet_v3_0_dev.access_materiel_poste SELECT * FROM intranet_v2_0_prod.access_materiel_poste;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.access_materiel_prestataire LIKE  intranet_v2_0_prod.access_materiel_prestataire;"
-//            . " INSERT INTO intranet_v3_0_dev.access_materiel_prestataire SELECT * FROM intranet_v2_0_prod.access_materiel_prestataire;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.access_materiel_processeur LIKE  intranet_v2_0_prod.access_materiel_processeur;"
-//            . " INSERT INTO intranet_v3_0_dev.access_materiel_processeur SELECT * FROM intranet_v2_0_prod.access_materiel_processeur;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.access_materiel_reseaux LIKE  intranet_v2_0_prod.access_materiel_reseaux;"
-//            . " INSERT INTO intranet_v3_0_dev.access_materiel_reseaux SELECT * FROM intranet_v2_0_prod.access_materiel_reseaux;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.access_materiel_reseaux_detail LIKE  intranet_v2_0_prod.access_materiel_reseaux_detail;"
-//            . " INSERT INTO intranet_v3_0_dev.access_materiel_reseaux_detail SELECT * FROM intranet_v2_0_prod.access_materiel_reseaux_detail;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.access_materiel_section_analytique LIKE  intranet_v2_0_prod.access_materiel_section_analytique;"
-//            . " INSERT INTO intranet_v3_0_dev.access_materiel_section_analytique SELECT * FROM intranet_v2_0_prod.access_materiel_section_analytique;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.access_materiel_serveur LIKE  intranet_v2_0_prod.access_materiel_serveur;"
-//            . " INSERT INTO intranet_v3_0_dev.access_materiel_serveur SELECT * FROM intranet_v2_0_prod.access_materiel_serveur;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.access_materiel_serveur_applicatif LIKE  intranet_v2_0_prod.access_materiel_serveur_applicatif;"
-//            . " INSERT INTO intranet_v3_0_dev.access_materiel_serveur_applicatif SELECT * FROM intranet_v2_0_prod.access_materiel_serveur_applicatif;"
-//    );
-//
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.access_materiel_technologie_materiel LIKE  intranet_v2_0_prod.access_materiel_technologie_materiel;"
-//            . " INSERT INTO intranet_v3_0_dev.access_materiel_technologie_materiel SELECT * FROM intranet_v2_0_prod.access_materiel_technologie_materiel;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.access_materiel_type_materiel_detail LIKE  intranet_v2_0_prod.access_materiel_type_materiel_detail;"
-//            . " INSERT INTO intranet_v3_0_dev.access_materiel_type_materiel_detail SELECT * FROM intranet_v2_0_prod.access_materiel_type_materiel_detail;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.access_materiel_unite_centrale LIKE  intranet_v2_0_prod.access_materiel_unite_centrale;"
-//            . " INSERT INTO intranet_v3_0_dev.access_materiel_unite_centrale SELECT * FROM intranet_v2_0_prod.access_materiel_unite_centrale;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE  intranet_v3_0_dev.access_materiel_wintegrate LIKE  intranet_v2_0_prod.access_materiel_wintegrate;"
-//            . " INSERT INTO  intranet_v3_0_dev.access_materiel_wintegrate SELECT * FROM intranet_v2_0_prod. access_materiel_wintegrate;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.access_plan_qualite_action LIKE  intranet_v2_0_prod.access_plan_qualite_action;"
-//            . " INSERT INTO intranet_v3_0_dev.access_plan_qualite_action SELECT * FROM intranet_v2_0_prod.access_plan_qualite_action;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.access_plan_qualite_genre LIKE  intranet_v2_0_prod.access_plan_qualite_genre;"
-//            . " INSERT INTO intranet_v3_0_dev.access_plan_qualite_genre SELECT * FROM intranet_v2_0_prod.access_plan_qualite_genre;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.access_plan_qualite_nature LIKE  intranet_v2_0_prod.access_plan_qualite_nature;"
-//            . " INSERT INTO intranet_v3_0_dev.access_plan_qualite_nature SELECT * FROM intranet_v2_0_prod.access_plan_qualite_nature;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.access_plan_qualite_origine LIKE  intranet_v2_0_prod.access_plan_qualite_origine;"
-//            . " INSERT INTO intranet_v3_0_dev.access_plan_qualite_origine SELECT * FROM intranet_v2_0_prod.access_plan_qualite_origine;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.access_plan_qualite_plan LIKE  intranet_v2_0_prod.access_plan_qualite_plan;"
-//            . " INSERT INTO intranet_v3_0_dev.access_plan_qualite_plan SELECT * FROM intranet_v2_0_prod.access_plan_qualite_plan;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.access_plan_qualite_processus LIKE  intranet_v2_0_prod.access_plan_qualite_processus;"
-//            . " INSERT INTO intranet_v3_0_dev.access_plan_qualite_processus SELECT * FROM intranet_v2_0_prod.access_plan_qualite_processus;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.access_prise_coeur_frequences LIKE  intranet_v2_0_prod.access_prise_coeur_frequences;"
-//            . " INSERT INTO intranet_v3_0_dev.access_prise_coeur_frequences SELECT * FROM intranet_v2_0_prod.access_prise_coeur_frequences;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.access_prise_coeur_produits LIKE  intranet_v2_0_prod.access_prise_coeur_produits;"
-//            . " INSERT INTO intranet_v3_0_dev.access_prise_coeur_produits SELECT * FROM intranet_v2_0_prod.access_prise_coeur_produits;"
-//    );
-//    DatabaseOperation::execute(
-//            "CREATE TABLE intranet_v3_0_dev.access_qualite_processus LIKE  intranet_v2_0_prod.access_qualite_processus;"
-//            . " INSERT INTO intranet_v3_0_dev.access_qualite_processus SELECT * FROM intranet_v2_0_prod.access_qualite_processus;"
-//    );
+echo "DROP intranet_v3_0_dev.access_base_degust_mois ...";
+$sql = "DROP TABLE intranet_v3_0_dev.access_base_degust_mois";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.access_base_degust_mois ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.access_base_degust_mois LIKE intranet_v2_0_prod.access_base_degust_mois";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.access_base_degust_mois ...";
+$sql = "INSERT INTO intranet_v3_0_dev.access_base_degust_mois SELECT * FROM intranet_v2_0_prod.access_base_degust_mois";
+if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.access_base_degust_motifs ...";
+$sql = "DROP TABLE intranet_v3_0_dev.access_base_degust_motifs";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.access_base_degust_motifs ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.access_base_degust_motifs LIKE intranet_v2_0_prod.access_base_degust_motifs";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.access_base_degust_motifs ...";
+$sql = "INSERT INTO intranet_v3_0_dev.access_base_degust_motifs SELECT * FROM intranet_v2_0_prod.access_base_degust_motifs";
+if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.access_base_degust_produits ...";
+$sql = "DROP TABLE intranet_v3_0_dev.access_base_degust_produits";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.access_base_degust_produits ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.access_base_degust_produits LIKE intranet_v2_0_prod.access_base_degust_produits";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.access_base_degust_produits ...";
+$sql = "INSERT INTO intranet_v3_0_dev.access_base_degust_produits SELECT * FROM intranet_v2_0_prod.access_base_degust_produits";
+if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+
+echo "DROP intranet_v3_0_dev.access_base_degust_resultat ...";
+$sql = "DROP TABLE intranet_v3_0_dev.access_base_degust_resultat";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.access_base_degust_resultat ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.access_base_degust_resultat LIKE intranet_v2_0_prod.access_base_degust_resultat";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.access_base_degust_resultat ...";
+$sql = "INSERT INTO intranet_v3_0_dev.access_base_degust_resultat SELECT * FROM intranet_v2_0_prod.access_base_degust_resultat";
+if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.access_budget_marketing_accomptes ...";
+$sql = "DROP TABLE intranet_v3_0_dev.access_budget_marketing_accomptes";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.access_budget_marketing_accomptes ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.access_budget_marketing_accomptes LIKE intranet_v2_0_prod.access_budget_marketing_accomptes";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.access_budget_marketing_accomptes ...";
+$sql = "INSERT INTO intranet_v3_0_dev.access_budget_marketing_accomptes SELECT * FROM intranet_v2_0_prod.access_budget_marketing_accomptes";
+if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.access_budget_marketing_budget ...";
+$sql = "DROP TABLE intranet_v3_0_dev.access_budget_marketing_budget";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.access_budget_marketing_budget ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.access_budget_marketing_budget LIKE intranet_v2_0_prod.access_budget_marketing_budget";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.access_budget_marketing_budget ...";
+$sql = "INSERT INTO intranet_v3_0_dev.access_budget_marketing_budget SELECT * FROM intranet_v2_0_prod.access_budget_marketing_budget";
+if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.access_budget_marketing_facturation ...";
+$sql = "DROP TABLE intranet_v3_0_dev.access_budget_marketing_facturation";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.access_budget_marketing_facturation ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.access_budget_marketing_facturation LIKE intranet_v2_0_prod.access_budget_marketing_facturation";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.access_budget_marketing_facturation ...";
+$sql = "INSERT INTO intranet_v3_0_dev.access_budget_marketing_facturation SELECT * FROM intranet_v2_0_prod.access_budget_marketing_facturation";
+if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.access_budget_marketing_fournisseur ...";
+$sql = "DROP TABLE intranet_v3_0_dev.access_budget_marketing_fournisseur";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.access_budget_marketing_fournisseur ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.access_budget_marketing_fournisseur LIKE intranet_v2_0_prod.access_budget_marketing_fournisseur";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.access_budget_marketing_fournisseur ...";
+$sql = "INSERT INTO intranet_v3_0_dev.access_budget_marketing_fournisseur SELECT * FROM intranet_v2_0_prod.access_budget_marketing_fournisseur";
+if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.access_datasharing_data_sharing ...";
+$sql = "DROP TABLE intranet_v3_0_dev.access_datasharing_data_sharing";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.access_datasharing_data_sharing ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.access_datasharing_data_sharing LIKE intranet_v2_0_prod.access_datasharing_data_sharing";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.access_datasharing_data_sharing ...";
+$sql = "INSERT INTO intranet_v3_0_dev.access_datasharing_data_sharing SELECT * FROM intranet_v2_0_prod.access_datasharing_data_sharing";
+if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.access_budget_marketing_mdd_accomptes ...";
+$sql = "DROP TABLE intranet_v3_0_dev.access_budget_marketing_mdd_accomptes";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.access_budget_marketing_mdd_accomptes ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.access_budget_marketing_mdd_accomptes LIKE intranet_v2_0_prod.access_budget_marketing_mdd_accomptes";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.access_budget_marketing_mdd_accomptes ...";
+$sql = "INSERT INTO intranet_v3_0_dev.access_budget_marketing_mdd_accomptes SELECT * FROM intranet_v2_0_prod.access_budget_marketing_mdd_accomptes";
+if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.access_budget_marketing_mdd_budget ...";
+$sql = "DROP TABLE intranet_v3_0_dev.access_budget_marketing_mdd_budget";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.access_budget_marketing_mdd_budget ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.access_budget_marketing_mdd_budget LIKE intranet_v2_0_prod.access_budget_marketing_mdd_budget";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.access_budget_marketing_mdd_budget ...";
+$sql = "INSERT INTO intranet_v3_0_dev.access_budget_marketing_mdd_budget SELECT * FROM intranet_v2_0_prod.access_budget_marketing_mdd_budget";
+if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.access_budget_marketing_mdd_facturation ...";
+$sql = "DROP TABLE intranet_v3_0_dev.access_budget_marketing_mdd_facturation";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.access_budget_marketing_mdd_facturation ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.access_budget_marketing_mdd_facturation LIKE intranet_v2_0_prod.access_budget_marketing_mdd_facturation";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.access_budget_marketing_mdd_facturation ...";
+$sql = "INSERT INTO intranet_v3_0_dev.access_budget_marketing_mdd_facturation SELECT * FROM intranet_v2_0_prod.access_budget_marketing_mdd_facturation";
+if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.access_budget_marketing_mdd_fournisseur ...";
+$sql = "DROP TABLE intranet_v3_0_dev.access_budget_marketing_mdd_fournisseur";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.access_budget_marketing_mdd_fournisseur ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.access_budget_marketing_mdd_fournisseur LIKE intranet_v2_0_prod.access_budget_marketing_mdd_fournisseur";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.access_budget_marketing_mdd_fournisseur ...";
+$sql = "INSERT INTO intranet_v3_0_dev.access_budget_marketing_mdd_fournisseur SELECT * FROM intranet_v2_0_prod.access_budget_marketing_mdd_fournisseur";
+if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.access_budget_marketing_mdd_hierarchie_compta_analytique ...";
+$sql = "DROP TABLE intranet_v3_0_dev.access_budget_marketing_mdd_hierarchie_compta_analytique";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.access_budget_marketing_mdd_hierarchie_compta_analytique ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.access_budget_marketing_mdd_hierarchie_compta_analytique LIKE intranet_v2_0_prod.access_budget_marketing_mdd_hierarchie_compta_analytique";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.access_budget_marketing_mdd_hierarchie_compta_analytique ...";
+$sql = "INSERT INTO intranet_v3_0_dev.access_budget_marketing_mdd_hierarchie_compta_analytique SELECT * FROM intranet_v2_0_prod.access_budget_marketing_mdd_hierarchie_compta_analytique";
+if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.access_budget_marketing_mdd_intitule_base ...";
+$sql = "DROP TABLE intranet_v3_0_dev.access_budget_marketing_mdd_intitule_base";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.access_budget_marketing_mdd_intitule_base ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.access_budget_marketing_mdd_intitule_base LIKE intranet_v2_0_prod.access_budget_marketing_mdd_intitule_base";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.access_budget_marketing_mdd_intitule_base ...";
+$sql = "INSERT INTO intranet_v3_0_dev.access_budget_marketing_mdd_intitule_base SELECT * FROM intranet_v2_0_prod.access_budget_marketing_mdd_intitule_base";
+if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.access_budget_marketing_hierarchie_compta_analytique ...";
+$sql = "DROP TABLE intranet_v3_0_dev.access_budget_marketing_hierarchie_compta_analytique";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.access_budget_marketing_hierarchie_compta_analytique ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.access_budget_marketing_hierarchie_compta_analytique LIKE intranet_v2_0_prod.access_budget_marketing_hierarchie_compta_analytique";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.access_budget_marketing_hierarchie_compta_analytique ...";
+$sql = "INSERT INTO intranet_v3_0_dev.access_budget_marketing_hierarchie_compta_analytique SELECT * FROM intranet_v2_0_prod.access_budget_marketing_hierarchie_compta_analytique";
+if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.access_budget_marketing_intitule_base ...";
+$sql = "DROP TABLE intranet_v3_0_dev.access_budget_marketing_intitule_base";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.access_budget_marketing_intitule_base ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.access_budget_marketing_intitule_base LIKE intranet_v2_0_prod.access_budget_marketing_intitule_base";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.access_budget_marketing_intitule_base ...";
+$sql = "INSERT INTO intranet_v3_0_dev.access_budget_marketing_intitule_base SELECT * FROM intranet_v2_0_prod.access_budget_marketing_intitule_base";
+if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.access_budget_marketing_mdd_prestation ...";
+$sql = "DROP TABLE intranet_v3_0_dev.access_budget_marketing_mdd_prestation";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.access_budget_marketing_mdd_prestation ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.access_budget_marketing_mdd_prestation LIKE intranet_v2_0_prod.access_budget_marketing_mdd_prestation";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.access_budget_marketing_mdd_prestation ...";
+$sql = "INSERT INTO intranet_v3_0_dev.access_budget_marketing_mdd_prestation SELECT * FROM intranet_v2_0_prod.access_budget_marketing_mdd_prestation";
+if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.access_budget_marketing_mdd_provisions ...";
+$sql = "DROP TABLE intranet_v3_0_dev.access_budget_marketing_mdd_provisions";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.access_budget_marketing_mdd_provisions ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.access_budget_marketing_mdd_provisions LIKE intranet_v2_0_prod.access_budget_marketing_mdd_provisions";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.access_budget_marketing_mdd_provisions ...";
+$sql = "INSERT INTO intranet_v3_0_dev.access_budget_marketing_mdd_provisions SELECT * FROM intranet_v2_0_prod.access_budget_marketing_mdd_provisions";
+if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.access_budget_marketing_mdd_reglement ...";
+$sql = "DROP TABLE intranet_v3_0_dev.access_budget_marketing_mdd_reglement";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.access_budget_marketing_mdd_reglement ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.access_budget_marketing_mdd_reglement LIKE intranet_v2_0_prod.access_budget_marketing_mdd_reglement";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.access_budget_marketing_mdd_reglement ...";
+$sql = "INSERT INTO intranet_v3_0_dev.access_budget_marketing_mdd_reglement SELECT * FROM intranet_v2_0_prod.access_budget_marketing_mdd_reglement";
+if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.access_budget_marketing_mdd_rubrique_facturation ...";
+$sql = "DROP TABLE intranet_v3_0_dev.access_budget_marketing_mdd_rubrique_facturation";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.access_budget_marketing_mdd_rubrique_facturation ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.access_budget_marketing_mdd_rubrique_facturation LIKE intranet_v2_0_prod.access_budget_marketing_mdd_rubrique_facturation";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.access_budget_marketing_mdd_rubrique_facturation ...";
+$sql = "INSERT INTO intranet_v3_0_dev.access_budget_marketing_mdd_rubrique_facturation SELECT * FROM intranet_v2_0_prod.access_budget_marketing_mdd_rubrique_facturation";
+if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.access_budget_marketing_mdd_section ...";
+$sql = "DROP TABLE intranet_v3_0_dev.access_budget_marketing_mdd_section";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.access_budget_marketing_mdd_section ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.access_budget_marketing_mdd_section LIKE intranet_v2_0_prod.access_budget_marketing_mdd_section";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.access_budget_marketing_mdd_section ...";
+$sql = "INSERT INTO intranet_v3_0_dev.access_budget_marketing_mdd_section SELECT * FROM intranet_v2_0_prod.access_budget_marketing_mdd_section";
+if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.intranet_moteur_de_recherche_association_type_operateur ...";
+$sql = "DROP TABLE intranet_v3_0_dev.intranet_moteur_de_recherche_association_type_operateur";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.intranet_moteur_de_recherche_association_type_operateur ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.intranet_moteur_de_recherche_association_type_operateur LIKE intranet_v2_0_prod.intranet_moteur_de_recherche_association_type_operateur";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.intranet_moteur_de_recherche_association_type_operateur ...";
+$sql = "INSERT INTO intranet_v3_0_dev.intranet_moteur_de_recherche_association_type_operateur SELECT * FROM intranet_v2_0_prod.intranet_moteur_de_recherche_association_type_operateur";
+if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.intranet_moteur_de_recherche_operateur_sur_champ ...";
+$sql = "DROP TABLE intranet_v3_0_dev.intranet_moteur_de_recherche_operateur_sur_champ";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.intranet_moteur_de_recherche_operateur_sur_champ ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.intranet_moteur_de_recherche_operateur_sur_champ LIKE intranet_v2_0_prod.intranet_moteur_de_recherche_operateur_sur_champ";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.intranet_moteur_de_recherche_operateur_sur_champ ...";
+$sql = "INSERT INTO intranet_v3_0_dev.intranet_moteur_de_recherche_operateur_sur_champ SELECT * FROM intranet_v2_0_prod.intranet_moteur_de_recherche_operateur_sur_champ";
+if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.access_budget_marketing_mdd_sous_facturation ...";
+$sql = "DROP TABLE intranet_v3_0_dev.access_budget_marketing_mdd_sous_facturation";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.access_budget_marketing_mdd_sous_facturation ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.access_budget_marketing_mdd_sous_facturation LIKE intranet_v2_0_prod.access_budget_marketing_mdd_sous_facturation";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.access_budget_marketing_mdd_sous_facturation ...";
+$sql = "INSERT INTO intranet_v3_0_dev.access_budget_marketing_mdd_sous_facturation SELECT * FROM intranet_v2_0_prod.access_budget_marketing_mdd_sous_facturation";
+if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.access_budget_marketing_mdd_sous_section ...";
+$sql = "DROP TABLE intranet_v3_0_dev.access_budget_marketing_mdd_sous_section";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.access_budget_marketing_mdd_sous_section ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.access_budget_marketing_mdd_sous_section LIKE intranet_v2_0_prod.access_budget_marketing_mdd_sous_section";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.access_budget_marketing_mdd_sous_section ...";
+$sql = "INSERT INTO intranet_v3_0_dev.access_budget_marketing_mdd_sous_section SELECT * FROM intranet_v2_0_prod.access_budget_marketing_mdd_sous_section";
+if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.access_budget_marketing_mdd_temp_facture_provionnee ...";
+$sql = "DROP TABLE intranet_v3_0_dev.access_budget_marketing_mdd_temp_facture_provionnee";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.access_budget_marketing_mdd_temp_facture_provionnee ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.access_budget_marketing_mdd_temp_facture_provionnee LIKE intranet_v2_0_prod.access_budget_marketing_mdd_temp_facture_provionnee";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.access_budget_marketing_mdd_temp_facture_provionnee ...";
+$sql = "INSERT INTO intranet_v3_0_dev.access_budget_marketing_mdd_temp_facture_provionnee SELECT * FROM intranet_v2_0_prod.access_budget_marketing_mdd_temp_facture_provionnee";
+if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.access_budget_marketing_prestation ...";
+$sql = "DROP TABLE intranet_v3_0_dev.access_budget_marketing_prestation";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.access_budget_marketing_prestation ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.access_budget_marketing_prestation LIKE intranet_v2_0_prod.access_budget_marketing_prestation";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.access_budget_marketing_prestation ...";
+$sql = "INSERT INTO intranet_v3_0_dev.access_budget_marketing_prestation SELECT * FROM intranet_v2_0_prod.access_budget_marketing_prestation";
+if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.access_budget_marketing_provisions ...";
+$sql = "DROP TABLE intranet_v3_0_dev.access_budget_marketing_provisions";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.access_budget_marketing_provisions ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.access_budget_marketing_provisions LIKE intranet_v2_0_prod.access_budget_marketing_provisions";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.access_budget_marketing_provisions ...";
+$sql = "INSERT INTO intranet_v3_0_dev.access_budget_marketing_provisions SELECT * FROM intranet_v2_0_prod.access_budget_marketing_provisions";
+if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.access_budget_marketing_reglement ...";
+$sql = "DROP TABLE intranet_v3_0_dev.access_budget_marketing_reglement";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.access_budget_marketing_reglement ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.access_budget_marketing_reglement LIKE intranet_v2_0_prod.access_budget_marketing_reglement";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.access_budget_marketing_reglement ...";
+$sql = "INSERT INTO intranet_v3_0_dev.access_budget_marketing_reglement SELECT * FROM intranet_v2_0_prod.access_budget_marketing_reglement";
+if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.access_budget_marketing_rubrique_facturation ...";
+$sql = "DROP TABLE intranet_v3_0_dev.access_budget_marketing_rubrique_facturation";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.access_budget_marketing_rubrique_facturation ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.access_budget_marketing_rubrique_facturation LIKE intranet_v2_0_prod.access_budget_marketing_rubrique_facturation";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.access_budget_marketing_rubrique_facturation ...";
+$sql = "INSERT INTO intranet_v3_0_dev.access_budget_marketing_rubrique_facturation SELECT * FROM intranet_v2_0_prod.access_budget_marketing_rubrique_facturation";
+if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.access_budget_marketing_section ...";
+$sql = "DROP TABLE intranet_v3_0_dev.access_budget_marketing_section";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.access_budget_marketing_section ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.access_budget_marketing_section LIKE intranet_v2_0_prod.access_budget_marketing_section";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.access_budget_marketing_section ...";
+$sql = "INSERT INTO intranet_v3_0_dev.access_budget_marketing_section SELECT * FROM intranet_v2_0_prod.access_budget_marketing_section";
+if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.access_budget_marketing_sous_facturation ...";
+$sql = "DROP TABLE intranet_v3_0_dev.access_budget_marketing_sous_facturation";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.access_budget_marketing_sous_facturation ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.access_budget_marketing_sous_facturation LIKE intranet_v2_0_prod.access_budget_marketing_sous_facturation";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.access_budget_marketing_sous_facturation ...";
+$sql = "INSERT INTO intranet_v3_0_dev.access_budget_marketing_sous_facturation SELECT * FROM intranet_v2_0_prod.access_budget_marketing_sous_facturation";
+if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.access_budget_marketing_sous_section ...";
+$sql = "DROP TABLE intranet_v3_0_dev.access_budget_marketing_sous_section";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.access_budget_marketing_sous_section ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.access_budget_marketing_sous_section LIKE intranet_v2_0_prod.access_budget_marketing_sous_section";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.access_budget_marketing_sous_section ...";
+$sql = "INSERT INTO intranet_v3_0_dev.access_budget_marketing_sous_section SELECT * FROM intranet_v2_0_prod.access_budget_marketing_sous_section";
+if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.access_budget_marketing_temp_facture_provionnee ...";
+$sql = "DROP TABLE intranet_v3_0_dev.access_budget_marketing_temp_facture_provionnee";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.access_budget_marketing_temp_facture_provionnee ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.access_budget_marketing_temp_facture_provionnee LIKE intranet_v2_0_prod.access_budget_marketing_temp_facture_provionnee";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.access_budget_marketing_temp_facture_provionnee ...";
+$sql = "INSERT INTO intranet_v3_0_dev.access_budget_marketing_temp_facture_provionnee SELECT * FROM intranet_v2_0_prod.access_budget_marketing_temp_facture_provionnee";
+if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.access_budget_ventes_14mois_Importation_Real_N_1 ...";
+$sql = "DROP TABLE intranet_v3_0_dev.access_budget_ventes_14mois_Importation_Real_N_1";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.access_budget_ventes_14mois_Importation_Real_N_1 ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.access_budget_ventes_14mois_Importation_Real_N_1 LIKE intranet_v2_0_prod.access_budget_ventes_14mois_Importation_Real_N_1";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.access_budget_ventes_14mois_Importation_Real_N_1 ...";
+$sql = "INSERT INTO intranet_v3_0_dev.access_budget_ventes_14mois_Importation_Real_N_1 SELECT * FROM intranet_v2_0_prod.access_budget_ventes_14mois_Importation_Real_N_1";
+if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.access_budget_ventes_14mois_Importation_des_Realisations_N_1 ...";
+$sql = "DROP TABLE intranet_v3_0_dev.access_budget_ventes_14mois_Importation_des_Realisations_N_1";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.access_budget_ventes_14mois_Importation_des_Realisations_N_1 ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.access_budget_ventes_14mois_Importation_des_Realisations_N_1 LIKE intranet_v2_0_prod.access_budget_ventes_14mois_Importation_des_Realisations_N_1";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.access_budget_ventes_14mois_Importation_des_Realisations_N_1 ...";
+$sql = "INSERT INTO intranet_v3_0_dev.access_budget_ventes_14mois_Importation_des_Realisations_N_1 SELECT * FROM intranet_v2_0_prod.access_budget_ventes_14mois_Importation_des_Realisations_N_1";
+if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.access_budget_ventes_Importation_des_Realisations_N_1 ...";
+$sql = "DROP TABLE intranet_v3_0_dev.access_budget_ventes_Importation_des_Realisations_N_1";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.access_budget_ventes_Importation_des_Realisations_N_1 ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.access_budget_ventes_Importation_des_Realisations_N_1 LIKE intranet_v2_0_prod.access_budget_ventes_Importation_des_Realisations_N_1";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.access_budget_ventes_Importation_des_Realisations_N_1 ...";
+$sql = "INSERT INTO intranet_v3_0_dev.access_budget_ventes_Importation_des_Realisations_N_1 SELECT * FROM intranet_v2_0_prod.access_budget_ventes_Importation_des_Realisations_N_1";
+if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.access_budget_ventes_arti2_dev ...";
+$sql = "DROP TABLE intranet_v3_0_dev.access_budget_ventes_arti2_dev";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.access_budget_ventes_arti2_dev ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.access_budget_ventes_arti2_dev LIKE intranet_v2_0_prod.access_budget_ventes_arti2_dev";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.access_budget_ventes_arti2_dev ...";
+$sql = "INSERT INTO intranet_v3_0_dev.access_budget_ventes_arti2_dev SELECT * FROM intranet_v2_0_prod.access_budget_ventes_arti2_dev";
+if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.access_budget_ventes_reseau_commercial ...";
+$sql = "DROP TABLE intranet_v3_0_dev.access_budget_ventes_reseau_commercial";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.access_budget_ventes_reseau_commercial ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.access_budget_ventes_reseau_commercial LIKE intranet_v2_0_prod.access_budget_ventes_reseau_commercial";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.access_budget_ventes_reseau_commercial ...";
+$sql = "INSERT INTO intranet_v3_0_dev.access_budget_ventes_reseau_commercial SELECT * FROM intranet_v2_0_prod.access_budget_ventes_reseau_commercial";
+if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.access_bugdet_ventes_14mois_table_animation ...";
+$sql = "DROP TABLE intranet_v3_0_dev.access_bugdet_ventes_14mois_table_animation";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.access_bugdet_ventes_14mois_table_animation ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.access_bugdet_ventes_14mois_table_animation LIKE intranet_v2_0_prod.access_bugdet_ventes_14mois_table_animation";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.access_bugdet_ventes_14mois_table_animation ...";
+$sql = "INSERT INTO intranet_v3_0_dev.access_bugdet_ventes_14mois_table_animation SELECT * FROM intranet_v2_0_prod.access_bugdet_ventes_14mois_table_animation";
+if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.access_bugdet_ventes_14mois_table_budget ...";
+$sql = "DROP TABLE intranet_v3_0_dev.access_bugdet_ventes_14mois_table_budget";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.access_bugdet_ventes_14mois_table_budget ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.access_bugdet_ventes_14mois_table_budget LIKE intranet_v2_0_prod.access_bugdet_ventes_14mois_table_budget";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.access_bugdet_ventes_14mois_table_budget ...";
+$sql = "INSERT INTO intranet_v3_0_dev.access_bugdet_ventes_14mois_table_budget SELECT * FROM intranet_v2_0_prod.access_bugdet_ventes_14mois_table_budget";
+if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.access_bugdet_ventes_14mois_table_realises ...";
+$sql = "DROP TABLE intranet_v3_0_dev.access_bugdet_ventes_14mois_table_realises";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.access_bugdet_ventes_14mois_table_realises ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.access_bugdet_ventes_14mois_table_realises LIKE intranet_v2_0_prod.access_bugdet_ventes_14mois_table_realises";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.access_bugdet_ventes_14mois_table_realises ...";
+$sql = "INSERT INTO intranet_v3_0_dev.access_bugdet_ventes_14mois_table_realises SELECT * FROM intranet_v2_0_prod.access_bugdet_ventes_14mois_table_realises";
+if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.access_bugdet_ventes_articles_cout ...";
+$sql = "DROP TABLE intranet_v3_0_dev.access_bugdet_ventes_articles_cout";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.access_bugdet_ventes_articles_cout ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.access_bugdet_ventes_articles_cout LIKE intranet_v2_0_prod.access_bugdet_ventes_articles_cout";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.access_bugdet_ventes_articles_cout ...";
+$sql = "INSERT INTO intranet_v3_0_dev.access_bugdet_ventes_articles_cout SELECT * FROM intranet_v2_0_prod.access_bugdet_ventes_articles_cout";
+if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.access_bugdet_ventes_articles_totalite ...";
+$sql = "DROP TABLE intranet_v3_0_dev.access_bugdet_ventes_articles_totalite";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.access_bugdet_ventes_articles_totalite ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.access_bugdet_ventes_articles_totalite LIKE intranet_v2_0_prod.access_bugdet_ventes_articles_totalite";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.access_bugdet_ventes_articles_totalite ...";
+$sql = "INSERT INTO intranet_v3_0_dev.access_bugdet_ventes_articles_totalite SELECT * FROM intranet_v2_0_prod.access_bugdet_ventes_articles_totalite";
+if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.access_bugdet_ventes_correspondance_famcli_fammktg ...";
+$sql = "DROP TABLE intranet_v3_0_dev.access_bugdet_ventes_correspondance_famcli_fammktg";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.access_bugdet_ventes_correspondance_famcli_fammktg ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.access_bugdet_ventes_correspondance_famcli_fammktg LIKE intranet_v2_0_prod.access_bugdet_ventes_correspondance_famcli_fammktg";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.access_bugdet_ventes_correspondance_famcli_fammktg ...";
+$sql = "INSERT INTO intranet_v3_0_dev.access_bugdet_ventes_correspondance_famcli_fammktg SELECT * FROM intranet_v2_0_prod.access_bugdet_ventes_correspondance_famcli_fammktg";
+if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.access_bugdet_ventes_table_animation ...";
+$sql = "DROP TABLE intranet_v3_0_dev.access_bugdet_ventes_table_animation";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.access_bugdet_ventes_table_animation ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.access_bugdet_ventes_table_animation LIKE intranet_v2_0_prod.access_bugdet_ventes_table_animation";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.access_bugdet_ventes_table_animation ...";
+$sql = "INSERT INTO intranet_v3_0_dev.access_bugdet_ventes_table_animation SELECT * FROM intranet_v2_0_prod.access_bugdet_ventes_table_animation";
+if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.access_bugdet_ventes_table_budget ...";
+$sql = "DROP TABLE intranet_v3_0_dev.access_bugdet_ventes_table_budget";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.access_bugdet_ventes_table_budget ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.access_bugdet_ventes_table_budget LIKE intranet_v2_0_prod.access_bugdet_ventes_table_budget";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.access_bugdet_ventes_table_budget ...";
+$sql = "INSERT INTO intranet_v3_0_dev.access_bugdet_ventes_table_budget SELECT * FROM intranet_v2_0_prod.access_bugdet_ventes_table_budget";
+if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.access_bugdet_ventes_table_bugdet_commentaire ...";
+$sql = "DROP TABLE intranet_v3_0_dev.access_bugdet_ventes_table_bugdet_commentaire";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.access_bugdet_ventes_table_bugdet_commentaire ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.access_bugdet_ventes_table_bugdet_commentaire LIKE intranet_v2_0_prod.access_bugdet_ventes_table_bugdet_commentaire";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.access_bugdet_ventes_table_bugdet_commentaire ...";
+$sql = "INSERT INTO intranet_v3_0_dev.access_bugdet_ventes_table_bugdet_commentaire SELECT * FROM intranet_v2_0_prod.access_bugdet_ventes_table_bugdet_commentaire";
+if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.access_bugdet_ventes_table_realises ...";
+$sql = "DROP TABLE intranet_v3_0_dev.access_bugdet_ventes_table_realises";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.access_bugdet_ventes_table_realises ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.access_bugdet_ventes_table_realises LIKE intranet_v2_0_prod.access_bugdet_ventes_table_realises";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.access_bugdet_ventes_table_realises ...";
+$sql = "INSERT INTO intranet_v3_0_dev.access_bugdet_ventes_table_realises SELECT * FROM intranet_v2_0_prod.access_bugdet_ventes_table_realises";
+if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.access_clients ...";
+$sql = "DROP TABLE intranet_v3_0_dev.access_clients";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.access_clients ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.access_clients LIKE intranet_v2_0_prod.access_clients";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.access_clients ...";
+$sql = "INSERT INTO intranet_v3_0_dev.access_clients SELECT * FROM intranet_v2_0_prod.access_clients";
+if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.access_clients_rayon ...";
+$sql = "DROP TABLE intranet_v3_0_dev.access_clients_rayon";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.access_clients_rayon ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.access_clients_rayon LIKE intranet_v2_0_prod.access_clients_rayon";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.access_clients_rayon ...";
+$sql = "INSERT INTO intranet_v3_0_dev.access_clients_rayon SELECT * FROM intranet_v2_0_prod.access_clients_rayon";
+if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.access_commerciaux ...";
+$sql = "DROP TABLE intranet_v3_0_dev.access_commerciaux";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.access_commerciaux ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.access_commerciaux LIKE intranet_v2_0_prod.access_commerciaux";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.access_commerciaux ...";
+$sql = "INSERT INTO intranet_v3_0_dev.access_commerciaux SELECT * FROM intranet_v2_0_prod.access_commerciaux";
+if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.access_datasharing_Nb_magasin_entrepot ...";
+$sql = "DROP TABLE intranet_v3_0_dev.access_datasharing_Nb_magasin_entrepot";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.access_datasharing_Nb_magasin_entrepot ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.access_datasharing_Nb_magasin_entrepot LIKE intranet_v2_0_prod.access_datasharing_Nb_magasin_entrepot";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.access_datasharing_Nb_magasin_entrepot ...";
+$sql = "INSERT INTO intranet_v3_0_dev.access_datasharing_Nb_magasin_entrepot SELECT * FROM intranet_v2_0_prod.access_datasharing_Nb_magasin_entrepot";
+if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.access_datasharing_Table_des_magasins ...";
+$sql = "DROP TABLE intranet_v3_0_dev.access_datasharing_Table_des_magasins";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.access_datasharing_Table_des_magasins ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.access_datasharing_Table_des_magasins LIKE intranet_v2_0_prod.access_datasharing_Table_des_magasins";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.access_datasharing_Table_des_magasins ...";
+$sql = "INSERT INTO intranet_v3_0_dev.access_datasharing_Table_des_magasins SELECT * FROM intranet_v2_0_prod.access_datasharing_Table_des_magasins";
+if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.access_etat ...";
+$sql = "DROP TABLE intranet_v3_0_dev.access_etat";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.access_etat ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.access_etat LIKE intranet_v2_0_prod.access_etat";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.access_etat ...";
+$sql = "INSERT INTO intranet_v3_0_dev.access_etat SELECT * FROM intranet_v2_0_prod.access_etat";
+if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.access_familles_articles ...";
+$sql = "DROP TABLE intranet_v3_0_dev.access_familles_articles";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.access_familles_articles ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.access_familles_articles LIKE intranet_v2_0_prod.access_familles_articles";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.access_familles_articles ...";
+$sql = "INSERT INTO intranet_v3_0_dev.access_familles_articles SELECT * FROM intranet_v2_0_prod.access_familles_articles";
+if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.access_familles_clients ...";
+$sql = "DROP TABLE intranet_v3_0_dev.access_familles_clients";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.access_familles_clients ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.access_familles_clients LIKE intranet_v2_0_prod.access_familles_clients";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.access_familles_clients ...";
+$sql = "INSERT INTO intranet_v3_0_dev.access_familles_clients SELECT * FROM intranet_v2_0_prod.access_familles_clients";
+if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.access_familles_gammes ...";
+$sql = "DROP TABLE intranet_v3_0_dev.access_familles_gammes";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.access_familles_gammes ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.access_familles_gammes LIKE intranet_v2_0_prod.access_familles_gammes";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.access_familles_gammes ...";
+$sql = "INSERT INTO intranet_v3_0_dev.access_familles_gammes SELECT * FROM intranet_v2_0_prod.access_familles_gammes";
+if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.access_familles_marketing ...";
+$sql = "DROP TABLE intranet_v3_0_dev.access_familles_marketing";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.access_familles_marketing ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.access_familles_marketing LIKE intranet_v2_0_prod.access_familles_marketing";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.access_familles_marketing ...";
+$sql = "INSERT INTO intranet_v3_0_dev.access_familles_marketing SELECT * FROM intranet_v2_0_prod.access_familles_marketing";
+if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.access_formation_categories_socio_professionnelles ...";
+$sql = "DROP TABLE intranet_v3_0_dev.access_formation_categories_socio_professionnelles";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.access_formation_categories_socio_professionnelles ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.access_formation_categories_socio_professionnelles LIKE intranet_v2_0_prod.access_formation_categories_socio_professionnelles";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.access_formation_categories_socio_professionnelles ...";
+$sql = "INSERT INTO intranet_v3_0_dev.access_formation_categories_socio_professionnelles SELECT * FROM intranet_v2_0_prod.access_formation_categories_socio_professionnelles";
+if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.access_formation_departements ...";
+$sql = "DROP TABLE intranet_v3_0_dev.access_formation_departements";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.access_formation_departements ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.access_formation_departements LIKE intranet_v2_0_prod.access_formation_departements";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.access_formation_departements ...";
+$sql = "INSERT INTO intranet_v3_0_dev.access_formation_departements SELECT * FROM intranet_v2_0_prod.access_formation_departements";
+if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.access_formation_fonctions ...";
+$sql = "DROP TABLE intranet_v3_0_dev.access_formation_fonctions";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.access_formation_fonctions ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.access_formation_fonctions LIKE intranet_v2_0_prod.access_formation_fonctions";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.access_formation_fonctions ...";
+$sql = "INSERT INTO intranet_v3_0_dev.access_formation_fonctions SELECT * FROM intranet_v2_0_prod.access_formation_fonctions";
+if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.access_formation_formation ...";
+$sql = "DROP TABLE intranet_v3_0_dev.access_formation_formation";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.access_formation_formation ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.access_formation_formation LIKE intranet_v2_0_prod.access_formation_formation";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.access_formation_formation ...";
+$sql = "INSERT INTO intranet_v3_0_dev.access_formation_formation SELECT * FROM intranet_v2_0_prod.access_formation_formation";
+if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.access_formation_regroupement_age ...";
+$sql = "DROP TABLE intranet_v3_0_dev.access_formation_regroupement_age";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.access_formation_regroupement_age ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.access_formation_regroupement_age LIKE intranet_v2_0_prod.access_formation_regroupement_age";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.access_formation_regroupement_age ...";
+$sql = "INSERT INTO intranet_v3_0_dev.access_formation_regroupement_age SELECT * FROM intranet_v2_0_prod.access_formation_regroupement_age";
+if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.access_formation_salarie ...";
+$sql = "DROP TABLE intranet_v3_0_dev.access_formation_salarie";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.access_formation_salarie ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.access_formation_salarie LIKE intranet_v2_0_prod.access_formation_salarie";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.access_formation_salarie ...";
+$sql = "INSERT INTO intranet_v3_0_dev.access_formation_salarie SELECT * FROM intranet_v2_0_prod.access_formation_salarie";
+if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.access_formation_services ...";
+$sql = "DROP TABLE intranet_v3_0_dev.access_formation_services";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.access_formation_services ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.access_formation_services LIKE intranet_v2_0_prod.access_formation_services";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.access_formation_services ...";
+$sql = "INSERT INTO intranet_v3_0_dev.access_formation_services SELECT * FROM intranet_v2_0_prod.access_formation_services";
+if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.access_formation_stage_informations ...";
+$sql = "DROP TABLE intranet_v3_0_dev.access_formation_stage_informations";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.access_formation_stage_informations ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.access_formation_stage_informations LIKE intranet_v2_0_prod.access_formation_stage_informations";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.access_formation_stage_informations ...";
+$sql = "INSERT INTO intranet_v3_0_dev.access_formation_stage_informations SELECT * FROM intranet_v2_0_prod.access_formation_stage_informations";
+if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.access_formation_stage_intitule_formation ...";
+$sql = "DROP TABLE intranet_v3_0_dev.access_formation_stage_intitule_formation";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.access_formation_stage_intitule_formation ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.access_formation_stage_intitule_formation LIKE intranet_v2_0_prod.access_formation_stage_intitule_formation";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.access_formation_stage_intitule_formation ...";
+$sql = "INSERT INTO intranet_v3_0_dev.access_formation_stage_intitule_formation SELECT * FROM intranet_v2_0_prod.access_formation_stage_intitule_formation";
+if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.access_formation_stage_table_des_domaines ...";
+$sql = "DROP TABLE intranet_v3_0_dev.access_formation_stage_table_des_domaines";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.access_formation_stage_table_des_domaines ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.access_formation_stage_table_des_domaines LIKE intranet_v2_0_prod.access_formation_stage_table_des_domaines";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.access_formation_stage_table_des_domaines ...";
+$sql = "INSERT INTO intranet_v3_0_dev.access_formation_stage_table_des_domaines SELECT * FROM intranet_v2_0_prod.access_formation_stage_table_des_domaines";
+if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.access_formation_stage_table_des_intitules ...";
+$sql = "DROP TABLE intranet_v3_0_dev.access_formation_stage_table_des_intitules";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.access_formation_stage_table_des_intitules ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.access_formation_stage_table_des_intitules LIKE intranet_v2_0_prod.access_formation_stage_table_des_intitules";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.access_formation_stage_table_des_intitules ...";
+$sql = "INSERT INTO intranet_v3_0_dev.access_formation_stage_table_des_intitules SELECT * FROM intranet_v2_0_prod.access_formation_stage_table_des_intitules";
+if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.access_formation_stage_table_des_organismes ...";
+$sql = "DROP TABLE intranet_v3_0_dev.access_formation_stage_table_des_organismes";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.access_formation_stage_table_des_organismes ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.access_formation_stage_table_des_organismes LIKE intranet_v2_0_prod.access_formation_stage_table_des_organismes";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.access_formation_stage_table_des_organismes ...";
+$sql = "INSERT INTO intranet_v3_0_dev.access_formation_stage_table_des_organismes SELECT * FROM intranet_v2_0_prod.access_formation_stage_table_des_organismes";
+if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.access_formation_table_des_Tx ...";
+$sql = "DROP TABLE intranet_v3_0_dev.access_formation_table_des_Tx";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.access_formation_table_des_Tx ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.access_formation_table_des_Tx LIKE intranet_v2_0_prod.access_formation_table_des_Tx";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.access_formation_table_des_Tx ...";
+$sql = "INSERT INTO intranet_v3_0_dev.access_formation_table_des_Tx SELECT * FROM intranet_v2_0_prod.access_formation_table_des_Tx";
+if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.access_formation_table_des_donnees ...";
+$sql = "DROP TABLE intranet_v3_0_dev.access_formation_table_des_donnees";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.access_formation_table_des_donnees ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.access_formation_table_des_donnees LIKE intranet_v2_0_prod.access_formation_table_des_donnees";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.access_formation_table_des_donnees ...";
+$sql = "INSERT INTO intranet_v3_0_dev.access_formation_table_des_donnees SELECT * FROM intranet_v2_0_prod.access_formation_table_des_donnees";
+if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.access_formation_table_des_postes_de_depenses ...";
+$sql = "DROP TABLE intranet_v3_0_dev.access_formation_table_des_postes_de_depenses";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.access_formation_table_des_postes_de_depenses ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.access_formation_table_des_postes_de_depenses LIKE intranet_v2_0_prod.access_formation_table_des_postes_de_depenses";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.access_formation_table_des_postes_de_depenses ...";
+$sql = "INSERT INTO intranet_v3_0_dev.access_formation_table_des_postes_de_depenses SELECT * FROM intranet_v2_0_prod.access_formation_table_des_postes_de_depenses";
+if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.access_gammes ...";
+$sql = "DROP TABLE intranet_v3_0_dev.access_gammes";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.access_gammes ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.access_gammes LIKE intranet_v2_0_prod.access_gammes";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.access_gammes ...";
+$sql = "INSERT INTO intranet_v3_0_dev.access_gammes SELECT * FROM intranet_v2_0_prod.access_gammes";
+if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.access_indicateur_productivite_expedition_production ...";
+$sql = "DROP TABLE intranet_v3_0_dev.access_indicateur_productivite_expedition_production";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.access_indicateur_productivite_expedition_production ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.access_indicateur_productivite_expedition_production LIKE intranet_v2_0_prod.access_indicateur_productivite_expedition_production";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.access_indicateur_productivite_expedition_production ...";
+$sql = "INSERT INTO intranet_v3_0_dev.access_indicateur_productivite_expedition_production SELECT * FROM intranet_v2_0_prod.access_indicateur_productivite_expedition_production";
+if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.access_indicateur_productivite_expedition_temps_travail ...";
+$sql = "DROP TABLE intranet_v3_0_dev.access_indicateur_productivite_expedition_temps_travail";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.access_indicateur_productivite_expedition_temps_travail ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.access_indicateur_productivite_expedition_temps_travail LIKE intranet_v2_0_prod.access_indicateur_productivite_expedition_temps_travail";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.access_indicateur_productivite_expedition_temps_travail ...";
+$sql = "INSERT INTO intranet_v3_0_dev.access_indicateur_productivite_expedition_temps_travail SELECT * FROM intranet_v2_0_prod.access_indicateur_productivite_expedition_temps_travail";
+if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.access_materiel_carte_reseau ...";
+$sql = "DROP TABLE intranet_v3_0_dev.access_materiel_carte_reseau";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.access_materiel_carte_reseau ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.access_materiel_carte_reseau LIKE intranet_v2_0_prod.access_materiel_carte_reseau";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.access_materiel_carte_reseau ...";
+$sql = "INSERT INTO intranet_v3_0_dev.access_materiel_carte_reseau SELECT * FROM intranet_v2_0_prod.access_materiel_carte_reseau";
+if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.access_materiel_categorie_logiciel ...";
+$sql = "DROP TABLE intranet_v3_0_dev.access_materiel_categorie_logiciel";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.access_materiel_categorie_logiciel ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.access_materiel_categorie_logiciel LIKE intranet_v2_0_prod.access_materiel_categorie_logiciel";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.access_materiel_categorie_logiciel ...";
+$sql = "INSERT INTO intranet_v3_0_dev.access_materiel_categorie_logiciel SELECT * FROM intranet_v2_0_prod.access_materiel_categorie_logiciel";
+if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.access_materiel_connectique ...";
+$sql = "DROP TABLE intranet_v3_0_dev.access_materiel_connectique";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.access_materiel_connectique ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.access_materiel_connectique LIKE intranet_v2_0_prod.access_materiel_connectique";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.access_materiel_connectique ...";
+$sql = "INSERT INTO intranet_v3_0_dev.access_materiel_connectique SELECT * FROM intranet_v2_0_prod.access_materiel_connectique";
+if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.access_materiel_contrat ...";
+$sql = "DROP TABLE intranet_v3_0_dev.access_materiel_contrat";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.access_materiel_contrat ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.access_materiel_contrat LIKE intranet_v2_0_prod.access_materiel_contrat";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.access_materiel_contrat ...";
+$sql = "INSERT INTO intranet_v3_0_dev.access_materiel_contrat SELECT * FROM intranet_v2_0_prod.access_materiel_contrat";
+if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.access_materiel_ecran ...";
+$sql = "DROP TABLE intranet_v3_0_dev.access_materiel_ecran";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.access_materiel_ecran ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.access_materiel_ecran LIKE intranet_v2_0_prod.access_materiel_ecran";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.access_materiel_ecran ...";
+$sql = "INSERT INTO intranet_v3_0_dev.access_materiel_ecran SELECT * FROM intranet_v2_0_prod.access_materiel_ecran";
+if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.access_materiel_etat_incident ...";
+$sql = "DROP TABLE intranet_v3_0_dev.access_materiel_etat_incident";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.access_materiel_etat_incident ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.access_materiel_etat_incident LIKE intranet_v2_0_prod.access_materiel_etat_incident";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.access_materiel_etat_incident ...";
+$sql = "INSERT INTO intranet_v3_0_dev.access_materiel_etat_incident SELECT * FROM intranet_v2_0_prod.access_materiel_etat_incident";
+if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.access_materiel_etat_materiel_detail ...";
+$sql = "DROP TABLE intranet_v3_0_dev.access_materiel_etat_materiel_detail";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.access_materiel_etat_materiel_detail ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.access_materiel_etat_materiel_detail LIKE intranet_v2_0_prod.access_materiel_etat_materiel_detail";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.access_materiel_etat_materiel_detail ...";
+$sql = "INSERT INTO intranet_v3_0_dev.access_materiel_etat_materiel_detail SELECT * FROM intranet_v2_0_prod.access_materiel_etat_materiel_detail";
+if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.access_materiel_fonction_prestataire ...";
+$sql = "DROP TABLE intranet_v3_0_dev.access_materiel_fonction_prestataire";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.access_materiel_fonction_prestataire ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.access_materiel_fonction_prestataire LIKE intranet_v2_0_prod.access_materiel_fonction_prestataire";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.access_materiel_fonction_prestataire ...";
+$sql = "INSERT INTO intranet_v3_0_dev.access_materiel_fonction_prestataire SELECT * FROM intranet_v2_0_prod.access_materiel_fonction_prestataire";
+if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.access_materiel_gestion_incident ...";
+$sql = "DROP TABLE intranet_v3_0_dev.access_materiel_gestion_incident";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.access_materiel_gestion_incident ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.access_materiel_gestion_incident LIKE intranet_v2_0_prod.access_materiel_gestion_incident";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.access_materiel_gestion_incident ...";
+$sql = "INSERT INTO intranet_v3_0_dev.access_materiel_gestion_incident SELECT * FROM intranet_v2_0_prod.access_materiel_gestion_incident";
+if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.access_materiel_gestion_incident_groupe ...";
+$sql = "DROP TABLE intranet_v3_0_dev.access_materiel_gestion_incident_groupe";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.access_materiel_gestion_incident_groupe ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.access_materiel_gestion_incident_groupe LIKE intranet_v2_0_prod.access_materiel_gestion_incident_groupe";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.access_materiel_gestion_incident_groupe ...";
+$sql = "INSERT INTO intranet_v3_0_dev.access_materiel_gestion_incident_groupe SELECT * FROM intranet_v2_0_prod.access_materiel_gestion_incident_groupe";
+if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.access_materiel_horloge_processeur ...";
+$sql = "DROP TABLE intranet_v3_0_dev.access_materiel_horloge_processeur";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.access_materiel_horloge_processeur ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.access_materiel_horloge_processeur LIKE intranet_v2_0_prod.access_materiel_horloge_processeur";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.access_materiel_horloge_processeur ...";
+$sql = "INSERT INTO intranet_v3_0_dev.access_materiel_horloge_processeur SELECT * FROM intranet_v2_0_prod.access_materiel_horloge_processeur";
+if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.access_materiel_imprimante ...";
+$sql = "DROP TABLE intranet_v3_0_dev.access_materiel_imprimante";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.access_materiel_imprimante ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.access_materiel_imprimante LIKE intranet_v2_0_prod.access_materiel_imprimante";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.access_materiel_imprimante ...";
+$sql = "INSERT INTO intranet_v3_0_dev.access_materiel_imprimante SELECT * FROM intranet_v2_0_prod.access_materiel_imprimante";
+if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.access_materiel_incident ...";
+$sql = "DROP TABLE intranet_v3_0_dev.access_materiel_incident";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.access_materiel_incident ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.access_materiel_incident LIKE intranet_v2_0_prod.access_materiel_incident";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.access_materiel_incident ...";
+$sql = "INSERT INTO intranet_v3_0_dev.access_materiel_incident SELECT * FROM intranet_v2_0_prod.access_materiel_incident";
+if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.access_materiel_licence ...";
+$sql = "DROP TABLE intranet_v3_0_dev.access_materiel_licence";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.access_materiel_licence ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.access_materiel_licence LIKE intranet_v2_0_prod.access_materiel_licence";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.access_materiel_licence ...";
+$sql = "INSERT INTO intranet_v3_0_dev.access_materiel_licence SELECT * FROM intranet_v2_0_prod.access_materiel_licence";
+if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.access_materiel_log ...";
+$sql = "DROP TABLE intranet_v3_0_dev.access_materiel_log";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.access_materiel_log ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.access_materiel_log LIKE intranet_v2_0_prod.access_materiel_log";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.access_materiel_log ...";
+$sql = "INSERT INTO intranet_v3_0_dev.access_materiel_log SELECT * FROM intranet_v2_0_prod.access_materiel_log";
+if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.access_materiel_marque_materiel ...";
+$sql = "DROP TABLE intranet_v3_0_dev.access_materiel_marque_materiel";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.access_materiel_marque_materiel ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.access_materiel_marque_materiel LIKE intranet_v2_0_prod.access_materiel_marque_materiel";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.access_materiel_marque_materiel ...";
+$sql = "INSERT INTO intranet_v3_0_dev.access_materiel_marque_materiel SELECT * FROM intranet_v2_0_prod.access_materiel_marque_materiel";
+if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.access_materiel_materiel_detail ...";
+$sql = "DROP TABLE intranet_v3_0_dev.access_materiel_materiel_detail";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.access_materiel_materiel_detail ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.access_materiel_materiel_detail LIKE intranet_v2_0_prod.access_materiel_materiel_detail";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.access_materiel_materiel_detail ...";
+$sql = "INSERT INTO intranet_v3_0_dev.access_materiel_materiel_detail SELECT * FROM intranet_v2_0_prod.access_materiel_materiel_detail";
+if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.access_materiel_materiel_general ...";
+$sql = "DROP TABLE intranet_v3_0_dev.access_materiel_materiel_general";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.access_materiel_materiel_general ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.access_materiel_materiel_general LIKE intranet_v2_0_prod.access_materiel_materiel_general";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.access_materiel_materiel_general ...";
+$sql = "INSERT INTO intranet_v3_0_dev.access_materiel_materiel_general SELECT * FROM intranet_v2_0_prod.access_materiel_materiel_general";
+if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.access_materiel_modem ...";
+$sql = "DROP TABLE intranet_v3_0_dev.access_materiel_modem";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.access_materiel_modem ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.access_materiel_modem LIKE intranet_v2_0_prod.access_materiel_modem";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.access_materiel_modem ...";
+$sql = "INSERT INTO intranet_v3_0_dev.access_materiel_modem SELECT * FROM intranet_v2_0_prod.access_materiel_modem";
+if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.access_materiel_module ...";
+$sql = "DROP TABLE intranet_v3_0_dev.access_materiel_module";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.access_materiel_module ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.access_materiel_module LIKE intranet_v2_0_prod.access_materiel_module";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.access_materiel_module ...";
+$sql = "INSERT INTO intranet_v3_0_dev.access_materiel_module SELECT * FROM intranet_v2_0_prod.access_materiel_module";
+if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.access_materiel_nature_action ...";
+$sql = "DROP TABLE intranet_v3_0_dev.access_materiel_nature_action";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.access_materiel_nature_action ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.access_materiel_nature_action LIKE intranet_v2_0_prod.access_materiel_nature_action";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.access_materiel_nature_action ...";
+$sql = "INSERT INTO intranet_v3_0_dev.access_materiel_nature_action SELECT * FROM intranet_v2_0_prod.access_materiel_nature_action";
+if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.access_materiel_nature_incident ...";
+$sql = "DROP TABLE intranet_v3_0_dev.access_materiel_nature_incident";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.access_materiel_nature_incident ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.access_materiel_nature_incident LIKE intranet_v2_0_prod.access_materiel_nature_incident";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.access_materiel_nature_incident ...";
+$sql = "INSERT INTO intranet_v3_0_dev.access_materiel_nature_incident SELECT * FROM intranet_v2_0_prod.access_materiel_nature_incident";
+if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.access_materiel_poste ...";
+$sql = "DROP TABLE intranet_v3_0_dev.access_materiel_poste";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.access_materiel_poste ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.access_materiel_poste LIKE intranet_v2_0_prod.access_materiel_poste";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.access_materiel_poste ...";
+$sql = "INSERT INTO intranet_v3_0_dev.access_materiel_poste SELECT * FROM intranet_v2_0_prod.access_materiel_poste";
+if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.access_materiel_prestataire ...";
+$sql = "DROP TABLE intranet_v3_0_dev.access_materiel_prestataire";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.access_materiel_prestataire ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.access_materiel_prestataire LIKE intranet_v2_0_prod.access_materiel_prestataire";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.access_materiel_prestataire ...";
+$sql = "INSERT INTO intranet_v3_0_dev.access_materiel_prestataire SELECT * FROM intranet_v2_0_prod.access_materiel_prestataire";
+if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.access_materiel_processeur ...";
+$sql = "DROP TABLE intranet_v3_0_dev.access_materiel_processeur";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.access_materiel_processeur ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.access_materiel_processeur LIKE intranet_v2_0_prod.access_materiel_processeur";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.access_materiel_processeur ...";
+$sql = "INSERT INTO intranet_v3_0_dev.access_materiel_processeur SELECT * FROM intranet_v2_0_prod.access_materiel_processeur";
+if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.access_materiel_reseaux ...";
+$sql = "DROP TABLE intranet_v3_0_dev.access_materiel_reseaux";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.access_materiel_reseaux ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.access_materiel_reseaux LIKE intranet_v2_0_prod.access_materiel_reseaux";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.access_materiel_reseaux ...";
+$sql = "INSERT INTO intranet_v3_0_dev.access_materiel_reseaux SELECT * FROM intranet_v2_0_prod.access_materiel_reseaux";
+if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.access_materiel_reseaux_detail ...";
+$sql = "DROP TABLE intranet_v3_0_dev.access_materiel_reseaux_detail";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.access_materiel_reseaux_detail ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.access_materiel_reseaux_detail LIKE intranet_v2_0_prod.access_materiel_reseaux_detail";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.access_materiel_reseaux_detail ...";
+$sql = "INSERT INTO intranet_v3_0_dev.access_materiel_reseaux_detail SELECT * FROM intranet_v2_0_prod.access_materiel_reseaux_detail";
+if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.access_materiel_section_analytique ...";
+$sql = "DROP TABLE intranet_v3_0_dev.access_materiel_section_analytique";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.access_materiel_section_analytique ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.access_materiel_section_analytique LIKE intranet_v2_0_prod.access_materiel_section_analytique";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.access_materiel_section_analytique ...";
+$sql = "INSERT INTO intranet_v3_0_dev.access_materiel_section_analytique SELECT * FROM intranet_v2_0_prod.access_materiel_section_analytique";
+if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.access_materiel_serveur ...";
+$sql = "DROP TABLE intranet_v3_0_dev.access_materiel_serveur";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.access_materiel_serveur ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.access_materiel_serveur LIKE intranet_v2_0_prod.access_materiel_serveur";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.access_materiel_serveur ...";
+$sql = "INSERT INTO intranet_v3_0_dev.access_materiel_serveur SELECT * FROM intranet_v2_0_prod.access_materiel_serveur";
+if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.access_materiel_serveur_applicatif ...";
+$sql = "DROP TABLE intranet_v3_0_dev.access_materiel_serveur_applicatif";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.access_materiel_serveur_applicatif ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.access_materiel_serveur_applicatif LIKE intranet_v2_0_prod.access_materiel_serveur_applicatif";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.access_materiel_serveur_applicatif ...";
+$sql = "INSERT INTO intranet_v3_0_dev.access_materiel_serveur_applicatif SELECT * FROM intranet_v2_0_prod.access_materiel_serveur_applicatif";
+if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.access_materiel_technologie_materiel ...";
+$sql = "DROP TABLE intranet_v3_0_dev.access_materiel_technologie_materiel";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.access_materiel_technologie_materiel ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.access_materiel_technologie_materiel LIKE intranet_v2_0_prod.access_materiel_technologie_materiel";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.access_materiel_technologie_materiel ...";
+$sql = "INSERT INTO intranet_v3_0_dev.access_materiel_technologie_materiel SELECT * FROM intranet_v2_0_prod.access_materiel_technologie_materiel";
+if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.access_materiel_type_materiel_detail ...";
+$sql = "DROP TABLE intranet_v3_0_dev.access_materiel_type_materiel_detail";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.access_materiel_type_materiel_detail ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.access_materiel_type_materiel_detail LIKE intranet_v2_0_prod.access_materiel_type_materiel_detail";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.access_materiel_type_materiel_detail ...";
+$sql = "INSERT INTO intranet_v3_0_dev.access_materiel_type_materiel_detail SELECT * FROM intranet_v2_0_prod.access_materiel_type_materiel_detail";
+if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.access_materiel_unite_centrale ...";
+$sql = "DROP TABLE intranet_v3_0_dev.access_materiel_unite_centrale";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.access_materiel_unite_centrale ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.access_materiel_unite_centrale LIKE intranet_v2_0_prod.access_materiel_unite_centrale";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.access_materiel_unite_centrale ...";
+$sql = "INSERT INTO intranet_v3_0_dev.access_materiel_unite_centrale SELECT * FROM intranet_v2_0_prod.access_materiel_unite_centrale";
+if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.access_materiel_wintegrate ...";
+$sql = "DROP TABLE intranet_v3_0_dev.access_materiel_wintegrate";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.access_materiel_wintegrate ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.access_materiel_wintegrate LIKE intranet_v2_0_prod.access_materiel_wintegrate";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.access_materiel_wintegrate ...";
+$sql = "INSERT INTO intranet_v3_0_dev.access_materiel_wintegrate SELECT * FROM intranet_v2_0_prod.access_materiel_wintegrate";
+if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.access_plan_qualite_action ...";
+$sql = "DROP TABLE intranet_v3_0_dev.access_plan_qualite_action";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.access_plan_qualite_action ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.access_plan_qualite_action LIKE intranet_v2_0_prod.access_plan_qualite_action";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.access_plan_qualite_action ...";
+$sql = "INSERT INTO intranet_v3_0_dev.access_plan_qualite_action SELECT * FROM intranet_v2_0_prod.access_plan_qualite_action";
+if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.access_plan_qualite_genre ...";
+$sql = "DROP TABLE intranet_v3_0_dev.access_plan_qualite_genre";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.access_plan_qualite_genre ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.access_plan_qualite_genre LIKE intranet_v2_0_prod.access_plan_qualite_genre";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.access_plan_qualite_genre ...";
+$sql = "INSERT INTO intranet_v3_0_dev.access_plan_qualite_genre SELECT * FROM intranet_v2_0_prod.access_plan_qualite_genre";
+if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.access_plan_qualite_nature ...";
+$sql = "DROP TABLE intranet_v3_0_dev.access_plan_qualite_nature";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.access_plan_qualite_nature ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.access_plan_qualite_nature LIKE intranet_v2_0_prod.access_plan_qualite_nature";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.access_plan_qualite_nature ...";
+$sql = "INSERT INTO intranet_v3_0_dev.access_plan_qualite_nature SELECT * FROM intranet_v2_0_prod.access_plan_qualite_nature";
+if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.access_plan_qualite_origine ...";
+$sql = "DROP TABLE intranet_v3_0_dev.access_plan_qualite_origine";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.access_plan_qualite_origine ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.access_plan_qualite_origine LIKE intranet_v2_0_prod.access_plan_qualite_origine";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.access_plan_qualite_origine ...";
+$sql = "INSERT INTO intranet_v3_0_dev.access_plan_qualite_origine SELECT * FROM intranet_v2_0_prod.access_plan_qualite_origine";
+if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.access_plan_qualite_plan ...";
+$sql = "DROP TABLE intranet_v3_0_dev.access_plan_qualite_plan";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.access_plan_qualite_plan ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.access_plan_qualite_plan LIKE intranet_v2_0_prod.access_plan_qualite_plan";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.access_plan_qualite_plan ...";
+$sql = "INSERT INTO intranet_v3_0_dev.access_plan_qualite_plan SELECT * FROM intranet_v2_0_prod.access_plan_qualite_plan";
+if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.access_plan_qualite_processus ...";
+$sql = "DROP TABLE intranet_v3_0_dev.access_plan_qualite_processus";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.access_plan_qualite_processus ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.access_plan_qualite_processus LIKE intranet_v2_0_prod.access_plan_qualite_processus";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.access_plan_qualite_processus ...";
+$sql = "INSERT INTO intranet_v3_0_dev.access_plan_qualite_processus SELECT * FROM intranet_v2_0_prod.access_plan_qualite_processus";
+if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.access_prise_coeur_frequences ...";
+$sql = "DROP TABLE intranet_v3_0_dev.access_prise_coeur_frequences";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.access_prise_coeur_frequences ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.access_prise_coeur_frequences LIKE intranet_v2_0_prod.access_prise_coeur_frequences";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.access_prise_coeur_frequences ...";
+$sql = "INSERT INTO intranet_v3_0_dev.access_prise_coeur_frequences SELECT * FROM intranet_v2_0_prod.access_prise_coeur_frequences";
+if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.access_prise_coeur_produits ...";
+$sql = "DROP TABLE intranet_v3_0_dev.access_prise_coeur_produits";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.access_prise_coeur_produits ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.access_prise_coeur_produits LIKE intranet_v2_0_prod.access_prise_coeur_produits";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.access_prise_coeur_produits ...";
+$sql = "INSERT INTO intranet_v3_0_dev.access_prise_coeur_produits SELECT * FROM intranet_v2_0_prod.access_prise_coeur_produits";
+if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.access_qualite_processus ...";
+$sql = "DROP TABLE intranet_v3_0_dev.access_qualite_processus";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.access_qualite_processus ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.access_qualite_processus LIKE intranet_v2_0_prod.access_qualite_processus";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.access_qualite_processus ...";
+$sql = "INSERT INTO intranet_v3_0_dev.access_qualite_processus SELECT * FROM intranet_v2_0_prod.access_qualite_processus";
+if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.access_rcp_Correspondance_mois_exercice ...";
+$sql = "DROP TABLE intranet_v3_0_dev.access_rcp_Correspondance_mois_exercice";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.access_rcp_Correspondance_mois_exercice ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.access_rcp_Correspondance_mois_exercice LIKE intranet_v2_0_prod.access_rcp_Correspondance_mois_exercice";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.access_rcp_Correspondance_mois_exercice ...";
+$sql = "INSERT INTO intranet_v3_0_dev.access_rcp_Correspondance_mois_exercice SELECT * FROM intranet_v2_0_prod.access_rcp_Correspondance_mois_exercice";
+if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+}
 //    DatabaseOperation::execute(
 //            "CREATE TABLE intranet_v3_0_dev.access_rcp_Correspondance_mois_exercice LIKE  intranet_v2_0_prod.access_rcp_Correspondance_mois_exercice;"
 //            . " INSERT INTO intranet_v3_0_dev.access_rcp_Correspondance_mois_exercice SELECT * FROM intranet_v2_0_prod.access_rcp_Correspondance_mois_exercice;"
@@ -1531,6 +2859,14 @@ if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
 //                "SELECT * FROM intranet_v2_0_prod.fta f JOIN intranet_v2_0_prod.access_arti2 a  ON a.id_access_arti2 = f.id_access_arti2  AND a.id_fta = f.id_fta");
 
 
+$sql = "SELECT * FROM intranet_v2_0_prod.fta f JOIN intranet_v2_0_prod.access_arti2 a  ON a.id_access_arti2 = f.id_access_arti2  AND a.id_fta = f.id_fta";
+$resultFta =mysql_query($sql);
+
+echo "CREATE TABLE intranet_v3_0_dev.fta_test ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.fta_test LIKE  intranet_v3_0_cod.fta;";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+
 //DatabaseOperation::execute(
 //        "CREATE TABLE intranet_v3_0_dev.fta LIKE  intranet_v3_0_cod.fta;"
 //);
@@ -1566,248 +2902,307 @@ $donnee = mysql_pconnect($hostname_connect, $username_connect, $password_connect
 
 */
 
-//foreach ($arrayTableFta as $value) {
-//    /**
-//     * Nouveau champs : 
-//     * commentaire
-//     * duree_vie_technique_fta est devenue DEPRECATED_duree_vie_technique_fta
-//     */
-//    $idFta = $value[FtaModel::KEYNAME];
-//    $idAccessArti2 = $value['id_access_arti2'];
-//
-//
-//
-//    $idDossierFta = $value[FtaModel::FIELDNAME_DOSSIER_FTA];
-//    $idVersionDossierFta = $value[FtaModel::FIELDNAME_VERSION_DOSSIER_FTA];
-//    $idFtaEtatTMP = $value[FtaModel::FIELDNAME_ID_FTA_ETAT];
-//    if ($idFtaEtatTMP == '8') {
-//        $idFtaEtat = '1';
-//    } else {
-//        $idFtaEtat = $idFtaEtatTMP;
-//    }
-//    $cretateurFta = $value[FtaModel::FIELDNAME_CREATEUR];
-//    if ($cretateurFta == '0') {
-//        $cretateurFta = '-1';
-//    }
-//    $dateDerniereMajFta = $value[FtaModel::FIELDNAME_DATE_DERNIERE_MAJ_FTA];
-//    $commentaireMajFtatmp = $value[FtaModel::FIELDNAME_COMMENTAIRE_MAJ_FTA];
-//    $commentaireMajFtatmp2 = str_replace('"', '', $commentaireMajFtatmp);
-//    $commentaireMajFta = stripslashes($commentaireMajFtatmp2);
-//    $dateEcheanceFta = $value[FtaModel::FIELDNAME_DATE_ECHEANCE_FTA];
-//    $codeDouneFta = $value[FtaModel::FIELDNAME_CODE_DOUANE_FTA];
-//    $poidsEmballageUVC = $value[FtaModel::FIELDNAME_POIDS_EMBALLAGES_UVC];
-//    $poidsBrutUVC = $value[FtaModel::FIELDNAME_POIDS_BRUT_UVC];
-//    $suffixeAgrologicFta = $value[FtaModel::FIELDNAME_SUFFIXE_AGROLOGIC_FTA];
-//    $origineTransformationFta = $value[FtaModel::FIELDNAME_PRODUIT_TRANSFORME];
-//    $remarqueFtatmp = $value[FtaModel::FIELDNAME_REMARQUE];
-//    $remarqueFtatmp2 = str_replace('"', '', $remarqueFtatmp);
-//    $remarqueFta = stripslashes($remarqueFtatmp2);
-//    $apresOuvertureFtatmp = $value[FtaModel::FIELDNAME_CONSEIL_APRES_OUVERTURE];
-//    $apresOuvertureFtatmp2 = str_replace('"', '', $apresOuvertureFtatmp);
-//    $apresOuvertureFta = stripslashes($apresOuvertureFtatmp2);
-//    $conseilRechauffageValideFtatmp = $value[FtaModel::FIELDNAME_CONSEIL_DE_RECHAUFFAGE];
-//    $conseilRechauffageValideFtatmp2 = str_replace('"', '', $conseilRechauffageValideFtatmp);
-//    $conseilRechauffageValideFta = stripslashes($conseilRechauffageValideFtatmp2);
-//    $conseilReferenceExterneFtatmp = $value[FtaModel::FIELDNAME_REFERENCE_EXTERNES];
-//    $conseilReferenceExterneFtatmp2 = str_replace('"', '', $conseilReferenceExterneFtatmp);
-//    $conseilReferenceExterneFta = stripslashes($conseilReferenceExterneFtatmp2);
-//    $designationCommercialeFtatmp = $value[FtaModel::FIELDNAME_DESIGNATION_COMMERCIALE];
-//    $designationCommercialeFtatmp2 = str_replace('"', '', $designationCommercialeFtatmp);
-//    $designationCommercialeFta = stripslashes($designationCommercialeFtatmp2);
-//    $siteExpeditionFta = $value[FtaModel::FIELDNAME_SITE_EXPEDITION_FTA];
-//    $conseilRechauffageExperimentaleFtatmp = $value[FtaModel::FIELDNAME_CONSEIL_DE_RECHAUFFAGE_DEVELOPPEMENT];
-//    $conseilRechauffageExperimentaleFtatmp2 = str_replace('"', '', $conseilRechauffageExperimentaleFtatmp);
-//    $conseilRechauffageExperimentaleFta = stripslashes($conseilRechauffageExperimentaleFtatmp2);
-//    $origineMatiereFtatmp = $value[FtaModel::FIELDNAME_ORIGINE_MATIERE_PREMIERE];
-//    $origineMatiereFtatmp2 = str_replace('"', '', $origineMatiereFtatmp);
-//    $origineMatiereFta = stripslashes($origineMatiereFtatmp2);
-//    $idArticleAgrocologic = $value[FtaModel::FIELDNAME_ARTICLE_AGROLOGIC];
-//    $allergenesMatiereFtatmp = $value[FtaModel::FIELDNAME_LISTE_ALLERGENE];
-//    $allergenesMatiereFtatmp2 = str_replace('"', '', $allergenesMatiereFtatmp);
-//    $allergenesMatiereFta = stripslashes($allergenesMatiereFtatmp2);
-//    $descriptionEmballagetmp = $value[FtaModel::FIELDNAME_DESCRIPTION_EMBALLAGE];
-//    $descriptionEmballagetmp2 = str_replace('"', '', $descriptionEmballagetmp);
-//    $descriptionEmballage = stripslashes($descriptionEmballagetmp2);
-//    $listeChapitreMajFta = $value[FtaModel::FIELDNAME_LISTE_CHAPITRE_MAJ_FTA];
-//    $verrouillageLibelleEtiquetteFta = $value[FtaModel::FIELDNAME_VERROUILLAGE_LIBELLE_ETIQUETTE];
-//    $nombrePortionFta = $value[FtaModel::FIELDNAME_NOMBRE_PORTION_FTA];
-//    $imageEcoEmballage = $value[FtaModel::FIELDNAME_LOGO_ECO_EMBALLAGE];
-//    $idServiceConsommateur = $value[FtaModel::FIELDNAME_SERVICE_CONSOMMATEUR];
-//    $dateCreation = $value[FtaModel::FIELDNAME_DATE_CREATION];
-//    $CODE_ARTICLE = $value[FtaModel::FIELDNAME_CODE_ARTICLE];
-//    $codeArticleClient = $value[FtaModel::FIELDNAME_CODE_ARTICLE_CLIENT];
-//    $libelleCodeArticleClient = $value[FtaModel::FIELDNAME_LIBELLE_CODE_ARTICLE_CLIENT];
-//    $codeArticleLdc = $value[FtaModel::FIELDNAME_CODE_ARTICLE_LDC];
-//    $LIBELLEtmp = $value[FtaModel::FIELDNAME_LIBELLE];
-//    $LIBELLEtmp2 = str_replace('"', '', $LIBELLEtmp);
-//    $LIBELLE = stripslashes($LIBELLEtmp2);
-//    $LIBELLE_CLIENTtmp = $value[FtaModel::FIELDNAME_LIBELLE_CLIENT];
-//    $LIBELLE_CLIENTtmp2 = str_replace('"', '', $LIBELLE_CLIENTtmp);
-//    $LIBELLE_CLIENT = stripslashes($LIBELLE_CLIENTtmp2);
-//    $NB_UNIT_ELEM = $value[FtaModel::FIELDNAME_NOMBRE_UVC_PAR_CARTON];
-//    $Poids_ELEM = $value[FtaModel::FIELDNAME_POIDS_ELEMENTAIRE];
-//    $atmosphereProtectrice = $value[FtaModel::FIELDNAME_CONDITION_SOUS_ATMOSPHERE];
-//
-//    /**
-//     * Unité_Facturation devient id_annexe_unite_facturation
-//     */
-//    $Unité_Facturation = $value[FtaModel::FIELDNAME_UNITE_FACTURATION];
-//    $actif = $value[FtaModel::FIELDNAME_ACTIF];
-//    $Site_de_production = $value[FtaModel::FIELDNAME_SITE_ASSEMBLAGE];
-//    $DureeDeVie = $value[FtaModel::FIELDNAME_DUREE_DE_VIE];
-//    $DureeDeVieTechnique = $value[FtaModel::FIELDNAME_DUREE_DE_VIE_TECHNIQUE_PRODUCTION];
-//    $Composition = $value[FtaModel::FIELDNAME_COMPOSITION1];
-//    $Composition1 = $value[FtaModel::FIELDNAME_COMPOSITION2];
-//    $libelleMultilangue = $value[FtaModel::FIELDNAME_LIBELLE_MULTILANGUE];
-//    $K_etat = $value[FtaModel::FIELDNAME_ENVIRONNEMENT_CONSERVATION];
-//    $EAN_UVC = $value[FtaModel::FIELDNAME_EAN_UVC];
-//    $EAN_COLIS = $value[FtaModel::FIELDNAME_EAN_COLIS];
-//    $EAN_PALETTE = $value[FtaModel::FIELDNAME_EAN_PALETTE];
-//    $activation_codesoft_arti2 = $value[FtaModel::FIELDNAME_ACTIVATION_CODESOFT];
-//    $id_etiquette_codesoft_arti2 = $value[FtaModel::FIELDNAME_ETIQUETTE_CODESOFT];
-//
-//
-//    /**
-//     * Conditions de transfères
-//     */
-//    $idFtaWorkflow = FtaWorkflowModel::MigrationIntranetWorkflowAttribution($Site_de_production, $idFtaEtatTMP, $cretateurFta);
-//
-//
-//
-//
-//
-//    /**
-//     * Champ non utlisé (renommer en intranet_v3_0_dev.nom_du_champ)
-//     */
-//    $numft = $value['numft'];
-//    $TRASH_id_fta_palettisation = $value['TRASH_id_fta_palettisation'];
-//    $champ_maj_fta = $value['champ_maj_fta'];
-//    $duree_apres_dernier_processus_fta = $value['duree_apres_dernier_processus_fta'];
-//    $periodeCommercialisationFta = $value[FtaModel::FIELDNAME_PERIODE_DE_COMMERCIALISATION];
-//    $code_douane_libelle_fta = $value['code_douane_libelle_fta'];
-//    $synoptique_valide_ftatmp = $value['synoptique_valide_fta'];
-//    $synoptique_valide_ftatmp2 = str_replace('"', '', $synoptique_valide_ftatmp);
-//    $synoptique_valide_fta = stripslashes($synoptique_valide_ftatmp2);
-//    $presentationFtatmp = $value[FtaModel::FIELDNAME_CONSEIL_DE_PRESENTATION];
-//    $presentationFtatmp2 = str_replace('"', '', $presentationFtatmp);
-//    $presentationFta = stripslashes($presentationFtatmp2);
-//    $nom_abrege_ftatmp = $value[FtaModel::FIELDNAME_NOM_ABREGE];
-//    $nom_abrege_ftatmp2 = str_replace('"', '', $nom_abrege_ftatmp);
-//    $nom_abrege_fta = stripslashes($nom_abrege_ftatmp2);
-//    $synoptique_experimental_ftatmp = $value['synoptique_experimental_fta'];
-//    $synoptique_experimental_ftatmp2 = str_replace('"', '', $synoptique_experimental_ftatmp);
-//    $synoptique_experimental_fta = stripslashes($synoptique_experimental_ftatmp2);
-//    $unite_affichage_fta = $value[FtaModel::FIELDNAME_UNITE_AFFICHAGE];
-//    $signature_validation_fta = $value['signature_validation_fta'];
-//    $old_gamdesc = $value['old_gamdesc'];
-//    $old_segdesc = $value['old_segdesc'];
-//    $old_condition = $value['old_condition'];
-//    $old_conservation = $value['old_conservation'];
-//    $id_annexe_environnement_conservation = $value['id_annexe_environnement_conservation'];
-//    $date_transfert_industriel = $value['date_transfert_industriel'];
-//    $NB_UV_PAR_US1 = $value['NB_UV_PAR_US1'];
-//    $REGROUPEMENT = $value['REGROUPEMENT'];
-//    $UL2 = $value['UL2'];
-//    $RGR2 = $value['RGR2'];
-//    $Rayon = $value['Rayon'];
-//    $code_barre_specifique = $value['code_barre_specifique'];
-//    $transfert_PF = $value['transfert_PF'];
-//    $Zone_picking = $value['Zone_picking'];
-//    $fiche_palette_specifique = $value['fiche_palette_specifique'];
-//    $TARIF = $value['TARIF'];
-//    $pvc_article = $value['pvc_article'];
-//    $pvc_article_kg = $value['pvc_article_kg'];
-//    $FAMILLE_BUDGET = $value['FAMILLE_BUDGET'];
-//    $FAMILLE_ARTICLE = $value['FAMILLE_ARTICLE'];
-//    $id_access_familles_gammes = $value['id_access_familles_gammes'];
-//    $Coût_Denrée = $value['Coût_Denrée'];
-//    $Coût_Emballage = $value['Coût_Emballage'];
-//    $Coût_Autre = $value['Coût_Autre'];
-//    $Coût_PF = $value['Coût_PF'];
-//    $FAMILLE_MKTG = $value['FAMILLE_MKTG'];
-//    $nouvel_article = $value['nouvel_article'];
-//    $k_gestion_lot = $value['k_gestion_lot'];
-//
-//
-//
-//
-//
-//
-//    $sql_inter = "INSERT INTO intranet_v3_0_dev.fta (
-//id_fta, id_access_arti2, OLD_numft, id_fta_workflow,
-// commentaire, OLD_id_fta_palettisation, id_dossier_fta, id_version_dossier_fta,
-// OLD_champ_maj_fta, id_fta_etat, createur_fta, date_derniere_maj_fta,
-// commentaire_maj_fta, date_echeance_fta, OLD_duree_apres_dernier_processus_fta, OLD_periode_commercialisation_fta,
-// code_douane_fta, OLD_code_douane_libelle_fta, poids_emballages_uvc_fta, poids_brut_uvc_fta,
-// poids_net_uvc_fta, suffixe_agrologic_fta, OLD_synoptique_valide_fta, origine_transformation_fta,
-// remarque_fta, OLD_presentation_fta, apres_ouverture_fta, conseil_rechauffage_valide_fta,
-// reference_externe_fta, OLD_duree_vie_technique_fta, designation_commerciale_fta, OLD_nom_abrege_fta,
-// site_expedition_fta, conseil_rechauffage_experimentale_fta, OLD_synoptique_experimental_fta, OLD_unite_affichage_fta,
-// OLD_signature_validation_fta, OLD_old_gamdesc, OLD_old_segdesc, OLD_old_condition,
-// OLD_old_conservation, id_article_agrologic, OLD_id_annexe_environnement_conservation, origine_matiere_fta,
-// allergenes_matiere_fta, description_emballage, OLD_date_transfert_industriel, liste_chapitre_maj_fta,
-// verrouillage_libelle_etiquette_fta, nombre_portion_fta, OLD_last_id_fta, OLD_id_arcadia_type_calibre,
-// OLD_nom_client_demandeur, OLD_besoin_fiche_technique, OLD_echeance_demandeur, OLD_besoin_compostage_fta,
-// OLD_calibre_defaut, OLD_id_arcadia_emballage_type, OLD_id_arcadia_client_segment, OLD_quantite_hebdomadaire_estime_commande,
-// OLD_nom_machine_fta, OLD_frequence_hebdomadaire_estime_commande, OLD_tare_fta, OLD_perte_matiere_fta,
-// OLD_besoin_fiche_rendement, OLD_nom_demandeur_fta, OLD_id_arcadia_atelier, OLD_id_arcadia_client_circuit,
-// OLD_id_annexe_environnement_conservation_groupe, OLD_societe_demandeur_fta, OLD_type_marinade_fta, OLD_besoin_fiche_productivite_fta,
-// OLD_id_arcadia_poste, OLD_date_demandeur_fta, id_annexe_unite_facturation, OLD_type_minerai,
-// OLD_id_arcadia_client_reseau, OLD_id_arcadia_maquette_etiquette, OLD_etude_prix_fta, OLD_bon_fabrication_atelier,
-// date_creation, CODE_ARTICLE, code_article_client, code_article_ldc,
-// LIBELLE, LIBELLE_CLIENT, NB_UNIT_ELEM, OLD_NB_UV_PAR_US1,
-// Poids_ELEM, OLD_REGROUPEMENT, OLD_UL2, OLD_RGR2,
-// OLD_Unite_Facturation, Rayon, actif, Site_de_production,
-// Duree_de_vie, Duree_de_vie_technique, OLD_code_barre_specifique, OLD_transfert_PF,
-// OLD_Zone_picking, OLD_fiche_palette_specifique, OLD_TARIF, pvc_article,
-// OLD_pvc_article_kg, OLD_FAMILLE_BUDGET, OLD_FAMILLE_ARTICLE, OLD_id_access_familles_gammes,
-// OLD_Cout_Denree, OLD_Cout_Emballage, OLD_Cout_Autre, OLD_Cout_PF,
-// OLD_FAMILLE_MKTG, Composition, composition1, libelle_multilangue,
-// K_etat, EAN_UVC, EAN_COLIS, EAN_PALETTE,
-// OLD_nouvel_article, OLD_k_gestion_lot, activation_codesoft_arti2, id_etiquette_codesoft_arti2,
-// atmosphere_protectrice, image_eco_emballage, libelle_code_article_client, id_service_consommateur,
-// nom_societe, id_fta_classification2)
-//VALUES ( \"$idFta\", \"$idAccessArti2\", \"$numft\", \"$idFtaWorkflow\" "
-//            . ", \"\", \"$TRASH_id_fta_palettisation\", \"$idDossierFta\", \"$idVersionDossierFta\" "
-//            . ", \"$champ_maj_fta\", \"$idFtaEtat\", \"$cretateurFta\", \"$dateDerniereMajFta\" "
-//            . ", \"$commentaireMajFta\", \"$dateEcheanceFta\", \"$duree_apres_dernier_processus_fta\", \"$periodeCommercialisationFta\" "
-//            . ", \"$codeDouneFta\", \"$code_douane_libelle_fta\", \"$poidsEmballageUVC\", \"$poidsBrutUVC\" "
-//            . ", \"\", \"$suffixeAgrologicFta\", \"$synoptique_valide_fta\", \"$origineTransformationFta\" "
-//            . ", \"$remarqueFta\", \"$presentationFta\", \"$apresOuvertureFta\", \"$conseilRechauffageValideFta\" "
-//            . ", \"\", \"$DureeDeVieTechnique\", \"$designationCommercialeFta\", \"$nom_abrege_fta\" "
-//            . ", \"$siteExpeditionFta\", \"$conseilRechauffageExperimentaleFta\", \"$synoptique_experimental_fta\", \"$unite_affichage_fta\" "
-//            . ", \"$signature_validation_fta\", \"$old_gamdesc\", \"$old_segdesc\", \"$old_condition\" "
-//            . ", \"$old_conservation\", \"$idArticleAgrocologic\", \"$id_annexe_environnement_conservation\", \"$origineMatiereFta\" "
-//            . ", \"$allergenesMatiereFta\", \"$descriptionEmballage\", \"$date_transfert_industriel\", \"$listeChapitreMajFta\" "
-//            . ", \"$verrouillageLibelleEtiquetteFta\", \"$nombrePortionFta\", \"\", \"\" "
-//            . ", \"\", \"\", \"\", \"\" "
-//            . ", \"\", \"\", \"\", \"\" "
-//            . ", \"\", \"\", \"\", \"\" "
-//            . ", \"\", \"\", \"\", \"\" "
-//            . ", \"\", \"\", \"\", \"\" "
-//            . ", \"\", \"\", \"$Unité_Facturation\", \"\" "
-//            . ", \"\", \"\", \"\", \"\" "
-//            . ", \"$dateCreation\", \"$CODE_ARTICLE\", \"$codeArticleClient\", \"$codeArticleLdc\" "
-//            . ", \"$LIBELLE\", \"$LIBELLE_CLIENT\", \"$NB_UNIT_ELEM\", \"$NB_UV_PAR_US1\" "
-//            . ", \"$Poids_ELEM\", \"$REGROUPEMENT\", \"$UL2\", \"$RGR2\" "
-//            . ", \"\", \"$Rayon\", \"$actif\", \"$Site_de_production\" "
-//            . ", \"$DureeDeVie\", \"$DureeDeVieTechnique\", \"$code_barre_specifique\", \"$transfert_PF\" "
-//            . ", \"$Zone_picking\", \"$fiche_palette_specifique\", \"$TARIF\", \"$pvc_article\" "
-//            . ", \"$pvc_article_kg\", \"$FAMILLE_BUDGET\", \"$FAMILLE_ARTICLE\", \"$id_access_familles_gammes\" "
-//            . ", \"$Coût_Denrée\", \"$Coût_Emballage\", \"$Coût_Autre\", \"$Coût_PF\" "
-//            . ", \"$FAMILLE_MKTG\", \"$Composition\", \"$Composition1\", \"$libelleMultilangue\" "
-//            . ", \"$K_etat\", \"$EAN_UVC\", \"$EAN_COLIS\", \"$EAN_PALETTE\" "
-//            . ", \"$nouvel_article\", \"$k_gestion_lot\", \"$activation_codesoft_arti2\", \"$id_etiquette_codesoft_arti2\" "
-//            . ", \"$atmosphereProtectrice\", \"$imageEcoEmballage\", \"$libelleCodeArticleClient\", \"$idServiceConsommateur\" "
-//            . ", \"\", NULL)";
-//
-//    mysql_query("SET NAMES 'utf8'");
+
+while ($rows1=mysql_fetch_array($resultFta)) {
+    /**
+     * Nouveau champs : 
+     * commentaire
+     * duree_vie_technique_fta est devenue DEPRECATED_duree_vie_technique_fta
+     */
+    $idFta = $value[FtaModel::KEYNAME];
+    $idAccessArti2 = $value['id_access_arti2'];
+
+
+
+    $idDossierFta = $value[FtaModel::FIELDNAME_DOSSIER_FTA];
+    $idVersionDossierFta = $value[FtaModel::FIELDNAME_VERSION_DOSSIER_FTA];
+    $idFtaEtatTMP = $value[FtaModel::FIELDNAME_ID_FTA_ETAT];
+    if ($idFtaEtatTMP == '8') {
+        $idFtaEtat = '1';
+    } else {
+        $idFtaEtat = $idFtaEtatTMP;
+    }
+    $cretateurFta = $value[FtaModel::FIELDNAME_CREATEUR];
+    if ($cretateurFta == '0') {
+        $cretateurFta = '-1';
+    }
+    $dateDerniereMajFta = $value[FtaModel::FIELDNAME_DATE_DERNIERE_MAJ_FTA];
+    $commentaireMajFtatmp = $value[FtaModel::FIELDNAME_COMMENTAIRE_MAJ_FTA];
+    $commentaireMajFtatmp2 = str_replace('"', '', $commentaireMajFtatmp);
+    $commentaireMajFta = stripslashes($commentaireMajFtatmp2);
+    $dateEcheanceFta = $value[FtaModel::FIELDNAME_DATE_ECHEANCE_FTA];
+    $codeDouneFta = $value[FtaModel::FIELDNAME_CODE_DOUANE_FTA];
+    $poidsEmballageUVC = $value[FtaModel::FIELDNAME_POIDS_EMBALLAGES_UVC];
+    $poidsBrutUVC = $value[FtaModel::FIELDNAME_POIDS_BRUT_UVC];
+    $suffixeAgrologicFta = $value[FtaModel::FIELDNAME_SUFFIXE_AGROLOGIC_FTA];
+    $origineTransformationFta = $value[FtaModel::FIELDNAME_PRODUIT_TRANSFORME];
+    $remarqueFtatmp = $value[FtaModel::FIELDNAME_REMARQUE];
+    $remarqueFtatmp2 = str_replace('"', '', $remarqueFtatmp);
+    $remarqueFta = stripslashes($remarqueFtatmp2);
+    $apresOuvertureFtatmp = $value[FtaModel::FIELDNAME_CONSEIL_APRES_OUVERTURE];
+    $apresOuvertureFtatmp2 = str_replace('"', '', $apresOuvertureFtatmp);
+    $apresOuvertureFta = stripslashes($apresOuvertureFtatmp2);
+    $conseilRechauffageValideFtatmp = $value[FtaModel::FIELDNAME_CONSEIL_DE_RECHAUFFAGE];
+    $conseilRechauffageValideFtatmp2 = str_replace('"', '', $conseilRechauffageValideFtatmp);
+    $conseilRechauffageValideFta = stripslashes($conseilRechauffageValideFtatmp2);
+    $conseilReferenceExterneFtatmp = $value[FtaModel::FIELDNAME_REFERENCE_EXTERNES];
+    $conseilReferenceExterneFtatmp2 = str_replace('"', '', $conseilReferenceExterneFtatmp);
+    $conseilReferenceExterneFta = stripslashes($conseilReferenceExterneFtatmp2);
+    $designationCommercialeFtatmp = $value[FtaModel::FIELDNAME_DESIGNATION_COMMERCIALE];
+    $designationCommercialeFtatmp2 = str_replace('"', '', $designationCommercialeFtatmp);
+    $designationCommercialeFta = stripslashes($designationCommercialeFtatmp2);
+    $siteExpeditionFta = $value[FtaModel::FIELDNAME_SITE_EXPEDITION_FTA];
+    $conseilRechauffageExperimentaleFtatmp = $value[FtaModel::FIELDNAME_CONSEIL_DE_RECHAUFFAGE_DEVELOPPEMENT];
+    $conseilRechauffageExperimentaleFtatmp2 = str_replace('"', '', $conseilRechauffageExperimentaleFtatmp);
+    $conseilRechauffageExperimentaleFta = stripslashes($conseilRechauffageExperimentaleFtatmp2);
+    $origineMatiereFtatmp = $value[FtaModel::FIELDNAME_ORIGINE_MATIERE_PREMIERE];
+    $origineMatiereFtatmp2 = str_replace('"', '', $origineMatiereFtatmp);
+    $origineMatiereFta = stripslashes($origineMatiereFtatmp2);
+    $idArticleAgrocologic = $value[FtaModel::FIELDNAME_ARTICLE_AGROLOGIC];
+    $allergenesMatiereFtatmp = $value[FtaModel::FIELDNAME_LISTE_ALLERGENE];
+    $allergenesMatiereFtatmp2 = str_replace('"', '', $allergenesMatiereFtatmp);
+    $allergenesMatiereFta = stripslashes($allergenesMatiereFtatmp2);
+    $descriptionEmballagetmp = $value[FtaModel::FIELDNAME_DESCRIPTION_EMBALLAGE];
+    $descriptionEmballagetmp2 = str_replace('"', '', $descriptionEmballagetmp);
+    $descriptionEmballage = stripslashes($descriptionEmballagetmp2);
+    $listeChapitreMajFta = $value[FtaModel::FIELDNAME_LISTE_CHAPITRE_MAJ_FTA];
+    $verrouillageLibelleEtiquetteFta = $value[FtaModel::FIELDNAME_VERROUILLAGE_LIBELLE_ETIQUETTE];
+    $nombrePortionFta = $value[FtaModel::FIELDNAME_NOMBRE_PORTION_FTA];
+    $imageEcoEmballage = $value[FtaModel::FIELDNAME_LOGO_ECO_EMBALLAGE];
+    $idServiceConsommateur = $value[FtaModel::FIELDNAME_SERVICE_CONSOMMATEUR];
+    $dateCreation = $value[FtaModel::FIELDNAME_DATE_CREATION];
+    $CODE_ARTICLE = $value[FtaModel::FIELDNAME_CODE_ARTICLE];
+    $codeArticleClient = $value[FtaModel::FIELDNAME_CODE_ARTICLE_CLIENT];
+    $libelleCodeArticleClient = $value[FtaModel::FIELDNAME_LIBELLE_CODE_ARTICLE_CLIENT];
+    $codeArticleLdc = $value[FtaModel::FIELDNAME_CODE_ARTICLE_LDC];
+    $LIBELLEtmp = $value[FtaModel::FIELDNAME_LIBELLE];
+    $LIBELLEtmp2 = str_replace('"', '', $LIBELLEtmp);
+    $LIBELLE = stripslashes($LIBELLEtmp2);
+    $LIBELLE_CLIENTtmp = $value[FtaModel::FIELDNAME_LIBELLE_CLIENT];
+    $LIBELLE_CLIENTtmp2 = str_replace('"', '', $LIBELLE_CLIENTtmp);
+    $LIBELLE_CLIENT = stripslashes($LIBELLE_CLIENTtmp2);
+    $NB_UNIT_ELEM = $value[FtaModel::FIELDNAME_NOMBRE_UVC_PAR_CARTON];
+    $Poids_ELEM = $value[FtaModel::FIELDNAME_POIDS_ELEMENTAIRE];
+    $atmosphereProtectrice = $value[FtaModel::FIELDNAME_CONDITION_SOUS_ATMOSPHERE];
+
+    /**
+     * Unité_Facturation devient id_annexe_unite_facturation
+     */
+    $Unité_Facturation = $value[FtaModel::FIELDNAME_UNITE_FACTURATION];
+    $actif = $value[FtaModel::FIELDNAME_ACTIF];
+    $Site_de_production = $value[FtaModel::FIELDNAME_SITE_ASSEMBLAGE];
+    $DureeDeVie = $value[FtaModel::FIELDNAME_DUREE_DE_VIE];
+    $DureeDeVieTechnique = $value[FtaModel::FIELDNAME_DUREE_DE_VIE_TECHNIQUE_PRODUCTION];
+    $Composition = $value[FtaModel::FIELDNAME_COMPOSITION1];
+    $Composition1 = $value[FtaModel::FIELDNAME_COMPOSITION2];
+    $libelleMultilangue = $value[FtaModel::FIELDNAME_LIBELLE_MULTILANGUE];
+    $K_etat = $value[FtaModel::FIELDNAME_ENVIRONNEMENT_CONSERVATION];
+    $EAN_UVC = $value[FtaModel::FIELDNAME_EAN_UVC];
+    $EAN_COLIS = $value[FtaModel::FIELDNAME_EAN_COLIS];
+    $EAN_PALETTE = $value[FtaModel::FIELDNAME_EAN_PALETTE];
+    $activation_codesoft_arti2 = $value[FtaModel::FIELDNAME_ACTIVATION_CODESOFT];
+    $id_etiquette_codesoft_arti2 = $value[FtaModel::FIELDNAME_ETIQUETTE_CODESOFT];
+
+
+    /**
+     * Conditions de transfères
+     */
+    
+     if ($idFtaEtatTMP <> '8') {
+            if ($Site_de_production == '1' or $Site_de_production == '3'or $Site_de_production == '6' or $Site_de_production == '11' or $Site_de_production == '0') {
+                switch ($cretateurFta) {
+                    //identifiant de l'utilisateur 
+                    case '-2':
+                    case '-1':
+                    case '43':
+                    case '48':
+                    case '58':
+                    case '71':
+                    case '207':
+                    case '237':
+                    case '292':
+                    case '318':
+                    case '426':
+                    case '492':
+                    case '493':
+                    case '521':
+                    case '534':
+                    case '544':
+                    case '556':
+                    case '557':
+                    case '558':
+                    case '559':
+                    case '560':
+                    case '572':
+                        $idFtaWorkflow = '6';
+                        break;
+                    case '196':
+                    case '278':
+                    case '371':
+                    case '379':
+                    case '445':
+                    case '457':
+                    case '473':
+                    case '474':
+                    case '484':
+                    case '487':
+                    case '501':
+                    case '512':
+                    case '562':
+                    case '563':
+                        $idFtaWorkflow = '2';
+                        break;
+                    case '262':
+                    case '361':
+                        $idFtaWorkflow = '3';
+                        break;
+                }
+            } else {
+                $idFtaWorkflow = '8';
+            }
+        }else {
+            $idFtaWorkflow = '9';
+        }
+
+
+
+
+
+
+    /**
+     * Champ non utlisé (renommer en intranet_v3_0_dev.nom_du_champ)
+     */
+    $numft = $value['numft'];
+    $TRASH_id_fta_palettisation = $value['TRASH_id_fta_palettisation'];
+    $champ_maj_fta = $value['champ_maj_fta'];
+    $duree_apres_dernier_processus_fta = $value['duree_apres_dernier_processus_fta'];
+    $periodeCommercialisationFta = $value[FtaModel::FIELDNAME_PERIODE_DE_COMMERCIALISATION];
+    $code_douane_libelle_fta = $value['code_douane_libelle_fta'];
+    $synoptique_valide_ftatmp = $value['synoptique_valide_fta'];
+    $synoptique_valide_ftatmp2 = str_replace('"', '', $synoptique_valide_ftatmp);
+    $synoptique_valide_fta = stripslashes($synoptique_valide_ftatmp2);
+    $presentationFtatmp = $value[FtaModel::FIELDNAME_CONSEIL_DE_PRESENTATION];
+    $presentationFtatmp2 = str_replace('"', '', $presentationFtatmp);
+    $presentationFta = stripslashes($presentationFtatmp2);
+    $nom_abrege_ftatmp = $value[FtaModel::FIELDNAME_NOM_ABREGE];
+    $nom_abrege_ftatmp2 = str_replace('"', '', $nom_abrege_ftatmp);
+    $nom_abrege_fta = stripslashes($nom_abrege_ftatmp2);
+    $synoptique_experimental_ftatmp = $value['synoptique_experimental_fta'];
+    $synoptique_experimental_ftatmp2 = str_replace('"', '', $synoptique_experimental_ftatmp);
+    $synoptique_experimental_fta = stripslashes($synoptique_experimental_ftatmp2);
+    $unite_affichage_fta = $value[FtaModel::FIELDNAME_UNITE_AFFICHAGE];
+    $signature_validation_fta = $value['signature_validation_fta'];
+    $old_gamdesc = $value['old_gamdesc'];
+    $old_segdesc = $value['old_segdesc'];
+    $old_condition = $value['old_condition'];
+    $old_conservation = $value['old_conservation'];
+    $id_annexe_environnement_conservation = $value['id_annexe_environnement_conservation'];
+    $date_transfert_industriel = $value['date_transfert_industriel'];
+    $NB_UV_PAR_US1 = $value['NB_UV_PAR_US1'];
+    $REGROUPEMENT = $value['REGROUPEMENT'];
+    $UL2 = $value['UL2'];
+    $RGR2 = $value['RGR2'];
+    $Rayon = $value['Rayon'];
+    $code_barre_specifique = $value['code_barre_specifique'];
+    $transfert_PF = $value['transfert_PF'];
+    $Zone_picking = $value['Zone_picking'];
+    $fiche_palette_specifique = $value['fiche_palette_specifique'];
+    $TARIF = $value['TARIF'];
+    $pvc_article = $value['pvc_article'];
+    $pvc_article_kg = $value['pvc_article_kg'];
+    $FAMILLE_BUDGET = $value['FAMILLE_BUDGET'];
+    $FAMILLE_ARTICLE = $value['FAMILLE_ARTICLE'];
+    $id_access_familles_gammes = $value['id_access_familles_gammes'];
+    $Coût_Denrée = $value['Coût_Denrée'];
+    $Coût_Emballage = $value['Coût_Emballage'];
+    $Coût_Autre = $value['Coût_Autre'];
+    $Coût_PF = $value['Coût_PF'];
+    $FAMILLE_MKTG = $value['FAMILLE_MKTG'];
+    $nouvel_article = $value['nouvel_article'];
+    $k_gestion_lot = $value['k_gestion_lot'];
+
+
+
+
+
+
+    $sql_inter = "INSERT INTO intranet_v3_0_dev.fta_test (
+id_fta, id_access_arti2, OLD_numft, id_fta_workflow,
+ commentaire, OLD_id_fta_palettisation, id_dossier_fta, id_version_dossier_fta,
+ OLD_champ_maj_fta, id_fta_etat, createur_fta, date_derniere_maj_fta,
+ commentaire_maj_fta, date_echeance_fta, OLD_duree_apres_dernier_processus_fta, OLD_periode_commercialisation_fta,
+ code_douane_fta, OLD_code_douane_libelle_fta, poids_emballages_uvc_fta, poids_brut_uvc_fta,
+ poids_net_uvc_fta, suffixe_agrologic_fta, OLD_synoptique_valide_fta, origine_transformation_fta,
+ remarque_fta, OLD_presentation_fta, apres_ouverture_fta, conseil_rechauffage_valide_fta,
+ reference_externe_fta, OLD_duree_vie_technique_fta, designation_commerciale_fta, OLD_nom_abrege_fta,
+ site_expedition_fta, conseil_rechauffage_experimentale_fta, OLD_synoptique_experimental_fta, OLD_unite_affichage_fta,
+ OLD_signature_validation_fta, OLD_old_gamdesc, OLD_old_segdesc, OLD_old_condition,
+ OLD_old_conservation, id_article_agrologic, OLD_id_annexe_environnement_conservation, origine_matiere_fta,
+ allergenes_matiere_fta, description_emballage, OLD_date_transfert_industriel, liste_chapitre_maj_fta,
+ verrouillage_libelle_etiquette_fta, nombre_portion_fta, OLD_last_id_fta, OLD_id_arcadia_type_calibre,
+ OLD_nom_client_demandeur, OLD_besoin_fiche_technique, OLD_echeance_demandeur, OLD_besoin_compostage_fta,
+ OLD_calibre_defaut, OLD_id_arcadia_emballage_type, OLD_id_arcadia_client_segment, OLD_quantite_hebdomadaire_estime_commande,
+ OLD_nom_machine_fta, OLD_frequence_hebdomadaire_estime_commande, OLD_tare_fta, OLD_perte_matiere_fta,
+ OLD_besoin_fiche_rendement, OLD_nom_demandeur_fta, OLD_id_arcadia_atelier, OLD_id_arcadia_client_circuit,
+ OLD_id_annexe_environnement_conservation_groupe, OLD_societe_demandeur_fta, OLD_type_marinade_fta, OLD_besoin_fiche_productivite_fta,
+ OLD_id_arcadia_poste, OLD_date_demandeur_fta, id_annexe_unite_facturation, OLD_type_minerai,
+ OLD_id_arcadia_client_reseau, OLD_id_arcadia_maquette_etiquette, OLD_etude_prix_fta, OLD_bon_fabrication_atelier,
+ date_creation, CODE_ARTICLE, code_article_client, code_article_ldc,
+ LIBELLE, LIBELLE_CLIENT, NB_UNIT_ELEM, OLD_NB_UV_PAR_US1,
+ Poids_ELEM, OLD_REGROUPEMENT, OLD_UL2, OLD_RGR2,
+ OLD_Unite_Facturation, Rayon, actif, Site_de_production,
+ Duree_de_vie, Duree_de_vie_technique, OLD_code_barre_specifique, OLD_transfert_PF,
+ OLD_Zone_picking, OLD_fiche_palette_specifique, OLD_TARIF, pvc_article,
+ OLD_pvc_article_kg, OLD_FAMILLE_BUDGET, OLD_FAMILLE_ARTICLE, OLD_id_access_familles_gammes,
+ OLD_Cout_Denree, OLD_Cout_Emballage, OLD_Cout_Autre, OLD_Cout_PF,
+ OLD_FAMILLE_MKTG, Composition, composition1, libelle_multilangue,
+ K_etat, EAN_UVC, EAN_COLIS, EAN_PALETTE,
+ OLD_nouvel_article, OLD_k_gestion_lot, activation_codesoft_arti2, id_etiquette_codesoft_arti2,
+ atmosphere_protectrice, image_eco_emballage, libelle_code_article_client, id_service_consommateur,
+ nom_societe, id_fta_classification2)
+VALUES ( \"$idFta\", \"$idAccessArti2\", \"$numft\", \"$idFtaWorkflow\" "
+            . ", \"\", \"$TRASH_id_fta_palettisation\", \"$idDossierFta\", \"$idVersionDossierFta\" "
+            . ", \"$champ_maj_fta\", \"$idFtaEtat\", \"$cretateurFta\", \"$dateDerniereMajFta\" "
+            . ", \"$commentaireMajFta\", \"$dateEcheanceFta\", \"$duree_apres_dernier_processus_fta\", \"$periodeCommercialisationFta\" "
+            . ", \"$codeDouneFta\", \"$code_douane_libelle_fta\", \"$poidsEmballageUVC\", \"$poidsBrutUVC\" "
+            . ", \"\", \"$suffixeAgrologicFta\", \"$synoptique_valide_fta\", \"$origineTransformationFta\" "
+            . ", \"$remarqueFta\", \"$presentationFta\", \"$apresOuvertureFta\", \"$conseilRechauffageValideFta\" "
+            . ", \"\", \"$DureeDeVieTechnique\", \"$designationCommercialeFta\", \"$nom_abrege_fta\" "
+            . ", \"$siteExpeditionFta\", \"$conseilRechauffageExperimentaleFta\", \"$synoptique_experimental_fta\", \"$unite_affichage_fta\" "
+            . ", \"$signature_validation_fta\", \"$old_gamdesc\", \"$old_segdesc\", \"$old_condition\" "
+            . ", \"$old_conservation\", \"$idArticleAgrocologic\", \"$id_annexe_environnement_conservation\", \"$origineMatiereFta\" "
+            . ", \"$allergenesMatiereFta\", \"$descriptionEmballage\", \"$date_transfert_industriel\", \"$listeChapitreMajFta\" "
+            . ", \"$verrouillageLibelleEtiquetteFta\", \"$nombrePortionFta\", \"\", \"\" "
+            . ", \"\", \"\", \"\", \"\" "
+            . ", \"\", \"\", \"\", \"\" "
+            . ", \"\", \"\", \"\", \"\" "
+            . ", \"\", \"\", \"\", \"\" "
+            . ", \"\", \"\", \"\", \"\" "
+            . ", \"\", \"\", \"$Unité_Facturation\", \"\" "
+            . ", \"\", \"\", \"\", \"\" "
+            . ", \"$dateCreation\", \"$CODE_ARTICLE\", \"$codeArticleClient\", \"$codeArticleLdc\" "
+            . ", \"$LIBELLE\", \"$LIBELLE_CLIENT\", \"$NB_UNIT_ELEM\", \"$NB_UV_PAR_US1\" "
+            . ", \"$Poids_ELEM\", \"$REGROUPEMENT\", \"$UL2\", \"$RGR2\" "
+            . ", \"\", \"$Rayon\", \"$actif\", \"$Site_de_production\" "
+            . ", \"$DureeDeVie\", \"$DureeDeVieTechnique\", \"$code_barre_specifique\", \"$transfert_PF\" "
+            . ", \"$Zone_picking\", \"$fiche_palette_specifique\", \"$TARIF\", \"$pvc_article\" "
+            . ", \"$pvc_article_kg\", \"$FAMILLE_BUDGET\", \"$FAMILLE_ARTICLE\", \"$id_access_familles_gammes\" "
+            . ", \"$Coût_Denrée\", \"$Coût_Emballage\", \"$Coût_Autre\", \"$Coût_PF\" "
+            . ", \"$FAMILLE_MKTG\", \"$Composition\", \"$Composition1\", \"$libelleMultilangue\" "
+            . ", \"$K_etat\", \"$EAN_UVC\", \"$EAN_COLIS\", \"$EAN_PALETTE\" "
+            . ", \"$nouvel_article\", \"$k_gestion_lot\", \"$activation_codesoft_arti2\", \"$id_etiquette_codesoft_arti2\" "
+            . ", \"$atmosphereProtectrice\", \"$imageEcoEmballage\", \"$libelleCodeArticleClient\", \"$idServiceConsommateur\" "
+            . ", \"\", NULL)";
+
+    mysql_query("SET NAMES 'utf8'");
+    if(mysql_query($sql_inter)) {echo "[OK]\n";}else{echo "[FAILED]\n $sql_inter \n";}
+
 //    $resultquery = mysql_query($sql_inter);
 //    if (!$resultquery) {
 //        $sqlFalse = $sql_inter;
 //        $resultquery2 = DatabaseOperation::execute($sql_inter);
 //    }
-//}
+}
 
 /**
  * Affiliation d'un id_user au createur supprimer

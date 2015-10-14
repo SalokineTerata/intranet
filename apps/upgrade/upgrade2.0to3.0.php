@@ -4860,7 +4860,7 @@ while ( $rowsIdFtaSuiviProjet=  mysql_fetch_array($arrayIdFtaSuiviProjet)) {
 /**
  * Composition
  */
- if(TRUE){
+ if(FALSE){
 echo "DROP intranet_v3_0_dev.fta_composant ...";
 $sql = "DROP TABLE intranet_v3_0_dev.fta_composant";
 if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
@@ -4952,48 +4952,80 @@ if ($arrayFtaCompositionIdGeo) {
 
 }
 
-///**
-// * Extraction  annexe emballage
-// */
-//DatabaseOperation::execute(
-//        "CREATE TABLE intranet_v3_0_dev.annexe_emballage_groupe_type LIKE intranet_v3_0_cod.annexe_emballage_groupe_type ;"
-//        . " INSERT INTO intranet_v3_0_dev.annexe_emballage_groupe_type SELECT * FROM intranet_v2_0_prod.annexe_emballage_groupe_type;"
-//);
-//DatabaseOperation::execute(
-//        "CREATE TABLE intranet_v3_0_dev.annexe_emballage_groupe LIKE intranet_v3_0_cod.annexe_emballage_groupe ;"
-//        . " INSERT INTO intranet_v3_0_dev.annexe_emballage_groupe SELECT * FROM intranet_v2_0_prod.annexe_emballage_groupe;"
-//);
-//
-//DatabaseOperation::execute(
-//        "CREATE TABLE intranet_v3_0_dev.annexe_emballage LIKE intranet_v3_0_cod.annexe_emballage ;"
-//        . " INSERT INTO intranet_v3_0_dev.annexe_emballage SELECT intranet_v2_0_prod.annexe_emballage.* FROM intranet_v2_0_prod.annexe_emballage,intranet_v3_0_dev.fte_fournisseur,intranet_v3_0_dev.annexe_emballage_groupe"
-//        . " WHERE intranet_v2_0_prod.annexe_emballage.id_fte_fournisseur=intranet_v3_0_dev.fte_fournisseur.id_fte_fournisseur"
-//        . " AND intranet_v2_0_prod.annexe_emballage.id_annexe_emballage_groupe=intranet_v3_0_dev.annexe_emballage_groupe.id_annexe_emballage_groupe;"
-//);
-//
-//
-///**
-// * Extrationc fta_conditionnement 
-// */
-//DatabaseOperation::execute(
-//        "CREATE TABLE intranet_v3_0_dev.fta_conditionnement LIKE intranet_v3_0_cod.fta_conditionnement ;"
-//        . " INSERT INTO intranet_v3_0_dev.fta_conditionnement SELECT intranet_v2_0_prod.fta_conditionnement.* FROM intranet_v2_0_prod.fta_conditionnement,intranet_v3_0_dev.fta,intranet_v3_0_dev.annexe_emballage"
-//        . " WHERE intranet_v2_0_prod.fta_conditionnement.id_fta=intranet_v3_0_dev.fta.id_fta"
-//        . " AND intranet_v2_0_prod.fta_conditionnement.id_annexe_emballage=intranet_v3_0_dev.annexe_emballage.id_annexe_emballage;"
-//);
-//
-//
-//
-///**
-// * Insertion  de la nouvelle classification
-// */
+/**
+ * Extraction  annexe emballage
+ */
+ if(TRUE){
+echo "DROP intranet_v3_0_dev.annexe_emballage_groupe_type ...";
+$sql = "DROP TABLE intranet_v3_0_dev.annexe_emballage_groupe_type";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.annexe_emballage_groupe_type ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.annexe_emballage_groupe_type LIKE  intranet_v3_0_cod.annexe_emballage_groupe_type;";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.annexe_emballage_groupe_type ...";
+$sql = "INSERT INTO intranet_v3_0_dev.annexe_emballage_groupe_type SELECT * FROM intranet_v2_0_prod.annexe_emballage_groupe_type;";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.annexe_emballage_groupe ...";
+$sql = "DROP TABLE intranet_v3_0_dev.annexe_emballage_groupe";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.annexe_emballage_groupe ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.annexe_emballage_groupe LIKE  intranet_v3_0_cod.annexe_emballage_groupe;";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.annexe_emballage_groupe ...";
+$sql = "INSERT INTO intranet_v3_0_dev.annexe_emballage_groupe SELECT * FROM intranet_v2_0_prod.annexe_emballage_groupe;";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.annexe_emballage ...";
+$sql = "DROP TABLE intranet_v3_0_dev.annexe_emballage";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.annexe_emballage ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.annexe_emballage LIKE  intranet_v3_0_cod.annexe_emballage;";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.annexe_emballage ...";
+$sql = "INSERT INTO intranet_v3_0_dev.annexe_emballage SELECT intranet_v2_0_prod.annexe_emballage.* FROM intranet_v2_0_prod.annexe_emballage,intranet_v3_0_dev.fte_fournisseur,intranet_v3_0_dev.annexe_emballage_groupe"
+        . " WHERE intranet_v2_0_prod.annexe_emballage.id_fte_fournisseur=intranet_v3_0_dev.fte_fournisseur.id_fte_fournisseur"
+        . " AND intranet_v2_0_prod.annexe_emballage.id_annexe_emballage_groupe=intranet_v3_0_dev.annexe_emballage_groupe.id_annexe_emballage_groupe;";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+
+
+/**
+ * Extrationc fta_conditionnement 
+ */
+
+echo "DROP intranet_v3_0_dev.fta_conditionnement ...";
+$sql = "DROP TABLE intranet_v3_0_dev.fta_conditionnement";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.fta_conditionnement ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.fta_conditionnement LIKE  intranet_v3_0_cod.fta_conditionnement;";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.fta_conditionnement ...";
+$sql = "INSERT INTO intranet_v3_0_dev.fta_conditionnement SELECT intranet_v2_0_prod.fta_conditionnement.* FROM intranet_v2_0_prod.fta_conditionnement,intranet_v3_0_dev.fta,intranet_v3_0_dev.annexe_emballage"
+        . " WHERE intranet_v2_0_prod.fta_conditionnement.id_fta=intranet_v3_0_dev.fta.id_fta"
+        . " AND intranet_v2_0_prod.fta_conditionnement.id_annexe_emballage=intranet_v3_0_dev.annexe_emballage.id_annexe_emballage;";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+}
+
+
+/**
+ * Insertion  de la nouvelle classification
+ */
 //DatabaseOperation::execute(
 //        "CREATE TABLE intranet_v3_0_dev.classification_fta LIKE intranet_v3_0_cod.classification_fta ;"
 //        . " INSERT INTO intranet_v3_0_dev.classification_fta SELECT intranet_v2_0_prod.classification_fta . * 
 //            FROM intranet_v2_0_prod.classification_fta, intranet_v3_0_dev.fta
 //            WHERE intranet_v2_0_prod.classification_fta.id_fta = intranet_v3_0_dev.fta.id_fta;"
 //);
-//
+
 //require_once '../fta/extraction_classification.php';
 //
 //$arrayFta = DatabaseOperation::convertSqlStatementWithoutKeyToArray(

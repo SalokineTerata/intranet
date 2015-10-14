@@ -5040,7 +5040,7 @@ if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
  * excution depuis l'interface
  */
 }
-if(TRUE){
+if(FALSE){
 $arrayFta = mysql_query(
                 "SELECT DISTINCT fta.id_fta FROM intranet_v3_0_dev.fta,intranet_v3_0_dev.classification_fta WHERE classification_fta.id_fta =fta.id_fta "
 );
@@ -5057,7 +5057,7 @@ while ($rowsFta= mysql_fetch_array($arrayFta)) {
             $sql_inter = "UPDATE intranet_v3_0_dev." . "fta"
                     . " SET " . "id_fta_classification2" . "=" . $value["id_fta_classification2"]
                     . " WHERE " . 'id_fta' . "=" . $rowsFta['id_fta'];
-            echo "UPDATE intranet_v3_0_dev." . "fta" . 'id_fta' . "=" . $rowsFta['id_fta']. "id_fta_classification2" . "=" . $value["id_fta_classification2"]." ...";
+            echo "UPDATE intranet_v3_0_dev." . "fta." . 'id_fta' . "=" . $rowsFta['id_fta']. " id_fta_classification2" . "=" . $value["id_fta_classification2"]." ...";
             if(mysql_query($sql_inter)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
         }
     }
@@ -5068,356 +5068,387 @@ $sql = "ALTER TABLE classification_fta2
 if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
 
 }
-//{
-//
-//// Fta workflow structure    
-//    $resultquery28 = DatabaseOperation::execute(
-//                    "ALTER TABLE intranet_v3_0_dev.fta_workflow_structure
-//        ADD CONSTRAINT  FOREIGN KEY (id_fta_workflow) REFERENCES intranet_v3_0_dev.fta_workflow(id_fta_workflow)
-//        ON DELETE  NO ACTION ON UPDATE CASCADE;"
-//    );
-//    if (!$resultquery28) {
-//        $resultFalse = $resultquery28;
-//    }
-//    $resultquery29 = DatabaseOperation::execute(
-//                    "ALTER TABLE intranet_v3_0_dev.fta_workflow_structure
-//        ADD CONSTRAINT  FOREIGN KEY (id_fta_role) REFERENCES intranet_v3_0_dev.fta_role(id_fta_role)
-//        ON DELETE  NO ACTION ON UPDATE CASCADE;"
-//    );
-//    if (!$resultquery29) {
-//        $resultFalse = $resultquery29;
-//    }
-//    $resultquery30 = DatabaseOperation::execute(
-//                    "ALTER TABLE intranet_v3_0_dev.fta_workflow_structure
-//        ADD CONSTRAINT  FOREIGN KEY (id_fta_processus) REFERENCES intranet_v3_0_dev.fta_processus(id_fta_processus)
-//        ON DELETE  NO ACTION ON UPDATE CASCADE;"
-//    );
-//    if (!$resultquery30) {
-//        $resultFalse = $resultquery30;
-//    }
-//    $resultquery31 = DatabaseOperation::execute(
-//                    "ALTER TABLE intranet_v3_0_dev.fta_workflow_structure
-//        ADD CONSTRAINT  FOREIGN KEY (id_fta_chapitre) REFERENCES intranet_v3_0_dev.fta_chapitre(id_fta_chapitre)
-//        ON DELETE  NO ACTION ON UPDATE CASCADE;"
-//    );
-//    if (!$resultquery31) {
-//        $resultFalse = $resultquery31;
-//    }
-//
-////annexe emballage
-//    $resultquery = DatabaseOperation::execute(
-//                    "ALTER TABLE intranet_v3_0_dev.annexe_emballage
-//       ADD CONSTRAINT FOREIGN KEY (id_fte_fournisseur) REFERENCES intranet_v3_0_dev.fte_fournisseur(id_fte_fournisseur)
-//        ON DELETE  NO ACTION ON UPDATE CASCADE;"
-//    );
-//    if (!$resultquery) {
-//        $resultFalse = $resultquery;
-//    }
-//
-//    $resultquery2 = DatabaseOperation::execute(
-//                    "ALTER TABLE intranet_v3_0_dev.annexe_emballage
-//        ADD CONSTRAINT FOREIGN KEY (id_annexe_emballage_groupe) REFERENCES intranet_v3_0_dev.annexe_emballage_groupe(id_annexe_emballage_groupe)
-//        ON DELETE  NO ACTION ON UPDATE CASCADE;"
-//    );
-//    if (!$resultquery2) {
-//        $resultFalse = $resultquery2;
-//    }
-////Fta
-//    $resultquery3 = DatabaseOperation::execute(
-//                    "ALTER TABLE intranet_v3_0_dev.fta
-//       ADD CONSTRAINT FOREIGN KEY (id_fta_workflow) REFERENCES intranet_v3_0_dev.fta_workflow_structure(id_fta_workflow)
-//        ON DELETE  NO ACTION ON UPDATE CASCADE;"
-//    );
-//
-//    if (!$resultquery3) {
-//        $resultFalse = $resultquery3;
-//    }
-//    $resultquery4 = DatabaseOperation::execute(
-//                    "ALTER TABLE intranet_v3_0_dev.fta
-//        ADD CONSTRAINT FOREIGN KEY (id_fta_etat) REFERENCES intranet_v3_0_dev.fta_etat(id_fta_etat)
-//        ON DELETE  NO ACTION ON UPDATE CASCADE;"
-//    );
-//    if (!$resultquery4) {
-//        $resultFalse = $resultquery4;
-//    }
-//
-//    $resultquery51 = DatabaseOperation::execute(
-//                    "ALTER TABLE intranet_v3_0_dev.fta
-//        ADD CONSTRAINT FOREIGN KEY (createur_fta) REFERENCES intranet_v3_0_dev.salaries(id_user)
-//        ON DELETE  NO ACTION ON UPDATE CASCADE;"
-//    );
-//    if (!$resultquery51) {
-//        $resultFalse = $resultquery51;
-//    }
-//    $resultquery52 = DatabaseOperation::execute(
-//                    "ALTER TABLE intranet_v3_0_dev.fta
-//        ADD CONSTRAINT FOREIGN KEY (Site_de_production) REFERENCES intranet_v3_0_dev.geo(id_geo)
-//        ON DELETE  NO ACTION ON UPDATE CASCADE;"
-//    );
-//    if (!$resultquery52) {
-//        $resultFalse = $resultquery52;
-//    }
-//    $resultquer6 = DatabaseOperation::execute(
-//                    "ALTER TABLE intranet_v3_0_dev.fta
-//        ADD CONSTRAINT FOREIGN KEY (id_fta_classification2) REFERENCES intranet_v3_0_dev.classification_fta2(id_fta_classification2)
-//       ON DELETE  NO ACTION ON UPDATE CASCADE;"
-//    );
-//    if (!$resultquer6) {
-//        $resultFalse = $resultquer6;
-//    }
-////Fta action role
-//
-//    $resultquery7 = DatabaseOperation::execute(
-//                    "ALTER TABLE intranet_v3_0_dev.fta_action_role
-//        ADD CONSTRAINT FOREIGN KEY (id_fta_role) REFERENCES intranet_v3_0_dev.fta_workflow_structure(id_fta_role)
-//        ON DELETE  NO ACTION ON UPDATE CASCADE;"
-//    );
-//    if (!$resultquery7) {
-//        $resultFalse = $resultquery7;
-//    }
-//    $resultquery8 = DatabaseOperation::execute(
-//                    "ALTER TABLE intranet_v3_0_dev.fta_action_role
-//        ADD CONSTRAINT  FOREIGN KEY (id_fta_workflow) REFERENCES intranet_v3_0_dev.fta_workflow_structure(id_fta_workflow)
-//        ON DELETE  NO ACTION ON UPDATE CASCADE;"
-//    );
-//    if (!$resultquery8) {
-//        $resultFalse = $resultquery8;
-//    }
-//    $resultquery9 = DatabaseOperation::execute(
-//                    "ALTER TABLE intranet_v3_0_dev.fta_action_role
-//        ADD CONSTRAINT  FOREIGN KEY (id_intranet_actions) REFERENCES intranet_v3_0_dev.intranet_actions(id_intranet_actions)
-//        ON DELETE  NO ACTION ON UPDATE CASCADE;"
-//    );
-//    if (!$resultquery9) {
-//        $resultFalse = $resultquery9;
-//    }
-////Fta action site
-//
-//    $resultquery10 = DatabaseOperation::execute(
-//                    "ALTER TABLE intranet_v3_0_dev.fta_action_site
-//        ADD CONSTRAINT FOREIGN KEY (id_site) REFERENCES intranet_v3_0_dev.geo(id_geo)
-//        ON DELETE  NO ACTION ON UPDATE CASCADE;"
-//    );
-//    if (!$resultquery10) {
-//        $resultFalse = $resultquery10;
-//    }
-//
-//    $resultquery11 = DatabaseOperation::execute(
-//                    "ALTER TABLE intranet_v3_0_dev.fta_action_site
-//       ADD CONSTRAINT  FOREIGN KEY (id_fta_workflow) REFERENCES intranet_v3_0_dev.fta_workflow_structure(id_fta_workflow)
-//        ON DELETE  NO ACTION ON UPDATE CASCADE;"
-//    );
-//    if (!$resultquery11) {
-//        $resultFalse = $resultquery11;
-//    }
-//
-//    $resultquery12 = DatabaseOperation::execute(
-//                    "ALTER TABLE intranet_v3_0_dev.fta_action_site
-//        ADD CONSTRAINT  FOREIGN KEY (id_intranet_actions) REFERENCES intranet_v3_0_dev.intranet_actions(id_intranet_actions)
-//        ON DELETE  NO ACTION ON UPDATE CASCADE;"
-//    );
-//    if (!$resultquery12) {
-//        $resultFalse = $resultquery12;
-//    }
-//
-////Fta composant
-//    $resultquery13 = DatabaseOperation::execute(
-//                    "ALTER TABLE intranet_v3_0_dev.fta_composant
-//        ADD CONSTRAINT  FOREIGN KEY (id_fta) REFERENCES intranet_v3_0_dev.fta(id_fta)
-//        ON DELETE  NO ACTION ON UPDATE CASCADE;"
-//    );
-//    if (!$resultquery13) {
-//        $resultFalse = $resultquery13;
-//    }
-//    $resultquery14 = DatabaseOperation::execute(
-//                    "ALTER TABLE intranet_v3_0_dev.fta_composant
-//       ADD CONSTRAINT  FOREIGN KEY (id_geo) REFERENCES intranet_v3_0_dev.geo(id_geo)
-//        ON DELETE  NO ACTION ON UPDATE CASCADE;"
-//    );
-//    if (!$resultquery14) {
-//        $resultFalse = $resultquery14;
-//    }
-//    $resultquery15 = DatabaseOperation::execute(
-//                    "ALTER TABLE intranet_v3_0_dev.fta_composant
-//        ADD CONSTRAINT  FOREIGN KEY (k_style_paragraphe_ingredient_fta_composition) REFERENCES intranet_v3_0_dev.codesoft_style_paragraphe(k_codesoft_style_paragraphe)
-//        ON DELETE  NO ACTION ON UPDATE CASCADE;"
-//    );
-//    if (!$resultquery15) {
-//        $resultFalse = $resultquery15;
-//    }
-//    $resultquery16 = DatabaseOperation::execute(
-//                    "ALTER TABLE intranet_v3_0_dev.fta_composant
-//        ADD CONSTRAINT  FOREIGN KEY (k_etiquette_fta_composition) REFERENCES intranet_v3_0_dev.codesoft_etiquettes(k_etiquette)
-//        ON DELETE  NO ACTION ON UPDATE CASCADE;"
-//    );
-//    if (!$resultquery16) {
-//        $resultFalse = $resultquery16;
-//    }
-//
-//
-////Fta conditionnement
-//    $resultquery18 = DatabaseOperation::execute(
-//                    "ALTER TABLE intranet_v3_0_dev.fta_conditionnement
-//        ADD CONSTRAINT  FOREIGN KEY (id_fta) REFERENCES intranet_v3_0_dev.fta(id_fta)
-//        ON DELETE  NO ACTION ON UPDATE CASCADE;"
-//    );
-//    if (!$resultquery18) {
-//        $resultFalse = $resultquery18;
-//    }
-//    $resultquery19 = DatabaseOperation::execute(
-//                    "ALTER TABLE intranet_v3_0_dev.fta_conditionnement
-//        ADD CONSTRAINT  FOREIGN KEY (id_annexe_emballage_groupe) REFERENCES intranet_v3_0_dev.annexe_emballage_groupe(id_annexe_emballage_groupe)
-//        ON DELETE  NO ACTION ON UPDATE CASCADE;"
-//    );
-//    if (!$resultquery19) {
-//        $resultFalse = $resultquery19;
-//    }
-//    $resultquery20 = DatabaseOperation::execute(
-//                    "ALTER TABLE intranet_v3_0_dev.fta_conditionnement
-//        ADD CONSTRAINT  FOREIGN KEY (id_annexe_emballage_groupe_type) REFERENCES intranet_v3_0_dev.annexe_emballage_groupe_type(id_annexe_emballage_groupe_type)
-//        ON DELETE  NO ACTION ON UPDATE CASCADE;"
-//    );
-//    if (!$resultquery20) {
-//        $resultFalse = $resultquery20;
-//    }
-//    $resultquery21 = DatabaseOperation::execute(
-//                    "ALTER TABLE intranet_v3_0_dev.fta_conditionnement
-//        ADD CONSTRAINT  FOREIGN KEY (id_annexe_emballage) REFERENCES intranet_v3_0_dev.annexe_emballage(id_annexe_emballage)
-//        ON DELETE  NO ACTION ON UPDATE CASCADE;"
-//    );
-//    if (!$resultquery21) {
-//        $resultFalse = $resultquery21;
-//    }
-//
-//
-////Fta processus
-//    $resultquery22 = DatabaseOperation::execute(
-//                    "ALTER TABLE intranet_v3_0_dev.fta_processus
-//        ADD CONSTRAINT  FOREIGN KEY (id_fta_role) REFERENCES intranet_v3_0_dev.fta_workflow_structure(id_fta_role)
-//        ON DELETE  NO ACTION ON UPDATE CASCADE;"
-//    );
-//    if (!$resultquery22) {
-//        $resultFalse = $resultquery22;
-//    }
-//
-//// Fta processus cycle
-//    $resultquery23 = DatabaseOperation::execute(
-//                    "ALTER TABLE intranet_v3_0_dev.fta_processus_cycle
-//       ADD CONSTRAINT  FOREIGN KEY (id_init_fta_processus) REFERENCES intranet_v3_0_dev.fta_processus(id_fta_processus)
-//        ON DELETE  NO ACTION ON UPDATE CASCADE;"
-//    );
-//    if (!$resultquery23) {
-//        $resultFalse = $resultquery23;
-//    }
-//    $resultquery24 = DatabaseOperation::execute(
-//                    "ALTER TABLE intranet_v3_0_dev.fta_processus_cycle
-//        ADD CONSTRAINT  FOREIGN KEY (id_next_fta_processus) REFERENCES intranet_v3_0_dev.fta_processus(id_fta_processus)
-//        ON DELETE  NO ACTION ON UPDATE CASCADE;"
-//    );
-//    if (!$resultquery24) {
-//        $resultFalse = $resultquery24;
-//    }
-//    $resultquery25 = DatabaseOperation::execute(
-//                    "ALTER TABLE intranet_v3_0_dev.fta_processus_cycle
-//        ADD CONSTRAINT  FOREIGN KEY (id_fta_workflow) REFERENCES intranet_v3_0_dev.fta_workflow_structure(id_fta_workflow)
-//       ON DELETE  NO ACTION ON UPDATE CASCADE;"
-//    );
-//    if (!$resultquery25) {
-//        $resultFalse = $resultquery25;
-//    }
-//
-//// Fta suivie projet
-//    $resultquery26 = DatabaseOperation::execute(
-//                    "ALTER TABLE intranet_v3_0_dev.fta_suivi_projet
-//        ADD CONSTRAINT  FOREIGN KEY (id_fta) REFERENCES intranet_v3_0_dev.fta(id_fta)
-//        ON DELETE  NO ACTION ON UPDATE CASCADE;"
-//    );
-//    if (!$resultquery26) {
-//        $resultFalse = $resultquery26;
-//    }
-//    $resultquery27 = DatabaseOperation::execute(
-//                    "ALTER TABLE intranet_v3_0_dev.fta_suivi_projet
-//        ADD CONSTRAINT  FOREIGN KEY (id_fta_chapitre) REFERENCES intranet_v3_0_dev.fta_chapitre(id_fta_chapitre)
-//        ON DELETE  NO ACTION ON UPDATE CASCADE;"
-//    );
-//    if (!$resultquery27) {
-//        $resultFalse = $resultquery27;
-//    }
-//
-//
-//// Intranet actions     
-//    $resultquery32 = DatabaseOperation::execute(
-//                    "ALTER TABLE intranet_v3_0_dev.intranet_actions
-//        ADD CONSTRAINT  FOREIGN KEY (parent_intranet_actions) REFERENCES intranet_v3_0_dev.fta_workflow(id_intranet_actions)
-//        ON DELETE  NO ACTION ON UPDATE CASCADE;"
-//    );
-//    if (!$resultquery32) {
-//        $resultFalse = $resultquery32;
-//    }
-//// Intranet droits acces
-//    $resultquery33 = DatabaseOperation::execute(
-//                    "ALTER TABLE intranet_v3_0_dev.intranet_droits_acces
-//        ADD CONSTRAINT  FOREIGN KEY (id_intranet_modules) REFERENCES intranet_v3_0_dev.intranet_modules(id_intranet_modules)
-//       ON DELETE  NO ACTION ON UPDATE CASCADE;"
-//    );
-//    if (!$resultquery33) {
-//        $resultFalse = $resultquery33;
-//    }
-//    $resultquery34 = DatabaseOperation::execute(
-//                    "ALTER TABLE intranet_v3_0_dev.intranet_droits_acces
-//       ADD CONSTRAINT  FOREIGN KEY (id_user) REFERENCES intranet_v3_0_dev.salaries(id_user)
-//        ON DELETE  NO ACTION ON UPDATE CASCADE;"
-//    );
-//    if (!$resultquery34) {
-//        $resultFalse = $resultquery34;
-//    }
-//    $resultquery35 = DatabaseOperation::execute(
-//                    "ALTER TABLE intranet_v3_0_dev.intranet_droits_acces
-//        ADD CONSTRAINT  FOREIGN KEY (id_intranet_actions) REFERENCES intranet_v3_0_dev.intranet_actions(id_intranet_actions)
-//        ON DELETE  NO ACTION ON UPDATE CASCADE;"
-//    );
-//    if (!$resultquery35) {
-//        $resultFalse = $resultquery35;
-//    }
-//
-//// log
-//    $resultquery36 = DatabaseOperation::execute(
-//                    "ALTER TABLE intranet_v3_0_dev.log
-//        ADD CONSTRAINT  FOREIGN KEY (id_user) REFERENCES intranet_v3_0_dev.salaries(id_user)
-//        ON DELETE  NO ACTION ON UPDATE CASCADE;"
-//    );
-//    if (!$resultquery36) {
-//        $resultFalse = $resultquery36;
-//    }
-//// modes
-//    $resultquery37 = DatabaseOperation::execute(
-//                    "ALTER TABLE intranet_v3_0_dev.modes
-//        ADD CONSTRAINT  FOREIGN KEY (id_user) REFERENCES intranet_v3_0_dev.salaries(id_user)
-//        ON DELETE  NO ACTION ON UPDATE CASCADE;"
-//    );
-//    if (!$resultquery37) {
-//        $resultFalse = $resultquery37;
-//    }
-////  Planning presence detail
-//    $resultquery38 = DatabaseOperation::execute(
-//                    "ALTER TABLE intranet_v3_0_dev.planning_presence_detail
-//        ADD CONSTRAINT  FOREIGN KEY (id_salaries) REFERENCES intranet_v3_0_dev.salaries(id_user)
-//        ON DELETE  NO ACTION ON UPDATE CASCADE;"
-//    );
-//    if (!$resultquery38) {
-//        $resultFalse = $resultquery38;
-//    }
-//
-//// Lu
-//    $resultquery39 = DatabaseOperation::execute(
-//                    "ALTER TABLE intranet_v3_0_dev.lu
-//        ADD CONSTRAINT  FOREIGN KEY (id_user) REFERENCES intranet_v3_0_dev.salaries(id_user)
-//       ON DELETE  NO ACTION ON UPDATE CASCADE;"
-//    );
-//    if (!$resultquery39) {
-//        $resultFalse = $resultquery39;
-//    }
-//}
+if(TRUE){
+
+// Fta workflow structure    
+    echo "ALTER TABLE intranet_v3_0_dev.fta_workflow_structure id_fta_workflow...";
+ 
+   $sql = "ALTER TABLE intranet_v3_0_dev.fta_workflow_structure
+        ADD CONSTRAINT  FOREIGN KEY (id_fta_workflow) REFERENCES intranet_v3_0_dev.fta_workflow(id_fta_workflow)
+        ON DELETE  NO ACTION ON UPDATE CASCADE;"
+    ;
+  if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+  
+      echo "ALTER TABLE intranet_v3_0_dev.fta_workflow_structure id_fta_role...";
+
+   $sql = "ALTER TABLE intranet_v3_0_dev.fta_workflow_structure
+        ADD CONSTRAINT  FOREIGN KEY (id_fta_role) REFERENCES intranet_v3_0_dev.fta_role(id_fta_role)
+        ON DELETE  NO ACTION ON UPDATE CASCADE;"
+    ;
+  if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+  
+      echo "ALTER TABLE intranet_v3_0_dev.fta_workflow_structure id_fta_processus...";
+
+   $sql = "ALTER TABLE intranet_v3_0_dev.fta_workflow_structure
+        ADD CONSTRAINT  FOREIGN KEY (id_fta_processus) REFERENCES intranet_v3_0_dev.fta_processus(id_fta_processus)
+        ON DELETE  NO ACTION ON UPDATE CASCADE;"
+    ;
+  if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+   
+      echo "ALTER TABLE intranet_v3_0_dev.fta_workflow_structure id_fta_chapitre...";
+
+   $sql =  "ALTER TABLE intranet_v3_0_dev.fta_workflow_structure
+        ADD CONSTRAINT  FOREIGN KEY (id_fta_chapitre) REFERENCES intranet_v3_0_dev.fta_chapitre(id_fta_chapitre)
+        ON DELETE  NO ACTION ON UPDATE CASCADE;"
+    ;
+  if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+   
+  
+
+//annexe emballage  
+  
+      echo "ALTER TABLE intranet_v3_0_dev.annexe_emballage id_fte_fournisseur...";
+
+   $sql =  "ALTER TABLE intranet_v3_0_dev.annexe_emballage
+       ADD CONSTRAINT FOREIGN KEY (id_fte_fournisseur) REFERENCES intranet_v3_0_dev.fte_fournisseur(id_fte_fournisseur)
+        ON DELETE  NO ACTION ON UPDATE CASCADE;"
+    ;
+  if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+  
+      echo "ALTER TABLE intranet_v3_0_dev.annexe_emballage id_annexe_emballage_groupe...";
+
+   $sql = "ALTER TABLE intranet_v3_0_dev.annexe_emballage
+        ADD CONSTRAINT FOREIGN KEY (id_annexe_emballage_groupe) REFERENCES intranet_v3_0_dev.annexe_emballage_groupe(id_annexe_emballage_groupe)
+        ON DELETE  NO ACTION ON UPDATE CASCADE;"
+    ;
+  if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+  
+
+//Fta
+  
+    echo "ALTER TABLE intranet_v3_0_dev.fta id_fta_workflow...";
+
+   $sql =  "ALTER TABLE intranet_v3_0_dev.fta
+       ADD CONSTRAINT FOREIGN KEY (id_fta_workflow) REFERENCES intranet_v3_0_dev.fta_workflow_structure(id_fta_workflow)
+        ON DELETE  NO ACTION ON UPDATE CASCADE;"
+    ;
+  if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+     
+    echo "ALTER TABLE intranet_v3_0_dev.fta id_fta_etat...";
+
+   $sql =   "ALTER TABLE intranet_v3_0_dev.fta
+        ADD CONSTRAINT FOREIGN KEY (id_fta_etat) REFERENCES intranet_v3_0_dev.fta_etat(id_fta_etat)
+        ON DELETE  NO ACTION ON UPDATE CASCADE;"
+    ;
+  if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+  
+    echo "ALTER TABLE intranet_v3_0_dev.fta createur_fta...";
+
+   $sql =   "ALTER TABLE intranet_v3_0_dev.fta
+        ADD CONSTRAINT FOREIGN KEY (createur_fta) REFERENCES intranet_v3_0_dev.salaries(id_user)
+        ON DELETE  NO ACTION ON UPDATE CASCADE;"
+    ;
+  if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+  
+    echo "ALTER TABLE intranet_v3_0_dev.fta Site_de_production...";
+
+   $sql =    "ALTER TABLE intranet_v3_0_dev.fta
+        ADD CONSTRAINT FOREIGN KEY (Site_de_production) REFERENCES intranet_v3_0_dev.geo(id_geo)
+        ON DELETE  NO ACTION ON UPDATE CASCADE;"
+    ;
+  if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+  
+    echo "ALTER TABLE intranet_v3_0_dev.fta id_fta_classification2...";
+
+   $sql =     "ALTER TABLE intranet_v3_0_dev.fta
+        ADD CONSTRAINT FOREIGN KEY (id_fta_classification2) REFERENCES intranet_v3_0_dev.classification_fta2(id_fta_classification2)
+       ON DELETE  NO ACTION ON UPDATE CASCADE;"
+    ;
+  if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+  
+//Fta action role
+  
+ echo "ALTER TABLE intranet_v3_0_dev.fta_action_role id_fta_role...";
+
+   $sql =      "ALTER TABLE intranet_v3_0_dev.fta_action_role
+        ADD CONSTRAINT FOREIGN KEY (id_fta_role) REFERENCES intranet_v3_0_dev.fta_workflow_structure(id_fta_role)
+        ON DELETE  NO ACTION ON UPDATE CASCADE;"
+    ;
+  if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+  
+ echo "ALTER TABLE intranet_v3_0_dev.fta_action_role id_fta_workflow...";
+
+   $sql =      "ALTER TABLE intranet_v3_0_dev.fta_action_role
+        ADD CONSTRAINT  FOREIGN KEY (id_fta_workflow) REFERENCES intranet_v3_0_dev.fta_workflow_structure(id_fta_workflow)
+        ON DELETE  NO ACTION ON UPDATE CASCADE;"
+    ;
+  if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+  
+    
+ echo "ALTER TABLE intranet_v3_0_dev.fta_action_role id_intranet_actions...";
+
+   $sql =     "ALTER TABLE intranet_v3_0_dev.fta_action_role
+        ADD CONSTRAINT  FOREIGN KEY (id_intranet_actions) REFERENCES intranet_v3_0_dev.intranet_actions(id_intranet_actions)
+        ON DELETE  NO ACTION ON UPDATE CASCADE;"
+    ;
+  if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+  
+//Fta action site
+  
+   
+ echo "ALTER TABLE intranet_v3_0_dev.fta_action_site id_site...";
+
+   $sql =       "ALTER TABLE intranet_v3_0_dev.fta_action_site
+        ADD CONSTRAINT FOREIGN KEY (id_site) REFERENCES intranet_v3_0_dev.geo(id_geo)
+        ON DELETE  NO ACTION ON UPDATE CASCADE;"
+    ;
+  if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+  
+ echo "ALTER TABLE intranet_v3_0_dev.fta_action_site id_fta_workflow...";
+
+   $sql =       "ALTER TABLE intranet_v3_0_dev.fta_action_site
+       ADD CONSTRAINT  FOREIGN KEY (id_fta_workflow) REFERENCES intranet_v3_0_dev.fta_workflow_structure(id_fta_workflow)
+        ON DELETE  NO ACTION ON UPDATE CASCADE;"
+    ;
+  if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+  
+    
+ echo "ALTER TABLE intranet_v3_0_dev.fta_action_site id_intranet_actions...";
+
+   $sql =     "ALTER TABLE intranet_v3_0_dev.fta_action_site
+        ADD CONSTRAINT  FOREIGN KEY (id_intranet_actions) REFERENCES intranet_v3_0_dev.intranet_actions(id_intranet_actions)
+        ON DELETE  NO ACTION ON UPDATE CASCADE;"
+    ;
+  if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+
+//Fta composant   
+    
+ echo "ALTER TABLE intranet_v3_0_dev.fta_composant id_fta...";
+
+   $sql =      "ALTER TABLE intranet_v3_0_dev.fta_composant
+        ADD CONSTRAINT  FOREIGN KEY (id_fta) REFERENCES intranet_v3_0_dev.fta(id_fta)
+        ON DELETE  NO ACTION ON UPDATE CASCADE;"
+    ;
+  if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}  
+    
+ echo "ALTER TABLE intranet_v3_0_dev.fta_composant id_geo...";
+
+   $sql =      "ALTER TABLE intranet_v3_0_dev.fta_composant
+       ADD CONSTRAINT  FOREIGN KEY (id_geo) REFERENCES intranet_v3_0_dev.geo(id_geo)
+        ON DELETE  NO ACTION ON UPDATE CASCADE;"
+    ;
+  if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+  
+ echo "ALTER TABLE intranet_v3_0_dev.fta_composant k_style_paragraphe_ingredient_fta_composition...";
+
+   $sql =     "ALTER TABLE intranet_v3_0_dev.fta_composant
+        ADD CONSTRAINT  FOREIGN KEY (k_style_paragraphe_ingredient_fta_composition) REFERENCES intranet_v3_0_dev.codesoft_style_paragraphe(k_codesoft_style_paragraphe)
+        ON DELETE  NO ACTION ON UPDATE CASCADE;"
+    ;
+  if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+  
+  
+ echo "ALTER TABLE intranet_v3_0_dev.fta_composant k_etiquette_fta_composition...";
+
+   $sql =      "ALTER TABLE intranet_v3_0_dev.fta_composant
+        ADD CONSTRAINT  FOREIGN KEY (k_etiquette_fta_composition) REFERENCES intranet_v3_0_dev.codesoft_etiquettes(k_etiquette)
+        ON DELETE  NO ACTION ON UPDATE CASCADE;"
+    ;
+  if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+  
+
+
+//Fta conditionnement
+  
+ echo "ALTER TABLE intranet_v3_0_dev.fta_conditionnement id_fta...";
+
+   $sql =       "ALTER TABLE intranet_v3_0_dev.fta_conditionnement
+        ADD CONSTRAINT  FOREIGN KEY (id_fta) REFERENCES intranet_v3_0_dev.fta(id_fta)
+        ON DELETE  NO ACTION ON UPDATE CASCADE;"
+    ;
+  if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+  
+  
+ echo "ALTER TABLE intranet_v3_0_dev.fta_conditionnement id_annexe_emballage_groupe...";
+
+   $sql =       "ALTER TABLE intranet_v3_0_dev.fta_conditionnement
+        ADD CONSTRAINT  FOREIGN KEY (id_annexe_emballage_groupe) REFERENCES intranet_v3_0_dev.annexe_emballage_groupe(id_annexe_emballage_groupe)
+        ON DELETE  NO ACTION ON UPDATE CASCADE;"
+    ;
+  if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+  
+  
+ echo "ALTER TABLE intranet_v3_0_dev.fta_conditionnement id_annexe_emballage_groupe_type...";
+
+   $sql =       "ALTER TABLE intranet_v3_0_dev.fta_conditionnement
+        ADD CONSTRAINT  FOREIGN KEY (id_annexe_emballage_groupe_type) REFERENCES intranet_v3_0_dev.annexe_emballage_groupe_type(id_annexe_emballage_groupe_type)
+        ON DELETE  NO ACTION ON UPDATE CASCADE;"
+    ;
+  if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+  
+ echo "ALTER TABLE intranet_v3_0_dev.fta_conditionnement id_annexe_emballage...";
+
+   $sql =        "ALTER TABLE intranet_v3_0_dev.fta_conditionnement
+        ADD CONSTRAINT  FOREIGN KEY (id_annexe_emballage) REFERENCES intranet_v3_0_dev.annexe_emballage(id_annexe_emballage)
+        ON DELETE  NO ACTION ON UPDATE CASCADE;"
+    ;
+  if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+  
+   
+
+
+//Fta processus
+  
+ echo "ALTER TABLE intranet_v3_0_dev.fta_processus id_fta_role...";
+
+   $sql =           "ALTER TABLE intranet_v3_0_dev.fta_processus
+        ADD CONSTRAINT  FOREIGN KEY (id_fta_role) REFERENCES intranet_v3_0_dev.fta_workflow_structure(id_fta_role)
+        ON DELETE  NO ACTION ON UPDATE CASCADE;"
+    ;
+    
+  if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+  
+   
+
+// Fta processus cycle
+  
+  echo "ALTER TABLE intranet_v3_0_dev.fta_processus_cycle id_init_fta_processus...";
+
+   $sql =          "ALTER TABLE intranet_v3_0_dev.fta_processus_cycle
+       ADD CONSTRAINT  FOREIGN KEY (id_init_fta_processus) REFERENCES intranet_v3_0_dev.fta_processus(id_fta_processus)
+        ON DELETE  NO ACTION ON UPDATE CASCADE;"
+    ;
+    
+  if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+  
+  
+  echo "ALTER TABLE intranet_v3_0_dev.fta_processus_cycle id_next_fta_processus...";
+
+   $sql =        "ALTER TABLE intranet_v3_0_dev.fta_processus_cycle
+        ADD CONSTRAINT  FOREIGN KEY (id_next_fta_processus) REFERENCES intranet_v3_0_dev.fta_processus(id_fta_processus)
+        ON DELETE  NO ACTION ON UPDATE CASCADE;"
+    ;
+    
+  if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+  
+  
+  echo "ALTER TABLE intranet_v3_0_dev.fta_processus_cycle id_fta_workflow...";
+
+   $sql =        "ALTER TABLE intranet_v3_0_dev.fta_processus_cycle
+        ADD CONSTRAINT  FOREIGN KEY (id_fta_workflow) REFERENCES intranet_v3_0_dev.fta_workflow_structure(id_fta_workflow)
+       ON DELETE  NO ACTION ON UPDATE CASCADE;"
+    ;
+    
+  if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+  
+  
+
+// Fta suivie projet
+  
+  echo "ALTER TABLE intranet_v3_0_dev.fta_suivi_projet id_fta...";
+
+   $sql =        "ALTER TABLE intranet_v3_0_dev.fta_suivi_projet
+        ADD CONSTRAINT  FOREIGN KEY (id_fta) REFERENCES intranet_v3_0_dev.fta(id_fta)
+        ON DELETE  NO ACTION ON UPDATE CASCADE;"
+    ;
+    
+  if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+  
+  echo "ALTER TABLE intranet_v3_0_dev.fta_suivi_projet id_fta_chapitre...";
+
+   $sql =         "ALTER TABLE intranet_v3_0_dev.fta_suivi_projet
+        ADD CONSTRAINT  FOREIGN KEY (id_fta_chapitre) REFERENCES intranet_v3_0_dev.fta_chapitre(id_fta_chapitre)
+        ON DELETE  NO ACTION ON UPDATE CASCADE;"
+    ;
+    
+  if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+  
+
+
+// Intranet actions    
+   
+  echo "ALTER TABLE intranet_v3_0_dev.intranet_actions parent_intranet_actions...";
+
+   $sql =          "ALTER TABLE intranet_v3_0_dev.intranet_actions
+        ADD CONSTRAINT  FOREIGN KEY (parent_intranet_actions) REFERENCES intranet_v3_0_dev.fta_workflow(id_intranet_actions)
+        ON DELETE  NO ACTION ON UPDATE CASCADE;"
+    ;
+    
+  if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+  
+  
+// Intranet droits acces
+  
+  echo "ALTER TABLE intranet_v3_0_dev.intranet_droits_acces id_intranet_modules...";
+
+   $sql =           "ALTER TABLE intranet_v3_0_dev.intranet_droits_acces
+        ADD CONSTRAINT  FOREIGN KEY (id_intranet_modules) REFERENCES intranet_v3_0_dev.intranet_modules(id_intranet_modules)
+       ON DELETE  NO ACTION ON UPDATE CASCADE;"
+    ;
+    
+  if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+  
+  echo "ALTER TABLE intranet_v3_0_dev.intranet_droits_acces id_user...";
+
+   $sql =             "ALTER TABLE intranet_v3_0_dev.intranet_droits_acces
+       ADD CONSTRAINT  FOREIGN KEY (id_user) REFERENCES intranet_v3_0_dev.salaries(id_user)
+        ON DELETE  NO ACTION ON UPDATE CASCADE;"
+    ;
+    
+  if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+  
+  echo "ALTER TABLE intranet_v3_0_dev.intranet_droits_acces id_intranet_actions...";
+
+   $sql =         "ALTER TABLE intranet_v3_0_dev.intranet_droits_acces
+        ADD CONSTRAINT  FOREIGN KEY (id_intranet_actions) REFERENCES intranet_v3_0_dev.intranet_actions(id_intranet_actions)
+        ON DELETE  NO ACTION ON UPDATE CASCADE;"
+    ;
+    
+  if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+  
+
+// log
+   echo "ALTER TABLE intranet_v3_0_dev.log id_user...";
+
+   $sql =     "ALTER TABLE intranet_v3_0_dev.log
+        ADD CONSTRAINT  FOREIGN KEY (id_user) REFERENCES intranet_v3_0_dev.salaries(id_user)
+        ON DELETE  NO ACTION ON UPDATE CASCADE;"
+    ;
+    
+  if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+ 
+// modes
+    echo "ALTER TABLE intranet_v3_0_dev.modes id_user...";
+
+   $sql =      "ALTER TABLE intranet_v3_0_dev.modes
+        ADD CONSTRAINT  FOREIGN KEY (id_user) REFERENCES intranet_v3_0_dev.salaries(id_user)
+        ON DELETE  NO ACTION ON UPDATE CASCADE;"
+    ;
+    
+  if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+ 
+//  Planning presence detail
+   echo "ALTER TABLE intranet_v3_0_dev.planning_presence_detail id_salaries...";
+
+   $sql =         "ALTER TABLE intranet_v3_0_dev.planning_presence_detail
+        ADD CONSTRAINT  FOREIGN KEY (id_salaries) REFERENCES intranet_v3_0_dev.salaries(id_user)
+        ON DELETE  NO ACTION ON UPDATE CASCADE;"
+    ;
+    
+  if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+    
+// Lu
+   echo "ALTER TABLE intranet_v3_0_dev.lu id_user...";
+
+   $sql =          "ALTER TABLE intranet_v3_0_dev.lu
+        ADD CONSTRAINT  FOREIGN KEY (id_user) REFERENCES intranet_v3_0_dev.salaries(id_user)
+       ON DELETE  NO ACTION ON UPDATE CASCADE;"
+    ;
+    
+  if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+    
+}
 /*
 
 mysql_close();

@@ -4641,7 +4641,7 @@ if ($resultChangeIdUse) {
 /**
  * Extraction Fta suivi de projet
  */
-if(TRUE){
+if(FALSE){
 echo "DROP intranet_v3_0_dev.fta_suivi_projet ...";
 $sql = "DROP TABLE intranet_v3_0_dev.fta_suivi_projet";
 if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
@@ -4769,20 +4769,90 @@ while ($rowsTableFtaSuiviProjet=mysql_fetch_array($resultFtaSuiviPrjet)) {
  * Second traitment fta suivie de projet
  */
 
-/*
 
-$arrayIdFtaSuiviProjet = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
+if(TRUE){
+$arrayIdFtaSuiviProjet = mysql_query(
                 "SELECT DISTINCT fta_suivi_projet.id_fta,id_fta_etat,createur_fta FROM intranet_v3_0_dev.fta_suivi_projet,intranet_v3_0_dev.fta "
 );
-foreach ($arrayIdFtaSuiviProjet as $rowsIdFtaSuiviProjet) {
-    $idFta = $rowsIdFtaSuiviProjet[FtaSuiviProjetModel::FIELDNAME_ID_FTA];
-    $idFtaEtat = $rowsTableFtaSuiviProjet[FtaModel::FIELDNAME_ID_FTA_ETAT];
-    $createurFta = $rowsTableFtaSuiviProjet[FtaModel::FIELDNAME_CREATEUR];
 
-    FtaSuiviProjetModel::initFtaSuiviProjetV2VersV3($idFta,$idFtaEtat,$createurFta);
+while ( $rowsIdFtaSuiviProjet=  mysql_fetch_array($arrayIdFtaSuiviProjet)) {
+    $idFta = $rowsIdFtaSuiviProjet['id_fta'];
+    $idFtaEtat = $rowsTableFtaSuiviProjet['id_fta_etat'];
+    $createurFta = $rowsTableFtaSuiviProjet['createur_fta'];
+
+    $arrayIdFtaWorkflow = mysql_query(
+                        "SELECT DISTINCT id_fta_workflow
+                         FROM intranet_v3_0_dev.fta "
+                        . " WHERE id_fta = " . $idFta
+        );
+
+        while ($rowIdFtaWorkflow=  mysql_fetch_array($arrayIdFtaWorkflow)) {
+            $idFtaWorkflow = $rowIdFtaWorkflow['id_fta_workflow'];
+        }
+        if ($idFtaWorkflow) {
+            $arrayChapitre = mysql_query(
+                            'SELECT id_fta_chapitre, id_fta_processus '
+                            . ' FROM intranet_v3_0_dev.fta_workflow_structure' 
+                            . ' WHERE id_fta_workflow' 
+                            . '=' . $idFtaWorkflow
+            );
+
+
+            while ($rowsChapitre=  mysql_fetch_array($arrayChapitre)) {
+                $arrayCheckIdSuiviProjet = mysql_query(
+                                'SELECT id_fta_suivi_projet' 
+                                . ' FROM intranet_v3_0_dev.fta_suivi_projet' 
+                                . ' WHERE id_fta' 
+                                . '=' . $idFta
+                                . ' AND id_fta_chapitre' 
+                                . '=' . $rowsChapitre['id_fta_chapitre']
+                );
+                if (!$arrayCheckIdSuiviProjet) {
+                    if ($rowsChapitre['id_fta_processus'] == 0) {
+                         if(mysql_query(
+                                'INSERT INTO intranet_v3_0_dev.' . 'fta_suivi_projet'
+                                . '(' . 'id_fta'
+                                . ', ' . 'id_fta_chapitre'
+                                . ', ' . 'signature_validation_suivi_projet'
+                                . ') VALUES (' . $idFta
+                                . ', ' . $rowsChapitre['id_fta_chapitre']
+                                . ', 1 )'
+                        ))
+                                  {echo "[OK] \n";}else{echo "[FAILED] $idFta,$rowsChapitre \n ";}
+                    } else {
+                        switch ($idFtaEtat) {
+                            case '1':
+                                if(mysql_query(
+                                        'INSERT INTO intranet_v3_0_dev.' . 'fta_suivi_projet'
+                                        . '(' . 'id_fta'
+                                        . ', ' . 'id_fta_chapitre'
+                                         . ', ' . 'signature_validation_suivi_projet'
+                                        . ') VALUES (' . $idFta
+                                        . ', ' . $rowsChapitre['id_fta_chapitre']
+                                        . ', 0 )'
+                                ))  {echo "[OK] \n";}else{echo "[FAILED] $idFta,$rowsChapitre \n ";}
+                                break;
+                            case '3':
+                            case '5':
+                            case '6':
+                                if(mysql_query(
+                                        'INSERT INTO intranet_v3_0_dev.' . 'fta_suivi_projet'
+                                        . '(' . 'id_fta'
+                                        . ', ' . 'id_fta_chapitre'
+                                        . ', ' . 'signature_validation_suivi_projet'
+                                        . ') VALUES (' . $idFta
+                                        . ', ' . $rowsChapitre['id_fta_chapitre']
+                                        . ', ' . $createurFta . ' )'
+                                ))  {echo "[OK] \n";}else{echo "[FAILED] $idFta,$rowsChapitre \n ";}
+                                break;
+                        }
+                    }
+                }
+            }
+        }
 }
 
-*/
+}
 
 ///**
 // * Composition

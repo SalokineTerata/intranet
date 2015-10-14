@@ -4606,8 +4606,8 @@ VALUES ( \"$idFta\", \"$idAccessArti2\", \"$numft\", \"$idFtaWorkflow\" "
          IN (SELECT id_geo FROM geo) ";
   
 $resultSiteDEProduction =mysql_query($sql);
-if ($resultFta) {
-    while ($rowsChangeIdSiteProduction=mysql_fetch_array($result1)) {
+if ($resultSiteDEProduction) {
+    while ($rowsChangeIdSiteProduction=mysql_fetch_array($resultSiteDEProduction)) {
         $idFta = $rowsChangeIdSiteProduction['id_fta'];
         $sql_inter = "UPDATE intranet_v3_0_dev.fta
                  SET Site_de_production=1"

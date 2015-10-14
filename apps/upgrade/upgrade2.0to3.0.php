@@ -4770,7 +4770,7 @@ while ($rowsTableFtaSuiviProjet=mysql_fetch_array($resultFtaSuiviPrjet)) {
  */
 
 
-if(TRUE){
+if(FALSE){
 $arrayIdFtaSuiviProjet = mysql_query(
                 "SELECT DISTINCT fta_suivi_projet.id_fta,id_fta_etat,createur_fta FROM intranet_v3_0_dev.fta_suivi_projet,intranet_v3_0_dev.fta "
         . " WHERE fta_suivi_projet.id_fta=fta.id_fta"
@@ -4857,94 +4857,101 @@ while ( $rowsIdFtaSuiviProjet=  mysql_fetch_array($arrayIdFtaSuiviProjet)) {
 
 }
 
-///**
-// * Composition
-// */
-//DatabaseOperation::execute(
-//        "CREATE TABLE intranet_v3_0_dev.fta_composant LIKE intranet_v3_0_cod.fta_composant;"
-//        . " INSERT INTO intranet_v3_0_dev.fta_composant SELECT intranet_v2_0_prod.fta_composant.* FROM intranet_v2_0_prod.fta_composant,intranet_v3_0_dev.fta "
-//        . " WHERE intranet_v2_0_prod.fta_composant.id_fta=intranet_v3_0_dev.fta.id_fta"
-//);
-//
-//$arrayFtaCompositionParagraphe = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
-//                "SELECT id_fta_composant
-//FROM  intranet_v3_0_dev.fta_composant
-//WHERE  k_style_paragraphe_ingredient_fta_composition =0 "
-//);
-//if ($arrayFtaCompositionParagraphe) {
-//    foreach ($arrayFtaCompositionParagraphe as $rowsFtaCompositionParagraphe) {
-//        $idFtaComposant = $rowsFtaCompositionParagraphe[FtaComposantModel::KEYNAME];
-//
-//
-//        $sql_inter = "UPDATE intranet_v3_0_dev." . FtaComposantModel::TABLENAME
-//                . " SET " . FtaComposantModel::FIELDNAME_K_STYLE_PARAGRAPHE_INGREDIENT_FTA_COMPOSITION . "=4"
-//                . " WHERE " . FtaComposantModel::KEYNAME . "=" . $idFtaComposant;
-//        $resultquery = DatabaseOperation::execute($sql_inter);
-//        if (!$resultquery) {
-//            $resultFalse = $resultquery;
-//        }
-//    }
-//}
-//$arrayFtaCompositionEtiquette = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
-//                "SELECT DISTINCT id_fta_composant, k_etiquette_fta_composition
-//FROM intranet_v3_0_dev.fta_composant
-//WHERE k_etiquette_fta_composition NOT 
-//IN (
-//
-//SELECT k_etiquette
-//FROM intranet_v2_0_prod.codesoft_etiquettes
-//)"
-//);
-//if ($arrayFtaCompositionEtiquette) {
-//    foreach ($arrayFtaCompositionEtiquette as $rowsFtaCompositionEtiquette) {
-//        $idFtaComposant = $rowsFtaCompositionEtiquette[FtaComposantModel::KEYNAME];
-//
-//
-//        $sql_inter = "UPDATE intranet_v3_0_dev." . FtaComposantModel::TABLENAME
-//                . " SET " . FtaComposantModel::FIELDNAME_K_ETIQUETTE_FTA_COMPOSITION . "=-1"
-//                . " WHERE " . FtaComposantModel::KEYNAME . "=" . $idFtaComposant;
-//        $resultquery = DatabaseOperation::execute($sql_inter);
-//        if (!$resultquery) {
-//            $resultFalse = $resultquery;
-//        }
-//    }
-//}
-//
-///**
-// * Seconde partie composition
-// */
-//$arrayFtaCompositionIdGeo = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
-//                "SELECT id_fta_composant, Site_de_production
-//FROM intranet_v3_0_dev.fta_composant, intranet_v3_0_dev.fta
-//WHERE id_fta_composant NOT 
-//IN (
-//
-//SELECT id_fta_composant
-//FROM  `fta_composant` , geo
-//WHERE fta_composant.id_geo = geo.id_geo
-//)
-//AND fta.id_fta = fta_composant.id_fta
-//AND Site_de_production IS NOT NULL "
-//);
-//if ($arrayFtaCompositionIdGeo) {
-//    foreach ($arrayFtaCompositionIdGeo as $rowsFtaCompositionIdGeo) {
-//        $idFtaComposant = $rowsFtaCompositionIdGeo[FtaComposantModel::KEYNAME];
-//        $idGeo = $rowsFtaCompositionIdGeo[FtaModel::FIELDNAME_SITE_ASSEMBLAGE];
-//
-//
-//        $sql_inter = "UPDATE intranet_v3_0_dev." . FtaComposantModel::TABLENAME
-//                . " SET " . FtaComposantModel::FIELDNAME_ID_GEO . "=" . $idGeo
-//                . " WHERE " . FtaComposantModel::KEYNAME . "=" . $idFtaComposant;
-//        $resultquery = DatabaseOperation::execute($sql_inter);
-//        if (!$resultquery) {
-//            $resultFalse = $resultquery;
-//        }
-//    }
-//}
-//
-//
-//
-//
+/**
+ * Composition
+ */
+ if(TRUE){
+echo "DROP intranet_v3_0_dev.fta_composant ...";
+$sql = "DROP TABLE intranet_v3_0_dev.fta_composant";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.fta_composant ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.fta_composant LIKE  intranet_v3_0_cod.fta_composant;";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.fta_composant ...";
+$sql = "INSERT INTO intranet_v3_0_dev.fta_composant SELECT intranet_v2_0_prod.fta_composant.* FROM intranet_v2_0_prod.fta_composant,intranet_v3_0_dev.fta "
+        . " WHERE intranet_v2_0_prod.fta_composant.id_fta=intranet_v3_0_dev.fta.id_fta";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+$sql ="SELECT intranet_v2_0_prod.fta_suivi_projet.* "
+        . " FROM intranet_v2_0_prod.fta_suivi_projet,intranet_v3_0_dev.fta"
+        . " WHERE intranet_v2_0_prod.fta_suivi_projet.id_fta=intranet_v3_0_dev.fta.id_fta ";
+$resultFtaSuiviPrjet =mysql_query($sql);
+
+
+
+$arrayFtaCompositionParagraphe = mysql_query(
+                "SELECT id_fta_composant
+FROM  intranet_v3_0_dev.fta_composant
+WHERE  k_style_paragraphe_ingredient_fta_composition =0 "
+);
+if ($arrayFtaCompositionParagraphe) {
+    while  ($rowsFtaCompositionParagraphe = mysql_fetch_array($arrayFtaCompositionParagraphe)) {
+        $idFtaComposant = $rowsFtaCompositionParagraphe['id_fta_composant'];
+
+
+        $sql_inter = "UPDATE intranet_v3_0_dev." . 'fta_composant'
+                . " SET " . 'k_style_paragraphe_ingredient_fta_composition'. "=4"
+                . " WHERE " . 'id_fta_composant' . "=" . $idFtaComposant;
+      if(mysql_query($sql_inter)) {	echo "[OK]\n";}else{echo "[FAILED] $idFtaComposant \n";}
+        
+    }
+}
+$arrayFtaCompositionEtiquette = mysql_query(
+                "SELECT DISTINCT id_fta_composant, k_etiquette_fta_composition
+FROM intranet_v3_0_dev.fta_composant
+WHERE k_etiquette_fta_composition NOT 
+IN (
+
+SELECT k_etiquette
+FROM intranet_v2_0_prod.codesoft_etiquettes
+)"
+);
+if ($arrayFtaCompositionEtiquette) {
+    while ($rowsFtaCompositionEtiquette = mysql_fetch_array($arrayFtaCompositionEtiquette)) {
+        $idFtaComposant = $rowsFtaCompositionEtiquette['id_fta_composant'];
+
+
+        $sql_inter = "UPDATE intranet_v3_0_dev." . 'fta_composant'
+                . " SET " . 'k_etiquette_fta_composition' . "=-1"
+                . " WHERE " . 'id_fta_composant' . "=" . $idFtaComposant;
+        if(mysql_query($sql_inter)) {	echo "[OK]\n";}else{echo "[FAILED] $idFtaComposant \n";}
+    }
+}
+
+/**
+ * Seconde partie composition
+ */
+$arrayFtaCompositionIdGeo = mysql_query(
+                "SELECT id_fta_composant, Site_de_production
+FROM intranet_v3_0_dev.fta_composant, intranet_v3_0_dev.fta
+WHERE id_fta_composant NOT 
+IN (
+
+SELECT id_fta_composant
+FROM  `fta_composant` , geo
+WHERE fta_composant.id_geo = geo.id_geo
+)
+AND fta.id_fta = fta_composant.id_fta
+AND Site_de_production IS NOT NULL "
+);
+if ($arrayFtaCompositionIdGeo) {
+    while ($rowsFtaCompositionIdGeo= mysql_fetch_array($arrayFtaCompositionIdGeo)) {
+        $idFtaComposant = $rowsFtaCompositionIdGeo['id_fta_composant'];
+        $idGeo = $rowsFtaCompositionIdGeo["Site_de_production"];
+
+
+        $sql_inter = "UPDATE intranet_v3_0_dev." . 'fta_composant'
+                . " SET " . 'id_geo' . "=" . $idGeo
+                . " WHERE " .'id_fta_composant' . "=" . $idFtaComposant;
+       if(mysql_query($sql_inter)) {	echo "[OK]\n";}else{echo "[FAILED] $idFtaComposant \n";}
+    }
+}
+
+
+}
+
 ///**
 // * Extraction  annexe emballage
 // */

@@ -2903,7 +2903,7 @@ $donnee = mysql_pconnect($hostname_connect, $username_connect, $password_connect
 */
 
 
-while ($rows1=mysql_fetch_array($resultFta)) {
+while ($value=mysql_fetch_array($resultFta)) {
     /**
      * Nouveau champs : 
      * commentaire

@@ -4955,7 +4955,7 @@ if ($arrayFtaCompositionIdGeo) {
 /**
  * Extraction  annexe emballage
  */
- if(TRUE){
+ if(FALSE){
 echo "DROP intranet_v3_0_dev.annexe_emballage_groupe_type ...";
 $sql = "DROP TABLE intranet_v3_0_dev.annexe_emballage_groupe_type";
 if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
@@ -5019,46 +5019,58 @@ if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
 /**
  * Insertion  de la nouvelle classification
  */
-//DatabaseOperation::execute(
-//        "CREATE TABLE intranet_v3_0_dev.classification_fta LIKE intranet_v3_0_cod.classification_fta ;"
-//        . " INSERT INTO intranet_v3_0_dev.classification_fta SELECT intranet_v2_0_prod.classification_fta . * 
-//            FROM intranet_v2_0_prod.classification_fta, intranet_v3_0_dev.fta
-//            WHERE intranet_v2_0_prod.classification_fta.id_fta = intranet_v3_0_dev.fta.id_fta;"
-//);
+if(TRue){
+    echo "DROP intranet_v3_0_dev.classification_fta ...";
+$sql = "DROP TABLE intranet_v3_0_dev.classification_fta";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
 
-//require_once '../fta/extraction_classification.php';
-//
-//$arrayFta = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
-//                "SELECT DISTINCT fta.id_fta FROM intranet_v3_0_dev.fta,intranet_v3_0_dev.classification_fta WHERE classification_fta.id_fta =fta.id_fta "
-//);
-//
-//foreach ($arrayFta as $rowsFta) {
-//    $arrayIdFtaClassfication = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
-//                    "SELECT DISTINCT id_fta_classification2 "
-//                    . " FROM intranet_v3_0_dev.classification_fta, intranet_v3_0_dev.classification_fta2"
-//                    . " WHERE intranet_v3_0_dev.classification_fta.id_classification_arborescence_article = intranet_v3_0_dev.classification_fta2.id_arborescence"
-//                    . " AND intranet_v3_0_dev.classification_fta.id_fta = " . $rowsFta[FtaModel::KEYNAME]
-//    );
-//    if ($arrayIdFtaClassfication) {
-//        foreach ($arrayIdFtaClassfication as $value) {
-//            $sql_inter = "UPDATE intranet_v3_0_dev." . FtaModel::TABLENAME
-//                    . " SET " . FtaModel::FIELDNAME_ID_FTA_CLASSIFICATION2 . "=" . $value[ClassificationFta2Model::KEYNAME]
-//                    . " WHERE " . FtaModel::KEYNAME . "=" . $rowsFta[FtaModel::KEYNAME];
-//            $resultquery = DatabaseOperation::execute($sql_inter);
-//
-//            if (!$resultquery) {
-//                $sqlFalse = $sql_inter;
-//            }
-//        }
-//    }
-//}
-//
-//DatabaseOperation::execute(
-//        "ALTER TABLE classification_fta2
-//        DROP id_arborescence");
-///**
-// * Ajout des clé étrangère
-// */ {
+echo "CREATE TABLE intranet_v3_0_dev.classification_fta ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.classification_fta LIKE  intranet_v3_0_cod.classification_fta;";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.fta_conditionnement ...";
+$sql = "INSERT INTO intranet_v3_0_dev.classification_fta SELECT intranet_v2_0_prod.classification_fta . * 
+            FROM intranet_v2_0_prod.classification_fta, intranet_v3_0_dev.fta
+            WHERE intranet_v2_0_prod.classification_fta.id_fta = intranet_v3_0_dev.fta.id_fta;";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+
+/**
+ * Generation de la table classification_fta2*
+ * excution depuis l'interface
+ */
+}
+if(FALSE){
+$arrayFta = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
+                "SELECT DISTINCT fta.id_fta FROM intranet_v3_0_dev.fta,intranet_v3_0_dev.classification_fta WHERE classification_fta.id_fta =fta.id_fta "
+);
+
+foreach ($arrayFta as $rowsFta) {
+    $arrayIdFtaClassfication = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
+                    "SELECT DISTINCT id_fta_classification2 "
+                    . " FROM intranet_v3_0_dev.classification_fta, intranet_v3_0_dev.classification_fta2"
+                    . " WHERE intranet_v3_0_dev.classification_fta.id_classification_arborescence_article = intranet_v3_0_dev.classification_fta2.id_arborescence"
+                    . " AND intranet_v3_0_dev.classification_fta.id_fta = " . $rowsFta[FtaModel::KEYNAME]
+    );
+    if ($arrayIdFtaClassfication) {
+        foreach ($arrayIdFtaClassfication as $value) {
+            $sql_inter = "UPDATE intranet_v3_0_dev." . FtaModel::TABLENAME
+                    . " SET " . FtaModel::FIELDNAME_ID_FTA_CLASSIFICATION2 . "=" . $value[ClassificationFta2Model::KEYNAME]
+                    . " WHERE " . FtaModel::KEYNAME . "=" . $rowsFta[FtaModel::KEYNAME];
+            $resultquery = DatabaseOperation::execute($sql_inter);
+
+            if (!$resultquery) {
+                $sqlFalse = $sql_inter;
+            }
+        }
+    }
+}
+
+DatabaseOperation::execute(
+        "ALTER TABLE classification_fta2
+        DROP id_arborescence");
+}
+//{
 //
 //// Fta workflow structure    
 //    $resultquery28 = DatabaseOperation::execute(

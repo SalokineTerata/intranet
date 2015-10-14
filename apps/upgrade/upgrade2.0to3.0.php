@@ -5019,7 +5019,7 @@ if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
 /**
  * Insertion  de la nouvelle classification
  */
-if(TRue){
+if(FALSE){
     echo "DROP intranet_v3_0_dev.classification_fta ...";
 $sql = "DROP TABLE intranet_v3_0_dev.classification_fta";
 if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
@@ -5040,35 +5040,33 @@ if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
  * excution depuis l'interface
  */
 }
-if(FALSE){
-$arrayFta = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
+if(TRUE){
+$arrayFta = mysql_query(
                 "SELECT DISTINCT fta.id_fta FROM intranet_v3_0_dev.fta,intranet_v3_0_dev.classification_fta WHERE classification_fta.id_fta =fta.id_fta "
 );
 
-foreach ($arrayFta as $rowsFta) {
-    $arrayIdFtaClassfication = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
+while ($rowsFta= mysql_fetch_array($arrayFta)) {
+    $arrayIdFtaClassfication = mysql_query(
                     "SELECT DISTINCT id_fta_classification2 "
                     . " FROM intranet_v3_0_dev.classification_fta, intranet_v3_0_dev.classification_fta2"
                     . " WHERE intranet_v3_0_dev.classification_fta.id_classification_arborescence_article = intranet_v3_0_dev.classification_fta2.id_arborescence"
-                    . " AND intranet_v3_0_dev.classification_fta.id_fta = " . $rowsFta[FtaModel::KEYNAME]
+                    . " AND intranet_v3_0_dev.classification_fta.id_fta = " . $rowsFta['id_fta']
     );
     if ($arrayIdFtaClassfication) {
-        foreach ($arrayIdFtaClassfication as $value) {
-            $sql_inter = "UPDATE intranet_v3_0_dev." . FtaModel::TABLENAME
-                    . " SET " . FtaModel::FIELDNAME_ID_FTA_CLASSIFICATION2 . "=" . $value[ClassificationFta2Model::KEYNAME]
-                    . " WHERE " . FtaModel::KEYNAME . "=" . $rowsFta[FtaModel::KEYNAME];
-            $resultquery = DatabaseOperation::execute($sql_inter);
-
-            if (!$resultquery) {
-                $sqlFalse = $sql_inter;
-            }
+        while ($value= mysql_fetch_array($arrayIdFtaClassfication)) {
+            $sql_inter = "UPDATE intranet_v3_0_dev." . "fta"
+                    . " SET " . "id_fta_classification2" . "=" . $value["id_fta_classification2"]
+                    . " WHERE " . 'id_fta' . "=" . $rowsFta['id_fta'];
+            echo "UPDATE intranet_v3_0_dev." . "fta" . 'id_fta' . "=" . $rowsFta['id_fta']. "id_fta_classification2" . "=" . $value["id_fta_classification2"]." ...";
+            if(mysql_query($sql_inter)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
         }
     }
 }
+echo "ALTER TABLE classification_fta2 DROP id_arborescence ...";
+$sql = "ALTER TABLE classification_fta2
+        DROP id_arborescence";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
 
-DatabaseOperation::execute(
-        "ALTER TABLE classification_fta2
-        DROP id_arborescence");
 }
 //{
 //

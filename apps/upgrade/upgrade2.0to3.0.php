@@ -2909,99 +2909,99 @@ while ($rows1=mysql_fetch_array($resultFta)) {
      * commentaire
      * duree_vie_technique_fta est devenue DEPRECATED_duree_vie_technique_fta
      */
-    $idFta = $value[FtaModel::KEYNAME];
+    $idFta = $value['id_fta'];
     $idAccessArti2 = $value['id_access_arti2'];
 
 
 
-    $idDossierFta = $value[FtaModel::FIELDNAME_DOSSIER_FTA];
-    $idVersionDossierFta = $value[FtaModel::FIELDNAME_VERSION_DOSSIER_FTA];
-    $idFtaEtatTMP = $value[FtaModel::FIELDNAME_ID_FTA_ETAT];
+    $idDossierFta = $value["id_dossier_fta"];
+    $idVersionDossierFta = $value["id_version_dossier_fta"];
+    $idFtaEtatTMP = $value["id_fta_etat"];
     if ($idFtaEtatTMP == '8') {
         $idFtaEtat = '1';
     } else {
         $idFtaEtat = $idFtaEtatTMP;
     }
-    $cretateurFta = $value[FtaModel::FIELDNAME_CREATEUR];
+    $cretateurFta = $value["createur_fta"];
     if ($cretateurFta == '0') {
         $cretateurFta = '-1';
     }
-    $dateDerniereMajFta = $value[FtaModel::FIELDNAME_DATE_DERNIERE_MAJ_FTA];
-    $commentaireMajFtatmp = $value[FtaModel::FIELDNAME_COMMENTAIRE_MAJ_FTA];
+    $dateDerniereMajFta = $value["date_derniere_maj_fta"];
+    $commentaireMajFtatmp = $value["commentaire_maj_fta"];
     $commentaireMajFtatmp2 = str_replace('"', '', $commentaireMajFtatmp);
     $commentaireMajFta = stripslashes($commentaireMajFtatmp2);
-    $dateEcheanceFta = $value[FtaModel::FIELDNAME_DATE_ECHEANCE_FTA];
-    $codeDouneFta = $value[FtaModel::FIELDNAME_CODE_DOUANE_FTA];
-    $poidsEmballageUVC = $value[FtaModel::FIELDNAME_POIDS_EMBALLAGES_UVC];
-    $poidsBrutUVC = $value[FtaModel::FIELDNAME_POIDS_BRUT_UVC];
-    $suffixeAgrologicFta = $value[FtaModel::FIELDNAME_SUFFIXE_AGROLOGIC_FTA];
-    $origineTransformationFta = $value[FtaModel::FIELDNAME_PRODUIT_TRANSFORME];
-    $remarqueFtatmp = $value[FtaModel::FIELDNAME_REMARQUE];
+    $dateEcheanceFta = $value["date_echeance_fta"];
+    $codeDouneFta = $value["code_douane_fta"];
+    $poidsEmballageUVC = $value["poids_emballages_uvc_fta"];
+    $poidsBrutUVC = $value["poids_brut_uvc_fta"];
+    $suffixeAgrologicFta = $value["suffixe_agrologic_fta"];
+    $origineTransformationFta = $value["origine_transformation_fta"];
+    $remarqueFtatmp = $value["remarque_fta"];
     $remarqueFtatmp2 = str_replace('"', '', $remarqueFtatmp);
     $remarqueFta = stripslashes($remarqueFtatmp2);
-    $apresOuvertureFtatmp = $value[FtaModel::FIELDNAME_CONSEIL_APRES_OUVERTURE];
+    $apresOuvertureFtatmp = $value["apres_ouverture_fta"];
     $apresOuvertureFtatmp2 = str_replace('"', '', $apresOuvertureFtatmp);
     $apresOuvertureFta = stripslashes($apresOuvertureFtatmp2);
-    $conseilRechauffageValideFtatmp = $value[FtaModel::FIELDNAME_CONSEIL_DE_RECHAUFFAGE];
+    $conseilRechauffageValideFtatmp = $value["conseil_rechauffage_valide_fta"];
     $conseilRechauffageValideFtatmp2 = str_replace('"', '', $conseilRechauffageValideFtatmp);
     $conseilRechauffageValideFta = stripslashes($conseilRechauffageValideFtatmp2);
-    $conseilReferenceExterneFtatmp = $value[FtaModel::FIELDNAME_REFERENCE_EXTERNES];
+    $conseilReferenceExterneFtatmp = $value["reference_externe_fta"];
     $conseilReferenceExterneFtatmp2 = str_replace('"', '', $conseilReferenceExterneFtatmp);
     $conseilReferenceExterneFta = stripslashes($conseilReferenceExterneFtatmp2);
-    $designationCommercialeFtatmp = $value[FtaModel::FIELDNAME_DESIGNATION_COMMERCIALE];
+    $designationCommercialeFtatmp = $value["designation_commerciale_fta"];
     $designationCommercialeFtatmp2 = str_replace('"', '', $designationCommercialeFtatmp);
     $designationCommercialeFta = stripslashes($designationCommercialeFtatmp2);
-    $siteExpeditionFta = $value[FtaModel::FIELDNAME_SITE_EXPEDITION_FTA];
-    $conseilRechauffageExperimentaleFtatmp = $value[FtaModel::FIELDNAME_CONSEIL_DE_RECHAUFFAGE_DEVELOPPEMENT];
+    $siteExpeditionFta = $value["site_expedition_fta"];
+    $conseilRechauffageExperimentaleFtatmp = $value["conseil_rechauffage_experimentale_fta"];
     $conseilRechauffageExperimentaleFtatmp2 = str_replace('"', '', $conseilRechauffageExperimentaleFtatmp);
     $conseilRechauffageExperimentaleFta = stripslashes($conseilRechauffageExperimentaleFtatmp2);
-    $origineMatiereFtatmp = $value[FtaModel::FIELDNAME_ORIGINE_MATIERE_PREMIERE];
+    $origineMatiereFtatmp = $value["origine_matiere_fta"];
     $origineMatiereFtatmp2 = str_replace('"', '', $origineMatiereFtatmp);
     $origineMatiereFta = stripslashes($origineMatiereFtatmp2);
-    $idArticleAgrocologic = $value[FtaModel::FIELDNAME_ARTICLE_AGROLOGIC];
-    $allergenesMatiereFtatmp = $value[FtaModel::FIELDNAME_LISTE_ALLERGENE];
+    $idArticleAgrocologic = $value["id_article_agrologic"];
+    $allergenesMatiereFtatmp = $value["allergenes_matiere_fta"];
     $allergenesMatiereFtatmp2 = str_replace('"', '', $allergenesMatiereFtatmp);
     $allergenesMatiereFta = stripslashes($allergenesMatiereFtatmp2);
-    $descriptionEmballagetmp = $value[FtaModel::FIELDNAME_DESCRIPTION_EMBALLAGE];
+    $descriptionEmballagetmp = $value["description_emballage"];
     $descriptionEmballagetmp2 = str_replace('"', '', $descriptionEmballagetmp);
     $descriptionEmballage = stripslashes($descriptionEmballagetmp2);
-    $listeChapitreMajFta = $value[FtaModel::FIELDNAME_LISTE_CHAPITRE_MAJ_FTA];
-    $verrouillageLibelleEtiquetteFta = $value[FtaModel::FIELDNAME_VERROUILLAGE_LIBELLE_ETIQUETTE];
-    $nombrePortionFta = $value[FtaModel::FIELDNAME_NOMBRE_PORTION_FTA];
-    $imageEcoEmballage = $value[FtaModel::FIELDNAME_LOGO_ECO_EMBALLAGE];
-    $idServiceConsommateur = $value[FtaModel::FIELDNAME_SERVICE_CONSOMMATEUR];
-    $dateCreation = $value[FtaModel::FIELDNAME_DATE_CREATION];
-    $CODE_ARTICLE = $value[FtaModel::FIELDNAME_CODE_ARTICLE];
-    $codeArticleClient = $value[FtaModel::FIELDNAME_CODE_ARTICLE_CLIENT];
-    $libelleCodeArticleClient = $value[FtaModel::FIELDNAME_LIBELLE_CODE_ARTICLE_CLIENT];
-    $codeArticleLdc = $value[FtaModel::FIELDNAME_CODE_ARTICLE_LDC];
-    $LIBELLEtmp = $value[FtaModel::FIELDNAME_LIBELLE];
+    $listeChapitreMajFta = $value["liste_chapitre_maj_fta"];
+    $verrouillageLibelleEtiquetteFta = $value["verrouillage_libelle_etiquette_fta"];
+    $nombrePortionFta = $value["nombre_portion_fta"];
+    $imageEcoEmballage = $value["image_eco_emballage"];
+    $idServiceConsommateur = $value["id_service_consommateur"];
+    $dateCreation = $value["date_creation"];
+    $CODE_ARTICLE = $value["CODE_ARTICLE"];
+    $codeArticleClient = $value["code_article_client"];
+    $libelleCodeArticleClient = $value["libelle_code_article_client"];
+    $codeArticleLdc = $value["code_article_ldc"];
+    $LIBELLEtmp = $value["LIBELLE"];
     $LIBELLEtmp2 = str_replace('"', '', $LIBELLEtmp);
     $LIBELLE = stripslashes($LIBELLEtmp2);
-    $LIBELLE_CLIENTtmp = $value[FtaModel::FIELDNAME_LIBELLE_CLIENT];
+    $LIBELLE_CLIENTtmp = $value["LIBELLE_CLIENT"];
     $LIBELLE_CLIENTtmp2 = str_replace('"', '', $LIBELLE_CLIENTtmp);
     $LIBELLE_CLIENT = stripslashes($LIBELLE_CLIENTtmp2);
-    $NB_UNIT_ELEM = $value[FtaModel::FIELDNAME_NOMBRE_UVC_PAR_CARTON];
-    $Poids_ELEM = $value[FtaModel::FIELDNAME_POIDS_ELEMENTAIRE];
-    $atmosphereProtectrice = $value[FtaModel::FIELDNAME_CONDITION_SOUS_ATMOSPHERE];
+    $NB_UNIT_ELEM = $value["NB_UNIT_ELEM"];
+    $Poids_ELEM = $value["Poids_ELEM"];
+    $atmosphereProtectrice = $value["atmosphere_protectrice"];
 
     /**
      * Unité_Facturation devient id_annexe_unite_facturation
      */
-    $Unité_Facturation = $value[FtaModel::FIELDNAME_UNITE_FACTURATION];
-    $actif = $value[FtaModel::FIELDNAME_ACTIF];
-    $Site_de_production = $value[FtaModel::FIELDNAME_SITE_ASSEMBLAGE];
-    $DureeDeVie = $value[FtaModel::FIELDNAME_DUREE_DE_VIE];
-    $DureeDeVieTechnique = $value[FtaModel::FIELDNAME_DUREE_DE_VIE_TECHNIQUE_PRODUCTION];
-    $Composition = $value[FtaModel::FIELDNAME_COMPOSITION1];
-    $Composition1 = $value[FtaModel::FIELDNAME_COMPOSITION2];
-    $libelleMultilangue = $value[FtaModel::FIELDNAME_LIBELLE_MULTILANGUE];
-    $K_etat = $value[FtaModel::FIELDNAME_ENVIRONNEMENT_CONSERVATION];
-    $EAN_UVC = $value[FtaModel::FIELDNAME_EAN_UVC];
-    $EAN_COLIS = $value[FtaModel::FIELDNAME_EAN_COLIS];
-    $EAN_PALETTE = $value[FtaModel::FIELDNAME_EAN_PALETTE];
-    $activation_codesoft_arti2 = $value[FtaModel::FIELDNAME_ACTIVATION_CODESOFT];
-    $id_etiquette_codesoft_arti2 = $value[FtaModel::FIELDNAME_ETIQUETTE_CODESOFT];
+    $Unité_Facturation = $value["id_annexe_unite_facturation"];
+    $actif = $value["actif"];
+    $Site_de_production = $value["Site_de_production"];
+    $DureeDeVie = $value["Duree_de_vie"];
+    $DureeDeVieTechnique = $value["Duree_de_vie_technique"];
+    $Composition = $value["Composition"];
+    $Composition1 = $value["composition1"];
+    $libelleMultilangue = $value["libelle_multilangue"];
+    $K_etat = $value["K_etat"];
+    $EAN_UVC = $value["EAN_UVC"];
+    $EAN_COLIS = $value["EAN_COLIS"];
+    $EAN_PALETTE = $value["EAN_PALETTE"];
+    $activation_codesoft_arti2 = $value["activation_codesoft_arti2"];
+    $id_etiquette_codesoft_arti2 = $value["id_etiquette_codesoft_arti2"];
 
 
     /**
@@ -3076,21 +3076,21 @@ while ($rows1=mysql_fetch_array($resultFta)) {
     $TRASH_id_fta_palettisation = $value['TRASH_id_fta_palettisation'];
     $champ_maj_fta = $value['champ_maj_fta'];
     $duree_apres_dernier_processus_fta = $value['duree_apres_dernier_processus_fta'];
-    $periodeCommercialisationFta = $value[FtaModel::FIELDNAME_PERIODE_DE_COMMERCIALISATION];
+    $periodeCommercialisationFta = $value["periode_commercialisation_fta"];
     $code_douane_libelle_fta = $value['code_douane_libelle_fta'];
     $synoptique_valide_ftatmp = $value['synoptique_valide_fta'];
     $synoptique_valide_ftatmp2 = str_replace('"', '', $synoptique_valide_ftatmp);
     $synoptique_valide_fta = stripslashes($synoptique_valide_ftatmp2);
-    $presentationFtatmp = $value[FtaModel::FIELDNAME_CONSEIL_DE_PRESENTATION];
+    $presentationFtatmp = $value["presentation_fta"];
     $presentationFtatmp2 = str_replace('"', '', $presentationFtatmp);
     $presentationFta = stripslashes($presentationFtatmp2);
-    $nom_abrege_ftatmp = $value[FtaModel::FIELDNAME_NOM_ABREGE];
+    $nom_abrege_ftatmp = $value["nom_abrege_fta"];
     $nom_abrege_ftatmp2 = str_replace('"', '', $nom_abrege_ftatmp);
     $nom_abrege_fta = stripslashes($nom_abrege_ftatmp2);
     $synoptique_experimental_ftatmp = $value['synoptique_experimental_fta'];
     $synoptique_experimental_ftatmp2 = str_replace('"', '', $synoptique_experimental_ftatmp);
     $synoptique_experimental_fta = stripslashes($synoptique_experimental_ftatmp2);
-    $unite_affichage_fta = $value[FtaModel::FIELDNAME_UNITE_AFFICHAGE];
+    $unite_affichage_fta = $value["unite_affichage_fta"];
     $signature_validation_fta = $value['signature_validation_fta'];
     $old_gamdesc = $value['old_gamdesc'];
     $old_segdesc = $value['old_segdesc'];

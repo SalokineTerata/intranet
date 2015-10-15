@@ -25,7 +25,7 @@ CHARSET_DEST="UTF-8"
 EXPORT_FILE="export$DB_NAME"
 EXPORT_FILE_CONV="$EXPORT_FILE-$CHARSET_DEST"
 
-SERVER_DEST="dev-intranet.agis.fr"
+SERVER_DEST="cod-intranet.agis.fr"
 DIR_DEST="/tmp"
 
 # EXPORTATION

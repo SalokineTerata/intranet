@@ -65,7 +65,7 @@ if ($planning_presence_modification==0)
 <meta name="generator" content="HAPedit 2.4">
 </head>
 <body bgcolor="#FFFFFF">
-<?
+<?php
 
 //Requête donnant la dernière semaine saisie
 $req1 = "SELECT * FROM planning_presence_semaine_visible ";

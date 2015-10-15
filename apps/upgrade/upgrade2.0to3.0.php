@@ -44,7 +44,7 @@ echo "*** Requêtes SQL:\n";
 // */ {
 //
 
-echo  date("H:i:s");
+echo  date("H:i:s")."\n";
 
 /**
 Tables basiques
@@ -158,6 +158,18 @@ if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
 
 echo "INSERT INTO intranet_v3_0_dev.annexe_agrologic_article_codification ...";
 $sql = "INSERT INTO intranet_v3_0_dev.annexe_agrologic_article_codification SELECT * FROM intranet_v2_0_prod.annexe_agrologic_article_codification";
+if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "DROP intranet_v3_0_dev.annexe_jours_semaine ...";
+$sql = "DROP TABLE intranet_v3_0_dev.annexe_jours_semaine";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE intranet_v3_0_dev.annexe_jours_semaine ...";
+$sql = "CREATE TABLE intranet_v3_0_dev.annexe_jours_semaine LIKE intranet_v3_0_cod.annexe_jours_semaine";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO intranet_v3_0_dev.annexe_jours_semaine ...";
+$sql = "INSERT INTO intranet_v3_0_dev.annexe_jours_semaine SELECT * FROM intranet_v2_0_prod.annexe_jours_semaine";
 if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
 
 echo "DROP intranet_v3_0_dev.annexe_allergene ...";
@@ -5043,14 +5055,14 @@ $sql = "INSERT INTO intranet_v3_0_dev.classification_fta SELECT intranet_v2_0_pr
             WHERE intranet_v2_0_prod.classification_fta.id_fta = intranet_v3_0_dev.fta.id_fta;";
 if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
 
-echo  date("H:i:s");
+echo  date("H:i:s")."\n";
 
 /**
  * Generation de la table classification_fta2*
  * excution depuis l'interface
  */
 }
-echo  date("H:i:s");
+echo  date("H:i:s")."\n";
 
 if(TRUE){
 $arrayFta = mysql_query(
@@ -5461,7 +5473,7 @@ if(TRUE){
   if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
     
 }
-echo  date("H:i:s");
+echo  date("H:i:s")."\n";
 
 /*
 

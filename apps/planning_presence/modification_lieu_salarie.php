@@ -1,8 +1,8 @@
 <?php
 /*
-Module d'appartenance (valeur obligatoire)
-Par défaut, le nom du module est le répertoire courant
-*/
+  Module d'appartenance (valeur obligatoire)
+  Par défaut, le nom du module est le répertoire courant
+ */
 //   $module=substr(strrchr(`pwd`, '/'), 1);
 //   $module=trim($module);
 
@@ -10,33 +10,30 @@ Par défaut, le nom du module est le répertoire courant
 
 
 /*
-Si la page peut être appelée depuis n'importe quel module,
-décommentez la ligne suivante
-*/
+  Si la page peut être appelée depuis n'importe quel module,
+  décommentez la ligne suivante
+ */
 
 //   $module='';
-
 //Inclusions
-
 //Sélection du mode de visualisation de la page
-switch($output)
-{
+switch ($output) {
 
-  case 'visualiser':
-       //Inclusions
-       include ("../lib/session.php");         //Récupération des variables de sessions
-       include ("../lib/functions.php");       //On inclus seulement les fonctions sans construire de page
-       include ("functions.php");              //Fonctions du module
-       echo "
+    case 'visualiser':
+        //Inclusions
+        include ("../lib/session.php");         //Récupération des variables de sessions
+        include ("../lib/functions.php");       //On inclus seulement les fonctions sans construire de page
+        include ("functions.php");              //Fonctions du module
+        echo "
             <link rel=stylesheet type=text/css href=../lib/css/intra01.css />
             <link rel=stylesheet type=text/css href=visualiser.css />
        ";
 
-  //break;
-  case 'pdf':
-  break;
+    //break;
+    case 'pdf':
+        break;
 
-  default:
+    default:
         //Inclusions
 //        include ("../lib/session.php");         //Récupération des variables de sessions
 //        include ("../lib/debut_page.php");      //Construction d'une nouvelle
@@ -48,79 +45,76 @@ switch($output)
 //        {
 //           include ("./menu_principal.inc");    //Sinon, menu par défaut
 //        }
-      require_once '../inc/main.php';
-      print_page_begin($disable_full_page, $menu_file);
+        require_once '../inc/main.php';
+        print_page_begin($disable_full_page, $menu_file);
 }//Fin de la sélection du mode d'affichage de la page
 
 
-$planning_presence_modification=  Lib::isDefined('planning_presence_modification');
-$id_salaries=  Lib::getParameterFromRequest('id_salaries');
-$id_jour=  Lib::getParameterFromRequest('id_jour');
-$id_semaine=  Lib::getParameterFromRequest('id_semaine');
-$annee=  Lib::getParameterFromRequest('annee');
+$planning_presence_modification = Lib::isDefined('planning_presence_modification');
+$id_salaries = Lib::getParameterFromRequest('id_salaries');
+$id_jour = Lib::getParameterFromRequest('id_jour');
+$id_semaine = Lib::getParameterFromRequest('id_semaine');
+$annee = Lib::getParameterFromRequest('annee');
 
 //Autorisation de d'accéder à cette page:
-if ($planning_presence_modification==0)
-{
-   header ("Location: none.php");
+if ($planning_presence_modification == 0) {
+    header("Location: none.php");
 }
 ?>
 <html>
 
-<head>
-<title>Modification du planning</title>
-<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
-<meta name="generator" content="HAPedit 2.4">
-</head>
-<body bgcolor="#FFFFFF">
-<?
+    <head>
+        <title>Modification du planning</title>
+        <meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+        <meta name="generator" content="HAPedit 2.4">
+    </head>
+    <body bgcolor="#FFFFFF">
+<?php
+/* -------------------------------------------
+  Modification du lieu de présence d'un salarié
+  ------------------------------------------- */
+/**
+ * Dictionnaire des variables:
+ * ---------------------------
+ * $prenom_salaries:          Prenom du salarié
+ * $nom_salaries:             Nom du salarié
+ * $semaine_en_cours:         Numéro de la semaine sur lequel la page va travailler (entre 1 et 52)
+ * $id_semaine:               Numéro d'une semaine envoyée à la page
+ * $annee_en_cours:           Année sur lequel travail la fonction
+ * $annee:                    Année envoyée à la page
+ * $id_salaries:              Numéro identifiant du salarié (cf table 'salaries' / champ 'id_user')
+ * $id_jour:                  1=Lundi, 2=Mardi ...etc.
+ * $jour_en_cours             Nom du jour
+ * $jour_type:                0=Journée Complète et 1=Deux demi-journée
+ * $lieu1:                    Lieu pour une journée complète ou lieu pour un matinée
+ * $lieu2:                    Lieu pour un Après-midi
+ */
 
-/*-------------------------------------------
-Modification du lieu de présence d'un salarié
--------------------------------------------*/
-
-/*
-Dictionnaire des variables:
----------------------------
-$prenom_salaries:          Prenom du salarié
-$nom_salaries:             Nom du salarié
-$semaine_en_cours:         Numéro de la semaine sur lequel la page va travailler (entre 1 et 52)
-$id_semaine:               Numéro d'une semaine envoyée à la page
-$annee_en_cours:           Année sur lequel travail la fonction
-$annee:                    Année envoyée à la page
-$id_salaries:              Numéro identifiant du salarié (cf table 'salaries' / champ 'id_user')
-$id_jour:                  1=Lundi, 2=Mardi ...etc.
-$jour_en_cours             Nom du jour
-$jour_type:                0=Journée Complète et 1=Deux demi-journée
-$lieu1:                    Lieu pour une journée complète ou lieu pour un matinée
-$lieu2:                    Lieu pour un Après-midi
-*/
 
 //Détermination des informations du salarié dont le planning est en cours de modification
 $req1 = "SELECT prenom,nom FROM salaries ";
 $req1.= "WHERE id_user=$id_salaries";
-$result1=mysql_query($req1);
-$prenom_salaries_slashes=mysql_result($result1, 0, prenom);
-$nom_salaries_slashes=mysql_result($result1, 0, nom);
-$prenom_salaries=stripslashes($prenom_salaries_slashes);
-$nom_salaries=stripslashes($nom_salaries_slashes);
+$result1 = mysql_query($req1);
+$prenom_salaries_slashes = mysql_result($result1, 0, prenom);
+$nom_salaries_slashes = mysql_result($result1, 0, nom);
+$prenom_salaries = stripslashes($prenom_salaries_slashes);
+$nom_salaries = stripslashes($nom_salaries_slashes);
 
 //Détermination du moment en cours de modification
 //Formatage de la semaine
-$taille1=strlen($id_semaine);
-$test1=substr($id_semaine, 0, 1);
-while ($test1==0)
-{
-      $id_semaine=substr($id_semaine,1-$taille);
-      $taille1=strlen($id_semaine);
-      $test1=substr($id_semaine, 0, 1);
+$taille1 = strlen($id_semaine);
+$test1 = substr($id_semaine, 0, 1);
+while ($test1 == 0) {
+    $id_semaine = substr($id_semaine, 1 - $taille);
+    $taille1 = strlen($id_semaine);
+    $test1 = substr($id_semaine, 0, 1);
 }
-$semaine_en_cours=$id_semaine;
-$annee_en_cours=$annee;
+$semaine_en_cours = $id_semaine;
+$annee_en_cours = $annee;
 $req1 = "SELECT nom_annexe_jours_semaine FROM annexe_jours_semaine ";
 $req1.= "WHERE id_annexe_jours_semaine=$id_jour";
-$result1=mysql_query($req1);
-$jour_en_cours=mysql_result($result1, 0, nom_annexe_jours_semaine);
+$result1 = mysql_query($req1);
+$jour_en_cours = mysql_result($result1, 0, nom_annexe_jours_semaine);
 
 //Caratéristiques de la journée en cours de modifications
 $req1 = "SELECT jour_type_planning_presence_detail,lieu_1_planning_presence_detail,lieu_2_planning_presence_detail"
@@ -129,28 +123,26 @@ $req1.= "WHERE id_salaries=$id_salaries ";
 $req1.= "AND id_planning_presence_semaine_visible=$semaine_en_cours ";
 $req1.= "AND annee_planning_presence_semaine_visible=$annee_en_cours ";
 $req1.= "AND id_annexe_jours_semaine=$id_jour";
-$result1=mysql_query($req1);
-$jour_type=mysql_result($result1, 0, jour_type_planning_presence_detail);
-$lieu_1_mysql=mysql_result($result1, 0, lieu_1_planning_presence_detail);
-$lieu_2_mysql=mysql_result($result1, 0, lieu_2_planning_presence_detail);
-$lieu_1=StripSlashes($lieu_1_mysql);
-$lieu_2=StripSlashes($lieu_2_mysql);
+$result1 = mysql_query($req1);
+$jour_type = mysql_result($result1, 0, jour_type_planning_presence_detail);
+$lieu_1_mysql = mysql_result($result1, 0, lieu_1_planning_presence_detail);
+$lieu_2_mysql = mysql_result($result1, 0, lieu_2_planning_presence_detail);
+$lieu_1 = StripSlashes($lieu_1_mysql);
+$lieu_2 = StripSlashes($lieu_2_mysql);
 //$lieu_1_html=htmlentities($lieu_1, ENT_QUOTES);
 //$lieu_2_html=htmlentities($lieu_2, ENT_QUOTES);
 
 
 //Sélection par défaut du bouton radio définissant si la journée est de type
 //Complète ou Matin/Après-midi.
-if ($jour_type==0)
-{
-   $check1 ="";
-   $check2 ="checked";
+if ($jour_type == 0) {
+    $check1 = "";
+    $check2 = "checked";
 }
 
-if ($jour_type==1)
-{
-   $check1 ="checked";
-   $check2 ="";
+if ($jour_type == 1) {
+    $check1 = "checked";
+    $check2 = "";
 }
 
 //Création du formulaire de saisie
@@ -188,15 +180,15 @@ echo "</td>";
 echo "</tr>";
 echo "<tr>";
 echo "<td>";
-echo "<input type=radio name=radio_type_jour value=0 $check2>Journée Complète";
+echo "<input type=radio name=radio_type_jour value=0 " . $check2 . ">Journée Complète";
 echo "</td>";
 echo "</tr>";
 echo "<tr>";
 echo "<td align=right>";
 echo "Lieu: ";
-/*echo $lieu_1;
-echo $lieu_1_html*/
-echo "<input type=text name=lieu value=`$lieu_1` size=20>";
+/* echo $lieu_1;
+  echo $lieu_1_html */
+echo "<input type=text name=lieu value=`" . $lieu_1 . "` size=20>";
 echo "</td>";
 echo "</tr>";
 //Saut de quelques lignes
@@ -208,16 +200,16 @@ echo "</td>";
 echo "</tr>";
 echo "<tr>";
 echo "<td>";
-echo "<input type=radio name=radio_type_jour value=1 $check1>Matin / Après-Midi";
+echo "<input type=radio name=radio_type_jour value=1 " . $check1 . ">Matin / Après-Midi";
 echo "</td>";
 echo "</tr>";
 echo "<tr>";
 echo "<td align=right>";
 echo "Matin: ";
-echo "<input type=text name=lieu1 value=`$lieu_1` size=20>";
+echo "<input type=text name=lieu1 value=`" . $lieu_1 . "` size=20>";
 echo "<br>";
 echo "Après-midi: ";
-echo "<input type=text name=lieu2 value=`$lieu_2` size=20>";
+echo "<input type=text name=lieu2 value=`" . $lieu_2 . "` size=20>";
 echo "</td>";
 echo "</tr>";
 echo "<tr>";

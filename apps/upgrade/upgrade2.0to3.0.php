@@ -3785,7 +3785,7 @@ if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
 /**
  * Création de tables de la V3
  */ 
-if(FASLE){
+if(FALSE){
  
 echo "DROP intranet_v3_0_dev.fta_saisie_obligatoire ...";
 $sql = "DROP TABLE intranet_v3_0_dev.fta_saisie_obligatoire";
@@ -4787,6 +4787,8 @@ while ($rowsTableFtaSuiviProjet=mysql_fetch_array($resultFtaSuiviPrjet)) {
 
 
 if(TRUE){
+    echo  date("H:i:s")."\n";
+
 $arrayIdFtaSuiviProjet = mysql_query(
                 "SELECT DISTINCT fta_suivi_projet.id_fta,id_fta_etat,createur_fta FROM intranet_v3_0_dev.fta_suivi_projet,intranet_v3_0_dev.fta "
         . " WHERE fta_suivi_projet.id_fta=fta.id_fta"
@@ -4804,7 +4806,7 @@ while ( $rowsIdFtaSuiviProjet=  mysql_fetch_array($arrayIdFtaSuiviProjet)) {
                          FROM intranet_v3_0_dev.fta "
                         . " WHERE id_fta = " . $idFta
         );
-
+    
         while ($rowIdFtaWorkflow=  mysql_fetch_array($arrayIdFtaWorkflow)) {
             $idFtaWorkflow = $rowIdFtaWorkflow['id_fta_workflow'];
         }
@@ -4824,8 +4826,10 @@ while ( $rowsIdFtaSuiviProjet=  mysql_fetch_array($arrayIdFtaSuiviProjet)) {
                                 . ' WHERE id_fta' 
                                 . '=' . $idFta
                                 . ' AND id_fta_chapitre' 
-                                . '=' . $rowsChapitre['id_fta_chapitre']
+                                . '=' . $rowsChapitre['id_fta_chapitre']                      
                 );
+                 if($arrayCheckIdSuiviProjet) {echo "[OK] \n";}else{echo "[FAILED] INSERT idFta: $idFta idFtaChapitre ".$rowsChapitre['id_fta_chapitre']."\n ";}
+
                 if (!$arrayCheckIdSuiviProjet) {
                     if ($rowsChapitre['id_fta_processus'] == 0) {
                          echo "INSERT INTO intranet_v3_0_dev." . "fta_suivi_projet." . "id_fta .". $idFta ."id_fta_chapitre" . "=" . $rowsChapitre['id_fta_chapitre']." ...";

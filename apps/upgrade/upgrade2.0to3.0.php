@@ -621,7 +621,7 @@ if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
 /**
  * Création de tables de la V2 vers V3
  */ 
-if(TRUE){
+if(FALSE){
 
 echo "DROP intranet_v3_0_dev.access_base_degust_mois ...";
 $sql = "DROP TABLE intranet_v3_0_dev.access_base_degust_mois";
@@ -3773,7 +3773,7 @@ if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
 /**
  * Création de tables de la V3
  */ 
-if(TRUE){
+if(FASLE){
  
 echo "DROP intranet_v3_0_dev.fta_saisie_obligatoire ...";
 $sql = "DROP TABLE intranet_v3_0_dev.fta_saisie_obligatoire";
@@ -4180,7 +4180,7 @@ if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
  * Création des tables dépendant de id_user
  */
 
-if(TRUE){
+if(FALSE){
 echo "DROP intranet_v3_0_dev.salaries ...";
 $sql = "DROP TABLE intranet_v3_0_dev.salaries";
 if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
@@ -4602,7 +4602,7 @@ VALUES ( \"$idFta\", \"$idAccessArti2\", \"$numft\", \"$idFtaWorkflow\" "
  * Affiliation d'un id_user au createur supprimer
  */
 
-if(TRUE){
+if(FALSE){
   $sql ="SELECT DISTINCT fta.id_fta
          FROM intranet_v3_0_dev.fta
          WHERE Site_de_production NOT 
@@ -4645,7 +4645,7 @@ if ($resultChangeIdUse) {
 /**
  * Extraction Fta suivi de projet
  */
-if(TRUE){
+if(FALSE){
 echo "DROP intranet_v3_0_dev.fta_suivi_projet ...";
 $sql = "DROP TABLE intranet_v3_0_dev.fta_suivi_projet";
 if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
@@ -4774,7 +4774,7 @@ while ($rowsTableFtaSuiviProjet=mysql_fetch_array($resultFtaSuiviPrjet)) {
  */
 
 
-if(TRUE){
+if(FALSE){
 $arrayIdFtaSuiviProjet = mysql_query(
                 "SELECT DISTINCT fta_suivi_projet.id_fta,id_fta_etat,createur_fta FROM intranet_v3_0_dev.fta_suivi_projet,intranet_v3_0_dev.fta "
         . " WHERE fta_suivi_projet.id_fta=fta.id_fta"
@@ -4866,7 +4866,7 @@ while ( $rowsIdFtaSuiviProjet=  mysql_fetch_array($arrayIdFtaSuiviProjet)) {
 /**
  * Composition
  */
- if(TRUE){
+ if(FALSE){
 echo "DROP intranet_v3_0_dev.fta_composant ...";
 $sql = "DROP TABLE intranet_v3_0_dev.fta_composant";
 if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
@@ -4964,7 +4964,7 @@ if ($arrayFtaCompositionIdGeo) {
 /**
  * Extraction  annexe emballage
  */
- if(TRUE){
+ if(FALSE){
 echo "DROP intranet_v3_0_dev.annexe_emballage_groupe_type ...";
 $sql = "DROP TABLE intranet_v3_0_dev.annexe_emballage_groupe_type";
 if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
@@ -5028,7 +5028,7 @@ if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
 /**
  * Insertion  de la nouvelle classification
  */
-if(TRUE){
+if(FALSE){
     echo "DROP intranet_v3_0_dev.classification_fta ...";
 $sql = "DROP TABLE intranet_v3_0_dev.classification_fta";
 if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
@@ -5080,7 +5080,7 @@ $sql = "ALTER TABLE classification_fta2
 if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
 
 }
-if(FALSE){
+if(TRUE){
 
 // Fta workflow structure    
     echo "ALTER TABLE intranet_v3_0_dev.fta_workflow_structure id_fta_workflow...";

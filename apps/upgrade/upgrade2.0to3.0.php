@@ -50,7 +50,7 @@ echo  date("H:i:s")."\n";
 Tables basiques
 **/
 
-if(TRUE){
+if(FALSE){
 
 echo "DROP intranet_v3_0_dev.classification_arborescence_article ...";
 $sql = "DROP TABLE intranet_v3_0_dev.classification_arborescence_article";
@@ -4786,7 +4786,7 @@ while ($rowsTableFtaSuiviProjet=mysql_fetch_array($resultFtaSuiviPrjet)) {
  */
 
 
-if(FALSE){
+if(TRUE){
 $arrayIdFtaSuiviProjet = mysql_query(
                 "SELECT DISTINCT fta_suivi_projet.id_fta,id_fta_etat,createur_fta FROM intranet_v3_0_dev.fta_suivi_projet,intranet_v3_0_dev.fta "
         . " WHERE fta_suivi_projet.id_fta=fta.id_fta"
@@ -4842,7 +4842,7 @@ while ( $rowsIdFtaSuiviProjet=  mysql_fetch_array($arrayIdFtaSuiviProjet)) {
                     } else {
                         switch ($idFtaEtat) {
                             case '1':
-                                if(mysql_query(
+                             $modif =  mysql_query(
                                         'INSERT INTO intranet_v3_0_dev.' . 'fta_suivi_projet'
                                         . '(' . 'id_fta'
                                         . ', ' . 'id_fta_chapitre'
@@ -4850,13 +4850,14 @@ while ( $rowsIdFtaSuiviProjet=  mysql_fetch_array($arrayIdFtaSuiviProjet)) {
                                         . ') VALUES (' . $idFta
                                         . ', ' . $rowsChapitre['id_fta_chapitre']
                                         . ', 0 )'
-                                ))  {echo "[OK] \n";}else{echo "[FAILED] $idFta,$rowsChapitre \n ";}
+                                );
+                            if($modif) {echo "[OK] \n";}else{echo "[FAILED] $idFta,$rowsChapitre \n ";}
                                 break;
                             case '3':
                             case '5':
                             case '6':
                                  echo "INSERT INTO intranet_v3_0_dev." . "fta_suivi_projet." . "id_fta .". $idFta ."id_fta_chapitre" . "=" . $rowsChapitre['id_fta_chapitre']." ...";
-                                if(mysql_query(
+                                $valid= mysql_query(
                                         'INSERT INTO intranet_v3_0_dev.' . 'fta_suivi_projet'
                                         . '(' . 'id_fta'
                                         . ', ' . 'id_fta_chapitre'
@@ -4864,7 +4865,8 @@ while ( $rowsIdFtaSuiviProjet=  mysql_fetch_array($arrayIdFtaSuiviProjet)) {
                                         . ') VALUES (' . $idFta
                                         . ', ' . $rowsChapitre['id_fta_chapitre']
                                         . ', ' . $createurFta . ' )'                                        
-                                ))  {echo "[OK] \n";}else{echo "[FAILED] $idFta,$rowsChapitre \n ";}
+                                );
+                                 if($valid){echo "[OK] \n";}else{echo "[FAILED] $idFta,$rowsChapitre \n ";}
                                 break;
                         }
                     }
@@ -5064,7 +5066,7 @@ echo  date("H:i:s")."\n";
 }
 echo  date("H:i:s")."\n";
 
-if(TRUE){
+if(FALSE){
 $arrayFta = mysql_query(
                 "SELECT DISTINCT fta.id_fta FROM intranet_v3_0_dev.fta,intranet_v3_0_dev.classification_fta WHERE classification_fta.id_fta =fta.id_fta "
 );
@@ -5092,7 +5094,7 @@ $sql = "ALTER TABLE classification_fta2
 if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
 
 }
-if(TRUE){
+if(FALSE){
 
 // Fta workflow structure    
     echo "ALTER TABLE intranet_v3_0_dev.fta_workflow_structure id_fta_workflow...";

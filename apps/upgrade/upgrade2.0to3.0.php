@@ -44,6 +44,8 @@ echo "*** Requêtes SQL:\n";
 // */ {
 //
 
+echo  date("H:i:s");
+
 /**
 Tables basiques
 **/
@@ -5041,13 +5043,16 @@ $sql = "INSERT INTO intranet_v3_0_dev.classification_fta SELECT intranet_v2_0_pr
             WHERE intranet_v2_0_prod.classification_fta.id_fta = intranet_v3_0_dev.fta.id_fta;";
 if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
 
+echo  date("H:i:s");
 
 /**
  * Generation de la table classification_fta2*
  * excution depuis l'interface
  */
 }
-if(FALSE){
+echo  date("H:i:s");
+
+if(TRUE){
 $arrayFta = mysql_query(
                 "SELECT DISTINCT fta.id_fta FROM intranet_v3_0_dev.fta,intranet_v3_0_dev.classification_fta WHERE classification_fta.id_fta =fta.id_fta "
 );
@@ -5456,6 +5461,8 @@ if(FALSE){
   if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
     
 }
+echo  date("H:i:s");
+
 /*
 
 mysql_close();

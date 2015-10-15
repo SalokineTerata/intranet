@@ -4824,7 +4824,9 @@ while ( $rowsIdFtaSuiviProjet=  mysql_fetch_array($arrayIdFtaSuiviProjet)) {
                                 . ' AND id_fta_chapitre' 
                                 . '=' . $rowsChapitre['id_fta_chapitre']                      
                 );
-                 while($rowsCheckIdSuiviProjet =  mysql_fetch_array($arrayCheckIdSuiviProjet)){
+                 $rowsCheckIdSuiviProjet =  mysql_fetch_array($arrayCheckIdSuiviProjet,MYSQL_ASSOC);
+                 
+                 
                  if($rowsCheckIdSuiviProjet['id_fta_suivi_projet']) {echo "[OK]$idFta \n";}else{echo "[FAILED] INSERT idFta: $idFta idFtaChapitre ".$rowsChapitre['id_fta_chapitre']."\n ";}
            
                 if (!$rowsCheckIdSuiviProjet['id_fta_suivi_projet']) {
@@ -4873,7 +4875,7 @@ while ( $rowsIdFtaSuiviProjet=  mysql_fetch_array($arrayIdFtaSuiviProjet)) {
                     }
                 }
             }
-            }
+            
         }
 }
 

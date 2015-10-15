@@ -48,7 +48,7 @@ echo "*** Requêtes SQL:\n";
 Tables basiques
 **/
 
-if(FALSE){
+if(TRUE){
 
 echo "DROP intranet_v3_0_dev.classification_arborescence_article ...";
 $sql = "DROP TABLE intranet_v3_0_dev.classification_arborescence_article";
@@ -439,7 +439,7 @@ $sql = "DROP TABLE intranet_v3_0_dev.codesoft_etiquettes";
 if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
 
 echo "CREATE TABLE intranet_v3_0_dev.codesoft_etiquettes ...";
-$sql = "CREATE TABLE intranet_v3_0_dev.codesoft_etiquettes LIKE intranet_v3_0_cod.codesoft_etiquettes";
+$sql = "CREATE TABLE intranet_v3_0_dev.codesoft_etiquettes LIKE intranet_v2_0_prod.codesoft_etiquettes";
 if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
 
 echo "INSERT INTO intranet_v3_0_dev.codesoft_etiquettes ...";
@@ -619,7 +619,7 @@ if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
 /**
  * Création de tables de la V2 vers V3
  */ 
-if(FALSE){
+if(TRUE){
 
 echo "DROP intranet_v3_0_dev.access_base_degust_mois ...";
 $sql = "DROP TABLE intranet_v3_0_dev.access_base_degust_mois";
@@ -3771,7 +3771,7 @@ if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
 /**
  * Création de tables de la V3
  */ 
-if(FALSE){
+if(TRUE){
  
 echo "DROP intranet_v3_0_dev.fta_saisie_obligatoire ...";
 $sql = "DROP TABLE intranet_v3_0_dev.fta_saisie_obligatoire";
@@ -4178,7 +4178,7 @@ if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
  * Création des tables dépendant de id_user
  */
 
-if(FALSE){
+if(TRUE){
 echo "DROP intranet_v3_0_dev.salaries ...";
 $sql = "DROP TABLE intranet_v3_0_dev.salaries";
 if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
@@ -4188,7 +4188,7 @@ $sql = "CREATE TABLE intranet_v3_0_dev.salaries LIKE intranet_v3_0_cod.salaries"
 if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
 
 echo "INSERT INTO intranet_v3_0_dev.salaries ...";
-$sql = "INSERT INTO intranet_v3_0_dev.salaries SELECT * FROM intranet_v3_0_cod.salaries";
+$sql = "INSERT INTO intranet_v3_0_dev.salaries SELECT * FROM intranet_v2_0_prod.salaries";
 if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
 
 
@@ -4585,7 +4585,7 @@ VALUES ( \"$idFta\", \"$idAccessArti2\", \"$numft\", \"$idFtaWorkflow\" "
             . ", \"$nouvel_article\", \"$k_gestion_lot\", \"$activation_codesoft_arti2\", \"$id_etiquette_codesoft_arti2\" "
             . ", \"$atmosphereProtectrice\", \"$imageEcoEmballage\", \"$libelleCodeArticleClient\", \"$idServiceConsommateur\" "
             . ", \"\", NULL)";
-
+         echo "UPDATE intranet_v3_0_dev." . "fta." . "id_fta .". $idFta ."id_fta_workflow" . "=" .$idFtaWorkflow." ...";
     mysql_query("SET NAMES 'utf8'");
     if(mysql_query($sql_inter)) {echo "[OK]\n";}else{echo "[FAILED]\n $idFta \n";}
 
@@ -4600,7 +4600,7 @@ VALUES ( \"$idFta\", \"$idAccessArti2\", \"$numft\", \"$idFtaWorkflow\" "
  * Affiliation d'un id_user au createur supprimer
  */
 
-if(FALSE){
+if(TRUE){
   $sql ="SELECT DISTINCT fta.id_fta
          FROM intranet_v3_0_dev.fta
          WHERE Site_de_production NOT 
@@ -4613,6 +4613,7 @@ if ($resultSiteDEProduction) {
         $sql_inter = "UPDATE intranet_v3_0_dev.fta
                  SET Site_de_production=1"
                 . " WHERE id_fta=" . $idFta;
+         echo "UPDATE intranet_v3_0_dev." . "fta." . "id_fta .". $idFta ."Site_de_production" . "=1" ." ...";
     if(mysql_query($sql_inter)) {echo "[OK]\n";}else{echo "[FAILED]\n $idFta \n";}
       
     }
@@ -4633,6 +4634,7 @@ if ($resultChangeIdUse) {
         $sql_inter = "UPDATE intranet_v3_0_dev.fta
                  SET createur_fta=-2"
                 . " WHERE id_fta=" . $idFta;
+ echo "UPDATE intranet_v3_0_dev." . "fta." . "id_fta .". $idFta ."createur_fta" . "=-2" ." ...";
     if(mysql_query($sql_inter)) {echo "[OK]\n";}else{echo "[FAILED]\n $idFta \n";}
       
     }
@@ -4641,7 +4643,7 @@ if ($resultChangeIdUse) {
 /**
  * Extraction Fta suivi de projet
  */
-if(FALSE){
+if(TRUE){
 echo "DROP intranet_v3_0_dev.fta_suivi_projet ...";
 $sql = "DROP TABLE intranet_v3_0_dev.fta_suivi_projet";
 if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
@@ -4759,7 +4761,7 @@ while ($rowsTableFtaSuiviProjet=mysql_fetch_array($resultFtaSuiviPrjet)) {
             . " \"" . $notification_fta_suivi_projet . "\","
             . " \"" . $correction_fta_suivi_projet . "\")"
     ;
-
+   echo "INSERT INTO intranet_v3_0_dev." . "fta_suivi_projet." . "id_fta .". $idFta ."id_fta_chapitre" . "=" . $idFtaChapitre." ...";
     mysql_query("SET NAMES 'utf8'");
    if(mysql_query($selectInsert)) {echo "[OK] \n";}else{echo "[FAILED] $idFtaSuiviProjet \n ";}
    
@@ -4770,7 +4772,7 @@ while ($rowsTableFtaSuiviProjet=mysql_fetch_array($resultFtaSuiviPrjet)) {
  */
 
 
-if(FALSE){
+if(TRUE){
 $arrayIdFtaSuiviProjet = mysql_query(
                 "SELECT DISTINCT fta_suivi_projet.id_fta,id_fta_etat,createur_fta FROM intranet_v3_0_dev.fta_suivi_projet,intranet_v3_0_dev.fta "
         . " WHERE fta_suivi_projet.id_fta=fta.id_fta"
@@ -4812,6 +4814,7 @@ while ( $rowsIdFtaSuiviProjet=  mysql_fetch_array($arrayIdFtaSuiviProjet)) {
                 );
                 if (!$arrayCheckIdSuiviProjet) {
                     if ($rowsChapitre['id_fta_processus'] == 0) {
+                         echo "INSERT INTO intranet_v3_0_dev." . "fta_suivi_projet." . "id_fta .". $idFta ."id_fta_chapitre" . "=" . $rowsChapitre['id_fta_chapitre']." ...";
                          if(mysql_query(
                                 'INSERT INTO intranet_v3_0_dev.' . 'fta_suivi_projet'
                                 . '(' . 'id_fta'
@@ -4838,6 +4841,7 @@ while ( $rowsIdFtaSuiviProjet=  mysql_fetch_array($arrayIdFtaSuiviProjet)) {
                             case '3':
                             case '5':
                             case '6':
+                                 echo "INSERT INTO intranet_v3_0_dev." . "fta_suivi_projet." . "id_fta .". $idFta ."id_fta_chapitre" . "=" . $rowsChapitre['id_fta_chapitre']." ...";
                                 if(mysql_query(
                                         'INSERT INTO intranet_v3_0_dev.' . 'fta_suivi_projet'
                                         . '(' . 'id_fta'
@@ -4845,7 +4849,7 @@ while ( $rowsIdFtaSuiviProjet=  mysql_fetch_array($arrayIdFtaSuiviProjet)) {
                                         . ', ' . 'signature_validation_suivi_projet'
                                         . ') VALUES (' . $idFta
                                         . ', ' . $rowsChapitre['id_fta_chapitre']
-                                        . ', ' . $createurFta . ' )'
+                                        . ', ' . $createurFta . ' )'                                        
                                 ))  {echo "[OK] \n";}else{echo "[FAILED] $idFta,$rowsChapitre \n ";}
                                 break;
                         }
@@ -4860,7 +4864,7 @@ while ( $rowsIdFtaSuiviProjet=  mysql_fetch_array($arrayIdFtaSuiviProjet)) {
 /**
  * Composition
  */
- if(FALSE){
+ if(TRUE){
 echo "DROP intranet_v3_0_dev.fta_composant ...";
 $sql = "DROP TABLE intranet_v3_0_dev.fta_composant";
 if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
@@ -4893,7 +4897,8 @@ if ($arrayFtaCompositionParagraphe) {
 
         $sql_inter = "UPDATE intranet_v3_0_dev." . 'fta_composant'
                 . " SET " . 'k_style_paragraphe_ingredient_fta_composition'. "=4"
-                . " WHERE " . 'id_fta_composant' . "=" . $idFtaComposant;
+                . " WHERE " . 'id_fta_composant' . "=" . $idFtaComposant;  
+        echo "UPDATE intranet_v3_0_dev." . "fta_composant." . "k_style_paragraphe_ingredient_fta_composition id_fta_composant" . "=" . $idFtaComposant." ...";
       if(mysql_query($sql_inter)) {	echo "[OK]\n";}else{echo "[FAILED] $idFtaComposant \n";}
         
     }
@@ -4916,6 +4921,7 @@ if ($arrayFtaCompositionEtiquette) {
         $sql_inter = "UPDATE intranet_v3_0_dev." . 'fta_composant'
                 . " SET " . 'k_etiquette_fta_composition' . "=-1"
                 . " WHERE " . 'id_fta_composant' . "=" . $idFtaComposant;
+        echo "UPDATE intranet_v3_0_dev." . "fta_composant." . "k_etiquette_fta_composition id_fta_composant" . "=" . $idFtaComposant." ...";
         if(mysql_query($sql_inter)) {	echo "[OK]\n";}else{echo "[FAILED] $idFtaComposant \n";}
     }
 }
@@ -4945,6 +4951,7 @@ if ($arrayFtaCompositionIdGeo) {
         $sql_inter = "UPDATE intranet_v3_0_dev." . 'fta_composant'
                 . " SET " . 'id_geo' . "=" . $idGeo
                 . " WHERE " .'id_fta_composant' . "=" . $idFtaComposant;
+       echo "UPDATE intranet_v3_0_dev." . "fta_composant." . 'id_geo' . "=" . $idGeo. " id_fta_composant" . "=" . $idFtaComposant." ...";
        if(mysql_query($sql_inter)) {	echo "[OK]\n";}else{echo "[FAILED] $idFtaComposant \n";}
     }
 }
@@ -4955,7 +4962,7 @@ if ($arrayFtaCompositionIdGeo) {
 /**
  * Extraction  annexe emballage
  */
- if(FALSE){
+ if(TRUE){
 echo "DROP intranet_v3_0_dev.annexe_emballage_groupe_type ...";
 $sql = "DROP TABLE intranet_v3_0_dev.annexe_emballage_groupe_type";
 if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
@@ -5019,7 +5026,7 @@ if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
 /**
  * Insertion  de la nouvelle classification
  */
-if(FALSE){
+if(TRUE){
     echo "DROP intranet_v3_0_dev.classification_fta ...";
 $sql = "DROP TABLE intranet_v3_0_dev.classification_fta";
 if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
@@ -5068,7 +5075,7 @@ $sql = "ALTER TABLE classification_fta2
 if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
 
 }
-if(TRUE){
+if(FALSE){
 
 // Fta workflow structure    
     echo "ALTER TABLE intranet_v3_0_dev.fta_workflow_structure id_fta_workflow...";

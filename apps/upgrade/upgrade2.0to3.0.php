@@ -4803,8 +4803,7 @@ while ( $rowsIdFtaSuiviProjet=  mysql_fetch_array($arrayIdFtaSuiviProjet)) {
 
     $arrayIdFtaWorkflow = mysql_query(
                         "SELECT DISTINCT id_fta_workflow
-                         FROM intranet_v3_0_dev.fta "
-                        . " WHERE id_fta = " . $idFta
+                         FROM intranet_v3_0_dev.fta  WHERE id_fta = " . $idFta
         );
     
         while ($rowIdFtaWorkflow=  mysql_fetch_array($arrayIdFtaWorkflow)) {
@@ -4812,10 +4811,7 @@ while ( $rowsIdFtaSuiviProjet=  mysql_fetch_array($arrayIdFtaSuiviProjet)) {
         }
         if ($idFtaWorkflow) {
             $arrayChapitre = mysql_query(
-                            'SELECT id_fta_chapitre, id_fta_processus '
-                            . ' FROM intranet_v3_0_dev.fta_workflow_structure' 
-                            . ' WHERE id_fta_workflow' 
-                            . '=' . $idFtaWorkflow
+                            'SELECT id_fta_chapitre, id_fta_processus  FROM intranet_v3_0_dev.fta_workflow_structure WHERE id_fta_workflow =' . $idFtaWorkflow
             );
 
 
@@ -4828,9 +4824,10 @@ while ( $rowsIdFtaSuiviProjet=  mysql_fetch_array($arrayIdFtaSuiviProjet)) {
                                 . ' AND id_fta_chapitre' 
                                 . '=' . $rowsChapitre['id_fta_chapitre']                      
                 );
-                 if($arrayCheckIdSuiviProjet) {echo "[OK] \n";}else{echo "[FAILED] INSERT idFta: $idFta idFtaChapitre ".$rowsChapitre['id_fta_chapitre']."\n ";}
-
-                if (!$arrayCheckIdSuiviProjet) {
+                 while($rowsCheckIdSuiviProjet =  mysql_fetch_array($arrayCheckIdSuiviProjet)){
+                 if($rowsCheckIdSuiviProjet['id_fta_suivi_projet']) {echo "[OK]$idFta \n";}else{echo "[FAILED] INSERT idFta: $idFta idFtaChapitre ".$rowsChapitre['id_fta_chapitre']."\n ";}
+           
+                if (!$rowsCheckIdSuiviProjet['id_fta_suivi_projet']) {
                     if ($rowsChapitre['id_fta_processus'] == 0) {
                          echo "INSERT INTO intranet_v3_0_dev." . "fta_suivi_projet." . "id_fta .". $idFta ."id_fta_chapitre" . "=" . $rowsChapitre['id_fta_chapitre']." ...";
                          if(mysql_query(
@@ -4875,6 +4872,7 @@ while ( $rowsIdFtaSuiviProjet=  mysql_fetch_array($arrayIdFtaSuiviProjet)) {
                         }
                     }
                 }
+            }
             }
         }
 }

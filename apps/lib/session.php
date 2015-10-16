@@ -37,5 +37,5 @@ $globalConfig->openDatabaseConnexion();
  * Construction de la description de la base de données et 
  * stockage en session PHP
  */
-//$globalConfig->buildDatabaseDescription();
+$globalConfig->buildDatabaseDescription();
 

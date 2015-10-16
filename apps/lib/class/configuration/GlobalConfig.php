@@ -142,7 +142,7 @@ class GlobalConfig {
         if (GlobalConfig::getDatabaseDescriptionIsInitialized() == NULL
 //                ||                $this->getConf()->getSessionDebugEnable()
         ) {
-            DatabaseDescription::buildDatabaseDescription($this->getConf()->getMysqlDatabaseName());
+//            DatabaseDescription::buildDatabaseDescription($this->getConf()->getMysqlDatabaseName());
 
             /**
              * Liste des modules public

@@ -50,7 +50,7 @@ switch ($output) {
 
 $id_fta = Lib::getParameterFromRequest(FtaModel::KEYNAME);
 $synthese_action = Lib::getParameterFromRequest('synthese_action');
-$id_fta_chapitre_encours = Lib::getParameterFromRequest('id_fta_chapitre_encours', AccueilFta::VALUE_1);
+$id_fta_chapitre_encours = Lib::getParameterFromRequest('id_fta_chapitre_encours', '1');
 $comeback = Lib::getParameterFromRequest('comeback');
 $idFtaEtat = Lib::getParameterFromRequest(FtaEtatModel::KEYNAME);
 $abreviationFtaEtat = Lib::getParameterFromRequest(FtaEtatModel::FIELDNAME_ABREVIATION);

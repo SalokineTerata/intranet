@@ -212,11 +212,11 @@ class AccueilFta {
      */
     private static function getHtmlTableauSythese($paramRole, $paramEtat, $paramNomEtat, $paramIdFtaRole, $paramSyntheseAction) {
 
-        $idKeyNameFtaEtat = AccueilFta::VALUE_0;
+        $idKeyNameFtaEtat = '0';
         $tableau_synthese = '';
 
         if (!self::$nombreFta) {
-            self::$nombreFta = AccueilFta::VALUE_0;
+            self::$nombreFta = '0';
         }
         switch (self::$syntheseAction) {
             case FtaEtatModel::ETAT_AVANCEMENT_VALUE_ATTENTE:
@@ -237,11 +237,11 @@ class AccueilFta {
 
         switch ($paramNomEtat) {
             case FtaEtatModel::ETAT_ABREVIATION_VALUE_MODIFICATION:
-                $lien[AccueilFta::VALUE_0] = '<a href=index.php?id_fta_etat=1'
+                $lien['0'] = '<a href=index.php?id_fta_etat=1'
                         . '&nom_fta_etat=' . FtaEtatModel::ETAT_ABREVIATION_VALUE_MODIFICATION
                         . '&id_fta_role=' . $paramIdFtaRole
                         . '&synthese_action=attente >En attente' . $nombreFta1 . '</a>';
-                $lien[AccueilFta::VALUE_1] = ' <a href=index.php?id_fta_etat=1'
+                $lien['1'] = ' <a href=index.php?id_fta_etat=1'
                         . '&nom_fta_etat=' . FtaEtatModel::ETAT_ABREVIATION_VALUE_MODIFICATION
                         . '&id_fta_role=' . $paramIdFtaRole
                         . '&synthese_action=encours >En cours' . $nombreFta2 . '</a>';
@@ -251,27 +251,27 @@ class AccueilFta {
                         . '&synthese_action=correction >Effectuées' . $nombreFta3 . '</a>';
                 break;
             case FtaEtatModel::ETAT_ABREVIATION_VALUE_VALIDE:
-                $lien[AccueilFta::VALUE_0] = '<a href=index.php?id_fta_etat=3'
+                $lien['0'] = '<a href=index.php?id_fta_etat=3'
                         . '&nom_fta_etat=' . FtaEtatModel::ETAT_ABREVIATION_VALUE_VALIDE
                         . '&id_fta_role=' . $paramIdFtaRole
                         . '&synthese_action=all >Voir' . $nombreFta4 . '</a>';
-                $lien[AccueilFta::VALUE_1] = '';
+                $lien['1'] = '';
                 $lien[AccueilFta::VALUE_2] = '';
                 break;
             case FtaEtatModel::ETAT_ABREVIATION_VALUE_ARCHIVE:
-                $lien[AccueilFta::VALUE_0] = '<a href=index.php?id_fta_etat=5'
+                $lien['0'] = '<a href=index.php?id_fta_etat=5'
                         . '&nom_fta_etat=' . FtaEtatModel::ETAT_ABREVIATION_VALUE_ARCHIVE
                         . '&id_fta_role=' . $paramIdFtaRole
                         . '&synthese_action=all >Voir' . $nombreFta4 . '</a>';
-                $lien[AccueilFta::VALUE_1] = '';
+                $lien['1'] = '';
                 $lien[AccueilFta::VALUE_2] = '';
                 break;
             case FtaEtatModel::ETAT_ABREVIATION_VALUE_RETIRE:
-                $lien[AccueilFta::VALUE_0] = '<a href=index.php?id_fta_etat=6'
+                $lien['0'] = '<a href=index.php?id_fta_etat=6'
                         . '&nom_fta_etat=' . FtaEtatModel::ETAT_ABREVIATION_VALUE_RETIRE
                         . '&id_fta_role=' . $paramIdFtaRole
                         . '&synthese_action=all >Voir' . $nombreFta4 . '</a>';
-                $lien[AccueilFta::VALUE_1] = '';
+                $lien['1'] = '';
                 $lien[AccueilFta::VALUE_2] = '';
                 break;
         }
@@ -288,8 +288,8 @@ class AccueilFta {
         /*
          * Données du tableau
          */
-        $tableau_synthese .= self::getLineSynthese($paramRole, $paramEtat, $paramIdFtaRole, $paramNomEtat, $paramSyntheseAction, $lien, $idFieldNomFtaRole = AccueilFta::VALUE_0, $idKeyNameFtaEtat = AccueilFta::VALUE_0, $idKeyValueFtaEtatAvancement = AccueilFta::VALUE_0);
-        $tableau_synthese .= self::getLineSynthese($paramRole, $paramEtat, $paramIdFtaRole, $paramNomEtat, $paramSyntheseAction, $lien, $idFieldNomFtaRole = AccueilFta::VALUE_1, $idKeyNameFtaEtat = AccueilFta::VALUE_1, $idKeyValueFtaEtatAvancement = AccueilFta::VALUE_1);
+        $tableau_synthese .= self::getLineSynthese($paramRole, $paramEtat, $paramIdFtaRole, $paramNomEtat, $paramSyntheseAction, $lien, $idFieldNomFtaRole = '0', $idKeyNameFtaEtat = '0', $idKeyValueFtaEtatAvancement = '0');
+        $tableau_synthese .= self::getLineSynthese($paramRole, $paramEtat, $paramIdFtaRole, $paramNomEtat, $paramSyntheseAction, $lien, $idFieldNomFtaRole = '1', $idKeyNameFtaEtat = '1', $idKeyValueFtaEtatAvancement = '1');
         $tableau_synthese .= self::getLineSynthese($paramRole, $paramEtat, $paramIdFtaRole, $paramNomEtat, $paramSyntheseAction, $lien, $idFieldNomFtaRole = AccueilFta::VALUE_2, $idKeyNameFtaEtat = AccueilFta::VALUE_2, $idKeyValueFtaEtatAvancement = AccueilFta::VALUE_2);
         $tableau_synthese .= self::getLineSynthese($paramRole, $paramEtat, $paramIdFtaRole, $paramNomEtat, $paramSyntheseAction, $lien, $idFieldNomFtaRole = AccueilFta::VALUE_3, $idKeyNameFtaEtat = AccueilFta::VALUE_3, $idKeyValueFtaEtatAvancement = AccueilFta::VALUE_3);
         $tableau_synthese .= self::getLineSynthese($paramRole, $paramEtat, $paramIdFtaRole, $paramNomEtat, $paramSyntheseAction, $lien, $idFieldNomFtaRole = AccueilFta::VALUE_4, $idKeyNameFtaEtat = AccueilFta::VALUE_4, $idKeyValueFtaEtatAvancement = AccueilFta::VALUE_3);
@@ -318,8 +318,8 @@ class AccueilFta {
         /*
          * Infobulle affichant le noms des sites de production des fta par workflow
          */
-        $paramNameSite0 = self::getNameSiteByWorkflow($paramNameSiteByWorkflow, $idKeyNameFtaSite = AccueilFta::VALUE_0);
-        $paramNameSite1 = self::getNameSiteByWorkflow($paramNameSiteByWorkflow, $idKeyNameFtaSite = AccueilFta::VALUE_1);
+        $paramNameSite0 = self::getNameSiteByWorkflow($paramNameSiteByWorkflow, $idKeyNameFtaSite = '0');
+        $paramNameSite1 = self::getNameSiteByWorkflow($paramNameSiteByWorkflow, $idKeyNameFtaSite = '1');
         $paramNameSite2 = self::getNameSiteByWorkflow($paramNameSiteByWorkflow, $idKeyNameFtaSite = AccueilFta::VALUE_2);
         $paramNameSite3 = self::getNameSiteByWorkflow($paramNameSiteByWorkflow, $idKeyNameFtaSite = AccueilFta::VALUE_3);
         $paramNameSite4 = self::getNameSiteByWorkflow($paramNameSiteByWorkflow, $idKeyNameFtaSite = AccueilFta::VALUE_4);
@@ -330,8 +330,8 @@ class AccueilFta {
         /**
          * Element de la ligne
          */
-        $tableau_synthese .=self::getLineSyntheseWorkflow($paramWorkflow, $idKeyNameFtaWorkflow = AccueilFta::VALUE_0, $paramNameSite, $idKeyNameFtaSite = AccueilFta::VALUE_0);
-        $tableau_synthese .=self::getLineSyntheseWorkflow($paramWorkflow, $idKeyNameFtaWorkflow = AccueilFta::VALUE_1, $paramNameSite, $idKeyNameFtaSite = AccueilFta::VALUE_1);
+        $tableau_synthese .=self::getLineSyntheseWorkflow($paramWorkflow, $idKeyNameFtaWorkflow = '0', $paramNameSite, $idKeyNameFtaSite = '0');
+        $tableau_synthese .=self::getLineSyntheseWorkflow($paramWorkflow, $idKeyNameFtaWorkflow = '1', $paramNameSite, $idKeyNameFtaSite = '1');
         $tableau_synthese .=self::getLineSyntheseWorkflow($paramWorkflow, $idKeyNameFtaWorkflow = AccueilFta::VALUE_2, $paramNameSite, $idKeyNameFtaSite = AccueilFta::VALUE_2);
         $tableau_synthese .=self::getLineSyntheseWorkflow($paramWorkflow, $idKeyNameFtaWorkflow = AccueilFta::VALUE_3, $paramNameSite, $idKeyNameFtaSite = AccueilFta::VALUE_3);
         $tableau_synthese .=self::getLineSyntheseWorkflow($paramWorkflow, $idKeyNameFtaWorkflow = AccueilFta::VALUE_4, $paramNameSite, $idKeyNameFtaSite = AccueilFta::VALUE_4);
@@ -415,14 +415,14 @@ class AccueilFta {
 
 
         switch ($idKeyValueFtaEtatAvancement) {
-            case AccueilFta::VALUE_0:
+            case '0':
                 $ligneEtatAvancement = 'attente';
                 if ($lien[AccueilFta::VALUE_2] == NULL) {
                     $ligneEtatAvancement = 'all';
                 }
                 break;
 
-            case AccueilFta::VALUE_1:
+            case '1':
                 $ligneEtatAvancement = 'encours';
                 break;
 
@@ -437,11 +437,11 @@ class AccueilFta {
 
         return '<TR>'
                 . '<td ' . $color . '  id=\'' . $paramArrayRole[$idFieldNomFtaRole][FtaRoleModel::FIELDNAME_NOM_FTA_ROLE] . '\'> '
-                . '<a href=index.php?id_fta_etat=' . $paramArrayEtat[AccueilFta::VALUE_0][FtaEtatModel::KEYNAME]
-                . '&nom_fta_etat=' . $paramArrayEtat[AccueilFta::VALUE_0][FtaEtatModel::FIELDNAME_ABREVIATION]
+                . '<a href=index.php?id_fta_etat=' . $paramArrayEtat['0'][FtaEtatModel::KEYNAME]
+                . '&nom_fta_etat=' . $paramArrayEtat['0'][FtaEtatModel::FIELDNAME_ABREVIATION]
                 . '&id_fta_role=' . $paramArrayRole[$idFieldNomFtaRole][FtaRoleModel::KEYNAME]
                 . '&synthese_action='
-                . AccueilFta::getLienByEtatFta($paramArrayEtat[AccueilFta::VALUE_0][FtaEtatModel::FIELDNAME_ABREVIATION], $paramArrayEtat [AccueilFta::VALUE_0][FtaEtatModel::FIELDNAME_ABREVIATION])
+                . AccueilFta::getLienByEtatFta($paramArrayEtat['0'][FtaEtatModel::FIELDNAME_ABREVIATION], $paramArrayEtat ['0'][FtaEtatModel::FIELDNAME_ABREVIATION])
                 . $paramArrayRole[$idFieldNomFtaRole][FtaRoleModel::FIELDNAME_DESCRIPTION_FTA_ROLE]
                 . '</a>'
                 . '</td>'
@@ -484,18 +484,18 @@ class AccueilFta {
 
         switch (self::$syntheseAction) {
             case FtaEtatModel::ETAT_AVANCEMENT_VALUE_ATTENTE:
-                $URL = substr($URL, AccueilFta::VALUE_0, strpos($URL, self::$syntheseAction) + AccueilFta::VALUE_7);
+                $URL = substr($URL, '0', strpos($URL, self::$syntheseAction) + AccueilFta::VALUE_7);
 
                 break;
             case FtaEtatModel::ETAT_AVANCEMENT_VALUE_EN_COURS:
-                $URL = substr($URL, AccueilFta::VALUE_0, strpos($URL, self::$syntheseAction) + AccueilFta::VALUE_7);
+                $URL = substr($URL, '0', strpos($URL, self::$syntheseAction) + AccueilFta::VALUE_7);
                 break;
             case FtaEtatModel::ETAT_AVANCEMENT_VALUE_EFFECTUES:
-                $URL = substr($URL, AccueilFta::VALUE_0, strpos($URL, self::$syntheseAction) + AccueilFta::VALUE_10);
+                $URL = substr($URL, '0', strpos($URL, self::$syntheseAction) + '10');
                 break;
 
             case FtaEtatModel::ETAT_AVANCEMENT_VALUE_ALL:
-                $URL = substr($URL, AccueilFta::VALUE_0, strpos($URL, self::$syntheseAction) + AccueilFta::VALUE_3);
+                $URL = substr($URL, '0', strpos($URL, self::$syntheseAction) + AccueilFta::VALUE_3);
                 break;
         }
         if (substr($URL, -2) == 'in') {
@@ -532,10 +532,10 @@ class AccueilFta {
                 . '</th>';
 
         $tmp = null;
-        if (self::$arrayIdFtaByUserAndWorkflow[AccueilFta::VALUE_1]) {
+        if (self::$arrayIdFtaByUserAndWorkflow['1']) {
             $createurNTmp = null;
             $createurTrTmp = null;
-            foreach (self::$arrayIdFtaByUserAndWorkflow[AccueilFta::VALUE_1] as $rowsDetail) {
+            foreach (self::$arrayIdFtaByUserAndWorkflow['1'] as $rowsDetail) {
                 $workflowDescription = $rowsDetail[FtaWorkflowModel::FIELDNAME_DESCRIPTION_FTA_WORKFLOW];
                 $workflowName = $rowsDetail[FtaWorkflowModel::FIELDNAME_NOM_FTA_WORKFLOW];
 
@@ -621,7 +621,7 @@ class AccueilFta {
                  * Designation commerciale
                  */
                 if (strlen($designationCommercialeFta) > 55) {
-                    $designationCommercialeFta = substr($designationCommercialeFta, AccueilFta::VALUE_0, 52) . '...';
+                    $designationCommercialeFta = substr($designationCommercialeFta, '0', 52) . '...';
                 }
                 if ($LIBELLE) {
                     $din = $LIBELLE;
@@ -640,7 +640,7 @@ class AccueilFta {
                  */
 
                 $taux_temp = FtaSuiviProjetModel::getFtaTauxValidation($idFta);
-                $recap[$idFta] = round($taux_temp[AccueilFta::VALUE_0] * AccueilFta::VALUE_100, AccueilFta::VALUE_0) . '%';
+                $recap[$idFta] = round($taux_temp['0'] * '100', '0') . '%';
 
                 /*
                  * Definition de la couleur de la cellule selon l'état d'avancement
@@ -648,12 +648,12 @@ class AccueilFta {
 
                 switch (self::$syntheseAction) {
                     case FtaEtatModel::ETAT_AVANCEMENT_VALUE_ATTENTE:
-                        $ok = AccueilFta::VALUE_0;
+                        $ok = '0';
                         $bgcolor = 'bgcolor=#A5A5CE ';
 
                         break;
                     case FtaEtatModel::ETAT_AVANCEMENT_VALUE_EN_COURS:
-                        $ok = AccueilFta::VALUE_1;
+                        $ok = '1';
                         $bgcolor = '';
 
                         break;
@@ -685,7 +685,7 @@ class AccueilFta {
 //    Contient le code source HTML utilisé pour la fonction visualiser_fiches()
 //echo $HTML_date_echeance_fta['status'];
                 switch ($HTML_date_echeance_fta['status']) {
-                    case AccueilFta::VALUE_1:
+                    case '1':
                         $bgcolor_header = $bgcolor;
                         $icon_header = '<img src=../lib/images/exclamation.png title=\'Certaines échéances sont dépassées !\' width=30 height=27 border=0 />';
                         break;
@@ -743,12 +743,12 @@ class AccueilFta {
                 if (
                         (
 //$ok == AccueilFta::VALUE_2 and
-                        self::$idFtaRole == AccueilFta::VALUE_1 and $recap[$idFta] == AccueilFta::VALUE_100_POURCENTAGE
+                        self::$idFtaRole == '1' and $recap[$idFta] == '100%'
 //                        and ( $abreviationFtaEtat == FtaEtatModel::ETAT_ABREVIATION_VALUE_MODIFICATION )
-                        )or ( $ok == AccueilFta::VALUE_2 and $accesTransitionButton == FALSE && $recap[$idFta] == AccueilFta::VALUE_100_POURCENTAGE) and (
+                        )or ( $ok == AccueilFta::VALUE_2 and $accesTransitionButton == FALSE && $recap[$idFta] == '100%') and (
                         self::$abrevationFtaEtat == FtaEtatModel::ETAT_ABREVIATION_VALUE_MODIFICATION
                         ) or ( self::$syntheseAction == FtaEtatModel::ETAT_AVANCEMENT_VALUE_ALL ) and self::$ftaModification
-                        or ( self::$idFtaRole == AccueilFta::VALUE_1 and self::$syntheseAction == FtaEtatModel::ETAT_AVANCEMENT_VALUE_EFFECTUES)
+                        or ( self::$idFtaRole == '1' and self::$syntheseAction == FtaEtatModel::ETAT_AVANCEMENT_VALUE_EFFECTUES)
                 ) {
                     $actions .= '<a '
                             . 'href=transiter.php'
@@ -758,9 +758,9 @@ class AccueilFta {
                             . '</a>'
                     ;
 
-                    if (self::$syntheseAction == FtaEtatModel::ETAT_AVANCEMENT_VALUE_EFFECTUES and $recap[$idFta] == AccueilFta::VALUE_100_POURCENTAGE) {
+                    if (self::$syntheseAction == FtaEtatModel::ETAT_AVANCEMENT_VALUE_EFFECTUES and $recap[$idFta] == '100%') {
                         $selection = '<input type=\'checkbox\' name=selection_fta value=\'' . $idFta . '\' checked />';
-                        $traitementDeMasse = AccueilFta::VALUE_1;
+                        $traitementDeMasse = '1';
                         $selection_width = '2%';
                         $StringFta .= $idFta . ',';
                         $tableauFiche .= '<input type=hidden name=arrayFta value=' . $StringFta . '>';
@@ -773,7 +773,7 @@ class AccueilFta {
                 /*
                  * Retirer une FTA en cours de modification
                  */
-                if ($valueIsGestionnaire == AccueilFta::VALUE_1) {
+                if ($valueIsGestionnaire == '1') {
                     if ($abreviationFtaEtat <> FtaEtatModel::ETAT_ABREVIATION_VALUE_RETIRE) {
                         $actions .= '<a '
                                 . 'href=# '
@@ -816,13 +816,13 @@ class AccueilFta {
                         $service .= $rowsService[FtaRoleModel::FIELDNAME_DESCRIPTION_FTA_ROLE] . '<br>';
                     }
                 }
-                if ($recap[$idFta] <> AccueilFta::VALUE_100_POURCENTAGE) {
+                if ($recap[$idFta] <> '100%') {
                     $createurFtaTr = $createurFta;
                     $workflowTR = $workflowDescription;
                     $diffWorkflowTr = $workflowTR <> $workflowTrTmp;
                     if ($diffWorkflowTr) {
                         $tableauFicheTr2 .= $tableauFicheTrWork . $tableauFicheTr;
-                        $nombreDeCellule = AccueilFta::VALUE_12;
+                        $nombreDeCellule = '12';
                         $tableauFicheTrWork = '<tbody  id=\'' . $workflowName . '\' >'
                                 . '<tr class=contenu>'
                                 . '<td  class=titre COLSPAN=' . $nombreDeCellule . '>' . $workflowDescription . '</td>'
@@ -837,7 +837,7 @@ class AccueilFta {
                     $diffWorkflowN = $workflowN <> $workflowNTmp;
                     if ($diffWorkflowN) {
                         $tableauFicheN2.= $tableauFicheNWork . $tableauFicheN;
-                        $nombreDeCellule = AccueilFta::VALUE_12;
+                        $nombreDeCellule = '12';
                         $tableauFicheNWork = '<tbody  id=\'' . $workflowName . '\' >'
                                 . '<tr class=contenu>'
                                 . '<td  class=titre COLSPAN=' . $nombreDeCellule . '>' . $workflowDescription . '</td>'
@@ -866,7 +866,7 @@ class AccueilFta {
                      */
                     $htmlField->setIsEditable(TRUE);
                     $commentaire = $htmlField->getHtmlResult();
-                    if ($recap[$idFta] == AccueilFta::VALUE_100_POURCENTAGE) {
+                    if ($recap[$idFta] == '100%') {
                         if ($createurFtaN <> $createurNTmp or $diffWorkflowN) {
                             $tableauFicheN = '<tr class=contenu>'
                                     . '<td COLSPAN=' . $nombreDeCellule . ' ><font size=2 >' . $createurPrenom . ' ' . $createurNom . ' </td>'
@@ -966,7 +966,7 @@ class AccueilFta {
                     /*
                      * Nouvelle ligne pour créateur
                      */
-                    if ($recap[$idFta] == AccueilFta::VALUE_100_POURCENTAGE) {
+                    if ($recap[$idFta] == '100%') {
                         if ($createurFtaN <> $createurNTmp or $diffWorkflowN) {
                             $tableauFicheTmp .= '<tr class=contenu>'
                                     . '<td COLSPAN=' . $nombreDeCellule . ' > <font size=2 >' . $createurPrenom . ' ' . $createurNom . ' </td>'
@@ -1155,7 +1155,7 @@ class AccueilFta {
             if ($paramIsEditable <> FALSE) {
                 $key = array_keys($table);
                 if (!$paramNomDefaut) {
-                    $paramNomDefaut = $key[AccueilFta::VALUE_1];
+                    $paramNomDefaut = $key['1'];
                 }
 
 //Création de la liste déroulante
@@ -1171,20 +1171,20 @@ class AccueilFta {
 //Création du contenu de la liste
                 $array = DatabaseOperation::convertSqlStatementKeyAndOneFieldToArray($paramRequeteSQL);
                 foreach ($array as $rows) {
-                    if ($rows[AccueilFta::VALUE_0] == $paramIdDefaut) {
+                    if ($rows['0'] == $paramIdDefaut) {
                         $selected = ' selected';
                     } else {
                         $selected = '';
                     }
 
-                    $html_liste .= '<option value=' . $rows[AccueilFta::VALUE_0] . '  ' . $selected . '>' . $rows[AccueilFta::VALUE_1] . '</option>';
+                    $html_liste .= '<option value=' . $rows['0'] . '  ' . $selected . '>' . $rows['1'] . '</option>';
                 }
                 $html_liste .= '</select>';
             } else {
                 $array = DatabaseOperation::convertSqlStatementKeyAndOneFieldToArray($paramRequeteSQL);
                 foreach ($array as $rows) {
-                    if ($rows[AccueilFta::VALUE_0] == $paramIdDefaut) {
-                        $html_listeTMP = $rows[AccueilFta::VALUE_1];
+                    if ($rows['0'] == $paramIdDefaut) {
+                        $html_listeTMP = $rows['1'];
                     } else {
                         $html_liste = NULL;
                     }

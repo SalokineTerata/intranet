@@ -891,7 +891,7 @@ class Chapitre {
 //        //Libellé etiquette carton:
 //        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_LIBELLE_CLIENT);
         //Modèle d'étiquette
-        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_ETIQUETTE_CODESOFT);
+        $bloc.=$ftaView->ListeCodesoftEtiquettes($id_fta, $isEditable);
 
         return $bloc;
     }
@@ -924,7 +924,7 @@ class Chapitre {
 //        //Libellé etiquette carton: ou Logo spécifique étiquette ?
 //        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_LIBELLE_CLIENT);
         //Modèle d'étiquette
-        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_ETIQUETTE_CODESOFT);
+        $bloc.=$ftaView->ListeCodesoftEtiquettes($id_fta, $isEditable);
 
 
         return $bloc;
@@ -1399,7 +1399,7 @@ class Chapitre {
         $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_LIBELLE_CLIENT);
 
         //Modèle d'étiquette
-        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_ETIQUETTE_CODESOFT);
+        $bloc.=$ftaView->ListeCodesoftEtiquettes($id_fta, $isEditable);
 
         $bloc.='<tr class=titre_principal><td class>Etiquettes Composition</td></tr>';
 
@@ -1815,7 +1815,7 @@ class Chapitre {
         $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_LIBELLE_CLIENT);
 
         //Modèle d'étiquette
-        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_ETIQUETTE_CODESOFT);
+        $bloc.=$ftaView->ListeCodesoftEtiquettes($id_fta, $isEditable);
 
         $bloc.='<tr class=titre_principal><td class>Etiquettes Composition</td></tr>';
 

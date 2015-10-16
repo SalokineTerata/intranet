@@ -1,6 +1,6 @@
 <?php
 
-//include('../inc/php.php');
+include('../inc/php.php');
 
 //$autologin = null;
 //$enable_autologin = false;

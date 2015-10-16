@@ -242,7 +242,7 @@ class DatabaseDescription {
         /**
          * Recherche de la documentation des champs
          */
-//        self::buildApplicationDocumentationDescription();
+        self::buildApplicationDocumentationDescription();
 
         /**
          * Récupération des relations des tables dans le schéma de la
@@ -326,9 +326,9 @@ class DatabaseDescription {
             $idDoc = $rowsDoc['id_intranet_column_info'];
             $contentSql = $rowsDoc['sql_request_content_intranet_column_info'];
             if ($contentSql) {
-                $contentArray = DatabaseOperation::convertSqlStatementWithKeyAndOneFieldToArray(
-                                $contentSql
-                );
+//                $contentArray = DatabaseOperation::convertSqlStatementWithKeyAndOneFieldToArray(
+//                                $contentSql
+//                );
             } else {
                 $contentArray = NULL;
             }

@@ -25,7 +25,7 @@ require_once ('../plugins/fpdi/fpdi.php');
 
 
 // Inclusions génériques
-//require_once('../lib/class/configuration/GlobalConfig.php');
+require_once('../lib/class/configuration/GlobalConfig.php');
 require_once('../lib/functions.php');
 require_once('../lib/functions.mail.php');
 require_once('../lib/functions.mysql.php');

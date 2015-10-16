@@ -299,6 +299,7 @@ class DatabaseDescription {
         /**
          * Recherche de la documentation des champs
          */
+        ini_set('max_execution_time','-1');
         $arrayDoc = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
                         'SELECT table_name_intranet_column_info'
                         . ',column_name_intranet_column_info'

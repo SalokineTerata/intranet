@@ -140,7 +140,7 @@ class FtaWorkflowStructureModel extends AbstractModel {
                 $idProcessus[] = $rowsProcessusAcces[FtaWorkflowStructureModel::FIELDNAME_ID_FTA_PROCESSUS];
             }
         } else {
-            $idProcessus = array(AccueilFta::VALUE_0);
+            $idProcessus = array('0');
         }
         return $idProcessus;
     }

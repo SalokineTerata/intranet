@@ -429,7 +429,7 @@ class Navigation {
                 }
             }
 
-            if (self::$id_fta_etat == AccueilFta::VALUE_1) {
+            if (self::$id_fta_etat == '1') {
 
                 //Création de la liste des processus dans la barre de navigation          
                 $t_liste_processus = array_merge($ProcessusEncoursVisible, $ProcessusPrecedentVisible, $ProcessusEnLecture);

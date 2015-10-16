@@ -327,7 +327,7 @@ class FtaTransitionModel {
                                 . " AND " . UserModel::TABLENAME . "." . UserModel::FIELDNAME_ACTIF . " ='oui' "
                                 . " AND " . IntranetDroitsAccesModel::TABLENAME . "." . IntranetDroitsAccesModel::FIELDNAME_ID_INTRANET_MODULES . " = 19"
                                 . " AND " . IntranetDroitsAccesModel::TABLENAME . "." . IntranetDroitsAccesModel::FIELDNAME_NIVEAU_INTRANET_DROITS_ACCES . " = 1 "
-                                . ' AND ' . IntranetDroitsAccesModel::FIELDNAME_ID_INTRANET_ACTIONS . '=' . AccueilFta::VALUE_3
+                                . ' AND ' . IntranetDroitsAccesModel::FIELDNAME_ID_INTRANET_ACTIONS . '=' . '3'
                 );
                 foreach ($arrayListeDiffusion as $value) {
                     $idUser[] = $value[UserModel::KEYNAME];

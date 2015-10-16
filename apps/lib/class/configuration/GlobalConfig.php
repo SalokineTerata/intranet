@@ -151,7 +151,7 @@ class GlobalConfig {
                             'SELECT ' . IntranetModulesModel::FIELDNAME_NOM_USUEL_INTRANET_MODULES
                             . ', ' . IntranetModulesModel::FIELDNAME_NOM_INTRANET_MODULES
                             . ' FROM ' . IntranetModulesModel::TABLENAME
-                            . ' WHERE ' . IntranetModulesModel::FIELDNAME_PUBLIC_INTRANET_MODULES . '=' . AccueilFta::VALUE_1 . ' '
+                            . ' WHERE ' . IntranetModulesModel::FIELDNAME_PUBLIC_INTRANET_MODULES . '=' . '1' . ' '
                             . ' ORDER BY ' . IntranetModulesModel::FIELDNAME_CLASSEMENT_INTRANET_MODULES . ' DESC'
             );
 

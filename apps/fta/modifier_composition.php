@@ -649,7 +649,7 @@ if ($mode_etiquette_fta_composition == 1 or $mode_etiquette_fta_composition == 2
 
 //Activation uniquement de celui correspondant à la taille de la police choisie
     switch ($taille_police_ingredient_fta_composition) {
-        case AccueilFta::VALUE_4:
+        case '4':
             $checked4 = "checked";
             break;
         case AccueilFta::VALUE_5:

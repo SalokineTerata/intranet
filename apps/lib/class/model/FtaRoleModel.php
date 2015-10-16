@@ -17,7 +17,7 @@ class FtaRoleModel extends AbstractModel {
     public static function getKeyNameOfFirstRoleByIdUser($paramIdUser) {
 
         $arrayFtaRole = FtaRoleModel::getIdFtaRoleByIdUser($paramIdUser);
-        return $arrayFtaRole[AccueilFta::VALUE_0][FtaRoleModel::KEYNAME];
+        return $arrayFtaRole['0'][FtaRoleModel::KEYNAME];
     }
 
     public static function getIdFtaRoleByIdUser($paramIdUser) {

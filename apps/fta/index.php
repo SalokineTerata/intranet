@@ -68,7 +68,7 @@ if ($id_user) {
     $tableau_fiche = Lib::getParameterFromRequest('tableau_fiche');
     $visualiser_fiche_total_fta = Lib::getParameterFromRequest('visualiser_fiche_total_fta');
     $order_common = Lib::getParameterFromRequest('order_common', FtaWorkflowModel::KEYNAME);
-    $numeroDePageCourante = Lib::getParameterFromRequest('numeroPage', AccueilFta::VALUE_1);
+    $numeroDePageCourante = Lib::getParameterFromRequest('numeroPage', '1');
 
 
     /*
@@ -155,7 +155,7 @@ if ($id_user) {
     /**
      * Calcul des enregistrements à afficher
      */
-    $debut = ($numeroDePageCourante - AccueilFta::VALUE_1) * AccueilFta::VALUE_MAX_PAR_PAGE;
+    $debut = ($numeroDePageCourante - '1') * AccueilFta::VALUE_MAX_PAR_PAGE;
     /*
      * Initialisation des valeurs
      */
@@ -187,7 +187,7 @@ if ($id_user) {
             //$tableau_fiche = AccueilFta::getTableauFiche($id_fta_etat, $choix, $isLimit, $order_common);
             $tableau_fiche = AccueilFta::getHtmlTableauFiche();
             $fileAriane = AccueilFta::getFileAriane();
-            $pagination = AccueilFta::paginer(AccueilFta::VALUE_MAX_PAR_PAGE, $numeroDePageCourante, AccueilFta::VALUE_4, AccueilFta::VALUE_4, AccueilFta::VALUE_1, AccueilFta::VALUE_1);
+            $pagination = AccueilFta::paginer(AccueilFta::VALUE_MAX_PAR_PAGE, $numeroDePageCourante, '4', '4', '1', '1');
         }
         /*
           //        if ($isLimit) {

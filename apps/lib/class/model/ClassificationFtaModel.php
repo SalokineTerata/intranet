@@ -248,7 +248,7 @@ class ClassificationFtaModel extends AbstractModel {
         if ($array) {
             $nombre_ligne = count($array);
         } else {
-            $nombre_ligne = AccueilFta::VALUE_0;
+            $nombre_ligne = '0';
         }
 
         /*

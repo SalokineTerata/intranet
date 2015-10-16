@@ -242,7 +242,7 @@ class DatabaseDescription {
         /**
          * Recherche de la documentation des champs
          */
-        self::buildApplicationDocumentationDescription();
+//        self::buildApplicationDocumentationDescription();
 
         /**
          * Récupération des relations des tables dans le schéma de la

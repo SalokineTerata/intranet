@@ -187,7 +187,7 @@ if ($id_user) {
             //$tableau_fiche = AccueilFta::getTableauFiche($id_fta_etat, $choix, $isLimit, $order_common);
             $tableau_fiche = AccueilFta::getHtmlTableauFiche();
             $fileAriane = AccueilFta::getFileAriane();
-            $pagination = AccueilFta::paginer(AccueilFta::VALUE_MAX_PAR_PAGE, $numeroDePageCourante, AccueilFta::VALUE_4, AccueilFta::VALUE_4, '1', '1');
+            $pagination = AccueilFta::paginer(AccueilFta::VALUE_MAX_PAR_PAGE, $numeroDePageCourante, '4', '4', '1', '1');
         }
         /*
           //        if ($isLimit) {

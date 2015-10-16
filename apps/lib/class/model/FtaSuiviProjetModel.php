@@ -572,7 +572,7 @@ class FtaSuiviProjetModel extends AbstractModel {
 //Dictionnaire des données
         $return['0'];     //Pourcentage globale de la validation
         $return['1'];     //Tableau de résultat par id_fta_processus des taux de validation
-        $return[AccueilFta::VALUE_2];     //Tableau de résultat par id_fta_processus des état des processus (Terminé, En cours, En attente)
+        $return['2'];     //Tableau de résultat par id_fta_processus des état des processus (Terminé, En cours, En attente)
         /*
          * Récupération du l'état de la FTA pour connatire le cycle de vie en cours
          */

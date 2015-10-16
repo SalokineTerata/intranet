@@ -85,7 +85,7 @@ class UserModel extends AbstractModel {
                             . ' LIMIT ' . AccueilFta::VALUE_MAX_PAR_PAGE . ' OFFSET ' . $paramDebut
             );
 
-            $array[AccueilFta::VALUE_2] = DatabaseOperation::getRowsNumberOverLimitInSqlStatement(
+            $array['2'] = DatabaseOperation::getRowsNumberOverLimitInSqlStatement(
                             'SELECT SQL_CALC_FOUND_ROWS ' . FtaModel::TABLENAME . '.' . FtaModel::KEYNAME
                             . ', ' . FtaEtatModel::FIELDNAME_ABREVIATION . ', ' . FtaModel::FIELDNAME_LIBELLE
                             . ', ' . FtaWorkflowModel::FIELDNAME_DESCRIPTION_FTA_WORKFLOW . ', ' . FtaWorkflowModel::FIELDNAME_NOM_FTA_WORKFLOW
@@ -117,7 +117,7 @@ class UserModel extends AbstractModel {
                 $idFta2[] = $rowsArrayIdFta[FtaModel::KEYNAME];
             }
 
-            $array[AccueilFta::VALUE_3] = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
+            $array['3'] = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
                             'SELECT DISTINCT ' . FtaWorkflowModel::TABLENAME . '.*'
                             . ' FROM ' . FtaModel::TABLENAME . ',' . FtaWorkflowModel::TABLENAME
                             . ' WHERE ( ' . '0' . ' ' . FtaModel::AddIdFTaValidProcess($idFta2) . ')'

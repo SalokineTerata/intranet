@@ -456,6 +456,10 @@ echo "CREATE TABLE intranet_v3_0_dev.codesoft_etiquettes ...";
 $sql = "CREATE TABLE intranet_v3_0_dev.codesoft_etiquettes LIKE intranet_v2_0_prod.codesoft_etiquettes";
 if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
 
+echo "ALTER TABLE  intranet_v3_0_dev.codesoft_etiquettes ...";
+$sql = "ALTER TABLE  intranet_v3_0_dev.codesoft_etiquettes ENGINE = INNODB";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
 echo "INSERT INTO intranet_v3_0_dev.codesoft_etiquettes ...";
 $sql = "INSERT INTO intranet_v3_0_dev.codesoft_etiquettes SELECT * FROM intranet_v2_0_prod.codesoft_etiquettes";
 if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}

@@ -212,7 +212,7 @@ class ClassificationFta2Model extends AbstractModel {
                         ' SELECT ' . IntranetDroitsAccesModel::FIELDNAME_NIVEAU_INTRANET_DROITS_ACCES
                         . ' FROM ' . IntranetDroitsAccesModel::TABLENAME
                         . ' WHERE ' . IntranetDroitsAccesModel::FIELDNAME_ID_USER . '=' . $paramIdUser
-                        . ' AND ' . IntranetDroitsAccesModel::FIELDNAME_ID_INTRANET_ACTIONS . '=' . AccueilFta::VALUE_2
+                        . ' AND ' . IntranetDroitsAccesModel::FIELDNAME_ID_INTRANET_ACTIONS . '=' . '2'
                         . ' AND ' . IntranetDroitsAccesModel::FIELDNAME_ID_INTRANET_MODULES . '=18'
         );
         foreach ($arrayModification as $rowsModifications) {

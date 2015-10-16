@@ -57,7 +57,7 @@ class UserModel extends AbstractModel {
                 $idFta[] = $rowsArrayIdFta[FtaModel::KEYNAME];
             }
 
-            $array[AccueilFta::VALUE_1] = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
+            $array['1'] = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
                             'SELECT DISTINCT ' . FtaModel::TABLENAME . '.' . FtaModel::KEYNAME
                             . ', ' . FtaEtatModel::FIELDNAME_ABREVIATION . ', ' . FtaModel::FIELDNAME_LIBELLE
                             . ', ' . FtaWorkflowModel::FIELDNAME_DESCRIPTION_FTA_WORKFLOW . ', ' . FtaWorkflowModel::FIELDNAME_NOM_FTA_WORKFLOW
@@ -113,14 +113,14 @@ class UserModel extends AbstractModel {
                             . ' LIMIT ' . AccueilFta::VALUE_MAX_PAR_PAGE . ' OFFSET ' . $paramDebut
             );
 
-            foreach ($array[AccueilFta::VALUE_1] as $rowsArrayIdFta) {
+            foreach ($array['1'] as $rowsArrayIdFta) {
                 $idFta2[] = $rowsArrayIdFta[FtaModel::KEYNAME];
             }
 
             $array[AccueilFta::VALUE_3] = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
                             'SELECT DISTINCT ' . FtaWorkflowModel::TABLENAME . '.*'
                             . ' FROM ' . FtaModel::TABLENAME . ',' . FtaWorkflowModel::TABLENAME
-                            . ' WHERE ( ' . AccueilFta::VALUE_0 . ' ' . FtaModel::AddIdFTaValidProcess($idFta2) . ')'
+                            . ' WHERE ( ' . '0' . ' ' . FtaModel::AddIdFTaValidProcess($idFta2) . ')'
                             . ' AND ' . FtaModel::TABLENAME . '.' . FtaModel::FIELDNAME_WORKFLOW
                             . '=' . FtaWorkflowModel::TABLENAME . '.' . FtaWorkflowModel::KEYNAME
             );

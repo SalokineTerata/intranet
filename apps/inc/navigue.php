@@ -65,10 +65,10 @@ if ($id_user) {//Si l'utilisateur est connecté
                     . ' FROM ' . IntranetModulesModel::TABLENAME . ', ' . IntranetDroitsAccesModel::TABLENAME
                     . ' WHERE (' . IntranetModulesModel::TABLENAME . '.' . IntranetModulesModel::KEYNAME
                     . '=' . IntranetDroitsAccesModel::TABLENAME . '.' . IntranetDroitsAccesModel::FIELDNAME_ID_INTRANET_MODULES
-                    . ' AND ' . IntranetModulesModel::FIELDNAME_VISIBLE_INTRANET_MODULES . '=' . AccueilFta::VALUE_1
-                    . ' AND ' . IntranetDroitsAccesModel::FIELDNAME_ID_INTRANET_ACTIONS . '=' . AccueilFta::VALUE_1
+                    . ' AND ' . IntranetModulesModel::FIELDNAME_VISIBLE_INTRANET_MODULES . '=' . '1'
+                    . ' AND ' . IntranetDroitsAccesModel::FIELDNAME_ID_INTRANET_ACTIONS . '=' . '1'
                     . ' AND ' . IntranetDroitsAccesModel::TABLENAME . '.' . IntranetDroitsAccesModel::FIELDNAME_ID_USER . '=' . $id_user . ' '
-                    . ' AND ' . IntranetDroitsAccesModel::TABLENAME . '.' . IntranetDroitsAccesModel::FIELDNAME_NIVEAU_INTRANET_DROITS_ACCES . '=' . AccueilFta::VALUE_1 . ') '
+                    . ' AND ' . IntranetDroitsAccesModel::TABLENAME . '.' . IntranetDroitsAccesModel::FIELDNAME_NIVEAU_INTRANET_DROITS_ACCES . '=' . '1' . ') '
                     . ' ORDER BY ' . IntranetModulesModel::FIELDNAME_CLASSEMENT_INTRANET_MODULES . ' DESC'
     );
 

@@ -184,14 +184,14 @@ class FtaProcessusDelaiModel extends AbstractModel {
      */
     public static function BuildFtaProcessusValidationDelai($paramIdFta, $paramIdFtaProcessus, $paramIdFtaWorkflow) {
         $valideFtaProcessusDelai = NULL;       //L'échéance est-elle validée ? (Oui=1, Non=0)
-        $return = AccueilFta::VALUE_0;
+        $return = '0';
         $etatEcheance = FtaProcessusModel::getValideProcessusEncours($paramIdFta, $paramIdFtaProcessus, $paramIdFtaWorkflow);
         switch ($etatEcheance) {
             case 1: //Le processus à validé tous ses chapitres
-                $valideFtaProcessusDelai = AccueilFta::VALUE_1;
+                $valideFtaProcessusDelai = '1';
                 break;
             default://Sinon, il reste encore des chapitres à valider
-                $valideFtaProcessusDelai = AccueilFta::VALUE_0;
+                $valideFtaProcessusDelai = '0';
         }
 
         //Existe-il déjà un enregistrement sur ce délai ?
@@ -215,7 +215,7 @@ class FtaProcessusDelaiModel extends AbstractModel {
                             . 'WHERE ' . FtaProcessusDelaiModel::KEYNAME . ' =\'' . $idFtaProcessusDelai . '\' '
                     ;
                     DatabaseOperation::query($req);
-                    $return = AccueilFta::VALUE_1;
+                    $return = '1';
                 }
             }
         }

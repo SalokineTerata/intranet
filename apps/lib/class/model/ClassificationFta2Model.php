@@ -56,8 +56,8 @@ class ClassificationFta2Model extends AbstractModel {
     public static function getListeClassificationProprietaireGroupe($paramIdDefaut, $isEditable) {
         $req = 'SELECT ' . ClassificationArborescenceArticleCategorieContenuModel::KEYNAME . ',' . ClassificationArborescenceArticleCategorieContenuModel::FIELDNAME_NOM_CLASSIFICATION_ARBORESCENCE_ARTICLE_CATEGORIE_CONTENU
                 . ' FROM ' . ClassificationArborescenceArticleCategorieContenuModel::TABLENAME
-                . ' WHERE ' . ClassificationArborescenceArticleCategorieContenuModel::FIELDNAME_ID_CLASSIFICATION_ARBORESCENCE_ARTICLE_CATEGORIE . '=' . AccueilFta::VALUE_1
-                . ' AND ' . ClassificationArborescenceArticleCategorieContenuModel::KEYNAME . '<>' . AccueilFta::VALUE_0
+                . ' WHERE ' . ClassificationArborescenceArticleCategorieContenuModel::FIELDNAME_ID_CLASSIFICATION_ARBORESCENCE_ARTICLE_CATEGORIE . '=' . '1'
+                . ' AND ' . ClassificationArborescenceArticleCategorieContenuModel::KEYNAME . '<>' . '0'
                 . ' ORDER BY ' . ClassificationArborescenceArticleCategorieContenuModel::FIELDNAME_NOM_CLASSIFICATION_ARBORESCENCE_ARTICLE_CATEGORIE_CONTENU;
 
         $paramNomDefaut = 'selection_proprietaire1';
@@ -68,8 +68,8 @@ class ClassificationFta2Model extends AbstractModel {
     public static function getListeClassificationProprietaireGroupeLabel($paramIdDefaut, $paramIsEditable) {
         $req = 'SELECT ' . ClassificationArborescenceArticleCategorieContenuModel::KEYNAME . ',' . ClassificationArborescenceArticleCategorieContenuModel::FIELDNAME_NOM_CLASSIFICATION_ARBORESCENCE_ARTICLE_CATEGORIE_CONTENU
                 . ' FROM ' . ClassificationArborescenceArticleCategorieContenuModel::TABLENAME
-                . ' WHERE ' . ClassificationArborescenceArticleCategorieContenuModel::FIELDNAME_ID_CLASSIFICATION_ARBORESCENCE_ARTICLE_CATEGORIE . '=' . AccueilFta::VALUE_1
-                . ' AND ' . ClassificationArborescenceArticleCategorieContenuModel::KEYNAME . '<>' . AccueilFta::VALUE_0
+                . ' WHERE ' . ClassificationArborescenceArticleCategorieContenuModel::FIELDNAME_ID_CLASSIFICATION_ARBORESCENCE_ARTICLE_CATEGORIE . '=' . '1'
+                . ' AND ' . ClassificationArborescenceArticleCategorieContenuModel::KEYNAME . '<>' . '0'
                 . ' ORDER BY ' . ClassificationArborescenceArticleCategorieContenuModel::FIELDNAME_NOM_CLASSIFICATION_ARBORESCENCE_ARTICLE_CATEGORIE_CONTENU;
 
         $paramNomDefaut = 'selection_proprietaire1';

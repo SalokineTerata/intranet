@@ -570,8 +570,8 @@ class FtaSuiviProjetModel extends AbstractModel {
     public static function getFtaTauxValidation($paramIdFta) {
 
 //Dictionnaire des données
-        $return[AccueilFta::VALUE_0];     //Pourcentage globale de la validation
-        $return[AccueilFta::VALUE_1];     //Tableau de résultat par id_fta_processus des taux de validation
+        $return['0'];     //Pourcentage globale de la validation
+        $return['1'];     //Tableau de résultat par id_fta_processus des taux de validation
         $return[AccueilFta::VALUE_2];     //Tableau de résultat par id_fta_processus des état des processus (Terminé, En cours, En attente)
         /*
          * Récupération du l'état de la FTA pour connatire le cycle de vie en cours
@@ -613,9 +613,9 @@ class FtaSuiviProjetModel extends AbstractModel {
         );
         $totalChapitre = count($arrayChapitreTotal);
         if ($currentChapitre) {
-            $return[AccueilFta::VALUE_0] = $currentChapitre / $totalChapitre;
+            $return['0'] = $currentChapitre / $totalChapitre;
         } else {
-            $return[AccueilFta::VALUE_0] = AccueilFta::VALUE_0;
+            $return['0'] = '0';
         }
         $arrayCycle = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
                         'SELECT DISTINCT ' . FtaProcessusCycleModel::FIELDNAME_PROCESSUS_INIT

@@ -101,7 +101,7 @@ class IntranetDroitsAccesModel {
         $arrayModule = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
                         'SELECT ' . IntranetModulesModel::KEYNAME . ',' . IntranetModulesModel::FIELDNAME_NOM_USUEL_INTRANET_MODULES
                         . ' FROM ' . IntranetModulesModel::TABLENAME
-                        . ' WHERE ' . IntranetModulesModel::FIELDNAME_VISIBLE_INTRANET_MODULES . '=' . AccueilFta::VALUE_1
+                        . ' WHERE ' . IntranetModulesModel::FIELDNAME_VISIBLE_INTRANET_MODULES . '=' . '1'
                         . ' ORDER BY ' . IntranetModulesModel::FIELDNAME_NOM_USUEL_INTRANET_MODULES . ' ASC');
         $colonne = 6;
 
@@ -211,7 +211,7 @@ class IntranetDroitsAccesModel {
                                 . ', ' . IntranetActionsModel::FIELDNAME_DESCRIPTION_INTRANET_ACTIONS
                                 . ', ' . IntranetActionsModel::FIELDNAME_MODULE_INTRANET_ACTIONS
                                 . ' FROM ' . IntranetActionsModel::TABLENAME
-                                . ' WHERE ' . IntranetActionsModel::FIELDNAME_MODULE_INTRANET_ACTIONS . '=' . AccueilFta::VALUE_0
+                                . ' WHERE ' . IntranetActionsModel::FIELDNAME_MODULE_INTRANET_ACTIONS . '=' . '0'
                 );
                 $ftaDroitsAccesGlobaux = '<table width=500 border=1>';
                 foreach ($arrayActionsGlobaux as $rowsActionsGlobaux) {
@@ -254,7 +254,7 @@ class IntranetDroitsAccesModel {
                                 . ' FROM ' . IntranetModulesModel::TABLENAME . ',' . IntranetActionsModel::TABLENAME
                                 . ' WHERE ' . IntranetModulesModel::TABLENAME . '.' . IntranetModulesModel::KEYNAME
                                 . '=' . $idIntranetModules
-                                . ' AND (' . IntranetActionsModel::FIELDNAME_MODULE_INTRANET_ACTIONS . '=' . AccueilFta::VALUE_0
+                                . ' AND (' . IntranetActionsModel::FIELDNAME_MODULE_INTRANET_ACTIONS . '=' . '0'
                                 . ' OR ' . IntranetActionsModel::FIELDNAME_MODULE_INTRANET_ACTIONS . '=' . $idIntranetModules . ')'
                 );
 
@@ -448,7 +448,7 @@ class IntranetDroitsAccesModel {
                         ' SELECT ' . IntranetDroitsAccesModel::FIELDNAME_NIVEAU_INTRANET_DROITS_ACCES
                         . ' FROM ' . IntranetDroitsAccesModel::TABLENAME
                         . ' WHERE ' . IntranetDroitsAccesModel::FIELDNAME_ID_USER . '=' . $paramIdUser
-                        . ' AND ' . IntranetDroitsAccesModel::FIELDNAME_ID_INTRANET_ACTIONS . '=' . AccueilFta::VALUE_1
+                        . ' AND ' . IntranetDroitsAccesModel::FIELDNAME_ID_INTRANET_ACTIONS . '=' . '1'
                         . ' AND ' . IntranetDroitsAccesModel::FIELDNAME_ID_INTRANET_MODULES . '=19'
         );
         foreach ($arrayConsultation as $rowsConsultation) {

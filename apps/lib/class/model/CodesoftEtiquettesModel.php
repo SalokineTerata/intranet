@@ -16,4 +16,38 @@ class CodesoftEtiquettesModel extends AbstractModel {
         parent::__construct($paramId, $paramIsCreateRecordsetInDatabaseIfKeyDoesntExist);
     }
 
+    static public function getListeCodesoftEtiquettes($paramIdFta, $paramIsEditable) {
+        $HtmlList = new HtmlListSelect();
+        $ftaModel = new FtaModel($paramIdFta);
+        $SiteDeProduction = $ftaModel->getDataField(FtaModel::FIELDNAME_SITE_ASSEMBLAGE)->getFieldValue();
+
+
+        $arrayEtiquette = DatabaseOperation::convertSqlStatementWithKeyAndOneFieldToArray(
+                        'SELECT DISTINCT ' . CodesoftEtiquettesModel::KEYNAME . ',' . CodesoftEtiquettesModel::FIELDNAME_DESIGNATION_CODESOFT_ETIQUETTES
+                        . ' FROM ' . CodesoftEtiquettesModel::TABLENAME
+                        . ' WHERE (' . CodesoftEtiquettesModel::FIELDNAME_K_SITE . '=' . $SiteDeProduction
+                        . ' OR ' . CodesoftEtiquettesModel::FIELDNAME_K_SITE . '=0)'
+                        . ' AND (' . CodesoftEtiquettesModel::FIELDNAME_K_TYPE_ETIQUETTE_CODESOFT_ETIQUETTES . '<>2)'
+                        . ' ORDER BY ' . CodesoftEtiquettesModel::FIELDNAME_DESIGNATION_CODESOFT_ETIQUETTES
+        );
+
+        $HtmlList->setArrayListContent($arrayEtiquette);
+
+        $HtmlTableName = FtaModel::TABLENAME
+                . '_'
+                . FtaModel::FIELDNAME_ETIQUETTE_CODESOFT
+                . '_'
+                . $paramIdFta
+        ;
+        $HtmlList->getAttributes()->getName()->setValue(FtaModel::FIELDNAME_ETIQUETTE_CODESOFT);
+        $HtmlList->setLabel(DatabaseDescription::getFieldDocLabel(CodesoftEtiquettesModel::TABLENAME, CodesoftEtiquettesModel::FIELDNAME_DESIGNATION_CODESOFT_ETIQUETTES));
+        $HtmlList->setIsEditable($paramIsEditable);
+        $HtmlList->initAbstractHtmlSelect(
+                $HtmlTableName, $HtmlList->getLabel(), $ftaModel->getDataField(FtaModel::FIELDNAME_ETIQUETTE_CODESOFT)->getFieldValue(), NULL, $HtmlList->getArrayListContent());
+        $HtmlList->getEventsForm()->setOnChangeWithAjaxAutoSave(FtaModel::TABLENAME, FtaModel::KEYNAME, $paramIdFta, FtaModel::FIELDNAME_ETIQUETTE_CODESOFT);
+        $listeCodesoftEtiquettes = $HtmlList->getHtmlResult();
+        
+        return $listeCodesoftEtiquettes;
+    }
+
 }

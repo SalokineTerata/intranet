@@ -165,9 +165,15 @@ class DatabaseOperation {
      */
     public static function query($paramRequest) {
 
-        $firstTime = microtime(true);
         $result = mysql_query($paramRequest);
-        $time = round(microtime(true) - $firstTime, 4);
+        $time_start = DatabaseOperation::microtime_float();
+
+        // Attend pendant un moment
+        usleep(100);
+
+        $time_end = DatabaseOperation::microtime_float();
+        $time = $time_end - $time_start;
+
         self::setQueriesInfo($paramRequest, $time, self::IncrementQueryCount());
         return $result;
     }
@@ -178,9 +184,15 @@ class DatabaseOperation {
      * @return type
      */
     public static function queryPDO($paramRequest) {
-        $firstTime = microtime(true);
         $result = DatabaseOperation::databaseAcces()->query($paramRequest);
-        $time = round(microtime(true) - $firstTime, 4);
+        $time_start = DatabaseOperation::microtime_float();
+
+        // Attend pendant un moment
+        usleep(100);
+
+        $time_end = DatabaseOperation::microtime_float();
+        $time = $time_end - $time_start;
+
         self::setQueriesInfo($paramRequest, $time, self::IncrementQueryCount());
         return $result;
     }
@@ -191,12 +203,17 @@ class DatabaseOperation {
      * @return type
      */
     public static function execute($paramRequest) {
-        $firstTime = microtime(true);
         $pdo = DatabaseOperation::databaseAcces();
         $result = $pdo->prepare($paramRequest);
         $result->closeCursor();
-        $validation =$result->execute();
-        $time = round(microtime(true) - $firstTime, 4);
+        $validation = $result->execute();
+        $time_start = DatabaseOperation::microtime_float();
+
+        // Attend pendant un moment
+        usleep(100);
+
+        $time_end = DatabaseOperation::microtime_float();
+        $time = $time_end - $time_start;
         self::setQueriesInfo($paramRequest, $time, self::IncrementQueryCount());
 
         return $pdo;
@@ -430,6 +447,14 @@ class DatabaseOperation {
         $special_page = "MYSQL_QUERIES";
         $title = "MySQL - " . count(DatabaseOperation::$queriesInfo) . " requêtes";
         return Html::popup("popup_queries_info", $default_message, $title, $special_page);
+    }
+
+    /**
+     * Fonction simple identique à celle en PHP 5 qui va suivre
+     */
+    public static function microtime_float() {
+        list($usec, $sec) = explode(" ", microtime());
+        return ((float) $usec + (float) $sec);
     }
 
     /**

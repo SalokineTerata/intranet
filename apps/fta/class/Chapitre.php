@@ -2180,7 +2180,8 @@ class Chapitre {
 
         //Recherche du droit d'accès correspondant
         if (
-                self::$synthese_action == FtaEtatModel::ETAT_AVANCEMENT_VALUE_EN_COURS and self::$is_owner == true and (
+//                self::$synthese_action == FtaEtatModel::ETAT_AVANCEMENT_VALUE_EN_COURS and
+                 self::$is_owner == true and (
                 (self::$ftaSuiviProjetModel->getDataField(FtaSuiviProjetModel::FIELDNAME_SIGNATURE_VALIDATION_SUIVI_PROJET)->getFieldValue() == 0 )
                 or ( self::$ftaSuiviProjetModel->getDataField(FtaSuiviProjetModel::FIELDNAME_SIGNATURE_VALIDATION_SUIVI_PROJET)->getFieldValue() == null)
                 )

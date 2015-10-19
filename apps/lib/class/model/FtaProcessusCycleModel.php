@@ -103,8 +103,8 @@ class FtaProcessusCycleModel extends AbstractModel {
     
     /**
      * Liste des processus pouvant être validé
-     * @param type $paramIdWorkflow
-     * @return type
+     * @param int $paramIdWorkflow
+     * @return array
      */
     public static function getArrayProcessusValidationFTA($paramIdWorkflow){
         $arrayProcessusValidation = DatabaseOperation::convertSqlStatementWithoutKeyToArray(

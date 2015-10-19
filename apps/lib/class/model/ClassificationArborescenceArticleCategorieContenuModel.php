@@ -17,6 +17,12 @@ class ClassificationArborescenceArticleCategorieContenuModel extends AbstractMod
         parent::__construct($paramId, $paramIsCreateRecordsetInDatabaseIfKeyDoesntExist);
     }
 
+    /**
+     * Recuperation de l'id Propriétaire Groupe de la Fta pour la page d'accueil
+     * @param int $paramIdClassif
+     * @param string $paramSelect
+     * @return int
+     */
     public static function getElementClassificationFta($paramIdClassif, $paramSelect) {
         if ($paramIdClassif) {
             $classificationFta2 = new ClassificationFta2Model($paramIdClassif);

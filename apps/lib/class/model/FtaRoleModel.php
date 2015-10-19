@@ -14,12 +14,22 @@ class FtaRoleModel extends AbstractModel {
     const FIELDNAME_NOM_FTA_ROLE = 'nom_fta_role';
     const FIELDNAME_IS_GESTIONNAIRE = 'is_gestionnaire';
 
+    /**
+     * On obtient l'id du rôle le plus en amot dans le cycle de validation
+     * @param int $paramIdUser
+     * @return array
+     */
     public static function getKeyNameOfFirstRoleByIdUser($paramIdUser) {
 
         $arrayFtaRole = FtaRoleModel::getIdFtaRoleByIdUser($paramIdUser);
         return $arrayFtaRole['0'][FtaRoleModel::KEYNAME];
     }
 
+    /**
+     * On obtient la liste des rôle auxquelles l'utilisateur connecté à les accès
+     * @param int $paramIdUser
+     * @return array
+     */
     public static function getIdFtaRoleByIdUser($paramIdUser) {
         $arrayIdFtaRole = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
                         'SELECT DISTINCT ' . FtaRoleModel::TABLENAME . '.' . FtaRoleModel::KEYNAME
@@ -43,6 +53,12 @@ class FtaRoleModel extends AbstractModel {
         return $arrayIdFtaRole;
     }
 
+    /**
+     * On obtient le niveau auxquelles la Fta se situe
+     * @param int $paramIdFta
+     * @param int $paramIdWorkflow
+     * @return array
+     */
     public static function getNameRoleEncoursByIdFta($paramIdFta, $paramIdWorkflow) {
 
         /*
@@ -110,7 +126,12 @@ class FtaRoleModel extends AbstractModel {
         return $array;
     }
 
-    public static function AddIdRole($paramIdRole) {
+    /**
+     * 
+     * @param int $paramIdRole
+     * @return string
+     */
+    private static function AddIdRole($paramIdRole) {
         if ($paramIdRole) {
             foreach ($paramIdRole as $value) {
                 $req .= ' OR ' . ' ' . FtaRoleModel::KEYNAME . '=' . $value . ' ';
@@ -119,6 +140,11 @@ class FtaRoleModel extends AbstractModel {
         return $req;
     }
 
+    /**
+     * On obtient le nom des rôles
+     * @param int $paramIdRole
+     * @return array
+     */
     public static function getNameRoleByIdRole($paramIdRole) {
         $arrayRole = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
                         'SELECT ' . FtaRoleModel::FIELDNAME_DESCRIPTION_FTA_ROLE
@@ -130,6 +156,12 @@ class FtaRoleModel extends AbstractModel {
         return $arrayRole[0][FtaRoleModel::FIELDNAME_DESCRIPTION_FTA_ROLE];
     }
 
+    /**
+     * On vérifie selon le role de l'utilisateur connecté 
+     * si il a accès aux boutoon transition en permanence
+     * @param int $paramIdRole
+     * @return int
+     */
     public static function getValueIsGestionnaire($paramIdRole) {
         $arrayIsGestionnaire = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
                         'SELECT ' . FtaRoleModel::FIELDNAME_IS_GESTIONNAIRE

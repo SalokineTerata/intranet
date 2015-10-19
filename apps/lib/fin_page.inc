@@ -16,7 +16,7 @@ if ($globalConfig->getConf()->getExecDebugEnable()) {
     $message = print_r($_SESSION['mysql_column_info'], true);
     $show_php_session = popup('popup_php_session', $message, 'PHP' . ' - ' . $exec_debug_time_show);
     foreach ($_SESSION['queriesInfo'] as $value) {
-       $time = $value['time']; 
+       $time = $value['time_complete']; 
     }
 
     $debug_info = ' | ' . $show_queries_info_popup . ' | ' . $show_php_session. ' | ' . $time;

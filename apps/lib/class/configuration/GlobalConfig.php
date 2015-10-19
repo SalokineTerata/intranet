@@ -188,32 +188,49 @@ class GlobalConfig {
          * Chargement de la configuration
          */
         $initFile = parse_ini_file(EnvironmentConf::CONFIG_INI_FILE, TRUE);
+        //print_r($initFile);
 
-        //Variables relatives aux environnements:
-        switch (filter_input(INPUT_SERVER, 'SERVER_NAME')) {
+        /*
+         * Serveur provenant de l'URL en cours de navigation par le client
+         */
+        $serverNameReal = filter_input(INPUT_SERVER, 'SERVER_NAME');
 
-            //Environnement Codeur
-            case $initFile[EnvironmentInit::URL_SERVEUR_NAME][EnvironmentConf::ENV_COD]:
+        /*
+         * Tableau de configuration du paramètres URL_SERVER_NAME 
+         */
+        $urlServerNameConfig = $initFile[EnvironmentInit::URL_SERVER_NAME];
 
-                $envToInit = new EnvironmentInit(EnvironmentConf::ENV_COD, $initFile);
-                break;
+        /*
+         * A-t-on trouvé un environnement ?
+         * Par défaut, non.
+         */
+        $isEnvFound = FALSE;
 
-            //Environnement Développement
-            Case $initFile[EnvironmentInit::URL_SERVEUR_NAME][EnvironmentConf::ENV_DEV]:
+        /*
+         * Recherche du serveur en cours dans la configuration
+         */
+        foreach ($urlServerNameConfig as $envKey => $serverNameListConfig) {
+            /*
+             * Transformation de la liste de serveur possibles en tableau PHP
+             */
+            $serverNameArrayConfig = explode(" ", $serverNameListConfig);
 
-                $envToInit = new EnvironmentInit(EnvironmentConf::ENV_DEV, $initFile);
-                break;
-
-            //Environnement Production
-            Case $initFile[EnvironmentInit::URL_SERVEUR_NAME][EnvironmentConf::ENV_PRD]:
-
-                $envToInit = new EnvironmentInit(EnvironmentConf::ENV_PRD, $initFile);
-                break;
-
-            default:
-                echo EnvironmentConf::ENVIRONMENT_DONT_EXIST_MESSAGE;
-                $envToInit = null;
+            /*
+             * Si le serveur en cours de navigation fait partie des serveurs de 
+             * la configuration, alors on charge l'environnement correspondant
+             */
+            if (in_array(strtolower($serverNameReal), array_map('strtolower', $serverNameArrayConfig))) {
+                $envToInit = new EnvironmentInit($envKey, $initFile);
+                $isEnvFound = TRUE;
+            }
         }
+
+        if ($isEnvFound == FALSE) {
+            echo EnvironmentConf::ENVIRONMENT_DONT_EXIST_MESSAGE;
+            $envToInit = null;
+        }
+
+
         //Initialisation de la configuration
         $this->setConf($envToInit->getConf());
 

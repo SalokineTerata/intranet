@@ -155,6 +155,7 @@ class DatabaseOperation {
         self::$queriesInfo[$paramQueryCount][self::QUERIES_INFO_ARRAY_NAME_REQUEST] = $paramRequest;
         self::$queriesInfo[$paramQueryCount][self::QUERIES_INFO_ARRAY_NAME_TIME] = $paramTime;
         self::$queriesInfo[$paramQueryCount][self::QUERIES_INFO_ARRAY_NAME_BACKTRACE] = debug_backtrace();
+        self::$queriesInfo[self::QUERIES_INFO_ARRAY_NAME_TIME] = $paramTime + self::$queriesInfo[self::QUERIES_INFO_ARRAY_NAME_TIME];
         $_SESSION['queriesInfo'] = self::$queriesInfo;
     }
 

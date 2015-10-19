@@ -121,7 +121,7 @@ class FtaEtatModel extends AbstractModel {
                                 . ' AND ' . FtaProcessusCycleModel::FIELDNAME_FTA_ETAT . '=\'' . $paramEtat . '\''                                            // Nous recuperons l'abréviation de l'etat de la Fta
                                 . ' AND ( 0 ' . IntranetActionsModel::AddIdIntranetAction($idIntranetActionsValide) . ')'
                 );
-                if ($paramRole == '1' or $paramRole == AccueilFta::VALUE_6) {
+                if ($paramRole == '1' or $paramRole == '6') {
                     $arrayTmp = NULL;
                 }
                 if ($arrayTmp) {
@@ -201,7 +201,7 @@ class FtaEtatModel extends AbstractModel {
                         /**
                          * En cas d'oublier des chef de projet qui aurait créé une fta sans validé les informations de base
                          */
-                        if ($paramRole == '1' or $paramRole == AccueilFta::VALUE_6) {
+                        if ($paramRole == '1' or $paramRole == '6') {
                             $chefProjet = ($tauxDeValidadation == '0');
                             if ($tauxDeValidadation <> '0' OR $chefProjet == TRUE) {
                                 $idFtaEffectue[] = $rows[FtaModel::KEYNAME];
@@ -280,7 +280,7 @@ class FtaEtatModel extends AbstractModel {
                 if ($arrayTmp) {
                     foreach ($arrayTmp as $rows) {
                         $tauxDeValidadation = FtaProcessusModel::getValideIdFtaByRoleWorkflowProcessus($rows[FtaModel::KEYNAME], $paramRole, $rows[FtaWorkflowStructureModel::FIELDNAME_ID_FTA_WORKFLOW]);
-                        if ($tauxDeValidadation == '1' or $paramRole == AccueilFta::VALUE_6) {
+                        if ($tauxDeValidadation == '1' or $paramRole == '6') {
                             $idFtaEffectue[] = $rows[FtaModel::KEYNAME];
                         }
                     }

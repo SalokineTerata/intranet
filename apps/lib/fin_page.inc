@@ -40,7 +40,7 @@ echo '</html>';
         </tr>
         <tr align='right'>
             <td>
-                <small>Intranet LDC - 2015 <?php echo $debug_info; ?> </small>
+                <small>Intranet LDC - 2015 </small>
             </td>
         </tr>
 

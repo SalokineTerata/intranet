@@ -64,11 +64,11 @@ require_once '../inc/main.php';
   Initialisation des variables
  */
 $default_message = Lib::isDefined("default_message");
-$popup_name = Lib::isDefined("popup_name");
+$popup_name = Lib::getParameterFromRequest("popup_name");
 $popup_content = $_SESSION[$popup_name];
-$edit_allow = Lib::isDefined("edit_allow");
-$title = Lib::isDefined("title");
-$special_page = Lib::isDefined("special_page");
+$edit_allow = Lib::getParameterFromRequest("edit_allow");
+$title = Lib::getParameterFromRequest("title");
+$special_page = Lib::getParameterFromRequest("special_page");
 
 $page_default = substr(strrchr($_SERVER["PHP_SELF"], '/'), '1', '-4');
 $page_action = $page_default . ".php"
@@ -122,7 +122,9 @@ if ($edit_mode) {
 
 switch ($special_page) {
     case "MYSQL_QUERIES":
-        $popup_content = print_r(DatabaseOperation::getQueriesInfo(), true);
+        $popup_content = print_r($_SESSION['queriesInfo'], true);
+        $content = $popup_content;
+
 }
 
 

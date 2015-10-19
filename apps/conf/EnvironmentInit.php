@@ -35,7 +35,7 @@ class EnvironmentInit extends EnvironmentAbstract {
     const SMTP_SERVER_NAME = "SMTP_SERVER_NAME";
     const URL_PROTOCOL = "URL_PROTOCOL";
     const URL_ROOT_DIR = "URL_ROOT_DIR";
-    const URL_SERVEUR_NAME = "URL_SERVEUR_NAME";
+    const URL_SERVER_NAME = "URL_SERVER_NAME";
     const URL_SUBDIR = "URL_SUBDIR";
 
     function __construct($paramEnvName, $paramInit) {
@@ -52,7 +52,7 @@ class EnvironmentInit extends EnvironmentAbstract {
          * directement utilisée dans la Partie 3
          */
         $this->getConf()->setUrlProtocol($paramInit[self::URL_PROTOCOL][$paramEnvName]);
-        $this->getConf()->setUrlServer($paramInit[self::URL_SERVEUR_NAME][$paramEnvName]);
+        $this->getConf()->setUrlServer(filter_input(INPUT_SERVER, 'SERVER_NAME'));
         $this->getConf()->setUrlRootDir($paramInit[self::URL_ROOT_DIR][$paramEnvName]);
         $this->getConf()->setUrlSubdir($paramInit[self::URL_SUBDIR][$paramEnvName]);
 

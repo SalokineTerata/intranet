@@ -111,6 +111,7 @@ $edit_mode;                                //Si =1, alors mode edition de l'aide
 
 $content = $popup_content;
 $bouton_record = "";
+ini_set('memory_limit', '-1');
 if ($edit_mode) {
     $bouton_record = "<tr><td>
                    <center>

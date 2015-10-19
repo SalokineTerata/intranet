@@ -37,7 +37,6 @@ usleep(100);
 $time_end = microtime_float();
 $time = $time_end - $time_start;
  
-echo "Ne rien faire pendant $time secondes\n";
 
 echo '</td>';
 echo '</tr>';
@@ -52,6 +51,7 @@ echo '</html>';
             <td>
                 <small>
                     <a href='#'>Haut de page<?php echo $debug_info; ?></a>
+                    <?php echo $time; ?>
                 </small>
             </td>
         </tr>

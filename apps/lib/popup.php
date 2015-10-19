@@ -124,7 +124,6 @@ switch ($special_page) {
     case "MYSQL_QUERIES":
         $popup_content = print_r($_SESSION['queriesInfo'], true);
         $content = $popup_content;
-
 }
 
 
@@ -183,23 +182,23 @@ switch ($special_page) {
 //default:
 
 echo "
-             <form method=$method action=$page_action>
-             <input type=hidden name=action value=$action>
-             <!input type=hidden name=edit_mode value=$edit_mode>
+             <form method=" . $method . " action=" . $page_action . ">
+             <input type=hidden name=action value=" . $action . ">
+             <!input type=hidden name=edit_mode value=" . $edit_mode . ">
 
-             <$html_table>
+             <" . $html_table . ">
              <tr class=titre_principal><td>
 
-                 $title 
+                " . $title . "
 
              </td></tr>
              <tr><td>
 
-                 <pre>$content</pre>
+                 <pre>" . $content . "</pre>
 
              </td></tr>
 
-                 $bouton_record
+                 " . $bouton_record . "
 
              </td></tr>
              </table>

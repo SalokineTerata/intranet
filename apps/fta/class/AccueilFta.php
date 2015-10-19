@@ -484,11 +484,11 @@ class AccueilFta {
 
         switch (self::$syntheseAction) {
             case FtaEtatModel::ETAT_AVANCEMENT_VALUE_ATTENTE:
-                $URL = substr($URL, '0', strpos($URL, self::$syntheseAction) + AccueilFta::VALUE_7);
+                $URL = substr($URL, '0', strpos($URL, self::$syntheseAction) + '7');
 
                 break;
             case FtaEtatModel::ETAT_AVANCEMENT_VALUE_EN_COURS:
-                $URL = substr($URL, '0', strpos($URL, self::$syntheseAction) + AccueilFta::VALUE_7);
+                $URL = substr($URL, '0', strpos($URL, self::$syntheseAction) + '7');
                 break;
             case FtaEtatModel::ETAT_AVANCEMENT_VALUE_EFFECTUES:
                 $URL = substr($URL, '0', strpos($URL, self::$syntheseAction) + '10');

@@ -655,13 +655,13 @@ if ($mode_etiquette_fta_composition == 1 or $mode_etiquette_fta_composition == 2
         case AccueilFta::VALUE_5:
             $checked5 = "checked";
             break;
-        case AccueilFta::VALUE_6:
+        case '6':
             $checked6 = "checked";
             break;
-        case AccueilFta::VALUE_7:
+        case '7':
             $checked7 = "checked";
             break;
-        case AccueilFta::VALUE_8:
+        case '8':
             $checked8 = "checked";
             break;
         case "" :

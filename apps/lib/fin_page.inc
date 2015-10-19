@@ -15,9 +15,11 @@ if ($globalConfig->getConf()->getExecDebugEnable()) {
     $show_queries_info_popup = DatabaseOperation::showPopupForQueriesInfo();
     $message = print_r($_SESSION['mysql_column_info'], true);
     $show_php_session = popup('popup_php_session', $message, 'PHP' . ' - ' . $exec_debug_time_show);
+    foreach ($_SESSION['queriesInfo'] as $value) {
+       $time = $value['time']; 
+    }
 
-
-    $debug_info = ' | ' . $show_queries_info_popup . ' | ' . $show_php_session;
+    $debug_info = ' | ' . $show_queries_info_popup . ' | ' . $show_php_session. ' | ' . $time;
 }
 
 

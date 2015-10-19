@@ -41,7 +41,7 @@ $abreviationFtaEtat = Lib::getParameterFromRequest(FtaEtatModel::FIELDNAME_ABREV
 $siteDeProduction = Lib::getParameterFromRequest(GeoModel::KEYNAME);
 
 If ($idFtaWorkflow == '2' and $idFtaRole == '1') {
-    $idFtaRole = AccueilFta::VALUE_6;
+    $idFtaRole = '6';
 }
 
 switch ($action) {

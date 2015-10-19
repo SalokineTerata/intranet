@@ -20,23 +20,7 @@ if ($globalConfig->getConf()->getExecDebugEnable()) {
     $debug_info = ' | ' . $show_queries_info_popup . ' | ' . $show_php_session;
 }
 
-/**
- * Fonction simple identique à celle en PHP 5 qui va suivre
- */
-function microtime_float() 
-{ 
-    list($usec, $sec) = explode(" ", microtime()); 
-    return ((float)$usec + (float)$sec); 
-} 
- 
-$time_start = microtime_float();
- 
-// Attend pendant un moment
-usleep(100);
- 
-$time_end = microtime_float();
-$time = $time_end - $time_start;
- 
+
 
 echo '</td>';
 echo '</tr>';
@@ -51,7 +35,6 @@ echo '</html>';
             <td>
                 <small>
                     <a href='#'>Haut de page<?php echo $debug_info; ?></a>
-                    <?php echo $time; ?>
                 </small>
             </td>
         </tr>

@@ -283,7 +283,6 @@ switch ($action) {
 //            afficher_message($titre, $message, $redirection);
 //            $erreur = 1;
 //        }
-
 //Cohérence du Code LDC
 // ************** GESTION MULTI PCB POUR MEME CODE GROUPE
         if ($modelFta->getDataField(FtaModel::FIELDNAME_CODE_ARTICLE_LDC)->getFieldValue() and ModuleConfig::CODE_LDC_UNIQUE) {
@@ -292,8 +291,9 @@ switch ($action) {
                             'SELECT ' . FtaModel::TABLENAME . '.' . FtaModel::KEYNAME
                             . ' FROM ' . FtaModel::TABLENAME . ',' . FtaEtatModel::TABLENAME
                             . ' WHERE ' . FtaModel::TABLENAME . '.' . FtaModel::FIELDNAME_DOSSIER_FTA . ' <> \'' . $modelFta->getDataField(FtaModel::FIELDNAME_DOSSIER_FTA)->getFieldValue() . '\' '
+                            . ' AND ' . FtaModel::TABLENAME . '.' . FtaModel::FIELDNAME_CODE_ARTICLE_LDC . ' = \'' . $modelFta->getDataField(FtaModel::FIELDNAME_CODE_ARTICLE_LDC)->getFieldValue() . '\' '
                             . ' AND ' . FtaEtatModel::TABLENAME . '.' . FtaEtatModel::KEYNAME . '=' . FtaModel::TABLENAME . '.' . FtaModel::FIELDNAME_ID_FTA_ETAT
-                            . 'AND ' . FtaEtatModel::FIELDNAME_ABREVIATION . '<>\'R\' '
+                            . ' AND ' . FtaEtatModel::FIELDNAME_ABREVIATION . '<>\'R\' '
             );
 
 
@@ -311,27 +311,28 @@ switch ($action) {
         }
 
 //Cohérence du Code Agrologic
-        if ($modelFta->getDataField(FtaModel::FIELDNAME_ARTICLE_AGROLOGIC)->getFieldValue()) {
-            $arrayCoherenceCodeAgro = DatabaseOperation::convertSqlStatementWithoutKeyToArray('SELECT ' . FtaModel::TABLENAME . '.' . FtaModel::KEYNAME
-                            . ' FROM ' . FtaModel::TABLENAME
-                            . ' WHERE ' . FtaModel::TABLENAME . '.' . FtaModel::FIELDNAME_ARTICLE_AGROLOGIC . '= \'' . $modelFta->getDataField(FtaModel::FIELDNAME_ARTICLE_AGROLOGIC)->getFieldValue() . '\' '
-                            . ' AND ' . FtaModel::TABLENAME . '.' . FtaModel::FIELDNAME_DOSSIER_FTA . ' <> \'' . $modelFta->getDataField(FtaModel::FIELDNAME_DOSSIER_FTA)->getFieldValue() . '\' '
-                            . ' AND (' . FtaModel::TABLENAME . '.' . FtaModel::KEYNAME . '=1 OR ' . FtaModel::TABLENAME . '.' . FtaModel::FIELDNAME_ID_FTA_ETAT . '=3) '
-            );
-
-            if ($arrayCoherenceCodeAgro) {//Si le code est déjà affecté à une autre FTA, on informe, et on suppime l'affectation sur la FTA en cours
-                foreach ($arrayCoherenceCodeAgro as $rowsCoherenceCodeAgro) {
-                    $titre = 'Code Article Agrologic déjà affecté';
-                    $message = 'Attention, le code Agrologic est déjà affecté à la FTA n°' . $rowsCoherenceCodeAgro[FtaModel::KEYNAME] . '<br>'
-                            . 'Votre code ne sera pas enregistré.'
-                    ;
-                }
-                afficher_message($titre, $message, $redirection);
-
-                $modelFta->getDataField(FtaModel::FIELDNAME_ARTICLE_AGROLOGIC)->setFieldValue(null);
-                $erreur = 1;
-            }
-        }
+//        if ($modelFta->getDataField(FtaModel::FIELDNAME_ARTICLE_AGROLOGIC)->getFieldValue()) {
+//            $arrayCoherenceCodeAgro = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
+//                            'SELECT ' . FtaModel::TABLENAME . '.' . FtaModel::KEYNAME
+//                            . ' FROM ' . FtaModel::TABLENAME
+//                            . ' WHERE ' . FtaModel::TABLENAME . '.' . FtaModel::FIELDNAME_ARTICLE_AGROLOGIC . '= \'' . $modelFta->getDataField(FtaModel::FIELDNAME_ARTICLE_AGROLOGIC)->getFieldValue() . '\' '
+//                            . ' AND ' . FtaModel::TABLENAME . '.' . FtaModel::FIELDNAME_DOSSIER_FTA . ' <> \'' . $modelFta->getDataField(FtaModel::FIELDNAME_DOSSIER_FTA)->getFieldValue() . '\' '
+//                            . ' AND (' . FtaModel::TABLENAME . '.' . FtaModel::FIELDNAME_ID_FTA_ETAT . '=1 OR ' . FtaModel::TABLENAME . '.' . FtaModel::FIELDNAME_ID_FTA_ETAT . '=3) '
+//            );
+//
+//            if ($arrayCoherenceCodeAgro) {//Si le code est déjà affecté à une autre FTA, on informe, et on suppime l'affectation sur la FTA en cours
+//                foreach ($arrayCoherenceCodeAgro as $rowsCoherenceCodeAgro) {
+//                    $titre = 'Code Article Agrologic déjà affecté';
+//                    $message = 'Attention, le code Agrologic est déjà affecté à la FTA n°' . $rowsCoherenceCodeAgro[FtaModel::KEYNAME] . '<br>'
+//                            . 'Votre code ne sera pas enregistré.'
+//                    ;
+//                }
+//                afficher_message($titre, $message, $redirection);
+//
+//                $modelFta->getDataField(FtaModel::FIELDNAME_ARTICLE_AGROLOGIC)->setFieldValue(null);
+//                $erreur = 1;
+//            }
+//        }
 
         if (!$erreur) {
             //Mise à jour de la validation de l'échéance

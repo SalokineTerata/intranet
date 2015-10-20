@@ -90,7 +90,7 @@ class Navigation {
             $menu_navigation = '
                      <' . $html_table . '>
                      <tr><td class=titre_principal> <div align=\'left\'>
-                           ' . $identifiant . '(LDC: <b><font size=\'2\' color=\'#0000FF\'>' . $rowsFtaEtatAndFta[FtaModel::FIELDNAME_CODE_ARTICLE_LDC] . '</font></b>) - ' . $nom . ' &nbsp;&nbsp;&nbsp;&nbsp;<i>(gérée par ' . $createur . ')</i>
+                            <b><font size=\'2\' color=\'#0000FF\'>' . $rowsFtaEtatAndFta[FtaModel::FIELDNAME_CODE_ARTICLE_LDC] . '</font></b> - ' . $nom . ' &nbsp;&nbsp;&nbsp;&nbsp;<i>(gérée par ' . $createur . ')</i>
                            </div>
                      </td></tr>
                      <tr class=titre><td>

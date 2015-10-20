@@ -459,7 +459,6 @@ class FtaConditionnementModel extends AbstractModel {
                 . ', ' . FtaConditionnementModel::FIELDNAME_LARGEUR_FTA_CONDITIONNEMENT
                 . ', ' . FtaConditionnementModel::FIELDNAME_LONGUEUR_FTA_CONDITIONNEMENT
                 . ', ' . FtaConditionnementModel::FIELDNAME_NOMBRE_COUCHE_FTA_CONDITIONNEMENT
-                . ', ' . FtaConditionnementModel::FIELDNAME_PCB_FTA_CONDITIONNEMENT
                 . ', ' . FtaConditionnementModel::FIELDNAME_POIDS_FTA_CONDITIONNEMENT
                 . ', ' . FtaConditionnementModel::FIELDNAME_QUANTITE_PAR_COUCHE_FTA_CONDITIONNEMENT
                 . ', ' . FtaConditionnementModel::FIELDNAME_LAST_ID_FTA_CONDITIONNEMENT
@@ -472,7 +471,6 @@ class FtaConditionnementModel extends AbstractModel {
                 . ', ' . FtaConditionnementModel::FIELDNAME_LARGEUR_FTA_CONDITIONNEMENT
                 . ', ' . FtaConditionnementModel::FIELDNAME_LONGUEUR_FTA_CONDITIONNEMENT
                 . ', ' . FtaConditionnementModel::FIELDNAME_NOMBRE_COUCHE_FTA_CONDITIONNEMENT
-                . ', ' . FtaConditionnementModel::FIELDNAME_PCB_FTA_CONDITIONNEMENT
                 . ', ' . FtaConditionnementModel::FIELDNAME_POIDS_FTA_CONDITIONNEMENT
                 . ', ' . FtaConditionnementModel::FIELDNAME_QUANTITE_PAR_COUCHE_FTA_CONDITIONNEMENT
                 . ', ' . FtaConditionnementModel::KEYNAME

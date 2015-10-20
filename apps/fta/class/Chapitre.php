@@ -223,9 +223,7 @@ class Chapitre {
 
     protected static function buildChapitreAll() {
 
-        $return = self::$html_submit_button
-                . self::$html_chapitre_core
-                . self::$html_submit_button
+        $return =  self::$html_chapitre_core                
                 . self::$html_suivi_dossier
                 . self::$html_submit_button
                 . self::$html_correct_button

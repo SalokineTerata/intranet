@@ -95,3 +95,11 @@ A:hover.link1
     writing-mode: tb-rl;
     filter: flipv fliph;
 }
+
+#bandeau_vague
+{
+margin-right: 0px;
+padding-right: 0px; /* seule les marges internes et externes de droite seront supprimées */
+border: 1px solid black; /* pour bien voir que les images sont collées */
+}
+ 

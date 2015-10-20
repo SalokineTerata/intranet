@@ -29,6 +29,7 @@ if ($_SESSION[$module_consultation]) {
         <input type=\'image\' src=\'images/loupe.png\' width=\'20\' height=\'20\' title=\'Effectuer la recherche\' name=\'texte_recherche\' />
         <input type=hidden name=type_recherche value=regate />
         </form>';
+    echo '<br>';
 //    echo '<form method=\'post\' action=\'recherche_post.php\' name=\'recherche_rapide\'>
 //        Recherche rapide Agrologic:<br></font><input type=\'text\' name=\'recherche\' size=\'15\' />
 //        <input type=\'image\' src=\'images/loupe.png\' width=\'20\' height=\'20\' title=\'Effectuer la recherche\' name=\'texte_recherche\' />

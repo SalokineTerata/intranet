@@ -75,7 +75,7 @@ class ClassificationFta2Model extends AbstractModel {
         $paramNomDefaut = 'selection_proprietaire1';
         $listeClassification = '<td class=contenu >' . DatabaseDescription::getFieldDocLabel(ClassificationFta2Model::TABLENAME, ClassificationFta2Model::FIELDNAME_ID_PROPRIETAIRE_GROUPE)
                 . '</td><td class=contenu>'
-                . AccueilFta::afficherRequeteEnListeDeroulante($req, $paramIdDefaut, $paramNomDefaut, $paramIsEditable) . '</tr>';
+                . AccueilFta::afficherRequeteEnListeDeroulante($req, $paramIdDefaut, $paramNomDefaut, $paramIsEditable,TRUE) . '</tr>';
 
         return $listeClassification;
     }
@@ -385,7 +385,7 @@ class ClassificationFta2Model extends AbstractModel {
 
         $listeClassification = '<tr><td class=contenu >' . DatabaseDescription::getFieldDocLabel(ClassificationFta2Model::TABLENAME, $paramSelect)
                 . '</td><td class=contenu >'
-                . AccueilFta::afficherRequeteEnListeDeroulante($reqClassification, $paramIdDefaut, $paramNomDefaut, $paramIsEditable) . '</tr>';
+                . AccueilFta::afficherRequeteEnListeDeroulante($reqClassification, $paramIdDefaut, $paramNomDefaut, $paramIsEditable,TRUE) . '</tr>';
 
         return $listeClassification;
     }

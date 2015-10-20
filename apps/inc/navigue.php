@@ -10,18 +10,8 @@ $globalConfig = new GlobalConfig();
 
 echo '
 <table width=\'150\' border=\'0\' cellspacing=\'0\' cellpadding=\'0\' >
-    <tr>
-        <td><img src=\'../lib/images/bandeau_vague.png\' width=\'150\'></td>
-    </tr>
-    <tr>
-        <td>
-            <table width=\'100%\' border=\'0\' cellspacing=\'2\' cellpadding=\'0\' bgcolor=\'#FFE5B2\'>
-                <tr>
-                    <td>
-                    </td>
-                    <td>
-</td>
-</tr>
+  <tr><td height=\'28\'width=\'150\' background=\'../lib/images/bandeau_vague.png\'></td></tr>
+  <tr><td><table width=\'100%\' border=\'0\' cellspacing=\'2\' cellpadding=\'0\' bgcolor=\'#FFE5B2\'>
 ';
 
 /* * ****************************************************************

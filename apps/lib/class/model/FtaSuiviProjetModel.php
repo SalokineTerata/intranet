@@ -298,7 +298,7 @@ class FtaSuiviProjetModel extends AbstractModel {
                                                 . ' AND ( ( ' . IntranetDroitsAccesModel::TABLENAME . '.' . IntranetDroitsAccesModel::FIELDNAME_NIVEAU_INTRANET_DROITS_ACCES . ' <> 0 '                                 //Obtention du droit d'accès
                                                 . ' AND ' . FtaProcessusModel::TABLENAME . '.' . FtaProcessusModel::KEYNAME . ' = ' . $rowsProcessus[FtaProcessusModel::KEYNAME]                  //Processus en cours
                                                 . ' AND ' . FtaProcessusModel::TABLENAME . '.' . FtaProcessusModel::FIELDNAME_MULTISITE_FTA_PROCESSUS . ' = 1 '                                     //Processus Multisite
-                                                . ' AND ' . GeoModel::TABLENAME . '.' . GeoModel::FIELDNAME_ID_SITE . '= \'' . $site_gestionnaire . '\' '                                                       //Site d'assemblage
+                                                . ' AND ' . GeoModel::TABLENAME . '.' . GeoModel::KEYNAME . '= \'' . $site_gestionnaire . '\' '                                                       //Site d'assemblage
                                                 . ' AND ' . IntranetModulesModel::TABLENAME . '.' . IntranetModulesModel::FIELDNAME_NOM_INTRANET_MODULES . ' = \'fta\' ) )'
                                                 . ' AND ' . UserModel::TABLENAME . '.' . UserModel::KEYNAME . '<>\'' . $modelFta->getModelCreateur()->getDataField(UserModel::KEYNAME)->getFieldValue() . '\''
                                 );

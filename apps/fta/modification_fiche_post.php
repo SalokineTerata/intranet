@@ -351,7 +351,7 @@ switch ($action) {
                 $noredirection = 1;
             }
         } else {
-            $modelFtaSuiviProjet->getDataField(FtaSuiviProjetModel::FIELDNAME_SIGNATURE_VALIDATION_SUIVI_PROJET)->setFieldValue(0);
+            $modelFtaSuiviProjet->getDataField(FtaSuiviProjetModel::FIELDNAME_SIGNATURE_VALIDATION_SUIVI_PROJET)->setFieldValue("0");
         }
 
 //Sauvegarde des enregistrements dans la base de données.

@@ -416,7 +416,7 @@ class FtaTransitionModel {
         $arrayGeoSite = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
                         "SELECT " . GeoModel::FIELDNAME_LIBELLE_SITE_AGIS
                         . " FROM " . GeoModel::TABLENAME
-                        . " WHERE " . GeoModel::FIELDNAME_ID_SITE . " = " . $SiteDeProduction
+                        . " WHERE " . GeoModel::KEYNAME . " = " . $SiteDeProduction
         );
         foreach ($arrayGeoSite as $rowsGeoSite) {
             $libelleSiteAgis = $rowsGeoSite[GeoModel::FIELDNAME_LIBELLE_SITE_AGIS];

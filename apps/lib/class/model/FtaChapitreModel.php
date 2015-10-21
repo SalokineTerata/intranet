@@ -339,17 +339,17 @@ class FtaChapitreModel extends AbstractModel {
                                     . '=' . FtaProcessusModel::TABLENAME . '.' . FtaProcessusModel::KEYNAME                    //Liaison
                                     . ' AND ' . FtaSuiviProjetModel::TABLENAME . '.' . FtaSuiviProjetModel::FIELDNAME_ID_FTA_CHAPITRE
                                     . '=' . FtaWorkflowStructureModel::TABLENAME . '.' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_CHAPITRE
-                                    . 'AND ' . FtaSuiviProjetModel::TABLENAME . '.' . FtaSuiviProjetModel::FIELDNAME_ID_FTA
+                                    . ' AND ' . FtaSuiviProjetModel::TABLENAME . '.' . FtaSuiviProjetModel::FIELDNAME_ID_FTA
                                     . '=' . FtaModel::TABLENAME . '.' . FtaModel::KEYNAME
-                                    . 'AND ' . GeoModel::TABLENAME . '.' . GeoModel::FIELDNAME_ID_SITE
+                                    . ' AND ' . GeoModel::TABLENAME . '.' . GeoModel::KEYNAME
                                     . '=' . FtaModel::TABLENAME . '.' . FtaModel::FIELDNAME_SITE_ASSEMBLAGE
-                                    . 'AND ' . GeoModel::TABLENAME . '.' . GeoModel::KEYNAME
+                                    . ' AND ' . GeoModel::TABLENAME . '.' . GeoModel::KEYNAME
                                     . '=' . UserModel::TABLENAME . '.' . UserModel::FIELDNAME_LIEU_GEO . ') '
-                                    . 'AND ( ( ' . FtaProcessusModel::TABLENAME . '.' . FtaProcessusModel::KEYNAME . '= \'' . $paramIdProcessus . '\' '
-                                    . 'AND ' . FtaProcessusModel::TABLENAME . '.' . FtaProcessusModel::FIELDNAME_MULTISITE_FTA_PROCESSUS . '= \'' . $multisite_fta_processus . '\' '
-                                    . 'AND ' . IntranetDroitsAccesModel::TABLENAME . '.' . IntranetDroitsAccesModel::FIELDNAME_NIVEAU_INTRANET_DROITS_ACCES . ' = 1 '
-                                    . 'AND ' . FtaSuiviProjetModel::TABLENAME . '.' . FtaSuiviProjetModel::FIELDNAME_ID_FTA . ' = \'' . $paramIdFta . '\' ) ) '
-                                    . 'GROUP BY ' . UserModel::TABLENAME . '.' . UserModel::FIELDNAME_MAIL
+                                    . ' AND ( ( ' . FtaProcessusModel::TABLENAME . '.' . FtaProcessusModel::KEYNAME . '= \'' . $paramIdProcessus . '\' '
+                                    . ' AND ' . FtaProcessusModel::TABLENAME . '.' . FtaProcessusModel::FIELDNAME_MULTISITE_FTA_PROCESSUS . '= \'' . $multisite_fta_processus . '\' '
+                                    . ' AND ' . IntranetDroitsAccesModel::TABLENAME . '.' . IntranetDroitsAccesModel::FIELDNAME_NIVEAU_INTRANET_DROITS_ACCES . ' = 1 '
+                                    . ' AND ' . FtaSuiviProjetModel::TABLENAME . '.' . FtaSuiviProjetModel::FIELDNAME_ID_FTA . ' = \'' . $paramIdFta . '\' ) ) '
+                                    . ' GROUP BY ' . UserModel::TABLENAME . '.' . UserModel::FIELDNAME_MAIL
                             ;
                             break;
                     }

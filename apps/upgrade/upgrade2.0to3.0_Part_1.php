@@ -52,7 +52,7 @@ echo  date("H:i:s")."\n";
 /**
 Tables basiques
 **/
-
+if(FALSE){
 echo "DROP ".$nameOfBDDTarget.".classification_arborescence_article ...";
 $sql = "DROP TABLE ".$nameOfBDDTarget.".classification_arborescence_article";
 if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
@@ -4741,7 +4741,7 @@ VALUES ( \"$idFta\", \"$idAccessArti2\", \"$numft\", \"$idFtaWorkflow\" "
             . ", \"$nouvel_article\", \"$k_gestion_lot\", \"$activation_codesoft_arti2\", \"$id_etiquette_codesoft_arti2\" "
             . ", \"$atmosphereProtectrice\", \"$imageEcoEmballage\", \"$libelleCodeArticleClient\", \"$idServiceConsommateur\" "
             . ", \"\", NULL)";
-         echo "UPDATE ".$nameOfBDDTarget."." . "fta." . "id_fta .". $idFta ."id_fta_workflow" . "=" .$idFtaWorkflow." ...";
+         echo "INSERT INTO ".$nameOfBDDTarget."." . "fta." . "id_fta .". $idFta ." ...";
     mysql_query("SET NAMES 'utf8'");
     if(mysql_query($sql_inter)) {echo "[OK]\n";}else{echo "[FAILED]\n $idFta \n";}
 
@@ -4920,7 +4920,7 @@ while ($rowsTableFtaSuiviProjet=mysql_fetch_array($resultFtaSuiviPrjet)) {
    if(mysql_query($selectInsert)) {echo "[OK] \n";}else{echo "[FAILED] $idFtaSuiviProjet \n ";}
    
 }
-
+}
 /**
  * Second traitment fta suivie de projet
  */
@@ -4956,12 +4956,12 @@ while ( $rowsIdFtaSuiviProjet=  mysql_fetch_array($arrayIdFtaSuiviProjet)) {
 
             while ($rowsChapitre=  mysql_fetch_array($arrayChapitre)) {
                 $arrayCheckIdSuiviProjet = mysql_query(
-                                'SELECT id_fta_suivi_projet' 
-                                . ' FROM ".$nameOfBDDTarget.".fta_suivi_projet' 
-                                . ' WHERE id_fta' 
-                                . '=' . $idFta
-                                . ' AND id_fta_chapitre' 
-                                . '=' . $rowsChapitre['id_fta_chapitre']                      
+                                "SELECT id_fta_suivi_projet" 
+                                . " FROM ".$nameOfBDDTarget.".fta_suivi_projet" 
+                                . " WHERE id_fta" 
+                                . "=" . $idFta
+                                . " AND id_fta_chapitre" 
+                                . "=" . $rowsChapitre["id_fta_chapitre"]                      
                 );
                  $rowsCheckIdSuiviProjet =  mysql_fetch_array($arrayCheckIdSuiviProjet,MYSQL_ASSOC);
                  

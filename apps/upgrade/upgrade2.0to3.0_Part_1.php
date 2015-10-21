@@ -2,7 +2,6 @@
 /* * *******
   Inclusions
  * ******* */
-require_once './inculde2.0to3.0.php';
 
 /* * ***********
   Début Code PHP

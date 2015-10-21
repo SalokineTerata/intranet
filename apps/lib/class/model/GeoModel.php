@@ -44,7 +44,7 @@ class GeoModel extends AbstractModel {
         $arrayNomSiteProduction = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
                         'SELECT ' . GeoModel::FIELDNAME_GEO
                         . ' FROM ' . GeoModel::TABLENAME
-                        . ' WHERE ' . GeoModel::FIELDNAME_ID_SITE
+                        . ' WHERE ' . GeoModel::KEYNAME
                         . '= \'' . $paramIdSite . '\''
         );
         if ($arrayNomSiteProduction) {

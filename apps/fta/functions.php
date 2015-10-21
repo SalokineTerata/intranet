@@ -1800,7 +1800,7 @@ function visualiser_fiches($id_fta_etat, $choix, $isLimit, $order_common) {
             //ToDo: voir pourquoi lors du premier passage, $id_site est vide !!
             //$id_site=Lib::isDefined("id_site",$_SESSION["id_geo"]);
             //$id_site = Lib::isDefined("id_site");
-            $id_site = $modelfta->getModelSiteExpedition()->getDataField(GeoModel::FIELDNAME_ID_SITE)->getFieldValue();
+            $id_site = $modelfta->getModelSiteExpedition()->getDataField(GeoModel::KEYNAME)->getFieldValue();
 
 
 

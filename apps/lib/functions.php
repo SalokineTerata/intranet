@@ -155,35 +155,36 @@ function identification1($mysql_table_authentification, $login, $pass, GlobalCon
     if ($globalConfig == null) {
         $globalConfig = new GlobalConfig();
     }
-    $ldap_active = $globalConfig->getConf()->getLdapServiceEnable();
-    $ldap_server = $globalConfig->getConf()->getLdapServerName();
+//    $ldap_active = $globalConfig->getConf()->getLdapServiceEnable();
+    $ldap_active = "1";
+//    $ldap_server = $globalConfig->getConf()->getLdapServerName();
+    $ldap_server = "172.20.3.89";
     $ldap_context = array("Comptes", "ldcseg");  //Liste des contextes LDAP supportés
     $ldap_result = false;
 
     //Authentification LDAP
-    if ($debug)
+    if ($debug){
         echo "ldap_active=$ldap_active<br>";
+    }
     if ($ldap_active) {
         $ldap_connect = ldap_connect($ldap_server);  // doit être un serveur LDAP valide !
         $result_LDAP_OPT_PROTOCOL_VERSION = ldap_set_option($ldap_connect, LDAP_OPT_PROTOCOL_VERSION, 3);
-        if ($debug)
-            echo "result_LDAP_OPT_PROTOCOL_VERSION=$result_LDAP_OPT_PROTOCOL_VERSION<br>";
-        if ($debug)
-            $get_LDAP_OPT_PROTOCOL_VERSION = 0;
-        if ($debug)
+        if ($debug){
+            echo "result_LDAP_OPT_PROTOCOL_VERSION=$result_LDAP_OPT_PROTOCOL_VERSION<br>";          
+            $get_LDAP_OPT_PROTOCOL_VERSION = 0;  
             ldap_get_option($ldap_connect, "LDAP_OPT_PROTOCOL_VERSION", $get_LDAP_OPT_PROTOCOL_VERSION);
-        if ($debug)
             echo "LDAP_OPT_PROTOCOL_VERSION=$get_LDAP_OPT_PROTOCOL_VERSION<br>";
-        if ($debug)
             echo "ldap_connect = $ldap_connect<br>";
+        }
         if ($ldap_connect) {
-            if ($debug) {
-                $ldap_result = ldap_bind($ldap_connect, "uid=" . $login . ",ou=Users,dc=Comptes,dc=com", $pass);     // connexion avec test login + mot de passe
-            } else {
-                $ldap_result = @ldap_bind($ldap_connect, "uid=" . $login . ",ou=Users,dc=Comptes,dc=com", $pass);     // connexion avec test login + mot de passe
+//            if ($debug) {
+//                $ldap_result = ldap_bind($ldap_connect, "uid=" . $login . ",ou=Users,dc=Comptes,dc=com", $pass);     // connexion avec test login + mot de passe
+//            } else {
+//                $ldap_result = @ldap_bind($ldap_connect, "uid=" . $login . ",ou=Users,dc=Comptes,dc=com", $pass);     // connexion avec test login + mot de passe
+//            }
+            if ($debug){
+                echo "L'utilisateur connecté  \"$login\" ne se trouve pas dans le serveur LDAP ";
             }
-            if ($debug)
-                echo "ldap_result=$ldap_result<br>";
             ldap_close($ldap_connect);
         } else {
             echo "Connexion au serveur LDAP impossible...";

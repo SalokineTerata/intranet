@@ -23,7 +23,6 @@
  * ******* */
 //include ("../lib/session.php");         //Récupération des variables de sessions
 //include ("../lib/debut_page.php");      //Affichage des éléments commun à l'Intranet
-
 //$html_image_modif = "&nbsp;<img src=../lib/images/exclamation.png alt=\"\" title=\"Information mise à jour\" width=\"20\" height=\"18\" border=\"0\" />";
 //$html_color_modif = "bgcolor=#B0FFFE";
 $version_modif = 1;                        //Activer la visualisation des modifications effectuées depuis la version précédente
@@ -54,9 +53,9 @@ require_once '../inc/main.php';
 //$password_connect2 = "8ale!ne"; //mot de passe de la base MySQL
 //$donnee2 = mysql_pconnect($hostname_connect2, $username_connect2, $password_connect2) or die("connexion impossible");
 
- $nameOfBDDTarget = '".$nameOfBDDStructure."';
- $nameOfBDDOrigin = 'intranet_v2_0_prod';
- $nameOfBDDStructure = 'intranet_v3_0_dev_2015_10_19';
+$nameOfBDDTarget = 'intranet_v3_0_cod';
+$nameOfBDDOrigin = 'intranet_v2_0_prod';
+$nameOfBDDStructure = 'intranet_v3_0_dev_2015_10_19';
 
 
 /**
@@ -65,14 +64,15 @@ require_once '../inc/main.php';
 //Mise en forme du tableau
 ini_set('memory_limit', '-1');
 ini_set('max_execution_time', 1800);
+
 function getQuery($paramStartValue) {
- $nameOfBDDOrigin = '".$nameOfBDDOrigin."';
+    $nameOfBDDOrigin = 'intranet_v2_0_prod';
 
     return $reqTableClassifRoot = "SELECT classification_arborescence_article.id_classification_arborescence_article, "
             . "ascendant_classification_arborescence_article_categorie_contenu, nom_classification_arborescence_article_categorie_contenu, "
             . "nom_classification_arborescence_article_categorie,classification_arborescence_article_categorie_contenu.id_classification_arborescence_article_categorie_contenu "
-            . "FROM ".$nameOfBDDOrigin.".classification_arborescence_article, ".$nameOfBDDOrigin.".classification_arborescence_article_categorie_contenu, "
-            . "".$nameOfBDDOrigin.".classification_arborescence_article_categorie "
+            . "FROM " . $nameOfBDDOrigin . ".classification_arborescence_article, " . $nameOfBDDOrigin . ".classification_arborescence_article_categorie_contenu, "
+            . "" . $nameOfBDDOrigin . ".classification_arborescence_article_categorie "
             . "WHERE classification_arborescence_article.id_classification_arborescence_article_categorie_contenu = "
             . "classification_arborescence_article_categorie_contenu.id_classification_arborescence_article_categorie_contenu "
             . "AND classification_arborescence_article_categorie.id_classification_arborescence_article_categorie = "
@@ -250,7 +250,7 @@ function recursifOne($paramStartValue, $htmlResult) {
 //                );
 
 $hostname_connect = "dev-intranet.agis.fr"; //nom du serveur MySQL de connection � la base de donn�e
-$database_connect = "".$nameOfBDDStructure.""; //nom de la base de donn�e sur votre serveur MySQL
+$database_connect = $nameOfBDDStructure; //nom de la base de donn�e sur votre serveur MySQL
 $username_connect = "root"; //login de la base MySQL
 $tablename_connect = "salaries"; //table login de la base MySQL
 $password_connect = "8ale!ne"; //mot de passe de la base MySQL
@@ -260,7 +260,7 @@ $donnee = mysql_pconnect($hostname_connect, $username_connect, $password_connect
 
 
 DatabaseOperation::execute(
-        "CREATE TABLE ".$nameOfBDDTarget.".classification_fta2 LIKE  ".$nameOfBDDStructure.".classification_fta2;"
+        "CREATE TABLE " . $nameOfBDDTarget . ".classification_fta2 LIKE  " . $nameOfBDDStructure . ".classification_fta2;"
 );
 foreach ($returnFull as $value) {
 //    $idArborescence = $value[HtmlResult::ID_ARBORESCENCE];
@@ -284,7 +284,7 @@ foreach ($returnFull as $value) {
     $reseau = $value['IdReseau'];
     $saisonalite = $value['IdSaisonnalite'];
 
-    $sql_inter = "INSERT INTO  `".$nameOfBDDTarget."`
+    $sql_inter = "INSERT INTO  `" . $nameOfBDDTarget . "`
     .`classification_fta2` (
     `id_fta_classification2` ,
     `id_Proprietaire_Groupe` ,

@@ -51,7 +51,7 @@ echo  date("H:i:s")."\n";
 /**
 Tables basiques
 **/
-if(FALSE){
+
 echo "DROP ".$nameOfBDDTarget.".classification_arborescence_article ...";
 $sql = "DROP TABLE ".$nameOfBDDTarget.".classification_arborescence_article";
 if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
@@ -4351,32 +4351,34 @@ while ($rowsListeIdGeo=mysql_fetch_array($isteIdGeo)) {
         
         while ($rowsWorkflow=mysql_fetch_array($resultWorkflow)) {
           
-                     $sqlCheckIdIntranetAction = "SELECT id_intranet_actions FROM  ".$nameOfBDDTarget.".intranet_actions 
-                                                    WHERE description_intranet_actions=".$Geo
-                                                    ." AND module_intranet_actions=19"
+                     $sqlCheckIdIntranetAction = "SELECT id_intranet_actions FROM  ".$nameOfBDDTarget.".intranet_actions "
+                                                    ." WHERE description_intranet_actions=\"".$Geo
+                                                    ."\" AND module_intranet_actions=19"
                                                     ." AND parent_intranet_actions=".$rowsWorkflow['id_intranet_actions']
-                                                    ." AND tag_intranet_actions=\"site\"";
-            
-             $rowsCheckIdIntranetAction =  mysql_fetch_array($sqlCheckIdIntranetAction,MYSQL_ASSOC);
+                                                    ." AND tag_intranet_actions=\"site\" ";
+                $resultCheckIdIntranetAction =mysql_query($sqlCheckIdIntranetAction);
+
+             $rowsCheckIdIntranetAction =  mysql_fetch_array($resultCheckIdIntranetAction,MYSQL_ASSOC);
                  
                   if (!$rowsCheckIdIntranetAction['id_intranet_actions']) {  
                       echo "INSERT INTO ".$nameOfBDDTarget."." . "intranet_actions." . "description_intranet_actions .". $Geo ." id_fta_workflow .". $rowsWorkflow['id_fta_workflow'] ." ...";
-                         if(mysql_query(
-                                "INSERT INTO ".$nameOfBDDTarget."." . "intranet_actions"
+                         $sql ="INSERT INTO ".$nameOfBDDTarget.".intranet_actions"
                                 . "(" . "nom_intranet_actions"
                                 . ", " . "module_intranet_actions"
                                 . ", " . "description_intranet_actions"
                                 . ", " . "tag_intranet_actions"
                                 . ", " . "parent_intranet_actions"
-                                . ") VALUES (" .$libelleSiteAgis
-                                . ", " . "19"
-                                . ", " . $Geo
-                                . ", " . "site"
+                                . ") VALUES (\"" .$libelleSiteAgis
+                                . "\", " . "19"
+                                . ", \"" . $Geo
+                                . "\", " . "\"site\""
                                 . ", " . $rowsWorkflow["id_intranet_actions"] 
-                                . ")"
-                        ))
+                                . ")";
+                     $result= mysql_query($sql);
+                     $idIntranetActions  = mysql_insert_id(); 
+                      if($result)
                                   {echo "[OK] \n";}else{echo "[FAILED] intranet_actions.". "description_intranet_actions .". $Geo ." id_fta_workflow .". $rowsWorkflow['id_fta_workflow'] ." \n ";}
-                          $idIntranetActions  = mysql_insert_id();        
+                                 
                                 
                   }else{
                        $idIntranetActions=  $rowsCheckIdIntranetAction['id_intranet_actions'] ;
@@ -4388,7 +4390,9 @@ while ($rowsListeIdGeo=mysql_fetch_array($isteIdGeo)) {
                     ." AND id_intranet_actions=".$idIntranetActions
                     ;
             
-             $rowsCheckFtaActionSite =  mysql_fetch_array($sqlCheckFtaActionSite,MYSQL_ASSOC);
+            $resultCheckFtaActionSite =mysql_query($sqlCheckFtaActionSite);
+            
+             $rowsCheckFtaActionSite =  mysql_fetch_array($resultCheckFtaActionSite,MYSQL_ASSOC);
                  
                  
                  if($rowsCheckFtaActionSite['id_fta_action_site']) {echo "[OK]$idGeo \n";}else{echo "[FAILED] -> INSERT INTO fta_action_site id_site $idGeo id_fta_workflow: ".$rowsWorkflow['id_fta_workflow']."  \n ";}
@@ -4919,7 +4923,7 @@ while ($rowsTableFtaSuiviProjet=mysql_fetch_array($resultFtaSuiviPrjet)) {
    if(mysql_query($selectInsert)) {echo "[OK] \n";}else{echo "[FAILED] $idFtaSuiviProjet \n ";}
    
 }
-}
+
 /**
  * Second traitment fta suivie de projet
  */

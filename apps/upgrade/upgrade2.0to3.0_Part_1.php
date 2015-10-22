@@ -51,7 +51,7 @@ echo  date("H:i:s")."\n";
 /**
 Tables basiques
 **/
-
+if(FALSE){
 echo "DROP ".$nameOfBDDTarget.".classification_arborescence_article ...";
 $sql = "DROP TABLE ".$nameOfBDDTarget.".classification_arborescence_article";
 if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
@@ -5125,11 +5125,31 @@ if ($resultChangeFtaSuviProjetIdUse) {
       
     }
 } 
-
+}
 /**
  * Attribution des droits accès aux utilisateur
  */
+echo "DROP ".$nameOfBDDTarget.".intranet_droits_acces ...";
+$sql = "DROP TABLE ".$nameOfBDDTarget.".intranet_droits_acces";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
 
+echo "CREATE TABLE ".$nameOfBDDTarget.".intranet_droits_acces ...";
+$sql = "CREATE TABLE ".$nameOfBDDTarget.".intranet_droits_acces LIKE ".$nameOfBDDStructure.".intranet_droits_acces";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO ".$nameOfBDDTarget.".intranet_droits_acces ...";
+$sql = " INSERT INTO ".$nameOfBDDTarget.".intranet_droits_acces SELECT ".$nameOfBDDOrigin.".intranet_droits_acces.*
+                FROM ".$nameOfBDDOrigin.".intranet_droits_acces,".$nameOfBDDTarget.".salaries,".$nameOfBDDTarget.".intranet_modules,".$nameOfBDDTarget.".intranet_actions 
+                WHERE ".$nameOfBDDOrigin.".intranet_droits_acces.id_user=".$nameOfBDDTarget.".salaries.id_user 
+                AND ".$nameOfBDDOrigin.".intranet_droits_acces.id_intranet_modules=".$nameOfBDDTarget.".intranet_modules.id_intranet_modules 
+                AND ".$nameOfBDDOrigin.".intranet_droits_acces.id_intranet_actions=".$nameOfBDDTarget.".intranet_actions.id_intranet_actions";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "ALTER TABLE ".$nameOfBDDTarget.".intranet_droits_acces ...";
+$sql = "ALTER TABLE ".$nameOfBDDTarget.".intranet_droits_acces "
+        . " ADD id_intranet_droits_acces INT NOT NULL AUTO_INCREMENT PRIMARY KEY FIRST";
+
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
 
 
 /**
@@ -5197,16 +5217,13 @@ if ($resultListeUserValideFta) {
 
        if ($resultCheckIdIntranetActionsSite) { 
            while ($rowsCheckIdIntranetActionsSite=mysql_fetch_array($resultCheckIdIntranetActionsSite)) {
-           $arrayCheckIdDroitsAccesSite = mysql_query(
-                                "SELECT id_intranet_droits_acces" 
+               $sql =  "SELECT id_intranet_droits_acces" 
                                 . " FROM ".$nameOfBDDTarget.".intranet_droits_acces" 
-                                . " WHERE id_user" 
-                                . "=" . $idUser
+                                . " WHERE id_user=" . $idUser
                                 . " AND id_intranet_modules=19" 
-                                . " AND id_intranet_actions" 
-                                . "=" . $rowsCheckIdIntranetActionsSite["id_intranet_actions"]                      
-                );
-                 $rowsCheckIdDroitsAccesSite =  mysql_fetch_array($arrayCheckIdSuiviProjet,MYSQL_ASSOC);
+                                . " AND id_intranet_actions=" . $rowsCheckIdIntranetActionsSite["id_intranet_actions"];
+           $arrayCheckIdDroitsAccesSite = mysql_query($sql);
+                 $rowsCheckIdDroitsAccesSite =  mysql_fetch_array($arrayCheckIdDroitsAccesSite,MYSQL_ASSOC);
                  
                  
                  if($rowsCheckIdDroitsAccesSite['id_intranet_droits_acces']) {echo "[OK]$idFta \n";}else{echo "[FAILED] INSERT idFta: $idFta idFtaChapitre ".$rowsChapitre['id_fta_chapitre']."\n ";}
@@ -5273,6 +5290,7 @@ if ($resultListeUserValideFta) {
      
     }
 } 
+
 
 
 /**

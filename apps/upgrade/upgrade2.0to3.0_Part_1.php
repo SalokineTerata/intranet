@@ -51,7 +51,7 @@ echo  date("H:i:s")."\n";
 /**
 Tables basiques
 **/
-if(FALSE){
+if(TRUE){
 echo "DROP ".$nameOfBDDTarget.".classification_arborescence_article ...";
 $sql = "DROP TABLE ".$nameOfBDDTarget.".classification_arborescence_article";
 if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
@@ -5226,7 +5226,7 @@ if ($resultListeUserValideFta) {
                  $rowsCheckIdDroitsAccesSite =  mysql_fetch_array($arrayCheckIdDroitsAccesSite,MYSQL_ASSOC);
                  
                  
-                 if($rowsCheckIdDroitsAccesSite['id_intranet_droits_acces']) {echo "[OK]$idFta \n";}else{echo "[FAILED] INSERT idFta: $idFta idFtaChapitre ".$rowsChapitre['id_fta_chapitre']."\n ";}
+                 if($rowsCheckIdDroitsAccesSite['id_intranet_droits_acces']) {echo "[OK]$idFta  \n";}else{echo "[FAILED] INSERT id_user: $idUser id_intranet_actions ".$rowsCheckIdIntranetActionsSite['id_intranet_actions']."\n ";}
            
                 if (!$rowsCheckIdDroitsAccesSite['id_intranet_droits_acces']) {
                       echo "INSERT INTO ".$nameOfBDDTarget."." . "intranet_droits_acces." . "id_user .". $idUser ." ...";
@@ -5268,7 +5268,7 @@ if ($resultListeUserValideFta) {
                  $rowsCheckIdSuiviProjet =  mysql_fetch_array($arrayCheckIdSuiviProjet,MYSQL_ASSOC);
                  
                  
-                 if($rowsCheckIdSuiviProjet['id_intranet_droits_acces']) {echo "[OK]$idFta \n";}else{echo "[FAILED] INSERT idFta: $idFta idFtaChapitre ".$rowsChapitre['id_fta_chapitre']."\n ";}
+                 if($rowsCheckIdSuiviProjet['id_intranet_droits_acces']) {echo "[OK]$idFta \n";}else{echo "[FAILED] INSERT id_user: $idUser id_intranet_actions ".$rowsCheckIdIntranetActionsSite['id_intranet_actions']."\n ";}
            
                 if (!$rowsCheckIdSuiviProjet['id_intranet_droits_acces']) {
                       echo "INSERT INTO ".$nameOfBDDTarget."." . "intranet_droits_acces." . "id_user .". $idUser ." ...";

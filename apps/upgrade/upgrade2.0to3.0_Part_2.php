@@ -38,7 +38,7 @@ echo "*** Requêtes SQL Part2:\n";
 
 echo  date("H:i:s")."\n";
 
-if(FALSE){
+
 $arrayFta = mysql_query(
                 "SELECT DISTINCT fta.id_fta FROM ".$nameOfBDDTarget.".fta,".$nameOfBDDTarget.".classification_fta WHERE classification_fta.id_fta =fta.id_fta "
 );
@@ -65,8 +65,8 @@ $sql = "ALTER TABLE classification_fta2
         DROP id_arborescence";
 if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
 
-}
-if(FALSE){
+
+
 
 // Fta workflow structure    
     echo "ALTER TABLE ".$nameOfBDDTarget.".fta_workflow_structure id_fta_workflow...";
@@ -446,7 +446,7 @@ if(FALSE){
     
   if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
     
-}
+
 echo  date("H:i:s")."\n";
  
 ?>

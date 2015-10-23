@@ -15,11 +15,15 @@ body {
     font-size: 8px;
     color: #000000;
     text-decoration: none;
-    background-color: #AAAAFF;
+        /*background-color: #007cf9*/
+        /*background-color: #00baf9*/
+    background-color: #009dd1
+    /*background-color: #AAAAFF*/
 }
 
 .tableauFiche.table.td:hover{
-    background-color: #AAAAFF;
+    /*background-color: #AAAAFF;*/
+    background-color: #009dd1;
 }
 
 table {
@@ -51,13 +55,23 @@ A:hover.link1
 .loginFFCC66droit { font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 10px; font-style: normal; font-weight: normal; color: #000000; background-color: #FFCC66; text-decoration: none; text-align: right; vertical-align: middle; font-variant: normal }
 .loginFFCC66Centre { font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 10px; font-style: normal; font-weight: bold; color: #000000; background-color: #FFCC66; text-decoration: none; text-align: center; vertical-align: middle; font-variant: normal }
 .contours {  font-family: Arial, Helvetica, sans-serif; font-size: 10px; background-color: #FFE5B2; border-top-width: 1px; border-right-width: 1px; border-bottom-width: 1px; border-left-width: 1px; line-height: 12px; color: #000000}
-.titre_principal { text-align: center; vertical-align: middle; font-size: 13px; font-weight: bold; background-color: #CCCCFF; vertical-align: middle; text-align: center;}
+.titre_principal { 
+    text-align: center;
+    vertical-align: middle;
+    font-size: 13px; 
+    font-weight: bold; 
+    /*background-color: #CCCCFF;*/ 
+    background-color: #0dc3ff;
+    vertical-align: middle; 
+    text-align: center;
+}
 .titre_tableau {   font-weight: bold; }
 .titre { text-align: center; vertical-align: middle; font-size: 11px; font-weight: bold;  vertical-align: middle; text-align: center;}
 .titresynthese { font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 20px; clip: rect( ) }
 .contenu {
     font-size: 11px;
-    background-color: #EDEDFF;
+    /*background-color: #EDEDFF;*/
+     background-color: #aaeaff;
     font-style: normal;
     font-weight: normal;
     text-align: left;
@@ -98,8 +112,29 @@ A:hover.link1
 
 #bandeau_vague
 {
-margin-right: 0px;
-padding-right: 0px; /* seule les marges internes et externes de droite seront supprimées */
-border: 1px solid black; /* pour bien voir que les images sont collées */
+    margin-right: 0px;
+    padding-right: 0px; /* seule les marges internes et externes de droite seront supprimées */
+    border: 1px solid black; /* pour bien voir que les images sont collées */
 }
- 
+
+.cadre{
+    margin-top: 250px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align:center;
+    height: 50px;
+    width: 900px;
+    border: 1px solid black;
+}
+
+#barre{
+    height: 50px;
+    width: 0px;
+    background-color: red;
+}
+
+.texte{
+    text-align: center;
+    font-size: 26px;
+    font-weight: bold;
+}

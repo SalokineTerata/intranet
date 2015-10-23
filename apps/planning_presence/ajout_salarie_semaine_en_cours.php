@@ -7,6 +7,8 @@
 //   $module=trim($module);
 require_once '../inc/main.php';
 print_page_begin($disable_full_page, $menu_file);
+flush();
+
 $planning_presence_modification = Lib::isDefined('planning_presence_modification');
 $id_groupe = Lib::isDefined('id_groupe');
 $selection_semaine_en_cours = Lib::isDefined('selection_semaine_en_cours');

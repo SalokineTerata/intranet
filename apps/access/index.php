@@ -48,6 +48,8 @@ switch ($output) {
 }//Fin de la sélection du mode d'affichage de la page
 require_once '../inc/main.php';
 print_page_begin($disable_full_page, $menu_file);
+flush();
+
 //print_page_begin($disable_full_page, $menu_file);
 /* * ***********
   Début Code PHP

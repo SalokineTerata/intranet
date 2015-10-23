@@ -606,11 +606,15 @@ function print_page_begin($disable_full_page = FALSE, $menu_file = NULL, $conf =
     echo "</head>";
 
 
-    echo "<body $printable leftmargin=0 topmargin=0 marginwidth=0 marginheight=0>";
+    echo "<body $printable leftmargin=0 topmargin=0 marginwidth=0 marginheight=0 onload=chargement()>";
 
+    echo "<div id=chargement style=width:100%;height:75px;color:red;font-weight:bold;font-size:14px;background:white;>
+           <img src= ..\lib\images\ajax_loader.gif> Chargement ...
+          </div>";
 
+    
     if (!$disable_full_page) {
-        //echo "TEST";
+        echo "<div id=site style=visibility:hidden;>";
         echo "<table border=0 cellspacing=0 cellpadding=0 height=534>";
         echo "<tr>";
         echo "<td valign=top  align=center><div id=menu class=display_none>";

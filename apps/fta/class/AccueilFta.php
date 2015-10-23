@@ -391,11 +391,13 @@ class AccueilFta {
 
 
         if ($paramArrayRole[$idFieldNomFtaRole][FtaRoleModel::KEYNAME] == $idFtaRole) {
-            $color = 'bgcolor=#AAAAFF';
+//            $color = 'bgcolor=#AAAAFF';
+            $color = 'bgcolor=#009dd1';
         }
 
         if ($paramArrayEtat[$idKeyNameFtaEtat][FtaEtatModel::FIELDNAME_ABREVIATION] == $nomFtaEtat) {
-            $color1 = 'bgcolor=#AAAAFF';
+//            $color1 = 'bgcolor=#AAAAFF';
+            $color1 = 'bgcolor=#009dd1';
         }
 
 
@@ -416,7 +418,8 @@ class AccueilFta {
                 break;
         }
         if ($paramSyntheseAction == $ligneEtatAvancement) {
-            $color2 = 'bgcolor=#AAAAFF';
+//            $color2 = 'bgcolor=#AAAAFF';
+            $color2 = 'bgcolor=#009dd1';
         }
 
 
@@ -641,7 +644,8 @@ class AccueilFta {
                         if ($recap[$idFta] == '100%') {
                             $bgcolor = 'bgcolor=#AFFF5A';
                         } else {
-                            $bgcolor = 'bgcolor=#A5A5CE ';
+//                            $bgcolor = 'bgcolor=#A5A5CE ';
+                            $bgcolor = 'bgcolor=#009dd1 ';
                         }
                         break;
 
@@ -723,7 +727,7 @@ class AccueilFta {
                         ((self::$idFtaRole == '1' or self::$idFtaRole == '6' ) and $recap[$idFta] == '100%' )
                         and self::$ftaModification and ( self::$abrevationFtaEtat == FtaEtatModel::ETAT_ABREVIATION_VALUE_MODIFICATION)
                         or ( $ok == '2' and $accesTransitionButton == FALSE && $recap[$idFta] == '100%')
-                        or ( self::$syntheseAction == FtaEtatModel::ETAT_AVANCEMENT_VALUE_ALL )
+                        or ( self::$syntheseAction == FtaEtatModel::ETAT_AVANCEMENT_VALUE_ALL  AND (self::$idFtaRole == '1' or self::$idFtaRole == '6' ))
                         or ( (self::$idFtaRole == '1' or self::$idFtaRole == '6' ) and self::$syntheseAction == FtaEtatModel::ETAT_AVANCEMENT_VALUE_EFFECTUES)
                 ) {
                     $actions .= '<a '

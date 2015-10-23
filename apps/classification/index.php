@@ -45,147 +45,152 @@ switch ($output) {
 //        }
         require_once '../inc/main.php';
         print_page_begin($disable_full_page, $menu_file);
+        flush();
+
 }//Fin de la sélection du mode d'affichage de la page
 
 
 /* * ***********
   Début Code PHP
  * *********** */
-
-/*
-  Initialisation des variables
- */
-$page_default = substr(strrchr($_SERVER["PHP_SELF"], '/'), '1', '-4');
-$page_action = $page_default . "_post.php";
-$page_pdf = $page_default . "_pdf.php";
-$action = 'valider';                       //Action proposée à la page _post.php
-$method = 'POST';                          //Pour une url > 2000 caractères, ne pas utiliser utiliser GET
-$html_table = "table "                     //Permet d'harmoniser les tableaux
-        . "border=1 "
-        . "width=100% "
-        . " "
-;
-$selection_proprietaire1 = Lib::getParameterFromRequest('selection_proprietaire1');
-$selection_proprietaire2 = Lib::getParameterFromRequest('selection_proprietaire2');
-$selection_marque = Lib::getParameterFromRequest('selection_marque');
-$selection_activite = Lib::getParameterFromRequest('selection_activite');
-$selection_rayon = Lib::getParameterFromRequest('selection_rayon');
-$selection_environnement = Lib::getParameterFromRequest('selection_environnement');
-$selection_reseau = Lib::getParameterFromRequest('selection_reseau');
-$selection_saisonnalite = Lib::getParameterFromRequest('selection_saisonnalite');
 $globalConfig = new GlobalConfig();
-$idUser = $globalConfig->getAuthenticatedUser()->getKeyValue();
-$classificationModifier = ClassificationFta2Model::getClassificationModification($idUser);
-$isEditable = TRUE;
-
-if (!$selection_proprietaire1) {
-    $selection_proprietaire1 = 0;
+if ($globalConfig->getAuthenticatedUser()) {
+    $idUser = $globalConfig->getAuthenticatedUser()->getKeyValue();
 }
-ClassificationFta2Model::initClassification($selection_proprietaire1, $selection_proprietaire2, $selection_marque
-        , $selection_activite, $selection_rayon, $selection_environnement, $selection_reseau, $selection_saisonnalite);
-$bloc .= "<" . $html_table . "><tr class=titre>"
-        . "<td>Proprietaire (Groupe)</td>"
-        . "<td>Proprietaire (Enseigne)</td>"
-        . "<td>" . HtmlResult::MARQUE . "</td>"
-        . "<td>" . HtmlResult::ACTIVITE . "</td>"
-        . "<td>" . HtmlResult::RAYON . "</td>"
-        . "<td>" . HtmlResult::ENVIRONNEMENT . "</td>"
-        . "<td>" . HtmlResult::RESEAU . "</td>"
-        . "<td>" . HtmlResult::SAISONALITE . "</td>"
-        . "</tr>";
-$bloc.="<td>" . ClassificationFta2Model::getListeClassificationProprietaireGroupe($selection_proprietaire1, $isEditable) . "</td>";
+if ($idUser) {
+    /*
+      Initialisation des variables
+     */
+    $page_default = substr(strrchr($_SERVER["PHP_SELF"], '/'), '1', '-4');
+    $page_action = $page_default . "_post.php";
+    $page_pdf = $page_default . "_pdf.php";
+    $action = 'valider';                       //Action proposée à la page _post.php
+    $method = 'POST';                          //Pour une url > 2000 caractères, ne pas utiliser utiliser GET
+    $html_table = "table "                     //Permet d'harmoniser les tableaux
+            . "border=1 "
+            . "width=100% "
+            . " "
+    ;
+    $selection_proprietaire1 = Lib::getParameterFromRequest('selection_proprietaire1');
+    $selection_proprietaire2 = Lib::getParameterFromRequest('selection_proprietaire2');
+    $selection_marque = Lib::getParameterFromRequest('selection_marque');
+    $selection_activite = Lib::getParameterFromRequest('selection_activite');
+    $selection_rayon = Lib::getParameterFromRequest('selection_rayon');
+    $selection_environnement = Lib::getParameterFromRequest('selection_environnement');
+    $selection_reseau = Lib::getParameterFromRequest('selection_reseau');
+    $selection_saisonnalite = Lib::getParameterFromRequest('selection_saisonnalite');
 
-if ($selection_proprietaire1) {
+    $classificationModifier = ClassificationFta2Model::getClassificationModification($idUser);
+    $isEditable = TRUE;
 
-    $bloc.= "<td>" . ClassificationFta2Model::getListeClassification($selection_proprietaire1, $selection_proprietaire2
-                    , ClassificationFta2Model::FIELDNAME_ID_PROPRIETAIRE_ENSEIGNE
-                    , ClassificationFta2Model::FIELDNAME_ID_PROPRIETAIRE_GROUPE
-                    , 'selection_proprietaire2'
-                    , $isEditable
-                    , $selection_marque2
-            ) . "</td>";
+    if (!$selection_proprietaire1) {
+        $selection_proprietaire1 = 0;
+    }
+    ClassificationFta2Model::initClassification($selection_proprietaire1, $selection_proprietaire2, $selection_marque
+            , $selection_activite, $selection_rayon, $selection_environnement, $selection_reseau, $selection_saisonnalite);
+    $bloc .= "<" . $html_table . "><tr class=titre>"
+            . "<td>Proprietaire (Groupe)</td>"
+            . "<td>Proprietaire (Enseigne)</td>"
+            . "<td>" . HtmlResult::MARQUE . "</td>"
+            . "<td>" . HtmlResult::ACTIVITE . "</td>"
+            . "<td>" . HtmlResult::RAYON . "</td>"
+            . "<td>" . HtmlResult::ENVIRONNEMENT . "</td>"
+            . "<td>" . HtmlResult::RESEAU . "</td>"
+            . "<td>" . HtmlResult::SAISONALITE . "</td>"
+            . "</tr>";
+    $bloc.="<td>" . ClassificationFta2Model::getListeClassificationProprietaireGroupe($selection_proprietaire1, $isEditable) . "</td>";
 
-    if ($selection_proprietaire2 <> NULL) {
-        $bloc.="<td>" . ClassificationFta2Model::getListeClassification($selection_proprietaire2, $selection_marque
-                        , ClassificationFta2Model::FIELDNAME_ID_MARQUE
+    if ($selection_proprietaire1) {
+
+        $bloc.= "<td>" . ClassificationFta2Model::getListeClassification($selection_proprietaire1, $selection_proprietaire2
                         , ClassificationFta2Model::FIELDNAME_ID_PROPRIETAIRE_ENSEIGNE
-                        , 'selection_marque'
+                        , ClassificationFta2Model::FIELDNAME_ID_PROPRIETAIRE_GROUPE
+                        , 'selection_proprietaire2'
                         , $isEditable
+                        , $selection_marque2
                 ) . "</td>";
-        if ($selection_marque) {
-            $bloc.="<td>" . ClassificationFta2Model::getListeClassification($selection_marque, $selection_activite
-                            , ClassificationFta2Model::FIELDNAME_ID_ACTIVITE
+
+        if ($selection_proprietaire2 <> NULL) {
+            $bloc.="<td>" . ClassificationFta2Model::getListeClassification($selection_proprietaire2, $selection_marque
                             , ClassificationFta2Model::FIELDNAME_ID_MARQUE
-                            , 'selection_activite'
+                            , ClassificationFta2Model::FIELDNAME_ID_PROPRIETAIRE_ENSEIGNE
+                            , 'selection_marque'
                             , $isEditable
                     ) . "</td>";
-            if ($selection_activite) {
-                $bloc.="<td>" . ClassificationFta2Model::getListeClassification($selection_activite, $selection_rayon
-                                , ClassificationFta2Model::FIELDNAME_ID_RAYON
+            if ($selection_marque) {
+                $bloc.="<td>" . ClassificationFta2Model::getListeClassification($selection_marque, $selection_activite
                                 , ClassificationFta2Model::FIELDNAME_ID_ACTIVITE
-                                , 'selection_rayon'
+                                , ClassificationFta2Model::FIELDNAME_ID_MARQUE
+                                , 'selection_activite'
                                 , $isEditable
                         ) . "</td>";
-                if ($selection_rayon) {
-                    $bloc.="<td>" . ClassificationFta2Model::getListeClassification($selection_rayon, $selection_environnement
-                                    , ClassificationFta2Model::FIELDNAME_ID_ENVIRONNEMENT
+                if ($selection_activite) {
+                    $bloc.="<td>" . ClassificationFta2Model::getListeClassification($selection_activite, $selection_rayon
                                     , ClassificationFta2Model::FIELDNAME_ID_RAYON
-                                    , 'selection_environnement'
+                                    , ClassificationFta2Model::FIELDNAME_ID_ACTIVITE
+                                    , 'selection_rayon'
                                     , $isEditable
                             ) . "</td>";
-                    if ($selection_environnement) {
-                        $bloc.="<td>" . ClassificationFta2Model::getListeClassification($selection_environnement, $selection_reseau
-                                        , ClassificationFta2Model::FIELDNAME_ID_RESEAU
+                    if ($selection_rayon) {
+                        $bloc.="<td>" . ClassificationFta2Model::getListeClassification($selection_rayon, $selection_environnement
                                         , ClassificationFta2Model::FIELDNAME_ID_ENVIRONNEMENT
-                                        , 'selection_reseau'
+                                        , ClassificationFta2Model::FIELDNAME_ID_RAYON
+                                        , 'selection_environnement'
                                         , $isEditable
                                 ) . "</td>";
-                        if ($selection_reseau) {
-                            $bloc.="<td>" . ClassificationFta2Model::getListeClassification($selection_reseau, $selection_saisonnalite
-                                            , ClassificationFta2Model::FIELDNAME_ID_SAISONNALITE
+                        if ($selection_environnement) {
+                            $bloc.="<td>" . ClassificationFta2Model::getListeClassification($selection_environnement, $selection_reseau
                                             , ClassificationFta2Model::FIELDNAME_ID_RESEAU
-                                            , 'selection_saisonnalite'
+                                            , ClassificationFta2Model::FIELDNAME_ID_ENVIRONNEMENT
+                                            , 'selection_reseau'
                                             , $isEditable
                                     ) . "</td>";
+                            if ($selection_reseau) {
+                                $bloc.="<td>" . ClassificationFta2Model::getListeClassification($selection_reseau, $selection_saisonnalite
+                                                , ClassificationFta2Model::FIELDNAME_ID_SAISONNALITE
+                                                , ClassificationFta2Model::FIELDNAME_ID_RESEAU
+                                                , 'selection_saisonnalite'
+                                                , $isEditable
+                                        ) . "</td>";
+                            }
                         }
                     }
                 }
             }
         }
     }
-}
 
 
-$bloc .= "<" . $html_table . "><tr class=titre>";
-if ($classificationModifier) {
-    $bloc .= "<td></td>";
-}
-$bloc .= "<td>Proprietaire (Groupe)</td>"
-        . "<td>Proprietaire (Enseigne)</td>"
-        . "<td>" . HtmlResult::MARQUE . "</td>"
-        . "<td>" . HtmlResult::ACTIVITE . "</td>"
-        . "<td>" . HtmlResult::RAYON . "</td>"
-        . "<td>" . HtmlResult::ENVIRONNEMENT . "</td>"
-        . "<td>" . HtmlResult::RESEAU . "</td>"
-        . "<td>" . HtmlResult::SAISONALITE . "</td>"
-        . "</tr>";
-
-
-$array = ClassificationFta2Model::getArrayListeClassification();
-
-foreach ($array as $value) {
-    $key = $value[ClassificationFta2Model::KEYNAME];
-    $bloc .="<tr class=\"contenu\" name=id_fta_classification2 value=" . $key . ">";
-//Modifier
+    $bloc .= "<" . $html_table . "><tr class=titre>";
     if ($classificationModifier) {
-        $bloc.="<td><a href=classification_modifier.php?id_fta_classification2=" . $key . "&action=modifier > "
-                . "<img src=../lib/images/next.png alt=Modifier  width=24 height=24 border=0 />"
-                . "</a>";
-        $bloc.="<a href=# onClick=confirmation_correction_classification" . $key . "() > "
-                . "<img src=../lib/images/supprimer.png alt=Supprimer cette Classification  width=24 height=24 border=0 />"
-                . "</a></td>";
+        $bloc .= "<td></td>";
+    }
+    $bloc .= "<td>Proprietaire (Groupe)</td>"
+            . "<td>Proprietaire (Enseigne)</td>"
+            . "<td>" . HtmlResult::MARQUE . "</td>"
+            . "<td>" . HtmlResult::ACTIVITE . "</td>"
+            . "<td>" . HtmlResult::RAYON . "</td>"
+            . "<td>" . HtmlResult::ENVIRONNEMENT . "</td>"
+            . "<td>" . HtmlResult::RESEAU . "</td>"
+            . "<td>" . HtmlResult::SAISONALITE . "</td>"
+            . "</tr>";
 
-        $javascript.='
+
+    $array = ClassificationFta2Model::getArrayListeClassification();
+
+    foreach ($array as $value) {
+        $key = $value[ClassificationFta2Model::KEYNAME];
+        $bloc .="<tr class=\"contenu\" name=id_fta_classification2 value=" . $key . ">";
+//Modifier
+        if ($classificationModifier) {
+            $bloc.="<td><a href=classification_modifier.php?id_fta_classification2=" . $key . "&action=modifier > "
+                    . "<img src=../lib/images/next.png alt=Modifier  width=24 height=24 border=0 />"
+                    . "</a>";
+            $bloc.="<a href=# onClick=confirmation_correction_classification" . $key . "() > "
+                    . "<img src=../lib/images/supprimer.png alt=Supprimer cette Classification  width=24 height=24 border=0 />"
+                    . "</a></td>";
+
+            $javascript.='
                            <SCRIPT LANGUAGE=JavaScript>
                                    function confirmation_correction_classification' . $key . '()
                                    {
@@ -197,21 +202,21 @@ foreach ($array as $value) {
                                    }
                            </SCRIPT>
                            ';
-        $Ajout = " Ajout d'une classification:<a href=classification_modifier.php><img src=\"../lib/images/plus.png\"/\" alt=\"\" width=\"10\" height=\"10\" border=\"0\" /></a>";
+            $Ajout = " Ajout d'une classification:<a href=classification_modifier.php><img src=\"../lib/images/plus.png\"/\" alt=\"\" width=\"10\" height=\"10\" border=\"0\" /></a>";
+        }
+
+        $bloc.= "<td >" . ClassificationFta2Model::getNameClassification($value[ClassificationFta2Model::FIELDNAME_ID_PROPRIETAIRE_GROUPE]) . "</td>"
+                . "<td >" . ClassificationFta2Model::getNameClassification($value[ClassificationFta2Model::FIELDNAME_ID_PROPRIETAIRE_ENSEIGNE]) . "</td>"
+                . "<td >" . ClassificationFta2Model::getNameClassification($value[ClassificationFta2Model::FIELDNAME_ID_MARQUE]) . "</td>"
+                . "<td >" . ClassificationFta2Model::getNameClassification($value[ClassificationFta2Model::FIELDNAME_ID_ACTIVITE]) . "</td>"
+                . "<td >" . ClassificationFta2Model::getNameClassification($value[ClassificationFta2Model::FIELDNAME_ID_RAYON]) . "</td>"
+                . "<td >" . ClassificationFta2Model::getNameClassification($value[ClassificationFta2Model::FIELDNAME_ID_ENVIRONNEMENT]) . "</td>"
+                . "<td >" . ClassificationFta2Model::getNameClassification($value[ClassificationFta2Model::FIELDNAME_ID_RESEAU]) . "</td>"
+                . "<td >" . ClassificationFta2Model::getNameClassification($value[ClassificationFta2Model::FIELDNAME_ID_SAISONNALITE]) . "</td>";
+
+        $bloc .="</tr>";
     }
-
-    $bloc.= "<td >" . ClassificationFta2Model::getNameClassification($value[ClassificationFta2Model::FIELDNAME_ID_PROPRIETAIRE_GROUPE]) . "</td>"
-            . "<td >" . ClassificationFta2Model::getNameClassification($value[ClassificationFta2Model::FIELDNAME_ID_PROPRIETAIRE_ENSEIGNE]) . "</td>"
-            . "<td >" . ClassificationFta2Model::getNameClassification($value[ClassificationFta2Model::FIELDNAME_ID_MARQUE]) . "</td>"
-            . "<td >" . ClassificationFta2Model::getNameClassification($value[ClassificationFta2Model::FIELDNAME_ID_ACTIVITE]) . "</td>"
-            . "<td >" . ClassificationFta2Model::getNameClassification($value[ClassificationFta2Model::FIELDNAME_ID_RAYON]) . "</td>"
-            . "<td >" . ClassificationFta2Model::getNameClassification($value[ClassificationFta2Model::FIELDNAME_ID_ENVIRONNEMENT]) . "</td>"
-            . "<td >" . ClassificationFta2Model::getNameClassification($value[ClassificationFta2Model::FIELDNAME_ID_RESEAU]) . "</td>"
-            . "<td >" . ClassificationFta2Model::getNameClassification($value[ClassificationFta2Model::FIELDNAME_ID_SAISONNALITE]) . "</td>";
-
-    $bloc .="</tr>";
 }
-
 /*
   Sélection du mode d'affichage
  */
@@ -291,7 +296,6 @@ switch ($output) {
 
         </form>
         ";
-
 
 
         /*         * *********************

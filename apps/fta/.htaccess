@@ -1,0 +1,6 @@
+# Fichier de configuration pour le répertoire /apps/fta/ 
+
+RewriteEngine On
+
+RewriteRule ^index\.php$ index.php [L]
+RewriteRule ^modification_fiche\.php$ modification_fiche.php [L]

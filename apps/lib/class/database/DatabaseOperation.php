@@ -186,7 +186,12 @@ class DatabaseOperation {
      * @return type
      */
     public static function queryPDO($paramRequest) {
-        $result = DatabaseOperation::databaseAcces()->query($paramRequest);
+        $pdo = DatabaseOperation::databaseAcces();
+        $result = $pdo->query($paramRequest);
+        /**
+         * Fermeture de la connection
+         */
+        $pdo = NULL;
         $time_start = DatabaseOperation::microtime_float();
 
         // Attend pendant un moment
@@ -205,6 +210,32 @@ class DatabaseOperation {
      * @return type
      */
     public static function execute($paramRequest) {
+        $pdo = DatabaseOperation::databaseAcces();
+        $result = $pdo->prepare($paramRequest);
+        $result->closeCursor();
+        $validation = $result->execute();
+        /**
+         * Fermeture de la connection
+         */
+        $pdo = NULL;
+        $time_start = DatabaseOperation::microtime_float();
+
+        // Attend pendant un moment
+        usleep(100);
+
+        $time_end = DatabaseOperation::microtime_float();
+        $time = $time_end - $time_start;
+        self::setQueriesInfo($paramRequest, $time, self::IncrementQueryCount());
+
+        return $validation;
+    }
+
+    /**
+     * La requête PDO execute réalise les requ$etes SQL (INSERT, DELETE et UPDATE)  sans la femeture de connection
+     * @param type $paramRequest
+     * @return type
+     */
+    public static function executeComplete($paramRequest) {
         $pdo = DatabaseOperation::databaseAcces();
         $result = $pdo->prepare($paramRequest);
         $result->closeCursor();
@@ -566,7 +597,7 @@ class DatabaseOperation {
      */
     public static function reserveKeyDatabase($paramTableName) {
         $sqlReq = 'INSERT ' . $paramTableName . ' VALUES()';
-        $sqlResult = DatabaseOperation::execute($sqlReq);
+        $sqlResult = DatabaseOperation::executeComplete($sqlReq);
         $return = $sqlResult->lastInsertId();
         return $return;
     }

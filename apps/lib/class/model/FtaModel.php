@@ -919,7 +919,7 @@ class FtaModel extends AbstractModel {
      * @return int
      */
     public static function DuplicationIdFta($paramIdFta) {
-        $pdo = DatabaseOperation::execute(
+        $pdo = DatabaseOperation::executeComplete(
                         " INSERT INTO " . FtaModel::TABLENAME . " (id_access_arti2, OLD_numft, id_fta_workflow,
  commentaire, OLD_id_fta_palettisation, id_dossier_fta, id_version_dossier_fta,
  OLD_champ_maj_fta, id_fta_etat, createur_fta, date_derniere_maj_fta,
@@ -1056,7 +1056,7 @@ class FtaModel extends AbstractModel {
      * @return int
      */
     public static function CreateFta($paramIdCreateur, $paramIdFtaEtat, $paramIdFtaWorkflow, $paramDesignationCommerciale, $paramDateCreation, $paramSiteDeProduction) {
-        $Id = DatabaseOperation::execute(
+        $Id = DatabaseOperation::executeComplete(
                         "INSERT INTO `intranet_v3_0_cod`." . FtaModel::TABLENAME
                         . " ( " . FtaModel::FIELDNAME_CREATEUR
                         . "," . FtaModel::FIELDNAME_ID_FTA_ETAT

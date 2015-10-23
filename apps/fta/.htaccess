@@ -2,5 +2,8 @@
 
 RewriteEngine On
 
-#RewriteRule ^index\.php$ index.php [L]
+RewriteBase /v3/apps/fta/
+
+RewriteCond %{DOCUMENT_ROOT} !^$ 
 RewriteRule ^modification_fiche\.php$ modification_fiche.php [L]
+#RewriteRule ^index\.php$ index.php [L]

@@ -48,6 +48,8 @@ switch($output)
 //        }
       require_once '../inc/main.php';
       print_page_begin($disable_full_page, $menu_file);
+      flush();
+
 }//Fin de la sélection du mode d'affichage de la page
 
 //Initialisation des droits d'accès du module planning_presence

@@ -23,7 +23,7 @@
 //include ('../lib/debut_page.php');      //Affichage des éléments commun à l'Intranet
 require_once '../inc/main.php';
 print_page_begin($disable_full_page, $menu_file);
-
+flush();
 /*
  * Initilisation
  */
@@ -88,7 +88,7 @@ if ($id_user) {
             $synthese_action = FtaEtatModel::ETAT_AVANCEMENT_VALUE_EN_COURS;
         } else {
             $synthese_action = FtaEtatModel::ETAT_AVANCEMENT_VALUE_ALL;
-            $idFtaRoleEncoursDefault ='0';
+            $idFtaRoleEncoursDefault = '0';
             $nomFtaEtat = FtaEtatModel::ETAT_ABREVIATION_VALUE_VALIDE;
             $id_fta_etat = '3';
         }
@@ -159,6 +159,9 @@ if ($id_user) {
     /*
      * Initialisation des valeurs
      */
+    /**
+     * traitement long
+     */
     AccueilFta::initAccueil($id_user, $id_fta_etat, $nomFtaEtat, $synthese_action, $idFtaRoleEncours, $order_common, $lieuGeo, $debut);
 
 
@@ -185,6 +188,9 @@ if ($id_user) {
         if ($synthese_action) {
             //echo $id_fta_etat;
             //$tableau_fiche = AccueilFta::getTableauFiche($id_fta_etat, $choix, $isLimit, $order_common);
+            /**
+             * traitement long
+             */
             $tableau_fiche = AccueilFta::getHtmlTableauFiche();
             $fileAriane = AccueilFta::getFileAriane();
             $pagination = AccueilFta::paginer(AccueilFta::VALUE_MAX_PAR_PAGE, $numeroDePageCourante, '4', '4', '1', '1');

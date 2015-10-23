@@ -35,7 +35,7 @@ echo "*** Requêtes SQL Part2:\n";
  * Generation de la table classification_fta2*
  * excution depuis l'interface
  */
-
+$debut =date("H:i:s");
 echo  date("H:i:s")."\n";
 
 
@@ -447,6 +447,6 @@ if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
   if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
     
 
-echo  date("H:i:s")."\n";
+echo"Debut :". $debut ." Fin :" .date("H:i:s")."\n";
  
 ?>

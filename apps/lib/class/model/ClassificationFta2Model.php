@@ -244,7 +244,7 @@ class ClassificationFta2Model extends AbstractModel {
      * @return int
      */
     public static function InsertClassification() {
-        $pdo = DatabaseOperation::execute(
+        $pdo = DatabaseOperation::executeComplete(
                         'INSERT INTO ' . ClassificationFta2Model::TABLENAME
                         . ' VALUES (NULL ,  \'\',  \'\',  \'\',  \'\',  \'\',  \'\',  \'\',  \'\')'
         );

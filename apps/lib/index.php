@@ -59,9 +59,9 @@ Sinon, accéder à l\'<a href=index.php> intranet en vous authentifiant ici</a><
 
     echo '<html>';
     echo '<head>';
-    echo '<title>$title</title>';
+    echo '<title>'.$title.'</title>';
 
-    echo '<link rel=stylesheet href=../lib/css/$css_intranet_module type=text/css>';
+    echo '<link rel=stylesheet href=../lib/css/'.  $css_intranet_module .' type=text/css>';
     echo '</head>';
 //} else {
 

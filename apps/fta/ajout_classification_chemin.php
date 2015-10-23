@@ -25,6 +25,8 @@ Inclusions
 //include ("../lib/debut_page.php");      //Affichage des éléments commun à l'Intranet
 require_once '../inc/main.php';
 print_page_begin($disable_full_page, $menu_file);
+flush();
+
 
 //if (isset($menu))                       //Si existant, utilisation du menu demandé
 //   {include ("./$menu");}               //en variable

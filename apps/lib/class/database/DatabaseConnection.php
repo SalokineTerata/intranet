@@ -32,7 +32,7 @@ class DatabaseConnection extends PDO {
 
         //  $this->setPdoObjet($globalConfig->getDatabaseConnexion());
     }
-
+   
     function getPdoObjet() {
         return $this->PdoObjet;
     }

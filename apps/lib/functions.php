@@ -209,13 +209,25 @@ function identification1($mysql_table_authentification, $login, $pass, GlobalCon
             $req_authentification = $req_authentification_main . $mysql_passwd;
             $q1 = DatabaseOperation::queryPDO($req_authentification);
             $mysql_result = DatabaseOperation::getSqlNumRows($q1);
-            if (!$mysql_result) {
+            if (!$mysql_result and !$ldap_connect) {
                 $return = 0;
             }
         }
     }
 
     return $return;
+}
+
+function progression($indice)
+{	
+	echo "<script>";
+		echo "document.getElementById('pourcentage').innerHTML='$indice%';";
+		echo "document.getElementById('barre').style.width='$indice%';";
+	echo "</script>";
+	ob_flush();
+	flush();
+	ob_flush();
+	flush();
 }
 
 function recuperation_donnees_recherche($module, $url_page_depart, $module_table, $champ_retour, $nb_limite_resultat, $nbligne, $nbcol, $champ_recherche, $operateur_recherche, $texte_recherche, $champ_courant, $operateur_courant, $texte_courant, $nb_col_courant, $nb_ligne_courant, $ajout_col

@@ -26,4 +26,8 @@
         return http;
     }
 
+    function chargement() {
+        document.getElementById('chargement').style.display = 'none';
+        document.getElementById('site').style.visibility = 'visible';
+    }
 </script>

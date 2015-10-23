@@ -73,13 +73,13 @@ if ($login) {
 
     if (!identification1($mysql_table_authentification, $login, $pass)) {
         /* nouvelle fonction de test des tentatives */
-        if ($tentative == 0) {
-            $tentative = 1;
-        }
+
         if ($identite == $login) {
             $tentative++;
             if ($tentative >= 3) {
-                $unique = DatabaseOperation::convertSqlStatementWithoutKeyToArray('SELECT id_user FROM salaries WHERE login=' . $identite . ' AND blocage=\'oui\'');
+                $unique = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
+                                'SELECT id_user FROM salaries WHERE login=\'' . $identite . '\' AND blocage=\'oui\''
+                );
                 $reponse = count($unique);
                 if ($reponse != 1) {
 
@@ -107,12 +107,18 @@ if ($login) {
                     $rep = envoismail($sujet, $corpsmail, $adrTo, $adrfrom);
                     $titou = DatabaseOperation::execute('update salaries set blocage=\'oui\' where (login=\'' . $identite . '\')');
                 }
+            } else {
+                $_SESSION['identite'] = $login;
+                $_SESSION['tentative'] = $tentative;
             }
         } else {
-            $identite = $login;
-            $tentative = 1;
-            $_SESSION['identite'];
-            $_SESSION['tentative'];
+            if ($tentative == 0) {
+                $tentative = 1;
+            } else {
+                $tentative++;
+            }
+            $_SESSION['identite'] = $login;
+            $_SESSION['tentative'] = $tentative;
         }
 
         /* fin nouvelles fonctions tests tentatives */
@@ -202,7 +208,7 @@ if ($login) {
               $erreur=0;
              */
             /* creation de la ligne user dans la table log */
-            $req = DatabaseOperation::execute('insert into log (id_user, date) values( ' . $id_user . ', NOW())');
+            $req = DatabaseOperation::executeComplete('insert into log (id_user, date) values( ' . $id_user . ', NOW())');
             //$ng=DatabaseOperation::query('select * from log');
             //$num_log=mysql_num_rows($ng);
             $num_log = $req->lastInsertId();

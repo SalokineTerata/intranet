@@ -284,7 +284,7 @@ class FtaComposantModel extends AbstractModel {
     }
 
     public static function InsertFtaComposant($paramIdFta) {
-        $pdo = DatabaseOperation::execute(
+        $pdo = DatabaseOperation::executeComplete(
                         'INSERT INTO ' . FtaComposantModel::TABLENAME
                         . '(' . FtaComposantModel::FIELDNAME_ID_FTA . ')'
                         . 'VALUES (' . $paramIdFta . ')'

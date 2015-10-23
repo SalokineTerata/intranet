@@ -45,7 +45,7 @@ echo "*** Requêtes SQL Part 1:\n";
 // * Recuperations des données de la V2 avec la structure de la V3
 // */ {
 //
-
+$debut = date("H:i:s");
 echo  date("H:i:s")."\n";
 
 /**
@@ -5465,7 +5465,7 @@ $sql = "INSERT INTO ".$nameOfBDDTarget.".classification_fta SELECT ".$nameOfBDDO
             WHERE ".$nameOfBDDOrigin.".classification_fta.id_fta = ".$nameOfBDDTarget.".fta.id_fta;";
 if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
 
-echo  date("H:i:s")."\n";
+echo"Debut :". $debut ." Fin :" .date("H:i:s")."\n";
 
 
 ?>

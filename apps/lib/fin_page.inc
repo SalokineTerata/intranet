@@ -27,6 +27,7 @@ if ($globalConfig->getConf()->getExecDebugEnable()) {
 echo '</td>';
 echo '</tr>';
 echo '</table>';
+echo '</div>';
 echo '</body>';
 echo '</html>';
 ?>

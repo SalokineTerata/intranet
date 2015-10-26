@@ -65,6 +65,13 @@ $show_help = 1;                              //Activer l'aide en ligne Pop-up
 
 //Paramètre d'URL
 $idFta = Lib::getParameterFromRequest(FtaModel::KEYNAME);
+$module_consultation = $_SESSION['module'] . '_consultation';
+//Sécurisation du chapitre Tarif
+if ($module_consultation <> 1 and $nom_fta_chapitre_encours == 'tarif') {
+    include ('../lib/acces_interdit.php');
+}
+
+
 /*
  * Nous recuperons le chapitre auquel ultisateur verra par défaut selon ces droits d'accès 
  * lorsqu'il regarde la liste de ces fta 
@@ -102,12 +109,7 @@ if ($idFtaClassification2) {
 }
 
 
-$module_consultation = $_SESSION['module'] . '_consultation';
 
-//Sécurisation du chapitre Tarif
-if ($$module_consultation <> 1 and $nom_fta_chapitre_encours == 'tarif') {
-    include ('../lib/acces_interdit.php');
-}
 
 //$navigue = afficher_navigation($id_fta, $id_fta_chapitre_encours, $synthese_action, $comeback);
 

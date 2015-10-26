@@ -117,39 +117,25 @@ if ($modifier == 'modifier') {
                             </tr>
                         </table>
                         <table width='620' border='0' cellspacing='0' cellpadding='0' align='center'>
+                            <?php
+                            /*
+                             * Initialisation du Bloc HTML
+                             */
+                            $bloc = '<tr><td><' . $html_table . '> ';
 
-                            <tr>
-                                <td><img src=../lib/images/espaceur.gif width='10' height='30'></td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div align='center'><img src='../images_pop/inser_sal.gif' width='500' height='30'></div>
-                                </td>
-                            </tr>
-                        </table>
-                        <img src=../lib/images/espaceur.gif width='10' height='10'>
-                    </td>
-                </tr>
+                            /*
+                             * Date de création de l'utlisateur
+                             */
+                            $bloc .='<tr><td align=right>'
+                                    . DatabaseDescription::getFieldDocLabel(UserModel::TABLENAME, UserModel::FIELDNAME_DATE_CREATION_SALARIES)
+                                    . '</td><td align=left><input type=text name=' . UserModel::FIELDNAME_DATE_CREATION_SALARIES . ' size=15  value='
+                                    . date('Y-m-d') . ' />'
+                                    . '</td></tr>'
+                            ;
 
-                <?php
-                /*
-                 * Initialisation du Bloc HTML
-                 */
-                $bloc = '<tr><td><' . $html_table . '> ';
-
-                /*
-                 * Date de création de l'utlisateur
-                 */
-                $bloc .='<tr><td align=right>'
-                        . DatabaseDescription::getFieldDocLabel(UserModel::TABLENAME, UserModel::FIELDNAME_DATE_CREATION_SALARIES)
-                        . '</td><td align=left><input type=text name=' . UserModel::FIELDNAME_DATE_CREATION_SALARIES . ' size=15  value='
-                        . date('Y-m-d') . ' />'
-                        . '</td></tr>'
-                ;
-
-                /*
-                 * Association à un groupe d'utilisateur
-                 */
+                            /*
+                             * Association à un groupe d'utilisateur
+                             */
 //                $HtmlList = new HtmlListSelectTagName();
 //                $arrayAscendant = DatabaseOperation::convertSqlStatementWithKeyAndOneFieldToArray(
 //                                'SELECT ' . UserModel::KEYNAME . ', ' . UserModel::FIELDNAME_LOGIN
@@ -163,19 +149,33 @@ if ($modifier == 'modifier') {
 //                $HtmlList->setIsEditable(TRUE);
 //                $listeAscendant = $HtmlList->getHtmlResult();
 //                $bloc .=$listeAscendant;
-                /*
-                  $HtmlListBoolen = new HtmlListBoolean();
-                  $HtmlListBoolen->getAttributes()->getName()->setValue(UserModel::FIELDNAME_ECRITURE);
-                  $HtmlListBoolen->setLabel('Droit d'&eacute;criture');
-                  $HtmlListBoolen->setIsEditable(TRUE);
-                  $listeEcriture = $HtmlListBoolen->getHtmlResult();
-                 * */
+                            /*
+                              $HtmlListBoolen = new HtmlListBoolean();
+                              $HtmlListBoolen->getAttributes()->getName()->setValue(UserModel::FIELDNAME_ECRITURE);
+                              $HtmlListBoolen->setLabel('Droit d'&eacute;criture');
+                              $HtmlListBoolen->setIsEditable(TRUE);
+                              $listeEcriture = $HtmlListBoolen->getHtmlResult();
+                             * */
 
-                /*
-                 * Affichage
-                 */
-                echo $bloc . $listeEcriture . '</table></td></tr>';
-                ?>
+                            /*
+                             * Affichage
+                             */
+                            echo $bloc . $listeEcriture . '</table></td></tr>';
+                            ?>
+                            <tr>
+                                <td><img src=../lib/images/espaceur.gif width='10' height='30'></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div align='center'><img src='../images_pop/inser_sal.gif' width='500' height='30'></div>
+                                </td>
+                            </tr>
+                        </table>
+                        <img src=../lib/images/espaceur.gif width='10' height='10'>
+                    </td>
+                </tr>
+
+
                 <table width='500' border='0' cellspacing='4' cellpadding='0' align='center'>
                     <tr>
                         <td class='loginFFFFFFdroit' width='25%'>Nom :</td>

@@ -4239,6 +4239,16 @@ $sql = "INSERT INTO `".$nameOfBDDTarget."`.`salaries` "
         . " '0', '0', 'oui', NULL, NULL, NULL, NULL, NULL, 'utilisateur_supprime',"
         . " NULL, NULL, 'oui', 'non', '', 'non', 'non', NULL); ";       
 if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+echo "INSERT INTO ".$nameOfBDDTarget.".salaries Utilisateur migrationv2tov3 ...";
+$sql = "INSERT INTO `".$nameOfBDDTarget."`.`salaries` "
+        . "(`id_user`, `ascendant_id_salaries`, `nom`, `prenom`, `date_creation_salaries`,"
+        . " `id_catsopro`, `id_service`, `id_type`, `actif`, `libre2`, `libre3`, `libre4`,"
+        . " `libre5`, `libre6`, `login`, `pass`, `mail`, `ecriture`, `membre_ce`, `lieu_geo`,"
+        . " `newsdefil`, `blocage`, `portail_wiki_salaries`) "
+        . "VALUES ('-3', '0', 'SYSTEM', 'Utilisateur migrationv2tov3', '" . date("Y-m-d") . "', '0',"
+        . " '0', '0', 'oui', NULL, NULL, NULL, NULL, NULL, 'utilisateur_migrationv2tov3',"
+        . " NULL, NULL, 'oui', 'non', '', 'non', 'non', NULL); ";       
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
 
 echo "DROP ".$nameOfBDDTarget.".log ...";
 $sql = "DROP TABLE ".$nameOfBDDTarget.".log";
@@ -4932,7 +4942,7 @@ while ($rowsTableFtaSuiviProjet=mysql_fetch_array($resultFtaSuiviPrjet)) {
     echo  date("H:i:s")."\n";
 
 $arrayIdFtaSuiviProjet = mysql_query(
-                "SELECT DISTINCT fta_suivi_projet.id_fta,id_fta_etat,createur_fta FROM ".$nameOfBDDTarget.".fta_suivi_projet,".$nameOfBDDTarget.".fta "
+                "SELECT DISTINCT fta_suivi_projet.id_fta,id_fta_etat FROM ".$nameOfBDDTarget.".fta_suivi_projet,".$nameOfBDDTarget.".fta "
         . " WHERE fta_suivi_projet.id_fta=fta.id_fta"
 );
 echo "SELECT DISTINCT fta_suivi_projet.id_fta,id_fta_etat,createur_fta FROM ".$nameOfBDDTarget.".fta_suivi_projet ...";
@@ -4941,7 +4951,6 @@ echo "SELECT DISTINCT fta_suivi_projet.id_fta,id_fta_etat,createur_fta FROM ".$n
 while ( $rowsIdFtaSuiviProjet=  mysql_fetch_array($arrayIdFtaSuiviProjet)) {
     $idFta = $rowsIdFtaSuiviProjet['id_fta'];
     $idFtaEtat = $rowsIdFtaSuiviProjet['id_fta_etat'];
-    $createurFta = $rowsIdFtaSuiviProjet['createur_fta'];
 
     $arrayIdFtaWorkflow = mysql_query(
                         "SELECT DISTINCT id_fta_workflow
@@ -5009,7 +5018,7 @@ while ( $rowsIdFtaSuiviProjet=  mysql_fetch_array($arrayIdFtaSuiviProjet)) {
                                         . ", " . "signature_validation_suivi_projet"
                                         . ") VALUES (" . $idFta
                                         . ", " . $rowsChapitre["id_fta_chapitre"]
-                                        . ", " . $createurFta . " )"                                        
+                                        . ", " . "-3" . " )"                                        
                                 );
                                  if($valid){echo "[OK] \n";}else{echo "[FAILED] $idFta,$rowsChapitre \n ";}
                                 break;

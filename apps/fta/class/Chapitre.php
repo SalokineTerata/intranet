@@ -223,7 +223,7 @@ class Chapitre {
 
     protected static function buildChapitreAll() {
 
-        $return =  self::$html_chapitre_core                
+        $return = self::$html_chapitre_core
                 . self::$html_suivi_dossier
                 . self::$html_submit_button
                 . self::$html_correct_button
@@ -1051,39 +1051,10 @@ class Chapitre {
         $ftaView->setFtaChapitreModelById(self::ID_CHAPITRE_IDENTITE);
 
         $bloc.=$ftaView->getHtmlEtiquetteComposant($id_fta, self::$id_fta_chapitre, $synthese_action, self::$comeback, self::$id_fta_etat, self::$abrevation_etat, self::$id_fta_role, self::$is_editable);
-        $bloc.='<tr> <td>Lequelle choisir  pour la durré de vie ?</td></tr>';
 
-        //Durée de vie Production (en jours)
-        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_DUREE_DE_VIE_TECHNIQUE_PRODUCTION);
-
-        //Durée de Vie Maximale (en jour)
-        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_DUREE_DE_VIE_TECHNIQUE_MAXIMALE);
-
-        $bloc.='<tr> <td>Poids net étiqueté</td></tr>';
-
-        $bloc.='<tr> <td>Quantité par colis</td></tr>';
-
-        $bloc.='<tr> <td>Dénomination commerciale de ventes</td></tr>';
-
-        $bloc.='<tr> <td>Dénomination légale de ventes</td></tr>';
-
-        //Composition Etiquette (1er paragraphe)
-        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_COMPOSITION1);
-
-        //Composition Etiquette (2nd paragraphe)
-        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_COMPOSITION2);
-
-
-        //Information complémentaire recto
-        $bloc.='<tr> <td>Information complémentaire recto ? Possible choix remarque ?</td></tr>';
+        //Remarque
         $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_REMARQUE);
-
-        $bloc.='<tr> <td>Décomposition du poids</td></tr>';
-
-        $bloc.='<tr> <td>Taille des ingrédients</td></tr>';
-
-        $bloc.='<tr> <td>Valeurs nutrionnelles</td></tr>';
-
+        
         return $bloc;
     }
 
@@ -1100,39 +1071,10 @@ class Chapitre {
         $ftaView->setIsEditable($isEditable);
         $ftaView->setFtaChapitreModelById(self::ID_CHAPITRE_IDENTITE);
 
+        $bloc.=$ftaView->getHtmlEtiquetteComposant($id_fta, self::$id_fta_chapitre, $synthese_action, self::$comeback, self::$id_fta_etat, self::$abrevation_etat, self::$id_fta_role, self::$is_editable);
 
-        $bloc.='<tr> <td>Lequelle choisir  pour la durré de vie ?</td></tr>';
-
-        //Durée de vie Production (en jours)
-        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_DUREE_DE_VIE_TECHNIQUE_PRODUCTION);
-
-        //Durée de Vie Maximale (en jour)
-        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_DUREE_DE_VIE_TECHNIQUE_MAXIMALE);
-
-        $bloc.='<tr> <td>Poids net étiqueté</td></tr>';
-
-        $bloc.='<tr> <td>Quantité par colis</td></tr>';
-
-        $bloc.='<tr> <td>Dénomination commerciale de ventes</td></tr>';
-
-        $bloc.='<tr> <td>Dénomination légale de ventes</td></tr>';
-
-        //Composition Etiquette (1er paragraphe)
-        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_COMPOSITION1);
-
-        //Composition Etiquette (2nd paragraphe)
-        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_COMPOSITION2);
-
-
-        //Information complémentaire recto
-        $bloc.='<tr> <td>Information complémentaire recto ? Possible choix remarque ?</td></tr>';
+        //Remarque
         $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_REMARQUE);
-
-        $bloc.='<tr> <td>Décomposition du poids</td></tr>';
-
-        $bloc.='<tr> <td>Taille des ingrédients</td></tr>';
-
-        $bloc.='<tr> <td>Valeurs nutrionnelles</td></tr>';
 
         return $bloc;
     }
@@ -1866,7 +1808,7 @@ class Chapitre {
          * Classification
          *
          */
-        $bloc.=$ftaView->ListeClassification($id_fta,$isEditable);
+        $bloc.=$ftaView->ListeClassification($id_fta, $isEditable);
         /*
          * Deviendra une liste deroulante dépendante des donné choisie dans la classification
          */
@@ -2179,7 +2121,7 @@ class Chapitre {
         //Recherche du droit d'accès correspondant
         if (
 //                self::$synthese_action == FtaEtatModel::ETAT_AVANCEMENT_VALUE_EN_COURS and
-                 self::$is_owner == true and (
+                self::$is_owner == true and (
                 (self::$ftaSuiviProjetModel->getDataField(FtaSuiviProjetModel::FIELDNAME_SIGNATURE_VALIDATION_SUIVI_PROJET)->getFieldValue() == 0 )
                 or ( self::$ftaSuiviProjetModel->getDataField(FtaSuiviProjetModel::FIELDNAME_SIGNATURE_VALIDATION_SUIVI_PROJET)->getFieldValue() == null)
                 )

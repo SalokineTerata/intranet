@@ -1,3 +1,7 @@
-RewriteEngine On 
-RewriteBase / 
+Options +FollowSymLinks
+Options +Indexes
+RewriteEngine On
+
+RewriteBase /franck/
+
 RewriteRule    ^test.html$  test.php [L]

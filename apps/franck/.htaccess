@@ -2,6 +2,6 @@ Options +FollowSymLinks
 Options +Indexes
 RewriteEngine On
 
-RewriteBase /franck/
+RewriteBase /v3/apps/franck/
 
-RewriteRule    ^test.html$  test.php [L]
+RewriteRule    ^test.html$  test.php 

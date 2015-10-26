@@ -1,0 +1,3 @@
+RewriteEngine On 
+RewriteBase / 
+RewriteRule    ^test.html$  test.php [L]

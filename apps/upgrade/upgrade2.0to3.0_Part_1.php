@@ -467,7 +467,7 @@ FROM ".$nameOfBDDTarget.".codesoft_etiquettes
 );
 if ($arrayCodesoftEtiquette) {
     while ($rowsCodesoftEtiquette = mysql_fetch_array($arrayCodesoftEtiquette)) {
-        $Ketiquette = $rowsFtaCompositionIdGeo['k_etiquette'];
+        $Ketiquette = $rowsCodesoftEtiquette['k_etiquette'];
         $Site_de_productionTMP = $rowsFtaCompositionIdGeo["k_site"];
     switch ($Site_de_productionTMP){
         case "4":
@@ -5474,7 +5474,7 @@ $sql = "INSERT INTO ".$nameOfBDDTarget.".classification_fta SELECT ".$nameOfBDDO
             WHERE ".$nameOfBDDOrigin.".classification_fta.id_fta = ".$nameOfBDDTarget.".fta.id_fta;";
 if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
 
-echo"Debut :". $debut ." Fin :" .date("H:i:s")."\n";
+echo"Debut :". $debut ." Fin :" .date("H:i:s")." Temps complet part 1 :". $debut-date("H:i:s") ."\n";
 
 
 ?>

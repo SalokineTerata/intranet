@@ -591,7 +591,7 @@ class AccueilFta {
                     $createurNom = $rowsNomCreateur[UserModel::FIELDNAME_NOM];
                     $createurPrenom = $rowsNomCreateur[UserModel::FIELDNAME_PRENOM];
                 }
-      
+
                 /**
                  * Calssification
                  */
@@ -692,17 +692,47 @@ class AccueilFta {
                         (self::$ftaModification)
                         or ( self::$ftaConsultation and self::$abrevationFtaEtat == FtaEtatModel::ETAT_ABREVIATION_VALUE_VALIDE )
                 )
-                    $actions = '<a '
-                            . 'href=modification_fiche.php'
-                            . '?id_fta=' . $idFta
-                            . '&synthese_action=' . self::$syntheseAction
-                            . '&comeback=1'
-                            . '&id_fta_etat=' . self::$idFtaEtat
-                            . '&abreviation_fta_etat=' . self::$abrevationFtaEtat
-                            . '&id_fta_role=' . self::$idFtaRole
-                            . ' /><img src=../lib/images/next.png alt=\'\' title=\'Voir la FTA\' width=\'30\' height=\'25\' border=\'0\' />'
+                    $actions .= '<a '
+                            . 'href=#'
+//                            . 'href=modification_fiche.php'
+//                            . '?id_fta=' . $idFta
+//                            . '&synthese_action=' . self::$syntheseAction
+//                            . '&comeback=1'
+//                            . '&id_fta_etat=' . self::$idFtaEtat
+//                            . '&abreviation_fta_etat=' . self::$abrevationFtaEtat
+//                            . '&id_fta_role=' . self::$idFtaRole
+                            . ' onClick=\'modification_fiche_' . $idFta . '();\' '
+                            . '/><img src=../lib/images/next.png alt=\'\' title=\'Voir la FTA\' width=\'30\' height=\'25\' border=\'0\' />'
                             . '</a>'
                     ;
+//                $actions .= '                    
+//                     <form name=\'modification_fiche_' . $idFta . '\'  method=\'post\' action=\'modification_fiche.php\' >
+//                        <input type=hidden name=id_fta_role_' . $idFta . ' id=id_fta_role_' . $idFta . ' >
+//                        <input type=hidden name=id_fta_etat_' . $idFta . ' id=id_fta_etat_' . $idFta . '>
+//                        <input type=\'hidden\' name=\'synthese_action_' . $idFta . ' id=synthese_action_' . $idFta . ' />
+//                        <input type=hidden name=abreviation_fta_etat_' . $idFta . ' id=abreviation_fta_etat_' . $idFta . ' >
+//                        <input type=\'hidden\' name=\'comeback_' . $idFta . ' id=comeback_' . $idFta . '/>  
+//
+//                  </form>';
+                $javascript1.=' <SCRIPT LANGUAGE=JavaScript> 
+                
+                                    function modification_fiche_' . $idFta . '() {  
+                                        document.modification_fiche.id_fta.value=\'' . $idFta . '\'; 
+                                        document.modification_fiche.id_fta_role.value=\'' . self::$idFtaRole . '\'; 
+                                        document.modification_fiche.id_fta_etat.value=\'' . self::$idFtaEtat . '\'; 
+                                        document.modification_fiche.synthese_action.value=\'' . self::$syntheseAction . '\'; 
+                                        document.modification_fiche.abreviation_fta_etat.value=\'' . self::$abrevationFtaEtat . '\'; 
+                                        document.modification_fiche.comeback.value=\'1\'; 
+                                        modification_fiche.submit(); 
+                                        
+                                        return true; 
+                                    } 
+                                    function doPreview()   {
+                                        form=document.getElementById(\'idOfForm\');
+                                        form.action=\'transiter_post.php\';
+                                        form.submit();                                 
+                                    }
+                                </SCRIPT>';
 
                 /*
                  * Export PDF
@@ -727,7 +757,7 @@ class AccueilFta {
                         ((self::$idFtaRole == '1' or self::$idFtaRole == '6' ) and $recap[$idFta] == '100%' )
                         and self::$ftaModification and ( self::$abrevationFtaEtat == FtaEtatModel::ETAT_ABREVIATION_VALUE_MODIFICATION)
                         or ( $ok == '2' and $accesTransitionButton == FALSE && $recap[$idFta] == '100%')
-                        or ( self::$syntheseAction == FtaEtatModel::ETAT_AVANCEMENT_VALUE_ALL  AND (self::$idFtaRole == '1' or self::$idFtaRole == '6' ))
+                        or ( self::$syntheseAction == FtaEtatModel::ETAT_AVANCEMENT_VALUE_ALL AND ( self::$idFtaRole == '1' or self::$idFtaRole == '6' ))
                         or ( (self::$idFtaRole == '1' or self::$idFtaRole == '6' ) and self::$syntheseAction == FtaEtatModel::ETAT_AVANCEMENT_VALUE_EFFECTUES)
                 ) {
                     $actions .= '<a '
@@ -1060,7 +1090,7 @@ class AccueilFta {
 
         $tableauFicheN2.= $tableauFicheNWork . $tableauFicheN;
         $tableauFicheTr2 .= $tableauFicheTrWork . $tableauFicheTr;
-        $tableauFiche .= $tableauFicheN2 . $tableauFicheTr2 . $javascript . '</tbody></table>';
+        $tableauFiche .= $tableauFicheN2 . $tableauFicheTr2 . $javascript . $javascript1 . '</tbody></table>';
 
         //Ajoute de la fonction de traitement de masse
         if ($traitementDeMasse) {
@@ -1071,8 +1101,8 @@ class AccueilFta {
             <i>Transitions groupées</i>:
             ' . $liste_action_groupe . '
             <input type = \'text\' name=\'subject\' size=\'20\' />
-                         <input type=image src=images/transiter.png width=20 height=20 />
-                         <input type=hidden name=action value=transition_groupe>
+            <input type=image src=images/transiter.png width=20 height=20 onClick=doPreview(); />
+            <input type=hidden name=action value=transition_groupe>
                          ';
         }
 

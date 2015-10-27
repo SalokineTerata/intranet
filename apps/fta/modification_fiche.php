@@ -79,11 +79,11 @@ if ($module_consultation <> 1 and $nom_fta_chapitre_encours == 'tarif') {
 //$chapitreParDefaut = FtaChapitreModel::getChapitreDefautByWorkflow($id_fta);
 
 $id_fta_chapitre_encours = Lib::getParameterFromRequest('id_fta_chapitre_encours', '1');
-$synthese_action = Lib::getParameterFromRequest('synthese_action');
-$comeback = Lib::getParameterFromRequest('comeback');
-$idFtaEtat = Lib::getParameterFromRequest(FtaEtatModel::KEYNAME);
-$abreviationFtaEtat = Lib::getParameterFromRequest(FtaEtatModel::FIELDNAME_ABREVIATION);
-$idFtaRole = Lib::getParameterFromRequest(FtaRoleModel::KEYNAME);
+$synthese_action = Lib::isDefined('synthese_action');
+$comeback = Lib::isDefined('comeback');
+$idFtaEtat = Lib::isDefined(FtaEtatModel::KEYNAME);
+$abreviationFtaEtat = Lib::isDefined(FtaEtatModel::FIELDNAME_ABREVIATION);
+$idFtaRole = Lib::isDefined(FtaRoleModel::KEYNAME);
 $id_fta_chapitre = $id_fta_chapitre_encours;
 $ftaModel = new FtaModel($idFta);
 $idFtaClassification2 = $ftaModel->getDataField(FtaModel::FIELDNAME_ID_FTA_CLASSIFICATION2)->getFieldValue();

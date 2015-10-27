@@ -93,7 +93,16 @@ class Navigation {
                             <b><font size=\'2\' color=\'#0000FF\'>' . $rowsFtaEtatAndFta[FtaModel::FIELDNAME_CODE_ARTICLE_LDC] . '</font></b> - ' . $nom . ' &nbsp;&nbsp;&nbsp;&nbsp;<i>(gérée par ' . $createur . ')</i>
                            </div>
                      </td></tr>
-                     <tr class=titre><td>
+                     <tr class=titre>
+                        <td>
+                            <form name=\'navigation\' method=post action=modification_fiche.php id=\'idOfForm\'>
+                                <input type=hidden name=id_fta_chapitre_encours > 
+                                <input type=hidden name=\'id_fta_role\'  >
+                                <input type=hidden name=\'id_fta\' id=id_fta >
+                                <input type=hidden name=\'id_fta_etat\' >
+                                <input type=\'hidden\' name=\'synthese_action\'  />
+                                <input type=hidden name=\'abreviation_fta_etat\' >
+                                <input type=\'hidden\' name=\'comeback\'  />  
                      ';
         }
         //Si une action est donnée, alors construction du menu des chapitres    
@@ -102,7 +111,7 @@ class Navigation {
 
         self::$comeback_url = 'index.php?id_fta_etat=' . self::$id_fta_etat . '&nom_fta_etat=' . self::$abreviation_etat . '&id_fta_role=' . self::$id_fta_role . '&synthese_action=' . self::$synthese_action;
 
-        $menu_navigation.= '</td></tr><tr><td>
+        $menu_navigation.= '</form></td></tr><tr><td>
     <a href=' . self::$comeback_url . '><img src=../lib/images/bouton_retour.png alt=\'\' title=\'Retour à la synthèse\' width=\'18\' height=\'15\' border=\'0\' /> Retour vers la synthèse</a> |
     ';
         //Corps du menu
@@ -114,7 +123,7 @@ class Navigation {
                 . '&id_fta_role=' . self::$id_fta_role
                 . '&synthese_action=' . self::$synthese_action
                 . '><img src=./images/graphique.png alt=\'\' title=\'Etat d\'avancement\' width=\'18\' height=\'15\' border=\'0\' /> Etat d\'avancement</a>
-                       </td></tr>
+                       </td></tr>                       
                        </table>
                        ';
         return $menu_navigation;
@@ -202,12 +211,11 @@ class Navigation {
                  * Nous récupérons les processus précédent du processus en cours si ils sont tous validé
                  */
                 foreach ($req as $rows) {
-                    self::$id_fta_processus = 
-                    /*
-                     * Nous verifions si tous les processus précedents du chapitre que l'utilisateur à les droits d'accès
-                     * sont validé ou non et donc visible ou non
-                     */
-                    $taux_validation_processus = FtaProcessusModel::getFtaProcessusNonValidePrecedent(self::$id_fta, $rows[FtaProcessusModel::KEYNAME], self::$id_fta_workflow);
+                    self::$id_fta_processus = /*
+                             * Nous verifions si tous les processus précedents du chapitre que l'utilisateur à les droits d'accès
+                             * sont validé ou non et donc visible ou non
+                             */
+                            $taux_validation_processus = FtaProcessusModel::getFtaProcessusNonValidePrecedent(self::$id_fta, $rows[FtaProcessusModel::KEYNAME], self::$id_fta_workflow);
 
                     //Liste des processus visible(lecture-seule)
                     if ($taux_validation_processus == 1 or $taux_validation_processus === NULL) {
@@ -526,14 +534,25 @@ class Navigation {
             if ($num == 0 and self::$synthese_action === 'attente') {
                 
             } else {
-                $menu_navigation .= '<a href=' . $page_default . '.php?id_fta=' . self::$id_fta . '&id_fta_chapitre_encours=' . $id_fta_chapitre . '&synthese_action=' . self::$synthese_action . '&id_fta_etat=' . self::$id_fta_etat
-                        . '&abreviation_fta_etat=' . self::$abreviation_etat
-                        . '&comeback=' . self::$comeback
-                        . '&id_fta_role=' . self::$id_fta_role . '>' . $b . ''
+                $menu_navigation .= '<a href=\'#\''
+                        . ' onClick=\'navigation_' . $id_fta_chapitre . '();\''
+                        . '>' . $b . ''
                         . $image1 . $nom_usuel_fta_chapitre . $image2
                         . '</a>'
                         . '</b></font> '
                 ;
+                $menu_navigation .= '<SCRIPT LANGUAGE=JavaScript> 
+                          function navigation_' . $id_fta_chapitre . '() {  
+                                        document.navigation.id_fta.value=\'' . self::$id_fta . '\'; 
+                                        document.navigation.id_fta_chapitre_encours.value=\'' . $id_fta_chapitre . '\'; 
+                                        document.navigation.id_fta_role.value=\'' . self::$id_fta_role . '\'; 
+                                        document.navigation.id_fta_etat.value=\'' . self::$id_fta_etat . '\'; 
+                                        document.navigation.synthese_action.value=\'' . self::$synthese_action . '\'; 
+                                        document.navigation.abreviation_fta_etat.value=\'' . self::$abreviation_etat . '\'; 
+                                        document.navigation.comeback.value=\'' . self::$comeback . '\'; 
+                                        navigation.submit();                                         
+                                        return true; 
+                                    }  </SCRIPT> ';
             }
         }
         return $menu_navigation;

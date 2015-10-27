@@ -4,4 +4,4 @@ RewriteEngine On
 
 RewriteBase /franck/
 
-RewriteRule    ^test.html$  test.php [L]
+RewriteRule    ^franck.php$  test.php

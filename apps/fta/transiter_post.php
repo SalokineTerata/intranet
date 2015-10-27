@@ -179,7 +179,7 @@ if (!$action) {
                 $extension = 'agismde';
             }
             $open_erpdatasync = '../access/base_erp_datasync/erp_datasync.' . $extension;
-            header('Location: open_erpdatasync.php?open_erpdatasync=$open_erpdatasync');
+            header('Location: open_erpdatasync.php?open_erpdatasync=' . $open_erpdatasync);
         } else {
             if ($t <> 1) {
                 header('Location: index.php');

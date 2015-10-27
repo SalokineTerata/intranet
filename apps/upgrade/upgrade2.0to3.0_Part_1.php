@@ -468,7 +468,7 @@ FROM ".$nameOfBDDTarget.".codesoft_etiquettes
 if ($arrayCodesoftEtiquette) {
     while ($rowsCodesoftEtiquette = mysql_fetch_array($arrayCodesoftEtiquette)) {
         $Ketiquette = $rowsCodesoftEtiquette['k_etiquette'];
-        $Site_de_productionTMP = $rowsFtaCompositionIdGeo["k_site"];
+        $Site_de_productionTMP = $rowsCodesoftEtiquette["k_site"];
     switch ($Site_de_productionTMP){
         case "4":
             $Site_de_production = "6";

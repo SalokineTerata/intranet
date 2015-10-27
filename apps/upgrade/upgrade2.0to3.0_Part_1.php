@@ -456,6 +456,10 @@ echo "CREATE TABLE ".$nameOfBDDTarget.".codesoft_etiquettes ...";
 $sql = "CREATE TABLE ".$nameOfBDDTarget.".codesoft_etiquettes LIKE ".$nameOfBDDOrigin.".codesoft_etiquettes";
 if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
 
+echo "INSERT INTO ".$nameOfBDDTarget.".codesoft_etiquettes ...";
+$sql = "INSERT INTO ".$nameOfBDDTarget.".codesoft_etiquettes SELECT * FROM ".$nameOfBDDOrigin.".codesoft_etiquettes";
+if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
+
 echo "ALTER TABLE  ".$nameOfBDDTarget.".codesoft_etiquettes ...";
 $sql = "ALTER TABLE  ".$nameOfBDDTarget.".codesoft_etiquettes ENGINE = INNODB";
 if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
@@ -488,11 +492,6 @@ if ($arrayCodesoftEtiquette) {
         if(mysql_query($sql_inter)) {	echo "[OK]\n";}else{echo "[FAILED] $Ketiquette \n";}
     }
 }
- 
-
-echo "INSERT INTO ".$nameOfBDDTarget.".codesoft_etiquettes ...";
-$sql = "INSERT INTO ".$nameOfBDDTarget.".codesoft_etiquettes SELECT * FROM ".$nameOfBDDOrigin.".codesoft_etiquettes";
-if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
 
 echo "DROP ".$nameOfBDDTarget.".codesoft_etiquettes_logo ...";
 $sql = "DROP TABLE ".$nameOfBDDTarget.".codesoft_etiquettes_logo";

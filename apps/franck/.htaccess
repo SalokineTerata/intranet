@@ -1,7 +1,0 @@
-Options +FollowSymLinks
-Options +Indexes
-RewriteEngine On
-
-RewriteBase /v3/apps/franck/
-
-RewriteRule    ^test.html$  test.php 

@@ -185,9 +185,9 @@ function envoismail($sujetmail, $text, $destinataire, $expediteur, $paramTypeMai
         /**
          * L'envoi réel du mail n'est pas réalisé en environnement Codeur
          */
-        if ($globalConfig->getConf()->getExecEnvironment() != EnvironmentConf::ENV_COD) {
-            $result = $mail->send(array($destinataire), 'smtp');
-        }
+//        if ($globalConfig->getConf()->getExecEnvironment() != EnvironmentConf::ENV_COD) {
+//            $result = $mail->send(array($destinataire), 'smtp');
+//        }
 
 
         if (!$result) {

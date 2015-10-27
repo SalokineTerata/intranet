@@ -42,7 +42,8 @@ if ($id_user) {
      */
     $page_default = substr(strrchr($_SERVER['PHP_SELF'], '/'), '1', '-4');
 //   $page_action=$page_default.'_post.php';
-    $page_action = 'transiter_post.php';
+//    $page_action = 'transiter_post.php';
+    $page_action = 'modification_fiche.php';
     $page_pdf = $page_default . '_pdf.php';
     $action = 'valider';                       //Action proposée à la page _post.php
     $method = 'method=post';             //Pour une url > 2000 caractères, utiliser POST
@@ -214,9 +215,15 @@ if ($id_user) {
 
 //Construction de la page <td>&nbsp</td>
     echo '
-    <form method=post action=' . $page_action . '>
+    <form name=\'modification_fiche\' method=post action=' . $page_action . ' id=\'idOfForm\' >
         <input type=hidden name=id_fta_etat value=' . $id_fta_etat_encours . '>
-        <input type=hidden name=nom_fta_etat value=' . $nom_fta_etat_encours . '>
+        <input type=hidden name=nom_fta_etat value=' . $nom_fta_etat_encours . '> 
+        <input type=hidden name=\'id_fta_role\' value=' . $idFtaRoleEncours . ' >
+        <input type=hidden name=\'id_fta\' id=id_fta >
+        <input type=hidden name=\'id_fta_etat\' value=' . $id_fta_etat . '>
+        <input type=\'hidden\' name=\'synthese_action\' value=' . $synthese_action . ' />
+        <input type=hidden name=\'abreviation_fta_etat\' value=' . $abreviationFtaEtat . ' >
+        <input type=\'hidden\' name=\'comeback\' value=1 />  
         <table width=100% border=1 valign=top cellspacing=0>
             <tr>
                  <td class=titre_principal valign=\'middle\' > <br>' . $fileAriane . ' <br></td>

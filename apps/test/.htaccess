@@ -1,0 +1,7 @@
+Options +FollowSymLinks
+Options +Indexes
+RewriteEngine On
+
+RewriteBase /franck/
+
+RewriteRule    ^franck.php$  test.php

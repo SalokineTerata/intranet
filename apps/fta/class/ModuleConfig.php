@@ -48,6 +48,12 @@ abstract class ModuleConfig {
      * Activer la visualisation des modifications effectuées depuis la version précédente
      */
     const ENABLE_SHOW_DIFF_FTA = true;
+    
+    /**
+     * Nombre maximale de fta afficher sur la page d'acceuil
+     */
+     const VALUE_MAX_PAR_PAGE = 15;
+
 }
 
 ?>

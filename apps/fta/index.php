@@ -156,7 +156,7 @@ if ($id_user) {
     /**
      * Calcul des enregistrements à afficher
      */
-    $debut = ($numeroDePageCourante - '1') * AccueilFta::VALUE_MAX_PAR_PAGE;
+    $debut = ($numeroDePageCourante - '1') * ModuleConfig::VALUE_MAX_PAR_PAGE;
     /*
      * Initialisation des valeurs
      */
@@ -194,7 +194,7 @@ if ($id_user) {
              */
             $tableau_fiche = AccueilFta::getHtmlTableauFiche();
             $fileAriane = AccueilFta::getFileAriane();
-            $pagination = AccueilFta::paginer(AccueilFta::VALUE_MAX_PAR_PAGE, $numeroDePageCourante, '4', '4', '1', '1');
+            $pagination = AccueilFta::paginer(ModuleConfig::VALUE_MAX_PAR_PAGE, $numeroDePageCourante, '4', '4', '1', '1');
         }
         /*
           //        if ($isLimit) {

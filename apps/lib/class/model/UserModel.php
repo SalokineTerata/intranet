@@ -82,7 +82,7 @@ class UserModel extends AbstractModel {
                                 . ',' . FtaModel::TABLENAME . '.' . FtaModel::FIELDNAME_WORKFLOW
                                 . ',' . UserModel::FIELDNAME_PRENOM . ' ASC'
                                 . ',' . FtaModel::FIELDNAME_DATE_ECHEANCE_FTA
-                                . ' LIMIT ' . AccueilFta::VALUE_MAX_PAR_PAGE . ' OFFSET ' . $paramDebut
+                                . ' LIMIT ' . ModuleConfig::VALUE_MAX_PAR_PAGE . ' OFFSET ' . $paramDebut
                 );
 
                 $array['2'] = DatabaseOperation::getRowsNumberOverLimitInSqlStatement(
@@ -110,7 +110,7 @@ class UserModel extends AbstractModel {
                                 . ',' . FtaModel::TABLENAME . '.' . FtaModel::FIELDNAME_WORKFLOW
                                 . ',' . UserModel::FIELDNAME_PRENOM . ' ASC'
                                 . ',' . FtaModel::FIELDNAME_DATE_ECHEANCE_FTA
-                                . ' LIMIT ' . AccueilFta::VALUE_MAX_PAR_PAGE . ' OFFSET ' . $paramDebut
+                                . ' LIMIT ' . ModuleConfig::VALUE_MAX_PAR_PAGE . ' OFFSET ' . $paramDebut
                 );
 
 

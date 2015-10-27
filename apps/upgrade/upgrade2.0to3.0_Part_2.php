@@ -11,7 +11,7 @@
   Initialisation des variables
 */
 
- $nameOfBDDTarget = 'intranet_v3_0_cod';
+ $nameOfBDDTarget = 'intranet_v3_0_dev';
  $nameOfBDDOrigin = 'intranet_v2_0_prod';
  $nameOfBDDStructure = 'intranet_v3_0_dev_2015_10_19';
 

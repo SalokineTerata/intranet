@@ -7,8 +7,7 @@
  */
 class AccueilFta {
 
-    const VALUE_MAX_PAR_PAGE = 15;
-
+   
     protected static $abrevationFtaEtat;
     protected static $arrayFtaEtat;
     protected static $arrayFtaRole;

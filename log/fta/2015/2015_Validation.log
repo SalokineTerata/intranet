@@ -1390,4 +1390,139 @@ Ce message a été envoyé automatiquement par le module Intranet - Fiche Techni
 INFORMATIONS DE DEBUGGAGE:
 
 
-SELECT code_produit_agrologic_fta_nomenclature,prefixe_annexe_agrologic_article_codification FROM fta_composant, annexe_agrologic_article_codification WHERE fta_composant.id_fta=337 AND is_composition_fta_composant=1  AND fta_composant.id_annexe_agrologic_article_codification=annexe_agrologic_article_codification.id_annexe_agrologic_article_codification ORDER BY prefixe_annexe_agrologic_article_codification ASC, nom_fta_nomenclature \n 
+SELECT code_produit_agrologic_fta_nomenclature,prefixe_annexe_agrologic_article_codification FROM fta_composant, annexe_agrologic_article_codification WHERE fta_composant.id_fta=337 AND is_composition_fta_composant=1  AND fta_composant.id_annexe_agrologic_article_codification=annexe_agrologic_article_codification.id_annexe_agrologic_article_codification ORDER BY prefixe_annexe_agrologic_article_codification ASC, nom_fta_nomenclature \n 26/10/2015 16:28:52\nFranck AMOFA <test@gmail.com> : test@gmail.com : FTA/Information "0 - " \n DESTINATAIRES:
+JAEGLE cecile: cecile.jaegle@agis-sa.fr
+MORIN stephane: stephane.morin@ldc.fr
+COUSTON Jasmine: jasmine.couston@agis-sa.fr
+SYSTEM superviseur: InformatiqueSupport.AVIGNON@agis-sa.fr
+COUGET marie-paule (R&D): marie-paule.couget@agis-sa.fr
+WEYMULLER julie: julie.weymuller@agis-sa.fr
+PFISTER cecile: cecile.pfister@agis-sa.fr
+CHOLLET Christine: christine.alberola@agis-sa.fr
+GASTAL Annabel: annabel.gastal@agis-sa.fr
+MEROT mathieu: mathieu.merot@agis-sa.fr
+RAGON johan: johan.ragon@agis-sa.fr
+TARDY lise: lise.tardy@agis-sa.fr
+EMBALLAGE Avignon: christelle.bernard@agis-sa.fr
+BERTAUX virginie: virginie.bertaux@agis-sa.fr
+FTA CrÃ©ation FTA: InformatiqueSupport.AVIGNON@agis-sa.fr
+COUGET Marie-Paule (CrÃ©ation FTA): marie-paule.couget@agis-sa.fr
+BERNARD Sarah-emilie: sarah-emilie bernard
+DUSSAUD lucile: lucile.dussaud@agis-sa.fr
+PREST-MAUGUIN Laurence: laurence.prest-mauguin@agis-sa.fr
+CHEIREZY Fabienne: fabienne.cheirezy@agis-sa.fr
+VIAUX Chloe: chloe.viaux@agis-sa.fr
+POLLET Gregory: gregory.pollet@agis-sa.fr
+COUGET marie-paule (Gestion): marie-paule.couget@agis-sa.fr
+GUINCHARD christelle: christelle.GUINCHARD@ldc.fr
+GATARD Emeline: Emeline.gatard@agis-sa.fr
+FREHEL sÃ©verine: severine.frehel@ldc.fr
+MARIET magali: Magali.MARIET@ldc.fr
+BRES Jessica: jessica.bres@agis-sa.fr
+LUCAS christine: christine.lucas@agis-sa.fr
+FREHEL sÃ©verine  (FTA): sf3100007@ldc.fr
+MEROT Mathieu (Gestion): mathieu.merot@agis-sa.fr
+SANEGRE boris: boris.sanegre@agis-sa.fr
+
+
+Message envoyÃ©:
+
+La Fiche Technique Article "0 - " vient d'Ãªtre validÃ©e.
+Cet Article est maintenant actif et disponible dans l'ensemble de notre systÃ¨me informatique.
+
+INFORMATIONS PRINCIPALES:
+Site d'assemblage: AVIGNON
+Identifiant dans Agrologic: 0
+
+Listes des produits crÃ©Ã©s:
+
+
+INFORMATIONS SUPPLEMENTAIRES:
+Code Article LDC: 0
+Gencod EAN Article: 
+Gencod EAN Colis: 
+Nombre d'UVC par colis: 6
+Poids net de l'unitÃ© de vente facturÃ©e (en Kg): 0.3
+Identifiant du Dossier Technique: 8558-v0
+UnitÃ© de facturation: 
+DurÃ©e de vie garantie client (en jours): 24
+DurÃ©e de vie Production (en jours): 0
+DÃ©signation Commerciale: KAFTA PDT TOMATE 300G SDL
+
+
+Bonne journÃ©e Ã  tous.
+Ce message a Ã©tÃ© envoyÃ© automatiquement par le module Intranet - Fiche Technique Article.
+
+INFORMATIONS DE DEBUGGAGE:
+
+
+SELECT code_produit_agrologic_fta_nomenclature,prefixe_annexe_agrologic_article_codification FROM fta_composant, annexe_agrologic_article_codification WHERE fta_composant.id_fta=8558 AND is_composition_fta_composant=1  AND fta_composant.id_annexe_agrologic_article_codification=annexe_agrologic_article_codification.id_annexe_agrologic_article_codification ORDER BY prefixe_annexe_agrologic_article_codification ASC, nom_fta_nomenclature \n 26/10/2015 16:39:28\nFranck AMOFA <test@gmail.com> : test@gmail.com : FTA/Information "0 - " \n DESTINATAIRES:
+JAEGLE cecile: cecile.jaegle@agis-sa.fr
+MORIN stephane: stephane.morin@ldc.fr
+COUSTON Jasmine: jasmine.couston@agis-sa.fr
+SYSTEM superviseur: InformatiqueSupport.AVIGNON@agis-sa.fr
+COUGET marie-paule (R&D): marie-paule.couget@agis-sa.fr
+WEYMULLER julie: julie.weymuller@agis-sa.fr
+PFISTER cecile: cecile.pfister@agis-sa.fr
+CHOLLET Christine: christine.alberola@agis-sa.fr
+GASTAL Annabel: annabel.gastal@agis-sa.fr
+MEROT mathieu: mathieu.merot@agis-sa.fr
+RAGON johan: johan.ragon@agis-sa.fr
+TARDY lise: lise.tardy@agis-sa.fr
+EMBALLAGE Avignon: christelle.bernard@agis-sa.fr
+BERTAUX virginie: virginie.bertaux@agis-sa.fr
+FTA CrÃ©ation FTA: InformatiqueSupport.AVIGNON@agis-sa.fr
+COUGET Marie-Paule (CrÃ©ation FTA): marie-paule.couget@agis-sa.fr
+BERNARD Sarah-emilie: sarah-emilie bernard
+DUSSAUD lucile: lucile.dussaud@agis-sa.fr
+PREST-MAUGUIN Laurence: laurence.prest-mauguin@agis-sa.fr
+CHEIREZY Fabienne: fabienne.cheirezy@agis-sa.fr
+VIAUX Chloe: chloe.viaux@agis-sa.fr
+POLLET Gregory: gregory.pollet@agis-sa.fr
+COUGET marie-paule (Gestion): marie-paule.couget@agis-sa.fr
+GUINCHARD christelle: christelle.GUINCHARD@ldc.fr
+GATARD Emeline: Emeline.gatard@agis-sa.fr
+FREHEL sÃ©verine: severine.frehel@ldc.fr
+MARIET magali: Magali.MARIET@ldc.fr
+BRES Jessica: jessica.bres@agis-sa.fr
+LUCAS christine: christine.lucas@agis-sa.fr
+FREHEL sÃ©verine  (FTA): sf3100007@ldc.fr
+MEROT Mathieu (Gestion): mathieu.merot@agis-sa.fr
+SANEGRE boris: boris.sanegre@agis-sa.fr
+
+
+Message envoyÃ©:
+
+La Fiche Technique Article "0 - " vient d'Ãªtre validÃ©e.
+Cet Article est maintenant actif et disponible dans l'ensemble de notre systÃ¨me informatique.
+
+INFORMATIONS PRINCIPALES:
+Site d'assemblage: AVIGNON
+Identifiant dans Agrologic: 0
+
+Listes des produits crÃ©Ã©s:
+
+
+INFORMATIONS SUPPLEMENTAIRES:
+Code Article LDC: 0
+Gencod EAN Article: 
+Gencod EAN Colis: 
+Nombre d'UVC par colis: 6
+Poids net de l'unitÃ© de vente facturÃ©e (en Kg): 0.3
+Identifiant du Dossier Technique: 8558-v0
+UnitÃ© de facturation: 
+DurÃ©e de vie garantie client (en jours): 24
+DurÃ©e de vie Production (en jours): 0
+DÃ©signation Commerciale: KAFTA PDT TOMATE 300G SDL
+
+
+COMMENTAIRE:
+test groupÃ©
+
+Bonne journÃ©e Ã  tous.
+Ce message a Ã©tÃ© envoyÃ© automatiquement par le module Intranet - Fiche Technique Article.
+
+INFORMATIONS DE DEBUGGAGE:
+
+
+SELECT code_produit_agrologic_fta_nomenclature,prefixe_annexe_agrologic_article_codification FROM fta_composant, annexe_agrologic_article_codification WHERE fta_composant.id_fta=8558 AND is_composition_fta_composant=1  AND fta_composant.id_annexe_agrologic_article_codification=annexe_agrologic_article_codification.id_annexe_agrologic_article_codification ORDER BY prefixe_annexe_agrologic_article_codification ASC, nom_fta_nomenclature \n 

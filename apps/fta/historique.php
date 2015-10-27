@@ -67,7 +67,7 @@ $id_fta_chapitre = $id_fta_chapitre_encours;
   Initialisation des variables
  */
 $page_default = substr(strrchr($_SERVER['PHP_SELF'], '/'), '1', '-4');
-$page_action = $page_default . '_post.php';
+$page_action = 'modification_fiche.php';
 $page_pdf = $page_default . '_pdf.php';
 $action = 'valider';                       //Action proposée à la page _post.php
 $method = 'POST';             //Pour une url > 2000 caractères, ne pas utiliser utiliser GET
@@ -349,7 +349,7 @@ switch ($output) {
     default:
 
         echo '
-             <form method=' . $method . ' action=' . $page_action . '>
+             <form name=navigation method=' . $method . ' action=' . $page_action . '>
              <input type=hidden name=action value=' . $action . '>
 
              <' . $html_table . '>

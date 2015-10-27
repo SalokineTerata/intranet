@@ -48,6 +48,11 @@ echo "*** Requêtes SQL Part 1:\n";
 $debut = date("H:i:s");
 echo  date("H:i:s")."\n";
 
+  echo "DROP DATABASE ".$nameOfBDDTarget." ...";
+  $sql = "DROP DATABASE ".$nameOfBDDTarget;
+  
+  if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+   
 /**
 Tables basiques
 **/

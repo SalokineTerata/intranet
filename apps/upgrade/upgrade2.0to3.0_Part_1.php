@@ -52,6 +52,10 @@ echo  date("H:i:s")."\n";
   $sql = "DROP DATABASE ".$nameOfBDDTarget;
   
   if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+  echo "CREATE DATABASE ".$nameOfBDDTarget." ...";
+  $sql = "CREATE DATABASE ".$nameOfBDDTarget;
+  
+  if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
    
 /**
 Tables basiques

@@ -94,7 +94,7 @@ class Navigation {
                      <' . $html_table . '>
                      <tr><td class=titre_principal> <div align=\'left\'>
                             <b><font size=\'2\' color=\'#0000FF\'>' . $rowsFtaEtatAndFta[FtaModel::FIELDNAME_CODE_ARTICLE_LDC] . '</font></b> - ' . $nom . ' &nbsp;&nbsp;&nbsp;&nbsp;<i>(gérée par ' . $createur . ')</i>  '
-                    . '  Espace de Travail : '.$rowsFtaEtatAndFta[FtaWorkflowModel::FIELDNAME_DESCRIPTION_FTA_WORKFLOW]
+//                    . '  Espace de Travail : '.$rowsFtaEtatAndFta[FtaWorkflowModel::FIELDNAME_DESCRIPTION_FTA_WORKFLOW]
             . '</div>
             </td></tr>
             <tr class = titre>

@@ -127,7 +127,7 @@ if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
     echo "ALTER TABLE ".$nameOfBDDTarget.".fta id_fta_workflow...";
 
    $sql =  "ALTER TABLE ".$nameOfBDDTarget.".fta
-       ADD CONSTRAINT FOREIGN KEY (id_fta_workflow) REFERENCES ".$nameOfBDDTarget.".fta_workflow_structure(id_fta_workflow)
+       ADD CONSTRAINT FOREIGN KEY (id_fta_workflow) REFERENCES ".$nameOfBDDTarget.".fta_workflow(id_fta_workflow)
         ON DELETE  NO ACTION ON UPDATE CASCADE;"
     ;
   if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
@@ -169,7 +169,7 @@ if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
  echo "ALTER TABLE ".$nameOfBDDTarget.".fta_action_role id_fta_role...";
 
    $sql =      "ALTER TABLE ".$nameOfBDDTarget.".fta_action_role
-        ADD CONSTRAINT FOREIGN KEY (id_fta_role) REFERENCES ".$nameOfBDDTarget.".fta_workflow_structure(id_fta_role)
+        ADD CONSTRAINT FOREIGN KEY (id_fta_role) REFERENCES ".$nameOfBDDTarget.".fta_role(id_fta_role)
         ON DELETE  NO ACTION ON UPDATE CASCADE;"
     ;
   if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
@@ -177,7 +177,7 @@ if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
  echo "ALTER TABLE ".$nameOfBDDTarget.".fta_action_role id_fta_workflow...";
 
    $sql =      "ALTER TABLE ".$nameOfBDDTarget.".fta_action_role
-        ADD CONSTRAINT  FOREIGN KEY (id_fta_workflow) REFERENCES ".$nameOfBDDTarget.".fta_workflow_structure(id_fta_workflow)
+        ADD CONSTRAINT  FOREIGN KEY (id_fta_workflow) REFERENCES ".$nameOfBDDTarget.".fta_workflow(id_fta_workflow)
         ON DELETE  NO ACTION ON UPDATE CASCADE;"
     ;
   if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
@@ -205,7 +205,7 @@ if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
  echo "ALTER TABLE ".$nameOfBDDTarget.".fta_action_site id_fta_workflow...";
 
    $sql =       "ALTER TABLE ".$nameOfBDDTarget.".fta_action_site
-       ADD CONSTRAINT  FOREIGN KEY (id_fta_workflow) REFERENCES ".$nameOfBDDTarget.".fta_workflow_structure(id_fta_workflow)
+       ADD CONSTRAINT  FOREIGN KEY (id_fta_workflow) REFERENCES ".$nameOfBDDTarget.".fta_workflow(id_fta_workflow)
         ON DELETE  NO ACTION ON UPDATE CASCADE;"
     ;
   if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
@@ -301,7 +301,7 @@ if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
  echo "ALTER TABLE ".$nameOfBDDTarget.".fta_processus id_fta_role...";
 
    $sql =           "ALTER TABLE ".$nameOfBDDTarget.".fta_processus
-        ADD CONSTRAINT  FOREIGN KEY (id_fta_role) REFERENCES ".$nameOfBDDTarget.".fta_workflow_structure(id_fta_role)
+        ADD CONSTRAINT  FOREIGN KEY (id_fta_role) REFERENCES ".$nameOfBDDTarget.".fta_role(id_fta_role)
         ON DELETE  NO ACTION ON UPDATE CASCADE;"
     ;
     
@@ -334,7 +334,7 @@ if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
   echo "ALTER TABLE ".$nameOfBDDTarget.".fta_processus_cycle id_fta_workflow...";
 
    $sql =        "ALTER TABLE ".$nameOfBDDTarget.".fta_processus_cycle
-        ADD CONSTRAINT  FOREIGN KEY (id_fta_workflow) REFERENCES ".$nameOfBDDTarget.".fta_workflow_structure(id_fta_workflow)
+        ADD CONSTRAINT  FOREIGN KEY (id_fta_workflow) REFERENCES ".$nameOfBDDTarget.".fta_workflow(id_fta_workflow)
        ON DELETE  NO ACTION ON UPDATE CASCADE;"
     ;
     

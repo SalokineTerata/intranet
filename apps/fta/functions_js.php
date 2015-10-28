@@ -68,9 +68,10 @@
         var TagData = TagId;
         var Data = document.getElementById(TagData);
         var FieldValue = Data.value;
-        var FieldValueForUrl = escape(FieldValue);
+        //var FieldValueForUrl = escape(FieldValue);
+        var FieldValueForUrl = encodeURIComponent(FieldValue);
 
-        //alert(FieldValueForUrl);
+        alert(FieldValueForUrl);
 
         var HtmlImageLoading = '<?php echo Html::DEFAULT_HTML_IMAGE_LOADING ?>';
         var TagStatus = '<?php echo Html::PREFIXE_ID_ICON_STATUS ?>' + '_' + TagId;

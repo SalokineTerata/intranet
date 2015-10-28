@@ -1,6 +1,3 @@
-
-LOG: YESNOAZER
-uu
-
-ttt
-fff
+2015-10-28 19:34:26 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : accentuéerazzzz
+2015-10-28 19:34:26 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `commentaire_suivi_projet` =   'accentuéerazzzz'
+2015-10-28 19:34:52 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\modification_fiche.php : accentué ?

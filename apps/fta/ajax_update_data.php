@@ -11,6 +11,7 @@ require_once '../inc/main.php';
  * Entête neutralisant le système de mise en cache du navigateur.
  * AJAX ne doit pas être mis en cache.
  */
+header('Content-type: text/html; charset=utf-8');
 header("Expires: Mon, 26 Jul 1997 05:00:00 GMT");
 header("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT");
 header("Cache-Control: no-store, no-cache, must-revalidate");
@@ -29,7 +30,7 @@ $fieldValue = Lib::getParameterFromRequest("FieldValue");
 /*
  * Mise à jour de la donnée demandée.
  */
+Logger::AddDebug($fieldValue, __FILE__);
 DatabaseOperation::doSqlUpdateFromOneField($tableName, $keyName, $keyValue, $fieldName, addslashes($fieldValue));
 
-//Logger::Add($fieldValue);
 

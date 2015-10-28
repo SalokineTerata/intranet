@@ -24,30 +24,44 @@
  */
 class Logger {
 
-    const OUTPUT_TAB = '\t';
-    const OUTPUT_CHR = '\n';
-    const OUTPUT_FILE = '../../output.log';
-    
-    static public function Add($paramLog) {
+    const OUTPUT_TAB = "\t";
+    const OUTPUT_CHR = "\n";
+    //const OUTPUT_FILE = 'D:\\weblocal\\output.log';
+    const OUTPUT_FILE = '../../log/output.log';
+    const MSG_LEVEL_LOG = "LOG";
+    const MSG_LEVEL_DEBUG = "DBG";
+
+    static public function AddDebug($paramLog, $paramContext) {
+        $globalConfig = new GlobalConfig();
+        if ($globalConfig->getConf()->getExecDebugEnable()) {
+            self::Add($paramLog, $paramContext, self::MSG_LEVEL_DEBUG);
+        }
+    }
+
+    static public function AddLog($paramLog, $paramContext) {
+        self::Add($paramLog, $paramContext, self::MSG_LEVEL_LOG);
+    }
+
+    static public function Add($paramLog, $paramContext, $paramMessageLevel) {
         // DECLARATION DES VARIABLES LOCALES
         $outputContent = NULL;
         $outputContentResource = fopen(self::OUTPUT_FILE, 'a+');
+        $time = date("Y-m-d H:i:s");
+        $remoteAddr = $serverNameReal = filter_input(INPUT_SERVER, 'REMOTE_ADDR');
 
         // Données à exporter
         $dataToExport = $paramLog;
 
 
         // Données contextuelle
-        $outputContext = '\nLOG: ';
+        $outputContext = $time . " " . $paramMessageLevel . " " . $remoteAddr . " " . $paramContext . " : ";
 
         // Construction de la ligne de log
-        $outputContent = $outputContext . $dataToExport;
+        $outputContent = $outputContext . $dataToExport . self::OUTPUT_CHR;
 
 
         // Enregistrement sous forme de fichier
-        //ftruncate($outputContentResource, 0);
         fputs($outputContentResource, $outputContent);
-
         fclose($outputContentResource);
     }
 

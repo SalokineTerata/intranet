@@ -210,7 +210,14 @@ class DatabaseOperation {
      * @return type
      */
     public static function execute($paramRequest) {
+        //Logger::AddDebug($paramRequest, __METHOD__);
+
+        //Démarrage du chrono sur le temps DB
+        $time_start = DatabaseOperation::microtime_float();
+        
+        //Connexion PDO
         $pdo = DatabaseOperation::databaseAcces();
+        $pdo->exec("SET CHARACTER SET utf8");
         $result = $pdo->prepare($paramRequest);
         $result->closeCursor();
         $validation = $result->execute();
@@ -218,11 +225,10 @@ class DatabaseOperation {
          * Fermeture de la connection
          */
         $pdo = NULL;
-        $time_start = DatabaseOperation::microtime_float();
 
         // Attend pendant un moment
-        usleep(100);
-
+        //usleep(100);
+        //Démarrage du chrono sur le temps DB
         $time_end = DatabaseOperation::microtime_float();
         $time = $time_end - $time_start;
         self::setQueriesInfo($paramRequest, $time, self::IncrementQueryCount());
@@ -737,6 +743,8 @@ class DatabaseOperation {
         $TableClause = '`' . $paramTableName . '` ';
         $SetClause = '`' . $paramFieldName . '` =  ' . self::convertDataForQuery($paramFieldValue);
         $WhereClause = '`' . $paramTableName . '`.`' . $paramKeyName . '` =  \'' . $paramKeyValue . '\'';
+
+        Logger::AddDebug($SetClause, __METHOD__);
 
         DatabaseOperation::doSqlUpdate($TableClause, $SetClause, $WhereClause);
     }

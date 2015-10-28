@@ -58,10 +58,13 @@ class Navigation {
                         . ', ' . FtaModel::FIELDNAME_ARTICLE_AGROLOGIC . ', ' . FtaModel::FIELDNAME_DOSSIER_FTA
                         . ', ' . FtaModel::FIELDNAME_VERSION_DOSSIER_FTA . ', ' . FtaModel::FIELDNAME_LIBELLE
                         . ', ' . FtaModel::FIELDNAME_DESIGNATION_COMMERCIALE . ', ' . FtaModel::FIELDNAME_CODE_ARTICLE_LDC
-                        . ' FROM ' . FtaModel::TABLENAME . ',' . FtaEtatModel::TABLENAME
+                        . ', ' . FtaWorkflowModel::FIELDNAME_DESCRIPTION_FTA_WORKFLOW
+                        . ' FROM ' . FtaModel::TABLENAME . ',' . FtaEtatModel::TABLENAME . ',' . FtaWorkflowModel::TABLENAME
                         . ' WHERE ' . FtaModel::KEYNAME . '=' . self::$id_fta
                         . ' AND ' . FtaEtatModel::TABLENAME . '.' . FtaEtatModel::KEYNAME
                         . '=' . FtaModel::TABLENAME . '.' . FtaModel::FIELDNAME_ID_FTA_ETAT
+                        . ' AND ' . FtaWorkflowModel::TABLENAME . '.' . FtaWorkflowModel::KEYNAME
+                        . '=' . FtaModel::TABLENAME . '.' . FtaModel::FIELDNAME_WORKFLOW
         );
 
         foreach ($arrayFtaEtatAndFta as $rowsFtaEtatAndFta) {
@@ -90,19 +93,20 @@ class Navigation {
             $menu_navigation = '
                      <' . $html_table . '>
                      <tr><td class=titre_principal> <div align=\'left\'>
-                            <b><font size=\'2\' color=\'#0000FF\'>' . $rowsFtaEtatAndFta[FtaModel::FIELDNAME_CODE_ARTICLE_LDC] . '</font></b> - ' . $nom . ' &nbsp;&nbsp;&nbsp;&nbsp;<i>(gérée par ' . $createur . ')</i>
-                           </div>
-                     </td></tr>
-                     <tr class=titre>
-                        <td>
-                            <form name=\'navigation\' method=post action=modification_fiche.php id=\'idOfForm\'>
+                            <b><font size=\'2\' color=\'#0000FF\'>' . $rowsFtaEtatAndFta[FtaModel::FIELDNAME_CODE_ARTICLE_LDC] . '</font></b> - ' . $nom . ' &nbsp;&nbsp;&nbsp;&nbsp;<i>(gérée par ' . $createur . ')</i>  '
+                    . '  Espace de Travail : '.$rowsFtaEtatAndFta[FtaWorkflowModel::FIELDNAME_DESCRIPTION_FTA_WORKFLOW]
+            . '</div>
+            </td></tr>
+            <tr class = titre>
+            <td>
+            <form name = \'navigation\' method=post action=modification_fiche.php id=\'idOfForm\'>
                                 <input type=hidden name=id_fta_chapitre_encours > 
                                 <input type=hidden name=\'id_fta_role\'  >
-                                <input type=hidden name=\'id_fta\' id=id_fta >
+                                <input type=hidden name=\'id_fta\' >
                                 <input type=hidden name=\'id_fta_etat\' >
-                                <input type=\'hidden\' name=\'synthese_action\'  />
+                                <input type=\'hidden\' name=\'synthese_action\' >
                                 <input type=hidden name=\'abreviation_fta_etat\' >
-                                <input type=\'hidden\' name=\'comeback\'  />  
+                                <input type=\'hidden\' name=\'comeback\' >  
                      ';
         }
         //Si une action est donnée, alors construction du menu des chapitres    
@@ -534,25 +538,33 @@ class Navigation {
             if ($num == 0 and self::$synthese_action === 'attente') {
                 
             } else {
-                $menu_navigation .= '<a href=\'#\''
-                        . ' onClick=\'navigation_' . $id_fta_chapitre . '();\''
+                $menu_navigation .= '<a href=' . $page_default . '.php?'
+//                $menu_navigation .= '<a href=\'#\''
+//                        . ' onClick=\'navigation_' . $id_fta_chapitre . '();\''
+                        . 'id_fta=' . self::$id_fta
+                        . '&id_fta_chapitre_encours=' . $id_fta_chapitre
+                        . '&synthese_action=' . self::$synthese_action
+                        . '&id_fta_etat=' . self::$id_fta_etat
+                        . '&abreviation_fta_etat=' . self::$abreviation_etat
+                        . '&comeback=' . self::$comeback
+                        . '&id_fta_role=' . self::$id_fta_role
                         . '>' . $b . ''
                         . $image1 . $nom_usuel_fta_chapitre . $image2
                         . '</a>'
                         . '</b></font> '
                 ;
-                $menu_navigation .= '<SCRIPT LANGUAGE=JavaScript> 
-                          function navigation_' . $id_fta_chapitre . '() {  
-                                        document.navigation.id_fta.value=\'' . self::$id_fta . '\'; 
-                                        document.navigation.id_fta_chapitre_encours.value=\'' . $id_fta_chapitre . '\'; 
-                                        document.navigation.id_fta_role.value=\'' . self::$id_fta_role . '\'; 
-                                        document.navigation.id_fta_etat.value=\'' . self::$id_fta_etat . '\'; 
-                                        document.navigation.synthese_action.value=\'' . self::$synthese_action . '\'; 
-                                        document.navigation.abreviation_fta_etat.value=\'' . self::$abreviation_etat . '\'; 
-                                        document.navigation.comeback.value=\'' . self::$comeback . '\'; 
-                                        navigation.submit();                                         
-                                        return true; 
-                                    }  </SCRIPT> ';
+//                $menu_navigation .= '<SCRIPT LANGUAGE=JavaScript> 
+//                          function navigation_' . $id_fta_chapitre . '() {  
+//                                        document.navigation.id_fta.value=\'' . self::$id_fta . '\'; 
+//                                        document.navigation.id_fta_chapitre_encours.value=\'' . $id_fta_chapitre . '\'; 
+//                                        document.navigation.id_fta_role.value=\'' . self::$id_fta_role . '\'; 
+//                                        document.navigation.id_fta_etat.value=\'' . self::$id_fta_etat . '\'; 
+//                                        document.navigation.synthese_action.value=\'' . self::$synthese_action . '\'; 
+//                                        document.navigation.abreviation_fta_etat.value=\'' . self::$abreviation_etat . '\'; 
+//                                        document.navigation.comeback.value=\'' . self::$comeback . '\'; 
+//                                        navigation.submit();                                         
+//                                        return true; 
+//                                    }  </SCRIPT> ';
             }
         }
         return $menu_navigation;

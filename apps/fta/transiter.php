@@ -130,6 +130,7 @@ $req = 'SELECT ' . FtaTransitionModel::FIELDNAME_NOM_USUEL_FTA_TRANSITION . ', '
 if ($demande_abreviation_fta_transition) {
     $req.= ' AND ' . FtaTransitionModel::FIELDNAME_ABREVIATION_FTA_TRANSITION . '=\'' . $demande_abreviation_fta_transition . '\' ';
 }
+//1+ La Fta peut être validé, 0 La Fta n'est pas à 100%
 if ($recap[$idFta] <> '100%') {
     $req.= ' AND ' . FtaTransitionModel::FIELDNAME_PROCESSUS_PROPRIETAIRE_FTA_TRANSITION . '=0';
 }

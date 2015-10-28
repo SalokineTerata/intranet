@@ -883,9 +883,9 @@ class Chapitre {
         //Logo éco-emballage
         $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_LOGO_ECO_EMBALLAGE);
 
+        //Activer le système d'impression Base Etiquette Codesoft
+        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_ACTIVATION_CODESOFT);
 
-//        $bloc.='<tr> <td>Logo spécifique étiquette manquant choix possible en dessous ?</td></tr>';
-//
 //        //Libellé etiquette carton:
 //        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_LIBELLE_CLIENT);
         //Modèle d'étiquette
@@ -1054,7 +1054,7 @@ class Chapitre {
 
         //Remarque
         $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_REMARQUE);
-        
+
         return $bloc;
     }
 
@@ -2142,13 +2142,25 @@ class Chapitre {
     protected static function buildIsOwner() {
 
         //Recherche du droit d'accès correspondant
+        $module=self::$moduleIntranetActionsModel->getDataField(IntranetActionsModel::FIELDNAME_NOM_INTRANET_ACTIONS)->getFieldValue();
         if (
-                $_SESSION['fta_' . self::$moduleIntranetActionsModel->getDataField(IntranetActionsModel::FIELDNAME_NOM_INTRANET_ACTIONS)->getFieldValue()]
+                $_SESSION['fta_' . $module]
         ) {
             $return = true;
         } else {
             $return = false;
         }
+//        /**
+//         * Recherche du droit d'accès correspondant
+//         */
+//        $ftaModification = IntranetDroitsAccesModel::getFtaModification(self::$idUser);
+//        if (
+//                $ftaModification
+//        ) {
+//            $return = true;
+//        } else {
+//            $return = false;
+//        }
 
         return $return;
     }

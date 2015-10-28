@@ -692,14 +692,14 @@ class AccueilFta {
                         or ( self::$ftaConsultation and self::$abrevationFtaEtat == FtaEtatModel::ETAT_ABREVIATION_VALUE_VALIDE )
                 )
                     $actions .= '<a '
-                            . 'href=#'
-//                            . 'href=modification_fiche.php'
-//                            . '?id_fta=' . $idFta
-//                            . '&synthese_action=' . self::$syntheseAction
-//                            . '&comeback=1'
-//                            . '&id_fta_etat=' . self::$idFtaEtat
-//                            . '&abreviation_fta_etat=' . self::$abrevationFtaEtat
-//                            . '&id_fta_role=' . self::$idFtaRole
+//                            . 'href=#'
+                            . 'href=modification_fiche.php'
+                            . '?id_fta=' . $idFta
+                            . '&synthese_action=' . self::$syntheseAction
+                            . '&comeback=1'
+                            . '&id_fta_etat=' . self::$idFtaEtat
+                            . '&abreviation_fta_etat=' . self::$abrevationFtaEtat
+                            . '&id_fta_role=' . self::$idFtaRole
                             . ' onClick=\'modification_fiche_' . $idFta . '();\' '
                             . '/><img src=../lib/images/next.png alt=\'\' title=\'Voir la FTA\' width=\'30\' height=\'25\' border=\'0\' />'
                             . '</a>'
@@ -713,25 +713,25 @@ class AccueilFta {
 //                        <input type=\'hidden\' name=\'comeback_' . $idFta . ' id=comeback_' . $idFta . '/>  
 //
 //                  </form>';
-                $javascript1.=' <SCRIPT LANGUAGE=JavaScript> 
-                
-                                    function modification_fiche_' . $idFta . '() {  
-                                        document.modification_fiche.id_fta.value=\'' . $idFta . '\'; 
-                                        document.modification_fiche.id_fta_role.value=\'' . self::$idFtaRole . '\'; 
-                                        document.modification_fiche.id_fta_etat.value=\'' . self::$idFtaEtat . '\'; 
-                                        document.modification_fiche.synthese_action.value=\'' . self::$syntheseAction . '\'; 
-                                        document.modification_fiche.abreviation_fta_etat.value=\'' . self::$abrevationFtaEtat . '\'; 
-                                        document.modification_fiche.comeback.value=\'1\'; 
-                                        modification_fiche.submit(); 
-                                        
-                                        return true; 
-                                    } 
-                                    function doPreview()   {
-                                        form=document.getElementById(\'idOfForm\');
-                                        form.action=\'transiter_post.php\';
-                                        form.submit();                                 
-                                    }
-                                </SCRIPT>';
+//                $javascript1.=' <SCRIPT LANGUAGE=JavaScript> 
+//                
+//                                    function modification_fiche_' . $idFta . '() {  
+//                                        document.modification_fiche.id_fta.value=\'' . $idFta . '\'; 
+//                                        document.modification_fiche.id_fta_role.value=\'' . self::$idFtaRole . '\'; 
+//                                        document.modification_fiche.id_fta_etat.value=\'' . self::$idFtaEtat . '\'; 
+//                                        document.modification_fiche.synthese_action.value=\'' . self::$syntheseAction . '\'; 
+//                                        document.modification_fiche.abreviation_fta_etat.value=\'' . self::$abrevationFtaEtat . '\'; 
+//                                        document.modification_fiche.comeback.value=\'1\'; 
+//                                        modification_fiche.submit(); 
+//                                        
+//                                        return true; 
+//                                    } 
+//                                    function doPreview()   {
+//                                        form=document.getElementById(\'idOfForm\');
+//                                        form.action=\'transiter_post.php\';
+//                                        form.submit();                                 
+//                                    }
+//                                </SCRIPT>';
 
                 /*
                  * Export PDF
@@ -797,7 +797,7 @@ class AccueilFta {
                                    {
                                    if(confirm(\'Etes vous certain de vouloir retirer cette Fiche Technique ? Les autres fiches du dossier resteront indem.\'))
                                    {
-                                       location.href =\'transiter.php?id_fta=' . $idFta . '&id_fta_chapitre_encours=' . $idFtaChapitreEncours . '&synthese_action=' . self::$syntheseAction . '&action=correction&demande_abreviation_fta_transition=R\'
+                                       location.href =\'transiter.php?id_fta=' . $idFta . '&id_fta_role=' . self::$idFtaRole . '&synthese_action=' . self::$syntheseAction . '&action=correction&demande_abreviation_fta_transition=R\'
                                    }
                                     else{}
                                    }
@@ -1089,7 +1089,9 @@ class AccueilFta {
 
         $tableauFicheN2.= $tableauFicheNWork . $tableauFicheN;
         $tableauFicheTr2 .= $tableauFicheTrWork . $tableauFicheTr;
-        $tableauFiche .= $tableauFicheN2 . $tableauFicheTr2 . $javascript . $javascript1 . '</tbody></table>';
+        $tableauFiche .= $tableauFicheN2 . $tableauFicheTr2 . $javascript 
+//                . $javascript1 
+                . '</tbody></table>';
 
         //Ajoute de la fonction de traitement de masse
         if ($traitementDeMasse) {

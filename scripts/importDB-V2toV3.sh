@@ -35,21 +35,21 @@ DIR_DEST="/tmp"
 # -----------
 
 echo "* Récupération du dump MySQL"
-#ssh -n $SRV_PRODV2 -- mysqldump -a --add-drop-table -v --quote-names --user=$DB_USER_PRODV2 --password=$DB_PASSWD_PRODV2 $DB_NAME > $DIR_DEST/$EXPORT_FILE.sql
+ssh -n $SRV_PRODV2 -- mysqldump -a --add-drop-table -v --quote-names --user=$DB_USER_PRODV2 --password=$DB_PASSWD_PRODV2 $DB_NAME > $DIR_DEST/$EXPORT_FILE.sql
 
 echo "* Archivage du Dump brut"
-#rsync -Phavz $DIR_DEST/$EXPORT_FILE.sql $SRV_ARCH:$ARCH_DIR/$EXPORT_FILE.sql
+rsync -Phavz $DIR_DEST/$EXPORT_FILE.sql $SRV_ARCH:$ARCH_DIR/$EXPORT_FILE.sql
 
 echo "* Conversion charset"
-#iconv -f $CHARSET_ORIG -t $CHARSET_DEST $DIR_DEST/$EXPORT_FILE.sql -o $DIR_DEST/$EXPORT_FILE_CONV.sql
+iconv -f $CHARSET_ORIG -t $CHARSET_DEST $DIR_DEST/$EXPORT_FILE.sql -o $DIR_DEST/$EXPORT_FILE_CONV.sql
 
 echo "* Correction Engine"
-#sed -i -e "s/TYPE=MyISAM/ENGINE=MyISAM/g" $DIR_DEST/$EXPORT_FILE_CONV.sql
+sed -i -e "s/TYPE=MyISAM/ENGINE=MyISAM/g" $DIR_DEST/$EXPORT_FILE_CONV.sql
 
 echo "* Correction Timestamp"
-#sed -i -e "s/timestamp(14)/timestamp/g" $DIR_DEST/$EXPORT_FILE_CONV.sql
+sed -i -e "s/timestamp(14)/timestamp/g" $DIR_DEST/$EXPORT_FILE_CONV.sql
 
 echo "* Importation des données dans le serveur de base de données local"
-#mysql --user=$DB_USER_PRODV3 --password=$DB_PASSWD_PRODV3 $DB_NAME_V3 < $DIR_DEST/$EXPORT_FILE_CONV.sql
+mysql --user=$DB_USER_PRODV3 --password=$DB_PASSWD_PRODV3 $DB_NAME_V3 < $DIR_DEST/$EXPORT_FILE_CONV.sql
 
 

@@ -1767,6 +1767,8 @@ function visualiser_fiches($id_fta_etat, $choix, $isLimit, $order_common) {
     $globalConfig = new GlobalConfig();
     $id_user = $globalConfig->getAuthenticatedUser()->getKeyValue();
     $synthese_action = Lib::isDefined("synthese_action");
+    $idFtaRole = Lib::getParameterFromRequest(FtaRoleModel::KEYNAME);
+   
 
     $id_fta_etat;    //Attention, double signification, si choix = 0 ou -1, alors il s'agit en fait de $id_fta
 
@@ -2378,10 +2380,14 @@ function visualiser_fiches($id_fta_etat, $choix, $isLimit, $order_common) {
                     . "href=modification_fiche.php"
                     . "?id_fta=$id_fta"
                     . "&synthese_action=$synthese_action"
+                    . "&id_fta_etat=" . $id_fta_etat
+                    . "&abreviation_fta_etat=" . $abreviation_fta_etat
+                    . "&id_fta_role=" . $idFtaRole
                     . "&comeback=1"
                     . " /><img src=../lib/images/next.png alt=\"\" title=\"Voir la FTA\" width=\"30\" height=\"25\" border=\"0\" />"
                     . "</a>"
             ;
+
 
         //Export PDF
 //echo "test".$rows["abreviation_fta_etat"];
@@ -2487,15 +2493,13 @@ function visualiser_fiches($id_fta_etat, $choix, $isLimit, $order_common) {
         //Si accès la fiche
         //Récupération du propriétaire
         //$id_fta=$rows["id_fta"];
-        $id_element = 1;    //Propriétaire
-        $extension[0] = 1;
-        $temp = recherche_element_classification_fta($id_fta, $id_element, $extension);
-
+//        $id_element = 1;    //Propriétaire
+//        $extension[0] = 1;
+//        $temp = recherche_element_classification_fta($id_fta, $id_element, $extension);
         //Récupération de la marque
-        $id_element = 2;  //Marque
-        $extension[0] = 1;
-        $temp2 = recherche_element_classification_fta($id_fta, $id_element, $extension);
-
+//        $id_element = 2;  //Marque
+//        $extension[0] = 1;
+//        $temp2 = recherche_element_classification_fta($id_fta, $id_element, $extension);
         //Désignation commerciale
         $designation_commerciale_fta = $designation_commerciale_fta;
         if (strlen($designation_commerciale_fta) > 55) {
@@ -2550,7 +2554,7 @@ function visualiser_fiches($id_fta_etat, $choix, $isLimit, $order_common) {
         ;
         $nom_defaut = "abreviation_fta_transition";
         $id_defaut = "V";
-        $liste_action_groupe = afficher_requete_en_liste_deroulante($requete, $id_defaut, $nom_defaut);
+        $liste_action_groupe = AccueilFta::afficherRequeteEnListeDeroulante($requete, $id_defaut, $nom_defaut);
 
         $tableau_fiches.= "&nbsp;<img src=../lib/images/fleche_gauche_et_haut.png width=38 height=22 border=0 />
                          <i>Transitions groupées</i>:

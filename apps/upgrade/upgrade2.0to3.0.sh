@@ -20,7 +20,7 @@ echo "*** Requêtes SQL:"
 echo "  * Migration de l'intranet V2 vers V3 ayant comme BDD d'origine $DB_NAME_ORIG pour devenir DB_NAME_V3 grâce à $DB_NAME_STRUCTURE..."
 php ./apps/upgrade/upgrade2.0to3.0_Part_1.php $DB_NAME_V3 $DB_NAME_ORIG $DB_NAME_STRUCTURE
 
-lynx $DB_ENVIRONNEMENT/v3/apps/fta/extraction_classification.php 
+lynx http://$DB_ENVIRONNEMENT-intranet.agis.fr/v3/apps/fta/extraction_classification_$DB_ENVIRONNEMENT.php 
 
 
 php ./apps/upgrade/upgrade2.0to3.0_Part_2.php $DB_NAME_V3 $DB_NAME_ORIG $DB_NAME_STRUCTURE

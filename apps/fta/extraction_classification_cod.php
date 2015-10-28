@@ -53,9 +53,9 @@ require_once '../inc/main.php';
 //$password_connect2 = "8ale!ne"; //mot de passe de la base MySQL
 //$donnee2 = mysql_pconnect($hostname_connect2, $username_connect2, $password_connect2) or die("connexion impossible");
 
-$nameOfBDDTarget = '$1';
- $nameOfBDDOrigin = '$2';
- $nameOfBDDStructure = '$3';
+$nameOfBDDTarget = "intranet_v3_0_cod";
+$nameOfBDDOrigin = "intranet_v2_0_prod_cod";
+$nameOfBDDStructure = "intranet_v3_0_dev_2015_10_19";
 
 
 /**
@@ -66,7 +66,7 @@ ini_set('memory_limit', '-1');
 ini_set('max_execution_time', 1800);
 
 function getQuery($paramStartValue) {
-    $nameOfBDDOrigin = 'intranet_v2_0_prod';
+    $nameOfBDDOrigin = 'intranet_v2_0_prod_cod';
 
     return $reqTableClassifRoot = "SELECT classification_arborescence_article.id_classification_arborescence_article, "
             . "ascendant_classification_arborescence_article_categorie_contenu, nom_classification_arborescence_article_categorie_contenu, "
@@ -305,7 +305,7 @@ foreach ($returnFull as $value) {
 
 mysql_close();
 
-
+echo "FIN de TRAITEMENT";
 /**
  * Rendu HTML
  */

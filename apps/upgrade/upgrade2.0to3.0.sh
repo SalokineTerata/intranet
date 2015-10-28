@@ -11,15 +11,16 @@
 DB_NAME_V3="$1"
 DB_NAME_ORIG="$2"
 DB_NAME_STRUCTURE="$3"
+DB_ENVIRONNEMENT="$4"
 
 # CORPS
 # -----
 
 echo "*** Requêtes SQL:"
-echo "  * Migration de l'intranet V2 vers V3 ayant comme BDD d'origine DB_NAME_ORIG pour devenir DB_NAME_V3 grâce à DB_NAME_STRUCTURE..."
-php ./apps/upgrade/upgrade2.0to3.0_Part_1.php DB_NAME_V3 DB_NAME_ORIG DB_NAME_STRUCTURE
+echo "  * Migration de l'intranet V2 vers V3 ayant comme BDD d'origine $DB_NAME_ORIG pour devenir DB_NAME_V3 grâce à $DB_NAME_STRUCTURE..."
+php ./apps/upgrade/upgrade2.0to3.0_Part_1.php $DB_NAME_V3 $DB_NAME_ORIG $DB_NAME_STRUCTURE
 
-lynx cod-intranet.agis.fr/v3/apps/fta/extraction_classification.php DB_NAME_V3 DB_NAME_ORIG DB_NAME_STRUCTURE
+lynx http://$DB_ENVIRONNEMENT-intranet.agis.fr/v3/apps/fta/extraction_classification_$DB_ENVIRONNEMENT.php 
 
 
-php ./apps/upgrade/upgrade2.0to3.0_Part_2.php DB_NAME_V3 DB_NAME_ORIG DB_NAME_STRUCTURE
+php ./apps/upgrade/upgrade2.0to3.0_Part_2.php $DB_NAME_V3 $DB_NAME_ORIG $DB_NAME_STRUCTURE

@@ -78,7 +78,7 @@ $HtmlList = new HtmlListSelectTagName();
 /*
  * Worflow de FTA
  */
-$listeWorkflow = FtaWorkflowModel::ShowListeDeroulanteNomWorkflowByAcces($idUser, $HtmlList, TRUE, $idFtaWorkflow);
+$listeWorkflow = FtaWorkflowModel::ShowListeDeroulanteNomWorkflowByAcces($idUser, $HtmlList, TRUE,$idFtaRole, $idFtaWorkflow);
 
 
 

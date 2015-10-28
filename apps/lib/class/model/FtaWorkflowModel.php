@@ -47,7 +47,7 @@ class FtaWorkflowModel extends AbstractModel {
      * @param int $paramIdDefault
      * @return string
      */
-    public static function ShowListeDeroulanteNomWorkflowByAcces($paramIdUser, $paramObjetList, $paramIsEditable, $paramIdDefault = NULL) {
+    public static function ShowListeDeroulanteNomWorkflowByAcces($paramIdUser, $paramObjetList, $paramIsEditable, $paramIdRole, $paramIdDefault = NULL) {
 
         $arrayWorkflow = DatabaseOperation::convertSqlStatementWithKeyAndOneFieldToArray(
                         'SELECT DISTINCT ' . FtaWorkflowModel::TABLENAME . '.' . FtaWorkflowModel::KEYNAME . ',' . FtaWorkflowModel::FIELDNAME_DESCRIPTION_FTA_WORKFLOW
@@ -57,6 +57,7 @@ class FtaWorkflowModel extends AbstractModel {
                         . ' WHERE ' . FtaWorkflowModel::FIELDNAME_DESCRIPTION_FTA_WORKFLOW . '<>\'\''
                         . ' AND ' . FtaWorkflowModel::TABLENAME . '.' . FtaWorkflowModel::FIELDNAME_ID_INTRANET_ACTIONS
                         . '=' . IntranetDroitsAccesModel::TABLENAME . '.' . IntranetDroitsAccesModel::FIELDNAME_ID_INTRANET_ACTIONS
+                        . ' AND ' . FtaWorkflowStructureModel::TABLENAME . '.' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_ROLE . '=' . $paramIdRole
                         . ' AND ' . FtaWorkflowModel::TABLENAME . '.' . FtaWorkflowModel::KEYNAME
                         . '=' . FtaWorkflowStructureModel::TABLENAME . '.' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_WORKFLOW
                         . ' AND ' . IntranetDroitsAccesModel::FIELDNAME_ID_USER . '=' . $paramIdUser // L'utilisateur connecté
@@ -169,7 +170,7 @@ class FtaWorkflowModel extends AbstractModel {
             } else {
                 $idFtaWorkflow = '8';
             }
-        }else {
+        } else {
             $idFtaWorkflow = '9';
         }
 

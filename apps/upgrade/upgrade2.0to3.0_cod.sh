@@ -7,7 +7,7 @@
 #
 
 #echo "* Migration vers l'environnement COD"
-./apps/upgrade/upgrade2.0to3.0.sh intranet_v3_0_cod intranet_v2_0_prod_cod intranet_v3_0_dev_2015_10_19
+./apps/upgrade/upgrade2.0to3.0.sh intranet_v3_0_cod intranet_v2_0_prod_cod intranet_v3_0_dev_2015_10_19 cod-intranet.agis.fr
 
 
 

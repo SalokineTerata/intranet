@@ -2,27 +2,24 @@
 #
 # Script de construction de la base de données Intranet V3
 #
-# Author: bs4300280 - 05/10/2015
+# Author: franckwastaken - 28/10/2015
 #
 #
 
 # VARIABLES
 # ---------
-DB_NAME_V3="intranet_v3_0_dev"
-DB_USER_PRODV3="mysqladm"
-DB_PASSWD_PRODV3="agis"
+DB_NAME_V3="$1"
+DB_NAME_ORIG="$2"
+DB_NAME_STRUCTURE="$3"
 
 # CORPS
 # -----
 
 echo "*** Requêtes SQL:"
-echo "  * CREATE TABLE intranet_v3_0_dev.classification_arborescence_article ..."
+echo "  * Migration de l'intranet V2 vers V3 ayant comme BDD d'origine DB_NAME_ORIG pour devenir DB_NAME_V3 grâce à DB_NAME_STRUCTURE..."
+php ./apps/upgrade/upgrade2.0to3.0_Part_1.php DB_NAME_V3 DB_NAME_ORIG DB_NAME_STRUCTURE
 
-SQL_TXT="CREATE TABLE intranet_v3_0_dev.classification_arborescence_article LIKE intranet_v3_0_cod.classification_arborescence_article ;"
-#echo $SQL_TXT | mysql --user=$DB_USER_PRODV3 --password=$DB_PASSWD_PRODV3 $DB_NAME_V3 
-
-
-SQL_TXT="INSERT INTO intranet_v3_0_dev.classification_arborescence_article SELECT * FROM intranet_v2_0_prod.classification_arborescence_article ;"
-echo $SQL_TXT | mysql --user=$DB_USER_PRODV3 --password=$DB_PASSWD_PRODV3 $DB_NAME_V3
+lynx cod-intranet.agis.fr/v3/apps/fta/extraction_classification.php DB_NAME_V3 DB_NAME_ORIG DB_NAME_STRUCTURE
 
 
+php ./apps/upgrade/upgrade2.0to3.0_Part_2.php DB_NAME_V3 DB_NAME_ORIG DB_NAME_STRUCTURE

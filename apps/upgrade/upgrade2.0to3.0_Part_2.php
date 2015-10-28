@@ -11,9 +11,9 @@
   Initialisation des variables
 */
 
- $nameOfBDDTarget = 'intranet_v3_0_dev';
- $nameOfBDDOrigin = 'intranet_v2_0_prod';
- $nameOfBDDStructure = 'intranet_v3_0_dev_2015_10_19';
+$nameOfBDDTarget = '$1';
+ $nameOfBDDOrigin = '$2';
+ $nameOfBDDStructure = '$3';
 
 $hostname_connect = "dev-intranet.agis.fr"; //nom du serveur MySQL de connection � la base de donn�e
 $database_connect = $nameOfBDDTarget; //nom de la base de donn�e sur votre serveur MySQL

@@ -12,9 +12,12 @@
  */
 class HtmlInputText extends AbstractHtmlInput {
 
+    const DEFAULT_SIZE = 50;
+
     public function __construct() {
         parent::__construct();
         parent::getAttributes()->getInputType()->setText();
+        parent::getAttributes()->getSize()->setValue(self::DEFAULT_SIZE);
     }
 
 }

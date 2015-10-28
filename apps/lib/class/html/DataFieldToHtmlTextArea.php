@@ -1,3 +1,4 @@
+
 <?php
 
 /*
@@ -6,11 +7,11 @@
  */
 
 /**
- * Description of DataFieldToHtmlInputText
+ * Description of DataFieldToHtmlTextArea
  *
  * @author bs4300280
  */
-class DataFieldToHtmlInputText extends HtmlInputText {
+class DataFieldToHtmlTextArea extends HtmlTextArea {
 
     use TraitDataFieldToHtml;
 
@@ -20,7 +21,7 @@ class DataFieldToHtmlInputText extends HtmlInputText {
 
         //Déclaration des propriétés générique (classe parent)
         parent::__construct();
-        $this->initAbstractHtmlInput(
+        $this->initObject(
                 $this->getHtmlName()
                 , $this->getDataField()->getFieldLabel()
                 , $this->getDataField()->getFieldValue()

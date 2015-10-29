@@ -19,7 +19,8 @@ class DatabaseConnection extends PDO {
                      *  Les connexions persistantes ne sont pas fermées à la fin du script,mais sont mises en cache 
                      *  et réutilisées lorsqu'un autre script demande une connexion en utilisant les mêmes paramètres
                      */
-                    , array(PDO::ATTR_PERSISTENT => true));
+                    , array(PDO::ATTR_PERSISTENT => true)
+            );
             /**
              * PDO définit simplement le code d'erreur à inspecter
              * et il émettra un message E_WARNING traditionnel
@@ -32,7 +33,7 @@ class DatabaseConnection extends PDO {
 
         //  $this->setPdoObjet($globalConfig->getDatabaseConnexion());
     }
-   
+
     function getPdoObjet() {
         return $this->PdoObjet;
     }

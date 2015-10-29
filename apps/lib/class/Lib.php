@@ -164,7 +164,7 @@ class Lib {
         if ($title == null) {
             $globalConfig = new GlobalConfig();
             $title = $globalConfig->getConf()->getApplicationTitle()
-                    . ' (v' . $_SESSION['intranet_modules'][self::$module]['version_intranet_modules'] . ') '
+                    . ' (v' . $_SESSION['intranet_modules']['lib']['version_intranet_modules'] . ') '
                     . ' - '
                     . $_SESSION['intranet_modules'][self::$module]['nom_usuel_intranet_modules']
                     . ' (v' . $_SESSION['intranet_modules'][self::$module]['version_intranet_modules'] . ')';

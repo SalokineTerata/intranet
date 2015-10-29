@@ -58,7 +58,7 @@ echo '...';
   Fonctions propres aux Assistantes de Direction Commerciales
  */
 if (
-        ($idFtaRole == 1) or ( $idFtaRole == 6)     //-> Chef de projet
+        $id_user and ( ($idFtaRole == 1) or ( $idFtaRole == 6) )    //-> Chef de projet
 ) {
     //Créer une nouvelle Fiche Technique Article
     echo '<br>';
@@ -98,7 +98,7 @@ if (
 //   echo '...';
 
 if (
-        $idFtaRole == 3 //-> Service Qualité
+      $id_user and  $idFtaRole == 3 //-> Service Qualité
 ) {
     /*
       //Accéder à son bloc de saisie sur les fiches en cours

@@ -4352,7 +4352,7 @@ echo "INSERT INTO ".$nameOfBDDTarget.".fta_action_site ...";
 $sql = "INSERT INTO ".$nameOfBDDTarget.".fta_action_site SELECT * FROM ".$nameOfBDDStructure.".fta_action_site";
 if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
 
-$sql ="SELECT id_geo,geo,libelle_site_agis FROM geo WHERE tag_application_geo LIKE \"%fta%\" OR id_geo=5 ";
+$sql ="SELECT id_geo,geo,libelle_site_agis FROM ".$nameOfBDDTarget.".geo WHERE tag_application_geo LIKE \"%fta%\" OR id_geo=5 ";
 $isteIdGeo =mysql_query($sql);
 
 
@@ -4780,7 +4780,7 @@ VALUES ( \"$idFta\", \"$idAccessArti2\", \"$numft\", \"$idFtaWorkflow\" "
   $sql ="SELECT DISTINCT fta.id_fta
          FROM ".$nameOfBDDTarget.".fta
          WHERE Site_de_production NOT 
-         IN (SELECT id_geo FROM geo) ";
+         IN (SELECT id_geo FROM ".$nameOfBDDTarget.".geo) ";
   
 $resultSiteDEProduction =mysql_query($sql);
 if ($resultSiteDEProduction) {
@@ -5379,7 +5379,7 @@ WHERE id_fta_composant NOT
 IN (
 
 SELECT id_fta_composant
-FROM  `fta_composant` , geo
+FROM  ".$nameOfBDDTarget.".fta_composant , ".$nameOfBDDTarget.".geo
 WHERE fta_composant.id_geo = geo.id_geo
 )
 AND fta.id_fta = fta_composant.id_fta

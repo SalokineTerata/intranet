@@ -4352,7 +4352,7 @@ echo "INSERT INTO ".$nameOfBDDTarget.".fta_action_site ...";
 $sql = "INSERT INTO ".$nameOfBDDTarget.".fta_action_site SELECT * FROM ".$nameOfBDDStructure.".fta_action_site";
 if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
 
-$sql ="SELECT id_geo,geo,libelle_site_agis FROM geo WHERE tag_application_geo LIKE \"%fta%\" OR id_geo=5 ";
+$sql ="SELECT id_geo,geo,libelle_site_agis FROM ".$nameOfBDDTarget.".geo WHERE tag_application_geo LIKE \"%fta%\" OR id_geo=5 ";
 $isteIdGeo =mysql_query($sql);
 
 

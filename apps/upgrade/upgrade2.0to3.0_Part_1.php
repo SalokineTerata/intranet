@@ -4780,7 +4780,7 @@ VALUES ( \"$idFta\", \"$idAccessArti2\", \"$numft\", \"$idFtaWorkflow\" "
   $sql ="SELECT DISTINCT fta.id_fta
          FROM ".$nameOfBDDTarget.".fta
          WHERE Site_de_production NOT 
-         IN (SELECT id_geo FROM geo) ";
+         IN (SELECT id_geo FROM ".$nameOfBDDTarget.".geo) ";
   
 $resultSiteDEProduction =mysql_query($sql);
 if ($resultSiteDEProduction) {
@@ -5379,7 +5379,7 @@ WHERE id_fta_composant NOT
 IN (
 
 SELECT id_fta_composant
-FROM  `fta_composant` , geo
+FROM  ".$nameOfBDDTarget.".fta_composant , ".$nameOfBDDTarget.".geo
 WHERE fta_composant.id_geo = geo.id_geo
 )
 AND fta.id_fta = fta_composant.id_fta

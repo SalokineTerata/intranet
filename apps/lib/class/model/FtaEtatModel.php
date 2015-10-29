@@ -65,7 +65,7 @@ class FtaEtatModel extends AbstractModel {
      * @return type
      */
     public static function getIdFtaByEtatAvancement($paramSyntheseAction, $paramEtat, $paramRole, $paramIdUser, $paramIdFtaEtat) {
-
+        $idFtaEffectue = array();
         switch ($paramSyntheseAction) {
 
             case FtaEtatModel::ETAT_AVANCEMENT_VALUE_ATTENTE:
@@ -126,9 +126,12 @@ class FtaEtatModel extends AbstractModel {
                 }
                 if ($arrayTmp) {
                     foreach ($arrayTmp as $rows) {
-                        $tauxDeValidadation = FtaProcessusModel::getValideProcessusEncours($rows[FtaModel::KEYNAME], $rows[FtaProcessusCycleModel::FIELDNAME_PROCESSUS_INIT], $rows[FtaWorkflowStructureModel::FIELDNAME_ID_FTA_WORKFLOW]);
-                        if ($tauxDeValidadation <> '1') {
-                            $idFtaEffectue[] = $rows[FtaModel::KEYNAME];
+                        $cheackIdFta = in_array($rows[FtaModel::KEYNAME], $idFtaEffectue);
+                        if (!$cheackIdFta) {
+                            $tauxDeValidadation = FtaProcessusModel::getValideProcessusEncours($rows[FtaModel::KEYNAME], $rows[FtaProcessusCycleModel::FIELDNAME_PROCESSUS_INIT], $rows[FtaWorkflowStructureModel::FIELDNAME_ID_FTA_WORKFLOW]);
+                            if ($tauxDeValidadation <> '1') {
+                                $idFtaEffectue[] = $rows[FtaModel::KEYNAME];
+                            }
                         }
                     }
                 }
@@ -197,17 +200,20 @@ class FtaEtatModel extends AbstractModel {
                 );
                 if ($arrayTmp) {
                     foreach ($arrayTmp as $rows) {
-                        $tauxDeValidadation = FtaProcessusModel::getFtaProcessusNonValidePrecedent($rows[FtaModel::KEYNAME], $rows[FtaProcessusModel::KEYNAME], $rows[FtaWorkflowStructureModel::FIELDNAME_ID_FTA_WORKFLOW]);
-                        /**
-                         * En cas d'oublier des chef de projet qui aurait créé une fta sans validé les informations de base
-                         */
-                        if ($paramRole == '1' or $paramRole == '6') {
-                            $chefProjet = ($tauxDeValidadation == '0');
-                            if ($tauxDeValidadation <> '0' OR $chefProjet == TRUE) {
+                        $cheackIdFta = in_array($rows[FtaModel::KEYNAME], $idFtaEffectue);
+                        if (!$cheackIdFta) {
+                            $tauxDeValidadation = FtaProcessusModel::getFtaProcessusNonValidePrecedent($rows[FtaModel::KEYNAME], $rows[FtaProcessusModel::KEYNAME], $rows[FtaWorkflowStructureModel::FIELDNAME_ID_FTA_WORKFLOW]);
+                            /**
+                             * En cas d'oublier des chef de projet qui aurait créé une fta sans validé les informations de base
+                             */
+                            if ($paramRole == '1' or $paramRole == '6') {
+                                $chefProjet = ($tauxDeValidadation == '0');
+                                if ($tauxDeValidadation <> '0' OR $chefProjet == TRUE) {
+                                    $idFtaEffectue[] = $rows[FtaModel::KEYNAME];
+                                }
+                            } elseif ($tauxDeValidadation == '1') {
                                 $idFtaEffectue[] = $rows[FtaModel::KEYNAME];
                             }
-                        } elseif ($tauxDeValidadation == '1') {
-                            $idFtaEffectue[] = $rows[FtaModel::KEYNAME];
                         }
                     }
                 }
@@ -279,9 +285,12 @@ class FtaEtatModel extends AbstractModel {
 
                 if ($arrayTmp) {
                     foreach ($arrayTmp as $rows) {
-                        $tauxDeValidadation = FtaProcessusModel::getValideIdFtaByRoleWorkflowProcessus($rows[FtaModel::KEYNAME], $paramRole, $rows[FtaWorkflowStructureModel::FIELDNAME_ID_FTA_WORKFLOW]);
-                        if ($tauxDeValidadation == '1' or $paramRole == '6') {
-                            $idFtaEffectue[] = $rows[FtaModel::KEYNAME];
+                        $cheackIdFta = in_array($rows[FtaModel::KEYNAME], $idFtaEffectue);
+                        if (!$cheackIdFta) {
+                            $tauxDeValidadation = FtaProcessusModel::getValideIdFtaByRoleWorkflowProcessus($rows[FtaModel::KEYNAME], $paramRole, $rows[FtaWorkflowStructureModel::FIELDNAME_ID_FTA_WORKFLOW]);
+                            if ($tauxDeValidadation == '1' or $paramRole == '6') {
+                                $idFtaEffectue[] = $rows[FtaModel::KEYNAME];
+                            }
                         }
                     }
                 }

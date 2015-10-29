@@ -7,7 +7,6 @@
  */
 class AccueilFta {
 
-   
     protected static $abrevationFtaEtat;
     protected static $arrayFtaEtat;
     protected static $arrayFtaRole;
@@ -574,22 +573,18 @@ class AccueilFta {
                  * Récuperation du nom de site de production
                  */
 
-                $nomSiteProduction = GeoModel::getProductionSiteName($siteProduction);
+                $geoModel = new GeoModel($siteProduction);
+                $nomSiteProduction = $geoModel->getDataField(GeoModel::FIELDNAME_GEO)->getFieldValue();
 
 
                 /*
                  * Récupération du nom du créateur de la fta
                  */
 
-                $arrayNomCreateur = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
-                                'SELECT ' . UserModel::FIELDNAME_NOM . ',' . UserModel::FIELDNAME_PRENOM
-                                . ' FROM ' . UserModel::TABLENAME
-                                . ' WHERE ' . UserModel::KEYNAME . '=\'' . $createurFta . '\' '
-                );
-                foreach ($arrayNomCreateur as $rowsNomCreateur) {
-                    $createurNom = $rowsNomCreateur[UserModel::FIELDNAME_NOM];
-                    $createurPrenom = $rowsNomCreateur[UserModel::FIELDNAME_PRENOM];
-                }
+                $userModel = new UserModel($createurFta);
+                $createurNom = $userModel->getDataField(UserModel::FIELDNAME_NOM)->getFieldValue();
+                $createurPrenom = $userModel->getDataField(UserModel::FIELDNAME_PRENOM)->getFieldValue();
+
 
                 /**
                  * Calssification
@@ -1089,7 +1084,7 @@ class AccueilFta {
 
         $tableauFicheN2.= $tableauFicheNWork . $tableauFicheN;
         $tableauFicheTr2 .= $tableauFicheTrWork . $tableauFicheTr;
-        $tableauFiche .= $tableauFicheN2 . $tableauFicheTr2 . $javascript 
+        $tableauFiche .= $tableauFicheN2 . $tableauFicheTr2 . $javascript
 //                . $javascript1 
                 . '</tbody></table>';
 

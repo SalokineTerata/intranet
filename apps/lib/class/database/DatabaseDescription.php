@@ -248,7 +248,7 @@ class DatabaseDescription {
          * Récupération des relations des tables dans le schéma de la
          * base de données.
          */
-        self::buildSchemaRelationshipDescription();
+        //self::buildSchemaRelationshipDescription();
 
         /**
          * Enregistrement du résultat final en session PHP $_SESSION
@@ -364,26 +364,26 @@ class DatabaseDescription {
         }
     }
 
-    public static function buildSchemaRelationshipDescription() {
-        /**
-         * Récupération des relations des tables
-         */
-        $tableRelationship = self::getArrayAllForeignKey();
-
-        foreach ($tableRelationship as $value) {
-
-            $paramTableName = $value[self::MYSQL_INFORMATION_SCHEMA_KEY_COLUMN_USAGE_TABLE_NAME];
-            $paramFieldName = $value[self::MYSQL_INFORMATION_SCHEMA_KEY_COLUMN_USAGE_COLUMN_NAME];
-            $paramForeignKey = $value[self::MYSQL_INFORMATION_SCHEMA_KEY_COLUMN_USAGE_REFERENCED_COLUMN_NAME];
-            $paramForeignTable = $value[self::MYSQL_INFORMATION_SCHEMA_KEY_COLUMN_USAGE_REFERENCED_TABLE_NAME];
-
-            self::$resultInSession[$paramTableName][self::ARRAY_NAME_FIELDS]
-                    [$paramFieldName][self::ARRAY_NAME_SCHEMA] = array(
-                self::ARRAY_NAME_DOC_FOREIGN_KEY => $paramForeignKey,
-                self::ARRAY_NAME_DOC_FOREIGN_TABLE => $paramForeignTable
-            );
-        }
-    }
+//    public static function buildSchemaRelationshipDescription() {
+//        /**
+//         * Récupération des relations des tables
+//         */
+//        $tableRelationship = self::getArrayAllForeignKey();
+//
+//        foreach ($tableRelationship as $value) {
+//
+//            $paramTableName = $value[self::MYSQL_INFORMATION_SCHEMA_KEY_COLUMN_USAGE_TABLE_NAME];
+//            $paramFieldName = $value[self::MYSQL_INFORMATION_SCHEMA_KEY_COLUMN_USAGE_COLUMN_NAME];
+//            $paramForeignKey = $value[self::MYSQL_INFORMATION_SCHEMA_KEY_COLUMN_USAGE_REFERENCED_COLUMN_NAME];
+//            $paramForeignTable = $value[self::MYSQL_INFORMATION_SCHEMA_KEY_COLUMN_USAGE_REFERENCED_TABLE_NAME];
+//
+//            self::$resultInSession[$paramTableName][self::ARRAY_NAME_FIELDS]
+//                    [$paramFieldName][self::ARRAY_NAME_SCHEMA] = array(
+//                self::ARRAY_NAME_DOC_FOREIGN_KEY => $paramForeignKey,
+//                self::ARRAY_NAME_DOC_FOREIGN_TABLE => $paramForeignTable
+//            );
+//        }
+//    }
 
     /**
      * Le champs est-il de type clef primaire ?

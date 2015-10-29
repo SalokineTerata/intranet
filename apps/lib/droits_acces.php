@@ -5,9 +5,10 @@
   ------------------------------------------------ */
 
 //Création des variables globales de tous les droits d'acces de l'intranet
-$timestart = time();
+//$timestart = time();
 $nom_droits_acces = Lib::isDefined('nom_droits_acces');
 $id_user = Lib::isDefined('id_user');
+Logger::AddLog($id_user, __METHOD__);
 
 //Requête retournant tous les droits d'accès de l'intranet pour l'utilisateur en cours
 $array = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
@@ -36,6 +37,8 @@ if ($array) {
         //Vérification
         //echo $nom_droits_acces.'='.$$nom_droits_acces.'<br>';
         //Enregistrement du droits d'accès dans les variables de session PHP
+        
+        //Acl::set($nom_droits_acces, $$nom_droits_acces);
         $_SESSION["$nom_droits_acces"] = $$nom_droits_acces;
 
         //Réinitialisation pour préaparer la nouvelle boucle
@@ -100,12 +103,12 @@ if ($array) {
  */
 
 
-
-$timestop = time();
-//2011-01-31 Boris Sanègre - Neutralisation du timeout.
-//$delay = $timestop - $timestart;
-$delay = 1;
-
-$_SESSION['delay'] = $delay;
+//
+//$timestop = time();
+////2011-01-31 Boris Sanègre - Neutralisation du timeout.
+////$delay = $timestop - $timestart;
+//$delay = 1;
+//
+//$_SESSION['delay'] = $delay;
 //$delay.' secondes';
 ?>

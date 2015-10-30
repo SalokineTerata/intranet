@@ -10,7 +10,7 @@
 $module_consultation = $module
         . "_consultation"
 ;
-$value_module_consultation = lib::isDefined($module_consultation);
+$value_module_consultation = AclClass::getValueAccesRights($module_consultation);
 if (!$value_module_consultation) {
     header("Location: index.php");
 }

@@ -52,7 +52,7 @@ switch ($output) {
 }//Fin de la sélection du mode d'affichage de la page
 
 
-$planning_presence_modification = Lib::isDefined('planning_presence_modification');
+$planning_presence_modification = AclClass::getValueAccesRights('planning_presence_modification');
 $id_salaries = Lib::getParameterFromRequest('id_salaries');
 $id_jour = Lib::getParameterFromRequest('id_jour');
 $id_semaine = Lib::getParameterFromRequest('id_semaine');

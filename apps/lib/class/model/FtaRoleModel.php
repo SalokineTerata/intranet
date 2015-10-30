@@ -60,7 +60,7 @@ class FtaRoleModel extends AbstractModel {
      * @return array
      */
     public static function getNameRoleEncoursByIdFta($paramIdFta, $paramIdWorkflow) {
-
+        $processusLISTE = array();
         /*
          * Nous récuperons les processus en cours.
          */
@@ -92,27 +92,31 @@ class FtaRoleModel extends AbstractModel {
              * si les processus de chaque sont validé alors il est effectués sinon il est en cours
              */
             foreach ($arrayProcessusEncours as $rowsProcessusEncours) {
-                /*
-                 * Nous verifions si tous les processus précedents du chapitre que l'utilisateur à les droits d'accès
-                 * sont validé ou non et donc visible ou non
-                 */
-                $taux_validation_processus = FtaProcessusModel::getFtaProcessusNonValidePrecedent($paramIdFta, $rowsProcessusEncours[FtaWorkflowStructureModel::FIELDNAME_ID_FTA_PROCESSUS], $rowsProcessusEncours[FtaWorkflowStructureModel::FIELDNAME_ID_FTA_WORKFLOW]);
-                if ($taux_validation_processus == 1 or $taux_validation_processus === NULL) {
+                $checkProcessus = in_array($rowsProcessusEncours[FtaWorkflowStructureModel::FIELDNAME_ID_FTA_PROCESSUS], $processusLISTE);
+                if (!$checkProcessus) {
                     /*
-                     * Nous récupérons tous les processus validé pour vérifier plus tard si nous devons les affichers
+                     * Nous verifions si tous les processus précedents du chapitre que l'utilisateur à les droits d'accès
+                     * sont validé ou non et donc visible ou non
                      */
-                    $taux_validation_processus = FtaProcessusModel::getValideProcessusEncours($paramIdFta, $rowsProcessusEncours[FtaWorkflowStructureModel::FIELDNAME_ID_FTA_PROCESSUS], $rowsProcessusEncours[FtaWorkflowStructureModel::FIELDNAME_ID_FTA_WORKFLOW]);
-                    if ($taux_validation_processus <> 1) {
-                        $arrayIdRole = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
-                                        'SELECT DISTINCT ' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_ROLE
-                                        . ' FROM ' . FtaWorkflowStructureModel::TABLENAME
-                                        . ' WHERE ' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_PROCESSUS
-                                        . '=' . $rowsProcessusEncours[FtaWorkflowStructureModel::FIELDNAME_ID_FTA_PROCESSUS]
-                                        . ' AND ' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_WORKFLOW
-                                        . '=' . $rowsProcessusEncours[FtaWorkflowStructureModel::FIELDNAME_ID_FTA_WORKFLOW]
-                        );
-                        foreach ($arrayIdRole as $rowsIdRole) {
-                            $IdRole[] = $rowsIdRole[FtaWorkflowStructureModel::FIELDNAME_ID_FTA_ROLE];
+                    $processusLISTE[] = $rowsProcessusEncours[FtaWorkflowStructureModel::FIELDNAME_ID_FTA_PROCESSUS];
+                    $taux_validation_processus = FtaProcessusModel::getFtaProcessusNonValidePrecedent($paramIdFta, $rowsProcessusEncours[FtaWorkflowStructureModel::FIELDNAME_ID_FTA_PROCESSUS], $rowsProcessusEncours[FtaWorkflowStructureModel::FIELDNAME_ID_FTA_WORKFLOW]);
+                    if ($taux_validation_processus == 1 or $taux_validation_processus === NULL) {
+                        /*
+                         * Nous récupérons tous les processus validé pour vérifier plus tard si nous devons les affichers
+                         */
+                        $taux_validation_processus = FtaProcessusModel::getValideProcessusEncours($paramIdFta, $rowsProcessusEncours[FtaWorkflowStructureModel::FIELDNAME_ID_FTA_PROCESSUS], $rowsProcessusEncours[FtaWorkflowStructureModel::FIELDNAME_ID_FTA_WORKFLOW]);
+                        if ($taux_validation_processus <> 1) {
+                            $arrayIdRole = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
+                                            'SELECT DISTINCT ' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_ROLE
+                                            . ' FROM ' . FtaWorkflowStructureModel::TABLENAME
+                                            . ' WHERE ' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_PROCESSUS
+                                            . '=' . $rowsProcessusEncours[FtaWorkflowStructureModel::FIELDNAME_ID_FTA_PROCESSUS]
+                                            . ' AND ' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_WORKFLOW
+                                            . '=' . $rowsProcessusEncours[FtaWorkflowStructureModel::FIELDNAME_ID_FTA_WORKFLOW]
+                            );
+                            foreach ($arrayIdRole as $rowsIdRole) {
+                                $IdRole[] = $rowsIdRole[FtaWorkflowStructureModel::FIELDNAME_ID_FTA_ROLE];
+                            }
                         }
                     }
                 }

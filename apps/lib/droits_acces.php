@@ -8,7 +8,6 @@
 //$timestart = time();
 $nom_droits_acces = Lib::isDefined('nom_droits_acces');
 $id_user = Lib::isDefined('id_user');
-Logger::AddLog($id_user, __METHOD__);
 
 //Requête retournant tous les droits d'accès de l'intranet pour l'utilisateur en cours
 $array = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
@@ -32,18 +31,18 @@ if ($array) {
         $nom_droits_acces = $rows['nom_intranet_modules'] . '_' . $rows['nom_intranet_actions'];
 
         //Affectation du niveau du droit d'accès
-        $$nom_droits_acces = $rows["niveau_intranet_droits_acces"];
+//        $$nom_droits_acces = $rows["niveau_intranet_droits_acces"];
 
         //Vérification
         //echo $nom_droits_acces.'='.$$nom_droits_acces.'<br>';
         //Enregistrement du droits d'accès dans les variables de session PHP
         
-        //Acl::set($nom_droits_acces, $$nom_droits_acces);
-        $_SESSION["$nom_droits_acces"] = $$nom_droits_acces;
+        AclClass::setAccesRightsValues($nom_droits_acces, $rows["niveau_intranet_droits_acces"]);
+//        $_SESSION["$nom_droits_acces"] = $$nom_droits_acces;
 
         //Réinitialisation pour préaparer la nouvelle boucle
-        $nom_droits_acces = "";
-        $$nom_droits_acces = 0;
+//        $nom_droits_acces = "";
+//        $$nom_droits_acces = 0;
     }
 } else {
     $titre = 'Attention';

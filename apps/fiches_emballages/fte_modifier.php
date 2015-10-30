@@ -72,7 +72,7 @@ $html_table = "table "              //Permet d'harmoniser les tableaux
 /*
   Récupération des données MySQL
  */
-$module_modification = Lib::isDefined($module . "_modification");
+$module_modification = AclClass::getValueAccesRights($module . "_modification");
 //Droits d'accès
 if ($module_modification >= 1) {
     $proprietaire = 1;

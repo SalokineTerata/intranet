@@ -66,11 +66,11 @@ class FtaEtatModel extends AbstractModel {
      */
     public static function getIdFtaByEtatAvancement($paramSyntheseAction, $paramEtat, $paramRole, $paramIdUser, $paramIdFtaEtat) {
         $idFtaEffectue = array();
+//        $compteur = "0";
         switch ($paramSyntheseAction) {
 
             case FtaEtatModel::ETAT_AVANCEMENT_VALUE_ATTENTE:
 
-//                if ($fta_modification) {
                 /**
                  *  Nous recuperons la liste des identifiant intranet actions selon le role et l'utilisateur connecté
                  */
@@ -131,6 +131,10 @@ class FtaEtatModel extends AbstractModel {
                             $tauxDeValidadation = FtaProcessusModel::getValideProcessusEncours($rows[FtaModel::KEYNAME], $rows[FtaProcessusCycleModel::FIELDNAME_PROCESSUS_INIT], $rows[FtaWorkflowStructureModel::FIELDNAME_ID_FTA_WORKFLOW]);
                             if ($tauxDeValidadation <> '1') {
                                 $idFtaEffectue[] = $rows[FtaModel::KEYNAME];
+//                                $compteur++;
+//                                if ($compteur == ModuleConfig::VALUE_MAX_PAR_PAGE) {
+//                                    break;
+//                                }
                             }
                         }
                     }
@@ -140,15 +144,12 @@ class FtaEtatModel extends AbstractModel {
                                 . ' FROM ' . FtaModel::TABLENAME
                                 . ' WHERE ( ' . '0'
                                 . ' ' . FtaModel::AddIdFTaValidProcess($idFtaEffectue) . ')');
-//                } else {
-//                    $array = array();
-//                }
+
 
                 break;
 
 
             case FtaEtatModel::ETAT_AVANCEMENT_VALUE_EN_COURS:
-//                if ($fta_modification) {
                 //Récupération des suivis de projet gérés par l'utilisateur et non validé
                 $idIntranetActions = IntranetDroitsAccesModel::getIdIntranetActionsByRoleANDSiteFromUser($paramIdUser, $paramRole);
                 /**
@@ -210,9 +211,17 @@ class FtaEtatModel extends AbstractModel {
                                 $chefProjet = ($tauxDeValidadation == '0');
                                 if ($tauxDeValidadation <> '0' OR $chefProjet == TRUE) {
                                     $idFtaEffectue[] = $rows[FtaModel::KEYNAME];
+//                                    $compteur++;
+//                                    if ($compteur == ModuleConfig::VALUE_MAX_PAR_PAGE) {
+//                                        break;
+//                                    }
                                 }
                             } elseif ($tauxDeValidadation == '1') {
                                 $idFtaEffectue[] = $rows[FtaModel::KEYNAME];
+//                                $compteur++;
+//                                if ($compteur == ModuleConfig::VALUE_MAX_PAR_PAGE) {
+//                                    break;
+//                                }
                             }
                         }
                     }
@@ -222,15 +231,12 @@ class FtaEtatModel extends AbstractModel {
                                 . ' FROM ' . FtaModel::TABLENAME
                                 . ' WHERE ( ' . '0'
                                 . ' ' . FtaModel::AddIdFTaValidProcess($idFtaEffectue) . ')');
-//                } else {
-//                    $array = array();
-//                }
+
 
                 break;
 
 
             case FtaEtatModel::ETAT_AVANCEMENT_VALUE_EFFECTUES:
-//                if ($fta_modification) {
                 //Récupération de la liste fta pour le role concernés 
                 /**
                  *  Nous recuperons la liste des identifiant intranet actions selon le role et l'utilisateur connecté
@@ -290,6 +296,10 @@ class FtaEtatModel extends AbstractModel {
                             $tauxDeValidadation = FtaProcessusModel::getValideIdFtaByRoleWorkflowProcessus($rows[FtaModel::KEYNAME], $paramRole, $rows[FtaWorkflowStructureModel::FIELDNAME_ID_FTA_WORKFLOW]);
                             if ($tauxDeValidadation == '1' or $paramRole == '6') {
                                 $idFtaEffectue[] = $rows[FtaModel::KEYNAME];
+//                                $compteur++;
+//                                if ($compteur == ModuleConfig::VALUE_MAX_PAR_PAGE) {
+//                                    break;
+//                                }
                             }
                         }
                     }
@@ -299,14 +309,10 @@ class FtaEtatModel extends AbstractModel {
                                 . ' FROM ' . FtaModel::TABLENAME
                                 . ' WHERE ( ' . '0'
                                 . ' ' . FtaModel::AddIdFTaValidProcess($idFtaEffectue) . ')');
-//                } else {
-//                    $array = array();
-//                }
                 break;
 
 
             case FtaEtatModel::ETAT_AVANCEMENT_VALUE_ALL: //Toutes les fiches de l'état sélectionné
-//                if ($fta_consultation) {
                 $array = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
                                 'SELECT DISTINCT ' . FtaModel::KEYNAME
                                 . ' FROM ' . FtaModel::TABLENAME . ',' . IntranetDroitsAccesModel::TABLENAME
@@ -321,9 +327,7 @@ class FtaEtatModel extends AbstractModel {
                                 . ' AND ' . FtaWorkflowModel::TABLENAME . '.' . FtaWorkflowModel::KEYNAME
                                 . '=' . FtaModel::TABLENAME . '.' . FtaModel::FIELDNAME_WORKFLOW
                 );
-//                } else {
-//                    $array = array();
-//                }
+
                 break;
         }
 

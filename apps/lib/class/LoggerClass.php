@@ -16,7 +16,11 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-
+/**
+ * Description of LoggerClass
+ *
+ * @author tp4300001
+ */
 class LoggerClass {
 
     private $depot; // Dossier où sont enregistrés les fichiers logs

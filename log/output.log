@@ -1,3 +1,15 @@
 2015-10-28 19:34:26 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : accentuéerazzzz
 2015-10-28 19:34:26 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `commentaire_suivi_projet` =   'accentuéerazzzz'
 2015-10-28 19:34:52 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\modification_fiche.php : accentué ?
+2015-10-29 15:18:02 LOG 127.0.0.1  : 316
+2015-10-29 15:19:41 LOG 127.0.0.1  : 316
+2015-10-30 08:51:22 LOG 127.0.0.1  : 318
+2015-10-30 10:50:37 LOG 127.0.0.1  : 318
+2015-10-30 10:52:14 LOG 127.0.0.1  : 318
+2015-10-30 11:04:44 LOG 127.0.0.1  : 318
+2015-10-30 11:10:06 LOG 127.0.0.1  : 318
+2015-10-30 11:38:06 LOG 127.0.0.1  : 318
+2015-10-30 11:47:18 LOG 127.0.0.1  : 318
+2015-10-30 11:57:41 LOG 127.0.0.1  : 318
+2015-10-30 12:05:22 LOG 127.0.0.1  : 318
+2015-10-30 13:04:30 LOG 127.0.0.1  : 318

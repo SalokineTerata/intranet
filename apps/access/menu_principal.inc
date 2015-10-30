@@ -1,7 +1,7 @@
 <?php
 //Barre de navigation du module
-$module_consultation=lib::isDefined('access_consultation');
-$module_modification=lib::isDefined('access_modification');
+$module_consultation=AclClass::getValueAccesRights('access_consultation');
+$module_modification=AclClass::getValueAccesRights('access_modification');
 //Récupération des droits d'accès necessaire
 $$module_consultation = $module_consultation
                           . "_consultation"

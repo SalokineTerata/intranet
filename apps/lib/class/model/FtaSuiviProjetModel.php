@@ -567,7 +567,7 @@ class FtaSuiviProjetModel extends AbstractModel {
         }
     }
 
-    public static function getFtaTauxValidation($paramIdFta) {
+    public static function getFtaTauxValidation($paramFtaModel) {
 
 //Dictionnaire des données
         $return['0'];     //Pourcentage globale de la validation
@@ -576,8 +576,8 @@ class FtaSuiviProjetModel extends AbstractModel {
         /*
          * Récupération du l'état de la FTA pour connatire le cycle de vie en cours
          */
-        $ftaModel = new FtaModel($paramIdFta);
-        $idFtaEtat = $ftaModel->getDataField(FtaModel::FIELDNAME_ID_FTA_ETAT)->getFieldValue();
+        $idFta=$paramFtaModel->getDataField(FtaModel::KEYNAME)->getFieldValue();
+        $idFtaEtat = $paramFtaModel->getDataField(FtaModel::FIELDNAME_ID_FTA_ETAT)->getFieldValue();
         $ftaEtatModel = new FtaEtatModel($idFtaEtat);
         $abreviation_fta_etat = $ftaEtatModel->getDataField(FtaEtatModel::FIELDNAME_ABREVIATION)->getFieldValue();
         /*
@@ -591,13 +591,13 @@ class FtaSuiviProjetModel extends AbstractModel {
         $arrayChapitre = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
                         'SELECT DISTINCT ' . FtaSuiviProjetModel::TABLENAME . '.' . FtaSuiviProjetModel::FIELDNAME_ID_FTA_CHAPITRE
                         . ' FROM ' . FtaSuiviProjetModel::TABLENAME . ',' . FtaWorkflowStructureModel::TABLENAME
-                        . ' WHERE ' . FtaSuiviProjetModel::TABLENAME . '.' . FtaSuiviProjetModel::FIELDNAME_ID_FTA . '=' . $paramIdFta
+                        . ' WHERE ' . FtaSuiviProjetModel::TABLENAME . '.' . FtaSuiviProjetModel::FIELDNAME_ID_FTA . '=' . $idFta
                         . ' AND ' . FtaSuiviProjetModel::FIELDNAME_SIGNATURE_VALIDATION_SUIVI_PROJET . '<>0 '
                         . ' AND ' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_PROCESSUS . '<>0 '
                         . ' AND ' . FtaWorkflowStructureModel::TABLENAME . '.' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_CHAPITRE
                         . '=' . FtaSuiviProjetModel::TABLENAME . '.' . FtaSuiviProjetModel::FIELDNAME_ID_FTA_CHAPITRE
                         . ' AND ' . FtaWorkflowStructureModel::TABLENAME . '.' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_WORKFLOW
-                        . '=\'' . $ftaModel->getDataField(FtaModel::FIELDNAME_WORKFLOW)->getFieldValue() . '\' '
+                        . '=\'' . $paramFtaModel->getDataField(FtaModel::FIELDNAME_WORKFLOW)->getFieldValue() . '\' '
         );
         $currentChapitre = count($arrayChapitre);
 
@@ -608,7 +608,7 @@ class FtaSuiviProjetModel extends AbstractModel {
                         'SELECT DISTINCT ' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_CHAPITRE
                         . ' FROM ' . FtaWorkflowStructureModel::TABLENAME
                         . ' WHERE  ' . FtaWorkflowStructureModel::TABLENAME . '.' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_WORKFLOW
-                        . '=\'' . $ftaModel->getDataField(FtaModel::FIELDNAME_WORKFLOW)->getFieldValue() . '\' '
+                        . '=\'' . $paramFtaModel->getDataField(FtaModel::FIELDNAME_WORKFLOW)->getFieldValue() . '\' '
                         . ' AND ' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_PROCESSUS . '<>0 '
         );
         $totalChapitre = count($arrayChapitreTotal);
@@ -621,11 +621,11 @@ class FtaSuiviProjetModel extends AbstractModel {
                         'SELECT DISTINCT ' . FtaProcessusCycleModel::FIELDNAME_PROCESSUS_INIT
                         . ' FROM ' . FtaProcessusCycleModel::TABLENAME
                         . ' WHERE ' . FtaProcessusCycleModel::FIELDNAME_FTA_ETAT . '=\'' . $abreviation_fta_etat
-                        . '\' AND ' . FtaProcessusCycleModel::FIELDNAME_WORKFLOW . '=' . $ftaModel->getDataField(FtaModel::FIELDNAME_WORKFLOW)->getFieldValue()
+                        . '\' AND ' . FtaProcessusCycleModel::FIELDNAME_WORKFLOW . '=' . $paramFtaModel->getDataField(FtaModel::FIELDNAME_WORKFLOW)->getFieldValue()
         );
         foreach ($arrayCycle as $rowsCycle) {
             $id_fta_processus = $rowsCycle[FtaProcessusCycleModel::FIELDNAME_PROCESSUS_INIT];
-            $taux_validation_processus = FtaProcessusModel::getValideProcessusEncours($paramIdFta, $id_fta_processus, $ftaModel->getDataField(FtaModel::FIELDNAME_WORKFLOW)->getFieldValue());
+            $taux_validation_processus = FtaProcessusModel::getValideProcessusEncours($idFta, $id_fta_processus, $paramFtaModel->getDataField(FtaModel::FIELDNAME_WORKFLOW)->getFieldValue());
 
             //Détail par processus
             $return[1][$id_fta_processus] = $taux_validation_processus;

@@ -47,7 +47,11 @@ echo "*** Requêtes SQL Part 1:\n";
 //
 $debut = date("H:i:s");
 echo  date("H:i:s")."\n";
-
+//SELECT * 
+//FROM  `TABLE_CONSTRAINTS` 
+//WHERE  `CONSTRAINT_SCHEMA` LIKE  'intranet_v3_0_cod'
+//AND CONSTRAINT_NAME <>  "PRIMARY"
+//AND CONSTRAINT_TYPE =  "FOREIGN KEY"
   echo "DROP DATABASE ".$nameOfBDDTarget." ...";
   $sql = "DROP DATABASE ".$nameOfBDDTarget;
   

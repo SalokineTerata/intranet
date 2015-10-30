@@ -33,9 +33,8 @@ class AccueilFta {
      * @param type $syntheseAction
      * @param type $IdFtaRole
      * @param type $OrderBy
-     * @param type $lieuGeo
      */
-    public static function initAccueil($id_user, $idFtaEtat, $abrevationFtaEtat, $syntheseAction, $IdFtaRole, $OrderBy, $lieuGeo, $debut) {
+    public static function initAccueil($id_user, $idFtaEtat, $abrevationFtaEtat, $syntheseAction, $IdFtaRole, $OrderBy, $debut) {
 
         self::$idUser = $id_user;
         self::$abrevationFtaEtat = $abrevationFtaEtat;
@@ -43,7 +42,6 @@ class AccueilFta {
         self::$idFtaRole = $IdFtaRole;
         self::$idFtaEtat = $idFtaEtat;
         self::$orderBy = $OrderBy;
-        self::$lieuGeo = $lieuGeo;
 
         /*
          * On recherche les roles auxquelles l'utilisateur à les droits d'acces
@@ -457,6 +455,7 @@ class AccueilFta {
         $tableauFicheTrWork = '';
         $largeur_html_C1 = ' width=15% '; // largeur cellule type
         $largeur_html_C3 = ' width=5% '; // largeur cellule type
+        $largeur_html_C3_action = ' width=150px '; // largeur cellule type
         $selection_width = '1%';
 
         $tableauFiche = '';
@@ -471,10 +470,16 @@ class AccueilFta {
         switch (self::$syntheseAction) {
             case FtaEtatModel::ETAT_AVANCEMENT_VALUE_ATTENTE:
                 $URL = substr($URL, '0', strpos($URL, self::$syntheseAction) + '7');
+                $ok = '0';
+                $bgcolor = 'bgcolor=#A5A5CE ';
+
 
                 break;
             case FtaEtatModel::ETAT_AVANCEMENT_VALUE_EN_COURS:
                 $URL = substr($URL, '0', strpos($URL, self::$syntheseAction) + '7');
+                $ok = '1';
+                $bgcolor = '';
+
                 break;
             case FtaEtatModel::ETAT_AVANCEMENT_VALUE_EFFECTUES:
                 $URL = substr($URL, '0', strpos($URL, self::$syntheseAction) + '10');
@@ -482,6 +487,8 @@ class AccueilFta {
 
             case FtaEtatModel::ETAT_AVANCEMENT_VALUE_ALL:
                 $URL = substr($URL, '0', strpos($URL, self::$syntheseAction) + '3');
+                $bgcolor = 'bgcolor=#AFFF5A';
+
                 break;
         }
         if (substr($URL, -2) == 'in') {
@@ -518,34 +525,21 @@ class AccueilFta {
                 . '</th>';
 
         $tmp = null;
+        
+        /**
+         * Droits d'actions
+         */
+        if (self::$idFtaRole == '1' or self::$idFtaRole == '6') {
+            $valueIsGestionnaire = FtaRoleModel::getValueIsGestionnaire(self::$idFtaRole);
+        }
+        
         if (self::$arrayIdFtaByUserAndWorkflow['1']) {
             $createurNTmp = null;
             $createurTrTmp = null;
             foreach (self::$arrayIdFtaByUserAndWorkflow['1'] as $rowsDetail) {
                 $workflowDescription = $rowsDetail[FtaWorkflowModel::FIELDNAME_DESCRIPTION_FTA_WORKFLOW];
                 $workflowName = $rowsDetail[FtaWorkflowModel::FIELDNAME_NOM_FTA_WORKFLOW];
-
-
-                /**
-                 * Droits d'actions
-                 */
-                if (self::$idFtaRole == '1' or self::$idFtaRole == '6') {
-                    $valueIsGestionnaire = FtaRoleModel::getValueIsGestionnaire(self::$idFtaRole);
-                }
-
-                /**
-                 * Liste des processus pouvant être validé
-                 */
-                $arrayProcessusValidation = FtaProcessusCycleModel::getArrayProcessusValidationFTA($rowsDetail[FtaModel::FIELDNAME_WORKFLOW]);
-
-
-                /**
-                 * Listes des processus auxquel l'utilisateur connecté à les droits d'accès
-                 */
-                $arrayProcessusAcces = FtaWorkflowStructureModel::getArrayProcessusByRoleAndWorkflow(self::$idFtaRole, $rowsDetail[FtaModel::FIELDNAME_WORKFLOW]);
-                $accesTransitionButton = is_null(array_intersect($arrayProcessusValidation, $arrayProcessusAcces));
-                $din = null;
-
+             
                 //Chargement manuel des données pour optimiser les performances
                 $idFta = $rowsDetail[FtaModel::KEYNAME];
                 $abreviationFtaEtat = $rowsDetail[FtaEtatModel::FIELDNAME_ABREVIATION];
@@ -560,6 +554,19 @@ class AccueilFta {
                 $siteProduction = $rowsDetail[FtaModel::FIELDNAME_SITE_ASSEMBLAGE];
                 $idWorkflowFtaEncours = $rowsDetail[FtaModel::FIELDNAME_WORKFLOW];
                 $idclassification = $rowsDetail[FtaModel::FIELDNAME_ID_FTA_CLASSIFICATION2];
+                
+                /**
+                 * Liste des processus pouvant être validé
+                 */
+                $arrayProcessusValidation = FtaProcessusCycleModel::getArrayProcessusValidationFTA($idWorkflowFtaEncours);
+
+
+                /**
+                 * Listes des processus auxquel l'utilisateur connecté à les droits d'accès
+                 */
+                $arrayProcessusAcces = FtaWorkflowStructureModel::getArrayProcessusByRoleAndWorkflow(self::$idFtaRole, $idWorkflowFtaEncours);
+                $accesTransitionButton = is_null(array_intersect($arrayProcessusValidation, $arrayProcessusAcces));
+                $din = null;
 
                 /*
                  * Initialisation des valeurs pour un 
@@ -585,6 +592,11 @@ class AccueilFta {
                 $createurNom = $userModel->getDataField(UserModel::FIELDNAME_NOM)->getFieldValue();
                 $createurPrenom = $userModel->getDataField(UserModel::FIELDNAME_PRENOM)->getFieldValue();
 
+                /*
+                 * Nom de l'assistante de projet responsable:
+                 */
+                $createur_link = '\'Géré par ' . $createurPrenom . ' ' . $createurNom . '\'';
+
 
                 /**
                  * Calssification
@@ -605,47 +617,27 @@ class AccueilFta {
                     $din = '<font size=\'1\' color=\'#808080\'><i>' . $designationCommercialeFta . '</i></font>';
                 }
 
-                /*
-                 * Nom de l'assistante de projet responsable:
-                 */
-                $createur_link = '\'Géré par ' . $createurPrenom . ' ' . $createurNom . '\'';
 
 
                 /*
                  * Calcul d'etat d'avancement
                  */
 
-                $taux_temp = FtaSuiviProjetModel::getFtaTauxValidation($idFta);
+                $taux_temp = FtaSuiviProjetModel::getFtaTauxValidation($ftaModel);
                 $recap[$idFta] = round($taux_temp['0'] * '100', '0') . '%';
 
                 /*
                  * Definition de la couleur de la cellule selon l'état d'avancement
                  */
 
-                switch (self::$syntheseAction) {
-                    case FtaEtatModel::ETAT_AVANCEMENT_VALUE_ATTENTE:
-                        $ok = '0';
-                        $bgcolor = 'bgcolor=#A5A5CE ';
-
-                        break;
-                    case FtaEtatModel::ETAT_AVANCEMENT_VALUE_EN_COURS:
-                        $ok = '1';
-                        $bgcolor = '';
-
-                        break;
-                    case FtaEtatModel::ETAT_AVANCEMENT_VALUE_EFFECTUES:
-                        $ok = '2';
-                        if ($recap[$idFta] == '100%') {
-                            $bgcolor = 'bgcolor=#AFFF5A';
-                        } else {
-//                            $bgcolor = 'bgcolor=#A5A5CE ';
-                            $bgcolor = 'bgcolor=#009dd1 ';
-                        }
-                        break;
-
-                    case FtaEtatModel::ETAT_AVANCEMENT_VALUE_ALL:
+                if (self::$syntheseAction == FtaEtatModel::ETAT_AVANCEMENT_VALUE_EFFECTUES) {
+                    $ok = '2';
+                    if ($recap[$idFta] == '100%') {
                         $bgcolor = 'bgcolor=#AFFF5A';
-                        break;
+                    } else {
+                        $bgcolor = 'bgcolor=#A5A5CE ';
+//                            $bgcolor = 'bgcolor=#009dd1 ';
+                    }
                 }
 
                 $HTML_date_echeance_fta = FtaProcessusDelaiModel::getFtaDelaiAvancement($idFta);
@@ -865,10 +857,7 @@ class AccueilFta {
                     case $createurFta:
                         /*
                          * Commentaire de la Fta
-                         */
-                        /*
-                         * @TODO caractères spéciaux de l'encodage ajax
-                         */
+                         */                       
                         $htmlField->setIsEditable(TRUE);
                         $commentaire = $htmlField->getHtmlResult();
                         if ($recap[$idFta] == '100%') {
@@ -892,7 +881,7 @@ class AccueilFta {
                                 }
                                 $tableauFicheN .= '<td ' . $bgcolor . ' width=5% align=center>' . $recap[$idFta] . '</td>'//% Avancement FTA
                                         . '<td ' . $bgcolor . $largeur_html_C3 . ' align=center >' . $service . '</td>' //Service               
-                                        . '<td ' . $bgcolor . $largeur_html_C3 . ' align=center >' . $actions . '</td>'// Actions
+                                        . '<td ' . $bgcolor . $largeur_html_C3_action .' align=center >' . $actions . '</td>'// Actions
                                         . $commentaire . '</tr >'; // Commentaires
                                 $createurNTmp = $createurFtaN;
                             } else {
@@ -912,7 +901,7 @@ class AccueilFta {
                                 }
                                 $tableauFicheN .= '<td ' . $bgcolor . ' width=5% align=center>' . $recap[$idFta] . '</td>'//% Avancement FTA
                                         . '<td ' . $bgcolor . $largeur_html_C3 . ' align=center >' . $service . '</td>' //Service               
-                                        . '<td ' . $bgcolor . $largeur_html_C3 . ' align=center >' . $actions . '</td>'// Actions
+                                        . '<td ' . $bgcolor . $largeur_html_C3_action .' align=center >' . $actions . '</td>'// Actions
                                         . $commentaire . '</tr >'; // Commentaires
                             }
                         } else {
@@ -936,7 +925,7 @@ class AccueilFta {
                                 }
                                 $tableauFicheTr .= '<td ' . $bgcolor . ' width=5% align=center>' . $recap[$idFta] . '</td>'//% Avancement FTA
                                         . '<td ' . $bgcolor . $largeur_html_C3 . ' align=center >' . $service . '</td>' //Service               
-                                        . '<td ' . $bgcolor . $largeur_html_C3 . ' align=center >' . $actions . '</td>'// Actions
+                                        . '<td ' . $bgcolor . $largeur_html_C3_action .' align=center >' . $actions . '</td>'// Actions
                                         . $commentaire . '</tr >'; // Commentaires
                                 $createurTrTmp = $createurFtaTr;
                             } else {
@@ -956,7 +945,7 @@ class AccueilFta {
                                 }
                                 $tableauFicheTr .= '<td ' . $bgcolor . ' width=5% align=center>' . $recap[$idFta] . '</td>'//% Avancement FTA
                                         . '<td ' . $bgcolor . $largeur_html_C3 . ' align=center >' . $service . '</td>' //Service               
-                                        . '<td ' . $bgcolor . $largeur_html_C3 . ' align=center >' . $actions . '</td>'// Actions
+                                        . '<td ' . $bgcolor . $largeur_html_C3_action .' align=center >' . $actions . '</td>'// Actions
                                         . $commentaire . '</tr >'; // Commentaires
                             }
                         }
@@ -995,7 +984,7 @@ class AccueilFta {
                                 }
                                 $tableauFicheTmp .= '<td ' . $bgcolor . ' width=5% align=center>' . $recap[$idFta] . '</td>'//% Avancement FTA
                                         . '<td ' . $bgcolor . $largeur_html_C3 . ' align=center >' . $service . '</td>' //Service               
-                                        . '<td ' . $bgcolor . $largeur_html_C3 . ' align=center >' . $actions . '</td>'// Actions
+                                        . '<td ' . $bgcolor . $largeur_html_C3_action .' align=center >' . $actions . '</td>'// Actions
                                         . $commentaire . '</tr >'; // Commentaires
                                 $createurNTmp = $createurFtaN;
                             } else {
@@ -1016,7 +1005,7 @@ class AccueilFta {
                                 }
                                 $tableauFicheTmp .='<td ' . $bgcolor . ' width=5% align=center>' . $recap[$idFta] . '</td>'//% Avancement FTA
                                         . '<td ' . $bgcolor . $largeur_html_C3 . ' align=center >' . $service . '</td>' //Service               
-                                        . '<td ' . $bgcolor . $largeur_html_C3 . ' align=center >' . $actions . '</td>'// Actions
+                                        . '<td ' . $bgcolor . $largeur_html_C3_action .' align=center >' . $actions . '</td>'// Actions
                                         . $commentaire . '</tr >'; // Commentaires
                             }
                         } else {
@@ -1041,7 +1030,7 @@ class AccueilFta {
                                 }
                                 $tableauFicheTrTmp .= '<td ' . $bgcolor . ' width=5% align=center>' . $recap[$idFta] . '</td>'//% Avancement FTA
                                         . '<td ' . $bgcolor . $largeur_html_C3 . ' align=center >' . $service . '</td>' //Service               
-                                        . '<td ' . $bgcolor . $largeur_html_C3 . ' align=center >' . $actions . '</td>'// Actions
+                                        . '<td ' . $bgcolor . $largeur_html_C3_action .' align=center >' . $actions . '</td>'// Actions
                                         . $commentaire . '</tr >'; // Commentaires
                                 $createurTrTmp = $createurFtaTr;
                             } else {
@@ -1061,7 +1050,7 @@ class AccueilFta {
                                 }
                                 $tableauFicheTrTmp .='<td ' . $bgcolor . ' width=5% align=center>' . $recap[$idFta] . '</td>'//% Avancement FTA
                                         . '<td ' . $bgcolor . $largeur_html_C3 . ' align=center >' . $service . '</td>' //Service               
-                                        . '<td ' . $bgcolor . $largeur_html_C3 . ' align=center >' . $actions . '</td>'// Actions
+                                        . '<td ' . $bgcolor . $largeur_html_C3_action .' align=center >' . $actions . '</td>'// Actions
                                         . $commentaire . '</tr >'; // Commentaires
                             }
                         }
@@ -1097,9 +1086,17 @@ class AccueilFta {
             <i>Transitions groupées</i>:
             ' . $liste_action_groupe . '
             <input type = \'text\' name=\'subject\' size=\'20\' />
-            <input type=image src=images/transiter.png width=20 height=20 onClick=doPreview(); />
+            <input type=image src=images/transiter.png width=20 height=20 />
             <input type=hidden name=action value=transition_groupe>
                          ';
+//            $tableauFiche.= '&nbsp;
+//            <img src = ../lib/images/fleche_gauche_et_haut.png width = 38 height = 22 border = 0 />
+//            <i>Transitions groupées</i>:
+//            ' . $liste_action_groupe . '
+//            <input type = \'text\' name=\'subject\' size=\'20\' />
+//            <input type=image src=images/transiter.png width=20 height=20 onClick=doPreview(); />
+//            <input type=hidden name=action value=transition_groupe>
+//                         ';
         }
 
         return $tableauFiche;

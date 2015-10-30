@@ -52,7 +52,7 @@ abstract class ModuleConfig {
     /**
      * Nombre maximale de fta afficher sur la page d'acceuil
      */
-     const VALUE_MAX_PAR_PAGE = 15;
+     const VALUE_MAX_PAR_PAGE = 100;
 
 }
 

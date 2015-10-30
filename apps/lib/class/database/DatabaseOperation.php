@@ -171,7 +171,7 @@ class DatabaseOperation {
         $time_start = DatabaseOperation::microtime_float();
 
         // Attend pendant un moment
-        usleep(100);
+//        usleep(100);
 
         $time_end = DatabaseOperation::microtime_float();
         $time = $time_end - $time_start;
@@ -195,7 +195,7 @@ class DatabaseOperation {
         $time_start = DatabaseOperation::microtime_float();
 
         // Attend pendant un moment
-        usleep(100);
+//        usleep(100);
 
         $time_end = DatabaseOperation::microtime_float();
         $time = $time_end - $time_start;
@@ -249,7 +249,7 @@ class DatabaseOperation {
         $time_start = DatabaseOperation::microtime_float();
 
         // Attend pendant un moment
-        usleep(100);
+//        usleep(100);
 
         $time_end = DatabaseOperation::microtime_float();
         $time = $time_end - $time_start;

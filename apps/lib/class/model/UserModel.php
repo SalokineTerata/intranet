@@ -66,11 +66,14 @@ class UserModel extends AbstractModel {
                                 . ', ' . FtaModel::FIELDNAME_DOSSIER_FTA . ', ' . FtaModel::FIELDNAME_VERSION_DOSSIER_FTA
                                 . ', ' . FtaModel::FIELDNAME_ARTICLE_AGROLOGIC . ', ' . FtaModel::FIELDNAME_CODE_ARTICLE_LDC
                                 . ', ' . FtaModel::FIELDNAME_DATE_ECHEANCE_FTA . ', ' . FtaModel::FIELDNAME_CREATEUR
-                                . ', ' . FtaModel::FIELDNAME_ID_FTA_CLASSIFICATION2
-                                . ', ' . FtaModel::FIELDNAME_SITE_ASSEMBLAGE . ', ' . FtaModel::TABLENAME . '. ' . FtaModel::FIELDNAME_WORKFLOW
+                                . ', ' . ClassificationArborescenceArticleCategorieContenuModel::FIELDNAME_NOM_CLASSIFICATION_ARBORESCENCE_ARTICLE_CATEGORIE_CONTENU
+                                . ', ' . GeoModel::FIELDNAME_GEO . ', ' . FtaModel::TABLENAME . '. ' . FtaModel::FIELDNAME_WORKFLOW
                                 . ' FROM ' . FtaModel::TABLENAME . ',' . UserModel::TABLENAME
                                 . ', ' . FtaEtatModel::TABLENAME
                                 . ', ' . FtaWorkflowModel::TABLENAME
+                                . ', ' . GeoModel::TABLENAME
+                                . ', ' . ClassificationFta2Model::TABLENAME
+                                . ', ' . ClassificationArborescenceArticleCategorieContenuModel::TABLENAME
                                 . ' WHERE ( 0 ' . FtaModel::AddIdFTaValidProcess($idFta) . ')'
                                 . ' AND ' . FtaModel::TABLENAME . '.' . FtaModel::FIELDNAME_CREATEUR
                                 . '=' . UserModel::TABLENAME . '.' . UserModel::KEYNAME
@@ -78,6 +81,12 @@ class UserModel extends AbstractModel {
                                 . '=' . FtaEtatModel::TABLENAME . '.' . FtaEtatModel::KEYNAME
                                 . ' AND ' . FtaWorkflowModel::TABLENAME . '.' . FtaWorkflowModel::KEYNAME
                                 . '=' . FtaModel::TABLENAME . '.' . FtaModel::FIELDNAME_WORKFLOW
+                                . ' AND ' . FtaModel::TABLENAME . '.' . FtaModel::FIELDNAME_SITE_ASSEMBLAGE
+                                . '=' . GeoModel::TABLENAME . '.' . GeoModel::KEYNAME
+                                . ' AND ' . ClassificationArborescenceArticleCategorieContenuModel::TABLENAME . '.' . ClassificationArborescenceArticleCategorieContenuModel::KEYNAME
+                                . '=' . ClassificationFta2Model::TABLENAME . '.' . ClassificationFta2Model::FIELDNAME_ID_PROPRIETAIRE_GROUPE
+                                . ' AND ' . FtaModel::TABLENAME . '.' . FtaModel::FIELDNAME_ID_FTA_CLASSIFICATION2
+                                . '=' . ClassificationFta2Model::TABLENAME . '.' . ClassificationFta2Model::KEYNAME
                                 . ' ORDER BY ' . $paramOrderBy
                                 . ',' . FtaModel::TABLENAME . '.' . FtaModel::FIELDNAME_WORKFLOW
                                 . ',' . UserModel::FIELDNAME_PRENOM . ' ASC'

@@ -1768,7 +1768,7 @@ function visualiser_fiches($id_fta_etat, $choix, $isLimit, $order_common) {
     $id_user = $globalConfig->getAuthenticatedUser()->getKeyValue();
     $synthese_action = Lib::isDefined("synthese_action");
     $idFtaRole = Lib::getParameterFromRequest(FtaRoleModel::KEYNAME);
-   
+
 
     $id_fta_etat;    //Attention, double signification, si choix = 0 ou -1, alors il s'agit en fait de $id_fta
 
@@ -2144,6 +2144,8 @@ function visualiser_fiches($id_fta_etat, $choix, $isLimit, $order_common) {
         case -1:
         case 0:
             $id_fta = $id_fta_etat;    //Attention, double signification, si choix = 0 ou -1, alors il s'agit en fait de $id_fta
+            $ftaModel = new FtaModel($id_fta);
+            $id_fta_etat = $ftaModel->getDataField(FtaModel::FIELDNAME_ID_FTA_ETAT)->getFieldValue();
             $where = "fta.id_fta = '$id_fta' ";
             $_SESSION["synthese_action"] = "all";
             $synthese_action = $_SESSION["synthese_action"];
@@ -2331,6 +2333,11 @@ function visualiser_fiches($id_fta_etat, $choix, $isLimit, $order_common) {
             $lien .= "<h5>" . $recap[$id_fta] . "<a "
                     . "href=historique.php"
                     . "?id_fta=$id_fta"
+                    . "&synthese_action=$synthese_action"
+                    . "&id_fta_etat=" . $id_fta_etat
+                    . "&abreviation_fta_etat=" . $abreviation_fta_etat
+                    . "&id_fta_role=" . $idFtaRole
+                    . "&comeback=1"
                     . "><img src=./images/graphique.png alt=\"\" title=\"Etat d'avancement\" width=\"30\" height=\"25\" border=\"0\" />"
                     . "</a>"
             ;
@@ -2374,8 +2381,8 @@ function visualiser_fiches($id_fta_etat, $choix, $isLimit, $order_common) {
 
         //Droit de consultation standard HTML
         if (
-                ($_SESSION["fta_modification"])
-                or ( $_SESSION["fta_consultation"] and $abreviation_fta_etat == "V" )
+                (AclClass::getValueAccesRights("fta_modification"))
+                or ( AclClass::getValueAccesRights("fta_consultation") and $abreviation_fta_etat == "V" )
         )
             $lien .= "<a "
                     . "href=modification_fiche.php"
@@ -2393,7 +2400,7 @@ function visualiser_fiches($id_fta_etat, $choix, $isLimit, $order_common) {
         //Export PDF
 //echo "test".$rows["abreviation_fta_etat"];
         if (
-                ($_SESSION["fta_impression"] and ( $abreviation_fta_etat == "V" or $abreviation_fta_etat == "P"))
+                (AclClass::getValueAccesRights("fta_impression") and ( $abreviation_fta_etat == "V" or $abreviation_fta_etat == "P"))
                 or ( $_SESSION["mode_debug"] == 1)
         ) {
 
@@ -2408,7 +2415,7 @@ function visualiser_fiches($id_fta_etat, $choix, $isLimit, $order_common) {
         //echo $taux_temp[0]." ".$_SESSION["fta_article"]."<br>";
         //Transiter
         if (
-                ($_SESSION["fta_definition"]) and (
+                (AclClass::getValueAccesRights("fta_definition")) and (
                 $abreviation_fta_etat == 'V' or
                 $abreviation_fta_etat == 'A' or
                 $abreviation_fta_etat == 'R' or
@@ -2455,7 +2462,7 @@ function visualiser_fiches($id_fta_etat, $choix, $isLimit, $order_common) {
           } */
 
         //Seul le Chef de projet peut retirer une FTA en cours de modification
-        if ($_SESSION["fta_definition"]) {
+        if (AclClass::getValueAccesRights("fta_definition")) {
             $lien .= "<a "
                     . "href=# "
                     . "onClick=confirmation_correction_fta" . $id_fta . "(); "
@@ -2478,7 +2485,7 @@ function visualiser_fiches($id_fta_etat, $choix, $isLimit, $order_common) {
         }
 
         //Actions systématiques pour le chef de projet
-        if ($_SESSION["fta_definition"]) {
+        if (AclClass::getValueAccesRights("fta_definition")) {
             $lien .= "<a "
                     . "href=creer_fiche.php"
                     . "?action=dupliquer_fiche"

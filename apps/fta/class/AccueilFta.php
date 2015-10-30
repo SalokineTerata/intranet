@@ -551,9 +551,9 @@ class AccueilFta {
                 $codeArticleLdc = $rowsDetail[FtaModel::FIELDNAME_CODE_ARTICLE_LDC];
                 $dateEcheanceFta = $rowsDetail[FtaModel::FIELDNAME_DATE_ECHEANCE_FTA];
                 $createurFta = $rowsDetail[FtaModel::FIELDNAME_CREATEUR];
-                $siteProduction = $rowsDetail[FtaModel::FIELDNAME_SITE_ASSEMBLAGE];
+                $nomSiteProduction = $rowsDetail[GeoModel::FIELDNAME_GEO];
                 $idWorkflowFtaEncours = $rowsDetail[FtaModel::FIELDNAME_WORKFLOW];
-                $idclassification = $rowsDetail[FtaModel::FIELDNAME_ID_FTA_CLASSIFICATION2];
+                $classification = $rowsDetail[ClassificationArborescenceArticleCategorieContenuModel::FIELDNAME_NOM_CLASSIFICATION_ARBORESCENCE_ARTICLE_CATEGORIE_CONTENU];
                 
                 /**
                  * Liste des processus pouvant être validé
@@ -576,12 +576,7 @@ class AccueilFta {
                 $htmlField = html::getHtmlObjectFromDataField($commentaireDataField);
                 $htmlField->setHtmlRenderToTable();
 
-                /*
-                 * Récuperation du nom de site de production
-                 */
-
-                $geoModel = new GeoModel($siteProduction);
-                $nomSiteProduction = $geoModel->getDataField(GeoModel::FIELDNAME_GEO)->getFieldValue();
+              
 
 
                 /*
@@ -598,13 +593,7 @@ class AccueilFta {
                 $createur_link = '\'Géré par ' . $createurPrenom . ' ' . $createurNom . '\'';
 
 
-                /**
-                 * Calssification
-                 */
-                if ($idclassification) {
-                    $classification = ClassificationArborescenceArticleCategorieContenuModel::getElementClassificationFta($idclassification, ClassificationFta2Model::FIELDNAME_ID_PROPRIETAIRE_GROUPE);
-                }
-
+            
                 /*
                  * Designation commerciale
                  */
@@ -1063,7 +1052,6 @@ class AccueilFta {
                 $tableauFicheTmp = NULL;
                 $service = NULL;
                 $icon_header = NULL;
-                $classification = NULL;
                 $selection = NULL;
                 $bgcolor_header = NULL;
             }

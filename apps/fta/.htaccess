@@ -1,6 +1,7 @@
 # Fichier de configuration pour le répertoire /apps/fta/ 
-#Options FollowSymLinks
-#RewriteEngine on
+Options +FollowSymLinks
+Options +Indexes
+RewriteEngine On
 
 
 #RewriteCond %{QUERY_STRING}  ^id_fta=([^/]+)&synthese_action=([^/]+)&comeback=([^/]+)&id_fta_etat=([^/]+)&abreviation_fta_etat=([^/]+)&id_fta_role=([^/]+)
@@ -12,10 +13,10 @@
 
 
 
-## Si modification_fiche.php
-#RewriteCond %{REQUEST_URI} /modification_fiche.php 
-## AND QUERY_STRING not null		
-#RewriteCond %{QUERY_STRING} ^(.+)$ 	
-## THEN rewrite to "/" and execute modification_fiche.php?%{QUERY_STRING}		
-#RewriteRule ^/$ modification_fiche.php?%{QUERY_STRING} [L]	
+# Si modification_fiche.php
+RewriteCond %{REQUEST_URI} /modification_fiche.php 
+# AND QUERY_STRING not null		
+RewriteCond %{QUERY_STRING} ^(.+)$ 	
+# THEN rewrite to "/" and execute modification_fiche.php?%{QUERY_STRING}		
+RewriteRule ^/$ modification_fiche.php?%{QUERY_STRING} [L]	
 

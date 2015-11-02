@@ -116,31 +116,32 @@ class FtaProcessusDelaiModel extends AbstractModel {
         /*
          * Liste des rôles non validés qui ont dépassé leur échéances 
          */
-        $arrayFtaDateProcessus = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
-                        'SELECT ' . FtaProcessusModel::TABLENAME . '.' . FtaProcessusModel::KEYNAME
-                        . ', ' . FtaProcessusDelaiModel::FIELDNAME_DATE_ECHEANCE_PROCESSUS
-                        . ',' . FtaRoleModel::FIELDNAME_DESCRIPTION_FTA_ROLE
-                        . ' FROM ' . FtaProcessusDelaiModel::TABLENAME . ', ' . FtaProcessusModel::TABLENAME . ',' . FtaRoleModel::TABLENAME
-                        . ' WHERE ' . FtaProcessusDelaiModel::FIELDNAME_ID_FTA . '=\'' . $paramIdFta . '\' '
-                        . ' AND ' . FtaProcessusModel::TABLENAME . '.' . FtaProcessusModel::KEYNAME
-                        . '=' . FtaProcessusDelaiModel::TABLENAME . '.' . FtaProcessusDelaiModel::FIELDNAME_ID_FTA_PROCESSUS
-                        . ' AND ' . FtaProcessusModel::TABLENAME . '.' . FtaProcessusModel::FIELDNAME_ID_FTA_ROLE
-                        . '=' . FtaRoleModel::TABLENAME . '.' . FtaRoleModel::KEYNAME
-                        . ' AND ' . FtaProcessusDelaiModel::FIELDNAME_DATE_ECHEANCE_PROCESSUS . ' < CURDATE()'
-                        . ' AND ' . FtaProcessusDelaiModel::FIELDNAME_VALIDE . '=0'
-                        . ' ORDER BY ' . FtaProcessusDelaiModel::FIELDNAME_DATE_ECHEANCE_PROCESSUS
-        );
-        if ($arrayFtaDateProcessus) {
-            $return['status'] = 1;
-            /*  foreach ($arrayFtaDateProcessus as $rowsFtaDateProcessus) {
-              $return['liste_processus_depasses'][$rows['id_fta_processus']] = $rows['date_echeance_processus'];
-              $HTML_processus .= '<br>' . $rows['nom_fta_processus'] . ' - ' . $return['liste_processus_depasses'][$rows['id_fta_processus']];
-              }
-              $HTML_processus = $HTML_processus_begin . $HTML_processus . $HTML_processus_end; */
-        } else {
-            $return['status'] = 0;
+
+//        $arrayFtaDateProcessus = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
+//                        'SELECT ' . FtaProcessusModel::TABLENAME . '.' . FtaProcessusModel::KEYNAME
+//                        . ', ' . FtaProcessusDelaiModel::FIELDNAME_DATE_ECHEANCE_PROCESSUS
+//                        . ',' . FtaRoleModel::FIELDNAME_DESCRIPTION_FTA_ROLE
+//                        . ' FROM ' . FtaProcessusDelaiModel::TABLENAME . ', ' . FtaProcessusModel::TABLENAME . ',' . FtaRoleModel::TABLENAME
+//                        . ' WHERE ' . FtaProcessusDelaiModel::FIELDNAME_ID_FTA . '=\'' . $paramIdFta . '\' '
+//                        . ' AND ' . FtaProcessusModel::TABLENAME . '.' . FtaProcessusModel::KEYNAME
+//                        . '=' . FtaProcessusDelaiModel::TABLENAME . '.' . FtaProcessusDelaiModel::FIELDNAME_ID_FTA_PROCESSUS
+//                        . ' AND ' . FtaProcessusModel::TABLENAME . '.' . FtaProcessusModel::FIELDNAME_ID_FTA_ROLE
+//                        . '=' . FtaRoleModel::TABLENAME . '.' . FtaRoleModel::KEYNAME
+//                        . ' AND ' . FtaProcessusDelaiModel::FIELDNAME_DATE_ECHEANCE_PROCESSUS . ' < CURDATE()'
+//                        . ' AND ' . FtaProcessusDelaiModel::FIELDNAME_VALIDE . '=0'
+//                        . ' ORDER BY ' . FtaProcessusDelaiModel::FIELDNAME_DATE_ECHEANCE_PROCESSUS
+//        );
+//        if ($arrayFtaDateProcessus) {
+//            $return['status'] = 1;
+        /*  foreach ($arrayFtaDateProcessus as $rowsFtaDateProcessus) {
+          $return['liste_processus_depasses'][$rows['id_fta_processus']] = $rows['date_echeance_processus'];
+          $HTML_processus .= '<br>' . $rows['nom_fta_processus'] . ' - ' . $return['liste_processus_depasses'][$rows['id_fta_processus']];
+          }
+          $HTML_processus = $HTML_processus_begin . $HTML_processus . $HTML_processus_end; */
+//        } else {
+//            $return['status'] = 0;
 //            $HTML_processus = '';
-        }
+//        }
 
         /*
          * Recherche du dépassement de la date d'échéance de validation de fta
@@ -153,12 +154,19 @@ class FtaProcessusDelaiModel extends AbstractModel {
 
             foreach ($arrayIdFtaDate as $rowsIdFtaDate) {
                 $dateEcheanceFta = $rowsIdFtaDate[FtaModel::FIELDNAME_DATE_ECHEANCE_FTA];
+                $dateEcheanceFta1 = new DateTime($rowsIdFtaDate[FtaModel::FIELDNAME_DATE_ECHEANCE_FTA]);
+                $dateActuelObjet = new DateTime(date('Y-m-d'));
+                $differenceDeDate = $dateEcheanceFta1->diff($dateActuelObjet) ;
+                $nb_jours = $differenceDeDate->days; 
             }
             if ($dateEcheanceFta == '0000-00-00' or $dateEcheanceFta == '') {
                 $return['status'] = 3;
             } else {
-                if ($dateEcheanceFta < date('Y-m-d')) {
-                    $return['status'] = 2;
+                if($nb_jours > ModuleConfig::VALUE_DATE_NOTIFICATION) {
+                    $return['status'] = 1;
+                    if ($nb_jours > ModuleConfig::VALUE_DATE_NOTIFICATION) {
+                        $return['status'] = 2;
+                    }
                 }
                 $HTML_fta .= $dateEcheanceFta;
             }

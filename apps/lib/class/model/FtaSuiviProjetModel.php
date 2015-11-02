@@ -567,7 +567,7 @@ class FtaSuiviProjetModel extends AbstractModel {
         }
     }
 
-    public static function getFtaTauxValidation($paramFtaModel) {
+    public static function getFtaTauxValidation($paramFtaModel, $paramTableauProcessus) {
 
 //Dictionnaire des données
         $return['0'];     //Pourcentage globale de la validation
@@ -576,10 +576,9 @@ class FtaSuiviProjetModel extends AbstractModel {
         /*
          * Récupération du l'état de la FTA pour connatire le cycle de vie en cours
          */
-        $idFta=$paramFtaModel->getDataField(FtaModel::KEYNAME)->getFieldValue();
+        $idFta = $paramFtaModel->getDataField(FtaModel::KEYNAME)->getFieldValue();
         $idFtaEtat = $paramFtaModel->getDataField(FtaModel::FIELDNAME_ID_FTA_ETAT)->getFieldValue();
-        $ftaEtatModel = new FtaEtatModel($idFtaEtat);
-        $abreviation_fta_etat = $ftaEtatModel->getDataField(FtaEtatModel::FIELDNAME_ABREVIATION)->getFieldValue();
+
         /*
           Corps de la fonction
          */
@@ -617,20 +616,22 @@ class FtaSuiviProjetModel extends AbstractModel {
         } else {
             $return['0'] = '0';
         }
-        $arrayCycle = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
-                        'SELECT DISTINCT ' . FtaProcessusCycleModel::FIELDNAME_PROCESSUS_INIT
-                        . ' FROM ' . FtaProcessusCycleModel::TABLENAME
-                        . ' WHERE ' . FtaProcessusCycleModel::FIELDNAME_FTA_ETAT . '=\'' . $abreviation_fta_etat
-                        . '\' AND ' . FtaProcessusCycleModel::FIELDNAME_WORKFLOW . '=' . $paramFtaModel->getDataField(FtaModel::FIELDNAME_WORKFLOW)->getFieldValue()
-        );
-        foreach ($arrayCycle as $rowsCycle) {
-            $id_fta_processus = $rowsCycle[FtaProcessusCycleModel::FIELDNAME_PROCESSUS_INIT];
-            $taux_validation_processus = FtaProcessusModel::getValideProcessusEncours($idFta, $id_fta_processus, $paramFtaModel->getDataField(FtaModel::FIELDNAME_WORKFLOW)->getFieldValue());
+        if ($paramTableauProcessus) {
+            $arrayCycle = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
+                            'SELECT DISTINCT ' . FtaProcessusCycleModel::FIELDNAME_PROCESSUS_INIT
+                            . ' FROM ' . FtaProcessusCycleModel::TABLENAME . ', ' . FtaEtatModel::TABLENAME
+                            . ' WHERE ' . FtaProcessusCycleModel::FIELDNAME_FTA_ETAT . '=' . FtaEtatModel::FIELDNAME_ABREVIATION
+                            . '\' AND ' . FtaProcessusCycleModel::FIELDNAME_WORKFLOW . '=' . $paramFtaModel->getDataField(FtaModel::FIELDNAME_WORKFLOW)->getFieldValue()
+                            . ' AND ' . FtaEtatModel::KEYNAME . '=\'' . $idFtaEtat . '\''
+            );
+            foreach ($arrayCycle as $rowsCycle) {
+                $id_fta_processus = $rowsCycle[FtaProcessusCycleModel::FIELDNAME_PROCESSUS_INIT];
+                $taux_validation_processus = FtaProcessusModel::getValideProcessusEncours($idFta, $id_fta_processus, $paramFtaModel->getDataField(FtaModel::FIELDNAME_WORKFLOW)->getFieldValue());
 
-            //Détail par processus
-            $return[1][$id_fta_processus] = $taux_validation_processus;
-        }//Fin du balayage
-
+                //Détail par processus
+                $return[1][$id_fta_processus] = $taux_validation_processus;
+            }//Fin du balayage
+        }
 
         return $return;
     }

@@ -124,9 +124,9 @@ class FtaWorkflowStructureModel extends AbstractModel {
 
     /**
      * Listes des processus auxquel l'utilisateur connecté à les droits d'accès
-     * @param type $paramIdRole
-     * @param type $paramIdWorkflow
-     * @return type
+     * @param int $paramIdRole
+     * @param int $paramIdWorkflow
+     * @return array
      */
     public static function getArrayProcessusByRoleAndWorkflow($paramIdRole, $paramIdWorkflow) {
         $arrayProcessusAcces = DatabaseOperation::convertSqlStatementWithoutKeyToArray(

@@ -2328,7 +2328,7 @@ function visualiser_fiches($id_fta_etat, $choix, $isLimit, $order_common) {
         //if($_SESSION["synthese_action"]<>"all")
         if ($abreviation_fta_etat == "I") {
             $ftaModel = new FtaModel($id_fta);
-            $taux_temp = FtaSuiviProjetModel::getFtaTauxValidation($ftaModel);
+            $taux_temp = FtaSuiviProjetModel::getFtaTauxValidation($ftaModel,FALSE);
             $recap[$id_fta] = round($taux_temp[0] * 100, 0) . "%";
             $lien .= "<h5>" . $recap[$id_fta] . "<a "
                     . "href=historique.php"

@@ -608,6 +608,14 @@ class FtaModel extends AbstractModel {
         }
         return $req;
     }
+    public static function AddIdFTaLabelValidProcess($paramIdEffectue) {
+        if ($paramIdEffectue) {
+            foreach ($paramIdEffectue as $value) {
+                $req .= " OR " . FtaModel::TABLENAME . "." . FtaModel::KEYNAME . "=" . $value[FtaModel::KEYNAME] . " ";
+            }
+        }
+        return $req;
+    }
 
     /**
      * Cette fonction permet de dupliquer une Fiche Technique Article pour faire les actions suivantes:

@@ -70,4 +70,28 @@ class AclClass {
         unset($_SESSION[UserModel::FIELDNAME_PORTAIL_WIKI_SALARIES]);
     }
 
+    /**
+     * On initialise les droits d'accès de l'utilisateur selon sont rôle
+     * @param int $paramIdUser
+     * @param int $paramRole
+     */
+    public static function setRightsAcces($paramIdUser, $paramRole) {
+        if ($_SESSION['CheckIdFtaRole'] <> $paramRole) {
+
+            /**
+             *  Nous recuperons la liste des identifiant intranet actions selon le role et l'utilisateur connecté
+             */
+            $idIntranetActions = IntranetDroitsAccesModel::getIdIntranetActionsByRoleANDSiteFromUser($paramIdUser, $paramRole);
+            /**
+             * Nous avons un tableau des id intranet actions pour lesquels l'utilisateur à accès pour tel rôle
+             */
+            $checkIdIntranetActions = IntranetDroitsAccesModel::checkIdIntranetActionsByRoleANDSiteFromUser($paramIdUser, $paramRole);
+
+            $idIntranetActionsValide = array_intersect($idIntranetActions, $checkIdIntranetActions);
+
+            $_SESSION['IntranetActionsValide'] = $idIntranetActionsValide;
+            $_SESSION['CheckIdFtaRole'] = $paramRole;
+        }
+    }
+
 }

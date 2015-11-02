@@ -5,40 +5,19 @@ Options +Indexes
 RewriteEngine on
 
 
-#RewriteCond %{QUERY_STRING}  ^id_fta=([^/]+)&synthese_action=([^/]+)&comeback=([^/]+)&id_fta_etat=([^/]+)&abreviation_fta_etat=([^/]+)&id_fta_role=([^/]+)
+RewriteCond %{QUERY_STRING}  ^id_fta=([^/]+)&synthese_action=([^/]+)&comeback=([^/]+)&id_fta_etat=([^/]+)&abreviation_fta_etat=([^/]+)&id_fta_role=([^/]+)
 #RewriteRule ^(.+)$  modification_fiche.php [QSA,L]
 #RewriteRule ^\-modification_fiche\.php(?:[0-9A-Za-z.-]*)-(?:[0-9A-Za-z.-]*)-(?:[0-9A-Za-z.-]*)-(?:[0-9A-Za-z.-]*)-(?:[0-9A-Za-z.-]*)-(?:[0-9A-Za-z.-]*)$ apps/fta/modification_fiche.php?id_fta=$1&synthese_action=$2&comeback=$3&id_fta_etat=$4&abreviation_fta_etat=$5&id_fta_role=$6 [L]
-#RewriteRule ^modification_fiche-([0-9]+)-(.+)-([0-9]+)-([0-9]+)-(.+)-([0-9]+)\.php$  modification_fiche.phpid_fta=$1&synthese_action=$2&comeback=$3&id_fta_etat=$4&abreviation_fta_etat=$5&id_fta_role=$6 [L]
+RewriteRule ^modification_fiche-([0-9]+)-(.+)-([0-9]+)-([0-9]+)-(.+)-([0-9]+)\.php$  modification_fiche.phpid_fta=$1&synthese_action=$2&comeback=$3&id_fta_etat=$4&abreviation_fta_etat=$5&id_fta_role=$6 [L]
 #RewriteRule ^index\.php$ index.php [L]
 #RewriteRule ^modification_fiche-([0-9]+).html$ /page.php?param=$1 [L]
 
 
 
-# Si modification_fiche.php
+## Si modification_fiche.php
 #RewriteCond %{REQUEST_URI} /modification_fiche.php 
-# AND QUERY_STRING not null		
-RewriteCond %{QUERY_STRING} ^(.+)$ 	
-# THEN rewrite to "/" and execute modification_fiche.php?%{QUERY_STRING}		
-RewriteRule ^modification_fiche\.php /modification_fiche.php?%{QUERY_STRING} [L]	
+## AND QUERY_STRING not null		
+#RewriteCond %{QUERY_STRING} ^(.+)$ 	
+## THEN rewrite to "/" and execute modification_fiche.php?%{QUERY_STRING}		
+#RewriteRule ^/$ modification_fiche.php?%{QUERY_STRING} [L]	
 
-#Activation de la compression permettant de réduire le temps de réponse des requêtes HTTP. 
-#Ce qui améliore le temps de chargement et diminue la consommation de la bande passante.
-# MOD_DEFLATE COMPRESSION
- SetOutputFilter DEFLATE
- AddOutputFilterByType DEFLATE text/html text/css text/plain text/xml application/x-javascript application/x-httpd-php
- #Pour les navigateurs incompatibles
- BrowserMatch ^Mozilla/4 gzip-only-text/html
- BrowserMatch ^Mozilla/4\.0[678] no-gzip
- BrowserMatch \bMSIE !no-gzip !gzip-only-text/html
- BrowserMatch \bMSI[E] !no-gzip !gzip-only-text/html
- #ne pas mettre en cache si ces fichiers le sont déjà
- SetEnvIfNoCase Request_URI \.(?:gif|jpe?g|png)$ no-gzip
- #les proxies doivent donner le bon contenu
- Header append Vary User-Agent env=!dont-vary
-
-#Bloque l’accès à des fichiers sensibles,
-# protect the htaccess file
-<files .htaccess>
-order allow,deny
-deny from all
-</files>

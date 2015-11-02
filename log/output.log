@@ -13,3 +13,19 @@
 2015-10-30 11:57:41 LOG 127.0.0.1  : 318
 2015-10-30 12:05:22 LOG 127.0.0.1  : 318
 2015-10-30 13:04:30 LOG 127.0.0.1  : 318
+2015-11-02 14:34:17 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : fefefqeqzfeqfezrerezerER
+2015-11-02 14:34:17 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `commentaire` =   'fefefqeqzfeqfezrerezerER'
+2015-11-02 14:34:27 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : fefefqeqzfeqfezrerezerERerE ERQEQERQZEQ
+2015-11-02 14:34:27 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `commentaire` =   'fefefqeqzfeqfezrerezerERerE ERQEQERQZEQ'
+2015-11-02 14:34:35 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : fefefqeqzfeqfezrerezerERerE ERQEQERQZEQeqzrezrezqrezrerezrzeqrqzerqrezrz
+2015-11-02 14:34:35 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `commentaire` =   'fefefqeqzfeqfezrerezerERerE ERQEQERQZEQeqzrezrezqrezrerezrzeqrqzerqrezrz'
+2015-11-02 14:34:40 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : fefefqeqzfeqfezrerezerERerE ERQEQERQZEQeqzrezrezqrezrerezrzeqrqzerqrezrzeezrzeqqr
+2015-11-02 14:34:40 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `commentaire` =   'fefefqeqzfeqfezrerezerERerE ERQEQERQZEQeqzrezrezqrezrerezrzeqrqzerqrezrzeezrzeqqr'
+2015-11-02 14:34:54 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : fefefqeqzfeqfezrerezerERerE ERQEQERQZEQeqzrezrezqrezrerezrzeqrqzerqrezrzeezrzeqqrzrerqezrzer erqe r354654564 31er5qeze3re5r4qze65r46z54rz56er4
+2015-11-02 14:34:54 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `commentaire` =   'fefefqeqzfeqfezrerezerERerE ERQEQERQZEQeqzrezrezqrezrerezrzeqrqzerqrezrzeezrzeqqrzrerqezrzer erqe r354654564 31er5qeze3re5r4qze65r46z54rz56er4'
+2015-11-02 14:35:03 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : franck saut 
+2015-11-02 14:35:03 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `commentaire` =   'franck saut '
+2015-11-02 14:35:15 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : franck saut et il temps temerni"
+2015-11-02 14:35:15 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `commentaire` =   'franck saut et il temps temerni\\\"'
+2015-11-02 14:35:25 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : franck saute et il temps temerni"
+2015-11-02 14:35:25 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `commentaire` =   'franck saute et il temps temerni\\\"'

@@ -1,7 +1,7 @@
 # Fichier de configuration pour le répertoire /apps/fta/ 
 Options +FollowSymLinks
 Options +Indexes
-RewriteEngine On
+RewriteEngine off
 
 
 #RewriteCond %{QUERY_STRING}  ^id_fta=([^/]+)&synthese_action=([^/]+)&comeback=([^/]+)&id_fta_etat=([^/]+)&abreviation_fta_etat=([^/]+)&id_fta_role=([^/]+)

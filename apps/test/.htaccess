@@ -2,6 +2,6 @@ Options +FollowSymLinks
 Options +Indexes
 RewriteEngine On
 
-RewriteBase /franck/
+#RewriteBase /test/
 
 RewriteRule    ^franck.php$  test.php

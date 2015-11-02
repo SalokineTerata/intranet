@@ -36,9 +36,3 @@ RewriteRule ^modification_fiche\.php /modification_fiche.php?%{QUERY_STRING} [L]
  #les proxies doivent donner le bon contenu
  Header append Vary User-Agent env=!dont-vary
 
-#Bloque l’accès à des fichiers sensibles,
-# protect the htaccess file
-<files .htaccess>
-order allow,deny
-deny from all
-</files>

@@ -1,8 +1,8 @@
 # Fichier de configuration pour le répertoire /apps/fta/ 
 Options +FollowSymLinks
 # protection de la lecture des répertoires
-Options -Indexes
-RewriteEngine off
+Options +Indexes
+RewriteEngine on
 
 
 #RewriteCond %{QUERY_STRING}  ^id_fta=([^/]+)&synthese_action=([^/]+)&comeback=([^/]+)&id_fta_etat=([^/]+)&abreviation_fta_etat=([^/]+)&id_fta_role=([^/]+)
@@ -21,5 +21,24 @@ RewriteCond %{QUERY_STRING} ^(.+)$
 # THEN rewrite to "/" and execute modification_fiche.php?%{QUERY_STRING}		
 RewriteRule ^modification_fiche\.php /modification_fiche.php?%{QUERY_STRING} [L]	
 
+#Activation de la compression permettant de réduire le temps de réponse des requêtes HTTP. 
+#Ce qui améliore le temps de chargement et diminue la consommation de la bande passante.
+# MOD_DEFLATE COMPRESSION
+ SetOutputFilter DEFLATE
+ AddOutputFilterByType DEFLATE text/html text/css text/plain text/xml application/x-javascript application/x-httpd-php
+ #Pour les navigateurs incompatibles
+ BrowserMatch ^Mozilla/4 gzip-only-text/html
+ BrowserMatch ^Mozilla/4\.0[678] no-gzip
+ BrowserMatch \bMSIE !no-gzip !gzip-only-text/html
+ BrowserMatch \bMSI[E] !no-gzip !gzip-only-text/html
+ #ne pas mettre en cache si ces fichiers le sont déjà
+ SetEnvIfNoCase Request_URI \.(?:gif|jpe?g|png)$ no-gzip
+ #les proxies doivent donner le bon contenu
+ Header append Vary User-Agent env=!dont-vary
 
-
+#Bloque l’accès à des fichiers sensibles,
+# protect the htaccess file
+<files .htaccess>
+order allow,deny
+deny from all
+</files>

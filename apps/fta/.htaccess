@@ -5,10 +5,10 @@ Options +Indexes
 RewriteEngine on
 
 
-RewriteCond %{QUERY_STRING}  ^id_fta=([^/]+)&synthese_action=([^/]+)&comeback=([^/]+)&id_fta_etat=([^/]+)&abreviation_fta_etat=([^/]+)&id_fta_role=([^/]+)
+#RewriteCond %{QUERY_STRING}  ^id_fta=([^/]+)&synthese_action=([^/]+)&comeback=([^/]+)&id_fta_etat=([^/]+)&abreviation_fta_etat=([^/]+)&id_fta_role=([^/]+)
 #RewriteRule ^(.+)$  modification_fiche.php [QSA,L]
 #RewriteRule ^\-modification_fiche\.php(?:[0-9A-Za-z.-]*)-(?:[0-9A-Za-z.-]*)-(?:[0-9A-Za-z.-]*)-(?:[0-9A-Za-z.-]*)-(?:[0-9A-Za-z.-]*)-(?:[0-9A-Za-z.-]*)$ apps/fta/modification_fiche.php?id_fta=$1&synthese_action=$2&comeback=$3&id_fta_etat=$4&abreviation_fta_etat=$5&id_fta_role=$6 [L]
-RewriteRule ^modification_fiche\.php?-([0-9]+)-(.+)-([0-9]+)-([0-9]+)-(.+)-([0-9]+)$  modification_fiche.phpid_fta=$1&synthese_action=$2&comeback=$3&id_fta_etat=$4&abreviation_fta_etat=$5&id_fta_role=$6 [L]
+RewriteRule ^modification_fiche-([0-9]+)-(.+)-([0-9]+)-([0-9]+)-(.+)-([0-9]+).html$  modification_fiche.php?id_fta=$1&synthese_action=$2&comeback=$3&id_fta_etat=$4&abreviation_fta_etat=$5&id_fta_role=$6 [L]
 #RewriteRule ^index\.php$ index.php [L]
 #RewriteRule ^modification_fiche-([0-9]+).html$ /page.php?param=$1 [L]
 

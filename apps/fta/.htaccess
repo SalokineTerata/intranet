@@ -14,9 +14,9 @@ RewriteEngine On
 
 
 # Si modification_fiche.php
-RewriteCond %{REQUEST_URI} /modification_fiche.php 
+#RewriteCond %{REQUEST_URI} /modification_fiche.php 
 # AND QUERY_STRING not null		
 RewriteCond %{QUERY_STRING} ^(.+)$ 	
 # THEN rewrite to "/" and execute modification_fiche.php?%{QUERY_STRING}		
-RewriteRule ^/$ modification_fiche.php?%{QUERY_STRING} [L]	
+RewriteRule ^modification_fiche\.php /modification_fiche.php? [L]	
 

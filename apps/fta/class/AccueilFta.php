@@ -682,7 +682,7 @@ class AccueilFta {
                             . '-' . self::$abrevationFtaEtat
                             . '-' . self::$idFtaRole
 //                            . ' onClick=\'modification_fiche_' . $idFta . '();\' '
-                            . '.html/><img src=../lib/images/next.png alt=\'\' title=\'Voir la FTA\' width=\'30\' height=\'25\' border=\'0\' />'
+                            . '.html /><img src=../lib/images/next.png alt=\'\' title=\'Voir la FTA\' width=\'30\' height=\'25\' border=\'0\' />'
                             . '</a>'
                     ;
 //                $actions .= '                    

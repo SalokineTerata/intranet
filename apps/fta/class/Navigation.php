@@ -99,14 +99,7 @@ class Navigation {
             </td></tr>
             <tr class = titre>
             <td>
-            <form name = \'navigation\' method=post action=modification_fiche.php id=\'idOfForm\'>
-                                <input type=hidden name=id_fta_chapitre_encours > 
-                                <input type=hidden name=\'id_fta_role\'  >
-                                <input type=hidden name=\'id_fta\' >
-                                <input type=hidden name=\'id_fta_etat\' >
-                                <input type=\'hidden\' name=\'synthese_action\' >
-                                <input type=hidden name=\'abreviation_fta_etat\' >
-                                <input type=\'hidden\' name=\'comeback\' >  
+         
                      ';
         }
         //Si une action est donnée, alors construction du menu des chapitres    
@@ -538,17 +531,17 @@ class Navigation {
             if ($num == 0 and self::$synthese_action === 'attente') {
                 
             } else {
-                $menu_navigation .= '<a href=' . $page_default . '.php?'
+                $menu_navigation .= '<a href=' . $page_default 
 //                $menu_navigation .= '<a href=\'#\''
 //                        . ' onClick=\'navigation_' . $id_fta_chapitre . '();\''
-                        . 'id_fta=' . self::$id_fta
-                        . '&id_fta_chapitre_encours=' . $id_fta_chapitre
-                        . '&synthese_action=' . self::$synthese_action
-                        . '&id_fta_etat=' . self::$id_fta_etat
-                        . '&abreviation_fta_etat=' . self::$abreviation_etat
-                        . '&comeback=' . self::$comeback
-                        . '&id_fta_role=' . self::$id_fta_role
-                        . '>' . $b . ''
+                        . '-' . self::$id_fta
+                        . '-' . $id_fta_chapitre
+                        . '-' . self::$synthese_action
+                        . '-' . self::$id_fta_etat
+                        . '-' . self::$abreviation_etat
+                        . '-' . self::$comeback
+                        . '-' . self::$id_fta_role
+                        . '.html >' . $b . ''
                         . $image1 . $nom_usuel_fta_chapitre . $image2
                         . '</a>'
                         . '</b></font> '

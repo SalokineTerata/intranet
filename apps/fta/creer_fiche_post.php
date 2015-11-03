@@ -141,7 +141,7 @@ switch ($action) {
         header('Location: modification_fiche-' . $idFta
                 . '-encours-1-' . $idFtaEtat
                 . '-' . $abreviationFtaEtat
-                . '-' . $idFtaRole);
+                . '-' . $idFtaRole . '.html');
 
         break;
 

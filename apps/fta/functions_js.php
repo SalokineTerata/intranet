@@ -169,13 +169,13 @@
         abreviationFtaEtat = document.getElementById("abreviation_fta_etat").value;
         idFtaRole = document.getElementById("id_fta_role").value;
         //if (i == 0) return;
-        url = "modification_fiche.php?id_fta=" + idFta
-                + "&synthese_action=" + syntheseAction
-                + "&comeback=" + comeback
-                + "&id_fta_etat=" + idFtaEtat
-                + "&abreviation_fta_etat=" + abreviationFtaEtat
-                + "&id_fta_role=" + idFtaRole
-                + "&selection_proprietaire1=" + document.form_action.selection_proprietaire1.options[proprietaire1].value
+        url = "modification_fiche-" + idFta
+                + "-" + syntheseAction
+                + "-" + comeback
+                + "-" + idFtaEtat
+                + "-" + abreviationFtaEtat
+                + "-" + idFtaRole
+                + "-" + document.form_action.selection_proprietaire1.options[proprietaire1].value
 
                 ;
         parent.location.href = url;

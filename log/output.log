@@ -29,3 +29,7 @@
 2015-11-02 14:35:15 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `commentaire` =   'franck saut et il temps temerni\\\"'
 2015-11-02 14:35:25 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : franck saute et il temps temerni"
 2015-11-02 14:35:25 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `commentaire` =   'franck saute et il temps temerni\\\"'
+2015-11-02 15:40:06 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 
+2015-11-02 15:40:06 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `commentaire` =   NULL
+2015-11-02 15:40:10 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 
+2015-11-02 15:40:10 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `commentaire` =   NULL

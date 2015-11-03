@@ -13,7 +13,7 @@ $page="../lib/gestion_table.php?module=fiches_emballages&menu=menu_principal.inc
 Menu accessible pour les utilisateurs ayant les droits
 en consultation sur ce module
 */
-if ($_SESSION[$module_consultation])
+if (AclClass::getValueAccesRights($module_consultation))
 {
    echo "<br>";
    echo "<a href=recapitulatif_droits_module.php><img src=\"../lib/images/bouton_aide_point_interrogation.gif\" border=\"0\" alt=\"R&eacute;capitulatif des Droits d'acc&egrave;s\" /></a>";
@@ -31,7 +31,7 @@ en modifications sur ce module
 */
 
 
-if ($_SESSION[$module_modification])
+if (AclClass::getValueAccesRights($module_modification))
 {
    //Ajouter une nouvelle FTE
    echo "<br>";

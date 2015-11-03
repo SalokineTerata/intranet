@@ -2142,9 +2142,9 @@ class Chapitre {
     protected static function buildIsOwner() {
 
         //Recherche du droit d'accès correspondant
-        $module=self::$moduleIntranetActionsModel->getDataField(IntranetActionsModel::FIELDNAME_NOM_INTRANET_ACTIONS)->getFieldValue();
+        $module = self::$moduleIntranetActionsModel->getDataField(IntranetActionsModel::FIELDNAME_NOM_INTRANET_ACTIONS)->getFieldValue();
         if (
-                $_SESSION['fta_' . $module]
+                AclClass::getValueAccesRights('fta_' . $module)
         ) {
             $return = true;
         } else {

@@ -65,11 +65,11 @@ $show_help = 1;                              //Activer l'aide en ligne Pop-up
 
 //Paramètre d'URL
 $idFta = Lib::getParameterFromRequest(FtaModel::KEYNAME);
-$module_consultation = $_SESSION['module'] . '_consultation';
-//Sécurisation du chapitre Tarif
-if ($module_consultation <> 1 and $nom_fta_chapitre_encours == 'tarif') {
-    include ('../lib/acces_interdit.php');
-}
+//$module_consultation = $_SESSION['module'] . '_consultation';
+////Sécurisation du chapitre Tarif
+//if ($module_consultation <> 1 and $nom_fta_chapitre_encours == 'tarif') {
+//    include ('../lib/acces_interdit.php');
+//}
 
 
 /*

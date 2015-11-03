@@ -9,7 +9,7 @@ En effet cette page est chargée par toutes les pages de ce module
 
     $module_consultation = $module. "_consultation";
 
-    if ($_SESSION[$module_consultation]=="0")
+    if (AclClass::getValueAccesRights($module_consultation)=="0")
     {
         header ("Location: index.php");
     }

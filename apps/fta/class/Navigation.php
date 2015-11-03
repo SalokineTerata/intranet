@@ -108,7 +108,7 @@ class Navigation {
 
         self::$comeback_url = 'index.php?id_fta_etat=' . self::$id_fta_etat . '&nom_fta_etat=' . self::$abreviation_etat . '&id_fta_role=' . self::$id_fta_role . '&synthese_action=' . self::$synthese_action;
 
-        $menu_navigation.= '</form></td></tr><tr><td>
+        $menu_navigation.= '</td></tr><tr><td>
     <a href=' . self::$comeback_url . '><img src=../lib/images/bouton_retour.png alt=\'\' title=\'Retour à la synthèse\' width=\'18\' height=\'15\' border=\'0\' /> Retour vers la synthèse</a> |
     ';
         //Corps du menu
@@ -531,7 +531,7 @@ class Navigation {
             if ($num == 0 and self::$synthese_action === 'attente') {
                 
             } else {
-                $menu_navigation .= '<a href=' . $page_default 
+                $menu_navigation .= '<a href=' . $page_default . '.php?'
 //                $menu_navigation .= '<a href=\'#\''
 //                        . ' onClick=\'navigation_' . $id_fta_chapitre . '();\''
                         . '-' . self::$id_fta

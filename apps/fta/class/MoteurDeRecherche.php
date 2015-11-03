@@ -134,7 +134,7 @@ class MoteurDeRecherche {
 //Restriction par droit d'accès
 //  $acces= $module."_modification";
 //  echo $SESSION[$acces];
-            if (!$_SESSION[$module . "_modification"] and $_SESSION["module"] == "fiches_mp_achats") {
+            if (!AclClass::getValueAccesRights($module . "_modification") and $_SESSION["module"] == "fiches_mp_achats") {
                 $req.= "WHERE " . $abreviation_recherche_etat . "='V' OR " . $abreviation_recherche_etat . "='E' ";
             }
             /**

@@ -66,7 +66,7 @@ switch ($action) {
     case '':
 
         //Redirection
-        header('Location: index.php');
+        header('Location: index.html');
 
         break;
 

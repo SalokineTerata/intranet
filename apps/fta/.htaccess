@@ -8,8 +8,13 @@ RewriteEngine on
 RewriteRule ^modification_fiche-([0-9]+)-(.+)-([0-9]+)-([0-9]+)-(.+)-([0-9]+).html$  modification_fiche.php?id_fta=$1&synthese_action=$2&comeback=$3&id_fta_etat=$4&abreviation_fta_etat=$5&id_fta_role=$6 [L]
 #Url avec le chapitre
 RewriteRule ^modification_fiche-([0-9]+)-([0-9]+)-(.+)-([0-9]+)-(.+)-([0-9]+)-([0-9]+).html$  modification_fiche.php?id_fta=$1&id_fta_chapitre_encours=$2&synthese_action=$3&id_fta_etat=$4&abreviation_fta_etat=$5&comeback=$6&id_fta_role=$7 [L]
-#Url de l'index
+#Url de l'index avec parametre
 RewriteRule ^index-([0-9]+)-(.+)-([0-9]+)-(.+).html$  index.php?id_fta_etat=$1&nom_fta_etat=$2&id_fta_role=$3&synthese_action=$4 [L]
+#Url de l'index avec parametre
+RewriteRule ^index-([0-9]+)-(.+)-([0-9]+)-(.+)-(.+).html$  index.php?id_fta_etat=$1&nom_fta_etat=$2&id_fta_role=$3&synthese_action=$4&order_common=$5 [L]
+#Url de l'index avec parametre
+RewriteRule ^index.html$  index.php [L]
+RewriteRule ^index-(.+).html$  index.php?&order_common=$1 [L]
 #Url de l'historique
 RewriteRule ^historique-([0-9]+)-([0-9]+)-([0-9]+)-(.+)-([0-9]+)-(.+)-([0-9]+).html$  historique.php?id_fta=$1&id_fta_chapitre_encours=$2&id_fta_etat=$3&abreviation_fta_etat=$4&id_fta_role=$5&synthese_action=$6&comeback=$7 [L]
 

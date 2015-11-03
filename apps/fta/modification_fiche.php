@@ -87,7 +87,8 @@ $idFtaRole = Lib::isDefined(FtaRoleModel::KEYNAME);
 $id_fta_chapitre = $id_fta_chapitre_encours;
 $ftaModel = new FtaModel($idFta);
 $idFtaClassification2 = $ftaModel->getDataField(FtaModel::FIELDNAME_ID_FTA_CLASSIFICATION2)->getFieldValue();
-if ($idFtaClassification2) {
+$selection_proprietaire1 = Lib::getParameterFromRequest('selection_proprietaire1');
+if ($idFtaClassification2 and $selection_proprietaire1 <> "0") {
     $ClassificationFta2Model = new ClassificationFta2Model($idFtaClassification2);
     $selection_proprietaire1 = $ClassificationFta2Model->getDataField(ClassificationFta2Model::FIELDNAME_ID_PROPRIETAIRE_GROUPE)->getFieldValue();
     $selection_proprietaire2 = $ClassificationFta2Model->getDataField(ClassificationFta2Model::FIELDNAME_ID_PROPRIETAIRE_ENSEIGNE)->getFieldValue();
@@ -98,7 +99,6 @@ if ($idFtaClassification2) {
     $selection_reseau = $ClassificationFta2Model->getDataField(ClassificationFta2Model::FIELDNAME_ID_RESEAU)->getFieldValue();
     $selection_saisonnalite = $ClassificationFta2Model->getDataField(ClassificationFta2Model::FIELDNAME_ID_SAISONNALITE)->getFieldValue();
 } else {
-    $selection_proprietaire1 = Lib::getParameterFromRequest('selection_proprietaire1');
     $selection_proprietaire2 = Lib::getParameterFromRequest('selection_proprietaire2');
     $selection_marque = Lib::getParameterFromRequest('selection_marque');
     $selection_activite = Lib::getParameterFromRequest('selection_activite');

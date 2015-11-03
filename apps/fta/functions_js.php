@@ -176,6 +176,7 @@
                 + "-" + abreviationFtaEtat
                 + "-" + idFtaRole
                 + "-" + document.form_action.selection_proprietaire1.options[proprietaire1].value
+                + ".html" 
 
                 ;
         parent.location.href = url;

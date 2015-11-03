@@ -70,35 +70,24 @@ $idFta = Lib::getParameterFromRequest(FtaModel::KEYNAME);
 //if ($module_consultation <> 1 and $nom_fta_chapitre_encours == 'tarif') {
 //    include ('../lib/acces_interdit.php');
 //}
+if ($idFta) {
 
-
-/*
- * Nous recuperons le chapitre auquel ultisateur verra par défaut selon ces droits d'accès 
- * lorsqu'il regarde la liste de ces fta 
- */
+    /*
+     * Nous recuperons le chapitre auquel ultisateur verra par défaut selon ces droits d'accès 
+     * lorsqu'il regarde la liste de ces fta 
+     */
 //$chapitreParDefaut = FtaChapitreModel::getChapitreDefautByWorkflow($id_fta);
 
-$id_fta_chapitre_encours = Lib::getParameterFromRequest('id_fta_chapitre_encours', '1');
-$synthese_action = Lib::isDefined('synthese_action');
-$comeback = Lib::isDefined('comeback');
-$idFtaEtat = Lib::isDefined(FtaEtatModel::KEYNAME);
-$abreviationFtaEtat = Lib::isDefined(FtaEtatModel::FIELDNAME_ABREVIATION);
-$idFtaRole = Lib::isDefined(FtaRoleModel::KEYNAME);
-$id_fta_chapitre = $id_fta_chapitre_encours;
-$ftaModel = new FtaModel($idFta);
-$idFtaClassification2 = $ftaModel->getDataField(FtaModel::FIELDNAME_ID_FTA_CLASSIFICATION2)->getFieldValue();
-$selection_proprietaire1 = Lib::getParameterFromRequest('selection_proprietaire1');
-if ($idFtaClassification2 and $selection_proprietaire1 <> "0") {
-    $ClassificationFta2Model = new ClassificationFta2Model($idFtaClassification2);
-    $selection_proprietaire1 = $ClassificationFta2Model->getDataField(ClassificationFta2Model::FIELDNAME_ID_PROPRIETAIRE_GROUPE)->getFieldValue();
-    $selection_proprietaire2 = $ClassificationFta2Model->getDataField(ClassificationFta2Model::FIELDNAME_ID_PROPRIETAIRE_ENSEIGNE)->getFieldValue();
-    $selection_marque = $ClassificationFta2Model->getDataField(ClassificationFta2Model::FIELDNAME_ID_MARQUE)->getFieldValue();
-    $selection_activite = $ClassificationFta2Model->getDataField(ClassificationFta2Model::FIELDNAME_ID_ACTIVITE)->getFieldValue();
-    $selection_rayon = $ClassificationFta2Model->getDataField(ClassificationFta2Model::FIELDNAME_ID_RAYON)->getFieldValue();
-    $selection_environnement = $ClassificationFta2Model->getDataField(ClassificationFta2Model::FIELDNAME_ID_ENVIRONNEMENT)->getFieldValue();
-    $selection_reseau = $ClassificationFta2Model->getDataField(ClassificationFta2Model::FIELDNAME_ID_RESEAU)->getFieldValue();
-    $selection_saisonnalite = $ClassificationFta2Model->getDataField(ClassificationFta2Model::FIELDNAME_ID_SAISONNALITE)->getFieldValue();
-} elseif ($selection_proprietaire1 <> "0") {
+    $id_fta_chapitre_encours = Lib::getParameterFromRequest('id_fta_chapitre_encours', '1');
+    $synthese_action = Lib::isDefined('synthese_action');
+    $comeback = Lib::isDefined('comeback');
+    $idFtaEtat = Lib::isDefined(FtaEtatModel::KEYNAME);
+    $abreviationFtaEtat = Lib::isDefined(FtaEtatModel::FIELDNAME_ABREVIATION);
+    $idFtaRole = Lib::isDefined(FtaRoleModel::KEYNAME);
+    $id_fta_chapitre = $id_fta_chapitre_encours;
+    $ftaModel = new FtaModel($idFta);
+    $idFtaClassification2 = $ftaModel->getDataField(FtaModel::FIELDNAME_ID_FTA_CLASSIFICATION2)->getFieldValue();
+    $selection_proprietaire1 = Lib::getParameterFromRequest('selection_proprietaire1');
     $selection_proprietaire2 = Lib::getParameterFromRequest('selection_proprietaire2');
     $selection_marque = Lib::getParameterFromRequest('selection_marque');
     $selection_activite = Lib::getParameterFromRequest('selection_activite');
@@ -106,7 +95,20 @@ if ($idFtaClassification2 and $selection_proprietaire1 <> "0") {
     $selection_environnement = Lib::getParameterFromRequest('selection_environnement');
     $selection_reseau = Lib::getParameterFromRequest('selection_reseau');
     $selection_saisonnalite = Lib::getParameterFromRequest('selection_saisonnalite');
-}
+    $checkIdFtaClasssification = Lib::getParameterFromRequest('checkIdFtaClasssification');
+
+    if ($idFtaClassification2 and ! $checkIdFtaClasssification) {
+        $ClassificationFta2Model = new ClassificationFta2Model($idFtaClassification2);
+        $selection_proprietaire1 = $ClassificationFta2Model->getDataField(ClassificationFta2Model::FIELDNAME_ID_PROPRIETAIRE_GROUPE)->getFieldValue();
+        $selection_proprietaire2 = $ClassificationFta2Model->getDataField(ClassificationFta2Model::FIELDNAME_ID_PROPRIETAIRE_ENSEIGNE)->getFieldValue();
+        $selection_marque = $ClassificationFta2Model->getDataField(ClassificationFta2Model::FIELDNAME_ID_MARQUE)->getFieldValue();
+        $selection_activite = $ClassificationFta2Model->getDataField(ClassificationFta2Model::FIELDNAME_ID_ACTIVITE)->getFieldValue();
+        $selection_rayon = $ClassificationFta2Model->getDataField(ClassificationFta2Model::FIELDNAME_ID_RAYON)->getFieldValue();
+        $selection_environnement = $ClassificationFta2Model->getDataField(ClassificationFta2Model::FIELDNAME_ID_ENVIRONNEMENT)->getFieldValue();
+        $selection_reseau = $ClassificationFta2Model->getDataField(ClassificationFta2Model::FIELDNAME_ID_RESEAU)->getFieldValue();
+        $selection_saisonnalite = $ClassificationFta2Model->getDataField(ClassificationFta2Model::FIELDNAME_ID_SAISONNALITE)->getFieldValue();
+    }
+
 
 
 
@@ -114,16 +116,16 @@ if ($idFtaClassification2 and $selection_proprietaire1 <> "0") {
 //$navigue = afficher_navigation($id_fta, $id_fta_chapitre_encours, $synthese_action, $comeback);
 
 
-Navigation::initNavigation($idFta, $id_fta_chapitre_encours, $synthese_action, $comeback, $idFtaEtat, $abreviationFtaEtat, $idFtaRole);
+    Navigation::initNavigation($idFta, $id_fta_chapitre_encours, $synthese_action, $comeback, $idFtaEtat, $abreviationFtaEtat, $idFtaRole);
 
-$navigue = Navigation::getHtmlNavigationBar();
+    $navigue = Navigation::getHtmlNavigationBar();
 
-/*
-  Création des Fonctions JavaScript
- */
+    /*
+      Création des Fonctions JavaScript
+     */
 //document.form_action.correction_fta_suivi_projet.value
 //Etes vous certain de vouloir corriger ce chapitre ?
-$javascript = '
+    $javascript = '
 <SCRIPT LANGUAGE=JavaScript>
         function confirmation_correction_fta()
         {
@@ -138,14 +140,13 @@ $javascript = '
 </SCRIPT>
 ';
 
-ClassificationFta2Model::initClassification($selection_proprietaire1, $selection_proprietaire2, $selection_marque
-        , $selection_activite, $selection_rayon, $selection_environnement, $selection_reseau, $selection_saisonnalite);
+    ClassificationFta2Model::initClassification($selection_proprietaire1, $selection_proprietaire2, $selection_marque
+            , $selection_activite, $selection_rayon, $selection_environnement, $selection_reseau, $selection_saisonnalite);
 
-Chapitre::initChapitre($idFta, $id_fta_chapitre, $synthese_action, $comeback, $idFtaEtat, $abreviationFtaEtat, $idFtaRole);
+    Chapitre::initChapitre($idFta, $id_fta_chapitre, $synthese_action, $comeback, $idFtaEtat, $abreviationFtaEtat, $idFtaRole);
 
-$bloc.= Chapitre::getHtmlChapitreAll();
-
-
+    $bloc.= Chapitre::getHtmlChapitreAll();
+}
 
 echo '
      ' . $navigue . '
@@ -157,7 +158,7 @@ echo '
      <input type=hidden name=id_fta_chapitre  id=id_fta_chapitre value=' . $id_fta_chapitre . '>
      <input type=hidden name=id_fta_role id=id_fta_role value=' . $idFtaRole . '>
      <input type=hidden name=id_fta_etat id=id_fta_etat value=' . $idFtaEtat . '>
-     <input type=hidden name=id_fta_suivi_projet value=' . $id_fta_suivi_projet . '>
+     <input type=hidden name=id_fta_suivi_projet value=' . $id_fta_suivi_projet . '>    
      <input type=\'hidden\' name=\'synthese_action\' id=synthese_action value=\'' . $synthese_action . '\' />
      <input type=\'hidden\' name=\'nom_fta_chapitre_encours\' value=\'' . $nom_fta_chapitre_encours . '\' />
      <input type=\'hidden\' name=\'comeback\' id=comeback value=\'' . $comeback . '\' />

@@ -75,7 +75,7 @@ class ClassificationFta2Model extends AbstractModel {
         $paramNomDefaut = 'selection_proprietaire1';
         $listeClassification = '<td class=contenu >' . DatabaseDescription::getFieldDocLabel(ClassificationFta2Model::TABLENAME, ClassificationFta2Model::FIELDNAME_ID_PROPRIETAIRE_GROUPE)
                 . '</td><td class=contenu>'
-                . AccueilFta::afficherRequeteEnListeDeroulante($req, $paramIdDefaut, $paramNomDefaut, $paramIsEditable,TRUE) . '</tr>';
+                . AccueilFta::afficherRequeteEnListeDeroulante($req, $paramIdDefaut, $paramNomDefaut, $paramIsEditable, TRUE) . '</tr>';
 
         return $listeClassification;
     }
@@ -132,6 +132,10 @@ class ClassificationFta2Model extends AbstractModel {
         return $req;
     }
 
+    /**
+     * Tableau de la classification
+     * @return array
+     */
     public static function getArrayListeClassification() {
         $req = 'SELECT ' . ClassificationFta2Model::FIELDNAME_ID_ACTIVITE
                 . ',' . ClassificationFta2Model::FIELDNAME_ID_ENVIRONNEMENT
@@ -228,7 +232,7 @@ class ClassificationFta2Model extends AbstractModel {
      * @param string $paramNomDefaut
      * @return string
      */
-    public static function getClassificationListeSansDependance($paramIdDefaut, $paramIdTypeClassification, $paramNomDefaut,$paramIsEditable) {
+    public static function getClassificationListeSansDependance($paramIdDefaut, $paramIdTypeClassification, $paramNomDefaut, $paramIsEditable) {
         $req = ' SELECT ' . ClassificationArborescenceArticleCategorieContenuModel::KEYNAME
                 . ',' . ClassificationArborescenceArticleCategorieContenuModel::FIELDNAME_NOM_CLASSIFICATION_ARBORESCENCE_ARTICLE_CATEGORIE_CONTENU
                 . ' FROM ' . ClassificationArborescenceArticleCategorieContenuModel::TABLENAME
@@ -236,7 +240,7 @@ class ClassificationFta2Model extends AbstractModel {
                 . ' ORDER BY ' . ClassificationArborescenceArticleCategorieContenuModel::FIELDNAME_NOM_CLASSIFICATION_ARBORESCENCE_ARTICLE_CATEGORIE_CONTENU
         ;
 
-        return AccueilFta::afficherRequeteEnListeDeroulante($req, $paramIdDefaut, $paramNomDefaut,$paramIsEditable);
+        return AccueilFta::afficherRequeteEnListeDeroulante($req, $paramIdDefaut, $paramNomDefaut, $paramIsEditable);
     }
 
     /**
@@ -256,7 +260,7 @@ class ClassificationFta2Model extends AbstractModel {
 
     /**
      * Suppression d'une classification
-     * @param type $paramIdClassification2
+     * @param int $paramIdClassification2
      */
     public static function SuppressionClassification($paramIdClassification2) {
         DatabaseOperation::execute(
@@ -265,19 +269,13 @@ class ClassificationFta2Model extends AbstractModel {
         );
     }
 
-    public static function ShowListeDeroulanteClassification($paramIdFtaClassification2, $paramIsEditable) {
-        if ($paramIdFtaClassification2) {
+    /**
+     * Liste déroulante de la classification
+     * @param boolean$ paramIsEditable
+     * @return string
+     */
+    public static function ShowListeDeroulanteClassification($paramIsEditable) {
 
-            $ClassificationFta2Model = new ClassificationFta2Model($paramIdFtaClassification2);
-            self::$idProprietaireGroupe = $ClassificationFta2Model->getDataField(ClassificationFta2Model::FIELDNAME_ID_PROPRIETAIRE_GROUPE)->getFieldValue();
-            self::$idProprietaireEnseigne = $ClassificationFta2Model->getDataField(ClassificationFta2Model::FIELDNAME_ID_PROPRIETAIRE_ENSEIGNE)->getFieldValue();
-            self::$idMarque = $ClassificationFta2Model->getDataField(ClassificationFta2Model::FIELDNAME_ID_MARQUE)->getFieldValue();
-            self::$idActivite = $ClassificationFta2Model->getDataField(ClassificationFta2Model::FIELDNAME_ID_ACTIVITE)->getFieldValue();
-            self::$idRayon = $ClassificationFta2Model->getDataField(ClassificationFta2Model::FIELDNAME_ID_RAYON)->getFieldValue();
-            self::$idEnvironnement = $ClassificationFta2Model->getDataField(ClassificationFta2Model::FIELDNAME_ID_ENVIRONNEMENT)->getFieldValue();
-            self::$idReseau = $ClassificationFta2Model->getDataField(ClassificationFta2Model::FIELDNAME_ID_RESEAU)->getFieldValue();
-            self::$idSaisonnalite = $ClassificationFta2Model->getDataField(ClassificationFta2Model::FIELDNAME_ID_SAISONNALITE)->getFieldValue();
-        }
 
         $bloc.= ClassificationFta2Model::getListeClassificationProprietaireGroupeLabel(self::$idProprietaireGroupe, $paramIsEditable);
 
@@ -385,7 +383,7 @@ class ClassificationFta2Model extends AbstractModel {
 
         $listeClassification = '<tr><td class=contenu >' . DatabaseDescription::getFieldDocLabel(ClassificationFta2Model::TABLENAME, $paramSelect)
                 . '</td><td class=contenu >'
-                . AccueilFta::afficherRequeteEnListeDeroulante($reqClassification, $paramIdDefaut, $paramNomDefaut, $paramIsEditable,TRUE) . '</tr>';
+                . AccueilFta::afficherRequeteEnListeDeroulante($reqClassification, $paramIdDefaut, $paramNomDefaut, $paramIsEditable, TRUE) . '</tr>';
 
         return $listeClassification;
     }

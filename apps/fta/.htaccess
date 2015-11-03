@@ -3,26 +3,11 @@ Options +FollowSymLinks
 # protection de la lecture des répertoires
 Options +Indexes
 RewriteEngine on
-#Cette regle Marche
+
+#Url sans le chapitre
 RewriteRule ^modification_fiche-([0-9]+)-(.+)-([0-9]+)-([0-9]+)-(.+)-([0-9]+).html$  modification_fiche.php?id_fta=$1&synthese_action=$2&comeback=$3&id_fta_etat=$4&abreviation_fta_etat=$5&id_fta_role=$6 [L]
-#RewriteRule ^modification_fiche-([0-9]+)-(.+)-([0-9]+)-([0-9]+)-(.+)-([0-9]+)-([0-9]+).html$  modification_fiche.php?id_fta=$1&synthese_action=$2&comeback=$3&id_fta_etat=$4&abreviation_fta_etat=$5&id_fta_role=$6&selection_proprietaire1=$7 [L]
+#Url avec le chapitre
 RewriteRule ^modification_fiche-([0-9]+)-([0-9]+)-(.+)-([0-9]+)-(.+)-([0-9]+)-([0-9]+).html$  modification_fiche.php?id_fta=$1&id_fta_chapitre_encours=$2&synthese_action=$3&id_fta_etat=$4&abreviation_fta_etat=$5&comeback=$6&id_fta_role=$7 [L]
 
 #http://cod-intranet.agis.fr/v3/apps/fta/modification_fiche-10924-encours-1-1-I-6.html
-
-
-#RewriteCond %{QUERY_STRING}  ^id_fta=([^/]+)&synthese_action=([^/]+)&comeback=([^/]+)&id_fta_etat=([^/]+)&abreviation_fta_etat=([^/]+)&id_fta_role=([^/]+)
-#RewriteRule ^(.+)$  modification_fiche.php [QSA,L]
-#RewriteRule ^\-modification_fiche\.php(?:[0-9A-Za-z.-]*)-(?:[0-9A-Za-z.-]*)-(?:[0-9A-Za-z.-]*)-(?:[0-9A-Za-z.-]*)-(?:[0-9A-Za-z.-]*)-(?:[0-9A-Za-z.-]*)$ apps/fta/modification_fiche.php?id_fta=$1&synthese_action=$2&comeback=$3&id_fta_etat=$4&abreviation_fta_etat=$5&id_fta_role=$6 [L]
-#RewriteRule ^index\.php$ index.php [L]
-#RewriteRule ^modification_fiche-([0-9]+).html$ /page.php?param=$1 [L]
-
-
-
-## Si modification_fiche.php
-#RewriteCond %{REQUEST_URI} /modification_fiche.php 
-## AND QUERY_STRING not null		
-#RewriteCond %{QUERY_STRING} ^(.+)$ 	
-## THEN rewrite to "/" and execute modification_fiche.php?%{QUERY_STRING}		
-#RewriteRule ^/$ modification_fiche.php?%{QUERY_STRING} [L]	
 

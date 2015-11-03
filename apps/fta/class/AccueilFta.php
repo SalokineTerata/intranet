@@ -116,20 +116,22 @@ class AccueilFta {
 
 // premiere page
         if ($premiere && $numero_page_courante - $avant > 1) {
-            $resultat .= '<a href="' . htmlspecialchars($_SERVER['PHP_SELF']) . '?numeroPage=1'
-                    . '&id_fta_etat=' . self::$idFtaEtat
-                    . '&nom_fta_etat=' . self::$abrevationFtaEtat
-                    . '&id_fta_role=' . self::$idFtaRole
-                    . '&synthese_action=' . self::$syntheseAction . '" title="Première page">&laquo;&laquo;</a>&nbsp;';
+            $resultat .= '<a href="index'
+                    . '-' . self::$idFtaEtat
+                    . '-' . self::$abrevationFtaEtat
+                    . '-' . self::$idFtaRole
+                    . '-' . self::$syntheseAction
+                    . '-1.html" title="Première page">&laquo;&laquo;</a>&nbsp;';
         }
 
 // page precedente
         if ($numero_page_courante > 1) {
-            $resultat .= '<a href="' . htmlspecialchars($_SERVER['PHP_SELF']) . '?numeroPage=' . ($numero_page_courante - 1)
-                    . '&id_fta_etat=' . self::$idFtaEtat
-                    . '&nom_fta_etat=' . self::$abrevationFtaEtat
-                    . '&id_fta_role=' . self::$idFtaRole
-                    . '&synthese_action=' . self::$syntheseAction . '" title="Page précédente ' . ($numero_page_courante - 1) . '">&laquo;</a>&nbsp;';
+            $resultat .= '<a href="index'
+                    . '-' . self::$idFtaEtat
+                    . '-' . self::$abrevationFtaEtat
+                    . '-' . self::$idFtaRole
+                    . '-' . self::$syntheseAction
+                    . '-' . ($numero_page_courante - 1) . '.html" title="Page précédente ' . ($numero_page_courante - 1) . '">&laquo;</a>&nbsp;';
         }
 
 // affichage des numeros de page
@@ -138,29 +140,33 @@ class AccueilFta {
             if ($i == $numero_page_courante) {
                 $resultat .= '&nbsp;[<strong>' . $i . '</strong>]&nbsp;';
             } else {
-                $resultat .= '&nbsp;[<a href="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES) . '?numeroPage=' . $i
-                        . '&id_fta_etat=' . self::$idFtaEtat
-                        . '&nom_fta_etat=' . self::$abrevationFtaEtat
-                        . '&id_fta_role=' . self::$idFtaRole
-                        . '&synthese_action=' . self::$syntheseAction . '" title="Consulter la page ' . $i . '">' . $i . '</a>]&nbsp;';
+                $resultat .= '&nbsp;[<a href="index'
+                        . '-' . self::$idFtaEtat
+                        . '-' . self::$abrevationFtaEtat
+                        . '-' . self::$idFtaRole
+                        . '-' . self::$syntheseAction
+                        . '-' . $i . '.html " title="Consulter la page ' . $i . '">' . $i . '</a>]&nbsp;';
             }
         }
 
 // page suivante
         if ($numero_page_courante < $nb_pages) {
-            $resultat .= '<a href="' . htmlspecialchars($_SERVER['PHP_SELF']) . '?numeroPage=' . ($numero_page_courante + 1) . '&id_fta_etat=' . self::$idFtaEtat
-                    . '&nom_fta_etat=' . self::$abrevationFtaEtat
-                    . '&id_fta_role=' . self::$idFtaRole
-                    . '&synthese_action=' . self::$syntheseAction . '" title="Consulter la page ' . ($numero_page_courante + 1) . ' !">&raquo;</a>&nbsp;';
+            $resultat .= '<a href="index'
+                    . '-' . self::$idFtaEtat
+                    . '-' . self::$abrevationFtaEtat
+                    . '-' . self::$idFtaRole
+                    . '-' . self::$syntheseAction
+                    . '-' . ($numero_page_courante + 1) . '.html " title="Consulter la page ' . ($numero_page_courante + 1) . ' !">&raquo;</a>&nbsp;';
         }
 
 // derniere page     
         if ($derniere && ($numero_page_courante + $apres) < $nb_pages) {
-            $resultat .= '<a href="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES) . '?numeroPage=' . $nb_pages
-                    . '&id_fta_etat=' . self::$idFtaEtat
-                    . '&nom_fta_etat=' . self::$abrevationFtaEtat
-                    . '&id_fta_role=' . self::$idFtaRole
-                    . '&synthese_action=' . self::$syntheseAction . '" title="Dernière page">&raquo;&raquo;</a>&nbsp;';
+            $resultat .= '<a href="index'
+                    . '-' . self::$idFtaEtat
+                    . '-' . self::$abrevationFtaEtat
+                    . '-' . self::$idFtaRole
+                    . '-' . self::$syntheseAction
+                    . '-' . $nb_pages . '.html" title="Dernière page">&raquo;&raquo;</a>&nbsp;';
         }
 
 // On retourne le resultat

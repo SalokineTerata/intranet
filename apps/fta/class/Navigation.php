@@ -113,13 +113,13 @@ class Navigation {
     ';
         //Corps du menu
         $menu_navigation.='
-                    <a href=historique.php?id_fta=' . self::$id_fta
-                . '&id_fta_chapitre_encours=' . self::$id_fta_chapitre_encours
-                . '&id_fta_etat=' . self::$id_fta_etat
-                . '&abreviation_fta_etat=' . self::$abreviation_etat
-                . '&id_fta_role=' . self::$id_fta_role
-                . '&synthese_action=' . self::$synthese_action
-                . '><img src=./images/graphique.png alt=\'\' title=\'Etat d\'avancement\' width=\'18\' height=\'15\' border=\'0\' /> Etat d\'avancement</a>
+                    <a href=historique-' . self::$id_fta
+                . '-' . self::$id_fta_chapitre_encours
+                . '-' . self::$id_fta_etat
+                . '-' . self::$abreviation_etat
+                . '-' . self::$id_fta_role
+                . '-' . self::$synthese_action
+                . '.html ><img src=./images/graphique.png alt=\'\' title=\'Etat d\'avancement\' width=\'18\' height=\'15\' border=\'0\' /> Etat d\'avancement</a>
                        </td></tr>                       
                        </table>
                        ';

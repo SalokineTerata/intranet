@@ -58,7 +58,7 @@ $idFtaEtat = Lib::getParameterFromRequest(FtaEtatModel::KEYNAME);
 $abreviationFtaEtat = Lib::getParameterFromRequest(FtaEtatModel::FIELDNAME_ABREVIATION);
 $idFtaRole = Lib::getParameterFromRequest(FtaRoleModel::KEYNAME);
 $id_fta_chapitre = $id_fta_chapitre_encours;
-
+$ftaModel =new FtaModel($id_fta);
 /* * ***********
   Début Code PHP
  * *********** */

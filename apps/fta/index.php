@@ -163,7 +163,7 @@ if ($id_user) {
     /**
      * traitement long
      */
-    AccueilFta::initAccueil($id_user, $id_fta_etat, $nomFtaEtat, $synthese_action, $idFtaRoleEncours, $order_common,  $debut);
+    AccueilFta::initAccueil($id_user, $id_fta_etat, $nomFtaEtat, $synthese_action, $idFtaRoleEncours, $order_common,  $debut,$numeroDePageCourante);
 
 
 

@@ -24,6 +24,7 @@ class AccueilFta {
     protected static $ftaModification;
     protected static $ftaConsultation;
     protected static $ftaImpression;
+    protected static $numeroDePageCourante;
 
     /**
      * Initialisation des données de la page d'accueil
@@ -34,7 +35,7 @@ class AccueilFta {
      * @param type $IdFtaRole
      * @param type $OrderBy
      */
-    public static function initAccueil($id_user, $idFtaEtat, $abrevationFtaEtat, $syntheseAction, $IdFtaRole, $OrderBy, $debut) {
+    public static function initAccueil($id_user, $idFtaEtat, $abrevationFtaEtat, $syntheseAction, $IdFtaRole, $OrderBy, $debut, $numeroDePageCourante) {
 
         self::$idUser = $id_user;
         self::$abrevationFtaEtat = $abrevationFtaEtat;
@@ -42,6 +43,7 @@ class AccueilFta {
         self::$idFtaRole = $IdFtaRole;
         self::$idFtaEtat = $idFtaEtat;
         self::$orderBy = $OrderBy;
+        self::$numeroDePageCourante = $numeroDePageCourante;
 
         /*
          * On recherche les roles auxquelles l'utilisateur à les droits d'acces
@@ -121,6 +123,7 @@ class AccueilFta {
                     . '-' . self::$abrevationFtaEtat
                     . '-' . self::$idFtaRole
                     . '-' . self::$syntheseAction
+                    . '&order_common=' . self::$orderBy
                     . '&numeroPage=1.html" title="Première page">&laquo;&laquo;</a>&nbsp;';
         }
 
@@ -131,6 +134,7 @@ class AccueilFta {
                     . '-' . self::$abrevationFtaEtat
                     . '-' . self::$idFtaRole
                     . '-' . self::$syntheseAction
+                    . '&order_common=' . self::$orderBy
                     . '&numeroPage=' . ($numero_page_courante - 1) . '.html" title="Page précédente ' . ($numero_page_courante - 1) . '">&laquo;</a>&nbsp;';
         }
 
@@ -145,6 +149,7 @@ class AccueilFta {
                         . '-' . self::$abrevationFtaEtat
                         . '-' . self::$idFtaRole
                         . '-' . self::$syntheseAction
+                        . '&order_common=' . self::$orderBy
                         . '&numeroPage=' . $i . '.html " title="Consulter la page ' . $i . '">' . $i . '</a>]&nbsp;';
             }
         }
@@ -156,6 +161,7 @@ class AccueilFta {
                     . '-' . self::$abrevationFtaEtat
                     . '-' . self::$idFtaRole
                     . '-' . self::$syntheseAction
+                    . '&order_common=' . self::$orderBy
                     . '&numeroPage=' . ($numero_page_courante + 1) . '.html " title="Consulter la page ' . ($numero_page_courante + 1) . ' !">&raquo;</a>&nbsp;';
         }
 
@@ -166,6 +172,7 @@ class AccueilFta {
                     . '-' . self::$abrevationFtaEtat
                     . '-' . self::$idFtaRole
                     . '-' . self::$syntheseAction
+                    . '&order_common=' . self::$orderBy
                     . '&numeroPage=' . $nb_pages . '.html" title="Dernière page">&raquo;&raquo;</a>&nbsp;';
         }
 
@@ -500,25 +507,25 @@ class AccueilFta {
         if (substr($URL, -2) == 'in') {
             $URL = $URL . 'tranet/apps/fta/index.php?';
         }
-        $tableauFiche .= '<th><a href=' . $URL . '&order_common=Site_de_production.html ><img src=../lib/images/order-AZ.png title=\'Ordonné par Nom de Site de Production\'  border=\'0\' /></a>'
+        $tableauFiche .= '<th><a href=' . $URL . '&order_common=Site_de_production&numeroPage=' . self::$numeroDePageCourante . '.html ><img src=../lib/images/order-AZ.png title=\'Ordonné par Nom de Site de Production\'  border=\'0\' /></a>'
                 . 'Site'
                 . '</th><th>'
-                . '<a href=' . $URL . '&order_common=id_fta.html ><img src=../lib/images/order-AZ.png title=\'Ordonné par Nom du Propriétaire\'  border=\'0\' /></a>'
+                . '<a href=' . $URL . '&order_common=id_fta&numeroPage=' . self::$numeroDePageCourante . '.html ><img src=../lib/images/order-AZ.png title=\'Ordonné par Nom du Propriétaire\'  border=\'0\' /></a>'
                 . 'Client'
                 . '</th><th>'
-                . '<a href=' . $URL . '&order_common=suffixe_agrologic_fta.html ><img src=../lib/images/order-AZ.png title=\'Ordonné par Nom de Classification\'  border=\'0\' /></a>'
+                . '<a href=' . $URL . '&order_common=suffixe_agrologic_fta&numeroPage=' . self::$numeroDePageCourante . '.html ><img src=../lib/images/order-AZ.png title=\'Ordonné par Nom de Classification\'  border=\'0\' /></a>'
                 . 'Class.'
                 . '</th><th>'
-                . '<a href=' . $URL . '&order_common=designation_commerciale_fta.html ><img src=../lib/images/order-AZ.png title=\'Ordonné par Noms du Produit\'  border=\'0\' /></a>'
+                . '<a href=' . $URL . '&order_common=designation_commerciale_fta&numeroPage=' . self::$numeroDePageCourante . '.html ><img src=../lib/images/order-AZ.png title=\'Ordonné par Noms du Produit\'  border=\'0\' /></a>'
                 . 'Produits'
                 . '</th><th>'
-                . '<a href=' . $URL . '&order_common=id_dossier_fta.html ><img src=../lib/images/order-AZ.png title=\'Ordonné par code Fta\'  border=\'0\' /></a>'
+                . '<a href=' . $URL . '&order_common=id_dossier_fta&numeroPage=' . self::$numeroDePageCourante . '.html ><img src=../lib/images/order-AZ.png title=\'Ordonné par code Fta\'  border=\'0\' /></a>'
                 . 'Dossier FTA'
                 . '</th><th>'
-                . '<a href=' . $URL . '&order_common=code_article_ldc.html ><img src=../lib/images/order-AZ.png title=\'Ordonné par code arcadia\'  border=\'0\' /></a>'
+                . '<a href=' . $URL . '&order_common=code_article_ldc&numeroPage=' . self::$numeroDePageCourante . '.html ><img src=../lib/images/order-AZ.png title=\'Ordonné par code arcadia\'  border=\'0\' /></a>'
                 . 'Code Arcadia'
                 . '</th><th>'
-                . '<a href=' . $URL . '&order_common=date_echeance_fta.html ><img src=../lib/images/order-AZ.png title=\'Ordonné par Date\'  border=\'0\' /></a>'
+                . '<a href=' . $URL . '&order_common=date_echeance_fta&numeroPage=' . self::$numeroDePageCourante . '.html ><img src=../lib/images/order-AZ.png title=\'Ordonné par Date\'  border=\'0\' /></a>'
                 . 'Echéance de validation'
                 . '</th><th>'
                 . '% Avancement FTA'

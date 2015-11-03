@@ -119,6 +119,7 @@ class Navigation {
                 . '-' . self::$abreviation_etat
                 . '-' . self::$id_fta_role
                 . '-' . self::$synthese_action
+                . '-1' 
                 . '.html ><img src=./images/graphique.png alt=\'\' title=\'Etat d\'avancement\' width=\'18\' height=\'15\' border=\'0\' /> Etat d\'avancement</a>
                        </td></tr>                       
                        </table>

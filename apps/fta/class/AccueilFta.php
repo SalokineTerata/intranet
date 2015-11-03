@@ -121,7 +121,7 @@ class AccueilFta {
                     . '-' . self::$abrevationFtaEtat
                     . '-' . self::$idFtaRole
                     . '-' . self::$syntheseAction
-                    . '-1.html" title="Première page">&laquo;&laquo;</a>&nbsp;';
+                    . '&numeroPage=1.html" title="Première page">&laquo;&laquo;</a>&nbsp;';
         }
 
 // page precedente
@@ -131,7 +131,7 @@ class AccueilFta {
                     . '-' . self::$abrevationFtaEtat
                     . '-' . self::$idFtaRole
                     . '-' . self::$syntheseAction
-                    . '-' . ($numero_page_courante - 1) . '.html" title="Page précédente ' . ($numero_page_courante - 1) . '">&laquo;</a>&nbsp;';
+                    . '&numeroPage=' . ($numero_page_courante - 1) . '.html" title="Page précédente ' . ($numero_page_courante - 1) . '">&laquo;</a>&nbsp;';
         }
 
 // affichage des numeros de page
@@ -145,7 +145,7 @@ class AccueilFta {
                         . '-' . self::$abrevationFtaEtat
                         . '-' . self::$idFtaRole
                         . '-' . self::$syntheseAction
-                        . '-' . $i . '.html " title="Consulter la page ' . $i . '">' . $i . '</a>]&nbsp;';
+                        . '&numeroPage=' . $i . '.html " title="Consulter la page ' . $i . '">' . $i . '</a>]&nbsp;';
             }
         }
 
@@ -156,7 +156,7 @@ class AccueilFta {
                     . '-' . self::$abrevationFtaEtat
                     . '-' . self::$idFtaRole
                     . '-' . self::$syntheseAction
-                    . '-' . ($numero_page_courante + 1) . '.html " title="Consulter la page ' . ($numero_page_courante + 1) . ' !">&raquo;</a>&nbsp;';
+                    . '&numeroPage=' . ($numero_page_courante + 1) . '.html " title="Consulter la page ' . ($numero_page_courante + 1) . ' !">&raquo;</a>&nbsp;';
         }
 
 // derniere page     
@@ -166,7 +166,7 @@ class AccueilFta {
                     . '-' . self::$abrevationFtaEtat
                     . '-' . self::$idFtaRole
                     . '-' . self::$syntheseAction
-                    . '-' . $nb_pages . '.html" title="Dernière page">&raquo;&raquo;</a>&nbsp;';
+                    . '&numeroPage=' . $nb_pages . '.html" title="Dernière page">&raquo;&raquo;</a>&nbsp;';
         }
 
 // On retourne le resultat

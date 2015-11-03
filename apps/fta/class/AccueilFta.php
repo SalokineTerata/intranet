@@ -175,9 +175,9 @@ class AccueilFta {
      */
     private static function getLienByEtatFta($paramAbrevation1, $paramAbrevation2) {
         if ($paramAbrevation1 == 'I' or $paramAbrevation2 == 'P') {
-            $tableau_synthese .= 'encours>';
+            $tableau_synthese .= 'encours.html>';
         } else {
-            $tableau_synthese .= 'all>';
+            $tableau_synthese .= 'all.html>';
         }
         return $tableau_synthese;
     }
@@ -218,40 +218,40 @@ class AccueilFta {
 
         switch ($paramNomEtat) {
             case FtaEtatModel::ETAT_ABREVIATION_VALUE_MODIFICATION:
-                $lien['0'] = '<a href=index.php?id_fta_etat=1'
-                        . '&nom_fta_etat=' . FtaEtatModel::ETAT_ABREVIATION_VALUE_MODIFICATION
-                        . '&id_fta_role=' . $paramIdFtaRole
-                        . '&synthese_action=attente >En attente' . $nombreFta1 . '</a>';
-                $lien['1'] = ' <a href=index.php?id_fta_etat=1'
-                        . '&nom_fta_etat=' . FtaEtatModel::ETAT_ABREVIATION_VALUE_MODIFICATION
-                        . '&id_fta_role=' . $paramIdFtaRole
-                        . '&synthese_action=encours >En cours' . $nombreFta2 . '</a>';
-                $lien['2'] = '<a href=index.php?id_fta_etat=1'
-                        . '&nom_fta_etat=' . FtaEtatModel::ETAT_ABREVIATION_VALUE_MODIFICATION
-                        . '&id_fta_role=' . $paramIdFtaRole
-                        . '&synthese_action=correction >Effectuées' . $nombreFta3 . '</a>';
+                $lien['0'] = '<a href=index-1'
+                        . '-' . FtaEtatModel::ETAT_ABREVIATION_VALUE_MODIFICATION
+                        . '-' . $paramIdFtaRole
+                        . '-attente.html >En attente' . $nombreFta1 . '</a>';
+                $lien['1'] = ' <a href=index-1'
+                        . '-' . FtaEtatModel::ETAT_ABREVIATION_VALUE_MODIFICATION
+                        . '-' . $paramIdFtaRole
+                        . '-encours.html >En cours' . $nombreFta2 . '</a>';
+                $lien['2'] = '<a href=index-1'
+                        . '-' . FtaEtatModel::ETAT_ABREVIATION_VALUE_MODIFICATION
+                        . '-' . $paramIdFtaRole
+                        . '-correction.html >Effectuées' . $nombreFta3 . '</a>';
                 break;
             case FtaEtatModel::ETAT_ABREVIATION_VALUE_VALIDE:
-                $lien['0'] = '<a href=index.php?id_fta_etat=3'
-                        . '&nom_fta_etat=' . FtaEtatModel::ETAT_ABREVIATION_VALUE_VALIDE
-                        . '&id_fta_role=' . $paramIdFtaRole
-                        . '&synthese_action=all >Voir' . $nombreFta4 . '</a>';
+                $lien['0'] = '<a href=index-3'
+                        . '-' . FtaEtatModel::ETAT_ABREVIATION_VALUE_VALIDE
+                        . '-' . $paramIdFtaRole
+                        . '-all.html >Voir' . $nombreFta4 . '</a>';
                 $lien['1'] = '';
                 $lien['2'] = '';
                 break;
             case FtaEtatModel::ETAT_ABREVIATION_VALUE_ARCHIVE:
-                $lien['0'] = '<a href=index.php?id_fta_etat=5'
-                        . '&nom_fta_etat=' . FtaEtatModel::ETAT_ABREVIATION_VALUE_ARCHIVE
-                        . '&id_fta_role=' . $paramIdFtaRole
-                        . '&synthese_action=all >Voir' . $nombreFta4 . '</a>';
+                $lien['0'] = '<a href=index-5'
+                        . '-' . FtaEtatModel::ETAT_ABREVIATION_VALUE_ARCHIVE
+                        . '-' . $paramIdFtaRole
+                        . '-all.html >Voir' . $nombreFta4 . '</a>';
                 $lien['1'] = '';
                 $lien['2'] = '';
                 break;
             case FtaEtatModel::ETAT_ABREVIATION_VALUE_RETIRE:
-                $lien['0'] = '<a href=index.php?id_fta_etat=6'
-                        . '&nom_fta_etat=' . FtaEtatModel::ETAT_ABREVIATION_VALUE_RETIRE
-                        . '&id_fta_role=' . $paramIdFtaRole
-                        . '&synthese_action=all >Voir' . $nombreFta4 . '</a>';
+                $lien['0'] = '<a href=index-6'
+                        . '-' . FtaEtatModel::ETAT_ABREVIATION_VALUE_RETIRE
+                        . '-' . $paramIdFtaRole
+                        . '-all.html >Voir' . $nombreFta4 . '</a>';
                 $lien['1'] = '';
                 $lien['2'] = '';
                 break;
@@ -421,19 +421,19 @@ class AccueilFta {
 
         return '<TR>'
                 . '<td ' . $color . '  id=\'' . $paramArrayRole[$idFieldNomFtaRole][FtaRoleModel::FIELDNAME_NOM_FTA_ROLE] . '\'> '
-                . '<a href=index.php?id_fta_etat=' . $paramArrayEtat['0'][FtaEtatModel::KEYNAME]
-                . '&nom_fta_etat=' . $paramArrayEtat['0'][FtaEtatModel::FIELDNAME_ABREVIATION]
-                . '&id_fta_role=' . $paramArrayRole[$idFieldNomFtaRole][FtaRoleModel::KEYNAME]
-                . '&synthese_action='
+                . '<a href=index-' . $paramArrayEtat['0'][FtaEtatModel::KEYNAME]
+                . '-' . $paramArrayEtat['0'][FtaEtatModel::FIELDNAME_ABREVIATION]
+                . '-' . $paramArrayRole[$idFieldNomFtaRole][FtaRoleModel::KEYNAME]
+                . '-'
                 . AccueilFta::getLienByEtatFta($paramArrayEtat['0'][FtaEtatModel::FIELDNAME_ABREVIATION], $paramArrayEtat ['0'][FtaEtatModel::FIELDNAME_ABREVIATION])
                 . $paramArrayRole[$idFieldNomFtaRole][FtaRoleModel::FIELDNAME_DESCRIPTION_FTA_ROLE]
                 . '</a>'
                 . '</td>'
                 . '<td ' . $color1 . ' id=\'' . $paramArrayEtat[$idKeyNameFtaEtat][FtaEtatModel::FIELDNAME_ABREVIATION] . '\'>  '
-                . '<a href=index.php?id_fta_etat=' . $paramArrayEtat[$idKeyNameFtaEtat][FtaEtatModel::KEYNAME]
-                . '&nom_fta_etat=' . $paramArrayEtat[$idKeyNameFtaEtat][FtaEtatModel::FIELDNAME_ABREVIATION]
-                . '&id_fta_role=' . $idFtaRole
-                . '&synthese_action='
+                . '<a href=index-' . $paramArrayEtat[$idKeyNameFtaEtat][FtaEtatModel::KEYNAME]
+                . '-' . $paramArrayEtat[$idKeyNameFtaEtat][FtaEtatModel::FIELDNAME_ABREVIATION]
+                . '-' . $idFtaRole
+                . '-'
                 . AccueilFta::getLienByEtatFta($paramArrayEtat[$idKeyNameFtaEtat][FtaEtatModel::FIELDNAME_ABREVIATION], $paramArrayEtat [$idKeyNameFtaEtat][FtaEtatModel::FIELDNAME_ABREVIATION])
                 . $paramArrayEtat[$idKeyNameFtaEtat][FtaEtatModel::FIELDNAME_NOM_FTA_ETAT]
                 . '</a>'

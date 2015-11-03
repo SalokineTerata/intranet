@@ -5,7 +5,7 @@ Options +Indexes
 RewriteEngine on
 #Cette regle Marche
 RewriteRule ^modification_fiche-([0-9]+)-(.+)-([0-9]+)-([0-9]+)-(.+)-([0-9]+).html$  modification_fiche.php?id_fta=$1&synthese_action=$2&comeback=$3&id_fta_etat=$4&abreviation_fta_etat=$5&id_fta_role=$6 [L]
-RewriteRule ^modification_fiche-([0-9]+)-(.+)-([0-9]+)-([0-9]+)-(.+)-([0-9]+)-([0-9]+).html$  modification_fiche.php?id_fta=$1&synthese_action=$2&comeback=$3&id_fta_etat=$4&abreviation_fta_etat=$5&id_fta_role=$6&selection_proprietaire1=$7 [L]
+#RewriteRule ^modification_fiche-([0-9]+)-(.+)-([0-9]+)-([0-9]+)-(.+)-([0-9]+)-([0-9]+).html$  modification_fiche.php?id_fta=$1&synthese_action=$2&comeback=$3&id_fta_etat=$4&abreviation_fta_etat=$5&id_fta_role=$6&selection_proprietaire1=$7 [L]
 RewriteRule ^modification_fiche-([0-9]+)-([0-9]+)-(.+)-([0-9]+)-(.+)-([0-9]+)-([0-9]+).html$  modification_fiche.php?id_fta=$1&id_fta_chapitre_encours=$2&synthese_action=$3&id_fta_etat=$4&abreviation_fta_etat=$5&comeback=$6&id_fta_role=$7 [L]
 
 #http://cod-intranet.agis.fr/v3/apps/fta/modification_fiche-10924-encours-1-1-I-6.html

@@ -1808,7 +1808,7 @@ class Chapitre {
          * Classification
          *
          */
-        $bloc.=$ftaView->ListeClassification($id_fta, $isEditable);
+        $bloc.=$ftaView->ListeClassification($isEditable);
         /*
          * Deviendra une liste deroulante dépendante des donné choisie dans la classification
          */

@@ -531,7 +531,7 @@ class Navigation {
             if ($num == 0 and self::$synthese_action === 'attente') {
                 
             } else {
-                $menu_navigation .= '<a href=' . $page_default . '.php?'
+                $menu_navigation .= '<a href=' . $page_default 
 //                $menu_navigation .= '<a href=\'#\''
 //                        . ' onClick=\'navigation_' . $id_fta_chapitre . '();\''
                         . '-' . self::$id_fta

@@ -86,7 +86,7 @@ class UserModel extends AbstractModel {
 //                            . '=' . ClassificationFta2Model::TABLENAME . '.' . ClassificationFta2Model::KEYNAME                            
                             . ' ORDER BY ' . $paramOrderBy
                             . ',' . FtaModel::TABLENAME . '.' . FtaModel::FIELDNAME_WORKFLOW
-                            . ',' . UserModel::FIELDNAME_PRENOM . ' ASC'
+                            . ',' . UserModel::FIELDNAME_PRENOM . ' ASC' . ',' . UserModel::FIELDNAME_NOM . ' ASC'
                             . ',' . FtaModel::FIELDNAME_DATE_ECHEANCE_FTA
                             . ' LIMIT ' . ModuleConfig::VALUE_MAX_PAR_PAGE . ' OFFSET ' . $paramDebut
             );

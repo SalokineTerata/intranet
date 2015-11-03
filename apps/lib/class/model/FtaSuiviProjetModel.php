@@ -621,7 +621,7 @@ class FtaSuiviProjetModel extends AbstractModel {
                             'SELECT DISTINCT ' . FtaProcessusCycleModel::FIELDNAME_PROCESSUS_INIT
                             . ' FROM ' . FtaProcessusCycleModel::TABLENAME . ', ' . FtaEtatModel::TABLENAME
                             . ' WHERE ' . FtaProcessusCycleModel::FIELDNAME_FTA_ETAT . '=' . FtaEtatModel::FIELDNAME_ABREVIATION
-                            . '\' AND ' . FtaProcessusCycleModel::FIELDNAME_WORKFLOW . '=' . $paramFtaModel->getDataField(FtaModel::FIELDNAME_WORKFLOW)->getFieldValue()
+                            . ' AND ' . FtaProcessusCycleModel::FIELDNAME_WORKFLOW . '=' . $paramFtaModel->getDataField(FtaModel::FIELDNAME_WORKFLOW)->getFieldValue()
                             . ' AND ' . FtaEtatModel::KEYNAME . '=\'' . $idFtaEtat . '\''
             );
             foreach ($arrayCycle as $rowsCycle) {

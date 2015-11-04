@@ -66,7 +66,11 @@ switch ($action) {
     case '':
 
         //Redirection
-        header('Location: index.html');
+        header('Location: index.php');
+        /**
+         * Version avec le module rewrite
+         */
+//        header('Location: index.html');
 
         break;
 
@@ -424,7 +428,11 @@ switch ($action) {
 
 //if(!$erreur and !$noredirection) header ('Location: modification_fiche.php?id_fta=$id_fta&id_fta_chapitre_encours=$id_fta_chapitre_encours&synthese_action=$synthese_action');
 if (!$erreur) {
-    header('Location: modification_fiche-' . $paramIdFta . '-' . $paramIdFtaChapitreEncours . '-' . $paramSyntheseAction . '-' . $idFtaEtat . '-' . $abreviationFtaEtat . '-' . $comeback . '-' . $idFtaRole . '.html');
+    header('Location: modification_fiche.php?id_fta=' . $paramIdFta . '&id_fta_chapitre_encours=' . $paramIdFtaChapitreEncours . '&synthese_action=' . $paramSyntheseAction . '&comeback=' . $comeback . '&id_fta_etat=' . $idFtaEtat . '&abreviation_fta_etat=' . $abreviationFtaEtat . '&id_fta_role=' . $idFtaRole);
+   /**
+     * Version avec le module rewrite
+     */
+//    header('Location: modification_fiche-' . $paramIdFta . '-' . $paramIdFtaChapitreEncours . '-' . $paramSyntheseAction . '-' . $idFtaEtat . '-' . $abreviationFtaEtat . '-' . $comeback . '-' . $idFtaRole . '.html');
 }
 //include ('./action_bs.php');
 //include ('./action_sm.php');

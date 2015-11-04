@@ -219,6 +219,7 @@ require_once('../lib/class/html/DataFieldToHtmlInputText.php');
 require_once('../lib/class/html/DataFieldToHtmlListSelect.php');
 require_once('../lib/class/html/DataFieldToHtmlListBoolean.php');
 require_once('../lib/class/html/DataFieldToHtmlInputCalendar.php');
+require_once('../lib/class/html/DataFieldToHtmlInputNumber.php');
 require_once('../lib/class/html/DataFieldToHtmlTextArea.php');
 require_once('../lib/class/html/DataFieldToHtmlSubForm_R1N.php');
 require_once('../lib/class/html/DataFieldToHtmlSubForm_RNN.php');

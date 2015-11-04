@@ -118,24 +118,45 @@ class AccueilFta {
 
 // premiere page
         if ($premiere && $numero_page_courante - $avant > 1) {
-            $resultat .= '<a href="index'
-                    . '-' . self::$idFtaEtat
-                    . '-' . self::$abrevationFtaEtat
-                    . '-' . self::$idFtaRole
-                    . '-' . self::$syntheseAction
+            $resultat .= '<a href="' . htmlspecialchars($_SERVER['PHP_SELF']) . '?numeroPage=1'
+                    . '&id_fta_etat=' . self::$idFtaEtat
+                    . '&nom_fta_etat=' . self::$abrevationFtaEtat
+                    . '&id_fta_role=' . self::$idFtaRole
+                    . '&synthese_action=' . self::$syntheseAction
                     . '&order_common=' . self::$orderBy
-                    . '&numeroPage=1.html" title="Première page">&laquo;&laquo;</a>&nbsp;';
+                    . '" title="Première page">&laquo;&laquo;</a>&nbsp;';
+
+            /**
+             * Version avec le rewrite
+             */
+//            $resultat .= '<a href="index'
+//                    . '-' . self::$idFtaEtat
+//                    . '-' . self::$abrevationFtaEtat
+//                    . '-' . self::$idFtaRole
+//                    . '-' . self::$syntheseAction
+//                    . '&order_common=' . self::$orderBy
+//                    . '&numeroPage=1.html" title="Première page">&laquo;&laquo;</a>&nbsp;';
         }
 
 // page precedente
         if ($numero_page_courante > 1) {
-            $resultat .= '<a href="index'
-                    . '-' . self::$idFtaEtat
-                    . '-' . self::$abrevationFtaEtat
-                    . '-' . self::$idFtaRole
-                    . '-' . self::$syntheseAction
+            $resultat .= '<a href="' . htmlspecialchars($_SERVER['PHP_SELF']) . '?numeroPage=' . ($numero_page_courante - 1)
+                    . '&id_fta_etat=' . self::$idFtaEtat
+                    . '&nom_fta_etat=' . self::$abrevationFtaEtat
+                    . '&id_fta_role=' . self::$idFtaRole
+                    . '&synthese_action=' . self::$syntheseAction
                     . '&order_common=' . self::$orderBy
-                    . '&numeroPage=' . ($numero_page_courante - 1) . '.html" title="Page précédente ' . ($numero_page_courante - 1) . '">&laquo;</a>&nbsp;';
+                    . '" title="Page précédente ' . ($numero_page_courante - 1) . '">&laquo;</a>&nbsp;';
+            /**
+             * Version avec le rewrite
+             */
+//            $resultat .= '<a href="index'
+//                    . '-' . self::$idFtaEtat
+//                    . '-' . self::$abrevationFtaEtat
+//                    . '-' . self::$idFtaRole
+//                    . '-' . self::$syntheseAction
+//                    . '&order_common=' . self::$orderBy
+//                    . '&numeroPage=' . ($numero_page_courante - 1) . '.html" title="Page précédente ' . ($numero_page_courante - 1) . '">&laquo;</a>&nbsp;';
         }
 
 // affichage des numeros de page
@@ -144,36 +165,65 @@ class AccueilFta {
             if ($i == $numero_page_courante) {
                 $resultat .= '&nbsp;[<strong>' . $i . '</strong>]&nbsp;';
             } else {
-                $resultat .= '&nbsp;[<a href="index'
-                        . '-' . self::$idFtaEtat
-                        . '-' . self::$abrevationFtaEtat
-                        . '-' . self::$idFtaRole
-                        . '-' . self::$syntheseAction
+                $resultat .= '&nbsp;[<a href="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES) . '?numeroPage=' . $i
+                        . '&id_fta_etat=' . self::$idFtaEtat
+                        . '&nom_fta_etat=' . self::$abrevationFtaEtat
+                        . '&id_fta_role=' . self::$idFtaRole
+                        . '&synthese_action=' . self::$syntheseAction
                         . '&order_common=' . self::$orderBy
-                        . '&numeroPage=' . $i . '.html " title="Consulter la page ' . $i . '">' . $i . '</a>]&nbsp;';
+                        . '" title="Consulter la page ' . $i . '">' . $i . '</a>]&nbsp;';
+                /**
+                 * Version avec le rewrite
+                 */
+//                $resultat .= '&nbsp;[<a href="index'
+//                        . '-' . self::$idFtaEtat
+//                        . '-' . self::$abrevationFtaEtat
+//                        . '-' . self::$idFtaRole
+//                        . '-' . self::$syntheseAction
+//                        . '&order_common=' . self::$orderBy
+//                        . '&numeroPage=' . $i . '.html " title="Consulter la page ' . $i . '">' . $i . '</a>]&nbsp;';
             }
         }
 
 // page suivante
         if ($numero_page_courante < $nb_pages) {
-            $resultat .= '<a href="index'
-                    . '-' . self::$idFtaEtat
-                    . '-' . self::$abrevationFtaEtat
-                    . '-' . self::$idFtaRole
-                    . '-' . self::$syntheseAction
+            $resultat .= '<a href="' . htmlspecialchars($_SERVER['PHP_SELF']) . '?numeroPage=' . ($numero_page_courante + 1) . '&id_fta_etat=' . self::$idFtaEtat
+                    . '&nom_fta_etat=' . self::$abrevationFtaEtat
+                    . '&id_fta_role=' . self::$idFtaRole
+                    . '&synthese_action=' . self::$syntheseAction
                     . '&order_common=' . self::$orderBy
-                    . '&numeroPage=' . ($numero_page_courante + 1) . '.html " title="Consulter la page ' . ($numero_page_courante + 1) . ' !">&raquo;</a>&nbsp;';
+                    . '" title="Consulter la page ' . ($numero_page_courante + 1) . ' !">&raquo;</a>&nbsp;';
+            /**
+             * Version avec le rewrite
+             */
+//            $resultat .= '<a href="index'
+//                    . '-' . self::$idFtaEtat
+//                    . '-' . self::$abrevationFtaEtat
+//                    . '-' . self::$idFtaRole
+//                    . '-' . self::$syntheseAction
+//                    . '&order_common=' . self::$orderBy
+//                    . '&numeroPage=' . ($numero_page_courante + 1) . '.html " title="Consulter la page ' . ($numero_page_courante + 1) . ' !">&raquo;</a>&nbsp;';
         }
 
 // derniere page     
         if ($derniere && ($numero_page_courante + $apres) < $nb_pages) {
-            $resultat .= '<a href="index'
-                    . '-' . self::$idFtaEtat
-                    . '-' . self::$abrevationFtaEtat
-                    . '-' . self::$idFtaRole
-                    . '-' . self::$syntheseAction
+            $resultat .= '<a href="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES) . '?numeroPage=' . $nb_pages
+                    . '&id_fta_etat=' . self::$idFtaEtat
+                    . '&nom_fta_etat=' . self::$abrevationFtaEtat
+                    . '&id_fta_role=' . self::$idFtaRole
+                    . '&synthese_action=' . self::$syntheseAction
                     . '&order_common=' . self::$orderBy
-                    . '&numeroPage=' . $nb_pages . '.html" title="Dernière page">&raquo;&raquo;</a>&nbsp;';
+                    . '" title="Dernière page">&raquo;&raquo;</a>&nbsp;';
+            /**
+             * Version avec le rewrite
+             */
+//            $resultat .= '<a href="index'
+//                    . '-' . self::$idFtaEtat
+//                    . '-' . self::$abrevationFtaEtat
+//                    . '-' . self::$idFtaRole
+//                    . '-' . self::$syntheseAction
+//                    . '&order_common=' . self::$orderBy
+//                    . '&numeroPage=' . $nb_pages . '.html" title="Dernière page">&raquo;&raquo;</a>&nbsp;';
         }
 
 // On retourne le resultat
@@ -188,10 +238,18 @@ class AccueilFta {
      */
     private static function getLienByEtatFta($paramAbrevation1, $paramAbrevation2) {
         if ($paramAbrevation1 == 'I' or $paramAbrevation2 == 'P') {
-            $tableau_synthese .= 'encours.html>';
+            $tableau_synthese .= 'encours>';
         } else {
-            $tableau_synthese .= 'all.html>';
+            $tableau_synthese .= 'all>';
         }
+        /**
+         * Version avec le rewrite
+         */
+//        if ($paramAbrevation1 == 'I' or $paramAbrevation2 == 'P') {
+//            $tableau_synthese .= 'encours.html>';
+//        } else {
+//            $tableau_synthese .= 'all.html>';
+//        }
         return $tableau_synthese;
     }
 
@@ -231,44 +289,87 @@ class AccueilFta {
 
         switch ($paramNomEtat) {
             case FtaEtatModel::ETAT_ABREVIATION_VALUE_MODIFICATION:
-                $lien['0'] = '<a href=index-1'
-                        . '-' . FtaEtatModel::ETAT_ABREVIATION_VALUE_MODIFICATION
-                        . '-' . $paramIdFtaRole
-                        . '-attente.html >En attente' . $nombreFta1 . '</a>';
-                $lien['1'] = ' <a href=index-1'
-                        . '-' . FtaEtatModel::ETAT_ABREVIATION_VALUE_MODIFICATION
-                        . '-' . $paramIdFtaRole
-                        . '-encours.html >En cours' . $nombreFta2 . '</a>';
-                $lien['2'] = '<a href=index-1'
-                        . '-' . FtaEtatModel::ETAT_ABREVIATION_VALUE_MODIFICATION
-                        . '-' . $paramIdFtaRole
-                        . '-correction.html >Effectuées' . $nombreFta3 . '</a>';
+                $lien['0'] = '<a href=index.php?id_fta_etat=1'
+                        . '&nom_fta_etat=' . FtaEtatModel::ETAT_ABREVIATION_VALUE_MODIFICATION
+                        . '&id_fta_role=' . $paramIdFtaRole
+                        . '&synthese_action=attente >En attente' . $nombreFta1 . '</a>';
+                $lien['1'] = ' <a href=index.php?id_fta_etat=1'
+                        . '&nom_fta_etat=' . FtaEtatModel::ETAT_ABREVIATION_VALUE_MODIFICATION
+                        . '&id_fta_role=' . $paramIdFtaRole
+                        . '&synthese_action=encours >En cours' . $nombreFta2 . '</a>';
+                $lien['2'] = '<a href=index.php?id_fta_etat=1'
+                        . '&nom_fta_etat=' . FtaEtatModel::ETAT_ABREVIATION_VALUE_MODIFICATION
+                        . '&id_fta_role=' . $paramIdFtaRole
+                        . '&synthese_action=correction >Effectuées' . $nombreFta3 . '</a>';
                 break;
             case FtaEtatModel::ETAT_ABREVIATION_VALUE_VALIDE:
-                $lien['0'] = '<a href=index-3'
-                        . '-' . FtaEtatModel::ETAT_ABREVIATION_VALUE_VALIDE
-                        . '-' . $paramIdFtaRole
-                        . '-all.html >Voir' . $nombreFta4 . '</a>';
+                $lien['0'] = '<a href=index.php?id_fta_etat=3'
+                        . '&nom_fta_etat=' . FtaEtatModel::ETAT_ABREVIATION_VALUE_VALIDE
+                        . '&id_fta_role=' . $paramIdFtaRole
+                        . '&synthese_action=all >Voir' . $nombreFta4 . '</a>';
                 $lien['1'] = '';
                 $lien['2'] = '';
                 break;
             case FtaEtatModel::ETAT_ABREVIATION_VALUE_ARCHIVE:
-                $lien['0'] = '<a href=index-5'
-                        . '-' . FtaEtatModel::ETAT_ABREVIATION_VALUE_ARCHIVE
-                        . '-' . $paramIdFtaRole
-                        . '-all.html >Voir' . $nombreFta4 . '</a>';
+                $lien['0'] = '<a href=index.php?id_fta_etat=5'
+                        . '&nom_fta_etat=' . FtaEtatModel::ETAT_ABREVIATION_VALUE_ARCHIVE
+                        . '&id_fta_role=' . $paramIdFtaRole
+                        . '&synthese_action=all >Voir' . $nombreFta4 . '</a>';
                 $lien['1'] = '';
                 $lien['2'] = '';
                 break;
             case FtaEtatModel::ETAT_ABREVIATION_VALUE_RETIRE:
-                $lien['0'] = '<a href=index-6'
-                        . '-' . FtaEtatModel::ETAT_ABREVIATION_VALUE_RETIRE
-                        . '-' . $paramIdFtaRole
-                        . '-all.html >Voir' . $nombreFta4 . '</a>';
+                $lien['0'] = '<a href=index.php?id_fta_etat=6'
+                        . '&nom_fta_etat=' . FtaEtatModel::ETAT_ABREVIATION_VALUE_RETIRE
+                        . '&id_fta_role=' . $paramIdFtaRole
+                        . '&synthese_action=all >Voir' . $nombreFta4 . '</a>';
                 $lien['1'] = '';
                 $lien['2'] = '';
                 break;
         }
+        /**
+         * Version avec le rewrite
+         */
+//        switch ($paramNomEtat) {
+//            case FtaEtatModel::ETAT_ABREVIATION_VALUE_MODIFICATION:
+//                $lien['0'] = '<a href=index-1'
+//                        . '-' . FtaEtatModel::ETAT_ABREVIATION_VALUE_MODIFICATION
+//                        . '-' . $paramIdFtaRole
+//                        . '-attente.html >En attente' . $nombreFta1 . '</a>';
+//                $lien['1'] = ' <a href=index-1'
+//                        . '-' . FtaEtatModel::ETAT_ABREVIATION_VALUE_MODIFICATION
+//                        . '-' . $paramIdFtaRole
+//                        . '-encours.html >En cours' . $nombreFta2 . '</a>';
+//                $lien['2'] = '<a href=index-1'
+//                        . '-' . FtaEtatModel::ETAT_ABREVIATION_VALUE_MODIFICATION
+//                        . '-' . $paramIdFtaRole
+//                        . '-correction.html >Effectuées' . $nombreFta3 . '</a>';
+//                break;
+//            case FtaEtatModel::ETAT_ABREVIATION_VALUE_VALIDE:
+//                $lien['0'] = '<a href=index-3'
+//                        . '-' . FtaEtatModel::ETAT_ABREVIATION_VALUE_VALIDE
+//                        . '-' . $paramIdFtaRole
+//                        . '-all.html >Voir' . $nombreFta4 . '</a>';
+//                $lien['1'] = '';
+//                $lien['2'] = '';
+//                break;
+//            case FtaEtatModel::ETAT_ABREVIATION_VALUE_ARCHIVE:
+//                $lien['0'] = '<a href=index-5'
+//                        . '-' . FtaEtatModel::ETAT_ABREVIATION_VALUE_ARCHIVE
+//                        . '-' . $paramIdFtaRole
+//                        . '-all.html >Voir' . $nombreFta4 . '</a>';
+//                $lien['1'] = '';
+//                $lien['2'] = '';
+//                break;
+//            case FtaEtatModel::ETAT_ABREVIATION_VALUE_RETIRE:
+//                $lien['0'] = '<a href=index-6'
+//                        . '-' . FtaEtatModel::ETAT_ABREVIATION_VALUE_RETIRE
+//                        . '-' . $paramIdFtaRole
+//                        . '-all.html >Voir' . $nombreFta4 . '</a>';
+//                $lien['1'] = '';
+//                $lien['2'] = '';
+//                break;
+//        }
 
 
 
@@ -434,19 +535,19 @@ class AccueilFta {
 
         return '<TR>'
                 . '<td ' . $color . '  id=\'' . $paramArrayRole[$idFieldNomFtaRole][FtaRoleModel::FIELDNAME_NOM_FTA_ROLE] . '\'> '
-                . '<a href=index-' . $paramArrayEtat['0'][FtaEtatModel::KEYNAME]
-                . '-' . $paramArrayEtat['0'][FtaEtatModel::FIELDNAME_ABREVIATION]
-                . '-' . $paramArrayRole[$idFieldNomFtaRole][FtaRoleModel::KEYNAME]
-                . '-'
+                . '<a href=index.php?id_fta_etat=' . $paramArrayEtat['0'][FtaEtatModel::KEYNAME]
+                . '&nom_fta_etat=' . $paramArrayEtat['0'][FtaEtatModel::FIELDNAME_ABREVIATION]
+                . '&id_fta_role=' . $paramArrayRole[$idFieldNomFtaRole][FtaRoleModel::KEYNAME]
+                . '&synthese_action='
                 . AccueilFta::getLienByEtatFta($paramArrayEtat['0'][FtaEtatModel::FIELDNAME_ABREVIATION], $paramArrayEtat ['0'][FtaEtatModel::FIELDNAME_ABREVIATION])
                 . $paramArrayRole[$idFieldNomFtaRole][FtaRoleModel::FIELDNAME_DESCRIPTION_FTA_ROLE]
                 . '</a>'
                 . '</td>'
                 . '<td ' . $color1 . ' id=\'' . $paramArrayEtat[$idKeyNameFtaEtat][FtaEtatModel::FIELDNAME_ABREVIATION] . '\'>  '
-                . '<a href=index-' . $paramArrayEtat[$idKeyNameFtaEtat][FtaEtatModel::KEYNAME]
-                . '-' . $paramArrayEtat[$idKeyNameFtaEtat][FtaEtatModel::FIELDNAME_ABREVIATION]
-                . '-' . $idFtaRole
-                . '-'
+                . '<a href=index.php?id_fta_etat=' . $paramArrayEtat[$idKeyNameFtaEtat][FtaEtatModel::KEYNAME]
+                . '&nom_fta_etat=' . $paramArrayEtat[$idKeyNameFtaEtat][FtaEtatModel::FIELDNAME_ABREVIATION]
+                . '&id_fta_role=' . $idFtaRole
+                . '&synthese_action='
                 . AccueilFta::getLienByEtatFta($paramArrayEtat[$idKeyNameFtaEtat][FtaEtatModel::FIELDNAME_ABREVIATION], $paramArrayEtat [$idKeyNameFtaEtat][FtaEtatModel::FIELDNAME_ABREVIATION])
                 . $paramArrayEtat[$idKeyNameFtaEtat][FtaEtatModel::FIELDNAME_NOM_FTA_ETAT]
                 . '</a>'
@@ -455,6 +556,32 @@ class AccueilFta {
                 . '</td>'
                 . '</TR>'
         ;
+        /**
+         * Version avec le module rewrite
+         */
+//        return '<TR>'
+//                . '<td ' . $color . '  id=\'' . $paramArrayRole[$idFieldNomFtaRole][FtaRoleModel::FIELDNAME_NOM_FTA_ROLE] . '\'> '
+//                . '<a href=index-' . $paramArrayEtat['0'][FtaEtatModel::KEYNAME]
+//                . '-' . $paramArrayEtat['0'][FtaEtatModel::FIELDNAME_ABREVIATION]
+//                . '-' . $paramArrayRole[$idFieldNomFtaRole][FtaRoleModel::KEYNAME]
+//                . '-'
+//                . AccueilFta::getLienByEtatFta($paramArrayEtat['0'][FtaEtatModel::FIELDNAME_ABREVIATION], $paramArrayEtat ['0'][FtaEtatModel::FIELDNAME_ABREVIATION])
+//                . $paramArrayRole[$idFieldNomFtaRole][FtaRoleModel::FIELDNAME_DESCRIPTION_FTA_ROLE]
+//                . '</a>'
+//                . '</td>'
+//                . '<td ' . $color1 . ' id=\'' . $paramArrayEtat[$idKeyNameFtaEtat][FtaEtatModel::FIELDNAME_ABREVIATION] . '\'>  '
+//                . '<a href=index-' . $paramArrayEtat[$idKeyNameFtaEtat][FtaEtatModel::KEYNAME]
+//                . '-' . $paramArrayEtat[$idKeyNameFtaEtat][FtaEtatModel::FIELDNAME_ABREVIATION]
+//                . '-' . $idFtaRole
+//                . '-'
+//                . AccueilFta::getLienByEtatFta($paramArrayEtat[$idKeyNameFtaEtat][FtaEtatModel::FIELDNAME_ABREVIATION], $paramArrayEtat [$idKeyNameFtaEtat][FtaEtatModel::FIELDNAME_ABREVIATION])
+//                . $paramArrayEtat[$idKeyNameFtaEtat][FtaEtatModel::FIELDNAME_NOM_FTA_ETAT]
+//                . '</a>'
+//                . '</td>'
+//                . '<td ' . $color2 . ' >' . $lien[$idKeyValueFtaEtatAvancement]
+//                . '</td>'
+//                . '</TR>'
+//        ;
     }
 
     /**
@@ -536,6 +663,38 @@ class AccueilFta {
                 . '</th><th>'
                 . 'Commentaires'
                 . '</th>';
+        /**
+         * Version avec le module rewrite
+         */
+//        $tableauFiche .= '<th><a href=' . $URL . '&order_common=Site_de_production&numeroPage=' . self::$numeroDePageCourante . '.html ><img src=../lib/images/order-AZ.png title=\'Ordonné par Nom de Site de Production\'  border=\'0\' /></a>'
+//                . 'Site'
+//                . '</th><th>'
+//                . '<a href=' . $URL . '&order_common=id_fta&numeroPage=' . self::$numeroDePageCourante . '.html ><img src=../lib/images/order-AZ.png title=\'Ordonné par Nom du Propriétaire\'  border=\'0\' /></a>'
+//                . 'Client'
+//                . '</th><th>'
+//                . '<a href=' . $URL . '&order_common=suffixe_agrologic_fta&numeroPage=' . self::$numeroDePageCourante . '.html ><img src=../lib/images/order-AZ.png title=\'Ordonné par Nom de Classification\'  border=\'0\' /></a>'
+//                . 'Class.'
+//                . '</th><th>'
+//                . '<a href=' . $URL . '&order_common=designation_commerciale_fta&numeroPage=' . self::$numeroDePageCourante . '.html ><img src=../lib/images/order-AZ.png title=\'Ordonné par Noms du Produit\'  border=\'0\' /></a>'
+//                . 'Produits'
+//                . '</th><th>'
+//                . '<a href=' . $URL . '&order_common=id_dossier_fta&numeroPage=' . self::$numeroDePageCourante . '.html ><img src=../lib/images/order-AZ.png title=\'Ordonné par code Fta\'  border=\'0\' /></a>'
+//                . 'Dossier FTA'
+//                . '</th><th>'
+//                . '<a href=' . $URL . '&order_common=code_article_ldc&numeroPage=' . self::$numeroDePageCourante . '.html ><img src=../lib/images/order-AZ.png title=\'Ordonné par code arcadia\'  border=\'0\' /></a>'
+//                . 'Code Arcadia'
+//                . '</th><th>'
+//                . '<a href=' . $URL . '&order_common=date_echeance_fta&numeroPage=' . self::$numeroDePageCourante . '.html ><img src=../lib/images/order-AZ.png title=\'Ordonné par Date\'  border=\'0\' /></a>'
+//                . 'Echéance de validation'
+//                . '</th><th>'
+//                . '% Avancement FTA'
+//                . '</th><th>'
+//                . 'Service'
+//                . '</th><th>'
+//                . 'Actions'
+//                . '</th><th>'
+//                . 'Commentaires'
+//                . '</th>';
 
         $tmp = null;
 
@@ -567,6 +726,9 @@ class AccueilFta {
                 $nomSiteProduction = $rowsDetail[GeoModel::FIELDNAME_GEO];
                 $idWorkflowFtaEncours = $rowsDetail[FtaModel::FIELDNAME_WORKFLOW];
                 $idclassification = $rowsDetail[FtaModel::FIELDNAME_ID_FTA_CLASSIFICATION2];
+                $recap[$idFta] = $rowsDetail[FtaModel::FIELDNAME_POURCENTAGE_AVANCEMENT];
+                $listeIdFtaRole = $rowsDetail[FtaModel::FIELDNAME_LISTE_ID_FTA_ROLE];
+
 
                 /**
                  * Liste des processus pouvant être validé
@@ -626,12 +788,12 @@ class AccueilFta {
 
 
 
-                /*
-                 * Calcul d'etat d'avancement
-                 */
-
-                $taux_temp = FtaSuiviProjetModel::getFtaTauxValidation($ftaModel, FALSE);
-                $recap[$idFta] = round($taux_temp['0'] * '100', '0') . '%';
+//                /*
+//                 * Calcul d'etat d'avancement
+//                 */
+//
+//                $taux_temp = FtaSuiviProjetModel::getFtaTauxValidation($ftaModel, FALSE);
+//                $recap[$idFta] = round($taux_temp['0'] * '100', '0') . '%';
 
                 /*
                  * Definition de la couleur de la cellule selon l'état d'avancement
@@ -684,20 +846,39 @@ class AccueilFta {
                 if (
                         (self::$ftaModification)
                         or ( self::$ftaConsultation and self::$abrevationFtaEtat == FtaEtatModel::ETAT_ABREVIATION_VALUE_VALIDE )
-                )
-                    $actions .= '<a '
+                ) {
+
+                    $actions = '<a '
 //                            . 'href=#'
-                            . 'href=modification_fiche'
-                            . '-' . $idFta
-                            . '-' . self::$syntheseAction
-                            . '-1'
-                            . '-' . self::$idFtaEtat
-                            . '-' . self::$abrevationFtaEtat
-                            . '-' . self::$idFtaRole
-//                            . ' onClick=\'modification_fiche_' . $idFta . '();\' '
-                            . '.html /><img src=../lib/images/next.png alt=\'\' title=\'Voir la FTA\' width=\'30\' height=\'25\' border=\'0\' />'
+                            . 'href=modification_fiche.php'
+                            . '?id_fta=' . $idFta
+                            . '&synthese_action=' . self::$syntheseAction
+                            . '&comeback=1'
+                            . '&id_fta_etat=' . self::$idFtaEtat
+                            . '&abreviation_fta_etat=' . self::$abrevationFtaEtat
+                            . '&id_fta_role=' . self::$idFtaRole
+                            . ' /><img src=../lib/images/next.png alt=\'\' title=\'Voir la FTA\' width=\'30\' height=\'25\' border=\'0\' />'
                             . '</a>'
                     ;
+                    /**
+                     * Version avec le module rewrite
+                     */
+//                    $actions .= '<a '
+////                            . 'href=#'
+//                            . 'href=modification_fiche'
+//                            . '-' . $idFta
+//                            . '-' . self::$syntheseAction
+//                            . '-1'
+//                            . '-' . self::$idFtaEtat
+//                            . '-' . self::$abrevationFtaEtat
+//                            . '-' . self::$idFtaRole
+////                            . ' onClick=\'modification_fiche_' . $idFta . '();\' '
+//                            . '.html /><img src=../lib/images/next.png alt=\'\' title=\'Voir la FTA\' width=\'30\' height=\'25\' border=\'0\' />'
+//                            . '</a>'
+                    ;
+                    /**
+                     * Version avec la méthode Post
+                     */
 //                $actions .= '                    
 //                     <form name=\'modification_fiche_' . $idFta . '\'  method=\'post\' action=\'modification_fiche.php\' >
 //                        <input type=hidden name=id_fta_role_' . $idFta . ' id=id_fta_role_' . $idFta . ' >
@@ -726,7 +907,7 @@ class AccueilFta {
 //                                        form.submit();                                 
 //                                    }
 //                                </SCRIPT>';
-
+                }
                 /*
                  * Export PDF
                  */
@@ -813,7 +994,8 @@ class AccueilFta {
                 /*
                  * Noms des services dans lequel la Fta se trouve
                  */
-                $service = FtaRoleModel::getNameRoleEncoursByIdFta($idFta, $idWorkflowFtaEncours);
+//                $service = FtaRoleModel::getListeIdFtaRoleEncoursByIdFta($idFta, $idWorkflowFtaEncours);
+                $service = FtaRoleModel::getNameServiceEncours($listeIdFtaRole);
 
                 if ($recap[$idFta] <> '100%') {
                     $createurFtaTr = $createurFta;

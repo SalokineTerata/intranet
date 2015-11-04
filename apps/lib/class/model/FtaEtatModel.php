@@ -272,7 +272,7 @@ class FtaEtatModel extends AbstractModel {
                         $cheackIdFta = in_array($rows[FtaModel::KEYNAME], $idFtaEffectue);
                         if (!$cheackIdFta) {
                             $tauxDeValidadation = FtaProcessusModel::getValideIdFtaByRoleWorkflowProcessus($rows[FtaModel::KEYNAME], $paramRole, $rows[FtaWorkflowStructureModel::FIELDNAME_ID_FTA_WORKFLOW]);
-                            if ($tauxDeValidadation == '1' or $paramRole == '6') {
+                            if ($tauxDeValidadation == '1' ) {
                                 $idFtaEffectue[] = $rows[FtaModel::KEYNAME];
 //                                $compteur++;
 //                                if ($compteur == ModuleConfig::VALUE_MAX_PAR_PAGE) {

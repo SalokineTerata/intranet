@@ -138,10 +138,17 @@ switch ($action) {
         }
 
         //Redirection
-        header('Location: modification_fiche-' . $idFta
-                . '-encours-1-' . $idFtaEtat
-                . '-' . $abreviationFtaEtat
-                . '-' . $idFtaRole . '.html');
+          header('Location: modification_fiche.php?id_fta=' . $idFta
+                . '&synthese_action=encours&comeback=1&id_fta_etat=' . $idFtaEtat
+                . '&abreviation_fta_etat=' . $abreviationFtaEtat
+                . '&id_fta_role=' . $idFtaRole);
+        /**
+         * Version avec le module rewrite
+         */
+//        header('Location: modification_fiche-' . $idFta
+//                . '-encours-1-' . $idFtaEtat
+//                . '-' . $abreviationFtaEtat
+//                . '-' . $idFtaRole . '.html');
 
         break;
 

@@ -15,10 +15,10 @@ body {
     font-size: 8px;
     color: #000000;
     text-decoration: none;
-        /*background-color: #007cf9*/
-        /*background-color: #00baf9*/
+    /*background-color: #007cf9*/
+    /*background-color: #00baf9*/
     background-color: #009dd1
-    /*background-color: #AAAAFF*/
+        /*background-color: #AAAAFF*/
 }
 
 .tableauFiche.table.td:hover{
@@ -71,7 +71,7 @@ A:hover.link1
 .contenu {
     font-size: 11px;
     /*background-color: #EDEDFF;*/
-     background-color: #aaeaff;
+    background-color: #aaeaff;
     font-style: normal;
     font-weight: normal;
     text-align: left;

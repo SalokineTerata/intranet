@@ -513,7 +513,7 @@ class FtaSuiviProjetModel extends AbstractModel {
 
     public function unsetSigned() {
         //Enlever de la base de données la signature
-        $signatureValidationSuiviProjet = 0;
+        $signatureValidationSuiviProjet = '0';
         $this->getDataField(FtaSuiviProjetModel::FIELDNAME_SIGNATURE_VALIDATION_SUIVI_PROJET)->setFieldValue($signatureValidationSuiviProjet);
         $this->updateAvancement();
     }

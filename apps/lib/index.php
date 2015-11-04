@@ -131,6 +131,10 @@ Sinon, accéder à l\'<a href=index.php> intranet en vous authentifiant ici</a><
 
 //Redirection vers la page par défaut du site
 //header('Location: ../news/rapide.php');
-header('Location: ../fta/index.html');
+header('Location: ../fta/index.php');
+ /**
+    * Version avec le module rewrite
+    */
+//header('Location: ../fta/index.html');
 ?>
 

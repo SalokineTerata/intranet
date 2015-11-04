@@ -96,6 +96,14 @@ class FtaChapitreModel extends AbstractModel {
         ;
         DatabaseOperation::execute($reqDevelidationChapitre);
 
+        /**
+         * Actualisation du pourcentage de validation de la Fta
+         */
+        $idFtaSuiviProjet = FtaSuiviProjetModel::getIdFtaSuiviProjetByIdFtaAndIdChapitre($paramIdFta, $paramIdChapitre);
+        $modelFtaSuiviProjet = new FtaSuiviProjetModel($idFtaSuiviProjet);
+        $modelFtaSuiviProjet->unsetSigned();
+        $modelFtaSuiviProjet->saveToDatabase();
+
         /*
          * Mise à jour de la validation de l'échéance du processus
          * fonction non utilisé

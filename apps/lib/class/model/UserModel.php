@@ -62,6 +62,7 @@ class UserModel extends AbstractModel {
                             . ', ' . FtaModel::FIELDNAME_DOSSIER_FTA . ', ' . FtaModel::FIELDNAME_VERSION_DOSSIER_FTA
                             . ', ' . FtaModel::FIELDNAME_ARTICLE_AGROLOGIC . ', ' . FtaModel::FIELDNAME_CODE_ARTICLE_LDC
                             . ', ' . FtaModel::FIELDNAME_DATE_ECHEANCE_FTA . ', ' . FtaModel::FIELDNAME_CREATEUR
+                            . ', ' . FtaModel::FIELDNAME_POURCENTAGE_AVANCEMENT . ', ' . FtaModel::FIELDNAME_LISTE_ID_FTA_ROLE
 //                            . ', ' . ClassificationArborescenceArticleCategorieContenuModel::FIELDNAME_NOM_CLASSIFICATION_ARBORESCENCE_ARTICLE_CATEGORIE_CONTENU
                             . ', ' . GeoModel::FIELDNAME_GEO . ', ' . FtaModel::TABLENAME . '. ' . FtaModel::FIELDNAME_WORKFLOW
                             . ', ' . FtaModel::FIELDNAME_ID_FTA_CLASSIFICATION2
@@ -100,6 +101,7 @@ class UserModel extends AbstractModel {
                             . ', ' . FtaModel::FIELDNAME_DOSSIER_FTA . ', ' . FtaModel::FIELDNAME_VERSION_DOSSIER_FTA
                             . ', ' . FtaModel::FIELDNAME_ARTICLE_AGROLOGIC . ', ' . FtaModel::FIELDNAME_CODE_ARTICLE_LDC
                             . ', ' . FtaModel::FIELDNAME_DATE_ECHEANCE_FTA . ', ' . FtaModel::FIELDNAME_CREATEUR
+                            . ', ' . FtaModel::FIELDNAME_POURCENTAGE_AVANCEMENT . ', ' . FtaModel::FIELDNAME_LISTE_ID_FTA_ROLE
 //                            . ', ' . ClassificationArborescenceArticleCategorieContenuModel::FIELDNAME_NOM_CLASSIFICATION_ARBORESCENCE_ARTICLE_CATEGORIE_CONTENU
                             . ', ' . GeoModel::FIELDNAME_GEO . ', ' . FtaModel::TABLENAME . '. ' . FtaModel::FIELDNAME_WORKFLOW
                             . ', ' . FtaModel::FIELDNAME_ID_FTA_CLASSIFICATION2

@@ -15,7 +15,7 @@ $globalConfig = new GlobalConfig();
 if ($globalConfig->getAuthenticatedUser()) {
     $id_user = $globalConfig->getAuthenticatedUser()->getKeyValue();
 }
-$fta_modification = Lib::isDefined('fta_modification');
+$fta_modification = AclClass::getValueAccesRights('fta_modification');
 
 $recherche = Lib::getParameterFromRequest("recherche");
 $type_recherche = Lib::getParameterFromRequest("type_recherche");

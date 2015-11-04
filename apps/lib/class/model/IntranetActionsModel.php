@@ -75,10 +75,11 @@ class IntranetActionsModel extends AbstractModel {
         }
     }
 
-    /*
+    /**
      * Nous obtenons les id intranet actions role selon son identifiant parents.
+     * @param int $paramIdParent
+     * @return type
      */
-
     public static function getIdIntranetActionsRoleFromIdParentActionNavigation($paramIdParent) {
         $globalconfig = new GlobalConfig();
         $id_user = $globalconfig->getAuthenticatedUser()->getKeyValue();
@@ -115,6 +116,12 @@ class IntranetActionsModel extends AbstractModel {
         }
     }
 
+    /**
+     * On obtient les id_intranet_action de 'site' pour un workflow selon les droits d'accès d'un utilisateur
+     * @param int $paramIdParent
+     * @param int $paramIdUser
+     * @return array
+     */
     public static function getIdIntranetActionsSiteFromIdParentActionNavigation($paramIdParent, $paramIdUser) {
         $arrayIdActions = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
                         'SELECT ' . IntranetActionsModel::TABLENAME . '.' . IntranetActionsModel::KEYNAME
@@ -166,6 +173,12 @@ class IntranetActionsModel extends AbstractModel {
         return $req;
     }
 
+    /**
+     * On récupère le nom des sites qu'un utilisateur a selon sont workflow
+     * @param int $paramIdUser
+     * @param array $paramArrayIdWorkflow
+     * @return array
+     */
     public static function getNameSiteByWorkflow($paramIdUser, $paramArrayIdWorkflow) {
         if ($paramArrayIdWorkflow) {
             foreach ($paramArrayIdWorkflow as $rowsIdWorkflow) {

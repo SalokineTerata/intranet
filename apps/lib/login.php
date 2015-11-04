@@ -46,7 +46,14 @@ if ($session == 'logout') {
     $pass = '';
     $id_user = '';
     $login = '';
-    session_destroy();
+   
+
+
+//    session_destroy;
+    AclClass::cancelValueAccesRights();
+    AclClass::cancelUserInfos();
+    $globalConfig->setAuthenticatedUser(NULL);
+    GlobalConfig::saveGlobalConfToPhpSession($globalConfig);
     header('Location: ../index.php');
     /* effacement des fichiers creer dans la session */
 }

@@ -51,7 +51,7 @@ switch ($action) {
      */
     case '':
         //Redirection
-        header('Location: index.php');
+        header('Location: index.html');
 
         break;
     case 'etape1': //Un groupe d'emballage a été sélectionné
@@ -112,7 +112,7 @@ switch ($action) {
 
 
 
-        header('Location: modification_fiche.php?id_fta=' . $idFta . '&id_fta_chapitre_encours=' . $idFtaChapitreEncours . '&synthese_action=encours&comeback=' . $comeback . '&id_fta_etat=' . $idFtaEtat . '&abreviation_fta_etat=' . $abreviationFtaEtat . '&id_fta_role=' . $idFtaRole);
+        header('Location: modification_fiche.php-' . $idFta . '-' . $idFtaChapitreEncours . '-encours'. '-' . $idFtaEtat . '-' . $abreviationFtaEtat.'-' . $comeback  . '-' . $idFtaRole .'.html');
         break;
 
 

@@ -239,25 +239,23 @@ class FtaView {
     }
 
     /**
-     * 
-     * @param type $paramIdFta
+     *    
      * @param type $paramIsEditable
      * @return type
      */
-    public function ListeClassification($paramIdFta, $paramIsEditable) {
-        $ftaModel = new FtaModel($paramIdFta);
-        $idFtaClassification2 = $ftaModel->getDataField(FtaModel::FIELDNAME_ID_FTA_CLASSIFICATION2)->getFieldValue();
-
-        $ListeCLassification = ClassificationFta2Model::ShowListeDeroulanteClassification($idFtaClassification2, $paramIsEditable);
-
-        /*
+    public function ListeClassification($paramIsEditable) {
+          /*
          * Classification FTA
          */
+        $ListeCLassification = ClassificationFta2Model::ShowListeDeroulanteClassification($paramIsEditable);
+
+      
         return $ListeCLassification;
     }
+
     public function ListeCodesoftEtiquettes($paramIdFta, $paramIsEditable) {
-       
-        $listeCodesoftEtiquettes = CodesoftEtiquettesModel::getListeCodesoftEtiquettes($paramIdFta, $paramIsEditable) ;
+
+        $listeCodesoftEtiquettes = CodesoftEtiquettesModel::getListeCodesoftEtiquettes($paramIdFta, $paramIsEditable);
 
         return $listeCodesoftEtiquettes;
     }

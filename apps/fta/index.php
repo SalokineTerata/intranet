@@ -30,7 +30,7 @@ flush();
 $globalConfig = new GlobalConfig();
 if ($globalConfig->getAuthenticatedUser()) {
     $id_user = $globalConfig->getAuthenticatedUser()->getKeyValue();
-    $lieuGeo = $globalConfig->getAuthenticatedUser()->getLieuGeo();
+//    $lieuGeo = $globalConfig->getAuthenticatedUser()->getLieuGeo();
 }
 
 /* * ***********
@@ -58,8 +58,8 @@ if ($id_user) {
     /**
      * Faire un lien avec un model pour recuperer les droit consutation et modification
      */
-    $fta_consultation = Lib::isDefined('fta_consultation');
-    $fta_modification = Lib::isDefined('fta_modification');
+    $fta_consultation = AclClass::getValueAccesRights('fta_consultation');
+    $fta_modification = AclClass::getValueAccesRights('fta_modification');
     $id_fta_etat = Lib::getParameterFromRequest(FtaEtatModel::KEYNAME);
     $isLimit = $_SESSION['limit_affichage_fta_index'];
     $nomFtaEtat = Lib::getParameterFromRequest(FtaEtatModel::FIELDNAME_NOM_FTA_ETAT);
@@ -163,7 +163,7 @@ if ($id_user) {
     /**
      * traitement long
      */
-    AccueilFta::initAccueil($id_user, $id_fta_etat, $nomFtaEtat, $synthese_action, $idFtaRoleEncours, $order_common, $lieuGeo, $debut);
+    AccueilFta::initAccueil($id_user, $id_fta_etat, $nomFtaEtat, $synthese_action, $idFtaRoleEncours, $order_common,  $debut,$numeroDePageCourante);
 
 
 

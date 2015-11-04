@@ -176,6 +176,7 @@
                 + "&abreviation_fta_etat=" + abreviationFtaEtat
                 + "&id_fta_role=" + idFtaRole
                 + "&selection_proprietaire1=" + document.form_action.selection_proprietaire1.options[proprietaire1].value
+                + "&checkIdFtaClasssification=1"
 
                 ;
         parent.location.href = url;
@@ -199,6 +200,8 @@
                 + "&id_fta_role=" + idFtaRole
                 + "&selection_proprietaire1=" + document.form_action.selection_proprietaire1.options[proprietaire1].value
                 + "&selection_proprietaire2=" + document.form_action.selection_proprietaire2.options[proprietaire2].value
+                + "&checkIdFtaClasssification=1"
+
 
                 ;
         parent.location.href = url;
@@ -223,6 +226,7 @@
                 + "&selection_proprietaire1=" + document.form_action.selection_proprietaire1.options[proprietaire1].value
                 + "&selection_proprietaire2=" + document.form_action.selection_proprietaire2.options[proprietaire2].value
                 + "&selection_marque=" + document.form_action.selection_marque.options[marque].value
+                + "&checkIdFtaClasssification=1"
 
                 ;
         parent.location.href = url;
@@ -250,6 +254,7 @@
                 + "&selection_proprietaire2=" + document.form_action.selection_proprietaire2.options[proprietaire2].value
                 + "&selection_marque=" + document.form_action.selection_marque.options[marque].value
                 + "&selection_activite=" + document.form_action.selection_activite.options[activite].value
+                + "&checkIdFtaClasssification=1"
 
                 ;
         parent.location.href = url;
@@ -278,6 +283,7 @@
                 + "&selection_marque=" + document.form_action.selection_marque.options[marque].value
                 + "&selection_activite=" + document.form_action.selection_activite.options[activite].value
                 + "&selection_rayon=" + document.form_action.selection_rayon.options[rayon].value
+                + "&checkIdFtaClasssification=1"
 
                 ;
         parent.location.href = url;
@@ -308,6 +314,7 @@
                 + "&selection_activite=" + document.form_action.selection_activite.options[activite].value
                 + "&selection_rayon=" + document.form_action.selection_rayon.options[rayon].value
                 + "&selection_environnement=" + document.form_action.selection_environnement.options[environnement].value
+                + "&checkIdFtaClasssification=1"
 
                 ;
         parent.location.href = url;
@@ -340,6 +347,7 @@
                 + "&selection_rayon=" + document.form_action.selection_rayon.options[rayon].value
                 + "&selection_environnement=" + document.form_action.selection_environnement.options[environnement].value
                 + "&selection_reseau=" + document.form_action.selection_reseau.options[reseau].value
+                + "&checkIdFtaClasssification=1"
 
                 ;
         parent.location.href = url;
@@ -374,6 +382,7 @@
                 + "&selection_environnement=" + document.form_action.selection_environnement.options[environnement].value
                 + "&selection_reseau=" + document.form_action.selection_reseau.options[reseau].value
                 + "&selection_saisonnalite=" + document.form_action.selection_saisonnalite.options[saisonnalite].value
+                + "&checkIdFtaClasssification=1"
                 ;
         parent.location.href = url;
     }

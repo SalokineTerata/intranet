@@ -53,79 +53,91 @@ class UserModel extends AbstractModel {
 
 
         if ($paramArrayIdFta) {
-            foreach ($paramArrayIdFta as $rowsArrayIdFta) {
-                $idFta[] = $rowsArrayIdFta[FtaModel::KEYNAME];
-            }
-            if ($idFta) {
-                $array['1'] = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
-                                'SELECT DISTINCT ' . FtaModel::TABLENAME . '.' . FtaModel::KEYNAME
-                                . ', ' . FtaEtatModel::FIELDNAME_ABREVIATION . ', ' . FtaModel::FIELDNAME_LIBELLE
-                                . ', ' . FtaWorkflowModel::FIELDNAME_DESCRIPTION_FTA_WORKFLOW . ', ' . FtaWorkflowModel::FIELDNAME_NOM_FTA_WORKFLOW
-                                . ', ' . FtaModel::FIELDNAME_NOMBRE_UVC_PAR_CARTON . ', ' . FtaModel::FIELDNAME_POIDS_ELEMENTAIRE
-                                . ', ' . FtaModel::FIELDNAME_SUFFIXE_AGROLOGIC_FTA . ', ' . FtaModel::FIELDNAME_DESIGNATION_COMMERCIALE
-                                . ', ' . FtaModel::FIELDNAME_DOSSIER_FTA . ', ' . FtaModel::FIELDNAME_VERSION_DOSSIER_FTA
-                                . ', ' . FtaModel::FIELDNAME_ARTICLE_AGROLOGIC . ', ' . FtaModel::FIELDNAME_CODE_ARTICLE_LDC
-                                . ', ' . FtaModel::FIELDNAME_DATE_ECHEANCE_FTA . ', ' . FtaModel::FIELDNAME_CREATEUR
-                                . ', ' . FtaModel::FIELDNAME_ID_FTA_CLASSIFICATION2
-                                . ', ' . FtaModel::FIELDNAME_SITE_ASSEMBLAGE . ', ' . FtaModel::TABLENAME . '. ' . FtaModel::FIELDNAME_WORKFLOW
-                                . ' FROM ' . FtaModel::TABLENAME . ',' . UserModel::TABLENAME
-                                . ', ' . FtaEtatModel::TABLENAME
-                                . ', ' . FtaWorkflowModel::TABLENAME
-                                . ' WHERE ( 0 ' . FtaModel::AddIdFTaValidProcess($idFta) . ')'
-                                . ' AND ' . FtaModel::TABLENAME . '.' . FtaModel::FIELDNAME_CREATEUR
-                                . '=' . UserModel::TABLENAME . '.' . UserModel::KEYNAME
-                                . ' AND ' . FtaModel::TABLENAME . '.' . FtaModel::FIELDNAME_ID_FTA_ETAT
-                                . '=' . FtaEtatModel::TABLENAME . '.' . FtaEtatModel::KEYNAME
-                                . ' AND ' . FtaWorkflowModel::TABLENAME . '.' . FtaWorkflowModel::KEYNAME
-                                . '=' . FtaModel::TABLENAME . '.' . FtaModel::FIELDNAME_WORKFLOW
-                                . ' ORDER BY ' . $paramOrderBy
-                                . ',' . FtaModel::TABLENAME . '.' . FtaModel::FIELDNAME_WORKFLOW
-                                . ',' . UserModel::FIELDNAME_PRENOM . ' ASC'
-                                . ',' . FtaModel::FIELDNAME_DATE_ECHEANCE_FTA
-                                . ' LIMIT ' . ModuleConfig::VALUE_MAX_PAR_PAGE . ' OFFSET ' . $paramDebut
-                );
+            $array['1'] = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
+                            'SELECT DISTINCT ' . FtaModel::TABLENAME . '.' . FtaModel::KEYNAME
+                            . ', ' . FtaEtatModel::FIELDNAME_ABREVIATION . ', ' . FtaModel::FIELDNAME_LIBELLE
+                            . ', ' . FtaWorkflowModel::FIELDNAME_DESCRIPTION_FTA_WORKFLOW . ', ' . FtaWorkflowModel::FIELDNAME_NOM_FTA_WORKFLOW
+                            . ', ' . FtaModel::FIELDNAME_NOMBRE_UVC_PAR_CARTON . ', ' . FtaModel::FIELDNAME_POIDS_ELEMENTAIRE
+                            . ', ' . FtaModel::FIELDNAME_SUFFIXE_AGROLOGIC_FTA . ', ' . FtaModel::FIELDNAME_DESIGNATION_COMMERCIALE
+                            . ', ' . FtaModel::FIELDNAME_DOSSIER_FTA . ', ' . FtaModel::FIELDNAME_VERSION_DOSSIER_FTA
+                            . ', ' . FtaModel::FIELDNAME_ARTICLE_AGROLOGIC . ', ' . FtaModel::FIELDNAME_CODE_ARTICLE_LDC
+                            . ', ' . FtaModel::FIELDNAME_DATE_ECHEANCE_FTA . ', ' . FtaModel::FIELDNAME_CREATEUR
+//                            . ', ' . ClassificationArborescenceArticleCategorieContenuModel::FIELDNAME_NOM_CLASSIFICATION_ARBORESCENCE_ARTICLE_CATEGORIE_CONTENU
+                            . ', ' . GeoModel::FIELDNAME_GEO . ', ' . FtaModel::TABLENAME . '. ' . FtaModel::FIELDNAME_WORKFLOW
+                            . ', ' . FtaModel::FIELDNAME_ID_FTA_CLASSIFICATION2
+                            . ' FROM ' . FtaModel::TABLENAME . ',' . UserModel::TABLENAME
+                            . ', ' . FtaEtatModel::TABLENAME
+                            . ', ' . FtaWorkflowModel::TABLENAME
+                            . ', ' . GeoModel::TABLENAME
+//                            . ', ' . ClassificationFta2Model::TABLENAME
+//                            . ', ' . ClassificationArborescenceArticleCategorieContenuModel::TABLENAME
+                            . ' WHERE ( 0 ' . FtaModel::AddIdFTaLabelValidProcess($paramArrayIdFta) . ')'
+                            . ' AND ' . FtaModel::TABLENAME . '.' . FtaModel::FIELDNAME_CREATEUR
+                            . '=' . UserModel::TABLENAME . '.' . UserModel::KEYNAME
+                            . ' AND ' . FtaModel::TABLENAME . '.' . FtaModel::FIELDNAME_ID_FTA_ETAT
+                            . '=' . FtaEtatModel::TABLENAME . '.' . FtaEtatModel::KEYNAME
+                            . ' AND ' . FtaWorkflowModel::TABLENAME . '.' . FtaWorkflowModel::KEYNAME
+                            . '=' . FtaModel::TABLENAME . '.' . FtaModel::FIELDNAME_WORKFLOW
+                            . ' AND ' . FtaModel::TABLENAME . '.' . FtaModel::FIELDNAME_SITE_ASSEMBLAGE
+                            . '=' . GeoModel::TABLENAME . '.' . GeoModel::KEYNAME
+//                            . ' AND ' . ClassificationArborescenceArticleCategorieContenuModel::TABLENAME . '.' . ClassificationArborescenceArticleCategorieContenuModel::KEYNAME
+//                            . '=' . ClassificationFta2Model::TABLENAME . '.' . ClassificationFta2Model::FIELDNAME_ID_PROPRIETAIRE_GROUPE
+//                            . ' AND ' . FtaModel::TABLENAME . '.' . FtaModel::FIELDNAME_ID_FTA_CLASSIFICATION2
+//                            . '=' . ClassificationFta2Model::TABLENAME . '.' . ClassificationFta2Model::KEYNAME                            
+                            . ' ORDER BY ' . $paramOrderBy
+                            . ',' . FtaModel::TABLENAME . '.' . FtaModel::FIELDNAME_WORKFLOW
+                            . ',' . UserModel::FIELDNAME_PRENOM . ' ASC' . ',' . UserModel::FIELDNAME_NOM . ' ASC'
+                            . ',' . FtaModel::FIELDNAME_DATE_ECHEANCE_FTA
+                            . ' LIMIT ' . ModuleConfig::VALUE_MAX_PAR_PAGE . ' OFFSET ' . $paramDebut
+            );
 
-                $array['2'] = DatabaseOperation::getRowsNumberOverLimitInSqlStatement(
-                                'SELECT SQL_CALC_FOUND_ROWS ' . FtaModel::TABLENAME . '.' . FtaModel::KEYNAME
-                                . ', ' . FtaEtatModel::FIELDNAME_ABREVIATION . ', ' . FtaModel::FIELDNAME_LIBELLE
-                                . ', ' . FtaWorkflowModel::FIELDNAME_DESCRIPTION_FTA_WORKFLOW . ', ' . FtaWorkflowModel::FIELDNAME_NOM_FTA_WORKFLOW
-                                . ', ' . FtaModel::FIELDNAME_NOMBRE_UVC_PAR_CARTON . ', ' . FtaModel::FIELDNAME_POIDS_ELEMENTAIRE
-                                . ', ' . FtaModel::FIELDNAME_SUFFIXE_AGROLOGIC_FTA . ', ' . FtaModel::FIELDNAME_DESIGNATION_COMMERCIALE
-                                . ', ' . FtaModel::FIELDNAME_DOSSIER_FTA . ', ' . FtaModel::FIELDNAME_VERSION_DOSSIER_FTA
-                                . ', ' . FtaModel::FIELDNAME_ARTICLE_AGROLOGIC . ', ' . FtaModel::FIELDNAME_CODE_ARTICLE_LDC
-                                . ', ' . FtaModel::FIELDNAME_DATE_ECHEANCE_FTA . ', ' . FtaModel::FIELDNAME_CREATEUR
-                                . ', ' . FtaModel::FIELDNAME_ID_FTA_CLASSIFICATION2
-                                . ', ' . FtaModel::FIELDNAME_SITE_ASSEMBLAGE . ', ' . FtaModel::TABLENAME . '. ' . FtaModel::FIELDNAME_WORKFLOW
-                                . ' FROM ' . FtaModel::TABLENAME . ',' . UserModel::TABLENAME
-                                . ', ' . FtaEtatModel::TABLENAME
-                                . ', ' . FtaWorkflowModel::TABLENAME
-                                . ' WHERE ( 0 ' . FtaModel::AddIdFTaValidProcess($idFta) . ')'
-                                . ' AND ' . FtaModel::TABLENAME . '.' . FtaModel::FIELDNAME_CREATEUR
-                                . '=' . UserModel::TABLENAME . '.' . UserModel::KEYNAME
-                                . ' AND ' . FtaModel::TABLENAME . '.' . FtaModel::FIELDNAME_ID_FTA_ETAT
-                                . '=' . FtaEtatModel::TABLENAME . '.' . FtaEtatModel::KEYNAME
-                                . ' AND ' . FtaWorkflowModel::TABLENAME . '.' . FtaWorkflowModel::KEYNAME
-                                . '=' . FtaModel::TABLENAME . '.' . FtaModel::FIELDNAME_WORKFLOW
-                                . ' ORDER BY ' . $paramOrderBy
-                                . ',' . FtaModel::TABLENAME . '.' . FtaModel::FIELDNAME_WORKFLOW
-                                . ',' . UserModel::FIELDNAME_PRENOM . ' ASC'
-                                . ',' . FtaModel::FIELDNAME_DATE_ECHEANCE_FTA
-                                . ' LIMIT ' . ModuleConfig::VALUE_MAX_PAR_PAGE . ' OFFSET ' . $paramDebut
-                );
+            $array['2'] = DatabaseOperation::getRowsNumberOverLimitInSqlStatement(
+                            'SELECT SQL_CALC_FOUND_ROWS ' . FtaModel::TABLENAME . '.' . FtaModel::KEYNAME
+                            . ', ' . FtaEtatModel::FIELDNAME_ABREVIATION . ', ' . FtaModel::FIELDNAME_LIBELLE
+                            . ', ' . FtaWorkflowModel::FIELDNAME_DESCRIPTION_FTA_WORKFLOW . ', ' . FtaWorkflowModel::FIELDNAME_NOM_FTA_WORKFLOW
+                            . ', ' . FtaModel::FIELDNAME_NOMBRE_UVC_PAR_CARTON . ', ' . FtaModel::FIELDNAME_POIDS_ELEMENTAIRE
+                            . ', ' . FtaModel::FIELDNAME_SUFFIXE_AGROLOGIC_FTA . ', ' . FtaModel::FIELDNAME_DESIGNATION_COMMERCIALE
+                            . ', ' . FtaModel::FIELDNAME_DOSSIER_FTA . ', ' . FtaModel::FIELDNAME_VERSION_DOSSIER_FTA
+                            . ', ' . FtaModel::FIELDNAME_ARTICLE_AGROLOGIC . ', ' . FtaModel::FIELDNAME_CODE_ARTICLE_LDC
+                            . ', ' . FtaModel::FIELDNAME_DATE_ECHEANCE_FTA . ', ' . FtaModel::FIELDNAME_CREATEUR
+//                            . ', ' . ClassificationArborescenceArticleCategorieContenuModel::FIELDNAME_NOM_CLASSIFICATION_ARBORESCENCE_ARTICLE_CATEGORIE_CONTENU
+                            . ', ' . GeoModel::FIELDNAME_GEO . ', ' . FtaModel::TABLENAME . '. ' . FtaModel::FIELDNAME_WORKFLOW
+                            . ', ' . FtaModel::FIELDNAME_ID_FTA_CLASSIFICATION2
+                            . ' FROM ' . FtaModel::TABLENAME . ',' . UserModel::TABLENAME
+                            . ', ' . FtaEtatModel::TABLENAME
+                            . ', ' . FtaWorkflowModel::TABLENAME
+                            . ', ' . GeoModel::TABLENAME
+//                            . ', ' . ClassificationFta2Model::TABLENAME
+//                            . ', ' . ClassificationArborescenceArticleCategorieContenuModel::TABLENAME
+                            . ' WHERE ( 0 ' . FtaModel::AddIdFTaLabelValidProcess($paramArrayIdFta) . ')'
+                            . ' AND ' . FtaModel::TABLENAME . '.' . FtaModel::FIELDNAME_CREATEUR
+                            . '=' . UserModel::TABLENAME . '.' . UserModel::KEYNAME
+                            . ' AND ' . FtaModel::TABLENAME . '.' . FtaModel::FIELDNAME_ID_FTA_ETAT
+                            . '=' . FtaEtatModel::TABLENAME . '.' . FtaEtatModel::KEYNAME
+                            . ' AND ' . FtaWorkflowModel::TABLENAME . '.' . FtaWorkflowModel::KEYNAME
+                            . '=' . FtaModel::TABLENAME . '.' . FtaModel::FIELDNAME_WORKFLOW
+                            . ' AND ' . FtaModel::TABLENAME . '.' . FtaModel::FIELDNAME_SITE_ASSEMBLAGE
+                            . '=' . GeoModel::TABLENAME . '.' . GeoModel::KEYNAME
+//                            . ' AND ' . ClassificationArborescenceArticleCategorieContenuModel::TABLENAME . '.' . ClassificationArborescenceArticleCategorieContenuModel::KEYNAME
+//                            . '=' . ClassificationFta2Model::TABLENAME . '.' . ClassificationFta2Model::FIELDNAME_ID_PROPRIETAIRE_GROUPE
+//                            . ' AND ' . FtaModel::TABLENAME . '.' . FtaModel::FIELDNAME_ID_FTA_CLASSIFICATION2
+//                            . '=' . ClassificationFta2Model::TABLENAME . '.' . ClassificationFta2Model::KEYNAME                            
+                            . ' ORDER BY ' . $paramOrderBy
+                            . ',' . FtaModel::TABLENAME . '.' . FtaModel::FIELDNAME_WORKFLOW
+                            . ',' . UserModel::FIELDNAME_PRENOM . ' ASC'
+                            . ',' . FtaModel::FIELDNAME_DATE_ECHEANCE_FTA
+                            . ' LIMIT ' . ModuleConfig::VALUE_MAX_PAR_PAGE . ' OFFSET ' . $paramDebut
+            );
 
 
-                foreach ($array['1'] as $rowsArrayIdFta) {
-                    $idFta2[] = $rowsArrayIdFta[FtaModel::KEYNAME];
-                }
+            $array['3'] = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
+                            'SELECT DISTINCT ' . FtaWorkflowModel::TABLENAME . '.*'
+                            . ' FROM ' . FtaModel::TABLENAME . ',' . FtaWorkflowModel::TABLENAME
+                            . ' WHERE ( ' . '0' . ' ' . FtaModel::AddIdFTaLabelValidProcess($array['1']) . ')'
+                            . ' AND ' . FtaModel::TABLENAME . '.' . FtaModel::FIELDNAME_WORKFLOW
+                            . '=' . FtaWorkflowModel::TABLENAME . '.' . FtaWorkflowModel::KEYNAME
+            );
 
-                $array['3'] = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
-                                'SELECT DISTINCT ' . FtaWorkflowModel::TABLENAME . '.*'
-                                . ' FROM ' . FtaModel::TABLENAME . ',' . FtaWorkflowModel::TABLENAME
-                                . ' WHERE ( ' . '0' . ' ' . FtaModel::AddIdFTaValidProcess($idFta2) . ')'
-                                . ' AND ' . FtaModel::TABLENAME . '.' . FtaModel::FIELDNAME_WORKFLOW
-                                . '=' . FtaWorkflowModel::TABLENAME . '.' . FtaWorkflowModel::KEYNAME
-                );
-            }
 
             return $array;
         }

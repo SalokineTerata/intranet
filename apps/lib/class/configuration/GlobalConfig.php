@@ -258,7 +258,7 @@ class GlobalConfig {
      * 
      * @param UserModel $authenticatedUser
      */
-    function setAuthenticatedUser(UserModel $authenticatedUser) {
+    function setAuthenticatedUser(UserModel $authenticatedUser = NULL) {
         $this->authenticatedUser = $authenticatedUser;
     }
 

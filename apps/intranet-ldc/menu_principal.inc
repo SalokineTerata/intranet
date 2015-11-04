@@ -12,7 +12,7 @@ $page="../lib/gestion_table.php?module=$module&menu=menu_principal.inc";
 Menu accessible pour les utilisateurs ayant les droits
 en consultation sur ce module
 */
-if ($_SESSION[$module_consultation])
+if (AclClass::getValueAccesRights($module_consultation))
 {
    /*
    //Exemple d'un menu
@@ -31,7 +31,7 @@ if ($_SESSION[$module_consultation])
 Menu accessible pour les utilisateurs ayant les droits
 en modifications sur ce module
 */
-if ($_SESSION[$module_modification])
+if (AclClass::getValueAccesRights($module_modification))
 {
 /*
    //Exemple d'un menu

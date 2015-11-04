@@ -1,21 +1,24 @@
 # Fichier de configuration pour le répertoire /apps/fta/ 
-#Options FollowSymLinks
-#RewriteEngine on
+Options +FollowSymLinks
+# protection de la lecture des répertoires
+Options +Indexes
+RewriteEngine on
 
+#Url sans le chapitre
+RewriteRule ^modification_fiche-([0-9]+)-(.+)-([0-9]+)-([0-9]+)-(.+)-([0-9]+).html$  modification_fiche.php?id_fta=$1&synthese_action=$2&comeback=$3&id_fta_etat=$4&abreviation_fta_etat=$5&id_fta_role=$6 [L]
+#Url avec le chapitre
+RewriteRule ^modification_fiche-([0-9]+)-([0-9]+)-(.+)-([0-9]+)-(.+)-([0-9]+)-([0-9]+).html$  modification_fiche.php?id_fta=$1&id_fta_chapitre_encours=$2&synthese_action=$3&id_fta_etat=$4&abreviation_fta_etat=$5&comeback=$6&id_fta_role=$7 [L]
+#Url de l'index avec parametre
+RewriteRule ^index-([0-9]+)-(.+)-([0-9]+)-(.+).html$  index.php?id_fta_etat=$1&nom_fta_etat=$2&id_fta_role=$3&synthese_action=$4 [L]
+#Url de l'index avec parametre et l'ordination
+RewriteRule ^index-([0-9]+)-(.+)-([0-9]+)-(.+)&order_common=(.+).html$  index.php?id_fta_etat=$1&nom_fta_etat=$2&id_fta_role=$3&synthese_action=$4&order_common=$5 [L]
+#Url de l'index avec parametre avec la pagination
+RewriteRule ^index-([0-9]+)-(.+)-([0-9]+)-(.+)&numeroPage=([0-9]+).html$  index.php?id_fta_etat=$1&nom_fta_etat=$2&id_fta_role=$3&synthese_action=$4&numeroPage=$5 [L]
+RewriteRule ^index-([0-9]+)-(.+)-([0-9]+)-(.+)&order_common=(.+)&numeroPage=([0-9]+).html$  index.php?id_fta_etat=$1&nom_fta_etat=$2&id_fta_role=$3&synthese_action=$4&order_common=$5&numeroPage=$6 [L]
+#Url de l'index avec parametre
+RewriteRule ^index.html$  index.php [L]
+RewriteRule ^index&order_common=(.+).html$  index.php?&order_common=$1 [L]
+#Url de l'historique
+RewriteRule ^historique-([0-9]+)-([0-9]+)-([0-9]+)-(.+)-([0-9]+)-(.+)-([0-9]+).html$  historique.php?id_fta=$1&id_fta_chapitre_encours=$2&id_fta_etat=$3&abreviation_fta_etat=$4&id_fta_role=$5&synthese_action=$6&comeback=$7 [L]
 
-#RewriteCond %{QUERY_STRING}  ^id_fta=([^/]+)&synthese_action=([^/]+)&comeback=([^/]+)&id_fta_etat=([^/]+)&abreviation_fta_etat=([^/]+)&id_fta_role=([^/]+)
-#RewriteRule ^(.+)$  modification_fiche.php [QSA,L]
-#RewriteRule ^\-modification_fiche\.php(?:[0-9A-Za-z.-]*)-(?:[0-9A-Za-z.-]*)-(?:[0-9A-Za-z.-]*)-(?:[0-9A-Za-z.-]*)-(?:[0-9A-Za-z.-]*)-(?:[0-9A-Za-z.-]*)$ apps/fta/modification_fiche.php?id_fta=$1&synthese_action=$2&comeback=$3&id_fta_etat=$4&abreviation_fta_etat=$5&id_fta_role=$6 [L]
-#RewriteRule ^modification_fiche-([0-9]+)-(.+)-([0-9]+)-([0-9]+)-(.+)-([0-9]+)\.php$  modification_fiche.phpid_fta=$1&synthese_action=$2&comeback=$3&id_fta_etat=$4&abreviation_fta_etat=$5&id_fta_role=$6 [L]
-#RewriteRule ^index\.php$ index.php [L]
-#RewriteRule ^modification_fiche-([0-9]+).html$ /page.php?param=$1 [L]
-
-
-
-## Si modification_fiche.php
-#RewriteCond %{REQUEST_URI} /modification_fiche.php 
-## AND QUERY_STRING not null		
-#RewriteCond %{QUERY_STRING} ^(.+)$ 	
-## THEN rewrite to "/" and execute modification_fiche.php?%{QUERY_STRING}		
-#RewriteRule ^/$ modification_fiche.php?%{QUERY_STRING} [L]	
 

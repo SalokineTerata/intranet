@@ -12,6 +12,7 @@ abstract class ModuleConfig {
       0 = Le mode est désactivé
       1 = Le mode standard est activé
      */
+
     const MODE_DEBUG = FALSE;
 
     /*
@@ -48,11 +49,21 @@ abstract class ModuleConfig {
      * Activer la visualisation des modifications effectuées depuis la version précédente
      */
     const ENABLE_SHOW_DIFF_FTA = true;
-    
+
     /**
      * Nombre maximale de fta afficher sur la page d'acceuil
      */
-     const VALUE_MAX_PAR_PAGE = 15;
+    const VALUE_MAX_PAR_PAGE = 100;
+
+    /**
+     * Nombre de jour attribué pour une première notification sur la date de validation d'une fta afficher sur la page d'acceuil
+     */
+    const VALUE_DATE_NOTIFICATION = 15;
+
+    /**
+     * Nombre de jour attribué pour une deuxième notification sur la date de validation d'une fta afficher sur la page d'acceuil
+     */
+    const VALUE_DATE_NOTIFICATION2 = 30;
 
 }
 

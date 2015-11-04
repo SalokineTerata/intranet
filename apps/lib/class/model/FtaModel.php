@@ -1075,4 +1075,11 @@ class FtaModel extends AbstractModel {
         return $key;
     }
 
+    public function updateAvancementFta() {
+
+        $idFta = $this->getKeyValue();
+        //Recalcul + stockage % Avancement
+        //Recalcul + stockage liste des services
+    }
+
 }

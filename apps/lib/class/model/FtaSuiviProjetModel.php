@@ -503,6 +503,25 @@ class FtaSuiviProjetModel extends AbstractModel {
         }
     }
 
+    public function setSigned($paramSignatureValidationSuiviProjet) {
+
+        //Enregistrer base de données la signature
+        $this->getDataField(FtaSuiviProjetModel::FIELDNAME_SIGNATURE_VALIDATION_SUIVI_PROJET)->setFieldValue($paramSignatureValidationSuiviProjet);
+
+        $this->updateAvancement();
+    }
+
+    public function unsetSigned() {
+        //Enlever de la base de données la signature
+        $signatureValidationSuiviProjet = 0;
+        $this->getDataField(FtaSuiviProjetModel::FIELDNAME_SIGNATURE_VALIDATION_SUIVI_PROJET)->setFieldValue($signatureValidationSuiviProjet);
+        $this->updateAvancement();
+    }
+
+    private function updateAvancement() {
+        $this->getModelFta()->updateAvancementFta();
+    }
+
     static public function updatetFtaSuiviProjet($paramIdFta) {
         /*
          * Changement de workflow fais par la chef de projet

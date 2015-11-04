@@ -119,7 +119,8 @@ switch ($action) {
         $idFtaWorkflowStruture = FtaWorkflowStructureModel::getIdFtaWorkflowStructureByIdFtaAndIdChapitre($paramIdFta, $paramIdFtaChapitreEncours);
         $modelFtaWorkflowStruture = new FtaWorkflowStructureModel($idFtaWorkflowStruture);
 
-        $modelFtaSuiviProjet->getDataField(FtaSuiviProjetModel::FIELDNAME_SIGNATURE_VALIDATION_SUIVI_PROJET)->setFieldValue($paramSignatureValidationSuiviProjet);
+        //$modelFtaSuiviProjet->getDataField(FtaSuiviProjetModel::FIELDNAME_SIGNATURE_VALIDATION_SUIVI_PROJET)->setFieldValue($paramSignatureValidationSuiviProjet);
+        $modelFtaSuiviProjet->setSigned($paramSignatureValidationSuiviProjet);
 
         $date_echeance_fta = $modelFta->getDataField(FtaModel::FIELDNAME_DATE_ECHEANCE_FTA)->getFieldValue();
 

@@ -54,13 +54,14 @@ class FtaRoleModel extends AbstractModel {
     }
 
     /**
-     * On obtient le niveau auxquelles la Fta se situe
+     * On enregistre le niveau auxquelles la Fta se situe
      * @param int $paramIdFta
      * @param int $paramIdWorkflow
      * @return string
      */
-    public static function getNameRoleEncoursByIdFta($paramIdFta, $paramIdWorkflow) {
+    public static function getListeIdFtaRoleEncoursByIdFta($paramIdFta, $paramIdWorkflow) {
         $processusLISTE = array();
+        $arrayIdRoleListe = array();
         /*
          * Nous récuperons les processus en cours.
          */
@@ -107,24 +108,44 @@ class FtaRoleModel extends AbstractModel {
                         $taux_validation_processus = FtaProcessusModel::getValideProcessusEncours($paramIdFta, $rowsProcessusEncours[FtaWorkflowStructureModel::FIELDNAME_ID_FTA_PROCESSUS], $rowsProcessusEncours[FtaWorkflowStructureModel::FIELDNAME_ID_FTA_WORKFLOW]);
                         if ($taux_validation_processus <> '1') {
                             $arrayIdRole = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
-                                            'SELECT DISTINCT ' . FtaRoleModel::FIELDNAME_DESCRIPTION_FTA_ROLE
-                                            . ' FROM ' . FtaWorkflowStructureModel::TABLENAME . ',' . FtaRoleModel::TABLENAME
+                                            'SELECT DISTINCT ' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_ROLE
+                                            . ' FROM ' . FtaWorkflowStructureModel::TABLENAME
                                             . ' WHERE ' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_PROCESSUS
                                             . '=' . $rowsProcessusEncours[FtaWorkflowStructureModel::FIELDNAME_ID_FTA_PROCESSUS]
                                             . ' AND ' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_WORKFLOW
                                             . '=' . $rowsProcessusEncours[FtaWorkflowStructureModel::FIELDNAME_ID_FTA_WORKFLOW]
-                                            . ' AND ' . FtaWorkflowStructureModel::TABLENAME . '.' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_ROLE
-                                            . '=' . FtaRoleModel::TABLENAME . '.' . FtaRoleModel::KEYNAME
                             );
                             if ($arrayIdRole) {
                                 foreach ($arrayIdRole as $rowsIdRole) {
-                                    $service .= $rowsIdRole[FtaRoleModel::FIELDNAME_DESCRIPTION_FTA_ROLE] . '<br>';
+                                    $checkListeIdFtaRole = in_array($rowsIdRole[FtaWorkflowStructureModel::FIELDNAME_ID_FTA_ROLE], $arrayIdRoleListe);
+                                    if (!$checkListeIdFtaRole) {
+                                        $arrayIdRoleListe[] = $rowsIdRole[FtaWorkflowStructureModel::FIELDNAME_ID_FTA_ROLE];
+                                        $listeIdRole .= $rowsIdRole[FtaWorkflowStructureModel::FIELDNAME_ID_FTA_ROLE] . ";";
+                                    }
                                 }
                             }
                         }
                     }
                 }
             }
+
+            return $listeIdRole;
+        }
+    }
+
+    public static function getNameServiceEncours($listeIdFtaRole) {
+        if ($listeIdFtaRole) {
+            $arrayService = explode(";", $listeIdFtaRole);
+            if ($arrayService) {
+                foreach ($arrayService as $rowsService) {
+                    if ($rowsService) {
+                        $ftaRole = new FtaRoleModel($rowsService);
+                        $service .= $ftaRole->getDataField(FtaRoleModel::FIELDNAME_DESCRIPTION_FTA_ROLE)->getFieldValue() . '<br>';
+                    }
+                }
+            }
+        } else {
+            $service = "";
         }
         return $service;
     }

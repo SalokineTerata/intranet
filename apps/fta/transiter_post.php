@@ -182,7 +182,11 @@ if (!$action) {
             header('Location: open_erpdatasync.php?open_erpdatasync=' . $open_erpdatasync);
         } else {
             if ($t <> 1) {
-                header('Location: index.html');
+                header('Location: index.php');
+                /**
+                 * Version avec le module rewrite
+                 */
+//                header('Location: index.html');
             }
         }
     }//Fin du traitement

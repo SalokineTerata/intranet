@@ -507,13 +507,18 @@ class FtaSuiviProjetModel extends AbstractModel {
 
         //Enregistrer base de données la signature
         $this->getDataField(FtaSuiviProjetModel::FIELDNAME_SIGNATURE_VALIDATION_SUIVI_PROJET)->setFieldValue($paramSignatureValidationSuiviProjet);
-
+        $reqValidationChapitre = ' UPDATE ' . FtaSuiviProjetModel::TABLENAME
+                . ' SET ' . FtaSuiviProjetModel::FIELDNAME_SIGNATURE_VALIDATION_SUIVI_PROJET . '=' . $paramSignatureValidationSuiviProjet
+                . ' WHERE ' . FtaModel::KEYNAME . '=' . $this->getDataField(FtaSuiviProjetModel::FIELDNAME_ID_FTA)->getFieldValue()
+                . ' AND ' . FtaSuiviProjetModel::FIELDNAME_ID_FTA_CHAPITRE . '=' . $this->getDataField(FtaSuiviProjetModel::FIELDNAME_ID_FTA_CHAPITRE)->getFieldValue()
+        ;
+        DatabaseOperation::execute($reqValidationChapitre);
         $this->updateAvancement();
     }
 
     public function unsetSigned() {
         //Enlever de la base de données la signature
-        $signatureValidationSuiviProjet = 0;
+        $signatureValidationSuiviProjet = '0';
         $this->getDataField(FtaSuiviProjetModel::FIELDNAME_SIGNATURE_VALIDATION_SUIVI_PROJET)->setFieldValue($signatureValidationSuiviProjet);
         $this->updateAvancement();
     }

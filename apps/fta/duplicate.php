@@ -129,7 +129,7 @@ echo '
      <tr><td>
 
          <center>
-         <a href=modification_fiche-' . $id_fta_new . '-encours-1-1-I-' . $idFtaRole . '>
+         <a href=modification_fiche.php?id_fta=' . $id_fta_new . '&comeback=1&synthese_action=encours&id_fta_etat=1&abreviation_fta_etat=I&id_fta_role=' . $idFtaRole . '>
          <font size=\'3\'>Suivant >></font></a>
          </center>
      </td></tr>
@@ -137,6 +137,11 @@ echo '
 
      </form>
      ';
+/**
+ * Version avec le module rewrite
+ */
+//         <a href=modification_fiche-' . $id_fta_new . '-encours-1-1-I-' . $idFtaRole . '.html>
+
 
 /* * **********
   Fin Code HTML

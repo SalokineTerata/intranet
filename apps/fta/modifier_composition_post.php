@@ -94,7 +94,11 @@ switch ($action) {
     case '':
 
         //Redirection
-        header("Location: index.html");
+        header("Location: index.php");
+        /**
+         * Version avec le module rewrite
+         */
+//        header("Location: index.html");
 
         break;
 

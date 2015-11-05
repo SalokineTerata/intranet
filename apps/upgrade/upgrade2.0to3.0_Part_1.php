@@ -4732,7 +4732,7 @@ id_fta, id_access_arti2, OLD_numft, id_fta_workflow,
  K_etat, EAN_UVC, EAN_COLIS, EAN_PALETTE,
  OLD_nouvel_article, OLD_k_gestion_lot, activation_codesoft_arti2, id_etiquette_codesoft_arti2,
  atmosphere_protectrice, image_eco_emballage, libelle_code_article_client, id_service_consommateur,
- nom_societe, id_fta_classification2)
+ nom_societe, id_fta_classification2, pourcentage_avancement, liste_id_fta_role)
 VALUES ( \"$idFta\", \"$idAccessArti2\", \"$numft\", \"$idFtaWorkflow\" "
             . ", \"\", \"$TRASH_id_fta_palettisation\", \"$idDossierFta\", \"$idVersionDossierFta\" "
             . ", \"$champ_maj_fta\", \"$idFtaEtat\", \"$cretateurFta\", \"$dateDerniereMajFta\" "
@@ -4765,7 +4765,7 @@ VALUES ( \"$idFta\", \"$idAccessArti2\", \"$numft\", \"$idFtaWorkflow\" "
             . ", \"$K_etat\", \"$EAN_UVC\", \"$EAN_COLIS\", \"$EAN_PALETTE\" "
             . ", \"$nouvel_article\", \"$k_gestion_lot\", \"$activation_codesoft_arti2\", \"$id_etiquette_codesoft_arti2\" "
             . ", \"$atmosphereProtectrice\", \"$imageEcoEmballage\", \"$libelleCodeArticleClient\", \"$idServiceConsommateur\" "
-            . ", \"\", NULL)";
+            . ", \"\", NULL,\"\",\"\")";
          echo "INSERT INTO ".$nameOfBDDTarget."." . "fta." . "id_fta .". $idFta ." ...";
     mysql_query("SET NAMES 'utf8'");
     if(mysql_query($sql_inter)) {echo "[OK]\n";}else{echo "[FAILED]\n $idFta \n";}

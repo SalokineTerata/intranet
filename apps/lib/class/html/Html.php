@@ -28,6 +28,7 @@ class Html {
     const TYPE_OF_OBJECT_CALENDAR = "CALENDAR";
     const TYPE_OF_OBJECT_COLIS_COMPOSITION = "COLISCOMPOSITION";
     const TYPE_OF_OBJECT_INPUTTEXT = "INPUTTEXT";
+    const TYPE_OF_OBJECT_INPUTNUMBER = "INPUTNUMBER";
     const TYPE_OF_OBJECT_LIST = "LIST";
     const TYPE_OF_OBJECT_SUBFORM_R1N = "SUBFORM_R1N";
     const TYPE_OF_OBJECT_SUBFORM_RNN = "SUBFORM_RNN";
@@ -180,6 +181,9 @@ class Html {
 
             case Html::TYPE_OF_OBJECT_SUBFORM_RNN:
                 $htmlObject = new DataFieldToHtmlSubform_RNN($paramDataField, $param,$param2);
+                break;
+            case Html::TYPE_OF_OBJECT_INPUTNUMBER:
+                $htmlObject = new DataFieldToHtmlInputNumber($paramDataField);
                 break;
 
             default:

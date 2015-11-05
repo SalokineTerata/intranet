@@ -95,7 +95,7 @@ class Navigation {
                      <tr><td class=titre_principal> <div align=\'left\'>
                             <b><font size=\'2\' color=\'#0000FF\'>' . $rowsFtaEtatAndFta[FtaModel::FIELDNAME_CODE_ARTICLE_LDC] . '</font></b> - ' . $nom . ' &nbsp;&nbsp;&nbsp;&nbsp;<i>(gérée par ' . $createur . ')</i>  '
 //                    . '  Espace de Travail : '.$rowsFtaEtatAndFta[FtaWorkflowModel::FIELDNAME_DESCRIPTION_FTA_WORKFLOW]
-            . '</div>
+                    . '</div>
             </td></tr>
             <tr class = titre>
             <td>
@@ -106,7 +106,11 @@ class Navigation {
         $menu_navigation .= self::CheckSyntheseAction();
         //Lien de retour rapide
 
-        self::$comeback_url = 'index-' . self::$id_fta_etat . '-' . self::$abreviation_etat . '-' . self::$id_fta_role . '-' . self::$synthese_action .'.html';
+        self::$comeback_url = 'index.php?id_fta_etat=' . self::$id_fta_etat . '&nom_fta_etat=' . self::$abreviation_etat . '&id_fta_role=' . self::$id_fta_role . '&synthese_action=' . self::$synthese_action;
+        /**
+         * Version avec le rewrite
+         */
+//        self::$comeback_url = 'index-' . self::$id_fta_etat . '-' . self::$abreviation_etat . '-' . self::$id_fta_role . '-' . self::$synthese_action . '.html';
 
         $menu_navigation.= '</td></tr><tr><td>
     <a href=' . self::$comeback_url . '><img src=../lib/images/bouton_retour.png alt=\'\' title=\'Retour à la synthèse\' width=\'18\' height=\'15\' border=\'0\' /> Retour vers la synthèse</a> |
@@ -119,7 +123,7 @@ class Navigation {
                 . '-' . self::$abreviation_etat
                 . '-' . self::$id_fta_role
                 . '-' . self::$synthese_action
-                . '-1' 
+                . '-1'
                 . '.html ><img src=./images/graphique.png alt=\'\' title=\'Etat d\'avancement\' width=\'18\' height=\'15\' border=\'0\' /> Etat d\'avancement</a>
                        </td></tr>                       
                        </table>
@@ -532,21 +536,40 @@ class Navigation {
             if ($num == 0 and self::$synthese_action === 'attente') {
                 
             } else {
-                $menu_navigation .= '<a href=' . $page_default 
+                $menu_navigation .= '<a href=' . $page_default . '.php?'
 //                $menu_navigation .= '<a href=\'#\''
 //                        . ' onClick=\'navigation_' . $id_fta_chapitre . '();\''
-                        . '-' . self::$id_fta
-                        . '-' . $id_fta_chapitre
-                        . '-' . self::$synthese_action
-                        . '-' . self::$id_fta_etat
-                        . '-' . self::$abreviation_etat
-                        . '-' . self::$comeback
-                        . '-' . self::$id_fta_role
-                        . '.html >' . $b . ''
+                         . 'id_fta=' . self::$id_fta
+                        . '&id_fta_chapitre_encours=' . $id_fta_chapitre
+                        . '&synthese_action=' . self::$synthese_action
+                        . '&id_fta_etat=' . self::$id_fta_etat
+                        . '&abreviation_fta_etat=' . self::$abreviation_etat
+                        . '&comeback=' . self::$comeback
+                        . '&id_fta_role=' . self::$id_fta_role
+                        . '>' . $b . ''
                         . $image1 . $nom_usuel_fta_chapitre . $image2
                         . '</a>'
                         . '</b></font> '
                 ;
+                
+                /**
+                 * Version avec le module rewrite
+                 */
+//                $menu_navigation .= '<a href=' . $page_default
+////                $menu_navigation .= '<a href=\'#\''
+////                        . ' onClick=\'navigation_' . $id_fta_chapitre . '();\''
+//                        . '-' . self::$id_fta
+//                        . '-' . $id_fta_chapitre
+//                        . '-' . self::$synthese_action
+//                        . '-' . self::$id_fta_etat
+//                        . '-' . self::$abreviation_etat
+//                        . '-' . self::$comeback
+//                        . '-' . self::$id_fta_role
+//                        . '.html >' . $b . ''
+//                        . $image1 . $nom_usuel_fta_chapitre . $image2
+//                        . '</a>'
+//                        . '</b></font> '
+//                ;
 //                $menu_navigation .= '<SCRIPT LANGUAGE=JavaScript> 
 //                          function navigation_' . $id_fta_chapitre . '() {  
 //                                        document.navigation.id_fta.value=\'' . self::$id_fta . '\'; 

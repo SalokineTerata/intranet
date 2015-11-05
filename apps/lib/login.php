@@ -37,16 +37,17 @@ if (empty($session_id)) {
   --------------------------------- */
 
 if ($session == 'logout') {
-
-    DatabaseOperation::execute(
-            'UPDATE ' . LogModel::TABLENAME . ' SET ' . LogModel::FIELDNAME_DATE . ' = now()'
-            . ' WHERE ((' . LogModel::KEYNAME . '=\'' . $num_log . '\')'
-            . ' AND (' . LogModel::FIELDNAME_ID_USER . '=' . $id_user . '))'
-    );
+    if ($id_user) {
+        DatabaseOperation::execute(
+                'UPDATE ' . LogModel::TABLENAME . ' SET ' . LogModel::FIELDNAME_DATE . ' = now()'
+                . ' WHERE ((' . LogModel::KEYNAME . '=\'' . $num_log . '\')'
+                . ' AND (' . LogModel::FIELDNAME_ID_USER . '=' . $id_user . '))'
+        );
+    }
     $pass = '';
     $id_user = '';
     $login = '';
-   
+
 
 
 //    session_destroy;

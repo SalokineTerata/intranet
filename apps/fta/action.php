@@ -34,6 +34,10 @@ switch ($action)
 
      //Redirection
      header ("Location: 'index.html");
+         /**
+         * Version avec le rewrite
+         */
+//     header ("Location: 'index.html");
 
      break;
 

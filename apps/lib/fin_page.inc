@@ -16,10 +16,10 @@ if ($globalConfig->getConf()->getExecDebugEnable()) {
     $message = print_r($_SESSION['mysql_column_info'], true);
     $show_php_session = popup('popup_php_session', $message, 'PHP' . ' - ' . $exec_debug_time_show);
     foreach ($_SESSION['queriesInfo'] as $value) {
-       $time = $value['time_complete']; 
+        $time = $value['time_complete'];
     }
 
-    $debug_info = ' | ' . $show_queries_info_popup . ' | ' . $show_php_session. ' | ' . $time;
+    $debug_info = ' | ' . $show_queries_info_popup . ' | ' . $show_php_session . ' | ' . $time;
 }
 
 
@@ -27,26 +27,26 @@ if ($globalConfig->getConf()->getExecDebugEnable()) {
 echo '</td>';
 echo '</tr>';
 echo '</table>';
-echo '</div>';
-echo '</body>';
-echo '</html>';
-?>
-
-<html>
-    <table width=100%>
-        <tr align='right'>
+echo ' <table width=100% height=100%>
+        <tr align=right>
             <td>
                 <small>
-                    <a href='#'>Haut de page<?php echo $debug_info; ?></a>
+                    <a href=#>Haut de page.' . $debug_info . '></a>
                 </small>
             </td>
         </tr>
-        <tr align='right'>
+        <tr align=right>
             <td>
                 <small>Intranet LDC - 2015 </small>
             </td>
         </tr>
 
-    </table>
+    </table></div>';
+echo '</body>';
+echo '</html>';
+?>
+
+
+
 </html>
 

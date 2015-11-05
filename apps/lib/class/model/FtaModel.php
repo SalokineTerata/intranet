@@ -63,6 +63,7 @@ class FtaModel extends AbstractModel {
     const FIELDNAME_LIBELLE_MULTILANGUE = "libelle_multilangue";
     const FIELDNAME_LISTE_ALLERGENE = "allergenes_matiere_fta";
     const FIELDNAME_LISTE_CHAPITRE_MAJ_FTA = "liste_chapitre_maj_fta";
+    const FIELDNAME_LISTE_ID_FTA_ROLE = "liste_id_fta_role";
     const FIELDNAME_LOGO_ECO_EMBALLAGE = "image_eco_emballage";
     const FIELDNAME_NOM_CLIENT_DEMANDEUR = "nom_client_demandeur";
     const FIELDNAME_NOM_ABREGE = "nom_abrege_fta";
@@ -78,6 +79,7 @@ class FtaModel extends AbstractModel {
     const FIELDNAME_PRODUIT_TRANSFORME = "origine_transformation_fta";
     const FIELDNAME_PVC_ARTICLE = "pvc_article";
     const FIELDNAME_PVC_ARTICLE_KG = "pvc_article_kg";
+    const FIELDNAME_POURCENTAGE_AVANCEMENT = "pourcentage_avancement";
     const FIELDNAME_QUANTITE_HEBDOMADAIRE_ESTIMEE_COMMANDE = "quantite_hebdomadaire_estime_commande";
     const FIELDNAME_REFERENCE_EXTERNES = "reference_externe_fta";
     const FIELDNAME_REMARQUE = "remarque_fta";
@@ -608,6 +610,7 @@ class FtaModel extends AbstractModel {
         }
         return $req;
     }
+
     public static function AddIdFTaLabelValidProcess($paramIdEffectue) {
         if ($paramIdEffectue) {
             foreach ($paramIdEffectue as $value) {
@@ -960,7 +963,7 @@ class FtaModel extends AbstractModel {
  K_etat, EAN_UVC, EAN_COLIS, EAN_PALETTE,
  OLD_nouvel_article, OLD_k_gestion_lot, activation_codesoft_arti2, id_etiquette_codesoft_arti2,
  atmosphere_protectrice, image_eco_emballage, libelle_code_article_client, id_service_consommateur,
- nom_societe, id_fta_classification2)"
+ nom_societe, id_fta_classification2,pourcentage_avancement, liste_id_fta_role)"
                         . " SELECT id_access_arti2, OLD_numft, id_fta_workflow,
  commentaire, OLD_id_fta_palettisation, id_dossier_fta, id_version_dossier_fta,
  OLD_champ_maj_fta, id_fta_etat, createur_fta, date_derniere_maj_fta,
@@ -993,7 +996,7 @@ class FtaModel extends AbstractModel {
  K_etat, EAN_UVC, EAN_COLIS, EAN_PALETTE,
  OLD_nouvel_article, OLD_k_gestion_lot, activation_codesoft_arti2, id_etiquette_codesoft_arti2,
  atmosphere_protectrice, image_eco_emballage, libelle_code_article_client, id_service_consommateur,
- nom_societe, id_fta_classification2 "
+ nom_societe, id_fta_classification2 ,pourcentage_avancement, liste_id_fta_role"
                         . " FROM " . FtaModel::TABLENAME
                         . " WHERE " . FtaModel::KEYNAME . "=" . $paramIdFta
         );
@@ -1086,8 +1089,20 @@ class FtaModel extends AbstractModel {
     public function updateAvancementFta() {
 
         $idFta = $this->getKeyValue();
-        //Recalcul + stockage % Avancement
-        //Recalcul + stockage liste des services
+        $idFtaWorkflow = $this->getDataField(FtaModel::FIELDNAME_WORKFLOW)->getFieldValue();
+        /**
+         * Recalcul + stockage % Avancement
+         */
+        $taux_temp = FtaSuiviProjetModel::getFtaTauxValidation($this, FALSE);
+        $recap[$idFta] = round($taux_temp['0'] * '100', '0') . '%';
+        $this->getDataField(FtaModel::FIELDNAME_POURCENTAGE_AVANCEMENT)->setFieldValue($recap[$idFta]);
+
+        /**
+         * Recalcul + stockage liste des services
+         */
+        $listeIdRole = FtaRoleModel::getListeIdFtaRoleEncoursByIdFta($idFta, $idFtaWorkflow);        
+        $this->getDataField(FtaModel::FIELDNAME_LISTE_ID_FTA_ROLE)->setFieldValue($listeIdRole);
+        $this->saveToDatabase();
     }
 
 }

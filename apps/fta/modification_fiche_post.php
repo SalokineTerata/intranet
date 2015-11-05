@@ -66,7 +66,11 @@ switch ($action) {
     case '':
 
         //Redirection
-        header('Location: index.html');
+        header('Location: index.php');
+        /**
+         * Version avec le module rewrite
+         */
+//        header('Location: index.html');
 
         break;
 
@@ -118,9 +122,8 @@ switch ($action) {
         $modeChapitre = new FtaChapitreModel($paramIdFtaChapitreEncours);
         $idFtaWorkflowStruture = FtaWorkflowStructureModel::getIdFtaWorkflowStructureByIdFtaAndIdChapitre($paramIdFta, $paramIdFtaChapitreEncours);
         $modelFtaWorkflowStruture = new FtaWorkflowStructureModel($idFtaWorkflowStruture);
-
-        //$modelFtaSuiviProjet->getDataField(FtaSuiviProjetModel::FIELDNAME_SIGNATURE_VALIDATION_SUIVI_PROJET)->setFieldValue($paramSignatureValidationSuiviProjet);
         $modelFtaSuiviProjet->setSigned($paramSignatureValidationSuiviProjet);
+        //$modelFtaSuiviProjet->getDataField(FtaSuiviProjetModel::FIELDNAME_SIGNATURE_VALIDATION_SUIVI_PROJET)->setFieldValue($paramSignatureValidationSuiviProjet);
 
         $date_echeance_fta = $modelFta->getDataField(FtaModel::FIELDNAME_DATE_ECHEANCE_FTA)->getFieldValue();
 
@@ -358,6 +361,8 @@ switch ($action) {
 //Sauvegarde des enregistrements dans la base de données.
         $modelFtaSuiviProjet->saveToDatabase();
 
+
+
         break;
 
     case 'suppression_tarif':
@@ -425,7 +430,11 @@ switch ($action) {
 
 //if(!$erreur and !$noredirection) header ('Location: modification_fiche.php?id_fta=$id_fta&id_fta_chapitre_encours=$id_fta_chapitre_encours&synthese_action=$synthese_action');
 if (!$erreur) {
-    header('Location: modification_fiche-' . $paramIdFta . '-' . $paramIdFtaChapitreEncours . '-' . $paramSyntheseAction . '-' . $idFtaEtat . '-' . $abreviationFtaEtat . '-' . $comeback . '-' . $idFtaRole . '.html');
+    header('Location: modification_fiche.php?id_fta=' . $paramIdFta . '&id_fta_chapitre_encours=' . $paramIdFtaChapitreEncours . '&synthese_action=' . $paramSyntheseAction . '&comeback=' . $comeback . '&id_fta_etat=' . $idFtaEtat . '&abreviation_fta_etat=' . $abreviationFtaEtat . '&id_fta_role=' . $idFtaRole);
+    /**
+     * Version avec le module rewrite
+     */
+//    header('Location: modification_fiche-' . $paramIdFta . '-' . $paramIdFtaChapitreEncours . '-' . $paramSyntheseAction . '-' . $idFtaEtat . '-' . $abreviationFtaEtat . '-' . $comeback . '-' . $idFtaRole . '.html');
 }
 //include ('./action_bs.php');
 //include ('./action_sm.php');

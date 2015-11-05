@@ -4765,7 +4765,7 @@ VALUES ( \"$idFta\", \"$idAccessArti2\", \"$numft\", \"$idFtaWorkflow\" "
             . ", \"$K_etat\", \"$EAN_UVC\", \"$EAN_COLIS\", \"$EAN_PALETTE\" "
             . ", \"$nouvel_article\", \"$k_gestion_lot\", \"$activation_codesoft_arti2\", \"$id_etiquette_codesoft_arti2\" "
             . ", \"$atmosphereProtectrice\", \"$imageEcoEmballage\", \"$libelleCodeArticleClient\", \"$idServiceConsommateur\" "
-            . ", \"\", NULL)";
+            . ", \"\", NULL,\"\",\"\")";
          echo "INSERT INTO ".$nameOfBDDTarget."." . "fta." . "id_fta .". $idFta ." ...";
     mysql_query("SET NAMES 'utf8'");
     if(mysql_query($sql_inter)) {echo "[OK]\n";}else{echo "[FAILED]\n $idFta \n";}

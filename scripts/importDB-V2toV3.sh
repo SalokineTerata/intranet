@@ -38,7 +38,7 @@ echo "* Récupération du dump MySQL"
 ssh -n $SRV_PRODV2 -- mysqldump -a --add-drop-table -v --quote-names --user=$DB_USER_PRODV2 --password=$DB_PASSWD_PRODV2 $DB_NAME > $DIR_DEST/$EXPORT_FILE.sql
 
 echo "* Archivage du Dump brut"
-rsync -Phavz $DIR_DEST/$EXPORT_FILE.sql $SRV_ARCH:$ARCH_DIR/$EXPORT_FILE.sql
+#rsync -Phavz $DIR_DEST/$EXPORT_FILE.sql $SRV_ARCH:$ARCH_DIR/$EXPORT_FILE.sql
 
 echo "* Conversion charset"
 iconv -f $CHARSET_ORIG -t $CHARSET_DEST $DIR_DEST/$EXPORT_FILE.sql -o $DIR_DEST/$EXPORT_FILE_CONV.sql

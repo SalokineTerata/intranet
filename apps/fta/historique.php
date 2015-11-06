@@ -123,6 +123,7 @@ if ($id_fta) {
     $tab = $details[$id_fta];
     if ($tab) {
         foreach ($tab as $id_fta_processus => $taux) {
+            $champChapitre = "";
             //Chargement des données
 
             $ftaProcessusModel = new FtaProcessusModel($id_fta_processus);
@@ -136,7 +137,7 @@ if ($id_fta) {
 
 
             $ftaProcessusEtatModel = new FtaProcessusEtatModel($idFtaProcessusEtat);
-            $idSite = $ftaModel->getDataField(FtaModel::FIELDNAME_SITE_ASSEMBLAGE)->getFieldValue();
+//            $idSite = $ftaModel->getDataField(FtaModel::FIELDNAME_SITE_ASSEMBLAGE)->getFieldValue();
             $date_echeance_fta = $ftaModel->getDataField(FtaModel::FIELDNAME_DATE_ECHEANCE_FTA)->getFieldValue();
             $idFtaWorkflow = $ftaModel->getDataField(FtaModel::FIELDNAME_WORKFLOW)->getFieldValue();
             $arrayIdFtaChapitre = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
@@ -144,17 +145,16 @@ if ($id_fta) {
                             . ' FROM ' . FtaWorkflowStructureModel::TABLENAME . ',' . FtaChapitreModel::TABLENAME
                             . ' WHERE ' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_WORKFLOW . '=' . $idFtaWorkflow
                             . ' AND ' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_PROCESSUS . '=' . $id_fta_processus
-                            . ' AND ' . FtaChapitreModel::KEYNAME . '=' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_CHAPITRE
+                            . ' AND ' . FtaChapitreModel::TABLENAME . '.' . FtaChapitreModel::KEYNAME
+                            . '=' . FtaWorkflowStructureModel::TABLENAME . '.' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_CHAPITRE
             );
             $nombreChapitre = count($arrayIdFtaChapitre);
 
             foreach ($arrayIdFtaChapitre as $rowsIdFtaChapitre) {
-                $champChapitre = ' <td>
-                   &nbsp;' . $rowsIdFtaChapitre[FtaChapitreModel::FIELDNAME_NOM_USUEL_CHAPITRE] . ' ' . $nom_site . '
-                   </td> ';
+                $champChapitre .=$rowsIdFtaChapitre[FtaChapitreModel::FIELDNAME_NOM_USUEL_CHAPITRE] . '<br>';
             }
-            $geoModel = new GeoModel($idSite);
-            $nom_site = $geoModel->getDataField(GeoModel::FIELDNAME_GEO)->getFieldValue();
+//            $geoModel = new GeoModel($idSite);
+//            $nom_site = $geoModel->getDataField(GeoModel::FIELDNAME_GEO)->getFieldValue();
             $nom_fta_processus = $ftaProcessusModel->getDataField(FtaProcessusModel::FIELDNAME_NOM)->getFieldValue();
             $service_fta_processus = $ftaProcessusModel->getDataField(FtaProcessusModel::FIELDNAME_SERVICE)->getFieldValue();
             $couleur_fta_processus_etat = $ftaProcessusEtatModel->getDataField(FtaProcessusEtatModel::FIELDNAME_COULEUR_PROCESSUS_ETAT)->getFieldValue();
@@ -163,17 +163,17 @@ if ($id_fta) {
             //Ecriture du code HTML
             $bloc.= '
                <tr class=contenu >
-                    <td ROWSPAN=' . $nombreChapitre . ' >
+                    <td >
                    &nbsp;' . $service_fta_processus . '
                    </td>
-                   <td ROWSPAN=' . $nombreChapitre . '>
-                   &nbsp;' . $nom_fta_processus . ' ' . $nom_site . '
-                   </td>   
-                   
-                   <td ROWSPAN=' . $nombreChapitre . '>
+                   <td >
+                   &nbsp;' . $nom_fta_processus .'
+                   </td> <td>   
+                   ' . $champChapitre . '
+                  </td> <td >
                    &nbsp;' . round($taux * "100", "2") . '%
                    </td>
-                   <td bgcolor=' . $couleur_fta_processus_etat . ' ROWSPAN=' . $nombreChapitre . '>
+                   <td bgcolor=' . $couleur_fta_processus_etat . ' >
                    &nbsp;' . $nom_fta_processus_etat . '
                    </td>
                   

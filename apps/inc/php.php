@@ -52,6 +52,7 @@ require_once('../fta/class/ObjectFta.php');
 // View
 require_once('../fta/class/view/FtaView.php');
 require_once('../fta/class/view/UserView.php');
+require_once('../fta/class/view/FtaComposantView.php');
 require_once('../fta/class/view/FtaProcessusDelaiView.php');
 require_once('../fta/class/ObjectFta.php');
 

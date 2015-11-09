@@ -213,13 +213,13 @@ class FtaView {
      * @param int $paramIdFta
      * @return string
      */
-    public function ListeWorkflowByAcces($paramIdUser, $paramIsEditable, $paramIdFta) {
+    public function ListeWorkflowByAcces($paramIdUser, $paramIsEditable, $paramIdFta,$paramIdFtaRole) {
         $HtmlList = new HtmlListSelect();
 
         /*
          * Worflow de FTA
          */
-        return FtaWorkflowModel::ShowListeDeroulanteNomWorkflowByAccesAndIdFta($paramIdUser, $HtmlList, $paramIsEditable, $paramIdFta);
+        return FtaWorkflowModel::ShowListeDeroulanteNomWorkflowByAccesAndIdFta($paramIdUser, $HtmlList, $paramIsEditable, $paramIdFta,$paramIdFtaRole);
     }
 
     /**
@@ -244,12 +244,12 @@ class FtaView {
      * @return type
      */
     public function ListeClassification($paramIsEditable) {
-          /*
+        /*
          * Classification FTA
          */
         $ListeCLassification = ClassificationFta2Model::ShowListeDeroulanteClassification($paramIsEditable);
 
-      
+
         return $ListeCLassification;
     }
 
@@ -726,7 +726,7 @@ class FtaView {
                         $this->getModel()->getKeyValue(), $idFtaChapitre
         );
         $ftaSuiviProjetModel = new FtaSuiviProjetModel($idFtaSuiviProjet);
-        $ftaSuiviProjetModel->setIsEditable($this->getIsEditable());
+        $ftaSuiviProjetModel->setIsEditable(FALSE);
         return $ftaSuiviProjetModel;
     }
 

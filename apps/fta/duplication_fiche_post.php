@@ -68,7 +68,7 @@ if ($action) {
     }
 
 //Traitement de la duplication
-    $option["abreviation_etat_destination"] = $abreviation_etat_destination;
+    $option["abreviation_etat_destination"] = FtaEtatModel::ETAT_ABREVIATION_VALUE_MODIFICATION;
     $option["designation_commerciale_fta"] = $new_designation_commerciale_fta;
     $option["site_de_production"] = $siteDeProduction;
     $action;

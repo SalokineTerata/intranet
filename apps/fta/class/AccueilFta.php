@@ -631,28 +631,28 @@ class AccueilFta {
 
                 break;
         }
-        if (substr($URL, -2) == 'in') {
-            $URL = $URL . 'tranet/apps/fta/index.php?';
+        if (substr($URL, -2) == 'pp') {
+            $URL = $URL . 's/fta/index.php?';
         }
-        $tableauFiche .= '<th><a href=' . $URL . '&order_common=Site_de_production&numeroPage=' . self::$numeroDePageCourante . '.html ><img src=../lib/images/order-AZ.png title=\'Ordonné par Nom de Site de Production\'  border=\'0\' /></a>'
+        $tableauFiche .= '<th><a href=' . $URL . '&order_common=Site_de_production&numeroPage=' . self::$numeroDePageCourante . '><img src=../lib/images/order-AZ.png title=\'Ordonné par Nom de Site de Production\'  border=\'0\' /></a>'
                 . 'Site'
                 . '</th><th>'
-                . '<a href=' . $URL . '&order_common=id_fta&numeroPage=' . self::$numeroDePageCourante . '.html ><img src=../lib/images/order-AZ.png title=\'Ordonné par Nom du Propriétaire\'  border=\'0\' /></a>'
+                . '<a href=' . $URL . '&order_common=id_fta&numeroPage=' . self::$numeroDePageCourante . '><img src=../lib/images/order-AZ.png title=\'Ordonné par Nom du Propriétaire\'  border=\'0\' /></a>'
                 . 'Client'
                 . '</th><th>'
-                . '<a href=' . $URL . '&order_common=suffixe_agrologic_fta&numeroPage=' . self::$numeroDePageCourante . '.html ><img src=../lib/images/order-AZ.png title=\'Ordonné par Nom de Classification\'  border=\'0\' /></a>'
+                . '<a href=' . $URL . '&order_common=suffixe_agrologic_fta&numeroPage=' . self::$numeroDePageCourante . ' ><img src=../lib/images/order-AZ.png title=\'Ordonné par Nom de Classification\'  border=\'0\' /></a>'
                 . 'Class.'
                 . '</th><th>'
-                . '<a href=' . $URL . '&order_common=designation_commerciale_fta&numeroPage=' . self::$numeroDePageCourante . '.html ><img src=../lib/images/order-AZ.png title=\'Ordonné par Noms du Produit\'  border=\'0\' /></a>'
+                . '<a href=' . $URL . '&order_common=designation_commerciale_fta&numeroPage=' . self::$numeroDePageCourante . ' ><img src=../lib/images/order-AZ.png title=\'Ordonné par Noms du Produit\'  border=\'0\' /></a>'
                 . 'Produits'
                 . '</th><th>'
-                . '<a href=' . $URL . '&order_common=id_dossier_fta&numeroPage=' . self::$numeroDePageCourante . '.html ><img src=../lib/images/order-AZ.png title=\'Ordonné par code Fta\'  border=\'0\' /></a>'
+                . '<a href=' . $URL . '&order_common=id_dossier_fta&numeroPage=' . self::$numeroDePageCourante . ' ><img src=../lib/images/order-AZ.png title=\'Ordonné par code Fta\'  border=\'0\' /></a>'
                 . 'Dossier FTA'
                 . '</th><th>'
-                . '<a href=' . $URL . '&order_common=code_article_ldc&numeroPage=' . self::$numeroDePageCourante . '.html ><img src=../lib/images/order-AZ.png title=\'Ordonné par code arcadia\'  border=\'0\' /></a>'
+                . '<a href=' . $URL . '&order_common=code_article_ldc&numeroPage=' . self::$numeroDePageCourante . ' ><img src=../lib/images/order-AZ.png title=\'Ordonné par code arcadia\'  border=\'0\' /></a>'
                 . 'Code Arcadia'
                 . '</th><th>'
-                . '<a href=' . $URL . '&order_common=date_echeance_fta&numeroPage=' . self::$numeroDePageCourante . '.html ><img src=../lib/images/order-AZ.png title=\'Ordonné par Date\'  border=\'0\' /></a>'
+                . '<a href=' . $URL . '&order_common=date_echeance_fta&numeroPage=' . self::$numeroDePageCourante . ' ><img src=../lib/images/order-AZ.png title=\'Ordonné par Date\'  border=\'0\' /></a>'
                 . 'Echéance de validation'
                 . '</th><th>'
                 . '% Avancement FTA'
@@ -728,6 +728,10 @@ class AccueilFta {
                 $idclassification = $rowsDetail[FtaModel::FIELDNAME_ID_FTA_CLASSIFICATION2];
                 $recap[$idFta] = $rowsDetail[FtaModel::FIELDNAME_POURCENTAGE_AVANCEMENT];
                 $listeIdFtaRole = $rowsDetail[FtaModel::FIELDNAME_LISTE_ID_FTA_ROLE];
+                
+                if ($recap[$idFta] == NULL){
+                    $recap[$idFta]="";
+                }
 
 
                 /**
@@ -773,7 +777,17 @@ class AccueilFta {
                 $createur_link = '\'Géré par ' . $createurPrenom . ' ' . $createurNom . '\'';
 
 
-
+                /**
+                 * Lien vers l'historique de la Fta
+                 */
+                $lienHistorique = ' <a href=historique-' . $idFta
+                        . '-1'
+                        . '-' . self::$idFtaEtat
+                        . '-' . self::$abrevationFtaEtat
+                        . '-' . self::$idFtaRole
+                        . '-' . self::$syntheseAction
+                        . '-1'
+                        . '.html >' . $recap[$idFta] . '</a>';
                 /*
                  * Designation commerciale
                  */
@@ -1064,7 +1078,7 @@ class AccueilFta {
                                 } else {
                                     $tableauFicheN.='<td ' . $bgcolor . $largeur_html_C3 . ' align=center>' . $dateEcheanceFta . '</td>'; //échance de validation
                                 }
-                                $tableauFicheN .= '<td ' . $bgcolor . ' width=5% align=center>' . $recap[$idFta] . '</td>'//% Avancement FTA
+                                $tableauFicheN .= '<td ' . $bgcolor . ' width=5% align=center >' . $lienHistorique . '</td>'//% Avancement FTA
                                         . '<td ' . $bgcolor . $largeur_html_C3 . ' align=center >' . $service . '</td>' //Service               
                                         . '<td ' . $bgcolor . $largeur_html_C3_action . ' align=center >' . $actions . '</td>'// Actions
                                         . $commentaire . '</tr >'; // Commentaires
@@ -1084,7 +1098,7 @@ class AccueilFta {
                                 } else {
                                     $tableauFicheN.='<td ' . $bgcolor . $largeur_html_C3 . '></td>';
                                 }
-                                $tableauFicheN .= '<td ' . $bgcolor . ' width=5% align=center>' . $recap[$idFta] . '</td>'//% Avancement FTA
+                                $tableauFicheN .= '<td ' . $bgcolor . ' width=5% align=center>' . $lienHistorique . '</td>'//% Avancement FTA
                                         . '<td ' . $bgcolor . $largeur_html_C3 . ' align=center >' . $service . '</td>' //Service               
                                         . '<td ' . $bgcolor . $largeur_html_C3_action . ' align=center >' . $actions . '</td>'// Actions
                                         . $commentaire . '</tr >'; // Commentaires
@@ -1108,7 +1122,7 @@ class AccueilFta {
                                 } else {
                                     $tableauFicheTr.='<td ' . $bgcolor . $largeur_html_C3 . '></td>';
                                 }
-                                $tableauFicheTr .= '<td ' . $bgcolor . ' width=5% align=center>' . $recap[$idFta] . '</td>'//% Avancement FTA
+                                $tableauFicheTr .= '<td ' . $bgcolor . ' width=5% align=center>' . $lienHistorique . '</td>'//% Avancement FTA
                                         . '<td ' . $bgcolor . $largeur_html_C3 . ' align=center >' . $service . '</td>' //Service               
                                         . '<td ' . $bgcolor . $largeur_html_C3_action . ' align=center >' . $actions . '</td>'// Actions
                                         . $commentaire . '</tr >'; // Commentaires
@@ -1128,7 +1142,7 @@ class AccueilFta {
                                 } else {
                                     $tableauFicheTr.='<td ' . $bgcolor . $largeur_html_C3 . ' ></td>';
                                 }
-                                $tableauFicheTr .= '<td ' . $bgcolor . ' width=5% align=center>' . $recap[$idFta] . '</td>'//% Avancement FTA
+                                $tableauFicheTr .= '<td ' . $bgcolor . ' width=5% align=center>' . $lienHistorique . '</td>'//% Avancement FTA
                                         . '<td ' . $bgcolor . $largeur_html_C3 . ' align=center >' . $service . '</td>' //Service               
                                         . '<td ' . $bgcolor . $largeur_html_C3_action . ' align=center >' . $actions . '</td>'// Actions
                                         . $commentaire . '</tr >'; // Commentaires
@@ -1167,7 +1181,7 @@ class AccueilFta {
                                 } else {
                                     $tableauFicheTmp.='<td ' . $bgcolor . $largeur_html_C3 . ' ></td>';
                                 }
-                                $tableauFicheTmp .= '<td ' . $bgcolor . ' width=5% align=center>' . $recap[$idFta] . '</td>'//% Avancement FTA
+                                $tableauFicheTmp .= '<td ' . $bgcolor . ' width=5% align=center>' . $lienHistorique. '</td>'//% Avancement FTA
                                         . '<td ' . $bgcolor . $largeur_html_C3 . ' align=center >' . $service . '</td>' //Service               
                                         . '<td ' . $bgcolor . $largeur_html_C3_action . ' align=center >' . $actions . '</td>'// Actions
                                         . $commentaire . '</tr >'; // Commentaires
@@ -1188,7 +1202,7 @@ class AccueilFta {
                                 } else {
                                     $tableauFicheTmp.='<td ' . $bgcolor . $largeur_html_C3 . ' ></td>';
                                 }
-                                $tableauFicheTmp .='<td ' . $bgcolor . ' width=5% align=center>' . $recap[$idFta] . '</td>'//% Avancement FTA
+                                $tableauFicheTmp .='<td ' . $bgcolor . ' width=5% align=center>' . $lienHistorique . '</td>'//% Avancement FTA
                                         . '<td ' . $bgcolor . $largeur_html_C3 . ' align=center >' . $service . '</td>' //Service               
                                         . '<td ' . $bgcolor . $largeur_html_C3_action . ' align=center >' . $actions . '</td>'// Actions
                                         . $commentaire . '</tr >'; // Commentaires
@@ -1213,7 +1227,7 @@ class AccueilFta {
                                 } else {
                                     $tableauFicheTrTmp.='<td ' . $bgcolor . $largeur_html_C3 . ' ></td>';
                                 }
-                                $tableauFicheTrTmp .= '<td ' . $bgcolor . ' width=5% align=center>' . $recap[$idFta] . '</td>'//% Avancement FTA
+                                $tableauFicheTrTmp .= '<td ' . $bgcolor . ' width=5% align=center>' . $lienHistorique . '</td>'//% Avancement FTA
                                         . '<td ' . $bgcolor . $largeur_html_C3 . ' align=center >' . $service . '</td>' //Service               
                                         . '<td ' . $bgcolor . $largeur_html_C3_action . ' align=center >' . $actions . '</td>'// Actions
                                         . $commentaire . '</tr >'; // Commentaires
@@ -1233,7 +1247,7 @@ class AccueilFta {
                                 } else {
                                     $tableauFicheTrTmp.='<td ' . $bgcolor . $largeur_html_C3 . ' ></td>';
                                 }
-                                $tableauFicheTrTmp .='<td ' . $bgcolor . ' width=5% align=center>' . $recap[$idFta] . '</td>'//% Avancement FTA
+                                $tableauFicheTrTmp .='<td ' . $bgcolor . ' width=5% align=center>' . $lienHistorique . '</td>'//% Avancement FTA
                                         . '<td ' . $bgcolor . $largeur_html_C3 . ' align=center >' . $service . '</td>' //Service               
                                         . '<td ' . $bgcolor . $largeur_html_C3_action . ' align=center >' . $actions . '</td>'// Actions
                                         . $commentaire . '</tr >'; // Commentaires

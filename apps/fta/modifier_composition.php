@@ -133,7 +133,8 @@ if ($proprietaire) {
 if ($id_fta_composant) {
     $creation = 0;
     $ftaComposantModel = new FtaComposantModel($id_fta_composant);
-
+    $ftaComposantView = new FtaComposantView($ftaComposantModel);
+    $ftaComposantView->setIsEditable($editable);
     $nom_fta_composition = $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_NOM_FTA_COMPOSITION)->getFieldValue();
     $ingredient_fta_composition = $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_INGREDIENT_FTA_COMPOSITION)->getFieldValue();
     $ingredient_fta_composition1 = $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_INGREDIENT_FTA_COMPOSITION1)->getFieldValue();
@@ -168,6 +169,7 @@ if ($id_fta_composant) {
     $etiquette_decomposition_poids_fta_composant = $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_ETIQUETTE_DECOMPOSITION_POIDS_FTA_COMPOSANT)->getFieldValue();
     $etiquette_information_complementaire_recto_fta_composant = $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_ETIQUETTE_INFORMATION_COMPLEMENTAIRE_RECTO_FTA_COMPOSANT)->getFieldValue();
     $etiquette_libelle_legal_fta_composition = $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_ETIQUETTE_LIBELLE_LEGAL_FTA_COMPOSITION)->getFieldValue();
+    $code_produit_agrologic_fta_nomenclature = $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_CODE_PRODUIT_AGROLOGIC_FTA_NOMENCLATURE)->getFieldValue();
 } else {
     $creation = 1;
 //Ce composant sera géré dans la composition
@@ -182,13 +184,22 @@ $ftaModel = new FtaModel($id_fta);
 //echo $id_fta."<br>";
 $bloc = ""; //Bloc de saisie
 //Désignation
-$bloc .= "<tr><td>" . DatabaseDescription::getFieldDocLabel(FtaComposantModel::TABLENAME, FtaComposantModel::FIELDNAME_NOM_FTA_COMPOSITION) . "</td><td>";
+//$bloc .= "<tr><td>" . DatabaseDescription::getFieldDocLabel(FtaComposantModel::TABLENAME, FtaComposantModel::FIELDNAME_NOM_FTA_COMPOSITION) . "</td><td>";
 
-if ($proprietaire) {
-    $bloc .= "<input type=text name=" . FtaComposantModel::FIELDNAME_NOM_FTA_COMPOSITION . " value='" . $nom_fta_composition . "' size=50/>";
-} else {
-    $bloc .=$nom_fta_composition;
-}
+//if ($proprietaire) {
+//    $bloc .= "<input type=text name=" . FtaComposantModel::FIELDNAME_NOM_FTA_COMPOSITION . " value='" . $nom_fta_composition . "' size=50/>";
+//} else {
+    $bloc .=    $ftaComposantView->getHtmlDataField(FtaComposantModel::FIELDNAME_NOM_FTA_COMPOSITION);
+
+//}
+//$bloc.="</td></tr>";
+
+//Code Produit Agrologic
+$bloc .= "<tr><td>" . DatabaseDescription::getFieldDocLabel(FtaComposantModel::TABLENAME, FtaComposantModel::FIELDNAME_CODE_PRODUIT_AGROLOGIC_FTA_NOMENCLATURE) . "</td><td>";
+
+//$bloc .=$code_produit_agrologic_fta_nomenclature;
+$bloc .=$ftaComposantView->getHtmlDataField(FtaComposantModel::FIELDNAME_CODE_PRODUIT_AGROLOGIC_FTA_NOMENCLATURE);;
+
 $bloc.="</td></tr>";
 
 
@@ -705,7 +716,7 @@ if ($mode_etiquette_fta_composition == 1 or $mode_etiquette_fta_composition == 2
         ;
         $nom_defaut = FtaComposantModel::FIELDNAME_K_STYLE_PARAGRAPHE_INGREDIENT_FTA_COMPOSITION;
         $id_defaut = $k_style_paragraphe_ingredient_fta_composition;
-        $liste_style .= AccueilFta::afficherRequeteEnListeDeroulante($requete, $id_defaut, $nom_defaut,$editable);
+        $liste_style .= AccueilFta::afficherRequeteEnListeDeroulante($requete, $id_defaut, $nom_defaut, $editable);
         $bloc.= $liste_style;
     } else {
         if ($k_style_paragraphe_ingredient_fta_composition) {
@@ -739,7 +750,7 @@ if ($mode_etiquette_fta_composition == 1 or $mode_etiquette_fta_composition == 2
         ;
         $nom_defaut = FtaComposantModel::FIELDNAME_K_ETIQUETTE_FTA_COMPOSITION;
         $id_defaut = $k_etiquette_fta_composition;
-        $bloc.= AccueilFta::afficherRequeteEnListeDeroulante($requete, $id_defaut, $nom_defaut,$editable) . $image_modif;
+        $bloc.= AccueilFta::afficherRequeteEnListeDeroulante($requete, $id_defaut, $nom_defaut, $editable) . $image_modif;
     } else {
         if ($k_etiquette_fta_composition) {
             $k_etiquette = $k_etiquette_fta_composition;
@@ -773,7 +784,7 @@ if ($mode_etiquette_fta_composition == 1 or $mode_etiquette_fta_composition == 2
         ;
         $nom_defaut = FtaComposantModel::FIELDNAME_K_ETIQUETTE_VERSO_FTA_COMPOSITION;
         $id_defaut = $k_etiquette_verso_fta_composition;
-        $bloc.= AccueilFta::afficherRequeteEnListeDeroulante($requete, $id_defaut, $nom_defaut,$editable) . $image_modif;
+        $bloc.= AccueilFta::afficherRequeteEnListeDeroulante($requete, $id_defaut, $nom_defaut, $editable) . $image_modif;
     } else {
         if ($k_etiquette_verso_fta_composition) {
             $k_etiquette = $k_etiquette_verso_fta_composition;
@@ -803,7 +814,7 @@ if ($mode_etiquette_fta_composition == 1 or $mode_etiquette_fta_composition == 2
                 . " ORDER BY " . CodesoftEtiquettesLogoModel::FIELDNAME_LOGO_NAME;
         $nom_defaut = FtaComposantModel::FIELDNAME_K_CODESOFT_ETIQUETTE_LOGO;
         $id_defaut = $k_codesoft_etiquette_logo;
-        $bloc.= AccueilFta::afficherRequeteEnListeDeroulante($requete, $id_defaut, $nom_defaut,$editable) . $image_modif;
+        $bloc.= AccueilFta::afficherRequeteEnListeDeroulante($requete, $id_defaut, $nom_defaut, $editable) . $image_modif;
     } else {
         if ($k_codesoft_etiquette_logo) {
             $id = $k_codesoft_etiquette_logo;
@@ -843,7 +854,7 @@ if ($mode_etiquette_fta_composition == 3) {
 
     $nom_defaut = FtaComposantModel::FIELDNAME_ETIQUETTE_ID_FTA_COMPOSITION;
     $id_defaut = $etiquette_id_fta_composition;
-    $bloc.= AccueilFta::afficherRequeteEnListeDeroulante($requete, $id_defaut, $nom_defaut,$editable) . $image_modif;
+    $bloc.= AccueilFta::afficherRequeteEnListeDeroulante($requete, $id_defaut, $nom_defaut, $editable) . $image_modif;
 }
 /* }else{
   $k_etiquette=$$champ;

@@ -123,7 +123,7 @@ class FtaChapitreModel extends AbstractModel {
         }
 
         //Informations
-        if ($return) {
+        if ($return['processus']) {
             foreach ($return['processus'] as $id_Fta_Processus) {
                 $idFtaProcessus = $id_Fta_Processus;
                 $arrayFtaProcessus = DatabaseOperation::convertSqlStatementWithoutKeyToArray(

@@ -12,7 +12,13 @@
         i = document.form_action.action.selectedIndex;
         if (i === "I")
             return;
-        url = "transiter.php?id_fta=" + document.form_action.id_fta.value + "&action=" + document.form_action.action[i].value;
+        url = "transiter.php?id_fta=" + document.form_action.id_fta.value 
+                + "&action=" + document.form_action.action[i].value
+                + "&id_fta_role=" + document.form_action.id_fta_role.value
+                + "&synthese_action=" + document.form_action.synthese_action.value
+                + "&demande_abreviation_fta_transition=" + document.form_action.demande_abreviation_fta_transition.value
+        ;
+
         parent.location.href = url;
     }
 

@@ -78,26 +78,31 @@ class FtaWorkflowModel extends AbstractModel {
     /**
      * Affiche la liste des espaces de travail pour lesquel l'utilisateur connecté à les droits d'accès
      * et l'identifiant de la Fta en cours
-     * @param type $paramIdUser
-     * @param type $paramObjetList
-     * @param type $paramIsEditable
-     * @param type $paramIdFta
-     * @return type
+     * @param int $paramIdUser
+     * @param objet $paramObjetList
+     * @param boolean $paramIsEditable
+     * @param int $paramIdFta
+     * @return string
      */
-    public static function ShowListeDeroulanteNomWorkflowByAccesAndIdFta($paramIdUser, $paramObjetList, $paramIsEditable, $paramIdFta) {
+    public static function ShowListeDeroulanteNomWorkflowByAccesAndIdFta($paramIdUser, $paramObjetList, $paramIsEditable, $paramIdFta,$paramIdRole) {
 
         $ftaModel = new FtaModel($paramIdFta);
-        $arrayWorkflow = DatabaseOperation::convertSqlStatementWithKeyAndOneFieldToArray(
-                        'SELECT DISTINCT ' . FtaWorkflowModel::KEYNAME . ',' . FtaWorkflowModel::FIELDNAME_DESCRIPTION_FTA_WORKFLOW
+         $arrayWorkflow = DatabaseOperation::convertSqlStatementWithKeyAndOneFieldToArray(
+                        'SELECT DISTINCT ' . FtaWorkflowModel::TABLENAME . '.' . FtaWorkflowModel::KEYNAME . ',' . FtaWorkflowModel::FIELDNAME_DESCRIPTION_FTA_WORKFLOW
                         . ' FROM ' . FtaWorkflowModel::TABLENAME
                         . ', ' . IntranetDroitsAccesModel::TABLENAME
+                        . ', ' . FtaWorkflowStructureModel::TABLENAME
                         . ' WHERE ' . FtaWorkflowModel::FIELDNAME_DESCRIPTION_FTA_WORKFLOW . '<>\'\''
                         . ' AND ' . FtaWorkflowModel::TABLENAME . '.' . FtaWorkflowModel::FIELDNAME_ID_INTRANET_ACTIONS
                         . '=' . IntranetDroitsAccesModel::TABLENAME . '.' . IntranetDroitsAccesModel::FIELDNAME_ID_INTRANET_ACTIONS
+                        . ' AND ' . FtaWorkflowStructureModel::TABLENAME . '.' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_ROLE . '=' . $paramIdRole
+                        . ' AND ' . FtaWorkflowModel::TABLENAME . '.' . FtaWorkflowModel::KEYNAME
+                        . '=' . FtaWorkflowStructureModel::TABLENAME . '.' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_WORKFLOW
                         . ' AND ' . IntranetDroitsAccesModel::FIELDNAME_ID_USER . '=' . $paramIdUser // L'utilisateur connecté
                         . ' AND ' . IntranetDroitsAccesModel::TABLENAME . '.' . IntranetDroitsAccesModel::FIELDNAME_NIVEAU_INTRANET_DROITS_ACCES . '=' . '1'
                         . ' ORDER BY ' . FtaWorkflowModel::FIELDNAME_DESCRIPTION_FTA_WORKFLOW
         );
+
         $paramObjetList->setArrayListContent($arrayWorkflow);
         $HtmlTableName = FtaModel::TABLENAME
                 . '_'

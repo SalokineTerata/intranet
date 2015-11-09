@@ -33,3 +33,79 @@
 2015-11-02 15:40:06 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `commentaire` =   NULL
 2015-11-02 15:40:10 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 
 2015-11-02 15:40:10 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `commentaire` =   NULL
+2015-11-04 14:07:15 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 2015-11-04
+2015-11-04 14:07:15 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `date_validation_suivi_projet` =   '2015-11-04'
+2015-11-04 14:24:41 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 2015-11-04
+2015-11-04 14:24:41 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `date_validation_suivi_projet` =   '2015-11-04'
+2015-11-04 14:41:13 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 2015-11-04
+2015-11-04 14:41:13 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `date_echeance_fta` =   '2015-11-04'
+2015-11-04 14:42:47 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 2015-11-04
+2015-11-04 14:42:47 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `date_validation_suivi_projet` =   '2015-11-04'
+2015-11-04 14:44:27 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 2015-11-04
+2015-11-04 14:44:27 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `date_validation_suivi_projet` =   '2015-11-04'
+2015-11-04 14:45:11 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 2015-11-04
+2015-11-04 14:45:11 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `date_validation_suivi_projet` =   '2015-11-04'
+2015-11-04 14:50:29 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : dsddrsrds
+2015-11-04 14:50:29 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `commentaire_maj_fta` =   'dsddrsrds'
+2015-11-04 14:51:51 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : test 
+2015-11-04 14:51:51 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `commentaire_maj_fta` =   'test '
+2015-11-04 15:39:46 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 291
+2015-11-04 15:39:46 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `poids_fta_composition` =   '291'
+2015-11-04 15:39:54 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 291.0000000000
+2015-11-04 15:39:54 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `poids_fta_composition` =   '291.0000000000'
+2015-11-04 15:40:07 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 2915343453486786453458
+2015-11-04 15:40:07 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `poids_fta_composition` =   '2915343453486786453458'
+2015-11-04 15:40:16 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 2.91534345348678645e+21
+2015-11-04 15:40:16 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `poids_fta_composition` =   '2.91534345348678645e+21'
+2015-11-04 15:40:28 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 5
+2015-11-04 15:40:28 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `quantite_fta_composition` =   '5'
+2015-11-04 15:40:30 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 6
+2015-11-04 15:40:30 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `quantite_fta_composition` =   '6'
+2015-11-04 15:40:33 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 7
+2015-11-04 15:40:33 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `quantite_fta_composition` =   '7'
+2015-11-04 15:40:36 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 6
+2015-11-04 15:40:36 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `quantite_fta_composition` =   '6'
+2015-11-04 15:40:38 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 5
+2015-11-04 15:40:38 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `quantite_fta_composition` =   '5'
+2015-11-04 15:40:53 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 200.000
+2015-11-04 15:40:53 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `poids_fta_composition` =   '200.000'
+2015-11-04 15:41:01 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 2009595468456
+2015-11-04 15:41:01 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `poids_fta_composition` =   '2009595468456'
+2015-11-04 15:42:43 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 12
+2015-11-04 15:42:43 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `poids_fta_composition` =   '12'
+2015-11-04 15:43:19 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 1234567
+2015-11-04 15:43:19 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `poids_fta_composition` =   '1234567'
+2015-11-04 15:43:28 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 12345678
+2015-11-04 15:43:28 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `poids_fta_composition` =   '12345678'
+2015-11-04 15:43:53 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 200
+2015-11-04 15:43:53 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `poids_fta_composition` =   '200'
+2015-11-04 17:46:01 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : erz
+2015-11-04 17:46:01 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `commentaire_maj_fta` =   'erz'
+2015-11-05 16:52:45 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 
+2015-11-05 16:52:45 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `date_validation_suivi_projet` =   NULL
+2015-11-05 16:57:12 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 
+2015-11-05 16:57:12 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `date_validation_suivi_projet` =   NULL
+2015-11-05 16:57:42 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 2015-11-05
+2015-11-05 16:57:42 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `date_validation_suivi_projet` =   '2015-11-05'
+2015-11-05 16:58:51 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 
+2015-11-05 16:58:51 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `date_validation_suivi_projet` =   NULL
+2015-11-06 14:08:00 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : test
+2015-11-06 14:08:00 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `commentaire_maj_fta` =   'test'
+2015-11-06 15:30:24 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 6
+2015-11-06 15:30:24 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `id_fta_workflow` =   '6'
+2015-11-06 15:32:58 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 7
+2015-11-06 15:32:58 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `id_fta_workflow` =   '7'
+2015-11-06 15:42:54 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 6
+2015-11-06 15:42:54 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `id_fta_workflow` =   '6'
+2015-11-06 16:01:42 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 6
+2015-11-06 16:01:42 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `id_fta_workflow` =   '6'
+2015-11-06 16:09:07 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 6
+2015-11-06 16:09:07 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `id_fta_workflow` =   '6'
+2015-11-06 16:11:29 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 6
+2015-11-06 16:11:29 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `id_fta_workflow` =   '6'
+2015-11-06 16:22:59 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 7
+2015-11-06 16:22:59 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `id_fta_workflow` =   '7'
+2015-11-09 09:42:25 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 2015-11-09
+2015-11-09 09:42:25 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `date_echeance_fta` =   '2015-11-09'
+2015-11-09 10:47:20 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 2015-12-31
+2015-11-09 10:47:20 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `date_echeance_fta` =   '2015-12-31'

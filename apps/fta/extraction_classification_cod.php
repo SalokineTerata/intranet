@@ -55,7 +55,7 @@ require_once '../inc/main.php';
 
 $nameOfBDDTarget = "intranet_v3_0_cod";
 $nameOfBDDOrigin = "intranet_v2_0_prod_cod";
-$nameOfBDDStructure = "intranet_v3_0_dev_2015_10_19";
+$nameOfBDDStructure = "intranet_v3_0_dev_model";
 
 
 /**

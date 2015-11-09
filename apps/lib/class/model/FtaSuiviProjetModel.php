@@ -643,10 +643,12 @@ class FtaSuiviProjetModel extends AbstractModel {
         if ($paramTableauProcessus) {
             $arrayCycle = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
                             'SELECT DISTINCT ' . FtaProcessusCycleModel::FIELDNAME_PROCESSUS_INIT
-                            . ' FROM ' . FtaProcessusCycleModel::TABLENAME . ', ' . FtaEtatModel::TABLENAME
+                            . ' FROM ' . FtaProcessusCycleModel::TABLENAME . ', ' . FtaEtatModel::TABLENAME . ',' . FtaProcessusModel::TABLENAME
                             . ' WHERE ' . FtaProcessusCycleModel::FIELDNAME_FTA_ETAT . '=' . FtaEtatModel::FIELDNAME_ABREVIATION
                             . ' AND ' . FtaProcessusCycleModel::FIELDNAME_WORKFLOW . '=' . $paramFtaModel->getDataField(FtaModel::FIELDNAME_WORKFLOW)->getFieldValue()
                             . ' AND ' . FtaEtatModel::KEYNAME . '=\'' . $idFtaEtat . '\''
+                            . ' AND ' . FtaProcessusModel::KEYNAME . '=' . FtaProcessusCycleModel::FIELDNAME_PROCESSUS_INIT
+                            . ' ORDER BY ' . FtaProcessusModel::FIELDNAME_SERVICE
             );
             foreach ($arrayCycle as $rowsCycle) {
                 $id_fta_processus = $rowsCycle[FtaProcessusCycleModel::FIELDNAME_PROCESSUS_INIT];

@@ -4478,10 +4478,17 @@ while ($value=mysql_fetch_array($resultFta)) {
     $idDossierFta = $value["id_dossier_fta"];
     $idVersionDossierFta = $value["id_version_dossier_fta"];
     $idFtaEtatTMP = $value["id_fta_etat"];
-    if ($idFtaEtatTMP == '8') {
+    switch ($idFtaEtatTMP) {
+    case  '8':
         $idFtaEtat = '1';
-    } else {
+        break;
+    case  '3':
+        $pourcentageAvancement = '100%'; 
         $idFtaEtat = $idFtaEtatTMP;
+         break;
+    default :
+        $idFtaEtat = $idFtaEtatTMP;
+        break;
     }
     $cretateurFta = $value["createur_fta"];
     if ($cretateurFta == '0') {
@@ -4765,7 +4772,7 @@ VALUES ( \"$idFta\", \"$idAccessArti2\", \"$numft\", \"$idFtaWorkflow\" "
             . ", \"$K_etat\", \"$EAN_UVC\", \"$EAN_COLIS\", \"$EAN_PALETTE\" "
             . ", \"$nouvel_article\", \"$k_gestion_lot\", \"$activation_codesoft_arti2\", \"$id_etiquette_codesoft_arti2\" "
             . ", \"$atmosphereProtectrice\", \"$imageEcoEmballage\", \"$libelleCodeArticleClient\", \"$idServiceConsommateur\" "
-            . ", \"\", NULL,\"\",\"\")";
+            . ", \"\", NULL,\"$pourcentageAvancement\",\"\")";
          echo "INSERT INTO ".$nameOfBDDTarget."." . "fta." . "id_fta .". $idFta ." ...";
     mysql_query("SET NAMES 'utf8'");
     if(mysql_query($sql_inter)) {echo "[OK]\n";}else{echo "[FAILED]\n $idFta \n";}

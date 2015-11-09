@@ -59,6 +59,8 @@ $idFta = Lib::getParameterFromRequest('id_fta');
 $idFtaRole = Lib::getParameterFromRequest('id_fta_role');
 $action = Lib::getParameterFromRequest('action');
 $demande_abreviation_fta_transition = Lib::getParameterFromRequest('demande_abreviation_fta_transition');
+$syntheseAction = Lib::getParameterFromRequest('synthese_action');
+
 
 /*
  * Initinalisation du modele Fta
@@ -109,7 +111,7 @@ foreach ($arrayFta as $rowsFta) {
 
 
 
-$taux_temp = FtaSuiviProjetModel::getFtaTauxValidation($ftaModel,FALSE);
+$taux_temp = FtaSuiviProjetModel::getFtaTauxValidation($ftaModel, FALSE);
 $recap[$idFta] = round($taux_temp['0'] * '100%', '0') . '%';
 
 
@@ -119,8 +121,7 @@ $recap[$idFta] = round($taux_temp['0'] * '100%', '0') . '%';
  */
 
 //Tableau des transitions disponibles pour cette fiches techniques
-$tableau_transition = '<select name=action onChange=lien_selection_chapitre()>'
-;
+$tableau_transition = '<select name=action onChange=lien_selection_chapitre()>';
 
 $req = 'SELECT ' . FtaTransitionModel::FIELDNAME_NOM_USUEL_FTA_TRANSITION . ', ' . FtaTransitionModel::FIELDNAME_ABREVIATION_FTA_TRANSITION
         . ' FROM ' . FtaTransitionModel::TABLENAME
@@ -133,7 +134,11 @@ if ($demande_abreviation_fta_transition) {
 if ($recap[$idFta] <> '100%') {
     $req.= ' AND ' . FtaTransitionModel::FIELDNAME_PROCESSUS_PROPRIETAIRE_FTA_TRANSITION . '=0';
 }
-$req .=' ORDER BY ' . FtaTransitionModel::FIELDNAME_ABREVIATION_FTA_TRANSITION . ' DESC ';
+if ($idFtaRole == "6") {
+    $req.= ' AND ' . FtaTransitionModel::FIELDNAME_ABREVIATION_FTA_TRANSITION . '<>\'' . FtaEtatModel::ETAT_ABREVIATION_VALUE_WORKFLOW . '\'';
+}
+
+$req .=' ORDER BY ' . FtaTransitionModel::FIELDNAME_ABREVIATION_FTA_TRANSITION;
 $arrayFtaTransition = DatabaseOperation::convertSqlStatementWithoutKeyToArray($req);
 
 $flag_selection_chapitre = 0;    //Peut-on sélectionner un chapitre à mettre à jour ?
@@ -197,7 +202,7 @@ if ($action == 'W') {
     /*
      * Worflow de FTA
      */
-    $listeDesWorkflow.=$ftaView->ListeWorkflowByAcces($idUser, TRUE, $idFta);
+    $listeDesWorkflow.=$ftaView->ListeWorkflowByAcces($idUser, TRUE, $idFta, $idFtaRole);
 }
 
 
@@ -227,6 +232,8 @@ echo '
      <input type=hidden name=id_fta_workflow value=' . $idFtaWorkflow . '>
      <input type=hidden name=id_dossier_fta value=' . $idDossierFta . '>
      <input type=hidden name=commentaire_maj_fta value=`' . $commentaireMajFta . '`>
+     <input type=hidden name=demande_abreviation_fta_transition value=' . $demande_abreviation_fta_transition . '>
+     <input type=hidden name=synthese_action value=' . $syntheseAction . '>
     <' . $html_table . '>
         <tr class=titre_principal>
             <td>

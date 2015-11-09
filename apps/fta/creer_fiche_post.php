@@ -40,6 +40,31 @@ $designationCommercialeFta = Lib::getParameterFromRequest(FtaModel::FIELDNAME_DE
 $abreviationFtaEtat = Lib::getParameterFromRequest(FtaEtatModel::FIELDNAME_ABREVIATION);
 $siteDeProduction = Lib::getParameterFromRequest(GeoModel::KEYNAME);
 
+/**
+ * Vérification de la sélection d'un site de production et d'un espace de travail
+ */
+if ($idFtaWorkflow == "-1") {
+    //Averissement
+    $titre = "Espace de travail d'une Fiche Technique Article";
+    $message = "Veuillez selectionner un espace de travail .<br><br>"
+    ;
+    afficher_message($titre, $message, $redirection);
+}
+if ($siteDeProduction == "-1") {
+    //Averissement
+    $titre = "Site de production d'une Fiche Technique Article";
+    $message = "Veuillez selectionner un site de production .<br><br>"
+    ;
+    afficher_message($titre, $message, $redirection);
+}
+if (!$designationCommercialeFta) {
+    //Averissement
+    $titre = "Désignation commerciale d'une Fiche Technique Article";
+    $message = "Veuillez saisir une désignation commerciale .<br><br>"
+    ;
+    afficher_message($titre, $message, $redirection);
+}
+
 If ($idFtaWorkflow == '2' and $idFtaRole == '1') {
     $idFtaRole = '6';
 }
@@ -138,7 +163,7 @@ switch ($action) {
         }
 
         //Redirection
-          header('Location: modification_fiche.php?id_fta=' . $idFta
+        header('Location: modification_fiche.php?id_fta=' . $idFta
                 . '&synthese_action=encours&comeback=1&id_fta_etat=' . $idFtaEtat
                 . '&abreviation_fta_etat=' . $abreviationFtaEtat
                 . '&id_fta_role=' . $idFtaRole);

@@ -6,8 +6,8 @@
 #
 #
 
-echo "* Migration vers l'environnement PRD"
-./apps/upgrade/upgrade2.0to3.0.sh intranet_v3_0_prd intranet_v2_0_prod_prd intranet_v3_0_prd_SAVE
+echo "* Migration vers l'environnement DEV"
+./apps/upgrade/upgrade2.0to3.0.sh intranet_v3_0_dev intranet_v2_0_prod_dev intranet_v3_0_model dev
 
 
 

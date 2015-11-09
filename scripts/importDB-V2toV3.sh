@@ -22,6 +22,9 @@ DB_PASSWD_PRODV3="agis"
 SRV_PRODV2="intranet.agis.fr"
 SRV_ARCH="admin.agis.fr"
 
+SRV_DEV="dev-intranet.agis.fr"
+DB_NAME_MODEL_DEV="intranet_v3_0_dev_model"
+
 ARCH_DIR="/u1/DATA01/archives/SAVE"
 CHARSET_ORIG="WINDOWS-1252"
 CHARSET_DEST="UTF-8"
@@ -53,3 +56,12 @@ echo "* Importation des données dans le serveur de base de données local"
 mysql --user=$DB_USER_PRODV3 --password=$DB_PASSWD_PRODV3 $DB_NAME_V3 < $DIR_DEST/$EXPORT_FILE_CONV.sql
 
 
+if [ $ENV_DEST = "prd" ]
+then
+	
+	echo "* Récupération de la base model en DEV"
+	ssh -n $SRV_DEV -- mysqldump -a --add-drop-table -v --quote-names --user=$DB_USER_PRODV3 --password=$DB_PASSWD_PRODV3 $DB_NAME_MODEL_DEV > $DIR_DEST/$DB_NAME_MODEL_DEV.sql
+	
+	echo "* Importation de la base model dans le SGBD Prod"
+	mysql --user=$DB_USER_PRODV3 --password=$DB_PASSWD_PRODV3 $DB_NAME_MODEL_DEV < $DIR_DEST/$DB_NAME_MODEL_DEV.sql
+fi

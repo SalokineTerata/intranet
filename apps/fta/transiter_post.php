@@ -121,14 +121,14 @@ if (!$action) {
             $commentaire_maj_fta = $new_commentaire_maj_fta;
             //echo $abreviation_fta_transition;
 //echo $id_fta;
-            $t = FtaTransitionModel::BuildTransitionFta($idFta, $abreviation_fta_transition, $commentaire_maj_fta, $idFtaRole, $idFtaWorkflow, $ListeDesChapitres);
+            $t = FtaTransitionModel::BuildTransitionFta($idFta, $abreviation_fta_transition, $commentaire_maj_fta, $idFtaWorkflow, $ListeDesChapitres);
             //Codes de retour de la fonction:
             //   0: FTA correctement transitée
             //   1: FTA non transité car risque de doublon
             //   3: Erreur autre
 
             if ($abreviation_fta_transition == 'V') { //Seules les FTA validées entrent dans un système de diffusion
-                switch ($t) {
+                switch ($t["0"]) {
                     case 0:
                         //Récupération de la liste diffusion
                         $liste_destinataire = FtaTransitionModel::BuildListeDiffusionTransition($idFta);
@@ -181,12 +181,13 @@ if (!$action) {
             $open_erpdatasync = '../access/base_erp_datasync/erp_datasync.' . $extension;
             header('Location: open_erpdatasync.php?open_erpdatasync=' . $open_erpdatasync);
         } else {
-            if ($t <> 1) {
-                header('Location: index.php');
+            if ($t["0"] <> 1) {
+                header('Location: modification_fiche.php?id_fta=' . $t["id_fta_new"] . '&synthese_action=encours&comeback=1&id_fta_etat=' . $t[FtaEtatModel::KEYNAME] . '&abreviation_fta_etat=' . $t[FtaEtatModel::FIELDNAME_ABREVIATION] . '&id_fta_role=' . $idFtaRole);
+                
                 /**
                  * Version avec le module rewrite
                  */
-//                header('Location: index.html');
+//                header('Location: modification_fiche-$t["id_fta_new"]-encours-1-$t[FtaEtatModel::KEYNAME]-$t[FtaEtatModel::FIELDNAME_ABREVIATION]-$idFtaRole.html');
             }
         }
     }//Fin du traitement

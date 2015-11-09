@@ -66,7 +66,7 @@ class FtaModel extends AbstractModel {
     const FIELDNAME_LISTE_ID_FTA_ROLE = "liste_id_fta_role";
     const FIELDNAME_LOGO_ECO_EMBALLAGE = "image_eco_emballage";
     const FIELDNAME_NOM_CLIENT_DEMANDEUR = "nom_client_demandeur";
-    const FIELDNAME_NOM_ABREGE = "nom_abrege_fta";
+    const FIELDNAME_NOM_ABREGE = "OLD_nom_abrege_fta";
     const FIELDNAME_NOM_DEMANDEUR = "nom_demandeur_fta";
     const FIELDNAME_NOMBRE_PORTION_FTA = "nombre_portion_fta";
     const FIELDNAME_NOMBRE_UVC_PAR_CARTON = "NB_UNIT_ELEM";
@@ -697,7 +697,7 @@ class FtaModel extends AbstractModel {
         if (!$paramOption["site_de_production"]) {
             $paramOption["site_de_production"] = "NULL";
         }
-        DatabaseOperation::query(
+        DatabaseOperation::execute(
                 "UPDATE " . FtaModel::TABLENAME
                 . " SET " . FtaModel::FIELDNAME_DATE_ECHEANCE_FTA . "=" . "0000-00-00"                                                                   //La date d'échéance sera à redéfinir
                 . ", " . FtaModel::FIELDNAME_DATE_CREATION . "='" . date("Y-m-d")                                                               //Date de la création de cet Article
@@ -714,7 +714,7 @@ class FtaModel extends AbstractModel {
              */
             case "totale":
 
-                DatabaseOperation::query(
+                DatabaseOperation::execute(
                         "UPDATE " . FtaModel::TABLENAME
                         . " SET " . FtaModel::FIELDNAME_DOSSIER_FTA . "=" . $idFtaNew                                                           //Dans le cas d'un nouveau dossier, son identifiant correspond à l'identifiant de sa première FTA
                         . ", " . FtaModel::FIELDNAME_VERSION_DOSSIER_FTA . "=" . 0                                                              //La première FTA commence en version "0"
@@ -723,10 +723,10 @@ class FtaModel extends AbstractModel {
                         . ", " . FtaModel::FIELDNAME_DESIGNATION_COMMERCIALE . "=\"" . $paramOption["designation_commerciale_fta"]                //Renommage de la nouvelle FTA
                         . "\", " . FtaModel::FIELDNAME_NOM_ABREGE . "=" . "NULL"                                                                  //Le nom abrégé est réinitilisé
                         . ", " . FtaModel::FIELDNAME_LIBELLE . "=" . "NULL"                                                                       //Dans le cas d'un nouveau dossier, son identifiant correspond à l'identifiant de sa première FTA
-                        . ", " . FtaModel::FIELDNAME_CODE_ARTICLE_LDC . "=" . "NULL"                                                              //Suppression Code LDC
-                        . ", " . FtaModel::FIELDNAME_EAN_COLIS . "=" . "NULL"                                                                     //Suppression EAN Colis
-                        . ", " . FtaModel::FIELDNAME_EAN_UVC . "=" . "NULL"                                                                       //Suppression EAN Article
-                        . ", " . FtaModel::FIELDNAME_EAN_PALETTE . "=" . "NULL"                                                                   //Suppression EAN Palette
+                        . ", " . FtaModel::FIELDNAME_CODE_ARTICLE_LDC . "=" . "0"                                                              //Suppression Code LDC
+                        . ", " . FtaModel::FIELDNAME_EAN_COLIS . "=" . "0"                                                                     //Suppression EAN Colis
+                        . ", " . FtaModel::FIELDNAME_EAN_UVC . "=" . "0"                                                                       //Suppression EAN Article
+                        . ", " . FtaModel::FIELDNAME_EAN_PALETTE . "=" . "0"                                                                   //Suppression EAN Palette
                         . " WHERE " . FtaModel::KEYNAME . "=" . $idFtaNew
                 );
                 break;
@@ -735,7 +735,7 @@ class FtaModel extends AbstractModel {
              */
             case "version":
                 $idFtaVersion = $idFtaVersion + 1;
-                DatabaseOperation::query(
+                DatabaseOperation::execute(
                         "UPDATE " . FtaModel::TABLENAME
                         . " SET " . FtaModel::FIELDNAME_VERSION_DOSSIER_FTA . "=" . $idFtaVersion                                                       //La première FTA commence en version "0"
                         . ", " . FtaModel::FIELDNAME_ID_FTA_ETAT . "=" . $idFtaEtatNew                                                          //Nouvel éta de la FTA données par l'argument $option de la fonction (cf. table fta_etat)
@@ -1068,7 +1068,7 @@ class FtaModel extends AbstractModel {
      */
     public static function CreateFta($paramIdCreateur, $paramIdFtaEtat, $paramIdFtaWorkflow, $paramDesignationCommerciale, $paramDateCreation, $paramSiteDeProduction) {
         $Id = DatabaseOperation::executeComplete(
-                        "INSERT INTO `intranet_v3_0_cod`." . FtaModel::TABLENAME
+                        "INSERT INTO " . FtaModel::TABLENAME
                         . " ( " . FtaModel::FIELDNAME_CREATEUR
                         . "," . FtaModel::FIELDNAME_ID_FTA_ETAT
                         . "," . FtaModel::FIELDNAME_DESIGNATION_COMMERCIALE
@@ -1086,6 +1086,9 @@ class FtaModel extends AbstractModel {
         return $key;
     }
 
+    /**
+     * Mise à jour du pourcentage d'avancement d'un Fta
+     */
     public function updateAvancementFta() {
 
         $idFta = $this->getKeyValue();
@@ -1100,9 +1103,13 @@ class FtaModel extends AbstractModel {
         /**
          * Recalcul + stockage liste des services
          */
-        $listeIdRole = FtaRoleModel::getListeIdFtaRoleEncoursByIdFta($idFta, $idFtaWorkflow);        
+        $listeIdRole = FtaRoleModel::getListeIdFtaRoleEncoursByIdFta($idFta, $idFtaWorkflow);
         $this->getDataField(FtaModel::FIELDNAME_LISTE_ID_FTA_ROLE)->setFieldValue($listeIdRole);
         $this->saveToDatabase();
+    }
+
+    public function ListeCodeProduitsAgrologic() {
+        $idFta = $this->getKeyValue();
     }
 
 }

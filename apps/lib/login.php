@@ -78,9 +78,14 @@ if ($login) {
       $q1 = DatabaseOperation::query($req_authentification);
       $nb1 = mysql_numrows($q1);
      */
+    if (!$pass) {
+        $titre = "Accès aux modules de l'Intranet";
+        $message = "Veuillez saisir votre mot de passe.<br><br>"
+        ;
+        afficher_message($titre, $message, $redirection);
+    }
 
     if (!identification1($mysql_table_authentification, $login, $pass)) {
-        /* nouvelle fonction de test des tentatives */
 
         if ($identite == $login) {
             $tentative++;
@@ -114,6 +119,12 @@ if ($login) {
                     /* Constition du corps du mail */
                     $rep = envoismail($sujet, $corpsmail, $adrTo, $adrfrom);
                     $titou = DatabaseOperation::execute('update salaries set blocage=\'oui\' where (login=\'' . $identite . '\')');
+                    //Averissement
+                    $titre = "Accès aux modules de l'Intranet";
+                    $message = "Votre compte est bloqué après trois tentative raté.<br><br>"
+                            . "Contactez un Administrateur pour réactiver votre compte.<br>"
+                    ;
+                    afficher_message($titre, $message, $redirection);
                 }
             } else {
                 $_SESSION['identite'] = $login;

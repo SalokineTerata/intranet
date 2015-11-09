@@ -155,10 +155,8 @@ function identification1($mysql_table_authentification, $login, $pass, GlobalCon
     if ($globalConfig == null) {
         $globalConfig = new GlobalConfig();
     }
-//    $ldap_active = $globalConfig->getConf()->getLdapServiceEnable();
-    $ldap_active = "1";
-//    $ldap_server = $globalConfig->getConf()->getLdapServerName();
-    $ldap_server = "172.20.3.89";
+    $ldap_active = $globalConfig->getConf()->getLdapServiceEnable();
+    $ldap_server = $globalConfig->getConf()->getLdapServerName();
     $ldap_context = array("Comptes", "ldcseg");  //Liste des contextes LDAP supportés
     $ldap_result = false;
 

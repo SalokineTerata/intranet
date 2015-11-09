@@ -74,11 +74,15 @@ if ($id_fta) {
     $checked_vierge = 'checked';
 }
 $HtmlList = new HtmlListSelectTagName();
-
 /*
  * Worflow de FTA
  */
-$listeWorkflow = FtaWorkflowModel::ShowListeDeroulanteNomWorkflowByAcces($idUser, $HtmlList, TRUE,$idFtaRole, $idFtaWorkflow);
+//if ($checked_duplicate) {
+//    $isEditable = FALSE;
+//} else {
+//    $isEditable = TRUE;
+//}
+$listeWorkflow = FtaWorkflowModel::ShowListeDeroulanteNomWorkflowByAcces($idUser, $HtmlList, TRUE, $idFtaRole, $idFtaWorkflow);
 
 
 
@@ -136,7 +140,7 @@ echo '
          <' . $html_table . '>           
              <tr class=contenu><td align=\'left\'>
                  ' . DatabaseDescription::getFieldDocLabel(FtaModel::TABLENAME, FtaModel::FIELDNAME_DESIGNATION_COMMERCIALE)
-                    . ':</td><td><input type=\'text\' name=\'designation_commerciale_fta\' size=\'20\' value=\'' . $designationCommercialeFta . '\' />
+ . ':</td><td><input type=\'text\' name=\'designation_commerciale_fta\' size=\'20\' value=\'' . $designationCommercialeFta . '\' />
              </td></tr>
 
                     ' . $listeWorkflow . '

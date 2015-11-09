@@ -57,6 +57,8 @@ function afficher_message($titre, $message, $redirection) {
       Dictionnaire des variables:
      * **************************
      */
+    require_once('../inc/javascript.php');
+
     if (!$redirection) {
         $redirection = "'Javascript:;' onClick='history.go(-1);return(false);'";
     }
@@ -89,7 +91,7 @@ function afficher_message($titre, $message, $redirection) {
                       <BR>
              </TD>
          </TR>
-         <!/TABLE>
+         <!/TABLE>        
      ";
     exit;
     //include ("../lib/fin_page.inc");
@@ -612,7 +614,7 @@ function print_page_begin($disable_full_page = FALSE, $menu_file = NULL, $conf =
            <img src= ..\lib\images\ajax_loader.gif> Chargement ...
           </div>";
 
-    
+
     if (!$disable_full_page) {
         echo "<div class=display_none id=site width=100%; style=visibility:hidden;>";
         echo "<table border=0 cellspacing=0 cellpadding=0 height=534>";

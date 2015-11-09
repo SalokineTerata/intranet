@@ -13,12 +13,11 @@ class FtaTransitionModel {
      * @param type $paramIdFta
      * @param type $paramAbreviationFtaTransition
      * @param type $paramCommentaireMajFta
-     * @param type $paramIdRole
      * @param type $paramIdWorkflow
      * @param type $paramListeChapitres
-     * @return int
+     * @return array
      */
-    public static function BuildTransitionFta($paramIdFta, $paramAbreviationFtaTransition, $paramCommentaireMajFta, $paramIdRole, $paramIdWorkflow, $paramListeChapitres) {
+    public static function BuildTransitionFta($paramIdFta, $paramAbreviationFtaTransition, $paramCommentaireMajFta, $paramIdWorkflow, $paramListeChapitres) {
         /*
          * Codes de retour de la fonction:
          */
@@ -27,7 +26,7 @@ class FtaTransitionModel {
           1: FTA non transité car risque de doublon
           3: Erreur autre
          */
-        $return = 0;
+        $return["0"] = "0";
 
         /*
          * Chargement de l'enregistrement
@@ -81,14 +80,17 @@ class FtaTransitionModel {
                 //Dans le cas d'une mise à jour, récupération des Chapitres à corriger.
 
                 $liste_chapitre_maj_fta = ";";
+                //Mise à  jour de la table Fta_suivie_projet
+                FtaSuiviProjetModel::initFtaSuiviProjet($paramIdFta);
                 foreach ($paramListeChapitres as $rowsChapitre) {
                     //Parcours des chapitres
                     //Si le chapitre a été sélectionné, on l'enregistre dans le tableau de résultat
                     $liste_chapitre_maj_fta.=$rowsChapitre . ";";
+                    //Correction des chapitres
+                    $paramOption["no_message_ecran"] = "1";
+                    $paramOption["correction_fta_suivi_projet"] = $nouveau_maj_fta;
+                    FtaChapitreModel::BuildCorrectionChapitre($paramIdFta, $rowsChapitre, $paramOption);
                 }
-
-                //Mise à  jour de la table Fta_suivie_projet
-                FtaSuiviProjetModel::initFtaSuiviProjet($paramIdFta);
                 $paramAbreviationFtaTransition = FtaEtatModel::ETAT_ABREVIATION_VALUE_MODIFICATION;
                 break;
 
@@ -110,7 +112,7 @@ class FtaTransitionModel {
                     $message = "Cette fiche est déjà en cours de modification.";
                     $redirection = "";
                     afficher_message($titre, $message, $redirection);
-                    $return = 1;
+                    $return["0"] = "1";
                     return $return;
                     exit;
                 }
@@ -144,7 +146,7 @@ class FtaTransitionModel {
                 $option_duplication["selection_chapitre"] = $paramListeChapitres;
                 $option_duplication["nouveau_maj_fta"] = $nouveau_maj_fta;
                 $option_duplication["site_de_production"] = $siteDeProduction;
-                $idFtaNew = FtaModel::BuildDuplicationFta($id_fta_original, $action_duplication, $option_duplication, $paramIdRole, $paramIdWorkflow);
+                $idFtaNew = FtaModel::BuildDuplicationFta($id_fta_original, $action_duplication, $option_duplication, $paramIdWorkflow);
                 $ftaModel = new FtaModel($idFtaNew);
                 $idArticleAgrologic = $ftaModel->getDataField(FtaModel::FIELDNAME_ARTICLE_AGROLOGIC)->getFieldValue();
                 $paramIdFta = $idFtaNew;
@@ -221,6 +223,9 @@ class FtaTransitionModel {
 
                 break;
         }
+        $return["id_fta_new"] = $paramIdFta;
+        $return[FtaEtatModel::KEYNAME] = $idFtaEtat;
+        $return[FtaEtatModel::FIELDNAME_ABREVIATION] = $paramAbreviationFtaTransition;
 
         return $return;
     }
@@ -527,8 +532,7 @@ class FtaTransitionModel {
                 . "\n"
                 . "INFORMATIONS DE DEBUGGAGE:\n"
                 . $logTransition
-        ;
-        {
+        ; {
             $expediteur = $prenom . " " . $nom . " <" . $mail . ">";
             envoismail($sujetmail, $corp, $mail, $expediteur, $typeMail);
         }
@@ -549,7 +553,7 @@ class FtaTransitionModel {
         ;
         $nom_defaut = FtaTransitionModel::FIELDNAME_ABREVIATION_FTA_TRANSITION;
         $id_defaut = FtaEtatModel::ETAT_ABREVIATION_VALUE_VALIDE;
-        return $liste_action_groupe = AccueilFta::afficherRequeteEnListeDeroulante($requete, $id_defaut, $nom_defaut,TRUE);
+        return $liste_action_groupe = AccueilFta::afficherRequeteEnListeDeroulante($requete, $id_defaut, $nom_defaut, TRUE);
     }
 
 //Fin de la vérification que la FTA est bien validé

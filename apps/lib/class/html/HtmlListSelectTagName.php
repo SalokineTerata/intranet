@@ -23,8 +23,12 @@ class HtmlListSelectTagName extends HtmlListSelect {
      * Retourne le code HTML pour présenter la liste en mode consultation
      */
     public function getHtmlViewedContent() {
-
-        return;
+        if ($this->getSelectedValue()) {
+            $return = $this->getSelectedContent();
+        } else {
+            $return = self::LIST_NO_SELECTION_VALUE;
+        }
+        return $return;
     }
 
     public function getHtmlAddContent() {

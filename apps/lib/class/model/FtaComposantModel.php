@@ -265,7 +265,7 @@ class FtaComposantModel extends AbstractModel {
                 . '&comeback=' . $paramComeback
                 . '&id_fta_etat=' . $paramIdFtaEtat
                 . '&abreviation_fta_etat=' . $paramAbreviationEtat
-                . '&id_fta_role=' . $paramIdFtaRole 
+                . '&id_fta_role=' . $paramIdFtaRole
         ;
     }
 
@@ -328,7 +328,7 @@ class FtaComposantModel extends AbstractModel {
                     . '&comeback=' . $paramComeback
                     . '&id_fta_etat=' . $paramIdFtaEtat
                     . '&abreviation_fta_etat=' . $paramAbreviationEtat
-                    . '&id_fta_role=' . $paramIdFtaRole ;
+                    . '&id_fta_role=' . $paramIdFtaRole;
         }
 
         return $return;
@@ -345,11 +345,41 @@ class FtaComposantModel extends AbstractModel {
                     . '&comeback=' . $paramComeback
                     . '&id_fta_etat=' . $paramIdFtaEtat
                     . '&abreviation_fta_etat=' . $paramAbreviationEtat
-                    . '&id_fta_role=' . $paramIdFtaRole 
+                    . '&id_fta_role=' . $paramIdFtaRole
             ;
         }
         return $return;
     }
+
+    public static function ShowListeDeroulanteNomCodeProduitAgrologicByIdFta($paramObjetList, $paramIsEditable, $paramIdFta) {
+
+        $ftaModel = new FtaModel($paramIdFta);
+        $arrayCodeProduitAgrologic = DatabaseOperation::convertSqlStatementWithKeyAndOneFieldToArray(
+                        'SELECT DISTINCT ' . AnnexeAgrologicArticleCodificationModel::KEYNAME . ', CONCAT_WS( - ,' . AnnexeAgrologicArticleCodificationModel::FIELDNAME_PREFIXE_ANNEXE_AGRO_ART_COD
+                        . ' , ' . AnnexeAgrologicArticleCodificationModel::FIELDNAME_NOM_ANNEXE_AGRO_ART_COD
+                        . ') FROM ' . AnnexeAgrologicArticleCodificationModel::TABLENAME
+                        . ' WHERE ' . AnnexeAgrologicArticleCodificationModel::FIELDNAME_PREFIXE_ANNEXE_AGRO_ART_COD . '<>00'
+                        . ' ORDER BY ' . AnnexeAgrologicArticleCodificationModel::FIELDNAME_PREFIXE_ANNEXE_AGRO_ART_COD
+        );
+        $paramObjetList->setArrayListContent($arrayCodeProduitAgrologic);
+        $HtmlTableName = FtaComposantModel::TABLENAME
+                . '_'
+                . FtaComposantModel::FIELDNAME_CODE_PRODUIT_AGROLOGIC_FTA_NOMENCLATURE
+                . '_'
+                . $paramIdFta
+        ;
+        $paramObjetList->getAttributes()->getName()->setValue(FtaComposantModel::FIELDNAME_CODE_PRODUIT_AGROLOGIC_FTA_NOMENCLATURE);
+        $paramObjetList->setLabel(DatabaseDescription::getFieldDocLabel(FtaComposantModel::TABLENAME, FtaComposantModel::FIELDNAME_CODE_PRODUIT_AGROLOGIC_FTA_NOMENCLATURE));
+        $paramObjetList->setIsEditable($paramIsEditable);
+        $paramObjetList->initAbstractHtmlSelect(
+                $HtmlTableName, $paramObjetList->getLabel(), $ftaModel->getDataField(FtaModel::FIELDNAME_WORKFLOW)->getFieldValue(), NULL, $paramObjetList->getArrayListContent());
+        $paramObjetList->getEventsForm()->setOnChangeWithAjaxAutoSave(FtaModel::TABLENAME, FtaModel::KEYNAME, $paramIdFta, FtaModel::FIELDNAME_WORKFLOW);
+
+        $listeSiteWorkflow = $paramObjetList->getHtmlResult();
+
+        return $listeSiteWorkflow;
+    }
+
 }
 
 ?>

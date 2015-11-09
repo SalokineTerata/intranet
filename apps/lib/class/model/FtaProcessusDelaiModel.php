@@ -156,18 +156,26 @@ class FtaProcessusDelaiModel extends AbstractModel {
                 $dateEcheanceFta = $rowsIdFtaDate[FtaModel::FIELDNAME_DATE_ECHEANCE_FTA];
                 $dateEcheanceFta1 = new DateTime($rowsIdFtaDate[FtaModel::FIELDNAME_DATE_ECHEANCE_FTA]);
                 $dateActuelObjet = new DateTime(date('Y-m-d'));
-                $differenceDeDate = $dateEcheanceFta1->diff($dateActuelObjet) ;
-                $nb_jours = $differenceDeDate->days; 
+                $differenceDeDate = $dateEcheanceFta1->diff($dateActuelObjet);
+                $nb_jours = $differenceDeDate->d;
+                $nb_annee = $differenceDeDate->y;
+                $nb_mois = $differenceDeDate->m;
             }
+            /**
+             * @todo Revoir les notification de date d'échances
+             */
             if ($dateEcheanceFta == '0000-00-00' or $dateEcheanceFta == '') {
                 $return['status'] = 3;
             } else {
-                if($nb_jours > ModuleConfig::VALUE_DATE_NOTIFICATION) {
+                if ($nb_annee > "1") {
+                    $return['status'] = 2;
+                } elseif ($nb_jours > ModuleConfig::VALUE_DATE_NOTIFICATION) {
                     $return['status'] = 1;
-                    if ($nb_jours > ModuleConfig::VALUE_DATE_NOTIFICATION) {
+                    if ($nb_mois >= "1") {
                         $return['status'] = 2;
                     }
                 }
+
                 $HTML_fta .= $dateEcheanceFta;
             }
         } else {

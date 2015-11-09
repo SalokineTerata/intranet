@@ -52,6 +52,22 @@ class Navigation {
                 . 'width=100% '
                 . 'class=contenu '
         ;
+        if (self::$id_fta) {
+            $ftamodel = new FtaModel(self::$id_fta);
+            $checkIdFta = $ftamodel->getDataField(FtaModel::KEYNAME)->getFieldValue();
+            if (!$checkIdFta) {
+                $titre = "Affichage d'une Fta";
+                $message = "Erreur la Fta n'existe pas.<br><br>";
+                $redirection = "index.php";
+                afficher_message($titre, $message, $redirection);
+            }
+        }else{         
+                $titre = "Affichage d'une Fta";
+                $message = "Erreur la Fta n'est passé en paramètre.<br><br>";
+                $redirection = "index.php";
+                afficher_message($titre, $message, $redirection);
+            
+        }
         //Récupère la page en cours
         $arrayFtaEtatAndFta = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
                         'SELECT ' . FtaModel::KEYNAME . ', ' . FtaModel::FIELDNAME_CREATEUR
@@ -539,7 +555,7 @@ class Navigation {
                 $menu_navigation .= '<a href=' . $page_default . '.php?'
 //                $menu_navigation .= '<a href=\'#\''
 //                        . ' onClick=\'navigation_' . $id_fta_chapitre . '();\''
-                         . 'id_fta=' . self::$id_fta
+                        . 'id_fta=' . self::$id_fta
                         . '&id_fta_chapitre_encours=' . $id_fta_chapitre
                         . '&synthese_action=' . self::$synthese_action
                         . '&id_fta_etat=' . self::$id_fta_etat
@@ -551,7 +567,7 @@ class Navigation {
                         . '</a>'
                         . '</b></font> '
                 ;
-                
+
                 /**
                  * Version avec le module rewrite
                  */

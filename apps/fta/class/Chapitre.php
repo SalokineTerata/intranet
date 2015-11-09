@@ -225,7 +225,6 @@ class Chapitre {
 
         $return = self::$html_chapitre_core
                 . self::$html_suivi_dossier
-                . self::$html_submit_button
                 . self::$html_correct_button
         ;
         return $return;
@@ -519,7 +518,7 @@ class Chapitre {
         $bloc.=$ftaView->getHtmlCommentaireChapitre();
 
         //Historique des mises à jour de la FTA
-        $bloc.='<tr class=titre_principal><td>Historique des actions effectuées sur le Fiche Technique Article</td></tr>';
+        $bloc.='<tr class=titre_principal><td>Historique des actions effectuées sur la Fiche Technique Article</td></tr>';
 
         $bloc.=$ftaModel->getHtmlDataField(FtaModel::FIELDNAME_COMMENTAIRE_MAJ_FTA);
 
@@ -943,6 +942,9 @@ class Chapitre {
 
         //Conseil de Réchauffage Validé
         $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_CONSEIL_DE_RECHAUFFAGE);
+
+        //Code agrologic
+//        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_CONSEIL_DE_RECHAUFFAGE);
 
         return $bloc;
     }
@@ -1827,7 +1829,7 @@ class Chapitre {
         $bloc.=$ftaView->getHtmlCreateurFta();
 
         //Workflow de FTA
-        $bloc.=$ftaView->ListeWorkflowByAcces(self::$idUser, FALSE, $id_fta);
+        $bloc.=$ftaView->ListeWorkflowByAcces(self::$idUser, FALSE, $id_fta, self::$id_fta_role);
 
         //Date d'échéance de la FTA
         $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_DATE_ECHEANCE_FTA);
@@ -1982,6 +1984,7 @@ class Chapitre {
         $proprietaire = $is_editable;
         $bloc_suivi = '';
 
+
         //Si le chapitre en cours n'est pas public
         $bloc_suivi .= '<' . Html::DEFAULT_HTML_TABLE_CONTENU . '>'
                 . '<tr class=titre_principal><td class>'
@@ -2110,7 +2113,7 @@ class Chapitre {
             }
         }
         $champ = 'signature_validation_suivi_projet';
-        $bloc_suivi.='</td></tr>';
+        $bloc_suivi.=self::$html_submit_button . '</td></tr>';
 
         $bloc_suivi .='</table>';
         return $bloc_suivi;
@@ -2168,7 +2171,7 @@ class Chapitre {
     protected static function buildHtmlSubmitButton() {
         $return = '';
         if (self::$is_editable == true) {
-            $return = '<table><tr><td><center><input type=submit value=\'Enregistrer les informations saisies\'></center></td></tr></table>';
+            $return = '<input type=submit value=\'Confirmer\'>';
         }
         return $return;
     }

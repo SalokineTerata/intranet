@@ -31,6 +31,7 @@ class EnvironmentConf {
 
     //Variables
     //A classer par ordre alphabérique
+    private $applicationVersion = null;
     private $applicationName = null;
     private $applicationTitle = null;
     private $applicationLogo = null;
@@ -108,8 +109,8 @@ class EnvironmentConf {
         return '<a href=\'' . $this->getUrlFullRoot() . '/'
                 . self::DOC_APIGEN_DIR . '\' target=\'_blank\'><img src=../lib/images/apigen.jpeg width=15  border=0> - Doc ApiGen</a>'
                 . '<br>'
-                . '<a href=\'' 
-                . self::URL_EASYPHP . '\' target=\'_blank\'><img src=../lib/images/pma_icone.png width=15  border=0> - Administration EasyPHP</a>'        
+                . '<a href=\''
+                . self::URL_EASYPHP . '\' target=\'_blank\'><img src=../lib/images/pma_icone.png width=15  border=0> - Administration EasyPHP</a>'
         ;
     }
 
@@ -263,6 +264,14 @@ class EnvironmentConf {
 
     public function setUrlSubdir($urlSubdir) {
         $this->urlSubdir = $urlSubdir;
+    }
+
+    public function getApplicationVersion() {
+        return $this->applicationVersion;
+    }
+
+    public function setApplicationVersion($applicationVersion) {
+        $this->applicationVersion = $applicationVersion;
     }
 
 }

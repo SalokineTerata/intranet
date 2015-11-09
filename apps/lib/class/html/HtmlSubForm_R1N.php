@@ -230,6 +230,12 @@ class HtmlSubForm_R1N extends HtmlSubForm {
                         $isFirstField = FALSE;
                     }
                     $htmlField->getAttributesGlobal()->setIsIconNextEnabledToFalse();
+                    /**
+                     * Ajout de style fonctionnel mais mauvaise mise en forme sur d'autre éléments
+                     */
+//                    $attrbuteStyleModel = new AttributeStyle();
+//                    $attrbuteStyleModel->setValue("border:1px solid #009dd1;");
+//                    $htmlField->getAttributesGlobal()->setStyle($attrbuteStyleModel);
 
                     $htmlField->setHtmlRenderToTable();
 
@@ -238,7 +244,7 @@ class HtmlSubForm_R1N extends HtmlSubForm {
                      * et que le champs ne fait pas partie de la liste des champs
                      * vérrouillés, alors le champs sera modifiable par l'utilisateur.
                      */
-                    if (parent::getIsEditable() && !in_array($fieldName, $this->getContentLocked())) {
+                    if (parent::getIsEditable() && $this->getContentLocked() == NULL) {
 
                         /**
                          * Le champs est modifiable.

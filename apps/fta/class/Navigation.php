@@ -158,8 +158,10 @@ class Navigation {
         $ProcessusPrecedentVisible = array();
         $ProcessusValide = array();
         $ProcessusEnLecture = array();
-        $globalconfig = new GlobalConfig();
-        $id_user = $globalconfig->getAuthenticatedUser()->getKeyValue();
+        $globalConfig = new GlobalConfig();
+      UserModel::ConnexionFalse($globalConfig);
+
+        $id_user = $globalConfig->getAuthenticatedUser()->getKeyValue();
         $idFtaRole = self::$id_fta_role;
         /**
          * Cette partie n'est plus utilisé car le but était de récupérer le rôle corespondant à l'utilisateur connecter

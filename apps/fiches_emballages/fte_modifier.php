@@ -302,20 +302,20 @@ $bloc.="</td></tr>";
 //Listes des FTA utilisant cette FTE
 if ($id_annexe_emballage) {
     $liste_fta = "";
-    $req = "SELECT `fta`.`id_fta`, `fta`.`id_article_agrologic`, LIBELLE "
-            . "FROM `fta_conditionnement`,  `annexe_emballage`,  `fta`, fta_etat "
-            . "WHERE `fta_conditionnement`.`id_annexe_emballage` = `annexe_emballage`.`id_annexe_emballage` "
-            . "AND `fta`.`id_fta` = `fta_conditionnement`.`id_fta` "
-            . "AND fta.id_fta_etat=fta_etat.id_fta_etat "
-            . "AND `annexe_emballage`.`id_annexe_emballage` = '" . $id_annexe_emballage . "' "
-            . "AND abreviation_fta_etat='V' "
+    $req = "SELECT `fta`.`id_fta`, `fta`.`id_article_agrologic`, LIBELLE ,code_article_ldc"
+            . " FROM `fta_conditionnement`,  `annexe_emballage`,  `fta`, fta_etat "
+            . " WHERE `fta_conditionnement`.`id_annexe_emballage` = `annexe_emballage`.`id_annexe_emballage` "
+            . " AND `fta`.`id_fta` = `fta_conditionnement`.`id_fta` "
+            . " AND fta.id_fta_etat=fta_etat.id_fta_etat "
+            . " AND `annexe_emballage`.`id_annexe_emballage` = '" . $id_annexe_emballage . "' "
+            . " AND abreviation_fta_etat='V' "
     ;
     $result_fta = DatabaseOperation::convertSqlStatementWithoutKeyToArray($req);
     if ($result_fta) {
 
-        $bloc.="<tr></tr><tr class=titre><td>" . mysql_field_desc("fta", "id_article_agrologic") . "</td><td>Liste des Fiches Techniques Articles validée utilisant cet emballage:</td></tr>";
+        $bloc.="<tr></tr><tr class=titre><td>" . mysql_field_desc("fta", "code_article_ldc") . "</td><td>Liste des Fiches Techniques Articles validée utilisant cet emballage:</td></tr>";
         foreach ($result_fta as $rows_fta) {
-            $bloc.="<tr><td align=\"right\">" . $rows_fta["id_article_agrologic"] . "</td><td>" . $rows_fta["LIBELLE"] . "</td></tr>";
+            $bloc.="<tr><td align=\"right\">" . $rows_fta["code_article_ldc"] . "</td><td>" . $rows_fta["LIBELLE"] . "</td></tr>";
             $liste_fta.=$rows_fta["id_fta"] . ";";
         }//Fin du while
     }//Fin du if

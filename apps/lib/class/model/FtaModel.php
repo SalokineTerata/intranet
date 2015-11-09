@@ -95,6 +95,7 @@ class FtaModel extends AbstractModel {
     const FIELDNAME_VERROUILLAGE_LIBELLE_ETIQUETTE = "verrouillage_libelle_etiquette_fta";
     const FIELDNAME_VERSION_DOSSIER_FTA = "id_version_dossier_fta";
     const FIELDNAME_VIRTUAL_FTA_COMPOSANT = "VIRTUAL_fta_composant";
+    const FIELDNAME_VIRTUAL_FTA_COMPOSANT_RD = "VIRTUAL_fta_composant_rd";
     const FIELDNAME_VIRTUAL_FTA_PROCESSUS_DELAI = "VIRTUAL_fta_processus_delai";
     const FIELDNAME_WORKFLOW = "id_fta_workflow";
     const ID_POIDS_VARIABLE = "3";
@@ -650,6 +651,8 @@ class FtaModel extends AbstractModel {
           Déclaration et initialisation des variables
          * **************************************** */
         $globalConfig = new GlobalConfig();
+                      UserModel::ConnexionFalse($globalConfig);
+
         $idUser = $globalConfig->getAuthenticatedUser()->getKeyValue();
         $ftaModelOrig = new FtaModel($paramIdFta);              //Identifiant de la fiche technique article à dupliquer
         $idFtaVersion = $ftaModelOrig->getDataField(FtaModel::FIELDNAME_VERSION_DOSSIER_FTA)->getFieldValue();

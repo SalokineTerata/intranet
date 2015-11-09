@@ -211,10 +211,9 @@ class DatabaseOperation {
      */
     public static function execute($paramRequest) {
         //Logger::AddDebug($paramRequest, __METHOD__);
-
         //Démarrage du chrono sur le temps DB
         $time_start = DatabaseOperation::microtime_float();
-        
+
         //Connexion PDO
         $pdo = DatabaseOperation::databaseAcces();
         $pdo->exec("SET CHARACTER SET utf8");
@@ -781,7 +780,7 @@ class DatabaseOperation {
         }
 
         return
-                'SELECT ' . $paramSelectClause
+                'SELECT DISTINCT ' . $paramSelectClause
                 . ' FROM ' . $paramTableClause
                 . ' WHERE ' . $paramWhereClause
                 . $orderClauseToAdd
@@ -816,6 +815,7 @@ class DatabaseOperation {
     , $foreignKeyValue
     , $arrayFieldsNameToDisplay
     , $arrayFieldsNameOrder = NULL
+    , $condtionSql = NULL
     ) {
 
         /**
@@ -839,6 +839,7 @@ class DatabaseOperation {
         $paramTableClause = $tableNameRN . ',' . $tableNameR1;
         $paramWhereClauseRelationship = $tableNameRN . '.' . $foreignKeyNameRN . ' = ' . $tableNameR1 . '.' . $foreignKeyNameR1;
         $paramWhereClause = $tableNameRN . '.' . $foreignKeyNameRN . ' = ' . $foreignKeyValue . ' AND ' . $paramWhereClauseRelationship;
+        $paramWhereClause .= ' ' . $condtionSql;
         if ($arrayFieldsNameOrder) {
             $paramOrderClause = implode(',', $arrayFieldsNameOrder);
         }
@@ -875,6 +876,7 @@ class DatabaseOperation {
     , $arrayFieldsNameToDisplay
     , $arrayFieldsNameOrder = NULL
     , $keyValue = NULL
+    , $conditionSql = NULL
     ) {
 
         /**
@@ -890,6 +892,8 @@ class DatabaseOperation {
         $paramSelectClause = $primaryTableNameRN . '.' . $keyNameRN . ',' . $arrayFieldsNameToDisplay;
         $paramTableClause = $primaryTableNameRN . DatabaseOperation::tableClauseRelationship($secondaryTablesNamesAndidKeyValueRN, $keyValue);
         $paramWhereClauseRelationship = ' 1 ' . DatabaseOperation::whereClauseRelationshipNtoN($primaryTableNameRN, $secondaryTablesNamesAndidKeyValueRN, $keyValue);
+        $paramWhereClauseRelationship .= DatabaseOperation::whereClauseDistinct($primaryTableNameRN, $keyValue);
+        $paramWhereClauseRelationship .= ' ' . $conditionSql;
 
         if ($arrayFieldsNameOrder) {
             $paramOrderClause = implode(',', $arrayFieldsNameOrder);
@@ -920,8 +924,8 @@ class DatabaseOperation {
                         /**
                          * Nom de la clef de la table primaire N.
                          */
-                        $secondaryableDescriptionRN = new DatabaseDescriptionTable($rows[0]);
-                        $secondaryTableKeyNameRN = $secondaryableDescriptionRN->getKeyName();
+                        $secondaryTableDescriptionRN = new DatabaseDescriptionTable($rows[0]);
+                        $secondaryTableKeyNameRN = $secondaryTableDescriptionRN->getKeyName();
                         $req .= ' AND ' . $paramPrimaryTableName . '.' . $primaryTableForeignKeyNameRN . '=' . $secondaryTableName . '.' . $secondaryTableKeyNameRN
                                 . ' AND ' . $secondaryTableName . '.' . $secondaryTableKeyNameRN . '=' . $ForeignKeyValue;
                     }
@@ -941,6 +945,14 @@ class DatabaseOperation {
                 }
             }
         }
+        return $req;
+    }
+
+    static private function whereClauseDistinct($paramPrimaryTableNameRN, $paramKeyCheck) {
+        $primaryTableDescriptionRN = new DatabaseDescriptionTable($paramPrimaryTableNameRN);
+        $primaryTableKeyNameRN = $primaryTableDescriptionRN->getKeyName();
+        $req .= ' AND ' . $paramPrimaryTableNameRN . '.' . $primaryTableKeyNameRN . '=' . $paramKeyCheck;
+
         return $req;
     }
 

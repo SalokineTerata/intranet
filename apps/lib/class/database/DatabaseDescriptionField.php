@@ -166,5 +166,9 @@ class DatabaseDescriptionField {
         return DatabaseDescription::getRightToAdd
                         ($this->getTableName(), $this->getFieldName());
     }
+    public function getConditionSql() {
+        return DatabaseDescription::getConditionSql
+                        ($this->getTableName(), $this->getFieldName());
+    }
 
 }

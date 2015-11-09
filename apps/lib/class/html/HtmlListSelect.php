@@ -143,7 +143,8 @@ class HtmlListSelect extends AbstractHtmlList {
                         . $option->getDiplayValueToHtml()
                         . '</' . $option->getAttributes()->getTagName() . '>';
             }
-            $return .= '</' . $this->getAttributes()->getTagName() . '>' . parent::getAttributesGlobal()->getIconMenuToHtml();
+            $return .= '</' . $this->getAttributes()->getTagName() . '>';
+//                    . parent::getAttributesGlobal()->getIconMenuToHtml();
         } else {
             $return .= '<i>' . Html::showValue(self::LIST_EMPTY_MESSAGE) . '</i>';
         }

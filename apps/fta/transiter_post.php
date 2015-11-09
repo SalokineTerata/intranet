@@ -172,14 +172,15 @@ if (!$action) {
 
         //Lancement de la passerelle de synchronisation
         if ($abreviation_fta_transition == 'V') {
-            //Ouverture de la base ERP Data sync
-            if ($globalConfig->getConf()->getExecEnvironment() != EnvironmentConf::ENV_PRD) {
-                $extension = 'mdb';
-            } else {
-                $extension = 'agismde';
-            }
-            $open_erpdatasync = '../access/base_erp_datasync/erp_datasync.' . $extension;
-            header('Location: open_erpdatasync.php?open_erpdatasync=' . $open_erpdatasync);
+//            //Ouverture de la base ERP Data sync
+//            if ($globalConfig->getConf()->getExecEnvironment() != EnvironmentConf::ENV_PRD) {
+//                $extension = 'mdb';
+//            } else {
+//                $extension = 'agismde';
+//            }
+//            $open_erpdatasync = '../access/base_erp_datasync/erp_datasync.' . $extension;
+//            header('Location: open_erpdatasync.php?open_erpdatasync=' . $open_erpdatasync);
+            header('Location: index.php');
         } else {
             if ($t["0"] <> 1) {
                 header('Location: modification_fiche.php?id_fta=' . $t["id_fta_new"] . '&synthese_action=encours&comeback=1&id_fta_etat=' . $t[FtaEtatModel::KEYNAME] . '&abreviation_fta_etat=' . $t[FtaEtatModel::FIELDNAME_ABREVIATION] . '&id_fta_role=' . $idFtaRole);

@@ -74,6 +74,7 @@ class HtmlSubForm_RNN extends HtmlSubForm {
      * @var string
      */
     private $LienSuppression;
+
     /**
      * Lien de supresssion
      * @var string
@@ -159,7 +160,7 @@ class HtmlSubForm_RNN extends HtmlSubForm {
         $this->LienDetail = $LienDetail;
     }
 
-        /**
+    /**
      * Retourne le rendu HTML du coeur du sous-formulaire
      * @return string
      */
@@ -231,6 +232,12 @@ class HtmlSubForm_RNN extends HtmlSubForm {
                         $isFirstField = FALSE;
                     }
                     $htmlField->getAttributesGlobal()->setIsIconNextEnabledToFalse();
+                    /**
+                     * Ajout de style fonctionnel mais mauvaise mise en forme sur d'autre éléments
+                     */
+//                    $attrbuteStyleModel = new AttributeStyle();
+//                    $attrbuteStyleModel->setValue("border:1px solid #009dd1;");
+//                    $htmlField->getAttributesGlobal()->setStyle($attrbuteStyleModel);
 
 
                     $htmlField->setHtmlRenderToTable();
@@ -276,15 +283,24 @@ class HtmlSubForm_RNN extends HtmlSubForm {
                             }
                         }
                     }
-
-                    $return.="<td>" . $lienDetail . "</td>";
-
-                    $return.="<td>" . $lienDeSupression . "</td>";
-
+                    /**
+                     * Mise en forme du lien de detail (modification)
+                     */
+                    if ($lienDetail) {
+                        $return.="<td>" . $lienDetail . "</td>";
+                    }
+                    /**
+                     * Mise en forme du lien de suppression
+                     */
+                    if ($lienDeSupression) {
+                        $return.="<td>" . $lienDeSupression . "</td>";
+                    }
                     /**
                      * Ajout d'un lien d'ajout
                      */
-                    $return.="<td>" . $this->getLienAjouter() . "</td>";
+                    if ($this->getLienAjouter()) {
+                        $return.="<td>" . $this->getLienAjouter() . "</td>";
+                    }
                 }
 
                 /**

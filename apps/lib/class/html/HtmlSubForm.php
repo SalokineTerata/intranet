@@ -20,7 +20,7 @@
 class HtmlSubForm extends AbstractHtmlList {
 
     public function getHtmlResultSubFormBegin() {
-        return '<table><tr>';
+        return '<table width=\'100%\' ><tr>';
     }
 
     public function getHtmlResultSubFormEnd() {

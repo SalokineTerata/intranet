@@ -12,6 +12,8 @@
 require_once '../inc/main.php';
 
 $globalConfig = new GlobalConfig();
+      UserModel::ConnexionFalse($globalConfig);
+
 if ($globalConfig->getAuthenticatedUser()) {
     $id_user = $globalConfig->getAuthenticatedUser()->getKeyValue();
 }

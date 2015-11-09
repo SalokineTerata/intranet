@@ -186,6 +186,7 @@ class Chapitre {
         self::$ftaWorkflowModel = new FtaWorkflowModel(self::$id_fta_workflow);
         self::$synthese_action = $synthese_action;
         $globalConfig = new GlobalConfig();
+        UserModel::ConnexionFalse($globalConfig);
         self::$idUser = $globalConfig->getAuthenticatedUser()->getKeyValue();
         $idFtaSuiviProjet = FtaSuiviProjetModel::getIdFtaSuiviProjetByIdFtaAndIdChapitre(self::$id_fta, self::$id_fta_chapitre);
         self::$ftaSuiviProjetModel = new FtaSuiviProjetModel($idFtaSuiviProjet);
@@ -506,6 +507,9 @@ class Chapitre {
         $ftaView->setFtaChapitreModelById(self::ID_CHAPITRE_IDENTITE);
 
         $bloc.='<tr class=titre_principal><td class>Commentaire</td></tr>';
+
+        //Commentaire sur la Fta
+        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_COMMENTAIRE);
 
         //Liste des corrections apportées
         $bloc.='<tr class=titre_principal><td>Récapitulatif des corrections</td></tr>';
@@ -940,11 +944,12 @@ class Chapitre {
         $ftaView->setIsEditable($isEditable);
         $ftaView->setFtaChapitreModelById(self::ID_CHAPITRE_IDENTITE);
 
+        //Tableau d'etiquette composant
+        $bloc.=$ftaView->getHtmlEtiquetteRD($id_fta, self::$id_fta_chapitre, $synthese_action, self::$comeback, self::$id_fta_etat, self::$abrevation_etat, self::$id_fta_role, $isEditable);
+
         //Conseil de Réchauffage Validé
         $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_CONSEIL_DE_RECHAUFFAGE);
 
-        //Code agrologic
-//        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_CONSEIL_DE_RECHAUFFAGE);
 
         return $bloc;
     }
@@ -1052,7 +1057,7 @@ class Chapitre {
         $ftaView->setIsEditable($isEditable);
         $ftaView->setFtaChapitreModelById(self::ID_CHAPITRE_IDENTITE);
 
-        $bloc.=$ftaView->getHtmlEtiquetteComposant($id_fta, self::$id_fta_chapitre, $synthese_action, self::$comeback, self::$id_fta_etat, self::$abrevation_etat, self::$id_fta_role, self::$is_editable);
+        $bloc.=$ftaView->getHtmlEtiquetteComposition($id_fta, self::$id_fta_chapitre, $synthese_action, self::$comeback, self::$id_fta_etat, self::$abrevation_etat, self::$id_fta_role, self::$is_editable);
 
         //Remarque
         $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_REMARQUE);
@@ -1073,7 +1078,7 @@ class Chapitre {
         $ftaView->setIsEditable($isEditable);
         $ftaView->setFtaChapitreModelById(self::ID_CHAPITRE_IDENTITE);
 
-        $bloc.=$ftaView->getHtmlEtiquetteComposant($id_fta, self::$id_fta_chapitre, $synthese_action, self::$comeback, self::$id_fta_etat, self::$abrevation_etat, self::$id_fta_role, self::$is_editable);
+        $bloc.=$ftaView->getHtmlEtiquetteComposition($id_fta, self::$id_fta_chapitre, $synthese_action, self::$comeback, self::$id_fta_etat, self::$abrevation_etat, self::$id_fta_role, self::$is_editable);
 
         //Remarque
         $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_REMARQUE);
@@ -1094,7 +1099,7 @@ class Chapitre {
         $ftaView->setIsEditable($isEditable);
         $ftaView->setFtaChapitreModelById(self::ID_CHAPITRE_IDENTITE);
 
-        $bloc.=$ftaView->getHtmlEtiquetteComposant($id_fta, self::$id_fta_chapitre, $synthese_action, self::$comeback, self::$id_fta_etat, self::$abrevation_etat, self::$id_fta_role, self::$is_editable);
+        $bloc.=$ftaView->getHtmlEtiquetteComposition($id_fta, self::$id_fta_chapitre, $synthese_action, self::$comeback, self::$id_fta_etat, self::$abrevation_etat, self::$id_fta_role, self::$is_editable);
 
         //Remarque
         $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_REMARQUE);
@@ -1633,7 +1638,7 @@ class Chapitre {
         //Désignation Interne Agis
         $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_LIBELLE);
 
-        //Code Article LDC, code arcadia
+        //Code Article LDC, code Article arcadia
         $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_CODE_ARTICLE_LDC);
 
         return $bloc;
@@ -1810,7 +1815,7 @@ class Chapitre {
          * Classification
          *
          */
-        $bloc.=$ftaView->ListeClassification($isEditable);
+        $bloc.=$ftaView->ListeClassification($isEditable, self::$id_fta_chapitre, $synthese_action, self::$comeback, self::$id_fta_etat, self::$abrevation_etat, self::$id_fta_role);
         /*
          * Deviendra une liste deroulante dépendante des donné choisie dans la classification
          */
@@ -1836,7 +1841,9 @@ class Chapitre {
 
 //        //Date d'échéance des processus
 //        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_VIRTUAL_FTA_PROCESSUS_DELAI);
-        /**        */
+        //Commentaire sur la Fta
+        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_COMMENTAIRE);
+
         return $bloc;
     }
 
@@ -1891,7 +1898,7 @@ class Chapitre {
         $ftaView->setIsEditable($isEditable);
         $ftaView->setFtaChapitreModelById(self::ID_CHAPITRE_IDENTITE);
 
-        $bloc.='<tr class=titre_principal><td class>Palettisasion</td></tr>';
+//        $bloc.='<tr class=titre_principal><td class>Palettisasion</td></tr>';
 
         $bloc.='<tr class=titre_principal><td class>Informations Générales de l\'UVC</td></tr>';
 
@@ -1995,7 +2002,7 @@ class Chapitre {
 
             //Commentaire sur le Chapitre
             //$bloc_suivi .= $ftaView->getHtmlCommentaireChapitre();
-            $bloc_suivi .= $ftaView->getFtaSuiviProjetModel()->getHtmlDataField(FtaSuiviprojetmodel::FIELDNAME_COMMENTAIRE_SUIVI_PROJET);
+            $bloc_suivi .= $ftaView->getFtaSuiviProjetModel($isEditable)->getHtmlDataField(FtaSuiviprojetmodel::FIELDNAME_COMMENTAIRE_SUIVI_PROJET);
             if (!$value) {
                 $value = date('Y-m-d');
             }
@@ -2031,7 +2038,7 @@ class Chapitre {
         //   $bloc_suivi .='<input type=hidden name=$champ value=${$champ}>';
         //   $bloc_suivi.='</td></tr>';
         //$bloc_suivi .= $ftaView->getFtaSuiviProjetModel()->getDataField(FtaSuiviprojetmodel::FIELDNAME_DATE_VALIDATION_SUIVI_PROJET)->getFieldValue();
-        $bloc_suivi .= $ftaView->getFtaSuiviProjetModel()->getHtmlDataField(FtaSuiviprojetmodel::FIELDNAME_DATE_VALIDATION_SUIVI_PROJET);
+        $bloc_suivi .= $ftaView->getFtaSuiviProjetModel(FALSE)->getHtmlDataField(FtaSuiviprojetmodel::FIELDNAME_DATE_VALIDATION_SUIVI_PROJET);
 
 //        $htmlObject = new HtmlInputCalendar(
 //                $field_name = 'date_validation_suivi_projet', $table_name = 'fta_suivi_projet', $value = self::$objectFta->getFieldValue($table_name, $field_name), $is_editable_false, $warning_update = ${'diff_' . $table_name}[$field_name]
@@ -2179,6 +2186,7 @@ class Chapitre {
     protected static function buildHtmlCorrectButton() {
         $return = '';
         if (self::$is_correctable == true) {
+
             $return = '<br><br><br><br><br><table width=\'30%\' align=\'right\'><tr align=\'right\'><td class=titre_principal>'
                     . DatabaseDescription::getFieldDocLabel('fta_suivi_projet', 'correction_fta_suivi_projet') . '</td></tr><tr align=\'right\'><td>'
                     . '<textarea name=correction_fta_suivi_projet rows=3 cols=40></textarea></td></tr><tr align=\'right\'><td>'

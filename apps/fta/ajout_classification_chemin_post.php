@@ -1,14 +1,12 @@
 <?php
+
 /*
-Module d'appartenance (valeur obligatoire)
-Par défaut, le nom du module est le répetoire courant
-*/
+  Module d'appartenance (valeur obligatoire)
+  Par défaut, le nom du module est le répetoire courant
+ */
 
 //$module=substr(strrchr(`pwd`, '/'), 1);
 //$module=trim($module);
-
-
-
 //Inclusions
 //include ("../lib/session.php");
 //include ("../lib/functions.php");
@@ -17,92 +15,69 @@ Par défaut, le nom du module est le répetoire courant
 require_once '../inc/main.php';
 
 /*
------------------
- ACTION A TRAITER
------------------
------------------------------------
- Détermination de l'action en cours
------------------------------------
+  -----------------
+  ACTION A TRAITER
+  -----------------
+  -----------------------------------
+  Détermination de l'action en cours
+  -----------------------------------
 
- Cette page est appelée pour effectuer un traitement particulier
- en fonction de la variable "$action". Ensuite elle redirige le
- résultat vers une autre page.
+  Cette page est appelée pour effectuer un traitement particulier
+  en fonction de la variable "$action". Ensuite elle redirige le
+  résultat vers une autre page.
 
- Le plus souvent, le traitement est délocalisé sous forme de
- fonction située dans le fichier "functions.php"
+  Le plus souvent, le traitement est délocalisé sous forme de
+  fonction située dans le fichier "functions.php"
 
-*/
-switch ($action)
-{
-
-/*
- S'il n'y a pas d'actions défini
  */
-     case 'valider':
-          
-          $id_classification_arborescence_article;  //From URL
-          $id_fta;                                  //From URL
+$action = Lib::getParameterFromRequest('action');
+$paramIdFta = Lib::getParameterFromRequest(FtaModel::KEYNAME);
+$paramIdFtaChapitreEncours = Lib::getParameterFromRequest('id_fta_chapitre_encours');
+$paramSyntheseAction = Lib::getParameterFromRequest('synthese_action');
+$idFtaRole = Lib::getParameterFromRequest(FtaRoleModel::KEYNAME);
+$idFtaEtat = Lib::getParameterFromRequest(FtaEtatModel::KEYNAME);
+$comeback = Lib::getParameterFromRequest(FtaEtatModel::KEYNAME);
+$selection_proprietaire1 = Lib::getParameterFromRequest('selection_proprietaire12');
+$selection_proprietaire2 = Lib::getParameterFromRequest('selection_proprietaire22');
+$selection_marque = Lib::getParameterFromRequest('selection_marque2');
+$selection_activite = Lib::getParameterFromRequest('selection_activite2');
+$selection_rayon = Lib::getParameterFromRequest('selection_rayon2');
+$selection_environnement = Lib::getParameterFromRequest('selection_environnement2');
+$selection_reseau = Lib::getParameterFromRequest('selection_reseau2');
+$selection_saisonnalite = Lib::getParameterFromRequest('selection_saisonnalite2');
 
-          //Enregistrement du chemin dans la classification de la fiche technique
-          mysql_table_load("classification_arborescence_article");
-          mysql_table_operation("classification_fta", "insert");
+switch ($action) {
 
-          //Mise à jour de la table access_arti2
-          $id_fta;
-          mysql_table_load("fta");
-          $id_element="51"; //Environnement de conservation
-          $extension[0]=1;
-          $exist=recherche_element_classification_fta($id_fta, $id_element, $extension);
+    /*
+      S'il n'y a pas d'actions défini
+     */
+    case 'valider':
 
-          //Identifiant id_classification_arborescence_article_categorie_contenu
-          $id_classification_arborescence_article_categorie_contenu = $exist[1];
+        $modelFta = new FtaModel($paramIdFta);
+        if ($selection_saisonnalite) {
+            //Enregistrement du nouvel éléments de classification
+            $idClassification2 = ClassificationFta2Model::getIdFtaClassification2(
+                            $selection_proprietaire1, $selection_proprietaire2
+                            , $selection_marque, $selection_activite
+                            , $selection_rayon, $selection_environnement
+                            , $selection_reseau, $selection_saisonnalite);
+            $modelFta->getDataField(FtaModel::FIELDNAME_ID_FTA_CLASSIFICATION2)->setFieldValue($idClassification2);
+        }
+        $abreviationFtaEtat = $modelFta->getModelFtaEtat()->getDataField(FtaEtatModel::FIELDNAME_ABREVIATION)->getFieldValue();
 
-          //Récupération de l'identifiant id_annexe_environnement_conservation_groupe
-          if($id_classification_arborescence_article_categorie_contenu)
-          {
-             $req = "SELECT id_annexe_environnement_conservation_groupe "
-                  . "FROM annexe_environnement_conservation_groupe "
-                  . "WHERE id_classification_arborescence_article_categorie_contenu='".$id_classification_arborescence_article_categorie_contenu."' "
-                  ;
-             $result=DatabaseOperation::query($req);
-             if(mysql_num_rows($result))
-             {
-               $id_annexe_environnement_conservation_groupe=mysql_result($result, 0, "id_annexe_environnement_conservation_groupe");
-               $K_etat=$id_annexe_environnement_conservation_groupe;
-             }
-             else
-             {
-                 $error=1;
-             }
-          }
-          else
-          {
-              $error=1;
-          }
-          if($error)
-          {
-             $titre="Erreur dans la Classification";
-             $message="Environnement de conservation introuvable.";
-             afficher_message($titre, $message, $redirection);
-          }
-          else
-          {
-             mysql_table_operation("access_arti2", "update");
-          }
-          //Redirection
-          header ("Location: modification_fiche.php?id_fta=$id_fta&id_fta_chapitre_encours=1&synthese_action=$synthese_action");
+        $modelFta->saveToDatabase();
+        //Redirection
+        header('Location: modification_fiche.php?id_fta=' . $paramIdFta . '&id_fta_chapitre_encours=' . $paramIdFtaChapitreEncours . '&synthese_action=' . $paramSyntheseAction . '&comeback=' . $comeback . '&id_fta_etat=' . $idFtaEtat . '&abreviation_fta_etat=' . $abreviationFtaEtat . '&id_fta_role=' . $idFtaRole);
 
-     break;
+        break;
 
 
 
-/************
-Fin de switch
-************/
-             
+    /*     * **********
+      Fin de switch
+     * ********** */
 }
 //include ("./action_bs.php");
 //include ("./action_sm.php");
-
 ?>
 

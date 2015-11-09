@@ -187,7 +187,8 @@ class Html {
                 break;
 
             default:
-                throw new Exception("Type d'objet <b>" . $TypeOfHtmlObject . "</b> inconnu." . " Champs concerné:" . $paramDataField->getFieldName() . " ");
+                afficher_message("Erreur", "Type d'objet <b>" . $TypeOfHtmlObject . "</b> inconnu." . " Champs concerné:" . $paramDataField->getFieldName() . " ", $redirection);
+//                throw new Exception();
         }
 
         return $htmlObject;

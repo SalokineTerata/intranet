@@ -154,12 +154,7 @@ class FtaProcessusDelaiModel extends AbstractModel {
 
             foreach ($arrayIdFtaDate as $rowsIdFtaDate) {
                 $dateEcheanceFta = $rowsIdFtaDate[FtaModel::FIELDNAME_DATE_ECHEANCE_FTA];
-                $dateEcheanceFta1 = new DateTime($rowsIdFtaDate[FtaModel::FIELDNAME_DATE_ECHEANCE_FTA]);
-                $dateActuelObjet = new DateTime(date('Y-m-d'));
-                $differenceDeDate = $dateEcheanceFta1->diff($dateActuelObjet);
-                $nb_jours = $differenceDeDate->d;
-                $nb_annee = $differenceDeDate->y;
-                $nb_mois = $differenceDeDate->m;
+                $jour_restant = ((strtotime($dateEcheanceFta) - strtotime(date('Y-m-d')))) / 86400;
             }
             /**
              * @todo Revoir les notification de date d'échances
@@ -167,12 +162,12 @@ class FtaProcessusDelaiModel extends AbstractModel {
             if ($dateEcheanceFta == '0000-00-00' or $dateEcheanceFta == '') {
                 $return['status'] = 3;
             } else {
-                if ($nb_annee > "1") {
+                if ($jour_restant <= "0") {
                     $return['status'] = 2;
-                } elseif ($nb_jours > ModuleConfig::VALUE_DATE_NOTIFICATION) {
-                    $return['status'] = 1;
-                    if ($nb_mois >= "1") {
-                        $return['status'] = 2;
+                } elseif ($jour_restant <= ModuleConfig::VALUE_DATE_NOTIFICATION2) {
+                    $return['status'] = 2;
+                    if ($jour_restant <= ModuleConfig::VALUE_DATE_NOTIFICATION) {
+                        $return['status'] = 1;
                     }
                 }
 

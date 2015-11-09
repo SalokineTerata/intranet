@@ -392,10 +392,9 @@ switch ($action) {
     case 'suppression_palettisation':
 
 //Variables passées en URL
-        $paramIdFta;
-        $id_fta_conditionnement;
-        mysql_table_operation('fta_conditionnement', 'delete');
-
+//        $paramIdFta;
+//        $id_fta_conditionnement;
+//        mysql_table_operation('fta_conditionnement', 'delete');
 //header ('Location: modification_fiche.php?id_fta=$id_fta&id_fta_chapitre_encours=$id_fta_chapitre_encours&synthese_action=$synthese_action');
         break;
 
@@ -404,9 +403,7 @@ switch ($action) {
 //Suppression de la nomenclature
 //$id_fta_nomenclature;
 //recette_nomenclature_suppression($id_fta_nomenclature);
-        mysql_table_operation('fta_composant', 'delete');
-
-
+//        mysql_table_operation('fta_composant', 'delete');
 //header ('Location: modification_fiche.php?id_fta=$id_fta&id_fta_chapitre_encours=$id_fta_chapitre_encours&synthese_action=$synthese_action');
         break;
 

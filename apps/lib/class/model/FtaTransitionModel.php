@@ -34,11 +34,13 @@ class FtaTransitionModel {
         $ftaModel = new FtaModel($paramIdFta);
         $idFtaEtatByIdFta = $ftaModel->getDataField(FtaModel::FIELDNAME_ID_FTA_ETAT)->getFieldValue();
         $idDossierFta = $ftaModel->getDataField(FtaModel::FIELDNAME_DOSSIER_FTA)->getFieldValue();
-        $idArticleAgrologic = $ftaModel->getDataField(FtaModel::FIELDNAME_ARTICLE_AGROLOGIC)->getFieldValue();
+        $codeArticleLdc = $ftaModel->getDataField(FtaModel::FIELDNAME_CODE_ARTICLE_LDC)->getFieldValue();
         $siteDeProduction = $ftaModel->getDataField(FtaModel::FIELDNAME_SITE_ASSEMBLAGE)->getFieldValue();
         $ftaEtatModel = new FtaEtatModel($idFtaEtatByIdFta);
         $initial_abreviation_fta_etat = $ftaEtatModel->getDataField(FtaEtatModel::FIELDNAME_ABREVIATION)->getFieldValue();
         $globalConfig = new GlobalConfig();
+                              UserModel::ConnexionFalse($globalConfig);
+
         $idUser = $globalConfig->getAuthenticatedUser()->getKeyValue();
         $userModel = new UserModel($idUser);
         $login = $userModel->getDataField(UserModel::FIELDNAME_LOGIN)->getFieldValue();
@@ -76,23 +78,23 @@ class FtaTransitionModel {
                 $nouveau_maj_fta = "";
 
                 break;
-            case $paramAbreviationFtaTransition == FtaEtatModel::ETAT_ABREVIATION_VALUE_WORKFLOW:
-                //Dans le cas d'une mise à jour, récupération des Chapitres à corriger.
-
-                $liste_chapitre_maj_fta = ";";
-                //Mise à  jour de la table Fta_suivie_projet
-                FtaSuiviProjetModel::initFtaSuiviProjet($paramIdFta);
-                foreach ($paramListeChapitres as $rowsChapitre) {
-                    //Parcours des chapitres
-                    //Si le chapitre a été sélectionné, on l'enregistre dans le tableau de résultat
-                    $liste_chapitre_maj_fta.=$rowsChapitre . ";";
-                    //Correction des chapitres
-                    $paramOption["no_message_ecran"] = "1";
-                    $paramOption["correction_fta_suivi_projet"] = $nouveau_maj_fta;
-                    FtaChapitreModel::BuildCorrectionChapitre($paramIdFta, $rowsChapitre, $paramOption);
-                }
-                $paramAbreviationFtaTransition = FtaEtatModel::ETAT_ABREVIATION_VALUE_MODIFICATION;
-                break;
+//            case $paramAbreviationFtaTransition == FtaEtatModel::ETAT_ABREVIATION_VALUE_WORKFLOW:
+//                //Dans le cas d'une mise à jour, récupération des Chapitres à corriger.
+//
+//                $liste_chapitre_maj_fta = ";";
+//                //Mise à  jour de la table Fta_suivie_projet
+//                FtaSuiviProjetModel::initFtaSuiviProjet($paramIdFta);
+//                foreach ($paramListeChapitres as $rowsChapitre) {
+//                    //Parcours des chapitres
+//                    //Si le chapitre a été sélectionné, on l'enregistre dans le tableau de résultat
+//                    $liste_chapitre_maj_fta.=$rowsChapitre . ";";
+//                    //Correction des chapitres
+//                    $paramOption["no_message_ecran"] = "1";
+//                    $paramOption["correction_fta_suivi_projet"] = $nouveau_maj_fta;
+//                    FtaChapitreModel::BuildCorrectionChapitre($paramIdFta, $rowsChapitre, $paramOption);
+//                }
+//                $paramAbreviationFtaTransition = FtaEtatModel::ETAT_ABREVIATION_VALUE_MODIFICATION;
+//                break;
 
             case $paramAbreviationFtaTransition == FtaEtatModel::ETAT_ABREVIATION_VALUE_MODIFICATION: //Passer en Initialisation
                 //Vérification que le dossier n'a pas une fiche déjà en Mise à jour
@@ -148,7 +150,7 @@ class FtaTransitionModel {
                 $option_duplication["site_de_production"] = $siteDeProduction;
                 $idFtaNew = FtaModel::BuildDuplicationFta($id_fta_original, $action_duplication, $option_duplication, $paramIdWorkflow);
                 $ftaModel = new FtaModel($idFtaNew);
-                $idArticleAgrologic = $ftaModel->getDataField(FtaModel::FIELDNAME_ARTICLE_AGROLOGIC)->getFieldValue();
+                $codeArticleLdc = $ftaModel->getDataField(FtaModel::FIELDNAME_CODE_ARTICLE_LDC)->getFieldValue();
                 $paramIdFta = $idFtaNew;
                 break;
 
@@ -196,15 +198,16 @@ class FtaTransitionModel {
 
                 //Désactivation de l'ancien Code Article Agrologic
                 $req = "UPDATE " . FtaModel::TABLENAME
-                        . " SET " . FtaModel::FIELDNAME_CODE_ARTICLE . "=NULL"
-                        . " WHERE " . FtaModel::FIELDNAME_CODE_ARTICLE . "='" . $idArticleAgrologic . "' "
+                        . " SET " . FtaModel::FIELDNAME_CODE_ARTICLE . "=NULL "
+                        . "," . FtaModel::FIELDNAME_ACTIF . "='0'"
+                        . " WHERE " . FtaModel::FIELDNAME_CODE_ARTICLE_LDC . "='" . $codeArticleLdc . "' "
                         . " AND " . FtaModel::KEYNAME . "='" . $paramIdFta . "' "
                 ;
                 DatabaseOperation::execute($req);
 
                 //Activation du nouvel Article
                 $req = "UPDATE " . FtaModel::TABLENAME
-                        . " SET " . FtaModel::FIELDNAME_CODE_ARTICLE . "='" . $idArticleAgrologic . "', actif='-1' "
+                        . " SET " . FtaModel::FIELDNAME_CODE_ARTICLE . "='" . "1" . "', actif='-1' "
                         . " WHERE " . FtaModel::KEYNAME . "='" . $paramIdFta . "' "
                 ;
                 DatabaseOperation::execute($req);
@@ -216,6 +219,7 @@ class FtaTransitionModel {
 
                 $req = "UPDATE " . FtaModel::TABLENAME
                         . " SET " . FtaModel::FIELDNAME_ACTIF . "=0"
+                        . "," . FtaModel::FIELDNAME_CODE_ARTICLE . "=NULL"
                         . " WHERE " . FtaModel::KEYNAME . "='" . $paramIdFta . "' "
                 ;
                 DatabaseOperation::execute($req);
@@ -532,7 +536,8 @@ class FtaTransitionModel {
                 . "\n"
                 . "INFORMATIONS DE DEBUGGAGE:\n"
                 . $logTransition
-        ; {
+        ;
+        {
             $expediteur = $prenom . " " . $nom . " <" . $mail . ">";
             envoismail($sujetmail, $corp, $mail, $expediteur, $typeMail);
         }

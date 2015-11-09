@@ -213,13 +213,13 @@ class FtaView {
      * @param int $paramIdFta
      * @return string
      */
-    public function ListeWorkflowByAcces($paramIdUser, $paramIsEditable, $paramIdFta,$paramIdFtaRole) {
+    public function ListeWorkflowByAcces($paramIdUser, $paramIsEditable, $paramIdFta, $paramIdFtaRole) {
         $HtmlList = new HtmlListSelect();
 
         /*
          * Worflow de FTA
          */
-        return FtaWorkflowModel::ShowListeDeroulanteNomWorkflowByAccesAndIdFta($paramIdUser, $HtmlList, $paramIsEditable, $paramIdFta,$paramIdFtaRole);
+        return FtaWorkflowModel::ShowListeDeroulanteNomWorkflowByAccesAndIdFta($paramIdUser, $HtmlList, $paramIsEditable, $paramIdFta, $paramIdFtaRole);
     }
 
     /**
@@ -243,12 +243,42 @@ class FtaView {
      * @param type $paramIsEditable
      * @return type
      */
-    public function ListeClassification($paramIsEditable) {
+    public function ListeClassification($paramIsEditable, $paramIdFtaChapitre, $paramSyntheseAction, $paramComeback, $paramIdFtaEtat, $paramAbrevationEtat, $paramIdFtaRole) {
+        $idFtaClassification2 = $this->getModel()->getDataField(FtaModel::FIELDNAME_ID_FTA_CLASSIFICATION2)->getFieldValue();
+        $idFta = $this->getModel()->getKeyValue();
         /*
          * Classification FTA
          */
-        $ListeCLassification = ClassificationFta2Model::ShowListeDeroulanteClassification($paramIsEditable);
+        if ($paramIsEditable and ! $idFtaClassification2) {
 
+            $ListeCLassification = "<tr ><td class=\"contenu\">Ajouter une classification</td ><td class=\"contenu\" width=75% >"
+                    . "<a href="
+                    . "ajout_classification_chemin.php?"
+                    . "id_fta=" . $idFta
+                    . "&id_fta_chapitre_encours=" . $paramIdFtaChapitre
+                    . "&synthese_action=" . $paramSyntheseAction
+                    . "&comeback=" . $paramComeback
+                    . "&id_fta_etat=" . $paramIdFtaEtat
+                    . "&abreviation_fta_etat=" . $paramAbrevationEtat
+                    . "&id_fta_role=" . $paramIdFtaRole
+                    . ">Cliquez ici</a></td></tr>";
+        } else {
+            $ListeCLassification = ClassificationFta2Model::ShowListeDeroulanteClassification(FALSE);
+            if ($paramIsEditable) {
+                $ListeCLassification .= "<tr ><td class=\"contenu\">Modifier la classification</td ><td class=\"contenu\" width=75% >"
+                        . "<a href="
+                        . "ajout_classification_chemin.php?"
+                        . "id_fta=" . $idFta
+                        . "&id_fta_chapitre_encours=" . $paramIdFtaChapitre
+                        . "&synthese_action=" . $paramSyntheseAction
+                        . "&comeback=" . $paramComeback
+                        . "&id_fta_etat=" . $paramIdFtaEtat
+                        . "&abreviation_fta_etat=" . $paramAbrevationEtat
+                        . "&id_fta_role=" . $paramIdFtaRole
+                        . "&id_fta_classification2=" . $idFtaClassification2
+                        . ">Cliquez ici</a></td></tr>";
+            }
+        }
 
         return $ListeCLassification;
     }
@@ -633,7 +663,66 @@ class FtaView {
         return $return;
     }
 
-    public function getHtmlEtiquetteComposant($paramIdFta, $paramChapitre, $paramSyntheseAction, $paramComeback, $paramIdFtaEtat, $paramAbreviationEtat, $paramIdFtaRole, $paramEditable) {
+    /**
+     * Tableau d'étiquette composition
+     * @param type $paramIdFta
+     * @param type $paramChapitre
+     * @param type $paramSyntheseAction
+     * @param type $paramComeback
+     * @param type $paramIdFtaEtat
+     * @param type $paramAbreviationEtat
+     * @param type $paramIdFtaRole
+     * @param type $paramEditable
+     * @return type
+     */
+    public function getHtmlEtiquetteComposition($paramIdFta, $paramChapitre, $paramSyntheseAction, $paramComeback, $paramIdFtaEtat, $paramAbreviationEtat, $paramIdFtaRole, $paramEditable) {
+
+        /*
+         * Récuperation des élements clé de la table fta_composant
+         */
+        if ($paramEditable) {
+            $proprietaire = '1';
+        } else {
+            $proprietaire = '0';
+        }
+        $FtaComposant = FtaComposantModel::getIdFtaComposition($paramIdFta);
+        if ($FtaComposant) {
+            foreach ($FtaComposant as $rowsFtaComposant) {
+                $idFtaComposant = $rowsFtaComposant[FtaComposantModel::KEYNAME];
+                $arrayIdFtaComposant[] = $idFtaComposant;
+            }
+
+            $htmlEtiquetteComposant = Html::getHtmlObjectFromDataField($this->getModel()->getDataField(FtaModel::FIELDNAME_VIRTUAL_FTA_COMPOSANT));
+            $htmlEtiquetteComposant->setIsEditable($this->getIsEditable());
+            $htmlEtiquetteComposant->setLienAjouter(FtaComposantModel::getAddAfterLinkComposition($paramIdFta, $paramChapitre, $paramSyntheseAction, $paramComeback, $paramIdFtaEtat, $paramAbreviationEtat, $paramIdFtaRole, $proprietaire));
+            $htmlEtiquetteComposant->setLienDetail(FtaComposantModel::getDetailLinkComposition($paramIdFta, $paramChapitre, $arrayIdFtaComposant, $paramSyntheseAction, $paramComeback, $paramIdFtaEtat, $paramAbreviationEtat, $paramIdFtaRole, $proprietaire));
+            $htmlEtiquetteComposant->setLienSuppression(FtaComposantModel::getDeleteLinkComposition($paramIdFta, $paramChapitre, $arrayIdFtaComposant, $paramSyntheseAction, $paramComeback, $paramIdFtaEtat, $paramAbreviationEtat, $paramIdFtaRole));
+            $htmlEtiquetteComposant->setTableLabel(FtaComposantModel::getTableCompositionLabel($idFtaComposant));
+            $return .= $htmlEtiquetteComposant->getHtmlResult();
+        } else {
+            $htmlEtiquetteComposant = Html::getHtmlObjectFromDataField($this->getModel()->getDataField(FtaModel::FIELDNAME_VIRTUAL_FTA_COMPOSANT));
+            $htmlEtiquetteComposant->setIsEditable($this->getIsEditable());
+            $htmlEtiquetteComposant->setRightToAdd(TRUE);
+            $htmlEtiquetteComposant->getAttributesGlobal()->setHrefAjoutValue(FtaComposantModel::getAddLinkComposition($paramIdFta, $paramChapitre, $paramSyntheseAction, $paramComeback, $paramIdFtaEtat, $paramAbreviationEtat, $paramIdFtaRole, $proprietaire));
+            $htmlEtiquetteComposant->setLien(FtaComposantModel::getAddLinkComposition($paramIdFta, $paramChapitre, $paramSyntheseAction, $paramComeback, $paramIdFtaEtat, $paramAbreviationEtat, $paramIdFtaRole, $proprietaire));
+            $return .= $htmlEtiquetteComposant->getHtmlResult();
+        }
+        return $return;
+    }
+
+    /**
+     * Tableau d'étiquette composant
+     * @param type $paramIdFta
+     * @param type $paramChapitre
+     * @param type $paramSyntheseAction
+     * @param type $paramComeback
+     * @param type $paramIdFtaEtat
+     * @param type $paramAbreviationEtat
+     * @param type $paramIdFtaRole
+     * @param type $paramEditable
+     * @return type
+     */
+    public function getHtmlEtiquetteRD($paramIdFta, $paramChapitre, $paramSyntheseAction, $paramComeback, $paramIdFtaEtat, $paramAbreviationEtat, $paramIdFtaRole, $paramEditable) {
 
         /*
          * Récuperation des élements clé de la table fta_composant
@@ -650,15 +739,15 @@ class FtaView {
                 $arrayIdFtaComposant[] = $idFtaComposant;
             }
 
-            $htmlEtiquetteComposant = Html::getHtmlObjectFromDataField($this->getModel()->getDataField(FtaModel::FIELDNAME_VIRTUAL_FTA_COMPOSANT));
+            $htmlEtiquetteComposant = Html::getHtmlObjectFromDataField($this->getModel()->getDataField(FtaModel::FIELDNAME_VIRTUAL_FTA_COMPOSANT_RD));
             $htmlEtiquetteComposant->setIsEditable($this->getIsEditable());
-            $htmlEtiquetteComposant->setLienAjouter(FtaComposantModel::getAddAfterLinkComposant($paramIdFta, $paramChapitre, $paramSyntheseAction, $paramComeback, $paramIdFtaEtat, $paramAbreviationEtat, $paramIdFtaRole, $proprietaire));
+            $htmlEtiquetteComposant->setLienAjouter(FtaComposantModel::getAddLinkComposant($paramIdFta, $paramChapitre, $paramSyntheseAction, $paramComeback, $paramIdFtaEtat, $paramAbreviationEtat, $paramIdFtaRole, $proprietaire));
             $htmlEtiquetteComposant->setLienDetail(FtaComposantModel::getDetailLinkComposant($paramIdFta, $paramChapitre, $arrayIdFtaComposant, $paramSyntheseAction, $paramComeback, $paramIdFtaEtat, $paramAbreviationEtat, $paramIdFtaRole, $proprietaire));
-            $htmlEtiquetteComposant->setLienSuppression(FtaComposantModel::getDeleteLinkComposant($paramIdFta, $paramChapitre, $arrayIdFtaComposant, $paramSyntheseAction, $paramComeback, $paramIdFtaEtat, $paramAbreviationEtat, $paramIdFtaRole));
+            $htmlEtiquetteComposant->setLienSuppression(FtaComposantModel::getDeleteLinkComposition($paramIdFta, $paramChapitre, $arrayIdFtaComposant, $paramSyntheseAction, $paramComeback, $paramIdFtaEtat, $paramAbreviationEtat, $paramIdFtaRole));
             $htmlEtiquetteComposant->setTableLabel(FtaComposantModel::getTableComposantLabel($idFtaComposant));
             $return .= $htmlEtiquetteComposant->getHtmlResult();
         } else {
-            $htmlEtiquetteComposant = Html::getHtmlObjectFromDataField($this->getModel()->getDataField(FtaModel::FIELDNAME_VIRTUAL_FTA_COMPOSANT));
+            $htmlEtiquetteComposant = Html::getHtmlObjectFromDataField($this->getModel()->getDataField(FtaModel::FIELDNAME_VIRTUAL_FTA_COMPOSANT_RD));
             $htmlEtiquetteComposant->setIsEditable($this->getIsEditable());
             $htmlEtiquetteComposant->setRightToAdd(TRUE);
             $htmlEtiquetteComposant->getAttributesGlobal()->setHrefAjoutValue(FtaComposantModel::getAddLinkComposant($paramIdFta, $paramChapitre, $paramSyntheseAction, $paramComeback, $paramIdFtaEtat, $paramAbreviationEtat, $paramIdFtaRole, $proprietaire));
@@ -719,14 +808,14 @@ class FtaView {
      * 
      * @return \FtaSuiviProjetModel
      */
-    function getFtaSuiviProjetModel() {
+    function getFtaSuiviProjetModel($paramIsEditable) {
 
         $idFtaChapitre = $this->getFtaChapitreModel()->getKeyValue();
         $idFtaSuiviProjet = FtaSuiviProjetModel::getIdFtaSuiviProjetByIdFtaAndIdChapitre(
                         $this->getModel()->getKeyValue(), $idFtaChapitre
         );
         $ftaSuiviProjetModel = new FtaSuiviProjetModel($idFtaSuiviProjet);
-        $ftaSuiviProjetModel->setIsEditable(FALSE);
+        $ftaSuiviProjetModel->setIsEditable($paramIsEditable);
         return $ftaSuiviProjetModel;
     }
 

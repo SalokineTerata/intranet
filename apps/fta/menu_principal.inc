@@ -77,46 +77,46 @@ if (
 /*
   Fonctionnalités communes
  */
-if (
-        AclClass::getValueAccesRights($module_modification) == 1 //-> Assistante Direction Commericale
-) {
-    /*
-      //Accéder à son bloc de saisie sur les fiches en cours
-      echo '<br>';
-      echo '<a href=modification_liste.php><img src=../lib/images/bouton_menu-en_cours.png border=0></a>';
-
-      //Valider la fin de la saisie de ses Fiches Techniques
-      echo '<br>';
-      echo '<a href=validation0.php><img src=../lib/images/bouton_menu-valider_la_fiche.png border=0></a>';
-     */
-    //Permet d'accéder directement aux Données Annexes dont l'utilisateur est gestionnaire de liste
-    //echo '<br>';
-    //echo '<a href=./index.php?menu=menu_table_annexe.inc target=_top><img src=../lib/images/bouton_menu-donnees_annexes.png border=0></a>';
-    echo '<br><a href=consultation_tarif.php>Consulter les tarifs</a>';
-    echo '<br>';
-}
+//if (
+//        AclClass::getValueAccesRights($module_modification) == 1 //-> Assistante Direction Commericale
+//) {
+//    /*
+//      //Accéder à son bloc de saisie sur les fiches en cours
+//      echo '<br>';
+//      echo '<a href=modification_liste.php><img src=../lib/images/bouton_menu-en_cours.png border=0></a>';
+//
+//      //Valider la fin de la saisie de ses Fiches Techniques
+//      echo '<br>';
+//      echo '<a href=validation0.php><img src=../lib/images/bouton_menu-valider_la_fiche.png border=0></a>';
+//     */
+//    //Permet d'accéder directement aux Données Annexes dont l'utilisateur est gestionnaire de liste
+//    //echo '<br>';
+//    //echo '<a href=./index.php?menu=menu_table_annexe.inc target=_top><img src=../lib/images/bouton_menu-donnees_annexes.png border=0></a>';
+//    echo '<br><a href=consultation_tarif.php>Consulter les tarifs</a>';
+//    echo '<br>';
+//}
 //   echo '...';
 
-if (
-      $id_user and  $idFtaRole == 3 //-> Service Qualité
-) {
-    /*
-      //Accéder à son bloc de saisie sur les fiches en cours
-      echo '<br>';
-      echo '<a href=modification_liste.php><img src=../lib/images/bouton_menu-en_cours.png border=0></a>';
-
-      //Valider la fin de la saisie de ses Fiches Techniques
-      echo '<br>';
-      echo '<a href=validation0.php><img src=../lib/images/bouton_menu-valider_la_fiche.png border=0></a>';
-     */
-    //Permet d'accéder directement aux Données Annexes dont l'utilisateur est gestionnaire de liste
-    echo '<br>';
-    echo '
-            <a href=./derogation_duree_vie.php target=_top>
-            <img src=images/bouton_menu-derogation_duree_vie.png border=0>
-            </a>
-            ';
-}
+//if (
+//      $id_user and  $idFtaRole == 3 //-> Service Qualité
+//) {
+//    /*
+//      //Accéder à son bloc de saisie sur les fiches en cours
+//      echo '<br>';
+//      echo '<a href=modification_liste.php><img src=../lib/images/bouton_menu-en_cours.png border=0></a>';
+//
+//      //Valider la fin de la saisie de ses Fiches Techniques
+//      echo '<br>';
+//      echo '<a href=validation0.php><img src=../lib/images/bouton_menu-valider_la_fiche.png border=0></a>';
+//     */
+//    //Permet d'accéder directement aux Données Annexes dont l'utilisateur est gestionnaire de liste
+//    echo '<br>';
+//    echo '
+//            <a href=./derogation_duree_vie.php target=_top>
+//            <img src=images/bouton_menu-derogation_duree_vie.png border=0>
+//            </a>
+//            ';
+//}
 
 //Migration de V1 vers V2
 if ($globalConfig->getConf()->getExecDebugEnable()) {

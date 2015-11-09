@@ -55,7 +55,7 @@ require_once '../inc/main.php';
 
 $nameOfBDDTarget = "intranet_v3_0_dev";
 $nameOfBDDOrigin = "intranet_v2_0_prod_dev";
-$nameOfBDDStructure = "intranet_v3_0_dev_model";
+$nameOfBDDStructure = "intranet_v3_0_model";
 
 
 /**
@@ -250,7 +250,7 @@ function recursifOne($paramStartValue, $htmlResult) {
 //                );
 
 $hostname_connect = "dev-intranet.agis.fr"; //nom du serveur MySQL de connection � la base de donn�e
-$database_connect = $nameOfBDDStructure; //nom de la base de donn�e sur votre serveur MySQL
+$database_connect = $nameOfBDDTarget; //nom de la base de donn�e sur votre serveur MySQL
 $username_connect = "root"; //login de la base MySQL
 $tablename_connect = "salaries"; //table login de la base MySQL
 $password_connect = "8ale!ne"; //mot de passe de la base MySQL

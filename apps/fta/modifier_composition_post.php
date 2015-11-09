@@ -30,6 +30,8 @@ $abreviationFtaEtat = Lib::getParameterFromRequest(FtaEtatModel::FIELDNAME_ABREV
 $comeback = Lib::getParameterFromRequest('comeback');
 $synthese_action = Lib::getParameterFromRequest('synthese_action');
 $globalConfig = new GlobalConfig();
+      UserModel::ConnexionFalse($globalConfig);
+
 $id_user = $globalConfig->getAuthenticatedUser()->getKeyValue();
 $proprietaire = Lib::getParameterFromRequest('proprietaire');
 $valider_saisie = Lib::getParameterFromRequest('valider_saisie');
@@ -116,46 +118,45 @@ switch ($action) {
             $is_composition_fta_composant = 1;
 
             //En revanche, un composant créé au niveau de la composition n'intervient pas dans la nomenclature
-            $id_fta_composant = FtaComposantModel::InsertFtaComposant($id_fta);
             $ftaComposantModel = new FtaComposantModel($id_fta_composant);
 
             /**
              * Enregistrement
              */
             $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_IS_COMPOSITION_FTA_COMPOSANT)->setFieldValue($is_composition_fta_composant);
-            $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_DUREE_VIE_TECHNIQUE_FTA_COMPOSITION)->setFieldValue($duree_vie_technique_fta_composition);
-            $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_ETIQUETTE)->setFieldValue($etiquette_fta_composition);
-            $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_ETIQUETTE_DUREE_VIE_FTA_COMPOSITION)->setFieldValue($etiquette_duree_vie_fta_composition);
-            $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_ETIQUETTE_ID_FTA_COMPOSITION)->setFieldValue($etiquette_id_fta_composition);
-            $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_ETIQUETTE_LIBELLE_FTA_COMPOSITION)->setFieldValue($etiquette_libelle_fta_composition);
-            $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_ETIQUETTE_POIDS_FTA_COMPOSITION)->setFieldValue($etiquette_poids_fta_composition);
-            $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_ETIQUETTE_SUPPLEMENTAIRE_FTA_COMPOSIITON)->setFieldValue($etiquette_supplementaire_fta_composition);
-            $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_ID_FTA_COMPOSTION)->setFieldValue($id_fta_composition);
-            $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_ID_GEO)->setFieldValue($SiteDeProduction);
-            $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_INGREDIENT_FTA_COMPOSITION)->setFieldValue($ingredient_fta_composition);
-            $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_INGREDIENT_FTA_COMPOSITION1)->setFieldValue($ingredient_fta_composition1);
-            $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_K_ETIQUETTE_FTA_COMPOSITION)->setFieldValue($k_etiquette);
-            $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_K_STYLE_PARAGRAPHE_INGREDIENT_FTA_COMPOSITION)->setFieldValue($k_style_paragraphe_ingredient_fta_composition);
+//            $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_DUREE_VIE_TECHNIQUE_FTA_COMPOSITION)->setFieldValue($duree_vie_technique_fta_composition);
+//            $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_ETIQUETTE)->setFieldValue($etiquette_fta_composition);
+//            $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_ETIQUETTE_DUREE_VIE_FTA_COMPOSITION)->setFieldValue($etiquette_duree_vie_fta_composition);
+//            $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_ETIQUETTE_ID_FTA_COMPOSITION)->setFieldValue($etiquette_id_fta_composition);
+//            $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_ETIQUETTE_LIBELLE_FTA_COMPOSITION)->setFieldValue($etiquette_libelle_fta_composition);
+//            $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_ETIQUETTE_POIDS_FTA_COMPOSITION)->setFieldValue($etiquette_poids_fta_composition);
+//            $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_ETIQUETTE_SUPPLEMENTAIRE_FTA_COMPOSIITON)->setFieldValue($etiquette_supplementaire_fta_composition);
+//            $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_ID_FTA_COMPOSTION)->setFieldValue($id_fta_composition);
+//            $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_ID_GEO)->setFieldValue($SiteDeProduction);
+//            $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_INGREDIENT_FTA_COMPOSITION)->setFieldValue($ingredient_fta_composition);
+//            $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_INGREDIENT_FTA_COMPOSITION1)->setFieldValue($ingredient_fta_composition1);
+//            $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_K_ETIQUETTE_FTA_COMPOSITION)->setFieldValue($k_etiquette);
+//            $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_K_STYLE_PARAGRAPHE_INGREDIENT_FTA_COMPOSITION)->setFieldValue($k_style_paragraphe_ingredient_fta_composition);
             $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_MODE_ETIQUETTE_FTA_COMPOSITION)->setFieldValue($mode_etiquette_fta_composition);
-            $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_NOM_FTA_COMPOSITION)->setFieldValue($nom_fta_composition);
-            $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_ORDRE_FTA_COMPOSITION)->setFieldValue($ordre_fta_composition);
-            $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_POIDS_FTA_COMPOSITION)->setFieldValue($poids_fta_composition);
-            $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_QUANTITE_FTA_COMPOSITION)->setFieldValue($quantite_fta_composition);
+//            $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_NOM_FTA_COMPOSITION)->setFieldValue($nom_fta_composition);
+//            $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_ORDRE_FTA_COMPOSITION)->setFieldValue($ordre_fta_composition);
+//            $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_POIDS_FTA_COMPOSITION)->setFieldValue($poids_fta_composition);
+//            $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_QUANTITE_FTA_COMPOSITION)->setFieldValue($quantite_fta_composition);
             $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_TAILLE_POLICE_INGREDIENT_FTA_COMPOSITION)->setFieldValue($taille_police_ingredient_fta_composition);
-            $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_VAL_SEL)->setFieldValue($val_nut_sel);
-            $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_VAL_PROTEINE)->setFieldValue($val_nut_proteine);
-            $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_VAL_SUCRE)->setFieldValue($val_nut_sucre);
-            $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_VAL_GLUCIDE)->setFieldValue($val_nut_glucide);
-            $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_VAL_ACIDE_GRAS)->setFieldValue($val_nut_acide_gras);
-            $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_VAL_MAT_GRASSE)->setFieldValue($val_nut_mat_grasse);
-            $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_VAL_NUT_KJ)->setFieldValue($val_nut_kj);
-            $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_VAL_NUT_KCAL)->setFieldValue($val_nut_kcal);
-            $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_ID_GEO)->setFieldValue($SiteDeProduction);
-            $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_K_ETIQUETTE_VERSO_FTA_COMPOSITION)->setFieldValue($k_etiquette_verso_fta_composition);
-            $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_K_CODESOFT_ETIQUETTE_LOGO)->setFieldValue($k_codesoft_etiquette_logo);
-            $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_ETIQUETTE_DECOMPOSITION_POIDS_FTA_COMPOSANT)->setFieldValue($etiquette_decomposition_poids_fta_composant);
-            $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_ETIQUETTE_INFORMATION_COMPLEMENTAIRE_RECTO_FTA_COMPOSANT)->setFieldValue($etiquette_information_complementaire_recto_fta_composant);
-            $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_ETIQUETTE_LIBELLE_LEGAL_FTA_COMPOSITION)->setFieldValue($etiquette_libelle_legal_fta_composition);
+//            $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_VAL_SEL)->setFieldValue($val_nut_sel);
+//            $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_VAL_PROTEINE)->setFieldValue($val_nut_proteine);
+//            $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_VAL_SUCRE)->setFieldValue($val_nut_sucre);
+//            $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_VAL_GLUCIDE)->setFieldValue($val_nut_glucide);
+//            $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_VAL_ACIDE_GRAS)->setFieldValue($val_nut_acide_gras);
+//            $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_VAL_MAT_GRASSE)->setFieldValue($val_nut_mat_grasse);
+//            $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_VAL_NUT_KJ)->setFieldValue($val_nut_kj);
+//            $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_VAL_NUT_KCAL)->setFieldValue($val_nut_kcal);
+//            $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_ID_GEO)->setFieldValue($SiteDeProduction);
+//            $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_K_ETIQUETTE_VERSO_FTA_COMPOSITION)->setFieldValue($k_etiquette_verso_fta_composition);
+//            $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_K_CODESOFT_ETIQUETTE_LOGO)->setFieldValue($k_codesoft_etiquette_logo);
+//            $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_ETIQUETTE_DECOMPOSITION_POIDS_FTA_COMPOSANT)->setFieldValue($etiquette_decomposition_poids_fta_composant);
+//            $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_ETIQUETTE_INFORMATION_COMPLEMENTAIRE_RECTO_FTA_COMPOSANT)->setFieldValue($etiquette_information_complementaire_recto_fta_composant);
+//            $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_ETIQUETTE_LIBELLE_LEGAL_FTA_COMPOSITION)->setFieldValue($etiquette_libelle_legal_fta_composition);
             $ftaComposantModel->saveToDatabase();
         } else {
 
@@ -163,39 +164,39 @@ switch ($action) {
             $ftaComposantModel = new FtaComposantModel($id_fta_composant);
 
 
-            $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_DUREE_VIE_TECHNIQUE_FTA_COMPOSITION)->setFieldValue($duree_vie_technique_fta_composition);
-            $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_ETIQUETTE)->setFieldValue($etiquette_fta_composition);
-            $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_ETIQUETTE_DUREE_VIE_FTA_COMPOSITION)->setFieldValue($etiquette_duree_vie_fta_composition);
-            $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_ETIQUETTE_ID_FTA_COMPOSITION)->setFieldValue($etiquette_id_fta_composition);
-            $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_ETIQUETTE_LIBELLE_FTA_COMPOSITION)->setFieldValue($etiquette_libelle_fta_composition);
-            $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_ETIQUETTE_POIDS_FTA_COMPOSITION)->setFieldValue($etiquette_poids_fta_composition);
-            $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_ETIQUETTE_SUPPLEMENTAIRE_FTA_COMPOSIITON)->setFieldValue($etiquette_supplementaire_fta_composition);
-            $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_ID_FTA_COMPOSTION)->setFieldValue($id_fta_composition);
-            $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_ID_GEO)->setFieldValue($SiteDeProduction);
-            $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_INGREDIENT_FTA_COMPOSITION)->setFieldValue($ingredient_fta_composition);
-            $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_INGREDIENT_FTA_COMPOSITION1)->setFieldValue($ingredient_fta_composition1);
-            $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_K_ETIQUETTE_FTA_COMPOSITION)->setFieldValue($k_etiquette);
-            $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_K_STYLE_PARAGRAPHE_INGREDIENT_FTA_COMPOSITION)->setFieldValue($k_style_paragraphe_ingredient_fta_composition);
+//            $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_DUREE_VIE_TECHNIQUE_FTA_COMPOSITION)->setFieldValue($duree_vie_technique_fta_composition);
+//            $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_ETIQUETTE)->setFieldValue($etiquette_fta_composition);
+//            $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_ETIQUETTE_DUREE_VIE_FTA_COMPOSITION)->setFieldValue($etiquette_duree_vie_fta_composition);
+//            $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_ETIQUETTE_ID_FTA_COMPOSITION)->setFieldValue($etiquette_id_fta_composition);
+//            $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_ETIQUETTE_LIBELLE_FTA_COMPOSITION)->setFieldValue($etiquette_libelle_fta_composition);
+//            $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_ETIQUETTE_POIDS_FTA_COMPOSITION)->setFieldValue($etiquette_poids_fta_composition);
+//            $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_ETIQUETTE_SUPPLEMENTAIRE_FTA_COMPOSIITON)->setFieldValue($etiquette_supplementaire_fta_composition);
+//            $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_ID_FTA_COMPOSTION)->setFieldValue($id_fta_composition);
+//            $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_ID_GEO)->setFieldValue($SiteDeProduction);
+//            $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_INGREDIENT_FTA_COMPOSITION)->setFieldValue($ingredient_fta_composition);
+//            $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_INGREDIENT_FTA_COMPOSITION1)->setFieldValue($ingredient_fta_composition1);
+//            $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_K_ETIQUETTE_FTA_COMPOSITION)->setFieldValue($k_etiquette);
+//            $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_K_STYLE_PARAGRAPHE_INGREDIENT_FTA_COMPOSITION)->setFieldValue($k_style_paragraphe_ingredient_fta_composition);
             $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_MODE_ETIQUETTE_FTA_COMPOSITION)->setFieldValue($mode_etiquette_fta_composition);
-            $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_NOM_FTA_COMPOSITION)->setFieldValue($nom_fta_composition);
-            $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_ORDRE_FTA_COMPOSITION)->setFieldValue($ordre_fta_composition);
-            $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_POIDS_FTA_COMPOSITION)->setFieldValue($poids_fta_composition);
-            $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_QUANTITE_FTA_COMPOSITION)->setFieldValue($quantite_fta_composition);
+//            $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_NOM_FTA_COMPOSITION)->setFieldValue($nom_fta_composition);
+//            $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_ORDRE_FTA_COMPOSITION)->setFieldValue($ordre_fta_composition);
+//            $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_POIDS_FTA_COMPOSITION)->setFieldValue($poids_fta_composition);
+//            $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_QUANTITE_FTA_COMPOSITION)->setFieldValue($quantite_fta_composition);
             $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_TAILLE_POLICE_INGREDIENT_FTA_COMPOSITION)->setFieldValue($taille_police_ingredient_fta_composition);
-            $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_VAL_SEL)->setFieldValue($val_nut_sel);
-            $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_VAL_PROTEINE)->setFieldValue($val_nut_proteine);
-            $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_VAL_SUCRE)->setFieldValue($val_nut_sucre);
-            $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_VAL_GLUCIDE)->setFieldValue($val_nut_glucide);
-            $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_VAL_ACIDE_GRAS)->setFieldValue($val_nut_acide_gras);
-            $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_VAL_MAT_GRASSE)->setFieldValue($val_nut_mat_grasse);
-            $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_VAL_NUT_KJ)->setFieldValue($val_nut_kj);
-            $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_VAL_NUT_KCAL)->setFieldValue($val_nut_kcal);
-            $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_ID_GEO)->setFieldValue($SiteDeProduction);
-            $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_K_ETIQUETTE_VERSO_FTA_COMPOSITION)->setFieldValue($k_etiquette_verso_fta_composition);
-            $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_K_CODESOFT_ETIQUETTE_LOGO)->setFieldValue($k_codesoft_etiquette_logo);
-            $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_ETIQUETTE_DECOMPOSITION_POIDS_FTA_COMPOSANT)->setFieldValue($etiquette_decomposition_poids_fta_composant);
-            $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_ETIQUETTE_INFORMATION_COMPLEMENTAIRE_RECTO_FTA_COMPOSANT)->setFieldValue($etiquette_information_complementaire_recto_fta_composant);
-            $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_ETIQUETTE_LIBELLE_LEGAL_FTA_COMPOSITION)->setFieldValue($etiquette_libelle_legal_fta_composition);
+//            $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_VAL_SEL)->setFieldValue($val_nut_sel);
+//            $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_VAL_PROTEINE)->setFieldValue($val_nut_proteine);
+//            $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_VAL_SUCRE)->setFieldValue($val_nut_sucre);
+//            $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_VAL_GLUCIDE)->setFieldValue($val_nut_glucide);
+//            $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_VAL_ACIDE_GRAS)->setFieldValue($val_nut_acide_gras);
+//            $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_VAL_MAT_GRASSE)->setFieldValue($val_nut_mat_grasse);
+//            $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_VAL_NUT_KJ)->setFieldValue($val_nut_kj);
+//            $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_VAL_NUT_KCAL)->setFieldValue($val_nut_kcal);
+//            $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_ID_GEO)->setFieldValue($SiteDeProduction);
+//            $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_K_ETIQUETTE_VERSO_FTA_COMPOSITION)->setFieldValue($k_etiquette_verso_fta_composition);
+//            $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_K_CODESOFT_ETIQUETTE_LOGO)->setFieldValue($k_codesoft_etiquette_logo);
+//            $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_ETIQUETTE_DECOMPOSITION_POIDS_FTA_COMPOSANT)->setFieldValue($etiquette_decomposition_poids_fta_composant);
+//            $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_ETIQUETTE_INFORMATION_COMPLEMENTAIRE_RECTO_FTA_COMPOSANT)->setFieldValue($etiquette_information_complementaire_recto_fta_composant);
+//            $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_ETIQUETTE_LIBELLE_LEGAL_FTA_COMPOSITION)->setFieldValue($etiquette_libelle_legal_fta_composition);
             $ftaComposantModel->saveToDatabase();
         }
         if ($valider_saisie) {

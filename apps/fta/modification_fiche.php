@@ -129,7 +129,7 @@ if ($idFta) {
 <SCRIPT LANGUAGE=JavaScript>
         function confirmation_correction_fta()
         {
-        i = document.form_action.correction_fta_suivi_projet.value
+        i = document.form_action.correction_fta_suivi_projet.value.replace(/\n/g, \'<br/>\');
         if(confirm(\'Etes vous certain de vouloir corriger ce chapitre ?\'))
         {
             location.href = \'modification_fiche_post.php?id_fta=' . $idFta . '&id_fta_chapitre_encours=' . $id_fta_chapitre_encours . '&synthese_action=' . $synthese_action . '&action=correction&new_correction_fta_suivi_projet=\' + i

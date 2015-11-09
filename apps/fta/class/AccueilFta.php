@@ -650,7 +650,7 @@ class AccueilFta {
                 . 'Dossier FTA'
                 . '</th><th>'
                 . '<a href=' . $URL . '&order_common=code_article_ldc&numeroPage=' . self::$numeroDePageCourante . ' ><img src=../lib/images/order-AZ.png title=\'Ordonné par code arcadia\'  border=\'0\' /></a>'
-                . 'Code Arcadia'
+                . 'Code Article Arcadia'
                 . '</th><th>'
                 . '<a href=' . $URL . '&order_common=date_echeance_fta&numeroPage=' . self::$numeroDePageCourante . ' ><img src=../lib/images/order-AZ.png title=\'Ordonné par Date\'  border=\'0\' /></a>'
                 . 'Echéance de validation'
@@ -661,7 +661,7 @@ class AccueilFta {
                 . '</th><th>'
                 . 'Actions'
                 . '</th><th>'
-                . 'Commentaires'
+                . 'Commentaires sur la Fta'
                 . '</th>';
         /**
          * Version avec le module rewrite

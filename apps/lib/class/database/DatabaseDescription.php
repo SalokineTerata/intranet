@@ -148,6 +148,11 @@ class DatabaseDescription {
     const ARRAY_NAME_DOC_RIGHT_TO_ADD = "RightsToAdd";
 
     /**
+     * Dans le cas d'une liste, droit d'ajouter une nouvelle ligne
+     */
+    const ARRAY_NAME_DOC_CONDITION_SQL = "ConditionSQL";
+
+    /**
      * Nom de la variable contenant le nom du champ (défini par MySQL)
      */
     const ARRAY_NAME_SQL_FIELDNAME = "Field";
@@ -260,7 +265,7 @@ class DatabaseDescription {
         /**
          * Récupération des caractéristiques SQL de chaque champs de chaque table
          */
-        ini_set('memory_limit','-1');
+        ini_set('memory_limit', '-1');
         $array = DatabaseOperation::convertSqlStatementKeyAndOneFieldToArray('SHOW TABLES');
         foreach ($array as $rowsTables) {
             $tableName = $rowsTables[0];
@@ -314,6 +319,7 @@ class DatabaseDescription {
                         . ',fields_to_lock'
                         . ',fields_to_order'
                         . ',right_to_add'
+                        . ',condition_sql'
                         . ' FROM `intranet_column_info` ');
         /**
          * Parcours du résultat de la recherche
@@ -340,6 +346,7 @@ class DatabaseDescription {
             $fieldsToLock = $rowsDoc['fields_to_lock'];
             $fieldsToOrder = $rowsDoc['fields_to_order'];
             $rightToAdd = $rowsDoc['right_to_add'];
+            $conditionSql = $rowsDoc['condition_sql'];
 
 
             /**
@@ -359,7 +366,8 @@ class DatabaseDescription {
                 self::ARRAY_NAME_DOC_FIELDS_TO_DISPLAY => $fieldsToDisplay,
                 self::ARRAY_NAME_DOC_FIELDS_TO_LOCK => $fieldsToLock,
                 self::ARRAY_NAME_DOC_FIELDS_TO_ORDER => $fieldsToOrder,
-                self::ARRAY_NAME_DOC_RIGHT_TO_ADD => $rightToAdd
+                self::ARRAY_NAME_DOC_RIGHT_TO_ADD => $rightToAdd,
+                self::ARRAY_NAME_DOC_CONDITION_SQL => $conditionSql
             );
         }
     }
@@ -574,6 +582,17 @@ class DatabaseDescription {
     public static function getRightToAdd($paramTableName, $paramFieldName) {
         return $_SESSION[get_class()][$paramTableName][self::ARRAY_NAME_FIELDS]
                 [$paramFieldName][self::ARRAY_NAME_DOC][self::ARRAY_NAME_DOC_RIGHT_TO_ADD];
+    }
+
+    /**
+     * Retourne une condition d'une reqête sql  pour son éxécution
+     * @param string $paramTableName Nom de la table
+     * @param string $paramFieldName Nom du champs
+     * @return string Retourne une condition d'une reqête sql  pour son éxécution
+     */
+    public static function getConditionSql($paramTableName, $paramFieldName) {
+        return $_SESSION[get_class()][$paramTableName][self::ARRAY_NAME_FIELDS]
+                [$paramFieldName][self::ARRAY_NAME_DOC][self::ARRAY_NAME_DOC_CONDITION_SQL];
     }
 
     /**

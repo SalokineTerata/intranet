@@ -310,32 +310,33 @@ class FtaConditionnementModel extends AbstractModel {
 
     public static function getTableConditionnementLabel($paramIdFtaConditionnment) {
         $ftaCondtionnementModel = new FtaConditionnementModel($paramIdFtaConditionnment);
-
+        $border = "style=\"border:1px solid #000;\"";
         return '<tr class=titre_tableau  align=center >' .
-                '<td>' . $ftaCondtionnementModel->getDataField(FtaConditionnementModel::FIELDNAME_ID_ANNEXE_EMBALLAGE_GROUPE)->getFieldLabel() . '</td>'
-                . '<td>' . $ftaCondtionnementModel->getDataField(FtaConditionnementModel::FIELDNAME_ID_ANNEXE_EMBALLAGE)->getFieldLabel() . '</td>'
-                . '<td>' . $ftaCondtionnementModel->getDataField(FtaConditionnementModel::FIELDNAME_HAUTEUR_FTA_CONDITIONNEMENT)->getFieldLabel() . '</td>'
-                . '<td>' . $ftaCondtionnementModel->getDataField(FtaConditionnementModel::FIELDNAME_LONGUEUR_FTA_CONDITIONNEMENT)->getFieldLabel() . '</td>'
-                . '<td>' . $ftaCondtionnementModel->getDataField(FtaConditionnementModel::FIELDNAME_LARGEUR_FTA_CONDITIONNEMENT)->getFieldLabel() . '</td>'
-                . '<td>' . $ftaCondtionnementModel->getDataField(FtaConditionnementModel::FIELDNAME_POIDS_FTA_CONDITIONNEMENT)->getFieldLabel() . '</td>'
-                . '<td>' . $ftaCondtionnementModel->getDataField(FtaConditionnementModel::FIELDNAME_QUANTITE_PAR_COUCHE_FTA_CONDITIONNEMENT)->getFieldLabel() . '</td>'
-                . '<td>Actions</td>'
+                '<td ' . $border . '>' . $ftaCondtionnementModel->getDataField(FtaConditionnementModel::FIELDNAME_ID_ANNEXE_EMBALLAGE_GROUPE)->getFieldLabel() . '</td>'
+                . '<td ' . $border . '>' . $ftaCondtionnementModel->getDataField(FtaConditionnementModel::FIELDNAME_ID_ANNEXE_EMBALLAGE)->getFieldLabel() . '</td>'
+                . '<td ' . $border . '>' . $ftaCondtionnementModel->getDataField(FtaConditionnementModel::FIELDNAME_HAUTEUR_FTA_CONDITIONNEMENT)->getFieldLabel() . '</td>'
+                . '<td ' . $border . '>' . $ftaCondtionnementModel->getDataField(FtaConditionnementModel::FIELDNAME_LONGUEUR_FTA_CONDITIONNEMENT)->getFieldLabel() . '</td>'
+                . '<td ' . $border . '>' . $ftaCondtionnementModel->getDataField(FtaConditionnementModel::FIELDNAME_LARGEUR_FTA_CONDITIONNEMENT)->getFieldLabel() . '</td>'
+                . '<td ' . $border . '>' . $ftaCondtionnementModel->getDataField(FtaConditionnementModel::FIELDNAME_POIDS_FTA_CONDITIONNEMENT)->getFieldLabel() . '</td>'
+                . '<td ' . $border . '>' . $ftaCondtionnementModel->getDataField(FtaConditionnementModel::FIELDNAME_QUANTITE_PAR_COUCHE_FTA_CONDITIONNEMENT)->getFieldLabel() . '</td>'
+                . '<td ' . $border . '>Actions</td>'
                 . '</tr>';
     }
 
     public static function getTableConditionnementLabelDuColis($paramIdFtaConditionnment) {
         $ftaCondtionnementModel = new FtaConditionnementModel($paramIdFtaConditionnment);
+        $border = "style=\"border:1px solid #000;\"";
 
         return '<tr class=titre_tableau >' .
-                '<td>' . $ftaCondtionnementModel->getDataField(FtaConditionnementModel::FIELDNAME_ID_ANNEXE_EMBALLAGE_GROUPE)->getFieldLabel() . '</td>'
-                . '<td>' . $ftaCondtionnementModel->getDataField(FtaConditionnementModel::FIELDNAME_ID_ANNEXE_EMBALLAGE)->getFieldLabel() . '</td>'
-                . '<td>' . $ftaCondtionnementModel->getDataField(FtaConditionnementModel::FIELDNAME_HAUTEUR_FTA_CONDITIONNEMENT)->getFieldLabel() . '</td>'
-                . '<td>' . $ftaCondtionnementModel->getDataField(FtaConditionnementModel::FIELDNAME_LONGUEUR_FTA_CONDITIONNEMENT)->getFieldLabel() . '</td>'
-                . '<td>' . $ftaCondtionnementModel->getDataField(FtaConditionnementModel::FIELDNAME_LARGEUR_FTA_CONDITIONNEMENT)->getFieldLabel() . '</td>'
-                . '<td>' . $ftaCondtionnementModel->getDataField(FtaConditionnementModel::FIELDNAME_POIDS_FTA_CONDITIONNEMENT)->getFieldLabel() . '</td>'
-                . '<td>' . $ftaCondtionnementModel->getDataField(FtaConditionnementModel::FIELDNAME_QUANTITE_PAR_COUCHE_FTA_CONDITIONNEMENT)->getFieldLabel() . '</td>'
-                . '<td>' . $ftaCondtionnementModel->getDataField(FtaConditionnementModel::FIELDNAME_NOMBRE_COUCHE_FTA_CONDITIONNEMENT)->getFieldLabel() . '</td>'
-                . '<td>Actions</td>'
+                '<td ' . $border . '>' . $ftaCondtionnementModel->getDataField(FtaConditionnementModel::FIELDNAME_ID_ANNEXE_EMBALLAGE_GROUPE)->getFieldLabel() . '</td>'
+                . '<td ' . $border . '>' . $ftaCondtionnementModel->getDataField(FtaConditionnementModel::FIELDNAME_ID_ANNEXE_EMBALLAGE)->getFieldLabel() . '</td>'
+                . '<td ' . $border . '>' . $ftaCondtionnementModel->getDataField(FtaConditionnementModel::FIELDNAME_HAUTEUR_FTA_CONDITIONNEMENT)->getFieldLabel() . '</td>'
+                . '<td ' . $border . '>' . $ftaCondtionnementModel->getDataField(FtaConditionnementModel::FIELDNAME_LONGUEUR_FTA_CONDITIONNEMENT)->getFieldLabel() . '</td>'
+                . '<td ' . $border . '>' . $ftaCondtionnementModel->getDataField(FtaConditionnementModel::FIELDNAME_LARGEUR_FTA_CONDITIONNEMENT)->getFieldLabel() . '</td>'
+                . '<td ' . $border . '>' . $ftaCondtionnementModel->getDataField(FtaConditionnementModel::FIELDNAME_POIDS_FTA_CONDITIONNEMENT)->getFieldLabel() . '</td>'
+                . '<td ' . $border . '>' . $ftaCondtionnementModel->getDataField(FtaConditionnementModel::FIELDNAME_QUANTITE_PAR_COUCHE_FTA_CONDITIONNEMENT)->getFieldLabel() . '</td>'
+                . '<td ' . $border . '>' . $ftaCondtionnementModel->getDataField(FtaConditionnementModel::FIELDNAME_NOMBRE_COUCHE_FTA_CONDITIONNEMENT)->getFieldLabel() . '</td>'
+                . '<td ' . $border . '>Actions</td>'
                 . '</tr>';
     }
 

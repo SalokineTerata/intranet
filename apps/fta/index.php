@@ -28,6 +28,7 @@ flush();
  * Initilisation
  */
 $globalConfig = new GlobalConfig();
+
 if ($globalConfig->getAuthenticatedUser()) {
     $id_user = $globalConfig->getAuthenticatedUser()->getKeyValue();
 //    $lieuGeo = $globalConfig->getAuthenticatedUser()->getLieuGeo();

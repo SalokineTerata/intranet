@@ -68,6 +68,8 @@ $syntheseAction = Lib::getParameterFromRequest('synthese_action');
  */
 $ftaModel = new FtaModel($idFta);
 $globalConfig = new GlobalConfig();
+      UserModel::ConnexionFalse($globalConfig);
+
 $idUser = $globalConfig->getAuthenticatedUser()->getKeyValue();
 $ftaView = new FtaView($ftaModel);
 $dataFieldCommentaire = $ftaModel->getDataField(FtaModel::FIELDNAME_COMMENTAIRE_MAJ_FTA);
@@ -126,6 +128,10 @@ $tableau_transition = '<select name=action onChange=lien_selection_chapitre()>';
 $req = 'SELECT ' . FtaTransitionModel::FIELDNAME_NOM_USUEL_FTA_TRANSITION . ', ' . FtaTransitionModel::FIELDNAME_ABREVIATION_FTA_TRANSITION
         . ' FROM ' . FtaTransitionModel::TABLENAME
         . ' WHERE ' . FtaTransitionModel::FIELDNAME_ABREVIATION_FTA_ETAT . '=\'' . $abreviationFtaEtat . '\' '
+        /**
+         * Désactivation du changement d'eapace de travail au meme moment que le changement d'état
+         */
+       . ' AND ' . FtaTransitionModel::FIELDNAME_ABREVIATION_FTA_TRANSITION . '<>\'' . FtaEtatModel::ETAT_ABREVIATION_VALUE_WORKFLOW . '\'' 
 ;
 if ($demande_abreviation_fta_transition) {
     $req.= ' AND ' . FtaTransitionModel::FIELDNAME_ABREVIATION_FTA_TRANSITION . '=\'' . $demande_abreviation_fta_transition . '\' ';
@@ -192,18 +198,18 @@ if ($action == 'I' or $action == 'W') {
             . '</table>'
     ;
 }
-//Tableau des chapitres
-if ($action == 'W') {
-    $listeDesWorkflow = '<' . $html_table . '>'
-            . '<tr class=titre><td>Liste des espaces de travail pouvant être mis à jour</td></tr>'
-            . '<tr><td><' . $html_table . '>'
-    ;
-
-    /*
-     * Worflow de FTA
-     */
-    $listeDesWorkflow.=$ftaView->ListeWorkflowByAcces($idUser, TRUE, $idFta, $idFtaRole);
-}
+//Tableau des chapitres espace de travail
+//if ($action == 'W') {
+//    $listeDesWorkflow = '<' . $html_table . '>'
+//            . '<tr class=titre><td>Liste des espaces de travail pouvant être mis à jour</td></tr>'
+//            . '<tr><td><' . $html_table . '>'
+//    ;
+//
+//    /*
+//     * Worflow de FTA
+//     */
+//    $listeDesWorkflow.=$ftaView->ListeWorkflowByAcces($idUser, TRUE, $idFta, $idFtaRole);
+//}
 
 
 //Validation_matiere_premiere

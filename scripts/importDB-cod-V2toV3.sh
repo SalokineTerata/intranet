@@ -7,5 +7,6 @@
 #
 
 echo "* Importation dans l'environnement COD"
+cd /u1/DATA01/webldc/cod-intranet/v3/
 ./scripts/importDB-V2toV3.sh cod
 

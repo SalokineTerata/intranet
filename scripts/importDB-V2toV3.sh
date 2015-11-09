@@ -23,7 +23,7 @@ SRV_PRODV2="intranet.agis.fr"
 SRV_ARCH="admin.agis.fr"
 
 SRV_DEV="dev-intranet.agis.fr"
-DB_NAME_MODEL_DEV="intranet_v3_0_dev_model"
+DB_NAME_MODEL_DEV="intranet_v3_0_model"
 
 ARCH_DIR="/u1/DATA01/archives/SAVE"
 CHARSET_ORIG="WINDOWS-1252"

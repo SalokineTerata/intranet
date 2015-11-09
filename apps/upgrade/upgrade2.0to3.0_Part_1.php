@@ -14,10 +14,13 @@
  $nameOfBDDOrigin = $argv[2];
  $nameOfBDDStructure = $argv[3];
 
-$hostname_connect = "dev-intranet.agis.fr"; //nom du serveur MySQL de connection � la base de donn�e
+//$hostname_connect = "dev-intranet.agis.fr"; //nom du serveur MySQL de connection � la base de donn�e
+$hostname_connect = $argv[4]; //nom du serveur MySQL de connection � la base de donn�e
 $database_connect = $nameOfBDDTarget; //nom de la base de donn�e sur votre serveur MySQL
-$username_connect = "root"; //login de la base MySQL
-$password_connect = "8ale!ne"; //mot de passe de la base MySQL
+//$username_connect = "root"; //login de la base MySQL
+$username_connect = $argv[5]; //login de la base MySQL
+//$password_connect = "8ale!ne"; //mot de passe de la base MySQL
+$password_connect = $argv[6];; //mot de passe de la base MySQL
 
 $donnee = mysql_pconnect($hostname_connect, $username_connect, $password_connect);
 mysql_select_db($database_connect);

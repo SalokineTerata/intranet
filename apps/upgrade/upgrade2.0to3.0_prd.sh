@@ -20,5 +20,3 @@ URL_SERVER_NAME="10.12.3.131"
 echo "* Migration vers l'environnement PRD"
 ./apps/upgrade/upgrade2.0to3.0.sh $DB_NAME_TO_CREATE $DB_NAME_V2_PRD $DB_NAME_MODEL $ENV_DEST $MYSQL_SERVER_NAME_DEST $URL_SERVER_NAME
 
-
-

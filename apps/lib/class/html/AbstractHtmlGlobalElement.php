@@ -349,7 +349,7 @@ abstract class AbstractHtmlGlobalElement {
         switch ($this->getHtmlRender()) {
             case self::HTML_RENDER_TO_FORM:
                 $html_result .= '<tr ' . $idRow . ' ' . $style . 'class=contenu>';
-                $html_result .= '<td style=\'' . $color_modif . '\'>' . $label . '</td>';
+                $html_result .= '<td align=left style=\'' . $color_modif . '\'>' . $label . '</td>';
                 break;
 
             case self::HTML_RENDER_TO_TABLE:

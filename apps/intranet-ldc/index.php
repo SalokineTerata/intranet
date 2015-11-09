@@ -59,7 +59,7 @@ décommentez la ligne suivante
  //       include ("./$menu");
 //}//Fin de la sélection du mode d'affichage de la page
 
-header ("Location: http://131.1.7.1/applications.html");
+header ("Location: http://www.grpldc.com/");
 
 require_once '../inc/main.php';
 print_page_begin($disable_full_page, $menu_file);

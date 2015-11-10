@@ -4489,7 +4489,9 @@ while ($value=mysql_fetch_array($resultFta)) {
         $pourcentageAvancement = '100%'; 
         $idFtaEtat = $idFtaEtatTMP;
          break;
-    default :
+  case  '1':
+  case  '5':
+  case  '6':
         $idFtaEtat = $idFtaEtatTMP;
         break;
     }

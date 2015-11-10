@@ -76,23 +76,23 @@ class FtaTransitionModel {
                 $nouveau_maj_fta = "";
 
                 break;
-            case $paramAbreviationFtaTransition == FtaEtatModel::ETAT_ABREVIATION_VALUE_WORKFLOW:
-                //Dans le cas d'une mise à jour, récupération des Chapitres à corriger.
-
-                $liste_chapitre_maj_fta = ";";
-                //Mise à  jour de la table Fta_suivie_projet
-                FtaSuiviProjetModel::initFtaSuiviProjet($paramIdFta);
-                foreach ($paramListeChapitres as $rowsChapitre) {
-                    //Parcours des chapitres
-                    //Si le chapitre a été sélectionné, on l'enregistre dans le tableau de résultat
-                    $liste_chapitre_maj_fta.=$rowsChapitre . ";";
-                    //Correction des chapitres
-                    $paramOption["no_message_ecran"] = "1";
-                    $paramOption["correction_fta_suivi_projet"] = $nouveau_maj_fta;
-                    FtaChapitreModel::BuildCorrectionChapitre($paramIdFta, $rowsChapitre, $paramOption);
-                }
-                $paramAbreviationFtaTransition = FtaEtatModel::ETAT_ABREVIATION_VALUE_MODIFICATION;
-                break;
+//            case $paramAbreviationFtaTransition == FtaEtatModel::ETAT_ABREVIATION_VALUE_WORKFLOW:
+//                //Dans le cas d'une mise à jour, récupération des Chapitres à corriger.
+//
+//                $liste_chapitre_maj_fta = ";";
+//                //Mise à  jour de la table Fta_suivie_projet
+//                FtaSuiviProjetModel::initFtaSuiviProjet($paramIdFta);
+//                foreach ($paramListeChapitres as $rowsChapitre) {
+//                    //Parcours des chapitres
+//                    //Si le chapitre a été sélectionné, on l'enregistre dans le tableau de résultat
+//                    $liste_chapitre_maj_fta.=$rowsChapitre . ";";
+//                    //Correction des chapitres
+//                    $paramOption["no_message_ecran"] = "1";
+//                    $paramOption["correction_fta_suivi_projet"] = $nouveau_maj_fta;
+//                    FtaChapitreModel::BuildCorrectionChapitre($paramIdFta, $rowsChapitre, $paramOption);
+//                }
+//                $paramAbreviationFtaTransition = FtaEtatModel::ETAT_ABREVIATION_VALUE_MODIFICATION;
+//                break;
 
             case $paramAbreviationFtaTransition == FtaEtatModel::ETAT_ABREVIATION_VALUE_MODIFICATION: //Passer en Initialisation
                 //Vérification que le dossier n'a pas une fiche déjà en Mise à jour

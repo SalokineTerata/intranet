@@ -633,6 +633,18 @@ class FtaView {
         return $return;
     }
 
+    /**
+     * Tableau d'étiquette composition
+     * @param type $paramIdFta
+     * @param type $paramChapitre
+     * @param type $paramSyntheseAction
+     * @param type $paramComeback
+     * @param type $paramIdFtaEtat
+     * @param type $paramAbreviationEtat
+     * @param type $paramIdFtaRole
+     * @param type $paramEditable
+     * @return type
+     */
     public function getHtmlEtiquetteComposant($paramIdFta, $paramChapitre, $paramSyntheseAction, $paramComeback, $paramIdFtaEtat, $paramAbreviationEtat, $paramIdFtaRole, $paramEditable) {
 
         /*
@@ -659,6 +671,52 @@ class FtaView {
             $return .= $htmlEtiquetteComposant->getHtmlResult();
         } else {
             $htmlEtiquetteComposant = Html::getHtmlObjectFromDataField($this->getModel()->getDataField(FtaModel::FIELDNAME_VIRTUAL_FTA_COMPOSANT));
+            $htmlEtiquetteComposant->setIsEditable($this->getIsEditable());
+            $htmlEtiquetteComposant->setRightToAdd(TRUE);
+            $htmlEtiquetteComposant->getAttributesGlobal()->setHrefAjoutValue(FtaComposantModel::getAddLinkComposant($paramIdFta, $paramChapitre, $paramSyntheseAction, $paramComeback, $paramIdFtaEtat, $paramAbreviationEtat, $paramIdFtaRole, $proprietaire));
+            $htmlEtiquetteComposant->setLien(FtaComposantModel::getAddLinkComposant($paramIdFta, $paramChapitre, $paramSyntheseAction, $paramComeback, $paramIdFtaEtat, $paramAbreviationEtat, $paramIdFtaRole, $proprietaire));
+            $return .= $htmlEtiquetteComposant->getHtmlResult();
+        }
+        return $return;
+    }
+    /**
+     * Tableau d'étiquette composant
+     * @param type $paramIdFta
+     * @param type $paramChapitre
+     * @param type $paramSyntheseAction
+     * @param type $paramComeback
+     * @param type $paramIdFtaEtat
+     * @param type $paramAbreviationEtat
+     * @param type $paramIdFtaRole
+     * @param type $paramEditable
+     * @return type
+     */
+    public function getHtmlEtiquetteRD($paramIdFta, $paramChapitre, $paramSyntheseAction, $paramComeback, $paramIdFtaEtat, $paramAbreviationEtat, $paramIdFtaRole, $paramEditable) {
+
+        /*
+         * Récuperation des élements clé de la table fta_composant
+         */
+        if ($paramEditable) {
+            $proprietaire = '1';
+        } else {
+            $proprietaire = '0';
+        }
+        $FtaComposant = FtaComposantModel::getIdFtaComposant($paramIdFta);
+        if ($FtaComposant) {
+            foreach ($FtaComposant as $rowsFtaComposant) {
+                $idFtaComposant = $rowsFtaComposant[FtaComposantModel::KEYNAME];
+                $arrayIdFtaComposant[] = $idFtaComposant;
+            }
+
+            $htmlEtiquetteComposant = Html::getHtmlObjectFromDataField($this->getModel()->getDataField(FtaModel::FIELDNAME_VIRTUAL_FTA_COMPOSANT_RD));
+            $htmlEtiquetteComposant->setIsEditable($this->getIsEditable());
+            $htmlEtiquetteComposant->setLienAjouter(FtaComposantModel::getAddAfterLinkComposant($paramIdFta, $paramChapitre, $paramSyntheseAction, $paramComeback, $paramIdFtaEtat, $paramAbreviationEtat, $paramIdFtaRole, $proprietaire));
+            $htmlEtiquetteComposant->setLienDetail(FtaComposantModel::getDetailLinkComposant($paramIdFta, $paramChapitre, $arrayIdFtaComposant, $paramSyntheseAction, $paramComeback, $paramIdFtaEtat, $paramAbreviationEtat, $paramIdFtaRole, $proprietaire));
+            $htmlEtiquetteComposant->setLienSuppression(FtaComposantModel::getDeleteLinkComposant($paramIdFta, $paramChapitre, $arrayIdFtaComposant, $paramSyntheseAction, $paramComeback, $paramIdFtaEtat, $paramAbreviationEtat, $paramIdFtaRole));
+            $htmlEtiquetteComposant->setTableLabel(FtaComposantModel::getTableComposantLabel($idFtaComposant));
+            $return .= $htmlEtiquetteComposant->getHtmlResult();
+        } else {
+            $htmlEtiquetteComposant = Html::getHtmlObjectFromDataField($this->getModel()->getDataField(FtaModel::FIELDNAME_VIRTUAL_FTA_COMPOSANT_RD));
             $htmlEtiquetteComposant->setIsEditable($this->getIsEditable());
             $htmlEtiquetteComposant->setRightToAdd(TRUE);
             $htmlEtiquetteComposant->getAttributesGlobal()->setHrefAjoutValue(FtaComposantModel::getAddLinkComposant($paramIdFta, $paramChapitre, $paramSyntheseAction, $paramComeback, $paramIdFtaEtat, $paramAbreviationEtat, $paramIdFtaRole, $proprietaire));

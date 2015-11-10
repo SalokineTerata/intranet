@@ -4481,19 +4481,10 @@ while ($value=mysql_fetch_array($resultFta)) {
     $idDossierFta = $value["id_dossier_fta"];
     $idVersionDossierFta = $value["id_version_dossier_fta"];
     $idFtaEtatTMP = $value["id_fta_etat"];
-    switch ($idFtaEtatTMP) {
-    case  '8':
+    if ($idFtaEtatTMP == '8') {
         $idFtaEtat = '1';
-        break;
-    case  '3':
-        $pourcentageAvancement = '100%'; 
+    } else {
         $idFtaEtat = $idFtaEtatTMP;
-         break;
-  case  '1':
-  case  '5':
-  case  '6':
-        $idFtaEtat = $idFtaEtatTMP;
-        break;
     }
     $cretateurFta = $value["createur_fta"];
     if ($cretateurFta == '0') {
@@ -4831,7 +4822,20 @@ if ($resultChangeIdUse) {
       
     }
 } 
-
+//   switch ($idFtaEtatTMP) {
+//    case  '8':
+//        $idFtaEtat = '1';
+//        break;
+//    case  '3':
+//        $pourcentageAvancement = '100%'; 
+//        $idFtaEtat = $idFtaEtatTMP;
+//         break;
+//  case  '1':
+//  case  '5':
+//  case  '6':
+//        $idFtaEtat = $idFtaEtatTMP;
+//        break;
+//    }
 /**
  * Extraction Fta suivi de projet
  */

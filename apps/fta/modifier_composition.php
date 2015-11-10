@@ -135,6 +135,7 @@ if ($id_fta_composant) {
     $ftaComposantModel = new FtaComposantModel($id_fta_composant);
     $ftaComposantView = new FtaComposantView($ftaComposantModel);
     $ftaComposantView->setIsEditable($editable);
+    $ftaComposantView2 = new FtaComposantView($ftaComposantModel);
     $nom_fta_composition = $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_NOM_FTA_COMPOSITION)->getFieldValue();
     $ingredient_fta_composition = $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_INGREDIENT_FTA_COMPOSITION)->getFieldValue();
     $ingredient_fta_composition1 = $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_INGREDIENT_FTA_COMPOSITION1)->getFieldValue();
@@ -185,43 +186,40 @@ $ftaModel = new FtaModel($id_fta);
 $bloc = ""; //Bloc de saisie
 //Désignation
 //$bloc .= "<tr><td>" . DatabaseDescription::getFieldDocLabel(FtaComposantModel::TABLENAME, FtaComposantModel::FIELDNAME_NOM_FTA_COMPOSITION) . "</td><td>";
-
 //if ($proprietaire) {
 //    $bloc .= "<input type=text name=" . FtaComposantModel::FIELDNAME_NOM_FTA_COMPOSITION . " value='" . $nom_fta_composition . "' size=50/>";
 //} else {
-    $bloc .=    $ftaComposantView->getHtmlDataField(FtaComposantModel::FIELDNAME_NOM_FTA_COMPOSITION);
+$bloc .= $ftaComposantView->getHtmlDataField(FtaComposantModel::FIELDNAME_NOM_FTA_COMPOSITION);
 
 //}
 //$bloc.="</td></tr>";
-
 //Code Produit Agrologic
 $bloc .= "<tr><td>" . DatabaseDescription::getFieldDocLabel(FtaComposantModel::TABLENAME, FtaComposantModel::FIELDNAME_CODE_PRODUIT_AGROLOGIC_FTA_NOMENCLATURE) . "</td><td>";
 
-//$bloc .=$code_produit_agrologic_fta_nomenclature;
-$bloc .=$ftaComposantView->getHtmlDataField(FtaComposantModel::FIELDNAME_CODE_PRODUIT_AGROLOGIC_FTA_NOMENCLATURE);;
+$bloc .=$code_produit_agrologic_fta_nomenclature;
 
 $bloc.="</td></tr>";
 
 
 //Liste des ingrédients
-$bloc .= "<tr><td>" . DatabaseDescription::getFieldDocLabel(FtaComposantModel::TABLENAME, FtaComposantModel::FIELDNAME_INGREDIENT_FTA_COMPOSITION) . "</td><td>";
-
-if ($proprietaire) {
-    $bloc .= "<textarea name=" . FtaComposantModel::FIELDNAME_INGREDIENT_FTA_COMPOSITION . " rows=15 cols=75>" . $ingredient_fta_composition . "</textarea>";
-} else {
-    $bloc .=$ingredient_fta_composition;
-}
-$bloc.="</td></tr>";
-
+//$bloc .= "<tr><td>" . DatabaseDescription::getFieldDocLabel(FtaComposantModel::TABLENAME, FtaComposantModel::FIELDNAME_INGREDIENT_FTA_COMPOSITION) . "</td><td>";
+//if ($proprietaire) {
+//    $bloc .= "<textarea name=" . FtaComposantModel::FIELDNAME_INGREDIENT_FTA_COMPOSITION . " rows=15 cols=75>" . $ingredient_fta_composition . "</textarea>";
+//} else {
+//    $bloc .=$ingredient_fta_composition;
+$bloc .=$ftaComposantView->getHtmlDataField(FtaComposantModel::FIELDNAME_INGREDIENT_FTA_COMPOSITION);
+//}
+//$bloc.="</td></tr>";
 //Liste des ingrédients (extension supplémentaire)
+//$bloc .= "<tr><td>" . DatabaseDescription::getFieldDocLabel(FtaComposantModel::TABLENAME, FtaComposantModel::FIELDNAME_INGREDIENT_FTA_COMPOSITION1) . "</td><td>";
+//
+//if ($proprietaire) {
+//    $bloc .= "<textarea name=" . FtaComposantModel::FIELDNAME_INGREDIENT_FTA_COMPOSITION1 . " rows=15 cols=75>" . $ingredient_fta_composition1 . "</textarea>";
+//} else {
+//    $bloc .=$ingredient_fta_composition1;
+$bloc .=$ftaComposantView->getHtmlDataField(FtaComposantModel::FIELDNAME_INGREDIENT_FTA_COMPOSITION1);
 
-$bloc .= "<tr><td>" . DatabaseDescription::getFieldDocLabel(FtaComposantModel::TABLENAME, FtaComposantModel::FIELDNAME_INGREDIENT_FTA_COMPOSITION1) . "</td><td>";
-
-if ($proprietaire) {
-    $bloc .= "<textarea name=" . FtaComposantModel::FIELDNAME_INGREDIENT_FTA_COMPOSITION1 . " rows=15 cols=75>" . $ingredient_fta_composition1 . "</textarea>";
-} else {
-    $bloc .=$ingredient_fta_composition1;
-}
+//}
 $bloc.="</td></tr>";
 
 //Site de Fabrication
@@ -235,47 +233,50 @@ if ($proprietaire) {
 } else {
     $bloc .= "<tr><td>" . DatabaseDescription::getFieldDocLabel(GeoModel::TABLENAME, GeoModel::FIELDNAME_GEO) . "</td><td>" . $SiteDeProduction;
 }
-$bloc.="</td></tr>";
+//$bloc.="</td></tr>";
 //echo $id_fta."<br>";
 //Durée de Vie
-$bloc .= "<tr><td>" . DatabaseDescription::getFieldDocLabel(FtaComposantModel::TABLENAME, FtaComposantModel::FIELDNAME_DUREE_VIE_TECHNIQUE_FTA_COMPOSITION) . "</td><td>";
+//$bloc .= "<tr><td>" . DatabaseDescription::getFieldDocLabel(FtaComposantModel::TABLENAME, FtaComposantModel::FIELDNAME_DUREE_VIE_TECHNIQUE_FTA_COMPOSITION) . "</td><td>";
+//if ($proprietaire) {
+//    $bloc .= "<input type=text name=" . FtaComposantModel::FIELDNAME_DUREE_VIE_TECHNIQUE_FTA_COMPOSITION . " value='" . $duree_vie_technique_fta_composition . "' size=50/>";
+//} else {
+//    $bloc .=$duree_vie_technique_fta_composition;
+$bloc .=$ftaComposantView->getHtmlDataField(FtaComposantModel::FIELDNAME_DUREE_VIE_TECHNIQUE_FTA_COMPOSITION);
 
-if ($proprietaire) {
-    $bloc .= "<input type=text name=" . FtaComposantModel::FIELDNAME_DUREE_VIE_TECHNIQUE_FTA_COMPOSITION . " value='" . $duree_vie_technique_fta_composition . "' size=50/>";
-} else {
-    $bloc .=$duree_vie_technique_fta_composition;
-}
-$bloc.="</td></tr>";
-
+//}
+//$bloc.="</td></tr>";
 //Poids
-$bloc .= "<tr><td>" . DatabaseDescription::getFieldDocLabel(FtaComposantModel::TABLENAME, FtaComposantModel::FIELDNAME_POIDS_FTA_COMPOSITION) . "</td><td>";
+//$bloc .= "<tr><td>" . DatabaseDescription::getFieldDocLabel(FtaComposantModel::TABLENAME, FtaComposantModel::FIELDNAME_POIDS_FTA_COMPOSITION) . "</td><td>";
+//
+//if ($proprietaire) {
+//    $bloc .= "<input type=text name=" . FtaComposantModel::FIELDNAME_POIDS_FTA_COMPOSITION . " value='" . $poids_fta_composition . "' size=50/>";
+//} else {
+//    $bloc .=$poids_fta_composition;
+$bloc .=$ftaComposantView->getHtmlDataField(FtaComposantModel::FIELDNAME_POIDS_FTA_COMPOSITION);
 
-if ($proprietaire) {
-    $bloc .= "<input type=text name=" . FtaComposantModel::FIELDNAME_POIDS_FTA_COMPOSITION . " value='" . $poids_fta_composition . "' size=50/>";
-} else {
-    $bloc .=$poids_fta_composition;
-}
-$bloc.="</td></tr>";
-
+//}
+//$bloc.="</td></tr>";
 //Quantité
-$bloc .= "<tr><td>" . DatabaseDescription::getFieldDocLabel(FtaComposantModel::TABLENAME, FtaComposantModel::FIELDNAME_QUANTITE_FTA_COMPOSITION) . "</td><td>";
+//$bloc .= "<tr><td>" . DatabaseDescription::getFieldDocLabel(FtaComposantModel::TABLENAME, FtaComposantModel::FIELDNAME_QUANTITE_FTA_COMPOSITION) . "</td><td>";
+//if ($proprietaire) {
+//    $bloc .= "<input type=text name=" . FtaComposantModel::FIELDNAME_QUANTITE_FTA_COMPOSITION . " value='" . $quantite_fta_composition . "' size=50/>";
+//} else {
+//    $bloc .=$quantite_fta_composition;
+$bloc .=$ftaComposantView->getHtmlDataField(FtaComposantModel::FIELDNAME_QUANTITE_FTA_COMPOSITION);
 
-if ($proprietaire) {
-    $bloc .= "<input type=text name=" . FtaComposantModel::FIELDNAME_QUANTITE_FTA_COMPOSITION . " value='" . $quantite_fta_composition . "' size=50/>";
-} else {
-    $bloc .=$quantite_fta_composition;
-}
-$bloc.="</td></tr>";
-
+//}
+//$bloc.="</td></tr>";
 //Ordre dans le quel présenter les composants
-$bloc .= "<tr><td>" . DatabaseDescription::getFieldDocLabel(FtaComposantModel::TABLENAME, FtaComposantModel::FIELDNAME_ORDRE_FTA_COMPOSITION) . "</td><td>";
+//$bloc .= "<tr><td>" . DatabaseDescription::getFieldDocLabel(FtaComposantModel::TABLENAME, FtaComposantModel::FIELDNAME_ORDRE_FTA_COMPOSITION) . "</td><td>";
+//
+//if ($proprietaire) {
+//    $bloc .= "<input type=text name=" . FtaComposantModel::FIELDNAME_ORDRE_FTA_COMPOSITION . " value='" . $ordre_fta_composition . "' size=50/>";
+//} else {
+//    $bloc .=$ordre_fta_composition;
+$bloc .=$ftaComposantView->getHtmlDataField(FtaComposantModel::FIELDNAME_ORDRE_FTA_COMPOSITION);
 
-if ($proprietaire) {
-    $bloc .= "<input type=text name=" . FtaComposantModel::FIELDNAME_ORDRE_FTA_COMPOSITION . " value='" . $ordre_fta_composition . "' size=50/>";
-} else {
-    $bloc .=$ordre_fta_composition;
-}
-$bloc.="</td></tr>";
+//}
+//$bloc.="</td></tr>";
 
 /* * *****************************************************************************
   Gestion de l'étiquette associée à ce composant
@@ -457,6 +458,8 @@ if ($proprietaire and $mode_etiquette_fta_composition == 4) {
     $edit_allow = false;
 }
 
+$ftaComposantView2->setIsEditable($edit_allow);
+
 //Libellé produit de l'étiquette
 $champ = "etiquette_libelle_fta_composition";
 $table = "fta_composant";
@@ -467,17 +470,18 @@ if (${"diff_" . $table}[$champ]) {
     $image_modif = $html_image_modif;
     $color_modif = $html_color_modif;
 }
-$bloc .= "<tr><td " . $color_modif . " >" . DatabaseDescription::getFieldDocLabel(FtaComposantModel::TABLENAME, FtaComposantModel::FIELDNAME_ETIQUETTE_LIBELLE_FTA_COMPOSITION) . "</td><td " . $color_modif . ">";
+//$bloc .= "<tr><td " . $color_modif . " >" . DatabaseDescription::getFieldDocLabel(FtaComposantModel::TABLENAME, FtaComposantModel::FIELDNAME_ETIQUETTE_LIBELLE_FTA_COMPOSITION) . "</td><td " . $color_modif . ">";
+//
+//if ($edit_allow) {
+//    $bloc .= "<textarea name=" . FtaComposantModel::FIELDNAME_ETIQUETTE_LIBELLE_FTA_COMPOSITION . " rows=4 cols=75>" . $etiquette_libelle_fta_composition . "</textarea>";
+$bloc .=$ftaComposantView2->getHtmlDataField(FtaComposantModel::FIELDNAME_ETIQUETTE_LIBELLE_FTA_COMPOSITION);
 
-if ($edit_allow) {
-    $bloc .= "<textarea name=" . FtaComposantModel::FIELDNAME_ETIQUETTE_LIBELLE_FTA_COMPOSITION . " rows=4 cols=75>" . $etiquette_libelle_fta_composition . "</textarea>";
-} else {
-    $bloc .=$etiquette_libelle_fta_composition;
-    $bloc .= "<input type=hidden name=" . FtaComposantModel::FIELDNAME_ETIQUETTE_LIBELLE_FTA_COMPOSITION . " value='" . $etiquette_libelle_fta_composition . "'/>";
-}
-$bloc.=$image_modif . "</td></tr>";
-
-
+//} else {
+//    $bloc .=$etiquette_libelle_fta_composition;
+//    $bloc .= "<input type=hidden name=" . FtaComposantModel::FIELDNAME_ETIQUETTE_LIBELLE_FTA_COMPOSITION . " value='" . $etiquette_libelle_fta_composition . "'/>";
+//
+//}
+//$bloc.=$image_modif . "</td></tr>";
 //Désignation légale produit de l'étiquette
 $champ = "etiquette_libelle_legal_fta_composition";
 $table = "fta_composant";
@@ -488,15 +492,16 @@ if (${"diff_" . $table}[$champ]) {
     $image_modif = $html_image_modif;
     $color_modif = $html_color_modif;
 }
-$bloc .= "<tr><td " . $color_modif . ">" . DatabaseDescription::getFieldDocLabel(FtaComposantModel::TABLENAME, FtaComposantModel::FIELDNAME_ETIQUETTE_LIBELLE_LEGAL_FTA_COMPOSITION) . "</td><td " . $color_modif . ">";
-if ($edit_allow) {
-    $bloc .= "<textarea name=" . FtaComposantModel::FIELDNAME_ETIQUETTE_LIBELLE_LEGAL_FTA_COMPOSITION . " rows=4 cols=75>" . $etiquette_libelle_legal_fta_composition . "</textarea>";
-} else {
-    $bloc .=$etiquette_libelle_legal_fta_composition;
-    $bloc .= "<input type=hidden name=" . FtaComposantModel::FIELDNAME_ETIQUETTE_LIBELLE_LEGAL_FTA_COMPOSITION . " value='" . $etiquette_libelle_legal_fta_composition . "'/>";
-}
-$bloc.="$image_modif</td></tr>";
+//$bloc .= "<tr><td " . $color_modif . ">" . DatabaseDescription::getFieldDocLabel(FtaComposantModel::TABLENAME, FtaComposantModel::FIELDNAME_ETIQUETTE_LIBELLE_LEGAL_FTA_COMPOSITION) . "</td><td " . $color_modif . ">";
+//if ($edit_allow) {
+//    $bloc .= "<textarea name=" . FtaComposantModel::FIELDNAME_ETIQUETTE_LIBELLE_LEGAL_FTA_COMPOSITION . " rows=4 cols=75>" . $etiquette_libelle_legal_fta_composition . "</textarea>";
+//} else {
+//    $bloc .=$etiquette_libelle_legal_fta_composition;
+//    $bloc .= "<input type=hidden name=" . FtaComposantModel::FIELDNAME_ETIQUETTE_LIBELLE_LEGAL_FTA_COMPOSITION . " value='" . $etiquette_libelle_legal_fta_composition . "'/>";
+$bloc .=$ftaComposantView2->getHtmlDataField(FtaComposantModel::FIELDNAME_ETIQUETTE_LIBELLE_LEGAL_FTA_COMPOSITION);
 
+//}
+//$bloc.="$image_modif</td></tr>";
 //Composition Etiquette
 $champ = "etiquette_fta_composition";
 $table = "fta_composant";
@@ -507,18 +512,17 @@ if (${"diff_" . $table}[$champ]) {
     $image_modif = $html_image_modif;
     $color_modif = $html_color_modif;
 }
-$bloc .= "<tr><td " . $color_modif . ">" . DatabaseDescription::getFieldDocLabel(FtaComposantModel::TABLENAME, FtaComposantModel::FIELDNAME_ETIQUETTE) . "</td><td " . $color_modif . ">";
-if ($edit_allow) {
-    $bloc .= "<textarea name=" . FtaComposantModel::FIELDNAME_ETIQUETTE . " rows=15 cols=75>" . $etiquette_fta_composition . "</textarea>";
-//$bloc .= "<input type=text name=".$champ." value=`".${$champ}."` size=50/>";
-} else {
-    $bloc .=$etiquette_fta_composition;
-    $bloc .= "<input type=hidden name=" . FtaComposantModel::FIELDNAME_ETIQUETTE . " value='" . $etiquette_fta_composition . "'/>";
-}
-$bloc.=$image_modif . "</td></tr>";
+//$bloc .= "<tr><td " . $color_modif . ">" . DatabaseDescription::getFieldDocLabel(FtaComposantModel::TABLENAME, FtaComposantModel::FIELDNAME_ETIQUETTE) . "</td><td " . $color_modif . ">";
+//if ($edit_allow) {
+//    $bloc .= "<textarea name=" . FtaComposantModel::FIELDNAME_ETIQUETTE . " rows=15 cols=75>" . $etiquette_fta_composition . "</textarea>";
+////$bloc .= "<input type=text name=".$champ." value=`".${$champ}."` size=50/>";
+//} else {
+//    $bloc .=$etiquette_fta_composition;
+//    $bloc .= "<input type=hidden name=" . FtaComposantModel::FIELDNAME_ETIQUETTE . " value='" . $etiquette_fta_composition . "'/>";
+$bloc .=$ftaComposantView2->getHtmlDataField(FtaComposantModel::FIELDNAME_ETIQUETTE);
 
-
-
+//}
+//$bloc.=$image_modif . "</td></tr>";
 //Composition Etiquette (extension supplémentaire)
 $champ = "etiquette_supplementaire_fta_composition";
 $table = "fta_composant";
@@ -530,18 +534,17 @@ if (${"diff_" . $table}[$champ]) {
     $image_modif = $html_image_modif;
     $color_modif = $html_color_modif;
 }
-$bloc .= "<tr><td " . $color_modif . ">" . DatabaseDescription::getFieldDocLabel(FtaComposantModel::TABLENAME, FtaComposantModel::FIELDNAME_ETIQUETTE_SUPPLEMENTAIRE_FTA_COMPOSIITON) . "</td><td " . $color_modif . ">";
-if ($edit_allow) {
-    $bloc .= "<textarea name=" . FtaComposantModel::FIELDNAME_ETIQUETTE_SUPPLEMENTAIRE_FTA_COMPOSIITON . " rows=15 cols=75>$etiquette_supplementaire_fta_composition</textarea>";
-} else {
-    $bloc .=$etiquette_supplementaire_fta_composition;
-    $bloc .= "<input type=hidden name=" . FtaComposantModel::FIELDNAME_ETIQUETTE_SUPPLEMENTAIRE_FTA_COMPOSIITON . " value='" . $etiquette_supplementaire_fta_composition . "'/>";
-}
+//$bloc .= "<tr><td " . $color_modif . ">" . DatabaseDescription::getFieldDocLabel(FtaComposantModel::TABLENAME, FtaComposantModel::FIELDNAME_ETIQUETTE_SUPPLEMENTAIRE_FTA_COMPOSIITON) . "</td><td " . $color_modif . ">";
+//if ($edit_allow) {
+//    $bloc .= "<textarea name=" . FtaComposantModel::FIELDNAME_ETIQUETTE_SUPPLEMENTAIRE_FTA_COMPOSIITON . " rows=15 cols=75>$etiquette_supplementaire_fta_composition</textarea>";
+//} else {
+//    $bloc .=$etiquette_supplementaire_fta_composition;
+//    $bloc .= "<input type=hidden name=" . FtaComposantModel::FIELDNAME_ETIQUETTE_SUPPLEMENTAIRE_FTA_COMPOSIITON . " value='" . $etiquette_supplementaire_fta_composition . "'/>";
+$bloc .=$ftaComposantView2->getHtmlDataField(FtaComposantModel::FIELDNAME_ETIQUETTE_SUPPLEMENTAIRE_FTA_COMPOSIITON);
 
-$bloc.="$image_modif</td></tr>";
-
-
-
+//}
+//
+//$bloc.="$image_modif</td></tr>";
 //********************************* Informations complémentaires récto
 $champ = "etiquette_information_complementaire_recto_fta_composant";
 $table = "fta_composant";
@@ -553,17 +556,15 @@ if (${"diff_" . $table}[$champ]) {
     $image_modif = $html_image_modif;
     $color_modif = $html_color_modif;
 }
-$bloc .= "<tr><td " . $color_modif . ">" . DatabaseDescription::getFieldDocLabel(FtaComposantModel::TABLENAME, FtaComposantModel::FIELDNAME_ETIQUETTE_INFORMATION_COMPLEMENTAIRE_RECTO_FTA_COMPOSANT) . "</td><td" . $color_modif . ">";
-if ($edit_allow) {
-    $bloc .= "<textarea name=" . FtaComposantModel::FIELDNAME_ETIQUETTE_INFORMATION_COMPLEMENTAIRE_RECTO_FTA_COMPOSANT . " rows=3 cols=75>" . $etiquette_information_complementaire_recto_fta_composant . "</textarea>";
-} else {
-    $bloc .=$etiquette_information_complementaire_recto_fta_composant;
-    $bloc .= "<input type=hidden name=" . FtaComposantModel::FIELDNAME_ETIQUETTE_INFORMATION_COMPLEMENTAIRE_RECTO_FTA_COMPOSANT . " value='" . $etiquette_information_complementaire_recto_fta_composant . "'/>";
-}
-
-
-$bloc.="$image_modif</td></tr>";
-
+//$bloc .= "<tr><td " . $color_modif . ">" . DatabaseDescription::getFieldDocLabel(FtaComposantModel::TABLENAME, FtaComposantModel::FIELDNAME_ETIQUETTE_INFORMATION_COMPLEMENTAIRE_RECTO_FTA_COMPOSANT) . "</td><td" . $color_modif . ">";
+//if ($edit_allow) {
+//    $bloc .= "<textarea name=" . FtaComposantModel::FIELDNAME_ETIQUETTE_INFORMATION_COMPLEMENTAIRE_RECTO_FTA_COMPOSANT . " rows=3 cols=75>" . $etiquette_information_complementaire_recto_fta_composant . "</textarea>";
+//} else {
+//    $bloc .=$etiquette_information_complementaire_recto_fta_composant;
+//    $bloc .= "<input type=hidden name=" . FtaComposantModel::FIELDNAME_ETIQUETTE_INFORMATION_COMPLEMENTAIRE_RECTO_FTA_COMPOSANT . " value='" . $etiquette_information_complementaire_recto_fta_composant . "'/>";
+$bloc .=$ftaComposantView2->getHtmlDataField(FtaComposantModel::FIELDNAME_ETIQUETTE_INFORMATION_COMPLEMENTAIRE_RECTO_FTA_COMPOSANT);
+//}
+//$bloc.="$image_modif</td></tr>";
 //Durée de vie etiquetée
 $champ = "etiquette_duree_vie_fta_composition";
 $table = "fta_composant";
@@ -575,14 +576,15 @@ if (${"diff_" . $table}[$champ]) {
     $image_modif = $html_image_modif;
     $color_modif = $html_color_modif;
 }
-$bloc .= "<tr><td " . $color_modif . ">" . DatabaseDescription::getFieldDocLabel(FtaComposantModel::TABLENAME, FtaComposantModel::FIELDNAME_ETIQUETTE_DUREE_VIE_FTA_COMPOSITION) . "</td><td " . $color_modif . ">";
-if ($edit_allow) {
-    $bloc .= "<input type=text name=" . FtaComposantModel::FIELDNAME_ETIQUETTE_DUREE_VIE_FTA_COMPOSITION . " value='" . $etiquette_duree_vie_fta_composition . "' size=50/>";
-} else {
-    $bloc .=$etiquette_duree_vie_fta_composition;
-    $bloc .= "<input type=hidden name=" . FtaComposantModel::FIELDNAME_ETIQUETTE_DUREE_VIE_FTA_COMPOSITION . " value='" . $etiquette_duree_vie_fta_composition . "'/>";
-}
+//$bloc .= "<tr><td " . $color_modif . ">" . DatabaseDescription::getFieldDocLabel(FtaComposantModel::TABLENAME, FtaComposantModel::FIELDNAME_ETIQUETTE_DUREE_VIE_FTA_COMPOSITION) . "</td><td " . $color_modif . ">";
+//if ($edit_allow) {
+//    $bloc .= "<input type=text name=" . FtaComposantModel::FIELDNAME_ETIQUETTE_DUREE_VIE_FTA_COMPOSITION . " value='" . $etiquette_duree_vie_fta_composition . "' size=50/>";
+//} else {
+//    $bloc .=$etiquette_duree_vie_fta_composition;
+//    $bloc .= "<input type=hidden name=" . FtaComposantModel::FIELDNAME_ETIQUETTE_DUREE_VIE_FTA_COMPOSITION . " value='" . $etiquette_duree_vie_fta_composition . "'/>";
+$bloc .=$ftaComposantView2->getHtmlDataField(FtaComposantModel::FIELDNAME_ETIQUETTE_DUREE_VIE_FTA_COMPOSITION);
 
+//}
 //Poids net etiqueté
 $champ = "etiquette_poids_fta_composition";
 $table = "fta_composant";
@@ -594,14 +596,15 @@ if (${"diff_" . $table}[$champ]) {
     $image_modif = $html_image_modif;
     $color_modif = $html_color_modif;
 }
-$bloc .= "<tr><td " . $color_modif . ">" . DatabaseDescription::getFieldDocLabel(FtaComposantModel::TABLENAME, FtaComposantModel::FIELDNAME_ETIQUETTE_POIDS_FTA_COMPOSITION) . "</td><td " . $color_modif . ">";
-if ($edit_allow) {
-    $bloc .= "<input type=text name=" . FtaComposantModel::FIELDNAME_ETIQUETTE_POIDS_FTA_COMPOSITION . " value='" . $etiquette_poids_fta_composition . "' size=50/>";
-} else {
-    $bloc .=$etiquette_poids_fta_composition;
-    $bloc .= "<input type=hidden name=" . FtaComposantModel::FIELDNAME_ETIQUETTE_POIDS_FTA_COMPOSITION . " value='" . $etiquette_poids_fta_composition . "'/>";
-}
+//$bloc .= "<tr><td " . $color_modif . ">" . DatabaseDescription::getFieldDocLabel(FtaComposantModel::TABLENAME, FtaComposantModel::FIELDNAME_ETIQUETTE_POIDS_FTA_COMPOSITION) . "</td><td " . $color_modif . ">";
+//if ($edit_allow) {
+//    $bloc .= "<input type=text name=" . FtaComposantModel::FIELDNAME_ETIQUETTE_POIDS_FTA_COMPOSITION . " value='" . $etiquette_poids_fta_composition . "' size=50/>";
+//} else {
+//    $bloc .=$etiquette_poids_fta_composition;
+//    $bloc .= "<input type=hidden name=" . FtaComposantModel::FIELDNAME_ETIQUETTE_POIDS_FTA_COMPOSITION . " value='" . $etiquette_poids_fta_composition . "'/>";
+$bloc .=$ftaComposantView2->getHtmlDataField(FtaComposantModel::FIELDNAME_ETIQUETTE_POIDS_FTA_COMPOSITION);
 
+//}
 //Décomposition du poids
 $champ = "etiquette_decomposition_poids_fta_composant";
 $table = "fta_composant";
@@ -613,15 +616,15 @@ if (${"diff_" . $table}[$champ]) {
     $image_modif = $html_image_modif;
     $color_modif = $html_color_modif;
 }
-$bloc .= "<tr><td " . $color_modif . ">" . DatabaseDescription::getFieldDocLabel(FtaComposantModel::TABLENAME, FtaComposantModel::FIELDNAME_ETIQUETTE_DECOMPOSITION_POIDS_FTA_COMPOSANT) . "</td><td " . $color_modif . ">";
-if ($edit_allow) {
-    $bloc .= "<input type=text name=" . FtaComposantModel::FIELDNAME_ETIQUETTE_DECOMPOSITION_POIDS_FTA_COMPOSANT . " value='" . $etiquette_decomposition_poids_fta_composant . "' size=50/>";
-} else {
-    $bloc .=$etiquette_decomposition_poids_fta_composant;
-    $bloc .= "<input type=hidden name=" . FtaComposantModel::FIELDNAME_ETIQUETTE_DECOMPOSITION_POIDS_FTA_COMPOSANT . " value='" . $etiquette_decomposition_poids_fta_composant . "'/>";
-}
+//$bloc .= "<tr><td " . $color_modif . ">" . DatabaseDescription::getFieldDocLabel(FtaComposantModel::TABLENAME, FtaComposantModel::FIELDNAME_ETIQUETTE_DECOMPOSITION_POIDS_FTA_COMPOSANT) . "</td><td " . $color_modif . ">";
+//if ($edit_allow) {
+//    $bloc .= "<input type=text name=" . FtaComposantModel::FIELDNAME_ETIQUETTE_DECOMPOSITION_POIDS_FTA_COMPOSANT . " value='" . $etiquette_decomposition_poids_fta_composant . "' size=50/>";
+//} else {
+//    $bloc .=$etiquette_decomposition_poids_fta_composant;
+//    $bloc .= "<input type=hidden name=" . FtaComposantModel::FIELDNAME_ETIQUETTE_DECOMPOSITION_POIDS_FTA_COMPOSANT . " value='" . $etiquette_decomposition_poids_fta_composant . "'/>";
+$bloc .=$ftaComposantView2->getHtmlDataField(FtaComposantModel::FIELDNAME_ETIQUETTE_DECOMPOSITION_POIDS_FTA_COMPOSANT);
 
-
+//}
 //Liste des composants regroupés sur cette étiquette
 if ($id_fta_composant) {
     $arrayComposition = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
@@ -705,27 +708,30 @@ if ($mode_etiquette_fta_composition == 1 or $mode_etiquette_fta_composition == 2
         $image_modif = $html_image_modif;
         $color_modif = $html_color_modif;
     }
-    $bloc.="<tr class=contenu><td " . $color_modif . ">";
-    $bloc.= DatabaseDescription::getFieldDocLabel(FtaComposantModel::TABLENAME, FtaComposantModel::FIELDNAME_K_STYLE_PARAGRAPHE_INGREDIENT_FTA_COMPOSITION)
-            . "</td><td " . $color_modif . ">"
-    ;
-    if ($proprietaire) {
-        $requete = " SELECT " . CodesoftStyleParagrapheModel::KEYNAME . ", " . CodesoftStyleParagrapheModel::FIELDNAME_LIBELLE_CODESOFT_STYLE_PARAGRAPHE
-                . " FROM " . CodesoftStyleParagrapheModel::TABLENAME
-                . " ORDER BY " . CodesoftStyleParagrapheModel::FIELDNAME_LIBELLE_CODESOFT_STYLE_PARAGRAPHE
-        ;
-        $nom_defaut = FtaComposantModel::FIELDNAME_K_STYLE_PARAGRAPHE_INGREDIENT_FTA_COMPOSITION;
-        $id_defaut = $k_style_paragraphe_ingredient_fta_composition;
-        $liste_style .= AccueilFta::afficherRequeteEnListeDeroulante($requete, $id_defaut, $nom_defaut, $editable);
-        $bloc.= $liste_style;
-    } else {
-        if ($k_style_paragraphe_ingredient_fta_composition) {
-            $k_codesoft_style_paragraphe = $k_style_paragraphe_ingredient_fta_composition;
-            $codeSoftStyleParagrapheModel = new CodesoftStyleParagrapheModel($k_codesoft_style_paragraphe);
-            $bloc .=$codeSoftStyleParagrapheModel->getDataField(CodesoftStyleParagrapheModel::FIELDNAME_LIBELLE_CODESOFT_STYLE_PARAGRAPHE)->getFieldValue();
-        }
-    }
-    $bloc .=$image_modif . "</td></tr>";
+//    $bloc.="<tr class=contenu><td " . $color_modif . ">";
+//    $bloc.= DatabaseDescription::getFieldDocLabel(FtaComposantModel::TABLENAME, FtaComposantModel::FIELDNAME_K_STYLE_PARAGRAPHE_INGREDIENT_FTA_COMPOSITION)
+//            . "</td><td " . $color_modif . ">"
+//    ;
+//    if ($proprietaire) {
+//        $requete = " SELECT " . CodesoftStyleParagrapheModel::KEYNAME . ", " . CodesoftStyleParagrapheModel::FIELDNAME_LIBELLE_CODESOFT_STYLE_PARAGRAPHE
+//                . " FROM " . CodesoftStyleParagrapheModel::TABLENAME
+//                . " ORDER BY " . CodesoftStyleParagrapheModel::FIELDNAME_LIBELLE_CODESOFT_STYLE_PARAGRAPHE
+//        ;
+//        $nom_defaut = FtaComposantModel::FIELDNAME_K_STYLE_PARAGRAPHE_INGREDIENT_FTA_COMPOSITION;
+//        $id_defaut = $k_style_paragraphe_ingredient_fta_composition;
+//        $liste_style .= AccueilFta::afficherRequeteEnListeDeroulante($requete, $id_defaut, $nom_defaut, $editable);
+//        $bloc.= $liste_style;
+//    } else {
+//        if ($k_style_paragraphe_ingredient_fta_composition) {
+//            $k_codesoft_style_paragraphe = $k_style_paragraphe_ingredient_fta_composition;
+//            $codeSoftStyleParagrapheModel = new CodesoftStyleParagrapheModel($k_codesoft_style_paragraphe);
+//            $bloc .=$codeSoftStyleParagrapheModel->getDataField(CodesoftStyleParagrapheModel::FIELDNAME_LIBELLE_CODESOFT_STYLE_PARAGRAPHE)->getFieldValue();
+//        }
+//    }
+//    $bloc .=$image_modif . "</td></tr>";
+    $bloc .=$ftaComposantView->getHtmlDataField(FtaComposantModel::FIELDNAME_K_STYLE_PARAGRAPHE_INGREDIENT_FTA_COMPOSITION);
+
+
 //echo $id_fta."<br>";
 //Modèle d'etiquette par défaut
     $champ = "k_etiquette_fta_composition";
@@ -737,28 +743,30 @@ if ($mode_etiquette_fta_composition == 1 or $mode_etiquette_fta_composition == 2
         $image_modif = $html_image_modif;
         $color_modif = $html_color_modif;
     }
-    $liste_etiquette = DatabaseDescription::getFieldDocLabel(FtaComposantModel::TABLENAME, FtaComposantModel::FIELDNAME_K_ETIQUETTE_FTA_COMPOSITION)
-            . "</td><td " . $color_modif . ">"
-    ;
-    $bloc.="<tr class=contenu><td " . $color_modif . ">" . $liste_etiquette;
-    if ($proprietaire) {
-        $requete = "SELECT " . CodesoftEtiquettesModel::KEYNAME . ", " . CodesoftEtiquettesModel::FIELDNAME_DESIGNATION_CODESOFT_ETIQUETTES
-                . " FROM " . CodesoftEtiquettesModel::TABLENAME
-                . " WHERE (" . CodesoftEtiquettesModel::FIELDNAME_K_TYPE_ETIQUETTE_CODESOFT_ETIQUETTES . "=2 "
-                . " OR " . CodesoftEtiquettesModel::FIELDNAME_K_TYPE_ETIQUETTE_CODESOFT_ETIQUETTES . "=0) "
-                . " ORDER BY " . CodesoftEtiquettesModel::FIELDNAME_DESIGNATION_CODESOFT_ETIQUETTES
-        ;
-        $nom_defaut = FtaComposantModel::FIELDNAME_K_ETIQUETTE_FTA_COMPOSITION;
-        $id_defaut = $k_etiquette_fta_composition;
-        $bloc.= AccueilFta::afficherRequeteEnListeDeroulante($requete, $id_defaut, $nom_defaut, $editable) . $image_modif;
-    } else {
-        if ($k_etiquette_fta_composition) {
-            $k_etiquette = $k_etiquette_fta_composition;
-            $codeEtiquetteModel = new CodesoftEtiquettesModel($k_etiquette);
-            $bloc .=$codeEtiquetteModel->getDataField(CodesoftEtiquettesModel::FIELDNAME_DESIGNATION_CODESOFT_ETIQUETTES)->getFieldValue();
-        }
-    }
-    $bloc.="</td></tr>";
+//    $liste_etiquette = DatabaseDescription::getFieldDocLabel(FtaComposantModel::TABLENAME, FtaComposantModel::FIELDNAME_K_ETIQUETTE_FTA_COMPOSITION)
+//            . "</td><td " . $color_modif . ">"
+//    ;
+//    $bloc.="<tr class=contenu><td " . $color_modif . ">" . $liste_etiquette;
+//    if ($proprietaire) {
+//        $requete = "SELECT " . CodesoftEtiquettesModel::KEYNAME . ", " . CodesoftEtiquettesModel::FIELDNAME_DESIGNATION_CODESOFT_ETIQUETTES
+//                . " FROM " . CodesoftEtiquettesModel::TABLENAME
+//                . " WHERE (" . CodesoftEtiquettesModel::FIELDNAME_K_TYPE_ETIQUETTE_CODESOFT_ETIQUETTES . "=2 "
+//                . " OR " . CodesoftEtiquettesModel::FIELDNAME_K_TYPE_ETIQUETTE_CODESOFT_ETIQUETTES . "=0) "
+//                . " ORDER BY " . CodesoftEtiquettesModel::FIELDNAME_DESIGNATION_CODESOFT_ETIQUETTES
+//        ;
+//        $nom_defaut = FtaComposantModel::FIELDNAME_K_ETIQUETTE_FTA_COMPOSITION;
+//        $id_defaut = $k_etiquette_fta_composition;
+//        $bloc.= AccueilFta::afficherRequeteEnListeDeroulante($requete, $id_defaut, $nom_defaut, $editable) . $image_modif;
+//    } else {
+//        if ($k_etiquette_fta_composition) {
+//            $k_etiquette = $k_etiquette_fta_composition;
+//            $codeEtiquetteModel = new CodesoftEtiquettesModel($k_etiquette);
+//            $bloc .=$codeEtiquetteModel->getDataField(CodesoftEtiquettesModel::FIELDNAME_DESIGNATION_CODESOFT_ETIQUETTES)->getFieldValue();
+//        }
+//    }
+//    $bloc.="</td></tr>";
+    $bloc .=$ftaComposantView->getHtmlDataField(FtaComposantModel::FIELDNAME_K_ETIQUETTE_FTA_COMPOSITION);
+
 
     //Modèle d'etiquette verso
     $champ = "k_etiquette_verso_fta_composition";
@@ -770,29 +778,31 @@ if ($mode_etiquette_fta_composition == 1 or $mode_etiquette_fta_composition == 2
         $image_modif = $html_image_modif;
         $color_modif = $html_color_modif;
     }
-    $liste_etiquette = DatabaseDescription::getFieldDocLabel(FtaComposantModel::TABLENAME, FtaComposantModel::FIELDNAME_K_ETIQUETTE_VERSO_FTA_COMPOSITION)
-            . "</td><td " . $color_modif . ">"
-    ;
-    $bloc.="<tr class=contenu><td " . $color_modif . ">" . $liste_etiquette;
-    if ($proprietaire) {
-        ;
-        $requete = " SELECT " . CodesoftEtiquettesModel::KEYNAME . ", " . CodesoftEtiquettesModel::FIELDNAME_DESIGNATION_CODESOFT_ETIQUETTES
-                . " FROM " . CodesoftEtiquettesModel::TABLENAME
-                . " WHERE (" . CodesoftEtiquettesModel::FIELDNAME_K_TYPE_ETIQUETTE_CODESOFT_ETIQUETTES . "=3 "
-                . " OR " . CodesoftEtiquettesModel::FIELDNAME_K_TYPE_ETIQUETTE_CODESOFT_ETIQUETTES . "=0) "
-                . " ORDER BY " . CodesoftEtiquettesModel::FIELDNAME_DESIGNATION_CODESOFT_ETIQUETTES
-        ;
-        $nom_defaut = FtaComposantModel::FIELDNAME_K_ETIQUETTE_VERSO_FTA_COMPOSITION;
-        $id_defaut = $k_etiquette_verso_fta_composition;
-        $bloc.= AccueilFta::afficherRequeteEnListeDeroulante($requete, $id_defaut, $nom_defaut, $editable) . $image_modif;
-    } else {
-        if ($k_etiquette_verso_fta_composition) {
-            $k_etiquette = $k_etiquette_verso_fta_composition;
-            $codeEtiquetteModel = new CodesoftEtiquettesModel($k_etiquette);
-            $bloc .=$codeEtiquetteModel->getDataField(CodesoftEtiquettesModel::FIELDNAME_DESIGNATION_CODESOFT_ETIQUETTES)->getFieldValue();
-        }
-    }
-    $bloc.="</td></tr>";
+//    $liste_etiquette = DatabaseDescription::getFieldDocLabel(FtaComposantModel::TABLENAME, FtaComposantModel::FIELDNAME_K_ETIQUETTE_VERSO_FTA_COMPOSITION)
+//            . "</td><td " . $color_modif . ">"
+//    ;
+//    $bloc.="<tr class=contenu><td " . $color_modif . ">" . $liste_etiquette;
+//    if ($proprietaire) {
+//        ;
+//        $requete = " SELECT " . CodesoftEtiquettesModel::KEYNAME . ", " . CodesoftEtiquettesModel::FIELDNAME_DESIGNATION_CODESOFT_ETIQUETTES
+//                . " FROM " . CodesoftEtiquettesModel::TABLENAME
+//                . " WHERE (" . CodesoftEtiquettesModel::FIELDNAME_K_TYPE_ETIQUETTE_CODESOFT_ETIQUETTES . "=3 "
+//                . " OR " . CodesoftEtiquettesModel::FIELDNAME_K_TYPE_ETIQUETTE_CODESOFT_ETIQUETTES . "=0) "
+//                . " ORDER BY " . CodesoftEtiquettesModel::FIELDNAME_DESIGNATION_CODESOFT_ETIQUETTES
+//        ;
+//        $nom_defaut = FtaComposantModel::FIELDNAME_K_ETIQUETTE_VERSO_FTA_COMPOSITION;
+//        $id_defaut = $k_etiquette_verso_fta_composition;
+//        $bloc.= AccueilFta::afficherRequeteEnListeDeroulante($requete, $id_defaut, $nom_defaut, $editable) . $image_modif;
+//    } else {
+//        if ($k_etiquette_verso_fta_composition) {
+//            $k_etiquette = $k_etiquette_verso_fta_composition;
+//            $codeEtiquetteModel = new CodesoftEtiquettesModel($k_etiquette);
+//            $bloc .=$codeEtiquetteModel->getDataField(CodesoftEtiquettesModel::FIELDNAME_DESIGNATION_CODESOFT_ETIQUETTES)->getFieldValue();
+//        }
+//    }
+//    $bloc.="</td></tr>";
+    $bloc .=$ftaComposantView->getHtmlDataField(FtaComposantModel::FIELDNAME_K_ETIQUETTE_VERSO_FTA_COMPOSITION);
+
 
     //Logo à imprimer sur le masque d'étiquette
     $champ = "k_codesoft_etiquette_logo";
@@ -804,25 +814,26 @@ if ($mode_etiquette_fta_composition == 1 or $mode_etiquette_fta_composition == 2
         $image_modif = $html_image_modif;
         $color_modif = $html_color_modif;
     }
-    $liste_etiquette = DatabaseDescription::getFieldDocLabel(FtaComposantModel::TABLENAME, FtaComposantModel::FIELDNAME_K_CODESOFT_ETIQUETTE_LOGO)
-            . "</td><td $color_modif>"
-    ;
-    $bloc.="<tr class=contenu><td " . $color_modif . ">" . $liste_etiquette;
-    if ($proprietaire) {
-        $requete = "SELECT " . CodesoftEtiquettesLogoModel::KEYNAME . "," . CodesoftEtiquettesLogoModel::FIELDNAME_LOGO_LABEL
-                . " FROM " . CodesoftEtiquettesLogoModel::TABLENAME
-                . " ORDER BY " . CodesoftEtiquettesLogoModel::FIELDNAME_LOGO_NAME;
-        $nom_defaut = FtaComposantModel::FIELDNAME_K_CODESOFT_ETIQUETTE_LOGO;
-        $id_defaut = $k_codesoft_etiquette_logo;
-        $bloc.= AccueilFta::afficherRequeteEnListeDeroulante($requete, $id_defaut, $nom_defaut, $editable) . $image_modif;
-    } else {
-        if ($k_codesoft_etiquette_logo) {
-            $id = $k_codesoft_etiquette_logo;
-            $codeEtiquetteLogoModel = new CodesoftEtiquettesLogoModel($id);
-            $bloc .=$codeEtiquetteLogoModel->getDataField(CodesoftEtiquettesLogoModel::FIELDNAME_LOGO_LABEL)->getFieldValue();
-        }
-    }
-    $bloc.="</td></tr>";
+//    $liste_etiquette = DatabaseDescription::getFieldDocLabel(FtaComposantModel::TABLENAME, FtaComposantModel::FIELDNAME_K_CODESOFT_ETIQUETTE_LOGO)
+//            . "</td><td $color_modif>"
+//    ;
+//    $bloc.="<tr class=contenu><td " . $color_modif . ">" . $liste_etiquette;
+//    if ($proprietaire) {
+//        $requete = "SELECT " . CodesoftEtiquettesLogoModel::KEYNAME . "," . CodesoftEtiquettesLogoModel::FIELDNAME_LOGO_LABEL
+//                . " FROM " . CodesoftEtiquettesLogoModel::TABLENAME
+//                . " ORDER BY " . CodesoftEtiquettesLogoModel::FIELDNAME_LOGO_NAME;
+//        $nom_defaut = FtaComposantModel::FIELDNAME_K_CODESOFT_ETIQUETTE_LOGO;
+//        $id_defaut = $k_codesoft_etiquette_logo;
+//        $bloc.= AccueilFta::afficherRequeteEnListeDeroulante($requete, $id_defaut, $nom_defaut, $editable) . $image_modif;
+//    } else {
+//        if ($k_codesoft_etiquette_logo) {
+//            $id = $k_codesoft_etiquette_logo;
+//            $codeEtiquetteLogoModel = new CodesoftEtiquettesLogoModel($id);
+//            $bloc .=$codeEtiquetteLogoModel->getDataField(CodesoftEtiquettesLogoModel::FIELDNAME_LOGO_LABEL)->getFieldValue();
+//        }
+//    }
+//    $bloc.="</td></tr>";
+    $bloc .=$ftaComposantView->getHtmlDataField(FtaComposantModel::FIELDNAME_K_CODESOFT_ETIQUETTE_LOGO);
 }
 //echo $mode_etiquette_fta_composition;
 
@@ -838,23 +849,42 @@ if ($mode_etiquette_fta_composition == 3) {
         $image_modif = $html_image_modif;
         $color_modif = $html_color_modif;
     }
-    $liste_etiquette = DatabaseDescription::getFieldDocLabel(FtaComposantModel::TABLENAME, FtaComposantModel::FIELDNAME_ETIQUETTE_ID_FTA_COMPOSITION)
-            . "</td><td " . $color_modif . ">"
-    ;
-    $bloc.="<tr class=contenu><td " . $color_modif . ">" . $liste_etiquette;
-    /*    if($proprietaire)
-      { */
-    $requete = " SELECT " . FtaComposantModel::KEYNAME . ", " . FtaComposantModel::FIELDNAME_NOM_FTA_COMPOSITION
-            . " FROM " . FtaComposantModel::TABLENAME
-            . " WHERE " . FtaComposantModel::TABLENAME . "." . FtaComposantModel::FIELDNAME_ID_FTA . "=" . $id_fta
-            . " AND " . FtaComposantModel::KEYNAME . "<>" . $id_fta_composant
-            . " AND " . FtaComposantModel::FIELDNAME_IS_NOMENCLATURE_FTA_COMPOSANT . "=1 "
-            . " ORDER BY " . FtaComposantModel::FIELDNAME_NOM_FTA_COMPOSITION
-    ;
+//    $liste_etiquette = DatabaseDescription::getFieldDocLabel(FtaComposantModel::TABLENAME, FtaComposantModel::FIELDNAME_ETIQUETTE_ID_FTA_COMPOSITION)
+//            . "</td><td " . $color_modif . ">"
+//    ;
+//    $bloc.="<tr class=contenu><td " . $color_modif . ">" . $liste_etiquette;
+//    /*    if($proprietaire)
+//      { */
+//    $requete = " SELECT " . FtaComposantModel::KEYNAME . ", " . FtaComposantModel::FIELDNAME_NOM_FTA_COMPOSITION
+//            . " FROM " . FtaComposantModel::TABLENAME
+//            . " WHERE " . FtaComposantModel::TABLENAME . "." . FtaComposantModel::FIELDNAME_ID_FTA . "=" . $id_fta
+//            . " AND " . FtaComposantModel::KEYNAME . "<>" . $id_fta_composant
+//            . " AND " . FtaComposantModel::FIELDNAME_IS_NOMENCLATURE_FTA_COMPOSANT . "=1 "
+//            . " ORDER BY " . FtaComposantModel::FIELDNAME_NOM_FTA_COMPOSITION
+//    ;
+//
+//    $nom_defaut = FtaComposantModel::FIELDNAME_ETIQUETTE_ID_FTA_COMPOSITION;
+//    $id_defaut = $etiquette_id_fta_composition;
+//    $bloc.= AccueilFta::afficherRequeteEnListeDeroulante($requete, $id_defaut, $nom_defaut, $editable) . $image_modif;
 
-    $nom_defaut = FtaComposantModel::FIELDNAME_ETIQUETTE_ID_FTA_COMPOSITION;
-    $id_defaut = $etiquette_id_fta_composition;
-    $bloc.= AccueilFta::afficherRequeteEnListeDeroulante($requete, $id_defaut, $nom_defaut, $editable) . $image_modif;
+    $HtmlList = new HtmlListSelect();
+
+    $HtmlList->setArrayListContent($requete);
+    $HtmlTableName = FtaComposantModel::TABLENAME
+            . '_'
+            . FtaComposantModel::FIELDNAME_ETIQUETTE_ID_FTA_COMPOSITION
+            . '_'
+            . $id_fta_composant
+    ;
+    $HtmlList->getAttributes()->getName()->setValue(FtaComposantModel::FIELDNAME_ETIQUETTE_ID_FTA_COMPOSITION);
+    $HtmlList->setLabel(DatabaseDescription::getFieldDocLabel(FtaComposantModel::TABLENAME, FtaComposantModel::FIELDNAME_NOM_FTA_COMPOSITION));
+    $HtmlList->setIsEditable($editable);
+    $HtmlList->initAbstractHtmlSelect(
+            $HtmlTableName, $paramObjetList->getLabel(), $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_ETIQUETTE_ID_FTA_COMPOSITION)->getFieldValue(), NULL, $paramObjetList->getArrayListContent());
+    $HtmlList->getEventsForm()->setOnChangeWithAjaxAutoSave(FtaComposantModel::TABLENAME, FtaComposantModel::KEYNAME, $id_fta_composant, FtaComposantModel::FIELDNAME_ETIQUETTE_ID_FTA_COMPOSITION);
+
+
+    $bloc .= $HtmlList->getHtmlResult();
 }
 /* }else{
   $k_etiquette=$$champ;
@@ -881,89 +911,105 @@ $bloc .= "</td></tr>
 /**
  * Energie en kcal
  */
-$bloc .= "<tr><td " . $color_modif . ">" . DatabaseDescription::getFieldDocLabel(FtaComposantModel::TABLENAME, FtaComposantModel::FIELDNAME_VAL_NUT_KCAL) . "</td><td " . $color_modif . ">";
-if ($proprietaire) {
-    $bloc .= "<input type=text name=" . FtaComposantModel::FIELDNAME_VAL_NUT_KCAL . " value='" . $val_nut_kcal . "' size=50/>";
-} else {
-    $bloc .=$val_nut_kcal;
-    $bloc .= "<input type=hidden name=" . FtaComposantModel::FIELDNAME_VAL_NUT_KCAL . " value='" . $val_nut_kcal . "'/>";
-}
+//$bloc .= "<tr><td " . $color_modif . ">" . DatabaseDescription::getFieldDocLabel(FtaComposantModel::TABLENAME, FtaComposantModel::FIELDNAME_VAL_NUT_KCAL) . "</td><td " . $color_modif . ">";
+//if ($proprietaire) {
+//    $bloc .= "<input type=text name=" . FtaComposantModel::FIELDNAME_VAL_NUT_KCAL . " value='" . $val_nut_kcal . "' size=50/>";
+//} else {
+//    $bloc .=$val_nut_kcal;
+//    $bloc .= "<input type=hidden name=" . FtaComposantModel::FIELDNAME_VAL_NUT_KCAL . " value='" . $val_nut_kcal . "'/>";
+$bloc .=$ftaComposantView->getHtmlDataField(FtaComposantModel::FIELDNAME_VAL_NUT_KCAL);
+
+//}
 /**
  * Energie en kJ
  */
-$bloc .= "<tr><td " . $color_modif . ">" . DatabaseDescription::getFieldDocLabel(FtaComposantModel::TABLENAME, FtaComposantModel::FIELDNAME_VAL_NUT_KJ) . "</td><td " . $color_modif . ">";
-if ($proprietaire) {
-    $bloc .= "<input type=text name=" . FtaComposantModel::FIELDNAME_VAL_NUT_KJ . " value='" . $val_nut_kj . "' size=50/>";
-} else {
-    $bloc .=$val_nut_kj;
-    $bloc .= "<input type=hidden name=" . FtaComposantModel::FIELDNAME_VAL_NUT_KJ . " value='" . $val_nut_kj . "'/>";
-}
+//$bloc .= "<tr><td " . $color_modif . ">" . DatabaseDescription::getFieldDocLabel(FtaComposantModel::TABLENAME, FtaComposantModel::FIELDNAME_VAL_NUT_KJ) . "</td><td " . $color_modif . ">";
+//if ($proprietaire) {
+//    $bloc .= "<input type=text name=" . FtaComposantModel::FIELDNAME_VAL_NUT_KJ . " value='" . $val_nut_kj . "' size=50/>";
+//} else {
+//    $bloc .=$val_nut_kj;
+//    $bloc .= "<input type=hidden name=" . FtaComposantModel::FIELDNAME_VAL_NUT_KJ . " value='" . $val_nut_kj . "'/>";
+$bloc .=$ftaComposantView->getHtmlDataField(FtaComposantModel::FIELDNAME_VAL_NUT_KJ);
+
+//}
 
 /**
  * Matières grasses
  */
-$bloc .= "<tr><td " . $color_modif . ">" . DatabaseDescription::getFieldDocLabel(FtaComposantModel::TABLENAME, FtaComposantModel::FIELDNAME_VAL_MAT_GRASSE) . "</td><td " . $color_modif . ">";
-if ($proprietaire) {
-    $bloc .= "<input type=text name=" . FtaComposantModel::FIELDNAME_VAL_MAT_GRASSE . " value='" . $val_nut_mat_grasse . "' size=50/>";
-} else {
-    $bloc .=$val_nut_mat_grasse;
-    $bloc .= "<input type=hidden name=" . FtaComposantModel::FIELDNAME_VAL_MAT_GRASSE . " value='" . $val_nut_mat_grasse . "'/>";
-}
+//$bloc .= "<tr><td " . $color_modif . ">" . DatabaseDescription::getFieldDocLabel(FtaComposantModel::TABLENAME, FtaComposantModel::FIELDNAME_VAL_MAT_GRASSE) . "</td><td " . $color_modif . ">";
+//if ($proprietaire) {
+//    $bloc .= "<input type=text name=" . FtaComposantModel::FIELDNAME_VAL_MAT_GRASSE . " value='" . $val_nut_mat_grasse . "' size=50/>";
+//} else {
+//    $bloc .=$val_nut_mat_grasse;
+//    $bloc .= "<input type=hidden name=" . FtaComposantModel::FIELDNAME_VAL_MAT_GRASSE . " value='" . $val_nut_mat_grasse . "'/>";
+$bloc .=$ftaComposantView->getHtmlDataField(FtaComposantModel::FIELDNAME_VAL_MAT_GRASSE);
+
+//}
 
 /**
  * Acides gras
  */
-$bloc .= "<tr><td " . $color_modif . ">" . DatabaseDescription::getFieldDocLabel(FtaComposantModel::TABLENAME, FtaComposantModel::FIELDNAME_VAL_ACIDE_GRAS) . "</td><td " . $color_modif . ">";
-if ($proprietaire) {
-    $bloc .= "<input type=text name=" . FtaComposantModel::FIELDNAME_VAL_ACIDE_GRAS . " value='" . $val_nut_acide_gras . "' size=50/>";
-} else {
-    $bloc .=$val_nut_acide_gras;
-    $bloc .= "<input type=hidden name=" . FtaComposantModel::FIELDNAME_VAL_ACIDE_GRAS . " value='" . $val_nut_acide_gras . "'/>";
-}
+//$bloc .= "<tr><td " . $color_modif . ">" . DatabaseDescription::getFieldDocLabel(FtaComposantModel::TABLENAME, FtaComposantModel::FIELDNAME_VAL_ACIDE_GRAS) . "</td><td " . $color_modif . ">";
+//if ($proprietaire) {
+//    $bloc .= "<input type=text name=" . FtaComposantModel::FIELDNAME_VAL_ACIDE_GRAS . " value='" . $val_nut_acide_gras . "' size=50/>";
+//} else {
+//    $bloc .=$val_nut_acide_gras;
+//    $bloc .= "<input type=hidden name=" . FtaComposantModel::FIELDNAME_VAL_ACIDE_GRAS . " value='" . $val_nut_acide_gras . "'/>";
+$bloc .=$ftaComposantView->getHtmlDataField(FtaComposantModel::FIELDNAME_VAL_ACIDE_GRAS);
+
+//}
 
 /**
  * Glucides
  */
-$bloc .= "<tr><td " . $color_modif . ">" . DatabaseDescription::getFieldDocLabel(FtaComposantModel::TABLENAME, FtaComposantModel::FIELDNAME_VAL_GLUCIDE) . "</td><td " . $color_modif . ">";
-if ($proprietaire) {
-    $bloc .= "<input type=text name=" . FtaComposantModel::FIELDNAME_VAL_GLUCIDE . " value='" . $val_nut_glucide . "' size=50/>";
-} else {
-    $bloc .=$val_nut_glucide;
-    $bloc .= "<input type=hidden name=" . FtaComposantModel::FIELDNAME_VAL_GLUCIDE . " value='" . $val_nut_glucide . "'/>";
-}
+//$bloc .= "<tr><td " . $color_modif . ">" . DatabaseDescription::getFieldDocLabel(FtaComposantModel::TABLENAME, FtaComposantModel::FIELDNAME_VAL_GLUCIDE) . "</td><td " . $color_modif . ">";
+//if ($proprietaire) {
+//    $bloc .= "<input type=text name=" . FtaComposantModel::FIELDNAME_VAL_GLUCIDE . " value='" . $val_nut_glucide . "' size=50/>";
+//} else {
+//    $bloc .=$val_nut_glucide;
+//    $bloc .= "<input type=hidden name=" . FtaComposantModel::FIELDNAME_VAL_GLUCIDE . " value='" . $val_nut_glucide . "'/>";
+$bloc .=$ftaComposantView->getHtmlDataField(FtaComposantModel::FIELDNAME_VAL_GLUCIDE);
+
+//}
 
 /**
  * Sucres
  */
-$bloc .= "<tr><td " . $color_modif . ">" . DatabaseDescription::getFieldDocLabel(FtaComposantModel::TABLENAME, FtaComposantModel::FIELDNAME_VAL_SUCRE) . "</td><td " . $color_modif . ">";
-if ($proprietaire) {
-    $bloc .= "<input type=text name=" . FtaComposantModel::FIELDNAME_VAL_SUCRE . " value='" . $val_nut_sucre . "' size=50/>";
-} else {
-    $bloc .=$val_nut_sucre;
-    $bloc .= "<input type=hidden name=" . FtaComposantModel::FIELDNAME_VAL_SUCRE . " value='" . $val_nut_sucre . "'/>";
-}
+//$bloc .= "<tr><td " . $color_modif . ">" . DatabaseDescription::getFieldDocLabel(FtaComposantModel::TABLENAME, FtaComposantModel::FIELDNAME_VAL_SUCRE) . "</td><td " . $color_modif . ">";
+//if ($proprietaire) {
+//    $bloc .= "<input type=text name=" . FtaComposantModel::FIELDNAME_VAL_SUCRE . " value='" . $val_nut_sucre . "' size=50/>";
+//} else {
+//    $bloc .=$val_nut_sucre;
+//    $bloc .= "<input type=hidden name=" . FtaComposantModel::FIELDNAME_VAL_SUCRE . " value='" . $val_nut_sucre . "'/>";
+$bloc .=$ftaComposantView->getHtmlDataField(FtaComposantModel::FIELDNAME_VAL_SUCRE);
+
+//}
 
 /**
  * Protéine
  */
-$bloc .= "<tr><td " . $color_modif . ">" . DatabaseDescription::getFieldDocLabel(FtaComposantModel::TABLENAME, FtaComposantModel::FIELDNAME_VAL_PROTEINE) . "</td><td " . $color_modif . ">";
-if ($proprietaire) {
-    $bloc .= "<input type=text name=" . FtaComposantModel::FIELDNAME_VAL_PROTEINE . " value='" . $val_nut_proteine . "' size=50/>";
-} else {
-    $bloc .=$val_nut_proteine;
-    $bloc .= "<input type=hidden name=" . FtaComposantModel::FIELDNAME_VAL_PROTEINE . " value='" . $val_nut_proteine . "'/>";
-}
+//$bloc .= "<tr><td " . $color_modif . ">" . DatabaseDescription::getFieldDocLabel(FtaComposantModel::TABLENAME, FtaComposantModel::FIELDNAME_VAL_PROTEINE) . "</td><td " . $color_modif . ">";
+//if ($proprietaire) {
+//    $bloc .= "<input type=text name=" . FtaComposantModel::FIELDNAME_VAL_PROTEINE . " value='" . $val_nut_proteine . "' size=50/>";
+//} else {
+//    $bloc .=$val_nut_proteine;
+//    $bloc .= "<input type=hidden name=" . FtaComposantModel::FIELDNAME_VAL_PROTEINE . " value='" . $val_nut_proteine . "'/>";
+$bloc .=$ftaComposantView->getHtmlDataField(FtaComposantModel::FIELDNAME_VAL_PROTEINE);
+
+//}
 
 /**
  * Sel
  */
-$bloc .= "<tr><td " . $color_modif . ">" . DatabaseDescription::getFieldDocLabel(FtaComposantModel::TABLENAME, FtaComposantModel::FIELDNAME_VAL_SEL) . "</td><td " . $color_modif . ">";
-if ($proprietaire) {
-    $bloc .= "<input type=text name=" . FtaComposantModel::FIELDNAME_VAL_SEL . " value='" . $val_nut_sel . "' size=50/>";
-} else {
-    $bloc .=$val_nut_sel;
-    $bloc .= "<input type=hidden name=" . FtaComposantModel::FIELDNAME_VAL_SEL . " value='" . $val_nut_sel . "'/>";
-}
+//$bloc .= "<tr><td " . $color_modif . ">" . DatabaseDescription::getFieldDocLabel(FtaComposantModel::TABLENAME, FtaComposantModel::FIELDNAME_VAL_SEL) . "</td><td " . $color_modif . ">";
+//if ($proprietaire) {
+//    $bloc .= "<input type=text name=" . FtaComposantModel::FIELDNAME_VAL_SEL . " value='" . $val_nut_sel . "' size=50/>";
+//} else {
+//    $bloc .=$val_nut_sel;
+//    $bloc .= "<input type=hidden name=" . FtaComposantModel::FIELDNAME_VAL_SEL . " value='" . $val_nut_sel . "'/>";
+$bloc .=$ftaComposantView->getHtmlDataField(FtaComposantModel::FIELDNAME_VAL_SEL);
+
+//}
 
 
 

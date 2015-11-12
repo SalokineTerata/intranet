@@ -35,6 +35,7 @@ class DataFieldToHtmlSubform_R1N extends HtmlSubForm_R1N {
                         , $paramDataField->getFieldValue()
                         , explode(',', $paramDataField->getFieldsToDisplay())
                         , explode(',', $paramDataField->getFieldsToOrder())
+                        , $paramDataField->getConditionSql()
         );
         parent::__construct($paramArrayContent
                 , ModelTableAssociation::getModelName($paramDataField->getReferencedTableName())

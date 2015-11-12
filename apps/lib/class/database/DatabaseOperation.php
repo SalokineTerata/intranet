@@ -781,7 +781,7 @@ class DatabaseOperation {
         }
 
         return
-                'SELECT ' . $paramSelectClause
+                'SELECT DISTINCT ' . $paramSelectClause
                 . ' FROM ' . $paramTableClause
                 . ' WHERE ' . $paramWhereClause
                 . $orderClauseToAdd
@@ -816,6 +816,7 @@ class DatabaseOperation {
     , $foreignKeyValue
     , $arrayFieldsNameToDisplay
     , $arrayFieldsNameOrder = NULL
+    , $condtionSql = NULL
     ) {
 
         /**
@@ -839,6 +840,7 @@ class DatabaseOperation {
         $paramTableClause = $tableNameRN . ',' . $tableNameR1;
         $paramWhereClauseRelationship = $tableNameRN . '.' . $foreignKeyNameRN . ' = ' . $tableNameR1 . '.' . $foreignKeyNameR1;
         $paramWhereClause = $tableNameRN . '.' . $foreignKeyNameRN . ' = ' . $foreignKeyValue . ' AND ' . $paramWhereClauseRelationship;
+        $paramWhereClause .= ' ' . $condtionSql;
         if ($arrayFieldsNameOrder) {
             $paramOrderClause = implode(',', $arrayFieldsNameOrder);
         }
@@ -875,6 +877,7 @@ class DatabaseOperation {
     , $arrayFieldsNameToDisplay
     , $arrayFieldsNameOrder = NULL
     , $keyValue = NULL
+    , $conditionSql = NULL
     ) {
 
         /**
@@ -890,6 +893,7 @@ class DatabaseOperation {
         $paramSelectClause = $primaryTableNameRN . '.' . $keyNameRN . ',' . $arrayFieldsNameToDisplay;
         $paramTableClause = $primaryTableNameRN . DatabaseOperation::tableClauseRelationship($secondaryTablesNamesAndidKeyValueRN, $keyValue);
         $paramWhereClauseRelationship = ' 1 ' . DatabaseOperation::whereClauseRelationshipNtoN($primaryTableNameRN, $secondaryTablesNamesAndidKeyValueRN, $keyValue);
+        $paramWhereClauseRelationship .= ' ' . $conditionSql;
 
         if ($arrayFieldsNameOrder) {
             $paramOrderClause = implode(',', $arrayFieldsNameOrder);

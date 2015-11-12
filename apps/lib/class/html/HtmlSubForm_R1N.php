@@ -238,7 +238,7 @@ class HtmlSubForm_R1N extends HtmlSubForm {
                      * et que le champs ne fait pas partie de la liste des champs
                      * vérrouillés, alors le champs sera modifiable par l'utilisateur.
                      */
-                    if (parent::getIsEditable() && !in_array($fieldName, $this->getContentLocked())) {
+                    if (parent::getIsEditable() && $this->getContentLocked() == NULL) {
 
                         /**
                          * Le champs est modifiable.

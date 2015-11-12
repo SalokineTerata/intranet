@@ -116,7 +116,6 @@ switch ($action) {
             $is_composition_fta_composant = 1;
 
             //En revanche, un composant créé au niveau de la composition n'intervient pas dans la nomenclature
-            $id_fta_composant = FtaComposantModel::InsertFtaComposant($id_fta);
             $ftaComposantModel = new FtaComposantModel($id_fta_composant);
 
             /**

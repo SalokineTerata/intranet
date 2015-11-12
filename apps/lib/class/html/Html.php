@@ -57,7 +57,7 @@ class Html {
     }
 
     public static function showValue($value) {
-        return htmlspecialchars(nl2br($value));
+        return htmlspecialchars($value);
     }
 
     public static function popup($paramPopupName

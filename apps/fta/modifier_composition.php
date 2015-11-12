@@ -86,6 +86,7 @@ $syntheseAction = Lib::getParameterFromRequest('synthese_action');
 $globalConfig = new GlobalConfig();
 $id_user = $globalConfig->getAuthenticatedUser()->getKeyValue();
 $proprietaire = Lib::getParameterFromRequest('proprietaire');
+$checkCreation = Lib::isDefined('checkCreation');
 //Bouton Valider
 if ($proprietaire) {
     $editable = TRUE;
@@ -171,16 +172,35 @@ if ($id_fta_composant) {
     $etiquette_information_complementaire_recto_fta_composant = $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_ETIQUETTE_INFORMATION_COMPLEMENTAIRE_RECTO_FTA_COMPOSANT)->getFieldValue();
     $etiquette_libelle_legal_fta_composition = $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_ETIQUETTE_LIBELLE_LEGAL_FTA_COMPOSITION)->getFieldValue();
     $code_produit_agrologic_fta_nomenclature = $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_CODE_PRODUIT_AGROLOGIC_FTA_NOMENCLATURE)->getFieldValue();
+    $id_prefixe_code_produit_agrologic_fta_nomenclature = $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_ID_ANNEXE_AGRO_ART_CODIFICATION)->getFieldValue();
+    if ($id_prefixe_code_produit_agrologic_fta_nomenclature) {
+        $annexexAgrologicModel = new AnnexeAgrologicArticleCodificationModel($id_prefixe_code_produit_agrologic_fta_nomenclature);
+        $prefixe_code_produit_agrologic_fta_nomenclature = $annexexAgrologicModel->getDataField(AnnexeAgrologicArticleCodificationModel::FIELDNAME_PREFIXE_ANNEXE_AGRO_ART_COD)->getFieldValue();
+    }
 } else {
-    $creation = 1;
+    if (!$checkCreation) {
+        $creation = 1;
+        $id_fta_composant = FtaComposantModel::InsertFtaComposition($id_fta);
+        $ftaComposantModel = new FtaComposantModel($id_fta_composant);
+        $ftaComposantView = new FtaComposantView($ftaComposantModel);
+        $ftaComposantView->setIsEditable($editable);
+        $ftaComposantView2 = new FtaComposantView($ftaComposantModel);
+        $_SESSION['checkCreation']=$creation;
+    } else {
+        $titre = "Erreur ";
+        $message = "Veuillez utiliser les boutons de navigation";
+        afficher_message($titre, $message, $redirection);
+    }
+
 //Ce composant sera géré dans la composition
 //$is_composition_fta_composant = 1;
 //La création d'un composant dans la composition n'inclus pas ce composant dans la nomenclature
 //$is_nomenclature_fta_nomenclature = 0;
 }
-$ftaModel = new FtaModel($id_fta);
 
 //Chargement des données de la FTA
+$ftaModel = new FtaModel($id_fta);
+
 //mysql_table_load("fta");
 //echo $id_fta."<br>";
 $bloc = ""; //Bloc de saisie
@@ -196,7 +216,7 @@ $bloc .= $ftaComposantView->getHtmlDataField(FtaComposantModel::FIELDNAME_NOM_FT
 //Code Produit Agrologic
 $bloc .= "<tr><td>" . DatabaseDescription::getFieldDocLabel(FtaComposantModel::TABLENAME, FtaComposantModel::FIELDNAME_CODE_PRODUIT_AGROLOGIC_FTA_NOMENCLATURE) . "</td><td>";
 
-$bloc .=$code_produit_agrologic_fta_nomenclature;
+$bloc .=$prefixe_code_produit_agrologic_fta_nomenclature . $code_produit_agrologic_fta_nomenclature;
 
 $bloc.="</td></tr>";
 
@@ -225,14 +245,12 @@ $bloc.="</td></tr>";
 //Site de Fabrication
 $SiteDeProduction = $ftaModel->getDataField(FtaModel::FIELDNAME_SITE_ASSEMBLAGE)->getFieldValue();
 
-if ($proprietaire) {
 
-    $HtmlList = new HtmlListSelect();
+//Site de facbrication de la composition
+$HtmlList = new HtmlListSelect();
 
-    $bloc .= GeoModel::ShowListeDeroulanteSiteProdByAccesAndIdFta($id_user, $HtmlList, $editable, $id_fta);
-} else {
-    $bloc .= "<tr><td>" . DatabaseDescription::getFieldDocLabel(GeoModel::TABLENAME, GeoModel::FIELDNAME_GEO) . "</td><td>" . $SiteDeProduction;
-}
+$bloc .= FtaComposantModel::ShowListeDeroulanteSiteProdForComposant($HtmlList, $editable, $id_fta, $id_fta_composant, FtaComposantModel::FIELDNAME_ID_GEO);
+
 //$bloc.="</td></tr>";
 //echo $id_fta."<br>";
 //Durée de Vie

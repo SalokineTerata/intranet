@@ -188,11 +188,32 @@ class FtaComposantModel extends AbstractModel {
         );
     }
 
+    /**
+     * On obtient la liste des composants
+     * @param int $paramIdFta
+     * @return array
+     */
     public static function getIdFtaComposant($paramIdFta) {
         $arrayIdFtaComposant = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
                         'SELECT ' . FtaComposantModel::KEYNAME
                         . ' FROM ' . FtaComposantModel::TABLENAME
                         . ' WHERE ' . FtaComposantModel::FIELDNAME_ID_FTA . '=' . $paramIdFta
+                        . ' AND ' . FtaComposantModel::FIELDNAME_IS_NOMENCLATURE_FTA_COMPOSANT . '=1'
+        );
+        return $arrayIdFtaComposant;
+    }
+
+    /**
+     * On obtien la liste des compositions
+     * @param int $paramIdFta
+     * @return array
+     */
+    public static function getIdFtaComposition($paramIdFta) {
+        $arrayIdFtaComposant = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
+                        'SELECT ' . FtaComposantModel::KEYNAME
+                        . ' FROM ' . FtaComposantModel::TABLENAME
+                        . ' WHERE ' . FtaComposantModel::FIELDNAME_ID_FTA . '=' . $paramIdFta
+                        . ' AND ' . FtaComposantModel::FIELDNAME_IS_COMPOSITION_FTA_COMPOSANT . '=1'
         );
         return $arrayIdFtaComposant;
     }
@@ -245,7 +266,55 @@ class FtaComposantModel extends AbstractModel {
         return $tablesNameAndIdForeignKeyOfFtaConditionnement;
     }
 
+    /**
+     * Ajouter une composition
+     * @param type $paramIdFta
+     * @param type $paramIdChapitre
+     * @param type $paramSyntheseAction
+     * @param type $paramComeback
+     * @param type $paramIdFtaEtat
+     * @param type $paramAbreviationEtat
+     * @param type $paramIdFtaRole
+     * @param type $paramProprietaire
+     * @return type
+     */
+    public static function getAddLinkComposition($paramIdFta, $paramIdChapitre, $paramSyntheseAction, $paramComeback, $paramIdFtaEtat, $paramAbreviationEtat, $paramIdFtaRole, $paramProprietaire) {
+        return 'modifier_composition.php?id_fta=' . $paramIdFta
+                . '&id_fta_chapitre_encours=' . $paramIdChapitre
+                . '&synthese_action=' . $paramSyntheseAction
+                . '&proprietaire=' . $paramProprietaire
+                . '&comeback=' . $paramComeback
+                . '&id_fta_etat=' . $paramIdFtaEtat
+                . '&abreviation_fta_etat=' . $paramAbreviationEtat
+                . '&id_fta_role=' . $paramIdFtaRole
+        ;
+    }
+
+    /**
+     * Ajouter un composant
+     * @param type $paramIdFta
+     * @param type $paramIdChapitre
+     * @param type $paramSyntheseAction
+     * @param type $paramComeback
+     * @param type $paramIdFtaEtat
+     * @param type $paramAbreviationEtat
+     * @param type $paramIdFtaRole
+     * @param type $paramProprietaire
+     * @return type
+     */
     public static function getAddLinkComposant($paramIdFta, $paramIdChapitre, $paramSyntheseAction, $paramComeback, $paramIdFtaEtat, $paramAbreviationEtat, $paramIdFtaRole, $paramProprietaire) {
+        return 'modifier_composant.php?id_fta=' . $paramIdFta
+                . '&id_fta_chapitre_encours=' . $paramIdChapitre
+                . '&synthese_action=' . $paramSyntheseAction
+                . '&proprietaire=' . $paramProprietaire
+                . '&comeback=' . $paramComeback
+                . '&id_fta_etat=' . $paramIdFtaEtat
+                . '&abreviation_fta_etat=' . $paramAbreviationEtat
+                . '&id_fta_role=' . $paramIdFtaRole
+        ;
+    }
+
+    public static function getAddAfterLinkComposition($paramIdFta, $paramIdChapitre, $paramSyntheseAction, $paramComeback, $paramIdFtaEtat, $paramAbreviationEtat, $paramIdFtaRole, $paramProprietaire) {
         return 'modifier_composition.php?id_fta=' . $paramIdFta
                 . '&id_fta_chapitre_encours=' . $paramIdChapitre
                 . '&synthese_action=' . $paramSyntheseAction
@@ -257,28 +326,43 @@ class FtaComposantModel extends AbstractModel {
         ;
     }
 
-    public static function getAddAfterLinkComposant($paramIdFta, $paramIdChapitre, $paramSyntheseAction, $paramComeback, $paramIdFtaEtat, $paramAbreviationEtat, $paramIdFtaRole, $paramProprietaire) {
-        return 'modifier_composition.php?id_fta=' . $paramIdFta
-                . '&id_fta_chapitre_encours=' . $paramIdChapitre
-                . '&synthese_action=' . $paramSyntheseAction
-                . '&proprietaire=' . $paramProprietaire
-                . '&comeback=' . $paramComeback
-                . '&id_fta_etat=' . $paramIdFtaEtat
-                . '&abreviation_fta_etat=' . $paramAbreviationEtat
-                . '&id_fta_role=' . $paramIdFtaRole
-        ;
-    }
-
-    public static function getTableComposantLabel($paramIdFtaConditionnment) {
-        $ftaCondtionnementModel = new FtaComposantModel($paramIdFtaConditionnment);
+    /**
+     * 
+     * @param type $paramIdFtaComposant
+     * @return type
+     */
+    public static function getTableCompositionLabel($paramIdFtaComposant) {
+        $ftaComposantModel = new FtaComposantModel($paramIdFtaComposant);
 
         return '<tr class=titre_tableau  align=center >' .
-                '<td>' . $ftaCondtionnementModel->getDataField(FtaComposantModel::FIELDNAME_NOM_FTA_COMPOSITION)->getFieldLabel() . '</td>'
-                . '<td>' . $ftaCondtionnementModel->getDataField(FtaComposantModel::FIELDNAME_INGREDIENT_FTA_COMPOSITION)->getFieldLabel() . '</td>'
-                . '<td>' . $ftaCondtionnementModel->getDataField(FtaComposantModel::FIELDNAME_ID_GEO)->getFieldLabel() . '</td>'
-                . '<td>' . $ftaCondtionnementModel->getDataField(FtaComposantModel::FIELDNAME_POIDS_FTA_COMPOSITION)->getFieldLabel() . '</td>'
+                '<td>' . $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_NOM_FTA_COMPOSITION)->getFieldLabel() . '</td>'
+                . '<td>' . $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_INGREDIENT_FTA_COMPOSITION)->getFieldLabel() . '</td>'
+                . '<td>' . $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_ID_GEO)->getFieldLabel() . '</td>'
+                . '<td>' . $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_POIDS_FTA_COMPOSITION)->getFieldLabel() . '</td>'
 //                . '<td>Répartition (en %)</td>'
-                . '<td>' . $ftaCondtionnementModel->getDataField(FtaComposantModel::FIELDNAME_QUANTITE_FTA_COMPOSITION)->getFieldLabel() . '</td>'
+                . '<td>' . $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_QUANTITE_FTA_COMPOSITION)->getFieldLabel() . '</td>'
+                . '<td>Actions</td>'
+                . '</tr>';
+    }
+
+    /**
+     * 
+     * @param type $paramIdFtaComposant
+     * @return type
+     */
+    public static function getTableComposantLabel($paramIdFtaComposant) {
+        $ftaComposantModel = new FtaComposantModel($paramIdFtaComposant);
+
+        return '<tr class=titre_tableau  align=center >' .
+                '<td>' . $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_ID_ANNEXE_AGRO_ART_CODIFICATION)->getFieldLabel() . '</td>'
+                . '<td>' . $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_CODE_PRODUIT_AGROLOGIC_FTA_NOMENCLATURE)->getFieldLabel() . '</td>'
+                . '<td>' . $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_DESIGNATION_CODIFICATION)->getFieldLabel() . '</td>'
+                . '<td>' . $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_POIDS_UNITAIRE_CODIFICATION)->getFieldLabel() . '</td>'
+                . '<td>' . $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_ID_ANNEXE_UNITE)->getFieldLabel() . '</td>'
+                . '<td>' . $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_SITE_PRODUCTION_FTA_CODIFICATION)->getFieldLabel() . '</td>'
+                . '<td>' . $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_ETAT_FTA_CODIFICATION)->getFieldLabel() . '</td>'
+                . '<td>' . $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_QUANTITE_PIECE_PAR_CARTON)->getFieldLabel() . '</td>'
+                . '<td>' . $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_POIDS_TOTAL_CARTON_VRAC_FTA_NOMENCLATURE)->getFieldLabel() . '</td>'
                 . '<td>Actions</td>'
                 . '</tr>';
     }
@@ -286,8 +370,22 @@ class FtaComposantModel extends AbstractModel {
     public static function InsertFtaComposant($paramIdFta) {
         $pdo = DatabaseOperation::executeComplete(
                         'INSERT INTO ' . FtaComposantModel::TABLENAME
-                        . '(' . FtaComposantModel::FIELDNAME_ID_FTA . ')'
-                        . 'VALUES (' . $paramIdFta . ')'
+                        . '(' . FtaComposantModel::FIELDNAME_ID_FTA
+                        . ',' . FtaComposantModel::FIELDNAME_IS_NOMENCLATURE_FTA_COMPOSANT . ')'
+                        . 'VALUES (' . $paramIdFta . ',' . '1' . ')'
+        );
+        $key = $pdo->lastInsertId();
+
+        return $key;
+    }
+
+    public static function InsertFtaComposition($paramIdFta) {
+        $pdo = DatabaseOperation::executeComplete(
+                        'INSERT INTO ' . FtaComposantModel::TABLENAME
+                        . '(' . FtaComposantModel::FIELDNAME_ID_FTA
+                        . ',' . FtaComposantModel::FIELDNAME_IS_COMPOSITION_FTA_COMPOSANT
+                        . ',' . FtaComposantModel::FIELDNAME_IS_NOMENCLATURE_FTA_COMPOSANT . ')'
+                        . 'VALUES (' . $paramIdFta . ',' . '1' . ',' . '0' . ')'
         );
         $key = $pdo->lastInsertId();
 
@@ -317,7 +415,7 @@ class FtaComposantModel extends AbstractModel {
      * @param int $paramIdFtaRole
      * @return string
      */
-    public static function getDeleteLinkComposant($paramIdFta, $paramIdChapitre, $paramIdFtaComposant, $paramSyntheseAction, $paramComeback, $paramIdFtaEtat, $paramAbreviationEtat, $paramIdFtaRole) {
+    public static function getDeleteLinkComposition($paramIdFta, $paramIdChapitre, $paramIdFtaComposant, $paramSyntheseAction, $paramComeback, $paramIdFtaEtat, $paramAbreviationEtat, $paramIdFtaRole) {
         foreach ($paramIdFtaComposant as $rows) {
             $return[$rows] = 'modification_fiche_post.php?'
                     . 'id_fta=' . $paramIdFta
@@ -334,7 +432,50 @@ class FtaComposantModel extends AbstractModel {
         return $return;
     }
 
+    /**
+     * Detail d'un composant
+     * @param type $paramIdFta
+     * @param type $paramIdChapitre
+     * @param type $paramIdFtaComposant
+     * @param type $paramSyntheseAction
+     * @param type $paramComeback
+     * @param type $paramIdFtaEtat
+     * @param type $paramAbreviationEtat
+     * @param type $paramIdFtaRole
+     * @param type $paramProprietaire
+     * @return string
+     */
     public static function getDetailLinkComposant($paramIdFta, $paramIdChapitre, $paramIdFtaComposant, $paramSyntheseAction, $paramComeback, $paramIdFtaEtat, $paramAbreviationEtat, $paramIdFtaRole, $paramProprietaire) {
+        foreach ($paramIdFtaComposant as $rows) {
+            $return[$rows] = 'modifier_composant.php?'
+                    . 'id_fta=' . $paramIdFta
+                    . '&id_fta_chapitre_encours=' . $paramIdChapitre
+                    . '&id_fta_composant=' . $rows
+                    . '&synthese_action=' . $paramSyntheseAction
+                    . '&proprietaire=' . $paramProprietaire
+                    . '&comeback=' . $paramComeback
+                    . '&id_fta_etat=' . $paramIdFtaEtat
+                    . '&abreviation_fta_etat=' . $paramAbreviationEtat
+                    . '&id_fta_role=' . $paramIdFtaRole
+            ;
+        }
+        return $return;
+    }
+
+    /**
+     * Detail d'un composition
+     * @param type $paramIdFta
+     * @param type $paramIdChapitre
+     * @param type $paramIdFtaComposant
+     * @param type $paramSyntheseAction
+     * @param type $paramComeback
+     * @param type $paramIdFtaEtat
+     * @param type $paramAbreviationEtat
+     * @param type $paramIdFtaRole
+     * @param type $paramProprietaire
+     * @return string
+     */
+    public static function getDetailLinkComposition($paramIdFta, $paramIdChapitre, $paramIdFtaComposant, $paramSyntheseAction, $paramComeback, $paramIdFtaEtat, $paramAbreviationEtat, $paramIdFtaRole, $paramProprietaire) {
         foreach ($paramIdFtaComposant as $rows) {
             $return[$rows] = 'modifier_composition.php?'
                     . 'id_fta=' . $paramIdFta
@@ -351,33 +492,108 @@ class FtaComposantModel extends AbstractModel {
         return $return;
     }
 
-    public static function ShowListeDeroulanteNomCodeProduitAgrologicByIdFta($paramObjetList, $paramIsEditable, $paramIdFta) {
+    /**
+     * 
+     * @param type $paramObjet
+     * @param type $paramIsEditable
+     * @param type $paramIdFta
+     * @param type $paramIdFtaComposant
+     * @param type $paramLabelSiteDeProduction
+     * @return type
+     */
+    public static function ShowListeDeroulanteSiteProdForComposant($paramObjet, $paramIsEditable, $paramIdFta, $paramIdFtaComposant, $paramLabelSiteDeProduction) {
 
         $ftaModel = new FtaModel($paramIdFta);
-        $arrayCodeProduitAgrologic = DatabaseOperation::convertSqlStatementWithKeyAndOneFieldToArray(
-                        'SELECT DISTINCT ' . AnnexeAgrologicArticleCodificationModel::KEYNAME . ', CONCAT_WS( - ,' . AnnexeAgrologicArticleCodificationModel::FIELDNAME_PREFIXE_ANNEXE_AGRO_ART_COD
-                        . ' , ' . AnnexeAgrologicArticleCodificationModel::FIELDNAME_NOM_ANNEXE_AGRO_ART_COD
-                        . ') FROM ' . AnnexeAgrologicArticleCodificationModel::TABLENAME
-                        . ' WHERE ' . AnnexeAgrologicArticleCodificationModel::FIELDNAME_PREFIXE_ANNEXE_AGRO_ART_COD . '<>00'
-                        . ' ORDER BY ' . AnnexeAgrologicArticleCodificationModel::FIELDNAME_PREFIXE_ANNEXE_AGRO_ART_COD
+        $ftaComposantModel = new FtaComposantModel($paramIdFtaComposant);
+        $siteDeProductionFta = $ftaModel->getDataField(FtaModel::FIELDNAME_SITE_ASSEMBLAGE)->getFieldValue();
+        $arraySite = DatabaseOperation::convertSqlStatementWithKeyAndOneFieldToArray(
+                        'SELECT DISTINCT ' . GeoModel::KEYNAME . ',' . GeoModel::FIELDNAME_GEO
+                        . ' FROM ' . GeoModel::TABLENAME
+                        . ' WHERE ' . GeoModel::FIELDNAME_TAG_APPLICATION_GEO . ' LIKE  \'%fta%\''
+                        . ' ORDER BY ' . GeoModel::FIELDNAME_GEO
         );
-        $paramObjetList->setArrayListContent($arrayCodeProduitAgrologic);
+
+        $paramObjet->setArrayListContent($arraySite);
+
         $HtmlTableName = FtaComposantModel::TABLENAME
                 . '_'
-                . FtaComposantModel::FIELDNAME_CODE_PRODUIT_AGROLOGIC_FTA_NOMENCLATURE
+                . $paramLabelSiteDeProduction
                 . '_'
-                . $paramIdFta
+                . $paramIdFtaComposant
         ;
-        $paramObjetList->getAttributes()->getName()->setValue(FtaComposantModel::FIELDNAME_CODE_PRODUIT_AGROLOGIC_FTA_NOMENCLATURE);
-        $paramObjetList->setLabel(DatabaseDescription::getFieldDocLabel(FtaComposantModel::TABLENAME, FtaComposantModel::FIELDNAME_CODE_PRODUIT_AGROLOGIC_FTA_NOMENCLATURE));
-        $paramObjetList->setIsEditable($paramIsEditable);
-        $paramObjetList->initAbstractHtmlSelect(
-                $HtmlTableName, $paramObjetList->getLabel(), $ftaModel->getDataField(FtaModel::FIELDNAME_WORKFLOW)->getFieldValue(), NULL, $paramObjetList->getArrayListContent());
-        $paramObjetList->getEventsForm()->setOnChangeWithAjaxAutoSave(FtaModel::TABLENAME, FtaModel::KEYNAME, $paramIdFta, FtaModel::FIELDNAME_WORKFLOW);
+        $arraySiteComposant = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
+                        'SELECT DISTINCT ' . $paramLabelSiteDeProduction
+                        . ' FROM ' . FtaComposantModel::TABLENAME
+                        . ' WHERE ' . FtaComposantModel::KEYNAME . '=' . $paramIdFtaComposant
+        );
+        foreach ($arraySiteComposant as $value) {
+            $SiteDeProduction = $value[$paramLabelSiteDeProduction];
+        }
 
-        $listeSiteWorkflow = $paramObjetList->getHtmlResult();
+        if ($SiteDeProduction) {
+            $paramObjet->setDefaultValue($SiteDeProduction);
+        } else {
+            $paramObjet->setDefaultValue($siteDeProductionFta);
+        }
+        $paramObjet->getAttributes()->getName()->setValue($paramLabelSiteDeProduction);
+        $paramObjet->setLabel(DatabaseDescription::getFieldDocLabel(GeoModel::TABLENAME, GeoModel::FIELDNAME_GEO));
+        $paramObjet->setIsEditable($paramIsEditable);
+        $paramObjet->initAbstractHtmlSelect(
+                $HtmlTableName, $paramObjet->getLabel(), $ftaComposantModel->getDataField($paramLabelSiteDeProduction)->getFieldValue(), NULL, $paramObjet->getArrayListContent());
+        $paramObjet->getEventsForm()->setOnChangeWithAjaxAutoSave(FtaComposantModel::TABLENAME, FtaComposantModel::KEYNAME, $paramIdFtaComposant, $paramLabelSiteDeProduction);
+        $listeSiteProduction = $paramObjet->getHtmlResult();
 
-        return $listeSiteWorkflow;
+        return $listeSiteProduction;
+    }
+
+    /**
+     * Fonction non utilisé
+     * @param type $paramObjet
+     * @param type $paramIsEditable
+     * @param type $paramIdFtaComposant
+     * @return type
+     */
+    public static function ShowListeDeroulantePrefixeForComposant($paramObjet, $paramIsEditable, $paramIdFtaComposant) {
+
+        $ftaComposantModel = new FtaComposantModel($paramIdFtaComposant);
+
+        $arraySite = DatabaseOperation::convertSqlStatementWithKeyAndOneFieldToArray(
+                        'SELECT DISTINCT ' . AnnexeAgrologicArticleCodificationModel::KEYNAME
+                        . ', CONCAT_WS(\' - \',' . AnnexeAgrologicArticleCodificationModel::FIELDNAME_PREFIXE_ANNEXE_AGRO_ART_COD
+                        . ',' . AnnexeAgrologicArticleCodificationModel::FIELDNAME_NOM_ANNEXE_AGRO_ART_COD
+                        . ') FROM ' . AnnexeAgrologicArticleCodificationModel::TABLENAME
+                        . ' WHERE ' . AnnexeAgrologicArticleCodificationModel::FIELDNAME_PREFIXE_ANNEXE_AGRO_ART_COD . ' <>\'00\''
+                        . ' ORDER BY ' . AnnexeAgrologicArticleCodificationModel::FIELDNAME_PREFIXE_ANNEXE_AGRO_ART_COD
+        );
+
+        $paramObjet->setArrayListContent($arraySite);
+
+        $HtmlTableName = FtaComposantModel::TABLENAME
+                . '_'
+                . FtaComposantModel::FIELDNAME_ID_ANNEXE_AGRO_ART_CODIFICATION
+                . '_'
+                . $paramIdFtaComposant
+        ;
+        $arrayIdPrefixeCodePSFComposant = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
+                        'SELECT DISTINCT ' . FtaComposantModel::FIELDNAME_ID_ANNEXE_AGRO_ART_CODIFICATION
+                        . ' FROM ' . FtaComposantModel::TABLENAME
+                        . ' WHERE ' . FtaComposantModel::KEYNAME . '=' . $paramIdFtaComposant
+        );
+        if ($arrayIdPrefixeCodePSFComposant) {
+            foreach ($arrayIdPrefixeCodePSFComposant as $value) {
+                $IdPrefixeCodePSF = $value[FtaComposantModel::FIELDNAME_ID_ANNEXE_AGRO_ART_CODIFICATION];
+                $paramObjet->setDefaultValue($IdPrefixeCodePSF);
+            }
+        }
+        $paramObjet->getAttributes()->getName()->setValue(FtaComposantModel::FIELDNAME_ID_ANNEXE_AGRO_ART_CODIFICATION);
+        $paramObjet->setLabel(DatabaseDescription::getFieldDocLabel(FtaComposantModel::TABLENAME, FtaComposantModel::FIELDNAME_ID_ANNEXE_AGRO_ART_CODIFICATION));
+        $paramObjet->setIsEditable($paramIsEditable);
+        $paramObjet->initAbstractHtmlSelect(
+                $HtmlTableName, $paramObjet->getLabel(), $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_ID_ANNEXE_AGRO_ART_CODIFICATION)->getFieldValue(), NULL, $paramObjet->getArrayListContent());
+        $paramObjet->getEventsForm()->setOnChangeWithAjaxAutoSave(FtaComposantModel::TABLENAME, FtaComposantModel::KEYNAME, $paramIdFtaComposant, FtaComposantModel::FIELDNAME_ID_ANNEXE_AGRO_ART_CODIFICATION);
+        $listePrefixeCodePSF = $paramObjet->getHtmlResult();
+
+        return $listePrefixeCodePSF;
     }
 
 }

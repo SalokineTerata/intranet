@@ -231,3 +231,74 @@ ZDDZSD
 2015-11-10 14:41:10 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `k_codesoft_etiquette_logo` =   '2'
 2015-11-10 14:42:55 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : WOK CREV LEG NAC 1KG
 2015-11-10 14:42:55 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `nom_fta_composition` =   'WOK CREV LEG NAC 1KG'
+2015-11-10 17:17:09 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : BAC
+2015-11-10 17:17:09 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `id_annexe_unite` =   'BAC'
+2015-11-10 17:17:12 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 1
+2015-11-10 17:17:12 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `etat_fta_nomenclature` =   '1'
+2015-11-12 11:10:47 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : BAC
+2015-11-12 11:10:47 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `id_annexe_unite` =   'BAC'
+2015-11-12 11:11:13 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 11
+2015-11-12 11:11:13 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `Site_de_production` =   '11'
+2015-11-12 11:11:14 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 1
+2015-11-12 11:11:14 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `Site_de_production` =   '1'
+2015-11-12 11:30:04 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 11
+2015-11-12 11:30:04 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `site_production_fta_nomenclature` =   '11'
+2015-11-12 11:33:10 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 11
+2015-11-12 11:33:10 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `site_production_fta_nomenclature` =   '11'
+2015-11-12 11:33:26 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 11
+2015-11-12 11:33:26 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `site_production_fta_nomenclature` =   '11'
+2015-11-12 11:35:23 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 14
+2015-11-12 11:35:23 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `site_production_fta_nomenclature` =   '14'
+2015-11-12 11:37:54 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 14
+2015-11-12 11:37:54 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `site_production_fta_nomenclature` =   '14'
+2015-11-12 11:38:42 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 14
+2015-11-12 11:38:42 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `site_production_fta_nomenclature` =   '14'
+2015-11-12 11:43:49 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 14
+2015-11-12 11:43:49 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `site_production_fta_nomenclature` =   '14'
+2015-11-12 11:45:10 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 14
+2015-11-12 11:45:10 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `site_production_fta_nomenclature` =   '14'
+2015-11-12 11:45:14 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 54
+2015-11-12 11:45:14 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `site_production_fta_nomenclature` =   '54'
+2015-11-12 11:48:55 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 3
+2015-11-12 11:48:55 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `site_production_fta_nomenclature` =   '3'
+2015-11-12 13:15:34 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 13
+2015-11-12 13:15:34 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `id_annexe_agrologic_article_codification` =   '13'
+2015-11-12 13:15:42 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 656231
+2015-11-12 13:15:42 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `code_produit_agrologic_fta_nomenclature` =   '656231'
+2015-11-12 13:16:04 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : piece/kg
+2015-11-12 13:16:04 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `id_annexe_unite` =   'piece/kg'
+2015-11-12 13:16:09 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 1
+2015-11-12 13:16:09 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `etat_fta_nomenclature` =   '1'
+2015-11-12 13:58:20 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 14
+2015-11-12 13:58:20 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `id_annexe_agrologic_article_codification` =   '14'
+2015-11-12 14:13:58 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 14
+2015-11-12 14:13:58 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `id_geo` =   '14'
+2015-11-12 14:21:49 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : test de cretation d'un composant
+2015-11-12 14:21:49 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `nom_fta_composition` =   'test de cretation d\\\'un composant'
+2015-11-12 14:21:54 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : erzerze
+2015-11-12 14:21:54 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `ingredient_fta_composition` =   'erzerze'
+2015-11-12 14:21:57 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : zerzer
+
+zerzre
+
+ezrez
+2015-11-12 14:21:57 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `ingredient_fta_composition1` =   'zerzer\n\nzerzre\n\nezrez'
+2015-11-12 14:22:00 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 11
+2015-11-12 14:22:00 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `id_geo` =   '11'
+2015-11-12 14:22:03 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 30
+2015-11-12 14:22:03 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `duree_vie_technique_fta_composition` =   '30'
+2015-11-12 14:22:10 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 5454
+2015-11-12 14:22:10 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `poids_fta_composition` =   '5454'
+2015-11-12 15:07:59 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : test de cretation d'un composant
+2015-11-12 15:07:59 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `nom_fta_composition` =   'test de cretation d\\\'un composant'
+2015-11-12 15:13:04 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : test de creation numéro 2 d'autres 
+2015-11-12 15:13:04 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `nom_fta_composition` =   'test de creation numéro 2 d\\\'autres '
+2015-11-12 15:24:42 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : eerzerez
+
+ezrezrz
+
+zerzerze
+zerzerez
+
+&é"''('(-èèçà %**$ê
+2015-11-12 15:24:42 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `remarque_fta` =   'eerzerez\n\nezrezrz\n\nzerzerze\nzerzerez\n\n&é\\\"\\\'\\\'(\\\'(-èèçà %**$ê'

@@ -36,6 +36,7 @@ class DataFieldToHtmlSubform_RNN extends HtmlSubForm_RNN {
                         , $paramDataField->getFieldsToDisplay()
                         , explode(',', $paramDataField->getFieldsToOrder())//Modifiable
                         , $keyValue
+                        , $paramDataField->getConditionSql()
         );
         parent::__construct($paramArrayContent
                 , ModelTableAssociation::getModelName($paramDataField->getTableName())

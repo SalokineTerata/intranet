@@ -85,7 +85,7 @@ class HtmlTextArea extends AbstractHtmlGlobalElement {
     }
 
     public function getHtmlViewedContent() {
-        return Html::showValue($this->getTextAreaContent());
+        return Html::showValue(nl2br($this->getTextAreaContent()));
     }
     public function getHtmlAddContent() {
         return ;

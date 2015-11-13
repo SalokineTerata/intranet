@@ -651,6 +651,8 @@ class FtaModel extends AbstractModel {
           Déclaration et initialisation des variables
          * **************************************** */
         $globalConfig = new GlobalConfig();
+                      UserModel::ConnexionFalse($globalConfig);
+
         $idUser = $globalConfig->getAuthenticatedUser()->getKeyValue();
         $ftaModelOrig = new FtaModel($paramIdFta);              //Identifiant de la fiche technique article à dupliquer
         $idFtaVersion = $ftaModelOrig->getDataField(FtaModel::FIELDNAME_VERSION_DOSSIER_FTA)->getFieldValue();

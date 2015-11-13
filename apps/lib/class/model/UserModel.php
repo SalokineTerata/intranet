@@ -207,6 +207,16 @@ class UserModel extends AbstractModel {
         return $req;
     }
 
+    public static function ConnexionFalse($paramGlobalConfig) {
+        if (!$paramGlobalConfig->getAuthenticatedUser()) {
+            $titre = "Déconnexion";
+            $message = "Erreur, la session précédement connecté à expirer.<br>"
+                    . "Veuillez vous reconnecter<br>";
+            $redirection = "index.php";
+            afficher_message($titre, $message, $redirection);
+        }
+    }
+
 }
 
 ?>

@@ -29,8 +29,10 @@ class IntranetActionsModel extends AbstractModel {
      */
 
     public static function getIdIntranetActionsFromIdParentAction($paramIdParent, $paramChapitre, $paramFtaWorkflow) {
-        $globalconfig = new GlobalConfig();
-        $id_user = $globalconfig->getAuthenticatedUser()->getKeyValue();
+        $globalConfig = new GlobalConfig();
+        UserModel::ConnexionFalse($globalConfig);
+
+        $id_user = $globalConfig->getAuthenticatedUser()->getKeyValue();
 
         $arrayIdActions = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
                         'SELECT ' . IntranetActionsModel::TABLENAME . '.' . IntranetActionsModel::KEYNAME
@@ -81,8 +83,10 @@ class IntranetActionsModel extends AbstractModel {
      * @return type
      */
     public static function getIdIntranetActionsRoleFromIdParentActionNavigation($paramIdParent) {
-        $globalconfig = new GlobalConfig();
-        $id_user = $globalconfig->getAuthenticatedUser()->getKeyValue();
+        $globalConfig = new GlobalConfig();
+        UserModel::ConnexionFalse($globalConfig);
+
+        $id_user = $globalConfig->getAuthenticatedUser()->getKeyValue();
 
         $arrayIdActions = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
                         'SELECT ' . IntranetActionsModel::TABLENAME . '.' . IntranetActionsModel::KEYNAME

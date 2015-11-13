@@ -46,8 +46,10 @@ class FtaChapitreModel extends AbstractModel {
         $option['correction_fta_suivi_projet'];            //Commentaire justifiant la correction du chapitre
         $HtmlResult = new HtmlResult2();
 
-        $globalconfig = new GlobalConfig();
-        $idUser = $globalconfig->getAuthenticatedUser()->getKeyValue();
+        $globalConfig = new GlobalConfig();
+              UserModel::ConnexionFalse($globalConfig);
+
+        $idUser = $globalConfig->getAuthenticatedUser()->getKeyValue();
         $idFtaWorkflowStructure = FtaWorkflowStructureModel::getIdFtaWorkflowStructureByIdFtaAndIdChapitre(
                         $paramIdFta, $paramIdChapitre);
         $ftaWorkflowStructureModel = new FtaWorkflowStructureModel($idFtaWorkflowStructure, $paramIdChapitre);

@@ -54,6 +54,7 @@ switch ($output) {
   Début Code PHP
  * *********** */
 $globalConfig = new GlobalConfig();
+
 if ($globalConfig->getAuthenticatedUser()) {
     $idUser = $globalConfig->getAuthenticatedUser()->getKeyValue();
 }

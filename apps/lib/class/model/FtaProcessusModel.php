@@ -283,9 +283,11 @@ class FtaProcessusModel extends AbstractModel {
      * @return int
      */
     public static function CheckProcessusSiteOrSociete($paramRows, $paramIdFta) {
-        $globalconfig = new GlobalConfig();
-        $idUser = $globalconfig->getAuthenticatedUser()->getKeyValue();
-        $paramLieuGeo = $globalconfig->getAuthenticatedUser()->getLieuGeo();
+        $globalConfig = new GlobalConfig();
+                      UserModel::ConnexionFalse($globalConfig);
+
+        $idUser = $globalConfig->getAuthenticatedUser()->getKeyValue();
+        $paramLieuGeo = $globalConfig->getAuthenticatedUser()->getLieuGeo();
 //Existe-il une configuration de gestion forcée pour ce processus et ce site d'assemblage ?
 
         foreach ($paramRows as $rowsSiteSociete) {

@@ -68,6 +68,8 @@ $syntheseAction = Lib::getParameterFromRequest('synthese_action');
  */
 $ftaModel = new FtaModel($idFta);
 $globalConfig = new GlobalConfig();
+      UserModel::ConnexionFalse($globalConfig);
+
 $idUser = $globalConfig->getAuthenticatedUser()->getKeyValue();
 $ftaView = new FtaView($ftaModel);
 $dataFieldCommentaire = $ftaModel->getDataField(FtaModel::FIELDNAME_COMMENTAIRE_MAJ_FTA);

@@ -302,3 +302,15 @@ zerzerez
 
 &é"''('(-èèçà %**$ê
 2015-11-12 15:24:42 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `remarque_fta` =   'eerzerez\n\nezrezrz\n\nzerzerze\nzerzerez\n\n&é\\\"\\\'\\\'(\\\'(-èèçà %**$ê'
+2015-11-13 11:29:29 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 178
+2015-11-13 11:29:29 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `hauteur_fta_conditionnement` =   '178'
+2015-11-13 11:30:50 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 175
+2015-11-13 11:30:50 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `hauteur_fta_conditionnement` =   '175'
+2015-11-13 11:30:57 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 304
+2015-11-13 11:30:57 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `longueur_fta_conditionnement` =   '304'
+2015-11-13 11:35:23 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 152
+2015-11-13 11:35:23 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `hauteur_fta_conditionnement` =   '152'
+2015-11-13 11:35:53 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 154
+2015-11-13 11:35:53 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `hauteur_fta_conditionnement` =   '154'
+2015-11-13 11:36:37 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 156
+2015-11-13 11:36:37 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `hauteur_fta_conditionnement` =   '156'

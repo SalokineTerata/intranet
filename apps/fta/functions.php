@@ -1765,6 +1765,8 @@ function visualiser_fiches($id_fta_etat, $choix, $isLimit, $order_common) {
      * Initilisation
      */
     $globalConfig = new GlobalConfig();
+          UserModel::ConnexionFalse($globalConfig);
+
     $id_user = $globalConfig->getAuthenticatedUser()->getKeyValue();
     $synthese_action = Lib::isDefined("synthese_action");
     $idFtaRole = Lib::getParameterFromRequest(FtaRoleModel::KEYNAME);

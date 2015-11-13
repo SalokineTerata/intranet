@@ -82,6 +82,8 @@ $comeback = Lib::getParameterFromRequest('comeback');
 $syntheseAction = Lib::getParameterFromRequest('synthese_action');
 $proprietaire = Lib::getParameterFromRequest('proprietaire');
 $globalConfig = new GlobalConfig();
+      UserModel::ConnexionFalse($globalConfig);
+
 $id_user = $globalConfig->getAuthenticatedUser()->getKeyValue();
 $HtmlList = new HtmlListSelect();
 

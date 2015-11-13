@@ -91,6 +91,8 @@ switch ($action) {
          * Initialisation de l'enregistrement de la Table FTA
          */
         $globalConfig = new GlobalConfig();
+              UserModel::ConnexionFalse($globalConfig);
+
         $idUser = $globalConfig->getAuthenticatedUser()->getKeyValue();
 
         $idFta = FtaModel::CreateFta($idUser, $idFtaEtat, $idFtaWorkflow, $designationCommercialeFta, date('Y-m-d'), $siteDeProduction);

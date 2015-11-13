@@ -331,7 +331,8 @@ abstract class AbstractHtmlGlobalElement {
         $label = NULL;
         $idRow = $this->getAttributesGlobal()->getIdRowToHtml();
         $style = $this->getStyleCSS()->getStyleAttribute();
-
+//        $style = $this->getAttributesGlobal()->getStyle()->getValue();
+              
         /**
          * Doit-on afficher le label ?
          */
@@ -348,7 +349,8 @@ abstract class AbstractHtmlGlobalElement {
         //Rendu HTML - début encapsulation
         switch ($this->getHtmlRender()) {
             case self::HTML_RENDER_TO_FORM:
-                $html_result .= '<tr ' . $idRow . ' ' . $style . 'class=contenu>';
+                $html_result .= '<tr ' . $idRow . ' ' . $style . ' class=contenu>';
+//                $html_result .= '<tr ' . $idRow . ' style=' . $style . ' class=contenu>';
                 $html_result .= '<td align=left style=\'' . $color_modif . '\'>' . $label . '</td>';
                 break;
 

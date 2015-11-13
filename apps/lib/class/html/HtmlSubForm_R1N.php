@@ -230,6 +230,12 @@ class HtmlSubForm_R1N extends HtmlSubForm {
                         $isFirstField = FALSE;
                     }
                     $htmlField->getAttributesGlobal()->setIsIconNextEnabledToFalse();
+                    /**
+                     * Ajout de style fonctionnel mais mauvaise mise en forme sur d'autre éléments
+                     */
+//                    $attrbuteStyleModel = new AttributeStyle();
+//                    $attrbuteStyleModel->setValue("border:1px solid #009dd1;");
+//                    $htmlField->getAttributesGlobal()->setStyle($attrbuteStyleModel);
 
                     $htmlField->setHtmlRenderToTable();
 

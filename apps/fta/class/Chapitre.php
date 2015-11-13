@@ -507,6 +507,9 @@ class Chapitre {
 
         $bloc.='<tr class=titre_principal><td class>Commentaire</td></tr>';
 
+        //Commentaire sur la Fta
+        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_COMMENTAIRE);
+
         //Liste des corrections apportées
         $bloc.='<tr class=titre_principal><td>Récapitulatif des corrections</td></tr>';
 
@@ -1634,7 +1637,7 @@ class Chapitre {
         //Désignation Interne Agis
         $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_LIBELLE);
 
-        //Code Article LDC, code arcadia
+        //Code Article LDC, code Article arcadia
         $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_CODE_ARTICLE_LDC);
 
         return $bloc;
@@ -1837,7 +1840,9 @@ class Chapitre {
 
 //        //Date d'échéance des processus
 //        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_VIRTUAL_FTA_PROCESSUS_DELAI);
-        /**        */
+        //Commentaire sur la Fta
+        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_COMMENTAIRE);
+
         return $bloc;
     }
 

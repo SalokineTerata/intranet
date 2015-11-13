@@ -395,7 +395,6 @@ switch ($action) {
 //        $paramIdFta;
 //        $id_fta_conditionnement;
 //        mysql_table_operation('fta_conditionnement', 'delete');
-
 //header ('Location: modification_fiche.php?id_fta=$id_fta&id_fta_chapitre_encours=$id_fta_chapitre_encours&synthese_action=$synthese_action');
         break;
 
@@ -405,8 +404,6 @@ switch ($action) {
 //$id_fta_nomenclature;
 //recette_nomenclature_suppression($id_fta_nomenclature);
 //        mysql_table_operation('fta_composant', 'delete');
-
-
 //header ('Location: modification_fiche.php?id_fta=$id_fta&id_fta_chapitre_encours=$id_fta_chapitre_encours&synthese_action=$synthese_action');
         break;
 

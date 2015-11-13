@@ -34,7 +34,7 @@ class FtaTransitionModel {
         $ftaModel = new FtaModel($paramIdFta);
         $idFtaEtatByIdFta = $ftaModel->getDataField(FtaModel::FIELDNAME_ID_FTA_ETAT)->getFieldValue();
         $idDossierFta = $ftaModel->getDataField(FtaModel::FIELDNAME_DOSSIER_FTA)->getFieldValue();
-        $idArticleAgrologic = $ftaModel->getDataField(FtaModel::FIELDNAME_ARTICLE_AGROLOGIC)->getFieldValue();
+        $codeArticleLdc = $ftaModel->getDataField(FtaModel::FIELDNAME_CODE_ARTICLE_LDC)->getFieldValue();
         $siteDeProduction = $ftaModel->getDataField(FtaModel::FIELDNAME_SITE_ASSEMBLAGE)->getFieldValue();
         $ftaEtatModel = new FtaEtatModel($idFtaEtatByIdFta);
         $initial_abreviation_fta_etat = $ftaEtatModel->getDataField(FtaEtatModel::FIELDNAME_ABREVIATION)->getFieldValue();
@@ -148,7 +148,7 @@ class FtaTransitionModel {
                 $option_duplication["site_de_production"] = $siteDeProduction;
                 $idFtaNew = FtaModel::BuildDuplicationFta($id_fta_original, $action_duplication, $option_duplication, $paramIdWorkflow);
                 $ftaModel = new FtaModel($idFtaNew);
-                $idArticleAgrologic = $ftaModel->getDataField(FtaModel::FIELDNAME_ARTICLE_AGROLOGIC)->getFieldValue();
+                $codeArticleLdc = $ftaModel->getDataField(FtaModel::FIELDNAME_CODE_ARTICLE_LDC)->getFieldValue();
                 $paramIdFta = $idFtaNew;
                 break;
 
@@ -196,15 +196,16 @@ class FtaTransitionModel {
 
                 //Désactivation de l'ancien Code Article Agrologic
                 $req = "UPDATE " . FtaModel::TABLENAME
-                        . " SET " . FtaModel::FIELDNAME_CODE_ARTICLE . "=NULL"
-                        . " WHERE " . FtaModel::FIELDNAME_CODE_ARTICLE . "='" . $idArticleAgrologic . "' "
+                        . " SET " . FtaModel::FIELDNAME_CODE_ARTICLE . "=NULL "
+                        . "," . FtaModel::FIELDNAME_ACTIF . "='0'"
+                        . " WHERE " . FtaModel::FIELDNAME_CODE_ARTICLE_LDC . "='" . $codeArticleLdc . "' "
                         . " AND " . FtaModel::KEYNAME . "='" . $paramIdFta . "' "
                 ;
                 DatabaseOperation::execute($req);
 
                 //Activation du nouvel Article
                 $req = "UPDATE " . FtaModel::TABLENAME
-                        . " SET " . FtaModel::FIELDNAME_CODE_ARTICLE . "='" . $idArticleAgrologic . "', actif='-1' "
+                        . " SET " . FtaModel::FIELDNAME_CODE_ARTICLE . "='" . "1" . "', actif='-1' "
                         . " WHERE " . FtaModel::KEYNAME . "='" . $paramIdFta . "' "
                 ;
                 DatabaseOperation::execute($req);
@@ -216,6 +217,7 @@ class FtaTransitionModel {
 
                 $req = "UPDATE " . FtaModel::TABLENAME
                         . " SET " . FtaModel::FIELDNAME_ACTIF . "=0"
+                        . "," . FtaModel::FIELDNAME_CODE_ARTICLE . "=NULL"
                         . " WHERE " . FtaModel::KEYNAME . "='" . $paramIdFta . "' "
                 ;
                 DatabaseOperation::execute($req);
@@ -532,7 +534,8 @@ class FtaTransitionModel {
                 . "\n"
                 . "INFORMATIONS DE DEBUGGAGE:\n"
                 . $logTransition
-        ; {
+        ;
+        {
             $expediteur = $prenom . " " . $nom . " <" . $mail . ">";
             envoismail($sujetmail, $corp, $mail, $expediteur, $typeMail);
         }

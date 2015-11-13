@@ -333,15 +333,16 @@ class FtaComposantModel extends AbstractModel {
      */
     public static function getTableCompositionLabel($paramIdFtaComposant) {
         $ftaComposantModel = new FtaComposantModel($paramIdFtaComposant);
+        $border = "style=\"border:1px solid #000;\"";
 
         return '<tr class=titre_tableau  align=center >' .
-                '<td>' . $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_NOM_FTA_COMPOSITION)->getFieldLabel() . '</td>'
-                . '<td>' . $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_INGREDIENT_FTA_COMPOSITION)->getFieldLabel() . '</td>'
-                . '<td>' . $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_ID_GEO)->getFieldLabel() . '</td>'
-                . '<td>' . $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_POIDS_FTA_COMPOSITION)->getFieldLabel() . '</td>'
+                '<td ' . $border . '>' . $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_NOM_FTA_COMPOSITION)->getFieldLabel() . '</td>'
+                . '<td ' . $border . '>' . $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_INGREDIENT_FTA_COMPOSITION)->getFieldLabel() . '</td>'
+                . '<td ' . $border . '>' . $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_ID_GEO)->getFieldLabel() . '</td>'
+                . '<td ' . $border . '>' . $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_POIDS_FTA_COMPOSITION)->getFieldLabel() . '</td>'
 //                . '<td>Répartition (en %)</td>'
-                . '<td>' . $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_QUANTITE_FTA_COMPOSITION)->getFieldLabel() . '</td>'
-                . '<td>Actions</td>'
+                . '<td ' . $border . '>' . $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_QUANTITE_FTA_COMPOSITION)->getFieldLabel() . '</td>'
+                . '<td ' . $border . '>Actions</td>'
                 . '</tr>';
     }
 
@@ -352,18 +353,19 @@ class FtaComposantModel extends AbstractModel {
      */
     public static function getTableComposantLabel($paramIdFtaComposant) {
         $ftaComposantModel = new FtaComposantModel($paramIdFtaComposant);
+        $border = "style=\"border:1px solid #000;\"";
 
         return '<tr class=titre_tableau  align=center >' .
-                '<td>' . $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_ID_ANNEXE_AGRO_ART_CODIFICATION)->getFieldLabel() . '</td>'
-                . '<td>' . $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_CODE_PRODUIT_AGROLOGIC_FTA_NOMENCLATURE)->getFieldLabel() . '</td>'
-                . '<td>' . $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_DESIGNATION_CODIFICATION)->getFieldLabel() . '</td>'
-                . '<td>' . $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_POIDS_UNITAIRE_CODIFICATION)->getFieldLabel() . '</td>'
-                . '<td>' . $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_ID_ANNEXE_UNITE)->getFieldLabel() . '</td>'
-                . '<td>' . $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_SITE_PRODUCTION_FTA_CODIFICATION)->getFieldLabel() . '</td>'
-                . '<td>' . $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_ETAT_FTA_CODIFICATION)->getFieldLabel() . '</td>'
-                . '<td>' . $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_QUANTITE_PIECE_PAR_CARTON)->getFieldLabel() . '</td>'
-                . '<td>' . $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_POIDS_TOTAL_CARTON_VRAC_FTA_NOMENCLATURE)->getFieldLabel() . '</td>'
-                . '<td>Actions</td>'
+                '<td ' . $border . '>' . $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_ID_ANNEXE_AGRO_ART_CODIFICATION)->getFieldLabel() . '</td>'
+                . '<td ' . $border . '>' . $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_CODE_PRODUIT_AGROLOGIC_FTA_NOMENCLATURE)->getFieldLabel() . '</td>'
+                . '<td ' . $border . '>' . $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_DESIGNATION_CODIFICATION)->getFieldLabel() . '</td>'
+                . '<td ' . $border . '>' . $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_POIDS_UNITAIRE_CODIFICATION)->getFieldLabel() . '</td>'
+                . '<td ' . $border . '>' . $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_ID_ANNEXE_UNITE)->getFieldLabel() . '</td>'
+                . '<td ' . $border . '>' . $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_SITE_PRODUCTION_FTA_CODIFICATION)->getFieldLabel() . '</td>'
+                . '<td ' . $border . '>' . $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_ETAT_FTA_CODIFICATION)->getFieldLabel() . '</td>'
+                . '<td ' . $border . '>' . $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_QUANTITE_PIECE_PAR_CARTON)->getFieldLabel() . '</td>'
+                . '<td ' . $border . '>' . $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_POIDS_TOTAL_CARTON_VRAC_FTA_NOMENCLATURE)->getFieldLabel() . '</td>'
+                . '<td ' . $border . '>Actions</td>'
                 . '</tr>';
     }
 

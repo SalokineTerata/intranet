@@ -80,7 +80,7 @@ class HtmlTextArea extends AbstractHtmlGlobalElement {
                 . '/>'
                 . $this->getTextAreaContent()
                 . '</' . $this->getAttributes()->getTagName() . '>'
-                . parent::getAttributesGlobal()->getIconMenuToHtml()
+//                . parent::getAttributesGlobal()->getIconMenuToHtml()
         ;
     }
 

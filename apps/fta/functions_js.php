@@ -93,7 +93,7 @@
         }
 
         //Coeur de gestion du fonctionnement AJAX
-        document.getElementById(TagStatus).innerHTML = HtmlImageLoading;
+//        document.getElementById(TagStatus).innerHTML = HtmlImageLoading;
         var http = createRequestObject();
         http.open('get', PhpAjaxFile + '?' + UrlParameter, true);
         http.onreadystatechange = handleAJAXReturnCustom;
@@ -117,23 +117,23 @@
         //2 : La méthode send vient d'être appelée
         //3 : Le serveur traite les informations et a commencé à renvoyer des données
         //4 : Le serveur a fini son travail, et toutes les données sont réceptionnées
-        if (Http.readyState === 4)
-        {
-            //Ici, possibilité d'ajouter du précontrôle si besoin...
-            if (Http.status === 200)
-            {
-                document.getElementById(TagStatus).innerHTML = HtmlImageOk;
-
-                //Si une fonction CallBack est définie, on l'exécute.
-                if (CallbackFunction !== "") {
-                    window[CallbackFunction](CallbackFunctionParameters);
-                }
-            }
-            else
-            {
-                document.getElementById(TagStatus).innerHTML = HtmlImageFailed;
-            }
-        }
+//        if (Http.readyState === 4)
+//        {
+//            //Ici, possibilité d'ajouter du précontrôle si besoin...
+//            if (Http.status === 200)
+//            {
+//                document.getElementById(TagStatus).innerHTML = HtmlImageOk;
+//
+//                //Si une fonction CallBack est définie, on l'exécute.
+//                if (CallbackFunction !== "") {
+//                    window[CallbackFunction](CallbackFunctionParameters);
+//                }
+//            }
+//            else
+//            {
+//                document.getElementById(TagStatus).innerHTML = HtmlImageFailed;
+//            }
+//        }
     }
     function displayTrueElementById(ParamId) {
         var targetElement;

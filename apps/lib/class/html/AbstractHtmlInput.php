@@ -68,7 +68,7 @@ abstract class AbstractHtmlInput extends AbstractHtmlGlobalElement {
                 . parent::getEventsMouse()->getAllHtmlParametersWithSpaceBefore()
                 . $this->getAttributes()->getAllHtmlParametersWithSpaceBefore()
                 . '/>'
-                . parent::getAttributesGlobal()->getIconMenuToHtml()
+//                . parent::getAttributesGlobal()->getIconMenuToHtml()
 
         ;
     }

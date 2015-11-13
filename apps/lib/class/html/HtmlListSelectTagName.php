@@ -80,7 +80,8 @@ class HtmlListSelectTagName extends HtmlListSelect {
                         . $option->getDiplayValueToHtml()
                         . '</' . $option->getAttributes()->getTagName() . '>';
             }
-            $return .= '</' . $this->getAttributes()->getTagName() . '>' . parent::getAttributesGlobal()->getIconMenuToHtml();
+            $return .= '</' . $this->getAttributes()->getTagName() . '>';
+//                    . parent::getAttributesGlobal()->getIconMenuToHtml();
         } else {
             $return .= '<i>' . Html::showValue(self::LIST_EMPTY_MESSAGE) . '</i>';
         }

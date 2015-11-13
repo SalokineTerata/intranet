@@ -249,11 +249,11 @@ function recursifOne($paramStartValue, $htmlResult) {
 //                        . "</tr>"
 //                );
 
-$hostname_connect = "dev-intranet.agis.fr"; //nom du serveur MySQL de connection � la base de donn�e
+$hostname_connect = "127.0.0.1"; //nom du serveur MySQL de connection � la base de donn�e
 $database_connect = $nameOfBDDStructure; //nom de la base de donn�e sur votre serveur MySQL
-$username_connect = "root"; //login de la base MySQL
-$tablename_connect = "salaries"; //table login de la base MySQL
-$password_connect = "8ale!ne"; //mot de passe de la base MySQL
+$username_connect = "mysqladm"; //login de la base MySQL
+//$tablename_connect = "agis"; //table login de la base MySQL
+$password_connect = "agis"; //mot de passe de la base MySQL
 //$connect = new PDO($hostname_connect, $username_connect, $password_connect); //connection � la base de donn�e si sa echoue sa retourne une erreur. 
 
 $donnee = mysql_pconnect($hostname_connect, $username_connect, $password_connect) or die("connexion impossible");

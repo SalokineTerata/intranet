@@ -1898,7 +1898,7 @@ class Chapitre {
         $ftaView->setIsEditable($isEditable);
         $ftaView->setFtaChapitreModelById(self::ID_CHAPITRE_IDENTITE);
 
-        $bloc.='<tr class=titre_principal><td class>Palettisasion</td></tr>';
+//        $bloc.='<tr class=titre_principal><td class>Palettisasion</td></tr>';
 
         $bloc.='<tr class=titre_principal><td class>Informations Générales de l\'UVC</td></tr>';
 

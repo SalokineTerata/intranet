@@ -251,7 +251,7 @@ class FtaView {
          */
         if ($paramIsEditable and ! $idFtaClassification2) {
 
-            $ListeCLassification = "<tr ><td class=\"contenu\">Ajouter une classification</td ><td class=\"contenu\">"
+            $ListeCLassification = "<tr ><td class=\"contenu\">Ajouter une classification</td ><td class=\"contenu\" width=75% >"
                     . "<a href="
                     . "ajout_classification_chemin.php?"
                     . "id_fta=" . $idFta
@@ -265,7 +265,7 @@ class FtaView {
         } else {
             $ListeCLassification = ClassificationFta2Model::ShowListeDeroulanteClassification(FALSE);
             if ($paramIsEditable) {
-                $ListeCLassification .= "<tr ><td class=\"contenu\">Modifier la classification</td ><td class=\"contenu\">"
+                $ListeCLassification .= "<tr ><td class=\"contenu\">Modifier la classification</td ><td class=\"contenu\" width=75% >"
                         . "<a href="
                         . "ajout_classification_chemin.php?"
                         . "id_fta=" . $idFta

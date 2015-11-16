@@ -4696,7 +4696,7 @@ while ($value=mysql_fetch_array($resultFta)) {
     $FAMILLE_MKTG = $value['FAMILLE_MKTG'];
     $nouvel_article = $value['nouvel_article'];
     $k_gestion_lot = $value['k_gestion_lot'];
-
+    $pourcentageAvancement ="";
 
 
 

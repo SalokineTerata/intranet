@@ -808,14 +808,14 @@ class FtaView {
      * 
      * @return \FtaSuiviProjetModel
      */
-    function getFtaSuiviProjetModel() {
+    function getFtaSuiviProjetModel($paramIsEditable) {
 
         $idFtaChapitre = $this->getFtaChapitreModel()->getKeyValue();
         $idFtaSuiviProjet = FtaSuiviProjetModel::getIdFtaSuiviProjetByIdFtaAndIdChapitre(
                         $this->getModel()->getKeyValue(), $idFtaChapitre
         );
         $ftaSuiviProjetModel = new FtaSuiviProjetModel($idFtaSuiviProjet);
-        $ftaSuiviProjetModel->setIsEditable(FALSE);
+        $ftaSuiviProjetModel->setIsEditable($paramIsEditable);
         return $ftaSuiviProjetModel;
     }
 

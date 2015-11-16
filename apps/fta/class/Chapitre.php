@@ -186,6 +186,7 @@ class Chapitre {
         self::$ftaWorkflowModel = new FtaWorkflowModel(self::$id_fta_workflow);
         self::$synthese_action = $synthese_action;
         $globalConfig = new GlobalConfig();
+        UserModel::ConnexionFalse($globalConfig);
         self::$idUser = $globalConfig->getAuthenticatedUser()->getKeyValue();
         $idFtaSuiviProjet = FtaSuiviProjetModel::getIdFtaSuiviProjetByIdFtaAndIdChapitre(self::$id_fta, self::$id_fta_chapitre);
         self::$ftaSuiviProjetModel = new FtaSuiviProjetModel($idFtaSuiviProjet);
@@ -1814,7 +1815,7 @@ class Chapitre {
          * Classification
          *
          */
-        $bloc.=$ftaView->ListeClassification($isEditable);
+        $bloc.=$ftaView->ListeClassification($isEditable,self::$id_fta_chapitre,$synthese_action,self::$comeback,self::$id_fta_etat,self::$abrevation_etat,self::$id_fta_role  );
         /*
          * Deviendra une liste deroulante dépendante des donné choisie dans la classification
          */

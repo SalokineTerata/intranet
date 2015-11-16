@@ -12,12 +12,12 @@
         i = document.form_action.action.selectedIndex;
         if (i === "I")
             return;
-        url = "transiter.php?id_fta=" + document.form_action.id_fta.value 
+        url = "transiter.php?id_fta=" + document.form_action.id_fta.value
                 + "&action=" + document.form_action.action[i].value
                 + "&id_fta_role=" + document.form_action.id_fta_role.value
                 + "&synthese_action=" + document.form_action.synthese_action.value
                 + "&demande_abreviation_fta_transition=" + document.form_action.demande_abreviation_fta_transition.value
-        ;
+                ;
 
         parent.location.href = url;
     }
@@ -207,10 +207,9 @@
                 + "&selection_proprietaire1=" + document.form_action.selection_proprietaire1.options[proprietaire1].value
                 + "&selection_proprietaire2=" + document.form_action.selection_proprietaire2.options[proprietaire2].value
                 + "&checkIdFtaClasssification=1"
-
-
                 ;
-        parent.location.href = url;
+
+
     }
     function selection_marque_js() {
         proprietaire1 = document.form_action.selection_proprietaire1.selectedIndex;
@@ -235,6 +234,8 @@
                 + "&checkIdFtaClasssification=1"
 
                 ;
+
+
         parent.location.href = url;
     }
     function selection_activite_js() {
@@ -263,6 +264,7 @@
                 + "&checkIdFtaClasssification=1"
 
                 ;
+
         parent.location.href = url;
     }
     function selection_rayon_js() {
@@ -292,6 +294,8 @@
                 + "&checkIdFtaClasssification=1"
 
                 ;
+
+
         parent.location.href = url;
     }
     function selection_environnement_js() {
@@ -323,6 +327,8 @@
                 + "&checkIdFtaClasssification=1"
 
                 ;
+
+
         parent.location.href = url;
     }
     function selection_reseau_js() {
@@ -356,6 +362,8 @@
                 + "&checkIdFtaClasssification=1"
 
                 ;
+
+
         parent.location.href = url;
     }
     function selection_saisonnalite_js() {
@@ -390,6 +398,257 @@
                 + "&selection_saisonnalite=" + document.form_action.selection_saisonnalite.options[saisonnalite].value
                 + "&checkIdFtaClasssification=1"
                 ;
+        parent.location.href = url;
+    }
+    function selection_proprietaire12_js() {
+        proprietaire1 = document.form_action.selection_proprietaire12.selectedIndex;
+        idFta = document.getElementById("id_fta").value;
+        id_fta_chapitre_encours = document.getElementById("id_fta_chapitre_encours").value;
+        syntheseAction = document.getElementById("synthese_action").value;
+        comeback = document.getElementById("comeback").value;
+        idFtaEtat = document.getElementById("id_fta_etat").value;
+        abreviationFtaEtat = document.getElementById("abreviation_fta_etat").value;
+        idFtaRole = document.getElementById("id_fta_role").value;
+        //if (i == 0) return;
+        url = "ajout_classification_chemin.php?id_fta=" + idFta
+                + "&id_fta_chapitre_encours=" + id_fta_chapitre_encours
+                + "&synthese_action=" + syntheseAction
+                + "&comeback=" + comeback
+                + "&id_fta_etat=" + idFtaEtat
+                + "&abreviation_fta_etat=" + abreviationFtaEtat
+                + "&id_fta_role=" + idFtaRole
+                + "&selection_proprietaire1=" + document.form_action.selection_proprietaire12.options[proprietaire1].value
+                + "&checkIdFtaClasssification=1";
+
+        parent.location.href = url;
+    }
+
+    function selection_proprietaire22_js() {
+        proprietaire1 = document.form_action.selection_proprietaire12.selectedIndex;
+        proprietaire2 = document.form_action.selection_proprietaire22.selectedIndex;
+        idFta = document.getElementById("id_fta").value;
+        syntheseAction = document.getElementById("synthese_action").value;
+        id_fta_chapitre_encours = document.getElementById("id_fta_chapitre_encours").value;
+        comeback = document.getElementById("comeback").value;
+        idFtaEtat = document.getElementById("id_fta_etat").value;
+        abreviationFtaEtat = document.getElementById("abreviation_fta_etat").value;
+        idFtaRole = document.getElementById("id_fta_role").value;
+        //if (i == 0) return;
+        url = "ajout_classification_chemin.php?id_fta=" + idFta
+                + "&id_fta_chapitre_encours=" + id_fta_chapitre_encours
+                + "&synthese_action=" + syntheseAction
+                + "&comeback=" + comeback
+                + "&id_fta_etat=" + idFtaEtat
+                + "&abreviation_fta_etat=" + abreviationFtaEtat
+                + "&id_fta_role=" + idFtaRole
+                + "&selection_proprietaire1=" + document.form_action.selection_proprietaire12.options[proprietaire1].value
+                + "&selection_proprietaire2=" + document.form_action.selection_proprietaire22.options[proprietaire2].value
+                + "&checkIdFtaClasssification=1"
+                ;
+
+
+        parent.location.href = url;
+    }
+    function selection_marque2_js() {
+        proprietaire1 = document.form_action.selection_proprietaire12.selectedIndex;
+        proprietaire2 = document.form_action.selection_proprietaire22.selectedIndex;
+        marque = document.form_action.selection_marque2.selectedIndex;
+        idFta = document.getElementById("id_fta").value;
+        id_fta_chapitre_encours = document.getElementById("id_fta_chapitre_encours").value;
+        syntheseAction = document.getElementById("synthese_action").value;
+        comeback = document.getElementById("comeback").value;
+        idFtaEtat = document.getElementById("id_fta_etat").value;
+        abreviationFtaEtat = document.getElementById("abreviation_fta_etat").value;
+        idFtaRole = document.getElementById("id_fta_role").value;
+
+        url = "ajout_classification_chemin.php?id_fta=" + idFta
+                + "&id_fta_chapitre_encours=" + id_fta_chapitre_encours
+                + "&synthese_action=" + syntheseAction
+                + "&comeback=" + comeback
+                + "&id_fta_etat=" + idFtaEtat
+                + "&abreviation_fta_etat=" + abreviationFtaEtat
+                + "&id_fta_role=" + idFtaRole
+                + "&selection_proprietaire1=" + document.form_action.selection_proprietaire12.options[proprietaire1].value
+                + "&selection_proprietaire2=" + document.form_action.selection_proprietaire22.options[proprietaire2].value
+                + "&selection_marque=" + document.form_action.selection_marque2.options[marque].value
+                + "&checkIdFtaClasssification=1"
+
+                ;
+        parent.location.href = url;
+    }
+    function selection_activite2_js() {
+        proprietaire1 = document.form_action.selection_proprietaire12.selectedIndex;
+        proprietaire2 = document.form_action.selection_proprietaire22.selectedIndex;
+        marque = document.form_action.selection_marque2.selectedIndex;
+        activite = document.form_action.selection_activite2.selectedIndex;
+        idFta = document.getElementById("id_fta").value;
+        id_fta_chapitre_encours = document.getElementById("id_fta_chapitre_encours").value;
+        syntheseAction = document.getElementById("synthese_action").value;
+        comeback = document.getElementById("comeback").value;
+        idFtaEtat = document.getElementById("id_fta_etat").value;
+        abreviationFtaEtat = document.getElementById("abreviation_fta_etat").value;
+        idFtaRole = document.getElementById("id_fta_role").value;
+
+        //if (i == 0) return;
+        url = "ajout_classification_chemin.php?id_fta=" + idFta
+                + "&id_fta_chapitre_encours=" + id_fta_chapitre_encours
+                + "&synthese_action=" + syntheseAction
+                + "&comeback=" + comeback
+                + "&id_fta_etat=" + idFtaEtat
+                + "&abreviation_fta_etat=" + abreviationFtaEtat
+                + "&id_fta_role=" + idFtaRole
+                + "&selection_proprietaire1=" + document.form_action.selection_proprietaire12.options[proprietaire1].value
+                + "&selection_proprietaire2=" + document.form_action.selection_proprietaire22.options[proprietaire2].value
+                + "&selection_marque=" + document.form_action.selection_marque2.options[marque].value
+                + "&selection_activite=" + document.form_action.selection_activite2.options[activite].value
+                + "&checkIdFtaClasssification=1"
+
+                ;
+
+
+        parent.location.href = url;
+    }
+    function selection_rayon2_js() {
+        proprietaire1 = document.form_action.selection_proprietaire12.selectedIndex;
+        proprietaire2 = document.form_action.selection_proprietaire22.selectedIndex;
+        marque = document.form_action.selection_marque2.selectedIndex;
+        activite = document.form_action.selection_activite2.selectedIndex;
+        rayon = document.form_action.selection_rayon2.selectedIndex;
+        idFta = document.getElementById("id_fta").value;
+        syntheseAction = document.getElementById("synthese_action").value;
+        id_fta_chapitre_encours = document.getElementById("id_fta_chapitre_encours").value;
+        comeback = document.getElementById("comeback").value;
+        idFtaEtat = document.getElementById("id_fta_etat").value;
+        abreviationFtaEtat = document.getElementById("abreviation_fta_etat").value;
+        idFtaRole = document.getElementById("id_fta_role").value;
+        //if (i == 0) return;
+        url = "ajout_classification_chemin.php?id_fta=" + idFta
+                + "&id_fta_chapitre_encours=" + id_fta_chapitre_encours
+                + "&synthese_action=" + syntheseAction
+                + "&comeback=" + comeback
+                + "&id_fta_etat=" + idFtaEtat
+                + "&abreviation_fta_etat=" + abreviationFtaEtat
+                + "&id_fta_role=" + idFtaRole
+                + "&selection_proprietaire1=" + document.form_action.selection_proprietaire12.options[proprietaire1].value
+                + "&selection_proprietaire2=" + document.form_action.selection_proprietaire22.options[proprietaire2].value
+                + "&selection_marque=" + document.form_action.selection_marque2.options[marque].value
+                + "&selection_activite=" + document.form_action.selection_activite2.options[activite].value
+                + "&selection_rayon=" + document.form_action.selection_rayon2.options[rayon].value
+                + "&checkIdFtaClasssification=1"
+
+                ;
+
+
+        parent.location.href = url;
+    }
+    function selection_environnement2_js() {
+        proprietaire1 = document.form_action.selection_proprietaire12.selectedIndex;
+        proprietaire2 = document.form_action.selection_proprietaire22.selectedIndex;
+        marque = document.form_action.selection_marque2.selectedIndex;
+        activite = document.form_action.selection_activite2.selectedIndex;
+        rayon = document.form_action.selection_rayon2.selectedIndex;
+        environnement = document.form_action.selection_environnement2.selectedIndex;
+        idFta = document.getElementById("id_fta").value;
+        id_fta_chapitre_encours = document.getElementById("id_fta_chapitre_encours").value;
+        syntheseAction = document.getElementById("synthese_action").value;
+        comeback = document.getElementById("comeback").value;
+        idFtaEtat = document.getElementById("id_fta_etat").value;
+        abreviationFtaEtat = document.getElementById("abreviation_fta_etat").value;
+        idFtaRole = document.getElementById("id_fta_role").value;
+        //if (i == 0) return;
+        url = "ajout_classification_chemin.php?id_fta=" + idFta
+                + "&id_fta_chapitre_encours=" + id_fta_chapitre_encours
+                + "&synthese_action=" + syntheseAction
+                + "&comeback=" + comeback
+                + "&id_fta_etat=" + idFtaEtat
+                + "&abreviation_fta_etat=" + abreviationFtaEtat
+                + "&id_fta_role=" + idFtaRole
+                + "&selection_proprietaire1=" + document.form_action.selection_proprietaire12.options[proprietaire1].value
+                + "&selection_proprietaire2=" + document.form_action.selection_proprietaire22.options[proprietaire2].value
+                + "&selection_marque=" + document.form_action.selection_marque2.options[marque].value
+                + "&selection_activite=" + document.form_action.selection_activite2.options[activite].value
+                + "&selection_rayon=" + document.form_action.selection_rayon2.options[rayon].value
+                + "&selection_environnement=" + document.form_action.selection_environnement2.options[environnement].value
+                + "&checkIdFtaClasssification=1"
+
+                ;
+
+
+
+        parent.location.href = url;
+    }
+    function selection_reseau2_js() {
+        proprietaire1 = document.form_action.selection_proprietaire12.selectedIndex;
+        proprietaire2 = document.form_action.selection_proprietaire22.selectedIndex;
+        marque = document.form_action.selection_marque2.selectedIndex;
+        activite = document.form_action.selection_activite2.selectedIndex;
+        rayon = document.form_action.selection_rayon2.selectedIndex;
+        environnement = document.form_action.selection_environnement2.selectedIndex;
+        reseau = document.form_action.selection_reseau2.selectedIndex;
+        idFta = document.getElementById("id_fta").value;
+        syntheseAction = document.getElementById("synthese_action").value;
+        id_fta_chapitre_encours = document.getElementById("id_fta_chapitre_encours").value;
+        comeback = document.getElementById("comeback").value;
+        idFtaEtat = document.getElementById("id_fta_etat").value;
+        abreviationFtaEtat = document.getElementById("abreviation_fta_etat").value;
+        idFtaRole = document.getElementById("id_fta_role").value;
+        //if (i == 0) return;
+        url = "ajout_classification_chemin.php?id_fta=" + idFta
+                + "&id_fta_chapitre_encours=" + id_fta_chapitre_encours
+                + "&synthese_action=" + syntheseAction
+                + "&comeback=" + comeback
+                + "&id_fta_etat=" + idFtaEtat
+                + "&abreviation_fta_etat=" + abreviationFtaEtat
+                + "&id_fta_role=" + idFtaRole
+                + "&selection_proprietaire1=" + document.form_action.selection_proprietaire12.options[proprietaire1].value
+                + "&selection_proprietaire2=" + document.form_action.selection_proprietaire22.options[proprietaire2].value
+                + "&selection_marque=" + document.form_action.selection_marque2.options[marque].value
+                + "&selection_activite=" + document.form_action.selection_activite2.options[activite].value
+                + "&selection_rayon=" + document.form_action.selection_rayon2.options[rayon].value
+                + "&selection_environnement=" + document.form_action.selection_environnement2.options[environnement].value
+                + "&selection_reseau=" + document.form_action.selection_reseau2.options[reseau].value
+                + "&checkIdFtaClasssification=1"
+
+                ;
+
+
+        parent.location.href = url;
+    }
+    function selection_saisonnalite2_js() {
+        proprietaire1 = document.form_action.selection_proprietaire12.selectedIndex;
+        proprietaire2 = document.form_action.selection_proprietaire22.selectedIndex;
+        marque = document.form_action.selection_marque2.selectedIndex;
+        activite = document.form_action.selection_activite2.selectedIndex;
+        rayon = document.form_action.selection_rayon2.selectedIndex;
+        environnement = document.form_action.selection_environnement2.selectedIndex;
+        reseau = document.form_action.selection_reseau2.selectedIndex;
+        saisonnalite = document.form_action.selection_saisonnalite2.selectedIndex;
+        idFta = document.getElementById("id_fta").value;
+        id_fta_chapitre_encours = document.getElementById("id_fta_chapitre_encours").value;
+        syntheseAction = document.getElementById("synthese_action").value;
+        comeback = document.getElementById("comeback").value;
+        idFtaEtat = document.getElementById("id_fta_etat").value;
+        abreviationFtaEtat = document.getElementById("abreviation_fta_etat").value;
+        idFtaRole = document.getElementById("id_fta_role").value;
+        //if (i == 0) return;
+        url = "ajout_classification_chemin.php?id_fta=" + idFta
+                + "&id_fta_chapitre_encours=" + id_fta_chapitre_encours
+                + "&synthese_action=" + syntheseAction
+                + "&comeback=" + comeback
+                + "&id_fta_etat=" + idFtaEtat
+                + "&abreviation_fta_etat=" + abreviationFtaEtat
+                + "&id_fta_role=" + idFtaRole
+                + "&selection_proprietaire1=" + document.form_action.selection_proprietaire12.options[proprietaire1].value
+                + "&selection_proprietaire2=" + document.form_action.selection_proprietaire22.options[proprietaire2].value
+                + "&selection_marque=" + document.form_action.selection_marque2.options[marque].value
+                + "&selection_activite=" + document.form_action.selection_activite2.options[activite].value
+                + "&selection_rayon=" + document.form_action.selection_rayon2.options[rayon].value
+                + "&selection_environnement=" + document.form_action.selection_environnement2.options[environnement].value
+                + "&selection_reseau=" + document.form_action.selection_reseau2.options[reseau].value
+                + "&selection_saisonnalite=" + document.form_action.selection_saisonnalite2.options[saisonnalite].value
+                + "&checkIdFtaClasssification=1"
+                ;
+
         parent.location.href = url;
     }
 </script>

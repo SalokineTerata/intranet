@@ -243,12 +243,42 @@ class FtaView {
      * @param type $paramIsEditable
      * @return type
      */
-    public function ListeClassification($paramIsEditable) {
+    public function ListeClassification($paramIsEditable, $paramIdFtaChapitre, $paramSyntheseAction, $paramComeback, $paramIdFtaEtat, $paramAbrevationEtat, $paramIdFtaRole) {
+        $idFtaClassification2 = $this->getModel()->getDataField(FtaModel::FIELDNAME_ID_FTA_CLASSIFICATION2)->getFieldValue();
+        $idFta = $this->getModel()->getKeyValue();
         /*
          * Classification FTA
          */
-        $ListeCLassification = ClassificationFta2Model::ShowListeDeroulanteClassification($paramIsEditable);
+        if ($paramIsEditable and ! $idFtaClassification2) {
 
+            $ListeCLassification = "<tr ><td class=\"contenu\">Ajouter une classification</td ><td class=\"contenu\">"
+                    . "<a href="
+                    . "ajout_classification_chemin.php?"
+                    . "id_fta=" . $idFta
+                    . "&id_fta_chapitre_encours=" . $paramIdFtaChapitre
+                    . "&synthese_action=" . $paramSyntheseAction
+                    . "&comeback=" . $paramComeback
+                    . "&id_fta_etat=" . $paramIdFtaEtat
+                    . "&abreviation_fta_etat=" . $paramAbrevationEtat
+                    . "&id_fta_role=" . $paramIdFtaRole
+                    . ">Cliquez ici</a></td></tr>";
+        } else {
+            $ListeCLassification = ClassificationFta2Model::ShowListeDeroulanteClassification(FALSE);
+            if ($paramIsEditable) {
+                $ListeCLassification .= "<tr ><td class=\"contenu\">Modifier la classification</td ><td class=\"contenu\">"
+                        . "<a href="
+                        . "ajout_classification_chemin.php?"
+                        . "id_fta=" . $idFta
+                        . "&id_fta_chapitre_encours=" . $paramIdFtaChapitre
+                        . "&synthese_action=" . $paramSyntheseAction
+                        . "&comeback=" . $paramComeback
+                        . "&id_fta_etat=" . $paramIdFtaEtat
+                        . "&abreviation_fta_etat=" . $paramAbrevationEtat
+                        . "&id_fta_role=" . $paramIdFtaRole
+                        . "&id_fta_classification2=" . $idFtaClassification2
+                        . ">Cliquez ici</a></td></tr>";
+            }
+        }
 
         return $ListeCLassification;
     }

@@ -1815,7 +1815,7 @@ class Chapitre {
          * Classification
          *
          */
-        $bloc.=$ftaView->ListeClassification($isEditable,self::$id_fta_chapitre,$synthese_action,self::$comeback,self::$id_fta_etat,self::$abrevation_etat,self::$id_fta_role  );
+        $bloc.=$ftaView->ListeClassification($isEditable, self::$id_fta_chapitre, $synthese_action, self::$comeback, self::$id_fta_etat, self::$abrevation_etat, self::$id_fta_role);
         /*
          * Deviendra une liste deroulante dépendante des donné choisie dans la classification
          */
@@ -2186,6 +2186,7 @@ class Chapitre {
     protected static function buildHtmlCorrectButton() {
         $return = '';
         if (self::$is_correctable == true) {
+
             $return = '<br><br><br><br><br><table width=\'30%\' align=\'right\'><tr align=\'right\'><td class=titre_principal>'
                     . DatabaseDescription::getFieldDocLabel('fta_suivi_projet', 'correction_fta_suivi_projet') . '</td></tr><tr align=\'right\'><td>'
                     . '<textarea name=correction_fta_suivi_projet rows=3 cols=40></textarea></td></tr><tr align=\'right\'><td>'

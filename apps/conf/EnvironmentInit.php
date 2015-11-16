@@ -30,6 +30,7 @@ class EnvironmentInit extends EnvironmentAbstract {
     const MYSQL_DATABASE_NAME = "MYSQL_DATABASE_NAME";
     const MYSQL_SERVER_NAME = "MYSQL_SERVER_NAME";
     const SITE_TITLE = "SITE_TITLE";
+    const SITE_VERSION = "SITE_VERSION";
     const SMTP_EMAIL_REDIRECTION_ADMIN = "SMTP_EMAIL_REDIRECTION_ADMIN";
     const SMTP_EMAIL_REDIRECTION_USER = "SMTP_EMAIL_REDIRECTION_USER";
     const SMTP_SERVER_NAME = "SMTP_SERVER_NAME";
@@ -59,6 +60,7 @@ class EnvironmentInit extends EnvironmentAbstract {
         /**
          * Partie 3 :
          */
+        $this->getConf()->setApplicationVersion($paramInit[self::SITE_VERSION][$paramEnvName]);
         $this->getConf()->setApplicationName($paramInit[self::APPLICATION_NAME][$paramEnvName]);
         $this->getConf()->setApplicationTitle($paramInit[self::SITE_TITLE][$paramEnvName]);
         $this->getConf()->setApplicationLogo($paramInit[self::APPLICATION_LOGO][$paramEnvName]);

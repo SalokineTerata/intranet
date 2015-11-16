@@ -47,7 +47,7 @@ class FtaChapitreModel extends AbstractModel {
         $HtmlResult = new HtmlResult2();
 
         $globalConfig = new GlobalConfig();
-              UserModel::ConnexionFalse($globalConfig);
+        UserModel::ConnexionFalse($globalConfig);
 
         $idUser = $globalConfig->getAuthenticatedUser()->getKeyValue();
         $idFtaWorkflowStructure = FtaWorkflowStructureModel::getIdFtaWorkflowStructureByIdFtaAndIdChapitre(
@@ -83,11 +83,14 @@ class FtaChapitreModel extends AbstractModel {
             }
         }
         //Intégration du commentaire de la correction
-        $newCorrectionFtaSuiviProjet.= $current_correction_fta_suivi_projet . '\n\n' . date('Y-m-d') . ': '
-                . $prenom . ' ' . $nom . ': '//table salaries
+        $newCorrectionFtaSuiviProjet.= $current_correction_fta_suivi_projet
+                . '<br/><br/>'
+                . date('Y-m-d') . ': '
+                . $prenom . ' ' . $nom . ': <br/>'//table salaries
                 . $option[FtaSuiviProjetModel::FIELDNAME_CORRECTION_FTA_SUIVI_PROJET]
         ;
-        $newCorrectionFtaSuiviProjet = mysql_real_escape_string($newCorrectionFtaSuiviProjet);
+//        $newCorrectionFtaSuiviProjet = mysql_real_escape_string($newCorrectionFtaSuiviProjet);
+        $newCorrectionFtaSuiviProjet = str_replace("<br/>", "\n", $newCorrectionFtaSuiviProjet);
 
         //Dévalidation du chapitre en cours
         $reqDevelidationChapitre = ' UPDATE ' . FtaSuiviProjetModel::TABLENAME
@@ -156,7 +159,7 @@ class FtaChapitreModel extends AbstractModel {
 
             if ($return['mail']) {
                 foreach ($return['mail'] as $mail) {
-                    $sujetmail = 'FTA/Correction: $name';
+                    $sujetmail = 'FTA/Correction: ' . $name;
                     $destinataire = $mail;
                     $expediteur = $prenom . ' ' . $nom . ' <' . $mail . '>';
                     $text = 'Vos chapitres viennent d\'être dévalidés suite à une correction apportée par '

@@ -18,7 +18,6 @@
                 + "&synthese_action=" + document.form_action.synthese_action.value
                 + "&demande_abreviation_fta_transition=" + document.form_action.demande_abreviation_fta_transition.value
                 ;
-
         parent.location.href = url;
     }
 
@@ -61,7 +60,6 @@
         var ParamCallbackFunction = ParamCallbackFunction;
         var ParamCallbackFunctionParameters = ParamCallbackFunctionParameters;
         AjaxDoAction(ParamTagId, ParamCallFile, ParamUrlParameter, ParamCallbackFunction, ParamCallbackFunctionParameters);
-
     }
     function ajaxDoAction(ParamTagId, ParamCallFile, ParamUrlParameter, ParamCallbackFunction, ParamCallbackFunctionParameters) {
 
@@ -70,21 +68,16 @@
         var PhpAjaxFile = ParamCallFile;
         var CallbackFunction = ParamCallbackFunction;
         var CallbackFunctionParameters = ParamCallbackFunctionParameters;
-
         var TagData = TagId;
         var Data = document.getElementById(TagData);
         var FieldValue = Data.value;
         //var FieldValueForUrl = escape(FieldValue);
         var FieldValueForUrl = encodeURIComponent(FieldValue);
-
         //alert(FieldValueForUrl);
 
         var HtmlImageLoading = '<?php echo Html::DEFAULT_HTML_IMAGE_LOADING ?>';
         var TagStatus = '<?php echo Html::PREFIXE_ID_ICON_STATUS ?>' + '_' + TagId;
-
         var UrlParameter = ParamUrlParameter + '&FieldValue=' + FieldValueForUrl;
-
-
         function handleAJAXReturnCustom()
         {
             var ParamTagStatus = TagStatus;
@@ -100,6 +93,8 @@
         http.send(null);
     }
 
+
+
     function handleAJAXReturn(ParamTagStatus, ParamHttp, ParamCallbackFunction, ParamCallbackFunctionParameters)
     {
 
@@ -110,7 +105,6 @@
         var HtmlImageFailed = '<?php echo Html::DEFAULT_HTML_IMAGE_FAILED ?>';
         var CallbackFunction = ParamCallbackFunction;
         var CallbackFunctionParameters = ParamCallbackFunctionParameters;
-
         //Corps de la fonction
         //0 : L'objet XHR a été créé, mais pas encore initialisé (la méthode open n'a pas encore été appelée)
         //1 : L'objet XHR a été créé, mais pas encore envoyé (avec la méthode send )
@@ -152,15 +146,12 @@
         var idElementUniteFacturation = Parameters[0];
         var idElementDataPoidsElem = Parameters[1];
         var idElementRowPoidsElem = '<?php echo Html::PREFIXE_ID_ROW . "_" ?>' + idElementDataPoidsElem;
-
         elementUniteFacturation = document.getElementById(idElementUniteFacturation);
-
         if (elementUniteFacturation.value === '<?php echo FtaModel::ID_POIDS_VARIABLE ?>')
         {
             displayFalseElementById(idElementRowPoidsElem);
             document.getElementById(idElementDataPoidsElem).value = "0";
             document.getElementById(idElementDataPoidsElem).onchange();
-
         } else {
             displayTrueElementById(idElementRowPoidsElem);
         }
@@ -208,8 +199,6 @@
                 + "&selection_proprietaire2=" + document.form_action.selection_proprietaire2.options[proprietaire2].value
                 + "&checkIdFtaClasssification=1"
                 ;
-
-
     }
     function selection_marque_js() {
         proprietaire1 = document.form_action.selection_proprietaire1.selectedIndex;
@@ -221,7 +210,6 @@
         idFtaEtat = document.getElementById("id_fta_etat").value;
         abreviationFtaEtat = document.getElementById("abreviation_fta_etat").value;
         idFtaRole = document.getElementById("id_fta_role").value;
-
         url = "modification_fiche.php?id_fta=" + idFta
                 + "&synthese_action=" + syntheseAction
                 + "&comeback=" + comeback
@@ -234,8 +222,6 @@
                 + "&checkIdFtaClasssification=1"
 
                 ;
-
-
         parent.location.href = url;
     }
     function selection_activite_js() {
@@ -249,7 +235,6 @@
         idFtaEtat = document.getElementById("id_fta_etat").value;
         abreviationFtaEtat = document.getElementById("abreviation_fta_etat").value;
         idFtaRole = document.getElementById("id_fta_role").value;
-
         //if (i == 0) return;
         url = "modification_fiche.php?id_fta=" + idFta
                 + "&synthese_action=" + syntheseAction
@@ -264,7 +249,6 @@
                 + "&checkIdFtaClasssification=1"
 
                 ;
-
         parent.location.href = url;
     }
     function selection_rayon_js() {
@@ -294,8 +278,6 @@
                 + "&checkIdFtaClasssification=1"
 
                 ;
-
-
         parent.location.href = url;
     }
     function selection_environnement_js() {
@@ -327,8 +309,6 @@
                 + "&checkIdFtaClasssification=1"
 
                 ;
-
-
         parent.location.href = url;
     }
     function selection_reseau_js() {
@@ -362,8 +342,6 @@
                 + "&checkIdFtaClasssification=1"
 
                 ;
-
-
         parent.location.href = url;
     }
     function selection_saisonnalite_js() {
@@ -419,7 +397,6 @@
                 + "&id_fta_role=" + idFtaRole
                 + "&selection_proprietaire1=" + document.form_action.selection_proprietaire12.options[proprietaire1].value
                 + "&checkIdFtaClasssification=1";
-
         parent.location.href = url;
     }
 
@@ -445,8 +422,6 @@
                 + "&selection_proprietaire2=" + document.form_action.selection_proprietaire22.options[proprietaire2].value
                 + "&checkIdFtaClasssification=1"
                 ;
-
-
         parent.location.href = url;
     }
     function selection_marque2_js() {
@@ -460,7 +435,6 @@
         idFtaEtat = document.getElementById("id_fta_etat").value;
         abreviationFtaEtat = document.getElementById("abreviation_fta_etat").value;
         idFtaRole = document.getElementById("id_fta_role").value;
-
         url = "ajout_classification_chemin.php?id_fta=" + idFta
                 + "&id_fta_chapitre_encours=" + id_fta_chapitre_encours
                 + "&synthese_action=" + syntheseAction
@@ -488,7 +462,6 @@
         idFtaEtat = document.getElementById("id_fta_etat").value;
         abreviationFtaEtat = document.getElementById("abreviation_fta_etat").value;
         idFtaRole = document.getElementById("id_fta_role").value;
-
         //if (i == 0) return;
         url = "ajout_classification_chemin.php?id_fta=" + idFta
                 + "&id_fta_chapitre_encours=" + id_fta_chapitre_encours
@@ -504,8 +477,6 @@
                 + "&checkIdFtaClasssification=1"
 
                 ;
-
-
         parent.location.href = url;
     }
     function selection_rayon2_js() {
@@ -537,8 +508,6 @@
                 + "&checkIdFtaClasssification=1"
 
                 ;
-
-
         parent.location.href = url;
     }
     function selection_environnement2_js() {
@@ -572,9 +541,6 @@
                 + "&checkIdFtaClasssification=1"
 
                 ;
-
-
-
         parent.location.href = url;
     }
     function selection_reseau2_js() {
@@ -610,8 +576,6 @@
                 + "&checkIdFtaClasssification=1"
 
                 ;
-
-
         parent.location.href = url;
     }
     function selection_saisonnalite2_js() {
@@ -648,7 +612,6 @@
                 + "&selection_saisonnalite=" + document.form_action.selection_saisonnalite2.options[saisonnalite].value
                 + "&checkIdFtaClasssification=1"
                 ;
-
         parent.location.href = url;
     }
 </script>

@@ -250,7 +250,7 @@ function recursifOne($paramStartValue, $htmlResult) {
 //                );
 
 $hostname_connect = "127.0.0.1"; //nom du serveur MySQL de connection � la base de donn�e
-$database_connect = $nameOfBDDStructure; //nom de la base de donn�e sur votre serveur MySQL
+$database_connect = $nameOfBDDTarget; //nom de la base de donn�e sur votre serveur MySQL
 $username_connect = "mysqladm"; //login de la base MySQL
 //$tablename_connect = "agis"; //table login de la base MySQL
 $password_connect = "agis"; //mot de passe de la base MySQL

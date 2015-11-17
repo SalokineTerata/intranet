@@ -653,7 +653,7 @@ class FtaSuiviProjetModel extends AbstractModel {
             foreach ($arrayCycle as $rowsCycle) {
                 $id_fta_processus = $rowsCycle[FtaProcessusCycleModel::FIELDNAME_PROCESSUS_INIT];
 //                $taux_validation_processus = FtaProcessusModel::getValideProcessusEncours($idFta, $id_fta_processus, $paramFtaModel->getDataField(FtaModel::FIELDNAME_WORKFLOW)->getFieldValue());
-                $taux_validation_processus = FtaProcessusModel::getFtaProcessusNonValidePrecedent($idFta, $id_fta_processus, $paramFtaModel->getDataField(FtaModel::FIELDNAME_WORKFLOW)->getFieldValue());
+                $taux_validation_processus = FtaProcessusModel::getNonValideProcessusSuivant($idFta, $id_fta_processus, $paramFtaModel->getDataField(FtaModel::FIELDNAME_WORKFLOW)->getFieldValue());
 
                 //Détail par processus
                 $return[1][$id_fta_processus] = $taux_validation_processus;

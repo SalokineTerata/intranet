@@ -22,9 +22,8 @@ URL_SERVER_NAME="$8"
 
 echo "*** Requêtes SQL:"
 echo "  * Migration de l'intranet V2 vers V3 ayant comme BDD d'origine $DB_NAME_ORIG pour devenir DB_NAME_V3 grâce à $DB_NAME_STRUCTURE..."
-#echo php ./apps/upgrade/upgrade2.0to3.0_Part_1.php $DB_NAME_V3 $DB_NAME_ORIG $DB_NAME_STRUCTURE $MYSQL_SERVER_NAME_DEST $MYSQL_USER_NAME_DEST $MYSQL_USER_PASSWORD_DEST
 php ./apps/upgrade/upgrade2.0to3.0_Part_1.php $DB_NAME_V3 $DB_NAME_ORIG $DB_NAME_STRUCTURE $MYSQL_SERVER_NAME_DEST $MYSQL_USER_NAME_DEST $MYSQL_USER_PASSWORD_DEST
 
-#lynx -dump -accept_all_cookies http://$URL_SERVER_NAME/v3/apps/fta/extraction_classification_$DB_ENVIRONNEMENT.php 
+lynx -dump -accept_all_cookies http://$URL_SERVER_NAME/v3/apps/fta/extraction_classification_$DB_ENVIRONNEMENT.php 
 
 php ./apps/upgrade/upgrade2.0to3.0_Part_2.php $DB_NAME_V3 $DB_NAME_ORIG $DB_NAME_STRUCTURE $MYSQL_SERVER_NAME_DEST $MYSQL_USER_NAME_DEST $MYSQL_USER_PASSWORD_DEST

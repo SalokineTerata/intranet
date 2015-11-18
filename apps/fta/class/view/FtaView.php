@@ -780,6 +780,10 @@ class FtaView {
         return $return;
     }
 
+    public function getHtmlCommentaireAllChapitres() {
+        return FtaSuiviProjetModel::getAllCommentsFromChapitres($this->getModel()->getKeyValue());
+    }
+
     /**
      * 
      * @return type

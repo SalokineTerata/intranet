@@ -116,7 +116,7 @@ if ($idFta) {
 //$navigue = afficher_navigation($id_fta, $id_fta_chapitre_encours, $synthese_action, $comeback);
 
 
-    Navigation::initNavigation($idFta, $id_fta_chapitre_encours, $synthese_action, $comeback, $idFtaEtat, $abreviationFtaEtat, $idFtaRole);
+    Navigation::initNavigation($idFta, $id_fta_chapitre_encours, $synthese_action, $comeback, $idFtaEtat, $abreviationFtaEtat, $idFtaRole, TRUE);
 
     $navigue = Navigation::getHtmlNavigationBar();
 

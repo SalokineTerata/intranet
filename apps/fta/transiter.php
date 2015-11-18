@@ -68,7 +68,7 @@ $syntheseAction = Lib::getParameterFromRequest('synthese_action');
  */
 $ftaModel = new FtaModel($idFta);
 $globalConfig = new GlobalConfig();
-      UserModel::ConnexionFalse($globalConfig);
+UserModel::ConnexionFalse($globalConfig);
 
 $idUser = $globalConfig->getAuthenticatedUser()->getKeyValue();
 $ftaView = new FtaView($ftaModel);
@@ -131,7 +131,7 @@ $req = 'SELECT ' . FtaTransitionModel::FIELDNAME_NOM_USUEL_FTA_TRANSITION . ', '
         /**
          * Désactivation du changement d'eapace de travail au meme moment que le changement d'état
          */
-       . ' AND ' . FtaTransitionModel::FIELDNAME_ABREVIATION_FTA_TRANSITION . '<>\'' . FtaEtatModel::ETAT_ABREVIATION_VALUE_WORKFLOW . '\'' 
+        . ' AND ' . FtaTransitionModel::FIELDNAME_ABREVIATION_FTA_TRANSITION . '<>\'' . FtaEtatModel::ETAT_ABREVIATION_VALUE_WORKFLOW . '\''
 ;
 if ($demande_abreviation_fta_transition) {
     $req.= ' AND ' . FtaTransitionModel::FIELDNAME_ABREVIATION_FTA_TRANSITION . '=\'' . $demande_abreviation_fta_transition . '\' ';
@@ -144,12 +144,19 @@ if ($idFtaRole == "6") {
     $req.= ' AND ' . FtaTransitionModel::FIELDNAME_ABREVIATION_FTA_TRANSITION . '<>\'' . FtaEtatModel::ETAT_ABREVIATION_VALUE_WORKFLOW . '\'';
 }
 
-$req .=' ORDER BY ' . FtaTransitionModel::FIELDNAME_ABREVIATION_FTA_TRANSITION;
+$req .=' ORDER BY ' . FtaTransitionModel::FIELDNAME_ABREVIATION_FTA_TRANSITION . ' DESC';
 $arrayFtaTransition = DatabaseOperation::convertSqlStatementWithoutKeyToArray($req);
 
 $flag_selection_chapitre = 0;    //Peut-on sélectionner un chapitre à mettre à jour ?
 
+
 foreach ($arrayFtaTransition as $rowsFtaTransition) {
+    /**
+     * Pour le cas des retirer vers modification on ajoute une action par défaut
+     */
+    if (count($arrayFtaTransition) == "1" and $action == NULL) {
+        $action = 'I';
+    }
     //Si l'utilisateur est autorisé à utiliser cette transition, alors affichage de l'option
 
     if ($action == $rowsFtaTransition[FtaTransitionModel::FIELDNAME_ABREVIATION_FTA_TRANSITION]) {
@@ -210,8 +217,6 @@ if ($action == 'I' or $action == 'W') {
 //     */
 //    $listeDesWorkflow.=$ftaView->ListeWorkflowByAcces($idUser, TRUE, $idFta, $idFtaRole);
 //}
-
-
 //Validation_matiere_premiere
 //Boris 2005-09-15: risque de mettre une date antérieure à la dernière date de mise à jour
 $nom_date = 'date_derniere_maj_fta';

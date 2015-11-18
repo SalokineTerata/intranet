@@ -318,3 +318,18 @@ zerzerez
 2015-11-16 14:48:17 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `correction_fta_suivi_projet` =   'trytrytrs'
 2015-11-16 14:48:26 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 
 2015-11-16 14:48:26 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `correction_fta_suivi_projet` =   NULL
+2015-11-17 15:01:53 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : test
+2015-11-17 15:01:53 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `commentaire_maj_fta` =   'test'
+2015-11-18 10:36:39 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : aaa
+2015-11-18 10:36:39 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `commentaire_suivi_projet` =   'aaa'
+2015-11-18 11:25:11 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : test
+
+ezrqezre
+2015-11-18 11:25:11 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `commentaire_suivi_projet` =   'test\n\nezrqezre'
+2015-11-18 11:25:25 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : tretretr
+2015-11-18 11:25:25 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `commentaire_suivi_projet` =   'tretretr'
+2015-11-18 11:25:36 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : tretretr
+ytufytuf
+
+tdytyryrty ç_èç_çè('-'(-
+2015-11-18 11:25:36 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `commentaire_suivi_projet` =   'tretretr\nytufytuf\n\ntdytyryrty ç_èç_çè(\\\'-\\\'(-'

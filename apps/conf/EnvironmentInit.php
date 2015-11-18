@@ -37,6 +37,7 @@ class EnvironmentInit extends EnvironmentAbstract {
     const URL_PROTOCOL = "URL_PROTOCOL";
     const URL_ROOT_DIR = "URL_ROOT_DIR";
     const URL_SERVER_NAME = "URL_SERVER_NAME";
+    const REVERSE_PROXY_NAME = "REVERSE_PROXY_NAME";
     const URL_SUBDIR = "URL_SUBDIR";
 
     function __construct($paramEnvName, $paramInit) {
@@ -54,6 +55,7 @@ class EnvironmentInit extends EnvironmentAbstract {
          */
         $this->getConf()->setUrlProtocol($paramInit[self::URL_PROTOCOL][$paramEnvName]);
         $this->getConf()->setUrlServer(filter_input(INPUT_SERVER, 'SERVER_NAME'));
+        $this->getConf()->setReverseProxyName(filter_input(INPUT_SERVER, 'REVERSE_PROXY_NAME'));
         $this->getConf()->setUrlRootDir($paramInit[self::URL_ROOT_DIR][$paramEnvName]);
         $this->getConf()->setUrlSubdir($paramInit[self::URL_SUBDIR][$paramEnvName]);
 

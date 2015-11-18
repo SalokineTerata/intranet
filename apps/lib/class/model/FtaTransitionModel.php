@@ -39,7 +39,7 @@ class FtaTransitionModel {
         $ftaEtatModel = new FtaEtatModel($idFtaEtatByIdFta);
         $initial_abreviation_fta_etat = $ftaEtatModel->getDataField(FtaEtatModel::FIELDNAME_ABREVIATION)->getFieldValue();
         $globalConfig = new GlobalConfig();
-                              UserModel::ConnexionFalse($globalConfig);
+        UserModel::ConnexionFalse($globalConfig);
 
         $idUser = $globalConfig->getAuthenticatedUser()->getKeyValue();
         $userModel = new UserModel($idUser);
@@ -536,8 +536,7 @@ class FtaTransitionModel {
                 . "\n"
                 . "INFORMATIONS DE DEBUGGAGE:\n"
                 . $logTransition
-        ;
-        {
+        ; {
             $expediteur = $prenom . " " . $nom . " <" . $mail . ">";
             envoismail($sujetmail, $corp, $mail, $expediteur, $typeMail);
         }

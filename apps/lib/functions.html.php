@@ -616,7 +616,7 @@ function print_page_begin($disable_full_page = FALSE, $menu_file = NULL, $conf =
 
 
     if (!$disable_full_page) {
-        echo "<div class=display_none id=site width=100%; style=visibility:hidden;>";
+        echo "<div class=display_none id=site width=100%; >";
         echo "<table border=0 cellspacing=0 cellpadding=0 height=534>";
         echo "<tr>";
         echo "<td valign=top  align=center><div id=menu class=display_none>";

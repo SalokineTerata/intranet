@@ -59,6 +59,7 @@ class EnvironmentConf {
     private $urlProtocol = null;
     private $urlRoot = null;       //Suivant environnement
     private $urlServer = null;
+    private $reverseProxyName = null;
     private $urlSubdir = null;
 
     /**
@@ -90,11 +91,20 @@ class EnvironmentConf {
     }
 
     public function getUrlFullRoot() {
-        return $this->getUrlProtocol() . '://'
-                . $this->getUrlServer() . '/'
-                . $this->getUrlRoot() . '/'
-                . $this->getUrlSubdir()
-        ;
+        if ($this->getReverseProxyName() == NULL) {
+            $UrlFullRoot = $this->getUrlProtocol() . '://'
+                    . $this->getUrlServer() . '/'
+                    . $this->getUrlRoot() . '/'
+                    . $this->getUrlSubdir()
+            ;
+        } else {
+            $UrlFullRoot = $this->getUrlProtocol() . '://'
+                    . $this->getReverseProxyName() . '/'
+                    . $this->getUrlRoot() . '/'
+                    . $this->getUrlSubdir()
+            ;
+        }
+        return $UrlFullRoot;
     }
 
     public function getUrlProtocol() {
@@ -272,6 +282,14 @@ class EnvironmentConf {
 
     public function setApplicationVersion($applicationVersion) {
         $this->applicationVersion = $applicationVersion;
+    }
+
+    function getReverseProxyName() {
+        return $this->reverseProxyName;
+    }
+
+    function setReverseProxyName($reverseProxyName) {
+        $this->reverseProxyName = $reverseProxyName;
     }
 
 }

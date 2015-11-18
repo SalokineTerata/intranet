@@ -3233,11 +3233,11 @@ $sql = "DROP TABLE ".$nameOfBDDTarget.".intranet_access_linked_table";
 if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
 
 echo "CREATE TABLE ".$nameOfBDDTarget.".intranet_access_linked_table ...";
-$sql = "CREATE TABLE ".$nameOfBDDTarget.".intranet_access_linked_table LIKE ".$nameOfBDDOrigin.".intranet_access_linked_table";
+$sql = "CREATE TABLE ".$nameOfBDDTarget.".intranet_access_linked_table LIKE ".$nameOfBDDStructure.".intranet_access_linked_table";
 if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
 
 echo "INSERT INTO ".$nameOfBDDTarget.".intranet_access_linked_table ...";
-$sql = "INSERT INTO ".$nameOfBDDTarget.".intranet_access_linked_table SELECT * FROM ".$nameOfBDDOrigin.".intranet_access_linked_table";
+$sql = "INSERT INTO ".$nameOfBDDTarget.".intranet_access_linked_table SELECT * FROM ".$nameOfBDDStructure.".intranet_access_linked_table";
 if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
 
 echo "DROP ".$nameOfBDDTarget.".lustat ...";
@@ -4007,11 +4007,11 @@ $sql = "DROP TABLE ".$nameOfBDDTarget.".annexe_service_consommateur";
 if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
 
 echo "CREATE TABLE ".$nameOfBDDTarget.".annexe_service_consommateur ...";
-$sql = "CREATE TABLE ".$nameOfBDDTarget.".annexe_service_consommateur LIKE ".$nameOfBDDStructure.".annexe_service_consommateur";
+$sql = "CREATE TABLE ".$nameOfBDDTarget.".annexe_service_consommateur LIKE ".$nameOfBDDOrigin.".service_consommateur";
 if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
 
 echo "INSERT INTO ".$nameOfBDDTarget.".annexe_service_consommateur ...";
-$sql = "INSERT INTO ".$nameOfBDDTarget.".annexe_service_consommateur SELECT * FROM ".$nameOfBDDStructure.".annexe_service_consommateur";
+$sql = "INSERT INTO ".$nameOfBDDTarget.".annexe_service_consommateur SELECT * FROM ".$nameOfBDDOrigin.".service_consommateur";
 if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
 
 echo "DROP ".$nameOfBDDTarget.".annexe_unite_facturation ...";

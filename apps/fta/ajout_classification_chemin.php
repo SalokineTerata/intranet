@@ -101,7 +101,7 @@ if ($selection_saisonnalite) {
      </tr>';
 }
 
-Navigation::initNavigation($idFta, $id_fta_chapitre_encours, $syntheseAction, $comeback, $idFtaEtat, $abreviationFtaEtat, $idFtaRole);
+Navigation::initNavigation($idFta, $id_fta_chapitre_encours, $syntheseAction, $comeback, $idFtaEtat, $abreviationFtaEtat, $idFtaRole,FALSE);
 
 $navigue = Navigation::getHtmlNavigationBar();
 

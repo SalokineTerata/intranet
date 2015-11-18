@@ -37,6 +37,7 @@ $fieldEnvironnement = "";
 $fieldSaisonalite = "";
 $fieldExport = "";
 require_once '../inc/main.php';
+
 //Barre de Navigation d'une Fiche Technique Article
 //include ("./menu_navigation.inc");
 //echo $synthese_action;
@@ -69,7 +70,6 @@ function UpgradeClassificationV2ToV3($paramNameOfBDDTarget, $paramNameOfBDDOrigi
 //
 //        return $reqTableClassifRoot;
 //    }
-
 //Démarrage
 //Initialisation première boucle:3
     $i = 0;
@@ -304,6 +304,20 @@ function UpgradeClassificationV2ToV3($paramNameOfBDDTarget, $paramNameOfBDDOrigi
 
     mysql_close();
 
+    $array = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
+                    "Select " . FtaModel::KEYNAME . "," . FtaModel::FIELDNAME_ID_FTA_ETAT . " FROM " . FtaModel::TABLENAME
+    );
+    foreach ($array as $value) {
+        $idFta = $value[FtaModel::KEYNAME];
+        $idFtaEtat = $value[FtaModel::FIELDNAME_ID_FTA_ETAT];
+        if ($idFtaEtat == "3") {
+            $req = "UPDATE " . FtaModel::TABLENAME
+                    . " SET " . FtaModel::FIELDNAME_POURCENTAGE_AVANCEMENT . "='" . "100%" . "' "
+                    . " WHERE " . FtaModel::KEYNAME . "='" . $idFta . "' "
+            ;
+            DatabaseOperation::execute($req);
+        }
+    }
     echo "FIN de TRAITEMENT";
 }
 

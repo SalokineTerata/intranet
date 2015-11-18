@@ -662,6 +662,31 @@ class FtaSuiviProjetModel extends AbstractModel {
         return $return;
     }
 
+    public static function getAllCommentsFromChapitres($paramIdFta) {
+        $arrayCommentaireAllChapitre = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
+                        "SELECT " . FtaSuiviProjetModel::FIELDNAME_COMMENTAIRE_SUIVI_PROJET . "," . UserModel::FIELDNAME_PRENOM . "," . UserModel::FIELDNAME_NOM
+                        . " FROM " . FtaSuiviProjetModel::TABLENAME . ", " . UserModel::TABLENAME
+                        . " WHERE ( " . FtaSuiviProjetModel::TABLENAME . "." . FtaSuiviProjetModel::FIELDNAME_SIGNATURE_VALIDATION_SUIVI_PROJET
+                        . " = " . UserModel::TABLENAME . "." . UserModel::KEYNAME . " ) "
+                        . " AND " . FtaSuiviProjetModel::TABLENAME . "." . FtaSuiviProjetModel::FIELDNAME_ID_FTA . " = " . $paramIdFta
+                        . " ORDER BY " . FtaSuiviProjetModel::FIELDNAME_DATE_VALIDATION_SUIVI_PROJET
+        );
+        if ($arrayCommentaireAllChapitre) {
+            foreach ($arrayCommentaireAllChapitre as $rowsCommentaireAllChapitre) {
+                if ($rowsCommentaireAllChapitre[FtaSuiviProjetModel::FIELDNAME_COMMENTAIRE_SUIVI_PROJET]) {
+                    $return.= "<br>" . $rowsCommentaireAllChapitre[UserModel::FIELDNAME_PRENOM] . " " . $rowsCommentaireAllChapitre[UserModel::FIELDNAME_NOM] . " a écrit:<br>"
+                            . $rowsCommentaireAllChapitre[FtaSuiviProjetModel::FIELDNAME_COMMENTAIRE_SUIVI_PROJET]
+                    ;
+                }
+            }
+            $return = "<tr class=contenu><td> Commentaires sur les Chapitres</td><td>" . $return . "</td></tr>";
+        } else {
+            $return = "<tr class=contenu><td> Commentaires sur les Chapitres</td><td></td></tr>";
+        }
+
+        return str_replace("  ", "&nbsp;&nbsp;", nl2br($return));
+    }
+
     public static function checkChapitreV2toV3($paramIdFtaChapitre, $paramIdFtaWorkflow) {
         switch ($paramIdFtaChapitre) {
             case '20':

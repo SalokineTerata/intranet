@@ -13,6 +13,7 @@ class Navigation {
     protected static $id_fta_role;
     protected static $comeback;
     protected static $comeback_url;
+    protected static $ftaModel;
     protected static $html_navigation_bar;
     protected static $html_navigation_core;
     //protected static $id_fta_chapitre;
@@ -26,24 +27,32 @@ class Navigation {
         return self::$html_navigation_bar;
     }
 
-    public static function initNavigation($id_fta, $id_fta_chapitre_encours, $synthese_action, $comeback, $id_fta_etat, $abrevation_etat, $id_fta_role) {
+    public static function initNavigation($id_fta, $id_fta_chapitre_encours, $synthese_action, $comeback, $id_fta_etat, $abrevation_etat, $id_fta_role,$paramActivationComplete) {
 
         self::$id_fta = $id_fta;
         self::$id_fta_chapitre_encours = $id_fta_chapitre_encours;
         self::$synthese_action = $synthese_action;
+        if($id_fta_etat <> "1"){
+            self::$synthese_action = FtaEtatModel::ETAT_AVANCEMENT_VALUE_ALL;
+        }
         self::$comeback = $comeback;
         self::$id_fta_etat = $id_fta_etat;
         self::$abreviation_etat = $abrevation_etat;
         self::$id_fta_role = $id_fta_role;
-        $ftaModel = new FtaModel(self::$id_fta);
-        self::$id_fta_workflow = $ftaModel->getDataField(FtaModel::FIELDNAME_WORKFLOW)->getFieldValue();
+        self::$ftaModel = new FtaModel(self::$id_fta);
+        self::$id_fta_workflow = self::$ftaModel->getDataField(FtaModel::FIELDNAME_WORKFLOW)->getFieldValue();
         $ftaWorkflowModel = new FtaWorkflowModel(self::$id_fta_workflow);
         self::$id_parent_intranet_actions = $ftaWorkflowModel->getDataField(FtaWorkflowModel::FIELDNAME_ID_INTRANET_ACTIONS)->getFieldValue();
 
-        self::$html_navigation_bar = self::buildNavigationBar();
+        self::$html_navigation_bar = self::buildNavigationBar($paramActivationComplete);
     }
 
-    protected static function buildNavigationBar() {
+    /**
+     * Barre de naviagtion de la Fta
+     * @param type $paramActivationComplete
+     * @return string
+     */
+    protected static function buildNavigationBar($paramActivationComplete) {
         //Barre de navigation de la Fiche Tehnique Article
         //Variables
 
@@ -53,20 +62,18 @@ class Navigation {
                 . 'class=contenu '
         ;
         if (self::$id_fta) {
-            $ftamodel = new FtaModel(self::$id_fta);
-            $checkIdFta = $ftamodel->getDataField(FtaModel::KEYNAME)->getFieldValue();
+            $checkIdFta = self::$ftaModel->getDataField(FtaModel::KEYNAME)->getFieldValue();
             if (!$checkIdFta) {
                 $titre = "Affichage d'une Fta";
                 $message = "Erreur la Fta n'existe pas.<br><br>";
                 $redirection = "index.php";
                 afficher_message($titre, $message, $redirection);
             }
-        }else{         
-                $titre = "Affichage d'une Fta";
-                $message = "Erreur la Fta n'est passé en paramètre.<br><br>";
-                $redirection = "index.php";
-                afficher_message($titre, $message, $redirection);
-            
+        } else {
+            $titre = "Affichage d'une Fta";
+            $message = "Erreur la Fta n'est passé en paramètre.<br><br>";
+            $redirection = "index.php";
+            afficher_message($titre, $message, $redirection);
         }
         //Récupère la page en cours
         $arrayFtaEtatAndFta = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
@@ -83,6 +90,9 @@ class Navigation {
                         . '=' . FtaModel::TABLENAME . '.' . FtaModel::FIELDNAME_WORKFLOW
         );
 
+        $ftaRoleModel = new FtaRoleModel(self::$id_fta_role);
+        $siteDeProduction = self::$ftaModel->getDataField(FtaModel::FIELDNAME_SITE_ASSEMBLAGE)->getFieldValue();
+        $geoModel = new GeoModel($siteDeProduction);
         foreach ($arrayFtaEtatAndFta as $rowsFtaEtatAndFta) {
             //Récupération des informations préalables
             //Nom de l'assistante de projet responsable:
@@ -107,19 +117,25 @@ class Navigation {
                 $nom = $rowsFtaEtatAndFta[FtaModel::FIELDNAME_DESIGNATION_COMMERCIALE];
             }
             $menu_navigation = '
-                     <' . $html_table . '>
-                     <tr><td class=titre_principal> <div align=\'left\'>
+                 <' . $html_table . '><tr><td class=titre_principal> <div align=\'left\'>
                             <b><font size=\'2\' color=\'#0000FF\'>' . $rowsFtaEtatAndFta[FtaModel::FIELDNAME_CODE_ARTICLE_LDC] . '</font></b> - ' . $nom . ' &nbsp;&nbsp;&nbsp;&nbsp;<i>(gérée par ' . $createur . ')</i>  '
-//                    . '  Espace de Travail : '.$rowsFtaEtatAndFta[FtaWorkflowModel::FIELDNAME_DESCRIPTION_FTA_WORKFLOW]
-                    . '</div>
-            </td></tr>
+                    . '</div></td>'
+                    . '<td width=25% class=titre_principal>'
+                    . '  Rôle : ' . $ftaRoleModel->getDataField(FtaRoleModel::FIELDNAME_DESCRIPTION_FTA_ROLE)->getFieldValue()
+                    . '<br>  Site de Production : ' . $geoModel->getDataField(GeoModel::FIELDNAME_GEO)->getFieldValue()
+                    . '<br>  Espace de Travail : ' . $rowsFtaEtatAndFta[FtaWorkflowModel::FIELDNAME_DESCRIPTION_FTA_WORKFLOW]
+                    . '</td></tr></table>
+                     <' . $html_table . '>
+                    
             <tr class = titre>
             <td>
          
                      ';
         }
-        //Si une action est donnée, alors construction du menu des chapitres    
-        $menu_navigation .= self::CheckSyntheseAction();
+        if ($paramActivationComplete) {
+            //Si une action est donnée, alors construction du menu des chapitres    
+            $menu_navigation .= self::CheckSyntheseAction();
+        }
         //Lien de retour rapide
 
         self::$comeback_url = 'index.php?id_fta_etat=' . self::$id_fta_etat . '&nom_fta_etat=' . self::$abreviation_etat . '&id_fta_role=' . self::$id_fta_role . '&synthese_action=' . self::$synthese_action;
@@ -131,19 +147,21 @@ class Navigation {
         $menu_navigation.= '</td></tr><tr><td>
     <a href=' . self::$comeback_url . '><img src=../lib/images/bouton_retour.png alt=\'\' title=\'Retour à la synthèse\' width=\'18\' height=\'15\' border=\'0\' /> Retour vers la synthèse</a> |
     ';
-        //Corps du menu
-        $menu_navigation.='
+        if ($paramActivationComplete) {
+            //Corps du menu
+            $menu_navigation.='
                     <a href=historique-' . self::$id_fta
-                . '-' . self::$id_fta_chapitre_encours
-                . '-' . self::$id_fta_etat
-                . '-' . self::$abreviation_etat
-                . '-' . self::$id_fta_role
-                . '-' . self::$synthese_action
-                . '-1'
-                . '.html ><img src=./images/graphique.png alt=\'\' title=\'Etat d\'avancement\' width=\'18\' height=\'15\' border=\'0\' /> Etat d\'avancement</a>
+                    . '-' . self::$id_fta_chapitre_encours
+                    . '-' . self::$id_fta_etat
+                    . '-' . self::$abreviation_etat
+                    . '-' . self::$id_fta_role
+                    . '-' . self::$synthese_action
+                    . '-1'
+                    . '.html ><img src=./images/graphique.png alt=\'\' title=\'Etat d\'avancement\' width=\'18\' height=\'15\' border=\'0\' /> Etat d\'avancement</a>
                        </td></tr>                       
                        </table>
                        ';
+        }
         return $menu_navigation;
         //return $return raplacera menu_navigation;
     }
@@ -159,7 +177,7 @@ class Navigation {
         $ProcessusValide = array();
         $ProcessusEnLecture = array();
         $globalConfig = new GlobalConfig();
-      UserModel::ConnexionFalse($globalConfig);
+        UserModel::ConnexionFalse($globalConfig);
 
         $id_user = $globalConfig->getAuthenticatedUser()->getKeyValue();
         $idFtaRole = self::$id_fta_role;

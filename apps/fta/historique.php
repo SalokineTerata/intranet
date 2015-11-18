@@ -81,7 +81,7 @@ $detail_id_fta;              //Identifiant de la fiche sur laquelle on souhaite 
   Récupération des données MySQL
  */
 
-Navigation::initNavigation($id_fta, $id_fta_chapitre, $synthese_action, $comeback, $idFtaEtat, $abreviationFtaEtat, $idFtaRole);
+Navigation::initNavigation($id_fta, $id_fta_chapitre, $synthese_action, $comeback, $idFtaEtat, $abreviationFtaEtat, $idFtaRole,TRUE);
 $navigue = Navigation::getHtmlNavigationBar();
 //Calcul du taux
 $taux_temp = FtaSuiviProjetModel::getFtaTauxValidation($ftaModel, TRUE);
@@ -129,8 +129,16 @@ if ($id_fta) {
             $ftaProcessusModel = new FtaProcessusModel($id_fta_processus);
             $date_echeance_fta = $ftaModel->getDataField(FtaModel::FIELDNAME_DATE_ECHEANCE_FTA)->getFieldValue();
             $idFtaWorkflow = $ftaModel->getDataField(FtaModel::FIELDNAME_WORKFLOW)->getFieldValue();
+            /**
+             * 1 en attente 
+             * 2 en cours
+             * 3 validé
+             */
             if ($taux == "0") {
                 $idFtaProcessusEtat = "1";
+                /**
+                 * Vérification que tous les processus précédent soit validé si oui le processus est encours
+                 */
                 $taux_validation_processus = FtaProcessusModel::getFtaProcessusNonValidePrecedent($id_fta, $id_fta_processus, $idFtaWorkflow);
                 if ($taux_validation_processus == "1" or $taux_validation_processus === NULL) {
                     $idFtaProcessusEtat = "2";

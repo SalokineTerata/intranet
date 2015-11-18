@@ -127,19 +127,23 @@ if ($id_fta) {
             //Chargement des données
 
             $ftaProcessusModel = new FtaProcessusModel($id_fta_processus);
+            $date_echeance_fta = $ftaModel->getDataField(FtaModel::FIELDNAME_DATE_ECHEANCE_FTA)->getFieldValue();
+            $idFtaWorkflow = $ftaModel->getDataField(FtaModel::FIELDNAME_WORKFLOW)->getFieldValue();
             if ($taux == "0") {
                 $idFtaProcessusEtat = "1";
+                $taux_validation_processus = FtaProcessusModel::getFtaProcessusNonValidePrecedent($id_fta, $id_fta_processus, $idFtaWorkflow);
+                if ($taux_validation_processus == "1" or $taux_validation_processus === NULL) {
+                    $idFtaProcessusEtat = "2";
+                }
             } elseif ($taux <> "0" and $taux <> "1") {
                 $idFtaProcessusEtat = "2";
             } elseif ($taux == "1") {
                 $idFtaProcessusEtat = "3";
             }
 
-
             $ftaProcessusEtatModel = new FtaProcessusEtatModel($idFtaProcessusEtat);
 //            $idSite = $ftaModel->getDataField(FtaModel::FIELDNAME_SITE_ASSEMBLAGE)->getFieldValue();
-            $date_echeance_fta = $ftaModel->getDataField(FtaModel::FIELDNAME_DATE_ECHEANCE_FTA)->getFieldValue();
-            $idFtaWorkflow = $ftaModel->getDataField(FtaModel::FIELDNAME_WORKFLOW)->getFieldValue();
+
             $arrayIdFtaChapitre = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
                             'SELECT DISTINCT ' . FtaChapitreModel::FIELDNAME_NOM_USUEL_CHAPITRE
                             . ' FROM ' . FtaWorkflowStructureModel::TABLENAME . ',' . FtaChapitreModel::TABLENAME
@@ -148,6 +152,7 @@ if ($id_fta) {
                             . ' AND ' . FtaChapitreModel::TABLENAME . '.' . FtaChapitreModel::KEYNAME
                             . '=' . FtaWorkflowStructureModel::TABLENAME . '.' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_CHAPITRE
             );
+
             $nombreChapitre = count($arrayIdFtaChapitre);
 
             foreach ($arrayIdFtaChapitre as $rowsIdFtaChapitre) {
@@ -167,7 +172,7 @@ if ($id_fta) {
                    &nbsp;' . $service_fta_processus . '
                    </td>
                    <td >
-                   &nbsp;' . $nom_fta_processus .'
+                   &nbsp;' . $nom_fta_processus . '
                    </td> <td>   
                    ' . $champChapitre . '
                   </td> <td >

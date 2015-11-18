@@ -32,6 +32,9 @@ class Navigation {
         self::$id_fta = $id_fta;
         self::$id_fta_chapitre_encours = $id_fta_chapitre_encours;
         self::$synthese_action = $synthese_action;
+        if($id_fta_etat <> "1"){
+            self::$synthese_action = FtaEtatModel::ETAT_AVANCEMENT_VALUE_ALL;
+        }
         self::$comeback = $comeback;
         self::$id_fta_etat = $id_fta_etat;
         self::$abreviation_etat = $abrevation_etat;

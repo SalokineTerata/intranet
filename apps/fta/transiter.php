@@ -151,12 +151,6 @@ $flag_selection_chapitre = 0;    //Peut-on sélectionner un chapitre à mettre �
 
 
 foreach ($arrayFtaTransition as $rowsFtaTransition) {
-    /**
-     * Pour le cas des retirer vers modification on ajoute une action par défaut
-     */
-    if (count($arrayFtaTransition) == "1" and $action == NULL) {
-        $action = 'I';
-    }
     //Si l'utilisateur est autorisé à utiliser cette transition, alors affichage de l'option
 
     if ($action == $rowsFtaTransition[FtaTransitionModel::FIELDNAME_ABREVIATION_FTA_TRANSITION]) {

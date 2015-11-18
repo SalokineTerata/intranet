@@ -1754,7 +1754,7 @@ function visualiser_fiches($id_fta_etat, $choix, $isLimit, $order_common) {
 
 //Déclaration de variables
     $largeur_html_C1 = "width=34%"; // largeur cellule type
-    $largeur_html_C3 = "width=16%"; // largeur cellule type
+    $largeur_html_C3 = " width=16%"; // largeur cellule type
     $compteur_ligne = 1;
     $selection_width = "1%";
     $id_fta_chapitre_encours = Lib::isDefined("id_fta_chapitre_encours");
@@ -1765,12 +1765,14 @@ function visualiser_fiches($id_fta_etat, $choix, $isLimit, $order_common) {
      * Initilisation
      */
     $globalConfig = new GlobalConfig();
-          UserModel::ConnexionFalse($globalConfig);
+    UserModel::ConnexionFalse($globalConfig);
 
     $id_user = $globalConfig->getAuthenticatedUser()->getKeyValue();
     $synthese_action = Lib::isDefined("synthese_action");
     $idFtaRole = Lib::getParameterFromRequest(FtaRoleModel::KEYNAME);
-
+    if ($idFtaRole == NULL) {
+        $idFtaRole = FtaRoleModel::getKeyNameOfFirstRoleByIdUser($id_user);
+    }
 
     $id_fta_etat;    //Attention, double signification, si choix = 0 ou -1, alors il s'agit en fait de $id_fta
 
@@ -2250,6 +2252,14 @@ function visualiser_fiches($id_fta_etat, $choix, $isLimit, $order_common) {
         case -1:
             break;
     }
+    /**
+     * Droits d'actions
+     */
+    if ($idFtaRole == '1' or $idFtaRole == '6') {
+        $valueIsGestionnaire = FtaRoleModel::getValueIsGestionnaire($idFtaRole);
+    }
+
+
     //Parcours des fiches techniques
     while ($rows = mysql_fetch_array($result_liste)) {
 
@@ -2258,12 +2268,14 @@ function visualiser_fiches($id_fta_etat, $choix, $isLimit, $order_common) {
         //$_SESSION["id_fta"]=$id_fta;
         //mysql_table_load("fta");
         $req_detail = "SELECT fta.id_fta as id_fta, abreviation_fta_etat, LIBELLE, NB_UNIT_ELEM, Poids_ELEM, suffixe_agrologic_fta, designation_commerciale_fta, "
-                . "id_dossier_fta, id_version_dossier_fta, id_article_agrologic, "
-                . "code_article_ldc, date_echeance_fta, createur_fta "
-                . "FROM fta, fta_etat "
+                . "id_dossier_fta, id_version_dossier_fta, id_article_agrologic,id_fta_classification2,liste_id_fta_role, "
+                . "code_article_ldc, date_echeance_fta, createur_fta, nom_fta_workflow,fta.id_fta_workflow,geo.geo "
+                . "FROM fta, fta_etat,fta_workflow,geo "
                 . "WHERE fta.id_fta=" . $rows["id_fta"] . " "
                 //. "AND fta.id_fta=access_arti2.id_fta "
                 . "AND fta_etat.id_fta_etat=fta.id_fta_etat "
+                . "AND fta_workflow.id_fta_workflow=fta.id_fta_workflow "
+                . "AND geo.id_geo=fta.Site_de_production "
         //. "AND fta.createur_fta=salaries.id_user"
         ;
         $result_detail = DatabaseOperation::query($req_detail);
@@ -2280,8 +2292,27 @@ function visualiser_fiches($id_fta_etat, $choix, $isLimit, $order_common) {
         $id_version_dossier_fta = mysql_result($result_detail, 0, "id_version_dossier_fta");
         $id_article_agrologic = mysql_result($result_detail, 0, "id_article_agrologic");
         $code_article_ldc = mysql_result($result_detail, 0, "code_article_ldc");
-        $date_echeance_fta = mysql_result($result_detail, 0, "date_echeance_fta");
+        $dateEcheanceFta = mysql_result($result_detail, 0, "date_echeance_fta");
         $createur_fta = mysql_result($result_detail, 0, "createur_fta");
+        $workflowName = mysql_result($result_detail, 0, FtaWorkflowModel::FIELDNAME_NOM_FTA_WORKFLOW);
+        $idWorkflowFtaEncours = mysql_result($result_detail, 0, FtaWorkflowModel::KEYNAME);
+        $nomSiteProduction = mysql_result($result_detail, 0, GeoModel::FIELDNAME_GEO);
+        $idclassification = mysql_result($result_detail, 0, FtaModel::FIELDNAME_ID_FTA_CLASSIFICATION2);
+        $listeIdFtaRole = mysql_result($result_detail, 0, FtaModel::FIELDNAME_LISTE_ID_FTA_ROLE);
+
+
+
+        /**
+         * Liste des processus pouvant être validé
+         */
+        $arrayProcessusValidation = FtaProcessusCycleModel::getArrayProcessusValidationFTA($idWorkflowFtaEncours);
+
+
+        /**
+         * Listes des processus auxquel l'utilisateur connecté à les droits d'accès
+         */
+        $arrayProcessusAcces = FtaWorkflowStructureModel::getArrayProcessusByRoleAndWorkflow($idFtaRole, $idWorkflowFtaEncours);
+        $accesTransitionButton = is_null(array_intersect($arrayProcessusValidation, $arrayProcessusAcces));
 
         //Récupération du nom du création
         $req = "SELECT prenom, nom FROM salaries WHERE id_user='" . $createur_fta . "' ";
@@ -2328,26 +2359,36 @@ function visualiser_fiches($id_fta_etat, $choix, $isLimit, $order_common) {
           { */
         //Calcul préalable et Etat d'avancement
         //if($_SESSION["synthese_action"]<>"all")
-        if ($abreviation_fta_etat == "I") {
             $ftaModel = new FtaModel($id_fta);
-            $taux_temp = FtaSuiviProjetModel::getFtaTauxValidation($ftaModel,FALSE);
+            $taux_temp = FtaSuiviProjetModel::getFtaTauxValidation($ftaModel, FALSE);
             $recap[$id_fta] = round($taux_temp[0] * 100, 0) . "%";
-            $lien .= "<h5>" . $recap[$id_fta] . "<a "
-                    . "href=historique.php"
-                    . "?id_fta=$id_fta"
-                    . "&synthese_action=$synthese_action"
-                    . "&id_fta_etat=" . $id_fta_etat
-                    . "&abreviation_fta_etat=" . $abreviation_fta_etat
-                    . "&id_fta_role=" . $idFtaRole
-                    . "&comeback=1"
-                    . "><img src=./images/graphique.png alt=\"\" title=\"Etat d'avancement\" width=\"30\" height=\"25\" border=\"0\" />"
-                    . "</a>"
-            ;
+//            $lien .= "<h5>" . $recap[$id_fta] . "<a "
+//                    . "href=historique.php"
+//                    . "?id_fta=$id_fta"
+//                    . "&synthese_action=$synthese_action"
+//                    . "&id_fta_etat=" . $id_fta_etat
+//                    . "&abreviation_fta_etat=" . $abreviation_fta_etat
+//                    . "&id_fta_role=" . $idFtaRole
+//                    . "&comeback=1"
+//                    . "><img src=./images/graphique.png alt=\"\" title=\"Etat d'avancement\" width=\"30\" height=\"25\" border=\"0\" />"
+//                    . "</a>"
+//            ;
+            /**
+             * Lien vers l'historique de la Fta
+             */
+            $lienHistorique = ' <a href=historique-' . $id_fta
+                    . '-1'
+                    . '-' . $id_fta_etat
+                    . '-' . $abreviation_fta_etat
+                    . '-' . $idFtaRole
+                    . '-' . $synthese_action
+                    . '-1'
+                    . '.html >' . $recap[$id_fta] . '</a>';
 
             //Gestion des délais
-            //if($date_echeance_fta) //La fonctionnalité n'est active qu'à partir du moment où un date d'échéance est saisie
+        if ($abreviation_fta_etat == "I") {
             {
-                $HTML_date_echeance_fta = fta_processus_delai_etat($id_fta);
+                $HTML_date_echeance_fta = FtaProcessusDelaiModel::getFtaDelaiAvancement($id_fta);
                 //$return["status"]
                 //    0: Aucun dépassement des échéances
                 //    1: Au moins un processus en cours a dépassé son échéance
@@ -2360,6 +2401,7 @@ function visualiser_fiches($id_fta_etat, $choix, $isLimit, $order_common) {
                 //$return["HTML_synthese"]
                 //    Contient le code source HTML utilisé pour la fonction visualiser_fiches()
                 //echo $HTML_date_echeance_fta["status"];
+                
                 switch ($HTML_date_echeance_fta["status"]) {
                     case 1:
                         $bgcolor_header = $bgcolor;
@@ -2384,26 +2426,46 @@ function visualiser_fiches($id_fta_etat, $choix, $isLimit, $order_common) {
         //Droit de consultation standard HTML
         if (
                 (AclClass::getValueAccesRights("fta_modification"))
-                or ( AclClass::getValueAccesRights("fta_consultation") and $abreviation_fta_etat == "V" )
-        )
-            $lien .= "<a "
-                    . "href=modification_fiche.php"
-                    . "?id_fta=$id_fta"
-                    . "&synthese_action=$synthese_action"
-                    . "&id_fta_etat=" . $id_fta_etat
-                    . "&abreviation_fta_etat=" . $abreviation_fta_etat
-                    . "&id_fta_role=" . $idFtaRole
-                    . "&comeback=1"
-                    . " /><img src=../lib/images/next.png alt=\"\" title=\"Voir la FTA\" width=\"30\" height=\"25\" border=\"0\" />"
-                    . "</a>"
+                or ( AclClass::getValueAccesRights("fta_consultation") and $abreviation_fta_etat == FtaEtatModel::ETAT_ABREVIATION_VALUE_VALIDE )
+        ) {
+            $lien .= '<a '
+//                            . 'href=#'
+                    . 'href=modification_fiche.php'
+                    . '?id_fta=' . $id_fta
+                    . '&synthese_action=' . $synthese_action
+                    . '&comeback=1'
+                    . '&id_fta_etat=' . $id_fta_etat
+                    . '&abreviation_fta_etat=' . $abreviation_fta_etat
+                    . '&id_fta_role=' . $idFtaRole
+                    . ' /><img src=../lib/images/next.png alt=\'\' title=\'Voir la FTA\' width=\'30\' height=\'25\' border=\'0\' />'
+                    . '</a>'
             ;
+            /**
+             * Version avec le module rewrite
+             */
+//                    $lien .= '<a '
+////                            . 'href=#'
+//                            . 'href=modification_fiche'
+//                            . '-' . $id_fta
+//                            . '-' . $synthese_action
+//                            . '-1'
+//                            . '-' . $id_fta_etat
+//                            . '-' . $abreviation_fta_etat
+//                            . '-' . $idFtaRole
+////                            . ' onClick=\'modification_fiche_' . $idFta . '();\' '
+//                            . '.html /><img src=../lib/images/next.png alt=\'\' title=\'Voir la FTA\' width=\'30\' height=\'25\' border=\'0\' />'
+//                            . '</a>'
+            ;
+        }
+
+
 
 
         //Export PDF
 //echo "test".$rows["abreviation_fta_etat"];
         if (
-                (AclClass::getValueAccesRights("fta_impression") and ( $abreviation_fta_etat == "V" or $abreviation_fta_etat == "P"))
-                or ( $_SESSION["mode_debug"] == 1)
+                (AclClass::getValueAccesRights("fta_impression") and ( $abreviation_fta_etat == FtaEtatModel::ETAT_ABREVIATION_VALUE_VALIDE ))
+                or ( $_SESSION["mode_debug"] == 1)or ( $workflowName == 'presentation')
         ) {
 
             $lien .= "  "
@@ -2416,35 +2478,27 @@ function visualiser_fiches($id_fta_etat, $choix, $isLimit, $order_common) {
         }
         //echo $taux_temp[0]." ".$_SESSION["fta_article"]."<br>";
         //Transiter
-        if (
-                (AclClass::getValueAccesRights("fta_definition")) and (
-                $abreviation_fta_etat == 'V' or
-                $abreviation_fta_etat == 'A' or
-                $abreviation_fta_etat == 'R' or
-                $abreviation_fta_etat == 'P'
-                )
-                or ( $ok == 2 and $_SESSION["fta_article"]) and (
-                $abreviation_fta_etat == 'I' or
-                $abreviation_fta_etat == 'M' or
-                $abreviation_fta_etat == 'T'
-                )
-                or ( $ok == 2 and $_SESSION["fta_referentiel"]) and (
-                $abreviation_fta_etat == 'I' or
-                $abreviation_fta_etat == 'M' or
-                $abreviation_fta_etat == 'T'
-                )
-        ) {
-            $lien .= "<a "
-                    . "href=transiter.php"
-                    . "?id_fta=" . $id_fta
-                    . "><img src=./images/transiter.png alt=\"\" title=\"Transiter\" width=\"30\" height=\"30\" border=\"0\" />"
-                    . "</a>"
-            ;
 
-            if ($synthese_action == "correction") {
-                $selection = "<input type=\"checkbox\" name=selection_fta[] value=\"" . $id_fta . "\" checked />";
-                $traitement_masse = 1;
-                $selection_width = "2%";
+        if (
+                (($idFtaRole == '1' or $idFtaRole == '6' ) and $recap[$id_fta] == '100%' )
+                and AclClass::getValueAccesRights("fta_modification") and ( $abreviation_fta_etat == FtaEtatModel::ETAT_ABREVIATION_VALUE_MODIFICATION)
+                or ( $ok == '2' and $accesTransitionButton == FALSE && $recap[$id_fta] == '100%')
+                or ( $synthese_action == FtaEtatModel::ETAT_AVANCEMENT_VALUE_ALL AND ( $idFtaRole == '1' or $idFtaRole == '6' ))
+                or ( ($idFtaRole == '1' or $idFtaRole == '6' ) and $synthese_action == FtaEtatModel::ETAT_AVANCEMENT_VALUE_EFFECTUES)
+        ) {
+            $lien .= '<a '
+                    . 'href=transiter.php'
+                    . '?id_fta=' . $id_fta
+                    . '&id_fta_role=' . $idFtaRole
+                    . '><img src=./images/transiter.png alt=\'\' title=\'Transiter\' width=\'30\' height=\'30\' border=\'0\' />'
+                    . '</a>'
+            ;
+            if ($synthese_action == FtaEtatModel::ETAT_AVANCEMENT_VALUE_EFFECTUES and $recap[$id_fta] == '100%') {
+                $selection = '<input type=\'checkbox\' name=selection_fta value=\'' . $id_fta . '\' checked />';
+                $traitementDeMasse = '1';
+                $selection_width = '2%';
+                $StringFta .= $id_fta . ',';
+                $tableau_fiches .= '<input type=hidden name=arrayFta value=' . $StringFta . '>';
             }
             //<a target="_parent" href="index"></a>
         }
@@ -2463,37 +2517,42 @@ function visualiser_fiches($id_fta_etat, $choix, $isLimit, $order_common) {
           ;
           } */
 
-        //Seul le Chef de projet peut retirer une FTA en cours de modification
-        if (AclClass::getValueAccesRights("fta_definition")) {
-            $lien .= "<a "
-                    . "href=# "
-                    . "onClick=confirmation_correction_fta" . $id_fta . "(); "
-                    . "/>"
-                    . "<img src=../lib/images/supprimer.png alt=\"Retirer cette FTA\" width=\"25\" height=\"25\" border=\"0\" />"
-                    . "</a>"
-            ;
-            $javascript.="
+        /*
+         * Action que seul les Chefs de projet peuvent faire
+         */
+        /*
+         * Retirer une FTA en cours de modification
+         */
+        if ($valueIsGestionnaire == '1') {
+            if ($abreviation_fta_etat <> FtaEtatModel::ETAT_ABREVIATION_VALUE_RETIRE) {
+                $lien .= '<a '
+                        . 'href=# '
+                        . 'onClick=confirmation_correction_fta' . $id_fta . '(); '
+                        . '/>'
+                        . '<img src=../lib/images/supprimer.png alt=\'Retirer cette FTA\' width=\'25\' height=\'25\' border=\'0\' />'
+                        . '</a>'
+                ;
+                $javascript.='
                            <SCRIPT LANGUAGE=JavaScript>
-                                   function confirmation_correction_fta" . $id_fta . "()
+                                   function confirmation_correction_fta' . $id_fta . '()
                                    {
-                                   if(confirm('Etes vous certain de vouloir retirer cette Fiche Technique ? Les autres fiches du dossier resteront indem.'))
+                                   if(confirm(\'Etes vous certain de vouloir retirer cette Fiche Technique ? Les autres fiches du dossier resteront indem.\'))
                                    {
-                                       location.href =\"transiter.php?id_fta=" . $id_fta . "&id_fta_chapitre_encours=$id_fta_chapitre_encours&synthese_action=$synthese_action&action=correction&demande_abreviation_fta_transition=R\"
+                                       location.href =\'transiter.php?id_fta=' . $id_fta . '&id_fta_role=' . $idFtaRole . '&synthese_action=' . $synthese_action . '&action=correction&demande_abreviation_fta_transition=R\'
                                    }
                                     else{}
                                    }
                            </SCRIPT>
-                           ";
-        }
+                           ';
+            }
 
-        //Actions systématiques pour le chef de projet
-        if (AclClass::getValueAccesRights("fta_definition")) {
-            $lien .= "<a "
-                    . "href=creer_fiche.php"
-                    . "?action=dupliquer_fiche"
-                    . "&id_fta=" . $id_fta
-                    . "><img src=../lib/images/copie.png alt=\"\" title=\"Dupliquer\" width=\"30\" height=\"30\" border=\"0\" />"
-                    . "</a>"
+            $lien .= '<a '
+                    . 'href=creer_fiche.php'
+                    . '?action=dupliquer_fiche'
+                    . '&id_fta=' . $id_fta
+                    . '&id_fta_role=' . $idFtaRole
+                    . '><img src=../lib/images/copie.png alt=\'\' title=\'Dupliquer\' width=\'30\' height=\'30\' border=\'0\' />'
+                    . '</a>'
             ;
         }
 
@@ -2511,7 +2570,6 @@ function visualiser_fiches($id_fta_etat, $choix, $isLimit, $order_common) {
 //        $extension[0] = 1;
 //        $temp2 = recherche_element_classification_fta($id_fta, $id_element, $extension);
         //Désignation commerciale
-        $designation_commerciale_fta = $designation_commerciale_fta;
         if (strlen($designation_commerciale_fta) > 55) {
             $designation_commerciale_fta = substr($designation_commerciale_fta, 0, 52) . "...";
         }
@@ -2525,12 +2583,27 @@ function visualiser_fiches($id_fta_etat, $choix, $isLimit, $order_common) {
             }
             $din = "<font size=\"1\" color=\"#808080\"><i>$din</i></font>";
         }
+        /*
+         * Initialisation des valeurs pour un commentaire
+         */
+        $ftaModel = new FtaModel($id_fta);
+        $commentaireDataField = $ftaModel->getDataField(FtaModel::FIELDNAME_COMMENTAIRE);
+        $htmlField = html::getHtmlObjectFromDataField($commentaireDataField);
+        $htmlField->setHtmlRenderToTable();
+        $htmlField->setIsEditable(TRUE);
+        $commentaire = $htmlField->getHtmlResult();
 
-        //Classification
-        if ($suffixe_agrologic_fta) {
-            $classification = $suffixe_agrologic_fta;
-        } else {
-            $classification = $temp2[2];
+        /*
+         * Noms des services dans lequel la Fta se trouve
+         */
+//                $service = FtaRoleModel::getListeIdFtaRoleEncoursByIdFta($idFta, $idWorkflowFtaEncours);
+        $service = FtaRoleModel::getNameServiceEncours($listeIdFtaRole);
+
+        /**
+         * Calssification
+         */
+        if ($idclassification) {
+            $classification = ClassificationArborescenceArticleCategorieContenuModel::getElementClassificationFta($idclassification, ClassificationFta2Model::FIELDNAME_ID_PROPRIETAIRE_GROUPE);
         }
 
         //Nom de l'assistante de projet responsable:
@@ -2539,40 +2612,40 @@ function visualiser_fiches($id_fta_etat, $choix, $isLimit, $order_common) {
         $tableau_fiches.= "<tr class=contenu>
                               <td $bgcolor_header width=\"" . $selection_width . "\" > $icon_header $selection</td>
                               ";
-        $tableau_fiches.="<td $bgcolor width=3%>" . $id_dossier_fta . "<br>v" . $id_version_dossier_fta . "</td>";
-//            $tableau_fiches.="<td $bgcolor width=3%>".$classification."</td>";
-//            $tableau_fiches.="<td $bgcolor width=6%>".$id_article_agrologic."</td>";
-        $tableau_fiches.="<td $bgcolor width=\"6%\"> <b><font size=\"2\" color=\"#0000FF\">" . $code_article_ldc . "</font></b></td>";
+        $tableau_fiches.= '<td ' . $bgcolor . ' width=8%>' . $nomSiteProduction . '</td>'//Site
+                . '<td ' . $bgcolor . ' width=6%>' . $classification . '</td>'//Client
+                . '<td ' . $bgcolor . ' width=6%>' . $suffixe_agrologic_fta . '</td>'; // Raccourcie Class.
         //$tableau_fiches.="<td $bgcolor $largeur_html_C1>".stripslashes($designation_commerciale_fta)."</td>";
-        $tableau_fiches.="<td $bgcolor $largeur_html_C1><a title=$createur_link />" . $din . "</a></td>";
-        if ($abreviation_fta_etat == "I") {
-            $tableau_fiches.="<td $bgcolor $largeur_html_C3 align=center>" . $HTML_date_echeance_fta["HTML_synthese"] . "</td>";
+        $tableau_fiches.="<td $bgcolor $largeur_html_C1><a title=$createur_link />" . $din . "</a></td>"
+                . "<td $bgcolor width=3%>" . $id_dossier_fta . "<br>v" . $id_version_dossier_fta . "</td>";
+
+        $tableau_fiches.="<td $bgcolor width=\"6%\"> <b><font size=\"2\" color=\"#0000FF\">" . $code_article_ldc . "</font></b></td>";
+        if ($abreviation_fta_etat == FtaEtatModel::ETAT_ABREVIATION_VALUE_MODIFICATION) {
+            $tableau_fiches.='<td ' .$bgcolor .  $largeur_html_C3 . ' align=center>' . $dateEcheanceFta . '</td>'; //échance de validation
+        } else {
+            $tableau_fiches.='<td ' .$bgcolor .  $largeur_html_C3 . ' align=center>' . $dateEcheanceFta . '</td>'; //échance de validation
         }
-        $tableau_fiches.="<td $bgcolor $largeur_html_C3 align=\"right\" valign=\"middle\">$lien</td>";
+        $tableau_fiches .= '<td ' . $bgcolor . ' width=5% align=center >' . $lienHistorique . '</td>'//% Avancement FTA
+                . '<td ' . $bgcolor . $largeur_html_C3 . ' align=center >' . $service . '</td>' //Service               
+                . '<td ' .  $bgcolor . $largeur_html_C3 . ' align=center >' . $lien . '</td>'; // Actions
+//        $tableau_fiches.="<td $bgcolor $largeur_html_C3 align=\"right\" valign=\"middle\">$lien</td>";
         $tableau_fiches.="</tr>";
         $compteur_ligne++;
     }//fin tant que tableau_origine
     $tableau_fiches = $javascript . $tableau_fiches . "</table>";
 
     //Ajoute de la fonction de traitement de masse
-    if ($traitement_masse) {
+    if ($traitementDeMasse) {
+        $liste_action_groupe = FtaTransitionModel::getListeFtaGrouper($abreviation_fta_etat);
 
-        $requete = "SELECT abreviation_fta_transition, nom_fta_etat "
-                . "FROM fta_transition, fta_etat "
-                . "WHERE fta_transition.abreviation_fta_etat='" . $_SESSION["abreviation_fta_etat"] . "' "
-                . "AND fta_etat.abreviation_fta_etat=fta_transition.abreviation_fta_transition "    //Liaison
-        ;
-        $nom_defaut = "abreviation_fta_transition";
-        $id_defaut = "V";
-        $liste_action_groupe = AccueilFta::afficherRequeteEnListeDeroulante($requete, $id_defaut, $nom_defaut);
-
-        $tableau_fiches.= "&nbsp;<img src=../lib/images/fleche_gauche_et_haut.png width=38 height=22 border=0 />
-                         <i>Transitions groupées</i>:
-                         $liste_action_groupe
-                         <input type=\"text\" name=\"subject\" size=\"20\" />
-                         <input type=image src=images/transiter.png width=20 height=20 />
-                         <input type=hidden name=action value=transition_groupe>
-                         ";
+        $tableau_fiches.= '&nbsp;
+            <img src = ../lib/images/fleche_gauche_et_haut.png width = 38 height = 22 border = 0 />
+            <i>Transitions groupées</i>:
+            ' . $liste_action_groupe . '
+            <input type = \'text\' name=\'subject\' size=\'20\' />
+            <input type=image src=images/transiter.png width=20 height=20 />
+            <input type=hidden name=action value=transition_groupe>
+                         ';
     }
 
     return $tableau_fiches;

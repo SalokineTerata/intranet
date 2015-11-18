@@ -19,16 +19,18 @@ class FtaActionRoleModel extends AbstractModel {
     }
 
     public static function getIdFtaActionRoleFromIdIntranetAtions($paramIdIntranetActions) {
-        foreach ($paramIdIntranetActions as $rowsIdIntranetActions) {
-            $arrayIdFtaActionRole = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
-                            'SELECT ' . FtaActionRoleModel::KEYNAME
-                            . ' FROM  ' . FtaActionRoleModel::TABLENAME
-                            . ' WHERE ' . FtaActionRoleModel::FIELDNAME_ID_INTRANET_ACTIONS . '=' . $rowsIdIntranetActions 
-            );
-        }
-        if ($arrayIdFtaActionRole) {
-            foreach ($arrayIdFtaActionRole as $value) {
-                return $value[FtaActionRoleModel::KEYNAME];
+        if ($paramIdIntranetActions) {
+            foreach ($paramIdIntranetActions as $rowsIdIntranetActions) {
+                $arrayIdFtaActionRole = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
+                                'SELECT ' . FtaActionRoleModel::KEYNAME
+                                . ' FROM  ' . FtaActionRoleModel::TABLENAME
+                                . ' WHERE ' . FtaActionRoleModel::FIELDNAME_ID_INTRANET_ACTIONS . '=' . $rowsIdIntranetActions
+                );
+            }
+            if ($arrayIdFtaActionRole) {
+                foreach ($arrayIdFtaActionRole as $value) {
+                    return $value[FtaActionRoleModel::KEYNAME];
+                }
             }
         }
     }

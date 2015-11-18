@@ -3228,6 +3228,18 @@ echo "INSERT INTO ".$nameOfBDDTarget.".logft ...";
 $sql = "INSERT INTO ".$nameOfBDDTarget.".logft SELECT * FROM ".$nameOfBDDOrigin.".logft";
 if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
 
+echo "DROP ".$nameOfBDDTarget.".intranet_access_linked_table ...";
+$sql = "DROP TABLE ".$nameOfBDDTarget.".intranet_access_linked_table";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE ".$nameOfBDDTarget.".intranet_access_linked_table ...";
+$sql = "CREATE TABLE ".$nameOfBDDTarget.".intranet_access_linked_table LIKE ".$nameOfBDDOrigin.".intranet_access_linked_table";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO ".$nameOfBDDTarget.".intranet_access_linked_table ...";
+$sql = "INSERT INTO ".$nameOfBDDTarget.".intranet_access_linked_table SELECT * FROM ".$nameOfBDDOrigin.".intranet_access_linked_table";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
 echo "DROP ".$nameOfBDDTarget.".lustat ...";
 $sql = "DROP TABLE ".$nameOfBDDTarget.".lustat";
 if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}

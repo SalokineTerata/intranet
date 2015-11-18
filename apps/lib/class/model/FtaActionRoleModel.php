@@ -18,6 +18,11 @@ class FtaActionRoleModel extends AbstractModel {
         parent::__construct($paramId, $paramIsCreateRecordsetInDatabaseIfKeyDoesntExist);
     }
 
+    /**
+     * 
+     * @param int $paramIdIntranetActions
+     * @return array
+     */
     public static function getIdFtaActionRoleFromIdIntranetAtions($paramIdIntranetActions) {
         if ($paramIdIntranetActions) {
             foreach ($paramIdIntranetActions as $rowsIdIntranetActions) {
@@ -29,8 +34,9 @@ class FtaActionRoleModel extends AbstractModel {
             }
             if ($arrayIdFtaActionRole) {
                 foreach ($arrayIdFtaActionRole as $value) {
-                    return $value[FtaActionRoleModel::KEYNAME];
+                    $result = $value[FtaActionRoleModel::KEYNAME];
                 }
+                return $result;
             }
         }
     }

@@ -519,7 +519,7 @@ class Chapitre {
         //Liste de tous les commentaires des chapitres
         $bloc.='<tr class=titre_principal><td>Récapitulatif des commentaires</td></tr>';
 
-        $bloc.=$ftaView->getHtmlCommentaireAllChapitres();
+        $bloc.=$ftaView->getHtmlCommentaireAllChapitres(self::$id_fta_workflow);
 
         //Historique des mises à jour de la FTA
         $bloc.='<tr class=titre_principal><td>Historique des actions effectuées sur la Fiche Technique Article</td></tr>';

@@ -236,7 +236,7 @@ if ($paramModifier == 'supprimer') {
                                                         . ', ' . UserModel::FIELDNAME_PRENOM
                                                         . ' FROM ' . UserModel::TABLENAME
                                                         . ' WHERE ' . UserModel::FIELDNAME_ACTIF . '=\'oui\''
-                                                        . ' ORDER BY ' . UserModel::FIELDNAME_NOM
+                                                        . ' ORDER BY ' . UserModel::FIELDNAME_NOM   . ',' . UserModel::FIELDNAME_PRENOM
                                         );
                                         if ($arrayIdUser) {
                                             foreach ($arrayIdUser as $rowIdUser) {

@@ -662,13 +662,16 @@ class FtaSuiviProjetModel extends AbstractModel {
         return $return;
     }
 
-    public static function getAllCommentsFromChapitres($paramIdFta) {
+    public static function getAllCommentsFromChapitres($paramIdFta, $paramIdFtaWorkflow) {
         $arrayCommentaireAllChapitre = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
                         "SELECT " . FtaSuiviProjetModel::FIELDNAME_COMMENTAIRE_SUIVI_PROJET . "," . UserModel::FIELDNAME_PRENOM . "," . UserModel::FIELDNAME_NOM
-                        . " FROM " . FtaSuiviProjetModel::TABLENAME . ", " . UserModel::TABLENAME
+                        . " FROM " . FtaSuiviProjetModel::TABLENAME . ", " . UserModel::TABLENAME . ", " . FtaWorkflowStructureModel::TABLENAME
                         . " WHERE ( " . FtaSuiviProjetModel::TABLENAME . "." . FtaSuiviProjetModel::FIELDNAME_SIGNATURE_VALIDATION_SUIVI_PROJET
                         . " = " . UserModel::TABLENAME . "." . UserModel::KEYNAME . " ) "
                         . " AND " . FtaSuiviProjetModel::TABLENAME . "." . FtaSuiviProjetModel::FIELDNAME_ID_FTA . " = " . $paramIdFta
+                        . " AND " . FtaWorkflowStructureModel::TABLENAME . "." . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_WORKFLOW . " = " . $paramIdFtaWorkflow
+                        . " AND " . FtaWorkflowStructureModel::TABLENAME . "." . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_CHAPITRE
+                        . " = " . FtaSuiviProjetModel::TABLENAME . "." . FtaSuiviProjetModel::FIELDNAME_ID_FTA_CHAPITRE
                         . " ORDER BY " . FtaSuiviProjetModel::FIELDNAME_DATE_VALIDATION_SUIVI_PROJET
         );
         if ($arrayCommentaireAllChapitre) {

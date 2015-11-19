@@ -784,8 +784,8 @@ class FtaView {
      * Affiche les commentaires de chaque chapitres pour la Fta concerné
      * @return string
      */
-    public function getHtmlCommentaireAllChapitres() {
-        return FtaSuiviProjetModel::getAllCommentsFromChapitres($this->getModel()->getKeyValue());
+    public function getHtmlCommentaireAllChapitres($paramIdFtaWorkflow) {
+        return FtaSuiviProjetModel::getAllCommentsFromChapitres($this->getModel()->getKeyValue(),$paramIdFtaWorkflow);
     }
 
     /**

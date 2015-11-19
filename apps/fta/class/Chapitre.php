@@ -1806,7 +1806,14 @@ class Chapitre {
         $ftaModel = new FtaModel($id_fta);
         $ftaView = new FtaView($ftaModel);
         $ftaView->setIsEditable($isEditable);
+
         $ftaView->setFtaChapitreModelById(self::ID_CHAPITRE_IDENTITE);
+        /**
+         * Ftaview indépendant pour les epace de traville qui ne doitvent pas être éditables
+         */
+        $ftaView2 = new FtaView($ftaModel);
+        $ftaView2->setIsEditable(FALSE);
+        $ftaView2->setFtaChapitreModelById(self::ID_CHAPITRE_IDENTITE);
 
 
         $bloc.='<tr class=titre_principal><td class>Classification</td></tr>';
@@ -1834,7 +1841,8 @@ class Chapitre {
         $bloc.=$ftaView->getHtmlCreateurFta();
 
         //Workflow de FTA
-        $bloc.=$ftaView->ListeWorkflowByAcces(self::$idUser, FALSE, $id_fta, self::$id_fta_role);
+//        $bloc.=$ftaView->ListeWorkflowByAcces(self::$idUser, FALSE, $id_fta, self::$id_fta_role);
+        $bloc.=$ftaView2->getHtmlDataField(FtaModel::FIELDNAME_WORKFLOW);
 
         //Date d'échéance de la FTA
         $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_DATE_ECHEANCE_FTA);

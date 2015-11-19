@@ -308,7 +308,7 @@ class FtaTransitionModel {
                             ' SELECT ' . FtaActionSiteModel::TABLENAME . '.' . FtaActionSiteModel::FIELDNAME_ID_INTRANET_ACTIONS
                             . ' FROM ' . FtaActionSiteModel::TABLENAME
                             . ' WHERE ' . FtaActionSiteModel::FIELDNAME_ID_SITE . '=' . $rowsFta[FtaModel::FIELDNAME_SITE_ASSEMBLAGE]
-                            . ' AND ' . FtaActionSiteModel::FIELDNAME_ID_FTA_WROKFLOW . ' =' . $rowsFta[FtaModel::FIELDNAME_WORKFLOW]
+                            . ' AND ' . FtaActionSiteModel::FIELDNAME_ID_FTA_WORKFLOW . ' =' . $rowsFta[FtaModel::FIELDNAME_WORKFLOW]
             );
 
             if ($arrayIdIntranetActions) {

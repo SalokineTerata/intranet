@@ -2382,15 +2382,27 @@ function visualiser_fiches($id_fta_etat, $choix, $isLimit, $order_common) {
         /**
          * Lien vers l'historique de la Fta
          */
-        $lienHistorique = ' <a href=historique-' . $id_fta
-                . '-1'
-                . '-' . $id_fta_etat
-                . '-' . $abreviation_fta_etat
-                . '-' . $idFtaRole
-                . '-' . $synthese_action
-                . '-1'
-                . '.html >' . $recap[$id_fta] . '</a>';
-
+        if ($abreviation_fta_etat <> FtaEtatModel::ETAT_ABREVIATION_VALUE_MODIFICATION) {
+            $lienHistorique = ' <a href=historique-' . $id_fta
+                    . '-1'
+                    . '-' . $id_fta_etat
+                    . '-' . $abreviation_fta_etat
+                    . '-' . $idFtaRole
+                    . '-' . $synthese_action
+                    . '-1'
+                    . '.html >' . $recap[$id_fta] . '</a>';
+        } else {
+            if ($checkAccesButton) {
+                $lienHistorique = ' <a href=historique-' . $id_fta
+                        . '-1'
+                        . '-' . $id_fta_etat
+                        . '-' . $abreviation_fta_etat
+                        . '-' . $idFtaRole
+                        . '-' . $synthese_action
+                        . '-1'
+                        . '.html >' . $recap[$id_fta] . '</a>';
+            }
+        }
         //Gestion des délais
         if ($abreviation_fta_etat == "I") { {
                 $HTML_date_echeance_fta = FtaProcessusDelaiModel::getFtaDelaiAvancement($id_fta);
@@ -2430,21 +2442,38 @@ function visualiser_fiches($id_fta_etat, $choix, $isLimit, $order_common) {
 
         //Droit de consultation standard HTML
         if (
-                (AclClass::getValueAccesRights("fta_modification") and $abreviation_fta_etat <> FtaEtatModel::ETAT_ABREVIATION_VALUE_MODIFICATION)
+                (AclClass::getValueAccesRights("fta_modification"))
                 or ( AclClass::getValueAccesRights("fta_consultation") and $abreviation_fta_etat == FtaEtatModel::ETAT_ABREVIATION_VALUE_VALIDE )
         ) {
-            $lien .= '<a '
+            if ($abreviation_fta_etat <> FtaEtatModel::ETAT_ABREVIATION_VALUE_MODIFICATION) {
+                $lien .= '<a '
 //                            . 'href=#'
-                    . 'href=modification_fiche.php'
-                    . '?id_fta=' . $id_fta
-                    . '&synthese_action=' . $synthese_action
-                    . '&comeback=1'
-                    . '&id_fta_etat=' . $id_fta_etat
-                    . '&abreviation_fta_etat=' . $abreviation_fta_etat
-                    . '&id_fta_role=' . $idFtaRole
-                    . ' /><img src=../lib/images/next.png alt=\'\' title=\'Voir la FTA\' width=\'30\' height=\'25\' border=\'0\' />'
-                    . '</a>'
-            ;
+                        . 'href=modification_fiche.php'
+                        . '?id_fta=' . $id_fta
+                        . '&synthese_action=' . $synthese_action
+                        . '&comeback=1'
+                        . '&id_fta_etat=' . $id_fta_etat
+                        . '&abreviation_fta_etat=' . $abreviation_fta_etat
+                        . '&id_fta_role=' . $idFtaRole
+                        . ' /><img src=../lib/images/next.png alt=\'\' title=\'Voir la FTA\' width=\'30\' height=\'25\' border=\'0\' />'
+                        . '</a>'
+                ;
+            } else {
+                if ($checkAccesButton) {
+                    $lien .= '<a '
+//                            . 'href=#'
+                            . 'href=modification_fiche.php'
+                            . '?id_fta=' . $id_fta
+                            . '&synthese_action=' . $synthese_action
+                            . '&comeback=1'
+                            . '&id_fta_etat=' . $id_fta_etat
+                            . '&abreviation_fta_etat=' . $abreviation_fta_etat
+                            . '&id_fta_role=' . $idFtaRole
+                            . ' /><img src=../lib/images/next.png alt=\'\' title=\'Voir la FTA\' width=\'30\' height=\'25\' border=\'0\' />'
+                            . '</a>'
+                    ;
+                }
+            }
             /**
              * Version avec le module rewrite
              */
@@ -2462,7 +2491,6 @@ function visualiser_fiches($id_fta_etat, $choix, $isLimit, $order_common) {
 //                            . '</a>'
             ;
         }
-
 
 
 
@@ -2488,7 +2516,7 @@ function visualiser_fiches($id_fta_etat, $choix, $isLimit, $order_common) {
                 (($idFtaRole == '1' or $idFtaRole == '6' ) and $recap[$id_fta] == '100%' and $checkAccesButton )
                 and AclClass::getValueAccesRights("fta_modification") and ( $abreviation_fta_etat == FtaEtatModel::ETAT_ABREVIATION_VALUE_MODIFICATION)
                 or ( $ok == '2' and $accesTransitionButton == FALSE && $recap[$id_fta] == '100%' and $checkAccesButton )
-                or ( $synthese_action == FtaEtatModel::ETAT_AVANCEMENT_VALUE_ALL AND ( $idFtaRole == '1' or $idFtaRole == '6' ) and $checkAccesButton )
+                or ( $synthese_action == FtaEtatModel::ETAT_AVANCEMENT_VALUE_ALL AND ( $idFtaRole == '1' or $idFtaRole == '6' ) and $checkAccesButton and $abreviation_fta_etat <> FtaEtatModel::ETAT_ABREVIATION_VALUE_MODIFICATION )
                 or ( ($idFtaRole == '1' or $idFtaRole == '6' ) and $synthese_action == FtaEtatModel::ETAT_AVANCEMENT_VALUE_EFFECTUES and $checkAccesButton )
         ) {
             $lien .= '<a '
@@ -2552,7 +2580,18 @@ function visualiser_fiches($id_fta_etat, $choix, $isLimit, $order_common) {
                            ';
                 }
             }
-            if ($abreviation_fta_etat <> FtaEtatModel::ETAT_ABREVIATION_VALUE_MODIFICATION and $checkAccesButton) {
+            if ($abreviation_fta_etat == FtaEtatModel::ETAT_ABREVIATION_VALUE_MODIFICATION) {
+                if ($checkAccesButton) {
+                    $lien .= '<a '
+                            . 'href=creer_fiche.php'
+                            . '?action=dupliquer_fiche'
+                            . '&id_fta=' . $id_fta
+                            . '&id_fta_role=' . $idFtaRole
+                            . '><img src=../lib/images/copie.png alt=\'\' title=\'Dupliquer\' width=\'30\' height=\'30\' border=\'0\' />'
+                            . '</a>'
+                    ;
+                }
+            } else {
                 $lien .= '<a '
                         . 'href=creer_fiche.php'
                         . '?action=dupliquer_fiche'
@@ -2591,22 +2630,28 @@ function visualiser_fiches($id_fta_etat, $choix, $isLimit, $order_common) {
             }
             $din = "<font size=\"1\" color=\"#808080\"><i>$din</i></font>";
         }
-        /*
-         * Initialisation des valeurs pour un commentaire
-         */
-        $ftaModel = new FtaModel($id_fta);
-        $commentaireDataField = $ftaModel->getDataField(FtaModel::FIELDNAME_COMMENTAIRE);
-        $htmlField = html::getHtmlObjectFromDataField($commentaireDataField);
-        $htmlField->setHtmlRenderToTable();
-        $htmlField->setIsEditable(TRUE);
-        $commentaire = $htmlField->getHtmlResult();
+//        /*
+//         * Initialisation des valeurs pour un commentaire
+//         */
+//        $ftaModel = new FtaModel($id_fta);
+//        $commentaireDataField = $ftaModel->getDataField(FtaModel::FIELDNAME_COMMENTAIRE);
+//        $htmlField = html::getHtmlObjectFromDataField($commentaireDataField);
+//        $htmlField->setHtmlRenderToTable();
+//        $htmlField->setIsEditable(TRUE);
+//        $commentaire = $htmlField->getHtmlResult();
 
         /*
          * Noms des services dans lequel la Fta se trouve
          */
 //                $service = FtaRoleModel::getListeIdFtaRoleEncoursByIdFta($idFta, $idWorkflowFtaEncours);
-        $service = FtaRoleModel::getNameServiceEncours($listeIdFtaRole);
 
+        if ($abreviation_fta_etat == FtaEtatModel::ETAT_ABREVIATION_VALUE_MODIFICATION) {
+            if ($checkAccesButton) {
+                $service = FtaRoleModel::getNameServiceEncours($listeIdFtaRole);
+            }
+        } else {
+            $service = FtaRoleModel::getNameServiceEncours($listeIdFtaRole);
+        }
         /**
          * Calssification
          */

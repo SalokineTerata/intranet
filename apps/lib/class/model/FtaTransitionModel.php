@@ -119,6 +119,26 @@ class FtaTransitionModel {
                     exit;
                 }
 
+                /**
+                 * Transition d'une Fta Archivé vers Modifier doit être la dernier version du dossier
+                 * afin d'éviter les doublons
+                 */
+                if ($initial_abreviation_fta_etat == FtaEtatModel::ETAT_ABREVIATION_VALUE_ARCHIVE) {
+                    /**
+                     * On récupère la dernière version du dossier
+                     */
+                    $arrayIdDossierVersion = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
+                                    "SELECT MAX(" . FtaModel::FIELDNAME_VERSION_DOSSIER_FTA
+                                    . ")  FROM " . FtaModel::TABLENAME
+                                    . " WHERE " . FtaModel::FIELDNAME_DOSSIER_FTA . "=" . $idDossierFta
+                    );
+                    foreach ($arrayIdDossierVersion as $rowsIdDossierVersion ){
+                        $IdDossierVersion= $rowsIdDossierVersion['MAX('.FtaModel::FIELDNAME_VERSION_DOSSIER_FTA.')'];
+                    }
+                }else{
+                    $IdDossierVersion = "";
+                }
+
                 //Dans le cas d'une mise à jour, récupération des Chapitres à corriger.
 
                 $liste_chapitre_maj_fta = ";";
@@ -148,6 +168,7 @@ class FtaTransitionModel {
                 $option_duplication["selection_chapitre"] = $paramListeChapitres;
                 $option_duplication["nouveau_maj_fta"] = $nouveau_maj_fta;
                 $option_duplication["site_de_production"] = $siteDeProduction;
+                $option_duplication["id_version_dossier_fta"] = $IdDossierVersion;
                 $idFtaNew = FtaModel::BuildDuplicationFta($id_fta_original, $action_duplication, $option_duplication, $paramIdWorkflow);
                 $ftaModel = new FtaModel($idFtaNew);
                 $codeArticleLdc = $ftaModel->getDataField(FtaModel::FIELDNAME_CODE_ARTICLE_LDC)->getFieldValue();
@@ -536,7 +557,8 @@ class FtaTransitionModel {
                 . "\n"
                 . "INFORMATIONS DE DEBUGGAGE:\n"
                 . $logTransition
-        ; {
+        ;
+        {
             $expediteur = $prenom . " " . $nom . " <" . $mail . ">";
             envoismail($sujetmail, $corp, $mail, $expediteur, $typeMail);
         }

@@ -678,7 +678,7 @@ class FtaSuiviProjetModel extends AbstractModel {
             foreach ($arrayCommentaireAllChapitre as $rowsCommentaireAllChapitre) {
                 if ($rowsCommentaireAllChapitre[FtaSuiviProjetModel::FIELDNAME_COMMENTAIRE_SUIVI_PROJET]) {
                     $return.= "<br>" . $rowsCommentaireAllChapitre[UserModel::FIELDNAME_PRENOM] . " " . $rowsCommentaireAllChapitre[UserModel::FIELDNAME_NOM] . " a écrit:<br>"
-                            . $rowsCommentaireAllChapitre[FtaSuiviProjetModel::FIELDNAME_COMMENTAIRE_SUIVI_PROJET]
+                            . $rowsCommentaireAllChapitre[FtaSuiviProjetModel::FIELDNAME_COMMENTAIRE_SUIVI_PROJET] . "<br>"
                     ;
                 }
             }

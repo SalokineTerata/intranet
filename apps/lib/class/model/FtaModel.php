@@ -651,17 +651,22 @@ class FtaModel extends AbstractModel {
           Déclaration et initialisation des variables
          * **************************************** */
         $globalConfig = new GlobalConfig();
-                      UserModel::ConnexionFalse($globalConfig);
+        UserModel::ConnexionFalse($globalConfig);
 
         $idUser = $globalConfig->getAuthenticatedUser()->getKeyValue();
         $ftaModelOrig = new FtaModel($paramIdFta);              //Identifiant de la fiche technique article à dupliquer
-        $idFtaVersion = $ftaModelOrig->getDataField(FtaModel::FIELDNAME_VERSION_DOSSIER_FTA)->getFieldValue();
+        if ($paramOption["id_version_dossier_fta"]) {
+            $idFtaVersion = $paramOption["id_version_dossier_fta"];
+        } else {
+            $idFtaVersion = $ftaModelOrig->getDataField(FtaModel::FIELDNAME_VERSION_DOSSIER_FTA)->getFieldValue();
+        }
         $idFtaOriginal = $paramIdFta;                //Sauvegarde de la clef initiale.
         $paramOption["abreviation_etat_destination"]; //Etat vers lequel doit aller la FTA
         $paramOption["selection_chapitre"];           //Tableau contenant les id_fta_chapitre des chapitres à corriger
         $paramOption["designation_commerciale_fta"];  //Nouveau nom commerciale de la FTA
         $paramOption["site_de_production"];  //Nouveau site de production de la FTA
         $paramOption["nouveau_maj_fta"];              //Nouveau commentaire de la nouvelle FTA
+        $paramOption["id_version_dossier_fta"];              //Id dossier version maximun
 
         switch ($paramAction) {
             case "version":

@@ -35,8 +35,11 @@ if ($fta_modification) {
     $idFtaRoleEncoursDefault = '0';
 }
 $idFtaRole = Lib::getParameterFromRequest(FtaRoleModel::KEYNAME, $idFtaRoleEncoursDefault);
-
-
+//$environnementConf = new EnvironmentConf();
+//$dossierUrL = $environnementConf->getUrlRoot();
+//if(!$dossierUrL){
+    $dossierUrL = "v3";
+//}
 /*
   -----------------
   ACTION A TRAITER
@@ -87,7 +90,7 @@ if (is_numeric($recherche)) {
         afficher_message("Erreur", $message, $redirection);
     }
 }
-header("Location: ./recherche.php?url_page_depart=(/dev-intranet/apps/fta/recherche.php)&requete_resultat=SELECT+DISTINCT+$search_id+FROM+$search_table+WHERE+$search_req&nb_limite_resultat=1000&champ_recherche=$champ_recherche&operateur_recherche=$operateur_recherche&texte_recherche=$recherche&nbcol=1&nbligne=1&nb_col_courant=0&nb_ligne_courant=1&ajout_col=0&id_fta_role=$idFtaRole");
+header("Location: ./recherche.php?url_page_depart=(/" . $dossierUrL . "/apps/fta/recherche.php)&requete_resultat=SELECT+DISTINCT+$search_id+FROM+$search_table+WHERE+$search_req&nb_limite_resultat=1000&champ_recherche=$champ_recherche&operateur_recherche=$operateur_recherche&texte_recherche=$recherche&nbcol=1&nbligne=1&nb_col_courant=0&nb_ligne_courant=1&ajout_col=0&id_fta_role=$idFtaRole");
 
 
 /* * **********

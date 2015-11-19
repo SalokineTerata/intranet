@@ -2494,7 +2494,6 @@ function visualiser_fiches($id_fta_etat, $choix, $isLimit, $order_common) {
 
 
 
-
         //Export PDF
 //echo "test".$rows["abreviation_fta_etat"];
         if (

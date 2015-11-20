@@ -38,7 +38,8 @@ $idFtaRole = Lib::getParameterFromRequest(FtaRoleModel::KEYNAME, $idFtaRoleEncou
 //$environnementConf = new EnvironmentConf();
 //$dossierUrL = $environnementConf->getUrlRoot();
 //if(!$dossierUrL){
-    $dossierUrL = "v3";
+    $dossierUrL = $globalConfig->getConf()->getUrlRoot();
+
 //}
 /*
   -----------------

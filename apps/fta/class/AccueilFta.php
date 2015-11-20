@@ -496,18 +496,32 @@ class AccueilFta {
     $paramArrayRole, $paramArrayEtat, $idFtaRole, $nomFtaEtat, $paramSyntheseAction, $lien, $idFieldNomFtaRole, $idKeyNameFtaEtat, $idKeyValueFtaEtatAvancement
     ) {
         $color = '';
-        $color1 = '';
+//        $color1 = '';
         $color2 = '';
-
+        $globalConfig = new GlobalConfig();
 
         if ($paramArrayRole[$idFieldNomFtaRole][FtaRoleModel::KEYNAME] == $idFtaRole) {
+            /**
+             * couleurV2 test violet
+             */
 //            $color = 'bgcolor=#AAAAFF';
-            $color = 'bgcolor=#009dd1';
+            /**
+             * couleurV3 test bleu
+             */
+//            $color = 'bgcolor=#009dd1';
+            $color = 'bgcolor=' . $globalConfig->getConf()->getCssBackgroundValue();
         }
 
         if ($paramArrayEtat[$idKeyNameFtaEtat][FtaEtatModel::FIELDNAME_ABREVIATION] == $nomFtaEtat) {
+            /**
+             * couleurV2 test violet
+             */
 //            $color1 = 'bgcolor=#AAAAFF';
-            $color1 = 'bgcolor=#009dd1';
+            /**
+             * couleurV3 test bleu
+             */
+//            $color1 = 'bgcolor=#009dd1';
+            $color1 = 'bgcolor=' . $globalConfig->getConf()->getCssBackgroundValue();
         }
 
 
@@ -528,8 +542,15 @@ class AccueilFta {
                 break;
         }
         if ($paramSyntheseAction == $ligneEtatAvancement) {
+            /**
+             * couleurV2 test violet
+             */
 //            $color2 = 'bgcolor=#AAAAFF';
-            $color2 = 'bgcolor=#009dd1';
+            /**
+             * couleurV3 test bleu
+             */
+//            $color2 = 'bgcolor=#009dd1';
+            $color2 = 'bgcolor=' . $globalConfig->getConf()->getCssBackgroundValue();
         }
 
 

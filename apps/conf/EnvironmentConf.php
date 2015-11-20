@@ -61,6 +61,10 @@ class EnvironmentConf {
     private $urlServer = null;
     private $reverseProxyName = null;
     private $urlSubdir = null;
+    private $cssBackgroundValue = null;
+    private $cssContentValue = null;
+    private $cssFta = null;
+    private $cssTitleValue = null;
 
     /**
      * A-t-on le droit d'utiliser l'ancienne méthode de connexion MySQL ?
@@ -291,6 +295,40 @@ class EnvironmentConf {
     function setReverseProxyName($reverseProxyName) {
         $this->reverseProxyName = $reverseProxyName;
     }
+
+    function getCssFta() {
+        return $this->cssFta;
+    }
+
+    function setCssFta($cssFta) {
+        $this->cssFta = $cssFta;
+    }
+
+    
+    function getCssBackgroundValue() {
+        return $this->cssBackgroundValue;
+    }
+
+    function getCssContentValue() {
+        return $this->cssContentValue;
+    }
+
+    function getCssTitleValue() {
+        return $this->cssTitleValue;
+    }
+
+    function setCssBackgroundValue($cssBackgroundValue) {
+        $this->cssBackgroundValue = $cssBackgroundValue;
+    }
+
+    function setCssContentValue($cssContentValue) {
+        $this->cssContentValue = $cssContentValue;
+    }
+
+    function setCssTitleValue($cssTitleValue) {
+        $this->cssTitleValue = $cssTitleValue;
+    }
+
 
 }
 

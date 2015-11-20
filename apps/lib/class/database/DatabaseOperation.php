@@ -300,13 +300,13 @@ class DatabaseOperation {
 
         $statement = DatabaseOperation::queryPDO($paramStatement);
         if ($statement) {
-            $return = $statement->fetchall(PDO::FETCH_ASSOC);
+            $return = $statement->fetchAll(PDO::FETCH_ASSOC);
             $statement->closeCursor();
         }
 
         return $return;
     }
-
+  
     public static function getRowsNumberOverLimitInSqlStatement($paramStatement) {
         $statement = DatabaseOperation::queryPDO($paramStatement);
         if ($statement) {

@@ -123,7 +123,7 @@ class FtaTransitionModel {
                  * Transition d'une Fta Archivé vers Modifier doit être la dernier version du dossier
                  * afin d'éviter les doublons
                  */
-                if ($initial_abreviation_fta_etat == FtaEtatModel::ETAT_ABREVIATION_VALUE_ARCHIVE) {
+                if ($initial_abreviation_fta_etat == FtaEtatModel::ETAT_ABREVIATION_VALUE_ARCHIVE or $initial_abreviation_fta_etat == FtaEtatModel::ETAT_ABREVIATION_VALUE_VALIDE) {
                     /**
                      * On récupère la dernière version du dossier
                      */

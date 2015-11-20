@@ -957,7 +957,7 @@ class FtaView {
      */
     function getHtmlPoidsColisUVC() {
 
-        $return = $this->getModel()->buildArrayEmballageTypeDuColis();
+        $return = $this->getModel()->PoidsDesEmballagesColis();
 
         $htmlPoidColisUVC = new HtmlInputText();
 
@@ -978,8 +978,8 @@ class FtaView {
 
         $htmlPoidsNetColisUVC = new HtmlInputText();
 
-        $htmlPoidsNetColisUVC->setLabel(DatabaseDescription::getFieldDocLabel(FtaModel::TABLENAME, FtaModel::FIELDNAME_NOMBRE_UVC_PAR_CARTON));
-        $htmlPoidsNetColisUVC->getAttributes()->getValue()->setValue($return["colis_net"]);
+        $htmlPoidsNetColisUVC->setLabel("Poids Net (en Kg):");
+        $htmlPoidsNetColisUVC->getAttributes()->getValue()->setValue(round($return["colis_net"],2));
         $htmlPoidsNetColisUVC->setIsEditable(FALSE);
 
         return $htmlPoidsNetColisUVC->getHtmlResult();
@@ -995,8 +995,8 @@ class FtaView {
 
         $htmlPoidsBrutColisUVC = new HtmlInputText();
 
-        $htmlPoidsBrutColisUVC->setLabel(DatabaseDescription::getFieldDocLabel(FtaModel::TABLENAME, FtaModel::FIELDNAME_POIDS_BRUT_UVC));
-        $htmlPoidsBrutColisUVC->getAttributes()->getValue()->setValue($return[FtaConditionnementModel::COLIS_EMBALLAGE_BRUT]);
+        $htmlPoidsBrutColisUVC->setLabel("Poids Brut (en Kg):");
+        $htmlPoidsBrutColisUVC->getAttributes()->getValue()->setValue(round($return[FtaConditionnementModel::COLIS_EMBALLAGE_BRUT],2));
         $htmlPoidsBrutColisUVC->setIsEditable(FALSE);
 
         return $htmlPoidsBrutColisUVC->getHtmlResult();
@@ -1031,8 +1031,8 @@ class FtaView {
 
         $htmlPoidsNetPalettisationUVC = new HtmlInputText();
 
-        $htmlPoidsNetPalettisationUVC->setLabel(DatabaseDescription::getFieldDocLabel(FtaModel::TABLENAME, FtaModel::FIELDNAME_NOMBRE_UVC_PAR_CARTON));
-        $htmlPoidsNetPalettisationUVC->getAttributes()->getValue()->setValue($return[FtaConditionnementModel::PALETTE_EMBALLAGE_NET]);
+        $htmlPoidsNetPalettisationUVC->setLabel("Poids Net (en Kg):");
+        $htmlPoidsNetPalettisationUVC->getAttributes()->getValue()->setValue(round($return[FtaConditionnementModel::PALETTE_EMBALLAGE_NET],2));
         $htmlPoidsNetPalettisationUVC->setIsEditable(FALSE);
 
         return $htmlPoidsNetPalettisationUVC->getHtmlResult();
@@ -1048,8 +1048,8 @@ class FtaView {
 
         $htmlPoidsBrutPalettisationUVC = new HtmlInputText();
 
-        $htmlPoidsBrutPalettisationUVC->setLabel(DatabaseDescription::getFieldDocLabel(FtaModel::TABLENAME, FtaModel::FIELDNAME_POIDS_BRUT_UVC));
-        $htmlPoidsBrutPalettisationUVC->getAttributes()->getValue()->setValue($return[FtaConditionnementModel::PALETTE_EMBALLAGE_BRUT]);
+        $htmlPoidsBrutPalettisationUVC->setLabel("Poids Brut (en Kg):");
+        $htmlPoidsBrutPalettisationUVC->getAttributes()->getValue()->setValue(round($return[FtaConditionnementModel::PALETTE_EMBALLAGE_BRUT],2));
         $htmlPoidsBrutPalettisationUVC->setIsEditable(FALSE);
 
         return $htmlPoidsBrutPalettisationUVC->getHtmlResult();
@@ -1066,7 +1066,7 @@ class FtaView {
         $htmlHauteurPalettisationUVC = new HtmlInputText();
 
         $htmlHauteurPalettisationUVC->setLabel(DatabaseDescription::getFieldDocLabel(FtaConditionnementModel::TABLENAME, FtaConditionnementModel::FIELDNAME_HAUTEUR_FTA_CONDITIONNEMENT));
-        $htmlHauteurPalettisationUVC->getAttributes()->getValue()->setValue($return[FtaConditionnementModel::PALETTE_EMBALLAGE_HAUTEUR]);
+        $htmlHauteurPalettisationUVC->getAttributes()->getValue()->setValue(round($return[FtaConditionnementModel::PALETTE_EMBALLAGE_HAUTEUR],2));
         $htmlHauteurPalettisationUVC->setIsEditable(FALSE);
 
         return $htmlHauteurPalettisationUVC->getHtmlResult();
@@ -1082,7 +1082,7 @@ class FtaView {
 
         $htmlCouchePalettisationUVC = new HtmlInputText();
 
-        $htmlCouchePalettisationUVC->setLabel(FtaConditionnementModel::PALETTE_EMBALLAGE_HAUTEUR_LABEL);
+        $htmlCouchePalettisationUVC->setLabel(DatabaseDescription::getFieldDocLabel(FtaConditionnementModel::TABLENAME, FtaConditionnementModel::FIELDNAME_NOMBRE_COUCHE_FTA_CONDITIONNEMENT));
         $htmlCouchePalettisationUVC->getAttributes()->getValue()->setValue($return[FtaConditionnementModel::PALETTE_NOMBRE_DE_COUCHE]);
         $htmlCouchePalettisationUVC->setIsEditable(FALSE);
 

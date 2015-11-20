@@ -36,6 +36,7 @@ class FtaConditionnementModel extends AbstractModel {
     const EMBALLAGES_DU_COLIS = '3';
     const EMBALLAGES_PALETTE = '4';
     const UVC_EMBALLAGE = 'uvc_emballage';
+    const UVC_EMBALLAGE_TYPE_1 = 'uvc_emballage_1';
     const UVC_EMBALLAGE_NET = 'uvc_net';
     const UVC_EMBALLAGE_BRUT = 'uvc_brut';
     const UVC_EMBALLAGE_DIMENSION = 'dimension_uvc';
@@ -44,6 +45,8 @@ class FtaConditionnementModel extends AbstractModel {
     const UVC_EMBALLAGE_DIMENSION_LARGEUR = 'dimension_uvc_largeur';
     const UVC_EMBALLAGE_DIMENSION_LABEL = 'Dimension de l\'UVC (en mm):';
     const COLIS_EMBALLAGE = 'colis_emballage';
+    const COLIS_EMBALLAGE_TYPE_2 = 'colis_emballage_2';
+    const COLIS_EMBALLAGE_TYPE_3 = 'colis_emballage_3';
     const COLIS_EMBALLAGE_NET = 'colis_net';
     const COLIS_EMBALLAGE_BRUT = 'colis_brut';
     const COLIS_EMBALLAGE_HAUTEUR = 'hauteur_colis';
@@ -129,8 +132,8 @@ class FtaConditionnementModel extends AbstractModel {
      * @param type $paramCouchePalette
      * @return type
      */
-    static function getCalculHauteurEmballagePalette($paramHauteurFtaConditionnement, $paramCouchePalette) {
-        return (($paramHauteurFtaConditionnement * $paramCouchePalette) + $paramHauteurFtaConditionnement ) / 1000;
+    static function getCalculHauteurEmballagePalette($paramHauteurFtaConditionnement, $paramCouchePalette,$paramHauteurFtaConditionnementPalette) {
+        return (($paramHauteurFtaConditionnement * $paramCouchePalette ) + $paramHauteurFtaConditionnementPalette ) / 1000;
     }
 
     /**

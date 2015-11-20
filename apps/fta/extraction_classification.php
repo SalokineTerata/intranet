@@ -304,6 +304,9 @@ function UpgradeClassificationV2ToV3($paramNameOfBDDTarget, $paramNameOfBDDOrigi
 
     mysql_close();
 
+    /**
+     * Les Fta validé ont par défaut un éta d'avancement de 100%
+     */
     $array = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
                     "Select " . FtaModel::KEYNAME . "," . FtaModel::FIELDNAME_ID_FTA_ETAT . " FROM " . FtaModel::TABLENAME
     );
@@ -318,6 +321,8 @@ function UpgradeClassificationV2ToV3($paramNameOfBDDTarget, $paramNameOfBDDOrigi
             DatabaseOperation::execute($req);
         }
     }
+    
+    
     echo "FIN de TRAITEMENT";
 }
 

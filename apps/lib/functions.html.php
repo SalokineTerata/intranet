@@ -582,18 +582,24 @@ function popup($paramPopupName
 function print_page_begin($disable_full_page = FALSE, $menu_file = NULL, $conf = null) {
 
     if ($conf == null) {
-        $conf = $_SESSION["globalConfig"];
+        $conf = new GlobalConfig();
     }
     $module = Lib::getModule();
     $title = Lib::setTitle();
-    $css_intranet_module = $_SESSION["intranet_modules"][$module]["css_intranet_module"];
+//    $css_intranet_module = $_SESSION["intranet_modules"][$module]["css_intranet_module"];
     $printable = "";
 
     if (!$_SESSION[$module . "_impression"]) {
         $printable = "class=display_none";
     }
-
-
+    /**
+     * Si le module Fta doit être affiché on selectionne le css du config.ini sinon celui de la base de données
+     */
+    if ($module == "fta" or  $module == "adminagis") {
+        $css_intranet_module = $conf->getConf()->getCssFta();
+    } else {
+        $css_intranet_module = $_SESSION["intranet_modules"][$module]["css_intranet_module"];
+    }
     header('Content-type: text/html; charset=utf-8');
     echo "<!DOCTYPE html><html>";
     echo "<head>";
@@ -601,9 +607,20 @@ function print_page_begin($disable_full_page = FALSE, $menu_file = NULL, $conf =
 
     //Configuration du CSS
     echo "<link rel=stylesheet href=../lib/css/"
-    . $_SESSION["intranet_modules"][$module]["css_intranet_module"]
+    . $css_intranet_module
     . " type=text/css>"
     ;
+    /**
+     * Css de la config.ini
+     */
+    if ($module == "fta" or  $module == "adminagis") {
+        echo "<style>
+        body {background-color:" . $conf->getConf()->getCssBackgroundValue() . ";}
+        .tableauFiche.table.td:hover   {background-color:" . $conf->getConf()->getCssBackgroundValue() . ";}
+        .titre_principal {background-color: " . $conf->getConf()->getCssTitleValue() . ";}
+        .contenu {background-color: " . $conf->getConf()->getCssContentValue() . ";}
+        </style>";
+    }
     echo "<link type=\"text/css\" rel=\"stylesheet\" href=\"../plugins/dhtmlgoodies_calendar/dhtmlgoodies_calendar/dhtmlgoodies_calendar.css?random=20051112\" media=\"screen\"></link>";
     echo "</head>";
 

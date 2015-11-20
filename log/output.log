@@ -351,3 +351,8 @@ tdytyryrty ç_èç_çè('-'(-
 2015-11-19 13:17:15 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `commentaire_maj_fta` =   'test'
 2015-11-19 14:00:26 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : test
 2015-11-19 14:00:26 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `commentaire_maj_fta` =   'test'
+2015-11-20 11:01:05 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : uhiohjiji
+2015-11-20 11:01:05 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `suffixe_agrologic_fta` =   'uhiohjiji'
+2015-11-20 11:01:40 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : FESTIFS 2014 REFERENCE SU NORD OUEST
+testr commentaire
+2015-11-20 11:01:40 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `commentaire_suivi_projet` =   'FESTIFS 2014 REFERENCE SU NORD OUEST\ntestr commentaire'

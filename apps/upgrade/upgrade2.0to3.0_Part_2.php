@@ -257,6 +257,14 @@ if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
     ;
   if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
   
+ echo "ALTER TABLE ".$nameOfBDDTarget.".fta_composant k_etiquette_verso_fta_composition...";
+
+   $sql =      "ALTER TABLE ".$nameOfBDDTarget.".fta_composant
+        ADD CONSTRAINT  FOREIGN KEY (k_etiquette_verso_fta_composition) REFERENCES ".$nameOfBDDTarget.".codesoft_etiquettes(k_etiquette)
+        ON DELETE  NO ACTION ON UPDATE CASCADE;"
+    ;
+  if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+  
 
 
 //Fta conditionnement

@@ -6,7 +6,7 @@
  *
  * @author salokine
  */
-abstract class AbstractModel {
+abstract class AbstractModel implements AbstractModelInterface {
 
     const TABLENAME = 'undefined';
     const KEYNAME = 'undefined';
@@ -32,10 +32,16 @@ abstract class AbstractModel {
     }
 
     /**
-     * Valeurs par défaut en cas de création
-     * d'un nouvel enregistrement
+     * Définition des valeurs par défaut
      */
-    public abstract function buildDefaultValues();
+    protected abstract function setDefaultValues();
+
+    /**
+     * Créé et réserve un nouvel enresgitrement dans la table
+     * @return mixed
+     */
+    
+    static public function insertNewRecordset($paramForeignKeysValuesArray = NULL);
 
     public static function getClassName() {
         return get_called_class();

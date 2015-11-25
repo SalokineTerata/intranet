@@ -10,4 +10,8 @@ class TypesModel extends AbstractModel {
     const KEYNAME = 'id_type';
     const FIELDNAME_INTITULE_TYP = 'intitule_typ';
 
+    protected function setDefaultValues() {
+        
+    }
+
 }

@@ -70,6 +70,7 @@ require_once('../lib/class/model/ModelTableAssociation.php');
 
 
 // Modèles des tables en base de données
+require_once('../lib/class/model/AbstractModelInterface.php');
 require_once('../lib/class/model/AbstractModel.php');
 require_once('../lib/class/model/AccessMaterielServiceModel.php');
 require_once('../lib/class/model/AnnexeAgrologicArticleCodificationModel.php');

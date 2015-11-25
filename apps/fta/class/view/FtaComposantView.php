@@ -5,7 +5,7 @@
  *
  * @author franckwastaken
  */
-class FtaComposantView  {
+class FtaComposantView {
 
     /**
      * Model de donnée d'un composant
@@ -52,6 +52,26 @@ class FtaComposantView  {
                         $this->getFtaComposantModel()->getDataField($paramFieldName)
                         , $this->getIsEditable()
         );
+    }
+
+    public function getHtmlCodePSF() {
+        $id_fta_composant = $this->getFtaComposantModel()->getKeyValue();
+        $codePSFValue = $this->getFtaComposantModel()->getDataField(FtaComposantModel::FIELDNAME_CODE_PRODUIT_AGROLOGIC_FTA_NOMENCLATURE)->getFieldValue();
+        $codePSF = new HtmlInputText();
+        $HtmlTableName = FtaComposantModel::TABLENAME
+                . '_'
+                . FtaComposantModel::FIELDNAME_CODE_PRODUIT_AGROLOGIC_FTA_NOMENCLATURE
+                . '_'
+                . $id_fta_composant
+        ;
+        $codePSF->setLabel(DatabaseDescription::getFieldDocLabel(FtaComposantModel::TABLENAME, FtaComposantModel::FIELDNAME_CODE_PRODUIT_AGROLOGIC_FTA_NOMENCLATURE));
+        $codePSF->getAttributes()->getValue()->setValue($codePSFValue);
+        $codePSF->getAttributes()->getPattern()->setValue("[0-9]{1,6}");
+        $codePSF->getAttributes()->getMaxLength()->setValue("6");
+        $codePSF->setIsEditable($this->getIsEditable());
+        $codePSF->initAbstractHtmlInput($HtmlTableName, $codePSF->getLabel(), $codePSFValue, NULL);
+        $codePSF->getEventsForm()->setOnChangeWithAjaxAutoSave(FtaComposantModel::TABLENAME, FtaComposantModel::KEYNAME, $id_fta_composant, FtaComposantModel::FIELDNAME_CODE_PRODUIT_AGROLOGIC_FTA_NOMENCLATURE);
+        return $codePSF->getHtmlResult();
     }
 
 }

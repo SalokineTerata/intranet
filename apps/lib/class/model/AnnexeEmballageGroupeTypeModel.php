@@ -42,6 +42,10 @@ class AnnexeEmballageGroupeTypeModel extends AbstractModel {
         parent::__construct($paramId, $paramIsCreateRecordsetInDatabaseIfKeyDoesntExist);
     }
 
+    protected function setDefaultValues() {
+        
+    }
+
     function getEmballageGroupeUVC() {
         return self::$idFtaConditionnemntUVC;
     }
@@ -177,8 +181,6 @@ class AnnexeEmballageGroupeTypeModel extends AbstractModel {
         self::$idFtaConditionnemntPalette = FtaConditionnementModel::getIdFtaConditionnement(self::$idAnnexeEmballagePalette, $paramIdFta, self::$emballagePalette);
         self::$idAnnexeEmballageGroupeTypePaletteByIdFtaConditionnement = FtaConditionnementModel::getIdAnnexeEmballageAndGroupeTypeAndGroupeAndIdFtaConditionnementFromFtaConditionnement(self::$idFtaConditionnemntPalette, $paramIdFta);
     }
-
-   
 
 }
 

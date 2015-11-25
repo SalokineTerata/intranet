@@ -72,7 +72,7 @@ $k_codesoft_etiquette_logo = Lib::getParameterFromRequest(FtaComposantModel::FIE
 $etiquette_decomposition_poids_fta_composant = Lib::getParameterFromRequest(FtaComposantModel::FIELDNAME_ETIQUETTE_DECOMPOSITION_POIDS_FTA_COMPOSANT);
 $etiquette_information_complementaire_recto_fta_composant = Lib::getParameterFromRequest(FtaComposantModel::FIELDNAME_ETIQUETTE_INFORMATION_COMPLEMENTAIRE_RECTO_FTA_COMPOSANT);
 $etiquette_libelle_legal_fta_composition = Lib::getParameterFromRequest(FtaComposantModel::FIELDNAME_ETIQUETTE_LIBELLE_LEGAL_FTA_COMPOSITION);
-
+$_SESSION['checkCreation']="0";
 
 if ($mode_etiquette_fta_composition == 0) {
     DatabaseOperation::execute(

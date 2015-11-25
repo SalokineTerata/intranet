@@ -31,6 +31,10 @@ class FtaWorkflowModel extends AbstractModel {
         );
     }
 
+    protected function setDefaultValues() {
+        
+    }
+
     function getModelIntranetActions() {
         return $this->modelIntranetActions;
     }
@@ -84,10 +88,10 @@ class FtaWorkflowModel extends AbstractModel {
      * @param int $paramIdFta
      * @return string
      */
-    public static function ShowListeDeroulanteNomWorkflowByAccesAndIdFta($paramIdUser, $paramObjetList, $paramIsEditable, $paramIdFta,$paramIdRole) {
+    public static function ShowListeDeroulanteNomWorkflowByAccesAndIdFta($paramIdUser, $paramObjetList, $paramIsEditable, $paramIdFta, $paramIdRole) {
 
         $ftaModel = new FtaModel($paramIdFta);
-         $arrayWorkflow = DatabaseOperation::convertSqlStatementWithKeyAndOneFieldToArray(
+        $arrayWorkflow = DatabaseOperation::convertSqlStatementWithKeyAndOneFieldToArray(
                         'SELECT DISTINCT ' . FtaWorkflowModel::TABLENAME . '.' . FtaWorkflowModel::KEYNAME . ',' . FtaWorkflowModel::FIELDNAME_DESCRIPTION_FTA_WORKFLOW
                         . ' FROM ' . FtaWorkflowModel::TABLENAME
                         . ', ' . IntranetDroitsAccesModel::TABLENAME

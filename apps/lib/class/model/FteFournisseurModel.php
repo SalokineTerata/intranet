@@ -12,6 +12,10 @@ class FteFournisseurModel extends AbstractModel {
     const KEYNAME = 'id_fte_fournisseur';
     const FIELDNAME_NOM_FTE_FOURNISSEUR = 'nom_fte_fournisseur';
 
+    protected function setDefaultValues() {
+        
+    }
+
 }
 
 ?>

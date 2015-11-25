@@ -73,6 +73,10 @@ class FtaConditionnementModel extends AbstractModel {
                 $this->getDataField(self::FIELDNAME_ID_FTA)->getFieldValue());
     }
 
+    protected function setDefaultValues() {
+        
+    }
+
     public function setModelFtaById($id) {
         $this->getDataField(self::FIELDNAME_ID_FTA)->setFieldValue($id);
         $this->setModelFta(
@@ -132,7 +136,7 @@ class FtaConditionnementModel extends AbstractModel {
      * @param type $paramCouchePalette
      * @return type
      */
-    static function getCalculHauteurEmballagePalette($paramHauteurFtaConditionnement, $paramCouchePalette,$paramHauteurFtaConditionnementPalette) {
+    static function getCalculHauteurEmballagePalette($paramHauteurFtaConditionnement, $paramCouchePalette, $paramHauteurFtaConditionnementPalette) {
         return (($paramHauteurFtaConditionnement * $paramCouchePalette ) + $paramHauteurFtaConditionnementPalette ) / 1000;
     }
 

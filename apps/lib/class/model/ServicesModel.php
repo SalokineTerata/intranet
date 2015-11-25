@@ -11,5 +11,9 @@ class ServicesModel extends AbstractModel {
     const FIELDNAME_INTITULE_SER = 'intitule_ser';
     const FIELDNAME_ID_GROUPE = 'id_groupe';
     const FIELDNAME_FAX_SERVICES = 'fax_services';
-   
+
+    protected function setDefaultValues() {
+        
+    }
+
 }

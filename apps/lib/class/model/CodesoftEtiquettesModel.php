@@ -16,6 +16,10 @@ class CodesoftEtiquettesModel extends AbstractModel {
         parent::__construct($paramId, $paramIsCreateRecordsetInDatabaseIfKeyDoesntExist);
     }
 
+    protected function setDefaultValues() {
+        
+    }
+
     static public function getListeCodesoftEtiquettes($paramIdFta, $paramIsEditable) {
         $HtmlList = new HtmlListSelect();
         $ftaModel = new FtaModel($paramIdFta);
@@ -46,7 +50,7 @@ class CodesoftEtiquettesModel extends AbstractModel {
                 $HtmlTableName, $HtmlList->getLabel(), $ftaModel->getDataField(FtaModel::FIELDNAME_ETIQUETTE_CODESOFT)->getFieldValue(), NULL, $HtmlList->getArrayListContent());
         $HtmlList->getEventsForm()->setOnChangeWithAjaxAutoSave(FtaModel::TABLENAME, FtaModel::KEYNAME, $paramIdFta, FtaModel::FIELDNAME_ETIQUETTE_CODESOFT);
         $listeCodesoftEtiquettes = $HtmlList->getHtmlResult();
-        
+
         return $listeCodesoftEtiquettes;
     }
 

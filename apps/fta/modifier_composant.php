@@ -101,6 +101,7 @@ if ($id_fta_composant) {
     $ftaComposantModel = new FtaComposantModel($id_fta_composant);
     $ftaComposantView = new FtaComposantView($ftaComposantModel);
     $ftaComposantView->setIsEditable($isEditable);
+    $codePSFValue = $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_CODE_PRODUIT_AGROLOGIC_FTA_NOMENCLATURE)->getFieldValue();
 } else {
     $creation = 1;
     $id_fta_composant = FtaComposantModel::createNewRecordset(
@@ -129,7 +130,7 @@ $bloc.= "<tr class=titre_principal><td>"
 $bloc .=$ftaComposantView->getHtmlDataField(FtaComposantModel::FIELDNAME_ID_ANNEXE_AGRO_ART_CODIFICATION);
 //$bloc .=FtaComposantModel::ShowListeDeroulantePrefixeForComposant($HtmlList, $isEditable, $id_fta_composant);
 //Code PSF Arcadia
-$bloc .=$ftaComposantView->getHtmlDataField(FtaComposantModel::FIELDNAME_CODE_PRODUIT_AGROLOGIC_FTA_NOMENCLATURE);
+$bloc .= $ftaComposantView->getHtmlCodePSF();
 
 
 //Désignation Nomenclature

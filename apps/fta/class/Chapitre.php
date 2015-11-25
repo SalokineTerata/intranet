@@ -548,13 +548,14 @@ class Chapitre {
         $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_UNITE_FACTURATION);
 
         //Gencod EAN Article
-        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_EAN_UVC);
+        $bloc.=$ftaView->getHtmlEANArticle();
 
         //Gencod EAN Colis
-        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_EAN_COLIS);
+        $bloc.=$ftaView->getHtmlEANColis();
 
         //Gencod EAN Palette
-        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_EAN_PALETTE);
+        $bloc.=$ftaView->getHtmlEANPalette();
+
         return $bloc;
     }
 

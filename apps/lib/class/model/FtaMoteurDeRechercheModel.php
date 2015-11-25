@@ -10,4 +10,8 @@ class FtaMoteurDeRechercheModel extends AbstractModel {
     const FIELDNAME_PRIORITE_MOTEUR_DE_RECHERCHE = 'priorite_moteur_de_recherche';
     const FIELDNAME_CHEMIN_FORCE_MOTEUR_DE_RECHERCHE = 'chemin_force_moteur_de_recherche';
 
+    protected function setDefaultValues() {
+        
+    }
+
 }

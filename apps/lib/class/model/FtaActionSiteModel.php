@@ -14,6 +14,10 @@ class FtaActionSiteModel extends AbstractModel {
     const FIELDNAME_ID_INTRANET_ACTIONS = 'id_intranet_actions';
     const FIELDNAME_ID_FTA_WORKFLOW = 'id_fta_workflow';
 
+    protected function setDefaultValues() {
+        
+    }
+
     /**
      * On obtient l'id intranet action selon l'espace de travail et le site de production
      * @param int $paramIdFtaWorkflow

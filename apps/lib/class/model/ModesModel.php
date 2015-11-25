@@ -11,4 +11,8 @@ class ModesModel extends AbstractModel {
     const FIELDNAME_ID_USER = 'id_user';
     const FIELDNAME_SERV_CONF = 'serv_conf';
 
+    protected function setDefaultValues() {
+        
+    }
+
 }

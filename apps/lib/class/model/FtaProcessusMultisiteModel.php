@@ -14,6 +14,10 @@ class FtaProcessusMultisiteModel extends AbstractModel {
     const FIELDNAME_ID_SITE_PROCESSUS_FTA_PROCESSUS_MULTISITE = 'id_site_processus_fta_processus_multisite';
     const FIELDNAME_ID_SITE_ASSEMBLAGE_FTA_PROCESSUS_MULTISITE = 'id_site_assemblage_fta_processus_multisite';
 
+    protected function setDefaultValues() {
+        
+    }
+
 }
 
 ?>

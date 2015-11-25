@@ -84,7 +84,7 @@ $abreviationFtaEtat = Lib::getParameterFromRequest(FtaEtatModel::FIELDNAME_ABREV
 $comeback = Lib::getParameterFromRequest('comeback');
 $syntheseAction = Lib::getParameterFromRequest('synthese_action');
 $globalConfig = new GlobalConfig();
-      UserModel::ConnexionFalse($globalConfig);
+UserModel::ConnexionFalse($globalConfig);
 
 $id_user = $globalConfig->getAuthenticatedUser()->getKeyValue();
 $proprietaire = Lib::getParameterFromRequest('proprietaire');
@@ -180,14 +180,20 @@ if ($id_fta_composant) {
         $prefixe_code_produit_agrologic_fta_nomenclature = $annexexAgrologicModel->getDataField(AnnexeAgrologicArticleCodificationModel::FIELDNAME_PREFIXE_ANNEXE_AGRO_ART_COD)->getFieldValue();
     }
 } else {
+    $checkCreation = 0;
     if (!$checkCreation) {
         $creation = 1;
-        $id_fta_composant = FtaComposantModel::InsertFtaComposition($id_fta);
+        $id_fta_composant = FtaComposantModel::createNewRecordset(
+                        array(FtaComposantModel::FIELDNAME_ID_FTA => $id_fta)
+        );
         $ftaComposantModel = new FtaComposantModel($id_fta_composant);
+        $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_IS_COMPOSITION_FTA_COMPOSANT)->setFieldValue("1");
+        $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_IS_NOMENCLATURE_FTA_COMPOSANT)->setFieldValue("0");
+        $ftaComposantModel->saveToDatabase();
         $ftaComposantView = new FtaComposantView($ftaComposantModel);
         $ftaComposantView->setIsEditable($editable);
         $ftaComposantView2 = new FtaComposantView($ftaComposantModel);
-        $_SESSION['checkCreation']=$creation;
+        $_SESSION['checkCreation'] = $creation;
     } else {
         $titre = "Erreur ";
         $message = "Veuillez utiliser les boutons de navigation";

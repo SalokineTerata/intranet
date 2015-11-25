@@ -356,3 +356,23 @@ tdytyryrty ç_èç_çè('-'(-
 2015-11-20 11:01:40 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : FESTIFS 2014 REFERENCE SU NORD OUEST
 testr commentaire
 2015-11-20 11:01:40 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `commentaire_suivi_projet` =   'FESTIFS 2014 REFERENCE SU NORD OUEST\ntestr commentaire'
+2015-11-24 14:45:28 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 1.1
+2015-11-24 14:45:28 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `val_nut_sel` =   '1.1'
+2015-11-24 14:45:46 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 1.2
+2015-11-24 14:45:46 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `val_nut_sel` =   '1.2'
+2015-11-24 14:48:58 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 1.5
+2015-11-24 14:48:58 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `val_nut_proteine` =   '1.5'
+2015-11-24 14:48:59 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 2.5
+2015-11-24 14:48:59 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `val_nut_proteine` =   '2.5'
+2015-11-24 14:49:00 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 1.5
+2015-11-24 14:49:00 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `val_nut_proteine` =   '1.5'
+2015-11-24 14:49:00 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 0.5
+2015-11-24 14:49:00 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `val_nut_proteine` =   '0.5'
+2015-11-24 14:49:09 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 0.665
+2015-11-24 14:49:09 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `val_nut_proteine` =   '0.665'
+2015-11-24 14:58:23 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 1.2
+2015-11-24 14:58:23 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `val_nut_sel` =   '1.2'
+2015-11-24 14:58:46 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 23.52
+2015-11-24 14:58:46 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `val_nut_sel` =   '23.52'
+2015-11-25 10:50:38 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 1.2626
+2015-11-25 10:50:38 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `val_nut_sel` =   '1.2626'

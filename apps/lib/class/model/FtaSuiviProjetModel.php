@@ -20,6 +20,10 @@ class FtaSuiviProjetModel extends AbstractModel {
     const FIELDNAME_NOTIFICATION_FTA_SUIVI_PROJET = 'notification_fta_suivi_projet';
     const FIELDNAME_CORRECTION_FTA_SUIVI_PROJET = 'correction_fta_suivi_projet';
 
+    protected function setDefaultValues() {
+        
+    }
+
     /**
      * Fta
      * @var FtaModel

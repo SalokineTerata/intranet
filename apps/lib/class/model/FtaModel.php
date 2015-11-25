@@ -157,6 +157,10 @@ class FtaModel extends AbstractModel {
         );
     }
 
+    protected function setDefaultValues() {
+        
+    }
+
     /**
      * 
      * @return GeoModel

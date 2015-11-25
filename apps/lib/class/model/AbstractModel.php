@@ -27,7 +27,7 @@ abstract class AbstractModel implements AbstractModelInterface {
          * définies dans la classe fille.
          */
         if ($paramId == NULL) {
-            $this->buildDefaultValues();
+            $this->setDefaultValues();
         }
     }
 
@@ -40,8 +40,10 @@ abstract class AbstractModel implements AbstractModelInterface {
      * Créé et réserve un nouvel enresgitrement dans la table
      * @return mixed
      */
-    
-    static public function insertNewRecordset($paramForeignKeysValuesArray = NULL);
+ 
+    public static function createNewRecordset($paramForeignKeysValuesArray = NULL) {
+        
+    }
 
     public static function getClassName() {
         return get_called_class();

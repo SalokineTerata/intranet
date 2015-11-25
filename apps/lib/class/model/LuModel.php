@@ -13,4 +13,8 @@ class LuModel extends AbstractModel {
     const FILEDNAME_ID_ART = 'id_art';
     const FILEDNAME_ID_USER = 'id_user';
 
+    protected function setDefaultValues() {
+        
+    }
+
 }

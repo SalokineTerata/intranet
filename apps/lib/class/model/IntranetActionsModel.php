@@ -23,6 +23,10 @@ class IntranetActionsModel extends AbstractModel {
         parent::__construct($paramId, $paramIsCreateRecordsetInDatabaseIfKeyDoesntExist);
     }
 
+    protected function setDefaultValues() {
+        
+    }
+
     /*
      * Nous obtenons les id intranet actions selon son identifiant parents
      *  dont l'ulisateur est le propiétaire .

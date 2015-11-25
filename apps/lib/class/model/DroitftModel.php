@@ -15,4 +15,8 @@ class DroitftModel extends AbstractModel {
     const FIELDNAME_VALIDFT = 'validft';
     const FIELDNAME_DROITSTAT = 'droitstat';
 
+    protected function setDefaultValues() {
+        
+    }
+
 }

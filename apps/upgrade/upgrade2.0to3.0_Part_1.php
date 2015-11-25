@@ -5421,9 +5421,9 @@ if ($arrayFtaCompositionEtiquette2) {
 
 
         $sql_inter = "UPDATE ".$nameOfBDDTarget."." . "fta_composant"
-                . " SET " . "k_etiquette_fta_composition" . "=-1"
+                . " SET " . "k_etiquette_verso_fta_composition" . "=-1"
                 . " WHERE " . "id_fta_composant" . "=" . $idFtaComposant;
-        echo "UPDATE ".$nameOfBDDTarget."." . "fta_composant." . "k_etiquette_fta_composition id_fta_composant" . "=" . $idFtaComposant." ...";
+        echo "UPDATE ".$nameOfBDDTarget."." . "fta_composant." . "k_etiquette_verso_fta_composition id_fta_composant" . "=" . $idFtaComposant." ...";
         if(mysql_query($sql_inter)) {	echo "[OK]\n";}else{echo "[FAILED] $idFtaComposant \n";}
     }
 }

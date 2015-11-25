@@ -68,7 +68,7 @@ class FtaComposantModel extends AbstractModel {
     const FIELDNAME_VIRTUAL_POIDS_FTA_COMPOSITION = 'virtual_poids_fta_composition';
     const FIELDNAME_VIRTUAL_QUANTITE_FTA_COMPOSITION = 'virtual_quantite_fta_composition';
     const FIELDNAME_VIRTUAL_SITE_DE_PRODUCTION = 'virtual_site_de_production';
-    const DEFAULT_VALUE_QTE_UVC = 1;
+    const DEFAULT_VALUE_QTE_UVC = "1";
 
     /**
      * FTA associée
@@ -76,7 +76,7 @@ class FtaComposantModel extends AbstractModel {
      */
     private $modelFta;
 
-    public function __construct($paramId = NULL, $paramIsCreateRecordsetInDatabaseIfKeyDoesntExist = AbstractModel::DEFAULT_IS_CREATE_RECORDSET_IN_DATABASE_IF_KEY_DOESNT_EXIST) {
+    public function __construct($paramId, $paramIsCreateRecordsetInDatabaseIfKeyDoesntExist = AbstractModel::DEFAULT_IS_CREATE_RECORDSET_IN_DATABASE_IF_KEY_DOESNT_EXIST) {
         parent::__construct($paramId, $paramIsCreateRecordsetInDatabaseIfKeyDoesntExist);
 
         $this->setModelFtaById($this->getDataField(self::FIELDNAME_ID_FTA)->getFieldValue());

@@ -14,6 +14,10 @@ class FtaRoleModel extends AbstractModel {
     const FIELDNAME_NOM_FTA_ROLE = 'nom_fta_role';
     const FIELDNAME_IS_GESTIONNAIRE = 'is_gestionnaire';
 
+    protected function setDefaultValues() {
+        
+    }
+
     /**
      * On obtient l'id du rôle le plus en amot dans le cycle de validation
      * @param int $paramIdUser

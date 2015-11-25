@@ -13,6 +13,10 @@ class ClassificationFtaModel extends AbstractModel {
     const FIELDNAME_ID_CLASSIFICATION_ARBORESCENCE_ARTICLE = 'id_classification_arborescence_article';
     const FIELDNAME_ID_FTA = 'id_fta';
 
+    protected function setDefaultValues() {
+        
+    }
+
     /**
      * 
      * @param type $paramIdFta
@@ -268,7 +272,5 @@ class ClassificationFtaModel extends AbstractModel {
         //var_dump($return);
         return $return;
     }
-
-   
 
 }

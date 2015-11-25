@@ -18,6 +18,10 @@ class FtaActionRoleModel extends AbstractModel {
         parent::__construct($paramId, $paramIsCreateRecordsetInDatabaseIfKeyDoesntExist);
     }
 
+    protected function setDefaultValues() {
+        
+    }
+
     /**
      * 
      * @param int $paramIdIntranetActions

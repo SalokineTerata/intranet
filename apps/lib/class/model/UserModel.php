@@ -32,6 +32,10 @@ class UserModel extends AbstractModel {
         parent::__construct($paramId, $paramIsCreateRecordsetInDatabaseIfKeyDoesntExist);
     }
 
+    protected function setDefaultValues() {
+        
+    }
+
     public function getPrenomNom() {
         $prenom = $this->getDataField(UserModel::FIELDNAME_PRENOM)->getFieldValue();
         $nom = $this->getDataField(UserModel::FIELDNAME_NOM)->getFieldValue();

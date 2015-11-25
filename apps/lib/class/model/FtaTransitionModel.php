@@ -8,6 +8,10 @@ class FtaTransitionModel {
     const FIELDNAME_NOM_USUEL_FTA_TRANSITION = "nom_usuel_fta_transition";
     const FIELDNAME_PROCESSUS_PROPRIETAIRE_FTA_TRANSITION = "processus_proprietaire_fta_transition";
 
+    protected function setDefaultValues() {
+        
+    }
+
     /**
      * Fonction transitant une fiche vers un etat donné
      * @param type $paramIdFta
@@ -132,10 +136,10 @@ class FtaTransitionModel {
                                     . ")  FROM " . FtaModel::TABLENAME
                                     . " WHERE " . FtaModel::FIELDNAME_DOSSIER_FTA . "=" . $idDossierFta
                     );
-                    foreach ($arrayIdDossierVersion as $rowsIdDossierVersion ){
-                        $IdDossierVersion= $rowsIdDossierVersion['MAX('.FtaModel::FIELDNAME_VERSION_DOSSIER_FTA.')'];
+                    foreach ($arrayIdDossierVersion as $rowsIdDossierVersion) {
+                        $IdDossierVersion = $rowsIdDossierVersion['MAX(' . FtaModel::FIELDNAME_VERSION_DOSSIER_FTA . ')'];
                     }
-                }else{
+                } else {
                     $IdDossierVersion = "";
                 }
 

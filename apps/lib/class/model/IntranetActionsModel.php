@@ -23,12 +23,16 @@ class IntranetActionsModel extends AbstractModel {
         parent::__construct($paramId, $paramIsCreateRecordsetInDatabaseIfKeyDoesntExist);
     }
 
+    protected function setDefaultValues() {
+        
+    }
+
     /*
      * Nous obtenons les id intranet actions selon son identifiant parents
      *  dont l'ulisateur est le propiétaire .
      */
 
-    public static function getIdIntranetActionsFromIdParentAction($paramIdParent, $paramChapitre, $paramFtaWorkflow) {
+    public static function getIdIntranetActionsFromIdParentAction($paramIdParent, $paramChapitre, $paramFtaWorkflow, $paramIdFtaRole) {
         $globalConfig = new GlobalConfig();
         UserModel::ConnexionFalse($globalConfig);
 
@@ -55,6 +59,8 @@ class IntranetActionsModel extends AbstractModel {
                                 . '.' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_WORKFLOW . '=' . $paramFtaWorkflow
                                 . ' AND ' . FtaWorkflowStructureModel::TABLENAME . '.' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_ROLE
                                 . '=' . FtaActionRoleModel::TABLENAME . '.' . FtaActionRoleModel::FIELDNAME_ID_FTA_ROLE
+                                . ' AND ' . FtaActionRoleModel::TABLENAME . '.' . FtaActionRoleModel::FIELDNAME_ID_FTA_ROLE
+                                . '=' . $paramIdFtaRole
                                 . ' AND ' . FtaWorkflowStructureModel::TABLENAME . '.' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_WORKFLOW
                                 . '=' . FtaActionRoleModel::TABLENAME . '.' . FtaActionRoleModel::FIELDNAME_ID_FTA_WROKFLOW
                                 . ' AND ' . IntranetActionsModel::TABLENAME . '.' . IntranetActionsModel::KEYNAME

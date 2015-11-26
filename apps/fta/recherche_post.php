@@ -87,7 +87,8 @@ if (is_numeric($recherche)) {
         $operateur_recherche = 1;
         $champ_recherche = 4;
     } else {
-        $message = "Veuillez saisir un code article arcadia";
+        $message = "Veuillez saisir un code article arcadia ou une Désignation interne";
+        $redirection = "recherche.php";
         afficher_message("Erreur", $message, $redirection);
     }
 }

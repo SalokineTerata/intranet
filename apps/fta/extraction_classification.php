@@ -79,9 +79,6 @@ function UpgradeClassificationV2ToV3($paramNameOfBDDTarget, $paramNameOfBDDOrigi
 
     $HtmlResult = new HtmlResult();
 
-    $returnFullTMP = recursifOne($paramStartValue = $startValue, $HtmlResult, $paramNameOfBDDOrigin);
-    $returnFull = $returnFullTMP->getArrayResult();
-
     /**
      * 
      * @param mixed $paramStartValue
@@ -170,7 +167,7 @@ function UpgradeClassificationV2ToV3($paramNameOfBDDTarget, $paramNameOfBDDOrigi
                     $nom_type => $nom_contenu,
                     "id" . $nom_type => $id_fils
                 );
-                $subReturn = recursifOne($id_fils, $htmlResult);
+                $subReturn = recursifOne($id_fils, $htmlResult, $paramNameOfBDDOrigin);
                 if ($subReturn != NULL) {
                     $return[$j][] = $subReturn;
 
@@ -235,6 +232,9 @@ function UpgradeClassificationV2ToV3($paramNameOfBDDTarget, $paramNameOfBDDOrigi
             return NULL;
         }
     }
+
+    $returnFullTMP = recursifOne($paramStartValue = $startValue, $HtmlResult, $paramNameOfBDDOrigin);
+    $returnFull = $returnFullTMP->getArrayResult();
 
 //                $htmlResult->setHtmlResult("<tr>" . "<td>" . $htmlResult->getProprietaire() . " / " . $htmlResult->getProprietaire2() . "</td>"
 //                        . "<td>" . $htmlResult->getMarque() . "</td>"
@@ -308,21 +308,41 @@ function UpgradeClassificationV2ToV3($paramNameOfBDDTarget, $paramNameOfBDDOrigi
      * Les Fta validé ont par défaut un éta d'avancement de 100%
      */
     $array = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
-                    "Select " . FtaModel::KEYNAME . "," . FtaModel::FIELDNAME_ID_FTA_ETAT . " FROM " . FtaModel::TABLENAME
+                    "Select " . FtaModel::KEYNAME . "," . FtaModel::FIELDNAME_ID_FTA_ETAT
+                    . " FROM " . $paramNameOfBDDTarget . "." . FtaModel::TABLENAME
+                    . " WHERE " . FtaModel::FIELDNAME_ID_FTA_ETAT . "=3"
     );
     foreach ($array as $value) {
         $idFta = $value[FtaModel::KEYNAME];
         $idFtaEtat = $value[FtaModel::FIELDNAME_ID_FTA_ETAT];
-        if ($idFtaEtat == "3") {
-            $req = "UPDATE " . FtaModel::TABLENAME
-                    . " SET " . FtaModel::FIELDNAME_POURCENTAGE_AVANCEMENT . "='" . "100%" . "' "
-                    . " WHERE " . FtaModel::KEYNAME . "='" . $idFta . "' "
-            ;
-            DatabaseOperation::execute($req);
-        }
+        $req = "UPDATE " . $paramNameOfBDDTarget . "." . FtaModel::TABLENAME
+                . " SET " . FtaModel::FIELDNAME_POURCENTAGE_AVANCEMENT . "='" . "100%" . "' "
+                . " WHERE " . FtaModel::KEYNAME . "='" . $idFta . "' "
+        ;
+        DatabaseOperation::execute($req);
     }
-    
-    
+    /**
+     * Les Fta en modification  sont par défaut un état d'avancement de 0%
+     */
+    $arraySuivi = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
+                    "Select " . FtaSuiviProjetModel::KEYNAME . "," . FtaSuiviProjetModel::FIELDNAME_SIGNATURE_VALIDATION_SUIVI_PROJET
+                    . " FROM " . $paramNameOfBDDTarget . "." . FtaModel::TABLENAME
+                    . "," . $paramNameOfBDDTarget . "." . FtaSuiviProjetModel::TABLENAME
+                    . " WHERE " . FtaModel::FIELDNAME_ID_FTA_ETAT . "=1"
+    );
+    foreach ($arraySuivi as $rowsSuivi) {
+
+        $signature = $rowsSuivi[FtaSuiviProjetModel::FIELDNAME_SIGNATURE_VALIDATION_SUIVI_PROJET];
+        $idsignature = $rowsSuivi[FtaSuiviProjetModel::KEYNAME];
+
+        $req = "UPDATE " . $paramNameOfBDDTarget . "." . FtaSuiviProjetModel::TABLENAME
+                . " SET " . FtaSuiviProjetModel::FIELDNAME_SIGNATURE_VALIDATION_SUIVI_PROJET . "='" . $signature . "', "
+                . " WHERE " . FtaSuiviProjetModel::KEYNAME . "='" . $idsignature . "' "
+        ;
+        DatabaseOperation::execute($req);
+    }
+
+
     echo "FIN de TRAITEMENT";
 }
 

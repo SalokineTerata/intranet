@@ -34,6 +34,10 @@ class FtaProcessusDelaiModel extends AbstractModel {
         $this->setModelFtaProcessusById($this->getDataField(self::FIELDNAME_ID_FTA_PROCESSUS)->getFieldValue());
     }
 
+    protected function setDefaultValues() {
+        
+    }
+
     /**
      * Retourne la FTA
      * @return FtaModel

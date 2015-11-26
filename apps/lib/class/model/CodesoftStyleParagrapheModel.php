@@ -11,4 +11,8 @@ class CodesoftStyleParagrapheModel extends AbstractModel {
         parent::__construct($paramId, $paramIsCreateRecordsetInDatabaseIfKeyDoesntExist);
     }
 
+    protected function setDefaultValues() {
+        
+    }
+
 }

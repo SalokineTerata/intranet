@@ -70,6 +70,7 @@ require_once('../lib/class/model/ModelTableAssociation.php');
 
 
 // Modèles des tables en base de données
+require_once('../lib/class/model/AbstractModelInterface.php');
 require_once('../lib/class/model/AbstractModel.php');
 require_once('../lib/class/model/AccessMaterielServiceModel.php');
 require_once('../lib/class/model/AnnexeAgrologicArticleCodificationModel.php');
@@ -245,5 +246,6 @@ if ($module != 'lib') {
     //Inclusion de la librairie de fonction propre au module
     require_once ('../' . $module . '/functions.php');
 }
-$globalConfig = $_SESSION['globalConfig'];
+//$globalConfig = $_SESSION['globalConfig'];
+GlobalConfig::setExecDebugTimeStart();
 

@@ -41,25 +41,10 @@ class FtaWorkflowStructureModel extends AbstractModel {
 
     public function __construct($paramId = NULL, $paramIsCreateRecordsetInDatabaseIfKeyDoesntExist = AbstractModel::DEFAULT_IS_CREATE_RECORDSET_IN_DATABASE_IF_KEY_DOESNT_EXIST) {
         parent::__construct($paramId, $paramIsCreateRecordsetInDatabaseIfKeyDoesntExist);
-//
-//        // Tables filles (Relation 1:N, la clef étrangère dans la table actuelle)
-//        $this->setModelFtaChapitre(
-//                new FtaChapitreModel($this->getDataField(self::FIELDNAME_ID_FTA_CHAPITRE)->getFieldValue()
-//                , DatabaseRecord::VALUE_DONT_CREATE_RECORD_IN_DATABASE_IF_KEY_DOESNT_EXIST)
-//        );
-//        $this->setModelFtaProcessus(
-//                new FtaProcessusModel($this->getDataField(self::FIELDNAME_ID_FTA_PROCESSUS)->getFieldValue()
-//                , DatabaseRecord::VALUE_DONT_CREATE_RECORD_IN_DATABASE_IF_KEY_DOESNT_EXIST)
-//        );
-//        $this->setModelFtaRole(
-//                new FtaRoleModel($this->getDataField(self::FIELDNAME_ID_FTA_ROLE)->getFieldValue()
-//                , DatabaseRecord::VALUE_DONT_CREATE_RECORD_IN_DATABASE_IF_KEY_DOESNT_EXIST)
-//        );
-//
-//        $this->setModelFtaWorkflow(
-//                new FtaWorkflowModel($this->getDataField(self::FIELDNAME_ID_FTA_WORKFLOW)->getFieldValue()
-//                , DatabaseRecord::VALUE_DONT_CREATE_RECORD_IN_DATABASE_IF_KEY_DOESNT_EXIST)
-//        );s
+    }
+
+    protected function setDefaultValues() {
+        
     }
 
     function getModelFtaWorkflow() {
@@ -143,6 +128,27 @@ class FtaWorkflowStructureModel extends AbstractModel {
             $idProcessus = array('0');
         }
         return $idProcessus;
+    }
+
+    /**
+     * Rôle le processus et workflow corresponds
+     * @param int $paramIdProcessus
+     * @param int $paramIdWorkflow
+     * @return array
+     */
+    public static function getArrayRoleByProcessusAndWorkflow($paramIdProcessus, $paramIdWorkflow) {
+        $arrayRole = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
+                        'SELECT DISTINCT ' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_ROLE
+                        . ' FROM ' . FtaWorkflowStructureModel::TABLENAME
+                        . ' WHERE ' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_WORKFLOW . '=' . $paramIdWorkflow
+                        . ' AND ' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_PROCESSUS . '=' . $paramIdProcessus
+        );
+
+         foreach ($arrayRole as $rowsIdFtaRole){
+            $IdFtaRole[]=$rowsIdFtaRole[FtaWorkflowStructureModel::FIELDNAME_ID_FTA_ROLE];
+        }
+
+        return $IdFtaRole;
     }
 
 }

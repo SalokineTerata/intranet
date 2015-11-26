@@ -17,4 +17,8 @@ class LogModel extends AbstractModel {
     const FIELDNAME_LECT_ART = 'lect_art';
     const FIELDNAME_REDAC_COM = 'redac_com';
 
+    protected function setDefaultValues() {
+        
+    }
+
 }

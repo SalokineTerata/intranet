@@ -36,6 +36,10 @@ class GeoModel extends AbstractModel {
         parent::__construct($paramId, $paramIsCreateRecordsetInDatabaseIfKeyDoesntExist);
     }
 
+    protected function setDefaultValues() {
+        
+    }
+
     /*
      * Récuperation du nom de site de production
      */

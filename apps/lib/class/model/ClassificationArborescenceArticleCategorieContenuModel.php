@@ -41,4 +41,8 @@ class ClassificationArborescenceArticleCategorieContenuModel extends AbstractMod
         return $value;
     }
 
+    protected function setDefaultValues() {
+        
+    }
+
 }

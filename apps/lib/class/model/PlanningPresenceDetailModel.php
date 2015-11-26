@@ -12,4 +12,8 @@ class PlanningPresenceDetailModel extends AbstractModel {
     const KEYNAME = 'id_planning_presence_semaine_visible';
     const FILEDNAME_ID_USER = 'id_salaries';
 
+    protected function setDefaultValues() {
+        
+    }
+
 }

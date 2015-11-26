@@ -69,6 +69,10 @@ class FtaProcessusCycleModel extends AbstractModel {
         );
     }
 
+    protected function setDefaultValues() {
+        
+    }
+
     public function getModelProcessusInit() {
         return $this->modelProcessusInit;
     }
@@ -100,22 +104,22 @@ class FtaProcessusCycleModel extends AbstractModel {
     function setModelFtaWorkflowModel(FtaWorkflowModel $modelFtaWorkflowModel) {
         $this->modelFtaWorkflowModel = $modelFtaWorkflowModel;
     }
-    
+
     /**
      * Liste des processus pouvant être validé
      * @param int $paramIdWorkflow
      * @return array
      */
-    public static function getArrayProcessusValidationFTA($paramIdWorkflow){
+    public static function getArrayProcessusValidationFTA($paramIdWorkflow) {
         $arrayProcessusValidation = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
-                                'SELECT DISTINCT t1 .' . FtaProcessusCycleModel::FIELDNAME_PROCESSUS_INIT
-                                . ' FROM ' . FtaProcessusCycleModel::TABLENAME . ' as t1'
-                                . ' LEFT OUTER JOIN ' . FtaProcessusCycleModel::TABLENAME . ' as t2'
-                                . ' ON  t1 .' . FtaProcessusCycleModel::FIELDNAME_PROCESSUS_INIT
-                                . '= t2 .' . FtaProcessusCycleModel::FIELDNAME_PROCESSUS_INIT
-                                . ' WHERE  t2 .' . FtaProcessusCycleModel::FIELDNAME_PROCESSUS_NEXT . ' IS NULL'                         
-                                . ' AND  t1 .' . FtaProcessusCycleModel::FIELDNAME_WORKFLOW . '='.   $paramIdWorkflow
-                );
+                        'SELECT DISTINCT t1 .' . FtaProcessusCycleModel::FIELDNAME_PROCESSUS_INIT
+                        . ' FROM ' . FtaProcessusCycleModel::TABLENAME . ' as t1'
+                        . ' LEFT OUTER JOIN ' . FtaProcessusCycleModel::TABLENAME . ' as t2'
+                        . ' ON  t1 .' . FtaProcessusCycleModel::FIELDNAME_PROCESSUS_INIT
+                        . '= t2 .' . FtaProcessusCycleModel::FIELDNAME_PROCESSUS_INIT
+                        . ' WHERE  t2 .' . FtaProcessusCycleModel::FIELDNAME_PROCESSUS_NEXT . ' IS NULL'
+                        . ' AND  t1 .' . FtaProcessusCycleModel::FIELDNAME_WORKFLOW . '=' . $paramIdWorkflow
+        );
         foreach ($arrayProcessusValidation as $rowsProcessusValidation) {
             $idProcessus[] = $rowsProcessusValidation[FtaProcessusCycleModel::FIELDNAME_PROCESSUS_INIT];
         }

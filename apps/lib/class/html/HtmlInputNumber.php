@@ -44,12 +44,14 @@ class HtmlInputNumber extends AbstractHtmlInput {
 //    function getHtmlEditableContent() {
 //        return '<input type=text name=' . $this->fieldName . ' value=' . Html::inputValue($this->attributeValue) . ' />';
 //    }
-const DEFAULT_SIZE = 8;
+const DEFAULT_SIZE = "8";
+const DEFAULT_DECIMAL_NUMBER = "any";
 
     public function __construct() {
         parent::__construct();
         parent::getAttributes()->getInputType()->setNumber();
         parent::getAttributes()->getSize()->setValue(self::DEFAULT_SIZE);
+        parent::getAttributes()->getStep()->setValue(self::DEFAULT_DECIMAL_NUMBER);
     }
 }
 

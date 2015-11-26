@@ -6,7 +6,12 @@
 
 $id_fta = Lib::getParameterFromRequest(FtaModel::KEYNAME);
 $ftaModel = new FtaModel($id_fta);
-
+$siteDeProduction = $ftaModel->getDataField(FtaModel::FIELDNAME_SITE_ASSEMBLAGE)->getFieldValue();
+$description_origine_transformation_fta = $ftaModel->getDataField(FtaModel::FIELDNAME_PRODUIT_TRANSFORME)->getFieldValue();
+$NOM_origine_transformation_fta = $ftaModel->getDataField(FtaModel::FIELDNAME_PRODUIT_TRANSFORME)->getFieldLabel();
+$geoModel = new GeoModel($siteDeProduction);
+$site_agrement_ce = $geoModel->getDataField(GeoModel::FIELDNAME_SITE_AGREMENT_CE)->getFieldValue();
+$NOM_site_agrement_ce = $geoModel->getDataField(GeoModel::FIELDNAME_SITE_AGREMENT_CE)->getFieldLabel();
 //Récupération des information de classification.
 //Rayon
 $IdFtaClassification2 = $ftaModel->getDataField(FtaModel::FIELDNAME_ID_FTA_CLASSIFICATION2)->getFieldValue();
@@ -34,14 +39,12 @@ $date_derniere_maj_fta = $ftaModel->getDataField(FtaModel::FIELDNAME_DATE_DERNIE
 $date_validation = recuperation_date_depuis_mysql($date_derniere_maj_fta);
 
 //Récupération des Informations FTA
-$palettisation = calcul_palettisation_fta($id_fta);
 $returnUVC = $ftaModel->buildArrayEmballageTypeUVC();
 $returnParColis = $ftaModel->buildArrayEmballageTypeParColis();
 $returnDuColis = $ftaModel->buildArrayEmballageTypeDuColis();
 $returnPallettes = $ftaModel->buildArrayEmballageTypePalette();
 $idFtaEtat = $ftaModel->getDataField(FtaModel::FIELDNAME_ID_FTA_ETAT)->getFieldValue();
 $ftaEtatModel = new FtaEtatModel($idFtaEtat);
-$abreviation_fta_etat = $ftaEtatModel->getDataField(FtaEtatModel::FIELDNAME_ABREVIATION)->getFieldValue();
 //Création de l'entête de la fiches techniques
 $pdf->AddPage();
 $pdf->Image("../lib/images/logo_agis.png", 10, 10, 20);
@@ -53,13 +56,13 @@ $pdf->SetFillColor(150, 250, 230);
 //Intitulés dynamiques
 $intitule_fta = "";
 $intitule_validation = "";
-switch ($abreviation_fta_etat) {
-    case "P":
+switch ($idFtaEtat) {
+    case "1":
         $intitule_fta = "PRESENTATION";
         $intitule_validation = "(Imprimé le " . date("d-m-Y") . ")";
         break;
 
-    case "V":
+    case "3":
         $intitule_fta = "TECHNIQUE";
         $intitule_validation = "(Validé le $date_validation)";
         break;
@@ -170,7 +173,7 @@ $K_etat = $ftaModel->getDataField(FtaModel::FIELDNAME_ENVIRONNEMENT_CONSERVATION
 $id_annexe_environnement_conservation_groupe = $K_etat;
 $annexeEnvironnementConservationGroupeModel = new AnnexeEnvironnementConservationGroupeModel($id_annexe_environnement_conservation_groupe);
 $temperature_par_defaut_annexe_environnement_conservation_groupe = $annexeEnvironnementConservationGroupeModel->getDataField(AnnexeEnvironnementConservationGroupeModel::FIELDNAME_TEMPERATURE_PAR_DEFAUT_ANNEXE_ENVIRONNEMENT_CONSERVATION_GROUPE)->getFieldValue();
-$NOM_K_etat = $annexeEnvironnementConservationGroupeModel->getDataField(AnnexeEnvironnementConservationGroupeModel::FIELDNAME_NOM_ANNEXE_ENVIRONNEMENT_CONSERVATION_GROUPE)->getFieldValue();
+$NOM_K_etat = $annexeEnvironnementConservationGroupeModel->getDataField(AnnexeEnvironnementConservationGroupeModel::FIELDNAME_NOM_ANNEXE_ENVIRONNEMENT_CONSERVATION_GROUPE)->getFieldLabel();
 //Tableau de données
 $data_table = array(
     //***********
@@ -178,7 +181,7 @@ $data_table = array(
     //array("Conditionnement", $description_emballage),
     //array("Température de conservation", $conservation),
     array($NOM_K_etat, $temperature_par_defaut_annexe_environnement_conservation_groupe),
-    array("Durée de vie garantie", ${"Durée_de_vie"} . " jours"),
+    array("Durée de vie garantie", $ftaModel->getDataField(FtaModel::FIELDNAME_DUREE_DE_VIE)->getFieldValue() . " jours"),
     //array(${"NOM_Durée_de_vie_technique"}, ${"Durée_de_vie_technique"}),
     array($NOM_site_agrement_ce, $site_agrement_ce),
     array($NOM_origine_transformation_fta, $description_origine_transformation_fta)
@@ -235,10 +238,15 @@ $pdf->Cell(0, $t4_size, 'COMPOSITION DU COLIS', 1, 1, 'C', 1);
 $pdf->SetY($pdf->GetY() + 2);
 
 //Récupération des données
-$poids_net_colis = calcul_poids_net_colis($id_fta);
+$returnCOLIS = $ftaModel->buildArrayEmballageTypeDuColis();
+$poids_net_colis = $returnCOLIS["colis_net"];
 
 //$req = "SELECT id_fta_composition FROM fta_composition WHERE id_fta='".$id_fta."' ORDER BY ordre_fta_composition, nom_fta_composition ";
-$req = "SELECT id_fta_composant FROM fta_composant WHERE id_fta='" . $id_fta . "' AND is_composition_fta_composant=1 ORDER BY ordre_fta_composition, nom_fta_composition ";
+$req = "SELECT " . FtaComposantModel::KEYNAME
+        . " FROM " . FtaComposantModel::TABLENAME
+        . " WHERE " . FtaComposantModel::FIELDNAME_ID_FTA . "='" . $id_fta . "'"
+        . " AND " . FtaComposantModel::FIELDNAME_IS_COMPOSITION_FTA_COMPOSANT . "=1 "
+        . " ORDER BY " . FtaComposantModel::FIELDNAME_ORDRE_FTA_COMPOSITION . ", " . FtaComposantModel::FIELDNAME_NOM_FTA_COMPOSITION . " ";
 $result = DatabaseOperation::convertSqlStatementWithoutKeyToArray($req);
 if ($result) {
     foreach ($result as $rows) {
@@ -246,13 +254,16 @@ if ($result) {
 
         //Chargement des données
         //$id_fta_composition=$rows["id_fta_composition"];
-        $id_fta_composant = $rows["id_fta_composant"];
+        $id_fta_composant = $rows[FtaComposantModel::KEYNAME];
         $ftaComposantModel = new FtaComposantModel($id_fta_composant);
 
         //Préparation des données de sortie
         $nom_fta_composition = $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_NOM_FTA_COMPOSITION)->getFieldValue();
-        $quantite_fta_composition = $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_QUANTITE_FTA_COMPOSITION)->getFieldValue();
+        $quantite_fta_composition = $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_QUANTITE_FTA_COMPOSITION_UVC)->getFieldValue();
         $poids_fta_compositionTmp = $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_POIDS_FTA_COMPOSITION)->getFieldValue();
+        $taille_nom_fta_composition = $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_TAILLE_POLICE_NOM_FTA_COMPOSITION)->getFieldValue();
+        $ingredient_fta_composition = $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_INGREDIENT_FTA_COMPOSITION)->getFieldValue();
+        $ingredient_fta_composition1 = $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_INGREDIENT_FTA_COMPOSITION1)->getFieldValue();
         $taux_poids_composant = ($poids_fta_compositionTmp * $quantite_fta_composition) / $poids_net_colis;
         $temp_taux = round($taux_poids_composant / 10, 2);
         $poids_fta_composition = round($poids_fta_composition, 0);
@@ -341,7 +352,7 @@ if ($result) {
         //$pdf->SetAutoPageBreak(0);
     }//Fin du parcours des composants
 }
-if ($abreviation_fta_etat <> "P") {
+if ($idFtaEtat <> "1") {
 //Conditionnement (1ère Colonne)
 
     $pdf->SetAutoPageBreak(1, 50);
@@ -361,11 +372,11 @@ if ($abreviation_fta_etat <> "P") {
     //Affichage des données
     $data_table = array(
         //***********
-        array("Dimension UVC", $palettisation["dimension_uvc"] . " mm"),
-        array("Dimension Colis", $palettisation["dimension_colis"]),
-        array("PCB", $palettisation["pcb"]),
-        array("Poids net Colis", $palettisation["colis_net"] . " kg"),
-        array("Poids brut Colis", $palettisation["colis_brut"] . " kg")
+        array("Dimension UVC", $returnUVC["dimension_uvc"] . " mm"),
+        array("Dimension Colis", $returnDuColis["dimension_uvc"]),
+        array("PCB", $returnUVC[FtaConditionnementModel::UVC_EMBALLAGE_NET]),
+        array("Poids net Colis", $returnDuColis["colis_net"] . " kg"),
+        array("Poids brut Colis", $returnDuColis["colis_brut"] . " kg")
     );
 
     foreach ($data_table as $information) {
@@ -399,13 +410,13 @@ if ($abreviation_fta_etat <> "P") {
     //Affichage des données
     $data_table = array(
         //***********
-        array("Nombre de colis par couche", $palettisation["colis_couche"]),
-        array("Nombre de couche par palette", $palettisation["couche_palette"]),
-        array("Nombre total de colis par palette", $palettisation["total_colis"]),
-        array("Dimension palette", $palettisation["dimension_palette"]),
-        array("Hauteur palette", $palettisation["hauteur_palette"] . " m"),
-        array("Poids Net palette", $palettisation["palette_net"] . " kg"),
-        array("Poids Brut palette", $palettisation["palette_brut"] . " kg")
+        array("Nombre de colis par couche", $returnPallettes["colis_couche"]),
+        array("Nombre de couche par palette", $returnPallettes["couche_palette"]),
+        array("Nombre total de colis par palette", $returnPallettes["total_colis"]),
+        array("Dimension palette", $returnPallettes["dimension_uvc"]),
+        array("Hauteur palette", $returnPallettes["hauteur_palette"] . " m"),
+        array("Poids Net palette", $returnPallettes["palette_net"] . " kg"),
+        array("Poids Brut palette", $returnPallettes["palette_brut"] . " kg")
     );
 
     foreach ($data_table as $information) {
@@ -429,9 +440,16 @@ if ($abreviation_fta_etat <> "P") {
     //$pdf->SetAutoPageBreak(0);
     $pdf->SetY($pdf->GetY() + 2);
 }
-
+$apres_ouverture_fta = $ftaModel->getDataField(FtaModel::FIELDNAME_CONSEIL_APRES_OUVERTURE)->getFieldValue();
+$NOM_apres_ouverture_fta = $ftaModel->getDataField(FtaModel::FIELDNAME_CONSEIL_APRES_OUVERTURE)->getFieldLabel();
+$remarque_fta = $ftaModel->getDataField(FtaModel::FIELDNAME_REMARQUE)->getFieldValue();
+$NOM_remarque_fta = $ftaModel->getDataField(FtaModel::FIELDNAME_REMARQUE)->getFieldLabel();
+$origine_matiere_fta = $ftaModel->getDataField(FtaModel::FIELDNAME_ORIGINE_MATIERE_PREMIERE)->getFieldValue();
+$NOM_origine_matiere_fta = $ftaModel->getDataField(FtaModel::FIELDNAME_ORIGINE_MATIERE_PREMIERE)->getFieldLabel();
+$allergenes_matiere_fta = $ftaModel->getDataField(FtaModel::FIELDNAME_LISTE_ALLERGENE)->getFieldValue();
+$NOM_allergenes_matiere_fta = $ftaModel->getDataField(FtaModel::FIELDNAME_LISTE_ALLERGENE)->getFieldLabel();
 //Informations supplémentaires
-if (!$presentation_fta and ! $apres_ouverture_fta and ! $remarque_fta and ! $origine_matiere_fta and ! $allergenes_matiere_fta) {
+if (! $apres_ouverture_fta and ! $remarque_fta and ! $origine_matiere_fta and ! $allergenes_matiere_fta) {
     
 } else {
     $pdf->SetFont($t2_police, $t2_style, $t3_size);
@@ -442,7 +460,7 @@ if (!$presentation_fta and ! $apres_ouverture_fta and ! $remarque_fta and ! $ori
     $pdf->SetY($pdf->GetY() + 2);
     $data_table = array(
         //***********
-        array($NOM_presentation_fta, $presentation_fta),
+//        array($NOM_presentation_fta, $presentation_fta),
         array($NOM_apres_ouverture_fta, $apres_ouverture_fta),
         array($NOM_remarque_fta, $remarque_fta),
         array($NOM_origine_matiere_fta, $origine_matiere_fta),

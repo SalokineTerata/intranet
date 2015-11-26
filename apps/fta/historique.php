@@ -113,7 +113,6 @@ if ($id_fta) {
 
        </tr>
        ';
-    $ftaModel = new FtaModel($id_fta);
     /*   //$id_access_arti2; //Clef récupérée précédement
       $req = 'SELECT id_access_arti2 FROM access_arti2 WHERE id_fta=''.$id_fta.'' ';
       $result = DatabaseOperation::query($req);

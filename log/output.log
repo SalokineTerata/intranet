@@ -356,3 +356,65 @@ tdytyryrty ç_èç_çè('-'(-
 2015-11-20 11:01:40 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : FESTIFS 2014 REFERENCE SU NORD OUEST
 testr commentaire
 2015-11-20 11:01:40 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `commentaire_suivi_projet` =   'FESTIFS 2014 REFERENCE SU NORD OUEST\ntestr commentaire'
+2015-11-24 14:45:28 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 1.1
+2015-11-24 14:45:28 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `val_nut_sel` =   '1.1'
+2015-11-24 14:45:46 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 1.2
+2015-11-24 14:45:46 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `val_nut_sel` =   '1.2'
+2015-11-24 14:48:58 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 1.5
+2015-11-24 14:48:58 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `val_nut_proteine` =   '1.5'
+2015-11-24 14:48:59 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 2.5
+2015-11-24 14:48:59 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `val_nut_proteine` =   '2.5'
+2015-11-24 14:49:00 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 1.5
+2015-11-24 14:49:00 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `val_nut_proteine` =   '1.5'
+2015-11-24 14:49:00 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 0.5
+2015-11-24 14:49:00 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `val_nut_proteine` =   '0.5'
+2015-11-24 14:49:09 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 0.665
+2015-11-24 14:49:09 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `val_nut_proteine` =   '0.665'
+2015-11-24 14:58:23 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 1.2
+2015-11-24 14:58:23 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `val_nut_sel` =   '1.2'
+2015-11-24 14:58:46 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 23.52
+2015-11-24 14:58:46 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `val_nut_sel` =   '23.52'
+2015-11-25 10:50:38 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 1.2626
+2015-11-25 10:50:38 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `val_nut_sel` =   '1.2626'
+2015-11-25 11:00:20 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 12.32656
+2015-11-25 11:00:20 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `val_nut_sel` =   '12.32656'
+2015-11-25 11:23:44 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 13
+2015-11-25 11:23:45 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `id_annexe_agrologic_article_codification` =   '13'
+2015-11-25 11:23:49 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 6232625625625
+2015-11-25 11:23:49 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `code_produit_agrologic_fta_nomenclature` =   '6232625625625'
+2015-11-25 11:38:39 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 13
+2015-11-25 11:38:39 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `id_annexe_agrologic_article_codification` =   '13'
+2015-11-25 11:38:42 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 13
+2015-11-25 11:38:42 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `id_annexe_agrologic_article_codification` =   '13'
+2015-11-25 11:39:08 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 13
+2015-11-25 11:39:08 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `id_annexe_agrologic_article_codification` =   '13'
+2015-11-25 11:45:22 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 1232654646
+2015-11-25 11:45:22 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `code_produit_agrologic_fta_nomenclature` =   '1232654646'
+2015-11-25 11:45:26 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 123456
+2015-11-25 11:45:26 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `code_produit_agrologic_fta_nomenclature` =   '123456'
+2015-11-25 11:51:21 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 1234567
+2015-11-25 11:51:21 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `code_produit_agrologic_fta_nomenclature` =   '1234567'
+2015-11-25 11:56:17 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 123456
+2015-11-25 11:56:17 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `code_produit_agrologic_fta_nomenclature` =   '123456'
+2015-11-25 13:10:59 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 123456
+2015-11-25 13:10:59 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `code_produit_agrologic_fta_nomenclature` =   '123456'
+2015-11-25 13:29:14 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 03560070790658
+2015-11-25 13:29:14 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `EAN_COLIS` =   '03560070790658'
+2015-11-25 16:46:47 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 2015-12-31
+2015-11-25 16:46:47 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `date_echeance_fta` =   '2015-12-31'
+2015-11-25 16:47:00 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : pour moi 
+2015-11-25 16:47:00 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `commentaire` =   'pour moi '
+2015-11-25 16:47:06 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : test
+2015-11-25 16:47:06 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `commentaire_suivi_projet` =   'test'
+2015-11-25 16:47:24 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : test de commentaire Fta accu
+2015-11-25 16:47:25 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `commentaire` =   'test de commentaire Fta accu'
+2015-11-25 16:47:35 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : test de commentaire Fta accueil
+2015-11-25 16:47:35 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `commentaire` =   'test de commentaire Fta accueil'
+2015-11-25 16:47:44 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : test commentaire chapitre identité
+2015-11-25 16:47:44 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `commentaire_suivi_projet` =   'test commentaire chapitre identité'
+2015-11-25 16:54:04 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 3
+2015-11-25 16:54:04 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `site_expedition_fta` =   '3'
+2015-11-25 16:54:08 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 159
+2015-11-25 16:54:08 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `site_expedition_fta` =   '159'
+2015-11-25 16:54:10 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 6
+2015-11-25 16:54:10 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `site_expedition_fta` =   '6'

@@ -246,5 +246,6 @@ if ($module != 'lib') {
     //Inclusion de la librairie de fonction propre au module
     require_once ('../' . $module . '/functions.php');
 }
-$globalConfig = $_SESSION['globalConfig'];
+//$globalConfig = $_SESSION['globalConfig'];
+GlobalConfig::setExecDebugTimeStart();
 

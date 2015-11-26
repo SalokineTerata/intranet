@@ -62,6 +62,12 @@ class DatabaseOperation {
      * Nom du la clef du tableau self::queriesInfo contenant les traces
      */
     const QUERIES_INFO_ARRAY_NAME_BACKTRACE = 'backtrace';
+    const SESSION_STORAGE_KEYWORD_QUERIES_INFO = 'queriesInfo';
+
+    public static function getQueriesTotalTime() {
+        //return $_SESSION[self::SESSION_STORAGE_KEYWORD_QUERIES_INFO]["time_complete"];
+        return self::$queriesInfo['time_complete'];
+    }
 
     /**
      * Permet de convertir un tableau de donnée pour être intégré dans<br>
@@ -306,7 +312,7 @@ class DatabaseOperation {
 
         return $return;
     }
-  
+
     public static function getRowsNumberOverLimitInSqlStatement($paramStatement) {
         $statement = DatabaseOperation::queryPDO($paramStatement);
         if ($statement) {
@@ -483,7 +489,7 @@ class DatabaseOperation {
     public static function showPopupForQueriesInfo() {
         $default_message = "";
         $special_page = "MYSQL_QUERIES";
-        $title = "MySQL - " . count(DatabaseOperation::$queriesInfo) . " requêtes";
+        $title = "MySQL: " . count(DatabaseOperation::$queriesInfo) . " requêtes | Temps total " . round(self::getQueriesTotalTime(), 3) . " seconde(s)";
         return Html::popup("popup_queries_info", $default_message, $title, $special_page);
     }
 

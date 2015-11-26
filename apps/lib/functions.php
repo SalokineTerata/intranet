@@ -149,7 +149,8 @@
 
  * ******************************************************************************** */
 function identification1($mysql_table_authentification, $login, $pass, GlobalConfig $globalConfig = null) {
-    $debug = EnvironmentConf::LDAP_DEBUG;
+//    $debug = EnvironmentConf::LDAP_DEBUG;
+    $debug = FALSE;
     $return = TRUE;         //On part du principe que l'authentification doit fonctionner
     $mysql_passwd = "";     //On part du principe que l'authentification MySQL ne sera pas nécessaire.
     if ($globalConfig == null) {

@@ -108,7 +108,7 @@ switch ($action) {
                         $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_ID_GEO)->setFieldValue($site_production_fta_nomenclature);
                         $poids_fta_nomenclature = $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_POIDS_UNITAIRE_CODIFICATION)->getFieldValue();
                         $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_POIDS_FTA_COMPOSITION)->setFieldValue($poids_fta_nomenclature);
-                        $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_QUANTITE_FTA_COMPOSITION)->setFieldValue("1");
+                        $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_QUANTITE_FTA_COMPOSITION_UVC)->setFieldValue("1");
                         $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_IS_COMPOSITION_FTA_COMPOSANT)->setFieldValue("1");
                     }
                 } else {

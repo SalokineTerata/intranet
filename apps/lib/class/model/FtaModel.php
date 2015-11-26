@@ -580,7 +580,7 @@ class FtaModel extends AbstractModel {
 
                 //Les Calculs de la table composant        
                 $arrayComposant = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
-                                "SELECT " . FtaComposantModel::FIELDNAME_QUANTITE_FTA_COMPOSITION
+                                "SELECT " . FtaComposantModel::FIELDNAME_QUANTITE_FTA_COMPOSITION_UVC
                                 . "," . FtaComposantModel::FIELDNAME_POIDS_FTA_COMPOSITION
                                 . " FROM " . FtaComposantModel::TABLENAME
                                 . " WHERE " . FtaComposantModel::FIELDNAME_ID_FTA . "=" . $this->getKeyValue()
@@ -593,16 +593,16 @@ class FtaModel extends AbstractModel {
 
                         // Calcul du Poids net du colis
                         $return[FtaConditionnementModel::COLIS_EMBALLAGE_NET] = FtaConditionnementModel::getCalculGenericMultiplication(
-                                        $rowsComposant[FtaComposantModel::FIELDNAME_QUANTITE_FTA_COMPOSITION]
+                                        $rowsComposant[FtaComposantModel::FIELDNAME_QUANTITE_FTA_COMPOSITION_UVC]
                                         , $rowsComposant[FtaComposantModel::FIELDNAME_POIDS_UNITAIRE_CODIFICATION]
                         );
                     }
                 } else {
-                    $return[FtaConditionnementModel::COLIS_EMBALLAGE_NET] = 0;
+                    $return[FtaConditionnementModel::COLIS_EMBALLAGE_NET] = "0";
                 }
 
                 // Calcul du Poids net du colis
-                $return[FtaConditionnementModel::COLIS_EMBALLAGE_NET] = $return[FtaConditionnementModel::COLIS_EMBALLAGE_NET] / 1000; //Conversion en g --> Kg
+                $return[FtaConditionnementModel::COLIS_EMBALLAGE_NET] = $return[FtaConditionnementModel::COLIS_EMBALLAGE_NET] / "1000"; //Conversion en g --> Kg
                 if (!$return[FtaConditionnementModel::COLIS_EMBALLAGE_NET]) {
                     $return[FtaConditionnementModel::COLIS_EMBALLAGE_NET] = FtaConditionnementModel::getCalculGenericMultiplication(
                                     $rowsFta[FtaModel::FIELDNAME_POIDS_ELEMENTAIRE]
@@ -683,9 +683,9 @@ class FtaModel extends AbstractModel {
 //                                , $rows[FtaConditionnementModel::FIELDNAME_QUANTITE_PAR_COUCHE_FTA_CONDITIONNEMENT]
 //                                , $rows[FtaConditionnementModel::FIELDNAME_NOMBRE_COUCHE_FTA_CONDITIONNEMENT]
 //                );
-                $return[FtaConditionnementModel::PALETTE_EMBALLAGE] += ($rows[FtaConditionnementModel::FIELDNAME_POIDS_FTA_CONDITIONNEMENT] / 1000);
+                $return[FtaConditionnementModel::PALETTE_EMBALLAGE] += ($rows[FtaConditionnementModel::FIELDNAME_POIDS_FTA_CONDITIONNEMENT] / "1000");
                 //Calcul du poids de l'emballage par palette
-                $return[FtaConditionnementModel::PALETTE_EMBALLAGE] += ($return[FtaConditionnementModel::COLIS_EMBALLAGE] / 1000) * ($return[FtaConditionnementModel::PALETTE_NOMBRE_COLIS_PAR_COUCHE] * $return[FtaConditionnementModel::PALETTE_NOMBRE_DE_COUCHE] );
+                $return[FtaConditionnementModel::PALETTE_EMBALLAGE] += ($return[FtaConditionnementModel::COLIS_EMBALLAGE] / "1000") * ($return[FtaConditionnementModel::PALETTE_NOMBRE_COLIS_PAR_COUCHE] * $return[FtaConditionnementModel::PALETTE_NOMBRE_DE_COUCHE] );
             }
 
             //Calcul Poids Brut  d'une Palette en Kg
@@ -708,7 +708,7 @@ class FtaModel extends AbstractModel {
         foreach ($arrayFta as $rowsFta) {
 
             //Calcul du Poids net par UVC
-            $return[FtaConditionnementModel::UVC_EMBALLAGE_NET] = $rowsFta[FtaModel::FIELDNAME_POIDS_ELEMENTAIRE] * 1000;
+            $return[FtaConditionnementModel::UVC_EMBALLAGE_NET] = $rowsFta[FtaModel::FIELDNAME_POIDS_ELEMENTAIRE] * "1000";
 
             //Calcul du PCB du colis
             $return[FtaModel::FIELDNAME_NOMBRE_UVC_PAR_CARTON] = $rowsFta[FtaModel::FIELDNAME_NOMBRE_UVC_PAR_CARTON];

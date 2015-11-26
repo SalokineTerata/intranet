@@ -108,6 +108,7 @@ if ($id_fta_composant) {
                     array(FtaComposantModel::FIELDNAME_ID_FTA => $id_fta)
     );
     $ftaComposantModel = new FtaComposantModel($id_fta_composant);
+    $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_QUANTITE_FTA_COMPOSITION_UVC)->setFieldValue(FtaComposantModel::DEFAULT_VALUE_QTE_UVC);
     $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_IS_NOMENCLATURE_FTA_COMPOSANT)->setFieldValue("1");
     $ftaComposantModel->saveToDatabase();
     $ftaComposantView = new FtaComposantView($ftaComposantModel);

@@ -162,12 +162,12 @@ class FtaConditionnementModel extends AbstractModel {
 
     /**
      * Calcul du poids de l'emballage par palette
-     * @param type $paramPoidsFta
-     * @param type $paramNombreColisCouche
-     * @param type $paramNombreCouchePalette
-     * @param type $paramQuantiteCouche
-     * @param type $paramNombreCouche
-     * @return type
+     * @param int $paramPoidsFta
+     * @param int $paramNombreColisCouche
+     * @param int $paramNombreCouchePalette
+     * @param int $paramQuantiteCouche
+     * @param int $paramNombreCouche
+     * @return string
      */
     static function getCalculPoidsEmballagePalette($paramPoidsFta, $paramNombreColisCouche, $paramNombreCouchePalette, $paramQuantiteCouche, $paramNombreCouche) {
         return ($paramPoidsFta / 1000) * $paramNombreColisCouche * $paramNombreCouchePalette * ($paramQuantiteCouche * $paramNombreCouche);
@@ -175,9 +175,9 @@ class FtaConditionnementModel extends AbstractModel {
 
     /**
      * Multiplication
-     * @param type $param
-     * @param type $paramb
-     * @return type
+     * @param int $param
+     * @param int $paramb
+     * @return string
      */
     static function getCalculGenericMultiplication($param, $paramb) {
         return $param * $paramb;

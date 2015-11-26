@@ -5364,6 +5364,10 @@ $sql = "INSERT INTO ".$nameOfBDDTarget.".fta_composant SELECT ".$nameOfBDDOrigin
         . " WHERE ".$nameOfBDDOrigin.".fta_composant.id_fta=".$nameOfBDDTarget.".fta.id_fta";
 if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
 
+echo "ALTER TABLE ".$nameOfBDDTarget.".fta_composant ADD quantite_fta_composition_uvc ...";
+$sql = "ALTER TABLE `".$nameOfBDDTarget."`.`fta_composant` "
+       ." ADD  `quantite_fta_composition_uvc` INT NOT NULL";       
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
 
 $arrayFtaCompositionParagraphe = mysql_query(
                 "SELECT id_fta_composant
@@ -5476,7 +5480,31 @@ if ($arrayFtaComposantEti) {
     }
 }
 
-
+$arrayFtaComposantColis =  mysql_query(
+                "SELECT id_fta_composant,quantite_fta_composition,NB_UNIT_ELEM"
+                    ." FROM ".$nameOfBDDTarget.".fta_composant,".$nameOfBDDTarget.".fta "
+                        ." WHERE fta_composant.id_fta=fta.id_fta "
+);
+if ($arrayFtaComposantColis) {
+    while ($rowsFtaComposantColis= mysql_fetch_array($arrayFtaComposantColis)) {
+        $idFtaComposant = $rowsFtaComposantColis['id_fta_composant'];
+        $quantite_fta_composition = $rowsFtaComposantColis['quantite_fta_composition'];
+        $PCB = $rowsFtaComposantColis['NB_UNIT_ELEM'];
+        $quantite_fta_composition_uvc= $quantite_fta_composition*$PCB;
+        $sql_inter = "UPDATE ".$nameOfBDDTarget."." . 'fta_composant'
+                . " SET " . 'quantite_fta_composition_uvc' . "=$quantite_fta_composition_uvc " 
+                . " WHERE " .'id_fta_composant' . "=" . $idFtaComposant;
+       echo "UPDATE ".$nameOfBDDTarget."." . "fta_composant." . 'quantite_fta_composition_uvc' . "=" . "$quantite_fta_composition_uvc" . " id_fta_composant" . "=" . $idFtaComposant." ...";
+       if(mysql_query($sql_inter)) {	echo "[OK]\n";}else{echo "[FAILED] $idFtaComposant \n";}
+    }
+}
+/**
+ * Rennomage du champs
+ */
+ $sql = ("ALTER TABLE `fta_composant` CHANGE `quantite_fta_composition` `OLD_quantite_fta_composition` INT(11) NULL DEFAULT '1'");
+    if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+    
+    
 /**
  * Extraction  annexe emballage
  */

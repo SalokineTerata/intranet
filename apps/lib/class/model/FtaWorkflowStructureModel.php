@@ -130,4 +130,25 @@ class FtaWorkflowStructureModel extends AbstractModel {
         return $idProcessus;
     }
 
+    /**
+     * Rôle le processus et workflow corresponds
+     * @param int $paramIdProcessus
+     * @param int $paramIdWorkflow
+     * @return array
+     */
+    public static function getArrayRoleByProcessusAndWorkflow($paramIdProcessus, $paramIdWorkflow) {
+        $arrayRole = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
+                        'SELECT DISTINCT ' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_ROLE
+                        . ' FROM ' . FtaWorkflowStructureModel::TABLENAME
+                        . ' WHERE ' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_WORKFLOW . '=' . $paramIdWorkflow
+                        . ' AND ' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_PROCESSUS . '=' . $paramIdProcessus
+        );
+
+         foreach ($arrayRole as $rowsIdFtaRole){
+            $IdFtaRole[]=$rowsIdFtaRole[FtaWorkflowStructureModel::FIELDNAME_ID_FTA_ROLE];
+        }
+
+        return $IdFtaRole;
+    }
+
 }

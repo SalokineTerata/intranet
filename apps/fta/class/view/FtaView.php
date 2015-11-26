@@ -1195,4 +1195,35 @@ class FtaView {
         return $htmlTotalColisPalettisationUVC->getHtmlResult();
     }
 
+    function getHtmlColisControle() {
+        /**
+         * Calcul type emballage UVC
+         */
+        $returnUVC = $this->getModel()->buildArrayEmballageTypeUVC();
+        $pcb = $returnUVC[FtaConditionnementModel::UVC_EMBALLAGE_NET];
+        $uvc_net = $returnUVC[FtaModel::FIELDNAME_NOMBRE_UVC_PAR_CARTON];
+
+        /**
+         * Calcul type emballage Colis
+         */
+        $returnCOLIS = $this->getModel()->buildArrayEmballageTypeDuColis();
+        $colisNet = $returnCOLIS["colis_net"];
+        $check1 = strval($colisNet * "1000");
+        $check2 = strval($uvc_net * $pcb);
+        if ($check1 <> $check2) {
+            $html_warning = "ATTENTION, poids net du colis différents de celui défini dans le chapitre \"Indentié\" <img src=../lib/images/exclamation.png width=15 height=15 border=0/><br><br>";
+            $bgcolor = "#FFAA55";
+        } else {
+            $bgcolor = "#AFFF5A";
+            $html_warning = "";
+        }
+
+        $bloc.= "<tr class=contenu><td bgcolor=$bgcolor align=\"center\" valign=\"middle\">";
+        $bloc.="Poids net du colis (en Kg): ";
+        $bloc.="</td><td bgcolor=$bgcolor align=\"center\" valign=\"middle\">"
+                . "<h4><br>$colisNet</h4><br>$html_warning</td></tr>";
+
+        return $bloc;
+    }
+
 }

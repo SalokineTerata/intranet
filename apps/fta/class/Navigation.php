@@ -27,12 +27,12 @@ class Navigation {
         return self::$html_navigation_bar;
     }
 
-    public static function initNavigation($id_fta, $id_fta_chapitre_encours, $synthese_action, $comeback, $id_fta_etat, $abrevation_etat, $id_fta_role,$paramActivationComplete) {
+    public static function initNavigation($id_fta, $id_fta_chapitre_encours, $synthese_action, $comeback, $id_fta_etat, $abrevation_etat, $id_fta_role, $paramActivationComplete) {
 
         self::$id_fta = $id_fta;
         self::$id_fta_chapitre_encours = $id_fta_chapitre_encours;
         self::$synthese_action = $synthese_action;
-        if($id_fta_etat == "1"){
+        if ($id_fta_etat == "1") {
             self::$synthese_action = FtaEtatModel::ETAT_AVANCEMENT_VALUE_EN_COURS;
         }
         self::$comeback = $comeback;
@@ -53,8 +53,11 @@ class Navigation {
      * @return string
      */
     protected static function buildNavigationBar($paramActivationComplete) {
-        //Barre de navigation de la Fiche Tehnique Article
         //Variables
+        $listeRole = array();
+        $globalConfig = new GlobalConfig();
+        UserModel::ConnexionFalse($globalConfig);
+        $idUser = $globalConfig->getAuthenticatedUser()->getKeyValue();
 
         $html_table = 'table '              //Permet d'harmoniser les tableaux
                 . 'border=1 '
@@ -89,8 +92,70 @@ class Navigation {
                         . ' AND ' . FtaWorkflowModel::TABLENAME . '.' . FtaWorkflowModel::KEYNAME
                         . '=' . FtaModel::TABLENAME . '.' . FtaModel::FIELDNAME_WORKFLOW
         );
-
-        $ftaRoleModel = new FtaRoleModel(self::$id_fta_role);
+        /**
+         * Liste des Rôles auxquelles l'utilisateur à accès pour un workflow donnée
+         */
+        $arrayRoleWorkflow = FtaRoleModel::getIdFtaRoleByIdUserAndWorkflow($idUser, self::$id_fta_workflow);
+        if (count($arrayRoleWorkflow) > "1") {
+            //Calcul du taux
+            $taux_temp = FtaSuiviProjetModel::getFtaTauxValidation(self::$ftaModel, TRUE);
+            if ($taux_temp["1"]) {
+                foreach ($taux_temp["1"] as $id_fta_processus => $taux) {
+                    /**
+                     * On obtien le rôle pour lequel le processus correspond
+                     */
+                    $arrayCheckRole = FtaWorkflowStructureModel::getArrayRoleByProcessusAndWorkflow($id_fta_processus, self::$id_fta_workflow);
+                    $checkRole1 = array_intersect($arrayCheckRole, $arrayRoleWorkflow);
+                    if ($checkRole1) {
+                        $checkRole2 = array_intersect($arrayCheckRole, $listeRole);
+                        if (!$checkRole2) {
+                            /**
+                             * 0 en attente 
+                             * entre 0 et 1 cours
+                             * 1 validé
+                             */
+                            $listeRole[] = $arrayCheckRole["0"];
+                            if ($taux == "0") {
+                                /**
+                                 * Vérification que tous les processus précédent soit validé si oui le processus est encours
+                                 */
+                                $taux_validation_processus = FtaProcessusModel::getFtaProcessusNonValidePrecedent(self::$id_fta, $id_fta_processus, self::$id_fta_workflow);
+                                if ($taux_validation_processus == "1" or $taux_validation_processus === NULL) {
+                                    $ftaRoleModel = new FtaRoleModel($arrayCheckRole["0"]);
+                                    $roles.= ' | <a href=' . 'modification_fiche' . '.php?'
+                                            . 'id_fta=' . self::$id_fta
+                                            . '&id_fta_chapitre_encours=' . self::$id_fta_chapitre_encours
+                                            . '&synthese_action=' . self::$synthese_action
+                                            . '&id_fta_etat=' . self::$id_fta_etat
+                                            . '&abreviation_fta_etat=' . self::$abreviation_etat
+                                            . '&comeback=' . self::$comeback
+                                            . '&id_fta_role=' . $arrayCheckRole["0"] . '>' . $ftaRoleModel->getDataField(FtaRoleModel::FIELDNAME_DESCRIPTION_FTA_ROLE)->getFieldValue() . '</a> ';
+                                } else {
+                                    $ftaRoleModel = new FtaRoleModel($arrayCheckRole["0"]);
+                                    /**
+                                     * Liien vers l'historique sans la navigation
+                                     */
+                                    $roles.= ' | ' . $ftaRoleModel->getDataField(FtaRoleModel::FIELDNAME_DESCRIPTION_FTA_ROLE)->getFieldValue();
+                                }
+                            } elseif ($taux == "1" or ( $taux <> "0" and $taux <> "1")) {
+                                $ftaRoleModel = new FtaRoleModel($arrayCheckRole["0"]);
+                                $roles.= ' | <a href=' . 'modification_fiche' . '.php?'
+                                        . 'id_fta=' . self::$id_fta
+                                        . '&id_fta_chapitre_encours=' . self::$id_fta_chapitre_encours
+                                        . '&synthese_action=' . self::$synthese_action
+                                        . '&id_fta_etat=' . self::$id_fta_etat
+                                        . '&abreviation_fta_etat=' . self::$abreviation_etat
+                                        . '&comeback=' . self::$comeback
+                                        . '&id_fta_role=' . $arrayCheckRole["0"] . '>' . $ftaRoleModel->getDataField(FtaRoleModel::FIELDNAME_DESCRIPTION_FTA_ROLE)->getFieldValue() . '</a> ';
+                            }
+                        }
+                    }
+                }
+                $RoleNavigation = '  Rôles  ' . $roles;
+            }
+        } else {
+            $ftaRoleModel = new FtaRoleModel(self::$id_fta_role);
+        }
         $siteDeProduction = self::$ftaModel->getDataField(FtaModel::FIELDNAME_SITE_ASSEMBLAGE)->getFieldValue();
         $geoModel = new GeoModel($siteDeProduction);
         foreach ($arrayFtaEtatAndFta as $rowsFtaEtatAndFta) {
@@ -116,21 +181,31 @@ class Navigation {
             } else {
                 $nom = $rowsFtaEtatAndFta[FtaModel::FIELDNAME_DESIGNATION_COMMERCIALE];
             }
-            $menu_navigation = '
-                 <' . $html_table . '><tr><td class=titre_principal> <div align=\'left\'>
+            if (count($arrayRoleWorkflow) > "1") {
+                $menu_navigation = '<' . $html_table . '><tr><td class=titre_principal> <div align=\'left\'>
                             <b><font size=\'2\' color=\'#0000FF\'>' . $rowsFtaEtatAndFta[FtaModel::FIELDNAME_CODE_ARTICLE_LDC] . '</font></b> - ' . $nom . ' &nbsp;&nbsp;&nbsp;&nbsp;<i>(gérée par ' . $createur . ')</i>  '
-                    . '</div></td>'
-                    . '<td width=25% class=titre_principal>'
-                    . '  Rôle : ' . $ftaRoleModel->getDataField(FtaRoleModel::FIELDNAME_DESCRIPTION_FTA_ROLE)->getFieldValue()
-                    . '<br>  Site de Production : ' . $geoModel->getDataField(GeoModel::FIELDNAME_GEO)->getFieldValue()
-                    . '<br>  Espace de Travail : ' . $rowsFtaEtatAndFta[FtaWorkflowModel::FIELDNAME_DESCRIPTION_FTA_WORKFLOW]
-                    . '</td></tr></table>
+                        . '</div></td>'
+                        . '<td width=25% class=titre_principal>'
+                        . $RoleNavigation
+                        . '<br>  Site de Production : ' . $geoModel->getDataField(GeoModel::FIELDNAME_GEO)->getFieldValue()
+                        . '<br>  Espace de Travail : ' . $rowsFtaEtatAndFta[FtaWorkflowModel::FIELDNAME_DESCRIPTION_FTA_WORKFLOW]
+                        . '</td></tr></table>
                      <' . $html_table . '>
-                    
-            <tr class = titre>
-            <td>
-         
-                     ';
+                           <tr class = titre>
+                                <td>';
+            } else {
+                $menu_navigation = '<' . $html_table . '><tr><td class=titre_principal> <div align=\'left\'>
+                            <b><font size=\'2\' color=\'#0000FF\'>' . $rowsFtaEtatAndFta[FtaModel::FIELDNAME_CODE_ARTICLE_LDC] . '</font></b> - ' . $nom . ' &nbsp;&nbsp;&nbsp;&nbsp;<i>(gérée par ' . $createur . ')</i>  '
+                        . '</div></td>'
+                        . '<td width=25% class=titre_principal>'
+                        . '  Rôle : ' . $ftaRoleModel->getDataField(FtaRoleModel::FIELDNAME_DESCRIPTION_FTA_ROLE)->getFieldValue()
+                        . '<br>  Site de Production : ' . $geoModel->getDataField(GeoModel::FIELDNAME_GEO)->getFieldValue()
+                        . '<br>  Espace de Travail : ' . $rowsFtaEtatAndFta[FtaWorkflowModel::FIELDNAME_DESCRIPTION_FTA_WORKFLOW]
+                        . '</td></tr></table>
+                    <' . $html_table . '>
+                           <tr class = titre>
+                                <td>';
+            }
         }
         if ($paramActivationComplete) {
             //Si une action est donnée, alors construction du menu des chapitres    
@@ -398,6 +473,9 @@ class Navigation {
                             $tauxValidationProcessus = FtaProcessusModel::getValideProcessusEncours(self::$id_fta, $rowsInit[FtaProcessusCycleModel::FIELDNAME_PROCESSUS_INIT], self::$id_fta_workflow);
                             if ($tauxValidationProcessus != 0) {
                                 $ProcessusEnLecture[] = $rowsInit[FtaProcessusCycleModel::FIELDNAME_PROCESSUS_INIT];
+                                //Enregistrement du processus en tant que processus en cours
+                                $ProcessusEncoursVisible[] = $rowsNext[FtaProcessusCycleModel::FIELDNAME_PROCESSUS_NEXT];
+//                            }
                             }
                         }
 
@@ -421,9 +499,7 @@ class Navigation {
                           $ProcessusEncoursVisible[] = self::CheckMultiSite($rows[FtaProcessusCycleModel::FIELDNAME_PROCESSUS_INIT]);
                           } else {
                          */
-                        //Enregistrement du processus en tant que processus en cours
-                        $ProcessusEncoursVisible[] = $rowsNext[FtaProcessusCycleModel::FIELDNAME_PROCESSUS_NEXT];
-//                            }
+
 //                        }
                     }
                 }//Fin du balayage des processus non-validés

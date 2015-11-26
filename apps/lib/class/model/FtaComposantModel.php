@@ -50,6 +50,7 @@ class FtaComposantModel extends AbstractModel {
     const FIELDNAME_POIDS_UNITAIRE_CODIFICATION = 'poids_fta_nomenclature';
     const FIELDNAME_QUANTITE_FTA_COMPOSITION = 'quantite_fta_composition';
     const FIELDNAME_QUANTITE_PIECE_PAR_CARTON = 'quantite_piece_par_carton';
+    const FIELDNAME_QUANTITE_FTA_COMPOSITION_UVC = 'quantite_fta_composition_uvc';
     const FIELDNAME_SITE_PRODUCTION_FTA_CODIFICATION = 'site_production_fta_nomenclature';
     const FIELDNAME_SUFFIXE_AGROLOGIC_FTA_NOMENCLATURE = 'suffixe_agrologic_fta_nomenclature';
     const FIELDNAME_TAILLE_POLICE_INGREDIENT_FTA_COMPOSITION = 'taille_police_ingredient_fta_composition';
@@ -85,7 +86,7 @@ class FtaComposantModel extends AbstractModel {
     /**
      * Valeurs par défaut en cas de création
      * d'un nouvel enregistrement
-    * @return mixed
+     * @return mixed
      */
     static public function createNewRecordset($paramForeignKeysValuesArray = NULL) {
 
@@ -98,9 +99,9 @@ class FtaComposantModel extends AbstractModel {
         $key = $pdo->lastInsertId();
         return $key;
     }
-    
+
     protected function setDefaultValues() {
-        $this->getDataField(self::FIELDNAME_QUANTITE_PIECE_PAR_CARTON)->setFieldValue(self::DEFAULT_VALUE_QTE_UVC);
+        $this->getDataField(self::FIELDNAME_QUANTITE_FTA_COMPOSITION_UVC)->setFieldValue(self::DEFAULT_VALUE_QTE_UVC);
     }
 
     public function setModelFtaById($id) {
@@ -164,6 +165,7 @@ class FtaComposantModel extends AbstractModel {
                 . ', ' . FtaComposantModel::FIELDNAME_TAILLE_POLICE_NOM_FTA_COMPOSITION
                 . ', ' . FtaComposantModel::FIELDNAME_VERSION
                 . ', ' . FtaComposantModel::FIELDNAME_LAST_ID_FTA_COMPOSANT
+                . ', ' . FtaComposantModel::FIELDNAME_QUANTITE_FTA_COMPOSITION_UVC
                 . ', ' . FtaComposantModel::FIELDNAME_ID_FTA . ')'
                 . ' SELECT ' . FtaComposantModel::FIELDNAME_ASCENDANT_FTA_NOMENCLATURE
                 . ', ' . FtaComposantModel::FIELDNAME_CODE_PRODUIT_AGROLOGIC_FTA_NOMENCLATURE
@@ -203,6 +205,7 @@ class FtaComposantModel extends AbstractModel {
                 . ', ' . FtaComposantModel::FIELDNAME_TAILLE_POLICE_INGREDIENT_FTA_COMPOSITION
                 . ', ' . FtaComposantModel::FIELDNAME_TAILLE_POLICE_NOM_FTA_COMPOSITION
                 . ', ' . FtaComposantModel::FIELDNAME_VERSION
+                . ', ' . FtaComposantModel::FIELDNAME_QUANTITE_FTA_COMPOSITION_UVC
                 . ', ' . FtaComposantModel::KEYNAME
                 . ', ' . $paramIdFtaNew
                 . ' FROM ' . FtaComposantModel::TABLENAME
@@ -253,7 +256,7 @@ class FtaComposantModel extends AbstractModel {
                         . ',' . FtaComposantModel::FIELDNAME_INGREDIENT_FTA_COMPOSITION
                         . ',' . FtaComposantModel::FIELDNAME_ID_GEO
                         . ',' . FtaComposantModel::FIELDNAME_POIDS_FTA_COMPOSITION
-                        . ',' . FtaComposantModel::FIELDNAME_QUANTITE_FTA_COMPOSITION
+                        . ',' . FtaComposantModel::FIELDNAME_QUANTITE_FTA_COMPOSITION_UVC
                         . ' FROM ' . FtaComposantModel::TABLENAME
                         . ' WHERE ' . FtaComposantModel::KEYNAME . '=' . $paramIdFtaComposant);
 
@@ -264,7 +267,7 @@ class FtaComposantModel extends AbstractModel {
                     FtaComposantModel::FIELDNAME_VIRTUAL_INGREDIENT_FTA_COMPOSITION => $rows[FtaComposantModel::FIELDNAME_INGREDIENT_FTA_COMPOSITION],
                     FtaComposantModel::FIELDNAME_VIRTUAL_SITE_DE_PRODUCTION => $rows[FtaComposantModel::FIELDNAME_ID_GEO],
                     FtaComposantModel::FIELDNAME_VIRTUAL_POIDS_FTA_COMPOSITION => $rows[FtaComposantModel::FIELDNAME_POIDS_FTA_COMPOSITION],
-                    FtaComposantModel::FIELDNAME_VIRTUAL_QUANTITE_FTA_COMPOSITION => $rows[FtaComposantModel::FIELDNAME_QUANTITE_FTA_COMPOSITION],
+                    FtaComposantModel::FIELDNAME_VIRTUAL_QUANTITE_FTA_COMPOSITION => $rows[FtaComposantModel::FIELDNAME_QUANTITE_FTA_COMPOSITION_UVC],
                 );
             }
         } else {
@@ -363,7 +366,7 @@ class FtaComposantModel extends AbstractModel {
                 . '<td ' . $border . '>' . $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_ID_GEO)->getFieldLabel() . '</td>'
                 . '<td ' . $border . '>' . $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_POIDS_FTA_COMPOSITION)->getFieldLabel() . '</td>'
 //                . '<td>Répartition (en %)</td>'
-                . '<td ' . $border . '>' . $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_QUANTITE_FTA_COMPOSITION)->getFieldLabel() . '</td>'
+                . '<td ' . $border . '>' . $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_QUANTITE_FTA_COMPOSITION_UVC)->getFieldLabel() . '</td>'
                 . '<td ' . $border . '>Actions</td>'
                 . '</tr>';
     }

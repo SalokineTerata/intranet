@@ -199,7 +199,7 @@ class Chapitre {
         self::$id_fta_processus = self::$ftaWorkflowStructureModel->getDataField(FtaWorkflowStructureModel::FIELDNAME_ID_FTA_PROCESSUS)->getFieldValue();
         self::$id_intranet_actions = IntranetActionsModel::getIdIntranetActionsFromIdParentAction(
                         self::$ftaWorkflowModel->getDataField(FtaWorkflowModel::FIELDNAME_ID_INTRANET_ACTIONS)->getFieldValue()
-                        , self::$id_fta_chapitre, self::$id_fta_workflow);
+                        , self::$id_fta_chapitre, self::$id_fta_workflow, self::$id_fta_role);
         self::$moduleIntranetActionsModel = new IntranetActionsModel(self::$id_intranet_actions);
 
         self::$is_owner = self::buildIsOwner();
@@ -765,8 +765,7 @@ class Chapitre {
         $ftaView->setIsEditable($isEditable);
         $ftaView->setFtaChapitreModelById(self::ID_CHAPITRE_IDENTITE);
 
-        //Poids net de l’UVF
-        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_POIDS_ELEMENTAIRE);
+
 
         //Nombre d’UVC par colis
         $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_NOMBRE_UVC_PAR_CARTON);
@@ -1058,12 +1057,20 @@ class Chapitre {
         $ftaView->setIsEditable($isEditable);
         $ftaView->setFtaChapitreModelById(self::ID_CHAPITRE_IDENTITE);
 
+        /**
+         * Affichage du tableau de compostion
+         */
         $bloc.=$ftaView->getHtmlEtiquetteComposition($id_fta, self::$id_fta_chapitre, $synthese_action, self::$comeback, self::$id_fta_etat, self::$abrevation_etat, self::$id_fta_role, self::$is_editable);
+
+        /**
+         * Controle du poids net
+         */
+        $bloc.=$ftaView->getHtmlColisControle();
 
         //Remarque
         $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_REMARQUE);
 
-        return $bloc;
+//        return $bloc;
     }
 
     public static function buildChapitreEtiquetteComposant_FEAvecEtiq() {
@@ -1079,7 +1086,15 @@ class Chapitre {
         $ftaView->setIsEditable($isEditable);
         $ftaView->setFtaChapitreModelById(self::ID_CHAPITRE_IDENTITE);
 
+        /**
+         * Affichage du tableau de compostion
+         */
         $bloc.=$ftaView->getHtmlEtiquetteComposition($id_fta, self::$id_fta_chapitre, $synthese_action, self::$comeback, self::$id_fta_etat, self::$abrevation_etat, self::$id_fta_role, self::$is_editable);
+
+        /**
+         * Controle du poids net
+         */
+        $bloc.=$ftaView->getHtmlColisControle();
 
         //Remarque
         $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_REMARQUE);
@@ -1099,9 +1114,16 @@ class Chapitre {
         $ftaView = new FtaView($ftaModel);
         $ftaView->setIsEditable($isEditable);
         $ftaView->setFtaChapitreModelById(self::ID_CHAPITRE_IDENTITE);
-
+        /**
+         * Affichage du tableau de compostion
+         */
         $bloc.=$ftaView->getHtmlEtiquetteComposition($id_fta, self::$id_fta_chapitre, $synthese_action, self::$comeback, self::$id_fta_etat, self::$abrevation_etat, self::$id_fta_role, self::$is_editable);
 
+
+        /**
+         * Controle du poids net
+         */
+        $bloc.=$ftaView->getHtmlColisControle();
         //Remarque
         $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_REMARQUE);
 
@@ -1835,6 +1857,8 @@ class Chapitre {
         //Désignation commerciale
         $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_DESIGNATION_COMMERCIALE);
 
+        //Poids net de l’UVF
+        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_POIDS_ELEMENTAIRE);
 
         $bloc.='<tr class=titre_principal><td class>Caractéristiques FTA</td></tr>';
 

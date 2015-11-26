@@ -144,7 +144,7 @@ if ($id_fta_composant) {
     $ingredient_fta_composition1 = $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_INGREDIENT_FTA_COMPOSITION1)->getFieldValue();
     $duree_vie_technique_fta_composition = $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_DUREE_VIE_TECHNIQUE_FTA_COMPOSITION)->getFieldValue();
     $poids_fta_composition = $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_POIDS_FTA_COMPOSITION)->getFieldValue();
-    $quantite_fta_composition = $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_QUANTITE_FTA_COMPOSITION)->getFieldValue();
+    $quantite_fta_composition_uvc = $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_QUANTITE_FTA_COMPOSITION_UVC)->getFieldValue();
     $ordre_fta_composition = $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_ORDRE_FTA_COMPOSITION)->getFieldValue();
     $is_nomenclature_fta_composant = $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_IS_NOMENCLATURE_FTA_COMPOSANT)->getFieldValue();
     $mode_etiquette_fta_composition = $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_MODE_ETIQUETTE_FTA_COMPOSITION)->getFieldValue();
@@ -187,6 +187,7 @@ if ($id_fta_composant) {
                         array(FtaComposantModel::FIELDNAME_ID_FTA => $id_fta)
         );
         $ftaComposantModel = new FtaComposantModel($id_fta_composant);
+        $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_QUANTITE_FTA_COMPOSITION_UVC)->setFieldValue(FtaComposantModel::DEFAULT_VALUE_QTE_UVC);
         $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_IS_COMPOSITION_FTA_COMPOSANT)->setFieldValue("1");
         $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_IS_NOMENCLATURE_FTA_COMPOSANT)->setFieldValue("0");
         $ftaComposantModel->saveToDatabase();
@@ -288,7 +289,7 @@ $bloc .=$ftaComposantView->getHtmlDataField(FtaComposantModel::FIELDNAME_POIDS_F
 //    $bloc .= "<input type=text name=" . FtaComposantModel::FIELDNAME_QUANTITE_FTA_COMPOSITION . " value='" . $quantite_fta_composition . "' size=50/>";
 //} else {
 //    $bloc .=$quantite_fta_composition;
-$bloc .=$ftaComposantView->getHtmlDataField(FtaComposantModel::FIELDNAME_QUANTITE_FTA_COMPOSITION);
+$bloc .=$ftaComposantView->getHtmlDataField(FtaComposantModel::FIELDNAME_QUANTITE_FTA_COMPOSITION_UVC);
 
 //}
 //$bloc.="</td></tr>";
@@ -412,7 +413,7 @@ $default_etiquette_libelle_fta_composition = $nom_fta_composition;
 $default_etiquette_fta_composition = $ingredient_fta_composition;
 $default_etiquette_supplementaire_fta_composition = $ingredient_fta_composition1;
 $default_etiquette_poids_fta_composition = $poids_fta_composition / 1000;  //Conversion de g -> Kg
-$default_etiquette_quantite_fta_composition = $quantite_fta_composition;
+$default_etiquette_quantite_fta_composition = $quantite_fta_composition_uvc;
 $default_etiquette_duree_vie_fta_composition = $duree_vie_technique_fta_composition;
 
 //Initialisation des données
@@ -654,7 +655,7 @@ $bloc .=$ftaComposantView2->getHtmlDataField(FtaComposantModel::FIELDNAME_ETIQUE
 //Liste des composants regroupés sur cette étiquette
 if ($id_fta_composant) {
     $arrayComposition = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
-                    " SELECT " . FtaComposantModel::FIELDNAME_NOM_FTA_COMPOSITION . "," . FtaComposantModel::FIELDNAME_POIDS_FTA_COMPOSITION . "," . FtaComposantModel::FIELDNAME_QUANTITE_FTA_COMPOSITION
+                    " SELECT " . FtaComposantModel::FIELDNAME_NOM_FTA_COMPOSITION . "," . FtaComposantModel::FIELDNAME_POIDS_FTA_COMPOSITION . "," . FtaComposantModel::FIELDNAME_QUANTITE_FTA_COMPOSITION_UVC
                     . " FROM " . FtaComposantModel::TABLENAME
                     . " WHERE " . FtaComposantModel::FIELDNAME_ETIQUETTE_ID_FTA_COMPOSITION . "=" . $id_fta_composant
                     . " ORDER BY " . FtaComposantModel::FIELDNAME_NOM_FTA_COMPOSITION
@@ -665,7 +666,7 @@ if ($arrayComposition) {
     $liste_composant_associee = "";
     foreach ($arrayComposition as $rows) {
         $liste_composant_associee.=$rows[FtaComposantModel::FIELDNAME_NOM_FTA_COMPOSITION] . "<br>";
-        $etiquette_poids_fta_composition = $etiquette_poids_fta_composition + ($rows[FtaComposantModel::FIELDNAME_POIDS_FTA_COMPOSITION] * $rows[FtaComposantModel::FIELDNAME_QUANTITE_FTA_COMPOSITION]);
+        $etiquette_poids_fta_composition = $etiquette_poids_fta_composition + ($rows[FtaComposantModel::FIELDNAME_POIDS_FTA_COMPOSITION] * $rows[FtaComposantModel::FIELDNAME_QUANTITE_FTA_COMPOSITION_UVC]);
     }
     $bloc .="<tr><td>Liste des composants inclus sur cette étiquette</td>"
             . "<td>" . $liste_composant_associee . "</td></tr>";

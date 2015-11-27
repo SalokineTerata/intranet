@@ -103,7 +103,7 @@ class EnvironmentConf {
     }
 
     public function getUrlFullRoot() {
-        if ($this->getReverseProxyName() == NULL) {
+        if ($this->getReverseProxyName() == "") {
             $UrlFullRoot = $this->getUrlProtocol() . '://'
                     . $this->getUrlServer() . '/'
                     . $this->getUrlRoot() . '/'

@@ -1070,7 +1070,7 @@ class Chapitre {
         //Remarque
         $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_REMARQUE);
 
-//        return $bloc;
+        return $bloc;
     }
 
     public static function buildChapitreEtiquetteComposant_FEAvecEtiq() {

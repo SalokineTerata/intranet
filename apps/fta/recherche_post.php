@@ -12,7 +12,7 @@
 require_once '../inc/main.php';
 
 $globalConfig = new GlobalConfig();
-      UserModel::ConnexionFalse($globalConfig);
+UserModel::ConnexionFalse($globalConfig);
 
 if ($globalConfig->getAuthenticatedUser()) {
     $id_user = $globalConfig->getAuthenticatedUser()->getKeyValue();
@@ -28,14 +28,19 @@ $search_req = Lib::isDefined("search_req");
 $operateur_recherche = Lib::isDefined("operateur_recherche");
 $champ_recherche = Lib::isDefined("champ_recherche");
 $idFtaRoleEncoursDefault = FtaRoleModel::getKeyNameOfFirstRoleByIdUser($id_user);
-if ($fta_modification) {    
+if ($fta_modification) {
+    
 } else {
     $synthese_action = FtaEtatModel::ETAT_AVANCEMENT_VALUE_ALL;
     $idFtaRoleEncoursDefault = '0';
 }
 $idFtaRole = Lib::getParameterFromRequest(FtaRoleModel::KEYNAME, $idFtaRoleEncoursDefault);
+//$environnementConf = new EnvironmentConf();
+//$dossierUrL = $environnementConf->getUrlRoot();
+//if(!$dossierUrL){
+    $dossierUrL = $globalConfig->getConf()->getUrlRoot();
 
-
+//}
 /*
   -----------------
   ACTION A TRAITER
@@ -74,14 +79,20 @@ if (is_numeric($recherche)) {
     }
     $operateur_recherche = 4;
 } else {
-    //Recherche dans la désignation Commerciale
-    $search_table = "fta";
-    $search_id = "$search_table.id_fta";
-    $search_req = "fta.designation_commerciale_fta++LIKE+%28+%27%25" . $recherche . "%25%27+%29+";
-    $operateur_recherche = 1;
-    $champ_recherche = 4;
+    if ($recherche) {
+        //Recherche dans la désignation Commerciale
+        $search_table = "fta";
+        $search_id = "$search_table.id_fta";
+        $search_req = "fta.designation_commerciale_fta++LIKE+%28+%27%25" . $recherche . "%25%27+%29+";
+        $operateur_recherche = 1;
+        $champ_recherche = 4;
+    } else {
+        $message = "Veuillez saisir un code article arcadia ou une Désignation interne";
+        $redirection = "recherche.php";
+        afficher_message("Erreur", $message, $redirection);
+    }
 }
-header("Location: ./recherche.php?url_page_depart=(/dev-intranet/apps/fta/recherche.php)&requete_resultat=SELECT+DISTINCT+$search_id+FROM+$search_table+WHERE+$search_req&nb_limite_resultat=1000&champ_recherche=$champ_recherche&operateur_recherche=$operateur_recherche&texte_recherche=$recherche&nbcol=1&nbligne=1&nb_col_courant=0&nb_ligne_courant=1&ajout_col=0&id_fta_role=$idFtaRole");
+header("Location: ./recherche.php?url_page_depart=(/" . $dossierUrL . "/apps/fta/recherche.php)&requete_resultat=SELECT+DISTINCT+$search_id+FROM+$search_table+WHERE+$search_req&nb_limite_resultat=1000&champ_recherche=$champ_recherche&operateur_recherche=$operateur_recherche&texte_recherche=$recherche&nbcol=1&nbligne=1&nb_col_courant=0&nb_ligne_courant=1&ajout_col=0&id_fta_role=$idFtaRole");
 
 
 /* * **********

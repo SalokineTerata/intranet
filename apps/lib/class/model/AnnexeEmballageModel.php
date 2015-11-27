@@ -23,6 +23,10 @@ class AnnexeEmballageModel extends AbstractModel {
     const FIELDNAME_NOMBRE_COUCHE_ANNEXE_EMBALLAGE = 'nombre_couche_annexe_emballage';
     const FIELDNAME_DATE_MAJ_ANNEXE_EMBALLAGE = 'date_maj_annexe_emballage';
 
+    protected function setDefaultValues() {
+        
+    }
+
     public static function getIdAnnexeEmballage($paramIdEmballageGroupe) {
 
         $req = 'SELECT DISTINCT ' . AnnexeEmballageModel::TABLENAME . '.' . AnnexeEmballageModel::KEYNAME
@@ -61,7 +65,7 @@ class AnnexeEmballageModel extends AbstractModel {
         $req .= ') AND ' . AnnexeEmballageGroupeModel::TABLENAME . '.' . AnnexeEmballageGroupeModel::KEYNAME
                 . '=' . AnnexeEmballageModel::TABLENAME . '.' . AnnexeEmballageModel::FIELDNAME_ID_ANNEXE_EMBALLAGE_GROUPE;
 
-       
+
         $array = DatabaseOperation::convertSqlStatementWithKeyAsFirstFieldToArray($req);
 
         return $array;

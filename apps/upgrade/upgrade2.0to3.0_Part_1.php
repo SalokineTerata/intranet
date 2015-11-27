@@ -116,6 +116,12 @@ echo "INSERT INTO ".$nameOfBDDTarget.".fte_fournisseur ...";
 $sql = "INSERT INTO ".$nameOfBDDTarget.".fte_fournisseur SELECT * FROM ".$nameOfBDDOrigin.".fte_fournisseur";
 if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
 
+echo "INSERT INTO ".$nameOfBDDTarget.".salaries Utilisateur supprimé ...";
+$sql = "INSERT INTO `".$nameOfBDDTarget."`.`fte_fournisseur` "
+        . "(`id_fte_fournisseur`, `nom_fte_fournisseur`) "
+        . "VALUES ('-1', 'Fte supprimé'); ";       
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
 echo "DROP ".$nameOfBDDTarget.".geo ...";
 $sql = "DROP TABLE ".$nameOfBDDTarget.".geo";
 if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
@@ -3228,6 +3234,18 @@ echo "INSERT INTO ".$nameOfBDDTarget.".logft ...";
 $sql = "INSERT INTO ".$nameOfBDDTarget.".logft SELECT * FROM ".$nameOfBDDOrigin.".logft";
 if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
 
+echo "DROP ".$nameOfBDDTarget.".intranet_access_linked_table ...";
+$sql = "DROP TABLE ".$nameOfBDDTarget.".intranet_access_linked_table";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "CREATE TABLE ".$nameOfBDDTarget.".intranet_access_linked_table ...";
+$sql = "CREATE TABLE ".$nameOfBDDTarget.".intranet_access_linked_table LIKE ".$nameOfBDDStructure.".intranet_access_linked_table";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+echo "INSERT INTO ".$nameOfBDDTarget.".intranet_access_linked_table ...";
+$sql = "INSERT INTO ".$nameOfBDDTarget.".intranet_access_linked_table SELECT * FROM ".$nameOfBDDStructure.".intranet_access_linked_table";
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
 echo "DROP ".$nameOfBDDTarget.".lustat ...";
 $sql = "DROP TABLE ".$nameOfBDDTarget.".lustat";
 if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
@@ -3995,11 +4013,11 @@ $sql = "DROP TABLE ".$nameOfBDDTarget.".annexe_service_consommateur";
 if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
 
 echo "CREATE TABLE ".$nameOfBDDTarget.".annexe_service_consommateur ...";
-$sql = "CREATE TABLE ".$nameOfBDDTarget.".annexe_service_consommateur LIKE ".$nameOfBDDStructure.".annexe_service_consommateur";
+$sql = "CREATE TABLE ".$nameOfBDDTarget.".annexe_service_consommateur LIKE ".$nameOfBDDOrigin.".service_consommateur";
 if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
 
 echo "INSERT INTO ".$nameOfBDDTarget.".annexe_service_consommateur ...";
-$sql = "INSERT INTO ".$nameOfBDDTarget.".annexe_service_consommateur SELECT * FROM ".$nameOfBDDStructure.".annexe_service_consommateur";
+$sql = "INSERT INTO ".$nameOfBDDTarget.".annexe_service_consommateur SELECT * FROM ".$nameOfBDDOrigin.".service_consommateur";
 if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
 
 echo "DROP ".$nameOfBDDTarget.".annexe_unite_facturation ...";
@@ -5346,6 +5364,10 @@ $sql = "INSERT INTO ".$nameOfBDDTarget.".fta_composant SELECT ".$nameOfBDDOrigin
         . " WHERE ".$nameOfBDDOrigin.".fta_composant.id_fta=".$nameOfBDDTarget.".fta.id_fta";
 if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
 
+echo "ALTER TABLE ".$nameOfBDDTarget.".fta_composant ADD quantite_fta_composition_uvc ...";
+$sql = "ALTER TABLE `".$nameOfBDDTarget."`.`fta_composant` "
+       ." ADD  `quantite_fta_composition_uvc` INT NOT NULL";       
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
 
 $arrayFtaCompositionParagraphe = mysql_query(
                 "SELECT id_fta_composant
@@ -5387,6 +5409,28 @@ if ($arrayFtaCompositionEtiquette) {
         if(mysql_query($sql_inter)) {	echo "[OK]\n";}else{echo "[FAILED] $idFtaComposant \n";}
     }
 }
+$arrayFtaCompositionEtiquette2 = mysql_query(
+                "SELECT DISTINCT id_fta_composant, k_etiquette_verso_fta_composition
+FROM ".$nameOfBDDTarget.".fta_composant
+WHERE k_etiquette_verso_fta_composition NOT 
+IN (
+
+SELECT k_etiquette
+FROM ".$nameOfBDDOrigin.".codesoft_etiquettes
+)"
+);
+if ($arrayFtaCompositionEtiquette2) {
+    while ($rowsFtaCompositionEtiquette2 = mysql_fetch_array($arrayFtaCompositionEtiquette2)) {
+        $idFtaComposant = $rowsFtaCompositionEtiquette2['id_fta_composant'];
+
+
+        $sql_inter = "UPDATE ".$nameOfBDDTarget."." . "fta_composant"
+                . " SET " . "k_etiquette_verso_fta_composition" . "=-1"
+                . " WHERE " . "id_fta_composant" . "=" . $idFtaComposant;
+        echo "UPDATE ".$nameOfBDDTarget."." . "fta_composant." . "k_etiquette_verso_fta_composition id_fta_composant" . "=" . $idFtaComposant." ...";
+        if(mysql_query($sql_inter)) {	echo "[OK]\n";}else{echo "[FAILED] $idFtaComposant \n";}
+    }
+}
 
 
 /**
@@ -5420,8 +5464,47 @@ if ($arrayFtaCompositionIdGeo) {
 }
 
 
+$arrayFtaComposantEti =  mysql_query(
+                "SELECT id_fta_composant
+FROM ".$nameOfBDDTarget.".fta_composant
+WHERE mode_etiquette_fta_composition=0 AND (k_etiquette_verso_fta_composition<>0 OR k_etiquette_fta_composition<>0)"
+);
+if ($arrayFtaComposantEti) {
+    while ($rowsFtaComposantEti= mysql_fetch_array($arrayFtaComposantEti)) {
+        $idFtaComposant = $rowsFtaComposantEti['id_fta_composant'];
+        $sql_inter = "UPDATE ".$nameOfBDDTarget."." . 'fta_composant'
+                . " SET " . 'k_etiquette_verso_fta_composition' . "=-1 , k_etiquette_verso_fta_composition=-1" 
+                . " WHERE " .'id_fta_composant' . "=" . $idFtaComposant;
+       echo "UPDATE ".$nameOfBDDTarget."." . "fta_composant." . 'k_etiquette_verso_fta_composition' . "=" . "0" . " id_fta_composant" . "=" . $idFtaComposant." ...";
+       if(mysql_query($sql_inter)) {	echo "[OK]\n";}else{echo "[FAILED] $idFtaComposant \n";}
+    }
+}
 
-
+$arrayFtaComposantColis =  mysql_query(
+                "SELECT id_fta_composant,quantite_fta_composition,NB_UNIT_ELEM"
+                    ." FROM ".$nameOfBDDTarget.".fta_composant,".$nameOfBDDTarget.".fta "
+                        ." WHERE fta_composant.id_fta=fta.id_fta "
+);
+if ($arrayFtaComposantColis) {
+    while ($rowsFtaComposantColis= mysql_fetch_array($arrayFtaComposantColis)) {
+        $idFtaComposant = $rowsFtaComposantColis['id_fta_composant'];
+        $quantite_fta_composition = $rowsFtaComposantColis['quantite_fta_composition'];
+        $PCB = $rowsFtaComposantColis['NB_UNIT_ELEM'];
+        $quantite_fta_composition_uvc= $quantite_fta_composition*$PCB;
+        $sql_inter = "UPDATE ".$nameOfBDDTarget."." . 'fta_composant'
+                . " SET " . 'quantite_fta_composition_uvc' . "=$quantite_fta_composition_uvc " 
+                . " WHERE " .'id_fta_composant' . "=" . $idFtaComposant;
+       echo "UPDATE ".$nameOfBDDTarget."." . "fta_composant." . 'quantite_fta_composition_uvc' . "=" . "$quantite_fta_composition_uvc" . " id_fta_composant" . "=" . $idFtaComposant." ...";
+       if(mysql_query($sql_inter)) {	echo "[OK]\n";}else{echo "[FAILED] $idFtaComposant \n";}
+    }
+}
+/**
+ * Rennomage du champs
+ */
+ $sql = ("ALTER TABLE `fta_composant` CHANGE `quantite_fta_composition` `OLD_quantite_fta_composition` INT(11) NULL DEFAULT '1'");
+    if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+    
+    
 /**
  * Extraction  annexe emballage
  */
@@ -5449,6 +5532,13 @@ echo "INSERT INTO ".$nameOfBDDTarget.".annexe_emballage_groupe ...";
 $sql = "INSERT INTO ".$nameOfBDDTarget.".annexe_emballage_groupe SELECT * FROM ".$nameOfBDDOrigin.".annexe_emballage_groupe;";
 if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
 
+echo "INSERT INTO ".$nameOfBDDTarget.".annexe_emballage_groupe Emballage supprimé ...";
+$sql = "INSERT INTO `".$nameOfBDDTarget."`.`annexe_emballage` "
+        . "(`id_annexe_emballage_groupe`, `nom_annexe_emballage_groupe`"
+        . ", `id_annexe_emballage_groupe_configuration`, `poids_variable_fta_emballage_groupe`) "
+        . "VALUES ('-1', 'Emballage supprimé',NULL,NULL); ";       
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+
 echo "DROP ".$nameOfBDDTarget.".annexe_emballage ...";
 $sql = "DROP TABLE ".$nameOfBDDTarget.".annexe_emballage";
 if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
@@ -5464,7 +5554,39 @@ $sql = "INSERT INTO ".$nameOfBDDTarget.".annexe_emballage SELECT ".$nameOfBDDOri
 if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
 
 
+echo "INSERT INTO ".$nameOfBDDTarget.".annexe_emballage Emballage supprimé ...";
+$sql = "INSERT INTO `".$nameOfBDDTarget."`.`annexe_emballage` "
+        . "(`id_annexe_emballage`, `id_fte_fournisseur`,`reference_fournisseur_annexe_emballage`) "
+        . "VALUES ('-1','-1','Emballage supprimé'); ";       
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
 
+
+
+/**
+ * Seconde partie composition
+ */
+$arrayFtaConditionnement = mysql_query(
+                "SELECT DISTINCT id_fta_conditionnement
+FROM ".$nameOfBDDTarget."fta_conditionnement
+WHERE fta_conditionnement.id_annexe_emballage NOT 
+IN (
+
+SELECT annexe_emballage.id_annexe_emballage
+FROM ".$nameOfBDDTarget."fta_conditionnement, ".$nameOfBDDTarget."annexe_emballage
+WHERE annexe_emballage.id_annexe_emballage = fta_conditionnement.id_annexe_emballage
+)");
+if ($arrayFtaConditionnement) {
+    while ($rowsFtaConditionnement= mysql_fetch_array($arrayFtaConditionnement)) {
+        $id_fta_conditionnement = $rowsFtaConditionnement['id_fta_conditionnement'];
+
+
+        $sql_inter = "UPDATE ".$nameOfBDDTarget."." . 'fta_conditionnement'
+                . " SET " . 'id_annexe_emballage' . "=-1" 
+                . " WHERE " .'id_fta_conditionnement' . "=" . $id_fta_conditionnement;
+       echo "UPDATE ".$nameOfBDDTarget."." . "fta_conditionnement." . 'id_annexe_emballage' . "=-1 id_fta_conditionnement" . "=" . $id_fta_conditionnement." ...";
+       if(mysql_query($sql_inter)) {	echo "[OK]\n";}else{echo "[FAILED] $idFtaComposant \n";}
+    }
+}
 /**
  * Extrationc fta_conditionnement 
  */

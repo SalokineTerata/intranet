@@ -23,12 +23,16 @@ class IntranetActionsModel extends AbstractModel {
         parent::__construct($paramId, $paramIsCreateRecordsetInDatabaseIfKeyDoesntExist);
     }
 
+    protected function setDefaultValues() {
+        
+    }
+
     /*
      * Nous obtenons les id intranet actions selon son identifiant parents
      *  dont l'ulisateur est le propiétaire .
      */
 
-    public static function getIdIntranetActionsFromIdParentAction($paramIdParent, $paramChapitre, $paramFtaWorkflow) {
+    public static function getIdIntranetActionsFromIdParentAction($paramIdParent, $paramChapitre, $paramFtaWorkflow, $paramIdFtaRole) {
         $globalConfig = new GlobalConfig();
         UserModel::ConnexionFalse($globalConfig);
 
@@ -55,6 +59,8 @@ class IntranetActionsModel extends AbstractModel {
                                 . '.' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_WORKFLOW . '=' . $paramFtaWorkflow
                                 . ' AND ' . FtaWorkflowStructureModel::TABLENAME . '.' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_ROLE
                                 . '=' . FtaActionRoleModel::TABLENAME . '.' . FtaActionRoleModel::FIELDNAME_ID_FTA_ROLE
+                                . ' AND ' . FtaActionRoleModel::TABLENAME . '.' . FtaActionRoleModel::FIELDNAME_ID_FTA_ROLE
+                                . '=' . $paramIdFtaRole
                                 . ' AND ' . FtaWorkflowStructureModel::TABLENAME . '.' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_WORKFLOW
                                 . '=' . FtaActionRoleModel::TABLENAME . '.' . FtaActionRoleModel::FIELDNAME_ID_FTA_WROKFLOW
                                 . ' AND ' . IntranetActionsModel::TABLENAME . '.' . IntranetActionsModel::KEYNAME
@@ -207,6 +213,29 @@ class IntranetActionsModel extends AbstractModel {
         }
 
         return $arrayFull;
+    }
+
+    /**
+     * On verifie si selon le workflow  et site de production en cours l'utilisateur connecté à les droits d'accès.
+     * @param int $paramIdUser
+     * @param int $paramIdFtaWorkflow
+     * @param array $paramIdIntranetActionSiteDeProduction
+     * @return array
+     */
+    public static function getIdFtaWorkflowAndSiteDeProduction($paramIdUser, $paramIdFtaWorkflow, $paramIdIntranetActionSiteDeProduction) {
+        $array = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
+                        'SELECT ' . IntranetActionsModel::TABLENAME . '.' . IntranetActionsModel::KEYNAME
+                        . ' FROM ' . IntranetActionsModel::TABLENAME . ',' . FtaWorkflowModel::TABLENAME . ',' . IntranetDroitsAccesModel::TABLENAME
+                        . ' WHERE ' . IntranetActionsModel::TABLENAME . '.' . IntranetActionsModel::KEYNAME
+                        . '=' . IntranetDroitsAccesModel::TABLENAME . '.' . IntranetDroitsAccesModel::FIELDNAME_ID_INTRANET_ACTIONS
+                        . ' AND ' . IntranetDroitsAccesModel::FIELDNAME_ID_USER . '=' . $paramIdUser // L'utilisateur connecté
+                        . ' AND ' . IntranetDroitsAccesModel::TABLENAME . '.' . IntranetDroitsAccesModel::FIELDNAME_NIVEAU_INTRANET_DROITS_ACCES . '=1 '
+                        . ' AND ' . IntranetActionsModel::TABLENAME . '.' . IntranetActionsModel::FIELDNAME_PARENT_INTRANET_ACTIONS
+                        . '=' . FtaWorkflowModel::TABLENAME . '.' . FtaWorkflowModel::FIELDNAME_ID_INTRANET_ACTIONS
+                        . ' AND ' . FtaWorkflowModel::TABLENAME . '.' . FtaWorkflowModel::KEYNAME . '=' . $paramIdFtaWorkflow // L'utilisateur connecté
+                        . ' AND ( 0 ' . IntranetActionsModel::AddIdIntranetAction($paramIdIntranetActionSiteDeProduction) . ')'
+        );
+        return $array;
     }
 
 }

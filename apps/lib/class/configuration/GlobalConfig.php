@@ -37,6 +37,12 @@ class GlobalConfig {
     const APPS_LOG_HISTORY_FILE_MAIL = 'mail';
 
     /**
+     * Temps en début de script
+     * @var mixed
+     */
+    static private $execDebugTimeStart = NULL;
+
+    /**
      * @var EnvironmentConf
      */
     private $conf = NULL;
@@ -235,13 +241,6 @@ class GlobalConfig {
         //Initialisation de la configuration
         $this->setConf($envToInit->getConf());
 
-        /**
-         * A chaque ouverture de script et si le paramètre de debug est activé,
-         * Chronométrage du temps d'exécution du script.
-         */
-        if ($this->getConf()->getExecDebugEnable()) {
-            $_SESSION[GlobalConfig::VARNAME_EXEC_DEBUG_TIME_START] = microtime(true);
-        }
 
         //Sauvegarde de la configuration dans la session:
         $this->setConfIsInitializedToTrue();
@@ -354,6 +353,16 @@ class GlobalConfig {
         $this->conf = $conf;
     }
 
+    static function getExecDebugTimeStart() {
+        return self::$execDebugTimeStart;
+    }
+
+    static function setExecDebugTimeStart() {
+        self::$execDebugTimeStart = microtime(true);
+    }
+
+//    static public function setExecDebugTimeStart() {
+//    }
 //Constantes
 //    const ENV_COD = 'developpeur';
 //    const ENV_DEV = 'developpement';

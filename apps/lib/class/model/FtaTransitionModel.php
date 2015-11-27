@@ -8,6 +8,10 @@ class FtaTransitionModel {
     const FIELDNAME_NOM_USUEL_FTA_TRANSITION = "nom_usuel_fta_transition";
     const FIELDNAME_PROCESSUS_PROPRIETAIRE_FTA_TRANSITION = "processus_proprietaire_fta_transition";
 
+    protected function setDefaultValues() {
+        
+    }
+
     /**
      * Fonction transitant une fiche vers un etat donné
      * @param type $paramIdFta
@@ -39,7 +43,7 @@ class FtaTransitionModel {
         $ftaEtatModel = new FtaEtatModel($idFtaEtatByIdFta);
         $initial_abreviation_fta_etat = $ftaEtatModel->getDataField(FtaEtatModel::FIELDNAME_ABREVIATION)->getFieldValue();
         $globalConfig = new GlobalConfig();
-                              UserModel::ConnexionFalse($globalConfig);
+        UserModel::ConnexionFalse($globalConfig);
 
         $idUser = $globalConfig->getAuthenticatedUser()->getKeyValue();
         $userModel = new UserModel($idUser);
@@ -119,6 +123,26 @@ class FtaTransitionModel {
                     exit;
                 }
 
+                /**
+                 * Transition d'une Fta Archivé vers Modifier doit être la dernier version du dossier
+                 * afin d'éviter les doublons
+                 */
+                if ($initial_abreviation_fta_etat == FtaEtatModel::ETAT_ABREVIATION_VALUE_ARCHIVE or $initial_abreviation_fta_etat == FtaEtatModel::ETAT_ABREVIATION_VALUE_VALIDE) {
+                    /**
+                     * On récupère la dernière version du dossier
+                     */
+                    $arrayIdDossierVersion = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
+                                    "SELECT MAX(" . FtaModel::FIELDNAME_VERSION_DOSSIER_FTA
+                                    . ")  FROM " . FtaModel::TABLENAME
+                                    . " WHERE " . FtaModel::FIELDNAME_DOSSIER_FTA . "=" . $idDossierFta
+                    );
+                    foreach ($arrayIdDossierVersion as $rowsIdDossierVersion) {
+                        $IdDossierVersion = $rowsIdDossierVersion['MAX(' . FtaModel::FIELDNAME_VERSION_DOSSIER_FTA . ')'];
+                    }
+                } else {
+                    $IdDossierVersion = "";
+                }
+
                 //Dans le cas d'une mise à jour, récupération des Chapitres à corriger.
 
                 $liste_chapitre_maj_fta = ";";
@@ -148,6 +172,7 @@ class FtaTransitionModel {
                 $option_duplication["selection_chapitre"] = $paramListeChapitres;
                 $option_duplication["nouveau_maj_fta"] = $nouveau_maj_fta;
                 $option_duplication["site_de_production"] = $siteDeProduction;
+                $option_duplication["id_version_dossier_fta"] = $IdDossierVersion;
                 $idFtaNew = FtaModel::BuildDuplicationFta($id_fta_original, $action_duplication, $option_duplication, $paramIdWorkflow);
                 $ftaModel = new FtaModel($idFtaNew);
                 $codeArticleLdc = $ftaModel->getDataField(FtaModel::FIELDNAME_CODE_ARTICLE_LDC)->getFieldValue();
@@ -308,7 +333,7 @@ class FtaTransitionModel {
                             ' SELECT ' . FtaActionSiteModel::TABLENAME . '.' . FtaActionSiteModel::FIELDNAME_ID_INTRANET_ACTIONS
                             . ' FROM ' . FtaActionSiteModel::TABLENAME
                             . ' WHERE ' . FtaActionSiteModel::FIELDNAME_ID_SITE . '=' . $rowsFta[FtaModel::FIELDNAME_SITE_ASSEMBLAGE]
-                            . ' AND ' . FtaActionSiteModel::FIELDNAME_ID_FTA_WROKFLOW . ' =' . $rowsFta[FtaModel::FIELDNAME_WORKFLOW]
+                            . ' AND ' . FtaActionSiteModel::FIELDNAME_ID_FTA_WORKFLOW . ' =' . $rowsFta[FtaModel::FIELDNAME_WORKFLOW]
             );
 
             if ($arrayIdIntranetActions) {

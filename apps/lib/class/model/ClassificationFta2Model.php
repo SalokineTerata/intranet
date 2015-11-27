@@ -28,6 +28,10 @@ class ClassificationFta2Model extends AbstractModel {
     protected static $idReseau;
     protected static $idSaisonnalite;
 
+    protected function setDefaultValues() {
+        
+    }
+
     public static function initClassification($paramProprietaireGroupe, $paramProprietaireEnseigne, $paramMarque
     , $paramActivite, $paramRayon, $paramEnvironnement, $paramReseau, $paramSaisonnalite) {
         self::$idProprietaireGroupe = $paramProprietaireGroupe;

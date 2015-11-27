@@ -16,6 +16,10 @@ class EnvironmentInit extends EnvironmentAbstract {
     const APPLICATION_HTML_MESSAGE_END = '</marquee></FONT></CENTER>';
     const APPLICATION_LOGO = "APPLICATION_LOGO";
     const APPLICATION_NAME = "APPLICATION_NAME";
+    const CSS_BACKGROUND_VALUE = "CSS_BACKGROUND_VALUE";
+    const CSS_CONTENT_VALUE = "CSS_CONTENT_VALUE";
+    const CSS_FTA = "CSS_FTA";
+    const CSS_TITLE_VALUE = "CSS_TITLE_VALUE";
     const EXECUTION_ENVIRONMENT_NAME = "EXECUTION_ENVIRONMENT_NAME";
     const EXECUTION_TIME_LIMIT = "EXECUTION_TIME_LIMIT";
     const IS_DEBUG_EXEC_ENVIRONMENT_ENABLED = "IS_DEBUG_EXEC_ENVIRONMENT_ENABLED";
@@ -37,6 +41,7 @@ class EnvironmentInit extends EnvironmentAbstract {
     const URL_PROTOCOL = "URL_PROTOCOL";
     const URL_ROOT_DIR = "URL_ROOT_DIR";
     const URL_SERVER_NAME = "URL_SERVER_NAME";
+    const REVERSE_PROXY_NAME = "REVERSE_PROXY_NAME";
     const URL_SUBDIR = "URL_SUBDIR";
 
     function __construct($paramEnvName, $paramInit) {
@@ -54,12 +59,17 @@ class EnvironmentInit extends EnvironmentAbstract {
          */
         $this->getConf()->setUrlProtocol($paramInit[self::URL_PROTOCOL][$paramEnvName]);
         $this->getConf()->setUrlServer(filter_input(INPUT_SERVER, 'SERVER_NAME'));
+        $this->getConf()->setReverseProxyName(filter_input(INPUT_SERVER, 'REVERSE_PROXY_NAME'));
         $this->getConf()->setUrlRootDir($paramInit[self::URL_ROOT_DIR][$paramEnvName]);
         $this->getConf()->setUrlSubdir($paramInit[self::URL_SUBDIR][$paramEnvName]);
 
         /**
          * Partie 3 :
          */
+        $this->getConf()->setCssBackgroundValue($paramInit[self::CSS_BACKGROUND_VALUE][$paramEnvName]);
+        $this->getConf()->setCssContentValue($paramInit[self::CSS_CONTENT_VALUE][$paramEnvName]);
+        $this->getConf()->setCssFta($paramInit[self::CSS_FTA][$paramEnvName]);
+        $this->getConf()->setCssTitleValue($paramInit[self::CSS_TITLE_VALUE][$paramEnvName]);
         $this->getConf()->setApplicationVersion($paramInit[self::SITE_VERSION][$paramEnvName]);
         $this->getConf()->setApplicationName($paramInit[self::APPLICATION_NAME][$paramEnvName]);
         $this->getConf()->setApplicationTitle($paramInit[self::SITE_TITLE][$paramEnvName]);

@@ -7,7 +7,7 @@
  */
 class AccueilFta {
 
-    protected static $abrevationFtaEtat;
+    protected static $abreviationFtaEtat;
     protected static $arrayFtaEtat;
     protected static $arrayFtaRole;
     protected static $arrayFtaWorkflow;
@@ -30,15 +30,15 @@ class AccueilFta {
      * Initialisation des données de la page d'accueil
      * @param type $id_user
      * @param type $idFtaEtat
-     * @param type $abrevationFtaEtat
+     * @param type $abreviationFtaEtat
      * @param type $syntheseAction
      * @param type $IdFtaRole
      * @param type $OrderBy
      */
-    public static function initAccueil($id_user, $idFtaEtat, $abrevationFtaEtat, $syntheseAction, $IdFtaRole, $OrderBy, $debut, $numeroDePageCourante) {
+    public static function initAccueil($id_user, $idFtaEtat, $abreviationFtaEtat, $syntheseAction, $IdFtaRole, $OrderBy, $debut, $numeroDePageCourante) {
 
         self::$idUser = $id_user;
-        self::$abrevationFtaEtat = $abrevationFtaEtat;
+        self::$abreviationFtaEtat = $abreviationFtaEtat;
         self::$syntheseAction = $syntheseAction;
         self::$idFtaRole = $IdFtaRole;
         self::$idFtaEtat = $idFtaEtat;
@@ -75,7 +75,7 @@ class AccueilFta {
          * $arrayIdFtaAndIdWorkflow[1] sont les id_fta
          * $arrayIdFtaAndIdWorkflow[2] sont les nom des workflows correspondant aux  id_fta
          */
-        self::$arrayIdFtaAndIdWorkflow = FtaEtatModel::getIdFtaByEtatAvancement(self::$syntheseAction, self::$abrevationFtaEtat, self::$idFtaRole, self::$idUser, self::$idFtaEtat);
+        self::$arrayIdFtaAndIdWorkflow = FtaEtatModel::getIdFtaByEtatAvancement(self::$syntheseAction, self::$abreviationFtaEtat, self::$idFtaRole, self::$idUser, self::$idFtaEtat);
 
         self::$arrayIdFtaByUserAndWorkflow = UserModel::getIdFtaByUserAndWorkflow(self::$arrayIdFtaAndIdWorkflow, self::$orderBy, $debut);
 
@@ -86,7 +86,7 @@ class AccueilFta {
 
     public static function getTableauSythese() {
 
-        $tableau_synthese = AccueilFta::getHtmlTableauSythese(self::$arrayFtaRole, self::$arrayFtaEtat, self::$abrevationFtaEtat, self::$idFtaRole, self::$syntheseAction);
+        $tableau_synthese = AccueilFta::getHtmlTableauSythese(self::$arrayFtaRole, self::$arrayFtaEtat, self::$abreviationFtaEtat, self::$idFtaRole, self::$syntheseAction);
         $tableau_syntheseWorkflow = AccueilFta::getHtmlTableauSytheseWorkflow(self::$arrayIdFtaByUserAndWorkflow['3'], self::$arraNameSiteByWorkflow);
         $tableau_synthese.=$tableau_syntheseWorkflow;
         return $tableau_synthese;
@@ -120,7 +120,7 @@ class AccueilFta {
         if ($premiere && $numero_page_courante - $avant > 1) {
             $resultat .= '<a href="' . htmlspecialchars($_SERVER['PHP_SELF']) . '?numeroPage=1'
                     . '&id_fta_etat=' . self::$idFtaEtat
-                    . '&nom_fta_etat=' . self::$abrevationFtaEtat
+                    . '&nom_fta_etat=' . self::$abreviationFtaEtat
                     . '&id_fta_role=' . self::$idFtaRole
                     . '&synthese_action=' . self::$syntheseAction
                     . '&order_common=' . self::$orderBy
@@ -142,7 +142,7 @@ class AccueilFta {
         if ($numero_page_courante > 1) {
             $resultat .= '<a href="' . htmlspecialchars($_SERVER['PHP_SELF']) . '?numeroPage=' . ($numero_page_courante - 1)
                     . '&id_fta_etat=' . self::$idFtaEtat
-                    . '&nom_fta_etat=' . self::$abrevationFtaEtat
+                    . '&nom_fta_etat=' . self::$abreviationFtaEtat
                     . '&id_fta_role=' . self::$idFtaRole
                     . '&synthese_action=' . self::$syntheseAction
                     . '&order_common=' . self::$orderBy
@@ -167,7 +167,7 @@ class AccueilFta {
             } else {
                 $resultat .= '&nbsp;[<a href="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES) . '?numeroPage=' . $i
                         . '&id_fta_etat=' . self::$idFtaEtat
-                        . '&nom_fta_etat=' . self::$abrevationFtaEtat
+                        . '&nom_fta_etat=' . self::$abreviationFtaEtat
                         . '&id_fta_role=' . self::$idFtaRole
                         . '&synthese_action=' . self::$syntheseAction
                         . '&order_common=' . self::$orderBy
@@ -188,7 +188,7 @@ class AccueilFta {
 // page suivante
         if ($numero_page_courante < $nb_pages) {
             $resultat .= '<a href="' . htmlspecialchars($_SERVER['PHP_SELF']) . '?numeroPage=' . ($numero_page_courante + 1) . '&id_fta_etat=' . self::$idFtaEtat
-                    . '&nom_fta_etat=' . self::$abrevationFtaEtat
+                    . '&nom_fta_etat=' . self::$abreviationFtaEtat
                     . '&id_fta_role=' . self::$idFtaRole
                     . '&synthese_action=' . self::$syntheseAction
                     . '&order_common=' . self::$orderBy
@@ -209,7 +209,7 @@ class AccueilFta {
         if ($derniere && ($numero_page_courante + $apres) < $nb_pages) {
             $resultat .= '<a href="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES) . '?numeroPage=' . $nb_pages
                     . '&id_fta_etat=' . self::$idFtaEtat
-                    . '&nom_fta_etat=' . self::$abrevationFtaEtat
+                    . '&nom_fta_etat=' . self::$abreviationFtaEtat
                     . '&id_fta_role=' . self::$idFtaRole
                     . '&synthese_action=' . self::$syntheseAction
                     . '&order_common=' . self::$orderBy
@@ -496,18 +496,32 @@ class AccueilFta {
     $paramArrayRole, $paramArrayEtat, $idFtaRole, $nomFtaEtat, $paramSyntheseAction, $lien, $idFieldNomFtaRole, $idKeyNameFtaEtat, $idKeyValueFtaEtatAvancement
     ) {
         $color = '';
-        $color1 = '';
+//        $color1 = '';
         $color2 = '';
-
+        $globalConfig = new GlobalConfig();
 
         if ($paramArrayRole[$idFieldNomFtaRole][FtaRoleModel::KEYNAME] == $idFtaRole) {
+            /**
+             * couleurV2 test violet
+             */
 //            $color = 'bgcolor=#AAAAFF';
-            $color = 'bgcolor=#009dd1';
+            /**
+             * couleurV3 test bleu
+             */
+//            $color = 'bgcolor=#009dd1';
+            $color = 'bgcolor=' . $globalConfig->getConf()->getCssBackgroundValue();
         }
 
         if ($paramArrayEtat[$idKeyNameFtaEtat][FtaEtatModel::FIELDNAME_ABREVIATION] == $nomFtaEtat) {
+            /**
+             * couleurV2 test violet
+             */
 //            $color1 = 'bgcolor=#AAAAFF';
-            $color1 = 'bgcolor=#009dd1';
+            /**
+             * couleurV3 test bleu
+             */
+//            $color1 = 'bgcolor=#009dd1';
+            $color1 = 'bgcolor=' . $globalConfig->getConf()->getCssBackgroundValue();
         }
 
 
@@ -528,8 +542,15 @@ class AccueilFta {
                 break;
         }
         if ($paramSyntheseAction == $ligneEtatAvancement) {
+            /**
+             * couleurV2 test violet
+             */
 //            $color2 = 'bgcolor=#AAAAFF';
-            $color2 = 'bgcolor=#009dd1';
+            /**
+             * couleurV3 test bleu
+             */
+//            $color2 = 'bgcolor=#009dd1';
+            $color2 = 'bgcolor=' . $globalConfig->getConf()->getCssBackgroundValue();
         }
 
 
@@ -728,9 +749,9 @@ class AccueilFta {
                 $idclassification = $rowsDetail[FtaModel::FIELDNAME_ID_FTA_CLASSIFICATION2];
                 $recap[$idFta] = $rowsDetail[FtaModel::FIELDNAME_POURCENTAGE_AVANCEMENT];
                 $listeIdFtaRole = $rowsDetail[FtaModel::FIELDNAME_LISTE_ID_FTA_ROLE];
-                
-                if ($recap[$idFta] == NULL){
-                    $recap[$idFta]="";
+
+                if ($recap[$idFta] == NULL) {
+                    $recap[$idFta] = "";
                 }
 
 
@@ -748,7 +769,7 @@ class AccueilFta {
                 $din = null;
 
                 /*
-                 * Initialisation des valeurs pour un 
+                 * Initialisation des valeurs pour un commentaire
                  */
                 $ftaModel = new FtaModel($idFta);
                 $commentaireDataField = $ftaModel->getDataField(FtaModel::FIELDNAME_COMMENTAIRE);
@@ -783,7 +804,7 @@ class AccueilFta {
                 $lienHistorique = ' <a href=historique-' . $idFta
                         . '-1'
                         . '-' . self::$idFtaEtat
-                        . '-' . self::$abrevationFtaEtat
+                        . '-' . self::$abreviationFtaEtat
                         . '-' . self::$idFtaRole
                         . '-' . self::$syntheseAction
                         . '-1'
@@ -836,18 +857,20 @@ class AccueilFta {
 //$return['HTML_synthese']
 //    Contient le code source HTML utilisé pour la fonction visualiser_fiches()
 //echo $HTML_date_echeance_fta['status'];
-                switch ($HTML_date_echeance_fta['status']) {
-                    case '1':
-                        $bgcolor_header = $bgcolor;
-                        $icon_header = '<img src=../lib/images/exclamation.png title=\'Certaines échéances sont dépassées !\' width=30 height=27 border=0 />';
-                        break;
-                    case '2':
-                        $bgcolor_header = 'class=couleur_rouge';
-                        $icon_header = '<img src=../lib/images/exclamation.png title=\'L\'échéance de la Fta est dépassées !\' width=30 height=27 border=0 />';
-                        break;
-                    default:
+                if (self::$abreviationFtaEtat == FtaEtatModel::ETAT_ABREVIATION_VALUE_MODIFICATION) {
+                    switch ($HTML_date_echeance_fta['status']) {
+                        case '1':
+                            $bgcolor_header = $bgcolor;
+                            $icon_header = '<img src=../lib/images/exclamation.png title=\'Certaines échéances sont dépassées !\' width=30 height=27 border=0 />';
+                            break;
+                        case '2':
+                            $bgcolor_header = 'class=couleur_rouge';
+                            $icon_header = '<img src=../lib/images/exclamation.png title=\'L\'échéance de la Fta est dépassées !\' width=30 height=27 border=0 />';
+                            break;
+                        default:
 //$bgcolor_header = $bgcolor;
-                        $icon_header = '';
+                            $icon_header = '';
+                    }
                 }
 
                 /*
@@ -859,7 +882,7 @@ class AccueilFta {
 
                 if (
                         (self::$ftaModification)
-                        or ( self::$ftaConsultation and self::$abrevationFtaEtat == FtaEtatModel::ETAT_ABREVIATION_VALUE_VALIDE )
+                        or ( self::$ftaConsultation and self::$abreviationFtaEtat == FtaEtatModel::ETAT_ABREVIATION_VALUE_VALIDE )
                 ) {
 
                     $actions = '<a '
@@ -869,7 +892,7 @@ class AccueilFta {
                             . '&synthese_action=' . self::$syntheseAction
                             . '&comeback=1'
                             . '&id_fta_etat=' . self::$idFtaEtat
-                            . '&abreviation_fta_etat=' . self::$abrevationFtaEtat
+                            . '&abreviation_fta_etat=' . self::$abreviationFtaEtat
                             . '&id_fta_role=' . self::$idFtaRole
                             . ' /><img src=../lib/images/next.png alt=\'\' title=\'Voir la FTA\' width=\'30\' height=\'25\' border=\'0\' />'
                             . '</a>'
@@ -943,7 +966,7 @@ class AccueilFta {
                  */
                 if (
                         ((self::$idFtaRole == '1' or self::$idFtaRole == '6' ) and $recap[$idFta] == '100%' )
-                        and self::$ftaModification and ( self::$abrevationFtaEtat == FtaEtatModel::ETAT_ABREVIATION_VALUE_MODIFICATION)
+                        and self::$ftaModification and ( self::$abreviationFtaEtat == FtaEtatModel::ETAT_ABREVIATION_VALUE_MODIFICATION)
                         or ( $ok == '2' and $accesTransitionButton == FALSE && $recap[$idFta] == '100%')
                         or ( self::$syntheseAction == FtaEtatModel::ETAT_AVANCEMENT_VALUE_ALL AND ( self::$idFtaRole == '1' or self::$idFtaRole == '6' ))
                         or ( (self::$idFtaRole == '1' or self::$idFtaRole == '6' ) and self::$syntheseAction == FtaEtatModel::ETAT_AVANCEMENT_VALUE_EFFECTUES)
@@ -1181,7 +1204,7 @@ class AccueilFta {
                                 } else {
                                     $tableauFicheTmp.='<td ' . $bgcolor . $largeur_html_C3 . ' ></td>';
                                 }
-                                $tableauFicheTmp .= '<td ' . $bgcolor . ' width=5% align=center>' . $lienHistorique. '</td>'//% Avancement FTA
+                                $tableauFicheTmp .= '<td ' . $bgcolor . ' width=5% align=center>' . $lienHistorique . '</td>'//% Avancement FTA
                                         . '<td ' . $bgcolor . $largeur_html_C3 . ' align=center >' . $service . '</td>' //Service               
                                         . '<td ' . $bgcolor . $largeur_html_C3_action . ' align=center >' . $actions . '</td>'// Actions
                                         . $commentaire . '</tr >'; // Commentaires
@@ -1276,7 +1299,7 @@ class AccueilFta {
 
         //Ajoute de la fonction de traitement de masse
         if ($traitementDeMasse) {
-            $liste_action_groupe = FtaTransitionModel::getListeFtaGrouper(self::$abrevationFtaEtat);
+            $liste_action_groupe = FtaTransitionModel::getListeFtaGrouper(self::$abreviationFtaEtat);
 
             $tableauFiche.= '&nbsp;
             <img src = ../lib/images/fleche_gauche_et_haut.png width = 38 height = 22 border = 0 />

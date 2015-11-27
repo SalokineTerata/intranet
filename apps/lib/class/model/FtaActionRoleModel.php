@@ -18,17 +18,31 @@ class FtaActionRoleModel extends AbstractModel {
         parent::__construct($paramId, $paramIsCreateRecordsetInDatabaseIfKeyDoesntExist);
     }
 
+    protected function setDefaultValues() {
+        
+    }
+
+    /**
+     * 
+     * @param int $paramIdIntranetActions
+     * @return array
+     */
     public static function getIdFtaActionRoleFromIdIntranetAtions($paramIdIntranetActions) {
-        foreach ($paramIdIntranetActions as $rowsIdIntranetActions) {
-            $arrayIdFtaActionRole = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
-                            'SELECT ' . FtaActionRoleModel::KEYNAME
-                            . ' FROM  ' . FtaActionRoleModel::TABLENAME
-                            . ' WHERE ' . FtaActionRoleModel::FIELDNAME_ID_INTRANET_ACTIONS . '=' . $rowsIdIntranetActions 
-            );
-        }
-        if ($arrayIdFtaActionRole) {
-            foreach ($arrayIdFtaActionRole as $value) {
-                return $value[FtaActionRoleModel::KEYNAME];
+        if ($paramIdIntranetActions) {
+            foreach ($paramIdIntranetActions as $rowsIdIntranetActions) {
+                if ($rowsIdIntranetActions) {
+                    $arrayIdFtaActionRole = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
+                                    'SELECT ' . FtaActionRoleModel::KEYNAME
+                                    . ' FROM  ' . FtaActionRoleModel::TABLENAME
+                                    . ' WHERE ' . FtaActionRoleModel::FIELDNAME_ID_INTRANET_ACTIONS . '=' . $rowsIdIntranetActions
+                    );
+                }
+            }
+            if ($arrayIdFtaActionRole) {
+                foreach ($arrayIdFtaActionRole as $value) {
+                    $result = $value[FtaActionRoleModel::KEYNAME];
+                }
+                return $result;
             }
         }
     }

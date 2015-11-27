@@ -30,7 +30,7 @@ $abreviationFtaEtat = Lib::getParameterFromRequest(FtaEtatModel::FIELDNAME_ABREV
 $comeback = Lib::getParameterFromRequest('comeback');
 $synthese_action = Lib::getParameterFromRequest('synthese_action');
 $globalConfig = new GlobalConfig();
-      UserModel::ConnexionFalse($globalConfig);
+UserModel::ConnexionFalse($globalConfig);
 
 $id_user = $globalConfig->getAuthenticatedUser()->getKeyValue();
 $proprietaire = Lib::getParameterFromRequest('proprietaire');
@@ -45,7 +45,7 @@ $ingredient_fta_composition = Lib::getParameterFromRequest(FtaComposantModel::FI
 $ingredient_fta_composition1 = Lib::getParameterFromRequest(FtaComposantModel::FIELDNAME_INGREDIENT_FTA_COMPOSITION1);
 $duree_vie_technique_fta_composition = Lib::getParameterFromRequest(FtaComposantModel::FIELDNAME_DUREE_VIE_TECHNIQUE_FTA_COMPOSITION);
 $poids_fta_composition = Lib::getParameterFromRequest(FtaComposantModel::FIELDNAME_POIDS_FTA_COMPOSITION);
-$quantite_fta_composition = Lib::getParameterFromRequest(FtaComposantModel::FIELDNAME_QUANTITE_FTA_COMPOSITION);
+$quantite_fta_composition = Lib::getParameterFromRequest(FtaComposantModel::FIELDNAME_QUANTITE_FTA_COMPOSITION_UVC);
 $ordre_fta_composition = Lib::getParameterFromRequest(FtaComposantModel::FIELDNAME_ORDRE_FTA_COMPOSITION);
 $val_nut_kcal = Lib::getParameterFromRequest(FtaComposantModel::FIELDNAME_VAL_NUT_KCAL);
 $val_nut_sel = Lib::getParameterFromRequest(FtaComposantModel::FIELDNAME_VAL_SEL);
@@ -72,6 +72,16 @@ $k_codesoft_etiquette_logo = Lib::getParameterFromRequest(FtaComposantModel::FIE
 $etiquette_decomposition_poids_fta_composant = Lib::getParameterFromRequest(FtaComposantModel::FIELDNAME_ETIQUETTE_DECOMPOSITION_POIDS_FTA_COMPOSANT);
 $etiquette_information_complementaire_recto_fta_composant = Lib::getParameterFromRequest(FtaComposantModel::FIELDNAME_ETIQUETTE_INFORMATION_COMPLEMENTAIRE_RECTO_FTA_COMPOSANT);
 $etiquette_libelle_legal_fta_composition = Lib::getParameterFromRequest(FtaComposantModel::FIELDNAME_ETIQUETTE_LIBELLE_LEGAL_FTA_COMPOSITION);
+$_SESSION['checkCreation']="0";
+
+if ($mode_etiquette_fta_composition == 0) {
+    DatabaseOperation::execute(
+            'UPDATE ' . FtaComposantModel::TABLENAME
+            . ' SET ' . FtaComposantModel::FIELDNAME_K_ETIQUETTE_FTA_COMPOSITION . '=' . "-1"
+            . ', ' . FtaComposantModel::FIELDNAME_K_ETIQUETTE_VERSO_FTA_COMPOSITION . '=' . "-1"
+            . ' WHERE ' . FtaComposantModel::KEYNAME . '=' . $id_fta_composant
+    );
+}
 /*
   -----------------
   ACTION A TRAITER

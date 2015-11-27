@@ -126,6 +126,78 @@ class FtaView {
     }
 
     /**
+     * Affichage Html de l'ean article
+     * @return string
+     */
+    public function getHtmlEANArticle() {
+        $id_fta = $this->getModel()->getKeyValue();
+        $eanArticleValue = $this->getModel()->getDataField(FtaModel::FIELDNAME_EAN_UVC)->getFieldValue();
+        $eanArticle = new HtmlInputText();
+        $HtmlTableName = FtaModel::TABLENAME
+                . '_'
+                . FtaModel::FIELDNAME_EAN_UVC
+                . '_'
+                . $id_fta
+        ;
+        $eanArticle->setLabel(DatabaseDescription::getFieldDocLabel(FtaModel::TABLENAME, FtaModel::FIELDNAME_EAN_UVC));
+        $eanArticle->getAttributes()->getValue()->setValue($eanArticleValue);
+        $eanArticle->getAttributes()->getPattern()->setValue("[0-9]{1,13}");
+        $eanArticle->getAttributes()->getMaxLength()->setValue("13");
+        $eanArticle->setIsEditable($this->getIsEditable());
+        $eanArticle->initAbstractHtmlInput($HtmlTableName, $eanArticle->getLabel(), $eanArticleValue, NULL);
+        $eanArticle->getEventsForm()->setOnChangeWithAjaxAutoSave(FtaModel::TABLENAME, FtaModel::KEYNAME, $id_fta, FtaModel::FIELDNAME_EAN_UVC);
+        return $eanArticle->getHtmlResult();
+    }
+
+    /**
+     * Affichage Html de l'ean colis
+     * @return string
+     */
+    public function getHtmlEANColis() {
+        $id_fta = $this->getModel()->getKeyValue();
+        $eanColisValue = $this->getModel()->getDataField(FtaModel::FIELDNAME_EAN_COLIS)->getFieldValue();
+        $eanColis = new HtmlInputText();
+        $HtmlTableName = FtaModel::TABLENAME
+                . '_'
+                . FtaModel::FIELDNAME_EAN_COLIS
+                . '_'
+                . $id_fta
+        ;
+        $eanColis->setLabel(DatabaseDescription::getFieldDocLabel(FtaModel::TABLENAME, FtaModel::FIELDNAME_EAN_COLIS));
+        $eanColis->getAttributes()->getValue()->setValue($eanColisValue);
+        $eanColis->getAttributes()->getPattern()->setValue("[0-9]{1,14}");
+        $eanColis->getAttributes()->getMaxLength()->setValue("14");
+        $eanColis->setIsEditable($this->getIsEditable());
+        $eanColis->initAbstractHtmlInput($HtmlTableName, $eanColis->getLabel(), $eanColisValue, NULL);
+        $eanColis->getEventsForm()->setOnChangeWithAjaxAutoSave(FtaModel::TABLENAME, FtaModel::KEYNAME, $id_fta, FtaModel::FIELDNAME_EAN_COLIS);
+        return $eanColis->getHtmlResult();
+    }
+
+    /**
+     * Affichage Html de l'ean palette
+     * @return string
+     */
+    public function getHtmlEANPalette() {
+        $id_fta = $this->getModel()->getKeyValue();
+        $eanPaletteValue = $this->getModel()->getDataField(FtaModel::FIELDNAME_EAN_PALETTE)->getFieldValue();
+        $eanPalette = new HtmlInputText();
+        $HtmlTableName = FtaModel::TABLENAME
+                . '_'
+                . FtaModel::FIELDNAME_EAN_PALETTE
+                . '_'
+                . $id_fta
+        ;
+        $eanPalette->setLabel(DatabaseDescription::getFieldDocLabel(FtaModel::TABLENAME, FtaModel::FIELDNAME_EAN_PALETTE));
+        $eanPalette->getAttributes()->getValue()->setValue($eanPaletteValue);
+        $eanPalette->getAttributes()->getPattern()->setValue("[0-9]{1,14}");
+        $eanPalette->getAttributes()->getMaxLength()->setValue("14");
+        $eanPalette->setIsEditable($this->getIsEditable());
+        $eanPalette->initAbstractHtmlInput($HtmlTableName, $eanPalette->getLabel(), $eanPaletteValue, NULL);
+        $eanPalette->getEventsForm()->setOnChangeWithAjaxAutoSave(FtaModel::TABLENAME, FtaModel::KEYNAME, $id_fta, FtaModel::FIELDNAME_EAN_PALETTE);
+        return $eanPalette->getHtmlResult();
+    }
+
+    /**
      * 
      * @return type
      */
@@ -781,6 +853,14 @@ class FtaView {
     }
 
     /**
+     * Affiche les commentaires de chaque chapitres pour la Fta concerné
+     * @return string
+     */
+    public function getHtmlCommentaireAllChapitres($paramIdFtaWorkflow) {
+        return FtaSuiviProjetModel::getAllCommentsFromChapitres($this->getModel()->getKeyValue(), $paramIdFtaWorkflow);
+    }
+
+    /**
      * 
      * @return type
      */
@@ -949,7 +1029,7 @@ class FtaView {
      */
     function getHtmlPoidsColisUVC() {
 
-        $return = $this->getModel()->buildArrayEmballageTypeDuColis();
+        $return = $this->getModel()->PoidsDesEmballagesColis();
 
         $htmlPoidColisUVC = new HtmlInputText();
 
@@ -970,8 +1050,8 @@ class FtaView {
 
         $htmlPoidsNetColisUVC = new HtmlInputText();
 
-        $htmlPoidsNetColisUVC->setLabel(DatabaseDescription::getFieldDocLabel(FtaModel::TABLENAME, FtaModel::FIELDNAME_NOMBRE_UVC_PAR_CARTON));
-        $htmlPoidsNetColisUVC->getAttributes()->getValue()->setValue($return["colis_net"]);
+        $htmlPoidsNetColisUVC->setLabel("Poids Net (en Kg):");
+        $htmlPoidsNetColisUVC->getAttributes()->getValue()->setValue(round($return["colis_net"], 2));
         $htmlPoidsNetColisUVC->setIsEditable(FALSE);
 
         return $htmlPoidsNetColisUVC->getHtmlResult();
@@ -987,8 +1067,8 @@ class FtaView {
 
         $htmlPoidsBrutColisUVC = new HtmlInputText();
 
-        $htmlPoidsBrutColisUVC->setLabel(DatabaseDescription::getFieldDocLabel(FtaModel::TABLENAME, FtaModel::FIELDNAME_POIDS_BRUT_UVC));
-        $htmlPoidsBrutColisUVC->getAttributes()->getValue()->setValue($return[FtaConditionnementModel::COLIS_EMBALLAGE_BRUT]);
+        $htmlPoidsBrutColisUVC->setLabel("Poids Brut (en Kg):");
+        $htmlPoidsBrutColisUVC->getAttributes()->getValue()->setValue(round($return[FtaConditionnementModel::COLIS_EMBALLAGE_BRUT], 2));
         $htmlPoidsBrutColisUVC->setIsEditable(FALSE);
 
         return $htmlPoidsBrutColisUVC->getHtmlResult();
@@ -1023,8 +1103,8 @@ class FtaView {
 
         $htmlPoidsNetPalettisationUVC = new HtmlInputText();
 
-        $htmlPoidsNetPalettisationUVC->setLabel(DatabaseDescription::getFieldDocLabel(FtaModel::TABLENAME, FtaModel::FIELDNAME_NOMBRE_UVC_PAR_CARTON));
-        $htmlPoidsNetPalettisationUVC->getAttributes()->getValue()->setValue($return[FtaConditionnementModel::PALETTE_EMBALLAGE_NET]);
+        $htmlPoidsNetPalettisationUVC->setLabel("Poids Net (en Kg):");
+        $htmlPoidsNetPalettisationUVC->getAttributes()->getValue()->setValue(round($return[FtaConditionnementModel::PALETTE_EMBALLAGE_NET], 2));
         $htmlPoidsNetPalettisationUVC->setIsEditable(FALSE);
 
         return $htmlPoidsNetPalettisationUVC->getHtmlResult();
@@ -1040,8 +1120,8 @@ class FtaView {
 
         $htmlPoidsBrutPalettisationUVC = new HtmlInputText();
 
-        $htmlPoidsBrutPalettisationUVC->setLabel(DatabaseDescription::getFieldDocLabel(FtaModel::TABLENAME, FtaModel::FIELDNAME_POIDS_BRUT_UVC));
-        $htmlPoidsBrutPalettisationUVC->getAttributes()->getValue()->setValue($return[FtaConditionnementModel::PALETTE_EMBALLAGE_BRUT]);
+        $htmlPoidsBrutPalettisationUVC->setLabel("Poids Brut (en Kg):");
+        $htmlPoidsBrutPalettisationUVC->getAttributes()->getValue()->setValue(round($return[FtaConditionnementModel::PALETTE_EMBALLAGE_BRUT], 2));
         $htmlPoidsBrutPalettisationUVC->setIsEditable(FALSE);
 
         return $htmlPoidsBrutPalettisationUVC->getHtmlResult();
@@ -1058,7 +1138,7 @@ class FtaView {
         $htmlHauteurPalettisationUVC = new HtmlInputText();
 
         $htmlHauteurPalettisationUVC->setLabel(DatabaseDescription::getFieldDocLabel(FtaConditionnementModel::TABLENAME, FtaConditionnementModel::FIELDNAME_HAUTEUR_FTA_CONDITIONNEMENT));
-        $htmlHauteurPalettisationUVC->getAttributes()->getValue()->setValue($return[FtaConditionnementModel::PALETTE_EMBALLAGE_HAUTEUR]);
+        $htmlHauteurPalettisationUVC->getAttributes()->getValue()->setValue(round($return[FtaConditionnementModel::PALETTE_EMBALLAGE_HAUTEUR], 2));
         $htmlHauteurPalettisationUVC->setIsEditable(FALSE);
 
         return $htmlHauteurPalettisationUVC->getHtmlResult();
@@ -1074,7 +1154,7 @@ class FtaView {
 
         $htmlCouchePalettisationUVC = new HtmlInputText();
 
-        $htmlCouchePalettisationUVC->setLabel(FtaConditionnementModel::PALETTE_EMBALLAGE_HAUTEUR_LABEL);
+        $htmlCouchePalettisationUVC->setLabel(DatabaseDescription::getFieldDocLabel(FtaConditionnementModel::TABLENAME, FtaConditionnementModel::FIELDNAME_NOMBRE_COUCHE_FTA_CONDITIONNEMENT));
         $htmlCouchePalettisationUVC->getAttributes()->getValue()->setValue($return[FtaConditionnementModel::PALETTE_NOMBRE_DE_COUCHE]);
         $htmlCouchePalettisationUVC->setIsEditable(FALSE);
 
@@ -1113,6 +1193,37 @@ class FtaView {
         $htmlTotalColisPalettisationUVC->setIsEditable(FALSE);
 
         return $htmlTotalColisPalettisationUVC->getHtmlResult();
+    }
+
+    function getHtmlColisControle() {
+        /**
+         * Calcul type emballage UVC
+         */
+        $returnUVC = $this->getModel()->buildArrayEmballageTypeUVC();
+        $pcb = $returnUVC[FtaConditionnementModel::UVC_EMBALLAGE_NET];
+        $uvc_net = $returnUVC[FtaModel::FIELDNAME_NOMBRE_UVC_PAR_CARTON];
+
+        /**
+         * Calcul type emballage Colis
+         */
+        $returnCOLIS = $this->getModel()->buildArrayEmballageTypeDuColis();
+        $colisNet = $returnCOLIS["colis_net"];
+        $check1 = strval($colisNet * "1000");
+        $check2 = strval($uvc_net * $pcb);
+        if ($check1 <> $check2) {
+            $html_warning = "ATTENTION, poids net du colis différents de celui défini dans le chapitre \"Indentié\" <img src=../lib/images/exclamation.png width=15 height=15 border=0/><br><br>";
+            $bgcolor = "#FFAA55";
+        } else {
+            $bgcolor = "#AFFF5A";
+            $html_warning = "";
+        }
+
+        $bloc.= "<tr class=contenu><td bgcolor=$bgcolor align=\"center\" valign=\"middle\">";
+        $bloc.="Poids net du colis (en Kg): ";
+        $bloc.="</td><td bgcolor=$bgcolor align=\"center\" valign=\"middle\">"
+                . "<h4><br>$colisNet</h4><br>$html_warning</td></tr>";
+
+        return $bloc;
     }
 
 }

@@ -82,7 +82,7 @@ $comeback = Lib::getParameterFromRequest('comeback');
 $syntheseAction = Lib::getParameterFromRequest('synthese_action');
 $proprietaire = Lib::getParameterFromRequest('proprietaire');
 $globalConfig = new GlobalConfig();
-      UserModel::ConnexionFalse($globalConfig);
+UserModel::ConnexionFalse($globalConfig);
 
 $id_user = $globalConfig->getAuthenticatedUser()->getKeyValue();
 $HtmlList = new HtmlListSelect();
@@ -101,10 +101,16 @@ if ($id_fta_composant) {
     $ftaComposantModel = new FtaComposantModel($id_fta_composant);
     $ftaComposantView = new FtaComposantView($ftaComposantModel);
     $ftaComposantView->setIsEditable($isEditable);
+    $codePSFValue = $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_CODE_PRODUIT_AGROLOGIC_FTA_NOMENCLATURE)->getFieldValue();
 } else {
     $creation = 1;
-    $id_fta_composant = FtaComposantModel::InsertFtaComposant($id_fta);
+    $id_fta_composant = FtaComposantModel::createNewRecordset(
+                    array(FtaComposantModel::FIELDNAME_ID_FTA => $id_fta)
+    );
     $ftaComposantModel = new FtaComposantModel($id_fta_composant);
+    $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_QUANTITE_FTA_COMPOSITION_UVC)->setFieldValue(FtaComposantModel::DEFAULT_VALUE_QTE_UVC);
+    $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_IS_NOMENCLATURE_FTA_COMPOSANT)->setFieldValue("1");
+    $ftaComposantModel->saveToDatabase();
     $ftaComposantView = new FtaComposantView($ftaComposantModel);
     $ftaComposantView->setIsEditable($isEditable);
 }
@@ -124,10 +130,8 @@ $bloc.= "<tr class=titre_principal><td>"
 // Prefixe code PSF
 $bloc .=$ftaComposantView->getHtmlDataField(FtaComposantModel::FIELDNAME_ID_ANNEXE_AGRO_ART_CODIFICATION);
 //$bloc .=FtaComposantModel::ShowListeDeroulantePrefixeForComposant($HtmlList, $isEditable, $id_fta_composant);
-
-
 //Code PSF Arcadia
-$bloc .=$ftaComposantView->getHtmlDataField(FtaComposantModel::FIELDNAME_CODE_PRODUIT_AGROLOGIC_FTA_NOMENCLATURE);
+$bloc .= $ftaComposantView->getHtmlCodePSF();
 
 
 //Désignation Nomenclature

@@ -35,7 +35,7 @@ abstract class AbstractHtmlInput extends AbstractHtmlGlobalElement {
         $this->setAttributes(new AttributesInput());
     }
 
-    protected function initAbstractHtmlInput(
+    public function initAbstractHtmlInput(
     $paramName
     , $paramLabel
     , $paramValue

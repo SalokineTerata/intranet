@@ -23,6 +23,10 @@ class FtaEtatModel extends AbstractModel {
     const ETAT_AVANCEMENT_VALUE_EFFECTUES = 'correction';
     const ETAT_AVANCEMENT_VALUE_EN_COURS = 'encours';
 
+    protected function setDefaultValues() {
+        
+    }
+
     /**
      * Récupération du nom et de l'abrévation de l'état de la fta selon son rôle
      * @param type $paramIdFtaRole
@@ -70,7 +74,7 @@ class FtaEtatModel extends AbstractModel {
         if ($_SESSION['CheckIdFtaRole'] <> $paramRole) {
             AclClass::setRightsAcces($paramIdUser, $paramRole);
         }
-        
+
         switch ($paramSyntheseAction) {
 
             case FtaEtatModel::ETAT_AVANCEMENT_VALUE_ATTENTE:
@@ -164,7 +168,7 @@ class FtaEtatModel extends AbstractModel {
                                 . '=' . FtaWorkflowStructureModel::TABLENAME . '.' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_WORKFLOW
                                 . ' AND ' . FtaWorkflowModel::TABLENAME . '.' . FtaWorkflowModel::KEYNAME
                                 . '=' . FtaWorkflowStructureModel::TABLENAME . '.' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_WORKFLOW
-                                . ' AND ' . FtaActionSiteModel::TABLENAME . '.' . FtaActionSiteModel::FIELDNAME_ID_FTA_WROKFLOW
+                                . ' AND ' . FtaActionSiteModel::TABLENAME . '.' . FtaActionSiteModel::FIELDNAME_ID_FTA_WORKFLOW
                                 . '=' . FtaWorkflowStructureModel::TABLENAME . '.' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_WORKFLOW
                                 . ' AND ' . FtaModel::TABLENAME . '.' . FtaModel::FIELDNAME_WORKFLOW
                                 . '=' . FtaWorkflowStructureModel::TABLENAME . '.' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_WORKFLOW
@@ -272,7 +276,7 @@ class FtaEtatModel extends AbstractModel {
                         $cheackIdFta = in_array($rows[FtaModel::KEYNAME], $idFtaEffectue);
                         if (!$cheackIdFta) {
                             $tauxDeValidadation = FtaProcessusModel::getValideIdFtaByRoleWorkflowProcessus($rows[FtaModel::KEYNAME], $paramRole, $rows[FtaWorkflowStructureModel::FIELDNAME_ID_FTA_WORKFLOW]);
-                            if ($tauxDeValidadation == '1' ) {
+                            if ($tauxDeValidadation == '1') {
                                 $idFtaEffectue[] = $rows[FtaModel::KEYNAME];
 //                                $compteur++;
 //                                if ($compteur == ModuleConfig::VALUE_MAX_PAR_PAGE) {

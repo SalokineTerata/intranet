@@ -17,14 +17,14 @@ class EnvironmentConf {
     const ENV_DEV = 'ENV_DEV';
     const ENV_REC = 'ENV_REC';
     const ENV_PRD = 'ENV_PRD';
-    const SITE_COD = '127.0.0.1';
-    const SITE_DEV = 'dev-intranet.agis.fr';
-    const SITE_REC = 'rec-fta05401.grpldc.com';
-    const SITE_PRD = 'prd-fta05401.grpldc.com';
-    const SITE_TITLE = 'Intranet Groupe LDC';
-    const LDAP_SERVER_NAME = 'ldap05401.grpldc.com';
-    const LDAP_DEBUG = false;
-    const URL_PROTOCOL = 'http';
+//    const SITE_COD = '127.0.0.1';
+//    const SITE_DEV = 'dev-intranet.agis.fr';
+//    const SITE_REC = 'rec-fta05401.grpldc.com';
+//    const SITE_PRD = 'prd-fta05401.grpldc.com';
+//    const SITE_TITLE = 'Intranet Groupe LDC';
+//    const LDAP_SERVER_NAME = 'ldap05401.grpldc.com';
+//    const LDAP_DEBUG = false;
+//    const URL_PROTOCOL = 'http';
     const DOC_APIGEN_DIR = 'doc/apigen';
     const URL_EASYPHP = 'http://127.0.0.1/home';
     const ENVIRONMENT_DONT_EXIST_MESSAGE = 'L\'environnement d\'exécution n\'a pas pu être trouvé. Vérifiez les fichiers conf/Environment*.php';
@@ -59,7 +59,20 @@ class EnvironmentConf {
     private $urlProtocol = null;
     private $urlRoot = null;       //Suivant environnement
     private $urlServer = null;
+    private $reverseProxyName = null;
     private $urlSubdir = null;
+    private $cssBackgroundValue = null;
+    private $cssContentValue = null;
+    private $cssFta = null;
+    private $cssTitleValue = null;
+
+    /**
+     * Lien vers la documentation internet ApiGen du projet Intranet
+     * @return type
+     */
+    function getUrlApiGen() {
+        return $this->getUrlFullRoot() . "/" . self::DOC_APIGEN_DIR;
+    }
 
     /**
      * A-t-on le droit d'utiliser l'ancienne méthode de connexion MySQL ?
@@ -90,11 +103,20 @@ class EnvironmentConf {
     }
 
     public function getUrlFullRoot() {
-        return $this->getUrlProtocol() . '://'
-                . $this->getUrlServer() . '/'
-                . $this->getUrlRoot() . '/'
-                . $this->getUrlSubdir()
-        ;
+        if ($this->getReverseProxyName() == NULL) {
+            $UrlFullRoot = $this->getUrlProtocol() . '://'
+                    . $this->getUrlServer() . '/'
+                    . $this->getUrlRoot() . '/'
+                    . $this->getUrlSubdir()
+            ;
+        } else {
+            $UrlFullRoot = $this->getUrlProtocol() . '://'
+                    . $this->getReverseProxyName() . '/'
+                    . $this->getUrlRoot() . '/'
+                    . $this->getUrlSubdir()
+            ;
+        }
+        return $UrlFullRoot;
     }
 
     public function getUrlProtocol() {
@@ -272,6 +294,46 @@ class EnvironmentConf {
 
     public function setApplicationVersion($applicationVersion) {
         $this->applicationVersion = $applicationVersion;
+    }
+
+    function getReverseProxyName() {
+        return $this->reverseProxyName;
+    }
+
+    function setReverseProxyName($reverseProxyName) {
+        $this->reverseProxyName = $reverseProxyName;
+    }
+
+    function getCssFta() {
+        return $this->cssFta;
+    }
+
+    function setCssFta($cssFta) {
+        $this->cssFta = $cssFta;
+    }
+
+    function getCssBackgroundValue() {
+        return $this->cssBackgroundValue;
+    }
+
+    function getCssContentValue() {
+        return $this->cssContentValue;
+    }
+
+    function getCssTitleValue() {
+        return $this->cssTitleValue;
+    }
+
+    function setCssBackgroundValue($cssBackgroundValue) {
+        $this->cssBackgroundValue = $cssBackgroundValue;
+    }
+
+    function setCssContentValue($cssContentValue) {
+        $this->cssContentValue = $cssContentValue;
+    }
+
+    function setCssTitleValue($cssTitleValue) {
+        $this->cssTitleValue = $cssTitleValue;
     }
 
 }

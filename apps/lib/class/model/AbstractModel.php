@@ -6,7 +6,7 @@
  *
  * @author salokine
  */
-class AbstractModel {
+abstract class AbstractModel implements AbstractModelInterface {
 
     const TABLENAME = 'undefined';
     const KEYNAME = 'undefined';
@@ -19,8 +19,31 @@ class AbstractModel {
     public function __construct($paramId = NULL, $paramIsCreateRecordsetInDatabaseIfKeyDoesntExist = self::DEFAULT_IS_CREATE_RECORDSET_IN_DATABASE_IF_KEY_DOESNT_EXIST) {
 
         $this->setRecord(new DatabaseRecord(static::TABLENAME, $paramId, NULL, NULL, $paramIsCreateRecordsetInDatabaseIfKeyDoesntExist));
-            $this->setKeyValue($this->getRecord()->getKeyValue());
+        $this->setKeyValue($this->getRecord()->getKeyValue());
+
+        /**
+         * Si il s'agit d'un nouvel enregistrement,
+         * alors on charge les valeurs par défaut
+         * définies dans la classe fille.
+         */
+        if ($paramId == NULL) {
+            $this->setDefaultValues();
         }
+    }
+
+    /**
+     * Définition des valeurs par défaut
+     */
+    protected abstract function setDefaultValues();
+
+    /**
+     * Créé et réserve un nouvel enresgitrement dans la table
+     * @return mixed
+     */
+ 
+    public static function createNewRecordset($paramForeignKeysValuesArray = NULL) {
+        
+    }
 
     public static function getClassName() {
         return get_called_class();

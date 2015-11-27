@@ -149,7 +149,8 @@
 
  * ******************************************************************************** */
 function identification1($mysql_table_authentification, $login, $pass, GlobalConfig $globalConfig = null) {
-    $debug = EnvironmentConf::LDAP_DEBUG;
+//    $debug = EnvironmentConf::LDAP_DEBUG;
+    $debug = FALSE;
     $return = TRUE;         //On part du principe que l'authentification doit fonctionner
     $mysql_passwd = "";     //On part du principe que l'authentification MySQL ne sera pas nécessaire.
     if ($globalConfig == null) {
@@ -158,18 +159,21 @@ function identification1($mysql_table_authentification, $login, $pass, GlobalCon
     $ldap_active = $globalConfig->getConf()->getLdapServiceEnable();
     $ldap_server = $globalConfig->getConf()->getLdapServerName();
     $ldap_context = array("Comptes", "ldcseg");  //Liste des contextes LDAP supportés
-    $ldap_result = false;
+    $dn = "uid=" . $login . ",ou=Users,dc=Comptes,dc=com";//association login au domaine
+
 
     //Authentification LDAP
-    if ($debug){
+    if ($debug) {
         echo "ldap_active=$ldap_active<br>";
     }
     if ($ldap_active) {
-        $ldap_connect = ldap_connect($ldap_server);  // doit être un serveur LDAP valide !
+        $ldap_connect = ldap_connect($ldap_server);  // doit être un serveur LDAP valide
+        ini_set('display_errors',FALSE);
+        $ldap_result = ldap_bind($ldap_connect, $dn, $pass);
         $result_LDAP_OPT_PROTOCOL_VERSION = ldap_set_option($ldap_connect, LDAP_OPT_PROTOCOL_VERSION, 3);
-        if ($debug){
-            echo "result_LDAP_OPT_PROTOCOL_VERSION=$result_LDAP_OPT_PROTOCOL_VERSION<br>";          
-            $get_LDAP_OPT_PROTOCOL_VERSION = 0;  
+        if ($debug) {
+            echo "result_LDAP_OPT_PROTOCOL_VERSION=$result_LDAP_OPT_PROTOCOL_VERSION<br>";
+            $get_LDAP_OPT_PROTOCOL_VERSION = 0;
             ldap_get_option($ldap_connect, "LDAP_OPT_PROTOCOL_VERSION", $get_LDAP_OPT_PROTOCOL_VERSION);
             echo "LDAP_OPT_PROTOCOL_VERSION=$get_LDAP_OPT_PROTOCOL_VERSION<br>";
             echo "ldap_connect = $ldap_connect<br>";
@@ -180,7 +184,7 @@ function identification1($mysql_table_authentification, $login, $pass, GlobalCon
 //            } else {
 //                $ldap_result = @ldap_bind($ldap_connect, "uid=" . $login . ",ou=Users,dc=Comptes,dc=com", $pass);     // connexion avec test login + mot de passe
 //            }
-            if ($debug){
+            if ($debug) {
                 echo "L'utilisateur connecté  \"$login\" ne se trouve pas dans le serveur LDAP ";
             }
             ldap_close($ldap_connect);
@@ -202,12 +206,11 @@ function identification1($mysql_table_authentification, $login, $pass, GlobalCon
         $q1 = DatabaseOperation::queryPDO($req_authentification);
         $mysql_result = DatabaseOperation::getSqlNumRows($q1);
         if (!$mysql_result) {
-
             $mysql_passwd = "AND (pass=OLD_PASSWORD('$pass'))";
             $req_authentification = $req_authentification_main . $mysql_passwd;
             $q1 = DatabaseOperation::queryPDO($req_authentification);
             $mysql_result = DatabaseOperation::getSqlNumRows($q1);
-            if (!$mysql_result and !$ldap_connect) {
+            if (!$mysql_result and ! $ldap_result) {
                 $return = 0;
             }
         }
@@ -216,16 +219,15 @@ function identification1($mysql_table_authentification, $login, $pass, GlobalCon
     return $return;
 }
 
-function progression($indice)
-{	
-	echo "<script>";
-		echo "document.getElementById('pourcentage').innerHTML='$indice%';";
-		echo "document.getElementById('barre').style.width='$indice%';";
-	echo "</script>";
-	ob_flush();
-	flush();
-	ob_flush();
-	flush();
+function progression($indice) {
+    echo "<script>";
+    echo "document.getElementById('pourcentage').innerHTML='$indice%';";
+    echo "document.getElementById('barre').style.width='$indice%';";
+    echo "</script>";
+    ob_flush();
+    flush();
+    ob_flush();
+    flush();
 }
 
 function recuperation_donnees_recherche($module, $url_page_depart, $module_table, $champ_retour, $nb_limite_resultat, $nbligne, $nbcol, $champ_recherche, $operateur_recherche, $texte_recherche, $champ_courant, $operateur_courant, $texte_courant, $nb_col_courant, $nb_ligne_courant, $ajout_col
@@ -446,7 +448,6 @@ function recuperation_donnees_recherche($module, $url_page_depart, $module_table
                 /**
                  * le type de champs diffère entre PDO et Mysql modifier la table intranet_moteur_de_recherche_type_de_champ
                  */
-
                 // recherche de l'identifiant du type :
                 $rech_id_type = " SELECT  id_intranet_moteur_de_recherche_type_de_champ
                                     FROM intranet_moteur_de_recherche_type_de_champ

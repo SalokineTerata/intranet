@@ -35,6 +35,10 @@ class FtaProcessusModel extends AbstractModel {
         );
     }
 
+    protected function setDefaultValues() {
+        
+    }
+
     function getModelFtaRole() {
         return $this->modelFtaRole;
     }
@@ -217,8 +221,8 @@ class FtaProcessusModel extends AbstractModel {
         $arrayNombreTotalChapitre = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
                         'SELECT DISTINCT ' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_CHAPITRE
                         . ' FROM ' . FtaWorkflowStructureModel::TABLENAME
-                        . ' WHERE '  . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_WORKFLOW . '=' . $paramIdWorkflow              //Workflow en cours
-                        . ' AND '  . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_PROCESSUS . '=' . $paramProcessusEncours
+                        . ' WHERE ' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_WORKFLOW . '=' . $paramIdWorkflow              //Workflow en cours
+                        . ' AND ' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_PROCESSUS . '=' . $paramProcessusEncours
         );
         $nombreTotalChapitre = count($arrayNombreTotalChapitre);
 
@@ -284,7 +288,7 @@ class FtaProcessusModel extends AbstractModel {
      */
     public static function CheckProcessusSiteOrSociete($paramRows, $paramIdFta) {
         $globalConfig = new GlobalConfig();
-                      UserModel::ConnexionFalse($globalConfig);
+        UserModel::ConnexionFalse($globalConfig);
 
         $idUser = $globalConfig->getAuthenticatedUser()->getKeyValue();
         $paramLieuGeo = $globalConfig->getAuthenticatedUser()->getLieuGeo();

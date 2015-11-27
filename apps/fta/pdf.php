@@ -233,7 +233,6 @@ $section = 0;
   //Informations Historique
   $pdf->AddPage();
   $pdf->Bookmark('Historique');
-  ob_start();
   //       include ("visualiser_historique.inc.php");
   $htmlbuffer=ob_get_contents();
   ob_end_clean();
@@ -247,7 +246,7 @@ $section = 0;
 
 $pdf->SetProtection(array("print"));
 
-switch ($sendto) {
+switch (0) {
     case 0://Le fichier n'est pas à envoyer donc on l'affiche à l'écran
         $pdf->Output(); //Read the FPDF.org manual to know the other options
         break;

@@ -11,4 +11,8 @@ class AccessMaterielServiceModel extends AbstractModel {
     const FIELDNAME_K_SERVICE = 'K_service';
     const FIELDNAME_NOM_SERVICE = 'nom_service';
 
+    protected function setDefaultValues() {
+        
+    }
+
 }

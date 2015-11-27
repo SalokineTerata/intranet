@@ -18,6 +18,10 @@ class AnnexeAgrologicArticleCodificationModel extends AbstractModel {
         parent::__construct($paramId, $paramIsCreateRecordsetInDatabaseIfKeyDoesntExist);
     }
 
+    protected function setDefaultValues() {
+        
+    }
+
 }
 
 ?>

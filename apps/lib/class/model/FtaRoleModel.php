@@ -14,6 +14,10 @@ class FtaRoleModel extends AbstractModel {
     const FIELDNAME_NOM_FTA_ROLE = 'nom_fta_role';
     const FIELDNAME_IS_GESTIONNAIRE = 'is_gestionnaire';
 
+    protected function setDefaultValues() {
+        
+    }
+
     /**
      * On obtient l'id du rôle le plus en amot dans le cycle de validation
      * @param int $paramIdUser
@@ -26,7 +30,7 @@ class FtaRoleModel extends AbstractModel {
     }
 
     /**
-     * On obtient la liste des rôle auxquelles l'utilisateur connecté à les accès
+     * On obtient la liste des rôles auxquelles l'utilisateur connecté à les accès
      * @param int $paramIdUser
      * @return array
      */
@@ -51,6 +55,39 @@ class FtaRoleModel extends AbstractModel {
         );
 
         return $arrayIdFtaRole;
+    }
+
+    /**
+     * On obtient la liste des rôles auxquelles l'utilisateur connecté à les accès selon un workflow
+     * @param int $paramIdUser
+     * @param int $paramIdFtaWorkflow
+     * @return array
+     */
+    public static function getIdFtaRoleByIdUserAndWorkflow($paramIdUser, $paramIdFtaWorkflow) {
+        $arrayIdFtaRole = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
+                        'SELECT DISTINCT ' . FtaRoleModel::TABLENAME . '.' . FtaRoleModel::KEYNAME
+                        . ',' . FtaRoleModel::FIELDNAME_NOM_FTA_ROLE
+                        . ',' . FtaRoleModel::FIELDNAME_DESCRIPTION_FTA_ROLE
+                        . ' FROM ' . FtaActionRoleModel::TABLENAME . ',' . UserModel::TABLENAME
+                        . ',' . IntranetDroitsAccesModel::TABLENAME . ',' . IntranetActionsModel::TABLENAME
+                        . ',' . FtaRoleModel::TABLENAME
+                        . ' WHERE ' . UserModel::TABLENAME . '.' . UserModel::KEYNAME . '=' . $paramIdUser
+                        . ' AND ' . UserModel::TABLENAME . '.' . UserModel::KEYNAME
+                        . '=' . IntranetDroitsAccesModel::TABLENAME . '.' . IntranetDroitsAccesModel::FIELDNAME_ID_USER
+                        . ' AND ' . IntranetDroitsAccesModel::FIELDNAME_NIVEAU_INTRANET_DROITS_ACCES . '=1'
+                        . ' AND ' . IntranetDroitsAccesModel::TABLENAME . '.' . IntranetDroitsAccesModel::FIELDNAME_ID_INTRANET_ACTIONS
+                        . '=' . IntranetActionsModel::TABLENAME . '.' . IntranetActionsModel::KEYNAME
+                        . ' AND ' . IntranetActionsModel::TABLENAME . '.' . IntranetActionsModel::KEYNAME
+                        . '=' . FtaActionRoleModel::TABLENAME . '.' . FtaActionRoleModel::FIELDNAME_ID_INTRANET_ACTIONS
+                        . ' AND ' . FtaActionRoleModel::TABLENAME . '.' . FtaActionRoleModel::FIELDNAME_ID_FTA_ROLE
+                        . '=' . FtaRoleModel::TABLENAME . '.' . FtaRoleModel::KEYNAME
+                        . ' AND ' . FtaActionRoleModel::TABLENAME . '.' . FtaActionRoleModel::FIELDNAME_ID_FTA_WROKFLOW . '=' . $paramIdFtaWorkflow
+        );
+        foreach ($arrayIdFtaRole as $rowsIdFtaRole){
+            $IdFtaRole[]=$rowsIdFtaRole[FtaRoleModel::KEYNAME];
+        }
+
+        return $IdFtaRole;
     }
 
     /**

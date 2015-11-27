@@ -59,7 +59,7 @@ class EnvironmentInit extends EnvironmentAbstract {
          */
         $this->getConf()->setUrlProtocol($paramInit[self::URL_PROTOCOL][$paramEnvName]);
         $this->getConf()->setUrlServer(filter_input(INPUT_SERVER, 'SERVER_NAME'));
-        $this->getConf()->setReverseProxyName(filter_input(INPUT_SERVER, 'REVERSE_PROXY_NAME'));
+        $this->getConf()->setReverseProxyName($paramInit[self::REVERSE_PROXY_NAME][$paramEnvName]);
         $this->getConf()->setUrlRootDir($paramInit[self::URL_ROOT_DIR][$paramEnvName]);
         $this->getConf()->setUrlSubdir($paramInit[self::URL_SUBDIR][$paramEnvName]);
 

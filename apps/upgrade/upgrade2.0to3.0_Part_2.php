@@ -67,6 +67,39 @@ $sql = "ALTER TABLE classification_fta2
         DROP id_arborescence";
 if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
 
+/**
+     * Les Fta validé ont par défaut un éta d'avancement de 100%
+     */
+    $arrayValide = mysql_query(
+                    "Select id_fta,id_fta_etat FROM " . $nameOfBDDTarget . ".fta WHERE id_fta_etat=3"
+    );
+    while ($value= mysql_fetch_array($arrayValide)) {
+        $idFta = $value["id_fta"];
+        $req = "UPDATE " . $nameOfBDDTarget . ".fta SET pourcentage_avancement='" . "100%" . "' "
+                . " WHERE id_fta='" . $idFta . "' "
+        ;
+       if(mysql_query($req)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+    }
+    /**
+     * Les Fta en modification  sont par défaut un état d'avancement de 0%
+     */
+    $arraySuivi = mysql_query(
+                    "Select DISTINCT " ."id_fta_suivi_projet" 
+                    . " FROM " . $nameOfBDDTarget . "." . "fta"
+                    . "," . $nameOfBDDTarget . "." . "fta_suivi_projet"
+                    . " WHERE " . "id_fta_etat" . "=1"
+                    . " AND " ."fta_suivi_projet".".". "id_fta" . "=" . "fta" .".". "id_fta"
+    );
+    while ($rowsSuivi= mysql_fetch_array($arraySuivi)) {
+
+        $idsignature = $rowsSuivi['id_fta_suivi_projet'];
+
+        $req = "UPDATE " . $nameOfBDDTarget . "." . "fta_suivi_projet"
+                . " SET " . "signature_validation_suivi_projet" . "='" . "0" . "', "
+                . " WHERE " . "id_fta_suivi_projet" . "='" . $idsignature . "' "
+        ;
+       if(mysql_query($req)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+    }
 
 
 

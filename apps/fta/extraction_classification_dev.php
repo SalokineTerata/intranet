@@ -36,7 +36,10 @@ $fieldReseau = "";
 $fieldEnvironnement = "";
 $fieldSaisonalite = "";
 $fieldExport = "";
-require_once '../inc/main.php';
+//require_once '../inc/main.php';
+$nameOfBDDTarget = "intranet_v3_0_dev";
+$nameOfBDDOrigin = "intranet_v2_0_prod_dev";
+$nameOfBDDStructure = "intranet_v3_0_model";
 require_once '../fta/extraction_classification.php';
 
 //Barre de Navigation d'une Fiche Technique Article
@@ -55,9 +58,7 @@ require_once '../fta/extraction_classification.php';
 //$password_connect2 = "8ale!ne"; //mot de passe de la base MySQL
 //$donnee2 = mysql_pconnect($hostname_connect2, $username_connect2, $password_connect2) or die("connexion impossible");
 
-$nameOfBDDTarget = "intranet_v3_0_dev";
-$nameOfBDDOrigin = "intranet_v2_0_prod_dev";
-$nameOfBDDStructure = "intranet_v3_0_model";
+
 UpgradeClassificationV2ToV3($nameOfBDDTarget, $nameOfBDDOrigin, $nameOfBDDStructure);
 
 

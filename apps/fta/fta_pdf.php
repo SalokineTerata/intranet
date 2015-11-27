@@ -229,47 +229,56 @@ $pdf->Cell(0, 0, "", 1, 1);
 
 //******************************************************************************
 //Listes des composants
-$pdf->SetFont($t2_police, $t2_style, $t3_size);
-$pdf->Bookmark($chapitre . ' - Composition');
-$chapitre = $chapitre + 1;
-$pdf->SetFillColor(150, 250, 230);
-$pdf->Cell(0, $t4_size, 'COMPOSITION DU COLIS', 1, 1, 'C', 1);
+if ($returnUVC["dimension_uvc"]
+        and $returnDuColis["dimension_uvc"]
+        and $returnUVC[FtaConditionnementModel::UVC_EMBALLAGE_NET]
+        and $returnDuColis["colis_net"]
+        and $returnDuColis["colis_brut"]) {
+    $pdf->SetFont($t2_police, $t2_style, $t3_size);
+    $pdf->Bookmark($chapitre . ' - Composition');
+    $chapitre = $chapitre + 1;
+    $pdf->SetFillColor(150, 250, 230);
+    $pdf->Cell(0, $t4_size, 'COMPOSITION DU COLIS', 1, 1, 'C', 1);
 //$pdf->SetY($pdf->GetY()+2);
-$pdf->SetY($pdf->GetY() + 2);
+    $pdf->SetY($pdf->GetY() + 2);
 
 //Récupération des données
-$returnCOLIS = $ftaModel->buildArrayEmballageTypeDuColis();
-$poids_net_colis = $returnCOLIS["colis_net"];
+    $returnCOLIS = $ftaModel->buildArrayEmballageTypeDuColis();
+    $poids_net_colis = $returnCOLIS["colis_net"];
 
 //$req = "SELECT id_fta_composition FROM fta_composition WHERE id_fta='".$id_fta."' ORDER BY ordre_fta_composition, nom_fta_composition ";
-$req = "SELECT " . FtaComposantModel::KEYNAME
-        . " FROM " . FtaComposantModel::TABLENAME
-        . " WHERE " . FtaComposantModel::FIELDNAME_ID_FTA . "='" . $id_fta . "'"
-        . " AND " . FtaComposantModel::FIELDNAME_IS_COMPOSITION_FTA_COMPOSANT . "=1 "
-        . " ORDER BY " . FtaComposantModel::FIELDNAME_ORDRE_FTA_COMPOSITION . ", " . FtaComposantModel::FIELDNAME_NOM_FTA_COMPOSITION . " ";
-$result = DatabaseOperation::convertSqlStatementWithoutKeyToArray($req);
-if ($result) {
-    foreach ($result as $rows) {
-        $pdf->SetAutoPageBreak(0);
+    $req = "SELECT " . FtaComposantModel::KEYNAME
+            . " FROM " . FtaComposantModel::TABLENAME
+            . " WHERE " . FtaComposantModel::FIELDNAME_ID_FTA . "='" . $id_fta . "'"
+            . " AND " . FtaComposantModel::FIELDNAME_IS_COMPOSITION_FTA_COMPOSANT . "=1 "
+            . " ORDER BY " . FtaComposantModel::FIELDNAME_ORDRE_FTA_COMPOSITION . ", " . FtaComposantModel::FIELDNAME_NOM_FTA_COMPOSITION . " ";
+    $result = DatabaseOperation::convertSqlStatementWithoutKeyToArray($req);
+    if ($result) {
+        foreach ($result as $rows) {
+            $pdf->SetAutoPageBreak(0);
 
-        //Chargement des données
-        //$id_fta_composition=$rows["id_fta_composition"];
-        $id_fta_composant = $rows[FtaComposantModel::KEYNAME];
-        $ftaComposantModel = new FtaComposantModel($id_fta_composant);
+            //Chargement des données
+            //$id_fta_composition=$rows["id_fta_composition"];
+            $id_fta_composant = $rows[FtaComposantModel::KEYNAME];
+            $ftaComposantModel = new FtaComposantModel($id_fta_composant);
 
-        //Préparation des données de sortie
-        $nom_fta_composition = $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_NOM_FTA_COMPOSITION)->getFieldValue();
-        $quantite_fta_composition = $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_QUANTITE_FTA_COMPOSITION_UVC)->getFieldValue();
-        $poids_fta_compositionTmp = $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_POIDS_FTA_COMPOSITION)->getFieldValue();
-        $taille_nom_fta_composition = $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_TAILLE_POLICE_NOM_FTA_COMPOSITION)->getFieldValue();
-        $ingredient_fta_composition = $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_INGREDIENT_FTA_COMPOSITION)->getFieldValue();
-        $ingredient_fta_composition1 = $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_INGREDIENT_FTA_COMPOSITION1)->getFieldValue();
-        $taux_poids_composant = ($poids_fta_compositionTmp * $quantite_fta_composition) / $poids_net_colis;
-        $temp_taux = round($taux_poids_composant / 10, 2);
-        $poids_fta_composition = round($poids_fta_composition, 0);
+            //Préparation des données de sortie
+            $nom_fta_composition = $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_NOM_FTA_COMPOSITION)->getFieldValue();
+            $quantite_fta_composition = $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_QUANTITE_FTA_COMPOSITION_UVC)->getFieldValue();
+            $poids_fta_compositionTmp = $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_POIDS_FTA_COMPOSITION)->getFieldValue();
+            $taille_nom_fta_composition = $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_TAILLE_POLICE_NOM_FTA_COMPOSITION)->getFieldValue();
+            $ingredient_fta_composition = $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_INGREDIENT_FTA_COMPOSITION)->getFieldValue();
+            $ingredient_fta_composition1 = $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_INGREDIENT_FTA_COMPOSITION1)->getFieldValue();
+            /**
+             * Verification que l'on est outes les données nécéssaire
+             */
+            if ($poids_fta_compositionTmp and $quantite_fta_composition and $poids_net_colis) {
+                $taux_poids_composant = ($poids_fta_compositionTmp * $quantite_fta_composition) / $poids_net_colis;
+                $temp_taux = round($taux_poids_composant / 10, 2);
+                $poids_fta_composition = round($poids_fta_composition, 0);
 
-        //Création de la première colonne
-        //Désignation Commerciale
+                //Création de la première colonne
+                //Désignation Commerciale
 //      $champ="designation_commerciale_fta";
 //      $title = "";
 //      $data = $nom_fta_composition;
@@ -281,12 +290,12 @@ if ($result) {
 //      fpdf_write_data($title, $data, $title_format, $data_format, $pdf);
 //      $pdf->SetY($pdf->GetY()+2);
 
-        $pdf->SetFillColor(255, 255, 255);
-        $pdf->SetFont($t2_police, $t2_style, $t3_size);
-        $txt = $nom_fta_composition . " (" . $poids_fta_composition . " g)";
-        //$pdf->Cell(0,$contenu_size,$nom_fta_composition." (".$poids_fta_composition." g)");
-        $pdf->MultiCell(0, 5, $txt, $border = 0, $align = 'C', $fill = 0);
-        $marge_haute = $pdf->GetY();
+                $pdf->SetFillColor(255, 255, 255);
+                $pdf->SetFont($t2_police, $t2_style, $t3_size);
+                $txt = $nom_fta_composition . " (" . $poids_fta_composition . " g)";
+                //$pdf->Cell(0,$contenu_size,$nom_fta_composition." (".$poids_fta_composition." g)");
+                $pdf->MultiCell(0, 5, $txt, $border = 0, $align = 'C', $fill = 0);
+                $marge_haute = $pdf->GetY();
 //      $taille_nom_fta_composition=strlen($nom_fta_composition);
 //      $data_table=array(
 //                        //***********
@@ -306,177 +315,179 @@ if ($result) {
 //         //$data_format[2]="8";
 //         fpdf_write_data($title, $data, $title_format, $data_format, $pdf);
 //      }
+                $marge_basse1 = $pdf->GetY();
+
+                //Création de la deuxième colonne
+                $pdf->SetY($marge_haute);
+                $marge_deuxieme_colonne = $marge_gauche;
+                $pdf->SetX($marge_deuxieme_colonne);
+                $pdf->SetLeftMargin($marge_deuxieme_colonne);
+
+                //Liste des composants
+                //$champ="ingredient_fta_composition";
+                $title = "";
+                if ($taille_nom_fta_composition > 25) {
+                    $data = "\n";
+                } else {
+                    $data = "";
+                }
+                $data .= $ingredient_fta_composition;
+                if ($ingredient_fta_composition1) {
+                    $data .= "\n" . $ingredient_fta_composition1;
+                }
+                $title_format = $t3_format;
+                //$title_format[4]+=20;//Personalisation de la largeur de la colonne
+                $data_format = $contenu_format;
+                $data_format[1] = "";
+                $data_format[4] = 0;   //Personalisation de la largeur de la colonne
+                $data_format[2] = "";
+                fpdf_write_data($title, $data, $title_format, $data_format, $pdf);
+
+                $marge_basse2 = $pdf->GetY();
+
+                if ($marge_basse2 > $marge_basse1) {
+                    $new_marge = $marge_basse2;
+                } else {
+                    $new_marge = $marge_basse1;
+                }
+
+                $pdf->SetY($new_marge);
+                $pdf->SetLeftMargin($marge_gauche);
+                $pdf->SetX($marge_gauche);
+                $pdf->SetAutoPageBreak(1, 40);
+
+                $pdf->Cell(0, 0, "", 1, 1);
+                $pdf->SetY($pdf->GetY() + 2);
+            }
+            //$pdf->SetAutoPageBreak(0);
+        }//Fin du parcours des composants
+    }
+    if ($idFtaEtat <> "1") {
+//Conditionnement (1ère Colonne)
+
+        $pdf->SetAutoPageBreak(1, 50);
+        $pdf->SetY($pdf->GetY() + 2);
+        $pdf->Cell(0, 0, "", 1, 1);
+        $marge_haute = $pdf->GetY();
+
+        $pdf->SetAutoPageBreak(0);
+        $pdf->SetFont($t2_police, $t2_style, $t3_size);
+        $pdf->Bookmark($chapitre . ' - Conditionnement');
+        $chapitre = $chapitre + 1;
+        $pdf->SetFillColor(150, 250, 230);
+        $pdf->Cell(100, $t4_size, 'CONDITIONNEMENT', 1, 1, 'C', 1);
+        $pdf->SetY($pdf->GetY() + 2);
+
+        //Conditionnement UVC
+        //Affichage des données
+        $data_table = array(
+            //***********
+            array("Dimension UVC", $returnUVC["dimension_uvc"] . " mm"),
+            array("Dimension Colis", $returnDuColis["dimension_uvc"]),
+            array("PCB", $returnUVC[FtaConditionnementModel::UVC_EMBALLAGE_NET]),
+            array("Poids net Colis", $returnDuColis["colis_net"] . " kg"),
+            array("Poids brut Colis", $returnDuColis["colis_brut"] . " kg")
+        );
+
+        foreach ($data_table as $information) {
+            $title = $information[0];
+            $data = $information[1];
+            $title_format = $t3_format;
+            $title_format[4] = 10;
+            //$title_format[5]="R";
+            //$title_format[3]=10;   //Personalisation de l'interligne
+            $data_format = $contenu_format;
+            $data_format[4] = 80;   //Personalisation de la largeur de la colonne
+            //$data_format[3]=10;   //Personalisation de l'interligne
+            fpdf_write_data($title, $data, $title_format, $data_format, $pdf);
+        }
         $marge_basse1 = $pdf->GetY();
 
-        //Création de la deuxième colonne
+//Palettisation (2ème Colonne)
         $pdf->SetY($marge_haute);
-        $marge_deuxieme_colonne = $marge_gauche;
+        $marge_deuxieme_colonne = 100;
         $pdf->SetX($marge_deuxieme_colonne);
         $pdf->SetLeftMargin($marge_deuxieme_colonne);
 
-        //Liste des composants
-        //$champ="ingredient_fta_composition";
-        $title = "";
-        if ($taille_nom_fta_composition > 25) {
-            $data = "\n";
-        } else {
-            $data = "";
-        }
-        $data .= $ingredient_fta_composition;
-        if ($ingredient_fta_composition1) {
-            $data .= "\n" . $ingredient_fta_composition1;
-        }
-        $title_format = $t3_format;
-        //$title_format[4]+=20;//Personalisation de la largeur de la colonne
-        $data_format = $contenu_format;
-        $data_format[1] = "";
-        $data_format[4] = 0;   //Personalisation de la largeur de la colonne
-        $data_format[2] = "";
-        fpdf_write_data($title, $data, $title_format, $data_format, $pdf);
+        $pdf->SetFont($t2_police, $t2_style, $t3_size);
+        $pdf->Bookmark($chapitre . ' - Palettisation');
+        $chapitre = $chapitre + 1;
+        $pdf->SetFillColor(150, 250, 230);
+        $pdf->Cell(0, $t4_size, 'PALETTISATION', 1, 1, 'C', 1);
+        $pdf->SetY($pdf->GetY() + 2);
 
+
+        //Affichage des données
+        $data_table = array(
+            //***********
+            array("Nombre de colis par couche", $returnPallettes["colis_couche"]),
+            array("Nombre de couche par palette", $returnPallettes["couche_palette"]),
+            array("Nombre total de colis par palette", $returnPallettes["total_colis"]),
+            array("Dimension palette", $returnPallettes["dimension_uvc"]),
+            array("Hauteur palette", $returnPallettes["hauteur_palette"] . " m"),
+            array("Poids Net palette", $returnPallettes["palette_net"] . " kg"),
+            array("Poids Brut palette", $returnPallettes["palette_brut"] . " kg")
+        );
+
+        foreach ($data_table as $information) {
+            $title = $information[0];
+            $data = $information[1];
+            $title_format = $t3_format;
+            $title_format[4] = 10;
+            //$title_format[5]="R";
+            //$title_format[3]=10;   //Personalisation de l'interligne
+            $data_format = $contenu_format;
+            $data_format[4] = 80;   //Personalisation de la largeur de la colonne
+            //$data_format[3]=10;   //Personalisation de l'interligne
+            fpdf_write_data($title, $data, $title_format, $data_format, $pdf);
+        }
         $marge_basse2 = $pdf->GetY();
 
-        if ($marge_basse2 > $marge_basse1) {
-            $new_marge = $marge_basse2;
-        } else {
-            $new_marge = $marge_basse1;
-        }
-
-        $pdf->SetY($new_marge);
+        $pdf->SetAutoPageBreak(1, 15);
         $pdf->SetLeftMargin($marge_gauche);
         $pdf->SetX($marge_gauche);
-        $pdf->SetAutoPageBreak(1, 40);
-
         $pdf->Cell(0, 0, "", 1, 1);
-        $pdf->SetY($pdf->GetY() + 2);
         //$pdf->SetAutoPageBreak(0);
-    }//Fin du parcours des composants
-}
-if ($idFtaEtat <> "1") {
-//Conditionnement (1ère Colonne)
-
-    $pdf->SetAutoPageBreak(1, 50);
-    $pdf->SetY($pdf->GetY() + 2);
-    $pdf->Cell(0, 0, "", 1, 1);
-    $marge_haute = $pdf->GetY();
-
-    $pdf->SetAutoPageBreak(0);
-    $pdf->SetFont($t2_police, $t2_style, $t3_size);
-    $pdf->Bookmark($chapitre . ' - Conditionnement');
-    $chapitre = $chapitre + 1;
-    $pdf->SetFillColor(150, 250, 230);
-    $pdf->Cell(100, $t4_size, 'CONDITIONNEMENT', 1, 1, 'C', 1);
-    $pdf->SetY($pdf->GetY() + 2);
-
-    //Conditionnement UVC
-    //Affichage des données
-    $data_table = array(
-        //***********
-        array("Dimension UVC", $returnUVC["dimension_uvc"] . " mm"),
-        array("Dimension Colis", $returnDuColis["dimension_uvc"]),
-        array("PCB", $returnUVC[FtaConditionnementModel::UVC_EMBALLAGE_NET]),
-        array("Poids net Colis", $returnDuColis["colis_net"] . " kg"),
-        array("Poids brut Colis", $returnDuColis["colis_brut"] . " kg")
-    );
-
-    foreach ($data_table as $information) {
-        $title = $information[0];
-        $data = $information[1];
-        $title_format = $t3_format;
-        $title_format[4] = 10;
-        //$title_format[5]="R";
-        //$title_format[3]=10;   //Personalisation de l'interligne
-        $data_format = $contenu_format;
-        $data_format[4] = 80;   //Personalisation de la largeur de la colonne
-        //$data_format[3]=10;   //Personalisation de l'interligne
-        fpdf_write_data($title, $data, $title_format, $data_format, $pdf);
+        $pdf->SetY($pdf->GetY() + 2);
     }
-    $marge_basse1 = $pdf->GetY();
-
-//Palettisation (2ème Colonne)
-    $pdf->SetY($marge_haute);
-    $marge_deuxieme_colonne = 100;
-    $pdf->SetX($marge_deuxieme_colonne);
-    $pdf->SetLeftMargin($marge_deuxieme_colonne);
-
-    $pdf->SetFont($t2_police, $t2_style, $t3_size);
-    $pdf->Bookmark($chapitre . ' - Palettisation');
-    $chapitre = $chapitre + 1;
-    $pdf->SetFillColor(150, 250, 230);
-    $pdf->Cell(0, $t4_size, 'PALETTISATION', 1, 1, 'C', 1);
-    $pdf->SetY($pdf->GetY() + 2);
-
-
-    //Affichage des données
-    $data_table = array(
-        //***********
-        array("Nombre de colis par couche", $returnPallettes["colis_couche"]),
-        array("Nombre de couche par palette", $returnPallettes["couche_palette"]),
-        array("Nombre total de colis par palette", $returnPallettes["total_colis"]),
-        array("Dimension palette", $returnPallettes["dimension_uvc"]),
-        array("Hauteur palette", $returnPallettes["hauteur_palette"] . " m"),
-        array("Poids Net palette", $returnPallettes["palette_net"] . " kg"),
-        array("Poids Brut palette", $returnPallettes["palette_brut"] . " kg")
-    );
-
-    foreach ($data_table as $information) {
-        $title = $information[0];
-        $data = $information[1];
-        $title_format = $t3_format;
-        $title_format[4] = 10;
-        //$title_format[5]="R";
-        //$title_format[3]=10;   //Personalisation de l'interligne
-        $data_format = $contenu_format;
-        $data_format[4] = 80;   //Personalisation de la largeur de la colonne
-        //$data_format[3]=10;   //Personalisation de l'interligne
-        fpdf_write_data($title, $data, $title_format, $data_format, $pdf);
-    }
-    $marge_basse2 = $pdf->GetY();
-
-    $pdf->SetAutoPageBreak(1, 15);
-    $pdf->SetLeftMargin($marge_gauche);
-    $pdf->SetX($marge_gauche);
-    $pdf->Cell(0, 0, "", 1, 1);
-    //$pdf->SetAutoPageBreak(0);
-    $pdf->SetY($pdf->GetY() + 2);
-}
-$apres_ouverture_fta = $ftaModel->getDataField(FtaModel::FIELDNAME_CONSEIL_APRES_OUVERTURE)->getFieldValue();
-$NOM_apres_ouverture_fta = $ftaModel->getDataField(FtaModel::FIELDNAME_CONSEIL_APRES_OUVERTURE)->getFieldLabel();
-$remarque_fta = $ftaModel->getDataField(FtaModel::FIELDNAME_REMARQUE)->getFieldValue();
-$NOM_remarque_fta = $ftaModel->getDataField(FtaModel::FIELDNAME_REMARQUE)->getFieldLabel();
-$origine_matiere_fta = $ftaModel->getDataField(FtaModel::FIELDNAME_ORIGINE_MATIERE_PREMIERE)->getFieldValue();
-$NOM_origine_matiere_fta = $ftaModel->getDataField(FtaModel::FIELDNAME_ORIGINE_MATIERE_PREMIERE)->getFieldLabel();
-$allergenes_matiere_fta = $ftaModel->getDataField(FtaModel::FIELDNAME_LISTE_ALLERGENE)->getFieldValue();
-$NOM_allergenes_matiere_fta = $ftaModel->getDataField(FtaModel::FIELDNAME_LISTE_ALLERGENE)->getFieldLabel();
+    $apres_ouverture_fta = $ftaModel->getDataField(FtaModel::FIELDNAME_CONSEIL_APRES_OUVERTURE)->getFieldValue();
+    $NOM_apres_ouverture_fta = $ftaModel->getDataField(FtaModel::FIELDNAME_CONSEIL_APRES_OUVERTURE)->getFieldLabel();
+    $remarque_fta = $ftaModel->getDataField(FtaModel::FIELDNAME_REMARQUE)->getFieldValue();
+    $NOM_remarque_fta = $ftaModel->getDataField(FtaModel::FIELDNAME_REMARQUE)->getFieldLabel();
+    $origine_matiere_fta = $ftaModel->getDataField(FtaModel::FIELDNAME_ORIGINE_MATIERE_PREMIERE)->getFieldValue();
+    $NOM_origine_matiere_fta = $ftaModel->getDataField(FtaModel::FIELDNAME_ORIGINE_MATIERE_PREMIERE)->getFieldLabel();
+    $allergenes_matiere_fta = $ftaModel->getDataField(FtaModel::FIELDNAME_LISTE_ALLERGENE)->getFieldValue();
+    $NOM_allergenes_matiere_fta = $ftaModel->getDataField(FtaModel::FIELDNAME_LISTE_ALLERGENE)->getFieldLabel();
 //Informations supplémentaires
-if (! $apres_ouverture_fta and ! $remarque_fta and ! $origine_matiere_fta and ! $allergenes_matiere_fta) {
-    
-} else {
-    $pdf->SetFont($t2_police, $t2_style, $t3_size);
-    $pdf->Bookmark($chapitre . ' - Informations Supplémentaires');
-    $chapitre = $chapitre + 1;
-    $pdf->SetFillColor(150, 250, 230);
-    $pdf->Cell(0, $t4_size, 'INFORMATIONS SUPPLEMENTAIRES', 1, 1, 'C', 1);
-    $pdf->SetY($pdf->GetY() + 2);
-    $data_table = array(
-        //***********
+    if (!$apres_ouverture_fta and ! $remarque_fta and ! $origine_matiere_fta and ! $allergenes_matiere_fta) {
+        
+    } else {
+        $pdf->SetFont($t2_police, $t2_style, $t3_size);
+        $pdf->Bookmark($chapitre . ' - Informations Supplémentaires');
+        $chapitre = $chapitre + 1;
+        $pdf->SetFillColor(150, 250, 230);
+        $pdf->Cell(0, $t4_size, 'INFORMATIONS SUPPLEMENTAIRES', 1, 1, 'C', 1);
+        $pdf->SetY($pdf->GetY() + 2);
+        $data_table = array(
+            //***********
 //        array($NOM_presentation_fta, $presentation_fta),
-        array($NOM_apres_ouverture_fta, $apres_ouverture_fta),
-        array($NOM_remarque_fta, $remarque_fta),
-        array($NOM_origine_matiere_fta, $origine_matiere_fta),
-        array($NOM_allergenes_matiere_fta, $allergenes_matiere_fta)
-    );
+            array($NOM_apres_ouverture_fta, $apres_ouverture_fta),
+            array($NOM_remarque_fta, $remarque_fta),
+            array($NOM_origine_matiere_fta, $origine_matiere_fta),
+            array($NOM_allergenes_matiere_fta, $allergenes_matiere_fta)
+        );
 
-    foreach ($data_table as $information) {
-        $title = $information[0];
-        $data = $information[1];
-        $title_format = $t3_format;
-        $title_format[4] = 50;
-        //$title_format[3]=10;   //Personalisation de l'interligne
-        $data_format = $contenu_format;
-        $data_format[4] = 0;   //Personalisation de la largeur de la colonne
-        //$data_format[3]=10;   //Personalisation de l'interligne
-        fpdf_write_data($title, $data, $title_format, $data_format, $pdf);
+        foreach ($data_table as $information) {
+            $title = $information[0];
+            $data = $information[1];
+            $title_format = $t3_format;
+            $title_format[4] = 50;
+            //$title_format[3]=10;   //Personalisation de l'interligne
+            $data_format = $contenu_format;
+            $data_format[4] = 0;   //Personalisation de la largeur de la colonne
+            //$data_format[3]=10;   //Personalisation de l'interligne
+            fpdf_write_data($title, $data, $title_format, $data_format, $pdf);
+        }
     }
 }
 $pdf->SetAutoPageBreak(1, 40);

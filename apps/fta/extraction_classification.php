@@ -304,44 +304,7 @@ function UpgradeClassificationV2ToV3($paramNameOfBDDTarget, $paramNameOfBDDOrigi
 
     mysql_close();
 
-    /**
-     * Les Fta validé ont par défaut un éta d'avancement de 100%
-     */
-    $array = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
-                    "Select " . FtaModel::KEYNAME . "," . FtaModel::FIELDNAME_ID_FTA_ETAT
-                    . " FROM " . $paramNameOfBDDTarget . "." . FtaModel::TABLENAME
-                    . " WHERE " . FtaModel::FIELDNAME_ID_FTA_ETAT . "=3"
-    );
-    foreach ($array as $value) {
-        $idFta = $value[FtaModel::KEYNAME];
-        $idFtaEtat = $value[FtaModel::FIELDNAME_ID_FTA_ETAT];
-        $req = "UPDATE " . $paramNameOfBDDTarget . "." . FtaModel::TABLENAME
-                . " SET " . FtaModel::FIELDNAME_POURCENTAGE_AVANCEMENT . "='" . "100%" . "' "
-                . " WHERE " . FtaModel::KEYNAME . "='" . $idFta . "' "
-        ;
-        DatabaseOperation::execute($req);
-    }
-    /**
-     * Les Fta en modification  sont par défaut un état d'avancement de 0%
-     */
-    $arraySuivi = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
-                    "Select " . FtaSuiviProjetModel::KEYNAME . "," . FtaSuiviProjetModel::FIELDNAME_SIGNATURE_VALIDATION_SUIVI_PROJET
-                    . " FROM " . $paramNameOfBDDTarget . "." . FtaModel::TABLENAME
-                    . "," . $paramNameOfBDDTarget . "." . FtaSuiviProjetModel::TABLENAME
-                    . " WHERE " . FtaModel::FIELDNAME_ID_FTA_ETAT . "=1"
-    );
-    foreach ($arraySuivi as $rowsSuivi) {
-
-        $signature = $rowsSuivi[FtaSuiviProjetModel::FIELDNAME_SIGNATURE_VALIDATION_SUIVI_PROJET];
-        $idsignature = $rowsSuivi[FtaSuiviProjetModel::KEYNAME];
-
-        $req = "UPDATE " . $paramNameOfBDDTarget . "." . FtaSuiviProjetModel::TABLENAME
-                . " SET " . FtaSuiviProjetModel::FIELDNAME_SIGNATURE_VALIDATION_SUIVI_PROJET . "='" . $signature . "', "
-                . " WHERE " . FtaSuiviProjetModel::KEYNAME . "='" . $idsignature . "' "
-        ;
-        DatabaseOperation::execute($req);
-    }
-
+    
 
     echo "FIN de TRAITEMENT";
 }

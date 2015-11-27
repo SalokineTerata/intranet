@@ -3,11 +3,8 @@
 # Script de construction de la base de données Intranet V3
 #
 # Author: franckwastaken - 28/10/2015
-<<<<<<< HEAD
-=======
 # Modification:
 #	25/11/2015 - bs4300280
->>>>>>> cc2b82b8d7481f9337cd6293b02a99992689a848
 #
 #
 

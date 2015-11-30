@@ -6,6 +6,14 @@
  */
 //$module = substr(strrchr(`pwd`, '/'), 1);
 //$module = trim($module);
+
+echo "<h1><table>";
+foreach ($_SERVER as $key => $value) {
+    
+    echo "<tr><td>$key</td><td>$value</td></tr>";
+}
+echo "</table></h1>";
+
 switch ($output) {
 
     case 'visualiser':
@@ -37,7 +45,6 @@ switch ($output) {
         require_once '../inc/main.php';
         print_page_begin($disable_full_page, $menu_file);
         flush();
-
 }//Fin de la sélection du mode d'affichage de la page
 
 

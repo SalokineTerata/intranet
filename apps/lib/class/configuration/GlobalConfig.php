@@ -92,7 +92,7 @@ class GlobalConfig {
              * Si le mode Debug de session est activé, on reconstruit
              * tout de même la configuration de l'environnement.
              */
-            if ($this->getConf()->getExecDebugEnable()) {
+            if ($this->getConf()->getSessionDebugEnable()) {
                 $this->setNeedBuildConf(TRUE);
             }
         }
@@ -203,7 +203,7 @@ class GlobalConfig {
         if ($serverNameReal == NULL) {
             $serverNameReal = filter_input(INPUT_SERVER, 'SERVER_NAME');
         }
-
+        
         /*
          * Tableau de configuration du paramètres URL_SERVER_NAME 
          */

@@ -39,7 +39,7 @@ if ($intranet_module_public) {
         }
         echo '<td align=center>';
         echo '<a href=' . $globalConfig->getConf()->getUrlFullRoot() . '/' . $nom_intranet_modules . ' target=_top>';
-        echo '<img src=' . $globalConfig->getConf()->getUrlFullRoot() . '/' . $nom_intranet_modules . '/images/bouton_module.png width=34 height=34 border=0 alt=`' . $nom_usuel_intranet_modules . '`>';
+	echo '<img src=' . $globalConfig->getConf()->getUrlFullRoot() . '/' . $nom_intranet_modules . '/images/bouton_module.png width=34 height=34 border=0 alt=`' . $nom_usuel_intranet_modules . '`>';
         echo '</a>';
         echo '</td>';
         $i = $i + 1;

@@ -199,7 +199,10 @@ class GlobalConfig {
         /*
          * Serveur provenant de l'URL en cours de navigation par le client
          */
-        $serverNameReal = filter_input(INPUT_SERVER, 'SERVER_NAME');
+        $serverNameReal = filter_input(INPUT_SERVER, 'HTTP_X_FORWARDED_HOST');
+        if ($serverNameReal == NULL) {
+            $serverNameReal = filter_input(INPUT_SERVER, 'SERVER_NAME');
+        }
 
         /*
          * Tableau de configuration du paramètres URL_SERVER_NAME 

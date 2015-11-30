@@ -68,7 +68,6 @@ class FtaTransitionModel {
                 $req = "UPDATE " . FtaModel::TABLENAME
                         . " SET " . FtaModel::FIELDNAME_ID_FTA_ETAT . "='6'" //Identifiant de "retirer"
                         . " WHERE " . FtaModel::FIELDNAME_DOSSIER_FTA . "='" . $idDossierFta . "' "
-                        . " AND " . FtaModel::KEYNAME . "='" . $paramIdFta . "' "
                 ;
                 $result = DatabaseOperation::execute($req);
 

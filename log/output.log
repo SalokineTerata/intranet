@@ -418,3 +418,23 @@ testr commentaire
 2015-11-25 16:54:08 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `site_expedition_fta` =   '159'
 2015-11-25 16:54:10 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 6
 2015-11-25 16:54:10 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `site_expedition_fta` =   '6'
+2015-11-27 15:52:20 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 25
+2015-11-27 15:52:20 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `id_annexe_agrologic_article_codification` =   '25'
+2015-11-27 15:52:26 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 123456
+2015-11-27 15:52:26 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `code_produit_agrologic_fta_nomenclature` =   '123456'
+2015-11-27 15:52:29 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : test
+2015-11-27 15:52:29 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `nom_fta_nomenclature` =   'test'
+2015-11-27 15:52:32 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 1.5
+2015-11-27 15:52:32 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `poids_fta_nomenclature` =   '1.5'
+2015-11-27 15:52:38 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : kg
+2015-11-27 15:52:38 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `id_annexe_unite` =   'kg'
+2015-11-27 15:52:40 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 1
+2015-11-27 15:52:40 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `etat_fta_nomenclature` =   '1'
+2015-11-27 15:52:44 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 16
+2015-11-27 15:52:44 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `site_production_fta_nomenclature` =   '16'
+2015-11-27 15:52:45 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 1
+2015-11-27 15:52:45 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `site_production_fta_nomenclature` =   '1'
+2015-11-30 10:18:00 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : test
+2015-11-30 10:18:00 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `commentaire_maj_fta` =   'test'
+2015-11-30 10:34:11 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : test
+2015-11-30 10:34:11 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `commentaire_maj_fta` =   'test'

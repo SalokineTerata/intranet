@@ -43,8 +43,8 @@ if ($id_user) {
      */
     $page_default = substr(strrchr($_SERVER['PHP_SELF'], '/'), '1', '-4');
 //   $page_action=$page_default.'_post.php';
-//    $page_action = 'transiter_post.php';
-    $page_action = 'modification_fiche.php';
+    $page_action = 'transiter_post.php';
+//    $page_action = 'modification_fiche.php';
     $page_pdf = $page_default . '_pdf.php';
     $action = 'valider';                       //Action proposée à la page _post.php
     $method = 'method=post';             //Pour une url > 2000 caractères, utiliser POST
@@ -88,6 +88,13 @@ if ($id_user) {
         $idFtaRoleEncoursDefault = FtaRoleModel::getKeyNameOfFirstRoleByIdUser($id_user);
         if ($fta_modification) {
             $synthese_action = FtaEtatModel::ETAT_AVANCEMENT_VALUE_EN_COURS;
+            if (!$idFtaRoleEncoursDefault) {
+                $titre = "Erreur d'accès";
+                $message = "Erreur, vous n'avez aucun droits d'accès Rôles sur le module Fta.<br><br>"
+                        . " Veuillez vous déconnecter et contactez l'administrateur de l'intranet";
+                $redirection = "index.php";
+                afficher_message($titre, $message, $redirection);
+            }
         } else {
             $synthese_action = FtaEtatModel::ETAT_AVANCEMENT_VALUE_ALL;
             $idFtaRoleEncoursDefault = '0';
@@ -164,7 +171,7 @@ if ($id_user) {
     /**
      * traitement long
      */
-    AccueilFta::initAccueil($id_user, $id_fta_etat, $nomFtaEtat, $synthese_action, $idFtaRoleEncours, $order_common,  $debut,$numeroDePageCourante);
+    AccueilFta::initAccueil($id_user, $id_fta_etat, $nomFtaEtat, $synthese_action, $idFtaRoleEncours, $order_common, $debut, $numeroDePageCourante);
 
 
 

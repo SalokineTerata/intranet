@@ -103,19 +103,11 @@ class EnvironmentConf {
     }
 
     public function getUrlFullRoot() {
-        if ($this->getReverseProxyName() == "") {
-            $UrlFullRoot = $this->getUrlProtocol() . '://'
-                    . $this->getUrlServer() . '/'
-                    . $this->getUrlRoot() . '/'
-                    . $this->getUrlSubdir()
-            ;
-        } else {
-            $UrlFullRoot = $this->getUrlProtocol() . '://'
-                    . $this->getReverseProxyName() . '/'
-                    . $this->getUrlRoot() . '/'
-                    . $this->getUrlSubdir()
-            ;
-        }
+        $UrlFullRoot = $this->getUrlProtocol() . '://'
+                . $this->getUrlServer() . '/'
+                . $this->getUrlRoot() . '/'
+                . $this->getUrlSubdir()
+        ;
         return $UrlFullRoot;
     }
 
@@ -204,8 +196,17 @@ class EnvironmentConf {
         return $this->urlRoot;
     }
 
+    private function getUrlServerClient() {
+        if ($this->getReverseProxyName() == "") {
+            $urlServer = $this->urlServer;
+        } else {
+            $urlServer = $this->getReverseProxyName();
+        }
+        return $urlServer;
+    }
+
     public function getUrlServer() {
-        return $this->urlServer;
+        return $this->getUrlServerClient();
     }
 
     public function getUrlSubdir() {

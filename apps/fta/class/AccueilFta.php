@@ -1306,7 +1306,7 @@ class AccueilFta {
             <i>Transitions groupées</i>:
             ' . $liste_action_groupe . '
             <input type = \'text\' name=\'subject\' size=\'20\' />
-            <input type=image src=images/transiter.png width=20 height=20 />
+            <input type=image src=images/transiter.png width=20 height=20  />
             <input type=hidden name=action value=transition_groupe>
                          ';
 //            $tableauFiche.= '&nbsp;
@@ -1314,7 +1314,7 @@ class AccueilFta {
 //            <i>Transitions groupées</i>:
 //            ' . $liste_action_groupe . '
 //            <input type = \'text\' name=\'subject\' size=\'20\' />
-//            <input type=image src=images/transiter.png width=20 height=20 onClick=doPreview(); />
+//            <input type=image src=images/transiter.png width=20 height=20  />
 //            <input type=hidden name=action value=transition_groupe>
 //                         ';
         }

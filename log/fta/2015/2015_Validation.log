@@ -1598,4 +1598,304 @@ Ce message a Ã©tÃ© envoyÃ© automatiquement par le module Intranet - Fiche 
 INFORMATIONS DE DEBUGGAGE:
 
 
-SELECT code_produit_agrologic_fta_nomenclature,prefixe_annexe_agrologic_article_codification FROM fta_composant, annexe_agrologic_article_codification WHERE fta_composant.id_fta=14480 AND is_composition_fta_composant=1  AND fta_composant.id_annexe_agrologic_article_codification=annexe_agrologic_article_codification.id_annexe_agrologic_article_codification ORDER BY prefixe_annexe_agrologic_article_codification ASC, nom_fta_nomenclature \n 
+SELECT code_produit_agrologic_fta_nomenclature,prefixe_annexe_agrologic_article_codification FROM fta_composant, annexe_agrologic_article_codification WHERE fta_composant.id_fta=14480 AND is_composition_fta_composant=1  AND fta_composant.id_annexe_agrologic_article_codification=annexe_agrologic_article_codification.id_annexe_agrologic_article_codification ORDER BY prefixe_annexe_agrologic_article_codification ASC, nom_fta_nomenclature \n 27/11/2015 16:40:47\nFTA Activation des Produits SYSTEM <informatiquesupport.avignon@agis-sa.fr> : informatiquesupport.avignon@agis-sa.fr : FTA/Information "1 - " \n DESTINATAIRES:
+SYSTEM superviseur: InformatiqueSupport.AVIGNON@agis-sa.fr
+JAEGLE cecile: cecile.jaegle@agis-sa.fr
+MORIN stephane: stephane.morin@ldc.fr
+SANEGRE boris: boris.sanegre@agis-sa.fr
+LUCAS christine: christine.lucas@agis-sa.fr
+WEYMULLER julie: julie.weymuller@agis-sa.fr
+COUSTON Jasmine: jasmine.couston@agis-sa.fr
+CHOLLET Christine: christine.alberola@agis-sa.fr
+PFISTER cecile: cecile.pfister@agis-sa.fr
+GASTAL Annabel: annabel.gastal@agis-sa.fr
+TARDY lise: lise.tardy@agis-sa.fr
+COUGET marie-paule (R&D): marie-paule.couget@agis-sa.fr
+EMBALLAGE Avignon: christelle.bernard@agis-sa.fr
+RAGON johan: johan.ragon@agis-sa.fr
+MEROT mathieu: mathieu.merot@agis-sa.fr
+DUSSAUD lucile: lucile.dussaud@agis-sa.fr
+BERTAUX virginie: virginie.bertaux@agis-sa.fr
+BOURGUIGNON anne-marie: anne-marie.bourguignon@agis-sa.fr
+FTA CrÃ©ation FTA: InformatiqueSupport.AVIGNON@agis-sa.fr
+BERNARD Sarah-emilie: sarah-emilie bernard
+CHEIREZY Fabienne: fabienne.cheirezy@agis-sa.fr
+COUGET Marie-Paule (CrÃ©ation FTA): marie-paule.couget@agis-sa.fr
+COUGET marie-paule (Gestion): marie-paule.couget@agis-sa.fr
+BRES Jessica: jessica.bres@agis-sa.fr
+PREST-MAUGUIN Laurence: laurence.prest-mauguin@agis-sa.fr
+VIAUX Chloe: chloe.viaux@agis-sa.fr
+POLLET Gregory: gregory.pollet@agis-sa.fr
+DRONE Alexandre: alexandre.drone@agis-sa.fr
+CALVO Julien: julien.calvo@agis-sa.fr
+BADARD Laura: laura.badard@agis-sa.fr
+VERNEREY Juliette: juliette.vernerey@agis-sa.fr
+TRANIELLO Benjamin: benjamin.traniello@agis-sa.fr
+JOUANEM Marine: Marine.JOUANEM@agis-sa.fr
+NINJA Avignon: informatique.agis@agis-sa.fr
+KLEIN CÃ©cile: cecile.klein@agis-sa.fr
+
+
+Message envoyÃ©:
+
+La Fiche Technique Article "1 - " vient d'Ãªtre validÃ©e.
+Cet Article est maintenant actif et disponible dans l'ensemble de notre systÃ¨me informatique.
+
+INFORMATIONS PRINCIPALES:
+Site d'assemblage: AVIGNON
+Identifiant dans Agrologic: 1
+
+Listes des produits crÃ©Ã©s:
+00, 
+
+INFORMATIONS SUPPLEMENTAIRES:
+Code Article LDC: 0
+Gencod EAN Article: 
+Gencod EAN Colis: 
+Nombre d'UVC par colis: 0
+Poids net de l'unitÃ© de vente facturÃ©e (en Kg): 0
+Identifiant du Dossier Technique: 13439-v0
+UnitÃ© de facturation: 
+DurÃ©e de vie garantie client (en jours): 0
+DurÃ©e de vie Production (en jours): 0
+DÃ©signation Commerciale: 
+
+
+COMMENTAIRE:
+validation
+
+Bonne journÃ©e Ã  tous.
+Ce message a Ã©tÃ© envoyÃ© automatiquement par le module Intranet - Fiche Technique Article.
+
+INFORMATIONS DE DEBUGGAGE:
+
+
+SELECT code_produit_agrologic_fta_nomenclature,prefixe_annexe_agrologic_article_codification FROM fta_composant, annexe_agrologic_article_codification WHERE fta_composant.id_fta=13439 AND is_composition_fta_composant=1  AND fta_composant.id_annexe_agrologic_article_codification=annexe_agrologic_article_codification.id_annexe_agrologic_article_codification ORDER BY prefixe_annexe_agrologic_article_codification ASC, nom_fta_nomenclature \n 27/11/2015 16:40:47\nFTA Activation des Produits SYSTEM <informatiquesupport.avignon@agis-sa.fr> : informatiquesupport.avignon@agis-sa.fr : FTA/Information "1 - RIZ CANTO TRFE 6X300G" \n DESTINATAIRES:
+SYSTEM superviseur: InformatiqueSupport.AVIGNON@agis-sa.fr
+JAEGLE cecile: cecile.jaegle@agis-sa.fr
+MORIN stephane: stephane.morin@ldc.fr
+SANEGRE boris: boris.sanegre@agis-sa.fr
+LUCAS christine: christine.lucas@agis-sa.fr
+WEYMULLER julie: julie.weymuller@agis-sa.fr
+COUSTON Jasmine: jasmine.couston@agis-sa.fr
+CHOLLET Christine: christine.alberola@agis-sa.fr
+PFISTER cecile: cecile.pfister@agis-sa.fr
+GASTAL Annabel: annabel.gastal@agis-sa.fr
+TARDY lise: lise.tardy@agis-sa.fr
+COUGET marie-paule (R&D): marie-paule.couget@agis-sa.fr
+EMBALLAGE Avignon: christelle.bernard@agis-sa.fr
+RAGON johan: johan.ragon@agis-sa.fr
+MEROT mathieu: mathieu.merot@agis-sa.fr
+DUSSAUD lucile: lucile.dussaud@agis-sa.fr
+BERTAUX virginie: virginie.bertaux@agis-sa.fr
+BOURGUIGNON anne-marie: anne-marie.bourguignon@agis-sa.fr
+FTA CrÃ©ation FTA: InformatiqueSupport.AVIGNON@agis-sa.fr
+BERNARD Sarah-emilie: sarah-emilie bernard
+CHEIREZY Fabienne: fabienne.cheirezy@agis-sa.fr
+COUGET Marie-Paule (CrÃ©ation FTA): marie-paule.couget@agis-sa.fr
+COUGET marie-paule (Gestion): marie-paule.couget@agis-sa.fr
+BRES Jessica: jessica.bres@agis-sa.fr
+PREST-MAUGUIN Laurence: laurence.prest-mauguin@agis-sa.fr
+VIAUX Chloe: chloe.viaux@agis-sa.fr
+POLLET Gregory: gregory.pollet@agis-sa.fr
+DRONE Alexandre: alexandre.drone@agis-sa.fr
+CALVO Julien: julien.calvo@agis-sa.fr
+BADARD Laura: laura.badard@agis-sa.fr
+VERNEREY Juliette: juliette.vernerey@agis-sa.fr
+TRANIELLO Benjamin: benjamin.traniello@agis-sa.fr
+JOUANEM Marine: Marine.JOUANEM@agis-sa.fr
+NINJA Avignon: informatique.agis@agis-sa.fr
+KLEIN CÃ©cile: cecile.klein@agis-sa.fr
+
+
+Message envoyÃ©:
+
+La Fiche Technique Article "1 - RIZ CANTO TRFE 6X300G" vient d'Ãªtre validÃ©e.
+Cet Article est maintenant actif et disponible dans l'ensemble de notre systÃ¨me informatique.
+
+INFORMATIONS PRINCIPALES:
+Site d'assemblage: AVIGNON
+Identifiant dans Agrologic: 1
+
+Listes des produits crÃ©Ã©s:
+30783086, 
+
+INFORMATIONS SUPPLEMENTAIRES:
+Code Article LDC: 23445
+Gencod EAN Article: 3366760011029
+Gencod EAN Colis: 13366760011026
+Nombre d'UVC par colis: 6
+Poids net de l'unitÃ© de vente facturÃ©e (en Kg): 0.3
+Identifiant du Dossier Technique: 325-v27
+UnitÃ© de facturation: PiÃ¨ce
+DurÃ©e de vie garantie client (en jours): 11
+DurÃ©e de vie Production (en jours): 35
+DÃ©signation Commerciale: RIZ CANTONAIS
+
+
+COMMENTAIRE:
+validation
+
+Bonne journÃ©e Ã  tous.
+Ce message a Ã©tÃ© envoyÃ© automatiquement par le module Intranet - Fiche Technique Article.
+
+INFORMATIONS DE DEBUGGAGE:
+
+
+SELECT code_produit_agrologic_fta_nomenclature,prefixe_annexe_agrologic_article_codification FROM fta_composant, annexe_agrologic_article_codification WHERE fta_composant.id_fta=14055 AND is_composition_fta_composant=1  AND fta_composant.id_annexe_agrologic_article_codification=annexe_agrologic_article_codification.id_annexe_agrologic_article_codification ORDER BY prefixe_annexe_agrologic_article_codification ASC, nom_fta_nomenclature \n 30/11/2015 10:28:29\nsuperviseur SYSTEM <InformatiqueSupport.AVIGNON@agis-sa.fr> : InformatiqueSupport.AVIGNON@agis-sa.fr : FTA/Information "1 - RIZ CANTO TRFE 6X300G" \n DESTINATAIRES:
+SYSTEM superviseur: InformatiqueSupport.AVIGNON@agis-sa.fr
+JAEGLE cecile: cecile.jaegle@agis-sa.fr
+MORIN stephane: stephane.morin@ldc.fr
+SANEGRE boris: boris.sanegre@agis-sa.fr
+LUCAS christine: christine.lucas@agis-sa.fr
+WEYMULLER julie: julie.weymuller@agis-sa.fr
+COUSTON Jasmine: jasmine.couston@agis-sa.fr
+CHOLLET Christine: christine.alberola@agis-sa.fr
+PFISTER cecile: cecile.pfister@agis-sa.fr
+GASTAL Annabel: annabel.gastal@agis-sa.fr
+TARDY lise: lise.tardy@agis-sa.fr
+COUGET marie-paule (R&D): marie-paule.couget@agis-sa.fr
+EMBALLAGE Avignon: christelle.bernard@agis-sa.fr
+RAGON johan: johan.ragon@agis-sa.fr
+MEROT mathieu: mathieu.merot@agis-sa.fr
+DUSSAUD lucile: lucile.dussaud@agis-sa.fr
+BERTAUX virginie: virginie.bertaux@agis-sa.fr
+BOURGUIGNON anne-marie: anne-marie.bourguignon@agis-sa.fr
+FTA CrÃ©ation FTA: InformatiqueSupport.AVIGNON@agis-sa.fr
+BERNARD Sarah-emilie: sarah-emilie bernard
+CHEIREZY Fabienne: fabienne.cheirezy@agis-sa.fr
+COUGET Marie-Paule (CrÃ©ation FTA): marie-paule.couget@agis-sa.fr
+COUGET marie-paule (Gestion): marie-paule.couget@agis-sa.fr
+BRES Jessica: jessica.bres@agis-sa.fr
+PREST-MAUGUIN Laurence: laurence.prest-mauguin@agis-sa.fr
+VIAUX Chloe: chloe.viaux@agis-sa.fr
+POLLET Gregory: gregory.pollet@agis-sa.fr
+DRONE Alexandre: alexandre.drone@agis-sa.fr
+CALVO Julien: julien.calvo@agis-sa.fr
+BADARD Laura: laura.badard@agis-sa.fr
+VERNEREY Juliette: juliette.vernerey@agis-sa.fr
+TRANIELLO Benjamin: benjamin.traniello@agis-sa.fr
+JOUANEM Marine: Marine.JOUANEM@agis-sa.fr
+NINJA Avignon: informatique.agis@agis-sa.fr
+KLEIN CÃ©cile: cecile.klein@agis-sa.fr
+
+
+Message envoyÃ©:
+
+La Fiche Technique Article "1 - RIZ CANTO TRFE 6X300G" vient d'Ãªtre validÃ©e.
+Cet Article est maintenant actif et disponible dans l'ensemble de notre systÃ¨me informatique.
+
+INFORMATIONS PRINCIPALES:
+Site d'assemblage: AVIGNON
+Identifiant dans Agrologic: 1
+
+Listes des produits crÃ©Ã©s:
+30783086, 
+
+INFORMATIONS SUPPLEMENTAIRES:
+Code Article LDC: 23445
+Gencod EAN Article: 3366760011029
+Gencod EAN Colis: 13366760011026
+Nombre d'UVC par colis: 6
+Poids net de l'unitÃ© de vente facturÃ©e (en Kg): 0.3
+Identifiant du Dossier Technique: 325-v28
+UnitÃ© de facturation: PiÃ¨ce
+DurÃ©e de vie garantie client (en jours): 11
+DurÃ©e de vie Production (en jours): 35
+DÃ©signation Commerciale: RIZ CANTONAIS
+
+
+COMMENTAIRE:
+
+==============================
+==============================
+Date: 2015-11-30
+Login du modificateur: superviseur
+
+test
+
+Bonne journÃ©e Ã  tous.
+Ce message a Ã©tÃ© envoyÃ© automatiquement par le module Intranet - Fiche Technique Article.
+
+INFORMATIONS DE DEBUGGAGE:
+
+
+SELECT code_produit_agrologic_fta_nomenclature,prefixe_annexe_agrologic_article_codification FROM fta_composant, annexe_agrologic_article_codification WHERE fta_composant.id_fta=14597 AND is_composition_fta_composant=1  AND fta_composant.id_annexe_agrologic_article_codification=annexe_agrologic_article_codification.id_annexe_agrologic_article_codification ORDER BY prefixe_annexe_agrologic_article_codification ASC, nom_fta_nomenclature \n 30/11/2015 10:39:37\nsuperviseur SYSTEM <InformatiqueSupport.AVIGNON@agis-sa.fr> : InformatiqueSupport.AVIGNON@agis-sa.fr : FTA/Information "1 - RIZ CANTO TRFE 6X300G" \n DESTINATAIRES:
+SYSTEM superviseur: InformatiqueSupport.AVIGNON@agis-sa.fr
+JAEGLE cecile: cecile.jaegle@agis-sa.fr
+MORIN stephane: stephane.morin@ldc.fr
+SANEGRE boris: boris.sanegre@agis-sa.fr
+LUCAS christine: christine.lucas@agis-sa.fr
+WEYMULLER julie: julie.weymuller@agis-sa.fr
+COUSTON Jasmine: jasmine.couston@agis-sa.fr
+CHOLLET Christine: christine.alberola@agis-sa.fr
+PFISTER cecile: cecile.pfister@agis-sa.fr
+GASTAL Annabel: annabel.gastal@agis-sa.fr
+TARDY lise: lise.tardy@agis-sa.fr
+COUGET marie-paule (R&D): marie-paule.couget@agis-sa.fr
+EMBALLAGE Avignon: christelle.bernard@agis-sa.fr
+RAGON johan: johan.ragon@agis-sa.fr
+MEROT mathieu: mathieu.merot@agis-sa.fr
+DUSSAUD lucile: lucile.dussaud@agis-sa.fr
+BERTAUX virginie: virginie.bertaux@agis-sa.fr
+BOURGUIGNON anne-marie: anne-marie.bourguignon@agis-sa.fr
+FTA CrÃ©ation FTA: InformatiqueSupport.AVIGNON@agis-sa.fr
+BERNARD Sarah-emilie: sarah-emilie bernard
+CHEIREZY Fabienne: fabienne.cheirezy@agis-sa.fr
+COUGET Marie-Paule (CrÃ©ation FTA): marie-paule.couget@agis-sa.fr
+COUGET marie-paule (Gestion): marie-paule.couget@agis-sa.fr
+BRES Jessica: jessica.bres@agis-sa.fr
+PREST-MAUGUIN Laurence: laurence.prest-mauguin@agis-sa.fr
+VIAUX Chloe: chloe.viaux@agis-sa.fr
+POLLET Gregory: gregory.pollet@agis-sa.fr
+DRONE Alexandre: alexandre.drone@agis-sa.fr
+CALVO Julien: julien.calvo@agis-sa.fr
+BADARD Laura: laura.badard@agis-sa.fr
+VERNEREY Juliette: juliette.vernerey@agis-sa.fr
+TRANIELLO Benjamin: benjamin.traniello@agis-sa.fr
+JOUANEM Marine: Marine.JOUANEM@agis-sa.fr
+NINJA Avignon: informatique.agis@agis-sa.fr
+KLEIN CÃ©cile: cecile.klein@agis-sa.fr
+
+
+Message envoyÃ©:
+
+La Fiche Technique Article "1 - RIZ CANTO TRFE 6X300G" vient d'Ãªtre validÃ©e.
+Cet Article est maintenant actif et disponible dans l'ensemble de notre systÃ¨me informatique.
+
+INFORMATIONS PRINCIPALES:
+Site d'assemblage: AVIGNON
+Identifiant dans Agrologic: 1
+
+Listes des produits crÃ©Ã©s:
+30783086, 
+
+INFORMATIONS SUPPLEMENTAIRES:
+Code Article LDC: 23445
+Gencod EAN Article: 3366760011029
+Gencod EAN Colis: 13366760011026
+Nombre d'UVC par colis: 6
+Poids net de l'unitÃ© de vente facturÃ©e (en Kg): 0.3
+Identifiant du Dossier Technique: 325-v29
+UnitÃ© de facturation: PiÃ¨ce
+DurÃ©e de vie garantie client (en jours): 11
+DurÃ©e de vie Production (en jours): 35
+DÃ©signation Commerciale: RIZ CANTONAIS
+
+
+COMMENTAIRE:
+
+==============================
+==============================
+Date: 2015-11-30
+Login du modificateur: superviseur
+
+test
+
+Bonne journÃ©e Ã  tous.
+Ce message a Ã©tÃ© envoyÃ© automatiquement par le module Intranet - Fiche Technique Article.
+
+INFORMATIONS DE DEBUGGAGE:
+
+
+SELECT code_produit_agrologic_fta_nomenclature,prefixe_annexe_agrologic_article_codification FROM fta_composant, annexe_agrologic_article_codification WHERE fta_composant.id_fta=14598 AND is_composition_fta_composant=1  AND fta_composant.id_annexe_agrologic_article_codification=annexe_agrologic_article_codification.id_annexe_agrologic_article_codification ORDER BY prefixe_annexe_agrologic_article_codification ASC, nom_fta_nomenclature \n 

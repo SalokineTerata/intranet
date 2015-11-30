@@ -80,7 +80,7 @@ if ($id_user) {//Si l'utilisateur est connecté
         echo '<a href='
         . $globalConfig->getConf()->getUrlFullRoot()
         . '/'
-        . $nom_intranet_modules
+        . $nom_intranet_modules . '/'
         . '' . $additional_ref . ' target=_top>';
         echo '<img src='
         . $globalConfig->getConf()->getUrlFullRoot()

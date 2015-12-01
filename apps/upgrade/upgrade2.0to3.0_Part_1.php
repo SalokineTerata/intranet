@@ -5146,7 +5146,7 @@ if ($resultCorrrectionFtaSuiviProjet2) {
 
 
 /**
- * Les Id des utilisateur supprimée sont remplacé par -1 (utilisateur supprimer) 
+ * Les Id des utilisateur supprimée sont remplacé par -2 (utilisateur migrationV2toV3) 
  * dans la table fta_suivi_projet
  * Etat :
  * Validé 3: retirer.

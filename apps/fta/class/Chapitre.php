@@ -2222,7 +2222,7 @@ class Chapitre {
 
             $return = '<br><br><br><br><br><table width=\'30%\' align=\'right\'><tr align=\'right\'><td class=titre_principal>'
                     . DatabaseDescription::getFieldDocLabel('fta_suivi_projet', 'correction_fta_suivi_projet') . '</td></tr><tr align=\'right\'><td>'
-                    . '<textarea name=correction_fta_suivi_projet rows=3 cols=40></textarea></td></tr><tr align=\'right\'><td>'
+                    . '<textarea name=correction_fta_suivi_projet rows=3 cols=65></textarea></td></tr><tr align=\'right\'><td>'
                     . '<a '
                     . 'href=# '
                     . 'onClick=confirmation_correction_fta(); '

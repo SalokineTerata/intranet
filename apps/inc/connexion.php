@@ -51,7 +51,7 @@ echo '
 if (0) {
     //Joyeux Noel  - Voeux
     echo '<BR><FONT SIZE=4>
-        <marquee>Le service informatique vous souhaite une très bonne année 2007 !!!</marquee>
+        <marquee>Le service informatique vous souhaite une très bonne année 2016 !!!</marquee>
         </FONT></CENTER>
        ';
 }

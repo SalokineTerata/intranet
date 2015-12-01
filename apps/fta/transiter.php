@@ -143,7 +143,7 @@ if ($recap[$idFta] <> '100%') {
 if ($idFtaRole == "6") {
     $req.= ' AND ' . FtaTransitionModel::FIELDNAME_ABREVIATION_FTA_TRANSITION . '<>\'' . FtaEtatModel::ETAT_ABREVIATION_VALUE_WORKFLOW . '\'';
 }
-if ($idFtaRole <> "1" or $idFtaRole <> "6") {
+if ($idFtaRole <> "1" and $idFtaRole <> "6") {
     $req.= ' AND ' . FtaTransitionModel::FIELDNAME_ABREVIATION_FTA_TRANSITION . '<>\'' . FtaEtatModel::ETAT_ABREVIATION_VALUE_RETIRE . '\'';
 }
 

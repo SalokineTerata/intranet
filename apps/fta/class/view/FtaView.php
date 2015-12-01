@@ -999,7 +999,7 @@ class FtaView {
         $htmlDimensionUVC = new HtmlInputText();
 
         $htmlDimensionUVC->setLabel(FtaConditionnementModel::UVC_EMBALLAGE_DIMENSION_LABEL);
-        $htmlDimensionUVC->getAttributes()->getValue()->setValue($return[FtaConditionnementModel::UVC_EMBALLAGE_DIMENSION]);
+        $htmlDimensionUVC->getAttributes()->getValue()->setValue($return[FtaConditionnementModel::UVC_EMBALLAGE_DIMENSION]. ' (Longueur x Largeur x Hauteur)');
         $htmlDimensionUVC->setIsEditable(FALSE);
 
 
@@ -1217,12 +1217,14 @@ class FtaView {
             $bgcolor = "#AFFF5A";
             $html_warning = "";
         }
-
-        $bloc.= "<tr class=contenu><td bgcolor=$bgcolor align=\"center\" valign=\"middle\">";
-        $bloc.="Poids net du colis (en Kg): ";
-        $bloc.="</td><td bgcolor=$bgcolor align=\"center\" valign=\"middle\">"
-                . "<h4><br>$colisNet</h4><br>$html_warning</td></tr>";
-
+        if($colisNet) {
+            $bloc.= "<tr class=contenu><td bgcolor=$bgcolor align=\"center\" valign=\"middle\">";
+            $bloc.="Poids net du colis (en Kg): ";
+            $bloc.="</td><td bgcolor=$bgcolor align=\"center\" valign=\"middle\">"
+                    . "<h4><br>$colisNet</h4><br>$html_warning</td></tr>";
+        } else {
+            $bloc = "";
+        }
         return $bloc;
     }
 

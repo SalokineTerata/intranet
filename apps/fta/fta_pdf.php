@@ -9,6 +9,8 @@ $ftaModel = new FtaModel($id_fta);
 $siteDeProduction = $ftaModel->getDataField(FtaModel::FIELDNAME_SITE_ASSEMBLAGE)->getFieldValue();
 $description_origine_transformation_fta = $ftaModel->getDataField(FtaModel::FIELDNAME_PRODUIT_TRANSFORME)->getFieldValue();
 $NOM_origine_transformation_fta = $ftaModel->getDataField(FtaModel::FIELDNAME_PRODUIT_TRANSFORME)->getFieldLabel();
+$synoptique_valide_fta = $ftaModel->getDataField(FtaModel::FIELDNAME_DESCRIPTION_DU_PRODUIT)->getFieldValue();
+$NOM_synoptique_valide_fta = $ftaModel->getDataField(FtaModel::FIELDNAME_DESCRIPTION_DU_PRODUIT)->getFieldLabel();
 $geoModel = new GeoModel($siteDeProduction);
 $site_agrement_ce = $geoModel->getDataField(GeoModel::FIELDNAME_SITE_AGREMENT_CE)->getFieldValue();
 $NOM_site_agrement_ce = $geoModel->getDataField(GeoModel::FIELDNAME_SITE_AGREMENT_CE)->getFieldLabel();
@@ -177,7 +179,7 @@ $NOM_K_etat = $annexeEnvironnementConservationGroupeModel->getDataField(AnnexeEn
 //Tableau de données
 $data_table = array(
     //***********
-    array($NOM_synoptique_valide_fta, $synoptique_valide_fta),
+//    array($NOM_synoptique_valide_fta, $synoptique_valide_fta),
     //array("Conditionnement", $description_emballage),
     //array("Température de conservation", $conservation),
     array($NOM_K_etat, $temperature_par_defaut_annexe_environnement_conservation_groupe),
@@ -383,8 +385,8 @@ if ($returnUVC["dimension_uvc"]
         $data_table = array(
             //***********
             array("Dimension UVC", $returnUVC["dimension_uvc"] . " mm"),
-            array("Dimension Colis", $returnDuColis["dimension_uvc"]),
-            array("PCB", $returnUVC[FtaConditionnementModel::UVC_EMBALLAGE_NET]),
+            array("Dimension Colis", $returnDuColis["dimension_uvc"]. " mm"),
+            array("PCB", $returnUVC[FtaModel::FIELDNAME_NOMBRE_UVC_PAR_CARTON]),
             array("Poids net Colis", $returnDuColis["colis_net"] . " kg"),
             array("Poids brut Colis", $returnDuColis["colis_brut"] . " kg")
         );

@@ -127,7 +127,7 @@ class FtaConditionnementModel extends AbstractModel {
         if ($paramDimensionEmballageLargeur < $paramDimensionEmballageLargeurRow) {
             $paramDimensionEmballageLargeur = $paramDimensionEmballageLargeurRow;
         }
-        return $paramDimensionEmballageLongueur . 'x' . $paramDimensionEmballageLargeur . 'x' . $paramDimensionEmballageHauteur . ' (Longueur x Largeur x Hauteur)';
+        return $paramDimensionEmballageLongueur . 'x' . $paramDimensionEmballageLargeur . 'x' . $paramDimensionEmballageHauteur;
     }
 
     /**

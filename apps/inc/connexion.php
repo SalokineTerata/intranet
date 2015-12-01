@@ -31,14 +31,14 @@ if ($globalConfig->getConf()->getExecEnvironment() == EnvironmentConf::ENV_PRD) 
 }
 
 //Pour les grandes occasions !!
-if (0) {
-    //Joyeux Noel
-    $logo = 'noel.gif width=80 ';
-    echo '<BR><FONT SIZE=4>
-        <marquee>Passez de bonnes fêtes !</marquee>
-        </FONT></CENTER>
-       ';
-}
+//if (0) {
+//    //Joyeux Noel
+//    $logo = 'noel.gif width=80 ';
+//    echo '<BR><FONT SIZE=4>
+//        <marquee>Passez de bonnes fêtes !</marquee>
+//        </FONT></CENTER>
+//       ';
+//}
 echo '
 
      <table border=0 cellspacing=0 cellpadding=0>
@@ -48,13 +48,13 @@ echo '
      <a href=../index.php><img src=../lib/images/' . $logo . ' width=100  border=0></a>
 ';
 //Pour les grandes occasions !!
-if (0) {
-    //Joyeux Noel  - Voeux
-    echo '<BR><FONT SIZE=4>
-        <marquee>Le service informatique vous souhaite une très bonne année 2016 !!!</marquee>
-        </FONT></CENTER>
-       ';
-}
+//if (0) {
+//    //Joyeux Noel  - Voeux
+//    echo '<BR><FONT SIZE=4>
+//        <marquee>Le service informatique vous souhaite une très bonne année 2016 !!!</marquee>
+//        </FONT></CENTER>
+//       ';
+//}
 echo $message;
 if ($globalConfig->getConf()->getExecDebugEnable()) {
     echo '<h4>Mode Debugger</h4>';

@@ -83,8 +83,10 @@ class IntranetDroitsAccesModel extends AbstractModel {
                     $IdIntranetActions[] = $rowsIdIntranetActions[IntranetDroitsAccesModel::FIELDNAME_ID_INTRANET_ACTIONS];
                 }
             } else {
-                $IdIntranetActions = array();
+                $IdIntranetActions = array("0");
             }
+        } else {
+            $IdIntranetActions = array("0");
         }
         return $IdIntranetActions;
     }

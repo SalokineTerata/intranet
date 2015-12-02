@@ -438,3 +438,16 @@ testr commentaire
 2015-11-30 10:18:00 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `commentaire_maj_fta` =   'test'
 2015-11-30 10:34:11 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : test
 2015-11-30 10:34:11 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `commentaire_maj_fta` =   'test'
+2015-12-02 10:51:59 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : test
+2015-12-02 10:51:59 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `commentaire_maj_fta` =   'test'
+2015-12-02 10:54:14 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : test
+2015-12-02 10:54:14 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `commentaire_maj_fta` =   'test'
+2015-12-02 10:56:56 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : test de desarchivage
+
+==============================
+==============================
+Date: 2013-09-04
+Login du modificateur: cj4300732
+
+arret
+2015-12-02 10:56:56 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `commentaire_maj_fta` =   'test de desarchivage\n\n==============================\n==============================\nDate: 2013-09-04\nLogin du modificateur: cj4300732\n\narret'

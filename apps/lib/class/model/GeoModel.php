@@ -100,12 +100,19 @@ class GeoModel extends AbstractModel {
      * Affiche la liste des site de production pour lesquel l'utilisateur connecté à les droits d'accès 
      * et l'identifiant de la Fta en cours
      * @param type $paramIdUser
-     * @param type $paramObjet
+     * @param type $paramHtmlObjet
      * @param type $paramIsEditable
      * @param type $paramIdFta
      * @return type
      */
-    public static function ShowListeDeroulanteSiteProdByAccesAndIdFta($paramIdUser, $paramObjet, $paramIsEditable, $paramIdFta) {
+    public static function ShowListeDeroulanteSiteProdByAccesAndIdFta($paramIdUser, $paramHtmlObjet, $paramIsEditable, $paramIdFta) {
+
+        /**
+         * Si l'utilisateur a les droits en consultation sur le module et pas en modification
+         * Transmettre à $paramHtmlObjet la liste de tous les sites taggés "fta".
+         * 
+         * Si il a accès en consultation et modification alors
+         */
         $ftaModel = new FtaModel($paramIdFta);
         $idFtaWorkflow = $ftaModel->getDataField(FtaModel::FIELDNAME_WORKFLOW)->getFieldValue();
         $arraySite = DatabaseOperation::convertSqlStatementWithKeyAndOneFieldToArray(
@@ -115,9 +122,11 @@ class GeoModel extends AbstractModel {
                         . ', ' . IntranetActionsModel::TABLENAME
                         . ', ' . IntranetDroitsAccesModel::TABLENAME
                         . ', ' . FtaWorkflowModel::TABLENAME
-                        . ' WHERE ' . GeoModel::FIELDNAME_GEO . '<>\'\''
-                        . ' AND ' . FtaActionSiteModel::TABLENAME . '.' . FtaActionSiteModel::FIELDNAME_ID_SITE . '=' . GeoModel::KEYNAME
-                        . ' AND ' . IntranetActionsModel::TABLENAME . '.' . IntranetActionsModel::KEYNAME
+                        . ' WHERE '
+                        //. GeoModel::FIELDNAME_GEO . '<>\'\''
+                        // . ' AND ' 
+                        . FtaActionSiteModel::TABLENAME . '.' . FtaActionSiteModel::FIELDNAME_ID_SITE . '=' . GeoModel::KEYNAME
+                        //. ' AND ' . IntranetActionsModel::TABLENAME . '.' . IntranetActionsModel::KEYNAME
                         . ' AND ' . FtaActionSiteModel::TABLENAME . '.' . FtaActionSiteModel::FIELDNAME_ID_INTRANET_ACTIONS
                         . '=' . IntranetActionsModel::TABLENAME . '.' . IntranetActionsModel::KEYNAME
                         . ' AND ' . FtaWorkflowModel::TABLENAME . '.' . FtaWorkflowModel::FIELDNAME_ID_INTRANET_ACTIONS
@@ -127,11 +136,12 @@ class GeoModel extends AbstractModel {
                         . ' AND ' . IntranetActionsModel::TABLENAME . '.' . IntranetActionsModel::KEYNAME
                         . '=' . IntranetDroitsAccesModel::TABLENAME . '.' . IntranetDroitsAccesModel::FIELDNAME_ID_INTRANET_ACTIONS
                         . ' AND ' . IntranetDroitsAccesModel::FIELDNAME_ID_USER . '=' . $paramIdUser // L'utilisateur connecté
-                        . ' AND ' . IntranetDroitsAccesModel::TABLENAME . '.' . IntranetDroitsAccesModel::FIELDNAME_NIVEAU_INTRANET_DROITS_ACCES . '=' . '1'
+                        . ' AND ' . IntranetDroitsAccesModel::TABLENAME . '.' . IntranetDroitsAccesModel::FIELDNAME_NIVEAU_INTRANET_DROITS_ACCES . '=' . IntranetNiveauAccesModel::NIVEAU_GENERIC_TRUE
                         . ' ORDER BY ' . GeoModel::FIELDNAME_GEO
         );
 
-        $paramObjet->setArrayListContent($arraySite);
+
+        $paramHtmlObjet->setArrayListContent($arraySite);
 
         $HtmlTableName = FtaModel::TABLENAME
                 . '_'
@@ -139,13 +149,13 @@ class GeoModel extends AbstractModel {
                 . '_'
                 . $paramIdFta
         ;
-        $paramObjet->getAttributes()->getName()->setValue(FtaModel::FIELDNAME_SITE_ASSEMBLAGE);
-        $paramObjet->setLabel(DatabaseDescription::getFieldDocLabel(GeoModel::TABLENAME, GeoModel::FIELDNAME_GEO));
-        $paramObjet->setIsEditable($paramIsEditable);
-        $paramObjet->initAbstractHtmlSelect(
-                $HtmlTableName, $paramObjet->getLabel(), $ftaModel->getDataField(FtaModel::FIELDNAME_SITE_ASSEMBLAGE)->getFieldValue(), NULL, $paramObjet->getArrayListContent());
-        $paramObjet->getEventsForm()->setOnChangeWithAjaxAutoSave(FtaModel::TABLENAME, FtaModel::KEYNAME, $paramIdFta, FtaModel::FIELDNAME_SITE_ASSEMBLAGE);
-        $listeSiteProduction = $paramObjet->getHtmlResult();
+        $paramHtmlObjet->getAttributes()->getName()->setValue(FtaModel::FIELDNAME_SITE_ASSEMBLAGE);
+        $paramHtmlObjet->setLabel(DatabaseDescription::getFieldDocLabel(GeoModel::TABLENAME, GeoModel::FIELDNAME_GEO));
+        $paramHtmlObjet->setIsEditable($paramIsEditable);
+        $paramHtmlObjet->initAbstractHtmlSelect(
+                $HtmlTableName, $paramHtmlObjet->getLabel(), $ftaModel->getDataField(FtaModel::FIELDNAME_SITE_ASSEMBLAGE)->getFieldValue(), NULL, $paramHtmlObjet->getArrayListContent());
+        $paramHtmlObjet->getEventsForm()->setOnChangeWithAjaxAutoSave(FtaModel::TABLENAME, FtaModel::KEYNAME, $paramIdFta, FtaModel::FIELDNAME_SITE_ASSEMBLAGE);
+        $listeSiteProduction = $paramHtmlObjet->getHtmlResult();
 
 
 

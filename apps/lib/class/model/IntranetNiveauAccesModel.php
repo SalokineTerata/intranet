@@ -13,6 +13,8 @@ class IntranetNiveauAccesModel extends AbstractModel {
     const FIELDNAME_ID_INTRANET_ACTIONS = 'id_intranet_actions';
     const FIELDNAME_ID_INTRANET_NIVEAU_ACCES = 'id_intranet_niveau_acces';
     const FIELDNAME_NOM_INTRANET_NIVEAU_ACCES = 'nom_intranet_niveau_acces';
+    const NIVEAU_GENERIC_FALSE = '0';
+    const NIVEAU_GENERIC_TRUE = '1';
 
     protected function setDefaultValues() {
         

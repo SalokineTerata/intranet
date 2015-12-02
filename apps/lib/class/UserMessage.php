@@ -24,6 +24,6 @@
  */
 class UserMessage {
 
-    const FR_LOGIN_PROCESS_ACCOUNT_LOCKED = "Votre compte est bloqué après trois tentative ratée.<br><br>Contactez un Administrateur pour réactiver votre compte.<br>";
+    const FR_LOGIN_PROCESS_ACCOUNT_LOCKED = "Votre compte est bloqué après trois tentatives ratées.<br><br>Contactez un Administrateur pour réactiver votre compte.<br>";
 
 }

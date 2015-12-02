@@ -99,10 +99,11 @@ if ($login) {
                 );
                 $reponseCheck = count($uniqueCheck);
                 if ($reponseCheck == 1) {
-                    $unique = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
-                                    'SELECT id_user FROM salaries WHERE login=\'' . $identite . '\' AND blocage=\'oui\''
-                    );
-                    $reponse = count($unique);
+//                    $unique = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
+//                                    'SELECT id_user FROM salaries WHERE login=\'' . $identite . '\' AND blocage=\'oui\''
+//                    );
+//                    $reponse = count($unique);
+                    $reponse = 0;
                     if ($reponse != 1) {
 
                         /* envois du mail d'information à l'utilisateur concerné */

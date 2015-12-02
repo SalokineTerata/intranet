@@ -78,6 +78,7 @@ if ($login) {
       $q1 = DatabaseOperation::query($req_authentification);
       $nb1 = mysql_numrows($q1);
      */
+    $login= str_replace("OR","",$login);
     if (!$pass) {
         $titre = "Accès aux modules de l'Intranet";
         $message = "Veuillez saisir votre mot de passe.<br><br>"

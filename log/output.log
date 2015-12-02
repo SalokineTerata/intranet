@@ -451,3 +451,7 @@ Login du modificateur: cj4300732
 
 arret
 2015-12-02 10:56:56 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `commentaire_maj_fta` =   'test de desarchivage\n\n==============================\n==============================\nDate: 2013-09-04\nLogin du modificateur: cj4300732\n\narret'
+2015-12-02 11:08:51 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : test
+2015-12-02 11:08:51 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `commentaire_maj_fta` =   'test'
+2015-12-02 11:16:31 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : test
+2015-12-02 11:16:31 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `commentaire_maj_fta` =   'test'

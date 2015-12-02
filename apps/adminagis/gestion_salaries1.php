@@ -27,7 +27,7 @@ $modifier = Lib::getParameterFromRequest('modifier');
 $userModel = new UserModel($idUser);
 $userView = new UserView($userModel);
 $userView->setIsEditable(TRUE);
-identification1('salaries', $idUser, $pass);
+identification1('salaries', $idUser, $pass,FALSE);
 //  include('functions.php');
 //  include('functions.js');
 

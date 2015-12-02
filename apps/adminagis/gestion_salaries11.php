@@ -23,7 +23,7 @@ $paramUserCatsopro = Lib::getParameterFromRequest('sal_catsopro');
 $paramDateCreationUser = Lib::getParameterFromRequest(UserModel::TABLENAME . '_' . UserModel::FIELDNAME_DATE_CREATION_SALARIES . '_' . $idUser);
 $paramUserMail = Lib::getParameterFromRequest('sal_mail');
 $paramModifier = Lib::getParameterFromRequest('modifier');
-identification1('salaries', $id_user, $pass);
+identification1('salaries', $id_user, $pass,FALSE);
 
 
 /*

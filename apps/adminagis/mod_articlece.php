@@ -1,7 +1,7 @@
 <?php
   require ("../lib/session.php");
   include("../lib/functions.php");
-  identification1("salaries", $login, $pass);
+  identification1("salaries", $login, $pass,FALSE);
   securce($id_user, $id_type);
   include("functions.php");
 

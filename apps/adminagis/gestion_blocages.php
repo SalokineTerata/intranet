@@ -9,7 +9,7 @@ $pass = $globalConfig->getAuthenticatedUser()->getDataField(UserModel::FIELDNAME
 $id_type = $globalConfig->getAuthenticatedUser()->getDataField(UserModel::FIELDNAME_ID_TYPE)->getFieldValue();
 $quidonc = Lib::getParameterFromRequest('quidonc');
 $action = Lib::getParameterFromRequest('action');
-identification1("salaries", $login, $pass);
+identification1("salaries", $login, $pass,FALSE);
 
 
 if ($action == "debloquer") {

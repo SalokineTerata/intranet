@@ -86,7 +86,7 @@ if ($login) {
         afficher_message($titre, $message, $redirection);
     }
 
-    if (!identification1($mysql_table_authentification, $login, $pass)) {
+    if (!identification1($mysql_table_authentification, $login, $pass,TRUE)) {
 
         if ($identite == $login) {
             $tentative++;

@@ -4,7 +4,7 @@
       require_once '../inc/main.php';
 
 
-identification1("salaries", $login, $pass);
+identification1("salaries", $login, $pass,FALSE);
    
 
 //  include("functions.php");

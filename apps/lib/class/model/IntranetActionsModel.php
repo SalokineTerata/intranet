@@ -177,7 +177,7 @@ class IntranetActionsModel extends AbstractModel {
     public static function AddIdIntranetActionParent($paramIdIntranetActionsParent) {
         if ($paramIdIntranetActionsParent) {
             foreach ($paramIdIntranetActionsParent as $value) {
-                $req .= ' OR ' . IntranetActionsModel::TABLENAME . '.' . IntranetActionsModel::FIELDNAME_PARENT_INTRANET_ACTIONS . '=' . $value . ' ';
+                $req .= ' OR ' . IntranetActionsModel::TABLENAME . '.' . IntranetActionsModel::FIELDNAME_PARENT_INTRANET_ACTIONS . '=\'' . $value . '\' ';
             }
         }
         return $req;

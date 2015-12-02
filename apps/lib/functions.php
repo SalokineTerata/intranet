@@ -168,7 +168,7 @@ function identification1($mysql_table_authentification, $login, $pass, GlobalCon
     }
     if ($ldap_active) {
         $ldap_connect = ldap_connect($ldap_server);  // doit être un serveur LDAP valide
-        ini_set('display_errors',TRUE);
+        ini_set('display_errors',FALSE);
         $ldap_result = ldap_bind($ldap_connect, $dn, $pass);
         $result_LDAP_OPT_PROTOCOL_VERSION = ldap_set_option($ldap_connect, LDAP_OPT_PROTOCOL_VERSION, 3);
         if ($debug) {

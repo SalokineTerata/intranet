@@ -3,7 +3,7 @@
 //  include("../lib/functions.php");
       require_once '../inc/main.php';
 
-identification1("salaries", $login, $pass);
+identification1("salaries", $login, $pass,FALSE);
   UserModel::securadmin(2, $id_type);
 
 //  include("functions.php");

@@ -27,21 +27,21 @@ $modifier = Lib::getParameterFromRequest('modifier');
 $userModel = new UserModel($idUser);
 $userView = new UserView($userModel);
 $userView->setIsEditable(TRUE);
-identification1('salaries', $idUser, $pass);
+identification1('salaries', $idUser, $pass,FALSE);
 //  include('functions.php');
 //  include('functions.js');
 
-if ($erreur == 'oui') {
-    echo ('<script language=\'JavaScript\'>\n');
-    echo ('alert(\'Ce salarié existe déjà\')');
-    echo ('</script>\n');
-}
+//if ($erreur == 'oui') {
+//    echo ('<script language=\'JavaScript\'>\n');
+//    echo ('alert(\'Ce salarié existe déjà\')');
+//    echo ('</script>\n');
+//}
 
-if ($erreur == 'pass') {
-    echo ('<script language=\'JavaScript\'>\n');
-    echo ('alert(\'Erreur de mot de passe\')');
-    echo ('</script>\n');
-}
+//if ($erreur == 'pass') {
+//    echo ('<script language=\'JavaScript\'>\n');
+//    echo ('alert(\'Erreur de mot de passe\')');
+//    echo ('</script>\n');
+//}
 
 /*
  *  Gestion des updates dans la table MODES

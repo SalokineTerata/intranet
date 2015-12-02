@@ -3,7 +3,7 @@
 //  include("../lib/functions.php");
       require_once '../inc/main.php';
 
-  identification1("salaries", $login, $pass);
+  identification1("salaries", $login, $pass,FALSE);
   UserModel::securadmin(3, $id_type);
 
   if (($valider=="valider")&&($nomliste!=""))

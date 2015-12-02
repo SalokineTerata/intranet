@@ -20,7 +20,7 @@ $paramNewsDefil = Lib::getParameterFromRequest('newsdefil');
 $paramUserMail = Lib::getParameterFromRequest('sal_mail');
 $paramModifier = Lib::getParameterFromRequest('modifier');
 $paramValider = Lib::getParameterFromRequest('valider');
-identification1('salaries', $login, $pass);
+identification1('salaries', $login, $pass,FALSE);
 
 if ($paramValider == 'valider') {
 

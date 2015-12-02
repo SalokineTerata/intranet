@@ -3,7 +3,7 @@
 //  include("../lib/functions.php");
       require_once '../inc/main.php';
 
-  identification1("salaries", $login, $pass);
+  identification1("salaries", $login, $pass,FALSE);
 
   echo "<hr />\n".
        "Update des droits d'accès dans la table intranet_droit_acces (SM - avril 2004 11:50:28)<br>";

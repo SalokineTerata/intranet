@@ -21,7 +21,7 @@ $paramRech = Lib::getParameterFromRequest('rech');
 $userModel = new UserModel($paramIdUser);
 $userView = new UserView($userModel);
 $userView->setIsEditable(TRUE);
-identification1('salaries', $login, $pass);
+identification1('salaries', $login, $pass,FALSE);
 if ($paramRech == '1') {
     /* Recherche des infos sur le salarie */
     $arrayUserDetail = DatabaseOperation::convertSqlStatementWithoutKeyToArray(

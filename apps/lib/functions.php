@@ -148,7 +148,7 @@
   $nb_limite_resultat = nombre maximun de resultat que peut avoir une requete.
 
  * ******************************************************************************** */
-function identification1($mysql_table_authentification, $login, $pass, GlobalConfig $globalConfig = null) {
+function identification1($mysql_table_authentification, $login, $pass,$paramldapCheck, GlobalConfig $globalConfig = null ) {
 //    $debug = EnvironmentConf::LDAP_DEBUG;
     $debug = FALSE;
     $return = TRUE;         //On part du principe que l'authentification doit fonctionner
@@ -166,7 +166,7 @@ function identification1($mysql_table_authentification, $login, $pass, GlobalCon
     if ($debug) {
         echo "ldap_active=$ldap_active<br>";
     }
-    if ($ldap_active) {
+    if ($ldap_active and $paramldapCheck) {
         $ldap_connect = ldap_connect($ldap_server);  // doit être un serveur LDAP valide
         ini_set('display_errors',FALSE);
         $ldap_result = ldap_bind($ldap_connect, $dn, $pass);

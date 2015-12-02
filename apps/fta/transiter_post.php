@@ -181,15 +181,17 @@ if (!$action) {
 //            $open_erpdatasync = '../access/base_erp_datasync/erp_datasync.' . $extension;
 //            header('Location: open_erpdatasync.php?open_erpdatasync=' . $open_erpdatasync);
             header('Location: index.php');
-        } else {
-            if ($t["0"] <> 1) {
+        } elseif ($abreviation_fta_transition == 'I') {
+            if ($t["0"] <> "1") {
                 header('Location: modification_fiche.php?id_fta=' . $t["id_fta_new"] . '&synthese_action=encours&comeback=1&id_fta_etat=' . $t[FtaEtatModel::KEYNAME] . '&abreviation_fta_etat=' . $t[FtaEtatModel::FIELDNAME_ABREVIATION] . '&id_fta_role=' . $idFtaRole);
-                
+
                 /**
                  * Version avec le module rewrite
                  */
 //                header('Location: modification_fiche-$t["id_fta_new"]-encours-1-$t[FtaEtatModel::KEYNAME]-$t[FtaEtatModel::FIELDNAME_ABREVIATION]-$idFtaRole.html');
             }
+        } else {
+            header('Location: modification_fiche.php?id_fta=' . $t["id_fta_new"] . '&synthese_action=all&comeback=1&id_fta_etat=' . $t[FtaEtatModel::KEYNAME] . '&abreviation_fta_etat=' . $t[FtaEtatModel::FIELDNAME_ABREVIATION] . '&id_fta_role=' . $idFtaRole);
         }
     }//Fin du traitement
 

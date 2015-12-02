@@ -28,7 +28,7 @@ if ($globalConfig->getConf()->getExecDebugEnable()) {
 echo '</td>';
 echo '</tr>';
 echo '</table>';
-echo ' <table width=100% height=100%>
+echo ' <table width=100% >
         <tr align=right>
             <td>
                 <small>

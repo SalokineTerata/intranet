@@ -89,13 +89,15 @@ if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
                     . "," . $nameOfBDDTarget . "." . "fta_suivi_projet"
                     . " WHERE " . "id_fta_etat" . "=1"
                     . " AND " ."fta_suivi_projet".".". "id_fta" . "=" . "fta" .".". "id_fta"
+                    . " AND " ."fta_suivi_projet".".". "id_fta_chapitre" . "<>" . "16"
+                    . " AND " ."fta_suivi_projet".".". "id_fta_chapitre" . "<>" . "17"
     );
     while ($rowsSuivi= mysql_fetch_array($arraySuivi)) {
 
         $idsignature = $rowsSuivi['id_fta_suivi_projet'];
 
         $req = "UPDATE " . $nameOfBDDTarget . "." . "fta_suivi_projet"
-                . " SET " . "signature_validation_suivi_projet" . "='" . "0" . "', "
+                . " SET " . "signature_validation_suivi_projet" . "='" . "0" . "' "
                 . " WHERE " . "id_fta_suivi_projet" . "='" . $idsignature . "' "
         ;
        if(mysql_query($req)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}

@@ -91,7 +91,7 @@ switch ($action) {
          * Initialisation de l'enregistrement de la Table FTA
          */
         $globalConfig = new GlobalConfig();
-              UserModel::ConnexionFalse($globalConfig);
+        UserModel::ConnexionFalse($globalConfig);
 
         $idUser = $globalConfig->getAuthenticatedUser()->getKeyValue();
 
@@ -180,15 +180,29 @@ switch ($action) {
         break;
 
     case 2: //Duplication d'une Fiche Technique Article
-        //Redirection
-        header('Location: duplication_fiche.php?'
-                . 'id_fta=' . $id_fta
-                . '&synthese_action=modification&abreviation_etat_destination=' . $abreviationFtaEtat
-                . '&new_designation_commerciale_fta=' . $designationCommercialeFta
-                . '&site_de_production=' . $siteDeProduction
-                . '&id_fta_role=' . $idFtaRole
-                . '&id_fta_workflow=' . $idFtaWorkflow);
 
+        $arrayFta = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
+                        'SELECT DISTINCT ' . FtaModel::KEYNAME
+                        . ' FROM ' . FtaModel::TABLENAME
+                        . ' WHERE ( ' . FtaModel::KEYNAME . ' = ' . $id_fta . ' ) '
+        );
+
+        if ($arrayFta) {
+            //Redirection
+            header('Location: duplication_fiche.php?'
+                    . 'id_fta=' . $id_fta
+                    . '&synthese_action=modification&abreviation_etat_destination=' . $abreviationFtaEtat
+                    . '&new_designation_commerciale_fta=' . $designationCommercialeFta
+                    . '&site_de_production=' . $siteDeProduction
+                    . '&id_fta_role=' . $idFtaRole
+                    . '&id_fta_workflow=' . $idFtaWorkflow);
+        } else {
+            //Averissement
+            $titre = "Fiche Technique Article";
+            $message = "Veuillez saisir un id fta existant .<br><br>"
+            ;
+            afficher_message($titre, $message, $redirection);
+        }
         break;
 
 

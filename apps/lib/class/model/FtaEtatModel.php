@@ -71,7 +71,7 @@ class FtaEtatModel extends AbstractModel {
     public static function getIdFtaByEtatAvancement($paramSyntheseAction, $paramEtat, $paramRole, $paramIdUser, $paramIdFtaEtat) {
         $idFtaEffectue = array();
 //        $compteur = "0";
-        if ($_SESSION['CheckIdFtaRole'] <> $paramRole) {
+        if ($_SESSION['CheckIdFtaRole'] <> $paramRole or $_SESSION[UserModel::KEYNAME] <> $paramIdUser) {
             AclClass::setRightsAcces($paramIdUser, $paramRole);
         }
 

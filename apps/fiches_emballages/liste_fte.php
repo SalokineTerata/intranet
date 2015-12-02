@@ -45,7 +45,7 @@ switch ($output) {
 //        }
         require_once '../inc/main.php';
         print_page_begin($disable_full_page, $menu_file);
-        flush();
+//        flush();
 }//Fin de la sélection du mode d'affichage de la page
 
 
@@ -99,10 +99,10 @@ if ($idUser) {
 
 //Initialisation
     if (!$selection_groupe) {
-        $selection_groupe = "-1";
+        $selection_groupe = "0";
     }
     if (!$selection_fournisseur) {
-        $selection_fournisseur = "-1";
+        $selection_fournisseur = "0";
     }
 
 
@@ -115,7 +115,7 @@ if ($idUser) {
 //Par Groupe de modèle d'emballage
     $recherche.="<td> Groupe: "
             . "<select name=selection_groupe onChange=lien_selection_goupe()>"
-            . "<option value=-1 >Tous</option>"
+            . "<option value=0 >Tous</option>"
     ;
     $req = "SELECT id_annexe_emballage_groupe,nom_annexe_emballage_groupe FROM annexe_emballage_groupe ORDER BY nom_annexe_emballage_groupe";
     $result_groupe = DatabaseOperation::convertSqlStatementWithoutKeyToArray($req);
@@ -134,7 +134,7 @@ if ($idUser) {
 //Par Fournisseur
     $recherche .="<td> Fournisseur: "
             . "<select name=selection_fournisseur onChange=lien_selection_fournisseur()>"
-            . "<option value=-1 >Tous</option>"
+            . "<option value=0 >Tous</option>"
     ;
     $req = "SELECT id_fte_fournisseur,nom_fte_fournisseur FROM fte_fournisseur ORDER BY nom_fte_fournisseur";
     $result_groupe = DatabaseOperation::convertSqlStatementWithoutKeyToArray($req);
@@ -167,11 +167,11 @@ if ($idUser) {
             . "AND `annexe_emballage`.`id_fte_fournisseur` = `fte_fournisseur`.`id_fte_fournisseur` ) "
     ;
 
-    if ($selection_groupe <> -1) {
+    if ($selection_groupe <> "0") {
         $req.= "AND ( ( `annexe_emballage_groupe`.`id_annexe_emballage_groupe` = $selection_groupe ) ) ";
     }
 
-    if ($selection_fournisseur <> -1) {
+    if ($selection_fournisseur <> "0") {
         $req.= "AND ( ( `annexe_emballage`.`id_fte_fournisseur` = $selection_fournisseur ) ) ";
     }
     $req .="ORDER BY fte_fournisseur.nom_fte_fournisseur, reference_fournisseur_annexe_emballage ";
@@ -190,7 +190,7 @@ if ($idUser) {
                 . "<td>L x l x h (en mm)</td>"
                 . "<td>" . DatabaseDescription::getFieldDocLabel("annexe_emballage", "poids_annexe_emballage") . "</td>"
         ;
-        if ($id_annexe_emballage_groupe_type == 3 or $selection_groupe == -1) {
+        if ($id_annexe_emballage_groupe_type == 3 or $selection_groupe == "0") {
             $bloc .="<td>Palettisation</td>";
         }
         $bloc .="<td></td></tr>";

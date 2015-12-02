@@ -2,7 +2,7 @@
 //  require("../lib/session.php");
 //  include("../lib/functions.php");
 require_once '../inc/main.php';
-identification1("salaries", $login, $pass);
+identification1("salaries", $login, $pass,FALSE);
    
 
   if ($mod=="mod")

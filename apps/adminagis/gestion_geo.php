@@ -9,7 +9,7 @@ $id_user = $globalConfig->getAuthenticatedUser()->getKeyValue();
 $pass = $globalConfig->getAuthenticatedUser()->getDataField(UserModel::FIELDNAME_PASSWORD)->getFieldValue();
 $id_type = $globalConfig->getAuthenticatedUser()->getDataField(UserModel::FIELDNAME_ID_TYPE)->getFieldValue();
 
-identification1("salaries", $login, $pass);
+identification1("salaries", $login, $pass,FALSE);
 
 //echo"lettre old :$lettreold<br>";  
   

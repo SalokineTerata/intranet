@@ -20,6 +20,11 @@ if ($globalConfig->getAuthenticatedUser()) {
 $fta_modification = AclClass::getValueAccesRights('fta_modification');
 
 $recherche = Lib::getParameterFromRequest("recherche");
+if ($recherche == "0") {
+    $message = "Votre demande a plus de 1000 résultats, veuillez précisez votre recherche ! ";
+    $redirection = "recherche.php";
+    afficher_message("Erreur", $message, $redirection);
+}
 $type_recherche = Lib::getParameterFromRequest("type_recherche");
 
 $search_table = Lib::isDefined("search_table");
@@ -38,7 +43,7 @@ $idFtaRole = Lib::getParameterFromRequest(FtaRoleModel::KEYNAME, $idFtaRoleEncou
 //$environnementConf = new EnvironmentConf();
 //$dossierUrL = $environnementConf->getUrlRoot();
 //if(!$dossierUrL){
-    $dossierUrL = $globalConfig->getConf()->getUrlRoot();
+$dossierUrL = $globalConfig->getConf()->getUrlRoot();
 
 //}
 /*

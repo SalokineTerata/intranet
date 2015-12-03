@@ -203,7 +203,7 @@ class IntranetActionsModel extends AbstractModel {
                                 . '=' . IntranetDroitsAccesModel::TABLENAME . '.' . IntranetDroitsAccesModel::FIELDNAME_ID_INTRANET_ACTIONS
                                 . ' AND ' . IntranetDroitsAccesModel::FIELDNAME_ID_USER . '=' . $paramIdUser // L'utilisateur connecté
                                 . ' AND ' . IntranetDroitsAccesModel::TABLENAME . '.' . IntranetDroitsAccesModel::FIELDNAME_NIVEAU_INTRANET_DROITS_ACCES . '= ' . IntranetNiveauAccesModel::NIVEAU_GENERIC_TRUE
-                                . 'AND ( 0 ' . IntranetActionsModel::AddIdIntranetAction($idIntranetActions) . ')'
+                                . ' AND ( 0 ' . IntranetActionsModel::AddIdIntranetAction($idIntranetActions) . ')'
                 );
 
                 $arrayFull[] = $array;

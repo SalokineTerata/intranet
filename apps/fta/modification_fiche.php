@@ -94,7 +94,7 @@ if ($idFta) {
         $redirection = "index.php";
         afficher_message($titre, $message, $redirection);
     }
-  
+
 
     /**
      * Récuparation des données pour la classification
@@ -126,7 +126,7 @@ if ($idFta) {
     }
 
 
-    if ($ftaModification) {
+    if ($ftaModification and $idFtaRole == FtaRoleModel::ID_FTA_ROLE_COMMUN) {
 
         $globalConfig = new GlobalConfig();
         $idUser = $globalConfig->getAuthenticatedUser()->getKeyValue();

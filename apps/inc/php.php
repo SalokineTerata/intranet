@@ -35,6 +35,7 @@ require_once('../lib/class/AclClass.php');
 require_once('../lib/class/Lib.php');
 require_once('../lib/class/Logger.php');
 require_once('../lib/class/LoggerClass.php');
+require_once('../lib/class/UserMessage.php');
 require_once('../lib/class/session/SessionSaveAndRestoreAbstract.php');
 
 // Configuration des environnements

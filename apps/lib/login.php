@@ -78,7 +78,7 @@ if ($login) {
       $q1 = DatabaseOperation::query($req_authentification);
       $nb1 = mysql_numrows($q1);
      */
-    $login= str_replace("OR","",$login);
+    $login = str_replace("OR", "", $login);
     if (!$pass) {
         $titre = "Accès aux modules de l'Intranet";
         $message = "Veuillez saisir votre mot de passe.<br><br>"
@@ -86,7 +86,7 @@ if ($login) {
         afficher_message($titre, $message, $redirection);
     }
 
-    if (!identification1($mysql_table_authentification, $login, $pass,TRUE)) {
+    if (!identification1($mysql_table_authentification, $login, $pass, TRUE)) {
 
         if ($identite == $login) {
             $tentative++;
@@ -99,10 +99,11 @@ if ($login) {
                 );
                 $reponseCheck = count($uniqueCheck);
                 if ($reponseCheck == 1) {
-                    $unique = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
-                                    'SELECT id_user FROM salaries WHERE login=\'' . $identite . '\' AND blocage=\'oui\''
-                    );
-                    $reponse = count($unique);
+//                    $unique = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
+//                                    'SELECT id_user FROM salaries WHERE login=\'' . $identite . '\' AND blocage=\'oui\''
+//                    );
+//                    $reponse = count($unique);
+                    $reponse = 0;
                     if ($reponse != 1) {
 
                         /* envois du mail d'information à l'utilisateur concerné */
@@ -130,9 +131,7 @@ if ($login) {
                         $titou = DatabaseOperation::execute('update salaries set blocage=\'oui\' where (login=\'' . $identite . '\')');
                         //Averissement
                         $titre = "Accès aux modules de l'Intranet";
-                        $message = "Votre compte est bloqué après trois tentative raté.<br><br>"
-                                . "Contactez un Administrateur pour réactiver votre compte.<br>"
-                        ;
+                        $message = UserMessage::FR_LOGIN_PROCESS_ACCOUNT_LOCKED;
                         afficher_message($titre, $message, $redirection);
                     }
                 } else {

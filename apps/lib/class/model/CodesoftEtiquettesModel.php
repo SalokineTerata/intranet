@@ -27,25 +27,25 @@ class CodesoftEtiquettesModel extends AbstractModel {
         $SiteDeProduction = $ftaModel->getDataField(FtaModel::FIELDNAME_SITE_ASSEMBLAGE)->getFieldValue();
 
 
-//        $arrayEtiquette = DatabaseOperation::convertSqlStatementWithKeyAndOneFieldToArray(
-//                        'SELECT DISTINCT ' . CodesoftEtiquettesModel::KEYNAME . ',' . CodesoftEtiquettesModel::FIELDNAME_DESIGNATION_CODESOFT_ETIQUETTES
-//                        . ' FROM ' . CodesoftEtiquettesModel::TABLENAME
-//                        . ' WHERE (' . CodesoftEtiquettesModel::FIELDNAME_K_SITE . '=' . $SiteDeProduction
-//                        . ' OR ' . CodesoftEtiquettesModel::FIELDNAME_K_SITE . '=0)'
-//                        . ' AND (' . CodesoftEtiquettesModel::FIELDNAME_K_TYPE_ETIQUETTE_CODESOFT_ETIQUETTES . '=2'
-//                        . ' OR ' . CodesoftEtiquettesModel::FIELDNAME_K_TYPE_ETIQUETTE_CODESOFT_ETIQUETTES . '=0' . ')'
-//                        . ' AND ' . CodesoftEtiquettesModel::FIELDNAME_IS_ENABLED_FTA . '=1'
-//                        . ' ORDER BY ' . CodesoftEtiquettesModel::FIELDNAME_DESIGNATION_CODESOFT_ETIQUETTES
-//        );
-
-         $arrayEtiquette = DatabaseOperation::convertSqlStatementWithKeyAndOneFieldToArray(
+        $arrayEtiquette = DatabaseOperation::convertSqlStatementWithKeyAndOneFieldToArray(
                         'SELECT DISTINCT ' . CodesoftEtiquettesModel::KEYNAME . ',' . CodesoftEtiquettesModel::FIELDNAME_DESIGNATION_CODESOFT_ETIQUETTES
                         . ' FROM ' . CodesoftEtiquettesModel::TABLENAME
                         . ' WHERE (' . CodesoftEtiquettesModel::FIELDNAME_K_SITE . '=' . $SiteDeProduction
                         . ' OR ' . CodesoftEtiquettesModel::FIELDNAME_K_SITE . '=0)'
-                        . ' AND (' . CodesoftEtiquettesModel::FIELDNAME_K_TYPE_ETIQUETTE_CODESOFT_ETIQUETTES . '<>2)'
+                        . ' AND (' . CodesoftEtiquettesModel::FIELDNAME_K_TYPE_ETIQUETTE_CODESOFT_ETIQUETTES . '=2'
+                        . ' OR ' . CodesoftEtiquettesModel::FIELDNAME_K_TYPE_ETIQUETTE_CODESOFT_ETIQUETTES . '=0' . ')'
+                        . ' AND ' . CodesoftEtiquettesModel::FIELDNAME_IS_ENABLED_FTA . '=1'
                         . ' ORDER BY ' . CodesoftEtiquettesModel::FIELDNAME_DESIGNATION_CODESOFT_ETIQUETTES
         );
+
+//         $arrayEtiquette = DatabaseOperation::convertSqlStatementWithKeyAndOneFieldToArray(
+//                        'SELECT DISTINCT ' . CodesoftEtiquettesModel::KEYNAME . ',' . CodesoftEtiquettesModel::FIELDNAME_DESIGNATION_CODESOFT_ETIQUETTES
+//                        . ' FROM ' . CodesoftEtiquettesModel::TABLENAME
+//                        . ' WHERE (' . CodesoftEtiquettesModel::FIELDNAME_K_SITE . '=' . $SiteDeProduction
+//                        . ' OR ' . CodesoftEtiquettesModel::FIELDNAME_K_SITE . '=0)'
+//                        . ' AND (' . CodesoftEtiquettesModel::FIELDNAME_K_TYPE_ETIQUETTE_CODESOFT_ETIQUETTES . '<>2)'
+//                        . ' ORDER BY ' . CodesoftEtiquettesModel::FIELDNAME_DESIGNATION_CODESOFT_ETIQUETTES
+//        );
         $HtmlList->setArrayListContent($arrayEtiquette);
 
         $HtmlTableName = FtaModel::TABLENAME

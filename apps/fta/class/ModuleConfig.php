@@ -51,9 +51,14 @@ abstract class ModuleConfig {
     const ENABLE_SHOW_DIFF_FTA = true;
 
     /**
-     * Nombre maximale de fta afficher sur la page d'acceuil
+     * Nombre maximale de fta afficher sur la page d'acceuil en moficiation
      */
     const VALUE_MAX_PAR_PAGE = 100;
+
+    /**
+     * Nombre maximale de fta afficher sur la page d'acceuil en consultation
+     */
+    const VALUE_MAX_PAR_PAGE_CONSUL = 50;
 
     /**
      * Nombre de jour attribué pour une première notification sur la date de validation d'une fta afficher sur la page d'acceuil

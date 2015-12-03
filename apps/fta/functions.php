@@ -1769,9 +1769,11 @@ function visualiser_fiches($id_fta_etat, $choix, $isLimit, $order_common) {
 
     $id_user = $globalConfig->getAuthenticatedUser()->getKeyValue();
     $synthese_action = Lib::isDefined("synthese_action");
-    $idFtaRole = Lib::getParameterFromRequest(FtaRoleModel::KEYNAME);
+//    $idFtaRole = Lib::getParameterFromRequest(FtaRoleModel::KEYNAME);
+
+    $idFtaRole = FtaRoleModel::getKeyNameOfFirstRoleByIdUser($id_user);
     if ($idFtaRole == NULL) {
-        $idFtaRole = FtaRoleModel::getKeyNameOfFirstRoleByIdUser($id_user);
+        $idFtaRole = FtaRoleModel::ID_FTA_ROLE_COMMUN;
     }
 
     $id_fta_etat;    //Attention, double signification, si choix = 0 ou -1, alors il s'agit en fait de $id_fta
@@ -2454,7 +2456,7 @@ function visualiser_fiches($id_fta_etat, $choix, $isLimit, $order_common) {
                         . '&comeback=1'
                         . '&id_fta_etat=' . $id_fta_etat
                         . '&abreviation_fta_etat=' . $abreviation_fta_etat
-                        . '&id_fta_role=' . $idFtaRole
+                        . '&id_fta_role=' . FtaRoleModel::ID_FTA_ROLE_COMMUN
                         . ' /><img src=../lib/images/next.png alt=\'\' title=\'Voir la FTA\' width=\'30\' height=\'25\' border=\'0\' />'
                         . '</a>'
                 ;
@@ -2468,7 +2470,7 @@ function visualiser_fiches($id_fta_etat, $choix, $isLimit, $order_common) {
                             . '&comeback=1'
                             . '&id_fta_etat=' . $id_fta_etat
                             . '&abreviation_fta_etat=' . $abreviation_fta_etat
-                            . '&id_fta_role=' . $idFtaRole
+                            . '&id_fta_role=' . FtaRoleModel::ID_FTA_ROLE_COMMUN
                             . ' /><img src=../lib/images/next.png alt=\'\' title=\'Voir la FTA\' width=\'30\' height=\'25\' border=\'0\' />'
                             . '</a>'
                     ;

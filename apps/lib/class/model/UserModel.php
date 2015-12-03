@@ -48,14 +48,26 @@ class UserModel extends AbstractModel {
     }
 
     /**
-     * 
+     * On récupère les informations des Fta 
      * @param type $paramArrayIdFta
      * @param type $paramOrderBy
      * @return type
      */
-    public static function getIdFtaByUserAndWorkflow($paramArrayIdFta, $paramOrderBy, $paramDebut) {
-
-
+    public static function getIdFtaByUserAndWorkflow($paramArrayIdFta, $paramOrderBy, $paramDebut, $paramFtaModificatin) {
+        if ($paramFtaModificatin) {
+            $nbMaxParPage = ModuleConfig::VALUE_MAX_PAR_PAGE;
+        } else {
+            $nbMaxParPage = ModuleConfig::VALUE_MAX_PAR_PAGE_CONSUL;
+        }
+        if ($paramFtaModificatin) {
+            $ordonance = ' ORDER BY ' . $paramOrderBy
+                    . ',' . FtaModel::TABLENAME . '.' . FtaModel::FIELDNAME_WORKFLOW
+                    . ',' . UserModel::FIELDNAME_PRENOM . ' ASC' . ',' . UserModel::FIELDNAME_NOM . ' ASC'
+                    . ',' . FtaModel::FIELDNAME_DATE_ECHEANCE_FTA
+                    . ' LIMIT ' . $nbMaxParPage . ' OFFSET ' . $paramDebut;
+        } else {
+            $ordonance = ' ORDER BY ' .FtaModel::KEYNAME . ' DESC';
+        }
         if ($paramArrayIdFta) {
             $array['1'] = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
                             'SELECT DISTINCT ' . FtaModel::TABLENAME . '.' . FtaModel::KEYNAME
@@ -89,11 +101,7 @@ class UserModel extends AbstractModel {
 //                            . '=' . ClassificationFta2Model::TABLENAME . '.' . ClassificationFta2Model::FIELDNAME_ID_PROPRIETAIRE_GROUPE
 //                            . ' AND ' . FtaModel::TABLENAME . '.' . FtaModel::FIELDNAME_ID_FTA_CLASSIFICATION2
 //                            . '=' . ClassificationFta2Model::TABLENAME . '.' . ClassificationFta2Model::KEYNAME                            
-                            . ' ORDER BY ' . $paramOrderBy
-                            . ',' . FtaModel::TABLENAME . '.' . FtaModel::FIELDNAME_WORKFLOW
-                            . ',' . UserModel::FIELDNAME_PRENOM . ' ASC' . ',' . UserModel::FIELDNAME_NOM . ' ASC'
-                            . ',' . FtaModel::FIELDNAME_DATE_ECHEANCE_FTA
-                            . ' LIMIT ' . ModuleConfig::VALUE_MAX_PAR_PAGE . ' OFFSET ' . $paramDebut
+                            . $ordonance
             );
 
             $array['2'] = DatabaseOperation::getRowsNumberOverLimitInSqlStatement(
@@ -132,7 +140,7 @@ class UserModel extends AbstractModel {
                             . ',' . FtaModel::TABLENAME . '.' . FtaModel::FIELDNAME_WORKFLOW
                             . ',' . UserModel::FIELDNAME_PRENOM . ' ASC'
                             . ',' . FtaModel::FIELDNAME_DATE_ECHEANCE_FTA
-                            . ' LIMIT ' . ModuleConfig::VALUE_MAX_PAR_PAGE . ' OFFSET ' . $paramDebut
+                            . ' LIMIT ' . $nbMaxParPage . ' OFFSET ' . $paramDebut
             );
 
 

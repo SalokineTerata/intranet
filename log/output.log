@@ -491,3 +491,7 @@ SAUT CHAP 1
 2015-12-02 14:32:58 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `id_annexe_agrologic_article_codification` =   '13'
 2015-12-02 14:59:29 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 13
 2015-12-02 14:59:29 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `id_annexe_agrologic_article_codification` =   '13'
+2015-12-03 16:44:15 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 38
+2015-12-03 16:44:15 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `k_etiquette_fta_composition` =   '38'
+2015-12-03 16:44:17 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 65
+2015-12-03 16:44:17 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `k_etiquette_verso_fta_composition` =   '65'

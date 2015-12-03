@@ -73,7 +73,7 @@ class FtaTransitionModel {
 
                 //Mise à jour de la date de validation
                 $ftaModel->getDataField(FtaModel::FIELDNAME_DATE_DERNIERE_MAJ_FTA)->setFieldValue(date('Y-m-d'));
-
+                $ftaModel->saveToDatabase();
 
                 //Suppression du vérrou pour qu'on puisse à nouveau modifier cette fiche - DEBUGGER
                 //$verrou_transite_fta=0;
@@ -560,7 +560,8 @@ class FtaTransitionModel {
                 . "\n"
                 . "INFORMATIONS DE DEBUGGAGE:\n"
                 . $logTransition
-        ; {
+        ;
+        {
             $expediteur = $prenom . " " . $nom . " <" . $mail . ">";
             envoismail($sujetmail, $corp, $mail, $expediteur, $typeMail);
         }

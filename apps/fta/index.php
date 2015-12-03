@@ -112,7 +112,6 @@ if ($id_user) {
         $nbMaxParPage = ModuleConfig::VALUE_MAX_PAR_PAGE;
     } else {
         $nbMaxParPage = ModuleConfig::VALUE_MAX_PAR_PAGE_CONSUL;
-        $order_common = FtaModel::KEYNAME;
     }
     $idFtaRoleEncours = Lib::getParameterFromRequest(FtaRoleModel::KEYNAME, $idFtaRoleEncoursDefault);
 //echo 'id_fta_etat=$id_fta_etat / nom_fta_etat=$nom_fta_etat / synthese_action=$synthese_action <br>';

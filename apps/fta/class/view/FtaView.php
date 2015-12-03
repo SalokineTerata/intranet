@@ -355,9 +355,11 @@ class FtaView {
         return $ListeCLassification;
     }
 
-    public function ListeCodesoftEtiquettes($paramIdFta, $paramIsEditable) {
+    function ListeCodesoftEtiquettes($paramIdFta, $paramIsEditable) {
+        $SiteDeProduction = $this->getModel()->getDataField(FtaModel::FIELDNAME_SITE_ASSEMBLAGE)->getFieldValue();
+        $etiqetteCodesoft = $this->getModel()->getDataField(FtaModel::FIELDNAME_ETIQUETTE_CODESOFT)->getFieldValue();
 
-        $listeCodesoftEtiquettes = CodesoftEtiquettesModel::getListeCodesoftEtiquettes($paramIdFta, $paramIsEditable);
+        $listeCodesoftEtiquettes = CodesoftEtiquettesModel::getListeCodesoftEtiquettesColis($paramIdFta, $paramIsEditable, $SiteDeProduction, $etiqetteCodesoft);
 
         return $listeCodesoftEtiquettes;
     }
@@ -1000,7 +1002,7 @@ class FtaView {
         $htmlDimensionUVC = new HtmlInputText();
 
         $htmlDimensionUVC->setLabel(FtaConditionnementModel::UVC_EMBALLAGE_DIMENSION_LABEL);
-        $htmlDimensionUVC->getAttributes()->getValue()->setValue($return[FtaConditionnementModel::UVC_EMBALLAGE_DIMENSION]. ' (Longueur x Largeur x Hauteur)');
+        $htmlDimensionUVC->getAttributes()->getValue()->setValue($return[FtaConditionnementModel::UVC_EMBALLAGE_DIMENSION] . ' (Longueur x Largeur x Hauteur)');
         $htmlDimensionUVC->setIsEditable(FALSE);
 
 
@@ -1218,7 +1220,7 @@ class FtaView {
             $bgcolor = "#AFFF5A";
             $html_warning = "";
         }
-        if($colisNet) {
+        if ($colisNet) {
             $bloc.= "<tr class=contenu><td bgcolor=$bgcolor align=\"center\" valign=\"middle\">";
             $bloc.="Poids net du colis (en Kg): ";
             $bloc.="</td><td bgcolor=$bgcolor align=\"center\" valign=\"middle\">"

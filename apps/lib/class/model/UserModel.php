@@ -58,6 +58,7 @@ class UserModel extends AbstractModel {
             $nbMaxParPage = ModuleConfig::VALUE_MAX_PAR_PAGE;
         } else {
             $nbMaxParPage = ModuleConfig::VALUE_MAX_PAR_PAGE_CONSUL;
+            $paramOrderBy =  FtaModel::KEYNAME . ' DESC ';
         }
 
         if ($paramArrayIdFta) {

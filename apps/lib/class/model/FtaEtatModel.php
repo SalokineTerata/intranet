@@ -113,7 +113,7 @@ class FtaEtatModel extends AbstractModel {
                                 . ' AND ' . FtaActionSiteModel::TABLENAME . '.' . FtaActionSiteModel::FIELDNAME_ID_INTRANET_ACTIONS
                                 . ' IN (' . IntranetActionsModel::TABLENAME . '.' . IntranetActionsModel::KEYNAME . ')'
                                 . ' AND ' . FtaSuiviProjetModel::FIELDNAME_SIGNATURE_VALIDATION_SUIVI_PROJET . '=' . '0'
-                                . ' AND ' . IntranetDroitsAccesModel::FIELDNAME_NIVEAU_INTRANET_DROITS_ACCES . '=' . '1'
+                                . ' AND ' . IntranetDroitsAccesModel::FIELDNAME_NIVEAU_INTRANET_DROITS_ACCES . '=' . IntranetNiveauAccesModel::NIVEAU_GENERIC_TRUE
                                 . ' AND ' . IntranetDroitsAccesModel::FIELDNAME_ID_USER . '=' . $paramIdUser                                                  // Nous recuperons l'identifiant de l'utilisateur connecté
                                 . ' AND ' . FtaModel::FIELDNAME_ID_FTA_ETAT . '=' . $paramIdFtaEtat                                                           // Nous recuperons l'identifiant de l'etat de la Fta
                                 . ' AND ' . FtaWorkflowStructureModel::TABLENAME . '.' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_ROLE . '=' . $paramRole // Nous recuperons le type de role pour l'utilisateur
@@ -185,7 +185,7 @@ class FtaEtatModel extends AbstractModel {
                                 . ' AND ' . FtaActionSiteModel::TABLENAME . '.' . FtaActionSiteModel::FIELDNAME_ID_INTRANET_ACTIONS
                                 . ' IN (' . IntranetActionsModel::TABLENAME . '.' . IntranetActionsModel::KEYNAME . ')'
                                 . ' AND ' . FtaSuiviProjetModel::FIELDNAME_SIGNATURE_VALIDATION_SUIVI_PROJET . '=' . '0'
-                                . ' AND ' . IntranetDroitsAccesModel::FIELDNAME_NIVEAU_INTRANET_DROITS_ACCES . '=' . '1'
+                                . ' AND ' . IntranetDroitsAccesModel::FIELDNAME_NIVEAU_INTRANET_DROITS_ACCES . '=' . IntranetNiveauAccesModel::NIVEAU_GENERIC_TRUE
                                 . ' AND ' . IntranetDroitsAccesModel::FIELDNAME_ID_USER . '=' . $paramIdUser                                                    // Nous recuperons l'identifiant de l'utilisateur connecté
                                 . ' AND ' . FtaModel::FIELDNAME_ID_FTA_ETAT . '=' . $paramIdFtaEtat                                                             // Nous recuperons l'identifiant de l'etat de la Fta
                                 . ' AND ' . FtaWorkflowStructureModel::TABLENAME . '.' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_ROLE . '=' . $paramRole    // Nous recuperons le type de role pour l'utilisateur
@@ -263,7 +263,7 @@ class FtaEtatModel extends AbstractModel {
                                 . ' AND ' . FtaActionSiteModel::TABLENAME . '.' . FtaActionSiteModel::FIELDNAME_ID_INTRANET_ACTIONS
                                 . ' IN (' . IntranetActionsModel::TABLENAME . '.' . IntranetActionsModel::KEYNAME . ')'
                                 . ' AND ' . FtaSuiviProjetModel::FIELDNAME_SIGNATURE_VALIDATION_SUIVI_PROJET . '<>' . '0'
-                                . ' AND ' . IntranetDroitsAccesModel::FIELDNAME_NIVEAU_INTRANET_DROITS_ACCES . '=' . '1'
+                                . ' AND ' . IntranetDroitsAccesModel::FIELDNAME_NIVEAU_INTRANET_DROITS_ACCES . '=' . IntranetNiveauAccesModel::NIVEAU_GENERIC_TRUE
                                 . ' AND ' . IntranetDroitsAccesModel::FIELDNAME_ID_USER . '=' . $paramIdUser                                                  // Nous recuperons l'identifiant de l'utilisateur connecté
                                 . ' AND ' . FtaModel::FIELDNAME_ID_FTA_ETAT . '=' . $paramIdFtaEtat                                                           // Nous recuperons l'identifiant de l'etat de la Fta
                                 . ' AND ' . FtaWorkflowStructureModel::TABLENAME . '.' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_ROLE . '=' . $paramRole // Nous recuperons le type de role pour l'utilisateur
@@ -300,7 +300,7 @@ class FtaEtatModel extends AbstractModel {
                                 . ' FROM ' . FtaModel::TABLENAME . ',' . IntranetDroitsAccesModel::TABLENAME
                                 . ',' . FtaWorkflowModel::TABLENAME . ',' . IntranetActionsModel::TABLENAME
                                 . ' WHERE ' . FtaModel::FIELDNAME_ID_FTA_ETAT . '=' . $paramIdFtaEtat   //Liaison
-                                . ' AND ' . IntranetDroitsAccesModel::FIELDNAME_NIVEAU_INTRANET_DROITS_ACCES . '=' . '1'
+                                . ' AND ' . IntranetDroitsAccesModel::FIELDNAME_NIVEAU_INTRANET_DROITS_ACCES . '=' . IntranetNiveauAccesModel::NIVEAU_GENERIC_TRUE
                                 . ' AND ' . IntranetDroitsAccesModel::FIELDNAME_ID_USER . '=' . $paramIdUser
                                 . ' AND ' . FtaWorkflowModel::TABLENAME . '.' . FtaWorkflowModel::FIELDNAME_ID_INTRANET_ACTIONS
                                 . '=' . IntranetActionsModel::TABLENAME . '.' . IntranetActionsModel::FIELDNAME_PARENT_INTRANET_ACTIONS

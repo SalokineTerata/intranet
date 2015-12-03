@@ -55,10 +55,12 @@ class AttributesGlobal extends StandardGlobalAttributes {
      * Lien lorsqu'on clique sur suivant.
      */
     private $hrefNextValue;
+
     /**
      * Lien lorsqu'on clique supprime.
      */
     private $hrefDeleteValue;
+
     /**
      * Lien lorsqu'on clique ajout.
      */
@@ -77,7 +79,7 @@ class AttributesGlobal extends StandardGlobalAttributes {
     function setHrefNextValue($hrefNextValue) {
         $this->hrefNextValue = $hrefNextValue;
     }
-    
+
     function getHrefDeleteValue() {
         return $this->hrefDeleteValue;
     }
@@ -94,7 +96,6 @@ class AttributesGlobal extends StandardGlobalAttributes {
         $this->hrefAjoutValue = $hrefAjoutValue;
     }
 
-    
     function getIsIconAddEnabled() {
         return $this->isIconAddEnabled;
     }
@@ -130,6 +131,7 @@ class AttributesGlobal extends StandardGlobalAttributes {
     public function getIdAdd() {
         return self::PREFIXE_ID_ICON_ADD . '_' . $this->getId()->getValue();
     }
+
     public function getIdDelete() {
         return self::PREFIXE_ID_ICON_DELETE . '_' . $this->getId()->getValue();
     }
@@ -166,6 +168,7 @@ class AttributesGlobal extends StandardGlobalAttributes {
                         , $this->getIdAdd()
         );
     }
+
     public function getIdDeleteToHtml() {
         return Html::getHtmlParameter(
                         $this->getId()->getName()
@@ -204,15 +207,19 @@ class AttributesGlobal extends StandardGlobalAttributes {
                 . "</a>"
         ;
     }
+
     /**
      * Retourne le code HTML affichant les icones d'action en fin de champs de saisie.
      * @param string
      */
     public function getIconDeleteToHtml() {
-        return "<a href=\"" . $this->getHrefDeleteValue() . "\" >"
-                . "<span " . $this->getIdAddToHtml() . ">" . self::DEFAULT_HTML_IMAGE_DELETE. "</span>"
-                . "</a>"
-        ;
+        if ($this->getHrefDeleteValue()) {
+            $return = "<a href=\"" . $this->getHrefDeleteValue() . "\" >"
+                    . "<span " . $this->getIdAddToHtml() . ">" . self::DEFAULT_HTML_IMAGE_DELETE . "</span>"
+                    . "</a>"
+            ;
+        }
+        return $return;
     }
 
     public function getIconNextToHtml() {

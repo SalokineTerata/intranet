@@ -761,7 +761,8 @@ class FtaView {
         if ($FtaComposant) {
             foreach ($FtaComposant as $rowsFtaComposant) {
                 $idFtaComposant = $rowsFtaComposant[FtaComposantModel::KEYNAME];
-                $arrayIdFtaComposant[] = $idFtaComposant;
+                $isComposant = $rowsFtaComposant[FtaComposantModel::FIELDNAME_IS_NOMENCLATURE_FTA_COMPOSANT];
+                $arrayIdFtaComposant[$idFtaComposant] = $isComposant;
             }
 
             $htmlEtiquetteComposant = Html::getHtmlObjectFromDataField($this->getModel()->getDataField(FtaModel::FIELDNAME_VIRTUAL_FTA_COMPOSANT));
@@ -815,7 +816,7 @@ class FtaView {
             $htmlEtiquetteComposant->setIsEditable($this->getIsEditable());
             $htmlEtiquetteComposant->setLienAjouter(FtaComposantModel::getAddLinkComposant($paramIdFta, $paramChapitre, $paramSyntheseAction, $paramComeback, $paramIdFtaEtat, $paramAbreviationEtat, $paramIdFtaRole, $proprietaire));
             $htmlEtiquetteComposant->setLienDetail(FtaComposantModel::getDetailLinkComposant($paramIdFta, $paramChapitre, $arrayIdFtaComposant, $paramSyntheseAction, $paramComeback, $paramIdFtaEtat, $paramAbreviationEtat, $paramIdFtaRole, $proprietaire));
-            $htmlEtiquetteComposant->setLienSuppression(FtaComposantModel::getDeleteLinkComposition($paramIdFta, $paramChapitre, $arrayIdFtaComposant, $paramSyntheseAction, $paramComeback, $paramIdFtaEtat, $paramAbreviationEtat, $paramIdFtaRole));
+            $htmlEtiquetteComposant->setLienSuppression(FtaComposantModel::getDeleteLinkComposant($paramIdFta, $paramChapitre, $arrayIdFtaComposant, $paramSyntheseAction, $paramComeback, $paramIdFtaEtat, $paramAbreviationEtat, $paramIdFtaRole));
             $htmlEtiquetteComposant->setTableLabel(FtaComposantModel::getTableComposantLabel($idFtaComposant));
             $return .= $htmlEtiquetteComposant->getHtmlResult();
         } else {

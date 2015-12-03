@@ -325,7 +325,7 @@ class FtaChapitreModel extends AbstractModel {
                                     . '=' . FtaWorkflowStructureModel::TABLENAME . '.' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_CHAPITRE . ') '                       //Liaison
                                     . 'AND ( ( ' . FtaProcessusModel::TABLENAME . '.' . FtaProcessusModel::KEYNAME . '= \'' . $paramIdProcessus . '\' '
                                     . 'AND ' . FtaProcessusModel::TABLENAME . '.' . FtaProcessusModel::FIELDNAME_MULTISITE_FTA_PROCESSUS . '= \'' . $multisite_fta_processus . '\' '
-                                    . 'AND ' . IntranetDroitsAccesModel::TABLENAME . '.' . IntranetDroitsAccesModel::FIELDNAME_NIVEAU_INTRANET_DROITS_ACCES . ' = 1 '
+                                    . 'AND ' . IntranetDroitsAccesModel::TABLENAME . '.' . IntranetDroitsAccesModel::FIELDNAME_NIVEAU_INTRANET_DROITS_ACCES . ' =  ' . IntranetNiveauAccesModel::NIVEAU_GENERIC_TRUE
                                     . 'AND ' . FtaSuiviProjetModel::TABLENAME . '.' . FtaSuiviProjetModel::FIELDNAME_ID_FTA . ' = \'' . $paramIdFta . '\' ) ) '
                                     . 'GROUP BY ' . UserModel::TABLENAME . '.' . UserModel::FIELDNAME_MAIL
                             ;
@@ -367,7 +367,7 @@ class FtaChapitreModel extends AbstractModel {
                                     . '=' . UserModel::TABLENAME . '.' . UserModel::FIELDNAME_LIEU_GEO . ') '
                                     . ' AND ( ( ' . FtaProcessusModel::TABLENAME . '.' . FtaProcessusModel::KEYNAME . '= \'' . $paramIdProcessus . '\' '
                                     . ' AND ' . FtaProcessusModel::TABLENAME . '.' . FtaProcessusModel::FIELDNAME_MULTISITE_FTA_PROCESSUS . '= \'' . $multisite_fta_processus . '\' '
-                                    . ' AND ' . IntranetDroitsAccesModel::TABLENAME . '.' . IntranetDroitsAccesModel::FIELDNAME_NIVEAU_INTRANET_DROITS_ACCES . ' = 1 '
+                                    . ' AND ' . IntranetDroitsAccesModel::TABLENAME . '.' . IntranetDroitsAccesModel::FIELDNAME_NIVEAU_INTRANET_DROITS_ACCES . ' = ' . IntranetNiveauAccesModel::NIVEAU_GENERIC_TRUE
                                     . ' AND ' . FtaSuiviProjetModel::TABLENAME . '.' . FtaSuiviProjetModel::FIELDNAME_ID_FTA . ' = \'' . $paramIdFta . '\' ) ) '
                                     . ' GROUP BY ' . UserModel::TABLENAME . '.' . UserModel::FIELDNAME_MAIL
                             ;

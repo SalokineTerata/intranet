@@ -359,7 +359,7 @@ class FtaTransitionModel {
                                 . " = " . IntranetDroitsAccesModel::TABLENAME . "." . IntranetDroitsAccesModel::FIELDNAME_ID_USER
                                 . " AND " . UserModel::TABLENAME . "." . UserModel::FIELDNAME_ACTIF . " ='oui' "
                                 . " AND " . IntranetDroitsAccesModel::TABLENAME . "." . IntranetDroitsAccesModel::FIELDNAME_ID_INTRANET_MODULES . " = 19"
-                                . " AND " . IntranetDroitsAccesModel::TABLENAME . "." . IntranetDroitsAccesModel::FIELDNAME_NIVEAU_INTRANET_DROITS_ACCES . " = 1 "
+                                . " AND " . IntranetDroitsAccesModel::TABLENAME . "." . IntranetDroitsAccesModel::FIELDNAME_NIVEAU_INTRANET_DROITS_ACCES . " = " . IntranetNiveauAccesModel::NIVEAU_GENERIC_TRUE
                                 . ' AND ' . IntranetDroitsAccesModel::FIELDNAME_ID_INTRANET_ACTIONS . '=' . '3'
                 );
                 foreach ($arrayListeDiffusion as $value) {
@@ -379,7 +379,7 @@ class FtaTransitionModel {
                         . " AND ( 0 " . UserModel::AddIdUser($idUser) . ')'
                         . " AND " . IntranetDroitsAccesModel::TABLENAME . "." . IntranetDroitsAccesModel::FIELDNAME_ID_INTRANET_ACTIONS
                         . " = " . IntranetActionsModel::TABLENAME . "." . IntranetActionsModel::KEYNAME      //Liaison
-                        . " AND " . IntranetDroitsAccesModel::TABLENAME . "." . IntranetDroitsAccesModel::FIELDNAME_NIVEAU_INTRANET_DROITS_ACCES . " = 1 "
+                        . " AND " . IntranetDroitsAccesModel::TABLENAME . "." . IntranetDroitsAccesModel::FIELDNAME_NIVEAU_INTRANET_DROITS_ACCES . " = " . IntranetNiveauAccesModel::NIVEAU_GENERIC_TRUE
                         . ' AND ( 0 ' . IntranetActionsModel::AddIdIntranetAction($IdIntranetActions) . ')'
 
 
@@ -560,8 +560,7 @@ class FtaTransitionModel {
                 . "\n"
                 . "INFORMATIONS DE DEBUGGAGE:\n"
                 . $logTransition
-        ;
-        {
+        ; {
             $expediteur = $prenom . " " . $nom . " <" . $mail . ">";
             envoismail($sujetmail, $corp, $mail, $expediteur, $typeMail);
         }

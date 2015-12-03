@@ -58,7 +58,7 @@ if ($id_user) {//Si l'utilisateur est connecté
                     . ' AND ' . IntranetModulesModel::FIELDNAME_VISIBLE_INTRANET_MODULES . '=' . '1'
                     . ' AND ' . IntranetDroitsAccesModel::FIELDNAME_ID_INTRANET_ACTIONS . '=' . '1'
                     . ' AND ' . IntranetDroitsAccesModel::TABLENAME . '.' . IntranetDroitsAccesModel::FIELDNAME_ID_USER . '=' . $id_user . ' '
-                    . ' AND ' . IntranetDroitsAccesModel::TABLENAME . '.' . IntranetDroitsAccesModel::FIELDNAME_NIVEAU_INTRANET_DROITS_ACCES . '=' . '1' . ') '
+                    . ' AND ' . IntranetDroitsAccesModel::TABLENAME . '.' . IntranetDroitsAccesModel::FIELDNAME_NIVEAU_INTRANET_DROITS_ACCES . '=' . IntranetNiveauAccesModel::NIVEAU_GENERIC_TRUE . ') '
                     . ' ORDER BY ' . IntranetModulesModel::FIELDNAME_CLASSEMENT_INTRANET_MODULES . ' DESC'
     );
 

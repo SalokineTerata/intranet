@@ -309,7 +309,7 @@ class Navigation {
                             . '=' . IntranetModulesModel::TABLENAME . '.' . IntranetModulesModel::KEYNAME  //Jointure
                             . ' AND ' . IntranetDroitsAccesModel::FIELDNAME_ID_USER . '=' . $id_user //Utilisateur actuellement connecté
                             . ' AND ' . IntranetModulesModel::FIELDNAME_NOM_INTRANET_MODULES . '=\'' . FtaModel::TABLENAME
-                            . '\' AND ' . IntranetDroitsAccesModel::FIELDNAME_NIVEAU_INTRANET_DROITS_ACCES . '=1'  //L'utilisateur est propriétaire
+                            . '\' AND ' . IntranetDroitsAccesModel::FIELDNAME_NIVEAU_INTRANET_DROITS_ACCES . '=' . IntranetNiveauAccesModel::NIVEAU_GENERIC_TRUE  //L'utilisateur est propriétaire
             );
 
             $arrayProcessusValide = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
@@ -396,7 +396,7 @@ class Navigation {
                             . '=' . IntranetModulesModel::TABLENAME . '.' . IntranetModulesModel::KEYNAME  //Jointure
                             . ' AND ' . IntranetDroitsAccesModel::FIELDNAME_ID_USER . '=' . $id_user //Utilisateur actuellement connecté
                             . ' AND ' . IntranetModulesModel::FIELDNAME_NOM_INTRANET_MODULES . '=\'' . FtaModel::TABLENAME
-                            . '\' AND ' . IntranetDroitsAccesModel::FIELDNAME_NIVEAU_INTRANET_DROITS_ACCES . '=1'  //L'utilisateur est propriétaire
+                            . '\' AND ' . IntranetDroitsAccesModel::FIELDNAME_NIVEAU_INTRANET_DROITS_ACCES . '=' . IntranetNiveauAccesModel::NIVEAU_GENERIC_TRUE   //L'utilisateur est propriétaire
                             . ' AND ' . FtaWorkflowStructureModel::TABLENAME . '.' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_CHAPITRE
                             . '=' . FtaSuiviProjetModel::TABLENAME . '.' . FtaSuiviProjetModel::FIELDNAME_ID_FTA_CHAPITRE  //Jointure
                             . ' AND ' . FtaSuiviProjetModel::FIELDNAME_SIGNATURE_VALIDATION_SUIVI_PROJET . '<>0' //chapitre validé

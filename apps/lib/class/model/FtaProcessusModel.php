@@ -309,7 +309,7 @@ class FtaProcessusModel extends AbstractModel {
                             . ' AND ' . IntranetDroitsAccesModel::TABLENAME . '.' . IntranetDroitsAccesModel::FIELDNAME_ID_INTRANET_MODULES
                             . '=' . IntranetModulesModel::TABLENAME . '.' . IntranetModulesModel::KEYNAME
                             . ' AND ' . IntranetDroitsAccesModel::FIELDNAME_ID_USER . ' =' . $idUser
-                            . ' AND ' . IntranetDroitsAccesModel::FIELDNAME_NIVEAU_INTRANET_DROITS_ACCES . '=1'
+                            . ' AND ' . IntranetDroitsAccesModel::FIELDNAME_NIVEAU_INTRANET_DROITS_ACCES . '=' . IntranetNiveauAccesModel::NIVEAU_GENERIC_TRUE
                             . ' AND ' . FtaActionSiteModel::TABLENAME . '.' . FtaActionSiteModel::FIELDNAME_ID_INTRANET_ACTIONS
                             . '=' . IntranetActionsModel::TABLENAME . '.' . IntranetActionsModel::KEYNAME
                             . ' AND ' . FtaActionSiteModel::TABLENAME . '.' . FtaActionSiteModel::FIELDNAME_ID_SITE . '=' . $paramLieuGeo // Nous recuperons la localisation de l'utilisateur

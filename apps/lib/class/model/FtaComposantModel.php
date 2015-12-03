@@ -235,7 +235,7 @@ class FtaComposantModel extends AbstractModel {
      */
     public static function getIdFtaComposition($paramIdFta) {
         $arrayIdFtaComposant = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
-                        'SELECT ' . FtaComposantModel::KEYNAME
+                        'SELECT ' . FtaComposantModel::KEYNAME . ',' . FtaComposantModel::FIELDNAME_IS_NOMENCLATURE_FTA_COMPOSANT
                         . ' FROM ' . FtaComposantModel::TABLENAME
                         . ' WHERE ' . FtaComposantModel::FIELDNAME_ID_FTA . '=' . $paramIdFta
                         . ' AND ' . FtaComposantModel::FIELDNAME_IS_COMPOSITION_FTA_COMPOSANT . '=1'
@@ -431,7 +431,7 @@ class FtaComposantModel extends AbstractModel {
     }
 
     /**
-     * Lien se supression d'un Emballage de Conditionnment
+     * Lien se supression d'un composant
      * @param int $paramIdFta
      * @param int $paramIdChapitre
      * @param array $paramIdFtaComposant
@@ -442,7 +442,7 @@ class FtaComposantModel extends AbstractModel {
      * @param int $paramIdFtaRole
      * @return string
      */
-    public static function getDeleteLinkComposition($paramIdFta, $paramIdChapitre, $paramIdFtaComposant, $paramSyntheseAction, $paramComeback, $paramIdFtaEtat, $paramAbreviationEtat, $paramIdFtaRole) {
+    public static function getDeleteLinkComposant($paramIdFta, $paramIdChapitre, $paramIdFtaComposant, $paramSyntheseAction, $paramComeback, $paramIdFtaEtat, $paramAbreviationEtat, $paramIdFtaRole) {
         foreach ($paramIdFtaComposant as $rows) {
             $return[$rows] = 'modification_fiche_post.php?'
                     . 'id_fta=' . $paramIdFta
@@ -454,6 +454,36 @@ class FtaComposantModel extends AbstractModel {
                     . '&id_fta_etat=' . $paramIdFtaEtat
                     . '&abreviation_fta_etat=' . $paramAbreviationEtat
                     . '&id_fta_role=' . $paramIdFtaRole;
+        }
+        return $return;
+    }
+
+    /**
+     * Lien se supression d'une composition
+     * @param int $paramIdFta
+     * @param int $paramIdChapitre
+     * @param array $paramIdFtaComposant
+     * @param string $paramSyntheseAction
+     * @param int $paramComeback
+     * @param int $paramIdFtaEtat
+     * @param string $paramAbreviationEtat
+     * @param int $paramIdFtaRole
+     * @return string
+     */
+    public static function getDeleteLinkComposition($paramIdFta, $paramIdChapitre, $paramIdFtaComposant, $paramSyntheseAction, $paramComeback, $paramIdFtaEtat, $paramAbreviationEtat, $paramIdFtaRole) {
+        foreach ($paramIdFtaComposant as $key => $rows) {
+            if (!$rows) {
+                $return[$key] = 'modification_fiche_post.php?'
+                        . 'id_fta=' . $paramIdFta
+                        . '&id_fta_composant=' . $key
+                        . '&action=suppression_composant'
+                        . '&id_fta_chapitre_encours=' . $paramIdChapitre
+                        . '&synthese_action=' . $paramSyntheseAction
+                        . '&comeback=' . $paramComeback
+                        . '&id_fta_etat=' . $paramIdFtaEtat
+                        . '&abreviation_fta_etat=' . $paramAbreviationEtat
+                        . '&id_fta_role=' . $paramIdFtaRole;
+            }
         }
 
         return $return;
@@ -503,11 +533,11 @@ class FtaComposantModel extends AbstractModel {
      * @return string
      */
     public static function getDetailLinkComposition($paramIdFta, $paramIdChapitre, $paramIdFtaComposant, $paramSyntheseAction, $paramComeback, $paramIdFtaEtat, $paramAbreviationEtat, $paramIdFtaRole, $paramProprietaire) {
-        foreach ($paramIdFtaComposant as $rows) {
-            $return[$rows] = 'modifier_composition.php?'
+        foreach ($paramIdFtaComposant as $key => $rows) {
+            $return[$key] = 'modifier_composition.php?'
                     . 'id_fta=' . $paramIdFta
                     . '&id_fta_chapitre_encours=' . $paramIdChapitre
-                    . '&id_fta_composant=' . $rows
+                    . '&id_fta_composant=' . $key
                     . '&synthese_action=' . $paramSyntheseAction
                     . '&proprietaire=' . $paramProprietaire
                     . '&comeback=' . $paramComeback
@@ -530,9 +560,9 @@ class FtaComposantModel extends AbstractModel {
      */
     public static function ShowListeDeroulanteSiteProdForComposant($paramObjet, $paramIsEditable, $paramIdFta, $paramIdFtaComposant, $paramLabelSiteDeProduction) {
 
-        $ftaModel = new FtaModel($paramIdFta);
+//        $ftaModel = new FtaModel($paramIdFta);
         $ftaComposantModel = new FtaComposantModel($paramIdFtaComposant);
-        $siteDeProductionFta = $ftaModel->getDataField(FtaModel::FIELDNAME_SITE_ASSEMBLAGE)->getFieldValue();
+//        $siteDeProductionFta = $ftaModel->getDataField(FtaModel::FIELDNAME_SITE_ASSEMBLAGE)->getFieldValue();
         $arraySite = DatabaseOperation::convertSqlStatementWithKeyAndOneFieldToArray(
                         'SELECT DISTINCT ' . GeoModel::KEYNAME . ',' . GeoModel::FIELDNAME_GEO
                         . ' FROM ' . GeoModel::TABLENAME
@@ -559,9 +589,10 @@ class FtaComposantModel extends AbstractModel {
 
         if ($SiteDeProduction) {
             $paramObjet->setDefaultValue($SiteDeProduction);
-        } else {
-            $paramObjet->setDefaultValue($siteDeProductionFta);
         }
+//        else {
+//            $paramObjet->setDefaultValue($siteDeProductionFta);
+//        }
         $paramObjet->getAttributes()->getName()->setValue($paramLabelSiteDeProduction);
         $paramObjet->setLabel(DatabaseDescription::getFieldDocLabel(GeoModel::TABLENAME, GeoModel::FIELDNAME_GEO));
         $paramObjet->setIsEditable($paramIsEditable);

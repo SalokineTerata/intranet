@@ -2680,7 +2680,7 @@ function visualiser_fiches($id_fta_etat, $choix, $isLimit, $order_common) {
         }
         $tableau_fiches .= '<td ' . $bgcolor . ' width=5% align=center >' . $lienHistorique . '</td>'//% Avancement FTA
                 . '<td ' . $bgcolor . $largeur_html_C3 . ' align=center >' . $service . '</td>' //Service               
-                . '<td ' . $bgcolor . $largeur_html_C3 . ' align=center >' . $lien . '</td>'; // Actions
+                . '<td ' . $bgcolor . ' width=150px ' . ' align=center >' . $lien . '</td>'; // Actions
 //        $tableau_fiches.="<td $bgcolor $largeur_html_C3 align=\"right\" valign=\"middle\">$lien</td>";
         $tableau_fiches.="</tr>";
         $compteur_ligne++;

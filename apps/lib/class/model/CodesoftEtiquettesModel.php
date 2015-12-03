@@ -11,6 +11,7 @@ class CodesoftEtiquettesModel extends AbstractModel {
     const FIELDNAME_DESIGNATION_CODESOFT_ETIQUETTES = 'designation_codesoft_etiquettes';
     const FIELDNAME_CONFIGURATION_MANUELLE_CODESOFT_ETIQUETTES = 'configuration_manuelle_codesoft_etiquettes';
     const FIELDNAME_AIDE_CONFIGURATION_MANUELLE_CODESOFT_ETIQUETTES = 'aide_configuration_manuelle_codesoft_etiquettes';
+    const FIELDNAME_IS_ENABLED_FTA = 'is_enabled_fta';
 
     public function __construct($paramId = NULL, $paramIsCreateRecordsetInDatabaseIfKeyDoesntExist = AbstractModel::DEFAULT_IS_CREATE_RECORDSET_IN_DATABASE_IF_KEY_DOESNT_EXIST) {
         parent::__construct($paramId, $paramIsCreateRecordsetInDatabaseIfKeyDoesntExist);
@@ -31,7 +32,9 @@ class CodesoftEtiquettesModel extends AbstractModel {
                         . ' FROM ' . CodesoftEtiquettesModel::TABLENAME
                         . ' WHERE (' . CodesoftEtiquettesModel::FIELDNAME_K_SITE . '=' . $SiteDeProduction
                         . ' OR ' . CodesoftEtiquettesModel::FIELDNAME_K_SITE . '=0)'
-                        . ' AND (' . CodesoftEtiquettesModel::FIELDNAME_K_TYPE_ETIQUETTE_CODESOFT_ETIQUETTES . '<>2)'
+                        . ' AND (' . CodesoftEtiquettesModel::FIELDNAME_K_TYPE_ETIQUETTE_CODESOFT_ETIQUETTES . '=2'
+                        . ' OR ' . CodesoftEtiquettesModel::FIELDNAME_K_TYPE_ETIQUETTE_CODESOFT_ETIQUETTES . '=0' . ')'
+                        . ' AND ' . CodesoftEtiquettesModel::FIELDNAME_IS_ENABLED_FTA . '=1'
                         . ' ORDER BY ' . CodesoftEtiquettesModel::FIELDNAME_DESIGNATION_CODESOFT_ETIQUETTES
         );
 

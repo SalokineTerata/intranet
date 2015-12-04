@@ -56,10 +56,9 @@ class UserModel extends AbstractModel {
     public static function getIdFtaByUserAndWorkflow($paramArrayIdFta, $paramOrderBy, $paramDebut, $paramFtaModificatin) {
         if ($paramFtaModificatin) {
             $nbMaxParPage = ModuleConfig::VALUE_MAX_PAR_PAGE;
-            $paramOrderByConsultation = FtaWorkflowModel::KEYNAME;
         } else {
             $nbMaxParPage = ModuleConfig::VALUE_MAX_PAR_PAGE_CONSUL;
-            $paramOrderByConsultation = FtaModel::FIELDNAME_DATE_DERNIERE_MAJ_FTA;
+            $paramOrderBy = FtaModel::FIELDNAME_DATE_DERNIERE_MAJ_FTA;
         }
 
         if ($paramArrayIdFta) {
@@ -89,7 +88,7 @@ class UserModel extends AbstractModel {
                             . '=' . FtaModel::TABLENAME . '.' . FtaModel::FIELDNAME_WORKFLOW
                             . ' AND ' . FtaModel::TABLENAME . '.' . FtaModel::FIELDNAME_SITE_ASSEMBLAGE
                             . '=' . GeoModel::TABLENAME . '.' . GeoModel::KEYNAME
-                            . ' ORDER BY ' . $paramOrderByConsultation . ',' . $paramOrderBy
+                            . ' ORDER BY ' . $paramOrderBy
                             . ',' . FtaModel::TABLENAME . '.' . FtaModel::FIELDNAME_WORKFLOW
                             . ',' . UserModel::FIELDNAME_PRENOM . ' ASC' . ',' . UserModel::FIELDNAME_NOM . ' ASC'
                             . ',' . FtaModel::FIELDNAME_DATE_ECHEANCE_FTA

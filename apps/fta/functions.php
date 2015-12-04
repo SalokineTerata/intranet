@@ -5320,7 +5320,7 @@ function afficher_navigation($id_fta, $id_fta_chapitre_encours, $synthese_action
     //echo "<pre>".print_r($_SERVER["QUERY_STRING"])."</pre>";
     //Corps du menu
     $menu_navigation.="
-                    <a href=historique.php?id_fta=$id_fta><img src=./images/graphique.png alt=\"\" title=\"Etat d'avancement\" width=\"18\" height=\"15\" border=\"0\" /> Etat d'avancement</a>
+                    <a href=historique.php?id_fta=$id_fta><img src=./images/graphique.png alt=\"\" title=\"" . UserInterfaceLabel::FR_AVANCEMENT_FTA . "\" width=\"18\" height=\"15\" border=\"0\" />" . UserInterfaceLabel::FR_AVANCEMENT_FTA . "</a>
                        </td></tr>
                        </table>
                        ";

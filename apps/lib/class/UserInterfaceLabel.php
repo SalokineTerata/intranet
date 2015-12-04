@@ -17,4 +17,13 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-header("Location: https://github.com/SalokineTerata/intranet/wiki");
+/**
+ * Description of UserInterfaceLabel
+ *
+ * @author bs4300280
+ */
+class UserInterfaceLabel {
+
+    const FR_AVANCEMENT_FTA = "% Avancement";
+
+}

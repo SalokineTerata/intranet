@@ -71,7 +71,11 @@ class EnvironmentConf {
      * @return type
      */
     function getUrlApiGen() {
-        return $this->getUrlFullRoot() . "/" . self::DOC_APIGEN_DIR;
+        return $this->getUrlProtocol() . '://'
+                . $this->getUrlServer() . '/'
+                . $this->getUrlRoot() . "/"
+                . self::DOC_APIGEN_DIR
+        ;
     }
 
     /**

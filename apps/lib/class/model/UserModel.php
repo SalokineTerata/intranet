@@ -81,7 +81,7 @@ class UserModel extends AbstractModel {
                             . ', ' . GeoModel::TABLENAME
 //                            . ', ' . ClassificationFta2Model::TABLENAME
 //                            . ', ' . ClassificationArborescenceArticleCategorieContenuModel::TABLENAME
-                            . ' WHERE ( 0 ' . FtaModel::AddIdFTaLabelValidProcess($paramArrayIdFta) . ')'
+                            . ' WHERE ( 0 ' . FtaModel::AddIdFtaLabel($paramArrayIdFta) . ')'
                             . ' AND ' . FtaModel::TABLENAME . '.' . FtaModel::FIELDNAME_CREATEUR
                             . '=' . UserModel::TABLENAME . '.' . UserModel::KEYNAME
                             . ' AND ' . FtaModel::TABLENAME . '.' . FtaModel::FIELDNAME_ID_FTA_ETAT
@@ -120,7 +120,7 @@ class UserModel extends AbstractModel {
                             . ', ' . GeoModel::TABLENAME
 //                            . ', ' . ClassificationFta2Model::TABLENAME
 //                            . ', ' . ClassificationArborescenceArticleCategorieContenuModel::TABLENAME
-                            . ' WHERE ( 0 ' . FtaModel::AddIdFTaLabelValidProcess($paramArrayIdFta) . ')'
+                            . ' WHERE ( 0 ' . FtaModel::AddIdFtaLabel($paramArrayIdFta) . ')'
                             . ' AND ' . FtaModel::TABLENAME . '.' . FtaModel::FIELDNAME_CREATEUR
                             . '=' . UserModel::TABLENAME . '.' . UserModel::KEYNAME
                             . ' AND ' . FtaModel::TABLENAME . '.' . FtaModel::FIELDNAME_ID_FTA_ETAT
@@ -144,7 +144,7 @@ class UserModel extends AbstractModel {
             $array['3'] = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
                             'SELECT DISTINCT ' . FtaWorkflowModel::TABLENAME . '.*'
                             . ' FROM ' . FtaModel::TABLENAME . ',' . FtaWorkflowModel::TABLENAME
-                            . ' WHERE ( ' . '0' . ' ' . FtaModel::AddIdFTaLabelValidProcess($array['1']) . ')'
+                            . ' WHERE ( ' . '0' . ' ' . FtaModel::AddIdFtaLabel($array['1']) . ')'
                             . ' AND ' . FtaModel::TABLENAME . '.' . FtaModel::FIELDNAME_WORKFLOW
                             . '=' . FtaWorkflowModel::TABLENAME . '.' . FtaWorkflowModel::KEYNAME
             );

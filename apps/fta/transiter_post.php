@@ -23,7 +23,12 @@ if ($action == 'transition_groupe') {
 $idFta = Lib::getParameterFromRequest('id_fta');
 if (!$idFta) {
     $idFtaArray = Lib::getParameterFromRequest('arrayFta');
-    $idFta = explode(',', $idFtaArray);
+    $idFtaTmp = explode(',', $idFtaArray);
+    foreach ($idFtaTmp as $rowsIdFtaTmp) {
+        if ($rowsIdFtaTmp) {
+            $idFta[] = Lib::getParameterFromRequest('selection_fta_' . $rowsIdFtaTmp);
+        }
+    }
 }
 $idFtaRole = Lib::getParameterFromRequest('id_fta_role');
 $idFtaWorkflow = Lib::getParameterFromRequest('id_fta_workflow');
@@ -31,7 +36,7 @@ $new_commentaire_maj_ftatmp = Lib::getParameterFromRequest('fta_commentaire_maj_
 $new_commentaire_maj_fta = addslashes($new_commentaire_maj_ftatmp);
 
 if (!$new_commentaire_maj_fta) {
-    $new_commentaire_maj_fta = Lib::getParameterFromRequest('subject');
+    $subject = Lib::getParameterFromRequest('subject');
 }
 if (!$action) {
     $titre = 'Erreur';
@@ -64,10 +69,10 @@ if (!$action) {
     if (!$selection_fta) {
         if (!is_array($idFta)) {
             $selection_fta[] = $idFta;
+            $envoi_mail_detail = 1;    //Permet d'envoi un mail en mode 'détaillé'
         } else {
             $selection_fta = $idFta;
         }
-        $envoi_mail_detail = 1;    //Permet d'envoi un mail en mode 'détaillé'
         $abreviation_fta_transition = $action;
     }
 
@@ -113,15 +118,14 @@ if (!$action) {
 //Si pas d'erreur, lancement de la transition
     if (!$error) {
 
-        $_SESSION['log_transition'] = '';
+
 
         foreach ($selection_fta as $idFta) {
             //Transition de la FTA
-            //$abreviation_fta_transition=$action;
             $commentaire_maj_fta = $new_commentaire_maj_fta;
-            //echo $abreviation_fta_transition;
-//echo $id_fta;
+
             $t = FtaTransitionModel::BuildTransitionFta($idFta, $abreviation_fta_transition, $commentaire_maj_fta, $idFtaWorkflow, $ListeDesChapitres);
+
             //Codes de retour de la fonction:
             //   0: FTA correctement transitée
             //   1: FTA non transité car risque de doublon
@@ -166,7 +170,7 @@ if (!$action) {
             $selection_fta;
             $liste_diffusion = $liste_global;
             $commentaire = $new_commentaire_maj_fta;
-            envoi_mail_global($selection_fta, $liste_diffusion, $subject);
+            FtaTransitionModel::BuildEnvoiMailGlobal($selection_fta, $liste_diffusion, $subject, $liste_diffusion["log"]);
         }
 
 

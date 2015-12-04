@@ -495,3 +495,13 @@ SAUT CHAP 1
 2015-12-03 16:44:15 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `k_etiquette_fta_composition` =   '38'
 2015-12-03 16:44:17 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 65
 2015-12-03 16:44:17 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `k_etiquette_verso_fta_composition` =   '65'
+2015-12-04 10:06:16 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : test mail
+2015-12-04 10:06:16 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `commentaire_maj_fta` =   'test mail'
+2015-12-04 10:17:17 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : test mail
+==============================
+==============================
+Date: 2015-12-04
+Login du modificateur: superviseur
+
+test mail
+2015-12-04 10:17:17 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `commentaire_maj_fta` =   'test mail\n==============================\n==============================\nDate: 2015-12-04\nLogin du modificateur: superviseur\n\ntest mail'

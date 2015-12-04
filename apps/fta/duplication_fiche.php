@@ -156,7 +156,7 @@ switch ($output) {
 
 
         echo '
-             <form method=$method action=' . $page_action . '>
+             <form method=' . $method . ' action=' . $page_action . '>
              <input type=\'hidden\' name=\'id_fta\' value=\'' . $idFta . '\' />
              <input type=\'hidden\' name=\'abreviation_etat_destination\' value=\'' . $abreviationEtatDestination . '\' />
              <input type=\'hidden\' name=\'new_designation_commerciale_fta\' value=\'' . $new_designation_commerciale_fta . '\' />

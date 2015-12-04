@@ -301,6 +301,7 @@ class FtaEtatModel extends AbstractModel {
                                     'SELECT DISTINCT ' . FtaModel::KEYNAME
                                     . ' FROM ' . FtaModel::TABLENAME . ',' . IntranetDroitsAccesModel::TABLENAME
                                     . ',' . FtaWorkflowModel::TABLENAME . ',' . IntranetActionsModel::TABLENAME
+                                    . ' , ' . FtaActionSiteModel::TABLENAME
                                     . ' WHERE ' . FtaModel::FIELDNAME_ID_FTA_ETAT . '=' . $paramIdFtaEtat   //Liaison
                                     . ' AND ' . IntranetDroitsAccesModel::FIELDNAME_NIVEAU_INTRANET_DROITS_ACCES . '=' . IntranetNiveauAccesModel::NIVEAU_GENERIC_TRUE
                                     . ' AND ' . IntranetDroitsAccesModel::FIELDNAME_ID_USER . '=' . $paramIdUser
@@ -311,13 +312,18 @@ class FtaEtatModel extends AbstractModel {
                                     . ' AND ' . FtaWorkflowModel::TABLENAME . '.' . FtaWorkflowModel::KEYNAME
                                     . '=' . FtaModel::TABLENAME . '.' . FtaModel::FIELDNAME_WORKFLOW
                                     . ' AND ( 0 ' . IntranetActionsModel::AddIdIntranetAction($_SESSION['IntranetActionsValide']) . ')'
+                                    . ' AND ' . FtaActionSiteModel::TABLENAME . '.' . FtaActionSiteModel::FIELDNAME_ID_SITE
+                                    . '=' . FtaModel::TABLENAME . '.' . FtaModel::FIELDNAME_SITE_ASSEMBLAGE
+                                    . ' AND ' . FtaActionSiteModel::TABLENAME . '.' . FtaActionSiteModel::FIELDNAME_ID_FTA_WORKFLOW
+                                    . '=' . FtaModel::TABLENAME . '.' . FtaModel::FIELDNAME_WORKFLOW
+                                    . ' AND ' . FtaActionSiteModel::TABLENAME . '.' . FtaActionSiteModel::FIELDNAME_ID_INTRANET_ACTIONS
+                                    . ' IN (' . IntranetActionsModel::TABLENAME . '.' . IntranetActionsModel::KEYNAME . ')'
                     );
                 } else {
                     $array = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
                                     'SELECT DISTINCT ' . FtaModel::KEYNAME
-                                    . ' FROM ' . FtaModel::TABLENAME 
+                                    . ' FROM ' . FtaModel::TABLENAME
                                     . ' WHERE ' . FtaModel::FIELDNAME_ID_FTA_ETAT . '=' . $paramIdFtaEtat   //Liaison
-                                   
                     );
                 }
 

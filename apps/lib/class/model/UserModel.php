@@ -56,9 +56,10 @@ class UserModel extends AbstractModel {
     public static function getIdFtaByUserAndWorkflow($paramArrayIdFta, $paramOrderBy, $paramDebut, $paramFtaModificatin) {
         if ($paramFtaModificatin) {
             $nbMaxParPage = ModuleConfig::VALUE_MAX_PAR_PAGE;
+            $paramOrderByConsultation ='';
         } else {
             $nbMaxParPage = ModuleConfig::VALUE_MAX_PAR_PAGE_CONSUL;
-            $paramOrderBy =  FtaModel::FIELDNAME_DATE_DERNIERE_MAJ_FTA ;
+            $paramOrderByConsultation = FtaModel::FIELDNAME_DATE_DERNIERE_MAJ_FTA;
         }
 
         if ($paramArrayIdFta) {
@@ -72,15 +73,13 @@ class UserModel extends AbstractModel {
                             . ', ' . FtaModel::FIELDNAME_ARTICLE_AGROLOGIC . ', ' . FtaModel::FIELDNAME_CODE_ARTICLE_LDC
                             . ', ' . FtaModel::FIELDNAME_DATE_ECHEANCE_FTA . ', ' . FtaModel::FIELDNAME_CREATEUR
                             . ', ' . FtaModel::FIELDNAME_POURCENTAGE_AVANCEMENT . ', ' . FtaModel::FIELDNAME_LISTE_ID_FTA_ROLE
-//                            . ', ' . ClassificationArborescenceArticleCategorieContenuModel::FIELDNAME_NOM_CLASSIFICATION_ARBORESCENCE_ARTICLE_CATEGORIE_CONTENU
                             . ', ' . GeoModel::FIELDNAME_GEO . ', ' . FtaModel::TABLENAME . '. ' . FtaModel::FIELDNAME_WORKFLOW
                             . ', ' . FtaModel::FIELDNAME_ID_FTA_CLASSIFICATION2
                             . ' FROM ' . FtaModel::TABLENAME . ',' . UserModel::TABLENAME
                             . ', ' . FtaEtatModel::TABLENAME
                             . ', ' . FtaWorkflowModel::TABLENAME
                             . ', ' . GeoModel::TABLENAME
-//                            . ', ' . ClassificationFta2Model::TABLENAME
-//                            . ', ' . ClassificationArborescenceArticleCategorieContenuModel::TABLENAME
+//                         
                             . ' WHERE ( 0 ' . FtaModel::AddIdFtaLabel($paramArrayIdFta) . ')'
                             . ' AND ' . FtaModel::TABLENAME . '.' . FtaModel::FIELDNAME_CREATEUR
                             . '=' . UserModel::TABLENAME . '.' . UserModel::KEYNAME
@@ -90,11 +89,7 @@ class UserModel extends AbstractModel {
                             . '=' . FtaModel::TABLENAME . '.' . FtaModel::FIELDNAME_WORKFLOW
                             . ' AND ' . FtaModel::TABLENAME . '.' . FtaModel::FIELDNAME_SITE_ASSEMBLAGE
                             . '=' . GeoModel::TABLENAME . '.' . GeoModel::KEYNAME
-//                            . ' AND ' . ClassificationArborescenceArticleCategorieContenuModel::TABLENAME . '.' . ClassificationArborescenceArticleCategorieContenuModel::KEYNAME
-//                            . '=' . ClassificationFta2Model::TABLENAME . '.' . ClassificationFta2Model::FIELDNAME_ID_PROPRIETAIRE_GROUPE
-//                            . ' AND ' . FtaModel::TABLENAME . '.' . FtaModel::FIELDNAME_ID_FTA_CLASSIFICATION2
-//                            . '=' . ClassificationFta2Model::TABLENAME . '.' . ClassificationFta2Model::KEYNAME                            
-                            . ' ORDER BY ' . $paramOrderBy
+                            . ' ORDER BY '. $paramOrderByConsultation . ','. $paramOrderBy
                             . ',' . FtaModel::TABLENAME . '.' . FtaModel::FIELDNAME_WORKFLOW
                             . ',' . UserModel::FIELDNAME_PRENOM . ' ASC' . ',' . UserModel::FIELDNAME_NOM . ' ASC'
                             . ',' . FtaModel::FIELDNAME_DATE_ECHEANCE_FTA
@@ -111,15 +106,12 @@ class UserModel extends AbstractModel {
                             . ', ' . FtaModel::FIELDNAME_ARTICLE_AGROLOGIC . ', ' . FtaModel::FIELDNAME_CODE_ARTICLE_LDC
                             . ', ' . FtaModel::FIELDNAME_DATE_ECHEANCE_FTA . ', ' . FtaModel::FIELDNAME_CREATEUR
                             . ', ' . FtaModel::FIELDNAME_POURCENTAGE_AVANCEMENT . ', ' . FtaModel::FIELDNAME_LISTE_ID_FTA_ROLE
-//                            . ', ' . ClassificationArborescenceArticleCategorieContenuModel::FIELDNAME_NOM_CLASSIFICATION_ARBORESCENCE_ARTICLE_CATEGORIE_CONTENU
                             . ', ' . GeoModel::FIELDNAME_GEO . ', ' . FtaModel::TABLENAME . '. ' . FtaModel::FIELDNAME_WORKFLOW
                             . ', ' . FtaModel::FIELDNAME_ID_FTA_CLASSIFICATION2
                             . ' FROM ' . FtaModel::TABLENAME . ',' . UserModel::TABLENAME
                             . ', ' . FtaEtatModel::TABLENAME
                             . ', ' . FtaWorkflowModel::TABLENAME
                             . ', ' . GeoModel::TABLENAME
-//                            . ', ' . ClassificationFta2Model::TABLENAME
-//                            . ', ' . ClassificationArborescenceArticleCategorieContenuModel::TABLENAME
                             . ' WHERE ( 0 ' . FtaModel::AddIdFtaLabel($paramArrayIdFta) . ')'
                             . ' AND ' . FtaModel::TABLENAME . '.' . FtaModel::FIELDNAME_CREATEUR
                             . '=' . UserModel::TABLENAME . '.' . UserModel::KEYNAME
@@ -129,10 +121,6 @@ class UserModel extends AbstractModel {
                             . '=' . FtaModel::TABLENAME . '.' . FtaModel::FIELDNAME_WORKFLOW
                             . ' AND ' . FtaModel::TABLENAME . '.' . FtaModel::FIELDNAME_SITE_ASSEMBLAGE
                             . '=' . GeoModel::TABLENAME . '.' . GeoModel::KEYNAME
-//                            . ' AND ' . ClassificationArborescenceArticleCategorieContenuModel::TABLENAME . '.' . ClassificationArborescenceArticleCategorieContenuModel::KEYNAME
-//                            . '=' . ClassificationFta2Model::TABLENAME . '.' . ClassificationFta2Model::FIELDNAME_ID_PROPRIETAIRE_GROUPE
-//                            . ' AND ' . FtaModel::TABLENAME . '.' . FtaModel::FIELDNAME_ID_FTA_CLASSIFICATION2
-//                            . '=' . ClassificationFta2Model::TABLENAME . '.' . ClassificationFta2Model::KEYNAME                            
                             . ' ORDER BY ' . $paramOrderBy
                             . ',' . FtaModel::TABLENAME . '.' . FtaModel::FIELDNAME_WORKFLOW
                             . ',' . UserModel::FIELDNAME_PRENOM . ' ASC'

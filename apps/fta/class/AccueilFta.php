@@ -655,6 +655,9 @@ class AccueilFta {
         if (substr($URL, -2) == 'pp') {
             $URL = $URL . 's/fta/index.php?';
         }
+        if ((substr($URL, -2)) == 'v3') {
+            $URL = $URL . '/apps/fta/index.php?';
+        }
         $tableauFiche .= '<th><a href=' . $URL . '&order_common=Site_de_production&numeroPage=' . self::$numeroDePageCourante . '><img src=../lib/images/order-AZ.png title=\'Ordonné par Nom de Site de Production\'  border=\'0\' /></a>'
                 . 'Site'
                 . '</th><th>'

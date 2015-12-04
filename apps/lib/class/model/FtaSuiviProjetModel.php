@@ -249,7 +249,7 @@ class FtaSuiviProjetModel extends AbstractModel {
                                                 . '=' . IntranetDroitsAccesModel::TABLENAME . '.' . IntranetDroitsAccesModel::FIELDNAME_ID_INTRANET_ACTIONS        //Liaison
                                                 . ' AND ' . IntranetActionsModel::TABLENAME . '.' . IntranetActionsModel::KEYNAME
                                                 . '=' . FtaActionRoleModel::TABLENAME . '.' . FtaActionRoleModel::FIELDNAME_ID_INTRANET_ACTIONS . ') '              //Liaison
-                                                . ' AND ( ( ' . IntranetDroitsAccesModel::TABLENAME . '.' . IntranetDroitsAccesModel::FIELDNAME_NIVEAU_INTRANET_DROITS_ACCES . ' <> 0 '                                 //Obtention du droit d'accès
+                                                . ' AND ( ( ' . IntranetDroitsAccesModel::TABLENAME . '.' . IntranetDroitsAccesModel::FIELDNAME_NIVEAU_INTRANET_DROITS_ACCES . ' <>  ' . IntranetNiveauAccesModel::NIVEAU_GENERIC_FALSE                                  //Obtention du droit d'accès
                                                 . ' AND ' . FtaProcessusModel::TABLENAME . '.' . FtaProcessusModel::KEYNAME . ' = ' . $rowsProcessus[FtaProcessusModel::KEYNAME]                  //Processus en cours
                                                 . ' AND ' . FtaProcessusModel::TABLENAME . '.' . FtaProcessusModel::FIELDNAME_MULTISITE_FTA_PROCESSUS . ' = 0 '                                 //Processus Monosite
                                                 . ' AND ' . IntranetModulesModel::TABLENAME . '.' . IntranetModulesModel::FIELDNAME_NOM_INTRANET_MODULES . ' = \'fta\' ) )'
@@ -299,7 +299,7 @@ class FtaSuiviProjetModel extends AbstractModel {
                                                 . ' AND ' . IntranetActionsModel::TABLENAME . '.' . IntranetActionsModel::KEYNAME
                                                 . '=' . IntranetActionsModel::getIdIntranetActionsRoleFromIdParentActionNavigation($id_parent_intranet_actions)            //Liaison                                                
                                                 . ' AND ' . GeoModel::TABLENAME . '.' . GeoModel::KEYNAME . '=' . UserModel::TABLENAME . '.' . UserModel::FIELDNAME_LIEU_GEO . ') '                                                         //Liaison
-                                                . ' AND ( ( ' . IntranetDroitsAccesModel::TABLENAME . '.' . IntranetDroitsAccesModel::FIELDNAME_NIVEAU_INTRANET_DROITS_ACCES . ' <> 0 '                                 //Obtention du droit d'accès
+                                                . ' AND ( ( ' . IntranetDroitsAccesModel::TABLENAME . '.' . IntranetDroitsAccesModel::FIELDNAME_NIVEAU_INTRANET_DROITS_ACCES . ' <>  ' . IntranetNiveauAccesModel::NIVEAU_GENERIC_FALSE                                  //Obtention du droit d'accès
                                                 . ' AND ' . FtaProcessusModel::TABLENAME . '.' . FtaProcessusModel::KEYNAME . ' = ' . $rowsProcessus[FtaProcessusModel::KEYNAME]                  //Processus en cours
                                                 . ' AND ' . FtaProcessusModel::TABLENAME . '.' . FtaProcessusModel::FIELDNAME_MULTISITE_FTA_PROCESSUS . ' = 1 '                                     //Processus Multisite
                                                 . ' AND ' . GeoModel::TABLENAME . '.' . GeoModel::KEYNAME . '= \'' . $site_gestionnaire . '\' '                                                       //Site d'assemblage

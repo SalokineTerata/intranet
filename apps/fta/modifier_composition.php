@@ -792,7 +792,7 @@ if ($mode_etiquette_fta_composition == 1 or $mode_etiquette_fta_composition == 2
 //        }
 //    }
 //    $bloc.="</td></tr>";
-    $bloc .=$ftaComposantView->getHtmlDataField(FtaComposantModel::FIELDNAME_K_ETIQUETTE_FTA_COMPOSITION);
+    $bloc .=$ftaComposantView->ListeCodesoftEtiquettesRecto($id_fta, $editable);
 
 
     //Modèle d'etiquette verso
@@ -828,7 +828,7 @@ if ($mode_etiquette_fta_composition == 1 or $mode_etiquette_fta_composition == 2
 //        }
 //    }
 //    $bloc.="</td></tr>";
-    $bloc .=$ftaComposantView->getHtmlDataField(FtaComposantModel::FIELDNAME_K_ETIQUETTE_VERSO_FTA_COMPOSITION);
+    $bloc .=$ftaComposantView->ListeCodesoftEtiquettesVerso($id_fta, $editable);
 
 
     //Logo à imprimer sur le masque d'étiquette

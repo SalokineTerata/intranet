@@ -75,10 +75,13 @@ $html_table = 'table '              //Permet d'harmoniser les tableaux
 $new_designation_commerciale_fta = Lib::getParameterFromRequest('new_designation_commerciale_fta');
 $abreviationEtatDestination = Lib::getParameterFromRequest('abreviation_etat_destination');
 $idFta = Lib::getParameterFromRequest('id_fta');
-$idFtaWorkflow = Lib::getParameterFromRequest('id_fta_workflow');
-$idFtaRole = Lib::getParameterFromRequest('id_fta_role');
 $siteDeProduction = Lib::getParameterFromRequest('site_de_production');
 $ftaModel = new FtaModel($idFta);
+$globalConfig = new GlobalConfig();
+$idUser = $globalConfig->getAuthenticatedUser()->getKeyValue();
+$idFtaWorkflow = $ftaModel->getDataField(FtaModel::FIELDNAME_WORKFLOW)->getFieldValue();
+$idFtaRoleAcces = FtaRoleModel::getIdFtaRoleByIdUserAndWorkflow($idUser, $idFtaWorkflow);
+$idFtaRole = $idFtaRoleAcces["0"];
 
 /*
   Sélection du mode d'affichage
@@ -131,9 +134,9 @@ switch ($output) {
         /*
          * Marque
          */
-        
+
         $IdFtaClassification2 = $ftaModel->getDataField(FtaModel::FIELDNAME_ID_FTA_CLASSIFICATION2)->getFieldValue();
-        $classificationMarque = ClassificationArborescenceArticleCategorieContenuModel::getElementClassificationFta($IdFtaClassification2,ClassificationFta2Model::FIELDNAME_ID_MARQUE);
+        $classificationMarque = ClassificationArborescenceArticleCategorieContenuModel::getElementClassificationFta($IdFtaClassification2, ClassificationFta2Model::FIELDNAME_ID_MARQUE);
         $bloc .= 'Marque(s) <i>(anciennement gamme)</i>:';
         $bloc .= $classificationMarque;
         $bloc.='<br>';
@@ -141,7 +144,7 @@ switch ($output) {
         /*
          * Activité
          */
-        $classificationActivite = ClassificationArborescenceArticleCategorieContenuModel::getElementClassificationFta($IdFtaClassification2,ClassificationFta2Model::FIELDNAME_ID_ACTIVITE);
+        $classificationActivite = ClassificationArborescenceArticleCategorieContenuModel::getElementClassificationFta($IdFtaClassification2, ClassificationFta2Model::FIELDNAME_ID_ACTIVITE);
         $bloc .= 'Activité(s) <i>(anciennement ségment)</i>:';
         $bloc .= $classificationActivite;
         $bloc.='<br>';
@@ -153,7 +156,7 @@ switch ($output) {
 
 
         echo '
-             <form method=$method action=' . $page_action . '>
+             <form method=' . $method . ' action=' . $page_action . '>
              <input type=\'hidden\' name=\'id_fta\' value=\'' . $idFta . '\' />
              <input type=\'hidden\' name=\'abreviation_etat_destination\' value=\'' . $abreviationEtatDestination . '\' />
              <input type=\'hidden\' name=\'new_designation_commerciale_fta\' value=\'' . $new_designation_commerciale_fta . '\' />

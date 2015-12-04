@@ -72,20 +72,33 @@ $idFta = Lib::getParameterFromRequest(FtaModel::KEYNAME);
 //}
 if ($idFta) {
 
-    /*
-     * Nous recuperons le chapitre auquel ultisateur verra par défaut selon ces droits d'accès 
-     * lorsqu'il regarde la liste de ces fta 
+    /**
+     * Récupérations des paramètres
      */
-//$chapitreParDefaut = FtaChapitreModel::getChapitreDefautByWorkflow($id_fta);
-
     $id_fta_chapitre_encours = Lib::getParameterFromRequest('id_fta_chapitre_encours', '1');
     $synthese_action = Lib::isDefined('synthese_action');
     $comeback = Lib::isDefined('comeback');
     $idFtaEtat = Lib::isDefined(FtaEtatModel::KEYNAME);
     $abreviationFtaEtat = Lib::isDefined(FtaEtatModel::FIELDNAME_ABREVIATION);
     $idFtaRole = Lib::isDefined(FtaRoleModel::KEYNAME);
+    $ftaModification = AclClass::getValueAccesRights('fta_modification');
     $id_fta_chapitre = $id_fta_chapitre_encours;
     $ftaModel = new FtaModel($idFta);
+
+    /**
+     * Verification des droits d'accès sur une Fta en modification
+     */
+    if ($idFtaEtat == "1" and ! $ftaModification) {
+        $titre = UserMessage::FR_WARNING_ACCES_RIGHTS_TILE;
+        $message = UserMessage::FR_WARNING_ACCES_RIGHTS;
+        $redirection = "index.php";
+        afficher_message($titre, $message, $redirection);
+    }
+
+
+    /**
+     * Récuparation des données pour la classification
+     */
     $idFtaClassification2 = $ftaModel->getDataField(FtaModel::FIELDNAME_ID_FTA_CLASSIFICATION2)->getFieldValue();
     $selection_proprietaire1 = Lib::getParameterFromRequest('selection_proprietaire1');
     $selection_proprietaire2 = Lib::getParameterFromRequest('selection_proprietaire2');
@@ -97,6 +110,9 @@ if ($idFta) {
     $selection_saisonnalite = Lib::getParameterFromRequest('selection_saisonnalite');
     $checkIdFtaClasssification = Lib::getParameterFromRequest('checkIdFtaClasssification');
 
+    /**
+     * Verification pour la classification
+     */
     if ($idFtaClassification2 and ! $checkIdFtaClasssification) {
         $ClassificationFta2Model = new ClassificationFta2Model($idFtaClassification2);
         $selection_proprietaire1 = $ClassificationFta2Model->getDataField(ClassificationFta2Model::FIELDNAME_ID_PROPRIETAIRE_GROUPE)->getFieldValue();
@@ -110,6 +126,14 @@ if ($idFta) {
     }
 
 
+    if ($ftaModification and $idFtaRole == FtaRoleModel::ID_FTA_ROLE_COMMUN) {
+
+        $globalConfig = new GlobalConfig();
+        $idUser = $globalConfig->getAuthenticatedUser()->getKeyValue();
+        $idFtaWorkflow = $ftaModel->getDataField(FtaModel::FIELDNAME_WORKFLOW)->getFieldValue();
+        $idFtaRoleAcces = FtaRoleModel::getIdFtaRoleByIdUserAndWorkflow($idUser, $idFtaWorkflow);
+        $idFtaRole = $idFtaRoleAcces["0"];
+    }
 
 
 
@@ -146,6 +170,11 @@ if ($idFta) {
     Chapitre::initChapitre($idFta, $id_fta_chapitre, $synthese_action, $comeback, $idFtaEtat, $abreviationFtaEtat, $idFtaRole);
 
     $bloc.= Chapitre::getHtmlChapitreAll();
+} else {
+    $titre = UserMessage::FR_WARNING_PARAM_ID_FTA_TITLE;
+    $message = UserMessage::FR_WARNING_PARAM_ID_FTA;
+    $redirection = "index.php";
+    afficher_message($titre, $message, $redirection);
 }
 
 echo '

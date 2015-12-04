@@ -56,7 +56,8 @@ $html_table = 'table '              //Permet d'harmoniser les tableaux
  */
 
 $idFta = Lib::getParameterFromRequest('id_fta');
-$idFtaRole = Lib::getParameterFromRequest('id_fta_role');
+
+
 $action = Lib::getParameterFromRequest('action');
 $demande_abreviation_fta_transition = Lib::getParameterFromRequest('demande_abreviation_fta_transition');
 $syntheseAction = Lib::getParameterFromRequest('synthese_action');
@@ -71,6 +72,9 @@ $globalConfig = new GlobalConfig();
 UserModel::ConnexionFalse($globalConfig);
 
 $idUser = $globalConfig->getAuthenticatedUser()->getKeyValue();
+$idFtaWorkflow = $ftaModel->getDataField(FtaModel::FIELDNAME_WORKFLOW)->getFieldValue();
+$idFtaRoleAcces = FtaRoleModel::getIdFtaRoleByIdUserAndWorkflow($idUser, $idFtaWorkflow);
+$idFtaRole = $idFtaRoleAcces["0"];
 $ftaView = new FtaView($ftaModel);
 $dataFieldCommentaire = $ftaModel->getDataField(FtaModel::FIELDNAME_COMMENTAIRE_MAJ_FTA);
 $htmlFieldCommentaire = Html::getHtmlObjectFromDataField($dataFieldCommentaire);

@@ -116,7 +116,7 @@ class ClassificationFta2Model extends AbstractModel {
 
         $paramNomDefaut = 'selection_proprietaire12';
         $listeClassification = '<td class=contenu >' . DatabaseDescription::getFieldDocLabel(ClassificationFta2Model::TABLENAME, ClassificationFta2Model::FIELDNAME_ID_PROPRIETAIRE_GROUPE)
-                . '</td><td class=contenu>'
+                . '</td><td class=contenu width=75% >'
                 . AccueilFta::afficherRequeteEnListeDeroulante($req, $paramIdDefaut, $paramNomDefaut, $paramIsEditable, TRUE) . '</tr>';
 
         return $listeClassification;

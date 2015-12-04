@@ -920,16 +920,16 @@ class FtaModel extends AbstractModel {
         return $return;
     }
 
-    public static function AddIdFTaValidProcess($paramIdEffectue) {
+    public static function AddIdFta($paramIdEffectue) {
         if ($paramIdEffectue) {
             foreach ($paramIdEffectue as $value) {
-                $req .= " OR " . FtaModel::TABLENAME . "." . FtaModel::KEYNAME . "=" . $value . " ";
+                $req .= " OR " . FtaModel::TABLENAME . "." . FtaModel::KEYNAME . "='" . $value . "' ";
             }
         }
         return $req;
     }
 
-    public static function AddIdFTaLabelValidProcess($paramIdEffectue) {
+    public static function AddIdFtaLabel($paramIdEffectue) {
         if ($paramIdEffectue) {
             foreach ($paramIdEffectue as $value) {
                 $req .= " OR " . FtaModel::TABLENAME . "." . FtaModel::KEYNAME . "=" . $value[FtaModel::KEYNAME] . " ";

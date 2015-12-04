@@ -28,7 +28,7 @@ $comeback = Lib::getParameterFromRequest('comeback');
 $synthese_action = Lib::getParameterFromRequest('synthese_action');
 $proprietaire = Lib::getParameterFromRequest('proprietaire');
 $globalConfig = new GlobalConfig();
-      UserModel::ConnexionFalse($globalConfig);
+UserModel::ConnexionFalse($globalConfig);
 
 $id_user = $globalConfig->getAuthenticatedUser()->getKeyValue();
 
@@ -79,7 +79,7 @@ switch ($action) {
                 /**
                  * Les Produits toujours en L
                  */
-                if ($prefixe_annexe_agrologic_article_codification == "17") {
+                if ($prefixe_code_produit_agrologic_fta_nomenclature == "17") {
                     $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_ID_ANNEXE_UNITE)->setFieldValue("L");
                 }
 
@@ -88,16 +88,16 @@ switch ($action) {
                  */
                 if (
                         (//Cas Général (sauf Tarare)
-                        $prefixe_annexe_agrologic_article_codification == "30"
+                        $prefixe_code_produit_agrologic_fta_nomenclature == "30"
                         )
                         or ( //Cas Tarare)
-                        $prefixe_annexe_agrologic_article_codification == "14"
+                        $prefixe_code_produit_agrologic_fta_nomenclature == "14"
                         )
                         or ( //Cas Tarare)
-                        $prefixe_annexe_agrologic_article_codification == "29"
+                        $prefixe_code_produit_agrologic_fta_nomenclature == "29"
                         )
                         or (
-                        $prefixe_annexe_agrologic_article_codification == "15"
+                        $prefixe_code_produit_agrologic_fta_nomenclature == "15"
                         )
                 ) {
                     if ($creation) {
@@ -109,8 +109,8 @@ switch ($action) {
                         $poids_fta_nomenclature = $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_POIDS_UNITAIRE_CODIFICATION)->getFieldValue();
                         $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_POIDS_FTA_COMPOSITION)->setFieldValue($poids_fta_nomenclature);
                         $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_QUANTITE_FTA_COMPOSITION_UVC)->setFieldValue("1");
-                        $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_IS_COMPOSITION_FTA_COMPOSANT)->setFieldValue("1");
                     }
+                    $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_IS_COMPOSITION_FTA_COMPOSANT)->setFieldValue("1");
                 } else {
                     $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_IS_COMPOSITION_FTA_COMPOSANT)->setFieldValue("0");
                 }

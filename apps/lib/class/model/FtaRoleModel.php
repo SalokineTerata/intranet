@@ -13,6 +13,7 @@ class FtaRoleModel extends AbstractModel {
     const FIELDNAME_DESCRIPTION_FTA_ROLE = 'description_fta_role';
     const FIELDNAME_NOM_FTA_ROLE = 'nom_fta_role';
     const FIELDNAME_IS_GESTIONNAIRE = 'is_gestionnaire';
+    const ID_FTA_ROLE_COMMUN = '0';
 
     protected function setDefaultValues() {
         
@@ -45,7 +46,7 @@ class FtaRoleModel extends AbstractModel {
                         . ' WHERE ' . UserModel::TABLENAME . '.' . UserModel::KEYNAME . '=' . $paramIdUser
                         . ' AND ' . UserModel::TABLENAME . '.' . UserModel::KEYNAME
                         . '=' . IntranetDroitsAccesModel::TABLENAME . '.' . IntranetDroitsAccesModel::FIELDNAME_ID_USER
-                        . ' AND ' . IntranetDroitsAccesModel::FIELDNAME_NIVEAU_INTRANET_DROITS_ACCES . '=1'
+                        . ' AND ' . IntranetDroitsAccesModel::FIELDNAME_NIVEAU_INTRANET_DROITS_ACCES . '=' . IntranetNiveauAccesModel::NIVEAU_GENERIC_TRUE
                         . ' AND ' . IntranetDroitsAccesModel::TABLENAME . '.' . IntranetDroitsAccesModel::FIELDNAME_ID_INTRANET_ACTIONS
                         . '=' . IntranetActionsModel::TABLENAME . '.' . IntranetActionsModel::KEYNAME
                         . ' AND ' . IntranetActionsModel::TABLENAME . '.' . IntranetActionsModel::KEYNAME
@@ -74,7 +75,7 @@ class FtaRoleModel extends AbstractModel {
                         . ' WHERE ' . UserModel::TABLENAME . '.' . UserModel::KEYNAME . '=' . $paramIdUser
                         . ' AND ' . UserModel::TABLENAME . '.' . UserModel::KEYNAME
                         . '=' . IntranetDroitsAccesModel::TABLENAME . '.' . IntranetDroitsAccesModel::FIELDNAME_ID_USER
-                        . ' AND ' . IntranetDroitsAccesModel::FIELDNAME_NIVEAU_INTRANET_DROITS_ACCES . '=1'
+                        . ' AND ' . IntranetDroitsAccesModel::FIELDNAME_NIVEAU_INTRANET_DROITS_ACCES . '=' . IntranetNiveauAccesModel::NIVEAU_GENERIC_TRUE
                         . ' AND ' . IntranetDroitsAccesModel::TABLENAME . '.' . IntranetDroitsAccesModel::FIELDNAME_ID_INTRANET_ACTIONS
                         . '=' . IntranetActionsModel::TABLENAME . '.' . IntranetActionsModel::KEYNAME
                         . ' AND ' . IntranetActionsModel::TABLENAME . '.' . IntranetActionsModel::KEYNAME
@@ -83,8 +84,8 @@ class FtaRoleModel extends AbstractModel {
                         . '=' . FtaRoleModel::TABLENAME . '.' . FtaRoleModel::KEYNAME
                         . ' AND ' . FtaActionRoleModel::TABLENAME . '.' . FtaActionRoleModel::FIELDNAME_ID_FTA_WROKFLOW . '=' . $paramIdFtaWorkflow
         );
-        foreach ($arrayIdFtaRole as $rowsIdFtaRole){
-            $IdFtaRole[]=$rowsIdFtaRole[FtaRoleModel::KEYNAME];
+        foreach ($arrayIdFtaRole as $rowsIdFtaRole) {
+            $IdFtaRole[] = $rowsIdFtaRole[FtaRoleModel::KEYNAME];
         }
 
         return $IdFtaRole;

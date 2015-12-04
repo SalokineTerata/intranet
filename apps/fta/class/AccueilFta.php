@@ -75,9 +75,9 @@ class AccueilFta {
          * $arrayIdFtaAndIdWorkflow[1] sont les id_fta
          * $arrayIdFtaAndIdWorkflow[2] sont les nom des workflows correspondant aux  id_fta
          */
-        self::$arrayIdFtaAndIdWorkflow = FtaEtatModel::getIdFtaByEtatAvancement(self::$syntheseAction, self::$abreviationFtaEtat, self::$idFtaRole, self::$idUser, self::$idFtaEtat);
+        self::$arrayIdFtaAndIdWorkflow = FtaEtatModel::getIdFtaByEtatAvancement(self::$syntheseAction, self::$abreviationFtaEtat, self::$idFtaRole, self::$idUser, self::$idFtaEtat, self::$ftaModification);
 
-        self::$arrayIdFtaByUserAndWorkflow = UserModel::getIdFtaByUserAndWorkflow(self::$arrayIdFtaAndIdWorkflow, self::$orderBy, $debut);
+        self::$arrayIdFtaByUserAndWorkflow = UserModel::getIdFtaByUserAndWorkflow(self::$arrayIdFtaAndIdWorkflow, self::$orderBy, $debut, self::$ftaModification);
 
         self::$arraNameSiteByWorkflow = IntranetActionsModel::getNameSiteByWorkflow(self::$idUser, self::$arrayIdFtaByUserAndWorkflow['3']);
 
@@ -655,6 +655,9 @@ class AccueilFta {
         if (substr($URL, -2) == 'pp') {
             $URL = $URL . 's/fta/index.php?';
         }
+        if ((substr($URL, -2)) == 'v3') {
+            $URL = $URL . '/apps/fta/index.php?';
+        }
         $tableauFiche .= '<th><a href=' . $URL . '&order_common=Site_de_production&numeroPage=' . self::$numeroDePageCourante . '><img src=../lib/images/order-AZ.png title=\'Ordonné par Nom de Site de Production\'  border=\'0\' /></a>'
                 . 'Site'
                 . '</th><th>'
@@ -980,7 +983,7 @@ class AccueilFta {
                     ;
 
                     if (self::$syntheseAction == FtaEtatModel::ETAT_AVANCEMENT_VALUE_EFFECTUES and $recap[$idFta] == '100%') {
-                        $selection = '<input type=\'checkbox\' name=selection_fta value=\'' . $idFta . '\' checked />';
+                        $selection = '<input type=\'checkbox\' name=selection_fta_' . $idFta . ' value=\'' . $idFta . '\' checked />';
                         $traitementDeMasse = '1';
                         $selection_width = '2%';
                         $StringFta .= $idFta . ',';

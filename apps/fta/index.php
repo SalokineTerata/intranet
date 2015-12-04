@@ -72,7 +72,13 @@ if ($id_user) {
     $order_common = Lib::getParameterFromRequest('order_common', FtaWorkflowModel::KEYNAME);
     $numeroDePageCourante = Lib::getParameterFromRequest('numeroPage', '1');
 
-
+    if (!$fta_consultation) {
+        $titre = UserMessage::FR_WARNING_ACCES_RIGHTS_TILE;
+        $message = UserMessage::FR_WARNING_ACCES_RIGHTS
+                . " Veuillez vous déconnecter et contactez l'administrateur de l'intranet";
+        $redirection = "index.php";
+        afficher_message($titre, $message, $redirection);
+    }
     /*
       Récupération des données MySQL
      */
@@ -102,7 +108,16 @@ if ($id_user) {
             $id_fta_etat = '3';
         }
     }
-
+    if ($fta_modification) {
+        $nbMaxParPage = ModuleConfig::VALUE_MAX_PAR_PAGE;
+    } else {
+        $nbMaxParPage = ModuleConfig::VALUE_MAX_PAR_PAGE_CONSUL;
+        $messageConsultation = '<table width=100% border=1 valign=top cellspacing=0>
+            <tr>
+                <td class=titre_principal valign=\'middle\'> ' . UserMessage::FR_LAST_50_FTA . '</td>
+            </tr>
+        </table>';
+    }
     $idFtaRoleEncours = Lib::getParameterFromRequest(FtaRoleModel::KEYNAME, $idFtaRoleEncoursDefault);
 //echo 'id_fta_etat=$id_fta_etat / nom_fta_etat=$nom_fta_etat / synthese_action=$synthese_action <br>';
 
@@ -164,7 +179,7 @@ if ($id_user) {
     /**
      * Calcul des enregistrements à afficher
      */
-    $debut = ($numeroDePageCourante - '1') * ModuleConfig::VALUE_MAX_PAR_PAGE;
+    $debut = ($numeroDePageCourante - '1') * $nbMaxParPage;
     /*
      * Initialisation des valeurs
      */
@@ -240,6 +255,7 @@ if ($id_user) {
                 <td> ' . $tableau_synthese . '</td>
             </tr>
         </table>
+       ' . $messageConsultation . '
         
 ';
 

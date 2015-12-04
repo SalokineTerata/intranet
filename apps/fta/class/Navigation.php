@@ -13,7 +13,10 @@ class Navigation {
     protected static $id_fta_role;
     protected static $comeback;
     protected static $comeback_url;
+    protected static $ftaConsultation;
     protected static $ftaModel;
+    protected static $ftaModification;
+    protected static $ftaImpression;
     protected static $html_navigation_bar;
     protected static $html_navigation_core;
     //protected static $id_fta_chapitre;
@@ -28,6 +31,18 @@ class Navigation {
     }
 
     public static function initNavigation($id_fta, $id_fta_chapitre_encours, $synthese_action, $comeback, $id_fta_etat, $abrevation_etat, $id_fta_role, $paramActivationComplete) {
+
+        /**
+         * Modification
+         */
+        self::$ftaModification = AclClass::getValueAccesRights('fta_modification');
+
+        /**
+         * Consultation
+         */
+        self::$ftaConsultation = AclClass::getValueAccesRights('fta_consultation');
+
+
 
         self::$id_fta = $id_fta;
         self::$id_fta_chapitre_encours = $id_fta_chapitre_encours;
@@ -67,14 +82,14 @@ class Navigation {
         if (self::$id_fta) {
             $checkIdFta = self::$ftaModel->getDataField(FtaModel::KEYNAME)->getFieldValue();
             if (!$checkIdFta) {
-                $titre = "Affichage d'une Fta";
-                $message = "Erreur la Fta n'existe pas.<br><br>";
+                $titre = UserMessage::FR_WARNING_PARAM_ID_FTA_TITLE;
+                $message = UserMessage::FR_WARNING_PARAM_ID_FTA_NOT_EXISTANT;
                 $redirection = "index.php";
                 afficher_message($titre, $message, $redirection);
             }
         } else {
-            $titre = "Affichage d'une Fta";
-            $message = "Erreur la Fta n'est passé en paramètre.<br><br>";
+            $titre = UserMessage::FR_WARNING_PARAM_ID_FTA_TITLE;
+            $message = UserMessage::FR_WARNING_PARAM_ID_FTA;
             $redirection = "index.php";
             afficher_message($titre, $message, $redirection);
         }
@@ -185,9 +200,11 @@ class Navigation {
                 $menu_navigation = '<' . $html_table . '><tr><td class=titre_principal> <div align=\'left\'>
                             <b><font size=\'2\' color=\'#0000FF\'>' . $rowsFtaEtatAndFta[FtaModel::FIELDNAME_CODE_ARTICLE_LDC] . '</font></b> - ' . $nom . ' &nbsp;&nbsp;&nbsp;&nbsp;<i>(gérée par ' . $createur . ')</i>  '
                         . '</div></td>'
-                        . '<td width=25% class=titre_principal>'
-                        . $RoleNavigation
-                        . '<br>  Site de Production : ' . $geoModel->getDataField(GeoModel::FIELDNAME_GEO)->getFieldValue()
+                        . '<td width=25% class=titre_principal>';
+                if (self::$abreviation_etat == FtaEtatModel::ETAT_ABREVIATION_VALUE_MODIFICATION) {
+                    $menu_navigation .= $RoleNavigation;
+                }
+                $menu_navigation .= '<br>  Site de Production : ' . $geoModel->getDataField(GeoModel::FIELDNAME_GEO)->getFieldValue()
                         . '<br>  Espace de Travail : ' . $rowsFtaEtatAndFta[FtaWorkflowModel::FIELDNAME_DESCRIPTION_FTA_WORKFLOW]
                         . '</td></tr></table>
                      <' . $html_table . '>
@@ -197,9 +214,12 @@ class Navigation {
                 $menu_navigation = '<' . $html_table . '><tr><td class=titre_principal> <div align=\'left\'>
                             <b><font size=\'2\' color=\'#0000FF\'>' . $rowsFtaEtatAndFta[FtaModel::FIELDNAME_CODE_ARTICLE_LDC] . '</font></b> - ' . $nom . ' &nbsp;&nbsp;&nbsp;&nbsp;<i>(gérée par ' . $createur . ')</i>  '
                         . '</div></td>'
-                        . '<td width=25% class=titre_principal>'
-                        . '  Rôle : ' . $ftaRoleModel->getDataField(FtaRoleModel::FIELDNAME_DESCRIPTION_FTA_ROLE)->getFieldValue()
-                        . '<br>  Site de Production : ' . $geoModel->getDataField(GeoModel::FIELDNAME_GEO)->getFieldValue()
+                        . '<td width=25% class=titre_principal>';
+                if (self::$abreviation_etat == FtaEtatModel::ETAT_ABREVIATION_VALUE_MODIFICATION) {
+                    $menu_navigation .= '  Rôle : ' . $ftaRoleModel->getDataField(FtaRoleModel::FIELDNAME_DESCRIPTION_FTA_ROLE)->getFieldValue();
+                }
+
+                $menu_navigation .= '<br>  Site de Production : ' . $geoModel->getDataField(GeoModel::FIELDNAME_GEO)->getFieldValue()
                         . '<br>  Espace de Travail : ' . $rowsFtaEtatAndFta[FtaWorkflowModel::FIELDNAME_DESCRIPTION_FTA_WORKFLOW]
                         . '</td></tr></table>
                     <' . $html_table . '>
@@ -309,7 +329,7 @@ class Navigation {
                             . '=' . IntranetModulesModel::TABLENAME . '.' . IntranetModulesModel::KEYNAME  //Jointure
                             . ' AND ' . IntranetDroitsAccesModel::FIELDNAME_ID_USER . '=' . $id_user //Utilisateur actuellement connecté
                             . ' AND ' . IntranetModulesModel::FIELDNAME_NOM_INTRANET_MODULES . '=\'' . FtaModel::TABLENAME
-                            . '\' AND ' . IntranetDroitsAccesModel::FIELDNAME_NIVEAU_INTRANET_DROITS_ACCES . '=1'  //L'utilisateur est propriétaire
+                            . '\' AND ' . IntranetDroitsAccesModel::FIELDNAME_NIVEAU_INTRANET_DROITS_ACCES . '=' . IntranetNiveauAccesModel::NIVEAU_GENERIC_TRUE  //L'utilisateur est propriétaire
             );
 
             $arrayProcessusValide = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
@@ -396,7 +416,7 @@ class Navigation {
                             . '=' . IntranetModulesModel::TABLENAME . '.' . IntranetModulesModel::KEYNAME  //Jointure
                             . ' AND ' . IntranetDroitsAccesModel::FIELDNAME_ID_USER . '=' . $id_user //Utilisateur actuellement connecté
                             . ' AND ' . IntranetModulesModel::FIELDNAME_NOM_INTRANET_MODULES . '=\'' . FtaModel::TABLENAME
-                            . '\' AND ' . IntranetDroitsAccesModel::FIELDNAME_NIVEAU_INTRANET_DROITS_ACCES . '=1'  //L'utilisateur est propriétaire
+                            . '\' AND ' . IntranetDroitsAccesModel::FIELDNAME_NIVEAU_INTRANET_DROITS_ACCES . '=' . IntranetNiveauAccesModel::NIVEAU_GENERIC_TRUE   //L'utilisateur est propriétaire
                             . ' AND ' . FtaWorkflowStructureModel::TABLENAME . '.' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_CHAPITRE
                             . '=' . FtaSuiviProjetModel::TABLENAME . '.' . FtaSuiviProjetModel::FIELDNAME_ID_FTA_CHAPITRE  //Jointure
                             . ' AND ' . FtaSuiviProjetModel::FIELDNAME_SIGNATURE_VALIDATION_SUIVI_PROJET . '<>0' //chapitre validé

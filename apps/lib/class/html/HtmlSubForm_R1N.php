@@ -268,11 +268,11 @@ class HtmlSubForm_R1N extends HtmlSubForm {
                     /**
                      * Ajout du lien d'accès au détail du sous-formulaire
                      */
-                    $return.='<td>' . $htmlUrlToSubFormSuppression . '</td>';
+                    $return.='<td>' . $htmlUrlToSubFormAjout . '</td>';
                     /**
                      * Ajout du lien d'accès au détail du sous-formulaire
                      */
-                    $return.='<td>' . $htmlUrlToSubFormAjout . '</td>';
+                    $return.='<td>' . $htmlUrlToSubFormSuppression . '</td>';
                 }
             }
             /**

@@ -66,9 +66,10 @@ class FtaEtatModel extends AbstractModel {
      * @param type $paramRole
      * @param type $paramIdUser
      * @param type $paramIdFtaEtat
+     * @param type $paramFtaModification
      * @return type
      */
-    public static function getIdFtaByEtatAvancement($paramSyntheseAction, $paramEtat, $paramRole, $paramIdUser, $paramIdFtaEtat) {
+    public static function getIdFtaByEtatAvancement($paramSyntheseAction, $paramEtat, $paramRole, $paramIdUser, $paramIdFtaEtat, $paramFtaModification) {
         $idFtaEffectue = array();
 //        $compteur = "0";
         if ($_SESSION['CheckIdFtaRole'] <> $paramRole or $_SESSION[UserModel::KEYNAME] <> $paramIdUser) {
@@ -113,7 +114,7 @@ class FtaEtatModel extends AbstractModel {
                                 . ' AND ' . FtaActionSiteModel::TABLENAME . '.' . FtaActionSiteModel::FIELDNAME_ID_INTRANET_ACTIONS
                                 . ' IN (' . IntranetActionsModel::TABLENAME . '.' . IntranetActionsModel::KEYNAME . ')'
                                 . ' AND ' . FtaSuiviProjetModel::FIELDNAME_SIGNATURE_VALIDATION_SUIVI_PROJET . '=' . '0'
-                                . ' AND ' . IntranetDroitsAccesModel::FIELDNAME_NIVEAU_INTRANET_DROITS_ACCES . '=' . '1'
+                                . ' AND ' . IntranetDroitsAccesModel::FIELDNAME_NIVEAU_INTRANET_DROITS_ACCES . '=' . IntranetNiveauAccesModel::NIVEAU_GENERIC_TRUE
                                 . ' AND ' . IntranetDroitsAccesModel::FIELDNAME_ID_USER . '=' . $paramIdUser                                                  // Nous recuperons l'identifiant de l'utilisateur connecté
                                 . ' AND ' . FtaModel::FIELDNAME_ID_FTA_ETAT . '=' . $paramIdFtaEtat                                                           // Nous recuperons l'identifiant de l'etat de la Fta
                                 . ' AND ' . FtaWorkflowStructureModel::TABLENAME . '.' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_ROLE . '=' . $paramRole // Nous recuperons le type de role pour l'utilisateur
@@ -142,7 +143,7 @@ class FtaEtatModel extends AbstractModel {
                                 'SELECT DISTINCT ' . FtaModel::KEYNAME
                                 . ' FROM ' . FtaModel::TABLENAME
                                 . ' WHERE ( ' . '0'
-                                . ' ' . FtaModel::AddIdFTaValidProcess($idFtaEffectue) . ')');
+                                . ' ' . FtaModel::AddIdFta($idFtaEffectue) . ')');
 
 
                 break;
@@ -185,7 +186,7 @@ class FtaEtatModel extends AbstractModel {
                                 . ' AND ' . FtaActionSiteModel::TABLENAME . '.' . FtaActionSiteModel::FIELDNAME_ID_INTRANET_ACTIONS
                                 . ' IN (' . IntranetActionsModel::TABLENAME . '.' . IntranetActionsModel::KEYNAME . ')'
                                 . ' AND ' . FtaSuiviProjetModel::FIELDNAME_SIGNATURE_VALIDATION_SUIVI_PROJET . '=' . '0'
-                                . ' AND ' . IntranetDroitsAccesModel::FIELDNAME_NIVEAU_INTRANET_DROITS_ACCES . '=' . '1'
+                                . ' AND ' . IntranetDroitsAccesModel::FIELDNAME_NIVEAU_INTRANET_DROITS_ACCES . '=' . IntranetNiveauAccesModel::NIVEAU_GENERIC_TRUE
                                 . ' AND ' . IntranetDroitsAccesModel::FIELDNAME_ID_USER . '=' . $paramIdUser                                                    // Nous recuperons l'identifiant de l'utilisateur connecté
                                 . ' AND ' . FtaModel::FIELDNAME_ID_FTA_ETAT . '=' . $paramIdFtaEtat                                                             // Nous recuperons l'identifiant de l'etat de la Fta
                                 . ' AND ' . FtaWorkflowStructureModel::TABLENAME . '.' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_ROLE . '=' . $paramRole    // Nous recuperons le type de role pour l'utilisateur
@@ -223,7 +224,7 @@ class FtaEtatModel extends AbstractModel {
                                 'SELECT ' . FtaModel::KEYNAME
                                 . ' FROM ' . FtaModel::TABLENAME
                                 . ' WHERE ( ' . '0'
-                                . ' ' . FtaModel::AddIdFTaValidProcess($idFtaEffectue) . ')');
+                                . ' ' . FtaModel::AddIdFta($idFtaEffectue) . ')');
 
 
                 break;
@@ -263,7 +264,7 @@ class FtaEtatModel extends AbstractModel {
                                 . ' AND ' . FtaActionSiteModel::TABLENAME . '.' . FtaActionSiteModel::FIELDNAME_ID_INTRANET_ACTIONS
                                 . ' IN (' . IntranetActionsModel::TABLENAME . '.' . IntranetActionsModel::KEYNAME . ')'
                                 . ' AND ' . FtaSuiviProjetModel::FIELDNAME_SIGNATURE_VALIDATION_SUIVI_PROJET . '<>' . '0'
-                                . ' AND ' . IntranetDroitsAccesModel::FIELDNAME_NIVEAU_INTRANET_DROITS_ACCES . '=' . '1'
+                                . ' AND ' . IntranetDroitsAccesModel::FIELDNAME_NIVEAU_INTRANET_DROITS_ACCES . '=' . IntranetNiveauAccesModel::NIVEAU_GENERIC_TRUE
                                 . ' AND ' . IntranetDroitsAccesModel::FIELDNAME_ID_USER . '=' . $paramIdUser                                                  // Nous recuperons l'identifiant de l'utilisateur connecté
                                 . ' AND ' . FtaModel::FIELDNAME_ID_FTA_ETAT . '=' . $paramIdFtaEtat                                                           // Nous recuperons l'identifiant de l'etat de la Fta
                                 . ' AND ' . FtaWorkflowStructureModel::TABLENAME . '.' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_ROLE . '=' . $paramRole // Nous recuperons le type de role pour l'utilisateur
@@ -290,26 +291,41 @@ class FtaEtatModel extends AbstractModel {
                                 'SELECT DISTINCT ' . FtaModel::KEYNAME
                                 . ' FROM ' . FtaModel::TABLENAME
                                 . ' WHERE ( ' . '0'
-                                . ' ' . FtaModel::AddIdFTaValidProcess($idFtaEffectue) . ')');
+                                . ' ' . FtaModel::AddIdFta($idFtaEffectue) . ')');
                 break;
 
 
             case FtaEtatModel::ETAT_AVANCEMENT_VALUE_ALL: //Toutes les fiches de l'état sélectionné
-                $array = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
-                                'SELECT DISTINCT ' . FtaModel::KEYNAME
-                                . ' FROM ' . FtaModel::TABLENAME . ',' . IntranetDroitsAccesModel::TABLENAME
-                                . ',' . FtaWorkflowModel::TABLENAME . ',' . IntranetActionsModel::TABLENAME
-                                . ' WHERE ' . FtaModel::FIELDNAME_ID_FTA_ETAT . '=' . $paramIdFtaEtat   //Liaison
-                                . ' AND ' . IntranetDroitsAccesModel::FIELDNAME_NIVEAU_INTRANET_DROITS_ACCES . '=' . '1'
-                                . ' AND ' . IntranetDroitsAccesModel::FIELDNAME_ID_USER . '=' . $paramIdUser
-                                . ' AND ' . FtaWorkflowModel::TABLENAME . '.' . FtaWorkflowModel::FIELDNAME_ID_INTRANET_ACTIONS
-                                . '=' . IntranetActionsModel::TABLENAME . '.' . IntranetActionsModel::FIELDNAME_PARENT_INTRANET_ACTIONS
-                                . ' AND ' . IntranetDroitsAccesModel::TABLENAME . '.' . IntranetDroitsAccesModel::FIELDNAME_ID_INTRANET_ACTIONS
-                                . '=' . IntranetActionsModel::TABLENAME . '.' . IntranetActionsModel::KEYNAME
-                                . ' AND ' . FtaWorkflowModel::TABLENAME . '.' . FtaWorkflowModel::KEYNAME
-                                . '=' . FtaModel::TABLENAME . '.' . FtaModel::FIELDNAME_WORKFLOW
-                                . ' AND ( 0 ' . IntranetActionsModel::AddIdIntranetAction($_SESSION['IntranetActionsValide']) . ')'
-                );
+                if ($paramFtaModification) {
+                    $array = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
+                                    'SELECT DISTINCT ' . FtaModel::KEYNAME
+                                    . ' FROM ' . FtaModel::TABLENAME . ',' . IntranetDroitsAccesModel::TABLENAME
+                                    . ',' . FtaWorkflowModel::TABLENAME . ',' . IntranetActionsModel::TABLENAME
+                                    . ' , ' . FtaActionSiteModel::TABLENAME
+                                    . ' WHERE ' . FtaModel::FIELDNAME_ID_FTA_ETAT . '=' . $paramIdFtaEtat   //Liaison
+                                    . ' AND ' . IntranetDroitsAccesModel::FIELDNAME_NIVEAU_INTRANET_DROITS_ACCES . '=' . IntranetNiveauAccesModel::NIVEAU_GENERIC_TRUE
+                                    . ' AND ' . IntranetDroitsAccesModel::FIELDNAME_ID_USER . '=' . $paramIdUser
+                                    . ' AND ' . FtaWorkflowModel::TABLENAME . '.' . FtaWorkflowModel::FIELDNAME_ID_INTRANET_ACTIONS
+                                    . '=' . IntranetActionsModel::TABLENAME . '.' . IntranetActionsModel::FIELDNAME_PARENT_INTRANET_ACTIONS
+                                    . ' AND ' . IntranetDroitsAccesModel::TABLENAME . '.' . IntranetDroitsAccesModel::FIELDNAME_ID_INTRANET_ACTIONS
+                                    . '=' . IntranetActionsModel::TABLENAME . '.' . IntranetActionsModel::KEYNAME
+                                    . ' AND ' . FtaWorkflowModel::TABLENAME . '.' . FtaWorkflowModel::KEYNAME
+                                    . '=' . FtaModel::TABLENAME . '.' . FtaModel::FIELDNAME_WORKFLOW
+                                    . ' AND ( 0 ' . IntranetActionsModel::AddIdIntranetAction($_SESSION['IntranetActionsValide']) . ')'
+                                    . ' AND ' . FtaActionSiteModel::TABLENAME . '.' . FtaActionSiteModel::FIELDNAME_ID_SITE
+                                    . '=' . FtaModel::TABLENAME . '.' . FtaModel::FIELDNAME_SITE_ASSEMBLAGE
+                                    . ' AND ' . FtaActionSiteModel::TABLENAME . '.' . FtaActionSiteModel::FIELDNAME_ID_FTA_WORKFLOW
+                                    . '=' . FtaModel::TABLENAME . '.' . FtaModel::FIELDNAME_WORKFLOW
+                                    . ' AND ' . FtaActionSiteModel::TABLENAME . '.' . FtaActionSiteModel::FIELDNAME_ID_INTRANET_ACTIONS
+                                    . ' IN (' . IntranetActionsModel::TABLENAME . '.' . IntranetActionsModel::KEYNAME . ')'
+                    );
+                } else {
+                    $array = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
+                                    'SELECT DISTINCT ' . FtaModel::KEYNAME
+                                    . ' FROM ' . FtaModel::TABLENAME
+                                    . ' WHERE ' . FtaModel::FIELDNAME_ID_FTA_ETAT . '=' . $paramIdFtaEtat   //Liaison
+                    );
+                }
 
                 break;
         }

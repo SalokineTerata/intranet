@@ -112,6 +112,11 @@ if ($id_user) {
         $nbMaxParPage = ModuleConfig::VALUE_MAX_PAR_PAGE;
     } else {
         $nbMaxParPage = ModuleConfig::VALUE_MAX_PAR_PAGE_CONSUL;
+        $messageConsultation = '<table width=100% border=1 valign=top cellspacing=0>
+            <tr>
+                <td class=titre_principal valign=\'middle\'> ' . UserMessage::FR_LAST_50_FTA . '</td>
+            </tr>
+        </table>';
     }
     $idFtaRoleEncours = Lib::getParameterFromRequest(FtaRoleModel::KEYNAME, $idFtaRoleEncoursDefault);
 //echo 'id_fta_etat=$id_fta_etat / nom_fta_etat=$nom_fta_etat / synthese_action=$synthese_action <br>';
@@ -250,6 +255,7 @@ if ($id_user) {
                 <td> ' . $tableau_synthese . '</td>
             </tr>
         </table>
+       ' . $messageConsultation . '
         
 ';
 

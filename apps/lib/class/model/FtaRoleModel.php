@@ -53,6 +53,7 @@ class FtaRoleModel extends AbstractModel {
                         . '=' . FtaActionRoleModel::TABLENAME . '.' . FtaActionRoleModel::FIELDNAME_ID_INTRANET_ACTIONS
                         . ' AND ' . FtaActionRoleModel::TABLENAME . '.' . FtaActionRoleModel::FIELDNAME_ID_FTA_ROLE
                         . '=' . FtaRoleModel::TABLENAME . '.' . FtaRoleModel::KEYNAME
+                        . ' ORDER BY ' . FtaRoleModel::TABLENAME . '.' . FtaRoleModel::KEYNAME
         );
 
         return $arrayIdFtaRole;

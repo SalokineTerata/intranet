@@ -50,7 +50,7 @@ switch ($output) {
         flush();
 
 }//Fin de la sélection du mode d'affichage de la page
-$planning_presence_modification = AclClass::getValueAccesRights('planning_presence_modification');
+$planning_presence_modification = Acl::getValueAccesRights('planning_presence_modification');
 //Autorisation de d'accéder à cette page:
 if ($planning_presence_modification==0)
 {

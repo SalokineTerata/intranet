@@ -51,7 +51,7 @@ switch ($output) {
 
 
 
-$planning_presence_modification = AclClass::getValueAccesRights('planning_presence_modification');
+$planning_presence_modification = Acl::getValueAccesRights('planning_presence_modification');
 $selection_semaine_en_cours = Lib::isDefined('selection_semaine_en_cours');
 
 /*

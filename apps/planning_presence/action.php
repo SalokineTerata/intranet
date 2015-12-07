@@ -5,7 +5,7 @@
 //include ("../lib/functions.php");
 //include ("./functions.php");
 require_once '../inc/main.php';
-$planning_presence_modification = AclClass::getValueAccesRights('planning_presence_modification');
+$planning_presence_modification = Acl::getValueAccesRights('planning_presence_modification');
 $id_salaries = Lib::isDefined('id_salaries');
 
 $id_groupe = Lib::getParameterFromRequest('id_groupe');

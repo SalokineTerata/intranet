@@ -11,7 +11,7 @@ En effet cette page est chargée par toutes les pages de ce module
                           . "_consultation"
                           ;
 
-    if (!AclClass::getValueAccesRights($module_consultation))
+    if (!Acl::getValueAccesRights($module_consultation))
     {
         header ("Location: index.php");
     }

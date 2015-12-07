@@ -2188,7 +2188,7 @@ class Chapitre {
         //Recherche du droit d'accès correspondant
         $module = self::$moduleIntranetActionsModel->getDataField(IntranetActionsModel::FIELDNAME_NOM_INTRANET_ACTIONS)->getFieldValue();
         if (
-                AclClass::getValueAccesRights('fta_' . $module)
+                Acl::getValueAccesRights('fta_' . $module)
         ) {
             $return = true;
         } else {

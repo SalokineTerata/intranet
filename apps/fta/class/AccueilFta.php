@@ -378,7 +378,7 @@ class AccueilFta {
                  * Entête de la barre de navigation de la page d'accueil
                  */
                 . '<TR>'
-                . '<TH>Role </TH> <TH>Etat FTA</TH> <TH>Etat d\'Avancement</TH>'
+                . '<TH>Role </TH> <TH>Etat FTA</TH> <TH>' . UserInterfaceLabel::FR_AVANCEMENT_FTA . '</TH>'
                 . '</TR>';
         /*
          * Données du tableau
@@ -679,7 +679,7 @@ class AccueilFta {
                 . '<a href=' . $URL . '&order_common=date_echeance_fta&numeroPage=' . self::$numeroDePageCourante . ' ><img src=../lib/images/order-AZ.png title=\'Ordonné par Date\'  border=\'0\' /></a>'
                 . 'Echéance de validation'
                 . '</th><th>'
-                . '% Avancement FTA'
+                . UserInterfaceLabel::FR_AVANCEMENT_FTA
                 . '</th><th>'
                 . 'Service'
                 . '</th><th>'

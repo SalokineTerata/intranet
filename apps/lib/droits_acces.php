@@ -37,7 +37,7 @@ if ($array) {
         //echo $nom_droits_acces.'='.$$nom_droits_acces.'<br>';
         //Enregistrement du droits d'accès dans les variables de session PHP
         
-        AclClass::setAccesRightsValues($nom_droits_acces, $rows["niveau_intranet_droits_acces"]);
+        Acl::setAccesRightsValues($nom_droits_acces, $rows["niveau_intranet_droits_acces"]);
 //        $_SESSION["$nom_droits_acces"] = $$nom_droits_acces;
 
         //Réinitialisation pour préaparer la nouvelle boucle

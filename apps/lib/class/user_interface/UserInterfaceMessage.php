@@ -22,7 +22,7 @@
  *
  * @author bs4300280
  */
-class UserMessage {
+class UserInterfaceMessage {
 
     const FR_LOGIN_PROCESS_ACCOUNT_LOCKED = "Votre compte est bloqué suite à trois tentatives ratées.<br><br>Contactez un Administrateur pour réactiver votre compte.<br>";
     const FR_LAST_50_FTA = "Consultation des 50 dernières FTA";

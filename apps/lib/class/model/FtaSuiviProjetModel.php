@@ -152,7 +152,7 @@ class FtaSuiviProjetModel extends AbstractModel {
                 }
             }
 //echo      'fta_'.$nom_intranet_actions.': '.$GLOBALS{'fta_'.$nom_intranet_actions}.'<br>';
-            if (AclClass::getValueAccesRights('fta_' . $nom_intranet_actions)) {
+            if (Acl::getValueAccesRights('fta_' . $nom_intranet_actions)) {
                 $no_mail = 1; //Désactivation du mail pour ce processus
             } else {
                 $no_mail = 0; //Activation du mail

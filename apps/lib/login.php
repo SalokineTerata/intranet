@@ -51,8 +51,8 @@ if ($session == 'logout') {
 
 
 //    session_destroy;
-    AclClass::cancelValueAccesRights();
-    AclClass::cancelUserInfos();
+    Acl::cancelValueAccesRights();
+    Acl::cancelUserInfos();
     $globalConfig->setAuthenticatedUser(NULL);
     GlobalConfig::saveGlobalConfToPhpSession($globalConfig);
     header('Location: ../index.php');
@@ -131,7 +131,7 @@ if ($login) {
                         $titou = DatabaseOperation::execute('update salaries set blocage=\'oui\' where (login=\'' . $identite . '\')');
                         //Averissement
                         $titre = "Accès aux modules de l'Intranet";
-                        $message = UserMessage::FR_LOGIN_PROCESS_ACCOUNT_LOCKED;
+                        $message = UserInterfaceMessage::FR_LOGIN_PROCESS_ACCOUNT_LOCKED;
                         afficher_message($titre, $message, $redirection);
                     }
                 } else {

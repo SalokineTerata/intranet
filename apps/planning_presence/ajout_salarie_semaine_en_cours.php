@@ -9,7 +9,7 @@ require_once '../inc/main.php';
 print_page_begin($disable_full_page, $menu_file);
 flush();
 
-$planning_presence_modification = AclClass::getValueAccesRights('planning_presence_modification');
+$planning_presence_modification = Acl::getValueAccesRights('planning_presence_modification');
 $id_groupe = Lib::isDefined('id_groupe');
 $selection_semaine_en_cours = Lib::isDefined('selection_semaine_en_cours');
 $semaine_en_cours = Lib::isDefined('semaine_en_cours');

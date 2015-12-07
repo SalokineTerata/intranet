@@ -17,7 +17,7 @@ UserModel::ConnexionFalse($globalConfig);
 if ($globalConfig->getAuthenticatedUser()) {
     $id_user = $globalConfig->getAuthenticatedUser()->getKeyValue();
 }
-$fta_modification = AclClass::getValueAccesRights('fta_modification');
+$fta_modification = Acl::getValueAccesRights('fta_modification');
 
 $recherche = Lib::getParameterFromRequest("recherche");
 if ($recherche == "0") {

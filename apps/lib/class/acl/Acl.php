@@ -19,10 +19,9 @@
 
 /**
  * Description of AclClass
- *
  * @author tp4300001
  */
-class AclClass {
+class Acl {
 
     /**
      * Nom du tableau contenant les droits d'accès de l'utilisateur

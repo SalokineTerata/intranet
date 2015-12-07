@@ -81,7 +81,7 @@ if ($idFta) {
     $idFtaEtat = Lib::isDefined(FtaEtatModel::KEYNAME);
     $abreviationFtaEtat = Lib::isDefined(FtaEtatModel::FIELDNAME_ABREVIATION);
     $idFtaRole = Lib::isDefined(FtaRoleModel::KEYNAME);
-    $ftaModification = AclClass::getValueAccesRights('fta_modification');
+    $ftaModification = Acl::getValueAccesRights('fta_modification');
     $id_fta_chapitre = $id_fta_chapitre_encours;
     $ftaModel = new FtaModel($idFta);
 
@@ -89,8 +89,8 @@ if ($idFta) {
      * Verification des droits d'accès sur une Fta en modification
      */
     if ($idFtaEtat == "1" and ! $ftaModification) {
-        $titre = UserMessage::FR_WARNING_ACCES_RIGHTS_TILE;
-        $message = UserMessage::FR_WARNING_ACCES_RIGHTS;
+        $titre = UserInterfaceMessage::FR_WARNING_ACCES_RIGHTS_TILE;
+        $message = UserInterfaceMessage::FR_WARNING_ACCES_RIGHTS;
         $redirection = "index.php";
         afficher_message($titre, $message, $redirection);
     }
@@ -171,8 +171,8 @@ if ($idFta) {
 
     $bloc.= Chapitre::getHtmlChapitreAll();
 } else {
-    $titre = UserMessage::FR_WARNING_PARAM_ID_FTA_TITLE;
-    $message = UserMessage::FR_WARNING_PARAM_ID_FTA;
+    $titre = UserInterfaceMessage::FR_WARNING_PARAM_ID_FTA_TITLE;
+    $message = UserInterfaceMessage::FR_WARNING_PARAM_ID_FTA;
     $redirection = "index.php";
     afficher_message($titre, $message, $redirection);
 }

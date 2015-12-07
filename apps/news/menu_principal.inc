@@ -1,8 +1,8 @@
 <?php
 //Barre de navigation du module
 
-$module_consultation = AclClass::getValueAccesRights("module_consultation");
-$module_modification = AclClass::getValueAccesRights("module_modification");
+$module_consultation = Acl::getValueAccesRights("module_consultation");
+$module_modification = Acl::getValueAccesRights("module_modification");
 
 
 //Récupération des droits d'accès necessaire

@@ -31,12 +31,12 @@ require_once('../lib/functions.mail.php');
 require_once('../lib/functions.mysql.php');
 require_once('../lib/functions.pdf.php');
 require_once('../lib/functions.html.php');
-require_once('../lib/class/AclClass.php');
+require_once('../lib/class/acl/Acl.php');
 require_once('../lib/class/Lib.php');
-require_once('../lib/class/Logger.php');
-require_once('../lib/class/LoggerClass.php');
-require_once('../lib/class/UserInterfaceMessage.php');
-require_once('../lib/class/UserInterfaceLabel.php');
+require_once('../lib/class/log/Logger.php');
+require_once('../lib/class/log/LoggerClass.php');
+require_once('../lib/class/user_interface/UserInterfaceMessage.php');
+require_once('../lib/class/user_interface/UserInterfaceLabel.php');
 require_once('../lib/class/session/SessionSaveAndRestoreAbstract.php');
 
 // Configuration des environnements

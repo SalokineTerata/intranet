@@ -59,8 +59,8 @@ if ($id_user) {
     /**
      * Faire un lien avec un model pour recuperer les droit consutation et modification
      */
-    $fta_consultation = AclClass::getValueAccesRights('fta_consultation');
-    $fta_modification = AclClass::getValueAccesRights('fta_modification');
+    $fta_consultation = Acl::getValueAccesRights('fta_consultation');
+    $fta_modification = Acl::getValueAccesRights('fta_modification');
     $id_fta_etat = Lib::getParameterFromRequest(FtaEtatModel::KEYNAME);
     $isLimit = $_SESSION['limit_affichage_fta_index'];
     $nomFtaEtat = Lib::getParameterFromRequest(FtaEtatModel::FIELDNAME_NOM_FTA_ETAT);
@@ -73,8 +73,8 @@ if ($id_user) {
     $numeroDePageCourante = Lib::getParameterFromRequest('numeroPage', '1');
 
     if (!$fta_consultation) {
-        $titre = UserMessage::FR_WARNING_ACCES_RIGHTS_TILE;
-        $message = UserMessage::FR_WARNING_ACCES_RIGHTS
+        $titre = UserInterfaceMessage::FR_WARNING_ACCES_RIGHTS_TILE;
+        $message = UserInterfaceMessage::FR_WARNING_ACCES_RIGHTS
                 . " Veuillez vous déconnecter et contactez l'administrateur de l'intranet";
         $redirection = "index.php";
         afficher_message($titre, $message, $redirection);
@@ -114,7 +114,7 @@ if ($id_user) {
         $nbMaxParPage = ModuleConfig::VALUE_MAX_PAR_PAGE_CONSUL;
         $messageConsultation = '<table width=100% border=1 valign=top cellspacing=0>
             <tr>
-                <td class=titre_principal valign=\'middle\'> ' . UserMessage::FR_LAST_50_FTA . '</td>
+                <td class=titre_principal valign=\'middle\'> ' . UserInterfaceMessage::FR_LAST_50_FTA . '</td>
             </tr>
         </table>';
     }

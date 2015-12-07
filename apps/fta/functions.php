@@ -2444,8 +2444,8 @@ function visualiser_fiches($id_fta_etat, $choix, $isLimit, $order_common) {
 
         //Droit de consultation standard HTML
         if (
-                (AclClass::getValueAccesRights("fta_modification"))
-                or ( AclClass::getValueAccesRights("fta_consultation") and $abreviation_fta_etat == FtaEtatModel::ETAT_ABREVIATION_VALUE_VALIDE )
+                (Acl::getValueAccesRights("fta_modification"))
+                or ( Acl::getValueAccesRights("fta_consultation") and $abreviation_fta_etat == FtaEtatModel::ETAT_ABREVIATION_VALUE_VALIDE )
         ) {
             if ($abreviation_fta_etat <> FtaEtatModel::ETAT_ABREVIATION_VALUE_MODIFICATION) {
                 $lien .= '<a '
@@ -2499,7 +2499,7 @@ function visualiser_fiches($id_fta_etat, $choix, $isLimit, $order_common) {
         //Export PDF
 //echo "test".$rows["abreviation_fta_etat"];
         if (
-                (AclClass::getValueAccesRights("fta_impression") and ( $abreviation_fta_etat == FtaEtatModel::ETAT_ABREVIATION_VALUE_VALIDE ))
+                (Acl::getValueAccesRights("fta_impression") and ( $abreviation_fta_etat == FtaEtatModel::ETAT_ABREVIATION_VALUE_VALIDE ))
                 or ( $_SESSION["mode_debug"] == 1)or ( $workflowName == 'presentation')
         ) {
 
@@ -2516,7 +2516,7 @@ function visualiser_fiches($id_fta_etat, $choix, $isLimit, $order_common) {
 
         if (
                 (($idFtaRole == '1' or $idFtaRole == '6' ) and $recap[$id_fta] == '100%' and $checkAccesButton )
-                and AclClass::getValueAccesRights("fta_modification") and ( $abreviation_fta_etat == FtaEtatModel::ETAT_ABREVIATION_VALUE_MODIFICATION)
+                and Acl::getValueAccesRights("fta_modification") and ( $abreviation_fta_etat == FtaEtatModel::ETAT_ABREVIATION_VALUE_MODIFICATION)
                 or ( $ok == '2' and $accesTransitionButton == FALSE && $recap[$id_fta] == '100%' and $checkAccesButton )
                 or ( $synthese_action == FtaEtatModel::ETAT_AVANCEMENT_VALUE_ALL AND ( $idFtaRole == '1' or $idFtaRole == '6' ) and $checkAccesButton and $abreviation_fta_etat <> FtaEtatModel::ETAT_ABREVIATION_VALUE_MODIFICATION )
                 or ( ($idFtaRole == '1' or $idFtaRole == '6' ) and $synthese_action == FtaEtatModel::ETAT_AVANCEMENT_VALUE_EFFECTUES and $checkAccesButton )

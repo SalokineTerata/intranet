@@ -35,12 +35,12 @@ class Navigation {
         /**
          * Modification
          */
-        self::$ftaModification = AclClass::getValueAccesRights('fta_modification');
+        self::$ftaModification = Acl::getValueAccesRights('fta_modification');
 
         /**
          * Consultation
          */
-        self::$ftaConsultation = AclClass::getValueAccesRights('fta_consultation');
+        self::$ftaConsultation = Acl::getValueAccesRights('fta_consultation');
 
 
 
@@ -82,14 +82,14 @@ class Navigation {
         if (self::$id_fta) {
             $checkIdFta = self::$ftaModel->getDataField(FtaModel::KEYNAME)->getFieldValue();
             if (!$checkIdFta) {
-                $titre = UserMessage::FR_WARNING_PARAM_ID_FTA_TITLE;
-                $message = UserMessage::FR_WARNING_PARAM_ID_FTA_NOT_EXISTANT;
+                $titre = UserInterfaceMessage::FR_WARNING_PARAM_ID_FTA_TITLE;
+                $message = UserInterfaceMessage::FR_WARNING_PARAM_ID_FTA_NOT_EXISTANT;
                 $redirection = "index.php";
                 afficher_message($titre, $message, $redirection);
             }
         } else {
-            $titre = UserMessage::FR_WARNING_PARAM_ID_FTA_TITLE;
-            $message = UserMessage::FR_WARNING_PARAM_ID_FTA;
+            $titre = UserInterfaceMessage::FR_WARNING_PARAM_ID_FTA_TITLE;
+            $message = UserInterfaceMessage::FR_WARNING_PARAM_ID_FTA;
             $redirection = "index.php";
             afficher_message($titre, $message, $redirection);
         }

@@ -12,14 +12,14 @@ $module_consultation = $module . '_consultation';
 $module_modification = $module . '_modification';
 
 $idFtaRole = Lib::getParameterFromRequest(FtaRoleModel::KEYNAME, $idFtaRoleEncoursDefault);
-$fta_definition = AclClass::getValueAccesRights('fta_definition');
-$fta_composition = AclClass::getValueAccesRights('fta_composition');
+$fta_definition = Acl::getValueAccesRights('fta_definition');
+$fta_composition = Acl::getValueAccesRights('fta_composition');
 
 /*
   Menu accessible pour les utilisateurs ayant les droits
   en consultation sur ce module
  */
-if (AclClass::getValueAccesRights($module_consultation)) {
+if (Acl::getValueAccesRights($module_consultation)) {
 
     echo '<br>';
 //   $action_rapide='recherche.php?url_page_depart=(/fta/recherche.php)&requete_resultat=SELECT+DISTINCT+fta.id_fta+FROM+fta+WHERE+fta.designation_commerciale_fta++LIKE+%28+%27%25test%25%27+%29+&nb_limite_resultat=1000&champ_recherche=4&operateur_recherche=1&nbcol=1&nbligne=1&nb_col_courant=0&nb_ligne_courant=0&ajout_col=0';

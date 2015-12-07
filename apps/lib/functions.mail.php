@@ -83,7 +83,7 @@ function envoismail($sujetmail, $text, $destinataire, $expediteur, $paramTypeMai
         $globalConfig = new GlobalConfig();
     }
 
-    $logMail = new LoggerClass('D:/weblocal/intranet-v3/log/');
+    $logMail = new Logger('D:/weblocal/intranet-v3/log/');
 
 
     if ($globalConfig->getConf()->getSmtpServiceEnable() == False) {

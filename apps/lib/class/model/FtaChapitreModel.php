@@ -220,6 +220,7 @@ class FtaChapitreModel extends AbstractModel {
                 . '=' . FtaSuiviProjetModel::TABLENAME . '.' . FtaSuiviProjetModel::FIELDNAME_ID_FTA_CHAPITRE . ' ) '
                 . ' AND ( ( ' . FtaWorkflowStructureModel::TABLENAME . '.' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_PROCESSUS
                 . ' = \'' . $paramIdProcessus . '\' '
+                . ' AND ' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_WORKFLOW . '=' . $id_fta_workflow
                 . ' AND ' . FtaSuiviProjetModel::TABLENAME . '.' . FtaSuiviProjetModel::FIELDNAME_ID_FTA . ' = \'' . $paramIdFta . '\' ) )'
         ;
         DatabaseOperation::execute($reqDenotification);
@@ -274,10 +275,13 @@ class FtaChapitreModel extends AbstractModel {
                         . '=' . FtaSuiviProjetModel::TABLENAME . '.' . FtaSuiviProjetModel::FIELDNAME_ID_FTA_CHAPITRE . ' ) '
                         . ' AND ( ( ' . FtaWorkflowStructureModel::TABLENAME . '.' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_PROCESSUS
                         . ' = \'' . $paramIdProcessus . '\' '
+                        . ' AND ' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_WORKFLOW . '=' . $id_fta_workflow
                         . ' AND ' . FtaSuiviProjetModel::TABLENAME . '.' . FtaSuiviProjetModel::FIELDNAME_ID_FTA . ' = \'' . $paramIdFta . '\' ) )'
                 ;
                 DatabaseOperation::execute($reqDevalidation);
-
+                /**
+                 * rejouter le workflow
+                 */
                 if ($reqDevalidation) { //Si le processus a été dévalidé, alors on informe
                     //Dénotification
                     $reqDenotification = 'UPDATE ' . FtaWorkflowStructureModel::TABLENAME . ',' . FtaSuiviProjetModel::TABLENAME
@@ -286,6 +290,7 @@ class FtaChapitreModel extends AbstractModel {
                             . '=' . FtaSuiviProjetModel::TABLENAME . '.' . FtaSuiviProjetModel::FIELDNAME_ID_FTA_CHAPITRE . ' ) '
                             . ' AND ( ( ' . FtaWorkflowStructureModel::TABLENAME . '.' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_PROCESSUS
                             . ' = \'' . $paramIdProcessus . '\' '
+                            . ' AND ' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_WORKFLOW . '=' . $id_fta_workflow
                             . ' AND ' . FtaSuiviProjetModel::TABLENAME . '.' . FtaSuiviProjetModel::FIELDNAME_ID_FTA . ' = \'' . $paramIdFta . '\' ) )'
                     ;
                     DatabaseOperation::execute($reqDenotification);

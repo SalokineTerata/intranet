@@ -505,3 +505,13 @@ Login du modificateur: superviseur
 
 test mail
 2015-12-04 10:17:17 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `commentaire_maj_fta` =   'test mail\n==============================\n==============================\nDate: 2015-12-04\nLogin du modificateur: superviseur\n\ntest mail'
+2015-12-07 11:46:44 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : r
+2015-12-07 11:46:44 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `commentaire_maj_fta` =   'r'
+2015-12-07 11:54:54 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : r
+2015-12-07 11:54:54 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `commentaire_maj_fta` =   'r'
+2015-12-07 13:14:26 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : r
+2015-12-07 13:14:26 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `commentaire_maj_fta` =   'r'
+2015-12-07 13:35:57 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : r
+2015-12-07 13:35:57 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `commentaire_maj_fta` =   'r'
+2015-12-07 13:53:55 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : r
+2015-12-07 13:53:55 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `commentaire_maj_fta` =   'r'

@@ -35,6 +35,7 @@ class EnvironmentConf {
     private $applicationName = null;
     private $applicationTitle = null;
     private $applicationLogo = null;
+    private $applicationLogoPDF = null;
     private $applicationLogoMessage = null;
     private $execDebugEnable = null;
     private $execEnvironnement = null;
@@ -100,6 +101,14 @@ class EnvironmentConf {
 
     function setApplicationLogo($applicationLogo) {
         $this->applicationLogo = $applicationLogo;
+    }
+
+    function getApplicationLogoPDF() {
+        return $this->applicationLogoPDF;
+    }
+
+    function setApplicationLogoPDF($applicationLogoPDF) {
+        $this->applicationLogoPDF = $applicationLogoPDF;
     }
 
     public function getUrlFullRoot() {

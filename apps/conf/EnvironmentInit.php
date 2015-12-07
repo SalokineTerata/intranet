@@ -15,6 +15,7 @@ class EnvironmentInit extends EnvironmentAbstract {
     const APPLICATION_HTML_MESSAGE_BEGIN = '<CENTER><BR><FONT SIZE=4><marquee>Environnement ';
     const APPLICATION_HTML_MESSAGE_END = '</marquee></FONT></CENTER>';
     const APPLICATION_LOGO = "APPLICATION_LOGO";
+    const APPLICATION_LOGO_PDF = "APPLICATION_LOGO_PDF";
     const APPLICATION_NAME = "APPLICATION_NAME";
     const CSS_BACKGROUND_VALUE = "CSS_BACKGROUND_VALUE";
     const CSS_CONTENT_VALUE = "CSS_CONTENT_VALUE";
@@ -74,6 +75,7 @@ class EnvironmentInit extends EnvironmentAbstract {
         $this->getConf()->setApplicationName($paramInit[self::APPLICATION_NAME][$paramEnvName]);
         $this->getConf()->setApplicationTitle($paramInit[self::SITE_TITLE][$paramEnvName]);
         $this->getConf()->setApplicationLogo($paramInit[self::APPLICATION_LOGO][$paramEnvName]);
+        $this->getConf()->setApplicationLogoPDF($paramInit[self::APPLICATION_LOGO_PDF][$paramEnvName]);
         $this->getConf()->setApplicationLogoMessage(
                 self::APPLICATION_HTML_MESSAGE_BEGIN
                 . $paramInit[self::EXECUTION_ENVIRONMENT_NAME][$paramEnvName]

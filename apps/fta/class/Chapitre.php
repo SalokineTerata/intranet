@@ -1659,7 +1659,8 @@ class Chapitre {
         $bloc.='<tr class=titre_principal><td class>Codification</td></tr>';
 
         //Désignation Interne Agis
-        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_LIBELLE);
+//        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_LIBELLE);
+        $bloc.=$ftaView->getHtmlDesignationInterneAgis();
 
         //Code Article LDC, code Article arcadia
         $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_CODE_ARTICLE_LDC);

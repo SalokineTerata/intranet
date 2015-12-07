@@ -1,3 +1,7 @@
+<?php
+$globalConfig = new GlobalConfig();
+$logo = $globalConfig->getConf()->getApplicationLogo();
+?>
 <TABLE WIDTH="150" BORDER="0" CELLPADDING="0" CELLSPACING="0" valign="top"  bgcolor="FFE5B2">
   <TR  bgcolor="FFCC66">
     <TD WIDTH="10" HEIGHT="1"  bgcolor="FFCC66"><img src=../lib/images/espaceur.gif width="1" height="1" >
@@ -23,7 +27,7 @@
   </tr>
   <TR bgcolor="FFCC66">
     <TD WIDTH="39" HEIGHT="83" COLSPAN="2" bgcolor="#FFCC66"> <IMG SRC="../lib/images/espaceur.gif"></TD>
-    <TD> <IMG SRC="../adminagis/images/logo_agis.gif" WIDTH="65" HEIGHT="83"></TD>
+    <TD> <IMG SRC=<?php echo "../lib/images/$logo" ?> WIDTH="65" HEIGHT="83"></TD>
     <TD WIDTH="46" HEIGHT="83" COLSPAN="2" bgcolor="#FFCC66"> <IMG SRC="../lib/images/espaceur.gif"></TD>
   </TR>
   <TR bgcolor="#FFCC66">

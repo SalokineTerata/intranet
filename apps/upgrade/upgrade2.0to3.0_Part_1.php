@@ -5490,7 +5490,11 @@ if ($arrayFtaComposantColis) {
         $idFtaComposant = $rowsFtaComposantColis['id_fta_composant'];
         $quantite_fta_composition = $rowsFtaComposantColis['quantite_fta_composition'];
         $PCB = $rowsFtaComposantColis['NB_UNIT_ELEM'];
+        if($PCB){
         $quantite_fta_composition_uvc= $quantite_fta_composition/$PCB;
+        }else{
+            $quantite_fta_composition_uvc = "0";
+        }
         $sql_inter = "UPDATE ".$nameOfBDDTarget."." . 'fta_composant'
                 . " SET " . 'quantite_fta_composition_uvc' . "=$quantite_fta_composition_uvc " 
                 . " WHERE " .'id_fta_composant' . "=" . $idFtaComposant;

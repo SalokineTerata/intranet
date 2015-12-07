@@ -5,6 +5,7 @@
  * *********** */
 
 $id_fta = Lib::getParameterFromRequest(FtaModel::KEYNAME);
+//Récupération des Informations FTA
 $ftaModel = new FtaModel($id_fta);
 $siteDeProduction = $ftaModel->getDataField(FtaModel::FIELDNAME_SITE_ASSEMBLAGE)->getFieldValue();
 $description_origine_transformation_fta = $ftaModel->getDataField(FtaModel::FIELDNAME_PRODUIT_TRANSFORME)->getFieldValue();
@@ -47,9 +48,11 @@ $returnDuColis = $ftaModel->buildArrayEmballageTypeDuColis();
 $returnPallettes = $ftaModel->buildArrayEmballageTypePalette();
 $idFtaEtat = $ftaModel->getDataField(FtaModel::FIELDNAME_ID_FTA_ETAT)->getFieldValue();
 $ftaEtatModel = new FtaEtatModel($idFtaEtat);
+$globalConfig = new GlobalConfig();
+$logo = $globalConfig->getConf()->getApplicationLogoPDF();
 //Création de l'entête de la fiches techniques
 $pdf->AddPage();
-$pdf->Image("../lib/images/logo_agis.png", 10, 10, 20);
+$pdf->Image("../lib/images/" . $logo, 10, 10, 20);
 $pdf->SetFont($t2_police, $t2_style, $t3_size);
 $pdf->SetLeftMargin(30);
 $pdf->SetY(10);
@@ -385,7 +388,7 @@ if ($returnUVC["dimension_uvc"]
         $data_table = array(
             //***********
             array("Dimension UVC", $returnUVC["dimension_uvc"] . " mm"),
-            array("Dimension Colis", $returnDuColis["dimension_uvc"]. " mm"),
+            array("Dimension Colis", $returnDuColis["dimension_uvc"] . " mm"),
             array("PCB", $returnUVC[FtaModel::FIELDNAME_NOMBRE_UVC_PAR_CARTON]),
             array("Poids net Colis", $returnDuColis["colis_net"] . " kg"),
             array("Poids brut Colis", $returnDuColis["colis_brut"] . " kg")

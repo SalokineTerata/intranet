@@ -113,6 +113,8 @@ $mode = Lib::getParameterFromRequest('mode'); //Variable passé en URL
 class temp_xfpdf extends xfpdf {
 
     function Footer() {
+        $globalConfig = new GlobalConfig();
+
         //Positionnement à 1cm du bas
         $marge_pied_page = -15;
         $this->SetY($marge_pied_page);
@@ -130,7 +132,9 @@ class temp_xfpdf extends xfpdf {
         $faxGeo = $geoModel->getDataField(GeoModel::FIELDNAME_FAX_GEO)->getFieldValue();
         $faxCommercialeGeo = $geoModel->getDataField(GeoModel::FIELDNAME_FAX_COMMERCIAL_GEO)->getFieldValue();
         $commentaire = $adresseGeo . "\nTel: " . $telephoneGeo . " - Fax : " . $faxGeo . " - Fax Gestion des Ventes : " . $faxCommercialeGeo
-                . "\nInformations susceptibles d'être modifiées, seule l'étiquette fait foi";
+                . "\nInformations susceptibles d'être modifiées, seule l'étiquette fait foi"
+                . " (Env: " . $globalConfig->getConf()->getExecEnvironment()
+                . " v" . $globalConfig->getConf()->getApplicationVersion() . ") ";
 
         //Numéro de page centré
         //$this->MultiCell(200,3,$commentaire.'Page '.$this->PageNo(). ' sur {nb}',0,'C');

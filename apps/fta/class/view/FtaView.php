@@ -126,6 +126,29 @@ class FtaView {
     }
 
     /**
+     * Affichage Html de la DIN
+     * @return string
+     */
+    public function getHtmlDesignationInterneAgis() {
+        $DIN = $this->getModel()->getDataField(FtaModel::FIELDNAME_LIBELLE)->getFieldValue();
+        if (!$DIN) {
+            $DesignationCommerciale = $this->getModel()->getDataField(FtaModel::FIELDNAME_DESIGNATION_COMMERCIALE)->getFieldValue();
+            $suffixeAgrologicFta = $this->getModel()->getDataField(FtaModel::FIELDNAME_SUFFIXE_AGROLOGIC_FTA)->getFieldValue();
+            $NB_UNIT_ELEM = $this->getModel()->getDataField(FtaModel::FIELDNAME_NOMBRE_UVC_PAR_CARTON)->getFieldValue();
+            $poidAffichage = $this->getModel()->getDataField(FtaModel::FIELDNAME_POIDS_ELEMENTAIRE)->getFieldValue();
+            $DIN = $DesignationCommerciale . " " . $suffixeAgrologicFta . " " . $NB_UNIT_ELEM . "X" . $poidAffichage . "kg";
+            $DIN = strtoupper($DIN);
+            $this->getModel()->getDataField(FtaModel::FIELDNAME_LIBELLE)->setFieldValue($DIN);
+            $this->getModel()->saveToDatabase();
+            $return = $this->getHtmlDataField(FtaModel::FIELDNAME_LIBELLE);
+        } else {
+            $return = $this->getHtmlDataField(FtaModel::FIELDNAME_LIBELLE);
+        }
+
+        return $return;
+    }
+
+    /**
      * Affichage Html de l'ean article
      * @return string
      */

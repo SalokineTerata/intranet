@@ -34,7 +34,6 @@ require_once('../lib/functions.html.php');
 require_once('../lib/class/acl/Acl.php');
 require_once('../lib/class/Lib.php');
 require_once('../lib/class/log/Logger.php');
-require_once('../lib/class/log/LoggerClass.php');
 require_once('../lib/class/user_interface/UserInterfaceMessage.php');
 require_once('../lib/class/user_interface/UserInterfaceLabel.php');
 require_once('../lib/class/session/SessionSaveAndRestoreAbstract.php');

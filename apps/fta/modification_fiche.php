@@ -126,13 +126,20 @@ if ($idFta) {
     }
 
 
-    if ($ftaModification and $idFtaRole == FtaRoleModel::ID_FTA_ROLE_COMMUN) {
+    if ($ftaModification and $idFtaRole == FtaRoleModel::ID_FTA_ROLE_COMMUN and $abreviationFtaEtat == FtaEtatModel::ETAT_ABREVIATION_VALUE_MODIFICATION) {
 
         $globalConfig = new GlobalConfig();
         $idUser = $globalConfig->getAuthenticatedUser()->getKeyValue();
         $idFtaWorkflow = $ftaModel->getDataField(FtaModel::FIELDNAME_WORKFLOW)->getFieldValue();
         $idFtaRoleAcces = FtaRoleModel::getIdFtaRoleByIdUserAndWorkflow($idUser, $idFtaWorkflow);
-        $idFtaRole = $idFtaRoleAcces["0"];
+        if (!$idFtaRoleAcces) {
+            $titre = UserInterfaceMessage::FR_WARNING_ACCES_RIGHTS_TILE;
+            $message = UserInterfaceMessage::FR_WARNING_ACCES_RIGHTS;
+            $redirection = "";
+            afficher_message($titre, $message, $redirection);
+        } else {
+            $idFtaRole = $idFtaRoleAcces["0"];
+        }
     }
 
 

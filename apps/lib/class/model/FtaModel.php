@@ -478,17 +478,17 @@ class FtaModel extends AbstractModel {
         );
 
 
-        if ($paramGroupeType == 3) {
+        if ($paramGroupeType == AnnexeEmballageGroupeTypeModel::EMBALLAGE_DU_COLIS) {
             if (count($array) > 1) {
-                $titre = "Cas non géré";
-                $message = "Il ne doit y avoir qu'un seul emballage Colis";
+                $titre = UserInterfaceMessage::FR_WARNING_NOT_HANDLE_TITLE;
+                $message = UserInterfaceMessage::FR_WARNING_EMBALLAGE_COLIS;
                 afficher_message($titre, $message, $redirection);
             }
         }
-        if ($paramGroupeType == 4) {
+        if ($paramGroupeType == AnnexeEmballageGroupeTypeModel::EMBALLAGE_PALETTE) {
             if (count($array) > 1) {
-                $titre = "Cas non géré";
-                $message = "Il ne doit y avoir qu'une seule Palette";
+                $titre = UserInterfaceMessage::FR_WARNING_NOT_HANDLE_TITLE;
+                $message = UserInterfaceMessage::FR_WARNING_EMBALLAGE_PALETTE;
                 afficher_message($titre, $message, $redirection);
             }
         }
@@ -551,7 +551,7 @@ class FtaModel extends AbstractModel {
                                 . ", " . FtaConditionnementModel::FIELDNAME_LONGUEUR_FTA_CONDITIONNEMENT . ", " . FtaConditionnementModel::FIELDNAME_LARGEUR_FTA_CONDITIONNEMENT
                                 . "  FROM " . FtaConditionnementModel::TABLENAME . ", " . AnnexeEmballageGroupeModel::TABLENAME . ", " . AnnexeEmballageGroupeTypeModel::TABLENAME . " "
                                 . " WHERE " . FtaConditionnementModel::TABLENAME . "." . FtaConditionnementModel::FIELDNAME_ID_FTA . "=" . $this->getKeyValue() . " "
-                                . " AND " . AnnexeEmballageGroupeTypeModel::TABLENAME . "." . AnnexeEmballageGroupeTypeModel::KEYNAME . "=" . 1 . " "
+                                . " AND " . AnnexeEmballageGroupeTypeModel::TABLENAME . "." . AnnexeEmballageGroupeTypeModel::KEYNAME . "=" . AnnexeEmballageGroupeTypeModel::EMBALLAGE_UVC. " "
                                 . " AND " . FtaConditionnementModel::TABLENAME . "." . FtaConditionnementModel::FIELDNAME_ID_ANNEXE_EMBALLAGE_GROUPE
                                 . "=" . AnnexeEmballageGroupeModel::TABLENAME . "." . AnnexeEmballageGroupeModel::KEYNAME . " "
                                 . " AND ( "
@@ -619,7 +619,7 @@ class FtaModel extends AbstractModel {
                                 . ", " . FtaConditionnementModel::FIELDNAME_LONGUEUR_FTA_CONDITIONNEMENT . ", " . FtaConditionnementModel::FIELDNAME_LARGEUR_FTA_CONDITIONNEMENT
                                 . "  FROM " . FtaConditionnementModel::TABLENAME . ", " . AnnexeEmballageGroupeModel::TABLENAME . ", " . AnnexeEmballageGroupeTypeModel::TABLENAME . " "
                                 . " WHERE " . FtaConditionnementModel::TABLENAME . "." . FtaConditionnementModel::FIELDNAME_ID_FTA . "=" . $this->getKeyValue() . " "
-                                . " AND " . AnnexeEmballageGroupeTypeModel::TABLENAME . "." . AnnexeEmballageGroupeTypeModel::KEYNAME . "=" . 3 . " "
+                                . " AND " . AnnexeEmballageGroupeTypeModel::TABLENAME . "." . AnnexeEmballageGroupeTypeModel::KEYNAME . "=" . AnnexeEmballageGroupeTypeModel::EMBALLAGE_DU_COLIS . " "
                                 . " AND " . FtaConditionnementModel::TABLENAME . "." . FtaConditionnementModel::FIELDNAME_ID_ANNEXE_EMBALLAGE_GROUPE
                                 . "=" . AnnexeEmballageGroupeModel::TABLENAME . "." . AnnexeEmballageGroupeModel::KEYNAME . " "
                                 . " AND ( "
@@ -733,7 +733,7 @@ class FtaModel extends AbstractModel {
                             . ", " . FtaConditionnementModel::FIELDNAME_LONGUEUR_FTA_CONDITIONNEMENT . ", " . FtaConditionnementModel::FIELDNAME_LARGEUR_FTA_CONDITIONNEMENT
                             . "  FROM " . FtaConditionnementModel::TABLENAME . ", " . AnnexeEmballageGroupeModel::TABLENAME . ", " . AnnexeEmballageGroupeTypeModel::TABLENAME . " "
                             . " WHERE " . FtaConditionnementModel::TABLENAME . "." . FtaConditionnementModel::FIELDNAME_ID_FTA . "=" . $this->getKeyValue() . " "
-                            . " AND " . AnnexeEmballageGroupeTypeModel::TABLENAME . "." . AnnexeEmballageGroupeTypeModel::KEYNAME . "=" . 3 . " "
+                            . " AND " . AnnexeEmballageGroupeTypeModel::TABLENAME . "." . AnnexeEmballageGroupeTypeModel::KEYNAME . "=" . AnnexeEmballageGroupeTypeModel::EMBALLAGE_DU_COLIS . " "
                             . " AND " . FtaConditionnementModel::TABLENAME . "." . FtaConditionnementModel::FIELDNAME_ID_ANNEXE_EMBALLAGE_GROUPE
                             . "=" . AnnexeEmballageGroupeModel::TABLENAME . "." . AnnexeEmballageGroupeModel::KEYNAME . " "
                             . " AND ( "

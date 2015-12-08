@@ -1,4 +1,4 @@
-<script language='php'>
+<?php
 
 /*
  * To change this template, choose Tools | Templates
@@ -25,4 +25,3 @@ class HtmlInputKg extends HtmlInputNumber {
     }
 
 }
-</script>

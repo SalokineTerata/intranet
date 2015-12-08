@@ -7,6 +7,13 @@
  */
 class Navigation {
 
+    const FONT_COLOR_CHAPITRE_ENCOURS = "#1D3FDA";
+    const FONT_COLOR_CHAPITRE_PUBLIC = "#8977A9";
+    const FONT_COLOR_CHAPITRE_NON_VALIDEE = "#FF0000";
+    const FONT_COLOR_CHAPITRE_VALIDEE = "#00CC00";
+    const FONT_SIZE_CHAPITRE_ENCOURS = "3";
+    const FONT_SIZE_DEFAULT = "2";
+
     protected static $abreviation_etat;
     protected static $id_fta;
     protected static $id_fta_etat;
@@ -626,49 +633,54 @@ class Navigation {
                 self::$id_fta_chapitre_encours = $id_fta_chapitre;
             }
             if (self::$id_fta_chapitre_encours == $id_fta_chapitre) {
-                $b = '<font size = 3 color = #5494EE><b>';
-                $image1 = '[>';
-                $image2 = '<]';
+                $font_size = "size=" . self::FONT_SIZE_CHAPITRE_ENCOURS;
+                $font_flash_color = "color=" . self::FONT_COLOR_CHAPITRE_ENCOURS;
+                $font_flash = "<font " . $font_size . " " . $font_flash_color . "><b>";
+                $image_flash1 = $font_flash . '[  ' . "</font>";
+                $image_flash2 = $font_flash . '  ]' . "</font>";
                 $num = 1;
             } else {
-                $image1 = '[>';
-                $image2 = '<]';
-                //Ce chapitre est-il public?
-                if ($rowsRecup[FtaProcessusModel::KEYNAME] == 0) {
-                    $b = '<font color=\'#8977A9\'>';
-                    $num = 1;
-                } else {
-                    //Le chapitre est-il validé ?
-                    $req1 = 'SELECT ' . FtaSuiviProjetModel::KEYNAME
-                            . ' FROM ' . FtaSuiviProjetModel::TABLENAME
-                            . ' WHERE ' . FtaSuiviProjetModel::FIELDNAME_ID_FTA . '=' . self::$id_fta
-                            . ' AND ' . FtaSuiviProjetModel::FIELDNAME_ID_FTA_CHAPITRE . '=' . $id_fta_chapitre
-                            . ' AND ' . FtaSuiviProjetModel::FIELDNAME_SIGNATURE_VALIDATION_SUIVI_PROJET . '<>0 '
-                    ;
-                    $result1 = DatabaseOperation::queryPDO($req1);
-                    $num = DatabaseOperation::getSqlNumRows($result1);
-                    switch ($num) {
-                        case 0:  //Chapiter pas encore validé
-                            $b = '<font color=\'#FF0000\'>';
-                            break;
+                $font_size = "";
+                $image_flash1 = '-  ';
+                $image_flash2 = '  -';
+            }
+            //Ce chapitre est-il public?
+            if ($rowsRecup[FtaProcessusModel::KEYNAME] == 0) {
+                $font_color = "color=" . self::FONT_COLOR_CHAPITRE_PUBLIC;
+                $num = 1;
+            } else {
+                //Le chapitre est-il validé ?
+                $req1 = 'SELECT ' . FtaSuiviProjetModel::KEYNAME
+                        . ' FROM ' . FtaSuiviProjetModel::TABLENAME
+                        . ' WHERE ' . FtaSuiviProjetModel::FIELDNAME_ID_FTA . '=' . self::$id_fta
+                        . ' AND ' . FtaSuiviProjetModel::FIELDNAME_ID_FTA_CHAPITRE . '=' . $id_fta_chapitre
+                        . ' AND ' . FtaSuiviProjetModel::FIELDNAME_SIGNATURE_VALIDATION_SUIVI_PROJET . '<>0 '
+                ;
+                $result1 = DatabaseOperation::queryPDO($req1);
+                $num = DatabaseOperation::getSqlNumRows($result1);
+                switch ($num) {
+                    case 0:  //Chapiter pas encore validé
+                        $font_color = "color=" . self::FONT_COLOR_CHAPITRE_NON_VALIDEE;
+                        break;
 
-                        case 1:  //Chapitre validé
-                            $b = '<font color=\'#00B300\'>';
-                            break;
+                    case 1:  //Chapitre validé
+                        $font_color = "color=" . self::FONT_COLOR_CHAPITRE_VALIDEE;
+                        break;
 
-                        default: //Anomalie
-                            $titre = 'Erreur Grave !';
-                            $message = 'La fonction afficher_navigation() vient de trouver des doublons de validation des chapitres dans la table fta_suivi_projet';
-                            afficher_message($titre, $message, $redirection);
-                            break;
-                    }
-                }//Fin du test public
-            }//Fin de la colorisation
+                    default: //Anomalie
+                        $titre = 'Erreur Grave !';
+                        $message = 'La fonction afficher_navigation() vient de trouver des doublons de validation des chapitres dans la table fta_suivi_projet';
+                        afficher_message($titre, $message, $redirection);
+                        break;
+                }
+            }//Fin du test public
+            //}//Fin de la colorisation
 
             if ($num == 0 and self::$synthese_action === 'attente') {
                 
             } else {
-                $menu_navigation .= '<a href=' . $page_default . '.php?'
+                $b = "<font " . $font_size . " " . $font_color . "/>";
+                $menu_navigation .= $image_flash1 . '<a href=' . $page_default . '.php?'
 //                $menu_navigation .= '<a href=\'#\''
 //                        . ' onClick=\'navigation_' . $id_fta_chapitre . '();\''
                         . 'id_fta=' . self::$id_fta
@@ -679,9 +691,9 @@ class Navigation {
                         . '&comeback=' . self::$comeback
                         . '&id_fta_role=' . self::$id_fta_role
                         . '>' . $b . ''
-                        . $image1 . $nom_usuel_fta_chapitre . $image2
+                        . $nom_usuel_fta_chapitre
                         . '</a>'
-                        . '</b></font> '
+                        . '</b></font> ' . $image_flash2
                 ;
 
                 /**

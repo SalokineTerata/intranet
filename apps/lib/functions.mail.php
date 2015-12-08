@@ -123,6 +123,8 @@ function envoismail($sujetmail, $text, $destinataire, $expediteur, $paramTypeMai
                  * 
                  */
                 $logMail->log("fta", $text, $paramTypeMail, $expediteur, $destinataire, $sujetmail, 1);
+                $paramLog = $paramTypeMail . " " . $expediteur . " " . $destinataire . "\n" . $sujetmail . "\n" . $text;
+                Logger::AddLog($paramLog, $paramTypeMail);
 
                 /**
                  * Enregistrement de l'historique des mails dans le fichier log

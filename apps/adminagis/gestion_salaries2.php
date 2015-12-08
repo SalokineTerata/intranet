@@ -213,7 +213,7 @@ $corpsmail = 'Bonjour,\n '
         . 'Votre profil vient d\'être créé dans l\'intranet AGIS.\n'
         . 'Votre login est : ' . $paramUserLogin . '\n'
         . '\nL\'administrateur Agis.\n';
-$typeMail = '';
+$typeMail = 'Inscription';
 envoismail($sujet, $corpsmail, $paramUserMail, 'postmaster@agis-sa.fr', $typeMail);
 ?>
 <html>

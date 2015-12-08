@@ -36,8 +36,10 @@ class Logger {
     const OUTPUT_CHR = "\n";
     //const OUTPUT_FILE = 'D:\\weblocal\\output.log';
     const OUTPUT_FILE = '../../log/output.log';
+    const OUTPUT_FILE_MAIL = '../../log/output_mail.log';
     const MSG_LEVEL_LOG = "LOG";
     const MSG_LEVEL_DEBUG = "DBG";
+    const MSG_LEVEL_MAIL = "MSG";
 
     public function __construct($path) {
         $this->ready = false;
@@ -170,18 +172,30 @@ class Logger {
     static public function AddDebug($paramLog, $paramContext) {
         $globalConfig = new GlobalConfig();
         if ($globalConfig->getConf()->getExecDebugEnable()) {
-            self::Add($paramLog, $paramContext, self::MSG_LEVEL_DEBUG);
+            self::AddToGlobalFile($paramLog, $paramContext, self::MSG_LEVEL_DEBUG);
         }
     }
 
     static public function AddLog($paramLog, $paramContext) {
-        self::Add($paramLog, $paramContext, self::MSG_LEVEL_LOG);
+        self::AddToGlobalFile($paramLog, $paramContext, self::MSG_LEVEL_LOG);
     }
 
-    static public function Add($paramLog, $paramContext, $paramMessageLevel) {
+    static public function AddMail($paramLog, $paramContext) {
+        self::AddToMailFile($paramLog, $paramContext, self::MSG_LEVEL_MAIL);
+    }
+
+    static private function AddToGlobalFile($paramLog, $paramContext, $paramMessageLevel) {
+        self::AddToFile($paramLog, $paramContext, $paramMessageLevel, self::OUTPUT_FILE);
+    }
+
+    static private function AddToMailFile($paramLog, $paramContext, $paramMessageLevel) {
+        self::AddToFile($paramLog, $paramContext, $paramMessageLevel, self::OUTPUT_FILE_MAIL);
+    }
+
+    static private function AddToFile($paramLog, $paramContext, $paramMessageLevel, $paramOutputFile) {
         // DECLARATION DES VARIABLES LOCALES
         $outputContent = NULL;
-        $outputContentResource = fopen(self::OUTPUT_FILE, 'a+');
+        $outputContentResource = fopen($paramOutputFile, 'a+');
         $time = date("Y-m-d H:i:s");
         $remoteAddr = $serverNameReal = filter_input(INPUT_SERVER, 'REMOTE_ADDR');
 

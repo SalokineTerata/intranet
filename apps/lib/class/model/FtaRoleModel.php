@@ -13,7 +13,13 @@ class FtaRoleModel extends AbstractModel {
     const FIELDNAME_DESCRIPTION_FTA_ROLE = 'description_fta_role';
     const FIELDNAME_NOM_FTA_ROLE = 'nom_fta_role';
     const FIELDNAME_IS_GESTIONNAIRE = 'is_gestionnaire';
+    const ID_FTA_ROLE_CHEF_DE_PROJET = '1';
     const ID_FTA_ROLE_COMMUN = '0';
+    const ID_FTA_ROLE_EMBALLAGE = '4';
+    const ID_FTA_ROLE_INFORMATIQUE_GESTION = '5';
+    const ID_FTA_ROLE_QUALITE = '3';
+    const ID_FTA_ROLE_RD = '2';
+    const ID_FTA_ROLE_SITE = '6';
 
     protected function setDefaultValues() {
         

@@ -126,8 +126,9 @@ if ($login) {
                             $adrTo = $colonnemail[UserModel::FIELDNAME_MAIL];
                         }
                         $sujet = 'connexion intranet Agis';
+                        $typeDeMail = 'CompteBloquer';
                         /* Constition du corps du mail */
-                        $rep = envoismail($sujet, $corpsmail, $adrTo, $adrfrom);
+                        $rep = envoismail($sujet, $corpsmail, $adrTo, $adrfrom,$typeDeMail);
                         $titou = DatabaseOperation::execute('update salaries set blocage=\'oui\' where (login=\'' . $identite . '\')');
                         //Averissement
                         $titre = "Accès aux modules de l'Intranet";

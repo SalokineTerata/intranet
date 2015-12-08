@@ -1,0 +1,4258 @@
+2015-10-28 19:34:26 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : accentuéerazzzz
+2015-10-28 19:34:26 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `commentaire_suivi_projet` =   'accentuéerazzzz'
+2015-10-28 19:34:52 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\modification_fiche.php : accentué ?
+2015-10-29 15:18:02 LOG 127.0.0.1  : 316
+2015-10-29 15:19:41 LOG 127.0.0.1  : 316
+2015-10-30 08:51:22 LOG 127.0.0.1  : 318
+2015-10-30 10:50:37 LOG 127.0.0.1  : 318
+2015-10-30 10:52:14 LOG 127.0.0.1  : 318
+2015-10-30 11:04:44 LOG 127.0.0.1  : 318
+2015-10-30 11:10:06 LOG 127.0.0.1  : 318
+2015-10-30 11:38:06 LOG 127.0.0.1  : 318
+2015-10-30 11:47:18 LOG 127.0.0.1  : 318
+2015-10-30 11:57:41 LOG 127.0.0.1  : 318
+2015-10-30 12:05:22 LOG 127.0.0.1  : 318
+2015-10-30 13:04:30 LOG 127.0.0.1  : 318
+2015-11-02 14:34:17 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : fefefqeqzfeqfezrerezerER
+2015-11-02 14:34:17 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `commentaire` =   'fefefqeqzfeqfezrerezerER'
+2015-11-02 14:34:27 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : fefefqeqzfeqfezrerezerERerE ERQEQERQZEQ
+2015-11-02 14:34:27 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `commentaire` =   'fefefqeqzfeqfezrerezerERerE ERQEQERQZEQ'
+2015-11-02 14:34:35 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : fefefqeqzfeqfezrerezerERerE ERQEQERQZEQeqzrezrezqrezrerezrzeqrqzerqrezrz
+2015-11-02 14:34:35 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `commentaire` =   'fefefqeqzfeqfezrerezerERerE ERQEQERQZEQeqzrezrezqrezrerezrzeqrqzerqrezrz'
+2015-11-02 14:34:40 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : fefefqeqzfeqfezrerezerERerE ERQEQERQZEQeqzrezrezqrezrerezrzeqrqzerqrezrzeezrzeqqr
+2015-11-02 14:34:40 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `commentaire` =   'fefefqeqzfeqfezrerezerERerE ERQEQERQZEQeqzrezrezqrezrerezrzeqrqzerqrezrzeezrzeqqr'
+2015-11-02 14:34:54 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : fefefqeqzfeqfezrerezerERerE ERQEQERQZEQeqzrezrezqrezrerezrzeqrqzerqrezrzeezrzeqqrzrerqezrzer erqe r354654564 31er5qeze3re5r4qze65r46z54rz56er4
+2015-11-02 14:34:54 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `commentaire` =   'fefefqeqzfeqfezrerezerERerE ERQEQERQZEQeqzrezrezqrezrerezrzeqrqzerqrezrzeezrzeqqrzrerqezrzer erqe r354654564 31er5qeze3re5r4qze65r46z54rz56er4'
+2015-11-02 14:35:03 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : franck saut 
+2015-11-02 14:35:03 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `commentaire` =   'franck saut '
+2015-11-02 14:35:15 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : franck saut et il temps temerni"
+2015-11-02 14:35:15 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `commentaire` =   'franck saut et il temps temerni\\\"'
+2015-11-02 14:35:25 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : franck saute et il temps temerni"
+2015-11-02 14:35:25 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `commentaire` =   'franck saute et il temps temerni\\\"'
+2015-11-02 15:40:06 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 
+2015-11-02 15:40:06 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `commentaire` =   NULL
+2015-11-02 15:40:10 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 
+2015-11-02 15:40:10 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `commentaire` =   NULL
+2015-11-04 14:07:15 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 2015-11-04
+2015-11-04 14:07:15 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `date_validation_suivi_projet` =   '2015-11-04'
+2015-11-04 14:24:41 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 2015-11-04
+2015-11-04 14:24:41 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `date_validation_suivi_projet` =   '2015-11-04'
+2015-11-04 14:41:13 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 2015-11-04
+2015-11-04 14:41:13 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `date_echeance_fta` =   '2015-11-04'
+2015-11-04 14:42:47 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 2015-11-04
+2015-11-04 14:42:47 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `date_validation_suivi_projet` =   '2015-11-04'
+2015-11-04 14:44:27 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 2015-11-04
+2015-11-04 14:44:27 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `date_validation_suivi_projet` =   '2015-11-04'
+2015-11-04 14:45:11 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 2015-11-04
+2015-11-04 14:45:11 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `date_validation_suivi_projet` =   '2015-11-04'
+2015-11-04 14:50:29 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : dsddrsrds
+2015-11-04 14:50:29 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `commentaire_maj_fta` =   'dsddrsrds'
+2015-11-04 14:51:51 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : test 
+2015-11-04 14:51:51 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `commentaire_maj_fta` =   'test '
+2015-11-04 15:39:46 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 291
+2015-11-04 15:39:46 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `poids_fta_composition` =   '291'
+2015-11-04 15:39:54 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 291.0000000000
+2015-11-04 15:39:54 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `poids_fta_composition` =   '291.0000000000'
+2015-11-04 15:40:07 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 2915343453486786453458
+2015-11-04 15:40:07 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `poids_fta_composition` =   '2915343453486786453458'
+2015-11-04 15:40:16 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 2.91534345348678645e+21
+2015-11-04 15:40:16 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `poids_fta_composition` =   '2.91534345348678645e+21'
+2015-11-04 15:40:28 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 5
+2015-11-04 15:40:28 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `quantite_fta_composition` =   '5'
+2015-11-04 15:40:30 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 6
+2015-11-04 15:40:30 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `quantite_fta_composition` =   '6'
+2015-11-04 15:40:33 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 7
+2015-11-04 15:40:33 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `quantite_fta_composition` =   '7'
+2015-11-04 15:40:36 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 6
+2015-11-04 15:40:36 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `quantite_fta_composition` =   '6'
+2015-11-04 15:40:38 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 5
+2015-11-04 15:40:38 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `quantite_fta_composition` =   '5'
+2015-11-04 15:40:53 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 200.000
+2015-11-04 15:40:53 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `poids_fta_composition` =   '200.000'
+2015-11-04 15:41:01 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 2009595468456
+2015-11-04 15:41:01 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `poids_fta_composition` =   '2009595468456'
+2015-11-04 15:42:43 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 12
+2015-11-04 15:42:43 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `poids_fta_composition` =   '12'
+2015-11-04 15:43:19 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 1234567
+2015-11-04 15:43:19 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `poids_fta_composition` =   '1234567'
+2015-11-04 15:43:28 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 12345678
+2015-11-04 15:43:28 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `poids_fta_composition` =   '12345678'
+2015-11-04 15:43:53 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 200
+2015-11-04 15:43:53 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `poids_fta_composition` =   '200'
+2015-11-04 17:46:01 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : erz
+2015-11-04 17:46:01 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `commentaire_maj_fta` =   'erz'
+2015-11-05 16:52:45 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 
+2015-11-05 16:52:45 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `date_validation_suivi_projet` =   NULL
+2015-11-05 16:57:12 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 
+2015-11-05 16:57:12 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `date_validation_suivi_projet` =   NULL
+2015-11-05 16:57:42 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 2015-11-05
+2015-11-05 16:57:42 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `date_validation_suivi_projet` =   '2015-11-05'
+2015-11-05 16:58:51 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 
+2015-11-05 16:58:51 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `date_validation_suivi_projet` =   NULL
+2015-11-06 14:08:00 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : test
+2015-11-06 14:08:00 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `commentaire_maj_fta` =   'test'
+2015-11-06 15:30:24 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 6
+2015-11-06 15:30:24 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `id_fta_workflow` =   '6'
+2015-11-06 15:32:58 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 7
+2015-11-06 15:32:58 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `id_fta_workflow` =   '7'
+2015-11-06 15:42:54 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 6
+2015-11-06 15:42:54 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `id_fta_workflow` =   '6'
+2015-11-06 16:01:42 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 6
+2015-11-06 16:01:42 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `id_fta_workflow` =   '6'
+2015-11-06 16:09:07 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 6
+2015-11-06 16:09:07 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `id_fta_workflow` =   '6'
+2015-11-06 16:11:29 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 6
+2015-11-06 16:11:29 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `id_fta_workflow` =   '6'
+2015-11-06 16:22:59 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 7
+2015-11-06 16:22:59 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `id_fta_workflow` =   '7'
+2015-11-09 09:42:25 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 2015-11-09
+2015-11-09 09:42:25 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `date_echeance_fta` =   '2015-11-09'
+2015-11-09 10:47:20 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 2015-12-31
+2015-11-09 10:47:20 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `date_echeance_fta` =   '2015-12-31'
+2015-11-10 14:04:27 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 1
+2015-11-10 14:04:28 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `val_nut_kcal` =   '1'
+2015-11-10 14:04:30 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 2
+2015-11-10 14:04:30 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `val_nut_kcal` =   '2'
+2015-11-10 14:04:31 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 3
+2015-11-10 14:04:31 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `val_nut_kcal` =   '3'
+2015-11-10 14:04:31 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 4
+2015-11-10 14:04:31 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `val_nut_kcal` =   '4'
+2015-11-10 14:04:32 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 2
+2015-11-10 14:04:32 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `val_nut_kcal` =   '2'
+2015-11-10 14:04:33 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 3
+2015-11-10 14:04:33 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `val_nut_kcal` =   '3'
+2015-11-10 14:04:33 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 1
+2015-11-10 14:04:34 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `val_nut_kcal` =   '1'
+2015-11-10 14:04:34 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 0
+2015-11-10 14:04:34 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `val_nut_kcal` =   '0'
+2015-11-10 14:04:47 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 1.5
+2015-11-10 14:04:47 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `val_nut_sel` =   '1.5'
+2015-11-10 14:04:50 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 0.5
+2015-11-10 14:04:50 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `val_nut_sel` =   '0.5'
+2015-11-10 14:04:51 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 1.5
+2015-11-10 14:04:51 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `val_nut_sel` =   '1.5'
+2015-11-10 14:04:52 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 2.5
+2015-11-10 14:04:52 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `val_nut_sel` =   '2.5'
+2015-11-10 14:06:33 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 3
+2015-11-10 14:06:33 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `activation_codesoft_arti2` =   '3'
+2015-11-10 14:07:47 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 1
+2015-11-10 14:07:47 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `val_nut_sel` =   '1'
+2015-11-10 14:07:48 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 2
+2015-11-10 14:07:48 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `val_nut_sel` =   '2'
+2015-11-10 14:07:48 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 3
+2015-11-10 14:07:48 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `val_nut_sel` =   '3'
+2015-11-10 14:09:01 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : -1
+2015-11-10 14:09:01 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `val_nut_proteine` =   '-1'
+2015-11-10 14:09:02 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : -2
+2015-11-10 14:09:02 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `val_nut_proteine` =   '-2'
+2015-11-10 14:09:03 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : -1
+2015-11-10 14:09:03 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `val_nut_proteine` =   '-1'
+2015-11-10 14:09:04 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 1
+2015-11-10 14:09:04 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `val_nut_proteine` =   '1'
+2015-11-10 14:09:04 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 0
+2015-11-10 14:09:04 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `val_nut_proteine` =   '0'
+2015-11-10 14:09:04 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 2
+2015-11-10 14:09:04 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `val_nut_proteine` =   '2'
+2015-11-10 14:09:04 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 3
+2015-11-10 14:09:04 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `val_nut_proteine` =   '3'
+2015-11-10 14:09:06 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 956
+2015-11-10 14:09:06 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `val_nut_sucre` =   '956'
+2015-11-10 14:09:08 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 8451
+2015-11-10 14:09:08 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `val_nut_glucide` =   '8451'
+2015-11-10 14:09:10 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 8478
+2015-11-10 14:09:10 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `val_nut_acide_gras` =   '8478'
+2015-11-10 14:09:12 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 845
+2015-11-10 14:09:12 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `val_nut_mat_grasse` =   '845'
+2015-11-10 14:09:14 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 878
+2015-11-10 14:09:14 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `val_nut_kj` =   '878'
+2015-11-10 14:09:16 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 845
+2015-11-10 14:09:16 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `val_nut_kcal` =   '845'
+2015-11-10 14:09:18 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 15
+2015-11-10 14:09:18 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `val_nut_sel` =   '15'
+2015-11-10 14:12:35 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : DADZDZDZ
+2015-11-10 14:12:35 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `nom_fta_composition` =   'DADZDZDZ'
+2015-11-10 14:12:41 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : ZDZDZDZ
+
+ZDZDZDZ
+2015-11-10 14:12:41 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `ingredient_fta_composition` =   'ZDZDZDZ\n\nZDZDZDZ'
+2015-11-10 14:12:47 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : ZDZDZZ
+
+ZDDZSD
+2015-11-10 14:12:47 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `ingredient_fta_composition1` =   'ZDZDZZ\n\nZDDZSD'
+2015-11-10 14:13:08 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 515
+2015-11-10 14:13:08 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `duree_vie_technique_fta_composition` =   '515'
+2015-11-10 14:13:10 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 454
+2015-11-10 14:13:10 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `poids_fta_composition` =   '454'
+2015-11-10 14:13:12 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 5454
+2015-11-10 14:13:12 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `quantite_fta_composition` =   '5454'
+2015-11-10 14:13:18 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 0154ZDZ
+2015-11-10 14:13:18 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `ordre_fta_composition` =   '0154ZDZ'
+2015-11-10 14:14:56 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : EZREER
+2015-11-10 14:14:56 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `etiquette_information_complementaire_recto_fta_composant` =   'EZREER'
+2015-11-10 14:14:57 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : ZERZER
+2015-11-10 14:14:57 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `etiquette_supplementaire_fta_composition` =   'ZERZER'
+2015-11-10 14:14:58 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : ZRE
+2015-11-10 14:14:58 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `etiquette_fta_composition` =   'ZRE'
+2015-11-10 14:15:00 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : EZRER
+2015-11-10 14:15:00 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `etiquette_libelle_legal_fta_composition` =   'EZRER'
+2015-11-10 14:15:02 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : EZRZERZ
+2015-11-10 14:15:02 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `etiquette_libelle_fta_composition` =   'EZRZERZ'
+2015-11-10 14:15:26 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 5215
+2015-11-10 14:15:26 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `etiquette_decomposition_poids_fta_composant` =   '5215'
+2015-11-10 14:15:32 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 1515
+2015-11-10 14:15:32 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `etiquette_poids_fta_composition` =   '1515'
+2015-11-10 14:15:35 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 51515
+2015-11-10 14:15:35 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `etiquette_duree_vie_fta_composition` =   '51515'
+2015-11-10 14:15:39 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : ZAEZAZ
+2015-11-10 14:15:39 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `etiquette_information_complementaire_recto_fta_composant` =   'ZAEZAZ'
+2015-11-10 14:17:17 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : DZZDDZ
+2015-11-10 14:17:17 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `etiquette_libelle_legal_fta_composition` =   'DZZDDZ'
+2015-11-10 14:17:24 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : ZDZDZ
+2015-11-10 14:17:24 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `etiquette_decomposition_poids_fta_composant` =   'ZDZDZ'
+2015-11-10 14:17:35 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : ZDDZDZ
+2015-11-10 14:17:35 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `etiquette_information_complementaire_recto_fta_composant` =   'ZDDZDZ'
+2015-11-10 14:17:37 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : ZDZDZ
+2015-11-10 14:17:37 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `etiquette_libelle_legal_fta_composition` =   'ZDZDZ'
+2015-11-10 14:40:53 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 4
+2015-11-10 14:40:53 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `k_style_paragraphe_ingredient_fta_composition` =   '4'
+2015-11-10 14:40:55 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 122
+2015-11-10 14:40:55 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `k_etiquette_fta_composition` =   '122'
+2015-11-10 14:40:58 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 164
+2015-11-10 14:40:58 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `k_etiquette_verso_fta_composition` =   '164'
+2015-11-10 14:40:59 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 2
+2015-11-10 14:40:59 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `k_codesoft_etiquette_logo` =   '2'
+2015-11-10 14:41:07 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 3
+2015-11-10 14:41:07 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `k_style_paragraphe_ingredient_fta_composition` =   '3'
+2015-11-10 14:41:08 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 128
+2015-11-10 14:41:08 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `k_etiquette_fta_composition` =   '128'
+2015-11-10 14:41:09 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 65
+2015-11-10 14:41:09 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `k_etiquette_verso_fta_composition` =   '65'
+2015-11-10 14:41:10 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 2
+2015-11-10 14:41:10 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `k_codesoft_etiquette_logo` =   '2'
+2015-11-10 14:42:55 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : WOK CREV LEG NAC 1KG
+2015-11-10 14:42:55 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `nom_fta_composition` =   'WOK CREV LEG NAC 1KG'
+2015-11-10 17:17:09 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : BAC
+2015-11-10 17:17:09 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `id_annexe_unite` =   'BAC'
+2015-11-10 17:17:12 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 1
+2015-11-10 17:17:12 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `etat_fta_nomenclature` =   '1'
+2015-11-12 11:10:47 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : BAC
+2015-11-12 11:10:47 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `id_annexe_unite` =   'BAC'
+2015-11-12 11:11:13 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 11
+2015-11-12 11:11:13 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `Site_de_production` =   '11'
+2015-11-12 11:11:14 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 1
+2015-11-12 11:11:14 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `Site_de_production` =   '1'
+2015-11-12 11:30:04 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 11
+2015-11-12 11:30:04 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `site_production_fta_nomenclature` =   '11'
+2015-11-12 11:33:10 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 11
+2015-11-12 11:33:10 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `site_production_fta_nomenclature` =   '11'
+2015-11-12 11:33:26 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 11
+2015-11-12 11:33:26 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `site_production_fta_nomenclature` =   '11'
+2015-11-12 11:35:23 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 14
+2015-11-12 11:35:23 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `site_production_fta_nomenclature` =   '14'
+2015-11-12 11:37:54 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 14
+2015-11-12 11:37:54 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `site_production_fta_nomenclature` =   '14'
+2015-11-12 11:38:42 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 14
+2015-11-12 11:38:42 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `site_production_fta_nomenclature` =   '14'
+2015-11-12 11:43:49 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 14
+2015-11-12 11:43:49 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `site_production_fta_nomenclature` =   '14'
+2015-11-12 11:45:10 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 14
+2015-11-12 11:45:10 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `site_production_fta_nomenclature` =   '14'
+2015-11-12 11:45:14 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 54
+2015-11-12 11:45:14 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `site_production_fta_nomenclature` =   '54'
+2015-11-12 11:48:55 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 3
+2015-11-12 11:48:55 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `site_production_fta_nomenclature` =   '3'
+2015-11-12 13:15:34 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 13
+2015-11-12 13:15:34 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `id_annexe_agrologic_article_codification` =   '13'
+2015-11-12 13:15:42 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 656231
+2015-11-12 13:15:42 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `code_produit_agrologic_fta_nomenclature` =   '656231'
+2015-11-12 13:16:04 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : piece/kg
+2015-11-12 13:16:04 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `id_annexe_unite` =   'piece/kg'
+2015-11-12 13:16:09 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 1
+2015-11-12 13:16:09 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `etat_fta_nomenclature` =   '1'
+2015-11-12 13:58:20 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 14
+2015-11-12 13:58:20 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `id_annexe_agrologic_article_codification` =   '14'
+2015-11-12 14:13:58 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 14
+2015-11-12 14:13:58 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `id_geo` =   '14'
+2015-11-12 14:21:49 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : test de cretation d'un composant
+2015-11-12 14:21:49 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `nom_fta_composition` =   'test de cretation d\\\'un composant'
+2015-11-12 14:21:54 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : erzerze
+2015-11-12 14:21:54 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `ingredient_fta_composition` =   'erzerze'
+2015-11-12 14:21:57 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : zerzer
+
+zerzre
+
+ezrez
+2015-11-12 14:21:57 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `ingredient_fta_composition1` =   'zerzer\n\nzerzre\n\nezrez'
+2015-11-12 14:22:00 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 11
+2015-11-12 14:22:00 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `id_geo` =   '11'
+2015-11-12 14:22:03 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 30
+2015-11-12 14:22:03 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `duree_vie_technique_fta_composition` =   '30'
+2015-11-12 14:22:10 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 5454
+2015-11-12 14:22:10 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `poids_fta_composition` =   '5454'
+2015-11-12 15:07:59 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : test de cretation d'un composant
+2015-11-12 15:07:59 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `nom_fta_composition` =   'test de cretation d\\\'un composant'
+2015-11-12 15:13:04 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : test de creation numéro 2 d'autres 
+2015-11-12 15:13:04 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `nom_fta_composition` =   'test de creation numéro 2 d\\\'autres '
+2015-11-12 15:24:42 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : eerzerez
+
+ezrezrz
+
+zerzerze
+zerzerez
+
+&é"''('(-èèçà %**$ê
+2015-11-12 15:24:42 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `remarque_fta` =   'eerzerez\n\nezrezrz\n\nzerzerze\nzerzerez\n\n&é\\\"\\\'\\\'(\\\'(-èèçà %**$ê'
+2015-11-13 11:29:29 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 178
+2015-11-13 11:29:29 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `hauteur_fta_conditionnement` =   '178'
+2015-11-13 11:30:50 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 175
+2015-11-13 11:30:50 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `hauteur_fta_conditionnement` =   '175'
+2015-11-13 11:30:57 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 304
+2015-11-13 11:30:57 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `longueur_fta_conditionnement` =   '304'
+2015-11-13 11:35:23 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 152
+2015-11-13 11:35:23 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `hauteur_fta_conditionnement` =   '152'
+2015-11-13 11:35:53 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 154
+2015-11-13 11:35:53 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `hauteur_fta_conditionnement` =   '154'
+2015-11-13 11:36:37 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 156
+2015-11-13 11:36:37 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `hauteur_fta_conditionnement` =   '156'
+2015-11-16 14:48:17 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : trytrytrs
+2015-11-16 14:48:17 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `correction_fta_suivi_projet` =   'trytrytrs'
+2015-11-16 14:48:26 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 
+2015-11-16 14:48:26 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `correction_fta_suivi_projet` =   NULL
+2015-11-17 15:01:53 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : test
+2015-11-17 15:01:53 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `commentaire_maj_fta` =   'test'
+2015-11-18 10:36:39 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : aaa
+2015-11-18 10:36:39 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `commentaire_suivi_projet` =   'aaa'
+2015-11-18 11:25:11 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : test
+
+ezrqezre
+2015-11-18 11:25:11 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `commentaire_suivi_projet` =   'test\n\nezrqezre'
+2015-11-18 11:25:25 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : tretretr
+2015-11-18 11:25:25 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `commentaire_suivi_projet` =   'tretretr'
+2015-11-18 11:25:36 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : tretretr
+ytufytuf
+
+tdytyryrty ç_èç_çè('-'(-
+2015-11-18 11:25:36 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `commentaire_suivi_projet` =   'tretretr\nytufytuf\n\ntdytyryrty ç_èç_çè(\\\'-\\\'(-'
+2015-11-18 13:29:17 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : test moteur de recherche
+2015-11-18 13:29:17 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `commentaire_maj_fta` =   'test moteur de recherche'
+2015-11-18 15:01:05 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : eferf
+2015-11-18 15:01:05 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `commentaire_maj_fta` =   'eferf'
+2015-11-18 15:16:04 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : test mdr 
+2015-11-18 15:16:04 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `commentaire_maj_fta` =   'test mdr '
+2015-11-18 15:16:38 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : test
+2015-11-18 15:16:38 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `commentaire_maj_fta` =   'test'
+2015-11-18 15:22:42 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 6465
+2015-11-18 15:22:42 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `commentaire_maj_fta` =   '6465'
+2015-11-18 16:35:27 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : test
+2015-11-18 16:35:27 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `commentaire_maj_fta` =   'test'
+2015-11-19 11:17:57 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : test commentaire
+2015-11-19 11:17:57 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `commentaire_maj_fta` =   'test commentaire'
+2015-11-19 13:17:15 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : test
+2015-11-19 13:17:15 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `commentaire_maj_fta` =   'test'
+2015-11-19 14:00:26 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : test
+2015-11-19 14:00:26 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `commentaire_maj_fta` =   'test'
+2015-11-20 11:01:05 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : uhiohjiji
+2015-11-20 11:01:05 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `suffixe_agrologic_fta` =   'uhiohjiji'
+2015-11-20 11:01:40 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : FESTIFS 2014 REFERENCE SU NORD OUEST
+testr commentaire
+2015-11-20 11:01:40 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `commentaire_suivi_projet` =   'FESTIFS 2014 REFERENCE SU NORD OUEST\ntestr commentaire'
+2015-11-24 14:45:28 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 1.1
+2015-11-24 14:45:28 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `val_nut_sel` =   '1.1'
+2015-11-24 14:45:46 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 1.2
+2015-11-24 14:45:46 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `val_nut_sel` =   '1.2'
+2015-11-24 14:48:58 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 1.5
+2015-11-24 14:48:58 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `val_nut_proteine` =   '1.5'
+2015-11-24 14:48:59 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 2.5
+2015-11-24 14:48:59 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `val_nut_proteine` =   '2.5'
+2015-11-24 14:49:00 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 1.5
+2015-11-24 14:49:00 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `val_nut_proteine` =   '1.5'
+2015-11-24 14:49:00 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 0.5
+2015-11-24 14:49:00 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `val_nut_proteine` =   '0.5'
+2015-11-24 14:49:09 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 0.665
+2015-11-24 14:49:09 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `val_nut_proteine` =   '0.665'
+2015-11-24 14:58:23 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 1.2
+2015-11-24 14:58:23 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `val_nut_sel` =   '1.2'
+2015-11-24 14:58:46 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 23.52
+2015-11-24 14:58:46 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `val_nut_sel` =   '23.52'
+2015-11-25 10:50:38 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 1.2626
+2015-11-25 10:50:38 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `val_nut_sel` =   '1.2626'
+2015-11-25 11:00:20 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 12.32656
+2015-11-25 11:00:20 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `val_nut_sel` =   '12.32656'
+2015-11-25 11:23:44 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 13
+2015-11-25 11:23:45 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `id_annexe_agrologic_article_codification` =   '13'
+2015-11-25 11:23:49 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 6232625625625
+2015-11-25 11:23:49 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `code_produit_agrologic_fta_nomenclature` =   '6232625625625'
+2015-11-25 11:38:39 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 13
+2015-11-25 11:38:39 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `id_annexe_agrologic_article_codification` =   '13'
+2015-11-25 11:38:42 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 13
+2015-11-25 11:38:42 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `id_annexe_agrologic_article_codification` =   '13'
+2015-11-25 11:39:08 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 13
+2015-11-25 11:39:08 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `id_annexe_agrologic_article_codification` =   '13'
+2015-11-25 11:45:22 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 1232654646
+2015-11-25 11:45:22 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `code_produit_agrologic_fta_nomenclature` =   '1232654646'
+2015-11-25 11:45:26 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 123456
+2015-11-25 11:45:26 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `code_produit_agrologic_fta_nomenclature` =   '123456'
+2015-11-25 11:51:21 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 1234567
+2015-11-25 11:51:21 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `code_produit_agrologic_fta_nomenclature` =   '1234567'
+2015-11-25 11:56:17 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 123456
+2015-11-25 11:56:17 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `code_produit_agrologic_fta_nomenclature` =   '123456'
+2015-11-25 13:10:59 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 123456
+2015-11-25 13:10:59 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `code_produit_agrologic_fta_nomenclature` =   '123456'
+2015-11-25 13:29:14 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 03560070790658
+2015-11-25 13:29:14 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `EAN_COLIS` =   '03560070790658'
+2015-11-25 16:46:47 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 2015-12-31
+2015-11-25 16:46:47 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `date_echeance_fta` =   '2015-12-31'
+2015-11-25 16:47:00 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : pour moi 
+2015-11-25 16:47:00 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `commentaire` =   'pour moi '
+2015-11-25 16:47:06 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : test
+2015-11-25 16:47:06 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `commentaire_suivi_projet` =   'test'
+2015-11-25 16:47:24 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : test de commentaire Fta accu
+2015-11-25 16:47:25 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `commentaire` =   'test de commentaire Fta accu'
+2015-11-25 16:47:35 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : test de commentaire Fta accueil
+2015-11-25 16:47:35 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `commentaire` =   'test de commentaire Fta accueil'
+2015-11-25 16:47:44 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : test commentaire chapitre identité
+2015-11-25 16:47:44 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `commentaire_suivi_projet` =   'test commentaire chapitre identité'
+2015-11-25 16:54:04 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 3
+2015-11-25 16:54:04 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `site_expedition_fta` =   '3'
+2015-11-25 16:54:08 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 159
+2015-11-25 16:54:08 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `site_expedition_fta` =   '159'
+2015-11-25 16:54:10 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 6
+2015-11-25 16:54:10 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `site_expedition_fta` =   '6'
+2015-11-27 15:52:20 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 25
+2015-11-27 15:52:20 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `id_annexe_agrologic_article_codification` =   '25'
+2015-11-27 15:52:26 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 123456
+2015-11-27 15:52:26 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `code_produit_agrologic_fta_nomenclature` =   '123456'
+2015-11-27 15:52:29 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : test
+2015-11-27 15:52:29 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `nom_fta_nomenclature` =   'test'
+2015-11-27 15:52:32 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 1.5
+2015-11-27 15:52:32 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `poids_fta_nomenclature` =   '1.5'
+2015-11-27 15:52:38 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : kg
+2015-11-27 15:52:38 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `id_annexe_unite` =   'kg'
+2015-11-27 15:52:40 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 1
+2015-11-27 15:52:40 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `etat_fta_nomenclature` =   '1'
+2015-11-27 15:52:44 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 16
+2015-11-27 15:52:44 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `site_production_fta_nomenclature` =   '16'
+2015-11-27 15:52:45 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 1
+2015-11-27 15:52:45 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `site_production_fta_nomenclature` =   '1'
+2015-11-30 10:18:00 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : test
+2015-11-30 10:18:00 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `commentaire_maj_fta` =   'test'
+2015-11-30 10:34:11 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : test
+2015-11-30 10:34:11 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `commentaire_maj_fta` =   'test'
+2015-12-02 10:51:59 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : test
+2015-12-02 10:51:59 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `commentaire_maj_fta` =   'test'
+2015-12-02 10:54:14 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : test
+2015-12-02 10:54:14 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `commentaire_maj_fta` =   'test'
+2015-12-02 10:56:56 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : test de desarchivage
+
+==============================
+==============================
+Date: 2013-09-04
+Login du modificateur: cj4300732
+
+arret
+2015-12-02 10:56:56 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `commentaire_maj_fta` =   'test de desarchivage\n\n==============================\n==============================\nDate: 2013-09-04\nLogin du modificateur: cj4300732\n\narret'
+2015-12-02 11:08:51 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : test
+2015-12-02 11:08:51 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `commentaire_maj_fta` =   'test'
+2015-12-02 11:16:31 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : test
+2015-12-02 11:16:31 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `commentaire_maj_fta` =   'test'
+2015-12-02 14:04:44 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 2015-12-02
+2015-12-02 14:04:44 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `date_echeance_fta` =   '2015-12-02'
+2015-12-02 14:04:48 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : test
+2015-12-02 14:04:48 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `commentaire` =   'test'
+2015-12-02 14:04:52 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : TEST
+2015-12-02 14:04:52 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `suffixe_agrologic_fta` =   'TEST'
+2015-12-02 14:04:54 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 84
+2015-12-02 14:04:54 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `Poids_ELEM` =   '84'
+2015-12-02 14:06:02 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : TEST
+
+SAUT CHAP 1
+2015-12-02 14:06:02 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `commentaire_suivi_projet` =   'TEST\n\nSAUT CHAP 1'
+2015-12-02 14:27:13 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 11
+2015-12-02 14:27:13 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `site_production_fta_nomenclature` =   '11'
+2015-12-02 14:32:02 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 13
+2015-12-02 14:32:02 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `id_annexe_agrologic_article_codification` =   '13'
+2015-12-02 14:32:05 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 555145
+2015-12-02 14:32:05 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `code_produit_agrologic_fta_nomenclature` =   '555145'
+2015-12-02 14:32:09 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : TEST22
+2015-12-02 14:32:09 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `nom_fta_nomenclature` =   'TEST22'
+2015-12-02 14:32:10 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 21
+2015-12-02 14:32:10 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `poids_fta_nomenclature` =   '21'
+2015-12-02 14:32:11 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : g
+2015-12-02 14:32:11 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `id_annexe_unite` =   'g'
+2015-12-02 14:32:12 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 1
+2015-12-02 14:32:12 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `site_production_fta_nomenclature` =   '1'
+2015-12-02 14:32:13 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 3
+2015-12-02 14:32:13 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `etat_fta_nomenclature` =   '3'
+2015-12-02 14:32:16 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 5215
+2015-12-02 14:32:16 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `quantite_piece_par_carton` =   '5215'
+2015-12-02 14:32:18 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 262
+2015-12-02 14:32:18 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `poids_total_carton_vrac_fta_nomenclature` =   '262'
+2015-12-02 14:32:58 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 13
+2015-12-02 14:32:58 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `id_annexe_agrologic_article_codification` =   '13'
+2015-12-02 14:59:29 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 13
+2015-12-02 14:59:29 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `id_annexe_agrologic_article_codification` =   '13'
+2015-12-03 16:44:15 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 38
+2015-12-03 16:44:15 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `k_etiquette_fta_composition` =   '38'
+2015-12-03 16:44:17 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 65
+2015-12-03 16:44:17 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `k_etiquette_verso_fta_composition` =   '65'
+2015-12-04 10:06:16 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : test mail
+2015-12-04 10:06:16 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `commentaire_maj_fta` =   'test mail'
+2015-12-04 10:17:17 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : test mail
+==============================
+==============================
+Date: 2015-12-04
+Login du modificateur: superviseur
+
+test mail
+2015-12-04 10:17:17 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `commentaire_maj_fta` =   'test mail\n==============================\n==============================\nDate: 2015-12-04\nLogin du modificateur: superviseur\n\ntest mail'
+2015-12-07 11:46:44 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : r
+2015-12-07 11:46:44 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `commentaire_maj_fta` =   'r'
+2015-12-07 11:54:54 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : r
+2015-12-07 11:54:54 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `commentaire_maj_fta` =   'r'
+2015-12-07 13:14:26 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : r
+2015-12-07 13:14:26 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `commentaire_maj_fta` =   'r'
+2015-12-07 13:35:57 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : r
+2015-12-07 13:35:57 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `commentaire_maj_fta` =   'r'
+2015-12-07 13:53:55 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : r
+2015-12-07 13:53:55 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `commentaire_maj_fta` =   'r'
+2015-12-08 12:03:04 MSG 127.0.0.1 Validation : Validation superviseur SYSTEM <InformatiqueSupport.AVIGNON@agis-sa.fr> InformatiqueSupport.AVIGNON@agis-sa.fr
+FTA/Validée: "23445 - RIZ CANTO TRFE 6X300G"
+La Fiche Technique Article "23445 - RIZ CANTO TRFE 6X300G" vient d'être validée.
+Cet Article est maintenant actif et disponible dans l'ensemble de notre système informatique.
+
+INFORMATIONS PRINCIPALES:
+Site d'assemblage: AVIGNON
+
+Listes des produits créés:
+30783086, 
+
+INFORMATIONS SUPPLEMENTAIRES:
+Code Article LDC: 23445
+Gencod EAN Article: 3366760011029
+Gencod EAN Colis: 13366760011026
+Nombre d'UVC par colis: 6
+Poids net de l'unité de vente facturée (en Kg): 0.3
+Identifiant du Dossier Technique: 325-v27
+Unité de facturation: Pièce
+Durée de vie garantie client (en jours): 11
+Durée de vie Production (en jours): 35
+Désignation Commerciale: RIZ CANTONAIS
+
+
+COMMENTAIRE:
+
+==============================
+==============================
+Date: 2015-08-13
+Login du modificateur: ck4301627
+
+MAJ COMPOSITION
+
+Bonne journée à tous.
+Ce message a été envoyé automatiquement par le module Intranet - Fiche Technique Article.
+
+2015-12-08 12:03:31 MSG 127.0.0.1 Validation : Validation superviseur SYSTEM <InformatiqueSupport.AVIGNON@agis-sa.fr> cecile.jaegle@agis-sa.fr
+FTA/Validée: "23445 - RIZ CANTO TRFE 6X300G"
+La Fiche Technique Article "23445 - RIZ CANTO TRFE 6X300G" vient d'être validée.
+Cet Article est maintenant actif et disponible dans l'ensemble de notre système informatique.
+
+INFORMATIONS PRINCIPALES:
+Site d'assemblage: AVIGNON
+
+Listes des produits créés:
+30783086, 
+
+INFORMATIONS SUPPLEMENTAIRES:
+Code Article LDC: 23445
+Gencod EAN Article: 3366760011029
+Gencod EAN Colis: 13366760011026
+Nombre d'UVC par colis: 6
+Poids net de l'unité de vente facturée (en Kg): 0.3
+Identifiant du Dossier Technique: 325-v27
+Unité de facturation: Pièce
+Durée de vie garantie client (en jours): 11
+Durée de vie Production (en jours): 35
+Désignation Commerciale: RIZ CANTONAIS
+
+
+COMMENTAIRE:
+
+==============================
+==============================
+Date: 2015-08-13
+Login du modificateur: ck4301627
+
+MAJ COMPOSITION
+
+Bonne journée à tous.
+Ce message a été envoyé automatiquement par le module Intranet - Fiche Technique Article.
+
+2015-12-08 12:03:31 MSG 127.0.0.1 Validation : Validation superviseur SYSTEM <InformatiqueSupport.AVIGNON@agis-sa.fr> stephane.morin@ldc.fr
+FTA/Validée: "23445 - RIZ CANTO TRFE 6X300G"
+La Fiche Technique Article "23445 - RIZ CANTO TRFE 6X300G" vient d'être validée.
+Cet Article est maintenant actif et disponible dans l'ensemble de notre système informatique.
+
+INFORMATIONS PRINCIPALES:
+Site d'assemblage: AVIGNON
+
+Listes des produits créés:
+30783086, 
+
+INFORMATIONS SUPPLEMENTAIRES:
+Code Article LDC: 23445
+Gencod EAN Article: 3366760011029
+Gencod EAN Colis: 13366760011026
+Nombre d'UVC par colis: 6
+Poids net de l'unité de vente facturée (en Kg): 0.3
+Identifiant du Dossier Technique: 325-v27
+Unité de facturation: Pièce
+Durée de vie garantie client (en jours): 11
+Durée de vie Production (en jours): 35
+Désignation Commerciale: RIZ CANTONAIS
+
+
+COMMENTAIRE:
+
+==============================
+==============================
+Date: 2015-08-13
+Login du modificateur: ck4301627
+
+MAJ COMPOSITION
+
+Bonne journée à tous.
+Ce message a été envoyé automatiquement par le module Intranet - Fiche Technique Article.
+
+2015-12-08 12:03:31 MSG 127.0.0.1 Validation : Validation superviseur SYSTEM <InformatiqueSupport.AVIGNON@agis-sa.fr> boris.sanegre@agis-sa.fr
+FTA/Validée: "23445 - RIZ CANTO TRFE 6X300G"
+La Fiche Technique Article "23445 - RIZ CANTO TRFE 6X300G" vient d'être validée.
+Cet Article est maintenant actif et disponible dans l'ensemble de notre système informatique.
+
+INFORMATIONS PRINCIPALES:
+Site d'assemblage: AVIGNON
+
+Listes des produits créés:
+30783086, 
+
+INFORMATIONS SUPPLEMENTAIRES:
+Code Article LDC: 23445
+Gencod EAN Article: 3366760011029
+Gencod EAN Colis: 13366760011026
+Nombre d'UVC par colis: 6
+Poids net de l'unité de vente facturée (en Kg): 0.3
+Identifiant du Dossier Technique: 325-v27
+Unité de facturation: Pièce
+Durée de vie garantie client (en jours): 11
+Durée de vie Production (en jours): 35
+Désignation Commerciale: RIZ CANTONAIS
+
+
+COMMENTAIRE:
+
+==============================
+==============================
+Date: 2015-08-13
+Login du modificateur: ck4301627
+
+MAJ COMPOSITION
+
+Bonne journée à tous.
+Ce message a été envoyé automatiquement par le module Intranet - Fiche Technique Article.
+
+2015-12-08 12:03:31 MSG 127.0.0.1 Validation : Validation superviseur SYSTEM <InformatiqueSupport.AVIGNON@agis-sa.fr> christine.lucas@agis-sa.fr
+FTA/Validée: "23445 - RIZ CANTO TRFE 6X300G"
+La Fiche Technique Article "23445 - RIZ CANTO TRFE 6X300G" vient d'être validée.
+Cet Article est maintenant actif et disponible dans l'ensemble de notre système informatique.
+
+INFORMATIONS PRINCIPALES:
+Site d'assemblage: AVIGNON
+
+Listes des produits créés:
+30783086, 
+
+INFORMATIONS SUPPLEMENTAIRES:
+Code Article LDC: 23445
+Gencod EAN Article: 3366760011029
+Gencod EAN Colis: 13366760011026
+Nombre d'UVC par colis: 6
+Poids net de l'unité de vente facturée (en Kg): 0.3
+Identifiant du Dossier Technique: 325-v27
+Unité de facturation: Pièce
+Durée de vie garantie client (en jours): 11
+Durée de vie Production (en jours): 35
+Désignation Commerciale: RIZ CANTONAIS
+
+
+COMMENTAIRE:
+
+==============================
+==============================
+Date: 2015-08-13
+Login du modificateur: ck4301627
+
+MAJ COMPOSITION
+
+Bonne journée à tous.
+Ce message a été envoyé automatiquement par le module Intranet - Fiche Technique Article.
+
+2015-12-08 12:03:31 MSG 127.0.0.1 Validation : Validation superviseur SYSTEM <InformatiqueSupport.AVIGNON@agis-sa.fr> julie.weymuller@agis-sa.fr
+FTA/Validée: "23445 - RIZ CANTO TRFE 6X300G"
+La Fiche Technique Article "23445 - RIZ CANTO TRFE 6X300G" vient d'être validée.
+Cet Article est maintenant actif et disponible dans l'ensemble de notre système informatique.
+
+INFORMATIONS PRINCIPALES:
+Site d'assemblage: AVIGNON
+
+Listes des produits créés:
+30783086, 
+
+INFORMATIONS SUPPLEMENTAIRES:
+Code Article LDC: 23445
+Gencod EAN Article: 3366760011029
+Gencod EAN Colis: 13366760011026
+Nombre d'UVC par colis: 6
+Poids net de l'unité de vente facturée (en Kg): 0.3
+Identifiant du Dossier Technique: 325-v27
+Unité de facturation: Pièce
+Durée de vie garantie client (en jours): 11
+Durée de vie Production (en jours): 35
+Désignation Commerciale: RIZ CANTONAIS
+
+
+COMMENTAIRE:
+
+==============================
+==============================
+Date: 2015-08-13
+Login du modificateur: ck4301627
+
+MAJ COMPOSITION
+
+Bonne journée à tous.
+Ce message a été envoyé automatiquement par le module Intranet - Fiche Technique Article.
+
+2015-12-08 12:03:31 MSG 127.0.0.1 Validation : Validation superviseur SYSTEM <InformatiqueSupport.AVIGNON@agis-sa.fr> jasmine.couston@agis-sa.fr
+FTA/Validée: "23445 - RIZ CANTO TRFE 6X300G"
+La Fiche Technique Article "23445 - RIZ CANTO TRFE 6X300G" vient d'être validée.
+Cet Article est maintenant actif et disponible dans l'ensemble de notre système informatique.
+
+INFORMATIONS PRINCIPALES:
+Site d'assemblage: AVIGNON
+
+Listes des produits créés:
+30783086, 
+
+INFORMATIONS SUPPLEMENTAIRES:
+Code Article LDC: 23445
+Gencod EAN Article: 3366760011029
+Gencod EAN Colis: 13366760011026
+Nombre d'UVC par colis: 6
+Poids net de l'unité de vente facturée (en Kg): 0.3
+Identifiant du Dossier Technique: 325-v27
+Unité de facturation: Pièce
+Durée de vie garantie client (en jours): 11
+Durée de vie Production (en jours): 35
+Désignation Commerciale: RIZ CANTONAIS
+
+
+COMMENTAIRE:
+
+==============================
+==============================
+Date: 2015-08-13
+Login du modificateur: ck4301627
+
+MAJ COMPOSITION
+
+Bonne journée à tous.
+Ce message a été envoyé automatiquement par le module Intranet - Fiche Technique Article.
+
+2015-12-08 12:03:31 MSG 127.0.0.1 Validation : Validation superviseur SYSTEM <InformatiqueSupport.AVIGNON@agis-sa.fr> christine.alberola@agis-sa.fr
+FTA/Validée: "23445 - RIZ CANTO TRFE 6X300G"
+La Fiche Technique Article "23445 - RIZ CANTO TRFE 6X300G" vient d'être validée.
+Cet Article est maintenant actif et disponible dans l'ensemble de notre système informatique.
+
+INFORMATIONS PRINCIPALES:
+Site d'assemblage: AVIGNON
+
+Listes des produits créés:
+30783086, 
+
+INFORMATIONS SUPPLEMENTAIRES:
+Code Article LDC: 23445
+Gencod EAN Article: 3366760011029
+Gencod EAN Colis: 13366760011026
+Nombre d'UVC par colis: 6
+Poids net de l'unité de vente facturée (en Kg): 0.3
+Identifiant du Dossier Technique: 325-v27
+Unité de facturation: Pièce
+Durée de vie garantie client (en jours): 11
+Durée de vie Production (en jours): 35
+Désignation Commerciale: RIZ CANTONAIS
+
+
+COMMENTAIRE:
+
+==============================
+==============================
+Date: 2015-08-13
+Login du modificateur: ck4301627
+
+MAJ COMPOSITION
+
+Bonne journée à tous.
+Ce message a été envoyé automatiquement par le module Intranet - Fiche Technique Article.
+
+2015-12-08 12:03:31 MSG 127.0.0.1 Validation : Validation superviseur SYSTEM <InformatiqueSupport.AVIGNON@agis-sa.fr> cecile.pfister@agis-sa.fr
+FTA/Validée: "23445 - RIZ CANTO TRFE 6X300G"
+La Fiche Technique Article "23445 - RIZ CANTO TRFE 6X300G" vient d'être validée.
+Cet Article est maintenant actif et disponible dans l'ensemble de notre système informatique.
+
+INFORMATIONS PRINCIPALES:
+Site d'assemblage: AVIGNON
+
+Listes des produits créés:
+30783086, 
+
+INFORMATIONS SUPPLEMENTAIRES:
+Code Article LDC: 23445
+Gencod EAN Article: 3366760011029
+Gencod EAN Colis: 13366760011026
+Nombre d'UVC par colis: 6
+Poids net de l'unité de vente facturée (en Kg): 0.3
+Identifiant du Dossier Technique: 325-v27
+Unité de facturation: Pièce
+Durée de vie garantie client (en jours): 11
+Durée de vie Production (en jours): 35
+Désignation Commerciale: RIZ CANTONAIS
+
+
+COMMENTAIRE:
+
+==============================
+==============================
+Date: 2015-08-13
+Login du modificateur: ck4301627
+
+MAJ COMPOSITION
+
+Bonne journée à tous.
+Ce message a été envoyé automatiquement par le module Intranet - Fiche Technique Article.
+
+2015-12-08 12:03:31 MSG 127.0.0.1 Validation : Validation superviseur SYSTEM <InformatiqueSupport.AVIGNON@agis-sa.fr> annabel.gastal@agis-sa.fr
+FTA/Validée: "23445 - RIZ CANTO TRFE 6X300G"
+La Fiche Technique Article "23445 - RIZ CANTO TRFE 6X300G" vient d'être validée.
+Cet Article est maintenant actif et disponible dans l'ensemble de notre système informatique.
+
+INFORMATIONS PRINCIPALES:
+Site d'assemblage: AVIGNON
+
+Listes des produits créés:
+30783086, 
+
+INFORMATIONS SUPPLEMENTAIRES:
+Code Article LDC: 23445
+Gencod EAN Article: 3366760011029
+Gencod EAN Colis: 13366760011026
+Nombre d'UVC par colis: 6
+Poids net de l'unité de vente facturée (en Kg): 0.3
+Identifiant du Dossier Technique: 325-v27
+Unité de facturation: Pièce
+Durée de vie garantie client (en jours): 11
+Durée de vie Production (en jours): 35
+Désignation Commerciale: RIZ CANTONAIS
+
+
+COMMENTAIRE:
+
+==============================
+==============================
+Date: 2015-08-13
+Login du modificateur: ck4301627
+
+MAJ COMPOSITION
+
+Bonne journée à tous.
+Ce message a été envoyé automatiquement par le module Intranet - Fiche Technique Article.
+
+2015-12-08 12:03:31 MSG 127.0.0.1 Validation : Validation superviseur SYSTEM <InformatiqueSupport.AVIGNON@agis-sa.fr> lise.tardy@agis-sa.fr
+FTA/Validée: "23445 - RIZ CANTO TRFE 6X300G"
+La Fiche Technique Article "23445 - RIZ CANTO TRFE 6X300G" vient d'être validée.
+Cet Article est maintenant actif et disponible dans l'ensemble de notre système informatique.
+
+INFORMATIONS PRINCIPALES:
+Site d'assemblage: AVIGNON
+
+Listes des produits créés:
+30783086, 
+
+INFORMATIONS SUPPLEMENTAIRES:
+Code Article LDC: 23445
+Gencod EAN Article: 3366760011029
+Gencod EAN Colis: 13366760011026
+Nombre d'UVC par colis: 6
+Poids net de l'unité de vente facturée (en Kg): 0.3
+Identifiant du Dossier Technique: 325-v27
+Unité de facturation: Pièce
+Durée de vie garantie client (en jours): 11
+Durée de vie Production (en jours): 35
+Désignation Commerciale: RIZ CANTONAIS
+
+
+COMMENTAIRE:
+
+==============================
+==============================
+Date: 2015-08-13
+Login du modificateur: ck4301627
+
+MAJ COMPOSITION
+
+Bonne journée à tous.
+Ce message a été envoyé automatiquement par le module Intranet - Fiche Technique Article.
+
+2015-12-08 12:03:31 MSG 127.0.0.1 Validation : Validation superviseur SYSTEM <InformatiqueSupport.AVIGNON@agis-sa.fr> marie-paule.couget@agis-sa.fr
+FTA/Validée: "23445 - RIZ CANTO TRFE 6X300G"
+La Fiche Technique Article "23445 - RIZ CANTO TRFE 6X300G" vient d'être validée.
+Cet Article est maintenant actif et disponible dans l'ensemble de notre système informatique.
+
+INFORMATIONS PRINCIPALES:
+Site d'assemblage: AVIGNON
+
+Listes des produits créés:
+30783086, 
+
+INFORMATIONS SUPPLEMENTAIRES:
+Code Article LDC: 23445
+Gencod EAN Article: 3366760011029
+Gencod EAN Colis: 13366760011026
+Nombre d'UVC par colis: 6
+Poids net de l'unité de vente facturée (en Kg): 0.3
+Identifiant du Dossier Technique: 325-v27
+Unité de facturation: Pièce
+Durée de vie garantie client (en jours): 11
+Durée de vie Production (en jours): 35
+Désignation Commerciale: RIZ CANTONAIS
+
+
+COMMENTAIRE:
+
+==============================
+==============================
+Date: 2015-08-13
+Login du modificateur: ck4301627
+
+MAJ COMPOSITION
+
+Bonne journée à tous.
+Ce message a été envoyé automatiquement par le module Intranet - Fiche Technique Article.
+
+2015-12-08 12:03:31 MSG 127.0.0.1 Validation : Validation superviseur SYSTEM <InformatiqueSupport.AVIGNON@agis-sa.fr> christelle.bernard@agis-sa.fr
+FTA/Validée: "23445 - RIZ CANTO TRFE 6X300G"
+La Fiche Technique Article "23445 - RIZ CANTO TRFE 6X300G" vient d'être validée.
+Cet Article est maintenant actif et disponible dans l'ensemble de notre système informatique.
+
+INFORMATIONS PRINCIPALES:
+Site d'assemblage: AVIGNON
+
+Listes des produits créés:
+30783086, 
+
+INFORMATIONS SUPPLEMENTAIRES:
+Code Article LDC: 23445
+Gencod EAN Article: 3366760011029
+Gencod EAN Colis: 13366760011026
+Nombre d'UVC par colis: 6
+Poids net de l'unité de vente facturée (en Kg): 0.3
+Identifiant du Dossier Technique: 325-v27
+Unité de facturation: Pièce
+Durée de vie garantie client (en jours): 11
+Durée de vie Production (en jours): 35
+Désignation Commerciale: RIZ CANTONAIS
+
+
+COMMENTAIRE:
+
+==============================
+==============================
+Date: 2015-08-13
+Login du modificateur: ck4301627
+
+MAJ COMPOSITION
+
+Bonne journée à tous.
+Ce message a été envoyé automatiquement par le module Intranet - Fiche Technique Article.
+
+2015-12-08 12:03:31 MSG 127.0.0.1 Validation : Validation superviseur SYSTEM <InformatiqueSupport.AVIGNON@agis-sa.fr> johan.ragon@agis-sa.fr
+FTA/Validée: "23445 - RIZ CANTO TRFE 6X300G"
+La Fiche Technique Article "23445 - RIZ CANTO TRFE 6X300G" vient d'être validée.
+Cet Article est maintenant actif et disponible dans l'ensemble de notre système informatique.
+
+INFORMATIONS PRINCIPALES:
+Site d'assemblage: AVIGNON
+
+Listes des produits créés:
+30783086, 
+
+INFORMATIONS SUPPLEMENTAIRES:
+Code Article LDC: 23445
+Gencod EAN Article: 3366760011029
+Gencod EAN Colis: 13366760011026
+Nombre d'UVC par colis: 6
+Poids net de l'unité de vente facturée (en Kg): 0.3
+Identifiant du Dossier Technique: 325-v27
+Unité de facturation: Pièce
+Durée de vie garantie client (en jours): 11
+Durée de vie Production (en jours): 35
+Désignation Commerciale: RIZ CANTONAIS
+
+
+COMMENTAIRE:
+
+==============================
+==============================
+Date: 2015-08-13
+Login du modificateur: ck4301627
+
+MAJ COMPOSITION
+
+Bonne journée à tous.
+Ce message a été envoyé automatiquement par le module Intranet - Fiche Technique Article.
+
+2015-12-08 12:03:31 MSG 127.0.0.1 Validation : Validation superviseur SYSTEM <InformatiqueSupport.AVIGNON@agis-sa.fr> mathieu.merot@agis-sa.fr
+FTA/Validée: "23445 - RIZ CANTO TRFE 6X300G"
+La Fiche Technique Article "23445 - RIZ CANTO TRFE 6X300G" vient d'être validée.
+Cet Article est maintenant actif et disponible dans l'ensemble de notre système informatique.
+
+INFORMATIONS PRINCIPALES:
+Site d'assemblage: AVIGNON
+
+Listes des produits créés:
+30783086, 
+
+INFORMATIONS SUPPLEMENTAIRES:
+Code Article LDC: 23445
+Gencod EAN Article: 3366760011029
+Gencod EAN Colis: 13366760011026
+Nombre d'UVC par colis: 6
+Poids net de l'unité de vente facturée (en Kg): 0.3
+Identifiant du Dossier Technique: 325-v27
+Unité de facturation: Pièce
+Durée de vie garantie client (en jours): 11
+Durée de vie Production (en jours): 35
+Désignation Commerciale: RIZ CANTONAIS
+
+
+COMMENTAIRE:
+
+==============================
+==============================
+Date: 2015-08-13
+Login du modificateur: ck4301627
+
+MAJ COMPOSITION
+
+Bonne journée à tous.
+Ce message a été envoyé automatiquement par le module Intranet - Fiche Technique Article.
+
+2015-12-08 12:03:31 MSG 127.0.0.1 Validation : Validation superviseur SYSTEM <InformatiqueSupport.AVIGNON@agis-sa.fr> lucile.dussaud@agis-sa.fr
+FTA/Validée: "23445 - RIZ CANTO TRFE 6X300G"
+La Fiche Technique Article "23445 - RIZ CANTO TRFE 6X300G" vient d'être validée.
+Cet Article est maintenant actif et disponible dans l'ensemble de notre système informatique.
+
+INFORMATIONS PRINCIPALES:
+Site d'assemblage: AVIGNON
+
+Listes des produits créés:
+30783086, 
+
+INFORMATIONS SUPPLEMENTAIRES:
+Code Article LDC: 23445
+Gencod EAN Article: 3366760011029
+Gencod EAN Colis: 13366760011026
+Nombre d'UVC par colis: 6
+Poids net de l'unité de vente facturée (en Kg): 0.3
+Identifiant du Dossier Technique: 325-v27
+Unité de facturation: Pièce
+Durée de vie garantie client (en jours): 11
+Durée de vie Production (en jours): 35
+Désignation Commerciale: RIZ CANTONAIS
+
+
+COMMENTAIRE:
+
+==============================
+==============================
+Date: 2015-08-13
+Login du modificateur: ck4301627
+
+MAJ COMPOSITION
+
+Bonne journée à tous.
+Ce message a été envoyé automatiquement par le module Intranet - Fiche Technique Article.
+
+2015-12-08 12:03:31 MSG 127.0.0.1 Validation : Validation superviseur SYSTEM <InformatiqueSupport.AVIGNON@agis-sa.fr> virginie.bertaux@agis-sa.fr
+FTA/Validée: "23445 - RIZ CANTO TRFE 6X300G"
+La Fiche Technique Article "23445 - RIZ CANTO TRFE 6X300G" vient d'être validée.
+Cet Article est maintenant actif et disponible dans l'ensemble de notre système informatique.
+
+INFORMATIONS PRINCIPALES:
+Site d'assemblage: AVIGNON
+
+Listes des produits créés:
+30783086, 
+
+INFORMATIONS SUPPLEMENTAIRES:
+Code Article LDC: 23445
+Gencod EAN Article: 3366760011029
+Gencod EAN Colis: 13366760011026
+Nombre d'UVC par colis: 6
+Poids net de l'unité de vente facturée (en Kg): 0.3
+Identifiant du Dossier Technique: 325-v27
+Unité de facturation: Pièce
+Durée de vie garantie client (en jours): 11
+Durée de vie Production (en jours): 35
+Désignation Commerciale: RIZ CANTONAIS
+
+
+COMMENTAIRE:
+
+==============================
+==============================
+Date: 2015-08-13
+Login du modificateur: ck4301627
+
+MAJ COMPOSITION
+
+Bonne journée à tous.
+Ce message a été envoyé automatiquement par le module Intranet - Fiche Technique Article.
+
+2015-12-08 12:03:31 MSG 127.0.0.1 Validation : Validation superviseur SYSTEM <InformatiqueSupport.AVIGNON@agis-sa.fr> anne-marie.bourguignon@agis-sa.fr
+FTA/Validée: "23445 - RIZ CANTO TRFE 6X300G"
+La Fiche Technique Article "23445 - RIZ CANTO TRFE 6X300G" vient d'être validée.
+Cet Article est maintenant actif et disponible dans l'ensemble de notre système informatique.
+
+INFORMATIONS PRINCIPALES:
+Site d'assemblage: AVIGNON
+
+Listes des produits créés:
+30783086, 
+
+INFORMATIONS SUPPLEMENTAIRES:
+Code Article LDC: 23445
+Gencod EAN Article: 3366760011029
+Gencod EAN Colis: 13366760011026
+Nombre d'UVC par colis: 6
+Poids net de l'unité de vente facturée (en Kg): 0.3
+Identifiant du Dossier Technique: 325-v27
+Unité de facturation: Pièce
+Durée de vie garantie client (en jours): 11
+Durée de vie Production (en jours): 35
+Désignation Commerciale: RIZ CANTONAIS
+
+
+COMMENTAIRE:
+
+==============================
+==============================
+Date: 2015-08-13
+Login du modificateur: ck4301627
+
+MAJ COMPOSITION
+
+Bonne journée à tous.
+Ce message a été envoyé automatiquement par le module Intranet - Fiche Technique Article.
+
+2015-12-08 12:03:31 MSG 127.0.0.1 Validation : Validation superviseur SYSTEM <InformatiqueSupport.AVIGNON@agis-sa.fr> InformatiqueSupport.AVIGNON@agis-sa.fr
+FTA/Validée: "23445 - RIZ CANTO TRFE 6X300G"
+La Fiche Technique Article "23445 - RIZ CANTO TRFE 6X300G" vient d'être validée.
+Cet Article est maintenant actif et disponible dans l'ensemble de notre système informatique.
+
+INFORMATIONS PRINCIPALES:
+Site d'assemblage: AVIGNON
+
+Listes des produits créés:
+30783086, 
+
+INFORMATIONS SUPPLEMENTAIRES:
+Code Article LDC: 23445
+Gencod EAN Article: 3366760011029
+Gencod EAN Colis: 13366760011026
+Nombre d'UVC par colis: 6
+Poids net de l'unité de vente facturée (en Kg): 0.3
+Identifiant du Dossier Technique: 325-v27
+Unité de facturation: Pièce
+Durée de vie garantie client (en jours): 11
+Durée de vie Production (en jours): 35
+Désignation Commerciale: RIZ CANTONAIS
+
+
+COMMENTAIRE:
+
+==============================
+==============================
+Date: 2015-08-13
+Login du modificateur: ck4301627
+
+MAJ COMPOSITION
+
+Bonne journée à tous.
+Ce message a été envoyé automatiquement par le module Intranet - Fiche Technique Article.
+
+2015-12-08 12:03:31 MSG 127.0.0.1 Validation : Validation superviseur SYSTEM <InformatiqueSupport.AVIGNON@agis-sa.fr> sarah-emilie bernard
+FTA/Validée: "23445 - RIZ CANTO TRFE 6X300G"
+La Fiche Technique Article "23445 - RIZ CANTO TRFE 6X300G" vient d'être validée.
+Cet Article est maintenant actif et disponible dans l'ensemble de notre système informatique.
+
+INFORMATIONS PRINCIPALES:
+Site d'assemblage: AVIGNON
+
+Listes des produits créés:
+30783086, 
+
+INFORMATIONS SUPPLEMENTAIRES:
+Code Article LDC: 23445
+Gencod EAN Article: 3366760011029
+Gencod EAN Colis: 13366760011026
+Nombre d'UVC par colis: 6
+Poids net de l'unité de vente facturée (en Kg): 0.3
+Identifiant du Dossier Technique: 325-v27
+Unité de facturation: Pièce
+Durée de vie garantie client (en jours): 11
+Durée de vie Production (en jours): 35
+Désignation Commerciale: RIZ CANTONAIS
+
+
+COMMENTAIRE:
+
+==============================
+==============================
+Date: 2015-08-13
+Login du modificateur: ck4301627
+
+MAJ COMPOSITION
+
+Bonne journée à tous.
+Ce message a été envoyé automatiquement par le module Intranet - Fiche Technique Article.
+
+2015-12-08 12:03:31 MSG 127.0.0.1 Validation : Validation superviseur SYSTEM <InformatiqueSupport.AVIGNON@agis-sa.fr> fabienne.cheirezy@agis-sa.fr
+FTA/Validée: "23445 - RIZ CANTO TRFE 6X300G"
+La Fiche Technique Article "23445 - RIZ CANTO TRFE 6X300G" vient d'être validée.
+Cet Article est maintenant actif et disponible dans l'ensemble de notre système informatique.
+
+INFORMATIONS PRINCIPALES:
+Site d'assemblage: AVIGNON
+
+Listes des produits créés:
+30783086, 
+
+INFORMATIONS SUPPLEMENTAIRES:
+Code Article LDC: 23445
+Gencod EAN Article: 3366760011029
+Gencod EAN Colis: 13366760011026
+Nombre d'UVC par colis: 6
+Poids net de l'unité de vente facturée (en Kg): 0.3
+Identifiant du Dossier Technique: 325-v27
+Unité de facturation: Pièce
+Durée de vie garantie client (en jours): 11
+Durée de vie Production (en jours): 35
+Désignation Commerciale: RIZ CANTONAIS
+
+
+COMMENTAIRE:
+
+==============================
+==============================
+Date: 2015-08-13
+Login du modificateur: ck4301627
+
+MAJ COMPOSITION
+
+Bonne journée à tous.
+Ce message a été envoyé automatiquement par le module Intranet - Fiche Technique Article.
+
+2015-12-08 12:03:31 MSG 127.0.0.1 Validation : Validation superviseur SYSTEM <InformatiqueSupport.AVIGNON@agis-sa.fr> marie-paule.couget@agis-sa.fr
+FTA/Validée: "23445 - RIZ CANTO TRFE 6X300G"
+La Fiche Technique Article "23445 - RIZ CANTO TRFE 6X300G" vient d'être validée.
+Cet Article est maintenant actif et disponible dans l'ensemble de notre système informatique.
+
+INFORMATIONS PRINCIPALES:
+Site d'assemblage: AVIGNON
+
+Listes des produits créés:
+30783086, 
+
+INFORMATIONS SUPPLEMENTAIRES:
+Code Article LDC: 23445
+Gencod EAN Article: 3366760011029
+Gencod EAN Colis: 13366760011026
+Nombre d'UVC par colis: 6
+Poids net de l'unité de vente facturée (en Kg): 0.3
+Identifiant du Dossier Technique: 325-v27
+Unité de facturation: Pièce
+Durée de vie garantie client (en jours): 11
+Durée de vie Production (en jours): 35
+Désignation Commerciale: RIZ CANTONAIS
+
+
+COMMENTAIRE:
+
+==============================
+==============================
+Date: 2015-08-13
+Login du modificateur: ck4301627
+
+MAJ COMPOSITION
+
+Bonne journée à tous.
+Ce message a été envoyé automatiquement par le module Intranet - Fiche Technique Article.
+
+2015-12-08 12:03:31 MSG 127.0.0.1 Validation : Validation superviseur SYSTEM <InformatiqueSupport.AVIGNON@agis-sa.fr> marie-paule.couget@agis-sa.fr
+FTA/Validée: "23445 - RIZ CANTO TRFE 6X300G"
+La Fiche Technique Article "23445 - RIZ CANTO TRFE 6X300G" vient d'être validée.
+Cet Article est maintenant actif et disponible dans l'ensemble de notre système informatique.
+
+INFORMATIONS PRINCIPALES:
+Site d'assemblage: AVIGNON
+
+Listes des produits créés:
+30783086, 
+
+INFORMATIONS SUPPLEMENTAIRES:
+Code Article LDC: 23445
+Gencod EAN Article: 3366760011029
+Gencod EAN Colis: 13366760011026
+Nombre d'UVC par colis: 6
+Poids net de l'unité de vente facturée (en Kg): 0.3
+Identifiant du Dossier Technique: 325-v27
+Unité de facturation: Pièce
+Durée de vie garantie client (en jours): 11
+Durée de vie Production (en jours): 35
+Désignation Commerciale: RIZ CANTONAIS
+
+
+COMMENTAIRE:
+
+==============================
+==============================
+Date: 2015-08-13
+Login du modificateur: ck4301627
+
+MAJ COMPOSITION
+
+Bonne journée à tous.
+Ce message a été envoyé automatiquement par le module Intranet - Fiche Technique Article.
+
+2015-12-08 12:03:31 MSG 127.0.0.1 Validation : Validation superviseur SYSTEM <InformatiqueSupport.AVIGNON@agis-sa.fr> jessica.bres@agis-sa.fr
+FTA/Validée: "23445 - RIZ CANTO TRFE 6X300G"
+La Fiche Technique Article "23445 - RIZ CANTO TRFE 6X300G" vient d'être validée.
+Cet Article est maintenant actif et disponible dans l'ensemble de notre système informatique.
+
+INFORMATIONS PRINCIPALES:
+Site d'assemblage: AVIGNON
+
+Listes des produits créés:
+30783086, 
+
+INFORMATIONS SUPPLEMENTAIRES:
+Code Article LDC: 23445
+Gencod EAN Article: 3366760011029
+Gencod EAN Colis: 13366760011026
+Nombre d'UVC par colis: 6
+Poids net de l'unité de vente facturée (en Kg): 0.3
+Identifiant du Dossier Technique: 325-v27
+Unité de facturation: Pièce
+Durée de vie garantie client (en jours): 11
+Durée de vie Production (en jours): 35
+Désignation Commerciale: RIZ CANTONAIS
+
+
+COMMENTAIRE:
+
+==============================
+==============================
+Date: 2015-08-13
+Login du modificateur: ck4301627
+
+MAJ COMPOSITION
+
+Bonne journée à tous.
+Ce message a été envoyé automatiquement par le module Intranet - Fiche Technique Article.
+
+2015-12-08 12:03:31 MSG 127.0.0.1 Validation : Validation superviseur SYSTEM <InformatiqueSupport.AVIGNON@agis-sa.fr> laurence.prest-mauguin@agis-sa.fr
+FTA/Validée: "23445 - RIZ CANTO TRFE 6X300G"
+La Fiche Technique Article "23445 - RIZ CANTO TRFE 6X300G" vient d'être validée.
+Cet Article est maintenant actif et disponible dans l'ensemble de notre système informatique.
+
+INFORMATIONS PRINCIPALES:
+Site d'assemblage: AVIGNON
+
+Listes des produits créés:
+30783086, 
+
+INFORMATIONS SUPPLEMENTAIRES:
+Code Article LDC: 23445
+Gencod EAN Article: 3366760011029
+Gencod EAN Colis: 13366760011026
+Nombre d'UVC par colis: 6
+Poids net de l'unité de vente facturée (en Kg): 0.3
+Identifiant du Dossier Technique: 325-v27
+Unité de facturation: Pièce
+Durée de vie garantie client (en jours): 11
+Durée de vie Production (en jours): 35
+Désignation Commerciale: RIZ CANTONAIS
+
+
+COMMENTAIRE:
+
+==============================
+==============================
+Date: 2015-08-13
+Login du modificateur: ck4301627
+
+MAJ COMPOSITION
+
+Bonne journée à tous.
+Ce message a été envoyé automatiquement par le module Intranet - Fiche Technique Article.
+
+2015-12-08 12:03:31 MSG 127.0.0.1 Validation : Validation superviseur SYSTEM <InformatiqueSupport.AVIGNON@agis-sa.fr> chloe.viaux@agis-sa.fr
+FTA/Validée: "23445 - RIZ CANTO TRFE 6X300G"
+La Fiche Technique Article "23445 - RIZ CANTO TRFE 6X300G" vient d'être validée.
+Cet Article est maintenant actif et disponible dans l'ensemble de notre système informatique.
+
+INFORMATIONS PRINCIPALES:
+Site d'assemblage: AVIGNON
+
+Listes des produits créés:
+30783086, 
+
+INFORMATIONS SUPPLEMENTAIRES:
+Code Article LDC: 23445
+Gencod EAN Article: 3366760011029
+Gencod EAN Colis: 13366760011026
+Nombre d'UVC par colis: 6
+Poids net de l'unité de vente facturée (en Kg): 0.3
+Identifiant du Dossier Technique: 325-v27
+Unité de facturation: Pièce
+Durée de vie garantie client (en jours): 11
+Durée de vie Production (en jours): 35
+Désignation Commerciale: RIZ CANTONAIS
+
+
+COMMENTAIRE:
+
+==============================
+==============================
+Date: 2015-08-13
+Login du modificateur: ck4301627
+
+MAJ COMPOSITION
+
+Bonne journée à tous.
+Ce message a été envoyé automatiquement par le module Intranet - Fiche Technique Article.
+
+2015-12-08 12:03:31 MSG 127.0.0.1 Validation : Validation superviseur SYSTEM <InformatiqueSupport.AVIGNON@agis-sa.fr> gregory.pollet@agis-sa.fr
+FTA/Validée: "23445 - RIZ CANTO TRFE 6X300G"
+La Fiche Technique Article "23445 - RIZ CANTO TRFE 6X300G" vient d'être validée.
+Cet Article est maintenant actif et disponible dans l'ensemble de notre système informatique.
+
+INFORMATIONS PRINCIPALES:
+Site d'assemblage: AVIGNON
+
+Listes des produits créés:
+30783086, 
+
+INFORMATIONS SUPPLEMENTAIRES:
+Code Article LDC: 23445
+Gencod EAN Article: 3366760011029
+Gencod EAN Colis: 13366760011026
+Nombre d'UVC par colis: 6
+Poids net de l'unité de vente facturée (en Kg): 0.3
+Identifiant du Dossier Technique: 325-v27
+Unité de facturation: Pièce
+Durée de vie garantie client (en jours): 11
+Durée de vie Production (en jours): 35
+Désignation Commerciale: RIZ CANTONAIS
+
+
+COMMENTAIRE:
+
+==============================
+==============================
+Date: 2015-08-13
+Login du modificateur: ck4301627
+
+MAJ COMPOSITION
+
+Bonne journée à tous.
+Ce message a été envoyé automatiquement par le module Intranet - Fiche Technique Article.
+
+2015-12-08 12:03:31 MSG 127.0.0.1 Validation : Validation superviseur SYSTEM <InformatiqueSupport.AVIGNON@agis-sa.fr> alexandre.drone@agis-sa.fr
+FTA/Validée: "23445 - RIZ CANTO TRFE 6X300G"
+La Fiche Technique Article "23445 - RIZ CANTO TRFE 6X300G" vient d'être validée.
+Cet Article est maintenant actif et disponible dans l'ensemble de notre système informatique.
+
+INFORMATIONS PRINCIPALES:
+Site d'assemblage: AVIGNON
+
+Listes des produits créés:
+30783086, 
+
+INFORMATIONS SUPPLEMENTAIRES:
+Code Article LDC: 23445
+Gencod EAN Article: 3366760011029
+Gencod EAN Colis: 13366760011026
+Nombre d'UVC par colis: 6
+Poids net de l'unité de vente facturée (en Kg): 0.3
+Identifiant du Dossier Technique: 325-v27
+Unité de facturation: Pièce
+Durée de vie garantie client (en jours): 11
+Durée de vie Production (en jours): 35
+Désignation Commerciale: RIZ CANTONAIS
+
+
+COMMENTAIRE:
+
+==============================
+==============================
+Date: 2015-08-13
+Login du modificateur: ck4301627
+
+MAJ COMPOSITION
+
+Bonne journée à tous.
+Ce message a été envoyé automatiquement par le module Intranet - Fiche Technique Article.
+
+2015-12-08 12:03:31 MSG 127.0.0.1 Validation : Validation superviseur SYSTEM <InformatiqueSupport.AVIGNON@agis-sa.fr> julien.calvo@agis-sa.fr
+FTA/Validée: "23445 - RIZ CANTO TRFE 6X300G"
+La Fiche Technique Article "23445 - RIZ CANTO TRFE 6X300G" vient d'être validée.
+Cet Article est maintenant actif et disponible dans l'ensemble de notre système informatique.
+
+INFORMATIONS PRINCIPALES:
+Site d'assemblage: AVIGNON
+
+Listes des produits créés:
+30783086, 
+
+INFORMATIONS SUPPLEMENTAIRES:
+Code Article LDC: 23445
+Gencod EAN Article: 3366760011029
+Gencod EAN Colis: 13366760011026
+Nombre d'UVC par colis: 6
+Poids net de l'unité de vente facturée (en Kg): 0.3
+Identifiant du Dossier Technique: 325-v27
+Unité de facturation: Pièce
+Durée de vie garantie client (en jours): 11
+Durée de vie Production (en jours): 35
+Désignation Commerciale: RIZ CANTONAIS
+
+
+COMMENTAIRE:
+
+==============================
+==============================
+Date: 2015-08-13
+Login du modificateur: ck4301627
+
+MAJ COMPOSITION
+
+Bonne journée à tous.
+Ce message a été envoyé automatiquement par le module Intranet - Fiche Technique Article.
+
+2015-12-08 12:03:31 MSG 127.0.0.1 Validation : Validation superviseur SYSTEM <InformatiqueSupport.AVIGNON@agis-sa.fr> laura.badard@agis-sa.fr
+FTA/Validée: "23445 - RIZ CANTO TRFE 6X300G"
+La Fiche Technique Article "23445 - RIZ CANTO TRFE 6X300G" vient d'être validée.
+Cet Article est maintenant actif et disponible dans l'ensemble de notre système informatique.
+
+INFORMATIONS PRINCIPALES:
+Site d'assemblage: AVIGNON
+
+Listes des produits créés:
+30783086, 
+
+INFORMATIONS SUPPLEMENTAIRES:
+Code Article LDC: 23445
+Gencod EAN Article: 3366760011029
+Gencod EAN Colis: 13366760011026
+Nombre d'UVC par colis: 6
+Poids net de l'unité de vente facturée (en Kg): 0.3
+Identifiant du Dossier Technique: 325-v27
+Unité de facturation: Pièce
+Durée de vie garantie client (en jours): 11
+Durée de vie Production (en jours): 35
+Désignation Commerciale: RIZ CANTONAIS
+
+
+COMMENTAIRE:
+
+==============================
+==============================
+Date: 2015-08-13
+Login du modificateur: ck4301627
+
+MAJ COMPOSITION
+
+Bonne journée à tous.
+Ce message a été envoyé automatiquement par le module Intranet - Fiche Technique Article.
+
+2015-12-08 12:03:31 MSG 127.0.0.1 Validation : Validation superviseur SYSTEM <InformatiqueSupport.AVIGNON@agis-sa.fr> juliette.vernerey@agis-sa.fr
+FTA/Validée: "23445 - RIZ CANTO TRFE 6X300G"
+La Fiche Technique Article "23445 - RIZ CANTO TRFE 6X300G" vient d'être validée.
+Cet Article est maintenant actif et disponible dans l'ensemble de notre système informatique.
+
+INFORMATIONS PRINCIPALES:
+Site d'assemblage: AVIGNON
+
+Listes des produits créés:
+30783086, 
+
+INFORMATIONS SUPPLEMENTAIRES:
+Code Article LDC: 23445
+Gencod EAN Article: 3366760011029
+Gencod EAN Colis: 13366760011026
+Nombre d'UVC par colis: 6
+Poids net de l'unité de vente facturée (en Kg): 0.3
+Identifiant du Dossier Technique: 325-v27
+Unité de facturation: Pièce
+Durée de vie garantie client (en jours): 11
+Durée de vie Production (en jours): 35
+Désignation Commerciale: RIZ CANTONAIS
+
+
+COMMENTAIRE:
+
+==============================
+==============================
+Date: 2015-08-13
+Login du modificateur: ck4301627
+
+MAJ COMPOSITION
+
+Bonne journée à tous.
+Ce message a été envoyé automatiquement par le module Intranet - Fiche Technique Article.
+
+2015-12-08 12:03:31 MSG 127.0.0.1 Validation : Validation superviseur SYSTEM <InformatiqueSupport.AVIGNON@agis-sa.fr> benjamin.traniello@agis-sa.fr
+FTA/Validée: "23445 - RIZ CANTO TRFE 6X300G"
+La Fiche Technique Article "23445 - RIZ CANTO TRFE 6X300G" vient d'être validée.
+Cet Article est maintenant actif et disponible dans l'ensemble de notre système informatique.
+
+INFORMATIONS PRINCIPALES:
+Site d'assemblage: AVIGNON
+
+Listes des produits créés:
+30783086, 
+
+INFORMATIONS SUPPLEMENTAIRES:
+Code Article LDC: 23445
+Gencod EAN Article: 3366760011029
+Gencod EAN Colis: 13366760011026
+Nombre d'UVC par colis: 6
+Poids net de l'unité de vente facturée (en Kg): 0.3
+Identifiant du Dossier Technique: 325-v27
+Unité de facturation: Pièce
+Durée de vie garantie client (en jours): 11
+Durée de vie Production (en jours): 35
+Désignation Commerciale: RIZ CANTONAIS
+
+
+COMMENTAIRE:
+
+==============================
+==============================
+Date: 2015-08-13
+Login du modificateur: ck4301627
+
+MAJ COMPOSITION
+
+Bonne journée à tous.
+Ce message a été envoyé automatiquement par le module Intranet - Fiche Technique Article.
+
+2015-12-08 12:03:31 MSG 127.0.0.1 Validation : Validation superviseur SYSTEM <InformatiqueSupport.AVIGNON@agis-sa.fr> Marine.JOUANEM@agis-sa.fr
+FTA/Validée: "23445 - RIZ CANTO TRFE 6X300G"
+La Fiche Technique Article "23445 - RIZ CANTO TRFE 6X300G" vient d'être validée.
+Cet Article est maintenant actif et disponible dans l'ensemble de notre système informatique.
+
+INFORMATIONS PRINCIPALES:
+Site d'assemblage: AVIGNON
+
+Listes des produits créés:
+30783086, 
+
+INFORMATIONS SUPPLEMENTAIRES:
+Code Article LDC: 23445
+Gencod EAN Article: 3366760011029
+Gencod EAN Colis: 13366760011026
+Nombre d'UVC par colis: 6
+Poids net de l'unité de vente facturée (en Kg): 0.3
+Identifiant du Dossier Technique: 325-v27
+Unité de facturation: Pièce
+Durée de vie garantie client (en jours): 11
+Durée de vie Production (en jours): 35
+Désignation Commerciale: RIZ CANTONAIS
+
+
+COMMENTAIRE:
+
+==============================
+==============================
+Date: 2015-08-13
+Login du modificateur: ck4301627
+
+MAJ COMPOSITION
+
+Bonne journée à tous.
+Ce message a été envoyé automatiquement par le module Intranet - Fiche Technique Article.
+
+2015-12-08 12:03:31 MSG 127.0.0.1 Validation : Validation superviseur SYSTEM <InformatiqueSupport.AVIGNON@agis-sa.fr> informatique.agis@agis-sa.fr
+FTA/Validée: "23445 - RIZ CANTO TRFE 6X300G"
+La Fiche Technique Article "23445 - RIZ CANTO TRFE 6X300G" vient d'être validée.
+Cet Article est maintenant actif et disponible dans l'ensemble de notre système informatique.
+
+INFORMATIONS PRINCIPALES:
+Site d'assemblage: AVIGNON
+
+Listes des produits créés:
+30783086, 
+
+INFORMATIONS SUPPLEMENTAIRES:
+Code Article LDC: 23445
+Gencod EAN Article: 3366760011029
+Gencod EAN Colis: 13366760011026
+Nombre d'UVC par colis: 6
+Poids net de l'unité de vente facturée (en Kg): 0.3
+Identifiant du Dossier Technique: 325-v27
+Unité de facturation: Pièce
+Durée de vie garantie client (en jours): 11
+Durée de vie Production (en jours): 35
+Désignation Commerciale: RIZ CANTONAIS
+
+
+COMMENTAIRE:
+
+==============================
+==============================
+Date: 2015-08-13
+Login du modificateur: ck4301627
+
+MAJ COMPOSITION
+
+Bonne journée à tous.
+Ce message a été envoyé automatiquement par le module Intranet - Fiche Technique Article.
+
+2015-12-08 12:03:31 MSG 127.0.0.1 Validation : Validation superviseur SYSTEM <InformatiqueSupport.AVIGNON@agis-sa.fr> cecile.klein@agis-sa.fr
+FTA/Validée: "23445 - RIZ CANTO TRFE 6X300G"
+La Fiche Technique Article "23445 - RIZ CANTO TRFE 6X300G" vient d'être validée.
+Cet Article est maintenant actif et disponible dans l'ensemble de notre système informatique.
+
+INFORMATIONS PRINCIPALES:
+Site d'assemblage: AVIGNON
+
+Listes des produits créés:
+30783086, 
+
+INFORMATIONS SUPPLEMENTAIRES:
+Code Article LDC: 23445
+Gencod EAN Article: 3366760011029
+Gencod EAN Colis: 13366760011026
+Nombre d'UVC par colis: 6
+Poids net de l'unité de vente facturée (en Kg): 0.3
+Identifiant du Dossier Technique: 325-v27
+Unité de facturation: Pièce
+Durée de vie garantie client (en jours): 11
+Durée de vie Production (en jours): 35
+Désignation Commerciale: RIZ CANTONAIS
+
+
+COMMENTAIRE:
+
+==============================
+==============================
+Date: 2015-08-13
+Login du modificateur: ck4301627
+
+MAJ COMPOSITION
+
+Bonne journée à tous.
+Ce message a été envoyé automatiquement par le module Intranet - Fiche Technique Article.
+
+2015-12-08 12:03:31 MSG 127.0.0.1 Validation : Validation superviseur SYSTEM <InformatiqueSupport.AVIGNON@agis-sa.fr> 
+
+FTA/Validée: "23445 - RIZ CANTO TRFE 6X300G"
+La Fiche Technique Article "23445 - RIZ CANTO TRFE 6X300G" vient d'être validée.
+Cet Article est maintenant actif et disponible dans l'ensemble de notre système informatique.
+
+INFORMATIONS PRINCIPALES:
+Site d'assemblage: AVIGNON
+
+Listes des produits créés:
+30783086, 
+
+INFORMATIONS SUPPLEMENTAIRES:
+Code Article LDC: 23445
+Gencod EAN Article: 3366760011029
+Gencod EAN Colis: 13366760011026
+Nombre d'UVC par colis: 6
+Poids net de l'unité de vente facturée (en Kg): 0.3
+Identifiant du Dossier Technique: 325-v27
+Unité de facturation: Pièce
+Durée de vie garantie client (en jours): 11
+Durée de vie Production (en jours): 35
+Désignation Commerciale: RIZ CANTONAIS
+
+
+COMMENTAIRE:
+
+==============================
+==============================
+Date: 2015-08-13
+Login du modificateur: ck4301627
+
+MAJ COMPOSITION
+
+Bonne journée à tous.
+Ce message a été envoyé automatiquement par le module Intranet - Fiche Technique Article.
+
+2015-12-08 12:03:31 MSG 127.0.0.1 Validation : Validation superviseur SYSTEM <InformatiqueSupport.AVIGNON@agis-sa.fr> InformatiqueSupport.AVIGNON@agis-sa.fr
+FTA/Information "23445 - RIZ CANTO TRFE 6X300G"
+DESTINATAIRES:
+SYSTEM superviseur: InformatiqueSupport.AVIGNON@agis-sa.fr
+JAEGLE cecile: cecile.jaegle@agis-sa.fr
+MORIN stephane: stephane.morin@ldc.fr
+SANEGRE boris: boris.sanegre@agis-sa.fr
+LUCAS christine: christine.lucas@agis-sa.fr
+WEYMULLER julie: julie.weymuller@agis-sa.fr
+COUSTON Jasmine: jasmine.couston@agis-sa.fr
+CHOLLET Christine: christine.alberola@agis-sa.fr
+PFISTER cecile: cecile.pfister@agis-sa.fr
+GASTAL Annabel: annabel.gastal@agis-sa.fr
+TARDY lise: lise.tardy@agis-sa.fr
+COUGET marie-paule (R&D): marie-paule.couget@agis-sa.fr
+EMBALLAGE Avignon: christelle.bernard@agis-sa.fr
+RAGON johan: johan.ragon@agis-sa.fr
+MEROT mathieu: mathieu.merot@agis-sa.fr
+DUSSAUD lucile: lucile.dussaud@agis-sa.fr
+BERTAUX virginie: virginie.bertaux@agis-sa.fr
+BOURGUIGNON anne-marie: anne-marie.bourguignon@agis-sa.fr
+FTA Création FTA: InformatiqueSupport.AVIGNON@agis-sa.fr
+BERNARD Sarah-emilie: sarah-emilie bernard
+CHEIREZY Fabienne: fabienne.cheirezy@agis-sa.fr
+COUGET Marie-Paule (Création FTA): marie-paule.couget@agis-sa.fr
+COUGET marie-paule (Gestion): marie-paule.couget@agis-sa.fr
+BRES Jessica: jessica.bres@agis-sa.fr
+PREST-MAUGUIN Laurence: laurence.prest-mauguin@agis-sa.fr
+VIAUX Chloe: chloe.viaux@agis-sa.fr
+POLLET Gregory: gregory.pollet@agis-sa.fr
+DRONE Alexandre: alexandre.drone@agis-sa.fr
+CALVO Julien: julien.calvo@agis-sa.fr
+BADARD Laura: laura.badard@agis-sa.fr
+VERNEREY Juliette: juliette.vernerey@agis-sa.fr
+TRANIELLO Benjamin: benjamin.traniello@agis-sa.fr
+JOUANEM Marine: Marine.JOUANEM@agis-sa.fr
+NINJA Avignon: informatique.agis@agis-sa.fr
+KLEIN Cécile: cecile.klein@agis-sa.fr
+
+: 
+
+
+
+Message envoyé:
+
+La Fiche Technique Article "23445 - RIZ CANTO TRFE 6X300G" vient d'être validée.
+Cet Article est maintenant actif et disponible dans l'ensemble de notre système informatique.
+
+INFORMATIONS PRINCIPALES:
+Site d'assemblage: AVIGNON
+
+Listes des produits créés:
+30783086, 
+
+INFORMATIONS SUPPLEMENTAIRES:
+Code Article LDC: 23445
+Gencod EAN Article: 3366760011029
+Gencod EAN Colis: 13366760011026
+Nombre d'UVC par colis: 6
+Poids net de l'unité de vente facturée (en Kg): 0.3
+Identifiant du Dossier Technique: 325-v27
+Unité de facturation: Pièce
+Durée de vie garantie client (en jours): 11
+Durée de vie Production (en jours): 35
+Désignation Commerciale: RIZ CANTONAIS
+
+
+COMMENTAIRE:
+
+==============================
+==============================
+Date: 2015-08-13
+Login du modificateur: ck4301627
+
+MAJ COMPOSITION
+
+Bonne journée à tous.
+Ce message a été envoyé automatiquement par le module Intranet - Fiche Technique Article.
+
+INFORMATIONS DE DEBUGGAGE:
+
+
+SELECT code_produit_agrologic_fta_nomenclature,prefixe_annexe_agrologic_article_codification FROM fta_composant, annexe_agrologic_article_codification WHERE fta_composant.id_fta=14055 AND is_composition_fta_composant=1  AND fta_composant.id_annexe_agrologic_article_codification=annexe_agrologic_article_codification.id_annexe_agrologic_article_codification ORDER BY prefixe_annexe_agrologic_article_codification ASC, nom_fta_nomenclature
+2015-12-08 13:22:46 MSG 127.0.0.1 Validation : Validation superviseur SYSTEM <InformatiqueSupport.AVIGNON@agis-sa.fr> cecile.jaegle@agis-sa.fr
+FTA/Validée: "43180 - MINI SAM VOLAIL BF MDAUC 6X240G"
+La Fiche Technique Article "43180 - MINI SAM VOLAIL BF MDAUC 6X240G" vient d'être validée.
+Cet Article est maintenant actif et disponible dans l'ensemble de notre système informatique.
+
+INFORMATIONS PRINCIPALES:
+Site d'assemblage: TARARE
+
+Listes des produits créés:
+00, 0121663, 0121637, 
+
+INFORMATIONS SUPPLEMENTAIRES:
+Code Article LDC: 43180
+Gencod EAN Article: 3596710362387
+Gencod EAN Colis: 13596710362384
+Nombre d'UVC par colis: 6
+Poids net de l'unité de vente facturée (en Kg): 0.24
+Identifiant du Dossier Technique: 6220-v2
+Unité de facturation: Pièce
+Durée de vie garantie client (en jours): 18
+Durée de vie Production (en jours): 29
+Désignation Commerciale: MINI SAMOSSAS VOLAILLE ET BOEUF 8 X 25 G
+
+
+COMMENTAIRE:
+
+==============================
+==============================
+Date: 2015-12-08
+Login du modificateur: superviseur
+
+r
+
+Bonne journée à tous.
+Ce message a été envoyé automatiquement par le module Intranet - Fiche Technique Article.
+
+2015-12-08 13:22:46 MSG 127.0.0.1 Validation : Validation superviseur SYSTEM <InformatiqueSupport.AVIGNON@agis-sa.fr> stephane.morin@ldc.fr
+FTA/Validée: "43180 - MINI SAM VOLAIL BF MDAUC 6X240G"
+La Fiche Technique Article "43180 - MINI SAM VOLAIL BF MDAUC 6X240G" vient d'être validée.
+Cet Article est maintenant actif et disponible dans l'ensemble de notre système informatique.
+
+INFORMATIONS PRINCIPALES:
+Site d'assemblage: TARARE
+
+Listes des produits créés:
+00, 0121663, 0121637, 
+
+INFORMATIONS SUPPLEMENTAIRES:
+Code Article LDC: 43180
+Gencod EAN Article: 3596710362387
+Gencod EAN Colis: 13596710362384
+Nombre d'UVC par colis: 6
+Poids net de l'unité de vente facturée (en Kg): 0.24
+Identifiant du Dossier Technique: 6220-v2
+Unité de facturation: Pièce
+Durée de vie garantie client (en jours): 18
+Durée de vie Production (en jours): 29
+Désignation Commerciale: MINI SAMOSSAS VOLAILLE ET BOEUF 8 X 25 G
+
+
+COMMENTAIRE:
+
+==============================
+==============================
+Date: 2015-12-08
+Login du modificateur: superviseur
+
+r
+
+Bonne journée à tous.
+Ce message a été envoyé automatiquement par le module Intranet - Fiche Technique Article.
+
+2015-12-08 13:22:46 MSG 127.0.0.1 Validation : Validation superviseur SYSTEM <InformatiqueSupport.AVIGNON@agis-sa.fr> christine.lucas@agis-sa.fr
+FTA/Validée: "43180 - MINI SAM VOLAIL BF MDAUC 6X240G"
+La Fiche Technique Article "43180 - MINI SAM VOLAIL BF MDAUC 6X240G" vient d'être validée.
+Cet Article est maintenant actif et disponible dans l'ensemble de notre système informatique.
+
+INFORMATIONS PRINCIPALES:
+Site d'assemblage: TARARE
+
+Listes des produits créés:
+00, 0121663, 0121637, 
+
+INFORMATIONS SUPPLEMENTAIRES:
+Code Article LDC: 43180
+Gencod EAN Article: 3596710362387
+Gencod EAN Colis: 13596710362384
+Nombre d'UVC par colis: 6
+Poids net de l'unité de vente facturée (en Kg): 0.24
+Identifiant du Dossier Technique: 6220-v2
+Unité de facturation: Pièce
+Durée de vie garantie client (en jours): 18
+Durée de vie Production (en jours): 29
+Désignation Commerciale: MINI SAMOSSAS VOLAILLE ET BOEUF 8 X 25 G
+
+
+COMMENTAIRE:
+
+==============================
+==============================
+Date: 2015-12-08
+Login du modificateur: superviseur
+
+r
+
+Bonne journée à tous.
+Ce message a été envoyé automatiquement par le module Intranet - Fiche Technique Article.
+
+2015-12-08 13:22:46 MSG 127.0.0.1 Validation : Validation superviseur SYSTEM <InformatiqueSupport.AVIGNON@agis-sa.fr> InformatiqueSupport.AVIGNON@agis-sa.fr
+FTA/Validée: "43180 - MINI SAM VOLAIL BF MDAUC 6X240G"
+La Fiche Technique Article "43180 - MINI SAM VOLAIL BF MDAUC 6X240G" vient d'être validée.
+Cet Article est maintenant actif et disponible dans l'ensemble de notre système informatique.
+
+INFORMATIONS PRINCIPALES:
+Site d'assemblage: TARARE
+
+Listes des produits créés:
+00, 0121663, 0121637, 
+
+INFORMATIONS SUPPLEMENTAIRES:
+Code Article LDC: 43180
+Gencod EAN Article: 3596710362387
+Gencod EAN Colis: 13596710362384
+Nombre d'UVC par colis: 6
+Poids net de l'unité de vente facturée (en Kg): 0.24
+Identifiant du Dossier Technique: 6220-v2
+Unité de facturation: Pièce
+Durée de vie garantie client (en jours): 18
+Durée de vie Production (en jours): 29
+Désignation Commerciale: MINI SAMOSSAS VOLAILLE ET BOEUF 8 X 25 G
+
+
+COMMENTAIRE:
+
+==============================
+==============================
+Date: 2015-12-08
+Login du modificateur: superviseur
+
+r
+
+Bonne journée à tous.
+Ce message a été envoyé automatiquement par le module Intranet - Fiche Technique Article.
+
+2015-12-08 13:22:46 MSG 127.0.0.1 Validation : Validation superviseur SYSTEM <InformatiqueSupport.AVIGNON@agis-sa.fr> virginie.bertaux@agis-sa.fr
+FTA/Validée: "43180 - MINI SAM VOLAIL BF MDAUC 6X240G"
+La Fiche Technique Article "43180 - MINI SAM VOLAIL BF MDAUC 6X240G" vient d'être validée.
+Cet Article est maintenant actif et disponible dans l'ensemble de notre système informatique.
+
+INFORMATIONS PRINCIPALES:
+Site d'assemblage: TARARE
+
+Listes des produits créés:
+00, 0121663, 0121637, 
+
+INFORMATIONS SUPPLEMENTAIRES:
+Code Article LDC: 43180
+Gencod EAN Article: 3596710362387
+Gencod EAN Colis: 13596710362384
+Nombre d'UVC par colis: 6
+Poids net de l'unité de vente facturée (en Kg): 0.24
+Identifiant du Dossier Technique: 6220-v2
+Unité de facturation: Pièce
+Durée de vie garantie client (en jours): 18
+Durée de vie Production (en jours): 29
+Désignation Commerciale: MINI SAMOSSAS VOLAILLE ET BOEUF 8 X 25 G
+
+
+COMMENTAIRE:
+
+==============================
+==============================
+Date: 2015-12-08
+Login du modificateur: superviseur
+
+r
+
+Bonne journée à tous.
+Ce message a été envoyé automatiquement par le module Intranet - Fiche Technique Article.
+
+2015-12-08 13:22:46 MSG 127.0.0.1 Validation : Validation superviseur SYSTEM <InformatiqueSupport.AVIGNON@agis-sa.fr> catherine.lardiere@agis-sa.fr
+FTA/Validée: "43180 - MINI SAM VOLAIL BF MDAUC 6X240G"
+La Fiche Technique Article "43180 - MINI SAM VOLAIL BF MDAUC 6X240G" vient d'être validée.
+Cet Article est maintenant actif et disponible dans l'ensemble de notre système informatique.
+
+INFORMATIONS PRINCIPALES:
+Site d'assemblage: TARARE
+
+Listes des produits créés:
+00, 0121663, 0121637, 
+
+INFORMATIONS SUPPLEMENTAIRES:
+Code Article LDC: 43180
+Gencod EAN Article: 3596710362387
+Gencod EAN Colis: 13596710362384
+Nombre d'UVC par colis: 6
+Poids net de l'unité de vente facturée (en Kg): 0.24
+Identifiant du Dossier Technique: 6220-v2
+Unité de facturation: Pièce
+Durée de vie garantie client (en jours): 18
+Durée de vie Production (en jours): 29
+Désignation Commerciale: MINI SAMOSSAS VOLAILLE ET BOEUF 8 X 25 G
+
+
+COMMENTAIRE:
+
+==============================
+==============================
+Date: 2015-12-08
+Login du modificateur: superviseur
+
+r
+
+Bonne journée à tous.
+Ce message a été envoyé automatiquement par le module Intranet - Fiche Technique Article.
+
+2015-12-08 13:22:46 MSG 127.0.0.1 Validation : Validation superviseur SYSTEM <InformatiqueSupport.AVIGNON@agis-sa.fr> marie-paule.couget@agis-sa.fr
+FTA/Validée: "43180 - MINI SAM VOLAIL BF MDAUC 6X240G"
+La Fiche Technique Article "43180 - MINI SAM VOLAIL BF MDAUC 6X240G" vient d'être validée.
+Cet Article est maintenant actif et disponible dans l'ensemble de notre système informatique.
+
+INFORMATIONS PRINCIPALES:
+Site d'assemblage: TARARE
+
+Listes des produits créés:
+00, 0121663, 0121637, 
+
+INFORMATIONS SUPPLEMENTAIRES:
+Code Article LDC: 43180
+Gencod EAN Article: 3596710362387
+Gencod EAN Colis: 13596710362384
+Nombre d'UVC par colis: 6
+Poids net de l'unité de vente facturée (en Kg): 0.24
+Identifiant du Dossier Technique: 6220-v2
+Unité de facturation: Pièce
+Durée de vie garantie client (en jours): 18
+Durée de vie Production (en jours): 29
+Désignation Commerciale: MINI SAMOSSAS VOLAILLE ET BOEUF 8 X 25 G
+
+
+COMMENTAIRE:
+
+==============================
+==============================
+Date: 2015-12-08
+Login du modificateur: superviseur
+
+r
+
+Bonne journée à tous.
+Ce message a été envoyé automatiquement par le module Intranet - Fiche Technique Article.
+
+2015-12-08 13:22:46 MSG 127.0.0.1 Validation : Validation superviseur SYSTEM <InformatiqueSupport.AVIGNON@agis-sa.fr> christine.alberola@agis-sa.fr
+FTA/Validée: "43180 - MINI SAM VOLAIL BF MDAUC 6X240G"
+La Fiche Technique Article "43180 - MINI SAM VOLAIL BF MDAUC 6X240G" vient d'être validée.
+Cet Article est maintenant actif et disponible dans l'ensemble de notre système informatique.
+
+INFORMATIONS PRINCIPALES:
+Site d'assemblage: TARARE
+
+Listes des produits créés:
+00, 0121663, 0121637, 
+
+INFORMATIONS SUPPLEMENTAIRES:
+Code Article LDC: 43180
+Gencod EAN Article: 3596710362387
+Gencod EAN Colis: 13596710362384
+Nombre d'UVC par colis: 6
+Poids net de l'unité de vente facturée (en Kg): 0.24
+Identifiant du Dossier Technique: 6220-v2
+Unité de facturation: Pièce
+Durée de vie garantie client (en jours): 18
+Durée de vie Production (en jours): 29
+Désignation Commerciale: MINI SAMOSSAS VOLAILLE ET BOEUF 8 X 25 G
+
+
+COMMENTAIRE:
+
+==============================
+==============================
+Date: 2015-12-08
+Login du modificateur: superviseur
+
+r
+
+Bonne journée à tous.
+Ce message a été envoyé automatiquement par le module Intranet - Fiche Technique Article.
+
+2015-12-08 13:22:46 MSG 127.0.0.1 Validation : Validation superviseur SYSTEM <InformatiqueSupport.AVIGNON@agis-sa.fr> marie.durdilly@agis-sa.fr
+FTA/Validée: "43180 - MINI SAM VOLAIL BF MDAUC 6X240G"
+La Fiche Technique Article "43180 - MINI SAM VOLAIL BF MDAUC 6X240G" vient d'être validée.
+Cet Article est maintenant actif et disponible dans l'ensemble de notre système informatique.
+
+INFORMATIONS PRINCIPALES:
+Site d'assemblage: TARARE
+
+Listes des produits créés:
+00, 0121663, 0121637, 
+
+INFORMATIONS SUPPLEMENTAIRES:
+Code Article LDC: 43180
+Gencod EAN Article: 3596710362387
+Gencod EAN Colis: 13596710362384
+Nombre d'UVC par colis: 6
+Poids net de l'unité de vente facturée (en Kg): 0.24
+Identifiant du Dossier Technique: 6220-v2
+Unité de facturation: Pièce
+Durée de vie garantie client (en jours): 18
+Durée de vie Production (en jours): 29
+Désignation Commerciale: MINI SAMOSSAS VOLAILLE ET BOEUF 8 X 25 G
+
+
+COMMENTAIRE:
+
+==============================
+==============================
+Date: 2015-12-08
+Login du modificateur: superviseur
+
+r
+
+Bonne journée à tous.
+Ce message a été envoyé automatiquement par le module Intranet - Fiche Technique Article.
+
+2015-12-08 13:22:46 MSG 127.0.0.1 Validation : Validation superviseur SYSTEM <InformatiqueSupport.AVIGNON@agis-sa.fr> boris.sanegre@agis-sa.fr
+FTA/Validée: "43180 - MINI SAM VOLAIL BF MDAUC 6X240G"
+La Fiche Technique Article "43180 - MINI SAM VOLAIL BF MDAUC 6X240G" vient d'être validée.
+Cet Article est maintenant actif et disponible dans l'ensemble de notre système informatique.
+
+INFORMATIONS PRINCIPALES:
+Site d'assemblage: TARARE
+
+Listes des produits créés:
+00, 0121663, 0121637, 
+
+INFORMATIONS SUPPLEMENTAIRES:
+Code Article LDC: 43180
+Gencod EAN Article: 3596710362387
+Gencod EAN Colis: 13596710362384
+Nombre d'UVC par colis: 6
+Poids net de l'unité de vente facturée (en Kg): 0.24
+Identifiant du Dossier Technique: 6220-v2
+Unité de facturation: Pièce
+Durée de vie garantie client (en jours): 18
+Durée de vie Production (en jours): 29
+Désignation Commerciale: MINI SAMOSSAS VOLAILLE ET BOEUF 8 X 25 G
+
+
+COMMENTAIRE:
+
+==============================
+==============================
+Date: 2015-12-08
+Login du modificateur: superviseur
+
+r
+
+Bonne journée à tous.
+Ce message a été envoyé automatiquement par le module Intranet - Fiche Technique Article.
+
+2015-12-08 13:22:46 MSG 127.0.0.1 Validation : Validation superviseur SYSTEM <InformatiqueSupport.AVIGNON@agis-sa.fr> Aurelien.GARIN@agis-sa.fr
+FTA/Validée: "43180 - MINI SAM VOLAIL BF MDAUC 6X240G"
+La Fiche Technique Article "43180 - MINI SAM VOLAIL BF MDAUC 6X240G" vient d'être validée.
+Cet Article est maintenant actif et disponible dans l'ensemble de notre système informatique.
+
+INFORMATIONS PRINCIPALES:
+Site d'assemblage: TARARE
+
+Listes des produits créés:
+00, 0121663, 0121637, 
+
+INFORMATIONS SUPPLEMENTAIRES:
+Code Article LDC: 43180
+Gencod EAN Article: 3596710362387
+Gencod EAN Colis: 13596710362384
+Nombre d'UVC par colis: 6
+Poids net de l'unité de vente facturée (en Kg): 0.24
+Identifiant du Dossier Technique: 6220-v2
+Unité de facturation: Pièce
+Durée de vie garantie client (en jours): 18
+Durée de vie Production (en jours): 29
+Désignation Commerciale: MINI SAMOSSAS VOLAILLE ET BOEUF 8 X 25 G
+
+
+COMMENTAIRE:
+
+==============================
+==============================
+Date: 2015-12-08
+Login du modificateur: superviseur
+
+r
+
+Bonne journée à tous.
+Ce message a été envoyé automatiquement par le module Intranet - Fiche Technique Article.
+
+2015-12-08 13:22:46 MSG 127.0.0.1 Validation : Validation superviseur SYSTEM <InformatiqueSupport.AVIGNON@agis-sa.fr> julie.weymuller@agis-sa.fr
+FTA/Validée: "43180 - MINI SAM VOLAIL BF MDAUC 6X240G"
+La Fiche Technique Article "43180 - MINI SAM VOLAIL BF MDAUC 6X240G" vient d'être validée.
+Cet Article est maintenant actif et disponible dans l'ensemble de notre système informatique.
+
+INFORMATIONS PRINCIPALES:
+Site d'assemblage: TARARE
+
+Listes des produits créés:
+00, 0121663, 0121637, 
+
+INFORMATIONS SUPPLEMENTAIRES:
+Code Article LDC: 43180
+Gencod EAN Article: 3596710362387
+Gencod EAN Colis: 13596710362384
+Nombre d'UVC par colis: 6
+Poids net de l'unité de vente facturée (en Kg): 0.24
+Identifiant du Dossier Technique: 6220-v2
+Unité de facturation: Pièce
+Durée de vie garantie client (en jours): 18
+Durée de vie Production (en jours): 29
+Désignation Commerciale: MINI SAMOSSAS VOLAILLE ET BOEUF 8 X 25 G
+
+
+COMMENTAIRE:
+
+==============================
+==============================
+Date: 2015-12-08
+Login du modificateur: superviseur
+
+r
+
+Bonne journée à tous.
+Ce message a été envoyé automatiquement par le module Intranet - Fiche Technique Article.
+
+2015-12-08 13:22:46 MSG 127.0.0.1 Validation : Validation superviseur SYSTEM <InformatiqueSupport.AVIGNON@agis-sa.fr> morgane.lafleur@agis-sa.fr
+FTA/Validée: "43180 - MINI SAM VOLAIL BF MDAUC 6X240G"
+La Fiche Technique Article "43180 - MINI SAM VOLAIL BF MDAUC 6X240G" vient d'être validée.
+Cet Article est maintenant actif et disponible dans l'ensemble de notre système informatique.
+
+INFORMATIONS PRINCIPALES:
+Site d'assemblage: TARARE
+
+Listes des produits créés:
+00, 0121663, 0121637, 
+
+INFORMATIONS SUPPLEMENTAIRES:
+Code Article LDC: 43180
+Gencod EAN Article: 3596710362387
+Gencod EAN Colis: 13596710362384
+Nombre d'UVC par colis: 6
+Poids net de l'unité de vente facturée (en Kg): 0.24
+Identifiant du Dossier Technique: 6220-v2
+Unité de facturation: Pièce
+Durée de vie garantie client (en jours): 18
+Durée de vie Production (en jours): 29
+Désignation Commerciale: MINI SAMOSSAS VOLAILLE ET BOEUF 8 X 25 G
+
+
+COMMENTAIRE:
+
+==============================
+==============================
+Date: 2015-12-08
+Login du modificateur: superviseur
+
+r
+
+Bonne journée à tous.
+Ce message a été envoyé automatiquement par le module Intranet - Fiche Technique Article.
+
+2015-12-08 13:22:46 MSG 127.0.0.1 Validation : Validation superviseur SYSTEM <InformatiqueSupport.AVIGNON@agis-sa.fr> christophe.droulon@agis-sa.fr
+FTA/Validée: "43180 - MINI SAM VOLAIL BF MDAUC 6X240G"
+La Fiche Technique Article "43180 - MINI SAM VOLAIL BF MDAUC 6X240G" vient d'être validée.
+Cet Article est maintenant actif et disponible dans l'ensemble de notre système informatique.
+
+INFORMATIONS PRINCIPALES:
+Site d'assemblage: TARARE
+
+Listes des produits créés:
+00, 0121663, 0121637, 
+
+INFORMATIONS SUPPLEMENTAIRES:
+Code Article LDC: 43180
+Gencod EAN Article: 3596710362387
+Gencod EAN Colis: 13596710362384
+Nombre d'UVC par colis: 6
+Poids net de l'unité de vente facturée (en Kg): 0.24
+Identifiant du Dossier Technique: 6220-v2
+Unité de facturation: Pièce
+Durée de vie garantie client (en jours): 18
+Durée de vie Production (en jours): 29
+Désignation Commerciale: MINI SAMOSSAS VOLAILLE ET BOEUF 8 X 25 G
+
+
+COMMENTAIRE:
+
+==============================
+==============================
+Date: 2015-12-08
+Login du modificateur: superviseur
+
+r
+
+Bonne journée à tous.
+Ce message a été envoyé automatiquement par le module Intranet - Fiche Technique Article.
+
+2015-12-08 13:22:46 MSG 127.0.0.1 Validation : Validation superviseur SYSTEM <InformatiqueSupport.AVIGNON@agis-sa.fr> chloe.viaux@agis-sa.fr
+FTA/Validée: "43180 - MINI SAM VOLAIL BF MDAUC 6X240G"
+La Fiche Technique Article "43180 - MINI SAM VOLAIL BF MDAUC 6X240G" vient d'être validée.
+Cet Article est maintenant actif et disponible dans l'ensemble de notre système informatique.
+
+INFORMATIONS PRINCIPALES:
+Site d'assemblage: TARARE
+
+Listes des produits créés:
+00, 0121663, 0121637, 
+
+INFORMATIONS SUPPLEMENTAIRES:
+Code Article LDC: 43180
+Gencod EAN Article: 3596710362387
+Gencod EAN Colis: 13596710362384
+Nombre d'UVC par colis: 6
+Poids net de l'unité de vente facturée (en Kg): 0.24
+Identifiant du Dossier Technique: 6220-v2
+Unité de facturation: Pièce
+Durée de vie garantie client (en jours): 18
+Durée de vie Production (en jours): 29
+Désignation Commerciale: MINI SAMOSSAS VOLAILLE ET BOEUF 8 X 25 G
+
+
+COMMENTAIRE:
+
+==============================
+==============================
+Date: 2015-12-08
+Login du modificateur: superviseur
+
+r
+
+Bonne journée à tous.
+Ce message a été envoyé automatiquement par le module Intranet - Fiche Technique Article.
+
+2015-12-08 13:22:46 MSG 127.0.0.1 Validation : Validation superviseur SYSTEM <InformatiqueSupport.AVIGNON@agis-sa.fr> 
+
+FTA/Validée: "43180 - MINI SAM VOLAIL BF MDAUC 6X240G"
+La Fiche Technique Article "43180 - MINI SAM VOLAIL BF MDAUC 6X240G" vient d'être validée.
+Cet Article est maintenant actif et disponible dans l'ensemble de notre système informatique.
+
+INFORMATIONS PRINCIPALES:
+Site d'assemblage: TARARE
+
+Listes des produits créés:
+00, 0121663, 0121637, 
+
+INFORMATIONS SUPPLEMENTAIRES:
+Code Article LDC: 43180
+Gencod EAN Article: 3596710362387
+Gencod EAN Colis: 13596710362384
+Nombre d'UVC par colis: 6
+Poids net de l'unité de vente facturée (en Kg): 0.24
+Identifiant du Dossier Technique: 6220-v2
+Unité de facturation: Pièce
+Durée de vie garantie client (en jours): 18
+Durée de vie Production (en jours): 29
+Désignation Commerciale: MINI SAMOSSAS VOLAILLE ET BOEUF 8 X 25 G
+
+
+COMMENTAIRE:
+
+==============================
+==============================
+Date: 2015-12-08
+Login du modificateur: superviseur
+
+r
+
+Bonne journée à tous.
+Ce message a été envoyé automatiquement par le module Intranet - Fiche Technique Article.
+
+2015-12-08 13:22:46 MSG 127.0.0.1 Validation : Validation superviseur SYSTEM <InformatiqueSupport.AVIGNON@agis-sa.fr> InformatiqueSupport.AVIGNON@agis-sa.fr
+FTA/Information "43180 - MINI SAM VOLAIL BF MDAUC 6X240G"
+DESTINATAIRES:
+JAEGLE cecile: cecile.jaegle@agis-sa.fr
+MORIN stephane: stephane.morin@ldc.fr
+LUCAS christine: christine.lucas@agis-sa.fr
+SYSTEM superviseur: InformatiqueSupport.AVIGNON@agis-sa.fr
+BERTAUX virginie: virginie.bertaux@agis-sa.fr
+LARDIERE catherine: catherine.lardiere@agis-sa.fr
+COUGET marie-paule (R&D): marie-paule.couget@agis-sa.fr
+CHOLLET Christine: christine.alberola@agis-sa.fr
+DURDILLY marie: marie.durdilly@agis-sa.fr
+SANEGRE boris: boris.sanegre@agis-sa.fr
+GARIN Aurelien: Aurelien.GARIN@agis-sa.fr
+WEYMULLER julie: julie.weymuller@agis-sa.fr
+LAFLEUR morgane: morgane.lafleur@agis-sa.fr
+DROULON (FTA) Christophe: christophe.droulon@agis-sa.fr
+VIAUX Chloe: chloe.viaux@agis-sa.fr
+
+: 
+
+
+
+Message envoyé:
+
+La Fiche Technique Article "43180 - MINI SAM VOLAIL BF MDAUC 6X240G" vient d'être validée.
+Cet Article est maintenant actif et disponible dans l'ensemble de notre système informatique.
+
+INFORMATIONS PRINCIPALES:
+Site d'assemblage: TARARE
+
+Listes des produits créés:
+00, 0121663, 0121637, 
+
+INFORMATIONS SUPPLEMENTAIRES:
+Code Article LDC: 43180
+Gencod EAN Article: 3596710362387
+Gencod EAN Colis: 13596710362384
+Nombre d'UVC par colis: 6
+Poids net de l'unité de vente facturée (en Kg): 0.24
+Identifiant du Dossier Technique: 6220-v2
+Unité de facturation: Pièce
+Durée de vie garantie client (en jours): 18
+Durée de vie Production (en jours): 29
+Désignation Commerciale: MINI SAMOSSAS VOLAILLE ET BOEUF 8 X 25 G
+
+
+COMMENTAIRE:
+
+==============================
+==============================
+Date: 2015-12-08
+Login du modificateur: superviseur
+
+r
+
+Bonne journée à tous.
+Ce message a été envoyé automatiquement par le module Intranet - Fiche Technique Article.
+
+INFORMATIONS DE DEBUGGAGE:
+
+
+SELECT code_produit_agrologic_fta_nomenclature,prefixe_annexe_agrologic_article_codification FROM fta_composant, annexe_agrologic_article_codification WHERE fta_composant.id_fta=14674 AND is_composition_fta_composant=1  AND fta_composant.id_annexe_agrologic_article_codification=annexe_agrologic_article_codification.id_annexe_agrologic_article_codification ORDER BY prefixe_annexe_agrologic_article_codification ASC, nom_fta_nomenclature
+2015-12-08 13:26:47 MSG 127.0.0.1 Validation : Validation superviseur SYSTEM <InformatiqueSupport.AVIGNON@agis-sa.fr> InformatiqueSupport.AVIGNON@agis-sa.fr
+FTA/Validée: "43643 - ASSORTIMENT VAPEUR MDCAR 6X250G"
+La Fiche Technique Article "43643 - ASSORTIMENT VAPEUR MDCAR 6X250G" vient d'être validée.
+Cet Article est maintenant actif et disponible dans l'ensemble de notre système informatique.
+
+INFORMATIONS PRINCIPALES:
+Site d'assemblage: HERBIGNAC
+
+Listes des produits créés:
+00, 
+
+INFORMATIONS SUPPLEMENTAIRES:
+Code Article LDC: 43643
+Gencod EAN Article: 3560070746415
+Gencod EAN Colis: 03560070746422
+Nombre d'UVC par colis: 6
+Poids net de l'unité de vente facturée (en Kg): 0.25
+Identifiant du Dossier Technique: 8358-v5
+Unité de facturation: Pièce
+Durée de vie garantie client (en jours): 19
+Durée de vie Production (en jours): 29
+Désignation Commerciale: ASSORTIMENT VAPEUR
+
+
+COMMENTAIRE:
+
+==============================
+==============================
+Date: 2015-12-08
+Login du modificateur: superviseur
+
+r
+
+Bonne journée à tous.
+Ce message a été envoyé automatiquement par le module Intranet - Fiche Technique Article.
+
+2015-12-08 13:26:47 MSG 127.0.0.1 Validation : Validation superviseur SYSTEM <InformatiqueSupport.AVIGNON@agis-sa.fr> boris.sanegre@agis-sa.fr
+FTA/Validée: "43643 - ASSORTIMENT VAPEUR MDCAR 6X250G"
+La Fiche Technique Article "43643 - ASSORTIMENT VAPEUR MDCAR 6X250G" vient d'être validée.
+Cet Article est maintenant actif et disponible dans l'ensemble de notre système informatique.
+
+INFORMATIONS PRINCIPALES:
+Site d'assemblage: HERBIGNAC
+
+Listes des produits créés:
+00, 
+
+INFORMATIONS SUPPLEMENTAIRES:
+Code Article LDC: 43643
+Gencod EAN Article: 3560070746415
+Gencod EAN Colis: 03560070746422
+Nombre d'UVC par colis: 6
+Poids net de l'unité de vente facturée (en Kg): 0.25
+Identifiant du Dossier Technique: 8358-v5
+Unité de facturation: Pièce
+Durée de vie garantie client (en jours): 19
+Durée de vie Production (en jours): 29
+Désignation Commerciale: ASSORTIMENT VAPEUR
+
+
+COMMENTAIRE:
+
+==============================
+==============================
+Date: 2015-12-08
+Login du modificateur: superviseur
+
+r
+
+Bonne journée à tous.
+Ce message a été envoyé automatiquement par le module Intranet - Fiche Technique Article.
+
+2015-12-08 13:26:47 MSG 127.0.0.1 Validation : Validation superviseur SYSTEM <InformatiqueSupport.AVIGNON@agis-sa.fr> virginie.bertaux@agis-sa.fr
+FTA/Validée: "43643 - ASSORTIMENT VAPEUR MDCAR 6X250G"
+La Fiche Technique Article "43643 - ASSORTIMENT VAPEUR MDCAR 6X250G" vient d'être validée.
+Cet Article est maintenant actif et disponible dans l'ensemble de notre système informatique.
+
+INFORMATIONS PRINCIPALES:
+Site d'assemblage: HERBIGNAC
+
+Listes des produits créés:
+00, 
+
+INFORMATIONS SUPPLEMENTAIRES:
+Code Article LDC: 43643
+Gencod EAN Article: 3560070746415
+Gencod EAN Colis: 03560070746422
+Nombre d'UVC par colis: 6
+Poids net de l'unité de vente facturée (en Kg): 0.25
+Identifiant du Dossier Technique: 8358-v5
+Unité de facturation: Pièce
+Durée de vie garantie client (en jours): 19
+Durée de vie Production (en jours): 29
+Désignation Commerciale: ASSORTIMENT VAPEUR
+
+
+COMMENTAIRE:
+
+==============================
+==============================
+Date: 2015-12-08
+Login du modificateur: superviseur
+
+r
+
+Bonne journée à tous.
+Ce message a été envoyé automatiquement par le module Intranet - Fiche Technique Article.
+
+2015-12-08 13:26:47 MSG 127.0.0.1 Validation : Validation superviseur SYSTEM <InformatiqueSupport.AVIGNON@agis-sa.fr> marie-paule.couget@agis-sa.fr
+FTA/Validée: "43643 - ASSORTIMENT VAPEUR MDCAR 6X250G"
+La Fiche Technique Article "43643 - ASSORTIMENT VAPEUR MDCAR 6X250G" vient d'être validée.
+Cet Article est maintenant actif et disponible dans l'ensemble de notre système informatique.
+
+INFORMATIONS PRINCIPALES:
+Site d'assemblage: HERBIGNAC
+
+Listes des produits créés:
+00, 
+
+INFORMATIONS SUPPLEMENTAIRES:
+Code Article LDC: 43643
+Gencod EAN Article: 3560070746415
+Gencod EAN Colis: 03560070746422
+Nombre d'UVC par colis: 6
+Poids net de l'unité de vente facturée (en Kg): 0.25
+Identifiant du Dossier Technique: 8358-v5
+Unité de facturation: Pièce
+Durée de vie garantie client (en jours): 19
+Durée de vie Production (en jours): 29
+Désignation Commerciale: ASSORTIMENT VAPEUR
+
+
+COMMENTAIRE:
+
+==============================
+==============================
+Date: 2015-12-08
+Login du modificateur: superviseur
+
+r
+
+Bonne journée à tous.
+Ce message a été envoyé automatiquement par le module Intranet - Fiche Technique Article.
+
+2015-12-08 13:26:47 MSG 127.0.0.1 Validation : Validation superviseur SYSTEM <InformatiqueSupport.AVIGNON@agis-sa.fr> cecile.jaegle@agis-sa.fr
+FTA/Validée: "43643 - ASSORTIMENT VAPEUR MDCAR 6X250G"
+La Fiche Technique Article "43643 - ASSORTIMENT VAPEUR MDCAR 6X250G" vient d'être validée.
+Cet Article est maintenant actif et disponible dans l'ensemble de notre système informatique.
+
+INFORMATIONS PRINCIPALES:
+Site d'assemblage: HERBIGNAC
+
+Listes des produits créés:
+00, 
+
+INFORMATIONS SUPPLEMENTAIRES:
+Code Article LDC: 43643
+Gencod EAN Article: 3560070746415
+Gencod EAN Colis: 03560070746422
+Nombre d'UVC par colis: 6
+Poids net de l'unité de vente facturée (en Kg): 0.25
+Identifiant du Dossier Technique: 8358-v5
+Unité de facturation: Pièce
+Durée de vie garantie client (en jours): 19
+Durée de vie Production (en jours): 29
+Désignation Commerciale: ASSORTIMENT VAPEUR
+
+
+COMMENTAIRE:
+
+==============================
+==============================
+Date: 2015-12-08
+Login du modificateur: superviseur
+
+r
+
+Bonne journée à tous.
+Ce message a été envoyé automatiquement par le module Intranet - Fiche Technique Article.
+
+2015-12-08 13:26:47 MSG 127.0.0.1 Validation : Validation superviseur SYSTEM <InformatiqueSupport.AVIGNON@agis-sa.fr> Magali.MARIET@ldc.fr
+FTA/Validée: "43643 - ASSORTIMENT VAPEUR MDCAR 6X250G"
+La Fiche Technique Article "43643 - ASSORTIMENT VAPEUR MDCAR 6X250G" vient d'être validée.
+Cet Article est maintenant actif et disponible dans l'ensemble de notre système informatique.
+
+INFORMATIONS PRINCIPALES:
+Site d'assemblage: HERBIGNAC
+
+Listes des produits créés:
+00, 
+
+INFORMATIONS SUPPLEMENTAIRES:
+Code Article LDC: 43643
+Gencod EAN Article: 3560070746415
+Gencod EAN Colis: 03560070746422
+Nombre d'UVC par colis: 6
+Poids net de l'unité de vente facturée (en Kg): 0.25
+Identifiant du Dossier Technique: 8358-v5
+Unité de facturation: Pièce
+Durée de vie garantie client (en jours): 19
+Durée de vie Production (en jours): 29
+Désignation Commerciale: ASSORTIMENT VAPEUR
+
+
+COMMENTAIRE:
+
+==============================
+==============================
+Date: 2015-12-08
+Login du modificateur: superviseur
+
+r
+
+Bonne journée à tous.
+Ce message a été envoyé automatiquement par le module Intranet - Fiche Technique Article.
+
+2015-12-08 13:26:47 MSG 127.0.0.1 Validation : Validation superviseur SYSTEM <InformatiqueSupport.AVIGNON@agis-sa.fr> stephane.morin@ldc.fr
+FTA/Validée: "43643 - ASSORTIMENT VAPEUR MDCAR 6X250G"
+La Fiche Technique Article "43643 - ASSORTIMENT VAPEUR MDCAR 6X250G" vient d'être validée.
+Cet Article est maintenant actif et disponible dans l'ensemble de notre système informatique.
+
+INFORMATIONS PRINCIPALES:
+Site d'assemblage: HERBIGNAC
+
+Listes des produits créés:
+00, 
+
+INFORMATIONS SUPPLEMENTAIRES:
+Code Article LDC: 43643
+Gencod EAN Article: 3560070746415
+Gencod EAN Colis: 03560070746422
+Nombre d'UVC par colis: 6
+Poids net de l'unité de vente facturée (en Kg): 0.25
+Identifiant du Dossier Technique: 8358-v5
+Unité de facturation: Pièce
+Durée de vie garantie client (en jours): 19
+Durée de vie Production (en jours): 29
+Désignation Commerciale: ASSORTIMENT VAPEUR
+
+
+COMMENTAIRE:
+
+==============================
+==============================
+Date: 2015-12-08
+Login du modificateur: superviseur
+
+r
+
+Bonne journée à tous.
+Ce message a été envoyé automatiquement par le module Intranet - Fiche Technique Article.
+
+2015-12-08 13:26:47 MSG 127.0.0.1 Validation : Validation superviseur SYSTEM <InformatiqueSupport.AVIGNON@agis-sa.fr> julie.weymuller@agis-sa.fr
+FTA/Validée: "43643 - ASSORTIMENT VAPEUR MDCAR 6X250G"
+La Fiche Technique Article "43643 - ASSORTIMENT VAPEUR MDCAR 6X250G" vient d'être validée.
+Cet Article est maintenant actif et disponible dans l'ensemble de notre système informatique.
+
+INFORMATIONS PRINCIPALES:
+Site d'assemblage: HERBIGNAC
+
+Listes des produits créés:
+00, 
+
+INFORMATIONS SUPPLEMENTAIRES:
+Code Article LDC: 43643
+Gencod EAN Article: 3560070746415
+Gencod EAN Colis: 03560070746422
+Nombre d'UVC par colis: 6
+Poids net de l'unité de vente facturée (en Kg): 0.25
+Identifiant du Dossier Technique: 8358-v5
+Unité de facturation: Pièce
+Durée de vie garantie client (en jours): 19
+Durée de vie Production (en jours): 29
+Désignation Commerciale: ASSORTIMENT VAPEUR
+
+
+COMMENTAIRE:
+
+==============================
+==============================
+Date: 2015-12-08
+Login du modificateur: superviseur
+
+r
+
+Bonne journée à tous.
+Ce message a été envoyé automatiquement par le module Intranet - Fiche Technique Article.
+
+2015-12-08 13:26:47 MSG 127.0.0.1 Validation : Validation superviseur SYSTEM <InformatiqueSupport.AVIGNON@agis-sa.fr> severine.frehel@ldc.fr
+FTA/Validée: "43643 - ASSORTIMENT VAPEUR MDCAR 6X250G"
+La Fiche Technique Article "43643 - ASSORTIMENT VAPEUR MDCAR 6X250G" vient d'être validée.
+Cet Article est maintenant actif et disponible dans l'ensemble de notre système informatique.
+
+INFORMATIONS PRINCIPALES:
+Site d'assemblage: HERBIGNAC
+
+Listes des produits créés:
+00, 
+
+INFORMATIONS SUPPLEMENTAIRES:
+Code Article LDC: 43643
+Gencod EAN Article: 3560070746415
+Gencod EAN Colis: 03560070746422
+Nombre d'UVC par colis: 6
+Poids net de l'unité de vente facturée (en Kg): 0.25
+Identifiant du Dossier Technique: 8358-v5
+Unité de facturation: Pièce
+Durée de vie garantie client (en jours): 19
+Durée de vie Production (en jours): 29
+Désignation Commerciale: ASSORTIMENT VAPEUR
+
+
+COMMENTAIRE:
+
+==============================
+==============================
+Date: 2015-12-08
+Login du modificateur: superviseur
+
+r
+
+Bonne journée à tous.
+Ce message a été envoyé automatiquement par le module Intranet - Fiche Technique Article.
+
+2015-12-08 13:26:47 MSG 127.0.0.1 Validation : Validation superviseur SYSTEM <InformatiqueSupport.AVIGNON@agis-sa.fr> stephane.raballand@ldc.fr
+FTA/Validée: "43643 - ASSORTIMENT VAPEUR MDCAR 6X250G"
+La Fiche Technique Article "43643 - ASSORTIMENT VAPEUR MDCAR 6X250G" vient d'être validée.
+Cet Article est maintenant actif et disponible dans l'ensemble de notre système informatique.
+
+INFORMATIONS PRINCIPALES:
+Site d'assemblage: HERBIGNAC
+
+Listes des produits créés:
+00, 
+
+INFORMATIONS SUPPLEMENTAIRES:
+Code Article LDC: 43643
+Gencod EAN Article: 3560070746415
+Gencod EAN Colis: 03560070746422
+Nombre d'UVC par colis: 6
+Poids net de l'unité de vente facturée (en Kg): 0.25
+Identifiant du Dossier Technique: 8358-v5
+Unité de facturation: Pièce
+Durée de vie garantie client (en jours): 19
+Durée de vie Production (en jours): 29
+Désignation Commerciale: ASSORTIMENT VAPEUR
+
+
+COMMENTAIRE:
+
+==============================
+==============================
+Date: 2015-12-08
+Login du modificateur: superviseur
+
+r
+
+Bonne journée à tous.
+Ce message a été envoyé automatiquement par le module Intranet - Fiche Technique Article.
+
+2015-12-08 13:26:47 MSG 127.0.0.1 Validation : Validation superviseur SYSTEM <InformatiqueSupport.AVIGNON@agis-sa.fr> Emeline.gatard@agis-sa.fr
+FTA/Validée: "43643 - ASSORTIMENT VAPEUR MDCAR 6X250G"
+La Fiche Technique Article "43643 - ASSORTIMENT VAPEUR MDCAR 6X250G" vient d'être validée.
+Cet Article est maintenant actif et disponible dans l'ensemble de notre système informatique.
+
+INFORMATIONS PRINCIPALES:
+Site d'assemblage: HERBIGNAC
+
+Listes des produits créés:
+00, 
+
+INFORMATIONS SUPPLEMENTAIRES:
+Code Article LDC: 43643
+Gencod EAN Article: 3560070746415
+Gencod EAN Colis: 03560070746422
+Nombre d'UVC par colis: 6
+Poids net de l'unité de vente facturée (en Kg): 0.25
+Identifiant du Dossier Technique: 8358-v5
+Unité de facturation: Pièce
+Durée de vie garantie client (en jours): 19
+Durée de vie Production (en jours): 29
+Désignation Commerciale: ASSORTIMENT VAPEUR
+
+
+COMMENTAIRE:
+
+==============================
+==============================
+Date: 2015-12-08
+Login du modificateur: superviseur
+
+r
+
+Bonne journée à tous.
+Ce message a été envoyé automatiquement par le module Intranet - Fiche Technique Article.
+
+2015-12-08 13:26:47 MSG 127.0.0.1 Validation : Validation superviseur SYSTEM <InformatiqueSupport.AVIGNON@agis-sa.fr> christelle.GUINCHARD@ldc.fr
+FTA/Validée: "43643 - ASSORTIMENT VAPEUR MDCAR 6X250G"
+La Fiche Technique Article "43643 - ASSORTIMENT VAPEUR MDCAR 6X250G" vient d'être validée.
+Cet Article est maintenant actif et disponible dans l'ensemble de notre système informatique.
+
+INFORMATIONS PRINCIPALES:
+Site d'assemblage: HERBIGNAC
+
+Listes des produits créés:
+00, 
+
+INFORMATIONS SUPPLEMENTAIRES:
+Code Article LDC: 43643
+Gencod EAN Article: 3560070746415
+Gencod EAN Colis: 03560070746422
+Nombre d'UVC par colis: 6
+Poids net de l'unité de vente facturée (en Kg): 0.25
+Identifiant du Dossier Technique: 8358-v5
+Unité de facturation: Pièce
+Durée de vie garantie client (en jours): 19
+Durée de vie Production (en jours): 29
+Désignation Commerciale: ASSORTIMENT VAPEUR
+
+
+COMMENTAIRE:
+
+==============================
+==============================
+Date: 2015-12-08
+Login du modificateur: superviseur
+
+r
+
+Bonne journée à tous.
+Ce message a été envoyé automatiquement par le module Intranet - Fiche Technique Article.
+
+2015-12-08 13:26:47 MSG 127.0.0.1 Validation : Validation superviseur SYSTEM <InformatiqueSupport.AVIGNON@agis-sa.fr> chloe.viaux@agis-sa.fr
+FTA/Validée: "43643 - ASSORTIMENT VAPEUR MDCAR 6X250G"
+La Fiche Technique Article "43643 - ASSORTIMENT VAPEUR MDCAR 6X250G" vient d'être validée.
+Cet Article est maintenant actif et disponible dans l'ensemble de notre système informatique.
+
+INFORMATIONS PRINCIPALES:
+Site d'assemblage: HERBIGNAC
+
+Listes des produits créés:
+00, 
+
+INFORMATIONS SUPPLEMENTAIRES:
+Code Article LDC: 43643
+Gencod EAN Article: 3560070746415
+Gencod EAN Colis: 03560070746422
+Nombre d'UVC par colis: 6
+Poids net de l'unité de vente facturée (en Kg): 0.25
+Identifiant du Dossier Technique: 8358-v5
+Unité de facturation: Pièce
+Durée de vie garantie client (en jours): 19
+Durée de vie Production (en jours): 29
+Désignation Commerciale: ASSORTIMENT VAPEUR
+
+
+COMMENTAIRE:
+
+==============================
+==============================
+Date: 2015-12-08
+Login du modificateur: superviseur
+
+r
+
+Bonne journée à tous.
+Ce message a été envoyé automatiquement par le module Intranet - Fiche Technique Article.
+
+2015-12-08 13:26:47 MSG 127.0.0.1 Validation : Validation superviseur SYSTEM <InformatiqueSupport.AVIGNON@agis-sa.fr> Stephanie.LEBARON@ldc.fr
+FTA/Validée: "43643 - ASSORTIMENT VAPEUR MDCAR 6X250G"
+La Fiche Technique Article "43643 - ASSORTIMENT VAPEUR MDCAR 6X250G" vient d'être validée.
+Cet Article est maintenant actif et disponible dans l'ensemble de notre système informatique.
+
+INFORMATIONS PRINCIPALES:
+Site d'assemblage: HERBIGNAC
+
+Listes des produits créés:
+00, 
+
+INFORMATIONS SUPPLEMENTAIRES:
+Code Article LDC: 43643
+Gencod EAN Article: 3560070746415
+Gencod EAN Colis: 03560070746422
+Nombre d'UVC par colis: 6
+Poids net de l'unité de vente facturée (en Kg): 0.25
+Identifiant du Dossier Technique: 8358-v5
+Unité de facturation: Pièce
+Durée de vie garantie client (en jours): 19
+Durée de vie Production (en jours): 29
+Désignation Commerciale: ASSORTIMENT VAPEUR
+
+
+COMMENTAIRE:
+
+==============================
+==============================
+Date: 2015-12-08
+Login du modificateur: superviseur
+
+r
+
+Bonne journée à tous.
+Ce message a été envoyé automatiquement par le module Intranet - Fiche Technique Article.
+
+2015-12-08 13:26:47 MSG 127.0.0.1 Validation : Validation superviseur SYSTEM <InformatiqueSupport.AVIGNON@agis-sa.fr> Alexandra.VANHUYSBERGHE@ldc.fr
+FTA/Validée: "43643 - ASSORTIMENT VAPEUR MDCAR 6X250G"
+La Fiche Technique Article "43643 - ASSORTIMENT VAPEUR MDCAR 6X250G" vient d'être validée.
+Cet Article est maintenant actif et disponible dans l'ensemble de notre système informatique.
+
+INFORMATIONS PRINCIPALES:
+Site d'assemblage: HERBIGNAC
+
+Listes des produits créés:
+00, 
+
+INFORMATIONS SUPPLEMENTAIRES:
+Code Article LDC: 43643
+Gencod EAN Article: 3560070746415
+Gencod EAN Colis: 03560070746422
+Nombre d'UVC par colis: 6
+Poids net de l'unité de vente facturée (en Kg): 0.25
+Identifiant du Dossier Technique: 8358-v5
+Unité de facturation: Pièce
+Durée de vie garantie client (en jours): 19
+Durée de vie Production (en jours): 29
+Désignation Commerciale: ASSORTIMENT VAPEUR
+
+
+COMMENTAIRE:
+
+==============================
+==============================
+Date: 2015-12-08
+Login du modificateur: superviseur
+
+r
+
+Bonne journée à tous.
+Ce message a été envoyé automatiquement par le module Intranet - Fiche Technique Article.
+
+2015-12-08 13:26:47 MSG 127.0.0.1 Validation : Validation superviseur SYSTEM <InformatiqueSupport.AVIGNON@agis-sa.fr> eg3105044@ldc.fr
+FTA/Validée: "43643 - ASSORTIMENT VAPEUR MDCAR 6X250G"
+La Fiche Technique Article "43643 - ASSORTIMENT VAPEUR MDCAR 6X250G" vient d'être validée.
+Cet Article est maintenant actif et disponible dans l'ensemble de notre système informatique.
+
+INFORMATIONS PRINCIPALES:
+Site d'assemblage: HERBIGNAC
+
+Listes des produits créés:
+00, 
+
+INFORMATIONS SUPPLEMENTAIRES:
+Code Article LDC: 43643
+Gencod EAN Article: 3560070746415
+Gencod EAN Colis: 03560070746422
+Nombre d'UVC par colis: 6
+Poids net de l'unité de vente facturée (en Kg): 0.25
+Identifiant du Dossier Technique: 8358-v5
+Unité de facturation: Pièce
+Durée de vie garantie client (en jours): 19
+Durée de vie Production (en jours): 29
+Désignation Commerciale: ASSORTIMENT VAPEUR
+
+
+COMMENTAIRE:
+
+==============================
+==============================
+Date: 2015-12-08
+Login du modificateur: superviseur
+
+r
+
+Bonne journée à tous.
+Ce message a été envoyé automatiquement par le module Intranet - Fiche Technique Article.
+
+2015-12-08 13:26:47 MSG 127.0.0.1 Validation : Validation superviseur SYSTEM <InformatiqueSupport.AVIGNON@agis-sa.fr> 
+
+FTA/Validée: "43643 - ASSORTIMENT VAPEUR MDCAR 6X250G"
+La Fiche Technique Article "43643 - ASSORTIMENT VAPEUR MDCAR 6X250G" vient d'être validée.
+Cet Article est maintenant actif et disponible dans l'ensemble de notre système informatique.
+
+INFORMATIONS PRINCIPALES:
+Site d'assemblage: HERBIGNAC
+
+Listes des produits créés:
+00, 
+
+INFORMATIONS SUPPLEMENTAIRES:
+Code Article LDC: 43643
+Gencod EAN Article: 3560070746415
+Gencod EAN Colis: 03560070746422
+Nombre d'UVC par colis: 6
+Poids net de l'unité de vente facturée (en Kg): 0.25
+Identifiant du Dossier Technique: 8358-v5
+Unité de facturation: Pièce
+Durée de vie garantie client (en jours): 19
+Durée de vie Production (en jours): 29
+Désignation Commerciale: ASSORTIMENT VAPEUR
+
+
+COMMENTAIRE:
+
+==============================
+==============================
+Date: 2015-12-08
+Login du modificateur: superviseur
+
+r
+
+Bonne journée à tous.
+Ce message a été envoyé automatiquement par le module Intranet - Fiche Technique Article.
+
+2015-12-08 13:26:47 MSG 127.0.0.1 Validation : Validation superviseur SYSTEM <InformatiqueSupport.AVIGNON@agis-sa.fr> InformatiqueSupport.AVIGNON@agis-sa.fr
+FTA/Information "43643 - ASSORTIMENT VAPEUR MDCAR 6X250G"
+DESTINATAIRES:
+SYSTEM superviseur: InformatiqueSupport.AVIGNON@agis-sa.fr
+SANEGRE boris: boris.sanegre@agis-sa.fr
+BERTAUX virginie: virginie.bertaux@agis-sa.fr
+COUGET marie-paule (R&D): marie-paule.couget@agis-sa.fr
+JAEGLE cecile: cecile.jaegle@agis-sa.fr
+MARIET magali: Magali.MARIET@ldc.fr
+MORIN stephane: stephane.morin@ldc.fr
+WEYMULLER julie: julie.weymuller@agis-sa.fr
+FREHEL séverine: severine.frehel@ldc.fr
+RABALLAND stéphane: stephane.raballand@ldc.fr
+GATARD Emeline: Emeline.gatard@agis-sa.fr
+GUINCHARD christelle: christelle.GUINCHARD@ldc.fr
+VIAUX Chloe: chloe.viaux@agis-sa.fr
+LE BARON Stéphanie: Stephanie.LEBARON@ldc.fr
+VANHUYSBERGHE Alexandra: Alexandra.VANHUYSBERGHE@ldc.fr
+GATARD Emeline (FTA): eg3105044@ldc.fr
+
+: 
+
+
+
+Message envoyé:
+
+La Fiche Technique Article "43643 - ASSORTIMENT VAPEUR MDCAR 6X250G" vient d'être validée.
+Cet Article est maintenant actif et disponible dans l'ensemble de notre système informatique.
+
+INFORMATIONS PRINCIPALES:
+Site d'assemblage: HERBIGNAC
+
+Listes des produits créés:
+00, 
+
+INFORMATIONS SUPPLEMENTAIRES:
+Code Article LDC: 43643
+Gencod EAN Article: 3560070746415
+Gencod EAN Colis: 03560070746422
+Nombre d'UVC par colis: 6
+Poids net de l'unité de vente facturée (en Kg): 0.25
+Identifiant du Dossier Technique: 8358-v5
+Unité de facturation: Pièce
+Durée de vie garantie client (en jours): 19
+Durée de vie Production (en jours): 29
+Désignation Commerciale: ASSORTIMENT VAPEUR
+
+
+COMMENTAIRE:
+
+==============================
+==============================
+Date: 2015-12-08
+Login du modificateur: superviseur
+
+r
+
+Bonne journée à tous.
+Ce message a été envoyé automatiquement par le module Intranet - Fiche Technique Article.
+
+INFORMATIONS DE DEBUGGAGE:
+
+
+SELECT code_produit_agrologic_fta_nomenclature,prefixe_annexe_agrologic_article_codification FROM fta_composant, annexe_agrologic_article_codification WHERE fta_composant.id_fta=14675 AND is_composition_fta_composant=1  AND fta_composant.id_annexe_agrologic_article_codification=annexe_agrologic_article_codification.id_annexe_agrologic_article_codification ORDER BY prefixe_annexe_agrologic_article_codification ASC, nom_fta_nomenclature
+2015-12-08 13:28:58 MSG 127.0.0.1 Validation : Validation superviseur SYSTEM <InformatiqueSupport.AVIGNON@agis-sa.fr> cecile.jaegle@agis-sa.fr
+FTA/Validée: "23552 - MOUSSAKA AGNEAU MDCAR 6X300G"
+La Fiche Technique Article "23552 - MOUSSAKA AGNEAU MDCAR 6X300G" vient d'être validée.
+Cet Article est maintenant actif et disponible dans l'ensemble de notre système informatique.
+
+INFORMATIONS PRINCIPALES:
+Site d'assemblage: AVIGNON
+
+Listes des produits créés:
+30783264, 
+
+INFORMATIONS SUPPLEMENTAIRES:
+Code Article LDC: 23552
+Gencod EAN Article: 3270190215721
+Gencod EAN Colis: 03276553274794
+Nombre d'UVC par colis: 6
+Poids net de l'unité de vente facturée (en Kg): 0.3
+Identifiant du Dossier Technique: 916-v17
+Unité de facturation: Pièce
+Durée de vie garantie client (en jours): 33
+Durée de vie Production (en jours): 50
+Désignation Commerciale: MOUSSAKA AGNEAU MDCAR
+
+
+COMMENTAIRE:
+
+==============================
+==============================
+Date: 2015-12-08
+Login du modificateur: superviseur
+
+m
+
+Bonne journée à tous.
+Ce message a été envoyé automatiquement par le module Intranet - Fiche Technique Article.
+
+2015-12-08 13:28:59 MSG 127.0.0.1 Validation : Validation superviseur SYSTEM <InformatiqueSupport.AVIGNON@agis-sa.fr> julie.weymuller@agis-sa.fr
+FTA/Validée: "23552 - MOUSSAKA AGNEAU MDCAR 6X300G"
+La Fiche Technique Article "23552 - MOUSSAKA AGNEAU MDCAR 6X300G" vient d'être validée.
+Cet Article est maintenant actif et disponible dans l'ensemble de notre système informatique.
+
+INFORMATIONS PRINCIPALES:
+Site d'assemblage: AVIGNON
+
+Listes des produits créés:
+30783264, 
+
+INFORMATIONS SUPPLEMENTAIRES:
+Code Article LDC: 23552
+Gencod EAN Article: 3270190215721
+Gencod EAN Colis: 03276553274794
+Nombre d'UVC par colis: 6
+Poids net de l'unité de vente facturée (en Kg): 0.3
+Identifiant du Dossier Technique: 916-v17
+Unité de facturation: Pièce
+Durée de vie garantie client (en jours): 33
+Durée de vie Production (en jours): 50
+Désignation Commerciale: MOUSSAKA AGNEAU MDCAR
+
+
+COMMENTAIRE:
+
+==============================
+==============================
+Date: 2015-12-08
+Login du modificateur: superviseur
+
+m
+
+Bonne journée à tous.
+Ce message a été envoyé automatiquement par le module Intranet - Fiche Technique Article.
+
+2015-12-08 13:29:00 MSG 127.0.0.1 Validation : Validation superviseur SYSTEM <InformatiqueSupport.AVIGNON@agis-sa.fr> boris.sanegre@agis-sa.fr
+FTA/Validée: "23552 - MOUSSAKA AGNEAU MDCAR 6X300G"
+La Fiche Technique Article "23552 - MOUSSAKA AGNEAU MDCAR 6X300G" vient d'être validée.
+Cet Article est maintenant actif et disponible dans l'ensemble de notre système informatique.
+
+INFORMATIONS PRINCIPALES:
+Site d'assemblage: AVIGNON
+
+Listes des produits créés:
+30783264, 
+
+INFORMATIONS SUPPLEMENTAIRES:
+Code Article LDC: 23552
+Gencod EAN Article: 3270190215721
+Gencod EAN Colis: 03276553274794
+Nombre d'UVC par colis: 6
+Poids net de l'unité de vente facturée (en Kg): 0.3
+Identifiant du Dossier Technique: 916-v17
+Unité de facturation: Pièce
+Durée de vie garantie client (en jours): 33
+Durée de vie Production (en jours): 50
+Désignation Commerciale: MOUSSAKA AGNEAU MDCAR
+
+
+COMMENTAIRE:
+
+==============================
+==============================
+Date: 2015-12-08
+Login du modificateur: superviseur
+
+m
+
+Bonne journée à tous.
+Ce message a été envoyé automatiquement par le module Intranet - Fiche Technique Article.
+
+2015-12-08 13:29:00 MSG 127.0.0.1 Validation : Validation superviseur SYSTEM <InformatiqueSupport.AVIGNON@agis-sa.fr> marie-paule.couget@agis-sa.fr
+FTA/Validée: "23552 - MOUSSAKA AGNEAU MDCAR 6X300G"
+La Fiche Technique Article "23552 - MOUSSAKA AGNEAU MDCAR 6X300G" vient d'être validée.
+Cet Article est maintenant actif et disponible dans l'ensemble de notre système informatique.
+
+INFORMATIONS PRINCIPALES:
+Site d'assemblage: AVIGNON
+
+Listes des produits créés:
+30783264, 
+
+INFORMATIONS SUPPLEMENTAIRES:
+Code Article LDC: 23552
+Gencod EAN Article: 3270190215721
+Gencod EAN Colis: 03276553274794
+Nombre d'UVC par colis: 6
+Poids net de l'unité de vente facturée (en Kg): 0.3
+Identifiant du Dossier Technique: 916-v17
+Unité de facturation: Pièce
+Durée de vie garantie client (en jours): 33
+Durée de vie Production (en jours): 50
+Désignation Commerciale: MOUSSAKA AGNEAU MDCAR
+
+
+COMMENTAIRE:
+
+==============================
+==============================
+Date: 2015-12-08
+Login du modificateur: superviseur
+
+m
+
+Bonne journée à tous.
+Ce message a été envoyé automatiquement par le module Intranet - Fiche Technique Article.
+
+2015-12-08 13:29:00 MSG 127.0.0.1 Validation : Validation superviseur SYSTEM <InformatiqueSupport.AVIGNON@agis-sa.fr> cecile.pfister@agis-sa.fr
+FTA/Validée: "23552 - MOUSSAKA AGNEAU MDCAR 6X300G"
+La Fiche Technique Article "23552 - MOUSSAKA AGNEAU MDCAR 6X300G" vient d'être validée.
+Cet Article est maintenant actif et disponible dans l'ensemble de notre système informatique.
+
+INFORMATIONS PRINCIPALES:
+Site d'assemblage: AVIGNON
+
+Listes des produits créés:
+30783264, 
+
+INFORMATIONS SUPPLEMENTAIRES:
+Code Article LDC: 23552
+Gencod EAN Article: 3270190215721
+Gencod EAN Colis: 03276553274794
+Nombre d'UVC par colis: 6
+Poids net de l'unité de vente facturée (en Kg): 0.3
+Identifiant du Dossier Technique: 916-v17
+Unité de facturation: Pièce
+Durée de vie garantie client (en jours): 33
+Durée de vie Production (en jours): 50
+Désignation Commerciale: MOUSSAKA AGNEAU MDCAR
+
+
+COMMENTAIRE:
+
+==============================
+==============================
+Date: 2015-12-08
+Login du modificateur: superviseur
+
+m
+
+Bonne journée à tous.
+Ce message a été envoyé automatiquement par le module Intranet - Fiche Technique Article.
+
+2015-12-08 13:29:00 MSG 127.0.0.1 Validation : Validation superviseur SYSTEM <InformatiqueSupport.AVIGNON@agis-sa.fr> jasmine.couston@agis-sa.fr
+FTA/Validée: "23552 - MOUSSAKA AGNEAU MDCAR 6X300G"
+La Fiche Technique Article "23552 - MOUSSAKA AGNEAU MDCAR 6X300G" vient d'être validée.
+Cet Article est maintenant actif et disponible dans l'ensemble de notre système informatique.
+
+INFORMATIONS PRINCIPALES:
+Site d'assemblage: AVIGNON
+
+Listes des produits créés:
+30783264, 
+
+INFORMATIONS SUPPLEMENTAIRES:
+Code Article LDC: 23552
+Gencod EAN Article: 3270190215721
+Gencod EAN Colis: 03276553274794
+Nombre d'UVC par colis: 6
+Poids net de l'unité de vente facturée (en Kg): 0.3
+Identifiant du Dossier Technique: 916-v17
+Unité de facturation: Pièce
+Durée de vie garantie client (en jours): 33
+Durée de vie Production (en jours): 50
+Désignation Commerciale: MOUSSAKA AGNEAU MDCAR
+
+
+COMMENTAIRE:
+
+==============================
+==============================
+Date: 2015-12-08
+Login du modificateur: superviseur
+
+m
+
+Bonne journée à tous.
+Ce message a été envoyé automatiquement par le module Intranet - Fiche Technique Article.
+
+2015-12-08 13:29:00 MSG 127.0.0.1 Validation : Validation superviseur SYSTEM <InformatiqueSupport.AVIGNON@agis-sa.fr> lise.tardy@agis-sa.fr
+FTA/Validée: "23552 - MOUSSAKA AGNEAU MDCAR 6X300G"
+La Fiche Technique Article "23552 - MOUSSAKA AGNEAU MDCAR 6X300G" vient d'être validée.
+Cet Article est maintenant actif et disponible dans l'ensemble de notre système informatique.
+
+INFORMATIONS PRINCIPALES:
+Site d'assemblage: AVIGNON
+
+Listes des produits créés:
+30783264, 
+
+INFORMATIONS SUPPLEMENTAIRES:
+Code Article LDC: 23552
+Gencod EAN Article: 3270190215721
+Gencod EAN Colis: 03276553274794
+Nombre d'UVC par colis: 6
+Poids net de l'unité de vente facturée (en Kg): 0.3
+Identifiant du Dossier Technique: 916-v17
+Unité de facturation: Pièce
+Durée de vie garantie client (en jours): 33
+Durée de vie Production (en jours): 50
+Désignation Commerciale: MOUSSAKA AGNEAU MDCAR
+
+
+COMMENTAIRE:
+
+==============================
+==============================
+Date: 2015-12-08
+Login du modificateur: superviseur
+
+m
+
+Bonne journée à tous.
+Ce message a été envoyé automatiquement par le module Intranet - Fiche Technique Article.
+
+2015-12-08 13:29:00 MSG 127.0.0.1 Validation : Validation superviseur SYSTEM <InformatiqueSupport.AVIGNON@agis-sa.fr> InformatiqueSupport.AVIGNON@agis-sa.fr
+FTA/Validée: "23552 - MOUSSAKA AGNEAU MDCAR 6X300G"
+La Fiche Technique Article "23552 - MOUSSAKA AGNEAU MDCAR 6X300G" vient d'être validée.
+Cet Article est maintenant actif et disponible dans l'ensemble de notre système informatique.
+
+INFORMATIONS PRINCIPALES:
+Site d'assemblage: AVIGNON
+
+Listes des produits créés:
+30783264, 
+
+INFORMATIONS SUPPLEMENTAIRES:
+Code Article LDC: 23552
+Gencod EAN Article: 3270190215721
+Gencod EAN Colis: 03276553274794
+Nombre d'UVC par colis: 6
+Poids net de l'unité de vente facturée (en Kg): 0.3
+Identifiant du Dossier Technique: 916-v17
+Unité de facturation: Pièce
+Durée de vie garantie client (en jours): 33
+Durée de vie Production (en jours): 50
+Désignation Commerciale: MOUSSAKA AGNEAU MDCAR
+
+
+COMMENTAIRE:
+
+==============================
+==============================
+Date: 2015-12-08
+Login du modificateur: superviseur
+
+m
+
+Bonne journée à tous.
+Ce message a été envoyé automatiquement par le module Intranet - Fiche Technique Article.
+
+2015-12-08 13:29:00 MSG 127.0.0.1 Validation : Validation superviseur SYSTEM <InformatiqueSupport.AVIGNON@agis-sa.fr> virginie.bertaux@agis-sa.fr
+FTA/Validée: "23552 - MOUSSAKA AGNEAU MDCAR 6X300G"
+La Fiche Technique Article "23552 - MOUSSAKA AGNEAU MDCAR 6X300G" vient d'être validée.
+Cet Article est maintenant actif et disponible dans l'ensemble de notre système informatique.
+
+INFORMATIONS PRINCIPALES:
+Site d'assemblage: AVIGNON
+
+Listes des produits créés:
+30783264, 
+
+INFORMATIONS SUPPLEMENTAIRES:
+Code Article LDC: 23552
+Gencod EAN Article: 3270190215721
+Gencod EAN Colis: 03276553274794
+Nombre d'UVC par colis: 6
+Poids net de l'unité de vente facturée (en Kg): 0.3
+Identifiant du Dossier Technique: 916-v17
+Unité de facturation: Pièce
+Durée de vie garantie client (en jours): 33
+Durée de vie Production (en jours): 50
+Désignation Commerciale: MOUSSAKA AGNEAU MDCAR
+
+
+COMMENTAIRE:
+
+==============================
+==============================
+Date: 2015-12-08
+Login du modificateur: superviseur
+
+m
+
+Bonne journée à tous.
+Ce message a été envoyé automatiquement par le module Intranet - Fiche Technique Article.
+
+2015-12-08 13:29:00 MSG 127.0.0.1 Validation : Validation superviseur SYSTEM <InformatiqueSupport.AVIGNON@agis-sa.fr> stephane.morin@ldc.fr
+FTA/Validée: "23552 - MOUSSAKA AGNEAU MDCAR 6X300G"
+La Fiche Technique Article "23552 - MOUSSAKA AGNEAU MDCAR 6X300G" vient d'être validée.
+Cet Article est maintenant actif et disponible dans l'ensemble de notre système informatique.
+
+INFORMATIONS PRINCIPALES:
+Site d'assemblage: AVIGNON
+
+Listes des produits créés:
+30783264, 
+
+INFORMATIONS SUPPLEMENTAIRES:
+Code Article LDC: 23552
+Gencod EAN Article: 3270190215721
+Gencod EAN Colis: 03276553274794
+Nombre d'UVC par colis: 6
+Poids net de l'unité de vente facturée (en Kg): 0.3
+Identifiant du Dossier Technique: 916-v17
+Unité de facturation: Pièce
+Durée de vie garantie client (en jours): 33
+Durée de vie Production (en jours): 50
+Désignation Commerciale: MOUSSAKA AGNEAU MDCAR
+
+
+COMMENTAIRE:
+
+==============================
+==============================
+Date: 2015-12-08
+Login du modificateur: superviseur
+
+m
+
+Bonne journée à tous.
+Ce message a été envoyé automatiquement par le module Intranet - Fiche Technique Article.
+
+2015-12-08 13:29:00 MSG 127.0.0.1 Validation : Validation superviseur SYSTEM <InformatiqueSupport.AVIGNON@agis-sa.fr> annabel.gastal@agis-sa.fr
+FTA/Validée: "23552 - MOUSSAKA AGNEAU MDCAR 6X300G"
+La Fiche Technique Article "23552 - MOUSSAKA AGNEAU MDCAR 6X300G" vient d'être validée.
+Cet Article est maintenant actif et disponible dans l'ensemble de notre système informatique.
+
+INFORMATIONS PRINCIPALES:
+Site d'assemblage: AVIGNON
+
+Listes des produits créés:
+30783264, 
+
+INFORMATIONS SUPPLEMENTAIRES:
+Code Article LDC: 23552
+Gencod EAN Article: 3270190215721
+Gencod EAN Colis: 03276553274794
+Nombre d'UVC par colis: 6
+Poids net de l'unité de vente facturée (en Kg): 0.3
+Identifiant du Dossier Technique: 916-v17
+Unité de facturation: Pièce
+Durée de vie garantie client (en jours): 33
+Durée de vie Production (en jours): 50
+Désignation Commerciale: MOUSSAKA AGNEAU MDCAR
+
+
+COMMENTAIRE:
+
+==============================
+==============================
+Date: 2015-12-08
+Login du modificateur: superviseur
+
+m
+
+Bonne journée à tous.
+Ce message a été envoyé automatiquement par le module Intranet - Fiche Technique Article.
+
+2015-12-08 13:29:00 MSG 127.0.0.1 Validation : Validation superviseur SYSTEM <InformatiqueSupport.AVIGNON@agis-sa.fr> christelle.bernard@agis-sa.fr
+FTA/Validée: "23552 - MOUSSAKA AGNEAU MDCAR 6X300G"
+La Fiche Technique Article "23552 - MOUSSAKA AGNEAU MDCAR 6X300G" vient d'être validée.
+Cet Article est maintenant actif et disponible dans l'ensemble de notre système informatique.
+
+INFORMATIONS PRINCIPALES:
+Site d'assemblage: AVIGNON
+
+Listes des produits créés:
+30783264, 
+
+INFORMATIONS SUPPLEMENTAIRES:
+Code Article LDC: 23552
+Gencod EAN Article: 3270190215721
+Gencod EAN Colis: 03276553274794
+Nombre d'UVC par colis: 6
+Poids net de l'unité de vente facturée (en Kg): 0.3
+Identifiant du Dossier Technique: 916-v17
+Unité de facturation: Pièce
+Durée de vie garantie client (en jours): 33
+Durée de vie Production (en jours): 50
+Désignation Commerciale: MOUSSAKA AGNEAU MDCAR
+
+
+COMMENTAIRE:
+
+==============================
+==============================
+Date: 2015-12-08
+Login du modificateur: superviseur
+
+m
+
+Bonne journée à tous.
+Ce message a été envoyé automatiquement par le module Intranet - Fiche Technique Article.
+
+2015-12-08 13:29:00 MSG 127.0.0.1 Validation : Validation superviseur SYSTEM <InformatiqueSupport.AVIGNON@agis-sa.fr> mathieu.merot@agis-sa.fr
+FTA/Validée: "23552 - MOUSSAKA AGNEAU MDCAR 6X300G"
+La Fiche Technique Article "23552 - MOUSSAKA AGNEAU MDCAR 6X300G" vient d'être validée.
+Cet Article est maintenant actif et disponible dans l'ensemble de notre système informatique.
+
+INFORMATIONS PRINCIPALES:
+Site d'assemblage: AVIGNON
+
+Listes des produits créés:
+30783264, 
+
+INFORMATIONS SUPPLEMENTAIRES:
+Code Article LDC: 23552
+Gencod EAN Article: 3270190215721
+Gencod EAN Colis: 03276553274794
+Nombre d'UVC par colis: 6
+Poids net de l'unité de vente facturée (en Kg): 0.3
+Identifiant du Dossier Technique: 916-v17
+Unité de facturation: Pièce
+Durée de vie garantie client (en jours): 33
+Durée de vie Production (en jours): 50
+Désignation Commerciale: MOUSSAKA AGNEAU MDCAR
+
+
+COMMENTAIRE:
+
+==============================
+==============================
+Date: 2015-12-08
+Login du modificateur: superviseur
+
+m
+
+Bonne journée à tous.
+Ce message a été envoyé automatiquement par le module Intranet - Fiche Technique Article.
+
+2015-12-08 13:29:00 MSG 127.0.0.1 Validation : Validation superviseur SYSTEM <InformatiqueSupport.AVIGNON@agis-sa.fr> johan.ragon@agis-sa.fr
+FTA/Validée: "23552 - MOUSSAKA AGNEAU MDCAR 6X300G"
+La Fiche Technique Article "23552 - MOUSSAKA AGNEAU MDCAR 6X300G" vient d'être validée.
+Cet Article est maintenant actif et disponible dans l'ensemble de notre système informatique.
+
+INFORMATIONS PRINCIPALES:
+Site d'assemblage: AVIGNON
+
+Listes des produits créés:
+30783264, 
+
+INFORMATIONS SUPPLEMENTAIRES:
+Code Article LDC: 23552
+Gencod EAN Article: 3270190215721
+Gencod EAN Colis: 03276553274794
+Nombre d'UVC par colis: 6
+Poids net de l'unité de vente facturée (en Kg): 0.3
+Identifiant du Dossier Technique: 916-v17
+Unité de facturation: Pièce
+Durée de vie garantie client (en jours): 33
+Durée de vie Production (en jours): 50
+Désignation Commerciale: MOUSSAKA AGNEAU MDCAR
+
+
+COMMENTAIRE:
+
+==============================
+==============================
+Date: 2015-12-08
+Login du modificateur: superviseur
+
+m
+
+Bonne journée à tous.
+Ce message a été envoyé automatiquement par le module Intranet - Fiche Technique Article.
+
+2015-12-08 13:29:00 MSG 127.0.0.1 Validation : Validation superviseur SYSTEM <InformatiqueSupport.AVIGNON@agis-sa.fr> christine.lucas@agis-sa.fr
+FTA/Validée: "23552 - MOUSSAKA AGNEAU MDCAR 6X300G"
+La Fiche Technique Article "23552 - MOUSSAKA AGNEAU MDCAR 6X300G" vient d'être validée.
+Cet Article est maintenant actif et disponible dans l'ensemble de notre système informatique.
+
+INFORMATIONS PRINCIPALES:
+Site d'assemblage: AVIGNON
+
+Listes des produits créés:
+30783264, 
+
+INFORMATIONS SUPPLEMENTAIRES:
+Code Article LDC: 23552
+Gencod EAN Article: 3270190215721
+Gencod EAN Colis: 03276553274794
+Nombre d'UVC par colis: 6
+Poids net de l'unité de vente facturée (en Kg): 0.3
+Identifiant du Dossier Technique: 916-v17
+Unité de facturation: Pièce
+Durée de vie garantie client (en jours): 33
+Durée de vie Production (en jours): 50
+Désignation Commerciale: MOUSSAKA AGNEAU MDCAR
+
+
+COMMENTAIRE:
+
+==============================
+==============================
+Date: 2015-12-08
+Login du modificateur: superviseur
+
+m
+
+Bonne journée à tous.
+Ce message a été envoyé automatiquement par le module Intranet - Fiche Technique Article.
+
+2015-12-08 13:29:00 MSG 127.0.0.1 Validation : Validation superviseur SYSTEM <InformatiqueSupport.AVIGNON@agis-sa.fr> lucile.dussaud@agis-sa.fr
+FTA/Validée: "23552 - MOUSSAKA AGNEAU MDCAR 6X300G"
+La Fiche Technique Article "23552 - MOUSSAKA AGNEAU MDCAR 6X300G" vient d'être validée.
+Cet Article est maintenant actif et disponible dans l'ensemble de notre système informatique.
+
+INFORMATIONS PRINCIPALES:
+Site d'assemblage: AVIGNON
+
+Listes des produits créés:
+30783264, 
+
+INFORMATIONS SUPPLEMENTAIRES:
+Code Article LDC: 23552
+Gencod EAN Article: 3270190215721
+Gencod EAN Colis: 03276553274794
+Nombre d'UVC par colis: 6
+Poids net de l'unité de vente facturée (en Kg): 0.3
+Identifiant du Dossier Technique: 916-v17
+Unité de facturation: Pièce
+Durée de vie garantie client (en jours): 33
+Durée de vie Production (en jours): 50
+Désignation Commerciale: MOUSSAKA AGNEAU MDCAR
+
+
+COMMENTAIRE:
+
+==============================
+==============================
+Date: 2015-12-08
+Login du modificateur: superviseur
+
+m
+
+Bonne journée à tous.
+Ce message a été envoyé automatiquement par le module Intranet - Fiche Technique Article.
+
+2015-12-08 13:29:00 MSG 127.0.0.1 Validation : Validation superviseur SYSTEM <InformatiqueSupport.AVIGNON@agis-sa.fr> anne-marie.bourguignon@agis-sa.fr
+FTA/Validée: "23552 - MOUSSAKA AGNEAU MDCAR 6X300G"
+La Fiche Technique Article "23552 - MOUSSAKA AGNEAU MDCAR 6X300G" vient d'être validée.
+Cet Article est maintenant actif et disponible dans l'ensemble de notre système informatique.
+
+INFORMATIONS PRINCIPALES:
+Site d'assemblage: AVIGNON
+
+Listes des produits créés:
+30783264, 
+
+INFORMATIONS SUPPLEMENTAIRES:
+Code Article LDC: 23552
+Gencod EAN Article: 3270190215721
+Gencod EAN Colis: 03276553274794
+Nombre d'UVC par colis: 6
+Poids net de l'unité de vente facturée (en Kg): 0.3
+Identifiant du Dossier Technique: 916-v17
+Unité de facturation: Pièce
+Durée de vie garantie client (en jours): 33
+Durée de vie Production (en jours): 50
+Désignation Commerciale: MOUSSAKA AGNEAU MDCAR
+
+
+COMMENTAIRE:
+
+==============================
+==============================
+Date: 2015-12-08
+Login du modificateur: superviseur
+
+m
+
+Bonne journée à tous.
+Ce message a été envoyé automatiquement par le module Intranet - Fiche Technique Article.
+
+2015-12-08 13:29:00 MSG 127.0.0.1 Validation : Validation superviseur SYSTEM <InformatiqueSupport.AVIGNON@agis-sa.fr> christine.alberola@agis-sa.fr
+FTA/Validée: "23552 - MOUSSAKA AGNEAU MDCAR 6X300G"
+La Fiche Technique Article "23552 - MOUSSAKA AGNEAU MDCAR 6X300G" vient d'être validée.
+Cet Article est maintenant actif et disponible dans l'ensemble de notre système informatique.
+
+INFORMATIONS PRINCIPALES:
+Site d'assemblage: AVIGNON
+
+Listes des produits créés:
+30783264, 
+
+INFORMATIONS SUPPLEMENTAIRES:
+Code Article LDC: 23552
+Gencod EAN Article: 3270190215721
+Gencod EAN Colis: 03276553274794
+Nombre d'UVC par colis: 6
+Poids net de l'unité de vente facturée (en Kg): 0.3
+Identifiant du Dossier Technique: 916-v17
+Unité de facturation: Pièce
+Durée de vie garantie client (en jours): 33
+Durée de vie Production (en jours): 50
+Désignation Commerciale: MOUSSAKA AGNEAU MDCAR
+
+
+COMMENTAIRE:
+
+==============================
+==============================
+Date: 2015-12-08
+Login du modificateur: superviseur
+
+m
+
+Bonne journée à tous.
+Ce message a été envoyé automatiquement par le module Intranet - Fiche Technique Article.
+
+2015-12-08 13:29:00 MSG 127.0.0.1 Validation : Validation superviseur SYSTEM <InformatiqueSupport.AVIGNON@agis-sa.fr> fabienne.cheirezy@agis-sa.fr
+FTA/Validée: "23552 - MOUSSAKA AGNEAU MDCAR 6X300G"
+La Fiche Technique Article "23552 - MOUSSAKA AGNEAU MDCAR 6X300G" vient d'être validée.
+Cet Article est maintenant actif et disponible dans l'ensemble de notre système informatique.
+
+INFORMATIONS PRINCIPALES:
+Site d'assemblage: AVIGNON
+
+Listes des produits créés:
+30783264, 
+
+INFORMATIONS SUPPLEMENTAIRES:
+Code Article LDC: 23552
+Gencod EAN Article: 3270190215721
+Gencod EAN Colis: 03276553274794
+Nombre d'UVC par colis: 6
+Poids net de l'unité de vente facturée (en Kg): 0.3
+Identifiant du Dossier Technique: 916-v17
+Unité de facturation: Pièce
+Durée de vie garantie client (en jours): 33
+Durée de vie Production (en jours): 50
+Désignation Commerciale: MOUSSAKA AGNEAU MDCAR
+
+
+COMMENTAIRE:
+
+==============================
+==============================
+Date: 2015-12-08
+Login du modificateur: superviseur
+
+m
+
+Bonne journée à tous.
+Ce message a été envoyé automatiquement par le module Intranet - Fiche Technique Article.
+
+2015-12-08 13:29:00 MSG 127.0.0.1 Validation : Validation superviseur SYSTEM <InformatiqueSupport.AVIGNON@agis-sa.fr> marie-paule.couget@agis-sa.fr
+FTA/Validée: "23552 - MOUSSAKA AGNEAU MDCAR 6X300G"
+La Fiche Technique Article "23552 - MOUSSAKA AGNEAU MDCAR 6X300G" vient d'être validée.
+Cet Article est maintenant actif et disponible dans l'ensemble de notre système informatique.
+
+INFORMATIONS PRINCIPALES:
+Site d'assemblage: AVIGNON
+
+Listes des produits créés:
+30783264, 
+
+INFORMATIONS SUPPLEMENTAIRES:
+Code Article LDC: 23552
+Gencod EAN Article: 3270190215721
+Gencod EAN Colis: 03276553274794
+Nombre d'UVC par colis: 6
+Poids net de l'unité de vente facturée (en Kg): 0.3
+Identifiant du Dossier Technique: 916-v17
+Unité de facturation: Pièce
+Durée de vie garantie client (en jours): 33
+Durée de vie Production (en jours): 50
+Désignation Commerciale: MOUSSAKA AGNEAU MDCAR
+
+
+COMMENTAIRE:
+
+==============================
+==============================
+Date: 2015-12-08
+Login du modificateur: superviseur
+
+m
+
+Bonne journée à tous.
+Ce message a été envoyé automatiquement par le module Intranet - Fiche Technique Article.
+
+2015-12-08 13:29:00 MSG 127.0.0.1 Validation : Validation superviseur SYSTEM <InformatiqueSupport.AVIGNON@agis-sa.fr> sarah-emilie bernard
+FTA/Validée: "23552 - MOUSSAKA AGNEAU MDCAR 6X300G"
+La Fiche Technique Article "23552 - MOUSSAKA AGNEAU MDCAR 6X300G" vient d'être validée.
+Cet Article est maintenant actif et disponible dans l'ensemble de notre système informatique.
+
+INFORMATIONS PRINCIPALES:
+Site d'assemblage: AVIGNON
+
+Listes des produits créés:
+30783264, 
+
+INFORMATIONS SUPPLEMENTAIRES:
+Code Article LDC: 23552
+Gencod EAN Article: 3270190215721
+Gencod EAN Colis: 03276553274794
+Nombre d'UVC par colis: 6
+Poids net de l'unité de vente facturée (en Kg): 0.3
+Identifiant du Dossier Technique: 916-v17
+Unité de facturation: Pièce
+Durée de vie garantie client (en jours): 33
+Durée de vie Production (en jours): 50
+Désignation Commerciale: MOUSSAKA AGNEAU MDCAR
+
+
+COMMENTAIRE:
+
+==============================
+==============================
+Date: 2015-12-08
+Login du modificateur: superviseur
+
+m
+
+Bonne journée à tous.
+Ce message a été envoyé automatiquement par le module Intranet - Fiche Technique Article.
+
+2015-12-08 13:29:00 MSG 127.0.0.1 Validation : Validation superviseur SYSTEM <InformatiqueSupport.AVIGNON@agis-sa.fr> jessica.bres@agis-sa.fr
+FTA/Validée: "23552 - MOUSSAKA AGNEAU MDCAR 6X300G"
+La Fiche Technique Article "23552 - MOUSSAKA AGNEAU MDCAR 6X300G" vient d'être validée.
+Cet Article est maintenant actif et disponible dans l'ensemble de notre système informatique.
+
+INFORMATIONS PRINCIPALES:
+Site d'assemblage: AVIGNON
+
+Listes des produits créés:
+30783264, 
+
+INFORMATIONS SUPPLEMENTAIRES:
+Code Article LDC: 23552
+Gencod EAN Article: 3270190215721
+Gencod EAN Colis: 03276553274794
+Nombre d'UVC par colis: 6
+Poids net de l'unité de vente facturée (en Kg): 0.3
+Identifiant du Dossier Technique: 916-v17
+Unité de facturation: Pièce
+Durée de vie garantie client (en jours): 33
+Durée de vie Production (en jours): 50
+Désignation Commerciale: MOUSSAKA AGNEAU MDCAR
+
+
+COMMENTAIRE:
+
+==============================
+==============================
+Date: 2015-12-08
+Login du modificateur: superviseur
+
+m
+
+Bonne journée à tous.
+Ce message a été envoyé automatiquement par le module Intranet - Fiche Technique Article.
+
+2015-12-08 13:29:00 MSG 127.0.0.1 Validation : Validation superviseur SYSTEM <InformatiqueSupport.AVIGNON@agis-sa.fr> marie-paule.couget@agis-sa.fr
+FTA/Validée: "23552 - MOUSSAKA AGNEAU MDCAR 6X300G"
+La Fiche Technique Article "23552 - MOUSSAKA AGNEAU MDCAR 6X300G" vient d'être validée.
+Cet Article est maintenant actif et disponible dans l'ensemble de notre système informatique.
+
+INFORMATIONS PRINCIPALES:
+Site d'assemblage: AVIGNON
+
+Listes des produits créés:
+30783264, 
+
+INFORMATIONS SUPPLEMENTAIRES:
+Code Article LDC: 23552
+Gencod EAN Article: 3270190215721
+Gencod EAN Colis: 03276553274794
+Nombre d'UVC par colis: 6
+Poids net de l'unité de vente facturée (en Kg): 0.3
+Identifiant du Dossier Technique: 916-v17
+Unité de facturation: Pièce
+Durée de vie garantie client (en jours): 33
+Durée de vie Production (en jours): 50
+Désignation Commerciale: MOUSSAKA AGNEAU MDCAR
+
+
+COMMENTAIRE:
+
+==============================
+==============================
+Date: 2015-12-08
+Login du modificateur: superviseur
+
+m
+
+Bonne journée à tous.
+Ce message a été envoyé automatiquement par le module Intranet - Fiche Technique Article.
+
+2015-12-08 13:29:00 MSG 127.0.0.1 Validation : Validation superviseur SYSTEM <InformatiqueSupport.AVIGNON@agis-sa.fr> chloe.viaux@agis-sa.fr
+FTA/Validée: "23552 - MOUSSAKA AGNEAU MDCAR 6X300G"
+La Fiche Technique Article "23552 - MOUSSAKA AGNEAU MDCAR 6X300G" vient d'être validée.
+Cet Article est maintenant actif et disponible dans l'ensemble de notre système informatique.
+
+INFORMATIONS PRINCIPALES:
+Site d'assemblage: AVIGNON
+
+Listes des produits créés:
+30783264, 
+
+INFORMATIONS SUPPLEMENTAIRES:
+Code Article LDC: 23552
+Gencod EAN Article: 3270190215721
+Gencod EAN Colis: 03276553274794
+Nombre d'UVC par colis: 6
+Poids net de l'unité de vente facturée (en Kg): 0.3
+Identifiant du Dossier Technique: 916-v17
+Unité de facturation: Pièce
+Durée de vie garantie client (en jours): 33
+Durée de vie Production (en jours): 50
+Désignation Commerciale: MOUSSAKA AGNEAU MDCAR
+
+
+COMMENTAIRE:
+
+==============================
+==============================
+Date: 2015-12-08
+Login du modificateur: superviseur
+
+m
+
+Bonne journée à tous.
+Ce message a été envoyé automatiquement par le module Intranet - Fiche Technique Article.
+
+2015-12-08 13:29:00 MSG 127.0.0.1 Validation : Validation superviseur SYSTEM <InformatiqueSupport.AVIGNON@agis-sa.fr> benjamin.traniello@agis-sa.fr
+FTA/Validée: "23552 - MOUSSAKA AGNEAU MDCAR 6X300G"
+La Fiche Technique Article "23552 - MOUSSAKA AGNEAU MDCAR 6X300G" vient d'être validée.
+Cet Article est maintenant actif et disponible dans l'ensemble de notre système informatique.
+
+INFORMATIONS PRINCIPALES:
+Site d'assemblage: AVIGNON
+
+Listes des produits créés:
+30783264, 
+
+INFORMATIONS SUPPLEMENTAIRES:
+Code Article LDC: 23552
+Gencod EAN Article: 3270190215721
+Gencod EAN Colis: 03276553274794
+Nombre d'UVC par colis: 6
+Poids net de l'unité de vente facturée (en Kg): 0.3
+Identifiant du Dossier Technique: 916-v17
+Unité de facturation: Pièce
+Durée de vie garantie client (en jours): 33
+Durée de vie Production (en jours): 50
+Désignation Commerciale: MOUSSAKA AGNEAU MDCAR
+
+
+COMMENTAIRE:
+
+==============================
+==============================
+Date: 2015-12-08
+Login du modificateur: superviseur
+
+m
+
+Bonne journée à tous.
+Ce message a été envoyé automatiquement par le module Intranet - Fiche Technique Article.
+
+2015-12-08 13:29:00 MSG 127.0.0.1 Validation : Validation superviseur SYSTEM <InformatiqueSupport.AVIGNON@agis-sa.fr> laura.badard@agis-sa.fr
+FTA/Validée: "23552 - MOUSSAKA AGNEAU MDCAR 6X300G"
+La Fiche Technique Article "23552 - MOUSSAKA AGNEAU MDCAR 6X300G" vient d'être validée.
+Cet Article est maintenant actif et disponible dans l'ensemble de notre système informatique.
+
+INFORMATIONS PRINCIPALES:
+Site d'assemblage: AVIGNON
+
+Listes des produits créés:
+30783264, 
+
+INFORMATIONS SUPPLEMENTAIRES:
+Code Article LDC: 23552
+Gencod EAN Article: 3270190215721
+Gencod EAN Colis: 03276553274794
+Nombre d'UVC par colis: 6
+Poids net de l'unité de vente facturée (en Kg): 0.3
+Identifiant du Dossier Technique: 916-v17
+Unité de facturation: Pièce
+Durée de vie garantie client (en jours): 33
+Durée de vie Production (en jours): 50
+Désignation Commerciale: MOUSSAKA AGNEAU MDCAR
+
+
+COMMENTAIRE:
+
+==============================
+==============================
+Date: 2015-12-08
+Login du modificateur: superviseur
+
+m
+
+Bonne journée à tous.
+Ce message a été envoyé automatiquement par le module Intranet - Fiche Technique Article.
+
+2015-12-08 13:29:00 MSG 127.0.0.1 Validation : Validation superviseur SYSTEM <InformatiqueSupport.AVIGNON@agis-sa.fr> julien.calvo@agis-sa.fr
+FTA/Validée: "23552 - MOUSSAKA AGNEAU MDCAR 6X300G"
+La Fiche Technique Article "23552 - MOUSSAKA AGNEAU MDCAR 6X300G" vient d'être validée.
+Cet Article est maintenant actif et disponible dans l'ensemble de notre système informatique.
+
+INFORMATIONS PRINCIPALES:
+Site d'assemblage: AVIGNON
+
+Listes des produits créés:
+30783264, 
+
+INFORMATIONS SUPPLEMENTAIRES:
+Code Article LDC: 23552
+Gencod EAN Article: 3270190215721
+Gencod EAN Colis: 03276553274794
+Nombre d'UVC par colis: 6
+Poids net de l'unité de vente facturée (en Kg): 0.3
+Identifiant du Dossier Technique: 916-v17
+Unité de facturation: Pièce
+Durée de vie garantie client (en jours): 33
+Durée de vie Production (en jours): 50
+Désignation Commerciale: MOUSSAKA AGNEAU MDCAR
+
+
+COMMENTAIRE:
+
+==============================
+==============================
+Date: 2015-12-08
+Login du modificateur: superviseur
+
+m
+
+Bonne journée à tous.
+Ce message a été envoyé automatiquement par le module Intranet - Fiche Technique Article.
+
+2015-12-08 13:29:00 MSG 127.0.0.1 Validation : Validation superviseur SYSTEM <InformatiqueSupport.AVIGNON@agis-sa.fr> InformatiqueSupport.AVIGNON@agis-sa.fr
+FTA/Information "23552 - MOUSSAKA AGNEAU MDCAR 6X300G"
+DESTINATAIRES:
+JAEGLE cecile: cecile.jaegle@agis-sa.fr
+WEYMULLER julie: julie.weymuller@agis-sa.fr
+SANEGRE boris: boris.sanegre@agis-sa.fr
+COUGET marie-paule (R&D): marie-paule.couget@agis-sa.fr
+PFISTER cecile: cecile.pfister@agis-sa.fr
+COUSTON Jasmine: jasmine.couston@agis-sa.fr
+TARDY lise: lise.tardy@agis-sa.fr
+SYSTEM superviseur: InformatiqueSupport.AVIGNON@agis-sa.fr
+BERTAUX virginie: virginie.bertaux@agis-sa.fr
+MORIN stephane: stephane.morin@ldc.fr
+GASTAL Annabel: annabel.gastal@agis-sa.fr
+EMBALLAGE Avignon: christelle.bernard@agis-sa.fr
+MEROT mathieu: mathieu.merot@agis-sa.fr
+RAGON johan: johan.ragon@agis-sa.fr
+LUCAS christine: christine.lucas@agis-sa.fr
+DUSSAUD lucile: lucile.dussaud@agis-sa.fr
+BOURGUIGNON anne-marie: anne-marie.bourguignon@agis-sa.fr
+CHOLLET Christine: christine.alberola@agis-sa.fr
+CHEIREZY Fabienne: fabienne.cheirezy@agis-sa.fr
+COUGET Marie-Paule (Création FTA): marie-paule.couget@agis-sa.fr
+BERNARD Sarah-emilie: sarah-emilie bernard
+BRES Jessica: jessica.bres@agis-sa.fr
+COUGET marie-paule (Gestion): marie-paule.couget@agis-sa.fr
+VIAUX Chloe: chloe.viaux@agis-sa.fr
+TRANIELLO Benjamin: benjamin.traniello@agis-sa.fr
+BADARD Laura: laura.badard@agis-sa.fr
+CALVO Julien: julien.calvo@agis-sa.fr
+
+
+Message envoyé:
+
+La Fiche Technique Article "23552 - MOUSSAKA AGNEAU MDCAR 6X300G" vient d'être validée.
+Cet Article est maintenant actif et disponible dans l'ensemble de notre système informatique.
+
+INFORMATIONS PRINCIPALES:
+Site d'assemblage: AVIGNON
+
+Listes des produits créés:
+30783264, 
+
+INFORMATIONS SUPPLEMENTAIRES:
+Code Article LDC: 23552
+Gencod EAN Article: 3270190215721
+Gencod EAN Colis: 03276553274794
+Nombre d'UVC par colis: 6
+Poids net de l'unité de vente facturée (en Kg): 0.3
+Identifiant du Dossier Technique: 916-v17
+Unité de facturation: Pièce
+Durée de vie garantie client (en jours): 33
+Durée de vie Production (en jours): 50
+Désignation Commerciale: MOUSSAKA AGNEAU MDCAR
+
+
+COMMENTAIRE:
+
+==============================
+==============================
+Date: 2015-12-08
+Login du modificateur: superviseur
+
+m
+
+Bonne journée à tous.
+Ce message a été envoyé automatiquement par le module Intranet - Fiche Technique Article.
+
+INFORMATIONS DE DEBUGGAGE:
+
+
+SELECT code_produit_agrologic_fta_nomenclature,prefixe_annexe_agrologic_article_codification FROM fta_composant, annexe_agrologic_article_codification WHERE fta_composant.id_fta=14677 AND is_composition_fta_composant=1  AND fta_composant.id_annexe_agrologic_article_codification=annexe_agrologic_article_codification.id_annexe_agrologic_article_codification ORDER BY prefixe_annexe_agrologic_article_codification ASC, nom_fta_nomenclature

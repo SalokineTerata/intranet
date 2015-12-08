@@ -45,28 +45,25 @@ $siteDeProduction = Lib::getParameterFromRequest(GeoModel::KEYNAME);
  */
 if ($idFtaWorkflow == "-1") {
     //Averissement
-    $titre = "Espace de travail d'une Fiche Technique Article";
-    $message = "Veuillez selectionner un espace de travail .<br><br>"
-    ;
+    $titre = UserInterfaceMessage::FR_WARNING_DATA_ESPACE_DE_TRAVAIL_TITLE;
+    $message = UserInterfaceMessage::FR_WARNING_DATA_ESPACE_DE_TRAVAIL;
     afficher_message($titre, $message, $redirection);
 }
 if ($siteDeProduction == "-1") {
     //Averissement
-    $titre = "Site de production d'une Fiche Technique Article";
-    $message = "Veuillez selectionner un site de production .<br><br>"
-    ;
+    $titre = UserInterfaceMessage::FR_WARNING_DATA_SITE_DE_PRODUCTION_TITLE;
+    $message = UserInterfaceMessage::FR_WARNING_DATA_SITE_DE_PRODUCTION;
     afficher_message($titre, $message, $redirection);
 }
 if (!$designationCommercialeFta) {
     //Averissement
-    $titre = "Désignation commerciale d'une Fiche Technique Article";
-    $message = "Veuillez saisir une désignation commerciale .<br><br>"
-    ;
+    $titre = UserInterfaceMessage::FR_WARNING_DATA_DESIGNATION_COMMERCIALE_TITLE;
+    $message = UserInterfaceMessage::FR_WARNING_DATA_DESIGNATION_COMMERCIALE;
     afficher_message($titre, $message, $redirection);
 }
 
-If ($idFtaWorkflow == '2' and $idFtaRole == '1') {
-    $idFtaRole = '6';
+If ($idFtaWorkflow == '2' and $idFtaRole == FtaRoleModel::ID_FTA_ROLE_CHEF_DE_PROJET) {
+    $idFtaRole = FtaRoleModel::ID_FTA_ROLE_SITE;
 }
 
 switch ($action) {
@@ -106,7 +103,11 @@ switch ($action) {
 
         FtaSuiviProjetModel::initFtaSuiviProjet($idFta);
 
-        //Cas d'une fiche Présentation
+        //Cas d'une fiche Présentation 
+        /**
+         * Ce cas n'est plus utiliser puisque l'espasce de travail Présentation,
+         * regroupe tous les chapitres nécéssaire
+         */
         if ($abreviationFtaEtat == 'P') {
             //Condition where
             $where = '';
@@ -181,12 +182,19 @@ switch ($action) {
 
     case 2: //Duplication d'une Fiche Technique Article
 
-        $arrayFta = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
-                        'SELECT DISTINCT ' . FtaModel::KEYNAME
-                        . ' FROM ' . FtaModel::TABLENAME
-                        . ' WHERE ( ' . FtaModel::KEYNAME . ' = ' . $id_fta . ' ) '
-        );
-
+        if ($id_fta) {
+            $arrayFta = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
+                            'SELECT DISTINCT ' . FtaModel::KEYNAME
+                            . ' FROM ' . FtaModel::TABLENAME
+                            . ' WHERE ( ' . FtaModel::KEYNAME . ' = ' . $id_fta . ' ) '
+            );
+        } else {
+            //Averissement
+            $titre = "Manque de donnée id_fta";
+            $message = "Veuillez saisir un id_fta existant à dupliquer .<br><br>"
+            ;
+            afficher_message($titre, $message, $redirection);
+        }
         if ($arrayFta) {
             //Redirection
             header('Location: duplication_fiche.php?'
@@ -198,9 +206,8 @@ switch ($action) {
                     . '&id_fta_workflow=' . $idFtaWorkflow);
         } else {
             //Averissement
-            $titre = "Fiche Technique Article";
-            $message = "Veuillez saisir un id fta existant .<br><br>"
-            ;
+            $titre = UserInterfaceMessage::FR_WARNING_DATA_ID_FTA_TITLE;
+            $message = UserInterfaceMessage::FR_WARNING_DATA_ID_FTA;
             afficher_message($titre, $message, $redirection);
         }
         break;

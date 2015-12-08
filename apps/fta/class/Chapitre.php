@@ -817,7 +817,7 @@ class Chapitre {
         $ftaView = new FtaView($ftaModel);
         $ftaView->setIsEditable($isEditable);
         $ftaView->setFtaChapitreModelById(self::ID_CHAPITRE_IDENTITE);
-
+      
         //Emballages du Colis
         $bloc.=$ftaView->getHtmlEmballageDuColis($id_fta, $idChapitre, $synthese_action, self::$comeback, self::$id_fta_etat, self::$abrevation_etat, self::$id_fta_role);
 

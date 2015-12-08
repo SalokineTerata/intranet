@@ -83,7 +83,7 @@ function envoismail($sujetmail, $text, $destinataire, $expediteur, $paramTypeMai
         $globalConfig = new GlobalConfig();
     }
 
-    $logMail = new Logger('../'.$globalConfig->getConf()->getUrlRoot().'/log/');
+//    $logMail = new Logger('../../log/');
 
 
     if ($globalConfig->getConf()->getSmtpServiceEnable() == False) {
@@ -119,22 +119,13 @@ function envoismail($sujetmail, $text, $destinataire, $expediteur, $paramTypeMai
                 /**
                  * Enregistrement des envoies de transactions mail dans le fichier log
                  * 
-                 * "date heure : $login : $module : $expediteur : $destinataire : $sujetmail
-                 * 
-                 */
-                $logMail->log("fta", $text, $paramTypeMail, $expediteur, $destinataire, $sujetmail, 1);
-                $paramLog = $paramTypeMail . " " . $expediteur . " " . $destinataire . "\n" . $sujetmail . "\n" . $text;
-                Logger::AddLog($paramLog, $paramTypeMail);
-
-                /**
-                 * Enregistrement de l'historique des mails dans le fichier log
-                 * 
-                 * "========================================================="
                  * "date heure : $login : $module : $expediteur : $destinataire : $sujetmail"
                  * "$text"
                  * 
                  */
-                $logMail->log("fta", $text, "historique", $expediteur, $destinataire, $sujetmail, 0);
+                $paramLog = $paramTypeMail . " " . $expediteur . " " . $destinataire . "\n" . $sujetmail . "\n" . $text;
+                Logger::AddMail($paramLog, $paramTypeMail);
+
                 break;
 
             case "Correction" :
@@ -147,8 +138,8 @@ function envoismail($sujetmail, $text, $destinataire, $expediteur, $paramTypeMai
                  * "$text"
                  * 
                  */
-                $logMail->log("fta", $text, $paramTypeMail, $expediteur, $destinataire, $sujetmail, 1);
-                /**
+                $paramLog = $paramTypeMail . " " . $expediteur . " " . $destinataire . "\n" . $sujetmail . "\n" . $text;
+                Logger::AddMail($paramLog, $paramTypeMail);/**
                  * Enregistrement de l'historique des mails dans le fichier log
                  * 
                  * "========================================================="
@@ -156,7 +147,6 @@ function envoismail($sujetmail, $text, $destinataire, $expediteur, $paramTypeMai
                  * "$text"
                  * 
                  */
-                $logMail->log("fta", $text, "historique", $expediteur, $destinataire, $sujetmail, 0);
                 break;
 
             case "Validation" :
@@ -169,8 +159,8 @@ function envoismail($sujetmail, $text, $destinataire, $expediteur, $paramTypeMai
                  * "$text"
                  * 
                  */
-                $logMail->log("fta", $text, $paramTypeMail, $expediteur, $destinataire, $sujetmail, 1);
-                /**
+                $paramLog = $paramTypeMail . " " . $expediteur . " " . $destinataire . "\n" . $sujetmail . "\n" . $text;
+                Logger::AddMail($paramLog, $paramTypeMail);/**
                  * Enregistrement de l'historique des mails dans le fichier log
                  * 
                  * "========================================================="
@@ -178,7 +168,14 @@ function envoismail($sujetmail, $text, $destinataire, $expediteur, $paramTypeMai
                  * "$text"
                  * 
                  */
-                $logMail->log("fta", $text, "historique", $expediteur, $destinataire, $sujetmail, 0);
+                break;
+            case "Inscription" :
+                $paramLog = $paramTypeMail . " " . $expediteur . " " . $destinataire . "\n" . $sujetmail . "\n" . $text;
+                Logger::AddMail($paramLog, $paramTypeMail);
+                break;
+            case "CompteBloquer" :
+                $paramLog = $paramTypeMail . " " . $expediteur . " " . $destinataire . "\n" . $sujetmail . "\n" . $text;
+                Logger::AddMail($paramLog, $paramTypeMail);
                 break;
         }
 

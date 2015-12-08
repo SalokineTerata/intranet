@@ -525,15 +525,16 @@ class FtaTransitionModel {
          * Envoi du mail d'information
          */
         foreach ($paramListeDiffusion as $mail_validation) {
-
-            $destinataire = $mail_validation[UserModel::FIELDNAME_MAIL];
-            $liste_destinataire .=$mail_validation["prenom_nom"]
-                    . ": "
-                    . $destinataire
-                    . "\n"
-            ;
-            $expediteur = $prenom . " " . $nom . " <" . $mail . ">";
-            envoismail($sujetmail, $text, $destinataire, $expediteur, $typeMail);
+            if (!is_string($mail_validation)) {
+                $destinataire = $mail_validation[UserModel::FIELDNAME_MAIL];
+                $liste_destinataire .=$mail_validation["prenom_nom"]
+                        . ": "
+                        . $destinataire
+                        . "\n"
+                ;
+                $expediteur = $prenom . " " . $nom . " <" . $mail . ">";
+                envoismail($sujetmail, $text, $destinataire, $expediteur, $typeMail);
+            }
         }
 
         /*
@@ -549,8 +550,7 @@ class FtaTransitionModel {
                 . "\n"
                 . "INFORMATIONS DE DEBUGGAGE:\n"
                 . $logTransition
-        ;
-        {
+        ; {
             $expediteur = $prenom . " " . $nom . " <" . $mail . ">";
             envoismail($sujetmail, $corp, $mail, $expediteur, $typeMail);
         }
@@ -666,8 +666,7 @@ class FtaTransitionModel {
                 . $text
                 . "\n\n"
                 . $paramLogTransition
-        ;
-        {
+        ; {
             $expediteur = $prenom . " " . $nom . " <" . $mailUser . ">";
             envoismail($sujetmail, $corp, $mailUser, $expediteur, $typeMail);
         }

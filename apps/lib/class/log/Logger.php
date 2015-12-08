@@ -36,7 +36,7 @@ class Logger {
     const OUTPUT_CHR = "\n";
     //const OUTPUT_FILE = 'D:\\weblocal\\output.log';
     const OUTPUT_FILE = '../../log/output.log';
-    const OUTPUT_FILE_MAIL = '../../log/output.mail.log';
+    const OUTPUT_FILE_MAIL = '../../log/output_mail.log';
     const MSG_LEVEL_LOG = "LOG";
     const MSG_LEVEL_DEBUG = "DBG";
     const MSG_LEVEL_MAIL = "MSG";

@@ -85,8 +85,10 @@ class FtaRoleModel extends AbstractModel {
                         . '=' . FtaRoleModel::TABLENAME . '.' . FtaRoleModel::KEYNAME
                         . ' AND ' . FtaActionRoleModel::TABLENAME . '.' . FtaActionRoleModel::FIELDNAME_ID_FTA_WROKFLOW . '=' . $paramIdFtaWorkflow
         );
-        foreach ($arrayIdFtaRole as $rowsIdFtaRole) {
-            $IdFtaRole[] = $rowsIdFtaRole[FtaRoleModel::KEYNAME];
+        if ($arrayIdFtaRole) {
+            foreach ($arrayIdFtaRole as $rowsIdFtaRole) {
+                $IdFtaRole[] = $rowsIdFtaRole[FtaRoleModel::KEYNAME];
+            }
         }
 
         return $IdFtaRole;

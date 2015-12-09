@@ -78,7 +78,7 @@ class Navigation {
         //Variables
         $listeRole = array();
         $globalConfig = new GlobalConfig();
-        UserModel::ConnexionFalse($globalConfig);
+        UserModel::checkUserSessionExpired($globalConfig);
         $idUser = $globalConfig->getAuthenticatedUser()->getKeyValue();
 
         $html_table = 'table '              //Permet d'harmoniser les tableaux
@@ -279,7 +279,7 @@ class Navigation {
         $ProcessusValide = array();
         $ProcessusEnLecture = array();
         $globalConfig = new GlobalConfig();
-        UserModel::ConnexionFalse($globalConfig);
+        UserModel::checkUserSessionExpired($globalConfig);
 
         $id_user = $globalConfig->getAuthenticatedUser()->getKeyValue();
         $idFtaRole = self::$id_fta_role;

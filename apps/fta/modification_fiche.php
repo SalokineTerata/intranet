@@ -89,7 +89,7 @@ if ($idFta) {
      * Verification des droits d'accès sur une Fta en modification
      */
     if ($idFtaEtat == "1" and ! $ftaModification) {
-        $titre = UserInterfaceMessage::FR_WARNING_ACCES_RIGHTS_TILE;
+        $titre = UserInterfaceMessage::FR_WARNING_ACCES_RIGHTS_TITLE;
         $message = UserInterfaceMessage::FR_WARNING_ACCES_RIGHTS;
         $redirection = "index.php";
         afficher_message($titre, $message, $redirection);
@@ -133,7 +133,7 @@ if ($idFta) {
         $idFtaWorkflow = $ftaModel->getDataField(FtaModel::FIELDNAME_WORKFLOW)->getFieldValue();
         $idFtaRoleAcces = FtaRoleModel::getIdFtaRoleByIdUserAndWorkflow($idUser, $idFtaWorkflow);
         if (!$idFtaRoleAcces) {
-            $titre = UserInterfaceMessage::FR_WARNING_ACCES_RIGHTS_TILE;
+            $titre = UserInterfaceMessage::FR_WARNING_ACCES_RIGHTS_TITLE;
             $message = UserInterfaceMessage::FR_WARNING_ACCES_RIGHTS;
             $redirection = "";
             afficher_message($titre, $message, $redirection);

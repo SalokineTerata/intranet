@@ -73,7 +73,7 @@ if ($id_user) {
     $numeroDePageCourante = Lib::getParameterFromRequest('numeroPage', '1');
 
     if (!$fta_consultation) {
-        $titre = UserInterfaceMessage::FR_WARNING_ACCES_RIGHTS_TILE;
+        $titre = UserInterfaceMessage::FR_WARNING_ACCES_RIGHTS_TITLE;
         $message = UserInterfaceMessage::FR_WARNING_ACCES_RIGHTS
                 . " Veuillez vous déconnecter et contactez l'administrateur de l'intranet";
         $redirection = "index.php";

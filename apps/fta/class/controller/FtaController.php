@@ -11,7 +11,7 @@
  * @author salokine
  */
 class FtaController {
-    //put your code here
+   
 }
 
 ?>

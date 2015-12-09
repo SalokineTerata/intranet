@@ -207,6 +207,7 @@ class UserModel extends AbstractModel {
      * Vérifie si l'utilisateur a toujours sa session active.
      * Sinon, c'est qu'elle a expirée.
      * @param GlobalConfig $paramGlobalConfig
+     * @return boolean
      */
     public static function isUserSessionExpired(GlobalConfig $paramGlobalConfig) {
         $errorReturn = FALSE;

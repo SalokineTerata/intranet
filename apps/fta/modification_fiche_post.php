@@ -122,7 +122,10 @@ switch ($action) {
         $modeChapitre = new FtaChapitreModel($paramIdFtaChapitreEncours);
         $idFtaWorkflowStruture = FtaWorkflowStructureModel::getIdFtaWorkflowStructureByIdFtaAndIdChapitre($paramIdFta, $paramIdFtaChapitreEncours);
         $modelFtaWorkflowStruture = new FtaWorkflowStructureModel($idFtaWorkflowStruture);
-        if ($paramSignatureValidationSuiviProjet) {
+
+        $isFtaDataValidationSuccess = $modelFta->isFtaDataValidationSuccess();
+
+        if ($paramSignatureValidationSuiviProjet and $isFtaDataValidationSuccess == TRUE) {
             $modelFtaSuiviProjet->setSigned($paramSignatureValidationSuiviProjet);
             $modelFtaSuiviProjet->getDataField(FtaSuiviProjetModel::FIELDNAME_DATE_VALIDATION_SUIVI_PROJET)->setFieldValue(date("Y-m-d"));
         }
@@ -359,7 +362,7 @@ switch ($action) {
             $modelFtaSuiviProjet->getDataField(FtaSuiviProjetModel::FIELDNAME_SIGNATURE_VALIDATION_SUIVI_PROJET)->setFieldValue("0");
         }
 
-//Sauvegarde des enregistrements dans la base de données.
+        //Sauvegarde des enregistrements dans la base de données.
         $modelFtaSuiviProjet->saveToDatabase();
 
 

@@ -99,6 +99,7 @@ class FtaModel extends AbstractModel {
     const FIELDNAME_VIRTUAL_FTA_PROCESSUS_DELAI = "VIRTUAL_fta_processus_delai";
     const FIELDNAME_WORKFLOW = "id_fta_workflow";
     const ID_POIDS_VARIABLE = "3";
+    const MESSAGE_DATA_VALIDATION_CODE_LDC = UserInterfaceMessage::FR_WARNING_DATA_VALIDATION_FTA_CODE_LDC;
 
     /**
      * Utilisateur ayant créé la FTA
@@ -133,6 +134,7 @@ class FtaModel extends AbstractModel {
     private $donneeEmballageParColis;
     private $donneeEmballageDuColis;
     private $donneeEmballagePallette;
+    private $messageErreurDataValidation;
 
     public function __construct($paramId = NULL, $paramIsCreateRecordsetInDatabaseIfKeyDoesntExist = AbstractModel::DEFAULT_IS_CREATE_RECORDSET_IN_DATABASE_IF_KEY_DOESNT_EXIST) {
         parent::__construct($paramId, $paramIsCreateRecordsetInDatabaseIfKeyDoesntExist);
@@ -155,6 +157,78 @@ class FtaModel extends AbstractModel {
                 new GeoModel($this->getDataField(self::FIELDNAME_SITE_EXPEDITION_FTA)->getFieldValue()
                 , DatabaseRecord::VALUE_DONT_CREATE_RECORD_IN_DATABASE_IF_KEY_DOESNT_EXIST)
         );
+    }
+
+    /**
+     * Les données de la FTA sont-elles validées ?
+     * Ce test vérifie le renseignement des données obligatoires.
+     * @return boolean     
+     */
+    public function isFtaDataValidationSuccess() {
+        $return = 0;
+
+        /*
+         * Liste des Contrôles 
+         */
+        $return += $this->checkDataValidationCodeLDC();
+        $return += $this->checkDataValidationPoidsUvc();
+
+        if ($return != 0) {
+            $titre;
+            $message = $this->getMessageErreurDataValidation();
+            $redirection;
+            afficher_message($titre, $message, $redirection);
+        }
+
+        return $return;
+    }
+
+    /**
+     * 
+     * @return boolean
+     */
+    private function checkDataValidationPoidsUvc() {
+        $return = TRUE;
+        $newErrorMessage = "...";
+
+        //Check... 
+        $return;
+
+        if ($return != 0) {
+            //Ajout de la raison de l'echec du contrôle dans le message d'information utilisateur.
+            $this->addMessageErreurDataValidation($newErrorMessage);
+        }
+        return $return;
+    }
+
+    /**
+     * 
+     * @return boolean
+     */
+    private function checkDataValidationCodeLDC() {
+        $return = TRUE;
+        $newErrorMessage = self::MESSAGE_DATA_VALIDATION_CODE_LDC;
+
+        //Check... 
+        $return;
+
+        if ($return != 0) {
+            //Ajout de la raison de l'echec du contrôle dans le message d'information utilisateur.
+            $this->addMessageErreurDataValidation($newErrorMessage);
+        }
+        return $return;
+    }
+
+    private function addMessageErreurDataValidation($paramNewErrorMessage) {
+        $this->setMessageErreurDataValidation($this->getMessageErreurDataValidation() + $paramNewErrorMessage);
+    }
+
+    function getMessageErreurDataValidation() {
+        return $this->messageErreurDataValidation;
+    }
+
+    function setMessageErreurDataValidation($paramMessageErreurDataValidation) {
+        $this->messageErreurDataValidation = $paramMessageErreurDataValidation;
     }
 
     protected function setDefaultValues() {
@@ -551,7 +625,7 @@ class FtaModel extends AbstractModel {
                                 . ", " . FtaConditionnementModel::FIELDNAME_LONGUEUR_FTA_CONDITIONNEMENT . ", " . FtaConditionnementModel::FIELDNAME_LARGEUR_FTA_CONDITIONNEMENT
                                 . "  FROM " . FtaConditionnementModel::TABLENAME . ", " . AnnexeEmballageGroupeModel::TABLENAME . ", " . AnnexeEmballageGroupeTypeModel::TABLENAME . " "
                                 . " WHERE " . FtaConditionnementModel::TABLENAME . "." . FtaConditionnementModel::FIELDNAME_ID_FTA . "=" . $this->getKeyValue() . " "
-                                . " AND " . AnnexeEmballageGroupeTypeModel::TABLENAME . "." . AnnexeEmballageGroupeTypeModel::KEYNAME . "=" . AnnexeEmballageGroupeTypeModel::EMBALLAGE_UVC. " "
+                                . " AND " . AnnexeEmballageGroupeTypeModel::TABLENAME . "." . AnnexeEmballageGroupeTypeModel::KEYNAME . "=" . AnnexeEmballageGroupeTypeModel::EMBALLAGE_UVC . " "
                                 . " AND " . FtaConditionnementModel::TABLENAME . "." . FtaConditionnementModel::FIELDNAME_ID_ANNEXE_EMBALLAGE_GROUPE
                                 . "=" . AnnexeEmballageGroupeModel::TABLENAME . "." . AnnexeEmballageGroupeModel::KEYNAME . " "
                                 . " AND ( "

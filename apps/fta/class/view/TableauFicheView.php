@@ -62,7 +62,7 @@ class TableauFicheView {
 //        if ($paramResultLimitByPage != NULL) {
 //            $limit = "LIMIT 0,$paramResultLimitByPage";
 //        } else {
-//            $limit = "";
+//            $paramResultLimitByPage = "";
 //        }
 
         $modelfta = new FtaModel("4");
@@ -413,9 +413,9 @@ class TableauFicheView {
                                 . $AND_where_Site_de_production
                         ;
                         $order = "ORDER BY $paramOrderCommon ";
-                        $limit;
+                        $paramResultLimitByPage;
 
-                        $req = $select . $from . $where . $order . $limit;
+                        $req = $select . $from . $where . $order . $paramResultLimitByPage;
 
                         $result_liste = DatabaseOperation::query($req);
                         break;

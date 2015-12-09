@@ -7,7 +7,7 @@
 $id_fta = Lib::getParameterFromRequest(FtaModel::KEYNAME);
 //Récupération des Informations FTA
 $ftaModel = new FtaModel($id_fta);
-$siteDeProduction = $ftaModel->getDataField(FtaModel::FIELDNAME_SITE_ASSEMBLAGE)->getFieldValue();
+$siteDeProduction = $ftaModel->getDataField(FtaModel::FIELDNAME_SITE_PRODUCTION)->getFieldValue();
 $description_origine_transformation_fta = $ftaModel->getDataField(FtaModel::FIELDNAME_PRODUIT_TRANSFORME)->getFieldValue();
 $NOM_origine_transformation_fta = $ftaModel->getDataField(FtaModel::FIELDNAME_PRODUIT_TRANSFORME)->getFieldLabel();
 $synoptique_valide_fta = $ftaModel->getDataField(FtaModel::FIELDNAME_DESCRIPTION_DU_PRODUIT)->getFieldValue();

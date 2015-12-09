@@ -49,7 +49,7 @@ class AccueilFta {
          * On recherche les roles auxquelles l'utilisateur à les droits d'acces
          */
 
-        self::$arrayFtaRole = FtaRoleModel::getIdFtaRoleByIdUser(self::$idUser);
+        self::$arrayFtaRole = FtaRoleModel::getArrayIdFtaRoleByIdUser(self::$idUser);
 
         /**
          * Modification
@@ -726,7 +726,7 @@ class AccueilFta {
          * Droits d'actions
          */
         if (self::$idFtaRole == '1' or self::$idFtaRole == '6') {
-            $valueIsGestionnaire = FtaRoleModel::getValueIsGestionnaire(self::$idFtaRole);
+            $valueIsGestionnaire = FtaRoleModel::isGestionnaire(self::$idFtaRole);
         }
 
         if (self::$arrayIdFtaByUserAndWorkflow['1']) {

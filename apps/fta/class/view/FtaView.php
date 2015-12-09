@@ -423,7 +423,7 @@ class FtaView {
     }
 
     function ListeCodesoftEtiquettes($paramIdFta, $paramIsEditable) {
-        $SiteDeProduction = $this->getModel()->getDataField(FtaModel::FIELDNAME_SITE_ASSEMBLAGE)->getFieldValue();
+        $SiteDeProduction = $this->getModel()->getDataField(FtaModel::FIELDNAME_SITE_PRODUCTION)->getFieldValue();
         $etiqetteCodesoft = $this->getModel()->getDataField(FtaModel::FIELDNAME_ETIQUETTE_CODESOFT)->getFieldValue();
 
         $listeCodesoftEtiquettes = CodesoftEtiquettesModel::getListeCodesoftEtiquettesColis($paramIdFta, $paramIsEditable, $SiteDeProduction, $etiqetteCodesoft);

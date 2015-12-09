@@ -302,7 +302,7 @@ class FtaProcessusModel extends AbstractModel {
                             . ',' . FtaActionSiteModel::TABLENAME
                             . ',' . IntranetActionsModel::TABLENAME
                             . ',' . FtaWorkflowStructureModel::TABLENAME
-                            . ' WHERE ' . GeoModel::KEYNAME . '=' . FtaModel::FIELDNAME_SITE_ASSEMBLAGE
+                            . ' WHERE ' . GeoModel::KEYNAME . '=' . FtaModel::FIELDNAME_SITE_PRODUCTION
                             . ' AND ' . FtaActionSiteModel::FIELDNAME_ID_SITE . '=' . GeoModel::KEYNAME
                             . ' AND ' . IntranetActionsModel::TABLENAME . '.' . IntranetActionsModel::KEYNAME
                             . '=' . IntranetDroitsAccesModel::TABLENAME . '.' . IntranetDroitsAccesModel::FIELDNAME_ID_INTRANET_ACTIONS

@@ -252,7 +252,7 @@ $bloc .=$ftaComposantView->getHtmlDataField(FtaComposantModel::FIELDNAME_INGREDI
 $bloc.="</td></tr>";
 
 //Site de Fabrication
-$SiteDeProduction = $ftaModel->getDataField(FtaModel::FIELDNAME_SITE_ASSEMBLAGE)->getFieldValue();
+$SiteDeProduction = $ftaModel->getDataField(FtaModel::FIELDNAME_SITE_PRODUCTION)->getFieldValue();
 
 
 //Site de facbrication de la composition

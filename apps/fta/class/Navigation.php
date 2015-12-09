@@ -178,7 +178,7 @@ class Navigation {
         } else {
             $ftaRoleModel = new FtaRoleModel(self::$id_fta_role);
         }
-        $siteDeProduction = self::$ftaModel->getDataField(FtaModel::FIELDNAME_SITE_ASSEMBLAGE)->getFieldValue();
+        $siteDeProduction = self::$ftaModel->getDataField(FtaModel::FIELDNAME_SITE_PRODUCTION)->getFieldValue();
         $geoModel = new GeoModel($siteDeProduction);
         foreach ($arrayFtaEtatAndFta as $rowsFtaEtatAndFta) {
             //Récupération des informations préalables

@@ -272,7 +272,7 @@ class FtaSuiviProjetModel extends AbstractModel {
                                 $arrayMultisiteProcessus = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
                                                 'SELECT ' . FtaProcessusMultisiteModel::FIELDNAME_ID_SITE_PROCESSUS_FTA_PROCESSUS_MULTISITE
                                                 . ' FROM  ' . FtaProcessusMultisiteModel::TABLENAME
-                                                . ' WHERE ' . FtaProcessusMultisiteModel::FIELDNAME_ID_SITE_ASSEMBLAGE_FTA_PROCESSUS_MULTISITE . '=' . $modelFta->getDataField(FtaModel::FIELDNAME_SITE_ASSEMBLAGE)->getFieldValue()
+                                                . ' WHERE ' . FtaProcessusMultisiteModel::FIELDNAME_ID_SITE_ASSEMBLAGE_FTA_PROCESSUS_MULTISITE . '=' . $modelFta->getDataField(FtaModel::FIELDNAME_SITE_PRODUCTION)->getFieldValue()
                                                 . ' AND ' . FtaProcessusMultisiteModel::FIELDNAME_ID_PROCESSUS_FTA_PROCESSUS_MULTISITE . '=' . $rowsProcessus[FtaProcessusModel::KEYNAME]
                                 );
 
@@ -281,7 +281,7 @@ class FtaSuiviProjetModel extends AbstractModel {
                                         $site_gestionnaire = $rowsMultisiteProcessus[FtaProcessusMultisiteModel::FIELDNAME_ID_SITE_PROCESSUS_FTA_PROCESSUS_MULTISITE];
                                     }
                                 } else {
-                                    $site_gestionnaire = $modelFta->getDataField(FtaModel::FIELDNAME_SITE_ASSEMBLAGE)->getFieldValue();
+                                    $site_gestionnaire = $modelFta->getDataField(FtaModel::FIELDNAME_SITE_PRODUCTION)->getFieldValue();
                                 }
 
                                 $arraySalarieProcessusMulti = DatabaseOperation::convertSqlStatementWithoutKeyToArray(

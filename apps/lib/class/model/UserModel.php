@@ -86,7 +86,7 @@ class UserModel extends AbstractModel {
                             . '=' . FtaEtatModel::TABLENAME . '.' . FtaEtatModel::KEYNAME
                             . ' AND ' . FtaWorkflowModel::TABLENAME . '.' . FtaWorkflowModel::KEYNAME
                             . '=' . FtaModel::TABLENAME . '.' . FtaModel::FIELDNAME_WORKFLOW
-                            . ' AND ' . FtaModel::TABLENAME . '.' . FtaModel::FIELDNAME_SITE_ASSEMBLAGE
+                            . ' AND ' . FtaModel::TABLENAME . '.' . FtaModel::FIELDNAME_SITE_PRODUCTION
                             . '=' . GeoModel::TABLENAME . '.' . GeoModel::KEYNAME
                             . ' ORDER BY ' . $paramOrderBy
                             . ',' . FtaModel::TABLENAME . '.' . FtaModel::FIELDNAME_WORKFLOW
@@ -118,7 +118,7 @@ class UserModel extends AbstractModel {
                             . '=' . FtaEtatModel::TABLENAME . '.' . FtaEtatModel::KEYNAME
                             . ' AND ' . FtaWorkflowModel::TABLENAME . '.' . FtaWorkflowModel::KEYNAME
                             . '=' . FtaModel::TABLENAME . '.' . FtaModel::FIELDNAME_WORKFLOW
-                            . ' AND ' . FtaModel::TABLENAME . '.' . FtaModel::FIELDNAME_SITE_ASSEMBLAGE
+                            . ' AND ' . FtaModel::TABLENAME . '.' . FtaModel::FIELDNAME_SITE_PRODUCTION
                             . '=' . GeoModel::TABLENAME . '.' . GeoModel::KEYNAME
                             . ' ORDER BY ' . $paramOrderBy
                             . ',' . FtaModel::TABLENAME . '.' . FtaModel::FIELDNAME_WORKFLOW

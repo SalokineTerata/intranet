@@ -86,7 +86,7 @@ class FtaModel extends AbstractModel {
     const FIELDNAME_RESEAU_CLIENT = "id_arcadia_client_reseau";
     const FIELDNAME_SEGMENT_CLIENT = "id_arcadia_client_segment";
     const FIELDNAME_SERVICE_CONSOMMATEUR = "id_service_consommateur";
-    const FIELDNAME_SITE_ASSEMBLAGE = "Site_de_production";
+    const FIELDNAME_SITE_PRODUCTION = "Site_de_production";
     const FIELDNAME_SITE_EXPEDITION_FTA = "site_expedition_fta";
     const FIELDNAME_SOCIETE_DEMANDEUR = "societe_demandeur_fta";
     const FIELDNAME_SUFFIXE_AGROLOGIC_FTA = "suffixe_agrologic_fta";
@@ -130,6 +130,12 @@ class FtaModel extends AbstractModel {
      * @var GeoModel
      */
     private $modelSiteExpedition;
+
+    /**
+     * Site de production de la FTA
+     * @var GeoModel
+     */
+    private $modelSiteProduction;
     private $donneeEmballageUVC;
     private $donneeEmballageParColis;
     private $donneeEmballageDuColis;
@@ -155,6 +161,10 @@ class FtaModel extends AbstractModel {
 
         $this->setModelSiteExpedition(
                 new GeoModel($this->getDataField(self::FIELDNAME_SITE_EXPEDITION_FTA)->getFieldValue()
+                , DatabaseRecord::VALUE_DONT_CREATE_RECORD_IN_DATABASE_IF_KEY_DOESNT_EXIST)
+        );
+        $this->setModelSiteProduction(
+                new GeoModel($this->getDataField(self::FIELDNAME_SITE_PRODUCTION)->getFieldValue()
                 , DatabaseRecord::VALUE_DONT_CREATE_RECORD_IN_DATABASE_IF_KEY_DOESNT_EXIST)
         );
     }
@@ -245,6 +255,18 @@ class FtaModel extends AbstractModel {
 
     function setModelSiteExpedition(GeoModel $modelSiteExpedition) {
         $this->modelSiteExpedition = $modelSiteExpedition;
+    }
+
+    /**
+     * 
+     * @return GeoModel
+     */
+    function getModelSiteProduction() {
+        return $this->modelSiteProduction;
+    }
+
+    function setModelSiteProduction(GeoModel $modelSiteProduction) {
+        $this->modelSiteProduction = $modelSiteProduction;
     }
 
     /**
@@ -1104,7 +1126,7 @@ class FtaModel extends AbstractModel {
                 . ", " . FtaModel::FIELDNAME_CODE_ARTICLE . "=" . 'NULL'                                                                         //Le Code Article Agrologic ne peut être présent 2 fois (index unique)
                 . ", " . FtaModel::FIELDNAME_CREATEUR . "=" . $idUser
                 . ", " . FtaModel::FIELDNAME_WORKFLOW . "=" . $paramIdFtaWorkflow
-                . ", " . FtaModel::FIELDNAME_SITE_ASSEMBLAGE . "=" . $paramOption["site_de_production"]
+                . ", " . FtaModel::FIELDNAME_SITE_PRODUCTION . "=" . $paramOption["site_de_production"]
                 . " WHERE " . FtaModel::KEYNAME . "=" . $idFtaNew
         );
         switch ($paramAction) {                                                                                                                 //Suivant l'action, certaines données sont à mettre à jour
@@ -1472,7 +1494,7 @@ class FtaModel extends AbstractModel {
                         . "," . FtaModel::FIELDNAME_ID_FTA_ETAT
                         . "," . FtaModel::FIELDNAME_DESIGNATION_COMMERCIALE
                         . "," . FtaModel::FIELDNAME_DATE_CREATION
-                        . "," . FtaModel::FIELDNAME_SITE_ASSEMBLAGE
+                        . "," . FtaModel::FIELDNAME_SITE_PRODUCTION
                         . "," . FtaModel::FIELDNAME_WORKFLOW . ")"
                         . " VALUES (" . $paramIdCreateur
                         . ", " . $paramIdFtaEtat

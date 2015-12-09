@@ -160,16 +160,16 @@ class GeoModel extends AbstractModel {
 
         $HtmlTableName = FtaModel::TABLENAME
                 . '_'
-                . FtaModel::FIELDNAME_SITE_ASSEMBLAGE
+                . FtaModel::FIELDNAME_SITE_PRODUCTION
                 . '_'
                 . $paramIdFta
         ;
-        $paramHtmlObjet->getAttributes()->getName()->setValue(FtaModel::FIELDNAME_SITE_ASSEMBLAGE);
+        $paramHtmlObjet->getAttributes()->getName()->setValue(FtaModel::FIELDNAME_SITE_PRODUCTION);
         $paramHtmlObjet->setLabel(DatabaseDescription::getFieldDocLabel(GeoModel::TABLENAME, GeoModel::FIELDNAME_GEO));
         $paramHtmlObjet->setIsEditable($paramIsEditable);
         $paramHtmlObjet->initAbstractHtmlSelect(
-                $HtmlTableName, $paramHtmlObjet->getLabel(), $ftaModel->getDataField(FtaModel::FIELDNAME_SITE_ASSEMBLAGE)->getFieldValue(), NULL, $paramHtmlObjet->getArrayListContent());
-        $paramHtmlObjet->getEventsForm()->setOnChangeWithAjaxAutoSave(FtaModel::TABLENAME, FtaModel::KEYNAME, $paramIdFta, FtaModel::FIELDNAME_SITE_ASSEMBLAGE);
+                $HtmlTableName, $paramHtmlObjet->getLabel(), $ftaModel->getDataField(FtaModel::FIELDNAME_SITE_PRODUCTION)->getFieldValue(), NULL, $paramHtmlObjet->getArrayListContent());
+        $paramHtmlObjet->getEventsForm()->setOnChangeWithAjaxAutoSave(FtaModel::TABLENAME, FtaModel::KEYNAME, $paramIdFta, FtaModel::FIELDNAME_SITE_PRODUCTION);
         $listeSiteProduction = $paramHtmlObjet->getHtmlResult();
 
         return $listeSiteProduction;

@@ -83,7 +83,7 @@ class FtaComposantView {
     function ListeCodesoftEtiquettesRecto($paramIdFta, $paramIsEditable) {
 
         $ftaModel = new FtaModel($paramIdFta);
-        $SiteDeProduction = $ftaModel->getDataField(FtaModel::FIELDNAME_SITE_ASSEMBLAGE)->getFieldValue();
+        $SiteDeProduction = $ftaModel->getDataField(FtaModel::FIELDNAME_SITE_PRODUCTION)->getFieldValue();
         $etiqetteCodesoftRecto = $this->getFtaComposantModel()->getDataField(FtaComposantModel::FIELDNAME_K_ETIQUETTE_FTA_COMPOSITION)->getFieldValue();
         $idFtaComposant = $this->getFtaComposantModel()->getKeyValue();
         $listeCodesoftEtiquettesRecto = CodesoftEtiquettesModel::getListeCodesoftEtiquettesRecto($idFtaComposant, $paramIsEditable, $SiteDeProduction, $etiqetteCodesoftRecto);
@@ -99,7 +99,7 @@ class FtaComposantView {
     function ListeCodesoftEtiquettesVerso($paramIdFta, $paramIsEditable) {
 
         $ftaModel = new FtaModel($paramIdFta);
-        $SiteDeProduction = $ftaModel->getDataField(FtaModel::FIELDNAME_SITE_ASSEMBLAGE)->getFieldValue();
+        $SiteDeProduction = $ftaModel->getDataField(FtaModel::FIELDNAME_SITE_PRODUCTION)->getFieldValue();
         $etiqetteCodesoft = $this->getFtaComposantModel()->getDataField(FtaComposantModel::FIELDNAME_K_ETIQUETTE_VERSO_FTA_COMPOSITION)->getFieldValue();
         $idFtaComposant = $this->getFtaComposantModel()->getKeyValue();
 

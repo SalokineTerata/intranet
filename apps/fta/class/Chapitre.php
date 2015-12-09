@@ -1203,7 +1203,7 @@ class Chapitre {
         $bloc.='<tr class=titre_principal><td class>Logistique</td></tr>';
 
         //Site d'assemblage
-        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_SITE_ASSEMBLAGE);
+        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_SITE_PRODUCTION);
 
         //Site d'expedition
         $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_SITE_EXPEDITION_FTA);
@@ -1737,7 +1737,7 @@ class Chapitre {
         $ftaView->setFtaChapitreModelById(self::ID_CHAPITRE_IDENTITE);
 
         //Site d'assemblage
-        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_SITE_ASSEMBLAGE);
+        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_SITE_PRODUCTION);
 
         //Site d'expedition
         $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_SITE_EXPEDITION_FTA);

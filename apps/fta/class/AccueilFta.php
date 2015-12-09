@@ -1308,7 +1308,7 @@ class AccueilFta {
             <img src = ../lib/images/fleche_gauche_et_haut.png width = 38 height = 22 border = 0 />
             <i>Transitions groupées</i>:
             ' . $liste_action_groupe . '
-            <input type = \'text\' name=\'subject\' size=\'20\' />
+            <input type = \'text\' name=\'subject\' size=\'50\' />
             <input type=image src=images/transiter.png width=20 height=20  />
             <input type=hidden name=action value=transition_groupe>
                          ';

@@ -142,7 +142,7 @@ echo '
          <' . $html_table . '>           
              <tr class=contenu><td align=\'left\'>
                  ' . DatabaseDescription::getFieldDocLabel(FtaModel::TABLENAME, FtaModel::FIELDNAME_DESIGNATION_COMMERCIALE)
- . ':</td><td><input type=\'text\' name=\'designation_commerciale_fta\' size=\'20\' value=\'' . $designationCommercialeFta . '\' />
+ . ':</td><td><input type=\'text\' name=\'designation_commerciale_fta\' size=\'70\' value=\'' . $designationCommercialeFta . '\' />
              </td></tr>
 
                     ' . $listeWorkflow . '

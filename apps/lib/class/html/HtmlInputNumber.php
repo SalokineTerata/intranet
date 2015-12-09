@@ -11,7 +11,6 @@
  * @author bs4300280
  */
 class HtmlInputNumber extends AbstractHtmlInput {
-
 //    private $size;
 //    private $maxlength;
 //    private static $DEFAULT_SIZE = 20;
@@ -44,8 +43,12 @@ class HtmlInputNumber extends AbstractHtmlInput {
 //    function getHtmlEditableContent() {
 //        return '<input type=text name=' . $this->fieldName . ' value=' . Html::inputValue($this->attributeValue) . ' />';
 //    }
-const DEFAULT_SIZE = "8";
-const DEFAULT_DECIMAL_NUMBER = "any";
+
+    /**
+     * La taille ne fonctionne pas avec un input de type number
+     */
+    const DEFAULT_SIZE = "8";
+    const DEFAULT_DECIMAL_NUMBER = "any";
 
     public function __construct() {
         parent::__construct();
@@ -53,6 +56,7 @@ const DEFAULT_DECIMAL_NUMBER = "any";
         parent::getAttributes()->getSize()->setValue(self::DEFAULT_SIZE);
         parent::getAttributes()->getStep()->setValue(self::DEFAULT_DECIMAL_NUMBER);
     }
+
 }
 
 ?>

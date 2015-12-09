@@ -33,7 +33,7 @@ class DataFieldToHtmlInputText extends HtmlInputText {
                 , $this->getDataField()->getKeyValue()
                 , $this->getDataField()->getFieldName()
         );
-
+       
         /**
          * Taille spécifique du champs si renseignée.
          */
@@ -46,8 +46,8 @@ class DataFieldToHtmlInputText extends HtmlInputText {
      * par défaut HtmlInputText::DEFAULT_SIZE
      */
     public function setSpecificFieldSize() {
-        if ($this->getDataField()->getFieldSize()) {
-            $this->getAttributes()->getSize()->setValue($this->getDataField()->getFieldSize());
+        if ($this->getDataField()->getFieldSizeOfHtmlObject()) {
+            $this->getAttributes()->getSize()->setValue($this->getDataField()->getFieldSizeOfHtmlObject());
         }
     }
 

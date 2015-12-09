@@ -24,8 +24,8 @@
  */
 class TableauFicheView {
 
-    const HTML_CELL_WIDTH_C1 = " width=34%";
-    const HTML_CELL_WIDTH_C3 = " width=16%";
+    const HTML_CELL_WIDTH_C1 = " width=15%";
+    const HTML_CELL_WIDTH_C3 = " width=5%";
     const HTML_CELL_WIDTH_SELECTION = " width=1%";
     const DEFAULT_RESULT_LIMIT_BY_PAGE = "1000";
 
@@ -951,7 +951,7 @@ class TableauFicheView {
             $tableau_fiches.="<td $bgcolor $largeur_html_C1><a title=$createur_link />" . $din . "</a></td>"
                     . "<td $bgcolor width=3%>" . $id_dossier_fta . "<br>v" . $id_version_dossier_fta . "</td>";
 
-            $tableau_fiches.="<td $bgcolor width=\"6%\"> <b><font size=\"2\" color=\"#0000FF\">" . $code_article_ldc . "</font></b></td>";
+            $tableau_fiches.="<td $bgcolor width=\"3%\"> <b><font size=\"2\" color=\"#0000FF\">" . $code_article_ldc . "</font></b></td>";
             if ($abreviation_fta_etat == FtaEtatModel::ETAT_ABREVIATION_VALUE_MODIFICATION) {
                 $tableau_fiches.='<td ' . $bgcolor . $largeur_html_C3 . ' align=center>' . $dateEcheanceFta . '</td>'; //échance de validation
             } else {
@@ -959,7 +959,7 @@ class TableauFicheView {
             }
             $tableau_fiches .= '<td ' . $bgcolor . ' width=5% align=center >' . $lienHistorique . '</td>'//% Avancement FTA
                     . '<td ' . $bgcolor . $largeur_html_C3 . ' align=center >' . $service . '</td>' //Service               
-                    . '<td ' . $bgcolor . ' width=10%px ' . ' align=center >' . $lien . '</td>'; // Actions
+                    . '<td ' . $bgcolor . ' width=6%' . ' align=center >' . $lien . '</td>'; // Actions
 //        $tableau_fiches.="<td $bgcolor $largeur_html_C3 align=\"right\" valign=\"middle\">$lien</td>";
             $tableau_fiches.="</tr>";
             $compteur_ligne++;

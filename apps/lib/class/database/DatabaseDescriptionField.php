@@ -108,6 +108,16 @@ class DatabaseDescriptionField {
     }
 
     /**
+     * Retourne la taille de l'objet HTML à utiliser pour représenter graphiquement
+     * le champs
+     * @return string
+     */
+    public function getFieldSizeOfHtmlObject() {
+        return DatabaseDescription::getFieldDocSizeOfHtmlObject
+                        ($this->getTableName(), $this->getFieldName());
+    }
+
+    /**
      * Retourne le type d'objet HTML à utiliser pour représenter graphiquement
      * le champs
      * @return string
@@ -162,10 +172,12 @@ class DatabaseDescriptionField {
         return DatabaseDescription::getFieldsToOrder
                         ($this->getTableName(), $this->getFieldName());
     }
+
     public function getRightToAdd() {
         return DatabaseDescription::getRightToAdd
                         ($this->getTableName(), $this->getFieldName());
     }
+
     public function getConditionSql() {
         return DatabaseDescription::getConditionSql
                         ($this->getTableName(), $this->getFieldName());

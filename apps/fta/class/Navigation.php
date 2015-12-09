@@ -351,11 +351,11 @@ class Navigation {
                  * Nous récupérons les processus précédent du processus en cours si ils sont tous validé
                  */
                 foreach ($req as $rows) {
-                    self::$id_fta_processus = /*
-                             * Nous verifions si tous les processus précedents du chapitre que l'utilisateur à les droits d'accès
-                             * sont validé ou non et donc visible ou non
-                             */
-                            $taux_validation_processus = FtaProcessusModel::getFtaProcessusNonValidePrecedent(self::$id_fta, $rows[FtaProcessusModel::KEYNAME], self::$id_fta_workflow);
+                    /*
+                     * Nous verifions si tous les processus précedents du chapitre que l'utilisateur à les droits d'accès
+                     * sont validé ou non et donc visible ou non
+                     */
+                    $taux_validation_processus = FtaProcessusModel::getFtaProcessusNonValidePrecedent(self::$id_fta, $rows[FtaProcessusModel::KEYNAME], self::$id_fta_workflow);
 
                     //Liste des processus visible(lecture-seule)
                     if ($taux_validation_processus == 1 or $taux_validation_processus === NULL) {
@@ -501,7 +501,9 @@ class Navigation {
                             if ($tauxValidationProcessus != 0) {
                                 $ProcessusEnLecture[] = $rowsInit[FtaProcessusCycleModel::FIELDNAME_PROCESSUS_INIT];
                                 //Enregistrement du processus en tant que processus en cours
-                                $ProcessusEncoursVisible[] = $rowsNext[FtaProcessusCycleModel::FIELDNAME_PROCESSUS_NEXT];
+                                if ($tauxValidationProcessus == "1") {
+                                    $ProcessusEncoursVisible[] = $rowsNext[FtaProcessusCycleModel::FIELDNAME_PROCESSUS_NEXT];
+                                }
 //                            }
                             }
                         }

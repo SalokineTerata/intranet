@@ -149,6 +149,50 @@ class FtaView {
     }
 
     /**
+     * Affichage Html du poids net uvf
+     * @return string
+     */
+    public function getHtmlPoidNetUVF() {
+        $id_fta = $this->getModel()->getKeyValue();
+        $PoidNetUVFValue = $this->getModel()->getDataField(FtaModel::FIELDNAME_POIDS_ELEMENTAIRE)->getFieldValue();
+        $PoidNetUVF = new HtmlInputText();
+        $HtmlTableName = FtaModel::TABLENAME
+                . '_'
+                . FtaModel::FIELDNAME_POIDS_ELEMENTAIRE
+                . '_'
+                . $id_fta
+        ;
+        $PoidNetUVF->setLabel(DatabaseDescription::getFieldDocLabel(FtaModel::TABLENAME, FtaModel::FIELDNAME_POIDS_ELEMENTAIRE));
+        $PoidNetUVF->getAttributes()->getValue()->setValue($PoidNetUVFValue);
+        $PoidNetUVF->getAttributes()->getSize()->setValue("8");
+        $PoidNetUVF->setIsEditable($this->getIsEditable());
+        $PoidNetUVF->initAbstractHtmlInput($HtmlTableName, $PoidNetUVF->getLabel(), $PoidNetUVFValue, NULL);
+        $PoidNetUVF->getEventsForm()->setOnChangeWithAjaxAutoSave(FtaModel::TABLENAME, FtaModel::KEYNAME, $id_fta, FtaModel::FIELDNAME_POIDS_ELEMENTAIRE);
+        return $PoidNetUVF->getHtmlResult();
+    }
+    /**
+     * Affichage Html de la désignation commerciale
+     * @return string
+     */
+    public function getHtmlDesignationCommerciale() {
+        $id_fta = $this->getModel()->getKeyValue();
+        $DesignationCommercialeValue = $this->getModel()->getDataField(FtaModel::FIELDNAME_DESIGNATION_COMMERCIALE)->getFieldValue();
+        $DesignationCommerciale = new HtmlInputText();
+        $HtmlTableName = FtaModel::TABLENAME
+                . '_'
+                . FtaModel::FIELDNAME_DESIGNATION_COMMERCIALE
+                . '_'
+                . $id_fta
+        ;
+        $DesignationCommerciale->setLabel(DatabaseDescription::getFieldDocLabel(FtaModel::TABLENAME, FtaModel::FIELDNAME_DESIGNATION_COMMERCIALE));
+        $DesignationCommerciale->getAttributes()->getValue()->setValue($DesignationCommercialeValue);
+        $DesignationCommerciale->getAttributes()->getSize()->setValue("70");
+        $DesignationCommerciale->setIsEditable($this->getIsEditable());
+        $DesignationCommerciale->initAbstractHtmlInput($HtmlTableName, $DesignationCommerciale->getLabel(), $DesignationCommercialeValue, NULL);
+        $DesignationCommerciale->getEventsForm()->setOnChangeWithAjaxAutoSave(FtaModel::TABLENAME, FtaModel::KEYNAME, $id_fta, FtaModel::FIELDNAME_DESIGNATION_COMMERCIALE);
+        return $DesignationCommerciale->getHtmlResult();
+    }
+    /**
      * Affichage Html de l'ean article
      * @return string
      */

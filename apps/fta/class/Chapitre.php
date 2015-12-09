@@ -1825,7 +1825,6 @@ class Chapitre {
         $isEditable = self::$is_editable;
 
 
-        //$objectFta = new ObjectFta($id_fta);
         //Identifiant FTA
         $ftaModel = new FtaModel($id_fta);
         $ftaView = new FtaView($ftaModel);

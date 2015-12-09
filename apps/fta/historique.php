@@ -81,7 +81,7 @@ $detail_id_fta;              //Identifiant de la fiche sur laquelle on souhaite 
   Récupération des données MySQL
  */
 
-Navigation::initNavigation($id_fta, $id_fta_chapitre, $synthese_action, $comeback, $idFtaEtat, $abreviationFtaEtat, $idFtaRole,TRUE);
+Navigation::initNavigation($id_fta, $id_fta_chapitre, $synthese_action, $comeback, $idFtaEtat, $abreviationFtaEtat, $idFtaRole,FALSE);
 $navigue = Navigation::getHtmlNavigationBar();
 //Calcul du taux
 $taux_temp = FtaSuiviProjetModel::getFtaTauxValidation($ftaModel, TRUE);

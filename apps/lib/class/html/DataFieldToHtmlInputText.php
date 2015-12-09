@@ -33,8 +33,22 @@ class DataFieldToHtmlInputText extends HtmlInputText {
                 , $this->getDataField()->getKeyValue()
                 , $this->getDataField()->getFieldName()
         );
+
+        /**
+         * Taille spécifique du champs si renseignée.
+         */
+        $this->setSpecificFieldSize();
+    }
+
+    /**
+     * Si une taille de champs a été précisée dans intranet_column_info
+     * Alors, on utilise cette valeur au lieu de la valeur 
+     * par défaut HtmlInputText::DEFAULT_SIZE
+     */
+    public function setSpecificFieldSize() {
+        if ($this->getDataField()->getFieldSize()) {
+            $this->getAttributes()->getSize()->setValue($this->getDataField()->getFieldSize());
+        }
     }
 
 }
-
-?>

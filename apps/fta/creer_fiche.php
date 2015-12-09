@@ -61,7 +61,7 @@ $html_table = 'table '                     //Permet d'harmoniser les tableaux
 $id_fta = Lib::getParameterFromRequest(FtaModel::KEYNAME);
 $idFtaRole = Lib::getParameterFromRequest(FtaRoleModel::KEYNAME);
 $globalConfig = new GlobalConfig();
-UserModel::ConnexionFalse($globalConfig);
+UserModel::checkUserSessionExpired($globalConfig);
 
 $idUser = $globalConfig->getAuthenticatedUser()->getKeyValue();
 $checked_vierge = '';

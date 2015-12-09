@@ -34,7 +34,7 @@ class IntranetActionsModel extends AbstractModel {
 
     public static function getIdIntranetActionsFromIdParentAction($paramIdParent, $paramChapitre, $paramFtaWorkflow, $paramIdFtaRole) {
         $globalConfig = new GlobalConfig();
-        UserModel::ConnexionFalse($globalConfig);
+        UserModel::checkUserSessionExpired($globalConfig);
 
         $id_user = $globalConfig->getAuthenticatedUser()->getKeyValue();
 
@@ -90,7 +90,7 @@ class IntranetActionsModel extends AbstractModel {
      */
     public static function getIdIntranetActionsRoleFromIdParentActionNavigation($paramIdParent) {
         $globalConfig = new GlobalConfig();
-        UserModel::ConnexionFalse($globalConfig);
+        UserModel::checkUserSessionExpired($globalConfig);
 
         $id_user = $globalConfig->getAuthenticatedUser()->getKeyValue();
 

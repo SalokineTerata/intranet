@@ -186,7 +186,7 @@ class Chapitre {
         self::$ftaWorkflowModel = new FtaWorkflowModel(self::$id_fta_workflow);
         self::$synthese_action = $synthese_action;
         $globalConfig = new GlobalConfig();
-        UserModel::ConnexionFalse($globalConfig);
+        UserModel::checkUserSessionExpired($globalConfig);
         self::$idUser = $globalConfig->getAuthenticatedUser()->getKeyValue();
         $idFtaSuiviProjet = FtaSuiviProjetModel::getIdFtaSuiviProjetByIdFtaAndIdChapitre(self::$id_fta, self::$id_fta_chapitre);
         self::$ftaSuiviProjetModel = new FtaSuiviProjetModel($idFtaSuiviProjet);

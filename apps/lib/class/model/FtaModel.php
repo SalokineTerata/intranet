@@ -968,7 +968,7 @@ class FtaModel extends AbstractModel {
           Déclaration et initialisation des variables
          * **************************************** */
         $globalConfig = new GlobalConfig();
-        UserModel::ConnexionFalse($globalConfig);
+        UserModel::checkUserSessionExpired($globalConfig);
 
         $idUser = $globalConfig->getAuthenticatedUser()->getKeyValue();
         $ftaModelOrig = new FtaModel($paramIdFta);              //Identifiant de la fiche technique article à dupliquer

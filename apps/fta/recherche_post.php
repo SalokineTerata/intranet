@@ -12,7 +12,7 @@
 require_once '../inc/main.php';
 
 $globalConfig = new GlobalConfig();
-UserModel::ConnexionFalse($globalConfig);
+UserModel::checkUserSessionExpired($globalConfig);
 
 if ($globalConfig->getAuthenticatedUser()) {
     $id_user = $globalConfig->getAuthenticatedUser()->getKeyValue();

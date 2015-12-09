@@ -69,7 +69,7 @@ $syntheseAction = Lib::getParameterFromRequest('synthese_action');
  */
 $ftaModel = new FtaModel($idFta);
 $globalConfig = new GlobalConfig();
-UserModel::ConnexionFalse($globalConfig);
+UserModel::checkUserSessionExpired($globalConfig);
 
 $idUser = $globalConfig->getAuthenticatedUser()->getKeyValue();
 $idFtaWorkflow = $ftaModel->getDataField(FtaModel::FIELDNAME_WORKFLOW)->getFieldValue();

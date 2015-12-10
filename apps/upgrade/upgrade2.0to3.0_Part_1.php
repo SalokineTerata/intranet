@@ -126,6 +126,12 @@ echo "DROP ".$nameOfBDDTarget.".geo ...";
 $sql = "DROP TABLE ".$nameOfBDDTarget.".geo";
 if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
 
+$sql = "INSERT INTO `".$nameOfBDDTarget."`.`geo` "
+        . "(`id_geo`, `geo`, `lettre`, `libelle_site_agis`,`tag_application_geo`,`site_actif`) "
+        . "VALUES ('-1', 'Site Non définie', 'NON', 'SITE NON DEFINIE', 'fta', '0'); ";       
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+echo "INSERT INTO ".$nameOfBDDTarget.".geo Site Non définie ...";
+
 echo "CREATE TABLE ".$nameOfBDDTarget.".geo ...";
 $sql = "CREATE TABLE ".$nameOfBDDTarget.".geo LIKE ".$nameOfBDDStructure.".geo";
 if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
@@ -4377,7 +4383,7 @@ echo "INSERT INTO ".$nameOfBDDTarget.".fta_action_site ...";
 $sql = "INSERT INTO ".$nameOfBDDTarget.".fta_action_site SELECT * FROM ".$nameOfBDDStructure.".fta_action_site";
 if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
 
-$sql ="SELECT id_geo,geo,libelle_site_agis FROM ".$nameOfBDDTarget.".geo WHERE tag_application_geo LIKE \"%fta%\" OR id_geo=5 ";
+$sql ="SELECT id_geo,geo,libelle_site_agis FROM ".$nameOfBDDTarget.".geo WHERE tag_application_geo  LIKE \"%fta%\" AND site_actif=1 ";
 $isteIdGeo =mysql_query($sql);
 
 
@@ -4498,12 +4504,8 @@ while ($value=mysql_fetch_array($resultFta)) {
 
     $idDossierFta = $value["id_dossier_fta"];
     $idVersionDossierFta = $value["id_version_dossier_fta"];
-    $idFtaEtatTMP = $value["id_fta_etat"];
-    if ($idFtaEtatTMP == '8') {
-        $idFtaEtat = '1';
-    } else {
-        $idFtaEtat = $idFtaEtatTMP;
-    }
+    $idFtaEtat = $value["id_fta_etat"];
+   
     $cretateurFta = $value["createur_fta"];
     if ($cretateurFta == '0') {
         $cretateurFta = '-1';
@@ -4598,65 +4600,7 @@ while ($value=mysql_fetch_array($resultFta)) {
     $id_etiquette_codesoft_arti2 = $value["id_etiquette_codesoft_arti2"];
 
 
-    /**
-     * Conditions de transfères
-     */
-    
-     if ($idFtaEtatTMP <> '8') {
-            if ($Site_de_production == '1' or $Site_de_production == '3'or $Site_de_production == '6' or $Site_de_production == '11' or $Site_de_production == '0') {
-                switch ($cretateurFta) {
-                    //identifiant de l'utilisateur 
-                    case '-2':
-                    case '-1':
-                    case '43':
-                    case '48':
-                    case '58':
-                    case '71':
-                    case '207':
-                    case '237':
-                    case '292':
-                    case '318':
-                    case '426':
-                    case '492':
-                    case '493':
-                    case '521':
-                    case '534':
-                    case '544':
-                    case '556':
-                    case '557':
-                    case '558':
-                    case '559':
-                    case '560':
-                    case '572':
-                        $idFtaWorkflow = '6';
-                        break;
-                    case '196':
-                    case '278':
-                    case '371':
-                    case '379':
-                    case '445':
-                    case '457':
-                    case '473':
-                    case '474':
-                    case '484':
-                    case '487':
-                    case '501':
-                    case '512':
-                    case '562':
-                    case '563':
-                        $idFtaWorkflow = '2';
-                        break;
-                    case '262':
-                    case '361':
-                        $idFtaWorkflow = '3';
-                        break;
-                }
-            } else {
-                $idFtaWorkflow = '8';
-            }
-        }else {
-            $idFtaWorkflow = '9';
-        }
+    $idFtaWorkflow ="1";
 
 
 
@@ -4812,9 +4756,9 @@ if ($resultSiteDEProduction) {
     while ($rowsChangeIdSiteProduction=mysql_fetch_array($resultSiteDEProduction)) {
         $idFta = $rowsChangeIdSiteProduction['id_fta'];
         $sql_inter = "UPDATE ".$nameOfBDDTarget.".fta
-                 SET Site_de_production=1"
+                 SET Site_de_production=-1"
                 . " WHERE id_fta=" . $idFta;
-         echo "UPDATE ".$nameOfBDDTarget."." . "fta." . "id_fta .". $idFta ."Site_de_production" . "=1" ." ...";
+         echo "UPDATE ".$nameOfBDDTarget."." . "fta." . "id_fta .". $idFta ."Site_de_production" . "=-1" ." ...";
     if(mysql_query($sql_inter)) {echo "[OK]\n";}else{echo "[FAILED]\n $idFta \n";}
       
     }
@@ -4840,20 +4784,118 @@ if ($resultChangeIdUse) {
       
     }
 } 
-//   switch ($idFtaEtatTMP) {
-//    case  '8':
-//        $idFtaEtat = '1';
-//        break;
-//    case  '3':
-//        $pourcentageAvancement = '100%'; 
-//        $idFtaEtat = $idFtaEtatTMP;
-//         break;
-//  case  '1':
-//  case  '5':
-//  case  '6':
-//        $idFtaEtat = $idFtaEtatTMP;
-//        break;
-//    }
+/**
+     * Affectation des espace de travail
+     */
+    
+$sql = "SELECT DISTINCT fta.id_dossier_fta
+                FROM ".$nameOfBDDTarget.".fta
+               ";
+$resultDossierFta =mysql_query($sql);
+if ($resultDossierFta) {
+    while ($rowsDossierFta=mysql_fetch_array($resultDossierFta)) {
+        $idDossierFta = $rowsDossierFta['id_dossier_fta'];
+        
+        $sqldetail = "SELECT id_dossier_fta, id_fta, MAX( id_version_dossier_fta ) , id_fta_etat, createur_fta, site_de_production
+                FROM ".$nameOfBDDTarget.".fta 
+                    WHERE `id_dossier_fta` =".$idDossierFta
+               ;
+        $resultDossierFtaDetail =mysql_query($sqldetail);
+         while ($rowsDossierFtaDetail=mysql_fetch_array($resultDossierFtaDetail)) {
+                     $idFta = $resultDossierFtaDetail['id_fta'];
+                     $idFtaEtat = $resultDossierFtaDetail['id_fta_etat'];
+                     $createurFta = $resultDossierFtaDetail['createur_fta'];
+                     $Site_de_production = $resultDossierFtaDetail['site_de_production'];
+                      if ($idFtaEtat <> '8') {
+                            if ($Site_de_production == '1' or $Site_de_production == '3'or $Site_de_production == '6' or $Site_de_production == '11' or $Site_de_production == '-1') {
+                                    switch ($createurFta) {
+                                        //identifiant de l'utilisateur 
+                                        case '-2':
+                                        case '-1':
+                                        case '43':
+                                        case '48':
+                                        case '58':
+                                        case '71':
+                                        case '207':
+                                        case '237':
+                                        case '292':
+                                        case '318':
+                                        case '426':
+                                        case '492':
+                                        case '493':
+                                        case '521':
+                                        case '534':
+                                        case '544':
+                                        case '556':
+                                        case '557':
+                                        case '558':
+                                        case '559':
+                                        case '560':
+                                        case '572':
+                                            $idFtaWorkflow = '6';
+                                            break;
+                                        case '196':
+                                        case '278':
+                                        case '371':
+                                        case '379':
+                                        case '445':
+                                        case '457':
+                                        case '473':
+                                        case '474':
+                                        case '484':
+                                        case '487':
+                                        case '501':
+                                        case '512':
+                                        case '562':
+                                        case '563':
+                                            $idFtaWorkflow = '2';
+                                            break;
+                                        case '262':
+                                        case '361':
+                                            $idFtaWorkflow = '3';
+                                            break;
+                                    }
+                            } else {
+                                    $idFtaWorkflow = '8';
+                                }
+                        }else {
+                                $idFtaWorkflow = '9';
+                            }
+                             $sqldetaildossier = "SELECT id_fta FROM ".$nameOfBDDTarget.".fta 
+                              WHERE `id_dossier_fta` =".$idDossierFta
+                                 ;
+                                 $resultDossierFtaIdFta =mysql_query($sqldetaildossier);
+                            while ($rowsDossierFtaIdFta=mysql_fetch_array($resultDossierFtaIdFta)) {
+                            $idFtaDossier = $resultDossierFtaDetail['id_fta'];
+                                $sql_inter = "UPDATE ".$nameOfBDDTarget.".fta
+                                     SET id_fta_workflow=" . $idFtaWorkflow
+                                    . " WHERE id_fta=" . $idFtaDossier;
+
+                                echo "UPDATE ".$nameOfBDDTarget."." . "fta." . "id_fta .". $idFta ." id_fta_workflow=" . $idFtaWorkflow ." ...";
+                                if(mysql_query($sql_inter)) {echo "[OK]\n";}else{echo "[FAILED]\n $idFta \n";}
+                            }
+                                
+                }
+    }
+} 
+/**
+ * Fta en présentation vers modification
+ */
+       $sql = "SELECT id_fta FROM ".$nameOfBDDTarget.".fta 
+                              WHERE `id_fta_etat` =8"
+                                 ;
+       $resultPresentation =mysql_query($sql);
+        while ($rowsPresentation=mysql_fetch_array($resultPresentation)) {
+          $idFta = $rowsPresentation['id_fta'];
+           $sql_inter = "UPDATE ".$nameOfBDDTarget.".fta
+                        SET id_fta_etat=1" 
+                        . " WHERE id_fta=" . $idFta;
+
+          echo "UPDATE ".$nameOfBDDTarget."." . "fta." . "id_fta .". $idFta ."id_fta_etat=1" . " ...";
+           if(mysql_query($sql_inter)) {echo "[OK]\n";}else{echo "[FAILED]\n $idFta \n";}
+        }
+
+
 /**
  * Extraction Fta suivi de projet
  */

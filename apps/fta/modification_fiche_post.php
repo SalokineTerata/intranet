@@ -123,7 +123,7 @@ switch ($action) {
         $idFtaWorkflowStruture = FtaWorkflowStructureModel::getIdFtaWorkflowStructureByIdFtaAndIdChapitre($paramIdFta, $paramIdFtaChapitreEncours);
         $modelFtaWorkflowStruture = new FtaWorkflowStructureModel($idFtaWorkflowStruture);
 
-        $isFtaDataValidationSuccess = $modelFta->isFtaDataValidationSuccess();
+//        $isFtaDataValidationSuccess = $modelFta->isFtaDataValidationSuccess();
 
         if ($paramSignatureValidationSuiviProjet and $isFtaDataValidationSuccess == TRUE) {
             $modelFtaSuiviProjet->setSigned($paramSignatureValidationSuiviProjet);

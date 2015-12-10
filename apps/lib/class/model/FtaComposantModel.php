@@ -123,7 +123,7 @@ class FtaComposantModel extends AbstractModel {
      * 
      * @param type $paramIdFta
      */
-    public static function DuplicateFtaComposantByIdFta($paramIdFtaOrig, $paramIdFtaNew) {
+    public static function duplicateFtaComposantByIdFta($paramIdFtaOrig, $paramIdFtaNew) {
         DatabaseOperation::execute(
                 ' INSERT INTO ' . FtaComposantModel::TABLENAME
                 . ' (' . FtaComposantModel::FIELDNAME_ASCENDANT_FTA_NOMENCLATURE

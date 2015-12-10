@@ -25,5 +25,6 @@
 class UserInterfaceLabel {
 
     const FR_AVANCEMENT_FTA = "% Avancement";
+    const FR_MODIFICATION_ESPACE_DE_TRAVAIL = "Modification de l'espace de travail";
 
 }

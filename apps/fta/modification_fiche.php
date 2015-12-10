@@ -135,7 +135,7 @@ if ($idFta) {
         if (!$idFtaRoleAcces) {
             $titre = UserInterfaceMessage::FR_WARNING_ACCES_RIGHTS_TITLE;
             $message = UserInterfaceMessage::FR_WARNING_ACCES_RIGHTS;
-            $redirection = "";
+            $redirection = "index.php";
             afficher_message($titre, $message, $redirection);
         } else {
             $idFtaRole = $idFtaRoleAcces["0"];

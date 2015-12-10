@@ -84,7 +84,7 @@ $HtmlList = new HtmlListSelectTagName();
 //} else {
 //    $isEditable = TRUE;
 //}
-$listeWorkflow = FtaWorkflowModel::ShowListeDeroulanteNomWorkflowByAcces($idUser, $HtmlList, TRUE, $idFtaRole, $idFtaWorkflow);
+$listeWorkflow = FtaWorkflowModel::showListeDeroulanteNomWorkflowByAcces($idUser, $HtmlList, TRUE, $idFtaRole, $idFtaWorkflow);
 
 
 

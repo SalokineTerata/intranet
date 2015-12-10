@@ -51,7 +51,7 @@ class FtaWorkflowModel extends AbstractModel {
      * @param int $paramIdDefault
      * @return string
      */
-    public static function ShowListeDeroulanteNomWorkflowByAcces($paramIdUser, $paramObjetList, $paramIsEditable, $paramIdRole, $paramIdDefault = NULL) {
+    public static function showListeDeroulanteNomWorkflowByAcces($paramIdUser, $paramObjetList, $paramIsEditable, $paramIdRole, $paramIdDefault = NULL) {
 
         $arrayWorkflow = DatabaseOperation::convertSqlStatementWithKeyAndOneFieldToArray(
                         'SELECT DISTINCT ' . FtaWorkflowModel::TABLENAME . '.' . FtaWorkflowModel::KEYNAME . ',' . FtaWorkflowModel::FIELDNAME_DESCRIPTION_FTA_WORKFLOW
@@ -83,12 +83,12 @@ class FtaWorkflowModel extends AbstractModel {
      * Affiche la liste des espaces de travail pour lesquel l'utilisateur connecté à les droits d'accès
      * et l'identifiant de la Fta en cours
      * @param int $paramIdUser
-     * @param objet $paramObjetList
+     * @param HtmlListSelect $paramObjetList
      * @param boolean $paramIsEditable
      * @param int $paramIdFta
      * @return string
      */
-    public static function ShowListeDeroulanteNomWorkflowByAccesAndIdFta($paramIdUser, $paramObjetList, $paramIsEditable, $paramIdFta, $paramIdRole) {
+    public static function showListeDeroulanteNomWorkflowByAccesAndIdFta($paramIdUser, $paramObjetList, $paramIsEditable, $paramIdFta, $paramIdRole) {
 
         $ftaModel = new FtaModel($paramIdFta);
         $arrayWorkflow = DatabaseOperation::convertSqlStatementWithKeyAndOneFieldToArray(
@@ -126,64 +126,34 @@ class FtaWorkflowModel extends AbstractModel {
         return $listeSiteWorkflow;
     }
 
-    static public function MigrationIntranetWorkflowAttribution($paramSitedeProduction, $paramIdFtaEtat, $paramCreateurFta) {
-        if ($paramIdFtaEtat <> '8') {
-            if ($paramSitedeProduction == '1' or $paramSitedeProduction == '3'or $paramSitedeProduction == '6' or $paramSitedeProduction == '11' or $paramSitedeProduction == '0') {
-                switch ($paramCreateurFta) {
-                    //identifiant de l'utilisateur 
-                    case '-2':
-                    case '-1':
-                    case '43':
-                    case '48':
-                    case '58':
-                    case '71':
-                    case '207':
-                    case '237':
-                    case '292':
-                    case '318':
-                    case '426':
-                    case '492':
-                    case '493':
-                    case '521':
-                    case '534':
-                    case '544':
-                    case '556':
-                    case '557':
-                    case '558':
-                    case '559':
-                    case '560':
-                    case '572':
-                        $idFtaWorkflow = '6';
-                        break;
-                    case '196':
-                    case '278':
-                    case '371':
-                    case '379':
-                    case '445':
-                    case '457':
-                    case '473':
-                    case '474':
-                    case '484':
-                    case '487':
-                    case '501':
-                    case '512':
-                    case '562':
-                    case '563':
-                        $idFtaWorkflow = '2';
-                        break;
-                    case '262':
-                    case '361':
-                        $idFtaWorkflow = '3';
-                        break;
-                }
-            } else {
-                $idFtaWorkflow = '8';
-            }
-        } else {
-            $idFtaWorkflow = '9';
-        }
+    /**
+     * Affiche la liste des espaces de travail
+     * @param int $paramIdFtaWorkflow
+     * @param HtmlListSelect $paramObjetList
+     * @return string
+     */
+    public static function showListeDeroulanteNomWorkflow($paramIdFtaWorkflow, HtmlListSelect $paramObjetList) {
 
-        return $idFtaWorkflow;
+        $arrayWorkflow = DatabaseOperation::convertSqlStatementWithKeyAndOneFieldToArray(
+                        'SELECT DISTINCT ' . FtaWorkflowModel::TABLENAME . '.' . FtaWorkflowModel::KEYNAME . ',' . FtaWorkflowModel::FIELDNAME_DESCRIPTION_FTA_WORKFLOW
+                        . ' FROM ' . FtaWorkflowModel::TABLENAME
+                        . ' ORDER BY ' . FtaWorkflowModel::FIELDNAME_DESCRIPTION_FTA_WORKFLOW
+        );
+
+        $paramObjetList->setArrayListContent($arrayWorkflow);
+        $HtmlTableName = FtaWorkflowModel::TABLENAME
+                . '_'
+                . FtaWorkflowModel::KEYNAME
+        ;
+        $paramObjetList->getAttributes()->getName()->setValue(FtaModel::FIELDNAME_WORKFLOW);
+        $paramObjetList->setLabel(DatabaseDescription::getFieldDocLabel(FtaWorkflowModel::TABLENAME, FtaWorkflowModel::FIELDNAME_DESCRIPTION_FTA_WORKFLOW));
+        $paramObjetList->setIsEditable(TRUE);
+        $paramObjetList->initAbstractHtmlSelect(
+                $HtmlTableName, $paramObjetList->getLabel(), $paramIdFtaWorkflow, NULL, $paramObjetList->getArrayListContent());
+
+        $listeSiteWorkflow = $paramObjetList->getHtmlResult();
+
+        return $listeSiteWorkflow;
     }
 
 }

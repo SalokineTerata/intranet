@@ -1176,9 +1176,9 @@ class FtaModel extends AbstractModel {
           Les tables esclaves sont des tables contenant le champ "id_fta" dans la liste de leurs champs
          * ****************************************************************************************** */
 
-        FtaComposantModel::DuplicateFtaComposantByIdFta($idFtaOriginal, $idFtaNew);
-        FtaConditionnementModel::DuplicateFtaConditionnementByIdFta($idFtaOriginal, $idFtaNew);
-        FtaSuiviProjetModel::DuplicateFtaSuiviProjetByIdFta($idFtaOriginal, $idFtaNew);
+        FtaComposantModel::duplicateFtaComposantByIdFta($idFtaOriginal, $idFtaNew);
+        FtaConditionnementModel::duplicateFtaConditionnementByIdFta($idFtaOriginal, $idFtaNew);
+        FtaSuiviProjetModel::duplicateFtaSuiviProjetByIdFta($idFtaOriginal, $idFtaNew);
         // ClassificationFtaModel::DuplicateFtaClassificationByIdFta($idFtaOriginal, $idFtaNew);
 
 
@@ -1529,8 +1529,14 @@ class FtaModel extends AbstractModel {
         $this->saveToDatabase();
     }
 
-    public function ListeCodeProduitsAgrologic() {
-        $idFta = $this->getKeyValue();
+    public static function getArrayIdFtaByIdDossierFta($paramIdDossierFta) {
+        $arrayIdFtaChange = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
+                        "SELECT " . FtaModel::KEYNAME
+                        . "," . FtaModel::FIELDNAME_ID_FTA_ETAT
+                        . " FROM " . FtaModel::TABLENAME
+                        . " WHERE " . FtaModel::FIELDNAME_DOSSIER_FTA . "=" . $paramIdDossierFta
+        );
+        return $arrayIdFtaChange;
     }
 
 }

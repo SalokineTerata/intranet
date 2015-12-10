@@ -31,6 +31,7 @@ class UserInterfaceMessage {
     const FR_WARNING_ACCES_RIGHTS = "Vous n'avez pas les droits d'accès nécessaire.<br><br>";
     const FR_WARNING_ACCES_RIGHTS_TITLE = "Erreur d'accès";
     const FR_WARNING_DATA_VALIDATION_FTA_CODE_LDC = "Le Code LDC doit être unique.";
+    const FR_WARNING_ECHEANCE_DEPASSEE = "Certaines échéances sont dépassées !";
     const FR_WARNING_EMBALLAGE_COLIS = "Il ne doit y avoir qu'un seul emballage Colis";
     const FR_WARNING_EMBALLAGE_PALETTE = "Il ne doit y avoir qu'une seule Palette";
     const FR_WARNING_MESSAGE_URL_MODIF = "Veuillez ne pas modifier URL.<br><br>";
@@ -38,6 +39,7 @@ class UserInterfaceMessage {
     const FR_WARNING_PARAM_ID_FTA = "Erreur la Fta n'est passé en paramètre.<br><br>";
     const FR_WARNING_PARAM_ID_FTA_NOT_EXISTANT = "Erreur la Fta n'existe pas.<br><br>";
     const FR_WARNING_PARAM_ID_FTA_TITLE = "Affichage d'une Fta";
+    const FR_WARNING_FTA_ETAT_REMOVE = "Etes vous certain de vouloir retirer cette Fiche Technique ? Les autres fiches du dossier resteront indems.";
     const FR_WARNING_DATA_ID_FTA = "Veuillez saisir un id_fta existant à dupliquer .<br><br>";
     const FR_WARNING_DATA_ID_FTA_TITLE = "Manque de donnée id_fta";
     const FR_WARNING_DATA_DESIGNATION_COMMERCIALE = "Veuillez saisir une désignation commerciale .<br><br>";

@@ -27,6 +27,9 @@ class Acl {
      * Nom du tableau contenant les droits d'accès de l'utilisateur
      */
     const ARRAY_NAME_ACCES_RIGHT = "Rights";
+    const ACL_FTA_CONSULTATION = "fta_consultation";
+    const ACL_FTA_IMPRESSION = "fta_impression";
+    const ACL_FTA_MODIFICATION = "fta_modification";
 
     /**
      * Enregistrement des droits d'accès

@@ -20,6 +20,7 @@ class FtaProcessusDelaiModel extends AbstractModel {
     const VALUE_DELAI_AVANCEMENT_ONE_PROCESSUS_EXPIRED = 1;
     const VALUE_DELAI_AVANCEMENT_ALL_FTA_EXPIRED = 2;
     const VALUE_DELAI_AVANCEMENT_NO_DATE = 3;
+    const TAUX_100 = "100%";
 
     /**
      * FTA associée
@@ -98,8 +99,19 @@ class FtaProcessusDelaiModel extends AbstractModel {
         );
     }
 
+    /**
+     * Informe de l'état des délais et donc du respect des échéances
+     * Retour de fonction:
+     * $return['status']
+     * 0: Aucun dépassement des échéances
+     * 1: Au moins un processus en cours a dépassé son échéance
+     * 2: La date d'échéance de validation de la FTA est dépassée
+     * 3: Il n'y a pas de date d'échéance de validation FTA saisie
+     * @param type $paramIdFta
+     * @return mixed
+     */
     public static function getFtaDelaiAvancementStatus($paramIdFta) {
-        $return = getArraytFtaDelaiAvancement($paramIdFta);
+        $return = self::getArraytFtaDelaiAvancement($paramIdFta);
         return $return[self::KEYWORD_DELAI_AVANCEMENT_STATUS];
     }
 

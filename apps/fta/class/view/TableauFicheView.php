@@ -31,6 +31,13 @@ class TableauFicheView {
     const HTML_CELL_BGCOLOR_MODIFY = "";
     const HTML_CELL_BGCOLOR_VALIDATE = " bgcolor=#AFFF5A";
     const HTML_CELL_BGCOLOR_DEFAULT = " bgcolor=#A5A5CE";
+    const HTML_TEXT_COLOR_DIN = " color=#808080";
+    const HTML_IMAGE_ECHEANCE_EXPIRED = "../lib/images/exclamation.png";
+    CONST HTML_CLASS_RED = " class=couleur_rouge";
+
+    static public function getHtmlIconEcheance() {
+        return "<img src=" . self::HTML_IMAGE_ECHEANCE_EXPIRED . " title='" . UserInterfaceMessage::FR_WARNING_ECHEANCE_DEPASSEE . "' width=30 height=27 border=0 />";
+    }
 
     static public function getHtmlTable($paramIdFta, $paramChoix, $paramResultLimitByPage = self::DEFAULT_RESULT_LIMIT_BY_PAGE, $paramOrderCommon = NULL) {
 
@@ -41,8 +48,6 @@ class TableauFicheView {
         $largeur_html_C3 = self::HTML_CELL_WIDTH_C3; // largeur cellule type
         $compteur_ligne = 1;
         $selection_width = self::HTML_CELL_WIDTH_SELECTION;
-        $bgcolor = -1;  //Déconfiguration du bgcolor, pour forcer sa redéfinition par la suite
-        $bgcolor_header = "";
         $lien = "";
         $tableau_fiches = "<table class=titre width=100% border=0>"
                 . "<tr class=titre_principal><td></td><td>"
@@ -99,17 +104,7 @@ class TableauFicheView {
         /*
          * Attribution des couleurs de fonds suivant l'état de la FTA
          */
-        switch ($abreviation_fta_etat) {
-            case "I":
-                $bgcolor = self::HTML_CELL_BGCOLOR_MODIFY;
-                break;
-            case "V":
-                $bgcolor = self::HTML_CELL_BGCOLOR_VALIDATE;
-                break;
-            default:
-                $bgcolor = self::HTML_CELL_BGCOLOR_DEFAULT;
-        }
-
+        $bgcolor = self::getHtmlCellBgColor($abreviation_fta_etat);
         $tauxRound = FtaSuiviProjetModel::getPourcentageFtaTauxValidation($ftaModel);
 
         /**
@@ -117,162 +112,45 @@ class TableauFicheView {
          */
         $lienHistorique = self::getHtmlLinkHistorique($abreviation_fta_etat, $paramIdFta, $idFtaRole, $synthese_action, $tauxRound, $checkAccesButton);
 
-        //Gestion des délais
-        if ($abreviation_fta_etat == FtaEtatModel::ETAT_ABREVIATION_VALUE_MODIFICATION) {
-            $HTML_date_echeance_fta = FtaProcessusDelaiModel::getArraytFtaDelaiAvancement($paramIdFta);
-
-            switch ($HTML_date_echeance_fta["status"]) {
-                case 1:
-                    $bgcolor_header = $bgcolor;
-                    $icon_header = "<img src=../lib/images/exclamation.png title='Certaines échéances sont dépassées !' width=30 height=27 border=0 />";
-                    break;
-                case 2:
-                    $bgcolor_header = "class=couleur_rouge";
-                    $icon_header = "<img src=../lib/images/exclamation.png title='Certaines échéances sont dépassées !' width=30 height=27 border=0 />";
-                    break;
-                default:
-                    $icon_header = "";
-            }
-        }
-
-
-        //Droit de consultation standard HTML
-        if (
-                (Acl::getValueAccesRights("fta_modification"))
-                or ( Acl::getValueAccesRights("fta_consultation") and $abreviation_fta_etat == FtaEtatModel::ETAT_ABREVIATION_VALUE_VALIDE )
-        ) {
-            if ($abreviation_fta_etat <> FtaEtatModel::ETAT_ABREVIATION_VALUE_MODIFICATION) {
-                $lien .= '<a '
-                        . 'href=modification_fiche.php'
-                        . '?id_fta=' . $paramIdFta
-                        . '&synthese_action=' . $synthese_action
-                        . '&comeback=1'
-                        . '&id_fta_etat=' . $paramIdFta
-                        . '&abreviation_fta_etat=' . $abreviation_fta_etat
-                        . '&id_fta_role=' . FtaRoleModel::ID_FTA_ROLE_COMMUN
-                        . ' /><img src=../lib/images/next.png alt=\'\' title=\'Voir la FTA\' width=\'30\' height=\'25\' border=\'0\' />'
-                        . '</a>'
-                ;
-            } else {
-                if ($checkAccesButton) {
-                    $lien .= '<a '
-                            . 'href=modification_fiche.php'
-                            . '?id_fta=' . $paramIdFta
-                            . '&synthese_action=' . $synthese_action
-                            . '&comeback=1'
-                            . '&id_fta_etat=' . $paramIdFta
-                            . '&abreviation_fta_etat=' . $abreviation_fta_etat
-                            . '&id_fta_role=' . FtaRoleModel::ID_FTA_ROLE_COMMUN
-                            . ' /><img src=../lib/images/next.png alt=\'\' title=\'Voir la FTA\' width=\'30\' height=\'25\' border=\'0\' />'
-                            . '</a>'
-                    ;
-                }
-            }
-        }
-
-        //Export PDF
-        if (
-                (Acl::getValueAccesRights("fta_impression") and ( $abreviation_fta_etat == FtaEtatModel::ETAT_ABREVIATION_VALUE_VALIDE ))
-                or ( $_SESSION["mode_debug"] == 1)or ( $workflowName == 'presentation')
-        ) {
-
-            $lien .= "  "
-                    . "<a "
-                    . "href=pdf.php?id_fta=" . $paramIdFta . "&mode=client "
-                    . "target=_blank"
-                    . "><img src=./images/pdf.png alt=\"\" title=\"Exportation PDF\" width=\"30\" height=\"25\" border=\"0\" />"
-                    . "</a>"
-            ;
-        }
-
-        //Transiter
-        if (
-                (($idFtaRole == '1' or $idFtaRole == '6' ) and $tauxRound == '100%' and $checkAccesButton )
-                and Acl::getValueAccesRights("fta_modification") and ( $abreviation_fta_etat == FtaEtatModel::ETAT_ABREVIATION_VALUE_MODIFICATION)
-                or ( $ok == '2' and $accesTransitionButton == FALSE && $tauxRound == '100%' and $checkAccesButton )
-                or ( $synthese_action == FtaEtatModel::ETAT_AVANCEMENT_VALUE_ALL AND ( $idFtaRole == '1' or $idFtaRole == '6' ) and $checkAccesButton and $abreviation_fta_etat <> FtaEtatModel::ETAT_ABREVIATION_VALUE_MODIFICATION )
-                or ( ($idFtaRole == '1' or $idFtaRole == '6' ) and $synthese_action == FtaEtatModel::ETAT_AVANCEMENT_VALUE_EFFECTUES and $checkAccesButton )
-        ) {
-            $lien .= '<a '
-                    . 'href=transiter.php'
-                    . '?id_fta=' . $paramIdFta
-                    . '&id_fta_role=' . $idFtaRole
-                    . '><img src=./images/transiter.png alt=\'\' title=\'Transiter\' width=\'30\' height=\'30\' border=\'0\' />'
-                    . '</a>'
-            ;
-            if ($synthese_action == FtaEtatModel::ETAT_AVANCEMENT_VALUE_EFFECTUES and $tauxRound == '100%') {
-                $selection = '<input type=\'checkbox\' name=selection_fta value=\'' . $paramIdFta . '\' checked />';
-                $traitementDeMasse = '1';
-                $selection_width = '2%';
-                $StringFta .= $paramIdFta . ',';
-                $tableau_fiches .= '<input type=hidden name=arrayFta value=' . $StringFta . '>';
-            }
-        }
-
-        /*
-         * Action que seul les Chefs de projet peuvent faire
-         * Retirer une FTA en cours de modification
+        /**
+         * Gestion des icones en fonction des délais
          */
-        if (FtaRoleModel::isGestionnaire($idFtaRole)) {
-            if ($checkAccesButton) {
-                if ($abreviation_fta_etat <> FtaEtatModel::ETAT_ABREVIATION_VALUE_RETIRE) {
-                    $lien .= '<a '
-                            . 'href=# '
-                            . 'onClick=confirmation_correction_fta' . $paramIdFta . '(); '
-                            . '/>'
-                            . '<img src=../lib/images/supprimer.png alt=\'Retirer cette FTA\' width=\'25\' height=\'25\' border=\'0\' />'
-                            . '</a>'
-                    ;
-                    $javascript.='
-                           <SCRIPT LANGUAGE=JavaScript>
-                                   function confirmation_correction_fta' . $paramIdFta . '()
-                                   {
-                                   if(confirm(\'Etes vous certain de vouloir retirer cette Fiche Technique ? Les autres fiches du dossier resteront indem.\'))
-                                   {
-                                       location.href =\'transiter.php?id_fta=' . $paramIdFta . '&id_fta_role=' . $idFtaRole . '&synthese_action=' . $synthese_action . '&action=correction&demande_abreviation_fta_transition=R\'
-                                   }
-                                    else{}
-                                   }
-                           </SCRIPT>
-                           ';
-                }
-            }
-            if ($abreviation_fta_etat == FtaEtatModel::ETAT_ABREVIATION_VALUE_MODIFICATION) {
-                if ($checkAccesButton) {
-                    $lien .= '<a '
-                            . 'href=creer_fiche.php'
-                            . '?action=dupliquer_fiche'
-                            . '&id_fta=' . $paramIdFta
-                            . '&id_fta_role=' . $idFtaRole
-                            . '><img src=../lib/images/copie.png alt=\'\' title=\'Dupliquer\' width=\'30\' height=\'30\' border=\'0\' />'
-                            . '</a>'
-                    ;
-                }
-            } else {
-                $lien .= '<a '
-                        . 'href=creer_fiche.php'
-                        . '?action=dupliquer_fiche'
-                        . '&id_fta=' . $paramIdFta
-                        . '&id_fta_role=' . $idFtaRole
-                        . '><img src=../lib/images/copie.png alt=\'\' title=\'Dupliquer\' width=\'30\' height=\'30\' border=\'0\' />'
-                        . '</a>'
-                ;
-            }
-        }
-        //Désignation commerciale
-        if (strlen($designation_commerciale_fta) > 55) {
-            $designation_commerciale_fta = substr($designation_commerciale_fta, 0, 52) . "...";
-        }
-        if ($LIBELLE) {
-            $din = $LIBELLE;
-        } else {
-            $din = $designation_commerciale_fta;
+        $bgcolor_header = self::getHtmlBgColorIconHeader($abreviation_fta_etat, $paramIdFta);
+        $icon_header = self::getHtmlIconEcheanceByEtatAndFta($abreviation_fta_etat, $paramIdFta);
 
-            if ($temp2[2]) {
-                $din .= " (" . $temp[2] . " " . $NB_UNIT_ELEM . " x " . $Poids_ELEM . "Kg)";
-            }
-            $din = "<font size=\"1\" color=\"#808080\"><i>$din</i></font>";
+        /**
+         * Bouton d'accès au détail de la FTA
+         */
+        $lien .= self::getHtmlLinkModify($abreviation_fta_etat, $paramIdFta, $synthese_action);
+
+        /**
+         * Bouton d'accès au rendu PDF de la FTA
+         */
+        $lien .= self::getHtmlLinkPDF($abreviation_fta_etat, $paramIdFta);
+
+        /**
+         * Bouton d'accès à la transition
+         */
+        $lien .= self::getHmlLinkTransiter($paramIdFta, $idFtaRole, $abreviation_fta_etat, $checkAccesButton
+                        , $accesTransitionButton, $synthese_action, $tauxRound);
+
+        /**
+         * Bouton d'accès pour retirer une FTA
+         */
+        if (FtaRoleModel::isGestionnaire($idFtaRole) AND $checkAccesButton AND $abreviation_fta_etat <> FtaEtatModel::ETAT_ABREVIATION_VALUE_RETIRE) {
+            $lien .= self::getHtmlLinkRemoveFta($paramIdFta);
+            $javascript.=self::getJavascriptLinkRemoveFta($paramIdFta, $idFtaRole, $synthese_action);
         }
+
+        /**
+         * Bouton d'accès pour dupliquer  une FTA
+         */
+        if (FtaRoleModel::isGestionnaire($idFtaRole) AND $checkAccesButton) {
+            $lien .= self::getHtmlLinkDuplicateFta($paramIdFta, $idFtaRole);
+        }
+
+        //Désignation commerciale
+        $din = self::getStringDINCompacted($designation_commerciale_fta, $LIBELLE, $NB_UNIT_ELEM, $Poids_ELEM);
 
         /*
          * Noms des services dans lequel la Fta se trouve
@@ -360,6 +238,207 @@ class TableauFicheView {
                     . '.html >' . $paramTauxRound . '</a>';
         }
         return $lienHistorique;
+    }
+
+    static private function getHtmlCellBgColor($paramAbreviationFtaEtat) {
+
+        $bgcolor = self::HTML_CELL_BGCOLOR_DEFAULT;
+        /*
+         * Attribution des couleurs de fonds suivant l'état de la FTA
+         */
+        switch ($paramAbreviationFtaEtat) {
+            case FtaEtatModel::ETAT_ABREVIATION_VALUE_MODIFICATION:
+                $bgcolor = self::HTML_CELL_BGCOLOR_MODIFY;
+                break;
+            case FtaEtatModel::ETAT_ABREVIATION_VALUE_VALIDE:
+                $bgcolor = self::HTML_CELL_BGCOLOR_VALIDATE;
+                break;
+        }
+        return $bgcolor;
+    }
+
+    static private function getHtmlBgColorIconHeader($paramAbreviationFtaEtat, $paramIdFta) {
+        $return = "";
+        if ($paramAbreviationFtaEtat == FtaEtatModel::ETAT_ABREVIATION_VALUE_MODIFICATION) {
+            switch (FtaProcessusDelaiModel::getFtaDelaiAvancementStatus($paramIdFta)) {
+                case FtaProcessusDelaiModel::VALUE_DELAI_AVANCEMENT_ONE_PROCESSUS_EXPIRED:
+                    $return = getHtmlCellBgColor($paramAbreviationFtaEtat);
+                    break;
+                case FtaProcessusDelaiModel::VALUE_DELAI_AVANCEMENT_ALL_FTA_EXPIRED:
+                    $return = self::HTML_CLASS_RED;
+                    break;
+            }
+        }
+        return $return;
+    }
+
+    static private function getHtmlIconEcheanceByEtatAndFta($paramAbreviationFtaEtat, $paramIdFta) {
+        $iconHeader = "";
+        if ($paramAbreviationFtaEtat == FtaEtatModel::ETAT_ABREVIATION_VALUE_MODIFICATION) {
+            switch (FtaProcessusDelaiModel::getFtaDelaiAvancementStatus($paramIdFta)) {
+                case FtaProcessusDelaiModel::VALUE_DELAI_AVANCEMENT_ONE_PROCESSUS_EXPIRED:
+                case FtaProcessusDelaiModel::VALUE_DELAI_AVANCEMENT_ALL_FTA_EXPIRED:
+                    $iconHeader = self::getHtmlIconEcheance();
+                    break;
+            }
+        }
+        return $iconHeader;
+    }
+
+    static private function getHtmlLinkModify($paramAbreviationFtaEtat, $paramIdFta, $paramSyntheseAction, $paramIdFtaRole = FtaRoleModel::ID_FTA_ROLE_COMMUN) {
+        $lien = "";
+        if (
+                (Acl::getValueAccesRights(Acl::ACL_FTA_MODIFICATION))
+                or ( Acl::getValueAccesRights(Acl::ACL_FTA_CONSULTATION) and $paramAbreviationFtaEtat <> FtaEtatModel::ETAT_ABREVIATION_VALUE_MODIFICATION )
+        ) {
+
+            $lien .= '<a '
+                    . 'href=modification_fiche.php'
+                    . '?id_fta=' . $paramIdFta
+                    . '&synthese_action=' . $paramSyntheseAction
+                    . '&comeback=1'
+                    //. '&id_fta_etat=' . $paramIdFta
+                    . '&abreviation_fta_etat=' . $paramAbreviationFtaEtat
+                    . '&id_fta_role=' . $paramIdFtaRole
+                    . ' /><img src=../lib/images/next.png alt=\'\' title=\'Voir la FTA\' width=\'30\' height=\'25\' border=\'0\' />'
+                    . '</a>'
+            ;
+        }
+
+        return $lien;
+    }
+
+    static private function getHtmlLinkPDF($paramAbreviationFtaEtat, $paramIdFta) {
+
+        $lien = "";
+        if (
+                (Acl::getValueAccesRights(Acl::ACL_FTA_IMPRESSION) and ( $paramAbreviationFtaEtat == FtaEtatModel::ETAT_ABREVIATION_VALUE_VALIDE ))
+        ) {
+
+            $lien .= "  "
+                    . "<a "
+                    . "href=pdf.php?id_fta=" . $paramIdFta . "&mode=client "
+                    . "target=_blank"
+                    . "><img src=./images/pdf.png alt=\"\" title=\"Exportation PDF\" width=\"30\" height=\"25\" border=\"0\" />"
+                    . "</a>"
+            ;
+        }
+        return $lien;
+    }
+
+    static private function isUserRightsLinkTransiter($paramIdFtaRole, $paramAbreviationFtaEtat, $paramCheckAccesButton
+    , $paramAccesTransitionButton, $paramSyntheseAction, $paramTauxRound) {
+        $return = FALSE;
+
+        switch (TRUE) {
+
+            case (
+            ($paramIdFtaRole == FtaRoleModel::ID_FTA_ROLE_CHEF_DE_PROJET OR $paramIdFtaRole == FtaRoleModel::ID_FTA_ROLE_SITE )
+            AND $paramTauxRound == FtaProcessusDelaiModel::TAUX_100
+            AND $paramCheckAccesButton
+            AND Acl::getValueAccesRights(Acl::ACL_FTA_MODIFICATION)
+            AND ( $paramAbreviationFtaEtat == FtaEtatModel::ETAT_ABREVIATION_VALUE_MODIFICATION)
+            ) :
+
+            case (
+            $paramAccesTransitionButton == FALSE AND $paramTauxRound == FtaProcessusDelaiModel::TAUX_100
+            AND $paramCheckAccesButton
+            ) :
+
+            case (
+            $paramSyntheseAction == FtaEtatModel::ETAT_AVANCEMENT_VALUE_ALL
+            AND ( $paramIdFtaRole == FtaRoleModel::ID_FTA_ROLE_CHEF_DE_PROJET OR $paramIdFtaRole == FtaRoleModel::ID_FTA_ROLE_SITE )
+            AND $paramCheckAccesButton
+            AND $paramAbreviationFtaEtat <> FtaEtatModel::ETAT_ABREVIATION_VALUE_MODIFICATION
+            ):
+
+            case (
+            ($paramIdFtaRole == FtaRoleModel::ID_FTA_ROLE_CHEF_DE_PROJET OR $paramIdFtaRole == FtaRoleModel::ID_FTA_ROLE_SITE )
+            AND $paramSyntheseAction == FtaEtatModel::ETAT_AVANCEMENT_VALUE_EFFECTUES
+            AND $paramCheckAccesButton
+            ) :
+                $return = TRUE;
+                break;
+        }
+        return $return;
+    }
+
+    static private function getHmlLinkTransiter($paramIdFta, $paramIdFtaRole, $paramAbreviationFtaEtat, $paramCheckAccesButton
+    , $paramAccesTransitionButton, $paramSyntheseAction, $paramTauxRound) {
+        $return = "";
+        if (
+                self::isUserRightsLinkTransiter($paramIdFtaRole, $paramAbreviationFtaEtat, $paramCheckAccesButton
+                        , $paramAccesTransitionButton, $paramSyntheseAction, $paramTauxRound)
+        ) {
+            $return = '<a '
+                    . 'href=transiter.php'
+                    . '?id_fta=' . $paramIdFta
+                    . '&id_fta_role=' . $paramIdFtaRole
+                    . '><img src=./images/transiter.png alt=\'\' title=\'Transiter\' width=\'30\' height=\'30\' border=\'0\' />'
+                    . '</a>'
+            ;
+        }
+        return $return;
+    }
+
+    static private function getHtmlLinkRemoveFta($paramIdFta) {
+        $lien = '<a '
+                . 'href=# '
+                . 'onClick=confirmation_correction_fta' . $paramIdFta . '(); '
+                . '/>'
+                . '<img src=../lib/images/supprimer.png alt=\'Retirer cette FTA\' width=\'25\' height=\'25\' border=\'0\' />'
+                . '</a>'
+        ;
+        return $lien;
+    }
+
+    static private function getJavascriptLinkRemoveFta($paramIdFta, $idFtaRole, $paramSyntheseAction) {
+        $return = '<SCRIPT LANGUAGE=JavaScript>'
+                . 'function confirmation_correction_fta' . $paramIdFta . '()'
+                . '{'
+                . 'if(confirm(\'Etes vous certain de vouloir retirer cette Fiche Technique ? Les autres fiches du dossier resteront indem.\'))'
+                . '{'
+                . 'location.href =\'transiter.php?id_fta=' . $paramIdFta
+                . '&id_fta_role=' . $idFtaRole
+                . '&synthese_action=' . $paramSyntheseAction
+                . '&action=correction'
+                . '&demande_abreviation_fta_transition=' . UserInterfaceMessage::FR_WARNING_FTA_ETAT_REMOVE . '\''
+                . '}'
+                . 'else{}'
+                . '}'
+                . '</SCRIPT>'
+        ;
+        return $return;
+    }
+
+    static private function getHtmlLinkDuplicateFta($paramIdFta, $idFtaRole) {
+        $lien = '<a '
+                . 'href=creer_fiche.php'
+                . '?action=dupliquer_fiche'
+                . '&id_fta=' . $paramIdFta
+                . '&id_fta_role=' . $idFtaRole
+                . '><img src=../lib/images/copie.png alt=\'\' title=\'Dupliquer\' width=\'30\' height=\'30\' border=\'0\' />'
+                . '</a>'
+        ;
+        return $lien;
+    }
+
+    static private function getStringDINCompacted($paramDesignationCommercialeFta, $paramLibelle, $paramNbUnitElem, $PoidsElem) {
+        $din = "";
+
+        if ($paramLibelle) {
+            $din = $paramLibelle;
+        } else {
+            if (strlen($paramDesignationCommercialeFta) > 55) {
+                $paramDesignationCommercialeFta = substr($paramDesignationCommercialeFta, 0, 52) . "...";
+            }
+            $din = "<font size=\"1\" " . self::HTML_TEXT_COLOR_DIN . ">"
+                    . "<i>" . $paramDesignationCommercialeFta . "(" . $paramNbUnitElem . " x " . $PoidsElem . "Kg)</i>"
+                    . "</font>"
+            ;
+        }
+
+        return $din;
     }
 
 }

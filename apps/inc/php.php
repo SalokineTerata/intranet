@@ -57,6 +57,9 @@ require_once('../fta/class/view/FtaComposantView.php');
 require_once('../fta/class/view/FtaProcessusDelaiView.php');
 require_once('../fta/class/view/TableauFicheView.php');
 
+// Controller
+require_once('../fta/class/controller/FtaController.php');
+
 // Moteur de base de données
 require_once('../lib/class/database/DatabaseConnection.php');
 require_once('../lib/class/database/DatabaseOperation.php');

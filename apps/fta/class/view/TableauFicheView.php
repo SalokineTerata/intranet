@@ -109,8 +109,8 @@ class TableauFicheView {
                 $bgcolor = self::HTML_CELL_BGCOLOR_DEFAULT;
         }
 
-        $taux_temp = FtaSuiviProjetModel::getFtaTauxValidation($ftaModel, FALSE);
-        $recap[$paramIdFta] = round($taux_temp[0] * 100, 0) . "%";
+        $tauxTemp = FtaSuiviProjetModel::getPourcentageFtaTauxValidation($ftaModel);
+        //$tauxRound = round($tauxTemp[0] * 100, 0) . "%";
 
         /**
          * Lien vers l'historique de la Fta
@@ -123,7 +123,7 @@ class TableauFicheView {
                     . '-' . $idFtaRole
                     . '-' . $synthese_action
                     . '-1'
-                    . '.html >' . $recap[$paramIdFta] . '</a>';
+                    . '.html >' . $tauxRound . '</a>';
         } else {
             if ($checkAccesButton) {
                 $lienHistorique = ' <a href=historique-' . $paramIdFta
@@ -133,7 +133,7 @@ class TableauFicheView {
                         . '-' . $idFtaRole
                         . '-' . $synthese_action
                         . '-1'
-                        . '.html >' . $recap[$paramIdFta] . '</a>';
+                        . '.html >' . $tauxRound . '</a>';
             }
         }
 
@@ -207,9 +207,9 @@ class TableauFicheView {
 
         //Transiter
         if (
-                (($idFtaRole == '1' or $idFtaRole == '6' ) and $recap[$paramIdFta] == '100%' and $checkAccesButton )
+                (($idFtaRole == '1' or $idFtaRole == '6' ) and $tauxRound == '100%' and $checkAccesButton )
                 and Acl::getValueAccesRights("fta_modification") and ( $abreviation_fta_etat == FtaEtatModel::ETAT_ABREVIATION_VALUE_MODIFICATION)
-                or ( $ok == '2' and $accesTransitionButton == FALSE && $recap[$paramIdFta] == '100%' and $checkAccesButton )
+                or ( $ok == '2' and $accesTransitionButton == FALSE && $tauxRound == '100%' and $checkAccesButton )
                 or ( $synthese_action == FtaEtatModel::ETAT_AVANCEMENT_VALUE_ALL AND ( $idFtaRole == '1' or $idFtaRole == '6' ) and $checkAccesButton and $abreviation_fta_etat <> FtaEtatModel::ETAT_ABREVIATION_VALUE_MODIFICATION )
                 or ( ($idFtaRole == '1' or $idFtaRole == '6' ) and $synthese_action == FtaEtatModel::ETAT_AVANCEMENT_VALUE_EFFECTUES and $checkAccesButton )
         ) {
@@ -220,7 +220,7 @@ class TableauFicheView {
                     . '><img src=./images/transiter.png alt=\'\' title=\'Transiter\' width=\'30\' height=\'30\' border=\'0\' />'
                     . '</a>'
             ;
-            if ($synthese_action == FtaEtatModel::ETAT_AVANCEMENT_VALUE_EFFECTUES and $recap[$paramIdFta] == '100%') {
+            if ($synthese_action == FtaEtatModel::ETAT_AVANCEMENT_VALUE_EFFECTUES and $tauxRound == '100%') {
                 $selection = '<input type=\'checkbox\' name=selection_fta value=\'' . $paramIdFta . '\' checked />';
                 $traitementDeMasse = '1';
                 $selection_width = '2%';

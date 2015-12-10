@@ -117,7 +117,7 @@ foreach ($arrayFta as $rowsFta) {
 
 
 
-$taux_temp = FtaSuiviProjetModel::getFtaTauxValidation($ftaModel, FALSE);
+$taux_temp = FtaSuiviProjetModel::getArrayFtaTauxValidation($ftaModel, FALSE);
 $recap[$idFta] = round($taux_temp['0'] * '100%', '0') . '%';
 
 

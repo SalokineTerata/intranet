@@ -120,7 +120,7 @@ class Navigation {
         $arrayRoleWorkflow = FtaRoleModel::getIdFtaRoleByIdUserAndWorkflow($idUser, self::$id_fta_workflow);
         if (count($arrayRoleWorkflow) > "1") {
             //Calcul du taux
-            $taux_temp = FtaSuiviProjetModel::getFtaTauxValidation(self::$ftaModel, TRUE);
+            $taux_temp = FtaSuiviProjetModel::getArrayFtaTauxValidation(self::$ftaModel, TRUE);
             if ($taux_temp["1"]) {
                 foreach ($taux_temp["1"] as $id_fta_processus => $taux) {
                     /**

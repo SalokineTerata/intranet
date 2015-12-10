@@ -595,7 +595,12 @@ class FtaSuiviProjetModel extends AbstractModel {
         }
     }
 
-    public static function getFtaTauxValidation($paramFtaModel, $paramTableauProcessus) {
+    public static function getPourcentageFtaTauxValidation($paramFtaModel) {
+        $tauxTemp = FtaSuiviProjetModel::getArrayFtaTauxValidation($paramFtaModel, FALSE);
+        return round($tauxTemp[0] * 100, 0) . "%";
+    }
+
+    public static function getArrayFtaTauxValidation($paramFtaModel, $paramTableauProcessus) {
 
 //Dictionnaire des données
         $return['0'];     //Pourcentage globale de la validation

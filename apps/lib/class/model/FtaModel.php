@@ -1517,7 +1517,7 @@ class FtaModel extends AbstractModel {
         /**
          * Recalcul + stockage % Avancement
          */
-        $taux_temp = FtaSuiviProjetModel::getFtaTauxValidation($this, FALSE);
+        $taux_temp = FtaSuiviProjetModel::getArrayFtaTauxValidation($this, FALSE);
         $recap[$idFta] = round($taux_temp['0'] * '100', '0') . '%';
         $this->getDataField(FtaModel::FIELDNAME_POURCENTAGE_AVANCEMENT)->setFieldValue($recap[$idFta]);
 

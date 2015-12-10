@@ -14,6 +14,12 @@ class FtaProcessusDelaiModel extends AbstractModel {
     const FIELDNAME_ID_FTA_PROCESSUS = 'id_fta_processus';
     const FIELDNAME_DATE_ECHEANCE_PROCESSUS = 'date_echeance_processus';
     const FIELDNAME_VALIDE = 'valide_fta_processus_delai';
+    const KEYWORD_DELAI_AVANCEMENT_STATUS = "status";
+    const KEYWORD_DELAI_AVANCEMENT_HTML_SYNTHESE = "HTML_synthese";
+    const VALUE_DELAI_AVANCEMENT_OK = 0;
+    const VALUE_DELAI_AVANCEMENT_ONE_PROCESSUS_EXPIRED = 1;
+    const VALUE_DELAI_AVANCEMENT_ALL_FTA_EXPIRED = 2;
+    const VALUE_DELAI_AVANCEMENT_NO_DATE = 3;
 
     /**
      * FTA associée
@@ -92,60 +98,31 @@ class FtaProcessusDelaiModel extends AbstractModel {
         );
     }
 
-    public static function getFtaDelaiAvancement($paramIdFta) {
-        /*         * *****************************************************************************
-          Informe de l'état des délais et donc du respect des échéances
+    public static function getFtaDelaiAvancementStatus($paramIdFta) {
+        $return = getArraytFtaDelaiAvancement($paramIdFta);
+        return $return[self::KEYWORD_DELAI_AVANCEMENT_STATUS];
+    }
 
-          Retour de fonction:
-         * ******************
-          $return['status']
-          0: Aucun dépassement des échéances
-          1: Au moins un processus en cours a dépassé son échéance
-          2: La date d'échéance de validation de la FTA est dépassée
-          3: Il n'y a pas de date d'échéance de validation FTA saisie
-          $return['liste_processus_depasses'][$id_processus]
-          Renvoi un tableau associatif contenant:
-          - la listes des processus en cours ayant dépassé leur échéance
-          - leur date d'échéance
-          $return['HTML_synthese']
-          Contient le code source HTML utilisé pour la fonction visualiser_fiches()
-
-         * ***************************************************************************** */
+    /**
+     * Informe de l'état des délais et donc du respect des échéances
+     * Retour de fonction:
+     * $return['status']
+     * 0: Aucun dépassement des échéances
+     * 1: Au moins un processus en cours a dépassé son échéance
+     * 2: La date d'échéance de validation de la FTA est dépassée
+     * 3: Il n'y a pas de date d'échéance de validation FTA saisie
+     * $return['liste_processus_depasses'][$id_processus]
+     * Renvoi un tableau associatif contenant:
+     * - la listes des processus en cours ayant dépassé leur échéance
+     * - leur date d'échéance
+     * $return['HTML_synthese']
+     * Contient le code source HTML utilisé pour la fonction visualiser_fiches()
+     * @param type $paramIdFta
+     * @return array
+     */
+    public static function getArraytFtaDelaiAvancement($paramIdFta) {
 
         $return = NULL;
-        $HTML_fta = '';                                                      //Partie HTML dédiée à la fta
-        //  $HTML_processus = '';                                                //Partie HTML dédiée aux processus
-        // $HTML_processus_begin = '<font size=\'1\' color=\'#808080\'><i>';    //Partie HTML dédiée aux processus (warning)
-        // $HTML_processus_end = '</i></font>';                                 //Partie HTML dédiée aux processus (warning)
-        /*
-         * Liste des rôles non validés qui ont dépassé leur échéances 
-         */
-
-//        $arrayFtaDateProcessus = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
-//                        'SELECT ' . FtaProcessusModel::TABLENAME . '.' . FtaProcessusModel::KEYNAME
-//                        . ', ' . FtaProcessusDelaiModel::FIELDNAME_DATE_ECHEANCE_PROCESSUS
-//                        . ',' . FtaRoleModel::FIELDNAME_DESCRIPTION_FTA_ROLE
-//                        . ' FROM ' . FtaProcessusDelaiModel::TABLENAME . ', ' . FtaProcessusModel::TABLENAME . ',' . FtaRoleModel::TABLENAME
-//                        . ' WHERE ' . FtaProcessusDelaiModel::FIELDNAME_ID_FTA . '=\'' . $paramIdFta . '\' '
-//                        . ' AND ' . FtaProcessusModel::TABLENAME . '.' . FtaProcessusModel::KEYNAME
-//                        . '=' . FtaProcessusDelaiModel::TABLENAME . '.' . FtaProcessusDelaiModel::FIELDNAME_ID_FTA_PROCESSUS
-//                        . ' AND ' . FtaProcessusModel::TABLENAME . '.' . FtaProcessusModel::FIELDNAME_ID_FTA_ROLE
-//                        . '=' . FtaRoleModel::TABLENAME . '.' . FtaRoleModel::KEYNAME
-//                        . ' AND ' . FtaProcessusDelaiModel::FIELDNAME_DATE_ECHEANCE_PROCESSUS . ' < CURDATE()'
-//                        . ' AND ' . FtaProcessusDelaiModel::FIELDNAME_VALIDE . '=0'
-//                        . ' ORDER BY ' . FtaProcessusDelaiModel::FIELDNAME_DATE_ECHEANCE_PROCESSUS
-//        );
-//        if ($arrayFtaDateProcessus) {
-//            $return['status'] = 1;
-        /*  foreach ($arrayFtaDateProcessus as $rowsFtaDateProcessus) {
-          $return['liste_processus_depasses'][$rows['id_fta_processus']] = $rows['date_echeance_processus'];
-          $HTML_processus .= '<br>' . $rows['nom_fta_processus'] . ' - ' . $return['liste_processus_depasses'][$rows['id_fta_processus']];
-          }
-          $HTML_processus = $HTML_processus_begin . $HTML_processus . $HTML_processus_end; */
-//        } else {
-//            $return['status'] = 0;
-//            $HTML_processus = '';
-//        }
 
         /*
          * Recherche du dépassement de la date d'échéance de validation de fta
@@ -161,27 +138,20 @@ class FtaProcessusDelaiModel extends AbstractModel {
                 $jour_restant = ((strtotime($dateEcheanceFta) - strtotime(date('Y-m-d')))) / 86400;
             }
             /**
-             * @todo Revoir les notification de date d'échances
+             * @todo Revoir les notifications de date d'échances
              */
             if ($dateEcheanceFta == '0000-00-00' or $dateEcheanceFta == '') {
-                $return['status'] = 3;
-            } else {
-                if ($jour_restant <= "0") {
-                    $return['status'] = 2;
-                } elseif ($jour_restant <= ModuleConfig::VALUE_DATE_NOTIFICATION2) {
-                    $return['status'] = 2;
-                    if ($jour_restant <= ModuleConfig::VALUE_DATE_NOTIFICATION) {
-                        $return['status'] = 1;
-                    }
-                }
-
-                $HTML_fta .= $dateEcheanceFta;
+                $return[self::KEYWORD_DELAI_AVANCEMENT_STATUS] = self::VALUE_DELAI_AVANCEMENT_NO_DATE;
+            } else if (($jour_restant <= "0") OR ( $jour_restant <= ModuleConfig::VALUE_DATE_NOTIFICATION2)) {
+                $return[self::KEYWORD_DELAI_AVANCEMENT_STATUS] = self::VALUE_DELAI_AVANCEMENT_ALL_FTA_EXPIRED;
+            } else if ($jour_restant <= ModuleConfig::VALUE_DATE_NOTIFICATION) {
+                $return[self::KEYWORD_DELAI_AVANCEMENT_STATUS] = self::VALUE_DELAI_AVANCEMENT_ONE_PROCESSUS_EXPIRED;
             }
+            $return[self::KEYWORD_DELAI_AVANCEMENT_HTML_SYNTHESE] .= $dateEcheanceFta;
         } else {
-            $return['status'] = 3;
+            $return[self::KEYWORD_DELAI_AVANCEMENT_STATUS] = self::VALUE_DELAI_AVANCEMENT_NO_DATE;
         }
 
-        $return['HTML_synthese'] = $HTML_fta;
         return $return;
     }
 

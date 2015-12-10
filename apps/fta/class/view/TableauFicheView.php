@@ -47,6 +47,7 @@ class TableauFicheView {
         $tableau_fiches = "<table class=titre width=100% border=0>"
                 . "<tr class=titre_principal><td></td><td>"
         ;
+        $synthese_action = "all";
 
 
         /*
@@ -109,37 +110,16 @@ class TableauFicheView {
                 $bgcolor = self::HTML_CELL_BGCOLOR_DEFAULT;
         }
 
-        $tauxTemp = FtaSuiviProjetModel::getPourcentageFtaTauxValidation($ftaModel);
-        //$tauxRound = round($tauxTemp[0] * 100, 0) . "%";
+        $tauxRound = FtaSuiviProjetModel::getPourcentageFtaTauxValidation($ftaModel);
 
         /**
          * Lien vers l'historique de la Fta
          */
-        if ($abreviation_fta_etat <> FtaEtatModel::ETAT_ABREVIATION_VALUE_MODIFICATION) {
-            $lienHistorique = ' <a href=historique-' . $paramIdFta
-                    . '-1'
-                    . '-' . $paramIdFta
-                    . '-' . $abreviation_fta_etat
-                    . '-' . $idFtaRole
-                    . '-' . $synthese_action
-                    . '-1'
-                    . '.html >' . $tauxRound . '</a>';
-        } else {
-            if ($checkAccesButton) {
-                $lienHistorique = ' <a href=historique-' . $paramIdFta
-                        . '-1'
-                        . '-' . $paramIdFta
-                        . '-' . $abreviation_fta_etat
-                        . '-' . $idFtaRole
-                        . '-' . $synthese_action
-                        . '-1'
-                        . '.html >' . $tauxRound . '</a>';
-            }
-        }
+        $lienHistorique = self::getHtmlLinkHistorique($abreviation_fta_etat, $paramIdFta, $idFtaRole, $synthese_action, $tauxRound, $checkAccesButton);
 
         //Gestion des délais
-        if ($abreviation_fta_etat == "I") {
-            $HTML_date_echeance_fta = FtaProcessusDelaiModel::getFtaDelaiAvancement($paramIdFta);
+        if ($abreviation_fta_etat == FtaEtatModel::ETAT_ABREVIATION_VALUE_MODIFICATION) {
+            $HTML_date_echeance_fta = FtaProcessusDelaiModel::getArraytFtaDelaiAvancement($paramIdFta);
 
             switch ($HTML_date_echeance_fta["status"]) {
                 case 1:
@@ -353,6 +333,33 @@ class TableauFicheView {
         }
 
         return $tableau_fiches;
+    }
+
+    /**
+     * Lien vers l'historique de la Fta
+     * @param type $paramAbreviationFtaEtat
+     * @param type $paramIdFta
+     * @param type $paramIdFtaRole
+     * @param type $paramSyntheseAction
+     * @param type $paramTauxRound
+     */
+    static public function getHtmlLinkHistorique($paramAbreviationFtaEtat, $paramIdFta, $paramIdFtaRole, $paramSyntheseAction, $paramTauxRound, $paramCheckAccesButton) {
+        $lienHistorique = NULL;
+
+        /**
+         * Lien vers l'historique de la Fta
+         */
+        if ($paramCheckAccesButton AND ( $paramAbreviationFtaEtat == FtaEtatModel::ETAT_ABREVIATION_VALUE_MODIFICATION)) {
+            $lienHistorique = ' <a href=historique-' . $paramIdFta
+                    . '-1'
+                    . '-' . $paramIdFta
+                    . '-' . $paramAbreviationFtaEtat
+                    . '-' . $paramIdFtaRole
+                    . '-' . $paramSyntheseAction
+                    . '-1'
+                    . '.html >' . $paramTauxRound . '</a>';
+        }
+        return $lienHistorique;
     }
 
 }

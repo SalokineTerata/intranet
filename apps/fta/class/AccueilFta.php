@@ -847,7 +847,7 @@ class AccueilFta {
                     }
                 }
 
-                $HTML_date_echeance_fta = FtaProcessusDelaiModel::getFtaDelaiAvancement($idFta);
+                $HTML_date_echeance_fta = FtaProcessusDelaiModel::getArraytFtaDelaiAvancement($idFta);
 //$return['status']
 //    0: Aucun dépassement des échéances
 //    1: Au moins un processus en cours a dépassé son échéance

@@ -4788,24 +4788,21 @@ if ($resultChangeIdUse) {
      * Affectation des espace de travail
      */
     
-$sql = "SELECT DISTINCT fta.id_dossier_fta
-                FROM ".$nameOfBDDTarget.".fta
+$sql = "SELECT DISTINCT id_dossier_fta FROM ".$nameOfBDDTarget.".fta
                ";
 $resultDossierFta =mysql_query($sql);
 if ($resultDossierFta) {
     while ($rowsDossierFta=mysql_fetch_array($resultDossierFta)) {
         $idDossierFta = $rowsDossierFta['id_dossier_fta'];
         
-        $sqldetail = "SELECT id_dossier_fta, id_fta, MAX( id_version_dossier_fta ) , id_fta_etat, createur_fta, site_de_production
-                FROM ".$nameOfBDDTarget.".fta 
-                    WHERE `id_dossier_fta` =".$idDossierFta
+        $sqldetail = "SELECT id_dossier_fta, id_fta, MAX( id_version_dossier_fta ) , id_fta_etat, createur_fta, Site_de_production FROM ".$nameOfBDDTarget.".fta WHERE id_dossier_fta=".$idDossierFta
                ;
         $resultDossierFtaDetail =mysql_query($sqldetail);
          while ($rowsDossierFtaDetail=mysql_fetch_array($resultDossierFtaDetail)) {
                      $idFta = $resultDossierFtaDetail['id_fta'];
                      $idFtaEtat = $resultDossierFtaDetail['id_fta_etat'];
                      $createurFta = $resultDossierFtaDetail['createur_fta'];
-                     $Site_de_production = $resultDossierFtaDetail['site_de_production'];
+                     $Site_de_production = $resultDossierFtaDetail['Site_de_production'];
                       if ($idFtaEtat <> '8') {
                             if ($Site_de_production == '1' or $Site_de_production == '3'or $Site_de_production == '6' or $Site_de_production == '11' or $Site_de_production == '-1') {
                                     switch ($createurFta) {
@@ -4861,8 +4858,7 @@ if ($resultDossierFta) {
                         }else {
                                 $idFtaWorkflow = '9';
                             }
-                             $sqldetaildossier = "SELECT id_fta FROM ".$nameOfBDDTarget.".fta 
-                              WHERE `id_dossier_fta` =".$idDossierFta
+                             $sqldetaildossier = "SELECT id_fta FROM ".$nameOfBDDTarget.".fta WHERE id_dossier_fta =".$idDossierFta
                                  ;
                                  $resultDossierFtaIdFta =mysql_query($sqldetaildossier);
                             while ($rowsDossierFtaIdFta=mysql_fetch_array($resultDossierFtaIdFta)) {
@@ -4871,8 +4867,8 @@ if ($resultDossierFta) {
                                      SET id_fta_workflow=" . $idFtaWorkflow
                                     . " WHERE id_fta=" . $idFtaDossier;
 
-                                echo "UPDATE ".$nameOfBDDTarget."." . "fta." . "id_fta .". $idFta ." id_fta_workflow=" . $idFtaWorkflow ." ...";
-                                if(mysql_query($sql_inter)) {echo "[OK]\n";}else{echo "[FAILED]\n $idFta \n";}
+                                echo "UPDATE ".$nameOfBDDTarget."." . "fta." . "id_fta .". $idFtaDossier ." id_fta_workflow=" . $idFtaWorkflow ." ...";
+                                if(mysql_query($sql_inter)) {echo "[OK]\n";}else{echo "[FAILED]\n $idFtaDossier \n";}
                             }
                                 
                 }

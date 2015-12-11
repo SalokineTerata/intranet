@@ -42,19 +42,19 @@ class Navigation {
         /**
          * Modification
          */
-        self::$ftaModification = Acl::getValueAccesRights('fta_modification');
+        self::$ftaModification = Acl::getValueAccesRights(Acl::ACL_FTA_MODIFICATION);
 
         /**
          * Consultation
          */
-        self::$ftaConsultation = Acl::getValueAccesRights('fta_consultation');
+        self::$ftaConsultation = Acl::getValueAccesRights(Acl::ACL_FTA_CONSULTATION);
 
 
 
         self::$id_fta = $id_fta;
         self::$id_fta_chapitre_encours = $id_fta_chapitre_encours;
         self::$synthese_action = $synthese_action;
-        if ($id_fta_etat == "1") {
+        if ($id_fta_etat == FtaEtatModel::ID_VALUE_MODIFICATION) {
             self::$synthese_action = FtaEtatModel::ETAT_AVANCEMENT_VALUE_EN_COURS;
         }
         self::$comeback = $comeback;
@@ -124,7 +124,7 @@ class Navigation {
             if ($taux_temp["1"]) {
                 foreach ($taux_temp["1"] as $id_fta_processus => $taux) {
                     /**
-                     * On obtien le rôle pour lequel le processus correspond
+                     * On obtient le rôle pour lequel le processus correspond
                      */
                     $arrayCheckRole = FtaWorkflowStructureModel::getArrayRoleByProcessusAndWorkflow($id_fta_processus, self::$id_fta_workflow);
                     $checkRole1 = array_intersect($arrayCheckRole, $arrayRoleWorkflow);
@@ -319,7 +319,7 @@ class Navigation {
                             . ',' . FtaActionRoleModel::TABLENAME
                             . ' WHERE ' . FtaProcessusCycleModel::TABLENAME . '.' . FtaProcessusCycleModel::FIELDNAME_PROCESSUS_INIT
                             . '=' . FtaWorkflowStructureModel::TABLENAME . '.' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_PROCESSUS
-                            . ' AND ' . FtaProcessusCycleModel::FIELDNAME_FTA_ETAT . '=\'I\''
+                            . ' AND ' . FtaProcessusCycleModel::FIELDNAME_FTA_ETAT . '=\'' . FtaEtatModel::ETAT_ABREVIATION_VALUE_MODIFICATION . '\''
                             . ' AND ' . FtaProcessusCycleModel::TABLENAME . '.' . FtaProcessusCycleModel::FIELDNAME_WORKFLOW
                             . '=' . self::$id_fta_workflow       //Jointure
                             . ' AND ' . FtaProcessusCycleModel::TABLENAME . '.' . FtaProcessusCycleModel::FIELDNAME_WORKFLOW
@@ -342,7 +342,7 @@ class Navigation {
             $arrayProcessusValide = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
                             'SELECT DISTINCT ' . FtaProcessusCycleModel::FIELDNAME_PROCESSUS_INIT . ' as ' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_PROCESSUS
                             . ' FROM ' . FtaProcessusCycleModel::TABLENAME
-                            . ' WHERE ' . FtaProcessusCycleModel::FIELDNAME_FTA_ETAT . '=\'I\''
+                            . ' WHERE ' . FtaProcessusCycleModel::FIELDNAME_FTA_ETAT . '=\'' . FtaEtatModel::ETAT_ABREVIATION_VALUE_MODIFICATION . '\''
                             . ' AND ' . FtaProcessusCycleModel::FIELDNAME_WORKFLOW
                             . '=\'' . self::$id_fta_workflow . '\' '
             );
@@ -426,7 +426,7 @@ class Navigation {
                             . '\' AND ' . IntranetDroitsAccesModel::FIELDNAME_NIVEAU_INTRANET_DROITS_ACCES . '=' . IntranetNiveauAccesModel::NIVEAU_GENERIC_TRUE   //L'utilisateur est propriétaire
                             . ' AND ' . FtaWorkflowStructureModel::TABLENAME . '.' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_CHAPITRE
                             . '=' . FtaSuiviProjetModel::TABLENAME . '.' . FtaSuiviProjetModel::FIELDNAME_ID_FTA_CHAPITRE  //Jointure
-                            . ' AND ' . FtaSuiviProjetModel::FIELDNAME_SIGNATURE_VALIDATION_SUIVI_PROJET . '<>0' //chapitre validé
+                            . ' AND ' . FtaSuiviProjetModel::FIELDNAME_SIGNATURE_VALIDATION_SUIVI_PROJET . '<>' . FtaSuiviProjetModel::SIGNATURE_VALIDATION_SUIVI_PROJET_FALSE //chapitre validé
             );
             if ($arrayNext) {
                 foreach ($arrayNext as $rowsNext) {
@@ -615,7 +615,7 @@ class Navigation {
                 . ' ON ' . FtaWorkflowStructureModel::TABLENAME . '.' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_CHAPITRE
                 . '=' . FtaChapitreModel::TABLENAME . '.' . FtaChapitreModel::KEYNAME
                 . ' WHERE ( '
-                . FtaWorkflowStructureModel::TABLENAME . '.' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_ROLE . ' =0'                          //Chapitre public
+                . FtaWorkflowStructureModel::TABLENAME . '.' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_ROLE . ' =' . FtaRoleModel::ID_FTA_ROLE_COMMUN                          //Chapitre public
         ;
         foreach ($paramT_Liste_Processus as $value) {
             $reqRecup .= ' OR ' . FtaWorkflowStructureModel::TABLENAME . '.' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_PROCESSUS
@@ -656,7 +656,7 @@ class Navigation {
                         . ' FROM ' . FtaSuiviProjetModel::TABLENAME
                         . ' WHERE ' . FtaSuiviProjetModel::FIELDNAME_ID_FTA . '=' . self::$id_fta
                         . ' AND ' . FtaSuiviProjetModel::FIELDNAME_ID_FTA_CHAPITRE . '=' . $id_fta_chapitre
-                        . ' AND ' . FtaSuiviProjetModel::FIELDNAME_SIGNATURE_VALIDATION_SUIVI_PROJET . '<>0 '
+                        . ' AND ' . FtaSuiviProjetModel::FIELDNAME_SIGNATURE_VALIDATION_SUIVI_PROJET . '<> '.FtaSuiviProjetModel::SIGNATURE_VALIDATION_SUIVI_PROJET_FALSE
                 ;
                 $result1 = DatabaseOperation::queryPDO($req1);
                 $num = DatabaseOperation::getSqlNumRows($result1);

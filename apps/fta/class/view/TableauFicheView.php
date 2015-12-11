@@ -19,25 +19,13 @@
 
 /**
  * Description of TableauFicheView
- * @todo
- * - Vérif/correction des conditions de droits d'accès
- * - Réduire raccourcis de classification 
- * - Agrandir colonne bouton
- * - Réduire colonne date
- * - Réduire colonne caode article
- * - N° version à côté de N°dossier
- * - Ajouté entre paranthèse l'espace de travail sous le site:
- *  Exemple:   
- *      Avignon
- *      (FEavecEtiq)
- *
  * @author bs4300280
  */
 class TableauFicheView {
 
     const DEFAULT_RESULT_LIMIT_BY_PAGE = "1000";
     const HTML_CELL_WIDTH_C1 = " width=15%";
-    const HTML_CELL_WIDTH_C3 = " width=5%";
+    const HTML_CELL_WIDTH_C3 = " width=4%";
     const HTML_CELL_WIDTH_SELECTION = " width=1%";
     const HTML_CELL_BGCOLOR_MODIFY = "";
     const HTML_CELL_BGCOLOR_VALIDATE = " bgcolor=#AFFF5A";
@@ -88,18 +76,25 @@ class TableauFicheView {
         $dateEcheanceFta = $ftaModel->getDataField(FtaModel::FIELDNAME_DATE_ECHEANCE_FTA)->getFieldValue();
         $createur_nom = $ftaModel->getModelCreateur()->getDataField(UserModel::FIELDNAME_NOM)->getFieldValue();
         $createur_prenom = $ftaModel->getModelCreateur()->getDataField(UserModel::FIELDNAME_PRENOM)->getFieldValue();
-        $workflowName = $ftaModel->getModelFtaWorkflow()->getDataField(FtaWorkflowModel::FIELDNAME_NOM_FTA_WORKFLOW)->getFieldValue();
+        $workflowName = $ftaModel->getModelFtaWorkflow()->getDataField(FtaWorkflowModel::FIELDNAME_DESCRIPTION_FTA_WORKFLOW)->getFieldValue();
         $idWorkflowFtaEncours = $ftaModel->getModelFtaWorkflow()->getKeyValue();
         $nomSiteProduction = $ftaModel->getModelSiteProduction()->getDataField(GeoModel::FIELDNAME_GEO)->getFieldValue();
         $idclassification = $ftaModel->getDataField(FtaModel::FIELDNAME_ID_FTA_CLASSIFICATION2)->getFieldValue();
         $listeIdFtaRole = $ftaModel->getDataField(FtaModel::FIELDNAME_LISTE_ID_FTA_ROLE)->getFieldValue();
         $idSiteDeProduction = $ftaModel->getDataField(FtaModel::FIELDNAME_SITE_PRODUCTION)->getFieldValue();
+        $idFtaEtat = $ftaModel->getDataField(FtaModel::FIELDNAME_ID_FTA_ETAT)->getFieldValue();
 
         /**
          * On obtient IdintranetAction du site de production
          */
         $idIntranetActionsSiteDeProduction = FtaActionSiteModel::getIdIntranetActionByWorkflowAndSiteDeProduction($idWorkflowFtaEncours, $idSiteDeProduction);
-        $checkAccesButton = IntranetActionsModel::getIdFtaWorkflowAndSiteDeProduction($idUser, $idWorkflowFtaEncours, $idIntranetActionsSiteDeProduction);
+        /**
+         * On verifie si selon le workflow  et site de production en cours l'utilisateur connecté à les droits d'accès.
+         * Puisqu'un utilisateur ne doit pas avoir accès aux boutons :
+         * historique, transition, retirer, duplication et pourcentage d'avancement
+         * si il n'a pas les accès aux site de production.
+         */
+        $checkAccesButtonBySiteProd = IntranetActionsModel::getIdFtaWorkflowAndSiteDeProduction($idUser, $idWorkflowFtaEncours, $idIntranetActionsSiteDeProduction);
 
         /**
          * Liste des processus pouvant être validé
@@ -121,7 +116,7 @@ class TableauFicheView {
         /**
          * Lien vers l'historique de la Fta
          */
-        $lienHistorique = self::getHtmlLinkHistorique($abreviation_fta_etat, $paramIdFta, $idFtaRole, $synthese_action, $tauxRound, $checkAccesButton);
+        $lienHistorique = self::getHtmlLinkHistorique($abreviation_fta_etat, $paramIdFta, $idFtaRole, $synthese_action, $tauxRound, $checkAccesButtonBySiteProd);
 
         /**
          * Gestion des icones en fonction des délais
@@ -132,7 +127,7 @@ class TableauFicheView {
         /**
          * Bouton d'accès au détail de la FTA
          */
-        $lien .= self::getHtmlLinkModify($abreviation_fta_etat, $paramIdFta, $synthese_action);
+        $lien .= self::getHtmlLinkModify($abreviation_fta_etat, $paramIdFta,$synthese_action, $idFtaEtat);
 
         /**
          * Bouton d'accès au rendu PDF de la FTA
@@ -142,13 +137,13 @@ class TableauFicheView {
         /**
          * Bouton d'accès à la transition
          */
-        $lien .= self::getHmlLinkTransiter($paramIdFta, $idFtaRole, $abreviation_fta_etat, $checkAccesButton
+        $lien .= self::getHmlLinkTransiter($paramIdFta, $idFtaRole, $abreviation_fta_etat, $checkAccesButtonBySiteProd
                         , $accesTransitionButton, $synthese_action, $tauxRound);
 
         /**
          * Bouton d'accès pour retirer une FTA
          */
-        if (FtaRoleModel::isGestionnaire($idFtaRole) AND $checkAccesButton AND $abreviation_fta_etat <> FtaEtatModel::ETAT_ABREVIATION_VALUE_RETIRE) {
+        if (FtaRoleModel::isGestionnaire($idFtaRole) AND $checkAccesButtonBySiteProd AND $abreviation_fta_etat <> FtaEtatModel::ETAT_ABREVIATION_VALUE_RETIRE) {
             $lien .= self::getHtmlLinkRemoveFta($paramIdFta);
             $javascript.=self::getJavascriptLinkRemoveFta($paramIdFta, $idFtaRole, $synthese_action);
         }
@@ -156,7 +151,7 @@ class TableauFicheView {
         /**
          * Bouton d'accès pour dupliquer  une FTA
          */
-        if (FtaRoleModel::isGestionnaire($idFtaRole) AND $checkAccesButton) {
+        if (FtaRoleModel::isGestionnaire($idFtaRole) AND $checkAccesButtonBySiteProd) {
             $lien .= self::getHtmlLinkDuplicateFta($paramIdFta, $idFtaRole);
         }
 
@@ -167,7 +162,7 @@ class TableauFicheView {
          * Noms des services dans lequel la Fta se trouve
          */
         if ($abreviation_fta_etat == FtaEtatModel::ETAT_ABREVIATION_VALUE_MODIFICATION) {
-            if ($checkAccesButton) {
+            if ($checkAccesButtonBySiteProd) {
                 $service = FtaRoleModel::getNameServiceEncours($listeIdFtaRole);
             }
         } else {
@@ -212,13 +207,13 @@ class TableauFicheView {
         $tableau_fiches.= "<tr class=contenu>
                               <td $bgcolor_header " . $selection_width . " > $icon_header $selection</td>
                               ";
-        $tableau_fiches.= '<td ' . $bgcolor . ' width=8%>' . $nomSiteProduction . '</td>'//Site
-                . '<td ' . $bgcolor . ' width=6%>' . $classification . '</td>'//Client
-                . '<td ' . $bgcolor . ' width=6%>' . $suffixe_agrologic_fta . '</td>'; // Raccourcie Class.
+        $tableau_fiches.= '<td ' . $bgcolor . ' width=8%>' . $nomSiteProduction . '<br>('.$workflowName.')</td>'//Site
+                . '<td ' . $bgcolor . ' width=3%>' . $classification . '</td>'//Client
+                . '<td ' . $bgcolor . ' width=3%>' . $suffixe_agrologic_fta . '</td>'; // Raccourcie Class.
         $tableau_fiches.="<td $bgcolor $largeur_html_C1><a title=$createur_link />" . $din . "</a></td>"
-                . "<td $bgcolor width=3%>" . $id_dossier_fta . "<br>v" . $id_version_dossier_fta . "</td>";
+                . "<td $bgcolor width=3%>" . $id_dossier_fta . "v" . $id_version_dossier_fta . "</td>";
 
-        $tableau_fiches.="<td $bgcolor width=\"3%\"> <b><font size=\"2\" color=\"#0000FF\">" . $code_article_ldc . "</font></b></td>";
+        $tableau_fiches.="<td $bgcolor width=\"1%\"> <b><font size=\"2\" color=\"#0000FF\">" . $code_article_ldc . "</font></b></td>";
         if ($abreviation_fta_etat == FtaEtatModel::ETAT_ABREVIATION_VALUE_MODIFICATION) {
             $tableau_fiches.='<td ' . $bgcolor . $largeur_html_C3 . ' align=center>' . $dateEcheanceFta . '</td>'; //échance de validation
         } else {
@@ -226,7 +221,7 @@ class TableauFicheView {
         }
         $tableau_fiches .= '<td ' . $bgcolor . ' width=5% align=center >' . $lienHistorique . '</td>'//% Avancement FTA
                 . '<td ' . $bgcolor . $largeur_html_C3 . ' align=center >' . $service . '</td>' //Service               
-                . '<td ' . $bgcolor . ' width=6%' . ' align=center >' . $lien . '</td>'; // Actions
+                . '<td ' . $bgcolor . ' width=8%' . ' align=center >' . $lien . '</td>'; // Actions
         $tableau_fiches.="</tr>";
         $compteur_ligne++;
 //        }//fin tant que tableau_origine
@@ -321,7 +316,7 @@ class TableauFicheView {
         return $iconHeader;
     }
 
-    static private function getHtmlLinkModify($paramAbreviationFtaEtat, $paramIdFta, $paramSyntheseAction, $paramIdFtaRole = FtaRoleModel::ID_FTA_ROLE_COMMUN) {
+    static private function getHtmlLinkModify($paramAbreviationFtaEtat, $paramIdFta, $paramSyntheseAction,$paramIdFtaEtat, $paramIdFtaRole = FtaRoleModel::ID_FTA_ROLE_COMMUN) {
         $lien = "";
         if (
                 (Acl::getValueAccesRights(Acl::ACL_FTA_MODIFICATION))
@@ -333,7 +328,7 @@ class TableauFicheView {
                     . '?id_fta=' . $paramIdFta
                     . '&synthese_action=' . $paramSyntheseAction
                     . '&comeback=1'
-                    //. '&id_fta_etat=' . $paramIdFta
+                    . '&id_fta_etat=' . $paramIdFtaEtat
                     . '&abreviation_fta_etat=' . $paramAbreviationFtaEtat
                     . '&id_fta_role=' . $paramIdFtaRole
                     . ' /><img src=../lib/images/next.png alt=\'\' title=\'Voir la FTA\' width=\'30\' height=\'25\' border=\'0\' />'
@@ -369,33 +364,65 @@ class TableauFicheView {
         switch (TRUE) {
 
             /**
-             * 
+             * Dans le cas où on a les droits de modification, 
+             * que le soit chef de projet,
+             * que la Fta en cours de modification soit dans un pourcentage d'avancement effectués,
+             * que l'on est les droits sur le site de production
+             * on accède au boutton de transition
              */
             case (
-            ($paramIdFtaRole == FtaRoleModel::ID_FTA_ROLE_CHEF_DE_PROJET OR $paramIdFtaRole == FtaRoleModel::ID_FTA_ROLE_SITE )
-            AND $paramTauxRound == FtaProcessusDelaiModel::TAUX_100
-            AND $paramCheckAccesButton
-            AND Acl::getValueAccesRights(Acl::ACL_FTA_MODIFICATION)
-            AND ( $paramAbreviationFtaEtat == FtaEtatModel::ETAT_ABREVIATION_VALUE_MODIFICATION)
-            ) :
-
-            case (
-            $paramAccesTransitionButton == FALSE AND $paramTauxRound == FtaProcessusDelaiModel::TAUX_100
-            AND $paramCheckAccesButton
-            ) :
-
-            case (
-            $paramSyntheseAction == FtaEtatModel::ETAT_AVANCEMENT_VALUE_ALL
+            Acl::getValueAccesRights(Acl::ACL_FTA_MODIFICATION)
             AND ( $paramIdFtaRole == FtaRoleModel::ID_FTA_ROLE_CHEF_DE_PROJET OR $paramIdFtaRole == FtaRoleModel::ID_FTA_ROLE_SITE )
-            AND $paramCheckAccesButton
-            AND $paramAbreviationFtaEtat <> FtaEtatModel::ETAT_ABREVIATION_VALUE_MODIFICATION
-            ):
-
-            case (
-            ($paramIdFtaRole == FtaRoleModel::ID_FTA_ROLE_CHEF_DE_PROJET OR $paramIdFtaRole == FtaRoleModel::ID_FTA_ROLE_SITE )
+            AND ( $paramAbreviationFtaEtat == FtaEtatModel::ETAT_ABREVIATION_VALUE_MODIFICATION
             AND $paramSyntheseAction == FtaEtatModel::ETAT_AVANCEMENT_VALUE_EFFECTUES
             AND $paramCheckAccesButton
+
+            )
             ) :
+            /**
+             * Dans le cas où on a les droits de modification, 
+             * que le soit chef de projet,
+             * que la Fta en cours est dans un état différents que modification,
+             * que l'on est les droits sur le site de production
+             * on accède au boutton de transition
+             */
+            case (
+            Acl::getValueAccesRights(Acl::ACL_FTA_MODIFICATION)
+            AND ( $paramIdFtaRole == FtaRoleModel::ID_FTA_ROLE_CHEF_DE_PROJET OR $paramIdFtaRole == FtaRoleModel::ID_FTA_ROLE_SITE )
+            AND $paramAbreviationFtaEtat <> FtaEtatModel::ETAT_ABREVIATION_VALUE_MODIFICATION
+            AND $paramCheckAccesButton
+
+            ) :
+            /**
+             * Dans le cas où on a les droits de modification, 
+             * que l'on est accès aux bouton de transition,
+             * que la Fta en cours de modification soit à 100%,
+             * que l'on est les droits sur le site de production
+             * on accède au boutton de transition
+             */
+            case (
+            Acl::getValueAccesRights(Acl::ACL_FTA_MODIFICATION)
+            AND $paramAccesTransitionButton == TRUE
+            AND ( $paramAbreviationFtaEtat == FtaEtatModel::ETAT_ABREVIATION_VALUE_MODIFICATION)
+            AND $paramTauxRound == FtaProcessusDelaiModel::TAUX_100
+            AND $paramCheckAccesButton
+
+            ) :
+            /**
+             * Dans le cas où on a les droits de modification, 
+             * que l'on est accès aux bouton de transition,
+             * que la Fta soit valider,
+             * que l'on est les droits sur le site de production
+             * on accède au boutton de transition
+             */
+            case (
+            Acl::getValueAccesRights(Acl::ACL_FTA_MODIFICATION)
+            AND $paramAccesTransitionButton == TRUE
+            AND ( $paramAbreviationFtaEtat == FtaEtatModel::ETAT_ABREVIATION_VALUE_VALIDE)
+            AND $paramCheckAccesButton
+
+            ) :
+
                 $return = TRUE;
                 break;
         }

@@ -30,6 +30,7 @@ class Acl {
     const ACL_FTA_CONSULTATION = "fta_consultation";
     const ACL_FTA_IMPRESSION = "fta_impression";
     const ACL_FTA_MODIFICATION = "fta_modification";
+    const ACL_INTRANET_ACTIONS_VALIDE = "IntranetActionsValide";
 
     /**
      * Enregistrement des droits d'accès
@@ -91,7 +92,7 @@ class Acl {
 
             $idIntranetActionsValide = array_intersect($idIntranetActions, $checkIdIntranetActions);
 
-            $_SESSION['IntranetActionsValide'] = $idIntranetActionsValide;
+            $_SESSION[Acl::ACL_INTRANET_ACTIONS_VALIDE] = $idIntranetActionsValide;
             $_SESSION['CheckIdFtaRole'] = $paramRole;
         }
     }

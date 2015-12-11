@@ -125,7 +125,8 @@ switch ($action) {
 
 //        $isFtaDataValidationSuccess = $modelFta->isFtaDataValidationSuccess();
 
-        if ($paramSignatureValidationSuiviProjet and $isFtaDataValidationSuccess == TRUE) {
+//        if ($paramSignatureValidationSuiviProjet and $isFtaDataValidationSuccess == TRUE) {
+        if ($paramSignatureValidationSuiviProjet ) {
             $modelFtaSuiviProjet->setSigned($paramSignatureValidationSuiviProjet);
             $modelFtaSuiviProjet->getDataField(FtaSuiviProjetModel::FIELDNAME_DATE_VALIDATION_SUIVI_PROJET)->setFieldValue(date("Y-m-d"));
         }

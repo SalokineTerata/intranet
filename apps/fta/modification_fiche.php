@@ -88,7 +88,7 @@ if ($idFta) {
     /**
      * Verification des droits d'accès sur une Fta en modification
      */
-    if ($idFtaEtat == "1" and ! $ftaModification) {
+    if ($idFtaEtat == FtaEtatModel::ID_VALUE_MODIFICATION and ! $ftaModification) {
         $titre = UserInterfaceMessage::FR_WARNING_ACCES_RIGHTS_TITLE;
         $message = UserInterfaceMessage::FR_WARNING_ACCES_RIGHTS;
         $redirection = "index.php";

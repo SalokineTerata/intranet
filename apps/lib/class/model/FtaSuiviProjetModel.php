@@ -19,6 +19,8 @@ class FtaSuiviProjetModel extends AbstractModel {
     const FIELDNAME_DATE_DEMARRAGE_CHAPITRE_FTA_SUIVI_PROJET = 'date_demarrage_chapitre_fta_suivi_projet';
     const FIELDNAME_NOTIFICATION_FTA_SUIVI_PROJET = 'notification_fta_suivi_projet';
     const FIELDNAME_CORRECTION_FTA_SUIVI_PROJET = 'correction_fta_suivi_projet';
+    const SIGNATURE_VALIDATION_SUIVI_PROJET_AUTO = '1';
+    const SIGNATURE_VALIDATION_SUIVI_PROJET_FALSE = '0';
 
     protected function setDefaultValues() {
         
@@ -84,9 +86,9 @@ class FtaSuiviProjetModel extends AbstractModel {
     }
 
     /**
-     * 
-     * @param type $paramIdFta
-     * @param type $paramIdChapitre
+     * On obtient IdFtaSuivieProjet suivant l'idFta et le chapitre encours
+     * @param int $paramIdFta
+     * @param int $paramIdChapitre
      * @return array
      */
     static public function getIdFtaSuiviProjetByIdFtaAndIdChapitre($paramIdFta, $paramIdChapitre) {

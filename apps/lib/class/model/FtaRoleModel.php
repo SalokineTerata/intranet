@@ -235,7 +235,7 @@ class FtaRoleModel extends AbstractModel {
 
     /**
      * On vérifie selon le role de l'utilisateur connecté 
-     * si il a accès aux boutoon transition en permanence
+     * si il a accès aux bouton de transition, de duplication et retirer
      * @param int $paramIdRole
      * @return boolean
      */

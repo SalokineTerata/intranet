@@ -723,11 +723,10 @@ class AccueilFta {
         $tmp = null;
 
         /**
-         * Droits d'actions
+         * Droits d'actions sur le bouton de transition, de duplication et retirer
          */
-        if (self::$idFtaRole == '1' or self::$idFtaRole == '6') {
-            $valueIsGestionnaire = FtaRoleModel::isGestionnaire(self::$idFtaRole);
-        }
+        $valueIsGestionnaire = FtaRoleModel::isGestionnaire(self::$idFtaRole);
+
 
         if (self::$arrayIdFtaByUserAndWorkflow['1']) {
             $createurNTmp = null;
@@ -968,11 +967,35 @@ class AccueilFta {
                  * Transiter
                  */
                 if (
-                        ((self::$idFtaRole == '1' or self::$idFtaRole == '6' ) and $recap[$idFta] == '100%' )
-                        and self::$ftaModification and ( self::$abreviationFtaEtat == FtaEtatModel::ETAT_ABREVIATION_VALUE_MODIFICATION)
-                        or ( $ok == '2' and $accesTransitionButton == FALSE && $recap[$idFta] == '100%')
-                        or ( self::$syntheseAction == FtaEtatModel::ETAT_AVANCEMENT_VALUE_ALL AND ( self::$idFtaRole == '1' or self::$idFtaRole == '6' ))
-                        or ( (self::$idFtaRole == '1' or self::$idFtaRole == '6' ) and self::$syntheseAction == FtaEtatModel::ETAT_AVANCEMENT_VALUE_EFFECTUES)
+                /**
+                 * Dans le cas où on a les droits de modification, 
+                 * que le soit chef de projet,
+                 * que la Fta en cours est dans un état différents que modification,
+                 * on accède au boutton de transition
+                 */
+                        $valueIsGestionnaire and self::$ftaModification and ( self::$abreviationFtaEtat <> FtaEtatModel::ETAT_ABREVIATION_VALUE_MODIFICATION)
+
+                        /**
+                         * Dans le cas où on a les droits de modification, 
+                         * que le soit chef de projet,
+                         * que la Fta en cours de modification soit dans un pourcentage d'avancement effectués,
+                         * on accède au boutton de transition
+                         */
+                        or ( ($valueIsGestionnaire) and self::$ftaModification and ( self::$abreviationFtaEtat == FtaEtatModel::ETAT_ABREVIATION_VALUE_MODIFICATION) and self::$syntheseAction == FtaEtatModel::ETAT_AVANCEMENT_VALUE_EFFECTUES)
+                        /**
+                         * Dans le cas où on a les droits de modification, 
+                         * que l'on est accès aux bouton de transition,
+                         * que la Fta en cours de modification soit à 100%,
+                         * on accède au boutton de transition
+                         */
+                        or ( self::$ftaModification and self::$abreviationFtaEtat == FtaEtatModel::ETAT_ABREVIATION_VALUE_MODIFICATION and $recap[$idFta] == FtaProcessusDelaiModel::TAUX_100 and $ok == '2' and $accesTransitionButton == TRUE)
+                        /**
+                         * Dans le cas où on a les droits de modification, 
+                         * que l'on est accès aux bouton de transition,
+                         * que la Fta soit valider,
+                         * on accède au boutton de transition
+                         */
+                        or ( self::$ftaModification and self::$abreviationFtaEtat == FtaEtatModel::ETAT_ABREVIATION_VALUE_VALIDE and $accesTransitionButton == TRUE)
                 ) {
                     $actions .= '<a '
                             . 'href=transiter.php'

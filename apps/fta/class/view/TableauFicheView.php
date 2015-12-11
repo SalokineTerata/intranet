@@ -94,7 +94,7 @@ class TableauFicheView {
          * historique, transition, retirer, duplication et pourcentage d'avancement
          * si il n'a pas les accès aux site de production.
          */
-        $checkAccesButtonBySiteProd = IntranetActionsModel::getIdFtaWorkflowAndSiteDeProduction($idUser, $idWorkflowFtaEncours, $idIntranetActionsSiteDeProduction);
+        $checkAccesButtonBySiteProd = IntranetActionsModel::isAccessFtaActionByIdUserFtaWorkflowAndSiteDeProduction($idUser, $idWorkflowFtaEncours, $idIntranetActionsSiteDeProduction);
 
         /**
          * Liste des processus pouvant être validé

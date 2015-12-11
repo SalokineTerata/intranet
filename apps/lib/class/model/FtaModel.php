@@ -99,7 +99,10 @@ class FtaModel extends AbstractModel {
     const FIELDNAME_VIRTUAL_FTA_PROCESSUS_DELAI = "VIRTUAL_fta_processus_delai";
     const FIELDNAME_WORKFLOW = "id_fta_workflow";
     const ID_POIDS_VARIABLE = "3";
+    const MESSAGE_DATA_MISSING = UserInterfaceMessage::FR_WARNING_DATA_MISSING_TITLE;
+    const MESSAGE_DATA_VALIDATION_CLASSIFICATION = UserInterfaceMessage::FR_WARNING_DATA_CLASIFICATION;
     const MESSAGE_DATA_VALIDATION_CODE_LDC = UserInterfaceMessage::FR_WARNING_DATA_VALIDATION_FTA_CODE_LDC;
+    const MESSAGE_DATA_VALIDATION_DATE_ECHEANCE = UserInterfaceMessage::FR_WARNING_DATA_DATE_ECHEANCE;
 
     /**
      * Utilisateur ayant créé la FTA
@@ -180,13 +183,14 @@ class FtaModel extends AbstractModel {
         /*
          * Liste des Contrôles 
          */
+        $return += $this->checkDataValidationClassification();
+        $return += $this->checkDataValidationDateEcheance();
         $return += $this->checkDataValidationCodeLDC();
-        $return += $this->checkDataValidationPoidsUvc();
+
 
         if ($return != 0) {
-            $titre;
+            $titre = self::MESSAGE_DATA_MISSING;
             $message = $this->getMessageErreurDataValidation();
-            $redirection;
             afficher_message($titre, $message, $redirection);
         }
 
@@ -194,17 +198,20 @@ class FtaModel extends AbstractModel {
     }
 
     /**
-     * 
+     * Vérification de la classification 
      * @return boolean
      */
-    private function checkDataValidationPoidsUvc() {
+    private function checkDataValidationClassification() {
         $return = TRUE;
-        $newErrorMessage = "...";
 
-        //Check... 
-        $return;
+        if (!$this->getDataField(FtaModel::FIELDNAME_ID_FTA_CLASSIFICATION2)->getFieldValue()) {
+            $newErrorMessage = self::MESSAGE_DATA_VALIDATION_CLASSIFICATION;
+            $return = "1";
+        } else {
+            $return = "0";
+        }
 
-        if ($return != 0) {
+        if ($return != "0") {
             //Ajout de la raison de l'echec du contrôle dans le message d'information utilisateur.
             $this->addMessageErreurDataValidation($newErrorMessage);
         }
@@ -212,17 +219,60 @@ class FtaModel extends AbstractModel {
     }
 
     /**
-     * 
+     * Vérification de la classification 
+     * @return boolean
+     */
+    private function checkDataValidationDateEcheance() {
+        $return = TRUE;
+
+        if (!$this->getDataField(FtaModel::FIELDNAME_DATE_ECHEANCE_FTA)->getFieldValue()) {
+            $newErrorMessage = self::MESSAGE_DATA_VALIDATION_DATE_ECHEANCE;
+            $return = "1";
+        } else {
+            $return = "0";
+        }
+
+
+        if ($return != "0") {
+            //Ajout de la raison de l'echec du contrôle dans le message d'information utilisateur.
+            $this->addMessageErreurDataValidation($newErrorMessage);
+        }
+        return $return;
+    }
+
+    /**
+     * Cohérence du Code LDC
+     * Si le code est déjà affecté à une autre FTA, on informe et on suppirme l'affectation sur la FTA en cours
      * @return boolean
      */
     private function checkDataValidationCodeLDC() {
         $return = TRUE;
-        $newErrorMessage = self::MESSAGE_DATA_VALIDATION_CODE_LDC;
 
-        //Check... 
-        $return;
+        if ($this->getDataField(FtaModel::FIELDNAME_CODE_ARTICLE_LDC)->getFieldValue() and ModuleConfig::CODE_LDC_UNIQUE) {
+            //if($code_article_ldc and false)
+            $arrayCoherenceLDC = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
+                            'SELECT ' . FtaModel::TABLENAME . '.' . FtaModel::KEYNAME
+                            . ' FROM ' . FtaModel::TABLENAME . ',' . FtaEtatModel::TABLENAME
+                            . ' WHERE ' . FtaModel::TABLENAME . '.' . FtaModel::FIELDNAME_DOSSIER_FTA . ' <> \'' . $this->getDataField(FtaModel::FIELDNAME_DOSSIER_FTA)->getFieldValue() . '\' '
+                            . ' AND ' . FtaModel::TABLENAME . '.' . FtaModel::FIELDNAME_CODE_ARTICLE_LDC . ' = \'' . $this->getDataField(FtaModel::FIELDNAME_CODE_ARTICLE_LDC)->getFieldValue() . '\' '
+                            . ' AND ' . FtaEtatModel::TABLENAME . '.' . FtaEtatModel::KEYNAME . '=' . FtaModel::TABLENAME . '.' . FtaModel::FIELDNAME_ID_FTA_ETAT
+                            . ' AND ' . FtaEtatModel::FIELDNAME_ABREVIATION . '<>\'' . FtaEtatModel::ETAT_ABREVIATION_VALUE_RETIRE . '\' '
+            );
 
-        if ($return != 0) {
+
+            if ($arrayCoherenceLDC) {
+                foreach ($arrayCoherenceLDC as $rowsCoherenceLDC) {
+                    $newErrorMessage = self::MESSAGE_DATA_VALIDATION_CODE_LDC;
+                    $this->getDataField(FtaModel::FIELDNAME_CODE_ARTICLE_LDC)->setFieldValue(null);
+                }
+                $return = "1";
+            }
+        } else {
+            $return = "0";
+        }
+
+
+        if ($return != "0") {
             //Ajout de la raison de l'echec du contrôle dans le message d'information utilisateur.
             $this->addMessageErreurDataValidation($newErrorMessage);
         }
@@ -230,7 +280,7 @@ class FtaModel extends AbstractModel {
     }
 
     private function addMessageErreurDataValidation($paramNewErrorMessage) {
-        $this->setMessageErreurDataValidation($this->getMessageErreurDataValidation() + $paramNewErrorMessage);
+        $this->setMessageErreurDataValidation($this->getMessageErreurDataValidation() . "\n" . $paramNewErrorMessage);
     }
 
     function getMessageErreurDataValidation() {

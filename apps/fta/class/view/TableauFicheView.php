@@ -19,6 +19,17 @@
 
 /**
  * Description of TableauFicheView
+ * @todo
+ * - Vérif/correction des conditions de droits d'accès
+ * - Réduire raccourcis de classification 
+ * - Agrandir colonne bouton
+ * - Réduire colonne date
+ * - Réduire colonne caode article
+ * - N° version à côté de N°dossier
+ * - Ajouté entre paranthèse l'espace de travail sous le site:
+ *  Exemple:   
+ *      Avignon
+ *      (FEavecEtiq)
  *
  * @author bs4300280
  */
@@ -162,6 +173,31 @@ class TableauFicheView {
         } else {
             $service = FtaRoleModel::getNameServiceEncours($listeIdFtaRole);
         }
+
+//        switch (TRUE) {
+//            /**
+//             * Si la FTA est en modification et que l'utilisateur n'est pas autorisé à accéder aux boutons.
+//             */
+//            case (
+//            $abreviation_fta_etat == FtaEtatModel::ETAT_ABREVIATION_VALUE_MODIFICATION AND $checkAccesButton != FALSE
+//            ):
+//                $service = "";
+//                break;
+//
+//            /**
+//             * Si la FTA est en modification et que l'utilisateur est autorisé à accéder aux boutons.
+//             */
+//            case (
+//            $abreviation_fta_etat == FtaEtatModel::ETAT_ABREVIATION_VALUE_MODIFICATION AND $checkAccesButton != TRUE
+//            ):
+//                $service = FtaRoleModel::getNameServiceEncours($listeIdFtaRole);
+//                break;
+//            /**
+//             * Sinon:
+//             */
+//            default:
+//                $service = FtaRoleModel::getNameServiceEncours($listeIdFtaRole);
+//        }
 
         /**
          * Calssification
@@ -332,6 +368,9 @@ class TableauFicheView {
 
         switch (TRUE) {
 
+            /**
+             * 
+             */
             case (
             ($paramIdFtaRole == FtaRoleModel::ID_FTA_ROLE_CHEF_DE_PROJET OR $paramIdFtaRole == FtaRoleModel::ID_FTA_ROLE_SITE )
             AND $paramTauxRound == FtaProcessusDelaiModel::TAUX_100

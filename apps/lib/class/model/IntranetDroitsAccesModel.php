@@ -59,7 +59,7 @@ class IntranetDroitsAccesModel extends AbstractModel {
                         . " FROM  " . self::TABLENAME . "," . IntranetActionsModel::TABLENAME
                         . " WHERE " . self::FIELDNAME_ID_INTRANET_MODULES . " =" . $paramIdIntranetModule
                         . " AND " . self::FIELDNAME_ID_USER . " =" . $paramIdUser
-                        . " AND " . self::FIELDNAME_ID_INTRANET_ACTIONS . " =" . IntranetActionsModel::KEYNAME
+                        . " AND " . self::TABLENAME . "." . self::FIELDNAME_ID_INTRANET_ACTIONS . " =" . IntranetActionsModel::TABLENAME . "." . IntranetActionsModel::KEYNAME
                         . " AND " . self::FIELDNAME_NIVEAU_INTRANET_DROITS_ACCES . " =" . IntranetNiveauAccesModel::NIVEAU_GENERIC_TRUE
                         . " AND " . IntranetActionsModel::FIELDNAME_PARENT_INTRANET_ACTIONS . " =" . $paramIdIntranetAction);
         if ($arrayEraseRightsAcces) {

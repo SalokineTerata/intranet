@@ -63,12 +63,12 @@ class GeoModel extends AbstractModel {
     /**
      * Affiche la liste des site de production pour lesquel l'utilisateur connecté à les droits d'accès
      * @param int $paramIdUser
-     * @param objet $paramObjet
+     * @param HtmlListSelectTagName $paramObjet
      * @param boolean $paramIsEditable
      * @param int $paramIdDefault
      * @return string
      */
-    public static function ShowListeDeroulanteSiteProdByAcces($paramIdUser, $paramObjet, $paramIsEditable, $paramIdDefault) {
+    public static function ShowListeDeroulanteSiteProdByAcces($paramIdUser,HtmlListSelectTagName $paramObjet, $paramIsEditable, $paramIdDefault) {
         $arraySite = DatabaseOperation::convertSqlStatementWithKeyAndOneFieldToArray(
                         'SELECT DISTINCT ' . GeoModel::KEYNAME . ',' . GeoModel::FIELDNAME_GEO
                         . ' FROM ' . GeoModel::TABLENAME
@@ -100,13 +100,13 @@ class GeoModel extends AbstractModel {
     /**
      * Affiche la liste des site de production pour lesquel l'utilisateur connecté à les droits d'accès 
      * et l'identifiant de la Fta en cours
-     * @param type $paramIdUser
-     * @param type $paramHtmlObjet
-     * @param type $paramIsEditable
-     * @param type $paramIdFta
-     * @return type
+     * @param int $paramIdUser
+     * @param HtmlListSelect $paramHtmlObjet
+     * @param boolean $paramIsEditable
+     * @param int $paramIdFta
+     * @return string
      */
-    public static function ShowListeDeroulanteSiteProdByAccesAndIdFta($paramIdUser, $paramHtmlObjet, $paramIsEditable, $paramIdFta) {
+    public static function ShowListeDeroulanteSiteProdByAccesAndIdFta($paramIdUser, HtmlListSelect $paramHtmlObjet, $paramIsEditable, $paramIdFta) {
 
         /**
          * Modification

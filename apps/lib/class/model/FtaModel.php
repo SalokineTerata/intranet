@@ -178,7 +178,7 @@ class FtaModel extends AbstractModel {
      * @return boolean     
      */
     public function isFtaDataValidationSuccess() {
-        $return = 0;
+        $return = "0";
 
         /*
          * Liste des Contrôles 
@@ -188,7 +188,7 @@ class FtaModel extends AbstractModel {
         $return += $this->checkDataValidationCodeLDC();
 
 
-        if ($return != 0) {
+        if ($return != "0") {
             $titre = self::MESSAGE_DATA_MISSING;
             $message = $this->getMessageErreurDataValidation();
             afficher_message($titre, $message, $redirection);
@@ -266,6 +266,8 @@ class FtaModel extends AbstractModel {
                     $this->getDataField(FtaModel::FIELDNAME_CODE_ARTICLE_LDC)->setFieldValue(null);
                 }
                 $return = "1";
+            } {
+                $return = "0";
             }
         } else {
             $return = "0";
@@ -1264,7 +1266,7 @@ class FtaModel extends AbstractModel {
                  * Cettefonction est mise en pause car elle nécessite la création de processus cycle pour chaque workflow,
                  * questionnement à boris.
                  */
-                if ($newAbreviationFtaEtat == "I" and ! $selection_chapitre) {//Suppression des validations
+                if ($newAbreviationFtaEtat == FtaEtatModel::ETAT_ABREVIATION_VALUE_MODIFICATION and ! $selection_chapitre) {//Suppression des validations
                     //Recherche des chapitres affectés au cycle de vie correspondant à l'état
                     $arrayCycle = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
                                     "SELECT DISTINCT " . FtaProcessusCycleModel::FIELDNAME_PROCESSUS_INIT . "," . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_CHAPITRE

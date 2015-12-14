@@ -125,8 +125,8 @@ switch ($action) {
 
         $isFtaDataValidationSuccess = $modelFta->isFtaDataValidationSuccess();
 
-       
-        if ($paramSignatureValidationSuiviProjet and $isFtaDataValidationSuccess == TRUE) {
+
+        if ($paramSignatureValidationSuiviProjet and $isFtaDataValidationSuccess == "0") {
             $modelFtaSuiviProjet->setSigned($paramSignatureValidationSuiviProjet);
             $modelFtaSuiviProjet->getDataField(FtaSuiviProjetModel::FIELDNAME_DATE_VALIDATION_SUIVI_PROJET)->setFieldValue(date("Y-m-d"));
         }
@@ -277,9 +277,10 @@ switch ($action) {
         }
 
 //Nom de l'étiquette par défaut si on enregistre sur le chapitre Gestion des articles (cf. table fta_chapitre)
-        if (($modelFta->getDataField(FtaModel::FIELDNAME_LIBELLE_CLIENT)->getFieldValue() == null) and ( $nom_fta_chapitre == 'activation_article')) {
-            $modelFta->getDataField(FtaModel::FIELDNAME_LIBELLE_CLIENT)->setFieldValue($modelFta->getDataField(FtaModel::FIELDNAME_LIBELLE)->getFieldValue());
-        }
+//        if (($modelFta->getDataField(FtaModel::FIELDNAME_LIBELLE_CLIENT)->getFieldValue() == null) and ( $nom_fta_chapitre == 'activation_article')) {
+//            $modelFta->getDataField(FtaModel::FIELDNAME_LIBELLE_CLIENT)->setFieldValue($modelFta->getDataField(FtaModel::FIELDNAME_LIBELLE)->getFieldValue());
+//        }
+        $modelFta->saveToDatabase();
 //        $table = 'fta';
 //        $operation = 'update';
 //        mysql_table_operation($table, $operation);
@@ -292,8 +293,6 @@ switch ($action) {
 //            afficher_message($titre, $message, $redirection);
 //            $erreur = 1;
 //        }
-
-
 //Cohérence du Code Agrologic
 //        if ($modelFta->getDataField(FtaModel::FIELDNAME_ARTICLE_AGROLOGIC)->getFieldValue()) {
 //            $arrayCoherenceCodeAgro = DatabaseOperation::convertSqlStatementWithoutKeyToArray(

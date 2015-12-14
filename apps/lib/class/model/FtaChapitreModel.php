@@ -105,13 +105,6 @@ class FtaChapitreModel extends AbstractModel {
         ;
         DatabaseOperation::execute($reqDevelidationChapitre);
 
-        /**
-         * Actualisation du pourcentage de validation de la Fta
-         */
-        $idFtaSuiviProjet = FtaSuiviProjetModel::getIdFtaSuiviProjetByIdFtaAndIdChapitre($paramIdFta, $paramIdChapitre);
-        $modelFtaSuiviProjet = new FtaSuiviProjetModel($idFtaSuiviProjet);
-        $modelFtaSuiviProjet->unsetSigned();
-        $modelFtaSuiviProjet->saveToDatabase();
 
         /*
          * Mise à jour de la validation de l'échéance du processus
@@ -121,6 +114,15 @@ class FtaChapitreModel extends AbstractModel {
         // FtaProcessusDelaiModel::BuildFtaProcessusValidationDelai($paramIdFta, $idFtaProcessus, $idFtaWorkflow);
         //Dévalidation des processus suivants
         $return = FtaChapitreModel::BuildDevalidationChapitre($paramIdFta, $idFtaProcessus, $HtmlResult);
+
+        /**
+         * Actualisation du pourcentage de validation de la Fta
+         */
+        $idFtaSuiviProjet = FtaSuiviProjetModel::getIdFtaSuiviProjetByIdFtaAndIdChapitre($paramIdFta, $paramIdChapitre);
+        $modelFtaSuiviProjet = new FtaSuiviProjetModel($idFtaSuiviProjet);
+        $modelFtaSuiviProjet->unsetSigned();
+        $modelFtaSuiviProjet->saveToDatabase();
+
         //print_r($return['mail']);      //Tableau contenant les adresses emails des personnes concernées par la dévalidation
         if (count($return) > 1) {
             $return['processus'] = array_unique($return['processus']);   //Tableau contenant les identifiants des processus dévalidés unique     

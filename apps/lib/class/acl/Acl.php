@@ -108,8 +108,8 @@ class Acl {
          */
         $arrayParentAction = self::getArrayIdParentActionByIntranetModule();
 
-        foreach ($arrayParentAction as $IdIntranetModule => $IdIntranetAction) {
-
+        foreach ($arrayParentAction as $IdIntranetModule => $arrayIdIntranetAction) {
+            $IdIntranetAction = $arrayIdIntranetAction[IntranetActionsModel::FIELDNAME_PARENT_INTRANET_ACTIONS];
             /**
              * L'utilisateur a-t-il le doit sur cet id_intranet_action pour cet id_intranet_module ?
              */

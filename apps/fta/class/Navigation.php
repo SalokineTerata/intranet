@@ -42,19 +42,19 @@ class Navigation {
         /**
          * Modification
          */
-        self::$ftaModification = Acl::getValueAccesRights('fta_modification');
+        self::$ftaModification = Acl::getValueAccesRights(Acl::ACL_FTA_MODIFICATION);
 
         /**
          * Consultation
          */
-        self::$ftaConsultation = Acl::getValueAccesRights('fta_consultation');
+        self::$ftaConsultation = Acl::getValueAccesRights(Acl::ACL_FTA_CONSULTATION);
 
 
 
         self::$id_fta = $id_fta;
         self::$id_fta_chapitre_encours = $id_fta_chapitre_encours;
         self::$synthese_action = $synthese_action;
-        if ($id_fta_etat == "1") {
+        if ($id_fta_etat == FtaEtatModel::ID_VALUE_MODIFICATION) {
             self::$synthese_action = FtaEtatModel::ETAT_AVANCEMENT_VALUE_EN_COURS;
         }
         self::$comeback = $comeback;
@@ -78,7 +78,7 @@ class Navigation {
         //Variables
         $listeRole = array();
         $globalConfig = new GlobalConfig();
-        UserModel::ConnexionFalse($globalConfig);
+        UserModel::checkUserSessionExpired($globalConfig);
         $idUser = $globalConfig->getAuthenticatedUser()->getKeyValue();
 
         $html_table = 'table '              //Permet d'harmoniser les tableaux
@@ -120,11 +120,11 @@ class Navigation {
         $arrayRoleWorkflow = FtaRoleModel::getIdFtaRoleByIdUserAndWorkflow($idUser, self::$id_fta_workflow);
         if (count($arrayRoleWorkflow) > "1") {
             //Calcul du taux
-            $taux_temp = FtaSuiviProjetModel::getFtaTauxValidation(self::$ftaModel, TRUE);
+            $taux_temp = FtaSuiviProjetModel::getArrayFtaTauxValidation(self::$ftaModel, TRUE);
             if ($taux_temp["1"]) {
                 foreach ($taux_temp["1"] as $id_fta_processus => $taux) {
                     /**
-                     * On obtien le rôle pour lequel le processus correspond
+                     * On obtient le rôle pour lequel le processus correspond
                      */
                     $arrayCheckRole = FtaWorkflowStructureModel::getArrayRoleByProcessusAndWorkflow($id_fta_processus, self::$id_fta_workflow);
                     $checkRole1 = array_intersect($arrayCheckRole, $arrayRoleWorkflow);
@@ -178,7 +178,7 @@ class Navigation {
         } else {
             $ftaRoleModel = new FtaRoleModel(self::$id_fta_role);
         }
-        $siteDeProduction = self::$ftaModel->getDataField(FtaModel::FIELDNAME_SITE_ASSEMBLAGE)->getFieldValue();
+        $siteDeProduction = self::$ftaModel->getDataField(FtaModel::FIELDNAME_SITE_PRODUCTION)->getFieldValue();
         $geoModel = new GeoModel($siteDeProduction);
         foreach ($arrayFtaEtatAndFta as $rowsFtaEtatAndFta) {
             //Récupération des informations préalables
@@ -279,7 +279,7 @@ class Navigation {
         $ProcessusValide = array();
         $ProcessusEnLecture = array();
         $globalConfig = new GlobalConfig();
-        UserModel::ConnexionFalse($globalConfig);
+        UserModel::checkUserSessionExpired($globalConfig);
 
         $id_user = $globalConfig->getAuthenticatedUser()->getKeyValue();
         $idFtaRole = self::$id_fta_role;
@@ -319,7 +319,7 @@ class Navigation {
                             . ',' . FtaActionRoleModel::TABLENAME
                             . ' WHERE ' . FtaProcessusCycleModel::TABLENAME . '.' . FtaProcessusCycleModel::FIELDNAME_PROCESSUS_INIT
                             . '=' . FtaWorkflowStructureModel::TABLENAME . '.' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_PROCESSUS
-                            . ' AND ' . FtaProcessusCycleModel::FIELDNAME_FTA_ETAT . '=\'I\''
+                            . ' AND ' . FtaProcessusCycleModel::FIELDNAME_FTA_ETAT . '=\'' . FtaEtatModel::ETAT_ABREVIATION_VALUE_MODIFICATION . '\''
                             . ' AND ' . FtaProcessusCycleModel::TABLENAME . '.' . FtaProcessusCycleModel::FIELDNAME_WORKFLOW
                             . '=' . self::$id_fta_workflow       //Jointure
                             . ' AND ' . FtaProcessusCycleModel::TABLENAME . '.' . FtaProcessusCycleModel::FIELDNAME_WORKFLOW
@@ -342,7 +342,7 @@ class Navigation {
             $arrayProcessusValide = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
                             'SELECT DISTINCT ' . FtaProcessusCycleModel::FIELDNAME_PROCESSUS_INIT . ' as ' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_PROCESSUS
                             . ' FROM ' . FtaProcessusCycleModel::TABLENAME
-                            . ' WHERE ' . FtaProcessusCycleModel::FIELDNAME_FTA_ETAT . '=\'I\''
+                            . ' WHERE ' . FtaProcessusCycleModel::FIELDNAME_FTA_ETAT . '=\'' . FtaEtatModel::ETAT_ABREVIATION_VALUE_MODIFICATION . '\''
                             . ' AND ' . FtaProcessusCycleModel::FIELDNAME_WORKFLOW
                             . '=\'' . self::$id_fta_workflow . '\' '
             );
@@ -351,11 +351,11 @@ class Navigation {
                  * Nous récupérons les processus précédent du processus en cours si ils sont tous validé
                  */
                 foreach ($req as $rows) {
-                    self::$id_fta_processus = /*
-                             * Nous verifions si tous les processus précedents du chapitre que l'utilisateur à les droits d'accès
-                             * sont validé ou non et donc visible ou non
-                             */
-                            $taux_validation_processus = FtaProcessusModel::getFtaProcessusNonValidePrecedent(self::$id_fta, $rows[FtaProcessusModel::KEYNAME], self::$id_fta_workflow);
+                    /*
+                     * Nous verifions si tous les processus précedents du chapitre que l'utilisateur à les droits d'accès
+                     * sont validé ou non et donc visible ou non
+                     */
+                    $taux_validation_processus = FtaProcessusModel::getFtaProcessusNonValidePrecedent(self::$id_fta, $rows[FtaProcessusModel::KEYNAME], self::$id_fta_workflow);
 
                     //Liste des processus visible(lecture-seule)
                     if ($taux_validation_processus == 1 or $taux_validation_processus === NULL) {
@@ -426,7 +426,7 @@ class Navigation {
                             . '\' AND ' . IntranetDroitsAccesModel::FIELDNAME_NIVEAU_INTRANET_DROITS_ACCES . '=' . IntranetNiveauAccesModel::NIVEAU_GENERIC_TRUE   //L'utilisateur est propriétaire
                             . ' AND ' . FtaWorkflowStructureModel::TABLENAME . '.' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_CHAPITRE
                             . '=' . FtaSuiviProjetModel::TABLENAME . '.' . FtaSuiviProjetModel::FIELDNAME_ID_FTA_CHAPITRE  //Jointure
-                            . ' AND ' . FtaSuiviProjetModel::FIELDNAME_SIGNATURE_VALIDATION_SUIVI_PROJET . '<>0' //chapitre validé
+                            . ' AND ' . FtaSuiviProjetModel::FIELDNAME_SIGNATURE_VALIDATION_SUIVI_PROJET . '<>' . FtaSuiviProjetModel::SIGNATURE_VALIDATION_SUIVI_PROJET_FALSE //chapitre validé
             );
             if ($arrayNext) {
                 foreach ($arrayNext as $rowsNext) {
@@ -501,7 +501,9 @@ class Navigation {
                             if ($tauxValidationProcessus != 0) {
                                 $ProcessusEnLecture[] = $rowsInit[FtaProcessusCycleModel::FIELDNAME_PROCESSUS_INIT];
                                 //Enregistrement du processus en tant que processus en cours
-                                $ProcessusEncoursVisible[] = $rowsNext[FtaProcessusCycleModel::FIELDNAME_PROCESSUS_NEXT];
+                                if ($tauxValidationProcessus == "1") {
+                                    $ProcessusEncoursVisible[] = $rowsNext[FtaProcessusCycleModel::FIELDNAME_PROCESSUS_NEXT];
+                                }
 //                            }
                             }
                         }
@@ -613,7 +615,7 @@ class Navigation {
                 . ' ON ' . FtaWorkflowStructureModel::TABLENAME . '.' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_CHAPITRE
                 . '=' . FtaChapitreModel::TABLENAME . '.' . FtaChapitreModel::KEYNAME
                 . ' WHERE ( '
-                . FtaWorkflowStructureModel::TABLENAME . '.' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_ROLE . ' =0'                          //Chapitre public
+                . FtaWorkflowStructureModel::TABLENAME . '.' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_ROLE . ' =' . FtaRoleModel::ID_FTA_ROLE_COMMUN                          //Chapitre public
         ;
         foreach ($paramT_Liste_Processus as $value) {
             $reqRecup .= ' OR ' . FtaWorkflowStructureModel::TABLENAME . '.' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_PROCESSUS
@@ -654,7 +656,7 @@ class Navigation {
                         . ' FROM ' . FtaSuiviProjetModel::TABLENAME
                         . ' WHERE ' . FtaSuiviProjetModel::FIELDNAME_ID_FTA . '=' . self::$id_fta
                         . ' AND ' . FtaSuiviProjetModel::FIELDNAME_ID_FTA_CHAPITRE . '=' . $id_fta_chapitre
-                        . ' AND ' . FtaSuiviProjetModel::FIELDNAME_SIGNATURE_VALIDATION_SUIVI_PROJET . '<>0 '
+                        . ' AND ' . FtaSuiviProjetModel::FIELDNAME_SIGNATURE_VALIDATION_SUIVI_PROJET . '<> '.FtaSuiviProjetModel::SIGNATURE_VALIDATION_SUIVI_PROJET_FALSE
                 ;
                 $result1 = DatabaseOperation::queryPDO($req1);
                 $num = DatabaseOperation::getSqlNumRows($result1);

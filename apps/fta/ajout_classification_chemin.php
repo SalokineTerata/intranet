@@ -94,14 +94,11 @@ ClassificationFta2Model::initClassification($selection_proprietaire1, $selection
 $ListeCLassification = ClassificationFta2Model::ShowListeDeroulanteClassification2(TRUE);
 
 if ($selection_saisonnalite) {
-    $bouton_submit = ' <tr>
-        <td>  
-       <center><input type=submit value=\'Confirmer\'></center>
-          </td>
-     </tr>';
+    $bouton_submit = FtaView::getHtmlButtonSubmit();
 }
+$bouton_retour_vers_fta = FtaView::getHtmlButtonReturnFta($idFta,$id_fta_chapitre_encours,$syntheseAction,$comeback,$idFtaEtat,$abreviationFtaEtat,$idFtaRole);
 
-Navigation::initNavigation($idFta, $id_fta_chapitre_encours, $syntheseAction, $comeback, $idFtaEtat, $abreviationFtaEtat, $idFtaRole,FALSE);
+Navigation::initNavigation($idFta, $id_fta_chapitre_encours, $syntheseAction, $comeback, $idFtaEtat, $abreviationFtaEtat, $idFtaRole, FALSE);
 
 $navigue = Navigation::getHtmlNavigationBar();
 
@@ -142,9 +139,11 @@ $navigue . "
 
         
      </tr>
-    
+     <tr>
+        $bouton_retour_vers_fta
          $bouton_submit
          
+    </tr>       
        
      </table>
 

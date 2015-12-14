@@ -84,7 +84,7 @@ $abreviationFtaEtat = Lib::getParameterFromRequest(FtaEtatModel::FIELDNAME_ABREV
 $comeback = Lib::getParameterFromRequest('comeback');
 $syntheseAction = Lib::getParameterFromRequest('synthese_action');
 $globalConfig = new GlobalConfig();
-UserModel::ConnexionFalse($globalConfig);
+UserModel::checkUserSessionExpired($globalConfig);
 
 $id_user = $globalConfig->getAuthenticatedUser()->getKeyValue();
 $proprietaire = Lib::getParameterFromRequest('proprietaire');
@@ -252,7 +252,7 @@ $bloc .=$ftaComposantView->getHtmlDataField(FtaComposantModel::FIELDNAME_INGREDI
 $bloc.="</td></tr>";
 
 //Site de Fabrication
-$SiteDeProduction = $ftaModel->getDataField(FtaModel::FIELDNAME_SITE_ASSEMBLAGE)->getFieldValue();
+$SiteDeProduction = $ftaModel->getDataField(FtaModel::FIELDNAME_SITE_PRODUCTION)->getFieldValue();
 
 
 //Site de facbrication de la composition

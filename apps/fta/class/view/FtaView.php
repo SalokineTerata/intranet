@@ -13,10 +13,21 @@
 class FtaView {
 
     /**
+     * Valeur de confirmation, pour un bouton de validation
+     */
+    const BUTTON_TYPE_SUBMIT_VALUE = "Confirmer";
+
+    /**
      * Fonction JavaScript appelée pour actualiser la visibilité
      * du champs Poids_ELEM
      */
     const JAVASCRIPT_CALLBACK_POIDS_ELEM = "displayPoidsElem";
+
+    /**
+     * Fonction JavaScript appelée pour actualiser la visibilité
+     * du champs Poids_ELEM
+     */
+    const CALLBACK_LINK_TO_FTA_VALUE = "Retour vers la Fta";
 
     /**
      * Model de donnée d'une FTA
@@ -125,6 +136,32 @@ class FtaView {
         );
     }
 
+
+    /**
+     * Affiche le bouton de validation
+     * @return string
+     */
+    public static function getHtmlButtonSubmit() {
+        return ' <td><input type=submit value=\'' . self::BUTTON_TYPE_SUBMIT_VALUE . '\'></td>';
+    }
+
+    /**
+     * Affiche le bouton de retour vers la Fta
+     * @return string
+     */
+    public static function getHtmlButtonReturnFta($paramIdFta, $paramIdFtaChapitreEncours, $paramSyntheseAction, $paramComeback, $paramIdFtaEtat, $paramAbreviationFtaEtat, $paramIdFtaRole) {
+        return '<td><center>'
+                . '<a href=modification_fiche.php?'
+                . 'id_fta=' . $paramIdFta
+                . '&id_fta_chapitre_encours=' . $paramIdFtaChapitreEncours
+                . '&synthese_action=' . $paramSyntheseAction
+                . '&comeback=' . $paramComeback
+                . '&id_fta_etat=' . $paramIdFtaEtat
+                . '&abreviation_fta_etat=' . $paramAbreviationFtaEtat
+                . '&id_fta_role=' . $paramIdFtaRole
+                . '>' . self::CALLBACK_LINK_TO_FTA_VALUE . '</a></center></td>';
+    }
+
     /**
      * Affichage Html de la DIN
      * @return string
@@ -146,6 +183,52 @@ class FtaView {
         }
 
         return $return;
+    }
+
+    /**
+     * Affichage Html du poids net uvf
+     * @return string
+     */
+    public function getHtmlPoidNetUVF() {
+        $id_fta = $this->getModel()->getKeyValue();
+        $PoidNetUVFValue = $this->getModel()->getDataField(FtaModel::FIELDNAME_POIDS_ELEMENTAIRE)->getFieldValue();
+        $PoidNetUVF = new HtmlInputText();
+        $HtmlTableName = FtaModel::TABLENAME
+                . '_'
+                . FtaModel::FIELDNAME_POIDS_ELEMENTAIRE
+                . '_'
+                . $id_fta
+        ;
+        $PoidNetUVF->setLabel(DatabaseDescription::getFieldDocLabel(FtaModel::TABLENAME, FtaModel::FIELDNAME_POIDS_ELEMENTAIRE));
+        $PoidNetUVF->getAttributes()->getValue()->setValue($PoidNetUVFValue);
+        $PoidNetUVF->getAttributes()->getSize()->setValue("8");
+        $PoidNetUVF->setIsEditable($this->getIsEditable());
+        $PoidNetUVF->initAbstractHtmlInput($HtmlTableName, $PoidNetUVF->getLabel(), $PoidNetUVFValue, NULL);
+        $PoidNetUVF->getEventsForm()->setOnChangeWithAjaxAutoSave(FtaModel::TABLENAME, FtaModel::KEYNAME, $id_fta, FtaModel::FIELDNAME_POIDS_ELEMENTAIRE);
+        return $PoidNetUVF->getHtmlResult();
+    }
+
+    /**
+     * Affichage Html de la désignation commerciale
+     * @return string
+     */
+    public function getHtmlDesignationCommerciale() {
+        $id_fta = $this->getModel()->getKeyValue();
+        $DesignationCommercialeValue = $this->getModel()->getDataField(FtaModel::FIELDNAME_DESIGNATION_COMMERCIALE)->getFieldValue();
+        $DesignationCommerciale = new HtmlInputText();
+        $HtmlTableName = FtaModel::TABLENAME
+                . '_'
+                . FtaModel::FIELDNAME_DESIGNATION_COMMERCIALE
+                . '_'
+                . $id_fta
+        ;
+        $DesignationCommerciale->setLabel(DatabaseDescription::getFieldDocLabel(FtaModel::TABLENAME, FtaModel::FIELDNAME_DESIGNATION_COMMERCIALE));
+        $DesignationCommerciale->getAttributes()->getValue()->setValue($DesignationCommercialeValue);
+        $DesignationCommerciale->getAttributes()->getSize()->setValue("70");
+        $DesignationCommerciale->setIsEditable($this->getIsEditable());
+        $DesignationCommerciale->initAbstractHtmlInput($HtmlTableName, $DesignationCommerciale->getLabel(), $DesignationCommercialeValue, NULL);
+        $DesignationCommerciale->getEventsForm()->setOnChangeWithAjaxAutoSave(FtaModel::TABLENAME, FtaModel::KEYNAME, $id_fta, FtaModel::FIELDNAME_DESIGNATION_COMMERCIALE);
+        return $DesignationCommerciale->getHtmlResult();
     }
 
     /**
@@ -308,13 +391,13 @@ class FtaView {
      * @param int $paramIdFta
      * @return string
      */
-    public function ListeWorkflowByAcces($paramIdUser, $paramIsEditable, $paramIdFta, $paramIdFtaRole) {
+    public function listeWorkflowByAcces($paramIdUser, $paramIsEditable, $paramIdFta, $paramIdFtaRole) {
         $HtmlList = new HtmlListSelect();
 
         /*
          * Worflow de FTA
          */
-        return FtaWorkflowModel::ShowListeDeroulanteNomWorkflowByAccesAndIdFta($paramIdUser, $HtmlList, $paramIsEditable, $paramIdFta, $paramIdFtaRole);
+        return FtaWorkflowModel::showListeDeroulanteNomWorkflowByAccesAndIdFta($paramIdUser, $HtmlList, $paramIsEditable, $paramIdFta, $paramIdFtaRole);
     }
 
     /**
@@ -324,7 +407,7 @@ class FtaView {
      * @param int $paramIdFta
      * @return string
      */
-    public function ListeSiteByAcces($paramIdUser, $paramIsEditable, $paramIdFta) {
+    public function listeSiteByAcces($paramIdUser, $paramIsEditable, $paramIdFta) {
         $HtmlList = new HtmlListSelect();
 
         /*
@@ -334,11 +417,11 @@ class FtaView {
     }
 
     /**
-     *    
-     * @param type $paramIsEditable
-     * @return type
+     * Accès à la page de modification de la classification
+     * @param boolean $paramIsEditable
+     * @return string
      */
-    public function ListeClassification($paramIsEditable, $paramIdFtaChapitre, $paramSyntheseAction, $paramComeback, $paramIdFtaEtat, $paramAbrevationEtat, $paramIdFtaRole) {
+    public function listeClassification($paramIsEditable, $paramIdFtaChapitre, $paramSyntheseAction, $paramComeback, $paramIdFtaEtat, $paramAbrevationEtat, $paramIdFtaRole) {
         $idFtaClassification2 = $this->getModel()->getDataField(FtaModel::FIELDNAME_ID_FTA_CLASSIFICATION2)->getFieldValue();
         $idFta = $this->getModel()->getKeyValue();
         /*
@@ -378,8 +461,37 @@ class FtaView {
         return $ListeCLassification;
     }
 
-    function ListeCodesoftEtiquettes($paramIdFta, $paramIsEditable) {
-        $SiteDeProduction = $this->getModel()->getDataField(FtaModel::FIELDNAME_SITE_ASSEMBLAGE)->getFieldValue();
+    /**
+     * Accès à la page de modification de l'espace de travail
+     * @param boolean $paramIsEditable
+     * @return string
+     */
+    public function workflowChangeList($paramIsEditable, $paramIdFtaChapitre, $paramSyntheseAction, $paramComeback, $paramIdFtaEtat, $paramAbrevationEtat, $paramIdFtaRole) {
+        $idFtaWorkflow = $this->getModel()->getDataField(FtaModel::FIELDNAME_WORKFLOW)->getFieldValue();
+        $idFta = $this->getModel()->getKeyValue();
+        /*
+         * Classification FTA
+         */
+        if ($paramIsEditable) {
+            $ListeCLassification .= "<tr ><td class=\"contenu\"> " . UserInterfaceLabel::FR_MODIFICATION_ESPACE_DE_TRAVAIL . "</td ><td class=\"contenu\" width=75% >"
+                    . "<a href="
+                    . "modification_workflow.php?"
+                    . "id_fta=" . $idFta
+                    . "&id_fta_chapitre_encours=" . $paramIdFtaChapitre
+                    . "&synthese_action=" . $paramSyntheseAction
+                    . "&comeback=" . $paramComeback
+                    . "&id_fta_etat=" . $paramIdFtaEtat
+                    . "&abreviation_fta_etat=" . $paramAbrevationEtat
+                    . "&id_fta_role=" . $paramIdFtaRole
+                    . "&id_fta_workflow=" . $idFtaWorkflow
+                    . ">Cliquez ici</a></td></tr>";
+        }
+
+        return $ListeCLassification;
+    }
+
+    function listeCodesoftEtiquettes($paramIdFta, $paramIsEditable) {
+        $SiteDeProduction = $this->getModel()->getDataField(FtaModel::FIELDNAME_SITE_PRODUCTION)->getFieldValue();
         $etiqetteCodesoft = $this->getModel()->getDataField(FtaModel::FIELDNAME_ETIQUETTE_CODESOFT)->getFieldValue();
 
         $listeCodesoftEtiquettes = CodesoftEtiquettesModel::getListeCodesoftEtiquettesColis($paramIdFta, $paramIsEditable, $SiteDeProduction, $etiqetteCodesoft);
@@ -594,7 +706,7 @@ class FtaView {
         if ($FtaConditionnement) {
             $arrayFtaConditionnementtmp = array();
             $tablesNameAndIdForeignKeyOfFtaConditionnementtmp = array();
-           
+
             foreach ($FtaConditionnement as $rowsFtaConditionnement) {
                 $idFtaCondtionnement = $rowsFtaConditionnement[FtaConditionnementModel::KEYNAME];
                 $idAnnexeEmballage = $rowsFtaConditionnement[FtaConditionnementModel::FIELDNAME_ID_ANNEXE_EMBALLAGE];
@@ -652,7 +764,7 @@ class FtaView {
             $htmlEmballageDuColis->setTableLabel(FtaConditionnementModel::getTableConditionnementLabelDuColis($idFtaCondtionnement));
 
             $return .= $htmlEmballageDuColis->getHtmlResult();
-             if (count($FtaConditionnement) > "1") {
+            if (count($FtaConditionnement) > "1") {
                 $return.= "<tr class=contenu><td bgcolor=#FFAA55 align=\"center\" valign=\"middle\">";
                 $return.=UserInterfaceMessage::FR_WARNING_NOT_HANDLE_TITLE;
                 $return.="</td><td bgcolor=#FFAA55 align=\"center\" valign=\"middle\">"

@@ -186,7 +186,7 @@ class Chapitre {
         self::$ftaWorkflowModel = new FtaWorkflowModel(self::$id_fta_workflow);
         self::$synthese_action = $synthese_action;
         $globalConfig = new GlobalConfig();
-        UserModel::ConnexionFalse($globalConfig);
+        UserModel::checkUserSessionExpired($globalConfig);
         self::$idUser = $globalConfig->getAuthenticatedUser()->getKeyValue();
         $idFtaSuiviProjet = FtaSuiviProjetModel::getIdFtaSuiviProjetByIdFtaAndIdChapitre(self::$id_fta, self::$id_fta_chapitre);
         self::$ftaSuiviProjetModel = new FtaSuiviProjetModel($idFtaSuiviProjet);
@@ -488,7 +488,67 @@ class Chapitre {
     }
 
     public static function buildChapitreIdentite() {
-        return self::buildChapitreIdentiteVolaille();
+
+        $bloc = '';
+        $id_fta = self::$id_fta;
+        $synthese_action = self::$synthese_action;
+        $isEditable = self::$is_editable;
+
+
+        //Identifiant FTA
+        $ftaModel = new FtaModel($id_fta);
+        $ftaView = new FtaView($ftaModel);
+        $ftaView->setIsEditable($isEditable);
+
+        $ftaView->setFtaChapitreModelById(self::ID_CHAPITRE_IDENTITE);
+        /**
+         * Ftaview indépendant pour les epace de travaille qui ne doitvent pas être éditables
+         */
+        $ftaView2 = new FtaView($ftaModel);
+        $ftaView2->setIsEditable(FALSE);
+        $ftaView2->setFtaChapitreModelById(self::ID_CHAPITRE_IDENTITE);
+
+
+        $bloc.='<tr class=titre_principal><td class>Classification</td></tr>';
+
+        /**
+         * Classification
+         *
+         */
+        $bloc.=$ftaView->listeClassification($isEditable, self::$id_fta_chapitre, $synthese_action, self::$comeback, self::$id_fta_etat, self::$abrevation_etat, self::$id_fta_role);
+        /*
+         * Deviendra une liste deroulante dépendante des donné choisie dans la classification
+         */
+        //Codification
+        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_SUFFIXE_AGROLOGIC_FTA);
+
+        $bloc.='<tr class=titre_principal><td class>Caractéristiques générales du produit</td></tr>';
+
+        //Désignation commerciale
+        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_DESIGNATION_COMMERCIALE);
+
+        //Poids net de l’UVF
+        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_POIDS_ELEMENTAIRE);
+
+        $bloc.='<tr class=titre_principal><td class>Caractéristiques FTA</td></tr>';
+
+        //Créateur
+        $bloc.=$ftaView->getHtmlCreateurFta();
+
+        //Workflow de FTA
+//        $bloc.=$ftaView->ListeWorkflowByAcces(self::$idUser, FALSE, $id_fta, self::$id_fta_role);
+        $bloc.=$ftaView2->getHtmlDataField(FtaModel::FIELDNAME_WORKFLOW);
+        $bloc.=$ftaView->workflowChangeList($isEditable, self::$id_fta_chapitre, $synthese_action,  self::$comeback, self::$id_fta_etat, self::$abrevation_etat, self::$id_fta_role);
+
+        //Date d'échéance de la FTA
+        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_DATE_ECHEANCE_FTA);
+
+//        //Date d'échéance des processus
+//        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_VIRTUAL_FTA_PROCESSUS_DELAI);
+        //Commentaire sur la Fta
+        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_COMMENTAIRE);
+
+        return $bloc;
     }
 
     public static function buildChapitreCommentaire() {
@@ -728,7 +788,7 @@ class Chapitre {
         $ftaView->setFtaChapitreModelById(self::ID_CHAPITRE_IDENTITE);
 
         //Site d'assemblage
-        $bloc.=$ftaView->ListeSiteByAcces(self::$idUser, $isEditable, $id_fta);
+        $bloc.=$ftaView->listeSiteByAcces(self::$idUser, $isEditable, $id_fta);
 
         return $bloc;
     }
@@ -817,7 +877,7 @@ class Chapitre {
         $ftaView = new FtaView($ftaModel);
         $ftaView->setIsEditable($isEditable);
         $ftaView->setFtaChapitreModelById(self::ID_CHAPITRE_IDENTITE);
-      
+
         //Emballages du Colis
         $bloc.=$ftaView->getHtmlEmballageDuColis($id_fta, $idChapitre, $synthese_action, self::$comeback, self::$id_fta_etat, self::$abrevation_etat, self::$id_fta_role);
 
@@ -892,7 +952,7 @@ class Chapitre {
 //        //Libellé etiquette carton:
 //        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_LIBELLE_CLIENT);
         //Modèle d'étiquette
-        $bloc.=$ftaView->ListeCodesoftEtiquettes($id_fta, $isEditable);
+        $bloc.=$ftaView->listeCodesoftEtiquettes($id_fta, $isEditable);
 
         return $bloc;
     }
@@ -925,7 +985,7 @@ class Chapitre {
 //        //Libellé etiquette carton: ou Logo spécifique étiquette ?
 //        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_LIBELLE_CLIENT);
         //Modèle d'étiquette
-        $bloc.=$ftaView->ListeCodesoftEtiquettes($id_fta, $isEditable);
+        $bloc.=$ftaView->listeCodesoftEtiquettes($id_fta, $isEditable);
 
 
         return $bloc;
@@ -1203,7 +1263,7 @@ class Chapitre {
         $bloc.='<tr class=titre_principal><td class>Logistique</td></tr>';
 
         //Site d'assemblage
-        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_SITE_ASSEMBLAGE);
+        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_SITE_PRODUCTION);
 
         //Site d'expedition
         $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_SITE_EXPEDITION_FTA);
@@ -1369,7 +1429,7 @@ class Chapitre {
         $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_LIBELLE_CLIENT);
 
         //Modèle d'étiquette
-        $bloc.=$ftaView->ListeCodesoftEtiquettes($id_fta, $isEditable);
+        $bloc.=$ftaView->listeCodesoftEtiquettes($id_fta, $isEditable);
 
         $bloc.='<tr class=titre_principal><td class>Etiquettes Composition</td></tr>';
 
@@ -1737,7 +1797,7 @@ class Chapitre {
         $ftaView->setFtaChapitreModelById(self::ID_CHAPITRE_IDENTITE);
 
         //Site d'assemblage
-        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_SITE_ASSEMBLAGE);
+        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_SITE_PRODUCTION);
 
         //Site d'expedition
         $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_SITE_EXPEDITION_FTA);
@@ -1786,7 +1846,7 @@ class Chapitre {
         $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_LIBELLE_CLIENT);
 
         //Modèle d'étiquette
-        $bloc.=$ftaView->ListeCodesoftEtiquettes($id_fta, $isEditable);
+        $bloc.=$ftaView->listeCodesoftEtiquettes($id_fta, $isEditable);
 
         $bloc.='<tr class=titre_principal><td class>Etiquettes Composition</td></tr>';
 
@@ -1825,7 +1885,6 @@ class Chapitre {
         $isEditable = self::$is_editable;
 
 
-        //$objectFta = new ObjectFta($id_fta);
         //Identifiant FTA
         $ftaModel = new FtaModel($id_fta);
         $ftaView = new FtaView($ftaModel);
@@ -1846,7 +1905,7 @@ class Chapitre {
          * Classification
          *
          */
-        $bloc.=$ftaView->ListeClassification($isEditable, self::$id_fta_chapitre, $synthese_action, self::$comeback, self::$id_fta_etat, self::$abrevation_etat, self::$id_fta_role);
+        $bloc.=$ftaView->listeClassification($isEditable, self::$id_fta_chapitre, $synthese_action, self::$comeback, self::$id_fta_etat, self::$abrevation_etat, self::$id_fta_role);
         /*
          * Deviendra une liste deroulante dépendante des donné choisie dans la classification
          */

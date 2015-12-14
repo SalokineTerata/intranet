@@ -86,7 +86,7 @@ class FtaModel extends AbstractModel {
     const FIELDNAME_RESEAU_CLIENT = "id_arcadia_client_reseau";
     const FIELDNAME_SEGMENT_CLIENT = "id_arcadia_client_segment";
     const FIELDNAME_SERVICE_CONSOMMATEUR = "id_service_consommateur";
-    const FIELDNAME_SITE_ASSEMBLAGE = "Site_de_production";
+    const FIELDNAME_SITE_PRODUCTION = "Site_de_production";
     const FIELDNAME_SITE_EXPEDITION_FTA = "site_expedition_fta";
     const FIELDNAME_SOCIETE_DEMANDEUR = "societe_demandeur_fta";
     const FIELDNAME_SUFFIXE_AGROLOGIC_FTA = "suffixe_agrologic_fta";
@@ -99,6 +99,10 @@ class FtaModel extends AbstractModel {
     const FIELDNAME_VIRTUAL_FTA_PROCESSUS_DELAI = "VIRTUAL_fta_processus_delai";
     const FIELDNAME_WORKFLOW = "id_fta_workflow";
     const ID_POIDS_VARIABLE = "3";
+    const MESSAGE_DATA_MISSING = UserInterfaceMessage::FR_WARNING_DATA_MISSING_TITLE;
+    const MESSAGE_DATA_VALIDATION_CLASSIFICATION = UserInterfaceMessage::FR_WARNING_DATA_CLASIFICATION;
+    const MESSAGE_DATA_VALIDATION_CODE_LDC = UserInterfaceMessage::FR_WARNING_DATA_VALIDATION_FTA_CODE_LDC;
+    const MESSAGE_DATA_VALIDATION_DATE_ECHEANCE = UserInterfaceMessage::FR_WARNING_DATA_DATE_ECHEANCE;
 
     /**
      * Utilisateur ayant créé la FTA
@@ -129,10 +133,17 @@ class FtaModel extends AbstractModel {
      * @var GeoModel
      */
     private $modelSiteExpedition;
+
+    /**
+     * Site de production de la FTA
+     * @var GeoModel
+     */
+    private $modelSiteProduction;
     private $donneeEmballageUVC;
     private $donneeEmballageParColis;
     private $donneeEmballageDuColis;
     private $donneeEmballagePallette;
+    private $messageErreurDataValidation;
 
     public function __construct($paramId = NULL, $paramIsCreateRecordsetInDatabaseIfKeyDoesntExist = AbstractModel::DEFAULT_IS_CREATE_RECORDSET_IN_DATABASE_IF_KEY_DOESNT_EXIST) {
         parent::__construct($paramId, $paramIsCreateRecordsetInDatabaseIfKeyDoesntExist);
@@ -155,6 +166,131 @@ class FtaModel extends AbstractModel {
                 new GeoModel($this->getDataField(self::FIELDNAME_SITE_EXPEDITION_FTA)->getFieldValue()
                 , DatabaseRecord::VALUE_DONT_CREATE_RECORD_IN_DATABASE_IF_KEY_DOESNT_EXIST)
         );
+        $this->setModelSiteProduction(
+                new GeoModel($this->getDataField(self::FIELDNAME_SITE_PRODUCTION)->getFieldValue()
+                , DatabaseRecord::VALUE_DONT_CREATE_RECORD_IN_DATABASE_IF_KEY_DOESNT_EXIST)
+        );
+    }
+
+    /**
+     * Les données de la FTA sont-elles validées ?
+     * Ce test vérifie le renseignement des données obligatoires.
+     * @return boolean     
+     */
+    public function isFtaDataValidationSuccess() {
+        $return = "0";
+
+        /*
+         * Liste des Contrôles 
+         */
+        $return += $this->checkDataValidationClassification();
+        $return += $this->checkDataValidationDateEcheance();
+        $return += $this->checkDataValidationCodeLDC();
+
+
+        if ($return != "0") {
+            $titre = self::MESSAGE_DATA_MISSING;
+            $message = $this->getMessageErreurDataValidation();
+            afficher_message($titre, $message, $redirection);
+        }
+
+        return $return;
+    }
+
+    /**
+     * Vérification de la classification 
+     * @return boolean
+     */
+    private function checkDataValidationClassification() {
+        $return = TRUE;
+
+        if (!$this->getDataField(FtaModel::FIELDNAME_ID_FTA_CLASSIFICATION2)->getFieldValue()) {
+            $newErrorMessage = self::MESSAGE_DATA_VALIDATION_CLASSIFICATION;
+            $return = "1";
+        } else {
+            $return = "0";
+        }
+
+        if ($return != "0") {
+            //Ajout de la raison de l'echec du contrôle dans le message d'information utilisateur.
+            $this->addMessageErreurDataValidation($newErrorMessage);
+        }
+        return $return;
+    }
+
+    /**
+     * Vérification de la classification 
+     * @return boolean
+     */
+    private function checkDataValidationDateEcheance() {
+        $return = TRUE;
+
+        if (!$this->getDataField(FtaModel::FIELDNAME_DATE_ECHEANCE_FTA)->getFieldValue()) {
+            $newErrorMessage = self::MESSAGE_DATA_VALIDATION_DATE_ECHEANCE;
+            $return = "1";
+        } else {
+            $return = "0";
+        }
+
+
+        if ($return != "0") {
+            //Ajout de la raison de l'echec du contrôle dans le message d'information utilisateur.
+            $this->addMessageErreurDataValidation($newErrorMessage);
+        }
+        return $return;
+    }
+
+    /**
+     * Cohérence du Code LDC
+     * Si le code est déjà affecté à une autre FTA, on informe et on suppirme l'affectation sur la FTA en cours
+     * @return boolean
+     */
+    private function checkDataValidationCodeLDC() {
+        $return = TRUE;
+
+        if ($this->getDataField(FtaModel::FIELDNAME_CODE_ARTICLE_LDC)->getFieldValue() and ModuleConfig::CODE_LDC_UNIQUE) {
+            //if($code_article_ldc and false)
+            $arrayCoherenceLDC = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
+                            'SELECT ' . FtaModel::TABLENAME . '.' . FtaModel::KEYNAME
+                            . ' FROM ' . FtaModel::TABLENAME . ',' . FtaEtatModel::TABLENAME
+                            . ' WHERE ' . FtaModel::TABLENAME . '.' . FtaModel::FIELDNAME_DOSSIER_FTA . ' <> \'' . $this->getDataField(FtaModel::FIELDNAME_DOSSIER_FTA)->getFieldValue() . '\' '
+                            . ' AND ' . FtaModel::TABLENAME . '.' . FtaModel::FIELDNAME_CODE_ARTICLE_LDC . ' = \'' . $this->getDataField(FtaModel::FIELDNAME_CODE_ARTICLE_LDC)->getFieldValue() . '\' '
+                            . ' AND ' . FtaEtatModel::TABLENAME . '.' . FtaEtatModel::KEYNAME . '=' . FtaModel::TABLENAME . '.' . FtaModel::FIELDNAME_ID_FTA_ETAT
+                            . ' AND ' . FtaEtatModel::FIELDNAME_ABREVIATION . '<>\'' . FtaEtatModel::ETAT_ABREVIATION_VALUE_RETIRE . '\' '
+            );
+
+
+            if ($arrayCoherenceLDC) {
+                foreach ($arrayCoherenceLDC as $rowsCoherenceLDC) {
+                    $newErrorMessage = self::MESSAGE_DATA_VALIDATION_CODE_LDC;
+                    $this->getDataField(FtaModel::FIELDNAME_CODE_ARTICLE_LDC)->setFieldValue(null);
+                }
+                $return = "1";
+            } {
+                $return = "0";
+            }
+        } else {
+            $return = "0";
+        }
+
+
+        if ($return != "0") {
+            //Ajout de la raison de l'echec du contrôle dans le message d'information utilisateur.
+            $this->addMessageErreurDataValidation($newErrorMessage);
+        }
+        return $return;
+    }
+
+    private function addMessageErreurDataValidation($paramNewErrorMessage) {
+        $this->setMessageErreurDataValidation($this->getMessageErreurDataValidation() . "\n" . $paramNewErrorMessage);
+    }
+
+    function getMessageErreurDataValidation() {
+        return $this->messageErreurDataValidation;
+    }
+
+    function setMessageErreurDataValidation($paramMessageErreurDataValidation) {
+        $this->messageErreurDataValidation = $paramMessageErreurDataValidation;
     }
 
     protected function setDefaultValues() {
@@ -171,6 +307,18 @@ class FtaModel extends AbstractModel {
 
     function setModelSiteExpedition(GeoModel $modelSiteExpedition) {
         $this->modelSiteExpedition = $modelSiteExpedition;
+    }
+
+    /**
+     * 
+     * @return GeoModel
+     */
+    function getModelSiteProduction() {
+        return $this->modelSiteProduction;
+    }
+
+    function setModelSiteProduction(GeoModel $modelSiteProduction) {
+        $this->modelSiteProduction = $modelSiteProduction;
     }
 
     /**
@@ -551,7 +699,7 @@ class FtaModel extends AbstractModel {
                                 . ", " . FtaConditionnementModel::FIELDNAME_LONGUEUR_FTA_CONDITIONNEMENT . ", " . FtaConditionnementModel::FIELDNAME_LARGEUR_FTA_CONDITIONNEMENT
                                 . "  FROM " . FtaConditionnementModel::TABLENAME . ", " . AnnexeEmballageGroupeModel::TABLENAME . ", " . AnnexeEmballageGroupeTypeModel::TABLENAME . " "
                                 . " WHERE " . FtaConditionnementModel::TABLENAME . "." . FtaConditionnementModel::FIELDNAME_ID_FTA . "=" . $this->getKeyValue() . " "
-                                . " AND " . AnnexeEmballageGroupeTypeModel::TABLENAME . "." . AnnexeEmballageGroupeTypeModel::KEYNAME . "=" . AnnexeEmballageGroupeTypeModel::EMBALLAGE_UVC. " "
+                                . " AND " . AnnexeEmballageGroupeTypeModel::TABLENAME . "." . AnnexeEmballageGroupeTypeModel::KEYNAME . "=" . AnnexeEmballageGroupeTypeModel::EMBALLAGE_UVC . " "
                                 . " AND " . FtaConditionnementModel::TABLENAME . "." . FtaConditionnementModel::FIELDNAME_ID_ANNEXE_EMBALLAGE_GROUPE
                                 . "=" . AnnexeEmballageGroupeModel::TABLENAME . "." . AnnexeEmballageGroupeModel::KEYNAME . " "
                                 . " AND ( "
@@ -968,7 +1116,7 @@ class FtaModel extends AbstractModel {
           Déclaration et initialisation des variables
          * **************************************** */
         $globalConfig = new GlobalConfig();
-        UserModel::ConnexionFalse($globalConfig);
+        UserModel::checkUserSessionExpired($globalConfig);
 
         $idUser = $globalConfig->getAuthenticatedUser()->getKeyValue();
         $ftaModelOrig = new FtaModel($paramIdFta);              //Identifiant de la fiche technique article à dupliquer
@@ -1030,7 +1178,7 @@ class FtaModel extends AbstractModel {
                 . ", " . FtaModel::FIELDNAME_CODE_ARTICLE . "=" . 'NULL'                                                                         //Le Code Article Agrologic ne peut être présent 2 fois (index unique)
                 . ", " . FtaModel::FIELDNAME_CREATEUR . "=" . $idUser
                 . ", " . FtaModel::FIELDNAME_WORKFLOW . "=" . $paramIdFtaWorkflow
-                . ", " . FtaModel::FIELDNAME_SITE_ASSEMBLAGE . "=" . $paramOption["site_de_production"]
+                . ", " . FtaModel::FIELDNAME_SITE_PRODUCTION . "=" . $paramOption["site_de_production"]
                 . " WHERE " . FtaModel::KEYNAME . "=" . $idFtaNew
         );
         switch ($paramAction) {                                                                                                                 //Suivant l'action, certaines données sont à mettre à jour
@@ -1080,9 +1228,9 @@ class FtaModel extends AbstractModel {
           Les tables esclaves sont des tables contenant le champ "id_fta" dans la liste de leurs champs
          * ****************************************************************************************** */
 
-        FtaComposantModel::DuplicateFtaComposantByIdFta($idFtaOriginal, $idFtaNew);
-        FtaConditionnementModel::DuplicateFtaConditionnementByIdFta($idFtaOriginal, $idFtaNew);
-        FtaSuiviProjetModel::DuplicateFtaSuiviProjetByIdFta($idFtaOriginal, $idFtaNew);
+        FtaComposantModel::duplicateFtaComposantByIdFta($idFtaOriginal, $idFtaNew);
+        FtaConditionnementModel::duplicateFtaConditionnementByIdFta($idFtaOriginal, $idFtaNew);
+        FtaSuiviProjetModel::duplicateFtaSuiviProjetByIdFta($idFtaOriginal, $idFtaNew);
         // ClassificationFtaModel::DuplicateFtaClassificationByIdFta($idFtaOriginal, $idFtaNew);
 
 
@@ -1118,7 +1266,7 @@ class FtaModel extends AbstractModel {
                  * Cettefonction est mise en pause car elle nécessite la création de processus cycle pour chaque workflow,
                  * questionnement à boris.
                  */
-                if ($newAbreviationFtaEtat == "I" and ! $selection_chapitre) {//Suppression des validations
+                if ($newAbreviationFtaEtat == FtaEtatModel::ETAT_ABREVIATION_VALUE_MODIFICATION and ! $selection_chapitre) {//Suppression des validations
                     //Recherche des chapitres affectés au cycle de vie correspondant à l'état
                     $arrayCycle = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
                                     "SELECT DISTINCT " . FtaProcessusCycleModel::FIELDNAME_PROCESSUS_INIT . "," . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_CHAPITRE
@@ -1398,7 +1546,7 @@ class FtaModel extends AbstractModel {
                         . "," . FtaModel::FIELDNAME_ID_FTA_ETAT
                         . "," . FtaModel::FIELDNAME_DESIGNATION_COMMERCIALE
                         . "," . FtaModel::FIELDNAME_DATE_CREATION
-                        . "," . FtaModel::FIELDNAME_SITE_ASSEMBLAGE
+                        . "," . FtaModel::FIELDNAME_SITE_PRODUCTION
                         . "," . FtaModel::FIELDNAME_WORKFLOW . ")"
                         . " VALUES (" . $paramIdCreateur
                         . ", " . $paramIdFtaEtat
@@ -1421,7 +1569,7 @@ class FtaModel extends AbstractModel {
         /**
          * Recalcul + stockage % Avancement
          */
-        $taux_temp = FtaSuiviProjetModel::getFtaTauxValidation($this, FALSE);
+        $taux_temp = FtaSuiviProjetModel::getArrayFtaTauxValidation($this, FALSE);
         $recap[$idFta] = round($taux_temp['0'] * '100', '0') . '%';
         $this->getDataField(FtaModel::FIELDNAME_POURCENTAGE_AVANCEMENT)->setFieldValue($recap[$idFta]);
 
@@ -1433,8 +1581,14 @@ class FtaModel extends AbstractModel {
         $this->saveToDatabase();
     }
 
-    public function ListeCodeProduitsAgrologic() {
-        $idFta = $this->getKeyValue();
+    public static function getArrayIdFtaByIdDossierFta($paramIdDossierFta) {
+        $arrayIdFtaChange = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
+                        "SELECT " . FtaModel::KEYNAME
+                        . "," . FtaModel::FIELDNAME_ID_FTA_ETAT
+                        . " FROM " . FtaModel::TABLENAME
+                        . " WHERE " . FtaModel::FIELDNAME_DOSSIER_FTA . "=" . $paramIdDossierFta
+        );
+        return $arrayIdFtaChange;
     }
 
 }

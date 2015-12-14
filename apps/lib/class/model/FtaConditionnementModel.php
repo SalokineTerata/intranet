@@ -456,7 +456,7 @@ class FtaConditionnementModel extends AbstractModel {
      * 
      * @param type $paramIdFta
      */
-    public static function DuplicateFtaConditionnementByIdFta($paramIdFtaOrig, $paramIdFtaNew) {
+    public static function duplicateFtaConditionnementByIdFta($paramIdFtaOrig, $paramIdFtaNew) {
         DatabaseOperation::execute(
                 ' INSERT INTO ' . FtaConditionnementModel::TABLENAME
                 . ' (' . FtaConditionnementModel::FIELDNAME_HAUTEUR_EMBALLAGE_FTA_CONDITIONNEMENT

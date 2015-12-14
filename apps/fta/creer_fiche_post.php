@@ -88,7 +88,7 @@ switch ($action) {
          * Initialisation de l'enregistrement de la Table FTA
          */
         $globalConfig = new GlobalConfig();
-        UserModel::ConnexionFalse($globalConfig);
+        UserModel::checkUserSessionExpired($globalConfig);
 
         $idUser = $globalConfig->getAuthenticatedUser()->getKeyValue();
 

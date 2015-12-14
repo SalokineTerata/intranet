@@ -120,10 +120,10 @@ class FtaComposantModel extends AbstractModel {
     }
 
     /**
-     * 
-     * @param type $paramIdFta
+     * Dupplication des données de la table FtaComposant concernant une Fta
+     * @param int $paramIdFta
      */
-    public static function DuplicateFtaComposantByIdFta($paramIdFtaOrig, $paramIdFtaNew) {
+    public static function duplicateFtaComposantByIdFta($paramIdFtaOrig, $paramIdFtaNew) {
         DatabaseOperation::execute(
                 ' INSERT INTO ' . FtaComposantModel::TABLENAME
                 . ' (' . FtaComposantModel::FIELDNAME_ASCENDANT_FTA_NOMENCLATURE
@@ -245,7 +245,7 @@ class FtaComposantModel extends AbstractModel {
 
     /**
      * Tableau de données, convertie le nom des champs des données aux noms des champs virtuel qui leur corresponds
-     * @param type $paramIdFtaComposant
+     * @param int $paramIdFtaComposant
      * @return int
      */
     public static function getArrayFtaConditonnement($paramIdFtaComposant) {
@@ -277,7 +277,7 @@ class FtaComposantModel extends AbstractModel {
     }
 
     /**
-     * 
+     * On obtient le tableau contenant les clé étrangères et la clé primaire de FtaComposant 
      * @param int $paramIdFta
      * @param int $paramIdFtaComposant
      * @return array
@@ -293,15 +293,15 @@ class FtaComposantModel extends AbstractModel {
 
     /**
      * Ajouter une composition
-     * @param type $paramIdFta
-     * @param type $paramIdChapitre
-     * @param type $paramSyntheseAction
-     * @param type $paramComeback
-     * @param type $paramIdFtaEtat
-     * @param type $paramAbreviationEtat
-     * @param type $paramIdFtaRole
-     * @param type $paramProprietaire
-     * @return type
+     * @param int $paramIdFta
+     * @param int $paramIdChapitre
+     * @param string $paramSyntheseAction
+     * @param int $paramComeback
+     * @param int $paramIdFtaEtat
+     * @param string $paramAbreviationEtat
+     * @param int $paramIdFtaRole
+     * @param int $paramProprietaire
+     * @return string
      */
     public static function getAddLinkComposition($paramIdFta, $paramIdChapitre, $paramSyntheseAction, $paramComeback, $paramIdFtaEtat, $paramAbreviationEtat, $paramIdFtaRole, $paramProprietaire) {
         return 'modifier_composition.php?id_fta=' . $paramIdFta
@@ -317,15 +317,15 @@ class FtaComposantModel extends AbstractModel {
 
     /**
      * Ajouter un composant
-     * @param type $paramIdFta
-     * @param type $paramIdChapitre
-     * @param type $paramSyntheseAction
-     * @param type $paramComeback
-     * @param type $paramIdFtaEtat
-     * @param type $paramAbreviationEtat
-     * @param type $paramIdFtaRole
-     * @param type $paramProprietaire
-     * @return type
+     * @param int $paramIdFta
+     * @param int $paramIdChapitre
+     * @param string $paramSyntheseAction
+     * @param int $paramComeback
+     * @param int $paramIdFtaEtat
+     * @param string $paramAbreviationEtat
+     * @param int $paramIdFtaRole
+     * @param int $paramProprietaire
+     * @return string
      */
     public static function getAddLinkComposant($paramIdFta, $paramIdChapitre, $paramSyntheseAction, $paramComeback, $paramIdFtaEtat, $paramAbreviationEtat, $paramIdFtaRole, $paramProprietaire) {
         return 'modifier_composant.php?id_fta=' . $paramIdFta
@@ -352,9 +352,9 @@ class FtaComposantModel extends AbstractModel {
     }
 
     /**
-     * 
-     * @param type $paramIdFtaComposant
-     * @return type
+     * Affiche le label des tableaux compositions
+     * @param int $paramIdFtaComposant
+     * @return string
      */
     public static function getTableCompositionLabel($paramIdFtaComposant) {
         $ftaComposantModel = new FtaComposantModel($paramIdFtaComposant);
@@ -372,9 +372,9 @@ class FtaComposantModel extends AbstractModel {
     }
 
     /**
-     * 
-     * @param type $paramIdFtaComposant
-     * @return type
+     * Affiche le label des tableaux composants
+     * @param int $paramIdFtaComposant
+     * @return string
      */
     public static function getTableComposantLabel($paramIdFtaComposant) {
         $ftaComposantModel = new FtaComposantModel($paramIdFtaComposant);
@@ -491,15 +491,15 @@ class FtaComposantModel extends AbstractModel {
 
     /**
      * Detail d'un composant
-     * @param type $paramIdFta
-     * @param type $paramIdChapitre
-     * @param type $paramIdFtaComposant
-     * @param type $paramSyntheseAction
-     * @param type $paramComeback
-     * @param type $paramIdFtaEtat
-     * @param type $paramAbreviationEtat
-     * @param type $paramIdFtaRole
-     * @param type $paramProprietaire
+     * @param int $paramIdFta
+     * @param int $paramIdChapitre
+     * @param array $paramIdFtaComposant
+     * @param string $paramSyntheseAction
+     * @param int $paramComeback
+     * @param int $paramIdFtaEtat
+     * @param string $paramAbreviationEtat
+     * @param int $paramIdFtaRole
+     * @param int $paramProprietaire
      * @return string
      */
     public static function getDetailLinkComposant($paramIdFta, $paramIdChapitre, $paramIdFtaComposant, $paramSyntheseAction, $paramComeback, $paramIdFtaEtat, $paramAbreviationEtat, $paramIdFtaRole, $paramProprietaire) {
@@ -521,15 +521,15 @@ class FtaComposantModel extends AbstractModel {
 
     /**
      * Detail d'un composition
-     * @param type $paramIdFta
-     * @param type $paramIdChapitre
-     * @param type $paramIdFtaComposant
-     * @param type $paramSyntheseAction
-     * @param type $paramComeback
-     * @param type $paramIdFtaEtat
-     * @param type $paramAbreviationEtat
-     * @param type $paramIdFtaRole
-     * @param type $paramProprietaire
+     * @param int $paramIdFta
+     * @param int $paramIdChapitre
+     * @param array $paramIdFtaComposant
+     * @param string $paramSyntheseAction
+     * @param int $paramComeback
+     * @param int $paramIdFtaEtat
+     * @param string $paramAbreviationEtat
+     * @param int $paramIdFtaRole
+     * @param int $paramProprietaire
      * @return string
      */
     public static function getDetailLinkComposition($paramIdFta, $paramIdChapitre, $paramIdFtaComposant, $paramSyntheseAction, $paramComeback, $paramIdFtaEtat, $paramAbreviationEtat, $paramIdFtaRole, $paramProprietaire) {
@@ -550,15 +550,15 @@ class FtaComposantModel extends AbstractModel {
     }
 
     /**
-     * 
-     * @param type $paramObjet
-     * @param type $paramIsEditable
-     * @param type $paramIdFta
-     * @param type $paramIdFtaComposant
-     * @param type $paramLabelSiteDeProduction
-     * @return type
+     * Affiche la liste déroulante des sites de production pour les composants et compositions
+     * @param HtmlListSelect $paramObjet
+     * @param boolean $paramIsEditable
+     * @param int $paramIdFta
+     * @param int $paramIdFtaComposant
+     * @param string $paramLabelSiteDeProduction
+     * @return string
      */
-    public static function ShowListeDeroulanteSiteProdForComposant($paramObjet, $paramIsEditable, $paramIdFta, $paramIdFtaComposant, $paramLabelSiteDeProduction) {
+    public static function ShowListeDeroulanteSiteProdForComposant(HtmlListSelect $paramObjet, $paramIsEditable, $paramIdFta, $paramIdFtaComposant, $paramLabelSiteDeProduction) {
 
 //        $ftaModel = new FtaModel($paramIdFta);
         $ftaComposantModel = new FtaComposantModel($paramIdFtaComposant);
@@ -606,10 +606,10 @@ class FtaComposantModel extends AbstractModel {
 
     /**
      * Fonction non utilisé
-     * @param type $paramObjet
-     * @param type $paramIsEditable
-     * @param type $paramIdFtaComposant
-     * @return type
+     * @param HtmlListSelect $paramObjet
+     * @param bolean $paramIsEditable
+     * @param int $paramIdFtaComposant
+     * @return string
      */
     public static function ShowListeDeroulantePrefixeForComposant($paramObjet, $paramIsEditable, $paramIdFtaComposant) {
 

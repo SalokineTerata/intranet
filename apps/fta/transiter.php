@@ -69,7 +69,7 @@ $syntheseAction = Lib::getParameterFromRequest('synthese_action');
  */
 $ftaModel = new FtaModel($idFta);
 $globalConfig = new GlobalConfig();
-UserModel::ConnexionFalse($globalConfig);
+UserModel::checkUserSessionExpired($globalConfig);
 
 $idUser = $globalConfig->getAuthenticatedUser()->getKeyValue();
 $idFtaWorkflow = $ftaModel->getDataField(FtaModel::FIELDNAME_WORKFLOW)->getFieldValue();
@@ -117,7 +117,7 @@ foreach ($arrayFta as $rowsFta) {
 
 
 
-$taux_temp = FtaSuiviProjetModel::getFtaTauxValidation($ftaModel, FALSE);
+$taux_temp = FtaSuiviProjetModel::getArrayFtaTauxValidation($ftaModel, FALSE);
 $recap[$idFta] = round($taux_temp['0'] * '100%', '0') . '%';
 
 

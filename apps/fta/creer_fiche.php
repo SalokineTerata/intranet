@@ -61,7 +61,7 @@ $html_table = 'table '                     //Permet d'harmoniser les tableaux
 $id_fta = Lib::getParameterFromRequest(FtaModel::KEYNAME);
 $idFtaRole = Lib::getParameterFromRequest(FtaRoleModel::KEYNAME);
 $globalConfig = new GlobalConfig();
-UserModel::ConnexionFalse($globalConfig);
+UserModel::checkUserSessionExpired($globalConfig);
 
 $idUser = $globalConfig->getAuthenticatedUser()->getKeyValue();
 $checked_vierge = '';
@@ -70,7 +70,7 @@ if ($id_fta) {
     $checked_duplicate = 'checked';
     $ftaModel = new FtaModel($id_fta);
     $idFtaWorkflow = $ftaModel->getDataField(FtaModel::FIELDNAME_WORKFLOW)->getFieldValue();
-    $SiteDeProduction = $ftaModel->getDataField(FtaModel::FIELDNAME_SITE_ASSEMBLAGE)->getFieldValue();
+    $SiteDeProduction = $ftaModel->getDataField(FtaModel::FIELDNAME_SITE_PRODUCTION)->getFieldValue();
     $designationCommercialeFta = $ftaModel->getDataField(FtaModel::FIELDNAME_DESIGNATION_COMMERCIALE)->getFieldValue();
 } else {
     $checked_vierge = 'checked';
@@ -84,7 +84,7 @@ $HtmlList = new HtmlListSelectTagName();
 //} else {
 //    $isEditable = TRUE;
 //}
-$listeWorkflow = FtaWorkflowModel::ShowListeDeroulanteNomWorkflowByAcces($idUser, $HtmlList, TRUE, $idFtaRole, $idFtaWorkflow);
+$listeWorkflow = FtaWorkflowModel::showListeDeroulanteNomWorkflowByAcces($idUser, $HtmlList, TRUE, $idFtaRole, $idFtaWorkflow);
 
 
 
@@ -142,7 +142,7 @@ echo '
          <' . $html_table . '>           
              <tr class=contenu><td align=\'left\'>
                  ' . DatabaseDescription::getFieldDocLabel(FtaModel::TABLENAME, FtaModel::FIELDNAME_DESIGNATION_COMMERCIALE)
- . ':</td><td><input type=\'text\' name=\'designation_commerciale_fta\' size=\'20\' value=\'' . $designationCommercialeFta . '\' />
+ . ':</td><td><input type=\'text\' name=\'designation_commerciale_fta\' size=\'70\' value=\'' . $designationCommercialeFta . '\' />
              </td></tr>
 
                     ' . $listeWorkflow . '

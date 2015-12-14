@@ -107,6 +107,12 @@ class DatabaseDescription {
     const ARRAY_NAME_DOC_TYPE_OF_HTML_OBJECT = "TypeOfHtmlObject";
 
     /**
+     * Nom de la variable contenant la requête SQL à exécuter pour fournir la
+     * liste des choix dans le cas des listes déroulantes.
+     */
+    const ARRAY_NAME_DOC_SIZE_OF_HTML_OBJECT = "SizeOfHtmlObject";
+
+    /**
      * Type de stockage de la donnée.
      * La donnée peut être réellement stockée en base de données : REAL
      * Elle peut etre virtuelle dans le cas de sous-table : VIRTUAL
@@ -311,6 +317,7 @@ class DatabaseDescription {
                         . ',explication_intranet_column_info'
                         . ',id_intranet_column_info'
                         . ',sql_request_content_intranet_column_info'
+                        . ',size_of_html_object_intranet_column_info'
                         . ',type_of_html_object_intranet_column_info'
                         . ',type_of_storage'
                         . ',referenced_table_name'
@@ -319,7 +326,7 @@ class DatabaseDescription {
                         . ',fields_to_lock'
                         . ',fields_to_order'
                         . ',right_to_add'
-                        . ',condition_sql'
+                        . ',sql_condition_content_intranet_column_info'
                         . ' FROM `intranet_column_info` ');
         /**
          * Parcours du résultat de la recherche
@@ -339,6 +346,7 @@ class DatabaseDescription {
                 $contentArray = NULL;
             }
             $typeOfHtmlObject = $rowsDoc['type_of_html_object_intranet_column_info'];
+            $sizeOfHtmlObject = $rowsDoc['size_of_html_object_intranet_column_info'];
             $typeOfStorage = $rowsDoc['type_of_storage'];
             $foreignTable = $rowsDoc['referenced_table_name'];
             $foreignKey = $rowsDoc['referenced_column_name'];
@@ -346,7 +354,7 @@ class DatabaseDescription {
             $fieldsToLock = $rowsDoc['fields_to_lock'];
             $fieldsToOrder = $rowsDoc['fields_to_order'];
             $rightToAdd = $rowsDoc['right_to_add'];
-            $conditionSql = $rowsDoc['condition_sql'];
+            $conditionSql = $rowsDoc['sql_condition_content_intranet_column_info'];
 
 
             /**
@@ -359,6 +367,7 @@ class DatabaseDescription {
                 self::ARRAY_NAME_DOC_HELP => $help,
                 self::ARRAY_NAME_DOC_CONTENT_SQL => $contentSql,
                 self::ARRAY_NAME_DOC_CONTENT_ARRAY => $contentArray,
+                self::ARRAY_NAME_DOC_SIZE_OF_HTML_OBJECT => $sizeOfHtmlObject,
                 self::ARRAY_NAME_DOC_TYPE_OF_HTML_OBJECT => $typeOfHtmlObject,
                 self::ARRAY_NAME_DOC_TYPE_OF_STORAGE => $typeOfStorage,
                 self::ARRAY_NAME_DOC_FOREIGN_TABLE => $foreignTable,
@@ -475,6 +484,18 @@ class DatabaseDescription {
     public static function getFieldDocContentSQL($paramTableName, $paramFieldName) {
         return $_SESSION[get_class()][$paramTableName][self::ARRAY_NAME_FIELDS]
                 [$paramFieldName][self::ARRAY_NAME_DOC][self::ARRAY_NAME_DOC_CONTENT_SQL];
+    }
+
+    /**
+     * Retourne la taille de l'objet HTML à utiliser pour représenter graphiquement
+     * le champs
+     * @param string $paramTableName Nom de la table
+     * @param string $paramFieldName Nom du champs
+     * @return string Type d'objet HTML
+     */
+    public static function getFieldDocSizeOfHtmlObject($paramTableName, $paramFieldName) {
+        return $_SESSION[get_class()][$paramTableName][self::ARRAY_NAME_FIELDS]
+                [$paramFieldName][self::ARRAY_NAME_DOC][self::ARRAY_NAME_DOC_SIZE_OF_HTML_OBJECT];
     }
 
     /**

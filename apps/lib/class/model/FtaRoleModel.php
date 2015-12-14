@@ -31,9 +31,15 @@ class FtaRoleModel extends AbstractModel {
      * @return array
      */
     public static function getKeyNameOfFirstRoleByIdUser($paramIdUser) {
-
-        $arrayFtaRole = FtaRoleModel::getIdFtaRoleByIdUser($paramIdUser);
-        return $arrayFtaRole['0'][FtaRoleModel::KEYNAME];
+        /**
+         * Si l'utilisateur n'a aucun rôle on lui affecte le rôle commun
+         */
+        $return = self::ID_FTA_ROLE_COMMUN;
+        $arrayFtaRole = FtaRoleModel::getArrayIdFtaRoleByIdUser($paramIdUser);
+        if ($arrayFtaRole != NULL) {
+            $return = $arrayFtaRole['0'][FtaRoleModel::KEYNAME];
+        }
+        return $return;
     }
 
     /**
@@ -41,7 +47,7 @@ class FtaRoleModel extends AbstractModel {
      * @param int $paramIdUser
      * @return array
      */
-    public static function getIdFtaRoleByIdUser($paramIdUser) {
+    public static function getArrayIdFtaRoleByIdUser($paramIdUser) {
         $arrayIdFtaRole = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
                         'SELECT DISTINCT ' . FtaRoleModel::TABLENAME . '.' . FtaRoleModel::KEYNAME
                         . ',' . FtaRoleModel::FIELDNAME_NOM_FTA_ROLE
@@ -229,11 +235,13 @@ class FtaRoleModel extends AbstractModel {
 
     /**
      * On vérifie selon le role de l'utilisateur connecté 
-     * si il a accès aux boutoon transition en permanence
+     * si il a accès aux bouton de transition, de duplication et retirer
      * @param int $paramIdRole
-     * @return int
+     * @return boolean
      */
-    public static function getValueIsGestionnaire($paramIdRole) {
+    public static function isGestionnaire($paramIdRole) {
+        $valueIsGestionnaire = 0;
+        $return = FALSE;
         $arrayIsGestionnaire = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
                         'SELECT ' . FtaRoleModel::FIELDNAME_IS_GESTIONNAIRE
                         . ' FROM ' . FtaRoleModel::TABLENAME
@@ -242,8 +250,11 @@ class FtaRoleModel extends AbstractModel {
         foreach ($arrayIsGestionnaire as $rowsIsGestionnaire) {
             $valueIsGestionnaire = $rowsIsGestionnaire[FtaRoleModel::FIELDNAME_IS_GESTIONNAIRE];
         }
+        if ($valueIsGestionnaire != 0) {
+            $return = TRUE;
+        }
 
-        return $valueIsGestionnaire;
+        return $return;
     }
 
 }

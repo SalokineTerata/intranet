@@ -86,7 +86,7 @@ class UserModel extends AbstractModel {
                             . '=' . FtaEtatModel::TABLENAME . '.' . FtaEtatModel::KEYNAME
                             . ' AND ' . FtaWorkflowModel::TABLENAME . '.' . FtaWorkflowModel::KEYNAME
                             . '=' . FtaModel::TABLENAME . '.' . FtaModel::FIELDNAME_WORKFLOW
-                            . ' AND ' . FtaModel::TABLENAME . '.' . FtaModel::FIELDNAME_SITE_ASSEMBLAGE
+                            . ' AND ' . FtaModel::TABLENAME . '.' . FtaModel::FIELDNAME_SITE_PRODUCTION
                             . '=' . GeoModel::TABLENAME . '.' . GeoModel::KEYNAME
                             . ' ORDER BY ' . $paramOrderBy
                             . ',' . FtaModel::TABLENAME . '.' . FtaModel::FIELDNAME_WORKFLOW
@@ -118,7 +118,7 @@ class UserModel extends AbstractModel {
                             . '=' . FtaEtatModel::TABLENAME . '.' . FtaEtatModel::KEYNAME
                             . ' AND ' . FtaWorkflowModel::TABLENAME . '.' . FtaWorkflowModel::KEYNAME
                             . '=' . FtaModel::TABLENAME . '.' . FtaModel::FIELDNAME_WORKFLOW
-                            . ' AND ' . FtaModel::TABLENAME . '.' . FtaModel::FIELDNAME_SITE_ASSEMBLAGE
+                            . ' AND ' . FtaModel::TABLENAME . '.' . FtaModel::FIELDNAME_SITE_PRODUCTION
                             . '=' . GeoModel::TABLENAME . '.' . GeoModel::KEYNAME
                             . ' ORDER BY ' . $paramOrderBy
                             . ',' . FtaModel::TABLENAME . '.' . FtaModel::FIELDNAME_WORKFLOW
@@ -203,11 +203,29 @@ class UserModel extends AbstractModel {
         return $req;
     }
 
-    public static function ConnexionFalse($paramGlobalConfig) {
+    /**
+     * Vérifie si l'utilisateur a toujours sa session active.
+     * Sinon, c'est qu'elle a expirée.
+     * @param GlobalConfig $paramGlobalConfig
+     * @return boolean
+     */
+    public static function isUserSessionExpired(GlobalConfig $paramGlobalConfig) {
+        $errorReturn = FALSE;
         if (!$paramGlobalConfig->getAuthenticatedUser()) {
-            $titre = "Déconnexion";
-            $message = "Erreur, la session précédement connecté à expirer.<br>"
-                    . "Veuillez vous reconnecter<br>";
+            $errorReturn = TRUE;
+        }
+        return $errorReturn;
+    }
+
+    /**
+     * Vérifie si l'utilisateur a toujours sa session active.
+     * Sinon, c'est qu'elle a expirée et un message est affiché.
+     * @param GlobalConfig $paramGlobalConfig
+     */
+    public static function checkUserSessionExpired(GlobalConfig $paramGlobalConfig) {
+        if (self::isUserSessionExpired($paramGlobalConfig)) {
+            $titre = UserInterfaceMessage::FR_SESSION_EXPIRED;
+            $message = UserInterfaceMessage::FR_SESSION_EXPIRED_TITLE;
             $redirection = "index.php";
             afficher_message($titre, $message, $redirection);
         }

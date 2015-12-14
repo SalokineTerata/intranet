@@ -84,7 +84,7 @@ $detail_id_fta;              //Identifiant de la fiche sur laquelle on souhaite 
 Navigation::initNavigation($id_fta, $id_fta_chapitre, $synthese_action, $comeback, $idFtaEtat, $abreviationFtaEtat, $idFtaRole,TRUE);
 $navigue = Navigation::getHtmlNavigationBar();
 //Calcul du taux
-$taux_temp = FtaSuiviProjetModel::getFtaTauxValidation($ftaModel, TRUE);
+$taux_temp = FtaSuiviProjetModel::getArrayFtaTauxValidation($ftaModel, TRUE);
 $details[$id_fta] = $taux_temp[1];
 
 //Détail d'un FTA

@@ -39,11 +39,11 @@ class FtaTransitionModel {
         $idFtaEtatByIdFta = $ftaModel->getDataField(FtaModel::FIELDNAME_ID_FTA_ETAT)->getFieldValue();
         $idDossierFta = $ftaModel->getDataField(FtaModel::FIELDNAME_DOSSIER_FTA)->getFieldValue();
         $codeArticleLdc = $ftaModel->getDataField(FtaModel::FIELDNAME_CODE_ARTICLE_LDC)->getFieldValue();
-        $siteDeProduction = $ftaModel->getDataField(FtaModel::FIELDNAME_SITE_ASSEMBLAGE)->getFieldValue();
+        $siteDeProduction = $ftaModel->getDataField(FtaModel::FIELDNAME_SITE_PRODUCTION)->getFieldValue();
         $ftaEtatModel = new FtaEtatModel($idFtaEtatByIdFta);
         $initial_abreviation_fta_etat = $ftaEtatModel->getDataField(FtaEtatModel::FIELDNAME_ABREVIATION)->getFieldValue();
         $globalConfig = new GlobalConfig();
-        UserModel::ConnexionFalse($globalConfig);
+        UserModel::checkUserSessionExpired($globalConfig);
 
         $idUser = $globalConfig->getAuthenticatedUser()->getKeyValue();
         $userModel = new UserModel($idUser);
@@ -277,7 +277,7 @@ class FtaTransitionModel {
                 . ", " . FtaModel::FIELDNAME_WORKFLOW
                 . ", " . FtaModel::FIELDNAME_VERSION_DOSSIER_FTA
                 . ", " . FtaModel::KEYNAME
-                . ", " . FtaModel::FIELDNAME_SITE_ASSEMBLAGE
+                . ", " . FtaModel::FIELDNAME_SITE_PRODUCTION
                 . " FROM " . FtaModel::TABLENAME . ",  " . FtaEtatModel::TABLENAME
                 . " WHERE " . FtaModel::TABLENAME . "." . FtaModel::KEYNAME . "='" . $id_fta . "' "
                 . " AND " . FtaEtatModel::TABLENAME . "." . FtaEtatModel::KEYNAME
@@ -331,7 +331,7 @@ class FtaTransitionModel {
             $arrayIdIntranetActions = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
                             ' SELECT ' . FtaActionSiteModel::TABLENAME . '.' . FtaActionSiteModel::FIELDNAME_ID_INTRANET_ACTIONS
                             . ' FROM ' . FtaActionSiteModel::TABLENAME
-                            . ' WHERE ' . FtaActionSiteModel::FIELDNAME_ID_SITE . '=' . $rowsFta[FtaModel::FIELDNAME_SITE_ASSEMBLAGE]
+                            . ' WHERE ' . FtaActionSiteModel::FIELDNAME_ID_SITE . '=' . $rowsFta[FtaModel::FIELDNAME_SITE_PRODUCTION]
                             . ' AND ' . FtaActionSiteModel::FIELDNAME_ID_FTA_WORKFLOW . ' =' . $rowsFta[FtaModel::FIELDNAME_WORKFLOW]
             );
 
@@ -421,7 +421,7 @@ class FtaTransitionModel {
          * Initilisation
          */
         $ftamodel = new FtaModel($paramIdFta);
-        $SiteDeProduction = $ftamodel->getDataField(FtaModel::FIELDNAME_SITE_ASSEMBLAGE)->getFieldValue();
+        $SiteDeProduction = $ftamodel->getDataField(FtaModel::FIELDNAME_SITE_PRODUCTION)->getFieldValue();
         $CodeArticleLdc = $ftamodel->getDataField(FtaModel::FIELDNAME_CODE_ARTICLE_LDC)->getFieldValue();
         $Libelle = $ftamodel->getDataField(FtaModel::FIELDNAME_LIBELLE)->getFieldValue();
         $UniteFacturation = $ftamodel->getDataField(FtaModel::FIELDNAME_UNITE_FACTURATION)->getFieldValue();
@@ -479,7 +479,7 @@ class FtaTransitionModel {
                 . "Cet Article est maintenant actif et disponible dans l'ensemble de notre système informatique.\n"
                 . "\n"
                 . "INFORMATIONS PRINCIPALES:\n"
-                . $ftamodel->getDataField(FtaModel::FIELDNAME_SITE_ASSEMBLAGE)->getFieldLabel() . ": " . $libelleSiteAgis . "\n"
+                . $ftamodel->getDataField(FtaModel::FIELDNAME_SITE_PRODUCTION)->getFieldLabel() . ": " . $libelleSiteAgis . "\n"
 //                . "Identifiant dans Agrologic: " . $CodeArticle . "\n"
                 . "\n"
                 . "Listes des produits créés:\n"
@@ -585,7 +585,7 @@ class FtaTransitionModel {
                 . "," . FtaModel::FIELDNAME_LIBELLE
                 . " FROM " . FtaModel::TABLENAME . ",  " . GeoModel::TABLENAME
                 . " WHERE ( 0 " . FtaModel::AddIdFta($paramSelectionFta) . " ) "
-                . " AND " . GeoModel::TABLENAME . "." . GeoModel::KEYNAME . "=" . FtaModel::TABLENAME . "." . FtaModel::FIELDNAME_SITE_ASSEMBLAGE
+                . " AND " . GeoModel::TABLENAME . "." . GeoModel::KEYNAME . "=" . FtaModel::TABLENAME . "." . FtaModel::FIELDNAME_SITE_PRODUCTION
                 . " ORDER BY " . GeoModel::FIELDNAME_LIBELLE_SITE_AGIS;
 
         $paramLogTransition .="\n\n" . $req;

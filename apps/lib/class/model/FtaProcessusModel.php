@@ -288,7 +288,7 @@ class FtaProcessusModel extends AbstractModel {
      */
     public static function CheckProcessusSiteOrSociete($paramRows, $paramIdFta) {
         $globalConfig = new GlobalConfig();
-        UserModel::ConnexionFalse($globalConfig);
+        UserModel::checkUserSessionExpired($globalConfig);
 
         $idUser = $globalConfig->getAuthenticatedUser()->getKeyValue();
         $paramLieuGeo = $globalConfig->getAuthenticatedUser()->getLieuGeo();
@@ -302,7 +302,7 @@ class FtaProcessusModel extends AbstractModel {
                             . ',' . FtaActionSiteModel::TABLENAME
                             . ',' . IntranetActionsModel::TABLENAME
                             . ',' . FtaWorkflowStructureModel::TABLENAME
-                            . ' WHERE ' . GeoModel::KEYNAME . '=' . FtaModel::FIELDNAME_SITE_ASSEMBLAGE
+                            . ' WHERE ' . GeoModel::KEYNAME . '=' . FtaModel::FIELDNAME_SITE_PRODUCTION
                             . ' AND ' . FtaActionSiteModel::FIELDNAME_ID_SITE . '=' . GeoModel::KEYNAME
                             . ' AND ' . IntranetActionsModel::TABLENAME . '.' . IntranetActionsModel::KEYNAME
                             . '=' . IntranetDroitsAccesModel::TABLENAME . '.' . IntranetDroitsAccesModel::FIELDNAME_ID_INTRANET_ACTIONS
@@ -330,6 +330,23 @@ class FtaProcessusModel extends AbstractModel {
             }
         }
         return $paramT_Processus_Encours;
+    }
+
+    static private function getSqlStatementAuthorizedProcessusByUser($paramIdUser) {
+        return "SELECT DISTINCT fta_processus.id_fta_processus, multisite_fta_processus "
+                . "FROM `intranet_modules`, `intranet_droits_acces`, `intranet_actions`, `fta_processus` , fta_action_role, fta_workflow_structure "
+                . "WHERE ( `intranet_modules`.`id_intranet_modules` = `intranet_droits_acces`.`id_intranet_modules` " //Liaison
+                . "AND `fta_workflow_structure`.`id_fta_role` = `fta_processus`.`id_fta_role` "
+                . "AND `fta_workflow_structure`.`id_fta_processus` = `fta_processus`.`id_fta_processus` "
+                . "AND `fta_workflow_structure`.`id_fta_role` = `fta_action_role`.`id_fta_role` "
+                . "AND `intranet_actions`.`id_intranet_actions` = `fta_action_role`.`id_intranet_actions` ) "       //Liaison
+                . "AND ( ( `intranet_droits_acces`.`id_user` = " . $paramIdUser . " "
+                . "AND `intranet_droits_acces`.`niveau_intranet_droits_acces` > 0 ))"
+        ;
+    }
+
+    static public function getSqlResultAuthorizedProcessusByUser($paramIdUser) {
+        return DatabaseOperation::query(self::getSqlStatementAuthorizedProcessusByUser($paramIdUser));
     }
 
 }

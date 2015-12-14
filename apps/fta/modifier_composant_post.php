@@ -28,7 +28,7 @@ $comeback = Lib::getParameterFromRequest('comeback');
 $synthese_action = Lib::getParameterFromRequest('synthese_action');
 $proprietaire = Lib::getParameterFromRequest('proprietaire');
 $globalConfig = new GlobalConfig();
-UserModel::ConnexionFalse($globalConfig);
+UserModel::checkUserSessionExpired($globalConfig);
 
 $id_user = $globalConfig->getAuthenticatedUser()->getKeyValue();
 

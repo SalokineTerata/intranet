@@ -19,6 +19,8 @@ class FtaSuiviProjetModel extends AbstractModel {
     const FIELDNAME_DATE_DEMARRAGE_CHAPITRE_FTA_SUIVI_PROJET = 'date_demarrage_chapitre_fta_suivi_projet';
     const FIELDNAME_NOTIFICATION_FTA_SUIVI_PROJET = 'notification_fta_suivi_projet';
     const FIELDNAME_CORRECTION_FTA_SUIVI_PROJET = 'correction_fta_suivi_projet';
+    const SIGNATURE_VALIDATION_SUIVI_PROJET_AUTO = '1';
+    const SIGNATURE_VALIDATION_SUIVI_PROJET_FALSE = '0';
 
     protected function setDefaultValues() {
         
@@ -59,7 +61,7 @@ class FtaSuiviProjetModel extends AbstractModel {
      * @param type $paramIdFtaOrig
      * @param type $paramIdFtaNew
      */
-    public static function DuplicateFtaSuiviProjetByIdFta($paramIdFtaOrig, $paramIdFtaNew) {
+    public static function duplicateFtaSuiviProjetByIdFta($paramIdFtaOrig, $paramIdFtaNew) {
         DatabaseOperation::execute(
                 ' INSERT INTO ' . FtaSuiviProjetModel::TABLENAME
                 . ' (' . FtaSuiviProjetModel::FIELDNAME_COMMENTAIRE_SUIVI_PROJET
@@ -84,9 +86,9 @@ class FtaSuiviProjetModel extends AbstractModel {
     }
 
     /**
-     * 
-     * @param type $paramIdFta
-     * @param type $paramIdChapitre
+     * On obtient IdFtaSuivieProjet suivant l'idFta et le chapitre encours
+     * @param int $paramIdFta
+     * @param int $paramIdChapitre
      * @return array
      */
     static public function getIdFtaSuiviProjetByIdFtaAndIdChapitre($paramIdFta, $paramIdChapitre) {
@@ -272,7 +274,7 @@ class FtaSuiviProjetModel extends AbstractModel {
                                 $arrayMultisiteProcessus = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
                                                 'SELECT ' . FtaProcessusMultisiteModel::FIELDNAME_ID_SITE_PROCESSUS_FTA_PROCESSUS_MULTISITE
                                                 . ' FROM  ' . FtaProcessusMultisiteModel::TABLENAME
-                                                . ' WHERE ' . FtaProcessusMultisiteModel::FIELDNAME_ID_SITE_ASSEMBLAGE_FTA_PROCESSUS_MULTISITE . '=' . $modelFta->getDataField(FtaModel::FIELDNAME_SITE_ASSEMBLAGE)->getFieldValue()
+                                                . ' WHERE ' . FtaProcessusMultisiteModel::FIELDNAME_ID_SITE_ASSEMBLAGE_FTA_PROCESSUS_MULTISITE . '=' . $modelFta->getDataField(FtaModel::FIELDNAME_SITE_PRODUCTION)->getFieldValue()
                                                 . ' AND ' . FtaProcessusMultisiteModel::FIELDNAME_ID_PROCESSUS_FTA_PROCESSUS_MULTISITE . '=' . $rowsProcessus[FtaProcessusModel::KEYNAME]
                                 );
 
@@ -281,7 +283,7 @@ class FtaSuiviProjetModel extends AbstractModel {
                                         $site_gestionnaire = $rowsMultisiteProcessus[FtaProcessusMultisiteModel::FIELDNAME_ID_SITE_PROCESSUS_FTA_PROCESSUS_MULTISITE];
                                     }
                                 } else {
-                                    $site_gestionnaire = $modelFta->getDataField(FtaModel::FIELDNAME_SITE_ASSEMBLAGE)->getFieldValue();
+                                    $site_gestionnaire = $modelFta->getDataField(FtaModel::FIELDNAME_SITE_PRODUCTION)->getFieldValue();
                                 }
 
                                 $arraySalarieProcessusMulti = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
@@ -383,7 +385,7 @@ class FtaSuiviProjetModel extends AbstractModel {
         return $liste_user;
     }
 
-    static public function initFtaSuiviProjet($paramIdFta) {
+    public static function initFtaSuiviProjet($paramIdFta) {
 
         $ftaModel = new FtaModel($paramIdFta);
         $idFtaWorkflow = $ftaModel->getDataField(FtaModel::FIELDNAME_WORKFLOW)->getFieldValue();
@@ -433,77 +435,136 @@ class FtaSuiviProjetModel extends AbstractModel {
         }
     }
 
-    static public function initFtaSuiviProjetV2VersV3($paramIdFta, $paramIdFtaEtat, $paramCreateurFta) {
+    /**
+     * Suppression des chapitres de l'ancien espace de travail
+     * @param int $paramIdFta
+     * @param int $paramIdFtaWorkflowNew
+     */
+    public static function deleteOldChapitreFromOldWorkflow($paramIdFta, $paramIdFtaWorkflowNew) {
+        $arrayChapitreOLD = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
+                        ' SELECT ' . FtaSuiviProjetModel::KEYNAME
+                        . ' FROM ' . FtaSuiviProjetModel::TABLENAME
+                        . ' WHERE ' . FtaSuiviProjetModel::FIELDNAME_ID_FTA . '=' . $paramIdFta
+                        . ' AND ' . FtaSuiviProjetModel::KEYNAME . ' NOT IN ( SELECT ' . FtaSuiviProjetModel::KEYNAME
+                        . ' FROM ' . FtaWorkflowStructureModel::TABLENAME . ', ' . FtaSuiviProjetModel::TABLENAME
+                        . ' WHERE ' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_WORKFLOW
+                        . '=' . $paramIdFtaWorkflowNew
+                        . ' AND ' . FtaWorkflowStructureModel::TABLENAME . '.' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_CHAPITRE
+                        . '=' . FtaSuiviProjetModel::TABLENAME . '.' . FtaSuiviProjetModel::FIELDNAME_ID_FTA_CHAPITRE
+                        . ' AND ' . FtaSuiviProjetModel::FIELDNAME_ID_FTA . '=' . $paramIdFta . ')'
+        );
+        if ($arrayChapitreOLD) {
+            foreach ($arrayChapitreOLD as $rowsChapitreOLD) {
 
-        $arrayIdFtaWorkflow = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
-                        "SELECT DISTINCT " . FtaModel::FIELDNAME_WORKFLOW
-                        . " FROM intranet_v3_0_dev.fta "
-                        . " WHERE id_fta = " . $paramIdFta
+                DatabaseOperation::execute(
+                        'DELETE  FROM ' . FtaSuiviProjetModel::TABLENAME
+                        . ' WHERE ' . FtaSuiviProjetModel::KEYNAME . '=' . $rowsChapitreOLD[FtaSuiviProjetModel::KEYNAME]
+                );
+            }
+        }
+    }
+
+    /**
+     *  1/Etat validé:
+     *  Créer les nouveaux suivis de projet manquant pour l'esapce de travail destination
+     *  Signer les nouveaux chapitres automatiquement avec les identifiants de l'utilisateur ayant provoquer la changement d'espace.
+     *  Dans le commentaire des suivis de projet nouvellement créés, ajouter la mention "Changement de l'espace travail $WF_ORIGINE vers l'espace de travail $WF_DESTINATION par $USER le $DATE_$HEURE".
+     *  Supprimer les suivis de projet des chapitres n'appartenant plus à l'espace de travail destination.
+     * 2/Etat modifié:
+     *  Supprimer les suivis de projet des chapitres n'appartenant plus à l'espace de travail destination.
+     *  Créer les nouveaux suivis de projet manquant pour l'esapce de travail destination
+     * 3/Etat archivé / Etat retiré:
+     * Supprimer les suivis de projet des chapitres n'appartenant plus à l'espace de travail destination.
+     * Créer les nouveaux suivis de projet manquant pour l'esapce de travail destination
+     *  Dans le commentaire des suivis de projet nouvellement créés, ajouter la mention "Changement de l'espace travail $WF_ORIGINE vers l'espace de travail $WF_DESTINATION par $USER le $DATE_$HEURE".
+     * Signer tous chapitres non-signés automatiquement avec les identifiants de l'utilisateur ayant provoquer la changement d'espace.
+     * @param int $paramIdFta
+     * @param int $paramIdFtaWorkflowNew
+     * @param string $paramArbreviationFta
+     * @param int $paramIdUser
+     * @param string $paramCommentaire
+     */
+    public static function createNewChapitresFromNewWorkflow($paramIdFta, $paramIdFtaWorkflowNew, $paramArbreviationFta, $paramIdUser, $paramCommentaire) {
+        /**
+         * Initialisation des nouveau chapitres de l'espace de travail
+         */
+        $arrayChapitre = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
+                        'SELECT ' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_CHAPITRE
+                        . ', ' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_PROCESSUS
+                        . ' FROM ' . FtaWorkflowStructureModel::TABLENAME
+                        . ' WHERE ' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_WORKFLOW
+                        . '=' . $paramIdFtaWorkflowNew
         );
 
-        foreach ($arrayIdFtaWorkflow as $rowIdFtaWorkflow) {
-            $idFtaWorkflow = $rowIdFtaWorkflow[FtaModel::FIELDNAME_WORKFLOW];
-        }
-        if ($idFtaWorkflow) {
-            $arrayChapitre = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
-                            'SELECT ' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_CHAPITRE
-                            . ', ' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_PROCESSUS
-                            . ' FROM intranet_v3_0_dev.' . FtaWorkflowStructureModel::TABLENAME
-                            . ' WHERE ' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_WORKFLOW
-                            . '=' . $idFtaWorkflow
+        foreach ($arrayChapitre as $rowsChapitre) {
+            $arrayCheckIdSuiviProjet = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
+                            'SELECT ' . FtaSuiviProjetModel::KEYNAME
+                            . ' FROM ' . FtaSuiviProjetModel::TABLENAME
+                            . ' WHERE ' . FtaSuiviProjetModel::FIELDNAME_ID_FTA
+                            . '=' . $paramIdFta
+                            . ' AND ' . FtaSuiviProjetModel::FIELDNAME_ID_FTA_CHAPITRE
+                            . '=' . $rowsChapitre[FtaSuiviProjetModel::FIELDNAME_ID_FTA_CHAPITRE]
             );
-
-
-            foreach ($arrayChapitre as $rowsChapitre) {
-                $arrayCheckIdSuiviProjet = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
-                                'SELECT ' . FtaSuiviProjetModel::KEYNAME
-                                . ' FROM intranet_v3_0_dev.' . FtaSuiviProjetModel::TABLENAME
-                                . ' WHERE ' . FtaSuiviProjetModel::FIELDNAME_ID_FTA
-                                . '=' . $paramIdFta
-                                . ' AND ' . FtaSuiviProjetModel::FIELDNAME_ID_FTA_CHAPITRE
-                                . '=' . $rowsChapitre[FtaSuiviProjetModel::FIELDNAME_ID_FTA_CHAPITRE]
-                );
-                if (!$arrayCheckIdSuiviProjet) {
-                    if ($rowsChapitre[FtaWorkflowStructureModel::FIELDNAME_ID_FTA_PROCESSUS] == 0) {
-                        DatabaseOperation::execute(
-                                'INSERT INTO intranet_v3_0_dev.' . FtaSuiviProjetModel::TABLENAME
-                                . '(' . FtaSuiviProjetModel::FIELDNAME_ID_FTA
-                                . ', ' . FtaSuiviProjetModel::FIELDNAME_ID_FTA_CHAPITRE
-                                . ', ' . FtaSuiviProjetModel::FIELDNAME_SIGNATURE_VALIDATION_SUIVI_PROJET
-                                . ') VALUES (' . $paramIdFta
-                                . ', ' . $rowsChapitre[FtaWorkflowStructureModel::FIELDNAME_ID_FTA_CHAPITRE]
-                                . ', 1 )'
-                        );
-                    } else {
-                        switch ($paramIdFtaEtat) {
-                            case '1':
-                                DatabaseOperation::execute(
-                                        'INSERT INTO intranet_v3_0_dev.' . FtaSuiviProjetModel::TABLENAME
-                                        . '(' . FtaSuiviProjetModel::FIELDNAME_ID_FTA
-                                        . ', ' . FtaSuiviProjetModel::FIELDNAME_ID_FTA_CHAPITRE
-                                        . ', ' . FtaSuiviProjetModel::FIELDNAME_SIGNATURE_VALIDATION_SUIVI_PROJET
-                                        . ') VALUES (' . $paramIdFta
-                                        . ', ' . $rowsChapitre[FtaWorkflowStructureModel::FIELDNAME_ID_FTA_CHAPITRE]
-                                        . ', 0 )'
-                                );
-                                break;
-                            case '3':
-                            case '5':
-                            case '6':
-                                DatabaseOperation::execute(
-                                        'INSERT INTO intranet_v3_0_dev.' . FtaSuiviProjetModel::TABLENAME
-                                        . '(' . FtaSuiviProjetModel::FIELDNAME_ID_FTA
-                                        . ', ' . FtaSuiviProjetModel::FIELDNAME_ID_FTA_CHAPITRE
-                                        . ', ' . FtaSuiviProjetModel::FIELDNAME_SIGNATURE_VALIDATION_SUIVI_PROJET
-                                        . ') VALUES (' . $paramIdFta
-                                        . ', ' . $rowsChapitre[FtaWorkflowStructureModel::FIELDNAME_ID_FTA_CHAPITRE]
-                                        . ', ' . $paramCreateurFta . ' )'
-                                );
-                                break;
-                        }
-                    }
+            if (!$arrayCheckIdSuiviProjet) {
+                if ($rowsChapitre[FtaWorkflowStructureModel::FIELDNAME_ID_FTA_PROCESSUS] == 0) {
+                    DatabaseOperation::execute(
+                            'INSERT INTO ' . FtaSuiviProjetModel::TABLENAME
+                            . '(' . FtaSuiviProjetModel::FIELDNAME_ID_FTA
+                            . ', ' . FtaSuiviProjetModel::FIELDNAME_ID_FTA_CHAPITRE
+                            . ', ' . FtaSuiviProjetModel::FIELDNAME_SIGNATURE_VALIDATION_SUIVI_PROJET
+                            . ') VALUES (' . $paramIdFta
+                            . ', ' . $rowsChapitre[FtaWorkflowStructureModel::FIELDNAME_ID_FTA_CHAPITRE]
+                            . ', 1 )'
+                    );
+                } elseif ($paramArbreviationFta <> FtaEtatModel::ETAT_ABREVIATION_VALUE_MODIFICATION) {
+                    DatabaseOperation::execute(
+                            "INSERT INTO " . FtaSuiviProjetModel::TABLENAME
+                            . "(" . FtaSuiviProjetModel::FIELDNAME_ID_FTA
+                            . ", " . FtaSuiviProjetModel::FIELDNAME_COMMENTAIRE_SUIVI_PROJET
+                            . ", " . FtaSuiviProjetModel::FIELDNAME_ID_FTA_CHAPITRE
+                            . ", " . FtaSuiviProjetModel::FIELDNAME_SIGNATURE_VALIDATION_SUIVI_PROJET
+                            . ") VALUES (" . $paramIdFta
+                            . ", " . "\"" . $paramCommentaire . "\""
+                            . ", " . $rowsChapitre[FtaWorkflowStructureModel::FIELDNAME_ID_FTA_CHAPITRE]
+                            . ", " . $paramIdUser . " )"
+                    );
+                } elseif ($paramArbreviationFta == FtaEtatModel::ETAT_ABREVIATION_VALUE_MODIFICATION) {
+                    DatabaseOperation::execute(
+                            'INSERT INTO ' . FtaSuiviProjetModel::TABLENAME
+                            . '(' . FtaSuiviProjetModel::FIELDNAME_ID_FTA
+                            . ', ' . FtaSuiviProjetModel::FIELDNAME_ID_FTA_CHAPITRE
+                            . ', ' . FtaSuiviProjetModel::FIELDNAME_SIGNATURE_VALIDATION_SUIVI_PROJET
+                            . ') VALUES (' . $paramIdFta
+                            . ', ' . $rowsChapitre[FtaWorkflowStructureModel::FIELDNAME_ID_FTA_CHAPITRE]
+                            . ', 0 )'
+                    );
                 }
             }
+        }
+        switch ($paramArbreviationFta) {
+            case FtaEtatModel::ETAT_ABREVIATION_VALUE_ARCHIVE:
+            case FtaEtatModel::ETAT_ABREVIATION_VALUE_RETIRE:
+                $arrayIdSuiviProjet = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
+                                ' SELECT ' . FtaSuiviProjetModel::KEYNAME
+                                . ' FROM ' . FtaWorkflowStructureModel::TABLENAME . ', ' . FtaSuiviProjetModel::TABLENAME
+                                . ' WHERE ' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_WORKFLOW
+                                . '=' . $paramIdFtaWorkflowNew
+                                . ' AND ' . FtaWorkflowStructureModel::TABLENAME . '.' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_CHAPITRE
+                                . '=' . FtaSuiviProjetModel::TABLENAME . '.' . FtaSuiviProjetModel::FIELDNAME_ID_FTA_CHAPITRE
+                                . ' AND ' . FtaSuiviProjetModel::FIELDNAME_ID_FTA . '=' . $paramIdFta
+                                . ' AND ' . FtaSuiviProjetModel::FIELDNAME_SIGNATURE_VALIDATION_SUIVI_PROJET . '=0'
+                );
+                if ($arrayIdSuiviProjet) {
+                    foreach ($arrayIdSuiviProjet as $rowsIdSuiviProjet) {
+                        DatabaseOperation::execute(
+                                "UPDATE  " . FtaSuiviProjetModel::TABLENAME
+                                . " SET " . FtaSuiviProjetModel::FIELDNAME_SIGNATURE_VALIDATION_SUIVI_PROJET . " = " . $paramIdUser
+                                . ", " . FtaSuiviProjetModel::FIELDNAME_COMMENTAIRE_SUIVI_PROJET . " = " . "\"" . $paramCommentaire . "\""
+                                . " WHERE " . FtaSuiviProjetModel::KEYNAME . ' = ' . $rowsIdSuiviProjet[FtaSuiviProjetModel::KEYNAME]
+                        );
+                    }
+                }
+                break;
         }
     }
 
@@ -595,7 +656,12 @@ class FtaSuiviProjetModel extends AbstractModel {
         }
     }
 
-    public static function getFtaTauxValidation($paramFtaModel, $paramTableauProcessus) {
+    public static function getPourcentageFtaTauxValidation($paramFtaModel) {
+        $tauxTemp = FtaSuiviProjetModel::getArrayFtaTauxValidation($paramFtaModel, FALSE);
+        return round($tauxTemp[0] * 100, 0) . "%";
+    }
+
+    public static function getArrayFtaTauxValidation($paramFtaModel, $paramTableauProcessus) {
 
 //Dictionnaire des données
         $return['0'];     //Pourcentage globale de la validation

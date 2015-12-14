@@ -23,7 +23,7 @@ $paramUserCatsopro = Lib::getParameterFromRequest('sal_catsopro');
 $paramDateCreationUser = Lib::getParameterFromRequest(UserModel::TABLENAME . '_' . UserModel::FIELDNAME_DATE_CREATION_SALARIES . '_' . $idUser);
 $paramUserMail = Lib::getParameterFromRequest('sal_mail');
 $paramModifier = Lib::getParameterFromRequest('modifier');
-identification1('salaries', $id_user, $pass,FALSE);
+identification1('salaries', $id_user, $pass, FALSE);
 
 
 /*
@@ -59,7 +59,6 @@ if ($paramModifier == 'modifier') {
 //                    . ' FROM ' . ServicesModel::TABLENAME
 //                    . ' ORDER BY ' . ServicesModel::KEYNAME
 //    );
-
 //    if ($arrayService) {
 //
 //        foreach ($arrayService as $rowsService) {
@@ -127,6 +126,7 @@ if ($paramModifier == 'modifier') {
         }
         $niveau_intranet_droits_acces = Lib::getParameterFromRequest($nom_niveau_intranet_droits_acces);
 
+
         /*
          * Enregistrement/Suppression du droit d'accès
          */
@@ -153,6 +153,26 @@ if ($paramModifier == 'modifier') {
                     . ', ' . IntranetDroitsAccesModel::FIELDNAME_ID_INTRANET_ACTIONS . '=' . $id_intranet_actions
                     . ', ' . IntranetDroitsAccesModel::FIELDNAME_NIVEAU_INTRANET_DROITS_ACCES . '=' . $niveau_intranet_droits_acces
             );
+        }
+    }
+
+    /**
+     * Post-traitement
+     * Vérification et correction des incohérences de droits d'accès.
+     */
+    Acl::checkHeritedRightsRemovedByUser($paramIdUser);
+
+    //Propagation de la suppresion des droits d'accès sur les actions héritées
+    $arrayParentAction = Acl::getArrayIdParentActionByIntranetModule(); // SQL SELECT parent_intranet_actions FROM `intranet_actions` WHERE parent_intranet_actions IS NOT NULL  GROUP BY `parent_intranet_actions`
+    foreach ($arrayParentAction as $IdIntranetModule => $IdIntranetAction) {
+
+        //L'utilisateur a-t-il le doit sur cet id_intranet_action pour cet id_intranet_module ?
+        $isUserHaveRight = Acl::$isUserHaveRight($user, $module, $action);
+
+        //Si il n'a pas les accès, alors, 
+        if ($isUserHaveRight == FALSE) {
+            //Nettoyage des accès sur toutes les actions liées
+            Acl::$eraseUserRightOnIntranetAction($user, $module, $action); //SQL DELETE liaison entre droits.action = action.parent  pour ce user et ce module
         }
     }
 }
@@ -191,10 +211,10 @@ if ($paramModifier == 'supprimer') {
     </head>
 
     <body onLoad='StartTimer(<?php
-    $time = timeout($id_user);
-    echo $time;
-    ?>)' bgcolor='#FFCC66' text='#000000' leftmargin='0' topmargin='0' marginwidth='0' marginheight='0'>
-              <?php
+$time = timeout($id_user);
+echo $time;
+?>)' bgcolor='#FFCC66' text='#000000' leftmargin='0' topmargin='0' marginwidth='0' marginheight='0'>
+          <?php
               include ('cadrehautent.php');
               ?>
         <form name='rechnom' method='post' action='gestion_salaries22.php'>
@@ -236,7 +256,7 @@ if ($paramModifier == 'supprimer') {
                                                         . ', ' . UserModel::FIELDNAME_PRENOM
                                                         . ' FROM ' . UserModel::TABLENAME
                                                         . ' WHERE ' . UserModel::FIELDNAME_ACTIF . '=\'oui\''
-                                                        . ' ORDER BY ' . UserModel::FIELDNAME_NOM   . ',' . UserModel::FIELDNAME_PRENOM
+                                                        . ' ORDER BY ' . UserModel::FIELDNAME_NOM . ',' . UserModel::FIELDNAME_PRENOM
                                         );
                                         if ($arrayIdUser) {
                                             foreach ($arrayIdUser as $rowIdUser) {

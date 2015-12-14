@@ -1314,7 +1314,7 @@ class AccueilFta {
                 $bgcolor_header = NULL;
             }
         } else {
-            $tableauFiche .= '<tr class=contenu><td>Aucune Fta identifié</td></tr>';
+            $tableauFiche .= '<tr class=contenu><td>' . UserInterfaceMessage::FR_NONE_FTA . '</td></tr>';
         }
 
         $tableauFicheN2.= $tableauFicheNWork . $tableauFicheN;

@@ -21,7 +21,7 @@ $paramRech = Lib::getParameterFromRequest('rech');
 $userModel = new UserModel($paramIdUser);
 $userView = new UserView($userModel);
 $userView->setIsEditable(TRUE);
-identification1('salaries', $login, $pass,FALSE);
+identification1('salaries', $login, $pass, FALSE);
 if ($paramRech == '1') {
     /* Recherche des infos sur le salarie */
     $arrayUserDetail = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
@@ -224,7 +224,8 @@ if ($paramRech == '1') {
                                         <?php
                                         /*                                         * ***************************************************
                                           Construction des droits d'accès pour tous les modules:
-                                         * ***************************Boris Sanègre 2003.03.25 */
+                                         * ***************************Boris Sanègre  2003.03.25 
+                                         * ***************************Franck Amofa 2015.08.07 */
                                         // require ('droits_acces.inc');  
                                         IntranetDroitsAccesModel::BuildHtmlDroitsAcces($paramIdUser);
                                         ?>

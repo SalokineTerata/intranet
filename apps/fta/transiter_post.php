@@ -84,7 +84,7 @@ if (!$action) {
             or substr($new_commentaire_maj_fta, 0, 1) == ' '
             )
             and
-            $abreviation_fta_transition <> 'V'
+            $abreviation_fta_transition <> FtaEtatModel::ETAT_ABREVIATION_VALUE_VALIDE
     ) {
         $titre = 'Informations manquantes';
         $message = 'Vous devez spécifier un commentaire sur la mise à jour.';
@@ -94,7 +94,7 @@ if (!$action) {
 
     //Tableau des chapitres
     //echo $action;
-    if ($action == 'I' or $action == 'W') {
+    if ($action == FtaEtatModel::ETAT_ABREVIATION_VALUE_MODIFICATION or $action == 'W') {
         $arrayChapitre = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
                         'SELECT ' . FtaChapitreModel::KEYNAME
                         . ' FROM ' . FtaChapitreModel::TABLENAME
@@ -131,7 +131,7 @@ if (!$action) {
             //   1: FTA non transité car risque de doublon
             //   3: Erreur autre
 
-            if ($abreviation_fta_transition == 'V') { //Seules les FTA validées entrent dans un système de diffusion
+            if ($abreviation_fta_transition == FtaEtatModel::ETAT_ABREVIATION_VALUE_VALIDE) { //Seules les FTA validées entrent dans un système de diffusion
                 switch ($t["0"]) {
                     case 0:
                         //Récupération de la liste diffusion
@@ -166,7 +166,7 @@ if (!$action) {
             }//Fin de la diffusion des FTA Validée
         }//Fin du parcours de la selection des FTA
         //Envoi du mail global d'information (uniquement pour les FTA Validée
-        if (!$envoi_mail_detail and $abreviation_fta_transition == 'V') {
+        if (!$envoi_mail_detail and $abreviation_fta_transition == FtaEtatModel::ETAT_ABREVIATION_VALUE_VALIDE) {
             $selection_fta;
             $liste_diffusion = $liste_global;
             $commentaire = $new_commentaire_maj_fta;
@@ -175,7 +175,7 @@ if (!$action) {
 
 
         //Lancement de la passerelle de synchronisation
-        if ($abreviation_fta_transition == 'V') {
+        if ($abreviation_fta_transition == FtaEtatModel::ETAT_ABREVIATION_VALUE_VALIDE) {
 //            //Ouverture de la base ERP Data sync
 //            if ($globalConfig->getConf()->getExecEnvironment() != EnvironmentConf::ENV_PRD) {
 //                $extension = 'mdb';
@@ -185,7 +185,7 @@ if (!$action) {
 //            $open_erpdatasync = '../access/base_erp_datasync/erp_datasync.' . $extension;
 //            header('Location: open_erpdatasync.php?open_erpdatasync=' . $open_erpdatasync);
             header('Location: index.php');
-        } elseif ($abreviation_fta_transition == 'I') {
+        } elseif ($abreviation_fta_transition == FtaEtatModel::ETAT_ABREVIATION_VALUE_MODIFICATION) {
             if ($t["0"] <> "1") {
                 header('Location: modification_fiche.php?id_fta=' . $t["id_fta_new"] . '&synthese_action=encours&comeback=1&id_fta_etat=' . $t[FtaEtatModel::KEYNAME] . '&abreviation_fta_etat=' . $t[FtaEtatModel::FIELDNAME_ABREVIATION] . '&id_fta_role=' . $idFtaRole);
 

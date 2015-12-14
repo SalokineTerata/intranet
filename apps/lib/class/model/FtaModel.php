@@ -104,6 +104,7 @@ class FtaModel extends AbstractModel {
     const MESSAGE_DATA_VALIDATION_CLASSIFICATION = UserInterfaceMessage::FR_WARNING_DATA_CLASIFICATION;
     const MESSAGE_DATA_VALIDATION_CODE_LDC = UserInterfaceMessage::FR_WARNING_DATA_VALIDATION_FTA_CODE_LDC;
     const MESSAGE_DATA_VALIDATION_DATE_ECHEANCE = UserInterfaceMessage::FR_WARNING_DATA_DATE_ECHEANCE;
+    const MESSAGE_DATA_VALIDATION_DATE_ECHEANCE_INCOHERENCE = UserInterfaceMessage::FR_WARNING_DATA_DATE_ECHEANCE_INCOHERENCE;
 
     /**
      * Utilisateur ayant créé la FTA
@@ -224,16 +225,37 @@ class FtaModel extends AbstractModel {
      * @return boolean
      */
     private function checkDataValidationDateEcheance() {
-        $return = TRUE;
+        $return = TRUE;      
 
-        if (!$this->getDataField(FtaModel::FIELDNAME_DATE_ECHEANCE_FTA)->getFieldValue() or $this->getDataField(FtaModel::FIELDNAME_DATE_ECHEANCE_FTA)->getFieldValue() == self::CHECK_DATE_ECHANCE) {
-            $newErrorMessage = self::MESSAGE_DATA_VALIDATION_DATE_ECHEANCE;
-            $return = "1";
-        } else {
-            $return = "0";
+        switch (TRUE) {
+            /**
+             * Si aucune date d'échance est renseigné, erreur
+             */
+            case!$this->getDataField(FtaModel::FIELDNAME_DATE_ECHEANCE_FTA)->getFieldValue():
+
+            /**
+             * Si la date d'échacne est égal à 0000-00-00, erreur
+             */
+            case $this->getDataField(FtaModel::FIELDNAME_DATE_ECHEANCE_FTA)->getFieldValue() == self::CHECK_DATE_ECHANCE:
+                $return = "1";
+                $newErrorMessage = self::MESSAGE_DATA_VALIDATION_DATE_ECHEANCE;
+
+                break;
+            /**
+             * Si la date d'échance est infèrieur à la date d'aujourd'hui , erreur
+             */
+            case $this->getDataField(FtaModel::FIELDNAME_DATE_ECHEANCE_FTA)->getFieldValue() < date("Y-m-d"):
+                $return = "1";
+                $newErrorMessage = self::MESSAGE_DATA_VALIDATION_DATE_ECHEANCE_INCOHERENCE;
+
+                break;
+
+            default :
+
+                $return = "0";
+
+                break;
         }
-
-
         if ($return != "0") {
             //Ajout de la raison de l'echec du contrôle dans le message d'information utilisateur.
             $this->addMessageErreurDataValidation($newErrorMessage);

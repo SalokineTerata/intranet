@@ -126,12 +126,6 @@ echo "DROP ".$nameOfBDDTarget.".geo ...";
 $sql = "DROP TABLE ".$nameOfBDDTarget.".geo";
 if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
 
-$sql = "INSERT INTO `".$nameOfBDDTarget."`.`geo` "
-        . "(`id_geo`, `geo`, `lettre`, `libelle_site_agis`,`tag_application_geo`,`site_actif`) "
-        . "VALUES ('-1', 'Site Non définie', 'NON', 'SITE NON DEFINIE', 'fta', '0'); ";       
-if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
-echo "INSERT INTO ".$nameOfBDDTarget.".geo Site Non définie ...";
-
 echo "CREATE TABLE ".$nameOfBDDTarget.".geo ...";
 $sql = "CREATE TABLE ".$nameOfBDDTarget.".geo LIKE ".$nameOfBDDStructure.".geo";
 if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
@@ -139,6 +133,12 @@ if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
 echo "INSERT INTO ".$nameOfBDDTarget.".geo ...";
 $sql = "INSERT INTO ".$nameOfBDDTarget.".geo SELECT * FROM ".$nameOfBDDOrigin.".geo";
 if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+$sql = "INSERT INTO ".$nameOfBDDTarget.".geo "
+        . "(`id_geo`, `geo`, `lettre`, `libelle_site_agis`,`tag_application_geo`,`site_actif`) "
+        . " VALUES ('-1', 'Site Non définie', 'NON', 'SITE NON DEFINIE', 'fta', '0'); ";       
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+echo "INSERT INTO ".$nameOfBDDTarget.".geo Site Non définie ...";
 
 echo "DROP ".$nameOfBDDTarget.".geo_codesoft ...";
 $sql = "DROP TABLE ".$nameOfBDDTarget.".geo_codesoft";

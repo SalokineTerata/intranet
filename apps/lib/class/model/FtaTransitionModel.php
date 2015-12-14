@@ -380,7 +380,7 @@ class FtaTransitionModel {
                         . " AND " . IntranetDroitsAccesModel::TABLENAME . "." . IntranetDroitsAccesModel::FIELDNAME_ID_INTRANET_ACTIONS
                         . " = " . IntranetActionsModel::TABLENAME . "." . IntranetActionsModel::KEYNAME      //Liaison
                         . " AND " . IntranetDroitsAccesModel::TABLENAME . "." . IntranetDroitsAccesModel::FIELDNAME_NIVEAU_INTRANET_DROITS_ACCES . " = " . IntranetNiveauAccesModel::NIVEAU_GENERIC_TRUE
-                        . ' AND ( 0 ' . IntranetActionsModel::AddIdIntranetAction($IdIntranetActions) . ')'
+                        . ' AND ( 0 ' . IntranetActionsModel::addIdIntranetAction($IdIntranetActions) . ')'
 
 
                 ;

@@ -326,7 +326,7 @@ class DatabaseDescription {
                         . ',fields_to_lock'
                         . ',fields_to_order'
                         . ',right_to_add'
-                        . ',condition_sql'
+                        . ',sql_condition_content_intranet_column_info'
                         . ' FROM `intranet_column_info` ');
         /**
          * Parcours du résultat de la recherche
@@ -354,7 +354,7 @@ class DatabaseDescription {
             $fieldsToLock = $rowsDoc['fields_to_lock'];
             $fieldsToOrder = $rowsDoc['fields_to_order'];
             $rightToAdd = $rowsDoc['right_to_add'];
-            $conditionSql = $rowsDoc['condition_sql'];
+            $conditionSql = $rowsDoc['sql_condition_content_intranet_column_info'];
 
 
             /**

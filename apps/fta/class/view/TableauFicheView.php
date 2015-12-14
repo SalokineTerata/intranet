@@ -87,7 +87,7 @@ class TableauFicheView {
         /**
          * On obtient IdintranetAction du site de production
          */
-        $idIntranetActionsSiteDeProduction = FtaActionSiteModel::getIdIntranetActionByWorkflowAndSiteDeProduction($idWorkflowFtaEncours, $idSiteDeProduction);
+        $idIntranetActionsSiteDeProduction = FtaActionSiteModel::getArrayIdIntranetActionByWorkflowAndSiteDeProduction($idWorkflowFtaEncours, $idSiteDeProduction);
         /**
          * On verifie si selon le workflow  et site de production en cours l'utilisateur connecté à les droits d'accès.
          * Puisqu'un utilisateur ne doit pas avoir accès aux boutons :

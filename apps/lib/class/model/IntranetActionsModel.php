@@ -236,10 +236,8 @@ class IntranetActionsModel extends AbstractModel {
                         . ' AND ' . IntranetActionsModel::TABLENAME . '.' . IntranetActionsModel::FIELDNAME_PARENT_INTRANET_ACTIONS
                         . '=' . FtaWorkflowModel::TABLENAME . '.' . FtaWorkflowModel::FIELDNAME_ID_INTRANET_ACTIONS
                         . ' AND ' . FtaWorkflowModel::TABLENAME . '.' . FtaWorkflowModel::KEYNAME . '=' . $paramIdFtaWorkflow // L'utilisateur connecté
-        );
-        if ($paramIdIntranetActionSiteDeProduction != GeoModel::SITE_NON_DEFINI) {
-            $arrayAcl .= ' AND ( 0 ' . IntranetActionsModel::AddIdIntranetAction($paramIdIntranetActionSiteDeProduction) . ')';
-        }
+                        . ' AND ( 0 ' . IntranetActionsModel::AddIdIntranetAction($paramIdIntranetActionSiteDeProduction) . ')');
+
 
         return $arrayAcl;
     }

@@ -24,14 +24,19 @@ class FtaActionSiteModel extends AbstractModel {
      * @param int $paramIdFtaSiteDeProduction
      * @return array
      */
-    public static function getIdIntranetActionByWorkflowAndSiteDeProduction($paramIdFtaWorkflow, $paramIdFtaSiteDeProduction) {
+    public static function getArrayIdIntranetActionByWorkflowAndSiteDeProduction($paramIdFtaWorkflow, $paramIdFtaSiteDeProduction) {
 
-        $array = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
-                        'SELECT ' . FtaActionSiteModel::FIELDNAME_ID_INTRANET_ACTIONS
-                        . ' FROM ' . FtaActionSiteModel::TABLENAME
-                        . ' WHERE ' . FtaActionSiteModel::FIELDNAME_ID_FTA_WORKFLOW . '=' . $paramIdFtaWorkflow
-                        . ' AND ' . FtaActionSiteModel::FIELDNAME_ID_SITE . '=' . $paramIdFtaSiteDeProduction
-        );
+
+        $req = 'SELECT ' . FtaActionSiteModel::FIELDNAME_ID_INTRANET_ACTIONS
+                . ' FROM ' . FtaActionSiteModel::TABLENAME
+                . ' WHERE ' . FtaActionSiteModel::FIELDNAME_ID_FTA_WORKFLOW . '=' . $paramIdFtaWorkflow;
+        /**
+         * on ne verifie que l'espace de travail pour les site non défiie
+         */
+        if ($paramIdFtaSiteDeProduction != GeoModel::ID_SITE_NON_DEFINIE) {
+            $req.= ' AND ' . FtaActionSiteModel::FIELDNAME_ID_SITE . '=' . $paramIdFtaSiteDeProduction;
+        } 
+        $array = DatabaseOperation::convertSqlStatementWithoutKeyToArray($req);
         if ($array) {
             foreach ($array as $value) {
                 $idIntranetActions[] = $value[FtaActionSiteModel::FIELDNAME_ID_INTRANET_ACTIONS];

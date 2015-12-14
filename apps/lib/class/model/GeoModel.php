@@ -31,6 +31,7 @@ class GeoModel extends AbstractModel {
     const FIELDNAME_NOM_DNS_COMPLET = 'nom_dns_complet';
     const FIELDNAME_K_SOCIETE = 'k_societe';
     const FIELDNAME_TAG_APPLICATION_GEO = 'tag_application_geo';
+    const ID_SITE_NON_DEFINIE = '-1';
 
     public function __construct($paramId = NULL, $paramIsCreateRecordsetInDatabaseIfKeyDoesntExist = AbstractModel::DEFAULT_IS_CREATE_RECORDSET_IN_DATABASE_IF_KEY_DOESNT_EXIST) {
         parent::__construct($paramId, $paramIsCreateRecordsetInDatabaseIfKeyDoesntExist);
@@ -62,12 +63,12 @@ class GeoModel extends AbstractModel {
     /**
      * Affiche la liste des site de production pour lesquel l'utilisateur connecté à les droits d'accès
      * @param int $paramIdUser
-     * @param objet $paramObjet
+     * @param HtmlListSelectTagName $paramObjet
      * @param boolean $paramIsEditable
      * @param int $paramIdDefault
      * @return string
      */
-    public static function ShowListeDeroulanteSiteProdByAcces($paramIdUser, $paramObjet, $paramIsEditable, $paramIdDefault) {
+    public static function ShowListeDeroulanteSiteProdByAcces($paramIdUser,HtmlListSelectTagName $paramObjet, $paramIsEditable, $paramIdDefault) {
         $arraySite = DatabaseOperation::convertSqlStatementWithKeyAndOneFieldToArray(
                         'SELECT DISTINCT ' . GeoModel::KEYNAME . ',' . GeoModel::FIELDNAME_GEO
                         . ' FROM ' . GeoModel::TABLENAME
@@ -99,13 +100,13 @@ class GeoModel extends AbstractModel {
     /**
      * Affiche la liste des site de production pour lesquel l'utilisateur connecté à les droits d'accès 
      * et l'identifiant de la Fta en cours
-     * @param type $paramIdUser
-     * @param type $paramHtmlObjet
-     * @param type $paramIsEditable
-     * @param type $paramIdFta
-     * @return type
+     * @param int $paramIdUser
+     * @param HtmlListSelect $paramHtmlObjet
+     * @param boolean $paramIsEditable
+     * @param int $paramIdFta
+     * @return string
      */
-    public static function ShowListeDeroulanteSiteProdByAccesAndIdFta($paramIdUser, $paramHtmlObjet, $paramIsEditable, $paramIdFta) {
+    public static function ShowListeDeroulanteSiteProdByAccesAndIdFta($paramIdUser, HtmlListSelect $paramHtmlObjet, $paramIsEditable, $paramIdFta) {
 
         /**
          * Modification

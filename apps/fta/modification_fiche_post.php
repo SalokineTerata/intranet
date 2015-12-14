@@ -123,10 +123,10 @@ switch ($action) {
         $idFtaWorkflowStruture = FtaWorkflowStructureModel::getIdFtaWorkflowStructureByIdFtaAndIdChapitre($paramIdFta, $paramIdFtaChapitreEncours);
         $modelFtaWorkflowStruture = new FtaWorkflowStructureModel($idFtaWorkflowStruture);
 
-//        $isFtaDataValidationSuccess = $modelFta->isFtaDataValidationSuccess();
+        $isFtaDataValidationSuccess = $modelFta->isFtaDataValidationSuccess();
 
-//        if ($paramSignatureValidationSuiviProjet and $isFtaDataValidationSuccess == TRUE) {
-        if ($paramSignatureValidationSuiviProjet ) {
+
+        if ($paramSignatureValidationSuiviProjet and $isFtaDataValidationSuccess == "0") {
             $modelFtaSuiviProjet->setSigned($paramSignatureValidationSuiviProjet);
             $modelFtaSuiviProjet->getDataField(FtaSuiviProjetModel::FIELDNAME_DATE_VALIDATION_SUIVI_PROJET)->setFieldValue(date("Y-m-d"));
         }
@@ -261,7 +261,7 @@ switch ($action) {
 //        }
 //        $id_fta_chapitre = $paramIdFtaChapitreEncours;
         if (!$paramSignatureValidationSuiviProjet) {
-            $paramSignatureValidationSuiviProjet = 0;
+            $paramSignatureValidationSuiviProjet = FtaSuiviProjetModel::SIGNATURE_VALIDATION_SUIVI_PROJET_FALSE;
         }
 //        $table = 'fta_suivi_projet';
 //        mysql_table_operation($table, $operation);
@@ -277,9 +277,10 @@ switch ($action) {
         }
 
 //Nom de l'étiquette par défaut si on enregistre sur le chapitre Gestion des articles (cf. table fta_chapitre)
-        if (($modelFta->getDataField(FtaModel::FIELDNAME_LIBELLE_CLIENT)->getFieldValue() == null) and ( $nom_fta_chapitre == 'activation_article')) {
-            $modelFta->getDataField(FtaModel::FIELDNAME_LIBELLE_CLIENT)->setFieldValue($modelFta->getDataField(FtaModel::FIELDNAME_LIBELLE)->getFieldValue());
-        }
+//        if (($modelFta->getDataField(FtaModel::FIELDNAME_LIBELLE_CLIENT)->getFieldValue() == null) and ( $nom_fta_chapitre == 'activation_article')) {
+//            $modelFta->getDataField(FtaModel::FIELDNAME_LIBELLE_CLIENT)->setFieldValue($modelFta->getDataField(FtaModel::FIELDNAME_LIBELLE)->getFieldValue());
+//        }
+        $modelFta->saveToDatabase();
 //        $table = 'fta';
 //        $operation = 'update';
 //        mysql_table_operation($table, $operation);
@@ -292,33 +293,6 @@ switch ($action) {
 //            afficher_message($titre, $message, $redirection);
 //            $erreur = 1;
 //        }
-//Cohérence du Code LDC
-// ************** GESTION MULTI PCB POUR MEME CODE GROUPE
-        if ($modelFta->getDataField(FtaModel::FIELDNAME_CODE_ARTICLE_LDC)->getFieldValue() and ModuleConfig::CODE_LDC_UNIQUE) {
-            //if($code_article_ldc and false)
-            $arrayCoherenceLDC = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
-                            'SELECT ' . FtaModel::TABLENAME . '.' . FtaModel::KEYNAME
-                            . ' FROM ' . FtaModel::TABLENAME . ',' . FtaEtatModel::TABLENAME
-                            . ' WHERE ' . FtaModel::TABLENAME . '.' . FtaModel::FIELDNAME_DOSSIER_FTA . ' <> \'' . $modelFta->getDataField(FtaModel::FIELDNAME_DOSSIER_FTA)->getFieldValue() . '\' '
-                            . ' AND ' . FtaModel::TABLENAME . '.' . FtaModel::FIELDNAME_CODE_ARTICLE_LDC . ' = \'' . $modelFta->getDataField(FtaModel::FIELDNAME_CODE_ARTICLE_LDC)->getFieldValue() . '\' '
-                            . ' AND ' . FtaEtatModel::TABLENAME . '.' . FtaEtatModel::KEYNAME . '=' . FtaModel::TABLENAME . '.' . FtaModel::FIELDNAME_ID_FTA_ETAT
-                            . ' AND ' . FtaEtatModel::FIELDNAME_ABREVIATION . '<>\'R\' '
-            );
-
-
-            if ($arrayCoherenceLDC) {//Si le code est déjà affecté à une autre FTA, on informe, et on suppime l'affectation sur la FTA en cours
-                foreach ($arrayCoherenceLDC as $rowsCoherenceLDC) {
-                    $titre = 'Code Article déjà affecté';
-                    $message = 'Attention, le code LDC est déjà affecté à la FTA n°' . $rowsCoherenceLDC[FtaModel::KEYNAME] . '<br>'
-                            . 'Votre code ne sera pas enregistré.'
-                    ;
-                    afficher_message($titre, $message, $redirection);
-                    $modelFta->getDataField(FtaModel::FIELDNAME_CODE_ARTICLE_LDC)->setFieldValue(null);
-                    $erreur = 1;
-                }
-            }
-        }
-
 //Cohérence du Code Agrologic
 //        if ($modelFta->getDataField(FtaModel::FIELDNAME_ARTICLE_AGROLOGIC)->getFieldValue()) {
 //            $arrayCoherenceCodeAgro = DatabaseOperation::convertSqlStatementWithoutKeyToArray(

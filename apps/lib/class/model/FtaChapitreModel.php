@@ -97,11 +97,11 @@ class FtaChapitreModel extends AbstractModel {
         $newCorrectionFtaSuiviProjet = str_replace("<br/>", "\n", $newCorrectionFtaSuiviProjet);
 
         //Dévalidation du chapitre en cours
-        $reqDevelidationChapitre = ' UPDATE ' . FtaSuiviProjetModel::TABLENAME
-                . ' SET ' . FtaSuiviProjetModel::FIELDNAME_SIGNATURE_VALIDATION_SUIVI_PROJET . '=0, '
-                . FtaSuiviProjetModel::FIELDNAME_CORRECTION_FTA_SUIVI_PROJET . '=\'' . $newCorrectionFtaSuiviProjet . '\' '
-                . ' WHERE ' . FtaModel::KEYNAME . '=' . $paramIdFta
-                . ' AND ' . FtaSuiviProjetModel::FIELDNAME_ID_FTA_CHAPITRE . '=' . $paramIdChapitre
+        $reqDevelidationChapitre = " UPDATE " . FtaSuiviProjetModel::TABLENAME
+                . " SET " . FtaSuiviProjetModel::FIELDNAME_SIGNATURE_VALIDATION_SUIVI_PROJET . "=0, "
+                . FtaSuiviProjetModel::FIELDNAME_CORRECTION_FTA_SUIVI_PROJET . "=\"" . $newCorrectionFtaSuiviProjet . "\" "
+                . " WHERE " . FtaModel::KEYNAME . "=" . $paramIdFta
+                . " AND " . FtaSuiviProjetModel::FIELDNAME_ID_FTA_CHAPITRE . "=" . $paramIdChapitre
         ;
         DatabaseOperation::execute($reqDevelidationChapitre);
 

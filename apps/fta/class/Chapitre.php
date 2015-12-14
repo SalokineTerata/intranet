@@ -933,6 +933,9 @@ class Chapitre {
 
         //Prix de ventes consommateur
         $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_PVC_ARTICLE);
+        
+        //Prix / KG
+        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_PVC_ARTICLE_KG);
 
         //Nombre de portion
         $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_NOMBRE_PORTION_FTA);

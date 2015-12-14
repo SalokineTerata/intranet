@@ -1286,7 +1286,7 @@ class FtaModel extends AbstractModel {
                 }
 
                 /*
-                 * Cettefonction est mise en pause car elle nécessite la création de processus cycle pour chaque workflow,
+                 * Cette fonction est mise en pause car elle nécessite la création de processus cycle pour chaque workflow,
                  * questionnement à boris.
                  */
                 if ($newAbreviationFtaEtat == FtaEtatModel::ETAT_ABREVIATION_VALUE_MODIFICATION and ! $selection_chapitre) {//Suppression des validations
@@ -1453,7 +1453,7 @@ class FtaModel extends AbstractModel {
  OLD_Unite_Facturation, Rayon, actif, Site_de_production,
  Duree_de_vie, Duree_de_vie_technique, OLD_code_barre_specifique, OLD_transfert_PF,
  OLD_Zone_picking, OLD_fiche_palette_specifique, OLD_TARIF, pvc_article,
- OLD_pvc_article_kg, OLD_FAMILLE_BUDGET, OLD_FAMILLE_ARTICLE, OLD_id_access_familles_gammes,
+ pvc_article_kg, OLD_FAMILLE_BUDGET, OLD_FAMILLE_ARTICLE, OLD_id_access_familles_gammes,
  OLD_Cout_Denree, OLD_Cout_Emballage, OLD_Cout_Autre, OLD_Cout_PF,
  OLD_FAMILLE_MKTG, Composition, composition1, libelle_multilangue,
  K_etat, EAN_UVC, EAN_COLIS, EAN_PALETTE,
@@ -1486,7 +1486,7 @@ class FtaModel extends AbstractModel {
  OLD_Unite_Facturation, Rayon, actif, Site_de_production,
  Duree_de_vie, Duree_de_vie_technique, OLD_code_barre_specifique, OLD_transfert_PF,
  OLD_Zone_picking, OLD_fiche_palette_specifique, OLD_TARIF, pvc_article,
- OLD_pvc_article_kg, OLD_FAMILLE_BUDGET, OLD_FAMILLE_ARTICLE, OLD_id_access_familles_gammes,
+ pvc_article_kg, OLD_FAMILLE_BUDGET, OLD_FAMILLE_ARTICLE, OLD_id_access_familles_gammes,
  OLD_Cout_Denree, OLD_Cout_Emballage, OLD_Cout_Autre, OLD_Cout_PF,
  OLD_FAMILLE_MKTG, Composition, composition1, libelle_multilangue,
  K_etat, EAN_UVC, EAN_COLIS, EAN_PALETTE,

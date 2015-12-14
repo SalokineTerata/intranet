@@ -31,8 +31,8 @@ class IntranetActionsModel extends AbstractModel {
      * On obitient le tableau des id intranet parents 
      * @return array
      */
-    public static function getArrayIdIntranetActionParentWithIdModuleAsKeyValues() {
-        $arrayIdIntranetParents = DatabaseOperation::convertSqlStatementWithKeyAsFirstFieldToArray(
+    public static function getArrayIdIntranetActionParentWithIdModule() {
+        $arrayIdIntranetParents = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
                         " SELECT " . self::FIELDNAME_MODULE_INTRANET_ACTIONS . ", " . self::FIELDNAME_PARENT_INTRANET_ACTIONS
                         . " FROM  " . self::TABLENAME
                         . " WHERE " . self::FIELDNAME_PARENT_INTRANET_ACTIONS . " IS NOT NULL"

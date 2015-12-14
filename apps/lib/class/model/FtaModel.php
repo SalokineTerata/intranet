@@ -8,6 +8,7 @@
  */
 class FtaModel extends AbstractModel {
 
+    const CHECK_DATE_ECHANCE = "0000-00-00";
     const TABLENAME = "fta";
     const KEYNAME = "id_fta";
     const KEYNAME_CREATEUR = "id_user";
@@ -225,7 +226,7 @@ class FtaModel extends AbstractModel {
     private function checkDataValidationDateEcheance() {
         $return = TRUE;
 
-        if (!$this->getDataField(FtaModel::FIELDNAME_DATE_ECHEANCE_FTA)->getFieldValue()) {
+        if (!$this->getDataField(FtaModel::FIELDNAME_DATE_ECHEANCE_FTA)->getFieldValue() or $this->getDataField(FtaModel::FIELDNAME_DATE_ECHEANCE_FTA)->getFieldValue() == self::CHECK_DATE_ECHANCE) {
             $newErrorMessage = self::MESSAGE_DATA_VALIDATION_DATE_ECHEANCE;
             $return = "1";
         } else {

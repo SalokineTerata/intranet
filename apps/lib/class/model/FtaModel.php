@@ -186,7 +186,12 @@ class FtaModel extends AbstractModel {
          * Liste des Contrôles 
          */
         $return += $this->checkDataValidationClassification();
-        $return += $this->checkDataValidationDateEcheance();
+        /**
+         * Si la Fta est un création (v0) alors la date d'échéance est obligatoire
+         */
+        if ($this->getDataField(FtaModel::FIELDNAME_VERSION_DOSSIER_FTA)->getFieldValue() == "0") {
+            $return += $this->checkDataValidationDateEcheance();
+        }
         $return += $this->checkDataValidationCodeLDC();
 
 
@@ -225,7 +230,7 @@ class FtaModel extends AbstractModel {
      * @return boolean
      */
     private function checkDataValidationDateEcheance() {
-        $return = TRUE;      
+        $return = TRUE;
 
         switch (TRUE) {
             /**

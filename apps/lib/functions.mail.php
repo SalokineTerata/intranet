@@ -86,13 +86,13 @@ function envoismail($sujetmail, $text, $destinataire, $expediteur, $paramTypeMai
 //    $logMail = new Logger('../../log/');
 
 
-    if ($globalConfig->getConf()->getSmtpServiceEnable() == False) {
+    if ($globalConfig->getConf()->getSmtpServiceEnable() == TRUE) {
 
         /*
          * Dans le l'environnement développement, 
          * Toutes les adresses emails sont redirigées vers utilisateurs.fta@ldc.fr
          */
-        if ($globalConfig->getConf()->getExecEnvironment() == EnvironmentConf::ENV_DEV) {
+        if ($globalConfig->getConf()->getExecEnvironment() <> EnvironmentConf::ENV_PRD) {
             $destinataire_orig = $destinataire;
             $destinataire = $globalConfig->getConf()->getSmtpEmailRedirectionUser();
 
@@ -112,6 +112,19 @@ function envoismail($sujetmail, $text, $destinataire, $expediteur, $paramTypeMai
         $mail->setText($text);
         //$result = $mail->send(array($adresse_to), 'smtp');
         //$result = $mail->send(array($destinataire), 'smtp');
+
+
+        /**
+         * L'envoi réel du mail n'est pas réalisé en environnement Codeur
+         */
+//        if ($globalConfig->getConf()->getExecEnvironment() == EnvironmentConf::ENV_PRD and $paramTypeMail <> "mail-transactions") {
+            $result = $mail->send(array($destinataire), 'smtp');
+//        }
+
+
+        if (!$result and $globalConfig->getConf()->getExecEnvironment() == EnvironmentConf::ENV_PRD) {
+            $paramTypeMail = "Erreur Mail non envoyé";
+        }
 
         switch ($paramTypeMail) {
 
@@ -177,31 +190,19 @@ function envoismail($sujetmail, $text, $destinataire, $expediteur, $paramTypeMai
                 $paramLog = $paramTypeMail . " " . $expediteur . " " . $destinataire . "\n" . $sujetmail . "\n" . $text;
                 Logger::AddMail($paramLog, $paramTypeMail);
                 break;
+
+            case "Erreur" :
+                $paramLog = $paramTypeMail . " " . $expediteur . " " . $destinataire . "\n" . $sujetmail . "\n" . $text;
+                Logger::AddMail($paramLog, $paramTypeMail);
+                break;
         }
-
-
-
-        /**
-         * L'envoi réel du mail n'est pas réalisé en environnement Codeur
-         */
-//        if ($globalConfig->getConf()->getExecEnvironment() != EnvironmentConf::ENV_COD) {
-//            $result = $mail->send(array($destinataire), 'smtp');
-//        }
-
-
-        if (!$result) {
-            print_r($mail->errors);
-        }
-        /*
-          else
-          {
-          $titre="Envoi Réussi !";
-          $message="Votre mail à bien été envoyé à:<br>$adresse_to";
-          $redirection="";
-          afficher_message($titre, $message, $redirection);
-          //echo 'Mail sent!';
-          }//echo $GLOBALS['smtp_ip'];
-         */
+//        else {
+//            $titre = "Envoi Réussi !";
+//            $message = "Votre mail à bien été envoyé à:<br>$adresse_to";
+//            $redirection = "";
+//            afficher_message($titre, $message, $redirection);
+//            //echo 'Mail sent!';
+//        }//echo $GLOBALS['smtp_ip'];
     }
 }
 

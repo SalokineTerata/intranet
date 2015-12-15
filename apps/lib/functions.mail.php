@@ -92,7 +92,7 @@ function envoismail($sujetmail, $text, $destinataire, $expediteur, $paramTypeMai
          * Dans le l'environnement développement, 
          * Toutes les adresses emails sont redirigées vers utilisateurs.fta@ldc.fr
          */
-//        if ($globalConfig->getConf()->getExecEnvironment() <> EnvironmentConf::ENV_PRD) {
+        if ($globalConfig->getConf()->getSmtpEmailRedirectionUser()) {
             $destinataire_orig = $destinataire;
             $destinataire = $globalConfig->getConf()->getSmtpEmailRedirectionUser();
 
@@ -101,9 +101,9 @@ function envoismail($sujetmail, $text, $destinataire, $expediteur, $paramTypeMai
 
             $text_orig = $text;
             $text = explode(",", $destinataire_orig) . "\n" . $text_orig;
-//        }
+        }
         //Création du mail
-        $mail = new htmlMimeMail();        
+        $mail = new htmlMimeMail();
         //$mail->addAttachment($tmp_pdf, $tmp_filename, 'application/pdf');
         //$mail->setFrom($mail_user);
         $mail->setFrom($expediteur);
@@ -117,7 +117,7 @@ function envoismail($sujetmail, $text, $destinataire, $expediteur, $paramTypeMai
         /**
          * L'envoi réel du mail n'est pas réalisé en environnement Codeur
          */
-        if ($globalConfig->getConf()->getExecEnvironment() == EnvironmentConf::ENV_PRD and $paramTypeMail <> "mail-transactions") {
+        if ($paramTypeMail <> "mail-transactions") {
             $result = $mail->send(array($destinataire), 'smtp');
         }
 

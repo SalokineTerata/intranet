@@ -114,7 +114,7 @@ switch ($action) {
         /**
          * Enregistrement de la DIN en majuscule
          */
-          if ($modelFta->getDataField(FtaModel::FIELDNAME_LIBELLE)->getFieldValue()) {
+        if ($modelFta->getDataField(FtaModel::FIELDNAME_LIBELLE)->getFieldValue()) {
             $modelFta->getDataField(FtaModel::FIELDNAME_LIBELLE)->setFieldValue(
                     mb_convert_case(
                             stripslashes(
@@ -136,10 +136,11 @@ switch ($action) {
         $modelFtaWorkflowStruture = new FtaWorkflowStructureModel($idFtaWorkflowStruture);
 
         $isFtaDataValidationSuccess = $modelFta->isFtaDataValidationSuccess();
-      
+
         if ($paramSignatureValidationSuiviProjet and $isFtaDataValidationSuccess == "0") {
-            $modelFtaSuiviProjet->setSigned($paramSignatureValidationSuiviProjet);
             $modelFtaSuiviProjet->getDataField(FtaSuiviProjetModel::FIELDNAME_DATE_VALIDATION_SUIVI_PROJET)->setFieldValue(date("Y-m-d"));
+            $modelFtaSuiviProjet->setSigned($paramSignatureValidationSuiviProjet);
+            $modelFtaSuiviProjet->saveToDatabase();
         }
         //$modelFtaSuiviProjet->getDataField(FtaSuiviProjetModel::FIELDNAME_SIGNATURE_VALIDATION_SUIVI_PROJET)->setFieldValue($paramSignatureValidationSuiviProjet);
 
@@ -147,7 +148,6 @@ switch ($action) {
 
 //        $idFtaProcessusEncours = $modelFtaWorkflowStruture->getDataField(FtaWorkflowStructureModel::FIELDNAME_ID_FTA_PROCESSUS)->getFieldValue();
 //        $idFtaWorkflowEncours = $modelFtaWorkflowStruture->getDataField(FtaWorkflowStructureModel::FIELDNAME_ID_FTA_WORKFLOW)->getFieldValue();
-
 //        $nom_fta_chapitre_encours = $modeChapitre->getDataField(FtaChapitreModel::FIELDNAME_NOM_CHAPITRE)->getFieldValue();
 
         /**
@@ -274,8 +274,6 @@ switch ($action) {
 //        $table = 'fta_suivi_projet';
 //        mysql_table_operation($table, $operation);
 //Controle des donnée et access_arti2
-        
-
 //Nom de l'étiquette par défaut si on enregistre sur le chapitre Gestion des articles (cf. table fta_chapitre)
 //        if (($modelFta->getDataField(FtaModel::FIELDNAME_LIBELLE_CLIENT)->getFieldValue() == null) and ( $nom_fta_chapitre == 'activation_article')) {
 //            $modelFta->getDataField(FtaModel::FIELDNAME_LIBELLE_CLIENT)->setFieldValue($modelFta->getDataField(FtaModel::FIELDNAME_LIBELLE)->getFieldValue());
@@ -315,7 +313,6 @@ switch ($action) {
 //                $erreur = 1;
 //            }
 //        }
-
 //        if (!$erreur) {
 //            //Mise à jour de la validation de l'échéance
 //            $paramIdFta;

@@ -20,6 +20,7 @@ class FtaWorkflowModel extends AbstractModel {
     const NOM_FTA_WORKFLOW_FE_SANS = 'coupe_et_frais_emballe_sans_etiquetage_interne';
     const NOM_FTA_WORKFLOW_INTERF = 'interfiliale';
     const NOM_FTA_WORKFLOW_PRESENT = 'presentation';
+    const ID_FTA_WORKFLOW_NON_DEFINI = '-1';
 
     /**
      * Site d'expedition de la FTA

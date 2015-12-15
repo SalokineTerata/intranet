@@ -144,11 +144,12 @@ if ($demande_abreviation_fta_transition) {
 if ($recap[$idFta] <> FtaProcessusDelaiModel::TAUX_100) {
     $req.= ' AND ' . FtaTransitionModel::FIELDNAME_PROCESSUS_PROPRIETAIRE_FTA_TRANSITION . '=0';
 }
-if ($idFtaRole == FtaRoleModel::ID_FTA_ROLE_SITE) {
-    $req.= ' AND ' . FtaTransitionModel::FIELDNAME_ABREVIATION_FTA_TRANSITION . '<>\'' . FtaEtatModel::ETAT_ABREVIATION_VALUE_WORKFLOW . '\'';
-}
-if ($idFtaRole <> FtaRoleModel::ID_FTA_ROLE_CHEF_DE_PROJET and $idFtaRole <> FtaRoleModel::ID_FTA_ROLE_SITE) {
-    $req.= ' AND ' . FtaTransitionModel::FIELDNAME_ABREVIATION_FTA_TRANSITION . '<>\'' . FtaEtatModel::ETAT_ABREVIATION_VALUE_RETIRE . '\'';
+//if ($idFtaRole == FtaRoleModel::ID_FTA_ROLE_SITE) {
+//    $req.= ' AND ' . FtaTransitionModel::FIELDNAME_ABREVIATION_FTA_TRANSITION . '<>\'' . FtaEtatModel::ETAT_ABREVIATION_VALUE_WORKFLOW . '\'';
+//}
+if (!FtaRoleModel::isGestionnaire($idFtaRole)) {
+    $req.= ' AND ' . FtaTransitionModel::FIELDNAME_ABREVIATION_FTA_TRANSITION . '<>\'' . FtaEtatModel::ETAT_ABREVIATION_VALUE_RETIRE . '\''
+            . ' AND ' . FtaTransitionModel::FIELDNAME_ABREVIATION_FTA_TRANSITION . '<>\'' . FtaEtatModel::ETAT_ABREVIATION_VALUE_ARCHIVE . '\'';
 }
 
 $req .=' ORDER BY ' . FtaTransitionModel::FIELDNAME_ABREVIATION_FTA_TRANSITION . ' DESC';

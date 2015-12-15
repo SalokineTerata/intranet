@@ -43,13 +43,13 @@ $siteDeProduction = Lib::getParameterFromRequest(GeoModel::KEYNAME);
 /**
  * Vérification de la sélection d'un site de production et d'un espace de travail
  */
-if ($idFtaWorkflow == "-1") {
+if ($idFtaWorkflow == FtaWorkflowModel::ID_FTA_WORKFLOW_NON_DEFINI) {
     //Averissement
     $titre = UserInterfaceMessage::FR_WARNING_DATA_ESPACE_DE_TRAVAIL_TITLE;
     $message = UserInterfaceMessage::FR_WARNING_DATA_ESPACE_DE_TRAVAIL;
     afficher_message($titre, $message, $redirection);
 }
-if ($siteDeProduction == "-1") {
+if ($siteDeProduction == GeoModel::ID_SITE_NON_DEFINIE) {
     //Averissement
     $titre = UserInterfaceMessage::FR_WARNING_DATA_SITE_DE_PRODUCTION_TITLE;
     $message = UserInterfaceMessage::FR_WARNING_DATA_SITE_DE_PRODUCTION;

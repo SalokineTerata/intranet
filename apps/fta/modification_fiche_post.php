@@ -143,7 +143,7 @@ switch ($action) {
         }
         //$modelFtaSuiviProjet->getDataField(FtaSuiviProjetModel::FIELDNAME_SIGNATURE_VALIDATION_SUIVI_PROJET)->setFieldValue($paramSignatureValidationSuiviProjet);
 
-//        $abreviationFtaEtat = $modelFta->getModelFtaEtat()->getDataField(FtaEtatModel::FIELDNAME_ABREVIATION)->getFieldValue();
+        $abreviationFtaEtat = $modelFta->getModelFtaEtat()->getDataField(FtaEtatModel::FIELDNAME_ABREVIATION)->getFieldValue();
 
 //        $idFtaProcessusEncours = $modelFtaWorkflowStruture->getDataField(FtaWorkflowStructureModel::FIELDNAME_ID_FTA_PROCESSUS)->getFieldValue();
 //        $idFtaWorkflowEncours = $modelFtaWorkflowStruture->getDataField(FtaWorkflowStructureModel::FIELDNAME_ID_FTA_WORKFLOW)->getFieldValue();

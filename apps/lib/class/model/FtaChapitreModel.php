@@ -97,21 +97,14 @@ class FtaChapitreModel extends AbstractModel {
         $newCorrectionFtaSuiviProjet = str_replace("<br/>", "\n", $newCorrectionFtaSuiviProjet);
 
         //Dévalidation du chapitre en cours
-        $reqDevelidationChapitre = ' UPDATE ' . FtaSuiviProjetModel::TABLENAME
-                . ' SET ' . FtaSuiviProjetModel::FIELDNAME_SIGNATURE_VALIDATION_SUIVI_PROJET . '=0, '
-                . FtaSuiviProjetModel::FIELDNAME_CORRECTION_FTA_SUIVI_PROJET . '=\'' . $newCorrectionFtaSuiviProjet . '\' '
-                . ' WHERE ' . FtaModel::KEYNAME . '=' . $paramIdFta
-                . ' AND ' . FtaSuiviProjetModel::FIELDNAME_ID_FTA_CHAPITRE . '=' . $paramIdChapitre
+        $reqDevelidationChapitre = " UPDATE " . FtaSuiviProjetModel::TABLENAME
+                . " SET " . FtaSuiviProjetModel::FIELDNAME_SIGNATURE_VALIDATION_SUIVI_PROJET . "=0, "
+                . FtaSuiviProjetModel::FIELDNAME_CORRECTION_FTA_SUIVI_PROJET . "=\"" . $newCorrectionFtaSuiviProjet . "\" "
+                . " WHERE " . FtaModel::KEYNAME . "=" . $paramIdFta
+                . " AND " . FtaSuiviProjetModel::FIELDNAME_ID_FTA_CHAPITRE . "=" . $paramIdChapitre
         ;
         DatabaseOperation::execute($reqDevelidationChapitre);
 
-        /**
-         * Actualisation du pourcentage de validation de la Fta
-         */
-        $idFtaSuiviProjet = FtaSuiviProjetModel::getIdFtaSuiviProjetByIdFtaAndIdChapitre($paramIdFta, $paramIdChapitre);
-        $modelFtaSuiviProjet = new FtaSuiviProjetModel($idFtaSuiviProjet);
-        $modelFtaSuiviProjet->unsetSigned();
-        $modelFtaSuiviProjet->saveToDatabase();
 
         /*
          * Mise à jour de la validation de l'échéance du processus
@@ -121,6 +114,15 @@ class FtaChapitreModel extends AbstractModel {
         // FtaProcessusDelaiModel::BuildFtaProcessusValidationDelai($paramIdFta, $idFtaProcessus, $idFtaWorkflow);
         //Dévalidation des processus suivants
         $return = FtaChapitreModel::BuildDevalidationChapitre($paramIdFta, $idFtaProcessus, $HtmlResult);
+
+        /**
+         * Actualisation du pourcentage de validation de la Fta
+         */
+        $idFtaSuiviProjet = FtaSuiviProjetModel::getIdFtaSuiviProjetByIdFtaAndIdChapitre($paramIdFta, $paramIdChapitre);
+        $modelFtaSuiviProjet = new FtaSuiviProjetModel($idFtaSuiviProjet);
+        $modelFtaSuiviProjet->unsetSigned();
+        $modelFtaSuiviProjet->saveToDatabase();
+
         //print_r($return['mail']);      //Tableau contenant les adresses emails des personnes concernées par la dévalidation
         if (count($return) > 1) {
             $return['processus'] = array_unique($return['processus']);   //Tableau contenant les identifiants des processus dévalidés unique     

@@ -30,6 +30,7 @@ class UserInterfaceMessage {
     const FR_DATABESE_MESSAGE_CHANGEMENT_ESPACE_DE_TRAVAIL_4 = " le ";
     const FR_LAST_50_FTA = "Consultation des 50 dernières FTA";
     const FR_LOGIN_PROCESS_ACCOUNT_LOCKED = "Votre compte est bloqué suite à trois tentatives ratées.<br><br>Contactez un Administrateur pour réactiver votre compte.<br>";
+    const FR_NONE_FTA = "Aucune Fta identifiée.<br><br>";
     const FR_SESSION_EXPIRED = "Erreur, la session précédement connecté à expirer.<br>Veuillez vous reconnecter.<br>";
     const FR_SESSION_EXPIRED_TITLE = "Déconnexion";
     const FR_WARNING_ACCES_RIGHTS = "Vous n'avez pas les droits d'accès nécessaire.<br><br>";
@@ -37,6 +38,7 @@ class UserInterfaceMessage {
     const FR_WARNING_DATA_CLASIFICATION = "Veuillez saisir une classfication";
     const FR_WARNING_DATA_CLASIFICATION_TITLE = "Classification d'une Fiche Technique Article";
     const FR_WARNING_DATA_DATE_ECHEANCE = "Veuillez saisir une date d'écheance de la Fta .<br><br>";
+    const FR_WARNING_DATA_DATE_ECHEANCE_INCOHERENCE = "Veuillez saisir une date d'écheance supérieur à la date d'aujourd'hui .<br><br>";
     const FR_WARNING_DATA_DESIGNATION_COMMERCIALE = "Veuillez saisir une désignation commerciale .<br><br>";
     const FR_WARNING_DATA_DESIGNATION_COMMERCIALE_TITLE = "Désignation commerciale d'une Fiche Technique Article";
     const FR_WARNING_DATA_ESPACE_DE_TRAVAIL = "Veuillez selectionner un espace de travail .<br><br>";

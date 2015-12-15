@@ -126,12 +126,6 @@ echo "DROP ".$nameOfBDDTarget.".geo ...";
 $sql = "DROP TABLE ".$nameOfBDDTarget.".geo";
 if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
 
-$sql = "INSERT INTO `".$nameOfBDDTarget."`.`geo` "
-        . "(`id_geo`, `geo`, `lettre`, `libelle_site_agis`,`tag_application_geo`,`site_actif`) "
-        . "VALUES ('-1', 'Site Non définie', 'NON', 'SITE NON DEFINIE', 'fta', '0'); ";       
-if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
-echo "INSERT INTO ".$nameOfBDDTarget.".geo Site Non définie ...";
-
 echo "CREATE TABLE ".$nameOfBDDTarget.".geo ...";
 $sql = "CREATE TABLE ".$nameOfBDDTarget.".geo LIKE ".$nameOfBDDStructure.".geo";
 if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
@@ -139,6 +133,12 @@ if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
 echo "INSERT INTO ".$nameOfBDDTarget.".geo ...";
 $sql = "INSERT INTO ".$nameOfBDDTarget.".geo SELECT * FROM ".$nameOfBDDOrigin.".geo";
 if(mysql_query($sql)) { echo "[OK]\n";}else{echo "[FAILED]\n";}
+
+$sql = "INSERT INTO ".$nameOfBDDTarget.".geo "
+        . "(`id_geo`, `geo`, `lettre`, `libelle_site_agis`,`tag_application_geo`,`site_actif`) "
+        . " VALUES ('-1', 'Site Non définie', 'NON', 'SITE NON DEFINIE', 'fta', '0'); ";       
+if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
+echo "INSERT INTO ".$nameOfBDDTarget.".geo Site Non définie ...";
 
 echo "DROP ".$nameOfBDDTarget.".geo_codesoft ...";
 $sql = "DROP TABLE ".$nameOfBDDTarget.".geo_codesoft";
@@ -4691,7 +4691,7 @@ id_fta, id_access_arti2, OLD_numft, id_fta_workflow,
  OLD_Unite_Facturation, Rayon, actif, Site_de_production,
  Duree_de_vie, Duree_de_vie_technique, OLD_code_barre_specifique, OLD_transfert_PF,
  OLD_Zone_picking, OLD_fiche_palette_specifique, OLD_TARIF, pvc_article,
- OLD_pvc_article_kg, OLD_FAMILLE_BUDGET, OLD_FAMILLE_ARTICLE, OLD_id_access_familles_gammes,
+ pvc_article_kg, OLD_FAMILLE_BUDGET, OLD_FAMILLE_ARTICLE, OLD_id_access_familles_gammes,
  OLD_Cout_Denree, OLD_Cout_Emballage, OLD_Cout_Autre, OLD_Cout_PF,
  OLD_FAMILLE_MKTG, Composition, composition1, libelle_multilangue,
  K_etat, EAN_UVC, EAN_COLIS, EAN_PALETTE,

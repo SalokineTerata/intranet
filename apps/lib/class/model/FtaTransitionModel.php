@@ -380,7 +380,7 @@ class FtaTransitionModel {
                         . " AND " . IntranetDroitsAccesModel::TABLENAME . "." . IntranetDroitsAccesModel::FIELDNAME_ID_INTRANET_ACTIONS
                         . " = " . IntranetActionsModel::TABLENAME . "." . IntranetActionsModel::KEYNAME      //Liaison
                         . " AND " . IntranetDroitsAccesModel::TABLENAME . "." . IntranetDroitsAccesModel::FIELDNAME_NIVEAU_INTRANET_DROITS_ACCES . " = " . IntranetNiveauAccesModel::NIVEAU_GENERIC_TRUE
-                        . ' AND ( 0 ' . IntranetActionsModel::AddIdIntranetAction($IdIntranetActions) . ')'
+                        . ' AND ( 0 ' . IntranetActionsModel::addIdIntranetAction($IdIntranetActions) . ')'
 
 
                 ;
@@ -550,7 +550,8 @@ class FtaTransitionModel {
                 . "\n"
                 . "INFORMATIONS DE DEBUGGAGE:\n"
                 . $logTransition
-        ; {
+        ;
+        {
             $expediteur = $prenom . " " . $nom . " <" . $mail . ">";
             envoismail($sujetmail, $corp, $mail, $expediteur, $typeMail);
         }
@@ -666,7 +667,8 @@ class FtaTransitionModel {
                 . $text
                 . "\n\n"
                 . $paramLogTransition
-        ; {
+        ;
+        {
             $expediteur = $prenom . " " . $nom . " <" . $mailUser . ">";
             envoismail($sujetmail, $corp, $mailUser, $expediteur, $typeMail);
         }
@@ -690,5 +692,30 @@ class FtaTransitionModel {
         return $liste_action_groupe = AccueilFta::afficherRequeteEnListeDeroulante($requete, $id_defaut, $nom_defaut, TRUE);
     }
 
-//Fin de la vérification que la FTA est bien validé
+    /**
+     * Donne accès aux bouton de transition 
+     * pour les utilisateur se trouvant en fin de parcours de l'espace de travail
+     * @param int $paramIdFtaRole
+     * @param int $paramIdFtaWorkflow
+     * @return boolean
+     */
+    public static function isAccesTransitionButton($paramIdFtaRole, $paramIdFtaWorkflow) {
+        $isAccesTransition = FALSE;
+        /**
+         * Liste des processus pouvant être validé
+         */
+        $arrayProcessusValidation = FtaProcessusCycleModel::getArrayProcessusValidationFTA($paramIdFtaWorkflow);
+
+        /**
+         * Listes des processus auxquel l'utilisateur connecté à les droits d'accès
+         */
+        $arrayProcessusAcces = FtaWorkflowStructureModel::getArrayProcessusByRoleAndWorkflow($paramIdFtaRole, $paramIdFtaWorkflow);
+        $accesTransitionButton = array_intersect($arrayProcessusValidation, $arrayProcessusAcces);
+        if ($accesTransitionButton) {
+            $isAccesTransition = TRUE;
+        }
+
+        return $isAccesTransition;
+    }
+
 }

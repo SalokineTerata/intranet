@@ -104,6 +104,7 @@ class FtaModel extends AbstractModel {
     const MESSAGE_DATA_VALIDATION_CLASSIFICATION = UserInterfaceMessage::FR_WARNING_DATA_CLASIFICATION;
     const MESSAGE_DATA_VALIDATION_CODE_LDC = UserInterfaceMessage::FR_WARNING_DATA_VALIDATION_FTA_CODE_LDC;
     const MESSAGE_DATA_VALIDATION_DATE_ECHEANCE = UserInterfaceMessage::FR_WARNING_DATA_DATE_ECHEANCE;
+    const MESSAGE_DATA_VALIDATION_DATE_ECHEANCE_INCOHERENCE = UserInterfaceMessage::FR_WARNING_DATA_DATE_ECHEANCE_INCOHERENCE;
 
     /**
      * Utilisateur ayant créé la FTA
@@ -185,7 +186,12 @@ class FtaModel extends AbstractModel {
          * Liste des Contrôles 
          */
         $return += $this->checkDataValidationClassification();
-        $return += $this->checkDataValidationDateEcheance();
+        /**
+         * Si la Fta est un création (v0) alors la date d'échéance est obligatoire
+         */
+        if ($this->getDataField(FtaModel::FIELDNAME_VERSION_DOSSIER_FTA)->getFieldValue() == "0") {
+            $return += $this->checkDataValidationDateEcheance();
+        }
         $return += $this->checkDataValidationCodeLDC();
 
 
@@ -226,14 +232,35 @@ class FtaModel extends AbstractModel {
     private function checkDataValidationDateEcheance() {
         $return = TRUE;
 
-        if (!$this->getDataField(FtaModel::FIELDNAME_DATE_ECHEANCE_FTA)->getFieldValue() or $this->getDataField(FtaModel::FIELDNAME_DATE_ECHEANCE_FTA)->getFieldValue() == self::CHECK_DATE_ECHANCE) {
-            $newErrorMessage = self::MESSAGE_DATA_VALIDATION_DATE_ECHEANCE;
-            $return = "1";
-        } else {
-            $return = "0";
+        switch (TRUE) {
+            /**
+             * Si aucune date d'échance est renseigné, erreur
+             */
+            case!$this->getDataField(FtaModel::FIELDNAME_DATE_ECHEANCE_FTA)->getFieldValue():
+
+            /**
+             * Si la date d'échacne est égal à 0000-00-00, erreur
+             */
+            case $this->getDataField(FtaModel::FIELDNAME_DATE_ECHEANCE_FTA)->getFieldValue() == self::CHECK_DATE_ECHANCE:
+                $return = "1";
+                $newErrorMessage = self::MESSAGE_DATA_VALIDATION_DATE_ECHEANCE;
+
+                break;
+            /**
+             * Si la date d'échance est infèrieur à la date d'aujourd'hui , erreur
+             */
+            case $this->getDataField(FtaModel::FIELDNAME_DATE_ECHEANCE_FTA)->getFieldValue() < date("Y-m-d"):
+                $return = "1";
+                $newErrorMessage = self::MESSAGE_DATA_VALIDATION_DATE_ECHEANCE_INCOHERENCE;
+
+                break;
+
+            default :
+
+                $return = "0";
+
+                break;
         }
-
-
         if ($return != "0") {
             //Ajout de la raison de l'echec du contrôle dans le message d'information utilisateur.
             $this->addMessageErreurDataValidation($newErrorMessage);
@@ -1264,7 +1291,7 @@ class FtaModel extends AbstractModel {
                 }
 
                 /*
-                 * Cettefonction est mise en pause car elle nécessite la création de processus cycle pour chaque workflow,
+                 * Cette fonction est mise en pause car elle nécessite la création de processus cycle pour chaque workflow,
                  * questionnement à boris.
                  */
                 if ($newAbreviationFtaEtat == FtaEtatModel::ETAT_ABREVIATION_VALUE_MODIFICATION and ! $selection_chapitre) {//Suppression des validations
@@ -1431,7 +1458,7 @@ class FtaModel extends AbstractModel {
  OLD_Unite_Facturation, Rayon, actif, Site_de_production,
  Duree_de_vie, Duree_de_vie_technique, OLD_code_barre_specifique, OLD_transfert_PF,
  OLD_Zone_picking, OLD_fiche_palette_specifique, OLD_TARIF, pvc_article,
- OLD_pvc_article_kg, OLD_FAMILLE_BUDGET, OLD_FAMILLE_ARTICLE, OLD_id_access_familles_gammes,
+ pvc_article_kg, OLD_FAMILLE_BUDGET, OLD_FAMILLE_ARTICLE, OLD_id_access_familles_gammes,
  OLD_Cout_Denree, OLD_Cout_Emballage, OLD_Cout_Autre, OLD_Cout_PF,
  OLD_FAMILLE_MKTG, Composition, composition1, libelle_multilangue,
  K_etat, EAN_UVC, EAN_COLIS, EAN_PALETTE,
@@ -1464,7 +1491,7 @@ class FtaModel extends AbstractModel {
  OLD_Unite_Facturation, Rayon, actif, Site_de_production,
  Duree_de_vie, Duree_de_vie_technique, OLD_code_barre_specifique, OLD_transfert_PF,
  OLD_Zone_picking, OLD_fiche_palette_specifique, OLD_TARIF, pvc_article,
- OLD_pvc_article_kg, OLD_FAMILLE_BUDGET, OLD_FAMILLE_ARTICLE, OLD_id_access_familles_gammes,
+ pvc_article_kg, OLD_FAMILLE_BUDGET, OLD_FAMILLE_ARTICLE, OLD_id_access_familles_gammes,
  OLD_Cout_Denree, OLD_Cout_Emballage, OLD_Cout_Autre, OLD_Cout_PF,
  OLD_FAMILLE_MKTG, Composition, composition1, libelle_multilangue,
  K_etat, EAN_UVC, EAN_COLIS, EAN_PALETTE,

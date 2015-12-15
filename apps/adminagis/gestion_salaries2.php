@@ -20,7 +20,7 @@ $paramNewsDefil = Lib::getParameterFromRequest('newsdefil');
 $paramUserMail = Lib::getParameterFromRequest('sal_mail');
 $paramModifier = Lib::getParameterFromRequest('modifier');
 $paramValider = Lib::getParameterFromRequest('valider');
-identification1('salaries', $login, $pass,FALSE);
+identification1('salaries', $login, $pass, FALSE);
 
 if ($paramValider == 'valider') {
 
@@ -381,7 +381,7 @@ envoismail($sujet, $corpsmail, $paramUserMail, 'postmaster@agis-sa.fr', $typeMai
                                                                 /*
                                                                  * Déclaration du droits d'accès fourni par droits_acces.inc et récupération de son niveau d'accès
                                                                  */
-                                                                if ($rowsModule[IntranetModulesModel::KEYNAME] <> 19) {
+                                                                if ($rowsModule[IntranetModulesModel::KEYNAME] <> IntranetModulesModel::ID_MODULES_FTA) {
                                                                     $nom_niveau_intranet_droits_acces = 'module' . $rowsModule[IntranetModulesModel::KEYNAME] . '_action' . $rowsModule[IntranetActionsModel::KEYNAME];
                                                                 } else {
                                                                     $nom_niveau_intranet_droits_acces = $rowsModule[IntranetActionsModel::FIELDNAME_NOM_INTRANET_ACTIONS] . '_' . $rowsModule[IntranetActionsModel::KEYNAME];
@@ -407,6 +407,11 @@ envoismail($sujet, $corpsmail, $paramUserMail, 'postmaster@agis-sa.fr', $typeMai
                                                                             . ', ' . IntranetDroitsAccesModel::FIELDNAME_NIVEAU_INTRANET_DROITS_ACCES . '=' . $niveau_intranet_droits_acces
                                                                     );
                                                                 }
+                                                                /**
+                                                                 * Post-traitement
+                                                                 * Vérification et correction des incohérences de droits d'accès.
+                                                                 */
+                                                                Acl::checkHeritedRightsRemovedByUser($paramIdUser);
 
                                                                 echo '</tr>';
 //    echo '</table>';

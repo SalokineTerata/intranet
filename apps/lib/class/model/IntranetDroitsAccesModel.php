@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Description of FtaProcessusModel
+ * Description of IntranetDroitsAccesModel
  * Table des utilisateurs
  *
  * @author tp4300001
@@ -9,6 +9,7 @@
 class IntranetDroitsAccesModel extends AbstractModel {
 
     const TABLENAME = 'intranet_droits_acces';
+    const KEYNAME = 'id_intranet_droits_acces';
     const FIELDNAME_ID_INTRANET_MODULES = 'id_intranet_modules';
     const FIELDNAME_ID_USER = 'id_user';
     const FIELDNAME_ID_INTRANET_ACTIONS = 'id_intranet_actions';
@@ -23,6 +24,55 @@ class IntranetDroitsAccesModel extends AbstractModel {
     }
 
     /**
+     * On vérifie si l'utilisateur à les droits d'accès sur id intranet actions parent
+     * @param int $paramIdUser
+     * @param int $paramIdIntranetModule
+     * @param int $paramIdIntranetAction
+     * @return boolean
+     */
+    public static function checkUserHaveRightsAcces($paramIdUser, $paramIdIntranetModule, $paramIdIntranetAction) {
+        $haveRightsAcces = FALSE;
+
+        $arrayHaveRightsAcces = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
+                        "SELECT " . self::FIELDNAME_ID_INTRANET_ACTIONS
+                        . " FROM  " . self::TABLENAME
+                        . " WHERE " . self::FIELDNAME_ID_INTRANET_MODULES . " =" . $paramIdIntranetModule
+                        . " AND  " . self::FIELDNAME_ID_USER . " =" . $paramIdUser
+                        . " AND  " . self::FIELDNAME_ID_INTRANET_ACTIONS . " =" . $paramIdIntranetAction
+                        . " AND  " . self::FIELDNAME_NIVEAU_INTRANET_DROITS_ACCES . " =" . IntranetNiveauAccesModel::NIVEAU_GENERIC_TRUE);
+        if ($arrayHaveRightsAcces) {
+            $haveRightsAcces = TRUE;
+        }
+        return $haveRightsAcces;
+    }
+
+    /**
+     * On supprime les droits sur id intranet actions de l'utilisateur connecté 
+     * correspondants à l'id intranet actions parents
+     * @param int $paramIdUser
+     * @param int $paramIdIntranetModule
+     * @param int $paramIdIntranetAction
+     */
+    public static function eraseUserRightsAcces($paramIdUser, $paramIdIntranetModule, $paramIdIntranetAction) {
+        $arrayEraseRightsAcces = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
+                        "SELECT " . self::KEYNAME
+                        . " FROM  " . self::TABLENAME . "," . IntranetActionsModel::TABLENAME
+                        . " WHERE " . self::FIELDNAME_ID_INTRANET_MODULES . " =" . $paramIdIntranetModule
+                        . " AND " . self::FIELDNAME_ID_USER . " =" . $paramIdUser
+                        . " AND " . self::TABLENAME . "." . self::FIELDNAME_ID_INTRANET_ACTIONS . " =" . IntranetActionsModel::TABLENAME . "." . IntranetActionsModel::KEYNAME
+                        . " AND " . self::FIELDNAME_NIVEAU_INTRANET_DROITS_ACCES . " =" . IntranetNiveauAccesModel::NIVEAU_GENERIC_TRUE
+                        . " AND " . IntranetActionsModel::FIELDNAME_PARENT_INTRANET_ACTIONS . " =" . $paramIdIntranetAction);
+        if ($arrayEraseRightsAcces) {
+            foreach ($arrayEraseRightsAcces as $rowsEraseRightsAcces) {
+                DatabaseOperation::execute(
+                        'DELETE FROM ' . self::TABLENAME
+                        . ' WHERE ' . self::KEYNAME . '=' . $rowsEraseRightsAcces[self::KEYNAME]
+                );
+            }
+        }
+    }
+
+    /**
      * Récupération de Id intranet actions par utilisateur et par site
      * @param type $paramIdUser
      * @param type $paramIdFtaRole
@@ -31,23 +81,23 @@ class IntranetDroitsAccesModel extends AbstractModel {
     public static function getIdIntranetActionsByRoleANDSiteFromUser($paramIdUser, $paramIdFtaRole) {
         $arrayIdIntranetActions = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
                         'SELECT ' . FtaActionRoleModel::TABLENAME . '.' . FtaActionRoleModel::FIELDNAME_ID_INTRANET_ACTIONS
-                        . ' FROM ' . IntranetDroitsAccesModel::TABLENAME . ', ' . FtaActionRoleModel::TABLENAME
+                        . ' FROM ' . self::TABLENAME . ', ' . FtaActionRoleModel::TABLENAME
                         . ' WHERE ' . FtaActionRoleModel::TABLENAME . '.' . FtaActionRoleModel::FIELDNAME_ID_INTRANET_ACTIONS
-                        . ' = ' . IntranetDroitsAccesModel::TABLENAME . '.' . IntranetDroitsAccesModel::FIELDNAME_ID_INTRANET_ACTIONS
+                        . ' = ' . self::TABLENAME . '.' . self::FIELDNAME_ID_INTRANET_ACTIONS
                         . ' AND ' . FtaActionRoleModel::TABLENAME . '.' . FtaActionRoleModel::FIELDNAME_ID_FTA_ROLE . '=' . $paramIdFtaRole
-                        . ' AND ' . IntranetDroitsAccesModel::FIELDNAME_ID_USER . '=' . $paramIdUser
-                        . ' AND ' . IntranetDroitsAccesModel::FIELDNAME_NIVEAU_INTRANET_DROITS_ACCES . ' =' . IntranetNiveauAccesModel::NIVEAU_GENERIC_TRUE
+                        . ' AND ' . self::FIELDNAME_ID_USER . '=' . $paramIdUser
+                        . ' AND ' . self::FIELDNAME_NIVEAU_INTRANET_DROITS_ACCES . ' =' . IntranetNiveauAccesModel::NIVEAU_GENERIC_TRUE
                         . ' UNION SELECT ' . FtaActionSiteModel::TABLENAME . '.' . FtaActionSiteModel::FIELDNAME_ID_INTRANET_ACTIONS
-                        . ' FROM ' . IntranetDroitsAccesModel::TABLENAME . ', ' . FtaActionSiteModel::TABLENAME
+                        . ' FROM ' . self::TABLENAME . ', ' . FtaActionSiteModel::TABLENAME
                         . ' WHERE ' . FtaActionSiteModel::TABLENAME . '.' . FtaActionSiteModel::FIELDNAME_ID_INTRANET_ACTIONS
-                        . ' = ' . IntranetDroitsAccesModel::TABLENAME . '.' . IntranetDroitsAccesModel::FIELDNAME_ID_INTRANET_ACTIONS
-                        . ' AND ' . IntranetDroitsAccesModel::FIELDNAME_ID_USER . '=' . $paramIdUser
-                        . ' AND ' . IntranetDroitsAccesModel::FIELDNAME_NIVEAU_INTRANET_DROITS_ACCES . ' =' . IntranetNiveauAccesModel::NIVEAU_GENERIC_TRUE
+                        . ' = ' . self::TABLENAME . '.' . self::FIELDNAME_ID_INTRANET_ACTIONS
+                        . ' AND ' . self::FIELDNAME_ID_USER . '=' . $paramIdUser
+                        . ' AND ' . self::FIELDNAME_NIVEAU_INTRANET_DROITS_ACCES . ' =' . IntranetNiveauAccesModel::NIVEAU_GENERIC_TRUE
         );
 
         if ($arrayIdIntranetActions) {
             foreach ($arrayIdIntranetActions as $rowsIdIntranetActions) {
-                $IdIntranetActions[] = $rowsIdIntranetActions[IntranetDroitsAccesModel::FIELDNAME_ID_INTRANET_ACTIONS];
+                $IdIntranetActions[] = $rowsIdIntranetActions[self::FIELDNAME_ID_INTRANET_ACTIONS];
             }
         } else {
             $IdIntranetActions = array();
@@ -65,25 +115,25 @@ class IntranetDroitsAccesModel extends AbstractModel {
         if ($paramIdFtaRole <> "0") {
             $arrayIdIntranetActionsParent = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
                             'SELECT DISTINCT ' . IntranetActionsModel::TABLENAME . '.' . IntranetActionsModel::FIELDNAME_PARENT_INTRANET_ACTIONS
-                            . ' FROM ' . IntranetDroitsAccesModel::TABLENAME . ', ' . FtaActionRoleModel::TABLENAME
+                            . ' FROM ' . self::TABLENAME . ', ' . FtaActionRoleModel::TABLENAME
                             . ', ' . IntranetActionsModel::TABLENAME
                             . ' WHERE ' . FtaActionRoleModel::TABLENAME . '.' . FtaActionRoleModel::FIELDNAME_ID_INTRANET_ACTIONS
-                            . ' = ' . IntranetDroitsAccesModel::TABLENAME . '.' . IntranetDroitsAccesModel::FIELDNAME_ID_INTRANET_ACTIONS
+                            . ' = ' . self::TABLENAME . '.' . self::FIELDNAME_ID_INTRANET_ACTIONS
                             . ' AND ' . FtaActionRoleModel::TABLENAME . '.' . FtaActionRoleModel::FIELDNAME_ID_FTA_ROLE . '=' . $paramIdFtaRole
-                            . ' AND ' . IntranetDroitsAccesModel::FIELDNAME_ID_USER . '=' . $paramIdUser
-                            . ' AND ' . IntranetDroitsAccesModel::FIELDNAME_NIVEAU_INTRANET_DROITS_ACCES . ' =' . IntranetNiveauAccesModel::NIVEAU_GENERIC_TRUE
+                            . ' AND ' . self::FIELDNAME_ID_USER . '=' . $paramIdUser
+                            . ' AND ' . self::FIELDNAME_NIVEAU_INTRANET_DROITS_ACCES . ' =' . IntranetNiveauAccesModel::NIVEAU_GENERIC_TRUE
                             . ' AND ' . IntranetActionsModel::TABLENAME . '.' . IntranetActionsModel::KEYNAME
-                            . ' = ' . IntranetDroitsAccesModel::TABLENAME . '.' . IntranetDroitsAccesModel::FIELDNAME_ID_INTRANET_ACTIONS
+                            . ' = ' . self::TABLENAME . '.' . self::FIELDNAME_ID_INTRANET_ACTIONS
             );
         } else {
             $arrayIdIntranetActionsParent = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
                             'SELECT DISTINCT ' . IntranetActionsModel::TABLENAME . '.' . IntranetActionsModel::FIELDNAME_PARENT_INTRANET_ACTIONS
-                            . ' FROM ' . IntranetDroitsAccesModel::TABLENAME . ', ' . IntranetActionsModel::TABLENAME
-                            . ' WHERE ' . IntranetDroitsAccesModel::FIELDNAME_ID_USER . '=' . $paramIdUser
-                            . ' AND ' . IntranetDroitsAccesModel::FIELDNAME_NIVEAU_INTRANET_DROITS_ACCES . ' =' . IntranetNiveauAccesModel::NIVEAU_GENERIC_TRUE
-                            . ' AND ' . IntranetDroitsAccesModel::FIELDNAME_ID_INTRANET_MODULES . ' =19'
+                            . ' FROM ' . self::TABLENAME . ', ' . IntranetActionsModel::TABLENAME
+                            . ' WHERE ' . self::FIELDNAME_ID_USER . '=' . $paramIdUser
+                            . ' AND ' . self::FIELDNAME_NIVEAU_INTRANET_DROITS_ACCES . ' =' . IntranetNiveauAccesModel::NIVEAU_GENERIC_TRUE
+                            . ' AND ' . self::FIELDNAME_ID_INTRANET_MODULES . ' =' . IntranetModulesModel::ID_MODULES_FTA
                             . ' AND ' . IntranetActionsModel::TABLENAME . '.' . IntranetActionsModel::KEYNAME
-                            . ' = ' . IntranetDroitsAccesModel::TABLENAME . '.' . IntranetDroitsAccesModel::FIELDNAME_ID_INTRANET_ACTIONS
+                            . ' = ' . self::TABLENAME . '.' . self::FIELDNAME_ID_INTRANET_ACTIONS
             );
         }
         if ($arrayIdIntranetActionsParent) {
@@ -93,11 +143,11 @@ class IntranetDroitsAccesModel extends AbstractModel {
             $arrayIdIntranetActions = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
                             'SELECT DISTINCT ' . IntranetActionsModel::TABLENAME . '.' . IntranetActionsModel::KEYNAME
                             . ' FROM ' . IntranetActionsModel::TABLENAME
-                            . ' WHERE ( 0 ' . IntranetActionsModel::AddIdIntranetActionParent($IdIntranetActionsParent) . ' )');
+                            . ' WHERE ( 0 ' . IntranetActionsModel::addIdIntranetActionParent($IdIntranetActionsParent) . ' )');
 
             if ($arrayIdIntranetActions) {
                 foreach ($arrayIdIntranetActions as $rowsIdIntranetActions) {
-                    $IdIntranetActions[] = $rowsIdIntranetActions[IntranetDroitsAccesModel::FIELDNAME_ID_INTRANET_ACTIONS];
+                    $IdIntranetActions[] = $rowsIdIntranetActions[self::FIELDNAME_ID_INTRANET_ACTIONS];
                 }
             } else {
                 $IdIntranetActions = array("0");
@@ -112,7 +162,7 @@ class IntranetDroitsAccesModel extends AbstractModel {
      * Construction des droits d'accès pour tous les modules:
      * Boris Sanègre 2003.03.25
      * Franck Amofa 2015.08.07
-     * @param type $paramSalUser
+     * @param int $paramSalUser
      */
     public static function BuildHtmlDroitsAcces($paramSalUser = NULL) {
         echo '<br>';
@@ -146,7 +196,7 @@ class IntranetDroitsAccesModel extends AbstractModel {
             /*
              * Contruction du tableau pour les Fta
              */
-            if ($idIntranetModules == 19) {
+            if ($idIntranetModules == IntranetModulesModel::ID_MODULES_FTA) {
                 echo '<br>';
                 echo '<table width=500 border=1 cellspacing=1 cellpadding=3 align=center>';
 
@@ -190,7 +240,7 @@ class IntranetDroitsAccesModel extends AbstractModel {
                     $Role = NULL;
                     if ($arrayActions) {
                         if ($paramSalUser) {
-                            $checked = IntranetDroitsAccesModel::CheckValueByNiveauAcces($paramSalUser, $rowsActionsWorkflow[IntranetActionsModel::KEYNAME], $idIntranetModules);
+                            $checked = self::CheckValueByNiveauAcces($paramSalUser, $rowsActionsWorkflow[IntranetActionsModel::KEYNAME], $idIntranetModules);
                         }
                         if ($checked) {
                             $visible = 'visibility';
@@ -206,7 +256,7 @@ class IntranetDroitsAccesModel extends AbstractModel {
                         foreach ($arrayActions as $rowsActions) {
                             if ($rowsActions[IntranetActionsModel::FIELDNAME_TAG_INTRANET_ACTIONS] == 'site') {
                                 if ($paramSalUser) {
-                                    $checked = IntranetDroitsAccesModel::CheckValueByNiveauAcces($paramSalUser, $rowsActions[IntranetActionsModel::KEYNAME], $idIntranetModules);
+                                    $checked = self::CheckValueByNiveauAcces($paramSalUser, $rowsActions[IntranetActionsModel::KEYNAME], $idIntranetModules);
                                 }
                                 if ($checked) {
                                     $visible = 'visibility';
@@ -218,7 +268,7 @@ class IntranetDroitsAccesModel extends AbstractModel {
                                         . ' value=1 ' . $checked . '/>' . $rowsActions[IntranetActionsModel::FIELDNAME_DESCRIPTION_INTRANET_ACTIONS] . '</td></tr></td>';
                             } else {
                                 if ($paramSalUser) {
-                                    $checked = IntranetDroitsAccesModel::CheckValueByNiveauAcces($paramSalUser, $rowsActions[IntranetActionsModel::KEYNAME], $idIntranetModules);
+                                    $checked = self::CheckValueByNiveauAcces($paramSalUser, $rowsActions[IntranetActionsModel::KEYNAME], $idIntranetModules);
                                 }
                                 if ($checked) {
                                     $visible = 'visibility';
@@ -247,7 +297,7 @@ class IntranetDroitsAccesModel extends AbstractModel {
                 $ftaDroitsAccesGlobaux = '<table width=500 border=1>';
                 foreach ($arrayActionsGlobaux as $rowsActionsGlobaux) {
                     if ($paramSalUser) {
-                        $checked = IntranetDroitsAccesModel::CheckValueByNiveauAcces($paramSalUser, $rowsActionsGlobaux[IntranetActionsModel::KEYNAME], $idIntranetModules);
+                        $checked = self::CheckValueByNiveauAcces($paramSalUser, $rowsActionsGlobaux[IntranetActionsModel::KEYNAME], $idIntranetModules);
                     }
                     $ftaDroitsAccesGlobaux .='<td  align=left width=100><input type=checkbox onclick=Change()'
                             . ' id=' . $rowsActionsGlobaux[IntranetActionsModel::FIELDNAME_NOM_INTRANET_ACTIONS]
@@ -385,12 +435,12 @@ class IntranetDroitsAccesModel extends AbstractModel {
                             ) {
 
                                 $arrayDroitsAcces = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
-                                                'SELECT ' . IntranetDroitsAccesModel::FIELDNAME_ID_INTRANET_ACTIONS
-                                                . ' FROM ' . IntranetDroitsAccesModel::TABLENAME
-                                                . ' WHERE ' . IntranetDroitsAccesModel::FIELDNAME_ID_INTRANET_MODULES . '=' . $idIntranetModules
-                                                . ' AND ' . IntranetDroitsAccesModel::FIELDNAME_ID_INTRANET_ACTIONS . '= ' . $idIntranetActions
-                                                . ' AND ' . IntranetDroitsAccesModel::FIELDNAME_NIVEAU_INTRANET_DROITS_ACCES . '=' . $idIntranetNiveauAcces
-                                                . ' AND ' . IntranetDroitsAccesModel::FIELDNAME_ID_USER . '=' . $paramSalUser
+                                                'SELECT ' . self::FIELDNAME_ID_INTRANET_ACTIONS
+                                                . ' FROM ' . self::TABLENAME
+                                                . ' WHERE ' . self::FIELDNAME_ID_INTRANET_MODULES . '=' . $idIntranetModules
+                                                . ' AND ' . self::FIELDNAME_ID_INTRANET_ACTIONS . '= ' . $idIntranetActions
+                                                . ' AND ' . self::FIELDNAME_NIVEAU_INTRANET_DROITS_ACCES . '=' . $idIntranetNiveauAcces
+                                                . ' AND ' . self::FIELDNAME_ID_USER . '=' . $paramSalUser
                                 );
 
                                 /*
@@ -429,15 +479,15 @@ class IntranetDroitsAccesModel extends AbstractModel {
      */
     private static function CheckValueByNiveauAcces($paramIdUser, $paramIdIntranetActions, $paramIdIntranetModule) {
         $arrayNiveauAcces = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
-                        ' SELECT ' . IntranetDroitsAccesModel::FIELDNAME_NIVEAU_INTRANET_DROITS_ACCES
-                        . ' FROM ' . IntranetDroitsAccesModel::TABLENAME
-                        . ' WHERE ' . IntranetDroitsAccesModel::FIELDNAME_ID_USER . '=' . $paramIdUser
-                        . ' AND ' . IntranetDroitsAccesModel::FIELDNAME_ID_INTRANET_ACTIONS . '=' . $paramIdIntranetActions
-                        . ' AND ' . IntranetDroitsAccesModel::FIELDNAME_ID_INTRANET_MODULES . '=' . $paramIdIntranetModule
+                        ' SELECT ' . self::FIELDNAME_NIVEAU_INTRANET_DROITS_ACCES
+                        . ' FROM ' . self::TABLENAME
+                        . ' WHERE ' . self::FIELDNAME_ID_USER . '=' . $paramIdUser
+                        . ' AND ' . self::FIELDNAME_ID_INTRANET_ACTIONS . '=' . $paramIdIntranetActions
+                        . ' AND ' . self::FIELDNAME_ID_INTRANET_MODULES . '=' . $paramIdIntranetModule
         );
         if ($arrayNiveauAcces) {
             foreach ($arrayNiveauAcces as $rowsNiveauAcces) {
-                $niveauAcces = $rowsNiveauAcces[IntranetDroitsAccesModel::FIELDNAME_NIVEAU_INTRANET_DROITS_ACCES];
+                $niveauAcces = $rowsNiveauAcces[self::FIELDNAME_NIVEAU_INTRANET_DROITS_ACCES];
             }
         } else {
             $niveauAcces = 0;
@@ -458,14 +508,14 @@ class IntranetDroitsAccesModel extends AbstractModel {
      */
     public static function getFtaImpression($paramIdUser) {
         $arrayImpression = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
-                        ' SELECT ' . IntranetDroitsAccesModel::FIELDNAME_NIVEAU_INTRANET_DROITS_ACCES
-                        . ' FROM ' . IntranetDroitsAccesModel::TABLENAME
-                        . ' WHERE ' . IntranetDroitsAccesModel::FIELDNAME_ID_USER . '=' . $paramIdUser
-                        . ' AND ' . IntranetDroitsAccesModel::FIELDNAME_ID_INTRANET_ACTIONS . '=' . '7'
-                        . ' AND ' . IntranetDroitsAccesModel::FIELDNAME_ID_INTRANET_MODULES . '=19'
+                        ' SELECT ' . self::FIELDNAME_NIVEAU_INTRANET_DROITS_ACCES
+                        . ' FROM ' . self::TABLENAME
+                        . ' WHERE ' . self::FIELDNAME_ID_USER . '=' . $paramIdUser
+                        . ' AND ' . self::FIELDNAME_ID_INTRANET_ACTIONS . '=' . '7'
+                        . ' AND ' . self::FIELDNAME_ID_INTRANET_MODULES . '=' . IntranetModulesModel::ID_MODULES_FTA
         );
         foreach ($arrayImpression as $rowsImpression) {
-            $fta_impression = $rowsImpression[IntranetDroitsAccesModel::FIELDNAME_NIVEAU_INTRANET_DROITS_ACCES];
+            $fta_impression = $rowsImpression[self::FIELDNAME_NIVEAU_INTRANET_DROITS_ACCES];
         }
         return $fta_impression;
     }
@@ -477,14 +527,14 @@ class IntranetDroitsAccesModel extends AbstractModel {
      */
     public static function getFtaConsultation($paramIdUser) {
         $arrayConsultation = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
-                        ' SELECT ' . IntranetDroitsAccesModel::FIELDNAME_NIVEAU_INTRANET_DROITS_ACCES
-                        . ' FROM ' . IntranetDroitsAccesModel::TABLENAME
-                        . ' WHERE ' . IntranetDroitsAccesModel::FIELDNAME_ID_USER . '=' . $paramIdUser
-                        . ' AND ' . IntranetDroitsAccesModel::FIELDNAME_ID_INTRANET_ACTIONS . '=' . '1'
-                        . ' AND ' . IntranetDroitsAccesModel::FIELDNAME_ID_INTRANET_MODULES . '=19'
+                        ' SELECT ' . self::FIELDNAME_NIVEAU_INTRANET_DROITS_ACCES
+                        . ' FROM ' . self::TABLENAME
+                        . ' WHERE ' . self::FIELDNAME_ID_USER . '=' . $paramIdUser
+                        . ' AND ' . self::FIELDNAME_ID_INTRANET_ACTIONS . '=' . '1'
+                        . ' AND ' . self::FIELDNAME_ID_INTRANET_MODULES . '=' . IntranetModulesModel::ID_MODULES_FTA
         );
         foreach ($arrayConsultation as $rowsConsultation) {
-            $fta_consultation = $rowsConsultation[IntranetDroitsAccesModel::FIELDNAME_NIVEAU_INTRANET_DROITS_ACCES];
+            $fta_consultation = $rowsConsultation[self::FIELDNAME_NIVEAU_INTRANET_DROITS_ACCES];
         }
         return $fta_consultation;
     }
@@ -496,14 +546,14 @@ class IntranetDroitsAccesModel extends AbstractModel {
      */
     public static function getFtaModification($paramIdUser) {
         $arrayModification = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
-                        ' SELECT ' . IntranetDroitsAccesModel::FIELDNAME_NIVEAU_INTRANET_DROITS_ACCES
-                        . ' FROM ' . IntranetDroitsAccesModel::TABLENAME
-                        . ' WHERE ' . IntranetDroitsAccesModel::FIELDNAME_ID_USER . '=' . $paramIdUser
-                        . ' AND ' . IntranetDroitsAccesModel::FIELDNAME_ID_INTRANET_ACTIONS . '=' . '2'
-                        . ' AND ' . IntranetDroitsAccesModel::FIELDNAME_ID_INTRANET_MODULES . '=19'
+                        ' SELECT ' . self::FIELDNAME_NIVEAU_INTRANET_DROITS_ACCES
+                        . ' FROM ' . self::TABLENAME
+                        . ' WHERE ' . self::FIELDNAME_ID_USER . '=' . $paramIdUser
+                        . ' AND ' . self::FIELDNAME_ID_INTRANET_ACTIONS . '=' . '2'
+                        . ' AND ' . self::FIELDNAME_ID_INTRANET_MODULES . '=' . IntranetModulesModel::ID_MODULES_FTA
         );
         foreach ($arrayModification as $rowsModifications) {
-            $fta_modification = $rowsModifications[IntranetDroitsAccesModel::FIELDNAME_NIVEAU_INTRANET_DROITS_ACCES];
+            $fta_modification = $rowsModifications[self::FIELDNAME_NIVEAU_INTRANET_DROITS_ACCES];
         }
         return $fta_modification;
     }

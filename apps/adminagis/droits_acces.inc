@@ -1,7 +1,9 @@
 <?php
-
+/**
+ * Page non utilisé
+ */
 //$paramIdUser = Lib::getParameterFromRequest("sal_user");
-$paramIdUser = 320;
+//$paramIdUser = 320;
 /* * ***************************************************
   Construction des droits d'accès pour tous les modules:
  * ***************************Boris Sanègre 2003.03.25 */

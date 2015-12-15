@@ -118,7 +118,7 @@ foreach ($arrayFta as $rowsFta) {
 
 
 $taux_temp = FtaSuiviProjetModel::getArrayFtaTauxValidation($ftaModel, FALSE);
-$recap[$idFta] = round($taux_temp['0'] * '100%', '0') . '%';
+$recap[$idFta] = round($taux_temp['0'] * FtaProcessusDelaiModel::TAUX_100, '0') . '%';
 
 
 
@@ -141,14 +141,15 @@ if ($demande_abreviation_fta_transition) {
     $req.= ' AND ' . FtaTransitionModel::FIELDNAME_ABREVIATION_FTA_TRANSITION . '=\'' . $demande_abreviation_fta_transition . '\' ';
 }
 //1+ La Fta peut être validé, 0 La Fta n'est pas à 100%
-if ($recap[$idFta] <> '100%') {
+if ($recap[$idFta] <> FtaProcessusDelaiModel::TAUX_100) {
     $req.= ' AND ' . FtaTransitionModel::FIELDNAME_PROCESSUS_PROPRIETAIRE_FTA_TRANSITION . '=0';
 }
-if ($idFtaRole == "6") {
-    $req.= ' AND ' . FtaTransitionModel::FIELDNAME_ABREVIATION_FTA_TRANSITION . '<>\'' . FtaEtatModel::ETAT_ABREVIATION_VALUE_WORKFLOW . '\'';
-}
-if ($idFtaRole <> "1" and $idFtaRole <> "6") {
-    $req.= ' AND ' . FtaTransitionModel::FIELDNAME_ABREVIATION_FTA_TRANSITION . '<>\'' . FtaEtatModel::ETAT_ABREVIATION_VALUE_RETIRE . '\'';
+//if ($idFtaRole == FtaRoleModel::ID_FTA_ROLE_SITE) {
+//    $req.= ' AND ' . FtaTransitionModel::FIELDNAME_ABREVIATION_FTA_TRANSITION . '<>\'' . FtaEtatModel::ETAT_ABREVIATION_VALUE_WORKFLOW . '\'';
+//}
+if (!FtaRoleModel::isGestionnaire($idFtaRole)) {
+    $req.= ' AND ' . FtaTransitionModel::FIELDNAME_ABREVIATION_FTA_TRANSITION . '<>\'' . FtaEtatModel::ETAT_ABREVIATION_VALUE_RETIRE . '\''
+            . ' AND ' . FtaTransitionModel::FIELDNAME_ABREVIATION_FTA_TRANSITION . '<>\'' . FtaEtatModel::ETAT_ABREVIATION_VALUE_ARCHIVE . '\'';
 }
 
 $req .=' ORDER BY ' . FtaTransitionModel::FIELDNAME_ABREVIATION_FTA_TRANSITION . ' DESC';
@@ -180,7 +181,7 @@ foreach ($arrayFtaTransition as $rowsFtaTransition) {
 $tableau_transition.='</select>';
 
 //Tableau des chapitres
-if ($action == 'I' or $action == 'W') {
+if ($action == FtaEtatModel::ETAT_ABREVIATION_VALUE_MODIFICATION or $action == 'W') {
     $tableau_chapitre = '<' . $html_table . '>'
             . '<tr class=titre><td>Liste des Chapitres pouvant être mis à jour</td></tr>'
             . '<tr><td><' . $html_table . '>'
@@ -192,7 +193,7 @@ if ($action == 'I' or $action == 'W') {
                     . ' WHERE ' . FtaWorkflowStructureModel::TABLENAME . '.' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_CHAPITRE
                     . '=' . FtaChapitreModel::TABLENAME . '.' . FtaChapitreModel::KEYNAME
                     . ' AND ' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_WORKFLOW . '=' . $idFtaWorkflow
-                    . ' AND ' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_PROCESSUS . '<>0'
+                    . ' AND ' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_PROCESSUS . '<>' . FtaProcessusModel::PROCESSUS_PUBLIC
                     . ' ORDER BY ' . FtaChapitreModel::FIELDNAME_NOM_USUEL_CHAPITRE
     );
     foreach ($arrrayFtaChapitre as $rowsChapitre) {

@@ -35,9 +35,9 @@ class FtaRoleModel extends AbstractModel {
          * Si l'utilisateur n'a aucun rôle on lui affecte le rôle commun
          */
         $return = self::ID_FTA_ROLE_COMMUN;
-        $arrayFtaRole = FtaRoleModel::getArrayIdFtaRoleByIdUser($paramIdUser);
+        $arrayFtaRole = self::getArrayIdFtaRoleByIdUser($paramIdUser);
         if ($arrayFtaRole != NULL) {
-            $return = $arrayFtaRole['0'][FtaRoleModel::KEYNAME];
+            $return = $arrayFtaRole['0'][self::KEYNAME];
         }
         return $return;
     }
@@ -49,12 +49,12 @@ class FtaRoleModel extends AbstractModel {
      */
     public static function getArrayIdFtaRoleByIdUser($paramIdUser) {
         $arrayIdFtaRole = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
-                        'SELECT DISTINCT ' . FtaRoleModel::TABLENAME . '.' . FtaRoleModel::KEYNAME
-                        . ',' . FtaRoleModel::FIELDNAME_NOM_FTA_ROLE
-                        . ',' . FtaRoleModel::FIELDNAME_DESCRIPTION_FTA_ROLE
+                        'SELECT DISTINCT ' . self::TABLENAME . '.' . self::KEYNAME
+                        . ',' . self::FIELDNAME_NOM_FTA_ROLE
+                        . ',' . self::FIELDNAME_DESCRIPTION_FTA_ROLE
                         . ' FROM ' . FtaActionRoleModel::TABLENAME . ',' . UserModel::TABLENAME
                         . ',' . IntranetDroitsAccesModel::TABLENAME . ',' . IntranetActionsModel::TABLENAME
-                        . ',' . FtaRoleModel::TABLENAME
+                        . ',' . self::TABLENAME
                         . ' WHERE ' . UserModel::TABLENAME . '.' . UserModel::KEYNAME . '=' . $paramIdUser
                         . ' AND ' . UserModel::TABLENAME . '.' . UserModel::KEYNAME
                         . '=' . IntranetDroitsAccesModel::TABLENAME . '.' . IntranetDroitsAccesModel::FIELDNAME_ID_USER
@@ -64,8 +64,8 @@ class FtaRoleModel extends AbstractModel {
                         . ' AND ' . IntranetActionsModel::TABLENAME . '.' . IntranetActionsModel::KEYNAME
                         . '=' . FtaActionRoleModel::TABLENAME . '.' . FtaActionRoleModel::FIELDNAME_ID_INTRANET_ACTIONS
                         . ' AND ' . FtaActionRoleModel::TABLENAME . '.' . FtaActionRoleModel::FIELDNAME_ID_FTA_ROLE
-                        . '=' . FtaRoleModel::TABLENAME . '.' . FtaRoleModel::KEYNAME
-                        . ' ORDER BY ' . FtaRoleModel::TABLENAME . '.' . FtaRoleModel::KEYNAME
+                        . '=' . self::TABLENAME . '.' . self::KEYNAME
+                        . ' ORDER BY ' . self::TABLENAME . '.' . self::KEYNAME
         );
 
         return $arrayIdFtaRole;
@@ -79,12 +79,12 @@ class FtaRoleModel extends AbstractModel {
      */
     public static function getIdFtaRoleByIdUserAndWorkflow($paramIdUser, $paramIdFtaWorkflow) {
         $arrayIdFtaRole = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
-                        'SELECT DISTINCT ' . FtaRoleModel::TABLENAME . '.' . FtaRoleModel::KEYNAME
-                        . ',' . FtaRoleModel::FIELDNAME_NOM_FTA_ROLE
-                        . ',' . FtaRoleModel::FIELDNAME_DESCRIPTION_FTA_ROLE
+                        'SELECT DISTINCT ' . self::TABLENAME . '.' . self::KEYNAME
+                        . ',' . self::FIELDNAME_NOM_FTA_ROLE
+                        . ',' . self::FIELDNAME_DESCRIPTION_FTA_ROLE
                         . ' FROM ' . FtaActionRoleModel::TABLENAME . ',' . UserModel::TABLENAME
                         . ',' . IntranetDroitsAccesModel::TABLENAME . ',' . IntranetActionsModel::TABLENAME
-                        . ',' . FtaRoleModel::TABLENAME
+                        . ',' . self::TABLENAME
                         . ' WHERE ' . UserModel::TABLENAME . '.' . UserModel::KEYNAME . '=' . $paramIdUser
                         . ' AND ' . UserModel::TABLENAME . '.' . UserModel::KEYNAME
                         . '=' . IntranetDroitsAccesModel::TABLENAME . '.' . IntranetDroitsAccesModel::FIELDNAME_ID_USER
@@ -94,12 +94,12 @@ class FtaRoleModel extends AbstractModel {
                         . ' AND ' . IntranetActionsModel::TABLENAME . '.' . IntranetActionsModel::KEYNAME
                         . '=' . FtaActionRoleModel::TABLENAME . '.' . FtaActionRoleModel::FIELDNAME_ID_INTRANET_ACTIONS
                         . ' AND ' . FtaActionRoleModel::TABLENAME . '.' . FtaActionRoleModel::FIELDNAME_ID_FTA_ROLE
-                        . '=' . FtaRoleModel::TABLENAME . '.' . FtaRoleModel::KEYNAME
+                        . '=' . self::TABLENAME . '.' . self::KEYNAME
                         . ' AND ' . FtaActionRoleModel::TABLENAME . '.' . FtaActionRoleModel::FIELDNAME_ID_FTA_WROKFLOW . '=' . $paramIdFtaWorkflow
         );
         if ($arrayIdFtaRole) {
             foreach ($arrayIdFtaRole as $rowsIdFtaRole) {
-                $IdFtaRole[] = $rowsIdFtaRole[FtaRoleModel::KEYNAME];
+                $IdFtaRole[] = $rowsIdFtaRole[self::KEYNAME];
             }
         }
 
@@ -192,8 +192,8 @@ class FtaRoleModel extends AbstractModel {
             if ($arrayService) {
                 foreach ($arrayService as $rowsService) {
                     if ($rowsService) {
-                        $ftaRole = new FtaRoleModel($rowsService);
-                        $service .= $ftaRole->getDataField(FtaRoleModel::FIELDNAME_DESCRIPTION_FTA_ROLE)->getFieldValue() . '<br>';
+                        $ftaRole = new self($rowsService);
+                        $service .= $ftaRole->getDataField(self::FIELDNAME_DESCRIPTION_FTA_ROLE)->getFieldValue() . '<br>';
                     }
                 }
             }
@@ -211,7 +211,7 @@ class FtaRoleModel extends AbstractModel {
     private static function AddIdRole($paramIdRole) {
         if ($paramIdRole) {
             foreach ($paramIdRole as $value) {
-                $req .= ' OR ' . ' ' . FtaRoleModel::KEYNAME . '=' . $value . ' ';
+                $req .= ' OR ' . ' ' . self::KEYNAME . '=' . $value . ' ';
             }
         }
         return $req;
@@ -224,13 +224,13 @@ class FtaRoleModel extends AbstractModel {
      */
     public static function getNameRoleByIdRole($paramIdRole) {
         $arrayRole = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
-                        'SELECT ' . FtaRoleModel::FIELDNAME_DESCRIPTION_FTA_ROLE
-                        . ' FROM ' . FtaRoleModel::TABLENAME
-                        . ' WHERE ' . FtaRoleModel::KEYNAME . '=' . $paramIdRole
+                        'SELECT ' . self::FIELDNAME_DESCRIPTION_FTA_ROLE
+                        . ' FROM ' . self::TABLENAME
+                        . ' WHERE ' . self::KEYNAME . '=' . $paramIdRole
         );
 
 
-        return $arrayRole[0][FtaRoleModel::FIELDNAME_DESCRIPTION_FTA_ROLE];
+        return $arrayRole[0][self::FIELDNAME_DESCRIPTION_FTA_ROLE];
     }
 
     /**
@@ -243,12 +243,12 @@ class FtaRoleModel extends AbstractModel {
         $valueIsGestionnaire = 0;
         $return = FALSE;
         $arrayIsGestionnaire = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
-                        'SELECT ' . FtaRoleModel::FIELDNAME_IS_GESTIONNAIRE
-                        . ' FROM ' . FtaRoleModel::TABLENAME
-                        . ' WHERE ' . FtaRoleModel::KEYNAME . '=' . $paramIdRole
+                        'SELECT ' . self::FIELDNAME_IS_GESTIONNAIRE
+                        . ' FROM ' . self::TABLENAME
+                        . ' WHERE ' . self::KEYNAME . '=' . $paramIdRole
         );
         foreach ($arrayIsGestionnaire as $rowsIsGestionnaire) {
-            $valueIsGestionnaire = $rowsIsGestionnaire[FtaRoleModel::FIELDNAME_IS_GESTIONNAIRE];
+            $valueIsGestionnaire = $rowsIsGestionnaire[self::FIELDNAME_IS_GESTIONNAIRE];
         }
         if ($valueIsGestionnaire != 0) {
             $return = TRUE;

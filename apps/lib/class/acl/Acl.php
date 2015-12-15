@@ -97,4 +97,66 @@ class Acl {
         }
     }
 
+    /**
+     * Vérification et correction des incohérences de droits d'accès.
+     * @param int $paramIdUser
+     */
+    public static function checkHeritedRightsRemovedByUser($paramIdUser) {
+
+        /**
+         * Propagation de la suppresion des droits d'accès sur les actions héritées
+         */
+        $arrayParentAction = self::getArrayIdParentActionByIntranetModule();
+
+        foreach ($arrayParentAction as $arrayIdIntranetActionIdIntranetModule) {
+            $IdIntranetAction = $arrayIdIntranetActionIdIntranetModule[IntranetActionsModel::FIELDNAME_PARENT_INTRANET_ACTIONS];
+            $IdIntranetModule = $arrayIdIntranetActionIdIntranetModule[IntranetActionsModel::FIELDNAME_MODULE_INTRANET_ACTIONS];
+            /**
+             * L'utilisateur a-t-il le doit sur cet id_intranet_action pour cet id_intranet_module ?
+             */
+            $isUserHaveRight = self::isUserHaveRight($paramIdUser, $IdIntranetModule, $IdIntranetAction);
+
+            /**
+             * Si il n'a pas les accès, alors, 
+             */
+            if ($isUserHaveRight == FALSE) {
+                /**
+                 * Nettoyage des accès sur toutes les actions liées
+                 */
+                self::eraseUserRightOnIntranetAction($paramIdUser, $IdIntranetModule, $IdIntranetAction); //SQL DELETE liaison entre droits.action = action.parent  pour ce user et ce module
+            }
+        }
+    }
+
+    /**
+     * On obtient le tableau des id intranet actions parent
+     * @return array
+     */
+    private static function getArrayIdParentActionByIntranetModule() {
+        return IntranetActionsModel::getArrayIdIntranetActionParentWithIdModule();
+    }
+
+    /**
+     * On verifie si l'utilisateur connecté à les droits sur id intranet actions parent
+     * @param int $paramIdUser
+     * @param int $paramIdIntranetModule
+     * @param int $paramIdIntranetAction
+     * @return boolean
+     */
+    private static function isUserHaveRight($paramIdUser, $paramIdIntranetModule, $paramIdIntranetAction) {
+        return IntranetDroitsAccesModel::checkUserHaveRightsAcces($paramIdUser, $paramIdIntranetModule, $paramIdIntranetAction);
+    }
+
+    /**
+     * On supprime les droits sur id intranet actions de l'utilisateur connecté 
+     * correspondants à l'id intranet actions parents en cours
+     * @param int $paramIdUser
+     * @param int $paramIdIntranetModule
+     * @param int $paramIdIntranetAction
+     * @return boolean
+     */
+    private static function eraseUserRightOnIntranetAction($paramIdUser, $paramIdIntranetModule, $paramIdIntranetAction) {
+        return IntranetDroitsAccesModel::eraseUserRightsAcces($paramIdUser, $paramIdIntranetModule, $paramIdIntranetAction);
+    }
+
 }

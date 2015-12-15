@@ -758,16 +758,10 @@ class AccueilFta {
 
 
                 /**
-                 * Liste des processus pouvant être validé
+                 * Donne accès aux bouton de transition 
+                 * pour les utilisateur se trouvant en fin de parcours de l'espace de travail
                  */
-                $arrayProcessusValidation = FtaProcessusCycleModel::getArrayProcessusValidationFTA($idWorkflowFtaEncours);
-
-
-                /**
-                 * Listes des processus auxquel l'utilisateur connecté à les droits d'accès
-                 */
-                $arrayProcessusAcces = FtaWorkflowStructureModel::getArrayProcessusByRoleAndWorkflow(self::$idFtaRole, $idWorkflowFtaEncours);
-                $accesTransitionButton = is_null(array_intersect($arrayProcessusValidation, $arrayProcessusAcces));
+                $accesTransitionButton = FtaTransitionModel::isAccesTransitionButton(self::$idFtaRole, $idWorkflowFtaEncours);
                 $din = null;
 
                 /*
@@ -780,7 +774,7 @@ class AccueilFta {
 
 
                 /**
-                 * Calssification
+                 * Classification
                  */
                 if ($idclassification) {
                     $classification = ClassificationArborescenceArticleCategorieContenuModel::getElementClassificationFta($idclassification, ClassificationFta2Model::FIELDNAME_ID_PROPRIETAIRE_GROUPE);
@@ -1314,7 +1308,7 @@ class AccueilFta {
                 $bgcolor_header = NULL;
             }
         } else {
-            $tableauFiche .= '<tr class=contenu><td>Aucune Fta identifié</td></tr>';
+            $tableauFiche .= '<tr class=contenu><td>' . UserInterfaceMessage::FR_NONE_FTA . '</td></tr>';
         }
 
         $tableauFicheN2.= $tableauFicheNWork . $tableauFicheN;

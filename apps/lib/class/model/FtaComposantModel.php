@@ -164,8 +164,8 @@ class FtaComposantModel extends AbstractModel {
                 . ', ' . FtaComposantModel::FIELDNAME_TAILLE_POLICE_INGREDIENT_FTA_COMPOSITION
                 . ', ' . FtaComposantModel::FIELDNAME_TAILLE_POLICE_NOM_FTA_COMPOSITION
                 . ', ' . FtaComposantModel::FIELDNAME_VERSION
-                . ', ' . FtaComposantModel::FIELDNAME_LAST_ID_FTA_COMPOSANT
                 . ', ' . FtaComposantModel::FIELDNAME_QUANTITE_FTA_COMPOSITION_UVC
+                . ', ' . FtaComposantModel::FIELDNAME_LAST_ID_FTA_COMPOSANT
                 . ', ' . FtaComposantModel::FIELDNAME_ID_FTA . ')'
                 . ' SELECT ' . FtaComposantModel::FIELDNAME_ASCENDANT_FTA_NOMENCLATURE
                 . ', ' . FtaComposantModel::FIELDNAME_CODE_PRODUIT_AGROLOGIC_FTA_NOMENCLATURE

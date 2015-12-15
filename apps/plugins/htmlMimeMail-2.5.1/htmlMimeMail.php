@@ -126,16 +126,17 @@ class htmlMimeMail {
         /**
          * Defaults for smtp sending
          */
-        if (!empty($GLOBALS['HTTP_SERVER_VARS']['HTTP_HOST'])) {
-            $helo = $GLOBALS['HTTP_SERVER_VARS']['HTTP_HOST'];
-        } elseif (!empty($GLOBALS['HTTP_SERVER_VARS']['SERVER_NAME'])) {
-            $helo = $GLOBALS['HTTP_SERVER_VARS']['SERVER_NAME'];
+        if (!empty($_SESSION['HTTP_SERVER_VARS']['HTTP_HOST'])) {
+            $helo = $_SESSION['HTTP_SERVER_VARS']['HTTP_HOST'];
+        } elseif (!empty($_SESSION['HTTP_SERVER_VARS']['SERVER_NAME'])) {
+            $helo = $_SESSION['HTTP_SERVER_VARS']['SERVER_NAME'];
         } else {
             $helo = 'localhost';
         }
 
         //$this->smtp_params['host'] = 'localhost';
-        $this->smtp_params['host'] = $_SESSION["globalConfig"]->smtp_server_adress;
+        $globalConfig = new GlobalConfig();
+        $this->smtp_params['host'] = $globalConfig->getConf()->getSmtpServerName();        
         $this->smtp_params['port'] = 25;
         //$this->smtp_params['helo'] = $helo;
         $this->smtp_params['helo'] = 'linux.agis.fr';
@@ -186,18 +187,24 @@ class htmlMimeMail {
      * Accessor to set the SMTP parameters
      */
     function setSMTPParams($host = null, $port = null, $helo = null, $auth = null, $user = null, $pass = null) {
-        if (!is_null($host))
+        if (!is_null($host)) {
             $this->smtp_params['host'] = $host;
-        if (!is_null($port))
+        }
+        if (!is_null($port)) {
             $this->smtp_params['port'] = $port;
-        if (!is_null($helo))
+        }
+        if (!is_null($helo)) {
             $this->smtp_params['helo'] = $helo;
-        if (!is_null($auth))
+        }
+        if (!is_null($auth)) {
             $this->smtp_params['auth'] = $auth;
-        if (!is_null($user))
+        }
+        if (!is_null($user)) {
             $this->smtp_params['user'] = $user;
-        if (!is_null($pass))
+        }
+        if (!is_null($pass)) {
             $this->smtp_params['pass'] = $pass;
+        }
     }
 
     /**
@@ -655,7 +662,7 @@ class htmlMimeMail {
 
             case 'smtp':
                 require_once(dirname(__FILE__) . '/smtp.php');
-                require_once(dirname(__FILE__) . '/RFC822.php');                
+                require_once(dirname(__FILE__) . '/RFC822.php');
                 $smtp = &smtp::connect($this->smtp_params);
 //                $smtp = new smtp();
 //                $smtp->connect($this->smtp_params);
@@ -670,7 +677,6 @@ class htmlMimeMail {
                 }
                 unset($addresses); // These are reused
                 unset($address);   // These are reused
-
                 // Get flat representation of headers, parsing
                 // Cc and Bcc as we go
                 foreach ($this->headers as $name => $value) {
@@ -698,7 +704,7 @@ class htmlMimeMail {
                 if (isset($this->return_path)) {
                     $send_params['from'] = $this->return_path;
                 } elseif (!empty($this->headers['From'])) {
-                      $from = Mail_RFC822::parseAddressList($this->headers['From']);
+                    $from = Mail_RFC822::parseAddressList($this->headers['From']);
 //                    $from = $Mail_RFC822->parseAddressList($this->headers['From']);
                     $send_params['from'] = sprintf('%s@%s', $from[0]->mailbox, $from[0]->host);
                 } else {

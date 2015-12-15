@@ -119,11 +119,11 @@ if (
 //}
 
 //Migration de V1 vers V2
-if ($globalConfig->getConf()->getExecDebugEnable()) {
-    echo '<br>';
-    echo '<a href=./migration.php target=_top>Administration du module</a>';
-    echo '</td>';
-}
+//if ($globalConfig->getConf()->getExecDebugEnable()) {
+//    echo '<br>';
+//    echo '<a href=./migration.php target=_top>Administration du module</a>';
+//    echo '</td>';
+//}
 
 
 

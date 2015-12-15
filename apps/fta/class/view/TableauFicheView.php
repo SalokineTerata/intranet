@@ -123,7 +123,7 @@ class TableauFicheView {
         /**
          * Bouton d'accès au détail de la FTA
          */
-        $lien .= self::getHtmlLinkModify($abreviation_fta_etat, $paramIdFta, $synthese_action, $idFtaEtat);
+        $lien .= self::getHtmlLinkModify($abreviation_fta_etat, $paramIdFta, $synthese_action, $idFtaEtat, $checkAccesButtonBySiteProd);
 
         /**
          * Bouton d'accès au rendu PDF de la FTA
@@ -312,10 +312,10 @@ class TableauFicheView {
         return $iconHeader;
     }
 
-    static private function getHtmlLinkModify($paramAbreviationFtaEtat, $paramIdFta, $paramSyntheseAction, $paramIdFtaEtat, $paramIdFtaRole = FtaRoleModel::ID_FTA_ROLE_COMMUN) {
+    static private function getHtmlLinkModify($paramAbreviationFtaEtat, $paramIdFta, $paramSyntheseAction, $paramIdFtaEtat, $paramAccesBouton, $paramIdFtaRole = FtaRoleModel::ID_FTA_ROLE_COMMUN) {
         $lien = "";
         if (
-                (Acl::getValueAccesRights(Acl::ACL_FTA_MODIFICATION))
+                (Acl::getValueAccesRights(Acl::ACL_FTA_MODIFICATION) and $paramAccesBouton)
                 or ( Acl::getValueAccesRights(Acl::ACL_FTA_CONSULTATION) and $paramAbreviationFtaEtat <> FtaEtatModel::ETAT_ABREVIATION_VALUE_MODIFICATION )
         ) {
 

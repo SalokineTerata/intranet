@@ -558,4 +558,25 @@ class IntranetDroitsAccesModel extends AbstractModel {
         return $fta_modification;
     }
 
+    public static function isIdUserHaveRightsOnSiteProdByWorkflow($paramIdUser, $paramIdFtaWorkflow, $paramIdFtaSiteDeProduction) {
+        $isIdUserHaveRightsOnSiteProd = FALSE;
+        /**
+         * On obtient IdintranetAction du site de production
+         */
+        $idIntranetActionsSiteDeProduction = FtaActionSiteModel::getArrayIdIntranetActionByWorkflowAndSiteDeProduction($paramIdFtaWorkflow, $paramIdFtaSiteDeProduction);
+        /**
+         * On verifie si selon le workflow  et site de production en cours l'utilisateur connecté à les droits d'accès.
+         * Puisqu'un utilisateur ne doit pas avoir accès aux boutons :
+         * historique, transition, retirer, duplication et pourcentage d'avancement
+         * si il n'a pas les accès aux site de production.
+         */
+        $checkAccesButtonBySiteProd = IntranetActionsModel::isAccessFtaActionByIdUserFtaWorkflowAndSiteDeProduction($paramIdUser, $paramIdFtaWorkflow, $idIntranetActionsSiteDeProduction);
+
+        if ($checkAccesButtonBySiteProd) {
+            $isIdUserHaveRightsOnSiteProd = TRUE;
+        }
+
+        return $isIdUserHaveRightsOnSiteProd;
+    }
+
 }

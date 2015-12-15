@@ -117,7 +117,7 @@ class Navigation {
         /**
          * Liste des Rôles auxquelles l'utilisateur à accès pour un workflow donnée
          */
-        $arrayRoleWorkflow = FtaRoleModel::getIdFtaRoleByIdUserAndWorkflow($idUser, self::$id_fta_workflow);
+        $arrayRoleWorkflow = FtaRoleModel::getArrayIdFtaRoleByIdUserAndWorkflow($idUser, self::$id_fta_workflow);
         if (count($arrayRoleWorkflow) > "1") {
             //Calcul du taux
             $taux_temp = FtaSuiviProjetModel::getArrayFtaTauxValidation(self::$ftaModel, TRUE);

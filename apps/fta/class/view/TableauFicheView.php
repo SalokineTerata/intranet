@@ -464,7 +464,7 @@ class TableauFicheView {
                 . '&id_fta_role=' . $idFtaRole
                 . '&synthese_action=' . $paramSyntheseAction
                 . '&action=correction'
-                . '&demande_abreviation_fta_transition=' . UserInterfaceMessage::FR_WARNING_FTA_ETAT_REMOVE . '\''
+                . '&demande_abreviation_fta_transition=' . FtaEtatModel::ETAT_ABREVIATION_VALUE_RETIRE . '\''
                 . '}'
                 . 'else{}'
                 . '}'

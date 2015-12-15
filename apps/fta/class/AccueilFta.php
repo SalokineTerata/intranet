@@ -774,7 +774,7 @@ class AccueilFta {
 
 
                 /**
-                 * Calssification
+                 * Classification
                  */
                 if ($idclassification) {
                     $classification = ClassificationArborescenceArticleCategorieContenuModel::getElementClassificationFta($idclassification, ClassificationFta2Model::FIELDNAME_ID_PROPRIETAIRE_GROUPE);

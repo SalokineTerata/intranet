@@ -758,16 +758,10 @@ class AccueilFta {
 
 
                 /**
-                 * Liste des processus pouvant être validé
+                 * Donne accès aux bouton de transition 
+                 * pour les utilisateur se trouvant en fin de parcours de l'espace de travail
                  */
-                $arrayProcessusValidation = FtaProcessusCycleModel::getArrayProcessusValidationFTA($idWorkflowFtaEncours);
-
-
-                /**
-                 * Listes des processus auxquel l'utilisateur connecté à les droits d'accès
-                 */
-                $arrayProcessusAcces = FtaWorkflowStructureModel::getArrayProcessusByRoleAndWorkflow(self::$idFtaRole, $idWorkflowFtaEncours);
-                $accesTransitionButton = is_null(array_intersect($arrayProcessusValidation, $arrayProcessusAcces));
+                $accesTransitionButton = FtaTransitionModel::isAccesTransitionButton(self::$idFtaRole, $idWorkflowFtaEncours);
                 $din = null;
 
                 /*

@@ -125,7 +125,7 @@ class FtaEtatModel extends AbstractModel {
                                 . ' AND ' . FtaProcessusCycleModel::FIELDNAME_FTA_ETAT . '=\'' . $paramEtat . '\''                                            // Nous recuperons l'abréviation de l'etat de la Fta
                                 . ' AND ( 0 ' . IntranetActionsModel::addIdIntranetAction($_SESSION[Acl::ACL_INTRANET_ACTIONS_VALIDE]) . ')'
                 );
-                if ($paramRole == FtaRoleModel::ID_FTA_ROLE_CHEF_DE_PROJET or $paramRole == FtaRoleModel::ID_FTA_ROLE_SITE) {
+                if (FtaRoleModel::isGestionnaire($paramRole)) {
                     $arrayTmp = NULL;
                 }
                 if ($arrayTmp) {
@@ -205,7 +205,7 @@ class FtaEtatModel extends AbstractModel {
                             /**
                              * En cas d'oublier des chef de projet qui aurait créé une fta sans validé les informations de base
                              */
-                            if ($paramRole == FtaRoleModel::ID_FTA_ROLE_CHEF_DE_PROJET or $paramRole == FtaRoleModel::ID_FTA_ROLE_SITE) {
+                            if (FtaRoleModel::isGestionnaire($paramRole)) {
                                 $chefProjet = ($tauxDeValidadation == '0');
                                 if ($tauxDeValidadation <> '0' OR $chefProjet == TRUE) {
                                     $idFtaEffectue[] = $rows[FtaModel::KEYNAME];

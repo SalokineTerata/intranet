@@ -80,8 +80,8 @@ $ftaModel = new FtaModel($idFta);
 $globalConfig = new GlobalConfig();
 $idUser = $globalConfig->getAuthenticatedUser()->getKeyValue();
 $idFtaWorkflow = $ftaModel->getDataField(FtaModel::FIELDNAME_WORKFLOW)->getFieldValue();
-$idFtaRoleAcces = FtaRoleModel::getIdFtaRoleByIdUserAndWorkflow($idUser, $idFtaWorkflow);
-$idFtaRole = $idFtaRoleAcces["0"];
+$arrayIdFtaRoleAcces = FtaRoleModel::getArrayIdFtaRoleByIdUserAndWorkflow($idUser, $idFtaWorkflow);
+$idFtaRole = $arrayIdFtaRoleAcces["0"];
 
 /*
   Sélection du mode d'affichage

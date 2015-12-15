@@ -77,7 +77,7 @@ class FtaRoleModel extends AbstractModel {
      * @param int $paramIdFtaWorkflow
      * @return array
      */
-    public static function getIdFtaRoleByIdUserAndWorkflow($paramIdUser, $paramIdFtaWorkflow) {
+    public static function getArrayIdFtaRoleByIdUserAndWorkflow($paramIdUser, $paramIdFtaWorkflow) {
         $arrayIdFtaRole = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
                         'SELECT DISTINCT ' . self::TABLENAME . '.' . self::KEYNAME
                         . ',' . self::FIELDNAME_NOM_FTA_ROLE
@@ -255,6 +255,17 @@ class FtaRoleModel extends AbstractModel {
         }
 
         return $return;
+    }
+
+    public static function isIdRoleRightsAccesByWorkflow($paramIdUser, $paramWorkflow) {
+        $isIdRoleRightsAcces = FALSE;
+        $arrayIdFtaRoleAcces = FtaRoleModel::getArrayIdFtaRoleByIdUserAndWorkflow($paramIdUser, $paramWorkflow);
+
+        if ($arrayIdFtaRoleAcces) {
+            $isIdRoleRightsAcces = TRUE;
+        }
+
+        return $isIdRoleRightsAcces;
     }
 
 }

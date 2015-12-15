@@ -73,8 +73,8 @@ UserModel::checkUserSessionExpired($globalConfig);
 
 $idUser = $globalConfig->getAuthenticatedUser()->getKeyValue();
 $idFtaWorkflow = $ftaModel->getDataField(FtaModel::FIELDNAME_WORKFLOW)->getFieldValue();
-$idFtaRoleAcces = FtaRoleModel::getIdFtaRoleByIdUserAndWorkflow($idUser, $idFtaWorkflow);
-$idFtaRole = $idFtaRoleAcces["0"];
+$arrayIdFtaRoleAcces = FtaRoleModel::getArrayIdFtaRoleByIdUserAndWorkflow($idUser, $idFtaWorkflow);
+$idFtaRole = $arrayIdFtaRoleAcces["0"];
 $ftaView = new FtaView($ftaModel);
 $dataFieldCommentaire = $ftaModel->getDataField(FtaModel::FIELDNAME_COMMENTAIRE_MAJ_FTA);
 $htmlFieldCommentaire = Html::getHtmlObjectFromDataField($dataFieldCommentaire);

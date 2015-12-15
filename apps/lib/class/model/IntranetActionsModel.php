@@ -264,7 +264,7 @@ class IntranetActionsModel extends AbstractModel {
         $result = FALSE;
 
         if (self::getArrayIdIntranetActionByIdUserFtaWorkflowAndSiteDeProduction(
-                        $paramIdUser, $paramIdFtaWorkflow, $paramIdIntranetActionSiteDeProduction) != 0) {
+                        $paramIdUser, $paramIdFtaWorkflow, $paramIdIntranetActionSiteDeProduction)) {
             $result = TRUE;
         }
 

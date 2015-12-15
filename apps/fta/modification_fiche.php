@@ -83,7 +83,14 @@ if ($idFta) {
     $idFtaRole = Lib::isDefined(FtaRoleModel::KEYNAME);
     $ftaModification = Acl::getValueAccesRights('fta_modification');
     $id_fta_chapitre = $id_fta_chapitre_encours;
-    $ftaModel = new FtaModel($idFta);
+    /**
+     * Initilisation
+     */
+    $ftaModel = new FtaModel($idFta); //Rien ne garantie que l'utilisateur est mis un idFta existant
+    $globalConfig = new GlobalConfig();
+    $idUser = $globalConfig->getAuthenticatedUser()->getKeyValue();
+    $idWorkflowFtaEncours = $ftaModel->getDataField(FtaModel::FIELDNAME_WORKFLOW)->getFieldValue();
+    $idSiteDeProduction = $ftaModel->getDataField(FtaModel::FIELDNAME_SITE_PRODUCTION)->getFieldValue();
 
     /**
      * Verification des droits d'accès sur une Fta en modification
@@ -126,25 +133,30 @@ if ($idFta) {
     }
 
 
-    if ($ftaModification and $idFtaRole == FtaRoleModel::ID_FTA_ROLE_COMMUN and $abreviationFtaEtat == FtaEtatModel::ETAT_ABREVIATION_VALUE_MODIFICATION) {
+    /**
+     * On vérifie si l'utilisateur à les droits d'accès sur une Fta en état de modification
+     */
+    if ($abreviationFtaEtat == FtaEtatModel::ETAT_ABREVIATION_VALUE_MODIFICATION and $ftaModification) {
+        if ($idFtaRole == FtaRoleModel::ID_FTA_ROLE_COMMUN) {
+            $arrayIdFtaRoleAcces = FtaRoleModel::getArrayIdFtaRoleByIdUserAndWorkflow($idUser, $idWorkflowFtaEncours);
+        }
+        $checkAccesButtonBySiteProd = IntranetDroitsAccesModel::isIdUserHaveRightsOnSiteProdByWorkflow($idUser, $idWorkflowFtaEncours, $idSiteDeProduction);
 
-        $globalConfig = new GlobalConfig();
-        $idUser = $globalConfig->getAuthenticatedUser()->getKeyValue();
-        $idFtaWorkflow = $ftaModel->getDataField(FtaModel::FIELDNAME_WORKFLOW)->getFieldValue();
-        $idFtaRoleAcces = FtaRoleModel::getIdFtaRoleByIdUserAndWorkflow($idUser, $idFtaWorkflow);
-        if (!$idFtaRoleAcces) {
+        if ((!$arrayIdFtaRoleAcces and ! $checkAccesButtonBySiteProd) or ! $checkAccesButtonBySiteProd) {
             $titre = UserInterfaceMessage::FR_WARNING_ACCES_RIGHTS_TITLE;
             $message = UserInterfaceMessage::FR_WARNING_ACCES_RIGHTS;
             $redirection = "index.php";
             afficher_message($titre, $message, $redirection);
         } else {
-            $idFtaRole = $idFtaRoleAcces["0"];
+            /**
+             * On affecte un IdFtaRole seulement dans le cas ou on est vient de la page de recherche
+             */
+            if ($idFtaRole == FtaRoleModel::ID_FTA_ROLE_COMMUN) {
+                $idFtaRole = $arrayIdFtaRoleAcces["0"];
+            }
         }
     }
 
-
-
-//$navigue = afficher_navigation($id_fta, $id_fta_chapitre_encours, $synthese_action, $comeback);
     $affichgeDesChapitres = TRUE;
 
     Navigation::initNavigation($idFta, $id_fta_chapitre_encours, $synthese_action, $comeback, $idFtaEtat, $abreviationFtaEtat, $idFtaRole, $affichgeDesChapitres);

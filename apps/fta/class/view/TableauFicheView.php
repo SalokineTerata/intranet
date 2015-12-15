@@ -402,7 +402,7 @@ class TableauFicheView {
              */
             case (
             Acl::getValueAccesRights(Acl::ACL_FTA_MODIFICATION)
-            AND $paramAccesTransitionButton == TRUE
+            AND $paramAccesTransitionButton == FALSE
             AND ( $paramAbreviationFtaEtat == FtaEtatModel::ETAT_ABREVIATION_VALUE_MODIFICATION)
             AND $paramTauxRound == FtaProcessusDelaiModel::TAUX_100
             AND $paramCheckAccesButton
@@ -417,7 +417,7 @@ class TableauFicheView {
              */
             case (
             Acl::getValueAccesRights(Acl::ACL_FTA_MODIFICATION)
-            AND $paramAccesTransitionButton == TRUE
+            AND $paramAccesTransitionButton == FALSE
             AND ( $paramAbreviationFtaEtat == FtaEtatModel::ETAT_ABREVIATION_VALUE_VALIDE)
             AND $paramCheckAccesButton
 

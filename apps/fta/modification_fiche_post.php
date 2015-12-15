@@ -111,6 +111,18 @@ switch ($action) {
                             , $selection_reseau, $selection_saisonnalite);
             $modelFta->getDataField(FtaModel::FIELDNAME_ID_FTA_CLASSIFICATION2)->setFieldValue($idClassification2);
         }
+        /**
+         * Enregistrement de la DIN en majuscule
+         */
+          if ($modelFta->getDataField(FtaModel::FIELDNAME_LIBELLE)->getFieldValue()) {
+            $modelFta->getDataField(FtaModel::FIELDNAME_LIBELLE)->setFieldValue(
+                    mb_convert_case(
+                            stripslashes(
+                                    $modelFta->getDataField(
+                                            FtaModel::FIELDNAME_LIBELLE)->getFieldValue()
+                            ), MB_CASE_UPPER, 'utf-8')
+            );
+        }
         $modelFta->saveToDatabase();
 
 
@@ -124,20 +136,19 @@ switch ($action) {
         $modelFtaWorkflowStruture = new FtaWorkflowStructureModel($idFtaWorkflowStruture);
 
         $isFtaDataValidationSuccess = $modelFta->isFtaDataValidationSuccess();
-
-
+      
         if ($paramSignatureValidationSuiviProjet and $isFtaDataValidationSuccess == "0") {
             $modelFtaSuiviProjet->setSigned($paramSignatureValidationSuiviProjet);
             $modelFtaSuiviProjet->getDataField(FtaSuiviProjetModel::FIELDNAME_DATE_VALIDATION_SUIVI_PROJET)->setFieldValue(date("Y-m-d"));
         }
         //$modelFtaSuiviProjet->getDataField(FtaSuiviProjetModel::FIELDNAME_SIGNATURE_VALIDATION_SUIVI_PROJET)->setFieldValue($paramSignatureValidationSuiviProjet);
 
-        $abreviationFtaEtat = $modelFta->getModelFtaEtat()->getDataField(FtaEtatModel::FIELDNAME_ABREVIATION)->getFieldValue();
+//        $abreviationFtaEtat = $modelFta->getModelFtaEtat()->getDataField(FtaEtatModel::FIELDNAME_ABREVIATION)->getFieldValue();
 
-        $idFtaProcessusEncours = $modelFtaWorkflowStruture->getDataField(FtaWorkflowStructureModel::FIELDNAME_ID_FTA_PROCESSUS)->getFieldValue();
-        $idFtaWorkflowEncours = $modelFtaWorkflowStruture->getDataField(FtaWorkflowStructureModel::FIELDNAME_ID_FTA_WORKFLOW)->getFieldValue();
+//        $idFtaProcessusEncours = $modelFtaWorkflowStruture->getDataField(FtaWorkflowStructureModel::FIELDNAME_ID_FTA_PROCESSUS)->getFieldValue();
+//        $idFtaWorkflowEncours = $modelFtaWorkflowStruture->getDataField(FtaWorkflowStructureModel::FIELDNAME_ID_FTA_WORKFLOW)->getFieldValue();
 
-        $nom_fta_chapitre_encours = $modeChapitre->getDataField(FtaChapitreModel::FIELDNAME_NOM_CHAPITRE)->getFieldValue();
+//        $nom_fta_chapitre_encours = $modeChapitre->getDataField(FtaChapitreModel::FIELDNAME_NOM_CHAPITRE)->getFieldValue();
 
         /**
          * Cette condition n'est plus à verifier puisque seul la date echande de processus est utilisé
@@ -260,27 +271,15 @@ switch ($action) {
 //            $operation = 'insert';
 //        }
 //        $id_fta_chapitre = $paramIdFtaChapitreEncours;
-        if (!$paramSignatureValidationSuiviProjet) {
-            $paramSignatureValidationSuiviProjet = FtaSuiviProjetModel::SIGNATURE_VALIDATION_SUIVI_PROJET_FALSE;
-        }
 //        $table = 'fta_suivi_projet';
 //        mysql_table_operation($table, $operation);
 //Controle des donnée et access_arti2
-        if ($modelFta->getDataField(FtaModel::FIELDNAME_LIBELLE)->getFieldValue()) {
-            $modelFta->getDataField(FtaModel::FIELDNAME_LIBELLE)->setFieldValue(
-                    mb_convert_case(
-                            stripslashes(
-                                    $modelFta->getDataField(
-                                            FtaModel::FIELDNAME_LIBELLE)->getFieldValue()
-                            ), MB_CASE_UPPER, 'utf-8')
-            );
-        }
+        
 
 //Nom de l'étiquette par défaut si on enregistre sur le chapitre Gestion des articles (cf. table fta_chapitre)
 //        if (($modelFta->getDataField(FtaModel::FIELDNAME_LIBELLE_CLIENT)->getFieldValue() == null) and ( $nom_fta_chapitre == 'activation_article')) {
 //            $modelFta->getDataField(FtaModel::FIELDNAME_LIBELLE_CLIENT)->setFieldValue($modelFta->getDataField(FtaModel::FIELDNAME_LIBELLE)->getFieldValue());
 //        }
-        $modelFta->saveToDatabase();
 //        $table = 'fta';
 //        $operation = 'update';
 //        mysql_table_operation($table, $operation);
@@ -317,28 +316,28 @@ switch ($action) {
 //            }
 //        }
 
-        if (!$erreur) {
-            //Mise à jour de la validation de l'échéance
-            $paramIdFta;
-            $id_fta_processus = $idFtaProcessusEncours;
-
-            /*
-             * Fonction non utilisé
-             */
-            //FtaProcessusDelaiModel::BuildFtaProcessusValidationDelai($paramIdFta, $id_fta_processus, $idFtaWorkflowEncours);
-            //Notification de l'état d'Avancement de la FTA
-            //afficher_message('Information de l'état d'avancement du Projet', 'Les intervenants ont été informer du nouvel état d'avancement.', '');
-            $liste_user = FtaSuiviProjetModel::getListeUsersAndNotificationSuiviProjet($paramIdFta, $paramIdFtaChapitreEncours);
-
-            if ($liste_user) {
-                $noredirection = 1;
-            }
-        } else {
-            $modelFtaSuiviProjet->getDataField(FtaSuiviProjetModel::FIELDNAME_SIGNATURE_VALIDATION_SUIVI_PROJET)->setFieldValue("0");
-        }
-
-        //Sauvegarde des enregistrements dans la base de données.
-        $modelFtaSuiviProjet->saveToDatabase();
+//        if (!$erreur) {
+//            //Mise à jour de la validation de l'échéance
+//            $paramIdFta;
+//            $id_fta_processus = $idFtaProcessusEncours;
+//
+//            /*
+//             * Fonction non utilisé
+//             */
+//            //FtaProcessusDelaiModel::BuildFtaProcessusValidationDelai($paramIdFta, $id_fta_processus, $idFtaWorkflowEncours);
+//            //Notification de l'état d'Avancement de la FTA
+//            //afficher_message('Information de l'état d'avancement du Projet', 'Les intervenants ont été informer du nouvel état d'avancement.', '');
+//            $liste_user = FtaSuiviProjetModel::getListeUsersAndNotificationSuiviProjet($paramIdFta, $paramIdFtaChapitreEncours);
+//
+//            if ($liste_user) {
+//                $noredirection = 1;
+//            }
+//        } else {
+//            $modelFtaSuiviProjet->getDataField(FtaSuiviProjetModel::FIELDNAME_SIGNATURE_VALIDATION_SUIVI_PROJET)->setFieldValue("0");
+//        }
+//
+//        //Sauvegarde des enregistrements dans la base de données.
+//        $modelFtaSuiviProjet->saveToDatabase();
 
 
 

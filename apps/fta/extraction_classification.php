@@ -248,11 +248,11 @@ function UpgradeClassificationV2ToV3($paramNameOfBDDTarget, $paramNameOfBDDOrigi
 //                        . "</tr>"
 //                );
 
-    $hostname_connect = "cod-intranet.agis.fr"; //nom du serveur MySQL de connection � la base de donn�e
-    $database_connect = $paramNameOfBDDTarget; //nom de la base de donn�e sur votre serveur MySQL
-    $username_connect = "root"; //login de la base MySQL
+//    $hostname_connect = "cod-intranet.agis.fr"; //nom du serveur MySQL de connection � la base de donn�e
+//    $database_connect = $paramNameOfBDDTarget; //nom de la base de donn�e sur votre serveur MySQL
+//    $username_connect = "root"; //login de la base MySQL
 //$tablename_connect = "salaries"; //table login de la base MySQL
-    $password_connect = "8ale!ne"; //mot de passe de la base MySQL
+//    $password_connect = "8ale!ne"; //mot de passe de la base MySQL
 //$connect = new PDO($hostname_connect, $username_connect, $password_connect); //connection � la base de donn�e si sa echoue sa retourne une erreur. 
 
     $donnee = mysql_pconnect($hostname_connect, $username_connect, $password_connect) or die("connexion impossible");

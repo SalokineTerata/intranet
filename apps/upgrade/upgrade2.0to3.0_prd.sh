@@ -14,7 +14,7 @@ ENV_DEST="prd"
 MYSQL_SERVER_NAME_DEST="127.0.0.1"
 MYSQL_USER_NAME_DEST="mysqladm"
 MYSQL_USER_PASSWORD_DEST="agis"
-URL_SERVER_NAME="10.12.3.131"
+URL_SERVER_NAME="fta05401.grpldc.com"
 
 
 echo "* Migration vers l'environnement PRD"

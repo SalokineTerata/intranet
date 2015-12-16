@@ -378,7 +378,7 @@ class AccueilFta {
                  * Entête de la barre de navigation de la page d'accueil
                  */
                 . '<TR>'
-                . '<TH>Role </TH> <TH>Etat FTA</TH> <TH>' . UserInterfaceLabel::FR_AVANCEMENT_FTA . '</TH>'
+                . '<TH>Rôle</TH> <TH>Etat FTA</TH> <TH>' . UserInterfaceLabel::FR_AVANCEMENT_FTA . '</TH>'
                 . '</TR>';
         /*
          * Données du tableau
@@ -681,7 +681,7 @@ class AccueilFta {
                 . '</th><th>'
                 . UserInterfaceLabel::FR_AVANCEMENT_FTA
                 . '</th><th>'
-                . 'Service'
+                . 'Rôles'
                 . '</th><th>'
                 . 'Actions'
                 . '</th><th>'

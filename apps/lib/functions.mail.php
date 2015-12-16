@@ -125,77 +125,77 @@ function envoismail($sujetmail, $text, $destinataire, $expediteur, $paramTypeMai
         if (!$result and $globalConfig->getConf()->getExecEnvironment() == EnvironmentConf::ENV_PRD) {
             $paramTypeMail = "Erreur Mail non envoyé";
         }
+    }
+    switch ($paramTypeMail) {
 
-        switch ($paramTypeMail) {
+        case "mail-transactions" :
+            /**
+             * Enregistrement des envoies de transactions mail dans le fichier log
+             * 
+             * "date heure : $login : $module : $expediteur : $destinataire : $sujetmail"
+             * "$text"
+             * 
+             */
+            $paramLog = $paramTypeMail . " " . $expediteur . " " . $destinataire . "\n" . $sujetmail . "\n" . $text;
+            Logger::AddMail($paramLog, $paramTypeMail);
 
-            case "mail-transactions" :
-                /**
-                 * Enregistrement des envoies de transactions mail dans le fichier log
-                 * 
-                 * "date heure : $login : $module : $expediteur : $destinataire : $sujetmail"
-                 * "$text"
-                 * 
-                 */
-                $paramLog = $paramTypeMail . " " . $expediteur . " " . $destinataire . "\n" . $sujetmail . "\n" . $text;
-                Logger::AddMail($paramLog, $paramTypeMail);
+            break;
 
-                break;
+        case "Correction" :
 
-            case "Correction" :
+            /**
+             * Enregistrement des envoies de correction des mails dans le fichier log
+             * 
+             * "========================================================="
+             * "date heure : $login : $module : $expediteur : $destinataire : $sujetmail"
+             * "$text"
+             * 
+             */
+            $paramLog = $paramTypeMail . " " . $expediteur . " " . $destinataire . "\n" . $sujetmail . "\n" . $text;
+            Logger::AddMail($paramLog, $paramTypeMail);/**
+             * Enregistrement de l'historique des mails dans le fichier log
+             * 
+             * "========================================================="
+             * "date heure : $login : $module : $expediteur : $destinataire : $sujetmail"
+             * "$text"
+             * 
+             */
+            break;
 
-                /**
-                 * Enregistrement des envoies de correction des mails dans le fichier log
-                 * 
-                 * "========================================================="
-                 * "date heure : $login : $module : $expediteur : $destinataire : $sujetmail"
-                 * "$text"
-                 * 
-                 */
-                $paramLog = $paramTypeMail . " " . $expediteur . " " . $destinataire . "\n" . $sujetmail . "\n" . $text;
-                Logger::AddMail($paramLog, $paramTypeMail);/**
-                 * Enregistrement de l'historique des mails dans le fichier log
-                 * 
-                 * "========================================================="
-                 * "date heure : $login : $module : $expediteur : $destinataire : $sujetmail"
-                 * "$text"
-                 * 
-                 */
-                break;
+        case "Validation" :
 
-            case "Validation" :
+            /**
+             * Enregistrement des envoies de validation des mails dans le fichier log
+             * 
+             * "========================================================="
+             * "date heure : $login : $module : $expediteur : $destinataire : $sujetmail"
+             * "$text"
+             * 
+             */
+            $paramLog = $paramTypeMail . " " . $expediteur . " " . $destinataire . "\n" . $sujetmail . "\n" . $text;
+            Logger::AddMail($paramLog, $paramTypeMail);/**
+             * Enregistrement de l'historique des mails dans le fichier log
+             * 
+             * "========================================================="
+             * "date heure : $login : $module : $expediteur : $destinataire : $sujetmail"
+             * "$text"
+             * 
+             */
+            break;
+        case "Inscription" :
+            $paramLog = $paramTypeMail . " " . $expediteur . " " . $destinataire . "\n" . $sujetmail . "\n" . $text;
+            Logger::AddMail($paramLog, $paramTypeMail);
+            break;
+        case "CompteBloquer" :
+            $paramLog = $paramTypeMail . " " . $expediteur . " " . $destinataire . "\n" . $sujetmail . "\n" . $text;
+            Logger::AddMail($paramLog, $paramTypeMail);
+            break;
 
-                /**
-                 * Enregistrement des envoies de validation des mails dans le fichier log
-                 * 
-                 * "========================================================="
-                 * "date heure : $login : $module : $expediteur : $destinataire : $sujetmail"
-                 * "$text"
-                 * 
-                 */
-                $paramLog = $paramTypeMail . " " . $expediteur . " " . $destinataire . "\n" . $sujetmail . "\n" . $text;
-                Logger::AddMail($paramLog, $paramTypeMail);/**
-                 * Enregistrement de l'historique des mails dans le fichier log
-                 * 
-                 * "========================================================="
-                 * "date heure : $login : $module : $expediteur : $destinataire : $sujetmail"
-                 * "$text"
-                 * 
-                 */
-                break;
-            case "Inscription" :
-                $paramLog = $paramTypeMail . " " . $expediteur . " " . $destinataire . "\n" . $sujetmail . "\n" . $text;
-                Logger::AddMail($paramLog, $paramTypeMail);
-                break;
-            case "CompteBloquer" :
-                $paramLog = $paramTypeMail . " " . $expediteur . " " . $destinataire . "\n" . $sujetmail . "\n" . $text;
-                Logger::AddMail($paramLog, $paramTypeMail);
-                break;
-
-            case "Erreur" :
-                $paramLog = $paramTypeMail . " " . $expediteur . " " . $destinataire . "\n" . $sujetmail . "\n" . $text;
-                Logger::AddMail($paramLog, $paramTypeMail);
-                break;
-        }
+        case "Erreur" :
+            $paramLog = $paramTypeMail . " " . $expediteur . " " . $destinataire . "\n" . $sujetmail . "\n" . $text;
+            Logger::AddMail($paramLog, $paramTypeMail);
+            break;
+    }
 //        else {
 //            $titre = "Envoi Réussi !";
 //            $message = "Votre mail à bien été envoyé à:<br>$adresse_to";
@@ -203,7 +203,6 @@ function envoismail($sujetmail, $text, $destinataire, $expediteur, $paramTypeMai
 //            afficher_message($titre, $message, $redirection);
 //            //echo 'Mail sent!';
 //        }//echo $GLOBALS['smtp_ip'];
-    }
 }
 
 function envoismail_CC($sujetmail, $text, $destinataire, $expediteur, $destinataireCc, $destinataireCCC) {

@@ -126,10 +126,10 @@ class htmlMimeMail {
         /**
          * Defaults for smtp sending
          */
-        if (!empty($_SESSION['HTTP_SERVER_VARS']['HTTP_HOST'])) {
-            $helo = $_SESSION['HTTP_SERVER_VARS']['HTTP_HOST'];
-        } elseif (!empty($_SESSION['HTTP_SERVER_VARS']['SERVER_NAME'])) {
-            $helo = $_SESSION['HTTP_SERVER_VARS']['SERVER_NAME'];
+        if (!empty($_SERVER['HTTP_HOST'])) {
+            $helo = $_SERVER['HTTP_HOST'];
+        } elseif (!empty($_SERVER['SERVER_NAME'])) {
+            $helo = $_SERVER['SERVER_NAME'];
         } else {
             $helo = 'localhost';
         }
@@ -138,8 +138,7 @@ class htmlMimeMail {
         $globalConfig = new GlobalConfig();
         $this->smtp_params['host'] = $globalConfig->getConf()->getSmtpServerName();        
         $this->smtp_params['port'] = 25;
-        //$this->smtp_params['helo'] = $helo;
-        $this->smtp_params['helo'] = 'linux.agis.fr';
+        $this->smtp_params['helo'] = $helo;
         $this->smtp_params['auth'] = false;
         $this->smtp_params['user'] = '';
         $this->smtp_params['pass'] = '';

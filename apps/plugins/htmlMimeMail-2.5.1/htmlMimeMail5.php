@@ -123,8 +123,7 @@ class htmlMimeMail5 {
         } else {
             $helo = 'localhost';
         }
-        $globalConfig = new GlobalConfig();
-        $this->smtp_params['host'] = $globalConfig->getConf()->getSmtpServerName();
+        $this->smtp_params['host'] = 'localhost';
         $this->smtp_params['port'] = 25;
         $this->smtp_params['helo'] = $helo;
         $this->smtp_params['auth'] = false;

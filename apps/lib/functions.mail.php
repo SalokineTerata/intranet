@@ -104,14 +104,15 @@ function envoismail($sujetmail, $text, $destinataire, $expediteur, $paramTypeMai
         }
         //Création du mail
         $mail = new htmlMimeMail5();
-        
+        $mail->setSMTPParams($globalConfig->getConf()->getSmtpServerName());
+
         // Set the From and Reply-To headers
         $mail->setFrom($expediteur);
         $mail->setReturnPath($expediteur);
-        
+
         // Set the Subject
         $mail->setSubject($sujetmail);
-        
+
         // Set the body
         $mail->setText($text);
         //$result = $mail->send(array($adresse_to), 'smtp');
@@ -200,6 +201,8 @@ function envoismail($sujetmail, $text, $destinataire, $expediteur, $paramTypeMai
             Logger::AddMail($paramLog, $paramTypeMail);
             break;
     }
+
+
 //        else {
 //            $titre = "Envoi Réussi !";
 //            $message = "Votre mail à bien été envoyé à:<br>$adresse_to";

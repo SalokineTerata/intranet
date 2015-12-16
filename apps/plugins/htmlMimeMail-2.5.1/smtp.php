@@ -57,7 +57,7 @@ class smtp {
         $globalConfig = new GlobalConfig();
 
         $this->authenticated = TRUE;
-        $this->timeout = 15;
+        $this->timeout = 5;
         $this->status = SMTP_STATUS_NOT_CONNECTED;
         $this->host = $globalConfig->getConf()->getSmtpServerName();
         $this->port = 25;
@@ -80,7 +80,7 @@ class smtp {
      * it will connect to the server and send
      * the HELO command.
      */
-    public function connect($params = array()) {
+    function connect($params = array()) {
 
         if (!isset($this->status)) {
             $obj = new smtp($params);
@@ -96,6 +96,7 @@ class smtp {
 
             $greeting = $this->get_data();
             if (is_resource($this->connection)) {
+                $this->status = SMTP_STATUS_CONNECTED;
                 return $this->auth ? $this->ehlo() : $this->helo();
             } else {
                 $this->errors[] = 'Failed to connect to server: ' . $errstr;
@@ -141,9 +142,9 @@ class smtp {
                 $this->rcpt($this->recipients);
             }
 
-            if (!$this->data()) {
-                return FALSE;
-            }
+//            if (!$this->data()) {
+//                return FALSE;
+//            }
 
             // Transparency
             $headers = str_replace(CRLF . '.', CRLF . '..', trim(implode(CRLF, $this->headers)));

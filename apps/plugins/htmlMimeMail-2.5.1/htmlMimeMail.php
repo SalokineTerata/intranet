@@ -663,8 +663,8 @@ class htmlMimeMail {
                 require_once(dirname(__FILE__) . '/smtp.php');
                 require_once(dirname(__FILE__) . '/RFC822.php');
 //                $smtp = &smtp::connect($this->smtp_params);
-                $smtp = new smtp($this->smtp_params);
-                $smtp->connect();
+                $smtp = new smtp();
+                $smtp->connect($this->smtp_params);
                 $Mail_RFC822 = new Mail_RFC822();
                 // Parse recipients argument for internet addresses
                 foreach ($recipients as $recipient) {

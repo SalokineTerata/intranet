@@ -83,14 +83,12 @@ function envoismail($sujetmail, $text, $destinataire, $expediteur, $paramTypeMai
         $globalConfig = new GlobalConfig();
     }
 
-//    $logMail = new Logger('../../log/');
-
 
     if ($globalConfig->getConf()->getSmtpServiceEnable() == TRUE) {
 
         /*
-         * Dans le l'environnement développement, 
          * Toutes les adresses emails sont redirigées vers utilisateurs.fta@ldc.fr
+         * Si la redirection est mis en place
          */
         if ($globalConfig->getConf()->getSmtpEmailRedirectionUser()) {
             $destinataire_orig = $destinataire;
@@ -131,115 +129,44 @@ function envoismail($sujetmail, $text, $destinataire, $expediteur, $paramTypeMai
             $paramTypeMail = "Erreur";
         }
     }
-    switch ($paramTypeMail) {
 
-        case "mail-transactions" :
-            /**
-             * Enregistrement des envoies de transactions mail dans le fichier log
-             * 
-             * "date heure : $login : $module : $expediteur : $destinataire : $sujetmail"
-             * "$text"
-             * 
-             */
-            $paramLog = $paramTypeMail . " " . $expediteur . " " . $destinataire . "\n" . $sujetmail . "\n" . $text;
-            Logger::AddMail($paramLog, $paramTypeMail);
-
-            break;
-
-        case "Correction" :
-
-            /**
-             * Enregistrement des envoies de correction des mails dans le fichier log
-             * 
-             * "========================================================="
-             * "date heure : $login : $module : $expediteur : $destinataire : $sujetmail"
-             * "$text"
-             * 
-             */
-            $paramLog = $paramTypeMail . " " . $expediteur . " " . $destinataire . "\n" . $sujetmail . "\n" . $text;
-            Logger::AddMail($paramLog, $paramTypeMail);/**
-             * Enregistrement de l'historique des mails dans le fichier log
-             * 
-             * "========================================================="
-             * "date heure : $login : $module : $expediteur : $destinataire : $sujetmail"
-             * "$text"
-             * 
-             */
-            break;
-
-        case "Validation" :
-
-            /**
-             * Enregistrement des envoies de validation des mails dans le fichier log
-             * 
-             * "========================================================="
-             * "date heure : $login : $module : $expediteur : $destinataire : $sujetmail"
-             * "$text"
-             * 
-             */
-            $paramLog = $paramTypeMail . " " . $expediteur . " " . $destinataire . "\n" . $sujetmail . "\n" . $text;
-            Logger::AddMail($paramLog, $paramTypeMail);/**
-             * Enregistrement de l'historique des mails dans le fichier log
-             * 
-             * "========================================================="
-             * "date heure : $login : $module : $expediteur : $destinataire : $sujetmail"
-             * "$text"
-             * 
-             */
-            break;
-        case "Inscription" :
-            $paramLog = $paramTypeMail . " " . $expediteur . " " . $destinataire . "\n" . $sujetmail . "\n" . $text;
-            Logger::AddMail($paramLog, $paramTypeMail);
-            break;
-        case "CompteBloquer" :
-            $paramLog = $paramTypeMail . " " . $expediteur . " " . $destinataire . "\n" . $sujetmail . "\n" . $text;
-            Logger::AddMail($paramLog, $paramTypeMail);
-            break;
-
-        case "Erreur" :
-            $paramLog = $paramTypeMail . " " . $expediteur . " " . $destinataire . "\n" . $sujetmail . "\n" . $text;
-            Logger::AddMail($paramLog, $paramTypeMail);
-            break;
-    }
-
-
-//        else {
-//            $titre = "Envoi Réussi !";
-//            $message = "Votre mail à bien été envoyé à:<br>$adresse_to";
-//            $redirection = "";
-//            afficher_message($titre, $message, $redirection);
-//            //echo 'Mail sent!';
-//        }//echo $GLOBALS['smtp_ip'];
+    /**
+     * Génération de log
+     */
+    $paramLog = $paramTypeMail . " " . $expediteur . " " . $destinataire . "\n" . $sujetmail . "\n" . $text;
+    Logger::AddMail($paramLog, $paramTypeMail);
 }
 
-function envoismail_CC($sujetmail, $text, $destinataire, $expediteur, $destinataireCc, $destinataireCCC) {
-// rajout de la possibilité d'envoyer le mail en CC ou en copie masqué
-    //Création du mail
-    $mail = new htmlMimeMail();
-    //$mail->addAttachment($tmp_pdf, $tmp_filename, 'application/pdf');
-    //$mail->setFrom($mail_user);
-    $mail->setFrom($expediteur);
-    $mail->setCc($destinataireCc);
-    $mail->setBcc($destinataireCCC);
-    //$mail->setSubject("Agis: Fiche Technique Matière Première");
-    $mail->setSubject($sujetmail);
-    $mail->setText($text);
-    //$result = $mail->send(array($adresse_to), 'smtp');
-    //$result = $mail->send(array($destinataire), 'smtp');
-    $result = $mail->send(array($destinataireCC), 'smtp');
+/**
 
-    if (!$result) {
-        print_r($mail->errors);
-        return(0);
-    } else {
-        return(1);
-        /* $titre="Envoi Réussi !";
-          $message="Votre mail à bien été envoyé à:<br>$adresse_to";
-          $redirection="";
-          afficher_message($titre, $message, $redirection);
-          //echo 'Mail sent!';
-         */
-    }//echo $GLOBALS['smtp_ip'];
-}
 
+
+  function envoismail_CC($sujetmail, $text, $destinataire, $expediteur, $destinataireCc, $destinataireCCC) {
+  // rajout de la possibilité d'envoyer le mail en CC ou en copie masqué
+  //Création du mail
+  $mail = new htmlMimeMail();
+  //$mail->addAttachment($tmp_pdf, $tmp_filename, 'application/pdf');
+  //$mail->setFrom($mail_user);
+  $mail->setFrom($expediteur);
+  $mail->setCc($destinataireCc);
+  $mail->setBcc($destinataireCCC);
+  //$mail->setSubject("Agis: Fiche Technique Matière Première");
+  $mail->setSubject($sujetmail);
+  $mail->setText($text);
+  //$result = $mail->send(array($adresse_to), 'smtp');
+  //$result = $mail->send(array($destinataire), 'smtp');
+  $result = $mail->send(array($destinataireCC), 'smtp');
+
+  if (!$result) {
+  print_r($mail->errors);
+  return(0);
+  } else {
+  return(1);
+  /* $titre="Envoi Réussi !";
+  $message="Votre mail à bien été envoyé à:<br>$adresse_to";
+  $redirection="";
+  afficher_message($titre, $message, $redirection);
+  //echo 'Mail sent!';
+ */
+//echo $GLOBALS['smtp_ip'];
 ?>

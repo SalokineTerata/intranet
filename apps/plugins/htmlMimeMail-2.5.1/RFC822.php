@@ -127,7 +127,7 @@ class Mail_RFC822
      * 
      * @return array A structured array of addresses.
      */
-    static function parseAddressList($address = null, $default_domain = null, $nest_groups = null, $validate = null, $limit = null)
+    function parseAddressList($address = null, $default_domain = null, $nest_groups = null, $validate = null, $limit = null)
     {
 
         if (!isset($this->mailRFC822)) {

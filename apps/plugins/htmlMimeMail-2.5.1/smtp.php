@@ -42,7 +42,7 @@ class smtp {
      *   timeout - The timeout in seconds for the call   Default: 5
      *             to fsockopen()
      */
-    static function smtp($params = array()) {
+    function smtp($params = array()) {
 
         if (!defined('CRLF')) {
             define('CRLF', "\r\n", TRUE);
@@ -71,7 +71,7 @@ class smtp {
      * it will connect to the server and send
      * the HELO command.
      */
-    static function &connect($params = array()) {
+    public function connect($params = array()) {
 
         if (!isset($this->status)) {
             $obj = new smtp($params);

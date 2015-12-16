@@ -756,7 +756,6 @@ class AccueilFta {
                     $recap[$idFta] = "";
                 }
 
-
                 /**
                  * Donne accès aux bouton de transition 
                  * pour les utilisateur se trouvant en fin de parcours de l'espace de travail
@@ -778,6 +777,8 @@ class AccueilFta {
                  */
                 if ($idclassification) {
                     $classification = ClassificationArborescenceArticleCategorieContenuModel::getElementClassificationFta($idclassification, ClassificationFta2Model::FIELDNAME_ID_PROPRIETAIRE_GROUPE);
+                }  else {
+                    $classification ="";
                 }
 
                 /*

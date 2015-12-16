@@ -103,12 +103,16 @@ function envoismail($sujetmail, $text, $destinataire, $expediteur, $paramTypeMai
             $text = explode(",", $destinataire_orig) . "\n" . $text_orig;
         }
         //Création du mail
-        $mail = new htmlMimeMail();
-        //$mail->addAttachment($tmp_pdf, $tmp_filename, 'application/pdf');
-        //$mail->setFrom($mail_user);
+        $mail = new htmlMimeMail5();
+        
+        // Set the From and Reply-To headers
         $mail->setFrom($expediteur);
-        //$mail->setSubject("Agis: Fiche Technique Matière Première");
+        $mail->setReturnPath($expediteur);
+        
+        // Set the Subject
         $mail->setSubject($sujetmail);
+        
+        // Set the body
         $mail->setText($text);
         //$result = $mail->send(array($adresse_to), 'smtp');
         //$result = $mail->send(array($destinataire), 'smtp');

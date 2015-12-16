@@ -12,7 +12,7 @@
 /* * ***************************************************************************
   Inclusion des plugins
  * ************************************************************************** */
-require_once('../plugins/htmlMimeMail-2.5.1/htmlMimeMail.php');
+require_once('../plugins/htmlMimeMail-2.5.1/htmlMimeMail5.php');
 
 //Free PDF: Classe Racine
 $fpdf_path = '../plugins/fpdf/';

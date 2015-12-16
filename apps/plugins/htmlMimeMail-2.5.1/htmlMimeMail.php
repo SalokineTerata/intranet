@@ -139,7 +139,7 @@ class htmlMimeMail {
         $this->smtp_params['host'] = $globalConfig->getConf()->getSmtpServerName();        
         $this->smtp_params['port'] = 25;
         $this->smtp_params['helo'] = $helo;
-        $this->smtp_params['auth'] = false;
+        $this->smtp_params['auth'] = TRUE;
         $this->smtp_params['user'] = '';
         $this->smtp_params['pass'] = '';
 

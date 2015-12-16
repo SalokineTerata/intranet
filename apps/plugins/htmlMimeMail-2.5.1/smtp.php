@@ -47,13 +47,22 @@ class smtp {
         if (!defined('CRLF')) {
             define('CRLF', "\r\n", TRUE);
         }
-        $this->authenticated = FALSE;
-        $this->timeout = 5;
+        if (!empty($_SERVER['HTTP_HOST'])) {
+            $helo = $_SERVER['HTTP_HOST'];
+        } elseif (!empty($_SERVER['SERVER_NAME'])) {
+            $helo = $_SERVER['SERVER_NAME'];
+        } else {
+            $helo = 'localhost';
+        }
+        $globalConfig = new GlobalConfig();
+
+        $this->authenticated = TRUE;
+        $this->timeout = 15;
         $this->status = SMTP_STATUS_NOT_CONNECTED;
-        $this->host = '192.168.2.101';
+        $this->host = $globalConfig->getConf()->getSmtpServerName();
         $this->port = 25;
-        $this->helo = 'localhost';
-        $this->auth = FALSE;
+        $this->helo = $helo;
+        $this->auth = TRUE;
         $this->user = '';
         $this->pass = '';
         $this->errors = array();

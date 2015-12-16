@@ -86,7 +86,7 @@ function envoismail($sujetmail, $text, $destinataire, $expediteur, $paramTypeMai
 //    $logMail = new Logger('../../log/');
 
 
-    if ($globalConfig->getConf()->getSmtpServiceEnable() == TRUE) {
+//    if ($globalConfig->getConf()->getSmtpServiceEnable() == TRUE) {
 
         /*
          * Dans le l'environnement développement, 
@@ -125,7 +125,7 @@ function envoismail($sujetmail, $text, $destinataire, $expediteur, $paramTypeMai
         if (!$result and $globalConfig->getConf()->getExecEnvironment() == EnvironmentConf::ENV_PRD) {
             $paramTypeMail = "Erreur";
         }
-    }
+//    }
     switch ($paramTypeMail) {
 
         case "mail-transactions" :

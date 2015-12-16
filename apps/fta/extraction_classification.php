@@ -254,8 +254,8 @@ function UpgradeClassificationV2ToV3($paramNameOfBDDTarget, $paramNameOfBDDOrigi
 //$tablename_connect = "salaries"; //table login de la base MySQL
 //    $password_connect = "8ale!ne"; //mot de passe de la base MySQL
 //$connect = new PDO($hostname_connect, $username_connect, $password_connect); //connection � la base de donn�e si sa echoue sa retourne une erreur. 
-
-    $donnee = mysql_pconnect($hostname_connect, $username_connect, $password_connect) or die("connexion impossible");
+//
+//    $donnee = mysql_pconnect($hostname_connect, $username_connect, $password_connect) or die("connexion impossible");
 
 
     DatabaseOperation::execute(
@@ -298,11 +298,11 @@ function UpgradeClassificationV2ToV3($paramNameOfBDDTarget, $paramNameOfBDDOrigi
     )
     VALUES ('','$proprietaire_groupe',  '$proprietaire_enseige', '$marque',  '$activite',  '$rayon',  '$environnement',  '$reseau',  '$saisonalite',   '$idArborescence')";
 
-        mysql_query("SET NAMES 'utf8'");
+//        mysql_query("SET NAMES 'utf8'");
         $resultquery = DatabaseOperation::execute($sql_inter);
     }
 
-    mysql_close();
+//    mysql_close();
 
     
 

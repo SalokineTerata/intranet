@@ -58,7 +58,7 @@ echo '...';
   Fonctions propres aux Assistantes de Direction Commerciales
  */
 if (
-        $id_user and ( ($idFtaRole == 1) or ( $idFtaRole == 6) )    //-> Chef de projet
+        $id_user and  (FtaRoleModel::isGestionnaire($idFtaRole) )    //-> Chef de projet
 ) {
     //Créer une nouvelle Fiche Technique Article
     echo '<br>';

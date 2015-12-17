@@ -41,8 +41,8 @@ class FtaEtatModel extends AbstractModel {
         if ($paramModification) {
             $req = '';
         } else {
-            $req = ' AND ' . FtaEtatModel::TABLENAME . '.' . FtaEtatModel::KEYNAME . ' <> '.FtaEtatModel::ID_VALUE_MODIFICATION 
-                    . ' AND ' . FtaEtatModel::TABLENAME . '.' . FtaEtatModel::KEYNAME . ' <> '.FtaEtatModel::ID_VALUE_RETIRE ;
+            $req = ' AND ' . FtaEtatModel::TABLENAME . '.' . FtaEtatModel::KEYNAME . ' <> ' . FtaEtatModel::ID_VALUE_MODIFICATION
+                    . ' AND ' . FtaEtatModel::TABLENAME . '.' . FtaEtatModel::KEYNAME . ' <> ' . FtaEtatModel::ID_VALUE_RETIRE;
         }
         $arrayFtaEtatAndName = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
                         'SELECT DISTINCT ' . FtaEtatModel::FIELDNAME_NOM_FTA_ETAT

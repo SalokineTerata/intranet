@@ -5394,7 +5394,7 @@ $sql = "DROP TABLE ".$nameOfBDDTarget.".fta_composant";
 if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
 
 echo "CREATE TABLE ".$nameOfBDDTarget.".fta_composant ...";
-$sql = "CREATE TABLE ".$nameOfBDDTarget.".fta_composant LIKE  ".$nameOfBDDStructure.".fta_composant;";
+$sql = "CREATE TABLE ".$nameOfBDDTarget.".fta_composant LIKE  ".$nameOfBDDOrigin.".fta_composant;";
 if(mysql_query($sql)) {	echo "[OK]\n";}else{echo "[FAILED]\n";}
 
 echo "INSERT INTO ".$nameOfBDDTarget.".fta_composant ...";

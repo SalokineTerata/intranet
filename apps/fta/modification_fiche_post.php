@@ -57,7 +57,11 @@ $selection_rayon = Lib::getParameterFromRequest('selection_rayon');
 $selection_environnement = Lib::getParameterFromRequest('selection_environnement');
 $selection_reseau = Lib::getParameterFromRequest('selection_reseau');
 $selection_saisonnalite = Lib::getParameterFromRequest('selection_saisonnalite');
-
+/**
+ * Initialisation
+ */
+$modelFta = new FtaModel($paramIdFta);
+$abreviationFtaEtat = $modelFta->getModelFtaEtat()->getDataField(FtaEtatModel::FIELDNAME_ABREVIATION)->getFieldValue();
 switch ($action) {
 
     /*
@@ -101,7 +105,6 @@ switch ($action) {
     case 'valider':
 
 
-        $modelFta = new FtaModel($paramIdFta);
         if ($selection_saisonnalite) {
             //Enregistrement du nouvel éléments de classification
             $idClassification2 = ClassificationFta2Model::getIdFtaClassification2(
@@ -143,9 +146,6 @@ switch ($action) {
             $modelFtaSuiviProjet->saveToDatabase();
         }
         //$modelFtaSuiviProjet->getDataField(FtaSuiviProjetModel::FIELDNAME_SIGNATURE_VALIDATION_SUIVI_PROJET)->setFieldValue($paramSignatureValidationSuiviProjet);
-
-        $abreviationFtaEtat = $modelFta->getModelFtaEtat()->getDataField(FtaEtatModel::FIELDNAME_ABREVIATION)->getFieldValue();
-
 //        $idFtaProcessusEncours = $modelFtaWorkflowStruture->getDataField(FtaWorkflowStructureModel::FIELDNAME_ID_FTA_PROCESSUS)->getFieldValue();
 //        $idFtaWorkflowEncours = $modelFtaWorkflowStruture->getDataField(FtaWorkflowStructureModel::FIELDNAME_ID_FTA_WORKFLOW)->getFieldValue();
 //        $nom_fta_chapitre_encours = $modeChapitre->getDataField(FtaChapitreModel::FIELDNAME_NOM_CHAPITRE)->getFieldValue();

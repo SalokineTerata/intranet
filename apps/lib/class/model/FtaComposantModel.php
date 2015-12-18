@@ -136,9 +136,12 @@ class FtaComposantModel extends AbstractModel {
                 . ', ' . FtaComposantModel::FIELDNAME_ETIQUETTE_DUREE_VIE_FTA_COMPOSITION
                 . ', ' . FtaComposantModel::FIELDNAME_ETIQUETTE_ID_FTA_COMPOSITION
                 . ', ' . FtaComposantModel::FIELDNAME_ETIQUETTE_LIBELLE_FTA_COMPOSITION
+                . ', ' . FtaComposantModel::FIELDNAME_ETIQUETTE_LIBELLE_LEGAL_FTA_COMPOSITION
                 . ', ' . FtaComposantModel::FIELDNAME_ETIQUETTE_POIDS_FTA_COMPOSITION
+                . ', ' . FtaComposantModel::FIELDNAME_ETIQUETTE_DECOMPOSITION_POIDS_FTA_COMPOSANT
                 . ', ' . FtaComposantModel::FIELDNAME_ETIQUETTE_QUANTITE_FTA_COMPOSITION
                 . ', ' . FtaComposantModel::FIELDNAME_ETIQUETTE_SUPPLEMENTAIRE_FTA_COMPOSIITON
+                . ', ' . FtaComposantModel::FIELDNAME_ETIQUETTE_INFORMATION_COMPLEMENTAIRE_RECTO_FTA_COMPOSANT
                 . ', ' . FtaComposantModel::FIELDNAME_ID_ACCESS_RECETTE_RECETTE
                 . ', ' . FtaComposantModel::FIELDNAME_ID_ANNEXE_AGRO_ART_CODIFICATION
                 . ', ' . FtaComposantModel::FIELDNAME_ID_ANNEXE_UNITE
@@ -150,6 +153,8 @@ class FtaComposantModel extends AbstractModel {
                 . ', ' . FtaComposantModel::FIELDNAME_IS_COMPOSITION_FTA_COMPOSANT
                 . ', ' . FtaComposantModel::FIELDNAME_IS_NOMENCLATURE_FTA_COMPOSANT
                 . ', ' . FtaComposantModel::FIELDNAME_K_ETIQUETTE_FTA_COMPOSITION
+                . ', ' . FtaComposantModel::FIELDNAME_K_ETIQUETTE_VERSO_FTA_COMPOSITION
+                . ', ' . FtaComposantModel::FIELDNAME_K_CODESOFT_ETIQUETTE_LOGO
                 . ', ' . FtaComposantModel::FIELDNAME_K_STYLE_PARAGRAPHE_INGREDIENT_FTA_COMPOSITION
                 . ', ' . FtaComposantModel::FIELDNAME_MODE_ETIQUETTE_FTA_COMPOSITION
                 . ', ' . FtaComposantModel::FIELDNAME_NOM_FTA_COMPOSITION
@@ -164,6 +169,14 @@ class FtaComposantModel extends AbstractModel {
                 . ', ' . FtaComposantModel::FIELDNAME_TAILLE_POLICE_INGREDIENT_FTA_COMPOSITION
                 . ', ' . FtaComposantModel::FIELDNAME_TAILLE_POLICE_NOM_FTA_COMPOSITION
                 . ', ' . FtaComposantModel::FIELDNAME_VERSION
+                . ', ' . FtaComposantModel::FIELDNAME_VAL_NUT_KCAL
+                . ', ' . FtaComposantModel::FIELDNAME_VAL_NUT_KJ
+                . ', ' . FtaComposantModel::FIELDNAME_VAL_MAT_GRASSE
+                . ', ' . FtaComposantModel::FIELDNAME_VAL_ACIDE_GRAS
+                . ', ' . FtaComposantModel::FIELDNAME_VAL_GLUCIDE
+                . ', ' . FtaComposantModel::FIELDNAME_VAL_SUCRE
+                . ', ' . FtaComposantModel::FIELDNAME_VAL_PROTEINE
+                . ', ' . FtaComposantModel::FIELDNAME_VAL_SEL
                 . ', ' . FtaComposantModel::FIELDNAME_QUANTITE_FTA_COMPOSITION_UVC
                 . ', ' . FtaComposantModel::FIELDNAME_LAST_ID_FTA_COMPOSANT
                 . ', ' . FtaComposantModel::FIELDNAME_ID_FTA . ')'
@@ -177,9 +190,12 @@ class FtaComposantModel extends AbstractModel {
                 . ', ' . FtaComposantModel::FIELDNAME_ETIQUETTE_DUREE_VIE_FTA_COMPOSITION
                 . ', ' . FtaComposantModel::FIELDNAME_ETIQUETTE_ID_FTA_COMPOSITION
                 . ', ' . FtaComposantModel::FIELDNAME_ETIQUETTE_LIBELLE_FTA_COMPOSITION
+                . ', ' . FtaComposantModel::FIELDNAME_ETIQUETTE_LIBELLE_LEGAL_FTA_COMPOSITION
                 . ', ' . FtaComposantModel::FIELDNAME_ETIQUETTE_POIDS_FTA_COMPOSITION
+                . ', ' . FtaComposantModel::FIELDNAME_ETIQUETTE_DECOMPOSITION_POIDS_FTA_COMPOSANT
                 . ', ' . FtaComposantModel::FIELDNAME_ETIQUETTE_QUANTITE_FTA_COMPOSITION
                 . ', ' . FtaComposantModel::FIELDNAME_ETIQUETTE_SUPPLEMENTAIRE_FTA_COMPOSIITON
+                . ', ' . FtaComposantModel::FIELDNAME_ETIQUETTE_INFORMATION_COMPLEMENTAIRE_RECTO_FTA_COMPOSANT
                 . ', ' . FtaComposantModel::FIELDNAME_ID_ACCESS_RECETTE_RECETTE
                 . ', ' . FtaComposantModel::FIELDNAME_ID_ANNEXE_AGRO_ART_CODIFICATION
                 . ', ' . FtaComposantModel::FIELDNAME_ID_ANNEXE_UNITE
@@ -191,6 +207,8 @@ class FtaComposantModel extends AbstractModel {
                 . ', ' . FtaComposantModel::FIELDNAME_IS_COMPOSITION_FTA_COMPOSANT
                 . ', ' . FtaComposantModel::FIELDNAME_IS_NOMENCLATURE_FTA_COMPOSANT
                 . ', ' . FtaComposantModel::FIELDNAME_K_ETIQUETTE_FTA_COMPOSITION
+                . ', ' . FtaComposantModel::FIELDNAME_K_ETIQUETTE_VERSO_FTA_COMPOSITION
+                . ', ' . FtaComposantModel::FIELDNAME_K_CODESOFT_ETIQUETTE_LOGO
                 . ', ' . FtaComposantModel::FIELDNAME_K_STYLE_PARAGRAPHE_INGREDIENT_FTA_COMPOSITION
                 . ', ' . FtaComposantModel::FIELDNAME_MODE_ETIQUETTE_FTA_COMPOSITION
                 . ', ' . FtaComposantModel::FIELDNAME_NOM_FTA_COMPOSITION
@@ -205,6 +223,14 @@ class FtaComposantModel extends AbstractModel {
                 . ', ' . FtaComposantModel::FIELDNAME_TAILLE_POLICE_INGREDIENT_FTA_COMPOSITION
                 . ', ' . FtaComposantModel::FIELDNAME_TAILLE_POLICE_NOM_FTA_COMPOSITION
                 . ', ' . FtaComposantModel::FIELDNAME_VERSION
+                . ', ' . FtaComposantModel::FIELDNAME_VAL_NUT_KCAL
+                . ', ' . FtaComposantModel::FIELDNAME_VAL_NUT_KJ
+                . ', ' . FtaComposantModel::FIELDNAME_VAL_MAT_GRASSE
+                . ', ' . FtaComposantModel::FIELDNAME_VAL_ACIDE_GRAS
+                . ', ' . FtaComposantModel::FIELDNAME_VAL_GLUCIDE
+                . ', ' . FtaComposantModel::FIELDNAME_VAL_SUCRE
+                . ', ' . FtaComposantModel::FIELDNAME_VAL_PROTEINE
+                . ', ' . FtaComposantModel::FIELDNAME_VAL_SEL
                 . ', ' . FtaComposantModel::FIELDNAME_QUANTITE_FTA_COMPOSITION_UVC
                 . ', ' . FtaComposantModel::KEYNAME
                 . ', ' . $paramIdFtaNew

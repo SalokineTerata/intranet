@@ -4795,7 +4795,13 @@ if ($resultDossierFta) {
     while ($rowsDossierFta=mysql_fetch_array($resultDossierFta)) {
         $idDossierFta = $rowsDossierFta['id_dossier_fta'];
         
-        $sqldetail = "SELECT id_dossier_fta, id_fta, MAX( id_version_dossier_fta ) , id_fta_etat, createur_fta, Site_de_production FROM ".$nameOfBDDTarget.".fta WHERE id_dossier_fta=".$idDossierFta
+        $sqlversion = "SELECT  MAX( id_version_dossier_fta ) as id_version_dossier_fta FROM ".$nameOfBDDTarget.".fta WHERE id_dossier_fta=".$idDossierFta;
+                       
+        $resultVersionFta =mysql_query($sqlversion);  
+        
+        $lastVersionDossierFta = mysql_result($resultVersionFta, 0, "id_version_dossier_fta");
+ 
+        $sqldetail = "SELECT id_fta, id_fta_etat, createur_fta, Site_de_production FROM ".$nameOfBDDTarget.".fta WHERE id_dossier_fta=".$idDossierFta ." AND id_version_dossier_fta=".$lastVersionDossierFta
                ;
         $resultDossierFtaDetail =mysql_query($sqldetail);
          while ($rowsDossierFtaDetail=mysql_fetch_array($resultDossierFtaDetail)) {

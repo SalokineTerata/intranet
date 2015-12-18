@@ -20,3 +20,20 @@ if (!$fp) {
 
     echo "$out";
 }
+
+
+$donnee = mysql_pconnect("cod-intranet.agis.fr", "root", "8ale!ne");
+mysql_select_db("intranet_v3_0_cod");
+mysql_query('SET NAMES utf8');
+$sqlversion = "SELECT  MAX( id_version_dossier_fta ) as id_version_dossier_fta FROM fta WHERE id_dossier_fta=8228";
+                       
+        $resultVersionFta =mysql_query($sqlversion);  
+        
+        $lastVersionDossierFta = mysql_result($resultVersionFta, 0, "id_version_dossier_fta");
+ 
+        $sqldetail = "SELECT id_fta, id_fta_etat, createur_fta, Site_de_production FROM ".$nameOfBDDTarget.".fta WHERE id_dossier_fta=8228 AND id_version_dossier_fta=".$lastVersionDossierFta
+               ;
+        $resultDossierFtaDetail =mysql_query($sqldetail);
+        
+         $idfta = mysql_result($resultDossierFtaDetail, 0, "id_fta");
+         $idfta2 = mysql_result($resultDossierFtaDetail, 0, "id_fta_etat");

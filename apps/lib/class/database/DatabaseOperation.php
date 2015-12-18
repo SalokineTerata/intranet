@@ -503,7 +503,7 @@ class DatabaseOperation {
 
     /**
      * Prépare une données PHP a être insérée dans une requête qui va être exécutée par le SGBD<br>
-     * la donnée subit des transformation pour echaper les caractères pouvants<br>
+     * la donnée subit des transformations pour echaper les caractères pouvants<br>
      * poser soucis lors de l'interprétation de la requête par le SGBD<br>
      * @param string $data Donnée à protéger
      * @return string Donnée protégée

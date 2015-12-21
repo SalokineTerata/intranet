@@ -1108,6 +1108,7 @@ switch ($output) {
              <input type=hidden name=id_fta_composition value=" . $id_fta_composition . ">
              <input type=hidden name=id_fta_composant value=" . $id_fta_composant . ">
              <input type=hidden name=etiquette_poids_fta_composition value=" . $etiquette_poids_fta_composition . ">
+             <input type=hidden name=mode_etiquette_fta_composition value=" . $mode_etiquette_fta_composition . ">
              <input type=hidden name=creation value=" . $creation . ">
              <input type=hidden name=id_fta_role value=" . $idFtaRole . ">
              <input type=hidden name=abreviation_fta_etat value=" . $abreviationFtaEtat . ">

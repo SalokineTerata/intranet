@@ -1228,6 +1228,7 @@ class FtaModel extends AbstractModel {
                         . ", " . FtaModel::FIELDNAME_EAN_COLIS . "=" . "0"                                                                     //Suppression EAN Colis
                         . ", " . FtaModel::FIELDNAME_EAN_UVC . "=" . "0"                                                                       //Suppression EAN Article
                         . ", " . FtaModel::FIELDNAME_EAN_PALETTE . "=" . "0"                                                                   //Suppression EAN Palette
+                        . ", " . FtaModel::FIELDNAME_POURCENTAGE_AVANCEMENT . "=" . "\"0%\""                                                                   //Suppression EAN Palette
                         . " WHERE " . FtaModel::KEYNAME . "=" . $idFtaNew
                 );
                 break;

@@ -142,7 +142,7 @@ echo "
      <" . $html_table . ">
      <tr class=titre_principal><td>
 
-         Sommaire des applications Access disponibles <br>
+         Les bases sont accessibles dans le répertoire R:\intranet\ <br>
 
      </td></tr>
      " . $tableau . "

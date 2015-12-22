@@ -142,10 +142,10 @@ echo "
      <" . $html_table . ">
      <tr class=titre_principal><td>
 
+     <br><br><br><br>
          Les bases sont accessibles dans le répertoire R:\intranet\ <br>
-
+    <br><br><br><br>
      </td></tr>
-     " . $tableau . "
 </table>
 
 </form>

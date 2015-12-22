@@ -25,7 +25,8 @@
  */
 class Chapitre {
 
-    const NOT_EDITABLE = false;
+    const NOT_EDITABLE = FALSE;
+    const EDITABLE = TRUE;
     const ID_CHAPITRE_IDENTITE = 1;
 
     /**
@@ -505,7 +506,7 @@ class Chapitre {
          * Ftaview indépendant pour les epace de travaille qui ne doitvent pas être éditables
          */
         $ftaView2 = new FtaView($ftaModel);
-        $ftaView2->setIsEditable(FALSE);
+        $ftaView2->setIsEditable(self::NOT_EDITABLE);
         $ftaView2->setFtaChapitreModelById(self::ID_CHAPITRE_IDENTITE);
 
 
@@ -534,11 +535,13 @@ class Chapitre {
 
         //Créateur
         $bloc.=$ftaView->getHtmlCreateurFta();
+        $bloc.=$ftaView->workflowChangeList(self::EDITABLE, self::$id_fta_chapitre, $synthese_action, self::$comeback, self::$id_fta_etat, self::$abrevation_etat, self::$id_fta_role);
+
 
         //Workflow de FTA
 //        $bloc.=$ftaView->ListeWorkflowByAcces(self::$idUser, FALSE, $id_fta, self::$id_fta_role);
         $bloc.=$ftaView2->getHtmlDataField(FtaModel::FIELDNAME_WORKFLOW);
-        $bloc.=$ftaView->workflowChangeList($isEditable, self::$id_fta_chapitre, $synthese_action,  self::$comeback, self::$id_fta_etat, self::$abrevation_etat, self::$id_fta_role);
+        $bloc.=$ftaView->workflowChangeList(self::EDITABLE, self::$id_fta_chapitre, $synthese_action, self::$comeback, self::$id_fta_etat, self::$abrevation_etat, self::$id_fta_role);
 
         //Date d'échéance de la FTA
         $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_DATE_ECHEANCE_FTA);
@@ -933,7 +936,7 @@ class Chapitre {
 
         //Prix de ventes consommateur
         $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_PVC_ARTICLE);
-        
+
         //Prix / KG
         $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_PVC_ARTICLE_KG);
 
@@ -972,6 +975,14 @@ class Chapitre {
         $ftaView = new FtaView($ftaModel);
         $ftaView->setIsEditable($isEditable);
         $ftaView->setFtaChapitreModelById(self::ID_CHAPITRE_IDENTITE);
+
+
+        //Libellé du code article chez le client
+        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_LIBELLE_CODE_ARTICLE_CLIENT);
+
+
+        //Valeur du code article chez le client
+        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_CODE_ARTICLE_CLIENT);
 
         //Service consommateur
         $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_SERVICE_CONSOMMATEUR);

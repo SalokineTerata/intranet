@@ -173,6 +173,28 @@ class FtaModel extends AbstractModel {
                 , DatabaseRecord::VALUE_DONT_CREATE_RECORD_IN_DATABASE_IF_KEY_DOESNT_EXIST)
         );
     }
+    
+    
+    /**
+     * Accès à la page de modification du gestionnaire de la Fta
+     * @param boolean $paramIsEditable
+     * @return string
+     */
+    function getListeUserGestionnaire() {    
+        /*
+         * Gestionnaire FTA
+         */
+            $arrayUserGestionnaire = $this->getArrayUserGestionnaire();
+        
+
+        return $arrayUserGestionnaire;
+    }
+    private function getArrayUserGestionnaire() {
+      $idFtaWorkflow = $this->getDataField(FtaModel::FIELDNAME_WORKFLOW)->getFieldValue();
+      $SiteDeProduction =  $this->getDataField(FtaModel::FIELDNAME_SITE_PRODUCTION)->getFieldValue();
+      
+      return;
+    }
 
     /**
      * Les données de la FTA sont-elles validées ?

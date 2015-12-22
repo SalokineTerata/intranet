@@ -47,7 +47,15 @@ $comeback = Lib::getParameterFromRequest('comeback');
 $idFtaEtat = Lib::getParameterFromRequest(FtaEtatModel::KEYNAME);
 $abreviationFtaEtat = Lib::getParameterFromRequest(FtaEtatModel::FIELDNAME_ABREVIATION);
 $idFtaRole = Lib::getParameterFromRequest(FtaRoleModel::KEYNAME);
-$idFtaWorkflow = Lib::getParameterFromRequest('id_fta_workflow');
+
+/**
+ * Initialisation des modèles
+ */
+$ftaModel = new FtaModel($idFta);
+
+
+$idFtaWorkflow = $ftaModel->getDataField(FtaModel::FIELDNAME_WORKFLOW)->getFieldValue();
+$SiteDeProduction = $ftaModel->getDataField(FtaModel::FIELDNAME_SITE_PRODUCTION)->getFieldValue();
 
 $HtmlList = new HtmlListSelect();
 

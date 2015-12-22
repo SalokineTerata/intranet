@@ -488,6 +488,34 @@ class FtaView {
 
         return $ListeCLassification;
     }
+    /**
+     * Accès à la page de modification du gestionnaire de la Fta
+     * @param boolean $paramIsEditable
+     * @return string
+     */
+    function gestionnaireChangeList($paramIsEditable, $paramIdFtaChapitre, $paramSyntheseAction, $paramComeback, $paramIdFtaEtat, $paramAbrevationEtat, $paramIdFtaRole) {
+    
+        $idFta = $this->getModel()->getKeyValue();
+        /*
+         * Gestionnaire FTA
+         */
+        if ($paramIsEditable) {
+            $ListeGestionnaire .= "<tr ><td class=\"contenu\"> " . UserInterfaceLabel::FR_MODIFICATION_ESPACE_DE_TRAVAIL . "</td ><td class=\"contenu\" width=75% >"
+                    . "<a href="
+                    . "modification_gestionnaire.php?"
+                    . "id_fta=" . $idFta
+                    . "&id_fta_chapitre_encours=" . $paramIdFtaChapitre
+                    . "&synthese_action=" . $paramSyntheseAction
+                    . "&comeback=" . $paramComeback
+                    . "&id_fta_etat=" . $paramIdFtaEtat
+                    . "&abreviation_fta_etat=" . $paramAbrevationEtat
+                    . "&id_fta_role=" . $paramIdFtaRole
+                    . ">Cliquez ici</a></td></tr>";
+        }
+
+        return $ListeGestionnaire;
+    }
+    
 
     function listeCodesoftEtiquettes($paramIdFta, $paramIsEditable) {
         $SiteDeProduction = $this->getModel()->getDataField(FtaModel::FIELDNAME_SITE_PRODUCTION)->getFieldValue();

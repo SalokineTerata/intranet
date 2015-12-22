@@ -26,7 +26,7 @@ class FtaRoleModel extends AbstractModel {
     }
 
     /**
-     * On obtient l'id du rôle le plus en amot dans le cycle de validation
+     * On obtient l'id du rôle le plus en amont dans le cycle de validation
      * @param int $paramIdUser
      * @return array
      */

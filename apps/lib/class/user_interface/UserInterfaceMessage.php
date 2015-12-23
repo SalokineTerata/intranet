@@ -24,10 +24,14 @@
  */
 class UserInterfaceMessage {
 
-    const FR_DATABESE_MESSAGE_CHANGEMENT_ESPACE_DE_TRAVAIL_1 = " Changement de l'espace travail ";
-    const FR_DATABESE_MESSAGE_CHANGEMENT_ESPACE_DE_TRAVAIL_2 = " vers l'espace de travail ";
-    const FR_DATABESE_MESSAGE_CHANGEMENT_ESPACE_DE_TRAVAIL_3 = " par ";
-    const FR_DATABESE_MESSAGE_CHANGEMENT_ESPACE_DE_TRAVAIL_4 = " le ";
+    const FR_DATABASE_MESSAGE_CHANGEMENT_ESPACE_DE_TRAVAIL_1 = " Changement de l'espace travail ";
+    const FR_DATABASE_MESSAGE_CHANGEMENT_ESPACE_DE_TRAVAIL_2 = " vers l'espace de travail ";
+    const FR_DATABASE_MESSAGE_CHANGEMENT_ESPACE_DE_TRAVAIL_3 = " par ";
+    const FR_DATABASE_MESSAGE_CHANGEMENT_ESPACE_DE_TRAVAIL_4 = " le ";
+    const FR_DATABASE_MESSAGE_CHANGEMENT_GESTIONNAIRE_FTA_1 = " Changement du gestionnaire ";
+    const FR_DATABASE_MESSAGE_CHANGEMENT_GESTIONNAIRE_FTA_2 = " pour ";
+    const FR_DATABASE_MESSAGE_CHANGEMENT_GESTIONNAIRE_FTA_3 = " par ";
+    const FR_DATABASE_MESSAGE_CHANGEMENT_GESTIONNAIRE_FTA_4 = " le ";
     const FR_LAST_50_FTA = "Consultation des 50 dernières FTA";
     const FR_LOGIN_PROCESS_ACCOUNT_LOCKED = "Votre compte est bloqué suite à trois tentatives ratées.<br><br>Contactez un Administrateur pour réactiver votre compte.<br>";
     const FR_NONE_FTA = "Aucune Fta identifiée.<br><br>";
@@ -44,6 +48,8 @@ class UserInterfaceMessage {
     const FR_WARNING_DATA_ESPACE_DE_TRAVAIL = "Veuillez selectionner un espace de travail .<br><br>";
     const FR_WARNING_DATA_ESPACE_DE_TRAVAIL_CHANGEMENT = "Veuillez selectionner un espace de travail différents.<br><br>";
     const FR_WARNING_DATA_ESPACE_DE_TRAVAIL_TITLE = "Espace de travail d'une Fiche Technique Article";
+    const FR_WARNING_DATA_GESTIONNAIRE = "Veuillez selectionner un gestionnaire de Fiche Technique Article différents.<br><br>";
+    const FR_WARNING_DATA_GESTIONNAIRE_TITLE = "Gestionnaire d'une Fiche Technique Article";
     const FR_WARNING_DATA_ID_FTA = "Veuillez saisir un id_fta existant à dupliquer .<br><br>";
     const FR_WARNING_DATA_ID_FTA_TITLE = "Manque de donnée id_fta";
     const FR_WARNING_DATA_MISSING_TITLE = "Manque de donnée";

@@ -57,8 +57,27 @@ $comeback = Lib::getParameterFromRequest('comeback');
 $idFtaEtat = Lib::getParameterFromRequest(FtaEtatModel::KEYNAME);
 $abreviationFtaEtat = Lib::getParameterFromRequest(FtaEtatModel::FIELDNAME_ABREVIATION);
 $idFtaRole = Lib::getParameterFromRequest(FtaRoleModel::KEYNAME);
-$id_fta_chapitre = $id_fta_chapitre_encours;
+
+/**
+ * Initialisation
+ */
 $ftaModel = new FtaModel($id_fta);
+$date_echeance_fta = $ftaModel->getDataField(FtaModel::FIELDNAME_DATE_ECHEANCE_FTA)->getFieldValue();
+$idFtaWorkflow = $ftaModel->getDataField(FtaModel::FIELDNAME_WORKFLOW)->getFieldValue();
+$globalConfig = new GlobalConfig();
+$idUser = $globalConfig->getAuthenticatedUser()->getKeyValue();
+/**
+ * Contrôle du rôle attribué
+ */
+if ($idFtaRole == FtaRoleModel::ID_FTA_ROLE_COMMUN) {
+    if ($abreviationFtaEtat == FtaEtatModel::ETAT_ABREVIATION_VALUE_MODIFICATION) {
+        $synthese_action = FtaEtatModel::ETAT_AVANCEMENT_VALUE_EN_COURS;
+    }
+    $arrayIdFtaRoleAcces = FtaRoleModel::getArrayIdFtaRoleByIdUserAndWorkflow($idUser, $idFtaWorkflow);
+    $idFtaRole = $arrayIdFtaRoleAcces["0"];
+}
+$id_fta_chapitre = $id_fta_chapitre_encours;
+
 /* * ***********
   Début Code PHP
  * *********** */
@@ -81,7 +100,7 @@ $detail_id_fta;              //Identifiant de la fiche sur laquelle on souhaite 
   Récupération des données MySQL
  */
 
-Navigation::initNavigation($id_fta, $id_fta_chapitre, $synthese_action, $comeback, $idFtaEtat, $abreviationFtaEtat, $idFtaRole,TRUE);
+Navigation::initNavigation($id_fta, $id_fta_chapitre, $synthese_action, $comeback, $idFtaEtat, $abreviationFtaEtat, $idFtaRole, TRUE);
 $navigue = Navigation::getHtmlNavigationBar();
 //Calcul du taux
 $taux_temp = FtaSuiviProjetModel::getArrayFtaTauxValidation($ftaModel, TRUE);
@@ -126,8 +145,7 @@ if ($id_fta) {
             //Chargement des données
 
             $ftaProcessusModel = new FtaProcessusModel($id_fta_processus);
-            $date_echeance_fta = $ftaModel->getDataField(FtaModel::FIELDNAME_DATE_ECHEANCE_FTA)->getFieldValue();
-            $idFtaWorkflow = $ftaModel->getDataField(FtaModel::FIELDNAME_WORKFLOW)->getFieldValue();
+
             /**
              * 1 en attente 
              * 2 en cours

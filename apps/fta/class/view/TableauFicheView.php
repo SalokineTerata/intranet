@@ -112,7 +112,7 @@ class TableauFicheView {
         /**
          * Lien vers l'historique de la Fta
          */
-        $lienHistorique = self::getHtmlLinkHistorique($abreviation_fta_etat, $paramIdFta, $idFtaRole, $synthese_action, $tauxRound, $checkAccesButtonBySiteProd);
+        $lienHistorique = self::getHtmlLinkHistorique($abreviation_fta_etat, $paramIdFta, FtaRoleModel::ID_FTA_ROLE_COMMUN, $synthese_action, $tauxRound, $checkAccesButtonBySiteProd, $idFtaEtat);
 
         /**
          * Gestion des icones en fonction des délais
@@ -242,13 +242,16 @@ class TableauFicheView {
 
     /**
      * Lien vers l'historique de la Fta
-     * @param type $paramAbreviationFtaEtat
-     * @param type $paramIdFta
-     * @param type $paramIdFtaRole
-     * @param type $paramSyntheseAction
-     * @param type $paramTauxRound
+     * @param string $paramAbreviationFtaEtat
+     * @param int $paramIdFta
+     * @param int $paramIdFtaRole
+     * @param string $paramSyntheseAction
+     * @param string $paramTauxRound
+     * @param boolean $paramCheckAccesButton
+     * @param int $paramIdFtaEtat
+     * @return string
      */
-    static public function getHtmlLinkHistorique($paramAbreviationFtaEtat, $paramIdFta, $paramIdFtaRole, $paramSyntheseAction, $paramTauxRound, $paramCheckAccesButton) {
+    static public function getHtmlLinkHistorique($paramAbreviationFtaEtat, $paramIdFta, $paramIdFtaRole, $paramSyntheseAction, $paramTauxRound, $paramCheckAccesButton, $paramIdFtaEtat) {
         $lienHistorique = NULL;
 
         /**
@@ -257,7 +260,7 @@ class TableauFicheView {
         if ($paramCheckAccesButton AND ( $paramAbreviationFtaEtat == FtaEtatModel::ETAT_ABREVIATION_VALUE_MODIFICATION)) {
             $lienHistorique = ' <a href=historique-' . $paramIdFta
                     . '-1'
-                    . '-' . $paramIdFta
+                    . '-' . $paramIdFtaEtat
                     . '-' . $paramAbreviationFtaEtat
                     . '-' . $paramIdFtaRole
                     . '-' . $paramSyntheseAction

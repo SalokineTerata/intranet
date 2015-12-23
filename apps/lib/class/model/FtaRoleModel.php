@@ -13,6 +13,8 @@ class FtaRoleModel extends AbstractModel {
     const FIELDNAME_DESCRIPTION_FTA_ROLE = 'description_fta_role';
     const FIELDNAME_NOM_FTA_ROLE = 'nom_fta_role';
     const FIELDNAME_IS_GESTIONNAIRE = 'is_gestionnaire';
+    const IS_GESTIONNAIRE_TRUE = '1';
+    const IS_GESTIONNAIRE_FALSE = '0';
     const ID_FTA_ROLE_CHEF_DE_PROJET = '1';
     const ID_FTA_ROLE_COMMUN = '0';
     const ID_FTA_ROLE_EMBALLAGE = '4';
@@ -95,7 +97,7 @@ class FtaRoleModel extends AbstractModel {
                         . '=' . FtaActionRoleModel::TABLENAME . '.' . FtaActionRoleModel::FIELDNAME_ID_INTRANET_ACTIONS
                         . ' AND ' . FtaActionRoleModel::TABLENAME . '.' . FtaActionRoleModel::FIELDNAME_ID_FTA_ROLE
                         . '=' . self::TABLENAME . '.' . self::KEYNAME
-                        . ' AND ' . FtaActionRoleModel::TABLENAME . '.' . FtaActionRoleModel::FIELDNAME_ID_FTA_WROKFLOW . '=' . $paramIdFtaWorkflow
+                        . ' AND ' . FtaActionRoleModel::TABLENAME . '.' . FtaActionRoleModel::FIELDNAME_ID_FTA_WORKFLOW . '=' . $paramIdFtaWorkflow
         );
         if ($arrayIdFtaRole) {
             foreach ($arrayIdFtaRole as $rowsIdFtaRole) {

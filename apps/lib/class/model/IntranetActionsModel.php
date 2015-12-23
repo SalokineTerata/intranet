@@ -79,7 +79,7 @@ class IntranetActionsModel extends AbstractModel {
                                 . ' AND ' . FtaActionRoleModel::TABLENAME . '.' . FtaActionRoleModel::FIELDNAME_ID_FTA_ROLE
                                 . '=' . $paramIdFtaRole
                                 . ' AND ' . FtaWorkflowStructureModel::TABLENAME . '.' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_WORKFLOW
-                                . '=' . FtaActionRoleModel::TABLENAME . '.' . FtaActionRoleModel::FIELDNAME_ID_FTA_WROKFLOW
+                                . '=' . FtaActionRoleModel::TABLENAME . '.' . FtaActionRoleModel::FIELDNAME_ID_FTA_WORKFLOW
                                 . ' AND ' . self::TABLENAME . '.' . self::KEYNAME
                                 . '=' . IntranetDroitsAccesModel::TABLENAME . '.' . IntranetDroitsAccesModel::FIELDNAME_ID_INTRANET_ACTIONS
                                 . ' AND ' . IntranetDroitsAccesModel::TABLENAME . '.' . IntranetDroitsAccesModel::FIELDNAME_ID_INTRANET_ACTIONS
@@ -269,6 +269,28 @@ class IntranetActionsModel extends AbstractModel {
         }
 
         return $result;
+    }
+
+    /**
+     * Tableau des id intranet actions gestionnaire selon l'espace de travail et le site de production  
+     * @param int $paramWorkflow
+     * @param int $paramSiteDeProd
+     * @return array
+     */
+    public static function getArrayIdIntranetActionByWorkflowAndSiteDeProdAndGestionnaire($paramWorkflow, $paramSiteDeProd) {
+        /**
+         *  Nous recuperons le tableau des id intranet actions selon l'espace de travail  et le role (gestionnaire) 
+         */
+        $arrayIdIntranetActionsGestionnaire = FtaActionRoleModel::getArrayIdIntranetActionsByWorkflowAndGestionnaire($paramWorkflow);
+        /**
+         * Nous recuperons le tableau des id intranet actions selon l'espace de travail et le site de production
+         */
+        $arrayIdIntranetActionsSiteDeProd = FtaActionSiteModel::getArrayIdIntranetActionsByWorkflowAndSiteDeProd($paramWorkflow, $paramSiteDeProd);
+
+        $arrayIdIntranetActions = array_merge($arrayIdIntranetActionsGestionnaire, $arrayIdIntranetActionsSiteDeProd);
+
+
+        return $arrayIdIntranetActions;
     }
 
 }

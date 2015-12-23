@@ -173,27 +173,47 @@ class FtaModel extends AbstractModel {
                 , DatabaseRecord::VALUE_DONT_CREATE_RECORD_IN_DATABASE_IF_KEY_DOESNT_EXIST)
         );
     }
-    
-    
+
     /**
      * Accès à la page de modification du gestionnaire de la Fta
-     * @param boolean $paramIsEditable
+     * @param HtmlListSelect $paramObjetList
+     * @param int $paramGestionaireFta
      * @return string
      */
-    function getListeUserGestionnaire() {    
+    function getListeUserGestionnaire(HtmlListSelect $paramObjetList, $paramGestionaireFta) {
         /*
          * Gestionnaire FTA
          */
-            $arrayUserGestionnaire = $this->getArrayUserGestionnaire();
-        
+        $arrayUserGestionnaire = $this->getArrayUserGestionnaire();
+        $paramObjetList->setArrayListContent($arrayUserGestionnaire);
 
-        return $arrayUserGestionnaire;
+        $HtmlTableName = self::TABLENAME
+                . '_'
+                . self::FIELDNAME_CREATEUR
+        ;
+        $paramObjetList->getAttributes()->getName()->setValue(FtaModel::FIELDNAME_CREATEUR);
+        $paramObjetList->setLabel(DatabaseDescription::getFieldDocLabel(self::TABLENAME, self::FIELDNAME_CREATEUR));
+        $paramObjetList->setIsEditable(TRUE);
+        $paramObjetList->initAbstractHtmlSelect(
+                $HtmlTableName, $paramObjetList->getLabel(), $paramGestionaireFta, NULL, $paramObjetList->getArrayListContent());
+
+        $listeUserGestionnaire = $paramObjetList->getHtmlResult();
+
+        return $listeUserGestionnaire;
     }
+
+    /**
+     * Récupère la liste des gestionnaires possibles de la Fta
+     * @return array
+     */
     private function getArrayUserGestionnaire() {
-      $idFtaWorkflow = $this->getDataField(FtaModel::FIELDNAME_WORKFLOW)->getFieldValue();
-      $SiteDeProduction =  $this->getDataField(FtaModel::FIELDNAME_SITE_PRODUCTION)->getFieldValue();
-      
-      return;
+
+        $idFtaWorkflow = $this->getDataField(FtaModel::FIELDNAME_WORKFLOW)->getFieldValue();
+        $SiteDeProduction = $this->getDataField(FtaModel::FIELDNAME_SITE_PRODUCTION)->getFieldValue();
+
+        $array = UserModel::getArrayGestionnaireBySiteProdAndWorkflow($SiteDeProduction, $idFtaWorkflow);
+
+        return$array;
     }
 
     /**

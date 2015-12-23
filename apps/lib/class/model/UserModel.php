@@ -58,7 +58,7 @@ class UserModel extends AbstractModel {
             $nbMaxParPage = ModuleConfig::VALUE_MAX_PAR_PAGE;
         } else {
             $nbMaxParPage = ModuleConfig::VALUE_MAX_PAR_PAGE_CONSUL;
-            $paramOrderBy = FtaModel::FIELDNAME_DATE_DERNIERE_MAJ_FTA. ' DESC ';
+            $paramOrderBy = FtaModel::FIELDNAME_DATE_DERNIERE_MAJ_FTA . ' DESC ';
         }
 
         if ($paramArrayIdFta) {
@@ -230,7 +230,7 @@ class UserModel extends AbstractModel {
             afficher_message($titre, $message, $redirection);
         }
     }
-    
+
     /**
      * On obtient le nom des gestionnaires pour l'espace de travail et le site en paramètres
      * @param int $paramIdSiteDeProduction
@@ -238,40 +238,33 @@ class UserModel extends AbstractModel {
      * @return array
      */
     public static function getArrayGestionnaireBySiteProdAndWorkflow($paramIdSiteDeProduction, $paramIdWorkflow) {
-       
-        $arrayFtaRole = self::getArrayIdFtaRoleByIdUser($paramIdUser);
-        if ($arrayFtaRole != NULL) {
-            $return = $arrayFtaRole['0'][self::KEYNAME];
-        }
-        return $return;
+        return self::getArrayIdUserBySiteProdAndWorkflow($paramIdSiteDeProduction, $paramIdWorkflow);
     }
+
     /**
-     * On obtient id_user pour l'espace de travail et le site en paramètres
+     * On obtient id_user, le nom et prénom associé pour l'espace de travail et le site en paramètres
      * @param int $paramIdSiteDeProduction
      * @param int $paramIdWorkflow
      * @return array
      */
-    public static function getArrayIdUserByiteProdAndWorkflow($paramIdSiteDeProduction, $paramIdWorkflow){
+    public static function getArrayIdUserBySiteProdAndWorkflow($paramIdSiteDeProduction, $paramIdWorkflow) {
+        $arrayIdIntranetActionsBySiteProdAndWorkflowAndGestio = IntranetActionsModel::getArrayIdIntranetActionByWorkflowAndSiteDeProdAndGestionnaire($paramIdWorkflow, $paramIdSiteDeProduction);
+
         $arrayIdUser = DatabaseOperation::convertSqlStatementWithKeyAndOneFieldToArray(
                         'SELECT DISTINCT ' . self::TABLENAME . '.' . self::KEYNAME
-                        . ',' . self::FIELDNAME_PRENOM
-                        . ',' . self::FIELDNAME_NOM
-                        . ' FROM ' . FtaActionSiteModel::TABLENAME 
-                        . ',' . IntranetDroitsAccesModel::TABLENAME . ',' . IntranetActionsModel::TABLENAME
+                        . ', CONCAT_WS ( \' \',' . self::FIELDNAME_PRENOM
+                        . ',' . self::FIELDNAME_NOM . ' )'
+                        . ' FROM ' . IntranetDroitsAccesModel::TABLENAME . ',' . IntranetActionsModel::TABLENAME
                         . ',' . self::TABLENAME
-                        . ' WHERE ' . UserModel::TABLENAME . '.' . UserModel::KEYNAME . '=' . $paramIdUser
-                        . ' AND ' . UserModel::TABLENAME . '.' . UserModel::KEYNAME
+                        . ' WHERE ' . UserModel::TABLENAME . '.' . UserModel::KEYNAME
                         . '=' . IntranetDroitsAccesModel::TABLENAME . '.' . IntranetDroitsAccesModel::FIELDNAME_ID_USER
                         . ' AND ' . IntranetDroitsAccesModel::FIELDNAME_NIVEAU_INTRANET_DROITS_ACCES . '=' . IntranetNiveauAccesModel::NIVEAU_GENERIC_TRUE
                         . ' AND ' . IntranetDroitsAccesModel::TABLENAME . '.' . IntranetDroitsAccesModel::FIELDNAME_ID_INTRANET_ACTIONS
                         . '=' . IntranetActionsModel::TABLENAME . '.' . IntranetActionsModel::KEYNAME
-                        . ' AND ' . IntranetActionsModel::TABLENAME . '.' . IntranetActionsModel::KEYNAME
-                        . '=' . FtaActionRoleModel::TABLENAME . '.' . FtaActionRoleModel::FIELDNAME_ID_INTRANET_ACTIONS
-                        . ' AND ' . FtaActionRoleModel::TABLENAME . '.' . FtaActionRoleModel::FIELDNAME_ID_FTA_ROLE
-                        . '=' . self::TABLENAME . '.' . self::KEYNAME
-                        . ' ORDER BY ' . self::TABLENAME . '.' . self::KEYNAME
+                        . ' AND ( 0 ' . IntranetActionsModel::addIdIntranetAction($arrayIdIntranetActionsBySiteProdAndWorkflowAndGestio) . ')'
+                        . ' ORDER BY ' . self::TABLENAME . '.' . self::FIELDNAME_PRENOM . ',' . self::FIELDNAME_NOM
         );
-
+        return $arrayIdUser;
     }
 
 }

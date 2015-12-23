@@ -54,14 +54,13 @@ $idFtaRole = Lib::getParameterFromRequest(FtaRoleModel::KEYNAME);
 $ftaModel = new FtaModel($idFta);
 
 
-$idFtaWorkflow = $ftaModel->getDataField(FtaModel::FIELDNAME_WORKFLOW)->getFieldValue();
-$SiteDeProduction = $ftaModel->getDataField(FtaModel::FIELDNAME_SITE_PRODUCTION)->getFieldValue();
+$gestionnaireFta = $ftaModel->getDataField(FtaModel::FIELDNAME_CREATEUR)->getFieldValue();
 
 $HtmlList = new HtmlListSelect();
 
 
-$listeWorkflow = FtaWorkflowModel::showListeDeroulanteNomWorkflow($idFtaWorkflow, $HtmlList);
-
+$listeGestionnaire = $ftaModel->getListeUserGestionnaire($HtmlList, $gestionnaireFta);
+//commentaire_maj_fta
 
 
 
@@ -97,25 +96,21 @@ $navigue . "
      <input type=\"hidden\" name=\"id_fta_etat\" id=\"id_fta_etat\" value=\"" . $idFtaEtat . "\" />
      <input type=\"hidden\" name=\"id_fta_role\" id=\"id_fta_role\" value=\"" . $idFtaRole . "\" />
      <input type=\"hidden\" name=\"comeback\" id=\"comeback\" value=\"" . $comeback . "\" />
-     <input type=\"hidden\" name=\"id_fta_workflow\" id=\"id_fta_workflow\" value=\"" . $idFtaWorkflow . "\" />
+     <input type=\"hidden\" name=\"createur_fta\" id=\"createur_fta\" value=\"" . $gestionnaireFta . "\" />
      <input type=\"hidden\" name=\"id_fta_chapitre_encours\" id=\"id_fta_chapitre_encours\" value=\"" . $id_fta_chapitre_encours . "\" />
 
      <" . $html_table . ">
          
      <tr class=titre_principal><td>
 
-        " . UserInterfaceLabel::FR_ESPACE_DE_TRAVAIL . "
+        " . UserInterfaceLabel::FR_GESTIONAIRE_FTA . "
 
      </td>
-     <td>
-
-        " . UserInterfaceLabel::FR_MODIFICATION_RAPPEL_ESPACE_DE_TRAVAIL . "    
-
-     </td>
+    
      </tr>
     
 
-        $listeWorkflow
+        $listeGestionnaire
 
         
      </tr>

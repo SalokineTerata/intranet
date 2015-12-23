@@ -509,6 +509,16 @@ class Chapitre {
         $ftaView2->setIsEditable(self::NOT_EDITABLE);
         $ftaView2->setFtaChapitreModelById(self::ID_CHAPITRE_IDENTITE);
 
+        /**
+         * Verification des droits sur l'accès à des modifications
+         */
+        if (FtaRoleModel::isGestionnaire(self::$id_fta_role)) {
+            $modifierGestionnaire = $ftaView->gestionnaireChangeList(self::EDITABLE, self::$id_fta_chapitre, $synthese_action, self::$comeback, self::$id_fta_etat, self::$abrevation_etat, self::$id_fta_role);
+            $modifierEspaceDeTravail = $ftaView->workflowChangeList(self::EDITABLE, self::$id_fta_chapitre, $synthese_action, self::$comeback, self::$id_fta_etat, self::$abrevation_etat, self::$id_fta_role);
+        } else {
+            $modifierGestionnaire = "";
+            $modifierEspaceDeTravail = "";
+        }
 
         $bloc.='<tr class=titre_principal><td class>Classification</td></tr>';
 
@@ -535,13 +545,13 @@ class Chapitre {
 
         //Créateur
         $bloc.=$ftaView->getHtmlCreateurFta();
-        $bloc.=$ftaView->workflowChangeList(self::EDITABLE, self::$id_fta_chapitre, $synthese_action, self::$comeback, self::$id_fta_etat, self::$abrevation_etat, self::$id_fta_role);
+        $bloc.=$modifierGestionnaire;
 
 
         //Workflow de FTA
 //        $bloc.=$ftaView->ListeWorkflowByAcces(self::$idUser, FALSE, $id_fta, self::$id_fta_role);
         $bloc.=$ftaView2->getHtmlDataField(FtaModel::FIELDNAME_WORKFLOW);
-        $bloc.=$ftaView->workflowChangeList(self::EDITABLE, self::$id_fta_chapitre, $synthese_action, self::$comeback, self::$id_fta_etat, self::$abrevation_etat, self::$id_fta_role);
+        $bloc.=$modifierEspaceDeTravail;
 
         //Date d'échéance de la FTA
         $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_DATE_ECHEANCE_FTA);

@@ -155,6 +155,14 @@ if ($idFta) {
                 $idFtaRole = $arrayIdFtaRoleAcces["0"];
             }
         }
+    } elseif ($ftaModification) {
+        /**
+         * On affecte un IdFtaRole seulement dans le cas ou on est vient de la page de recherche
+         */
+        if ($idFtaRole == FtaRoleModel::ID_FTA_ROLE_COMMUN) {
+            $arrayIdFtaRoleAcces = FtaRoleModel::getArrayIdFtaRoleByIdUserAndWorkflow($idUser, $idWorkflowFtaEncours);
+            $idFtaRole = $arrayIdFtaRoleAcces["0"];
+        }
     }
 
     $affichgeDesChapitres = TRUE;

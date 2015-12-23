@@ -500,7 +500,7 @@ class FtaView {
          * Gestionnaire FTA
          */
         if ($paramIsEditable) {
-            $ListeGestionnaire .= "<tr ><td class=\"contenu\"> " . UserInterfaceLabel::FR_MODIFICATION_ESPACE_DE_TRAVAIL . "</td ><td class=\"contenu\" width=75% >"
+            $ListeGestionnaire .= "<tr ><td class=\"contenu\"> " . UserInterfaceLabel::FR_MODIFICATION_GESTIONNAIRE_FTA . "</td ><td class=\"contenu\" width=75% >"
                     . "<a href="
                     . "modification_gestionnaire.php?"
                     . "id_fta=" . $idFta

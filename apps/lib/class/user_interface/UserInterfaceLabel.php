@@ -26,6 +26,7 @@ class UserInterfaceLabel {
 
     const FR_AVANCEMENT_FTA = "% Avancement";
     const FR_ESPACE_DE_TRAVAIL = "Espace de Travail de la Fiche Technique Article";
+    const FR_GESTIONAIRE_FTA = "Gestionnaire de la Fiche Technique Article";
     const FR_MODIFICATION_ESPACE_DE_TRAVAIL = "Modification de l'espace de travail";
     const FR_MODIFICATION_GESTIONNAIRE_FTA = "Modification du gestionnaire de la Fta";
     const FR_MODIFICATION_RAPPEL_ESPACE_DE_TRAVAIL = "Rappel : la modification de l'espace de travail concerne son dossier";

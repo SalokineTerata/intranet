@@ -105,6 +105,8 @@ class FtaModel extends AbstractModel {
     const MESSAGE_DATA_VALIDATION_CODE_LDC = UserInterfaceMessage::FR_WARNING_DATA_VALIDATION_FTA_CODE_LDC;
     const MESSAGE_DATA_VALIDATION_DATE_ECHEANCE = UserInterfaceMessage::FR_WARNING_DATA_DATE_ECHEANCE;
     const MESSAGE_DATA_VALIDATION_DATE_ECHEANCE_INCOHERENCE = UserInterfaceMessage::FR_WARNING_DATA_DATE_ECHEANCE_INCOHERENCE;
+    const VALEUR_CHECK_EN_KG = "1";
+    const CONVERSION_KG_EN_G = "1000";
 
     /**
      * Utilisateur ayant créé la FTA

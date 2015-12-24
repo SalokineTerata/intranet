@@ -587,7 +587,7 @@ class Chapitre {
         //Liste des corrections apportées
         $bloc.='<tr class=titre_principal><td>Récapitulatif des corrections</td></tr>';
 
-        $bloc.=$ftaView->getHtmlCorrectionChapitre();
+        $bloc.=$ftaView->getHtmlCorrectionAllChapitres(self::$id_fta_workflow);
 
         //Liste de tous les commentaires des chapitres
         $bloc.='<tr class=titre_principal><td>Récapitulatif des commentaires</td></tr>';

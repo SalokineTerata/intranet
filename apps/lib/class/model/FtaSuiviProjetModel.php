@@ -732,6 +732,12 @@ class FtaSuiviProjetModel extends AbstractModel {
         return $return;
     }
 
+    /**
+     * On obtient les commentaires de chaque chapitres
+     * @param int $paramIdFta
+     * @param int $paramIdFtaWorkflow
+     * @return int
+     */
     public static function getAllCommentsFromChapitres($paramIdFta, $paramIdFtaWorkflow) {
         $arrayCommentaireAllChapitre = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
                         "SELECT " . FtaSuiviProjetModel::FIELDNAME_COMMENTAIRE_SUIVI_PROJET . "," . UserModel::FIELDNAME_PRENOM . "," . UserModel::FIELDNAME_NOM
@@ -755,6 +761,45 @@ class FtaSuiviProjetModel extends AbstractModel {
             $return = "<tr class=contenu><td> Commentaires sur les Chapitres</td><td>" . $return . "</td></tr>";
         } else {
             $return = "<tr class=contenu><td> Commentaires sur les Chapitres</td><td></td></tr>";
+        }
+
+        return str_replace("  ", "&nbsp;&nbsp;", nl2br($return));
+    }
+
+    /**
+     * On obtient les corrections de chaque chapitres
+     * @param int $paramIdFta
+     * @param int $paramIdFtaWorkflow
+     * @return int
+     */
+    public static function getAllCorrectionsFromChapitres($paramIdFta, $paramIdFtaWorkflow) {
+        $arrayCommentaireAllChapitre = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
+                        "SELECT " . FtaSuiviProjetModel::FIELDNAME_CORRECTION_FTA_SUIVI_PROJET
+                        . "," . UserModel::FIELDNAME_PRENOM . "," . UserModel::FIELDNAME_NOM
+                        . "," . FtaSuiviProjetModel::TABLENAME . "." . FtaSuiviProjetModel::FIELDNAME_ID_FTA_CHAPITRE
+                        . " FROM " . FtaSuiviProjetModel::TABLENAME . ", " . UserModel::TABLENAME . ", " . FtaWorkflowStructureModel::TABLENAME
+                        . " WHERE ( " . FtaSuiviProjetModel::TABLENAME . "." . FtaSuiviProjetModel::FIELDNAME_SIGNATURE_VALIDATION_SUIVI_PROJET
+                        . " = " . UserModel::TABLENAME . "." . UserModel::KEYNAME . " ) "
+                        . " AND " . FtaSuiviProjetModel::TABLENAME . "." . FtaSuiviProjetModel::FIELDNAME_ID_FTA . " = " . $paramIdFta
+                        . " AND " . FtaWorkflowStructureModel::TABLENAME . "." . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_WORKFLOW . " = " . $paramIdFtaWorkflow
+                        . " AND " . FtaWorkflowStructureModel::TABLENAME . "." . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_CHAPITRE
+                        . " = " . FtaSuiviProjetModel::TABLENAME . "." . FtaSuiviProjetModel::FIELDNAME_ID_FTA_CHAPITRE
+                        . " ORDER BY " . FtaSuiviProjetModel::FIELDNAME_DATE_VALIDATION_SUIVI_PROJET
+        );
+        if ($arrayCommentaireAllChapitre) {
+            foreach ($arrayCommentaireAllChapitre as $rowsCommentaireAllChapitre) {
+                if ($rowsCommentaireAllChapitre[FtaSuiviProjetModel::FIELDNAME_CORRECTION_FTA_SUIVI_PROJET]) {
+                    $idFtaChapitre = $rowsCommentaireAllChapitre[FtaSuiviProjetModel::FIELDNAME_ID_FTA_CHAPITRE];
+                    $ftaChapitreModel = new FtaChapitreModel($idFtaChapitre);
+                    $nomChapitre = $ftaChapitreModel->getDataField(FtaChapitreModel::FIELDNAME_NOM_USUEL_CHAPITRE)->getFieldValue();
+                    $return.= "<br>" . $rowsCommentaireAllChapitre[UserModel::FIELDNAME_PRENOM] . " " . $rowsCommentaireAllChapitre[UserModel::FIELDNAME_NOM] . " a écrit pour le Chapitre " . $nomChapitre . ":<br>"
+                            . $rowsCommentaireAllChapitre[FtaSuiviProjetModel::FIELDNAME_CORRECTION_FTA_SUIVI_PROJET] . "<br>"
+                    ;
+                }
+            }
+            $return = "<tr class=contenu><td> Récapitulatif des corrections</td><td>" . $return . "</td></tr>";
+        } else {
+            $return = "<tr class=contenu><td> Récapitulatif des corrections</td><td></td></tr>";
         }
 
         return str_replace("  ", "&nbsp;&nbsp;", nl2br($return));

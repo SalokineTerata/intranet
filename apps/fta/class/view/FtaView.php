@@ -172,7 +172,14 @@ class FtaView {
             $suffixeAgrologicFta = $this->getModel()->getDataField(FtaModel::FIELDNAME_SUFFIXE_AGROLOGIC_FTA)->getFieldValue();
             $NB_UNIT_ELEM = $this->getModel()->getDataField(FtaModel::FIELDNAME_NOMBRE_UVC_PAR_CARTON)->getFieldValue();
             $poidAffichage = $this->getModel()->getDataField(FtaModel::FIELDNAME_POIDS_ELEMENTAIRE)->getFieldValue();
-            $DIN = $DesignationCommerciale . " " . $suffixeAgrologicFta . " " . $NB_UNIT_ELEM . "X" . $poidAffichage . "kg";
+            $valeurUnite = "kg";
+            if ($poidAffichage < FtaModel::VALEUR_CHECK_EN_KG) {
+                $poidAffichage = $poidAffichage * FtaModel::CONVERSION_KG_EN_G;
+                $valeurUnite = "g";
+            }
+            $DIN = $DesignationCommerciale . " " . $suffixeAgrologicFta . " " . $NB_UNIT_ELEM . "X" . $poidAffichage . $valeurUnite;
+
+
             $DIN = strtoupper($DIN);
             $this->getModel()->getDataField(FtaModel::FIELDNAME_LIBELLE)->setFieldValue($DIN);
             $this->getModel()->saveToDatabase();
@@ -488,13 +495,14 @@ class FtaView {
 
         return $ListeCLassification;
     }
+
     /**
      * Accès à la page de modification du gestionnaire de la Fta
      * @param boolean $paramIsEditable
      * @return string
      */
     function gestionnaireChangeList($paramIsEditable, $paramIdFtaChapitre, $paramSyntheseAction, $paramComeback, $paramIdFtaEtat, $paramAbrevationEtat, $paramIdFtaRole) {
-    
+
         $idFta = $this->getModel()->getKeyValue();
         /*
          * Gestionnaire FTA
@@ -515,7 +523,6 @@ class FtaView {
 
         return $ListeGestionnaire;
     }
-    
 
     function listeCodesoftEtiquettes($paramIdFta, $paramIsEditable) {
         $SiteDeProduction = $this->getModel()->getDataField(FtaModel::FIELDNAME_SITE_PRODUCTION)->getFieldValue();
@@ -1036,6 +1043,14 @@ class FtaView {
      */
     public function getHtmlCommentaireAllChapitres($paramIdFtaWorkflow) {
         return FtaSuiviProjetModel::getAllCommentsFromChapitres($this->getModel()->getKeyValue(), $paramIdFtaWorkflow);
+    }
+
+    /**
+     *  Affiche les commentaires de chaque chapitres pour la Fta concerné*
+     * @return string
+     */
+    public function getHtmlCorrectionAllChapitres($paramIdFtaWorkflow) {
+        return FtaSuiviProjetModel::getAllCorrectionsFromChapitres($this->getModel()->getKeyValue(), $paramIdFtaWorkflow);
     }
 
     /**

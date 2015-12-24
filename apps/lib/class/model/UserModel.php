@@ -147,6 +147,10 @@ class UserModel extends AbstractModel {
      */
     public static function suppressionIntranetUtilisateur($paramIdSalaries) {
         DatabaseOperation::execute(
+                'DELETE FROM ' . LogModel::TABLENAME
+                . ' WHERE ' . LogModel::FIELDNAME_ID_USER . '=' . $paramIdSalaries
+        );
+        DatabaseOperation::execute(
                 'DELETE FROM ' . ModesModel::TABLENAME
                 . ' WHERE ' . ModesModel::FIELDNAME_ID_USER . '=' . $paramIdSalaries
         );

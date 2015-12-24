@@ -411,11 +411,11 @@ envoismail($sujet, $corpsmail, $paramUserMail, 'postmaster@agis-sa.fr', $typeMai
                                                                  * Post-traitement
                                                                  * Vérification et correction des incohérences de droits d'accès.
                                                                  */
-                                                                Acl::checkHeritedRightsRemovedByUser($paramIdUser);
-
                                                                 echo '</tr>';
 //    echo '</table>';
                                                             }
+                                                            Acl::checkHeritedRightsRemovedByUser($idUser);
+
                                                             echo '<br>';
                                                             ?>
                                                             </table>

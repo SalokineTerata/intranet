@@ -636,7 +636,7 @@ function print_page_begin($disable_full_page = FALSE, $menu_file = NULL, $conf =
         echo "<div class=display_none id=site width=100%; >";
         echo "<table border=0 cellspacing=0 cellpadding=0 height=534>";
         echo "<tr>";
-        echo "<td valign=top  align=center><div id=menu class=display_none>";
+        echo "<td valign=top align=center ><div id=menu >";
         include("../inc/connexion.php");
         include("../inc/navigue.php");
         if ($menu_file != NULL) {                       //Si existant, utilisation du menu demandé

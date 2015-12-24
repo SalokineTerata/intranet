@@ -748,7 +748,7 @@ class FtaSuiviProjetModel extends AbstractModel {
                         . " AND " . FtaWorkflowStructureModel::TABLENAME . "." . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_WORKFLOW . " = " . $paramIdFtaWorkflow
                         . " AND " . FtaWorkflowStructureModel::TABLENAME . "." . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_CHAPITRE
                         . " = " . FtaSuiviProjetModel::TABLENAME . "." . FtaSuiviProjetModel::FIELDNAME_ID_FTA_CHAPITRE
-                        . " ORDER BY " . FtaSuiviProjetModel::FIELDNAME_DATE_VALIDATION_SUIVI_PROJET
+                        . " ORDER BY " . FtaSuiviProjetModel::FIELDNAME_DATE_VALIDATION_SUIVI_PROJET  . " DESC "
         );
         if ($arrayCommentaireAllChapitre) {
             foreach ($arrayCommentaireAllChapitre as $rowsCommentaireAllChapitre) {
@@ -784,7 +784,7 @@ class FtaSuiviProjetModel extends AbstractModel {
                         . " AND " . FtaWorkflowStructureModel::TABLENAME . "." . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_WORKFLOW . " = " . $paramIdFtaWorkflow
                         . " AND " . FtaWorkflowStructureModel::TABLENAME . "." . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_CHAPITRE
                         . " = " . FtaSuiviProjetModel::TABLENAME . "." . FtaSuiviProjetModel::FIELDNAME_ID_FTA_CHAPITRE
-                        . " ORDER BY " . FtaSuiviProjetModel::FIELDNAME_DATE_VALIDATION_SUIVI_PROJET
+                        . " ORDER BY " . FtaSuiviProjetModel::FIELDNAME_DATE_VALIDATION_SUIVI_PROJET . " DESC "
         );
         if ($arrayCommentaireAllChapitre) {
             foreach ($arrayCommentaireAllChapitre as $rowsCommentaireAllChapitre) {

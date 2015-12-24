@@ -315,6 +315,11 @@ class FtaConditionnementModel extends AbstractModel {
         return $tablesNameAndIdForeignKeyOfFtaConditionnement;
     }
 
+    /**
+     * Affiche le label du tableau Embalage
+     * @param int $paramIdFtaConditionnment
+     * @return string
+     */
     public static function getTableConditionnementLabel($paramIdFtaConditionnment) {
         $ftaCondtionnementModel = new FtaConditionnementModel($paramIdFtaConditionnment);
         $border = "style=\"border:1px solid #000;\"";
@@ -330,6 +335,11 @@ class FtaConditionnementModel extends AbstractModel {
                 . '</tr>';
     }
 
+    /**
+     * Affiche le label de l'emballage colis
+     * @param int $paramIdFtaConditionnment
+     * @return string
+     */
     public static function getTableConditionnementLabelDuColis($paramIdFtaConditionnment) {
         $ftaCondtionnementModel = new FtaConditionnementModel($paramIdFtaConditionnment);
         $border = "style=\"border:1px solid #000;\"";
@@ -341,8 +351,8 @@ class FtaConditionnementModel extends AbstractModel {
                 . '<td ' . $border . '>' . $ftaCondtionnementModel->getDataField(FtaConditionnementModel::FIELDNAME_LONGUEUR_FTA_CONDITIONNEMENT)->getFieldLabel() . '</td>'
                 . '<td ' . $border . '>' . $ftaCondtionnementModel->getDataField(FtaConditionnementModel::FIELDNAME_LARGEUR_FTA_CONDITIONNEMENT)->getFieldLabel() . '</td>'
                 . '<td ' . $border . '>' . $ftaCondtionnementModel->getDataField(FtaConditionnementModel::FIELDNAME_POIDS_FTA_CONDITIONNEMENT)->getFieldLabel() . '</td>'
-                . '<td ' . $border . '>' . $ftaCondtionnementModel->getDataField(FtaConditionnementModel::FIELDNAME_QUANTITE_PAR_COUCHE_FTA_CONDITIONNEMENT)->getFieldLabel() . '</td>'
                 . '<td ' . $border . '>' . $ftaCondtionnementModel->getDataField(FtaConditionnementModel::FIELDNAME_NOMBRE_COUCHE_FTA_CONDITIONNEMENT)->getFieldLabel() . '</td>'
+                . '<td ' . $border . '>' . $ftaCondtionnementModel->getDataField(FtaConditionnementModel::FIELDNAME_QUANTITE_PAR_COUCHE_FTA_CONDITIONNEMENT)->getFieldLabel() . '</td>'
                 . '<td ' . $border . '>Actions</td>'
                 . '</tr>';
     }

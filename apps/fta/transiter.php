@@ -75,7 +75,7 @@ $idUser = $globalConfig->getAuthenticatedUser()->getKeyValue();
 $idFtaWorkflow = $ftaModel->getDataField(FtaModel::FIELDNAME_WORKFLOW)->getFieldValue();
 $arrayIdFtaRoleAcces = FtaRoleModel::getArrayIdFtaRoleByIdUserAndWorkflow($idUser, $idFtaWorkflow);
 $idFtaRole = $arrayIdFtaRoleAcces["0"];
-$ftaView = new FtaView($ftaModel);
+
 $dataFieldCommentaire = $ftaModel->getDataField(FtaModel::FIELDNAME_COMMENTAIRE_MAJ_FTA);
 $htmlFieldCommentaire = Html::getHtmlObjectFromDataField($dataFieldCommentaire);
 $htmlFieldCommentaire->getAttributesGlobal()->setIsIconNextEnabledToFalse();
@@ -182,6 +182,11 @@ $tableau_transition.='</select>';
 
 //Tableau des chapitres
 if ($action == FtaEtatModel::ETAT_ABREVIATION_VALUE_MODIFICATION or $action == 'W') {
+    /**
+     * Affichage de la date d'échéances
+     */
+    $ftaModel->setIsEditable(Chapitre::EDITABLE);
+    $dateEcheanceFtaHtml = $ftaModel->getHtmlDateEcheance(TRUE);
     $tableau_chapitre = '<' . $html_table . '>'
             . '<tr class=titre><td>Liste des Chapitres pouvant être mis à jour</td></tr>'
             . '<tr><td><' . $html_table . '>'
@@ -203,7 +208,7 @@ if ($action == FtaEtatModel::ETAT_ABREVIATION_VALUE_MODIFICATION or $action == '
                 . '</tr>'
         ;
     }
-    $tableau_chapitre.= '</table></td></tr>'
+    $tableau_chapitre.= $dateEcheanceFtaHtml . '</table></td></tr>'
             . '</table>'
     ;
 }
@@ -251,7 +256,7 @@ echo '
         <tr class=titre_principal>
             <td>
 
-                Transiter l\'Etat d\'une Fiche Technique Article
+                ' . UserInterfaceMessage::FR_TRANSITION_FTA_TITLE . '
 
             </td>
         </tr>
@@ -260,11 +265,7 @@ echo '
 
                 <img src=../lib/images/transiter.png>
                 &nbsp&nbsp&nbsp&nbsp
-                La transition de l\'état d\'une fiche permet de changer son état tout en laissant le système contrôler la cohérence et la version de la fiche.<br>
-                <br>
-                Suivant l\'état de votre fiche, seuls certains états sont accessibles. Vous pouvez considérer la transition de l\'état d\'une fiche comme un contrôle sur son cycle de vie.<br>
-                <br>
-
+               ' . UserInterfaceMessage::FR_TRANSITION_FTA . '
             </td>
         </tr>
         <tr class=titre_principal>

@@ -32,6 +32,7 @@ if (!$idFta) {
 }
 $idFtaRole = Lib::getParameterFromRequest('id_fta_role');
 $idFtaWorkflow = Lib::getParameterFromRequest('id_fta_workflow');
+$dateEcheanceFta = Lib::getParameterFromRequest(FtaModel::TABLENAME . "_" . FtaModel::FIELDNAME_DATE_ECHEANCE_FTA . "_" . $idFta);
 $new_commentaire_maj_ftatmp = Lib::getParameterFromRequest('fta_commentaire_maj_fta_' . $idFta);
 $new_commentaire_maj_fta = addslashes($new_commentaire_maj_ftatmp);
 
@@ -61,7 +62,7 @@ if (!$action) {
       fonction située dans le fichier 'functions.php'
 
      */
-    //echo $action.'<br>'.$id_fta.'<br>'.$new_commentaire_maj_fta.'<br>';
+//echo $action.'<br>'.$id_fta.'<br>'.$new_commentaire_maj_fta.'<br>';
 //echo $abreviation_fta_transition;
     $liste_global = array();    //Tableau contenant les emails et le nom des destinataire (cf fonction liste_diffusion_transition() )
 //Dans le cas où il n'y aurait qu'une seule FTA a valider,
@@ -77,7 +78,7 @@ if (!$action) {
     }
 
 //Controle d'intégrité         *************************************************
-    //Justification du la transition
+//Justification du la transition
     if (
             (
             !$new_commentaire_maj_fta
@@ -92,8 +93,8 @@ if (!$action) {
         $error = 1;
     }
 
-    //Tableau des chapitres
-    //echo $action;
+//Tableau des chapitres
+//echo $action;
     if ($action == FtaEtatModel::ETAT_ABREVIATION_VALUE_MODIFICATION or $action == 'W') {
         $arrayChapitre = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
                         'SELECT ' . FtaChapitreModel::KEYNAME
@@ -124,7 +125,7 @@ if (!$action) {
             //Transition de la FTA
             $commentaire_maj_fta = $new_commentaire_maj_fta;
 
-            $t = FtaTransitionModel::BuildTransitionFta($idFta, $abreviation_fta_transition, $commentaire_maj_fta, $idFtaWorkflow, $ListeDesChapitres);
+            $t = FtaTransitionModel::BuildTransitionFta($idFta, $abreviation_fta_transition, $commentaire_maj_fta, $idFtaWorkflow, $ListeDesChapitres,$dateEcheanceFta);
 
             //Codes de retour de la fonction:
             //   0: FTA correctement transitée

@@ -554,7 +554,7 @@ class Chapitre {
         $bloc.=$modifierEspaceDeTravail;
 
         //Date d'échéance de la FTA
-        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_DATE_ECHEANCE_FTA);
+        $bloc.=$ftaView->getHtmlDateEcheance();
 
 //        //Date d'échéance des processus
 //        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_VIRTUAL_FTA_PROCESSUS_DELAI);

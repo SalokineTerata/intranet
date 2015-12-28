@@ -32,11 +32,22 @@ class UserInterfaceMessage {
     const FR_DATABASE_MESSAGE_CHANGEMENT_GESTIONNAIRE_FTA_2 = " pour ";
     const FR_DATABASE_MESSAGE_CHANGEMENT_GESTIONNAIRE_FTA_3 = " par ";
     const FR_DATABASE_MESSAGE_CHANGEMENT_GESTIONNAIRE_FTA_4 = " le ";
+    const FR_DUPLICATION_DE_FTA_1 = "Dès que vous aurez cliqué sur le bouton Dupliquer, <br>
+                 un double de l 'ensemble de la fiche technique article sera créé sous le nom <b>";
+    const FR_DUPLICATION_DE_FTA_2 = "</b>.<br>
+                 Cette opération est irreversible<br>";
+    const FR_DUPLICATION_DE_FTA_WARNING = " Attention, vous êtes sur le point de dupliquer la Fiche Technique Article suivante:<br>";
     const FR_LAST_50_FTA = "Consultation des 50 dernières FTA";
     const FR_LOGIN_PROCESS_ACCOUNT_LOCKED = "Votre compte est bloqué suite à trois tentatives ratées.<br><br>Contactez un Administrateur pour réactiver votre compte.<br>";
     const FR_NONE_FTA = "Aucune Fta identifiée.<br><br>";
     const FR_SESSION_EXPIRED = "Erreur, la session précédement connecté à expirer.<br>Veuillez vous reconnecter.<br>";
     const FR_SESSION_EXPIRED_TITLE = "Déconnexion";
+    const FR_TRANSITION_FTA = " La transition de l'état d'une fiche permet de changer son état tout en laissant le système contrôler la cohérence et la version de la fiche.<br>
+                <br>
+                Suivant l'état de votre fiche, seuls certains états sont accessibles. Vous pouvez considérer la transition de l'état d'une fiche comme un contrôle sur son espace de travail.<br>
+                <br>
+";
+    const FR_TRANSITION_FTA_TITLE = "Transiter l'Etat d'une Fiche Technique Article";
     const FR_WARNING_ACCES_RIGHTS = "Vous n'avez pas les droits d'accès nécessaire.<br><br>";
     const FR_WARNING_ACCES_RIGHTS_TITLE = "Erreur d'accès";
     const FR_WARNING_DATA_CLASIFICATION = "Veuillez saisir une classfication";

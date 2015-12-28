@@ -167,7 +167,7 @@ switch ($output) {
              <tr><td>
 
                  &nbsp&nbsp&nbsp&nbsp
-                 Attention, vous êtes sur le point de dupliquer la Fiche Technique Article suivante:<br>
+                ' . UserInterfaceMessage::FR_DUPLICATION_DE_FTA_WARNING . '
                  <br>
                      <' . $html_table . '>
                      <tr class=titre_principal><td align=left>
@@ -179,9 +179,7 @@ switch ($output) {
                      </td></tr>
                      </table>
                  <br>
-                 Dès que vous aurez cliqué sur le bouton Dupliquer, <br>
-                 un double de l\'ensemble de la fiche technique article sera créée sous le nom <b>' . $new_designation_commerciale_fta . '</b>.<br>
-                 Cette opération est irreversible<br>
+                 ' . UserInterfaceMessage::FR_DUPLICATION_DE_FTA_1 . $new_designation_commerciale_fta . UserInterfaceMessage::FR_DUPLICATION_DE_FTA_2 . '
                  <br>
                  <br>
 

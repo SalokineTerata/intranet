@@ -21,7 +21,7 @@ class FtaTransitionModel {
      * @param type $paramListeChapitres
      * @return array
      */
-    public static function BuildTransitionFta($paramIdFta, $paramAbreviationFtaTransition, $paramCommentaireMajFta, $paramIdWorkflow, $paramListeChapitres) {
+    public static function BuildTransitionFta($paramIdFta, $paramAbreviationFtaTransition, $paramCommentaireMajFta, $paramIdWorkflow, $paramListeChapitres,$dateEcheanceFta) {
         /*
          * Codes de retour de la fonction:
          */
@@ -172,6 +172,7 @@ class FtaTransitionModel {
                 $option_duplication["nouveau_maj_fta"] = $nouveau_maj_fta;
                 $option_duplication["site_de_production"] = $siteDeProduction;
                 $option_duplication["id_version_dossier_fta"] = $IdDossierVersion;
+                $option_duplication["date_echeance_fta"] = $dateEcheanceFta;
                 $idFtaNew = FtaModel::BuildDuplicationFta($id_fta_original, $action_duplication, $option_duplication, $paramIdWorkflow);
                 $ftaModel = new FtaModel($idFtaNew);
                 $codeArticleLdc = $ftaModel->getDataField(FtaModel::FIELDNAME_CODE_ARTICLE_LDC)->getFieldValue();

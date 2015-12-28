@@ -137,6 +137,15 @@ class FtaView {
     }
 
     /**
+     * Affiche la date d'échéance
+     * @return string
+     */
+    function getHtmlDateEcheance() {
+        $this->getModel()->setIsEditable($this->getIsEditable());
+        return $this->getModel()->getHtmlDateEcheance(FALSE);
+    }
+
+    /**
      * Affiche le bouton de validation
      * @return string
      */
@@ -488,13 +497,14 @@ class FtaView {
 
         return $ListeCLassification;
     }
+
     /**
      * Accès à la page de modification du gestionnaire de la Fta
      * @param boolean $paramIsEditable
      * @return string
      */
     function gestionnaireChangeList($paramIsEditable, $paramIdFtaChapitre, $paramSyntheseAction, $paramComeback, $paramIdFtaEtat, $paramAbrevationEtat, $paramIdFtaRole) {
-    
+
         $idFta = $this->getModel()->getKeyValue();
         /*
          * Gestionnaire FTA
@@ -515,7 +525,6 @@ class FtaView {
 
         return $ListeGestionnaire;
     }
-    
 
     function listeCodesoftEtiquettes($paramIdFta, $paramIsEditable) {
         $SiteDeProduction = $this->getModel()->getDataField(FtaModel::FIELDNAME_SITE_PRODUCTION)->getFieldValue();

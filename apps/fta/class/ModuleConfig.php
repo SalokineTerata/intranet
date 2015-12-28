@@ -70,6 +70,17 @@ abstract class ModuleConfig {
      */
     const VALUE_DATE_NOTIFICATION2 = 30;
 
+    /**
+     * Nombre de jour par défaut d'une date d'échéance de validation d'une Fta en création
+     * par rapport à la date actuelle
+     */
+    const VALUE_DATE_PLUS_CREATION = 35;
+    /**
+     * Nombre de jour par défaut d'une date d'échéance de validation d'une Fta mise à jour
+     * par rapport à la date actuelle
+     */
+    const VALUE_DATE_PLUS_MISE_A_JOUR = 14;
+
 }
 
 ?>

@@ -137,6 +137,15 @@ class FtaView {
     }
 
     /**
+     * Affiche la date d'échéance
+     * @return string
+     */
+    function getHtmlDateEcheance() {
+        $this->getModel()->setIsEditable($this->getIsEditable());
+        return $this->getModel()->getHtmlDateEcheance(FALSE);
+    }
+
+    /**
      * Affiche le bouton de validation
      * @return string
      */

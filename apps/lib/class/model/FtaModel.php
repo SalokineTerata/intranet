@@ -1244,8 +1244,7 @@ class FtaModel extends AbstractModel {
         }
         DatabaseOperation::execute(
                 "UPDATE " . FtaModel::TABLENAME
-                . " SET " . FtaModel::FIELDNAME_DATE_ECHEANCE_FTA . "=" . "0000-00-00"                                                                   //La date d'échéance sera à redéfinir
-                . ", " . FtaModel::FIELDNAME_DATE_CREATION . "='" . date("Y-m-d")                                                               //Date de la création de cet Article
+                . " SET " . FtaModel::FIELDNAME_DATE_CREATION . "='" . date("Y-m-d")                                                               //Date de la création de cet Article
                 . "', " . FtaModel::FIELDNAME_ACTIF . "=" . 0                                                                                   //Tant que la fiche n'est pas activée, la flag reste à 0.
                 . ", " . FtaModel::FIELDNAME_CODE_ARTICLE . "=" . 'NULL'                                                                         //Le Code Article Agrologic ne peut être présent 2 fois (index unique)
                 . ", " . FtaModel::FIELDNAME_CREATEUR . "=" . $idUser
@@ -1265,6 +1264,7 @@ class FtaModel extends AbstractModel {
                         . ", " . FtaModel::FIELDNAME_VERSION_DOSSIER_FTA . "=" . 0                                                              //La première FTA commence en version "0"
                         . ", " . FtaModel::FIELDNAME_ID_FTA_ETAT . "=" . 1                                                                      //La première FTA commence en état "Initialisation"  (cf. table fta_etat)
                         . ", " . FtaModel::FIELDNAME_ARTICLE_AGROLOGIC . "=" . 0
+                        . ", " . FtaModel::FIELDNAME_DATE_ECHEANCE_FTA . "=" . "0000-00-00"                                                                   //La date d'échéance sera définie sur la page de transition
                         . ", " . FtaModel::FIELDNAME_DESIGNATION_COMMERCIALE . "=\"" . $paramOption["designation_commerciale_fta"]                //Renommage de la nouvelle FTA
                         . "\", " . FtaModel::FIELDNAME_NOM_ABREGE . "=" . "NULL"                                                                  //Le nom abrégé est réinitilisé
                         . ", " . FtaModel::FIELDNAME_LIBELLE . "=" . "NULL"                                                                       //Dans le cas d'un nouveau dossier, son identifiant correspond à l'identifiant de sa première FTA
@@ -1282,10 +1282,11 @@ class FtaModel extends AbstractModel {
             case "version":
                 $idFtaVersion = $idFtaVersion + 1;
                 DatabaseOperation::execute(
-                        "UPDATE " . FtaModel::TABLENAME
-                        . " SET " . FtaModel::FIELDNAME_VERSION_DOSSIER_FTA . "=" . $idFtaVersion                                                       //La première FTA commence en version "0"
-                        . ", " . FtaModel::FIELDNAME_ID_FTA_ETAT . "=" . $idFtaEtatNew                                                          //Nouvel éta de la FTA données par l'argument $option de la fonction (cf. table fta_etat)
-                        . " WHERE " . FtaModel::KEYNAME . "=" . $idFtaNew
+                        "UPDATE " . self::TABLENAME
+                        . " SET " . self::FIELDNAME_VERSION_DOSSIER_FTA . "=\"" . $idFtaVersion                                                       //La première FTA commence en version "0"
+                        . "\", " . self::FIELDNAME_ID_FTA_ETAT . "=\"" . $idFtaEtatNew                                                          //Nouvel éta de la FTA données par l'argument $option de la fonction (cf. table fta_etat)
+                        . "\", " . self::FIELDNAME_DATE_ECHEANCE_FTA . "=\"" . $paramOption["date_echeance_fta"]                                                              //Nouvel éta de la FTA données par l'argument $option de la fonction (cf. table fta_etat)
+                        . "\" WHERE " . self::KEYNAME . "=" . $idFtaNew
                 );
                 break;
         }
@@ -1662,6 +1663,73 @@ class FtaModel extends AbstractModel {
                         . " WHERE " . FtaModel::FIELDNAME_DOSSIER_FTA . "=" . $paramIdDossierFta
         );
         return $arrayIdFtaChange;
+    }
+
+  
+    /**
+     * Affiche la date d'échéance
+     * @param boolean $paramUpdateFta
+     * @return string
+     */
+    function getHtmlDateEcheance($paramUpdateFta) {
+        $htmlInputCalendar = new HtmlInputCalendar();
+        $dataFieldDateEcheance = $this->getDataField(self::FIELDNAME_DATE_ECHEANCE_FTA);
+        /**
+         * Contrôle de la date d'échéance
+         */
+        $dateEcheValue = $this->checkDateEcheance($paramUpdateFta);
+        /**
+         * Mise en forme
+         */
+        $HtmlTableName = self::TABLENAME
+                . '_'
+                . self::FIELDNAME_DATE_ECHEANCE_FTA
+                . '_'
+                . $this->getKeyValue()
+        ;
+        $htmlInputCalendar->setIsEditable($this->getIsEditable());
+
+        $htmlInputCalendar->initAbstractHtmlInput(
+                $HtmlTableName
+                , $dataFieldDateEcheance->getFieldLabel()
+                , $dateEcheValue
+                , $dataFieldDateEcheance->isFieldDiff()
+        );
+        $htmlInputCalendar->getEventsForm()->setOnChangeWithAjaxAutoSave(
+                $dataFieldDateEcheance->getTableName()
+                , $dataFieldDateEcheance->getKeyName()
+                , $dataFieldDateEcheance->getKeyValue()
+                , $dataFieldDateEcheance->getFieldName()
+        );
+        $htmlInputCalendar->setHtmlResultOnClick();
+
+        return $htmlInputCalendar->getHtmlResult();
+    }
+
+
+    /**
+     * Contrôle de la date d'échéance
+     * @param boolean $paramUpdateFta
+     * @return string
+     */
+    function checkDateEcheance($paramUpdateFta) {
+        $dataFieldDateEcheance = $this->getDataField(self::FIELDNAME_DATE_ECHEANCE_FTA);
+        /**
+         * Contrôle de la date d'échéance
+         */
+        $dateEcheanceValue = $dataFieldDateEcheance->getFieldValue();
+        if ($dateEcheanceValue == self::CHECK_DATE_ECHANCE or ! $dateEcheanceValue or $paramUpdateFta) {
+            switch ($this->getDataField(self::FIELDNAME_VERSION_DOSSIER_FTA)->getFieldValue()) {
+                case "0":
+                    $nbJours = ModuleConfig::VALUE_DATE_PLUS_CREATION;
+                    break;
+                default :
+                    $nbJours = ModuleConfig::VALUE_DATE_PLUS_MISE_A_JOUR;
+                    break;
+            }
+            $dateEcheanceValue = date("Y-m-d", strtotime(date("Y-m-d") . " +" . $nbJours . " days"));
+        }
+        return $dateEcheanceValue;
     }
 
 }

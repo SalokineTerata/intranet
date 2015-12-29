@@ -400,8 +400,8 @@ if ($idFtaEtat <> "1") {
         array("Dimension UVC", $returnUVC["dimension_uvc"] . " mm"),
         array("Dimension Colis", $returnDuColis["dimension_uvc"] . " mm"),
         array("PCB", $returnUVC[FtaModel::FIELDNAME_NOMBRE_UVC_PAR_CARTON]),
-        array("Poids net Colis", $returnDuColis["colis_net"] . " kg"),
-        array("Poids brut Colis", $returnDuColis["colis_brut"] . " kg")
+        array("Poids net Colis", round($returnDuColis["colis_net"],"3") . " kg"),
+        array("Poids brut Colis", round($returnDuColis["colis_brut"], "3") . " kg")
     );
 
     foreach ($data_table as $information) {
@@ -443,8 +443,8 @@ if ($idFtaEtat <> "1") {
         array("Nombre total de colis par palette", $returnPallettes["total_colis"]),
         array("Dimension palette", $returnPallettes["dimension_uvc"]),
         array("Hauteur palette", $returnPallettes["hauteur_palette"] . " m"),
-        array("Poids Net palette", $returnPallettes["palette_net"] . " kg"),
-        array("Poids Brut palette", $returnPallettes["palette_brut"] . " kg")
+        array("Poids Net palette", round($returnPallettes["palette_net"],"1") . " kg"),
+        array("Poids Brut palette", round($returnPallettes["palette_brut"],"1") . " kg")
     );
 
     foreach ($data_table as $information) {

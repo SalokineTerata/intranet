@@ -35,7 +35,7 @@ class UserInterfaceMessage {
     const FR_SESSION_EXPIRED_TITLE = "Déconnexion";
     const FR_WARNING_ACCES_RIGHTS = "Vous n'avez pas les droits d'accès nécessaire.<br><br>";
     const FR_WARNING_ACCES_RIGHTS_TITLE = "Erreur d'accès";
-    const FR_WARNING_DATA_CLASIFICATION = "Veuillez saisir une classfication";
+    const FR_WARNING_DATA_CLASIFICATION = "Veuillez saisir une classification";
     const FR_WARNING_DATA_CLASIFICATION_TITLE = "Classification d'une Fiche Technique Article";
     const FR_WARNING_DATA_DATE_ECHEANCE = "Veuillez saisir une date d'écheance de la Fta .<br><br>";
     const FR_WARNING_DATA_DATE_ECHEANCE_INCOHERENCE = "Veuillez saisir une date d'écheance supérieur à la date d'aujourd'hui .<br><br>";

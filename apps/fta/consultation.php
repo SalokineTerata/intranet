@@ -73,28 +73,28 @@ $html_table = 'table '              //Permet d'harmoniser les tableaux
   Récupération des données MySQL
  */
 //  Exemple: mysql_table_load('nom_de_ma_table');
-$id_fta = 1;
-mysql_table_load('fta');
-$numft; //Varible récupérée
-mysql_table_load('infog');
+//$id_fta = 1;
+//mysql_table_load('fta');
+//$numft; //Varible récupérée
+//mysql_table_load('infog');
+//
+//echo $NOM_date_echeance_fta;
+//echo $date_echeance_fta;
+//echo '<br>';
+//echo $NOM_nomprod;
+//echo $nomprod;
 
-echo $NOM_date_echeance_fta;
-echo $date_echeance_fta;
-echo '<br>';
-echo $NOM_nomprod;
-echo $nomprod;
-
-$req = 'SELECT * FROM fta, infog '
-        . 'WHERE fta.numft=infog.numft '
-        . 'ORDER BY nomprod '
-;
-
-$result = DatabaseOperation::query($req);
-$liste_fta = '';
-while ($rows = mysql_fetch_array($result)) {
-
-    $liste_fta.=$rows['id_fta'] . ': ' . $rows['nomprod'] . '<br>';
-}
+//$req = 'SELECT * FROM fta, infog '
+//        . 'WHERE fta.numft=infog.numft '
+//        . 'ORDER BY nomprod '
+//;
+//
+//$result = DatabaseOperation::query($req);
+//$liste_fta = '';
+//while ($rows = mysql_fetch_array($result)) {
+//
+//    $liste_fta.=$rows['id_fta'] . ': ' . $rows['nomprod'] . '<br>';
+//}
 
 /*
   Sélection du mode d'affichage
@@ -154,32 +154,32 @@ switch ($output) {
     default:
 
 
-        echo '
-             <form method=' . $method . ' action=' . $page_action . '>
-             <input type=hidden name=action value=' . $action . '>
-
-             <' . $html_table . '>
-             <tr class=titre_principal><td>
-
-                 Liste des Fiches Techniques Articles
-
-             </td></tr>
-             <tr><td>
-
-                 ' . $liste_fta . '
-
-        </td></tr>
-        <tr><td>
-
-        <center>
-        <input type = submit value = \'Enregistrer\'>
-                 </center>
-
-             </td></tr>
-             </table>
-
-             </form>
-             ';
+//        echo '
+//             <form method=' . $method . ' action=' . $page_action . '>
+//             <input type=hidden name=action value=' . $action . '>
+//
+//             <' . $html_table . '>
+//             <tr class=titre_principal><td>
+//
+//                 Liste des Fiches Techniques Articles
+//
+//             </td></tr>
+//             <tr><td>
+//
+//                 ' . $liste_fta . '
+//
+//        </td></tr>
+//        <tr><td>
+//
+//        <center>
+//        <input type = submit value = \'Enregistrer\'>
+//                 </center>
+//
+//             </td></tr>
+//             </table>
+//
+//             </form>
+//             ';
         /*
 
          */

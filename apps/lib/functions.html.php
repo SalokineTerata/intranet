@@ -52,7 +52,7 @@
  *                            DEBUT DES FONCTIONS                              *
  * ******************************************************************************
  */
-function afficher_message($titre, $message, $redirection) {
+function afficher_message($titre, $message, $redirection,$paramButtonCheck = NULL) {
     /*
       Dictionnaire des variables:
      * **************************
@@ -62,11 +62,13 @@ function afficher_message($titre, $message, $redirection) {
     if (!$redirection) {
         $redirection = "'Javascript:;' onClick='history.go(-1);return(false);'";
     }
+    if(!$paramButtonCheck){
     $bouton_valider = "
                        <a href='$redirection'>
                        <img src=../lib/images/bouton_valider_jaune.gif border=0>
                        </a>
                        ";
+    }
     echo
     "
          <TABLE>

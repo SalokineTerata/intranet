@@ -60,8 +60,18 @@ $show_help = 1;                              //Activer l'aide en ligne Pop-up
   echo '<br>';
   echo htmlspecialchars($comeback);
  */
+/**
+ * Vérification des droits d'accès
+ */
+$fta_consultation = Acl::getValueAccesRights('fta_consultation');
 
-
+if (!$fta_consultation) {
+    $titre = UserInterfaceMessage::FR_WARNING_ACCES_RIGHTS_TITLE;
+    $message = UserInterfaceMessage::FR_WARNING_ACCES_RIGHTS
+            . " Veuillez vous déconnecter et contactez l'administrateur de l'intranet";
+    $redirection = "index.php";
+    afficher_message($titre, $message, $redirection, TRUE);
+}
 
 //Paramètre d'URL
 $idFta = Lib::getParameterFromRequest(FtaModel::KEYNAME);

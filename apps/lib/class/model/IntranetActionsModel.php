@@ -182,6 +182,11 @@ class IntranetActionsModel extends AbstractModel {
         return $idActionT;
     }
 
+    /**
+     * Ajout d'une liste d'intranet actions avec la conddition or
+     * @param array $paramIdIntranetActions
+     * @return string
+     */
     public static function addIdIntranetAction($paramIdIntranetActions) {
         if ($paramIdIntranetActions) {
             foreach ($paramIdIntranetActions as $value) {
@@ -191,6 +196,11 @@ class IntranetActionsModel extends AbstractModel {
         return $req;
     }
 
+    /**
+     * Ajout d'une liste d'intranet actions parent
+     * @param array $paramIdIntranetActionsParent
+     * @return string
+     */
     public static function addIdIntranetActionParent($paramIdIntranetActionsParent) {
         if ($paramIdIntranetActionsParent) {
             foreach ($paramIdIntranetActionsParent as $value) {

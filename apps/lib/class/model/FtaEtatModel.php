@@ -51,6 +51,7 @@ class FtaEtatModel extends AbstractModel {
                         . ' FROM ' . FtaEtatModel::TABLENAME
                         . ',' . FtaRoleModel::TABLENAME . ',' . FtaModel::TABLENAME
                         . ',' . FtaWorkflowStructureModel::TABLENAME
+//                        . ',' . FtaWorkflowModel::TABLENAME
                         . ' WHERE ' . FtaRoleModel::TABLENAME . '.' . FtaRoleModel::KEYNAME . '=' . $paramIdFtaRole
                         . ' AND ' . FtaRoleModel::TABLENAME . '.' . FtaRoleModel::KEYNAME
                         . '=' . FtaWorkflowStructureModel::TABLENAME . '.' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_ROLE
@@ -58,6 +59,10 @@ class FtaEtatModel extends AbstractModel {
                         . '=' . FtaModel::TABLENAME . '.' . FtaModel::FIELDNAME_WORKFLOW
                         . ' AND ' . FtaModel::TABLENAME . '.' . FtaModel::FIELDNAME_ID_FTA_ETAT . '=' . FtaEtatModel::TABLENAME . '.' . FtaEtatModel::KEYNAME
                         . $req
+                        /**
+                         * Ticket 49823 en 3.1 activation/désactivation d'un workflow
+                         */
+//                        . FtaWorkflowModel::checkActifWorkflowSQL()
                         . ' ORDER BY ' . FtaEtatModel::TABLENAME . '.' . FtaEtatModel::KEYNAME
         );
         return $arrayFtaEtatAndName;
@@ -124,6 +129,10 @@ class FtaEtatModel extends AbstractModel {
                                 . ' AND ' . FtaWorkflowStructureModel::TABLENAME . '.' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_ROLE . '=' . $paramRole // Nous recuperons le type de role pour l'utilisateur
                                 . ' AND ' . FtaProcessusCycleModel::FIELDNAME_FTA_ETAT . '=\'' . $paramEtat . '\''                                            // Nous recuperons l'abréviation de l'etat de la Fta
                                 . ' AND ( 0 ' . IntranetActionsModel::addIdIntranetAction($_SESSION[Acl::ACL_INTRANET_ACTIONS_VALIDE]) . ')'
+                                /**
+                                 * Ticket 49823 en 3.1 activation/désactivation d'un workflow
+                                 */
+//                                . FtaWorkflowModel::checkActifWorkflowSQL()
                 );
                 if (FtaRoleModel::isGestionnaire($paramRole)) {
                     $arrayTmp = NULL;
@@ -196,6 +205,10 @@ class FtaEtatModel extends AbstractModel {
                                 . ' AND ' . FtaWorkflowStructureModel::TABLENAME . '.' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_ROLE . '=' . $paramRole    // Nous recuperons le type de role pour l'utilisateur
                                 . ' AND ' . FtaProcessusCycleModel::FIELDNAME_FTA_ETAT . '=\'' . $paramEtat . '\''                                               // Nous recuperons l'abréviation de l'etat de la Fta
                                 . ' AND ( 0 ' . IntranetActionsModel::addIdIntranetAction($_SESSION[Acl::ACL_INTRANET_ACTIONS_VALIDE]) . ')'
+                                /**
+                                 * Ticket 49823 en 3.1 activation/désactivation d'un workflow
+                                 */
+//                                . FtaWorkflowModel::checkActifWorkflowSQL()
                 );
                 if ($arrayTmp) {
                     foreach ($arrayTmp as $rows) {
@@ -274,6 +287,10 @@ class FtaEtatModel extends AbstractModel {
                                 . ' AND ' . FtaWorkflowStructureModel::TABLENAME . '.' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_ROLE . '=' . $paramRole // Nous recuperons le type de role pour l'utilisateur
                                 . ' AND ' . FtaProcessusCycleModel::FIELDNAME_FTA_ETAT . '=\'' . $paramEtat . '\''                                             // Nous recuperons l'abréviation de l'etat de la Fta
                                 . ' AND ( 0 ' . IntranetActionsModel::addIdIntranetAction($_SESSION[Acl::ACL_INTRANET_ACTIONS_VALIDE]) . ')'
+                                /**
+                                 * Ticket 49823 en 3.1 activation/désactivation d'un workflow
+                                 */
+//                                . FtaWorkflowModel::checkActifWorkflowSQL()
                 );
 
                 if ($arrayTmp) {
@@ -322,6 +339,10 @@ class FtaEtatModel extends AbstractModel {
                                     . '=' . FtaModel::TABLENAME . '.' . FtaModel::FIELDNAME_WORKFLOW
                                     . ' AND ' . FtaActionSiteModel::TABLENAME . '.' . FtaActionSiteModel::FIELDNAME_ID_INTRANET_ACTIONS
                                     . ' IN (' . IntranetActionsModel::TABLENAME . '.' . IntranetActionsModel::KEYNAME . ')'
+                                    /**
+                                     * Ticket 49823 en 3.1 activation/désactivation d'un workflow
+                                     */
+//                                    . ' AND ' . FtaWorkflowModel::FIELDNAME_WORKFLOW_ACTIF . '=' . FtaWorkflowModel::WORKFLOW_ACTIF_TRUE
                     );
                 } else {
                     $array = DatabaseOperation::convertSqlStatementWithoutKeyToArray(

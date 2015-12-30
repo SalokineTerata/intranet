@@ -101,6 +101,10 @@ if ($idFta) {
     $idUser = $globalConfig->getAuthenticatedUser()->getKeyValue();
     $idWorkflowFtaEncours = $ftaModel->getDataField(FtaModel::FIELDNAME_WORKFLOW)->getFieldValue();
     $idSiteDeProduction = $ftaModel->getDataField(FtaModel::FIELDNAME_SITE_PRODUCTION)->getFieldValue();
+    /**
+     * Ticket 49823 en 3.1 activation/désactivation d'un workflow
+     */
+//    FtaWorkflowModel::checkActifWorkflow($idWorkflowFtaEncours);
 
     /**
      * Verification des droits d'accès sur une Fta en modification

@@ -13,6 +13,7 @@ class FtaWorkflowModel extends AbstractModel {
     const FIELDNAME_DESCRIPTION_FTA_WORKFLOW = 'description_fta_workflow';
     const FIELDNAME_ID_INTRANET_ACTIONS = 'id_intranet_actions';
     const FIELDNAME_NOM_FTA_WORKFLOW = 'nom_fta_workflow';
+    const FIELDNAME_WORKFLOW_ACTIF = 'actif_fta_workflow';
     const NOM_FTA_WORKFLOW_SOUS_TRAI = 'sous_traitance_industrielle';
     const NOM_FTA_WORKFLOW_MDD_SANS = 'MDD_sans_etiquetage_interne';
     const NOM_FTA_WORKFLOW_MDD_AVEC = 'MDD_avec_etiquetage_interne';
@@ -21,6 +22,11 @@ class FtaWorkflowModel extends AbstractModel {
     const NOM_FTA_WORKFLOW_INTERF = 'interfiliale';
     const NOM_FTA_WORKFLOW_PRESENT = 'presentation';
     const ID_FTA_WORKFLOW_NON_DEFINI = '-1';
+    const WORKFLOW_ACTIF_FALSE = '0';
+    const WORKFLOW_ACTIF_TRUE = '1';
+    const WORKFLOW_NON_ACTIF_1 = UserInterfaceMessage::FR_WARNING_WORKFLOW_INACTIF_1;
+    const WORKFLOW_NON_ACTIF_2 = UserInterfaceMessage::FR_WARNING_WORKFLOW_INACTIF_2;
+    const WORKFLOW_NON_ACTIF_TITLE = UserInterfaceMessage::FR_WARNING_WORKFLOW_INACTIF_TITLE;
 
     /**
      * Site d'expedition de la FTA
@@ -52,6 +58,36 @@ class FtaWorkflowModel extends AbstractModel {
     }
 
     /**
+     * On récupère les espaces de travail actif
+     * @return string
+     */
+    public static function checkActifWorkflowSQL() {
+        $req = " AND " . self::TABLENAME . "." . self::KEYNAME
+                . "=" . FtaWorkflowStructureModel::TABLENAME . "." . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_WORKFLOW
+                . " AND " . self::FIELDNAME_WORKFLOW_ACTIF . "=" . self::WORKFLOW_ACTIF_TRUE;
+        return $req;
+    }
+
+    public static function checkActifWorkflow($paramIdFtaWorkflow) {
+
+        $arrayActifWorkflow = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
+                        " SELECT " . self::TABLENAME . "." . self::FIELDNAME_WORKFLOW_ACTIF
+                        . "," . self::FIELDNAME_DESCRIPTION_FTA_WORKFLOW
+                        . " FROM " . self::TABLENAME
+                        . " WHERE  " . self::KEYNAME . "=" . $paramIdFtaWorkflow);
+        foreach ($arrayActifWorkflow as $rowsActifWorkflow) {
+            $actif = $rowsActifWorkflow[self::FIELDNAME_WORKFLOW_ACTIF];
+            $nom = $rowsActifWorkflow[self::FIELDNAME_DESCRIPTION_FTA_WORKFLOW];
+            if (!$actif) {
+                $titre = self::WORKFLOW_NON_ACTIF_TITLE;
+                $message = self::WORKFLOW_NON_ACTIF_1 . $nom . self::WORKFLOW_NON_ACTIF_2;
+                $redirection = "";
+                afficher_message($titre, $message, $redirection);
+            }
+        }
+    }
+
+    /**
      * Affiche la liste des espaces de travail pour lesquel l'utilisateur connecté à les droits d'accès
      * @param int $paramIdUser
      * @param HtmlListSelectTagName $paramObjetList
@@ -74,6 +110,10 @@ class FtaWorkflowModel extends AbstractModel {
                         . '=' . FtaWorkflowStructureModel::TABLENAME . '.' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_WORKFLOW
                         . ' AND ' . IntranetDroitsAccesModel::FIELDNAME_ID_USER . '=' . $paramIdUser // L'utilisateur connecté
                         . ' AND ' . IntranetDroitsAccesModel::TABLENAME . '.' . IntranetDroitsAccesModel::FIELDNAME_NIVEAU_INTRANET_DROITS_ACCES . '=' . IntranetNiveauAccesModel::NIVEAU_GENERIC_TRUE
+                        /**
+                         * Ticket 49823 en 3.1 activation/désactivation d'un workflow
+                         */
+//                        . ' AND ' . self::FIELDNAME_WORKFLOW_ACTIF . '=' . self::WORKFLOW_ACTIF_TRUE
                         . ' ORDER BY ' . self::FIELDNAME_DESCRIPTION_FTA_WORKFLOW
         );
         $paramObjetList->setArrayListContent($arrayWorkflow);
@@ -145,6 +185,7 @@ class FtaWorkflowModel extends AbstractModel {
         $arrayWorkflow = DatabaseOperation::convertSqlStatementWithKeyAndOneFieldToArray(
                         'SELECT DISTINCT ' . self::TABLENAME . '.' . self::KEYNAME . ',' . self::FIELDNAME_DESCRIPTION_FTA_WORKFLOW
                         . ' FROM ' . self::TABLENAME
+                        . ' WHERE ' . self::FIELDNAME_WORKFLOW_ACTIF . '=' . self::WORKFLOW_ACTIF_TRUE
                         . ' ORDER BY ' . self::FIELDNAME_DESCRIPTION_FTA_WORKFLOW
         );
 

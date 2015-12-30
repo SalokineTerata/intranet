@@ -1750,8 +1750,8 @@ function liste_processus_encours($id_fta) {
   Utilisée pour visualiser toutes les fiches dont l'état (C, M, A)est passé en variable
  * ***************************************************************************** */
 
-function visualiser_fiches($id_fta_etat, $choix, $isLimit, $order_common) {
-    $tableau_fiches = TableauFicheView::getHtmlTable($id_fta_etat, $choix, $isLimit, $order_common);
+function visualiser_fiches($paramIdFtaEtat, $choix, $isLimit, $order_common) {
+    $tableau_fiches = TableauFicheView::getHtmlTable($paramIdFtaEtat, $choix, $isLimit, $order_common);
     return $tableau_fiches;
 }
 

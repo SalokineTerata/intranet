@@ -273,7 +273,7 @@ class Navigation {
      * @return String
      */
     protected static function CheckSyntheseAction() {
-
+        $nbProcessusPreceValide = "0";
         $ProcessusEncoursVisible = array();
         $ProcessusPrecedentVisible = array();
         $ProcessusValide = array();
@@ -495,13 +495,15 @@ class Navigation {
                         /*
                          * Vérifie si tous les processus précédent du processus en cours a des chapitres non validé
                          */
+                        $nbProcessusPrece = count($arrayInit);
                         foreach ($arrayInit as $rowsInit) {
 
                             $tauxValidationProcessus = FtaProcessusModel::getValideProcessusEncours(self::$id_fta, $rowsInit[FtaProcessusCycleModel::FIELDNAME_PROCESSUS_INIT], self::$id_fta_workflow);
                             if ($tauxValidationProcessus != 0) {
-                                $ProcessusEnLecture[] = $rowsInit[FtaProcessusCycleModel::FIELDNAME_PROCESSUS_INIT];
+                                $nbProcessusPreceValide = $nbProcessusPreceValide + 1;
                                 //Enregistrement du processus en tant que processus en cours
-                                if ($tauxValidationProcessus == "1") {
+                                if ($tauxValidationProcessus == "1" and $nbProcessusPreceValide == $nbProcessusPrece) {
+                                    $ProcessusEnLecture[] = $rowsInit[FtaProcessusCycleModel::FIELDNAME_PROCESSUS_INIT];
                                     $ProcessusEncoursVisible[] = $rowsNext[FtaProcessusCycleModel::FIELDNAME_PROCESSUS_NEXT];
                                 }
 //                            }
@@ -656,7 +658,7 @@ class Navigation {
                         . ' FROM ' . FtaSuiviProjetModel::TABLENAME
                         . ' WHERE ' . FtaSuiviProjetModel::FIELDNAME_ID_FTA . '=' . self::$id_fta
                         . ' AND ' . FtaSuiviProjetModel::FIELDNAME_ID_FTA_CHAPITRE . '=' . $id_fta_chapitre
-                        . ' AND ' . FtaSuiviProjetModel::FIELDNAME_SIGNATURE_VALIDATION_SUIVI_PROJET . '<> '.FtaSuiviProjetModel::SIGNATURE_VALIDATION_SUIVI_PROJET_FALSE
+                        . ' AND ' . FtaSuiviProjetModel::FIELDNAME_SIGNATURE_VALIDATION_SUIVI_PROJET . '<> ' . FtaSuiviProjetModel::SIGNATURE_VALIDATION_SUIVI_PROJET_FALSE
                 ;
                 $result1 = DatabaseOperation::queryPDO($req1);
                 $num = DatabaseOperation::getSqlNumRows($result1);

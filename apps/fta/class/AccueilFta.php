@@ -1105,7 +1105,7 @@ class AccueilFta {
                         $commentaire = $htmlField->getHtmlResult();
                         if ($recap[$idFta] == '100%') {
                             if ($createurFtaN <> $createurNTmp or $diffWorkflowN) {
-                                $tableauFicheN = '<tr class=contenu>'
+                                $tableauFicheN .= '<tr class=contenu>'
                                         . '<td COLSPAN=' . $nombreDeCellule . ' ><font size=2 >' . $createurPrenom . ' ' . $createurNom . ' </td>'
                                         . '</tr>'
                                         . '<tr class=contenu >'

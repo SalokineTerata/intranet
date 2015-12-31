@@ -115,6 +115,8 @@ class FtaProcessusModel extends AbstractModel {
                     $tauxValidationProcessusEncours = $tauxValidationProcessus / $nombre_total_processus_precedent;
                 }
             }
+        }else{
+            $tauxValidationProcessusEncours = "0";
         }
         $return = $tauxValidationProcessusEncours;
 

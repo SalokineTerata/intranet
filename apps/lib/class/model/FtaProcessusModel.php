@@ -116,7 +116,7 @@ class FtaProcessusModel extends AbstractModel {
                 }
             }
         }else{
-            $tauxValidationProcessusEncours = "0";
+            $tauxValidationProcessusEncours = NULL;
         }
         $return = $tauxValidationProcessusEncours;
 

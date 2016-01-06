@@ -32,7 +32,7 @@ class DataFieldToHtmlListBoolean extends HtmlListBoolean {
 
     public function getHtmlViewedContent() {
         $return = '';
-        if ($this->selected_value) {
+        if ($this->getSelectedValue()) {
             $return = Html::showValue(self::YES_LABEL);
         } else {
             $return = Html::showValue(self::NO_LABEL);

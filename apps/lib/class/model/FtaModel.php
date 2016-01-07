@@ -291,11 +291,11 @@ class FtaModel extends AbstractModel {
             /**
              * Si la date d'échance est infèrieur à la date d'aujourd'hui , erreur
              */
-            case $this->getDataField(FtaModel::FIELDNAME_DATE_ECHEANCE_FTA)->getFieldValue() < date("Y-m-d"):
-                $return = "1";
-                $newErrorMessage = self::MESSAGE_DATA_VALIDATION_DATE_ECHEANCE_INCOHERENCE;
-
-                break;
+//            case $this->getDataField(FtaModel::FIELDNAME_DATE_ECHEANCE_FTA)->getFieldValue() < date("Y-m-d"):
+//                $return = "1";
+//                $newErrorMessage = self::MESSAGE_DATA_VALIDATION_DATE_ECHEANCE_INCOHERENCE;
+//
+//                break;
 
             default :
 
@@ -1663,7 +1663,6 @@ class FtaModel extends AbstractModel {
         return $arrayIdFtaChange;
     }
 
-  
     /**
      * Affiche la date d'échéance
      * @param boolean $paramUpdateFta
@@ -1704,7 +1703,6 @@ class FtaModel extends AbstractModel {
         return $htmlInputCalendar->getHtmlResult();
     }
 
-
     /**
      * Contrôle de la date d'échéance
      * @param boolean $paramUpdateFta
@@ -1727,6 +1725,8 @@ class FtaModel extends AbstractModel {
             }
             $dateEcheanceValue = date("Y-m-d", strtotime(date("Y-m-d") . " +" . $nbJours . " days"));
         }
+        $dataFieldDateEcheance->setFieldValue($dateEcheanceValue);
+        $this->saveToDatabase();
         return $dateEcheanceValue;
     }
 

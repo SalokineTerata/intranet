@@ -66,6 +66,7 @@ class Chapitre {
     protected static$abrevation_etat;
     protected static$comeback;
     protected static $ftaWorkflowStructureModel;
+    protected static $html_chapitre_activation_cody;
     protected static $html_chapitre_activation_des_produits;
     protected static $html_chapitre_all;
     protected static $html_chapitre_codification;
@@ -397,6 +398,11 @@ class Chapitre {
             case 'duree_de_vie':
                 self::$html_chapitre_duree_de_vie = self::buildChapitreDureeDeVie();
                 $return = self::$html_chapitre_duree_de_vie;
+                break;
+            default:
+            case 'activation_cody':
+                self::$html_chapitre_activation_cody = self::buildChapitreActivationCody();
+                $return = self::$html_chapitre_activation_cody;
                 break;
             default:
         }
@@ -961,6 +967,23 @@ class Chapitre {
 
         //Logo éco-emballage
         $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_LOGO_ECO_EMBALLAGE);
+
+
+        return $bloc;
+    }
+
+    public static function buildChapitreActivationCody() {
+
+        $bloc = '';
+        $id_fta = self::$id_fta;
+        $synthese_action = self::$synthese_action;
+        $isEditable = self::$is_editable;
+
+        //Identifiant FTA
+        $ftaModel = new FtaModel($id_fta);
+        $ftaView = new FtaView($ftaModel);
+        $ftaView->setIsEditable($isEditable);
+        $ftaView->setFtaChapitreModelById(self::ID_CHAPITRE_IDENTITE);
 
         //Activer le système d'impression Base Etiquette Codesoft
         $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_ACTIVATION_CODESOFT);

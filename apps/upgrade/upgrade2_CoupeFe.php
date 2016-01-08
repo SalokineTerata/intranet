@@ -44,7 +44,8 @@ if ($arrayClassifIncomplete) {
                     . ' AND id_fta_chapitre'
                     . '=' . $rowsChapitre["id_fta_chapitre"]
             ;
-            $arrayCheckIdSuiviProjet = mysql_fetch_array($sql3, MYSQL_ASSOC);
+            $resultCheckIdSuiviProjet = mysql_query($sql3);
+            $arrayCheckIdSuiviProjet = mysql_fetch_array($resultCheckIdSuiviProjet, MYSQL_ASSOC);
             if (!$arrayCheckIdSuiviProjet['id_fta_suivi_projet']) {
                 if ($rowsChapitre["id_fta_processus"] == 0) {
                     mysql_query(

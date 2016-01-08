@@ -1,33 +1,89 @@
 <?php
 
-require_once '../inc/php.php';
+$nameOfBDDTarget = $argv[1];
+$nameOfBDDOrigin = $argv[2];
+$nameOfBDDStructure = $argv[3];
 
-$arrayClassifIncomplete = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
-                "SELECT " . FtaModel::KEYNAME . "," . FtaModel::FIELDNAME_ID_FTA_ETAT
-                . " FROM " . FtaModel::TABLENAME
-                . " WHERE " . FtaModel::FIELDNAME_WORKFLOW . "=" . "6"
-);
+$hostname_connect = $argv[4]; //nom du serveur MySQL de connection � la base de donn�e
+$database_connect = $nameOfBDDTarget; //nom de la base de donn�e sur votre serveur MySQL
+$username_connect = $argv[5]; //login de la base MySQL
+$password_connect = $argv[6];
+; //mot de passe de la base MySQL
+
+$donnee = mysql_pconnect($hostname_connect, $username_connect, $password_connect);
+mysql_select_db($database_connect);
+mysql_query('SET NAMES utf8');
+
+$sql = "SELECT id_fta,id_fta_etat"
+        . " FROM fta"
+        . " WHERE id_fta_workflow=" . "6"
+;
+$arrayClassifIncomplete = mysql_query($sql);
 if ($arrayClassifIncomplete) {
-    foreach ($arrayClassifIncomplete as $rowsClassifInComplete) {
-        $idFta = $rowsClassifInComplete[FtaModel::KEYNAME];
-        $IdFtaEtat = $rowsClassifInComplete[FtaModel::FIELDNAME_ID_FTA_ETAT];
+    while ($rowsClassifInComplete = mysql_fetch_array($arrayClassifIncomplete)) {
+        $idFta = $rowsClassifInComplete["id_fta"];
+        $IdFtaEtat = $rowsClassifInComplete["id_fta_etat"];
 
         /**
          * Initailisation du nouveau chapitre
          */
-        FtaSuiviProjetModel::initFtaSuiviProjet($idFta);
+        $sql2 = 'SELECT id_fta_chapitre'
+                . ', id_fta_processus'
+                . ' FROM fta_workflow_structure'
+                . ' WHERE id_fta_workflow'
+                . '=' . "6"
+        ;
+        $arrayChapitre = mysql_query($sql2);
 
-        if ($IdFtaEtat <> FtaEtatModel::ID_VALUE_MODIFICATION) {
-            $validation = DatabaseOperation::execute(
-                            "UPDATE " . FtaSuiviProjetModel::TABLENAME
-                            . " SET " . FtaSuiviProjetModel::FIELDNAME_SIGNATURE_VALIDATION_SUIVI_PROJET . "=" . FtaSuiviProjetModel::SIGNATURE_VALIDATION_SUIVI_PROJET_AUTO
-                            . " WHERE " . FtaSuiviProjetModel::FIELDNAME_ID_FTA . "=" . $idFta
-                            . " AND " . FtaSuiviProjetModel::FIELDNAME_ID_FTA_CHAPITRE . "=" . "41"
+        while ($rowsChapitre = mysql_fetch_array($arrayChapitre)) {
+
+            $sql3 = 'SELECT id_fta_suivi_projet'
+                    . ' FROM fta_suivi_projet'
+                    . ' WHERE id_fta'
+                    . '=' . $idFta
+                    . ' AND id_fta_chapitre'
+                    . '=' . $rowsChapitre["id_fta_chapitre"]
+            ;
+            $arrayCheckIdSuiviProjet = mysql_fetch_array($sql3, MYSQL_ASSOC);
+            if (!$arrayCheckIdSuiviProjet['id_fta_suivi_projet']) {
+                if ($rowsChapitre["id_fta_processus"] == 0) {
+                    mysql_query(
+                            'INSERT INTO fta_suivi_projet'
+                            . '(id_fta'
+                            . ', id_fta_chapitre'
+                            . ', signature_validation_suivi_projet'
+                            . ') VALUES (' . $idFta
+                            . ', ' . $rowsChapitre["id_fta_chapitre"]
+                            . ', 1 )'
+                    );
+                } else {
+                    mysql_query(
+                            'INSERT INTO fta_suivi_projet'
+                            . '(id_fta'
+                            . ', id_fta_chapitre'
+                            . ', signature_validation_suivi_projet'
+                            . ') VALUES (' . $idFta
+                            . ', ' . $rowsChapitre["id_fta_chapitre"]
+                            . ', 0 )'
+                    );
+                }
+            }
+        }
+
+        /**
+         * Validation des Fta autres que dans l'état de modification
+         */
+        if ($IdFtaEtat <> "1") {
+            $validation = mysql_query(
+                    "UPDATE fta_suivi_projet"
+                    . " SET signature_validation_suivi_projet=-3"
+                    . " WHERE id_fta=" . $idFta
+                    . " AND id_fta_chapitre=" . "41"
             );
             if ($validation) {
-                echo FtaSuiviProjetModel::FIELDNAME_ID_FTA . "=" . $idFta . " OK <br>";
+                echo "id_fta=" . $idFta . " OK <br>";
             } else {
-                echo FtaSuiviProjetModel::FIELDNAME_ID_FTA . "=" . $idFta . " FAILDED <br>";
+                echo "id_fta=" . $idFta . " FAILDED <br>";
             }
         } else {
             echo "Cette Id " . $idFta . " Fta n'est pas à validé<br>";

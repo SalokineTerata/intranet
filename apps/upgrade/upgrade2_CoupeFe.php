@@ -89,8 +89,8 @@ if ($arrayClassifIncomplete) {
         if ($arrayCheckIdSuiviProjet2['signature_validation_suivi_projet'] <> "0") {
             $validation = mysql_query(
                     "UPDATE fta_suivi_projet"
-                    . " SET signature_validation_suivi_projet=" . $arrayCheckIdSuiviProjet2['signature_validation_suivi_projet']
-                    . " WHERE id_fta=" . $idFta
+                    . " SET signature_validation_suivi_projet=\"" . $arrayCheckIdSuiviProjet2['signature_validation_suivi_projet']
+                    . "\" WHERE id_fta=" . $idFta
                     . " AND id_fta_chapitre=" . "41"
             );
             if ($validation) {

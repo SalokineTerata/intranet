@@ -211,7 +211,7 @@ class FtaModel extends AbstractModel {
         $idFtaWorkflow = $this->getDataField(FtaModel::FIELDNAME_WORKFLOW)->getFieldValue();
         $SiteDeProduction = $this->getDataField(FtaModel::FIELDNAME_SITE_PRODUCTION)->getFieldValue();
 
-        $array = UserModel::getArrayGestionnaireBySiteProdAndWorkflow($SiteDeProduction, $idFtaWorkflow);
+        $array = UserModel::getArrayIdUserBySiteProdAndWorkflow($SiteDeProduction, $idFtaWorkflow);
 
         return$array;
     }

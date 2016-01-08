@@ -232,39 +232,44 @@ class UserModel extends AbstractModel {
     }
 
     /**
-     * On obtient le nom des gestionnaires pour l'espace de travail et le site en paramètres
-     * @param int $paramIdSiteDeProduction
-     * @param int $paramIdWorkflow
-     * @return array
-     */
-    public static function getArrayGestionnaireBySiteProdAndWorkflow($paramIdSiteDeProduction, $paramIdWorkflow) {
-        return self::getArrayIdUserBySiteProdAndWorkflow($paramIdSiteDeProduction, $paramIdWorkflow);
-    }
-
-    /**
      * On obtient id_user, le nom et prénom associé pour l'espace de travail et le site en paramètres
      * @param int $paramIdSiteDeProduction
      * @param int $paramIdWorkflow
      * @return array
      */
     public static function getArrayIdUserBySiteProdAndWorkflow($paramIdSiteDeProduction, $paramIdWorkflow) {
-        $arrayIdIntranetActionsBySiteProdAndWorkflowAndGestio = IntranetActionsModel::getArrayIdIntranetActionByWorkflowAndSiteDeProdAndGestionnaire($paramIdWorkflow, $paramIdSiteDeProduction);
+        $arrayIdIntranetActionsBySiteProdAndWorkflowAndGestion = IntranetActionsModel::getArrayIdIntranetActionByWorkflowAndSiteDeProdAndGestionnaire($paramIdWorkflow, $paramIdSiteDeProduction);
 
-        $arrayIdUser = DatabaseOperation::convertSqlStatementWithKeyAndOneFieldToArray(
-                        'SELECT DISTINCT ' . self::TABLENAME . '.' . self::KEYNAME
-                        . ', CONCAT_WS ( \' \',' . self::FIELDNAME_PRENOM
-                        . ',' . self::FIELDNAME_NOM . ' )'
-                        . ' FROM ' . IntranetDroitsAccesModel::TABLENAME . ',' . IntranetActionsModel::TABLENAME
-                        . ',' . self::TABLENAME
-                        . ' WHERE ' . UserModel::TABLENAME . '.' . UserModel::KEYNAME
-                        . '=' . IntranetDroitsAccesModel::TABLENAME . '.' . IntranetDroitsAccesModel::FIELDNAME_ID_USER
-                        . ' AND ' . IntranetDroitsAccesModel::FIELDNAME_NIVEAU_INTRANET_DROITS_ACCES . '=' . IntranetNiveauAccesModel::NIVEAU_GENERIC_TRUE
-                        . ' AND ' . IntranetDroitsAccesModel::TABLENAME . '.' . IntranetDroitsAccesModel::FIELDNAME_ID_INTRANET_ACTIONS
-                        . '=' . IntranetActionsModel::TABLENAME . '.' . IntranetActionsModel::KEYNAME
-                        . ' AND ( 0 ' . IntranetActionsModel::addIdIntranetAction($arrayIdIntranetActionsBySiteProdAndWorkflowAndGestio) . ')'
-                        . ' ORDER BY ' . self::TABLENAME . '.' . self::FIELDNAME_PRENOM . ',' . self::FIELDNAME_NOM
-        );
+        $sql = self::getSqlGestionnaireByWorkflowAndSiteProd($arrayIdIntranetActionsBySiteProdAndWorkflowAndGestion);
+        $arrayIdUser = DatabaseOperation::convertSqlStatementWithKeyAndOneFieldToArray($sql);
+
         return $arrayIdUser;
+    }
+
+    /**
+     * Sql de la liste déroulant de Gestionnaire Fta
+     * pour un espace de travail et un site de production donnée
+     * @param array $paramArrayIdIntranetActions
+     * @return string
+     */
+    public static function getSqlGestionnaireByWorkflowAndSiteProd($paramArrayIdIntranetActions) {
+        $sql = 'SELECT DISTINCT ' . self::TABLENAME . '.' . self::KEYNAME
+                . ', CONCAT_WS ( \' \',' . self::FIELDNAME_PRENOM
+                . ',' . self::FIELDNAME_NOM . ' )'
+                . ' FROM ' . IntranetDroitsAccesModel::TABLENAME . ',' . IntranetActionsModel::TABLENAME
+                . ',' . self::TABLENAME
+                . ' WHERE ' . UserModel::TABLENAME . '.' . UserModel::KEYNAME
+                . '=' . IntranetDroitsAccesModel::TABLENAME . '.' . IntranetDroitsAccesModel::FIELDNAME_ID_USER
+                . ' AND ' . IntranetDroitsAccesModel::FIELDNAME_NIVEAU_INTRANET_DROITS_ACCES . '=' . IntranetNiveauAccesModel::NIVEAU_GENERIC_TRUE
+                . ' AND ' . IntranetDroitsAccesModel::TABLENAME . '.' . IntranetDroitsAccesModel::FIELDNAME_ID_INTRANET_ACTIONS
+                . '=' . IntranetActionsModel::TABLENAME . '.' . IntranetActionsModel::KEYNAME
+                . ' AND ' . IntranetActionsModel::TABLENAME . '.' . IntranetActionsModel::KEYNAME . '=' . $paramArrayIdIntranetActions["0"]
+                . ' AND ' . IntranetDroitsAccesModel::TABLENAME . '.' . self::KEYNAME
+                . ' IN ( SELECT DISTINCT ' . self::KEYNAME
+                . ' FROM ' . IntranetDroitsAccesModel::TABLENAME
+                . ' WHERE ' . IntranetDroitsAccesModel::FIELDNAME_ID_INTRANET_ACTIONS . '=' . $paramArrayIdIntranetActions["1"]
+                . ') ORDER BY ' . self::TABLENAME . '.' . self::FIELDNAME_PRENOM . ',' . self::FIELDNAME_NOM;
+        return $sql;
     }
 
 }

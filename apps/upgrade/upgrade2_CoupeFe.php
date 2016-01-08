@@ -77,10 +77,19 @@ if ($arrayClassifIncomplete) {
         /**
          * Validation des Fta autres que dans l'état de modification
          */
-        if ($IdFtaEtat <> "1") {
+        $sql4 = 'SELECT signature_validation_suivi_projet'
+                . ' FROM fta_suivi_projet'
+                . ' WHERE id_fta'
+                . '=' . $idFta
+                . ' AND id_fta_chapitre'
+                . '=20'
+        ;
+        $resultCheckIdSuiviProjet2 = mysql_query($sql4);
+        $arrayCheckIdSuiviProjet2 = mysql_fetch_array($resultCheckIdSuiviProjet2, MYSQL_ASSOC);
+        if ($arrayCheckIdSuiviProjet2['signature_validation_suivi_projet']) {
             $validation = mysql_query(
                     "UPDATE fta_suivi_projet"
-                    . " SET signature_validation_suivi_projet=-3"
+                    . " SET signature_validation_suivi_projet=" . $arrayCheckIdSuiviProjet2['signature_validation_suivi_projet']
                     . " WHERE id_fta=" . $idFta
                     . " AND id_fta_chapitre=" . "41"
             );

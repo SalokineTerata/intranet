@@ -236,16 +236,6 @@ class UserModel extends AbstractModel {
     }
 
     /**
-     * On obtient le nom des gestionnaires pour l'espace de travail et le site en paramètres
-     * @param int $paramIdSiteDeProduction
-     * @param int $paramIdWorkflow
-     * @return array
-     */
-    public static function getArrayGestionnaireBySiteProdAndWorkflow($paramIdSiteDeProduction, $paramIdWorkflow) {
-        return self::getArrayIdUserBySiteProdAndWorkflow($paramIdSiteDeProduction, $paramIdWorkflow);
-    }
-
-    /**
      * On obtient id_user, le nom et prénom associé pour l'espace de travail et le site en paramètres
      * @param int $paramIdSiteDeProduction
      * @param int $paramIdWorkflow

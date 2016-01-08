@@ -67,7 +67,7 @@ $userModelOLD = new UserModel($createurFtaOLD);
 $userModelNEW = new UserModel($createurFtaNEW);
 $nomWorkflowOLD = $userModelOLD->getPrenomNom();
 $nomWorkflowNEW = $userModelNEW->getPrenomNom();
-$commentaire = "\n" . FtaController::getCommentGestionnaireChange($nomWorkflowOLD, $nomWorkflowNEW, $nomPrenomConnect) . "\n";
+$commentaire = "\n" . FtaController::getCommentGestionnaireChange($nomWorkflowOLD, $nomWorkflowNEW, $nomPrenomConnect) ;
 
 
 switch ($action) {

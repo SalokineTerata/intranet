@@ -118,6 +118,7 @@ class FtaProcessusCycleModel extends AbstractModel {
                         . ' ON  t1 .' . FtaProcessusCycleModel::FIELDNAME_PROCESSUS_INIT
                         . '= t2 .' . FtaProcessusCycleModel::FIELDNAME_PROCESSUS_INIT
                         . ' WHERE  t2 .' . FtaProcessusCycleModel::FIELDNAME_PROCESSUS_NEXT . ' IS NULL'
+                        . ' AND  t1 .' . FtaProcessusCycleModel::FIELDNAME_PROCESSUS_NEXT . ' IS NULL'
                         . ' AND  t1 .' . FtaProcessusCycleModel::FIELDNAME_WORKFLOW . '=' . $paramIdWorkflow
         );
         foreach ($arrayProcessusValidation as $rowsProcessusValidation) {

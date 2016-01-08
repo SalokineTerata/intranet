@@ -67,7 +67,7 @@ $ftaWorflowModelOLD = new FtaWorkflowModel($idFtaWorkflowOLD);
 $ftaWorflowModelNEW = new FtaWorkflowModel($idFtaWorkflowNEW);
 $nomWorkflowOLD = $ftaWorflowModelOLD->getDataField(FtaWorkflowModel::FIELDNAME_DESCRIPTION_FTA_WORKFLOW)->getFieldValue();
 $nomWorkflowNEW = $ftaWorflowModelNEW->getDataField(FtaWorkflowModel::FIELDNAME_DESCRIPTION_FTA_WORKFLOW)->getFieldValue();
-$commentaire = "\n\n" . FtaController::getCommentWorkflowChange($nomWorkflowOLD, $nomWorkflowNEW, $nomPrenomConnect) . "\n";
+$commentaire = FtaController::getCommentWorkflowChange($nomWorkflowOLD, $nomWorkflowNEW, $nomPrenomConnect);
 
 
 

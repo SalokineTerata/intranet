@@ -85,12 +85,12 @@ if ($arrayClassifIncomplete) {
                 . '=20'
         ;
         $resultCheckIdSuiviProjet2 = mysql_query($sql4);
-        $signature_validation_suivi_projet = mysql_result($resultCheckIdSuiviProjet2, 0, "signature_validation_suivi_projet");
-        if ($signature_validation_suivi_projet <> "0") {
-            echo $signature_validation_suivi_projet;
+        $arrayCheckIdSuiviProjet2 = mysql_fetch_array($resultCheckIdSuiviProjet2, MYSQL_ASSOC);
+        if ($arrayCheckIdSuiviProjet2['signature_validation_suivi_projet'] <> "0") {
+            echo "AFFICHER SIGNATURE" . $arrayCheckIdSuiviProjet2['signature_validation_suivi_projet'];
             $validation = mysql_query(
                     'UPDATE fta_suivi_projet'
-                    . ' SET signature_validation_suivi_projet=\'' . $signature_validation_suivi_projet
+                    . ' SET signature_validation_suivi_projet=\'' . $arrayCheckIdSuiviProjet2['signature_validation_suivi_projet']
                     . '\' WHERE id_fta=' . $idFta
                     . ' AND id_fta_chapitre=' . '41'
             );

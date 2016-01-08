@@ -14,6 +14,9 @@ $donnee = mysql_pconnect($hostname_connect, $username_connect, $password_connect
 mysql_select_db($database_connect);
 mysql_query('SET NAMES utf8');
 
+$debut = date("H:i:s");
+echo date("H:i:s") . "\n";
+
 $sql = "SELECT id_fta,id_fta_etat"
         . " FROM fta"
         . " WHERE id_fta_workflow=" . "6"
@@ -82,14 +85,15 @@ if ($arrayClassifIncomplete) {
                     . " AND id_fta_chapitre=" . "41"
             );
             if ($validation) {
-                echo "id_fta=" . $idFta . " OK <br>";
+                echo "id_fta=" . $idFta . " OK \n";
             } else {
-                echo "id_fta=" . $idFta . " FAILDED <br>";
+                echo "id_fta=" . $idFta . " FAILDED \n";
             }
         } else {
-            echo "Cette Id " . $idFta . " Fta n'est pas à validé<br>";
+            echo "Cette Id " . $idFta . " Fta n'est pas à validé \n";
         }
     }
+    echo"Debut :" . $debut . " Fin :" . date("H:i:s") . " Temps complet part 1 :" . $debut - date("H:i:s") . "\n";
 } else {
     echo "<br>Vous vennez d'executer un script interdit <br> CONTACTEZ IMMEDIATEMENT L'ADMINISTRATEUR DU SITE!!!!!!!!!!!!!<br>";
 }

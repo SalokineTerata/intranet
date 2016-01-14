@@ -241,7 +241,11 @@ class FtaView {
         $DesignationCommerciale->getAttributes()->getValue()->setValue($DesignationCommercialeValue);
         $DesignationCommerciale->getAttributes()->getSize()->setValue("70");
         $DesignationCommerciale->setIsEditable($this->getIsEditable());
-        $DesignationCommerciale->initAbstractHtmlInput($HtmlTableName, $DesignationCommerciale->getLabel(), $DesignationCommercialeValue, NULL);
+        $DesignationCommerciale->initAbstractHtmlInput(
+                $HtmlTableName
+                , $DesignationCommerciale->getLabel()
+                , $DesignationCommercialeValue
+                , NULL);
         $DesignationCommerciale->getEventsForm()->setOnChangeWithAjaxAutoSave(FtaModel::TABLENAME, FtaModel::KEYNAME, $id_fta, FtaModel::FIELDNAME_DESIGNATION_COMMERCIALE);
         return $DesignationCommerciale->getHtmlResult();
     }
@@ -250,7 +254,7 @@ class FtaView {
      * Affichage Html de l'ean article
      * @return string
      */
-    public function getHtmlEANArticle() {
+    function getHtmlEANArticle() {
         $id_fta = $this->getModel()->getKeyValue();
         $eanArticleValue = $this->getModel()->getDataField(FtaModel::FIELDNAME_EAN_UVC)->getFieldValue();
         $eanArticle = new HtmlInputText();
@@ -265,7 +269,12 @@ class FtaView {
         $eanArticle->getAttributes()->getPattern()->setValue("[0-9]{1,13}");
         $eanArticle->getAttributes()->getMaxLength()->setValue("13");
         $eanArticle->setIsEditable($this->getIsEditable());
-        $eanArticle->initAbstractHtmlInput($HtmlTableName, $eanArticle->getLabel(), $eanArticleValue, NULL);
+        $eanArticle->initAbstractHtmlInput(
+                $HtmlTableName
+                , $eanArticle->getLabel()
+                , $eanArticleValue
+                , $this->getModel()->getDataField(FtaModel::FIELDNAME_EAN_UVC)->isFieldDiff()
+        );
         $eanArticle->getEventsForm()->setOnChangeWithAjaxAutoSave(FtaModel::TABLENAME, FtaModel::KEYNAME, $id_fta, FtaModel::FIELDNAME_EAN_UVC);
         return $eanArticle->getHtmlResult();
     }
@@ -274,7 +283,7 @@ class FtaView {
      * Affichage Html de l'ean colis
      * @return string
      */
-    public function getHtmlEANColis() {
+    function getHtmlEANColis() {
         $id_fta = $this->getModel()->getKeyValue();
         $eanColisValue = $this->getModel()->getDataField(FtaModel::FIELDNAME_EAN_COLIS)->getFieldValue();
         $eanColis = new HtmlInputText();
@@ -289,7 +298,12 @@ class FtaView {
         $eanColis->getAttributes()->getPattern()->setValue("[0-9]{1,14}");
         $eanColis->getAttributes()->getMaxLength()->setValue("14");
         $eanColis->setIsEditable($this->getIsEditable());
-        $eanColis->initAbstractHtmlInput($HtmlTableName, $eanColis->getLabel(), $eanColisValue, NULL);
+        $eanColis->initAbstractHtmlInput(
+                $HtmlTableName
+                , $eanColis->getLabel()
+                , $eanColisValue
+                , $this->getModel()->getDataField(FtaModel::FIELDNAME_EAN_COLIS)->isFieldDiff()
+        );
         $eanColis->getEventsForm()->setOnChangeWithAjaxAutoSave(FtaModel::TABLENAME, FtaModel::KEYNAME, $id_fta, FtaModel::FIELDNAME_EAN_COLIS);
         return $eanColis->getHtmlResult();
     }
@@ -298,7 +312,7 @@ class FtaView {
      * Affichage Html de l'ean palette
      * @return string
      */
-    public function getHtmlEANPalette() {
+    function getHtmlEANPalette() {
         $id_fta = $this->getModel()->getKeyValue();
         $eanPaletteValue = $this->getModel()->getDataField(FtaModel::FIELDNAME_EAN_PALETTE)->getFieldValue();
         $eanPalette = new HtmlInputText();
@@ -313,7 +327,12 @@ class FtaView {
         $eanPalette->getAttributes()->getPattern()->setValue("[0-9]{1,14}");
         $eanPalette->getAttributes()->getMaxLength()->setValue("14");
         $eanPalette->setIsEditable($this->getIsEditable());
-        $eanPalette->initAbstractHtmlInput($HtmlTableName, $eanPalette->getLabel(), $eanPaletteValue, NULL);
+        $eanPalette->initAbstractHtmlInput(
+                $HtmlTableName
+                , $eanPalette->getLabel()
+                , $eanPaletteValue
+                , $this->getModel()->getDataField(FtaModel::FIELDNAME_EAN_PALETTE)->isFieldDiff()
+        );
         $eanPalette->getEventsForm()->setOnChangeWithAjaxAutoSave(FtaModel::TABLENAME, FtaModel::KEYNAME, $id_fta, FtaModel::FIELDNAME_EAN_PALETTE);
         return $eanPalette->getHtmlResult();
     }
@@ -367,8 +386,16 @@ class FtaView {
     public function getHtmlCreateurFta() {
 
         $htmlObject = new htmlInputText();
+        $HtmlTableName = FtaModel::TABLENAME
+                . '_'
+                . FtaModel::FIELDNAME_CREATEUR
+                . '_'
+                . $this->getModel()->getKeyValue()
+        ;
         $htmlObject->setLabel($this->getModel()->getDataField(FtaModel::FIELDNAME_CREATEUR)->getFieldLabel());
-        $htmlObject->getAttributes()->getValue()->setValue($this->getModel()->getModelCreateur()->getPrenomNom());
+        $htmlObject->initAbstractHtmlInput($HtmlTableName, $htmlObject->getLabel()
+                , $this->getModel()->getModelCreateur()->getPrenomNom()
+                , $this->getModel()->getDataField(FtaModel::FIELDNAME_CREATEUR)->isFieldDiff());
         $htmlObject->setIsEditable(FALSE);
         return $htmlObject->getHtmlResult();
     }
@@ -419,16 +446,95 @@ class FtaView {
      * Affiche la liste des site de production pour lesquel l'utilisateur connecté à les droits d'accès
      * @param int $paramIdUser
      * @param bolean $paramIsEditable
-     * @param int $paramIdFta
      * @return string
      */
-    public function listeSiteByAcces($paramIdUser, $paramIsEditable, $paramIdFta) {
+    public function listeSiteByAcces($paramIdUser, $paramIsEditable) {
         $HtmlList = new HtmlListSelect();
 
         /*
          * Site de production FTA
          */
-        return GeoModel::ShowListeDeroulanteSiteProdByAccesAndIdFta($paramIdUser, $HtmlList, $paramIsEditable, $paramIdFta);
+        return $this->showListeDeroulanteSiteProdByAccesAndIdFta($paramIdUser, $HtmlList, $paramIsEditable);
+    }
+
+    /**
+     * Affiche la liste des site de production pour lesquel l'utilisateur connecté à les droits d'accès 
+     * et l'identifiant de la Fta en cours
+     * @param int $paramIdUser
+     * @param HtmlListSelect $paramHtmlObjet
+     * @param boolean $paramIsEditable
+     * @return string
+     */
+    function showListeDeroulanteSiteProdByAccesAndIdFta($paramIdUser, HtmlListSelect $paramHtmlObjet, $paramIsEditable) {
+
+        /**
+         * Modification
+         */
+        $ftaModification = IntranetDroitsAccesModel::getFtaModification($paramIdUser);
+
+        /**
+         * Consultation
+         */
+        $ftaConsultation = IntranetDroitsAccesModel::getFtaConsultation($paramIdUser);
+
+        /**
+         * Si l'utilisateur a les droits en consultation sur le module et pas en modification
+         * Transmettre à $paramHtmlObjet la liste de tous les sites taggés "fta".
+         * 
+         * Si il a accès en consultation et modification alors
+         */
+        if ($ftaConsultation and $ftaModification) {
+
+            $idFtaWorkflow = $this->getModel()->getDataField(FtaModel::FIELDNAME_WORKFLOW)->getFieldValue();
+            $arraySite = DatabaseOperation::convertSqlStatementWithKeyAndOneFieldToArray(
+                            'SELECT DISTINCT ' . GeoModel::KEYNAME . ',' . GeoModel::FIELDNAME_GEO
+                            . ' FROM ' . GeoModel::TABLENAME
+                            . ', ' . FtaActionSiteModel::TABLENAME
+                            . ', ' . IntranetActionsModel::TABLENAME
+                            . ', ' . IntranetDroitsAccesModel::TABLENAME
+                            . ', ' . FtaWorkflowModel::TABLENAME
+                            . ' WHERE ' . FtaActionSiteModel::TABLENAME . '.' . FtaActionSiteModel::FIELDNAME_ID_SITE . '=' . GeoModel::KEYNAME
+                            . ' AND ' . FtaActionSiteModel::TABLENAME . '.' . FtaActionSiteModel::FIELDNAME_ID_INTRANET_ACTIONS
+                            . '=' . IntranetActionsModel::TABLENAME . '.' . IntranetActionsModel::KEYNAME
+                            . ' AND ' . FtaWorkflowModel::TABLENAME . '.' . FtaWorkflowModel::FIELDNAME_ID_INTRANET_ACTIONS
+                            . '=' . IntranetActionsModel::TABLENAME . '.' . IntranetActionsModel::FIELDNAME_PARENT_INTRANET_ACTIONS
+                            . ' AND ' . FtaWorkflowModel::TABLENAME . '.' . FtaWorkflowModel::KEYNAME
+                            . '=' . $idFtaWorkflow
+                            . ' AND ' . IntranetActionsModel::TABLENAME . '.' . IntranetActionsModel::KEYNAME
+                            . '=' . IntranetDroitsAccesModel::TABLENAME . '.' . IntranetDroitsAccesModel::FIELDNAME_ID_INTRANET_ACTIONS
+                            . ' AND ' . IntranetDroitsAccesModel::FIELDNAME_ID_USER . '=' . $paramIdUser // L'utilisateur connecté
+                            . ' AND ' . IntranetDroitsAccesModel::TABLENAME . '.' . IntranetDroitsAccesModel::FIELDNAME_NIVEAU_INTRANET_DROITS_ACCES . '=' . IntranetNiveauAccesModel::NIVEAU_GENERIC_TRUE
+                            . ' ORDER BY ' . GeoModel::FIELDNAME_GEO
+            );
+        } elseif ($ftaConsultation) {
+            $arraySite = DatabaseOperation::convertSqlStatementWithKeyAndOneFieldToArray(
+                            'SELECT DISTINCT ' . GeoModel::KEYNAME . ',' . GeoModel::FIELDNAME_GEO
+                            . ' FROM ' . GeoModel::TABLENAME
+                            . ' WHERE ' . GeoModel::FIELDNAME_TAG_APPLICATION_GEO . ' LIKE \'%fta%\''
+                            . ' ORDER BY ' . GeoModel::FIELDNAME_GEO
+            );
+        }
+
+        $paramHtmlObjet->setArrayListContent($arraySite);
+
+        $HtmlTableName = FtaModel::TABLENAME
+                . '_'
+                . FtaModel::FIELDNAME_SITE_PRODUCTION
+                . '_'
+                . $this->getModel()->getKeyValue()
+        ;
+        $paramHtmlObjet->getAttributes()->getName()->setValue(FtaModel::FIELDNAME_SITE_PRODUCTION);
+        $paramHtmlObjet->setLabel(DatabaseDescription::getFieldDocLabel(GeoModel::TABLENAME, GeoModel::FIELDNAME_GEO));
+        $paramHtmlObjet->setIsEditable($paramIsEditable);
+        $paramHtmlObjet->initAbstractHtmlSelect(
+                $HtmlTableName, $paramHtmlObjet->getLabel()
+                , $this->getModel()->getDataField(FtaModel::FIELDNAME_SITE_PRODUCTION)->getFieldValue()
+                , $this->getModel()->getDataField(FtaModel::FIELDNAME_SITE_PRODUCTION)->isFieldDiff()
+                , $paramHtmlObjet->getArrayListContent());
+        $paramHtmlObjet->getEventsForm()->setOnChangeWithAjaxAutoSave(FtaModel::TABLENAME, FtaModel::KEYNAME, $this->getModel()->getKeyValue(), FtaModel::FIELDNAME_SITE_PRODUCTION);
+        $listeSiteProduction = $paramHtmlObjet->getHtmlResult();
+
+        return $listeSiteProduction;
     }
 
     /**
@@ -456,7 +562,11 @@ class FtaView {
                     . "&id_fta_role=" . $paramIdFtaRole
                     . ">Cliquez ici</a></td></tr>";
         } else {
-            $ListeCLassification = ClassificationFta2Model::ShowListeDeroulanteClassification(FALSE);
+            /**
+             * Les données sont initalisation de la classification
+             */
+            $this->initClassificationFta();
+            $ListeCLassification = ClassificationFta2Model::showListeDeroulanteClassification(FALSE);
             if ($paramIsEditable) {
                 $ListeCLassification .= "<tr ><td class=\"contenu\">Modifier la classification</td ><td class=\"contenu\" width=75% >"
                         . "<a href="
@@ -474,6 +584,38 @@ class FtaView {
         }
 
         return $ListeCLassification;
+    }
+
+    function initClassificationFta() {
+        /**
+         * Récuparation des données pour la classification
+         */
+        $idFtaClassification2 = $this->getModel()->getDataField(FtaModel::FIELDNAME_ID_FTA_CLASSIFICATION2)->getFieldValue();
+        /**
+         * Vérification si la Fta est une v0
+         */
+        if ($this->getModel()->getDataField(FtaModel::FIELDNAME_ID_FTA_CLASSIFICATION2)->getFieldValue()) {
+            /**
+             * Si oui on vérifie si la classification est différente de la version précédente
+             */
+            $warningUpdate = $this->getModel()->getDataField(FtaModel::FIELDNAME_ID_FTA_CLASSIFICATION2)->isFieldDiff();
+        }
+        /**
+         * Verification pour la classification
+         */
+        if ($idFtaClassification2) {
+            $ClassificationFta2Model = new ClassificationFta2Model($idFtaClassification2);
+            $selection_proprietaire1 = $ClassificationFta2Model->getDataField(ClassificationFta2Model::FIELDNAME_ID_PROPRIETAIRE_GROUPE)->getFieldValue();
+            $selection_proprietaire2 = $ClassificationFta2Model->getDataField(ClassificationFta2Model::FIELDNAME_ID_PROPRIETAIRE_ENSEIGNE)->getFieldValue();
+            $selection_marque = $ClassificationFta2Model->getDataField(ClassificationFta2Model::FIELDNAME_ID_MARQUE)->getFieldValue();
+            $selection_activite = $ClassificationFta2Model->getDataField(ClassificationFta2Model::FIELDNAME_ID_ACTIVITE)->getFieldValue();
+            $selection_rayon = $ClassificationFta2Model->getDataField(ClassificationFta2Model::FIELDNAME_ID_RAYON)->getFieldValue();
+            $selection_environnement = $ClassificationFta2Model->getDataField(ClassificationFta2Model::FIELDNAME_ID_ENVIRONNEMENT)->getFieldValue();
+            $selection_reseau = $ClassificationFta2Model->getDataField(ClassificationFta2Model::FIELDNAME_ID_RESEAU)->getFieldValue();
+            $selection_saisonnalite = $ClassificationFta2Model->getDataField(ClassificationFta2Model::FIELDNAME_ID_SAISONNALITE)->getFieldValue();
+        }
+        ClassificationFta2Model::initClassification($selection_proprietaire1, $selection_proprietaire2, $selection_marque
+                , $selection_activite, $selection_rayon, $selection_environnement, $selection_reseau, $selection_saisonnalite, $warningUpdate);
     }
 
     /**
@@ -533,11 +675,55 @@ class FtaView {
         return $ListeGestionnaire;
     }
 
-    function listeCodesoftEtiquettes($paramIdFta, $paramIsEditable) {
+    function listeCodesoftEtiquettes() {
         $SiteDeProduction = $this->getModel()->getDataField(FtaModel::FIELDNAME_SITE_PRODUCTION)->getFieldValue();
         $etiqetteCodesoft = $this->getModel()->getDataField(FtaModel::FIELDNAME_ETIQUETTE_CODESOFT)->getFieldValue();
+        $IsEditable = $this->getIsEditable();
+        $listeCodesoftEtiquettes = $this->getListeCodesoftEtiquettesColis($IsEditable, $SiteDeProduction, $etiqetteCodesoft);
 
-        $listeCodesoftEtiquettes = CodesoftEtiquettesModel::getListeCodesoftEtiquettesColis($paramIdFta, $paramIsEditable, $SiteDeProduction, $etiqetteCodesoft);
+        return $listeCodesoftEtiquettes;
+    }
+
+    /**
+     * Liste des étiqettes colis     
+     * @param type $paramIsEditable
+     * @param type $paramSiteDeProduction
+     * @param type $paramEtiqetteCodesoft
+     * @return type
+     */
+    function getListeCodesoftEtiquettesColis($paramIsEditable, $paramSiteDeProduction, $paramEtiqetteCodesoft) {
+        $HtmlList = new HtmlListSelect();
+
+        $arrayEtiquette = DatabaseOperation::convertSqlStatementWithKeyAndOneFieldToArray(
+                        'SELECT DISTINCT ' . CodesoftEtiquettesModel::KEYNAME . ',' . CodesoftEtiquettesModel::FIELDNAME_DESIGNATION_CODESOFT_ETIQUETTES
+                        . ' FROM ' . CodesoftEtiquettesModel::TABLENAME
+                        . ' WHERE (' . CodesoftEtiquettesModel::FIELDNAME_K_SITE . '=' . $paramSiteDeProduction
+                        . ' OR ' . CodesoftEtiquettesModel::FIELDNAME_K_SITE . '=0)'
+                        . ' AND (' . CodesoftEtiquettesModel::FIELDNAME_K_TYPE_ETIQUETTE_CODESOFT_ETIQUETTES . '=1'
+                        . ' OR ' . CodesoftEtiquettesModel::FIELDNAME_K_TYPE_ETIQUETTE_CODESOFT_ETIQUETTES . '=0' . ')'
+                        . ' AND ' . CodesoftEtiquettesModel::FIELDNAME_IS_ENABLED_FTA . '=1'
+                        . ' ORDER BY ' . CodesoftEtiquettesModel::FIELDNAME_DESIGNATION_CODESOFT_ETIQUETTES
+        );
+
+        $HtmlList->setArrayListContent($arrayEtiquette);
+
+        $HtmlTableName = FtaModel::TABLENAME
+                . '_'
+                . FtaModel::FIELDNAME_ETIQUETTE_CODESOFT
+                . '_'
+                . $this->getModel()->getKeyValue()
+        ;
+        $HtmlList->getAttributes()->getName()->setValue(FtaModel::FIELDNAME_ETIQUETTE_CODESOFT);
+        $HtmlList->setLabel(DatabaseDescription::getFieldDocLabel(FtaModel::TABLENAME, FtaModel::FIELDNAME_ETIQUETTE_CODESOFT));
+        $HtmlList->setIsEditable($paramIsEditable);
+        $HtmlList->initAbstractHtmlSelect(
+                $HtmlTableName, $HtmlList->getLabel()
+                , $paramEtiqetteCodesoft
+                , $this->getModel()->getDataField(FtaModel::FIELDNAME_ETIQUETTE_CODESOFT)->isFieldDiff()
+                , $HtmlList->getArrayListContent()
+        );
+        $HtmlList->getEventsForm()->setOnChangeWithAjaxAutoSave(FtaModel::TABLENAME, FtaModel::KEYNAME, $this->getModel()->getKeyValue(), FtaModel::FIELDNAME_ETIQUETTE_CODESOFT);
+        $listeCodesoftEtiquettes = $HtmlList->getHtmlResult();
 
         return $listeCodesoftEtiquettes;
     }

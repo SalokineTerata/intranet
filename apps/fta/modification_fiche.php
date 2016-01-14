@@ -117,34 +117,17 @@ if ($idFta) {
     }
 
 
-    /**
-     * Récuparation des données pour la classification
-     */
-    $idFtaClassification2 = $ftaModel->getDataField(FtaModel::FIELDNAME_ID_FTA_CLASSIFICATION2)->getFieldValue();
-    $selection_proprietaire1 = Lib::getParameterFromRequest('selection_proprietaire1');
-    $selection_proprietaire2 = Lib::getParameterFromRequest('selection_proprietaire2');
-    $selection_marque = Lib::getParameterFromRequest('selection_marque');
-    $selection_activite = Lib::getParameterFromRequest('selection_activite');
-    $selection_rayon = Lib::getParameterFromRequest('selection_rayon');
-    $selection_environnement = Lib::getParameterFromRequest('selection_environnement');
-    $selection_reseau = Lib::getParameterFromRequest('selection_reseau');
-    $selection_saisonnalite = Lib::getParameterFromRequest('selection_saisonnalite');
-    $checkIdFtaClasssification = Lib::getParameterFromRequest('checkIdFtaClasssification');
-
-    /**
-     * Verification pour la classification
-     */
-    if ($idFtaClassification2 and ! $checkIdFtaClasssification) {
-        $ClassificationFta2Model = new ClassificationFta2Model($idFtaClassification2);
-        $selection_proprietaire1 = $ClassificationFta2Model->getDataField(ClassificationFta2Model::FIELDNAME_ID_PROPRIETAIRE_GROUPE)->getFieldValue();
-        $selection_proprietaire2 = $ClassificationFta2Model->getDataField(ClassificationFta2Model::FIELDNAME_ID_PROPRIETAIRE_ENSEIGNE)->getFieldValue();
-        $selection_marque = $ClassificationFta2Model->getDataField(ClassificationFta2Model::FIELDNAME_ID_MARQUE)->getFieldValue();
-        $selection_activite = $ClassificationFta2Model->getDataField(ClassificationFta2Model::FIELDNAME_ID_ACTIVITE)->getFieldValue();
-        $selection_rayon = $ClassificationFta2Model->getDataField(ClassificationFta2Model::FIELDNAME_ID_RAYON)->getFieldValue();
-        $selection_environnement = $ClassificationFta2Model->getDataField(ClassificationFta2Model::FIELDNAME_ID_ENVIRONNEMENT)->getFieldValue();
-        $selection_reseau = $ClassificationFta2Model->getDataField(ClassificationFta2Model::FIELDNAME_ID_RESEAU)->getFieldValue();
-        $selection_saisonnalite = $ClassificationFta2Model->getDataField(ClassificationFta2Model::FIELDNAME_ID_SAISONNALITE)->getFieldValue();
-    }
+   
+//    $selection_proprietaire1 = Lib::getParameterFromRequest('selection_proprietaire1');
+//    $selection_proprietaire2 = Lib::getParameterFromRequest('selection_proprietaire2');
+//    $selection_marque = Lib::getParameterFromRequest('selection_marque');
+//    $selection_activite = Lib::getParameterFromRequest('selection_activite');
+//    $selection_rayon = Lib::getParameterFromRequest('selection_rayon');
+//    $selection_environnement = Lib::getParameterFromRequest('selection_environnement');
+//    $selection_reseau = Lib::getParameterFromRequest('selection_reseau');
+//    $selection_saisonnalite = Lib::getParameterFromRequest('selection_saisonnalite');
+//    $checkIdFtaClasssification = Lib::getParameterFromRequest('checkIdFtaClasssification');
+ 
 
 
     /**
@@ -204,9 +187,6 @@ if ($idFta) {
         }
 </SCRIPT>
 ';
-
-    ClassificationFta2Model::initClassification($selection_proprietaire1, $selection_proprietaire2, $selection_marque
-            , $selection_activite, $selection_rayon, $selection_environnement, $selection_reseau, $selection_saisonnalite);
 
     Chapitre::initChapitre($idFta, $id_fta_chapitre, $synthese_action, $comeback, $idFtaEtat, $abreviationFtaEtat, $idFtaRole);
 

@@ -99,6 +99,7 @@ if ($proprietaire) {
 if ($id_fta_composant) {
     $creation = 0;
     $ftaComposantModel = new FtaComposantModel($id_fta_composant);
+    $ftaComposantModel->setDataFtaComposantTableToCompare();
     $ftaComposantView = new FtaComposantView($ftaComposantModel);
     $ftaComposantView->setIsEditable($isEditable);
     $codePSFValue = $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_CODE_PRODUIT_AGROLOGIC_FTA_NOMENCLATURE)->getFieldValue();
@@ -111,6 +112,7 @@ if ($id_fta_composant) {
     $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_QUANTITE_FTA_COMPOSITION_UVC)->setFieldValue(FtaComposantModel::DEFAULT_VALUE_QTE_UVC);
     $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_IS_NOMENCLATURE_FTA_COMPOSANT)->setFieldValue("1");
     $ftaComposantModel->saveToDatabase();
+    $ftaComposantModel->setDataFtaComposantTableToCompare();
     $ftaComposantView = new FtaComposantView($ftaComposantModel);
     $ftaComposantView->setIsEditable($isEditable);
 }
@@ -146,7 +148,7 @@ $bloc .=$ftaComposantView->getHtmlDataField(FtaComposantModel::FIELDNAME_ID_ANNE
 
 
 //Site de production du composant
-$bloc .= FtaComposantModel::ShowListeDeroulanteSiteProdForComposant($HtmlList, $isEditable, $id_fta, $id_fta_composant, FtaComposantModel::FIELDNAME_SITE_PRODUCTION_FTA_CODIFICATION);
+$bloc .= $ftaComposantView->showListeDeroulanteSiteProdForComposant($HtmlList, $isEditable, FtaComposantModel::FIELDNAME_SITE_PRODUCTION_FTA_CODIFICATION);
 
 //Environnement de conservation
 $bloc .=$ftaComposantView->getHtmlDataField(FtaComposantModel::FIELDNAME_ETAT_FTA_CODIFICATION);

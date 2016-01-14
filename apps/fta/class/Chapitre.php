@@ -409,6 +409,10 @@ class Chapitre {
         return $return;
     }
 
+    /**
+     * Chapitre non actif
+     * @return string
+     */
     public static function buildChapitreIdentiteTraiteur() {
 
         $bloc = '';
@@ -504,6 +508,8 @@ class Chapitre {
 
         //Identifiant FTA
         $ftaModel = new FtaModel($id_fta);
+        $ftaModel->setDataFtaTableToCompare();
+
         $ftaView = new FtaView($ftaModel);
         $ftaView->setIsEditable($isEditable);
 
@@ -619,6 +625,7 @@ class Chapitre {
         //Identifiant FTA
         $idFta = $id_fta;
         $ftaModel = new FtaModel($idFta);
+        $ftaModel->setDataFtaTableToCompare();
         $ftaView = new FtaView($ftaModel);
         $ftaView->setIsEditable($isEditable);
         $ftaView->setFtaChapitreModelById(self::ID_CHAPITRE_IDENTITE);
@@ -638,6 +645,10 @@ class Chapitre {
         return $bloc;
     }
 
+    /**
+     * Chapitre non actif
+     * @return string
+     */
     public static function buildChapitreComposition() {
 
         $bloc = '';
@@ -783,6 +794,7 @@ class Chapitre {
 
         //Identifiant FTA
         $ftaModel = new FtaModel($id_fta);
+        $ftaModel->setDataFtaTableToCompare();
         $ftaView = new FtaView($ftaModel);
         $ftaView->setIsEditable($isEditable);
         $ftaView->setFtaChapitreModelById(self::ID_CHAPITRE_IDENTITE);
@@ -802,12 +814,13 @@ class Chapitre {
 
         //Identifiant FTA
         $ftaModel = new FtaModel($id_fta);
+        $ftaModel->setDataFtaTableToCompare();
         $ftaView = new FtaView($ftaModel);
         $ftaView->setIsEditable($isEditable);
         $ftaView->setFtaChapitreModelById(self::ID_CHAPITRE_IDENTITE);
 
         //Site d'assemblage
-        $bloc.=$ftaView->listeSiteByAcces(self::$idUser, $isEditable, $id_fta);
+        $bloc.=$ftaView->listeSiteByAcces(self::$idUser, $isEditable);
 
         return $bloc;
     }
@@ -821,6 +834,7 @@ class Chapitre {
 
         //Identifiant FTA
         $ftaModel = new FtaModel($id_fta);
+        $ftaModel->setDataFtaTableToCompare();
         $ftaView = new FtaView($ftaModel);
         $ftaView->setIsEditable($isEditable);
         $ftaView->setFtaChapitreModelById(self::ID_CHAPITRE_IDENTITE);
@@ -840,6 +854,7 @@ class Chapitre {
 
         //Identifiant FTA
         $ftaModel = new FtaModel($id_fta);
+        $ftaModel->setDataFtaTableToCompare();
         $ftaView = new FtaView($ftaModel);
         $ftaView->setIsEditable($isEditable);
         $ftaView->setFtaChapitreModelById(self::ID_CHAPITRE_IDENTITE);
@@ -863,6 +878,7 @@ class Chapitre {
 
         //Identifiant FTA
         $ftaModel = new FtaModel($id_fta);
+        $ftaModel->setDataFtaTableToCompare();
         $ftaView = new FtaView($ftaModel);
         $ftaView->setIsEditable($isEditable);
         $ftaView->setFtaChapitreModelById(self::ID_CHAPITRE_IDENTITE);
@@ -893,6 +909,7 @@ class Chapitre {
 
         //Identifiant FTA
         $ftaModel = new FtaModel($id_fta);
+        $ftaModel->setDataFtaTableToCompare();
         $ftaView = new FtaView($ftaModel);
         $ftaView->setIsEditable($isEditable);
         $ftaView->setFtaChapitreModelById(self::ID_CHAPITRE_IDENTITE);
@@ -912,6 +929,7 @@ class Chapitre {
 
         //Identifiant FTA
         $ftaModel = new FtaModel($id_fta);
+        $ftaModel->setDataFtaTableToCompare();
         $ftaView = new FtaView($ftaModel);
         $ftaView->setIsEditable($isEditable);
         $ftaView->setFtaChapitreModelById(self::ID_CHAPITRE_IDENTITE);
@@ -938,6 +956,7 @@ class Chapitre {
 
         //Identifiant FTA
         $ftaModel = new FtaModel($id_fta);
+        $ftaModel->setDataFtaTableToCompare();
         $ftaView = new FtaView($ftaModel);
         $ftaView->setIsEditable($isEditable);
         $ftaView->setFtaChapitreModelById(self::ID_CHAPITRE_IDENTITE);
@@ -981,6 +1000,7 @@ class Chapitre {
 
         //Identifiant FTA
         $ftaModel = new FtaModel($id_fta);
+        $ftaModel->setDataFtaTableToCompare();
         $ftaView = new FtaView($ftaModel);
         $ftaView->setIsEditable($isEditable);
         $ftaView->setFtaChapitreModelById(self::ID_CHAPITRE_IDENTITE);
@@ -991,7 +1011,7 @@ class Chapitre {
 //        //Libellé etiquette carton:
 //        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_LIBELLE_CLIENT);
         //Modèle d'étiquette
-        $bloc.=$ftaView->listeCodesoftEtiquettes($id_fta, $isEditable);
+        $bloc.=$ftaView->listeCodesoftEtiquettes();
 
         return $bloc;
     }
@@ -1005,6 +1025,7 @@ class Chapitre {
 
         //Identifiant FTA
         $ftaModel = new FtaModel($id_fta);
+        $ftaModel->setDataFtaTableToCompare();
         $ftaView = new FtaView($ftaModel);
         $ftaView->setIsEditable($isEditable);
         $ftaView->setFtaChapitreModelById(self::ID_CHAPITRE_IDENTITE);
@@ -1047,6 +1068,7 @@ class Chapitre {
 
         //Identifiant FTA
         $ftaModel = new FtaModel($id_fta);
+        $ftaModel->setDataFtaTableToCompare();
         $ftaView = new FtaView($ftaModel);
         $ftaView->setIsEditable($isEditable);
         $ftaView->setFtaChapitreModelById(self::ID_CHAPITRE_IDENTITE);
@@ -1070,6 +1092,7 @@ class Chapitre {
 
         //Identifiant FTA
         $ftaModel = new FtaModel($id_fta);
+        $ftaModel->setDataFtaTableToCompare();
         $ftaView = new FtaView($ftaModel);
         $ftaView->setIsEditable($isEditable);
         $ftaView->setFtaChapitreModelById(self::ID_CHAPITRE_IDENTITE);
@@ -1099,6 +1122,7 @@ class Chapitre {
 
         //Identifiant FTA
         $ftaModel = new FtaModel($id_fta);
+        $ftaModel->setDataFtaTableToCompare();
         $ftaView = new FtaView($ftaModel);
         $ftaView->setIsEditable($isEditable);
         $ftaView->setFtaChapitreModelById(self::ID_CHAPITRE_IDENTITE);
@@ -1131,6 +1155,7 @@ class Chapitre {
 
         //Identifiant FTA
         $ftaModel = new FtaModel($id_fta);
+        $ftaModel->setDataFtaTableToCompare();
         $ftaView = new FtaView($ftaModel);
         $ftaView->setIsEditable($isEditable);
         $ftaView->setFtaChapitreModelById(self::ID_CHAPITRE_IDENTITE);
@@ -1160,6 +1185,7 @@ class Chapitre {
 
         //Identifiant FTA
         $ftaModel = new FtaModel($id_fta);
+        $ftaModel->setDataFtaTableToCompare();
         $ftaView = new FtaView($ftaModel);
         $ftaView->setIsEditable($isEditable);
         $ftaView->setFtaChapitreModelById(self::ID_CHAPITRE_IDENTITE);
@@ -1189,6 +1215,7 @@ class Chapitre {
 
         //Identifiant FTA
         $ftaModel = new FtaModel($id_fta);
+        $ftaModel->setDataFtaTableToCompare();
         $ftaView = new FtaView($ftaModel);
         $ftaView->setIsEditable($isEditable);
         $ftaView->setFtaChapitreModelById(self::ID_CHAPITRE_IDENTITE);
@@ -1218,6 +1245,7 @@ class Chapitre {
 
         //Identifiant FTA
         $ftaModel = new FtaModel($id_fta);
+        $ftaModel->setDataFtaTableToCompare();
         $ftaView = new FtaView($ftaModel);
         $ftaView->setIsEditable($isEditable);
         $ftaView->setFtaChapitreModelById(self::ID_CHAPITRE_IDENTITE);
@@ -1239,6 +1267,10 @@ class Chapitre {
         return $bloc;
     }
 
+    /**
+     * Chapitre non actif
+     * @return string
+     */
     public static function buildChapitreDecoupe() {
 
         $bloc = '';
@@ -1289,6 +1321,10 @@ class Chapitre {
         return $bloc;
     }
 
+    /**
+     * Chapitre non actif
+     * @return string
+     */
     public static function buildChapitreDictionnaireDeDonnees() {
 
         $bloc = '';
@@ -1607,6 +1643,10 @@ class Chapitre {
         return $bloc;
     }
 
+    /**
+     * Chapitre non actif
+     * @return string
+     */
     public static function buildChapitreConditionnementPieceEntiere() {
 
         $bloc = '';
@@ -1685,6 +1725,10 @@ class Chapitre {
         return $bloc;
     }
 
+    /**
+     * Chapitre non actif
+     * @return string
+     */
     public static function buildChapitreConditionnementDecoupe() {
 
         $bloc = self::buildChapitreConditionnementPieceEntiere();
@@ -1704,6 +1748,10 @@ class Chapitre {
         return $bloc;
     }
 
+    /**
+     * Chapitre non actif
+     * @return string
+     */
     public static function buildChapitreActivationDesProduits() {
 
         $bloc = '';
@@ -1759,6 +1807,7 @@ class Chapitre {
         //
         //Identifiant FTA
         $ftaModel = new FtaModel($id_fta);
+        $ftaModel->setDataFtaTableToCompare();
         $ftaView = new FtaView($ftaModel);
         $ftaView->setIsEditable($isEditable);
         $ftaView->setFtaChapitreModelById(self::ID_CHAPITRE_IDENTITE);
@@ -1785,6 +1834,7 @@ class Chapitre {
         //
         //Identifiant FTA
         $ftaModel = new FtaModel($id_fta);
+        $ftaModel->setDataFtaTableToCompare();
         $ftaView = new FtaView($ftaModel);
         $ftaView->setIsEditable($isEditable);
         $ftaView->setFtaChapitreModelById(self::ID_CHAPITRE_IDENTITE);
@@ -1800,6 +1850,10 @@ class Chapitre {
         return $bloc;
     }
 
+    /**
+     * Chapitre non actif
+     * @return string
+     */
     public static function buildChapitreCodificationExterne() {
 
         $bloc = '';
@@ -1827,6 +1881,10 @@ class Chapitre {
         return $bloc;
     }
 
+    /**
+     * Chapitre non actif
+     * @return string
+     */
     public static function buildChapitreExpedition() {
 
         $bloc = '';
@@ -1863,6 +1921,10 @@ class Chapitre {
         return $bloc;
     }
 
+    /**
+     * Chapitre non actif
+     * @return string
+     */
     public static function buildChapitreEtiquette() {
 
         $bloc = '';
@@ -1910,6 +1972,10 @@ class Chapitre {
         return $bloc;
     }
 
+    /**
+     * Chapitre non actif
+     * @return string
+     */
     private static function buildChapitreTemplate() {
 
         $bloc = '';
@@ -1924,6 +1990,10 @@ class Chapitre {
         return $bloc;
     }
 
+    /**
+     * Chapitre non actif
+     * @return string
+     */
     public static function buildChapitreIdentiteVolaille() {
 
         $bloc = '';
@@ -1987,6 +2057,10 @@ class Chapitre {
         return $bloc;
     }
 
+    /**
+     * Chapitre non actif
+     * @return string
+     */
     public static function buildChapitreNomenclature() {
 
         $bloc = '';

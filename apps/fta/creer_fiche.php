@@ -105,7 +105,7 @@ $listeWorkflow = FtaWorkflowModel::showListeDeroulanteNomWorkflowByAcces($idUser
  * Site de production FTA
  */
 
-$listeSiteProduction = GeoModel::ShowListeDeroulanteSiteProdByAcces($idUser, $HtmlList, TRUE, $SiteDeProduction);
+$listeSiteProduction = GeoModel::showListeDeroulanteSiteProdByAcces($idUser, $HtmlList, TRUE, $SiteDeProduction);
 
 
 

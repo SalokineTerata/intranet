@@ -575,60 +575,7 @@ class FtaComposantModel extends AbstractModel {
         return $return;
     }
 
-    /**
-     * Affiche la liste déroulante des sites de production pour les composants et compositions
-     * @param HtmlListSelect $paramObjet
-     * @param boolean $paramIsEditable
-     * @param int $paramIdFta
-     * @param int $paramIdFtaComposant
-     * @param string $paramLabelSiteDeProduction
-     * @return string
-     */
-    public static function ShowListeDeroulanteSiteProdForComposant(HtmlListSelect $paramObjet, $paramIsEditable, $paramIdFta, $paramIdFtaComposant, $paramLabelSiteDeProduction) {
-
-//        $ftaModel = new FtaModel($paramIdFta);
-        $ftaComposantModel = new FtaComposantModel($paramIdFtaComposant);
-//        $siteDeProductionFta = $ftaModel->getDataField(FtaModel::FIELDNAME_SITE_ASSEMBLAGE)->getFieldValue();
-        $arraySite = DatabaseOperation::convertSqlStatementWithKeyAndOneFieldToArray(
-                        'SELECT DISTINCT ' . GeoModel::KEYNAME . ',' . GeoModel::FIELDNAME_GEO
-                        . ' FROM ' . GeoModel::TABLENAME
-                        . ' WHERE ' . GeoModel::FIELDNAME_TAG_APPLICATION_GEO . ' LIKE  \'%fta%\''
-                        . ' ORDER BY ' . GeoModel::FIELDNAME_GEO
-        );
-
-        $paramObjet->setArrayListContent($arraySite);
-
-        $HtmlTableName = FtaComposantModel::TABLENAME
-                . '_'
-                . $paramLabelSiteDeProduction
-                . '_'
-                . $paramIdFtaComposant
-        ;
-        $arraySiteComposant = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
-                        'SELECT DISTINCT ' . $paramLabelSiteDeProduction
-                        . ' FROM ' . FtaComposantModel::TABLENAME
-                        . ' WHERE ' . FtaComposantModel::KEYNAME . '=' . $paramIdFtaComposant
-        );
-        foreach ($arraySiteComposant as $value) {
-            $SiteDeProduction = $value[$paramLabelSiteDeProduction];
-        }
-
-        if ($SiteDeProduction) {
-            $paramObjet->setDefaultValue($SiteDeProduction);
-        }
-//        else {
-//            $paramObjet->setDefaultValue($siteDeProductionFta);
-//        }
-        $paramObjet->getAttributes()->getName()->setValue($paramLabelSiteDeProduction);
-        $paramObjet->setLabel(DatabaseDescription::getFieldDocLabel(GeoModel::TABLENAME, GeoModel::FIELDNAME_GEO));
-        $paramObjet->setIsEditable($paramIsEditable);
-        $paramObjet->initAbstractHtmlSelect(
-                $HtmlTableName, $paramObjet->getLabel(), $ftaComposantModel->getDataField($paramLabelSiteDeProduction)->getFieldValue(), NULL, $paramObjet->getArrayListContent());
-        $paramObjet->getEventsForm()->setOnChangeWithAjaxAutoSave(FtaComposantModel::TABLENAME, FtaComposantModel::KEYNAME, $paramIdFtaComposant, $paramLabelSiteDeProduction);
-        $listeSiteProduction = $paramObjet->getHtmlResult();
-
-        return $listeSiteProduction;
-    }
+    
 
     /**
      * Fonction non utilisé
@@ -680,6 +627,55 @@ class FtaComposantModel extends AbstractModel {
         return $listePrefixeCodePSF;
     }
 
+    
+    /**
+     * On récupère le DataRecord à comparer 
+     * @param DatabaseRecord $paramRecordToCompare
+     */
+    function setDataToCompare($paramRecordToCompare) {
+        parent::setDataToCompare($paramRecordToCompare);
+    }
+
+    /**
+     * On initialise l'idFta à comparer de la version actuelle du FtaModel 
+     */
+    function setDataFtaComposantTableToCompare() {
+
+        $idFtaComposantToCompare = $this->getIdFtaComposantToCompare();
+
+        $DataRecord = new DatabaseRecord(self::TABLENAME, $idFtaComposantToCompare);
+
+        $this->setDataToCompare($DataRecord);
+    }
+
+    function getIdFtaComposantToCompare() {
+        $currentIdFtaComposant = $this->getKeyValue();
+
+        $currentIdFta = $this->getModelFta()->getKeyValue();
+        $arrayIdFtaDossierAndVersion = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
+                        "SELECT " . FtaModel::FIELDNAME_VERSION_DOSSIER_FTA . "," . FtaModel::FIELDNAME_DOSSIER_FTA
+                        . " FROM " . FtaModel::TABLENAME
+                        . " WHERE " . FtaModel::KEYNAME . "=" . $currentIdFta
+        );
+        foreach ($arrayIdFtaDossierAndVersion as $rowsIdFtaDossierAndVersion) {
+            $idFtaVersion = $rowsIdFtaDossierAndVersion[FtaModel::FIELDNAME_VERSION_DOSSIER_FTA];
+        }
+        if ($idFtaVersion <> "0") {
+            $arrayIdFta = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
+                            "SELECT " . self::FIELDNAME_LAST_ID_FTA_COMPOSANT
+                            . " FROM " . self::TABLENAME
+                            . " WHERE " . self::KEYNAME . "=" . $currentIdFtaComposant
+            );
+
+            foreach ($arrayIdFta as $rowsIdFta) {
+                $idFtaComposantToCompare = $rowsIdFta[self::FIELDNAME_LAST_ID_FTA_COMPOSANT];
+            }
+        } else {
+            $idFtaComposantToCompare = $currentIdFtaComposant;
+        }
+
+        return $idFtaComposantToCompare;
+    }
 }
 
 ?>

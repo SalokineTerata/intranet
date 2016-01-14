@@ -95,6 +95,55 @@ class FtaConditionnementModel extends AbstractModel {
     }
 
     /**
+     * On récupère le DataRecord à comparer 
+     * @param DatabaseRecord $paramRecordToCompare
+     */
+    function setDataToCompare($paramRecordToCompare) {
+        parent::setDataToCompare($paramRecordToCompare);
+    }
+
+    /**
+     * On initialise l'idFta à comparer de la version actuelle du FtaModel 
+     */
+    function setDataFtaConditionnementTableToCompare() {
+
+        $idFtaConditionnmentToCompare = $this->getIdFtaConditionnementToCompare();
+
+        $DataRecord = new DatabaseRecord(self::TABLENAME, $idFtaConditionnmentToCompare);
+
+        $this->setDataToCompare($DataRecord);
+    }
+
+    function getIdFtaConditionnementToCompare() {
+        $currentIdFtaConditionnement = $this->getKeyValue();
+
+        $currentIdFta = $this->getModelFta()->getKeyValue();
+        $arrayIdFtaDossierAndVersion = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
+                        "SELECT " . FtaModel::FIELDNAME_VERSION_DOSSIER_FTA . "," . FtaModel::FIELDNAME_DOSSIER_FTA
+                        . " FROM " . FtaModel::TABLENAME
+                        . " WHERE " . FtaModel::KEYNAME . "=" . $currentIdFta
+        );
+        foreach ($arrayIdFtaDossierAndVersion as $rowsIdFtaDossierAndVersion) {
+            $idFtaVersion = $rowsIdFtaDossierAndVersion[FtaModel::FIELDNAME_VERSION_DOSSIER_FTA];
+        }
+        if ($idFtaVersion <> "0") {
+            $arrayIdFta = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
+                            "SELECT " . self::FIELDNAME_LAST_ID_FTA_CONDITIONNEMENT
+                            . " FROM " . self::TABLENAME
+                            . " WHERE " . self::KEYNAME . "=" . $currentIdFtaConditionnement
+            );
+
+            foreach ($arrayIdFta as $rowsIdFta) {
+                $idFtaConditionnementToCompare = $rowsIdFta[self::FIELDNAME_LAST_ID_FTA_CONDITIONNEMENT];
+            }
+        } else {
+            $idFtaConditionnementToCompare = $currentIdFtaConditionnement;
+        }
+
+        return $idFtaConditionnementToCompare;
+    }
+
+    /**
      * Calcul du poids de l'emballage  par UVC
      * @param type $paramPoidsEmballageUnitaire
      * @param type $paramQuantiteCouche

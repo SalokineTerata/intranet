@@ -136,6 +136,7 @@ if ($proprietaire) {
 if ($id_fta_composant) {
     $creation = 0;
     $ftaComposantModel = new FtaComposantModel($id_fta_composant);
+    $ftaComposantModel->setDataFtaComposantTableToCompare();
     $ftaComposantView = new FtaComposantView($ftaComposantModel);
     $ftaComposantView->setIsEditable($editable);
     $ftaComposantView2 = new FtaComposantView($ftaComposantModel);
@@ -223,11 +224,15 @@ $bloc .= $ftaComposantView->getHtmlDataField(FtaComposantModel::FIELDNAME_NOM_FT
 //}
 //$bloc.="</td></tr>";
 //Code Produit Agrologic
-$bloc .= "<tr><td>" . DatabaseDescription::getFieldDocLabel(FtaComposantModel::TABLENAME, FtaComposantModel::FIELDNAME_CODE_PRODUIT_AGROLOGIC_FTA_NOMENCLATURE) . "</td><td>";
-
-$bloc .=$prefixe_code_produit_agrologic_fta_nomenclature . $code_produit_agrologic_fta_nomenclature;
-
-$bloc.="</td></tr>";
+//$bloc .= "<tr><td>" . DatabaseDescription::getFieldDocLabel(FtaComposantModel::TABLENAME, FtaComposantModel::FIELDNAME_CODE_PRODUIT_AGROLOGIC_FTA_NOMENCLATURE) . "</td><td>";
+//
+///**
+// * Faire une fonctionne qui gèrre l'affichage  du code PSF
+// * pour les bouton radio faire les table annexe correpondante
+// */
+//$bloc .=$prefixe_code_produit_agrologic_fta_nomenclature . $code_produit_agrologic_fta_nomenclature;
+//
+$bloc.= $ftaComposantView->getHtmlPrefixeIdCodePSF();
 
 
 //Liste des ingrédients
@@ -258,7 +263,7 @@ $SiteDeProduction = $ftaModel->getDataField(FtaModel::FIELDNAME_SITE_PRODUCTION)
 //Site de facbrication de la composition
 $HtmlList = new HtmlListSelect();
 
-$bloc .= FtaComposantModel::ShowListeDeroulanteSiteProdForComposant($HtmlList, $editable, $id_fta, $id_fta_composant, FtaComposantModel::FIELDNAME_ID_GEO);
+$bloc .= $ftaComposantView->showListeDeroulanteSiteProdForComposant($HtmlList, $isEditable, FtaComposantModel::FIELDNAME_ID_GEO);
 
 //$bloc.="</td></tr>";
 //echo $id_fta."<br>";
@@ -324,155 +329,85 @@ $bloc .= "</td></tr>
 
 //Mode de fonctionnement de l'Etiquette Composition
 //Versionning
-$color_modif = "";
-$image_modif = "";
-if (${"diff_" . FtaComposantModel::TABLENAME}[FtaComposantModel::FIELDNAME_MODE_ETIQUETTE_FTA_COMPOSITION]) {
-    $image_modif = $html_image_modif;
-    $color_modif = $html_color_modif;
-}
-$bloc .= "<tr class=contenu><td " . $color_modif . ">" . DatabaseDescription::getFieldDocLabel(FtaComposantModel::TABLENAME, FtaComposantModel::FIELDNAME_MODE_ETIQUETTE_FTA_COMPOSITION) . "</td><td " . $color_modif . ">";
-$checked6 = "";
-$checked7 = "";
-$checked8 = "";
-if ($proprietaire) {
-    $data_disabled_0 = "";
-
-// Le champ $id_fta_nomenclature est obsolète
-//if($id_fta_nomenclature)  //Sans code Agrologic, on ne peut pas étiqueter
-//echo $is_nomenclature_fta_composant." ".$code_produit_agrologic_fta_nomenclature." " .$activation_codesoft_arti2;
-//if($is_nomenclature_fta_composant and $code_produit_agrologic_fta_nomenclature and ($activation_codesoft_arti2==2
-    $activation_codesoft_arti2 = $ftaModel->getDataField(FtaModel::FIELDNAME_ACTIVATION_CODESOFT)->getFieldValue();
-
-    if ($activation_codesoft_arti2 == 2 or $activation_codesoft_arti2 == 3) {
-        $data_disabled_1 = "";
-        $data_disabled_4 = "";
-    } else {
-        $data_disabled_1 = "disabled";
-        $data_disabled_4 = "disabled";
-    }
-} else {
-    $data_disabled_0 = "disabled";
-    $data_disabled_1 = "disabled";
-    $data_disabled_4 = "disabled";
-}
-if (!$mode_etiquette_fta_composition and ( $activation_codesoft_arti2 == 2 or $activation_codesoft_arti2 == 3)) {
-    $mode_etiquette_fta_composition = 0;
-}
-switch ($mode_etiquette_fta_composition) {
-
-    case 0: //Pas d'étiquette composition
-        $checked_0 = "checked";
-//$etiquette_fta_composition=$etiquette_supplementaire_fta_composition="";
-
-        break;
-    case 1: //Contenu de l'etiquette identique à la liste des ingrédients
-        $checked_1 = "checked";
-//$etiquette_fta_composition=$ingredient_fta_composition;
-//$etiquette_supplementaire_fta_composition=$ingredient_fta_composition1;
-
-        break;
-    /* OBSOLETE
-      case 2: //Etiquette regroupant quelques composants
-      $checked_2="checked";
-
-      break;
-     * */
-
-    /* ONBSOLETE
-      case 3: //L'étiquette est regroupée sur un autre composant
-      $checked_3="checked";
-
-      break;
-     * */
-
-    case 4: //Etiquette personnalisée
-        $checked_4 = "checked";
-
-        break;
-
-    default:
-//case 14:
-        $checked_0 = "checked";
-        break;
-}
-$bloc .= "<input type=radio name=" . FtaComposantModel::FIELDNAME_MODE_ETIQUETTE_FTA_COMPOSITION . " value=0 " . $checked_0 . " " . $data_disabled_0 . " > Pas d'étiquette pour ce composant " . $image_modif . "<br>";
-$bloc .= "<input type=radio name=" . FtaComposantModel::FIELDNAME_MODE_ETIQUETTE_FTA_COMPOSITION . " value=1 " . $checked_1 . " " . $data_disabled_1 . " > Etiquette identique à ce composant " . $image_modif . "<br>";
-//$bloc .= "<input type=radio name=".$champ." value=2 $checked_2 $data_disabled_2> Etiquette regroupant quelques composants $image_modif<br>";
-//$bloc .= "<input type=radio name=".$champ." value=3 $checked_3 $data_disabled_3> L'étiquette est regroupée sur un autre composant $image_modif<br>";
-$bloc .= "<input type=radio name=" . FtaComposantModel::FIELDNAME_MODE_ETIQUETTE_FTA_COMPOSITION . " value=4 " . $checked_4 . " " . $data_disabled_4 . " > Etiquette personnalisée " . $image_modif . "<br>";
-$bloc .="</td></tr>";
-
+//$bloc .= "<tr class=contenu><td " . $color_modif . ">" . DatabaseDescription::getFieldDocLabel(FtaComposantModel::TABLENAME, FtaComposantModel::FIELDNAME_MODE_ETIQUETTE_FTA_COMPOSITION) . "</td><td " . $color_modif . ">";
+//$checked6 = "";
+//$checked7 = "";
+//$checked8 = "";
+//if ($proprietaire) {
+//    $data_disabled_0 = "";
+//
+//// Le champ $id_fta_nomenclature est obsolète
+////if($id_fta_nomenclature)  //Sans code Agrologic, on ne peut pas étiqueter
+////echo $is_nomenclature_fta_composant." ".$code_produit_agrologic_fta_nomenclature." " .$activation_codesoft_arti2;
+////if($is_nomenclature_fta_composant and $code_produit_agrologic_fta_nomenclature and ($activation_codesoft_arti2==2
+//    $activation_codesoft_arti2 = $ftaModel->getDataField(FtaModel::FIELDNAME_ACTIVATION_CODESOFT)->getFieldValue();
+//
+//    if ($activation_codesoft_arti2 == 2 or $activation_codesoft_arti2 == 3) {
+//        $data_disabled_1 = "";
+//        $data_disabled_4 = "";
+//    } else {
+//        $data_disabled_1 = "disabled";
+//        $data_disabled_4 = "disabled";
+//    }
+//} else {
+//    $data_disabled_0 = "disabled";
+//    $data_disabled_1 = "disabled";
+//    $data_disabled_4 = "disabled";
+//}
+//if (!$mode_etiquette_fta_composition and ( $activation_codesoft_arti2 == 2 or $activation_codesoft_arti2 == 3)) {
+//    $mode_etiquette_fta_composition = 0;
+//}
+//switch ($mode_etiquette_fta_composition) {
+//
+//    case 0: //Pas d'étiquette composition
+//        $checked_0 = "checked";
+////$etiquette_fta_composition=$etiquette_supplementaire_fta_composition="";
+//
+//        break;
+//    case 1: //Contenu de l'etiquette identique à la liste des ingrédients
+//        $checked_1 = "checked";
+////$etiquette_fta_composition=$ingredient_fta_composition;
+////$etiquette_supplementaire_fta_composition=$ingredient_fta_composition1;
+//
+//        break;
+//    /* OBSOLETE
+//      case 2: //Etiquette regroupant quelques composants
+//      $checked_2="checked";
+//
+//      break;
+//     * */
+//
+//    /* ONBSOLETE
+//      case 3: //L'étiquette est regroupée sur un autre composant
+//      $checked_3="checked";
+//
+//      break;
+//     * */
+//
+//    case 4: //Etiquette personnalisée
+//        $checked_4 = "checked";
+//
+//        break;
+//
+//    default:
+////case 14:
+//        $checked_0 = "checked";
+//        break;
+//}
+$bloc .=$ftaComposantView->getListeModeEtiquette($editable);
+//        "<input type=radio name=" . FtaComposantModel::FIELDNAME_MODE_ETIQUETTE_FTA_COMPOSITION . " value=0 " . $checked_0 . " " . $data_disabled_0 . " > Pas d'étiquette pour ce composant " . $image_modif . "<br>";
+//$bloc .= "<input type=radio name=" . FtaComposantModel::FIELDNAME_MODE_ETIQUETTE_FTA_COMPOSITION . " value=1 " . $checked_1 . " " . $data_disabled_1 . " > Etiquette identique à ce composant " . $image_modif . "<br>";
+////$bloc .= "<input type=radio name=".$champ." value=2 $checked_2 $data_disabled_2> Etiquette regroupant quelques composants $image_modif<br>";
+////$bloc .= "<input type=radio name=".$champ." value=3 $checked_3 $data_disabled_3> L'étiquette est regroupée sur un autre composant $image_modif<br>";
+//$bloc .= "<input type=radio name=" . FtaComposantModel::FIELDNAME_MODE_ETIQUETTE_FTA_COMPOSITION . " value=4 " . $checked_4 . " " . $data_disabled_4 . " > Etiquette personnalisée " . $image_modif . "<br>";
+//$bloc .="</td></tr>";
 //$etiquette_poids_fta_composition=$poids_fta_composition*$quantite_fta_composition;
 
 /* * *********************************************************************
   Contenu de l'étiquette
  * ********************************************************************* */
 
-//Données par défaut
-$default_etiquette_libelle_fta_composition = $nom_fta_composition;
-$default_etiquette_fta_composition = $ingredient_fta_composition;
-$default_etiquette_supplementaire_fta_composition = $ingredient_fta_composition1;
-$default_etiquette_poids_fta_composition = $poids_fta_composition / 1000;  //Conversion de g -> Kg
-$default_etiquette_quantite_fta_composition = $quantite_fta_composition_uvc;
-$default_etiquette_duree_vie_fta_composition = $duree_vie_technique_fta_composition;
 
-//Initialisation des données
-//echo "MODE: $mode_etiquette_fta_composition<br><br>";
-
-switch ($mode_etiquette_fta_composition) {
-    case 0:
-
-        /*
-         * Les données étiquettes sont purgées
-         */
-        $etiquette_libelle_fta_composition = "";
-        $etiquette_fta_composition = "";
-        $etiquette_supplementaire_fta_composition = "";
-        $etiquette_poids_fta_composition = 0;
-        $etiquette_quantite_fta_composition = 0;
-        $etiquette_duree_vie_fta_composition = 0;
-
-        break;
-
-    case 1:
-        /*
-         * Etiquette identique à ce composant
-         * Les données sont forcées avec les valeurs par défaut
-         */
-
-        $etiquette_libelle_fta_composition = $default_etiquette_libelle_fta_composition;
-        $etiquette_fta_composition = $default_etiquette_fta_composition;
-        $etiquette_supplementaire_fta_composition = $default_etiquette_supplementaire_fta_composition;
-        $etiquette_poids_fta_composition = $default_etiquette_poids_fta_composition;
-        $etiquette_quantite_fta_composition = $default_etiquette_quantite_fta_composition;
-        $etiquette_duree_vie_fta_composition = $default_etiquette_duree_vie_fta_composition;
-
-        break;
-    case 4:
-
-        /*
-         * Les données sont initialisées si absente.
-         */
-        if ($etiquette_libelle_fta_composition == "") {
-            $etiquette_libelle_fta_composition = $default_etiquette_libelle_fta_composition;
-        }
-        if ($etiquette_fta_composition == "") {
-            $etiquette_fta_composition = $default_etiquette_fta_composition;
-        }
-        if ($etiquette_supplementaire_fta_composition == "") {
-            $etiquette_supplementaire_fta_composition = $default_etiquette_supplementaire_fta_composition;
-        }
-        if ($etiquette_poids_fta_composition == "") {
-            $etiquette_poids_fta_composition = $default_etiquette_poids_fta_composition;
-        }
-        if ($etiquette_quantite_fta_composition == "") {
-            $etiquette_quantite_fta_composition = $default_etiquette_quantite_fta_composition;
-        }
-        if ($etiquette_duree_vie_fta_composition == "") {
-            $etiquette_duree_vie_fta_composition = $default_etiquette_duree_vie_fta_composition;
-        }
-        break;
-}
 
 /* * *********************************************************************
   Interface utilisateur pour configurer de l'étiquette
@@ -484,24 +419,15 @@ if ($proprietaire and $mode_etiquette_fta_composition == 4) {
 } else {
     $edit_allow = false;
 }
-
-$ftaComposantView2->setIsEditable($edit_allow);
+if ($edit_allow) {
+    $ftaComposantView2->setIsEditable($edit_allow);
 
 //Libellé produit de l'étiquette
-$champ = "etiquette_libelle_fta_composition";
-$table = "fta_composant";
-//Versionning
-$color_modif = "";
-$image_modif = "";
-if (${"diff_" . $table}[$champ]) {
-    $image_modif = $html_image_modif;
-    $color_modif = $html_color_modif;
-}
 //$bloc .= "<tr><td " . $color_modif . " >" . DatabaseDescription::getFieldDocLabel(FtaComposantModel::TABLENAME, FtaComposantModel::FIELDNAME_ETIQUETTE_LIBELLE_FTA_COMPOSITION) . "</td><td " . $color_modif . ">";
 //
 //if ($edit_allow) {
 //    $bloc .= "<textarea name=" . FtaComposantModel::FIELDNAME_ETIQUETTE_LIBELLE_FTA_COMPOSITION . " rows=4 cols=75>" . $etiquette_libelle_fta_composition . "</textarea>";
-$bloc .=$ftaComposantView2->getHtmlDataField(FtaComposantModel::FIELDNAME_ETIQUETTE_LIBELLE_FTA_COMPOSITION);
+    $bloc .=$ftaComposantView2->getHtmlDataField(FtaComposantModel::FIELDNAME_ETIQUETTE_LIBELLE_FTA_COMPOSITION);
 
 //} else {
 //    $bloc .=$etiquette_libelle_fta_composition;
@@ -510,35 +436,17 @@ $bloc .=$ftaComposantView2->getHtmlDataField(FtaComposantModel::FIELDNAME_ETIQUE
 //}
 //$bloc.=$image_modif . "</td></tr>";
 //Désignation légale produit de l'étiquette
-$champ = "etiquette_libelle_legal_fta_composition";
-$table = "fta_composant";
-//Versionning
-$color_modif = "";
-$image_modif = "";
-if (${"diff_" . $table}[$champ]) {
-    $image_modif = $html_image_modif;
-    $color_modif = $html_color_modif;
-}
 //$bloc .= "<tr><td " . $color_modif . ">" . DatabaseDescription::getFieldDocLabel(FtaComposantModel::TABLENAME, FtaComposantModel::FIELDNAME_ETIQUETTE_LIBELLE_LEGAL_FTA_COMPOSITION) . "</td><td " . $color_modif . ">";
 //if ($edit_allow) {
 //    $bloc .= "<textarea name=" . FtaComposantModel::FIELDNAME_ETIQUETTE_LIBELLE_LEGAL_FTA_COMPOSITION . " rows=4 cols=75>" . $etiquette_libelle_legal_fta_composition . "</textarea>";
 //} else {
 //    $bloc .=$etiquette_libelle_legal_fta_composition;
 //    $bloc .= "<input type=hidden name=" . FtaComposantModel::FIELDNAME_ETIQUETTE_LIBELLE_LEGAL_FTA_COMPOSITION . " value='" . $etiquette_libelle_legal_fta_composition . "'/>";
-$bloc .=$ftaComposantView2->getHtmlDataField(FtaComposantModel::FIELDNAME_ETIQUETTE_LIBELLE_LEGAL_FTA_COMPOSITION);
+    $bloc .=$ftaComposantView2->getHtmlDataField(FtaComposantModel::FIELDNAME_ETIQUETTE_LIBELLE_LEGAL_FTA_COMPOSITION);
 
 //}
 //$bloc.="$image_modif</td></tr>";
 //Composition Etiquette
-$champ = "etiquette_fta_composition";
-$table = "fta_composant";
-//Versionning
-$color_modif = "";
-$image_modif = "";
-if (${"diff_" . $table}[$champ]) {
-    $image_modif = $html_image_modif;
-    $color_modif = $html_color_modif;
-}
 //$bloc .= "<tr><td " . $color_modif . ">" . DatabaseDescription::getFieldDocLabel(FtaComposantModel::TABLENAME, FtaComposantModel::FIELDNAME_ETIQUETTE) . "</td><td " . $color_modif . ">";
 //if ($edit_allow) {
 //    $bloc .= "<textarea name=" . FtaComposantModel::FIELDNAME_ETIQUETTE . " rows=15 cols=75>" . $etiquette_fta_composition . "</textarea>";
@@ -546,111 +454,61 @@ if (${"diff_" . $table}[$champ]) {
 //} else {
 //    $bloc .=$etiquette_fta_composition;
 //    $bloc .= "<input type=hidden name=" . FtaComposantModel::FIELDNAME_ETIQUETTE . " value='" . $etiquette_fta_composition . "'/>";
-$bloc .=$ftaComposantView2->getHtmlDataField(FtaComposantModel::FIELDNAME_ETIQUETTE);
+    $bloc .=$ftaComposantView2->getHtmlDataField(FtaComposantModel::FIELDNAME_ETIQUETTE);
 
 //}
 //$bloc.=$image_modif . "</td></tr>";
 //Composition Etiquette (extension supplémentaire)
-$champ = "etiquette_supplementaire_fta_composition";
-$table = "fta_composant";
-
-//Versionning
-$color_modif = "";
-$image_modif = "";
-if (${"diff_" . $table}[$champ]) {
-    $image_modif = $html_image_modif;
-    $color_modif = $html_color_modif;
-}
 //$bloc .= "<tr><td " . $color_modif . ">" . DatabaseDescription::getFieldDocLabel(FtaComposantModel::TABLENAME, FtaComposantModel::FIELDNAME_ETIQUETTE_SUPPLEMENTAIRE_FTA_COMPOSIITON) . "</td><td " . $color_modif . ">";
 //if ($edit_allow) {
 //    $bloc .= "<textarea name=" . FtaComposantModel::FIELDNAME_ETIQUETTE_SUPPLEMENTAIRE_FTA_COMPOSIITON . " rows=15 cols=75>$etiquette_supplementaire_fta_composition</textarea>";
 //} else {
 //    $bloc .=$etiquette_supplementaire_fta_composition;
 //    $bloc .= "<input type=hidden name=" . FtaComposantModel::FIELDNAME_ETIQUETTE_SUPPLEMENTAIRE_FTA_COMPOSIITON . " value='" . $etiquette_supplementaire_fta_composition . "'/>";
-$bloc .=$ftaComposantView2->getHtmlDataField(FtaComposantModel::FIELDNAME_ETIQUETTE_SUPPLEMENTAIRE_FTA_COMPOSIITON);
+    $bloc .=$ftaComposantView2->getHtmlDataField(FtaComposantModel::FIELDNAME_ETIQUETTE_SUPPLEMENTAIRE_FTA_COMPOSIITON);
 
 //}
 //
 //$bloc.="$image_modif</td></tr>";
 //********************************* Informations complémentaires récto
-$champ = "etiquette_information_complementaire_recto_fta_composant";
-$table = "fta_composant";
-
-//Versionning
-$color_modif = "";
-$image_modif = "";
-if (${"diff_" . $table}[$champ]) {
-    $image_modif = $html_image_modif;
-    $color_modif = $html_color_modif;
-}
 //$bloc .= "<tr><td " . $color_modif . ">" . DatabaseDescription::getFieldDocLabel(FtaComposantModel::TABLENAME, FtaComposantModel::FIELDNAME_ETIQUETTE_INFORMATION_COMPLEMENTAIRE_RECTO_FTA_COMPOSANT) . "</td><td" . $color_modif . ">";
 //if ($edit_allow) {
 //    $bloc .= "<textarea name=" . FtaComposantModel::FIELDNAME_ETIQUETTE_INFORMATION_COMPLEMENTAIRE_RECTO_FTA_COMPOSANT . " rows=3 cols=75>" . $etiquette_information_complementaire_recto_fta_composant . "</textarea>";
 //} else {
 //    $bloc .=$etiquette_information_complementaire_recto_fta_composant;
 //    $bloc .= "<input type=hidden name=" . FtaComposantModel::FIELDNAME_ETIQUETTE_INFORMATION_COMPLEMENTAIRE_RECTO_FTA_COMPOSANT . " value='" . $etiquette_information_complementaire_recto_fta_composant . "'/>";
-$bloc .=$ftaComposantView2->getHtmlDataField(FtaComposantModel::FIELDNAME_ETIQUETTE_INFORMATION_COMPLEMENTAIRE_RECTO_FTA_COMPOSANT);
+    $bloc .=$ftaComposantView2->getHtmlDataField(FtaComposantModel::FIELDNAME_ETIQUETTE_INFORMATION_COMPLEMENTAIRE_RECTO_FTA_COMPOSANT);
 //}
 //$bloc.="$image_modif</td></tr>";
 //Durée de vie etiquetée
-$champ = "etiquette_duree_vie_fta_composition";
-$table = "fta_composant";
-
-//Versionning
-$color_modif = "";
-$image_modif = "";
-if (${"diff_" . $table}[$champ]) {
-    $image_modif = $html_image_modif;
-    $color_modif = $html_color_modif;
-}
 //$bloc .= "<tr><td " . $color_modif . ">" . DatabaseDescription::getFieldDocLabel(FtaComposantModel::TABLENAME, FtaComposantModel::FIELDNAME_ETIQUETTE_DUREE_VIE_FTA_COMPOSITION) . "</td><td " . $color_modif . ">";
 //if ($edit_allow) {
 //    $bloc .= "<input type=text name=" . FtaComposantModel::FIELDNAME_ETIQUETTE_DUREE_VIE_FTA_COMPOSITION . " value='" . $etiquette_duree_vie_fta_composition . "' size=50/>";
 //} else {
 //    $bloc .=$etiquette_duree_vie_fta_composition;
 //    $bloc .= "<input type=hidden name=" . FtaComposantModel::FIELDNAME_ETIQUETTE_DUREE_VIE_FTA_COMPOSITION . " value='" . $etiquette_duree_vie_fta_composition . "'/>";
-$bloc .=$ftaComposantView2->getHtmlDataField(FtaComposantModel::FIELDNAME_ETIQUETTE_DUREE_VIE_FTA_COMPOSITION);
+    $bloc .=$ftaComposantView2->getHtmlDataField(FtaComposantModel::FIELDNAME_ETIQUETTE_DUREE_VIE_FTA_COMPOSITION);
 
 //}
 //Poids net etiqueté
-$champ = "etiquette_poids_fta_composition";
-$table = "fta_composant";
-
-//Versionning
-$color_modif = "";
-$image_modif = "";
-if (${"diff_" . $table}[$champ]) {
-    $image_modif = $html_image_modif;
-    $color_modif = $html_color_modif;
-}
 //$bloc .= "<tr><td " . $color_modif . ">" . DatabaseDescription::getFieldDocLabel(FtaComposantModel::TABLENAME, FtaComposantModel::FIELDNAME_ETIQUETTE_POIDS_FTA_COMPOSITION) . "</td><td " . $color_modif . ">";
 //if ($edit_allow) {
 //    $bloc .= "<input type=text name=" . FtaComposantModel::FIELDNAME_ETIQUETTE_POIDS_FTA_COMPOSITION . " value='" . $etiquette_poids_fta_composition . "' size=50/>";
 //} else {
 //    $bloc .=$etiquette_poids_fta_composition;
 //    $bloc .= "<input type=hidden name=" . FtaComposantModel::FIELDNAME_ETIQUETTE_POIDS_FTA_COMPOSITION . " value='" . $etiquette_poids_fta_composition . "'/>";
-$bloc .=$ftaComposantView2->getHtmlDataField(FtaComposantModel::FIELDNAME_ETIQUETTE_POIDS_FTA_COMPOSITION);
+    $bloc .=$ftaComposantView2->getHtmlDataField(FtaComposantModel::FIELDNAME_ETIQUETTE_POIDS_FTA_COMPOSITION);
 
 //}
 //Décomposition du poids
-$champ = "etiquette_decomposition_poids_fta_composant";
-$table = "fta_composant";
-
-//Versionning
-$color_modif = "";
-$image_modif = "";
-if (${"diff_" . $table}[$champ]) {
-    $image_modif = $html_image_modif;
-    $color_modif = $html_color_modif;
-}
 //$bloc .= "<tr><td " . $color_modif . ">" . DatabaseDescription::getFieldDocLabel(FtaComposantModel::TABLENAME, FtaComposantModel::FIELDNAME_ETIQUETTE_DECOMPOSITION_POIDS_FTA_COMPOSANT) . "</td><td " . $color_modif . ">";
 //if ($edit_allow) {
 //    $bloc .= "<input type=text name=" . FtaComposantModel::FIELDNAME_ETIQUETTE_DECOMPOSITION_POIDS_FTA_COMPOSANT . " value='" . $etiquette_decomposition_poids_fta_composant . "' size=50/>";
 //} else {
 //    $bloc .=$etiquette_decomposition_poids_fta_composant;
 //    $bloc .= "<input type=hidden name=" . FtaComposantModel::FIELDNAME_ETIQUETTE_DECOMPOSITION_POIDS_FTA_COMPOSANT . " value='" . $etiquette_decomposition_poids_fta_composant . "'/>";
-$bloc .=$ftaComposantView2->getHtmlDataField(FtaComposantModel::FIELDNAME_ETIQUETTE_DECOMPOSITION_POIDS_FTA_COMPOSANT);
-
+    $bloc .=$ftaComposantView2->getHtmlDataField(FtaComposantModel::FIELDNAME_ETIQUETTE_DECOMPOSITION_POIDS_FTA_COMPOSANT);
+}
 //}
 //Liste des composants regroupés sur cette étiquette
 if ($id_fta_composant) {
@@ -676,65 +534,47 @@ if ($mode_etiquette_fta_composition == 1 or $mode_etiquette_fta_composition == 2
 
 
 //Taile de la police de la liste d'ingrédient:
-    $champ = "taille_police_ingredient_fta_composition";
-    $table = "fta_composant";
-//Versionning
-    $color_modif = "";
-    $image_modif = "";
-    if (${"diff_" . $table}[$champ]) {
-        $image_modif = $html_image_modif;
-        $color_modif = $html_color_modif;
-    }
-    $bloc .= "<tr class=contenu><td " . $color_modif . ">" . DatabaseDescription::getFieldDocLabel(FtaComposantModel::TABLENAME, FtaComposantModel::FIELDNAME_TAILLE_POLICE_INGREDIENT_FTA_COMPOSITION) . "</td><td " . $color_modif . ">";
-
-//Remise à zéro des bouton radio
-    $checked4 = $checked5 = $checked6 = $checked7 = $checked8 = "";
-
-//Activation uniquement de celui correspondant à la taille de la police choisie
-    switch ($taille_police_ingredient_fta_composition) {
-        case '4':
-            $checked4 = "checked";
-            break;
-        case '5':
-            $checked5 = "checked";
-            break;
-        case '6':
-            $checked6 = "checked";
-            break;
-        case '7':
-            $checked7 = "checked";
-            break;
-        case '8':
-            $checked8 = "checked";
-            break;
-        case "" :
-            $checked6 = "checked";
-            break;
-    }
-    if ($proprietaire) {
-        $data_disabled = "";
-    } else {
-        $data_disabled = "disabled";
-    }
-
-    $bloc .= "<input type=radio name=" . FtaComposantModel::FIELDNAME_TAILLE_POLICE_INGREDIENT_FTA_COMPOSITION . " value=4 " . $checked4 . " " . $data_disabled . "> 4 " . $image_modif;
-    $bloc .= "<input type=radio name=" . FtaComposantModel::FIELDNAME_TAILLE_POLICE_INGREDIENT_FTA_COMPOSITION . " value=5 " . $checked5 . " " . $data_disabled . "> 5 " . $image_modif;
-    $bloc .= "<input type=radio name=" . FtaComposantModel::FIELDNAME_TAILLE_POLICE_INGREDIENT_FTA_COMPOSITION . " value=6 " . $checked6 . " " . $data_disabled . "> 6 " . $image_modif;
-    $bloc .= "<input type=radio name=" . FtaComposantModel::FIELDNAME_TAILLE_POLICE_INGREDIENT_FTA_COMPOSITION . " value=7 " . $checked7 . " " . $data_disabled . "> 7 " . $image_modif;
-    $bloc .= "<input type=radio name=" . FtaComposantModel::FIELDNAME_TAILLE_POLICE_INGREDIENT_FTA_COMPOSITION . " value=8 " . $checked8 . " " . $data_disabled . "> 8 " . $image_modif;
-    $bloc .="</td></tr>";
+//    $bloc .= "<tr class=contenu><td " . $color_modif . ">" . DatabaseDescription::getFieldDocLabel(FtaComposantModel::TABLENAME, FtaComposantModel::FIELDNAME_TAILLE_POLICE_INGREDIENT_FTA_COMPOSITION) . "</td><td " . $color_modif . ">";
+//
+////Remise à zéro des bouton radio
+//    $checked4 = $checked5 = $checked6 = $checked7 = $checked8 = "";
+//
+////Activation uniquement de celui correspondant à la taille de la police choisie
+//    switch ($taille_police_ingredient_fta_composition) {
+//        case '4':
+//            $checked4 = "checked";
+//            break;
+//        case '5':
+//            $checked5 = "checked";
+//            break;
+//        case '6':
+//            $checked6 = "checked";
+//            break;
+//        case '7':
+//            $checked7 = "checked";
+//            break;
+//        case '8':
+//            $checked8 = "checked";
+//            break;
+//        case "" :
+//            $checked6 = "checked";
+//            break;
+//    }
+//    if ($proprietaire) {
+//        $data_disabled = "";
+//    } else {
+//        $data_disabled = "disabled";
+//    }
+//
+//    $bloc .= "<input type=radio name=" . FtaComposantModel::FIELDNAME_TAILLE_POLICE_INGREDIENT_FTA_COMPOSITION . " value=4 " . $checked4 . " " . $data_disabled . "> 4 " . $image_modif;
+//    $bloc .= "<input type=radio name=" . FtaComposantModel::FIELDNAME_TAILLE_POLICE_INGREDIENT_FTA_COMPOSITION . " value=5 " . $checked5 . " " . $data_disabled . "> 5 " . $image_modif;
+//    $bloc .= "<input type=radio name=" . FtaComposantModel::FIELDNAME_TAILLE_POLICE_INGREDIENT_FTA_COMPOSITION . " value=6 " . $checked6 . " " . $data_disabled . "> 6 " . $image_modif;
+//    $bloc .= "<input type=radio name=" . FtaComposantModel::FIELDNAME_TAILLE_POLICE_INGREDIENT_FTA_COMPOSITION . " value=7 " . $checked7 . " " . $data_disabled . "> 7 " . $image_modif;
+//    $bloc .= "<input type=radio name=" . FtaComposantModel::FIELDNAME_TAILLE_POLICE_INGREDIENT_FTA_COMPOSITION . " value=8 " . $checked8 . " " . $data_disabled . "> 8 " . $image_modif;
+    $bloc .=$ftaComposantView->getHtmlDataField(FtaComposantModel::FIELDNAME_TAILLE_POLICE_INGREDIENT_FTA_COMPOSITION);
 
 
 //Alignement
-    $champ = "k_style_paragraphe_ingredient_fta_composition";
-    $table = "fta_composant";
-//Versionning
-    $color_modif = "";
-    $image_modif = "";
-    if (${"diff_" . $table}[$champ]) {
-        $image_modif = $html_image_modif;
-        $color_modif = $html_color_modif;
-    }
 //    $bloc.="<tr class=contenu><td " . $color_modif . ">";
 //    $bloc.= DatabaseDescription::getFieldDocLabel(FtaComposantModel::TABLENAME, FtaComposantModel::FIELDNAME_K_STYLE_PARAGRAPHE_INGREDIENT_FTA_COMPOSITION)
 //            . "</td><td " . $color_modif . ">"
@@ -761,15 +601,6 @@ if ($mode_etiquette_fta_composition == 1 or $mode_etiquette_fta_composition == 2
 
 //echo $id_fta."<br>";
 //Modèle d'etiquette par défaut
-    $champ = "k_etiquette_fta_composition";
-    $table = "fta_composant";
-//Versionning
-    $color_modif = "";
-    $image_modif = "";
-    if (${"diff_" . $table}[$champ]) {
-        $image_modif = $html_image_modif;
-        $color_modif = $html_color_modif;
-    }
 //    $liste_etiquette = DatabaseDescription::getFieldDocLabel(FtaComposantModel::TABLENAME, FtaComposantModel::FIELDNAME_K_ETIQUETTE_FTA_COMPOSITION)
 //            . "</td><td " . $color_modif . ">"
 //    ;
@@ -792,19 +623,10 @@ if ($mode_etiquette_fta_composition == 1 or $mode_etiquette_fta_composition == 2
 //        }
 //    }
 //    $bloc.="</td></tr>";
-    $bloc .=$ftaComposantView->ListeCodesoftEtiquettesRecto($id_fta, $editable);
+    $bloc .=$ftaComposantView->listeCodesoftEtiquettesRecto($editable);
 
 
     //Modèle d'etiquette verso
-    $champ = "k_etiquette_verso_fta_composition";
-    $table = "fta_composant";
-    //Versionning
-    $color_modif = "";
-    $image_modif = "";
-    if (${"diff_" . $table}[$champ]) {
-        $image_modif = $html_image_modif;
-        $color_modif = $html_color_modif;
-    }
 //    $liste_etiquette = DatabaseDescription::getFieldDocLabel(FtaComposantModel::TABLENAME, FtaComposantModel::FIELDNAME_K_ETIQUETTE_VERSO_FTA_COMPOSITION)
 //            . "</td><td " . $color_modif . ">"
 //    ;
@@ -828,19 +650,10 @@ if ($mode_etiquette_fta_composition == 1 or $mode_etiquette_fta_composition == 2
 //        }
 //    }
 //    $bloc.="</td></tr>";
-    $bloc .=$ftaComposantView->ListeCodesoftEtiquettesVerso($id_fta, $editable);
+    $bloc .=$ftaComposantView->listeCodesoftEtiquettesVerso($editable);
 
 
     //Logo à imprimer sur le masque d'étiquette
-    $champ = "k_codesoft_etiquette_logo";
-    $table = "fta_composant";
-    //Versionning
-    $color_modif = "";
-    $image_modif = "";
-    if (${"diff_" . $table}[$champ]) {
-        $image_modif = $html_image_modif;
-        $color_modif = $html_color_modif;
-    }
 //    $liste_etiquette = DatabaseDescription::getFieldDocLabel(FtaComposantModel::TABLENAME, FtaComposantModel::FIELDNAME_K_CODESOFT_ETIQUETTE_LOGO)
 //            . "</td><td $color_modif>"
 //    ;
@@ -867,15 +680,6 @@ if ($mode_etiquette_fta_composition == 1 or $mode_etiquette_fta_composition == 2
 if ($mode_etiquette_fta_composition == 3) {
 
 //Composant regroupant l'étiquette
-    $champ = "etiquette_id_fta_composition";
-    $table = "fta_composant";
-//Versionning
-    $color_modif = "";
-    $image_modif = "";
-    if (${"diff_" . $table}[$champ]) {
-        $image_modif = $html_image_modif;
-        $color_modif = $html_color_modif;
-    }
 //    $liste_etiquette = DatabaseDescription::getFieldDocLabel(FtaComposantModel::TABLENAME, FtaComposantModel::FIELDNAME_ETIQUETTE_ID_FTA_COMPOSITION)
 //            . "</td><td " . $color_modif . ">"
 //    ;

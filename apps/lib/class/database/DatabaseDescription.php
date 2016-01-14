@@ -278,7 +278,7 @@ class DatabaseDescription {
             $tableDescription = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
                             'DESC ' . DatabaseOperation::convertNameToSqlClause($tableName)
             );
-
+           
             /**
              * Enregistrement des caractéristiques SQL de chaque champs
              * Parcours de chaque champs de la table en cours d'analyse.

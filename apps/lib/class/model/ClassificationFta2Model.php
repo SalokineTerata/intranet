@@ -27,13 +27,14 @@ class ClassificationFta2Model extends AbstractModel {
     protected static $idEnvironnement;
     protected static $idReseau;
     protected static $idSaisonnalite;
+    protected static $paramWarningUpdate;
 
     protected function setDefaultValues() {
         
     }
 
     public static function initClassification($paramProprietaireGroupe, $paramProprietaireEnseigne, $paramMarque
-    , $paramActivite, $paramRayon, $paramEnvironnement, $paramReseau, $paramSaisonnalite) {
+    , $paramActivite, $paramRayon, $paramEnvironnement, $paramReseau, $paramSaisonnalite, $paramWarningUpdate = NULL) {
         self::$idProprietaireGroupe = $paramProprietaireGroupe;
         self::$idProprietaireEnseigne = $paramProprietaireEnseigne;
         self::$idMarque = $paramMarque;
@@ -42,6 +43,7 @@ class ClassificationFta2Model extends AbstractModel {
         self::$idEnvironnement = $paramEnvironnement;
         self::$idReseau = $paramReseau;
         self::$idSaisonnalite = $paramSaisonnalite;
+        self::$paramWarningUpdate = $paramWarningUpdate;
     }
 
     /**
@@ -87,6 +89,12 @@ class ClassificationFta2Model extends AbstractModel {
      * @return string
      */
     public static function getListeClassificationProprietaireGroupeLabel($paramIdDefaut, $paramIsEditable) {
+        //Traitement du Warning Update
+        if (self::$paramWarningUpdate) {
+            $image_modif = Html::DEFAULT_HTML_WARNING_UPDATE_IMAGE;
+            $color_modif = Html::DEFAULT_HTML_WARNING_UPDATE_BGCOLOR;
+        }
+
         $req = 'SELECT ' . ClassificationArborescenceArticleCategorieContenuModel::KEYNAME . ',' . ClassificationArborescenceArticleCategorieContenuModel::FIELDNAME_NOM_CLASSIFICATION_ARBORESCENCE_ARTICLE_CATEGORIE_CONTENU
                 . ' FROM ' . ClassificationArborescenceArticleCategorieContenuModel::TABLENAME
                 . ' WHERE ' . ClassificationArborescenceArticleCategorieContenuModel::FIELDNAME_ID_CLASSIFICATION_ARBORESCENCE_ARTICLE_CATEGORIE . '=' . '1'
@@ -94,9 +102,9 @@ class ClassificationFta2Model extends AbstractModel {
                 . ' ORDER BY ' . ClassificationArborescenceArticleCategorieContenuModel::FIELDNAME_NOM_CLASSIFICATION_ARBORESCENCE_ARTICLE_CATEGORIE_CONTENU;
 
         $paramNomDefaut = 'selection_proprietaire1';
-        $listeClassification = '<td class=contenu >' . DatabaseDescription::getFieldDocLabel(ClassificationFta2Model::TABLENAME, ClassificationFta2Model::FIELDNAME_ID_PROPRIETAIRE_GROUPE)
-                . '</td><td class=contenu width=75% >'
-                . AccueilFta::afficherRequeteEnListeDeroulante($req, $paramIdDefaut, $paramNomDefaut, $paramIsEditable, TRUE) . '</tr>';
+        $listeClassification = '<td class=contenu style=\'' . $color_modif . '\' >' . DatabaseDescription::getFieldDocLabel(ClassificationFta2Model::TABLENAME, ClassificationFta2Model::FIELDNAME_ID_PROPRIETAIRE_GROUPE)
+                . '</td><td class=contenu width=75% style=\'' . $color_modif . '\' >'
+                . AccueilFta::afficherRequeteEnListeDeroulante($req, $paramIdDefaut, $paramNomDefaut, $paramIsEditable, TRUE) . ' ' . $image_modif . '</td></tr>';
 
         return $listeClassification;
     }
@@ -327,7 +335,7 @@ class ClassificationFta2Model extends AbstractModel {
      * @param boolean$ paramIsEditable
      * @return string
      */
-    public static function ShowListeDeroulanteClassification($paramIsEditable) {
+    public static function showListeDeroulanteClassification($paramIsEditable) {
 
 
         $bloc.= ClassificationFta2Model::getListeClassificationProprietaireGroupeLabel(self::$idProprietaireGroupe, $paramIsEditable);
@@ -500,15 +508,21 @@ class ClassificationFta2Model extends AbstractModel {
                 $return[] = $value[$paramSelect];
             }
         }
+        //Traitement du Warning Update
+        if (self::$paramWarningUpdate) {
+            $image_modif = Html::DEFAULT_HTML_WARNING_UPDATE_IMAGE;
+            $color_modif = Html::DEFAULT_HTML_WARNING_UPDATE_BGCOLOR;
+        }
+
         $reqClassification = 'SELECT ' . ClassificationArborescenceArticleCategorieContenuModel::KEYNAME . ',' . ClassificationArborescenceArticleCategorieContenuModel::FIELDNAME_NOM_CLASSIFICATION_ARBORESCENCE_ARTICLE_CATEGORIE_CONTENU
                 . ' FROM ' . ClassificationArborescenceArticleCategorieContenuModel::TABLENAME
                 . ' WHERE ( 0 ' . ClassificationFta2Model::AddIdClassificationArborescenceArticleCategorieContenu($return)
                 . ') ORDER BY ' . ClassificationArborescenceArticleCategorieContenuModel::FIELDNAME_NOM_CLASSIFICATION_ARBORESCENCE_ARTICLE_CATEGORIE_CONTENU
         ;
 
-        $listeClassification = '<tr><td class=contenu >' . DatabaseDescription::getFieldDocLabel(ClassificationFta2Model::TABLENAME, $paramSelect)
-                . '</td><td class=contenu width=75%>'
-                . AccueilFta::afficherRequeteEnListeDeroulante($reqClassification, $paramIdDefaut, $paramNomDefaut, $paramIsEditable, TRUE) . '</tr>';
+        $listeClassification = '<tr><td class=contenu style=\'' . $color_modif . '\' >' . DatabaseDescription::getFieldDocLabel(ClassificationFta2Model::TABLENAME, $paramSelect)
+                . '</td><td class=contenu width=75%  style=\'' . $color_modif . '\' >'
+                . AccueilFta::afficherRequeteEnListeDeroulante($reqClassification, $paramIdDefaut, $paramNomDefaut, $paramIsEditable, TRUE) . ' ' . $image_modif . '</td></tr>';
 
         return $listeClassification;
     }

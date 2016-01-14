@@ -77,6 +77,7 @@ require_once('../lib/class/model/ModelTableAssociation.php');
 require_once('../lib/class/model/AbstractModelInterface.php');
 require_once('../lib/class/model/AbstractModel.php');
 require_once('../lib/class/model/AccessMaterielServiceModel.php');
+require_once('../lib/class/model/AnnexeModeEtiquetteModel.php');
 require_once('../lib/class/model/AnnexeAgrologicArticleCodificationModel.php');
 require_once('../lib/class/model/AnnexeEmballageGroupeModel.php');
 require_once('../lib/class/model/AnnexeEmballageGroupeTypeModel.php');

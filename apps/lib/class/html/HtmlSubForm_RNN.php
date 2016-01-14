@@ -195,6 +195,7 @@ class HtmlSubForm_RNN extends HtmlSubForm {
                  * Chargement de l'enregistrement
                  */
                 $modelSubForm = new $subFormModelClassName($key);
+                $modelSubForm->setDataFtaConditionnementTableToCompare();
 
                 /**
                  * Récupération de la liste des champs à représenter
@@ -258,6 +259,13 @@ class HtmlSubForm_RNN extends HtmlSubForm {
                          * Le champs n'est pas modifiable.
                          */
                         $htmlField->setIsEditable(FALSE);
+                    }
+                    /**
+                     * On vérifie si le champ en cours est différents de la version précédente
+                     */
+                    $check = strstr($fieldName, "VIRTUAL_");
+                    if (!$check) {
+                        $htmlField->setIsWarningUpdate($modelSubForm->getDataField($fieldName)->isFieldDiff());
                     }
                     $return.=$htmlField->getHtmlResult();
                 }

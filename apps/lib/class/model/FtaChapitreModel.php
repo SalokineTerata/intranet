@@ -58,6 +58,7 @@ class FtaChapitreModel extends AbstractModel {
                         $paramIdFta, $paramIdChapitre);
         $ftaWorkflowStructureModel = new FtaWorkflowStructureModel($idFtaWorkflowStructure, $paramIdChapitre);
         $idFtaProcessus = $ftaWorkflowStructureModel->getDataField(FtaWorkflowStructureModel::FIELDNAME_ID_FTA_PROCESSUS)->getFieldValue();
+        $idFtaWorkflow = $ftaWorkflowStructureModel->getDataField(FtaWorkflowStructureModel::FIELDNAME_ID_FTA_WORKFLOW)->getFieldValue();
 
 
         //Récupération des informations préalables
@@ -144,6 +145,7 @@ class FtaChapitreModel extends AbstractModel {
                                 . ' WHERE ' . FtaWorkflowStructureModel::TABLENAME . '.' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_PROCESSUS
                                 . '=' . FtaProcessusModel::TABLENAME . '.' . FtaProcessusModel::KEYNAME
                                 . ' AND ' . FtaWorkflowStructureModel::TABLENAME . '.' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_PROCESSUS . '=' . $idFtaProcessus
+                                . ' AND ' . FtaWorkflowStructureModel::TABLENAME . '.' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_WORKFLOW . '=' . $idFtaWorkflow
                 );
                 if ($arrayFtaProcessus) {
                     foreach ($arrayFtaProcessus as $rowsFtaProcessus) {
@@ -281,9 +283,7 @@ class FtaChapitreModel extends AbstractModel {
                         . ' AND ' . FtaSuiviProjetModel::TABLENAME . '.' . FtaSuiviProjetModel::FIELDNAME_ID_FTA . ' = \'' . $paramIdFta . '\' ) )'
                 ;
                 DatabaseOperation::execute($reqDevalidation);
-                /**
-                 * rejouter le workflow
-                 */
+                
                 if ($reqDevalidation) { //Si le processus a été dévalidé, alors on informe
                     //Dénotification
                     $reqDenotification = 'UPDATE ' . FtaWorkflowStructureModel::TABLENAME . ',' . FtaSuiviProjetModel::TABLENAME

@@ -40,7 +40,6 @@ abstract class AbstractModel implements AbstractModelInterface {
      * Créé et réserve un nouvel enresgitrement dans la table
      * @return mixed
      */
- 
     public static function createNewRecordset($paramForeignKeysValuesArray = NULL) {
         
     }
@@ -98,6 +97,14 @@ abstract class AbstractModel implements AbstractModelInterface {
                         $this->getDataField($paramFieldName)
                         , $this->getIsEditable()
         );
+    }
+
+    /**
+     * On récupère le DataRecord à comparer 
+     * @param DatabaseRecord $paramRecordToCompare
+     */
+    public function setDataToCompare($paramRecordToCompare) {
+        $this->getRecord()->setRecordToCompare($paramRecordToCompare);
     }
 
 }

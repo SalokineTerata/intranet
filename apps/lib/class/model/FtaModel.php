@@ -1716,7 +1716,8 @@ class FtaModel extends AbstractModel {
          * Contrôle de la date d'échéance
          */
         $dateEcheanceValue = $dataFieldDateEcheance->getFieldValue();
-        if ($dateEcheanceValue == self::CHECK_DATE_ECHANCE or ! $dateEcheanceValue or $paramUpdateFta) {
+
+        if ($this->getIsEditable() and ( $dateEcheanceValue == self::CHECK_DATE_ECHANCE or ! $dateEcheanceValue or $paramUpdateFta)) {
             switch ($this->getDataField(self::FIELDNAME_VERSION_DOSSIER_FTA)->getFieldValue()) {
                 case "0":
                     $nbJours = ModuleConfig::VALUE_DATE_PLUS_CREATION;
@@ -1730,6 +1731,58 @@ class FtaModel extends AbstractModel {
         $dataFieldDateEcheance->setFieldValue($dateEcheanceValue);
         $this->saveToDatabase();
         return $dateEcheanceValue;
+    }
+
+    /**
+     * On récupère le DataRecord à comparer 
+     * @param DatabaseRecord $paramRecordToCompare
+     */
+    function setDataToCompare($paramRecordToCompare) {
+        parent::setDataToCompare($paramRecordToCompare);
+    }
+
+    /**
+     * On initialise l'idFta à comparer de la version actuelle du FtaModel 
+     */
+    function setDataFtaTableToCompare() {
+
+        $idFtaToCompare = $this->getIdFtaToCompare();
+
+        $DataRecord = new DatabaseRecord(self::TABLENAME, $idFtaToCompare);
+
+        $this->setDataToCompare($DataRecord);
+    }
+
+    function getIdFtaToCompare() {
+        $currentIdFta = $this->getKeyValue();
+
+        $arrayIdFtaDossierAndVersion = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
+                        "SELECT " . self::FIELDNAME_VERSION_DOSSIER_FTA . "," . self::FIELDNAME_DOSSIER_FTA
+                        . " FROM " . self::TABLENAME
+                        . " WHERE " . self::KEYNAME . "=" . $currentIdFta
+        );
+        foreach ($arrayIdFtaDossierAndVersion as $rowsIdFtaDossierAndVersion) {
+            $idFtaVersion = $rowsIdFtaDossierAndVersion[self::FIELDNAME_VERSION_DOSSIER_FTA];
+            $idFtaDossier = $rowsIdFtaDossierAndVersion[self::FIELDNAME_DOSSIER_FTA];
+        }
+        if ($idFtaVersion <> "0") {
+            $idFtaVersion = $idFtaVersion - "1";
+
+            $arrayIdFta = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
+                            "SELECT " . self::KEYNAME
+                            . " FROM " . self::TABLENAME
+                            . " WHERE " . self::FIELDNAME_VERSION_DOSSIER_FTA . "=" . $idFtaVersion
+                            . " AND " . self::FIELDNAME_DOSSIER_FTA . "=" . $idFtaDossier
+            );
+
+            foreach ($arrayIdFta as $rowsIdFta) {
+                $idFtaToCompare = $rowsIdFta[self::KEYNAME];
+            }
+        } else {
+            $idFtaToCompare = $currentIdFta;
+        }
+
+        return $idFtaToCompare;
     }
 
 }

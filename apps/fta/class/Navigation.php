@@ -248,6 +248,8 @@ class Navigation {
         if (self::$comeback == "1") {
 //                   self::$comeback_url = 'index.php?id_fta_etat=' . self::$id_fta_etat . '&nom_fta_etat=' . self::$abreviation_etat . '&id_fta_role=' . self::$id_fta_role . '&synthese_action=' . self::$synthese_action;
            $_SESSION["comeback_url"] = $_SERVER["HTTP_REFERER"];
+        }else{
+           $_SESSION["comeback_url"] = 'index.php?id_fta_etat=' . self::$id_fta_etat . '&nom_fta_etat=' . self::$abreviation_etat . '&id_fta_role=' . self::$id_fta_role . '&synthese_action=' . self::$synthese_action;
         }
         $menu_navigation.= '</td></tr><tr><td>
     <a href=' . $_SESSION["comeback_url"] . '><img src=../lib/images/bouton_retour.png alt=\'\' title=\'Retour\' width=\'18\' height=\'15\' border=\'0\' /> Retour</a> |

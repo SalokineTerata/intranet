@@ -1043,7 +1043,6 @@ class AccueilFta {
                             . '?action=dupliquer_fiche'
                             . '&id_fta=' . $idFta
                             . '&id_fta_role=' . self::$idFtaRole
-                            . '&comeback=1'
                             . '><img src=../lib/images/copie.png alt=\'\' title=\'Dupliquer\' width=\'30\' height=\'30\' border=\'0\' />'
                             . '</a>'
                     ;

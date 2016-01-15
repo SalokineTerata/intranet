@@ -373,7 +373,7 @@ class TableauFicheView {
             Acl::getValueAccesRights(Acl::ACL_FTA_MODIFICATION)
             AND ( FtaRoleModel::isGestionnaire($paramIdFtaRole) )
             AND ( $paramAbreviationFtaEtat == FtaEtatModel::ETAT_ABREVIATION_VALUE_MODIFICATION
-            AND $paramSyntheseAction == FtaEtatModel::ETAT_AVANCEMENT_VALUE_EFFECTUES
+            AND $paramSyntheseAction == FtaEtatModel::ETAT_AVANCEMENT_VALUE_ALL
             AND $paramCheckAccesButton
 
             )

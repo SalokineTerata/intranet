@@ -478,26 +478,27 @@ WHERE id_intranet_moteur_de_recherche_operateur_sur_champ = '$enr2[0]'";
                         case $operateur_recherche[$cpt_ligne][$cpt_col] == 9 : //Liste
 
                             $req_temp = "SELECT DISTINCT $nom_champ FROM $nom_table ORDER BY $nom_champ";
-                            $result_temp = DatabaseOperation::convertSqlStatementWithoutKeyToArray($req_temp);
+                            $result_temp = DatabaseOperation::convertSqlStatementKeyAndOneFieldToArray($req_temp);
                             $saisie_utilisateur = "<select size = 1 name = $name_val value = $temp>";
                             $verrou = 0;
                             $oui_non = 1;
                             foreach ($result_temp as $rows) {
 
-                                if ("$rows[0]" == "$temp") {
+                                if ($rows[0] == $temp) {
                                     //echo "$temp";
                                     $select = "selected";
                                 } else {
                                     $select = "";
                                 }
 
-                                if ($rows[0] != "1" and $rows[0] != "0")
+                                if ($rows[0] != "1" and $rows[0] != "0") {
                                     $oui_non = 0;
+                                }
 
                                 //Vérification de la tailles des entées
                                 if (strlen($rows[0]) < 50) {
                                     if ($rows[0] != "") {
-                                        $saisie_utilisateur.="<option value = `$rows[0]` $select> $rows[0] </option>";
+                                        $saisie_utilisateur.="<option value = $rows[0] $select> $rows[0] </option>";
                                     }
                                 } else {
                                     $verrou = 1;

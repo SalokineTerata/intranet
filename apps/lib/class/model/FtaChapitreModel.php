@@ -88,11 +88,12 @@ class FtaChapitreModel extends AbstractModel {
             }
         }
         //Intégration du commentaire de la correction
-        $newCorrectionFtaSuiviProjet.= $current_correction_fta_suivi_projet
-                . '<br/><br/>'
-                . date('Y-m-d') . ': '
-                . $prenom . ' ' . $nom . ': <br/>'//table salaries
+        $newCorrectionFtaSuiviProjet.=
+                date('Y-m-d') . ': '
+                . $prenom . ' ' . $nom . ': \n'//table salaries
                 . $option[FtaSuiviProjetModel::FIELDNAME_CORRECTION_FTA_SUIVI_PROJET]
+                . '\n\n' .
+                $current_correction_fta_suivi_projet
         ;
 //        $newCorrectionFtaSuiviProjet = mysql_real_escape_string($newCorrectionFtaSuiviProjet);
         $newCorrectionFtaSuiviProjet = str_replace("<br/>", "\n", $newCorrectionFtaSuiviProjet);
@@ -283,7 +284,7 @@ class FtaChapitreModel extends AbstractModel {
                         . ' AND ' . FtaSuiviProjetModel::TABLENAME . '.' . FtaSuiviProjetModel::FIELDNAME_ID_FTA . ' = \'' . $paramIdFta . '\' ) )'
                 ;
                 DatabaseOperation::execute($reqDevalidation);
-                
+
                 if ($reqDevalidation) { //Si le processus a été dévalidé, alors on informe
                     //Dénotification
                     $reqDenotification = 'UPDATE ' . FtaWorkflowStructureModel::TABLENAME . ',' . FtaSuiviProjetModel::TABLENAME

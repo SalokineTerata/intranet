@@ -69,7 +69,6 @@ class FtaSuiviProjetModel extends AbstractModel {
                 . ', ' . FtaSuiviProjetModel::FIELDNAME_DATE_VALIDATION_SUIVI_PROJET
                 . ', ' . FtaSuiviProjetModel::FIELDNAME_SIGNATURE_VALIDATION_SUIVI_PROJET
                 . ', ' . FtaSuiviProjetModel::FIELDNAME_DATE_DEMARRAGE_CHAPITRE_FTA_SUIVI_PROJET
-                . ', ' . FtaSuiviProjetModel::FIELDNAME_CORRECTION_FTA_SUIVI_PROJET
                 . ', ' . FtaSuiviProjetModel::FIELDNAME_ID_FTA
                 . ', ' . FtaSuiviProjetModel::FIELDNAME_NOTIFICATION_FTA_SUIVI_PROJET . ')'
                 . ' SELECT ' . FtaSuiviProjetModel::FIELDNAME_COMMENTAIRE_SUIVI_PROJET
@@ -77,7 +76,6 @@ class FtaSuiviProjetModel extends AbstractModel {
                 . ', ' . FtaSuiviProjetModel::FIELDNAME_DATE_VALIDATION_SUIVI_PROJET
                 . ', ' . FtaSuiviProjetModel::FIELDNAME_SIGNATURE_VALIDATION_SUIVI_PROJET
                 . ', ' . FtaSuiviProjetModel::FIELDNAME_DATE_DEMARRAGE_CHAPITRE_FTA_SUIVI_PROJET
-                . ', ' . FtaSuiviProjetModel::FIELDNAME_CORRECTION_FTA_SUIVI_PROJET
                 . ', ' . $paramIdFtaNew
                 . ', ' . FtaSuiviProjetModel::FIELDNAME_NOTIFICATION_FTA_SUIVI_PROJET
                 . ' FROM ' . FtaSuiviProjetModel::TABLENAME

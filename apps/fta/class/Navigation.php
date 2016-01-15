@@ -150,7 +150,7 @@ class Navigation {
                                             . '&synthese_action=' . self::$synthese_action
                                             . '&id_fta_etat=' . self::$id_fta_etat
                                             . '&abreviation_fta_etat=' . self::$abreviation_etat
-                                            . '&comeback=' . self::$comeback
+//                                            . '&comeback=' . self::$comeback
                                             . '&id_fta_role=' . $arrayCheckRole["0"] . '>' . $ftaRoleModel->getDataField(FtaRoleModel::FIELDNAME_DESCRIPTION_FTA_ROLE)->getFieldValue() . '</a> ';
                                 } else {
                                     $ftaRoleModel = new FtaRoleModel($arrayCheckRole["0"]);
@@ -167,7 +167,7 @@ class Navigation {
                                         . '&synthese_action=' . self::$synthese_action
                                         . '&id_fta_etat=' . self::$id_fta_etat
                                         . '&abreviation_fta_etat=' . self::$abreviation_etat
-                                        . '&comeback=' . self::$comeback
+//                                        . '&comeback=' . self::$comeback
                                         . '&id_fta_role=' . $arrayCheckRole["0"] . '>' . $ftaRoleModel->getDataField(FtaRoleModel::FIELDNAME_DESCRIPTION_FTA_ROLE)->getFieldValue() . '</a> ';
                             }
                         }
@@ -240,14 +240,17 @@ class Navigation {
         }
         //Lien de retour rapide
 
-        self::$comeback_url = 'index.php?id_fta_etat=' . self::$id_fta_etat . '&nom_fta_etat=' . self::$abreviation_etat . '&id_fta_role=' . self::$id_fta_role . '&synthese_action=' . self::$synthese_action;
         /**
          * Version avec le rewrite
          */
 //        self::$comeback_url = 'index-' . self::$id_fta_etat . '-' . self::$abreviation_etat . '-' . self::$id_fta_role . '-' . self::$synthese_action . '.html';
 
+        if (self::$comeback == "1") {
+//                   self::$comeback_url = 'index.php?id_fta_etat=' . self::$id_fta_etat . '&nom_fta_etat=' . self::$abreviation_etat . '&id_fta_role=' . self::$id_fta_role . '&synthese_action=' . self::$synthese_action;
+           $_SESSION["comeback_url"] = $_SERVER["HTTP_REFERER"];
+        }
         $menu_navigation.= '</td></tr><tr><td>
-    <a href=' . self::$comeback_url . '><img src=../lib/images/bouton_retour.png alt=\'\' title=\'Retour à la synthèse\' width=\'18\' height=\'15\' border=\'0\' /> Retour vers la synthèse</a> |
+    <a href=' . $_SESSION["comeback_url"] . '><img src=../lib/images/bouton_retour.png alt=\'\' title=\'Retour\' width=\'18\' height=\'15\' border=\'0\' /> Retour</a> |
     ';
         if ($paramActivationComplete) {
             //Corps du menu
@@ -692,7 +695,7 @@ class Navigation {
                         . '&synthese_action=' . self::$synthese_action
                         . '&id_fta_etat=' . self::$id_fta_etat
                         . '&abreviation_fta_etat=' . self::$abreviation_etat
-                        . '&comeback=' . self::$comeback
+//                        . '&comeback=' . self::$comeback
                         . '&id_fta_role=' . self::$id_fta_role
                         . '>' . $b . ''
                         . $nom_usuel_fta_chapitre

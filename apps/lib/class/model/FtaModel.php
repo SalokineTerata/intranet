@@ -223,13 +223,15 @@ class FtaModel extends AbstractModel {
      * Ce test vérifie le renseignement des données obligatoires.
      * @return boolean     
      */
-    public function isFtaDataValidationSuccess() {
+    public function isFtaDataValidationSuccess($paramIdFtaChapitre) {
         $return = "0";
 
         /*
          * Liste des Contrôles 
          */
-        $return += $this->checkDataValidationClassification();
+        if ($paramIdFtaChapitre == FtaChapitreModel::ID_CHAPITRE_IDENTITE) {
+            $return += $this->checkDataValidationClassification();
+        }
         /**
          * Si la Fta est un création (v0) alors la date d'échéance est obligatoire
          */

@@ -85,6 +85,14 @@ if ($id_fta) {
     $designationCommercialeFta = $ftaModel->getDataField(FtaModel::FIELDNAME_DESIGNATION_COMMERCIALE)->getFieldValue();
     $arrayIdFtaRoleAcces = FtaRoleModel::getArrayIdFtaRoleByIdUserAndWorkflow($idUser, $idFtaWorkflow);
     $idFtaRole = $arrayIdFtaRoleAcces["0"];
+    $comeback = Lib::getParameterFromRequest('comeback');
+
+    /**
+     * Initialisation du bouton de retour de synthèse
+     */
+    if ($comeback) {
+        $_SESSION["comeback_url"] = $_SERVER["HTTP_REFERER"];
+    }
 } else {
     $checked_vierge = 'checked';
 }

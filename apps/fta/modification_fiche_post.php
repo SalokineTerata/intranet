@@ -138,7 +138,7 @@ switch ($action) {
         $idFtaWorkflowStruture = FtaWorkflowStructureModel::getIdFtaWorkflowStructureByIdFtaAndIdChapitre($paramIdFta, $paramIdFtaChapitreEncours);
         $modelFtaWorkflowStruture = new FtaWorkflowStructureModel($idFtaWorkflowStruture);
 
-        $isFtaDataValidationSuccess = $modelFta->isFtaDataValidationSuccess();
+        $isFtaDataValidationSuccess = $modelFta->isFtaDataValidationSuccess($paramIdFtaChapitreEncours);
 
         if ($paramSignatureValidationSuiviProjet and $isFtaDataValidationSuccess == "0") {
             $modelFtaSuiviProjet->getDataField(FtaSuiviProjetModel::FIELDNAME_DATE_VALIDATION_SUIVI_PROJET)->setFieldValue(date("Y-m-d"));

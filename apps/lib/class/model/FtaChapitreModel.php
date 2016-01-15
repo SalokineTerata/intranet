@@ -28,6 +28,7 @@ class FtaChapitreModel extends AbstractModel {
     const KEYNAME = 'id_fta_chapitre';
     const FIELDNAME_NOM_CHAPITRE = 'nom_fta_chapitre';
     const FIELDNAME_NOM_USUEL_CHAPITRE = 'nom_usuel_fta_chapitre';
+    const ID_CHAPITRE_IDENTITE = '1';
 
     public function __construct($paramId = NULL, $paramIsCreateRecordsetInDatabaseIfKeyDoesntExist = AbstractModel::DEFAULT_IS_CREATE_RECORDSET_IN_DATABASE_IF_KEY_DOESNT_EXIST) {
         parent::__construct($paramId, $paramIsCreateRecordsetInDatabaseIfKeyDoesntExist);

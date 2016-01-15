@@ -439,6 +439,7 @@ class TableauFicheView {
                     . 'href=transiter.php'
                     . '?id_fta=' . $paramIdFta
                     . '&id_fta_role=' . $paramIdFtaRole
+                    . '&comeback=1'
                     . '><img src=./images/transiter.png alt=\'\' title=\'Transiter\' width=\'30\' height=\'30\' border=\'0\' />'
                     . '</a>'
             ;

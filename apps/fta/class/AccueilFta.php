@@ -996,6 +996,7 @@ class AccueilFta {
                             . 'href=transiter.php'
                             . '?id_fta=' . $idFta
                             . '&id_fta_role=' . self::$idFtaRole
+                            . '&comeback=1'
                             . '><img src=./images/transiter.png alt=\'\' title=\'Transiter\' width=\'30\' height=\'30\' border=\'0\' />'
                             . '</a>'
                     ;

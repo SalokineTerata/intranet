@@ -56,8 +56,14 @@ $html_table = 'table '              //Permet d'harmoniser les tableaux
  */
 
 $idFta = Lib::getParameterFromRequest('id_fta');
+$comeback = Lib::getParameterFromRequest('comeback');
 
-
+/**
+ * Initialisation du bouton de retour de synthèse
+ */
+if ($comeback) {
+    $_SESSION["comeback_url"] = $_SERVER["HTTP_REFERER"];
+}
 $action = Lib::getParameterFromRequest('action');
 $demande_abreviation_fta_transition = Lib::getParameterFromRequest('demande_abreviation_fta_transition');
 $syntheseAction = Lib::getParameterFromRequest('synthese_action');

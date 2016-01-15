@@ -161,14 +161,14 @@
         proprietaire1 = document.form_action.selection_proprietaire1.selectedIndex;
         idFta = document.getElementById("id_fta").value;
         syntheseAction = document.getElementById("synthese_action").value;
-        comeback = document.getElementById("comeback").value;
+//        comeback = document.getElementById("comeback").value;
         idFtaEtat = document.getElementById("id_fta_etat").value;
         abreviationFtaEtat = document.getElementById("abreviation_fta_etat").value;
         idFtaRole = document.getElementById("id_fta_role").value;
         //if (i == 0) return;
         url = "modification_fiche.php?id_fta=" + idFta
                 + "&synthese_action=" + syntheseAction
-                + "&comeback=" + comeback
+//                + "&comeback=" + comeback
                 + "&id_fta_etat=" + idFtaEtat
                 + "&abreviation_fta_etat=" + abreviationFtaEtat
                 + "&id_fta_role=" + idFtaRole
@@ -184,14 +184,14 @@
         proprietaire2 = document.form_action.selection_proprietaire2.selectedIndex;
         idFta = document.getElementById("id_fta").value;
         syntheseAction = document.getElementById("synthese_action").value;
-        comeback = document.getElementById("comeback").value;
+//        comeback = document.getElementById("comeback").value;
         idFtaEtat = document.getElementById("id_fta_etat").value;
         abreviationFtaEtat = document.getElementById("abreviation_fta_etat").value;
         idFtaRole = document.getElementById("id_fta_role").value;
         //if (i == 0) return;
         url = "modification_fiche.php?id_fta=" + idFta
                 + "&synthese_action=" + syntheseAction
-                + "&comeback=" + comeback
+//                + "&comeback=" + comeback
                 + "&id_fta_etat=" + idFtaEtat
                 + "&abreviation_fta_etat=" + abreviationFtaEtat
                 + "&id_fta_role=" + idFtaRole
@@ -206,13 +206,13 @@
         marque = document.form_action.selection_marque.selectedIndex;
         idFta = document.getElementById("id_fta").value;
         syntheseAction = document.getElementById("synthese_action").value;
-        comeback = document.getElementById("comeback").value;
+//        comeback = document.getElementById("comeback").value;
         idFtaEtat = document.getElementById("id_fta_etat").value;
         abreviationFtaEtat = document.getElementById("abreviation_fta_etat").value;
         idFtaRole = document.getElementById("id_fta_role").value;
         url = "modification_fiche.php?id_fta=" + idFta
                 + "&synthese_action=" + syntheseAction
-                + "&comeback=" + comeback
+//                + "&comeback=" + comeback
                 + "&id_fta_etat=" + idFtaEtat
                 + "&abreviation_fta_etat=" + abreviationFtaEtat
                 + "&id_fta_role=" + idFtaRole
@@ -231,14 +231,14 @@
         activite = document.form_action.selection_activite.selectedIndex;
         idFta = document.getElementById("id_fta").value;
         syntheseAction = document.getElementById("synthese_action").value;
-        comeback = document.getElementById("comeback").value;
+//        comeback = document.getElementById("comeback").value;
         idFtaEtat = document.getElementById("id_fta_etat").value;
         abreviationFtaEtat = document.getElementById("abreviation_fta_etat").value;
         idFtaRole = document.getElementById("id_fta_role").value;
         //if (i == 0) return;
         url = "modification_fiche.php?id_fta=" + idFta
                 + "&synthese_action=" + syntheseAction
-                + "&comeback=" + comeback
+//                + "&comeback=" + comeback
                 + "&id_fta_etat=" + idFtaEtat
                 + "&abreviation_fta_etat=" + abreviationFtaEtat
                 + "&id_fta_role=" + idFtaRole
@@ -259,14 +259,14 @@
         rayon = document.form_action.selection_rayon.selectedIndex;
         idFta = document.getElementById("id_fta").value;
         syntheseAction = document.getElementById("synthese_action").value;
-        comeback = document.getElementById("comeback").value;
+//        comeback = document.getElementById("comeback").value;
         idFtaEtat = document.getElementById("id_fta_etat").value;
         abreviationFtaEtat = document.getElementById("abreviation_fta_etat").value;
         idFtaRole = document.getElementById("id_fta_role").value;
         //if (i == 0) return;
         url = "modification_fiche.php?id_fta=" + idFta
                 + "&synthese_action=" + syntheseAction
-                + "&comeback=" + comeback
+//                + "&comeback=" + comeback
                 + "&id_fta_etat=" + idFtaEtat
                 + "&abreviation_fta_etat=" + abreviationFtaEtat
                 + "&id_fta_role=" + idFtaRole
@@ -289,14 +289,14 @@
         environnement = document.form_action.selection_environnement.selectedIndex;
         idFta = document.getElementById("id_fta").value;
         syntheseAction = document.getElementById("synthese_action").value;
-        comeback = document.getElementById("comeback").value;
+//        comeback = document.getElementById("comeback").value;
         idFtaEtat = document.getElementById("id_fta_etat").value;
         abreviationFtaEtat = document.getElementById("abreviation_fta_etat").value;
         idFtaRole = document.getElementById("id_fta_role").value;
         //if (i == 0) return;
         url = "modification_fiche.php?id_fta=" + idFta
                 + "&synthese_action=" + syntheseAction
-                + "&comeback=" + comeback
+//                + "&comeback=" + comeback
                 + "&id_fta_etat=" + idFtaEtat
                 + "&abreviation_fta_etat=" + abreviationFtaEtat
                 + "&id_fta_role=" + idFtaRole
@@ -321,14 +321,14 @@
         reseau = document.form_action.selection_reseau.selectedIndex;
         idFta = document.getElementById("id_fta").value;
         syntheseAction = document.getElementById("synthese_action").value;
-        comeback = document.getElementById("comeback").value;
+//        comeback = document.getElementById("comeback").value;
         idFtaEtat = document.getElementById("id_fta_etat").value;
         abreviationFtaEtat = document.getElementById("abreviation_fta_etat").value;
         idFtaRole = document.getElementById("id_fta_role").value;
         //if (i == 0) return;
         url = "modification_fiche.php?id_fta=" + idFta
                 + "&synthese_action=" + syntheseAction
-                + "&comeback=" + comeback
+//                + "&comeback=" + comeback
                 + "&id_fta_etat=" + idFtaEtat
                 + "&abreviation_fta_etat=" + abreviationFtaEtat
                 + "&id_fta_role=" + idFtaRole
@@ -355,14 +355,14 @@
         saisonnalite = document.form_action.selection_saisonnalite.selectedIndex;
         idFta = document.getElementById("id_fta").value;
         syntheseAction = document.getElementById("synthese_action").value;
-        comeback = document.getElementById("comeback").value;
+//        comeback = document.getElementById("comeback").value;
         idFtaEtat = document.getElementById("id_fta_etat").value;
         abreviationFtaEtat = document.getElementById("abreviation_fta_etat").value;
         idFtaRole = document.getElementById("id_fta_role").value;
         //if (i == 0) return;
         url = "modification_fiche.php?id_fta=" + idFta
                 + "&synthese_action=" + syntheseAction
-                + "&comeback=" + comeback
+//                + "&comeback=" + comeback
                 + "&id_fta_etat=" + idFtaEtat
                 + "&abreviation_fta_etat=" + abreviationFtaEtat
                 + "&id_fta_role=" + idFtaRole
@@ -383,7 +383,7 @@
         idFta = document.getElementById("id_fta").value;
         id_fta_chapitre_encours = document.getElementById("id_fta_chapitre_encours").value;
         syntheseAction = document.getElementById("synthese_action").value;
-        comeback = document.getElementById("comeback").value;
+//        comeback = document.getElementById("comeback").value;
         idFtaEtat = document.getElementById("id_fta_etat").value;
         abreviationFtaEtat = document.getElementById("abreviation_fta_etat").value;
         idFtaRole = document.getElementById("id_fta_role").value;
@@ -391,7 +391,7 @@
         url = "ajout_classification_chemin.php?id_fta=" + idFta
                 + "&id_fta_chapitre_encours=" + id_fta_chapitre_encours
                 + "&synthese_action=" + syntheseAction
-                + "&comeback=" + comeback
+//                + "&comeback=" + comeback
                 + "&id_fta_etat=" + idFtaEtat
                 + "&abreviation_fta_etat=" + abreviationFtaEtat
                 + "&id_fta_role=" + idFtaRole
@@ -406,7 +406,7 @@
         idFta = document.getElementById("id_fta").value;
         syntheseAction = document.getElementById("synthese_action").value;
         id_fta_chapitre_encours = document.getElementById("id_fta_chapitre_encours").value;
-        comeback = document.getElementById("comeback").value;
+//        comeback = document.getElementById("comeback").value;
         idFtaEtat = document.getElementById("id_fta_etat").value;
         abreviationFtaEtat = document.getElementById("abreviation_fta_etat").value;
         idFtaRole = document.getElementById("id_fta_role").value;
@@ -414,7 +414,7 @@
         url = "ajout_classification_chemin.php?id_fta=" + idFta
                 + "&id_fta_chapitre_encours=" + id_fta_chapitre_encours
                 + "&synthese_action=" + syntheseAction
-                + "&comeback=" + comeback
+//                + "&comeback=" + comeback
                 + "&id_fta_etat=" + idFtaEtat
                 + "&abreviation_fta_etat=" + abreviationFtaEtat
                 + "&id_fta_role=" + idFtaRole
@@ -431,14 +431,14 @@
         idFta = document.getElementById("id_fta").value;
         id_fta_chapitre_encours = document.getElementById("id_fta_chapitre_encours").value;
         syntheseAction = document.getElementById("synthese_action").value;
-        comeback = document.getElementById("comeback").value;
+//        comeback = document.getElementById("comeback").value;
         idFtaEtat = document.getElementById("id_fta_etat").value;
         abreviationFtaEtat = document.getElementById("abreviation_fta_etat").value;
         idFtaRole = document.getElementById("id_fta_role").value;
         url = "ajout_classification_chemin.php?id_fta=" + idFta
                 + "&id_fta_chapitre_encours=" + id_fta_chapitre_encours
                 + "&synthese_action=" + syntheseAction
-                + "&comeback=" + comeback
+//                + "&comeback=" + comeback
                 + "&id_fta_etat=" + idFtaEtat
                 + "&abreviation_fta_etat=" + abreviationFtaEtat
                 + "&id_fta_role=" + idFtaRole
@@ -458,7 +458,7 @@
         idFta = document.getElementById("id_fta").value;
         id_fta_chapitre_encours = document.getElementById("id_fta_chapitre_encours").value;
         syntheseAction = document.getElementById("synthese_action").value;
-        comeback = document.getElementById("comeback").value;
+//        comeback = document.getElementById("comeback").value;
         idFtaEtat = document.getElementById("id_fta_etat").value;
         abreviationFtaEtat = document.getElementById("abreviation_fta_etat").value;
         idFtaRole = document.getElementById("id_fta_role").value;
@@ -466,7 +466,7 @@
         url = "ajout_classification_chemin.php?id_fta=" + idFta
                 + "&id_fta_chapitre_encours=" + id_fta_chapitre_encours
                 + "&synthese_action=" + syntheseAction
-                + "&comeback=" + comeback
+//                + "&comeback=" + comeback
                 + "&id_fta_etat=" + idFtaEtat
                 + "&abreviation_fta_etat=" + abreviationFtaEtat
                 + "&id_fta_role=" + idFtaRole
@@ -488,7 +488,7 @@
         idFta = document.getElementById("id_fta").value;
         syntheseAction = document.getElementById("synthese_action").value;
         id_fta_chapitre_encours = document.getElementById("id_fta_chapitre_encours").value;
-        comeback = document.getElementById("comeback").value;
+//        comeback = document.getElementById("comeback").value;
         idFtaEtat = document.getElementById("id_fta_etat").value;
         abreviationFtaEtat = document.getElementById("abreviation_fta_etat").value;
         idFtaRole = document.getElementById("id_fta_role").value;
@@ -496,7 +496,7 @@
         url = "ajout_classification_chemin.php?id_fta=" + idFta
                 + "&id_fta_chapitre_encours=" + id_fta_chapitre_encours
                 + "&synthese_action=" + syntheseAction
-                + "&comeback=" + comeback
+//                + "&comeback=" + comeback
                 + "&id_fta_etat=" + idFtaEtat
                 + "&abreviation_fta_etat=" + abreviationFtaEtat
                 + "&id_fta_role=" + idFtaRole
@@ -520,7 +520,7 @@
         idFta = document.getElementById("id_fta").value;
         id_fta_chapitre_encours = document.getElementById("id_fta_chapitre_encours").value;
         syntheseAction = document.getElementById("synthese_action").value;
-        comeback = document.getElementById("comeback").value;
+//        comeback = document.getElementById("comeback").value;
         idFtaEtat = document.getElementById("id_fta_etat").value;
         abreviationFtaEtat = document.getElementById("abreviation_fta_etat").value;
         idFtaRole = document.getElementById("id_fta_role").value;
@@ -528,7 +528,7 @@
         url = "ajout_classification_chemin.php?id_fta=" + idFta
                 + "&id_fta_chapitre_encours=" + id_fta_chapitre_encours
                 + "&synthese_action=" + syntheseAction
-                + "&comeback=" + comeback
+//                + "&comeback=" + comeback
                 + "&id_fta_etat=" + idFtaEtat
                 + "&abreviation_fta_etat=" + abreviationFtaEtat
                 + "&id_fta_role=" + idFtaRole
@@ -554,7 +554,7 @@
         idFta = document.getElementById("id_fta").value;
         syntheseAction = document.getElementById("synthese_action").value;
         id_fta_chapitre_encours = document.getElementById("id_fta_chapitre_encours").value;
-        comeback = document.getElementById("comeback").value;
+//        comeback = document.getElementById("comeback").value;
         idFtaEtat = document.getElementById("id_fta_etat").value;
         abreviationFtaEtat = document.getElementById("abreviation_fta_etat").value;
         idFtaRole = document.getElementById("id_fta_role").value;
@@ -562,7 +562,7 @@
         url = "ajout_classification_chemin.php?id_fta=" + idFta
                 + "&id_fta_chapitre_encours=" + id_fta_chapitre_encours
                 + "&synthese_action=" + syntheseAction
-                + "&comeback=" + comeback
+//                + "&comeback=" + comeback
                 + "&id_fta_etat=" + idFtaEtat
                 + "&abreviation_fta_etat=" + abreviationFtaEtat
                 + "&id_fta_role=" + idFtaRole
@@ -590,7 +590,7 @@
         idFta = document.getElementById("id_fta").value;
         id_fta_chapitre_encours = document.getElementById("id_fta_chapitre_encours").value;
         syntheseAction = document.getElementById("synthese_action").value;
-        comeback = document.getElementById("comeback").value;
+//        comeback = document.getElementById("comeback").value;
         idFtaEtat = document.getElementById("id_fta_etat").value;
         abreviationFtaEtat = document.getElementById("abreviation_fta_etat").value;
         idFtaRole = document.getElementById("id_fta_role").value;
@@ -598,7 +598,7 @@
         url = "ajout_classification_chemin.php?id_fta=" + idFta
                 + "&id_fta_chapitre_encours=" + id_fta_chapitre_encours
                 + "&synthese_action=" + syntheseAction
-                + "&comeback=" + comeback
+//                + "&comeback=" + comeback
                 + "&id_fta_etat=" + idFtaEtat
                 + "&abreviation_fta_etat=" + abreviationFtaEtat
                 + "&id_fta_role=" + idFtaRole

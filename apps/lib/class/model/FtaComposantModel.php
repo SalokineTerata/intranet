@@ -322,19 +322,18 @@ class FtaComposantModel extends AbstractModel {
      * @param int $paramIdFta
      * @param int $paramIdChapitre
      * @param string $paramSyntheseAction
-     * @param int $paramComeback
      * @param int $paramIdFtaEtat
      * @param string $paramAbreviationEtat
      * @param int $paramIdFtaRole
      * @param int $paramProprietaire
      * @return string
      */
-    public static function getAddLinkComposition($paramIdFta, $paramIdChapitre, $paramSyntheseAction, $paramComeback, $paramIdFtaEtat, $paramAbreviationEtat, $paramIdFtaRole, $paramProprietaire) {
+    public static function getAddLinkComposition($paramIdFta, $paramIdChapitre, $paramSyntheseAction,  $paramIdFtaEtat, $paramAbreviationEtat, $paramIdFtaRole, $paramProprietaire) {
         return 'modifier_composition.php?id_fta=' . $paramIdFta
                 . '&id_fta_chapitre_encours=' . $paramIdChapitre
                 . '&synthese_action=' . $paramSyntheseAction
                 . '&proprietaire=' . $paramProprietaire
-                . '&comeback=' . $paramComeback
+//                . '&comeback=' . $paramComeback
                 . '&id_fta_etat=' . $paramIdFtaEtat
                 . '&abreviation_fta_etat=' . $paramAbreviationEtat
                 . '&id_fta_role=' . $paramIdFtaRole
@@ -346,6 +345,29 @@ class FtaComposantModel extends AbstractModel {
      * @param int $paramIdFta
      * @param int $paramIdChapitre
      * @param string $paramSyntheseAction
+     * @param int $paramIdFtaEtat
+     * @param string $paramAbreviationEtat
+     * @param int $paramIdFtaRole
+     * @param int $paramProprietaire
+     * @return string
+     */
+    public static function getAddLinkComposant($paramIdFta, $paramIdChapitre, $paramSyntheseAction,  $paramIdFtaEtat, $paramAbreviationEtat, $paramIdFtaRole, $paramProprietaire) {
+        return 'modifier_composant.php?id_fta=' . $paramIdFta
+                . '&id_fta_chapitre_encours=' . $paramIdChapitre
+                . '&synthese_action=' . $paramSyntheseAction
+                . '&proprietaire=' . $paramProprietaire
+//                . '&comeback=' . $paramComeback
+                . '&id_fta_etat=' . $paramIdFtaEtat
+                . '&abreviation_fta_etat=' . $paramAbreviationEtat
+                . '&id_fta_role=' . $paramIdFtaRole
+        ;
+    }
+
+    /**
+     * Ajouter un autre composant
+     * @param int $paramIdFta
+     * @param int $paramIdChapitre
+     * @param string $paramSyntheseAction
      * @param int $paramComeback
      * @param int $paramIdFtaEtat
      * @param string $paramAbreviationEtat
@@ -353,24 +375,12 @@ class FtaComposantModel extends AbstractModel {
      * @param int $paramProprietaire
      * @return string
      */
-    public static function getAddLinkComposant($paramIdFta, $paramIdChapitre, $paramSyntheseAction, $paramComeback, $paramIdFtaEtat, $paramAbreviationEtat, $paramIdFtaRole, $paramProprietaire) {
-        return 'modifier_composant.php?id_fta=' . $paramIdFta
-                . '&id_fta_chapitre_encours=' . $paramIdChapitre
-                . '&synthese_action=' . $paramSyntheseAction
-                . '&proprietaire=' . $paramProprietaire
-                . '&comeback=' . $paramComeback
-                . '&id_fta_etat=' . $paramIdFtaEtat
-                . '&abreviation_fta_etat=' . $paramAbreviationEtat
-                . '&id_fta_role=' . $paramIdFtaRole
-        ;
-    }
-
-    public static function getAddAfterLinkComposition($paramIdFta, $paramIdChapitre, $paramSyntheseAction, $paramComeback, $paramIdFtaEtat, $paramAbreviationEtat, $paramIdFtaRole, $paramProprietaire) {
+    public static function getAddAfterLinkComposition($paramIdFta, $paramIdChapitre, $paramSyntheseAction,  $paramIdFtaEtat, $paramAbreviationEtat, $paramIdFtaRole, $paramProprietaire) {
         return 'modifier_composition.php?id_fta=' . $paramIdFta
                 . '&id_fta_chapitre_encours=' . $paramIdChapitre
                 . '&synthese_action=' . $paramSyntheseAction
                 . '&proprietaire=' . $paramProprietaire
-                . '&comeback=' . $paramComeback
+//                . '&comeback=' . $paramComeback
                 . '&id_fta_etat=' . $paramIdFtaEtat
                 . '&abreviation_fta_etat=' . $paramAbreviationEtat
                 . '&id_fta_role=' . $paramIdFtaRole
@@ -462,13 +472,12 @@ class FtaComposantModel extends AbstractModel {
      * @param int $paramIdChapitre
      * @param array $paramIdFtaComposant
      * @param string $paramSyntheseAction
-     * @param int $paramComeback
      * @param int $paramIdFtaEtat
      * @param string $paramAbreviationEtat
      * @param int $paramIdFtaRole
      * @return string
      */
-    public static function getDeleteLinkComposant($paramIdFta, $paramIdChapitre, $paramIdFtaComposant, $paramSyntheseAction, $paramComeback, $paramIdFtaEtat, $paramAbreviationEtat, $paramIdFtaRole) {
+    public static function getDeleteLinkComposant($paramIdFta, $paramIdChapitre, $paramIdFtaComposant, $paramSyntheseAction, $paramIdFtaEtat, $paramAbreviationEtat, $paramIdFtaRole) {
         foreach ($paramIdFtaComposant as $rows) {
             $return[$rows] = 'modification_fiche_post.php?'
                     . 'id_fta=' . $paramIdFta
@@ -476,7 +485,7 @@ class FtaComposantModel extends AbstractModel {
                     . '&action=suppression_composant'
                     . '&id_fta_chapitre_encours=' . $paramIdChapitre
                     . '&synthese_action=' . $paramSyntheseAction
-                    . '&comeback=' . $paramComeback
+//                    . '&comeback=' . $paramComeback
                     . '&id_fta_etat=' . $paramIdFtaEtat
                     . '&abreviation_fta_etat=' . $paramAbreviationEtat
                     . '&id_fta_role=' . $paramIdFtaRole;
@@ -490,13 +499,12 @@ class FtaComposantModel extends AbstractModel {
      * @param int $paramIdChapitre
      * @param array $paramIdFtaComposant
      * @param string $paramSyntheseAction
-     * @param int $paramComeback
      * @param int $paramIdFtaEtat
      * @param string $paramAbreviationEtat
      * @param int $paramIdFtaRole
      * @return string
      */
-    public static function getDeleteLinkComposition($paramIdFta, $paramIdChapitre, $paramIdFtaComposant, $paramSyntheseAction, $paramComeback, $paramIdFtaEtat, $paramAbreviationEtat, $paramIdFtaRole) {
+    public static function getDeleteLinkComposition($paramIdFta, $paramIdChapitre, $paramIdFtaComposant, $paramSyntheseAction,  $paramIdFtaEtat, $paramAbreviationEtat, $paramIdFtaRole) {
         foreach ($paramIdFtaComposant as $key => $rows) {
             if (!$rows) {
                 $return[$key] = 'modification_fiche_post.php?'
@@ -505,7 +513,7 @@ class FtaComposantModel extends AbstractModel {
                         . '&action=suppression_composant'
                         . '&id_fta_chapitre_encours=' . $paramIdChapitre
                         . '&synthese_action=' . $paramSyntheseAction
-                        . '&comeback=' . $paramComeback
+//                        . '&comeback=' . $paramComeback
                         . '&id_fta_etat=' . $paramIdFtaEtat
                         . '&abreviation_fta_etat=' . $paramAbreviationEtat
                         . '&id_fta_role=' . $paramIdFtaRole;
@@ -521,14 +529,13 @@ class FtaComposantModel extends AbstractModel {
      * @param int $paramIdChapitre
      * @param array $paramIdFtaComposant
      * @param string $paramSyntheseAction
-     * @param int $paramComeback
      * @param int $paramIdFtaEtat
      * @param string $paramAbreviationEtat
      * @param int $paramIdFtaRole
      * @param int $paramProprietaire
      * @return string
      */
-    public static function getDetailLinkComposant($paramIdFta, $paramIdChapitre, $paramIdFtaComposant, $paramSyntheseAction, $paramComeback, $paramIdFtaEtat, $paramAbreviationEtat, $paramIdFtaRole, $paramProprietaire) {
+    public static function getDetailLinkComposant($paramIdFta, $paramIdChapitre, $paramIdFtaComposant, $paramSyntheseAction,  $paramIdFtaEtat, $paramAbreviationEtat, $paramIdFtaRole, $paramProprietaire) {
         foreach ($paramIdFtaComposant as $rows) {
             $return[$rows] = 'modifier_composant.php?'
                     . 'id_fta=' . $paramIdFta
@@ -536,7 +543,7 @@ class FtaComposantModel extends AbstractModel {
                     . '&id_fta_composant=' . $rows
                     . '&synthese_action=' . $paramSyntheseAction
                     . '&proprietaire=' . $paramProprietaire
-                    . '&comeback=' . $paramComeback
+//                    . '&comeback=' . $paramComeback
                     . '&id_fta_etat=' . $paramIdFtaEtat
                     . '&abreviation_fta_etat=' . $paramAbreviationEtat
                     . '&id_fta_role=' . $paramIdFtaRole
@@ -551,14 +558,13 @@ class FtaComposantModel extends AbstractModel {
      * @param int $paramIdChapitre
      * @param array $paramIdFtaComposant
      * @param string $paramSyntheseAction
-     * @param int $paramComeback
      * @param int $paramIdFtaEtat
      * @param string $paramAbreviationEtat
      * @param int $paramIdFtaRole
      * @param int $paramProprietaire
      * @return string
      */
-    public static function getDetailLinkComposition($paramIdFta, $paramIdChapitre, $paramIdFtaComposant, $paramSyntheseAction, $paramComeback, $paramIdFtaEtat, $paramAbreviationEtat, $paramIdFtaRole, $paramProprietaire) {
+    public static function getDetailLinkComposition($paramIdFta, $paramIdChapitre, $paramIdFtaComposant, $paramSyntheseAction,  $paramIdFtaEtat, $paramAbreviationEtat, $paramIdFtaRole, $paramProprietaire) {
         foreach ($paramIdFtaComposant as $key => $rows) {
             $return[$key] = 'modifier_composition.php?'
                     . 'id_fta=' . $paramIdFta
@@ -566,7 +572,7 @@ class FtaComposantModel extends AbstractModel {
                     . '&id_fta_composant=' . $key
                     . '&synthese_action=' . $paramSyntheseAction
                     . '&proprietaire=' . $paramProprietaire
-                    . '&comeback=' . $paramComeback
+//                    . '&comeback=' . $paramComeback
                     . '&id_fta_etat=' . $paramIdFtaEtat
                     . '&abreviation_fta_etat=' . $paramAbreviationEtat
                     . '&id_fta_role=' . $paramIdFtaRole

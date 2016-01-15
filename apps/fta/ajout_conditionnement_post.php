@@ -116,7 +116,7 @@ switch ($action) {
 
 
 
-        header('Location: modification_fiche.php?id_fta=' . $idFta . '&id_fta_chapitre_encours=' . $idFtaChapitreEncours . '&synthese_action=encours'. '&id_fta_etat=' . $idFtaEtat . '&abreviation_fta_etat=' . $abreviationFtaEtat.'&comeback=' . $comeback  . '&id_fta_role=' . $idFtaRole);
+        header('Location: modification_fiche.php?id_fta=' . $idFta . '&id_fta_chapitre_encours=' . $idFtaChapitreEncours . '&synthese_action=encours'. '&id_fta_etat=' . $idFtaEtat . '&abreviation_fta_etat=' . $abreviationFtaEtat. '&id_fta_role=' . $idFtaRole);
          /**
           * Version avec le rewrite
           */

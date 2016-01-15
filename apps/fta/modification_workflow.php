@@ -58,7 +58,7 @@ $listeWorkflow = FtaWorkflowModel::showListeDeroulanteNomWorkflow($idFtaWorkflow
 
 
 $bouton_submit = FtaView::getHtmlButtonSubmit();
-$bouton_retour_vers_fta = FtaView::getHtmlButtonReturnFta($idFta, $id_fta_chapitre_encours, $syntheseAction, $comeback, $idFtaEtat, $abreviationFtaEtat, FtaRoleModel::ID_FTA_ROLE_COMMUN);
+$bouton_retour_vers_fta = FtaView::getHtmlButtonReturnFta($idFta, $id_fta_chapitre_encours, $syntheseAction,$idFtaEtat, $abreviationFtaEtat, FtaRoleModel::ID_FTA_ROLE_COMMUN);
 
 
 

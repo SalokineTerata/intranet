@@ -122,7 +122,7 @@ switch ($action) {
                 . "?id_fta=" . $id_fta
                 . "&id_fta_chapitre_encours=" . $id_fta_chapitre_encours
                 . "&synthese_action=" . $synthese_action
-                . "&comeback=" . $comeback
+//                . "&comeback=" . $comeback
                 . "&id_fta_etat=" . $idFtaEtat
                 . "&abreviation_fta_etat=" . $abreviationFtaEtat
                 . "&id_fta_role=" . $idFtaRole

@@ -88,7 +88,7 @@ switch ($action) {
             $modelFta->getDataField(FtaModel::FIELDNAME_CREATEUR)->setFieldValue($createurFtaNEW);
             $modelFta->saveToDatabase();
             //Redirection
-            header('Location: modification_fiche.php?id_fta=' . $paramIdFta . '&id_fta_chapitre_encours=' . $paramIdFtaChapitreEncours . '&synthese_action=' . $paramSyntheseAction . '&comeback=' . $comeback . '&id_fta_etat=' . $idFtaEtat . '&abreviation_fta_etat=' . $abreviationFtaEtat . '&id_fta_role=' . FtaRoleModel::ID_FTA_ROLE_COMMUN);
+            header('Location: modification_fiche.php?id_fta=' . $paramIdFta . '&id_fta_chapitre_encours=' . $paramIdFtaChapitreEncours . '&synthese_action=' . $paramSyntheseAction . '&id_fta_etat=' . $idFtaEtat . '&abreviation_fta_etat=' . $abreviationFtaEtat . '&id_fta_role=' . FtaRoleModel::ID_FTA_ROLE_COMMUN);
         } else {
             $titre = UserInterfaceMessage::FR_WARNING_DATA_GESTIONNAIRE_TITLE;
             $message = UserInterfaceMessage::FR_WARNING_DATA_GESTIONNAIRE;

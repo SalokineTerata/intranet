@@ -553,19 +553,18 @@ class FtaConditionnementModel extends AbstractModel {
      * @param int $paramIdChapitre
      * @param int $paramTypeEmballage
      * @param string $paramSyntheseAction
-     * @param int $paramComeback
      * @param int $paramIdFtaEtat
      * @param string $paramAbreviationEtat
      * @param int $paramIdFtaRole
      * @return string
      */
-    public static function getAddLinkBeforeConditionnement($paramIdFta, $paramIdChapitre, $paramTypeEmballage, $paramSyntheseAction, $paramComeback, $paramIdFtaEtat, $paramAbreviationEtat, $paramIdFtaRole) {
+    public static function getAddLinkBeforeConditionnement($paramIdFta, $paramIdChapitre, $paramTypeEmballage, $paramSyntheseAction,  $paramIdFtaEtat, $paramAbreviationEtat, $paramIdFtaRole) {
         return 'ajout_conditionnement.php?'
                 . 'id_fta=' . $paramIdFta
                 . '&id_annexe_emballage_groupe_type=' . $paramTypeEmballage
                 . '&id_fta_chapitre=' . $paramIdChapitre
                 . '&synthese_action=' . $paramSyntheseAction
-                . '&comeback=' . $paramComeback
+//                . '&comeback=' . $paramComeback
                 . '&id_fta_etat=' . $paramIdFtaEtat
                 . '&abreviation_fta_etat=' . $paramAbreviationEtat
                 . '&id_fta_role=' . $paramIdFtaRole
@@ -578,19 +577,19 @@ class FtaConditionnementModel extends AbstractModel {
      * @param int $paramIdChapitre
      * @param int $paramTypeEmballage
      * @param string $paramSyntheseAction
-     * @param int $paramComeback
+     
      * @param int $paramIdFtaEtat
      * @param string $paramAbreviationEtat
      * @param int $paramIdFtaRole
      * @return string
      */
-    public static function getAddLinkAfterConditionnement($paramIdFta, $paramIdChapitre, $paramTypeEmballage, $paramSyntheseAction, $paramComeback, $paramIdFtaEtat, $paramAbreviationEtat, $paramIdFtaRole) {
+    public static function getAddLinkAfterConditionnement($paramIdFta, $paramIdChapitre, $paramTypeEmballage, $paramSyntheseAction,  $paramIdFtaEtat, $paramAbreviationEtat, $paramIdFtaRole) {
         return '<a href=ajout_conditionnement.php?'
                 . 'id_fta=' . $paramIdFta
                 . '&id_annexe_emballage_groupe_type=' . $paramTypeEmballage
                 . '&id_fta_chapitre=' . $paramIdChapitre
                 . '&synthese_action=' . $paramSyntheseAction
-                . '&comeback=' . $paramComeback
+//                . '&comeback=' . $paramComeback
                 . '&id_fta_etat=' . $paramIdFtaEtat
                 . '&abreviation_fta_etat=' . $paramAbreviationEtat
                 . '&id_fta_role=' . $paramIdFtaRole . '><img src=../lib/images/plus.png width=22  border=0 valign=middle halign=right />'
@@ -603,13 +602,12 @@ class FtaConditionnementModel extends AbstractModel {
      * @param int $paramIdChapitre
      * @param array $paramIdFtaConditionnement
      * @param string $paramSyntheseAction
-     * @param int $paramComeback
      * @param int $paramIdFtaEtat
      * @param string $paramAbreviationEtat
      * @param int $paramIdFtaRole
      * @return string
      */
-    public static function getDeleteLinkConditionnement($paramIdFta, $paramIdChapitre, $paramIdFtaConditionnement, $paramSyntheseAction, $paramComeback, $paramIdFtaEtat, $paramAbreviationEtat, $paramIdFtaRole) {
+    public static function getDeleteLinkConditionnement($paramIdFta, $paramIdChapitre, $paramIdFtaConditionnement, $paramSyntheseAction, $paramIdFtaEtat, $paramAbreviationEtat, $paramIdFtaRole) {
         foreach ($paramIdFtaConditionnement as $rows) {
             $return[$rows] = '<a href=modification_fiche_post.php?'
                     . 'id_fta=' . $paramIdFta
@@ -617,7 +615,7 @@ class FtaConditionnementModel extends AbstractModel {
                     . '&action=suppression_conditionnement'
                     . '&id_fta_chapitre_encours=' . $paramIdChapitre
                     . '&synthese_action=' . $paramSyntheseAction
-                    . '&comeback=' . $paramComeback
+//                    . '&comeback=' . $paramComeback
                     . '&id_fta_etat=' . $paramIdFtaEtat
                     . '&abreviation_fta_etat=' . $paramAbreviationEtat
                     . '&id_fta_role=' . $paramIdFtaRole . '>

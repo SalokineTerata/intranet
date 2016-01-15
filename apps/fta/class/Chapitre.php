@@ -538,7 +538,7 @@ class Chapitre {
          * Classification
          *
          */
-        $bloc.=$ftaView->listeClassification($isEditable, self::$id_fta_chapitre, $synthese_action, self::$comeback, self::$id_fta_etat, self::$abrevation_etat, self::$id_fta_role);
+        $bloc.=$ftaView->listeClassification($isEditable, self::$id_fta_chapitre, $synthese_action, self::$id_fta_etat, self::$abrevation_etat, self::$id_fta_role);
         /*
          * Deviendra une liste deroulante dépendante des donné choisie dans la classification
          */
@@ -886,13 +886,13 @@ class Chapitre {
         $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_DESCRIPTION_EMBALLAGE);
 
         //Emballages par UVC
-        $bloc.=$ftaView->getHtmlEmballageUVC($id_fta, $idChapitre, $synthese_action, self::$comeback, self::$id_fta_etat, self::$abrevation_etat, self::$id_fta_role);
+        $bloc.=$ftaView->getHtmlEmballageUVC($id_fta, $idChapitre, $synthese_action,  self::$id_fta_etat, self::$abrevation_etat, self::$id_fta_role);
 
         //Emballages par Colis
-        $bloc.=$ftaView->getHtmlEmballageParColis($id_fta, $idChapitre, $synthese_action, self::$comeback, self::$id_fta_etat, self::$abrevation_etat, self::$id_fta_role);
+        $bloc.=$ftaView->getHtmlEmballageParColis($id_fta, $idChapitre, $synthese_action,  self::$id_fta_etat, self::$abrevation_etat, self::$id_fta_role);
 
         //Palette
-        $bloc.=$ftaView->getHtmlEmballagePalette($id_fta, $idChapitre, $synthese_action, self::$comeback, self::$id_fta_etat, self::$abrevation_etat, self::$id_fta_role);
+        $bloc.=$ftaView->getHtmlEmballagePalette($id_fta, $idChapitre, $synthese_action,  self::$id_fta_etat, self::$abrevation_etat, self::$id_fta_role);
 
         return $bloc;
     }
@@ -915,7 +915,7 @@ class Chapitre {
         $ftaView->setFtaChapitreModelById(self::ID_CHAPITRE_IDENTITE);
 
         //Emballages du Colis
-        $bloc.=$ftaView->getHtmlEmballageDuColis($id_fta, $idChapitre, $synthese_action, self::$comeback, self::$id_fta_etat, self::$abrevation_etat, self::$id_fta_role);
+        $bloc.=$ftaView->getHtmlEmballageDuColis($id_fta, $idChapitre, $synthese_action,  self::$id_fta_etat, self::$abrevation_etat, self::$id_fta_role);
 
         return $bloc;
     }
@@ -1074,7 +1074,7 @@ class Chapitre {
         $ftaView->setFtaChapitreModelById(self::ID_CHAPITRE_IDENTITE);
 
         //Tableau d'etiquette composant
-        $bloc.=$ftaView->getHtmlEtiquetteRD($id_fta, self::$id_fta_chapitre, $synthese_action, self::$comeback, self::$id_fta_etat, self::$abrevation_etat, self::$id_fta_role, $isEditable);
+        $bloc.=$ftaView->getHtmlEtiquetteRD($id_fta, self::$id_fta_chapitre, $synthese_action,self::$id_fta_etat, self::$abrevation_etat, self::$id_fta_role, $isEditable);
 
         //Conseil de Réchauffage Validé
         $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_CONSEIL_DE_RECHAUFFAGE);
@@ -1193,7 +1193,7 @@ class Chapitre {
         /**
          * Affichage du tableau de compostion
          */
-        $bloc.=$ftaView->getHtmlEtiquetteComposition($id_fta, self::$id_fta_chapitre, $synthese_action, self::$comeback, self::$id_fta_etat, self::$abrevation_etat, self::$id_fta_role, self::$is_editable);
+        $bloc.=$ftaView->getHtmlEtiquetteComposition($id_fta, self::$id_fta_chapitre, $synthese_action, self::$id_fta_etat, self::$abrevation_etat, self::$id_fta_role, self::$is_editable);
 
         /**
          * Controle du poids net
@@ -1223,7 +1223,7 @@ class Chapitre {
         /**
          * Affichage du tableau de compostion
          */
-        $bloc.=$ftaView->getHtmlEtiquetteComposition($id_fta, self::$id_fta_chapitre, $synthese_action, self::$comeback, self::$id_fta_etat, self::$abrevation_etat, self::$id_fta_role, self::$is_editable);
+        $bloc.=$ftaView->getHtmlEtiquetteComposition($id_fta, self::$id_fta_chapitre, $synthese_action, self::$id_fta_etat, self::$abrevation_etat, self::$id_fta_role, self::$is_editable);
 
         /**
          * Controle du poids net
@@ -1252,7 +1252,7 @@ class Chapitre {
         /**
          * Affichage du tableau de compostion
          */
-        $bloc.=$ftaView->getHtmlEtiquetteComposition($id_fta, self::$id_fta_chapitre, $synthese_action, self::$comeback, self::$id_fta_etat, self::$abrevation_etat, self::$id_fta_role, self::$is_editable);
+        $bloc.=$ftaView->getHtmlEtiquetteComposition($id_fta, self::$id_fta_chapitre, $synthese_action, self::$id_fta_etat, self::$abrevation_etat, self::$id_fta_role, self::$is_editable);
 
 
         /**

@@ -96,7 +96,7 @@ $ListeCLassification = ClassificationFta2Model::showListeDeroulanteClassificatio
 if ($selection_saisonnalite) {
     $bouton_submit = FtaView::getHtmlButtonSubmit();
 }
-$bouton_retour_vers_fta = FtaView::getHtmlButtonReturnFta($idFta,$id_fta_chapitre_encours,$syntheseAction,$comeback,$idFtaEtat,$abreviationFtaEtat,$idFtaRole);
+$bouton_retour_vers_fta = FtaView::getHtmlButtonReturnFta($idFta,$id_fta_chapitre_encours,$syntheseAction,$idFtaEtat,$abreviationFtaEtat,$idFtaRole);
 
 Navigation::initNavigation($idFta, $id_fta_chapitre_encours, $syntheseAction, $comeback, $idFtaEtat, $abreviationFtaEtat, $idFtaRole, FALSE);
 

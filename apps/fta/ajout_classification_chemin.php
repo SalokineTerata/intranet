@@ -91,7 +91,7 @@ ClassificationFta2Model::initClassification($selection_proprietaire1, $selection
         , $selection_activite, $selection_rayon, $selection_environnement, $selection_reseau, $selection_saisonnalite);
 
 
-$ListeCLassification = ClassificationFta2Model::ShowListeDeroulanteClassification2(TRUE);
+$ListeCLassification = ClassificationFta2Model::showListeDeroulanteClassification2(TRUE);
 
 if ($selection_saisonnalite) {
     $bouton_submit = FtaView::getHtmlButtonSubmit();

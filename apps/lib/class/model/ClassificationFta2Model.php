@@ -116,10 +116,11 @@ class ClassificationFta2Model extends AbstractModel {
      * @return string
      */
     public static function getListeClassificationProprietaireGroupeLabel2($paramIdDefaut, $paramIsEditable) {
-        $req = 'SELECT ' . ClassificationArborescenceArticleCategorieContenuModel::KEYNAME . ',' . ClassificationArborescenceArticleCategorieContenuModel::FIELDNAME_NOM_CLASSIFICATION_ARBORESCENCE_ARTICLE_CATEGORIE_CONTENU
-                . ' FROM ' . ClassificationArborescenceArticleCategorieContenuModel::TABLENAME
+        $req = 'SELECT DISTINCT ' . ClassificationArborescenceArticleCategorieContenuModel::KEYNAME . ',' . ClassificationArborescenceArticleCategorieContenuModel::FIELDNAME_NOM_CLASSIFICATION_ARBORESCENCE_ARTICLE_CATEGORIE_CONTENU
+                . ' FROM ' . ClassificationArborescenceArticleCategorieContenuModel::TABLENAME . ',' . ClassificationFta2Model::TABLENAME
                 . ' WHERE ' . ClassificationArborescenceArticleCategorieContenuModel::FIELDNAME_ID_CLASSIFICATION_ARBORESCENCE_ARTICLE_CATEGORIE . '=' . '1'
                 . ' AND ' . ClassificationArborescenceArticleCategorieContenuModel::KEYNAME . '<>' . '0'
+                . ' AND ' . ClassificationArborescenceArticleCategorieContenuModel::KEYNAME . '=' . ClassificationFta2Model::FIELDNAME_ID_PROPRIETAIRE_GROUPE
                 . ' ORDER BY ' . ClassificationArborescenceArticleCategorieContenuModel::FIELDNAME_NOM_CLASSIFICATION_ARBORESCENCE_ARTICLE_CATEGORIE_CONTENU;
 
         $paramNomDefaut = 'selection_proprietaire12';
@@ -407,7 +408,7 @@ class ClassificationFta2Model extends AbstractModel {
      * @param boolean$ paramIsEditable
      * @return string
      */
-    public static function ShowListeDeroulanteClassification2($paramIsEditable) {
+    public static function showListeDeroulanteClassification2($paramIsEditable) {
 
 
         $bloc.= ClassificationFta2Model::getListeClassificationProprietaireGroupeLabel2(self::$idProprietaireGroupe, $paramIsEditable);

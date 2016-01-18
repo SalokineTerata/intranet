@@ -886,13 +886,13 @@ class Chapitre {
         $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_DESCRIPTION_EMBALLAGE);
 
         //Emballages par UVC
-        $bloc.=$ftaView->getHtmlEmballageUVC($id_fta, $idChapitre, $synthese_action,  self::$id_fta_etat, self::$abrevation_etat, self::$id_fta_role);
+        $bloc.=$ftaView->getHtmlEmballageUVC($id_fta, $idChapitre, $synthese_action, self::$id_fta_etat, self::$abrevation_etat, self::$id_fta_role);
 
         //Emballages par Colis
-        $bloc.=$ftaView->getHtmlEmballageParColis($id_fta, $idChapitre, $synthese_action,  self::$id_fta_etat, self::$abrevation_etat, self::$id_fta_role);
+        $bloc.=$ftaView->getHtmlEmballageParColis($id_fta, $idChapitre, $synthese_action, self::$id_fta_etat, self::$abrevation_etat, self::$id_fta_role);
 
         //Palette
-        $bloc.=$ftaView->getHtmlEmballagePalette($id_fta, $idChapitre, $synthese_action,  self::$id_fta_etat, self::$abrevation_etat, self::$id_fta_role);
+        $bloc.=$ftaView->getHtmlEmballagePalette($id_fta, $idChapitre, $synthese_action, self::$id_fta_etat, self::$abrevation_etat, self::$id_fta_role);
 
         return $bloc;
     }
@@ -915,7 +915,7 @@ class Chapitre {
         $ftaView->setFtaChapitreModelById(self::ID_CHAPITRE_IDENTITE);
 
         //Emballages du Colis
-        $bloc.=$ftaView->getHtmlEmballageDuColis($id_fta, $idChapitre, $synthese_action,  self::$id_fta_etat, self::$abrevation_etat, self::$id_fta_role);
+        $bloc.=$ftaView->getHtmlEmballageDuColis($id_fta, $idChapitre, $synthese_action, self::$id_fta_etat, self::$abrevation_etat, self::$id_fta_role);
 
         return $bloc;
     }
@@ -1074,7 +1074,7 @@ class Chapitre {
         $ftaView->setFtaChapitreModelById(self::ID_CHAPITRE_IDENTITE);
 
         //Tableau d'etiquette composant
-        $bloc.=$ftaView->getHtmlEtiquetteRD($id_fta, self::$id_fta_chapitre, $synthese_action,self::$id_fta_etat, self::$abrevation_etat, self::$id_fta_role, $isEditable);
+        $bloc.=$ftaView->getHtmlEtiquetteRD($id_fta, self::$id_fta_chapitre, $synthese_action, self::$id_fta_etat, self::$abrevation_etat, self::$id_fta_role, $isEditable);
 
         //Conseil de Réchauffage Validé
         $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_CONSEIL_DE_RECHAUFFAGE);
@@ -1200,7 +1200,14 @@ class Chapitre {
          */
         $bloc.=$ftaView->getHtmlColisControle();
 
-        //Remarque
+        /**
+         * Environnement de conservation
+         */
+        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_ENVIRONNEMENT_CONSERVATION);
+
+        /**
+         * Remarque
+         */
         $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_REMARQUE);
 
         return $bloc;
@@ -1230,7 +1237,14 @@ class Chapitre {
          */
         $bloc.=$ftaView->getHtmlColisControle();
 
-        //Remarque
+        /**
+         * Environnement de conservation
+         */
+        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_ENVIRONNEMENT_CONSERVATION);
+
+        /**
+         * Remarque
+         */
         $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_REMARQUE);
 
         return $bloc;
@@ -1259,7 +1273,15 @@ class Chapitre {
          * Controle du poids net
          */
         $bloc.=$ftaView->getHtmlColisControle();
-        //Remarque
+
+        /**
+         * Environnement de conservation
+         */
+        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_ENVIRONNEMENT_CONSERVATION);
+
+        /**
+         * Remarque
+         */
         $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_REMARQUE);
 
 

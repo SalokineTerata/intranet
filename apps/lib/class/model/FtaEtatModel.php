@@ -156,7 +156,7 @@ class FtaEtatModel extends AbstractModel {
                                 'SELECT DISTINCT ' . FtaModel::KEYNAME
                                 . ' FROM ' . FtaModel::TABLENAME
                                 . ' WHERE ( ' . '0'
-                                . ' ' . FtaModel::AddIdFta($idFtaEffectue) . ')');
+                                . ' ' . FtaModel::addIdFta($idFtaEffectue) . ')');
 
 
                 break;
@@ -241,7 +241,7 @@ class FtaEtatModel extends AbstractModel {
                                 'SELECT ' . FtaModel::KEYNAME
                                 . ' FROM ' . FtaModel::TABLENAME
                                 . ' WHERE ( ' . '0'
-                                . ' ' . FtaModel::AddIdFta($idFtaEffectue) . ')');
+                                . ' ' . FtaModel::addIdFta($idFtaEffectue) . ')');
 
 
                 break;
@@ -312,7 +312,7 @@ class FtaEtatModel extends AbstractModel {
                                 'SELECT DISTINCT ' . FtaModel::KEYNAME
                                 . ' FROM ' . FtaModel::TABLENAME
                                 . ' WHERE ( ' . '0'
-                                . ' ' . FtaModel::AddIdFta($idFtaEffectue) . ')');
+                                . ' ' . FtaModel::addIdFta($idFtaEffectue) . ')');
                 break;
 
 

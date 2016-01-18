@@ -53,28 +53,17 @@ class FtaChapitreModel extends AbstractModel {
 
         $globalConfig = new GlobalConfig();
         UserModel::checkUserSessionExpired($globalConfig);
-
+        //Récupération des informations préalables
+        //Nom de l'assistante de projet responsable:
         $idUser = $globalConfig->getAuthenticatedUser()->getKeyValue();
+        $mailExpediteur = $globalConfig->getAuthenticatedUser()->getDataField(UserModel::FIELDNAME_MAIL)->getFieldValue();
+        $nomPrenom = $globalConfig->getAuthenticatedUser()->getPrenomNom();
         $idFtaWorkflowStructure = FtaWorkflowStructureModel::getIdFtaWorkflowStructureByIdFtaAndIdChapitre(
                         $paramIdFta, $paramIdChapitre);
         $ftaWorkflowStructureModel = new FtaWorkflowStructureModel($idFtaWorkflowStructure, $paramIdChapitre);
         $idFtaProcessus = $ftaWorkflowStructureModel->getDataField(FtaWorkflowStructureModel::FIELDNAME_ID_FTA_PROCESSUS)->getFieldValue();
         $idFtaWorkflow = $ftaWorkflowStructureModel->getDataField(FtaWorkflowStructureModel::FIELDNAME_ID_FTA_WORKFLOW)->getFieldValue();
 
-
-        //Récupération des informations préalables
-        //Nom de l'assistante de projet responsable:
-        $array = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
-                        'SELECT ' . UserModel::FIELDNAME_PRENOM . ',' . UserModel::FIELDNAME_NOM
-                        . ', ' . UserModel::FIELDNAME_MAIL
-                        . ' FROM ' . UserModel::TABLENAME
-                        . ' WHERE ' . UserModel::KEYNAME
-                        . '=\'' . $idUser . '\' ');
-        foreach ($array as $rows) {
-            $prenom = $rows[UserModel::FIELDNAME_PRENOM];
-            $nom = $rows[UserModel::FIELDNAME_NOM];
-            $mailExpediteur = $rows[UserModel::FIELDNAME_MAIL];
-        }
 
         $arrayFtaSuiviCorrection = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
                         'SELECT ' . FtaSuiviProjetModel::FIELDNAME_CORRECTION_FTA_SUIVI_PROJET . ',' . FtaSuiviProjetModel::FIELDNAME_NOTIFICATION_FTA_SUIVI_PROJET
@@ -88,14 +77,11 @@ class FtaChapitreModel extends AbstractModel {
                 $notificationFtaSuiviProjet = $rowsFtaSuiviCorrection[FtaSuiviProjetModel::FIELDNAME_CORRECTION_FTA_SUIVI_PROJET];
             }
         }
-        //Intégration du commentaire de la correction
-        $newCorrectionFtaSuiviProjet.=
-                date('Y-m-d') . ': '
-                . $prenom . ' ' . $nom . ': \n'//table salaries
-                . $option[FtaSuiviProjetModel::FIELDNAME_CORRECTION_FTA_SUIVI_PROJET]
-                . '\n\n' .
-                $current_correction_fta_suivi_projet
-        ;
+        //Intégration du commentaire de la correction        
+        if ($current_correction_fta_suivi_projet and $option[FtaSuiviProjetModel::FIELDNAME_CORRECTION_FTA_SUIVI_PROJET]) {
+            $fullComment = $option[FtaSuiviProjetModel::FIELDNAME_CORRECTION_FTA_SUIVI_PROJET] . '\n\n' . $current_correction_fta_suivi_projet;
+            $newCorrectionFtaSuiviProjet = FtaController::getComment("Correction d'une Fta", $nomPrenom, $fullComment);
+        }
 //        $newCorrectionFtaSuiviProjet = mysql_real_escape_string($newCorrectionFtaSuiviProjet);
         $newCorrectionFtaSuiviProjet = str_replace("<br/>", "\n", $newCorrectionFtaSuiviProjet);
 
@@ -164,7 +150,7 @@ class FtaChapitreModel extends AbstractModel {
             }
 
             //Envoi des mails
-            $show_din = FtaModel::ShowDin($paramIdFta);
+            $show_din = FtaModel::showDin($paramIdFta);
             $name = $show_din;
 
             if ($return['mail']) {
@@ -172,11 +158,9 @@ class FtaChapitreModel extends AbstractModel {
                 foreach ($return['mail'] as $mail) {
                     $sujetmail = 'FTA/Correction: ' . $name;
                     $destinataire = $mail;
-                    $expediteur = $prenom . ' ' . $nom . ' <' . $mailExpediteur . '>';
+                    $expediteur = $nomPrenom . ' <' . $mailExpediteur . '>';
                     $text = 'Vos chapitres viennent d\'être dévalidés suite à une correction apportée par '
-                            . $prenom
-                            . ' '
-                            . $nom . '.\n\n'
+                            . $nomPrenom . '.\n\n'
                             . 'OBJET DE LA CORRECTION:\n'
                             . '\t' . stripslashes($option[FtaSuiviProjetModel::FIELDNAME_CORRECTION_FTA_SUIVI_PROJET])
                     ;

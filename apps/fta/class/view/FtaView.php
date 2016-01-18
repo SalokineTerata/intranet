@@ -1411,7 +1411,7 @@ class FtaView {
      */
     function getHtmlPoidsColisUVC() {
 
-        $return = $this->getModel()->PoidsDesEmballagesColis();
+        $return = $this->getModel()->poidsDesEmballagesColis();
 
         $htmlPoidColisUVC = new HtmlInputText();
 

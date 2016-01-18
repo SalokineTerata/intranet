@@ -630,19 +630,19 @@ class FtaModel extends AbstractModel {
     }
 
     public function getArrayEmballageTypeUVC() {
-        $this->setDonneeEmballageUVC($this->ArrayEmballages(FtaConditionnementModel::EMBALLAGES_UVC));
+        $this->setDonneeEmballageUVC($this->arrayEmballages(FtaConditionnementModel::EMBALLAGES_UVC));
     }
 
     public function getArrayEmballageTypeParColis() {
-        $this->setDonneeEmballageParColis($this->ArrayEmballages(FtaConditionnementModel::EMBALLAGES_PAR_COLIS));
+        $this->setDonneeEmballageParColis($this->arrayEmballages(FtaConditionnementModel::EMBALLAGES_PAR_COLIS));
     }
 
     public function getArrayEmballageTypeDuColis() {
-        $this->setDonneeEmballageDuColis($this->ArrayEmballages(FtaConditionnementModel::EMBALLAGES_DU_COLIS));
+        $this->setDonneeEmballageDuColis($this->arrayEmballages(FtaConditionnementModel::EMBALLAGES_DU_COLIS));
     }
 
     public function getArrayEmballageTypePalette() {
-        $this->setDonneeEmballagePallette($this->ArrayEmballages(FtaConditionnementModel::EMBALLAGES_PALETTE));
+        $this->setDonneeEmballagePallette($this->arrayEmballages(FtaConditionnementModel::EMBALLAGES_PALETTE));
     }
 
     public function buildArrayEmballageTypeUVC() {
@@ -673,8 +673,8 @@ class FtaModel extends AbstractModel {
         return $this->getDonneeEmballagePallette();
     }
 
-    public function ArrayEmballages($paramGroupeType) {
-        $return = $this->PoidsDesEmballagesColis();
+    public function arrayEmballages($paramGroupeType) {
+        $return = $this->poidsDesEmballagesColis();
 
 
         //Les calculs pour Emballages
@@ -1029,7 +1029,7 @@ class FtaModel extends AbstractModel {
         return $return;
     }
 
-    public function PoidsDesEmballagesColis() {
+    public function poidsDesEmballagesColis() {
         //Les Calculs de la table fta
         $arrayFta = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
                         "SELECT DISTINCT " . FtaModel::FIELDNAME_NOMBRE_UVC_PAR_CARTON . "," . FtaModel::FIELDNAME_POIDS_ELEMENTAIRE
@@ -1142,7 +1142,7 @@ class FtaModel extends AbstractModel {
         return $return;
     }
 
-    public static function AddIdFta($paramIdEffectue) {
+    public static function addIdFta($paramIdEffectue) {
         if ($paramIdEffectue) {
             foreach ($paramIdEffectue as $value) {
                 $req .= " OR " . FtaModel::TABLENAME . "." . FtaModel::KEYNAME . "='" . $value . "' ";
@@ -1151,7 +1151,7 @@ class FtaModel extends AbstractModel {
         return $req;
     }
 
-    public static function AddIdFtaLabel($paramIdEffectue) {
+    public static function addIdFtaLabel($paramIdEffectue) {
         if ($paramIdEffectue) {
             foreach ($paramIdEffectue as $value) {
                 $req .= " OR " . FtaModel::TABLENAME . "." . FtaModel::KEYNAME . "=" . $value[FtaModel::KEYNAME] . " ";
@@ -1184,7 +1184,7 @@ class FtaModel extends AbstractModel {
      * @param int $paramIdFtaWorkflow
      * @return int
      */
-    public static function BuildDuplicationFta($paramIdFta, $paramAction, $paramOption, $paramIdFtaWorkflow) {
+    public static function buildDuplicationFta($paramIdFta, $paramAction, $paramOption, $paramIdFtaWorkflow) {
 
         /*         * ****************************************
           Déclaration et initialisation des variables
@@ -1236,7 +1236,7 @@ class FtaModel extends AbstractModel {
          * ************************* */
 
 
-        $idFtaNew = FtaModel::DuplicationIdFta($paramIdFta);                                                                                    //Récupération de la nouvelle clef
+        $idFtaNew = FtaModel::duplicationIdFta($paramIdFta);                                                                                    //Récupération de la nouvelle clef
         /*
          * Enregsitrement des mises à jour
          */
@@ -1478,7 +1478,7 @@ class FtaModel extends AbstractModel {
      * @param int $paramIdFta
      * @return int
      */
-    public static function DuplicationIdFta($paramIdFta) {
+    public static function duplicationIdFta($paramIdFta) {
         $pdo = DatabaseOperation::executeComplete(
                         " INSERT INTO " . FtaModel::TABLENAME . " (id_access_arti2, OLD_numft, id_fta_workflow,
  commentaire, OLD_id_fta_palettisation, id_dossier_fta, id_version_dossier_fta,
@@ -1558,7 +1558,7 @@ class FtaModel extends AbstractModel {
      * @param type $paramIdFta
      * @return type
      */
-    public static function ShowDin($paramIdFta) {
+    public static function showDin($paramIdFta) {
 
         /*
          * Déclaration des variables
@@ -1615,7 +1615,7 @@ class FtaModel extends AbstractModel {
      * @param int $paramSiteDeProduction
      * @return int
      */
-    public static function CreateFta($paramIdCreateur, $paramIdFtaEtat, $paramIdFtaWorkflow, $paramDesignationCommerciale, $paramDateCreation, $paramSiteDeProduction) {
+    public static function createFta($paramIdCreateur, $paramIdFtaEtat, $paramIdFtaWorkflow, $paramDesignationCommerciale, $paramDateCreation, $paramSiteDeProduction) {
         $Id = DatabaseOperation::executeComplete(
                         "INSERT INTO " . FtaModel::TABLENAME
                         . " ( " . FtaModel::FIELDNAME_CREATEUR

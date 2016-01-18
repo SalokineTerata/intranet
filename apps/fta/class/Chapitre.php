@@ -596,20 +596,20 @@ class Chapitre {
         //Commentaire sur la Fta
         $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_COMMENTAIRE);
 
-        //Liste des corrections apportées
-        $bloc.='<tr class=titre_principal><td>Récapitulatif des corrections</td></tr>';
+        //Historique des mises à jour de la FTA
+        $bloc.='<tr class=titre_principal><td>Historique des actions effectuées sur la Fiche Technique Article</td></tr>';
 
-        $bloc.=$ftaView->getHtmlCorrectionAllChapitres(self::$id_fta_workflow);
+        $bloc.=$ftaModel->getHtmlDataField(FtaModel::FIELDNAME_COMMENTAIRE_MAJ_FTA);
 
         //Liste de tous les commentaires des chapitres
         $bloc.='<tr class=titre_principal><td>Récapitulatif des commentaires</td></tr>';
 
         $bloc.=$ftaView->getHtmlCommentaireAllChapitres(self::$id_fta_workflow);
 
-        //Historique des mises à jour de la FTA
-        $bloc.='<tr class=titre_principal><td>Historique des actions effectuées sur la Fiche Technique Article</td></tr>';
+        //Liste des corrections apportées
+        $bloc.='<tr class=titre_principal><td>Récapitulatif des corrections</td></tr>';
 
-        $bloc.=$ftaModel->getHtmlDataField(FtaModel::FIELDNAME_COMMENTAIRE_MAJ_FTA);
+        $bloc.=$ftaView->getHtmlCorrectionAllChapitres(self::$id_fta_workflow);
 
         return $bloc;
     }
@@ -886,13 +886,13 @@ class Chapitre {
         $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_DESCRIPTION_EMBALLAGE);
 
         //Emballages par UVC
-        $bloc.=$ftaView->getHtmlEmballageUVC($id_fta, $idChapitre, $synthese_action,  self::$id_fta_etat, self::$abrevation_etat, self::$id_fta_role);
+        $bloc.=$ftaView->getHtmlEmballageUVC($id_fta, $idChapitre, $synthese_action, self::$id_fta_etat, self::$abrevation_etat, self::$id_fta_role);
 
         //Emballages par Colis
-        $bloc.=$ftaView->getHtmlEmballageParColis($id_fta, $idChapitre, $synthese_action,  self::$id_fta_etat, self::$abrevation_etat, self::$id_fta_role);
+        $bloc.=$ftaView->getHtmlEmballageParColis($id_fta, $idChapitre, $synthese_action, self::$id_fta_etat, self::$abrevation_etat, self::$id_fta_role);
 
         //Palette
-        $bloc.=$ftaView->getHtmlEmballagePalette($id_fta, $idChapitre, $synthese_action,  self::$id_fta_etat, self::$abrevation_etat, self::$id_fta_role);
+        $bloc.=$ftaView->getHtmlEmballagePalette($id_fta, $idChapitre, $synthese_action, self::$id_fta_etat, self::$abrevation_etat, self::$id_fta_role);
 
         return $bloc;
     }
@@ -915,7 +915,7 @@ class Chapitre {
         $ftaView->setFtaChapitreModelById(self::ID_CHAPITRE_IDENTITE);
 
         //Emballages du Colis
-        $bloc.=$ftaView->getHtmlEmballageDuColis($id_fta, $idChapitre, $synthese_action,  self::$id_fta_etat, self::$abrevation_etat, self::$id_fta_role);
+        $bloc.=$ftaView->getHtmlEmballageDuColis($id_fta, $idChapitre, $synthese_action, self::$id_fta_etat, self::$abrevation_etat, self::$id_fta_role);
 
         return $bloc;
     }
@@ -1074,7 +1074,7 @@ class Chapitre {
         $ftaView->setFtaChapitreModelById(self::ID_CHAPITRE_IDENTITE);
 
         //Tableau d'etiquette composant
-        $bloc.=$ftaView->getHtmlEtiquetteRD($id_fta, self::$id_fta_chapitre, $synthese_action,self::$id_fta_etat, self::$abrevation_etat, self::$id_fta_role, $isEditable);
+        $bloc.=$ftaView->getHtmlEtiquetteRD($id_fta, self::$id_fta_chapitre, $synthese_action, self::$id_fta_etat, self::$abrevation_etat, self::$id_fta_role, $isEditable);
 
         //Conseil de Réchauffage Validé
         $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_CONSEIL_DE_RECHAUFFAGE);

@@ -1200,7 +1200,14 @@ class Chapitre {
          */
         $bloc.=$ftaView->getHtmlColisControle();
 
-        //Remarque
+        /**
+         * Environnement de conservation
+         */
+        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_ENVIRONNEMENT_CONSERVATION);
+
+        /**
+         * Remarque
+         */
         $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_REMARQUE);
 
         return $bloc;
@@ -1230,7 +1237,14 @@ class Chapitre {
          */
         $bloc.=$ftaView->getHtmlColisControle();
 
-        //Remarque
+        /**
+         * Environnement de conservation
+         */
+        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_ENVIRONNEMENT_CONSERVATION);
+
+        /**
+         * Remarque
+         */
         $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_REMARQUE);
 
         return $bloc;
@@ -1259,7 +1273,15 @@ class Chapitre {
          * Controle du poids net
          */
         $bloc.=$ftaView->getHtmlColisControle();
-        //Remarque
+
+        /**
+         * Environnement de conservation
+         */
+        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_ENVIRONNEMENT_CONSERVATION);
+
+        /**
+         * Remarque
+         */
         $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_REMARQUE);
 
 

@@ -55,7 +55,6 @@ class FtaChapitreModel extends AbstractModel {
         UserModel::checkUserSessionExpired($globalConfig);
         //Récupération des informations préalables
         //Nom de l'assistante de projet responsable:
-        $idUser = $globalConfig->getAuthenticatedUser()->getKeyValue();
         $mailExpediteur = $globalConfig->getAuthenticatedUser()->getDataField(UserModel::FIELDNAME_MAIL)->getFieldValue();
         $nomPrenom = $globalConfig->getAuthenticatedUser()->getPrenomNom();
         $idFtaWorkflowStructure = FtaWorkflowStructureModel::getIdFtaWorkflowStructureByIdFtaAndIdChapitre(

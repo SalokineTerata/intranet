@@ -21,7 +21,7 @@ class FtaTransitionModel {
      * @param type $paramListeChapitres
      * @return array
      */
-    public static function BuildTransitionFta($paramIdFta, $paramAbreviationFtaTransition, $paramCommentaireMajFta, $paramIdWorkflow, $paramListeChapitres, $dateEcheanceFta) {
+    public static function buildTransitionFta($paramIdFta, $paramAbreviationFtaTransition, $paramCommentaireMajFta, $paramIdWorkflow, $paramListeChapitres, $dateEcheanceFta) {
         /*
          * Codes de retour de la fonction:
          */
@@ -40,6 +40,7 @@ class FtaTransitionModel {
         $idDossierFta = $ftaModel->getDataField(FtaModel::FIELDNAME_DOSSIER_FTA)->getFieldValue();
         $codeArticleLdc = $ftaModel->getDataField(FtaModel::FIELDNAME_CODE_ARTICLE_LDC)->getFieldValue();
         $siteDeProduction = $ftaModel->getDataField(FtaModel::FIELDNAME_SITE_PRODUCTION)->getFieldValue();
+        $old_nouveau_maj_fta = $ftaModel->getDataField(FtaModel::FIELDNAME_COMMENTAIRE_MAJ_FTA)->getFieldValue();
         $ftaEtatModel = new FtaEtatModel($idFtaEtatByIdFta);
         $initial_abreviation_fta_etat = $ftaEtatModel->getDataField(FtaEtatModel::FIELDNAME_ABREVIATION)->getFieldValue();
         $globalConfig = new GlobalConfig();
@@ -203,6 +204,9 @@ class FtaTransitionModel {
         foreach ($arrayIdFtaEtat as $value) {
             $idFtaEtat = $value[FtaEtatModel::KEYNAME];
         }
+        if ($old_nouveau_maj_fta) {
+            $nouveau_maj_fta = $nouveau_maj_fta . $old_nouveau_maj_fta;
+        }
 
         $req = "UPDATE " . FtaModel::TABLENAME
                 . " SET " . FtaModel::FIELDNAME_ID_FTA_ETAT . "=" . $idFtaEtat //Identifiant de "retirer"
@@ -274,7 +278,7 @@ class FtaTransitionModel {
      * @param int $id_fta
      * @return array
      */
-    public static function BuildListeDiffusionTransition($id_fta) {
+    public static function buildListeDiffusionTransition($id_fta) {
 
         $logTransition = "";
 //Déclaration des variables
@@ -421,7 +425,7 @@ class FtaTransitionModel {
      * @param type $paramListeDiffusion
      * @param type $paramCommentaire
      */
-    public static function BuildEnvoiMailDetail($paramIdFta, $paramListeDiffusion, $paramCommentaire) {
+    public static function buildEnvoiMailDetail($paramIdFta, $paramListeDiffusion, $paramCommentaire) {
 
         /**
          * Initilisation
@@ -556,8 +560,7 @@ class FtaTransitionModel {
                 . "\n"
                 . "INFORMATIONS DE DEBUGGAGE:\n"
                 . $logTransition
-        ;
-        {
+        ; {
             $expediteur = $prenom . " " . $nom . " <" . $mail . ">";
             envoismail($sujetmail, $corp, $mail, $expediteur, $typeMail);
         }
@@ -570,7 +573,7 @@ class FtaTransitionModel {
      * @param string $paramSubject
      * @param string $paramLogTransition
      */
-    public static function BuildEnvoiMailGlobal($paramSelectionFta, $paramListeDiffusion, $paramSubject, $paramLogTransition) {
+    public static function buildEnvoiMailGlobal($paramSelectionFta, $paramListeDiffusion, $paramSubject, $paramLogTransition) {
 
         /**
          * Utilisateur connecté
@@ -673,8 +676,7 @@ class FtaTransitionModel {
                 . $text
                 . "\n\n"
                 . $paramLogTransition
-        ;
-        {
+        ; {
             $expediteur = $prenom . " " . $nom . " <" . $mailUser . ">";
             envoismail($sujetmail, $corp, $mailUser, $expediteur, $typeMail);
         }

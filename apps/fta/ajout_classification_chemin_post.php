@@ -71,7 +71,26 @@ switch ($action) {
 
         break;
 
+    case 'gestionnaire':
 
+        
+          $modelFta = new FtaModel($paramIdFta);
+        if ($selection_saisonnalite) {
+            //Enregistrement du nouvel éléments de classification
+            $idClassification2 = ClassificationFta2Model::getIdFtaClassification2(
+                            $selection_proprietaire1, $selection_proprietaire2
+                            , $selection_marque, $selection_activite
+                            , $selection_rayon, $selection_environnement
+                            , $selection_reseau, $selection_saisonnalite);
+            $modelFta->getDataField(FtaModel::FIELDNAME_ID_FTA_CLASSIFICATION2)->setFieldValue($idClassification2);
+        }
+        $abreviationFtaEtat = $modelFta->getModelFtaEtat()->getDataField(FtaEtatModel::FIELDNAME_ABREVIATION)->getFieldValue();
+
+        $modelFta->saveToDatabase();
+        //Redirection
+        header('Location: modification_classification.php');
+
+        break;
 
     /*     * **********
       Fin de switch

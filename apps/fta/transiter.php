@@ -82,16 +82,13 @@ $idFtaWorkflow = $ftaModel->getDataField(FtaModel::FIELDNAME_WORKFLOW)->getField
 $arrayIdFtaRoleAcces = FtaRoleModel::getArrayIdFtaRoleByIdUserAndWorkflow($idUser, $idFtaWorkflow);
 $idFtaRole = $arrayIdFtaRoleAcces["0"];
 
-$dataFieldCommentaire = $ftaModel->getDataField(FtaModel::FIELDNAME_COMMENTAIRE_MAJ_FTA);
-$htmlFieldCommentaire = Html::getHtmlObjectFromDataField($dataFieldCommentaire);
-$htmlFieldCommentaire->getAttributesGlobal()->setIsIconNextEnabledToFalse();
-$htmlFieldCommentaire->setHtmlRenderToTable();
-$htmlFieldCommentaire->setIsEditable(TRUE);
-$NOM_commentaire_maj_fta = $htmlFieldCommentaire->getHtmlResult();
-//$NOM_commentaire_maj_fta = str_replace('<>');
 /**
  * Affichage commentaire à modifier
  */
+$NOM_commentaire_maj_fta = $ftaModel->getHtmlCommentaireMajFta();
+
+//$NOM_commentaire_maj_fta = str_replace('<>');
+
 /**
  * Recupération des élement de la Fta en cours
  */
@@ -217,6 +214,16 @@ if ($action == FtaEtatModel::ETAT_ABREVIATION_VALUE_MODIFICATION or $action == '
     $tableau_chapitre.= $dateEcheanceFtaHtml . '</table></td></tr>'
             . '</table>'
     ;
+    $affichageCommentaire = " <tr>
+            <td class=titre_principal>
+                Historiques des commentaire de mise à jour
+            </td>
+        </tr>
+        <tr  class=contenu>
+     
+           ' . $NOM_commentaire_maj_fta . '
+
+        </tr>";
 }
 //Tableau des chapitres espace de travail
 //if ($action == 'W') {
@@ -255,7 +262,7 @@ echo '
      <input type=hidden name=id_fta_role value=' . $idFtaRole . '>
      <input type=hidden name=id_fta_workflow value=' . $idFtaWorkflow . '>
      <input type=hidden name=id_dossier_fta value=' . $idDossierFta . '>
-     <input type=hidden name=commentaire_maj_fta value=`' . $commentaireMajFta . '`>
+     <input type=hidden name=' . FtaModel::TABLENAME . '_' . FtaModel::FIELDNAME_COMMENTAIRE_MAJ_FTA . '_' . $idFta . ' value=`' . $commentaireMajFta . '`>
      <input type=hidden name=demande_abreviation_fta_transition value=' . $demande_abreviation_fta_transition . '>
      <input type=hidden name=synthese_action value=' . $syntheseAction . '>
     <' . $html_table . '>
@@ -320,16 +327,7 @@ echo '
             </td>
         </tr>
     </table>
-        <tr>
-            <td class=titre_principal>
-                Historiques des commentaire de mise à jour
-            </td>
-        </tr>
-        <tr>
-     
-           ' . $NOM_commentaire_maj_fta . '
-
-        </tr>
+       ' . $affichageCommentaire . '
         <tr>
             <td>
           <center>

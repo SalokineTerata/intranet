@@ -1248,8 +1248,7 @@ class FtaModel extends AbstractModel {
                 "UPDATE " . FtaModel::TABLENAME
                 . " SET " . FtaModel::FIELDNAME_DATE_CREATION . "='" . date("Y-m-d")                                                               //Date de la création de cet Article
                 . "', " . FtaModel::FIELDNAME_ACTIF . "=" . 0                                                                                   //Tant que la fiche n'est pas activée, la flag reste à 0.
-                . ", " . FtaModel::FIELDNAME_CODE_ARTICLE . "=" . 'NULL'                                                                         //Le Code Article Agrologic ne peut être présent 2 fois (index unique)
-                . ", " . FtaModel::FIELDNAME_CREATEUR . "=" . $idUser
+                . ", " . FtaModel::FIELDNAME_CODE_ARTICLE . "=" . 'NULL'                                                                       //Le Code Article Agrologic ne peut être présent 2 fois (index unique)               
                 . ", " . FtaModel::FIELDNAME_WORKFLOW . "=" . $paramIdFtaWorkflow
                 . ", " . FtaModel::FIELDNAME_SITE_PRODUCTION . "=" . $paramOption["site_de_production"]
                 . " WHERE " . FtaModel::KEYNAME . "=" . $idFtaNew
@@ -1275,6 +1274,7 @@ class FtaModel extends AbstractModel {
                         . ", " . FtaModel::FIELDNAME_EAN_UVC . "=" . "0"                                                                       //Suppression EAN Article
                         . ", " . FtaModel::FIELDNAME_EAN_PALETTE . "=" . "0"                                                                   //Suppression EAN Palette
                         . ", " . FtaModel::FIELDNAME_POURCENTAGE_AVANCEMENT . "=" . "\"0%\""                                                                   //Suppression EAN Palette
+                        . ", " . FtaModel::FIELDNAME_CREATEUR . "=" . $idUser
                         . " WHERE " . FtaModel::KEYNAME . "=" . $idFtaNew
                 );
                 break;
@@ -1287,7 +1287,8 @@ class FtaModel extends AbstractModel {
                         "UPDATE " . self::TABLENAME
                         . " SET " . self::FIELDNAME_VERSION_DOSSIER_FTA . "=\"" . $idFtaVersion                                                       //La première FTA commence en version "0"
                         . "\", " . self::FIELDNAME_ID_FTA_ETAT . "=\"" . $idFtaEtatNew                                                          //Nouvel éta de la FTA données par l'argument $option de la fonction (cf. table fta_etat)
-                        . "\", " . self::FIELDNAME_DATE_ECHEANCE_FTA . "=\"" . $paramOption["date_echeance_fta"]                                                              //Nouvel éta de la FTA données par l'argument $option de la fonction (cf. table fta_etat)
+                        . "\", " . self::FIELDNAME_DATE_ECHEANCE_FTA . "=\"" . $paramOption["date_echeance_fta"]
+                        //Nouvel éta de la FTA données par l'argument $option de la fonction (cf. table fta_etat)
                         . "\" WHERE " . self::KEYNAME . "=" . $idFtaNew
                 );
                 break;
@@ -1665,6 +1666,23 @@ class FtaModel extends AbstractModel {
                         . " WHERE " . FtaModel::FIELDNAME_DOSSIER_FTA . "=" . $paramIdDossierFta
         );
         return $arrayIdFtaChange;
+    }
+
+    /**
+     * Affiche le commentaire d'un changement d'état de la Fta
+     * @return string
+     */
+    function getHtmlCommentaireMajFta() {
+        $HtmlTableName = self::TABLENAME
+                . '_'
+                . self::FIELDNAME_COMMENTAIRE_MAJ_FTA
+                . '_'
+                . $this->getKeyValue()
+        ;
+        $htmlTextAreaResult = "<td><textarea id=\"" . $HtmlTableName
+                . "\" cols=\"140\" rows=\"10\" name=\"" . $HtmlTableName
+                . "\" rows=15></textarea></td>";
+        return $htmlTextAreaResult;
     }
 
     /**

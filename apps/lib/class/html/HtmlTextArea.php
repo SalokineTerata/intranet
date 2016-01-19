@@ -33,7 +33,7 @@ class HtmlTextArea extends AbstractHtmlGlobalElement {
         $this->getAttributes()->getRows()->setValue(self::DEFAULT_ROWS_SIZE);
     }
 
-    protected function initObject(
+    public function initObject(
     $paramName
     , $paramLabel
     , $paramValue

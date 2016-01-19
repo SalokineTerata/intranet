@@ -33,7 +33,7 @@ if (!$idFta) {
 $idFtaRole = Lib::getParameterFromRequest('id_fta_role');
 $idFtaWorkflow = Lib::getParameterFromRequest('id_fta_workflow');
 $dateEcheanceFta = Lib::getParameterFromRequest(FtaModel::TABLENAME . "_" . FtaModel::FIELDNAME_DATE_ECHEANCE_FTA . "_" . $idFta);
-$new_commentaire_maj_ftatmp = Lib::getParameterFromRequest('fta_commentaire_maj_fta_' . $idFta);
+$new_commentaire_maj_ftatmp = Lib::getParameterFromRequest(FtaModel::TABLENAME . "_" . FtaModel::FIELDNAME_COMMENTAIRE_MAJ_FTA . "_" . $idFta);
 $new_commentaire_maj_fta = addslashes($new_commentaire_maj_ftatmp);
 
 if (!$new_commentaire_maj_fta) {
@@ -85,7 +85,7 @@ if (!$action) {
             or substr($new_commentaire_maj_fta, 0, 1) == ' '
             )
             and
-            $abreviation_fta_transition <> FtaEtatModel::ETAT_ABREVIATION_VALUE_VALIDE
+            $abreviation_fta_transition == FtaEtatModel::ETAT_ABREVIATION_VALUE_MODIFICATION
     ) {
         $titre = 'Informations manquantes';
         $message = 'Vous devez spécifier un commentaire sur la mise à jour.';
@@ -125,7 +125,7 @@ if (!$action) {
             //Transition de la FTA
             $commentaire_maj_fta = $new_commentaire_maj_fta;
 
-            $t = FtaTransitionModel::BuildTransitionFta($idFta, $abreviation_fta_transition, $commentaire_maj_fta, $idFtaWorkflow, $ListeDesChapitres,$dateEcheanceFta);
+            $t = FtaTransitionModel::buildTransitionFta($idFta, $abreviation_fta_transition, $commentaire_maj_fta, $idFtaWorkflow, $ListeDesChapitres, $dateEcheanceFta);
 
             //Codes de retour de la fonction:
             //   0: FTA correctement transitée
@@ -136,7 +136,7 @@ if (!$action) {
                 switch ($t["0"]) {
                     case 0:
                         //Récupération de la liste diffusion
-                        $liste_destinataire = FtaTransitionModel::BuildListeDiffusionTransition($idFta);
+                        $liste_destinataire = FtaTransitionModel::buildListeDiffusionTransition($idFta);
 
                         if ($liste_destinataire) {
                             $liste_global = $liste_global + $liste_destinataire;
@@ -145,7 +145,7 @@ if (!$action) {
                                 $idFta;
                                 $liste_diffusion = $liste_destinataire;
                                 $commentaire = $new_commentaire_maj_fta;
-                                FtaTransitionModel::BuildEnvoiMailDetail($idFta, $liste_diffusion, $commentaire);
+                                FtaTransitionModel::buildEnvoiMailDetail($idFta, $liste_diffusion, $commentaire);
                             }
                         }
                         break;
@@ -171,7 +171,7 @@ if (!$action) {
             $selection_fta;
             $liste_diffusion = $liste_global;
             $commentaire = $new_commentaire_maj_fta;
-            FtaTransitionModel::BuildEnvoiMailGlobal($selection_fta, $liste_diffusion, $subject, $liste_diffusion["log"]);
+            FtaTransitionModel::buildEnvoiMailGlobal($selection_fta, $liste_diffusion, $subject, $liste_diffusion["log"]);
         }
 
 

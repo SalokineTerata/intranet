@@ -128,7 +128,7 @@ class TableauFicheView {
         /**
          * Bouton d'accès au rendu PDF de la FTA
          */
-        $lien .= self::getHtmlLinkPDF($abreviation_fta_etat, $paramIdFta);
+        $lien .= self::getHtmlLinkPDF($abreviation_fta_etat, $paramIdFta,$idWorkflowFtaEncours);
 
         /**
          * Bouton d'accès à la transition
@@ -338,11 +338,11 @@ class TableauFicheView {
         return $lien;
     }
 
-    static private function getHtmlLinkPDF($paramAbreviationFtaEtat, $paramIdFta) {
+    static private function getHtmlLinkPDF($paramAbreviationFtaEtat, $paramIdFta,$paramIdWorkflow) {
 
         $lien = "";
         if (
-                (Acl::getValueAccesRights(Acl::ACL_FTA_IMPRESSION) and ( $paramAbreviationFtaEtat == FtaEtatModel::ETAT_ABREVIATION_VALUE_VALIDE ))
+                (Acl::getValueAccesRights(Acl::ACL_FTA_IMPRESSION) and ( $paramAbreviationFtaEtat == FtaEtatModel::ETAT_ABREVIATION_VALUE_VALIDE ))or ( $paramIdWorkflow == FtaWorkflowModel::ID_WORKFLOW_PRESENTATION)
         ) {
 
             $lien .= "  "

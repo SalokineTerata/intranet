@@ -73,6 +73,7 @@ $id_fta_chapitre_encours = Lib::getParameterFromRequest('id_fta_chapitre_encours
 $idFtaClassification2 = Lib::getParameterFromRequest('id_fta_classification2');
 $checkIdFtaClasssification = Lib::getParameterFromRequest('checkIdFtaClasssification');
 
+$modificationGestionnaire = Lib::getParameterFromRequest('gestionnaire');
 
 
 
@@ -96,12 +97,17 @@ $ListeCLassification = ClassificationFta2Model::showListeDeroulanteClassificatio
 if ($selection_saisonnalite) {
     $bouton_submit = FtaView::getHtmlButtonSubmit();
 }
-$bouton_retour_vers_fta = FtaView::getHtmlButtonReturnFta($idFta,$id_fta_chapitre_encours,$syntheseAction,$idFtaEtat,$abreviationFtaEtat,$idFtaRole);
+if (!$modificationGestionnaire) {
+    $bouton_retour_vers_fta = FtaView::getHtmlButtonReturnFta($idFta, $id_fta_chapitre_encours, $syntheseAction, $idFtaEtat, $abreviationFtaEtat, $idFtaRole);
 
-Navigation::initNavigation($idFta, $id_fta_chapitre_encours, $syntheseAction, $comeback, $idFtaEtat, $abreviationFtaEtat, $idFtaRole, FALSE);
+    Navigation::initNavigation($idFta, $id_fta_chapitre_encours, $syntheseAction, $comeback, $idFtaEtat, $abreviationFtaEtat, $idFtaRole, FALSE);
 
-$navigue = Navigation::getHtmlNavigationBar();
+    $navigue = Navigation::getHtmlNavigationBar();
+}
 
+if ($modificationGestionnaire) {
+    $action = "gestionnaire";
+}
 
 
 /* * *********

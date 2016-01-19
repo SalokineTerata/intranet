@@ -65,7 +65,7 @@ class FtaController {
                 . "Utilisateur: " . $paramUser . "\n";
 
         if ($paramCommentaire) {
-            $newComment .= "Commentaire: \n" . $paramCommentaire;
+            $newComment .= "Commentaire:   " . $paramCommentaire;
         }
 
         return $newComment;

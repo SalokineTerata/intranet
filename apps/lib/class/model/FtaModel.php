@@ -1787,4 +1787,30 @@ class FtaModel extends AbstractModel {
         return $idFtaToCompare;
     }
 
+    private function functionName($param) {
+        
+        /*
+        Au niveau DataField:
+        $this->getRulesValidation()->checkAllRules();
+        
+        
+        checkRules
+           --> récupérer d'intranet_colum_info, les règles à tester
+         * --> boucle parcourant les règles
+         *      --> Pour chaque règle getWarningMessage()
+         *      --> Récupération du message propre à la règle et enregistrement
+         *          dans l'attribut warningMessageListe du DataField
+         * 
+         * 
+         * 
+         * 
+         * Au niveau du HtmlDataField
+         * --> Getteur de l'attribut warningMessageListe
+         * --> Si valeur existante alors affichage.
+        */
+        
+        
+        
+    }
+    
 }

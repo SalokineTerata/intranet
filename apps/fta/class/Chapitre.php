@@ -1843,6 +1843,9 @@ class Chapitre {
         //Code Article LDC, code Article arcadia
         $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_CODE_ARTICLE_LDC);
 
+        if ($ftaView->isDataValidationSuccessful() == FALSE) {
+            $this->setDataValidationSuccessfulToFalse();
+        }
         return $bloc;
     }
 

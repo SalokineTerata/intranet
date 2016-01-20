@@ -130,8 +130,15 @@ class FtaView {
     }
 
     public function getHtmlDataField($paramFieldName) {
+        
+        $dataField = $this->getModel()->getDataField($paramFieldName);
+
+        if ($dataField->isDataValidationSuccessful() == FALSE){
+            $this->setDataValidationSuccessfulToFalse();
+        }
+        
         return Html::convertDataFieldToHtml(
-                        $this->getModel()->getDataField($paramFieldName)
+                        $dataField
                         , $this->getIsEditable()
         );
     }
@@ -176,6 +183,9 @@ class FtaView {
      */
     public function getHtmlDesignationInterneAgis() {
         $DIN = $this->getModel()->getDataField(FtaModel::FIELDNAME_LIBELLE)->getFieldValue();
+        if ($this->getModel()->getDataField(FtaModel::FIELDNAME_LIBELLE)->isDataValidationSuccessful() == FALSE){
+            $this->setDataValidationSuccessfulToFalse();
+        }
         if (!$DIN) {
             $DesignationCommerciale = $this->getModel()->getDataField(FtaModel::FIELDNAME_DESIGNATION_COMMERCIALE)->getFieldValue();
             $suffixeAgrologicFta = $this->getModel()->getDataField(FtaModel::FIELDNAME_SUFFIXE_AGROLOGIC_FTA)->getFieldValue();

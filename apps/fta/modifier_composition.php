@@ -419,13 +419,13 @@ if ($proprietaire and $mode_etiquette_fta_composition == 4) {
 } else {
     $edit_allow = false;
 }
-if ($edit_allow) {
-    $ftaComposantView2->setIsEditable($edit_allow);
+
+$ftaComposantView2->setIsEditable($edit_allow);
 
 //Libellé produit de l'étiquette
 //$bloc .= "<tr><td " . $color_modif . " >" . DatabaseDescription::getFieldDocLabel(FtaComposantModel::TABLENAME, FtaComposantModel::FIELDNAME_ETIQUETTE_LIBELLE_FTA_COMPOSITION) . "</td><td " . $color_modif . ">";
 //
-//if ($edit_allow) {
+if ($mode_etiquette_fta_composition == 4) {
 //    $bloc .= "<textarea name=" . FtaComposantModel::FIELDNAME_ETIQUETTE_LIBELLE_FTA_COMPOSITION . " rows=4 cols=75>" . $etiquette_libelle_fta_composition . "</textarea>";
     $bloc .=$ftaComposantView2->getHtmlDataField(FtaComposantModel::FIELDNAME_ETIQUETTE_LIBELLE_FTA_COMPOSITION);
 
@@ -509,6 +509,8 @@ if ($edit_allow) {
 //    $bloc .= "<input type=hidden name=" . FtaComposantModel::FIELDNAME_ETIQUETTE_DECOMPOSITION_POIDS_FTA_COMPOSANT . " value='" . $etiquette_decomposition_poids_fta_composant . "'/>";
     $bloc .=$ftaComposantView2->getHtmlDataField(FtaComposantModel::FIELDNAME_ETIQUETTE_DECOMPOSITION_POIDS_FTA_COMPOSANT);
 }
+
+
 //}
 //Liste des composants regroupés sur cette étiquette
 if ($id_fta_composant) {

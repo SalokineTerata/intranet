@@ -64,7 +64,22 @@ $bloc .= "<" . $html_table . "><tr class=titre>"
         . "</tr>";
 
 $arrayDossierComplet = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
-                "SELECT DISTINCT " . FtaModel::FIELDNAME_DOSSIER_FTA . " FROM " . FtaModel::TABLENAME
+                "SELECT DISTINCT " . FtaModel::FIELDNAME_DOSSIER_FTA
+                . " FROM " . FtaModel::TABLENAME . " , " . FtaActionSiteModel::TABLENAME
+                . " , " . FtaWorkflowModel::TABLENAME . " , " . IntranetDroitsAccesModel::TABLENAME
+                . " , " . IntranetActionsModel::TABLENAME . " , " . ClassificationFta2Model::TABLENAME
+                . " WHERE " . FtaModel::TABLENAME . "." . FtaModel::FIELDNAME_WORKFLOW
+                . " = " . FtaWorkflowModel::TABLENAME . "." . FtaWorkflowModel::KEYNAME
+                . " AND " . FtaModel::TABLENAME . "." . FtaModel::FIELDNAME_ID_FTA_CLASSIFICATION2 . " IS NULL "
+                . " AND " . FtaWorkflowModel::TABLENAME . "." . FtaWorkflowModel::FIELDNAME_ID_INTRANET_ACTIONS
+                . "=" . IntranetActionsModel::TABLENAME . "." . IntranetActionsModel::FIELDNAME_PARENT_INTRANET_ACTIONS
+                . " AND " . IntranetDroitsAccesModel::TABLENAME . "." . IntranetDroitsAccesModel::FIELDNAME_ID_INTRANET_ACTIONS
+                . "=" . IntranetActionsModel::TABLENAME . "." . IntranetActionsModel::KEYNAME
+                . " AND " . FtaActionSiteModel::TABLENAME . "." . FtaActionSiteModel::FIELDNAME_ID_INTRANET_ACTIONS
+                . " IN (" . IntranetActionsModel::TABLENAME . "." . IntranetActionsModel::KEYNAME . ")"
+                . ' AND ( 0 ' . IntranetActionsModel::addIdIntranetAction($_SESSION[Acl::ACL_INTRANET_ACTIONS_VALIDE]) . ")"
+                . " AND " . IntranetDroitsAccesModel::FIELDNAME_NIVEAU_INTRANET_DROITS_ACCES . "=" . IntranetNiveauAccesModel::NIVEAU_GENERIC_TRUE
+                . " AND " . IntranetDroitsAccesModel::FIELDNAME_ID_USER . "=" . $idUser                                                  // Nous recuperons l'identifiant de l'utilisateur connecté
 );
 $nbDeResulta = count($arrayDossierComplet);
 
@@ -77,8 +92,22 @@ $pagination = AccueilFta::paginerClassification($nbMaxParPage, $numeroDePageCour
 
 $arrayDossier = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
                 "SELECT DISTINCT " . FtaModel::FIELDNAME_DOSSIER_FTA
-                . " FROM " . FtaModel::TABLENAME
-                . " ORDER BY " . FtaModel::FIELDNAME_ID_FTA_ETAT . "," . FtaModel::FIELDNAME_DESIGNATION_COMMERCIALE
+                . " FROM " . FtaModel::TABLENAME . " , " . FtaActionSiteModel::TABLENAME
+                . " , " . FtaWorkflowModel::TABLENAME . " , " . IntranetDroitsAccesModel::TABLENAME
+                . " , " . IntranetActionsModel::TABLENAME . " , " . ClassificationFta2Model::TABLENAME
+                . " WHERE " . FtaModel::TABLENAME . "." . FtaModel::FIELDNAME_WORKFLOW
+                . " = " . FtaWorkflowModel::TABLENAME . "." . FtaWorkflowModel::KEYNAME
+                . " AND " . FtaModel::TABLENAME . "." . FtaModel::FIELDNAME_ID_FTA_CLASSIFICATION2 . " IS NULL "
+                . " AND " . FtaWorkflowModel::TABLENAME . "." . FtaWorkflowModel::FIELDNAME_ID_INTRANET_ACTIONS
+                . "=" . IntranetActionsModel::TABLENAME . "." . IntranetActionsModel::FIELDNAME_PARENT_INTRANET_ACTIONS
+                . " AND " . IntranetDroitsAccesModel::TABLENAME . "." . IntranetDroitsAccesModel::FIELDNAME_ID_INTRANET_ACTIONS
+                . "=" . IntranetActionsModel::TABLENAME . "." . IntranetActionsModel::KEYNAME
+                . " AND " . FtaActionSiteModel::TABLENAME . "." . FtaActionSiteModel::FIELDNAME_ID_INTRANET_ACTIONS
+                . " IN (" . IntranetActionsModel::TABLENAME . "." . IntranetActionsModel::KEYNAME . ")"
+                . ' AND ( 0 ' . IntranetActionsModel::addIdIntranetAction($_SESSION[Acl::ACL_INTRANET_ACTIONS_VALIDE]) . ")"
+                . " AND " . IntranetDroitsAccesModel::FIELDNAME_NIVEAU_INTRANET_DROITS_ACCES . "=" . IntranetNiveauAccesModel::NIVEAU_GENERIC_TRUE
+                . " AND " . IntranetDroitsAccesModel::FIELDNAME_ID_USER . "=" . $idUser                                                  // Nous recuperons l'identifiant de l'utilisateur connecté
+                . " ORDER BY " . FtaWorkflowModel::TABLENAME . "." . FtaWorkflowModel::KEYNAME . "," . FtaModel::FIELDNAME_ID_FTA_ETAT . "," . FtaModel::FIELDNAME_DESIGNATION_COMMERCIALE
                 . " LIMIT " . $nbMaxParPage . " OFFSET " . $debut
 );
 foreach ($arrayDossier as $rowsDossier) {
@@ -94,13 +123,12 @@ foreach ($arrayDossier as $rowsDossier) {
     $arrayContenu = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
                     " SELECT DISTINCT " . FtaWorkflowModel::FIELDNAME_DESCRIPTION_FTA_WORKFLOW . "," . FtaEtatModel::FIELDNAME_NOM_FTA_ETAT
                     . "," . FtaModel::FIELDNAME_DOSSIER_FTA . "," . FtaModel::FIELDNAME_VERSION_DOSSIER_FTA
-                    . "," . FtaModel::FIELDNAME_CODE_ARTICLE_LDC . "," . FtaModel::FIELDNAME_DESIGNATION_COMMERCIALE                    
-                    . "," . FtaModel::KEYNAME
+                    . "," . FtaModel::FIELDNAME_CODE_ARTICLE_LDC . "," . FtaModel::FIELDNAME_DESIGNATION_COMMERCIALE
+                    . "," . FtaModel::KEYNAME . "," . FtaEtatModel::TABLENAME . "." . FtaEtatModel::KEYNAME
+                    . "," . FtaEtatModel::FIELDNAME_ABREVIATION
                     . " FROM " . FtaModel::TABLENAME . "," . ClassificationFta2Model::TABLENAME
                     . "," . FtaWorkflowModel::TABLENAME . "," . FtaEtatModel::TABLENAME
-                    . " WHERE " . FtaModel::TABLENAME . "." . FtaModel::FIELDNAME_ID_FTA_CLASSIFICATION2
-                    . " IS NULL " 
-                    . " AND " . FtaModel::TABLENAME . "." . FtaModel::FIELDNAME_ID_FTA_ETAT
+                    . " WHERE " . FtaModel::TABLENAME . "." . FtaModel::FIELDNAME_ID_FTA_ETAT
                     . "=" . FtaEtatModel::TABLENAME . "." . FtaEtatModel::KEYNAME
                     . " AND " . FtaModel::TABLENAME . "." . FtaModel::FIELDNAME_WORKFLOW
                     . "=" . FtaWorkflowModel::TABLENAME . "." . FtaWorkflowModel::KEYNAME
@@ -110,6 +138,8 @@ foreach ($arrayDossier as $rowsDossier) {
     foreach ($arrayContenu as $rowsContenu) {
         $descriptionFtaWorkflow = $rowsContenu[FtaWorkflowModel::FIELDNAME_DESCRIPTION_FTA_WORKFLOW];
         $nomFtaEtat = $rowsContenu[FtaEtatModel::FIELDNAME_NOM_FTA_ETAT];
+        $idFtaEtat = $rowsContenu[FtaEtatModel::KEYNAME];
+        $abrviationFtaEtat = $rowsContenu[FtaEtatModel::FIELDNAME_ABREVIATION];
         $idDossier = $rowsContenu[FtaModel::FIELDNAME_DOSSIER_FTA];
         $idVersionDossier = $rowsContenu[FtaModel::FIELDNAME_VERSION_DOSSIER_FTA];
         $codeArticleLdc = $rowsContenu[FtaModel::FIELDNAME_CODE_ARTICLE_LDC];
@@ -132,10 +162,14 @@ foreach ($arrayDossier as $rowsDossier) {
                 . "<td>" . $codeArticleLdc . "</td>"
                 . "<td>" . $designationCommercialeFta . "</td>"
                 . "<td>" . $classificationGroupe
-                               . "</td>"
+                . "</td>"
                 . "<td>  <a href="
                 . "ajout_classification_chemin.php?id_fta=" . $idFta
-                . "&id_fta_classification2=" . $idClassificationFta2
+                . "&id_fta_chapitre_encours=1"
+                . "&synthese_action=encours"
+                . "&id_fta_etat=" . $idFtaEtat
+                . "&abreviation_fta_etat=" . $abrviationFtaEtat
+                . "&id_fta_role=" . $idFtaRole
                 . "&gestionnaire=1 > Ajouter une classification</td></tr>"
 
         ;

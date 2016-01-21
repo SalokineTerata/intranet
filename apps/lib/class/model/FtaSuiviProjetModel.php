@@ -466,7 +466,7 @@ class FtaSuiviProjetModel extends AbstractModel {
      *  1/Etat validé:
      *  Créer les nouveaux suivis de projet manquant pour l'esapce de travail destination
      *  Signer les nouveaux chapitres automatiquement avec les identifiants de l'utilisateur ayant provoquer la changement d'espace.
-     *  Dans le commentaire des suivis de projet nouvellement créés, ajouter la mention "Changement de l'espace travail $WF_ORIGINE vers l'espace de travail $WF_DESTINATION par $USER le $DATE_$HEURE".
+     *  Dans le commentaire des suivis de projet nouvellement créés, ajouter la mention "Changement de l'espace travail $WF_ORIGINE vers l'espace de travail $WF_DESTINATION par $USER le $DATE_$HEURE". (ancienne version)
      *  Supprimer les suivis de projet des chapitres n'appartenant plus à l'espace de travail destination.
      * 2/Etat modifié:
      *  Supprimer les suivis de projet des chapitres n'appartenant plus à l'espace de travail destination.
@@ -474,15 +474,14 @@ class FtaSuiviProjetModel extends AbstractModel {
      * 3/Etat archivé / Etat retiré:
      * Supprimer les suivis de projet des chapitres n'appartenant plus à l'espace de travail destination.
      * Créer les nouveaux suivis de projet manquant pour l'esapce de travail destination
-     *  Dans le commentaire des suivis de projet nouvellement créés, ajouter la mention "Changement de l'espace travail $WF_ORIGINE vers l'espace de travail $WF_DESTINATION par $USER le $DATE_$HEURE".
+     *  Dans le commentaire des suivis de projet nouvellement créés, ajouter la mention "Changement de l'espace travail $WF_ORIGINE vers l'espace de travail $WF_DESTINATION par $USER le $DATE_$HEURE".(ancienne version)
      * Signer tous chapitres non-signés automatiquement avec les identifiants de l'utilisateur ayant provoquer la changement d'espace.
      * @param int $paramIdFta
      * @param int $paramIdFtaWorkflowNew
      * @param string $paramArbreviationFta
      * @param int $paramIdUser
-     * @param string $paramCommentaire
      */
-    public static function createNewChapitresFromNewWorkflow($paramIdFta, $paramIdFtaWorkflowNew, $paramArbreviationFta, $paramIdUser, $paramCommentaire) {
+    public static function createNewChapitresFromNewWorkflow($paramIdFta, $paramIdFtaWorkflowNew, $paramArbreviationFta, $paramIdUser) {
         /**
          * Initialisation des nouveau chapitres de l'espace de travail
          */
@@ -518,11 +517,9 @@ class FtaSuiviProjetModel extends AbstractModel {
                     DatabaseOperation::execute(
                             "INSERT INTO " . FtaSuiviProjetModel::TABLENAME
                             . "(" . FtaSuiviProjetModel::FIELDNAME_ID_FTA
-                            . ", " . FtaSuiviProjetModel::FIELDNAME_COMMENTAIRE_SUIVI_PROJET
                             . ", " . FtaSuiviProjetModel::FIELDNAME_ID_FTA_CHAPITRE
                             . ", " . FtaSuiviProjetModel::FIELDNAME_SIGNATURE_VALIDATION_SUIVI_PROJET
                             . ") VALUES (" . $paramIdFta
-                            . ", " . "\"" . $paramCommentaire . "\""
                             . ", " . $rowsChapitre[FtaWorkflowStructureModel::FIELDNAME_ID_FTA_CHAPITRE]
                             . ", " . $paramIdUser . " )"
                     );

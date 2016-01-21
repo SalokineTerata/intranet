@@ -128,6 +128,7 @@ $navigue . "
      <input type=\"hidden\" name=\"abreviation_fta_etat\" id=\"abreviation_fta_etat\" value=\"" . $abreviationFtaEtat . "\" />
      <input type=\"hidden\" name=\"id_fta_etat\" id=\"id_fta_etat\" value=\"" . $idFtaEtat . "\" />
      <input type=\"hidden\" name=\"id_fta_role\" id=\"id_fta_role\" value=\"" . $idFtaRole . "\" />
+     <input type=\"hidden\" name=\"gestionnaire\" id=\"gestionnaire\" value=\"" . $modificationGestionnaire . "\" />
      <input type=\"hidden\" name=\"comeback\" id=\"comeback\" value=\"" . $comeback . "\" />
      <input type=\"hidden\" name=\"id_fta_chapitre_encours\" id=\"id_fta_chapitre_encours\" value=\"" . $id_fta_chapitre_encours . "\" />
 

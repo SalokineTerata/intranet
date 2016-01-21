@@ -387,6 +387,8 @@
         idFtaEtat = document.getElementById("id_fta_etat").value;
         abreviationFtaEtat = document.getElementById("abreviation_fta_etat").value;
         idFtaRole = document.getElementById("id_fta_role").value;
+        gestionnaire = document.getElementById("gestionnaire").value;
+
         //if (i == 0) return;
         url = "ajout_classification_chemin.php?id_fta=" + idFta
                 + "&id_fta_chapitre_encours=" + id_fta_chapitre_encours
@@ -396,7 +398,8 @@
                 + "&abreviation_fta_etat=" + abreviationFtaEtat
                 + "&id_fta_role=" + idFtaRole
                 + "&selection_proprietaire1=" + document.form_action.selection_proprietaire12.options[proprietaire1].value
-                + "&checkIdFtaClasssification=1";
+                + "&checkIdFtaClasssification=1"
+                + "&gestionnaire=" + gestionnaire;
         parent.location.href = url;
     }
 
@@ -410,6 +413,8 @@
         idFtaEtat = document.getElementById("id_fta_etat").value;
         abreviationFtaEtat = document.getElementById("abreviation_fta_etat").value;
         idFtaRole = document.getElementById("id_fta_role").value;
+        gestionnaire = document.getElementById("gestionnaire").value;
+
         //if (i == 0) return;
         url = "ajout_classification_chemin.php?id_fta=" + idFta
                 + "&id_fta_chapitre_encours=" + id_fta_chapitre_encours
@@ -421,6 +426,7 @@
                 + "&selection_proprietaire1=" + document.form_action.selection_proprietaire12.options[proprietaire1].value
                 + "&selection_proprietaire2=" + document.form_action.selection_proprietaire22.options[proprietaire2].value
                 + "&checkIdFtaClasssification=1"
+                + "&gestionnaire=" + gestionnaire
                 ;
         parent.location.href = url;
     }
@@ -435,6 +441,8 @@
         idFtaEtat = document.getElementById("id_fta_etat").value;
         abreviationFtaEtat = document.getElementById("abreviation_fta_etat").value;
         idFtaRole = document.getElementById("id_fta_role").value;
+        gestionnaire = document.getElementById("gestionnaire").value;
+
         url = "ajout_classification_chemin.php?id_fta=" + idFta
                 + "&id_fta_chapitre_encours=" + id_fta_chapitre_encours
                 + "&synthese_action=" + syntheseAction
@@ -446,7 +454,7 @@
                 + "&selection_proprietaire2=" + document.form_action.selection_proprietaire22.options[proprietaire2].value
                 + "&selection_marque=" + document.form_action.selection_marque2.options[marque].value
                 + "&checkIdFtaClasssification=1"
-
+                + "&gestionnaire=" + gestionnaire
                 ;
         parent.location.href = url;
     }
@@ -462,6 +470,8 @@
         idFtaEtat = document.getElementById("id_fta_etat").value;
         abreviationFtaEtat = document.getElementById("abreviation_fta_etat").value;
         idFtaRole = document.getElementById("id_fta_role").value;
+        gestionnaire = document.getElementById("gestionnaire").value;
+
         //if (i == 0) return;
         url = "ajout_classification_chemin.php?id_fta=" + idFta
                 + "&id_fta_chapitre_encours=" + id_fta_chapitre_encours
@@ -475,7 +485,7 @@
                 + "&selection_marque=" + document.form_action.selection_marque2.options[marque].value
                 + "&selection_activite=" + document.form_action.selection_activite2.options[activite].value
                 + "&checkIdFtaClasssification=1"
-
+                + "&gestionnaire=" + gestionnaire
                 ;
         parent.location.href = url;
     }
@@ -492,6 +502,8 @@
         idFtaEtat = document.getElementById("id_fta_etat").value;
         abreviationFtaEtat = document.getElementById("abreviation_fta_etat").value;
         idFtaRole = document.getElementById("id_fta_role").value;
+        gestionnaire = document.getElementById("gestionnaire").value;
+
         //if (i == 0) return;
         url = "ajout_classification_chemin.php?id_fta=" + idFta
                 + "&id_fta_chapitre_encours=" + id_fta_chapitre_encours
@@ -506,7 +518,7 @@
                 + "&selection_activite=" + document.form_action.selection_activite2.options[activite].value
                 + "&selection_rayon=" + document.form_action.selection_rayon2.options[rayon].value
                 + "&checkIdFtaClasssification=1"
-
+                + "&gestionnaire=" + gestionnaire
                 ;
         parent.location.href = url;
     }
@@ -524,6 +536,8 @@
         idFtaEtat = document.getElementById("id_fta_etat").value;
         abreviationFtaEtat = document.getElementById("abreviation_fta_etat").value;
         idFtaRole = document.getElementById("id_fta_role").value;
+        gestionnaire = document.getElementById("gestionnaire").value;
+
         //if (i == 0) return;
         url = "ajout_classification_chemin.php?id_fta=" + idFta
                 + "&id_fta_chapitre_encours=" + id_fta_chapitre_encours
@@ -539,7 +553,7 @@
                 + "&selection_rayon=" + document.form_action.selection_rayon2.options[rayon].value
                 + "&selection_environnement=" + document.form_action.selection_environnement2.options[environnement].value
                 + "&checkIdFtaClasssification=1"
-
+                + "&gestionnaire=" + gestionnaire
                 ;
         parent.location.href = url;
     }
@@ -554,6 +568,8 @@
         idFta = document.getElementById("id_fta").value;
         syntheseAction = document.getElementById("synthese_action").value;
         id_fta_chapitre_encours = document.getElementById("id_fta_chapitre_encours").value;
+        gestionnaire = document.getElementById("gestionnaire").value;
+
 //        comeback = document.getElementById("comeback").value;
         idFtaEtat = document.getElementById("id_fta_etat").value;
         abreviationFtaEtat = document.getElementById("abreviation_fta_etat").value;
@@ -574,7 +590,7 @@
                 + "&selection_environnement=" + document.form_action.selection_environnement2.options[environnement].value
                 + "&selection_reseau=" + document.form_action.selection_reseau2.options[reseau].value
                 + "&checkIdFtaClasssification=1"
-
+                + "&gestionnaire=" + gestionnaire
                 ;
         parent.location.href = url;
     }
@@ -594,6 +610,8 @@
         idFtaEtat = document.getElementById("id_fta_etat").value;
         abreviationFtaEtat = document.getElementById("abreviation_fta_etat").value;
         idFtaRole = document.getElementById("id_fta_role").value;
+        gestionnaire = document.getElementById("gestionnaire").value;
+
         //if (i == 0) return;
         url = "ajout_classification_chemin.php?id_fta=" + idFta
                 + "&id_fta_chapitre_encours=" + id_fta_chapitre_encours
@@ -611,6 +629,7 @@
                 + "&selection_reseau=" + document.form_action.selection_reseau2.options[reseau].value
                 + "&selection_saisonnalite=" + document.form_action.selection_saisonnalite2.options[saisonnalite].value
                 + "&checkIdFtaClasssification=1"
+                + "&gestionnaire=" + gestionnaire
                 ;
         parent.location.href = url;
     }

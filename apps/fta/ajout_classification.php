@@ -60,7 +60,7 @@ $bloc .= "<" . $html_table . "><tr class=titre>"
         . "<td>Code Article</td>"
         . "<td>Désignation Commerciale</td>"
         . "<td>Classification actuelle</td>"
-        . "<td>Modifier une classification</td>"
+        . "<td>Ajouter une classification</td>"
         . "</tr>";
 
 $arrayDossierComplet = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
@@ -94,13 +94,12 @@ foreach ($arrayDossier as $rowsDossier) {
     $arrayContenu = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
                     " SELECT DISTINCT " . FtaWorkflowModel::FIELDNAME_DESCRIPTION_FTA_WORKFLOW . "," . FtaEtatModel::FIELDNAME_NOM_FTA_ETAT
                     . "," . FtaModel::FIELDNAME_DOSSIER_FTA . "," . FtaModel::FIELDNAME_VERSION_DOSSIER_FTA
-                    . "," . FtaModel::FIELDNAME_CODE_ARTICLE_LDC . "," . FtaModel::FIELDNAME_DESIGNATION_COMMERCIALE
-                    . "," . ClassificationFta2Model::TABLENAME . "." . ClassificationFta2Model::KEYNAME
+                    . "," . FtaModel::FIELDNAME_CODE_ARTICLE_LDC . "," . FtaModel::FIELDNAME_DESIGNATION_COMMERCIALE                    
                     . "," . FtaModel::KEYNAME
                     . " FROM " . FtaModel::TABLENAME . "," . ClassificationFta2Model::TABLENAME
                     . "," . FtaWorkflowModel::TABLENAME . "," . FtaEtatModel::TABLENAME
                     . " WHERE " . FtaModel::TABLENAME . "." . FtaModel::FIELDNAME_ID_FTA_CLASSIFICATION2
-                    . "=" . ClassificationFta2Model::TABLENAME . "." . ClassificationFta2Model::KEYNAME
+                    . " IS NULL " 
                     . " AND " . FtaModel::TABLENAME . "." . FtaModel::FIELDNAME_ID_FTA_ETAT
                     . "=" . FtaEtatModel::TABLENAME . "." . FtaEtatModel::KEYNAME
                     . " AND " . FtaModel::TABLENAME . "." . FtaModel::FIELDNAME_WORKFLOW
@@ -115,17 +114,17 @@ foreach ($arrayDossier as $rowsDossier) {
         $idVersionDossier = $rowsContenu[FtaModel::FIELDNAME_VERSION_DOSSIER_FTA];
         $codeArticleLdc = $rowsContenu[FtaModel::FIELDNAME_CODE_ARTICLE_LDC];
         $designationCommercialeFta = $rowsContenu[FtaModel::FIELDNAME_DESIGNATION_COMMERCIALE];
-        $idClassificationFta2 = $rowsContenu[ClassificationFta2Model::KEYNAME];
+//        $idClassificationFta2 = $rowsContenu[ClassificationFta2Model::KEYNAME];
         $idFta = $rowsContenu[FtaModel::KEYNAME];
 
-        $classificationGroupe = ClassificationArborescenceArticleCategorieContenuModel::getElementClassificationFta($idClassificationFta2, ClassificationFta2Model::FIELDNAME_ID_PROPRIETAIRE_GROUPE);
-        $classificationEnseigne = ClassificationArborescenceArticleCategorieContenuModel::getElementClassificationFta($idClassificationFta2, ClassificationFta2Model::FIELDNAME_ID_PROPRIETAIRE_ENSEIGNE);
-        $classificationMarque = ClassificationArborescenceArticleCategorieContenuModel::getElementClassificationFta($idClassificationFta2, ClassificationFta2Model::FIELDNAME_ID_MARQUE);
-        $classificationActivite = ClassificationArborescenceArticleCategorieContenuModel::getElementClassificationFta($idClassificationFta2, ClassificationFta2Model::FIELDNAME_ID_ACTIVITE);
-        $classificationRayon = ClassificationArborescenceArticleCategorieContenuModel::getElementClassificationFta($idClassificationFta2, ClassificationFta2Model::FIELDNAME_ID_RAYON);
-        $classificationEnvironnement = ClassificationArborescenceArticleCategorieContenuModel::getElementClassificationFta($idClassificationFta2, ClassificationFta2Model::FIELDNAME_ID_ENVIRONNEMENT);
-        $classificationReseau = ClassificationArborescenceArticleCategorieContenuModel::getElementClassificationFta($idClassificationFta2, ClassificationFta2Model::FIELDNAME_ID_RESEAU);
-        $classificationSaisonalite = ClassificationArborescenceArticleCategorieContenuModel::getElementClassificationFta($idClassificationFta2, ClassificationFta2Model::FIELDNAME_ID_SAISONNALITE);
+//        $classificationGroupe = ClassificationArborescenceArticleCategorieContenuModel::getElementClassificationFta($idClassificationFta2, ClassificationFta2Model::FIELDNAME_ID_PROPRIETAIRE_GROUPE);
+//        $classificationEnseigne = ClassificationArborescenceArticleCategorieContenuModel::getElementClassificationFta($idClassificationFta2, ClassificationFta2Model::FIELDNAME_ID_PROPRIETAIRE_ENSEIGNE);
+//        $classificationMarque = ClassificationArborescenceArticleCategorieContenuModel::getElementClassificationFta($idClassificationFta2, ClassificationFta2Model::FIELDNAME_ID_MARQUE);
+//        $classificationActivite = ClassificationArborescenceArticleCategorieContenuModel::getElementClassificationFta($idClassificationFta2, ClassificationFta2Model::FIELDNAME_ID_ACTIVITE);
+//        $classificationRayon = ClassificationArborescenceArticleCategorieContenuModel::getElementClassificationFta($idClassificationFta2, ClassificationFta2Model::FIELDNAME_ID_RAYON);
+//        $classificationEnvironnement = ClassificationArborescenceArticleCategorieContenuModel::getElementClassificationFta($idClassificationFta2, ClassificationFta2Model::FIELDNAME_ID_ENVIRONNEMENT);
+//        $classificationReseau = ClassificationArborescenceArticleCategorieContenuModel::getElementClassificationFta($idClassificationFta2, ClassificationFta2Model::FIELDNAME_ID_RESEAU);
+//        $classificationSaisonalite = ClassificationArborescenceArticleCategorieContenuModel::getElementClassificationFta($idClassificationFta2, ClassificationFta2Model::FIELDNAME_ID_SAISONNALITE);
 
 
         $bloc.= "<tr  class=contenu ><td>" . $descriptionFtaWorkflow . "</td>"
@@ -133,18 +132,11 @@ foreach ($arrayDossier as $rowsDossier) {
                 . "<td>" . $codeArticleLdc . "</td>"
                 . "<td>" . $designationCommercialeFta . "</td>"
                 . "<td>" . $classificationGroupe
-                . "/" . $classificationEnseigne
-                . "/" . $classificationMarque
-                . "/" . $classificationActivite
-                . "/" . $classificationRayon
-                . "/" . $classificationEnvironnement
-                . "/" . $classificationReseau
-                . "/" . $classificationSaisonalite
-                . "</td>"
+                               . "</td>"
                 . "<td>  <a href="
                 . "ajout_classification_chemin.php?id_fta=" . $idFta
                 . "&id_fta_classification2=" . $idClassificationFta2
-                . "&gestionnaire=1 > Modifier une classification</td></tr>"
+                . "&gestionnaire=1 > Ajouter une classification</td></tr>"
 
         ;
     }

@@ -174,54 +174,55 @@ switch ($action) {
                 . "AND ( 0"
         ;
 
-        $operator = "";
-        $text_article = "";
-        while (list($key, $idFta) = each($tab_fta)) {
-            if ($idFta) {
-                $req .="$operator fta.id_fta='" . $idFta . "' ";
-                $operator = "OR";
-            }
-        }
-        $req .=" ) ";
-        //echo $req;
-
-        $result = DatabaseOperation::query($req);
-        $sujetmail = "FTA/Mise à jour de l'emballage: " . $nom_fte_fournisseur . " - " . $reference_fournisseur_annexe_emballage;
-        $text = "Bonjour,\n"
-                . "La Fiche Technique Emballage (FTE) \"" . $nom_fte_fournisseur . " - " . $reference_fournisseur_annexe_emballage . "\" vient d'être actualisée.\n"
-                . "\n"
-                . "Les Fiches Techniques Articles validées suivantes sont maintenant à jour:\n"
-        ;
-        $destinataire = "InformatiqueSupport.AVIGNON@agis-sa.fr,";
-        $expediteur = "InformatiqueSupport.AVIGNON@agis-sa.fr";
-        $operateur = "";
-        $text_article = "";
-        while ($rows_mail = mysql_fetch_array($result)) {
-            $text_article[] = $rows_mail["CODE_ARTICLE"] . " - " . $rows_mail["LIBELLE"] . "\n";
-            $destinataire.=$operateur . $rows_mail["mail"];
-            $operateur = ",";
-        }
-        //Reconstitution de la liste des articles affectées
-        if ($text_article) {
-            $text_article = array_unique($text_article);
-
-            $text_article = implode("", $text_article);
-        }
-
-        //Finalisation du mail
-        $text.=$text_article;
-        $text.= "\n"
-                . "Bonne journée.\n"
-                . "Intranet Agis\n"
-        ;
-
-        //print_r($destinataire);
-        //$sujetmail="test4";
-        //$text="test4";
-        //$destinataire="InformatiqueSupport.AVIGNON@agis-sa.fr,boris.sanegre@agis-sa.fr";
-        envoismail($sujetmail, $text, $destinataire, $expediteur);
-
-
+//        $operator = "";
+//        $text_article = "";
+//        while (list($key, $idFta) = each($tab_fta)) {
+//            if ($idFta) {
+//                $req .="$operator fta.id_fta='" . $idFta . "' ";
+//                $operator = "OR";
+//            }
+//        }
+//        $req .=" ) ";
+//        //echo $req;
+//
+//        $result = DatabaseOperation::query($req);
+//        $sujetmail = "FTA/Mise à jour de l'emballage: " . $nom_fte_fournisseur . " - " . $reference_fournisseur_annexe_emballage;
+//        $text = "Bonjour,\n"
+//                . "La Fiche Technique Emballage (FTE) \"" . $nom_fte_fournisseur . " - " . $reference_fournisseur_annexe_emballage . "\" vient d'être actualisée.\n"
+//                . "\n"
+//                . "Les Fiches Techniques Articles validées suivantes sont maintenant à jour:\n"
+//        ;
+//        $destinataire = "InformatiqueSupport.AVIGNON@agis-sa.fr,";
+//        $expediteur = "InformatiqueSupport.AVIGNON@agis-sa.fr";
+//        $operateur = "";
+//        $text_article = "";
+//        if ($result) {
+//            while ($rows_mail = mysql_fetch_array($result)) {
+//                $text_article[] = $rows_mail["CODE_ARTICLE"] . " - " . $rows_mail["LIBELLE"] . "\n";
+//                $destinataire.=$operateur . $rows_mail["mail"];
+//                $operateur = ",";
+//            }
+//
+//            //Reconstitution de la liste des articles affectées
+//            if ($text_article) {
+//                $text_article = array_unique($text_article);
+//
+//                $text_article = implode("", $text_article);
+//            }
+//
+//            //Finalisation du mail
+//            $text.=$text_article;
+//            $text.= "\n"
+//                    . "Bonne journée.\n"
+//                    . "Intranet Agis\n"
+//            ;
+//
+//            //print_r($destinataire);
+//            //$sujetmail="test4";
+//            //$text="test4";
+//            //$destinataire="InformatiqueSupport.AVIGNON@agis-sa.fr,boris.sanegre@agis-sa.fr";
+//            envoismail($sujetmail, $text, $destinataire, $expediteur);
+//        }
 
 
         //Redirection

@@ -250,14 +250,15 @@ class FtaComposantView {
     }
 
     /**
-     * Liste des étiqettes verso 
+     * Liste des options étiqettes
      * @param boolean $paramIsEditable
      * @return string
      */
     function getListeModeEtiquette($paramIsEditable) {
         $HtmlList = new HtmlListSelect();
         $activationCodification = $this->getFtaModel()->getDataField(FtaModel::FIELDNAME_ACTIVATION_CODESOFT)->getFieldValue();
-        if ($activationCodification == "2" or $activationCodification == "3") {
+        $codePSFValue = $this->getFtaComposantModel()->getDataField(FtaComposantModel::FIELDNAME_CODE_PRODUIT_AGROLOGIC_FTA_NOMENCLATURE)->getFieldValue();
+        if (($activationCodification == "2" or $activationCodification == "3") and $codePSFValue) {
             $sqlCondi = " ";
         } else {
             $sqlCondi = " WHERE " . AnnexeModeEtiquetteModel::FIELDNAME_ETIQUETTE_ACTIF . "=0 ";

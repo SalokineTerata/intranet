@@ -703,15 +703,15 @@ class FtaModel extends AbstractModel {
         if ($paramGroupeType == AnnexeEmballageGroupeTypeModel::EMBALLAGE_DU_COLIS) {
             if (count($array) > 1) {
                 $titre = UserInterfaceMessage::FR_WARNING_NOT_HANDLE_TITLE;
-                $message = UserInterfaceMessage::FR_WARNING_EMBALLAGE_COLIS;
-                afficher_message($titre, $message, $redirection);
+                $message = UserInterfaceMessage::FR_WARNING_EMBALLAGE_COLIS;                
+                afficher_message($titre, $message, $redirection,TRUE);
             }
         }
         if ($paramGroupeType == AnnexeEmballageGroupeTypeModel::EMBALLAGE_PALETTE) {
             if (count($array) > 1) {
                 $titre = UserInterfaceMessage::FR_WARNING_NOT_HANDLE_TITLE;
                 $message = UserInterfaceMessage::FR_WARNING_EMBALLAGE_PALETTE;
-                afficher_message($titre, $message, $redirection);
+                afficher_message($titre, $message, $redirection,TRUE);
             }
         }
 

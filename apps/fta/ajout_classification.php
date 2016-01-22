@@ -62,7 +62,9 @@ $bloc .= "<" . $html_table . "><tr class=titre>"
         . "<td>Classification actuelle</td>"
         . "<td>Ajouter une classification</td>"
         . "</tr>";
-
+/**
+ * On récupère le tableau complet des dossier Fta n'ayant pas de classification
+ */
 $arrayDossierComplet = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
                 "SELECT DISTINCT " . FtaModel::FIELDNAME_DOSSIER_FTA
                 . " FROM " . FtaModel::TABLENAME . " , " . FtaActionSiteModel::TABLENAME
@@ -90,6 +92,9 @@ $nbMaxParPage = "200";
 $debut = ($numeroDePageCourante - '1') * $nbMaxParPage;
 $pagination = AccueilFta::paginerClassification($nbMaxParPage, $numeroDePageCourante, '4', '4', '1', '1', $nbDeResulta);
 
+/**
+ * On récupère le tableau limité des dossier Fta n'ayant pas de classification
+ */
 $arrayDossier = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
                 "SELECT DISTINCT " . FtaModel::FIELDNAME_DOSSIER_FTA
                 . " FROM " . FtaModel::TABLENAME . " , " . FtaActionSiteModel::TABLENAME
@@ -107,14 +112,36 @@ $arrayDossier = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
                 . ' AND ( 0 ' . IntranetActionsModel::addIdIntranetAction($_SESSION[Acl::ACL_INTRANET_ACTIONS_VALIDE]) . ")"
                 . " AND " . IntranetDroitsAccesModel::FIELDNAME_NIVEAU_INTRANET_DROITS_ACCES . "=" . IntranetNiveauAccesModel::NIVEAU_GENERIC_TRUE
                 . " AND " . IntranetDroitsAccesModel::FIELDNAME_ID_USER . "=" . $idUser                                                  // Nous recuperons l'identifiant de l'utilisateur connecté
-                . " ORDER BY " . FtaWorkflowModel::TABLENAME . "." . FtaWorkflowModel::KEYNAME . "," . FtaModel::FIELDNAME_ID_FTA_ETAT . "," . FtaModel::FIELDNAME_DESIGNATION_COMMERCIALE
+                . " ORDER BY " . FtaWorkflowModel::TABLENAME . "." . FtaWorkflowModel::KEYNAME
+                . "," . FtaModel::FIELDNAME_ID_FTA_ETAT
+                . "," . FtaModel::FIELDNAME_CODE_ARTICLE_LDC
+                . "," . FtaModel::FIELDNAME_DESIGNATION_COMMERCIALE
                 . " LIMIT " . $nbMaxParPage . " OFFSET " . $debut
 );
+/**
+ * On récupère la dernièer version
+ */
 foreach ($arrayDossier as $rowsDossier) {
     $idDossierFta = $rowsDossier[FtaModel::FIELDNAME_DOSSIER_FTA];
     $arrayVersionDossier = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
                     "SELECT  MAX( " . FtaModel::FIELDNAME_VERSION_DOSSIER_FTA . " ) as " . FtaModel::FIELDNAME_VERSION_DOSSIER_FTA
-                    . " FROM " . FtaModel::TABLENAME . " WHERE id_dossier_fta=" . $idDossierFta
+                    . " FROM " . FtaModel::TABLENAME
+                    . " , " . FtaActionSiteModel::TABLENAME
+                    . " , " . FtaWorkflowModel::TABLENAME . " , " . IntranetDroitsAccesModel::TABLENAME
+                    . " , " . IntranetActionsModel::TABLENAME . " , " . ClassificationFta2Model::TABLENAME
+                    . " WHERE " . FtaModel::FIELDNAME_DOSSIER_FTA . "=" . $idDossierFta
+                    . " AND " . FtaModel::TABLENAME . "." . FtaModel::FIELDNAME_WORKFLOW
+                    . " = " . FtaWorkflowModel::TABLENAME . "." . FtaWorkflowModel::KEYNAME
+                    . " AND " . FtaModel::TABLENAME . "." . FtaModel::FIELDNAME_ID_FTA_CLASSIFICATION2 . " IS NULL "
+                    . " AND " . FtaWorkflowModel::TABLENAME . "." . FtaWorkflowModel::FIELDNAME_ID_INTRANET_ACTIONS
+                    . "=" . IntranetActionsModel::TABLENAME . "." . IntranetActionsModel::FIELDNAME_PARENT_INTRANET_ACTIONS
+                    . " AND " . IntranetDroitsAccesModel::TABLENAME . "." . IntranetDroitsAccesModel::FIELDNAME_ID_INTRANET_ACTIONS
+                    . "=" . IntranetActionsModel::TABLENAME . "." . IntranetActionsModel::KEYNAME
+                    . " AND " . FtaActionSiteModel::TABLENAME . "." . FtaActionSiteModel::FIELDNAME_ID_INTRANET_ACTIONS
+                    . " IN (" . IntranetActionsModel::TABLENAME . "." . IntranetActionsModel::KEYNAME . ")"
+                    . ' AND ( 0 ' . IntranetActionsModel::addIdIntranetAction($_SESSION[Acl::ACL_INTRANET_ACTIONS_VALIDE]) . ")"
+                    . " AND " . IntranetDroitsAccesModel::FIELDNAME_NIVEAU_INTRANET_DROITS_ACCES . "=" . IntranetNiveauAccesModel::NIVEAU_GENERIC_TRUE
+                    . " AND " . IntranetDroitsAccesModel::FIELDNAME_ID_USER . "=" . $idUser
     );
     foreach ($arrayVersionDossier as $rowsVersionDossier) {
         $idVersionDossierFta = $rowsVersionDossier[FtaModel::FIELDNAME_VERSION_DOSSIER_FTA];
@@ -134,45 +161,41 @@ foreach ($arrayDossier as $rowsDossier) {
                     . "=" . FtaWorkflowModel::TABLENAME . "." . FtaWorkflowModel::KEYNAME
                     . " AND " . FtaModel::FIELDNAME_DOSSIER_FTA . "=" . $idDossierFta
                     . " AND " . FtaModel::FIELDNAME_VERSION_DOSSIER_FTA . "=" . $idVersionDossierFta
+                    . " AND " . FtaModel::TABLENAME . "." . FtaModel::FIELDNAME_ID_FTA_CLASSIFICATION2 . " IS NULL "
     );
-    foreach ($arrayContenu as $rowsContenu) {
-        $descriptionFtaWorkflow = $rowsContenu[FtaWorkflowModel::FIELDNAME_DESCRIPTION_FTA_WORKFLOW];
-        $nomFtaEtat = $rowsContenu[FtaEtatModel::FIELDNAME_NOM_FTA_ETAT];
-        $idFtaEtat = $rowsContenu[FtaEtatModel::KEYNAME];
-        $abrviationFtaEtat = $rowsContenu[FtaEtatModel::FIELDNAME_ABREVIATION];
-        $idDossier = $rowsContenu[FtaModel::FIELDNAME_DOSSIER_FTA];
-        $idVersionDossier = $rowsContenu[FtaModel::FIELDNAME_VERSION_DOSSIER_FTA];
-        $codeArticleLdc = $rowsContenu[FtaModel::FIELDNAME_CODE_ARTICLE_LDC];
-        $designationCommercialeFta = $rowsContenu[FtaModel::FIELDNAME_DESIGNATION_COMMERCIALE];
-//        $idClassificationFta2 = $rowsContenu[ClassificationFta2Model::KEYNAME];
-        $idFta = $rowsContenu[FtaModel::KEYNAME];
-
-//        $classificationGroupe = ClassificationArborescenceArticleCategorieContenuModel::getElementClassificationFta($idClassificationFta2, ClassificationFta2Model::FIELDNAME_ID_PROPRIETAIRE_GROUPE);
-//        $classificationEnseigne = ClassificationArborescenceArticleCategorieContenuModel::getElementClassificationFta($idClassificationFta2, ClassificationFta2Model::FIELDNAME_ID_PROPRIETAIRE_ENSEIGNE);
-//        $classificationMarque = ClassificationArborescenceArticleCategorieContenuModel::getElementClassificationFta($idClassificationFta2, ClassificationFta2Model::FIELDNAME_ID_MARQUE);
-//        $classificationActivite = ClassificationArborescenceArticleCategorieContenuModel::getElementClassificationFta($idClassificationFta2, ClassificationFta2Model::FIELDNAME_ID_ACTIVITE);
-//        $classificationRayon = ClassificationArborescenceArticleCategorieContenuModel::getElementClassificationFta($idClassificationFta2, ClassificationFta2Model::FIELDNAME_ID_RAYON);
-//        $classificationEnvironnement = ClassificationArborescenceArticleCategorieContenuModel::getElementClassificationFta($idClassificationFta2, ClassificationFta2Model::FIELDNAME_ID_ENVIRONNEMENT);
-//        $classificationReseau = ClassificationArborescenceArticleCategorieContenuModel::getElementClassificationFta($idClassificationFta2, ClassificationFta2Model::FIELDNAME_ID_RESEAU);
-//        $classificationSaisonalite = ClassificationArborescenceArticleCategorieContenuModel::getElementClassificationFta($idClassificationFta2, ClassificationFta2Model::FIELDNAME_ID_SAISONNALITE);
+    if ($arrayContenu) {
+        foreach ($arrayContenu as $rowsContenu) {
+            $descriptionFtaWorkflow = $rowsContenu[FtaWorkflowModel::FIELDNAME_DESCRIPTION_FTA_WORKFLOW];
+            $nomFtaEtat = $rowsContenu[FtaEtatModel::FIELDNAME_NOM_FTA_ETAT];
+            $idFtaEtat = $rowsContenu[FtaEtatModel::KEYNAME];
+            $abrviationFtaEtat = $rowsContenu[FtaEtatModel::FIELDNAME_ABREVIATION];
+            $idDossier = $rowsContenu[FtaModel::FIELDNAME_DOSSIER_FTA];
+            $idVersionDossier = $rowsContenu[FtaModel::FIELDNAME_VERSION_DOSSIER_FTA];
+            $codeArticleLdc = $rowsContenu[FtaModel::FIELDNAME_CODE_ARTICLE_LDC];
+            $designationCommercialeFta = $rowsContenu[FtaModel::FIELDNAME_DESIGNATION_COMMERCIALE];
+            $idFta = $rowsContenu[FtaModel::KEYNAME];
 
 
-        $bloc.= "<tr  class=contenu ><td>" . $descriptionFtaWorkflow . "</td>"
-                . "<td>" . $nomFtaEtat . " - V" . $idVersionDossier . "</td>"
-                . "<td>" . $codeArticleLdc . "</td>"
-                . "<td>" . $designationCommercialeFta . "</td>"
-                . "<td>" . $classificationGroupe
-                . "</td>"
-                . "<td>  <a href="
-                . "ajout_classification_chemin.php?id_fta=" . $idFta
-                . "&id_fta_chapitre_encours=1"
-                . "&synthese_action=encours"
-                . "&id_fta_etat=" . $idFtaEtat
-                . "&abreviation_fta_etat=" . $abrviationFtaEtat
-                . "&id_fta_role=" . $idFtaRole
-                . "&gestionnaire=1 > Ajouter une classification</td></tr>"
+            /**
+             * Mise en forme du tableau
+             */
+            $bloc.= "<tr  class=contenu ><td>" . $descriptionFtaWorkflow . "</td>"
+                    . "<td>" . $nomFtaEtat . " - V" . $idVersionDossier . "</td>"
+                    . "<td>" . $codeArticleLdc . "</td>"
+                    . "<td>" . $designationCommercialeFta . "</td>"
+                    . "<td>" . $classificationGroupe
+                    . "</td>"
+                    . "<td>  <a href="
+                    . "ajout_classification_chemin.php?id_fta=" . $idFta
+                    . "&id_fta_chapitre_encours=1"
+                    . "&synthese_action=encours"
+                    . "&id_fta_etat=" . $idFtaEtat
+                    . "&abreviation_fta_etat=" . $abrviationFtaEtat
+                    . "&id_fta_role=" . $idFtaRole
+                    . "&gestionnaire=2 > Ajouter une classification</td></tr>"
 
-        ;
+            ;
+        }
     }
 }
 

@@ -78,7 +78,7 @@ class FtaEtatModel extends AbstractModel {
      * @param type $paramFtaModification
      * @return type
      */
-    public static function getIdFtaByEtatAvancement($paramSyntheseAction, $paramEtat, $paramRole, $paramIdUser, $paramIdFtaEtat, $paramFtaModification) {
+    public static function getIdFtaByEtatAvancement($paramSyntheseAction, $paramEtat, $paramRole, $paramIdUser, $paramIdFtaEtat, $paramFtaModification, $paramLieuGeo) {
         $idFtaEffectue = array();
 //        $compteur = "0";
         if ($_SESSION['CheckIdFtaRole'] <> $paramRole or $_SESSION[UserModel::KEYNAME] <> $paramIdUser) {
@@ -345,11 +345,22 @@ class FtaEtatModel extends AbstractModel {
 //                                    . ' AND ' . FtaWorkflowModel::FIELDNAME_WORKFLOW_ACTIF . '=' . FtaWorkflowModel::WORKFLOW_ACTIF_TRUE
                     );
                 } else {
+                    $isSiteDeProd = GeoModel::isLieuGeoSiteDeProduction($paramLieuGeo);
+                    if($isSiteDeProd){
                     $array = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
                                     'SELECT DISTINCT ' . FtaModel::KEYNAME
                                     . ' FROM ' . FtaModel::TABLENAME
                                     . ' WHERE ' . FtaModel::FIELDNAME_ID_FTA_ETAT . '=' . $paramIdFtaEtat   //Liaison
+                                    . ' AND  ' . FtaModel::FIELDNAME_SITE_PRODUCTION . '=' . $paramLieuGeo   //Liaison
                     );
+                    }else{
+                        $array = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
+                                    'SELECT DISTINCT ' . FtaModel::KEYNAME
+                                    . ' FROM ' . FtaModel::TABLENAME
+                                    . ' WHERE ' . FtaModel::FIELDNAME_ID_FTA_ETAT . '=' . $paramIdFtaEtat   //Liaison
+                    ); 
+                    }
+                        
                 }
 
                 break;

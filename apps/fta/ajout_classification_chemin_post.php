@@ -46,6 +46,20 @@ $selection_environnement = Lib::getParameterFromRequest('selection_environnement
 $selection_reseau = Lib::getParameterFromRequest('selection_reseau2');
 $selection_saisonnalite = Lib::getParameterFromRequest('selection_saisonnalite2');
 
+$modelFta = new FtaModel($paramIdFta);
+if ($selection_saisonnalite) {
+    //Enregistrement du nouvel éléments de classification
+    $idClassification2 = ClassificationFta2Model::getIdFtaClassification2(
+                    $selection_proprietaire1, $selection_proprietaire2
+                    , $selection_marque, $selection_activite
+                    , $selection_rayon, $selection_environnement
+                    , $selection_reseau, $selection_saisonnalite);
+    $modelFta->getDataField(FtaModel::FIELDNAME_ID_FTA_CLASSIFICATION2)->setFieldValue($idClassification2);
+}
+$abreviationFtaEtat = $modelFta->getModelFtaEtat()->getDataField(FtaEtatModel::FIELDNAME_ABREVIATION)->getFieldValue();
+
+$modelFta->saveToDatabase();
+
 switch ($action) {
 
     /*
@@ -53,19 +67,7 @@ switch ($action) {
      */
     case 'valider':
 
-        $modelFta = new FtaModel($paramIdFta);
-        if ($selection_saisonnalite) {
-            //Enregistrement du nouvel éléments de classification
-            $idClassification2 = ClassificationFta2Model::getIdFtaClassification2(
-                            $selection_proprietaire1, $selection_proprietaire2
-                            , $selection_marque, $selection_activite
-                            , $selection_rayon, $selection_environnement
-                            , $selection_reseau, $selection_saisonnalite);
-            $modelFta->getDataField(FtaModel::FIELDNAME_ID_FTA_CLASSIFICATION2)->setFieldValue($idClassification2);
-        }
-        $abreviationFtaEtat = $modelFta->getModelFtaEtat()->getDataField(FtaEtatModel::FIELDNAME_ABREVIATION)->getFieldValue();
 
-        $modelFta->saveToDatabase();
         //Redirection
         header('Location: modification_fiche.php?id_fta=' . $paramIdFta . '&id_fta_chapitre_encours=' . $paramIdFtaChapitreEncours . '&synthese_action=' . $paramSyntheseAction . '&id_fta_etat=' . $idFtaEtat . '&abreviation_fta_etat=' . $abreviationFtaEtat . '&id_fta_role=' . $idFtaRole);
 
@@ -73,22 +75,19 @@ switch ($action) {
 
     case 'gestionnaire':
 
-        
-          $modelFta = new FtaModel($paramIdFta);
-        if ($selection_saisonnalite) {
-            //Enregistrement du nouvel éléments de classification
-            $idClassification2 = ClassificationFta2Model::getIdFtaClassification2(
-                            $selection_proprietaire1, $selection_proprietaire2
-                            , $selection_marque, $selection_activite
-                            , $selection_rayon, $selection_environnement
-                            , $selection_reseau, $selection_saisonnalite);
-            $modelFta->getDataField(FtaModel::FIELDNAME_ID_FTA_CLASSIFICATION2)->setFieldValue($idClassification2);
-        }
-        $abreviationFtaEtat = $modelFta->getModelFtaEtat()->getDataField(FtaEtatModel::FIELDNAME_ABREVIATION)->getFieldValue();
 
-        $modelFta->saveToDatabase();
+
         //Redirection
         header('Location: modification_classification.php');
+
+        break;
+
+    case 'gestionnaire1':
+
+
+
+        //Redirection
+        header('Location: ajout_classification.php');
 
         break;
 

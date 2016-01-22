@@ -35,9 +35,10 @@ class AccueilFta {
      * @param type $IdFtaRole
      * @param type $OrderBy
      */
-    public static function initAccueil($id_user, $idFtaEtat, $abreviationFtaEtat, $syntheseAction, $IdFtaRole, $OrderBy, $debut, $numeroDePageCourante) {
+    public static function initAccueil($id_user, $idFtaEtat, $abreviationFtaEtat, $syntheseAction, $IdFtaRole, $OrderBy, $debut, $numeroDePageCourante, $paramLieuGeo) {
 
         self::$idUser = $id_user;
+        self::$lieuGeo = $paramLieuGeo;
         self::$abreviationFtaEtat = $abreviationFtaEtat;
         self::$syntheseAction = $syntheseAction;
         self::$idFtaRole = $IdFtaRole;
@@ -75,7 +76,7 @@ class AccueilFta {
          * $arrayIdFtaAndIdWorkflow[1] sont les id_fta
          * $arrayIdFtaAndIdWorkflow[2] sont les nom des workflows correspondant aux  id_fta
          */
-        self::$arrayIdFtaAndIdWorkflow = FtaEtatModel::getIdFtaByEtatAvancement(self::$syntheseAction, self::$abreviationFtaEtat, self::$idFtaRole, self::$idUser, self::$idFtaEtat, self::$ftaModification);
+        self::$arrayIdFtaAndIdWorkflow = FtaEtatModel::getIdFtaByEtatAvancement(self::$syntheseAction, self::$abreviationFtaEtat, self::$idFtaRole, self::$idUser, self::$idFtaEtat, self::$ftaModification, self::$lieuGeo);
 
         self::$arrayIdFtaByUserAndWorkflow = UserModel::getIdFtaByUserAndWorkflow(self::$arrayIdFtaAndIdWorkflow, self::$orderBy, $debut, self::$ftaModification);
 
@@ -711,7 +712,7 @@ class AccueilFta {
         $tableauFiche .= '<th><a href=' . $URL . '&order_common=Site_de_production&numeroPage=' . self::$numeroDePageCourante . '><img src=../lib/images/order-AZ.png title=\'Ordonné par Nom de Site de Production\'  border=\'0\' /></a>'
                 . 'Site'
                 . '</th><th>'
-                . '<a href=' . $URL . '&order_common=id_fta&numeroPage=' . self::$numeroDePageCourante . '><img src=../lib/images/order-AZ.png title=\'Ordonné par Nom du Propriétaire\'  border=\'0\' /></a>'
+                . '<a href=' . $URL . '&order_common=id_fta_classification2&numeroPage=' . self::$numeroDePageCourante . '><img src=../lib/images/order-AZ.png title=\'Ordonné par Nom du Propriétaire\'  border=\'0\' /></a>'
                 . 'Client'
                 . '</th><th>'
                 . '<a href=' . $URL . '&order_common=suffixe_agrologic_fta&numeroPage=' . self::$numeroDePageCourante . ' ><img src=../lib/images/order-AZ.png title=\'Ordonné par Nom de Classification\'  border=\'0\' /></a>'

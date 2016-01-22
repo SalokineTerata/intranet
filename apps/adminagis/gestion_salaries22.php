@@ -28,6 +28,7 @@ if ($paramRech == '1') {
                     'SELECT ' . UserModel::FIELDNAME_NOM
                     . ',' . UserModel::FIELDNAME_PRENOM
                     . ',' . UserModel::FIELDNAME_ID_CATSOPRO
+                    . ',' . UserModel::FIELDNAME_LIEU_GEO
                     . ',' . UserModel::FIELDNAME_LOGIN
                     . ',' . UserModel::FIELDNAME_PASSWORD
                     . ',' . UserModel::FIELDNAME_MAIL
@@ -35,13 +36,14 @@ if ($paramRech == '1') {
                     . ' FROM ' . UserModel::TABLENAME
                     . ' WHERE ' . UserModel::KEYNAME . '=' . $paramIdUser
     );
-    if (!$arrayUserDetail)
+    if (!$arrayUserDetail) {
         echo ('La requete de recherche de l\'ID salarie a echoue');
-    else {
+    } else {
         foreach ($arrayUserDetail as $rowsUserDetail) {
             $userNom = $rowsUserDetail[UserModel::FIELDNAME_NOM];
             $userPrenom = $rowsUserDetail[UserModel::FIELDNAME_PRENOM];
             $userCatsopro = $rowsUserDetail[UserModel::FIELDNAME_ID_CATSOPRO];
+            $userLieuGeo = $rowsUserDetail[UserModel::FIELDNAME_LIEU_GEO];
             $userLogin = $rowsUserDetail[UserModel::FIELDNAME_LOGIN];
             $userPass = $rowsUserDetail[UserModel::FIELDNAME_PASSWORD];
 
@@ -213,6 +215,30 @@ if ($paramRech == '1') {
                                                         if ($rowsCatsopro[CatsoproModel::KEYNAME] == $userCatsopro)
                                                             echo ('selected');
                                                         echo ('>' . $rowsCatsopro[CatsoproModel::FIELDNAME_INTITULE_CAT] . '</option>');
+                                                    }
+                                                }
+                                                echo ('</select>');
+                                                ?>
+                                            </center>
+                                            </td>
+                                            <td  class='loginFFFFFFdroit'>
+                                            <center><br>
+                                                Lieu Geo <br>
+                                                <?php
+                                                echo ('<select name=\'sal_lieu_geo\'>');
+                                                /* Constitution de la liste déroulante des noms des csp */
+                                                $arrayLieuGeo = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
+                                                                "SELECT " . GeoModel::KEYNAME . "," . GeoModel::FIELDNAME_GEO
+                                                                . " FROM " . GeoModel::TABLENAME
+                                                                . " WHERE " . GeoModel::FIELDNAME_SITE_ACTIF . "=1"
+                                                                . " ORDER BY " . GeoModel::FIELDNAME_GEO
+                                                );
+                                                if ($arrayLieuGeo) {
+                                                    foreach ($arrayLieuGeo as $rowsLieuGeo) {
+                                                        echo ('<option value=\'' . $rowsLieuGeo[GeoModel::KEYNAME] . '\'');
+                                                        if ($rowsLieuGeo[GeoModel::KEYNAME] == $userLieuGeo)
+                                                            echo ('selected');
+                                                        echo ('>' . $rowsLieuGeo[GeoModel::FIELDNAME_GEO] . '</option>');
                                                     }
                                                 }
                                                 echo ('</select>');

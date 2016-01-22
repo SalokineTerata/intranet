@@ -104,10 +104,18 @@ if (!$modificationGestionnaire) {
 
     $navigue = Navigation::getHtmlNavigationBar();
 }
-
-if ($modificationGestionnaire) {
-    $action = "gestionnaire";
+switch ($modificationGestionnaire){
+    case "1";
+        $action = "gestionnaire";
+        break;
+    case "2";
+        $action = "gestionnaire1";
+        break;
+    default :
+        $action ="valider";
+    break;
 }
+
 
 
 /* * *********

@@ -1047,14 +1047,6 @@ class Chapitre {
         //Logo éco-emballage
         $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_LOGO_ECO_EMBALLAGE);
 
-        //Activer le système d'impression Base Etiquette Codesoft
-        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_ACTIVATION_CODESOFT);
-
-//        //Libellé etiquette carton: ou Logo spécifique étiquette ?
-//        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_LIBELLE_CLIENT);
-        //Modèle d'étiquette
-        $bloc.=$ftaView->listeCodesoftEtiquettes($id_fta, $isEditable);
-
 
         return $bloc;
     }

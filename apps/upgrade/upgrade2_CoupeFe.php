@@ -8,6 +8,7 @@ $hostname_connect = $argv[4]; //nom du serveur MySQL de connection � la base d
 $database_connect = $nameOfBDDTarget; //nom de la base de donn�e sur votre serveur MySQL
 $username_connect = $argv[5]; //login de la base MySQL
 $password_connect = $argv[6];
+$idFtaWorkflow = $argv[7];
 ; //mot de passe de la base MySQL
 
 $donnee = mysql_pconnect($hostname_connect, $username_connect, $password_connect);
@@ -19,7 +20,7 @@ echo date("H:i:s") . "\n";
 
 $sql = "SELECT id_fta,id_fta_etat"
         . " FROM fta"
-        . " WHERE id_fta_workflow=" . "6"
+        . " WHERE id_fta_workflow=" . $idFtaWorkflow
 ;
 $arrayClassifIncomplete = mysql_query($sql);
 if ($arrayClassifIncomplete) {

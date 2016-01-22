@@ -36,7 +36,7 @@ if (!$fta_consultation) {
 
     if ($globalConfig->getAuthenticatedUser()) {
         $id_user = $globalConfig->getAuthenticatedUser()->getKeyValue();
-//    $lieuGeo = $globalConfig->getAuthenticatedUser()->getLieuGeo();
+        $lieuGeo = $globalConfig->getAuthenticatedUser()->getLieuGeo();
     }
 
     /*     * ***********
@@ -186,7 +186,7 @@ if (!$fta_consultation) {
         /**
          * traitement long
          */
-        AccueilFta::initAccueil($id_user, $id_fta_etat, $nomFtaEtat, $synthese_action, $idFtaRoleEncours, $order_common, $debut, $numeroDePageCourante);
+        AccueilFta::initAccueil($id_user, $id_fta_etat, $nomFtaEtat, $synthese_action, $idFtaRoleEncours, $order_common, $debut, $numeroDePageCourante,$lieuGeo);
 
 
 

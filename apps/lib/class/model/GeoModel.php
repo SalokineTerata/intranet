@@ -60,6 +60,29 @@ class GeoModel extends AbstractModel {
         return $nomSiteProduction;
     }
 
+    /*
+     * Vérifie si le lieu géographique est un site de production
+     */
+
+    public static function isLieuGeoSiteDeProduction($paramLieuGeo) {
+        $trueSiteDeProd = FALSE;
+        $arrayNomSiteProduction = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
+                        'SELECT ' . GeoModel::FIELDNAME_ASSEMBLAGE
+                        . ' FROM ' . GeoModel::TABLENAME
+                        . ' WHERE ' . GeoModel::KEYNAME
+                        . '= \'' . $paramLieuGeo . '\''
+        );
+        if ($arrayNomSiteProduction) {
+            foreach ($arrayNomSiteProduction as $rowsNomSiteProduction) {
+                $siteDeProdValue = $rowsNomSiteProduction[GeoModel::FIELDNAME_ASSEMBLAGE];
+                if ($siteDeProdValue) {
+                    $trueSiteDeProd = TRUE;
+                }
+            }
+        }
+        return $trueSiteDeProd;
+    }
+
     /**
      * Affiche la liste des site de production pour lesquel l'utilisateur connecté à les droits d'accès
      * @param int $paramIdUser
@@ -96,8 +119,6 @@ class GeoModel extends AbstractModel {
 
         return $listeSiteProduction;
     }
-
-   
 
 }
 ?>

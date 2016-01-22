@@ -1835,6 +1835,15 @@ class Chapitre {
         //Code Article LDC, code Article arcadia
         $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_CODE_ARTICLE_LDC);
 
+        //Gencod EAN Article
+        $bloc.=$ftaView->getHtmlEANArticle();
+
+        //Gencod EAN Colis
+        $bloc.=$ftaView->getHtmlEANColis();
+
+        //Gencod EAN Palette
+        $bloc.=$ftaView->getHtmlEANPalette();
+
         return $bloc;
     }
 

@@ -147,11 +147,8 @@ switch ($output) {
                           <a href=http://intranet.agis.fr/mediawiki/index.php/Module_FTA target=_top><img src=\"../lib/images/wiki.png\" alt=\"\" title=\"pdf\" width=\"100\" height=\"100\" border=\"0\" /><br>Manuel Utilisateur</a>
                           <br><br><br>
                           <br><br><br>
-                          <a href=./doc/cycle.pdf target=_top><img src=\"../lib/images/pdf.png\" alt=\"\" title=\"pdf\" width=\"100\" height=\"100\" border=\"0\" /><br>Cycle de Vie d'une Fiche Technique Article</a>
-                          <br><br><br>
-                          <br><br><br>
-                          <a href=../.data/grille_codification_article.sxc target=_top><img src=\"../lib/images/transiter.png\" alt=\"\" title=\"pdf\" width=\"100\" height=\"100\" border=\"0\" /><br>Grille de codification Article</a>
-
+                          <a href=http://intranet.agis.fr/.data/mediawiki.images/f/f0/Cycle.pdf target=_top><img src=\"../lib/images/pdf.png\" alt=\"\" title=\"pdf\" width=\"100\" height=\"100\" border=\"0\" /><br>Cycle de Vie d'une Fiche Technique Article</a>
+                          
                          </td>
 
                      </tr>
@@ -162,6 +159,9 @@ switch ($output) {
              </form>
              ";
 
+//<br><br><br>
+//                          <br><br><br>
+//                          <a href=../.data/grille_codification_article.sxc target=_top><img src=\"../lib/images/transiter.png\" alt=\"\" title=\"pdf\" width=\"100\" height=\"100\" border=\"0\" /><br>Grille de codification Article</a>
 
 
         /*         * *********************

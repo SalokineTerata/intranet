@@ -14,6 +14,7 @@ class FtaWorkflowModel extends AbstractModel {
     const FIELDNAME_ID_INTRANET_ACTIONS = 'id_intranet_actions';
     const FIELDNAME_NOM_FTA_WORKFLOW = 'nom_fta_workflow';
     const FIELDNAME_WORKFLOW_ACTIF = 'actif_fta_workflow';
+    const ID_WORKFLOW_PRESENTATION = '9';
     const NOM_FTA_WORKFLOW_SOUS_TRAI = 'sous_traitance_industrielle';
     const NOM_FTA_WORKFLOW_MDD_SANS = 'MDD_sans_etiquetage_interne';
     const NOM_FTA_WORKFLOW_MDD_AVEC = 'MDD_avec_etiquetage_interne';

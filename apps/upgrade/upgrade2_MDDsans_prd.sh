@@ -14,7 +14,7 @@ ENV_DEST="prd"
 MYSQL_SERVER_NAME_DEST="127.0.0.1"
 MYSQL_USER_NAME_DEST="mysqladm"
 MYSQL_USER_PASSWORD_DEST="agis"
-ID_FTA_WORKFLOW="6"
+ID_FTA_WORKFLOW="3"
 
 
 echo "* Migration vers l'environnement PRD"

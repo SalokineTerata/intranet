@@ -124,7 +124,7 @@ switch ($action) {
             if (!$tab[0]) {   //Cet article n'est pas classé car il n'y a même pas un chemin de classification
                 //Message HTML
                 echo $rows["CODE_ARTICLE"] . ";\"" . $rows["LIBELLE"] . "\";" . $rows["id_fta"] . ";\"" . $rows["date_derniere_maj_fta"] . "\"";
-                FtaTransitionModel::BuildTransitionFta(
+                FtaTransitionModel::buildTransitionFta(
                         $id_fta, $abreviation_fta_transition, $commentaire_maj_fta, $idFtaRole, $idFtaWorkflow, $ListeDesChapitres
                 );
                 echo "<br>";

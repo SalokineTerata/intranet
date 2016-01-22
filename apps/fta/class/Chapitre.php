@@ -596,20 +596,20 @@ class Chapitre {
         //Commentaire sur la Fta
         $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_COMMENTAIRE);
 
-        //Liste des corrections apportées
-        $bloc.='<tr class=titre_principal><td>Récapitulatif des corrections</td></tr>';
+        //Historique des mises à jour de la FTA
+        $bloc.='<tr class=titre_principal><td>Historique des actions effectuées sur la Fiche Technique Article</td></tr>';
 
-        $bloc.=$ftaView->getHtmlCorrectionAllChapitres(self::$id_fta_workflow);
+        $bloc.=$ftaModel->getHtmlDataField(FtaModel::FIELDNAME_COMMENTAIRE_MAJ_FTA);
 
         //Liste de tous les commentaires des chapitres
         $bloc.='<tr class=titre_principal><td>Récapitulatif des commentaires</td></tr>';
 
         $bloc.=$ftaView->getHtmlCommentaireAllChapitres(self::$id_fta_workflow);
 
-        //Historique des mises à jour de la FTA
-        $bloc.='<tr class=titre_principal><td>Historique des actions effectuées sur la Fiche Technique Article</td></tr>';
+        //Liste des corrections apportées
+        $bloc.='<tr class=titre_principal><td>Récapitulatif des corrections</td></tr>';
 
-        $bloc.=$ftaModel->getHtmlDataField(FtaModel::FIELDNAME_COMMENTAIRE_MAJ_FTA);
+        $bloc.=$ftaView->getHtmlCorrectionAllChapitres(self::$id_fta_workflow);
 
         return $bloc;
     }
@@ -1046,14 +1046,6 @@ class Chapitre {
 
         //Logo éco-emballage
         $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_LOGO_ECO_EMBALLAGE);
-
-        //Activer le système d'impression Base Etiquette Codesoft
-        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_ACTIVATION_CODESOFT);
-
-//        //Libellé etiquette carton: ou Logo spécifique étiquette ?
-//        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_LIBELLE_CLIENT);
-        //Modèle d'étiquette
-        $bloc.=$ftaView->listeCodesoftEtiquettes($id_fta, $isEditable);
 
 
         return $bloc;

@@ -106,9 +106,11 @@ switch ($action) {
                  */
                 $ftaModel = new FtaModel($idFta);
                 $ftaModel->getDataField(FtaModel::FIELDNAME_WORKFLOW)->setFieldValue($idFtaWorkflowNEW);
+                $oldComment = $ftaModel->getDataField(FtaModel::FIELDNAME_COMMENTAIRE_MAJ_FTA)->getFieldValue();
+                $ftaModel->getDataField(FtaModel::FIELDNAME_COMMENTAIRE_MAJ_FTA)->setFieldValue($commentaire . $oldComment);
                 $ftaModel->saveToDatabase();
 
-                FtaSuiviProjetModel::createNewChapitresFromNewWorkflow($idFta, $idFtaWorkflowNEW, $arbreviationFta, $idUser, $commentaire);
+                FtaSuiviProjetModel::createNewChapitresFromNewWorkflow($idFta, $idFtaWorkflowNEW, $arbreviationFta, $idUser);
                 /**
                  * Suppression des chapitres de l'ancien espace de travail
                  */

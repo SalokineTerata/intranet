@@ -15,6 +15,7 @@ $paramUserPrenom = Lib::getParameterFromRequest('sal_prenom');
 $paramUserPass = Lib::getParameterFromRequest('sal_pass');
 $paramUserPass2 = Lib::getParameterFromRequest('sal_pass2');
 $paramUserCatsopro = Lib::getParameterFromRequest('catsopro');
+$paramUserLieuGeo = Lib::getParameterFromRequest('lieu_geo');
 $paramDateCreationUser = Lib::getParameterFromRequest('date_creation_salaries', date('Y-m-d'));
 $paramNewsDefil = Lib::getParameterFromRequest('newsdefil');
 $paramUserMail = Lib::getParameterFromRequest('sal_mail');
@@ -47,11 +48,15 @@ if ($paramValider == 'valider') {
         $resultInsertionUser = DatabaseOperation::execute(
                         'INSERT INTO ' . UserModel::TABLENAME
                         . ' (' . UserModel::FIELDNAME_NOM . ', ' . UserModel::FIELDNAME_PRENOM
-                        . ', ' . UserModel::FIELDNAME_DATE_CREATION_SALARIES . ', ' . UserModel::FIELDNAME_ID_CATSOPRO
+                        . ', ' . UserModel::FIELDNAME_DATE_CREATION_SALARIES
+                        . ', ' . UserModel::FIELDNAME_ID_CATSOPRO
+                        . ', ' . UserModel::FIELDNAME_LIEU_GEO
                         . ', ' . UserModel::FIELDNAME_LOGIN . ', ' . UserModel::FIELDNAME_PASSWORD
                         . ', ' . UserModel::FIELDNAME_MAIL
                         . ') VALUES (\'' . $paramUserNom . '\', \'' . $paramUserPrenom
-                        . '\', \'' . $paramDateCreationUser . '\', \'' . $paramUserCatsopro
+                        . '\', \'' . $paramDateCreationUser
+                        . '\', \'' . $paramUserCatsopro
+                        . '\', \'' . $paramUserLieuGeo
                         . '\', \'' . $paramUserLogin . '\',  PASSWORD(\'' . $paramUserPass
                         . '\'),\'' . $paramUserMail . '\')'
         );
@@ -336,6 +341,22 @@ envoismail($sujet, $corpsmail, $paramUserMail, 'postmaster@agis-sa.fr', $typeMai
                                                                             }
                                                                             $intitule_cat = stripslashes($intitule_cat);
                                                                             echo ($intitule_cat);
+                                                                        }
+                                                                        /*
+                                                                         * Affichage de l'intitule de la CSP
+                                                                         */
+                                                                        $arrayLieuGeo = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
+                                                                                        "SELECT " . GeoModel::FIELDNAME_GEO
+                                                                                        . " FROM " . GeoModel::TABLENAME
+                                                                                        . " WHERE " . GeoModel::FIELDNAME_SITE_ACTIF . "=1"
+                                                                                        . " AND " . GeoModel::KEYNAME . "=" . $paramUserLieuGeo
+                                                                        );
+                                                                        if ($arrayLieuGeo) {
+                                                                            foreach ($arrayLieuGeo as $rowsLieuGeo) {
+                                                                                $lieu_geo = $rowsLieuGeo[GeoModel::FIELDNAME_GEO];
+                                                                            }
+                                                                            $lieu_geo = stripslashes($lieu_geo);
+                                                                            echo ($lieu_geo);
                                                                         }
                                                                         ?>
                                                                     </p>

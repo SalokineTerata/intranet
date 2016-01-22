@@ -63,6 +63,8 @@ if (
     //Créer une nouvelle Fiche Technique Article
     echo '<br>';
     echo '<a href=creer_fiche.php?id_fta_role=' . $idFtaRole . '><img src=../lib/images/bouton_menu-creer_une_fiche.png border=0></a>';
+    echo '<a href=modification_classification.php><img src=../lib/images/bouton_menu-classification.PNG border=0></a>';
+    echo '<a href=ajout_classification.php><img src=../lib/images/bouton_menu-classification_ajout.PNG border=0></a>';
 
     //Mettre à jour une Fiche Technique Article existante
     //echo '<br>';

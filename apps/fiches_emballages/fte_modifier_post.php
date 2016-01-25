@@ -86,7 +86,7 @@ switch ($action) {
         $id_annexe_emballage;      //URL
         $selection_groupe;         //URL
         $selection_fournisseur;    //URL
-        $date_maj_annexe_emballage = date("Y-m-d");
+        $date_maj_annexe_emballage = date("d-m-Y");
 
         //Ajout ou réécriture de la FTE
         if (Acl::getValueAccesRights($module . "_modification") >= 1) {

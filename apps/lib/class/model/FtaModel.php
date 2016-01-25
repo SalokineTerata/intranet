@@ -8,7 +8,7 @@
  */
 class FtaModel extends AbstractModel {
 
-    const CHECK_DATE_ECHANCE = "0000-00-00";
+    const CHECK_DATE_ECHANCE = "00-00-0000";
     const TABLENAME = "fta";
     const KEYNAME = "id_fta";
     const KEYNAME_CREATEUR = "id_user";
@@ -608,7 +608,7 @@ class FtaModel extends AbstractModel {
 
                 $delai_jour = $WeekSinceFirstProcessus * ModuleConfig::DELAI_ECHEANCE_PROCESSUS_JOUR;
                 $timestamp_date_echeance_fta = mktime(0, 0, 0, $mois_date_echeance_fta, $jour_date_echeance_fta - $delai_jour, $annee_date_echeance_fta);
-                $dateDefaultEcheance = date("Y-m-d", $timestamp_date_echeance_fta);
+                $dateDefaultEcheance = date("d-m-Y", $timestamp_date_echeance_fta);
                 $modelFtaProcessusDelai->getDataField(FtaProcessusDelaiModel::FIELDNAME_DATE_ECHEANCE_PROCESSUS)->setFieldValue($dateDefaultEcheance);
             }
 
@@ -1246,7 +1246,7 @@ class FtaModel extends AbstractModel {
         }
         DatabaseOperation::execute(
                 "UPDATE " . FtaModel::TABLENAME
-                . " SET " . FtaModel::FIELDNAME_DATE_CREATION . "='" . date("Y-m-d")                                                               //Date de la création de cet Article
+                . " SET " . FtaModel::FIELDNAME_DATE_CREATION . "='" . date("d-m-Y")                                                               //Date de la création de cet Article
                 . "', " . FtaModel::FIELDNAME_ACTIF . "=" . 0                                                                                   //Tant que la fiche n'est pas activée, la flag reste à 0.
                 . ", " . FtaModel::FIELDNAME_CODE_ARTICLE . "=" . 'NULL'                                                                       //Le Code Article Agrologic ne peut être présent 2 fois (index unique)               
                 . ", " . FtaModel::FIELDNAME_WORKFLOW . "=" . $paramIdFtaWorkflow
@@ -1746,7 +1746,7 @@ class FtaModel extends AbstractModel {
                     $nbJours = ModuleConfig::VALUE_DATE_PLUS_MISE_A_JOUR;
                     break;
             }
-            $dateEcheanceValue = date("Y-m-d", strtotime(date("Y-m-d") . " +" . $nbJours . " days"));
+            $dateEcheanceValue = date("d-m-Y", strtotime(date("d-m-Y") . " +" . $nbJours . " days"));
         }
         $dataFieldDateEcheance->setFieldValue($dateEcheanceValue);
         $this->saveToDatabase();

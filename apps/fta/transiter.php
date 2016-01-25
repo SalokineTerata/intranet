@@ -239,12 +239,12 @@ if ($action == FtaEtatModel::ETAT_ABREVIATION_VALUE_MODIFICATION or $action == '
 //}
 //Validation_matiere_premiere
 //Boris 2005-09-15: risque de mettre une date antérieure à la dernière date de mise à jour
-$nom_date = 'date_derniere_maj_fta';
-//$nom_date='date_dernier_changement_etat_new';
-$nom_liste = 'selection_' . $nom_date;
-$date_defaut = date('Y-m-d');
-$$nom_liste = selection_date_pour_mysql($nom_date, $date_defaut);
-$selection_date_derniere_maj_fta;
+//$nom_date = 'date_derniere_maj_fta';
+////$nom_date='date_dernier_changement_etat_new';
+//$nom_liste = 'selection_' . $nom_date;
+//$date_defaut = date('d-m-Y');
+//$$nom_liste = selection_date_pour_mysql($nom_date, $date_defaut);
+//$selection_date_derniere_maj_fta;
 
 /* * *********
   Fin Code PHP

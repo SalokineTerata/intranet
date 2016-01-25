@@ -35,7 +35,7 @@ if ($arrayClassifIncomplete) {
                 . ', id_fta_processus'
                 . ' FROM fta_workflow_structure'
                 . ' WHERE id_fta_workflow'
-                . '=' . "6"
+                . '=' . $idFtaWorkflow
         ;
         $arrayChapitre = mysql_query($sql2);
 
@@ -83,7 +83,7 @@ if ($arrayClassifIncomplete) {
                 . ' WHERE id_fta'
                 . '=' . $idFta
                 . ' AND id_fta_chapitre'
-                . '=37'
+                . '=34'
         ;
         $resultCheckIdSuiviProjet2 = mysql_query($sql4);
         $arrayCheckIdSuiviProjet2 = mysql_fetch_array($resultCheckIdSuiviProjet2, MYSQL_ASSOC);

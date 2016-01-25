@@ -71,6 +71,16 @@ class FtaController {
         return $newComment;
     }
 
+    /**
+     * On vérifie si la date est au bon format français
+     * @param date $value
+     * @return boolean
+     */
+    public static function isCheckDateFormat($value) {
+        $result = DateTime::createFromFormat("d-m-Y", $value);
+        return $result;
+    }
+
 }
 
 ?>

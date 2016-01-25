@@ -115,7 +115,7 @@ class FtaProcessusModel extends AbstractModel {
                     $tauxValidationProcessusEncours = $tauxValidationProcessus / $nombre_total_processus_precedent;
                 }
             }
-        }else{
+        } else {
             $tauxValidationProcessusEncours = NULL;
         }
         $return = $tauxValidationProcessusEncours;
@@ -349,6 +349,15 @@ class FtaProcessusModel extends AbstractModel {
 
     static public function getSqlResultAuthorizedProcessusByUser($paramIdUser) {
         return DatabaseOperation::query(self::getSqlStatementAuthorizedProcessusByUser($paramIdUser));
+    }
+
+    public static function addIdFtaProcessus($paramIdEffectue) {
+        if ($paramIdEffectue) {
+            foreach ($paramIdEffectue as $value) {
+                $req .= " OR " . self::KEYNAME . "=" . $value . " ";
+            }
+        }
+        return $req;
     }
 
 }

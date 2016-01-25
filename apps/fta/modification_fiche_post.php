@@ -84,7 +84,7 @@ switch ($action) {
         if ($new_correction_fta_suivi_projet) {
             $paramIdFtaChapitre = $paramIdFtaChapitreEncours;
             $option[FtaSuiviProjetModel::FIELDNAME_CORRECTION_FTA_SUIVI_PROJET] = $new_correction_fta_suivi_projet;
-            $noredirection = FtaChapitreModel::BuildCorrectionChapitre($paramIdFta, $paramIdFtaChapitre, $option);
+            $noredirection = FtaChapitreModel::buildCorrectionChapitre($paramIdFta, $paramIdFtaChapitre, $option);
         } else {
             $titre = 'Informations manquantes';
             $message = 'Vous devez spécifier l\'objet de votre correction.';

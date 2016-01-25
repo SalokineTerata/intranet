@@ -1335,7 +1335,7 @@ class FtaModel extends AbstractModel {
                         //Correction des chapitres
 
                         $paramOption["correction_fta_suivi_projet"] = $paramOption["nouveau_maj_fta"];
-                        FtaChapitreModel::BuildCorrectionChapitre($idFtaNew, $id_fta_chapitre, $paramOption);
+                        FtaChapitreModel::buildCorrectionChapitre($idFtaNew, $id_fta_chapitre, $paramOption);
                     }
                 }
 

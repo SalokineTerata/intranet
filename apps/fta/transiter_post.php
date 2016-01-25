@@ -116,7 +116,11 @@ if (!$action) {
         }
 
         $new_commentaire_maj_fta = $new_commentaire_maj_fta . "-" . $ListeDesChapitresComment;
+
+        
+        $idFtaChapitreByDefault = FtaChapitreModel::getIdFtaChapitreByDefault($idFtaRole, $idFtaWorkflow, $ListeDesChapitres);
     }
+
 
 // Fin du controle d'intégrité *************************************************
 //Si pas d'erreur, lancement de la transition
@@ -178,6 +182,7 @@ if (!$action) {
         }
 
 
+
         //Lancement de la passerelle de synchronisation
         if ($abreviation_fta_transition == FtaEtatModel::ETAT_ABREVIATION_VALUE_VALIDE) {
 //            //Ouverture de la base ERP Data sync
@@ -191,7 +196,7 @@ if (!$action) {
             header('Location: index.php');
         } elseif ($abreviation_fta_transition == FtaEtatModel::ETAT_ABREVIATION_VALUE_MODIFICATION) {
             if ($t["0"] <> "1") {
-                header('Location: modification_fiche.php?id_fta=' . $t["id_fta_new"] . '&synthese_action=encours&id_fta_etat=' . $t[FtaEtatModel::KEYNAME] . '&abreviation_fta_etat=' . $t[FtaEtatModel::FIELDNAME_ABREVIATION] . '&id_fta_role=' . $idFtaRole);
+                header('Location: modification_fiche.php?id_fta=' . $t["id_fta_new"] . '&id_fta_chapitre_encours=' . $idFtaChapitreByDefault . '&synthese_action=encours&id_fta_etat=' . $t[FtaEtatModel::KEYNAME] . '&abreviation_fta_etat=' . $t[FtaEtatModel::FIELDNAME_ABREVIATION] . '&id_fta_role=' . $idFtaRole);
 
                 /**
                  * Version avec le module rewrite

@@ -46,7 +46,7 @@ class FtaChapitreModel extends AbstractModel {
      * @param type $option
      * @return int
      */
-    public static function BuildCorrectionChapitre($paramIdFta, $paramIdChapitre, $option) {
+    public static function buildCorrectionChapitre($paramIdFta, $paramIdChapitre, $option) {
         $option['no_message_ecran'];                       //0=affichage à l'ecran, 1=rien
         $option['correction_fta_suivi_projet'];            //Commentaire justifiant la correction du chapitre
         $HtmlResult = new HtmlResult2();
@@ -101,7 +101,7 @@ class FtaChapitreModel extends AbstractModel {
 
         // FtaProcessusDelaiModel::BuildFtaProcessusValidationDelai($paramIdFta, $idFtaProcessus, $idFtaWorkflow);
         //Dévalidation des processus suivants
-        $return = FtaChapitreModel::BuildDevalidationChapitre($paramIdFta, $idFtaProcessus, $HtmlResult);
+        $return = FtaChapitreModel::buildDevalidationChapitre($paramIdFta, $idFtaProcessus, $HtmlResult);
 
         /**
          * Actualisation du pourcentage de validation de la Fta
@@ -181,7 +181,7 @@ class FtaChapitreModel extends AbstractModel {
      * @param type $htmlResult
      * @return type
      */
-    public static function BuildDevalidationChapitre($paramIdFta, $paramIdProcessus, $htmlResult) {
+    public static function buildDevalidationChapitre($paramIdFta, $paramIdProcessus, $htmlResult) {
         //Déclarion des variables
         $modelFta = new FtaModel($paramIdFta);
         $id_fta_workflow = $modelFta->getDataField(FtaModel::FIELDNAME_WORKFLOW)->getFieldValue();
@@ -331,7 +331,7 @@ class FtaChapitreModel extends AbstractModel {
                 BuildFtaProcessusValidationDelai($paramIdFta, $paramIdProcessus);
 
                 //Appel récursif de la fonction pour continuer à dévalider les processus suivants
-                FtaChapitreModel::BuildDevalidationChapitre($paramIdFta, $paramIdProcessus, $htmlResult);
+                FtaChapitreModel::buildDevalidationChapitre($paramIdFta, $paramIdProcessus, $htmlResult);
             }
         }
         //Retour de la fonction
@@ -357,6 +357,43 @@ class FtaChapitreModel extends AbstractModel {
         foreach ($rarrayChapitreDefaut as $rowsChapitreDefaut) {
             return $rowsChapitreDefaut[FtaProcessusModel::KEYNAME];
         }
+    }
+
+    /**
+     * On obtient le tableau des id Fta chapitre pour lesquelle l'utilisateur connecté à les droits d'accès
+     * @param array $paramArrayProcessus
+     */
+    public static function getIdFtaChapitreByArrayProcessus($paramArrayProcessus) {
+        $arrayIdFtaChapitre = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
+                        'SELECT DISTINCT ' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_CHAPITRE
+                        . ' FROM ' . FtaWorkflowStructureModel::TABLENAME
+                        . ' WHERE ( 0 ' . FtaProcessusModel::addIdFtaProcessus($paramArrayProcessus) . ')'
+        );
+        foreach ($arrayIdFtaChapitre as $rowsIdFtaChapitre) {
+            $ListeIdFtaChapitre[] = $rowsIdFtaChapitre[self::KEYNAME];
+        }
+
+        return $ListeIdFtaChapitre;
+    }
+
+    
+    /**
+     * On obtient le chapitre par défaut en redirection
+     * @param int $paramIdFtaRole
+     * @param int $paramIdFtaWorkflow
+     * @param array $paramListeDesChapitres
+     * @return array
+     */
+    public static function getIdFtaChapitreByDefault($paramIdFtaRole, $paramIdFtaWorkflow, $paramListeDesChapitres) {
+
+        $arrayProcessusAcces = FtaWorkflowStructureModel::getArrayProcessusByRoleAndWorkflow($paramIdFtaRole, $paramIdFtaWorkflow);
+        $ListeDesChapitresByUser = FtaChapitreModel::getIdFtaChapitreByArrayProcessus($arrayProcessusAcces);
+
+        if ($paramListeDesChapitres) {
+            $ListeDesChapitresAcces = array_intersect($paramListeDesChapitres, $ListeDesChapitresByUser);
+        }
+
+        return $ListeDesChapitresAcces["0"];
     }
 
 }

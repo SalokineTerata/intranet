@@ -97,13 +97,14 @@ if (!$action) {
 //echo $action;
     if ($action == FtaEtatModel::ETAT_ABREVIATION_VALUE_MODIFICATION or $action == 'W') {
         $arrayChapitre = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
-                        'SELECT ' . FtaChapitreModel::KEYNAME
+                        'SELECT ' . FtaChapitreModel::KEYNAME . ',' . FtaChapitreModel::FIELDNAME_NOM_USUEL_CHAPITRE
                         . ' FROM ' . FtaChapitreModel::TABLENAME
                         . ' ORDER BY ' . FtaChapitreModel::FIELDNAME_NOM_USUEL_CHAPITRE);
         $ok = 0;
         foreach ($arrayChapitre as $rowsChapitre) {
             if (Lib::getParameterFromRequest(FtaChapitreModel::FIELDNAME_NOM_CHAPITRE . '-' . $rowsChapitre[FtaChapitreModel::KEYNAME]) == 1) {
                 $ListeDesChapitres[] = $rowsChapitre[FtaChapitreModel::KEYNAME];
+                $ListeDesChapitresComment .= " " . $rowsChapitre[FtaChapitreModel::FIELDNAME_NOM_USUEL_CHAPITRE];
                 $ok = 1;
             }
         }
@@ -113,6 +114,8 @@ if (!$action) {
             afficher_message($titre, $message, $redirection);
             $error = 1;
         }
+
+        $new_commentaire_maj_fta = $new_commentaire_maj_fta . "-" . $ListeDesChapitresComment;
     }
 
 // Fin du controle d'intégrité *************************************************

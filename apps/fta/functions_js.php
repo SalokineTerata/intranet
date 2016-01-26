@@ -157,6 +157,27 @@
         }
     }
 
+    /**
+     * Cette fonction gère l'affichage de l'étiquette colis
+     * @returns {undefined}
+     */
+    function displayVerrouEtiq(Param) {
+
+        var Parameters = Param.split(",", 2);
+        var idElementVerrouEtiquette = Parameters[0];
+        var idElementDataEtiquetteColis = Parameters[1];
+        var idElementRowEtiquetteColis = '<?php echo Html::PREFIXE_ID_ROW . "_" ?>' + idElementDataEtiquetteColis;
+        elementUniteFacturation = document.getElementById(idElementVerrouEtiquette);
+        if (elementUniteFacturation.value === '<?php echo FtaModel::ID_POIDS_VARIABLE ?>')
+        {
+            displayFalseElementById(idElementRowEtiquetteColis);
+            document.getElementById(idElementDataEtiquetteColis).value = "0";
+            document.getElementById(idElementDataEtiquetteColis).onchange();
+        } else {
+            displayTrueElementById(idElementRowEtiquetteColis);
+        }
+    }
+
     function selection_proprietaire1_js() {
         proprietaire1 = document.form_action.selection_proprietaire1.selectedIndex;
         idFta = document.getElementById("id_fta").value;

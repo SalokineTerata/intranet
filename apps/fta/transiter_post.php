@@ -102,7 +102,7 @@ if (!$action) {
                         . ' ORDER BY ' . FtaChapitreModel::FIELDNAME_NOM_USUEL_CHAPITRE);
         $ok = 0;
         foreach ($arrayChapitre as $rowsChapitre) {
-            if (Lib::getParameterFromRequest(FtaChapitreModel::FIELDNAME_NOM_CHAPITRE . '-' . $rowsChapitre[FtaChapitreModel::KEYNAME]) == 1) {
+            if (Lib::getParameterFromRequest(FtaChapitreModel::FIELDNAME_NOM_CHAPITRE . '_' . $rowsChapitre[FtaChapitreModel::KEYNAME]) == 1) {
                 $ListeDesChapitres[] = $rowsChapitre[FtaChapitreModel::KEYNAME];
                 $ListeDesChapitresComment .= " " . $rowsChapitre[FtaChapitreModel::FIELDNAME_NOM_USUEL_CHAPITRE];
                 $ok = 1;

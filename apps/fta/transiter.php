@@ -42,7 +42,9 @@ flush();
 /*
   Initialisation des variables
  */
-$page_action = substr(strrchr($_SERVER['PHP_SELF'], '/'), '1', '-4') . '_post.php';
+$page_default = substr(strrchr($_SERVER['PHP_SELF'], '/'), '1', '-4');
+$page_query = $_SERVER['QUERY_STRING'];
+$page_action = $page_default . '_post.php';
 //   $action = '';                       //Action proposée à la page _post.php
 $method = 'method=POST';             //Pour une url > 2000 caractères, utiliser POST
 $html_table = 'table '              //Permet d'harmoniser les tableaux
@@ -196,7 +198,8 @@ if ($action == FtaEtatModel::ETAT_ABREVIATION_VALUE_MODIFICATION or $action == '
     ;
 
     $arrrayFtaChapitre = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
-                    'SELECT ' . FtaWorkflowStructureModel::TABLENAME . '.' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_CHAPITRE . ',' . FtaChapitreModel::FIELDNAME_NOM_USUEL_CHAPITRE
+                    'SELECT ' . FtaWorkflowStructureModel::TABLENAME . '.' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_CHAPITRE
+                    . ',' . FtaChapitreModel::FIELDNAME_NOM_USUEL_CHAPITRE
                     . ' FROM ' . FtaChapitreModel::TABLENAME . ',' . FtaWorkflowStructureModel::TABLENAME
                     . ' WHERE ' . FtaWorkflowStructureModel::TABLENAME . '.' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_CHAPITRE
                     . '=' . FtaChapitreModel::TABLENAME . '.' . FtaChapitreModel::KEYNAME
@@ -205,14 +208,33 @@ if ($action == FtaEtatModel::ETAT_ABREVIATION_VALUE_MODIFICATION or $action == '
                     . ' ORDER BY ' . FtaChapitreModel::FIELDNAME_NOM_USUEL_CHAPITRE
     );
     foreach ($arrrayFtaChapitre as $rowsChapitre) {
+        if (Lib::getParameterFromRequest(FtaChapitreModel::FIELDNAME_NOM_CHAPITRE . '_' . $rowsChapitre[FtaWorkflowStructureModel::FIELDNAME_ID_FTA_CHAPITRE]) == 1) {
+            $ListeDesChapitres[] = $rowsChapitre[FtaChapitreModel::KEYNAME];
+            $checked = 'checked';
+        } else {
+            $checked = '';
+        }
         $tableau_chapitre.= '<tr>'
-                . '<td><input type=checkbox name=' . FtaChapitreModel::FIELDNAME_NOM_CHAPITRE . '-' . $rowsChapitre[FtaChapitreModel::KEYNAME] . ' value=1 /></td>'
+                . '<td><input type=checkbox onClick=\'js_page_reload_' . FtaChapitreModel::FIELDNAME_NOM_CHAPITRE . '_' . $rowsChapitre[FtaChapitreModel::KEYNAME] . '()\''
+                . ' name=' . FtaChapitreModel::FIELDNAME_NOM_CHAPITRE . '_' . $rowsChapitre[FtaChapitreModel::KEYNAME] . ' value=1 ' . $checked . ' /></td>'
                 . '<td>' . $rowsChapitre[FtaChapitreModel::FIELDNAME_NOM_USUEL_CHAPITRE] . '</td>'
                 . '</tr>'
         ;
+
+        $javascript.='
+                           <SCRIPT LANGUAGE=JavaScript>
+                                    function js_page_reload_' . FtaChapitreModel::FIELDNAME_NOM_CHAPITRE . '_' . $rowsChapitre[FtaChapitreModel::KEYNAME] . '() {
+        current_page = document.form_action.current_page.value;
+        current_query = document.form_action.current_query.value;
+        reload = document.form_action.' . FtaChapitreModel::FIELDNAME_NOM_CHAPITRE . '_' . $rowsChapitre[FtaChapitreModel::KEYNAME] . '.value;
+        url = current_page + "?" + current_query + "&' . FtaChapitreModel::FIELDNAME_NOM_CHAPITRE . '_' . $rowsChapitre[FtaChapitreModel::KEYNAME] . '=" + reload;
+        parent.location.href = url;
+    }
+                           </SCRIPT>
+                           ';
     }
     $tableau_chapitre.= $dateEcheanceFtaHtml . '</table></td></tr>'
-            . '</table>'
+            . '</table>' . $javascript
     ;
     $affichageCommentaire = " <tr>
             <td class=titre_principal>
@@ -257,6 +279,8 @@ echo '
 
 <form ' . $method . ' action=\'' . $page_action . '\' name=\'form_action\'>
      <!input type=hidden name=action value=' . $action . '>
+     <input type=hidden name=current_page value=' . $page_default . '.php >
+     <input type=hidden name=current_query value=' . $page_query . ' >
      <input type=hidden name=abreviation_fta_etat value=' . $abreviationFtaEtat . '>
      <input type=hidden name=id_fta value=' . $idFta . '>
      <input type=hidden name=id_fta_role value=' . $idFtaRole . '>

@@ -9,6 +9,7 @@ $id_fta = Lib::getParameterFromRequest(FtaModel::KEYNAME);
 $ftaModel = new FtaModel($id_fta);
 $siteDeProduction = $ftaModel->getDataField(FtaModel::FIELDNAME_SITE_PRODUCTION)->getFieldValue();
 $description_origine_transformation_fta = $ftaModel->getDataField(FtaModel::FIELDNAME_PRODUIT_TRANSFORME)->getFieldValue();
+$idFtaWorkflow = $ftaModel->getDataField(FtaModel::FIELDNAME_WORKFLOW)->getFieldValue();
 switch ($description_origine_transformation_fta) {
     case "0":
         $description_origine_transformation_fta = "Non";
@@ -18,7 +19,7 @@ switch ($description_origine_transformation_fta) {
     case "2":
         $description_origine_transformation_fta = "Oui";
 
-        break;    
+        break;
 }
 
 $NOM_origine_transformation_fta = $ftaModel->getDataField(FtaModel::FIELDNAME_PRODUIT_TRANSFORME)->getFieldLabel();
@@ -73,13 +74,13 @@ $pdf->SetFillColor(150, 250, 230);
 //Intitulés dynamiques
 $intitule_fta = "";
 $intitule_validation = "";
-switch ($idFtaEtat) {
-    case "1":
+switch ($idFtaWorkflow) {
+    case FtaWorkflowModel::ID_WORKFLOW_PRESENTATION:
         $intitule_fta = "PRESENTATION";
-        $intitule_validation = "(Imprimé le " . date("d-m-Y") . ")";
+        $intitule_validation = "(Imprimé le " . date("d/m/Y") . ")";
         break;
 
-    case "3":
+    default :
         $intitule_fta = "TECHNIQUE";
         $intitule_validation = "(Validé le $date_validation)";
         break;
@@ -287,10 +288,10 @@ if ($result) {
         /**
          * Verification que l'on est outes les données nécéssaire
          */
-        if ($poids_fta_compositionTmp and $quantite_fta_composition and $poids_net_colis) {
-            $taux_poids_composant = ($poids_fta_compositionTmp * $quantite_fta_composition) / $poids_net_colis;
-            $temp_taux = round($taux_poids_composant / 10, 2);
-            $poids_fta_composition = round($poids_fta_composition, 0);
+        if ($poids_fta_compositionTmp and $quantite_fta_composition) {
+//            $taux_poids_composant = ($poids_fta_compositionTmp * $quantite_fta_composition) / $poids_net_colis;
+//            $temp_taux = round($taux_poids_composant / 10, 2);
+            $poids_fta_composition = round($poids_fta_compositionTmp, 0);
 
             //Création de la première colonne
             //Désignation Commerciale
@@ -307,7 +308,7 @@ if ($result) {
 
             $pdf->SetFillColor(255, 255, 255);
             $pdf->SetFont($t2_police, $t2_style, $t3_size);
-            $txt = $nom_fta_composition . " (" . $poids_fta_composition . " g)";
+            $txt = $nom_fta_composition . " (" . $poids_fta_composition . " g) x " . $quantite_fta_composition;
             //$pdf->Cell(0,$contenu_size,$nom_fta_composition." (".$poids_fta_composition." g)");
             $pdf->MultiCell(0, 5, $txt, $border = 0, $align = 'C', $fill = 0);
             $marge_haute = $pdf->GetY();
@@ -377,7 +378,7 @@ if ($result) {
         //$pdf->SetAutoPageBreak(0);
     }//Fin du parcours des composants
 }
-if ($idFtaEtat <> "1") {
+if ($idFtaWorkflow <> FtaWorkflowModel::ID_WORKFLOW_PRESENTATION) {
 //Conditionnement (1ère Colonne)
 
     $pdf->SetAutoPageBreak(1, 50);
@@ -400,7 +401,7 @@ if ($idFtaEtat <> "1") {
         array("Dimension UVC", $returnUVC["dimension_uvc"] . " mm"),
         array("Dimension Colis", $returnDuColis["dimension_uvc"] . " mm"),
         array("PCB", $returnUVC[FtaModel::FIELDNAME_NOMBRE_UVC_PAR_CARTON]),
-        array("Poids net Colis", round($returnDuColis["colis_net"],"3") . " kg"),
+        array("Poids net Colis", round($returnDuColis["colis_net"], "3") . " kg"),
         array("Poids brut Colis", round($returnDuColis["colis_brut"], "3") . " kg")
     );
 
@@ -443,8 +444,8 @@ if ($idFtaEtat <> "1") {
         array("Nombre total de colis par palette", $returnPallettes["total_colis"]),
         array("Dimension palette", $returnPallettes["dimension_uvc"]),
         array("Hauteur palette", $returnPallettes["hauteur_palette"] . " m"),
-        array("Poids Net palette", round($returnPallettes["palette_net"],"1") . " kg"),
-        array("Poids Brut palette", round($returnPallettes["palette_brut"],"1") . " kg")
+        array("Poids Net palette", round($returnPallettes["palette_net"], "1") . " kg"),
+        array("Poids Brut palette", round($returnPallettes["palette_brut"], "1") . " kg")
     );
 
     foreach ($data_table as $information) {
@@ -501,9 +502,9 @@ if (!$apres_ouverture_fta and ! $remarque_fta and ! $origine_matiere_fta and ! $
     foreach ($data_table as $information) {
         $title = $information[0];
         $data = $information[1];
-        if ($data == NULL) {
-            $data = "Données manquantes";
-        }
+//        if ($data == NULL) {
+//            $data = "Données manquantes";
+//        }
         $title_format = $t3_format;
         $title_format[4] = 50;
         //$title_format[3]=10;   //Personalisation de l'interligne

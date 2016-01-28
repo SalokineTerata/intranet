@@ -385,8 +385,12 @@ class FtaView {
         return $htmlReturn;
     }
     
-    
-    function getHtmlVerrouillageEtiquetteWithEtiquetteColis(){
+    /**
+     * Affiche les champs "Forcer libellé étiquette colis ?" et Libellé etiquette carton
+     * En fonction du résultat du champs Forcer libellé étiquette colis ? fais apparaitre ou non l'autre champ
+     * @return string
+     */
+    public function getHtmlVerrouillageEtiquetteWithEtiquetteColis(){
           //Initialisation des variables locales
         $htmlReturn = NULL;
         $htmlObjectVerrouillageEtiquette = new DataFieldToHtmlListBoolean(
@@ -395,8 +399,6 @@ class FtaView {
         $htmlObjectEtiquetteColis = new DataFieldToHtmlInputText(
                 $this->getModel()->getDataField(FtaModel::FIELDNAME_LIBELLE_CLIENT)
         );
-
-
 
         //Unité de facturation
         $htmlObjectVerrouillageEtiquette->setIsEditable($this->getIsEditable());
@@ -414,7 +416,8 @@ class FtaView {
 
         if ($htmlObjectVerrouillageEtiquette->getDataField()->getFieldValue() <> FtaModel::ETIQUETTE_COLIS_VERROUILLAGE_FALSE) {
             $htmlObjectEtiquetteColis->getStyleCSS()->setDisplayToNone();
-//            $htmlObjectEtiquetteColis->getDataField()->setFieldValue("0");
+            $dinValue=$this->getModel()->getDataField(FtaModel::FIELDNAME_LIBELLE)->getFieldValue();
+            $htmlObjectEtiquetteColis->getDataField()->setFieldValue($dinValue);
             $htmlObjectEtiquetteColis->getDataField()->getRecordsetRef()->saveToDatabase();
         } else {
             $htmlObjectEtiquetteColis->getStyleCSS()->unsetDisplay();

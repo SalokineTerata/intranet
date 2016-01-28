@@ -80,6 +80,34 @@ class AnnexeEmballageModel extends AbstractModel {
         return $req;
     }
 
+    /**
+     * Valeurs par défaut en cas de création
+     * d'un nouvel enregistrement
+     * @return mixed
+     */
+    static public function createNewRecordset($paramForeignKeysValuesArray = NULL) {
+
+
+        $pdo = DatabaseOperation::executeComplete(
+                        'INSERT INTO ' . AnnexeEmballageModel::TABLENAME
+                        . '(' . AnnexeEmballageModel::FIELDNAME_ID_FTE_FOURNISSEUR . ')'
+                        . 'VALUES (' . $paramForeignKeysValuesArray[AnnexeEmballageModel::FIELDNAME_ID_FTE_FOURNISSEUR] . ')'
+        );
+        $key = $pdo->lastInsertId();
+        return $key;
+    }
+
+    /**
+     * Suppression d'une donnée de la table Annexe emballage par son identifiant
+     * @param type $paramIdAnnexeEmballage
+     * @return type
+     */
+    public static function deleteAnnexeEmballage($paramIdAnnexeEmballage) {
+        return DatabaseOperation::execute(
+                        ' DELETE FROM ' . self::TABLENAME . ' WHERE ' .
+                        self::KEYNAME . '=' . $paramIdAnnexeEmballage);
+    }
+
 }
 
 ?>

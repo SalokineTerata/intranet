@@ -234,7 +234,7 @@ if ($idUser) {
             }
 
             //Action possible sur la FTE
-            if (${$module . "_modification"} == 1) {
+            if (Acl::getValueAccesRights($module . "_modification") == 1) {
                 $bloc.="<td>";
 
                 //Supprimer

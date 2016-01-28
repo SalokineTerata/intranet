@@ -22,6 +22,7 @@ class EnvironmentInit extends EnvironmentAbstract {
     const CSS_FTA = "CSS_FTA";
     const CSS_TITLE_VALUE = "CSS_TITLE_VALUE";
     const EXECUTION_ENVIRONMENT_NAME = "EXECUTION_ENVIRONMENT_NAME";
+    const EXECUTION_MEMORY_LIMIT = "EXECUTION_MEMORY_LIMIT";
     const EXECUTION_TIME_LIMIT = "EXECUTION_TIME_LIMIT";
     const IS_DEBUG_EXEC_ENVIRONMENT_ENABLED = "IS_DEBUG_EXEC_ENVIRONMENT_ENABLED";
     const IS_DEBUG_SESSION_ENABLED = "IS_DEBUG_SESSION_ENABLED";
@@ -53,6 +54,7 @@ class EnvironmentInit extends EnvironmentAbstract {
          */
         $this->setConf(new EnvironmentConf);
         set_time_limit($paramInit[self::EXECUTION_TIME_LIMIT][$paramEnvName]);
+        ini_set('memory_limit', $paramInit[self::EXECUTION_MEMORY_LIMIT][$paramEnvName]);
 
         /*
          * Partie 2 : Bloc de variables pouvant être

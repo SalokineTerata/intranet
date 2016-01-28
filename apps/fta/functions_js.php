@@ -75,18 +75,19 @@
         var TagData = TagId;
         var Data = document.getElementById(TagData);
         var FieldValue = Data.value;
-        //var FieldValueForUrl = escape(FieldValue);
+//        var FieldValueForUrl = escape(FieldValue);
         var FieldValueForUrl = encodeURIComponent(FieldValue);
         //alert(FieldValueForUrl);
 
-        var HtmlImageLoading = '<?php echo Html::DEFAULT_HTML_IMAGE_LOADING ?>';
-        var TagStatus = '<?php echo Html::PREFIXE_ID_ICON_STATUS ?>' + '_' + TagId;
+//        var HtmlImageLoading = '<?php echo Html::DEFAULT_HTML_IMAGE_LOADING ?>';
+//        var TagStatus = '<?php echo Html::PREFIXE_ID_ICON_STATUS ?>' + '_' + TagId;
         var UrlParameter = ParamUrlParameter + '&FieldValue=' + FieldValueForUrl;
         function handleAJAXReturnCustom()
         {
-            var ParamTagStatus = TagStatus;
+//            var ParamTagStatus = TagStatus;
             var ParamHttp = http;
-            handleAJAXReturn(ParamTagStatus, ParamHttp, CallbackFunction, CallbackFunctionParameters);
+//            handleAJAXReturn(ParamTagStatus, ParamHttp, CallbackFunction, CallbackFunctionParameters);
+            handleAJAXReturn(ParamHttp, CallbackFunction, CallbackFunctionParameters);
         }
 
         //Coeur de gestion du fonctionnement AJAX
@@ -99,14 +100,14 @@
 
 
 
-    function handleAJAXReturn(ParamTagStatus, ParamHttp, ParamCallbackFunction, ParamCallbackFunctionParameters)
+    function handleAJAXReturn( ParamHttp, ParamCallbackFunction, ParamCallbackFunctionParameters)
     {
 
         //Définition des variables
-        var TagStatus = ParamTagStatus;
+//        var TagStatus = ParamTagStatus;
         var Http = ParamHttp;
-        var HtmlImageOk = '<?php echo Html::DEFAULT_HTML_IMAGE_OK ?>';
-        var HtmlImageFailed = '<?php echo Html::DEFAULT_HTML_IMAGE_FAILED ?>';
+//        var HtmlImageOk = '<?php echo Html::DEFAULT_HTML_IMAGE_OK ?>';
+//        var HtmlImageFailed = '<?php echo Html::DEFAULT_HTML_IMAGE_FAILED ?>';
         var CallbackFunction = ParamCallbackFunction;
         var CallbackFunctionParameters = ParamCallbackFunctionParameters;
         //Corps de la fonction
@@ -115,23 +116,23 @@
         //2 : La méthode send vient d'être appelée
         //3 : Le serveur traite les informations et a commencé à renvoyer des données
         //4 : Le serveur a fini son travail, et toutes les données sont réceptionnées
-//        if (Http.readyState === 4)
-//        {
-//            //Ici, possibilité d'ajouter du précontrôle si besoin...
-//            if (Http.status === 200)
-//            {
+        if (Http.readyState === 4)
+        {
+            //Ici, possibilité d'ajouter du précontrôle si besoin...
+            if (Http.status === 200)
+            {
 //                document.getElementById(TagStatus).innerHTML = HtmlImageOk;
-//
-//                //Si une fonction CallBack est définie, on l'exécute.
-//                if (CallbackFunction !== "") {
-//                    window[CallbackFunction](CallbackFunctionParameters);
-//                }
-//            }
+
+                //Si une fonction CallBack est définie, on l'exécute.
+                if (CallbackFunction !== "") {
+                    window[CallbackFunction](CallbackFunctionParameters);
+                }
+            }
 //            else
 //            {
 //                document.getElementById(TagStatus).innerHTML = HtmlImageFailed;
 //            }
-//        }
+        }
     }
     function displayTrueElementById(ParamId) {
         var targetElement;
@@ -158,6 +159,26 @@
             document.getElementById(idElementDataPoidsElem).onchange();
         } else {
             displayTrueElementById(idElementRowPoidsElem);
+        }
+    }
+
+    /**
+     * Cette fonction gère l'affichage de l'étiquette colis
+     * @returns {undefined}
+     */
+    function displayVerrouEtiq(Param) {
+
+        var Parameters = Param.split(",", 2);
+        var idElementVerrouEtiquette = Parameters[0];
+        var idElementDataEtiquetteColis = Parameters[1];
+        var idElementRowEtiquetteColis = '<?php echo Html::PREFIXE_ID_ROW . "_" ?>' + idElementDataEtiquetteColis;
+        elementUniteFacturation = document.getElementById(idElementVerrouEtiquette);
+        if (elementUniteFacturation.value != '<?php echo FtaModel::ETIQUETTE_COLIS_VERROUILLAGE_NON ?>')
+        {
+            displayFalseElementById(idElementRowEtiquetteColis);
+            document.getElementById(idElementDataEtiquetteColis).onchange();
+        } else {
+            displayTrueElementById(idElementRowEtiquetteColis);
         }
     }
 

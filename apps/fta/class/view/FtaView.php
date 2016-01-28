@@ -22,6 +22,12 @@ class FtaView {
      * du champs Poids_ELEM
      */
     const JAVASCRIPT_CALLBACK_POIDS_ELEM = "displayPoidsElem";
+    
+    /**
+     * Fonction JavaScript appelée pour actualiser la visibilité
+     * du champs verrouillage_libelle_etiquette_fta
+     */
+    const JAVASCRIPT_CALLBACK_VERROUILLAGE_ETIQ = "displayVerrouEtiq";
 
     /**
      * Fonction JavaScript appelée pour actualiser la visibilité
@@ -376,6 +382,47 @@ class FtaView {
             $htmlObjectPoidsElementaire->getStyleCSS()->unsetDisplay();
         }
         $htmlReturn.=$htmlObjectPoidsElementaire->getHtmlResult();
+        return $htmlReturn;
+    }
+    
+    /**
+     * Affiche les champs "Forcer libellé étiquette colis ?" et Libellé etiquette carton
+     * En fonction du résultat du champs Forcer libellé étiquette colis ? fais apparaitre ou non l'autre champ
+     * @return string
+     */
+    public function getHtmlVerrouillageEtiquetteWithEtiquetteColis(){
+          //Initialisation des variables locales
+        $htmlReturn = NULL;
+        $htmlObjectVerrouillageEtiquette = new DataFieldToHtmlListBoolean(
+                $this->getModel()->getDataField(FtaModel::FIELDNAME_VERROUILLAGE_LIBELLE_ETIQUETTE)
+        );
+        $htmlObjectEtiquetteColis = new DataFieldToHtmlInputText(
+                $this->getModel()->getDataField(FtaModel::FIELDNAME_LIBELLE_CLIENT)
+        );
+
+        //Unité de facturation
+        $htmlObjectVerrouillageEtiquette->setIsEditable($this->getIsEditable());
+        $htmlObjectVerrouillageEtiquette->getEventsForm()->setCallbackJavaScriptFunctionOnChange(self::JAVASCRIPT_CALLBACK_VERROUILLAGE_ETIQ);
+        $callbackJavaScriptFunctionOnChangeParameters = $htmlObjectVerrouillageEtiquette->getAttributesGlobal()->getId()->getValue()
+                . ","
+                . $htmlObjectEtiquetteColis->getAttributesGlobal()->getId()->getValue()
+        ;
+        $htmlObjectVerrouillageEtiquette->getEventsForm()->setCallbackJavaScriptFunctionOnChangeParameters($callbackJavaScriptFunctionOnChangeParameters);
+
+        $htmlReturn.=$htmlObjectVerrouillageEtiquette->getHtmlResult();
+
+        //Poids élémentaire
+        $htmlObjectEtiquetteColis->setIsEditable($this->getIsEditable());
+
+        if ($htmlObjectVerrouillageEtiquette->getDataField()->getFieldValue() <> FtaModel::ETIQUETTE_COLIS_VERROUILLAGE_FALSE) {
+            $htmlObjectEtiquetteColis->getStyleCSS()->setDisplayToNone();
+            $dinValue=$this->getModel()->getDataField(FtaModel::FIELDNAME_LIBELLE)->getFieldValue();
+            $htmlObjectEtiquetteColis->getDataField()->setFieldValue($dinValue);
+            $htmlObjectEtiquetteColis->getDataField()->getRecordsetRef()->saveToDatabase();
+        } else {
+            $htmlObjectEtiquetteColis->getStyleCSS()->unsetDisplay();
+        }
+        $htmlReturn.=$htmlObjectEtiquetteColis->getHtmlResult();
         return $htmlReturn;
     }
 

@@ -1102,6 +1102,12 @@ class Chapitre {
         //Conditionné sous atmosphère protectrice
         $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_CONDITION_SOUS_ATMOSPHERE);
 
+        //Forcer libellé étiquette colis ?:
+        //Etiquette colis
+        $bloc.=$ftaView->getHtmlVerrouillageEtiquetteWithEtiquetteColis();
+        ;
+
+
         return $bloc;
     }
 
@@ -1129,11 +1135,13 @@ class Chapitre {
         //Conseil après ouverture
         $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_CONSEIL_APRES_OUVERTURE);
 
-        //Forcer libellé étiquette colis ?:
-        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_VERROUILLAGE_LIBELLE_ETIQUETTE);
-
         //Conditionné sous atmosphère protectrice
         $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_CONDITION_SOUS_ATMOSPHERE);
+
+        //Forcer libellé étiquette colis ?:
+        //Etiquette colis
+        $bloc.=$ftaView->getHtmlVerrouillageEtiquetteWithEtiquetteColis();
+
 
         return $bloc;
     }
@@ -1164,6 +1172,11 @@ class Chapitre {
 
         //Conditionné sous atmosphère protectrice
         $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_CONDITION_SOUS_ATMOSPHERE);
+
+        //Forcer libellé étiquette colis ?:
+        //Etiquette colis
+        $bloc.=$ftaView->getHtmlVerrouillageEtiquetteWithEtiquetteColis();
+
 
         return $bloc;
     }

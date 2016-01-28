@@ -70,6 +70,9 @@ class UserInterfaceMessage {
     const FR_WARNING_ECHEANCE_DEPASSEE = "Certaines échéances sont dépassées !";
     const FR_WARNING_EMBALLAGE_COLIS = "Il ne doit y avoir qu'un seul emballage Colis";
     const FR_WARNING_EMBALLAGE_PALETTE = "Il ne doit y avoir qu'une seule Palette";
+    const FR_WARNING_EMBALLAGE_SUPPRESION = "Vous ne pouvez pas supprimer cette Fiche Technique Emballage.<br><br>
+                    En effet, elle est encore utilisée dans certaines Fiches Techniques Articles.<br><br>";
+    const FR_WARNING_EMBALLAGE_SUPPRESION_TITLE = "Suppression d'une Fiche Technique Emballage";
     const FR_WARNING_MESSAGE_URL_MODIF = "Veuillez ne pas modifier URL.<br><br>";
     const FR_WARNING_NOT_HANDLE_TITLE = "Cas non géré";
     const FR_WARNING_PARAM_ID_FTA = "Erreur la Fta n'est passé en paramètre.<br><br>";

@@ -69,6 +69,7 @@ if ($comeback) {
 $action = Lib::getParameterFromRequest('action');
 $demande_abreviation_fta_transition = Lib::getParameterFromRequest('demande_abreviation_fta_transition');
 $syntheseAction = Lib::getParameterFromRequest('synthese_action');
+$checkPost = Lib::getParameterFromRequest('checkPost');
 
 
 /*
@@ -188,6 +189,23 @@ $tableau_transition.='</select>';
 //Tableau des chapitres
 if ($action == FtaEtatModel::ETAT_ABREVIATION_VALUE_MODIFICATION or $action == 'W') {
     /**
+     * Changement de la page d'action
+     */
+    if (!$checkPost) {
+        $page_action = "transiter_fiche.php";
+    } else {
+        $affichageCommentaire = " <tr>
+            <td class=titre_principal>
+                Historiques des commentaire de mise à jour
+            </td>
+        </tr>
+        <tr  class=contenu>
+     
+           ' . $NOM_commentaire_maj_fta . '
+
+        </tr>";
+    }
+    /**
      * Affichage de la date d'échéances
      */
     $ftaModel->setIsEditable(Chapitre::EDITABLE);
@@ -209,43 +227,27 @@ if ($action == FtaEtatModel::ETAT_ABREVIATION_VALUE_MODIFICATION or $action == '
     );
     foreach ($arrrayFtaChapitre as $rowsChapitre) {
         if (Lib::getParameterFromRequest(FtaChapitreModel::FIELDNAME_NOM_CHAPITRE . '_' . $rowsChapitre[FtaWorkflowStructureModel::FIELDNAME_ID_FTA_CHAPITRE]) == 1) {
-            $ListeDesChapitres[] = $rowsChapitre[FtaChapitreModel::KEYNAME];
             $checked = 'checked';
+            $bgcolor = TableauFicheView::HTML_CELL_BGCOLOR_VALIDATE;
+            $din = "";
+        } elseif (Lib::getParameterFromRequest(FtaChapitreModel::FIELDNAME_NOM_CHAPITRE . '_' . $rowsChapitre[FtaWorkflowStructureModel::FIELDNAME_ID_FTA_CHAPITRE]) == 2) {
+            $checked = 'checked';
+            $din = TableauFicheView::HTML_TEXT_COLOR_DIN;
+            $bgcolor = TableauFicheView::HTML_CELL_BGCOLOR_DEFAULT;
         } else {
-            $checked = '';
+            $checked = "";
+            $bgcolor = "";
+            $din = "";
         }
         $tableau_chapitre.= '<tr>'
-                . '<td><input type=checkbox onClick=\'js_page_reload_' . FtaChapitreModel::FIELDNAME_NOM_CHAPITRE . '_' . $rowsChapitre[FtaChapitreModel::KEYNAME] . '()\''
-                . ' name=' . FtaChapitreModel::FIELDNAME_NOM_CHAPITRE . '_' . $rowsChapitre[FtaChapitreModel::KEYNAME] . ' value=1 ' . $checked . ' /></td>'
-                . '<td>' . $rowsChapitre[FtaChapitreModel::FIELDNAME_NOM_USUEL_CHAPITRE] . '</td>'
+                . '<td><input type=checkbox  name=' . FtaChapitreModel::FIELDNAME_NOM_CHAPITRE . '_' . $rowsChapitre[FtaChapitreModel::KEYNAME] . ' value=1  ' . $checked . '/></td>'
+                . '<td ' . $bgcolor . '><font  ' . $din . '>' . $rowsChapitre[FtaChapitreModel::FIELDNAME_NOM_USUEL_CHAPITRE] . '</font></td>'
                 . '</tr>'
         ;
-
-        $javascript.='
-                           <SCRIPT LANGUAGE=JavaScript>
-                                    function js_page_reload_' . FtaChapitreModel::FIELDNAME_NOM_CHAPITRE . '_' . $rowsChapitre[FtaChapitreModel::KEYNAME] . '() {
-        current_page = document.form_action.current_page.value;
-        current_query = document.form_action.current_query.value;
-        reload = document.form_action.' . FtaChapitreModel::FIELDNAME_NOM_CHAPITRE . '_' . $rowsChapitre[FtaChapitreModel::KEYNAME] . '.value;
-        url = current_page + "?" + current_query + "&' . FtaChapitreModel::FIELDNAME_NOM_CHAPITRE . '_' . $rowsChapitre[FtaChapitreModel::KEYNAME] . '=" + reload;
-        parent.location.href = url;
-    }
-                           </SCRIPT>
-                           ';
     }
     $tableau_chapitre.= $dateEcheanceFtaHtml . '</table></td></tr>'
-            . '</table>' . $javascript
+            . '</table>'
     ;
-    $affichageCommentaire = " <tr>
-            <td class=titre_principal>
-                Historiques des commentaire de mise à jour
-            </td>
-        </tr>
-        <tr  class=contenu>
-     
-           ' . $NOM_commentaire_maj_fta . '
-
-        </tr>";
 }
 //Tableau des chapitres espace de travail
 //if ($action == 'W') {

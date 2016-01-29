@@ -215,26 +215,7 @@ class FtaChapitreModel extends AbstractModel {
         DatabaseOperation::execute($reqDenotification);
 
         //Recherches des processus suivants
-        $arrayProcessusCycle = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
-                        'SELECT DISTINCT ' . FtaProcessusCycleModel::FIELDNAME_PROCESSUS_NEXT . ',' . FtaProcessusModel::FIELDNAME_MULTISITE_FTA_PROCESSUS
-                        . ' FROM ' . FtaProcessusCycleModel::TABLENAME . ',' . FtaProcessusModel::TABLENAME
-                        . ',' . FtaSuiviProjetModel::TABLENAME . ',' . FtaWorkflowStructureModel::TABLENAME
-                        . ' WHERE ' . FtaProcessusCycleModel::FIELDNAME_FTA_ETAT . '=\'' . $abreviation_fta_etat . '\' '
-                        . ' AND ' . FtaProcessusModel::TABLENAME . '.' . FtaProcessusModel::KEYNAME
-                        . '=' . FtaProcessusCycleModel::TABLENAME . '.' . FtaProcessusCycleModel::FIELDNAME_PROCESSUS_NEXT
-                        . ' AND ' . FtaWorkflowStructureModel::TABLENAME . '.' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_PROCESSUS
-                        . '=' . FtaProcessusCycleModel::TABLENAME . '.' . FtaProcessusCycleModel::FIELDNAME_PROCESSUS_NEXT
-                        . ' AND ' . FtaWorkflowStructureModel::TABLENAME . '.' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_WORKFLOW
-                        . '=' . FtaProcessusCycleModel::TABLENAME . '.' . FtaProcessusCycleModel::FIELDNAME_WORKFLOW
-                        . ' AND ' . FtaWorkflowStructureModel::TABLENAME . '.' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_CHAPITRE
-                        . '=' . FtaSuiviProjetModel::TABLENAME . '.' . FtaSuiviProjetModel::FIELDNAME_ID_FTA_CHAPITRE
-                        . ' AND ' . FtaProcessusCycleModel::FIELDNAME_PROCESSUS_INIT . '=\'' . $paramIdProcessus . '\' '
-                        . ' AND ' . FtaProcessusCycleModel::FIELDNAME_PROCESSUS_NEXT . ' IS NOT NULL'
-                        . ' AND ' . FtaSuiviProjetModel::FIELDNAME_SIGNATURE_VALIDATION_SUIVI_PROJET . ' <> 0'
-                        . ' AND ' . FtaSuiviProjetModel::FIELDNAME_ID_FTA . '=' . $paramIdFta
-                        . ' AND ' . FtaWorkflowStructureModel::TABLENAME . '.' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_WORKFLOW . '=' . $id_fta_workflow
-        );
-
+        $arrayProcessusCycle = FtaProcessusCycleModel::getArrayProccusNextValidateFromIdFta($paramIdFta, $id_fta_workflow, $abreviation_fta_etat, $paramIdProcessus);
         //Enregistrement du processus
         $htmlResult->setProcessus($paramIdProcessus);
 
@@ -363,11 +344,12 @@ class FtaChapitreModel extends AbstractModel {
      * On obtient le tableau des id Fta chapitre pour lesquelle l'utilisateur connecté à les droits d'accès
      * @param array $paramArrayProcessus
      */
-    public static function getIdFtaChapitreByArrayProcessus($paramArrayProcessus) {
+    public static function getIdFtaChapitreByArrayProcessusAndWorkflow($paramArrayProcessus, $paramIdFtaWorkflow) {
         $arrayIdFtaChapitre = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
                         'SELECT DISTINCT ' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_CHAPITRE
                         . ' FROM ' . FtaWorkflowStructureModel::TABLENAME
                         . ' WHERE ( 0 ' . FtaProcessusModel::addIdFtaProcessus($paramArrayProcessus) . ')'
+                        . ' AND  ' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_WORKFLOW . '=' . $paramIdFtaWorkflow
         );
         foreach ($arrayIdFtaChapitre as $rowsIdFtaChapitre) {
             $ListeIdFtaChapitre[] = $rowsIdFtaChapitre[self::KEYNAME];
@@ -376,7 +358,6 @@ class FtaChapitreModel extends AbstractModel {
         return $ListeIdFtaChapitre;
     }
 
-    
     /**
      * On obtient le chapitre par défaut en redirection
      * @param int $paramIdFtaRole
@@ -387,13 +368,24 @@ class FtaChapitreModel extends AbstractModel {
     public static function getIdFtaChapitreByDefault($paramIdFtaRole, $paramIdFtaWorkflow, $paramListeDesChapitres) {
 
         $arrayProcessusAcces = FtaWorkflowStructureModel::getArrayProcessusByRoleAndWorkflow($paramIdFtaRole, $paramIdFtaWorkflow);
-        $ListeDesChapitresByUser = FtaChapitreModel::getIdFtaChapitreByArrayProcessus($arrayProcessusAcces);
+        $ListeDesChapitresByUser = FtaChapitreModel::getIdFtaChapitreByArrayProcessusAndWorkflow($arrayProcessusAcces, $paramIdFtaWorkflow);
 
         if ($paramListeDesChapitres) {
             $ListeDesChapitresAcces = array_intersect($paramListeDesChapitres, $ListeDesChapitresByUser);
         }
+        foreach ($ListeDesChapitresAcces as $key => $value) {
+            $idFtaChapitre = $value;
+        }
+        return $idFtaChapitre;
+    }
 
-        return $ListeDesChapitresAcces["0"];
+    public static function addIdFtaChapitre($paramIdEffectue) {
+        if ($paramIdEffectue) {
+            foreach ($paramIdEffectue as $value) {
+                $req .= " OR " . self::KEYNAME . "=" . $value . " ";
+            }
+        }
+        return $req;
     }
 
 }

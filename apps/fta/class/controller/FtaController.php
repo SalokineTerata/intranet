@@ -12,6 +12,9 @@
  */
 class FtaController {
 
+    const CALLBACK_LINK_TO_TRANSITER_PAGE = "Retour";
+    const CALLBACK_LINK_TO_TRANSITER_PAGE_VALIDATE = "Confirmer";
+
     /**
      *  Génère le commentaire d'un changement d'espace de travail
      * @param string $paramWorkflowOLD
@@ -79,6 +82,37 @@ class FtaController {
     public static function isCheckDateFormat($value) {
         $result = DateTime::createFromFormat("d-m-Y", $value);
         return $result;
+    }
+
+    /**
+     * Affiche le bouton de retour vers la Fta
+     * @return string
+     */
+    public static function getHtmlButtonReturnTransition($paramIdFta, $paramAction, $paramIdFtaRole, $paramSyntheseAction, $paramDemandeAbreviationFtaEtat) {
+        return '<td><center>'
+                . '<a href=transiter.php?'
+                . 'id_fta=' . $paramIdFta
+                . '&action=' . $paramAction
+                . '&id_fta_role=' . $paramIdFtaRole
+                . '&synthese_action=' . $paramSyntheseAction
+                . '&demande_abreviation_fta_transition=' . $paramDemandeAbreviationFtaEtat
+                . '>' . self::CALLBACK_LINK_TO_TRANSITER_PAGE . '</a></center></td>';
+    }
+
+    /**
+     * Affiche le bouton de retour vers la Fta
+     * @return string
+     */
+    public static function getHtmlButtonConfirmationTransition($paramIdFta, $paramAction, $paramIdFtaRole, $paramChapitresSelectionne, $paramChapitres) {
+        return '<td><center>'
+                . '<a href=transiter.php?'
+                . 'id_fta=' . $paramIdFta
+                . '&action=' . $paramAction
+                . '&id_fta_role=' . $paramIdFtaRole
+                . '&checkPost=1'
+                . $paramChapitresSelectionne
+                . $paramChapitres
+                . '>' . self::CALLBACK_LINK_TO_TRANSITER_PAGE_VALIDATE . '</a></center></td>';
     }
 
 }

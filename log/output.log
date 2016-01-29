@@ -521,3 +521,69 @@ test mail
 2015-12-09 13:05:29 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `site_expedition_fta` =   '11'
 2015-12-09 13:08:32 DBG 127.0.0.1 D:\weblocal\intranet-v3\apps\fta\ajax_update_data.php : 3
 2015-12-09 13:08:32 DBG 127.0.0.1 DatabaseOperation::doSqlUpdateFromOneField : `activation_codesoft_arti2` =   '3'
+2016-01-15 09:02:24 DBG 10.143.35.42 /u1/DATA01/webldc/cod-intranet/v3/apps/fta/ajax_update_data.php : 0
+2016-01-15 09:02:24 DBG 10.143.35.42 DatabaseOperation::doSqlUpdateFromOneField : `Poids_ELEM` =   '0'
+2016-01-15 09:02:36 DBG 10.143.35.42 /u1/DATA01/webldc/cod-intranet/v3/apps/fta/ajax_update_data.php : 0.500
+2016-01-15 09:02:36 DBG 10.143.35.42 DatabaseOperation::doSqlUpdateFromOneField : `Poids_ELEM` =   '0.500'
+2016-01-15 09:05:07 DBG 10.143.35.42 /u1/DATA01/webldc/cod-intranet/v3/apps/fta/ajax_update_data.php : 0.4
+2016-01-15 09:05:07 DBG 10.143.35.42 DatabaseOperation::doSqlUpdateFromOneField : `pvc_article_kg` =   '0.4'
+2016-01-15 09:05:10 DBG 10.143.35.42 /u1/DATA01/webldc/cod-intranet/v3/apps/fta/ajax_update_data.php : 0.2
+2016-01-15 09:05:10 DBG 10.143.35.42 DatabaseOperation::doSqlUpdateFromOneField : `pvc_article` =   '0.2'
+2016-01-15 09:10:18 DBG 10.143.35.42 /u1/DATA01/webldc/cod-intranet/v3/apps/fta/ajax_update_data.php : 
+2016-01-15 09:10:18 DBG 10.143.35.42 DatabaseOperation::doSqlUpdateFromOneField : `LIBELLE` =   NULL
+2016-01-15 09:10:50 DBG 10.143.35.42 /u1/DATA01/webldc/cod-intranet/v3/apps/fta/ajax_update_data.php : 
+2016-01-15 09:10:50 DBG 10.143.35.42 DatabaseOperation::doSqlUpdateFromOneField : `LIBELLE` =   NULL
+2016-01-15 09:11:55 DBG 10.143.35.42 /u1/DATA01/webldc/cod-intranet/v3/apps/fta/ajax_update_data.php : 
+2016-01-15 09:11:55 DBG 10.143.35.42 DatabaseOperation::doSqlUpdateFromOneField : `LIBELLE` =   NULL
+2016-01-15 09:13:21 DBG 10.143.35.42 /u1/DATA01/webldc/cod-intranet/v3/apps/fta/ajax_update_data.php : 
+2016-01-15 09:13:21 DBG 10.143.35.42 DatabaseOperation::doSqlUpdateFromOneField : `LIBELLE` =   NULL
+2016-01-18 16:23:22 DBG 10.143.35.42 /u1/DATA01/webldc/cod-intranet/v3/apps/fta/ajax_update_data.php : 3
+2016-01-18 16:23:22 DBG 10.143.35.42 DatabaseOperation::doSqlUpdateFromOneField : `K_etat` =   '3'
+2016-01-18 16:23:28 DBG 10.143.35.42 /u1/DATA01/webldc/cod-intranet/v3/apps/fta/ajax_update_data.php : 1
+2016-01-18 16:23:28 DBG 10.143.35.42 DatabaseOperation::doSqlUpdateFromOneField : `K_etat` =   '1'
+2016-01-22 14:02:17 DBG 10.143.35.42 /u1/DATA01/webldc/cod-intranet/v3/apps/fta/ajax_update_data.php : 3
+2016-01-22 14:02:17 DBG 10.143.35.42 DatabaseOperation::doSqlUpdateFromOneField : `activation_codesoft_arti2` =   '3'
+2016-01-22 14:02:22 DBG 10.143.35.42 /u1/DATA01/webldc/cod-intranet/v3/apps/fta/ajax_update_data.php : 72
+2016-01-22 14:02:22 DBG 10.143.35.42 DatabaseOperation::doSqlUpdateFromOneField : `id_etiquette_codesoft_arti2` =   '72'
+2016-01-22 14:07:21 DBG 10.143.35.42 /u1/DATA01/webldc/cod-intranet/v3/apps/fta/ajax_update_data.php : 13
+2016-01-22 14:07:21 DBG 10.143.35.42 DatabaseOperation::doSqlUpdateFromOneField : `id_annexe_agrologic_article_codification` =   '13'
+2016-01-22 14:07:24 DBG 10.143.35.42 /u1/DATA01/webldc/cod-intranet/v3/apps/fta/ajax_update_data.php : 845845
+2016-01-22 14:07:24 DBG 10.143.35.42 DatabaseOperation::doSqlUpdateFromOneField : `code_produit_agrologic_fta_nomenclature` =   '845845'
+2016-01-22 14:07:27 DBG 10.143.35.42 /u1/DATA01/webldc/cod-intranet/v3/apps/fta/ajax_update_data.php : test
+2016-01-22 14:07:27 DBG 10.143.35.42 DatabaseOperation::doSqlUpdateFromOneField : `nom_fta_nomenclature` =   'test'
+2016-01-22 14:07:31 DBG 10.143.35.42 /u1/DATA01/webldc/cod-intranet/v3/apps/fta/ajax_update_data.php : kg
+2016-01-22 14:07:31 DBG 10.143.35.42 DatabaseOperation::doSqlUpdateFromOneField : `id_annexe_unite` =   'kg'
+2016-01-22 14:07:31 DBG 10.143.35.42 /u1/DATA01/webldc/cod-intranet/v3/apps/fta/ajax_update_data.php : 02
+2016-01-22 14:07:31 DBG 10.143.35.42 DatabaseOperation::doSqlUpdateFromOneField : `poids_fta_nomenclature` =   '02'
+2016-01-22 14:07:33 DBG 10.143.35.42 /u1/DATA01/webldc/cod-intranet/v3/apps/fta/ajax_update_data.php : 1
+2016-01-22 14:07:33 DBG 10.143.35.42 DatabaseOperation::doSqlUpdateFromOneField : `site_production_fta_nomenclature` =   '1'
+2016-01-22 14:07:34 DBG 10.143.35.42 /u1/DATA01/webldc/cod-intranet/v3/apps/fta/ajax_update_data.php : 1
+2016-01-22 14:07:34 DBG 10.143.35.42 DatabaseOperation::doSqlUpdateFromOneField : `etat_fta_nomenclature` =   '1'
+2016-01-22 14:25:45 DBG 10.143.35.42 /u1/DATA01/webldc/cod-intranet/v3/apps/fta/ajax_update_data.php : 34280
+2016-01-22 14:25:45 DBG 10.143.35.42 DatabaseOperation::doSqlUpdateFromOneField : `code_article_ldc` =   '34280'
+2016-01-28 10:58:56 DBG 10.143.35.42 /u1/DATA01/webldc/cod-intranet/v3/apps/fta/ajax_update_data.php : 1
+2016-01-28 10:58:56 DBG 10.143.35.42 DatabaseOperation::doSqlUpdateFromOneField : `verrouillage_libelle_etiquette_fta` =   '1'
+2016-01-28 10:58:56 DBG 10.143.35.42 /u1/DATA01/webldc/cod-intranet/v3/apps/fta/ajax_update_data.php : PLAT MEF CLASSIQUE TRFST 4X240G
+2016-01-28 10:58:56 DBG 10.143.35.42 DatabaseOperation::doSqlUpdateFromOneField : `LIBELLE_CLIENT` =   'PLAT MEF CLASSIQUE TRFST 4X240G'
+2016-01-28 10:58:59 DBG 10.143.35.42 /u1/DATA01/webldc/cod-intranet/v3/apps/fta/ajax_update_data.php : Non
+2016-01-28 10:58:59 DBG 10.143.35.42 DatabaseOperation::doSqlUpdateFromOneField : `verrouillage_libelle_etiquette_fta` =   'Non'
+2016-01-28 10:59:01 DBG 10.143.35.42 /u1/DATA01/webldc/cod-intranet/v3/apps/fta/ajax_update_data.php : 1
+2016-01-28 10:59:01 DBG 10.143.35.42 DatabaseOperation::doSqlUpdateFromOneField : `verrouillage_libelle_etiquette_fta` =   '1'
+2016-01-28 10:59:01 DBG 10.143.35.42 /u1/DATA01/webldc/cod-intranet/v3/apps/fta/ajax_update_data.php : PLAT MEF CLASSIQUE TRFST 4X240G
+2016-01-28 10:59:01 DBG 10.143.35.42 DatabaseOperation::doSqlUpdateFromOneField : `LIBELLE_CLIENT` =   'PLAT MEF CLASSIQUE TRFST 4X240G'
+2016-01-28 10:59:04 DBG 10.143.35.42 /u1/DATA01/webldc/cod-intranet/v3/apps/fta/ajax_update_data.php : Non
+2016-01-28 10:59:04 DBG 10.143.35.42 DatabaseOperation::doSqlUpdateFromOneField : `verrouillage_libelle_etiquette_fta` =   'Non'
+2016-01-28 10:59:07 DBG 10.143.35.42 /u1/DATA01/webldc/cod-intranet/v3/apps/fta/ajax_update_data.php : PLA
+2016-01-28 10:59:07 DBG 10.143.35.42 DatabaseOperation::doSqlUpdateFromOneField : `LIBELLE_CLIENT` =   'PLA'
+2016-01-28 10:59:08 DBG 10.143.35.42 /u1/DATA01/webldc/cod-intranet/v3/apps/fta/ajax_update_data.php : 1
+2016-01-28 10:59:08 DBG 10.143.35.42 DatabaseOperation::doSqlUpdateFromOneField : `verrouillage_libelle_etiquette_fta` =   '1'
+2016-01-28 10:59:08 DBG 10.143.35.42 /u1/DATA01/webldc/cod-intranet/v3/apps/fta/ajax_update_data.php : PLA
+2016-01-28 10:59:08 DBG 10.143.35.42 DatabaseOperation::doSqlUpdateFromOneField : `LIBELLE_CLIENT` =   'PLA'
+2016-01-28 10:59:11 DBG 10.143.35.42 /u1/DATA01/webldc/cod-intranet/v3/apps/fta/ajax_update_data.php : Non
+2016-01-28 10:59:11 DBG 10.143.35.42 DatabaseOperation::doSqlUpdateFromOneField : `verrouillage_libelle_etiquette_fta` =   'Non'
+2016-01-28 10:59:12 DBG 10.143.35.42 /u1/DATA01/webldc/cod-intranet/v3/apps/fta/ajax_update_data.php : 1
+2016-01-28 10:59:12 DBG 10.143.35.42 DatabaseOperation::doSqlUpdateFromOneField : `verrouillage_libelle_etiquette_fta` =   '1'
+2016-01-28 10:59:12 DBG 10.143.35.42 /u1/DATA01/webldc/cod-intranet/v3/apps/fta/ajax_update_data.php : PLA
+2016-01-28 10:59:12 DBG 10.143.35.42 DatabaseOperation::doSqlUpdateFromOneField : `LIBELLE_CLIENT` =   'PLA'
+2016-01-28 10:59:24 DBG 10.143.35.42 /u1/DATA01/webldc/cod-intranet/v3/apps/fta/ajax_update_data.php : Non
+2016-01-28 10:59:24 DBG 10.143.35.42 DatabaseOperation::doSqlUpdateFromOneField : `verrouillage_libelle_etiquette_fta` =   'Non'

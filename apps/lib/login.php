@@ -267,7 +267,7 @@ if ($login) {
                 //$q1 = DatabaseOperation::query('SELECT * FROM $mysql_table_authentification WHERE ((login = '$login') AND (pass = '$pass'))');
                 //Page par défaut après un login réussi
             } else {
-                $message = "La connection est un succès mais vous n'avez pas les droits d'accès sur l'intranet.<br><br>
+                $message = "La connection est un succès mais vous n'avez pas les droits d'accès sur l'intranet ou votre compte est bloqué.<br><br>
                              Veuillez contacter l'administrateur du site.";
                 afficher_message("Connection à l'intranet", $message, $redirection);
             }

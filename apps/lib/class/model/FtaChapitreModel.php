@@ -376,6 +376,9 @@ class FtaChapitreModel extends AbstractModel {
         foreach ($ListeDesChapitresAcces as $key => $value) {
             $idFtaChapitre = $value;
         }
+        if (!$idFtaChapitre) {
+            $idFtaChapitre = FtaChapitreModel::ID_CHAPITRE_IDENTITE;
+        }
         return $idFtaChapitre;
     }
 

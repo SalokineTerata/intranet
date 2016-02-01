@@ -263,7 +263,7 @@ $SiteDeProduction = $ftaModel->getDataField(FtaModel::FIELDNAME_SITE_PRODUCTION)
 //Site de facbrication de la composition
 $HtmlList = new HtmlListSelect();
 
-$bloc .= $ftaComposantView->showListeDeroulanteSiteProdForComposant($HtmlList, $isEditable, FtaComposantModel::FIELDNAME_ID_GEO);
+$bloc .= $ftaComposantView->showListeDeroulanteSiteProdForComposant($HtmlList, $editable, FtaComposantModel::FIELDNAME_ID_GEO);
 
 //$bloc.="</td></tr>";
 //echo $id_fta."<br>";

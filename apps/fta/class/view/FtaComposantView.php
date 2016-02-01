@@ -103,54 +103,7 @@ class FtaComposantView {
      */
     function showListeDeroulanteSiteProdForComposant(HtmlListSelect $paramObjet, $paramIsEditable, $paramLabelSiteDeProduction) {
 
-//        $ftaModel = new FtaModel($paramIdFta);
-//        $siteDeProductionFta = $ftaModel->getDataField(FtaModel::FIELDNAME_SITE_ASSEMBLAGE)->getFieldValue();
-        $arraySite = DatabaseOperation::convertSqlStatementWithKeyAndOneFieldToArray(
-                        'SELECT DISTINCT ' . GeoModel::KEYNAME . ',' . GeoModel::FIELDNAME_GEO
-                        . ' FROM ' . GeoModel::TABLENAME
-                        . ' WHERE ' . GeoModel::FIELDNAME_TAG_APPLICATION_GEO . ' LIKE  \'%fta%\''
-                        . ' ORDER BY ' . GeoModel::FIELDNAME_GEO
-        );
-
-        $paramObjet->setArrayListContent($arraySite);
-
-        $HtmlTableName = FtaComposantModel::TABLENAME
-                . '_'
-                . $paramLabelSiteDeProduction
-                . '_'
-                . $this->getFtaComposantModel()->getKeyValue()
-        ;
-        $arraySiteComposant = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
-                        'SELECT DISTINCT ' . $paramLabelSiteDeProduction
-                        . ' FROM ' . FtaComposantModel::TABLENAME
-                        . ' WHERE ' . FtaComposantModel::KEYNAME . '=' . $this->getFtaComposantModel()->getKeyValue()
-        );
-        foreach ($arraySiteComposant as $value) {
-            $SiteDeProduction = $value[$paramLabelSiteDeProduction];
-        }
-
-        if ($SiteDeProduction) {
-            $paramObjet->setDefaultValue($SiteDeProduction);
-        }
-//        else {
-//            $paramObjet->setDefaultValue($siteDeProductionFta);
-//        }
-        $paramObjet->getAttributes()->getName()->setValue($paramLabelSiteDeProduction);
-        $paramObjet->setLabel(DatabaseDescription::getFieldDocLabel(GeoModel::TABLENAME, GeoModel::FIELDNAME_GEO));
-        $paramObjet->setIsEditable($paramIsEditable);
-        $paramObjet->initAbstractHtmlSelect(
-                $HtmlTableName
-                , $paramObjet->getLabel()
-                , $this->getFtaComposantModel()->getDataField($paramLabelSiteDeProduction)->getFieldValue()
-                , $this->getFtaComposantModel()->getDataField($paramLabelSiteDeProduction)->isFieldDiff()
-                , $paramObjet->getArrayListContent()
-        );
-        $paramObjet->getEventsForm()->setOnChangeWithAjaxAutoSave(
-                FtaComposantModel::TABLENAME
-                , FtaComposantModel::KEYNAME
-                , $this->getFtaComposantModel()->getKeyValue()
-                , $paramLabelSiteDeProduction);
-        $listeSiteProduction = $paramObjet->getHtmlResult();
+        $listeSiteProduction = $this->getFtaComposantModel()->showListeDeroulanteSiteProdForComposant($paramObjet, $paramIsEditable, $paramLabelSiteDeProduction);
 
         return $listeSiteProduction;
     }
@@ -162,43 +115,7 @@ class FtaComposantView {
      */
     function getListeCodesoftEtiquettesRecto($paramIsEditable) {
 
-        $HtmlList = new HtmlListSelect();
-
-        $arrayEtiquette = DatabaseOperation::convertSqlStatementWithKeyAndOneFieldToArray(
-                        'SELECT DISTINCT ' . CodesoftEtiquettesModel::KEYNAME . ',' . CodesoftEtiquettesModel::FIELDNAME_DESIGNATION_CODESOFT_ETIQUETTES
-                        . ' FROM ' . CodesoftEtiquettesModel::TABLENAME
-                        . ' WHERE (' . CodesoftEtiquettesModel::FIELDNAME_K_SITE . '=' . $this->getFtaModel()->getDataField(FtaModel::FIELDNAME_SITE_PRODUCTION)->getFieldValue()
-                        . ' OR ' . CodesoftEtiquettesModel::FIELDNAME_K_SITE . '=0)'
-                        . ' AND (' . CodesoftEtiquettesModel::FIELDNAME_K_TYPE_ETIQUETTE_CODESOFT_ETIQUETTES . '=2'
-                        . ' OR ' . CodesoftEtiquettesModel::FIELDNAME_K_TYPE_ETIQUETTE_CODESOFT_ETIQUETTES . '=0' . ')'
-                        . ' AND ' . CodesoftEtiquettesModel::FIELDNAME_IS_ENABLED_FTA . '=1'
-                        . ' ORDER BY ' . CodesoftEtiquettesModel::FIELDNAME_DESIGNATION_CODESOFT_ETIQUETTES
-        );
-
-        $HtmlList->setArrayListContent($arrayEtiquette);
-
-        $HtmlTableName = FtaComposantModel::TABLENAME
-                . '_'
-                . FtaComposantModel::FIELDNAME_K_ETIQUETTE_FTA_COMPOSITION
-                . '_'
-                . $this->getFtaComposantModel()->getKeyValue()
-        ;
-        $HtmlList->getAttributes()->getName()->setValue(FtaComposantModel::FIELDNAME_K_ETIQUETTE_FTA_COMPOSITION);
-        $HtmlList->setLabel(DatabaseDescription::getFieldDocLabel(FtaComposantModel::TABLENAME, FtaComposantModel::FIELDNAME_K_ETIQUETTE_FTA_COMPOSITION));
-        $HtmlList->setIsEditable($paramIsEditable);
-        $HtmlList->initAbstractHtmlSelect(
-                $HtmlTableName
-                , $HtmlList->getLabel()
-                , $this->getFtaComposantModel()->getDataField(FtaComposantModel::FIELDNAME_K_ETIQUETTE_FTA_COMPOSITION)->getFieldValue()
-                , $this->getFtaComposantModel()->getDataField(FtaComposantModel::FIELDNAME_K_ETIQUETTE_FTA_COMPOSITION)->isFieldDiff()
-                , $HtmlList->getArrayListContent());
-        $HtmlList->getEventsForm()->setOnChangeWithAjaxAutoSave(
-                FtaComposantModel::TABLENAME
-                , FtaComposantModel::KEYNAME
-                , $this->getFtaComposantModel()->getKeyValue()
-                , FtaComposantModel::FIELDNAME_K_ETIQUETTE_FTA_COMPOSITION
-        );
-        $listeCodesoftEtiquettes = $HtmlList->getHtmlResult();
+        $listeCodesoftEtiquettes = $this->getFtaComposantModel()->getListeCodesoftEtiquettesRecto($paramIsEditable);
 
         return $listeCodesoftEtiquettes;
     }
@@ -209,42 +126,7 @@ class FtaComposantView {
      * @return string
      */
     function getListeCodesoftEtiquettesVerso($paramIsEditable) {
-        $HtmlList = new HtmlListSelect();
-
-        $arrayEtiquette = DatabaseOperation::convertSqlStatementWithKeyAndOneFieldToArray(
-                        'SELECT DISTINCT ' . CodesoftEtiquettesModel::KEYNAME . ',' . CodesoftEtiquettesModel::FIELDNAME_DESIGNATION_CODESOFT_ETIQUETTES
-                        . ' FROM ' . CodesoftEtiquettesModel::TABLENAME
-                        . ' WHERE (' . CodesoftEtiquettesModel::FIELDNAME_K_SITE . '=' . $this->getFtaModel()->getDataField(FtaModel::FIELDNAME_SITE_PRODUCTION)->getFieldValue()
-                        . ' OR ' . CodesoftEtiquettesModel::FIELDNAME_K_SITE . '=0)'
-                        . ' AND (' . CodesoftEtiquettesModel::FIELDNAME_K_TYPE_ETIQUETTE_CODESOFT_ETIQUETTES . '=3'
-                        . ' OR ' . CodesoftEtiquettesModel::FIELDNAME_K_TYPE_ETIQUETTE_CODESOFT_ETIQUETTES . '=0' . ')'
-                        . ' AND ' . CodesoftEtiquettesModel::FIELDNAME_IS_ENABLED_FTA . '=1'
-                        . ' ORDER BY ' . CodesoftEtiquettesModel::FIELDNAME_DESIGNATION_CODESOFT_ETIQUETTES
-        );
-
-        $HtmlList->setArrayListContent($arrayEtiquette);
-
-        $HtmlTableName = FtaComposantModel::TABLENAME
-                . '_'
-                . FtaComposantModel::FIELDNAME_K_ETIQUETTE_VERSO_FTA_COMPOSITION
-                . '_'
-                . $this->getFtaComposantModel()->getKeyValue()
-        ;
-        $HtmlList->getAttributes()->getName()->setValue(FtaComposantModel::FIELDNAME_K_ETIQUETTE_VERSO_FTA_COMPOSITION);
-        $HtmlList->setLabel(DatabaseDescription::getFieldDocLabel(FtaComposantModel::TABLENAME, FtaComposantModel::FIELDNAME_K_ETIQUETTE_VERSO_FTA_COMPOSITION));
-        $HtmlList->setIsEditable($paramIsEditable);
-        $HtmlList->initAbstractHtmlSelect(
-                $HtmlTableName
-                , $HtmlList->getLabel()
-                , $this->getFtaComposantModel()->getDataField(FtaComposantModel::FIELDNAME_K_ETIQUETTE_VERSO_FTA_COMPOSITION)->getFieldValue()
-                , $this->getFtaComposantModel()->getDataField(FtaComposantModel::FIELDNAME_K_ETIQUETTE_VERSO_FTA_COMPOSITION)->isFieldDiff()
-                , $HtmlList->getArrayListContent());
-        $HtmlList->getEventsForm()->setOnChangeWithAjaxAutoSave(
-                FtaComposantModel::TABLENAME
-                , FtaComposantModel::KEYNAME
-                , $this->getFtaComposantModel()->getKeyValue()
-                , FtaComposantModel::FIELDNAME_K_ETIQUETTE_VERSO_FTA_COMPOSITION);
-        $listeCodesoftEtiquettes = $HtmlList->getHtmlResult();
+        $listeCodesoftEtiquettes = $this->getFtaComposantModel()->getListeCodesoftEtiquettesVerso($paramIsEditable);
 
         return $listeCodesoftEtiquettes;
     }
@@ -255,45 +137,8 @@ class FtaComposantView {
      * @return string
      */
     function getListeModeEtiquette($paramIsEditable) {
-        $HtmlList = new HtmlListSelect();
-        $activationCodification = $this->getFtaModel()->getDataField(FtaModel::FIELDNAME_ACTIVATION_CODESOFT)->getFieldValue();
-        $codePSFValue = $this->getFtaComposantModel()->getDataField(FtaComposantModel::FIELDNAME_CODE_PRODUIT_AGROLOGIC_FTA_NOMENCLATURE)->getFieldValue();
-        if (($activationCodification == "2" or $activationCodification == "3") and $codePSFValue) {
-            $sqlCondi = " ";
-        } else {
-            $sqlCondi = " WHERE " . AnnexeModeEtiquetteModel::FIELDNAME_ETIQUETTE_ACTIF . "=0 ";
-        }
-        $sql = "SELECT " . AnnexeModeEtiquetteModel::KEYNAME . "," . AnnexeModeEtiquetteModel::FIELDNAME_MODE_ETIQUETTE_LABEL
-                . " FROM " . AnnexeModeEtiquetteModel::TABLENAME
-                . $sqlCondi
-                . "  ORDER BY " . AnnexeModeEtiquetteModel::FIELDNAME_MODE_ETIQUETTE_NOM . "";
-        $arrayModeEtiquette = DatabaseOperation::convertSqlStatementWithKeyAndOneFieldToArray(
-                        $sql
-        );
-
-        $HtmlList->setArrayListContent($arrayModeEtiquette);
-
-        $HtmlTableName = FtaComposantModel::TABLENAME
-                . '_'
-                . FtaComposantModel::FIELDNAME_MODE_ETIQUETTE_FTA_COMPOSITION
-                . '_'
-                . $this->getFtaComposantModel()->getKeyValue()
-        ;
-        $HtmlList->getAttributes()->getName()->setValue(FtaComposantModel::FIELDNAME_MODE_ETIQUETTE_FTA_COMPOSITION);
-        $HtmlList->setLabel(DatabaseDescription::getFieldDocLabel(FtaComposantModel::TABLENAME, FtaComposantModel::FIELDNAME_MODE_ETIQUETTE_FTA_COMPOSITION));
-        $HtmlList->setIsEditable($paramIsEditable);
-        $HtmlList->initAbstractHtmlSelect(
-                $HtmlTableName
-                , $HtmlList->getLabel()
-                , $this->getFtaComposantModel()->getDataField(FtaComposantModel::FIELDNAME_MODE_ETIQUETTE_FTA_COMPOSITION)->getFieldValue()
-                , $this->getFtaComposantModel()->getDataField(FtaComposantModel::FIELDNAME_MODE_ETIQUETTE_FTA_COMPOSITION)->isFieldDiff()
-                , $HtmlList->getArrayListContent());
-        $HtmlList->getEventsForm()->setOnChangeWithAjaxAutoSave(
-                FtaComposantModel::TABLENAME
-                , FtaComposantModel::KEYNAME
-                , $this->getFtaComposantModel()->getKeyValue()
-                , FtaComposantModel::FIELDNAME_MODE_ETIQUETTE_FTA_COMPOSITION);
-        $listeModeEtiquettes = $HtmlList->getHtmlResult();
+       
+        $listeModeEtiquettes = $this->getFtaComposantModel()->getListeModeEtiquette($paramIsEditable);
 
         return $listeModeEtiquettes;
     }

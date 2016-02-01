@@ -52,6 +52,8 @@ class UserInterfaceMessage {
     const FR_WARNING_CHAPITRES = " Veuillez selectionner un chapitre<br>";
     const FR_WARNING_CHAPITRES_TITLE = " Chapitres Fta<br>";
     const FR_WARNING_CHAPITRES_DE_FTA = " Attention, vous êtes sur le point de dévalidé aussi les chapitres suivants:<br>";
+    const FR_WARNING_CONNECTION = " La connection est un succès mais vous n'avez pas les droits d'accès sur l'intranet ou votre compte est bloqué.<br><br>
+                             Veuillez contacter l'administrateur du site.";
     const FR_WARNING_DATA_CLASIFICATION = "Veuillez saisir une classification";
     const FR_WARNING_DATA_CLASIFICATION_TITLE = "Classification d'une Fiche Technique Article";
     const FR_WARNING_DATA_DATE_ECHEANCE = "Veuillez saisir une date d'écheance de la Fta .<br><br>";

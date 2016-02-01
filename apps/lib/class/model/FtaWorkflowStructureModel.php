@@ -129,7 +129,7 @@ class FtaWorkflowStructureModel extends AbstractModel {
         }
         return $idProcessus;
     }
-
+   
     /**
      * Rôle pour le processus et workflow correspondants
      * @param int $paramIdProcessus

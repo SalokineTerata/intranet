@@ -573,6 +573,9 @@ class Chapitre {
         //Commentaire sur la Fta
         $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_COMMENTAIRE);
 
+        //Code Regate Mère sur la Fta
+        $bloc.=$ftaView->getHtmlCodeArticleLdcMere();
+
         return $bloc;
     }
 

@@ -8,6 +8,9 @@
  */
 class FtaModel extends AbstractModel {
 
+    const ACTIVATION_ETIQUETTE_COLIS = "1";
+    const ACTIVATION_ETIQUETTE_COMPOSITION = "2";
+    const ACTIVATION_ETIQUETTE_COLIS_ET_COMPOSITION = "3";
     const CHECK_DATE_ECHANCE = "00-00-0000";
     const TABLENAME = "fta";
     const KEYNAME = "id_fta";
@@ -22,6 +25,7 @@ class FtaModel extends AbstractModel {
     const FIELDNAME_CODE_ARTICLE = "CODE_ARTICLE";
     const FIELDNAME_CODE_ARTICLE_CLIENT = "code_article_client";
     const FIELDNAME_CODE_ARTICLE_LDC = "code_article_ldc";
+    const FIELDNAME_CODE_ARTICLE_LDC_MERE = "code_article_ldc_mere";
     const FIELDNAME_CODE_DOUANE_FTA = "code_douane_fta";
     const FIELDNAME_CODE_DOUANE_LIBELLE_FTA = "code_douane_libelle_fta";
     const FIELDNAME_COMMENTAIRE = "commentaire";
@@ -705,15 +709,15 @@ class FtaModel extends AbstractModel {
         if ($paramGroupeType == AnnexeEmballageGroupeTypeModel::EMBALLAGE_DU_COLIS) {
             if (count($array) > 1) {
                 $titre = UserInterfaceMessage::FR_WARNING_NOT_HANDLE_TITLE;
-                $message = UserInterfaceMessage::FR_WARNING_EMBALLAGE_COLIS;                
-                afficher_message($titre, $message, $redirection,TRUE);
+                $message = UserInterfaceMessage::FR_WARNING_EMBALLAGE_COLIS;
+                afficher_message($titre, $message, $redirection, TRUE);
             }
         }
         if ($paramGroupeType == AnnexeEmballageGroupeTypeModel::EMBALLAGE_PALETTE) {
             if (count($array) > 1) {
                 $titre = UserInterfaceMessage::FR_WARNING_NOT_HANDLE_TITLE;
                 $message = UserInterfaceMessage::FR_WARNING_EMBALLAGE_PALETTE;
-                afficher_message($titre, $message, $redirection,TRUE);
+                afficher_message($titre, $message, $redirection, TRUE);
             }
         }
 
@@ -1515,7 +1519,7 @@ class FtaModel extends AbstractModel {
  K_etat, EAN_UVC, EAN_COLIS, EAN_PALETTE,
  OLD_nouvel_article, OLD_k_gestion_lot, activation_codesoft_arti2, id_etiquette_codesoft_arti2,
  atmosphere_protectrice, image_eco_emballage, libelle_code_article_client, id_service_consommateur,
- nom_societe, id_fta_classification2,pourcentage_avancement, liste_id_fta_role)"
+ nom_societe, id_fta_classification2,pourcentage_avancement, liste_id_fta_role,code_article_ldc_mere)"
                         . " SELECT id_access_arti2, OLD_numft, id_fta_workflow,
  commentaire, OLD_id_fta_palettisation, id_dossier_fta, id_version_dossier_fta,
  OLD_champ_maj_fta, id_fta_etat, createur_fta, date_derniere_maj_fta,
@@ -1548,7 +1552,7 @@ class FtaModel extends AbstractModel {
  K_etat, EAN_UVC, EAN_COLIS, EAN_PALETTE,
  OLD_nouvel_article, OLD_k_gestion_lot, activation_codesoft_arti2, id_etiquette_codesoft_arti2,
  atmosphere_protectrice, image_eco_emballage, libelle_code_article_client, id_service_consommateur,
- nom_societe, id_fta_classification2 ,pourcentage_avancement, liste_id_fta_role"
+ nom_societe, id_fta_classification2 ,pourcentage_avancement, liste_id_fta_role,code_article_ldc_mere"
                         . " FROM " . FtaModel::TABLENAME
                         . " WHERE " . FtaModel::KEYNAME . "=" . $paramIdFta
         );

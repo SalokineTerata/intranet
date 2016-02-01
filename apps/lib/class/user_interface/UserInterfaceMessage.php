@@ -36,7 +36,6 @@ class UserInterfaceMessage {
                  un double de l 'ensemble de la fiche technique article sera créé sous le nom <b>";
     const FR_DUPLICATION_DE_FTA_2 = "</b>.<br>
                  Cette opération est irreversible<br>";
-    const FR_DUPLICATION_DE_FTA_WARNING = " Attention, vous êtes sur le point de dupliquer la Fiche Technique Article suivante:<br>";
     const FR_LAST_50_FTA = "Consultation des dernières FTA";
     const FR_LOGIN_PROCESS_ACCOUNT_LOCKED = "Votre compte est bloqué suite à trois tentatives ratées.<br><br>Contactez un Administrateur pour réactiver votre compte.<br>";
     const FR_NONE_FTA = "Aucune Fta identifiée.<br><br>";
@@ -50,6 +49,9 @@ class UserInterfaceMessage {
     const FR_TRANSITION_FTA_TITLE = "Transiter l'Etat d'une Fiche Technique Article";
     const FR_WARNING_ACCES_RIGHTS = "Vous n'avez pas les droits d'accès nécessaire.<br><br>";
     const FR_WARNING_ACCES_RIGHTS_TITLE = "Erreur d'accès";
+    const FR_WARNING_CHAPITRES = " Veuillez selectionner un chapitre<br>";
+    const FR_WARNING_CHAPITRES_TITLE = " Chapitres Fta<br>";
+    const FR_WARNING_CHAPITRES_DE_FTA = " Attention, vous êtes sur le point de dévalidé aussi les chapitres suivants:<br>";
     const FR_WARNING_DATA_CLASIFICATION = "Veuillez saisir une classification";
     const FR_WARNING_DATA_CLASIFICATION_TITLE = "Classification d'une Fiche Technique Article";
     const FR_WARNING_DATA_DATE_ECHEANCE = "Veuillez saisir une date d'écheance de la Fta .<br><br>";
@@ -67,6 +69,7 @@ class UserInterfaceMessage {
     const FR_WARNING_DATA_SITE_DE_PRODUCTION = "Veuillez selectionner un site de production .<br><br>";
     const FR_WARNING_DATA_SITE_DE_PRODUCTION_TITLE = "Site de production d'une Fiche Technique Article";
     const FR_WARNING_DATA_VALIDATION_FTA_CODE_LDC = "Le Code LDC doit être unique.";
+    const FR_WARNING_DUPLICATION_DE_FTA = " Attention, vous êtes sur le point de dupliquer la Fiche Technique Article suivante:<br>";
     const FR_WARNING_ECHEANCE_DEPASSEE = "Certaines échéances sont dépassées !";
     const FR_WARNING_EMBALLAGE_COLIS = "Il ne doit y avoir qu'un seul emballage Colis";
     const FR_WARNING_EMBALLAGE_PALETTE = "Il ne doit y avoir qu'une seule Palette";

@@ -58,12 +58,14 @@ echo '...';
   Fonctions propres aux Assistantes de Direction Commerciales
  */
 if (
-        $id_user and  (FtaRoleModel::isGestionnaire($idFtaRole) )    //-> Chef de projet
+        $id_user and ( FtaRoleModel::isGestionnaire($idFtaRole) )    //-> Chef de projet
 ) {
     //Créer une nouvelle Fiche Technique Article
     echo '<br>';
     echo '<a href=creer_fiche.php?id_fta_role=' . $idFtaRole . '><img src=../lib/images/bouton_menu-creer_une_fiche.png border=0></a>';
+    echo '<br>';
     echo '<a href=modification_classification.php><img src=../lib/images/bouton_menu-classification.PNG border=0></a>';
+    echo '<br>';
     echo '<a href=ajout_classification.php><img src=../lib/images/bouton_menu-classification_ajout.PNG border=0></a>';
 
     //Mettre à jour une Fiche Technique Article existante
@@ -98,7 +100,6 @@ if (
 //    echo '<br>';
 //}
 //   echo '...';
-
 //if (
 //      $id_user and  $idFtaRole == 3 //-> Service Qualité
 //) {
@@ -119,18 +120,12 @@ if (
 //            </a>
 //            ';
 //}
-
 //Migration de V1 vers V2
 //if ($globalConfig->getConf()->getExecDebugEnable()) {
 //    echo '<br>';
 //    echo '<a href=./migration.php target=_top>Administration du module</a>';
 //    echo '</td>';
 //}
-
-
-
-
-
 //Génération du cadre de droite contenant la page .php
 echo '<td width=100% valign=top>';
 ?>

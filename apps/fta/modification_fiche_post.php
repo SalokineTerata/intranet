@@ -84,7 +84,7 @@ switch ($action) {
         if ($new_correction_fta_suivi_projet) {
             $paramIdFtaChapitre = $paramIdFtaChapitreEncours;
             $option[FtaSuiviProjetModel::FIELDNAME_CORRECTION_FTA_SUIVI_PROJET] = $new_correction_fta_suivi_projet;
-            $noredirection = FtaChapitreModel::BuildCorrectionChapitre($paramIdFta, $paramIdFtaChapitre, $option);
+            $noredirection = FtaChapitreModel::buildCorrectionChapitre($paramIdFta, $paramIdFtaChapitre, $option);
         } else {
             $titre = 'Informations manquantes';
             $message = 'Vous devez spécifier l\'objet de votre correction.';
@@ -144,7 +144,7 @@ switch ($action) {
         $isFtaDataValidationSuccess = $modelFta->isFtaDataValidationSuccess($paramIdFtaChapitreEncours);
 
         if ($paramSignatureValidationSuiviProjet and $isFtaDataValidationSuccess == "0") {
-            $modelFtaSuiviProjet->getDataField(FtaSuiviProjetModel::FIELDNAME_DATE_VALIDATION_SUIVI_PROJET)->setFieldValue(date("Y-m-d"));
+            $modelFtaSuiviProjet->getDataField(FtaSuiviProjetModel::FIELDNAME_DATE_VALIDATION_SUIVI_PROJET)->setFieldValue(date("d-m-Y"));
             $modelFtaSuiviProjet->setSigned($paramSignatureValidationSuiviProjet);
             $modelFtaSuiviProjet->saveToDatabase();
         }

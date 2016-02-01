@@ -42,7 +42,9 @@ flush();
 /*
   Initialisation des variables
  */
-$page_action = substr(strrchr($_SERVER['PHP_SELF'], '/'), '1', '-4') . '_post.php';
+$page_default = substr(strrchr($_SERVER['PHP_SELF'], '/'), '1', '-4');
+$page_query = $_SERVER['QUERY_STRING'];
+$page_action = $page_default . '_post.php';
 //   $action = '';                       //Action proposée à la page _post.php
 $method = 'method=POST';             //Pour une url > 2000 caractères, utiliser POST
 $html_table = 'table '              //Permet d'harmoniser les tableaux
@@ -67,6 +69,7 @@ if ($comeback) {
 $action = Lib::getParameterFromRequest('action');
 $demande_abreviation_fta_transition = Lib::getParameterFromRequest('demande_abreviation_fta_transition');
 $syntheseAction = Lib::getParameterFromRequest('synthese_action');
+$checkPost = Lib::getParameterFromRequest('checkPost');
 
 
 /*
@@ -186,6 +189,23 @@ $tableau_transition.='</select>';
 //Tableau des chapitres
 if ($action == FtaEtatModel::ETAT_ABREVIATION_VALUE_MODIFICATION or $action == 'W') {
     /**
+     * Changement de la page d'action
+     */
+    if (!$checkPost) {
+        $page_action = "transiter_fiche.php";
+    } else {
+        $affichageCommentaire = " <tr>
+            <td class=titre_principal>
+                Historiques des commentaire de mise à jour
+            </td>
+        </tr>
+        <tr  class=contenu>
+     
+           ' . $NOM_commentaire_maj_fta . '
+
+        </tr>";
+    }
+    /**
      * Affichage de la date d'échéances
      */
     $ftaModel->setIsEditable(Chapitre::EDITABLE);
@@ -196,7 +216,8 @@ if ($action == FtaEtatModel::ETAT_ABREVIATION_VALUE_MODIFICATION or $action == '
     ;
 
     $arrrayFtaChapitre = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
-                    'SELECT ' . FtaWorkflowStructureModel::TABLENAME . '.' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_CHAPITRE . ',' . FtaChapitreModel::FIELDNAME_NOM_USUEL_CHAPITRE
+                    'SELECT ' . FtaWorkflowStructureModel::TABLENAME . '.' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_CHAPITRE
+                    . ',' . FtaChapitreModel::FIELDNAME_NOM_USUEL_CHAPITRE
                     . ' FROM ' . FtaChapitreModel::TABLENAME . ',' . FtaWorkflowStructureModel::TABLENAME
                     . ' WHERE ' . FtaWorkflowStructureModel::TABLENAME . '.' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_CHAPITRE
                     . '=' . FtaChapitreModel::TABLENAME . '.' . FtaChapitreModel::KEYNAME
@@ -205,25 +226,28 @@ if ($action == FtaEtatModel::ETAT_ABREVIATION_VALUE_MODIFICATION or $action == '
                     . ' ORDER BY ' . FtaChapitreModel::FIELDNAME_NOM_USUEL_CHAPITRE
     );
     foreach ($arrrayFtaChapitre as $rowsChapitre) {
+        if (Lib::getParameterFromRequest(FtaChapitreModel::FIELDNAME_NOM_CHAPITRE . '_' . $rowsChapitre[FtaWorkflowStructureModel::FIELDNAME_ID_FTA_CHAPITRE]) == 1) {
+            $checked = 'checked';
+            $bgcolor = TableauFicheView::HTML_CELL_BGCOLOR_VALIDATE;
+            $din = "";
+        } elseif (Lib::getParameterFromRequest(FtaChapitreModel::FIELDNAME_NOM_CHAPITRE . '_' . $rowsChapitre[FtaWorkflowStructureModel::FIELDNAME_ID_FTA_CHAPITRE]) == 2) {
+            $checked = 'checked';
+            $din = TableauFicheView::HTML_TEXT_COLOR_DIN;
+            $bgcolor = TableauFicheView::HTML_CELL_BGCOLOR_DEFAULT;
+        } else {
+            $checked = "";
+            $bgcolor = "";
+            $din = "";
+        }
         $tableau_chapitre.= '<tr>'
-                . '<td><input type=checkbox name=' . FtaChapitreModel::FIELDNAME_NOM_CHAPITRE . '-' . $rowsChapitre[FtaChapitreModel::KEYNAME] . ' value=1 /></td>'
-                . '<td>' . $rowsChapitre[FtaChapitreModel::FIELDNAME_NOM_USUEL_CHAPITRE] . '</td>'
+                . '<td><input type=checkbox  name=' . FtaChapitreModel::FIELDNAME_NOM_CHAPITRE . '_' . $rowsChapitre[FtaChapitreModel::KEYNAME] . ' value=1  ' . $checked . '/></td>'
+                . '<td ' . $bgcolor . '><font  ' . $din . '>' . $rowsChapitre[FtaChapitreModel::FIELDNAME_NOM_USUEL_CHAPITRE] . '</font></td>'
                 . '</tr>'
         ;
     }
     $tableau_chapitre.= $dateEcheanceFtaHtml . '</table></td></tr>'
             . '</table>'
     ;
-    $affichageCommentaire = " <tr>
-            <td class=titre_principal>
-                Historiques des commentaire de mise à jour
-            </td>
-        </tr>
-        <tr  class=contenu>
-     
-           ' . $NOM_commentaire_maj_fta . '
-
-        </tr>";
 }
 //Tableau des chapitres espace de travail
 //if ($action == 'W') {
@@ -239,12 +263,12 @@ if ($action == FtaEtatModel::ETAT_ABREVIATION_VALUE_MODIFICATION or $action == '
 //}
 //Validation_matiere_premiere
 //Boris 2005-09-15: risque de mettre une date antérieure à la dernière date de mise à jour
-$nom_date = 'date_derniere_maj_fta';
-//$nom_date='date_dernier_changement_etat_new';
-$nom_liste = 'selection_' . $nom_date;
-$date_defaut = date('Y-m-d');
-$$nom_liste = selection_date_pour_mysql($nom_date, $date_defaut);
-$selection_date_derniere_maj_fta;
+//$nom_date = 'date_derniere_maj_fta';
+////$nom_date='date_dernier_changement_etat_new';
+//$nom_liste = 'selection_' . $nom_date;
+//$date_defaut = date('d-m-Y');
+//$$nom_liste = selection_date_pour_mysql($nom_date, $date_defaut);
+//$selection_date_derniere_maj_fta;
 
 /* * *********
   Fin Code PHP
@@ -257,6 +281,8 @@ echo '
 
 <form ' . $method . ' action=\'' . $page_action . '\' name=\'form_action\'>
      <!input type=hidden name=action value=' . $action . '>
+     <input type=hidden name=current_page value=' . $page_default . '.php >
+     <input type=hidden name=current_query value=' . $page_query . ' >
      <input type=hidden name=abreviation_fta_etat value=' . $abreviationFtaEtat . '>
      <input type=hidden name=id_fta value=' . $idFta . '>
      <input type=hidden name=id_fta_role value=' . $idFtaRole . '>

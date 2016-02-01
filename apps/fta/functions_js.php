@@ -21,6 +21,10 @@
         parent.location.href = url;
     }
 
+    /**
+     * Rechargement de la page courante avec une nouvelle valeur
+     * @returns {undefined}
+     */
     function js_page_reload() {
         current_page = document.form_action.current_page.value;
         current_query = document.form_action.current_query.value;

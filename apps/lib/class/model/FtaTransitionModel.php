@@ -62,8 +62,8 @@ class FtaTransitionModel {
                 $result = DatabaseOperation::execute($req);
 
                 //Mise à jour de la date de validation
-                $ftaModel->getDataField(FtaModel::FIELDNAME_DATE_DERNIERE_MAJ_FTA)->setFieldValue(date('Y-m-d'));
-                $ftaModel->saveToDatabase();
+//                $ftaModel->getDataField(FtaModel::FIELDNAME_DATE_DERNIERE_MAJ_FTA)->setFieldValue(date('d-m-Y'));
+//                $ftaModel->saveToDatabase();
 
                 /*
                  * Préparation des données
@@ -191,9 +191,15 @@ class FtaTransitionModel {
                 break;
         }//Fin Pré-traitement spécifique
 
-        /*         * *****************************************************************************
+        /*         * ************************************************************* 1****************
           Traitement Commun
          * ***************************************************************************** */
+
+        /**
+         * Mise à jour de la date de validation
+         */
+        $ftaModel->getDataField(FtaModel::FIELDNAME_DATE_DERNIERE_MAJ_FTA)->setFieldValue(date('d-m-Y'));
+        $ftaModel->saveToDatabase();
 
         //Récupération du nouvel état de la fiche
         $arrayIdFtaEtat = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
@@ -560,7 +566,8 @@ class FtaTransitionModel {
                 . "\n"
                 . "INFORMATIONS DE DEBUGGAGE:\n"
                 . $logTransition
-        ; {
+        ;
+        {
             $expediteur = $prenom . " " . $nom . " <" . $mail . ">";
             envoismail($sujetmail, $corp, $mail, $expediteur, $typeMail);
         }
@@ -676,7 +683,8 @@ class FtaTransitionModel {
                 . $text
                 . "\n\n"
                 . $paramLogTransition
-        ; {
+        ;
+        {
             $expediteur = $prenom . " " . $nom . " <" . $mailUser . ">";
             envoismail($sujetmail, $corp, $mailUser, $expediteur, $typeMail);
         }

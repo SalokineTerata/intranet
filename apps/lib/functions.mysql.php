@@ -202,12 +202,25 @@ function recuperation_date_depuis_mysql($valeur_date) {
      * **************************
       $valeur_date: contient la date au format AAAA-MM-JJ
      */
-
-    //Extraction de l'année
-    $annee = substr($valeur_date, 0, 4);
-    $mois = substr($valeur_date, 5, 2);
-    $jours = substr($valeur_date, 8, 2);
-
+    $valeur_date = "2015-01-25";
+    $checkValue =  FtaController::isCheckDateFormat($valeur_date);
+    if ($checkValue) {
+        /**
+         * Extraction de l'année
+         * Format Français
+         */
+        $annee = substr($valeur_date, 6, 9);
+        $mois = substr($valeur_date, 3, 2);
+        $jours = substr($valeur_date, 0, 2);
+    } else {
+        /**
+         * Extraction de l'année
+         * Format Anglais
+         */
+        $annee = substr($valeur_date, 0, 4);
+        $mois = substr($valeur_date, 5, 2);
+        $jours = substr($valeur_date, 8, 2);
+    }
     $return = $jours . "/" . $mois . "/" . $annee;
     return $return;
 }
@@ -414,7 +427,7 @@ function mysql_table_load($paramTableName) {
              * 
              * TRES TRES SALE !!
              */
-        $GLOBALS[$key] = $value;
+            $GLOBALS[$key] = $value;
         }
     }
 

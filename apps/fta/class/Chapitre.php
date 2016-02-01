@@ -573,6 +573,9 @@ class Chapitre {
         //Commentaire sur la Fta
         $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_COMMENTAIRE);
 
+        //Code Regate Mère sur la Fta
+        $bloc.=$ftaView->getHtmlCodeArticleLdcMere();
+
         return $bloc;
     }
 
@@ -2275,7 +2278,7 @@ class Chapitre {
                 $$champ = $rows[FtaProcessusDelaiModel::FIELDNAME_DATE_ECHEANCE_PROCESSUS];
             }
         }
-        if ($proprietaire and ( $$champ < date('Y-m-d'))) {
+        if ($proprietaire and ( $$champ < date('d-m-Y'))) {
             $bgcolor = 'class=couleur_rouge';
             $blod = '<b>';
             $blod_end = '</b>';
@@ -2376,6 +2379,10 @@ class Chapitre {
         $bloc_suivi.=self::$html_submit_button . '</td></tr>';
 
         $bloc_suivi .='</table>';
+
+        if ($id_fta_processus == NULL) {
+            $bloc_suivi = "";
+        }
         return $bloc_suivi;
     }
 

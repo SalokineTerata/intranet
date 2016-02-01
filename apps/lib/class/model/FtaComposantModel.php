@@ -328,7 +328,7 @@ class FtaComposantModel extends AbstractModel {
      * @param int $paramProprietaire
      * @return string
      */
-    public static function getAddLinkComposition($paramIdFta, $paramIdChapitre, $paramSyntheseAction,  $paramIdFtaEtat, $paramAbreviationEtat, $paramIdFtaRole, $paramProprietaire) {
+    public static function getAddLinkComposition($paramIdFta, $paramIdChapitre, $paramSyntheseAction, $paramIdFtaEtat, $paramAbreviationEtat, $paramIdFtaRole, $paramProprietaire) {
         return 'modifier_composition.php?id_fta=' . $paramIdFta
                 . '&id_fta_chapitre_encours=' . $paramIdChapitre
                 . '&synthese_action=' . $paramSyntheseAction
@@ -351,7 +351,7 @@ class FtaComposantModel extends AbstractModel {
      * @param int $paramProprietaire
      * @return string
      */
-    public static function getAddLinkComposant($paramIdFta, $paramIdChapitre, $paramSyntheseAction,  $paramIdFtaEtat, $paramAbreviationEtat, $paramIdFtaRole, $paramProprietaire) {
+    public static function getAddLinkComposant($paramIdFta, $paramIdChapitre, $paramSyntheseAction, $paramIdFtaEtat, $paramAbreviationEtat, $paramIdFtaRole, $paramProprietaire) {
         return 'modifier_composant.php?id_fta=' . $paramIdFta
                 . '&id_fta_chapitre_encours=' . $paramIdChapitre
                 . '&synthese_action=' . $paramSyntheseAction
@@ -375,7 +375,7 @@ class FtaComposantModel extends AbstractModel {
      * @param int $paramProprietaire
      * @return string
      */
-    public static function getAddAfterLinkComposition($paramIdFta, $paramIdChapitre, $paramSyntheseAction,  $paramIdFtaEtat, $paramAbreviationEtat, $paramIdFtaRole, $paramProprietaire) {
+    public static function getAddAfterLinkComposition($paramIdFta, $paramIdChapitre, $paramSyntheseAction, $paramIdFtaEtat, $paramAbreviationEtat, $paramIdFtaRole, $paramProprietaire) {
         return 'modifier_composition.php?id_fta=' . $paramIdFta
                 . '&id_fta_chapitre_encours=' . $paramIdChapitre
                 . '&synthese_action=' . $paramSyntheseAction
@@ -504,7 +504,7 @@ class FtaComposantModel extends AbstractModel {
      * @param int $paramIdFtaRole
      * @return string
      */
-    public static function getDeleteLinkComposition($paramIdFta, $paramIdChapitre, $paramIdFtaComposant, $paramSyntheseAction,  $paramIdFtaEtat, $paramAbreviationEtat, $paramIdFtaRole) {
+    public static function getDeleteLinkComposition($paramIdFta, $paramIdChapitre, $paramIdFtaComposant, $paramSyntheseAction, $paramIdFtaEtat, $paramAbreviationEtat, $paramIdFtaRole) {
         foreach ($paramIdFtaComposant as $key => $rows) {
             if (!$rows) {
                 $return[$key] = 'modification_fiche_post.php?'
@@ -535,7 +535,7 @@ class FtaComposantModel extends AbstractModel {
      * @param int $paramProprietaire
      * @return string
      */
-    public static function getDetailLinkComposant($paramIdFta, $paramIdChapitre, $paramIdFtaComposant, $paramSyntheseAction,  $paramIdFtaEtat, $paramAbreviationEtat, $paramIdFtaRole, $paramProprietaire) {
+    public static function getDetailLinkComposant($paramIdFta, $paramIdChapitre, $paramIdFtaComposant, $paramSyntheseAction, $paramIdFtaEtat, $paramAbreviationEtat, $paramIdFtaRole, $paramProprietaire) {
         foreach ($paramIdFtaComposant as $rows) {
             $return[$rows] = 'modifier_composant.php?'
                     . 'id_fta=' . $paramIdFta
@@ -564,7 +564,7 @@ class FtaComposantModel extends AbstractModel {
      * @param int $paramProprietaire
      * @return string
      */
-    public static function getDetailLinkComposition($paramIdFta, $paramIdChapitre, $paramIdFtaComposant, $paramSyntheseAction,  $paramIdFtaEtat, $paramAbreviationEtat, $paramIdFtaRole, $paramProprietaire) {
+    public static function getDetailLinkComposition($paramIdFta, $paramIdChapitre, $paramIdFtaComposant, $paramSyntheseAction, $paramIdFtaEtat, $paramAbreviationEtat, $paramIdFtaRole, $paramProprietaire) {
         foreach ($paramIdFtaComposant as $key => $rows) {
             $return[$key] = 'modifier_composition.php?'
                     . 'id_fta=' . $paramIdFta
@@ -580,8 +580,6 @@ class FtaComposantModel extends AbstractModel {
         }
         return $return;
     }
-
-    
 
     /**
      * Fonction non utilisé
@@ -633,7 +631,6 @@ class FtaComposantModel extends AbstractModel {
         return $listePrefixeCodePSF;
     }
 
-    
     /**
      * On récupère le DataRecord à comparer 
      * @param DatabaseRecord $paramRecordToCompare
@@ -682,6 +679,213 @@ class FtaComposantModel extends AbstractModel {
 
         return $idFtaComposantToCompare;
     }
+
+    /**
+     * Affiche la liste déroulante des sites de production pour les composants et compositions
+     * @param HtmlListSelect $paramObjet
+     * @param boolean $paramIsEditable
+     * @param boolean $paramLabelSiteDeProduction
+     * @return string
+     */
+    function showListeDeroulanteSiteProdForComposant(HtmlListSelect $paramObjet, $paramIsEditable, $paramLabelSiteDeProduction) {
+
+//        $ftaModel = new FtaModel($paramIdFta);
+//        $siteDeProductionFta = $ftaModel->getDataField(FtaModel::FIELDNAME_SITE_ASSEMBLAGE)->getFieldValue();
+        $arraySite = DatabaseOperation::convertSqlStatementWithKeyAndOneFieldToArray(
+                        'SELECT DISTINCT ' . GeoModel::KEYNAME . ',' . GeoModel::FIELDNAME_GEO
+                        . ' FROM ' . GeoModel::TABLENAME
+                        . ' WHERE ' . GeoModel::FIELDNAME_TAG_APPLICATION_GEO . ' LIKE  \'%fta%\''
+                        . ' ORDER BY ' . GeoModel::FIELDNAME_GEO
+        );
+
+        $paramObjet->setArrayListContent($arraySite);
+
+        $HtmlTableName = FtaComposantModel::TABLENAME
+                . '_'
+                . $paramLabelSiteDeProduction
+                . '_'
+                . $this->getKeyValue()
+        ;
+        $arraySiteComposant = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
+                        'SELECT DISTINCT ' . $paramLabelSiteDeProduction
+                        . ' FROM ' . FtaComposantModel::TABLENAME
+                        . ' WHERE ' . FtaComposantModel::KEYNAME . '=' . $this->getKeyValue()
+        );
+        foreach ($arraySiteComposant as $value) {
+            $SiteDeProduction = $value[$paramLabelSiteDeProduction];
+        }
+
+        if ($SiteDeProduction) {
+            $paramObjet->setDefaultValue($SiteDeProduction);
+        }
+//        else {
+//            $paramObjet->setDefaultValue($siteDeProductionFta);
+//        }
+        $paramObjet->getAttributes()->getName()->setValue($paramLabelSiteDeProduction);
+        $paramObjet->setLabel(DatabaseDescription::getFieldDocLabel(GeoModel::TABLENAME, GeoModel::FIELDNAME_GEO));
+        $paramObjet->setIsEditable($paramIsEditable);
+        $paramObjet->initAbstractHtmlSelect(
+                $HtmlTableName
+                , $paramObjet->getLabel()
+                , $this->getDataField($paramLabelSiteDeProduction)->getFieldValue()
+                , $this->getDataField($paramLabelSiteDeProduction)->isFieldDiff()
+                , $paramObjet->getArrayListContent()
+        );
+        $paramObjet->getEventsForm()->setOnChangeWithAjaxAutoSave(
+                FtaComposantModel::TABLENAME
+                , FtaComposantModel::KEYNAME
+                , $this->getKeyValue()
+                , $paramLabelSiteDeProduction);
+        $listeSiteProduction = $paramObjet->getHtmlResult();
+
+        return $listeSiteProduction;
+    }
+
+    /**
+     * Liste des étiqettes recto
+     * @param boolean $paramIsEditable
+     * @return string
+     */
+    function getListeCodesoftEtiquettesRecto($paramIsEditable) {
+
+        $HtmlList = new HtmlListSelect();
+
+        $arrayEtiquette = DatabaseOperation::convertSqlStatementWithKeyAndOneFieldToArray(
+                        'SELECT DISTINCT ' . CodesoftEtiquettesModel::KEYNAME . ',' . CodesoftEtiquettesModel::FIELDNAME_DESIGNATION_CODESOFT_ETIQUETTES
+                        . ' FROM ' . CodesoftEtiquettesModel::TABLENAME
+                        . ' WHERE (' . CodesoftEtiquettesModel::FIELDNAME_K_SITE . '=' . $this->getModelFta()->getDataField(FtaModel::FIELDNAME_SITE_PRODUCTION)->getFieldValue()
+                        . ' OR ' . CodesoftEtiquettesModel::FIELDNAME_K_SITE . '=0)'
+                        . ' AND (' . CodesoftEtiquettesModel::FIELDNAME_K_TYPE_ETIQUETTE_CODESOFT_ETIQUETTES . '=2'
+                        . ' OR ' . CodesoftEtiquettesModel::FIELDNAME_K_TYPE_ETIQUETTE_CODESOFT_ETIQUETTES . '=0' . ')'
+                        . ' AND ' . CodesoftEtiquettesModel::FIELDNAME_IS_ENABLED_FTA . '=1'
+                        . ' ORDER BY ' . CodesoftEtiquettesModel::FIELDNAME_DESIGNATION_CODESOFT_ETIQUETTES
+        );
+
+        $HtmlList->setArrayListContent($arrayEtiquette);
+
+        $HtmlTableName = FtaComposantModel::TABLENAME
+                . '_'
+                . FtaComposantModel::FIELDNAME_K_ETIQUETTE_FTA_COMPOSITION
+                . '_'
+                . $this->getKeyValue()
+        ;
+        $HtmlList->getAttributes()->getName()->setValue(FtaComposantModel::FIELDNAME_K_ETIQUETTE_FTA_COMPOSITION);
+        $HtmlList->setLabel(DatabaseDescription::getFieldDocLabel(FtaComposantModel::TABLENAME, FtaComposantModel::FIELDNAME_K_ETIQUETTE_FTA_COMPOSITION));
+        $HtmlList->setIsEditable($paramIsEditable);
+        $HtmlList->initAbstractHtmlSelect(
+                $HtmlTableName
+                , $HtmlList->getLabel()
+                , $this->getDataField(FtaComposantModel::FIELDNAME_K_ETIQUETTE_FTA_COMPOSITION)->getFieldValue()
+                , $this->getDataField(FtaComposantModel::FIELDNAME_K_ETIQUETTE_FTA_COMPOSITION)->isFieldDiff()
+                , $HtmlList->getArrayListContent());
+        $HtmlList->getEventsForm()->setOnChangeWithAjaxAutoSave(
+                FtaComposantModel::TABLENAME
+                , FtaComposantModel::KEYNAME
+                , $this->getKeyValue()
+                , FtaComposantModel::FIELDNAME_K_ETIQUETTE_FTA_COMPOSITION
+        );
+        $listeCodesoftEtiquettes = $HtmlList->getHtmlResult();
+
+        return $listeCodesoftEtiquettes;
+    }
+
+    
+    
+    /**
+     * Liste des étiqettes verso 
+     * @param boolean $paramIsEditable
+     * @return string
+     */
+    function getListeCodesoftEtiquettesVerso($paramIsEditable) {
+        $HtmlList = new HtmlListSelect();
+
+        $arrayEtiquette = DatabaseOperation::convertSqlStatementWithKeyAndOneFieldToArray(
+                        'SELECT DISTINCT ' . CodesoftEtiquettesModel::KEYNAME . ',' . CodesoftEtiquettesModel::FIELDNAME_DESIGNATION_CODESOFT_ETIQUETTES
+                        . ' FROM ' . CodesoftEtiquettesModel::TABLENAME
+                        . ' WHERE (' . CodesoftEtiquettesModel::FIELDNAME_K_SITE . '=' . $this->getModelFta()->getDataField(FtaModel::FIELDNAME_SITE_PRODUCTION)->getFieldValue()
+                        . ' OR ' . CodesoftEtiquettesModel::FIELDNAME_K_SITE . '=0)'
+                        . ' AND (' . CodesoftEtiquettesModel::FIELDNAME_K_TYPE_ETIQUETTE_CODESOFT_ETIQUETTES . '=3'
+                        . ' OR ' . CodesoftEtiquettesModel::FIELDNAME_K_TYPE_ETIQUETTE_CODESOFT_ETIQUETTES . '=0' . ')'
+                        . ' AND ' . CodesoftEtiquettesModel::FIELDNAME_IS_ENABLED_FTA . '=1'
+                        . ' ORDER BY ' . CodesoftEtiquettesModel::FIELDNAME_DESIGNATION_CODESOFT_ETIQUETTES
+        );
+        $HtmlList->setArrayListContent($arrayEtiquette);
+
+        $HtmlTableName = FtaComposantModel::TABLENAME
+                . '_'
+                . FtaComposantModel::FIELDNAME_K_ETIQUETTE_VERSO_FTA_COMPOSITION
+                . '_'
+                . $this->getKeyValue()
+        ;
+        $HtmlList->getAttributes()->getName()->setValue(FtaComposantModel::FIELDNAME_K_ETIQUETTE_VERSO_FTA_COMPOSITION);
+        $HtmlList->setLabel(DatabaseDescription::getFieldDocLabel(FtaComposantModel::TABLENAME, FtaComposantModel::FIELDNAME_K_ETIQUETTE_VERSO_FTA_COMPOSITION));
+        $HtmlList->setIsEditable($paramIsEditable);
+        $HtmlList->initAbstractHtmlSelect(
+                $HtmlTableName
+                , $HtmlList->getLabel()
+                , $this->getDataField(FtaComposantModel::FIELDNAME_K_ETIQUETTE_VERSO_FTA_COMPOSITION)->getFieldValue()
+                , $this->getDataField(FtaComposantModel::FIELDNAME_K_ETIQUETTE_VERSO_FTA_COMPOSITION)->isFieldDiff()
+                , $HtmlList->getArrayListContent());
+        $HtmlList->getEventsForm()->setOnChangeWithAjaxAutoSave(
+                FtaComposantModel::TABLENAME
+                , FtaComposantModel::KEYNAME
+                , $this->getKeyValue()
+                , FtaComposantModel::FIELDNAME_K_ETIQUETTE_VERSO_FTA_COMPOSITION);
+        $listeCodesoftEtiquettes = $HtmlList->getHtmlResult();
+
+        return $listeCodesoftEtiquettes;
+    }
+    
+     /**
+     * Liste des options étiqettes
+     * @param boolean $paramIsEditable
+     * @return string
+     */
+    function getListeModeEtiquette($paramIsEditable) {
+        $HtmlList = new HtmlListSelect();
+        $activationCodification = $this->getModelFta()->getDataField(FtaModel::FIELDNAME_ACTIVATION_CODESOFT)->getFieldValue();
+        $codePSFValue = $this->getDataField(FtaComposantModel::FIELDNAME_CODE_PRODUIT_AGROLOGIC_FTA_NOMENCLATURE)->getFieldValue();
+        if (($activationCodification == FtaModel::ACTIVATION_ETIQUETTE_COLIS_ET_COMPOSITION or $activationCodification == FtaModel::ACTIVATION_ETIQUETTE_COMPOSITION) and $codePSFValue) {
+            $sqlCondi = " ";
+        } else {
+            $sqlCondi = " WHERE " . AnnexeModeEtiquetteModel::FIELDNAME_ETIQUETTE_ACTIF . "=0 ";
+        }
+        $sql = "SELECT " . AnnexeModeEtiquetteModel::KEYNAME . "," . AnnexeModeEtiquetteModel::FIELDNAME_MODE_ETIQUETTE_LABEL
+                . " FROM " . AnnexeModeEtiquetteModel::TABLENAME
+                . $sqlCondi
+                . "  ORDER BY " . AnnexeModeEtiquetteModel::FIELDNAME_MODE_ETIQUETTE_NOM . "";
+        $arrayModeEtiquette = DatabaseOperation::convertSqlStatementWithKeyAndOneFieldToArray(
+                        $sql
+        );
+
+        $HtmlList->setArrayListContent($arrayModeEtiquette);
+
+        $HtmlTableName = FtaComposantModel::TABLENAME
+                . '_'
+                . FtaComposantModel::FIELDNAME_MODE_ETIQUETTE_FTA_COMPOSITION
+                . '_'
+                . $this->getKeyValue()
+        ;
+        $HtmlList->getAttributes()->getName()->setValue(FtaComposantModel::FIELDNAME_MODE_ETIQUETTE_FTA_COMPOSITION);
+        $HtmlList->setLabel(DatabaseDescription::getFieldDocLabel(FtaComposantModel::TABLENAME, FtaComposantModel::FIELDNAME_MODE_ETIQUETTE_FTA_COMPOSITION));
+        $HtmlList->setIsEditable($paramIsEditable);
+        $HtmlList->initAbstractHtmlSelect(
+                $HtmlTableName
+                , $HtmlList->getLabel()
+                , $this->getDataField(FtaComposantModel::FIELDNAME_MODE_ETIQUETTE_FTA_COMPOSITION)->getFieldValue()
+                , $this->getDataField(FtaComposantModel::FIELDNAME_MODE_ETIQUETTE_FTA_COMPOSITION)->isFieldDiff()
+                , $HtmlList->getArrayListContent());
+        $HtmlList->getEventsForm()->setOnChangeWithAjaxAutoSave(
+                FtaComposantModel::TABLENAME
+                , FtaComposantModel::KEYNAME
+                , $this->getKeyValue()
+                , FtaComposantModel::FIELDNAME_MODE_ETIQUETTE_FTA_COMPOSITION);
+        $listeModeEtiquettes = $HtmlList->getHtmlResult();
+
+        return $listeModeEtiquettes;
+    }
+
+
 }
 
 ?>

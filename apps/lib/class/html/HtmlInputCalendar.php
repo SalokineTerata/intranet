@@ -22,7 +22,7 @@ const DEFAULT_SIZE = 10;
     }
     function setHtmlResultOnClick() {
         $fieldName = $this->getAttributes()->getName()->getValue();
-        $htmlResultOnClick = "onclick=\"displayCalendar(document.forms['form_action']." . $fieldName . ",'yyyy-mm-dd',this)\" ";
+        $htmlResultOnClick = "onclick=\"displayCalendar(document.forms['form_action']." . $fieldName . ",'dd-mm-yyyy',this)\" ";
         $this->getEventsMouse()->setOnClick($htmlResultOnClick);
     }
 

@@ -4372,4 +4372,6 @@ function afficher_navigation($id_fta, $id_fta_chapitre_encours, $synthese_action
     return $menu_navigation;
 }
 
+
+
 ?>

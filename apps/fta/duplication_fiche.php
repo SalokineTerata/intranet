@@ -167,7 +167,7 @@ switch ($output) {
              <tr><td>
 
                  &nbsp&nbsp&nbsp&nbsp
-                ' . UserInterfaceMessage::FR_DUPLICATION_DE_FTA_WARNING . '
+                ' . UserInterfaceMessage::FR_WARNING_DUPLICATION_DE_FTA . '
                  <br>
                      <' . $html_table . '>
                      <tr class=titre_principal><td align=left>

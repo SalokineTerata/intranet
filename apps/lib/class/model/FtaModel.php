@@ -8,7 +8,10 @@
  */
 class FtaModel extends AbstractModel {
 
-    const CHECK_DATE_ECHANCE = "0000-00-00";
+    const ACTIVATION_ETIQUETTE_COLIS = "1";
+    const ACTIVATION_ETIQUETTE_COMPOSITION = "2";
+    const ACTIVATION_ETIQUETTE_COLIS_ET_COMPOSITION = "3";
+    const CHECK_DATE_ECHANCE = "00-00-0000";
     const TABLENAME = "fta";
     const KEYNAME = "id_fta";
     const KEYNAME_CREATEUR = "id_user";
@@ -22,6 +25,7 @@ class FtaModel extends AbstractModel {
     const FIELDNAME_CODE_ARTICLE = "CODE_ARTICLE";
     const FIELDNAME_CODE_ARTICLE_CLIENT = "code_article_client";
     const FIELDNAME_CODE_ARTICLE_LDC = "code_article_ldc";
+    const FIELDNAME_CODE_ARTICLE_LDC_MERE = "code_article_ldc_mere";
     const FIELDNAME_CODE_DOUANE_FTA = "code_douane_fta";
     const FIELDNAME_CODE_DOUANE_LIBELLE_FTA = "code_douane_libelle_fta";
     const FIELDNAME_COMMENTAIRE = "commentaire";
@@ -610,7 +614,7 @@ class FtaModel extends AbstractModel {
 
                 $delai_jour = $WeekSinceFirstProcessus * ModuleConfig::DELAI_ECHEANCE_PROCESSUS_JOUR;
                 $timestamp_date_echeance_fta = mktime(0, 0, 0, $mois_date_echeance_fta, $jour_date_echeance_fta - $delai_jour, $annee_date_echeance_fta);
-                $dateDefaultEcheance = date("Y-m-d", $timestamp_date_echeance_fta);
+                $dateDefaultEcheance = date("d-m-Y", $timestamp_date_echeance_fta);
                 $modelFtaProcessusDelai->getDataField(FtaProcessusDelaiModel::FIELDNAME_DATE_ECHEANCE_PROCESSUS)->setFieldValue($dateDefaultEcheance);
             }
 
@@ -705,15 +709,15 @@ class FtaModel extends AbstractModel {
         if ($paramGroupeType == AnnexeEmballageGroupeTypeModel::EMBALLAGE_DU_COLIS) {
             if (count($array) > 1) {
                 $titre = UserInterfaceMessage::FR_WARNING_NOT_HANDLE_TITLE;
-                $message = UserInterfaceMessage::FR_WARNING_EMBALLAGE_COLIS;                
-                afficher_message($titre, $message, $redirection,TRUE);
+                $message = UserInterfaceMessage::FR_WARNING_EMBALLAGE_COLIS;
+                afficher_message($titre, $message, $redirection, TRUE);
             }
         }
         if ($paramGroupeType == AnnexeEmballageGroupeTypeModel::EMBALLAGE_PALETTE) {
             if (count($array) > 1) {
                 $titre = UserInterfaceMessage::FR_WARNING_NOT_HANDLE_TITLE;
                 $message = UserInterfaceMessage::FR_WARNING_EMBALLAGE_PALETTE;
-                afficher_message($titre, $message, $redirection,TRUE);
+                afficher_message($titre, $message, $redirection, TRUE);
             }
         }
 
@@ -1248,7 +1252,7 @@ class FtaModel extends AbstractModel {
         }
         DatabaseOperation::execute(
                 "UPDATE " . FtaModel::TABLENAME
-                . " SET " . FtaModel::FIELDNAME_DATE_CREATION . "='" . date("Y-m-d")                                                               //Date de la création de cet Article
+                . " SET " . FtaModel::FIELDNAME_DATE_CREATION . "='" . date("d-m-Y")                                                               //Date de la création de cet Article
                 . "', " . FtaModel::FIELDNAME_ACTIF . "=" . 0                                                                                   //Tant que la fiche n'est pas activée, la flag reste à 0.
                 . ", " . FtaModel::FIELDNAME_CODE_ARTICLE . "=" . 'NULL'                                                                       //Le Code Article Agrologic ne peut être présent 2 fois (index unique)               
                 . ", " . FtaModel::FIELDNAME_WORKFLOW . "=" . $paramIdFtaWorkflow
@@ -1337,7 +1341,7 @@ class FtaModel extends AbstractModel {
                         //Correction des chapitres
 
                         $paramOption["correction_fta_suivi_projet"] = $paramOption["nouveau_maj_fta"];
-                        FtaChapitreModel::BuildCorrectionChapitre($idFtaNew, $id_fta_chapitre, $paramOption);
+                        FtaChapitreModel::buildCorrectionChapitre($idFtaNew, $id_fta_chapitre, $paramOption);
                     }
                 }
 
@@ -1515,7 +1519,7 @@ class FtaModel extends AbstractModel {
  K_etat, EAN_UVC, EAN_COLIS, EAN_PALETTE,
  OLD_nouvel_article, OLD_k_gestion_lot, activation_codesoft_arti2, id_etiquette_codesoft_arti2,
  atmosphere_protectrice, image_eco_emballage, libelle_code_article_client, id_service_consommateur,
- nom_societe, id_fta_classification2,pourcentage_avancement, liste_id_fta_role)"
+ nom_societe, id_fta_classification2,pourcentage_avancement, liste_id_fta_role,code_article_ldc_mere)"
                         . " SELECT id_access_arti2, OLD_numft, id_fta_workflow,
  commentaire, OLD_id_fta_palettisation, id_dossier_fta, id_version_dossier_fta,
  OLD_champ_maj_fta, id_fta_etat, createur_fta, date_derniere_maj_fta,
@@ -1548,7 +1552,7 @@ class FtaModel extends AbstractModel {
  K_etat, EAN_UVC, EAN_COLIS, EAN_PALETTE,
  OLD_nouvel_article, OLD_k_gestion_lot, activation_codesoft_arti2, id_etiquette_codesoft_arti2,
  atmosphere_protectrice, image_eco_emballage, libelle_code_article_client, id_service_consommateur,
- nom_societe, id_fta_classification2 ,pourcentage_avancement, liste_id_fta_role"
+ nom_societe, id_fta_classification2 ,pourcentage_avancement, liste_id_fta_role,code_article_ldc_mere"
                         . " FROM " . FtaModel::TABLENAME
                         . " WHERE " . FtaModel::KEYNAME . "=" . $paramIdFta
         );
@@ -1748,7 +1752,7 @@ class FtaModel extends AbstractModel {
                     $nbJours = ModuleConfig::VALUE_DATE_PLUS_MISE_A_JOUR;
                     break;
             }
-            $dateEcheanceValue = date("Y-m-d", strtotime(date("Y-m-d") . " +" . $nbJours . " days"));
+            $dateEcheanceValue = date("d-m-Y", strtotime(date("d-m-Y") . " +" . $nbJours . " days"));
         }
         $dataFieldDateEcheance->setFieldValue($dateEcheanceValue);
         $this->saveToDatabase();
@@ -1805,6 +1809,86 @@ class FtaModel extends AbstractModel {
         }
 
         return $idFtaToCompare;
+    }
+    
+    /**
+     * Affiche la liste des site de production pour lesquel l'utilisateur connecté à les droits d'accès 
+     * et l'identifiant de la Fta en cours
+     * @param int $paramIdUser
+     * @param HtmlListSelect $paramHtmlObjet
+     * @param boolean $paramIsEditable
+     * @return string
+     */
+    function showListeDeroulanteSiteProdByAccesAndIdFta($paramIdUser, HtmlListSelect $paramHtmlObjet, $paramIsEditable) {
+
+        /**
+         * Modification
+         */
+        $ftaModification = IntranetDroitsAccesModel::getFtaModification($paramIdUser);
+
+        /**
+         * Consultation
+         */
+        $ftaConsultation = IntranetDroitsAccesModel::getFtaConsultation($paramIdUser);
+
+        /**
+         * Si l'utilisateur a les droits en consultation sur le module et pas en modification
+         * Transmettre à $paramHtmlObjet la liste de tous les sites taggés "fta".
+         * 
+         * Si il a accès en consultation et modification alors
+         */
+        if ($ftaConsultation and $ftaModification) {
+
+            $idFtaWorkflow = $this->getDataField(FtaModel::FIELDNAME_WORKFLOW)->getFieldValue();
+            $arraySite = DatabaseOperation::convertSqlStatementWithKeyAndOneFieldToArray(
+                            'SELECT DISTINCT ' . GeoModel::KEYNAME . ',' . GeoModel::FIELDNAME_GEO
+                            . ' FROM ' . GeoModel::TABLENAME
+                            . ', ' . FtaActionSiteModel::TABLENAME
+                            . ', ' . IntranetActionsModel::TABLENAME
+                            . ', ' . IntranetDroitsAccesModel::TABLENAME
+                            . ', ' . FtaWorkflowModel::TABLENAME
+                            . ' WHERE ' . FtaActionSiteModel::TABLENAME . '.' . FtaActionSiteModel::FIELDNAME_ID_SITE . '=' . GeoModel::KEYNAME
+                            . ' AND ' . FtaActionSiteModel::TABLENAME . '.' . FtaActionSiteModel::FIELDNAME_ID_INTRANET_ACTIONS
+                            . '=' . IntranetActionsModel::TABLENAME . '.' . IntranetActionsModel::KEYNAME
+                            . ' AND ' . FtaWorkflowModel::TABLENAME . '.' . FtaWorkflowModel::FIELDNAME_ID_INTRANET_ACTIONS
+                            . '=' . IntranetActionsModel::TABLENAME . '.' . IntranetActionsModel::FIELDNAME_PARENT_INTRANET_ACTIONS
+                            . ' AND ' . FtaWorkflowModel::TABLENAME . '.' . FtaWorkflowModel::KEYNAME
+                            . '=' . $idFtaWorkflow
+                            . ' AND ' . IntranetActionsModel::TABLENAME . '.' . IntranetActionsModel::KEYNAME
+                            . '=' . IntranetDroitsAccesModel::TABLENAME . '.' . IntranetDroitsAccesModel::FIELDNAME_ID_INTRANET_ACTIONS
+                            . ' AND ' . IntranetDroitsAccesModel::FIELDNAME_ID_USER . '=' . $paramIdUser // L'utilisateur connecté
+                            . ' AND ' . IntranetDroitsAccesModel::TABLENAME . '.' . IntranetDroitsAccesModel::FIELDNAME_NIVEAU_INTRANET_DROITS_ACCES . '=' . IntranetNiveauAccesModel::NIVEAU_GENERIC_TRUE
+                            . ' ORDER BY ' . GeoModel::FIELDNAME_GEO
+            );
+        } elseif ($ftaConsultation) {
+            $arraySite = DatabaseOperation::convertSqlStatementWithKeyAndOneFieldToArray(
+                            'SELECT DISTINCT ' . GeoModel::KEYNAME . ',' . GeoModel::FIELDNAME_GEO
+                            . ' FROM ' . GeoModel::TABLENAME
+                            . ' WHERE ' . GeoModel::FIELDNAME_TAG_APPLICATION_GEO . ' LIKE \'%fta%\''
+                            . ' ORDER BY ' . GeoModel::FIELDNAME_GEO
+            );
+        }
+
+        $paramHtmlObjet->setArrayListContent($arraySite);
+
+        $HtmlTableName = FtaModel::TABLENAME
+                . '_'
+                . FtaModel::FIELDNAME_SITE_PRODUCTION
+                . '_'
+                . $this->getKeyValue()
+        ;
+        $paramHtmlObjet->getAttributes()->getName()->setValue(FtaModel::FIELDNAME_SITE_PRODUCTION);
+        $paramHtmlObjet->setLabel(DatabaseDescription::getFieldDocLabel(GeoModel::TABLENAME, GeoModel::FIELDNAME_GEO));
+        $paramHtmlObjet->setIsEditable($paramIsEditable);
+        $paramHtmlObjet->initAbstractHtmlSelect(
+                $HtmlTableName, $paramHtmlObjet->getLabel()
+                , $this->getDataField(FtaModel::FIELDNAME_SITE_PRODUCTION)->getFieldValue()
+                , $this->getDataField(FtaModel::FIELDNAME_SITE_PRODUCTION)->isFieldDiff()
+                , $paramHtmlObjet->getArrayListContent());
+        $paramHtmlObjet->getEventsForm()->setOnChangeWithAjaxAutoSave(FtaModel::TABLENAME, FtaModel::KEYNAME, $this->getKeyValue(), FtaModel::FIELDNAME_SITE_PRODUCTION);
+        $listeSiteProduction = $paramHtmlObjet->getHtmlResult();
+
+        return $listeSiteProduction;
     }
 
     private function functionName($param) {

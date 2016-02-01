@@ -218,11 +218,20 @@ if ($id_fta) {
         }
     }
 }
+$checkValue = FtaController::isCheckDateFormat($date_echeance_fta);
+if ($checkValue) {
 
-//Echéance de validation de la FTA
-$annee_date_echeance_fta = substr($date_echeance_fta, 0, 4);
-$mois_date_echeance_fta = substr($date_echeance_fta, 5, 2);
-$jour_date_echeance_fta = substr($date_echeance_fta, 8, 2);
+    //Echéance de validation de la FTA
+    $annee_date_echeance_fta = substr($date_echeance_fta, 6, 9);
+    $mois_date_echeance_fta = substr($date_echeance_fta, 3, 2);
+    $jour_date_echeance_fta = substr($date_echeance_fta, 0, 2);
+} else {
+    //Echéance de validation de la FTA
+    $annee_date_echeance_fta = substr($date_echeance_fta, 0, 4);
+    $mois_date_echeance_fta = substr($date_echeance_fta, 5, 2);
+    $jour_date_echeance_fta = substr($date_echeance_fta, 8, 2);
+}
+
 
 //$jour_restant = mktime(0,0,0,$mois_date_echeance_processus - date('m'), $jour_date_echeance_processus - date('d'), $annee_date_echeance_processus - date ('Y'));
 $echeance_timestamp = mktime(0, 0, 0, $mois_date_echeance_fta, $jour_date_echeance_fta, $annee_date_echeance_fta);

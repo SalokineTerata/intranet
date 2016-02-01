@@ -127,7 +127,7 @@ if ($modifier == 'modifier') {
                             $bloc .='<tr><td align=right>'
                                     . DatabaseDescription::getFieldDocLabel(UserModel::TABLENAME, UserModel::FIELDNAME_DATE_CREATION_SALARIES)
                                     . '</td><td align=left><input type=text name=' . UserModel::FIELDNAME_DATE_CREATION_SALARIES . ' size=15  value='
-                                    . date('Y-m-d') . ' />'
+                                    . date('d-m-Y') . ' />'
                                     . '</td></tr>'
                             ;
 

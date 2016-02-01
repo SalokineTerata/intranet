@@ -737,6 +737,8 @@ class AccueilFta {
                 . 'Actions'
                 . '</th><th>'
                 . 'Commentaires sur la Fta'
+                . '</th><th>'
+                . 'Code Regate Mère Fta'
                 . '</th>';
         /**
          * Version avec le module rewrite
@@ -819,8 +821,11 @@ class AccueilFta {
                  */
                 $ftaModel = new FtaModel($idFta);
                 $commentaireDataField = $ftaModel->getDataField(FtaModel::FIELDNAME_COMMENTAIRE);
-                $htmlField = html::getHtmlObjectFromDataField($commentaireDataField);
-                $htmlField->setHtmlRenderToTable();
+                $codeRegateMereDataField = $ftaModel->getDataField(FtaModel::FIELDNAME_CODE_ARTICLE_LDC_MERE);
+                $htmlFieldCommentaire = html::getHtmlObjectFromDataField($commentaireDataField);
+                $htmlFieldCodeRegateMere = html::getHtmlObjectFromDataField($codeRegateMereDataField);
+                $htmlFieldCodeRegateMere->setHtmlRenderToTable();
+                $htmlFieldCommentaire->setHtmlRenderToTable();
 
 
                 /**
@@ -1114,7 +1119,7 @@ class AccueilFta {
                     $diffWorkflowTr = $workflowTR <> $workflowTrTmp;
                     if ($diffWorkflowTr) {
                         $tableauFicheTr2 .= $tableauFicheTrWork . $tableauFicheTr;
-                        $nombreDeCellule = '12';
+                        $nombreDeCellule = '13';
                         $tableauFicheTrWork = '<tbody  id=\'' . $workflowName . '\' >'
                                 . '<tr class=contenu>'
                                 . '<td  class=titre COLSPAN=' . $nombreDeCellule . '>' . $workflowDescription . '</td>'
@@ -1129,7 +1134,7 @@ class AccueilFta {
                     $diffWorkflowN = $workflowN <> $workflowNTmp;
                     if ($diffWorkflowN) {
                         $tableauFicheN2.= $tableauFicheNWork . $tableauFicheN;
-                        $nombreDeCellule = '12';
+                        $nombreDeCellule = '13';
                         $tableauFicheNWork = '<tbody  id=\'' . $workflowName . '\' >'
                                 . '<tr class=contenu>'
                                 . '<td  class=titre COLSPAN=' . $nombreDeCellule . '>' . $workflowDescription . '</td>'
@@ -1152,10 +1157,12 @@ class AccueilFta {
                 switch (self::$idUser) {
                     case $createurFta:
                         /*
-                         * Commentaire de la Fta
+                         * Commentaire de la Fta et code Regate Mère
                          */
-                        $htmlField->setIsEditable(TRUE);
-                        $commentaire = $htmlField->getHtmlResult();
+                        $htmlFieldCommentaire->setIsEditable(TRUE);
+                        $htmlFieldCodeRegateMere->setIsEditable(TRUE);
+                        $commentaire = $htmlFieldCommentaire->getHtmlResult();
+                        $codeRegateMere = $htmlFieldCodeRegateMere->getHtmlResult();
                         if ($recap[$idFta] == '100%') {
                             if ($createurFtaN <> $createurNTmp or $diffWorkflowN) {
                                 $tableauFicheN .= '<tr class=contenu>'
@@ -1178,7 +1185,8 @@ class AccueilFta {
                                 $tableauFicheN .= '<td ' . $bgcolor . ' width=5% align=center >' . $lienHistorique . '</td>'//% Avancement FTA
                                         . '<td ' . $bgcolor . $largeur_html_C3 . ' align=center >' . $service . '</td>' //Service               
                                         . '<td ' . $bgcolor . $largeur_html_C3_action . ' align=center >' . $actions . '</td>'// Actions
-                                        . $commentaire . '</tr >'; // Commentaires
+                                        . $commentaire  // Commentaires
+                                        . $codeRegateMere . '</tr >'; // Code Regate Mere
                                 $createurNTmp = $createurFtaN;
                             } else {
                                 $tableauFicheN .= '<tr class=contenu >'
@@ -1198,7 +1206,8 @@ class AccueilFta {
                                 $tableauFicheN .= '<td ' . $bgcolor . ' width=5% align=center>' . $lienHistorique . '</td>'//% Avancement FTA
                                         . '<td ' . $bgcolor . $largeur_html_C3 . ' align=center >' . $service . '</td>' //Service               
                                         . '<td ' . $bgcolor . $largeur_html_C3_action . ' align=center >' . $actions . '</td>'// Actions
-                                        . $commentaire . '</tr >'; // Commentaires
+                                        . $commentaire  // Commentaires
+                                        . $codeRegateMere . '</tr >'; // Code Regate Mere
                             }
                         } else {
                             if ($createurFtaTr <> $createurTrTmp or $diffWorkflowTr) {
@@ -1222,7 +1231,8 @@ class AccueilFta {
                                 $tableauFicheTr .= '<td ' . $bgcolor . ' width=5% align=center>' . $lienHistorique . '</td>'//% Avancement FTA
                                         . '<td ' . $bgcolor . $largeur_html_C3 . ' align=center >' . $service . '</td>' //Service               
                                         . '<td ' . $bgcolor . $largeur_html_C3_action . ' align=center >' . $actions . '</td>'// Actions
-                                        . $commentaire . '</tr >'; // Commentaires
+                                        . $commentaire  // Commentaires
+                                        . $codeRegateMere . '</tr >'; // Code Regate Mere
                                 $createurTrTmp = $createurFtaTr;
                             } else {
                                 $tableauFicheTr .= '<tr class=contenu >'
@@ -1242,7 +1252,8 @@ class AccueilFta {
                                 $tableauFicheTr .= '<td ' . $bgcolor . ' width=5% align=center>' . $lienHistorique . '</td>'//% Avancement FTA
                                         . '<td ' . $bgcolor . $largeur_html_C3 . ' align=center >' . $service . '</td>' //Service               
                                         . '<td ' . $bgcolor . $largeur_html_C3_action . ' align=center >' . $actions . '</td>'// Actions
-                                        . $commentaire . '</tr >'; // Commentaires
+                                        . $commentaire  // Commentaires
+                                        . $codeRegateMere . '</tr >'; // Code Regate Mere
                             }
                         }
                         break;
@@ -1253,9 +1264,10 @@ class AccueilFta {
                          * Commentaire de la Fta
                          */
 
-                        $htmlField->setIsEditable(FALSE);
-                        $commentaire = $htmlField->getHtmlResult();
-
+                        $htmlFieldCommentaire->setIsEditable(FALSE);
+                        $htmlFieldCodeRegateMere->setIsEditable(FALSE);
+                        $commentaire = $htmlFieldCommentaire->getHtmlResult();
+                        $codeRegateMere = $htmlFieldCodeRegateMere->getHtmlResult();
                         /*
                          * Nouvelle ligne pour créateur
                          */
@@ -1281,7 +1293,8 @@ class AccueilFta {
                                 $tableauFicheTmp .= '<td ' . $bgcolor . ' width=5% align=center>' . $lienHistorique . '</td>'//% Avancement FTA
                                         . '<td ' . $bgcolor . $largeur_html_C3 . ' align=center >' . $service . '</td>' //Service               
                                         . '<td ' . $bgcolor . $largeur_html_C3_action . ' align=center >' . $actions . '</td>'// Actions
-                                        . $commentaire . '</tr >'; // Commentaires
+                                        . $commentaire  // Commentaires
+                                        . $codeRegateMere . '</tr >'; // Code Regate Mere
                                 $createurNTmp = $createurFtaN;
                             } else {
                                 $tableauFicheTmp .= '<tr class=contenu >'
@@ -1302,7 +1315,8 @@ class AccueilFta {
                                 $tableauFicheTmp .='<td ' . $bgcolor . ' width=5% align=center>' . $lienHistorique . '</td>'//% Avancement FTA
                                         . '<td ' . $bgcolor . $largeur_html_C3 . ' align=center >' . $service . '</td>' //Service               
                                         . '<td ' . $bgcolor . $largeur_html_C3_action . ' align=center >' . $actions . '</td>'// Actions
-                                        . $commentaire . '</tr >'; // Commentaires
+                                        . $commentaire  // Commentaires
+                                        . $codeRegateMere . '</tr >'; // Code Regate Mere
                             }
                         } else {
                             if ($createurFtaTr <> $createurTrTmp or $diffWorkflowTr) {
@@ -1327,7 +1341,8 @@ class AccueilFta {
                                 $tableauFicheTrTmp .= '<td ' . $bgcolor . ' width=5% align=center>' . $lienHistorique . '</td>'//% Avancement FTA
                                         . '<td ' . $bgcolor . $largeur_html_C3 . ' align=center >' . $service . '</td>' //Service               
                                         . '<td ' . $bgcolor . $largeur_html_C3_action . ' align=center >' . $actions . '</td>'// Actions
-                                        . $commentaire . '</tr >'; // Commentaires
+                                        . $commentaire  // Commentaires
+                                        . $codeRegateMere . '</tr >'; // Code Regate Mere
                                 $createurTrTmp = $createurFtaTr;
                             } else {
                                 $tableauFicheTrTmp .= '<tr class=contenu >'
@@ -1347,7 +1362,8 @@ class AccueilFta {
                                 $tableauFicheTrTmp .='<td ' . $bgcolor . ' width=5% align=center>' . $lienHistorique . '</td>'//% Avancement FTA
                                         . '<td ' . $bgcolor . $largeur_html_C3 . ' align=center >' . $service . '</td>' //Service               
                                         . '<td ' . $bgcolor . $largeur_html_C3_action . ' align=center >' . $actions . '</td>'// Actions
-                                        . $commentaire . '</tr >'; // Commentaires
+                                        . $commentaire  // Commentaires
+                                        . $codeRegateMere . '</tr >'; // Code Regate Mere
                             }
                         }
                         break;

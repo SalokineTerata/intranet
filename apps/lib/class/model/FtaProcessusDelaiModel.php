@@ -147,7 +147,7 @@ class FtaProcessusDelaiModel extends AbstractModel {
 
             foreach ($arrayIdFtaDate as $rowsIdFtaDate) {
                 $dateEcheanceFta = $rowsIdFtaDate[FtaModel::FIELDNAME_DATE_ECHEANCE_FTA];
-                $jour_restant = ((strtotime($dateEcheanceFta) - strtotime(date('Y-m-d')))) / 86400;
+                $jour_restant = ((strtotime($dateEcheanceFta) - strtotime(date('d-m-Y')))) / 86400;
             }
             /**
              * @todo Revoir les notifications de date d'échances

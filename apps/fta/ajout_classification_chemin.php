@@ -104,16 +104,22 @@ if (!$modificationGestionnaire) {
 
     $navigue = Navigation::getHtmlNavigationBar();
 }
-switch ($modificationGestionnaire){
+switch ($modificationGestionnaire) {
     case "1";
         $action = "gestionnaire";
+        $ftaModel = new FtaModel($idFta);
+        $ftaModel->setIsEditable(TRUE);
+        $suffixeAgrologicFta = $ftaModel->getHtmlDataField(FtaModel::FIELDNAME_SUFFIXE_AGROLOGIC_FTA);
         break;
     case "2";
         $action = "gestionnaire1";
+        $ftaModel = new FtaModel($idFta);
+        $ftaModel->setIsEditable(TRUE);
+        $suffixeAgrologicFta = $ftaModel->getHtmlDataField(FtaModel::FIELDNAME_SUFFIXE_AGROLOGIC_FTA);
         break;
     default :
-        $action ="valider";
-    break;
+        $action = "valider";
+        break;
 }
 
 
@@ -154,6 +160,7 @@ $navigue . "
 
         
      </tr>
+     $suffixeAgrologicFta
      <tr>
         $bouton_retour_vers_fta
          $bouton_submit

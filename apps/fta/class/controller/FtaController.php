@@ -115,6 +115,34 @@ class FtaController {
                 . '>' . self::CALLBACK_LINK_TO_TRANSITER_PAGE_VALIDATE . '</a></center></td>';
     }
 
+    public static function changementDuFormatDeDate($paramValeurDate) {
+        /*
+          Dictionnaire des variables:
+         * **************************
+          $valeur_date: contient la date au format AAAA-MM-JJ
+         */
+        $checkValue = FtaController::isCheckDateFormat($paramValeurDate);
+        if ($checkValue) {
+            /**
+             * Extraction de l'année
+             * Format Français
+             */
+            $annee = substr($paramValeurDate, 6, 9);
+            $mois = substr($paramValeurDate, 3, 2);
+            $jours = substr($paramValeurDate, 0, 2);
+        } else {
+            /**
+             * Extraction de l'année
+             * Format Anglais
+             */
+            $annee = substr($paramValeurDate, 0, 4);
+            $mois = substr($paramValeurDate, 5, 2);
+            $jours = substr($paramValeurDate, 8, 2);
+        }
+        $return = $jours . "-" . $mois . "-" . $annee;
+        return $return;
+    }
+
 }
 
 ?>

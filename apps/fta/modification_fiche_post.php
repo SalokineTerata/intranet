@@ -144,7 +144,7 @@ switch ($action) {
         $isFtaDataValidationSuccess = $modelFta->isFtaDataValidationSuccess($paramIdFtaChapitreEncours);
 
         if ($paramSignatureValidationSuiviProjet and $isFtaDataValidationSuccess == "0") {
-            $modelFtaSuiviProjet->getDataField(FtaSuiviProjetModel::FIELDNAME_DATE_VALIDATION_SUIVI_PROJET)->setFieldValue(date("d-m-Y"));
+            $modelFtaSuiviProjet->getDataField(FtaSuiviProjetModel::FIELDNAME_DATE_VALIDATION_SUIVI_PROJET)->setFieldValue(date("Y-m-d"));
             $modelFtaSuiviProjet->setSigned($paramSignatureValidationSuiviProjet);
             $modelFtaSuiviProjet->saveToDatabase();
         }

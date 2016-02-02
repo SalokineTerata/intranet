@@ -651,11 +651,50 @@ class FtaSuiviProjetModel extends AbstractModel {
         }
     }
 
+    /**
+     * Affiche la date de validition d'un chapitre
+     * @return string
+     */
+    function getHtmlDateValidationSuiviFta() {
+        $idFtaSuivieProjet = $this->getKeyValue();
+        $dateValidationValueTmp = $this->getDataField(self::FIELDNAME_DATE_VALIDATION_SUIVI_PROJET)->getFieldValue();
+        $dateValidationValue = FtaController::changementDuFormatDeDate($dateValidationValueTmp);
+
+        $signatureValidationObjet = new HtmlInputText();
+        $HtmlTableName = self::TABLENAME
+                . '_'
+                . self::FIELDNAME_DATE_VALIDATION_SUIVI_PROJET
+                . '_'
+                . $idFtaSuivieProjet
+        ;
+        $signatureValidationObjet->setLabel(DatabaseDescription::getFieldDocLabel(self::TABLENAME, self::FIELDNAME_DATE_VALIDATION_SUIVI_PROJET));
+        $signatureValidationObjet->getAttributes()->getValue()->setValue($dateValidationValue);
+        $signatureValidationObjet->setIsEditable($this->getIsEditable());
+        $signatureValidationObjet->initAbstractHtmlInput(
+                $HtmlTableName
+                , $signatureValidationObjet->getLabel()
+                , $dateValidationValue
+                , NULL);
+        $signatureValidationObjet->getEventsForm()->setOnChangeWithAjaxAutoSave(self::TABLENAME, self::KEYNAME, $idFtaSuivieProjet, self::FIELDNAME_DATE_VALIDATION_SUIVI_PROJET);
+        return $signatureValidationObjet->getHtmlResult();
+    }
+
+    /**
+     * 
+     * @param type $paramFtaModel
+     * @return type
+     */
     public static function getPourcentageFtaTauxValidation($paramFtaModel) {
         $tauxTemp = FtaSuiviProjetModel::getArrayFtaTauxValidation($paramFtaModel, FALSE);
         return round($tauxTemp[0] * 100, 0) . "%";
     }
 
+    /**
+     * 
+     * @param type $paramFtaModel
+     * @param type $paramTableauProcessus
+     * @return type
+     */
     public static function getArrayFtaTauxValidation($paramFtaModel, $paramTableauProcessus) {
 
 //Dictionnaire des données
@@ -756,7 +795,7 @@ class FtaSuiviProjetModel extends AbstractModel {
                     $action = "Chapitre " . $nomChapitre;
                     $nomPrenom = $rowsCommentaireAllChapitre[UserModel::FIELDNAME_PRENOM] . " " . $rowsCommentaireAllChapitre[UserModel::FIELDNAME_NOM];
                     $comment = $rowsCommentaireAllChapitre[FtaSuiviProjetModel::FIELDNAME_COMMENTAIRE_SUIVI_PROJET];
-                    $return.= FtaController::getComment($action, $nomPrenom, $comment)."\n";
+                    $return.= FtaController::getComment($action, $nomPrenom, $comment) . "\n";
                 }
             }
             $return = "<tr class=contenu><td> Commentaires sur les Chapitres</td><td>" . $return . "</td></tr>";
@@ -796,7 +835,7 @@ class FtaSuiviProjetModel extends AbstractModel {
                     $action = "Chapitre " . $nomChapitre;
                     $nomPrenom = $rowsCommentaireAllChapitre[UserModel::FIELDNAME_PRENOM] . " " . $rowsCommentaireAllChapitre[UserModel::FIELDNAME_NOM];
                     $comment = $rowsCommentaireAllChapitre[FtaSuiviProjetModel::FIELDNAME_CORRECTION_FTA_SUIVI_PROJET];
-                    $return.= FtaController::getComment($action, $nomPrenom, $comment)."\n";
+                    $return.= FtaController::getComment($action, $nomPrenom, $comment) . "\n";
                 }
             }
             $return = "<tr class=contenu><td> Récapitulatif des corrections</td><td>" . $return . "</td></tr>";

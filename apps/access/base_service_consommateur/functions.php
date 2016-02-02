@@ -82,7 +82,7 @@ function do_sendmail($k_dossier,$k_article)
                    . "Enregistrement de la réclamation suivante, n° ".$k_dossier." : \n\n"
                    . "- article   : ".$k_article." - " .$info_article["LIBELLE"]." (code groupe ".$info_article["code_article_ldc"].")\n"
                    . "- n° de lot : ".$info_dossier["N__Lot"]."\n"
-                   . "- dlc       : ".recuperation_date_depuis_mysql($info_dossier["DLC"])."\n"
+                   . "- dlc       : ".changementDuFormatDeDate($info_dossier["DLC"])."\n"
                    . "- objet     : ".$info_dossier["Objet"]."\n"
                    . "- typologie : ".$info_dossier["Nom"]."\n"
                    . "- service concerné : ".$info_dossier["nom_service"]."\n\n"

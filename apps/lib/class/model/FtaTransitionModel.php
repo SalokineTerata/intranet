@@ -198,7 +198,7 @@ class FtaTransitionModel {
         /**
          * Mise à jour de la date de validation
          */
-        $ftaModel->getDataField(FtaModel::FIELDNAME_DATE_DERNIERE_MAJ_FTA)->setFieldValue(date('d-m-Y'));
+        $ftaModel->getDataField(FtaModel::FIELDNAME_DATE_DERNIERE_MAJ_FTA)->setFieldValue(date('Y-m-d'));
         $ftaModel->saveToDatabase();
 
         //Récupération du nouvel état de la fiche

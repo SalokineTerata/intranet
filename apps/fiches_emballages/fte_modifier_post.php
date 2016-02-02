@@ -93,7 +93,7 @@ switch ($action) {
             $annexeEmballageModel->getDataField(AnnexeEmballageModel::FIELDNAME_NOMBRE_COUCHE_ANNEXE_EMBALLAGE)->setFieldValue($nombre_couche_annexe_emballage);
             $annexeEmballageModel->getDataField(AnnexeEmballageModel::FIELDNAME_QUANTITE_PAR_COUCHE_ANNEXE_EMBALLAGE)->setFieldValue($quantite_par_couche_annexe_emballage);
             $annexeEmballageModel->getDataField(AnnexeEmballageModel::FIELDNAME_REFERENCE_FOURNISSEUR_ANNEXE_EMBALLAGE)->setFieldValue($reference_fournisseur_annexe_emballage);
-            $annexeEmballageModel->getDataField(AnnexeEmballageModel::FIELDNAME_DATE_MAJ_ANNEXE_EMBALLAGE)->setFieldValue(date("d-m-Y"));
+            $annexeEmballageModel->getDataField(AnnexeEmballageModel::FIELDNAME_DATE_MAJ_ANNEXE_EMBALLAGE)->setFieldValue(date("Y-m-d"));
             $annexeEmballageModel->getDataField(AnnexeEmballageModel::FIELDNAME_ID_ANNEXE_EMBALLAGE_GROUPE)->setFieldValue($nom_annexe_emballage_groupe);
             $annexeEmballageModel->getDataField(AnnexeEmballageModel::FIELDNAME_ID_FTE_FOURNISSEUR)->setFieldValue($nom_fte_fournisseur);
             $annexeEmballageModel->saveToDatabase();
@@ -111,7 +111,7 @@ switch ($action) {
             $annexeEmballageModel->getDataField(AnnexeEmballageModel::FIELDNAME_NOMBRE_COUCHE_ANNEXE_EMBALLAGE)->setFieldValue($nombre_couche_annexe_emballage);
             $annexeEmballageModel->getDataField(AnnexeEmballageModel::FIELDNAME_QUANTITE_PAR_COUCHE_ANNEXE_EMBALLAGE)->setFieldValue($quantite_par_couche_annexe_emballage);
             $annexeEmballageModel->getDataField(AnnexeEmballageModel::FIELDNAME_REFERENCE_FOURNISSEUR_ANNEXE_EMBALLAGE)->setFieldValue($reference_fournisseur_annexe_emballage);
-            $annexeEmballageModel->getDataField(AnnexeEmballageModel::FIELDNAME_DATE_MAJ_ANNEXE_EMBALLAGE)->setFieldValue(date("d-m-Y"));
+            $annexeEmballageModel->getDataField(AnnexeEmballageModel::FIELDNAME_DATE_MAJ_ANNEXE_EMBALLAGE)->setFieldValue(date("Y-m-d"));
             $annexeEmballageModel->getDataField(AnnexeEmballageModel::FIELDNAME_ID_ANNEXE_EMBALLAGE_GROUPE)->setFieldValue($nom_annexe_emballage_groupe);
 
             $annexeEmballageModel->saveToDatabase();

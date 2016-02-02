@@ -405,8 +405,7 @@ class MoteurDeRecherche {
 
                     // Chercher le type de $nom_champ dans $nom_table
 
-                    $rech_type = " SELECT $nom_champ
-FROM $nom_table";
+                    $rech_type = " SELECT " . $nom_champ . " FROM " . $nom_table;
                     $rech_type_res = DatabaseOperation::queryPDO($rech_type) or die('Erreur SQL !' . $rech_type . '<br>' . PDO::errorInfo());
 
                     // type du champ sur lequel on fait la recherche

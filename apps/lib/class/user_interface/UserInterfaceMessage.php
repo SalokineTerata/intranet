@@ -37,7 +37,7 @@ class UserInterfaceMessage {
     const FR_DUPLICATION_DE_FTA_2 = "</b>.<br>
                  Cette opération est irreversible<br>";
     const FR_DUPLICATION_DE_FTA_WARNING = " Attention, vous êtes sur le point de dupliquer la Fiche Technique Article suivante:<br>";
-    const FR_LAST_50_FTA = "Consultation des 50 dernières FTA";
+    const FR_LAST_50_FTA = "Consultation des dernières FTA";
     const FR_LOGIN_PROCESS_ACCOUNT_LOCKED = "Votre compte est bloqué suite à trois tentatives ratées.<br><br>Contactez un Administrateur pour réactiver votre compte.<br>";
     const FR_NONE_FTA = "Aucune Fta identifiée.<br><br>";
     const FR_SESSION_EXPIRED = "Erreur, la session précédement connecté à expirer.<br>Veuillez vous reconnecter.<br>";
@@ -70,6 +70,9 @@ class UserInterfaceMessage {
     const FR_WARNING_ECHEANCE_DEPASSEE = "Certaines échéances sont dépassées !";
     const FR_WARNING_EMBALLAGE_COLIS = "Il ne doit y avoir qu'un seul emballage Colis";
     const FR_WARNING_EMBALLAGE_PALETTE = "Il ne doit y avoir qu'une seule Palette";
+    const FR_WARNING_EMBALLAGE_SUPPRESION = "Vous ne pouvez pas supprimer cette Fiche Technique Emballage.<br><br>
+                    En effet, elle est encore utilisée dans certaines Fiches Techniques Articles.<br><br>";
+    const FR_WARNING_EMBALLAGE_SUPPRESION_TITLE = "Suppression d'une Fiche Technique Emballage";
     const FR_WARNING_MESSAGE_URL_MODIF = "Veuillez ne pas modifier URL.<br><br>";
     const FR_WARNING_NOT_HANDLE_TITLE = "Cas non géré";
     const FR_WARNING_PARAM_ID_FTA = "Erreur la Fta n'est passé en paramètre.<br><br>";

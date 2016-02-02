@@ -100,6 +100,8 @@ class FtaModel extends AbstractModel {
     const FIELDNAME_VIRTUAL_FTA_PROCESSUS_DELAI = "VIRTUAL_fta_processus_delai";
     const FIELDNAME_WORKFLOW = "id_fta_workflow";
     const ID_POIDS_VARIABLE = "3";
+    const ETIQUETTE_COLIS_VERROUILLAGE_FALSE = "0";
+    const ETIQUETTE_COLIS_VERROUILLAGE_NON = "Non";
     const MESSAGE_DATA_MISSING = UserInterfaceMessage::FR_WARNING_DATA_MISSING_TITLE;
     const MESSAGE_DATA_VALIDATION_CLASSIFICATION = UserInterfaceMessage::FR_WARNING_DATA_CLASIFICATION;
     const MESSAGE_DATA_VALIDATION_CODE_LDC = UserInterfaceMessage::FR_WARNING_DATA_VALIDATION_FTA_CODE_LDC;
@@ -630,19 +632,19 @@ class FtaModel extends AbstractModel {
     }
 
     public function getArrayEmballageTypeUVC() {
-        $this->setDonneeEmballageUVC($this->ArrayEmballages(FtaConditionnementModel::EMBALLAGES_UVC));
+        $this->setDonneeEmballageUVC($this->arrayEmballages(FtaConditionnementModel::EMBALLAGES_UVC));
     }
 
     public function getArrayEmballageTypeParColis() {
-        $this->setDonneeEmballageParColis($this->ArrayEmballages(FtaConditionnementModel::EMBALLAGES_PAR_COLIS));
+        $this->setDonneeEmballageParColis($this->arrayEmballages(FtaConditionnementModel::EMBALLAGES_PAR_COLIS));
     }
 
     public function getArrayEmballageTypeDuColis() {
-        $this->setDonneeEmballageDuColis($this->ArrayEmballages(FtaConditionnementModel::EMBALLAGES_DU_COLIS));
+        $this->setDonneeEmballageDuColis($this->arrayEmballages(FtaConditionnementModel::EMBALLAGES_DU_COLIS));
     }
 
     public function getArrayEmballageTypePalette() {
-        $this->setDonneeEmballagePallette($this->ArrayEmballages(FtaConditionnementModel::EMBALLAGES_PALETTE));
+        $this->setDonneeEmballagePallette($this->arrayEmballages(FtaConditionnementModel::EMBALLAGES_PALETTE));
     }
 
     public function buildArrayEmballageTypeUVC() {
@@ -673,8 +675,8 @@ class FtaModel extends AbstractModel {
         return $this->getDonneeEmballagePallette();
     }
 
-    public function ArrayEmballages($paramGroupeType) {
-        $return = $this->PoidsDesEmballagesColis();
+    public function arrayEmballages($paramGroupeType) {
+        $return = $this->poidsDesEmballagesColis();
 
 
         //Les calculs pour Emballages
@@ -703,15 +705,15 @@ class FtaModel extends AbstractModel {
         if ($paramGroupeType == AnnexeEmballageGroupeTypeModel::EMBALLAGE_DU_COLIS) {
             if (count($array) > 1) {
                 $titre = UserInterfaceMessage::FR_WARNING_NOT_HANDLE_TITLE;
-                $message = UserInterfaceMessage::FR_WARNING_EMBALLAGE_COLIS;
-                afficher_message($titre, $message, $redirection);
+                $message = UserInterfaceMessage::FR_WARNING_EMBALLAGE_COLIS;                
+                afficher_message($titre, $message, $redirection,TRUE);
             }
         }
         if ($paramGroupeType == AnnexeEmballageGroupeTypeModel::EMBALLAGE_PALETTE) {
             if (count($array) > 1) {
                 $titre = UserInterfaceMessage::FR_WARNING_NOT_HANDLE_TITLE;
                 $message = UserInterfaceMessage::FR_WARNING_EMBALLAGE_PALETTE;
-                afficher_message($titre, $message, $redirection);
+                afficher_message($titre, $message, $redirection,TRUE);
             }
         }
 
@@ -1029,7 +1031,7 @@ class FtaModel extends AbstractModel {
         return $return;
     }
 
-    public function PoidsDesEmballagesColis() {
+    public function poidsDesEmballagesColis() {
         //Les Calculs de la table fta
         $arrayFta = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
                         "SELECT DISTINCT " . FtaModel::FIELDNAME_NOMBRE_UVC_PAR_CARTON . "," . FtaModel::FIELDNAME_POIDS_ELEMENTAIRE
@@ -1142,7 +1144,7 @@ class FtaModel extends AbstractModel {
         return $return;
     }
 
-    public static function AddIdFta($paramIdEffectue) {
+    public static function addIdFta($paramIdEffectue) {
         if ($paramIdEffectue) {
             foreach ($paramIdEffectue as $value) {
                 $req .= " OR " . FtaModel::TABLENAME . "." . FtaModel::KEYNAME . "='" . $value . "' ";
@@ -1151,7 +1153,7 @@ class FtaModel extends AbstractModel {
         return $req;
     }
 
-    public static function AddIdFtaLabel($paramIdEffectue) {
+    public static function addIdFtaLabel($paramIdEffectue) {
         if ($paramIdEffectue) {
             foreach ($paramIdEffectue as $value) {
                 $req .= " OR " . FtaModel::TABLENAME . "." . FtaModel::KEYNAME . "=" . $value[FtaModel::KEYNAME] . " ";
@@ -1184,7 +1186,7 @@ class FtaModel extends AbstractModel {
      * @param int $paramIdFtaWorkflow
      * @return int
      */
-    public static function BuildDuplicationFta($paramIdFta, $paramAction, $paramOption, $paramIdFtaWorkflow) {
+    public static function buildDuplicationFta($paramIdFta, $paramAction, $paramOption, $paramIdFtaWorkflow) {
 
         /*         * ****************************************
           Déclaration et initialisation des variables
@@ -1236,7 +1238,7 @@ class FtaModel extends AbstractModel {
          * ************************* */
 
 
-        $idFtaNew = FtaModel::DuplicationIdFta($paramIdFta);                                                                                    //Récupération de la nouvelle clef
+        $idFtaNew = FtaModel::duplicationIdFta($paramIdFta);                                                                                    //Récupération de la nouvelle clef
         /*
          * Enregsitrement des mises à jour
          */
@@ -1248,8 +1250,7 @@ class FtaModel extends AbstractModel {
                 "UPDATE " . FtaModel::TABLENAME
                 . " SET " . FtaModel::FIELDNAME_DATE_CREATION . "='" . date("Y-m-d")                                                               //Date de la création de cet Article
                 . "', " . FtaModel::FIELDNAME_ACTIF . "=" . 0                                                                                   //Tant que la fiche n'est pas activée, la flag reste à 0.
-                . ", " . FtaModel::FIELDNAME_CODE_ARTICLE . "=" . 'NULL'                                                                         //Le Code Article Agrologic ne peut être présent 2 fois (index unique)
-                . ", " . FtaModel::FIELDNAME_CREATEUR . "=" . $idUser
+                . ", " . FtaModel::FIELDNAME_CODE_ARTICLE . "=" . 'NULL'                                                                       //Le Code Article Agrologic ne peut être présent 2 fois (index unique)               
                 . ", " . FtaModel::FIELDNAME_WORKFLOW . "=" . $paramIdFtaWorkflow
                 . ", " . FtaModel::FIELDNAME_SITE_PRODUCTION . "=" . $paramOption["site_de_production"]
                 . " WHERE " . FtaModel::KEYNAME . "=" . $idFtaNew
@@ -1275,6 +1276,7 @@ class FtaModel extends AbstractModel {
                         . ", " . FtaModel::FIELDNAME_EAN_UVC . "=" . "0"                                                                       //Suppression EAN Article
                         . ", " . FtaModel::FIELDNAME_EAN_PALETTE . "=" . "0"                                                                   //Suppression EAN Palette
                         . ", " . FtaModel::FIELDNAME_POURCENTAGE_AVANCEMENT . "=" . "\"0%\""                                                                   //Suppression EAN Palette
+                        . ", " . FtaModel::FIELDNAME_CREATEUR . "=" . $idUser
                         . " WHERE " . FtaModel::KEYNAME . "=" . $idFtaNew
                 );
                 break;
@@ -1287,7 +1289,8 @@ class FtaModel extends AbstractModel {
                         "UPDATE " . self::TABLENAME
                         . " SET " . self::FIELDNAME_VERSION_DOSSIER_FTA . "=\"" . $idFtaVersion                                                       //La première FTA commence en version "0"
                         . "\", " . self::FIELDNAME_ID_FTA_ETAT . "=\"" . $idFtaEtatNew                                                          //Nouvel éta de la FTA données par l'argument $option de la fonction (cf. table fta_etat)
-                        . "\", " . self::FIELDNAME_DATE_ECHEANCE_FTA . "=\"" . $paramOption["date_echeance_fta"]                                                              //Nouvel éta de la FTA données par l'argument $option de la fonction (cf. table fta_etat)
+                        . "\", " . self::FIELDNAME_DATE_ECHEANCE_FTA . "=\"" . $paramOption["date_echeance_fta"]
+                        //Nouvel éta de la FTA données par l'argument $option de la fonction (cf. table fta_etat)
                         . "\" WHERE " . self::KEYNAME . "=" . $idFtaNew
                 );
                 break;
@@ -1478,7 +1481,7 @@ class FtaModel extends AbstractModel {
      * @param int $paramIdFta
      * @return int
      */
-    public static function DuplicationIdFta($paramIdFta) {
+    public static function duplicationIdFta($paramIdFta) {
         $pdo = DatabaseOperation::executeComplete(
                         " INSERT INTO " . FtaModel::TABLENAME . " (id_access_arti2, OLD_numft, id_fta_workflow,
  commentaire, OLD_id_fta_palettisation, id_dossier_fta, id_version_dossier_fta,
@@ -1558,7 +1561,7 @@ class FtaModel extends AbstractModel {
      * @param type $paramIdFta
      * @return type
      */
-    public static function ShowDin($paramIdFta) {
+    public static function showDin($paramIdFta) {
 
         /*
          * Déclaration des variables
@@ -1615,7 +1618,7 @@ class FtaModel extends AbstractModel {
      * @param int $paramSiteDeProduction
      * @return int
      */
-    public static function CreateFta($paramIdCreateur, $paramIdFtaEtat, $paramIdFtaWorkflow, $paramDesignationCommerciale, $paramDateCreation, $paramSiteDeProduction) {
+    public static function createFta($paramIdCreateur, $paramIdFtaEtat, $paramIdFtaWorkflow, $paramDesignationCommerciale, $paramDateCreation, $paramSiteDeProduction) {
         $Id = DatabaseOperation::executeComplete(
                         "INSERT INTO " . FtaModel::TABLENAME
                         . " ( " . FtaModel::FIELDNAME_CREATEUR
@@ -1665,6 +1668,23 @@ class FtaModel extends AbstractModel {
                         . " WHERE " . FtaModel::FIELDNAME_DOSSIER_FTA . "=" . $paramIdDossierFta
         );
         return $arrayIdFtaChange;
+    }
+
+    /**
+     * Affiche le commentaire d'un changement d'état de la Fta
+     * @return string
+     */
+    function getHtmlCommentaireMajFta() {
+        $HtmlTableName = self::TABLENAME
+                . '_'
+                . self::FIELDNAME_COMMENTAIRE_MAJ_FTA
+                . '_'
+                . $this->getKeyValue()
+        ;
+        $htmlTextAreaResult = "<td><textarea id=\"" . $HtmlTableName
+                . "\" cols=\"140\" rows=\"10\" name=\"" . $HtmlTableName
+                . "\" rows=15></textarea></td>";
+        return $htmlTextAreaResult;
     }
 
     /**

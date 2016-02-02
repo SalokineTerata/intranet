@@ -117,14 +117,17 @@ switch ($action) {
         /**
          * Enregistrement de la DIN en majuscule
          */
-        if ($modelFta->getDataField(FtaModel::FIELDNAME_LIBELLE)->getFieldValue()) {
+        $dinValue = $modelFta->getDataField(FtaModel::FIELDNAME_LIBELLE)->getFieldValue();
+        if ($dinValue) {
             $modelFta->getDataField(FtaModel::FIELDNAME_LIBELLE)->setFieldValue(
                     mb_convert_case(
                             stripslashes(
-                                    $modelFta->getDataField(
-                                            FtaModel::FIELDNAME_LIBELLE)->getFieldValue()
+                                    $dinValue
                             ), MB_CASE_UPPER, 'utf-8')
             );
+            if ($modelFta->getDataField(FtaModel::FIELDNAME_VERROUILLAGE_LIBELLE_ETIQUETTE)->getFieldValue()) {
+                $modelFta->getDataField(FtaModel::FIELDNAME_LIBELLE_CLIENT)->setFieldValue($dinValue);
+            }
         }
         $modelFta->saveToDatabase();
 

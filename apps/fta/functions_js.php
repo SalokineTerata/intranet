@@ -71,18 +71,19 @@
         var TagData = TagId;
         var Data = document.getElementById(TagData);
         var FieldValue = Data.value;
-        //var FieldValueForUrl = escape(FieldValue);
+//        var FieldValueForUrl = escape(FieldValue);
         var FieldValueForUrl = encodeURIComponent(FieldValue);
         //alert(FieldValueForUrl);
 
-        var HtmlImageLoading = '<?php echo Html::DEFAULT_HTML_IMAGE_LOADING ?>';
-        var TagStatus = '<?php echo Html::PREFIXE_ID_ICON_STATUS ?>' + '_' + TagId;
+//        var HtmlImageLoading = '<?php echo Html::DEFAULT_HTML_IMAGE_LOADING ?>';
+//        var TagStatus = '<?php echo Html::PREFIXE_ID_ICON_STATUS ?>' + '_' + TagId;
         var UrlParameter = ParamUrlParameter + '&FieldValue=' + FieldValueForUrl;
         function handleAJAXReturnCustom()
         {
-            var ParamTagStatus = TagStatus;
+//            var ParamTagStatus = TagStatus;
             var ParamHttp = http;
-            handleAJAXReturn(ParamTagStatus, ParamHttp, CallbackFunction, CallbackFunctionParameters);
+//            handleAJAXReturn(ParamTagStatus, ParamHttp, CallbackFunction, CallbackFunctionParameters);
+            handleAJAXReturn(ParamHttp, CallbackFunction, CallbackFunctionParameters);
         }
 
         //Coeur de gestion du fonctionnement AJAX
@@ -95,14 +96,14 @@
 
 
 
-    function handleAJAXReturn(ParamTagStatus, ParamHttp, ParamCallbackFunction, ParamCallbackFunctionParameters)
+    function handleAJAXReturn( ParamHttp, ParamCallbackFunction, ParamCallbackFunctionParameters)
     {
 
         //Définition des variables
-        var TagStatus = ParamTagStatus;
+//        var TagStatus = ParamTagStatus;
         var Http = ParamHttp;
-        var HtmlImageOk = '<?php echo Html::DEFAULT_HTML_IMAGE_OK ?>';
-        var HtmlImageFailed = '<?php echo Html::DEFAULT_HTML_IMAGE_FAILED ?>';
+//        var HtmlImageOk = '<?php echo Html::DEFAULT_HTML_IMAGE_OK ?>';
+//        var HtmlImageFailed = '<?php echo Html::DEFAULT_HTML_IMAGE_FAILED ?>';
         var CallbackFunction = ParamCallbackFunction;
         var CallbackFunctionParameters = ParamCallbackFunctionParameters;
         //Corps de la fonction
@@ -111,23 +112,23 @@
         //2 : La méthode send vient d'être appelée
         //3 : Le serveur traite les informations et a commencé à renvoyer des données
         //4 : Le serveur a fini son travail, et toutes les données sont réceptionnées
-//        if (Http.readyState === 4)
-//        {
-//            //Ici, possibilité d'ajouter du précontrôle si besoin...
-//            if (Http.status === 200)
-//            {
+        if (Http.readyState === 4)
+        {
+            //Ici, possibilité d'ajouter du précontrôle si besoin...
+            if (Http.status === 200)
+            {
 //                document.getElementById(TagStatus).innerHTML = HtmlImageOk;
-//
-//                //Si une fonction CallBack est définie, on l'exécute.
-//                if (CallbackFunction !== "") {
-//                    window[CallbackFunction](CallbackFunctionParameters);
-//                }
-//            }
+
+                //Si une fonction CallBack est définie, on l'exécute.
+                if (CallbackFunction !== "") {
+                    window[CallbackFunction](CallbackFunctionParameters);
+                }
+            }
 //            else
 //            {
 //                document.getElementById(TagStatus).innerHTML = HtmlImageFailed;
 //            }
-//        }
+        }
     }
     function displayTrueElementById(ParamId) {
         var targetElement;
@@ -154,6 +155,26 @@
             document.getElementById(idElementDataPoidsElem).onchange();
         } else {
             displayTrueElementById(idElementRowPoidsElem);
+        }
+    }
+
+    /**
+     * Cette fonction gère l'affichage de l'étiquette colis
+     * @returns {undefined}
+     */
+    function displayVerrouEtiq(Param) {
+
+        var Parameters = Param.split(",", 2);
+        var idElementVerrouEtiquette = Parameters[0];
+        var idElementDataEtiquetteColis = Parameters[1];
+        var idElementRowEtiquetteColis = '<?php echo Html::PREFIXE_ID_ROW . "_" ?>' + idElementDataEtiquetteColis;
+        elementUniteFacturation = document.getElementById(idElementVerrouEtiquette);
+        if (elementUniteFacturation.value != '<?php echo FtaModel::ETIQUETTE_COLIS_VERROUILLAGE_NON ?>')
+        {
+            displayFalseElementById(idElementRowEtiquetteColis);
+            document.getElementById(idElementDataEtiquetteColis).onchange();
+        } else {
+            displayTrueElementById(idElementRowEtiquetteColis);
         }
     }
 
@@ -387,6 +408,8 @@
         idFtaEtat = document.getElementById("id_fta_etat").value;
         abreviationFtaEtat = document.getElementById("abreviation_fta_etat").value;
         idFtaRole = document.getElementById("id_fta_role").value;
+        gestionnaire = document.getElementById("gestionnaire").value;
+
         //if (i == 0) return;
         url = "ajout_classification_chemin.php?id_fta=" + idFta
                 + "&id_fta_chapitre_encours=" + id_fta_chapitre_encours
@@ -396,7 +419,8 @@
                 + "&abreviation_fta_etat=" + abreviationFtaEtat
                 + "&id_fta_role=" + idFtaRole
                 + "&selection_proprietaire1=" + document.form_action.selection_proprietaire12.options[proprietaire1].value
-                + "&checkIdFtaClasssification=1";
+                + "&checkIdFtaClasssification=1"
+                + "&gestionnaire=" + gestionnaire;
         parent.location.href = url;
     }
 
@@ -410,6 +434,8 @@
         idFtaEtat = document.getElementById("id_fta_etat").value;
         abreviationFtaEtat = document.getElementById("abreviation_fta_etat").value;
         idFtaRole = document.getElementById("id_fta_role").value;
+        gestionnaire = document.getElementById("gestionnaire").value;
+
         //if (i == 0) return;
         url = "ajout_classification_chemin.php?id_fta=" + idFta
                 + "&id_fta_chapitre_encours=" + id_fta_chapitre_encours
@@ -421,6 +447,7 @@
                 + "&selection_proprietaire1=" + document.form_action.selection_proprietaire12.options[proprietaire1].value
                 + "&selection_proprietaire2=" + document.form_action.selection_proprietaire22.options[proprietaire2].value
                 + "&checkIdFtaClasssification=1"
+                + "&gestionnaire=" + gestionnaire
                 ;
         parent.location.href = url;
     }
@@ -435,6 +462,8 @@
         idFtaEtat = document.getElementById("id_fta_etat").value;
         abreviationFtaEtat = document.getElementById("abreviation_fta_etat").value;
         idFtaRole = document.getElementById("id_fta_role").value;
+        gestionnaire = document.getElementById("gestionnaire").value;
+
         url = "ajout_classification_chemin.php?id_fta=" + idFta
                 + "&id_fta_chapitre_encours=" + id_fta_chapitre_encours
                 + "&synthese_action=" + syntheseAction
@@ -446,7 +475,7 @@
                 + "&selection_proprietaire2=" + document.form_action.selection_proprietaire22.options[proprietaire2].value
                 + "&selection_marque=" + document.form_action.selection_marque2.options[marque].value
                 + "&checkIdFtaClasssification=1"
-
+                + "&gestionnaire=" + gestionnaire
                 ;
         parent.location.href = url;
     }
@@ -462,6 +491,8 @@
         idFtaEtat = document.getElementById("id_fta_etat").value;
         abreviationFtaEtat = document.getElementById("abreviation_fta_etat").value;
         idFtaRole = document.getElementById("id_fta_role").value;
+        gestionnaire = document.getElementById("gestionnaire").value;
+
         //if (i == 0) return;
         url = "ajout_classification_chemin.php?id_fta=" + idFta
                 + "&id_fta_chapitre_encours=" + id_fta_chapitre_encours
@@ -475,7 +506,7 @@
                 + "&selection_marque=" + document.form_action.selection_marque2.options[marque].value
                 + "&selection_activite=" + document.form_action.selection_activite2.options[activite].value
                 + "&checkIdFtaClasssification=1"
-
+                + "&gestionnaire=" + gestionnaire
                 ;
         parent.location.href = url;
     }
@@ -492,6 +523,8 @@
         idFtaEtat = document.getElementById("id_fta_etat").value;
         abreviationFtaEtat = document.getElementById("abreviation_fta_etat").value;
         idFtaRole = document.getElementById("id_fta_role").value;
+        gestionnaire = document.getElementById("gestionnaire").value;
+
         //if (i == 0) return;
         url = "ajout_classification_chemin.php?id_fta=" + idFta
                 + "&id_fta_chapitre_encours=" + id_fta_chapitre_encours
@@ -506,7 +539,7 @@
                 + "&selection_activite=" + document.form_action.selection_activite2.options[activite].value
                 + "&selection_rayon=" + document.form_action.selection_rayon2.options[rayon].value
                 + "&checkIdFtaClasssification=1"
-
+                + "&gestionnaire=" + gestionnaire
                 ;
         parent.location.href = url;
     }
@@ -524,6 +557,8 @@
         idFtaEtat = document.getElementById("id_fta_etat").value;
         abreviationFtaEtat = document.getElementById("abreviation_fta_etat").value;
         idFtaRole = document.getElementById("id_fta_role").value;
+        gestionnaire = document.getElementById("gestionnaire").value;
+
         //if (i == 0) return;
         url = "ajout_classification_chemin.php?id_fta=" + idFta
                 + "&id_fta_chapitre_encours=" + id_fta_chapitre_encours
@@ -539,7 +574,7 @@
                 + "&selection_rayon=" + document.form_action.selection_rayon2.options[rayon].value
                 + "&selection_environnement=" + document.form_action.selection_environnement2.options[environnement].value
                 + "&checkIdFtaClasssification=1"
-
+                + "&gestionnaire=" + gestionnaire
                 ;
         parent.location.href = url;
     }
@@ -554,6 +589,8 @@
         idFta = document.getElementById("id_fta").value;
         syntheseAction = document.getElementById("synthese_action").value;
         id_fta_chapitre_encours = document.getElementById("id_fta_chapitre_encours").value;
+        gestionnaire = document.getElementById("gestionnaire").value;
+
 //        comeback = document.getElementById("comeback").value;
         idFtaEtat = document.getElementById("id_fta_etat").value;
         abreviationFtaEtat = document.getElementById("abreviation_fta_etat").value;
@@ -574,7 +611,7 @@
                 + "&selection_environnement=" + document.form_action.selection_environnement2.options[environnement].value
                 + "&selection_reseau=" + document.form_action.selection_reseau2.options[reseau].value
                 + "&checkIdFtaClasssification=1"
-
+                + "&gestionnaire=" + gestionnaire
                 ;
         parent.location.href = url;
     }
@@ -594,6 +631,8 @@
         idFtaEtat = document.getElementById("id_fta_etat").value;
         abreviationFtaEtat = document.getElementById("abreviation_fta_etat").value;
         idFtaRole = document.getElementById("id_fta_role").value;
+        gestionnaire = document.getElementById("gestionnaire").value;
+
         //if (i == 0) return;
         url = "ajout_classification_chemin.php?id_fta=" + idFta
                 + "&id_fta_chapitre_encours=" + id_fta_chapitre_encours
@@ -611,6 +650,7 @@
                 + "&selection_reseau=" + document.form_action.selection_reseau2.options[reseau].value
                 + "&selection_saisonnalite=" + document.form_action.selection_saisonnalite2.options[saisonnalite].value
                 + "&checkIdFtaClasssification=1"
+                + "&gestionnaire=" + gestionnaire
                 ;
         parent.location.href = url;
     }

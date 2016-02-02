@@ -82,7 +82,7 @@ if ($action) {
       id_fta_old=$id_fta_old <br>
       ";
       /* */
-    $id_fta_new = FtaModel::BuildDuplicationFta($id_fta, $action, $option, $idFtaWorkflow);
+    $id_fta_new = FtaModel::buildDuplicationFta($id_fta, $action, $option, $idFtaWorkflow);
     FtaSuiviProjetModel::initFtaSuiviProjet($id_fta_new);
 
 

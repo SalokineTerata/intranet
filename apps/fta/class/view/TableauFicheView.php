@@ -128,7 +128,7 @@ class TableauFicheView {
         /**
          * Bouton d'accès au rendu PDF de la FTA
          */
-        $lien .= self::getHtmlLinkPDF($abreviation_fta_etat, $paramIdFta);
+        $lien .= self::getHtmlLinkPDF($abreviation_fta_etat, $paramIdFta, $idWorkflowFtaEncours);
 
         /**
          * Bouton d'accès à la transition
@@ -157,13 +157,8 @@ class TableauFicheView {
         /*
          * Noms des services dans lequel la Fta se trouve
          */
-        if ($abreviation_fta_etat == FtaEtatModel::ETAT_ABREVIATION_VALUE_MODIFICATION) {
-            if ($checkAccesButtonBySiteProd) {
-                $service = FtaRoleModel::getNameServiceEncours($listeIdFtaRole);
-            }
-        } else {
-            $service = FtaRoleModel::getNameServiceEncours($listeIdFtaRole);
-        }
+        $service = FtaRoleModel::getNameServiceEncours($listeIdFtaRole);
+
 
 //        switch (TRUE) {
 //            /**
@@ -257,7 +252,7 @@ class TableauFicheView {
         /**
          * Lien vers l'historique de la Fta
          */
-        if ($paramCheckAccesButton AND ( $paramAbreviationFtaEtat == FtaEtatModel::ETAT_ABREVIATION_VALUE_MODIFICATION)) {
+        if ($paramCheckAccesButton AND ( Acl::getValueAccesRights(Acl::ACL_FTA_MODIFICATION))) {
             $lienHistorique = ' <a href=historique-' . $paramIdFta
                     . '-1'
                     . '-' . $paramIdFtaEtat
@@ -266,6 +261,8 @@ class TableauFicheView {
                     . '-' . $paramSyntheseAction
                     . '-1'
                     . '.html >' . $paramTauxRound . '</a>';
+        } else {
+            $lienHistorique = $paramTauxRound;
         }
         return $lienHistorique;
     }
@@ -338,11 +335,11 @@ class TableauFicheView {
         return $lien;
     }
 
-    static private function getHtmlLinkPDF($paramAbreviationFtaEtat, $paramIdFta) {
+    static private function getHtmlLinkPDF($paramAbreviationFtaEtat, $paramIdFta, $paramIdWorkflow) {
 
         $lien = "";
         if (
-                (Acl::getValueAccesRights(Acl::ACL_FTA_IMPRESSION) and ( $paramAbreviationFtaEtat == FtaEtatModel::ETAT_ABREVIATION_VALUE_VALIDE ))
+                (Acl::getValueAccesRights(Acl::ACL_FTA_IMPRESSION) and ( $paramAbreviationFtaEtat == FtaEtatModel::ETAT_ABREVIATION_VALUE_VALIDE ))or ( $paramIdWorkflow == FtaWorkflowModel::ID_WORKFLOW_PRESENTATION)
         ) {
 
             $lien .= "  "

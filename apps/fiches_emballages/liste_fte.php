@@ -227,14 +227,14 @@ if ($idUser) {
                     . "<td>" . $rows_fte["longueur_annexe_emballage"] . " x " . $rows_fte["largeur_annexe_emballage"] . " x " . $rows_fte["hauteur_annexe_emballage"] . "</td>"
                     . "<td>" . $rows_fte["poids_annexe_emballage"] . "</td>"
             ;
-            if ($rows_fte["id_annexe_emballage_groupe_type"] == 3) {
+            if ($rows_fte[AnnexeEmballageGroupeModel::FIELDNAME_ID_ANNEXE_EMBALLAGE_GROUPE_CONFIGURATION] == 3) {
                 $bloc .="<td>" . $rows_fte["quantite_par_couche_annexe_emballage"] . " x " . $rows_fte["nombre_couche_annexe_emballage"] . "</td>";
             } else {
                 $bloc .="<td></td>";
             }
 
             //Action possible sur la FTE
-            if (${$module . "_modification"} == 1) {
+            if (Acl::getValueAccesRights($module . "_modification") == 1) {
                 $bloc.="<td>";
 
                 //Supprimer

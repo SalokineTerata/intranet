@@ -110,13 +110,14 @@ class Chapitre {
     protected static $html_submit_button;
     protected static $html_suivi_dossier;
     protected static $id_fta_chapitre;
-    protected static$id_fta_etat;
+    protected static $id_fta_etat;
     protected static $id_fta_processus;
-    protected static$id_fta_role;
+    protected static $id_fta_role;
     protected static $id_fta_workflow;
     protected static $id_fta_workflow_structure;
     protected static $id_intranet_actions;
     protected static $is_correctable;
+    protected static $is_data_validation_successful;
     protected static $is_editable;
     protected static $is_owner;
     protected static $idUser;
@@ -176,6 +177,7 @@ class Chapitre {
 
     public static function initChapitre($id_fta, $id_fta_chapitre, $synthese_action, $comeback, $idFtaEtat, $abreviationFtaEtat, $idFtaRole) {
 
+        self::$is_data_validation_successful = FALSE;
         self::$id_fta = $id_fta;
         self::$comeback = $comeback;
         self::$id_fta_etat = $idFtaEtat;
@@ -1844,6 +1846,9 @@ class Chapitre {
 
         $bloc.='<tr class=titre_principal><td class>Codification</td></tr>';
 
+        //Désignation Abrégée
+        $bloc.=$ftaView->getHtmlNomAbrege();
+
         //Désignation Interne Agis
 //        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_LIBELLE);
         $bloc.=$ftaView->getHtmlDesignationInterneAgis();
@@ -1860,9 +1865,9 @@ class Chapitre {
         //Gencod EAN Palette
         $bloc.=$ftaView->getHtmlEANPalette();
 
-        if ($ftaView->isDataValidationSuccessful() == FALSE) {
-            $this->setDataValidationSuccessfulToFalse();
-        }
+//        if ($ftaView->isDataValidationSuccessful() == FALSE) {
+//            $this->setDataValidationSuccessfulToFalse();
+//        }
         return $bloc;
     }
 
@@ -2437,8 +2442,8 @@ class Chapitre {
 
     protected static function buildHtmlSubmitButton() {
         $return = '';
-        if (self::$is_editable == true) {
-            $return = '<input type=submit value=\'Confirmer\'>';
+        if (self::$is_editable == true and self::$is_data_validation_successful == TRUE) {
+            $return = '<input type=submit value=\'Confirmer\' >';
         }
         return $return;
     }

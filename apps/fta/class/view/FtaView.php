@@ -136,13 +136,13 @@ class FtaView {
     }
 
     public function getHtmlDataField($paramFieldName) {
-        
+
         $dataField = $this->getModel()->getDataField($paramFieldName);
 
-        if ($dataField->isDataValidationSuccessful() == FALSE){
-            $this->setDataValidationSuccessfulToFalse();
-        }
-        
+//        if ($dataField->isDataValidationSuccessful() == FALSE){
+//            $this->setDataValidationSuccessfulToFalse();
+//        }
+
         return Html::convertDataFieldToHtml(
                         $dataField
                         , $this->getIsEditable()
@@ -184,15 +184,15 @@ class FtaView {
     }
 
     /**
-     * Affichage Html de la DIN
+     * Affichage Html du nom abrégé
      * @return string
      */
-    public function getHtmlDesignationInterneAgis() {
-        $DIN = $this->getModel()->getDataField(FtaModel::FIELDNAME_LIBELLE)->getFieldValue();
-        if ($this->getModel()->getDataField(FtaModel::FIELDNAME_LIBELLE)->isDataValidationSuccessful() == FALSE){
-            $this->setDataValidationSuccessfulToFalse();
-        }
-        if (!$DIN) {
+    function getHtmlNomAbrege() {
+        $nomAbregeValue = $this->getModel()->getDataField(FtaModel::FIELDNAME_NOM_ABREGE)->getFieldValue();
+//        if ($this->getModel()->getDataField(FtaModel::FIELDNAME_LIBELLE)->isDataValidationSuccessful() == FALSE){
+//            $this->setDataValidationSuccessfulToFalse();
+//        }
+        if (!$nomAbregeValue) {
             $DesignationCommerciale = $this->getModel()->getDataField(FtaModel::FIELDNAME_DESIGNATION_COMMERCIALE)->getFieldValue();
             $suffixeAgrologicFta = $this->getModel()->getDataField(FtaModel::FIELDNAME_SUFFIXE_AGROLOGIC_FTA)->getFieldValue();
             $NB_UNIT_ELEM = $this->getModel()->getDataField(FtaModel::FIELDNAME_NOMBRE_UVC_PAR_CARTON)->getFieldValue();
@@ -202,11 +202,33 @@ class FtaView {
                 $poidAffichage = $poidAffichage * FtaModel::CONVERSION_KG_EN_G;
                 $valeurUnite = "g";
             }
-            $DIN = $DesignationCommerciale . " " . $suffixeAgrologicFta . " " . $NB_UNIT_ELEM . "X" . $poidAffichage . $valeurUnite;
+            $nomAbregeValue = $DesignationCommerciale . " " . $suffixeAgrologicFta . " " . $NB_UNIT_ELEM . "X" . $poidAffichage . $valeurUnite;
 
 
-            $DIN = strtoupper($DIN);
-            $this->getModel()->getDataField(FtaModel::FIELDNAME_LIBELLE)->setFieldValue($DIN);
+            $nomAbregeValue = strtoupper($nomAbregeValue);
+            $this->getModel()->getDataField(FtaModel::FIELDNAME_NOM_ABREGE)->setFieldValue($nomAbregeValue);
+            $this->getModel()->saveToDatabase();
+            $return = $this->getHtmlDataField(FtaModel::FIELDNAME_NOM_ABREGE);
+        } else {
+            $return = $this->getHtmlDataField(FtaModel::FIELDNAME_NOM_ABREGE);
+        }
+
+        return $return;
+    }
+
+    /**
+     * Affichage Html de la DIN
+     * @return string
+     */
+    function getHtmlDesignationInterneAgis() {
+        $DIN = $this->getModel()->getDataField(FtaModel::FIELDNAME_LIBELLE)->getFieldValue();
+//        if ($this->getModel()->getDataField(FtaModel::FIELDNAME_LIBELLE)->isDataValidationSuccessful() == FALSE){
+//            $this->setDataValidationSuccessfulToFalse();
+//        }
+        if (!$DIN) {
+            $nomAbregeValue = $this->getModel()->getDataField(FtaModel::FIELDNAME_NOM_ABREGE)->getFieldValue();
+
+            $this->getModel()->getDataField(FtaModel::FIELDNAME_LIBELLE)->setFieldValue($nomAbregeValue);
             $this->getModel()->saveToDatabase();
             $return = $this->getHtmlDataField(FtaModel::FIELDNAME_LIBELLE);
         } else {

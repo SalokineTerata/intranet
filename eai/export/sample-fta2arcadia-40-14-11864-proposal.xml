@@ -31,9 +31,8 @@ Historique des modifications:
                     
                     <!-- Entête -->
                     <NO_ART key="TRUE">43150</NO_ART>
-                
-                    <!-- Regate -->
-                    <LIBELLE_TARIF><![CDATA[LANGUE DE BOEUF TEST FTA 2 ARCADIA]]></LIBELLE_TARIF>
+                    <LIB_CCIAL><![CDATA[PRENDRE LA DIN]]></LIB_CCIAL><!-- DIN de la FTA -->
+                    <LIB_PRODUCTION><![CDATA[PRENDRE LA DIN]]></LIB_PRODUCTION><!-- DIN de la FTA -->
 
                 </Recordset>
 

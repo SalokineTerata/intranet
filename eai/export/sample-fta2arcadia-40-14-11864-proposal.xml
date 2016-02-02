@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Version : 1.1
+
+Historique des modifications:
+
+    * Version 1.1 - 2014-08-27 bs4300280@ldc.fr:
+        - Ajout du champs obligatoire DUN14.IS_STANDARD
+        - Ajout du champs obligatoire DUN14.DUN14.IS_SPECIFIQUE
+        - Lors d'une création article, ESP_PRODUITS_FINIS.Recordset.action = "create"
+        - Renommage du champs ARTICLE_REF.POIDS_MAX_BARQ en ARTICLE_REF.POIDS_MAXI_BARQ
+        - Renommage du champs ARTICLE_REF.COD_POIDS_CST_UVC en ARTICLE_REF.COD_POID_CST_UVC
+        - Renommage du champs ARTICLE_REF.ID_UC en ARTICLE_REF.UC
+    
+    * Version 1.0 - 2014-06-16 bs4300280@ldc.fr:
+        - Version initiale.
+        
+-->
+
+
+<Transaction id="11" version="1.1" type="proposal">
+    <Parameters>
+        <IdFirm>40</IdFirm><!-- Agis -->      
+        <IdArcadia>43150</IdArcadia><!-- Code article dans Arcadia -->
+        <IdFta>11864</IdFta><!-- N° de la FTA -->
+    </Parameters>
+    <Tables>
+        <ARTICLE_REF>
+            <DataToImport>
+                <Recordset id="1" action="update">
+                    
+                    <!-- Entête -->
+                    <NO_ART key="TRUE">43150</NO_ART>
+                    <LIB_CCIAL><![CDATA[PRENDRE LA DIN]]></LIB_CCIAL><!-- DIN de la FTA -->
+                    <LIB_PRODUCTION><![CDATA[PRENDRE LA DIN]]></LIB_PRODUCTION><!-- DIN de la FTA -->
+
+                </Recordset>
+
+            </DataToImport>
+        </ARTICLE_REF>
+    </Tables>    
+</Transaction>
+
+
+

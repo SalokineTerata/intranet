@@ -83,6 +83,7 @@ require_once('../lib/class/model/AnnexeEmballageGroupeModel.php');
 require_once('../lib/class/model/AnnexeEmballageGroupeTypeModel.php');
 require_once('../lib/class/model/AnnexeEmballageModel.php');
 require_once('../lib/class/model/AnnexeEnvironnementConservationGroupeModel.php');
+require_once('../lib/class/model/AnnexeGestionDesEtiquettesModel.php');
 require_once('../lib/class/model/CatsoproModel.php');
 require_once('../lib/class/model/ClassificationArborescenceArticleCategorieContenuModel.php');
 require_once('../lib/class/model/ClassificationArborescenceArticleCategorieModel.php');

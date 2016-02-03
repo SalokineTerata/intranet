@@ -58,6 +58,7 @@ require_once('../fta/class/view/FtaProcessusDelaiView.php');
 require_once('../fta/class/view/TableauFicheView.php');
 
 // Controller
+require_once('../fta/class/controller/Fta2ArcadiaController.php');
 require_once('../fta/class/controller/FtaController.php');
 
 // Moteur de base de données

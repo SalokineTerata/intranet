@@ -1766,11 +1766,19 @@ class FtaModel extends AbstractModel {
     }
 
     /**
-     * On récupère le DataRecord à comparer 
+     * On initialise le DataRecord à comparer 
      * @param DatabaseRecord $paramRecordToCompare
      */
     function setDataToCompare($paramRecordToCompare) {
         parent::setDataToCompare($paramRecordToCompare);
+    }
+
+    /**
+     * On récupère le DataRecord à comparer 
+     * @param DatabaseRecord $paramRecordToCompare
+     */
+    function getDataToCompare() {
+        parent::getDataToCompare();
     }
 
     /**
@@ -1898,14 +1906,14 @@ class FtaModel extends AbstractModel {
     }
 
     private function functionName($param) {
-        
+
         /*
-        Au niveau DataField:
-        $this->getRulesValidation()->checkAllRules();
-        
-        
-        checkRules
-           --> récupérer d'intranet_colum_info, les règles à tester
+          Au niveau DataField:
+          $this->getRulesValidation()->checkAllRules();
+
+
+          checkRules
+          --> récupérer d'intranet_colum_info, les règles à tester
          * --> boucle parcourant les règles
          *      --> Pour chaque règle getWarningMessage()
          *      --> Récupération du message propre à la règle et enregistrement
@@ -1917,10 +1925,7 @@ class FtaModel extends AbstractModel {
          * Au niveau du HtmlDataField
          * --> Getteur de l'attribut warningMessageListe
          * --> Si valeur existante alors affichage.
-        */
-        
-        
-        
+         */
     }
-    
+
 }

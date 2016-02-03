@@ -82,7 +82,7 @@ switch ($action) {
 
 
         //Ajout ou réécriture de la FTE
-        if (Acl::getValueAccesRights($module . "_modification") <> 1 and $id_annexe_emballage) {
+        if (Acl::getValueAccesRights($module . "_modification") == 1 and $id_annexe_emballage) {
             $annexeEmballageModel = new AnnexeEmballageModel($id_annexe_emballage);
             $annexeEmballageModel->getDataField(AnnexeEmballageModel::FIELDNAME_POIDS_ANNEXE_EMBALLAGE)->setFieldValue($poids_annexe_emballage);
             $annexeEmballageModel->getDataField(AnnexeEmballageModel::FIELDNAME_ACTIF_ANNEXE_EMBALLAGE)->setFieldValue($actif_annexe_emballage);

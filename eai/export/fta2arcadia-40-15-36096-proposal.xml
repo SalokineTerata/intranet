@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Transaction id="15" version="1.1" type="proposal">
+	<Tables>
+		<ARTICLE_REF>
+			<DataToImport>
+				<Recordset id="1" action="update">
+					<!-- Entête -->
+					<NO_ART key="TRUE">36096</NO_ART>
+
+				</Recordset>
+			</DataToImport>
+		</ARTICLE_REF>
+	</Tables>
+

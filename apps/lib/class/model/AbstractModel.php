@@ -100,11 +100,19 @@ abstract class AbstractModel implements AbstractModelInterface {
     }
 
     /**
-     * On récupère le DataRecord à comparer 
+     * On initialise le DataRecord à comparer 
      * @param DatabaseRecord $paramRecordToCompare
      */
     public function setDataToCompare($paramRecordToCompare) {
         $this->getRecord()->setRecordToCompare($paramRecordToCompare);
+    }
+
+    /**
+     * On récupère le DataRecord à comparer 
+     * @param DatabaseRecord $paramRecordToCompare
+     */
+    public function getDataToCompare() {
+        return $this->getRecord()->getRecordToCompare();
     }
 
 }

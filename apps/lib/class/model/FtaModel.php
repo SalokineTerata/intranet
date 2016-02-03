@@ -8,10 +8,8 @@
  */
 class FtaModel extends AbstractModel {
 
-    const ACTIVATION_ETIQUETTE_COLIS = "1";
-    const ACTIVATION_ETIQUETTE_COMPOSITION = "2";
-    const ACTIVATION_ETIQUETTE_COLIS_ET_COMPOSITION = "3";
     const CHECK_DATE_ECHANCE = "00-00-0000";
+    const CHECK_DATE_ECHANCE2 = "0000-00-00";
     const TABLENAME = "fta";
     const KEYNAME = "id_fta";
     const KEYNAME_CREATEUR = "id_user";
@@ -293,7 +291,8 @@ class FtaModel extends AbstractModel {
             /**
              * Si la date d'échacne est égal à 0000-00-00, erreur
              */
-            case $this->getDataField(FtaModel::FIELDNAME_DATE_ECHEANCE_FTA)->getFieldValue() == self::CHECK_DATE_ECHANCE:
+            case $this->getDataField(FtaModel::FIELDNAME_DATE_ECHEANCE_FTA)->getFieldValue() == self::CHECK_DATE_ECHANCE
+            or $this->getDataField(FtaModel::FIELDNAME_DATE_ECHEANCE_FTA)->getFieldValue() == self::CHECK_DATE_ECHANCE2:
                 $return = "1";
                 $newErrorMessage = self::MESSAGE_DATA_VALIDATION_DATE_ECHEANCE;
 
@@ -1252,7 +1251,7 @@ class FtaModel extends AbstractModel {
         }
         DatabaseOperation::execute(
                 "UPDATE " . FtaModel::TABLENAME
-                . " SET " . FtaModel::FIELDNAME_DATE_CREATION . "='" . date("d-m-Y")                                                               //Date de la création de cet Article
+                . " SET " . FtaModel::FIELDNAME_DATE_CREATION . "='" . date("Y-m-d")                                                               //Date de la création de cet Article
                 . "', " . FtaModel::FIELDNAME_ACTIF . "=" . 0                                                                                   //Tant que la fiche n'est pas activée, la flag reste à 0.
                 . ", " . FtaModel::FIELDNAME_CODE_ARTICLE . "=" . 'NULL'                                                                       //Le Code Article Agrologic ne peut être présent 2 fois (index unique)               
                 . ", " . FtaModel::FIELDNAME_WORKFLOW . "=" . $paramIdFtaWorkflow
@@ -1703,6 +1702,13 @@ class FtaModel extends AbstractModel {
          * Contrôle de la date d'échéance
          */
         $dateEcheValue = $this->checkDateEcheance($paramUpdateFta);
+
+        /**
+         * Changement du format de date
+         */
+        if (!$this->getIsEditable()) {
+            $dateEcheValue = FtaController::changementDuFormatDeDate($dateEcheValue);
+        }
         /**
          * Mise en forme
          */
@@ -1743,7 +1749,7 @@ class FtaModel extends AbstractModel {
          */
         $dateEcheanceValue = $dataFieldDateEcheance->getFieldValue();
 
-        if ($this->getIsEditable() and ( $dateEcheanceValue == self::CHECK_DATE_ECHANCE or ! $dateEcheanceValue or $paramUpdateFta)) {
+        if ($this->getIsEditable() and ( $dateEcheanceValue == self::CHECK_DATE_ECHANCE2 or $dateEcheanceValue == self::CHECK_DATE_ECHANCE or ! $dateEcheanceValue or $paramUpdateFta)) {
             switch ($this->getDataField(self::FIELDNAME_VERSION_DOSSIER_FTA)->getFieldValue()) {
                 case "0":
                     $nbJours = ModuleConfig::VALUE_DATE_PLUS_CREATION;
@@ -1752,7 +1758,7 @@ class FtaModel extends AbstractModel {
                     $nbJours = ModuleConfig::VALUE_DATE_PLUS_MISE_A_JOUR;
                     break;
             }
-            $dateEcheanceValue = date("d-m-Y", strtotime(date("d-m-Y") . " +" . $nbJours . " days"));
+            $dateEcheanceValue = date("Y-m-d", strtotime(date("Y-m-d") . " +" . $nbJours . " days"));
         }
         $dataFieldDateEcheance->setFieldValue($dateEcheanceValue);
         $this->saveToDatabase();
@@ -1810,7 +1816,7 @@ class FtaModel extends AbstractModel {
 
         return $idFtaToCompare;
     }
-    
+
     /**
      * Affiche la liste des site de production pour lesquel l'utilisateur connecté à les droits d'accès 
      * et l'identifiant de la Fta en cours

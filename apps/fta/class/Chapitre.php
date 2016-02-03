@@ -2264,9 +2264,11 @@ class Chapitre {
             //Commentaire sur le Chapitre
             //$bloc_suivi .= $ftaView->getHtmlCommentaireChapitre();
             $bloc_suivi .= $ftaView->getFtaSuiviProjetModel($isEditable)->getHtmlDataField(FtaSuiviprojetmodel::FIELDNAME_COMMENTAIRE_SUIVI_PROJET);
-            if (!$value) {
-                $value = date('Y-m-d');
-            }
+            $bloc_suivi .= $ftaView->getFtaSuiviProjetModel(FALSE)->getHtmlDateValidationSuiviFta();
+
+//            if (!$value) {
+//                $value = date('Y-m-d');
+//            }
         }
         $bloc_suivi.='</td></tr>';
 
@@ -2283,7 +2285,7 @@ class Chapitre {
                 $$champ = $rows[FtaProcessusDelaiModel::FIELDNAME_DATE_ECHEANCE_PROCESSUS];
             }
         }
-        if ($proprietaire and ( $$champ < date('d-m-Y'))) {
+        if ($proprietaire and ( $$champ < date('Y-m-d'))) {
             $bgcolor = 'class=couleur_rouge';
             $blod = '<b>';
             $blod_end = '</b>';
@@ -2299,8 +2301,6 @@ class Chapitre {
         //   $bloc_suivi .='<input type=hidden name=$champ value=${$champ}>';
         //   $bloc_suivi.='</td></tr>';
         //$bloc_suivi .= $ftaView->getFtaSuiviProjetModel()->getDataField(FtaSuiviprojetmodel::FIELDNAME_DATE_VALIDATION_SUIVI_PROJET)->getFieldValue();
-        $bloc_suivi .= $ftaView->getFtaSuiviProjetModel(FALSE)->getHtmlDataField(FtaSuiviprojetmodel::FIELDNAME_DATE_VALIDATION_SUIVI_PROJET);
-
 //        $htmlObject = new HtmlInputCalendar(
 //                $field_name = 'date_validation_suivi_projet', $table_name = 'fta_suivi_projet', $value = self::$objectFta->getFieldValue($table_name, $field_name), $is_editable_false, $warning_update = ${'diff_' . $table_name}[$field_name]
 //        );

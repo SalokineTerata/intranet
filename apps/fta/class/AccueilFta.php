@@ -88,8 +88,8 @@ class AccueilFta {
     public static function getTableauSythese() {
 
         $tableau_synthese = AccueilFta::getHtmlTableauSythese(self::$arrayFtaRole, self::$arrayFtaEtat, self::$abreviationFtaEtat, self::$idFtaRole, self::$syntheseAction);
-        $tableau_syntheseWorkflow = AccueilFta::getHtmlTableauSytheseWorkflow(self::$arrayIdFtaByUserAndWorkflow['3'], self::$arraNameSiteByWorkflow);
-        $tableau_synthese.=$tableau_syntheseWorkflow;
+//        $tableau_syntheseWorkflow = AccueilFta::getHtmlTableauSytheseWorkflow(self::$arrayIdFtaByUserAndWorkflow['3'], self::$arraNameSiteByWorkflow);
+//        $tableau_synthese.=$tableau_syntheseWorkflow;
         return $tableau_synthese;
     }
 
@@ -797,7 +797,7 @@ class AccueilFta {
                 $idDossierFta = $rowsDetail[FtaModel::FIELDNAME_DOSSIER_FTA];
                 $idVersionDossierFta = $rowsDetail[FtaModel::FIELDNAME_VERSION_DOSSIER_FTA];
                 $codeArticleLdc = $rowsDetail[FtaModel::FIELDNAME_CODE_ARTICLE_LDC];
-                $dateEcheanceFta = $rowsDetail[FtaModel::FIELDNAME_DATE_ECHEANCE_FTA];
+                $dateEcheanceFtatmp = $rowsDetail[FtaModel::FIELDNAME_DATE_ECHEANCE_FTA];
                 $createurFta = $rowsDetail[FtaModel::FIELDNAME_CREATEUR];
                 $nomSiteProduction = $rowsDetail[GeoModel::FIELDNAME_GEO];
                 $idWorkflowFtaEncours = $rowsDetail[FtaModel::FIELDNAME_WORKFLOW];
@@ -808,6 +808,11 @@ class AccueilFta {
                 if ($recap[$idFta] == NULL) {
                     $recap[$idFta] = "";
                 }
+
+                /**
+                 * Changment du format de date en Fr
+                 */
+                $dateEcheanceFta = FtaController::changementDuFormatDeDate($dateEcheanceFtatmp);
 
                 /**
                  * Donne accès aux bouton de transition 

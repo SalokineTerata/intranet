@@ -94,6 +94,7 @@ require_once('../lib/class/model/CodesoftEtiquettesModel.php');
 require_once('../lib/class/model/CodesoftStyleParagrapheModel.php');
 require_once('../lib/class/model/DroitftModel.php');
 require_once('../lib/class/model/UserModel.php');
+require_once('../lib/class/model/Fta2ArcadiaTransactionModel.php');
 require_once('../lib/class/model/FtaActionRoleModel.php');
 require_once('../lib/class/model/FtaActionSiteModel.php');
 require_once('../lib/class/model/FtaConditionnementModel.php');

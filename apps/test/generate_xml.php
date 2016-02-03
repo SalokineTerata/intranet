@@ -32,19 +32,41 @@ $arrayFta = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
 );
 $xmlstr = '<?xml version="1.0" encoding="UTF-8" ?>' . $sautDeLigne . $espace;
 foreach ($arrayFta as $value) {
-    $xmlstr .= "<Transaction id=\"" . $value[FtaModel::KEYNAME] . "\" version=\"1\" type=\"result\">" . $sautDeLigne
+    $xmlstr .= "<Transaction id=\"" . $value[FtaModel::KEYNAME] . "\" version=\"1\" type=\"proposal\">" . $sautDeLigne
             . $tabulation . "<Parameters>"
+            . $tabulation . $tabulation . "<IdFirm>40" . "</IdFirm><!-- Agis -->" . $sautDeLigne
             . $tabulation . $tabulation . "<IdArcadia>" . $value[FtaModel::FIELDNAME_CODE_ARTICLE_LDC] . "</IdArcadia><!-- Code article dans Arcadia -->" . $sautDeLigne
             . $tabulation . $tabulation . "<IdFta>" . $value[FtaModel::KEYNAME] . "</IdFta><!-- N° de la FTA -->" . $sautDeLigne
             . $tabulation . "</Parameters>" . $sautDeLigne
+            . $tabulation . "<Tables>" . $sautDeLigne
+            . $tabulation . $tabulation . "<ARTICLE_REF>" . $sautDeLigne
+            . $tabulation . $tabulation . $tabulation . "<DataToImport>" . $sautDeLigne
+            . $tabulation . $tabulation . $tabulation . $tabulation . "<Recordset id=\"1\" action=\"update\">" . $sautDeLigne
+            . $espace . $sautDeLigne
+            . $tabulation . $tabulation . $tabulation . $tabulation . $tabulation . "<!-- Entête -->" . $sautDeLigne
+            . $tabulation . $tabulation . $tabulation . $tabulation . $tabulation . "<NO_ART key=\"TRUE\">" . $value[FtaModel::FIELDNAME_CODE_ARTICLE_LDC] . "</NO_ART>" . $sautDeLigne
+            . $tabulation . $tabulation . $tabulation . $tabulation . $tabulation . "<LIB_CCIAL>" . $value[FtaModel::FIELDNAME_LIBELLE] . "</LIB_CCIAL><!-- DIN de la FTA -->" . $sautDeLigne
+            . $tabulation . $tabulation . $tabulation . $tabulation . $tabulation . "<LIB_PRODUCTION>" . $value[FtaModel::FIELDNAME_LIBELLE] . "</LIB_PRODUCTION><!-- DIN de la FTA -->" . $sautDeLigne
+            . $espace . $sautDeLigne
+            . $tabulation . $tabulation . $tabulation . $tabulation . "</Recordset>" . $sautDeLigne
+            . $tabulation . $tabulation . $tabulation . "</DataToImport>" . $sautDeLigne
+            . $tabulation . $tabulation . "</ARTICLE_REF>" . $sautDeLigne
+            . $tabulation . "</Tables>" . $sautDeLigne
             . "</Transaction>" . $sautDeLigne
             . $sautDeLigne;
 }
 
+$keyProposal = Fta2ArcadiaTransactionModel::createNewRecordset();
 
 
-file_put_contents("fta2arcadia-40-" . $value[FtaModel::KEYNAME] . "-" . $value[FtaModel::KEYNAME] . ".xml", $xmlstr);
+file_put_contents("../eai/export/fta2arcadia-40-" . $keyProposal . "-" . $value[FtaModel::FIELDNAME_CODE_ARTICLE_LDC] . "-proposal.xml", $xmlstr);
 
 
 
-
+//// Instance de la class DomDocumen
+//$xml = new DOMDocument();
+//
+//// Definition du prologue :  la version et l'encodage
+//$xml->version = "1.0";
+//$xml->encoding = "UTF-8";
+//https://openclassrooms.com/forum/sujet/creer-un-fichier-xml-puis-demander-de-l-enregistrer-14428

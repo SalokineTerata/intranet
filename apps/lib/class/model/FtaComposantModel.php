@@ -430,7 +430,7 @@ class FtaComposantModel extends AbstractModel {
                 . '</tr>';
     }
 
-    public static function InsertFtaComposant($paramIdFta) {
+    public static function insertFtaComposant($paramIdFta) {
         $pdo = DatabaseOperation::executeComplete(
                         'INSERT INTO ' . FtaComposantModel::TABLENAME
                         . '(' . FtaComposantModel::FIELDNAME_ID_FTA
@@ -442,7 +442,7 @@ class FtaComposantModel extends AbstractModel {
         return $key;
     }
 
-    public static function InsertFtaComposition($paramIdFta) {
+    public static function insertFtaComposition($paramIdFta) {
         $pdo = DatabaseOperation::executeComplete(
                         'INSERT INTO ' . FtaComposantModel::TABLENAME
                         . '(' . FtaComposantModel::FIELDNAME_ID_FTA

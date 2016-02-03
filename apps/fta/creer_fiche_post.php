@@ -92,7 +92,7 @@ switch ($action) {
 
         $idUser = $globalConfig->getAuthenticatedUser()->getKeyValue();
 
-        $idFta = FtaModel::createFta($idUser, $idFtaEtat, $idFtaWorkflow, $designationCommercialeFta, date('d-m-Y'), $siteDeProduction);
+        $idFta = FtaModel::createFta($idUser, $idFtaEtat, $idFtaWorkflow, $designationCommercialeFta, date('Y-m-d'), $siteDeProduction);
 
         DatabaseOperation::execute(
                 'UPDATE ' . FtaModel::TABLENAME

@@ -196,13 +196,12 @@ function recuperation_date_pour_mysql($jour_date, $mois_date, $annee_date, $nom_
 /* * *************************************************************************** */
 /* * *************************************************************************** */
 
-function recuperation_date_depuis_mysql($valeur_date) {
+function changementDuFormatDeDate($valeur_date) {
     /*
       Dictionnaire des variables:
      * **************************
       $valeur_date: contient la date au format AAAA-MM-JJ
      */
-    $valeur_date = "2015-01-25";
     $checkValue =  FtaController::isCheckDateFormat($valeur_date);
     if ($checkValue) {
         /**

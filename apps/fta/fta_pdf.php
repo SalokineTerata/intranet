@@ -52,7 +52,7 @@ $classification = "$rayon $activite $marque";
 $date_derniere_maj_fta = $ftaModel->getDataField(FtaModel::FIELDNAME_DATE_DERNIERE_MAJ_FTA)->getFieldValue();
 
 //Formatage de la date
-$date_validation = recuperation_date_depuis_mysql($date_derniere_maj_fta);
+$date_validation = changementDuFormatDeDate($date_derniere_maj_fta);
 
 //Récupération des Informations FTA
 $returnUVC = $ftaModel->buildArrayEmballageTypeUVC();

@@ -216,7 +216,7 @@ if (!$fta_consultation) {
                  * traitement long
                  */
                 $tableau_fiche = AccueilFta::getHtmlTableauFiche();
-                $fileAriane = AccueilFta::getFileAriane();
+//                $fileAriane = AccueilFta::getFileAriane();
                 $pagination = AccueilFta::paginer(ModuleConfig::VALUE_MAX_PAR_PAGE, $numeroDePageCourante, '4', '4', '1', '1');
             }
             /*

@@ -845,7 +845,7 @@ class FtaComposantModel extends AbstractModel {
         $HtmlList = new HtmlListSelect();
         $activationCodification = $this->getModelFta()->getDataField(FtaModel::FIELDNAME_ACTIVATION_CODESOFT)->getFieldValue();
         $codePSFValue = $this->getDataField(FtaComposantModel::FIELDNAME_CODE_PRODUIT_AGROLOGIC_FTA_NOMENCLATURE)->getFieldValue();
-        if (($activationCodification == FtaModel::ACTIVATION_ETIQUETTE_COLIS_ET_COMPOSITION or $activationCodification == FtaModel::ACTIVATION_ETIQUETTE_COMPOSITION) and $codePSFValue) {
+        if (($activationCodification == AnnexeGestionDesEtiquettesModel::ACTIVATION_ETIQUETTE_COLIS_ET_COMPOSITION or $activationCodification == AnnexeGestionDesEtiquettesModel::ACTIVATION_ETIQUETTE_COMPOSITION) and $codePSFValue) {
             $sqlCondi = " ";
         } else {
             $sqlCondi = " WHERE " . AnnexeModeEtiquetteModel::FIELDNAME_ETIQUETTE_ACTIF . "=0 ";

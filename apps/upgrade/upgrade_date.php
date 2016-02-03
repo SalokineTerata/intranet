@@ -11,24 +11,50 @@ $arraydate = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
 if ($arraydate) {
     foreach ($arraydate as $rowsdate) {
         $dateEcheanceFtatmp = $rowsdate[FtaModel::FIELDNAME_DATE_ECHEANCE_FTA];
-        $idFta = $rowsdate[FtaModel::KEYNAME];
         $dateCreationtmp = $rowsdate[FtaModel::FIELDNAME_DATE_CREATION];
         $dateDerniereMajFtatmp = $rowsdate[FtaModel::FIELDNAME_DATE_DERNIERE_MAJ_FTA];
+        if (FtaController::isCheckDateFormat($dateEcheanceFtatmp)
+                or FtaController::isCheckDateFormat($dateCreationtmp)
+                or FtaController::isCheckDateFormat($dateDerniereMajFtatmp)) {
+            $idFta = $rowsdate[FtaModel::KEYNAME];
+            $dateEcheanceFta = correctionDateBDD($dateEcheanceFtatmp);
+            $dateCreation = correctionDateBDD($dateCreationtmp);
+            $dateDerniereMajFta = correctionDateBDD($dateDerniereMajFtatmp);
 
-        $dateEcheanceFta = correctionDateBDD($dateEcheanceFtatmp);
-        $dateCreation = correctionDateBDD($dateCreationtmp);
-        $dateDerniereMajFta = correctionDateBDD($dateDerniereMajFtatmp);
-
-        $validation = DatabaseOperation::execute(
-                        "UPDATE " . FtaModel::TABLENAME
-                        . " SET " . FtaModel::FIELDNAME_DATE_ECHEANCE_FTA . "=\"" . $dateEcheanceFta
-                        . "\"," . FtaModel::FIELDNAME_DATE_CREATION . "=\"" . $dateCreation
-                        . "\"," . FtaModel::FIELDNAME_DATE_DERNIERE_MAJ_FTA . "=\"" . $dateDerniereMajFta
-                        . "\" WHERE " . FtaModel::KEYNAME . "=" . $idFta);
-        if ($validation) {
-            echo FtaModel::KEYNAME . "=" . $idFta . " OK ";
-        } else {
-            echo FtaModel::KEYNAME . "=" . $idFta . " FAILDED ";
+            $validation = DatabaseOperation::execute(
+                            "UPDATE " . FtaModel::TABLENAME
+                            . " SET " . FtaModel::FIELDNAME_DATE_ECHEANCE_FTA . "=\"" . $dateEcheanceFta
+                            . "\"," . FtaModel::FIELDNAME_DATE_CREATION . "=\"" . $dateCreation
+                            . "\"," . FtaModel::FIELDNAME_DATE_DERNIERE_MAJ_FTA . "=\"" . $dateDerniereMajFta
+                            . "\" WHERE " . FtaModel::KEYNAME . "=" . $idFta);
+            if ($validation) {
+                echo FtaModel::KEYNAME . "=" . $idFta . " OK ";
+            } else {
+                echo FtaModel::KEYNAME . "=" . $idFta . " FAILDED ";
+            }
+        }
+    }
+}
+$arraydatesuivieprojet = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
+                "SELECT " . FtaSuiviProjetModel::FIELDNAME_DATE_VALIDATION_SUIVI_PROJET
+                . "," . FtaSuiviProjetModel::KEYNAME
+                . " FROM " . FtaSuiviProjetModel::TABLENAME
+);
+if ($arraydatesuivieprojet) {
+    foreach ($arraydatesuivieprojet as $rowsdatesuivieprojet) {
+        $dateValidationFtatmp = $rowsdatesuivieprojet[FtaSuiviProjetModel::FIELDNAME_DATE_VALIDATION_SUIVI_PROJET];
+        if (FtaController::isCheckDateFormat($dateValidationFtatmp)) {
+            $idFtaSuiviProjet = $rowsdatesuivieprojet[FtaSuiviProjetModel::KEYNAME];
+            $dateValidationFta = correctionDateBDD($dateValidationFtatmp);
+            $validation = DatabaseOperation::execute(
+                            "UPDATE " . FtaSuiviProjetModel::TABLENAME
+                            . " SET " . FtaSuiviProjetModel::FIELDNAME_DATE_VALIDATION_SUIVI_PROJET . "=\"" . $dateValidationFta
+                            . "\" WHERE " . FtaModel::KEYNAME . "=" . $idFtaSuiviProjet);
+            if ($validation) {
+                echo FtaSuiviProjetModel::KEYNAME . "=" . $idFtaSuiviProjet . " OK ";
+            } else {
+                echo FtaSuiviProjetModel::KEYNAME . "=" . $idFtaSuiviProjet . " FAILDED ";
+            }
         }
     }
 }

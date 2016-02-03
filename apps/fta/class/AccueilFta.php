@@ -88,8 +88,8 @@ class AccueilFta {
     public static function getTableauSythese() {
 
         $tableau_synthese = AccueilFta::getHtmlTableauSythese(self::$arrayFtaRole, self::$arrayFtaEtat, self::$abreviationFtaEtat, self::$idFtaRole, self::$syntheseAction);
-        $tableau_syntheseWorkflow = AccueilFta::getHtmlTableauSytheseWorkflow(self::$arrayIdFtaByUserAndWorkflow['3'], self::$arraNameSiteByWorkflow);
-        $tableau_synthese.=$tableau_syntheseWorkflow;
+//        $tableau_syntheseWorkflow = AccueilFta::getHtmlTableauSytheseWorkflow(self::$arrayIdFtaByUserAndWorkflow['3'], self::$arraNameSiteByWorkflow);
+//        $tableau_synthese.=$tableau_syntheseWorkflow;
         return $tableau_synthese;
     }
 

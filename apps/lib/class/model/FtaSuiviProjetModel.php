@@ -777,6 +777,7 @@ class FtaSuiviProjetModel extends AbstractModel {
                         "SELECT " . FtaSuiviProjetModel::FIELDNAME_COMMENTAIRE_SUIVI_PROJET
                         . "," . UserModel::FIELDNAME_PRENOM . "," . UserModel::FIELDNAME_NOM
                         . "," . FtaSuiviProjetModel::TABLENAME . "." . FtaSuiviProjetModel::FIELDNAME_ID_FTA_CHAPITRE
+                        . "," . FtaSuiviProjetModel::TABLENAME . "." . FtaSuiviProjetModel::FIELDNAME_DATE_VALIDATION_SUIVI_PROJET
                         . " FROM " . FtaSuiviProjetModel::TABLENAME . ", " . UserModel::TABLENAME . ", " . FtaWorkflowStructureModel::TABLENAME
                         . " WHERE ( " . FtaSuiviProjetModel::TABLENAME . "." . FtaSuiviProjetModel::FIELDNAME_SIGNATURE_VALIDATION_SUIVI_PROJET
                         . " = " . UserModel::TABLENAME . "." . UserModel::KEYNAME . " ) "
@@ -790,12 +791,13 @@ class FtaSuiviProjetModel extends AbstractModel {
             foreach ($arrayCommentaireAllChapitre as $rowsCommentaireAllChapitre) {
                 if ($rowsCommentaireAllChapitre[FtaSuiviProjetModel::FIELDNAME_COMMENTAIRE_SUIVI_PROJET]) {
                     $idFtaChapitre = $rowsCommentaireAllChapitre[FtaSuiviProjetModel::FIELDNAME_ID_FTA_CHAPITRE];
+                    $dateDeValidation = $rowsCommentaireAllChapitre[FtaSuiviProjetModel::FIELDNAME_DATE_VALIDATION_SUIVI_PROJET];
                     $ftaChapitreModel = new FtaChapitreModel($idFtaChapitre);
                     $nomChapitre = $ftaChapitreModel->getDataField(FtaChapitreModel::FIELDNAME_NOM_USUEL_CHAPITRE)->getFieldValue();
                     $action = "Chapitre " . $nomChapitre;
                     $nomPrenom = $rowsCommentaireAllChapitre[UserModel::FIELDNAME_PRENOM] . " " . $rowsCommentaireAllChapitre[UserModel::FIELDNAME_NOM];
                     $comment = $rowsCommentaireAllChapitre[FtaSuiviProjetModel::FIELDNAME_COMMENTAIRE_SUIVI_PROJET];
-                    $return.= FtaController::getComment($action, $nomPrenom, $comment) . "\n";
+                    $return.= FtaController::getComment($action, $nomPrenom, $comment, $dateDeValidation) . "\n";
                 }
             }
             $return = "<tr class=contenu><td> Commentaires sur les Chapitres</td><td>" . $return . "</td></tr>";
@@ -817,6 +819,7 @@ class FtaSuiviProjetModel extends AbstractModel {
                         "SELECT " . FtaSuiviProjetModel::FIELDNAME_CORRECTION_FTA_SUIVI_PROJET
                         . "," . UserModel::FIELDNAME_PRENOM . "," . UserModel::FIELDNAME_NOM
                         . "," . FtaSuiviProjetModel::TABLENAME . "." . FtaSuiviProjetModel::FIELDNAME_ID_FTA_CHAPITRE
+                        . "," . FtaSuiviProjetModel::TABLENAME . "." . FtaSuiviProjetModel::FIELDNAME_DATE_VALIDATION_SUIVI_PROJET
                         . " FROM " . FtaSuiviProjetModel::TABLENAME . ", " . UserModel::TABLENAME . ", " . FtaWorkflowStructureModel::TABLENAME
                         . " WHERE ( " . FtaSuiviProjetModel::TABLENAME . "." . FtaSuiviProjetModel::FIELDNAME_SIGNATURE_VALIDATION_SUIVI_PROJET
                         . " = " . UserModel::TABLENAME . "." . UserModel::KEYNAME . " ) "
@@ -830,12 +833,13 @@ class FtaSuiviProjetModel extends AbstractModel {
             foreach ($arrayCommentaireAllChapitre as $rowsCommentaireAllChapitre) {
                 if ($rowsCommentaireAllChapitre[FtaSuiviProjetModel::FIELDNAME_CORRECTION_FTA_SUIVI_PROJET]) {
                     $idFtaChapitre = $rowsCommentaireAllChapitre[FtaSuiviProjetModel::FIELDNAME_ID_FTA_CHAPITRE];
+                    $dateDeValidation = $rowsCommentaireAllChapitre[FtaSuiviProjetModel::FIELDNAME_DATE_VALIDATION_SUIVI_PROJET];
                     $ftaChapitreModel = new FtaChapitreModel($idFtaChapitre);
                     $nomChapitre = $ftaChapitreModel->getDataField(FtaChapitreModel::FIELDNAME_NOM_USUEL_CHAPITRE)->getFieldValue();
                     $action = "Chapitre " . $nomChapitre;
                     $nomPrenom = $rowsCommentaireAllChapitre[UserModel::FIELDNAME_PRENOM] . " " . $rowsCommentaireAllChapitre[UserModel::FIELDNAME_NOM];
                     $comment = $rowsCommentaireAllChapitre[FtaSuiviProjetModel::FIELDNAME_CORRECTION_FTA_SUIVI_PROJET];
-                    $return.= FtaController::getComment($action, $nomPrenom, $comment) . "\n";
+                    $return.= FtaController::getComment($action, $nomPrenom, $comment, $dateDeValidation) . "\n";
                 }
             }
             $return = "<tr class=contenu><td> Récapitulatif des corrections</td><td>" . $return . "</td></tr>";

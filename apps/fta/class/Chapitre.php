@@ -1051,6 +1051,7 @@ class Chapitre {
 
         //Logo éco-emballage
         $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_LOGO_ECO_EMBALLAGE);
+        $test = $ftaModel->getDataField(FtaModel::FIELDNAME_LOGO_ECO_EMBALLAGE)->getFieldName();
 
 
         return $bloc;
@@ -2443,7 +2444,7 @@ class Chapitre {
     protected static function buildHtmlSubmitButton() {
         $return = '';
 //        and self::$is_data_validation_successful == TRUE
-        if (self::$is_editable == true ) {
+        if (self::$is_editable == true) {
             $return = '<input type=submit value=\'Confirmer\' >';
         }
         return $return;

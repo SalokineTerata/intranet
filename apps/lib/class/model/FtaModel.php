@@ -143,6 +143,12 @@ class FtaModel extends AbstractModel {
     private $modelSiteExpedition;
 
     /**
+     *
+     * @var AnnexeUniteFacturationModel 
+     */
+    private $modelAnnexeUniteFacturation;
+
+    /**
      * Site de production de la FTA
      * @var GeoModel
      */
@@ -176,6 +182,10 @@ class FtaModel extends AbstractModel {
         );
         $this->setModelSiteProduction(
                 new GeoModel($this->getDataField(self::FIELDNAME_SITE_PRODUCTION)->getFieldValue()
+                , DatabaseRecord::VALUE_DONT_CREATE_RECORD_IN_DATABASE_IF_KEY_DOESNT_EXIST)
+        );
+        $this->setModelAnnexeUniteFacturation(
+                new AnnexeUniteFacturationModel($this->getDataField(self::FIELDNAME_UNITE_FACTURATION)->getFieldValue()
                 , DatabaseRecord::VALUE_DONT_CREATE_RECORD_IN_DATABASE_IF_KEY_DOESNT_EXIST)
         );
     }
@@ -442,6 +452,14 @@ class FtaModel extends AbstractModel {
      */
     private function setModelFtaEtat(FtaEtatModel $modelFtaEtat) {
         $this->modelFtaEtat = $modelFtaEtat;
+    }
+
+    function getModelAnnexeUniteFacturation() {
+        return $this->modelAnnexeUniteFacturation;
+    }
+
+    function setModelAnnexeUniteFacturation(AnnexeUniteFacturationModel $modelAnnexeUniteFacturation) {
+        $this->modelAnnexeUniteFacturation = $modelAnnexeUniteFacturation;
     }
 
     function getModelFtaWorkflow() {
@@ -1493,7 +1511,7 @@ class FtaModel extends AbstractModel {
  code_douane_fta, OLD_code_douane_libelle_fta, poids_emballages_uvc_fta, poids_brut_uvc_fta,
  poids_net_uvc_fta, suffixe_agrologic_fta, OLD_synoptique_valide_fta, origine_transformation_fta,
  remarque_fta, OLD_presentation_fta, apres_ouverture_fta, conseil_rechauffage_valide_fta,
- reference_externe_fta, OLD_duree_vie_technique_fta, designation_commerciale_fta, OLD_nom_abrege_fta,
+ reference_externe_fta, OLD_duree_vie_technique_fta, designation_commerciale_fta, nom_abrege_fta,
  site_expedition_fta, conseil_rechauffage_experimentale_fta, OLD_synoptique_experimental_fta, OLD_unite_affichage_fta,
  OLD_signature_validation_fta, OLD_old_gamdesc, OLD_old_segdesc, OLD_old_condition,
  OLD_old_conservation, id_article_agrologic, OLD_id_annexe_environnement_conservation, origine_matiere_fta,
@@ -1526,7 +1544,7 @@ class FtaModel extends AbstractModel {
  code_douane_fta, OLD_code_douane_libelle_fta, poids_emballages_uvc_fta, poids_brut_uvc_fta,
  poids_net_uvc_fta, suffixe_agrologic_fta, OLD_synoptique_valide_fta, origine_transformation_fta,
  remarque_fta, OLD_presentation_fta, apres_ouverture_fta, conseil_rechauffage_valide_fta,
- reference_externe_fta, OLD_duree_vie_technique_fta, designation_commerciale_fta, OLD_nom_abrege_fta,
+ reference_externe_fta, OLD_duree_vie_technique_fta, designation_commerciale_fta, nom_abrege_fta,
  site_expedition_fta, conseil_rechauffage_experimentale_fta, OLD_synoptique_experimental_fta, OLD_unite_affichage_fta,
  OLD_signature_validation_fta, OLD_old_gamdesc, OLD_old_segdesc, OLD_old_condition,
  OLD_old_conservation, id_article_agrologic, OLD_id_annexe_environnement_conservation, origine_matiere_fta,
@@ -1781,6 +1799,14 @@ class FtaModel extends AbstractModel {
         parent::getDataToCompare();
     }
 
+    function getActionProposal() {
+        $action = Fta2ArcadiaController::CREATE;
+        if ($this->getDataField(self::FIELDNAME_CODE_ARTICLE_LDC)->getFieldValue()) {
+            $action = Fta2ArcadiaController::UPDATE;
+        }
+        return $action;
+    }
+
     /**
      * On initialise l'idFta à comparer de la version actuelle du FtaModel 
      */
@@ -1814,9 +1840,12 @@ class FtaModel extends AbstractModel {
                             . " WHERE " . self::FIELDNAME_VERSION_DOSSIER_FTA . "=" . $idFtaVersion
                             . " AND " . self::FIELDNAME_DOSSIER_FTA . "=" . $idFtaDossier
             );
-
-            foreach ($arrayIdFta as $rowsIdFta) {
-                $idFtaToCompare = $rowsIdFta[self::KEYNAME];
+            if ($arrayIdFta) {
+                foreach ($arrayIdFta as $rowsIdFta) {
+                    $idFtaToCompare = $rowsIdFta[self::KEYNAME];
+                }
+            } else {
+                $idFtaToCompare = $currentIdFta;
             }
         } else {
             $idFtaToCompare = $currentIdFta;

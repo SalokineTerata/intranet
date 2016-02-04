@@ -60,11 +60,16 @@ class FtaController {
      * @param string $paramCommentaire
      * @return string
      */
-    public static function getComment($paramAction, $paramUser, $paramCommentaire) {
+    public static function getComment($paramAction, $paramUser, $paramCommentaire, $paramDate = NULL) {
+        if (!$paramDate) {
+            $paramDate = date('d-m-Y');
+        } else {
+            $paramDate = FtaController::changementDuFormatDeDate($paramDate);
+        }
         $newComment = "\n"
                 . "==============================\n\n"
                 . "Action : " . $paramAction . " \n"
-                . "Date: " . date('d-m-Y') . "\n"
+                . "Date: " . $paramDate . "\n"
                 . "Utilisateur: " . $paramUser . "\n";
 
         if ($paramCommentaire) {

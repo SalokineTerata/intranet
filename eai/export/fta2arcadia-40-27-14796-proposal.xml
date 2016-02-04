@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Transaction id="27" version="1.1" type="proposal">
+	<Parameters>
+		<IdFirm>40</IdFirm><!-- Agis -->
+		<IdArcadia>0</IdArcadia><!-- Code article dans Arcadia -->
+		<IdFta>14796</IdFta><!-- N° de la FTA -->
+	</Parameters>
+	<Tables>
+		<ARTICLE_REF>
+			<DataToImport>
+				<Recordset id="1" action="create">
+					<!-- Entête -->
+					<NO_ART key="TRUE">0</NO_ART>
+					<LIB_CCIAL></LIB_CCIAL><!-- DIN de la FTA -->
+					<LIB_PRODUCTION></LIB_PRODUCTION><!-- DIN de la FTA -->
+
+					<!-- Class./Ident. -->
+					<COD_GENCOD_ADM>0</COD_GENCOD_ADM>
+
+					<!-- Qualite -->
+					<DLC_CCIAL>21</DLC_CCIAL>
+					<DUREE_VIE>42</DUREE_VIE>
+					<DTS>21</DTS>
+
+					<!-- Info Prod 1 -->
+					<POIDS_MOY_CALCULE>300</POIDS_MOY_CALCULE>
+					<COD_POIDS_MINI_BARQ>300</COD_POIDS_MINI_BARQ>
+					<POIDS_MAXI_BARQ>300</POIDS_MAXI_BARQ>
+					<POIDS_CST_UVC>300</POIDS_CST_UVC>
+
+					<!-- Pds Mini/Maxi -->
+					<POIDS_MINI>300</POIDS_MINI>
+					<POIDS_MAXI>300</POIDS_MAXI>
+
+					<!-- Info Fact -->
+					<UNITE_FACT>0</UNITE_FACT>
+					<UNITE_FACT_PRIVE>0</UNITE_FACT_PRIVE>
+
+					<!-- Export/Compta -->
+					<COD_NDP></COD_NDP>
+
+					<!-- Fourniture -->
+					<SOUMIS_ECO_EMBALLAGE>0</SOUMIS_ECO_EMBALLAGE>
+
+				</Recordset>
+			</DataToImport>
+		</ARTICLE_REF>
+	</Tables>
+
+</Transaction>
+

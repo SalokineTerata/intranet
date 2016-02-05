@@ -23,16 +23,15 @@
  * @author tp4300001
  */
 class AbstractRulesValidation {
-    
-     private $valueTotest;
-    
-   public function __construct($paramValueToTest = NULL) {
+
+    private $warningMessage;
+    private $valueTotest;
+
+    public function __construct($paramValueToTest = NULL) {
 
         $this->setValueTotest($paramValueToTest);
-
-      
     }
-    
+
     function getValueTotest() {
         return $this->valueTotest;
     }
@@ -40,13 +39,17 @@ class AbstractRulesValidation {
     function setValueTotest($valueTotest) {
         $this->valueTotest = $valueTotest;
     }
-    
+
     function isValide() {
         
     }
-    function getWarningMessage(){
-        
+
+    function getWarningMessage() {
+        return $this->warningMessage;
     }
 
+    function setWarningMessage($warningMessage) {
+        $this->warningMessage = $warningMessage;
+    }
 
 }

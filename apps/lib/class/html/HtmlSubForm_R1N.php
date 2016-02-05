@@ -194,6 +194,17 @@ class HtmlSubForm_R1N extends HtmlSubForm {
                     $dataField = $modelSubForm->getDataField($fieldName);
 
                     /**
+                     * Verification des règles de validation
+                     */
+                    $dataField->checkValidationRules();
+
+                    if ($dataField->getDataValidationSuccessful() == TRUE) {
+                        $this->setDataValidationSuccessfulToTrue();
+                    } else {
+                        $this->setDataValidationSuccessfulToFalse();
+                    }
+
+                    /**
                      * Conversion du DataField en HtmlField
                      */
                     $htmlField = Html::getHtmlObjectFromDataField($dataField);
@@ -258,7 +269,7 @@ class HtmlSubForm_R1N extends HtmlSubForm {
                          */
                         $htmlField->setIsEditable(FALSE);
                     }
-                     /**
+                    /**
                      * On vérifie si le champ en cours est différents de la version précédente
                      */
                     $check = strstr($fieldName, "VIRTUAL_");

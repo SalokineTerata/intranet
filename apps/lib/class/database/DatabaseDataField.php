@@ -24,6 +24,19 @@ class DatabaseDataField extends DatabaseDescriptionField {
     private $labelCustom;
 
     /**
+     * Le dataField en cours respect-il ces règles de validation associées
+     * @var boolean
+     */
+    private $dataValidationSuccessful;
+
+    /**
+     * Le dataField en cours ne respect pas ces règles de validation associées
+     * alors on affiche un message sur l'interface
+     * @var boolean
+     */
+    private $dataWarningMessage;
+
+    /**
      * Création de l'objet
      * @param string $paramFieldName Nom du champs
      * @param DatabaseRecord $paramRecordset Référence au recordset
@@ -71,6 +84,34 @@ class DatabaseDataField extends DatabaseDescriptionField {
      */
     public function isFieldDiff() {
         return $this->getRecordsetRef()->isFieldDiff(parent::getFieldName());
+    }
+
+    public function checkValidationRules() {
+        /**
+         * Vérification du champ initialisé
+         */
+        $this->getRecordsetRef()->checkValidationRules($this->getFieldValue(), parent::getTagsValidationRules());
+        /**
+         * Inialisation du résultat et du message
+         */
+        $this->setDataValidationSuccessful();
+        $this->setDataWarningMessage();
+    }
+
+    function getDataValidationSuccessful() {
+        return $this->dataValidationSuccessful;
+    }
+
+    function setDataValidationSuccessful() {
+        $this->dataValidationSuccessful = $this->getRecordsetRef()->getDataValidationSuccessful();
+    }
+
+    function getDataWarningMessage() {
+        return $this->dataWarningMessage;
+    }
+
+    function setDataWarningMessage() {
+        $this->dataWarningMessage = $this->getRecordsetRef()->getDataWarningMessage();
     }
 
     /**

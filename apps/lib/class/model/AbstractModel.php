@@ -114,5 +114,9 @@ abstract class AbstractModel implements AbstractModelInterface {
     public function getDataToCompare() {
         return $this->getRecord()->getRecordToCompare();
     }
+    
+    public function isDataValidationSuccessful(){
+        return $this->getRecord()->getDataValidationSuccessful();
+    }
 
 }

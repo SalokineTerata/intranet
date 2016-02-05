@@ -40,12 +40,16 @@ abstract class AbstractHtmlInput extends AbstractHtmlGlobalElement {
     , $paramLabel
     , $paramValue
     , $paramIsWarningUpdate
+    , $paramIsWarningMessage = NULL
+    , $paramWarningMessage = NULL
     ) {
         $id = $paramName;
         parent::initAbstractHtmlGlobalElement(
                 $id
                 , $paramLabel
                 , $paramIsWarningUpdate
+                , $paramIsWarningMessage
+                , $paramWarningMessage
         );
 
         $this->getAttributes()->getName()->setValue($paramName);
@@ -55,8 +59,9 @@ abstract class AbstractHtmlInput extends AbstractHtmlGlobalElement {
     public function getHtmlViewedContent() {
         return Html::showValue($this->getAttributes()->getValue()->getValue());
     }
+
     public function getHtmlAddContent() {
-        return ;
+        return;
     }
 
     function getHtmlEditableContent() {

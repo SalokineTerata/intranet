@@ -158,6 +158,7 @@ class FtaModel extends AbstractModel {
     private $donneeEmballageDuColis;
     private $donneeEmballagePallette;
     private $messageErreurDataValidation;
+    private $dataValidationSuccessful;
 
     public function __construct($paramId = NULL, $paramIsCreateRecordsetInDatabaseIfKeyDoesntExist = AbstractModel::DEFAULT_IS_CREATE_RECORDSET_IN_DATABASE_IF_KEY_DOESNT_EXIST) {
         parent::__construct($paramId, $paramIsCreateRecordsetInDatabaseIfKeyDoesntExist);
@@ -384,6 +385,22 @@ class FtaModel extends AbstractModel {
 
     protected function setDefaultValues() {
         
+    }
+
+    public function isDataValidationSuccessful() {
+        return $this->dataValidationSuccessful;
+    }
+
+    function setDataValidationSuccessful($paramDataValidationSuccessful) {
+        $this->dataValidationSuccessful = $paramDataValidationSuccessful;
+    }
+
+    function setDataValidationSuccessfulToTrue() {
+        $this->setDataValidationSuccessful("0");
+    }
+
+    function setDataValidationSuccessfulToFalse() {
+        $this->setDataValidationSuccessful("1");
     }
 
     /**
@@ -1865,6 +1882,11 @@ class FtaModel extends AbstractModel {
     function showListeDeroulanteSiteProdByAccesAndIdFta($paramIdUser, HtmlListSelect $paramHtmlObjet, $paramIsEditable) {
 
         /**
+         * Datafield site de production
+         */
+        $dataFieldSiteDeProduction = $this->getDataField(FtaModel::FIELDNAME_SITE_PRODUCTION);
+
+        /**
          * Modification
          */
         $ftaModification = IntranetDroitsAccesModel::getFtaModification($paramIdUser);
@@ -1914,6 +1936,16 @@ class FtaModel extends AbstractModel {
 
         $paramHtmlObjet->setArrayListContent($arraySite);
 
+        /**
+         * Verification des règles de validation
+         */
+        $dataFieldSiteDeProduction->checkValidationRules();
+
+        if ($dataFieldSiteDeProduction->getDataValidationSuccessful() == TRUE) {
+            $this->setDataValidationSuccessfulToTrue();
+        } else {
+            $this->setDataValidationSuccessfulToFalse();
+        }
         $HtmlTableName = FtaModel::TABLENAME
                 . '_'
                 . FtaModel::FIELDNAME_SITE_PRODUCTION
@@ -1925,36 +1957,38 @@ class FtaModel extends AbstractModel {
         $paramHtmlObjet->setIsEditable($paramIsEditable);
         $paramHtmlObjet->initAbstractHtmlSelect(
                 $HtmlTableName, $paramHtmlObjet->getLabel()
-                , $this->getDataField(FtaModel::FIELDNAME_SITE_PRODUCTION)->getFieldValue()
-                , $this->getDataField(FtaModel::FIELDNAME_SITE_PRODUCTION)->isFieldDiff()
-                , $paramHtmlObjet->getArrayListContent());
+                , $dataFieldSiteDeProduction->getFieldValue()
+                , $dataFieldSiteDeProduction->isFieldDiff()
+                , $paramHtmlObjet->getArrayListContent()
+                , $dataFieldSiteDeProduction->getDataValidationSuccessful()
+                , $dataFieldSiteDeProduction->getDataWarningMessage());
         $paramHtmlObjet->getEventsForm()->setOnChangeWithAjaxAutoSave(FtaModel::TABLENAME, FtaModel::KEYNAME, $this->getKeyValue(), FtaModel::FIELDNAME_SITE_PRODUCTION);
         $listeSiteProduction = $paramHtmlObjet->getHtmlResult();
 
         return $listeSiteProduction;
     }
 
-    private function functionName($param) {
+//    private function checkValidationRules($paramFieldName) {
+//        $this->getDataField($paramFieldName)->;
 
-        /*
-          Au niveau DataField:
-          $this->getRulesValidation()->checkAllRules();
+    /*
+      Au niveau DataField:
+      $this->getRulesValidation()->checkAllRules();
 
 
-          checkRules
-          --> récupérer d'intranet_colum_info, les règles à tester
-         * --> boucle parcourant les règles
-         *      --> Pour chaque règle getWarningMessage()
-         *      --> Récupération du message propre à la règle et enregistrement
-         *          dans l'attribut warningMessageListe du DataField
-         * 
-         * 
-         * 
-         * 
-         * Au niveau du HtmlDataField
-         * --> Getteur de l'attribut warningMessageListe
-         * --> Si valeur existante alors affichage.
-         */
-    }
-
+      checkRules
+      --> récupérer d'intranet_colum_info, les règles à tester
+     * --> boucle parcourant les règles
+     *      --> Pour chaque règle getWarningMessage()
+     *      --> Récupération du message propre à la règle et enregistrement
+     *          dans l'attribut warningMessageListe du DataField
+     * 
+     * 
+     * 
+     * 
+     * Au niveau du HtmlDataField
+     * --> Getteur de l'attribut warningMessageListe
+     * --> Si valeur existante alors affichage.
+     */
+//    }
 }

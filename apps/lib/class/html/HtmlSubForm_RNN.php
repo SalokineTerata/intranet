@@ -220,6 +220,17 @@ class HtmlSubForm_RNN extends HtmlSubForm {
                     $dataField = $modelSubForm->getDataField($fieldName);
 
                     /**
+                     * Verification des règles de validation
+                     */
+                    $dataField->checkValidationRules();
+
+                    if ($dataField->getDataValidationSuccessful() == TRUE) {
+                        $this->setDataValidationSuccessfulToTrue();
+                    } else {
+                        $this->setDataValidationSuccessfulToFalse();
+                    }
+
+                    /**
                      * Conversion du DataField en HtmlField
                      */
                     $htmlField = Html::getHtmlObjectFromDataField($dataField, $this->getSecondaryTableNamesAndIdKeyValue(), $key);

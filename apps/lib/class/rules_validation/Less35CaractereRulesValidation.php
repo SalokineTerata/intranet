@@ -22,10 +22,10 @@
  *
  * @author franckwastken
  */
-class Less8CaractereRulesValidation extends AbstractRulesValidation {
+class Less35CaractereRulesValidation extends AbstractRulesValidation {
 
-    const WARNING_MESSAGE = UserInterfaceMessage::FR_WARNING_VALIDATION_RULES_LESS8;
-    const CHECK_VALUE = "8";
+    const WARNING_MESSAGE = UserInterfaceMessage::FR_WARNING_VALIDATION_RULES_LESS35;
+    const CHECK_VALUE = "35";
 
     public function __construct($paramValueToTest = NULL) {
         parent::__construct($paramValueToTest);

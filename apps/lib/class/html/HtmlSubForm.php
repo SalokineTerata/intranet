@@ -19,6 +19,8 @@
 
 class HtmlSubForm extends AbstractHtmlList {
 
+    private $dataValidationSuccessful;
+
     public function getHtmlResultSubFormBegin() {
         return '<table width=\'100%\' ><tr>';
     }
@@ -36,6 +38,7 @@ class HtmlSubForm extends AbstractHtmlList {
                     . '</td>'
             ;
         }
+        $this->setDataValidationSuccessfulToTrue();
         return $return;
     }
 
@@ -50,6 +53,22 @@ class HtmlSubForm extends AbstractHtmlList {
 
     public function getHtmlViewedContent() {
         return $this->getHtmlViewedContent();
+    }
+
+    public function isDataValidationSuccessful() {
+        return $this->dataValidationSuccessful;
+    }
+
+    function setDataValidationSuccessful($paramDataValidationSuccessful) {
+        $this->dataValidationSuccessful += $paramDataValidationSuccessful;
+    }
+
+    function setDataValidationSuccessfulToTrue() {
+        $this->setDataValidationSuccessful("0");
+    }
+
+    function setDataValidationSuccessfulToFalse() {
+        $this->setDataValidationSuccessful("1");
     }
 
 }

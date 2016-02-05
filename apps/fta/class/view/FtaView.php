@@ -10,7 +10,7 @@
  *
  * @author salokine
  */
-class FtaView {
+class FtaView extends AbstractView {
 
     /**
      * Valeur de confirmation, pour un bouton de validation
@@ -139,9 +139,13 @@ class FtaView {
 
         $dataField = $this->getModel()->getDataField($paramFieldName);
 
-//        if ($dataField->isDataValidationSuccessful() == FALSE){
-//            $this->setDataValidationSuccessfulToFalse();
-//        }
+        $dataField->checkValidationRules();
+
+        if ($dataField->getDataValidationSuccessful() == TRUE) {
+            $this->setDataValidationSuccessfulToTrue();
+        } else {
+            $this->setDataValidationSuccessfulToFalse();
+        }
 
         return Html::convertDataFieldToHtml(
                         $dataField
@@ -189,9 +193,6 @@ class FtaView {
      */
     function getHtmlNomAbrege() {
         $nomAbregeValue = $this->getModel()->getDataField(FtaModel::FIELDNAME_NOM_ABREGE)->getFieldValue();
-//        if ($this->getModel()->getDataField(FtaModel::FIELDNAME_LIBELLE)->isDataValidationSuccessful() == FALSE){
-//            $this->setDataValidationSuccessfulToFalse();
-//        }
         if (!$nomAbregeValue) {
             $DesignationCommerciale = $this->getModel()->getDataField(FtaModel::FIELDNAME_DESIGNATION_COMMERCIALE)->getFieldValue();
             $suffixeAgrologicFta = $this->getModel()->getDataField(FtaModel::FIELDNAME_SUFFIXE_AGROLOGIC_FTA)->getFieldValue();
@@ -222,9 +223,6 @@ class FtaView {
      */
     function getHtmlDesignationInterneAgis() {
         $DIN = $this->getModel()->getDataField(FtaModel::FIELDNAME_LIBELLE)->getFieldValue();
-//        if ($this->getModel()->getDataField(FtaModel::FIELDNAME_LIBELLE)->isDataValidationSuccessful() == FALSE){
-//            $this->setDataValidationSuccessfulToFalse();
-//        }
         if (!$DIN) {
             $nomAbregeValue = $this->getModel()->getDataField(FtaModel::FIELDNAME_NOM_ABREGE)->getFieldValue();
 
@@ -577,6 +575,11 @@ class FtaView {
 
         $listeSiteProduction = $this->getModel()->showListeDeroulanteSiteProdByAccesAndIdFta($paramIdUser, $paramHtmlObjet, $paramIsEditable);
 
+        /**
+         * Initialisation du reésultat des règles de validation
+         */
+        $this->setDataValidationSuccessful($this->getModel()->isDataValidationSuccessful());
+
         return $listeSiteProduction;
     }
 
@@ -862,6 +865,12 @@ class FtaView {
             $htmlEmballageUVC->setLien(FtaConditionnementModel::getAddLinkBeforeConditionnement($paramIdFta, $paramChapitre, AnnexeEmballageGroupeTypeModel::EMBALLAGE_UVC, $paramSyntheseAction, $paramIdFtaEtat, $paramAbreviationEtat, $paramIdFtaRole));
             $return .= $htmlEmballageUVC->getHtmlResult();
         }
+
+        /**
+         * Initialisation du reésultat des règles de validation
+         */
+        $this->setDataValidationSuccessful($htmlEmballageUVC->isDataValidationSuccessful());
+
         return $return;
     }
 
@@ -952,6 +961,11 @@ class FtaView {
             $htmlEmballageParColis->setLien(FtaConditionnementModel::getAddLinkBeforeConditionnement($paramIdFta, $paramChapitre, AnnexeEmballageGroupeTypeModel::EMBALLAGE_PAR_COLIS, $paramSyntheseAction, $paramIdFtaEtat, $paramAbreviationEtat, $paramIdFtaRole));
             $return .= $htmlEmballageParColis->getHtmlResult();
         }
+        /**
+         * Initialisation du reésultat des règles de validation
+         */
+        $this->setDataValidationSuccessful($htmlEmballageParColis->isDataValidationSuccessful());
+
         return $return;
     }
 
@@ -1052,6 +1066,12 @@ class FtaView {
             $htmlEmballageDuColis->setLien(FtaConditionnementModel::getAddLinkBeforeConditionnement($paramIdFta, $paramChapitre, AnnexeEmballageGroupeTypeModel::EMBALLAGE_DU_COLIS, $paramSyntheseAction, $paramIdFtaEtat, $paramAbreviationEtat, $paramIdFtaRole));
             $return .= $htmlEmballageDuColis->getHtmlResult();
         }
+
+
+        /**
+         * Initialisation du reésultat des règles de validation
+         */
+        $this->setDataValidationSuccessful($htmlEmballageDuColis->isDataValidationSuccessful());
         return $return;
     }
 
@@ -1150,6 +1170,12 @@ class FtaView {
             $htmlEmballagePalette->setLien(FtaConditionnementModel::getAddLinkBeforeConditionnement($paramIdFta, $paramChapitre, AnnexeEmballageGroupeTypeModel::EMBALLAGE_PALETTE, $paramSyntheseAction, $paramIdFtaEtat, $paramAbreviationEtat, $paramIdFtaRole));
             $return .= $htmlEmballagePalette->getHtmlResult();
         }
+
+        /**
+         * Initialisation du reésultat des règles de validation
+         */
+        $this->setDataValidationSuccessful($htmlEmballagePalette->isDataValidationSuccessful());
+
         return $return;
     }
 
@@ -1197,6 +1223,12 @@ class FtaView {
             $htmlEtiquetteComposant->setLien(FtaComposantModel::getAddLinkComposition($paramIdFta, $paramChapitre, $paramSyntheseAction, $paramIdFtaEtat, $paramAbreviationEtat, $paramIdFtaRole, $proprietaire));
             $return .= $htmlEtiquetteComposant->getHtmlResult();
         }
+
+        /**
+         * Initialisation du reésultat des règles de validation
+         */
+        $this->setDataValidationSuccessful($htmlEtiquetteComposant->isDataValidationSuccessful());
+
         return $return;
     }
 
@@ -1243,6 +1275,12 @@ class FtaView {
             $htmlEtiquetteComposant->setLien(FtaComposantModel::getAddLinkComposant($paramIdFta, $paramChapitre, $paramSyntheseAction, $paramIdFtaEtat, $paramAbreviationEtat, $paramIdFtaRole, $proprietaire));
             $return .= $htmlEtiquetteComposant->getHtmlResult();
         }
+
+        /**
+         * Initialisation du reésultat des règles de validation
+         */
+        $this->setDataValidationSuccessful($htmlEtiquetteComposant->isDataValidationSuccessful());
+
         return $return;
     }
 

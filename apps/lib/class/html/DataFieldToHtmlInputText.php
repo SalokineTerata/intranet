@@ -26,6 +26,8 @@ class DataFieldToHtmlInputText extends HtmlInputText {
                 , $this->getDataField()->getFieldLabel()
                 , $this->getDataField()->getFieldValue()
                 , $this->getDataField()->isFieldDiff()
+                , $this->getDataField()->getDataValidationSuccessful()
+                , $this->getDataField()->getDataWarningMessage()
         );
         $this->getEventsForm()->setOnChangeWithAjaxAutoSave(
                 $this->getDataField()->getTableName()
@@ -33,7 +35,7 @@ class DataFieldToHtmlInputText extends HtmlInputText {
                 , $this->getDataField()->getKeyValue()
                 , $this->getDataField()->getFieldName()
         );
-       
+
         /**
          * Taille spécifique du champs si renseignée.
          */

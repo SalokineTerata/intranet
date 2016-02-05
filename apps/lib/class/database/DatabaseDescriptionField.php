@@ -23,6 +23,12 @@ class DatabaseDescriptionField {
     private $table;
 
     /**
+     * Liste des règles de validation
+     * @var DatabaseDescriptionTable 
+     */
+    private $tagsValidationRules;
+
+    /**
      * Construit un champs
      * @param DatabaseDescriptionTable $paramTable Table du champs
      * @param string $paramFieldName Nom du champs
@@ -30,6 +36,7 @@ class DatabaseDescriptionField {
     public function __construct(DatabaseDescriptionTable $paramTable, $paramFieldName) {
         $this->setTable($paramTable);
         $this->setFieldName($paramFieldName);
+        $this->setTagsValidationRules();
     }
 
     /**
@@ -86,6 +93,15 @@ class DatabaseDescriptionField {
      */
     public function getTableName() {
         return $this->getTable()->getTableName();
+    }
+
+    function getTagsValidationRules() {
+        return $this->tagsValidationRules;
+    }
+
+    function setTagsValidationRules() {
+        $this->tagsValidationRules = DatabaseDescription::getTagsValidationRules
+                        ($this->getTableName(), $this->getFieldName());
     }
 
     /**

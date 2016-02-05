@@ -5,7 +5,7 @@
  *
  * @author franckwastaken
  */
-class FtaComposantView {
+class FtaComposantView extends AbstractView {
 
     /**
      * Model de donnée d'un composant
@@ -88,8 +88,19 @@ class FtaComposantView {
     }
 
     public function getHtmlDataField($paramFieldName) {
+
+        $dataField = $this->getFtaComposantModel()->getDataField($paramFieldName);
+
+        $dataField->checkValidationRules();
+
+        if ($dataField->getDataValidationSuccessful() == TRUE) {
+            $this->setDataValidationSuccessfulToTrue();
+        } else {
+            $this->setDataValidationSuccessfulToFalse();
+        }
+
         return Html::convertDataFieldToHtml(
-                        $this->getFtaComposantModel()->getDataField($paramFieldName)
+                        $dataField
                         , $this->getIsEditable()
         );
     }
@@ -137,7 +148,7 @@ class FtaComposantView {
      * @return string
      */
     function getListeModeEtiquette($paramIsEditable) {
-       
+
         $listeModeEtiquettes = $this->getFtaComposantModel()->getListeModeEtiquette($paramIsEditable);
 
         return $listeModeEtiquettes;

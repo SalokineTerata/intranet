@@ -344,12 +344,23 @@ class Navigation {
                             . '\' AND ' . IntranetDroitsAccesModel::FIELDNAME_NIVEAU_INTRANET_DROITS_ACCES . '=' . IntranetNiveauAccesModel::NIVEAU_GENERIC_TRUE  //L'utilisateur est propriétaire
             );
 
+            /**
+             * On ne récuère que les processus d'init validé
+             */
+//            $arrayProcessusValide = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
+//                            'SELECT DISTINCT ' . FtaProcessusCycleModel::FIELDNAME_PROCESSUS_INIT . ' as ' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_PROCESSUS
+//                            . ' FROM ' . FtaProcessusCycleModel::TABLENAME
+//                            . ' WHERE ' . FtaProcessusCycleModel::FIELDNAME_FTA_ETAT . '=\'' . FtaEtatModel::ETAT_ABREVIATION_VALUE_MODIFICATION . '\''
+//                            . ' AND ' . FtaProcessusCycleModel::FIELDNAME_WORKFLOW
+//                            . '=\'' . self::$id_fta_workflow . '\' '
+            /**
+             * On récuère les processus validé
+             */
             $arrayProcessusValide = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
-                            'SELECT DISTINCT ' . FtaProcessusCycleModel::FIELDNAME_PROCESSUS_INIT . ' as ' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_PROCESSUS
-                            . ' FROM ' . FtaProcessusCycleModel::TABLENAME
-                            . ' WHERE ' . FtaProcessusCycleModel::FIELDNAME_FTA_ETAT . '=\'' . FtaEtatModel::ETAT_ABREVIATION_VALUE_MODIFICATION . '\''
-                            . ' AND ' . FtaProcessusCycleModel::FIELDNAME_WORKFLOW
-                            . '=\'' . self::$id_fta_workflow . '\' '
+                            'SELECT DISTINCT ' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_PROCESSUS
+                            . ' FROM ' . FtaWorkflowStructureModel::TABLENAME
+                            . ' WHERE ' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_WORKFLOW . '=\'' . self::$id_fta_workflow . '\''
+                            . ' AND ' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_PROCESSUS . '<>\'' . FtaProcessusModel::PROCESSUS_PUBLIC . '\''
             );
             if ($req AND $arrayProcessusValide) {
                 /*
@@ -383,7 +394,7 @@ class Navigation {
                 }//Fin du balayage
 
 
-                if ($ProcessusPrecedentVisible) {
+//                if ($ProcessusPrecedentVisible) {
                     /*
                      * Nous récupérons tous les processus validé pour vérifier plus tard si nous devons les affichers
                      */
@@ -394,7 +405,7 @@ class Navigation {
                             $ProcessusValide[] = $rowsProcessusValide[FtaProcessusModel::KEYNAME];
                         }
                     }
-                }
+//                }
             }
             /*
              * Nous récuperons la liste des processus non valider  qui sont en cours
@@ -590,7 +601,7 @@ class Navigation {
             if (self::$id_fta_etat == '1') {
 
                 //Création de la liste des processus dans la barre de navigation          
-                $t_liste_processus = array_merge($ProcessusEncoursVisible, $ProcessusPrecedentVisible, $ProcessusEnLecture);
+                $t_liste_processus = array_merge($ProcessusEncoursVisible, $ProcessusPrecedentVisible, $ProcessusEnLecture, $ProcessusValide);
             } else {
                 $arrayProcessusByWorkflow = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
                                 'SELECT DISTINCT ' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_PROCESSUS

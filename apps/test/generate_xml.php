@@ -18,7 +18,7 @@
  */
 
 require_once '../inc/main.php';
-$paramIdFta = "14797";
+$paramIdFta = Lib::getParameterFromRequest(FtaModel::KEYNAME);
 $sautDeLigne = "\n";
 $tabulation = "\t";
 $espace = "\r";
@@ -64,9 +64,6 @@ $xmlstr = '<?xml version="1.0" encoding="UTF-8" ?>' . $sautDeLigne . $espace;
 //            . "</Transaction>" . $sautDeLigne
 //            . $sautDeLigne;
 //}
-
-
-
 //file_put_contents("../../eai/export/fta2arcadia-40-" . $keyProposal . "-" . $value[FtaModel::FIELDNAME_CODE_ARTICLE_LDC] . "-proposal.xml", $xmlstr);
 $ftaModel = new FtaModel($paramIdFta);
 $fta2ArcadiaContoller = new Fta2ArcadiaController($ftaModel);

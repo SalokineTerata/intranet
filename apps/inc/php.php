@@ -51,6 +51,7 @@ require_once('../fta/class/Navigation.php');
 require_once('../fta/class/ObjectFta.php');
 
 // View
+require_once('../fta/class/view/AbstractView.php');
 require_once('../fta/class/view/FtaView.php');
 require_once('../fta/class/view/UserView.php');
 require_once('../fta/class/view/FtaComposantView.php');

@@ -36,6 +36,10 @@ class Fta2ArcadiaController {
     const RECORDSET_END = "\t\t\t\t</Recordset>\n";
     const CREATE = "create";
     const UPDATE = "update";
+    const COD_SOCIETE_AGIS = "40";
+    const CNUF_AGIS = "336676";
+    const OUI = "1";
+    const NON = "0";
 
     /**
      * FTA associée
@@ -60,6 +64,8 @@ class Fta2ArcadiaController {
      * @var string
      */
     private $xmlText;
+    private $arcadiaUtilisableGroupe;
+    private $arcadiaSiteDeProd;
     private $arcadiaArticleRefLicCcial;
     private $arcadiaArticleRefLicProduction;
     private $arcadiaParametre;
@@ -79,6 +85,10 @@ class Fta2ArcadiaController {
     private $arcadiaPoidsMaxiBarq;
     private $arcadiaPoidsCstUvc;
     private $arcadiaUniteDeFacturation;
+    private $arcadiaCNUF;
+    private $arcadiaCodPoidsCstUvc;
+    private $arcadiaCodSociete;
+    private $arcadiaProlongationDLC;
 
     public function __construct($paramFtaModel) {
         /**
@@ -193,11 +203,51 @@ class Fta2ArcadiaController {
         $this->transformDTS();
         $this->transformPoidsMaxiAndMini();
         $this->transformUniteFacturation();
+        $this->transformCREATE();
+        $this->transformSiteDePorduction();
     }
 
     function setAllBalise() {
         $this->setArcadiaNoArtKey();
         $this->setArcadiaParametre();
+    }
+
+    function transformCREATE() {
+        if ($this->getActionProposal() == self::CREATE) {
+            $this->transformCNUF();
+            $this->transformUtilisableGroupe();
+            $this->transformCodPoidsCstUvc();
+            $this->transformCodSociete();
+            $this->transformProlongationDLC();
+        }
+    }
+
+    function transformProlongationDLC() {
+        $this->setArcadiaProlongationDLC();
+    }
+
+    function transformCNUF() {
+        $this->setArcadiaCNUF();
+    }
+
+    function transformCodSociete() {
+        $this->setArcadiaCodSociete();
+    }
+
+    function transformCodPoidsCstUvc() {
+        $this->setArcadiaCodPoidsCstUvc();
+    }
+
+    function transformUtilisableGroupe() {
+        $this->setArcadiaUtilisableGroupe();
+    }
+
+    function transformSiteDePorduction() {
+        $checkDiff = $this->getFtaModel()->getDataField(FtaModel::FIELDNAME_SITE_PRODUCTION)->isFieldDiff();
+        if ($checkDiff or $this->getActionProposal() == self::CREATE) {
+            $geoModel = $this->getFtaModel()->getModelSiteProduction();
+            $this->setArcadiaSiteDeProd($geoModel);
+        }
     }
 
     function transformDIN() {
@@ -372,6 +422,64 @@ class Fta2ArcadiaController {
                 . "<SOUMIS_ECO_EMBALLAGE>" . $paramArcadiaLogoEcoEmballage . "</SOUMIS_ECO_EMBALLAGE>" . self::SAUT_DE_LIGNE;
     }
 
+    function getArcadiaProlongationDLC() {
+        return $this->arcadiaProlongationDLC;
+    }
+
+    function setArcadiaProlongationDLC() {
+        $this->arcadiaProlongationDLC = self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION
+                . "<PROLOGATION_DLC>" . self::NON . "</PROLOGATION_DLC><!-- Non --> " . self::SAUT_DE_LIGNE;
+    }
+
+    function getArcadiaCodSociete() {
+        return $this->arcadiaCodSociete;
+    }
+
+    function setArcadiaCodSociete() {
+        $this->arcadiaCodSociete = self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION
+                . "<COD_SOCIETE_RESP_PV>" . self::COD_SOCIETE_AGIS . "</COD_SOCIETE_RESP_PV><!-- Agis --> " . self::SAUT_DE_LIGNE;
+    }
+
+    function getArcadiaCodPoidsCstUvc() {
+        return $this->arcadiaCodPoidsCstUvc;
+    }
+
+    function setArcadiaCodPoidsCstUvc() {
+        $this->arcadiaCodPoidsCstUvc = self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION
+                . "<COD_POID_CST_UVC>1</COD_POID_CST_UVC>" . self::SAUT_DE_LIGNE;
+    }
+
+    function getArcadiaCNUF() {
+        return $this->arcadiaCNUF;
+    }
+
+    function setArcadiaCNUF() {
+        $this->arcadiaCNUF = self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION
+                . "<CNUF>" . self::CNUF_AGIS . "</CNUF>" . self::SAUT_DE_LIGNE;
+    }
+
+    function getArcadiaUtilisableGroupe() {
+        return $this->arcadiaUtilisableGroupe;
+    }
+
+    function setArcadiaUtilisableGroupe() {
+        $this->arcadiaUtilisableGroupe = self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION
+                . "<!-- Info générales -->" . self::SAUT_DE_LIGNE
+                . self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION
+                . "<UTILISABLE_SITE>" . self::OUI . "</UTILISABLE_SITE><!-- Oui -->" . self::SAUT_DE_LIGNE;
+    }
+
+    function getArcadiaSiteDeProd() {
+        return $this->arcadiaSiteDeProd;
+    }
+
+    function setArcadiaSiteDeProd(GeoModel $paramArcadiaSiteDeProdModel) {
+        $this->arcadiaSiteDeProd = self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION
+                . "<SITE_PROD_EE>"
+                . $paramArcadiaSiteDeProdModel->getDataField(GeoModel::FIELDNAME_ID_SITE_GROUPE)->getFieldValue() . "</SITE_PROD_EE><!-- "
+                . $paramArcadiaSiteDeProdModel->getDataField(GeoModel::FIELDNAME_GEO)->getFieldValue() . " -->" . self::SAUT_DE_LIGNE;
+    }
+
     function getArcadiaDTS() {
         return $this->arcadiaDTS;
     }
@@ -483,17 +591,24 @@ class Fta2ArcadiaController {
                 . $this->getArcadiaNoArtKey() //<!-- Entête -->
                 . $this->getArcadiaArticleRefLicCcial()
                 . $this->getArcadiaArticleRefLicProduction()
+                . self::ESPACE . self::SAUT_DE_LIGNE // <!-- Info générales -->
+                . $this->getArcadiaUtilisableGroupe()
                 . self::ESPACE . self::SAUT_DE_LIGNE // <!-- Class./Ident. -->
                 . $this->getArcadiaEanArticle()
+                . $this->getArcadiaCNUF()
                 . self::ESPACE . self::SAUT_DE_LIGNE // <!-- Qualite -->
                 . $this->getArcadiaDLC()
                 . $this->getArcadiaDureeDeVie()
                 . $this->getArcadiaDTS()
+                . $this->getArcadiaProlongationDLC()
                 . self::ESPACE . self::SAUT_DE_LIGNE //<!-- Info Prod 1 -->
                 . $this->getArcadiaPoidsMoyenCal()
                 . $this->getArcadiaPoidsMiniBarq()
                 . $this->getArcadiaPoidsMaxiBarq()
+                . $this->getArcadiaCodPoidsCstUvc()
                 . $this->getArcadiaPoidsCstUvc()
+                . self::ESPACE . self::SAUT_DE_LIGNE //<!-- Info Prod 2 -->
+                . $this->getArcadiaSiteDeProd()
                 . self::ESPACE . self::SAUT_DE_LIGNE //<!-- Pds Mini/Maxi -->
                 . $this->getArcadiaPoidsMini()
                 . $this->getArcadiaPoidsMaxi()

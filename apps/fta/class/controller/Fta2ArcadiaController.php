@@ -40,6 +40,9 @@ class Fta2ArcadiaController {
     const CNUF_AGIS = "336676";
     const OUI = "1";
     const NON = "0";
+    const LINK_DEV = "";
+    const LINK_COD = "";
+    const LINK_PRD = "";
 
     /**
      * FTA associée

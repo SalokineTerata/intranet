@@ -45,12 +45,11 @@ switch ($output) {
         require_once '../inc/main.php';
         print_page_begin($disable_full_page, $menu_file);
         flush();
-
 }//Fin de la sélection du mode d'affichage de la page
 
 $id_fta_classification2 = Lib::getParameterFromRequest(ClassificationFta2Model::KEYNAME);
 $action = Lib::getParameterFromRequest('action');
-$isEditable =TRUE;
+$isEditable = TRUE;
 /* * ***********
   Début Code PHP
  * *********** */
@@ -104,30 +103,33 @@ $bloc .= "<" . $html_table . "><tr class=titre>"
         . "<td>" . HtmlResult::RESEAU . "</td>"
         . "<td>" . HtmlResult::SAISONALITE . "</td>"
         . "</tr>";
-$bloc.="<td>" . ClassificationFta2Model::getListeClassificationProprietaireGroupe($idProprietaireGroupe,$isEditable) . "</td>";
+$bloc.="<td>" . ClassificationFta2Model::getListeClassificationProprietaireGroupe($idProprietaireGroupe, $isEditable) . "</td>";
 
 
-$bloc.= "<td>" . ClassificationFta2Model::getClassificationListeSansDependance($idProprietaireEnseigne, 1, ClassificationFta2Model::FIELDNAME_ID_PROPRIETAIRE_ENSEIGNE,$isEditable
+$bloc.= "<td>" . ClassificationFta2Model::getClassificationListeSansDependance($idProprietaireEnseigne, 1, ClassificationFta2Model::FIELDNAME_ID_PROPRIETAIRE_ENSEIGNE, $isEditable
         ) . "</td>";
 
 $bloc.="<td>" . ClassificationFta2Model::getClassificationListeSansDependance($idMarque, 2
-                , ClassificationFta2Model::FIELDNAME_ID_MARQUE,$isEditable
+                , ClassificationFta2Model::FIELDNAME_ID_MARQUE, $isEditable
         ) . "</td>";
 $bloc.="<td>" . ClassificationFta2Model::getClassificationListeSansDependance($idActivite, 3
-                , ClassificationFta2Model::FIELDNAME_ID_ACTIVITE,$isEditable
+                , ClassificationFta2Model::FIELDNAME_ID_ACTIVITE, $isEditable
         ) . "</td>";
 $bloc.="<td>" . ClassificationFta2Model::getClassificationListeSansDependance($idRayon, 4
-                , ClassificationFta2Model::FIELDNAME_ID_RAYON,$isEditable
+                , ClassificationFta2Model::FIELDNAME_ID_RAYON, $isEditable
         ) . "</td>";
 $bloc.="<td>" . ClassificationFta2Model::getClassificationListeSansDependance($idEnvironnement, 51
-                , ClassificationFta2Model::FIELDNAME_ID_ENVIRONNEMENT,$isEditable
+                , ClassificationFta2Model::FIELDNAME_ID_ENVIRONNEMENT, $isEditable
         ) . "</td>";
 $bloc.="<td>" . ClassificationFta2Model::getClassificationListeSansDependance($idReseau, 5
-                , ClassificationFta2Model::FIELDNAME_ID_RESEAU,$isEditable
+                , ClassificationFta2Model::FIELDNAME_ID_RESEAU, $isEditable
         ) . "</td>";
 $bloc.="<td>" . ClassificationFta2Model::getClassificationListeSansDependance($idSaisonalite, 52
-                , ClassificationFta2Model::FIELDNAME_ID_SAISONNALITE,$isEditable
+                , ClassificationFta2Model::FIELDNAME_ID_SAISONNALITE, $isEditable
         ) . "</td>";
+
+
+//$RaccourcisClassif = new HtmlSubForm_RNN($paramArrayPrimaryContent, $paramSubFormPrimaryModelClassName, $paramPrimaryLabel, $secondaryTableNamesAndIdKeyValue);
 
 
 /*
@@ -202,12 +204,21 @@ switch ($output) {
                 " . $bloc . "            
 
              </td></tr>
+              <tr><td>
+              " . $RaccourcisClassif . "
+              </td></tr> 
+              <tr><td>
+              " . $CategorieOptiventes . "
+              </td></tr> 
+              <tr><td>
+              " . $CategorieFamilleBudget . "
+              </td></tr> 
              <tr><td>
                  <center>
                  <input type=submit value=Enregistrer>
                  </center>
 
-             </td></tr>
+             </td>             
              </table>
 
              </form>

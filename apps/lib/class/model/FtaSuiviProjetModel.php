@@ -413,9 +413,10 @@ class FtaSuiviProjetModel extends AbstractModel {
                                 . '(' . FtaSuiviProjetModel::FIELDNAME_ID_FTA
                                 . ', ' . FtaSuiviProjetModel::FIELDNAME_ID_FTA_CHAPITRE
                                 . ', ' . FtaSuiviProjetModel::FIELDNAME_SIGNATURE_VALIDATION_SUIVI_PROJET
+                                . ', ' . FtaSuiviProjetModel::FIELDNAME_DATE_DEMARRAGE_CHAPITRE_FTA_SUIVI_PROJET
                                 . ') VALUES (' . $paramIdFta
                                 . ', ' . $rowsChapitre[FtaWorkflowStructureModel::FIELDNAME_ID_FTA_CHAPITRE]
-                                . ', 1 )'
+                                . ', 1 ,\'' . date("Y-m-d") . '\')'
                         );
                     } else {
                         DatabaseOperation::execute(
@@ -423,9 +424,10 @@ class FtaSuiviProjetModel extends AbstractModel {
                                 . '(' . FtaSuiviProjetModel::FIELDNAME_ID_FTA
                                 . ', ' . FtaSuiviProjetModel::FIELDNAME_ID_FTA_CHAPITRE
                                 . ', ' . FtaSuiviProjetModel::FIELDNAME_SIGNATURE_VALIDATION_SUIVI_PROJET
+                                . ', ' . FtaSuiviProjetModel::FIELDNAME_DATE_DEMARRAGE_CHAPITRE_FTA_SUIVI_PROJET
                                 . ') VALUES (' . $paramIdFta
                                 . ', ' . $rowsChapitre[FtaWorkflowStructureModel::FIELDNAME_ID_FTA_CHAPITRE]
-                                . ', 0 )'
+                                . ', 0 ,\'' . date("Y-m-d") . '\')'
                         );
                     }
                 }

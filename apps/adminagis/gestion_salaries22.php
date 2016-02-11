@@ -269,7 +269,7 @@ if ($paramRech == '1') {
                                                     <table width='350' border='0' cellspacing='0' cellpadding='0' align='center'>
                                                         <tr>
                                                             <td colspan='2'>
-                                                                <div align='center'><input type='image' src='../zimages/modifier-j.gif' width='130' height='20'>&nbsp;&nbsp;<a href='#' onClick='confirmation(<?php echo $paramIdUser; ?>);'><img src='../images-index/supprimer.gif' border=0></a></div>
+                                                                <div align='center'><input type='image' src='../zimages/modifier-j.gif' width='130' height='20'>&nbsp;&nbsp;<a href='#' onClick='confirmation_desactivation(<?php echo $paramIdUser; ?>);'><img src='../images-index/supprimer.gif' border=0></a></div>
 
                                                                 <input type='hidden' name='modifier' value='modifier'>
                                                             </td>

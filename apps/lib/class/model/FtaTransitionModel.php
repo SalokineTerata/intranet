@@ -373,7 +373,7 @@ class FtaTransitionModel {
                                 . ", " . IntranetDroitsAccesModel::TABLENAME
                                 . " WHERE " . UserModel::TABLENAME . "." . UserModel::KEYNAME
                                 . " = " . IntranetDroitsAccesModel::TABLENAME . "." . IntranetDroitsAccesModel::FIELDNAME_ID_USER
-                                . " AND " . UserModel::TABLENAME . "." . UserModel::FIELDNAME_ACTIF . " =\'" . UserModel::USER_ACTIF . "\' "
+                                . " AND " . UserModel::TABLENAME . "." . UserModel::FIELDNAME_ACTIF . " ='" . UserModel::USER_ACTIF . "' "
                                 . " AND " . IntranetDroitsAccesModel::TABLENAME . "." . IntranetDroitsAccesModel::FIELDNAME_ID_INTRANET_MODULES . " = " . IntranetModulesModel::ID_MODULES_FTA
                                 . " AND " . IntranetDroitsAccesModel::TABLENAME . "." . IntranetDroitsAccesModel::FIELDNAME_NIVEAU_INTRANET_DROITS_ACCES . " = " . IntranetNiveauAccesModel::NIVEAU_GENERIC_TRUE
                                 . ' AND ' . IntranetDroitsAccesModel::FIELDNAME_ID_INTRANET_ACTIONS . '=' . IntranetNiveauAccesModel::NIVEAU_FTA_DIFFUSION
@@ -390,7 +390,7 @@ class FtaTransitionModel {
                         //Début Droits d'accès de diffusion
                         . " WHERE " . UserModel::TABLENAME . "." . UserModel::KEYNAME
                         . " = " . IntranetDroitsAccesModel::TABLENAME . "." . IntranetDroitsAccesModel::FIELDNAME_ID_USER
-                        . " AND " . UserModel::TABLENAME . "." . UserModel::FIELDNAME_ACTIF . " =\'" . UserModel::USER_ACTIF . "\' "
+                        . " AND " . UserModel::TABLENAME . "." . UserModel::FIELDNAME_ACTIF . " ='" . UserModel::USER_ACTIF . "' "
                         . " AND ( 0 " . UserModel::AddIdUser($idUser) . ')'
                         . " AND " . IntranetDroitsAccesModel::TABLENAME . "." . IntranetDroitsAccesModel::FIELDNAME_ID_INTRANET_ACTIONS
                         . " = " . IntranetActionsModel::TABLENAME . "." . IntranetActionsModel::KEYNAME      //Liaison
@@ -412,7 +412,7 @@ class FtaTransitionModel {
                         //Début Droits d'accès de diffusion
                         . " WHERE " . UserModel::TABLENAME . "." . UserModel::KEYNAME
                         . " = " . IntranetDroitsAccesModel::TABLENAME . "." . IntranetDroitsAccesModel::FIELDNAME_ID_USER
-                        . " AND " . UserModel::TABLENAME . "." . UserModel::FIELDNAME_ACTIF . " =\'" . UserModel::USER_ACTIF . "\' "
+                        . " AND " . UserModel::TABLENAME . "." . UserModel::FIELDNAME_ACTIF . " ='" . UserModel::USER_ACTIF . "' "
                         . " AND " . IntranetDroitsAccesModel::TABLENAME . "." . IntranetDroitsAccesModel::FIELDNAME_ID_INTRANET_ACTIONS
                         . " = " . IntranetNiveauAccesModel::NIVEAU_FTA_DIFFUSION
                         . " AND " . IntranetDroitsAccesModel::TABLENAME . "." . IntranetDroitsAccesModel::FIELDNAME_ID_USER . " NOT IN ("
@@ -421,7 +421,7 @@ class FtaTransitionModel {
                         . ", " . IntranetDroitsAccesModel::TABLENAME
                         . " WHERE " . UserModel::TABLENAME . "." . UserModel::KEYNAME
                         . " = " . IntranetDroitsAccesModel::TABLENAME . "." . IntranetDroitsAccesModel::FIELDNAME_ID_USER
-                        . " AND " . UserModel::TABLENAME . "." . UserModel::FIELDNAME_ACTIF . " =\'" . UserModel::USER_ACTIF . "\' "
+                        . " AND " . UserModel::TABLENAME . "." . UserModel::FIELDNAME_ACTIF . " ='" . UserModel::USER_ACTIF . "' "
                         . " AND " . IntranetDroitsAccesModel::TABLENAME . "." . IntranetDroitsAccesModel::FIELDNAME_ID_INTRANET_ACTIONS
                         . " = " . IntranetNiveauAccesModel::NIVEAU_FTA_MODIFICATION . ")"
                 ;
@@ -590,8 +590,7 @@ class FtaTransitionModel {
                 . "\n"
                 . "INFORMATIONS DE DEBUGGAGE:\n"
                 . $logTransition
-        ;
-        {
+        ; {
             $expediteur = $prenom . " " . $nom . " <" . $mail . ">";
             envoismail($sujetmail, $corp, $mail, $expediteur, $typeMail);
         }
@@ -707,8 +706,7 @@ class FtaTransitionModel {
                 . $text
                 . "\n\n"
                 . $paramLogTransition
-        ;
-        {
+        ; {
             $expediteur = $prenom . " " . $nom . " <" . $mailUser . ">";
             envoismail($sujetmail, $corp, $mailUser, $expediteur, $typeMail);
         }

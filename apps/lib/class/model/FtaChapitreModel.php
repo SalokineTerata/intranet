@@ -289,6 +289,7 @@ class FtaChapitreModel extends AbstractModel {
                             . '=' . FtaWorkflowStructureModel::TABLENAME . '.' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_CHAPITRE . ') '
                             . ' AND ' . IntranetDroitsAccesModel::TABLENAME . '.' . IntranetDroitsAccesModel::FIELDNAME_NIVEAU_INTRANET_DROITS_ACCES . ' = ' . IntranetNiveauAccesModel::NIVEAU_GENERIC_TRUE
                             . ' AND ' . FtaSuiviProjetModel::TABLENAME . '.' . FtaSuiviProjetModel::FIELDNAME_ID_FTA . ' = \'' . $paramIdFta . '\'  '
+                            . ' AND ' . UserModel::TABLENAME . '.' . UserModel::FIELDNAME_ACTIF . ' = \'' . UserModel::USER_ACTIF . '\'  '
                             . ' GROUP BY ' . UserModel::TABLENAME . '.' . UserModel::FIELDNAME_MAIL
                     ;
                     /**

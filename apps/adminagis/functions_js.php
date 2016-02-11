@@ -208,7 +208,7 @@
         } else {
             var elems = document.getElementsByClassName("site");
             for (var i = 0; i < elems.length; i++) {
-                elems[i].style.visibility = 'hidden';              
+                elems[i].style.visibility = 'hidden';
             }
             var elems2 = document.getElementsByClassName("id_fta_workflow");
             for (var i = 0; i < elems2.length; i++) {
@@ -233,14 +233,26 @@
     function confirmation(paramIdUser) {
         var idUser = paramIdUser;
         {
-            if (confirm('vous etes sur le point de supprimer un utilisateur'))
+            if (confirm('Vous etes sur le point de supprimer un utilisateur.'))
             {
                 location.href = "gestion_salaries11.php?modifier=supprimer&sal_user=" + idUser;
             }
             else {
             }
         }
-
     }
+
+    function confirmation_desactivation(paramIdUser) {
+        var idUser = paramIdUser;
+        {
+            if (confirm('Vous êtes sur le point de désactiver ce compte utilisateur.'))
+            {
+                location.href = "gestion_salaries11.php?modifier=desactivation&sal_user=" + idUser;
+            }
+            else {
+            }
+        }
+    }
+
 </script>
 

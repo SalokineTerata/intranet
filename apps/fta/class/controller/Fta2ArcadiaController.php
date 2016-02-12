@@ -67,31 +67,31 @@ class Fta2ArcadiaController {
      * @var string
      */
     private $xmlText;
-    private $arcadiaUtilisableGroupe;
-    private $arcadiaSiteDeProd;
-    private $arcadiaArticleRefLicCcial;
+    private $XMLarcadiaUtilisableGroupe;
+    private $XMLarcadiaSiteDeProd;
+    private $XMLarcadiaArticleRefLicCcial;
     private $arcadiaArticleRefLicProduction;
-    private $arcadiaParametre;
-    private $arcadiaEanArticle;
-    private $arcadiaDLC;
-    private $arcadiaDureeDeVie;
+    private $XMLarcadiaParametre;
+    private $XMLarcadiaEanArticle;
+    private $XMLarcadiaDLC;
+    private $XMLarcadiaDureeDeVie;
     private $actionProposal;
     private $recordsetBalise;
-    private $arcadiaNoArtKey;
-    private $arcadiaCodeDouane;
-    private $arcadiaLogoEcoEmballage;
-    private $arcadiaDTS;
-    private $arcadiaPoidsMini;
-    private $arcadiaPoidsMaxi;
-    private $arcadiaPoidsMoyenCal;
-    private $arcadiaPoidsMiniBarq;
-    private $arcadiaPoidsMaxiBarq;
-    private $arcadiaPoidsCstUvc;
-    private $arcadiaUniteDeFacturation;
-    private $arcadiaCNUF;
-    private $arcadiaCodPoidsCstUvc;
-    private $arcadiaCodSociete;
-    private $arcadiaProlongationDLC;
+    private $XMLarcadiaNoArtKey;
+    private $XMLarcadiaCodeDouane;
+    private $XMLarcadiaLogoEcoEmballage;
+    private $XMLarcadiaDTS;
+    private $XMLarcadiaPoidsMini;
+    private $XMLarcadiaPoidsMaxi;
+    private $XMLarcadiaPoidsMoyenCal;
+    private $XMLarcadiaPoidsMiniBarq;
+    private $XMLarcadiaPoidsMaxiBarq;
+    private $XMLarcadiaPoidsCstUvc;
+    private $XMLarcadiaUniteDeFacturation;
+    private $XMLarcadiaCNUF;
+    private $XMLarcadiaCodPoidsCstUvc;
+    private $XMLarcadiaCodSociete;
+    private $XMLarcadiaProlongationDLC;
 
     public function __construct($paramFtaModel) {
         /**
@@ -189,12 +189,12 @@ class Fta2ArcadiaController {
         $fta2ArcadiaTrasactionModel = new Fta2ArcadiaTransactionModel($this->getKeyValuePorposal());
         $fta2ArcadiaTrasactionModel->getDataField(Fta2ArcadiaTransactionModel::FIELDNAME_TAG_TYPE_TRANSACTION)->setFieldValue($actionProposal);
         $fta2ArcadiaTrasactionModel->saveToDatabase();
-        $this->setRecordsetBalise($actionProposal);
+        $this->setXMLRecordsetBalise($actionProposal);
         $this->actionProposal = $actionProposal;
     }
 
     /**
-     * Vérification
+     * Vérification de tous les champs de balises
      */
     function transformAll() {
         $this->transformDIN();
@@ -208,108 +208,143 @@ class Fta2ArcadiaController {
         $this->transformUniteFacturation();
         $this->transformCREATE();
         $this->transformSiteDePorduction();
+        $this->transformCodPoidsCstUvc();
     }
 
+    /**
+     * Initialisation des balises 
+     */
     function setAllBalise() {
-        $this->setArcadiaNoArtKey();
-        $this->setArcadiaParametre();
+        $this->setXMLArcadiaNoArtKey();
+        $this->setXMLArcadiaParametre();
     }
 
+    /**
+     * Initialisation des balises dont la valeur ne change pas 
+     */
     function transformCREATE() {
         if ($this->getActionProposal() == self::CREATE) {
             $this->transformCNUF();
             $this->transformUtilisableGroupe();
-            $this->transformCodPoidsCstUvc();
             $this->transformCodSociete();
             $this->transformProlongationDLC();
         }
     }
 
+    /**
+     * Initialisation des balises dont la valeur ne change pas 
+     */
     function transformProlongationDLC() {
-        $this->setArcadiaProlongationDLC();
+        $this->setXMLArcadiaProlongationDLC();
     }
 
+    /**
+     * Initialisation des balises dont la valeur ne change pas 
+     */
     function transformCNUF() {
-        $this->setArcadiaCNUF();
+        $this->setXMLArcadiaCNUF();
     }
 
+    /**
+     * Initialisation des balises dont la valeur ne change pas 
+     */
     function transformCodSociete() {
-        $this->setArcadiaCodSociete();
+        $this->setXMLArcadiaCodSociete();
     }
 
-    function transformCodPoidsCstUvc() {
-        $this->setArcadiaCodPoidsCstUvc();
-    }
-
+    /**
+     * Initialisation des balises dont la valeur ne change pas 
+     */
     function transformUtilisableGroupe() {
-        $this->setArcadiaUtilisableGroupe();
+        $this->setXMLArcadiaUtilisableGroupe();
     }
 
+    /**
+     * Le Code Poids Constant UVC est à oui sauf si unité de facturation est poids variable
+     */
+    function transformCodPoidsCstUvc() {
+        /**
+         * Vérifie la donnée de l'unité de facturation
+         */
+        $codPoidsCstUvc = self::OUI;
+        $uniteFactValue = $this->getFtaModel()->getDataField(FtaModel::FIELDNAME_UNITE_FACTURATION)->getFieldValue();
+        if ($uniteFactValue == AnnexeUniteFacturationModel::ID_KG_POIDS_VARIABLE) {
+            $codPoidsCstUvc = self::NON;
+        }
+        /**
+         * Vérifie l'actualisation de la données
+         */
+        $checkDiff = $this->getFtaModel()->getDataField(FtaModel::FIELDNAME_UNITE_FACTURATION)->isFieldDiff();
+        if ($checkDiff or $this->getActionProposal() == self::CREATE) {
+            $this->setXMLArcadiaCodPoidsCstUvc($codPoidsCstUvc);
+        }
+    }
+
+    /**
+     * On vérifie si le site de production de la Fta a été modifié
+     */
     function transformSiteDePorduction() {
         $checkDiff = $this->getFtaModel()->getDataField(FtaModel::FIELDNAME_SITE_PRODUCTION)->isFieldDiff();
         if ($checkDiff or $this->getActionProposal() == self::CREATE) {
             $geoModel = $this->getFtaModel()->getModelSiteProduction();
-            $this->setArcadiaSiteDeProd($geoModel);
+            $this->setXMLArcadiaSiteDeProd($geoModel);
         }
     }
 
+    /**
+     * On vérifie si la DIN de la Fta a été modifié
+     * En effet cette donnée concerne le Libellé Production et Libellé Commercial
+     */
     function transformDIN() {
         $checkDiff = $this->getFtaModel()->getDataField(FtaModel::FIELDNAME_LIBELLE)->isFieldDiff();
         if ($checkDiff or $this->getActionProposal() == self::CREATE) {
             $dinValue = $this->getFtaModel()->getDataField(FtaModel::FIELDNAME_LIBELLE)->getFieldValue();
-            $this->setArcadiaArticleRefLicCcial($dinValue);
-            $this->setArcadiaArticleRefLicProduction($dinValue);
+            $this->setXMLArcadiaArticleRefLicCcial($dinValue);
+            $this->setXMLArcadiaArticleRefLicProduction($dinValue);
         }
     }
 
+    /**
+     * On vérifie si la EAN Article de la Fta a été modifié
+     * En effet cette donnée concerne le Gencod Administratif
+     */
     function transformEanArticle() {
         $checkDiff = $this->getFtaModel()->getDataField(FtaModel::FIELDNAME_EAN_UVC)->isFieldDiff();
         if ($checkDiff or $this->getActionProposal() == self::CREATE) {
             $eanArticleValue = $this->getFtaModel()->getDataField(FtaModel::FIELDNAME_EAN_UVC)->getFieldValue();
-            $this->setArcadiaEanArticle($eanArticleValue);
+            $this->setXMLArcadiaEanArticle($eanArticleValue);
         }
     }
 
+    /**
+     * On vérifie si la Durée de vie garantie client (en jours) de la Fta a été modifié
+     * En effet cette donnée concerne la DLC Commerciale
+     */
     function transformDLC() {
         $checkDiff = $this->getFtaModel()->getDataField(FtaModel::FIELDNAME_DUREE_DE_VIE)->isFieldDiff();
         if ($checkDiff or $this->getActionProposal() == self::CREATE) {
             $dlcValue = $this->getFtaModel()->getDataField(FtaModel::FIELDNAME_DUREE_DE_VIE)->getFieldValue();
-            $this->setArcadiaDLC($dlcValue);
+            $this->setXMLArcadiaDLC($dlcValue);
         }
     }
 
+    /**
+     * On vérifie si la  Durée de vie Production (en jours) de la Fta a été modifié
+     * En effet cette donnée concerne la Duree de vie
+     */
     function transformDureeDeVie() {
         $checkDiff = $this->getFtaModel()->getDataField(FtaModel::FIELDNAME_DUREE_DE_VIE_TECHNIQUE_PRODUCTION)->isFieldDiff();
         if ($checkDiff or $this->getActionProposal() == self::CREATE) {
             $dureeDeVieValue = $this->getFtaModel()->getDataField(FtaModel::FIELDNAME_DUREE_DE_VIE_TECHNIQUE_PRODUCTION)->getFieldValue();
-            $this->setArcadiaDureeDeVie($dureeDeVieValue);
+            $this->setXMLArcadiaDureeDeVie($dureeDeVieValue);
         }
     }
 
-    function transformCodeDouane() {
-        $checkDiff = $this->getFtaModel()->getDataField(FtaModel::FIELDNAME_CODE_DOUANE_FTA)->isFieldDiff();
-        if ($checkDiff or $this->getActionProposal() == self::CREATE) {
-            $codeDouaneValue = $this->getFtaModel()->getDataField(FtaModel::FIELDNAME_CODE_DOUANE_FTA)->getFieldValue();
-            $this->setArcadiaCodeDouane($codeDouaneValue);
-        }
-    }
-
-    function transformLogoEmballage() {
-        $checkDiff = $this->getFtaModel()->getDataField(FtaModel::FIELDNAME_LOGO_ECO_EMBALLAGE)->isFieldDiff();
-        if ($checkDiff or $this->getActionProposal() == self::CREATE) {
-            $logoEmballageValue = $this->getFtaModel()->getDataField(FtaModel::FIELDNAME_LOGO_ECO_EMBALLAGE)->getFieldValue();
-            $this->setArcadiaLogoEcoEmballage($logoEmballageValue);
-        }
-    }
-
-    function transformUniteFacturation() {
-        $checkDiff = $this->getFtaModel()->getDataField(FtaModel::FIELDNAME_UNITE_FACTURATION)->isFieldDiff();
-        if ($checkDiff or $this->getActionProposal() == self::CREATE) {
-            $uniteFacturationArcadiaValue = $this->getFtaModel()->getModelAnnexeUniteFacturation()->getDataField(AnnexeUniteFacturationModel::FIELDNAME_ID_ARCADIA_UNITE_FACTURATION)->getFieldValue();
-            $this->setArcadiaUniteDeFacturation($uniteFacturationArcadiaValue);
-        }
-    }
-
+    /**
+     * On vérifie si la  Durée de vie Production (en jours)
+     *  ou  la Durée de vie garantie client (en jours) de la Fta a été modifié
+     * En effet une modification engengre le recalcule de DTS
+     */
     function transformDTS() {
         $checkDiffDLC = $this->getFtaModel()->getDataField(FtaModel::FIELDNAME_DUREE_DE_VIE)->isFieldDiff();
         $checkDiffDurreDeVie = $this->getFtaModel()->getDataField(FtaModel::FIELDNAME_DUREE_DE_VIE_TECHNIQUE_PRODUCTION)->isFieldDiff();
@@ -317,73 +352,115 @@ class Fta2ArcadiaController {
             $dlcValue = $this->getFtaModel()->getDataField(FtaModel::FIELDNAME_DUREE_DE_VIE)->getFieldValue();
             $dureeDeVieValue = $this->getFtaModel()->getDataField(FtaModel::FIELDNAME_DUREE_DE_VIE_TECHNIQUE_PRODUCTION)->getFieldValue();
             $dtsValue = $dureeDeVieValue - $dlcValue;
-            $this->setArcadiaDTS($dtsValue);
+            $this->setXMLArcadiaDTS($dtsValue);
         }
     }
 
+    /**
+     * On vérifie si la  code douane de la Fta a été modifié
+     * Et on récupère les 8 premiers caractères si la Fta n'est pas export
+     * si il s'agit d'un export récupérer le code complet
+     */
+    function transformCodeDouane() {
+        $checkDiff = $this->getFtaModel()->getDataField(FtaModel::FIELDNAME_CODE_DOUANE_FTA)->isFieldDiff();
+        if ($checkDiff or $this->getActionProposal() == self::CREATE) {
+            $codeDouaneValue = $this->getFtaModel()->getDataField(FtaModel::FIELDNAME_CODE_DOUANE_FTA)->getFieldValue();
+            $this->setXMLArcadiaCodeDouane($codeDouaneValue);
+        }
+    }
+
+    /**
+     * On vérifie si la classification a pour rayon "Libre service"
+     * Si oui la balise Eco-Emballages est à oui et on ajoute la balise site de reference Eco Emballages
+     * d'apères le site de production
+     * Si non la balise Eco-Emballages est à non
+     */
+    function transformLogoEmballage() {
+        $checkDiff = $this->getFtaModel()->getDataField(FtaModel::FIELDNAME_LOGO_ECO_EMBALLAGE)->isFieldDiff();
+        if ($checkDiff or $this->getActionProposal() == self::CREATE) {
+            $logoEmballageValue = $this->getFtaModel()->getDataField(FtaModel::FIELDNAME_LOGO_ECO_EMBALLAGE)->getFieldValue();
+            $this->setXMLArcadiaLogoEcoEmballage($logoEmballageValue);
+        }
+    }
+
+    /**
+     * On vérifie si l'unité de facturation a été modifié
+     */
+    function transformUniteFacturation() {
+        $checkDiff = $this->getFtaModel()->getDataField(FtaModel::FIELDNAME_UNITE_FACTURATION)->isFieldDiff();
+        if ($checkDiff or $this->getActionProposal() == self::CREATE) {
+            $uniteFacturationArcadiaValue = $this->getFtaModel()->getModelAnnexeUniteFacturation()->getDataField(AnnexeUniteFacturationModel::FIELDNAME_ID_ARCADIA_UNITE_FACTURATION)->getFieldValue();
+            $this->setXMLArcadiaUniteDeFacturation($uniteFacturationArcadiaValue);
+        }
+    }
+
+    /**
+     * On vérifie Poids net de l'unité de vente facturée (en Kg) a été modifié
+     * si oui il renseigne le poid maxi, mini, mini barq, maxi barq, cst uvc et moyenne calculé.
+     */
     function transformPoidsMaxiAndMini() {
         $checkDiff = $this->getFtaModel()->getDataField(FtaModel::FIELDNAME_POIDS_ELEMENTAIRE)->isFieldDiff();
         if ($checkDiff or $this->getActionProposal() == self::CREATE) {
             $poidsUVFValue = $this->getFtaModel()->getDataField(FtaModel::FIELDNAME_POIDS_ELEMENTAIRE)->getFieldValue();
             $poidsUVFValueCalcul = $poidsUVFValue * FtaModel::CONVERSION_KG_EN_G;
-            $this->setArcadiaPoidsMaxi($poidsUVFValueCalcul);
-            $this->setArcadiaPoidsMini($poidsUVFValueCalcul);
-            $this->setArcadiaPoidsMiniBarq($poidsUVFValueCalcul);
-            $this->setArcadiaPoidsMaxiBarq($poidsUVFValueCalcul);
-            $this->setArcadiaPoidsCstUvc($poidsUVFValueCalcul);
-            $this->setArcadiaPoidsMoyenCal($poidsUVFValueCalcul);
+            $this->setXMLArcadiaPoidsMaxi($poidsUVFValueCalcul);
+            $this->setXMLArcadiaPoidsMini($poidsUVFValueCalcul);
+            $this->setXMLArcadiaPoidsMiniBarq($poidsUVFValueCalcul);
+            $this->setXMLArcadiaPoidsMaxiBarq($poidsUVFValueCalcul);
+            $this->setXMLArcadiaPoidsCstUvc($poidsUVFValueCalcul);
+            $this->setXMLArcadiaPoidsMoyenCal($poidsUVFValueCalcul);
         }
     }
 
-    function getRecordsetBalise() {
+    function getXMLRecordsetBalise() {
         return $this->recordsetBalise;
     }
 
-    function setRecordsetBalise($actionProposal) {
+    function setXMLRecordsetBalise($actionProposal) {
         $this->recordsetBalise = self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION . "<Recordset id=\"1\" action=\"" . $actionProposal . "\">" . self::SAUT_DE_LIGNE;
     }
 
-    function getArcadiaNoArtKey() {
-        return $this->arcadiaNoArtKey;
+    function getXMLArcadiaNoArtKey() {
+        return $this->XMLarcadiaNoArtKey;
     }
 
-    function setArcadiaNoArtKey() {
-        $this->arcadiaNoArtKey = self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION . "<!-- Entête -->" . self::SAUT_DE_LIGNE
+    function setXMLArcadiaNoArtKey() {
+        $this->XMLarcadiaNoArtKey = self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION . "<!-- Entête -->" . self::SAUT_DE_LIGNE
                 . self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION
                 . "<NO_ART key=\"TRUE\">" . $this->getFtaModel()->getDataField(FtaModel::FIELDNAME_CODE_ARTICLE_LDC)->getFieldValue()
                 . "</NO_ART>" . self::SAUT_DE_LIGNE;
     }
 
-    function getArcadiaParametre() {
-        return $this->arcadiaParametre;
+    function getXMLArcadiaParametre() {
+        return $this->XMLarcadiaParametre;
     }
 
-    function setArcadiaParametre() {
-        $this->arcadiaParametre = self::TABULATION . "<Parameters>" . self::SAUT_DE_LIGNE
+    function setXMLArcadiaParametre() {
+        $this->XMLarcadiaParametre = self::TABULATION . "<Parameters>" . self::SAUT_DE_LIGNE
                 . self::TABULATION . self::TABULATION . "<IdFirm>40" . "</IdFirm><!-- Agis -->" . self::SAUT_DE_LIGNE
                 . self::TABULATION . self::TABULATION . "<IdArcadia>" . $this->getFtaModel()->getDataField(FtaModel::FIELDNAME_CODE_ARTICLE_LDC)->getFieldValue() . "</IdArcadia><!-- Code article dans Arcadia -->" . self::SAUT_DE_LIGNE
                 . self::TABULATION . self::TABULATION . "<IdFta>" . $this->getFtaModel()->getDataField(FtaModel::KEYNAME)->getFieldValue() . "</IdFta><!-- N° de la FTA -->" . self::SAUT_DE_LIGNE
                 . self::TABULATION . "</Parameters>" . self::SAUT_DE_LIGNE;
     }
 
-    function getArcadiaArticleRefLicCcial() {
-        return $this->arcadiaArticleRefLicCcial;
+    function getXMLArcadiaArticleRefLicCcial() {
+        return $this->XMLarcadiaArticleRefLicCcial;
     }
 
-    function getArcadiaArticleRefLicProduction() {
+    function getXMLArcadiaArticleRefLicProduction() {
         return $this->arcadiaArticleRefLicProduction;
     }
 
-    function setArcadiaArticleRefLicCcial($paramArcadiaArticleRefLicCcial) {
+    function setXMLArcadiaArticleRefLicCcial($paramArcadiaArticleRefLicCcial) {
         $value = "";
         if ($paramArcadiaArticleRefLicCcial) {
             $value = "<![CDATA[" . $paramArcadiaArticleRefLicCcial . "]]>";
         }
-        $this->arcadiaArticleRefLicCcial = self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION
+        $this->XMLarcadiaArticleRefLicCcial = self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION
                 . "<LIB_CCIAL>" . $value . "</LIB_CCIAL><!-- DIN de la FTA -->" . self::SAUT_DE_LIGNE;
     }
 
-    function setArcadiaArticleRefLicProduction($paramArcadiaArticleRefLicProduction) {
+    function setXMLArcadiaArticleRefLicProduction($paramArcadiaArticleRefLicProduction) {
         $value = "";
         if ($paramArcadiaArticleRefLicProduction) {
             $value = "<![CDATA[" . $paramArcadiaArticleRefLicProduction . "]]>";
@@ -392,112 +469,112 @@ class Fta2ArcadiaController {
                 . "<LIB_PRODUCTION>" . $value . "</LIB_PRODUCTION><!-- DIN de la FTA -->" . self::SAUT_DE_LIGNE;
     }
 
-    function getArcadiaEanArticle() {
-        return $this->arcadiaEanArticle;
+    function getXMLArcadiaEanArticle() {
+        return $this->XMLarcadiaEanArticle;
     }
 
-    function setArcadiaEanArticle($paramArcadiaEanArticle) {
-        $this->arcadiaEanArticle = self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION
+    function setXMLArcadiaEanArticle($paramArcadiaEanArticle) {
+        $this->XMLarcadiaEanArticle = self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION
                 . "<!-- Class./Ident. -->" . self::SAUT_DE_LIGNE
                 . self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION
                 . "<COD_GENCOD_ADM>" . $paramArcadiaEanArticle . "</COD_GENCOD_ADM>" . self::SAUT_DE_LIGNE;
     }
 
-    function getArcadiaCodeDouane() {
-        return $this->arcadiaCodeDouane;
+    function getXMLArcadiaCodeDouane() {
+        return $this->XMLarcadiaCodeDouane;
     }
 
-    function setArcadiaCodeDouane($paramArcadiaCodeDouane) {
-        $this->arcadiaCodeDouane = self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION
+    function setXMLArcadiaCodeDouane($paramArcadiaCodeDouane) {
+        $this->XMLarcadiaCodeDouane = self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION
                 . "<!-- Export/Compta -->" . self::SAUT_DE_LIGNE
                 . self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION
                 . "<COD_NDP>" . $paramArcadiaCodeDouane . "</COD_NDP>" . self::SAUT_DE_LIGNE;
     }
 
-    function getArcadiaLogoEcoEmballage() {
-        return $this->arcadiaLogoEcoEmballage;
+    function getXMLArcadiaLogoEcoEmballage() {
+        return $this->XMLarcadiaLogoEcoEmballage;
     }
 
-    function setArcadiaLogoEcoEmballage($paramArcadiaLogoEcoEmballage) {
-        $this->arcadiaLogoEcoEmballage = self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION
+    function setXMLArcadiaLogoEcoEmballage($paramArcadiaLogoEcoEmballage) {
+        $this->XMLarcadiaLogoEcoEmballage = self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION
                 . "<!-- Fourniture -->" . self::SAUT_DE_LIGNE
                 . self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION
                 . "<SOUMIS_ECO_EMBALLAGE>" . $paramArcadiaLogoEcoEmballage . "</SOUMIS_ECO_EMBALLAGE>" . self::SAUT_DE_LIGNE;
     }
 
-    function getArcadiaProlongationDLC() {
-        return $this->arcadiaProlongationDLC;
+    function getXMLArcadiaProlongationDLC() {
+        return $this->XMLarcadiaProlongationDLC;
     }
 
-    function setArcadiaProlongationDLC() {
-        $this->arcadiaProlongationDLC = self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION
+    function setXMLArcadiaProlongationDLC() {
+        $this->XMLarcadiaProlongationDLC = self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION
                 . "<PROLOGATION_DLC>" . self::NON . "</PROLOGATION_DLC><!-- Non --> " . self::SAUT_DE_LIGNE;
     }
 
-    function getArcadiaCodSociete() {
-        return $this->arcadiaCodSociete;
+    function getXMLArcadiaCodSociete() {
+        return $this->XMLarcadiaCodSociete;
     }
 
-    function setArcadiaCodSociete() {
-        $this->arcadiaCodSociete = self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION
+    function setXMLArcadiaCodSociete() {
+        $this->XMLarcadiaCodSociete = self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION
                 . "<COD_SOCIETE_RESP_PV>" . self::COD_SOCIETE_AGIS . "</COD_SOCIETE_RESP_PV><!-- Agis --> " . self::SAUT_DE_LIGNE;
     }
 
-    function getArcadiaCodPoidsCstUvc() {
-        return $this->arcadiaCodPoidsCstUvc;
+    function getXMLArcadiaCodPoidsCstUvc() {
+        return $this->XMLarcadiaCodPoidsCstUvc;
     }
 
-    function setArcadiaCodPoidsCstUvc() {
-        $this->arcadiaCodPoidsCstUvc = self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION
-                . "<COD_POID_CST_UVC>1</COD_POID_CST_UVC>" . self::SAUT_DE_LIGNE;
+    function setXMLArcadiaCodPoidsCstUvc($paramArcadiaCodPoidsCsrUvc) {
+        $this->XMLarcadiaCodPoidsCstUvc = self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION
+                . "<COD_POID_CST_UVC>" . $paramArcadiaCodPoidsCsrUvc . "</COD_POID_CST_UVC>" . self::SAUT_DE_LIGNE;
     }
 
-    function getArcadiaCNUF() {
-        return $this->arcadiaCNUF;
+    function getXMLArcadiaCNUF() {
+        return $this->XMLarcadiaCNUF;
     }
 
-    function setArcadiaCNUF() {
-        $this->arcadiaCNUF = self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION
+    function setXMLArcadiaCNUF() {
+        $this->XMLarcadiaCNUF = self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION
                 . "<CNUF>" . self::CNUF_AGIS . "</CNUF>" . self::SAUT_DE_LIGNE;
     }
 
-    function getArcadiaUtilisableGroupe() {
-        return $this->arcadiaUtilisableGroupe;
+    function getXMLArcadiaUtilisableGroupe() {
+        return $this->XMLarcadiaUtilisableGroupe;
     }
 
-    function setArcadiaUtilisableGroupe() {
-        $this->arcadiaUtilisableGroupe = self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION
+    function setXMLArcadiaUtilisableGroupe() {
+        $this->XMLarcadiaUtilisableGroupe = self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION
                 . "<!-- Info générales -->" . self::SAUT_DE_LIGNE
                 . self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION
                 . "<UTILISABLE_SITE>" . self::OUI . "</UTILISABLE_SITE><!-- Oui -->" . self::SAUT_DE_LIGNE;
     }
 
-    function getArcadiaSiteDeProd() {
-        return $this->arcadiaSiteDeProd;
+    function getXMLArcadiaSiteDeProd() {
+        return $this->XMLarcadiaSiteDeProd;
     }
 
-    function setArcadiaSiteDeProd(GeoModel $paramArcadiaSiteDeProdModel) {
-        $this->arcadiaSiteDeProd = self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION
+    function setXMLArcadiaSiteDeProd(GeoModel $paramArcadiaSiteDeProdModel) {
+        $this->XMLarcadiaSiteDeProd = self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION
                 . "<SITE_PROD_EE>"
                 . $paramArcadiaSiteDeProdModel->getDataField(GeoModel::FIELDNAME_ID_SITE_GROUPE)->getFieldValue() . "</SITE_PROD_EE><!-- "
                 . $paramArcadiaSiteDeProdModel->getDataField(GeoModel::FIELDNAME_GEO)->getFieldValue() . " -->" . self::SAUT_DE_LIGNE;
     }
 
-    function getArcadiaDTS() {
-        return $this->arcadiaDTS;
+    function getXMLArcadiaDTS() {
+        return $this->XMLarcadiaDTS;
     }
 
-    function setArcadiaDTS($paramArcadiaDTS) {
-        $this->arcadiaDTS = self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION
+    function setXMLArcadiaDTS($paramArcadiaDTS) {
+        $this->XMLarcadiaDTS = self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION
                 . "<DTS>" . $paramArcadiaDTS . "</DTS>" . self::SAUT_DE_LIGNE;
     }
 
-    function getArcadiaUniteDeFacturation() {
-        return $this->arcadiaUniteDeFacturation;
+    function getXMLArcadiaUniteDeFacturation() {
+        return $this->XMLarcadiaUniteDeFacturation;
     }
 
-    function setArcadiaUniteDeFacturation($paramArcadiaUniteDeFacturation) {
-        $this->arcadiaUniteDeFacturation = self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION
+    function setXMLArcadiaUniteDeFacturation($paramArcadiaUniteDeFacturation) {
+        $this->XMLarcadiaUniteDeFacturation = self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION
                 . "<!-- Info Fact -->" . self::SAUT_DE_LIGNE
                 . self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION
                 . "<UNITE_FACT>" . $paramArcadiaUniteDeFacturation . "</UNITE_FACT>" . self::SAUT_DE_LIGNE
@@ -505,122 +582,122 @@ class Fta2ArcadiaController {
                 . "<UNITE_FACT_PRIVE>" . $paramArcadiaUniteDeFacturation . "</UNITE_FACT_PRIVE>" . self::SAUT_DE_LIGNE;
     }
 
-    function getArcadiaPoidsMini() {
-        return $this->arcadiaPoidsMini;
+    function getXMLArcadiaPoidsMini() {
+        return $this->XMLarcadiaPoidsMini;
     }
 
-    function getArcadiaPoidsMaxi() {
-        return $this->arcadiaPoidsMaxi;
+    function getXMLArcadiaPoidsMaxi() {
+        return $this->XMLarcadiaPoidsMaxi;
     }
 
-    function setArcadiaPoidsMini($paramArcadiaPoidsMini) {
-        $this->arcadiaPoidsMini = self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION
+    function setXMLArcadiaPoidsMini($paramArcadiaPoidsMini) {
+        $this->XMLarcadiaPoidsMini = self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION
                 . "<!-- Pds Mini/Maxi -->" . self::SAUT_DE_LIGNE
                 . self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION
                 . "<POIDS_MINI>" . $paramArcadiaPoidsMini . "</POIDS_MINI>" . self::SAUT_DE_LIGNE;
     }
 
-    function setArcadiaPoidsMaxi($paramArcadiaPoidsMAxi) {
-        $this->arcadiaPoidsMaxi = self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION
+    function setXMLArcadiaPoidsMaxi($paramArcadiaPoidsMAxi) {
+        $this->XMLarcadiaPoidsMaxi = self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION
                 . "<POIDS_MAXI>" . $paramArcadiaPoidsMAxi . "</POIDS_MAXI>" . self::SAUT_DE_LIGNE;
     }
 
-    function getArcadiaPoidsMoyenCal() {
-        return $this->arcadiaPoidsMoyenCal;
+    function getXMLArcadiaPoidsMoyenCal() {
+        return $this->XMLarcadiaPoidsMoyenCal;
     }
 
-    function getArcadiaPoidsMiniBarq() {
-        return $this->arcadiaPoidsMiniBarq;
+    function getXMLArcadiaPoidsMiniBarq() {
+        return $this->XMLarcadiaPoidsMiniBarq;
     }
 
-    function getArcadiaPoidsCstUvc() {
-        return $this->arcadiaPoidsCstUvc;
+    function getXMLArcadiaPoidsCstUvc() {
+        return $this->XMLarcadiaPoidsCstUvc;
     }
 
-    function getArcadiaPoidsMaxiBarq() {
-        return $this->arcadiaPoidsMaxiBarq;
+    function getXMLArcadiaPoidsMaxiBarq() {
+        return $this->XMLarcadiaPoidsMaxiBarq;
     }
 
-    function setArcadiaPoidsMoyenCal($paramArcadiaPoidsMoyenCal) {
-        $this->arcadiaPoidsMoyenCal = self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION
+    function setXMLArcadiaPoidsMoyenCal($paramArcadiaPoidsMoyenCal) {
+        $this->XMLarcadiaPoidsMoyenCal = self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION
                 . "<!-- Info Prod 1 -->" . self::SAUT_DE_LIGNE
                 . self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION
                 . "<POIDS_MOY_CALCULE>" . $paramArcadiaPoidsMoyenCal . "</POIDS_MOY_CALCULE>" . self::SAUT_DE_LIGNE;
     }
 
-    function setArcadiaPoidsMiniBarq($paramArcadiaPoidsMiniBarq) {
-        $this->arcadiaPoidsMiniBarq = self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION
+    function setXMLArcadiaPoidsMiniBarq($paramArcadiaPoidsMiniBarq) {
+        $this->XMLarcadiaPoidsMiniBarq = self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION
                 . "<COD_POIDS_MINI_BARQ>" . $paramArcadiaPoidsMiniBarq . "</COD_POIDS_MINI_BARQ>" . self::SAUT_DE_LIGNE;
     }
 
-    function setArcadiaPoidsCstUvc($paramArcadiaPoidsCstUvc) {
-        $this->arcadiaPoidsCstUvc = self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION
+    function setXMLArcadiaPoidsCstUvc($paramArcadiaPoidsCstUvc) {
+        $this->XMLarcadiaPoidsCstUvc = self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION
                 . "<POIDS_CST_UVC>" . $paramArcadiaPoidsCstUvc . "</POIDS_CST_UVC>" . self::SAUT_DE_LIGNE;
     }
 
-    function setArcadiaPoidsMaxiBarq($paramArcadiaPoidsMaxiBarq) {
-        $this->arcadiaPoidsMaxiBarq = self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION
+    function setXMLArcadiaPoidsMaxiBarq($paramArcadiaPoidsMaxiBarq) {
+        $this->XMLarcadiaPoidsMaxiBarq = self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION
                 . "<POIDS_MAXI_BARQ>" . $paramArcadiaPoidsMaxiBarq . "</POIDS_MAXI_BARQ>" . self::SAUT_DE_LIGNE;
     }
 
-    function getArcadiaDLC() {
-        return $this->arcadiaDLC;
+    function getXMLArcadiaDLC() {
+        return $this->XMLarcadiaDLC;
     }
 
-    function getArcadiaDureeDeVie() {
-        return $this->arcadiaDureeDeVie;
+    function getXMLArcadiaDureeDeVie() {
+        return $this->XMLarcadiaDureeDeVie;
     }
 
-    function setArcadiaDLC($arcadiaDLC) {
-        $this->arcadiaDLC = self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION
+    function setXMLArcadiaDLC($arcadiaDLC) {
+        $this->XMLarcadiaDLC = self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION
                 . "<!-- Qualite -->" . self::SAUT_DE_LIGNE
                 . self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION
                 . "<DLC_CCIAL>" . $arcadiaDLC . "</DLC_CCIAL>" . self::SAUT_DE_LIGNE;
     }
 
-    function setArcadiaDureeDeVie($arcadiaDureeDeVie) {
-        $this->arcadiaDureeDeVie = self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION
+    function setXMLArcadiaDureeDeVie($arcadiaDureeDeVie) {
+        $this->XMLarcadiaDureeDeVie = self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION
                 . "<DUREE_VIE>" . $arcadiaDureeDeVie . "</DUREE_VIE>" . self::SAUT_DE_LIGNE;
     }
 
     function generateXmlText() {
         $xmlText .='<?xml version="1.0" encoding="UTF-8" ?>' . self::SAUT_DE_LIGNE . self::ESPACE
                 . "<Transaction id=\"" . $this->getKeyValuePorposal() . "\" version=\"1.1\" type=\"proposal\">" . self::SAUT_DE_LIGNE
-                . $this->getArcadiaParametre()
+                . $this->getXMLArcadiaParametre()
                 . self::TABLE_START
                 . self::ARTICLE_REF_START
                 . self::DATA_IMPORT_START
-                . $this->getRecordsetBalise()
-                . $this->getArcadiaNoArtKey() //<!-- Entête -->
-                . $this->getArcadiaArticleRefLicCcial()
-                . $this->getArcadiaArticleRefLicProduction()
+                . $this->getXMLRecordsetBalise()
+                . $this->getXMLArcadiaNoArtKey() //<!-- Entête -->
+                . $this->getXMLArcadiaArticleRefLicCcial()
+                . $this->getXMLArcadiaArticleRefLicProduction()
                 . self::ESPACE . self::SAUT_DE_LIGNE // <!-- Info générales -->
-                . $this->getArcadiaUtilisableGroupe()
+                . $this->getXMLArcadiaUtilisableGroupe()
                 . self::ESPACE . self::SAUT_DE_LIGNE // <!-- Class./Ident. -->
-                . $this->getArcadiaEanArticle()
-                . $this->getArcadiaCNUF()
+                . $this->getXMLArcadiaEanArticle()
+                . $this->getXMLArcadiaCNUF()
                 . self::ESPACE . self::SAUT_DE_LIGNE // <!-- Qualite -->
-                . $this->getArcadiaDLC()
-                . $this->getArcadiaDureeDeVie()
-                . $this->getArcadiaDTS()
-                . $this->getArcadiaProlongationDLC()
+                . $this->getXMLArcadiaDLC()
+                . $this->getXMLArcadiaDureeDeVie()
+                . $this->getXMLArcadiaDTS()
+                . $this->getXMLArcadiaProlongationDLC()
                 . self::ESPACE . self::SAUT_DE_LIGNE //<!-- Info Prod 1 -->
-                . $this->getArcadiaPoidsMoyenCal()
-                . $this->getArcadiaPoidsMiniBarq()
-                . $this->getArcadiaPoidsMaxiBarq()
-                . $this->getArcadiaCodPoidsCstUvc()
-                . $this->getArcadiaPoidsCstUvc()
+                . $this->getXMLArcadiaPoidsMoyenCal()
+                . $this->getXMLArcadiaPoidsMiniBarq()
+                . $this->getXMLArcadiaPoidsMaxiBarq()
+                . $this->getXMLArcadiaCodPoidsCstUvc()
+                . $this->getXMLArcadiaPoidsCstUvc()
                 . self::ESPACE . self::SAUT_DE_LIGNE //<!-- Info Prod 2 -->
-                . $this->getArcadiaSiteDeProd()
+                . $this->getXMLArcadiaSiteDeProd()
                 . self::ESPACE . self::SAUT_DE_LIGNE //<!-- Pds Mini/Maxi -->
-                . $this->getArcadiaPoidsMini()
-                . $this->getArcadiaPoidsMaxi()
+                . $this->getXMLArcadiaPoidsMini()
+                . $this->getXMLArcadiaPoidsMaxi()
                 . self::ESPACE . self::SAUT_DE_LIGNE //<!-- Info Fact -->
-                . $this->getArcadiaUniteDeFacturation()
+                . $this->getXMLArcadiaUniteDeFacturation()
                 . self::ESPACE . self::SAUT_DE_LIGNE //<!-- Export/Compta -->
-                . $this->getArcadiaCodeDouane()
+                . $this->getXMLArcadiaCodeDouane()
                 . self::ESPACE . self::SAUT_DE_LIGNE //<!-- Fourniture -->
-                . $this->getArcadiaLogoEcoEmballage()
+                . $this->getXMLArcadiaLogoEcoEmballage()
                 . self::ESPACE . self::SAUT_DE_LIGNE
                 . self::RECORDSET_END
                 . self::DATA_IMPORT_END

@@ -64,7 +64,7 @@ class FtaController {
         if (!$paramDate) {
             $paramDate = date('d-m-Y');
         } else {
-            $paramDate = FtaController::changementDuFormatDeDate($paramDate);
+            $paramDate = FtaController::changementDuFormatDeDateFR($paramDate);
         }
         $newComment = "\n"
                 . "==============================\n\n"
@@ -120,7 +120,12 @@ class FtaController {
                 . '>' . self::CALLBACK_LINK_TO_TRANSITER_PAGE_VALIDATE . '</a></center></td>';
     }
 
-    public static function changementDuFormatDeDate($paramValeurDate) {
+    /**
+     * Modifie le format de date vers le FR
+     * @param string $paramValeurDate
+     * @return string
+     */
+    public static function changementDuFormatDeDateFR($paramValeurDate) {
         /*
           Dictionnaire des variables:
          * **************************
@@ -146,6 +151,20 @@ class FtaController {
         }
         $return = $jours . "-" . $mois . "-" . $annee;
         return $return;
+    }
+
+    /**
+     * On récupère le nombre indiqué de caractères
+     * @param string $paramString
+     * @param int $paramLimitNumber
+     * @return string
+     */
+    public static function getFirstStringNumber($paramString, $paramLimitNumber) {
+        $result = "";
+        if ($paramString) {
+            $result = substr($paramString, 0, $paramLimitNumber);
+        }
+        return $result;
     }
 
 }

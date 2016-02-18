@@ -42,6 +42,7 @@ Historique des modifications:
                     <COD_GENCOD_ADM>3366760030693</COD_GENCOD_ADM>
                     <CNUF>336676</CNUF>
                     <COD_FAMVTE>499</COD_FAMVTE><!-- APERITIF -->
+                    <IS_EXPORT>0</IS_EXPORT><!-- Non -->
                     <IS_HALLAL>0</IS_HALLAL><!-- Non -->
                     <COD_SOUSFAM>442</COD_SOUSFAM><!-- APERITIF -->
                     <COD_GENERIQUE_FM></COD_GENERIQUE_FM><!-- Sera généré automatiquement -->

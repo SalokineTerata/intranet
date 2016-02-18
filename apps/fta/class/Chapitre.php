@@ -514,7 +514,7 @@ class Chapitre {
 
         $ftaView = new FtaView($ftaModel);
         $ftaView->setIsEditable($isEditable);
-         
+
         $ftaView->setFtaChapitreModelById(self::ID_CHAPITRE_IDENTITE);
         /**
          * Ftaview indépendant pour les epace de travaille qui ne doitvent pas être éditables
@@ -545,7 +545,12 @@ class Chapitre {
          * Deviendra une liste deroulante dépendante des donné choisie dans la classification
          */
         //Codification
-        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_SUFFIXE_AGROLOGIC_FTA);
+//        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_SUFFIXE_AGROLOGIC_FTA);
+   
+        //Données lié à arcadia 
+        $bloc.= $ftaView2->getHtmlArcadiaDataNotEditable();
+
+        $bloc.=$ftaView->getHtmlArcadiaDataVariableEditable();
 
         $bloc.='<tr class=titre_principal><td class>Caractéristiques générales du produit</td></tr>';
 
@@ -636,7 +641,7 @@ class Chapitre {
         $ftaModel->setDataFtaTableToCompare();
         $ftaView = new FtaView($ftaModel);
         $ftaView->setIsEditable($isEditable);
-         
+
 
         $ftaView->setFtaChapitreModelById(self::ID_CHAPITRE_IDENTITE);
 
@@ -810,7 +815,7 @@ class Chapitre {
         $ftaModel = new FtaModel($id_fta);
         $ftaModel->setDataFtaTableToCompare();
         $ftaView = new FtaView($ftaModel);
-        $ftaView->setIsEditable($isEditable);         
+        $ftaView->setIsEditable($isEditable);
         $ftaView->setFtaChapitreModelById(self::ID_CHAPITRE_IDENTITE);
 
         //Site d'expedition
@@ -835,7 +840,7 @@ class Chapitre {
         $ftaModel = new FtaModel($id_fta);
         $ftaModel->setDataFtaTableToCompare();
         $ftaView = new FtaView($ftaModel);
-        $ftaView->setIsEditable($isEditable);        
+        $ftaView->setIsEditable($isEditable);
         $ftaView->setFtaChapitreModelById(self::ID_CHAPITRE_IDENTITE);
 
         //Site d'assemblage
@@ -972,7 +977,7 @@ class Chapitre {
         $ftaModel->setDataFtaTableToCompare();
         $ftaView = new FtaView($ftaModel);
         $ftaView->setIsEditable($isEditable);
-         
+
 
         $ftaView->setFtaChapitreModelById(self::ID_CHAPITRE_IDENTITE);
 
@@ -1958,7 +1963,7 @@ class Chapitre {
         $ftaModel = new FtaModel($id_fta);
         $ftaModel->setDataFtaTableToCompare();
         $ftaView = new FtaView($ftaModel);
-        $ftaView->setIsEditable($isEditable);       
+        $ftaView->setIsEditable($isEditable);
         $ftaView->setFtaChapitreModelById(self::ID_CHAPITRE_IDENTITE);
 
 
@@ -2024,7 +2029,7 @@ class Chapitre {
         //Identifiant FTA
         $ftaModel = new FtaModel($id_fta);
         $ftaView = new FtaView($ftaModel);
-        $ftaView->setIsEditable($isEditable);        
+        $ftaView->setIsEditable($isEditable);
         $ftaView->setFtaChapitreModelById(self::ID_CHAPITRE_IDENTITE);
 
         //Site d'assemblage

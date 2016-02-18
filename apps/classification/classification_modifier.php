@@ -76,6 +76,7 @@ $html_table = "table "              //Permet d'harmoniser les tableaux
 if ($id_fta_classification2) {
 
     $ClassificationFta2Model = new ClassificationFta2Model($id_fta_classification2);
+    $ClassificationFta2Model->setIsEditable($isEditable);
     $idProprietaireGroupe = $ClassificationFta2Model->getDataField(ClassificationFta2Model::FIELDNAME_ID_PROPRIETAIRE_GROUPE)->getFieldValue();
     $idProprietaireEnseigne = $ClassificationFta2Model->getDataField(ClassificationFta2Model::FIELDNAME_ID_PROPRIETAIRE_ENSEIGNE)->getFieldValue();
     $idMarque = $ClassificationFta2Model->getDataField(ClassificationFta2Model::FIELDNAME_ID_MARQUE)->getFieldValue();
@@ -84,14 +85,26 @@ if ($id_fta_classification2) {
     $idEnvironnement = $ClassificationFta2Model->getDataField(ClassificationFta2Model::FIELDNAME_ID_ENVIRONNEMENT)->getFieldValue();
     $idReseau = $ClassificationFta2Model->getDataField(ClassificationFta2Model::FIELDNAME_ID_RESEAU)->getFieldValue();
     $idSaisonalite = $ClassificationFta2Model->getDataField(ClassificationFta2Model::FIELDNAME_ID_SAISONNALITE)->getFieldValue();
+
+    $CategorieOptiventes = $ClassificationFta2Model->getHtmlDataField(ClassificationFta2Model::FIELDNAME_CATEGORIE_PRODUIT_OPTIVENTES);
+
+    $RaccourcisClassif = $ClassificationFta2Model->getHtmlClassificationRaccourcis($action);
+    
+    $CategorieFamilleBudget = $ClassificationFta2Model->getHtmlArcadiaGammeFamilleBudget($action);
 }
 
 if ($action == 'modifier') {
     $titre = "Modification de la classification  identifiant n°" . $id_fta_classification2;
     $action = "modifier";
+
+    $HtmlDonnesArcadia = $CategorieOptiventes
+            . $RaccourcisClassif
+            . $CategorieFamilleBudget;
 } else {
     $titre = "Ajout d'une classification";
     $action = "ajout";
+
+    $HtmlDonnesArcadia = "<b> Après l'ajout d'une classification vous serez redirigé vers une autre page, afin de sélectionner les éléments lier à arcadia</b>";
 }
 $bloc .= "<" . $html_table . "><tr class=titre>"
         . "<td>Proprietaire (Groupe)</td>"
@@ -131,6 +144,9 @@ $bloc.="<td>" . ClassificationFta2Model::getClassificationListeSansDependance($i
 
 //$RaccourcisClassif = new HtmlSubForm_RNN($paramArrayPrimaryContent, $paramSubFormPrimaryModelClassName, $paramPrimaryLabel, $secondaryTableNamesAndIdKeyValue);
 
+/*
+  Création des objets HTML (listes déroulante, cases à cocher ...etc.)
+ */
 
 /*
   Sélection du mode d'affichage
@@ -174,14 +190,6 @@ switch ($output) {
      * ********* */
 
 
-    /*
-      Création des objets HTML (listes déroulante, cases à cocher ...etc.)
-     */
-
-
-
-
-
     /*     * ************
       Début Code HTML
      * ************ */
@@ -203,22 +211,15 @@ switch ($output) {
 
                 " . $bloc . "            
 
-             </td></tr>
-              <tr><td>
-              " . $RaccourcisClassif . "
-              </td></tr> 
-              <tr><td>
-              " . $CategorieOptiventes . "
-              </td></tr> 
-              <tr><td>
-              " . $CategorieFamilleBudget . "
-              </td></tr> 
-             <tr><td>
+             </td></tr>  
+                " . $HtmlDonnesArcadia . "
+             <tr><td>            
                  <center>
                  <input type=submit value=Enregistrer>
                  </center>
 
-             </td>             
+             </td>   
+          
              </table>
 
              </form>

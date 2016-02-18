@@ -59,6 +59,7 @@ class FtaConditionnementModel extends AbstractModel {
     const PALETTE_NOMBRE_COLIS_PAR_COUCHE = 'colis_couche';
     const PALETTE_NOMBRE_TOTAL_PAR_CARTON = 'total_colis';
     const PALETTE_NOMBRE_TOTAL_PAR_CARTON_LABEL = 'Nombre total de Carton par palette';
+    const FONCTIONNAME_VERSIONNING = 'setDataFtaConditionnementTableToCompare';
 
     /**
      * FTA associée
@@ -346,8 +347,17 @@ class FtaConditionnementModel extends AbstractModel {
         return $array;
     }
 
+    /*
+
+     */
+
     /**
-     * 
+     * On identifie les clé étrangères sur lesquelle on veut enregistrer les donnée cad FtaConditionnement
+     * Cette array doit être utilisé de cette manière 
+     * Array (
+     * nom de table,
+     * clé étrangère de la table présenté
+     * valeur de la clé étrangère);
      * @param int $paramIdFta
      * @param int $paramIdAnnexeEmballage
      * @param int $paramIdAnnexeEmballageGroupeType
@@ -558,7 +568,7 @@ class FtaConditionnementModel extends AbstractModel {
      * @param int $paramIdFtaRole
      * @return string
      */
-    public static function getAddLinkBeforeConditionnement($paramIdFta, $paramIdChapitre, $paramTypeEmballage, $paramSyntheseAction,  $paramIdFtaEtat, $paramAbreviationEtat, $paramIdFtaRole) {
+    public static function getAddLinkBeforeConditionnement($paramIdFta, $paramIdChapitre, $paramTypeEmballage, $paramSyntheseAction, $paramIdFtaEtat, $paramAbreviationEtat, $paramIdFtaRole) {
         return 'ajout_conditionnement.php?'
                 . 'id_fta=' . $paramIdFta
                 . '&id_annexe_emballage_groupe_type=' . $paramTypeEmballage
@@ -577,13 +587,13 @@ class FtaConditionnementModel extends AbstractModel {
      * @param int $paramIdChapitre
      * @param int $paramTypeEmballage
      * @param string $paramSyntheseAction
-     
+
      * @param int $paramIdFtaEtat
      * @param string $paramAbreviationEtat
      * @param int $paramIdFtaRole
      * @return string
      */
-    public static function getAddLinkAfterConditionnement($paramIdFta, $paramIdChapitre, $paramTypeEmballage, $paramSyntheseAction,  $paramIdFtaEtat, $paramAbreviationEtat, $paramIdFtaRole) {
+    public static function getAddLinkAfterConditionnement($paramIdFta, $paramIdChapitre, $paramTypeEmballage, $paramSyntheseAction, $paramIdFtaEtat, $paramAbreviationEtat, $paramIdFtaRole) {
         return '<a href=ajout_conditionnement.php?'
                 . 'id_fta=' . $paramIdFta
                 . '&id_annexe_emballage_groupe_type=' . $paramTypeEmballage

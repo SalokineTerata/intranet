@@ -58,6 +58,14 @@ class FtaModel extends AbstractModel {
     const FIELDNAME_ETIQUETTE_CODESOFT = "id_etiquette_codesoft_arti2";
     const FIELDNAME_ETUDE_PRIX_FTA = "etude_prix_fta";
     const FIELDNAME_FREQUENCE_HEBDOMADAIRE_ESTIMEE_COMMANDE = "frequence_hebdomadaire_estime_commande";
+    const FIELDNAME_ID_ARCADIA_CATEGEORIE_PRODUIT_OPTIVENTES = "id_arcadia_categeorie_produit_optiventes";
+    const FIELDNAME_ID_ARCADIA_FAMILLE_BUDGET = "id_arcadia_famille_budget";
+    const FIELDNAME_ID_ARCADIA_FAMILLE_VENTE = "id_arcadia_famille_vente";
+    const FIELDNAME_ID_ARCADIA_MARQUE = "id_arcadia_marque";
+    const FIELDNAME_ID_ARCADIA_GAMME_COOP = "id_arcadia_gamme_coop";
+    const FIELDNAME_ID_ARCADIA_GAMME_FAMILLE_BUDGET = "id_arcadia_gamme_famille_budget";
+    const FIELDNAME_ID_ARCADIA_SOUS_FAMILLE = "id_arcadia_sous_famille";
+    const FIELDNAME_ID_CLASSIFICATION_RACCOURCIS = "id_classification_raccourcis";
     const FIELDNAME_ID_FTA_CLASSIFICATION2 = "id_fta_classification2";
     const FIELDNAME_ID_FTA_ETAT = "id_fta_etat";
     const FIELDNAME_LIBELLE = "LIBELLE";
@@ -143,10 +151,21 @@ class FtaModel extends AbstractModel {
     private $modelSiteExpedition;
 
     /**
+     * Catégorie Produit Optiventes
+     * @var ArcadiaCategorieProduitOptiventesModel
+     */
+    private $modelArcadiaCategorieProduitOptiventes;
+
+    /**
      *
      * @var AnnexeUniteFacturationModel 
      */
     private $modelAnnexeUniteFacturation;
+    /**
+     *
+     * @var AnnexeEnvironnementConservationGroupeModel 
+     */
+    private $modelAnnexeEnvironnementConservationGroupe;
 
     /**
      * Site de production de la FTA
@@ -187,6 +206,14 @@ class FtaModel extends AbstractModel {
         );
         $this->setModelAnnexeUniteFacturation(
                 new AnnexeUniteFacturationModel($this->getDataField(self::FIELDNAME_UNITE_FACTURATION)->getFieldValue()
+                , DatabaseRecord::VALUE_DONT_CREATE_RECORD_IN_DATABASE_IF_KEY_DOESNT_EXIST)
+        );
+        $this->setModelArcadiaCategorieProduitOptiventes(
+                new ArcadiaCategorieProduitOptiventesModel($this->getDataField(self::FIELDNAME_ID_ARCADIA_CATEGEORIE_PRODUIT_OPTIVENTES)->getFieldValue()
+                , DatabaseRecord::VALUE_DONT_CREATE_RECORD_IN_DATABASE_IF_KEY_DOESNT_EXIST)
+        );
+        $this->setModelAnnexeEnvironnementConservationGroupe(
+                new AnnexeEnvironnementConservationGroupeModel($this->getDataField(self::FIELDNAME_ENVIRONNEMENT_CONSERVATION)->getFieldValue()
                 , DatabaseRecord::VALUE_DONT_CREATE_RECORD_IN_DATABASE_IF_KEY_DOESNT_EXIST)
         );
     }
@@ -519,6 +546,23 @@ class FtaModel extends AbstractModel {
         $this->donneeEmballagePallette = $donneeEmballagePallette;
     }
 
+    function getModelArcadiaCategorieProduitOptiventes() {
+        return $this->modelArcadiaCategorieProduitOptiventes;
+    }
+
+    function setModelArcadiaCategorieProduitOptiventes(ArcadiaCategorieProduitOptiventesModel $modelArcadiaCategorieProduitOptiventes) {
+        $this->modelArcadiaCategorieProduitOptiventes = $modelArcadiaCategorieProduitOptiventes;
+    }
+    
+    function getModelAnnexeEnvironnementConservationGroupe() {
+        return $this->modelAnnexeEnvironnementConservationGroupe;
+    }
+
+    function setModelAnnexeEnvironnementConservationGroupe(AnnexeEnvironnementConservationGroupeModel $modelAnnexeEnvironnementConservationGroupe) {
+        $this->modelAnnexeEnvironnementConservationGroupe = $modelAnnexeEnvironnementConservationGroupe;
+    }
+
+    
     /**
      * Tableau de DatabaseRecord contenant les processus de cycle de vie
      * de la FTA
@@ -1553,7 +1597,8 @@ class FtaModel extends AbstractModel {
  K_etat, EAN_UVC, EAN_COLIS, EAN_PALETTE,
  OLD_nouvel_article, OLD_k_gestion_lot, activation_codesoft_arti2, id_etiquette_codesoft_arti2,
  atmosphere_protectrice, image_eco_emballage, libelle_code_article_client, id_service_consommateur,
- nom_societe, id_fta_classification2,pourcentage_avancement, liste_id_fta_role,code_article_ldc_mere)"
+ nom_societe, id_fta_classification2,pourcentage_avancement, liste_id_fta_role,code_article_ldc_mere,
+ id_arcadia_categeorie_produit_optiventes,id_arcadia_gamme_famille_budget,id_classification_raccourcis)"
                         . " SELECT id_access_arti2, OLD_numft, id_fta_workflow,
  commentaire, OLD_id_fta_palettisation, id_dossier_fta, id_version_dossier_fta,
  OLD_champ_maj_fta, id_fta_etat, createur_fta, date_derniere_maj_fta,
@@ -1586,7 +1631,8 @@ class FtaModel extends AbstractModel {
  K_etat, EAN_UVC, EAN_COLIS, EAN_PALETTE,
  OLD_nouvel_article, OLD_k_gestion_lot, activation_codesoft_arti2, id_etiquette_codesoft_arti2,
  atmosphere_protectrice, image_eco_emballage, libelle_code_article_client, id_service_consommateur,
- nom_societe, id_fta_classification2 ,pourcentage_avancement, liste_id_fta_role,code_article_ldc_mere"
+ nom_societe, id_fta_classification2 ,pourcentage_avancement, liste_id_fta_role,code_article_ldc_mere,
+ id_arcadia_categeorie_produit_optiventes,id_arcadia_gamme_famille_budget,id_classification_raccourcis"
                         . " FROM " . FtaModel::TABLENAME
                         . " WHERE " . FtaModel::KEYNAME . "=" . $paramIdFta
         );
@@ -1742,7 +1788,7 @@ class FtaModel extends AbstractModel {
          * Changement du format de date
          */
         if (!$this->getIsEditable()) {
-            $dateEcheValue = FtaController::changementDuFormatDeDate($dateEcheValue);
+            $dateEcheValue = FtaController::changementDuFormatDeDateFR($dateEcheValue);
         }
         /**
          * Mise en forme

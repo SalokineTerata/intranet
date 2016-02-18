@@ -24,6 +24,8 @@
  */
 class UserInterfaceMessage {
 
+    const FR_CLASSIFICATION_ACTIVITE_MESSAGE = " Veuillez sélectionner une activité à associer ";
+    const FR_CLASSIFICATION_MARQUE_MESSAGE = " Veuillez sélectionner une marque à associer ";
     const FR_DATABASE_MESSAGE_CHANGEMENT_ESPACE_DE_TRAVAIL_1 = " Changement de l'espace travail ";
     const FR_DATABASE_MESSAGE_CHANGEMENT_ESPACE_DE_TRAVAIL_2 = " vers l'espace de travail ";
     const FR_DATABASE_MESSAGE_CHANGEMENT_ESPACE_DE_TRAVAIL_3 = " par ";
@@ -87,7 +89,7 @@ class UserInterfaceMessage {
 
     /**
      * Toujours mettre un | devant les message de type Règle de validations
-     */    
+     */
     const FR_WARNING_VALIDATION_RULES_LESS35 = " | Cette donnée a dépassé trente-cinq caractères ";
     const FR_WARNING_VALIDATION_RULES_LESS5 = " | Cette donnée a dépassé cinq caractères ";
     const FR_WARNING_VALIDATION_RULES_LESS8 = " | Cette donnée a dépassé huit caractères ";

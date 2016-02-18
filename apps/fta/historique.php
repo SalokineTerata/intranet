@@ -246,7 +246,7 @@ if ($jour_restant < 0) {
 } else {
     $txt_echeance = 'reste';
 }
-$dateEcheanceFtaFr = FtaController::changementDuFormatDeDate($date_echeance_fta);
+$dateEcheanceFtaFr = FtaController::changementDuFormatDeDateFR($date_echeance_fta);
 $HTML_echeance_fta = 'A valider avant le: ' . $dateEcheanceFtaFr . ' <i>(' . $txt_echeance . ' ' . $jour_restant . 'jours)</i>';
 
 /*

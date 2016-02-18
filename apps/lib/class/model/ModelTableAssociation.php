@@ -41,6 +41,11 @@ class ModelTableAssociation {
         'annexe_emballage_groupe' => 'AnnexeEmballageGroupeModel',
         'annexe_emballage_groupe_type' => 'AnnexeEmballageGroupeTypeModel',
         'annexe_emballage' => 'AnnexeEmballageModel',
+        'classification_gamme_famille_budget_arcadia' => 'ClassificationGammeFamilleBudgetArcadiaModel',
+        'classification_raccourcis_association' => 'ClassificationRaccourcisAssociationModel',
+        'classification_activite_famille_ventes_arcadia' => 'ClassificationActiviteFamilleVentesArcadiaModel',
+        'classification_activite_sous_famille_arcadia' => 'ClassificationActiviteSousFamilleArcadiaModel',
+        'classification_marque_arcadia' => 'ClassificationMarqueArcadiaModel',
     );
 
     static public function getModelName($paramTableName) {

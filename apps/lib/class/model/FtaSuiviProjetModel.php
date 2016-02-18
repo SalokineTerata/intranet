@@ -660,7 +660,7 @@ class FtaSuiviProjetModel extends AbstractModel {
     function getHtmlDateValidationSuiviFta() {
         $idFtaSuivieProjet = $this->getKeyValue();
         $dateValidationValueTmp = $this->getDataField(self::FIELDNAME_DATE_VALIDATION_SUIVI_PROJET)->getFieldValue();
-        $dateValidationValue = FtaController::changementDuFormatDeDate($dateValidationValueTmp);
+        $dateValidationValue = FtaController::changementDuFormatDeDateFR($dateValidationValueTmp);
 
         $signatureValidationObjet = new HtmlInputText();
         $HtmlTableName = self::TABLENAME

@@ -86,14 +86,28 @@ class HtmlSubForm_RNN extends HtmlSubForm {
      */
     private $tableLabel;
 
+    /**
+     * Nom de la fonction de gestion des versions
+     */
+    private $nameDataTableToCompare;
+
     const VIRTUAL = 'VIRTUAL';
 
-    function __construct($paramArrayPrimaryContent = NULL, $paramSubFormPrimaryModelClassName = NULL, $paramPrimaryLabel = NULL, $secondaryTableNamesAndIdKeyValue = NULL) {
+    function __construct($paramArrayPrimaryContent = NULL, $paramSubFormPrimaryModelClassName = NULL, $paramPrimaryLabel = NULL, $secondaryTableNamesAndIdKeyValue = NULL, $NameDataFtaConditionnementTableToCompare = NULL) {
         parent::__construct();
         parent::setLabel($paramPrimaryLabel);
         $this->setArrayPrimaryContent($paramArrayPrimaryContent);
         $this->setSubFormPrimaryModelClassName($paramSubFormPrimaryModelClassName);
         $this->setSecondaryTableNamesAndIdKeyValue($secondaryTableNamesAndIdKeyValue);
+        $this->setNameDataTableToCompare($NameDataFtaConditionnementTableToCompare);
+    }
+
+    function getNameDataTableToCompare() {
+        return $this->nameDataTableToCompare;
+    }
+
+    function setNameDataTableToCompare($nameDataTableToCompare) {
+        $this->nameDataTableToCompare = $nameDataTableToCompare;
     }
 
     function getTableLabel() {
@@ -195,7 +209,14 @@ class HtmlSubForm_RNN extends HtmlSubForm {
                  * Chargement de l'enregistrement
                  */
                 $modelSubForm = new $subFormModelClassName($key);
-                $modelSubForm->setDataFtaConditionnementTableToCompare();
+
+                /**
+                 * On récupère le nom de la fonction gérant la gestion des versions
+                 */
+                $NameDataTableToCompare = $this->getNameDataTableToCompare();
+                if ($NameDataTableToCompare) {
+                    $modelSubForm->$NameDataTableToCompare();
+                }
 
                 /**
                  * Récupération de la liste des champs à représenter

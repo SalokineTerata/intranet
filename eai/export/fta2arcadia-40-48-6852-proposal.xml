@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
-<Transaction id="47" version="1" type="proposal">
+<Transaction id="48" version="1" type="proposal">
     <Parameters>
         <IdFirm>40</IdFirm><!-- Agis -->
         <IdArcadia>43152</IdArcadia><!-- Code article dans Arcadia -->

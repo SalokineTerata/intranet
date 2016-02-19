@@ -137,6 +137,7 @@ require_once('../lib/class/model/FtaTransitionModel.php');
 require_once('../lib/class/model/FtaWorkflowModel.php');
 require_once('../lib/class/model/FtaWorkflowStructureModel.php');
 require_once('../lib/class/model/FteFournisseurModel.php');
+require_once('../lib/class/model/GeoArcadiaModel.php');
 require_once('../lib/class/model/GeoModel.php');
 require_once('../lib/class/model/HtmlResultModel.php');
 require_once('../lib/class/model/IntranetActionsModel.php');

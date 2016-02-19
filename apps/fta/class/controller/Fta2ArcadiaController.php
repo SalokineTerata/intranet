@@ -1327,8 +1327,8 @@ class Fta2ArcadiaController {
     }
 
     function generateXmlText() {
-        $xmlText .='<?xml version="1.0" encoding="UTF-8" ?>' . self::SAUT_DE_LIGNE . self::ESPACE
-                . "<Transaction id=\"" . $this->getKeyValuePorposal() . "\" version=\"1.1\" type=\"proposal\">" . self::SAUT_DE_LIGNE
+        $xmlText .='<?xml version="1.0" encoding="UTF-8"?>' . self::SAUT_DE_LIGNE . self::ESPACE
+                . "<Transaction id=\"" . $this->getKeyValuePorposal() . "\" version=\"1\" type=\"proposal\">" . self::SAUT_DE_LIGNE
                 . $this->getXMLArcadiaParametre()
                 . self::TABLE_START
                 . self::ARTICLE_REF_START

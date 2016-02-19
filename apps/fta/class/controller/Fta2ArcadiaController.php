@@ -34,7 +34,7 @@ class Fta2ArcadiaController {
     const DATA_IMPORT_START = "            <DataToImport>\n";
     const DATA_IMPORT_END = "            </DataToImport>\n";
     const RECORDSET_END = "                </Recordset>\n";
-    const MAIL_ANOMALIE = "franck.amofa@agis-sa.fr";
+    const MAIL_ANOMALIE = "FA4301632";
     const CREATE = "create";
     const UPDATE = "update";
     const COD_SOCIETE_AGIS = "40";
@@ -671,7 +671,7 @@ class Fta2ArcadiaController {
                 . self::TABULATION . self::TABULATION . "<IdFirm>" . self::COD_SOCIETE_AGIS . "</IdFirm><!-- Agis -->" . self::SAUT_DE_LIGNE
                 . self::TABULATION . self::TABULATION . "<IdArcadia>" . $this->getFtaModel()->getDataField(FtaModel::FIELDNAME_CODE_ARTICLE_LDC)->getFieldValue() . "</IdArcadia><!-- Code article dans Arcadia -->" . self::SAUT_DE_LIGNE
                 . self::TABULATION . self::TABULATION . "<IdFta>" . $this->getFtaModel()->getDataField(FtaModel::KEYNAME)->getFieldValue() . "</IdFta><!-- N° de la FTA -->" . self::SAUT_DE_LIGNE
-                . self::TABULATION . self::TABULATION . "<MAIL_ANO>" . self::MAIL_ANOMALIE . "</MAIL_ANO>" . self::SAUT_DE_LIGNE
+                . self::TABULATION . self::TABULATION . "<MAIL_ANO>" . self::MAIL_ANOMALIE . "</MAIL_ANO><!-- N° de matricule -->" . self::SAUT_DE_LIGNE
                 . self::TABULATION . "</Parameters>" . self::SAUT_DE_LIGNE;
     }
 

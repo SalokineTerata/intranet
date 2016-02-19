@@ -91,7 +91,7 @@ Cas d'une création de données privée sur un article déjà existant dans Arca
                     
                     <!-- RegateAC Stock -->
                     <ACREG_SITESECONDAIRE>186</ACREG_SITESECONDAIRE><!-- PLB -->
-                    <ACREG_LIEUSECONDAIRE>1</ACREG_SITESECONDAIRE><!-- PLB (lieu par défaut) -->
+                    <ACREG_LIEUSECONDAIRE>1</ACREG_LIEUSECONDAIRE><!-- PLB (lieu par défaut) -->
                     <ACREG_TYPE_PROD_EMPLACEMENT>3</ACREG_TYPE_PROD_EMPLACEMENT><!-- PLB - AGIS -->
                     <ACREG_QUANTITE_EMPLACEMENT>81</ACREG_QUANTITE_EMPLACEMENT>
                 </Recordset>

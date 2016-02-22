@@ -19,7 +19,6 @@ class ClassificationFta2Model extends AbstractModel {
     const FIELDNAME_ID_ENVIRONNEMENT = 'id_Environnement';
     const FIELDNAME_ID_RESEAU = 'id_Reseau';
     const FIELDNAME_ID_SAISONNALITE = 'id_Saisonnalite';
-    const FIELDNAME_RACCOURCIS_AUTORISES_CLASSIFICATION2 = 'raccourcis_autorises_classification2';
     const ID_CLASSIFICATION_EXPORT = '22';
     const ID_CLASSIFICATION_LIBRE_SERVICE = '5';
     const ID_CLASSIFICATION_FESTIF = '71';

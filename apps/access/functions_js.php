@@ -1,7 +1,0 @@
-<script language="javascript">
-<!--
-
-
-//-->
-</script>
-

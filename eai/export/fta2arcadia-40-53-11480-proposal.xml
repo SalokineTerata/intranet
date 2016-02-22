@@ -4,7 +4,7 @@ Cas d'une mise à jour d'une donnée publique exclusivement.
 -->
 
 
-<Transaction id="3" version="1" type="proposal">
+<Transaction id="53" version="1" type="proposal">
     <Parameters>
         <IdFirm>40</IdFirm><!-- Agis -->      
         <IdArcadia>80932</IdArcadia><!-- Code article dans Arcadia -->
@@ -16,10 +16,8 @@ Cas d'une mise à jour d'une donnée publique exclusivement.
                 <Recordset id="1" action="update">
 
                     <!-- Entête -->
-                    <NO_ART key="TRUE"></NO_ART>
-                
-                    <!-- Export/Compta -->
-                    <COD_NDP>1602909900</COD_NDP><!-- PREPARATION ET CONSERVES DE VIANDE -->
+                    <NO_ART key="TRUE">80932</NO_ART>
+                    <LIB_PRODUCTION><![CDATA[PLATEAU FECAS 4X280G]]></LIB_PRODUCTION><!-- DIN de la FTA -->
                 
                 </Recordset>
             </DataToImport>

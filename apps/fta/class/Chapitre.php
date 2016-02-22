@@ -64,6 +64,7 @@ class Chapitre {
      * @var FtaWorkflowStructureModel 
      */
     protected static$abrevation_etat;
+    protected static$checkArcadiaData;
     protected static$comeback;
     protected static $ftaWorkflowStructureModel;
     protected static $html_chapitre_activation_cody;
@@ -175,8 +176,9 @@ class Chapitre {
         return self::$html_chapitre_all;
     }
 
-    public static function initChapitre($id_fta, $id_fta_chapitre, $synthese_action, $comeback, $idFtaEtat, $abreviationFtaEtat, $idFtaRole) {
+    public static function initChapitre($id_fta, $id_fta_chapitre, $synthese_action, $comeback, $idFtaEtat, $abreviationFtaEtat, $idFtaRole,$checkArcadiaData) {
 
+        self::$checkArcadiaData = $checkArcadiaData;
         self::$is_data_validation_successful = FALSE;
         self::$id_fta = $id_fta;
         self::$comeback = $comeback;
@@ -546,7 +548,6 @@ class Chapitre {
          */
         //Codification
 //        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_SUFFIXE_AGROLOGIC_FTA);
-   
         //Données lié à arcadia 
         $bloc.= $ftaView2->getHtmlArcadiaDataNotEditable();
 
@@ -1944,6 +1945,9 @@ class Chapitre {
 
         //Gencod EAN Palette
         $bloc.=$ftaView->getHtmlEANPalette();
+
+        //Fta2Arcadia
+        $bloc.=$ftaView->getHtmlLinkGenerateXmlFile(self::$checkArcadiaData);
 
         if ($ftaView->isDataValidationSuccessful() == "0") {
             self::setDataValidationSuccessfulToTrue();

@@ -174,7 +174,7 @@ class ClassificationRaccourcisAssociationModel extends AbstractModel {
         $htmlList = new HtmlListSelect();
 
         $ftaModel = new FtaModel($paramIdFta);
-
+        $dataFieldIdClassificationRaccourcis = $ftaModel->getDataField(FtaModel::FIELDNAME_ID_CLASSIFICATION_RACCOURCIS);
         $arrayClassificationRaccourcis = DatabaseOperation::convertSqlStatementWithKeyAndOneFieldToArray(
                         'SELECT DISTINCT ' . ClassificationRaccourcisModel::TABLENAME . '.' . ClassificationRaccourcisModel::KEYNAME
                         . ',' . ClassificationRaccourcisModel::TABLENAME . '.' . ClassificationRaccourcisModel::FIELDNAME_NOM_CLASSIFICATION_RACCOURCIS
@@ -216,6 +216,17 @@ class ClassificationRaccourcisAssociationModel extends AbstractModel {
                 . '_'
                 . $paramIdFta
         ;
+        /**
+         * Vérification des règle de validation
+         */
+        $dataFieldIdClassificationRaccourcis->checkValidationRules();
+
+        if ($dataFieldIdClassificationRaccourcis->getDataValidationSuccessful() == TRUE) {
+            $htmlList->setIsWarningMessage($dataFieldIdClassificationRaccourcis->getDataValidationSuccessful());
+        } else {
+            $htmlList->setIsWarningMessage($dataFieldIdClassificationRaccourcis->getDataValidationSuccessful());
+            $htmlList->setWarningMessage($dataFieldIdClassificationRaccourcis->getDataWarningMessage());
+        }
 
         $htmlList->getAttributes()->getName()->setValue(FtaModel::FIELDNAME_ID_CLASSIFICATION_RACCOURCIS);
         $htmlList->setLabel(DatabaseDescription::getFieldDocLabel(ClassificationRaccourcisAssociationModel::TABLENAME, ClassificationRaccourcisAssociationModel::FIELDNAME_ID_CLASSIFICATION_RACCOURCIS));
@@ -223,9 +234,12 @@ class ClassificationRaccourcisAssociationModel extends AbstractModel {
         $htmlList->initAbstractHtmlSelect(
                 $HtmlTableName
                 , $htmlList->getLabel()
-                , $ftaModel->getDataField(FtaModel::FIELDNAME_ID_CLASSIFICATION_RACCOURCIS)->getFieldValue()
-                , $ftaModel->getDataField(FtaModel::FIELDNAME_ID_CLASSIFICATION_RACCOURCIS)->isFieldDiff()
-                , $htmlList->getArrayListContent());
+                , $dataFieldIdClassificationRaccourcis->getFieldValue()
+                , $dataFieldIdClassificationRaccourcis->isFieldDiff()
+                , $htmlList->getArrayListContent()
+                , $htmlList->getIsWarningMessage()
+                , $htmlList->getWarningMessage()
+        );
         $htmlList->getEventsForm()->setOnChangeWithAjaxAutoSave(FtaModel::TABLENAME, FtaModel::KEYNAME, $paramIdFta, FtaModel::FIELDNAME_ID_CLASSIFICATION_RACCOURCIS);
 
         $listeClassificationRaccourcis = $htmlList->getHtmlResult();

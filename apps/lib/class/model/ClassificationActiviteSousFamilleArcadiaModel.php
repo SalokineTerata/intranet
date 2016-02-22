@@ -24,7 +24,7 @@ class ClassificationActiviteSousFamilleArcadiaModel extends AbstractModel {
     }
 
     /**
-     * Affiche le tableau d'ajout de racourcis de classification à une classification
+     * Affiche le tableau d'ajout d'une sous famille à une activité de classification
      * @param string $paramIdActivite
      * @return string
      */
@@ -107,7 +107,7 @@ class ClassificationActiviteSousFamilleArcadiaModel extends AbstractModel {
     }
 
     /**
-     * Retour la liste des IdClassificationActiviteFamilleVentes pour une activite donnée
+     * Retour la liste des IdClassificationActiviteSousFamille pour une activite donnée
      * @param int $paramIdActivite
      * @return array
      */
@@ -169,7 +169,7 @@ class ClassificationActiviteSousFamilleArcadiaModel extends AbstractModel {
     }
 
     /**
-     * On identifie les clé étrangères de la table classification raccourcis association
+     * On identifie les clé étrangères de la table classification activite sous famille
      * Cette array doit être utilisé de cette manière 
      * Array (
      * nom de table,
@@ -187,7 +187,7 @@ class ClassificationActiviteSousFamilleArcadiaModel extends AbstractModel {
     }
 
     /**
-     * Affiche le label du tableau de Raccoucis de classification
+     * Affiche le label du tableau d'une sous famille à une activité de classification
      * @return string
      */
     function getTableClassificationActiviteSousFamilleArcadiaLabel() {
@@ -199,7 +199,7 @@ class ClassificationActiviteSousFamilleArcadiaModel extends AbstractModel {
     }
 
     /**
-     *  Lien d'ajout d'un raccourcis de classification associé à une classification
+     *  Lien d'ajout d'une sous famille à une activité de classification
      * @param string $paramIdClassificationFta2
      * @return string
      */
@@ -212,7 +212,7 @@ class ClassificationActiviteSousFamilleArcadiaModel extends AbstractModel {
     }
 
     /**
-     * Lien de suppression d'un raccourcis de classification associé à une classification
+     * Lien de suppression d'une sous famille à une activité de classification
      * @param int $paramIdActivite
      * @param array $paramArrayIdClassificationSousFamilleArcadia
      * @return string
@@ -232,7 +232,7 @@ class ClassificationActiviteSousFamilleArcadiaModel extends AbstractModel {
     }
 
     /**
-     * Lien d'ajout d'un raccourcis de classification associé à une classification après une autre  Gamme Famille Budget
+     * Lien d'ajout d'une sous famille à une activité de classification après une autre Sous famille
      * @param int $paramIdActivite
      * @return string
      */
@@ -244,7 +244,7 @@ class ClassificationActiviteSousFamilleArcadiaModel extends AbstractModel {
     }
 
     /**
-     * On affiche la liste des raccourcis de classification associé à une classification
+     * On affiche la liste des sous famille à une activité de classification
      * @param int $paramIdFta
      * @param int $paramIdClassificationFta2
      * @param boolean $paramIsEditable
@@ -255,6 +255,9 @@ class ClassificationActiviteSousFamilleArcadiaModel extends AbstractModel {
 
         $ftaModel = new FtaModel($paramIdFta);
         $idActivite = ClassificationFta2Model::getIdClassificationTypeByTypeNameAndIdClassificationFta2($paramIdClassificationFta2, ClassificationFta2Model::FIELDNAME_ID_ACTIVITE);
+
+        $dataFieldIdArcadiaSousFamille = $ftaModel->getDataField(FtaModel::FIELDNAME_ID_ARCADIA_SOUS_FAMILLE);
+
         $arrayClassificationActiviteSousFamilleArcadia = DatabaseOperation::convertSqlStatementWithKeyAndOneFieldToArray(
                         'SELECT DISTINCT ' . ArcadiaSousFamilleModel::TABLENAME . '.' . ArcadiaSousFamilleModel::KEYNAME
                         . ', CONCAT_WS(  \' - \',' . ArcadiaSousFamilleModel::TABLENAME . '.' . ArcadiaSousFamilleModel::KEYNAME
@@ -298,15 +301,30 @@ class ClassificationActiviteSousFamilleArcadiaModel extends AbstractModel {
                 . $paramIdFta
         ;
 
+
+        /**
+         * Vérification des règle de validation
+         */
+        $dataFieldIdArcadiaSousFamille->checkValidationRules();
+
+        if ($dataFieldIdArcadiaSousFamille->getDataValidationSuccessful() == TRUE) {
+            $htmlList->setIsWarningMessage($dataFieldIdArcadiaSousFamille->getDataValidationSuccessful());
+        } else {
+            $htmlList->setIsWarningMessage($dataFieldIdArcadiaSousFamille->getDataValidationSuccessful());
+            $htmlList->setWarningMessage($dataFieldIdArcadiaSousFamille->getDataWarningMessage());
+        }
         $htmlList->getAttributes()->getName()->setValue(FtaModel::FIELDNAME_ID_ARCADIA_SOUS_FAMILLE);
         $htmlList->setLabel(DatabaseDescription::getFieldDocLabel(self::TABLENAME, self::FIELDNAME_ID_ARCADIA_SOUS_FAMILLE));
         $htmlList->setIsEditable($paramIsEditable);
         $htmlList->initAbstractHtmlSelect(
                 $HtmlTableName
                 , $htmlList->getLabel()
-                , $ftaModel->getDataField(FtaModel::FIELDNAME_ID_ARCADIA_SOUS_FAMILLE)->getFieldValue()
-                , $ftaModel->getDataField(FtaModel::FIELDNAME_ID_ARCADIA_SOUS_FAMILLE)->isFieldDiff()
-                , $htmlList->getArrayListContent());
+                , $dataFieldIdArcadiaSousFamille->getFieldValue()
+                , $dataFieldIdArcadiaSousFamille->isFieldDiff()
+                , $htmlList->getArrayListContent()
+                , $htmlList->getIsWarningMessage()
+                , $htmlList->getWarningMessage()
+        );
         $htmlList->getEventsForm()->setOnChangeWithAjaxAutoSave(FtaModel::TABLENAME, FtaModel::KEYNAME, $paramIdFta, FtaModel::FIELDNAME_ID_ARCADIA_SOUS_FAMILLE);
 
         $listeClassificationSousFamilleArcadia = $htmlList->getHtmlResult();

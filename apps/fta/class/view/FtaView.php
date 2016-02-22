@@ -36,6 +36,18 @@ class FtaView extends AbstractView {
     const CALLBACK_LINK_TO_FTA_VALUE = "Retour vers la Fta";
 
     /**
+     * Fonction JavaScript appelée pour actualiser la visibilité
+     * du champs Poids_ELEM
+     */
+    const LINK_TO_FTA_XML_FILE = "Chargement des données vers Arcadia";
+
+    /**
+     * Fonction JavaScript appelée pour actualiser la visibilité
+     * du champs Poids_ELEM
+     */
+    const LINK_TO_FTA_XML_FILE_AGAIN = "Actualisation des données vers Arcadia";
+
+    /**
      * Model de donnée d'une FTA
      * @var FtaModel 
      */
@@ -160,6 +172,49 @@ class FtaView extends AbstractView {
     function getHtmlDateEcheance() {
         $this->getModel()->setIsEditable($this->getIsEditable());
         return $this->getModel()->getHtmlDateEcheance(FALSE);
+    }
+
+    /**
+     * Bouton affichant le lien générant le fichier xml
+     */
+    function generateXmlFile() {
+        return '<td class="contenu"><center>'
+                . '<a href=generate_xml.php?'
+                . 'id_fta=' . $this->getModel()->getKeyValue()
+                . '>' . self::LINK_TO_FTA_XML_FILE . '</a></center></td>';
+    }
+
+    /**
+     * Stade 1 
+     * On affiche l'option de préchargement des données vers arcadia qu dans le cas d'une création d'un article
+     * (manque d'information sur la mise à jour)
+     * @return string
+     */
+    function getHtmlLinkGenerateXmlFile($paramCheckArcadiaData) {
+        $lienFta2Arcadia = null;
+        $codeArticleLDC = $this->getModel()->getDataField(FtaModel::FIELDNAME_CODE_ARTICLE_LDC)->getFieldValue();
+        if (!$codeArticleLDC and $this->getIsEditable()) {
+            if (!$paramCheckArcadiaData) {
+                $lienFta2Arcadia = $this->generateXmlFile();
+            } else {
+                $lienFta2Arcadia = $this->getMessageSendDataToArcadia();
+            }
+        }
+        return $lienFta2Arcadia;
+    }
+
+    /**
+     * Affiche une message de confirmation que les données ont bien été envoyé
+     */
+    function getMessageSendDataToArcadia() {
+        return '<td class="contenu"><center>' . UserInterfaceMessage::FR_ARCADIA_SEND_DATA_MESSAGE . '</center></td>' . $this->getMessageSendDataToArcadiaAgain();
+    }
+
+    function getMessageSendDataToArcadiaAgain() {
+        return'<td class="contenu"><center>'
+                . '<a href=generate_xml.php?'
+                . 'id_fta=' . $this->getModel()->getKeyValue()
+                . '>' . self::LINK_TO_FTA_XML_FILE_AGAIN . '</a></center></td>';
     }
 
     /**

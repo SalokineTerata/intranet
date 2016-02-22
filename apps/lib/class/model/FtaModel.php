@@ -1598,7 +1598,8 @@ class FtaModel extends AbstractModel {
  OLD_nouvel_article, OLD_k_gestion_lot, activation_codesoft_arti2, id_etiquette_codesoft_arti2,
  atmosphere_protectrice, image_eco_emballage, libelle_code_article_client, id_service_consommateur,
  nom_societe, id_fta_classification2,pourcentage_avancement, liste_id_fta_role,code_article_ldc_mere,
- id_arcadia_categeorie_produit_optiventes,id_arcadia_gamme_famille_budget,id_classification_raccourcis)"
+ id_arcadia_categeorie_produit_optiventes,id_arcadia_gamme_famille_budget,id_classification_raccourcis,
+  id_arcadia_famille_budget,id_arcadia_gamme_coop,id_arcadia_famille_vente,id_arcadia_sous_famille,id_arcadia_marque)"
                         . " SELECT id_access_arti2, OLD_numft, id_fta_workflow,
  commentaire, OLD_id_fta_palettisation, id_dossier_fta, id_version_dossier_fta,
  OLD_champ_maj_fta, id_fta_etat, createur_fta, date_derniere_maj_fta,
@@ -1632,7 +1633,8 @@ class FtaModel extends AbstractModel {
  OLD_nouvel_article, OLD_k_gestion_lot, activation_codesoft_arti2, id_etiquette_codesoft_arti2,
  atmosphere_protectrice, image_eco_emballage, libelle_code_article_client, id_service_consommateur,
  nom_societe, id_fta_classification2 ,pourcentage_avancement, liste_id_fta_role,code_article_ldc_mere,
- id_arcadia_categeorie_produit_optiventes,id_arcadia_gamme_famille_budget,id_classification_raccourcis"
+ id_arcadia_categeorie_produit_optiventes,id_arcadia_gamme_famille_budget,id_classification_raccourcis,
+ id_arcadia_famille_budget,id_arcadia_gamme_coop,id_arcadia_famille_vente,id_arcadia_sous_famille,id_arcadia_marque"
                         . " FROM " . FtaModel::TABLENAME
                         . " WHERE " . FtaModel::KEYNAME . "=" . $paramIdFta
         );

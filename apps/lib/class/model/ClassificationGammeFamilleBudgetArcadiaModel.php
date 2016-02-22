@@ -177,7 +177,7 @@ class ClassificationGammeFamilleBudgetArcadiaModel extends AbstractModel {
         $htmlList = new HtmlListSelect();
 
         $ftaModel = new FtaModel($paramIdFta);
-
+        $dataFieldIdArcadiaGammeFamilleBudget = $ftaModel->getDataField(FtaModel::FIELDNAME_ID_ARCADIA_GAMME_FAMILLE_BUDGET);
         $arrayGammeFamilleBudget = DatabaseOperation::convertSqlStatementWithKeyAndOneFieldToArray(
                         'SELECT DISTINCT ' . ArcadiaGammeFamilleBudgetModel::TABLENAME . '.' . ArcadiaGammeFamilleBudgetModel::KEYNAME
                         . ', CONCAT_WS(  \' - \',' . ArcadiaGammeFamilleBudgetModel::TABLENAME
@@ -220,6 +220,17 @@ class ClassificationGammeFamilleBudgetArcadiaModel extends AbstractModel {
                 . '_'
                 . $paramIdFta
         ;
+        /**
+         * Vérification des règle de validation
+         */
+        $dataFieldIdArcadiaGammeFamilleBudget->checkValidationRules();
+
+        if ($dataFieldIdArcadiaGammeFamilleBudget->getDataValidationSuccessful() == TRUE) {
+            $htmlList->setIsWarningMessage($dataFieldIdArcadiaGammeFamilleBudget->getDataValidationSuccessful());
+        } else {
+            $htmlList->setIsWarningMessage($dataFieldIdArcadiaGammeFamilleBudget->getDataValidationSuccessful());
+            $htmlList->setWarningMessage($dataFieldIdArcadiaGammeFamilleBudget->getDataWarningMessage());
+        }
 
         $htmlList->getAttributes()->getName()->setValue(FtaModel::FIELDNAME_ID_ARCADIA_GAMME_FAMILLE_BUDGET);
         $htmlList->setLabel(DatabaseDescription::getFieldDocLabel(FtaModel::TABLENAME, FtaModel::FIELDNAME_ID_ARCADIA_GAMME_FAMILLE_BUDGET));
@@ -227,9 +238,12 @@ class ClassificationGammeFamilleBudgetArcadiaModel extends AbstractModel {
         $htmlList->initAbstractHtmlSelect(
                 $HtmlTableName
                 , $htmlList->getLabel()
-                , $ftaModel->getDataField(FtaModel::FIELDNAME_ID_ARCADIA_GAMME_FAMILLE_BUDGET)->getFieldValue()
-                , $ftaModel->getDataField(FtaModel::FIELDNAME_ID_ARCADIA_GAMME_FAMILLE_BUDGET)->isFieldDiff()
-                , $htmlList->getArrayListContent());
+                , $dataFieldIdArcadiaGammeFamilleBudget->getFieldValue()
+                , $dataFieldIdArcadiaGammeFamilleBudget->isFieldDiff()
+                , $htmlList->getArrayListContent()
+                , $htmlList->getIsWarningMessage()
+                , $htmlList->getWarningMessage()
+        );
         $htmlList->getEventsForm()->setOnChangeWithAjaxAutoSave(FtaModel::TABLENAME, FtaModel::KEYNAME, $paramIdFta, FtaModel::FIELDNAME_ID_ARCADIA_GAMME_FAMILLE_BUDGET);
 
         $listeGammeFamilleBudget = $htmlList->getHtmlResult();

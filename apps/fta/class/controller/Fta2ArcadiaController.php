@@ -168,6 +168,11 @@ class Fta2ArcadiaController {
         $this->saveExportXmlToFile();
     }
 
+    function getGlobalConfigModel() {
+        $globalConfig = new GlobalConfig();
+        return $globalConfig;
+    }
+
     function getFtaModel() {
         return $this->ftaModel;
     }
@@ -1413,12 +1418,75 @@ class Fta2ArcadiaController {
      * Géneration du fichier xml
      */
     function saveExportXmlToFile() {
-        file_put_contents(
-                "../../eai/export/fta2arcadia-40-"
-                . $this->getKeyValuePorposal()
-                . "-" . $this->getFtaModel()->getDataField(FtaModel::KEYNAME)->getFieldValue()
-                . "-proposal.xml"
-                , $this->getXmlText());
+        $linkData = $this->linkXmlFileDataSend();
+        $linkOk = $this->linkXmlFileOkSend();
+        file_put_contents($linkData, $this->getXmlText());
+        file_put_contents($linkOk, "ok");
+    }
+
+    /**
+     * Génération du lien vers le dossier data d'envoi
+     * @return string
+     */
+    function linkXmlFileDataSend() {
+        $env = $this->getGlobalConfigModel()->getConf()->getExecEnvironment();
+        $link = "";
+        switch ($env) {
+            case EnvironmentConf::ENV_COD:
+                $link = "../../eai/export/fta2arcadia-40-"
+                        . $this->getKeyValuePorposal()
+                        . "-" . $this->getFtaModel()->getDataField(FtaModel::KEYNAME)->getFieldValue()
+                        . "-proposal.xml";
+
+                break;
+            case EnvironmentConf::ENV_DEV:
+                $link = "/u1/DATA01/eai/intranet-dev/export/data/fta2arcadia-40-"
+                        . $this->getKeyValuePorposal()
+                        . "-" . $this->getFtaModel()->getDataField(FtaModel::KEYNAME)->getFieldValue()
+                        . "-proposal.xml";
+
+                break;
+            case EnvironmentConf::ENV_PRD:
+                $link = "/u1/DATA01/eai/intranet-dev/export/data/fta2arcadia-40-"
+                        . $this->getKeyValuePorposal()
+                        . "-" . $this->getFtaModel()->getDataField(FtaModel::KEYNAME)->getFieldValue()
+                        . "-proposal.xml";
+
+                break;
+        }
+
+        return $link;
+    }
+
+    /**
+     * Génération du lien vers le dossier ok d'envoi
+     * @return string
+     */
+    function linkXmlFileOkSend() {
+        $env = $this->getGlobalConfigModel()->getConf()->getExecEnvironment();
+        $link = "";
+        switch ($env) {
+            case EnvironmentConf::ENV_COD:
+                $link = "";
+
+                break;
+            case EnvironmentConf::ENV_DEV:
+                $link = "/u1/DATA01/eai/intranet-dev/export/ok/fta2arcadia-40-"
+                        . $this->getKeyValuePorposal()
+                        . "-" . $this->getFtaModel()->getDataField(FtaModel::KEYNAME)->getFieldValue()
+                        . "-proposal.xml.ok";
+
+                break;
+            case EnvironmentConf::ENV_PRD:
+                $link = "/u1/DATA01/eai/intranet-dev/export/ok/fta2arcadia-40-"
+                        . $this->getKeyValuePorposal()
+                        . "-" . $this->getFtaModel()->getDataField(FtaModel::KEYNAME)->getFieldValue()
+                        . "-proposal.xml.ok";
+
+                break;
+        }
+
+        return $link;
     }
 
 }

@@ -24,7 +24,7 @@ class ClassificationMarqueArcadiaModel extends AbstractModel {
     }
 
     /**
-     * Affiche le tableau d'ajout de racourcis de classification à une classification
+     * Affiche le tableau d'ajout d'une Marque arcadia à une marque de classification
      * @param string $paramIdMarque
      * @return string
      */
@@ -107,16 +107,16 @@ class ClassificationMarqueArcadiaModel extends AbstractModel {
     }
 
     /**
-     * Retour la liste des IdClassificationActiviteFamilleVentes pour une activite donnée
-     * @param int $paramIdActivite
+     * Retour la liste des IdClassificationMarque pour une marque donnée
+     * @param int $paramIdMarque
      * @return array
      */
-    private static function getArrayIdClassificationMarqueArcadiaByIdMarque($paramIdActivite) {
+    private static function getArrayIdClassificationMarqueArcadiaByIdMarque($paramIdMarque) {
 
         $array = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
                         "SELECT " . self::KEYNAME
                         . " FROM " . self::TABLENAME
-                        . " WHERE " . self::FIELDNAME_ID_MARQUE . "=" . $paramIdActivite
+                        . " WHERE " . self::FIELDNAME_ID_MARQUE . "=" . $paramIdMarque
         );
 
         return $array;
@@ -169,7 +169,7 @@ class ClassificationMarqueArcadiaModel extends AbstractModel {
     }
 
     /**
-     * On identifie les clé étrangères de la table classification raccourcis association
+     * On identifie les clé étrangères de la table classification Marque
      * Cette array doit être utilisé de cette manière 
      * Array (
      * nom de table,
@@ -187,7 +187,7 @@ class ClassificationMarqueArcadiaModel extends AbstractModel {
     }
 
     /**
-     * Affiche le label du tableau de Raccoucis de classification
+     * Affiche le label du tableau d'une Marque arcadia à une marque de classification
      * @return string
      */
     function getTableClassificationMarqueArcadiaLabel() {
@@ -199,7 +199,7 @@ class ClassificationMarqueArcadiaModel extends AbstractModel {
     }
 
     /**
-     *  Lien d'ajout d'un raccourcis de classification associé à une classification
+     *  Lien d'ajout d'une Marque arcadia à une marque de classification
      * @param string $paramIdClassificationFta2
      * @return string
      */
@@ -212,7 +212,7 @@ class ClassificationMarqueArcadiaModel extends AbstractModel {
     }
 
     /**
-     * Lien de suppression d'un raccourcis de classification associé à une classification
+     * Lien de suppression d'une Marque arcadia à une marque de classificationion
      * @param int $paramIdMarque
      * @param array $paramArrayIdClassificationMarque
      * @return string
@@ -232,7 +232,7 @@ class ClassificationMarqueArcadiaModel extends AbstractModel {
     }
 
     /**
-     * Lien d'ajout d'un raccourcis de classification associé à une classification après une autre  Gamme Famille Budget
+     * Lien d'ajout d'une Marque arcadia à une marque de classification après une autre  Marque Arcadia
      * @param int $paramIdActivite
      * @return string
      */
@@ -244,7 +244,7 @@ class ClassificationMarqueArcadiaModel extends AbstractModel {
     }
 
     /**
-     * On affiche la liste des raccourcis de classification associé à une classification
+     * On affiche la liste des Marques arcadia à une marque de classification
      * @param int $paramIdFta
      * @param int $paramIdClassificationFta2
      * @param boolean $paramIsEditable
@@ -255,7 +255,7 @@ class ClassificationMarqueArcadiaModel extends AbstractModel {
 
         $ftaModel = new FtaModel($paramIdFta);
         $idMarque = ClassificationFta2Model::getIdClassificationTypeByTypeNameAndIdClassificationFta2($paramIdClassificationFta2, ClassificationFta2Model::FIELDNAME_ID_MARQUE);
-
+        $dataFieldIdArcadiaMarque = $ftaModel->getDataField(FtaModel::FIELDNAME_ID_ARCADIA_MARQUE);
         $arrayClassificationMarqueArcadia = DatabaseOperation::convertSqlStatementWithKeyAndOneFieldToArray(
                         'SELECT DISTINCT ' . ArcadiaMarqueModel::TABLENAME . '.' . ArcadiaMarqueModel::KEYNAME
                         . ', CONCAT_WS(  \' - \',' . ArcadiaMarqueModel::TABLENAME . '.' . ArcadiaMarqueModel::KEYNAME
@@ -298,15 +298,32 @@ class ClassificationMarqueArcadiaModel extends AbstractModel {
                 . $paramIdFta
         ;
 
+
+        /**
+         * Vérification des règle de validation
+         */
+        $dataFieldIdArcadiaMarque->checkValidationRules();
+
+        if ($dataFieldIdArcadiaMarque->getDataValidationSuccessful() == TRUE) {
+            $htmlList->setIsWarningMessage($dataFieldIdArcadiaMarque->getDataValidationSuccessful());
+        } else {
+            $htmlList->setIsWarningMessage($dataFieldIdArcadiaMarque->getDataValidationSuccessful());
+            $htmlList->setWarningMessage($dataFieldIdArcadiaMarque->getDataWarningMessage());
+        }
+
+
         $htmlList->getAttributes()->getName()->setValue(FtaModel::FIELDNAME_ID_ARCADIA_MARQUE);
         $htmlList->setLabel(DatabaseDescription::getFieldDocLabel(self::TABLENAME, self::FIELDNAME_ID_ARCADIA_MARQUE));
         $htmlList->setIsEditable($paramIsEditable);
         $htmlList->initAbstractHtmlSelect(
                 $HtmlTableName
                 , $htmlList->getLabel()
-                , $ftaModel->getDataField(FtaModel::FIELDNAME_ID_ARCADIA_MARQUE)->getFieldValue()
-                , $ftaModel->getDataField(FtaModel::FIELDNAME_ID_ARCADIA_MARQUE)->isFieldDiff()
-                , $htmlList->getArrayListContent());
+                , $dataFieldIdArcadiaMarque->getFieldValue()
+                , $dataFieldIdArcadiaMarque->isFieldDiff()
+                , $htmlList->getArrayListContent()
+                , $htmlList->getIsWarningMessage()
+                , $htmlList->getWarningMessage()
+        );
         $htmlList->getEventsForm()->setOnChangeWithAjaxAutoSave(FtaModel::TABLENAME, FtaModel::KEYNAME, $paramIdFta, FtaModel::FIELDNAME_ID_ARCADIA_MARQUE);
 
         $listeClassificationRaccourcis = $htmlList->getHtmlResult();

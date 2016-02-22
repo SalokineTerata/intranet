@@ -86,6 +86,7 @@ if ($idFta) {
     /**
      * Récupérations des paramètres
      */
+    $checkArcadiaData = Lib::getParameterFromRequest('checkArcadiaData');
     $id_fta_chapitre_encours = Lib::getParameterFromRequest('id_fta_chapitre_encours', '1');
     $synthese_action = Lib::isDefined('synthese_action');
     $comeback = Lib::isDefined('comeback');
@@ -189,7 +190,7 @@ if ($idFta) {
 </SCRIPT>
 ';
 
-    Chapitre::initChapitre($idFta, $id_fta_chapitre, $synthese_action, $comeback, $idFtaEtat, $abreviationFtaEtat, $idFtaRole);
+    Chapitre::initChapitre($idFta, $id_fta_chapitre, $synthese_action, $comeback, $idFtaEtat, $abreviationFtaEtat, $idFtaRole,$checkArcadiaData);
 
     $bloc.= Chapitre::getHtmlChapitreAll();
 } else {

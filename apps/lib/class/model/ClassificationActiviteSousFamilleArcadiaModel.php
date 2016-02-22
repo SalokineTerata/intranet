@@ -275,22 +275,22 @@ class ClassificationActiviteSousFamilleArcadiaModel extends AbstractModel {
          * Si nous avons plusieur résultat alors on affiche la liste déroulante 
          * sinon on enregistre l'unique  résutat 
          */
-        if ($paramIsEditable == Chapitre::EDITABLE) {
-            if (count($arrayClassificationActiviteSousFamilleArcadia) > "1") {
-                $paramIsEditable = Chapitre::EDITABLE;
-            } else {
-                /**
-                 * Enregistrement de la donnée raccourcis de classification
-                 */
-                if ($arrayClassificationActiviteSousFamilleArcadia) {
-                    foreach ($arrayClassificationActiviteSousFamilleArcadia as $key => $value) {
-                        $ftaModel->getDataField(FtaModel::FIELDNAME_ID_ARCADIA_SOUS_FAMILLE)->setFieldValue($key);
-                        $ftaModel->saveToDatabase();
-                    }
-                }
-                $paramIsEditable = Chapitre::NOT_EDITABLE;
-            }
-        }
+//        if ($paramIsEditable == Chapitre::EDITABLE) {
+//            if (count($arrayClassificationActiviteSousFamilleArcadia) > "1") {
+//                $paramIsEditable = Chapitre::EDITABLE;
+//            } else {
+//                /**
+//                 * Enregistrement de la donnée raccourcis de classification
+//                 */
+//                if ($arrayClassificationActiviteSousFamilleArcadia) {
+//                    foreach ($arrayClassificationActiviteSousFamilleArcadia as $key => $value) {
+//                        $ftaModel->getDataField(FtaModel::FIELDNAME_ID_ARCADIA_SOUS_FAMILLE)->setFieldValue($key);
+//                        $ftaModel->saveToDatabase();
+//                    }
+//                }
+//                $paramIsEditable = Chapitre::NOT_EDITABLE;
+//            }
+//        }
         $htmlList->setArrayListContent($arrayClassificationActiviteSousFamilleArcadia);
 
 

@@ -195,22 +195,22 @@ class ClassificationGammeFamilleBudgetArcadiaModel extends AbstractModel {
          * Si nous avons plusieur résultat alors on affiche la liste déroulante 
          * sinon on enregistre l'unique  résutat 
          */
-        if ($paramIsEditable == Chapitre::EDITABLE) {
-            if (count($arrayGammeFamilleBudget) > "1") {
-                $paramIsEditable = Chapitre::EDITABLE;
-            } else {
-                /**
-                 * Enregistrement de la donnée gamme famille budget
-                 */
-                if ($arrayGammeFamilleBudget) {
-                    foreach ($arrayGammeFamilleBudget as $key => $value) {
-                        $ftaModel->getDataField(FtaModel::FIELDNAME_ID_ARCADIA_GAMME_FAMILLE_BUDGET)->setFieldValue($key);
-                        $ftaModel->saveToDatabase();
-                    }
-                }
-                $paramIsEditable = Chapitre::NOT_EDITABLE;
-            }
-        }
+//        if ($paramIsEditable == Chapitre::EDITABLE) {
+//            if (count($arrayGammeFamilleBudget) > "1") {
+//                $paramIsEditable = Chapitre::EDITABLE;
+//            } else {
+//                /**
+//                 * Enregistrement de la donnée gamme famille budget
+//                 */
+//                if ($arrayGammeFamilleBudget) {
+//                    foreach ($arrayGammeFamilleBudget as $key => $value) {
+//                        $ftaModel->getDataField(FtaModel::FIELDNAME_ID_ARCADIA_GAMME_FAMILLE_BUDGET)->setFieldValue($key);
+//                        $ftaModel->saveToDatabase();
+//                    }
+//                }
+//                $paramIsEditable = Chapitre::NOT_EDITABLE;
+//            }
+//        }
         $htmlList->setArrayListContent($arrayGammeFamilleBudget);
 
 

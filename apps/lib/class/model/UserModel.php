@@ -27,6 +27,8 @@ class UserModel extends AbstractModel {
     const FIELDNAME_ASENDANT_ID_SALARIES = 'ascendant_id_salaries';
     const FIELDNAME_PORTAIL_WIKI_SALARIES = 'portail_wiki_salaries';
     const FIELDNAME_LIEU_GEO = 'lieu_geo';
+    const USER_ACTIF = 'oui';
+    const USER_NON_ACTIF = 'non';
 
     public function __construct($paramId = NULL, $paramIsCreateRecordsetInDatabaseIfKeyDoesntExist = AbstractModel::DEFAULT_IS_CREATE_RECORDSET_IN_DATABASE_IF_KEY_DOESNT_EXIST) {
         parent::__construct($paramId, $paramIsCreateRecordsetInDatabaseIfKeyDoesntExist);
@@ -176,6 +178,17 @@ class UserModel extends AbstractModel {
         DatabaseOperation::execute(
                 'DELETE FROM ' . UserModel::TABLENAME
                 . ' WHERE ' . UserModel::KEYNAME . '=' . $paramIdSalaries
+        );
+    }
+
+    /**
+     * Cette fonction désactive le compte utilisateur
+     * @param int $paramIdUser
+     */
+    public static function desactivationUser($paramIdUser) {
+        DatabaseOperation::execute(
+                'UPDATE ' . self::TABLENAME . ' SET ' . self::FIELDNAME_ACTIF . ' = \'' . self::USER_NON_ACTIF
+                . '\' WHERE ' . self::KEYNAME . '=\'' . $paramIdUser . '\''
         );
     }
 

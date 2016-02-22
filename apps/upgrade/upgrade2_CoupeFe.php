@@ -83,7 +83,7 @@ if ($arrayClassifIncomplete) {
                 . ' WHERE id_fta'
                 . '=' . $idFta
                 . ' AND id_fta_chapitre'
-                . '=34'
+                . '=20'
         ;
         $resultCheckIdSuiviProjet2 = mysql_query($sql4);
         $arrayCheckIdSuiviProjet2 = mysql_fetch_array($resultCheckIdSuiviProjet2, MYSQL_ASSOC);

@@ -115,7 +115,7 @@ if ($login) {
                                         'SELECT ' . UserModel::FIELDNAME_MAIL
                                         . ' FROM ' . UserModel::TABLENAME
                                         . ' WHERE ' . UserModel::FIELDNAME_ID_TYPE . ' =4'
-                                        . ' AND ' . UserModel::FIELDNAME_ACTIF . ' =\'oui\'');
+                                        . ' AND ' . UserModel::FIELDNAME_ACTIF . ' =\'' . UserModel::USER_ACTIF . '\'');
                         foreach ($arrayMailAdmin as $rowsmail) {
                             $corpsmail.=' - ' . $rowsmail[UserModel::FIELDNAME_MAIL] . ' <br>';
                         }
@@ -128,7 +128,7 @@ if ($login) {
                         $sujet = 'connexion intranet Agis';
                         $typeDeMail = 'CompteBloquer';
                         /* Constition du corps du mail */
-                        $rep = envoismail($sujet, $corpsmail, $adrTo, $adrfrom,$typeDeMail);
+                        $rep = envoismail($sujet, $corpsmail, $adrTo, $adrfrom, $typeDeMail);
                         $titou = DatabaseOperation::execute('update salaries set blocage=\'oui\' where (login=\'' . $identite . '\')');
                         //Averissement
                         $titre = "Accès aux modules de l'Intranet";
@@ -267,7 +267,7 @@ if ($login) {
                 //$q1 = DatabaseOperation::query('SELECT * FROM $mysql_table_authentification WHERE ((login = '$login') AND (pass = '$pass'))');
                 //Page par défaut après un login réussi
             } else {
-                $message = "La connection est un succès mais vous n'avez pas les droits d'accès sur l'intranet ou votre compte est bloqué.<br><br>
+                $message = "La connection est un succès mais vous n'avez pas les droits d'accès sur l'intranet ou votre compte est bloqué ou encore désactiver.<br><br>
                              Veuillez contacter l'administrateur du site.";
                 afficher_message("Connection à l'intranet", $message, $redirection);
             }

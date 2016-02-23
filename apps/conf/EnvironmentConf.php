@@ -14,9 +14,12 @@ class EnvironmentConf {
 
     const CONFIG_INI_FILE = "../../config.ini";
     const ENV_COD = 'ENV_COD';
+    const ENV_COD_NAME = "Codeur";
     const ENV_DEV = 'ENV_DEV';
+    const ENV_DEV_NAME = "Developpement";
     const ENV_REC = 'ENV_REC';
     const ENV_PRD = 'ENV_PRD';
+    const ENV_PRD_NAME = "Production";
 //    const SITE_COD = '127.0.0.1';
 //    const SITE_DEV = 'dev-intranet.agis.fr';
 //    const SITE_REC = 'rec-fta05401.grpldc.com';

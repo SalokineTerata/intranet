@@ -1330,6 +1330,9 @@ class Fta2ArcadiaController {
         }
     }
 
+    /**
+     * Mise en forme du text contenu dans le fichier XML
+     */
     function generateXmlText() {
         $xmlText .='<?xml version="1.0" encoding="UTF-8"?>' . self::SAUT_DE_LIGNE . self::ESPACE
                 . "<Transaction id=\"" . $this->getKeyValuePorposal() . "\" version=\"1.1\" type=\"proposal\">" . self::SAUT_DE_LIGNE
@@ -1420,8 +1423,18 @@ class Fta2ArcadiaController {
     function saveExportXmlToFile() {
         $linkData = $this->linkXmlFileDataSend();
         $linkOk = $this->linkXmlFileOkSend();
-        file_put_contents($linkData, $this->getXmlText());
-        file_put_contents($linkOk, "ok");
+        /**
+         * On créer le  nouveau fichier si un lien est initialiser
+         */
+        if ($linkData) {
+            file_put_contents($linkData, $this->getXmlText());
+        }
+        /**
+         * On créer le  nouveau fichier si un lien est initialiser
+         */
+        if ($linkOk) {
+            file_put_contents($linkOk, "ok");
+        }
     }
 
     /**
@@ -1432,21 +1445,21 @@ class Fta2ArcadiaController {
         $env = $this->getGlobalConfigModel()->getConf()->getExecEnvironment();
         $link = "";
         switch ($env) {
-            case EnvironmentConf::ENV_COD:
+            case EnvironmentConf::ENV_COD_NAME:
                 $link = "../../eai/export/fta2arcadia-40-"
                         . $this->getKeyValuePorposal()
                         . "-" . $this->getFtaModel()->getDataField(FtaModel::KEYNAME)->getFieldValue()
                         . "-proposal.xml";
 
                 break;
-            case EnvironmentConf::ENV_DEV:
+            case EnvironmentConf::ENV_DEV_NAME:
                 $link = "/u1/DATA01/eai/intranet-dev/export/data/fta2arcadia-40-"
                         . $this->getKeyValuePorposal()
                         . "-" . $this->getFtaModel()->getDataField(FtaModel::KEYNAME)->getFieldValue()
                         . "-proposal.xml";
 
                 break;
-            case EnvironmentConf::ENV_PRD:
+            case EnvironmentConf::ENV_PRD_NAME:
                 $link = "/u1/DATA01/eai/intranet-dev/export/data/fta2arcadia-40-"
                         . $this->getKeyValuePorposal()
                         . "-" . $this->getFtaModel()->getDataField(FtaModel::KEYNAME)->getFieldValue()

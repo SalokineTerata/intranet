@@ -1479,18 +1479,18 @@ class Fta2ArcadiaController {
         $env = $this->getGlobalConfigModel()->getConf()->getExecEnvironment();
         $link = "";
         switch ($env) {
-            case EnvironmentConf::ENV_COD:
+            case EnvironmentConf::ENV_COD_NAME:
                 $link = "";
 
                 break;
-            case EnvironmentConf::ENV_DEV:
+            case EnvironmentConf::ENV_DEV_NAME:
                 $link = "/u1/DATA01/eai/intranet-dev/export/ok/fta2arcadia-40-"
                         . $this->getKeyValuePorposal()
                         . "-" . $this->getFtaModel()->getDataField(FtaModel::KEYNAME)->getFieldValue()
                         . "-proposal.xml.ok";
 
                 break;
-            case EnvironmentConf::ENV_PRD:
+            case EnvironmentConf::ENV_PRD_NAME:
                 $link = "/u1/DATA01/eai/intranet-dev/export/ok/fta2arcadia-40-"
                         . $this->getKeyValuePorposal()
                         . "-" . $this->getFtaModel()->getDataField(FtaModel::KEYNAME)->getFieldValue()

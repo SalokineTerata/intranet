@@ -1443,7 +1443,11 @@ class Fta2ArcadiaController {
      * Si un élement de RegateAC Stock  est présent on affiche le commentaire
      */
     function checkCommentRegateAcStock() {
-        if ($this->getXMLArcadiaCodProduit()) {
+        if ($this->getXMLArcadiaAcregSiteSecondaire()
+                or $this->getXMLArcadiaAcregLieuSecondaire()
+                or $this->getXMLArcadiaAcregTypeProdEmplacement()
+                or $this->getXMLArcadiaAcregQuantiteEmplacement()
+        ) {
             $this->setXMLCommentRegateAcStock();
         }
     }

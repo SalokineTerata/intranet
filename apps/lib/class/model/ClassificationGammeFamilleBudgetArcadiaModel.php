@@ -177,6 +177,7 @@ class ClassificationGammeFamilleBudgetArcadiaModel extends AbstractModel {
         $htmlList = new HtmlListSelect();
 
         $ftaModel = new FtaModel($paramIdFta);
+        $ftaModel->setDataFtaTableToCompare();
         $dataFieldIdArcadiaGammeFamilleBudget = $ftaModel->getDataField(FtaModel::FIELDNAME_ID_ARCADIA_GAMME_FAMILLE_BUDGET);
         $arrayGammeFamilleBudget = DatabaseOperation::convertSqlStatementWithKeyAndOneFieldToArray(
                         'SELECT DISTINCT ' . ArcadiaGammeFamilleBudgetModel::TABLENAME . '.' . ArcadiaGammeFamilleBudgetModel::KEYNAME
@@ -230,7 +231,7 @@ class ClassificationGammeFamilleBudgetArcadiaModel extends AbstractModel {
         } else {
             $htmlList->setIsWarningMessage($dataFieldIdArcadiaGammeFamilleBudget->getDataValidationSuccessful());
             $htmlList->setWarningMessage($dataFieldIdArcadiaGammeFamilleBudget->getDataWarningMessage());
-        }
+        }           
 
         $htmlList->getAttributes()->getName()->setValue(FtaModel::FIELDNAME_ID_ARCADIA_GAMME_FAMILLE_BUDGET);
         $htmlList->setLabel(DatabaseDescription::getFieldDocLabel(FtaModel::TABLENAME, FtaModel::FIELDNAME_ID_ARCADIA_GAMME_FAMILLE_BUDGET));

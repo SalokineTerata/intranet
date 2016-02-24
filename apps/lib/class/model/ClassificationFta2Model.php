@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Description of ClassificationFtaModel
+ * Description of ClassificationFta2Model
  * Table de classification Fta2
  *
  * @author franckwastaken
@@ -19,7 +19,10 @@ class ClassificationFta2Model extends AbstractModel {
     const FIELDNAME_ID_ENVIRONNEMENT = 'id_Environnement';
     const FIELDNAME_ID_RESEAU = 'id_Reseau';
     const FIELDNAME_ID_SAISONNALITE = 'id_Saisonnalite';
+    const ID_CLASSIFICATION_TRADITION_DASIE = '33';
+    const ID_CLASSIFICATION_MARIE = '121';
     const ID_CLASSIFICATION_EXPORT = '22';
+    const ID_CLASSIFICATION_LIASIA = '184';
     const ID_CLASSIFICATION_LIBRE_SERVICE = '5';
     const ID_CLASSIFICATION_FESTIF = '71';
     const LABEL_CLASSIFICATION_GAMME_FAMILLE_BUDGET = 'Gamme Famille Budget';

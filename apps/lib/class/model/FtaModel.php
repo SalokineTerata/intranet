@@ -151,6 +151,18 @@ class FtaModel extends AbstractModel {
     private $modelSiteExpedition;
 
     /**
+     * Site d'expedition de la FTA
+     * @var GeoArcadiaModel
+     */
+    private $modelGeoArcadia;
+
+    /**
+     * Classification de la FTA
+     * @var ClassificationFta2
+     */
+    private $modelClassificationFta2;
+
+    /**
      * Catégorie Produit Optiventes
      * @var ArcadiaCategorieProduitOptiventesModel
      */
@@ -161,6 +173,7 @@ class FtaModel extends AbstractModel {
      * @var AnnexeUniteFacturationModel 
      */
     private $modelAnnexeUniteFacturation;
+
     /**
      *
      * @var AnnexeEnvironnementConservationGroupeModel 
@@ -214,6 +227,14 @@ class FtaModel extends AbstractModel {
         );
         $this->setModelAnnexeEnvironnementConservationGroupe(
                 new AnnexeEnvironnementConservationGroupeModel($this->getDataField(self::FIELDNAME_ENVIRONNEMENT_CONSERVATION)->getFieldValue()
+                , DatabaseRecord::VALUE_DONT_CREATE_RECORD_IN_DATABASE_IF_KEY_DOESNT_EXIST)
+        );
+        $this->setModelGeoArcadia(
+                new GeoArcadiaModel($this->getDataField(self::FIELDNAME_SITE_EXPEDITION_FTA)->getFieldValue()
+                , DatabaseRecord::VALUE_DONT_CREATE_RECORD_IN_DATABASE_IF_KEY_DOESNT_EXIST)
+        );
+        $this->setModelClassificationFta2(
+                new ClassificationFta2Model($this->getDataField(self::FIELDNAME_ID_FTA_CLASSIFICATION2)->getFieldValue()
                 , DatabaseRecord::VALUE_DONT_CREATE_RECORD_IN_DATABASE_IF_KEY_DOESNT_EXIST)
         );
     }
@@ -443,6 +464,30 @@ class FtaModel extends AbstractModel {
     }
 
     /**
+     * Lien vers la table geoArcadia
+     * @return GeoArcadiaModel
+     */
+    function getModelGeoArcadia() {
+        return $this->modelGeoArcadia;
+    }
+
+    function setModelGeoArcadia(GeoArcadiaModel $modelGeoArcadia) {
+        $this->modelGeoArcadia = $modelGeoArcadia;
+    }
+
+    /**
+     * Lien vers la table geoArcadia
+     * @return ClassificationFta2Model
+     */
+    function getModelClassificationFta2() {
+        return $this->modelClassificationFta2;
+    }
+
+    function setModelClassificationFta2(ClassificationFta2Model $modelClassificationFta2) {
+        $this->modelClassificationFta2 = $modelClassificationFta2;
+    }
+
+    /**
      * 
      * @return GeoModel
      */
@@ -553,7 +598,7 @@ class FtaModel extends AbstractModel {
     function setModelArcadiaCategorieProduitOptiventes(ArcadiaCategorieProduitOptiventesModel $modelArcadiaCategorieProduitOptiventes) {
         $this->modelArcadiaCategorieProduitOptiventes = $modelArcadiaCategorieProduitOptiventes;
     }
-    
+
     function getModelAnnexeEnvironnementConservationGroupe() {
         return $this->modelAnnexeEnvironnementConservationGroupe;
     }
@@ -562,7 +607,6 @@ class FtaModel extends AbstractModel {
         $this->modelAnnexeEnvironnementConservationGroupe = $modelAnnexeEnvironnementConservationGroupe;
     }
 
-    
     /**
      * Tableau de DatabaseRecord contenant les processus de cycle de vie
      * de la FTA

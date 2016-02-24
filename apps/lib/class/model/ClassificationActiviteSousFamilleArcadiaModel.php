@@ -254,6 +254,8 @@ class ClassificationActiviteSousFamilleArcadiaModel extends AbstractModel {
         $htmlList = new HtmlListSelect();
 
         $ftaModel = new FtaModel($paramIdFta);
+        $ftaModel->setDataFtaTableToCompare();
+
         $idActivite = ClassificationFta2Model::getIdClassificationTypeByTypeNameAndIdClassificationFta2($paramIdClassificationFta2, ClassificationFta2Model::FIELDNAME_ID_ACTIVITE);
 
         $dataFieldIdArcadiaSousFamille = $ftaModel->getDataField(FtaModel::FIELDNAME_ID_ARCADIA_SOUS_FAMILLE);

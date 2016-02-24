@@ -33,12 +33,15 @@ class Fta2ArcadiaController {
     const ARTICLE_REF_END = "        </ARTICLE_REF>\n";
     const DATA_IMPORT_START = "            <DataToImport>\n";
     const DATA_IMPORT_END = "            </DataToImport>\n";
+    const ESP_PRODUITS_FINIS_START = "        <ESP_PRODUITS_FINIS>\n";
+    const ESP_PRODUITS_FINIS_END = "        </ESP_PRODUITS_FINIS>\n";
     const RECORDSET_END = "                </Recordset>\n";
     const CREATE = "create";
     const UPDATE = "update";
     const COD_SOCIETE_AGIS = "40";
     const CNUF_AGIS = "336676";
     const NB_UNITE_CONDITIONNEMENT = "1";
+    const LIEU_PRODUIT_FINI = "1";
     const OUI = "1";
     const NON = "0";
     const LIMIT_NUMBER_COD_NDP = "8";
@@ -82,6 +85,7 @@ class Fta2ArcadiaController {
     private $XMLarcadiaDureeDeVie;
     private $actionProposal;
     private $XMLrecordsetBalise;
+    private $XMLrecordsetBaliseEspProduitFini;
     private $XMLarcadiaNoArtKey;
     private $XMLarcadiaCodeDouane;
     private $XMLarcadiaLogoEcoEmballage;
@@ -113,6 +117,15 @@ class Fta2ArcadiaController {
     private $XMLarcadiaFestif;
     private $XMLarcadiaFamilleDeclCaClient;
     private $XMLarcadiaMarque;
+    private $XMLarcadiaCodProduit;
+    private $XMLarcadiaAcregSite;
+    private $XMLarcadiaAcregLieu;
+    private $XMLarcadiaAcregNoquai;
+    private $XMLarcadiaAcregNomethode;
+    private $XMLarcadiaAcregSiteSecondaire;
+    private $XMLarcadiaAcregLieuSecondaire;
+    private $XMLarcadiaAcregTypeProdEmplacement;
+    private $XMLarcadiaAcregQuantiteEmplacement;
     private $arcadiaExportResult;
     private $XMLCommentEntete;
     private $XMLCommentInfoGenerale;
@@ -126,6 +139,8 @@ class Fta2ArcadiaController {
     private $XMLCommentOptiventes;
     private $XMLCommentFourniture;
     private $XMLCommentRegate;
+    private $XMLCommentRegateAcAchat;
+    private $XMLCommentRegateAcStock;
 
     public function __construct($paramFtaModel) {
         /**
@@ -234,6 +249,7 @@ class Fta2ArcadiaController {
         $fta2ArcadiaTrasactionModel->getDataField(Fta2ArcadiaTransactionModel::FIELDNAME_TAG_TYPE_TRANSACTION)->setFieldValue($actionProposal);
         $fta2ArcadiaTrasactionModel->saveToDatabase();
         $this->setXMLRecordsetBalise($actionProposal);
+        $this->setXMLrecordsetBaliseEspProduitFini();
         $this->actionProposal = $actionProposal;
     }
 
@@ -262,30 +278,33 @@ class Fta2ArcadiaController {
         $this->transformFestif();
         $this->transformCodPoidsCstUvc();
         $this->transformOptiventes();
+        $this->transformSiteDePreparationReception();
     }
 
     /**
-     * Initialisation des balises 
+     * Initialisation des balises avec le code article ldc et idFta
      */
     function setAllBalise() {
         $this->setXMLArcadiaNoArtKey();
         $this->setXMLArcadiaParametre();
+        $this->setXMLArcadiaCodProduit();
     }
 
     /**
      * Initialisation des balises dont la valeur ne change pas 
      */
     function transformCREATE() {
-//        if ($this->getActionProposal() == self::CREATE) {
-        $this->transformCNUF();
-        $this->transformUtilisableGroupe();
-        $this->transformCodSociete();
-        $this->transformProlongationDLC();
-        $this->transformIsHallal();
-        $this->transformGeneriqueFm();
-        $this->transformTypeConditPub();
-        $this->transformUniteConditionnement();
-//        }
+        if ($this->getActionProposal() == self::CREATE) {
+            $this->transformCNUF();
+            $this->transformUtilisableGroupe();
+            $this->transformCodSociete();
+            $this->transformProlongationDLC();
+            $this->transformIsHallal();
+            $this->transformGeneriqueFm();
+            $this->transformTypeConditPub();
+            $this->transformUniteConditionnement();
+            $this->transformAcregLieu();
+        }
     }
 
     /**
@@ -293,6 +312,14 @@ class Fta2ArcadiaController {
      */
     function transformIsHallal() {
         $this->setXMLArcadiaIsHallal();
+    }
+
+    /**
+     * Initialisation des balises dont la valeur ne change pas 
+     */
+    function transformAcregLieu() {
+        $this->setXMLArcadiaAcregLieu();
+        $this->setXMLArcadiaAcregLieuSecondaire();
     }
 
     /**
@@ -359,23 +386,75 @@ class Fta2ArcadiaController {
         /**
          * Vérifie l'actualisation de la données
          */
-//        $checkDiff = $this->getFtaModel()->getDataField(FtaModel::FIELDNAME_UNITE_FACTURATION)->isFieldDiff();
-//        if ($checkDiff or $this->getActionProposal() == self::CREATE) {
-        $this->setXMLArcadiaCodPoidsCstUvc($codPoidsCstUvc);
-//        }
+        $checkDiff = $this->getFtaModel()->getDataField(FtaModel::FIELDNAME_UNITE_FACTURATION)->isFieldDiff();
+        if ($checkDiff or $this->getActionProposal() == self::CREATE) {
+            $this->setXMLArcadiaCodPoidsCstUvc($codPoidsCstUvc);
+        }
     }
 
     /**
      * On vérifie si le site de production de la Fta a été modifié
      */
     function transformSiteDePorduction() {
-//        $checkDiff = $this->getFtaModel()->getDataField(FtaModel::FIELDNAME_SITE_PRODUCTION)->isFieldDiff();
-//        if ($checkDiff or $this->getActionProposal() == self::CREATE) {
-        $geoModel = $this->getFtaModel()->getModelSiteProduction();
-        $this->setXMLArcadiaSiteDeProd($geoModel);
-        $this->setXMLArcadiaSiteRefEcoEmb($geoModel->getDataField(geomodel::FIELDNAME_ID_SITE_GROUPE)->getFieldValue());
-        $this->setXMLArcadiaFamilleDeclCaClient($geoModel->getDataField(geomodel::FIELDNAME_ID_SITE_GROUPE)->getFieldValue());
-//        }
+        $checkDiff = $this->getFtaModel()->getDataField(FtaModel::FIELDNAME_SITE_PRODUCTION)->isFieldDiff();
+        if ($checkDiff or $this->getActionProposal() == self::CREATE) {
+            $geoModel = $this->getFtaModel()->getModelSiteProduction();
+            $this->setXMLArcadiaSiteDeProd($geoModel);
+            $this->setXMLArcadiaSiteRefEcoEmb($geoModel->getDataField(geomodel::FIELDNAME_ID_SITE_GROUPE)->getFieldValue());
+            $this->setXMLArcadiaFamilleDeclCaClient($geoModel->getDataField(geomodel::FIELDNAME_ID_SITE_GROUPE)->getFieldValue());
+        }
+    }
+
+    /**
+     * On vérifie si le site d'expedition de la Fta a été modifié
+     * Cela concerne le site principale et le site secondaire
+     */
+    function transformSiteDePreparationReception() {
+        $checkDiff = $this->getFtaModel()->getDataField(FtaModel::FIELDNAME_SITE_EXPEDITION_FTA)->isFieldDiff();
+        if ($checkDiff or $this->getActionProposal() == self::CREATE) {
+            $geoModel = $this->getFtaModel()->getModelSiteExpedition();
+            $this->setXMLArcadiaAcregSite($geoModel);
+            $this->setXMLArcadiaAcregSiteSecondaire($geoModel);
+            $this->transformFileDePrepAndMethodeDePrep();
+
+            /**
+             * On vérifie sie le site d'expediction est PLB 
+             * si oui 
+             */
+            if ($geoModel->getKeyValue() == GeoModel::ID_SITE_PLB) {
+                $idMarque = $this->getFtaModel()->getModelClassificationFta2()->getDataField(ClassificationFta2Model::FIELDNAME_ID_MARQUE)->getFieldValue();
+                /**
+                 * Si départ PLB et marque TDA ou Marie alors "2 - PLB - MARIE - TDA"
+                 */
+                if ($idMarque == ClassificationFta2Model::ID_CLASSIFICATION_MARIE or $idMarque == ClassificationFta2Model::ID_CLASSIFICATION_TRADITION_DASIE) {
+                    $XMLarcadiaAcregTypeProdEmplacement = GeoArcadiaModel::CODE_TYPE_PRODUIT_PLB_MARIE_TDA;
+                } else
+                /**
+                 * Si départ PLB et différent de marque TDA ou Marie alors "3 - PLB - AGIS"
+                 */ {
+                    $XMLarcadiaAcregTypeProdEmplacement = GeoArcadiaModel::CODE_TYPE_PRODUIT_PLB_AGIS;
+                }
+            } else
+            /**
+             * Sinon : 50 ( Rodolphe peut être amené à mettre 51 )
+             */ {
+                $XMLarcadiaAcregTypeProdEmplacement = GeoArcadiaModel::CODE_TYPE_PRODUIT_PLATEFORME;
+            }
+            $this->setXMLArcadiaAcregTypeProdEmplacement($XMLarcadiaAcregTypeProdEmplacement);
+        }
+    }
+
+    /**
+     * Si le site de production a été modifié on actualise le file et methode de préparation
+     */
+    function transformFileDePrepAndMethodeDePrep() {
+
+        $geoArcadiaModel = $this->getFtaModel()->getModelGeoArcadia();
+        $filePrep = $geoArcadiaModel->getDataField(GeoArcadiaModel::FIELDNAME_FILE_PREP)->getFieldValue();
+        $methodePrep = $geoArcadiaModel->getDataField(GeoArcadiaModel::FIELDNAME_METHODE_PREP)->getFieldValue();
+
+        $this->setXMLArcadiaAcregNomethode($methodePrep);
+        $this->setXMLArcadiaAcregNoquai($filePrep);
     }
 
     /**
@@ -383,23 +462,23 @@ class Fta2ArcadiaController {
      * En effet cette donnée concerne le Libellé Production et Libellé Commercial
      */
     function transformDIN() {
-//        $checkDiff = $this->getFtaModel()->getDataField(FtaModel::FIELDNAME_LIBELLE)->isFieldDiff();
-//        if ($checkDiff or $this->getActionProposal() == self::CREATE) {
-        $dinValue = $this->getFtaModel()->getDataField(FtaModel::FIELDNAME_LIBELLE)->getFieldValue();
-        $this->setXMLArcadiaArticleRefLicCcial($dinValue);
-        $this->setXMLArcadiaArticleRefLicProduction($dinValue);
-//        }
+        $checkDiff = $this->getFtaModel()->getDataField(FtaModel::FIELDNAME_LIBELLE)->isFieldDiff();
+        if ($checkDiff or $this->getActionProposal() == self::CREATE) {
+            $dinValue = $this->getFtaModel()->getDataField(FtaModel::FIELDNAME_LIBELLE)->getFieldValue();
+            $this->setXMLArcadiaArticleRefLicCcial($dinValue);
+            $this->setXMLArcadiaArticleRefLicProduction($dinValue);
+        }
     }
 
     /**
      * On vérifie si la désignation commerciale de la Fta a été modifié
      */
     function transformLibelleTarif() {
-//        $checkDiff = $this->getFtaModel()->getDataField(FtaModel::FIELDNAME_DESIGNATION_COMMERCIALE)->isFieldDiff();
-//        if ($checkDiff or $this->getActionProposal() == self::CREATE) {
-        $designationCommertialeValue = $this->getFtaModel()->getDataField(FtaModel::FIELDNAME_DESIGNATION_COMMERCIALE)->getFieldValue();
-        $this->setXMLArcadiaLibelleTarif($designationCommertialeValue);
-//        }
+        $checkDiff = $this->getFtaModel()->getDataField(FtaModel::FIELDNAME_DESIGNATION_COMMERCIALE)->isFieldDiff();
+        if ($checkDiff or $this->getActionProposal() == self::CREATE) {
+            $designationCommertialeValue = $this->getFtaModel()->getDataField(FtaModel::FIELDNAME_DESIGNATION_COMMERCIALE)->getFieldValue();
+            $this->setXMLArcadiaLibelleTarif($designationCommertialeValue);
+        }
     }
 
     /**
@@ -407,11 +486,11 @@ class Fta2ArcadiaController {
      * En effet cette donnée concerne le Gencod Administratif
      */
     function transformEanArticle() {
-//        $checkDiff = $this->getFtaModel()->getDataField(FtaModel::FIELDNAME_EAN_UVC)->isFieldDiff();
-//        if ($checkDiff or $this->getActionProposal() == self::CREATE) {
-        $eanArticleValue = $this->getFtaModel()->getDataField(FtaModel::FIELDNAME_EAN_UVC)->getFieldValue();
-        $this->setXMLArcadiaEanArticle($eanArticleValue);
-//        }
+        $checkDiff = $this->getFtaModel()->getDataField(FtaModel::FIELDNAME_EAN_UVC)->isFieldDiff();
+        if ($checkDiff or $this->getActionProposal() == self::CREATE) {
+            $eanArticleValue = $this->getFtaModel()->getDataField(FtaModel::FIELDNAME_EAN_UVC)->getFieldValue();
+            $this->setXMLArcadiaEanArticle($eanArticleValue);
+        }
     }
 
     /**
@@ -419,11 +498,11 @@ class Fta2ArcadiaController {
      * En effet cette donnée concerne la DLC Commerciale
      */
     function transformDLC() {
-//        $checkDiff = $this->getFtaModel()->getDataField(FtaModel::FIELDNAME_DUREE_DE_VIE)->isFieldDiff();
-//        if ($checkDiff or $this->getActionProposal() == self::CREATE) {
-        $dlcValue = $this->getFtaModel()->getDataField(FtaModel::FIELDNAME_DUREE_DE_VIE)->getFieldValue();
-        $this->setXMLArcadiaDLC($dlcValue);
-//        }
+        $checkDiff = $this->getFtaModel()->getDataField(FtaModel::FIELDNAME_DUREE_DE_VIE)->isFieldDiff();
+        if ($checkDiff or $this->getActionProposal() == self::CREATE) {
+            $dlcValue = $this->getFtaModel()->getDataField(FtaModel::FIELDNAME_DUREE_DE_VIE)->getFieldValue();
+            $this->setXMLArcadiaDLC($dlcValue);
+        }
     }
 
     /**
@@ -431,11 +510,11 @@ class Fta2ArcadiaController {
      * En effet cette donnée concerne la Duree de vie
      */
     function transformDureeDeVie() {
-//        $checkDiff = $this->getFtaModel()->getDataField(FtaModel::FIELDNAME_DUREE_DE_VIE_TECHNIQUE_PRODUCTION)->isFieldDiff();
-//        if ($checkDiff or $this->getActionProposal() == self::CREATE) {
-        $dureeDeVieValue = $this->getFtaModel()->getDataField(FtaModel::FIELDNAME_DUREE_DE_VIE_TECHNIQUE_PRODUCTION)->getFieldValue();
-        $this->setXMLArcadiaDureeDeVie($dureeDeVieValue);
-//        }
+        $checkDiff = $this->getFtaModel()->getDataField(FtaModel::FIELDNAME_DUREE_DE_VIE_TECHNIQUE_PRODUCTION)->isFieldDiff();
+        if ($checkDiff or $this->getActionProposal() == self::CREATE) {
+            $dureeDeVieValue = $this->getFtaModel()->getDataField(FtaModel::FIELDNAME_DUREE_DE_VIE_TECHNIQUE_PRODUCTION)->getFieldValue();
+            $this->setXMLArcadiaDureeDeVie($dureeDeVieValue);
+        }
     }
 
     /**
@@ -444,14 +523,14 @@ class Fta2ArcadiaController {
      * En effet une modification engengre le recalcule de DTS
      */
     function transformDTS() {
-//        $checkDiffDLC = $this->getFtaModel()->getDataField(FtaModel::FIELDNAME_DUREE_DE_VIE)->isFieldDiff();
-//        $checkDiffDurreDeVie = $this->getFtaModel()->getDataField(FtaModel::FIELDNAME_DUREE_DE_VIE_TECHNIQUE_PRODUCTION)->isFieldDiff();
-//        if ($checkDiffDurreDeVie or $checkDiffDLC or $this->getActionProposal() == self::CREATE) {
-        $dlcValue = $this->getFtaModel()->getDataField(FtaModel::FIELDNAME_DUREE_DE_VIE)->getFieldValue();
-        $dureeDeVieValue = $this->getFtaModel()->getDataField(FtaModel::FIELDNAME_DUREE_DE_VIE_TECHNIQUE_PRODUCTION)->getFieldValue();
-        $dtsValue = $dureeDeVieValue - $dlcValue;
-        $this->setXMLArcadiaDTS($dtsValue);
-//        }
+        $checkDiffDLC = $this->getFtaModel()->getDataField(FtaModel::FIELDNAME_DUREE_DE_VIE)->isFieldDiff();
+        $checkDiffDurreDeVie = $this->getFtaModel()->getDataField(FtaModel::FIELDNAME_DUREE_DE_VIE_TECHNIQUE_PRODUCTION)->isFieldDiff();
+        if ($checkDiffDurreDeVie or $checkDiffDLC or $this->getActionProposal() == self::CREATE) {
+            $dlcValue = $this->getFtaModel()->getDataField(FtaModel::FIELDNAME_DUREE_DE_VIE)->getFieldValue();
+            $dureeDeVieValue = $this->getFtaModel()->getDataField(FtaModel::FIELDNAME_DUREE_DE_VIE_TECHNIQUE_PRODUCTION)->getFieldValue();
+            $dtsValue = $dureeDeVieValue - $dlcValue;
+            $this->setXMLArcadiaDTS($dtsValue);
+        }
     }
 
     /**
@@ -459,12 +538,12 @@ class Fta2ArcadiaController {
      * Et on récupère les 8 premiers caractères 
      */
     function transformCodeDouane() {
-//        $checkDiff = $this->getFtaModel()->getDataField(FtaModel::FIELDNAME_CODE_DOUANE_FTA)->isFieldDiff();
-//        if ($checkDiff or $this->getActionProposal() == self::CREATE) {
-        $codeDouaneTmp = $this->getFtaModel()->getDataField(FtaModel::FIELDNAME_CODE_DOUANE_FTA)->getFieldValue();
-        $codeDouaneValue = FtaController::getFirstStringNumber($codeDouaneTmp, 0, self::LIMIT_NUMBER_COD_NDP);
-        $this->setXMLArcadiaCodeDouane($codeDouaneValue);
-//        }
+        $checkDiff = $this->getFtaModel()->getDataField(FtaModel::FIELDNAME_CODE_DOUANE_FTA)->isFieldDiff();
+        if ($checkDiff or $this->getActionProposal() == self::CREATE) {
+            $codeDouaneTmp = $this->getFtaModel()->getDataField(FtaModel::FIELDNAME_CODE_DOUANE_FTA)->getFieldValue();
+            $codeDouaneValue = FtaController::getFirstStringNumber($codeDouaneTmp, 0, self::LIMIT_NUMBER_COD_NDP);
+            $this->setXMLArcadiaCodeDouane($codeDouaneValue);
+        }
     }
 
     /**
@@ -474,72 +553,72 @@ class Fta2ArcadiaController {
      * Si non la balise Eco-Emballages est à non
      */
     function transformLogoEmballage() {
-//        $checkDiff = $this->getFtaModel()->getDataField(FtaModel::FIELDNAME_ID_FTA_CLASSIFICATION2)->isFieldDiff();
-//        if ($checkDiff or $this->getActionProposal() == self::CREATE) {
-        $idClassificationFta2 = $this->getFtaModel()->getDataField(FtaModel::FIELDNAME_ID_FTA_CLASSIFICATION2)->getFieldValue();
-        $idRayon = ClassificationFta2Model::getIdClassificationTypeByTypeNameAndIdClassificationFta2($idClassificationFta2, ClassificationFta2Model::FIELDNAME_ID_RAYON);
-        if ($idRayon == ClassificationFta2Model::ID_CLASSIFICATION_LIBRE_SERVICE) {
-            $logoEmballageValue = self::OUI;
-        } else {
-            $logoEmballageValue = self::NON;
+        $checkDiff = $this->getFtaModel()->getDataField(FtaModel::FIELDNAME_ID_FTA_CLASSIFICATION2)->isFieldDiff();
+        if ($checkDiff or $this->getActionProposal() == self::CREATE) {
+            $idClassificationFta2 = $this->getFtaModel()->getDataField(FtaModel::FIELDNAME_ID_FTA_CLASSIFICATION2)->getFieldValue();
+            $idRayon = ClassificationFta2Model::getIdClassificationTypeByTypeNameAndIdClassificationFta2($idClassificationFta2, ClassificationFta2Model::FIELDNAME_ID_RAYON);
+            if ($idRayon == ClassificationFta2Model::ID_CLASSIFICATION_LIBRE_SERVICE) {
+                $logoEmballageValue = self::OUI;
+            } else {
+                $logoEmballageValue = self::NON;
+            }
+            $this->setXMLArcadiaLogoEcoEmballage($logoEmballageValue);
         }
-        $this->setXMLArcadiaLogoEcoEmballage($logoEmballageValue);
-//        }
     }
 
     /**
      * On vérifie si l'unité de facturation a été modifié
      */
     function transformUniteFacturation() {
-//        $checkDiff = $this->getFtaModel()->getDataField(FtaModel::FIELDNAME_UNITE_FACTURATION)->isFieldDiff();
-//        if ($checkDiff or $this->getActionProposal() == self::CREATE) {
-        $uniteFacturationArcadiaValue = $this->getFtaModel()->getModelAnnexeUniteFacturation()->getDataField(AnnexeUniteFacturationModel::FIELDNAME_ID_ARCADIA_UNITE_FACTURATION)->getFieldValue();
-        $this->setXMLArcadiaUniteDeFacturation($uniteFacturationArcadiaValue);
-//        }
+        $checkDiff = $this->getFtaModel()->getDataField(FtaModel::FIELDNAME_UNITE_FACTURATION)->isFieldDiff();
+        if ($checkDiff or $this->getActionProposal() == self::CREATE) {
+            $uniteFacturationArcadiaValue = $this->getFtaModel()->getModelAnnexeUniteFacturation()->getDataField(AnnexeUniteFacturationModel::FIELDNAME_ID_ARCADIA_UNITE_FACTURATION)->getFieldValue();
+            $this->setXMLArcadiaUniteDeFacturation($uniteFacturationArcadiaValue);
+        }
     }
 
     /**
      * On vérifie si la marque arcadia a été modifié
      */
     function transformMarqueArcadia() {
-//        $checkDiff = $this->getFtaModel()->getDataField(FtaModel::FIELDNAME_ID_ARCADIA_MARQUE)->isFieldDiff();
-//        if ($checkDiff or $this->getActionProposal() == self::CREATE) {
-        $idArcadiaMarque = $this->getFtaModel()->getDataField(FtaModel::FIELDNAME_ID_ARCADIA_MARQUE)->getFieldValue();
-        $this->setXMLArcadiaMarque($idArcadiaMarque);
-//        }
+        $checkDiff = $this->getFtaModel()->getDataField(FtaModel::FIELDNAME_ID_ARCADIA_MARQUE)->isFieldDiff();
+        if ($checkDiff or $this->getActionProposal() == self::CREATE) {
+            $idArcadiaMarque = $this->getFtaModel()->getDataField(FtaModel::FIELDNAME_ID_ARCADIA_MARQUE)->getFieldValue();
+            $this->setXMLArcadiaMarque($idArcadiaMarque);
+        }
     }
 
     /**
      * On vérifie si la famille budget a été modifié
      */
     function transformFamilleBudget() {
-//        $checkDiff = $this->getFtaModel()->getDataField(FtaModel::FIELDNAME_ID_ARCADIA_FAMILLE_BUDGET)->isFieldDiff();
-//        if ($checkDiff or $this->getActionProposal() == self::CREATE) {
-        $idFamilleBudget = $this->getFtaModel()->getDataField(FtaModel::FIELDNAME_ID_ARCADIA_FAMILLE_BUDGET)->getFieldValue();
-        $this->setXMLArcadiaFamilleBudget($idFamilleBudget);
-//        }
+        $checkDiff = $this->getFtaModel()->getDataField(FtaModel::FIELDNAME_ID_ARCADIA_FAMILLE_BUDGET)->isFieldDiff();
+        if ($checkDiff or $this->getActionProposal() == self::CREATE) {
+            $idFamilleBudget = $this->getFtaModel()->getDataField(FtaModel::FIELDNAME_ID_ARCADIA_FAMILLE_BUDGET)->getFieldValue();
+            $this->setXMLArcadiaFamilleBudget($idFamilleBudget);
+        }
     }
 
     /**
      * On vérifie si la gamme famille budgete a été modifié
      */
     function transformGammeFamilleBudget() {
-//        $checkDiff = $this->getFtaModel()->getDataField(FtaModel::FIELDNAME_ID_ARCADIA_GAMME_FAMILLE_BUDGET)->isFieldDiff();
-//        if ($checkDiff or $this->getActionProposal() == self::CREATE) {
-        $idGammeFamillleBudget = $this->getFtaModel()->getDataField(FtaModel::FIELDNAME_ID_ARCADIA_GAMME_FAMILLE_BUDGET)->getFieldValue();
-        $this->setXMLArcadiaGammeFamilleBudget($idGammeFamillleBudget);
-//        }
+        $checkDiff = $this->getFtaModel()->getDataField(FtaModel::FIELDNAME_ID_ARCADIA_GAMME_FAMILLE_BUDGET)->isFieldDiff();
+        if ($checkDiff or $this->getActionProposal() == self::CREATE) {
+            $idGammeFamillleBudget = $this->getFtaModel()->getDataField(FtaModel::FIELDNAME_ID_ARCADIA_GAMME_FAMILLE_BUDGET)->getFieldValue();
+            $this->setXMLArcadiaGammeFamilleBudget($idGammeFamillleBudget);
+        }
     }
 
     /**
      * On vérifie si la gamme coop a été modifié
      */
     function transformGammeCoop() {
-//        $checkDiff = $this->getFtaModel()->getDataField(FtaModel::FIELDNAME_ID_ARCADIA_GAMME_COOP)->isFieldDiff();
-//        if ($checkDiff or $this->getActionProposal() == self::CREATE) {
-        $idArcadiaGammeCoop = $this->getFtaModel()->getDataField(FtaModel::FIELDNAME_ID_ARCADIA_GAMME_COOP)->getFieldValue();
-        $this->setXMLArcadiaGammeCoop($idArcadiaGammeCoop);
-//        }
+        $checkDiff = $this->getFtaModel()->getDataField(FtaModel::FIELDNAME_ID_ARCADIA_GAMME_COOP)->isFieldDiff();
+        if ($checkDiff or $this->getActionProposal() == self::CREATE) {
+            $idArcadiaGammeCoop = $this->getFtaModel()->getDataField(FtaModel::FIELDNAME_ID_ARCADIA_GAMME_COOP)->getFieldValue();
+            $this->setXMLArcadiaGammeCoop($idArcadiaGammeCoop);
+        }
     }
 
     /**
@@ -547,61 +626,61 @@ class Fta2ArcadiaController {
      * si oui on verifie si la saisonalité est festive alors COD_FESTIF est à oui
      */
     function transformFestif() {
-//        $checkDiff = $this->getFtaModel()->getDataField(FtaModel::FIELDNAME_ID_FTA_CLASSIFICATION2)->isFieldDiff();
-//        if ($checkDiff or $this->getActionProposal() == self::CREATE) {
-        $idClassificationFta2 = $this->getFtaModel()->getDataField(FtaModel::FIELDNAME_ID_FTA_CLASSIFICATION2)->getFieldValue();
-        $idSaisonalite = ClassificationFta2Model::getIdClassificationTypeByTypeNameAndIdClassificationFta2($idClassificationFta2, ClassificationFta2Model::FIELDNAME_ID_SAISONNALITE);
-        if ($idSaisonalite == ClassificationFta2Model::ID_CLASSIFICATION_FESTIF) {
-            $festifValue = self::OUI;
-        } else {
-            $festifValue = self::NON;
+        $checkDiff = $this->getFtaModel()->getDataField(FtaModel::FIELDNAME_ID_FTA_CLASSIFICATION2)->isFieldDiff();
+        if ($checkDiff or $this->getActionProposal() == self::CREATE) {
+            $idClassificationFta2 = $this->getFtaModel()->getDataField(FtaModel::FIELDNAME_ID_FTA_CLASSIFICATION2)->getFieldValue();
+            $idSaisonalite = ClassificationFta2Model::getIdClassificationTypeByTypeNameAndIdClassificationFta2($idClassificationFta2, ClassificationFta2Model::FIELDNAME_ID_SAISONNALITE);
+            if ($idSaisonalite == ClassificationFta2Model::ID_CLASSIFICATION_FESTIF) {
+                $festifValue = self::OUI;
+            } else {
+                $festifValue = self::NON;
+            }
+            $this->setXMLArcadiaFestif($festifValue);
         }
-        $this->setXMLArcadiaFestif($festifValue);
-//        }
     }
 
     /**
      * On vérifie si la catégorie du produit optivente a été modifié
      */
     function transformOptiventes() {
-//        $checkDiff = $this->getFtaModel()->getDataField(FtaModel::FIELDNAME_ID_ARCADIA_CATEGEORIE_PRODUIT_OPTIVENTES)->isFieldDiff();
-//        if ($checkDiff or $this->getActionProposal() == self::CREATE) {
-        $CategorieProduitOptiventes = $this->getFtaModel()->getDataField(FtaModel::FIELDNAME_ID_ARCADIA_CATEGEORIE_PRODUIT_OPTIVENTES)->getFieldValue();
-        $this->setXMLArcadiaOptiventes($CategorieProduitOptiventes);
-//        }
+        $checkDiff = $this->getFtaModel()->getDataField(FtaModel::FIELDNAME_ID_ARCADIA_CATEGEORIE_PRODUIT_OPTIVENTES)->isFieldDiff();
+        if ($checkDiff or $this->getActionProposal() == self::CREATE) {
+            $CategorieProduitOptiventes = $this->getFtaModel()->getDataField(FtaModel::FIELDNAME_ID_ARCADIA_CATEGEORIE_PRODUIT_OPTIVENTES)->getFieldValue();
+            $this->setXMLArcadiaOptiventes($CategorieProduitOptiventes);
+        }
     }
 
     /**
      * On vérifie si la sous famille a été modifié
      */
     function transformCodSousFamille() {
-//        $checkDiff = $this->getFtaModel()->getDataField(FtaModel::FIELDNAME_ID_ARCADIA_SOUS_FAMILLE)->isFieldDiff();
-//        if ($checkDiff or $this->getActionProposal() == self::CREATE) {
-        $codSousFamilleValue = $this->getFtaModel()->getDataField(FtaModel::FIELDNAME_ID_ARCADIA_SOUS_FAMILLE)->getFieldValue();
-        $this->setXMLArcadiaCodSousFam($codSousFamilleValue);
-//        }
+        $checkDiff = $this->getFtaModel()->getDataField(FtaModel::FIELDNAME_ID_ARCADIA_SOUS_FAMILLE)->isFieldDiff();
+        if ($checkDiff or $this->getActionProposal() == self::CREATE) {
+            $codSousFamilleValue = $this->getFtaModel()->getDataField(FtaModel::FIELDNAME_ID_ARCADIA_SOUS_FAMILLE)->getFieldValue();
+            $this->setXMLArcadiaCodSousFam($codSousFamilleValue);
+        }
     }
 
     /**
      * On vérifie si la famille vente a été modifié
      */
     function transformCodFamVte() {
-//        $checkDiff = $this->getFtaModel()->getDataField(FtaModel::FIELDNAME_ID_ARCADIA_FAMILLE_VENTE)->isFieldDiff();
-//        if ($checkDiff or $this->getActionProposal() == self::CREATE) {
-        $codFamilleVenteValue = $this->getFtaModel()->getDataField(FtaModel::FIELDNAME_ID_ARCADIA_FAMILLE_VENTE)->getFieldValue();
-        $this->setXMLArcadiaCodFamVte($codFamilleVenteValue);
-//        }
+        $checkDiff = $this->getFtaModel()->getDataField(FtaModel::FIELDNAME_ID_ARCADIA_FAMILLE_VENTE)->isFieldDiff();
+        if ($checkDiff or $this->getActionProposal() == self::CREATE) {
+            $codFamilleVenteValue = $this->getFtaModel()->getDataField(FtaModel::FIELDNAME_ID_ARCADIA_FAMILLE_VENTE)->getFieldValue();
+            $this->setXMLArcadiaCodFamVte($codFamilleVenteValue);
+        }
     }
 
     /**
      * On vérifie si l'environnement de conservation a été modifié
      */
     function transformEnvironConserv() {
-//        $checkDiff = $this->getFtaModel()->getDataField(FtaModel::FIELDNAME_ID_ARCADIA_FAMILLE_VENTE)->isFieldDiff();
-//        if ($checkDiff or $this->getActionProposal() == self::CREATE) {
-        $idArcaciaEnvConservValue = $this->getFtaModel()->getModelAnnexeEnvironnementConservationGroupe()->getDataField(AnnexeEnvironnementConservationGroupeModel::FIELDNAME_CORRESPONDANCE_ARCADIA)->getFieldValue();
-        $this->setXMLArcadiaEnvironConserv($idArcaciaEnvConservValue);
-//        }
+        $checkDiff = $this->getFtaModel()->getDataField(FtaModel::FIELDNAME_ID_ARCADIA_FAMILLE_VENTE)->isFieldDiff();
+        if ($checkDiff or $this->getActionProposal() == self::CREATE) {
+            $idArcaciaEnvConservValue = $this->getFtaModel()->getModelAnnexeEnvironnementConservationGroupe()->getDataField(AnnexeEnvironnementConservationGroupeModel::FIELDNAME_CORRESPONDANCE_ARCADIA)->getFieldValue();
+            $this->setXMLArcadiaEnvironConserv($idArcaciaEnvConservValue);
+        }
     }
 
     /**
@@ -623,10 +702,10 @@ class Fta2ArcadiaController {
         /**
          * Vérifie l'actualisation de la données
          */
-//        $checkDiff = $this->getFtaModel()->getDataField(FtaModel::FIELDNAME_ID_FTA_CLASSIFICATION2)->isFieldDiff();
-//        if ($checkDiff or $this->getActionProposal() == self::CREATE) {
-        $this->setXMLArcadiaExport($exportValue);
-//        }
+        $checkDiff = $this->getFtaModel()->getDataField(FtaModel::FIELDNAME_ID_FTA_CLASSIFICATION2)->isFieldDiff();
+        if ($checkDiff or $this->getActionProposal() == self::CREATE) {
+            $this->setXMLArcadiaExport($exportValue);
+        }
     }
 
     /**
@@ -634,17 +713,38 @@ class Fta2ArcadiaController {
      * si oui il renseigne le poid maxi, mini, mini barq, maxi barq, cst uvc et moyenne calculé.
      */
     function transformPoidsMaxiAndMini() {
-//        $checkDiff = $this->getFtaModel()->getDataField(FtaModel::FIELDNAME_POIDS_ELEMENTAIRE)->isFieldDiff();
-//        if ($checkDiff or $this->getActionProposal() == self::CREATE) {
-        $poidsUVFValue = $this->getFtaModel()->getDataField(FtaModel::FIELDNAME_POIDS_ELEMENTAIRE)->getFieldValue();
-        $poidsUVFValueCalcul = $poidsUVFValue * FtaModel::CONVERSION_KG_EN_G;
-        $this->setXMLArcadiaPoidsMaxi($poidsUVFValueCalcul);
-        $this->setXMLArcadiaPoidsMini($poidsUVFValueCalcul);
-        $this->setXMLArcadiaPoidsMiniBarq($poidsUVFValueCalcul);
-        $this->setXMLArcadiaPoidsMaxiBarq($poidsUVFValueCalcul);
-        $this->setXMLArcadiaPoidsCstUvc($poidsUVFValueCalcul);
-        $this->setXMLArcadiaPoidsMoyenCal($poidsUVFValueCalcul);
-//        }
+        $checkDiff = $this->getFtaModel()->getDataField(FtaModel::FIELDNAME_POIDS_ELEMENTAIRE)->isFieldDiff();
+        if ($checkDiff or $this->getActionProposal() == self::CREATE) {
+            $poidsUVFValue = $this->getFtaModel()->getDataField(FtaModel::FIELDNAME_POIDS_ELEMENTAIRE)->getFieldValue();
+            $poidsUVFValueCalcul = $poidsUVFValue * FtaModel::CONVERSION_KG_EN_G;
+            $this->setXMLArcadiaPoidsMaxi($poidsUVFValueCalcul);
+            $this->setXMLArcadiaPoidsMini($poidsUVFValueCalcul);
+            $this->setXMLArcadiaPoidsMiniBarq($poidsUVFValueCalcul);
+            $this->setXMLArcadiaPoidsMaxiBarq($poidsUVFValueCalcul);
+            $this->setXMLArcadiaPoidsCstUvc($poidsUVFValueCalcul);
+            $this->setXMLArcadiaPoidsMoyenCal($poidsUVFValueCalcul);
+        }
+    }
+
+    /**
+     * Actualisation de la quantité standard
+     */
+    function transformAcregQuantieEmplacement() {
+
+        /**
+         * Pour les produits à marque L'ILASIA, laisser la valeur par défaut car inutilisée.
+         */
+        $nombresColisParPalette = "";
+        $idMarque = $this->getFtaModel()->getModelClassificationFta2()->getDataField(ClassificationFta2Model::FIELDNAME_ID_MARQUE)->getFieldValue();
+        if ($idMarque <> ClassificationFta2Model::ID_CLASSIFICATION_LIASIA) {
+            /**
+             * FTA > palettisation > Nombre total de Carton par palette
+             */
+            $return = $this->getFtaModel()->buildArrayEmballageTypePalette();
+            $nombresColisParPalette = $return[FtaConditionnementModel::PALETTE_NOMBRE_TOTAL_PAR_CARTON];
+        }
+
+        $this->setXMLArcadiaAcregQuantiteEmplacement($nombresColisParPalette);
     }
 
     function getXMLRecordsetBalise() {
@@ -763,7 +863,7 @@ class Fta2ArcadiaController {
 
     function setXMLArcadiaCodGeneriqueFm() {
         $this->XMLarcadiaCodGeneriqueFm = self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION
-                . "<COD_GENERIQUE_FM>" . "</COD_GENERIQUE_FM><!-- Non --> " . self::SAUT_DE_LIGNE;
+                . "<COD_GENERIQUE_FM>" . $this->getFtaModel()->getDataField(FtaModel::FIELDNAME_CODE_ARTICLE_LDC)->getFieldValue() . "</COD_GENERIQUE_FM> " . self::SAUT_DE_LIGNE;
     }
 
     function getXMLArcadiaCodSousFam() {
@@ -1044,6 +1144,101 @@ class Fta2ArcadiaController {
                 . "<DUREE_VIE>" . $arcadiaDureeDeVie . "</DUREE_VIE>" . self::SAUT_DE_LIGNE;
     }
 
+    function getXMLArcadiaCodProduit() {
+        return $this->XMLarcadiaCodProduit;
+    }
+
+    function setXMLArcadiaCodProduit() {
+        $this->XMLarcadiaCodProduit = self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION
+                . "<COD_PRODUIT key=\"TRUE\">" . $this->getFtaModel()->getDataField(FtaModel::FIELDNAME_CODE_ARTICLE_LDC)->getFieldValue() . "</COD_PRODUIT>" . self::SAUT_DE_LIGNE;
+    }
+
+    function getXMLArcadiaAcregSite() {
+        return $this->XMLarcadiaAcregSite;
+    }
+
+    function getXMLArcadiaAcregLieu() {
+        return $this->XMLarcadiaAcregLieu;
+    }
+
+    function getXMLArcadiaAcregNoQuai() {
+        return $this->XMLarcadiaAcregNoquai;
+    }
+
+    function getXMLArcadiaAcregNoMethode() {
+        return $this->XMLarcadiaAcregNomethode;
+    }
+
+    function setXMLArcadiaAcregSite(GeoModel $XMLarcadiaAcregSite) {
+        $this->XMLarcadiaAcregSite = self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION
+                . "<ACREG_SITE>"
+                . $XMLarcadiaAcregSite->getDataField(GeoModel::FIELDNAME_ID_SITE_GROUPE)->getFieldValue() . "</ACREG_SITE><!-- "
+                . $XMLarcadiaAcregSite->getDataField(GeoModel::FIELDNAME_GEO)->getFieldValue() . " -->"
+                . self::SAUT_DE_LIGNE;
+    }
+
+    function setXMLArcadiaAcregLieu() {
+        $this->XMLarcadiaAcregLieu = self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION
+                . "<ACREG_LIEU>" . self::LIEU_PRODUIT_FINI . "</ACREG_LIEU>" . self::SAUT_DE_LIGNE;
+    }
+
+    function setXMLArcadiaAcregNoquai($XMLarcadiaAcregNoquai) {
+        $this->XMLarcadiaAcregNoquai = self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION
+                . "<ACREG_NOQUAI>" . $XMLarcadiaAcregNoquai . "</ACREG_NOQUAI>" . self::SAUT_DE_LIGNE;
+    }
+
+    function setXMLArcadiaAcregNomethode($XMLarcadiaAcregNomethode) {
+        $this->XMLarcadiaAcregNomethode = self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION
+                . "<ACREG_NOMETHODE>" . $XMLarcadiaAcregNomethode . "</ACREG_NOMETHODE>" . self::SAUT_DE_LIGNE;
+    }
+
+    function getXMLArcadiaAcregSiteSecondaire() {
+        return $this->XMLarcadiaAcregSiteSecondaire;
+    }
+
+    function getXMLArcadiaAcregLieuSecondaire() {
+        return $this->XMLarcadiaAcregLieuSecondaire;
+    }
+
+    function getXMLArcadiaAcregTypeProdEmplacement() {
+        return $this->XMLarcadiaAcregTypeProdEmplacement;
+    }
+
+    function getXMLArcadiaAcregQuantiteEmplacement() {
+        return $this->XMLarcadiaAcregQuantiteEmplacement;
+    }
+
+    function setXMLArcadiaAcregSiteSecondaire(GeoModel $XMLarcadiaAcregSiteSecondaire) {
+        $this->XMLarcadiaAcregSiteSecondaire = self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION
+                . "<ACREG_SITESECONDAIRE>" . $XMLarcadiaAcregSiteSecondaire->getDataField(GeoModel::FIELDNAME_ID_SITE_GROUPE)->getFieldValue() . "</ACREG_SITESECONDAIRE><!-- "
+                . $XMLarcadiaAcregSiteSecondaire->getDataField(GeoModel::FIELDNAME_GEO)->getFieldValue() . " -->"
+                . self::SAUT_DE_LIGNE;
+    }
+
+    function setXMLArcadiaAcregLieuSecondaire() {
+        $this->XMLarcadiaAcregLieuSecondaire = self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION
+                . "<ACREG_LIEUSECONDAIRE>" . self::LIEU_PRODUIT_FINI . "</ACREG_LIEUSECONDAIRE>" . self::SAUT_DE_LIGNE;
+    }
+
+    function setXMLArcadiaAcregTypeProdEmplacement($XMLarcadiaAcregTypeProdEmplacement) {
+        $this->XMLarcadiaAcregTypeProdEmplacement = self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION
+                . "<ACREG_TYPE_PROD_EMPLACEMENT>" . $XMLarcadiaAcregTypeProdEmplacement . "</ACREG_TYPE_PROD_EMPLACEMENT>" . self::SAUT_DE_LIGNE;
+    }
+
+    function setXMLArcadiaAcregQuantiteEmplacement($XMLarcadiaAcregQuantiteEmplacement) {
+        $this->XMLarcadiaAcregQuantiteEmplacement = self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION
+                . "<ACREG_QUANTITE_EMPLACEMENT>" . $XMLarcadiaAcregQuantiteEmplacement . "</ACREG_QUANTITE_EMPLACEMENT>" . self::SAUT_DE_LIGNE;
+    }
+
+    function getXMLrecordsetBaliseEspProduitFini() {
+        return $this->XMLrecordsetBaliseEspProduitFini;
+    }
+
+    function setXMLrecordsetBaliseEspProduitFini() {
+        $this->XMLrecordsetBaliseEspProduitFini = self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION
+                . "<Recordset id=\"1\" action=\"" . self::UPDATE . "\">" . self::SAUT_DE_LIGNE;
+    }
+
     function getXMLCommentEntete() {
         return $this->XMLCommentEntete;
     }
@@ -1164,10 +1359,31 @@ class Fta2ArcadiaController {
                 . "<!-- Regate -->" . self::SAUT_DE_LIGNE;
     }
 
+    function getXMLCommentRegateAcAchat() {
+        return $this->XMLCommentRegateAcAchat;
+    }
+
+    function getXMLCommentRegateAcStock() {
+        return $this->XMLCommentRegateAcStock;
+    }
+
+    function setXMLCommentRegateAcAchat() {
+        $this->XMLCommentRegateAcAchat = self::ESPACE . self::SAUT_DE_LIGNE
+                . self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION
+                . "<!-- RegateAC Achat -->" . self::SAUT_DE_LIGNE;
+    }
+
+    function setXMLCommentRegateAcStock() {
+        $this->XMLCommentRegateAcStock = self::ESPACE . self::SAUT_DE_LIGNE
+                . self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION
+                . "<!-- RegateAC Stock -->" . self::SAUT_DE_LIGNE;
+    }
+
     /**
      * On vérifie si le commentaire doit être ajouté
      */
     function checkComment() {
+        $this->checkCommentEnteteProdFini();
         $this->checkCommentEntete();
         $this->checkCommentInfoGenerale();
         $this->checkCommentClassIdent();
@@ -1180,19 +1396,52 @@ class Fta2ArcadiaController {
         $this->checkCommentOptiventes();
         $this->checkCommentFourniture();
         $this->checkCommentRegate();
+        $this->checkCommentEnteteProdFini();
+        $this->checkCommentRegateAcAchat();
+        $this->checkCommentRegateAcStock();
     }
 
     /**
      * Si un élement d'entête est présent on affiche le commentaire
      */
     function checkCommentEntete() {
-        if ($this->getXMLRecordsetBalise()
-                or $this->getXMLArcadiaNoArtKey() //<!-- Entête -->
+        if ($this->getXMLArcadiaNoArtKey() //<!-- Entête -->
                 or $this->getXMLArcadiaArticleRefLicCcial()
                 or $this->getXMLArcadiaMarque()
                 or $this->getXMLArcadiaArticleRefLicProduction()
         ) {
             $this->setXMLCommentEntete();
+        }
+    }
+
+    /**
+     * Si un élement d'entête est présent on affiche le commentaire
+     */
+    function checkCommentEnteteProdFini() {
+        if ($this->getXMLArcadiaCodProduit()) {
+            $this->setXMLCommentEntete();
+        }
+    }
+
+    /**
+     * Si un élement de RegateAC Achat  est présent on affiche le commentaire
+     */
+    function checkCommentRegateAcAchat() {
+        if ($this->getXMLArcadiaAcregSite()
+                or $this->getXMLArcadiaAcregLieu()
+                or $this->getXMLArcadiaAcregNoQuai()
+                or $this->getXMLArcadiaAcregNoMethode()
+        ) {
+            $this->setXMLCommentRegateAcAchat();
+        }
+    }
+
+    /**
+     * Si un élement de RegateAC Stock  est présent on affiche le commentaire
+     */
+    function checkCommentRegateAcStock() {
+        if ($this->getXMLArcadiaCodProduit()) {
+            $this->setXMLCommentRegateAcStock();
         }
     }
 
@@ -1331,6 +1580,36 @@ class Fta2ArcadiaController {
     }
 
     /**
+     * Affiche au format Xml la table de correspondances avec les produit fini
+     * @return string
+     */
+    function XmlProduitFinis() {
+        $xmlText = "";
+
+
+        $xmlText = self::ESP_PRODUITS_FINIS_START
+                . self::DATA_IMPORT_START
+                . $this->getXMLrecordsetBaliseEspProduitFini()
+                . $this->getXMLCommentEntete()
+                . $this->getXMLArcadiaCodProduit()
+                . $this->getXMLCommentRegateAcAchat()
+                . $this->getXMLArcadiaAcregSite()
+                . $this->getXMLArcadiaAcregLieu()
+                . $this->getXMLArcadiaAcregNoQuai()
+                . $this->getXMLArcadiaAcregNoMethode()
+                . $this->getXMLCommentRegateAcStock()
+                . $this->getXMLArcadiaAcregSiteSecondaire()
+                . $this->getXMLArcadiaAcregLieuSecondaire()
+                . $this->getXMLArcadiaAcregTypeProdEmplacement()
+                . $this->getXMLArcadiaAcregQuantiteEmplacement()
+                . self::RECORDSET_END
+                . self::DATA_IMPORT_END
+                . self::ESP_PRODUITS_FINIS_END;
+
+        return $xmlText;
+    }
+
+    /**
      * Mise en forme du text contenu dans le fichier XML
      */
     function generateXmlText() {
@@ -1408,6 +1687,7 @@ class Fta2ArcadiaController {
                 . self::RECORDSET_END
                 . self::DATA_IMPORT_END
                 . self::ARTICLE_REF_END
+                . $this->XmlProduitFinis()
                 . self::TABLE_END . self::SAUT_DE_LIGNE
                 . "</Transaction>" . self::SAUT_DE_LIGNE
                 . self::SAUT_DE_LIGNE

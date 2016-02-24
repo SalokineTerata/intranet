@@ -174,6 +174,8 @@ class ClassificationRaccourcisAssociationModel extends AbstractModel {
         $htmlList = new HtmlListSelect();
 
         $ftaModel = new FtaModel($paramIdFta);
+        $ftaModel->setDataFtaTableToCompare();
+
         $dataFieldIdClassificationRaccourcis = $ftaModel->getDataField(FtaModel::FIELDNAME_ID_CLASSIFICATION_RACCOURCIS);
         $arrayClassificationRaccourcis = DatabaseOperation::convertSqlStatementWithKeyAndOneFieldToArray(
                         'SELECT DISTINCT ' . ClassificationRaccourcisModel::TABLENAME . '.' . ClassificationRaccourcisModel::KEYNAME

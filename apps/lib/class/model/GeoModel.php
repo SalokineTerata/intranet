@@ -32,6 +32,7 @@ class GeoModel extends AbstractModel {
     const FIELDNAME_K_SOCIETE = 'k_societe';
     const FIELDNAME_TAG_APPLICATION_GEO = 'tag_application_geo';
     const ID_SITE_NON_DEFINIE = '-1';
+    const ID_SITE_PLB = '20';
 
     public function __construct($paramId = NULL, $paramIsCreateRecordsetInDatabaseIfKeyDoesntExist = AbstractModel::DEFAULT_IS_CREATE_RECORDSET_IN_DATABASE_IF_KEY_DOESNT_EXIST) {
         parent::__construct($paramId, $paramIsCreateRecordsetInDatabaseIfKeyDoesntExist);

@@ -192,8 +192,7 @@ class FtaView extends AbstractView {
      */
     function getHtmlLinkGenerateXmlFile($paramCheckArcadiaData) {
         $lienFta2Arcadia = null;
-        $codeArticleLDC = $this->getModel()->getDataField(FtaModel::FIELDNAME_CODE_ARTICLE_LDC)->getFieldValue();
-        if (!$codeArticleLDC and $this->getIsEditable()) {
+        if ($this->getIsEditable()) {
             if (!$paramCheckArcadiaData) {
                 $lienFta2Arcadia = $this->generateXmlFile();
             } else {

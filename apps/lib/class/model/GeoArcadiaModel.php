@@ -9,11 +9,19 @@
 class GeoArcadiaModel extends AbstractModel {
 
     const TABLENAME = 'geo_arcadia';
-    const KEYNAME = 'id_geo_arcadia';
-    const FIELDNAME_ID_GEO = 'id_geo';
+    const KEYNAME = 'id_geo';
     const FIELDNAME_FILE_PREP = 'file_prep';
     const FIELDNAME_METHODE_PREP = 'methode_prep';
+    const CODE_TYPE_PRODUIT_PLATEFORME = '50';
+    const CODE_TYPE_PRODUIT_PLB_AGIS = '3';
+    const CODE_TYPE_PRODUIT_PLB_MARIE_TDA = '2';
 
+     public function __construct($paramId = NULL, $paramIsCreateRecordsetInDatabaseIfKeyDoesntExist = AbstractModel::DEFAULT_IS_CREATE_RECORDSET_IN_DATABASE_IF_KEY_DOESNT_EXIST) {
+        parent::__construct($paramId, $paramIsCreateRecordsetInDatabaseIfKeyDoesntExist);
+        
+     }
+    
+    
     protected function setDefaultValues() {
         
     }

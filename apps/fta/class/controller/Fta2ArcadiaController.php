@@ -282,7 +282,8 @@ class Fta2ArcadiaController {
     }
 
     /**
-     * Initialisation des balises avec le code article ldc et idFta
+     * Initialisation des balises avec le code article ldc et idFta 
+     * (ou autres colones clé tel que numero variante pour les produits fini)
      */
     function setAllBalise() {
         $this->setXMLArcadiaNoArtKey();
@@ -1150,7 +1151,9 @@ class Fta2ArcadiaController {
 
     function setXMLArcadiaCodProduit() {
         $this->XMLarcadiaCodProduit = self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION
-                . "<COD_PRODUIT key=\"TRUE\">" . $this->getFtaModel()->getDataField(FtaModel::FIELDNAME_CODE_ARTICLE_LDC)->getFieldValue() . "</COD_PRODUIT>" . self::SAUT_DE_LIGNE;
+                . "<COD_PRODUIT key=\"TRUE\">" . $this->getFtaModel()->getDataField(FtaModel::FIELDNAME_CODE_ARTICLE_LDC)->getFieldValue() . "</COD_PRODUIT>" . self::SAUT_DE_LIGNE
+                . self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION
+                . "<NO_VAR>" . self::NON . "</NO_VAR><!-- Numéro variante -->" . self::SAUT_DE_LIGNE;
     }
 
     function getXMLArcadiaAcregSite() {

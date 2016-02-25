@@ -1905,7 +1905,7 @@ class FtaModel extends AbstractModel {
      * @param DatabaseRecord $paramRecordToCompare
      */
     function getDataToCompare() {
-        parent::getDataToCompare();
+        return parent::getDataToCompare();
     }
 
     function getActionProposal() {

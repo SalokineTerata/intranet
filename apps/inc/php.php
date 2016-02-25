@@ -102,6 +102,7 @@ require_once('../lib/class/model/ArcadiaGammeCoopModel.php');
 require_once('../lib/class/model/ArcadiaGammeFamilleBudgetModel.php');
 require_once('../lib/class/model/ArcadiaMarqueModel.php');
 require_once('../lib/class/model/ArcadiaSousFamilleModel.php');
+require_once('../lib/class/model/ArcadiaTypeCartonModel.php');
 require_once('../lib/class/model/CatsoproModel.php');
 require_once('../lib/class/model/ClassificationActiviteFamilleVentesArcadiaModel.php');
 require_once('../lib/class/model/ClassificationActiviteSousFamilleArcadiaModel.php');

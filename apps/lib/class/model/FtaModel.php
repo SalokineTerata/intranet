@@ -154,7 +154,13 @@ class FtaModel extends AbstractModel {
      * Site d'expedition de la FTA
      * @var GeoArcadiaModel
      */
-    private $modelGeoArcadia;
+    private $modelGeoArcadiaExpe;
+
+    /**
+     * Site d'expedition de la FTA
+     * @var GeoArcadiaModel
+     */
+    private $modelGeoArcadiaProd;
 
     /**
      * Classification de la FTA
@@ -229,8 +235,12 @@ class FtaModel extends AbstractModel {
                 new AnnexeEnvironnementConservationGroupeModel($this->getDataField(self::FIELDNAME_ENVIRONNEMENT_CONSERVATION)->getFieldValue()
                 , DatabaseRecord::VALUE_DONT_CREATE_RECORD_IN_DATABASE_IF_KEY_DOESNT_EXIST)
         );
-        $this->setModelGeoArcadia(
+        $this->setModelGeoArcadiaExpe(
                 new GeoArcadiaModel($this->getDataField(self::FIELDNAME_SITE_EXPEDITION_FTA)->getFieldValue()
+                , DatabaseRecord::VALUE_DONT_CREATE_RECORD_IN_DATABASE_IF_KEY_DOESNT_EXIST)
+        );
+        $this->setModelGeoArcadiaProd(
+                new GeoArcadiaModel($this->getDataField(self::FIELDNAME_SITE_PRODUCTION)->getFieldValue()
                 , DatabaseRecord::VALUE_DONT_CREATE_RECORD_IN_DATABASE_IF_KEY_DOESNT_EXIST)
         );
         $this->setModelClassificationFta2(
@@ -464,15 +474,27 @@ class FtaModel extends AbstractModel {
     }
 
     /**
-     * Lien vers la table geoArcadia
+     * Lien vers la table geoArcadia avec le site d'expedition
      * @return GeoArcadiaModel
      */
-    function getModelGeoArcadia() {
-        return $this->modelGeoArcadia;
+    function getModelGeoArcadiaExpe() {
+        return $this->modelGeoArcadiaExpe;
     }
 
-    function setModelGeoArcadia(GeoArcadiaModel $modelGeoArcadia) {
-        $this->modelGeoArcadia = $modelGeoArcadia;
+    function setModelGeoArcadiaExpe(GeoArcadiaModel $modelGeoArcadia) {
+        $this->modelGeoArcadiaExpe = $modelGeoArcadia;
+    }
+
+    /**
+     * Lien vers la table geoArcadia avec le site de production
+     * @return GeoArcadiaModel
+     */
+    function getModelGeoArcadiaProd() {
+        return $this->modelGeoArcadiaProd;
+    }
+
+    function setModelGeoArcadiaProd(GeoArcadiaModel $modelGeoArcadiaProd) {
+        $this->modelGeoArcadiaProd = $modelGeoArcadiaProd;
     }
 
     /**

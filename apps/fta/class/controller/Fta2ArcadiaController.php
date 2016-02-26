@@ -37,8 +37,12 @@ class Fta2ArcadiaController {
     const ESP_PRODUITS_FINIS_END = "        </ESP_PRODUITS_FINIS>\n";
     const DUN14_START = "        <DUN14>\n";
     const DUN14_END = "        </DUN14>\n";
+    const ART_SITE_START = "        <ART_SITE>\n";
+    const ART_SITE_END = "        </ART_SITE>\n";
+    const ART_SITE_DATE_FIN_EFFET = "31/12/2029";
     const RECORDSET_END = "                </Recordset>\n";
     const CREATE = "create";
+    const AJOUT_DUN_RECORDSET = "1";
     const UPDATE = "update";
     const DELETE = "delete";
     const COD_SOCIETE_AGIS = "40";
@@ -55,6 +59,10 @@ class Fta2ArcadiaController {
     const CDATA_CLOSE = "]]>";
     const FALSE = FALSE;
     const TRUE = TRUE;
+    const ACTION_DELETE_DISABLED =
+    FALSE;
+    const ACTION_DELETE_ENABLED =
+    TRUE;
 
     /**
      * FTA associée
@@ -92,6 +100,11 @@ class Fta2ArcadiaController {
     private $XMLrecordsetBaliseEspProduitFini;
     private $XMLrecordsetBaliseDun14;
     private $XMLrecordsetBaliseDun14Delete;
+    private $XMLrecordsetBaliseArtSiteOne;
+    private $XMLrecordsetBaliseArtSiteTwo;
+    private $XMLrecordsetArtSiteTwo;
+    private $XMLrecordsetBaliseArtSiteUpdateOne;
+    private $XMLrecordsetBaliseArtSiteUpdateTwo;
     private $XMLarcadiaNoArtKey;
     private $XMLarcadiaCodeDouane;
     private $XMLarcadiaLogoEcoEmballage;
@@ -136,6 +149,11 @@ class Fta2ArcadiaController {
     private $XMLarcadiaDun14;
     private $XMLarcadiaDunPalette;
     private $XMLarcadiaTypeCarton;
+    private $XMLarcadiaArtSiteDateDebutEffet;
+    private $XMLarcadiaArtSiteDateFinEffet;
+    private $XMLarcadiaArtSiteCodPosteCC;
+    private $XMLarcadiaArtSiteCodAtelier;
+    private $XMLarcadiaArtSiteSiteAffectRes;
     private $XMLCommentEntete;
     private $XMLCommentInfoGenerale;
     private $XMLCommentClassIdent;
@@ -153,6 +171,10 @@ class Fta2ArcadiaController {
     private $actionProposal;
     private $arcadiaExportResult;
     private $arcadiaDun14Check;
+    private $arcadiaDun14RecordValue;
+    private $arcadiaArtSiteCheck;
+    private $arcadiaArtSiteRecordTwoCheck;
+    private $arcadiaArtSiteRecordValue;
 
     public function __construct
             
@@ -299,6 +321,7 @@ function transformAll() {
     $this->transformDun14();
     $this->transformTypeCarton();
     $this->transformDunPalette();
+    $this->transformArtSite();
 }
 
 /**
@@ -470,7 +493,7 @@ function transformSiteDePreparationReception() {
  */
 function transformFileDePrepAndMethodeDePrep() {
 
-    $geoArcadiaModel = $this->getFtaModel()->getModelGeoArcadia();
+    $geoArcadiaModel = $this->getFtaModel()->getModelGeoArcadiaExpe();
     $filePrep = $geoArcadiaModel->getDataField(GeoArcadiaModel::FIELDNAME_FILE_PREP)->getFieldValue();
     $methodePrep = $geoArcadiaModel->getDataField(GeoArcadiaModel::FIELDNAME_METHODE_PREP)->getFieldValue();
 
@@ -776,14 +799,20 @@ function transformCodPCB() {
     if ($checkDiff) {
         /**
          * Si le PCB est diférrent on supprimer le pcb de l'ancienne version
+         * Activation : ACTION_DELETE_ENABLED
+         * Désactivation : ACTION_DELETE_DISABLED
          */
-        $pcbOldVersionData = $this->getFtaModel()->getDataToCompare();
-        $pcbOldVersionValue = $pcbOldVersionData->getFieldValue(FtaModel::FIELDNAME_NOMBRE_UVC_PAR_CARTON);
-        $this->setXMLRecordsetBaliseDun14Delete($pcbOldVersionValue);
+        if (self::ACTION_DELETE_DISABLED) {
+            $pcbOldVersionData = $this->getFtaModel()->getDataToCompare();
+            $pcbOldVersionValue = $pcbOldVersionData->getFieldValue(FtaModel::FIELDNAME_NOMBRE_UVC_PAR_CARTON);
+            $this->setArcadiaDun14RecordValue(self::AJOUT_DUN_RECORDSET);
+            $this->setXMLRecordsetBaliseDun14Delete($pcbOldVersionValue);
+        }
         /**
          * On ajout le nouvelle enregistrement         
          */
         $action = self::CREATE;
+        $this->setArcadiaDun14RecordValue(self::AJOUT_DUN_RECORDSET);
         $this->setXMLRecordsetBaliseDun14($action);
         /**
          * Le PCB a été modifié dont il faut affihcer la table dun14 dans tous les cas
@@ -795,6 +824,7 @@ function transformCodPCB() {
          * On vérifie si il s'agit d'une mise à jour de donnée ou une création
          */
         $action = $this->getActionProposal();
+        $this->setArcadiaDun14RecordValue(self::AJOUT_DUN_RECORDSET);
         $this->setXMLRecordsetBaliseDun14($action);
         /**
          * Le PCB n'a pas été modifié mais on initalise quand même la valeur,
@@ -862,6 +892,224 @@ function transformDunPalette() {
     } else {
         $this->setArcadiaDun14CheckFalse();
     }
+}
+
+/**
+ * On vérifie les différents conditions pour la table ArtSite selon le site d'expédition et le site de production
+ */
+function transformArtSite() {
+    $checkDiffExpe = $this->getFtaModel()->getDataField(FtaModel::FIELDNAME_SITE_EXPEDITION_FTA)->isFieldDiff();
+    $checkDiffProduc = $this->getFtaModel()->getDataField(FtaModel::FIELDNAME_SITE_PRODUCTION)->isFieldDiff();
+    $geoModelExp = $this->getFtaModel()->getModelSiteExpedition();
+    $geoModelProd = $this->getFtaModel()->getModelSiteProduction();
+    if ($this->getActionProposal() == self::CREATE) {
+        /**
+         * On vérifie auparavant si il y a un ou deux enregistrement 
+         * pour la table artsite dans le cas d'une création de données
+         */
+        $checkValueNumberRecordset = $this->isArtSitePrimaireTwo();
+
+        if ($checkValueNumberRecordset) {
+            /**
+             * Le site d'expedition est différent de celui de production
+             */
+            $this->setArcadiaArtSiteRecordValue(self::AJOUT_DUN_RECORDSET);
+            $this->setXMLRecordsetBaliseArtSiteOne($geoModelExp);
+
+            $this->setArcadiaArtSiteRecordValue(self::AJOUT_DUN_RECORDSET);
+            $this->setXMLRecordsetBaliseArtSiteTwo($geoModelProd);
+            /**
+             * On informe qu'il y a bien deux enregistrements
+             */
+            $this->setArcadiaArtSiteRecordTwoCheckTrue();
+
+            /**
+             * On initalise les valeurs du recordset two
+             */
+            $this->initiateArtSiteRecordsetTwo();
+            /**
+             * On initalise les valeurs du recordset one
+             */
+            $this->initiateArtSiteRecordsetOne();
+        } else {
+            /**
+             * Le site d'expedition est le même que celui de production
+             */
+            $this->setArcadiaArtSiteRecordValue(self::AJOUT_DUN_RECORDSET);
+
+            $this->setXMLRecordsetBaliseArtSiteOne($geoModelExp);
+
+            /**
+             * On informe qu'il y a bien un enregistrements
+             */
+            $this->setArcadiaArtSiteRecordTwoCheckFalse();
+            /**
+             * On initalise les valeurs du recordset one
+             */
+            $this->initiateArtSiteRecordsetOne();
+        }
+
+        /**
+         * On ajoute la table artisite
+         */
+        $this->setArcadiaArtSiteCheckTrue();
+    } elseif ($checkDiffProduc or $checkDiffExpe) {
+        /**
+         * On vérifie auparavant si il y a un ou deux enregistrement 
+         * pour la table artsite pour la version précedente et actuelle
+         * dans le cas d'une mise à jour de données
+         */
+        $checkValueNumberRecordsetOldVersion = $this->isArtSitePrimaireTwoForPreviousVersionFta();
+        $siteExpeditionValue = $this->getFtaModel()->getDataToCompare()->getFieldValue(FtaModel::FIELDNAME_SITE_EXPEDITION_FTA);
+        $geoModelExpeOld = new GeoModel($siteExpeditionValue);
+
+        if ($checkValueNumberRecordsetOldVersion) {
+            /**
+             * Le site d'expedition est différent de celui de production
+             */
+            $siteDeProductionValue = $this->getFtaModel()->getDataToCompare()->getFieldValue(FtaModel::FIELDNAME_SITE_PRODUCTION);
+            $geoModelProdOld = new GeoModel($siteDeProductionValue);
+
+            $this->setArcadiaArtSiteRecordValue(self::AJOUT_DUN_RECORDSET);
+            $this->setArcadiaArtSiteRecordValue(self::AJOUT_DUN_RECORDSET);
+            $this->setXMLRecordsetBaliseArtSiteUpdateTwo($geoModelExpeOld, $geoModelProdOld);
+        } else {
+            /**
+             * Le site d'expedition est le même que celui de production
+             */
+            $this->setArcadiaArtSiteRecordValue(self::AJOUT_DUN_RECORDSET);
+
+            $this->setXMLRecordsetBaliseArtSiteUpdateOne($geoModelExpeOld);
+        }
+
+        $checkValueNumberRecordsetNewVersion = $this->isArtSitePrimaireTwo();
+
+        if ($checkValueNumberRecordsetNewVersion) {
+            /**
+             * Le site d'expedition est différent de celui de production
+             */
+            $this->setArcadiaArtSiteRecordValue(self::AJOUT_DUN_RECORDSET);
+            $this->setXMLRecordsetBaliseArtSiteOne($geoModelExp);
+            $this->setArcadiaArtSiteRecordValue(self::AJOUT_DUN_RECORDSET);
+            $this->setXMLRecordsetBaliseArtSiteTwo($geoModelProd);
+            /**
+             * On informe qu'il y a bien deux enregistrements
+             */
+            $this->setArcadiaArtSiteRecordTwoCheckTrue();
+
+            /**
+             * On initalise les valeurs du recordset two
+             */
+            $this->initiateArtSiteRecordsetTwo();
+            /**
+             * On initalise les valeurs du recordset one
+             */
+            $this->initiateArtSiteRecordsetOne();
+        } else {
+            /**
+             * Le site d'expedition est le même que celui de production
+             */
+            $this->setArcadiaArtSiteRecordValue(self::AJOUT_DUN_RECORDSET);
+            $this->setXMLRecordsetBaliseArtSiteOne($geoModelExp);
+            /**
+             * On informe qu'il y a bien deux enregistrements
+             */
+            $this->setArcadiaArtSiteRecordTwoCheckFalse();
+            /**
+             * On initalise les valeurs du recordset one
+             */
+            $this->initiateArtSiteRecordsetOne();
+        }
+        /**
+         * On ajoute la table artisite
+         */
+        $this->setArcadiaArtSiteCheckTrue();
+    } else {
+        /**
+         * On n'ajoute pas la table artisite
+         */
+        $this->setArcadiaArtSiteCheckFalse();
+    }
+}
+
+/**
+ * On initalise les valeurs du recordset one
+ *  On récupère les différents éléments du deuxième recordset
+ */
+function initiateArtSiteRecordsetTwo() {
+    /**
+     * On initalise les valeurs du recordset one
+     */
+    $ArtSiteCodPosteCC = $this->getFtaModel()->getModelGeoArcadiaProd()->getDataField(GeoArcadiaModel::FIELDNAME_CODE_POSTE_ARCADIA)->getFieldValue();
+    $this->setXMLArcadiaArtSiteCodPosteCC($ArtSiteCodPosteCC);
+    $this->setXMLArcadiaArtSiteCodAtelier(GeoArcadiaModel::CODE_ATELIER);
+    $this->setXMLArcadiaArtSiteSiteAffectRes();
+    $this->setXMLArcadiaArtSiteDateDebutEffet();
+    $this->setXMLArcadiaArtSiteDateFinEffet();
+
+    /**
+     * On récupère les différents éléments du deuxième recordset
+     */
+    $XMLrecordsetArtSiteTwo = $this->getXMLArcadiaArtSiteCodPosteCC()
+            . $this->getXMLArcadiaArtSiteCodAtelier()
+            . $this->getXMLArcadiaArtSiteSiteAffectRes();
+    $this->setXMLrecordsetArtSiteTwo($XMLrecordsetArtSiteTwo);
+}
+
+/**
+ * On initalise les valeurs du recordset one
+ */
+function initiateArtSiteRecordsetOne() {
+    /**
+     * On initalise les valeurs du recordset one
+     */
+    $ArtSiteCodPosteCC = $this->getFtaModel()->getModelGeoArcadiaExpe()->getDataField(GeoArcadiaModel::FIELDNAME_CODE_POSTE_ARCADIA)->getFieldValue();
+    $this->setXMLArcadiaArtSiteCodPosteCC($ArtSiteCodPosteCC);
+    $this->setXMLArcadiaArtSiteCodAtelier(GeoArcadiaModel::CODE_ATELIER);
+    $this->setXMLArcadiaArtSiteSiteAffectRes();
+    $this->setXMLArcadiaArtSiteDateDebutEffet();
+    $this->setXMLArcadiaArtSiteDateFinEffet();
+}
+
+/**
+ * On vérifie le site de production et le même que le site d'expedition
+ * Si il y a deux enregistrement TRUE ou un seul enregistremetn FALSE
+ */
+function isArtSitePrimaireTwo() {
+
+    $siteDeProductionValue = $this->getFtaModel()->getDataField(FtaModel::FIELDNAME_SITE_PRODUCTION)->getFieldValue();
+    $siteExpeditionValue = $this->getFtaModel()->getDataField(FtaModel::FIELDNAME_SITE_EXPEDITION_FTA)->getFieldValue();
+    /**
+     * Si oui alors on ne traite qu'un enregistrement 
+     * pour le site primaire
+     */
+    if ($siteDeProductionValue <> $siteExpeditionValue) {
+        $isArtSitePrimaireTwo = self::TRUE;
+    } else {
+        $isArtSitePrimaireTwo = self::FALSE;
+    }
+    return $isArtSitePrimaireTwo;
+}
+
+/**
+ * On vérifie le site de production et le même que le site d'expedition 
+ * pour la version précédent de la Fta encours
+ * Si il y a deux enregistrement TRUE ou un seul enregistremetn FALSE
+ */
+function isArtSitePrimaireTwoForPreviousVersionFta() {
+
+    $siteDeProductionValue = $this->getFtaModel()->getDataToCompare()->getFieldValue(FtaModel::FIELDNAME_SITE_PRODUCTION);
+    $siteExpeditionValue = $this->getFtaModel()->getDataToCompare()->getFieldValue(FtaModel::FIELDNAME_SITE_EXPEDITION_FTA);
+    /**
+     * Si oui alors on ne traite qu'un enregistrement 
+     * pour le site primaire
+     */
+    if ($siteDeProductionValue == $siteExpeditionValue) {
+        $isArtSitePrimaireTwo = self::FALSE;
+    } else {
+        $isArtSitePrimaireTwo = self::TRUE;
+    }
+    return $isArtSitePrimaireTwo;
 }
 
 function getXMLRecordsetBalise() {
@@ -1401,6 +1649,179 @@ function setArcadiaDun14CheckTrue() {
     $this->setArcadiaDun14Check(self::TRUE);
 }
 
+function getArcadiaArtSiteCheck() {
+    return $this->arcadiaArtSiteCheck;
+}
+
+function setArcadiaArtSiteCheck($arcadiaArtSiteCheck) {
+    $this->arcadiaArtSiteCheck = $arcadiaArtSiteCheck;
+}
+
+function setArcadiaArtSiteCheckFalse() {
+    $this->setArcadiaArtSiteCheck(self::FALSE);
+}
+
+function setArcadiaArtSiteCheckTrue() {
+    $this->setArcadiaArtSiteCheck(self::TRUE);
+}
+
+function getArcadiaArtSiteRecordTwoCheck() {
+    return $this->arcadiaArtSiteRecordTwoCheck;
+}
+
+function setArcadiaArtSiteRecordTwoCheck($arcadiaArtSiteRecordTwoCheck) {
+    $this->arcadiaArtSiteRecordTwoCheck = $arcadiaArtSiteRecordTwoCheck;
+}
+
+function setArcadiaArtSiteRecordTwoCheckFalse() {
+    $this->setArcadiaArtSiteRecordTwoCheck(self::FALSE);
+}
+
+function setArcadiaArtSiteRecordTwoCheckTrue() {
+    $this->setArcadiaArtSiteRecordTwoCheck(self::TRUE);
+}
+
+function getArcadiaArtSiteRecordValue() {
+    return $this->arcadiaArtSiteRecordValue;
+}
+
+function setArcadiaArtSiteRecordValue($arcadiaArtSiteRecordValue) {
+    $this->arcadiaArtSiteRecordValue += $arcadiaArtSiteRecordValue;
+}
+
+function getXMLRecordsetBaliseArtSiteOne() {
+    return $this->XMLrecordsetBaliseArtSiteOne;
+}
+
+function getXMLRecordsetBaliseArtSiteTwo() {
+    return $this->XMLrecordsetBaliseArtSiteTwo;
+}
+
+function getXMLRecordsetBaliseArtSiteUpdateOne() {
+    return $this->XMLrecordsetBaliseArtSiteUpdateOne;
+}
+
+function getXMLRecordsetBaliseArtSiteUpdateTwo() {
+    return $this->XMLrecordsetBaliseArtSiteUpdateTwo;
+}
+
+function setXMLRecordsetBaliseArtSiteOne(GeoModel $paramGeoModelExpe) {
+    $this->XMLrecordsetBaliseArtSiteOne = self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION
+            . "<Recordset id=\"" . $this->getArcadiaArtSiteRecordValue() . "\" action=\"" . self::CREATE . "\">" . self::SAUT_DE_LIGNE
+            . $this->getXMLArcadiaNoArtKey()
+            . self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION
+            . "<COD_SITE_GRP key=\"TRUE\">" . $paramGeoModelExpe->getDataField(GeoModel::FIELDNAME_ID_SITE_GROUPE)->getFieldValue()
+            . "</COD_SITE_GRP><!--" . $paramGeoModelExpe->getDataField(GeoModel::FIELDNAME_GEO)->getFieldValue() . " -->" . self::SAUT_DE_LIGNE
+            . self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION
+            . "<NIVEAU key=\"TRUE\">1</NIVEAU><!-- Primaire -->" . self::SAUT_DE_LIGNE
+    ;
+}
+
+function setXMLRecordsetBaliseArtSiteTwo(GeoModel $paramGeoModelProd) {
+    $this->XMLrecordsetBaliseArtSiteTwo = self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION
+            . "<Recordset id=\"" . $this->getArcadiaArtSiteRecordValue() . "\" action=\"" . self::CREATE . "\">" . self::SAUT_DE_LIGNE
+            . $this->getXMLArcadiaNoArtKey()
+            . self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION
+            . "<COD_SITE_GRP key=\"TRUE\">" . $paramGeoModelProd->getDataField(GeoModel::FIELDNAME_ID_SITE_GROUPE)->getFieldValue()
+            . "</COD_SITE_GRP><!--" . $paramGeoModelProd->getDataField(GeoModel::FIELDNAME_GEO)->getFieldValue() . " -->" . self::SAUT_DE_LIGNE
+            . self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION
+            . "<NIVEAU key = \"TRUE\">2</NIVEAU><!-- Secondaire -->" . self::SAUT_DE_LIGNE;
+}
+
+function setXMLRecordsetBaliseArtSiteUpdateOne(GeoModel $paramGeoModelSiteExpe) {
+    $this->XMLrecordsetBaliseArtSiteUpdateOne = self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION
+            . "<Recordset id=\"1\" action=\"update\">" . self::SAUT_DE_LIGNE
+            . $this->getXMLArcadiaNoArtKey()
+            . self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION
+            . "<COD_SITE_GRP key=\"TRUE\">" . $paramGeoModelSiteExpe->getDataField(GeoModel::FIELDNAME_ID_SITE_GROUPE)->getFieldValue()
+            . "</COD_SITE_GRP><!--" . $paramGeoModelSiteExpe->getDataField(GeoModel::FIELDNAME_GEO)->getFieldValue() . " -->" . self::SAUT_DE_LIGNE
+            . self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION
+            . "<NIVEAU key=\"TRUE\">1</NIVEAU><!-- Primare -->" . self::SAUT_DE_LIGNE
+            . self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION
+            . "<DATE_FIN_EFFET>" . date("d/m/Y") . "</DATE_FIN_EFFET>" . self::SAUT_DE_LIGNE
+            . self::RECORDSET_END . self::SAUT_DE_LIGNE;
+}
+
+function setXMLRecordsetBaliseArtSiteUpdateTwo(GeoModel $paramGeoModelSiteExpe, GeoModel $paramGeoModelSiteProd) {
+    $this->XMLrecordsetBaliseArtSiteUpdateTwo = self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION
+            . "<Recordset id=\"1\" action=\"update\">" . self::SAUT_DE_LIGNE
+            . $this->getXMLArcadiaNoArtKey()
+            . self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION
+            . "<COD_SITE_GRP key=\"TRUE\">" . $paramGeoModelSiteExpe->getDataField(GeoModel::FIELDNAME_ID_SITE_GROUPE)->getFieldValue()
+            . "</COD_SITE_GRP><!--" . $paramGeoModelSiteExpe->getDataField(GeoModel::FIELDNAME_GEO)->getFieldValue() . " -->" . self::SAUT_DE_LIGNE
+            . self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION
+            . "<NIVEAU key=\"TRUE\">1</NIVEAU><!-- Primare -->" . self::SAUT_DE_LIGNE
+            . self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION
+            . "<DATE_FIN_EFFET>" . date("d/m/Y") . "</DATE_FIN_EFFET>" . self::SAUT_DE_LIGNE
+            . self::RECORDSET_END . self::SAUT_DE_LIGNE
+            . self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION
+            . "<Recordset id=\"2\" action=\"update\">" . self::SAUT_DE_LIGNE
+            . $this->getXMLArcadiaNoArtKey()
+            . self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION
+            . "<COD_SITE_GRP key=\"TRUE\">" . $paramGeoModelSiteProd->getDataField(GeoModel::FIELDNAME_ID_SITE_GROUPE)->getFieldValue()
+            . "</COD_SITE_GRP><!--" . $paramGeoModelSiteProd->getDataField(GeoModel::FIELDNAME_GEO)->getFieldValue() . " -->" . self::SAUT_DE_LIGNE
+            . self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION
+            . "<NIVEAU key=\"TRUE\">2</NIVEAU><!-- Secondaire -->" . self::SAUT_DE_LIGNE
+            . self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION
+            . "<DATE_FIN_EFFET>" . date("d/m/Y") . "</DATE_FIN_EFFET>" . self::SAUT_DE_LIGNE
+            . self::RECORDSET_END . self::SAUT_DE_LIGNE
+
+    ;
+}
+
+function getXMLArcadiaArtSiteDateDebutEffet() {
+    return $this->XMLarcadiaArtSiteDateDebutEffet;
+}
+
+function getXMLArcadiaArtSiteDateFinEffet() {
+    return $this->XMLarcadiaArtSiteDateFinEffet;
+}
+
+function getXMLArcadiaArtSiteCodPosteCC() {
+    return $this->XMLarcadiaArtSiteCodPosteCC;
+}
+
+function getXMLArcadiaArtSiteCodAtelier() {
+    return $this->XMLarcadiaArtSiteCodAtelier;
+}
+
+function getXMLArcadiaArtSiteSiteAffectRes() {
+    return $this->XMLarcadiaArtSiteSiteAffectRes;
+}
+
+function setXMLArcadiaArtSiteDateDebutEffet() {
+    $this->XMLarcadiaArtSiteDateDebutEffet = self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION
+            . "<DATE_DEBUT_EFFET>" . date("d/m/Y") . "</DATE_DEBUT_EFFET>" . self::SAUT_DE_LIGNE;
+}
+
+function setXMLArcadiaArtSiteDateFinEffet() {
+    $this->XMLarcadiaArtSiteDateFinEffet = self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION
+            . "<DATE_FIN_EFFET>" . self::ART_SITE_DATE_FIN_EFFET . "</DATE_FIN_EFFET>" . self::SAUT_DE_LIGNE;
+}
+
+function setXMLArcadiaArtSiteCodPosteCC($XMLarcadiaArtSiteCodPosteCC) {
+    $this->XMLarcadiaArtSiteCodPosteCC = self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION
+            . "<COD_POSTE_CC>" . $XMLarcadiaArtSiteCodPosteCC . "</COD_POSTE_CC>" . self::SAUT_DE_LIGNE;
+}
+
+function setXMLArcadiaArtSiteCodAtelier($XMLarcadiaArtSiteCodAtelier) {
+    $this->XMLarcadiaArtSiteCodAtelier = self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION
+            . "<COD_ATELIER>" . $XMLarcadiaArtSiteCodAtelier . "</COD_ATELIER>" . self::SAUT_DE_LIGNE;
+}
+
+function setXMLArcadiaArtSiteSiteAffectRes() {
+    $this->XMLarcadiaArtSiteSiteAffectRes = self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION
+            . "<SIT_AFFECT_RES>" . $this->getFtaModel()->getModelSiteExpedition()->getDataField(GeoModel::FIELDNAME_ID_SITE_GROUPE)->getFieldValue() . "</SIT_AFFECT_RES>" . self::SAUT_DE_LIGNE;
+}
+
+function getXMLRecordsetArtSiteTwo() {
+    return $this->XMLrecordsetArtSiteTwo;
+}
+
+function setXMLrecordsetArtSiteTwo($XMLrecordsetArtSiteTwo) {
+    $this->XMLrecordsetArtSiteTwo = $XMLrecordsetArtSiteTwo;
+}
+
 function getXMLRecordsetBaliseDun14() {
     return $this->XMLrecordsetBaliseDun14;
 }
@@ -1411,12 +1832,12 @@ function getXMLRecordsetBaliseDun14Delete() {
 
 function setXMLRecordsetBaliseDun14($paramAction) {
     $this->XMLrecordsetBaliseDun14 = self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION
-            . "<Recordset id=\"1\" action=\"" . $paramAction . "\">" . self::SAUT_DE_LIGNE;
+            . "<Recordset id=\"" . $this->getArcadiaDun14RecordValue() . "\" action=\"" . $paramAction . "\">" . self::SAUT_DE_LIGNE;
 }
 
 function setXMLRecordsetBaliseDun14Delete($XMLrecordsetBaliseDun14Delete) {
     $this->XMLrecordsetBaliseDun14Delete = self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION
-            . "<Recordset id=\"1\" action=\"" . self::DELETE . "\">" . self::SAUT_DE_LIGNE
+            . "<Recordset id=\"" . $this->getArcadiaDun14RecordValue() . "\" action=\"" . self::DELETE . "\">" . self::SAUT_DE_LIGNE
             . $this->getXMLArcadiaNoArtKey()
             . self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION
             . "<COD_PCB key=\"TRUE\">" . $XMLrecordsetBaliseDun14Delete . "</COD_PCB>" . self::SAUT_DE_LIGNE
@@ -1430,6 +1851,14 @@ function getXMLRecordsetBaliseEspProduitFini() {
 function setXMLRecordsetBaliseEspProduitFini() {
     $this->XMLrecordsetBaliseEspProduitFini = self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION
             . "<Recordset id=\"1\" action=\"" . self::UPDATE . "\">" . self::SAUT_DE_LIGNE;
+}
+
+function getArcadiaDun14RecordValue() {
+    return $this->arcadiaDun14RecordValue;
+}
+
+function setArcadiaDun14RecordValue($arcadiaDun14RecordValue) {
+    $this->arcadiaDun14RecordValue += $arcadiaDun14RecordValue;
 }
 
 function getXMLCommentEntete() {
@@ -1777,7 +2206,7 @@ function checkCommentRegate() {
 }
 
 /**
- * Affiche au format Xml la table de correspondances concernant le Dun14
+ * Affiche au format Xml la table de correspondance concernant le Dun14
  * @return string
  */
 function xmlDunc14() {
@@ -1797,6 +2226,41 @@ function xmlDunc14() {
                 . self::DATA_IMPORT_END
                 . self::DUN14_END
 
+        ;
+    }
+    return $xmlText;
+}
+
+/**
+ * Affiche au formet Xml la table de correspondance concernant ArtSite
+ */
+function xmlArtSite() {
+    $xmlTextRecordSetTwo = "";
+    $xmlText = "";
+    /**
+     * Si il y a un deuxième enregistrement à ajouter on l'affiche
+     */
+    if ($this->getArcadiaArtSiteRecordTwoCheck()) {
+        $xmlTextRecordSetTwo = $this->getXMLRecordsetBaliseArtSiteTwo()
+                . $this->getXMLArcadiaArtSiteDateDebutEffet()
+                . $this->getXMLArcadiaArtSiteDateFinEffet()
+                . $this->getXMLRecordsetArtSiteTwo()
+                . self::RECORDSET_END;
+    }
+    if ($this->getArcadiaArtSiteCheck()) {
+        $xmlText = self::ART_SITE_START
+                . self::DATA_IMPORT_START
+                . $this->getXMLRecordsetBaliseArtSiteUpdateTwo()
+                . $this->getXMLRecordsetBaliseArtSiteUpdateOne()
+                . $this->getXMLRecordsetBaliseArtSiteOne()
+                . $this->getXMLArcadiaArtSiteDateDebutEffet()
+                . $this->getXMLArcadiaArtSiteDateFinEffet()
+                . $this->getXMLArcadiaArtSiteCodPosteCC()
+                . $this->getXMLArcadiaArtSiteCodAtelier()
+                . $this->getXMLArcadiaArtSiteSiteAffectRes()
+                . self::RECORDSET_END
+                . $xmlTextRecordSetTwo
+                . self::ART_SITE_END
         ;
     }
     return $xmlText;
@@ -1911,6 +2375,7 @@ function generateXmlText() {
             . self::DATA_IMPORT_END
             . self::ARTICLE_REF_END
             . $this->xmlProduitFinis()
+            . $this->xmlArtSite()
             . $this->xmlDunc14()
             . self::TABLE_END . self::SAUT_DE_LIGNE
             . "</Transaction>" . self::SAUT_DE_LIGNE
@@ -1964,7 +2429,7 @@ function linkXmlFileDataSend() {
 
             break;
         case EnvironmentConf::ENV_PRD_NAME:
-            $link = "/u1/DATA01/eai/intranet-dev/export/data/fta2arcadia-40-"
+            $link = "../../eai/export/fta2arcadia-40-"
                     . $this->getKeyValuePorposal()
                     . "-" . $this->getFtaModel()->getDataField(FtaModel::KEYNAME)->getFieldValue()
                     . "-proposal.xml";
@@ -1995,10 +2460,7 @@ function linkXmlFileOkSend() {
 
             break;
         case EnvironmentConf::ENV_PRD_NAME:
-            $link = "/u1/DATA01/eai/intranet-dev/export/ok/fta2arcadia-40-"
-                    . $this->getKeyValuePorposal()
-                    . "-" . $this->getFtaModel()->getDataField(FtaModel::KEYNAME)->getFieldValue()
-                    . "-proposal.xml.ok";
+            $link = "";
 
             break;
     }

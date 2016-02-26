@@ -12,6 +12,7 @@ class AnnexeEmballageModel extends AbstractModel {
     const KEYNAME = 'id_annexe_emballage';
     const FIELDNAME_ID_FTE_FOURNISSEUR = 'id_fte_fournisseur';
     const FIELDNAME_ID_ANNEXE_EMBALLAGE_GROUPE = 'id_annexe_emballage_groupe';
+    const FIELDNAME_ID_ARCADIA_TYPE_CARTON = 'id_arcadia_type_carton';
     const FIELDNAME_REFERENCE_FOURNISSEUR_ANNEXE_EMBALLAGE = 'reference_fournisseur_annexe_emballage';
     const FIELDNAME_POIDS_ANNEXE_EMBALLAGE = 'poids_annexe_emballage';
     const FIELDNAME_LONGUEUR_ANNEXE_EMBALLAGE = 'longueur_annexe_emballage';

@@ -75,10 +75,12 @@ $module_modification = Acl::getValueAccesRights($module . "_modification");
 //Droits d'accès
 if ($module_modification >= 1) {
     $proprietaire = 1;
+    $isEditable = TRUE;
     $html_restricted_box = "";
     $bouton_submit = "Enregistrer >>";
 } else {
     $proprietaire = 0;
+    $isEditable = FALSE;
     $html_restricted_box = "disabled";
     $bouton_submit = "<< Retour";
 }
@@ -91,12 +93,13 @@ if ($id_annexe_emballage) {
 //  mysql_table_load("annexe_emballage_groupe_type");
 //  mysql_table_load("fte_fournisseur");
     $annexeEmballageModel = new AnnexeEmballageModel($id_annexe_emballage);
+    $annexeEmballageModel->setIsEditable($isEditable);
     $id_fte_fournisseur = $annexeEmballageModel->getDataField(AnnexeEmballageModel::FIELDNAME_ID_FTE_FOURNISSEUR)->getFieldValue();
     $actif_annexe_emballage = $annexeEmballageModel->getDataField(AnnexeEmballageModel::FIELDNAME_ACTIF_ANNEXE_EMBALLAGE)->getFieldValue();
     $id_annexe_emballage_groupe = $annexeEmballageModel->getDataField(AnnexeEmballageModel::FIELDNAME_ID_ANNEXE_EMBALLAGE_GROUPE)->getFieldValue();
     $fteFournisseurModel = new FteFournisseurModel($id_fte_fournisseur);
     $annexeEmballageGroupeModel = new AnnexeEmballageGroupeModel($id_annexe_emballage_groupe);
-
+    $typeEmballage = $annexeEmballageGroupeModel->getDataField(AnnexeEmballageGroupeModel::FIELDNAME_ID_ANNEXE_EMBALLAGE_GROUPE_CONFIGURATION)->getFieldValue();
     $action = 'rewrite';
 } else {
     $titre = "Création d'une Fiche Technique Emballage";
@@ -286,6 +289,12 @@ if ($proprietaire) {
 $bloc .= $value
         . "</td></tr>"
 ;
+/**
+ * Correspondance Arcadia
+ */
+if ($typeEmballage == AnnexeEmballageGroupeTypeModel::EMBALLAGE_DU_COLIS) {
+    $bloc .=$annexeEmballageModel->getHtmlDataField(AnnexeEmballageModel::FIELDNAME_ID_ARCADIA_TYPE_CARTON);
+}
 
 //Date de dernière mise à jour
 $champ = "date_maj_annexe_emballage";

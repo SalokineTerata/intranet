@@ -250,6 +250,47 @@ class FtaModel extends AbstractModel {
     }
 
     /**
+     * On récupère l'id carton arcadia associé à un emballage du colis 
+     * @return type
+     */
+    function getIdArcadiaTypeCarton() {
+        $idArcadiaTypeCarton = "";
+        $idFta = $this->getKeyValue();
+
+        $arrayIdAnnexeEmballageGroupeDuColis = AnnexeEmballageGroupeModel::getArrayIdAnnexeEmballageGroupe(AnnexeEmballageGroupeTypeModel::EMBALLAGE_DU_COLIS);
+        $arrayIdAnnexeEmballageDuColis = AnnexeEmballageModel::getArrayIdAnnexeEmballage($arrayIdAnnexeEmballageGroupeDuColis);
+        $arrayIdFtaConditionnemntDuColis = FtaConditionnementModel::getIdFtaConditionnement($arrayIdAnnexeEmballageDuColis, $idFta, AnnexeEmballageGroupeTypeModel::EMBALLAGE_DU_COLIS);
+        if ($arrayIdFtaConditionnemntDuColis) {
+            foreach ($arrayIdFtaConditionnemntDuColis as $key => $paramId) {
+                $ftaConditionnmentModel = new FtaConditionnementModel($paramId);
+                $idArcadiaTypeCarton = $ftaConditionnmentModel->getModelAnnexeEmballage()->getDataField(AnnexeEmballageModel::FIELDNAME_ID_ARCADIA_TYPE_CARTON)->getFieldValue();
+                $ftaConditionnmentModel->getDataField(FtaConditionnementModel::FIELDNAME_ID_ANNEXE_EMBALLAGE)->isFieldDiff();
+            }
+        }
+        return $idArcadiaTypeCarton;
+    }
+
+    /**
+     * On vérifie si l'emballage du colis a été modifié
+     * @return bolean
+     */
+    function checkEmballageDuColisIsDiff() {
+        $checkdiff = "";
+        $idFta = $this->getKeyValue();
+
+        $arrayIdAnnexeEmballageGroupeDuColis = AnnexeEmballageGroupeModel::getArrayIdAnnexeEmballageGroupe(AnnexeEmballageGroupeTypeModel::EMBALLAGE_DU_COLIS);
+        $arrayIdAnnexeEmballageDuColis = AnnexeEmballageModel::getArrayIdAnnexeEmballage($arrayIdAnnexeEmballageGroupeDuColis);
+        $arrayIdFtaConditionnemntDuColis = FtaConditionnementModel::getIdFtaConditionnement($arrayIdAnnexeEmballageDuColis, $idFta, AnnexeEmballageGroupeTypeModel::EMBALLAGE_DU_COLIS);
+        if ($arrayIdFtaConditionnemntDuColis) {
+            foreach ($arrayIdFtaConditionnemntDuColis as $key => $paramId) {
+                $ftaConditionnmentModel = new FtaConditionnementModel($paramId);
+                $checkdiff = $ftaConditionnmentModel->getDataField(FtaConditionnementModel::FIELDNAME_ID_ANNEXE_EMBALLAGE)->isFieldDiff();
+            }
+        }
+        return $checkdiff;
+    }
+
+    /**
      * Accès à la page de modification du gestionnaire de la Fta
      * @param HtmlListSelect $paramObjetList
      * @param int $paramGestionaireFta

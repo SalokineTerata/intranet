@@ -802,7 +802,7 @@ function transformCodPCB() {
          * Activation : ACTION_DELETE_ENABLED
          * Désactivation : ACTION_DELETE_DISABLED
          */
-        if (self::ACTION_DELETE_DISABLED) {
+        if (self::ACTION_DELETE_ENABLED) {
             $pcbOldVersionData = $this->getFtaModel()->getDataToCompare();
             $pcbOldVersionValue = $pcbOldVersionData->getFieldValue(FtaModel::FIELDNAME_NOMBRE_UVC_PAR_CARTON);
             $this->setArcadiaDun14RecordValue(self::AJOUT_DUN_RECORDSET);
@@ -862,11 +862,11 @@ function transformDun14() {
  * si oui il renseigne le TypeCarton.
  */
 function transformTypeCarton() {
-    $checkDiff = $this->getFtaModel()->getDataField(FtaModel::FIELDNAME_POIDS_ELEMENTAIRE)->isFieldDiff();
-    if ($checkDiff or $this->getActionProposal() == self::CREATE or $this->getArcadiaDun14Check()) {
-        $poidsUVFValue = $this->getFtaModel()->getDataField(FtaModel::FIELDNAME_POIDS_ELEMENTAIRE)->getFieldValue();
-        $poidsUVFValueCalcul = $poidsUVFValue * FtaModel::CONVERSION_KG_EN_G;
-        $this->setXMLArcadiaPoidsMaxi($poidsUVFValueCalcul);
+    $checkDiff = $this->getFtaModel()->checkEmballageDuColisIsDiff();
+    if ($checkDiff or$this->getActionProposal() == self::CREATE or $this->getArcadiaDun14Check()) {
+        $idTypeCartonArcadia = $this->getFtaModel()->getIdArcadiaTypeCarton();
+
+        $this->setXMLArcadiaTypeCarton($idTypeCartonArcadia);
         /**
          * Si l'EAN Palette a été modifié alors on affiche la table Dun14
          */

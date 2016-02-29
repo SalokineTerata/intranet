@@ -68,7 +68,7 @@ class FtaConditionnementModel extends AbstractModel {
     private $modelFta;
 
     /**
-     * FTA associée
+     * AnnexEmballage associée
      * @var AnnexeEmballageModel
      */
     private $modelAnnexeEmballage;
@@ -372,7 +372,7 @@ class FtaConditionnementModel extends AbstractModel {
     }
 
     /*
-
+   
      */
 
     /**

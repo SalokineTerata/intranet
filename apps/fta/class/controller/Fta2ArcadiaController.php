@@ -802,7 +802,7 @@ function transformCodPCB() {
          * Activation : ACTION_DELETE_ENABLED
          * Désactivation : ACTION_DELETE_DISABLED
          */
-        if (self::ACTION_DELETE_ENABLED) {
+        if (self::ACTION_DELETE_DISABLED) {
             $pcbOldVersionData = $this->getFtaModel()->getDataToCompare();
             $pcbOldVersionValue = $pcbOldVersionData->getFieldValue(FtaModel::FIELDNAME_NOMBRE_UVC_PAR_CARTON);
             $this->setArcadiaDun14RecordValue(self::AJOUT_DUN_RECORDSET);
@@ -2260,6 +2260,7 @@ function xmlArtSite() {
                 . $this->getXMLArcadiaArtSiteSiteAffectRes()
                 . self::RECORDSET_END
                 . $xmlTextRecordSetTwo
+                . self::DATA_IMPORT_END
                 . self::ART_SITE_END
         ;
     }

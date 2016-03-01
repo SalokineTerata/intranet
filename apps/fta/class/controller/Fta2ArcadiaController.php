@@ -175,6 +175,7 @@ class Fta2ArcadiaController {
     private $arcadiaArtSiteCheck;
     private $arcadiaArtSiteRecordTwoCheck;
     private $arcadiaArtSiteRecordValue;
+    private $arcadiaPublicData;
 
     public function __construct
             
@@ -199,6 +200,11 @@ class Fta2ArcadiaController {
      * Initialisation des balises
      */
     $this->setAllBalise();
+    
+    /**
+     * On décide si oui ou non affcihe les données publiques
+     */
+    $this->setPublicBalise();
 
     /**
      * On vérifie les champs différents de la version précédent.
@@ -335,6 +341,17 @@ function setAllBalise() {
 }
 
 /**
+ * On détermine si oui ou non on affiche les données public
+ */
+function setPublicBalise() {
+    /**
+     * On n'affiche pas les donées publiques
+     *  car une conditions de validation est demandé lors du pré-chargement
+     */
+    $this->setArcadiaPublicDataFalse();
+}
+
+/**
  * Initialisation des balises dont la valeur ne change pas 
  */
 function transformCREATE() {
@@ -344,7 +361,7 @@ function transformCREATE() {
         $this->transformCodSociete();
         $this->transformProlongationDLC();
         $this->transformIsHallal();
-        $this->transformGeneriqueFm();
+//        $this->transformGeneriqueFm();  // voir comentaire de la fonction
         $this->transformTypeConditPub();
         $this->transformUniteConditionnement();
         $this->transformAcregLieu();
@@ -374,7 +391,10 @@ function transformTypeConditPub() {
 }
 
 /**
- * Initialisation des balises dont la valeur ne change pas 
+ * Initialisation des balises dont la valeur ne change pas
+ * Cette fonction n'est pas actve mais implémenté
+ * Lors de la création d'un article ce chap et automatiquement renseigné
+ * et il ne bouge pas lors des mise à jour. 
  */
 function transformGeneriqueFm() {
     $this->setXMLArcadiaCodGeneriqueFm();
@@ -431,7 +451,7 @@ function transformCodPoidsCstUvc() {
      * Vérifie l'actualisation de la données
      */
     $checkDiff = $this->getFtaModel()->getDataField(FtaModel::FIELDNAME_UNITE_FACTURATION)->isFieldDiff();
-    if ($checkDiff or $this->getActionProposal() == self::CREATE) {
+    if (($checkDiff and $this->IsArcadiaPublicDataCheck()) or $this->getActionProposal() == self::CREATE) {
         $this->setXMLArcadiaCodPoidsCstUvc($codPoidsCstUvc);
     }
 }
@@ -531,7 +551,7 @@ function transformLibelleTarif() {
  */
 function transformEanArticle() {
     $checkDiff = $this->getFtaModel()->getDataField(FtaModel::FIELDNAME_EAN_UVC)->isFieldDiff();
-    if ($checkDiff or $this->getActionProposal() == self::CREATE) {
+    if (($checkDiff and $this->IsArcadiaPublicDataCheck()) or $this->getActionProposal() == self::CREATE) {
         $eanArticleValue = $this->getFtaModel()->getDataField(FtaModel::FIELDNAME_EAN_UVC)->getFieldValue();
         $this->setXMLArcadiaEanArticle($eanArticleValue);
     }
@@ -598,7 +618,7 @@ function transformCodeDouane() {
  */
 function transformLogoEmballage() {
     $checkDiff = $this->getFtaModel()->getDataField(FtaModel::FIELDNAME_ID_FTA_CLASSIFICATION2)->isFieldDiff();
-    if ($checkDiff or $this->getActionProposal() == self::CREATE) {
+    if (($checkDiff and $this->IsArcadiaPublicDataCheck()) or $this->getActionProposal() == self::CREATE) {
         $idClassificationFta2 = $this->getFtaModel()->getDataField(FtaModel::FIELDNAME_ID_FTA_CLASSIFICATION2)->getFieldValue();
         $idRayon = ClassificationFta2Model::getIdClassificationTypeByTypeNameAndIdClassificationFta2($idClassificationFta2, ClassificationFta2Model::FIELDNAME_ID_RAYON);
         if ($idRayon == ClassificationFta2Model::ID_CLASSIFICATION_LIBRE_SERVICE) {
@@ -615,7 +635,7 @@ function transformLogoEmballage() {
  */
 function transformUniteFacturation() {
     $checkDiff = $this->getFtaModel()->getDataField(FtaModel::FIELDNAME_UNITE_FACTURATION)->isFieldDiff();
-    if ($checkDiff or $this->getActionProposal() == self::CREATE) {
+    if (($checkDiff and $this->IsArcadiaPublicDataCheck()) or $this->getActionProposal() == self::CREATE) {
         $uniteFacturationArcadiaValue = $this->getFtaModel()->getModelAnnexeUniteFacturation()->getDataField(AnnexeUniteFacturationModel::FIELDNAME_ID_ARCADIA_UNITE_FACTURATION)->getFieldValue();
         $this->setXMLArcadiaUniteDeFacturation($uniteFacturationArcadiaValue);
     }
@@ -699,7 +719,7 @@ function transformOptiventes() {
  */
 function transformCodSousFamille() {
     $checkDiff = $this->getFtaModel()->getDataField(FtaModel::FIELDNAME_ID_ARCADIA_SOUS_FAMILLE)->isFieldDiff();
-    if ($checkDiff or $this->getActionProposal() == self::CREATE) {
+    if (($checkDiff and $this->IsArcadiaPublicDataCheck()) or $this->getActionProposal() == self::CREATE) {
         $codSousFamilleValue = $this->getFtaModel()->getDataField(FtaModel::FIELDNAME_ID_ARCADIA_SOUS_FAMILLE)->getFieldValue();
         $this->setXMLArcadiaCodSousFam($codSousFamilleValue);
     }
@@ -710,7 +730,7 @@ function transformCodSousFamille() {
  */
 function transformCodFamVte() {
     $checkDiff = $this->getFtaModel()->getDataField(FtaModel::FIELDNAME_ID_ARCADIA_FAMILLE_VENTE)->isFieldDiff();
-    if ($checkDiff or $this->getActionProposal() == self::CREATE) {
+    if (($checkDiff and $this->IsArcadiaPublicDataCheck()) or $this->getActionProposal() == self::CREATE) {
         $codFamilleVenteValue = $this->getFtaModel()->getDataField(FtaModel::FIELDNAME_ID_ARCADIA_FAMILLE_VENTE)->getFieldValue();
         $this->setXMLArcadiaCodFamVte($codFamilleVenteValue);
     }
@@ -720,8 +740,8 @@ function transformCodFamVte() {
  * On vérifie si l'environnement de conservation a été modifié
  */
 function transformEnvironConserv() {
-    $checkDiff = $this->getFtaModel()->getDataField(FtaModel::FIELDNAME_ID_ARCADIA_FAMILLE_VENTE)->isFieldDiff();
-    if ($checkDiff or $this->getActionProposal() == self::CREATE) {
+    $checkDiff = $this->getFtaModel()->getDataField(FtaModel::FIELDNAME_ENVIRONNEMENT_CONSERVATION)->isFieldDiff();
+    if (($checkDiff and $this->IsArcadiaPublicDataCheck()) or $this->getActionProposal() == self::CREATE) {
         $idArcaciaEnvConservValue = $this->getFtaModel()->getModelAnnexeEnvironnementConservationGroupe()->getDataField(AnnexeEnvironnementConservationGroupeModel::FIELDNAME_CORRESPONDANCE_ARCADIA)->getFieldValue();
         $this->setXMLArcadiaEnvironConserv($idArcaciaEnvConservValue);
     }
@@ -1110,6 +1130,22 @@ function isArtSitePrimaireTwoForPreviousVersionFta() {
         $isArtSitePrimaireTwo = self::TRUE;
     }
     return $isArtSitePrimaireTwo;
+}
+
+function IsArcadiaPublicDataCheck() {
+    return $this->arcadiaPublicData;
+}
+
+function setIsArcadiaPublicDataCheck($arcadiaPublicData) {
+    $this->arcadiaPublicData = $arcadiaPublicData;
+}
+
+function setArcadiaPublicDataFalse() {
+    $this->setIsArcadiaPublicDataCheck(self::FALSE);
+}
+
+function setArcadiaPublicDataTrue() {
+    $this->setIsArcadiaPublicDataCheck(self::TRUE);
 }
 
 function getXMLRecordsetBalise() {

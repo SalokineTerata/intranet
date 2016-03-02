@@ -379,7 +379,7 @@ function transformIsHallal() {
  * Si le code artcile n'est pas renseigné alors on affiche un code article vide
  */
 function transformNoArtKey() {
-    $codeArticleLDC = "";
+    $codeArticleLDC = " ";
     if ($this->getFtaModel()->getDataField(FtaModel::FIELDNAME_CODE_ARTICLE_LDC)->getFieldValue()) {
         $codeArticleLDC = $this->getFtaModel()->getDataField(FtaModel::FIELDNAME_CODE_ARTICLE_LDC)->getFieldValue();
     }
@@ -1182,9 +1182,13 @@ function getXMLArcadiaParametre() {
 }
 
 function setXMLArcadiaParametre() {
+    $codeArtcileLDC = " ";
+    if ($this->getFtaModel()->getDataField(FtaModel::FIELDNAME_CODE_ARTICLE_LDC)->getFieldValue()) {
+        $codeArtcileLDC = $this->getFtaModel()->getDataField(FtaModel::FIELDNAME_CODE_ARTICLE_LDC)->getFieldValue();
+    }
     $this->XMLarcadiaParametre = self::TABULATION . "<Parameters>" . self::SAUT_DE_LIGNE
             . self::TABULATION . self::TABULATION . "<IdFirm>" . self::COD_SOCIETE_AGIS . "</IdFirm><!-- Agis -->" . self::SAUT_DE_LIGNE
-            . self::TABULATION . self::TABULATION . "<IdArcadia>" . $this->getFtaModel()->getDataField(FtaModel::FIELDNAME_CODE_ARTICLE_LDC)->getFieldValue() . "</IdArcadia><!-- Code article dans Arcadia -->" . self::SAUT_DE_LIGNE
+            . self::TABULATION . self::TABULATION . "<IdArcadia>" . $codeArtcileLDC . "</IdArcadia><!-- Code article dans Arcadia -->" . self::SAUT_DE_LIGNE
             . self::TABULATION . self::TABULATION . "<IdFta>" . $this->getFtaModel()->getDataField(FtaModel::KEYNAME)->getFieldValue() . "</IdFta><!-- N° de la FTA -->" . self::SAUT_DE_LIGNE
             . self::TABULATION . "</Parameters>" . self::SAUT_DE_LIGNE;
 }

@@ -2420,8 +2420,8 @@ function generateXmlText() {
             . self::RECORDSET_END
             . self::DATA_IMPORT_END
             . self::ARTICLE_REF_END
-//            . $this->xmlProduitFinis()
-            . $this->xmlArtSite()
+            . $this->xmlProduitFinis()
+//            . $this->xmlArtSite()
 //            . $this->xmlDunc14()
             . self::TABLE_END . self::SAUT_DE_LIGNE
             . "</Transaction>" . self::SAUT_DE_LIGNE

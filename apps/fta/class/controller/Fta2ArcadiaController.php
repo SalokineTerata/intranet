@@ -1564,8 +1564,12 @@ function getXMLArcadiaCodProduit() {
 }
 
 function setXMLArcadiaCodProduit() {
+    $codeArtcileLDC = " ";
+    if ($this->getFtaModel()->getDataField(FtaModel::FIELDNAME_CODE_ARTICLE_LDC)->getFieldValue()) {
+        $codeArtcileLDC = $this->getFtaModel()->getDataField(FtaModel::FIELDNAME_CODE_ARTICLE_LDC)->getFieldValue();
+    }
     $this->XMLarcadiaCodProduit = self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION
-            . "<COD_PRODUIT key=\"TRUE\">" . $this->getFtaModel()->getDataField(FtaModel::FIELDNAME_CODE_ARTICLE_LDC)->getFieldValue() . "</COD_PRODUIT>" . self::SAUT_DE_LIGNE
+            . "<COD_PRODUIT key=\"TRUE\">" . $codeArtcileLDC . "</COD_PRODUIT>" . self::SAUT_DE_LIGNE
             . self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION
             . "<NO_VAR>" . self::NON . "</NO_VAR><!-- Numéro variante -->" . self::SAUT_DE_LIGNE;
 }
@@ -2356,15 +2360,16 @@ function xmlProduitFinis() {
 }
 
 /**
- * Mise en forme du text contenu dans le fichier XML
- * l'art site et le dun14 sont mise en commentaire 
+ * Affiche au format Xml la table de correspondances avec les Articles Ref
+ * @return string
  */
-function generateXmlText() {
-    $xmlText .='<?xml version="1.0" encoding="UTF-8"?>' . self::SAUT_DE_LIGNE . self::ESPACE
-            . "<Transaction id=\"" . $this->getKeyValuePorposal() . "\" version=\"1.1\" type=\"proposal\">" . self::SAUT_DE_LIGNE
-            . $this->getXMLArcadiaParametre()
-            . self::TABLE_START
-            . self::ARTICLE_REF_START
+function xmlArticleRef() {
+    $xmlText = "";
+
+    /**
+     * On l'active que pour un créate
+     */
+    $xmlText = self::ARTICLE_REF_START
             . self::DATA_IMPORT_START
             . $this->getXMLRecordsetBalise()
             . $this->getXMLCommentEntete()
@@ -2433,9 +2438,23 @@ function generateXmlText() {
             . self::ESPACE . self::SAUT_DE_LIGNE
             . self::RECORDSET_END
             . self::DATA_IMPORT_END
-            . self::ARTICLE_REF_END
-//            . $this->xmlProduitFinis()
-//            . $this->xmlArtSite()
+            . self::ARTICLE_REF_END;
+
+    return $xmlText;
+}
+
+/**
+ * Mise en forme du text contenu dans le fichier XML
+ * l'art site et le dun14 sont mise en commentaire 
+ */
+function generateXmlText() {
+    $xmlText .= '<?xml version="1.0" encoding="UTF-8"?>' . self::SAUT_DE_LIGNE . self::ESPACE
+            . "<Transaction id=\"" . $this->getKeyValuePorposal() . "\" version=\"1.1\" type=\"proposal\">" . self::SAUT_DE_LIGNE
+            . $this->getXMLArcadiaParametre()
+            . self::TABLE_START
+//            . $this->xmlArticleRef()
+            . $this->xmlProduitFinis()
+            //            . $this->xmlArtSite()
 //            . $this->xmlDunc14()
             . self::TABLE_END . self::SAUT_DE_LIGNE
             . "</Transaction>" . self::SAUT_DE_LIGNE
@@ -2448,14 +2467,12 @@ function generateXmlText() {
 
 /**
  * Géneration du fichier xml
- */
-function saveExportXmlToFile() {
+ */ function saveExportXmlToFile() {
     $linkData = $this->linkXmlFileDataSend();
     $linkOk = $this->linkXmlFileOkSend();
     /**
      * On créer le  nouveau fichier si un lien est initialiser
-     */
-    if ($linkData) {
+     */ if ($linkData) {
         file_put_contents($linkData, $this->getXmlText());
     }
     /**
@@ -2474,7 +2491,7 @@ function linkXmlFileDataSend() {
     $env = $this->getGlobalConfigModel()->getConf()->getExecEnvironment();
     $link = "";
     switch ($env) {
-        case EnvironmentConf::ENV_COD_NAME:
+        case EnvironmentConf::ENV_COD_NAME :
             $link = $this->getGlobalConfigModel()->getConf()->getUrlEai() . "/fta2arcadia-40-"
                     . $this->getKeyValuePorposal()
                     . "-" . $this->getFtaModel()->getDataField(FtaModel::KEYNAME)->getFieldValue()
@@ -2488,7 +2505,7 @@ function linkXmlFileDataSend() {
                     . "-proposal.xml";
 
             break;
-        case EnvironmentConf::ENV_PRD_NAME:
+        case EnvironmentConf::ENV_PRD_NAME :
             $link = $this->getGlobalConfigModel()->getConf()->getUrlEai() . "/export/fta2arcadia-40-"
                     . $this->getKeyValuePorposal()
                     . "-" . $this->getFtaModel()->getDataField(FtaModel::KEYNAME)->getFieldValue()
@@ -2508,7 +2525,7 @@ function linkXmlFileOkSend() {
     $env = $this->getGlobalConfigModel()->getConf()->getExecEnvironment();
     $link = "";
     switch ($env) {
-        case EnvironmentConf::ENV_COD_NAME:
+        case EnvironmentConf::ENV_COD_NAME :
             $link = "";
 
             break;

@@ -90,7 +90,7 @@ if ($id_fta_classification2) {
 
     $RaccourcisClassif = $ClassificationFta2Model->getHtmlClassificationRaccourcis($action);
     
-    $CategorieFamilleBudget = $ClassificationFta2Model->getHtmlArcadiaGammeFamilleBudget($action);
+    $GammeFamilleBudget = $ClassificationFta2Model->getHtmlArcadiaGammeFamilleBudget($action);
 }
 
 if ($action == 'modifier') {
@@ -99,7 +99,7 @@ if ($action == 'modifier') {
 
     $HtmlDonnesArcadia = $CategorieOptiventes
             . $RaccourcisClassif
-            . $CategorieFamilleBudget;
+            . $GammeFamilleBudget;
 } else {
     $titre = "Ajout d'une classification";
     $action = "ajout";

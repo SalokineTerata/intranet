@@ -44,6 +44,7 @@ class EnvironmentInit extends EnvironmentAbstract {
     const URL_SERVER_NAME = "URL_SERVER_NAME";
     const REVERSE_PROXY_NAME = "REVERSE_PROXY_NAME";
     const URL_SUBDIR = "URL_SUBDIR";
+    const URL_EAI = "URL_EAI";
 
     function __construct($paramEnvName, $paramInit) {
 
@@ -63,6 +64,7 @@ class EnvironmentInit extends EnvironmentAbstract {
         $this->getConf()->setReverseProxyName($paramInit[self::REVERSE_PROXY_NAME][$paramEnvName]);
         $this->getConf()->setUrlRootDir($paramInit[self::URL_ROOT_DIR][$paramEnvName]);
         $this->getConf()->setUrlSubdir($paramInit[self::URL_SUBDIR][$paramEnvName]);
+        $this->getConf()->setUrlEai($paramInit[self::URL_EAI][$paramEnvName]);
 
         /**
          * Partie 3 :

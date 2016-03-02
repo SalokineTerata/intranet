@@ -153,7 +153,7 @@ class AnnexeEmballageGroupeTypeModel extends AbstractModel {
          * On obtient l' id Annexe Emballage de type UVC selon l'id fta et id fta conditionnement
          * On obtient l' id Annexe Emballage groupe type de type UVC selon l'id fta et id fta conditionnement
          */
-        self::$idFtaConditionnemntUVC = FtaConditionnementModel::getIdFtaConditionnement(self::$idAnnexeEmballageUVC, $paramIdFta, self::EMBALLAGE_UVC);
+        self::$idFtaConditionnemntUVC = FtaConditionnementModel::getIdFtaConditionnementByArrayIdAnnexeEmballageAndIdFtaAndIdEmballageGroupeType(self::$idAnnexeEmballageUVC, $paramIdFta, self::EMBALLAGE_UVC);
         self::$idAnnexeEmballageGroupeTypeUVCByIdFtaConditionnement = FtaConditionnementModel::getIdAnnexeEmballageAndGroupeTypeAndGroupeAndIdFtaConditionnementFromFtaConditionnement(self::$idFtaConditionnemntUVC, $paramIdFta);
 
         /*
@@ -161,7 +161,7 @@ class AnnexeEmballageGroupeTypeModel extends AbstractModel {
          * On obtient l' id Annexe Emballagepar Colis selon l'id fta et id fta conditionnement
          * On obtient l' id Annexe Emballage groupe type par Colis selon l'id fta et id fta conditionnement
          */
-        self::$idFtaConditionnemntParColis = FtaConditionnementModel::getIdFtaConditionnement(self::$idAnnexeEmballageParColis, $paramIdFta, self::EMBALLAGE_PAR_COLIS);
+        self::$idFtaConditionnemntParColis = FtaConditionnementModel::getIdFtaConditionnementByArrayIdAnnexeEmballageAndIdFtaAndIdEmballageGroupeType(self::$idAnnexeEmballageParColis, $paramIdFta, self::EMBALLAGE_PAR_COLIS);
         self::$idAnnexeEmballageGroupeTypeParColisByIdFtaConditionnement = FtaConditionnementModel::getIdAnnexeEmballageAndGroupeTypeAndGroupeAndIdFtaConditionnementFromFtaConditionnement(self::$idFtaConditionnemntParColis, $paramIdFta);
 
 
@@ -170,7 +170,7 @@ class AnnexeEmballageGroupeTypeModel extends AbstractModel {
          * On obtient l' id Annexe Emballage du Colisselon l'id fta et id fta conditionnement
          * On obtient l' id Annexe Emballage groupe type du Colis selon l'id fta et id fta conditionnement
          */
-        self::$idFtaConditionnemntDuColis = FtaConditionnementModel::getIdFtaConditionnement(self::$idAnnexeEmballageDuColis, $paramIdFta, self::EMBALLAGE_DU_COLIS);
+        self::$idFtaConditionnemntDuColis = FtaConditionnementModel::getIdFtaConditionnementByArrayIdAnnexeEmballageAndIdFtaAndIdEmballageGroupeType(self::$idAnnexeEmballageDuColis, $paramIdFta, self::EMBALLAGE_DU_COLIS);
         self::$idAnnexeEmballageGroupeTypeDuColisByIdFtaConditionnement = FtaConditionnementModel::getIdAnnexeEmballageAndGroupeTypeAndGroupeAndIdFtaConditionnementFromFtaConditionnement(self::$idFtaConditionnemntDuColis, $paramIdFta);
 
         /*
@@ -178,7 +178,7 @@ class AnnexeEmballageGroupeTypeModel extends AbstractModel {
          * On obtient l' id Annexe Emballage de type Palette selon l'id fta et id fta conditionnement
          * On obtient l' id Annexe Emballage groupe type de type Palette selon l'id fta et id fta conditionnement
          */
-        self::$idFtaConditionnemntPalette = FtaConditionnementModel::getIdFtaConditionnement(self::$idAnnexeEmballagePalette, $paramIdFta, self::EMBALLAGE_PALETTE);
+        self::$idFtaConditionnemntPalette = FtaConditionnementModel::getIdFtaConditionnementByArrayIdAnnexeEmballageAndIdFtaAndIdEmballageGroupeType(self::$idAnnexeEmballagePalette, $paramIdFta, self::EMBALLAGE_PALETTE);
         self::$idAnnexeEmballageGroupeTypePaletteByIdFtaConditionnement = FtaConditionnementModel::getIdAnnexeEmballageAndGroupeTypeAndGroupeAndIdFtaConditionnementFromFtaConditionnement(self::$idFtaConditionnemntPalette, $paramIdFta);
     }
 

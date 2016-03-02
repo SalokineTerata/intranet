@@ -176,7 +176,7 @@ class Chapitre {
         return self::$html_chapitre_all;
     }
 
-    public static function initChapitre($id_fta, $id_fta_chapitre, $synthese_action, $comeback, $idFtaEtat, $abreviationFtaEtat, $idFtaRole,$checkArcadiaData) {
+    public static function initChapitre($id_fta, $id_fta_chapitre, $synthese_action, $comeback, $idFtaEtat, $abreviationFtaEtat, $idFtaRole, $checkArcadiaData) {
 
         self::$checkArcadiaData = $checkArcadiaData;
         self::$is_data_validation_successful = FALSE;
@@ -957,6 +957,9 @@ class Chapitre {
         //Emballages du Colis
         $bloc.=$ftaView->getHtmlEmballageDuColis($id_fta, $idChapitre, $synthese_action, self::$id_fta_etat, self::$abrevation_etat, self::$id_fta_role);
 
+        //Vérification que l'enballage sélectionner soit existant sur Arcadia
+        $bloc.=$ftaView->checkEmballageColisValide();
+
         //Palette
         $bloc.=$ftaView->getHtmlEmballagePalette($id_fta, $idChapitre, $synthese_action, self::$id_fta_etat, self::$abrevation_etat, self::$id_fta_role);
 
@@ -1065,8 +1068,7 @@ class Chapitre {
 
 //        //Libellé etiquette carton:
 //        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_LIBELLE_CLIENT);
-        //Modèle d'étiquette
-        $bloc.=$ftaView->listeCodesoftEtiquettes();
+
 
         if ($ftaView->isDataValidationSuccessful() == "0") {
             self::setDataValidationSuccessfulToTrue();
@@ -1171,7 +1173,9 @@ class Chapitre {
         //Forcer libellé étiquette colis ?:
         //Etiquette colis
         $bloc.=$ftaView->getHtmlVerrouillageEtiquetteWithEtiquetteColis();
-        ;
+
+        //Modèle d'étiquette
+        $bloc.=$ftaView->listeCodesoftEtiquettes();
 
         if ($ftaView->isDataValidationSuccessful() == "0") {
             self::setDataValidationSuccessfulToTrue();
@@ -1211,6 +1215,9 @@ class Chapitre {
         //Etiquette colis
         $bloc.=$ftaView->getHtmlVerrouillageEtiquetteWithEtiquetteColis();
 
+        //Modèle d'étiquette
+        $bloc.=$ftaView->listeCodesoftEtiquettes();
+
         if ($ftaView->isDataValidationSuccessful() == "0") {
             self::setDataValidationSuccessfulToTrue();
         }
@@ -1248,6 +1255,9 @@ class Chapitre {
         //Forcer libellé étiquette colis ?:
         //Etiquette colis
         $bloc.=$ftaView->getHtmlVerrouillageEtiquetteWithEtiquetteColis();
+
+        //Modèle d'étiquette
+        $bloc.=$ftaView->listeCodesoftEtiquettes();
 
         if ($ftaView->isDataValidationSuccessful() == "0") {
             self::setDataValidationSuccessfulToTrue();

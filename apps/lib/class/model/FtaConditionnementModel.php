@@ -258,18 +258,18 @@ class FtaConditionnementModel extends AbstractModel {
     }
 
     /**
-     * On obtient les id Fta Conditionnement selon le type d'emballage
-     * @param type $paramIdAnnexeEmballage
+     * On obtient les id Fta Conditionnement selon le type d'emballage par emballage type et annexe emballage type
+     * @param type $paramArrayIdAnnexeEmballage
      * @param type $paramIdFta
      * @return int
      */
-    public static function getIdFtaConditionnement($paramIdAnnexeEmballage, $paramIdFta, $paramIdEmballageGroupeType) {
+    public static function getIdFtaConditionnementByArrayIdAnnexeEmballageAndIdFtaAndIdEmballageGroupeType($paramArrayIdAnnexeEmballage, $paramIdFta, $paramIdEmballageGroupeType) {
 
         $req = 'SELECT DISTINCT ' . FtaConditionnementModel::KEYNAME
                 . ' FROM ' . FtaConditionnementModel::TABLENAME
                 . ' WHERE ( 0 ';
 
-        $req .=AnnexeEmballageModel::AddIdAnnexeEmballage($paramIdAnnexeEmballage);
+        $req .=AnnexeEmballageModel::AddIdAnnexeEmballage($paramArrayIdAnnexeEmballage);
 
         $req .= ') AND ' . FtaConditionnementModel::FIELDNAME_ID_FTA . '=' . $paramIdFta
                 . ' AND ' . FtaConditionnementModel::FIELDNAME_ID_ANNEXE_EMBALLAGE_GROUPE_TYPE . '=' . $paramIdEmballageGroupeType

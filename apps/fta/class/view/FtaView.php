@@ -242,6 +242,17 @@ class FtaView extends AbstractView {
     }
 
     /**
+     * On vérifie si l'emballage du colis qui devrait être unique
+     * à une correspondance sur arcadia sinon alors on affiche une message d'avertissement 
+     * pour un cas non communiqué
+     */
+    function checkEmballageColisValide() {
+        $return = $this->getModel()->checkEmballageColisValide();
+
+        return $return;
+    }
+
+    /**
      * Affichage Html du nom abrégé
      * @return string
      */

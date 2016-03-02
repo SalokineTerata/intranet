@@ -63,7 +63,7 @@ switch ($action) {
     case "supprimer":
 
         //Suppression de la FTE
-        if (Acl::getValueAccesRights($module . "_modification") <> 1) {
+        if (Acl::getValueAccesRights($module . "_modification") == 1) {
             AnnexeEmballageModel::deleteAnnexeEmballage($id_annexe_emballage);
         }
         //Redirection

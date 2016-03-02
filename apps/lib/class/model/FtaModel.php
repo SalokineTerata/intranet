@@ -259,7 +259,7 @@ class FtaModel extends AbstractModel {
 
         $arrayIdAnnexeEmballageGroupeDuColis = AnnexeEmballageGroupeModel::getArrayIdAnnexeEmballageGroupe(AnnexeEmballageGroupeTypeModel::EMBALLAGE_DU_COLIS);
         $arrayIdAnnexeEmballageDuColis = AnnexeEmballageModel::getArrayIdAnnexeEmballage($arrayIdAnnexeEmballageGroupeDuColis);
-        $arrayIdFtaConditionnemntDuColis = FtaConditionnementModel::getIdFtaConditionnement($arrayIdAnnexeEmballageDuColis, $idFta, AnnexeEmballageGroupeTypeModel::EMBALLAGE_DU_COLIS);
+        $arrayIdFtaConditionnemntDuColis = FtaConditionnementModel::getIdFtaConditionnementByArrayIdAnnexeEmballageAndIdFtaAndIdEmballageGroupeType($arrayIdAnnexeEmballageDuColis, $idFta, AnnexeEmballageGroupeTypeModel::EMBALLAGE_DU_COLIS);
         if ($arrayIdFtaConditionnemntDuColis) {
             foreach ($arrayIdFtaConditionnemntDuColis as $key => $paramId) {
                 $ftaConditionnmentModel = new FtaConditionnementModel($paramId);
@@ -280,7 +280,7 @@ class FtaModel extends AbstractModel {
 
         $arrayIdAnnexeEmballageGroupeDuColis = AnnexeEmballageGroupeModel::getArrayIdAnnexeEmballageGroupe(AnnexeEmballageGroupeTypeModel::EMBALLAGE_DU_COLIS);
         $arrayIdAnnexeEmballageDuColis = AnnexeEmballageModel::getArrayIdAnnexeEmballage($arrayIdAnnexeEmballageGroupeDuColis);
-        $arrayIdFtaConditionnemntDuColis = FtaConditionnementModel::getIdFtaConditionnement($arrayIdAnnexeEmballageDuColis, $idFta, AnnexeEmballageGroupeTypeModel::EMBALLAGE_DU_COLIS);
+        $arrayIdFtaConditionnemntDuColis = FtaConditionnementModel::getIdFtaConditionnementByArrayIdAnnexeEmballageAndIdFtaAndIdEmballageGroupeType($arrayIdAnnexeEmballageDuColis, $idFta, AnnexeEmballageGroupeTypeModel::EMBALLAGE_DU_COLIS);
         if ($arrayIdFtaConditionnemntDuColis) {
             foreach ($arrayIdFtaConditionnemntDuColis as $key => $paramId) {
                 $ftaConditionnmentModel = new FtaConditionnementModel($paramId);
@@ -288,6 +288,34 @@ class FtaModel extends AbstractModel {
             }
         }
         return $checkdiff;
+    }
+
+     /**
+     * On vérifie si l'emballage du colis qui devrait être unique
+     * à une correspondance sur arcadia sinon alors on affiche une message d'avertissement 
+     * pour un cas non communiqué
+     */
+    function checkEmballageColisValide() {
+        $return = "";
+        $idFta = $this->getKeyValue();
+
+        $arrayIdAnnexeEmballageGroupeDuColis = AnnexeEmballageGroupeModel::getArrayIdAnnexeEmballageGroupe(AnnexeEmballageGroupeTypeModel::EMBALLAGE_DU_COLIS);
+        $arrayIdAnnexeEmballageDuColis = AnnexeEmballageModel::getArrayIdAnnexeEmballage($arrayIdAnnexeEmballageGroupeDuColis);
+        $arrayIdFtaConditionnemntDuColis = FtaConditionnementModel::getIdFtaConditionnementByArrayIdAnnexeEmballageAndIdFtaAndIdEmballageGroupeType($arrayIdAnnexeEmballageDuColis, $idFta, AnnexeEmballageGroupeTypeModel::EMBALLAGE_DU_COLIS);
+        if ($arrayIdFtaConditionnemntDuColis) {
+            foreach ($arrayIdFtaConditionnemntDuColis as $key => $paramId) {
+                $ftaConditionnmentModel = new FtaConditionnementModel($paramId);
+                $idCartonArcadia = $ftaConditionnmentModel->getModelAnnexeEmballage()->getDataField(AnnexeEmballageModel::FIELDNAME_ID_ARCADIA_TYPE_CARTON)->getFieldValue();
+                if ($idCartonArcadia == ArcadiaTypeCartonModel::ID_CARTON_NON_COMUNIQUE) {
+                    $return = "<tr class=contenu><td bgcolor=#FFAA55 align=\"center\" valign=\"middle\">";
+                    $return.=UserInterfaceMessage::FR_WARNING_TITLE;
+                    $return.="</td><td bgcolor=#FFAA55 align=\"center\" valign=\"middle\">"
+                            . "<h4>" . UserInterfaceMessage::FR_WARNING_EMBALLAGE_COLIS_ARCADIA . "</h4></td></tr>";
+                }
+            }
+        }
+
+        return $return;
     }
 
     /**

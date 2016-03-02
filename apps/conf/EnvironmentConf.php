@@ -65,6 +65,7 @@ class EnvironmentConf {
     private $urlServer = null;
     private $reverseProxyName = null;
     private $urlSubdir = null;
+    private $urlEai = null;
     private $cssBackgroundValue = null;
     private $cssContentValue = null;
     private $cssFta = null;
@@ -229,6 +230,14 @@ class EnvironmentConf {
         return $this->urlSubdir;
     }
 
+    function getUrlEai() {
+        return $this->urlEai;
+    }
+
+    function setUrlEai($urlEai) {
+        $this->urlEai = $urlEai;
+    }
+        
     public function setApplicationName($applicationName) {
         $this->applicationName = $applicationName;
     }

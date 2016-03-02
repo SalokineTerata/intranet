@@ -50,12 +50,14 @@ class UserInterfaceMessage {
                 <br>
 ";
     const FR_TRANSITION_FTA_TITLE = "Transiter l'Etat d'une Fiche Technique Article";
+    const FR_WARNING_TITLE = "AVERTISSEMENT";
     const FR_WARNING_ACCES_RIGHTS = "Vous n'avez pas les droits d'accès nécessaire.<br><br>";
     const FR_WARNING_ACCES_RIGHTS_TITLE = "Erreur d'accès";
     const FR_WARNING_CHAPITRES = " Veuillez selectionner un chapitre<br>";
     const FR_WARNING_CHAPITRES_TITLE = " Chapitres Fta<br>";
-    const FR_WARNING_CHAPITRES_DE_FTA = " Attention, vous êtes sur le point de dévalidé aussi les chapitres suivants:<br>";
-    const FR_WARNING_CONNECTION = " La connection est un succès mais vous n'avez pas les droits d'accès sur l'intranet ou votre compte est bloqué.<br><br>
+    const FR_WARNING_CHAPITRES_DE_FTA = " Attention, vous êtes sur le point de dévalider aussi les chapitres suivants:<br>";
+    const FR_WARNING_CONNEXION_TITLE = "Connexion à l'intranet";
+    const FR_WARNING_CONNEXION = " La connexion est un succès mais vous n'avez pas les droits d'accès sur l'intranet ou votre compte est bloqué ou encore désactivé.<br><br>
                              Veuillez contacter l'administrateur du site.";
     const FR_WARNING_DATA_CLASIFICATION = "Veuillez saisir une classification";
     const FR_WARNING_DATA_CLASIFICATION_TITLE = "Classification d'une Fiche Technique Article";
@@ -77,6 +79,7 @@ class UserInterfaceMessage {
     const FR_WARNING_DUPLICATION_DE_FTA = " Attention, vous êtes sur le point de dupliquer la Fiche Technique Article suivante:<br>";
     const FR_WARNING_ECHEANCE_DEPASSEE = "Certaines échéances sont dépassées !";
     const FR_WARNING_EMBALLAGE_COLIS = "Il ne doit y avoir qu'un seul emballage Colis";
+    const FR_WARNING_EMBALLAGE_COLIS_ARCADIA = "Il n'y a pas de correspondance sur Arcadia à cette emballage Colis";
     const FR_WARNING_EMBALLAGE_PALETTE = "Il ne doit y avoir qu'une seule Palette";
     const FR_WARNING_EMBALLAGE_SUPPRESION = "Vous ne pouvez pas supprimer cette Fiche Technique Emballage.<br><br>
                     En effet, elle est encore utilisée dans certaines Fiches Techniques Articles.<br><br>";

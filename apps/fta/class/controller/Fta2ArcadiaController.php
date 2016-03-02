@@ -200,7 +200,7 @@ class Fta2ArcadiaController {
      * Initialisation des balises
      */
     $this->setAllBalise();
-    
+
     /**
      * On décide si oui ou non affcihe les données publiques
      */
@@ -348,7 +348,7 @@ function setPublicBalise() {
      * On n'affiche pas les donées publiques
      *  car une conditions de validation est demandé lors du pré-chargement
      */
-    $this->setArcadiaPublicDataFalse();
+    $this->setArcadiaPublicDataTrue();
 }
 
 /**
@@ -2276,29 +2276,34 @@ function xmlArtSite() {
     /**
      * Si il y a un deuxième enregistrement à ajouter on l'affiche
      */
-    if ($this->getArcadiaArtSiteRecordTwoCheck()) {
-        $xmlTextRecordSetTwo = $this->getXMLRecordsetBaliseArtSiteTwo()
-                . $this->getXMLArcadiaArtSiteDateDebutEffet()
-                . $this->getXMLArcadiaArtSiteDateFinEffet()
-                . $this->getXMLRecordsetArtSiteTwo()
-                . self::RECORDSET_END;
-    }
-    if ($this->getArcadiaArtSiteCheck()) {
-        $xmlText = self::ART_SITE_START
-                . self::DATA_IMPORT_START
-                . $this->getXMLRecordsetBaliseArtSiteUpdateTwo()
-                . $this->getXMLRecordsetBaliseArtSiteUpdateOne()
-                . $this->getXMLRecordsetBaliseArtSiteOne()
-                . $this->getXMLArcadiaArtSiteDateDebutEffet()
-                . $this->getXMLArcadiaArtSiteDateFinEffet()
-                . $this->getXMLArcadiaArtSiteCodPosteCC()
-                . $this->getXMLArcadiaArtSiteCodAtelier()
-                . $this->getXMLArcadiaArtSiteSiteAffectRes()
-                . self::RECORDSET_END
-                . $xmlTextRecordSetTwo
-                . self::DATA_IMPORT_END
-                . self::ART_SITE_END
-        ;
+    /**
+     * On l'active que pour un créate
+     */
+    if ($this->getActionProposal() == self::CREATE) {
+        if ($this->getArcadiaArtSiteRecordTwoCheck()) {
+            $xmlTextRecordSetTwo = $this->getXMLRecordsetBaliseArtSiteTwo()
+                    . $this->getXMLArcadiaArtSiteDateDebutEffet()
+                    . $this->getXMLArcadiaArtSiteDateFinEffet()
+                    . $this->getXMLRecordsetArtSiteTwo()
+                    . self::RECORDSET_END;
+        }
+        if ($this->getArcadiaArtSiteCheck()) {
+            $xmlText = self::ART_SITE_START
+                    . self::DATA_IMPORT_START
+                    . $this->getXMLRecordsetBaliseArtSiteUpdateTwo()
+                    . $this->getXMLRecordsetBaliseArtSiteUpdateOne()
+                    . $this->getXMLRecordsetBaliseArtSiteOne()
+                    . $this->getXMLArcadiaArtSiteDateDebutEffet()
+                    . $this->getXMLArcadiaArtSiteDateFinEffet()
+                    . $this->getXMLArcadiaArtSiteCodPosteCC()
+                    . $this->getXMLArcadiaArtSiteCodAtelier()
+                    . $this->getXMLArcadiaArtSiteSiteAffectRes()
+                    . self::RECORDSET_END
+                    . $xmlTextRecordSetTwo
+                    . self::DATA_IMPORT_END
+                    . self::ART_SITE_END
+            ;
+        }
     }
     return $xmlText;
 }
@@ -2310,26 +2315,29 @@ function xmlArtSite() {
 function xmlProduitFinis() {
     $xmlText = "";
 
-
-    $xmlText = self::ESP_PRODUITS_FINIS_START
-            . self::DATA_IMPORT_START
-            . $this->getXMLRecordsetBaliseEspProduitFini()
-            . $this->getXMLCommentEntete()
-            . $this->getXMLArcadiaCodProduit()
-            . $this->getXMLCommentRegateAcAchat()
-            . $this->getXMLArcadiaAcregSite()
-            . $this->getXMLArcadiaAcregLieu()
-            . $this->getXMLArcadiaAcregNoQuai()
-            . $this->getXMLArcadiaAcregNoMethode()
-            . $this->getXMLCommentRegateAcStock()
-            . $this->getXMLArcadiaAcregSiteSecondaire()
-            . $this->getXMLArcadiaAcregLieuSecondaire()
-            . $this->getXMLArcadiaAcregTypeProdEmplacement()
-            . $this->getXMLArcadiaAcregQuantiteEmplacement()
-            . self::RECORDSET_END
-            . self::DATA_IMPORT_END
-            . self::ESP_PRODUITS_FINIS_END;
-
+    /**
+     * On l'active que pour un créate
+     */
+    if ($this->getActionProposal() == self::CREATE) {
+        $xmlText = self::ESP_PRODUITS_FINIS_START
+                . self::DATA_IMPORT_START
+                . $this->getXMLRecordsetBaliseEspProduitFini()
+                . $this->getXMLCommentEntete()
+                . $this->getXMLArcadiaCodProduit()
+                . $this->getXMLCommentRegateAcAchat()
+                . $this->getXMLArcadiaAcregSite()
+                . $this->getXMLArcadiaAcregLieu()
+                . $this->getXMLArcadiaAcregNoQuai()
+                . $this->getXMLArcadiaAcregNoMethode()
+                . $this->getXMLCommentRegateAcStock()
+                . $this->getXMLArcadiaAcregSiteSecondaire()
+                . $this->getXMLArcadiaAcregLieuSecondaire()
+                . $this->getXMLArcadiaAcregTypeProdEmplacement()
+                . $this->getXMLArcadiaAcregQuantiteEmplacement()
+                . self::RECORDSET_END
+                . self::DATA_IMPORT_END
+                . self::ESP_PRODUITS_FINIS_END;
+    }
     return $xmlText;
 }
 
@@ -2413,8 +2421,8 @@ function generateXmlText() {
             . self::DATA_IMPORT_END
             . self::ARTICLE_REF_END
             . $this->xmlProduitFinis()
-//            . $this->xmlArtSite()
-//            . $this->xmlDunc14()
+            . $this->xmlArtSite()
+            . $this->xmlDunc14()
             . self::TABLE_END . self::SAUT_DE_LIGNE
             . "</Transaction>" . self::SAUT_DE_LIGNE
             . self::SAUT_DE_LIGNE
@@ -2453,21 +2461,21 @@ function linkXmlFileDataSend() {
     $link = "";
     switch ($env) {
         case EnvironmentConf::ENV_COD_NAME:
-            $link = "../../eai/export/fta2arcadia-40-"
+            $link = $this->getGlobalConfigModel()->getConf()->getUrlEai() . "/fta2arcadia-40-"
                     . $this->getKeyValuePorposal()
                     . "-" . $this->getFtaModel()->getDataField(FtaModel::KEYNAME)->getFieldValue()
                     . "-proposal.xml";
 
             break;
         case EnvironmentConf::ENV_DEV_NAME:
-            $link = "/u1/DATA01/eai/intranet-dev/export/data/fta2arcadia-40-"
+            $link = $this->getGlobalConfigModel()->getConf()->getUrlEai() . "/export/data/fta2arcadia-40-"
                     . $this->getKeyValuePorposal()
                     . "-" . $this->getFtaModel()->getDataField(FtaModel::KEYNAME)->getFieldValue()
                     . "-proposal.xml";
 
             break;
         case EnvironmentConf::ENV_PRD_NAME:
-            $link = "../../eai/export/fta2arcadia-40-"
+            $link = $this->getGlobalConfigModel()->getConf()->getUrlEai() . "/export/fta2arcadia-40-"
                     . $this->getKeyValuePorposal()
                     . "-" . $this->getFtaModel()->getDataField(FtaModel::KEYNAME)->getFieldValue()
                     . "-proposal.xml";
@@ -2491,14 +2499,17 @@ function linkXmlFileOkSend() {
 
             break;
         case EnvironmentConf::ENV_DEV_NAME:
-            $link = "/u1/DATA01/eai/intranet-dev/export/ok/fta2arcadia-40-"
+            $link = $this->getGlobalConfigModel()->getConf()->getUrlEai() . "/export/ok/fta2arcadia-40-"
                     . $this->getKeyValuePorposal()
                     . "-" . $this->getFtaModel()->getDataField(FtaModel::KEYNAME)->getFieldValue()
                     . "-proposal.xml.ok";
 
             break;
         case EnvironmentConf::ENV_PRD_NAME:
-            $link = "";
+            $link = $this->getGlobalConfigModel()->getConf()->getUrlEai() . "/export/ok/fta2arcadia-40-"
+                    . $this->getKeyValuePorposal()
+                    . "-" . $this->getFtaModel()->getDataField(FtaModel::KEYNAME)->getFieldValue()
+                    . "-proposal.xml.ok";
 
             break;
     }

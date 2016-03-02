@@ -1174,8 +1174,7 @@ function getXMLArcadiaNoArtKey() {
 
 function setXMLArcadiaNoArtKey($paramCodeArticleLDC) {
     $this->XMLarcadiaNoArtKey = self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION
-            . "<NO_ART key=\"TRUE\">" . $paramCodeArticleLDC
-            . "</NO_ART>" . self::SAUT_DE_LIGNE;
+            . "<NO_ART key=\"TRUE\">" . $paramCodeArticleLDC . "</NO_ART>" . self::SAUT_DE_LIGNE;
 }
 
 function getXMLArcadiaParametre() {

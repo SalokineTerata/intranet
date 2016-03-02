@@ -335,7 +335,7 @@ function transformAll() {
  * (ou autres colones clé tel que numero variante pour les produits fini)
  */
 function setAllBalise() {
-    $this->setXMLArcadiaNoArtKey();
+    $this->transformNoArtKey();
     $this->setXMLArcadiaParametre();
     $this->setXMLArcadiaCodProduit();
 }
@@ -373,6 +373,17 @@ function transformCREATE() {
  */
 function transformIsHallal() {
     $this->setXMLArcadiaIsHallal();
+}
+
+/**
+ * Si le code artcile n'est pas renseigné alors on affiche un code article vide
+ */
+function transformNoArtKey() {
+    $codeArticleLDC = "";
+    if ($this->getFtaModel()->getDataField(FtaModel::FIELDNAME_CODE_ARTICLE_LDC)->getFieldValue()) {
+        $codeArticleLDC = $this->getFtaModel()->getDataField(FtaModel::FIELDNAME_CODE_ARTICLE_LDC)->getFieldValue();
+    }
+    $this->setXMLArcadiaNoArtKey($codeArticleLDC);
 }
 
 /**
@@ -1161,9 +1172,9 @@ function getXMLArcadiaNoArtKey() {
     return $this->XMLarcadiaNoArtKey;
 }
 
-function setXMLArcadiaNoArtKey() {
+function setXMLArcadiaNoArtKey($paramCodeArticleLDC) {
     $this->XMLarcadiaNoArtKey = self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION
-            . "<NO_ART key=\"TRUE\">" . $this->getFtaModel()->getDataField(FtaModel::FIELDNAME_CODE_ARTICLE_LDC)->getFieldValue()
+            . "<NO_ART key=\"TRUE\">" . $paramCodeArticleLDC
             . "</NO_ART>" . self::SAUT_DE_LIGNE;
 }
 

@@ -11,7 +11,7 @@
     <Tables>
         <ARTICLE_REF>
             <DataToImport>
-                <Recordset id="1" action="create">
+                <Recordset id="1" action="update">
 
                     <!-- Entête -->
                     <NO_ART key="TRUE"></NO_ART>                   

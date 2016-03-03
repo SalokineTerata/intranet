@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Transaction id="34" version="1.1" type="proposal">
+    <Parameters>
+        <IdFirm>40</IdFirm><!-- Agis -->
+        <IdArcadia>43150</IdArcadia><!-- Code article dans Arcadia -->
+        <IdFta>14774</IdFta><!-- N° de la FTA -->
+    </Parameters>
+    <Tables>
+        <ART_SITE>
+            <DataToImport>
+                <Recordset id="1" action="update">
+                    <NO_ART key="TRUE">43150</NO_ART>
+                    <COD_SITE_GRP key="TRUE">47</COD_SITE_GRP><!--Plateforme de Tarare -->
+                    <NIVEAU key="TRUE">1</NIVEAU><!-- Primaire -->
+                    <DATE_DEBUT_EFFET>02/03/2016</DATE_DEBUT_EFFET>
+                </Recordset>             
+            </DataToImport>
+        </ART_SITE>
+    </Tables>
+
+</Transaction>
+

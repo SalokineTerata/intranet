@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Transaction id="32" version="1.1" type="proposal">
+    <Parameters>
+        <IdFirm>40</IdFirm><!-- Agis -->
+        <IdArcadia>43150</IdArcadia><!-- Code article dans Arcadia -->
+        <IdFta>14774</IdFta><!-- N° de la FTA -->
+    </Parameters>
+    <Tables>
+        <ART_SITE>
+            <DataToImport>
+                <Recordset id="1" action="create">
+                    <NO_ART key="TRUE">43150</NO_ART>
+                    <COD_SITE_GRP key="TRUE">47</COD_SITE_GRP><!--Plateforme de Tarare -->
+                    <NIVEAU key="TRUE">1</NIVEAU><!-- Primaire -->
+                    <DATE_DEBUT_EFFET>02/03/2016</DATE_DEBUT_EFFET>
+                    <DATE_FIN_EFFET>31/12/2029</DATE_FIN_EFFET>
+                    <COD_POSTE_CC>3</COD_POSTE_CC>
+                    <COD_ATELIER>1</COD_ATELIER>
+                    <SIT_AFFECT_RES>47</SIT_AFFECT_RES>
+                </Recordset>
+                <Recordset id="2" action="create">
+                    <NO_ART key="TRUE"> </NO_ART>
+                    <COD_SITE_GRP key="TRUE">43</COD_SITE_GRP><!--Avignon -->
+                    <NIVEAU key = "TRUE">2</NIVEAU><!-- Secondaire -->
+                    <DATE_DEBUT_EFFET>02/03/2016</DATE_DEBUT_EFFET>
+                    <DATE_FIN_EFFET>31/12/2029</DATE_FIN_EFFET>
+                    <COD_POSTE_CC>1</COD_POSTE_CC>
+                    <COD_ATELIER>1</COD_ATELIER>
+                    <SIT_AFFECT_RES>47</SIT_AFFECT_RES>
+                </Recordset>
+            </DataToImport>
+        </ART_SITE>
+    </Tables>
+
+</Transaction>
+

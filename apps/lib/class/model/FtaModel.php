@@ -39,6 +39,7 @@ class FtaModel extends AbstractModel {
     const FIELDNAME_DATE_CREATION = "date_creation";
     const FIELDNAME_DATE_DEMANDEUR = "date_demandeur_fta";
     const FIELDNAME_DATE_DERNIERE_MAJ_FTA = "date_derniere_maj_fta";
+    const FIELDNAME_DATE_DE_VALIDATION_FTA = "date_de_validation_fta";
     const FIELDNAME_DATE_ECHEANCE_FTA = "date_echeance_fta";
     const FIELDNAME_DATE_PREVISONNELLE_TRANSFERT_INDUSTRIEL = "date_transfert_industriel";
     const FIELDNAME_DESCRIPTION_DU_PRODUIT = "OLD_synoptique_valide_fta";
@@ -1734,7 +1735,8 @@ class FtaModel extends AbstractModel {
  atmosphere_protectrice, image_eco_emballage, libelle_code_article_client, id_service_consommateur,
  nom_societe, id_fta_classification2,pourcentage_avancement, liste_id_fta_role,code_article_ldc_mere,
  id_arcadia_categeorie_produit_optiventes,id_arcadia_gamme_famille_budget,id_classification_raccourcis,
-  id_arcadia_famille_budget,id_arcadia_gamme_coop,id_arcadia_famille_vente,id_arcadia_sous_famille,id_arcadia_marque)"
+  id_arcadia_famille_budget,id_arcadia_gamme_coop,id_arcadia_famille_vente,id_arcadia_sous_famille,id_arcadia_marque,
+  date_de_validation_fta)"
                         . " SELECT id_access_arti2, OLD_numft, id_fta_workflow,
  commentaire, OLD_id_fta_palettisation, id_dossier_fta, id_version_dossier_fta,
  OLD_champ_maj_fta, id_fta_etat, createur_fta, date_derniere_maj_fta,
@@ -1769,7 +1771,8 @@ class FtaModel extends AbstractModel {
  atmosphere_protectrice, image_eco_emballage, libelle_code_article_client, id_service_consommateur,
  nom_societe, id_fta_classification2 ,pourcentage_avancement, liste_id_fta_role,code_article_ldc_mere,
  id_arcadia_categeorie_produit_optiventes,id_arcadia_gamme_famille_budget,id_classification_raccourcis,
- id_arcadia_famille_budget,id_arcadia_gamme_coop,id_arcadia_famille_vente,id_arcadia_sous_famille,id_arcadia_marque"
+ id_arcadia_famille_budget,id_arcadia_gamme_coop,id_arcadia_famille_vente,id_arcadia_sous_famille,id_arcadia_marque,
+ date_de_validation_fta"
                         . " FROM " . FtaModel::TABLENAME
                         . " WHERE " . FtaModel::KEYNAME . "=" . $paramIdFta
         );

@@ -588,22 +588,24 @@ class FtaView extends AbstractView {
         $htmlReturn = NULL;
         $idClassificationFta2 = $this->getModel()->getDataField(FtaModel::FIELDNAME_ID_FTA_CLASSIFICATION2)->getFieldValue();
         if ($idClassificationFta2) {
+            $htmlFamilleBudget = $this->getHtmlDataField(FtaModel::FIELDNAME_ID_ARCADIA_FAMILLE_BUDGET);
+            $htmlGammeCoop = $this->getHtmlDataField(FtaModel::FIELDNAME_ID_ARCADIA_GAMME_COOP);
+
             $htmlArcadiaGammeFamileBudget = $this->getHtmlArcadiaGammeFamileBudget();
             $htmlClassificationRaccourcis = $this->getHtmlClassificationRaccourcis();
             $htmlArcadiaSousFamille = $this->getHtmlArcadiaSousFamille();
             $htmlArcadiaFamilleVente = $this->getHtmlArcadiaFamilleVenteArcadia();
             $htmlArcadiaMarque = $this->getHtmlArcadiaMarque();
 
-            $htmlFamilleBudget = $this->getHtmlDataField(FtaModel::FIELDNAME_ID_ARCADIA_FAMILLE_BUDGET);
-            $htmlGammeCoop = $this->getHtmlDataField(FtaModel::FIELDNAME_ID_ARCADIA_GAMME_COOP);
 
             $htmlReturn = $htmlClassificationRaccourcis
                     . $htmlArcadiaGammeFamileBudget
-                    . $htmlGammeCoop
-                    . $htmlFamilleBudget
                     . $htmlArcadiaFamilleVente
                     . $htmlArcadiaSousFamille
                     . $htmlArcadiaMarque
+                    . $htmlFamilleBudget
+                    . $htmlGammeCoop
+
             ;
         }
         return $htmlReturn;

@@ -214,6 +214,10 @@ class DatabaseRecord extends SessionSaveAndRestoreAbstract {
         $this->dataWarningMessage .= $dataWarningMessage;
     }
 
+    function resetDataWarningMessage() {
+        $this->dataWarningMessage = NULL;
+    }
+
     /**
      * 
      * @return boolean
@@ -644,7 +648,7 @@ class DatabaseRecord extends SessionSaveAndRestoreAbstract {
      * @param string $paramFieldValue Nom du champ
      * @return boolean TRUE=différence, FALSE=Aucune différence.
      */
-    
+
     /**
      * 
      * @param string $paramFieldValue
@@ -655,7 +659,10 @@ class DatabaseRecord extends SessionSaveAndRestoreAbstract {
          * $isDataValidationSuccessful: Le champs respect-il toutes ces règles ?
          */
         $isDataValidationSuccessful = "0";
-
+        /**
+         * On supprime les ancien message afin d'éviter qui s'ajoute d'un champ à l'autre
+         */
+        $this->resetDataWarningMessage();
         /**
          * On récupère la liste de règle à vérifier en BDD
          */

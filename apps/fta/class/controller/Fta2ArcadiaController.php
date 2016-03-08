@@ -63,6 +63,10 @@ class Fta2ArcadiaController {
     FALSE;
     const ACTION_DELETE_ENABLED =
     TRUE;
+    const ACTION_CREATE_ENABLED =
+    TRUE;
+    const ACTION_CREATE_DISABLED =
+    FALSE;
 
     /**
      * FTA associée
@@ -176,6 +180,7 @@ class Fta2ArcadiaController {
     private $arcadiaArtSiteRecordTwoCheck;
     private $arcadiaArtSiteRecordValue;
     private $arcadiaPublicData;
+    private $arcadiaDun14Create;
 
     public function __construct
             
@@ -853,8 +858,10 @@ function transformCodPCB() {
         /**
          * Si le PCB n'est pas différent 
          * On vérifie si il s'agit d'une mise à jour de donnée ou une création
+         * @todo Après des test unitaire la création Dun14 ne fonctionnent pas on bloque se fonctionnnement 
          */
         $action = $this->getActionProposal();
+        $this->checkDun14ActionType();
         $this->setArcadiaDun14RecordValue(self::AJOUT_DUN_RECORDSET);
         $this->setXMLRecordsetBaliseDun14($action);
         /**
@@ -868,6 +875,20 @@ function transformCodPCB() {
      */
     $pcbValue = $this->getFtaModel()->getDataField(FtaModel::FIELDNAME_NOMBRE_UVC_PAR_CARTON)->getFieldValue();
     $this->setXMLArcadiaCodPCB($pcbValue);
+}
+
+/**
+ * Vérification du type d'action
+ */
+function checkDun14ActionType() {
+    if ($this->getActionProposal() == self::CREATE) {
+        /**
+         * Si l'action est unn crate alors on n'affiche pas la table Dun14
+         */
+        $this->setArcadiaDun14CreateFalse();
+    } else {
+        $this->setArcadiaDun14CreateTrue();
+    }
 }
 
 /**
@@ -1703,6 +1724,22 @@ function setArcadiaDun14CheckTrue() {
     $this->setArcadiaDun14Check(self::TRUE);
 }
 
+function getArcadiaDun14Create() {
+    return $this->arcadiaDun14Create;
+}
+
+function setArcadiaDun14Create($arcadiaDun14Create) {
+    $this->arcadiaDun14Create = $arcadiaDun14Create;
+}
+
+function setArcadiaDun14CreateFalse() {
+    $this->setArcadiaDun14Check(self::ACTION_CREATE_DISABLED);
+}
+
+function setArcadiaDun14CreateTrue() {
+    $this->setArcadiaDun14Check(self::ACTION_CREATE_ENABLED);
+}
+
 function getArcadiaArtSiteCheck() {
     return $this->arcadiaArtSiteCheck;
 }
@@ -2266,21 +2303,23 @@ function checkCommentRegate() {
 function xmlDunc14() {
     $xmlText = "";
 
-    if ($this->getArcadiaDun14Check()) {
-        $xmlText = self::DUN14_START
-                . self::DATA_IMPORT_START
-                . $this->getXMLRecordsetBaliseDun14Delete()
-                . $this->getXMLRecordsetBaliseDun14()
-                . $this->getXMLArcadiaNoArtKey()
-                . $this->getXMLArcadiaCodPCB()
-                . $this->getXMLArcadiaDun14()
-                . $this->getXMLArcadiaTypeCarton()
-                . $this->getXMLArcadiaDunPalette()
-                . self::RECORDSET_END
-                . self::DATA_IMPORT_END
-                . self::DUN14_END
+    if ($this->getArcadiaDun14Create()) {
+        if ($this->getArcadiaDun14Check()) {
+            $xmlText = self::DUN14_START
+                    . self::DATA_IMPORT_START
+                    . $this->getXMLRecordsetBaliseDun14Delete()
+                    . $this->getXMLRecordsetBaliseDun14()
+                    . $this->getXMLArcadiaNoArtKey()
+                    . $this->getXMLArcadiaCodPCB()
+                    . $this->getXMLArcadiaDun14()
+                    . $this->getXMLArcadiaTypeCarton()
+                    . $this->getXMLArcadiaDunPalette()
+                    . self::RECORDSET_END
+                    . self::DATA_IMPORT_END
+                    . self::DUN14_END
 
-        ;
+            ;
+        }
     }
     return $xmlText;
 }
@@ -2297,31 +2336,29 @@ function xmlArtSite() {
     /**
      * On l'active que pour un créate
      */
-    if ($this->getActionProposal() == self::CREATE) {
-        if ($this->getArcadiaArtSiteRecordTwoCheck()) {
-            $xmlTextRecordSetTwo = $this->getXMLRecordsetBaliseArtSiteTwo()
-                    . $this->getXMLArcadiaArtSiteDateDebutEffet()
-                    . $this->getXMLArcadiaArtSiteDateFinEffet()
-                    . $this->getXMLRecordsetArtSiteTwo()
-                    . self::RECORDSET_END;
-        }
-        if ($this->getArcadiaArtSiteCheck()) {
-            $xmlText = self::ART_SITE_START
-                    . self::DATA_IMPORT_START
-                    . $this->getXMLRecordsetBaliseArtSiteUpdateTwo()
-                    . $this->getXMLRecordsetBaliseArtSiteUpdateOne()
-                    . $this->getXMLRecordsetBaliseArtSiteOne()
-                    . $this->getXMLArcadiaArtSiteDateDebutEffet()
-                    . $this->getXMLArcadiaArtSiteDateFinEffet()
-                    . $this->getXMLArcadiaArtSiteCodPosteCC()
-                    . $this->getXMLArcadiaArtSiteCodAtelier()
-                    . $this->getXMLArcadiaArtSiteSiteAffectRes()
-                    . self::RECORDSET_END
-                    . $xmlTextRecordSetTwo
-                    . self::DATA_IMPORT_END
-                    . self::ART_SITE_END
-            ;
-        }
+    if ($this->getArcadiaArtSiteRecordTwoCheck()) {
+        $xmlTextRecordSetTwo = $this->getXMLRecordsetBaliseArtSiteTwo()
+                . $this->getXMLArcadiaArtSiteDateDebutEffet()
+                . $this->getXMLArcadiaArtSiteDateFinEffet()
+                . $this->getXMLRecordsetArtSiteTwo()
+                . self::RECORDSET_END;
+    }
+    if ($this->getArcadiaArtSiteCheck()) {
+        $xmlText = self::ART_SITE_START
+                . self::DATA_IMPORT_START
+                . $this->getXMLRecordsetBaliseArtSiteUpdateTwo()
+                . $this->getXMLRecordsetBaliseArtSiteUpdateOne()
+                . $this->getXMLRecordsetBaliseArtSiteOne()
+                . $this->getXMLArcadiaArtSiteDateDebutEffet()
+                . $this->getXMLArcadiaArtSiteDateFinEffet()
+                . $this->getXMLArcadiaArtSiteCodPosteCC()
+                . $this->getXMLArcadiaArtSiteCodAtelier()
+                . $this->getXMLArcadiaArtSiteSiteAffectRes()
+                . self::RECORDSET_END
+                . $xmlTextRecordSetTwo
+                . self::DATA_IMPORT_END
+                . self::ART_SITE_END
+        ;
     }
     return $xmlText;
 }
@@ -2452,8 +2489,8 @@ function generateXmlText() {
             . "<Transaction id=\"" . $this->getKeyValuePorposal() . "\" version=\"1.1\" type=\"proposal\">" . self::SAUT_DE_LIGNE
             . $this->getXMLArcadiaParametre()
             . self::TABLE_START
-//            . $this->xmlArticleRef()
-//            . $this->xmlProduitFinis()
+            . $this->xmlArticleRef()
+            . $this->xmlProduitFinis()
 //            . $this->xmlArtSite()
             . $this->xmlDunc14()
             . self::TABLE_END . self::SAUT_DE_LIGNE

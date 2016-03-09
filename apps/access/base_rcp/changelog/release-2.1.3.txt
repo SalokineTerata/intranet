@@ -1,0 +1,40 @@
+================================================================================
+Modifications à apporter aux différentes versions du modules
+================================================================================
+
+[ ]: Reste à effectuer
+[!]: Prioritaire
+[V]: Réalisé
+[.]: Abandonné
+================================================================================
+Exemples:
+[V] 23/05/2003: saisie_vierge_origine.php
+      Déplacer les informations de cette page au niveau du composant.
+
+[ ] 28/07/2003: saisie_origine.php
+                Saisie de plusieurs origine sans cycle.
+                Rajouter dans la listedes origine:
+                         - Cf Origine MP
+                         - Cf Lieu dernière Transformation
+                         - Cf Origine Multiple
+                         - Cf Non défini
+                Bouton "Terminer Saisie"
+================================================================================
+
+[2.1.3] quand dans la statistique Regate la colonne Animations sera bien alimentée : modifier la R MEF - Ajout Données CLIENTS ARTICLES en alimentant le champ Mt_Animations de la table des données clients articles par le bon champ
+
+	Pour information correspondance des colonnes V2 - V3 pour les budgets ristournes
+	colonne AgroV2		colonne REGATE
+	budget %			budget inconditionnel
+	budget forfaitaire		budget forfaitaire (mais qui englobe aussi les animations - 2010-08-12)
+	ct agence			budget conditionnel
+	animations			au 2010-08-12 elles st dans bud forfait (mais en cours pour les distinguer dans colonne budget animation)
+	rfa				ristounrne conditionnelle + rist incond
+modification stat CA 3 NET infocentre mai 2010 avec rajout de la colonne animation avant la colonne mt promo
+modification importation dans la base pour prise en compte de cette information
+
+[2.1.3] rajouter une édition par famille de gamme (dans l'onglet ARTICLE)
+   rajout ds R "RCP - Article - Cout kilo moyen selection" & "RCP - Article - Cout kilo moyen selection - periode2" du champ id_access_familles_gammes
+   création R "RCP - Nb Article par Gamme et Famille Gamme"		
+   rajout dans R "RCP - Article - Cout kilo moyen" du champ id_access_familles_gammes
+ 

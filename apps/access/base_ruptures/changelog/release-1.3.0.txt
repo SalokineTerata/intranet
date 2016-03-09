@@ -1,0 +1,70 @@
+================================================================================
+Modifications à apporter aux différentes versions du modules
+================================================================================
+
+[ ]: Reste à effectuer
+[!]: Prioritaire
+[V]: Réalisé
+[.]: Abandonné
+================================================================================
+Exemples:
+[V] 23/05/2003: saisie_vierge_origine.php
+      Déplacer les informations de cette page au niveau du composant.
+
+[ ] 28/07/2003: saisie_origine.php
+                Saisie de plusieurs origine sans cycle.
+                Rajouter dans la listedes origine:
+                         - Cf Origine MP
+                         - Cf Lieu dernière Transformation
+                         - Cf Origine Multiple
+                         - Cf Non défini
+                Bouton "Terminer Saisie"
+================================================================================
+
+2010-08-12 : 
+- modification pour utilisation avec REGATE : nouveau code client + nouveau motif de rutpure
+- reprise de toutes les requetes en enlevant la table access_clients_rayon qui n'a plus lieu d'être
+- rajout des champs id_site_groupe et num_site_groupe dans les tables geo et access_ruptures (car ces n° proviennent de regate)
+lots de l'import transformation du n° site groupe en n° site Agis (1, 3 ...) et du motif de rupture (clef texte en numérique) pour ne pas avoir à modifier toutes les requêtes
+
+
+[V] rajout dans table FAMILLES CLIENTS
+CLEFAM	FAMILLE	CLEREG	REGROUPEMENT	actif
+0	A CLASSER	995	DIVERS	0
+
+[v] mise à jour des tables de données n° client et n° article avec les codes regate
+[v] mise à jour code article T access_ruptures_export_libelles_etrangers
+[v] mise à jour code langue T access_clients pour les codes regate
+[v] mise à jour fax co tel et n operateur dans table client
+
+[v] modifier macro excel pour supprimer la colonne G
+
+
+InformatiqueSupport AVIGNON/LDCAVI/GRPLDC/FR Envoyé par : Stephane MORIN 16/08/2010 09:58	
+A Cecile CASANOVA/LDCTAR/GRPLDC/FR@LDCGRP, Catherine BLARD/LDCTAR/GRPLDC/FR@LDCGRP, Sylvie GUILLARME/LDCTAR/GRPLDC/FR@LDCGRP, Christelle VARILLON/LDCTAR/GRPLDC/FR@LDCGRP
+cc Franck VOLAY/LDCTAR/GRPLDC/FR@LDCGRP, Benjamin MONTLAHUC/LDCAVI/GRPLDC/FR@LDCGRP, Bernard ANTONIAZZI/LDCTAR/GRPLDC/FR@LDCGRP, Christele LUCAS/LDCAVI/GRPLDC/FR@LDCGRP, Maryse MEANCE/LDCAVI/GRPLDC/FR@LDCGRP, Florence MAGRE/LDCAVI/GRPLDC/FR@LDCGRP, Informatique Avignon@LDCGRP
+Objet
+REGATE : base de données ruptures - taux de service	
+	
+Bonjour,
+
+La base de données Suivi des ruptures et taux de service est de nouveau parmi nous (version 1.3.0)
+
+A compter  de ce jour vous pouvez reprendre le fonctionnement quotidien sur le traitement des données
+
+Les mises à jour et modifications sont les suivantes :
+ procédure d'utilisation de la base mise à jour et disponible en cliquant sur le bouton 
+
+ transformation de codes clients et articles au format Regate
+mise à jour de toutes les éditions avec les nouveaux codes
+
+ importation des ruptures du 17/05 au 13/08 inclus
+
+ importation des statistiques mensuelles des mois de mai à juillet
+
+ rajout d'un champ fax_rupture (oui/non) afin de n'éditer que les clients qui souhaitent le fax (accessible via le bouton Modif Tel - Fax). Par défaut pour tous les clients actuellement ce champ est  à oui.
+
+
+A disposition en cas de besoin
+Stéphane
+

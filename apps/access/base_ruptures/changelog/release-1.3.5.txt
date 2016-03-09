@@ -1,0 +1,48 @@
+================================================================================
+Modifications à apporter aux différentes versions du modules
+================================================================================
+
+[ ]: Reste à effectuer
+[!]: Prioritaire
+[V]: Réalisé
+[.]: Abandonné
+================================================================================
+Exemples:
+[V] 23/05/2003: saisie_vierge_origine.php
+      Déplacer les informations de cette page au niveau du composant.
+
+[ ] 28/07/2003: saisie_origine.php
+                Saisie de plusieurs origine sans cycle.
+                Rajouter dans la listedes origine:
+                         - Cf Origine MP
+                         - Cf Lieu dernière Transformation
+                         - Cf Origine Multiple
+                         - Cf Non défini
+                Bouton "Terminer Saisie"
+================================================================================
+
+
+SM pour répondre rapidement à la demande ci dessous j'ai modifié la requête TS - Suivi par Site - MySQL	et passé en inactif les 3 articles avec pcb 1
+
+
+Cecile CASANOVA 	A : 	InformatiqueSupport AVIGNON 	06/06/2011 17:42 
+Bonjour,
+
+Pour faire suite à notre entretien téléphonique de ce jour, veuillez trouver ci-joint le fichier PDF concerné page 37.
+
+Concerne le site EPC - gamme viandes cuites pour lesquels il y a des doublons sur les reférences suivantes :
+- 33375 ROSBIF
+- 33371 GIGOT D'AGNEAU
+- 31746 ROTI VEAU
+
+[pièce jointe "TAUX DE SERVICE EPC - GAMMES VIANDES CUITES MAI 2011.pdf" supprimée par Stephane MORIN/LDCAVI/GRPLDC/FR] 
+
+Merci d'avance (je dois présenter le taux de service mardi prochain !!!)
+
+
+Cécile CASANOVA
+Responsable GDV et SAV
+AGIS PLATEFORME TARARE
+Tel : 04.74.05.32.60 - Fax : 04.74.05.32.68
+mail : cecile.casanova@agis-sa.fr
+

@@ -1,0 +1,27 @@
+================================================================================
+Modifications à apporter aux différentes versions du modules
+================================================================================
+
+[ ]: Reste à effectuer
+[!]: Prioritaire
+[V]: Réalisé
+[.]: Abandonné
+================================================================================
+Exemples:
+[V] 23/05/2003: saisie_vierge_origine.php
+      Déplacer les informations de cette page au niveau du composant.
+
+[ ] 28/07/2003: saisie_origine.php
+                Saisie de plusieurs origine sans cycle.
+                Rajouter dans la listedes origine:
+                         - Cf Origine MP
+                         - Cf Lieu dernière Transformation
+                         - Cf Origine Multiple
+                         - Cf Non défini
+                Bouton "Terminer Saisie"
+================================================================================
+
+[v] Suite mise à jour de la base budget des ventes (ajout table famille gamme + ajout un champ dans la table access_arti2 (id_fam_gamme)) => modifier le form de saisie des articles de la base rcp F articles - modification
+
+[v] deverouillage des champs années du formulaire Edition afin de pouvoir éditer sur l'année en cours
+

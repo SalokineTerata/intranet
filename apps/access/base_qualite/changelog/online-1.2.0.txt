@@ -1,0 +1,55 @@
+================================================================================
+Fiches et Tables à basculer de intranet.dev.agis.fr vers intranet.agis.fr:
+================================================================================
+
+[ ]: Reste à effectuer
+[X]: Réalisé
+================================================================================
+
+Pour les copies MYSQL[]:
+---------------------------
+[D]: DATA et STRUCTURE sont à transférer
+[S]: STRUCTURE seulement sont à transférer
+[O]: Renommer la table en OLD_nom_de_la_table
+================================================================================
+
+Pour les copies de FILE:
+----------------------------
+chemin depuis le répertoire racine du site
+- si c'est le répertoire du module:
+    - renommer le répertoire d'exploitation nom-AAAA-MM-JJ où la date est la
+        date du jour de la modification
+    - faire un TAR.GZ
+    - supprimer l'original
+    - copier le répertoire de développement vers le site d'exploitation
+
+================================================================================
+[V] Systématique: Ecarter une sauvegarde de l'intranet exploitation
+[V] Systématique: ACCESS: Démarrage --> Titre de l'Application --> Incrémenter la version
+[V] Systématique: MYSQL[D]: intranet_access_linked_table
+[V] Systématique: Créer le fichier .agismde
+[V] Systématique: copier le sous dossier actuel /base_nom_du_sous_module
+[V] Renommer de M:\extract.mdb en M:\extract.mdb-1.1.0
+[V] Mise en place de C:\temp.mdb via maintenance.bat
+[V] MySQL[D]: access_qualite_processus
+    Suppression de la table Access
+    [V] Lamballe
+    [V] Tarare
+    [V] Avignon
+
+[V] Sauvegarder les champ N°Norme vers N°Norme_OLD pour toutes les tables documents et historiques
+    [V] Avignon  [V] Appliquer le patch 1.2.0 - Processus
+    [V] Lamballe [V] Appliquer le patch 1.2.0 - Processus
+    [V] Tarare   [V] Appliquer le patch 1.2.0 - Processus
+
+[ ] OpenOffice dans r:\ avec config ODBC
+    [V] Avignon
+    [V] Lamballe
+    [V] Tarare
+
+
+
+
+
+
+

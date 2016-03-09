@@ -1,0 +1,126 @@
+================================================================================
+Fiches et Tables à basculer de intranet.dev.agis.fr vers intranet.agis.fr:
+================================================================================
+
+[ ]: Reste à effectuer
+[X]: Réalisé
+================================================================================
+
+Pour les copies MYSQL[]:
+---------------------------
+[D]: DATA et STRUCTURE sont à transférer
+[S]: STRUCTURE seulement sont à transférer
+[O]: Renommer la table en OLD_nom_de_la_table
+================================================================================
+
+Pour les copies de FILE:
+----------------------------
+chemin depuis le répertoire racine du site
+- si c'est le répertoire du module:
+	- renommer le répertoire d'exploitation nom-AAAA-MM-JJ où la date est la
+		date du jour de la modification
+	- faire un TAR.GZ
+	- supprimer l'original
+	- copier le répertoire de développement vers le site d'exploitation
+
+================================================================================
+[NA] Systématique: Ecarter une sauvegarde de l'intranet exploitation
+[v] Systématique: ACCESS: Démarrage --> Titre de l'Application --> Incrémenter la version
+[v] Systématique: MYSQL[D]: intranet_access_linked_table uniquement pour la base sur laquelle on travaille
+[v] Systématique: Créer le fichier .agismde
+[v] Systématique: copier le sous dossier actuel /base_nom_du_sous_module
+[v] Systématique: Ajouter à l'extension du .mdb l'extension ".lock"
+[v] systématique: vérification du mode debug
+
+
+[v] exporter dans mysql la T table_animation
+[v] exporter structure table access_bugdet_ventes_table_animation
+	[x] ALTER TABLE `access_bugdet_ventes_table_animation` ADD PRIMARY KEY ( `k_famille_budget_anim` ) 
+	[x] ALTER TABLE `access_bugdet_ventes_table_animation` CHANGE `date_heure_operation` `date_heure_operation` TIMESTAMP NULL DEFAULT NULL 
+[v] ALTER TABLE `access_budget_ventes_arti2_dev` ADD `k_famille_budget_dev` INT DEFAULT '0',
+[v] ADD `id_access_familles_gammes_dev` INT DEFAULT '0';
+[v] ALTER TABLE `access_bugdet_ventes_table_budget` ADD `date_heure_operation` TIMESTAMP NOT NULL ;
+[v] ALTER TABLE `access_bugdet_ventes_table_budget` ADD `login_derniere_modification` VARCHAR( 10 )
+[v] ALTER TABLE `access_bugdet_ventes_articles_totalite` ADD `k_famille_budget` INT DEFAULT '0',
+[v] ADD `id_access_familles_gammes` TINYINT DEFAULT '0';
+[v] ALTER TABLE `access_bugdet_ventes_correspondance_famcli_fammktg` ADD `k_famille_budget` INT( 4 ) NOT NULL DEFAULT '0'
+[v] ALTER TABLE `access_bugdet_ventes_correspondance_famcli_fammktg` DROP PRIMARY KEY 
+[v] vider la table puis creer la clef primaire
+[v] ALTER TABLE `access_bugdet_ventes_correspondance_famcli_fammktg` ADD PRIMARY KEY ( `CLEFAM` , `k_famille_budget` , `k_reseau` ) 
+[v] ALTER TABLE `access_bugdet_ventes_correspondance_famcli_fammktg` ADD `date_heure_operation` TIMESTAMP NOT NULL ;
+
+
+
+[v] ALTER TABLE `geo` ADD `k_societe` TINYINT DEFAULT '1' NOT NULL 
+[v] ALTER TABLE `access_arti2` ADD `id_access_familles_gammes` INT DEFAULT '0' AFTER `FAMILLE_ARTICLE` ;
+[v] ALTER TABLE `access_arti2` ADD INDEX ( `id_access_familles_gammes` ) ;
+
+
+[v] CREATE TABLE `access_familles_gammes` (
+`id_access_familles_gammes` INT NOT NULL ,
+`libelle_access_familles_gammes` VARCHAR( 25 ) NOT NULL ,
+PRIMARY KEY ( `id_access_familles_gammes` )
+) TYPE = MYISAM ;
+
+[v] INSERT INTO `intranet_access_linked_table` ( `id_intranet_access_linked_table` , `base_intranet_access_linked_table` , `source_intranet_access_linked_table` , `destination_intranet_access_linked_table` , `droits_intranet_access_linked_table` , `location_intranet_access_linked_table` , `extension_intranet_access_linked_table` , `mode_connect_intranet_access_linked_table` )
+VALUES (
+'', 'rcp', 'access_familles_gammes', 'access_familles_gammes', 'complet', '', '', ''
+);
+
+[v] faire la mise en ligne de la base rcp v2.0.7
+
+[v] ALTER TABLE `access_bugdet_ventes_table_budget` CHANGE `R1` `R1` INT( 11 ) NULL DEFAULT '0',
+CHANGE `R2` `R2` INT( 11 ) NULL DEFAULT '0',
+CHANGE `R3` `R3` INT( 11 ) NULL DEFAULT '0',
+CHANGE `R4` `R4` INT( 11 ) NULL DEFAULT '0',
+CHANGE `R5` `R5` INT( 11 ) NULL DEFAULT '0',
+CHANGE `R6` `R6` INT( 11 ) NULL DEFAULT '0',
+CHANGE `R7` `R7` INT( 11 ) NULL DEFAULT '0',
+CHANGE `R8` `R8` INT( 11 ) NULL DEFAULT '0',
+CHANGE `R9` `R9` INT( 11 ) NULL DEFAULT '0',
+CHANGE `R10` `R10` INT( 11 ) NULL DEFAULT '0',
+CHANGE `R11` `R11` INT( 11 ) NULL DEFAULT '0',
+CHANGE `R12` `R12` INT( 11 ) NULL DEFAULT '0'
+
+[v] ALTER TABLE `access_bugdet_ventes_table_budget` CHANGE `tarif_base` `tarif_base` FLOAT NULL DEFAULT '0',
+CHANGE `Rem1` `Rem1` FLOAT NULL DEFAULT '0',
+CHANGE `Rem2` `Rem2` FLOAT NULL DEFAULT '0',
+CHANGE `Rem3` `Rem3` FLOAT NULL DEFAULT '0',
+CHANGE `Rem4` `Rem4` FLOAT NULL DEFAULT '0',
+CHANGE `RFA` `RFA` FLOAT NULL DEFAULT '0',
+CHANGE `BUDGET_COOP` `BUDGET_COOP` FLOAT NULL DEFAULT '0',
+CHANGE `ANIM` `ANIM` FLOAT NULL DEFAULT '0',
+CHANGE `B1` `B1` INT( 11 ) NULL DEFAULT '0',
+CHANGE `TMP1` `TMP1` FLOAT NULL DEFAULT '0',
+CHANGE `B2` `B2` INT( 11 ) NULL DEFAULT '0',
+CHANGE `TMP2` `TMP2` FLOAT NULL DEFAULT '0',
+CHANGE `B3` `B3` INT( 11 ) NULL DEFAULT '0',
+CHANGE `TMP3` `TMP3` FLOAT NULL DEFAULT '0',
+CHANGE `B4` `B4` INT( 11 ) NULL DEFAULT '0',
+CHANGE `TMP4` `TMP4` FLOAT NULL DEFAULT '0',
+CHANGE `B5` `B5` INT( 11 ) NULL DEFAULT '0',
+CHANGE `TMP5` `TMP5` FLOAT NULL DEFAULT '0',
+CHANGE `B6` `B6` INT( 11 ) NULL DEFAULT '0',
+CHANGE `TMP6` `TMP6` FLOAT NULL DEFAULT '0',
+CHANGE `B7` `B7` INT( 11 ) NULL DEFAULT '0',
+CHANGE `TMP7` `TMP7` FLOAT NULL DEFAULT '0',
+CHANGE `B8` `B8` INT( 11 ) NULL DEFAULT '0',
+CHANGE `TMP8` `TMP8` FLOAT NULL DEFAULT '0',
+CHANGE `B9` `B9` INT( 11 ) NULL DEFAULT '0',
+CHANGE `TMP9` `TMP9` FLOAT NULL DEFAULT '0',
+CHANGE `B10` `B10` INT( 11 ) NULL DEFAULT '0',
+CHANGE `TMP10` `TMP10` FLOAT NULL DEFAULT '0',
+CHANGE `B11` `B11` INT( 11 ) NULL DEFAULT '0',
+CHANGE `TMP11` `TMP11` FLOAT NULL DEFAULT '0',
+CHANGE `B12` `B12` INT( 11 ) NULL DEFAULT '0',
+CHANGE `TMP12` `TMP12` FLOAT NULL DEFAULT '0'
+
+
+[V] ALTER TABLE `access_gammes` ADD `k_reseau` TINYINT DEFAULT '0' NOT NULL ,
+ADD `date_heure_operation` TIMESTAMP DEFAULT NULL ;
+
+[v] ALTER TABLE `access_bugdet_ventes_articles_cout` CHANGE `ct_denree` `ct_denree` FLOAT NULL DEFAULT '0',
+CHANGE `ct_emballage` `ct_emballage` FLOAT NULL DEFAULT '0'
+
+[v] ALTER TABLE `access_bugdet_ventes_correspondance_famcli_fammktg` ADD `login_derniere_modification` VARCHAR( 10 ) NOT NULL AFTER `k_reseau` ;
+[v] ALTER TABLE `access_bugdet_ventes_articles_cout` ADD `login_derniere_modification` VARCHAR( 10 ) NOT NULL AFTER `ct_emballage` ;

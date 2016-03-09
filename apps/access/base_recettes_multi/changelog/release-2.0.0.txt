@@ -1,0 +1,27 @@
+================================================================================
+Modifications à apporter aux différentes versions du modules
+================================================================================
+
+[ ]: Reste à effectuer
+[!]: Prioritaire
+[V]: Réalisé
+[.]: Abandonné
+================================================================================
+Exemples:
+[V] 23/05/2003: saisie_vierge_origine.php
+      Déplacer les informations de cette page au niveau du composant.
+
+[ ] 28/07/2003: saisie_origine.php
+                Saisie de plusieurs origine sans cycle.
+                Rajouter dans la listedes origine:
+                         - Cf Origine MP
+                         - Cf Lieu dernière Transformation
+                         - Cf Origine Multiple
+                         - Cf Non défini
+                Bouton "Terminer Saisie"
+================================================================================
+[V] Gérer les doublons déjà existant dans la table COMPOSITIONS
+Suppression des doublnons:
+delete access_recettes_composition_avignon.* from access_recettes_composition_avignon, access_recettes_composition_avignon_doublon WHERE access_recettes_composition_avignon.CLE_COMPOSANT=access_recettes_composition_avignon_doublon.CLE_COMPOSANTChamps 
+AND access_recettes_composition_avignon.CLE_RECETTE=access_recettes_composition_avignon_doublon.CLE_RECETTEChamps 
+

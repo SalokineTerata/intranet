@@ -1,0 +1,31 @@
+================================================================================
+Modifications à apporter aux différentes versions du modules
+================================================================================
+
+[ ]: Reste à effectuer
+[!]: Prioritaire
+[V]: Réalisé
+[.]: Abandonné
+================================================================================
+Exemples:
+[V] 23/05/2003: saisie_vierge_origine.php
+      Déplacer les informations de cette page au niveau du composant.
+
+[ ] 28/07/2003: saisie_origine.php
+                Saisie de plusieurs origine sans cycle.
+                Rajouter dans la listedes origine:
+                         - Cf Origine MP
+                         - Cf Lieu dernière Transformation
+                         - Cf Origine Multiple
+                         - Cf Non défini
+                Bouton "Terminer Saisie"
+================================================================================
+[2006-02-10] erreur non constaté sur la base 1.0.0 (sm)
+  Erreur OpenReport 
+    Lorsque l'utilisateur appuit sur le bouton DN - Entrepôt ou DN - centrale, plantage Visual Basic
+    cf. \\Avi1203\www\intranet.dev\access\base_datasharing\archives\erreur-2006-07-12.png
+
+================================================================================
+
+[V] Anomalie sur la gestion des années n-1 (par exemple on est en 2009 et on souhaite exploiter les données 2008.
+

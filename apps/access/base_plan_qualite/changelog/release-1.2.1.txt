@@ -1,0 +1,57 @@
+================================================================================
+Modifications à apporter aux différentes versions du modules
+================================================================================
+
+[ ]: Reste à effectuer
+[!]: Prioritaire
+[V]: Réalisé
+[.]: Abandonné
+================================================================================
+Exemples:
+[V] 23/05/2003: saisie_vierge_origine.php
+      Déplacer les informations de cette page au niveau du composant.
+
+[ ] 28/07/2003: saisie_origine.php
+                Saisie de plusieurs origine sans cycle.
+                Rajouter dans la listedes origine:
+                         - Cf Origine MP
+                         - Cf Lieu dernière Transformation
+                         - Cf Origine Multiple
+                         - Cf Non défini
+                Bouton "Terminer Saisie"
+================================================================================
+
+[V] bonjour Boris,
+    Peux tu "m'aménager" la base afin que je puisse créer des plans qualité Tarare et Plate-forme ?
+    Lorsque je ferme une fenêtre de modif, par exemple, une autre s'ouvre : "entrer la valeur du paramètre" et me demande "access_plan.qualite_plan.etat_access_plan_qualite_plan".
+        
+    Merci et bon après-midi
+    Marie
+
+
+[V] Bonjour,
+    Il me manque encore un tout petit nom dans la liste des responsables :
+    HORODYLOWSKI Bernard
+        
+    Peux tu le rajouter ?
+
+    Merci d'avance et bonne journée
+    Marie
+
+[V] Bonjour Boris,
+    Voici quelques petits problèmes que j'ai rencontré lors de l'utilisation de la base :
+
+    [V] Impossible de créer une nouvelle action corrective
+    [V] Impossible d'obtenir l'aperçu d'une action corrective
+        La saisie du responsable d'une action est obligatoire
+
+    [V] Lors de l'aperçu d'un plan qualité, ce sont les n° des responsables d'actions qui s'affichent
+    [V] Peux tu intégrer les états des actions correctives : en cours / clôturées (idem que pour les plans qualité) ?
+
+    Merci d'avance et je suis à ta dispo si tu as besoin que je sois un peu plus claire ..
+
+    Bonne journée
+    Marie
+
+
+

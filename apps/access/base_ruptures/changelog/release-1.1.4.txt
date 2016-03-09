@@ -1,0 +1,32 @@
+================================================================================
+Modifications à apporter aux différentes versions du modules
+================================================================================
+
+[ ]: Reste à effectuer
+[!]: Prioritaire
+[V]: Réalisé
+[.]: Abandonné
+================================================================================
+Exemples:
+[V] 23/05/2003: saisie_vierge_origine.php
+      Déplacer les informations de cette page au niveau du composant.
+
+[ ] 28/07/2003: saisie_origine.php
+                Saisie de plusieurs origine sans cycle.
+                Rajouter dans la listedes origine:
+                         - Cf Origine MP
+                         - Cf Lieu dernière Transformation
+                         - Cf Origine Multiple
+                         - Cf Non défini
+                Bouton "Terminer Saisie"
+================================================================================
+
+03/10/2007  ALTER TABLE `access_ruptures_commandes` ADD `date_heure_operation` TIMESTAMP NOT NULL ;
+ALTER TABLE `access_ruptures_commandes_details` ADD `date_heure_operation` TIMESTAMP NOT NULL ;
+
+03/10/2007  le rafraichissement ne fonctionne pas quand on appuie sur le bouton poubelle 
+raison : le formulaire travaille sur des tables temporaires et la requète de suppression agit directement sur les tables de données (et non sur la table temp)
+solution : ouverture du formualire détail de la commande et détail des articles directement sur les tables de données
+
+
+03/10/2007 rajout du nom du client dans la liste des ruptures à une date donnée

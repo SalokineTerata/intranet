@@ -1,0 +1,91 @@
+================================================================================
+Modifications à apporter aux différentes versions du modules
+================================================================================
+
+[ ]: Reste à effectuer
+[!]: Prioritaire
+[V]: Réalisé
+[.]: Abandonné
+================================================================================
+Exemples:
+[V] 23/05/2003: saisie_vierge_origine.php
+      Déplacer les informations de cette page au niveau du composant.
+
+[ ] 28/07/2003: saisie_origine.php
+                Saisie de plusieurs origine sans cycle.
+                Rajouter dans la listedes origine:
+                         - Cf Origine MP
+                         - Cf Lieu dernière Transformation
+                         - Cf Origine Multiple
+                         - Cf Non défini
+                Bouton "Terminer Saisie"
+================================================================================
+[V] Bug sur la répartition
+[A] Mise en commun de la table ingredient
+
+
+[V] Voir si possiblité de simplifier le renommage de la recette
+    Bug dans le cas ou une recette est en cours d'utilisation sur un autre poste.
+
+
+
+[V] 2005-08-05 déverouillange chp N°Infologic en modification / mise en commentaire de la MAJ du champ dans le module lib
+sm
+
+    Modification de stockage des données.
+
+    Laisser la Table RECETTES exclusivement gérée par la base Access, et Utliiser uniquement la table access_recettes,  pour tout éléments provenant de L'intranet (ne plus essayer de les intégrer aussi dans la table RECETTES.
+    Boris.
+
+
+[A]Les limitation d'Access ne permettent pas de réaliser facilm  A mettre par défaut dans le champ Process:
+
+          - PROCESS :
+
+          COUPLE DE CUISSON :                   H        °C
+
+          PREPARATION DES INGREDIENTS :
+          MARQUAGE : [ ] oui / [ ] non
+              INGREDIENT :                               -->                          %
+              INGREDIENT :                               -->                          %
+          BLANCHIMENT : [ ] oui / [ ] non
+              INGREDIENT :                               -->                          %
+              INGREDIENT :                               -->                          %
+          DECONGELATION / EGOUTTAGE :
+              INGREDIENT :                               -->                          %
+              INGREDIENT :                               -->                          %
+
+          PREPARATION SAUCE :
+          BEURRE FONDU : [ ] oui / [ ] non
+          CREME EN DERNIER : [ ] oui / [ ] non
+          MARQUANTS : [ ] oui / [ ] non
+          THURAX : [ ] oui / [ ] non
+
+          AUTRE : 
+
+
+          CONDITIONNEMENT :
+          DEGUSTATION :
+
+[A]Aucune influence sur le fonctionnement -->  Dans le formaulaire modification-TempRECETTES -> indice_nouveau -> click
+    ATTENTION !!! CDG est en dure dans le code ... à changer pour qu'il soit dynamique.
+
+    Dim a As Variant
+    a = Right([Indice], 2)
+    If a < 9 Then
+                 a = a + 1
+                 [Indice] = "CDG-0" & a
+             Else: a = a + 1
+                 [Indice] = "CDG-" & a
+     End If
+
+
+[v] Corriger l'impression d'une recette pour inclure les informations Intranet
+
+[V] problème de renommage
+       Recette 8923 / 8549 / 8424
+
+[V] En modification, si erreur sur l'élément de la liste, alors plantage et obliger de redémarrer la base.
+    Voir la partie consultation, car celle-ci permet la gestino de l'erreur
+
+[V] Vérrouillages de l'accès aux tables recettes et ingrédients

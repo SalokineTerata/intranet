@@ -1,0 +1,12 @@
+[DATA SOURCE]
+DataSource=D:\cache.etiquettes\base_codesoft.dsn
+DatabaseType = 2
+[SQL]
+Query=SELECT [id_access_arti2], [CODE_ARTICLE], [code_article_client], [code_article_ldc], [LIBELLE], [LIBELLE_CLIENT], [poids_colis], [Poids_ELEM], [NB_UNIT_ELEM], [EAN_COLIS], [libelle_etat], [Etat_texte_legal], [lot_article], [dlc_article], [site_code_emballeur], [site_agrement_ce], [code_barre_bofrost], [K_etat], [libelle_multilangue], [nom_fta_composition], [EAN_UVC], [etiquette_fta_composition], [etiquette_supplementaire_fta_composition], [code_agrologic_nomenclature], [dlc_composant], [etiquette_libelle_fta_composition], [etiquette_poids_fta_composition], [quantite_fta_composition], [etiquette_duree_vie_fta_composition], [segment93], [segment10], [segement21], [segment90], [ligne_etiquetage], [apres_ouverture_fta], [conseil_rechauffage_valide_fta], [pvc_article], [pvc_article_kg], [etiquette_quantite_fta_composition], [nombre_portion_fta], [date_fabrication] FROM [etiquette_carton_ean]
+[Options]
+Extended = 0
+UserName = 0
+AllTableType = 0
+ErrorOnly = 0
+[TABLE NAME]
+IncludeName=0

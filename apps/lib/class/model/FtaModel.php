@@ -78,7 +78,7 @@ class FtaModel extends AbstractModel {
     const FIELDNAME_LISTE_ID_FTA_ROLE = "liste_id_fta_role";
     const FIELDNAME_LOGO_ECO_EMBALLAGE = "image_eco_emballage";
     const FIELDNAME_NOM_CLIENT_DEMANDEUR = "nom_client_demandeur";
-    const FIELDNAME_NOM_ABREGE = "nom_abrege_fta";
+    const FIELDNAME_NOM_ABREGE = "OLD_nom_abrege_fta";
     const FIELDNAME_NOM_DEMANDEUR = "nom_demandeur_fta";
     const FIELDNAME_NOMBRE_PORTION_FTA = "nombre_portion_fta";
     const FIELDNAME_NOMBRE_UVC_PAR_CARTON = "NB_UNIT_ELEM";

@@ -1,0 +1,216 @@
+CREATE TABLE `agis`.`access_recettes_multi_composition` (
+`CLE_COMPOSANT` int( 11 ) NOT NULL default '0',
+`CLE_RECETTE` int( 11 ) NOT NULL default '0',
+`QTE_UL_NETTE` double default '0',
+`COEFF_PERTE` double default '0',
+`PRIX_UL` double default '0',
+`FOURNISSEUR` varchar( 50 ) default NULL ,
+`UNITE` varchar( 10 ) default NULL ,
+`prix_estime` tinyint( 1 ) default '0',
+`date_prix_estime` datetime default NULL ,
+PRIMARY KEY ( `CLE_COMPOSANT` , `CLE_RECETTE` )
+) TYPE = MYISAM ;
+
+INSERT INTO `agis`.`access_recettes_multi_composition`
+SELECT *
+FROM `agis`.`access_recettes_composition_avignon` ;
+
+CREATE TABLE `agis`.`access_recettes_multi_cout_fab` (
+`niveau_coût_fab` int( 11 ) NOT NULL default '0',
+`C_FAB` float default '0',
+PRIMARY KEY ( `niveau_coût_fab` )
+) TYPE = MYISAM ;
+
+INSERT INTO `agis`.`access_recettes_multi_cout_fab`
+SELECT *
+FROM `agis`.`access_recettes_cout_fab_avignon` ;
+
+CREATE TABLE `agis`.`access_recettes_multi_frais_de_transport` (
+`k_frais_port` tinyint( 4 ) NOT NULL default '0',
+`montant_port` float default '0',
+`categorie_port` varchar( 50 ) default NULL ,
+PRIMARY KEY ( `k_frais_port` )
+) TYPE = MYISAM ;
+
+INSERT INTO `agis`.`access_recettes_multi_frais_de_transport`
+SELECT *
+FROM `agis`.`access_recettes_frais_de_transport_avignon` ;
+
+CREATE TABLE `agis`.`access_recettes_multi_gammes` (
+`CLE_GAMME` smallint( 6 ) NOT NULL default '0',
+`GAMME` varchar( 50 ) default NULL ,
+`COUT_TRANSPORT` float default '0',
+`COUT_EMBALLAGE` float default '0',
+`COUT_PRODUCTION` float default '0',
+PRIMARY KEY ( `CLE_GAMME` )
+) TYPE = MYISAM ;
+
+INSERT INTO `agis`.`access_recettes_multi_gammes`
+SELECT *
+FROM `agis`.`access_recettes_gammes_avignon` ;
+
+CREATE TABLE `agis`.`access_recettes_multi_importation_matiere` (
+`cle` double NOT NULL default '0',
+`designation` varchar( 255 ) default NULL ,
+`unite_facturation` double default NULL ,
+`sous_unite_facturation` double default NULL ,
+`nb_sous_unite_facturation_par_unite_achat` double default NULL ,
+PRIMARY KEY ( `cle` )
+) TYPE = MYISAM ;
+
+INSERT INTO `agis`.`access_recettes_multi_importation_matiere`
+SELECT *
+FROM `agis`.`access_recettes_importation_matiere_avignon` ;
+
+CREATE TABLE `agis`.`access_recettes_multi_importation_tarif` (
+`code_fournisseur` double NOT NULL default '0',
+`nom_fournisseur` varchar( 255 ) default NULL ,
+`code_matiere` double NOT NULL default '0',
+`libelle_matiere` varchar( 255 ) default NULL ,
+`date_debut_tarif` datetime NOT NULL default '0000-00-00 00:00:00',
+`date_fin_tarif` varchar( 255 ) NOT NULL default '',
+`tarif` double default NULL ,
+PRIMARY KEY ( `code_fournisseur` , `code_matiere` )
+) TYPE = MYISAM ;
+
+INSERT INTO `agis`.`access_recettes_multi_importation_tarif`
+SELECT *
+FROM `agis`.`access_recettes_importation_tarif_avignon` ;
+
+CREATE TABLE `agis`.`access_recettes_multi_infologic_fournisseurs` (
+`k_fournisseur` int( 11 ) NOT NULL default '0',
+`nom_fournisseur` varchar( 50 ) default NULL ,
+`frais_port` float default '0',
+PRIMARY KEY ( `k_fournisseur` )
+) TYPE = MYISAM ;
+
+INSERT INTO `agis`.`access_recettes_multi_infologic_fournisseurs`
+SELECT *
+FROM `agis`.`access_recettes_infologic_fournisseurs_avignon` ;
+
+CREATE TABLE `agis`.`access_recettes_multi_infologic_unite` (
+`k_unite` double NOT NULL default '0',
+`unite_abrege` varchar( 255 ) default NULL ,
+`correspondance_access_infologic` varchar( 50 ) default NULL ,
+PRIMARY KEY ( `k_unite` )
+) TYPE = MYISAM ;
+
+INSERT INTO `agis`.`access_recettes_multi_infologic_unite`
+SELECT *
+FROM `agis`.`access_recettes_infologic_unite_avignon` ;
+
+CREATE TABLE `agis`.`access_recettes_multi_ingredients` (
+`CLE_INGREDIENT` int( 11 ) NOT NULL default '0',
+`id_recette` int( 11 ) default NULL ,
+`INGREDIENT` varchar( 50 ) default '0',
+`PRIX` double default '0',
+`FOURNISSEUR` varchar( 50 ) default NULL ,
+`UNITE` varchar( 50 ) default NULL ,
+`état_ingr` int( 11 ) default '0',
+`code_matiere_infologic` int( 11 ) default '0',
+`code_fournisseur_infologic` int( 11 ) default '0',
+`date_derniere_modification` datetime default NULL ,
+`prix_avant_maj` float default '0',
+`actif` tinyint( 1 ) default '-1',
+PRIMARY KEY ( `CLE_INGREDIENT` )
+) TYPE = MYISAM ;
+
+INSERT INTO `agis`.`access_recettes_multi_ingredients`
+SELECT *
+FROM `agis`.`access_recettes_ingredients_avignon` ;
+
+CREATE TABLE `agis`.`access_recettes_multi_recette` (
+`CLE_RECETTE` int( 11 ) NOT NULL default '0',
+`id_dossier` int( 11 ) default NULL ,
+`INTITULE_RECETTE` varchar( 50 ) default NULL ,
+`CLIENT` varchar( 50 ) default NULL ,
+`GAMME` smallint( 6 ) default '0',
+`DATE_CREATION` datetime default NULL ,
+`COUT_TOTAL` double default '0',
+`POIDS_TOTAL` double default '0',
+`PRIX_DE_VENTE` double default '0',
+`DATE_DE_REVISION` datetime default NULL ,
+`N_INFOLOGIC` int( 11 ) default '0',
+`Unité` varchar( 50 ) default NULL ,
+`id_stade_recette` int( 11 ) default '3',
+`SITE` varchar( 50 ) default NULL ,
+`PROCESS` longtext,
+`INDICE` int( 11 ) default '0',
+`raison_modif` longtext,
+`condition` int( 11 ) default '0',
+`état` int( 11 ) default '0',
+`modif_en_cours` int( 11 ) default '0',
+`CMobjectif` double default '0',
+`Niveau_préparation` int( 11 ) default '0',
+`CMréel` double default '0',
+`Niveau_conditionnement` float default '0',
+`n__ingr_correspondant` int( 11 ) default '0',
+`verrou_recette` int( 11 ) default NULL ,
+`version_recette` int( 11 ) default '1',
+`valide_recette` int( 11 ) default '0',
+`date_previsionnelle_nouvel_indice_recette` datetime default NULL ,
+`sous_recette` int( 11 ) default '0',
+`actif` tinyint( 1 ) default '-1',
+PRIMARY KEY ( `CLE_RECETTE` )
+) TYPE = MYISAM ;
+
+INSERT INTO `agis`.`access_recettes_multi_recette`
+SELECT *
+FROM `agis`.`access_recettes_recette_avignon` ;
+
+CREATE TABLE `agis`.`access_recettes_multi_stades` (
+`id_stade` int( 11 ) NOT NULL default '0',
+`Stade_de_commercialisation` varchar( 50 ) default NULL ,
+PRIMARY KEY ( `id_stade` )
+) TYPE = MYISAM ;
+
+INSERT INTO `agis`.`access_recettes_multi_stades`
+SELECT *
+FROM `agis`.`access_recettes_stades_avignon` ;
+
+
+CREATE TABLE `agis`.`access_recettes_multi_unites` (
+`unité` varchar( 50 ) NOT NULL default '',
+PRIMARY KEY ( `unité` )
+) TYPE = MYISAM ;
+
+INSERT INTO `agis`.`access_recettes_multi_unites`
+SELECT *
+FROM `agis`.`access_recettes_unites_avignon` ;
+
+
+ALTER TABLE `access_recettes_composition_avignon` RENAME `OLD_access_recettes_composition_avignon` ;
+ALTER TABLE `access_recettes_cout_fab_avignon` RENAME `OLD_access_recettes_cout_fab_avignon` ;
+ALTER TABLE `access_recettes_frais_de_transport_avignon` RENAME `OLD_access_recettes_frais_de_transport_avignon` ;
+ALTER TABLE `access_recettes_gammes_avignon` RENAME `OLD_access_recettes_gammes_avignon` ;
+ALTER TABLE `access_recettes_importation_matiere_avignon` RENAME `OLD_access_recettes_importation_matiere_avignon` ;
+ALTER TABLE `access_recettes_importation_tarif_avignon` RENAME `OLD_access_recettes_importation_tarif_avignon` ;
+ALTER TABLE `access_recettes_infologic_fournisseurs_avignon` RENAME `OLD_access_recettes_infologic_fournisseurs_avignon` ;
+ALTER TABLE `access_recettes_infologic_unite_avignon` RENAME `OLD_access_recettes_infologic_unite_avignon` ;
+ALTER TABLE `access_recettes_ingredients_avignon` RENAME `OLD_access_recettes_ingredients_avignon` ;
+ALTER TABLE `access_recettes_recette_avignon` RENAME `OLD_access_recettes_recette_avignon` ;
+ALTER TABLE `access_recettes_stades_avignon` RENAME `OLD_access_recettes_stades_avignon` ;
+ALTER TABLE `access_recettes_unites_avignon` RENAME `OLD_access_recettes_unites_avignon` ;
+
+ALTER TABLE `access_recettes_multi_composition` DROP PRIMARY KEY 
+ALTER TABLE `access_recettes_multi_composition` ADD `date_heure_operation` TIMESTAMP NOT NULL ;
+ALTER TABLE `access_recettes_multi_composition` ADD `num_site` TINYINT DEFAULT '0' NOT NULL AFTER `CLE_RECETTE` ;
+ALTER TABLE `access_recettes_multi_composition` ADD PRIMARY KEY ( `CLE_COMPOSANT` , `CLE_RECETTE` , `num_site` ); 
+UPDATE access_recettes_multi_composition SET access_recettes_multi_composition.num_site =1 ;
+
+ALTER TABLE `access_recettes_multi_ingredients` DROP PRIMARY KEY ;
+#ALTER TABLE `access_recettes_multi_ingredients` ADD `k_ingredient_new` INT NOT NULL AUTO_INCREMENT PRIMARY KEY FIRST ;
+ALTER TABLE `access_recettes_multi_ingredients` ADD `num_site` TINYINT NOT NULL ;
+ALTER TABLE `access_recettes_multi_ingredients` ADD PRIMARY KEY ( `CLE_INGREDIENT` , `num_site` ) ;
+UPDATE access_recettes_multi_ingredients SET access_recettes_multi_ingredients.num_site =1 ;
+
+ALTER TABLE `access_recettes_multi_recette` ADD `date_heure_operation` TIMESTAMP NOT NULL ;
+ALTER TABLE `access_recettes_multi_recette` DROP PRIMARY KEY ;
+#ALTER TABLE `access_recettes_multi_recette` ADD `k_recette_new` INT NOT NULL AUTO_INCREMENT PRIMARY KEY FIRST ;
+ALTER TABLE `access_recettes_multi_recette` ADD `num_site` TINYINT NOT NULL ;
+ALTER TABLE `access_recettes_multi_recette` ADD PRIMARY KEY ( `CLE_RECETTE` , `num_site` ) ;
+UPDATE access_recettes_multi_recette SET access_recettes_multi_recette.num_site =1 ;
+
+#affectation des nouveaux droits sur la base recettes
+INSERT INTO `intranet_niveau_acces` ( `id_intranet_modules` , `id_intranet_actions` , `id_intranet_niveau_acces` , `nom_intranet_niveau_acces` )
+VALUES ('13', '13', '2', 'Saisie'), ('13', '13', '1', 'Consultation'), ('13', '13', '0', 'Non'), ('13', '13', '3', 'Responsable');

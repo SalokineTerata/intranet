@@ -1,0 +1,63 @@
+================================================================================
+Fiches et Tables à basculer de intranet.dev.agis.fr vers intranet.agis.fr:
+================================================================================
+
+[ ]: Reste à effectuer
+[X]: Réalisé
+================================================================================
+
+Pour les copies MYSQL[]:
+---------------------------
+[D]: DATA et STRUCTURE sont à transférer
+[S]: STRUCTURE seulement sont à transférer
+[O]: Renommer la table en OLD_nom_de_la_table
+================================================================================
+
+Pour les copies de FILE:
+----------------------------
+chemin depuis le répertoire racine du site
+- si c'est le répertoire du module:
+    - renommer le répertoire d'exploitation nom-AAAA-MM-JJ où la date est la
+        date du jour de la modification
+    - faire un TAR.GZ
+    - supprimer l'original
+    - copier le répertoire de développement vers le site d'exploitation
+
+================================================================================
+[V] Systématique: Ecarter une sauvegarde
+[V] Systématique: MYSQL[D]: intranet_modules
+[V] Systématique: MYSQL[D]: intranet_actions
+[V] Systématique: MYSQL[D]: intranet_access_linked_table
+[V] Systématique: /repertoire_du_sous_module
+
+[V] MYSQL[S]: access_plan_qualite_action + requête access "action"
+    [V] ajout de la clef N°Plan
+     RESP_REALISATION     int(11)
+     DELAI     datetime --> ECHEANCE date
+     DATE_REALISATION     date
+
+[V] MYSQL[S]: access_plan_qualite_plan
+    CLOTURE: Null=Non Défaut=0
+     DATE_CREATION         date
+     DATE_DE_CLOTURE       date
+     REDACTEUR             int(11)
+     NATURE                int(11)
+
+[V] MYSQL[D]: intranet_niveau_acces
+[V] /lib/session.php
+[V] /lib/login.php
+[V] /lib/droits_acces.php
+[V] /adminagis
+[V] MYSQL[D]: salaries
+    Encoder tous les mots de passe avec la fonction PASSWORD() de MySQL
+              UPDATE salaries SET pass = PASSWORD( pass )
+
+[V] MYSQL[S]: salaries
+    Suppression de password_internet_salaries, informer_password_internet_salaries
+    nom         varchar(50)
+    prenom      varchar(50)
+
+[V] Systématique: /repertoire_du_module/index.php
+[V] MYSQL[O] access_plan_qualite_detail_plan
+
+

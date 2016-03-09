@@ -1,0 +1,88 @@
+================================================================================
+Modifications à apporter aux différentes versions du modules
+================================================================================
+
+[ ]: Reste à effectuer
+[!]: Prioritaire
+[V]: Réalisé
+[.]: Abandonné
+================================================================================
+Exemples:
+[V] 23/05/2003: saisie_vierge_origine.php
+      Déplacer les informations de cette page au niveau du composant.
+
+[ ] 28/07/2003: saisie_origine.php
+                Saisie de plusieurs origine sans cycle.
+                Rajouter dans la listedes origine:
+                         - Cf Origine MP
+                         - Cf Lieu dernière Transformation
+                         - Cf Origine Multiple
+                         - Cf Non défini
+                Bouton "Terminer Saisie"
+================================================================================
+
+[.] Les utilisateurs ayant le droits "saisie" ou plus peuvent voir et créer sur tous les sites
+    ensuite, supprimer le login "plan pf"
+	==> autorisation de la saisie multi site quelque soit l'utilisateur
+
+[V] Formulaire de sélection pour les impressions
+    - Une action vide
+    - PQ/AC vide
+    (pas de champ texte)
+
+    puis centralisation de tous les bouton d'éditions
+
+[v] Bonjour,
+    Je viens de noter une nouvelle anomalie !
+    Je suis sur un PQ du mois de juin.
+    Une action a pour échéance le 15.07.05. 
+    Cette action a été réalisée le 12.07.05 mais je ne l'enregistre qu'aujourd'hui.
+    Quand j'inscris la date de réalisation la case "Réalisé" est cochée mais pas la case "Délais respecté".
+    Parfois la base remet par défaut la date d'aujourd'hui au lieu de la date de réalisation que j'ai inscris.
+    J'espère que mes explications sont compréhensibles .
+    Merci
+    Delphine
+
+    -----> rajout d'un test de validation si on modifie à la main la date de réalisation
+
+
+
+[v] je viens de créer 2 nouvelles actions et voici quelques remarques :
+
+dominique GERMAIN : responsable technique n'apparaît toujours pas dans les responsables d'actions
+Au même titre que TARARE Maintenance, il faudrait créer, LAMBALLE maintenance, LAMBALLE 3ème équipe
+Il faut retirer DESENCLOS valérie (fin de CDD au 23/12/05)
+
+autre question : j'ai créé des actions en novembre. les n° attribués étaient 2;3;4.....
+aujourdh'ui j'ai l'action n° 394 et N° 396 ?????????
+
+Merci de votre attention
+à+
+christine
+    --> création des login Dominique Germain
+    --> LAMBALLE maintenance
+    --> 
+
+[v] lors de la modification d'un Plan qualité, on peut avoir la trame d'une action Corrective si
+    le dernier formulaire ouvert était une Action Corrective ( et vie-versa)
+
+[v] Dans un Plan Qualité, Afficher le processus
+
+[v] Corriger la duplication d'une action.
+
+[v] Laisser l'ensemble des formulaires en Agrandi.
+    ---> effectué sur les formulaires de saisie / modification et ajout d'action
+
+
+[v] Centraliser le selecteur de PQ/AC
+
+
+[v] Edition Action Corrective:
+    Ajouter les informations propres aux Actions Correctives
+
+
+[v] champ date de création à passer en obligatoire
+
+[v] dans les actions par plan rajouter un champ ordre des actions (saisie par l'utilisateur) afin d'avoir une édition des actions du PQ croissante
+
+

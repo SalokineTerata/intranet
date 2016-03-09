@@ -1,0 +1,54 @@
+================================================================================
+Modifications à apporter aux différentes versions du modules
+================================================================================
+
+[ ]: Reste à effectuer
+[!]: Prioritaire
+[V]: Réalisé
+[.]: Abandonné
+================================================================================
+Exemples:
+[V] 23/05/2003: saisie_vierge_origine.php
+      Déplacer les informations de cette page au niveau du composant.
+
+[ ] 28/07/2003: saisie_origine.php
+                Saisie de plusieurs origine sans cycle.
+                Rajouter dans la listedes origine:
+                         - Cf Origine MP
+                         - Cf Lieu dernière Transformation
+                         - Cf Origine Multiple
+                         - Cf Non défini
+                Bouton "Terminer Saisie"
+================================================================================
+
+[v] migration totale de la base dans l'intranet (avignon / tarare / herbignac) pour une utilisation multi site
+	regroupement de toutes les recettes et ingrédients dans une seule table - rajout de champ nouvelle_clef + num_site
+	principe d'ouverture de la base si administrateur alors ouverture d'un formulaire de sélection de site
+	sinon ouverture directe sur les recettes du site de l'utilisateur
+
+	droits sur le module
+		13 	35 	3 	Responsable	: accès à toute la base avec ouverture formulaire SITE
+		13  	35  	2  	Saisie		: ouverture sur menu général avec restriction au site de l'utilisateur
+		13 	35 	1 	Consultation	: idem saisie mais uniquement en consultation
+		13 	35 	0 	Non		: pas d'accès
+
+
+ANCIEN STADE
+id_stade	Stade_de_commercialisation	nouveau stade
+1		ancienne recette		NON DEFINI
+2		commercialisée			REFERENCE
+3		en cours de développement	DEVELOPPEMENT
+4		validée client et R&D		INACTIF ARCHIVE
+5		Retirée				RETIRE
+
+
+
+Cf cdc CDC Access Base formulation_dic 08.doc :
+[v] ajout de la fonctionnalité cas d'emploi
+[v] ajout dans les différentes éditions du code GPAO (quand il est renseigné, sinon il est à 0)
+[v] ajout d'une zone commentaire emballage en saisie de recette
+[v] possibilité de rechercher les recettes soit par nom, soit par code recette, soit par code GPAO
+[v] modification de l'édition d'un OF pour qu'il soit de la même forme que l'édition d'une recette
+[v] rajout du cout des recettes au kilo (avec zone de saisie pour Objectif CM kilo)
+
+[v] dans le formulaire gestion des ingrédients rajout d'un bouton qui permet d'éditer la liste des recettes qui seront impactées par la mise à jour des prix (ci dessous exemple de l'édition)

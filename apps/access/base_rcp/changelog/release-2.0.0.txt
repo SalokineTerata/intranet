@@ -1,0 +1,50 @@
+================================================================================
+Modifications à apporter aux différentes versions du modules
+================================================================================
+
+[ ]: Reste à effectuer
+[!]: Prioritaire
+[V]: Réalisé
+[.]: Abandonné
+================================================================================
+Exemples:
+[V] 23/05/2003: saisie_vierge_origine.php
+      Déplacer les informations de cette page au niveau du composant.
+
+[ ] 28/07/2003: saisie_origine.php
+                Saisie de plusieurs origine sans cycle.
+                Rajouter dans la listedes origine:
+                         - Cf Origine MP
+                         - Cf Lieu dernière Transformation
+                         - Cf Origine Multiple
+                         - Cf Non défini
+                Bouton "Terminer Saisie"
+================================================================================
+
+2.0.0
+[v] suppression de toutes les tables attachées qui servaient pour les calculs (sauvegarde dans la base dans la table intranet_access_linked_table - avant epuration base RCP)
+[v] modification statistique RCP 07 02 04 
+	--------------------------------------------------------------------------------
+	|N° stat : 63         Nom de la Stat : BASE RCP                                |
+	|-----------------------------------Période 1----------------------------------|
+	|004     CA           facturé                                                  |
+	|003   Pds/Qté        facture                                                  |
+	|011   Mtt           F.trans                                                   |
+	|041   BUDGET           %                                                      |
+	|042  BUDGET         FORFAIT                                                   |
+	|508  Animation      Provision                                                 |
+	|040  RISTOURNE                                                                |
+	|006     Mtt           Promo                                                   |
+	|043 BUDGET         ANIMATION                                                  |>>>>>>>>>>>> changement colonne 043 par 002 POIDS TOTAL
+	|044  ANIMATION      LOC STAND                                                 |
+	|013    UF           Gratuit                                                   |
+	|512  RIST            %                                                        |
+	|024  % VERIF        BUDGET                                                    |
+	|507  T.M.P.         REEL                                                      |
+	|047     CT           AGENCE                                                   |
+	--------------------------------------------------------------------------------
+	 | Validation : .                       | Taille des colonnes 189 / 200       | 
+	 ------------------------------------------------------------------------------ 
+
+[v] historiser le site de production dans la table Données CLIENTS ARTICLES
+

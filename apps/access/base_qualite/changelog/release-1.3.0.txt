@@ -1,0 +1,62 @@
+================================================================================
+Modifications à apporter aux différentes versions du modules
+================================================================================
+
+[ ]: Reste à effectuer
+[!]: Prioritaire
+[V]: Réalisé
+[.]: Abandonné
+================================================================================
+Exemples:
+[V] 23/05/2003: saisie_vierge_origine.php
+      Déplacer les informations de cette page au niveau du composant.
+
+[ ] 28/07/2003: saisie_origine.php
+                Saisie de plusieurs origine sans cycle.
+                Rajouter dans la listedes origine:
+                         - Cf Origine MP
+                         - Cf Lieu dernière Transformation
+                         - Cf Origine Multiple
+                         - Cf Non défini
+                Bouton "Terminer Saisie"
+================================================================================
+
+[v] Formulaire "Tris par rédacteur /destinatires"
+    - Ajouter case à cocher pour activer l'ajout des informations d'audit sur les éditions
+
+    
+    
+[v] Edition "Revue des documents" --> Cf. Edition par rédacteur
+    Informations des colonnes
+                  + Sous titre
+                  + A supprimer  case à cocher statique
+                  + A modifier   case à cocher statique
+                  + A conserver  case à cocher statique
+
+    Informations du cartouche uniquement à la fin de l'édition
+                 + Nom du rédacteur
+                 + Fonction
+                 + Date
+                 + Signature
+                 + Validation Secrétaire Qualité
+
+[v] Edition "Audit Documentaire" --> Cf. Edition par destinataire
+    Informatinons des colonnes
+                  + Sous titre
+                  + Document Manquant case à cocher statique
+                  + Mauvais Indice   case à cocher statique
+
+    Ajouter une page avec le tableau vide à la fin de l'édition intitulé "Document présents dans le classeur, mais pas dans la liste"
+
+    Informations du cartouche uniquement à la fin de l'édition
+                 + Nom du destinataire
+                 + Service
+                 + Date
+                 + Signature
+                 + Validation Secrétaire Qualité
+                 + Remise à jour du classeur effectuée le:
+
+[v] Ajouter un bouton pour fermer le formulaire "Editions"
+
+
+

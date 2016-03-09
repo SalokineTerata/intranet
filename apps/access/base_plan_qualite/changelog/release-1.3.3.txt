@@ -1,0 +1,42 @@
+================================================================================
+Modifications à apporter aux différentes versions du modules
+================================================================================
+
+[ ]: Reste à effectuer
+[!]: Prioritaire
+[V]: Réalisé
+[.]: Abandonné
+================================================================================
+Exemples:
+[V] 23/05/2003: saisie_vierge_origine.php
+      Déplacer les informations de cette page au niveau du composant.
+
+[ ] 28/07/2003: saisie_origine.php
+                Saisie de plusieurs origine sans cycle.
+                Rajouter dans la listedes origine:
+                         - Cf Origine MP
+                         - Cf Lieu dernière Transformation
+                         - Cf Origine Multiple
+                         - Cf Non défini
+                Bouton "Terminer Saisie"
+================================================================================
+
+[v] 2007-03-19
+
+Bonjour,
+
+Modification effectuée pour cette édition. Il y a un changement dans la sélection des responsables :
+- pour les avoir tous mettre 99999 (et non plus *)
+- pour avoir une responsable en particulier le rechercher dans la liste (tri par ordre alphabétique)
+
+stéphane
+
+>>> marie durdilly 19/03/07 10h04 >>>
+Bonjour,
+
+J'édite aujourd'hui la liste des actions en cours par responsable et je viens de rencontrer une petite difficulté : seule l'édition concernant Christophe GUYONY apparaît, Valérie n'est pas prise en compte.
+Pouvez-vous m'aider ??
+
+Merci et bonne journée
+
+Marie

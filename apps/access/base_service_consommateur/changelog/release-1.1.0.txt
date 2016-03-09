@@ -1,0 +1,43 @@
+================================================================================
+Modifications à apporter aux différentes versions du modules
+================================================================================
+
+[ ]: Reste à effectuer
+[!]: Prioritaire
+[V]: Réalisé
+[.]: Abandonné
+================================================================================
+Exemples:
+[V] 23/05/2003: saisie_vierge_origine.php
+      Déplacer les informations de cette page au niveau du composant.
+
+[ ] 28/07/2003: saisie_origine.php
+                Saisie de plusieurs origine sans cycle.
+                Rajouter dans la listedes origine:
+                         - Cf Origine MP
+                         - Cf Lieu dernière Transformation
+                         - Cf Origine Multiple
+                         - Cf Non défini
+                Bouton "Terminer Saisie"
+================================================================================
+
+[v] 11/07/2008 création d'un formulaire pour gérer les listes de diffusion pour les personnes ayant le droit administration (utilisation du forumulaire developpé dans la base qualité ainsi que les requetes associées)
+
+[v] 16/07/08 modification du fichier functions.php du module pour amélioration du contenu du mail :
+AVANT :
+Le nombre de réclamation sur le code 36015 - TAG CARBO MDLEC 4X330G (code groupe 31162) depuis un mois est de 1.                                          Dossier n° 3894
+
+APRES :
+Bonjour, 
+
+Enregistrement de la réclamation suivante, n° 3715 : 
+
+- article   : 21636 - 10 ACRAS MORUE MDAUC 8X220G (code groupe 32633)
+- n° de lot : 0101
+- dlc       : 01/01/2001
+- objet     : sdljnhs
+- typologie : Recette
+- service concerné : Comité d'Entreprise
+
+Le nombre de réclamation depuis un mois est de 2
+

@@ -1,0 +1,70 @@
+================================================================================
+Modifications à apporter aux différentes versions du modules
+================================================================================
+
+[ ]: Reste à effectuer
+[!]: Prioritaire
+[V]: Réalisé
+[.]: Abandonné
+================================================================================
+Exemples:
+[V] 23/05/2003: saisie_vierge_origine.php
+      Déplacer les informations de cette page au niveau du composant.
+
+[ ] 28/07/2003: saisie_origine.php
+                Saisie de plusieurs origine sans cycle.
+                Rajouter dans la listedes origine:
+                         - Cf Origine MP
+                         - Cf Lieu dernière Transformation
+                         - Cf Origine Multiple
+                         - Cf Non défini
+                Bouton "Terminer Saisie"
+================================================================================
+
+[v] Actions positionnés dans un mauvais plan:
+	Exemple: Plan n°496
+	EN edition, Action --> 01/01/2006 au 26/10/2006 -->  Responsable "Emmanuelle Bourdin" l'action "RESOPNSABILITE DE LA DIRECTION" n'a est pas de la Plan (cf. Gestion gliobale)
+ --> pb au niveau des ruptures de l'état changement de l'en tête de groupe nature --> redacteur
+
+[v] modification de la requete PLAN QUALITE CLOTURE en mettant des jointures ouvertes sur les tables RESPONSABLES
+2006-07-24 bonjour, 
+J'essaie par exemple de modifier aujourd'hui le plan n°497 : je n'ai accès qu'au plan, je ne peux pas modifier les actions.
+Merci
+Marie
+
+>>> INFORMATIQUE avignon 24/07/06 11h42 >>>
+Bonjour,
+Merci de donner les numéros de plan ou action concernés
+Stéphane
+
+
+/***********************************
+[v] Bonjour,
+    J'essaie de modifier des plans qualité sur la base. Je le retrouve bien dans la liste déroulante, mais que je demande la modification des actions, rien n'apparaît. Le problème se pose quand je passe par le titre du plan, en renseignant l'identifiant, tout est ok.
+    Peux tu m'aider ?
+    Merci d'avance
+    Marie
+
+[v] Bonjour,
+	Lorsque j'ai voulu modifier une action corrective, je me retrouve sur le formulaire d'un plan qualité. Je n'ai pas accès aux renseignements liés à une action co.
+	Peux tu faire quelquechose ??
+	Merci d'avance
+	Marie
+ Bonjour Boris,
+
+J'ai 2 petites remarques sur l'édition des actions en cours par responsable :
+
+[V] Saisie obligatoire de dates de début et fin => Peut-on supprimer ce critère ?
+	date de début : au lieu d'avoir la date du jour par défaut --> ddj-365
+
+[v] mise en page revu
+Mise en page difficile à la lecture => Peut-on élargir la colonne "action" pour limiter le nombre de lignes et faire une légère séparation entre 2 actions ??
+Merci bcp !!
+
+Bonne fin de journée
+Marie
+
+[v] Dans le Menu: Edition --> Multicritère --> Actions:
+	Rajouter : Liste "Par Nature";
+
+

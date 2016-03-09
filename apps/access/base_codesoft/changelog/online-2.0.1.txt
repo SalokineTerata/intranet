@@ -1,0 +1,50 @@
+================================================================================
+Fiches et Tables à basculer de intranet.dev.agis.fr vers intranet.agis.fr:
+================================================================================
+
+[ ]: Reste à effectuer
+[X]: Réalisé
+================================================================================
+
+Pour les copies MYSQL[]:
+---------------------------
+[D]: DATA et STRUCTURE sont à transférer
+[S]: STRUCTURE seulement sont à transférer
+[O]: Renommer la table en OLD_nom_de_la_table
+================================================================================
+
+Pour les copies de FILE:
+----------------------------
+chemin depuis le répertoire racine du site
+- si c'est le répertoire du module:
+	- renommer le répertoire d'exploitation nom-AAAA-MM-JJ où la date est la
+		date du jour de la modification
+	- faire un TAR.GZ
+	- supprimer l'original
+	- copier le répertoire de développement vers le site d'exploitation
+
+================================================================================
+[v] Systématique: Ecarter une sauvegarde
+[na] Systématique: MYSQL[D]: intranet_modules
+[na] Systématique: /repertoire_du_module
+
+
+POUR AVIGNON
+[V] renommer la base cs_pilot.mdb vers cs_pilot.mdb.v1.0
+[V] copier la base cs_pilot_v2.0.mdb vers cs_pilot.mdb
+
+
+POUR LES AUTRES SITES
+[v] renommer la base cs_pilot.mdb vers cs_pilot.mdb.v1.0
+[v] recopier la base cs_data.mdb d'avignon
+[v] copier la base cs_pilot_v2.0.mdb d'avignon 
+[v] renommer la base cs_pilot_v2.0.mdb en CS_pilot
+[v] faire une copie de sauvegarde des étiquettes du dossier modele R:\etiquettage\modele
+[v] copier les étiquettes d'avignon vers le dossier modele
+[v] sur les pc utilisant la base mettre à jour l'activeX date/heure
+	regsvr32 BCGTimeIntervals.ocx
+	regsvr32 BCGDurationCtrl.ocx
+	regsvr32 BCGDateTime.ocx
+
+[V] valider le fonctionnement avec la personne en charge de l'étiquettage (bien veiller à la bonne orthographe des imprimantes dans la table imprimante)
+

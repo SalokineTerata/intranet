@@ -1,0 +1,36 @@
+================================================================================
+Modifications à apporter aux différentes versions du modules
+================================================================================
+
+[ ]: Reste à effectuer
+[!]: Prioritaire
+[V]: Réalisé
+[.]: Abandonné
+================================================================================
+Exemples:
+[V] 23/05/2003: saisie_vierge_origine.php
+      Déplacer les informations de cette page au niveau du composant.
+
+[ ] 28/07/2003: saisie_origine.php
+                Saisie de plusieurs origine sans cycle.
+                Rajouter dans la listedes origine:
+                         - Cf Origine MP
+                         - Cf Lieu dernière Transformation
+                         - Cf Origine Multiple
+                         - Cf Non défini
+                Bouton "Terminer Saisie"
+================================================================================
+
+* Ajout d'un droit n°4 "Accès Manuelle + DLC Full Acces"
+
+* Modification sur le formulaire "Selection_article_etiquette"
+    Private Sub Form_Open(Cancel As Integer)
+    [...]
+    '*** Accès total dans le cas des festifs sur le numéro de lot
+    '------------------------------------------------------------
+    If droit_acces_user() = 4 Then 'Accès Manuelle + DLC Full Acces
+        Me.lot_article.Locked = False
+        Me.lot_article.BackColor = 33023 'Orange
+    End If
+    [...]
+

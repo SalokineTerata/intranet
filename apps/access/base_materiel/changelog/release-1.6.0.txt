@@ -1,0 +1,74 @@
+================================================================================
+Modifications à apporter aux différentes versions du modules
+================================================================================
+
+[ ]: Reste à effectuer
+[!]: Prioritaire
+[V]: Réalisé
+[.]: Abandonné
+================================================================================
+Exemples:
+[V] 23/05/2003: saisie_vierge_origine.php
+      Déplacer les informations de cette page au niveau du composant.
+
+[ ] 28/07/2003: saisie_origine.php
+                Saisie de plusieurs origine sans cycle.
+                Rajouter dans la listedes origine:
+                         - Cf Origine MP
+                         - Cf Lieu dernière Transformation
+                         - Cf Origine Multiple
+                         - Cf Non défini
+                Bouton "Terminer Saisie"
+================================================================================
+
+[A] 2006-02-14: fonction de la touche tabulation dans une zone de texte.
+	pas trouvé dans cette version
+[A] Form. Visualisation dossier : rajouter une recherhce des dossiers par DEMANDEUR
+	déja existant
+[A] faire un formulaire de visualisation des dossiers non lus (sur le même modèle que l'intranet sans les couleurs)
+	méthode de fonctionnement mise en oeuvre pour la gestion des dossiers, ils sont passés en état A LIRE pour celui qui ne suit pas le dossier et le destinataire est changé
+
+[v] Form. suivi de dossiers: Conserver les paramètres de sélection
+    mise en place de variables globales
+	voir pour le calcul de la priorisation
+
+[v] en saisie  d'un nouveau dossier, lors de la sélection d'un demandeur (exemple installations SYSTEM) => erreur sur évenement après mise à  jour
+
+[v] Form. Visualisation dossier : afficher le nb total de dossier et le nb de dossier sur l'utilisateur en cours
+
+[v] Form. matériel (et dossier) pour les imprimantes CUPS avoir le lien direct vers la page d'administration
+[v] Form. saisie dossier: rajouter un lien vers http://mailhost.infologic.fr/grc/formulaire.php4 pour saisir nos demandes de maintenance directement sur l'extranet Infologic
+
+[v] Lors de l'ajout d'une pièce jointe, inclure l'extension PDF
+
+[v] interdire la saisie d'un dossier (ou d'un matériel) si on est déjà sur le détail d'un dossier (car écrasement du dossier en cours de visualisation)
+
+
+[v] Sur le formulaire détail du matériel, impossibilité de choisir le site virtuel "Nomade" au niveau du poste
+[v] F.saisie matériel rajouter dans la liste des sites NOMADES pour affecterdes matériels
+
+[v] Pouvoir gérer la priorité lorsqu'on est sur l'interface de saisie d'un incident
+
+[v] R contrat_ip_description => remplacer la table site de ces requètes par la table GEO 
+	alias dejà créé rajout d'un alias sur id_site vers k_site
+
+
+[v] 2006-02-17: Avoir la possibilité de lier la procédure de résolution, même si elle n'est pas forcément dans "S:\departement\gestion_informatique\informatique\commun"
+	rajout du dossier partage
+
+[R] 2006/02/16: Inclure la possibilité d'affecter plusieurs login à un même poste ?
+
+[A] 2006/02/16: Mettre des jointures "ouvertes" sur la requête affichant les tâche dans "suivi", ainsi on pourra voir des tâche incorrectement rempli.
+  Par exemple si il manque l'affecter à , le demandeur ou autre, le tâche ne sera pas perdue.
+
+
+[v] Form. saisie dossier faire une fonction qui transforme l'@ip 010.003.002.010 en 10.3.2.10 (pour vnc)
+
+
+[V] Avoir la possibilité de consulter la liste des tâche classer par date (Format Lettre + Semaine (de la date d'échéance)) par ordre décroissant
+    Avec recherche par Nature, Groupe et module
+
+[v] Agrandir la colonne "Poste" sur le formulaire "Listes des matière par rapport aux adresses IP" + c'est l'explorateur + augmenter nb ligne ds zone liste site
+
+
+

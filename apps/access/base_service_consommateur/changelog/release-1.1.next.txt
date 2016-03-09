@@ -1,0 +1,139 @@
+================================================================================
+Modifications à apporter aux différentes versions du modules
+================================================================================
+
+[ ]: Reste à effectuer
+[!]: Prioritaire
+[V]: Réalisé
+[.]: Abandonné
+================================================================================
+Exemples:
+[V] 23/05/2003: saisie_vierge_origine.php
+      Déplacer les informations de cette page au niveau du composant.
+
+[ ] 28/07/2003: saisie_origine.php
+                Saisie de plusieurs origine sans cycle.
+                Rajouter dans la listedes origine:
+                         - Cf Origine MP
+                         - Cf Lieu dernière Transformation
+                         - Cf Origine Multiple
+                         - Cf Non défini
+                Bouton "Terminer Saisie"
+================================================================================
+
+
+
+Brigitte SELTZ/LDCAVI/GRPLDC/FR a écrit sur 08/06/2009 14:55:26 :
+
+> Bonjour,
+> 
+> Quand je fais une édition des ratio PPM du 1/01/08 au 28/02/08 avec 
+> le bouton article, j'obtiens le tableau ci-dessous qui contient une 
+> colonne poids (? à supprimer) + les références pour lesquelles il 
+> n'y a pas eu de réclamation sur la période (normalement cette info 
+> n'apparaît que dans l'édition "tous") + également les stats de 
+> janvier à octobre 2008 + les stats de mars et avril 2009. 
+> Le nombre de dossiers et le ratio PPM sont bien renseignés 
+> uniquement pour la période demandée. Peut-on modifier cette édition 
+> pour obtenir les renseignements uniquement sur la période demandée 
+> et sur les articles pour lesquels il y a eu des réclamations ?
+> 
+> [image supprimée] 
+> Merci
+> 
+> Brigitte
+
+Brigitte SELTZ/LDCAVI/GRPLDC/FR a écrit sur 23/06/2009 12:08:21 :
+
+> Stéphane,
+> 
+> Est-il possible de sortir le ratio PPM d'une gamme complète, tous 
+> sites confondus, avec les UVC pour lesquelles il n'y a pas de 
+> réclamation sans faire plusieurs extractions excel des éditions 
+> existantes. Par exemple, le bouton "tous" reprend tous les produits 
+> par site (avec et sans réclamation) mais il n'y a pas de notion de gamme. 
+> La base conso étant également destinée aux chefs de projet, ils vont
+> surtout se servir de cette édition spécifique pour leur suivi de 
+> gamme. Merci de me dire comment l'on fait et s'il faut créer une 
+> édition à part.
+> Merci de ta réponse,
+> 
+> Brigitte 
+
+
+Christine ALBEROLA/LDCAVI/GRPLDC/FR a écrit sur 20/08/2009 14:05:20 :
+CREATIION REQUETE Recherche reclamations conso -> reste à faire son intégration dans un formulaire 
+puis mise en ligne
+> Stéphane,
+> 
+> Cette personne est déjà saisie dans la base conso mais la base ne 
+> permet pas de lancer de recherche par le nom du consommateur. Peux-
+> tu regarder dans la base access à quand remonte sa dernière réclamation ?
+> 
+> Merci
+> 
+> Christine 
+> 
+> ----- Réacheminé par Christine ALBEROLA/LDCAVI/GRPLDC/FR le 
+> 20/08/2009 14:02 -----
+> 
+> AccueilSiege AVIGNON/LDCAVI/GRPLDC/FR 
+> 17/08/2009 10:04
+> 
+> A
+> 
+> Christine ALBEROLA/LDCAVI/GRPLDC/FR@LDCGRP
+> 
+> cc
+> 
+> Objet
+> 
+> Tr : Contact depuis www.agis-sa.fr
+> 
+> AGIS SAS
+> Accueil Siège Avignon
+> Tél : 04.90.80.99.99
+> Fax : 04.90.80.99.80
+> E-mail : accueilsiege.avignon@agis-sa.fr
+> ----- Réacheminé par AccueilSiege AVIGNON/LDCAVI/GRPLDC/FR le 
+> 17/08/2009 10:04 -----
+> 
+> alain.berger2@orange.fr 
+> 15/08/2009 13:33
+> 
+> Veuillez répondre à
+> alain.berger2@orange.fr
+> 
+> A
+> 
+> agis@agis-sa.fr
+> 
+> cc
+> 
+> Objet
+> 
+> Contact depuis www.agis-sa.fr
+> 
+> *********************************************
+> 
+> FORMULAIRE ENVOYE DEPUIS AGIS-SA.COM
+> 
+> *********************************************
+> 
+> Nom : BERGER
+> Prénom : Alain
+> Adresse : 4 square Saphir
+> Code postal : 78960
+> Ville : Voisins le bx
+> Email : alain.berger2@orange.fr
+> Gamme : Traditions
+> Magasin : CARREFOUR
+> DLC et numéro de lot (sur l'emballage) : 18-08-2009 lot 2032
+> 
+> Message : Alors que le site de Traditions d'Asie rappelle justement 
+> qu'il faut éviter de manger trop salé j'ai été très surpris de 
+> constater que le Canard laqué vermicelle que j'avais acheté (c'était
+> la première fois que j'en achetais) était outrageusement salé, au 
+> point que le goût en était dénaturé et finalement désagréable. Je 
+> précise que je sale normalement mes aliments et que je ne suis pas 
+> du tout un régime sans sel

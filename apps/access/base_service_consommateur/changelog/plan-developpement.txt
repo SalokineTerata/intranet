@@ -1,0 +1,13 @@
+Prochaines étapes:
+
+	Ainsi se termine la version 0.2 qui représente l'achèvement du développement de la partie "saisie" du module. Pour information, voici les prochaines étapes de développement du module:
+
+0.3:	Ajout de la fonctionnalité de gestion des états des fiches techniques matières premières
+
+0.4:	Ajout de la restriction par droit d'accès à l'interieur même du module.
+
+0.5:	Ajout de la possibilité de consulter les matières premières (consultation/impression/exportation PDF)
+
+0.6:	Activation du moteur de recherche.
+
+1.0:	Validation de l'ensemble du module par le département Achats et le service Informatique.

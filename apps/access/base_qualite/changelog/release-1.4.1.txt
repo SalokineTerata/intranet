@@ -1,0 +1,37 @@
+================================================================================
+Modifications à apporter aux différentes versions du modules
+================================================================================
+
+[ ]: Reste à effectuer
+[!]: Prioritaire
+[V]: Réalisé
+[.]: Abandonné
+================================================================================
+Exemples:
+[V] 23/05/2003: saisie_vierge_origine.php
+      Déplacer les informations de cette page au niveau du composant.
+
+[ ] 28/07/2003: saisie_origine.php
+                Saisie de plusieurs origine sans cycle.
+                Rajouter dans la listedes origine:
+                         - Cf Origine MP
+                         - Cf Lieu dernière Transformation
+                         - Cf Origine Multiple
+                         - Cf Non défini
+                Bouton "Terminer Saisie"
+================================================================================
+
+[v] création d'un nouveau site POLE TRAITEUR 
+    [V] voir si possibilité de gérer un chrono sur 2 lettres NON 1 LETTRE => S
+    [V] créer les tables sur le modèle des documents COMMUN
+    [V] modifier le code des différents modules et formulaires
+
+[v] retour du formulaire de gestion des fonctions accès via le bouton paramétrage (présent sur le menu général)
+
+[v] Saisie d'un nouveau doc sur "S" sa plante. --> Célien Bernard     
+	[v] mise à jour de la table intranet_access_linked_table
+	[v] attachement des tables PT - *
+
+[v] anne-marie : renomme une fonction puis ensuite ne peut plus la saisir dans la base (en création / modification)
+	le renommage se faisait sur la table CDG - Fonctions alors que la saisie/modification se fait sur la table COM - Fonctions
+	correction de l'erreur

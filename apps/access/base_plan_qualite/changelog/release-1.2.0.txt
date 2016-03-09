@@ -1,0 +1,105 @@
+================================================================================
+Modifications à apporter aux différentes versions du modules
+================================================================================
+
+[ ]: Reste à effectuer
+[!]: Prioritaire
+[V]: Réalisé
+[.]: Abandonné
+================================================================================
+Exemples:
+[V] 23/05/2003: saisie_vierge_origine.php
+      Déplacer les informations de cette page au niveau du composant.
+
+[ ] 28/07/2003: saisie_origine.php
+                Saisie de plusieurs origine sans cycle.
+                Rajouter dans la listedes origine:
+                         - Cf Origine MP
+                         - Cf Lieu dernière Transformation
+                         - Cf Origine Multiple
+                         - Cf Non défini
+                Bouton "Terminer Saisie"
+================================================================================
+SAISIE
+[ ] Filtrer les informations en fonction de l'utilisateur (pour la partie CONSULTATION pas en MODIFICATION)
+    L'utilisateur ne doit voir que les Plans Qualités de son site
+    si droit RESPONSABLE ou SAISIE pouvoir consulter/modifier aussi les autres sites
+
+[V] Intégrer l'export PDF
+[V] Rétablir la fonctionnalité d'édition d'un plan en cours.
+    
+[V] 2005-03-18: Selection des "Plans en cours" dans "MODIFICATION D'UN PLAN"
+    --> Avoir le possibilité de sélectionner un plan par son identifiant, ou par son nom (déjà actif)
+    --> Possibilité de filtrer la liste suivant le site
+
+[V] 2005-03-18: Impression des Plans En cours
+    --> Modifier l'impression des plans cloturer pour avoir sur le formulaire de sélection
+    la possibilité de sélectionner "Plans en cours" ou "Plans Cloturés"
+
+[V] 2005-03-18: Afficher l'identifiant des Actions dans la liste "Modifier / Supprimer" et dans "Ajouter" une action
+    --> Sur ajouter, c'est impossible
+
+[V] 2005-08-18 : aperçu PQ/AC dans l'état faire apparaitre en dynamique le genre dans le titre PQ ou AC
+
+[A] 2005-08-07: Centralisation du formaulaire de saisie.
+    EN fonction de genre de Dossiers d'Amélioration Continue, activation des compléments d'informations supplémentaires
+    Centraliser le chrono pour souplesse
+
+[V] 2005-08-07: Revoir l'affichage du formulaire de saisie d'un Document
+
+[V] 2005-09-08:
+
+    Voici la liste des personnes n'ayant pas de boîte et intervenant dans les plans qualité :
+
+    BIDOLIN Nicolas 
+    BIEF Eric
+    BLEIN Régis   
+    BRAGARD Gilles
+    DELORME Evelyne  
+    DUBESSY Frédéric  
+    FARGEOT Ginette
+    FETTET Gislaine  
+    FRANCON Rémi  
+    JOUMARD Réné  
+    LACROIX Richard
+    LAFAY Ludovic    
+    MUSEL Sébastien  
+    PERRIER Christophe  
+    RIZET Gilles
+    ROCHARD Maria  
+    ALAIN Fabienne     
+    CHSCT 
+
+    Merci
+
+[V] Mauvaise Gestion de la molette sous Access 97
+    Au niveau du plan qualité:
+    Création de la notion d'état (etat_access_plan_qualite_plan)
+
+    2: Plan Temporaire en cours de saisie (susceptible d'êter supprimé en cas de sortie prématuré du programme)
+    1: Création Validé
+    0: Anomalie ou Non utilisé (susceptible d'êter supprimé en cas de sortie prématuré du programme)
+    -1: Valeur par défaut et inutilisée
+
+
+
+    >>> postmaster mardi 13 septembre 2005 11:38:01 >>>
+    2 failles de saisie;
+    - Utilisation de la molette:
+        Le formulaire de saisie étant hors de l'écran, l'utilisateur a tendance à utiliser la molette pour descendre.
+        Cette action provoque l'enregistrement de l'élément
+    - Risque aussi de passer trop vite le message demandant de ne pas enregsitrer l'élements
+
+    >>> delphine delorme (boris sanegre) jeudi 8 septembre 2005 15:07:59 >>>
+    hello !
+
+    Petit bug dans la base PQ AC. 
+
+    Lorsqu'on entre dans "créer un PQ ou créer une AC" on tombe sur la fenêtre à remplir.
+
+     Lorsqu'on ferme cette fenêtre la base nous demande si on veut enregistrer le document ; si on tape NON la base enregistre quand même le document et passe au numéro chronos suivant. Il y a donc toujours des fichiers fantômes.
+
+
+    Delphine
+
+

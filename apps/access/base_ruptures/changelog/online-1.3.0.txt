@@ -1,0 +1,50 @@
+================================================================================
+Fiches et Tables à basculer de intranet.dev.agis.fr vers intranet.agis.fr:
+================================================================================
+
+[ ]: Reste à effectuer
+[X]: Réalisé
+================================================================================
+
+Pour les copies MYSQL[]:
+---------------------------
+[D]: DATA et STRUCTURE sont à transférer
+[S]: STRUCTURE seulement sont à transférer
+[O]: Renommer la table en OLD_nom_de_la_table
+================================================================================
+
+Pour les copies de FILE:
+----------------------------
+chemin depuis le répertoire racine du site
+- si c'est le répertoire du module:
+	- renommer le répertoire d'exploitation nom-AAAA-MM-JJ où la date est la
+		date du jour de la modification
+	- faire un TAR.GZ
+	- supprimer l'original
+	- copier le répertoire de développement vers le site d'exploitation
+
+================================================================================
+[v] Systématique: Ecarter une sauvegarde de l'intranet exploitation
+[v] Systématique: ACCESS: Démarrage --> Titre de l'Application --> Incrémenter la version
+[x] Systématique: MYSQL[D]: intranet_access_linked_table uniquement pour la base sur laquelle on travaille
+[v] Systématique: Créer le fichier .agismde
+[v] Systématique: copier le sous dossier actuel /base_nom_du_sous_module
+[v] Systématique: Ajouter à l'extension du .mdb l'extension ".lock"
+[v] Systematique: Réaffection des droits sur l'utilisateur ldcadm exemple : chown -R ldcadm:ldcadm /u1/DATA01/www/intranet/access/base_formation
+
+[DS] access_ruptures_type_manquant
+
+rajout dans les tables geo et access_rupture_commandes du champ site_groupe
+[v] ALTER TABLE `geo` ADD `id_site_groupe` INT DEFAULT '0' NOT NULL AFTER `id_site_agis` ;
+[v] mise à jour du champ id_site_groupe
+[v] ALTER TABLE `access_ruptures_commandes` ADD `n_site_groupe` INT DEFAULT '0' NOT NULL AFTER `N__Site` ;
+
+[v] ALTER TABLE `access_clients` ADD `Tel_SCo` VARCHAR( 20 ) DEFAULT NULL ,
+ADD `Fax_SCo` VARCHAR( 20 ) DEFAULT NULL ;
+
+[v] ALTER TABLE `access_clients` ADD `code_intra_groupe` INT DEFAULT '0',
+ADD `circuit` INT DEFAULT '0';
+
+[v] ALTER TABLE `access_clients` CHANGE `num_client_societe` `num_client_societe` INT( 20 ) NULL DEFAULT '0'
+
+[v] ALTER TABLE `access_clients` ADD `fax_rupture` TINYINT( 1 ) DEFAULT '-1' NOT NULL AFTER `Fax_SCo` ;

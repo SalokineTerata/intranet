@@ -1,0 +1,124 @@
+================================================================================
+Modifications à apporter aux différentes versions du modules
+================================================================================
+
+[ ]: Reste à effectuer
+[!]: Prioritaire
+[V]: Réalisé
+[.]: Abandonné
+================================================================================
+Exemples:
+[V] 23/05/2003: saisie_vierge_origine.php
+      Déplacer les informations de cette page au niveau du composant.
+
+[ ] 28/07/2003: saisie_origine.php
+                Saisie de plusieurs origine sans cycle.
+                Rajouter dans la listedes origine:
+                         - Cf Origine MP
+                         - Cf Lieu dernière Transformation
+                         - Cf Origine Multiple
+                         - Cf Non défini
+                Bouton "Terminer Saisie"
+================================================================================
+
+[ ] F. Listes des ingrédients rajouter 2 boutons pour afficher que les actifs / que les inactifs / tous
+
+[ ] vérifier l'inactivation des recettes de référence ex NEM CREVETTE 25 G HIPPO RHF PIECE SURGELE
+
+[ ] Faire une requete de suppression des recettes inactivées (F gestion des recettes)
+
+[ ] rajouter dans la liste stade la possibilité de rechercher sur ts les stades (mettre "*")
+
+
+Cecile PFISTER/LDCAVI/GRPLDC/FR a écrit sur 15/07/2009 11:09:43 :
+
+> Bonjour,
+> 
+> Comme nous avons désormais accès aux 2 bases recettes ATI et 
+> AVIGNON? est-il possible de faire apparaître dans la fenêtre de la 
+> base ouverte, le site correspondant pour savoir sur quelle base on est !
+> 
+> A+
+> Cécile
+
+Cecile PFISTER/LDCAVI/GRPLDC/FR a écrit sur 13/01/2009 16:43:31 :
+> Bonjour,
+> 
+> Dans la fiche récap' ingts, apparaissent désormais les sous recettes...
+> à ce jour il y a juste celles du niveau N-1
+> prut-on avoir tous les sou niveaux...
+> 
+> Ex 14596
+> 2 N-1 indiqués = 14729 + 14746
+> or il y a aussi des N-2
+> 14579
+> 14742
+> 
+> il faudait qu'elles apparaissent aussi dans le récap'
+> 
+> Merci
+> A+
+> Cécile
+
+Mathieu MEROT/LDCAVI/GRPLDC/FR a écrit sur 15/01/2009 18:28:26 :
+
+> Bonsoir,
+> 
+> Point sur la base recette : 
+> 
+> Lorsque l'on fait une recherche d'une recette par le nom, il 
+> faudrait avoir la possibilité dans le menu déroulant "Stade" de 
+> choisir "tout stade confondu"
+> 
+> Cette modification faciliterai la recherche d'ancienne recette, 
+> servant souvent de base pour les nouveaux développements.
+> 
+> A votre dispo si vous avez des questions.
+> 
+> Mathieu
+
+
+Cecile PFISTER/LDCAVI/GRPLDC/FR a écrit sur 23/01/2009 15:23:13 :
+
+> Bonjour,
+> 
+> Le code recette qui s'affiche à l'écran n'est pas le bon.
+> il s'agit du numéro de dossier = numéro de création.
+> Or, il faut afficher le numéri identifiant : celui ci est différent 
+> à chaque montée en version ou indice.
+> 
+> Merci
+> A+
+> Cécile
+
+Domitille DE VILLAINE/LDCTAR/GRPLDC/FR a écrit sur 27/01/2009 18:43:22 :
+
+> Stéphane,
+> 
+> Suite à l'utilisation du cas d'emploi pour une MP donnée, merci 
+> d'indiquer une colonne pour le stade de la recette + indiquer le 
+> code GPAO de la matière concernée
+> 
+> Qd on met à jour un intitulé de recette, on a 3 ou 4 fenêtres de 
+> messages qui demandent si on souhaite changer cet intitulé : peut-on
+> l'avoir uniquement en 1 seule fois?
+> 
+> le code GPAO est renseigné pour les champignons noirs réhydratés, or
+> ce code n'apparait pas ds la liste des ingrédients de la fiche recette 
+> 
+> Merci bcp
+> Domitille
+
+Cecile PFISTER/LDCAVI/GRPLDC/FR a écrit sur 10/02/2009 09:23:44 :
+
+> Bonjour,
+> 
+> Tu nous as paramétré l'imp° rapide de la fiche recette lorsqu'on est
+> en modification...c'est très pratique.
+> pourrait-on aussi lancer directement l'imp° d'une fiche récap' ingts ?
+> 
+> si ok pour tous les utilisateurs !!!???
+> 
+> Merci
+> A+
+> Cécile

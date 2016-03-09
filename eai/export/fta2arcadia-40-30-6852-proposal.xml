@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Transaction id="30" version="1.1" type="proposal">
+	<Parameters>
+		<IdFirm>40</IdFirm><!-- Agis -->
+		<IdArcadia>43152</IdArcadia><!-- Code article dans Arcadia -->
+		<IdFta>6852</IdFta><!-- N° de la FTA -->
+	</Parameters>
+	<Tables>
+		<ARTICLE_REF>
+			<DataToImport>
+				<Recordset id="1" action="update">
+					<!-- Entête -->
+					<NO_ART key="TRUE">43152</NO_ART>
+
+
+					<!-- Class./Ident. -->
+					<COD_GENCOD_ADM>3366760023635</COD_GENCOD_ADM>
+
+					<DUREE_VIE>50</DUREE_VIE>
+					<DTS>30</DTS>
+
+
+					<SITE_PROD_EE>43</SITE_PROD_EE><!-- Avignon -->
+
+
+
+
+					<!-- Fourniture -->
+					<SOUMIS_ECO_EMBALLAGE>1</SOUMIS_ECO_EMBALLAGE>
+
+				</Recordset>
+			</DataToImport>
+		</ARTICLE_REF>
+	</Tables>
+
+</Transaction>
+

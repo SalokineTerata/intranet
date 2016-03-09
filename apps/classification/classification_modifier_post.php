@@ -71,7 +71,7 @@ switch ($action) {
         $ClassificationFta2Model->saveToDatabase();
 
         //Redirection
-        header("Location: index.php");
+        header("Location: classification_arcadia.php?" . ClassificationFta2Model::KEYNAME . "=" . $idClassification2);
 
         break;
 

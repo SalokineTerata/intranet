@@ -87,7 +87,7 @@ class TableauFicheView {
         /**
          * Changment du format de date en Fr
          */
-        $dateEcheanceFta = FtaController::changementDuFormatDeDate($dateEcheanceFtatmp);
+        $dateEcheanceFta = FtaController::changementDuFormatDeDateFR($dateEcheanceFtatmp);
 
 
         /**

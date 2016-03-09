@@ -22,7 +22,7 @@
  *
  * @author salokine
  */
-abstract class  AbstractView {
+abstract class AbstractView {
 
     /**
      * La vue est-elle modifiable par l'utilisateur (saisie) ou simplement
@@ -30,6 +30,7 @@ abstract class  AbstractView {
      * @var boolean
      */
     private $isEditable;
+    private $dataValidationSuccessful;
 
     public function getHtmlDataField($paramFieldName) {
         return Html::convertDataFieldToHtml(
@@ -46,13 +47,29 @@ abstract class  AbstractView {
         $this->isEditable = $isEditable;
     }
 
-    /**
-     * @return type Description
-     */
-    abstract public function getModel();
+    public function isDataValidationSuccessful() {
+        return $this->dataValidationSuccessful;
+    }
 
-    /**
-     * 
-     */
-    abstract public function setModel(FtaSuiviProjetModel $model);
+    function setDataValidationSuccessful($paramDataValidationSuccessful) {
+        $this->dataValidationSuccessful += $paramDataValidationSuccessful;
+    }
+
+    function setDataValidationSuccessfulToTrue() {
+        $this->setDataValidationSuccessful("0");
+    }
+
+    function setDataValidationSuccessfulToFalse() {
+        $this->setDataValidationSuccessful("1");
+    }
+
+//    /**
+//     * @return type Description
+//     */
+//    abstract public function getModel();
+//
+//    /**
+//     * 
+//     */
+//    abstract public function setModel(FtaSuiviProjetModel $model);
 }

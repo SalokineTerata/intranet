@@ -240,6 +240,7 @@ class FtaTransitionModel {
                 $req = "UPDATE " . FtaModel::TABLENAME
                         . " SET " . FtaModel::FIELDNAME_CODE_ARTICLE . "=NULL "
                         . "," . FtaModel::FIELDNAME_ACTIF . "='0'"
+                        . "," . FtaModel::FIELDNAME_DATE_DE_VALIDATION_FTA . "=" . date("Y-m-d")
                         . " WHERE " . FtaModel::FIELDNAME_CODE_ARTICLE_LDC . "='" . $codeArticleLdc . "' "
                         . " AND " . FtaModel::KEYNAME . "='" . $paramIdFta . "' "
                 ;
@@ -590,7 +591,8 @@ class FtaTransitionModel {
                 . "\n"
                 . "INFORMATIONS DE DEBUGGAGE:\n"
                 . $logTransition
-        ; {
+        ;
+        {
             $expediteur = $prenom . " " . $nom . " <" . $mail . ">";
             envoismail($sujetmail, $corp, $mail, $expediteur, $typeMail);
         }
@@ -706,7 +708,8 @@ class FtaTransitionModel {
                 . $text
                 . "\n\n"
                 . $paramLogTransition
-        ; {
+        ;
+        {
             $expediteur = $prenom . " " . $nom . " <" . $mailUser . ">";
             envoismail($sujetmail, $corp, $mailUser, $expediteur, $typeMail);
         }

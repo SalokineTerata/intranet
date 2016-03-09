@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Transaction id="35" version="1.1" type="proposal">
+    <Parameters>
+        <IdFirm>40</IdFirm><!-- Agis -->
+        <IdArcadia>43150</IdArcadia><!-- Code article dans Arcadia -->
+        <IdFta>14774</IdFta><!-- N° de la FTA -->
+    </Parameters>
+    <Tables>
+        <DUN14>
+            <DataToImport>
+                <Recordset id="1" action="update">
+                    <NO_ART key="TRUE">43150</NO_ART>
+                    <COD_PCB key="TRUE">2</COD_PCB>
+                    <DUN14>13366760023648</DUN14>                   
+                </Recordset>
+            </DataToImport>
+        </DUN14>
+    </Tables>
+
+</Transaction>
+

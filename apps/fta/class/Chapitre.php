@@ -64,6 +64,7 @@ class Chapitre {
      * @var FtaWorkflowStructureModel 
      */
     protected static$abrevation_etat;
+    protected static$checkArcadiaData;
     protected static$comeback;
     protected static $ftaWorkflowStructureModel;
     protected static $html_chapitre_activation_cody;
@@ -110,13 +111,14 @@ class Chapitre {
     protected static $html_submit_button;
     protected static $html_suivi_dossier;
     protected static $id_fta_chapitre;
-    protected static$id_fta_etat;
+    protected static $id_fta_etat;
     protected static $id_fta_processus;
-    protected static$id_fta_role;
+    protected static $id_fta_role;
     protected static $id_fta_workflow;
     protected static $id_fta_workflow_structure;
     protected static $id_intranet_actions;
     protected static $is_correctable;
+    protected static $is_data_validation_successful;
     protected static $is_editable;
     protected static $is_owner;
     protected static $idUser;
@@ -174,8 +176,10 @@ class Chapitre {
         return self::$html_chapitre_all;
     }
 
-    public static function initChapitre($id_fta, $id_fta_chapitre, $synthese_action, $comeback, $idFtaEtat, $abreviationFtaEtat, $idFtaRole) {
+    public static function initChapitre($id_fta, $id_fta_chapitre, $synthese_action, $comeback, $idFtaEtat, $abreviationFtaEtat, $idFtaRole, $checkArcadiaData) {
 
+        self::$checkArcadiaData = $checkArcadiaData;
+        self::$is_data_validation_successful = FALSE;
         self::$id_fta = $id_fta;
         self::$comeback = $comeback;
         self::$id_fta_etat = $idFtaEtat;
@@ -208,9 +212,9 @@ class Chapitre {
         self::$is_editable = self::buildIsEditable();
         self::$is_correctable = self::buildIsCorrectable();
         self::$taux_validation_processus = self::buildTauxValidationProcessus();
-        self::$html_submit_button = self::buildHtmlSubmitButton();
         self::$html_correct_button = self::buildHtmlCorrectButton();
         self::$html_chapitre_core = self::buildChapitreCore();
+        self::$html_submit_button = self::buildHtmlSubmitButton();
         self::$html_suivi_dossier = self::buildSuiviDossier();
         self::$html_chapitre_all = self::buildChapitreAll();
     }
@@ -543,7 +547,11 @@ class Chapitre {
          * Deviendra une liste deroulante dépendante des donné choisie dans la classification
          */
         //Codification
-        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_SUFFIXE_AGROLOGIC_FTA);
+//        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_SUFFIXE_AGROLOGIC_FTA);
+        //Données lié à arcadia 
+        $bloc.= $ftaView2->getHtmlArcadiaDataNotEditable();
+
+        $bloc.=$ftaView->getHtmlArcadiaDataVariableEditable();
 
         $bloc.='<tr class=titre_principal><td class>Caractéristiques générales du produit</td></tr>';
 
@@ -576,6 +584,9 @@ class Chapitre {
         //Code Regate Mère sur la Fta
         $bloc.=$ftaView->getHtmlCodeArticleLdcMere();
 
+        if ($ftaView->isDataValidationSuccessful() == "0") {
+            self::setDataValidationSuccessfulToTrue();
+        }
         return $bloc;
     }
 
@@ -631,6 +642,8 @@ class Chapitre {
         $ftaModel->setDataFtaTableToCompare();
         $ftaView = new FtaView($ftaModel);
         $ftaView->setIsEditable($isEditable);
+
+
         $ftaView->setFtaChapitreModelById(self::ID_CHAPITRE_IDENTITE);
 
         //Unité de Facturation
@@ -645,6 +658,10 @@ class Chapitre {
         //Gencod EAN Palette
         $bloc.=$ftaView->getHtmlEANPalette();
 
+
+        if ($ftaView->isDataValidationSuccessful() == "0") {
+            self::setDataValidationSuccessfulToTrue();
+        }
         return $bloc;
     }
 
@@ -805,6 +822,11 @@ class Chapitre {
         //Site d'expedition
         $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_SITE_EXPEDITION_FTA);
 
+
+        if ($ftaView->isDataValidationSuccessful() == "0") {
+            self::setDataValidationSuccessfulToTrue();
+        }
+
         return $bloc;
     }
 
@@ -825,6 +847,11 @@ class Chapitre {
         //Site d'assemblage
         $bloc.=$ftaView->listeSiteByAcces(self::$idUser, $isEditable);
 
+
+        if ($ftaView->isDataValidationSuccessful() == "0") {
+            self::setDataValidationSuccessfulToTrue();
+        }
+
         return $bloc;
     }
 
@@ -844,6 +871,10 @@ class Chapitre {
 
         //Durée de vie garantie client (en jours)
         $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_DUREE_DE_VIE);
+
+        if ($ftaView->isDataValidationSuccessful() == "0") {
+            self::setDataValidationSuccessfulToTrue();
+        }
 
         return $bloc;
     }
@@ -866,6 +897,10 @@ class Chapitre {
 
         //Nombre d’UVC par colis
         $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_NOMBRE_UVC_PAR_CARTON);
+
+        if ($ftaView->isDataValidationSuccessful() == "0") {
+            self::setDataValidationSuccessfulToTrue();
+        }
 
         return $bloc;
     }
@@ -894,8 +929,10 @@ class Chapitre {
         //Emballages par Colis
         $bloc.=$ftaView->getHtmlEmballageParColis($id_fta, $idChapitre, $synthese_action, self::$id_fta_etat, self::$abrevation_etat, self::$id_fta_role);
 
-        //Palette
-        $bloc.=$ftaView->getHtmlEmballagePalette($id_fta, $idChapitre, $synthese_action, self::$id_fta_etat, self::$abrevation_etat, self::$id_fta_role);
+
+        if ($ftaView->isDataValidationSuccessful() == "0") {
+            self::setDataValidationSuccessfulToTrue();
+        }
 
         return $bloc;
     }
@@ -920,6 +957,15 @@ class Chapitre {
         //Emballages du Colis
         $bloc.=$ftaView->getHtmlEmballageDuColis($id_fta, $idChapitre, $synthese_action, self::$id_fta_etat, self::$abrevation_etat, self::$id_fta_role);
 
+        //Vérification que l'enballage sélectionner soit existant sur Arcadia
+        $bloc.=$ftaView->checkEmballageColisValide();
+
+        //Palette
+        $bloc.=$ftaView->getHtmlEmballagePalette($id_fta, $idChapitre, $synthese_action, self::$id_fta_etat, self::$abrevation_etat, self::$id_fta_role);
+
+        if ($ftaView->isDataValidationSuccessful() == "0") {
+            self::setDataValidationSuccessfulToTrue();
+        }
         return $bloc;
     }
 
@@ -935,6 +981,8 @@ class Chapitre {
         $ftaModel->setDataFtaTableToCompare();
         $ftaView = new FtaView($ftaModel);
         $ftaView->setIsEditable($isEditable);
+
+
         $ftaView->setFtaChapitreModelById(self::ID_CHAPITRE_IDENTITE);
 
 
@@ -946,6 +994,10 @@ class Chapitre {
 
         //Logo éco-emballage
         $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_LOGO_ECO_EMBALLAGE);
+
+        if ($ftaView->isDataValidationSuccessful() == "0") {
+            self::setDataValidationSuccessfulToTrue();
+        }
 
         return $bloc;
     }
@@ -990,6 +1042,9 @@ class Chapitre {
         //Logo éco-emballage
         $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_LOGO_ECO_EMBALLAGE);
 
+        if ($ftaView->isDataValidationSuccessful() == "0") {
+            self::setDataValidationSuccessfulToTrue();
+        }
 
         return $bloc;
     }
@@ -1013,8 +1068,11 @@ class Chapitre {
 
 //        //Libellé etiquette carton:
 //        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_LIBELLE_CLIENT);
-        //Modèle d'étiquette
-        $bloc.=$ftaView->listeCodesoftEtiquettes();
+
+
+        if ($ftaView->isDataValidationSuccessful() == "0") {
+            self::setDataValidationSuccessfulToTrue();
+        }
 
         return $bloc;
     }
@@ -1050,6 +1108,10 @@ class Chapitre {
         //Logo éco-emballage
         $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_LOGO_ECO_EMBALLAGE);
 
+        if ($ftaView->isDataValidationSuccessful() == "0") {
+            self::setDataValidationSuccessfulToTrue();
+        }
+
 
         return $bloc;
     }
@@ -1074,6 +1136,9 @@ class Chapitre {
         //Conseil de Réchauffage Validé
         $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_CONSEIL_DE_RECHAUFFAGE);
 
+        if ($ftaView->isDataValidationSuccessful() == "0") {
+            self::setDataValidationSuccessfulToTrue();
+        }
 
         return $bloc;
     }
@@ -1108,8 +1173,13 @@ class Chapitre {
         //Forcer libellé étiquette colis ?:
         //Etiquette colis
         $bloc.=$ftaView->getHtmlVerrouillageEtiquetteWithEtiquetteColis();
-        ;
 
+        //Modèle d'étiquette
+        $bloc.=$ftaView->listeCodesoftEtiquettes();
+
+        if ($ftaView->isDataValidationSuccessful() == "0") {
+            self::setDataValidationSuccessfulToTrue();
+        }
 
         return $bloc;
     }
@@ -1145,6 +1215,12 @@ class Chapitre {
         //Etiquette colis
         $bloc.=$ftaView->getHtmlVerrouillageEtiquetteWithEtiquetteColis();
 
+        //Modèle d'étiquette
+        $bloc.=$ftaView->listeCodesoftEtiquettes();
+
+        if ($ftaView->isDataValidationSuccessful() == "0") {
+            self::setDataValidationSuccessfulToTrue();
+        }
 
         return $bloc;
     }
@@ -1180,6 +1256,12 @@ class Chapitre {
         //Etiquette colis
         $bloc.=$ftaView->getHtmlVerrouillageEtiquetteWithEtiquetteColis();
 
+        //Modèle d'étiquette
+        $bloc.=$ftaView->listeCodesoftEtiquettes();
+
+        if ($ftaView->isDataValidationSuccessful() == "0") {
+            self::setDataValidationSuccessfulToTrue();
+        }
 
         return $bloc;
     }
@@ -1218,6 +1300,10 @@ class Chapitre {
          */
         $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_REMARQUE);
 
+        if ($ftaView->isDataValidationSuccessful() == "0") {
+            self::setDataValidationSuccessfulToTrue();
+        }
+
         return $bloc;
     }
 
@@ -1254,6 +1340,10 @@ class Chapitre {
          * Remarque
          */
         $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_REMARQUE);
+
+        if ($ftaView->isDataValidationSuccessful() == "0") {
+            self::setDataValidationSuccessfulToTrue();
+        }
 
         return $bloc;
     }
@@ -1293,6 +1383,9 @@ class Chapitre {
         $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_REMARQUE);
 
 
+        if ($ftaView->isDataValidationSuccessful() == "0") {
+            self::setDataValidationSuccessfulToTrue();
+        }
 
         return $bloc;
     }
@@ -1844,6 +1937,9 @@ class Chapitre {
 
         $bloc.='<tr class=titre_principal><td class>Codification</td></tr>';
 
+        //Désignation Abrégée
+        $bloc.=$ftaView->getHtmlNomAbrege();
+
         //Désignation Interne Agis
 //        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_LIBELLE);
         $bloc.=$ftaView->getHtmlDesignationInterneAgis();
@@ -1860,6 +1956,12 @@ class Chapitre {
         //Gencod EAN Palette
         $bloc.=$ftaView->getHtmlEANPalette();
 
+        //Fta2Arcadia
+        $bloc.=$ftaView->getHtmlLinkGenerateXmlFile(self::$checkArcadiaData);
+
+        if ($ftaView->isDataValidationSuccessful() == "0") {
+            self::setDataValidationSuccessfulToTrue();
+        }
         return $bloc;
     }
 
@@ -1886,6 +1988,10 @@ class Chapitre {
         //Code Douane 
         $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_CODE_DOUANE_FTA);
 
+
+        if ($ftaView->isDataValidationSuccessful() == "0") {
+            self::setDataValidationSuccessfulToTrue();
+        }
         return $bloc;
     }
 
@@ -1956,6 +2062,10 @@ class Chapitre {
         //Libellé Code Douane 
         $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_CODE_DOUANE_LIBELLE_FTA);
 
+
+        if ($ftaView->isDataValidationSuccessful() == "0") {
+            self::setDataValidationSuccessfulToTrue();
+        }
 
         return $bloc;
     }
@@ -2325,7 +2435,7 @@ class Chapitre {
         $field_name = 'signature_validation_suivi_projet';
         $table_name = 'fta_suivi_projet';
 
-        if (self::$ftaSuiviProjetModel->getDataField(FtaSuiviProjetModel::FIELDNAME_SIGNATURE_VALIDATION_SUIVI_PROJET)->getFieldValue()) {
+        if (self::$ftaSuiviProjetModel->getDataField(FtaSuiviProjetModel::FIELDNAME_SIGNATURE_VALIDATION_SUIVI_PROJET)->getFieldValue() or self::$is_data_validation_successful) {
             $checked = 'checked';
         } else {
             $checked = '';
@@ -2335,9 +2445,10 @@ class Chapitre {
         } else {
             $disabled = '';
         }
+
         if ($proprietaire) {
             $bloc_suivi .= '<tr class=contenu><td>' . DatabaseDescription::getFieldDocLabel('fta_suivi_projet', $field_name) . '</td><td>';
-            $bloc_suivi .= '<input type=checkbox name=' . $field_name . ' value=' . self::$idUser . ' ' . $checked . ' ' . $disabled . '/>';
+            $bloc_suivi .= '<input type=checkbox onclick=\'js_page_refresh()\' name=' . $field_name . ' value=' . self::$idUser . ' ' . $checked . ' ' . $disabled . '/>';
         } else {
 
             //Recherche de la personnes ayant signé ce chapitre
@@ -2434,8 +2545,8 @@ class Chapitre {
 
     protected static function buildHtmlSubmitButton() {
         $return = '';
-        if (self::$is_editable == true) {
-            $return = '<input type=submit value=\'Confirmer\'>';
+        if (self::$is_editable == true and self::$is_data_validation_successful == TRUE) {
+            $return = '<input type=submit value=\'Confirmer\'  >';
         }
         return $return;
     }
@@ -2479,6 +2590,10 @@ class Chapitre {
 
 
         return $return;
+    }
+
+    public static function setDataValidationSuccessfulToTrue() {
+        self::$is_data_validation_successful = TRUE;
     }
 
 }

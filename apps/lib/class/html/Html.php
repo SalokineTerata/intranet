@@ -18,6 +18,7 @@ class Html {
     const DEFAULT_HTML_IMAGE_UNDO = AttributesGlobal::DEFAULT_HTML_IMAGE_UNDO;
     const DEFAULT_HTML_WARNING_UPDATE_IMAGE = "<img src=../lib/images/exclamation.png alt=\"\" title=\"Information mise à jour\" width=\"20\" height=\"18\" border=\"0\" />";
     const DEFAULT_HTML_WARNING_UPDATE_BGCOLOR = "background-color:#B0FFFE;";
+    const DEFAULT_HTML_WARNING_MESSAGE_BGCOLOR = "background-color:#FF5B5B;";
     const DEFAULT_HTML_TABLE_TITRE = "table border=0 width=100% class=titre";
     const DEFAULT_HTML_TABLE_CONTENU = "table border=0 width=100% class=titre";
     const PREFIXE_ID_ROW = AttributesGlobal::PREFIXE_ID_ROW;

@@ -737,8 +737,6 @@ class AccueilFta {
                 . 'Actions'
                 . '</th><th>'
                 . 'Commentaires sur la Fta'
-                . '</th><th>'
-                . 'Code Regate Mère Fta'
                 . '</th>';
         /**
          * Version avec le module rewrite
@@ -812,7 +810,7 @@ class AccueilFta {
                 /**
                  * Changment du format de date en Fr
                  */
-                $dateEcheanceFta = FtaController::changementDuFormatDeDate($dateEcheanceFtatmp);
+                $dateEcheanceFta = FtaController::changementDuFormatDeDateFR($dateEcheanceFtatmp);
 
                 /**
                  * Donne accès aux bouton de transition 
@@ -826,10 +824,7 @@ class AccueilFta {
                  */
                 $ftaModel = new FtaModel($idFta);
                 $commentaireDataField = $ftaModel->getDataField(FtaModel::FIELDNAME_COMMENTAIRE);
-                $codeRegateMereDataField = $ftaModel->getDataField(FtaModel::FIELDNAME_CODE_ARTICLE_LDC_MERE);
                 $htmlFieldCommentaire = html::getHtmlObjectFromDataField($commentaireDataField);
-                $htmlFieldCodeRegateMere = html::getHtmlObjectFromDataField($codeRegateMereDataField);
-                $htmlFieldCodeRegateMere->setHtmlRenderToTable();
                 $htmlFieldCommentaire->setHtmlRenderToTable();
 
 
@@ -1165,9 +1160,7 @@ class AccueilFta {
                          * Commentaire de la Fta et code Regate Mère
                          */
                         $htmlFieldCommentaire->setIsEditable(TRUE);
-                        $htmlFieldCodeRegateMere->setIsEditable(TRUE);
                         $commentaire = $htmlFieldCommentaire->getHtmlResult();
-                        $codeRegateMere = $htmlFieldCodeRegateMere->getHtmlResult();
                         if ($recap[$idFta] == '100%') {
                             if ($createurFtaN <> $createurNTmp or $diffWorkflowN) {
                                 $tableauFicheN .= '<tr class=contenu>'
@@ -1191,7 +1184,7 @@ class AccueilFta {
                                         . '<td ' . $bgcolor . $largeur_html_C3 . ' align=center >' . $service . '</td>' //Service               
                                         . '<td ' . $bgcolor . $largeur_html_C3_action . ' align=center >' . $actions . '</td>'// Actions
                                         . $commentaire  // Commentaires
-                                        . $codeRegateMere . '</tr >'; // Code Regate Mere
+                                        . '</tr >';
                                 $createurNTmp = $createurFtaN;
                             } else {
                                 $tableauFicheN .= '<tr class=contenu >'
@@ -1212,7 +1205,7 @@ class AccueilFta {
                                         . '<td ' . $bgcolor . $largeur_html_C3 . ' align=center >' . $service . '</td>' //Service               
                                         . '<td ' . $bgcolor . $largeur_html_C3_action . ' align=center >' . $actions . '</td>'// Actions
                                         . $commentaire  // Commentaires
-                                        . $codeRegateMere . '</tr >'; // Code Regate Mere
+                                        . '</tr >';
                             }
                         } else {
                             if ($createurFtaTr <> $createurTrTmp or $diffWorkflowTr) {
@@ -1237,7 +1230,7 @@ class AccueilFta {
                                         . '<td ' . $bgcolor . $largeur_html_C3 . ' align=center >' . $service . '</td>' //Service               
                                         . '<td ' . $bgcolor . $largeur_html_C3_action . ' align=center >' . $actions . '</td>'// Actions
                                         . $commentaire  // Commentaires
-                                        . $codeRegateMere . '</tr >'; // Code Regate Mere
+                                        . '</tr >';
                                 $createurTrTmp = $createurFtaTr;
                             } else {
                                 $tableauFicheTr .= '<tr class=contenu >'
@@ -1258,7 +1251,7 @@ class AccueilFta {
                                         . '<td ' . $bgcolor . $largeur_html_C3 . ' align=center >' . $service . '</td>' //Service               
                                         . '<td ' . $bgcolor . $largeur_html_C3_action . ' align=center >' . $actions . '</td>'// Actions
                                         . $commentaire  // Commentaires
-                                        . $codeRegateMere . '</tr >'; // Code Regate Mere
+                                        . '</tr >';
                             }
                         }
                         break;
@@ -1270,9 +1263,7 @@ class AccueilFta {
                          */
 
                         $htmlFieldCommentaire->setIsEditable(FALSE);
-                        $htmlFieldCodeRegateMere->setIsEditable(FALSE);
                         $commentaire = $htmlFieldCommentaire->getHtmlResult();
-                        $codeRegateMere = $htmlFieldCodeRegateMere->getHtmlResult();
                         /*
                          * Nouvelle ligne pour créateur
                          */
@@ -1299,7 +1290,7 @@ class AccueilFta {
                                         . '<td ' . $bgcolor . $largeur_html_C3 . ' align=center >' . $service . '</td>' //Service               
                                         . '<td ' . $bgcolor . $largeur_html_C3_action . ' align=center >' . $actions . '</td>'// Actions
                                         . $commentaire  // Commentaires
-                                        . $codeRegateMere . '</tr >'; // Code Regate Mere
+                                        . '</tr >';
                                 $createurNTmp = $createurFtaN;
                             } else {
                                 $tableauFicheTmp .= '<tr class=contenu >'
@@ -1321,7 +1312,7 @@ class AccueilFta {
                                         . '<td ' . $bgcolor . $largeur_html_C3 . ' align=center >' . $service . '</td>' //Service               
                                         . '<td ' . $bgcolor . $largeur_html_C3_action . ' align=center >' . $actions . '</td>'// Actions
                                         . $commentaire  // Commentaires
-                                        . $codeRegateMere . '</tr >'; // Code Regate Mere
+                                        . '</tr >';
                             }
                         } else {
                             if ($createurFtaTr <> $createurTrTmp or $diffWorkflowTr) {
@@ -1347,7 +1338,7 @@ class AccueilFta {
                                         . '<td ' . $bgcolor . $largeur_html_C3 . ' align=center >' . $service . '</td>' //Service               
                                         . '<td ' . $bgcolor . $largeur_html_C3_action . ' align=center >' . $actions . '</td>'// Actions
                                         . $commentaire  // Commentaires
-                                        . $codeRegateMere . '</tr >'; // Code Regate Mere
+                                        . '</tr >';
                                 $createurTrTmp = $createurFtaTr;
                             } else {
                                 $tableauFicheTrTmp .= '<tr class=contenu >'
@@ -1368,7 +1359,7 @@ class AccueilFta {
                                         . '<td ' . $bgcolor . $largeur_html_C3 . ' align=center >' . $service . '</td>' //Service               
                                         . '<td ' . $bgcolor . $largeur_html_C3_action . ' align=center >' . $actions . '</td>'// Actions
                                         . $commentaire  // Commentaires
-                                        . $codeRegateMere . '</tr >'; // Code Regate Mere
+                                        . '</tr >';
                             }
                         }
                         break;
@@ -1457,6 +1448,8 @@ class AccueilFta {
      * Fonction de création d'une liste déroulante basée sur une requete SQL
       le premier champ retourné par la requête est désigné comme Clef de la liste
       le second alimente le contenu de la liste déroulante
+     * Le dernier paramètre est un boolean qui permet d'afficher l'élément "tous"
+     * dans la liste déroulante pour valeur "0"
      * @param string $paramRequeteSQL
      * @param int $paramIdDefaut
      * @param string $paramNomDefaut
@@ -1476,7 +1469,7 @@ class AccueilFta {
                 }
 
                 //Création de la liste déroulante
-                $html_liste = '<select name=' . $paramNomDefaut . ' onChange=' . $paramNomDefaut . '_js()>';
+                $html_liste = '<select id=' . $paramNomDefaut . ' name=' . $paramNomDefaut . ' onChange=' . $paramNomDefaut . '_js()>';
                 if ($paramTous) {
                     $html_liste .='<option value=0 >Tous</option>';
                 }

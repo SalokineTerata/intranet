@@ -51,6 +51,7 @@ require_once('../fta/class/Navigation.php');
 require_once('../fta/class/ObjectFta.php');
 
 // View
+require_once('../fta/class/view/AbstractView.php');
 require_once('../fta/class/view/FtaView.php');
 require_once('../fta/class/view/UserView.php');
 require_once('../fta/class/view/FtaComposantView.php');
@@ -58,6 +59,7 @@ require_once('../fta/class/view/FtaProcessusDelaiView.php');
 require_once('../fta/class/view/TableauFicheView.php');
 
 // Controller
+require_once('../fta/class/controller/Fta2ArcadiaController.php');
 require_once('../fta/class/controller/FtaController.php');
 
 // Moteur de base de données
@@ -68,6 +70,14 @@ require_once('../lib/class/database/DatabaseDescriptionField.php');
 require_once('../lib/class/database/DatabaseDescriptionTable.php');
 require_once('../lib/class/database/DatabaseDataField.php');
 require_once('../lib/class/database/DatabaseRecord.php');
+
+//Règles de validation
+require_once('../lib/class/rules_validation/AbstractRulesValidation.php');
+require_once('../lib/class/rules_validation/DataNotEmptyRulesValidation.php');
+require_once('../lib/class/rules_validation/Less35CaractereRulesValidation.php');
+require_once('../lib/class/rules_validation/Less5CaractereRulesValidation.php');
+require_once('../lib/class/rules_validation/Less8CaractereRulesValidation.php');
+
 
 // Configuration des models de base de données
 require_once('../lib/class/model/ModelTableAssociation.php');
@@ -84,17 +94,33 @@ require_once('../lib/class/model/AnnexeEmballageGroupeTypeModel.php');
 require_once('../lib/class/model/AnnexeEmballageModel.php');
 require_once('../lib/class/model/AnnexeEnvironnementConservationGroupeModel.php');
 require_once('../lib/class/model/AnnexeGestionDesEtiquettesModel.php');
+require_once('../lib/class/model/AnnexeUniteFacturationModel.php');
+require_once('../lib/class/model/ArcadiaCategorieProduitOptiventesModel.php');
+require_once('../lib/class/model/ArcadiaFamilleBudgetModel.php');
+require_once('../lib/class/model/ArcadiaFamilleVenteModel.php');
+require_once('../lib/class/model/ArcadiaGammeCoopModel.php');
+require_once('../lib/class/model/ArcadiaGammeFamilleBudgetModel.php');
+require_once('../lib/class/model/ArcadiaMarqueModel.php');
+require_once('../lib/class/model/ArcadiaSousFamilleModel.php');
+require_once('../lib/class/model/ArcadiaTypeCartonModel.php');
 require_once('../lib/class/model/CatsoproModel.php');
+require_once('../lib/class/model/ClassificationActiviteFamilleVentesArcadiaModel.php');
+require_once('../lib/class/model/ClassificationActiviteSousFamilleArcadiaModel.php');
 require_once('../lib/class/model/ClassificationArborescenceArticleCategorieContenuModel.php');
 require_once('../lib/class/model/ClassificationArborescenceArticleCategorieModel.php');
 require_once('../lib/class/model/ClassificationArborescenceArticleModel.php');
 require_once('../lib/class/model/ClassificationFtaModel.php');
 require_once('../lib/class/model/ClassificationFta2Model.php');
+require_once('../lib/class/model/ClassificationGammeFamilleBudgetArcadiaModel.php');
+require_once('../lib/class/model/ClassificationMarqueArcadiaModel.php');
+require_once('../lib/class/model/ClassificationRaccourcisAssociationModel.php');
+require_once('../lib/class/model/ClassificationRaccourcisModel.php');
 require_once('../lib/class/model/CodesoftEtiquettesLogoModel.php');
 require_once('../lib/class/model/CodesoftEtiquettesModel.php');
 require_once('../lib/class/model/CodesoftStyleParagrapheModel.php');
 require_once('../lib/class/model/DroitftModel.php');
 require_once('../lib/class/model/UserModel.php');
+require_once('../lib/class/model/Fta2ArcadiaTransactionModel.php');
 require_once('../lib/class/model/FtaActionRoleModel.php');
 require_once('../lib/class/model/FtaActionSiteModel.php');
 require_once('../lib/class/model/FtaConditionnementModel.php');
@@ -113,6 +139,7 @@ require_once('../lib/class/model/FtaTransitionModel.php');
 require_once('../lib/class/model/FtaWorkflowModel.php');
 require_once('../lib/class/model/FtaWorkflowStructureModel.php');
 require_once('../lib/class/model/FteFournisseurModel.php');
+require_once('../lib/class/model/GeoArcadiaModel.php');
 require_once('../lib/class/model/GeoModel.php');
 require_once('../lib/class/model/HtmlResultModel.php');
 require_once('../lib/class/model/IntranetActionsModel.php');

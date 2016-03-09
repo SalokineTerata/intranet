@@ -59,6 +59,7 @@ class FtaConditionnementModel extends AbstractModel {
     const PALETTE_NOMBRE_COLIS_PAR_COUCHE = 'colis_couche';
     const PALETTE_NOMBRE_TOTAL_PAR_CARTON = 'total_colis';
     const PALETTE_NOMBRE_TOTAL_PAR_CARTON_LABEL = 'Nombre total de Carton par palette';
+    const FONCTIONNAME_VERSIONNING = 'setDataFtaConditionnementTableToCompare';
 
     /**
      * FTA associée
@@ -66,15 +67,39 @@ class FtaConditionnementModel extends AbstractModel {
      */
     private $modelFta;
 
+    /**
+     * AnnexEmballage associée
+     * @var AnnexeEmballageModel
+     */
+    private $modelAnnexeEmballage;
+
     public function __construct($paramId = NULL, $paramIsCreateRecordsetInDatabaseIfKeyDoesntExist = AbstractModel::DEFAULT_IS_CREATE_RECORDSET_IN_DATABASE_IF_KEY_DOESNT_EXIST) {
         parent::__construct($paramId, $paramIsCreateRecordsetInDatabaseIfKeyDoesntExist);
 
         $this->setModelFtaById(
                 $this->getDataField(self::FIELDNAME_ID_FTA)->getFieldValue());
+        $this->setModelAnnexeEmballage(
+                new AnnexeEmballageModel($this->getDataField(self::FIELDNAME_ID_ANNEXE_EMBALLAGE)->getFieldValue()));
     }
 
     protected function setDefaultValues() {
         
+    }
+
+    /**
+     * 
+     * @return AnnexeEmballageModel
+     */
+    function getModelAnnexeEmballage() {
+        return $this->modelAnnexeEmballage;
+    }
+
+    /**
+     * 
+     * @param AnnexeEmballageModel $modelAnnexeEmballage
+     */
+    function setModelAnnexeEmballage(AnnexeEmballageModel $modelAnnexeEmballage) {
+        $this->modelAnnexeEmballage = $modelAnnexeEmballage;
     }
 
     public function setModelFtaById($id) {
@@ -233,18 +258,18 @@ class FtaConditionnementModel extends AbstractModel {
     }
 
     /**
-     * On obtient les id Fta Conditionnement selon le type d'emballage
-     * @param type $paramIdAnnexeEmballage
+     * On obtient les id Fta Conditionnement selon le type d'emballage par emballage type et annexe emballage type
+     * @param type $paramArrayIdAnnexeEmballage
      * @param type $paramIdFta
      * @return int
      */
-    public static function getIdFtaConditionnement($paramIdAnnexeEmballage, $paramIdFta, $paramIdEmballageGroupeType) {
+    public static function getIdFtaConditionnementByArrayIdAnnexeEmballageAndIdFtaAndIdEmballageGroupeType($paramArrayIdAnnexeEmballage, $paramIdFta, $paramIdEmballageGroupeType) {
 
         $req = 'SELECT DISTINCT ' . FtaConditionnementModel::KEYNAME
                 . ' FROM ' . FtaConditionnementModel::TABLENAME
                 . ' WHERE ( 0 ';
 
-        $req .=AnnexeEmballageModel::AddIdAnnexeEmballage($paramIdAnnexeEmballage);
+        $req .=AnnexeEmballageModel::AddIdAnnexeEmballage($paramArrayIdAnnexeEmballage);
 
         $req .= ') AND ' . FtaConditionnementModel::FIELDNAME_ID_FTA . '=' . $paramIdFta
                 . ' AND ' . FtaConditionnementModel::FIELDNAME_ID_ANNEXE_EMBALLAGE_GROUPE_TYPE . '=' . $paramIdEmballageGroupeType
@@ -346,8 +371,17 @@ class FtaConditionnementModel extends AbstractModel {
         return $array;
     }
 
+    /*
+   
+     */
+
     /**
-     * 
+     * On identifie les clé étrangères sur lesquelle on veut enregistrer les donnée cad FtaConditionnement
+     * Cette array doit être utilisé de cette manière 
+     * Array (
+     * nom de table,
+     * clé étrangère de la table présenté
+     * valeur de la clé étrangère);
      * @param int $paramIdFta
      * @param int $paramIdAnnexeEmballage
      * @param int $paramIdAnnexeEmballageGroupeType
@@ -558,7 +592,7 @@ class FtaConditionnementModel extends AbstractModel {
      * @param int $paramIdFtaRole
      * @return string
      */
-    public static function getAddLinkBeforeConditionnement($paramIdFta, $paramIdChapitre, $paramTypeEmballage, $paramSyntheseAction,  $paramIdFtaEtat, $paramAbreviationEtat, $paramIdFtaRole) {
+    public static function getAddLinkBeforeConditionnement($paramIdFta, $paramIdChapitre, $paramTypeEmballage, $paramSyntheseAction, $paramIdFtaEtat, $paramAbreviationEtat, $paramIdFtaRole) {
         return 'ajout_conditionnement.php?'
                 . 'id_fta=' . $paramIdFta
                 . '&id_annexe_emballage_groupe_type=' . $paramTypeEmballage
@@ -577,13 +611,13 @@ class FtaConditionnementModel extends AbstractModel {
      * @param int $paramIdChapitre
      * @param int $paramTypeEmballage
      * @param string $paramSyntheseAction
-     
+
      * @param int $paramIdFtaEtat
      * @param string $paramAbreviationEtat
      * @param int $paramIdFtaRole
      * @return string
      */
-    public static function getAddLinkAfterConditionnement($paramIdFta, $paramIdChapitre, $paramTypeEmballage, $paramSyntheseAction,  $paramIdFtaEtat, $paramAbreviationEtat, $paramIdFtaRole) {
+    public static function getAddLinkAfterConditionnement($paramIdFta, $paramIdChapitre, $paramTypeEmballage, $paramSyntheseAction, $paramIdFtaEtat, $paramAbreviationEtat, $paramIdFtaRole) {
         return '<a href=ajout_conditionnement.php?'
                 . 'id_fta=' . $paramIdFta
                 . '&id_annexe_emballage_groupe_type=' . $paramTypeEmballage

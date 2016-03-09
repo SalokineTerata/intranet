@@ -10,7 +10,7 @@
  *
  * @author salokine
  */
-class FtaView {
+class FtaView extends AbstractView {
 
     /**
      * Valeur de confirmation, pour un bouton de validation
@@ -34,6 +34,18 @@ class FtaView {
      * du champs Poids_ELEM
      */
     const CALLBACK_LINK_TO_FTA_VALUE = "Retour vers la Fta";
+
+    /**
+     * Fonction JavaScript appelée pour actualiser la visibilité
+     * du champs Poids_ELEM
+     */
+    const LINK_TO_FTA_XML_FILE = "Chargement des données vers Arcadia";
+
+    /**
+     * Fonction JavaScript appelée pour actualiser la visibilité
+     * du champs Poids_ELEM
+     */
+    const LINK_TO_FTA_XML_FILE_AGAIN = "Actualisation des données vers Arcadia";
 
     /**
      * Model de donnée d'une FTA
@@ -136,8 +148,19 @@ class FtaView {
     }
 
     public function getHtmlDataField($paramFieldName) {
+
+        $dataField = $this->getModel()->getDataField($paramFieldName);
+
+        $dataField->checkValidationRules();
+
+        if ($dataField->getDataValidationSuccessful() == TRUE) {
+            $this->setDataValidationSuccessfulToTrue();
+        } else {
+            $this->setDataValidationSuccessfulToFalse();
+        }
+
         return Html::convertDataFieldToHtml(
-                        $this->getModel()->getDataField($paramFieldName)
+                        $dataField
                         , $this->getIsEditable()
         );
     }
@@ -149,6 +172,48 @@ class FtaView {
     function getHtmlDateEcheance() {
         $this->getModel()->setIsEditable($this->getIsEditable());
         return $this->getModel()->getHtmlDateEcheance(FALSE);
+    }
+
+    /**
+     * Bouton affichant le lien générant le fichier xml
+     */
+    function generateXmlFile() {
+        return '<td class="contenu"><center>'
+                . '<a href=generate_xml.php?'
+                . 'id_fta=' . $this->getModel()->getKeyValue()
+                . '>' . self::LINK_TO_FTA_XML_FILE . '</a></center></td>';
+    }
+
+    /**
+     * Stade 1 
+     * On affiche l'option de préchargement des données vers arcadia qu dans le cas d'une création d'un article
+     * (manque d'information sur la mise à jour)
+     * @return string
+     */
+    function getHtmlLinkGenerateXmlFile($paramCheckArcadiaData) {
+        $lienFta2Arcadia = null;
+        if ($this->getIsEditable()) {
+            if (!$paramCheckArcadiaData) {
+                $lienFta2Arcadia = $this->generateXmlFile();
+            } else {
+                $lienFta2Arcadia = $this->getMessageSendDataToArcadia();
+            }
+        }
+        return $lienFta2Arcadia;
+    }
+
+    /**
+     * Affiche une message de confirmation que les données ont bien été envoyé
+     */
+    function getMessageSendDataToArcadia() {
+        return '<td class="contenu"><center>' . UserInterfaceMessage::FR_ARCADIA_SEND_DATA_MESSAGE . '</center></td>' . $this->getMessageSendDataToArcadiaAgain();
+    }
+
+    function getMessageSendDataToArcadiaAgain() {
+        return'<td class="contenu"><center>'
+                . '<a href=generate_xml.php?'
+                . 'id_fta=' . $this->getModel()->getKeyValue()
+                . '>' . self::LINK_TO_FTA_XML_FILE_AGAIN . '</a></center></td>';
     }
 
     /**
@@ -177,12 +242,23 @@ class FtaView {
     }
 
     /**
-     * Affichage Html de la DIN
+     * On vérifie si l'emballage du colis qui devrait être unique
+     * à une correspondance sur arcadia sinon alors on affiche une message d'avertissement 
+     * pour un cas non communiqué
+     */
+    function checkEmballageColisValide() {
+        $return = $this->getModel()->checkEmballageColisValide();
+
+        return $return;
+    }
+
+    /**
+     * Affichage Html du nom abrégé
      * @return string
      */
-    public function getHtmlDesignationInterneAgis() {
-        $DIN = $this->getModel()->getDataField(FtaModel::FIELDNAME_LIBELLE)->getFieldValue();
-        if (!$DIN) {
+    function getHtmlNomAbrege() {
+        $nomAbregeValue = $this->getModel()->getDataField(FtaModel::FIELDNAME_NOM_ABREGE)->getFieldValue();
+        if (!$nomAbregeValue) {
             $DesignationCommerciale = $this->getModel()->getDataField(FtaModel::FIELDNAME_DESIGNATION_COMMERCIALE)->getFieldValue();
             $suffixeAgrologicFta = $this->getModel()->getDataField(FtaModel::FIELDNAME_SUFFIXE_AGROLOGIC_FTA)->getFieldValue();
             $NB_UNIT_ELEM = $this->getModel()->getDataField(FtaModel::FIELDNAME_NOMBRE_UVC_PAR_CARTON)->getFieldValue();
@@ -192,11 +268,30 @@ class FtaView {
                 $poidAffichage = $poidAffichage * FtaModel::CONVERSION_KG_EN_G;
                 $valeurUnite = "g";
             }
-            $DIN = $DesignationCommerciale . " " . $suffixeAgrologicFta . " " . $NB_UNIT_ELEM . "X" . $poidAffichage . $valeurUnite;
+            $nomAbregeValue = $DesignationCommerciale . " " . $suffixeAgrologicFta . " " . $NB_UNIT_ELEM . "X" . $poidAffichage . $valeurUnite;
 
 
-            $DIN = strtoupper($DIN);
-            $this->getModel()->getDataField(FtaModel::FIELDNAME_LIBELLE)->setFieldValue($DIN);
+            $nomAbregeValue = strtoupper($nomAbregeValue);
+            $this->getModel()->getDataField(FtaModel::FIELDNAME_NOM_ABREGE)->setFieldValue($nomAbregeValue);
+            $this->getModel()->saveToDatabase();
+            $return = $this->getHtmlDataField(FtaModel::FIELDNAME_NOM_ABREGE);
+        } else {
+            $return = $this->getHtmlDataField(FtaModel::FIELDNAME_NOM_ABREGE);
+        }
+
+        return $return;
+    }
+
+    /**
+     * Affichage Html de la DIN
+     * @return string
+     */
+    function getHtmlDesignationInterneAgis() {
+        $DIN = $this->getModel()->getDataField(FtaModel::FIELDNAME_LIBELLE)->getFieldValue();
+        if (!$DIN) {
+            $nomAbregeValue = $this->getModel()->getDataField(FtaModel::FIELDNAME_NOM_ABREGE)->getFieldValue();
+
+            $this->getModel()->getDataField(FtaModel::FIELDNAME_LIBELLE)->setFieldValue($nomAbregeValue);
             $this->getModel()->saveToDatabase();
             $return = $this->getHtmlDataField(FtaModel::FIELDNAME_LIBELLE);
         } else {
@@ -456,6 +551,132 @@ class FtaView {
     }
 
     /**
+     * On affiche les données d'arcadia si une classification est saisi
+     * Suivant la classification les champs apparaisant ne sont pas éditables
+     */
+    public function getHtmlArcadiaDataNotEditable() {
+
+        //Initialisation des variables locales
+        $htmlReturn = NULL;
+        $idClassificationFta2 = $this->getModel()->getDataField(FtaModel::FIELDNAME_ID_FTA_CLASSIFICATION2)->getFieldValue();
+        if ($idClassificationFta2) {
+
+            /**
+             * Enregistrement de la donnée catégorie produit optiventes
+             */
+            $classificationFta2Model = new ClassificationFta2Model($idClassificationFta2);
+            $categorieProduitOptiventesValue = $classificationFta2Model->getDataField(ClassificationFta2Model::FIELDNAME_CATEGORIE_PRODUIT_OPTIVENTES)->getFieldValue();
+            $this->getModel()->getDataField(FtaModel::FIELDNAME_ID_ARCADIA_CATEGEORIE_PRODUIT_OPTIVENTES)->setFieldValue($categorieProduitOptiventesValue);
+            $this->getModel()->saveToDatabase();
+            /**
+             * Affichage Html
+             */
+            $htmlCodeProduitOptiv = $this->getHtmlDataField(FtaModel::FIELDNAME_ID_ARCADIA_CATEGEORIE_PRODUIT_OPTIVENTES);
+
+            $htmlReturn = $htmlCodeProduitOptiv;
+        }
+        return $htmlReturn;
+    }
+
+    /**
+     * On affiche les données d'arcadia si une classification est saisi
+     * Suivant la classification les champs apparaisant ne sont pas toujours éditables
+     */
+    function getHtmlArcadiaDataVariableEditable() {
+
+        //Initialisation des variables locales
+        $htmlReturn = NULL;
+        $idClassificationFta2 = $this->getModel()->getDataField(FtaModel::FIELDNAME_ID_FTA_CLASSIFICATION2)->getFieldValue();
+        if ($idClassificationFta2) {
+            $htmlFamilleBudget = $this->getHtmlDataField(FtaModel::FIELDNAME_ID_ARCADIA_FAMILLE_BUDGET);
+            $htmlGammeCoop = $this->getHtmlDataField(FtaModel::FIELDNAME_ID_ARCADIA_GAMME_COOP);
+
+            $htmlArcadiaGammeFamileBudget = $this->getHtmlArcadiaGammeFamileBudget();
+            $htmlClassificationRaccourcis = $this->getHtmlClassificationRaccourcis();
+            $htmlArcadiaSousFamille = $this->getHtmlArcadiaSousFamille();
+            $htmlArcadiaFamilleVente = $this->getHtmlArcadiaFamilleVenteArcadia();
+            $htmlArcadiaMarque = $this->getHtmlArcadiaMarque();
+
+
+            $htmlReturn = $htmlClassificationRaccourcis
+                    . $htmlArcadiaGammeFamileBudget
+                    . $htmlArcadiaFamilleVente
+                    . $htmlArcadiaSousFamille
+                    . $htmlArcadiaMarque
+                    . $htmlFamilleBudget
+                    . $htmlGammeCoop
+
+            ;
+        }
+        return $htmlReturn;
+    }
+
+    /**
+     * On affiche le ou les choix de gamme famille budget si une classification est renseigné
+     * @return string
+     */
+    function getHtmlArcadiaGammeFamileBudget() {
+        $htmlReturn = NULL;
+        $idClassificationFta2 = $this->getModel()->getDataField(FtaModel::FIELDNAME_ID_FTA_CLASSIFICATION2)->getFieldValue();
+        if ($idClassificationFta2) {
+            $htmlReturn = ClassificationGammeFamilleBudgetArcadiaModel::getHtmlClassificationGammeFamilleBudget($this->getModel()->getKeyValue(), $idClassificationFta2, $this->getIsEditable());
+        }
+        return $htmlReturn;
+    }
+
+    /**
+     * On affiche le ou les choix de gamme famille budget si une classification est renseigné
+     * @return string
+     */
+    function getHtmlClassificationRaccourcis() {
+        $htmlReturn = NULL;
+        $idClassificationFta2 = $this->getModel()->getDataField(FtaModel::FIELDNAME_ID_FTA_CLASSIFICATION2)->getFieldValue();
+        if ($idClassificationFta2) {
+            $htmlReturn = ClassificationRaccourcisAssociationModel::getHtmlClassificationRaccourcisAssociation($this->getModel()->getKeyValue(), $idClassificationFta2, $this->getIsEditable());
+        }
+        return $htmlReturn;
+    }
+
+    /**
+     * On affiche le ou les choix de gamme famille budget si une classification est renseigné
+     * @return string
+     */
+    function getHtmlArcadiaSousFamille() {
+        $htmlReturn = NULL;
+        $idClassificationFta2 = $this->getModel()->getDataField(FtaModel::FIELDNAME_ID_FTA_CLASSIFICATION2)->getFieldValue();
+        if ($idClassificationFta2) {
+            $htmlReturn = ClassificationActiviteSousFamilleArcadiaModel::getHtmlListeClassificationActiviteSousFamilleArcadia($this->getModel()->getKeyValue(), $idClassificationFta2, $this->getIsEditable());
+        }
+        return $htmlReturn;
+    }
+
+    /**
+     * On affiche le ou les choix de gamme famille budget si une classification est renseigné
+     * @return string
+     */
+    function getHtmlArcadiaFamilleVenteArcadia() {
+        $htmlReturn = NULL;
+        $idClassificationFta2 = $this->getModel()->getDataField(FtaModel::FIELDNAME_ID_FTA_CLASSIFICATION2)->getFieldValue();
+        if ($idClassificationFta2) {
+            $htmlReturn = ClassificationActiviteFamilleVentesArcadiaModel::getHtmlListeClassificationActiviteFamilleVentesArcadia($this->getModel()->getKeyValue(), $idClassificationFta2, $this->getIsEditable());
+        }
+        return $htmlReturn;
+    }
+
+    /**
+     * On affiche le ou les choix de gamme famille budget si une classification est renseigné
+     * @return string
+     */
+    function getHtmlArcadiaMarque() {
+        $htmlReturn = NULL;
+        $idClassificationFta2 = $this->getModel()->getDataField(FtaModel::FIELDNAME_ID_FTA_CLASSIFICATION2)->getFieldValue();
+        if ($idClassificationFta2) {
+            $htmlReturn = ClassificationMarqueArcadiaModel::getHtmlListeClassificationMarqueArcadia($this->getModel()->getKeyValue(), $idClassificationFta2, $this->getIsEditable());
+        }
+        return $htmlReturn;
+    }
+
+    /**
      * 
      * @return type
      */
@@ -544,6 +765,11 @@ class FtaView {
     function showListeDeroulanteSiteProdByAccesAndIdFta($paramIdUser, HtmlListSelect $paramHtmlObjet, $paramIsEditable) {
 
         $listeSiteProduction = $this->getModel()->showListeDeroulanteSiteProdByAccesAndIdFta($paramIdUser, $paramHtmlObjet, $paramIsEditable);
+
+        /**
+         * Initialisation du reésultat des règles de validation
+         */
+        $this->setDataValidationSuccessful($this->getModel()->isDataValidationSuccessful());
 
         return $listeSiteProduction;
     }
@@ -809,7 +1035,7 @@ class FtaView {
             $label = $annexeEmballageGroupeTypeModel2->getDataField(AnnexeEmballageGroupeTypeModel::FIELDNAME_NOM_ANNEXE_EMBALLAGE_GROUPE_TYPE)->getFieldValue();
 
 
-            $htmlEmballageUVC = new HtmlSubForm_RNN($arrayFtaConditionnement, $className, $label, $tablesNameAndIdForeignKeyOfFtaConditionnement);
+            $htmlEmballageUVC = new HtmlSubForm_RNN($arrayFtaConditionnement, $className, $label, $tablesNameAndIdForeignKeyOfFtaConditionnement, FtaConditionnementModel::FONCTIONNAME_VERSIONNING);
             $htmlEmballageUVC->setIsEditable($this->getIsEditable());
             $htmlEmballageUVC->setRightToAdd($rightToAdd);
             $htmlEmballageUVC->setLienAjouter(FtaConditionnementModel::getAddLinkAfterConditionnement($paramIdFta, $paramChapitre, AnnexeEmballageGroupeTypeModel::EMBALLAGE_UVC, $paramSyntheseAction, $paramIdFtaEtat, $paramAbreviationEtat, $paramIdFtaRole));
@@ -824,12 +1050,18 @@ class FtaView {
             $annexeEmballageGroupeTypeModel2 = new AnnexeEmballageGroupeTypeModel('1');
             $label = $annexeEmballageGroupeTypeModel2->getDataField(AnnexeEmballageGroupeTypeModel::FIELDNAME_NOM_ANNEXE_EMBALLAGE_GROUPE_TYPE)->getFieldValue();
 
-            $htmlEmballageUVC = new HtmlSubForm_RNN($arrayFtaConditionnement, $className, $label, $tablesNameAndIdForeignKeyOfFtaConditionnement);
+            $htmlEmballageUVC = new HtmlSubForm_RNN($arrayFtaConditionnement, $className, $label, $tablesNameAndIdForeignKeyOfFtaConditionnement, FtaConditionnementModel::FONCTIONNAME_VERSIONNING);
             $htmlEmballageUVC->setIsEditable($this->getIsEditable());
             $htmlEmballageUVC->setRightToAdd(TRUE);
             $htmlEmballageUVC->setLien(FtaConditionnementModel::getAddLinkBeforeConditionnement($paramIdFta, $paramChapitre, AnnexeEmballageGroupeTypeModel::EMBALLAGE_UVC, $paramSyntheseAction, $paramIdFtaEtat, $paramAbreviationEtat, $paramIdFtaRole));
             $return .= $htmlEmballageUVC->getHtmlResult();
         }
+
+        /**
+         * Initialisation du reésultat des règles de validation
+         */
+        $this->setDataValidationSuccessful($htmlEmballageUVC->isDataValidationSuccessful());
+
         return $return;
     }
 
@@ -899,7 +1131,7 @@ class FtaView {
             $label = $annexeEmballageGroupeTypeModel2->getDataField(AnnexeEmballageGroupeTypeModel::FIELDNAME_NOM_ANNEXE_EMBALLAGE_GROUPE_TYPE)->getFieldValue();
 
 
-            $htmlEmballageParColis = new HtmlSubForm_RNN($arrayFtaConditionnement, $className, $label, $tablesNameAndIdForeignKeyOfFtaConditionnement);
+            $htmlEmballageParColis = new HtmlSubForm_RNN($arrayFtaConditionnement, $className, $label, $tablesNameAndIdForeignKeyOfFtaConditionnement, FtaConditionnementModel::FONCTIONNAME_VERSIONNING);
             $htmlEmballageParColis->setIsEditable($this->getIsEditable());
             $htmlEmballageParColis->setRightToAdd($rightToAdd);
             $htmlEmballageParColis->setLienAjouter(FtaConditionnementModel::getAddLinkAfterConditionnement($paramIdFta, $paramChapitre, AnnexeEmballageGroupeTypeModel::EMBALLAGE_PAR_COLIS, $paramSyntheseAction, $paramIdFtaEtat, $paramAbreviationEtat, $paramIdFtaRole));
@@ -914,12 +1146,17 @@ class FtaView {
             $annexeEmballageGroupeTypeModel2 = new AnnexeEmballageGroupeTypeModel(AnnexeEmballageGroupeTypeModel::EMBALLAGE_PAR_COLIS);
             $label = $annexeEmballageGroupeTypeModel2->getDataField(AnnexeEmballageGroupeTypeModel::FIELDNAME_NOM_ANNEXE_EMBALLAGE_GROUPE_TYPE)->getFieldValue();
 
-            $htmlEmballageParColis = new HtmlSubForm_RNN($arrayFtaConditionnement, $className, $label, $tablesNameAndIdForeignKeyOfFtaConditionnement);
+            $htmlEmballageParColis = new HtmlSubForm_RNN($arrayFtaConditionnement, $className, $label, $tablesNameAndIdForeignKeyOfFtaConditionnement, FtaConditionnementModel::FONCTIONNAME_VERSIONNING);
             $htmlEmballageParColis->setIsEditable($this->getIsEditable());
             $htmlEmballageParColis->setRightToAdd(TRUE);
             $htmlEmballageParColis->setLien(FtaConditionnementModel::getAddLinkBeforeConditionnement($paramIdFta, $paramChapitre, AnnexeEmballageGroupeTypeModel::EMBALLAGE_PAR_COLIS, $paramSyntheseAction, $paramIdFtaEtat, $paramAbreviationEtat, $paramIdFtaRole));
             $return .= $htmlEmballageParColis->getHtmlResult();
         }
+        /**
+         * Initialisation du reésultat des règles de validation
+         */
+        $this->setDataValidationSuccessful($htmlEmballageParColis->isDataValidationSuccessful());
+
         return $return;
     }
 
@@ -992,7 +1229,7 @@ class FtaView {
             $label = $annexeEmballageGroupeTypeModel2->getDataField(AnnexeEmballageGroupeTypeModel::FIELDNAME_NOM_ANNEXE_EMBALLAGE_GROUPE_TYPE)->getFieldValue();
 
 
-            $htmlEmballageDuColis = new HtmlSubForm_RNN($arrayFtaConditionnement, $className, $label, $tablesNameAndIdForeignKeyOfFtaConditionnement);
+            $htmlEmballageDuColis = new HtmlSubForm_RNN($arrayFtaConditionnement, $className, $label, $tablesNameAndIdForeignKeyOfFtaConditionnement, FtaConditionnementModel::FONCTIONNAME_VERSIONNING);
             $htmlEmballageDuColis->setIsEditable($this->getIsEditable());
             $htmlEmballageDuColis->setRightToAdd($rightToAdd);
             $htmlEmballageDuColis->setLienAjouter(FtaConditionnementModel::getAddLinkAfterConditionnement($paramIdFta, $paramChapitre, AnnexeEmballageGroupeTypeModel::EMBALLAGE_DU_COLIS, $paramSyntheseAction, $paramIdFtaEtat, $paramAbreviationEtat, $paramIdFtaRole));
@@ -1014,12 +1251,18 @@ class FtaView {
             $annexeEmballageGroupeTypeModel2 = new AnnexeEmballageGroupeTypeModel('3');
             $label = $annexeEmballageGroupeTypeModel2->getDataField(AnnexeEmballageGroupeTypeModel::FIELDNAME_NOM_ANNEXE_EMBALLAGE_GROUPE_TYPE)->getFieldValue();
 
-            $htmlEmballageDuColis = new HtmlSubForm_RNN($arrayFtaConditionnement, $className, $label, $tablesNameAndIdForeignKeyOfFtaConditionnement);
+            $htmlEmballageDuColis = new HtmlSubForm_RNN($arrayFtaConditionnement, $className, $label, $tablesNameAndIdForeignKeyOfFtaConditionnement, FtaConditionnementModel::FONCTIONNAME_VERSIONNING);
             $htmlEmballageDuColis->setIsEditable($this->getIsEditable());
             $htmlEmballageDuColis->setRightToAdd(TRUE);
             $htmlEmballageDuColis->setLien(FtaConditionnementModel::getAddLinkBeforeConditionnement($paramIdFta, $paramChapitre, AnnexeEmballageGroupeTypeModel::EMBALLAGE_DU_COLIS, $paramSyntheseAction, $paramIdFtaEtat, $paramAbreviationEtat, $paramIdFtaRole));
             $return .= $htmlEmballageDuColis->getHtmlResult();
         }
+
+
+        /**
+         * Initialisation du reésultat des règles de validation
+         */
+        $this->setDataValidationSuccessful($htmlEmballageDuColis->isDataValidationSuccessful());
         return $return;
     }
 
@@ -1091,7 +1334,7 @@ class FtaView {
             $label = $annexeEmballageGroupeTypeModel2->getDataField(AnnexeEmballageGroupeTypeModel::FIELDNAME_NOM_ANNEXE_EMBALLAGE_GROUPE_TYPE)->getFieldValue();
 
 
-            $htmlEmballagePalette = new HtmlSubForm_RNN($arrayFtaConditionnement, $className, $label, $tablesNameAndIdForeignKeyOfFtaConditionnement);
+            $htmlEmballagePalette = new HtmlSubForm_RNN($arrayFtaConditionnement, $className, $label, $tablesNameAndIdForeignKeyOfFtaConditionnement, FtaConditionnementModel::FONCTIONNAME_VERSIONNING);
             $htmlEmballagePalette->setIsEditable($this->getIsEditable());
             $htmlEmballagePalette->setRightToAdd($rightToAdd);
             $htmlEmballagePalette->setLienAjouter(FtaConditionnementModel::getAddLinkAfterConditionnement($paramIdFta, $paramChapitre, AnnexeEmballageGroupeTypeModel::EMBALLAGE_PALETTE, $paramSyntheseAction, $paramIdFtaEtat, $paramAbreviationEtat, $paramIdFtaRole));
@@ -1112,12 +1355,18 @@ class FtaView {
             $annexeEmballageGroupeTypeModel2 = new AnnexeEmballageGroupeTypeModel(AnnexeEmballageGroupeTypeModel::EMBALLAGE_PALETTE);
             $label = $annexeEmballageGroupeTypeModel2->getDataField(AnnexeEmballageGroupeTypeModel::FIELDNAME_NOM_ANNEXE_EMBALLAGE_GROUPE_TYPE)->getFieldValue();
 
-            $htmlEmballagePalette = new HtmlSubForm_RNN($arrayFtaConditionnement, $className, $label, $tablesNameAndIdForeignKeyOfFtaConditionnement);
+            $htmlEmballagePalette = new HtmlSubForm_RNN($arrayFtaConditionnement, $className, $label, $tablesNameAndIdForeignKeyOfFtaConditionnement, FtaConditionnementModel::FONCTIONNAME_VERSIONNING);
             $htmlEmballagePalette->setIsEditable($this->getIsEditable());
             $htmlEmballagePalette->setRightToAdd(TRUE);
             $htmlEmballagePalette->setLien(FtaConditionnementModel::getAddLinkBeforeConditionnement($paramIdFta, $paramChapitre, AnnexeEmballageGroupeTypeModel::EMBALLAGE_PALETTE, $paramSyntheseAction, $paramIdFtaEtat, $paramAbreviationEtat, $paramIdFtaRole));
             $return .= $htmlEmballagePalette->getHtmlResult();
         }
+
+        /**
+         * Initialisation du reésultat des règles de validation
+         */
+        $this->setDataValidationSuccessful($htmlEmballagePalette->isDataValidationSuccessful());
+
         return $return;
     }
 
@@ -1165,6 +1414,12 @@ class FtaView {
             $htmlEtiquetteComposant->setLien(FtaComposantModel::getAddLinkComposition($paramIdFta, $paramChapitre, $paramSyntheseAction, $paramIdFtaEtat, $paramAbreviationEtat, $paramIdFtaRole, $proprietaire));
             $return .= $htmlEtiquetteComposant->getHtmlResult();
         }
+
+        /**
+         * Initialisation du reésultat des règles de validation
+         */
+        $this->setDataValidationSuccessful($htmlEtiquetteComposant->isDataValidationSuccessful());
+
         return $return;
     }
 
@@ -1211,6 +1466,12 @@ class FtaView {
             $htmlEtiquetteComposant->setLien(FtaComposantModel::getAddLinkComposant($paramIdFta, $paramChapitre, $paramSyntheseAction, $paramIdFtaEtat, $paramAbreviationEtat, $paramIdFtaRole, $proprietaire));
             $return .= $htmlEtiquetteComposant->getHtmlResult();
         }
+
+        /**
+         * Initialisation du reésultat des règles de validation
+         */
+        $this->setDataValidationSuccessful($htmlEtiquetteComposant->isDataValidationSuccessful());
+
         return $return;
     }
 

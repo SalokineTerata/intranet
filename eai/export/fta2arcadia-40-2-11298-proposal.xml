@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Cas d'une création de données privée sur un article déjà existant dans Arcadia
+-->
+
+<Transaction id="1" version="1" type="proposal">
+    <Parameters>
+        <IdFirm>40</IdFirm><!-- Agis -->   
+        <IdArcadia>69032</IdArcadia><!-- Code article dans Arcadia -->
+        <IdFta>11298</IdFta><!-- N° de la FTA -->
+    </Parameters>
+    <Tables>
+        <ARTICLE_REF>
+            <DataToImport>
+                <Recordset id="1" action="update">
+                    
+                    <!-- Entête -->
+                    <NO_ART key="TRUE">69032</NO_ART>
+                    <LIB_CCIAL><![CDATA[NEM 6PORC 4PLT 2CREV MDLIDL 3720G]]></LIB_CCIAL>
+                    <COD_MARQUE>256</COD_MARQUE><!-- LIDL -->
+                    <LIB_PRODUCTION><![CDATA[NEM 6PORC 4PLT 2CREV MDLIDL 1X3720G]]></LIB_PRODUCTION>
+                
+                    <!-- Info générales -->
+                    <UTILISABLE_SITE>1</UTILISABLE_SITE><!-- Oui -->
+
+                    <!-- Class./Ident. -->
+                    <COD_GENCOD_ADM>3248830690320</COD_GENCOD_ADM>
+                    <CNUF>324883</CNUF><!-- Marie -->
+                    <COD_FAMVTE>181</COD_FAMVTE><!-- Nem -->
+                    <COD_SOUSFAM>346</COD_SOUSFAM><!-- GRAND NEM>40G -->
+                    <COD_GENERIQUE_FM>69032</COD_GENERIQUE_FM>
+                    <COD_SOCIETE_RESP_PV>59</COD_SOCIETE_RESP_PV><!-- Marie -->
+                
+                    <!-- Qualite -->
+                    <DLC_CCIAL>20</DLC_CCIAL>
+                    <DUREE_VIE>30</DUREE_VIE>
+                    <DTS>10</DTS>
+                
+                    <!-- Info Prod 1 -->
+                    <POIDS_MOY_CALCULE>3720</POIDS_MOY_CALCULE>
+                    <COD_POIDS_MINI_BARQ>3720</COD_POIDS_MINI_BARQ>
+                    <POIDS_MAX_BARQ>3720</POIDS_MAX_BARQ>
+                    <POIDS_CST_UVC>3720</POIDS_CST_UVC>
+                
+                    <!-- Info Prod 2 -->
+                    <FRAIS_CONGELE>1</FRAIS_CONGELE><!-- FRAIS : [0oC,4oC] -->
+                    <SITE_PROD_EE>215</SITE_PROD_EE><!-- Agis Herbignac -->
+                    <ID_UC>1</ID_UC>
+                
+                    <!-- Pds Mini/Maxi -->
+                    <POIDS_MINI>3720</POIDS_MINI>
+                    <POIDS_MAXI>3720</POIDS_MAXI>
+                
+                    <!-- Info Fact -->
+                    <UNITE_FACT>0</UNITE_FACT><!-- Pièce -->
+                    <UNITE_FACT_PRIVE>0</UNITE_FACT_PRIVE><!-- Pièce -->
+                
+                    <!-- Export/Compta -->
+                    <COD_NDP>19059090</COD_NDP>
+                
+                    <!-- OPTIVENTES -->
+                    <COD_CIRCUIT>12</COD_CIRCUIT><!-- Hard discount -->
+                                
+                    <!-- Fourniture -->
+                    <SOUMIS_ECO_EMBALLAGE>1</SOUMIS_ECO_EMBALLAGE><!-- Oui -->
+                    <SITE_REF_ECO_EMB>215</SITE_REF_ECO_EMB><!-- Agis Herbignac -->
+                
+                    <!-- Regate -->
+                    <LIBELLE_TARIF><![CDATA[NEMS PORC X 6 + NEMS POULET X 4 + NEMS CREV-CRABE X 2]]></LIBELLE_TARIF>
+                    <COD_FAM_BUDGET>503</COD_FAM_BUDGET><!-- ASIATIQUE HD -->
+                    <COD_GAM_FAM_BUDGET>3050</COD_GAM_FAM_BUDGET><!-- HD SPE EXO -->
+                    <COD_GAM_COOP>500</COD_GAM_COOP><!-- Hard Discount -->
+                    <COD_FESTIF>0</COD_FESTIF><!-- NON FESTIF -->
+                    <COD_FAM_DECL_CA_CLIENT>215</COD_FAM_DECL_CA_CLIENT><!-- Agis Herbignac -->
+                </Recordset>
+
+            </DataToImport>
+        </ARTICLE_REF>       
+    </Tables>    
+</Transaction>

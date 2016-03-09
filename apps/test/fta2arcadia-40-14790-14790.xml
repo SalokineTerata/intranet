@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Transaction id="14790" version="1" type="result">
+	<Parameters>
+		<IdArcadia>36096</IdArcadia><!-- Code article dans Arcadia -->
+		<IdFta>14790</IdFta><!-- N° de la FTA -->
+	</Parameters>
+</Transaction>

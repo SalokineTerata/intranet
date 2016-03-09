@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Transaction id="52" version="1.1" type="proposal">
+    <Parameters>
+        <IdFirm>40</IdFirm><!-- Agis -->
+        <IdArcadia>0</IdArcadia><!-- Code article dans Arcadia -->
+        <IdFta>14802</IdFta><!-- N° de la FTA -->
+    </Parameters>
+    <Tables>
+        <ARTICLE_REF>
+            <DataToImport>
+                <Recordset id="1" action="create">
+
+                    <!-- Entête -->
+                    <NO_ART key="TRUE">0</NO_ART>
+                    <LIB_CCIAL><![CDATA[HACHIS PARMENTIER TR TR 2X1.2KG]]></LIB_CCIAL><!-- DIN de la FTA -->
+                    <LIB_PRODUCTION><![CDATA[HACHIS PARMENTIER TR TR 2X1.2KG]]></LIB_PRODUCTION><!-- DIN de la FTA -->
+
+                    <!-- Info générales -->
+                    <UTILISABLE_SITE>1</UTILISABLE_SITE><!-- Oui -->
+
+                    <!-- Class./Ident. -->
+                    <COD_GENCOD_ADM>0</COD_GENCOD_ADM>
+                    <CNUF>336676</CNUF>
+                    <COD_FAMVTE>485</COD_FAMVTE>
+                    <IS_EXPORT>0</IS_EXPORT>
+                    <IS_HALLAL>0</IS_HALLAL><!-- Non --> 
+                    <COD_SOUSFAM>171</COD_SOUSFAM>
+                    <COD_GENERIQUE_FM></COD_GENERIQUE_FM><!-- Non --> 
+                    <COD_SOCIETE_RESP_PV>40</COD_SOCIETE_RESP_PV><!-- Agis --> 
+
+                    <!-- Qualite -->
+                    <DLC_CCIAL>20</DLC_CCIAL>
+                    <DUREE_VIE>50</DUREE_VIE>
+                    <DTS>30</DTS>
+                    <PROLOGATION_DLC>0</PROLOGATION_DLC><!-- Non --> 
+
+                    <!-- Info Prod 1 -->
+                    <POIDS_MOY_CALCULE>1200</POIDS_MOY_CALCULE>
+                    <COD_POIDS_MINI_BARQ>1200</COD_POIDS_MINI_BARQ>
+                    <POIDS_MAXI_BARQ>1200</POIDS_MAXI_BARQ>
+                    <COD_POID_CST_UVC>1</COD_POID_CST_UVC>
+                    <POIDS_CST_UVC>1200</POIDS_CST_UVC>
+
+                    <!-- Info Prod 2 -->
+                    <FRAIS_CONGELE>1</FRAIS_CONGELE>
+                    <COD_TYP_CONDIT_PUB>0</COD_TYP_CONDIT_PUB>
+                    <SITE_PROD_EE>43</SITE_PROD_EE><!-- Avignon -->
+                    <UC>1</UC>
+
+                    <!-- Pds Mini/Maxi -->
+                    <POIDS_MINI>1200</POIDS_MINI>
+                    <POIDS_MAXI>1200</POIDS_MAXI>
+
+                    <!-- Info Fact -->
+                    <UNITE_FACT>1</UNITE_FACT>
+                    <UNITE_FACT_PRIVE>1</UNITE_FACT_PRIVE>
+                    <COD_NDP></COD_NDP>
+
+                    <!-- OPTIVENTES -->
+                    <COD_CIRCUIT>11</COD_CIRCUIT>
+
+                    <!-- Fourniture -->
+                    <SOUMIS_ECO_EMBALLAGE>1</SOUMIS_ECO_EMBALLAGE>
+                    <SITE_REF_ECO_EMB>43</SITE_REF_ECO_EMB>
+
+                    <!-- Regate -->
+                    <COD_FAM_BUDGET>200</COD_FAM_BUDGET>
+                    <COD_GAM_FAM_BUDGET>1011</COD_GAM_FAM_BUDGET>
+                    <COD_GAM_COOP>119</COD_GAM_COOP>
+                    <COD_FESTIF>0</COD_FESTIF>
+                    <COD_FAM_DECL_CA_CLIENT>43</COD_FAM_DECL_CA_CLIENT>
+
+                </Recordset>
+            </DataToImport>
+        </ARTICLE_REF>
+    </Tables>
+
+</Transaction>
+

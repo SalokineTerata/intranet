@@ -71,12 +71,16 @@ class HtmlListSelect extends AbstractHtmlList {
     , $paramValue
     , $paramIsWarningUpdate
     , $paramArrayListContent
+    , $paramIsWarningMessage = NULL
+    , $paramWarningMessage = NULL
     ) {
         $id = $paramName;
         parent::initAbstractHtmlGlobalElement(
                 $id
                 , $paramLabel
                 , $paramIsWarningUpdate
+                , $paramIsWarningMessage
+                , $paramWarningMessage
         );
 
         $this->getAttributes()->getName()->setValue($paramName);

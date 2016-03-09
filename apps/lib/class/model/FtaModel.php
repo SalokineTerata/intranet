@@ -39,6 +39,7 @@ class FtaModel extends AbstractModel {
     const FIELDNAME_DATE_CREATION = "date_creation";
     const FIELDNAME_DATE_DEMANDEUR = "date_demandeur_fta";
     const FIELDNAME_DATE_DERNIERE_MAJ_FTA = "date_derniere_maj_fta";
+    const FIELDNAME_DATE_DE_VALIDATION_FTA = "date_de_validation_fta";
     const FIELDNAME_DATE_ECHEANCE_FTA = "date_echeance_fta";
     const FIELDNAME_DATE_PREVISONNELLE_TRANSFERT_INDUSTRIEL = "date_transfert_industriel";
     const FIELDNAME_DESCRIPTION_DU_PRODUIT = "OLD_synoptique_valide_fta";
@@ -58,6 +59,14 @@ class FtaModel extends AbstractModel {
     const FIELDNAME_ETIQUETTE_CODESOFT = "id_etiquette_codesoft_arti2";
     const FIELDNAME_ETUDE_PRIX_FTA = "etude_prix_fta";
     const FIELDNAME_FREQUENCE_HEBDOMADAIRE_ESTIMEE_COMMANDE = "frequence_hebdomadaire_estime_commande";
+    const FIELDNAME_ID_ARCADIA_CATEGEORIE_PRODUIT_OPTIVENTES = "id_arcadia_categeorie_produit_optiventes";
+    const FIELDNAME_ID_ARCADIA_FAMILLE_BUDGET = "id_arcadia_famille_budget";
+    const FIELDNAME_ID_ARCADIA_FAMILLE_VENTE = "id_arcadia_famille_vente";
+    const FIELDNAME_ID_ARCADIA_MARQUE = "id_arcadia_marque";
+    const FIELDNAME_ID_ARCADIA_GAMME_COOP = "id_arcadia_gamme_coop";
+    const FIELDNAME_ID_ARCADIA_GAMME_FAMILLE_BUDGET = "id_arcadia_gamme_famille_budget";
+    const FIELDNAME_ID_ARCADIA_SOUS_FAMILLE = "id_arcadia_sous_famille";
+    const FIELDNAME_ID_CLASSIFICATION_RACCOURCIS = "id_classification_raccourcis";
     const FIELDNAME_ID_FTA_CLASSIFICATION2 = "id_fta_classification2";
     const FIELDNAME_ID_FTA_ETAT = "id_fta_etat";
     const FIELDNAME_LIBELLE = "LIBELLE";
@@ -69,7 +78,7 @@ class FtaModel extends AbstractModel {
     const FIELDNAME_LISTE_ID_FTA_ROLE = "liste_id_fta_role";
     const FIELDNAME_LOGO_ECO_EMBALLAGE = "image_eco_emballage";
     const FIELDNAME_NOM_CLIENT_DEMANDEUR = "nom_client_demandeur";
-    const FIELDNAME_NOM_ABREGE = "OLD_nom_abrege_fta";
+    const FIELDNAME_NOM_ABREGE = "nom_abrege_fta";
     const FIELDNAME_NOM_DEMANDEUR = "nom_demandeur_fta";
     const FIELDNAME_NOMBRE_PORTION_FTA = "nombre_portion_fta";
     const FIELDNAME_NOMBRE_UVC_PAR_CARTON = "NB_UNIT_ELEM";
@@ -143,6 +152,42 @@ class FtaModel extends AbstractModel {
     private $modelSiteExpedition;
 
     /**
+     * Site d'expedition de la FTA
+     * @var GeoArcadiaModel
+     */
+    private $modelGeoArcadiaExpe;
+
+    /**
+     * Site d'expedition de la FTA
+     * @var GeoArcadiaModel
+     */
+    private $modelGeoArcadiaProd;
+
+    /**
+     * Classification de la FTA
+     * @var ClassificationFta2
+     */
+    private $modelClassificationFta2;
+
+    /**
+     * Catégorie Produit Optiventes
+     * @var ArcadiaCategorieProduitOptiventesModel
+     */
+    private $modelArcadiaCategorieProduitOptiventes;
+
+    /**
+     *
+     * @var AnnexeUniteFacturationModel 
+     */
+    private $modelAnnexeUniteFacturation;
+
+    /**
+     *
+     * @var AnnexeEnvironnementConservationGroupeModel 
+     */
+    private $modelAnnexeEnvironnementConservationGroupe;
+
+    /**
      * Site de production de la FTA
      * @var GeoModel
      */
@@ -152,6 +197,7 @@ class FtaModel extends AbstractModel {
     private $donneeEmballageDuColis;
     private $donneeEmballagePallette;
     private $messageErreurDataValidation;
+    private $dataValidationSuccessful;
 
     public function __construct($paramId = NULL, $paramIsCreateRecordsetInDatabaseIfKeyDoesntExist = AbstractModel::DEFAULT_IS_CREATE_RECORDSET_IN_DATABASE_IF_KEY_DOESNT_EXIST) {
         parent::__construct($paramId, $paramIsCreateRecordsetInDatabaseIfKeyDoesntExist);
@@ -178,6 +224,99 @@ class FtaModel extends AbstractModel {
                 new GeoModel($this->getDataField(self::FIELDNAME_SITE_PRODUCTION)->getFieldValue()
                 , DatabaseRecord::VALUE_DONT_CREATE_RECORD_IN_DATABASE_IF_KEY_DOESNT_EXIST)
         );
+        $this->setModelAnnexeUniteFacturation(
+                new AnnexeUniteFacturationModel($this->getDataField(self::FIELDNAME_UNITE_FACTURATION)->getFieldValue()
+                , DatabaseRecord::VALUE_DONT_CREATE_RECORD_IN_DATABASE_IF_KEY_DOESNT_EXIST)
+        );
+        $this->setModelArcadiaCategorieProduitOptiventes(
+                new ArcadiaCategorieProduitOptiventesModel($this->getDataField(self::FIELDNAME_ID_ARCADIA_CATEGEORIE_PRODUIT_OPTIVENTES)->getFieldValue()
+                , DatabaseRecord::VALUE_DONT_CREATE_RECORD_IN_DATABASE_IF_KEY_DOESNT_EXIST)
+        );
+        $this->setModelAnnexeEnvironnementConservationGroupe(
+                new AnnexeEnvironnementConservationGroupeModel($this->getDataField(self::FIELDNAME_ENVIRONNEMENT_CONSERVATION)->getFieldValue()
+                , DatabaseRecord::VALUE_DONT_CREATE_RECORD_IN_DATABASE_IF_KEY_DOESNT_EXIST)
+        );
+        $this->setModelGeoArcadiaExpe(
+                new GeoArcadiaModel($this->getDataField(self::FIELDNAME_SITE_EXPEDITION_FTA)->getFieldValue()
+                , DatabaseRecord::VALUE_DONT_CREATE_RECORD_IN_DATABASE_IF_KEY_DOESNT_EXIST)
+        );
+        $this->setModelGeoArcadiaProd(
+                new GeoArcadiaModel($this->getDataField(self::FIELDNAME_SITE_PRODUCTION)->getFieldValue()
+                , DatabaseRecord::VALUE_DONT_CREATE_RECORD_IN_DATABASE_IF_KEY_DOESNT_EXIST)
+        );
+        $this->setModelClassificationFta2(
+                new ClassificationFta2Model($this->getDataField(self::FIELDNAME_ID_FTA_CLASSIFICATION2)->getFieldValue()
+                , DatabaseRecord::VALUE_DONT_CREATE_RECORD_IN_DATABASE_IF_KEY_DOESNT_EXIST)
+        );
+    }
+
+    /**
+     * On récupère l'id carton arcadia associé à un emballage du colis 
+     * @return type
+     */
+    function getIdArcadiaTypeCarton() {
+        $idArcadiaTypeCarton = "";
+        $idFta = $this->getKeyValue();
+
+        $arrayIdAnnexeEmballageGroupeDuColis = AnnexeEmballageGroupeModel::getArrayIdAnnexeEmballageGroupe(AnnexeEmballageGroupeTypeModel::EMBALLAGE_DU_COLIS);
+        $arrayIdAnnexeEmballageDuColis = AnnexeEmballageModel::getArrayIdAnnexeEmballage($arrayIdAnnexeEmballageGroupeDuColis);
+        $arrayIdFtaConditionnemntDuColis = FtaConditionnementModel::getIdFtaConditionnementByArrayIdAnnexeEmballageAndIdFtaAndIdEmballageGroupeType($arrayIdAnnexeEmballageDuColis, $idFta, AnnexeEmballageGroupeTypeModel::EMBALLAGE_DU_COLIS);
+        if ($arrayIdFtaConditionnemntDuColis) {
+            foreach ($arrayIdFtaConditionnemntDuColis as $key => $paramId) {
+                $ftaConditionnmentModel = new FtaConditionnementModel($paramId);
+                $idArcadiaTypeCarton = $ftaConditionnmentModel->getModelAnnexeEmballage()->getDataField(AnnexeEmballageModel::FIELDNAME_ID_ARCADIA_TYPE_CARTON)->getFieldValue();
+                $ftaConditionnmentModel->getDataField(FtaConditionnementModel::FIELDNAME_ID_ANNEXE_EMBALLAGE)->isFieldDiff();
+            }
+        }
+        return $idArcadiaTypeCarton;
+    }
+
+    /**
+     * On vérifie si l'emballage du colis a été modifié
+     * @return bolean
+     */
+    function checkEmballageDuColisIsDiff() {
+        $checkdiff = "";
+        $idFta = $this->getKeyValue();
+
+        $arrayIdAnnexeEmballageGroupeDuColis = AnnexeEmballageGroupeModel::getArrayIdAnnexeEmballageGroupe(AnnexeEmballageGroupeTypeModel::EMBALLAGE_DU_COLIS);
+        $arrayIdAnnexeEmballageDuColis = AnnexeEmballageModel::getArrayIdAnnexeEmballage($arrayIdAnnexeEmballageGroupeDuColis);
+        $arrayIdFtaConditionnemntDuColis = FtaConditionnementModel::getIdFtaConditionnementByArrayIdAnnexeEmballageAndIdFtaAndIdEmballageGroupeType($arrayIdAnnexeEmballageDuColis, $idFta, AnnexeEmballageGroupeTypeModel::EMBALLAGE_DU_COLIS);
+        if ($arrayIdFtaConditionnemntDuColis) {
+            foreach ($arrayIdFtaConditionnemntDuColis as $key => $paramId) {
+                $ftaConditionnmentModel = new FtaConditionnementModel($paramId);
+                $checkdiff = $ftaConditionnmentModel->getDataField(FtaConditionnementModel::FIELDNAME_ID_ANNEXE_EMBALLAGE)->isFieldDiff();
+            }
+        }
+        return $checkdiff;
+    }
+
+     /**
+     * On vérifie si l'emballage du colis qui devrait être unique
+     * à une correspondance sur arcadia sinon alors on affiche une message d'avertissement 
+     * pour un cas non communiqué
+     */
+    function checkEmballageColisValide() {
+        $return = "";
+        $idFta = $this->getKeyValue();
+
+        $arrayIdAnnexeEmballageGroupeDuColis = AnnexeEmballageGroupeModel::getArrayIdAnnexeEmballageGroupe(AnnexeEmballageGroupeTypeModel::EMBALLAGE_DU_COLIS);
+        $arrayIdAnnexeEmballageDuColis = AnnexeEmballageModel::getArrayIdAnnexeEmballage($arrayIdAnnexeEmballageGroupeDuColis);
+        $arrayIdFtaConditionnemntDuColis = FtaConditionnementModel::getIdFtaConditionnementByArrayIdAnnexeEmballageAndIdFtaAndIdEmballageGroupeType($arrayIdAnnexeEmballageDuColis, $idFta, AnnexeEmballageGroupeTypeModel::EMBALLAGE_DU_COLIS);
+        if ($arrayIdFtaConditionnemntDuColis) {
+            foreach ($arrayIdFtaConditionnemntDuColis as $key => $paramId) {
+                $ftaConditionnmentModel = new FtaConditionnementModel($paramId);
+                $idCartonArcadia = $ftaConditionnmentModel->getModelAnnexeEmballage()->getDataField(AnnexeEmballageModel::FIELDNAME_ID_ARCADIA_TYPE_CARTON)->getFieldValue();
+                if ($idCartonArcadia == ArcadiaTypeCartonModel::ID_CARTON_NON_COMUNIQUE) {
+                    $return = "<tr class=contenu><td bgcolor=#FFAA55 align=\"center\" valign=\"middle\">";
+                    $return.=UserInterfaceMessage::FR_WARNING_TITLE;
+                    $return.="</td><td bgcolor=#FFAA55 align=\"center\" valign=\"middle\">"
+                            . "<h4>" . UserInterfaceMessage::FR_WARNING_EMBALLAGE_COLIS_ARCADIA . "</h4></td></tr>";
+                }
+            }
+        }
+
+        return $return;
     }
 
     /**
@@ -376,6 +515,22 @@ class FtaModel extends AbstractModel {
         
     }
 
+    public function isDataValidationSuccessful() {
+        return $this->dataValidationSuccessful;
+    }
+
+    function setDataValidationSuccessful($paramDataValidationSuccessful) {
+        $this->dataValidationSuccessful = $paramDataValidationSuccessful;
+    }
+
+    function setDataValidationSuccessfulToTrue() {
+        $this->setDataValidationSuccessful("0");
+    }
+
+    function setDataValidationSuccessfulToFalse() {
+        $this->setDataValidationSuccessful("1");
+    }
+
     /**
      * 
      * @return GeoModel
@@ -386,6 +541,42 @@ class FtaModel extends AbstractModel {
 
     function setModelSiteExpedition(GeoModel $modelSiteExpedition) {
         $this->modelSiteExpedition = $modelSiteExpedition;
+    }
+
+    /**
+     * Lien vers la table geoArcadia avec le site d'expedition
+     * @return GeoArcadiaModel
+     */
+    function getModelGeoArcadiaExpe() {
+        return $this->modelGeoArcadiaExpe;
+    }
+
+    function setModelGeoArcadiaExpe(GeoArcadiaModel $modelGeoArcadia) {
+        $this->modelGeoArcadiaExpe = $modelGeoArcadia;
+    }
+
+    /**
+     * Lien vers la table geoArcadia avec le site de production
+     * @return GeoArcadiaModel
+     */
+    function getModelGeoArcadiaProd() {
+        return $this->modelGeoArcadiaProd;
+    }
+
+    function setModelGeoArcadiaProd(GeoArcadiaModel $modelGeoArcadiaProd) {
+        $this->modelGeoArcadiaProd = $modelGeoArcadiaProd;
+    }
+
+    /**
+     * Lien vers la table geoArcadia
+     * @return ClassificationFta2Model
+     */
+    function getModelClassificationFta2() {
+        return $this->modelClassificationFta2;
+    }
+
+    function setModelClassificationFta2(ClassificationFta2Model $modelClassificationFta2) {
+        $this->modelClassificationFta2 = $modelClassificationFta2;
     }
 
     /**
@@ -444,6 +635,14 @@ class FtaModel extends AbstractModel {
         $this->modelFtaEtat = $modelFtaEtat;
     }
 
+    function getModelAnnexeUniteFacturation() {
+        return $this->modelAnnexeUniteFacturation;
+    }
+
+    function setModelAnnexeUniteFacturation(AnnexeUniteFacturationModel $modelAnnexeUniteFacturation) {
+        $this->modelAnnexeUniteFacturation = $modelAnnexeUniteFacturation;
+    }
+
     function getModelFtaWorkflow() {
         return $this->modelFtaWorkflow;
     }
@@ -482,6 +681,22 @@ class FtaModel extends AbstractModel {
 
     function setDonneeEmballagePallette($donneeEmballagePallette) {
         $this->donneeEmballagePallette = $donneeEmballagePallette;
+    }
+
+    function getModelArcadiaCategorieProduitOptiventes() {
+        return $this->modelArcadiaCategorieProduitOptiventes;
+    }
+
+    function setModelArcadiaCategorieProduitOptiventes(ArcadiaCategorieProduitOptiventesModel $modelArcadiaCategorieProduitOptiventes) {
+        $this->modelArcadiaCategorieProduitOptiventes = $modelArcadiaCategorieProduitOptiventes;
+    }
+
+    function getModelAnnexeEnvironnementConservationGroupe() {
+        return $this->modelAnnexeEnvironnementConservationGroupe;
+    }
+
+    function setModelAnnexeEnvironnementConservationGroupe(AnnexeEnvironnementConservationGroupeModel $modelAnnexeEnvironnementConservationGroupe) {
+        $this->modelAnnexeEnvironnementConservationGroupe = $modelAnnexeEnvironnementConservationGroupe;
     }
 
     /**
@@ -1493,7 +1708,7 @@ class FtaModel extends AbstractModel {
  code_douane_fta, OLD_code_douane_libelle_fta, poids_emballages_uvc_fta, poids_brut_uvc_fta,
  poids_net_uvc_fta, suffixe_agrologic_fta, OLD_synoptique_valide_fta, origine_transformation_fta,
  remarque_fta, OLD_presentation_fta, apres_ouverture_fta, conseil_rechauffage_valide_fta,
- reference_externe_fta, OLD_duree_vie_technique_fta, designation_commerciale_fta, OLD_nom_abrege_fta,
+ reference_externe_fta, OLD_duree_vie_technique_fta, designation_commerciale_fta, nom_abrege_fta,
  site_expedition_fta, conseil_rechauffage_experimentale_fta, OLD_synoptique_experimental_fta, OLD_unite_affichage_fta,
  OLD_signature_validation_fta, OLD_old_gamdesc, OLD_old_segdesc, OLD_old_condition,
  OLD_old_conservation, id_article_agrologic, OLD_id_annexe_environnement_conservation, origine_matiere_fta,
@@ -1518,7 +1733,10 @@ class FtaModel extends AbstractModel {
  K_etat, EAN_UVC, EAN_COLIS, EAN_PALETTE,
  OLD_nouvel_article, OLD_k_gestion_lot, activation_codesoft_arti2, id_etiquette_codesoft_arti2,
  atmosphere_protectrice, image_eco_emballage, libelle_code_article_client, id_service_consommateur,
- nom_societe, id_fta_classification2,pourcentage_avancement, liste_id_fta_role,code_article_ldc_mere)"
+ nom_societe, id_fta_classification2,pourcentage_avancement, liste_id_fta_role,code_article_ldc_mere,
+ id_arcadia_categeorie_produit_optiventes,id_arcadia_gamme_famille_budget,id_classification_raccourcis,
+  id_arcadia_famille_budget,id_arcadia_gamme_coop,id_arcadia_famille_vente,id_arcadia_sous_famille,id_arcadia_marque,
+  date_de_validation_fta)"
                         . " SELECT id_access_arti2, OLD_numft, id_fta_workflow,
  commentaire, OLD_id_fta_palettisation, id_dossier_fta, id_version_dossier_fta,
  OLD_champ_maj_fta, id_fta_etat, createur_fta, date_derniere_maj_fta,
@@ -1526,7 +1744,7 @@ class FtaModel extends AbstractModel {
  code_douane_fta, OLD_code_douane_libelle_fta, poids_emballages_uvc_fta, poids_brut_uvc_fta,
  poids_net_uvc_fta, suffixe_agrologic_fta, OLD_synoptique_valide_fta, origine_transformation_fta,
  remarque_fta, OLD_presentation_fta, apres_ouverture_fta, conseil_rechauffage_valide_fta,
- reference_externe_fta, OLD_duree_vie_technique_fta, designation_commerciale_fta, OLD_nom_abrege_fta,
+ reference_externe_fta, OLD_duree_vie_technique_fta, designation_commerciale_fta, nom_abrege_fta,
  site_expedition_fta, conseil_rechauffage_experimentale_fta, OLD_synoptique_experimental_fta, OLD_unite_affichage_fta,
  OLD_signature_validation_fta, OLD_old_gamdesc, OLD_old_segdesc, OLD_old_condition,
  OLD_old_conservation, id_article_agrologic, OLD_id_annexe_environnement_conservation, origine_matiere_fta,
@@ -1551,7 +1769,10 @@ class FtaModel extends AbstractModel {
  K_etat, EAN_UVC, EAN_COLIS, EAN_PALETTE,
  OLD_nouvel_article, OLD_k_gestion_lot, activation_codesoft_arti2, id_etiquette_codesoft_arti2,
  atmosphere_protectrice, image_eco_emballage, libelle_code_article_client, id_service_consommateur,
- nom_societe, id_fta_classification2 ,pourcentage_avancement, liste_id_fta_role,code_article_ldc_mere"
+ nom_societe, id_fta_classification2 ,pourcentage_avancement, liste_id_fta_role,code_article_ldc_mere,
+ id_arcadia_categeorie_produit_optiventes,id_arcadia_gamme_famille_budget,id_classification_raccourcis,
+ id_arcadia_famille_budget,id_arcadia_gamme_coop,id_arcadia_famille_vente,id_arcadia_sous_famille,id_arcadia_marque,
+ date_de_validation_fta"
                         . " FROM " . FtaModel::TABLENAME
                         . " WHERE " . FtaModel::KEYNAME . "=" . $paramIdFta
         );
@@ -1707,7 +1928,7 @@ class FtaModel extends AbstractModel {
          * Changement du format de date
          */
         if (!$this->getIsEditable()) {
-            $dateEcheValue = FtaController::changementDuFormatDeDate($dateEcheValue);
+            $dateEcheValue = FtaController::changementDuFormatDeDateFR($dateEcheValue);
         }
         /**
          * Mise en forme
@@ -1766,11 +1987,27 @@ class FtaModel extends AbstractModel {
     }
 
     /**
-     * On récupère le DataRecord à comparer 
+     * On initialise le DataRecord à comparer 
      * @param DatabaseRecord $paramRecordToCompare
      */
     function setDataToCompare($paramRecordToCompare) {
         parent::setDataToCompare($paramRecordToCompare);
+    }
+
+    /**
+     * On récupère le DataRecord à comparer 
+     * @param DatabaseRecord $paramRecordToCompare
+     */
+    function getDataToCompare() {
+        return parent::getDataToCompare();
+    }
+
+    function getActionProposal() {
+        $action = Fta2ArcadiaController::CREATE;
+        if ($this->getDataField(self::FIELDNAME_CODE_ARTICLE_LDC)->getFieldValue()) {
+            $action = Fta2ArcadiaController::UPDATE;
+        }
+        return $action;
     }
 
     /**
@@ -1806,9 +2043,12 @@ class FtaModel extends AbstractModel {
                             . " WHERE " . self::FIELDNAME_VERSION_DOSSIER_FTA . "=" . $idFtaVersion
                             . " AND " . self::FIELDNAME_DOSSIER_FTA . "=" . $idFtaDossier
             );
-
-            foreach ($arrayIdFta as $rowsIdFta) {
-                $idFtaToCompare = $rowsIdFta[self::KEYNAME];
+            if ($arrayIdFta) {
+                foreach ($arrayIdFta as $rowsIdFta) {
+                    $idFtaToCompare = $rowsIdFta[self::KEYNAME];
+                }
+            } else {
+                $idFtaToCompare = $currentIdFta;
             }
         } else {
             $idFtaToCompare = $currentIdFta;
@@ -1826,6 +2066,11 @@ class FtaModel extends AbstractModel {
      * @return string
      */
     function showListeDeroulanteSiteProdByAccesAndIdFta($paramIdUser, HtmlListSelect $paramHtmlObjet, $paramIsEditable) {
+
+        /**
+         * Datafield site de production
+         */
+        $dataFieldSiteDeProduction = $this->getDataField(FtaModel::FIELDNAME_SITE_PRODUCTION);
 
         /**
          * Modification
@@ -1877,6 +2122,16 @@ class FtaModel extends AbstractModel {
 
         $paramHtmlObjet->setArrayListContent($arraySite);
 
+        /**
+         * Verification des règles de validation
+         */
+        $dataFieldSiteDeProduction->checkValidationRules();
+
+        if ($dataFieldSiteDeProduction->getDataValidationSuccessful() == TRUE) {
+            $this->setDataValidationSuccessfulToTrue();
+        } else {
+            $this->setDataValidationSuccessfulToFalse();
+        }
         $HtmlTableName = FtaModel::TABLENAME
                 . '_'
                 . FtaModel::FIELDNAME_SITE_PRODUCTION
@@ -1888,13 +2143,38 @@ class FtaModel extends AbstractModel {
         $paramHtmlObjet->setIsEditable($paramIsEditable);
         $paramHtmlObjet->initAbstractHtmlSelect(
                 $HtmlTableName, $paramHtmlObjet->getLabel()
-                , $this->getDataField(FtaModel::FIELDNAME_SITE_PRODUCTION)->getFieldValue()
-                , $this->getDataField(FtaModel::FIELDNAME_SITE_PRODUCTION)->isFieldDiff()
-                , $paramHtmlObjet->getArrayListContent());
+                , $dataFieldSiteDeProduction->getFieldValue()
+                , $dataFieldSiteDeProduction->isFieldDiff()
+                , $paramHtmlObjet->getArrayListContent()
+                , $dataFieldSiteDeProduction->getDataValidationSuccessful()
+                , $dataFieldSiteDeProduction->getDataWarningMessage());
         $paramHtmlObjet->getEventsForm()->setOnChangeWithAjaxAutoSave(FtaModel::TABLENAME, FtaModel::KEYNAME, $this->getKeyValue(), FtaModel::FIELDNAME_SITE_PRODUCTION);
         $listeSiteProduction = $paramHtmlObjet->getHtmlResult();
 
         return $listeSiteProduction;
     }
 
+//    private function checkValidationRules($paramFieldName) {
+//        $this->getDataField($paramFieldName)->;
+
+    /*
+      Au niveau DataField:
+      $this->getRulesValidation()->checkAllRules();
+
+
+      checkRules
+      --> récupérer d'intranet_colum_info, les règles à tester
+     * --> boucle parcourant les règles
+     *      --> Pour chaque règle getWarningMessage()
+     *      --> Récupération du message propre à la règle et enregistrement
+     *          dans l'attribut warningMessageListe du DataField
+     * 
+     * 
+     * 
+     * 
+     * Au niveau du HtmlDataField
+     * --> Getteur de l'attribut warningMessageListe
+     * --> Si valeur existante alors affichage.
+     */
+//    }
 }

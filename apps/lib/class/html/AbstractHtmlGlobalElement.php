@@ -87,6 +87,18 @@ abstract class AbstractHtmlGlobalElement {
     private $isWarningUpdate;
 
     /**
+     * Doit-on informer qu'une règle de validation de la donnée n'est pas respecter ?
+     * @var boolean 
+     */
+    private $isWarningMessage;
+
+    /**
+     * Récupération du message 
+     * @var string 
+     */
+    private $warningMessage;
+
+    /**
      * Information complémentaire affichée après l'objet HTML
      * @var String
      */
@@ -151,10 +163,14 @@ abstract class AbstractHtmlGlobalElement {
     $paramId
     , $paramLabel
     , $paramIsWarningUpdate
+    , $paramIsWarningMessage = NULL
+    , $paramWarningMessage = NULL
     ) {
 
         $this->setLabel($paramLabel);
         $this->setIsWarningUpdate($paramIsWarningUpdate);
+        $this->setIsWarningMessage($paramIsWarningMessage);
+        $this->setWarningMessage($paramWarningMessage);
         $this->getAttributesGlobal()->getId()->setValue($paramId);
     }
 
@@ -217,7 +233,7 @@ abstract class AbstractHtmlGlobalElement {
     function setCheckTableForm($CheckTableForm) {
         $this->CheckTableForm = $CheckTableForm;
     }
-        
+
     /**
      * 
      * @return AttributesGlobal
@@ -298,6 +314,22 @@ abstract class AbstractHtmlGlobalElement {
         $this->isWarningUpdate = $paramIsWarningUpdate;
     }
 
+    function getIsWarningMessage() {
+        return $this->isWarningMessage;
+    }
+
+    function setIsWarningMessage($isWarningMessage) {
+        $this->isWarningMessage = $isWarningMessage;
+    }
+
+    function getWarningMessage() {
+        return $this->warningMessage;
+    }
+
+    function setWarningMessage($warningMessage) {
+        $this->warningMessage = $warningMessage;
+    }
+
     public function getAdditionnalTextInfo() {
         return $this->additionnalTextInfo;
     }
@@ -326,13 +358,14 @@ abstract class AbstractHtmlGlobalElement {
 
         //Définition des variables locales
         $image_modif = '';
+        $warning_message = '';
         $color_modif = '';
         $html_result = '';
         $label = NULL;
         $idRow = $this->getAttributesGlobal()->getIdRowToHtml();
         $style = $this->getStyleCSS()->getStyleAttribute();
 //        $style = $this->getAttributesGlobal()->getStyle()->getValue();
-              
+
         /**
          * Doit-on afficher le label ?
          */
@@ -344,6 +377,12 @@ abstract class AbstractHtmlGlobalElement {
         if ($this->getIsWarningUpdate()) {
             $image_modif = Html::DEFAULT_HTML_WARNING_UPDATE_IMAGE;
             $color_modif = Html::DEFAULT_HTML_WARNING_UPDATE_BGCOLOR;
+        }
+
+        //Traitement du warning message
+        if ($this->getIsWarningMessage() === FALSE) {
+            $warning_message = $this->getWarningMessage();
+            $color_modif = Html::DEFAULT_HTML_WARNING_MESSAGE_BGCOLOR;
         }
 
         //Rendu HTML - début encapsulation
@@ -386,11 +425,11 @@ abstract class AbstractHtmlGlobalElement {
         //Rendu HTML - fin encapsulation
         switch ($this->getHtmlRender()) {
             case self::HTML_RENDER_TO_FORM:
-                $html_result.= $image_modif . '</td></tr>';
+                $html_result.= $image_modif . $warning_message . '</td></tr>';
                 break;
 
             case self::HTML_RENDER_TO_TABLE:
-                $html_result.= $image_modif . '</td>';
+                $html_result.= $image_modif . $warning_message . '</td>';
                 break;
         }
 

@@ -39,6 +39,7 @@ flush();
   Initialisation des variables
  */
 $page_default = substr(strrchr($_SERVER['PHP_SELF'], '/'), '1', '-4');
+$page_query = $_SERVER['QUERY_STRING'];
 $page_action = $page_default . '_post.php';
 $page_pdf = $page_default . '_pdf.php';
 $action = 'valider';                       //Action proposée à la page _post.php
@@ -85,6 +86,7 @@ if ($idFta) {
     /**
      * Récupérations des paramètres
      */
+    $checkArcadiaData = Lib::getParameterFromRequest('checkArcadiaData');
     $id_fta_chapitre_encours = Lib::getParameterFromRequest('id_fta_chapitre_encours', '1');
     $synthese_action = Lib::isDefined('synthese_action');
     $comeback = Lib::isDefined('comeback');
@@ -117,7 +119,7 @@ if ($idFta) {
     }
 
 
-   
+
 //    $selection_proprietaire1 = Lib::getParameterFromRequest('selection_proprietaire1');
 //    $selection_proprietaire2 = Lib::getParameterFromRequest('selection_proprietaire2');
 //    $selection_marque = Lib::getParameterFromRequest('selection_marque');
@@ -127,7 +129,7 @@ if ($idFta) {
 //    $selection_reseau = Lib::getParameterFromRequest('selection_reseau');
 //    $selection_saisonnalite = Lib::getParameterFromRequest('selection_saisonnalite');
 //    $checkIdFtaClasssification = Lib::getParameterFromRequest('checkIdFtaClasssification');
- 
+
 
 
     /**
@@ -188,7 +190,7 @@ if ($idFta) {
 </SCRIPT>
 ';
 
-    Chapitre::initChapitre($idFta, $id_fta_chapitre, $synthese_action, $comeback, $idFtaEtat, $abreviationFtaEtat, $idFtaRole);
+    Chapitre::initChapitre($idFta, $id_fta_chapitre, $synthese_action, $comeback, $idFtaEtat, $abreviationFtaEtat, $idFtaRole,$checkArcadiaData);
 
     $bloc.= Chapitre::getHtmlChapitreAll();
 } else {
@@ -202,6 +204,8 @@ echo '
      ' . $navigue . '
      <form ' . $method . ' action=\'' . $page_action . '\' name=\'form_action\' method=\'post\'>
      <input type=hidden name=action value=' . $action . '>
+     <input type=hidden name=current_page value=' . $page_default . '.php >
+     <input type=hidden name=current_query value=' . $page_query . ' >
      <input type=hidden name=id_fta id=id_fta value=' . $idFta . '>
      <input type=hidden name=abreviation_fta_etat id=abreviation_fta_etat value=' . $abreviationFtaEtat . '>
      <input type=hidden name=id_fta_chapitre_encours id=id_fta_chapitre_encours value=' . $id_fta_chapitre_encours . '>

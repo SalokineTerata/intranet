@@ -34,6 +34,17 @@
     }
 
     /**
+     * Rechargement de la page courante avec une nouvelle valeur
+     * @returns {undefined}
+     */
+    function js_page_refresh() {
+        current_page = document.form_action.current_page.value;
+        current_query = document.form_action.current_query.value;
+        url = current_page + "?" + current_query;
+        parent.location.href = url;
+    }
+
+    /**s
      * AjaxAutosave
      * Gère les mises à jour de données AJAX en arrière plan.
      * Icone trouvés sur http://preloaders.net/en/search/circle
@@ -100,7 +111,7 @@
 
 
 
-    function handleAJAXReturn( ParamHttp, ParamCallbackFunction, ParamCallbackFunctionParameters)
+    function handleAJAXReturn(ParamHttp, ParamCallbackFunction, ParamCallbackFunctionParameters)
     {
 
         //Définition des variables

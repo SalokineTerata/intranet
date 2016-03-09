@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Transaction id="39" version="1.1" type="proposal">
+    <Parameters>
+        <IdFirm>40</IdFirm><!-- Agis -->
+        <IdArcadia>43152</IdArcadia><!-- Code article dans Arcadia -->
+        <IdFta>6852</IdFta><!-- N° de la FTA -->
+    </Parameters>
+	<Tables>
+		<ARTICLE_REF>
+			<DataToImport>
+                <Recordset id="1" action="update">
+                    <!-- Entête -->
+                    <NO_ART key="TRUE">43152</NO_ART>
+
+
+                    <!-- Class./Ident. -->
+                    <COD_GENCOD_ADM>3366760023635</COD_GENCOD_ADM>
+
+                    <!-- Qualite -->
+                    <DUREE_VIE>50</DUREE_VIE>
+                    <DTS>30</DTS>
+
+
+                    <!-- Info Prod 2 -->
+                    <SITE_PROD_EE>43</SITE_PROD_EE><!-- Avignon -->
+
+
+
+
+
+                    <!-- Fourniture -->
+                    <SITE_REF_ECO_EMB>43</SITE_REF_ECO_EMB>
+
+                    <!-- Regate -->
+                    <COD_FAM_DECL_CA_CLIENT>43</COD_FAM_DECL_CA_CLIENT>
+
+				</Recordset>
+			</DataToImport>
+		</ARTICLE_REF>
+	</Tables>
+
+</Transaction>
+

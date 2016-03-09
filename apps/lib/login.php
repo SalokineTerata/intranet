@@ -267,9 +267,9 @@ if ($login) {
                 //$q1 = DatabaseOperation::query('SELECT * FROM $mysql_table_authentification WHERE ((login = '$login') AND (pass = '$pass'))');
                 //Page par défaut après un login réussi
             } else {
-                $message = "La connection est un succès mais vous n'avez pas les droits d'accès sur l'intranet ou votre compte est bloqué ou encore désactiver.<br><br>
-                             Veuillez contacter l'administrateur du site.";
-                afficher_message("Connection à l'intranet", $message, $redirection);
+                $message = UserInterfaceMessage::FR_WARNING_CONNEXION;
+                $titre = UserInterfaceMessage::FR_WARNING_CONNEXION_TITLE;
+                afficher_message($titre, $message, $redirection);
             }
             header('Location: ' . $page);
         }

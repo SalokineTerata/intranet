@@ -45,12 +45,11 @@ switch ($output) {
         require_once '../inc/main.php';
         print_page_begin($disable_full_page, $menu_file);
         flush();
-
 }//Fin de la sélection du mode d'affichage de la page
 
 $id_fta_classification2 = Lib::getParameterFromRequest(ClassificationFta2Model::KEYNAME);
 $action = Lib::getParameterFromRequest('action');
-$isEditable =TRUE;
+$isEditable = TRUE;
 /* * ***********
   Début Code PHP
  * *********** */
@@ -77,6 +76,7 @@ $html_table = "table "              //Permet d'harmoniser les tableaux
 if ($id_fta_classification2) {
 
     $ClassificationFta2Model = new ClassificationFta2Model($id_fta_classification2);
+    $ClassificationFta2Model->setIsEditable($isEditable);
     $idProprietaireGroupe = $ClassificationFta2Model->getDataField(ClassificationFta2Model::FIELDNAME_ID_PROPRIETAIRE_GROUPE)->getFieldValue();
     $idProprietaireEnseigne = $ClassificationFta2Model->getDataField(ClassificationFta2Model::FIELDNAME_ID_PROPRIETAIRE_ENSEIGNE)->getFieldValue();
     $idMarque = $ClassificationFta2Model->getDataField(ClassificationFta2Model::FIELDNAME_ID_MARQUE)->getFieldValue();
@@ -85,14 +85,26 @@ if ($id_fta_classification2) {
     $idEnvironnement = $ClassificationFta2Model->getDataField(ClassificationFta2Model::FIELDNAME_ID_ENVIRONNEMENT)->getFieldValue();
     $idReseau = $ClassificationFta2Model->getDataField(ClassificationFta2Model::FIELDNAME_ID_RESEAU)->getFieldValue();
     $idSaisonalite = $ClassificationFta2Model->getDataField(ClassificationFta2Model::FIELDNAME_ID_SAISONNALITE)->getFieldValue();
+
+    $CategorieOptiventes = $ClassificationFta2Model->getHtmlDataField(ClassificationFta2Model::FIELDNAME_CATEGORIE_PRODUIT_OPTIVENTES);
+
+    $RaccourcisClassif = $ClassificationFta2Model->getHtmlClassificationRaccourcis($action);
+    
+    $GammeFamilleBudget = $ClassificationFta2Model->getHtmlArcadiaGammeFamilleBudget($action);
 }
 
 if ($action == 'modifier') {
     $titre = "Modification de la classification  identifiant n°" . $id_fta_classification2;
     $action = "modifier";
+
+    $HtmlDonnesArcadia = $CategorieOptiventes
+            . $RaccourcisClassif
+            . $GammeFamilleBudget;
 } else {
     $titre = "Ajout d'une classification";
     $action = "ajout";
+
+    $HtmlDonnesArcadia = "<b> Après l'ajout d'une classification vous serez redirigé vers une autre page, afin de sélectionner les éléments lier à arcadia</b>";
 }
 $bloc .= "<" . $html_table . "><tr class=titre>"
         . "<td>Proprietaire (Groupe)</td>"
@@ -104,31 +116,37 @@ $bloc .= "<" . $html_table . "><tr class=titre>"
         . "<td>" . HtmlResult::RESEAU . "</td>"
         . "<td>" . HtmlResult::SAISONALITE . "</td>"
         . "</tr>";
-$bloc.="<td>" . ClassificationFta2Model::getListeClassificationProprietaireGroupe($idProprietaireGroupe,$isEditable) . "</td>";
+$bloc.="<td>" . ClassificationFta2Model::getListeClassificationProprietaireGroupe($idProprietaireGroupe, $isEditable) . "</td>";
 
 
-$bloc.= "<td>" . ClassificationFta2Model::getClassificationListeSansDependance($idProprietaireEnseigne, 1, ClassificationFta2Model::FIELDNAME_ID_PROPRIETAIRE_ENSEIGNE,$isEditable
+$bloc.= "<td>" . ClassificationFta2Model::getClassificationListeSansDependance($idProprietaireEnseigne, 1, ClassificationFta2Model::FIELDNAME_ID_PROPRIETAIRE_ENSEIGNE, $isEditable
         ) . "</td>";
 
 $bloc.="<td>" . ClassificationFta2Model::getClassificationListeSansDependance($idMarque, 2
-                , ClassificationFta2Model::FIELDNAME_ID_MARQUE,$isEditable
+                , ClassificationFta2Model::FIELDNAME_ID_MARQUE, $isEditable
         ) . "</td>";
 $bloc.="<td>" . ClassificationFta2Model::getClassificationListeSansDependance($idActivite, 3
-                , ClassificationFta2Model::FIELDNAME_ID_ACTIVITE,$isEditable
+                , ClassificationFta2Model::FIELDNAME_ID_ACTIVITE, $isEditable
         ) . "</td>";
 $bloc.="<td>" . ClassificationFta2Model::getClassificationListeSansDependance($idRayon, 4
-                , ClassificationFta2Model::FIELDNAME_ID_RAYON,$isEditable
+                , ClassificationFta2Model::FIELDNAME_ID_RAYON, $isEditable
         ) . "</td>";
 $bloc.="<td>" . ClassificationFta2Model::getClassificationListeSansDependance($idEnvironnement, 51
-                , ClassificationFta2Model::FIELDNAME_ID_ENVIRONNEMENT,$isEditable
+                , ClassificationFta2Model::FIELDNAME_ID_ENVIRONNEMENT, $isEditable
         ) . "</td>";
 $bloc.="<td>" . ClassificationFta2Model::getClassificationListeSansDependance($idReseau, 5
-                , ClassificationFta2Model::FIELDNAME_ID_RESEAU,$isEditable
+                , ClassificationFta2Model::FIELDNAME_ID_RESEAU, $isEditable
         ) . "</td>";
 $bloc.="<td>" . ClassificationFta2Model::getClassificationListeSansDependance($idSaisonalite, 52
-                , ClassificationFta2Model::FIELDNAME_ID_SAISONNALITE,$isEditable
+                , ClassificationFta2Model::FIELDNAME_ID_SAISONNALITE, $isEditable
         ) . "</td>";
 
+
+//$RaccourcisClassif = new HtmlSubForm_RNN($paramArrayPrimaryContent, $paramSubFormPrimaryModelClassName, $paramPrimaryLabel, $secondaryTableNamesAndIdKeyValue);
+
+/*
+  Création des objets HTML (listes déroulante, cases à cocher ...etc.)
+ */
 
 /*
   Sélection du mode d'affichage
@@ -172,14 +190,6 @@ switch ($output) {
      * ********* */
 
 
-    /*
-      Création des objets HTML (listes déroulante, cases à cocher ...etc.)
-     */
-
-
-
-
-
     /*     * ************
       Début Code HTML
      * ************ */
@@ -201,13 +211,15 @@ switch ($output) {
 
                 " . $bloc . "            
 
-             </td></tr>
-             <tr><td>
+             </td></tr>  
+                " . $HtmlDonnesArcadia . "
+             <tr><td>            
                  <center>
                  <input type=submit value=Enregistrer>
                  </center>
 
-             </td></tr>
+             </td>   
+          
              </table>
 
              </form>

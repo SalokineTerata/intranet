@@ -24,6 +24,9 @@
  */
 class UserInterfaceMessage {
 
+    const FR_ARCADIA_SEND_DATA_MESSAGE = " Les données ont bien été envoyé vers Arcadia ";
+    const FR_CLASSIFICATION_ACTIVITE_MESSAGE = " Veuillez sélectionner une activité à associer ";
+    const FR_CLASSIFICATION_MARQUE_MESSAGE = " Veuillez sélectionner une marque à associer ";
     const FR_DATABASE_MESSAGE_CHANGEMENT_ESPACE_DE_TRAVAIL_1 = " Changement de l'espace travail ";
     const FR_DATABASE_MESSAGE_CHANGEMENT_ESPACE_DE_TRAVAIL_2 = " vers l'espace de travail ";
     const FR_DATABASE_MESSAGE_CHANGEMENT_ESPACE_DE_TRAVAIL_3 = " par ";
@@ -47,12 +50,14 @@ class UserInterfaceMessage {
                 <br>
 ";
     const FR_TRANSITION_FTA_TITLE = "Transiter l'Etat d'une Fiche Technique Article";
+    const FR_WARNING_TITLE = "AVERTISSEMENT";
     const FR_WARNING_ACCES_RIGHTS = "Vous n'avez pas les droits d'accès nécessaire.<br><br>";
     const FR_WARNING_ACCES_RIGHTS_TITLE = "Erreur d'accès";
     const FR_WARNING_CHAPITRES = " Veuillez selectionner un chapitre<br>";
     const FR_WARNING_CHAPITRES_TITLE = " Chapitres Fta<br>";
-    const FR_WARNING_CHAPITRES_DE_FTA = " Attention, vous êtes sur le point de dévalidé aussi les chapitres suivants:<br>";
-    const FR_WARNING_CONNECTION = " La connection est un succès mais vous n'avez pas les droits d'accès sur l'intranet ou votre compte est bloqué.<br><br>
+    const FR_WARNING_CHAPITRES_DE_FTA = " Attention, vous êtes sur le point de dévalider aussi les chapitres suivants:<br>";
+    const FR_WARNING_CONNEXION_TITLE = "Connexion à l'intranet";
+    const FR_WARNING_CONNEXION = " La connexion est un succès mais vous n'avez pas les droits d'accès sur l'intranet ou votre compte est bloqué ou encore désactivé.<br><br>
                              Veuillez contacter l'administrateur du site.";
     const FR_WARNING_DATA_CLASIFICATION = "Veuillez saisir une classification";
     const FR_WARNING_DATA_CLASIFICATION_TITLE = "Classification d'une Fiche Technique Article";
@@ -74,6 +79,7 @@ class UserInterfaceMessage {
     const FR_WARNING_DUPLICATION_DE_FTA = " Attention, vous êtes sur le point de dupliquer la Fiche Technique Article suivante:<br>";
     const FR_WARNING_ECHEANCE_DEPASSEE = "Certaines échéances sont dépassées !";
     const FR_WARNING_EMBALLAGE_COLIS = "Il ne doit y avoir qu'un seul emballage Colis";
+    const FR_WARNING_EMBALLAGE_COLIS_ARCADIA = "Il n'y a pas de correspondance sur Arcadia à cette emballage Colis";
     const FR_WARNING_EMBALLAGE_PALETTE = "Il ne doit y avoir qu'une seule Palette";
     const FR_WARNING_EMBALLAGE_SUPPRESION = "Vous ne pouvez pas supprimer cette Fiche Technique Emballage.<br><br>
                     En effet, elle est encore utilisée dans certaines Fiches Techniques Articles.<br><br>";
@@ -84,6 +90,14 @@ class UserInterfaceMessage {
     const FR_WARNING_PARAM_ID_FTA_NOT_EXISTANT = "Erreur la Fta n'existe pas.<br><br>";
     const FR_WARNING_PARAM_ID_FTA_TITLE = "Affichage d'une Fta";
     const FR_WARNING_FTA_ETAT_REMOVE = "Etes vous certain de vouloir retirer cette Fiche Technique ? Les autres fiches du dossier resteront indems.";
+
+    /**
+     * Toujours mettre un | devant les message de type Règle de validations
+     */
+    const FR_WARNING_VALIDATION_RULES_LESS35 = " | Cette donnée a dépassé trente-cinq caractères ";
+    const FR_WARNING_VALIDATION_RULES_LESS5 = " | Cette donnée a dépassé cinq caractères ";
+    const FR_WARNING_VALIDATION_RULES_LESS8 = " | Cette donnée a dépassé huit caractères ";
+    const FR_WARNING_VALIDATION_RULES_DATA_NOT_EMPTY = " | Cette donnée doit être saisi ";
     const FR_WARNING_WORKFLOW_INACTIF_1 = "L'espace de travail \"";
     const FR_WARNING_WORKFLOW_INACTIF_2 = "\" est inactif";
     const FR_WARNING_WORKFLOW_INACTIF_TITLE = "Espace de travail inactif.";

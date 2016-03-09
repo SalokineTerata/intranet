@@ -60,6 +60,19 @@ class DatabaseRecord extends SessionSaveAndRestoreAbstract {
     private $isCreateRecordInDatabaseIfKeyDoesntExist;
 
     /**
+     * Le dataField en cours respect-il ces règles de validation associées
+     * @var boolean
+     */
+    private $dataValidationSuccessful;
+
+    /**
+     * Le dataField en cours ne respect pas ces règles de validation associées
+     * alors on affiche un message sur l'interface
+     * @var boolean
+     */
+    private $dataWarningMessage;
+
+    /**
      * Par défaut, si la clef n'existe pas, doit-on créer l'enregistrement
      * en base de donnée ?
      */
@@ -183,6 +196,26 @@ class DatabaseRecord extends SessionSaveAndRestoreAbstract {
              * Exception
              */
         }
+    }
+
+    function getDataValidationSuccessful() {
+        return $this->dataValidationSuccessful;
+    }
+
+    function setDataValidationSuccessful($dataValidationSuccessful) {
+        $this->dataValidationSuccessful = $dataValidationSuccessful;
+    }
+
+    function getDataWarningMessage() {
+        return $this->dataWarningMessage;
+    }
+
+    function setDataWarningMessage($dataWarningMessage) {
+        $this->dataWarningMessage .= $dataWarningMessage;
+    }
+
+    function resetDataWarningMessage() {
+        $this->dataWarningMessage = NULL;
     }
 
     /**
@@ -607,6 +640,70 @@ class DatabaseRecord extends SessionSaveAndRestoreAbstract {
          * On signale si il y a une différence ou pas
          */
         return $isDiff;
+    }
+
+    /**
+     * Application des règles de validation d'un champ
+     * celui avec lequel comparer ?
+     * @param string $paramFieldValue Nom du champ
+     * @return boolean TRUE=différence, FALSE=Aucune différence.
+     */
+
+    /**
+     * 
+     * @param string $paramFieldValue
+     * @param string $paramTagsValidationRules
+     */
+    public function checkValidationRules($paramFieldValue, $paramTagsValidationRules) {
+        /**
+         * $isDataValidationSuccessful: Le champs respect-il toutes ces règles ?
+         */
+        $isDataValidationSuccessful = "0";
+        /**
+         * On supprime les ancien message afin d'éviter qui s'ajoute d'un champ à l'autre
+         */
+        $this->resetDataWarningMessage();
+        /**
+         * On récupère la liste de règle à vérifier en BDD
+         */
+        $arrayTagValidationRules = explode(',', $paramTagsValidationRules);
+
+        if ($arrayTagValidationRules) {
+            foreach ($arrayTagValidationRules as $key => $tagValidationRulesModel) {
+                if ($tagValidationRulesModel) {
+
+                    /**
+                     * Chargement de l'enregistrement
+                     */
+                    $rulesModel = new $tagValidationRulesModel($paramFieldValue);
+                    /**
+                     * On récupère le boolean indiquant si la règle à été respecter.
+                     */
+                    $isValideValue = $rulesModel->isValide();
+                    /**
+                     * Si la règle n'est pas respecter alors on instacie le message d'erreur
+                     */
+                    if (!$isValideValue) {
+                        $this->setDataWarningMessage($rulesModel->getWarningMessage());
+                        $isDataValidationSuccessful += "1";
+                    }
+                }
+            }
+        }
+        /**
+         * Si le champ respecte toutes ces règles alors sa validation est un succès.
+         */
+        if ($isDataValidationSuccessful == "0") {
+            $isDataValidationSuccessful = TRUE;
+        } else {
+            $isDataValidationSuccessful = FALSE;
+        }
+
+
+        /**
+         * Initilisation de l'information de success ou pas
+         */
+        $this->setDataValidationSuccessful($isDataValidationSuccessful);
     }
 
     public function isNeedUpdateRecordsetInDatabase($paramIsAutoSaving = FALSE) {

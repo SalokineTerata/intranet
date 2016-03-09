@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- Mise à jour de données publiques -->
+
+<Transaction id="36" version="1.1" type="proposal">
+    <Parameters>
+        <IdFirm>40</IdFirm><!-- Agis -->
+        <IdArcadia>43150</IdArcadia><!-- Code article dans Arcadia -->
+        <IdFta>14805</IdFta><!-- N° de la FTA -->
+    </Parameters>
+    <Tables>
+        <ARTICLE_REF>
+            <DataToImport>
+                <Recordset id="1" action="update">
+
+                    <!-- Entête -->
+                    <NO_ART key="TRUE"></NO_ART>                   
+                  
+                    <!-- Class./Ident. -->
+                    <COD_GENCOD_ADM>3366760023635</COD_GENCOD_ADM>
+                    <COD_FAMVTE>485</COD_FAMVTE>              
+                    <COD_SOUSFAM>25</COD_SOUSFAM>
+
+                    <!-- Info Prod 1 -->
+                    <COD_POID_CST_UVC>1</COD_POID_CST_UVC>
+
+
+                    <!-- Info Prod 2 -->
+                    <FRAIS_CONGELE>1</FRAIS_CONGELE>             
+
+                  
+
+                </Recordset>
+            </DataToImport>
+        </ARTICLE_REF>
+    </Tables>
+
+</Transaction>
+

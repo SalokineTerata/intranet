@@ -159,6 +159,11 @@ class DatabaseDescription {
     const ARRAY_NAME_DOC_CONDITION_SQL = "ConditionSQL";
 
     /**
+     * Dans le cas d'une vérification de la donnée saisi
+     */
+    const ARRAY_NAME_DOC_TAGS_VALIDATION_RULES = "TagsValidationRules";
+
+    /**
      * Nom de la variable contenant le nom du champ (défini par MySQL)
      */
     const ARRAY_NAME_SQL_FIELDNAME = "Field";
@@ -278,7 +283,7 @@ class DatabaseDescription {
             $tableDescription = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
                             'DESC ' . DatabaseOperation::convertNameToSqlClause($tableName)
             );
-           
+
             /**
              * Enregistrement des caractéristiques SQL de chaque champs
              * Parcours de chaque champs de la table en cours d'analyse.
@@ -327,6 +332,7 @@ class DatabaseDescription {
                         . ',fields_to_order'
                         . ',right_to_add'
                         . ',sql_condition_content_intranet_column_info'
+                        . ',tags_validation_rules_intranet_column_info'
                         . ' FROM `intranet_column_info` ');
         /**
          * Parcours du résultat de la recherche
@@ -355,6 +361,7 @@ class DatabaseDescription {
             $fieldsToOrder = $rowsDoc['fields_to_order'];
             $rightToAdd = $rowsDoc['right_to_add'];
             $conditionSql = $rowsDoc['sql_condition_content_intranet_column_info'];
+            $tagsValidationRules = $rowsDoc['tags_validation_rules_intranet_column_info'];
 
 
             /**
@@ -376,7 +383,8 @@ class DatabaseDescription {
                 self::ARRAY_NAME_DOC_FIELDS_TO_LOCK => $fieldsToLock,
                 self::ARRAY_NAME_DOC_FIELDS_TO_ORDER => $fieldsToOrder,
                 self::ARRAY_NAME_DOC_RIGHT_TO_ADD => $rightToAdd,
-                self::ARRAY_NAME_DOC_CONDITION_SQL => $conditionSql
+                self::ARRAY_NAME_DOC_CONDITION_SQL => $conditionSql,
+                self::ARRAY_NAME_DOC_TAGS_VALIDATION_RULES => $tagsValidationRules
             );
         }
     }
@@ -614,6 +622,17 @@ class DatabaseDescription {
     public static function getConditionSql($paramTableName, $paramFieldName) {
         return $_SESSION[get_class()][$paramTableName][self::ARRAY_NAME_FIELDS]
                 [$paramFieldName][self::ARRAY_NAME_DOC][self::ARRAY_NAME_DOC_CONDITION_SQL];
+    }
+
+    /**
+     * Retourne le ou les tage de cohérence de donnée saisi.
+     * @param string $paramTableName Nom de la table
+     * @param string $paramFieldName Nom du champs
+     * @return string Retourne une condition d'une reqête sql  pour son éxécution
+     */
+    public static function getTagsValidationRules($paramTableName, $paramFieldName) {
+        return $_SESSION[get_class()][$paramTableName][self::ARRAY_NAME_FIELDS]
+                [$paramFieldName][self::ARRAY_NAME_DOC][self::ARRAY_NAME_DOC_TAGS_VALIDATION_RULES];
     }
 
     /**

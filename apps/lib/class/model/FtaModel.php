@@ -188,6 +188,12 @@ class FtaModel extends AbstractModel {
     private $modelAnnexeEnvironnementConservationGroupe;
 
     /**
+     * Classification Raccourcis
+     * @var ClassificationRaccourcisModel 
+     */
+    private $modelClassificationRacourcis;
+
+    /**
      * Site de production de la FTA
      * @var GeoModel
      */
@@ -248,6 +254,11 @@ class FtaModel extends AbstractModel {
                 new ClassificationFta2Model($this->getDataField(self::FIELDNAME_ID_FTA_CLASSIFICATION2)->getFieldValue()
                 , DatabaseRecord::VALUE_DONT_CREATE_RECORD_IN_DATABASE_IF_KEY_DOESNT_EXIST)
         );
+
+        $this->setModelClassificationRacourcis(
+                new ClassificationRaccourcisModel($this->getDataField(self::FIELDNAME_ID_CLASSIFICATION_RACCOURCIS)->getFieldValue()
+                , DatabaseRecord::VALUE_DONT_CREATE_RECORD_IN_DATABASE_IF_KEY_DOESNT_EXIST)
+        );
     }
 
     /**
@@ -291,7 +302,7 @@ class FtaModel extends AbstractModel {
         return $checkdiff;
     }
 
-     /**
+    /**
      * On vérifie si l'emballage du colis qui devrait être unique
      * à une correspondance sur arcadia sinon alors on affiche une message d'avertissement 
      * pour un cas non communiqué
@@ -577,6 +588,18 @@ class FtaModel extends AbstractModel {
 
     function setModelClassificationFta2(ClassificationFta2Model $modelClassificationFta2) {
         $this->modelClassificationFta2 = $modelClassificationFta2;
+    }
+
+      /**
+     * Lien vers la table classsification Raccourcis
+     * @return ClassificationRaccourcisModel
+     */
+    function getModelClassificationRacourcis() {
+        return $this->modelClassificationRacourcis;
+    }
+
+    function setModelClassificationRacourcis(ClassificationRaccourcisModel $modelClassificationRacourcis) {
+        $this->modelClassificationRacourcis = $modelClassificationRacourcis;
     }
 
     /**

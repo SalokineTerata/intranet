@@ -68,7 +68,7 @@ class TableauFicheView {
         $LIBELLE = $ftaModel->getDataField(FtaModel::FIELDNAME_LIBELLE)->getFieldValue();
         $NB_UNIT_ELEM = $ftaModel->getDataField(FtaModel::FIELDNAME_NOMBRE_UVC_PAR_CARTON)->getFieldValue();
         $Poids_ELEM = $ftaModel->getDataField(FtaModel::FIELDNAME_POIDS_ELEMENTAIRE)->getFieldValue();
-        $suffixe_agrologic_fta = $ftaModel->getDataField(FtaModel::FIELDNAME_SUFFIXE_AGROLOGIC_FTA)->getFieldValue();
+        $suffixe_agrologic_fta = $ftaModel->getModelClassificationRacourcis()->getNameRaccourcisClassif();
         $designation_commerciale_fta = $ftaModel->getDataField(FtaModel::FIELDNAME_DESIGNATION_COMMERCIALE)->getFieldValue();
         $id_dossier_fta = $ftaModel->getDataField(FtaModel::FIELDNAME_DOSSIER_FTA)->getFieldValue();
         $id_version_dossier_fta = $ftaModel->getDataField(FtaModel::FIELDNAME_VERSION_DOSSIER_FTA)->getFieldValue();

@@ -19,4 +19,13 @@ class ClassificationRaccourcisModel extends AbstractModel {
         
     }
 
+    /**
+     * Affiche le raccourcis de classification
+     * @return string
+     */
+    function getNameRaccourcisClassif() {
+        $raccourcisValue = $this->getDataField(self::FIELDNAME_NOM_CLASSIFICATION_RACCOURCIS)->getFieldValue();
+        return $raccourcisValue;
+    }
+
 }

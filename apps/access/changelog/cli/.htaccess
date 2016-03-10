@@ -1,3 +1,0 @@
-# Interdire l'accès aux fichiers dédié au CLI PHP (Command Line Interface PHP)
-deny from all
-#allow from all

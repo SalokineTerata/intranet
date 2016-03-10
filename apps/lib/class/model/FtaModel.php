@@ -590,7 +590,7 @@ class FtaModel extends AbstractModel {
         $this->modelClassificationFta2 = $modelClassificationFta2;
     }
 
-      /**
+    /**
      * Lien vers la table classsification Raccourcis
      * @return ClassificationRaccourcisModel
      */

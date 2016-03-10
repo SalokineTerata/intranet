@@ -109,13 +109,13 @@ switch ($modificationGestionnaire) {
         $action = "gestionnaire";
         $ftaModel = new FtaModel($idFta);
         $ftaModel->setIsEditable(TRUE);
-        $suffixeAgrologicFta = $ftaModel->getHtmlDataField(FtaModel::FIELDNAME_SUFFIXE_AGROLOGIC_FTA);
+        $suffixeAgrologicFta = $ftaModel->getModelClassificationRacourcis()->getNameRaccourcisClassif();;
         break;
     case "2";
         $action = "gestionnaire1";
         $ftaModel = new FtaModel($idFta);
         $ftaModel->setIsEditable(TRUE);
-        $suffixeAgrologicFta = $ftaModel->getHtmlDataField(FtaModel::FIELDNAME_SUFFIXE_AGROLOGIC_FTA);
+        $suffixeAgrologicFta = $ftaModel->getModelClassificationRacourcis()->getNameRaccourcisClassif();;
         break;
     default :
         $action = "valider";

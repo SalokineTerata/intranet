@@ -715,7 +715,7 @@ class AccueilFta {
                 . '<a href=' . $URL . '&order_common=id_fta_classification2&numeroPage=' . self::$numeroDePageCourante . '><img src=../lib/images/order-AZ.png title=\'Ordonné par Nom du Propriétaire\'  border=\'0\' /></a>'
                 . 'Client'
                 . '</th><th>'
-                . '<a href=' . $URL . '&order_common=suffixe_agrologic_fta&numeroPage=' . self::$numeroDePageCourante . ' ><img src=../lib/images/order-AZ.png title=\'Ordonné par Nom de Classification\'  border=\'0\' /></a>'
+                . '<a href=' . $URL . '&order_common=id_classification_raccourcis&numeroPage=' . self::$numeroDePageCourante . ' ><img src=../lib/images/order-AZ.png title=\'Ordonné par Nom de Classification\'  border=\'0\' /></a>'
                 . 'Class.'
                 . '</th><th>'
                 . '<a href=' . $URL . '&order_common=designation_commerciale_fta&numeroPage=' . self::$numeroDePageCourante . ' ><img src=../lib/images/order-AZ.png title=\'Ordonné par Noms du Produit\'  border=\'0\' /></a>'
@@ -790,7 +790,7 @@ class AccueilFta {
                 $idFta = $rowsDetail[FtaModel::KEYNAME];
                 $abreviationFtaEtat = $rowsDetail[FtaEtatModel::FIELDNAME_ABREVIATION];
                 $LIBELLE = $rowsDetail[FtaModel::FIELDNAME_LIBELLE];
-                $suffixeAgrologicFta = $rowsDetail[FtaModel::FIELDNAME_SUFFIXE_AGROLOGIC_FTA];
+                $suffixeAgrologicFta = $rowsDetail[ClassificationRaccourcisModel::FIELDNAME_NOM_CLASSIFICATION_RACCOURCIS];
                 $designationCommercialeFta = $rowsDetail[FtaModel::FIELDNAME_DESIGNATION_COMMERCIALE];
                 $idDossierFta = $rowsDetail[FtaModel::FIELDNAME_DOSSIER_FTA];
                 $idVersionDossierFta = $rowsDetail[FtaModel::FIELDNAME_VERSION_DOSSIER_FTA];

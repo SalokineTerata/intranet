@@ -230,6 +230,7 @@ class ClassificationRaccourcisAssociationModel extends AbstractModel {
             $htmlList->setWarningMessage($dataFieldIdClassificationRaccourcis->getDataWarningMessage());
         }
 
+        $htmlList->setSelectedValue($dataFieldIdClassificationRaccourcis->getFieldValue());
         $htmlList->getAttributes()->getName()->setValue(FtaModel::FIELDNAME_ID_CLASSIFICATION_RACCOURCIS);
         $htmlList->setLabel(DatabaseDescription::getFieldDocLabel(ClassificationRaccourcisAssociationModel::TABLENAME, ClassificationRaccourcisAssociationModel::FIELDNAME_ID_CLASSIFICATION_RACCOURCIS));
         $htmlList->setIsEditable($paramIsEditable);

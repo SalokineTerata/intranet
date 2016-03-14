@@ -186,10 +186,11 @@
         elementUniteFacturation = document.getElementById(idElementVerrouEtiquette);
         if (elementUniteFacturation.value != '<?php echo FtaModel::ETIQUETTE_COLIS_VERROUILLAGE_NON ?>')
         {
-            displayFalseElementById(idElementRowEtiquetteColis);
+            displayTrueElementById(idElementRowEtiquetteColis);
             document.getElementById(idElementDataEtiquetteColis).onchange();
         } else {
-            displayTrueElementById(idElementRowEtiquetteColis);
+            displayFalseElementById(idElementRowEtiquetteColis);
+            document.getElementById(idElementDataEtiquetteColis).onchange();
         }
     }
 

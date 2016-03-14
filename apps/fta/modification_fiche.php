@@ -64,7 +64,17 @@ $show_help = 1;                              //Activer l'aide en ligne Pop-up
 /**
  * Vérification des droits d'accès
  */
+/*
+ * Initilisation
+ */
+$globalConfig = new GlobalConfig();
+
+if ($globalConfig->getAuthenticatedUser()) {
+    $idUser = $globalConfig->getAuthenticatedUser()->getKeyValue();
+}
+
 $fta_consultation = Acl::getValueAccesRights('fta_consultation');
+$fta_modification = Acl::getValueAccesRights('fta_modification');
 
 if (!$fta_consultation) {
     $titre = UserInterfaceMessage::FR_WARNING_ACCES_RIGHTS_TITLE;
@@ -72,6 +82,14 @@ if (!$fta_consultation) {
             . " Veuillez vous déconnecter et contactez l'administrateur de l'intranet";
     $redirection = "index.php";
     afficher_message($titre, $message, $redirection, TRUE);
+} elseif ($fta_modification) {
+    $idFtaRoleEncoursDefault = FtaRoleModel::getKeyNameOfFirstRoleByIdUser($idUser);
+    if (!$idFtaRoleEncoursDefault) {
+        $titre = UserInterfaceMessage::FR_WARNING_ACCES_RIGHTS_TITLE;
+        $message = UserInterfaceMessage::FR_WARNING_ACCES_RIGHTS_ROLES;
+        $redirection = "index.php";
+        afficher_message($titre, $message, $redirection);
+    }
 }
 
 //Paramètre d'URL
@@ -99,8 +117,6 @@ if ($idFta) {
      * Initilisation
      */
     $ftaModel = new FtaModel($idFta); //Rien ne garantie que l'utilisateur est mis un idFta existant
-    $globalConfig = new GlobalConfig();
-    $idUser = $globalConfig->getAuthenticatedUser()->getKeyValue();
     $idWorkflowFtaEncours = $ftaModel->getDataField(FtaModel::FIELDNAME_WORKFLOW)->getFieldValue();
     $idSiteDeProduction = $ftaModel->getDataField(FtaModel::FIELDNAME_SITE_PRODUCTION)->getFieldValue();
     /**
@@ -190,7 +206,7 @@ if ($idFta) {
 </SCRIPT>
 ';
 
-    Chapitre::initChapitre($idFta, $id_fta_chapitre, $synthese_action, $comeback, $idFtaEtat, $abreviationFtaEtat, $idFtaRole,$checkArcadiaData);
+    Chapitre::initChapitre($idFta, $id_fta_chapitre, $synthese_action, $comeback, $idFtaEtat, $abreviationFtaEtat, $idFtaRole, $checkArcadiaData);
 
     $bloc.= Chapitre::getHtmlChapitreAll();
 } else {

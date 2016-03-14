@@ -119,9 +119,9 @@ function envoismail($sujetmail, $text, $destinataire, $expediteur, $paramTypeMai
         /**
          * Encodement en utf-8
          */
-//        $mail->setTextCharset("UTF-8");
-//        $mail->setHTMLCharset("UTF-8");
-//        $mail->setHeadCharset("UTF-8");
+        $mail->setTextCharset("UTF-8");
+        $mail->setHTMLCharset("UTF-8");
+        $mail->setHeadCharset("UTF-8");
 
         // Set the body
         $mail->setText($text);

@@ -1046,7 +1046,9 @@ class AccueilFta {
                          * que la Fta soit valider,
                          * on accède au boutton de transition
                          */
-                        or ( self::$ftaModification and self::$abreviationFtaEtat == FtaEtatModel::ETAT_ABREVIATION_VALUE_VALIDE and $accesTransitionButton == TRUE)
+                        or ( self::$ftaModification and self::$abreviationFtaEtat == FtaEtatModel::ETAT_ABREVIATION_VALUE_VALIDE 
+//                                and $accesTransitionButton == TRUE
+                                )
                 ) {
                     $actions .= '<a '
                             . 'href=transiter.php'

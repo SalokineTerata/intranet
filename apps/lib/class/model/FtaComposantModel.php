@@ -397,11 +397,12 @@ class FtaComposantModel extends AbstractModel {
         $border = "style=\"border:1px solid #000;\"";
 
         return '<tr class=titre_tableau  align=center >' .
-                '<td ' . $border . '>' . $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_NOM_FTA_COMPOSITION)->getFieldLabel() . '</td>'
+                '<td ' . $border . '>' . $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_ID_ANNEXE_AGRO_ART_CODIFICATION)->getFieldLabel() . '</td>'
+                .'<td ' . $border . '>' . $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_CODE_PRODUIT_AGROLOGIC_FTA_NOMENCLATURE)->getFieldLabel() . '</td>'
+                . '<td ' . $border . '>' . $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_NOM_FTA_COMPOSITION)->getFieldLabel() . '</td>'
                 . '<td ' . $border . '>' . $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_INGREDIENT_FTA_COMPOSITION)->getFieldLabel() . '</td>'
                 . '<td ' . $border . '>' . $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_ID_GEO)->getFieldLabel() . '</td>'
                 . '<td ' . $border . '>' . $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_POIDS_FTA_COMPOSITION)->getFieldLabel() . '</td>'
-//                . '<td>Répartition (en %)</td>'
                 . '<td ' . $border . '>' . $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_QUANTITE_FTA_COMPOSITION_UVC)->getFieldLabel() . '</td>'
                 . '<td ' . $border . '>Actions</td>'
                 . '</tr>';
@@ -789,8 +790,6 @@ class FtaComposantModel extends AbstractModel {
         return $listeCodesoftEtiquettes;
     }
 
-    
-    
     /**
      * Liste des étiqettes verso 
      * @param boolean $paramIsEditable
@@ -835,8 +834,8 @@ class FtaComposantModel extends AbstractModel {
 
         return $listeCodesoftEtiquettes;
     }
-    
-     /**
+
+    /**
      * Liste des options étiqettes
      * @param boolean $paramIsEditable
      * @return string
@@ -884,7 +883,6 @@ class FtaComposantModel extends AbstractModel {
 
         return $listeModeEtiquettes;
     }
-
 
 }
 

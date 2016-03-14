@@ -30,5 +30,6 @@ class UserInterfaceLabel {
     const FR_MODIFICATION_ESPACE_DE_TRAVAIL = "Modification de l'espace de travail";
     const FR_MODIFICATION_GESTIONNAIRE_FTA = "Modification du gestionnaire de la Fta";
     const FR_MODIFICATION_RAPPEL_ESPACE_DE_TRAVAIL = "Rappel : la modification de l'espace de travail concerne son dossier";
+    const FR_TRANSITION_MODIFICATION = "Liste des Chapitres pouvant être mis à jour";
 
 }

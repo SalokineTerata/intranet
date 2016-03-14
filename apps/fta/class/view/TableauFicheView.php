@@ -419,7 +419,7 @@ class TableauFicheView {
              */
             case (
             Acl::getValueAccesRights(Acl::ACL_FTA_MODIFICATION)
-            AND $paramAccesTransitionButton == TRUE
+//            AND $paramAccesTransitionButton == TRUE
             AND ( $paramAbreviationFtaEtat == FtaEtatModel::ETAT_ABREVIATION_VALUE_VALIDE)
             AND $paramCheckAccesButton
 

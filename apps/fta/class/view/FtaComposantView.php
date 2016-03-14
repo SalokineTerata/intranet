@@ -215,6 +215,10 @@ class FtaComposantView extends AbstractView {
         return $listeModeEtiquettes;
     }
 
+    /**
+     * Affiche le le COde PSF avec le prefixe
+     * @return string
+     */
     function getHtmlPrefixeIdCodePSF() {
         $id_fta_composant = $this->getFtaComposantModel()->getKeyValue();
         $prefixe = $this->getAnnexeAgrologicArticleCodificationModel()->getDataField(AnnexeAgrologicArticleCodificationModel::FIELDNAME_PREFIXE_ANNEXE_AGRO_ART_COD)->getFieldValue();

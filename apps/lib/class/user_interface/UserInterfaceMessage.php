@@ -24,7 +24,7 @@
  */
 class UserInterfaceMessage {
 
-    const FR_ARCADIA_SEND_DATA_MESSAGE = " Les données ont bien été envoyé vers Arcadia ";
+    const FR_ARCADIA_SEND_DATA_MESSAGE = " Les données ont bien été envoyées vers Arcadia ";
     const FR_CLASSIFICATION_ACTIVITE_MESSAGE = " Veuillez sélectionner une activité à associer ";
     const FR_CLASSIFICATION_MARQUE_MESSAGE = " Veuillez sélectionner une marque à associer ";
     const FR_DATABASE_MESSAGE_CHANGEMENT_ESPACE_DE_TRAVAIL_1 = " Changement de l'espace travail ";
@@ -51,6 +51,7 @@ class UserInterfaceMessage {
 ";
     const FR_TRANSITION_FTA_TITLE = "Transiter l'Etat d'une Fiche Technique Article";
     const FR_WARNING_TITLE = "AVERTISSEMENT";
+    const FR_WARNING_ACCES_RIGHTS_ROLES = "Erreur, vous n'avez aucun droits d'accès Rôles sur le module Fta.<br><br>Veuillez vous déconnecter et contactez l'administrateur de l'intranet";
     const FR_WARNING_ACCES_RIGHTS = "Vous n'avez pas les droits d'accès nécessaire.<br><br>";
     const FR_WARNING_ACCES_RIGHTS_TITLE = "Erreur d'accès";
     const FR_WARNING_CHAPITRES = " Veuillez selectionner un chapitre<br>";
@@ -97,7 +98,7 @@ class UserInterfaceMessage {
     const FR_WARNING_VALIDATION_RULES_LESS35 = " | Cette donnée a dépassé trente-cinq caractères ";
     const FR_WARNING_VALIDATION_RULES_LESS5 = " | Cette donnée a dépassé cinq caractères ";
     const FR_WARNING_VALIDATION_RULES_LESS8 = " | Cette donnée a dépassé huit caractères ";
-    const FR_WARNING_VALIDATION_RULES_DATA_NOT_EMPTY = " | Cette donnée doit être saisi ";
+    const FR_WARNING_VALIDATION_RULES_DATA_NOT_EMPTY = " | Cette donnée doit être saisie ";
     const FR_WARNING_WORKFLOW_INACTIF_1 = "L'espace de travail \"";
     const FR_WARNING_WORKFLOW_INACTIF_2 = "\" est inactif";
     const FR_WARNING_WORKFLOW_INACTIF_TITLE = "Espace de travail inactif.";

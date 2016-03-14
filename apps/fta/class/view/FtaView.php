@@ -259,19 +259,10 @@ class FtaView extends AbstractView {
     function getHtmlNomAbrege() {
         $nomAbregeValue = $this->getModel()->getDataField(FtaModel::FIELDNAME_NOM_ABREGE)->getFieldValue();
         if (!$nomAbregeValue) {
-            $DesignationCommerciale = $this->getModel()->getDataField(FtaModel::FIELDNAME_DESIGNATION_COMMERCIALE)->getFieldValue();           
-            $suffixeAgrologicFta = $this->getModel()->getModelClassificationRacourcis()->getNameRaccourcisClassif();
-            $NB_UNIT_ELEM = $this->getModel()->getDataField(FtaModel::FIELDNAME_NOMBRE_UVC_PAR_CARTON)->getFieldValue();
-            $poidAffichage = $this->getModel()->getDataField(FtaModel::FIELDNAME_POIDS_ELEMENTAIRE)->getFieldValue();
-            $valeurUnite = "kg";
-            if ($poidAffichage < FtaModel::VALEUR_CHECK_EN_KG) {
-                $poidAffichage = $poidAffichage * FtaModel::CONVERSION_KG_EN_G;
-                $valeurUnite = "g";
-            }
-            $nomAbregeValue = $DesignationCommerciale . " " . $suffixeAgrologicFta . " " . $NB_UNIT_ELEM . "X" . $poidAffichage . $valeurUnite;
+            $DesignationCommerciale = $this->getModel()->getDataField(FtaModel::FIELDNAME_DESIGNATION_COMMERCIALE)->getFieldValue();
 
+            $nomAbregeValue = strtoupper($DesignationCommerciale);
 
-            $nomAbregeValue = strtoupper($nomAbregeValue);
             $this->getModel()->getDataField(FtaModel::FIELDNAME_NOM_ABREGE)->setFieldValue($nomAbregeValue);
             $this->getModel()->saveToDatabase();
             $return = $this->getHtmlDataField(FtaModel::FIELDNAME_NOM_ABREGE);
@@ -291,7 +282,20 @@ class FtaView extends AbstractView {
         if (!$DIN) {
             $nomAbregeValue = $this->getModel()->getDataField(FtaModel::FIELDNAME_NOM_ABREGE)->getFieldValue();
 
-            $this->getModel()->getDataField(FtaModel::FIELDNAME_LIBELLE)->setFieldValue($nomAbregeValue);
+            $suffixeAgrologicFta = $this->getModel()->getModelClassificationRacourcis()->getNameRaccourcisClassif();
+            $NB_UNIT_ELEM = $this->getModel()->getDataField(FtaModel::FIELDNAME_NOMBRE_UVC_PAR_CARTON)->getFieldValue();
+            $poidAffichage = $this->getModel()->getDataField(FtaModel::FIELDNAME_POIDS_ELEMENTAIRE)->getFieldValue();
+            $valeurUnite = "kg";
+
+            if ($poidAffichage < FtaModel::VALEUR_CHECK_EN_KG) {
+                $poidAffichage = $poidAffichage * FtaModel::CONVERSION_KG_EN_G;
+                $valeurUnite = "g";
+            }
+
+            $DIN = $nomAbregeValue . " " . $suffixeAgrologicFta . " " . $NB_UNIT_ELEM . "X" . $poidAffichage . $valeurUnite;
+
+            $DIN = strtoupper($DIN);
+            $this->getModel()->getDataField(FtaModel::FIELDNAME_LIBELLE)->setFieldValue($DIN);
             $this->getModel()->saveToDatabase();
             $return = $this->getHtmlDataField(FtaModel::FIELDNAME_LIBELLE);
         } else {
@@ -510,14 +514,14 @@ class FtaView extends AbstractView {
     }
 
     /**
-     * Affiche les champs "Forcer libellé étiquette colis ?" et Libellé etiquette carton
+     * Affiche les champs "Voulez-vous imposer le libellé étiquette colis ?" et Libellé etiquette carton
      * En fonction du résultat du champs Forcer libellé étiquette colis ? fais apparaitre ou non l'autre champ
      * @return string
      */
     public function getHtmlVerrouillageEtiquetteWithEtiquetteColis() {
         //Initialisation des variables locales
         $htmlReturn = NULL;
-        $htmlObjectVerrouillageEtiquette = new DataFieldToHtmlListBoolean(
+        $htmlObjectVerrouillageEtiquette = new DataFieldToHtmlListSelect(
                 $this->getModel()->getDataField(FtaModel::FIELDNAME_VERROUILLAGE_LIBELLE_ETIQUETTE)
         );
         $htmlObjectEtiquetteColis = new DataFieldToHtmlInputText(
@@ -538,13 +542,25 @@ class FtaView extends AbstractView {
         //Poids élémentaire
         $htmlObjectEtiquetteColis->setIsEditable($this->getIsEditable());
 
-        if ($htmlObjectVerrouillageEtiquette->getDataField()->getFieldValue() <> FtaModel::ETIQUETTE_COLIS_VERROUILLAGE_FALSE) {
-            $htmlObjectEtiquetteColis->getStyleCSS()->setDisplayToNone();
-            $dinValue = $this->getModel()->getDataField(FtaModel::FIELDNAME_LIBELLE)->getFieldValue();
-            $htmlObjectEtiquetteColis->getDataField()->setFieldValue($dinValue);
-            $htmlObjectEtiquetteColis->getDataField()->getRecordsetRef()->saveToDatabase();
-        } else {
+        if ($htmlObjectVerrouillageEtiquette->getDataField()->getFieldValue() === FtaModel::ETIQUETTE_COLIS_VERROUILLAGE_TRUE) {
+           /**
+            * Si l'utilisateur souhaite renseigné son étiquette colis 
+            * alors on l'affiche afin qu'il puisse la modifier
+            */
             $htmlObjectEtiquetteColis->getStyleCSS()->unsetDisplay();
+            /**
+             * Si l'étiqueete colis n'est pas renseigné alors on récupère la DIN 
+             */
+            if (!$htmlObjectEtiquetteColis->getDataField()->getFieldValue()) {
+                $dinValue = $this->getModel()->getDataField(FtaModel::FIELDNAME_LIBELLE)->getFieldValue();
+                $htmlObjectEtiquetteColis->getDataField()->setFieldValue($dinValue);
+                $htmlObjectEtiquetteColis->getDataField()->getRecordsetRef()->saveToDatabase();
+            }
+        } else {
+            /**
+             * Sinon on n'affiche pas le libellé etiquette colis
+             */
+            $htmlObjectEtiquetteColis->getStyleCSS()->setDisplayToNone();
         }
         $htmlReturn.=$htmlObjectEtiquetteColis->getHtmlResult();
         return $htmlReturn;
@@ -599,11 +615,11 @@ class FtaView extends AbstractView {
 
 
             $htmlReturn = $htmlClassificationRaccourcis
-                    . $htmlArcadiaGammeFamileBudget
+                    . $htmlArcadiaMarque
                     . $htmlArcadiaFamilleVente
                     . $htmlArcadiaSousFamille
-                    . $htmlArcadiaMarque
                     . $htmlFamilleBudget
+                    . $htmlArcadiaGammeFamileBudget
                     . $htmlGammeCoop
 
             ;
@@ -1856,28 +1872,26 @@ class FtaView extends AbstractView {
              * Calcul type emballage UVC
              */
             $returnUVC = $this->getModel()->buildArrayEmballageTypeUVC();
-            $pcb = $returnUVC[FtaConditionnementModel::UVC_EMBALLAGE_NET];
-            $uvc_net = $returnUVC[FtaModel::FIELDNAME_NOMBRE_UVC_PAR_CARTON];
+            $uvc_net = $returnUVC[FtaConditionnementModel::UVC_EMBALLAGE_NET];
 
             /**
              * Calcul type emballage Colis
              */
-            $returnCOLIS = $this->getModel()->buildArrayEmballageTypeDuColis();
-            $colisNet = $returnCOLIS["colis_net"];
-            $check1 = strval($colisNet * "1000");
-            $check2 = strval($uvc_net * $pcb);
+            $poidsUVC = $this->getModel()->getDataField(FtaModel::FIELDNAME_POIDS_ELEMENTAIRE)->getFieldValue();
+            $check1 = strval($poidsUVC);
+            $check2 = strval($uvc_net / "1000");
             if ($check1 <> $check2) {
-                $html_warning = "ATTENTION, poids net du colis différents de celui défini dans le chapitre \"Indentié\" <img src=../lib/images/exclamation.png width=15 height=15 border=0/><br><br>";
+                $html_warning = "ATTENTION, poids net de l'uvc est différents de celui défini dans le chapitre Indentié <img src=../lib/images/exclamation.png width=15 height=15 border=0/><br><br>";
                 $bgcolor = "#FFAA55";
             } else {
                 $bgcolor = "#AFFF5A";
                 $html_warning = "";
             }
-            if ($colisNet) {
+            if ($poidsUVC) {
                 $bloc.= "<tr class=contenu><td bgcolor=$bgcolor align=\"center\" valign=\"middle\">";
-                $bloc.="Poids net du colis (en Kg): ";
+                $bloc.="Poids net de UVC (en Kg): ";
                 $bloc.="</td><td bgcolor=$bgcolor align=\"center\" valign=\"middle\">"
-                        . "<h4><br>$colisNet</h4><br>$html_warning</td></tr>";
+                        . "<h4><br>$check2</h4><br>$html_warning</td></tr>";
             } else {
                 $bloc = "";
             }

@@ -43,7 +43,17 @@ flush();
 /**
  * Vérification des droits d'accès
  */
+/*
+ * Initilisation
+ */
+$globalConfig = new GlobalConfig();
+
+if ($globalConfig->getAuthenticatedUser()) {
+    $id_user = $globalConfig->getAuthenticatedUser()->getKeyValue();
+}
+
 $fta_consultation = Acl::getValueAccesRights('fta_consultation');
+$fta_modification = Acl::getValueAccesRights('fta_modification');
 
 if (!$fta_consultation) {
     $titre = UserInterfaceMessage::FR_WARNING_ACCES_RIGHTS_TITLE;
@@ -51,7 +61,17 @@ if (!$fta_consultation) {
             . " Veuillez vous déconnecter et contactez l'administrateur de l'intranet";
     $redirection = "index.php";
     afficher_message($titre, $message, $redirection, TRUE);
+} elseif ($fta_modification) {
+    $idFtaRoleEncoursDefault = FtaRoleModel::getKeyNameOfFirstRoleByIdUser($id_user);
+    if (!$idFtaRoleEncoursDefault) {
+        $titre = UserInterfaceMessage::FR_WARNING_ACCES_RIGHTS_TITLE;
+        $message = UserInterfaceMessage::FR_WARNING_ACCES_RIGHTS_ROLES;
+        $redirection = "index.php";
+        afficher_message($titre, $message, $redirection);
+    }
 }
+
+
 /*
   Initialisation des variables
  */

@@ -2543,7 +2543,7 @@ function linkXmlFileDataSend() {
 
             break;
         case EnvironmentConf::ENV_PRD_NAME :
-            $link = $this->getGlobalConfigModel()->getConf()->getUrlEai() . "/export/fta2arcadia-40-"
+            $link = $this->getGlobalConfigModel()->getConf()->getUrlEai() . "/export/data/fta2arcadia-40-"
                     . $this->getKeyValuePorposal()
                     . "-" . $this->getFtaModel()->getDataField(FtaModel::KEYNAME)->getFieldValue()
                     . "-proposal.xml";

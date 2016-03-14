@@ -95,9 +95,8 @@ if (!$fta_consultation) {
             if ($fta_modification) {
                 $synthese_action = FtaEtatModel::ETAT_AVANCEMENT_VALUE_EN_COURS;
                 if (!$idFtaRoleEncoursDefault) {
-                    $titre = "Erreur d'accès";
-                    $message = "Erreur, vous n'avez aucun droits d'accès Rôles sur le module Fta.<br><br>"
-                            . " Veuillez vous déconnecter et contactez l'administrateur de l'intranet";
+                    $titre = UserInterfaceMessage::FR_WARNING_ACCES_RIGHTS_TITLE;
+                    $message = UserInterfaceMessage::FR_WARNING_ACCES_RIGHTS_ROLES;
                     $redirection = "index.php";
                     afficher_message($titre, $message, $redirection);
                 }
@@ -186,7 +185,7 @@ if (!$fta_consultation) {
         /**
          * traitement long
          */
-        AccueilFta::initAccueil($id_user, $id_fta_etat, $nomFtaEtat, $synthese_action, $idFtaRoleEncours, $order_common, $debut, $numeroDePageCourante,$lieuGeo);
+        AccueilFta::initAccueil($id_user, $id_fta_etat, $nomFtaEtat, $synthese_action, $idFtaRoleEncours, $order_common, $debut, $numeroDePageCourante, $lieuGeo);
 
 
 

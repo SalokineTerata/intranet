@@ -98,7 +98,12 @@ function envoismail($sujetmail, $text, $destinataire, $expediteur, $paramTypeMai
             $sujetmail = "[Environnement " . $globalConfig->getConf()->getExecEnvironment() . "] " . $sujetmail_orig;
 
             $text_orig = $text;
-            $text = explode(",", $destinataire_orig) . "\n" . $text_orig;
+            if (is_array($destinataire_orig)) {
+                $listeDesDestinataire = explode(",", $destinataire_orig);
+            } else {
+                $listeDesDestinataire = $destinataire_orig;
+            }
+            $text = $listeDesDestinataire . "\n" . $text_orig;
         }
         //Création du mail
         $mail = new htmlMimeMail5();
@@ -117,7 +122,7 @@ function envoismail($sujetmail, $text, $destinataire, $expediteur, $paramTypeMai
         $mail->setTextCharset("UTF-8");
         $mail->setHTMLCharset("UTF-8");
         $mail->setHeadCharset("UTF-8");
-        
+
         // Set the body
         $mail->setText($text);
         //$result = $mail->send(array($adresse_to), 'smtp');

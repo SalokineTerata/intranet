@@ -69,6 +69,7 @@ class FtaModel extends AbstractModel {
     const FIELDNAME_ID_CLASSIFICATION_RACCOURCIS = "id_classification_raccourcis";
     const FIELDNAME_ID_FTA_CLASSIFICATION2 = "id_fta_classification2";
     const FIELDNAME_ID_FTA_ETAT = "id_fta_etat";
+    const FIELDNAME_IS_DUREE_DE_VIE_CALCULATE = "is_duree_de_vie_calculate";
     const FIELDNAME_LIBELLE = "LIBELLE";
     const FIELDNAME_LIBELLE_CLIENT = "LIBELLE_CLIENT";
     const FIELDNAME_LIBELLE_CODE_ARTICLE_CLIENT = "libelle_code_article_client";
@@ -111,8 +112,10 @@ class FtaModel extends AbstractModel {
     const FIELDNAME_VIRTUAL_FTA_PROCESSUS_DELAI = "VIRTUAL_fta_processus_delai";
     const FIELDNAME_WORKFLOW = "id_fta_workflow";
     const ID_POIDS_VARIABLE = "3";
+    const DUREE_DE_VIE_CALCULATE_AUTO = "1";
     const ETIQUETTE_COLIS_VERROUILLAGE_TRUE = "1";
     const ETIQUETTE_COLIS_VERROUILLAGE_NON = "Non";
+    const DUREE_DE_VIE_CALCULATE_AUTO_OUI = "Oui";
     const MESSAGE_DATA_MISSING = UserInterfaceMessage::FR_WARNING_DATA_MISSING_TITLE;
     const MESSAGE_DATA_VALIDATION_CLASSIFICATION = UserInterfaceMessage::FR_WARNING_DATA_CLASIFICATION;
     const MESSAGE_DATA_VALIDATION_CODE_LDC = UserInterfaceMessage::FR_WARNING_DATA_VALIDATION_FTA_CODE_LDC;
@@ -1759,7 +1762,7 @@ class FtaModel extends AbstractModel {
  nom_societe, id_fta_classification2,pourcentage_avancement, liste_id_fta_role,code_article_ldc_mere,
  id_arcadia_categeorie_produit_optiventes,id_arcadia_gamme_famille_budget,id_classification_raccourcis,
   id_arcadia_famille_budget,id_arcadia_gamme_coop,id_arcadia_famille_vente,id_arcadia_sous_famille,id_arcadia_marque,
-  date_de_validation_fta)"
+  date_de_validation_fta,is_duree_de_vie_calculate)"
                         . " SELECT id_access_arti2, OLD_numft, id_fta_workflow,
  commentaire, OLD_id_fta_palettisation, id_dossier_fta, id_version_dossier_fta,
  OLD_champ_maj_fta, id_fta_etat, createur_fta, date_derniere_maj_fta,
@@ -1795,7 +1798,7 @@ class FtaModel extends AbstractModel {
  nom_societe, id_fta_classification2 ,pourcentage_avancement, liste_id_fta_role,code_article_ldc_mere,
  id_arcadia_categeorie_produit_optiventes,id_arcadia_gamme_famille_budget,id_classification_raccourcis,
  id_arcadia_famille_budget,id_arcadia_gamme_coop,id_arcadia_famille_vente,id_arcadia_sous_famille,id_arcadia_marque,
- date_de_validation_fta"
+ date_de_validation_fta,is_duree_de_vie_calculate"
                         . " FROM " . FtaModel::TABLENAME
                         . " WHERE " . FtaModel::KEYNAME . "=" . $paramIdFta
         );
@@ -1853,6 +1856,21 @@ class FtaModel extends AbstractModel {
         }
 
         return $din;
+    }
+
+    /**
+     * On calcule la durée de vie client en fonction de la durée de vie en production
+     * enrondie à l'entier inférieur 
+     * @return string
+     */
+    function getDureeDeVieClientByDureeDeVieProduction() {
+        $dureeDeVieProductionValue = $this->getDataField(FtaModel::FIELDNAME_DUREE_DE_VIE_TECHNIQUE_PRODUCTION)->getFieldValue();
+        if ($dureeDeVieProductionValue) {
+            $dureeDeVieProductionValue = FtaController::getTwoOfThreeValue($dureeDeVieProductionValue);
+        } else {
+            $dureeDeVieProductionValue = UserInterfaceMessage::FR_CALCUL_DUREE_DE_VIE_EN_ATTENTE;
+        }
+        return $dureeDeVieProductionValue;
     }
 
     /**

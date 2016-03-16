@@ -145,6 +145,47 @@
 //            }
         }
     }
+//    function disabledTrueElementById(ParamId) {
+//        var targetElement;
+//        targetElement = document.getElementById(ParamId);
+//        targetElement.disabled = true;
+//    }
+//    function disabledFalseElementById(ParamId) {
+//        var targetElement;
+//        targetElement = document.getElementById(ParamId);
+//        targetElement.disabled = false;
+//    }
+//
+    /**
+     * Rechargement de la page courante 
+     * @returns {undefined}
+     */
+    function disabledDureeDeVie(Param) {
+
+//        var Parameters = Param.split(",", 2);
+//        var idElementIsDureeDeVieCalculate = Parameters[0];
+//        var idElementDataDureeDeVieClient = Parameters[1];
+//        var idElementRowDureeDeVieClient = '<?php echo Html::PREFIXE_ID_ROW . "_" ?>' + idElementDataDureeDeVieClient;
+//        elementIsDureeDeVieCalculate = document.getElementById(idElementIsDureeDeVieCalculate);
+//        if (elementIsDureeDeVieCalculate.value == '<?php echo FtaModel::DUREE_DE_VIE_CALCULATE_AUTO_OUI ?>')
+//        {
+//            disabledTrueElementById(idElementRowDureeDeVieClient);
+//            document.getElementById(idElementDataDureeDeVieClient).onchange();
+//        } else {
+//            disabledFalseElementById(idElementRowDureeDeVieClient);
+//            document.getElementById(idElementDataDureeDeVieClient).onchange();
+//        }
+//        
+        current_page = document.form_action.current_page.value;
+        current_query = document.form_action.current_query.value;
+        url = current_page + "?" + current_query;
+        parent.location.href = url;
+    }
+
+
+    function id_Activite_js() {
+
+    }
     function displayTrueElementById(ParamId) {
         var targetElement;
         targetElement = document.getElementById(ParamId);
@@ -155,6 +196,7 @@
         targetElement = document.getElementById(ParamId);
         targetElement.style.display = "none";
     }
+
 
     function displayPoidsElem(Param) {
 
@@ -183,8 +225,8 @@
         var idElementVerrouEtiquette = Parameters[0];
         var idElementDataEtiquetteColis = Parameters[1];
         var idElementRowEtiquetteColis = '<?php echo Html::PREFIXE_ID_ROW . "_" ?>' + idElementDataEtiquetteColis;
-        elementUniteFacturation = document.getElementById(idElementVerrouEtiquette);
-        if (elementUniteFacturation.value != '<?php echo FtaModel::ETIQUETTE_COLIS_VERROUILLAGE_NON ?>')
+        elementVerrouEtiquette = document.getElementById(idElementVerrouEtiquette);
+        if (elementVerrouEtiquette.value != '<?php echo FtaModel::ETIQUETTE_COLIS_VERROUILLAGE_NON ?>')
         {
             displayTrueElementById(idElementRowEtiquetteColis);
             document.getElementById(idElementDataEtiquetteColis).onchange();

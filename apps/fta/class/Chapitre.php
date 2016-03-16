@@ -872,6 +872,36 @@ class Chapitre {
         //Durée de vie garantie client (en jours)
         $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_DUREE_DE_VIE);
 
+
+        if ($ftaView->isDataValidationSuccessful() == "0") {
+            self::setDataValidationSuccessfulToTrue();
+        }
+
+        return $bloc;
+    }
+
+    public static function buildChapitreExigenceClientMDD() {
+
+        $bloc = '';
+        $id_fta = self::$id_fta;
+        $synthese_action = self::$synthese_action;
+        $isEditable = self::$is_editable;
+
+        //Identifiant FTA
+        $ftaModel = new FtaModel($id_fta);
+        $ftaModel->setDataFtaTableToCompare();
+        $ftaView = new FtaView($ftaModel);
+        $ftaView->setIsEditable($isEditable);
+        $ftaView->setFtaChapitreModelById(self::ID_CHAPITRE_IDENTITE);
+
+        //Durée de vie garantie client (en jours)
+//        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_IS_DUREE_DE_DE_CALCULATE);
+        $bloc.=$ftaView->getHtmlIsDureeDeVieCalculateWithDureeDeVieClient();
+
+        //Durée de vie garantie client (en jours)
+//        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_DUREE_DE_VIE);
+
+
         if ($ftaView->isDataValidationSuccessful() == "0") {
             self::setDataValidationSuccessfulToTrue();
         }

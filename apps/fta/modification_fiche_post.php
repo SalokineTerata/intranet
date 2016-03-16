@@ -105,35 +105,8 @@ switch ($action) {
     case 'valider':
 
 
-        if ($selection_saisonnalite) {
-            //Enregistrement du nouvel éléments de classification
-            $idClassification2 = ClassificationFta2Model::getIdFtaClassification2(
-                            $selection_proprietaire1, $selection_proprietaire2
-                            , $selection_marque, $selection_activite
-                            , $selection_rayon, $selection_environnement
-                            , $selection_reseau, $selection_saisonnalite);
-            $modelFta->getDataField(FtaModel::FIELDNAME_ID_FTA_CLASSIFICATION2)->setFieldValue($idClassification2);
-        }
         /**
-         * Enregistrement de la DIN en majuscule
-         */
-        $dinValue = $modelFta->getDataField(FtaModel::FIELDNAME_LIBELLE)->getFieldValue();
-        if ($dinValue) {
-            $modelFta->getDataField(FtaModel::FIELDNAME_LIBELLE)->setFieldValue(
-                    mb_convert_case(
-                            stripslashes(
-                                    $dinValue
-                            ), MB_CASE_UPPER, 'utf-8')
-            );
-            if ($modelFta->getDataField(FtaModel::FIELDNAME_VERROUILLAGE_LIBELLE_ETIQUETTE)->getFieldValue()) {
-                $modelFta->getDataField(FtaModel::FIELDNAME_LIBELLE_CLIENT)->setFieldValue($dinValue);
-            }
-        }
-        $modelFta->saveToDatabase();
-
-
-        /**
-         * Enregistrement de la signature
+         * Initialisation
          */
         $idFtaSuiviProjet = FtaSuiviProjetModel::getIdFtaSuiviProjetByIdFtaAndIdChapitre($paramIdFta, $paramIdFtaChapitreEncours);
         $modelFtaSuiviProjet = new FtaSuiviProjetModel($idFtaSuiviProjet);
@@ -141,7 +114,20 @@ switch ($action) {
         $idFtaWorkflowStruture = FtaWorkflowStructureModel::getIdFtaWorkflowStructureByIdFtaAndIdChapitre($paramIdFta, $paramIdFtaChapitreEncours);
         $modelFtaWorkflowStruture = new FtaWorkflowStructureModel($idFtaWorkflowStruture);
 
-        $isFtaDataValidationSuccess = $modelFta->isFtaDataValidationSuccess($paramIdFtaChapitreEncours);
+
+        /**
+         * Actualisation de la durée de vie garantie client
+         */
+        $nomFtaWorkflow = $modelFtaWorkflowStruture->getModelFtaWorkflow()->getDataField(FtaWorkflowModel::FIELDNAME_NOM_FTA_WORKFLOW)->getFieldValue();
+        $nomFtaChapitre = $modelFtaWorkflowStruture->getModelFtaChapitre()->getDataField(FtaChapitreModel::FIELDNAME_NOM_CHAPITRE)->getFieldValue();
+        FtaController::refreshDureeDeVieMDD($nomFtaWorkflow, $nomFtaChapitre, $modelFtaSuiviProjet->getModelFta());
+
+
+        /**q
+         * Enregistrement de la signature
+         */
+        $isFtaDataValidationSuccess = $modelFtaSuiviProjet->getModelFta()->isFtaDataValidationSuccess($paramIdFtaChapitreEncours);
+
 
         if ($paramSignatureValidationSuiviProjet and $isFtaDataValidationSuccess == "0") {
             $modelFtaSuiviProjet->getDataField(FtaSuiviProjetModel::FIELDNAME_DATE_VALIDATION_SUIVI_PROJET)->setFieldValue(date("Y-m-d"));
@@ -152,6 +138,7 @@ switch ($action) {
 //        $idFtaProcessusEncours = $modelFtaWorkflowStruture->getDataField(FtaWorkflowStructureModel::FIELDNAME_ID_FTA_PROCESSUS)->getFieldValue();
 //        $idFtaWorkflowEncours = $modelFtaWorkflowStruture->getDataField(FtaWorkflowStructureModel::FIELDNAME_ID_FTA_WORKFLOW)->getFieldValue();
 //        $nom_fta_chapitre_encours = $modeChapitre->getDataField(FtaChapitreModel::FIELDNAME_NOM_CHAPITRE)->getFieldValue();
+
 
         /**
          * Cette condition n'est plus à verifier puisque seul la date echande de processus est utilisé

@@ -98,6 +98,7 @@ class Chapitre {
     protected static $html_chapitre_etiquette_r_d;
     protected static $html_chapitre_expedition;
     protected static $html_chapitre_exigence_client;
+    protected static $html_chapitre_exigence_client_MDD;
     protected static $html_chapitre_identite;
     protected static $html_chapitre_need_rebuild;
     protected static $html_chapitre_nomenclature;
@@ -322,6 +323,11 @@ class Chapitre {
             case 'exigence_client':
                 self::$html_chapitre_exigence_client = self::buildChapitreExigenceClient();
                 $return = self::$html_chapitre_exigence_client;
+                break;
+            default:
+            case 'exigence_client_MDD':
+                self::$html_chapitre_exigence_client_MDD = self::buildChapitreExigenceClientMDD();
+                $return = self::$html_chapitre_exigence_client_MDD;
                 break;
             default:
             case 'etiquette_client':
@@ -628,6 +634,10 @@ class Chapitre {
         return $bloc;
     }
 
+    /**
+     * Chapitre non Actif
+     * @return type
+     */
     public static function buildChapitreDonneClient() {
 
         $bloc = '';
@@ -822,6 +832,17 @@ class Chapitre {
         //Site d'expedition
         $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_SITE_EXPEDITION_FTA);
 
+         //Unité de Facturation
+        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_UNITE_FACTURATION);
+
+        //Gencod EAN Article
+        $bloc.=$ftaView->getHtmlEANArticle();
+
+        //Gencod EAN Colis
+        $bloc.=$ftaView->getHtmlEANColis();
+
+        //Gencod EAN Palette
+        $bloc.=$ftaView->getHtmlEANPalette();
 
         if ($ftaView->isDataValidationSuccessful() == "0") {
             self::setDataValidationSuccessfulToTrue();

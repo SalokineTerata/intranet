@@ -1988,7 +1988,7 @@ class FtaView extends AbstractView {
                 . '&id_fta_role=' . $paramIdFtaRole
                 . '&synthese_action=' . $paramSyntheseAction
                 . '&demande_abreviation_fta_transition=' . $paramDemandeAbreviationFtaEtat
-                . '>' . self::CALLBACK_LINK_TO_TRANSITER_PAGE . '</a></center></td>';
+                . '>' . FtaController::CALLBACK_LINK_TO_TRANSITER_PAGE . '</a></center></td>';
     }
     
     
@@ -2005,6 +2005,6 @@ class FtaView extends AbstractView {
                 . '&checkPost=1'
                 . $paramChapitresSelectionne
                 . $paramChapitres
-                . '>' . self::CALLBACK_LINK_TO_TRANSITER_PAGE_VALIDATE . '</a></center></td>';
+                . '>' . FtaController::CALLBACK_LINK_TO_TRANSITER_PAGE_VALIDATE . '</a></center></td>';
     }
 }

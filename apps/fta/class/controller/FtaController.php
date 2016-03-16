@@ -87,7 +87,7 @@ class FtaController {
     public static function isCheckDateFormat($value) {
         $result = DateTime::createFromFormat("d-m-Y", $value);
         return $result;
-    }   
+    }
 
     /**
      * Modifie le format de date vers le FR
@@ -144,6 +144,31 @@ class FtaController {
     public static function getTwoOfThreeValue($param) {
         $result = floor(($param * "2") / "3");
         return $result;
+    }
+
+    /**
+     * Actualisation du calcul de la duree de vie client pour les espace de trvail MDD
+     * @param string $paramWorkflow
+     * @param string $paramNomChapitre
+     * @param FtaModel $paramFtaModel
+     */
+    public static function refreshDureeDeVieMDD($paramWorkflow, $paramNomChapitre, FtaModel $paramFtaModel) {
+
+        switch ($paramWorkflow) {
+            case FtaWorkflowModel::NOM_FTA_WORKFLOW_MDD_AVEC:
+            case FtaWorkflowModel::NOM_FTA_WORKFLOW_MDD_SANS:
+
+                if ($paramNomChapitre == FtaChapitreModel::NOM_CHAPITRE_DUREE_DE_VIE) {
+                    $dureeDeVieProductionValue = $paramFtaModel->getDureeDeVieClientByDureeDeVieProduction();
+                    $paramFtaModel->getDataField(FtaModel::FIELDNAME_DUREE_DE_VIE)->setFieldValue($dureeDeVieProductionValue);
+                    $paramFtaModel->saveToDatabase();
+                }
+
+                break;
+
+            default:
+                break;
+        }
     }
 
 }

@@ -649,7 +649,7 @@ class FtaModel extends AbstractModel {
      * Défini le créateur de la FTA
      * @param UserModel 
      */
-    private function setModelCreateur($modelCreateur) {
+    private function setModelCreateur(UserModel $modelCreateur) {
         $this->modelCreateur = $modelCreateur;
     }
 

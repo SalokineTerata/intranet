@@ -207,7 +207,7 @@ if ($action == FtaEtatModel::ETAT_ABREVIATION_VALUE_MODIFICATION or $action == '
         </tr>
         <tr  class=contenu>
      
-           ' . $NOM_commentaire_maj_fta . '
+           " . $NOM_commentaire_maj_fta . "
 
         </tr>";
     }

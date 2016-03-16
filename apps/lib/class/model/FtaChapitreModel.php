@@ -29,6 +29,7 @@ class FtaChapitreModel extends AbstractModel {
     const FIELDNAME_NOM_CHAPITRE = 'nom_fta_chapitre';
     const FIELDNAME_NOM_USUEL_CHAPITRE = 'nom_usuel_fta_chapitre';
     const ID_CHAPITRE_IDENTITE = '1';
+    const NOM_CHAPITRE_DUREE_DE_VIE = 'duree_de_vie';
 
     public function __construct($paramId = NULL, $paramIsCreateRecordsetInDatabaseIfKeyDoesntExist = AbstractModel::DEFAULT_IS_CREATE_RECORDSET_IN_DATABASE_IF_KEY_DOESNT_EXIST) {
         parent::__construct($paramId, $paramIsCreateRecordsetInDatabaseIfKeyDoesntExist);
@@ -175,9 +176,9 @@ class FtaChapitreModel extends AbstractModel {
              * Génération d'un mail informant le gestionnaire de la Fta
              */
             if ($option['mail_gestionnaire']) {
+                $ftaModel = new FtaModel($paramIdFta);
                 $idGestionnaire = $ftaModel->getModelCreateur()->getKeyValue();
                 if ($idGestionnaire <> $idUser) {
-                    $ftaModel = new FtaModel($paramIdFta);
                     $mailGestionnaire = $ftaModel->getModelCreateur()->getDataField(UserModel::FIELDNAME_MAIL)->getFieldValue();
                     $sujetmail = 'FTA/Mise en Correction: ' . $sujetElements . ' par ' . $nomPrenom;
                     $destinataire = $mailGestionnaire;

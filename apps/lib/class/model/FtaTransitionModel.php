@@ -165,6 +165,7 @@ class FtaTransitionModel {
                 $option_duplication["site_de_production"] = $siteDeProduction;
                 $option_duplication["id_version_dossier_fta"] = $IdDossierVersion;
                 $option_duplication["date_echeance_fta"] = $dateEcheanceFta;
+                $option_duplication["nouveau_maj_fta"] = $nouveau_maj_fta;
                 $idFtaNew = FtaModel::buildDuplicationFta($id_fta_original, $action_duplication, $option_duplication, $paramIdWorkflow);
                 $ftaModel = new FtaModel($idFtaNew);
                 $codeArticleLdc = $ftaModel->getDataField(FtaModel::FIELDNAME_CODE_ARTICLE_LDC)->getFieldValue();

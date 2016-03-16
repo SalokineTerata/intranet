@@ -709,27 +709,28 @@ class AccueilFta {
         if ((substr($URL, -2)) == 'v3') {
             $URL = $URL . '/apps/fta/index.php?';
         }
-        $tableauFiche .= '<th><a href=' . $URL . '&order_common=Site_de_production&numeroPage=' . self::$numeroDePageCourante . '><img src=../lib/images/order-AZ.png title=\'Ordonné par Nom de Site de Production\'  border=\'0\' /></a>'
+        $tableauFiche .= '<th><a href=' . $URL . '&order_common=' . FtaModel::FIELDNAME_SITE_PRODUCTION . '&numeroPage=' . self::$numeroDePageCourante . '><img src=../lib/images/order-AZ.png title=\'Ordonné par Nom de Site de Production\'  border=\'0\' /></a>'
                 . 'Site'
                 . '</th><th>'
-                . '<a href=' . $URL . '&order_common=id_fta_classification2&numeroPage=' . self::$numeroDePageCourante . '><img src=../lib/images/order-AZ.png title=\'Ordonné par Nom du Propriétaire\'  border=\'0\' /></a>'
+                . '<a href=' . $URL . '&order_common=' . FtaModel::FIELDNAME_ID_FTA_CLASSIFICATION2 . '&numeroPage=' . self::$numeroDePageCourante . '><img src=../lib/images/order-AZ.png title=\'Ordonné par Nom du Propriétaire\'  border=\'0\' /></a>'
                 . 'Client'
                 . '</th><th>'
-                . '<a href=' . $URL . '&order_common=id_classification_raccourcis&numeroPage=' . self::$numeroDePageCourante . ' ><img src=../lib/images/order-AZ.png title=\'Ordonné par Nom de Classification\'  border=\'0\' /></a>'
+                . '<a href=' . $URL . '&order_common=' . FtaModel::FIELDNAME_ID_CLASSIFICATION_RACCOURCIS . '&numeroPage=' . self::$numeroDePageCourante . ' ><img src=../lib/images/order-AZ.png title=\'Ordonné par Nom de Classification\'  border=\'0\' /></a>'
                 . 'Class.'
                 . '</th><th>'
-                . '<a href=' . $URL . '&order_common=designation_commerciale_fta&numeroPage=' . self::$numeroDePageCourante . ' ><img src=../lib/images/order-AZ.png title=\'Ordonné par Noms du Produit\'  border=\'0\' /></a>'
+                . '<a href=' . $URL . '&order_common=' . FtaModel::FIELDNAME_DESIGNATION_COMMERCIALE . '&numeroPage=' . self::$numeroDePageCourante . ' ><img src=../lib/images/order-AZ.png title=\'Ordonné par Noms du Produit\'  border=\'0\' /></a>'
                 . 'Produits'
                 . '</th><th>'
-                . '<a href=' . $URL . '&order_common=id_dossier_fta&numeroPage=' . self::$numeroDePageCourante . ' ><img src=../lib/images/order-AZ.png title=\'Ordonné par code Fta\'  border=\'0\' /></a>'
+                . '<a href=' . $URL . '&order_common=' . FtaModel::FIELDNAME_DOSSIER_FTA . '&numeroPage=' . self::$numeroDePageCourante . ' ><img src=../lib/images/order-AZ.png title=\'Ordonné par code Fta\'  border=\'0\' /></a>'
                 . 'Dossier FTA'
                 . '</th><th>'
-                . '<a href=' . $URL . '&order_common=code_article_ldc&numeroPage=' . self::$numeroDePageCourante . ' ><img src=../lib/images/order-AZ.png title=\'Ordonné par code arcadia\'  border=\'0\' /></a>'
+                . '<a href=' . $URL . '&order_common=' . FtaModel::FIELDNAME_CODE_ARTICLE_LDC . '&numeroPage=' . self::$numeroDePageCourante . ' ><img src=../lib/images/order-AZ.png title=\'Ordonné par code arcadia\'  border=\'0\' /></a>'
                 . 'Code Article Arcadia'
                 . '</th><th>'
-                . '<a href=' . $URL . '&order_common=date_echeance_fta&numeroPage=' . self::$numeroDePageCourante . ' ><img src=../lib/images/order-AZ.png title=\'Ordonné par Date\'  border=\'0\' /></a>'
+                . '<a href=' . $URL . '&order_common=' . FtaModel::FIELDNAME_DATE_ECHEANCE_FTA . '&numeroPage=' . self::$numeroDePageCourante . ' ><img src=../lib/images/order-AZ.png title=\'Ordonné par Date\'  border=\'0\' /></a>'
                 . 'Echéance de validation'
                 . '</th><th>'
+                . '<a href=' . $URL . '&order_common=' . FtaModel::FIELDNAME_POURCENTAGE_AVANCEMENT . '&numeroPage=' . self::$numeroDePageCourante . ' ><img src=../lib/images/order-AZ.png title=\'Ordonné par ' . UserInterfaceLabel::FR_AVANCEMENT_FTA . '\'  border=\'0\' /></a>'
                 . UserInterfaceLabel::FR_AVANCEMENT_FTA
                 . '</th><th>'
                 . 'Rôles'
@@ -804,7 +805,7 @@ class AccueilFta {
                 $listeIdFtaRole = $rowsDetail[FtaModel::FIELDNAME_LISTE_ID_FTA_ROLE];
 
                 if ($recap[$idFta] == NULL) {
-                    $recap[$idFta] = "";
+                    $recap[$idFta] = "0%";
                 }
 
                 /**
@@ -853,15 +854,18 @@ class AccueilFta {
 
                 /**
                  * Lien vers l'historique de la Fta
+                 * Il ne s'affiche que  pour le Fta Validé et Modifier
                  */
-                $lienHistorique = ' <a href=historique-' . $idFta
-                        . '-1'
-                        . '-' . self::$idFtaEtat
-                        . '-' . self::$abreviationFtaEtat
-                        . '-' . self::$idFtaRole
-                        . '-' . self::$syntheseAction
-                        . '-1'
-                        . '.html >' . $recap[$idFta] . '</a>';
+                if (self::$abreviationFtaEtat == FtaEtatModel::ETAT_ABREVIATION_VALUE_VALIDE or self::$abreviationFtaEtat == FtaEtatModel::ETAT_ABREVIATION_VALUE_MODIFICATION) {
+                    $lienHistorique = ' <a href=historique-' . $idFta
+                            . '-1'
+                            . '-' . self::$idFtaEtat
+                            . '-' . self::$abreviationFtaEtat
+                            . '-' . self::$idFtaRole
+                            . '-' . self::$syntheseAction
+                            . '-1'
+                            . '.html >' . $recap[$idFta] . '</a>';
+                }
                 /*
                  * Designation commerciale
                  */
@@ -1046,7 +1050,9 @@ class AccueilFta {
                          * que la Fta soit valider,
                          * on accède au boutton de transition
                          */
-                        or ( self::$ftaModification and self::$abreviationFtaEtat == FtaEtatModel::ETAT_ABREVIATION_VALUE_VALIDE and $accesTransitionButton == TRUE)
+                        or ( self::$ftaModification and self::$abreviationFtaEtat == FtaEtatModel::ETAT_ABREVIATION_VALUE_VALIDE
+//                                and $accesTransitionButton == TRUE
+                        )
                 ) {
                     $actions .= '<a '
                             . 'href=transiter.php'

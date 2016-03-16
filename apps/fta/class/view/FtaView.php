@@ -543,10 +543,10 @@ class FtaView extends AbstractView {
         $htmlObjectEtiquetteColis->setIsEditable($this->getIsEditable());
 
         if ($htmlObjectVerrouillageEtiquette->getDataField()->getFieldValue() === FtaModel::ETIQUETTE_COLIS_VERROUILLAGE_TRUE) {
-           /**
-            * Si l'utilisateur souhaite renseigné son étiquette colis 
-            * alors on l'affiche afin qu'il puisse la modifier
-            */
+            /**
+             * Si l'utilisateur souhaite renseigné son étiquette colis 
+             * alors on l'affiche afin qu'il puisse la modifier
+             */
             $htmlObjectEtiquetteColis->getStyleCSS()->unsetDisplay();
             /**
              * Si l'étiqueete colis n'est pas renseigné alors on récupère la DIN 
@@ -1019,7 +1019,7 @@ class FtaView extends AbstractView {
                 /*
                  * Tableau de données
                  */
-                $arrayFtaConditionnementTmp = FtaConditionnementModel::getArrayFtaConditonnement($idFtaCondtionnement);
+                $arrayFtaConditionnementTmp = $ftaConditionnmentModel->getArrayFtaConditonnement();
 
 //                $arrayFtaConditionnement = array_replace_recursive($arrayFtaConditionnementtmp, $arrayFtaConditionnementTmp);
                 $arrayFtaConditionnement = ($arrayFtaConditionnementtmp + $arrayFtaConditionnementTmp);
@@ -1049,7 +1049,7 @@ class FtaView extends AbstractView {
             }
             $className = $ftaConditionnmentModel->getClassName();
             $label = $annexeEmballageGroupeTypeModel2->getDataField(AnnexeEmballageGroupeTypeModel::FIELDNAME_NOM_ANNEXE_EMBALLAGE_GROUPE_TYPE)->getFieldValue();
-
+            $ftaConditionnmentModel->setIsEditable($this->getIsEditable());
 
             $htmlEmballageUVC = new HtmlSubForm_RNN($arrayFtaConditionnement, $className, $label, $tablesNameAndIdForeignKeyOfFtaConditionnement, FtaConditionnementModel::FONCTIONNAME_VERSIONNING);
             $htmlEmballageUVC->setIsEditable($this->getIsEditable());
@@ -1057,7 +1057,7 @@ class FtaView extends AbstractView {
             $htmlEmballageUVC->setLienAjouter(FtaConditionnementModel::getAddLinkAfterConditionnement($paramIdFta, $paramChapitre, AnnexeEmballageGroupeTypeModel::EMBALLAGE_UVC, $paramSyntheseAction, $paramIdFtaEtat, $paramAbreviationEtat, $paramIdFtaRole));
             $htmlEmballageUVC->setLien(FtaConditionnementModel::getAddLinkBeforeConditionnement($paramIdFta, $paramChapitre, AnnexeEmballageGroupeTypeModel::EMBALLAGE_UVC, $paramSyntheseAction, $paramIdFtaEtat, $paramAbreviationEtat, $paramIdFtaRole));
             $htmlEmballageUVC->setLienSuppression(FtaConditionnementModel::getDeleteLinkConditionnement($paramIdFta, $paramChapitre, $arrayIdFtaCondtionnement, $paramSyntheseAction, $paramIdFtaEtat, $paramAbreviationEtat, $paramIdFtaRole));
-            $htmlEmballageUVC->setTableLabel(FtaConditionnementModel::getTableConditionnementLabel($idFtaCondtionnement));
+            $htmlEmballageUVC->setTableLabel($ftaConditionnmentModel->getTableConditionnementLabel());
             $return .= $htmlEmballageUVC->getHtmlResult();
         } else {
             /*
@@ -1118,7 +1118,7 @@ class FtaView extends AbstractView {
                 /*
                  * Tableau de données
                  */
-                $arrayFtaConditionnementTmp = FtaConditionnementModel::getArrayFtaConditonnement($idFtaCondtionnement);
+                $arrayFtaConditionnementTmp = $ftaConditionnmentModel->getArrayFtaConditonnement();
 
                 $arrayFtaConditionnement = array_replace_recursive($arrayFtaConditionnementtmp, $arrayFtaConditionnementTmp);
 
@@ -1145,7 +1145,7 @@ class FtaView extends AbstractView {
             }
             $className = $ftaConditionnmentModel->getClassName();
             $label = $annexeEmballageGroupeTypeModel2->getDataField(AnnexeEmballageGroupeTypeModel::FIELDNAME_NOM_ANNEXE_EMBALLAGE_GROUPE_TYPE)->getFieldValue();
-
+            $ftaConditionnmentModel->setIsEditable($this->getIsEditable());
 
             $htmlEmballageParColis = new HtmlSubForm_RNN($arrayFtaConditionnement, $className, $label, $tablesNameAndIdForeignKeyOfFtaConditionnement, FtaConditionnementModel::FONCTIONNAME_VERSIONNING);
             $htmlEmballageParColis->setIsEditable($this->getIsEditable());
@@ -1153,7 +1153,7 @@ class FtaView extends AbstractView {
             $htmlEmballageParColis->setLienAjouter(FtaConditionnementModel::getAddLinkAfterConditionnement($paramIdFta, $paramChapitre, AnnexeEmballageGroupeTypeModel::EMBALLAGE_PAR_COLIS, $paramSyntheseAction, $paramIdFtaEtat, $paramAbreviationEtat, $paramIdFtaRole));
             $htmlEmballageParColis->setLien(FtaConditionnementModel::getAddLinkBeforeConditionnement($paramIdFta, $paramChapitre, AnnexeEmballageGroupeTypeModel::EMBALLAGE_PAR_COLIS, $paramSyntheseAction, $paramIdFtaEtat, $paramAbreviationEtat, $paramIdFtaRole));
             $htmlEmballageParColis->setLienSuppression(FtaConditionnementModel::getDeleteLinkConditionnement($paramIdFta, $paramChapitre, $arrayIdFtaCondtionnement, $paramSyntheseAction, $paramIdFtaEtat, $paramAbreviationEtat, $paramIdFtaRole));
-            $htmlEmballageParColis->setTableLabel(FtaConditionnementModel::getTableConditionnementLabel($idFtaCondtionnement));
+            $htmlEmballageParColis->setTableLabel($ftaConditionnmentModel->getTableConditionnementLabel());
             $return .= $htmlEmballageParColis->getHtmlResult();
         } else {
             /*
@@ -1214,7 +1214,7 @@ class FtaView extends AbstractView {
                 /*
                  * Tableau de données
                  */
-                $arrayFtaConditionnementTmp = FtaConditionnementModel::getArrayFtaConditonnementDuColis($idFtaCondtionnement);
+                $arrayFtaConditionnementTmp = $ftaConditionnmentModel->getArrayFtaConditonnementDuColis();
 
                 $arrayFtaConditionnement = array_replace_recursive($arrayFtaConditionnementtmp, $arrayFtaConditionnementTmp);
 
@@ -1243,7 +1243,7 @@ class FtaView extends AbstractView {
             }
             $className = $ftaConditionnmentModel->getClassName();
             $label = $annexeEmballageGroupeTypeModel2->getDataField(AnnexeEmballageGroupeTypeModel::FIELDNAME_NOM_ANNEXE_EMBALLAGE_GROUPE_TYPE)->getFieldValue();
-
+            $ftaConditionnmentModel->setIsEditable($this->getIsEditable());
 
             $htmlEmballageDuColis = new HtmlSubForm_RNN($arrayFtaConditionnement, $className, $label, $tablesNameAndIdForeignKeyOfFtaConditionnement, FtaConditionnementModel::FONCTIONNAME_VERSIONNING);
             $htmlEmballageDuColis->setIsEditable($this->getIsEditable());
@@ -1251,7 +1251,7 @@ class FtaView extends AbstractView {
             $htmlEmballageDuColis->setLienAjouter(FtaConditionnementModel::getAddLinkAfterConditionnement($paramIdFta, $paramChapitre, AnnexeEmballageGroupeTypeModel::EMBALLAGE_DU_COLIS, $paramSyntheseAction, $paramIdFtaEtat, $paramAbreviationEtat, $paramIdFtaRole));
             $htmlEmballageDuColis->setLien(FtaConditionnementModel::getAddLinkBeforeConditionnement($paramIdFta, $paramChapitre, AnnexeEmballageGroupeTypeModel::EMBALLAGE_DU_COLIS, $paramSyntheseAction, $paramIdFtaEtat, $paramAbreviationEtat, $paramIdFtaRole));
             $htmlEmballageDuColis->setLienSuppression(FtaConditionnementModel::getDeleteLinkConditionnement($paramIdFta, $paramChapitre, $arrayIdFtaCondtionnement, $paramSyntheseAction, $paramIdFtaEtat, $paramAbreviationEtat, $paramIdFtaRole));
-            $htmlEmballageDuColis->setTableLabel(FtaConditionnementModel::getTableConditionnementLabelDuColis($idFtaCondtionnement));
+            $htmlEmballageDuColis->setTableLabel($ftaConditionnmentModel->getTableConditionnementLabelDuColis());
 
             $return .= $htmlEmballageDuColis->getHtmlResult();
             if (count($FtaConditionnement) > "1") {
@@ -1319,7 +1319,7 @@ class FtaView extends AbstractView {
                 /*
                  * Tableau de données
                  */
-                $arrayFtaConditionnementTmp = FtaConditionnementModel::getArrayFtaConditonnement($idFtaCondtionnement);
+                $arrayFtaConditionnementTmp = $ftaConditionnmentModel->getArrayFtaConditonnement();
 
                 $arrayFtaConditionnement = array_replace_recursive($arrayFtaConditionnementtmp, $arrayFtaConditionnementTmp);
 
@@ -1348,7 +1348,7 @@ class FtaView extends AbstractView {
             }
             $className = $ftaConditionnmentModel->getClassName();
             $label = $annexeEmballageGroupeTypeModel2->getDataField(AnnexeEmballageGroupeTypeModel::FIELDNAME_NOM_ANNEXE_EMBALLAGE_GROUPE_TYPE)->getFieldValue();
-
+            $ftaConditionnmentModel->setIsEditable($this->getIsEditable());
 
             $htmlEmballagePalette = new HtmlSubForm_RNN($arrayFtaConditionnement, $className, $label, $tablesNameAndIdForeignKeyOfFtaConditionnement, FtaConditionnementModel::FONCTIONNAME_VERSIONNING);
             $htmlEmballagePalette->setIsEditable($this->getIsEditable());
@@ -1356,7 +1356,7 @@ class FtaView extends AbstractView {
             $htmlEmballagePalette->setLienAjouter(FtaConditionnementModel::getAddLinkAfterConditionnement($paramIdFta, $paramChapitre, AnnexeEmballageGroupeTypeModel::EMBALLAGE_PALETTE, $paramSyntheseAction, $paramIdFtaEtat, $paramAbreviationEtat, $paramIdFtaRole));
             $htmlEmballagePalette->setLien(FtaConditionnementModel::getAddLinkBeforeConditionnement($paramIdFta, $paramChapitre, AnnexeEmballageGroupeTypeModel::EMBALLAGE_PALETTE, $paramSyntheseAction, $paramIdFtaEtat, $paramAbreviationEtat, $paramIdFtaRole));
             $htmlEmballagePalette->setLienSuppression(FtaConditionnementModel::getDeleteLinkConditionnement($paramIdFta, $paramChapitre, $arrayIdFtaCondtionnement, $paramSyntheseAction, $paramIdFtaEtat, $paramAbreviationEtat, $paramIdFtaRole));
-            $htmlEmballagePalette->setTableLabel(FtaConditionnementModel::getTableConditionnementLabel($idFtaCondtionnement));
+            $htmlEmballagePalette->setTableLabel($ftaConditionnmentModel->getTableConditionnementLabel());
             $return .= $htmlEmballagePalette->getHtmlResult();
             if (count($FtaConditionnement) > "1") {
                 $return.= "<tr class=contenu><td bgcolor=#FFAA55 align=\"center\" valign=\"middle\">";

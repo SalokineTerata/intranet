@@ -172,6 +172,12 @@ foreach ($arrayFtaTransition as $rowsFtaTransition) {
     } else {
         $selected = '';
     }
+    /**
+     * Si une action n'est pas renseigné alors on affiche la première action possible
+     */
+    if (!$action) {
+        $action = $rowsFtaTransition[FtaTransitionModel::FIELDNAME_ABREVIATION_FTA_TRANSITION];
+    }
 
     $tableau_transition .='<option value=\'' . $rowsFtaTransition[FtaTransitionModel::FIELDNAME_ABREVIATION_FTA_TRANSITION] . '\' ' . $selected . '>'
             . $rowsFtaTransition[FtaTransitionModel::FIELDNAME_NOM_USUEL_FTA_TRANSITION] . '</option>'
@@ -211,26 +217,39 @@ if ($action == FtaEtatModel::ETAT_ABREVIATION_VALUE_MODIFICATION or $action == '
     $ftaModel->setIsEditable(Chapitre::EDITABLE);
     $dateEcheanceFtaHtml = $ftaModel->getHtmlDateEcheance(TRUE);
     $tableau_chapitre = '<' . $html_table . '>'
-            . '<tr class=titre><td>Liste des Chapitres pouvant être mis à jour</td></tr>'
+            . '<tr class=titre><td>' . UserInterfaceLabel::FR_TRANSITION_MODIFICATION . '</td></tr>'
             . '<tr><td><' . $html_table . '>'
     ;
+    if (!FtaRoleModel::isGestionnaire($idFtaRole)) {
+        $reqRestrictionListeChapitre = ' AND ' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_ROLE . '=' . $idFtaRole;
+    }
 
-    $arrrayFtaChapitre = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
-                    'SELECT ' . FtaWorkflowStructureModel::TABLENAME . '.' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_CHAPITRE
-                    . ',' . FtaChapitreModel::FIELDNAME_NOM_USUEL_CHAPITRE
-                    . ' FROM ' . FtaChapitreModel::TABLENAME . ',' . FtaWorkflowStructureModel::TABLENAME
-                    . ' WHERE ' . FtaWorkflowStructureModel::TABLENAME . '.' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_CHAPITRE
-                    . '=' . FtaChapitreModel::TABLENAME . '.' . FtaChapitreModel::KEYNAME
-                    . ' AND ' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_WORKFLOW . '=' . $idFtaWorkflow
-                    . ' AND ' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_PROCESSUS . '<>' . FtaProcessusModel::PROCESSUS_PUBLIC
-                    . ' ORDER BY ' . FtaChapitreModel::FIELDNAME_NOM_USUEL_CHAPITRE
+    $reqListesChapitre = 'SELECT ' . FtaWorkflowStructureModel::TABLENAME . '.' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_CHAPITRE
+            . ',' . FtaChapitreModel::FIELDNAME_NOM_USUEL_CHAPITRE
+            . ' FROM ' . FtaChapitreModel::TABLENAME . ',' . FtaWorkflowStructureModel::TABLENAME
+            . ' WHERE ' . FtaWorkflowStructureModel::TABLENAME . '.' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_CHAPITRE
+            . '=' . FtaChapitreModel::TABLENAME . '.' . FtaChapitreModel::KEYNAME
+            . ' AND ' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_WORKFLOW . '=' . $idFtaWorkflow
+            . ' AND ' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_PROCESSUS . '<>' . FtaProcessusModel::PROCESSUS_PUBLIC
+            . $reqRestrictionListeChapitre
+            . ' ORDER BY ' . FtaChapitreModel::FIELDNAME_NOM_USUEL_CHAPITRE;
+    $arrrayFtaChapitre = DatabaseOperation::convertSqlStatementWithoutKeyToArray($reqListesChapitre
     );
+    /**
+     * On attribut un code couleur selon les éléments sélectionner à dévalider     * 
+     */
     foreach ($arrrayFtaChapitre as $rowsChapitre) {
         if (Lib::getParameterFromRequest(FtaChapitreModel::FIELDNAME_NOM_CHAPITRE . '_' . $rowsChapitre[FtaWorkflowStructureModel::FIELDNAME_ID_FTA_CHAPITRE]) == 1) {
+            /**
+             * Elements sélectionner par l'utilisateur
+             */
             $checked = 'checked';
             $bgcolor = TableauFicheView::HTML_CELL_BGCOLOR_VALIDATE;
             $din = "";
         } elseif (Lib::getParameterFromRequest(FtaChapitreModel::FIELDNAME_NOM_CHAPITRE . '_' . $rowsChapitre[FtaWorkflowStructureModel::FIELDNAME_ID_FTA_CHAPITRE]) == 2) {
+            /**
+             * Elements grisé en conséquence de la sélection par l'utilisateur
+             */
             $checked = 'checked';
             $din = TableauFicheView::HTML_TEXT_COLOR_DIN;
             $bgcolor = TableauFicheView::HTML_CELL_BGCOLOR_DEFAULT;
@@ -240,7 +259,7 @@ if ($action == FtaEtatModel::ETAT_ABREVIATION_VALUE_MODIFICATION or $action == '
             $din = "";
         }
         $tableau_chapitre.= '<tr>'
-                . '<td><input type=checkbox  name=' . FtaChapitreModel::FIELDNAME_NOM_CHAPITRE . '_' . $rowsChapitre[FtaChapitreModel::KEYNAME] . ' value=1  ' . $checked . '/></td>'
+                . '<td><input type=checkbox   name=' . FtaChapitreModel::FIELDNAME_NOM_CHAPITRE . '_' . $rowsChapitre[FtaChapitreModel::KEYNAME] . ' value=1  ' . $checked . '/></td>'
                 . '<td ' . $bgcolor . '><font  ' . $din . '>' . $rowsChapitre[FtaChapitreModel::FIELDNAME_NOM_USUEL_CHAPITRE] . '</font></td>'
                 . '</tr>'
         ;

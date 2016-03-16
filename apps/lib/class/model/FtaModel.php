@@ -1575,6 +1575,7 @@ class FtaModel extends AbstractModel {
                 //Récupération de la liste des chapitres a dévalider
                 $selection_chapitre = $paramOption["selection_chapitre"];
                 $paramOption["no_message_ecran"] = 1;
+                $paramOption["mail_gestionnaire"] = 1;
                 if ($selection_chapitre) {
                     foreach ($selection_chapitre as $id_fta_chapitre) {
 
@@ -1817,7 +1818,7 @@ class FtaModel extends AbstractModel {
          * Déclaration des variables
          */
         $ftaModel = new FtaModel($paramIdFta);
-        $IdArticleAgrocologic = $ftaModel->getDataField(FtaModel::FIELDNAME_ARTICLE_AGROLOGIC)->getFieldValue();
+        $codeArticleLDC = $ftaModel->getDataField(FtaModel::FIELDNAME_CODE_ARTICLE_LDC)->getFieldValue();
         $IdDossierFta = $ftaModel->getDataField(FtaModel::FIELDNAME_DOSSIER_FTA)->getFieldValue();
         $IdVersionDossierFta = $ftaModel->getDataField(FtaModel::FIELDNAME_VERSION_DOSSIER_FTA)->getFieldValue();
         $Libelle = $ftaModel->getDataField(FtaModel::FIELDNAME_LIBELLE)->getFieldValue();
@@ -1832,8 +1833,8 @@ class FtaModel extends AbstractModel {
         /*
          * Code
          */
-        if ($IdArticleAgrocologic) {
-            $din.= $IdArticleAgrocologic;
+        if ($codeArticleLDC) {
+            $din.= $codeArticleLDC;
         } else {
             $din.= $IdDossierFta . "v" . $IdVersionDossierFta;
         }

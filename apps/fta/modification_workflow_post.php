@@ -54,7 +54,7 @@ $paramSyntheseAction = Lib::getParameterFromRequest('synthese_action');
 $idFtaEtat = Lib::getParameterFromRequest(FtaEtatModel::KEYNAME);
 $abreviationFtaEtat = Lib::getParameterFromRequest(FtaEtatModel::FIELDNAME_ABREVIATION);
 $comeback = Lib::getParameterFromRequest(FtaEtatModel::KEYNAME);
-$idFtaWorkflowOLD = Lib::getParameterFromRequest('id_fta_workflow');
+$idFtaWorkflowOLD = Lib::getParameterFromRequest(FtaWorkflowModel::KEYNAME);
 $idFtaWorkflowNEW = Lib::getParameterFromRequest(FtaWorkflowModel::TABLENAME . '_' . FtaWorkflowModel::KEYNAME);
 /**
  * Initialisation

@@ -311,7 +311,7 @@ class Chapitre {
                 break;
             default:
             case 'site_expedition':
-                self::$html_chapitre_site_expedition = self::buildChapitreSiteExpedition();
+                self::$html_chapitre_site_expedition = self::buildChapitreExpeditionEtEANS();
                 $return = self::$html_chapitre_site_expedition;
                 break;
             default:
@@ -815,7 +815,7 @@ class Chapitre {
         return $bloc;
     }
 
-    public static function buildChapitreSiteExpedition() {
+    public static function buildChapitreExpeditionEtEANS() {
 
         $bloc = '';
         $id_fta = self::$id_fta;

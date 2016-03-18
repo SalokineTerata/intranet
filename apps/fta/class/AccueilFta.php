@@ -76,7 +76,7 @@ class AccueilFta {
          * $arrayIdFtaAndIdWorkflow[1] sont les id_fta
          * $arrayIdFtaAndIdWorkflow[2] sont les nom des workflows correspondant aux  id_fta
          */
-        self::$arrayIdFtaAndIdWorkflow = FtaEtatModel::getIdFtaByEtatAvancement(self::$syntheseAction, self::$abreviationFtaEtat, self::$idFtaRole, self::$idUser, self::$idFtaEtat, self::$ftaModification, self::$lieuGeo);
+        self::$arrayIdFtaAndIdWorkflow = FtaEtatModel::getIdFtaByEtatAvancement(self::$syntheseAction, self::$idFtaRole, self::$idUser, self::$idFtaEtat, self::$ftaModification, self::$lieuGeo);
 
         self::$arrayIdFtaByUserAndWorkflow = UserModel::getIdFtaByUserAndWorkflow(self::$arrayIdFtaAndIdWorkflow, self::$orderBy, $debut, self::$ftaModification);
 
@@ -791,7 +791,7 @@ class AccueilFta {
                 $idFta = $rowsDetail[FtaModel::KEYNAME];
                 $abreviationFtaEtat = $rowsDetail[FtaEtatModel::FIELDNAME_ABREVIATION];
                 $LIBELLE = $rowsDetail[FtaModel::FIELDNAME_LIBELLE];
-                $suffixeAgrologicFta = $rowsDetail[ClassificationRaccourcisModel::FIELDNAME_NOM_CLASSIFICATION_RACCOURCIS];
+                $idClassificationRaccourcis = $rowsDetail[FtaModel::FIELDNAME_ID_CLASSIFICATION_RACCOURCIS];
                 $designationCommercialeFta = $rowsDetail[FtaModel::FIELDNAME_DESIGNATION_COMMERCIALE];
                 $idDossierFta = $rowsDetail[FtaModel::FIELDNAME_DOSSIER_FTA];
                 $idVersionDossierFta = $rowsDetail[FtaModel::FIELDNAME_VERSION_DOSSIER_FTA];
@@ -807,6 +807,11 @@ class AccueilFta {
                 if ($recap[$idFta] == NULL) {
                     $recap[$idFta] = "0%";
                 }
+
+                /**
+                 * On récupère le nom de la classification
+                 */
+                $suffixeAgrologicFta = ClassificationRaccourcisModel::getNameRaccroucisClassifById($idClassificationRaccourcis);
 
                 /**
                  * Changment du format de date en Fr

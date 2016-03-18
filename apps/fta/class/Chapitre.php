@@ -832,7 +832,7 @@ class Chapitre {
         //Site d'expedition
         $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_SITE_EXPEDITION_FTA);
 
-         //Unité de Facturation
+        //Unité de Facturation
         $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_UNITE_FACTURATION);
 
         //Gencod EAN Article
@@ -2505,7 +2505,9 @@ class Chapitre {
             //Recherche de la personnes ayant signé ce chapitre
             if (self::$ftaSuiviProjetModel->getDataField(FtaSuiviProjetModel::FIELDNAME_SIGNATURE_VALIDATION_SUIVI_PROJET)->getFieldValue()) { //Le chapitre est signé
                 $arrayUser = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
-                                'SELECT ' . UserModel::FIELDNAME_NOM . ', ' . UserModel::FIELDNAME_PRENOM
+                                'SELECT ' . UserModel::FIELDNAME_NOM
+                                . ', ' . UserModel::FIELDNAME_PRENOM
+                                . ', ' . UserModel::FIELDNAME_LOGIN
                                 . ' FROM ' . UserModel::TABLENAME
                                 . ' WHERE ' . UserModel::KEYNAME . '=' . self::$ftaSuiviProjetModel->getDataField(FtaSuiviProjetModel::FIELDNAME_SIGNATURE_VALIDATION_SUIVI_PROJET)->getFieldValue()
                 );
@@ -2515,6 +2517,9 @@ class Chapitre {
                         $validateur = $rowsUser[UserModel::FIELDNAME_PRENOM]
                                 . ' '
                                 . $rowsUser[UserModel::FIELDNAME_NOM]
+                                . ' ('
+                                . $rowsUser[UserModel::FIELDNAME_LOGIN]
+                                . ') '
                         ;
                     }
                 }

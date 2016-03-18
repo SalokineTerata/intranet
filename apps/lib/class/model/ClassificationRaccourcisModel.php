@@ -28,4 +28,20 @@ class ClassificationRaccourcisModel extends AbstractModel {
         return $raccourcisValue;
     }
 
+    /**
+     *    On récupère le nom de la classification
+     * @param type $paramIdClassificationRaccourcis
+     */
+    public static function getNameRaccroucisClassifById($paramIdClassificationRaccourcis) {
+
+        if ($paramIdClassificationRaccourcis) {
+            $classificationRaccoucisModel = new ClassificationRaccourcisModel($paramIdClassificationRaccourcis);
+            $suffixeAgrologicFta = $classificationRaccoucisModel->getNameRaccourcisClassif();
+        } else {
+            $suffixeAgrologicFta = "";
+        }
+
+        return $suffixeAgrologicFta;
+    }
+
 }

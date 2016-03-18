@@ -71,14 +71,13 @@ class FtaEtatModel extends AbstractModel {
     /**
      * Liste des id Fta selon l'état d'avancement en exécution
      * @param type $paramSyntheseAction
-     * @param type $paramEtat
      * @param type $paramRole
      * @param type $paramIdUser
      * @param type $paramIdFtaEtat
      * @param type $paramFtaModification
      * @return type
      */
-    public static function getIdFtaByEtatAvancement($paramSyntheseAction, $paramEtat, $paramRole, $paramIdUser, $paramIdFtaEtat, $paramFtaModification, $paramLieuGeo) {
+    public static function getIdFtaByEtatAvancement($paramSyntheseAction, $paramRole, $paramIdUser, $paramIdFtaEtat, $paramFtaModification, $paramLieuGeo) {
         $idFtaEffectue = array();
 //        $compteur = "0";
         if ($_SESSION['CheckIdFtaRole'] <> $paramRole or $_SESSION[UserModel::KEYNAME] <> $paramIdUser) {
@@ -95,17 +94,14 @@ class FtaEtatModel extends AbstractModel {
                  */
                 $arrayTmp = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
                                 'SELECT DISTINCT ' . FtaModel::TABLENAME . '.' . FtaModel::KEYNAME
-                                . ',' . FtaProcessusCycleModel::TABLENAME . '.' . FtaProcessusCycleModel::FIELDNAME_PROCESSUS_INIT
-                                . ',' . FtaProcessusCycleModel::TABLENAME . '.' . FtaProcessusCycleModel::FIELDNAME_PROCESSUS_NEXT
+                                . ',' . FtaWorkflowStructureModel::TABLENAME . '.' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_PROCESSUS
                                 . ',' . FtaModel::TABLENAME . '.' . FtaModel::FIELDNAME_WORKFLOW
                                 . ' FROM ' . FtaWorkflowModel::TABLENAME . ', ' . FtaWorkflowStructureModel::TABLENAME
-                                . ', ' . FtaProcessusCycleModel::TABLENAME . ', ' . FtaSuiviProjetModel::TABLENAME
+                                . ', ' . FtaSuiviProjetModel::TABLENAME
                                 . ' , ' . FtaActionSiteModel::TABLENAME . ' , ' . FtaModel::TABLENAME
                                 . ' , ' . IntranetDroitsAccesModel::TABLENAME . ' , ' . IntranetActionsModel::TABLENAME
-                                . ' WHERE ' . FtaProcessusCycleModel::TABLENAME . '.' . FtaProcessusCycleModel::FIELDNAME_PROCESSUS_NEXT
-                                . '=' . FtaWorkflowStructureModel::TABLENAME . '.' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_PROCESSUS
-                                . ' AND ' . FtaProcessusCycleModel::TABLENAME . '.' . FtaProcessusCycleModel::FIELDNAME_WORKFLOW
-                                . '=' . FtaWorkflowStructureModel::TABLENAME . '.' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_WORKFLOW
+                                . ' WHERE ' . FtaWorkflowStructureModel::TABLENAME . '.' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_PROCESSUS
+                                . ' IS NOT NULL'
                                 . ' AND ' . FtaWorkflowModel::TABLENAME . '.' . FtaWorkflowModel::KEYNAME
                                 . '=' . FtaWorkflowStructureModel::TABLENAME . '.' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_WORKFLOW
                                 . ' AND ' . FtaModel::TABLENAME . '.' . FtaModel::FIELDNAME_WORKFLOW
@@ -127,7 +123,6 @@ class FtaEtatModel extends AbstractModel {
                                 . ' AND ' . IntranetDroitsAccesModel::FIELDNAME_ID_USER . '=' . $paramIdUser                                                  // Nous recuperons l'identifiant de l'utilisateur connecté
                                 . ' AND ' . FtaModel::FIELDNAME_ID_FTA_ETAT . '=' . $paramIdFtaEtat                                                           // Nous recuperons l'identifiant de l'etat de la Fta
                                 . ' AND ' . FtaWorkflowStructureModel::TABLENAME . '.' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_ROLE . '=' . $paramRole // Nous recuperons le type de role pour l'utilisateur
-                                . ' AND ' . FtaProcessusCycleModel::FIELDNAME_FTA_ETAT . '=\'' . $paramEtat . '\''                                            // Nous recuperons l'abréviation de l'etat de la Fta
                                 . ' AND ( 0 ' . IntranetActionsModel::addIdIntranetAction($_SESSION[Acl::ACL_INTRANET_ACTIONS_VALIDE]) . ')'
                                 /**
                                  * Ticket 49823 en 3.1 activation/désactivation d'un workflow
@@ -141,7 +136,7 @@ class FtaEtatModel extends AbstractModel {
                     foreach ($arrayTmp as $rows) {
                         $cheackIdFta = in_array($rows[FtaModel::KEYNAME], $idFtaEffectue);
                         if (!$cheackIdFta) {
-                            $tauxDeValidadation = FtaProcessusModel::getValideProcessusEncours($rows[FtaModel::KEYNAME], $rows[FtaProcessusCycleModel::FIELDNAME_PROCESSUS_INIT], $rows[FtaWorkflowStructureModel::FIELDNAME_ID_FTA_WORKFLOW]);
+                            $tauxDeValidadation = FtaProcessusModel::getValideProcessusEncours($rows[FtaModel::KEYNAME], $rows[FtaWorkflowStructureModel::FIELDNAME_ID_FTA_PROCESSUS], $rows[FtaWorkflowStructureModel::FIELDNAME_ID_FTA_WORKFLOW]);
                             if ($tauxDeValidadation <> '1') {
                                 $idFtaEffectue[] = $rows[FtaModel::KEYNAME];
 //                                $compteur++;
@@ -162,7 +157,7 @@ class FtaEtatModel extends AbstractModel {
                 break;
 
 
-            case FtaEtatModel::ETAT_AVANCEMENT_VALUE_EN_COURS:
+            case FtaEtatModel::ETAT_AVANCEMENT_VALUE_EN_COURS:               
                 //Récupération des suivis de projet gérés par l'utilisateur et non validé
 
                 /*
@@ -173,13 +168,11 @@ class FtaEtatModel extends AbstractModel {
                                 . ',' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_PROCESSUS
                                 . ',' . FtaModel::TABLENAME . '.' . FtaModel::FIELDNAME_WORKFLOW
                                 . ' FROM ' . FtaWorkflowModel::TABLENAME . ', ' . FtaWorkflowStructureModel::TABLENAME
-                                . ', ' . FtaProcessusCycleModel::TABLENAME . ', ' . FtaSuiviProjetModel::TABLENAME
+                                . ', ' . FtaSuiviProjetModel::TABLENAME
                                 . ' , ' . FtaActionSiteModel::TABLENAME . ' , ' . FtaModel::TABLENAME
                                 . ' , ' . IntranetDroitsAccesModel::TABLENAME . ' , ' . IntranetActionsModel::TABLENAME
-                                . ' WHERE ' . FtaProcessusCycleModel::TABLENAME . '.' . FtaProcessusCycleModel::FIELDNAME_PROCESSUS_NEXT
-                                . '=' . FtaWorkflowStructureModel::TABLENAME . '.' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_PROCESSUS
-                                . ' AND ' . FtaProcessusCycleModel::TABLENAME . '.' . FtaProcessusCycleModel::FIELDNAME_WORKFLOW
-                                . '=' . FtaWorkflowStructureModel::TABLENAME . '.' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_WORKFLOW
+                                . ' WHERE ' . FtaWorkflowStructureModel::TABLENAME . '.' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_PROCESSUS
+                                . ' IS NOT NULL'
                                 . ' AND ' . FtaWorkflowModel::TABLENAME . '.' . FtaWorkflowModel::KEYNAME
                                 . '=' . FtaWorkflowStructureModel::TABLENAME . '.' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_WORKFLOW
                                 . ' AND ' . FtaActionSiteModel::TABLENAME . '.' . FtaActionSiteModel::FIELDNAME_ID_FTA_WORKFLOW
@@ -203,7 +196,6 @@ class FtaEtatModel extends AbstractModel {
                                 . ' AND ' . IntranetDroitsAccesModel::FIELDNAME_ID_USER . '=' . $paramIdUser                                                    // Nous recuperons l'identifiant de l'utilisateur connecté
                                 . ' AND ' . FtaModel::FIELDNAME_ID_FTA_ETAT . '=' . $paramIdFtaEtat                                                             // Nous recuperons l'identifiant de l'etat de la Fta
                                 . ' AND ' . FtaWorkflowStructureModel::TABLENAME . '.' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_ROLE . '=' . $paramRole    // Nous recuperons le type de role pour l'utilisateur
-                                . ' AND ' . FtaProcessusCycleModel::FIELDNAME_FTA_ETAT . '=\'' . $paramEtat . '\''                                               // Nous recuperons l'abréviation de l'etat de la Fta
                                 . ' AND ( 0 ' . IntranetActionsModel::addIdIntranetAction($_SESSION[Acl::ACL_INTRANET_ACTIONS_VALIDE]) . ')'
                                 /**
                                  * Ticket 49823 en 3.1 activation/désactivation d'un workflow
@@ -247,7 +239,7 @@ class FtaEtatModel extends AbstractModel {
                 break;
 
 
-            case FtaEtatModel::ETAT_AVANCEMENT_VALUE_EFFECTUES:
+            case FtaEtatModel::ETAT_AVANCEMENT_VALUE_EFFECTUES:             
                 //Récupération de la liste fta pour le role concernés 
                 /*
                  * On obtient les fta à vérifié dont tous les chapitres sont validés
@@ -257,13 +249,11 @@ class FtaEtatModel extends AbstractModel {
                                 . ',' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_PROCESSUS
                                 . ',' . FtaModel::TABLENAME . '.' . FtaModel::FIELDNAME_WORKFLOW
                                 . ' FROM ' . FtaWorkflowModel::TABLENAME . ', ' . FtaWorkflowStructureModel::TABLENAME
-                                . ', ' . FtaProcessusCycleModel::TABLENAME . ', ' . FtaSuiviProjetModel::TABLENAME
+                                . ', ' . FtaSuiviProjetModel::TABLENAME
                                 . ' , ' . FtaActionSiteModel::TABLENAME . ' , ' . FtaModel::TABLENAME
                                 . ' , ' . IntranetDroitsAccesModel::TABLENAME . ' , ' . IntranetActionsModel::TABLENAME
-                                . ' WHERE ' . FtaProcessusCycleModel::TABLENAME . '.' . FtaProcessusCycleModel::FIELDNAME_PROCESSUS_NEXT
-                                . '=' . FtaWorkflowStructureModel::TABLENAME . '.' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_PROCESSUS
-                                . ' AND ' . FtaProcessusCycleModel::TABLENAME . '.' . FtaProcessusCycleModel::FIELDNAME_WORKFLOW
-                                . '=' . FtaWorkflowStructureModel::TABLENAME . '.' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_WORKFLOW
+                                . ' WHERE ' . FtaWorkflowStructureModel::TABLENAME . '.' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_PROCESSUS
+                                . ' IS NOT NULL'
                                 . ' AND ' . FtaWorkflowModel::TABLENAME . '.' . FtaWorkflowModel::KEYNAME
                                 . '=' . FtaWorkflowStructureModel::TABLENAME . '.' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_WORKFLOW
                                 . ' AND ' . FtaModel::TABLENAME . '.' . FtaModel::FIELDNAME_WORKFLOW
@@ -285,7 +275,6 @@ class FtaEtatModel extends AbstractModel {
                                 . ' AND ' . IntranetDroitsAccesModel::FIELDNAME_ID_USER . '=' . $paramIdUser                                                  // Nous recuperons l'identifiant de l'utilisateur connecté
                                 . ' AND ' . FtaModel::FIELDNAME_ID_FTA_ETAT . '=' . $paramIdFtaEtat                                                           // Nous recuperons l'identifiant de l'etat de la Fta
                                 . ' AND ' . FtaWorkflowStructureModel::TABLENAME . '.' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_ROLE . '=' . $paramRole // Nous recuperons le type de role pour l'utilisateur
-                                . ' AND ' . FtaProcessusCycleModel::FIELDNAME_FTA_ETAT . '=\'' . $paramEtat . '\''                                             // Nous recuperons l'abréviation de l'etat de la Fta
                                 . ' AND ( 0 ' . IntranetActionsModel::addIdIntranetAction($_SESSION[Acl::ACL_INTRANET_ACTIONS_VALIDE]) . ')'
                                 /**
                                  * Ticket 49823 en 3.1 activation/désactivation d'un workflow
@@ -346,21 +335,20 @@ class FtaEtatModel extends AbstractModel {
                     );
                 } else {
                     $isSiteDeProd = GeoModel::isLieuGeoSiteDeProduction($paramLieuGeo);
-                    if($isSiteDeProd){
-                    $array = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
-                                    'SELECT DISTINCT ' . FtaModel::KEYNAME
-                                    . ' FROM ' . FtaModel::TABLENAME
-                                    . ' WHERE ' . FtaModel::FIELDNAME_ID_FTA_ETAT . '=' . $paramIdFtaEtat   //Liaison
-                                    . ' AND  ' . FtaModel::FIELDNAME_SITE_PRODUCTION . '=' . $paramLieuGeo   //Liaison
-                    );
-                    }else{
+                    if ($isSiteDeProd) {
                         $array = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
-                                    'SELECT DISTINCT ' . FtaModel::KEYNAME
-                                    . ' FROM ' . FtaModel::TABLENAME
-                                    . ' WHERE ' . FtaModel::FIELDNAME_ID_FTA_ETAT . '=' . $paramIdFtaEtat   //Liaison
-                    ); 
+                                        'SELECT DISTINCT ' . FtaModel::KEYNAME
+                                        . ' FROM ' . FtaModel::TABLENAME
+                                        . ' WHERE ' . FtaModel::FIELDNAME_ID_FTA_ETAT . '=' . $paramIdFtaEtat   //Liaison
+                                        . ' AND  ' . FtaModel::FIELDNAME_SITE_PRODUCTION . '=' . $paramLieuGeo   //Liaison
+                        );
+                    } else {
+                        $array = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
+                                        'SELECT DISTINCT ' . FtaModel::KEYNAME
+                                        . ' FROM ' . FtaModel::TABLENAME
+                                        . ' WHERE ' . FtaModel::FIELDNAME_ID_FTA_ETAT . '=' . $paramIdFtaEtat   //Liaison
+                        );
                     }
-                        
                 }
 
                 break;

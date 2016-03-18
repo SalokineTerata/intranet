@@ -498,7 +498,7 @@ class FtaModel extends AbstractModel {
                     $this->getDataField(FtaModel::FIELDNAME_CODE_ARTICLE_LDC)->setFieldValue(null);
                 }
                 $return = "1";
-            } {
+            } else {
                 $return = "0";
             }
         } else {

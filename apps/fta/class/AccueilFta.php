@@ -227,6 +227,10 @@ class AccueilFta {
 //                    . '&numeroPage=' . $nb_pages . '.html" title="Dernière page">&raquo;&raquo;</a>&nbsp;';
         }
 
+        /**
+         * Augmentation de la taille d'affichage
+         */
+        $resultat = "<h3>" . $resultat . "</h3>";
 // On retourne le resultat
         return $resultat;
     }

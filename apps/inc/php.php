@@ -152,6 +152,7 @@ require_once('../lib/class/model/ModesModel.php');
 require_once('../lib/class/model/PersoModel.php');
 require_once('../lib/class/model/PlanningPresenceDetailModel.php');
 require_once('../lib/class/model/ServicesModel.php');
+require_once('../lib/class/model/StaticStandardModel.php');
 require_once('../lib/class/model/TypeModel.php');
 
 // Standard HTML

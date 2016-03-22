@@ -15,6 +15,12 @@ class FtaController {
     const CALLBACK_LINK_TO_TRANSITER_PAGE = "Retour";
     const CALLBACK_LINK_TO_TRANSITER_PAGE_VALIDATE = "Confirmer";
 
+    public static function duplicateId($paramTable, $paramId) {
+        $key = StaticStandardModel::duplicateRowsById($paramTable, $paramId);
+
+        return $key;
+    }
+
     /**
      *  Génère le commentaire d'un changement d'espace de travail
      * @param string $paramWorkflowOLD

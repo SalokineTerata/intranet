@@ -296,7 +296,6 @@ $arrayUserType4 = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
                 . ' FROM ' . AccessMaterielServiceModel::TABLENAME . ',' . UserModel::TABLENAME
                 . ', ' . CatsoproModel::TABLENAME
                 . ' WHERE ' . UserModel::TABLENAME . '.' . UserModel::FIELDNAME_ID_TYPE . '=' . $type4
-                . ' AND ' . UserModel::TABLENAME . '.' . UserModel::FIELDNAME_ID_SERVICE . '=' . AccessMaterielServiceModel::TABLENAME . '.' . AccessMaterielServiceModel::FIELDNAME_K_SERVICE
                 . ' AND ' . UserModel::TABLENAME . '.' . UserModel::FIELDNAME_ID_CATSOPRO . '=' . CatsoproModel::TABLENAME . '.' . CatsoproModel::KEYNAME
                 . ' AND ' . UserModel::FIELDNAME_ACTIF . '=\'' . UserModel::USER_ACTIF . '\' ORDER BY ' . UserModel::FIELDNAME_NOM);
 if ($arrayUserType4) {
@@ -327,7 +326,6 @@ $arrayUserType3 = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
                 . ' FROM ' . AccessMaterielServiceModel::TABLENAME . ',' . UserModel::TABLENAME
                 . ', ' . CatsoproModel::TABLENAME
                 . ' WHERE ' . UserModel::TABLENAME . '.' . UserModel::FIELDNAME_ID_TYPE . '=' . $type3
-                . ' AND ' . UserModel::TABLENAME . '.' . UserModel::FIELDNAME_ID_SERVICE . '=' . AccessMaterielServiceModel::TABLENAME . '.' . AccessMaterielServiceModel::FIELDNAME_K_SERVICE
                 . ' AND ' . UserModel::TABLENAME . '.' . UserModel::FIELDNAME_ID_CATSOPRO . '=' . CatsoproModel::TABLENAME . '.' . CatsoproModel::KEYNAME
                 . ' AND ' . UserModel::FIELDNAME_ACTIF . '=\'' . UserModel::USER_ACTIF . '\' ORDER BY ' . UserModel::FIELDNAME_NOM);
 if ($arrayUserType3) {
@@ -359,7 +357,6 @@ $arrayUserType2 = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
                 . ' FROM ' . AccessMaterielServiceModel::TABLENAME . ',' . UserModel::TABLENAME
                 . ', ' . CatsoproModel::TABLENAME
                 . ' WHERE ' . UserModel::TABLENAME . '.' . UserModel::FIELDNAME_ID_TYPE . '=' . $type2
-                . ' AND ' . UserModel::TABLENAME . '.' . UserModel::FIELDNAME_ID_SERVICE . '=' . AccessMaterielServiceModel::TABLENAME . '.' . AccessMaterielServiceModel::FIELDNAME_K_SERVICE
                 . ' AND ' . UserModel::TABLENAME . '.' . UserModel::FIELDNAME_ID_CATSOPRO . '=' . CatsoproModel::TABLENAME . '.' . CatsoproModel::KEYNAME
                 . ' AND ' . UserModel::FIELDNAME_ACTIF . '=\'' . UserModel::USER_ACTIF . '\' ORDER BY ' . UserModel::FIELDNAME_NOM);
 if ($arrayUserType2) {
@@ -391,7 +388,6 @@ $arrayUserType1 = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
                 . ' FROM ' . AccessMaterielServiceModel::TABLENAME . ',' . UserModel::TABLENAME
                 . ', ' . CatsoproModel::TABLENAME
                 . ' WHERE ' . UserModel::TABLENAME . '.' . UserModel::FIELDNAME_ID_TYPE . '=' . $type1
-                . ' AND ' . UserModel::TABLENAME . '.' . UserModel::FIELDNAME_ID_SERVICE . '=' . AccessMaterielServiceModel::TABLENAME . '.' . AccessMaterielServiceModel::FIELDNAME_K_SERVICE
                 . ' AND ' . UserModel::TABLENAME . '.' . UserModel::FIELDNAME_ID_CATSOPRO . '=' . CatsoproModel::TABLENAME . '.' . CatsoproModel::KEYNAME
                 . ' AND ' . UserModel::FIELDNAME_ACTIF . '=\'' . UserModel::USER_ACTIF . '\' ORDER BY ' . UserModel::FIELDNAME_NOM);
 if ($arrayUserType1) {

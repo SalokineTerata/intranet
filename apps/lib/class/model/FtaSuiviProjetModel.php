@@ -911,6 +911,10 @@ class FtaSuiviProjetModel extends AbstractModel {
         return $paramIdFtaChapitre;
     }
 
+    /**
+     *  
+     * @return FtaModel
+     */
     public function getModelFta() {
         return $this->modelFta;
     }

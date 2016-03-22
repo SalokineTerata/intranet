@@ -41,41 +41,90 @@ class FtaWorkflowStructureModel extends AbstractModel {
 
     public function __construct($paramId = NULL, $paramIsCreateRecordsetInDatabaseIfKeyDoesntExist = AbstractModel::DEFAULT_IS_CREATE_RECORDSET_IN_DATABASE_IF_KEY_DOESNT_EXIST) {
         parent::__construct($paramId, $paramIsCreateRecordsetInDatabaseIfKeyDoesntExist);
+
+        $this->setModelFtaWorkflow(
+                new FtaWorkflowModel($this->getDataField(self::FIELDNAME_ID_FTA_WORKFLOW)->getFieldValue()
+                , DatabaseRecord::VALUE_DONT_CREATE_RECORD_IN_DATABASE_IF_KEY_DOESNT_EXIST)
+        );
+        $this->setModelFtaRole(
+                new FtaRoleModel($this->getDataField(self::FIELDNAME_ID_FTA_ROLE)->getFieldValue()
+                , DatabaseRecord::VALUE_DONT_CREATE_RECORD_IN_DATABASE_IF_KEY_DOESNT_EXIST)
+        );
+        $this->setModelFtaProcessus(
+                new FtaProcessusModel($this->getDataField(self::FIELDNAME_ID_FTA_PROCESSUS)->getFieldValue()
+                , DatabaseRecord::VALUE_DONT_CREATE_RECORD_IN_DATABASE_IF_KEY_DOESNT_EXIST)
+        );
+        $this->setModelFtaChapitre(
+                new FtaChapitreModel($this->getDataField(self::FIELDNAME_ID_FTA_CHAPITRE)->getFieldValue()
+                , DatabaseRecord::VALUE_DONT_CREATE_RECORD_IN_DATABASE_IF_KEY_DOESNT_EXIST)
+        );
     }
 
     protected function setDefaultValues() {
         
     }
 
+    /**
+     * Retourne le workflow
+     * @return FtaWorkflowModel
+     */
     function getModelFtaWorkflow() {
         return $this->modelFtaWorkflow;
     }
 
+    /**
+     * Retourne le role
+     * @return FtaRoleModel
+     */
     function getModelFtaRole() {
         return $this->modelFtaRole;
     }
 
+    /**
+     * Retourne le processus
+     * @return FtaProcessusModel
+     */
     function getModelFtaProcessus() {
         return $this->modelFtaProcessus;
     }
 
+    /**
+     * Retourne le chapitre
+     * @return FtaChapitreModel
+     */
     function getModelFtaChapitre() {
         return $this->modelFtaChapitre;
     }
 
-    function setModelFtaWorkflow($modelFtaWorkflow) {
+    /**
+     * 
+     * @param FtaWorkflowModel $modelFtaWorkflow
+     */
+    function setModelFtaWorkflow(FtaWorkflowModel $modelFtaWorkflow) {
         $this->modelFtaWorkflow = $modelFtaWorkflow;
     }
 
-    function setModelFtaRole(FtaRole $modelFtaRole) {
+    /**
+     * 
+     * @param FtaRole $modelFtaRole
+     */
+    function setModelFtaRole(FtaRoleModel $modelFtaRole) {
         $this->modelFtaRole = $modelFtaRole;
     }
 
-    function setModelFtaProcessus(FtaProcessus $modelFtaProcessus) {
+    /**
+     * 
+     * @param FtaProcessus $modelFtaProcessus
+     */
+    function setModelFtaProcessus(FtaProcessusModel $modelFtaProcessus) {
         $this->modelFtaProcessus = $modelFtaProcessus;
     }
 
-    function setModelFtaChapitre(FtaChapitre $modelFtaChapitre) {
+    /**
+     * 
+     * @param FtaChapitre $modelFtaChapitre
+     */
+    function setModelFtaChapitre(FtaChapitreModel $modelFtaChapitre) {
         $this->modelFtaChapitre = $modelFtaChapitre;
     }
 
@@ -129,7 +178,7 @@ class FtaWorkflowStructureModel extends AbstractModel {
         }
         return $idProcessus;
     }
-   
+
     /**
      * Rôle pour le processus et workflow correspondants
      * @param int $paramIdProcessus

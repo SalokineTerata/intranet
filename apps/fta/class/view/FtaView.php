@@ -30,6 +30,12 @@ class FtaView extends AbstractView {
     const JAVASCRIPT_CALLBACK_VERROUILLAGE_ETIQ = "displayVerrouEtiq";
 
     /**
+     * Fonction JavaScript appelée pour actualiser l'édition
+     * du champs Duree_de_vie
+     */
+    const JAVASCRIPT_CALLBACK_DUREE_DE_VIE = "disabledDureeDeVie";
+
+    /**
      * Fonction JavaScript appelée pour actualiser la visibilité
      * du champs Poids_ELEM
      */
@@ -528,7 +534,6 @@ class FtaView extends AbstractView {
                 $this->getModel()->getDataField(FtaModel::FIELDNAME_LIBELLE_CLIENT)
         );
 
-        //Unité de facturation
         $htmlObjectVerrouillageEtiquette->setIsEditable($this->getIsEditable());
         $htmlObjectVerrouillageEtiquette->getEventsForm()->setCallbackJavaScriptFunctionOnChange(self::JAVASCRIPT_CALLBACK_VERROUILLAGE_ETIQ);
         $callbackJavaScriptFunctionOnChangeParameters = $htmlObjectVerrouillageEtiquette->getAttributesGlobal()->getId()->getValue()
@@ -539,7 +544,6 @@ class FtaView extends AbstractView {
 
         $htmlReturn.=$htmlObjectVerrouillageEtiquette->getHtmlResult();
 
-        //Poids élémentaire
         $htmlObjectEtiquetteColis->setIsEditable($this->getIsEditable());
 
         if ($htmlObjectVerrouillageEtiquette->getDataField()->getFieldValue() === FtaModel::ETIQUETTE_COLIS_VERROUILLAGE_TRUE) {
@@ -549,7 +553,7 @@ class FtaView extends AbstractView {
              */
             $htmlObjectEtiquetteColis->getStyleCSS()->unsetDisplay();
             /**
-             * Si l'étiqueete colis n'est pas renseigné alors on récupère la DIN 
+             * Si l'étiquette colis n'est pas renseigné alors on récupère la DIN 
              */
             if (!$htmlObjectEtiquetteColis->getDataField()->getFieldValue()) {
                 $dinValue = $this->getModel()->getDataField(FtaModel::FIELDNAME_LIBELLE)->getFieldValue();
@@ -563,6 +567,77 @@ class FtaView extends AbstractView {
             $htmlObjectEtiquetteColis->getStyleCSS()->setDisplayToNone();
         }
         $htmlReturn.=$htmlObjectEtiquetteColis->getHtmlResult();
+        return $htmlReturn;
+    }
+
+    /**
+     * Affiche les champs "Voulez-vous imposer le libellé étiquette colis ?" et Libellé etiquette carton
+     * En fonction du résultat du champs Forcer libellé étiquette colis ? fais apparaitre ou non l'autre champ
+     * @return string
+     */
+    public function getHtmlIsDureeDeVieCalculateWithDureeDeVieClient() {
+        //Initialisation des variables locales
+        $htmlReturn = NULL;
+        $dataIsDureeDeVieCalculate = $this->getModel()->getDataField(FtaModel::FIELDNAME_IS_DUREE_DE_VIE_CALCULATE);
+        $dataIsDureeDeVie = $this->getModel()->getDataField(FtaModel::FIELDNAME_DUREE_DE_VIE);
+        $htmlObjectIsDureeDeVieCalculate = new DataFieldToHtmlListBoolean($dataIsDureeDeVieCalculate);
+        $htmlObjectDureeDeVieClient = new DataFieldToHtmlInputText($dataIsDureeDeVie);
+
+        /**
+         * Vérification que les règle de validation sont respecter
+         * non présent 
+         */
+        $dataIsDureeDeVieCalculate->checkValidationRules();
+        $dataIsDureeDeVie->checkValidationRules();
+
+        if ($dataIsDureeDeVieCalculate->getDataValidationSuccessful() == TRUE and $dataIsDureeDeVie->getDataValidationSuccessful() == TRUE) {
+            $this->setDataValidationSuccessfulToTrue();
+        } else {
+            $this->setDataValidationSuccessfulToFalse();
+        }
+
+        // is duree de vie calculate
+        $htmlObjectIsDureeDeVieCalculate->setIsEditable($this->getIsEditable());
+        $htmlObjectIsDureeDeVieCalculate->getEventsForm()->setCallbackJavaScriptFunctionOnChange(self::JAVASCRIPT_CALLBACK_DUREE_DE_VIE);
+        $callbackJavaScriptFunctionOnChangeParameters = $htmlObjectIsDureeDeVieCalculate->getAttributesGlobal()->getId()->getValue()
+                . ","
+                . $htmlObjectDureeDeVieClient->getAttributesGlobal()->getId()->getValue()
+        ;
+        $htmlObjectIsDureeDeVieCalculate->getEventsForm()->setCallbackJavaScriptFunctionOnChangeParameters($callbackJavaScriptFunctionOnChangeParameters);
+
+        $htmlReturn.=$htmlObjectIsDureeDeVieCalculate->getHtmlResult();
+
+        // durée de vie garantie client
+        $htmlObjectDureeDeVieClient->setIsEditable($this->getIsEditable());
+
+        if ($htmlObjectIsDureeDeVieCalculate->getDataField()->getFieldValue() === FtaModel::DUREE_DE_VIE_CALCULATE_AUTO) {
+            /**
+             * Si l'utilisateur souhaite calculé la durée de vie garantie client en automatique
+             */
+            $htmlObjectDureeDeVieClient->getAttributes()->getDisabled()->setTrue();
+            /**
+             * Si la durré de vie client n'est pas renseigné alors on récupère 
+             * on calcul de 2/3 de la Durré de vie de production
+             */
+            if (!$htmlObjectDureeDeVieClient->getDataField()->getFieldValue()) {
+                $dureeDeVieProductionValue = $this->getModel()->getDureeDeVieClientByDureeDeVieProduction();
+                if (is_float($dureeDeVieProductionValue)) {
+                    $htmlObjectDureeDeVieClient->getDataField()->setFieldValue($dureeDeVieProductionValue);
+                    $htmlObjectDureeDeVieClient->getDataField()->getRecordsetRef()->saveToDatabase();
+                } else {
+                    $message = "<tr class=contenu><td align=\"center\" valign=\"middle\">"
+                            . " Informations "
+                            . "</td><td  align=\"center\" valign=\"middle\">"
+                            . "<h4>$dureeDeVieProductionValue</h4></td></tr>";
+                }
+            }
+        } else {
+            /**
+             * Sinon on n'affiche pas le libellé etiquette colis
+             */
+            $htmlObjectDureeDeVieClient->getAttributes()->getDisabled()->setFalse();
+        }
+        $htmlReturn.=$htmlObjectDureeDeVieClient->getHtmlResult() . $message;
         return $htmlReturn;
     }
 
@@ -1901,4 +1976,35 @@ class FtaView extends AbstractView {
         return $bloc;
     }
 
+    /**
+     * Affiche le bouton de retour vers la Fta
+     * @return string
+     */
+    public static function getHtmlButtonReturnTransition($paramIdFta, $paramAction, $paramIdFtaRole, $paramSyntheseAction, $paramDemandeAbreviationFtaEtat) {
+        return '<td><center>'
+                . '<a href=transiter.php?'
+                . 'id_fta=' . $paramIdFta
+                . '&action=' . $paramAction
+                . '&id_fta_role=' . $paramIdFtaRole
+                . '&synthese_action=' . $paramSyntheseAction
+                . '&demande_abreviation_fta_transition=' . $paramDemandeAbreviationFtaEtat
+                . '>' . FtaController::CALLBACK_LINK_TO_TRANSITER_PAGE . '</a></center></td>';
+    }
+    
+    
+     /**
+     * Affiche le bouton de retour vers la Fta
+     * @return string
+     */
+    public static function getHtmlButtonConfirmationTransition($paramIdFta, $paramAction, $paramIdFtaRole, $paramChapitresSelectionne, $paramChapitres) {
+        return '<td><center>'
+                . '<a href=transiter.php?'
+                . 'id_fta=' . $paramIdFta
+                . '&action=' . $paramAction
+                . '&id_fta_role=' . $paramIdFtaRole
+                . '&checkPost=1'
+                . $paramChapitresSelectionne
+                . $paramChapitres
+                . '>' . FtaController::CALLBACK_LINK_TO_TRANSITER_PAGE_VALIDATE . '</a></center></td>';
+    }
 }

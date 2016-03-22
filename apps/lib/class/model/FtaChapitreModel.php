@@ -29,6 +29,7 @@ class FtaChapitreModel extends AbstractModel {
     const FIELDNAME_NOM_CHAPITRE = 'nom_fta_chapitre';
     const FIELDNAME_NOM_USUEL_CHAPITRE = 'nom_usuel_fta_chapitre';
     const ID_CHAPITRE_IDENTITE = '1';
+    const NOM_CHAPITRE_DUREE_DE_VIE = 'duree_de_vie';
 
     public function __construct($paramId = NULL, $paramIsCreateRecordsetInDatabaseIfKeyDoesntExist = AbstractModel::DEFAULT_IS_CREATE_RECORDSET_IN_DATABASE_IF_KEY_DOESNT_EXIST) {
         parent::__construct($paramId, $paramIsCreateRecordsetInDatabaseIfKeyDoesntExist);
@@ -49,12 +50,14 @@ class FtaChapitreModel extends AbstractModel {
     public static function buildCorrectionChapitre($paramIdFta, $paramIdChapitre, $option) {
         $option['no_message_ecran'];                       //0=affichage à l'ecran, 1=rien
         $option['correction_fta_suivi_projet'];            //Commentaire justifiant la correction du chapitre
+        $option['mail_gestionnaire'];            //Informe le gestionnaire de la Fta de la mise en correction de sa Fta
         $HtmlResult = new HtmlResult2();
 
         $globalConfig = new GlobalConfig();
         UserModel::checkUserSessionExpired($globalConfig);
         //Récupération des informations préalables
         //Nom de l'assistante de projet responsable:
+        $idUser = $globalConfig->getAuthenticatedUser()->getKeyValue();
         $mailExpediteur = $globalConfig->getAuthenticatedUser()->getDataField(UserModel::FIELDNAME_MAIL)->getFieldValue();
         $nomPrenom = $globalConfig->getAuthenticatedUser()->getPrenomNom();
         $idFtaWorkflowStructure = FtaWorkflowStructureModel::getIdFtaWorkflowStructureByIdFtaAndIdChapitre(
@@ -150,12 +153,12 @@ class FtaChapitreModel extends AbstractModel {
 
             //Envoi des mails
             $show_din = FtaModel::showDin($paramIdFta);
-            $name = $show_din;
+            $sujetElements = $show_din;
 
             if ($return['mail']) {
                 $return['mail'] = array_unique($return['mail']);
                 foreach ($return['mail'] as $mail) {
-                    $sujetmail = 'FTA/Correction: ' . $name;
+                    $sujetmail = 'FTA/Correction: ' . $sujetElements;
                     $destinataire = $mail;
                     $expediteur = $nomPrenom . ' <' . $mailExpediteur . '>';
                     $text = 'Vos chapitres viennent d\'être dévalidés suite à une correction apportée par '
@@ -167,6 +170,25 @@ class FtaChapitreModel extends AbstractModel {
                     if ($notificationFtaSuiviProjet) {
                         envoismail($sujetmail, $text, $destinataire, $expediteur, $typeMail);
                     }
+                }
+            }
+            /**
+             * Génération d'un mail informant le gestionnaire de la Fta
+             */
+            if ($option['mail_gestionnaire']) {
+                $ftaModel = new FtaModel($paramIdFta);
+                $idGestionnaire = $ftaModel->getModelCreateur()->getKeyValue();
+                if ($idGestionnaire <> $idUser) {
+                    $mailGestionnaire = $ftaModel->getModelCreateur()->getDataField(UserModel::FIELDNAME_MAIL)->getFieldValue();
+                    $sujetmail = 'FTA/Mise en Correction: ' . $sujetElements . ' par ' . $nomPrenom;
+                    $destinataire = $mailGestionnaire;
+                    $expediteur = $nomPrenom . ' <' . $mailExpediteur . '>';
+                    $text = 'Une nouvelle version vient d\'être crée, la correction apportée par '
+                            . $nomPrenom . ' est au sujet de :\n'
+                            . '\t' . stripslashes($option[FtaSuiviProjetModel::FIELDNAME_CORRECTION_FTA_SUIVI_PROJET])
+                    ;
+                    $typeMail = 'CorrectionValidation2Modification';
+                    envoismail($sujetmail, $text, $destinataire, $expediteur, $typeMail);
                 }
             }
         }//Fin du traitement des processus suivants

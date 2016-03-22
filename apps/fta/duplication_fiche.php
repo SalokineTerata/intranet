@@ -79,7 +79,7 @@ $siteDeProduction = Lib::getParameterFromRequest('site_de_production');
 $ftaModel = new FtaModel($idFta);
 $globalConfig = new GlobalConfig();
 $idUser = $globalConfig->getAuthenticatedUser()->getKeyValue();
-$idFtaWorkflow = $ftaModel->getDataField(FtaModel::FIELDNAME_WORKFLOW)->getFieldValue();
+$idFtaWorkflow = Lib::getParameterFromRequest(FtaModel::FIELDNAME_WORKFLOW);
 $arrayIdFtaRoleAcces = FtaRoleModel::getArrayIdFtaRoleByIdUserAndWorkflow($idUser, $idFtaWorkflow);
 $idFtaRole = $arrayIdFtaRoleAcces["0"];
 

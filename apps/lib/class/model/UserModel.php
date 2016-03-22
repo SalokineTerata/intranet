@@ -63,25 +63,26 @@ class UserModel extends AbstractModel {
             $paramOrderBy = FtaModel::FIELDNAME_DATE_DERNIERE_MAJ_FTA . ' DESC ';
         }
 
+        /**
+         * Attention dans la condition where de la requette ne pas mettre des conditions non présente lors de la création de la fta
+         * Exemple ClassificationRaccourcisModel::TABLENAME 
+         */
         if ($paramArrayIdFta) {
             $array['1'] = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
                             'SELECT DISTINCT ' . FtaModel::TABLENAME . '.' . FtaModel::KEYNAME
                             . ', ' . FtaEtatModel::FIELDNAME_ABREVIATION . ', ' . FtaModel::FIELDNAME_LIBELLE
                             . ', ' . FtaWorkflowModel::FIELDNAME_DESCRIPTION_FTA_WORKFLOW . ', ' . FtaWorkflowModel::FIELDNAME_NOM_FTA_WORKFLOW
                             . ', ' . FtaModel::FIELDNAME_NOMBRE_UVC_PAR_CARTON . ', ' . FtaModel::FIELDNAME_POIDS_ELEMENTAIRE
-                            . ', ' . ClassificationRaccourcisModel::FIELDNAME_NOM_CLASSIFICATION_RACCOURCIS . ', ' . FtaModel::FIELDNAME_DESIGNATION_COMMERCIALE
+                            . ', ' . FtaModel::FIELDNAME_ID_CLASSIFICATION_RACCOURCIS . ', ' . FtaModel::FIELDNAME_DESIGNATION_COMMERCIALE
                             . ', ' . FtaModel::FIELDNAME_DOSSIER_FTA . ', ' . FtaModel::FIELDNAME_VERSION_DOSSIER_FTA
-                            . ', ' . FtaModel::FIELDNAME_ARTICLE_AGROLOGIC . ', ' . FtaModel::FIELDNAME_CODE_ARTICLE_LDC
-                            . ', ' . FtaModel::FIELDNAME_DATE_ECHEANCE_FTA . ', ' . FtaModel::FIELDNAME_CREATEUR
+                            . ', ' . FtaModel::FIELDNAME_CODE_ARTICLE_LDC . ', ' . FtaModel::FIELDNAME_DATE_ECHEANCE_FTA
+                            . ', ' . FtaModel::FIELDNAME_CREATEUR . ', ' . FtaModel::FIELDNAME_ID_FTA_CLASSIFICATION2
                             . ', ' . FtaModel::FIELDNAME_POURCENTAGE_AVANCEMENT . ', ' . FtaModel::FIELDNAME_LISTE_ID_FTA_ROLE
                             . ', ' . GeoModel::FIELDNAME_GEO . ', ' . FtaModel::TABLENAME . '. ' . FtaModel::FIELDNAME_WORKFLOW
-                            . ', ' . FtaModel::FIELDNAME_ID_FTA_CLASSIFICATION2
                             . ' FROM ' . FtaModel::TABLENAME . ',' . UserModel::TABLENAME
                             . ', ' . FtaEtatModel::TABLENAME
                             . ', ' . FtaWorkflowModel::TABLENAME
                             . ', ' . GeoModel::TABLENAME
-                            . ', ' . ClassificationRaccourcisModel::TABLENAME
-//                         
                             . ' WHERE ( 0 ' . FtaModel::addIdFtaLabel($paramArrayIdFta) . ')'
                             . ' AND ' . FtaModel::TABLENAME . '.' . FtaModel::FIELDNAME_CREATEUR
                             . '=' . UserModel::TABLENAME . '.' . UserModel::KEYNAME
@@ -90,9 +91,7 @@ class UserModel extends AbstractModel {
                             . ' AND ' . FtaWorkflowModel::TABLENAME . '.' . FtaWorkflowModel::KEYNAME
                             . '=' . FtaModel::TABLENAME . '.' . FtaModel::FIELDNAME_WORKFLOW
                             . ' AND ' . FtaModel::TABLENAME . '.' . FtaModel::FIELDNAME_SITE_PRODUCTION
-                            . '=' . GeoModel::TABLENAME . '.' . GeoModel::KEYNAME
-                            . ' AND ' . FtaModel::TABLENAME . '.' . FtaModel::FIELDNAME_ID_CLASSIFICATION_RACCOURCIS
-                            . '=' . ClassificationRaccourcisModel::TABLENAME . '.' . ClassificationRaccourcisModel::KEYNAME
+                            . '=' . GeoModel::TABLENAME . '.' . GeoModel::KEYNAME                          
                             . ' ORDER BY ' . $paramOrderBy
                             . ',' . FtaModel::TABLENAME . '.' . FtaModel::FIELDNAME_WORKFLOW
                             . ',' . UserModel::FIELDNAME_PRENOM . ' ASC' . ',' . UserModel::FIELDNAME_NOM . ' ASC'
@@ -105,18 +104,16 @@ class UserModel extends AbstractModel {
                             . ', ' . FtaEtatModel::FIELDNAME_ABREVIATION . ', ' . FtaModel::FIELDNAME_LIBELLE
                             . ', ' . FtaWorkflowModel::FIELDNAME_DESCRIPTION_FTA_WORKFLOW . ', ' . FtaWorkflowModel::FIELDNAME_NOM_FTA_WORKFLOW
                             . ', ' . FtaModel::FIELDNAME_NOMBRE_UVC_PAR_CARTON . ', ' . FtaModel::FIELDNAME_POIDS_ELEMENTAIRE
-                            . ', ' . ClassificationRaccourcisModel::FIELDNAME_NOM_CLASSIFICATION_RACCOURCIS . ', ' . FtaModel::FIELDNAME_DESIGNATION_COMMERCIALE
+                            . ', ' . FtaModel::FIELDNAME_ID_CLASSIFICATION_RACCOURCIS . ', ' . FtaModel::FIELDNAME_DESIGNATION_COMMERCIALE
                             . ', ' . FtaModel::FIELDNAME_DOSSIER_FTA . ', ' . FtaModel::FIELDNAME_VERSION_DOSSIER_FTA
-                            . ', ' . FtaModel::FIELDNAME_ARTICLE_AGROLOGIC . ', ' . FtaModel::FIELDNAME_CODE_ARTICLE_LDC
+                            . ', ' . FtaModel::FIELDNAME_CODE_ARTICLE_LDC . ', ' . FtaModel::FIELDNAME_ID_FTA_CLASSIFICATION2
                             . ', ' . FtaModel::FIELDNAME_DATE_ECHEANCE_FTA . ', ' . FtaModel::FIELDNAME_CREATEUR
                             . ', ' . FtaModel::FIELDNAME_POURCENTAGE_AVANCEMENT . ', ' . FtaModel::FIELDNAME_LISTE_ID_FTA_ROLE
                             . ', ' . GeoModel::FIELDNAME_GEO . ', ' . FtaModel::TABLENAME . '. ' . FtaModel::FIELDNAME_WORKFLOW
-                            . ', ' . FtaModel::FIELDNAME_ID_FTA_CLASSIFICATION2
                             . ' FROM ' . FtaModel::TABLENAME . ',' . UserModel::TABLENAME
                             . ', ' . FtaEtatModel::TABLENAME
                             . ', ' . FtaWorkflowModel::TABLENAME
                             . ', ' . GeoModel::TABLENAME
-                            . ', ' . ClassificationRaccourcisModel::TABLENAME
                             . ' WHERE ( 0 ' . FtaModel::addIdFtaLabel($paramArrayIdFta) . ')'
                             . ' AND ' . FtaModel::TABLENAME . '.' . FtaModel::FIELDNAME_CREATEUR
                             . '=' . UserModel::TABLENAME . '.' . UserModel::KEYNAME
@@ -125,9 +122,7 @@ class UserModel extends AbstractModel {
                             . ' AND ' . FtaWorkflowModel::TABLENAME . '.' . FtaWorkflowModel::KEYNAME
                             . '=' . FtaModel::TABLENAME . '.' . FtaModel::FIELDNAME_WORKFLOW
                             . ' AND ' . FtaModel::TABLENAME . '.' . FtaModel::FIELDNAME_SITE_PRODUCTION
-                            . '=' . GeoModel::TABLENAME . '.' . GeoModel::KEYNAME
-                            . ' AND ' . FtaModel::TABLENAME . '.' . FtaModel::FIELDNAME_ID_CLASSIFICATION_RACCOURCIS
-                            . '=' . ClassificationRaccourcisModel::TABLENAME . '.' . ClassificationRaccourcisModel::KEYNAME
+                            . '=' . GeoModel::TABLENAME . '.' . GeoModel::KEYNAME                          
                             . ' ORDER BY ' . $paramOrderBy
                             . ',' . FtaModel::TABLENAME . '.' . FtaModel::FIELDNAME_WORKFLOW
                             . ',' . UserModel::FIELDNAME_PRENOM . ' ASC'

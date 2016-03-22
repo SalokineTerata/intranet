@@ -169,8 +169,8 @@ switch ($output) {
         }
 
 
-        $bouton_retour_vers_transiter = FtaController::getHtmlButtonReturnTransition($idFta, $action, $idFtaRole, "", "");
-        $bouton_confirmation = FtaController::getHtmlButtonConfirmationTransition($idFta, $action, $idFtaRole, $redirectionSelectionne, $redirection);
+        $bouton_retour_vers_transiter = FtaView::getHtmlButtonReturnTransition($idFta, $action, $idFtaRole, "", "");
+        $bouton_confirmation = FtaView::getHtmlButtonConfirmationTransition($idFta, $action, $idFtaRole, $redirectionSelectionne, $redirection);
 
         /*         * ************
           Début Code HTML

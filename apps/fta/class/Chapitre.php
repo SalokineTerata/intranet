@@ -98,6 +98,7 @@ class Chapitre {
     protected static $html_chapitre_etiquette_r_d;
     protected static $html_chapitre_expedition;
     protected static $html_chapitre_exigence_client;
+    protected static $html_chapitre_exigence_client_MDD;
     protected static $html_chapitre_identite;
     protected static $html_chapitre_need_rebuild;
     protected static $html_chapitre_nomenclature;
@@ -310,7 +311,7 @@ class Chapitre {
                 break;
             default:
             case 'site_expedition':
-                self::$html_chapitre_site_expedition = self::buildChapitreSiteExpedition();
+                self::$html_chapitre_site_expedition = self::buildChapitreExpeditionEtEANS();
                 $return = self::$html_chapitre_site_expedition;
                 break;
             default:
@@ -322,6 +323,11 @@ class Chapitre {
             case 'exigence_client':
                 self::$html_chapitre_exigence_client = self::buildChapitreExigenceClient();
                 $return = self::$html_chapitre_exigence_client;
+                break;
+            default:
+            case 'exigence_client_MDD':
+                self::$html_chapitre_exigence_client_MDD = self::buildChapitreExigenceClientMDD();
+                $return = self::$html_chapitre_exigence_client_MDD;
                 break;
             default:
             case 'etiquette_client':
@@ -628,6 +634,10 @@ class Chapitre {
         return $bloc;
     }
 
+    /**
+     * Chapitre non Actif
+     * @return type
+     */
     public static function buildChapitreDonneClient() {
 
         $bloc = '';
@@ -805,7 +815,7 @@ class Chapitre {
         return $bloc;
     }
 
-    public static function buildChapitreSiteExpedition() {
+    public static function buildChapitreExpeditionEtEANS() {
 
         $bloc = '';
         $id_fta = self::$id_fta;
@@ -822,6 +832,17 @@ class Chapitre {
         //Site d'expedition
         $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_SITE_EXPEDITION_FTA);
 
+        //Unité de Facturation
+        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_UNITE_FACTURATION);
+
+        //Gencod EAN Article
+        $bloc.=$ftaView->getHtmlEANArticle();
+
+        //Gencod EAN Colis
+        $bloc.=$ftaView->getHtmlEANColis();
+
+        //Gencod EAN Palette
+        $bloc.=$ftaView->getHtmlEANPalette();
 
         if ($ftaView->isDataValidationSuccessful() == "0") {
             self::setDataValidationSuccessfulToTrue();
@@ -871,6 +892,36 @@ class Chapitre {
 
         //Durée de vie garantie client (en jours)
         $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_DUREE_DE_VIE);
+
+
+        if ($ftaView->isDataValidationSuccessful() == "0") {
+            self::setDataValidationSuccessfulToTrue();
+        }
+
+        return $bloc;
+    }
+
+    public static function buildChapitreExigenceClientMDD() {
+
+        $bloc = '';
+        $id_fta = self::$id_fta;
+        $synthese_action = self::$synthese_action;
+        $isEditable = self::$is_editable;
+
+        //Identifiant FTA
+        $ftaModel = new FtaModel($id_fta);
+        $ftaModel->setDataFtaTableToCompare();
+        $ftaView = new FtaView($ftaModel);
+        $ftaView->setIsEditable($isEditable);
+        $ftaView->setFtaChapitreModelById(self::ID_CHAPITRE_IDENTITE);
+
+        //Durée de vie garantie client (en jours)
+//        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_IS_DUREE_DE_DE_CALCULATE);
+        $bloc.=$ftaView->getHtmlIsDureeDeVieCalculateWithDureeDeVieClient();
+
+        //Durée de vie garantie client (en jours)
+//        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_DUREE_DE_VIE);
+
 
         if ($ftaView->isDataValidationSuccessful() == "0") {
             self::setDataValidationSuccessfulToTrue();
@@ -2454,7 +2505,9 @@ class Chapitre {
             //Recherche de la personnes ayant signé ce chapitre
             if (self::$ftaSuiviProjetModel->getDataField(FtaSuiviProjetModel::FIELDNAME_SIGNATURE_VALIDATION_SUIVI_PROJET)->getFieldValue()) { //Le chapitre est signé
                 $arrayUser = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
-                                'SELECT ' . UserModel::FIELDNAME_NOM . ', ' . UserModel::FIELDNAME_PRENOM
+                                'SELECT ' . UserModel::FIELDNAME_NOM
+                                . ', ' . UserModel::FIELDNAME_PRENOM
+                                . ', ' . UserModel::FIELDNAME_LOGIN
                                 . ' FROM ' . UserModel::TABLENAME
                                 . ' WHERE ' . UserModel::KEYNAME . '=' . self::$ftaSuiviProjetModel->getDataField(FtaSuiviProjetModel::FIELDNAME_SIGNATURE_VALIDATION_SUIVI_PROJET)->getFieldValue()
                 );
@@ -2464,6 +2517,9 @@ class Chapitre {
                         $validateur = $rowsUser[UserModel::FIELDNAME_PRENOM]
                                 . ' '
                                 . $rowsUser[UserModel::FIELDNAME_NOM]
+                                . ' ('
+                                . $rowsUser[UserModel::FIELDNAME_LOGIN]
+                                . ') '
                         ;
                     }
                 }

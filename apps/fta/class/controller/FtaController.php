@@ -15,10 +15,27 @@ class FtaController {
     const CALLBACK_LINK_TO_TRANSITER_PAGE = "Retour";
     const CALLBACK_LINK_TO_TRANSITER_PAGE_VALIDATE = "Confirmer";
 
+    /**
+     * Duplication d'une table donné par son id
+     * @param string $paramTable
+     * @param int $paramId
+     * @return int
+     */
     public static function duplicateId($paramTable, $paramId) {
         $key = StaticStandardModel::duplicateRowsById($paramTable, $paramId);
 
         return $key;
+    }
+
+    /**
+     * Duplication d'une table avec un nouvelle id 
+     * @param type $paramTable
+     * @param type $paramIdOLD
+     * @param type $paramIdNEW
+     * @return type
+     */
+    public static function duplicateWithNewId($paramTable, $paramIdOLD, $paramIdNEW) {
+        StaticStandardModel::duplicateRowsByIdReplaceLast($paramTable, $paramIdOLD, $paramIdNEW);
     }
 
     /**

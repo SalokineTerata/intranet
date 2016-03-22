@@ -11,6 +11,7 @@ class FtaSuiviProjetModel extends AbstractModel {
 
     const TABLENAME = 'fta_suivi_projet';
     const KEYNAME = 'id_fta_suivi_projet';
+    const FIELDNAME_ID_FTA_SUIVI_PROJET = 'last_id_fta_suivi_projet';
     const FIELDNAME_ID_FTA = 'id_fta';
     const FIELDNAME_ID_FTA_CHAPITRE = 'id_fta_chapitre';
     const FIELDNAME_COMMENTAIRE_SUIVI_PROJET = 'commentaire_suivi_projet';
@@ -62,25 +63,7 @@ class FtaSuiviProjetModel extends AbstractModel {
      * @param type $paramIdFtaNew
      */
     public static function duplicateFtaSuiviProjetByIdFta($paramIdFtaOrig, $paramIdFtaNew) {
-        DatabaseOperation::execute(
-                ' INSERT INTO ' . FtaSuiviProjetModel::TABLENAME
-                . ' (' . FtaSuiviProjetModel::FIELDNAME_COMMENTAIRE_SUIVI_PROJET
-                . ', ' . FtaSuiviProjetModel::FIELDNAME_ID_FTA_CHAPITRE
-                . ', ' . FtaSuiviProjetModel::FIELDNAME_DATE_VALIDATION_SUIVI_PROJET
-                . ', ' . FtaSuiviProjetModel::FIELDNAME_SIGNATURE_VALIDATION_SUIVI_PROJET
-                . ', ' . FtaSuiviProjetModel::FIELDNAME_DATE_DEMARRAGE_CHAPITRE_FTA_SUIVI_PROJET
-                . ', ' . FtaSuiviProjetModel::FIELDNAME_ID_FTA
-                . ', ' . FtaSuiviProjetModel::FIELDNAME_NOTIFICATION_FTA_SUIVI_PROJET . ')'
-                . ' SELECT ' . FtaSuiviProjetModel::FIELDNAME_COMMENTAIRE_SUIVI_PROJET
-                . ', ' . FtaSuiviProjetModel::FIELDNAME_ID_FTA_CHAPITRE
-                . ', ' . FtaSuiviProjetModel::FIELDNAME_DATE_VALIDATION_SUIVI_PROJET
-                . ', ' . FtaSuiviProjetModel::FIELDNAME_SIGNATURE_VALIDATION_SUIVI_PROJET
-                . ', ' . FtaSuiviProjetModel::FIELDNAME_DATE_DEMARRAGE_CHAPITRE_FTA_SUIVI_PROJET
-                . ', ' . $paramIdFtaNew
-                . ', ' . FtaSuiviProjetModel::FIELDNAME_NOTIFICATION_FTA_SUIVI_PROJET
-                . ' FROM ' . FtaSuiviProjetModel::TABLENAME
-                . ' WHERE ' . FtaSuiviProjetModel::FIELDNAME_ID_FTA . '=' . $paramIdFtaOrig
-        );
+        FtaController::duplicateWithNewId(self::TABLENAME, $paramIdFtaOrig, $paramIdFtaNew);
     }
 
     /**
@@ -107,7 +90,7 @@ class FtaSuiviProjetModel extends AbstractModel {
         return $array[0][$keyName];
     }
 
-    /***
+    /*     * *
      * Fonction non actif
      * Cette fonction notifie les processus en fonction de l'état d'avancement du suivi du projet.
      * Cet état d'avancement est géré par la table fta_suivi_projet
@@ -116,6 +99,7 @@ class FtaSuiviProjetModel extends AbstractModel {
      * @param type $paramIdChapitre
      * @return string
      */
+
     public static function getListeUsersAndNotificationSuiviProjet($paramIdFta, $paramIdChapitre) {
 
         $idFtaSuiviProjet = FtaSuiviProjetModel::getIdFtaSuiviProjetByIdFtaAndIdChapitre($paramIdFta, $paramIdChapitre);

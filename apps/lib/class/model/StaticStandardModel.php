@@ -27,50 +27,92 @@ class StaticStandardModel {
     const PRIMARY_KEY = "PRI";
     const KEY = "Key";
     const FIELD = "Field";
+    const LAST = "last";
+    const FALSE = FALSE;
 
     /**
      * On return le nom de la clé primaire d'une table donnée
      * @param string $paramTable
      * @return string
      */
-    public static function getPrimaryFieldName($paramTable) {
-        $arrayKeyField = DatabaseOperation::convertSqlStatementWithoutKeyToArray("DESC " . $paramTable);
-        foreach ($arrayKeyField as $value) {
-            if ($value[self::KEY] == self::PRIMARY_KEY) {
-                $primaryFieldName = $value[self::FIELD];
-            }
-        }
-        return $primaryFieldName;
-    }
+    public static function getPrimaryFieldName(
 
+    $paramTable) {
+    $arrayKeyField = DatabaseOperation::convertSqlStatementWithoutKeyToArray("DESC " . $paramTable);
+    foreach ($arrayKeyField as $value) {
+        if ($value[self::KEY] == self::PRIMARY_KEY) {
+            $primaryFieldName = $value[self::FIELD];
+        }
+    }
+    return $primaryFieldName;
+}
+
+/**
+ * Retourn la nouvelle clé de l'engregistrement.
+ * @param string $paramTable
+ * @param string $paramId
+ * @return int
+ */
+public static function duplicateRowsById($paramTable, $paramId) {
+    $primaryFieldName = self::getPrimaryFieldName($paramTable);
+
+
+    $arrayField = DatabaseOperation::getArrayFiledsNamesTable($paramTable);
+    $separation = "";
+    foreach ($arrayField as $nomColumn) {
+        if ($nomColumn <> $primaryFieldName) {
+            $tableListe .= $separation . $nomColumn;
+            $separation = ",";
+        }
+    }
+    $req = " INSERT INTO " . $paramTable . " (" . $tableListe . ") "
+            . " SELECT " . $tableListe
+            . " FROM " . $paramTable
+            . " WHERE " . $primaryFieldName . "=" . $paramId;
+
+    $pdo = DatabaseOperation::executeComplete($req);
+
+    $key = $pdo->lastInsertId();
+
+    return $key;
+}
+
+/**
+ * Duplique la table résultat de la clé étrangère
+ * @param string $paramTable
+ * @param string $paramId
+ * @return int
+ */
+public static function duplicateRowsByIdReplaceLast($paramTable, $paramIdOLD, $paramIdNew) {
+    
     /**
-     * Retourn la nouvelle clé de l'engregistrement.
-     * @param string $paramTable
-     * @param string $paramId
-     * @return int
+     * On récupère le nom du champ primaire de la table
      */
-    public static function duplicateRowsById($paramTable, $paramId) {
-        $primaryFieldName = self::getPrimaryFieldName($paramTable);
+    $primaryFieldName = self::getPrimaryFieldName($paramTable);
 
 
-        $arrayField = DatabaseOperation::getArrayFiledsNamesTable($paramTable);
-        $separation = "";
-        foreach ($arrayField as $nomColumn) {
-            if ($nomColumn <> $primaryFieldName) {
-                $tableListe .= $separation . $nomColumn;
-                $separation = ",";
-            }
+    $arrayField = DatabaseOperation::getArrayFiledsNamesTable($paramTable);
+    $separation = "";
+    $separation2 = "";
+    foreach ($arrayField as $nomColumn) {
+        if ($nomColumn <> $primaryFieldName) {
+            $tableListeInsert .= $separation . $nomColumn;
+            $separation = ",";
         }
-        $req = " INSERT INTO " . $paramTable . " (" . $tableListe . ") "
-                . " SELECT " . $tableListe
-                . " FROM " . $paramTable
-                . " WHERE " . $primaryFieldName . "=" . $paramId;
-
-        $pdo = DatabaseOperation::executeComplete($req);
-
-        $key = $pdo->lastInsertId();
-
-        return $key;
+        if (stripos($nomColumn, self::LAST) === self::FALSE) {
+            if ($nomColumn == FtaModel::KEYNAME) {
+                $nomColumn = $paramIdNew;
+            }
+            $tableListeSelect .= $separation2 . $nomColumn;
+            $separation2 = ",";
+        }
     }
+    $req = " INSERT INTO " . $paramTable . " (" . $tableListeInsert . ") "
+            . " SELECT " . $tableListeSelect
+            . " FROM " . $paramTable
+            . " WHERE " . FtaModel::KEYNAME . "=" . $paramIdOLD;
+
+    DatabaseOperation::executeComplete($req);
+}
 
 }

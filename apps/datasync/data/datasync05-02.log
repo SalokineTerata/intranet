@@ -1,0 +1,159 @@
+Démarrage : ven mai  2 23:00:02 CEST 2014
+Arrêt     : ven mai  2 23:02:24 CEST 2014
+
+
+
+Base MySQL sélectionnée: agis
+Nombre de serveur(s) Linux concerné(s): 4
+Nombre de dossier(s) à mettre à jour: 29
+
+sending incremental file list
+
+sent 7051 bytes  received 49 bytes  4733.33 bytes/sec
+total size is 12693370  speedup is 1787.80
+sending incremental file list
+
+sent 6274 bytes  received 38 bytes  2524.80 bytes/sec
+total size is 12421591  speedup is 1967.93
+sending incremental file list
+erp_data.mdb
+
+sent 7951829 bytes  received 65747 bytes  180170.25 bytes/sec
+total size is 88092672  speedup is 10.99
+sending incremental file list
+
+sent 7538 bytes  received 45 bytes  5055.33 bytes/sec
+total size is 9253358  speedup is 1220.28
+sending incremental file list
+
+sent 7695 bytes  received 20 bytes  3086.00 bytes/sec
+total size is 16751789  speedup is 2171.33
+sending incremental file list
+
+sent 4308 bytes  received 24 bytes  2888.00 bytes/sec
+total size is 6387982  speedup is 1474.60
+sending incremental file list
+mercuriales/gms/2014/REGIONS  2014/GALEC REGION MERCU JUIN 2014.xls
+mercuriales/mdd/2014/2014 MERCURIALE CARREFOUR PLATS CUISINES.xls
+
+sent 29789 bytes  received 8561 bytes  4036.84 bytes/sec
+total size is 31318530  speedup is 816.65
+sending incremental file list
+
+sent 5047 bytes  received 27 bytes  3382.67 bytes/sec
+total size is 39173092  speedup is 7720.36
+sending incremental file list
+operations_commerciales/chrono demande echantillons.xls
+operations_commerciales/GMS/2014/D-REGIONS/GMS LECLERC 2014-FUTUR MASTER.xls
+operations_commerciales/MDD/MODELES CJ/AUCHAN ATAC SCHIEVER/CONF OP/2014/CONFIRMATION OPERATION AUCHAN AOUT 4.xls
+operations_commerciales/MDD/OP MDD 2013/MDD AUCHAN 2013 FUTUR MASTER.xls
+operations_commerciales/MDD/OP MDD 2014/MDD GROUPE AUCHAN 2014.xls
+
+sent 250516 bytes  received 11267 bytes  74795.14 bytes/sec
+total size is 50113435  speedup is 191.43
+sending incremental file list
+rh_multi_sites/CONGES RH 2014.xls
+
+sent 23244 bytes  received 99 bytes  9337.20 bytes/sec
+total size is 98935304  speedup is 4238.33
+sending incremental file list
+gofast/CHANTIERS/6_LANCEMENT_PDTS_Emeline/ASS MINI SAMOSSAS CRF.xls
+gofast/CHANTIERS/6_LANCEMENT_PDTS_Emeline/BT_chou_fci_sce_tomate_riz_350g_TRFE13.doc
+gofast/CHANTIERS/6_LANCEMENT_PDTS_Emeline/DOC000.pdf
+gofast/CHANTIERS/6_LANCEMENT_PDTS_Emeline/FT_dariole_emb_pdt_trompette_300414.doc
+gofast/CHANTIERS/6_LANCEMENT_PDTS_Emeline/PALP 220414 POULET CURRY AUCHAN.doc
+gofast/CHANTIERS/6_LANCEMENT_PDTS_Emeline/book samossas SU coupe.doc
+gofast/CHANTIERS/6_LANCEMENT_PDTS_Emeline/ex1_acteur.PDF
+gofast/CHANTIERS/6_LANCEMENT_PDTS_Emeline/festif agis 2013.doc
+
+sent 639229 bytes  received 234 bytes  142102.89 bytes/sec
+total size is 35609049  speedup is 55.69
+sending incremental file list
+
+sent 9238 bytes  received 13 bytes  3700.40 bytes/sec
+total size is 43986432  speedup is 4754.78
+sending incremental file list
+
+sent 5781 bytes  received 30 bytes  3874.00 bytes/sec
+total size is 93132165  speedup is 16026.87
+sending incremental file list
+erp_data.mdb
+
+sent 7951829 bytes  received 65747 bytes  188648.85 bytes/sec
+total size is 88092672  speedup is 10.99
+sending incremental file list
+
+sent 7538 bytes  received 45 bytes  5055.33 bytes/sec
+total size is 9253358  speedup is 1220.28
+sending incremental file list
+
+sent 4308 bytes  received 24 bytes  2888.00 bytes/sec
+total size is 6387982  speedup is 1474.60
+sending incremental file list
+
+sent 7695 bytes  received 20 bytes  5143.33 bytes/sec
+total size is 16751789  speedup is 2171.33
+sending incremental file list
+
+sent 85 bytes  received 13 bytes  65.33 bytes/sec
+total size is 104853504  speedup is 1069933.71
+sending incremental file list
+operations_commerciales/chrono demande echantillons.xls
+operations_commerciales/GMS/2014/D-REGIONS/GMS LECLERC 2014-FUTUR MASTER.xls
+operations_commerciales/MDD/MODELES CJ/AUCHAN ATAC SCHIEVER/CONF OP/2014/CONFIRMATION OPERATION AUCHAN AOUT 4.xls
+operations_commerciales/MDD/OP MDD 2013/MDD AUCHAN 2013 FUTUR MASTER.xls
+operations_commerciales/MDD/OP MDD 2014/MDD GROUPE AUCHAN 2014.xls
+
+sent 250516 bytes  received 11267 bytes  104713.20 bytes/sec
+total size is 50113435  speedup is 191.43
+sending incremental file list
+mercuriales/gms/2014/REGIONS  2014/GALEC REGION MERCU JUIN 2014.xls
+mercuriales/mdd/2014/2014 MERCURIALE CARREFOUR PLATS CUISINES.xls
+
+sent 29789 bytes  received 8561 bytes  25566.67 bytes/sec
+total size is 31318530  speedup is 816.65
+sending incremental file list
+
+sent 9238 bytes  received 13 bytes  6167.33 bytes/sec
+total size is 43986432  speedup is 4754.78
+sending incremental file list
+
+sent 7051 bytes  received 49 bytes  4733.33 bytes/sec
+total size is 12693370  speedup is 1787.80
+sending incremental file list
+
+sent 5732 bytes  received 23 bytes  3836.67 bytes/sec
+total size is 129183193  speedup is 22447.12
+sending incremental file list
+
+sent 5610 bytes  received 39 bytes  3766.00 bytes/sec
+total size is 59049369  speedup is 10453.07
+sending incremental file list
+
+sent 51070 bytes  received 95 bytes  34110.00 bytes/sec
+total size is 293952595  speedup is 5745.19
+sending incremental file list
+rh_multi_sites/CONGES RH 2014.xls
+
+sent 23244 bytes  received 99 bytes  9337.20 bytes/sec
+total size is 98935304  speedup is 4238.33
+sending incremental file list
+gofast/CHANTIERS/6_LANCEMENT_PDTS_Emeline/ASS MINI SAMOSSAS CRF.xls
+gofast/CHANTIERS/6_LANCEMENT_PDTS_Emeline/BT_chou_fci_sce_tomate_riz_350g_TRFE13.doc
+gofast/CHANTIERS/6_LANCEMENT_PDTS_Emeline/DOC000.pdf
+gofast/CHANTIERS/6_LANCEMENT_PDTS_Emeline/FT_dariole_emb_pdt_trompette_300414.doc
+gofast/CHANTIERS/6_LANCEMENT_PDTS_Emeline/PALP 220414 POULET CURRY AUCHAN.doc
+gofast/CHANTIERS/6_LANCEMENT_PDTS_Emeline/book samossas SU coupe.doc
+gofast/CHANTIERS/6_LANCEMENT_PDTS_Emeline/ex1_acteur.PDF
+gofast/CHANTIERS/6_LANCEMENT_PDTS_Emeline/festif agis 2013.doc
+
+sent 639229 bytes  received 234 bytes  116266.00 bytes/sec
+total size is 35609049  speedup is 55.69
+sending incremental file list
+
+sent 7695 bytes  received 20 bytes  5143.33 bytes/sec
+total size is 16751789  speedup is 2171.33
+sending incremental file list
+
+sent 7695 bytes  received 20 bytes  5143.33 bytes/sec
+total size is 16751789  speedup is 2171.33

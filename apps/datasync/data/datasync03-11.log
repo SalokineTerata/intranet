@@ -1,0 +1,145 @@
+Démarrage : mar mar 11 23:00:01 CET 2014
+Arrêt     : mar mar 11 23:00:51 CET 2014
+
+
+
+Base MySQL sélectionnée: agis
+Nombre de serveur(s) Linux concerné(s): 4
+Nombre de dossier(s) à mettre à jour: 27
+
+sending incremental file list
+
+sent 6345 bytes  received 46 bytes  4260.67 bytes/sec
+total size is 11731248  speedup is 1835.59
+sending incremental file list
+
+sent 6067 bytes  received 37 bytes  4069.33 bytes/sec
+total size is 12258686  speedup is 2008.30
+sending incremental file list
+
+sent 63 bytes  received 12 bytes  150.00 bytes/sec
+total size is 84160512  speedup is 1122140.16
+sending incremental file list
+
+sent 7538 bytes  received 45 bytes  5055.33 bytes/sec
+total size is 9253358  speedup is 1220.28
+sending incremental file list
+
+sent 7695 bytes  received 20 bytes  5143.33 bytes/sec
+total size is 16751789  speedup is 2171.33
+sending incremental file list
+
+sent 4308 bytes  received 24 bytes  2888.00 bytes/sec
+total size is 6387982  speedup is 1474.60
+sending incremental file list
+mercuriales/gms/2014/REGIONS  2014/GALEC REGION MERCU AVRIL 2014.xls
+mercuriales/gms/2014/REGIONS  2014/SCHIEVER MERCU 2014.xls
+mercuriales/mdd/2014/2014 MERCURIALE CARREFOUR ASIATIQUE.xls
+mercuriales/mdd/2014/2014 MERCURIALE CARREFOUR PLATS CUISINES.xls
+mercuriales/mdd/2014/2014 MERCURIALE CASINO.xls
+
+sent 69592 bytes  received 13204 bytes  18399.11 bytes/sec
+total size is 29501468  speedup is 356.32
+sending incremental file list
+
+sent 5047 bytes  received 27 bytes  3382.67 bytes/sec
+total size is 39173092  speedup is 7720.36
+sending incremental file list
+operations_commerciales/chrono demande echantillons.xls
+operations_commerciales/FZC/OP FZC 2014/FZC TOUPARGEL 2014.xls
+operations_commerciales/MDD/MODELES CJ/AUCHAN ATAC SCHIEVER/DDE ECHANTILLONS/2014/DEMANDE ECHANTILLONS AUCHAN 133 CREPUSCULE.xls
+operations_commerciales/MDD/MODELES VB/DEM ECHANTILLONS/2014/Chrono 137 Monoprix 110314.XLS
+
+sent 215598 bytes  received 6250 bytes  40336.00 bytes/sec
+total size is 47303170  speedup is 213.22
+sending incremental file list
+
+sent 19882 bytes  received 78 bytes  13306.67 bytes/sec
+total size is 98562242  speedup is 4937.99
+sending incremental file list
+
+sent 3305 bytes  received 79 bytes  2256.00 bytes/sec
+total size is 16126730  speedup is 4765.58
+sending incremental file list
+modeles/compo_asia_simply_double_haut_g.lab
+
+sent 14168 bytes  received 1178 bytes  10230.67 bytes/sec
+total size is 43683328  speedup is 2846.56
+sending incremental file list
+
+sent 5781 bytes  received 30 bytes  3874.00 bytes/sec
+total size is 93132165  speedup is 16026.87
+sending incremental file list
+
+sent 63 bytes  received 12 bytes  50.00 bytes/sec
+total size is 84160512  speedup is 1122140.16
+sending incremental file list
+
+sent 7538 bytes  received 45 bytes  5055.33 bytes/sec
+total size is 9253358  speedup is 1220.28
+sending incremental file list
+
+sent 4308 bytes  received 24 bytes  2888.00 bytes/sec
+total size is 6387982  speedup is 1474.60
+sending incremental file list
+
+sent 7695 bytes  received 20 bytes  5143.33 bytes/sec
+total size is 16751789  speedup is 2171.33
+sending incremental file list
+
+sent 85 bytes  received 13 bytes  196.00 bytes/sec
+total size is 104853504  speedup is 1069933.71
+sending incremental file list
+operations_commerciales/chrono demande echantillons.xls
+operations_commerciales/FZC/OP FZC 2014/FZC TOUPARGEL 2014.xls
+operations_commerciales/MDD/MODELES CJ/AUCHAN ATAC SCHIEVER/DDE ECHANTILLONS/2014/DEMANDE ECHANTILLONS AUCHAN 133 CREPUSCULE.xls
+operations_commerciales/MDD/MODELES VB/DEM ECHANTILLONS/2014/Chrono 137 Monoprix 110314.XLS
+
+sent 215598 bytes  received 6250 bytes  88739.20 bytes/sec
+total size is 47303170  speedup is 213.22
+sending incremental file list
+mercuriales/gms/2014/REGIONS  2014/GALEC REGION MERCU AVRIL 2014.xls
+mercuriales/gms/2014/REGIONS  2014/SCHIEVER MERCU 2014.xls
+mercuriales/mdd/2014/2014 MERCURIALE CARREFOUR ASIATIQUE.xls
+mercuriales/mdd/2014/2014 MERCURIALE CARREFOUR PLATS CUISINES.xls
+mercuriales/mdd/2014/2014 MERCURIALE CASINO.xls
+
+sent 69592 bytes  received 13204 bytes  55197.33 bytes/sec
+total size is 29501468  speedup is 356.32
+sending incremental file list
+modeles/compo_asia_simply_double_haut_g.lab
+
+sent 14168 bytes  received 1178 bytes  10230.67 bytes/sec
+total size is 43683328  speedup is 2846.56
+sending incremental file list
+
+sent 6345 bytes  received 46 bytes  12782.00 bytes/sec
+total size is 11731248  speedup is 1835.59
+sending incremental file list
+
+sent 5684 bytes  received 23 bytes  1037.64 bytes/sec
+total size is 129152473  speedup is 22630.54
+sending incremental file list
+
+sent 5610 bytes  received 39 bytes  3766.00 bytes/sec
+total size is 59049369  speedup is 10453.07
+sending incremental file list
+codesoft/Codesoft 7/Agis FE/43056_ass_asia_verso.bak
+codesoft/Codesoft 7/Agis FE/43056_ass_asia_verso.lab
+codesoft/Codesoft 7/Agis FE/75293_verso.bak
+codesoft/Codesoft 7/Agis FE/75293_verso.lab
+codesoft/Codesoft 7/EN_ATTENTE_nems_rang\#351s/43638_verso.bak
+codesoft/Codesoft 7/EN_ATTENTE_nems_rang\#351s/43638_verso.lab
+codesoft/Codesoft 7/ITM FE/43618_sam_porc_verso.bak
+codesoft/Codesoft 7/ITM FE/43618_sam_porc_verso.lab
+
+sent 107313 bytes  received 5954 bytes  45306.80 bytes/sec
+total size is 291113043  speedup is 2570.15
+sending incremental file list
+
+sent 19882 bytes  received 78 bytes  5702.86 bytes/sec
+total size is 98562242  speedup is 4937.99
+sending incremental file list
+
+sent 3305 bytes  received 79 bytes  1353.60 bytes/sec
+total size is 16126730  speedup is 4765.58

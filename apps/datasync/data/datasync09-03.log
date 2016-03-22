@@ -1,0 +1,137 @@
+Démarrage : mar sep  3 23:00:01 CEST 2013
+Arrêt     : mar sep  3 23:00:38 CEST 2013
+
+
+
+Base MySQL sélectionnée: agis
+Nombre de serveur(s) Linux concerné(s): 4
+Nombre de dossier(s) à mettre à jour: 24
+
+sending incremental file list
+
+sent 7552 bytes  received 20 bytes  15144.00 bytes/sec
+total size is 16747404  speedup is 2211.75
+sending incremental file list
+
+sent 5384 bytes  received 44 bytes  3618.67 bytes/sec
+total size is 9463304  speedup is 1743.42
+sending incremental file list
+
+sent 45548 bytes  received 83 bytes  18252.40 bytes/sec
+total size is 271852115  speedup is 5957.62
+sending incremental file list
+
+sent 5589 bytes  received 33 bytes  3748.00 bytes/sec
+total size is 11358988  speedup is 2020.45
+sending incremental file list
+
+sent 63 bytes  received 12 bytes  50.00 bytes/sec
+total size is 77592576  speedup is 1034567.68
+sending incremental file list
+
+sent 7538 bytes  received 45 bytes  5055.33 bytes/sec
+total size is 9253358  speedup is 1220.28
+sending incremental file list
+
+sent 7552 bytes  received 20 bytes  5048.00 bytes/sec
+total size is 16747404  speedup is 2211.75
+sending incremental file list
+
+sent 4308 bytes  received 24 bytes  2888.00 bytes/sec
+total size is 6387982  speedup is 1474.60
+sending incremental file list
+mercuriales/gms/2013/CENTRALES 2013/SYSTEME U 2013.xls
+mercuriales/gms/2013/CONTROLE TARIF 2013/09-SEPTEMBRE/SYSTEME U PRIX AU 01-09-2013 CHOUX FARCIS.pdf
+mercuriales/gms/2013/CONTROLE TARIF 2013/09-SEPTEMBRE/SYSTEME U PRIX SANS LA RPP LANCEMENT.pdf
+mercuriales/mdd/2013/2013 MERCURIALE CARREFOUR ASIATIQUE.xls
+mercuriales/mdd/2013/2013 MERCURIALE CARREFOUR PLATS CUISINES.xls
+mercuriales/mdd/2013/2013 MERCURIALE GROUPE AUCHAN.xls
+
+sent 64600 bytes  received 12216 bytes  30726.40 bytes/sec
+total size is 31583087  speedup is 411.15
+sending incremental file list
+
+sent 5047 bytes  received 27 bytes  3382.67 bytes/sec
+total size is 39173092  speedup is 7720.36
+sending incremental file list
+operations_commerciales/DEMANDE ECHANTILLONS CL .xls
+operations_commerciales/chrono demande echantillons.xls
+operations_commerciales/FZC/CONFIRMATIONS/2013/ARGEL/ARGEL_CATALOGUE_13_2013.xls
+operations_commerciales/FZC/OP FZC 2013/FZC ARGEL 2013.xls
+operations_commerciales/GMS/2013/A-CENTRALES/GMS AUCHAN.FR 2013-FUTUR MASTER.xls
+operations_commerciales/GMS/2013/A-CENTRALES/GMS CARREFOUR MARKET MN 2013-FUTUR MASTER.xls
+operations_commerciales/GMS/2013/C-CONTROLES PRIX/CARREFOUR MARKET/2013 CARREFOUR MARKET FESTIFS MENU.pdf
+operations_commerciales/GMS/2013/D-REGIONS/GMS LECLERC 2013-FUTUR MASTER.xls
+operations_commerciales/GMS/2013/D-REGIONS/GMS SCHIEVER 2013-FUTUR MASTER.xls
+operations_commerciales/MDD/MODELES CJ/CARREFOUR/DDE ECHANTILLONS/demande \#351chantillons DM STUDIO.XLS
+
+sent 278096 bytes  received 19667 bytes  85075.14 bytes/sec
+total size is 92474784  speedup is 310.57
+sending incremental file list
+
+sent 18506 bytes  received 80 bytes  12390.67 bytes/sec
+total size is 41728031  speedup is 2245.13
+sending incremental file list
+
+sent 7502 bytes  received 13 bytes  3006.00 bytes/sec
+total size is 33724035  speedup is 4487.56
+sending incremental file list
+
+sent 63 bytes  received 12 bytes  50.00 bytes/sec
+total size is 77592576  speedup is 1034567.68
+sending incremental file list
+
+sent 7538 bytes  received 45 bytes  5055.33 bytes/sec
+total size is 9253358  speedup is 1220.28
+sending incremental file list
+
+sent 4308 bytes  received 24 bytes  2888.00 bytes/sec
+total size is 6387982  speedup is 1474.60
+sending incremental file list
+
+sent 7552 bytes  received 20 bytes  5048.00 bytes/sec
+total size is 16747404  speedup is 2211.75
+sending incremental file list
+
+sent 85 bytes  received 13 bytes  65.33 bytes/sec
+total size is 104853504  speedup is 1069933.71
+sending incremental file list
+operations_commerciales/DEMANDE ECHANTILLONS CL .xls
+operations_commerciales/chrono demande echantillons.xls
+operations_commerciales/FZC/CONFIRMATIONS/2013/ARGEL/ARGEL_CATALOGUE_13_2013.xls
+operations_commerciales/FZC/OP FZC 2013/FZC ARGEL 2013.xls
+operations_commerciales/GMS/2013/A-CENTRALES/GMS AUCHAN.FR 2013-FUTUR MASTER.xls
+operations_commerciales/GMS/2013/A-CENTRALES/GMS CARREFOUR MARKET MN 2013-FUTUR MASTER.xls
+operations_commerciales/GMS/2013/C-CONTROLES PRIX/CARREFOUR MARKET/2013 CARREFOUR MARKET FESTIFS MENU.pdf
+operations_commerciales/GMS/2013/D-REGIONS/GMS LECLERC 2013-FUTUR MASTER.xls
+operations_commerciales/GMS/2013/D-REGIONS/GMS SCHIEVER 2013-FUTUR MASTER.xls
+operations_commerciales/MDD/MODELES CJ/CARREFOUR/DDE ECHANTILLONS/demande \#351chantillons DM STUDIO.XLS
+
+sent 278096 bytes  received 19667 bytes  119105.20 bytes/sec
+total size is 92474784  speedup is 310.57
+sending incremental file list
+mercuriales/gms/2013/CENTRALES 2013/SYSTEME U 2013.xls
+mercuriales/gms/2013/CONTROLE TARIF 2013/09-SEPTEMBRE/SYSTEME U PRIX AU 01-09-2013 CHOUX FARCIS.pdf
+mercuriales/gms/2013/CONTROLE TARIF 2013/09-SEPTEMBRE/SYSTEME U PRIX SANS LA RPP LANCEMENT.pdf
+mercuriales/mdd/2013/2013 MERCURIALE CARREFOUR ASIATIQUE.xls
+mercuriales/mdd/2013/2013 MERCURIALE CARREFOUR PLATS CUISINES.xls
+mercuriales/mdd/2013/2013 MERCURIALE GROUPE AUCHAN.xls
+
+sent 64600 bytes  received 12216 bytes  51210.67 bytes/sec
+total size is 31583087  speedup is 411.15
+sending incremental file list
+
+sent 5384 bytes  received 44 bytes  3618.67 bytes/sec
+total size is 9463304  speedup is 1743.42
+sending incremental file list
+
+sent 5645 bytes  received 23 bytes  3778.67 bytes/sec
+total size is 128643061  speedup is 22696.38
+sending incremental file list
+
+sent 4707 bytes  received 36 bytes  3162.00 bytes/sec
+total size is 46318934  speedup is 9765.75
+sending incremental file list
+
+sent 18506 bytes  received 80 bytes  12390.67 bytes/sec
+total size is 41728031  speedup is 2245.13

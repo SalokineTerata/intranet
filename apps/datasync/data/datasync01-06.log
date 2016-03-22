@@ -1,0 +1,52 @@
+Démarrage : lun jan  6 23:00:01 CET 2014
+Arrêt     : lun jan  6 23:00:56 CET 2014
+
+
+
+Base MySQL sélectionnée: agis
+Nombre de serveur(s) Linux concerné(s): 4
+Nombre de dossier(s) à mettre à jour: 24
+
+sending incremental file list
+
+sent 63 bytes  received 12 bytes  150.00 bytes/sec
+total size is 81426432  speedup is 1085685.76
+sending incremental file list
+
+sent 7538 bytes  received 45 bytes  5055.33 bytes/sec
+total size is 9253358  speedup is 1220.28
+sending incremental file list
+
+sent 4308 bytes  received 24 bytes  2888.00 bytes/sec
+total size is 6387982  speedup is 1474.60
+sending incremental file list
+
+sent 7695 bytes  received 20 bytes  5143.33 bytes/sec
+total size is 16751789  speedup is 2171.33
+sending incremental file list
+
+sent 85 bytes  received 13 bytes  65.33 bytes/sec
+total size is 104853504  speedup is 1069933.71
+sending incremental file list
+operations_commerciales/GMS/2013/A-CENTRALES/GMS CASINO 2013-FUTUR MASTER.xls
+operations_commerciales/GMS/2013/A-CENTRALES/GMS PDM 2013-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/A-CENTRALES/Copie de GMS INTERMARCHE 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS SYSTEME U 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/D-REGIONS/GMS LECLERC 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/D-REGIONS/GMS SCHIEVER 2014-FUTUR MASTER.xls
+
+sent 258965 bytes  received 19051 bytes  79433.14 bytes/sec
+total size is 61192558  speedup is 220.10
+sending incremental file list
+mercuriales/HD/2014/2014 MERCURIALE DIA.xls
+mercuriales/gms/2014/CENTRALES 2014/AUCHAN 2014.xls
+mercuriales/gms/2014/REGIONS  2014/SIMPLY ENTREPOT JANV 2014.xls
+mercuriales/mdd/2014/2014 MERCURIALE CARREFOUR PLATS CUISINES.xls
+
+sent 144652 bytes  received 6501 bytes  60461.20 bytes/sec
+total size is 25541760  speedup is 168.98
+sending incremental file list
+
+sent 7378 bytes  received 13 bytes  4927.33 bytes/sec
+total size is 32486400  speedup is 4395.40
+sending incremental file list

@@ -1,0 +1,143 @@
+Démarrage : lun aoû 25 23:00:01 CEST 2014
+Arrêt     : lun aoû 25 23:00:44 CEST 2014
+
+
+
+Base MySQL sélectionnée: agis
+Nombre de serveur(s) Linux concerné(s): 4
+Nombre de dossier(s) à mettre à jour: 29
+
+sending incremental file list
+
+sent 7305 bytes  received 49 bytes  4902.67 bytes/sec
+total size is 13622581  speedup is 1852.40
+sending incremental file list
+
+sent 6675 bytes  received 40 bytes  2686.00 bytes/sec
+total size is 12849623  speedup is 1913.57
+sending incremental file list
+
+sent 63 bytes  received 12 bytes  50.00 bytes/sec
+total size is 212826112  speedup is 2837681.49
+sending incremental file list
+
+sent 7593 bytes  received 45 bytes  5092.00 bytes/sec
+total size is 9254930  speedup is 1211.70
+sending incremental file list
+
+sent 7938 bytes  received 20 bytes  5305.33 bytes/sec
+total size is 16768700  speedup is 2107.15
+sending incremental file list
+
+sent 4308 bytes  received 24 bytes  2888.00 bytes/sec
+total size is 6387982  speedup is 1474.60
+sending incremental file list
+mercuriales/MERCURIALES - AGIS/gms/2014/CONTROLE TARIFS 2014/10-OCTOBRE/PLACE DU MARCHE PC FE 01.10.14.pdf
+mercuriales/MERCURIALES - AGIS/mdd/2014/2014 MERCURIALE SYSTEME U.xls
+
+sent 37847 bytes  received 536 bytes  15353.20 bytes/sec
+total size is 37734374  speedup is 983.10
+sending incremental file list
+
+sent 5047 bytes  received 27 bytes  3382.67 bytes/sec
+total size is 39173092  speedup is 7720.36
+sending incremental file list
+operations_commerciales/DEMANDE ECHANTILLONS CL .xls
+operations_commerciales/DEMANDE ECHANTILLONS GB.xls
+operations_commerciales/chrono demande echantillons.xls
+operations_commerciales/FZC/OP FZC 2014/FZC PICARD 2014.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS AUCHAN 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/AUCHAN.FR/2014 AUCHAN.FR FESTIFS.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/AUCHAN/2014 AUCHAN OP 25 JOURS 1.xls
+
+sent 268014 bytes  received 12235 bytes  112099.60 bytes/sec
+total size is 57307830  speedup is 204.49
+sending incremental file list
+
+sent 20406 bytes  received 83 bytes  8195.60 bytes/sec
+total size is 99360776  speedup is 4849.47
+sending incremental file list
+
+sent 6737 bytes  received 93 bytes  4553.33 bytes/sec
+total size is 53070050  speedup is 7770.14
+sending incremental file list
+
+sent 9529 bytes  received 13 bytes  6361.33 bytes/sec
+total size is 46763520  speedup is 4900.81
+sending incremental file list
+
+sent 5794 bytes  received 30 bytes  11648.00 bytes/sec
+total size is 94942597  speedup is 16301.96
+sending incremental file list
+
+sent 63 bytes  received 12 bytes  150.00 bytes/sec
+total size is 212826112  speedup is 2837681.49
+sending incremental file list
+
+sent 7593 bytes  received 45 bytes  5092.00 bytes/sec
+total size is 9254930  speedup is 1211.70
+sending incremental file list
+
+sent 4308 bytes  received 24 bytes  8664.00 bytes/sec
+total size is 6387982  speedup is 1474.60
+sending incremental file list
+
+sent 7938 bytes  received 20 bytes  5305.33 bytes/sec
+total size is 16768700  speedup is 2107.15
+sending incremental file list
+
+sent 85 bytes  received 13 bytes  65.33 bytes/sec
+total size is 104853504  speedup is 1069933.71
+sending incremental file list
+operations_commerciales/DEMANDE ECHANTILLONS CL .xls
+operations_commerciales/DEMANDE ECHANTILLONS GB.xls
+operations_commerciales/chrono demande echantillons.xls
+operations_commerciales/FZC/OP FZC 2014/FZC PICARD 2014.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS AUCHAN 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/AUCHAN.FR/2014 AUCHAN.FR FESTIFS.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/AUCHAN/2014 AUCHAN OP 25 JOURS 1.xls
+
+sent 268014 bytes  received 12235 bytes  112099.60 bytes/sec
+total size is 57307830  speedup is 204.49
+sending incremental file list
+mercuriales/MERCURIALES - AGIS/gms/2014/CONTROLE TARIFS 2014/10-OCTOBRE/PLACE DU MARCHE PC FE 01.10.14.pdf
+mercuriales/MERCURIALES - AGIS/mdd/2014/2014 MERCURIALE SYSTEME U.xls
+
+sent 37847 bytes  received 536 bytes  25588.67 bytes/sec
+total size is 37734374  speedup is 983.10
+sending incremental file list
+
+sent 9529 bytes  received 13 bytes  6361.33 bytes/sec
+total size is 46763520  speedup is 4900.81
+sending incremental file list
+
+sent 7305 bytes  received 49 bytes  4902.67 bytes/sec
+total size is 13622581  speedup is 1852.40
+sending incremental file list
+
+sent 5745 bytes  received 23 bytes  3845.33 bytes/sec
+total size is 129159129  speedup is 22392.36
+sending incremental file list
+
+sent 5610 bytes  received 39 bytes  3766.00 bytes/sec
+total size is 59049369  speedup is 10453.07
+sending incremental file list
+
+sent 52293 bytes  received 97 bytes  34926.67 bytes/sec
+total size is 299707475  speedup is 5720.70
+sending incremental file list
+
+sent 20406 bytes  received 83 bytes  8195.60 bytes/sec
+total size is 99360776  speedup is 4849.47
+sending incremental file list
+
+sent 6737 bytes  received 93 bytes  2732.00 bytes/sec
+total size is 53070050  speedup is 7770.14
+sending incremental file list
+
+sent 7938 bytes  received 20 bytes  3183.20 bytes/sec
+total size is 16768700  speedup is 2107.15
+sending incremental file list
+
+sent 7938 bytes  received 20 bytes  5305.33 bytes/sec
+total size is 16768700  speedup is 2107.15

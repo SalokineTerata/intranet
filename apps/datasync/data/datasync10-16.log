@@ -1,0 +1,144 @@
+Démarrage : mer oct 16 23:00:01 CEST 2013
+Arrêt     : mer oct 16 23:00:44 CEST 2013
+
+
+
+Base MySQL sélectionnée: agis
+Nombre de serveur(s) Linux concerné(s): 4
+Nombre de dossier(s) à mettre à jour: 24
+
+sending incremental file list
+
+sent 7651 bytes  received 20 bytes  15342.00 bytes/sec
+total size is 16750790  speedup is 2183.65
+sending incremental file list
+
+sent 5598 bytes  received 45 bytes  3762.00 bytes/sec
+total size is 9985067  speedup is 1769.46
+sending incremental file list
+
+sent 5715 bytes  received 34 bytes  2299.60 bytes/sec
+total size is 11514959  speedup is 2002.95
+sending incremental file list
+
+sent 63 bytes  received 12 bytes  50.00 bytes/sec
+total size is 78852096  speedup is 1051361.28
+sending incremental file list
+
+sent 7538 bytes  received 45 bytes  5055.33 bytes/sec
+total size is 9253358  speedup is 1220.28
+sending incremental file list
+
+sent 7651 bytes  received 20 bytes  5114.00 bytes/sec
+total size is 16750790  speedup is 2183.65
+sending incremental file list
+
+sent 4308 bytes  received 24 bytes  2888.00 bytes/sec
+total size is 6387982  speedup is 1474.60
+sending incremental file list
+mercuriales/gms/2013/CONTROLE TARIF 2013/11-NOVEMBRE/2013 CARREDFOUR PIZZAS.pdf
+
+sent 645827 bytes  received 5196 bytes  118367.82 bytes/sec
+total size is 35795290  speedup is 54.98
+sending incremental file list
+
+sent 5047 bytes  received 27 bytes  3382.67 bytes/sec
+total size is 39173092  speedup is 7720.36
+sending incremental file list
+operations_commerciales/DEMANDE ECHANTILLONS CL .xls
+operations_commerciales/chrono demande echantillons.xls
+operations_commerciales/GMS/RECAP DEMANDE ET CONFIRMATIONS HEBDO.xls
+deleting operations_commerciales/GMS/2013/RECAP DEMANDE ET CONFIRMATIONS HEBDO.xls
+operations_commerciales/GMS/2013/A-CENTRALES/GMS AUCHAN 2013-FUTUR MASTER.xls
+operations_commerciales/GMS/2013/A-CENTRALES/GMS CASINO 2013-FUTUR MASTER.xls
+operations_commerciales/GMS/2013/B-CONFIRMATIONS OPERATIONS/CONFIRMATIONS CASINO/GEANT/2013 GEANT PROMO DUO S44-45.xls
+operations_commerciales/GMS/2013/B-CONFIRMATIONS OPERATIONS/CONFIRMATIONS CASINO/GEANT/2013 GEANT PROMO DUO S47-48.xls
+operations_commerciales/GMS/2013/B-CONFIRMATIONS OPERATIONS/CONFIRMATIONS CASINO/GEANT/2013 GEANT PROMO DUO S51-52.xls
+operations_commerciales/GMS/2013/B-CONFIRMATIONS OPERATIONS/CONFIRMATIONS CASINO/SM CASINO/2013 SM ANNIVERSAIRE 2 TARTIFLETTE 800G.xls
+operations_commerciales/GMS/2013/D-REGIONS/GMS LECLERC 2013-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS CARREFOUR MN 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS CASINO 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS SYSTEME U 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/CASINO HM/2014 HM GROS VOLUMES CHANDELEUR NAA HYPER.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/SYSTEME U/2014 SYSTEME U FIDELISATION JANVIER PAUPIETTES LANGUE.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/SYSTEME U/2014 SYSTEME U TRAFIC NAA JANVIER.xls
+operations_commerciales/MDD/MODELES VB/CONF OPES ITM NETTO/2014/
+operations_commerciales/MDD/MODELES VB/CONF OPES ITM NETTO/2014/CONFIRMATION OPE_GENERALISTE_FEVRIER1.xls
+operations_commerciales/MDD/MODELES VB/DEM ECHANTILLONS/2013/Chrono 501 ITM 161013.XLS
+
+sent 375851 bytes  received 33967 bytes  117090.86 bytes/sec
+total size is 52570313  speedup is 128.28
+sending incremental file list
+
+sent 18506 bytes  received 80 bytes  12390.67 bytes/sec
+total size is 41728031  speedup is 2245.13
+sending incremental file list
+
+sent 7556 bytes  received 13 bytes  5046.00 bytes/sec
+total size is 34205315  speedup is 4519.13
+sending incremental file list
+
+sent 63 bytes  received 12 bytes  50.00 bytes/sec
+total size is 78852096  speedup is 1051361.28
+sending incremental file list
+
+sent 7538 bytes  received 45 bytes  5055.33 bytes/sec
+total size is 9253358  speedup is 1220.28
+sending incremental file list
+
+sent 4308 bytes  received 24 bytes  2888.00 bytes/sec
+total size is 6387982  speedup is 1474.60
+sending incremental file list
+
+sent 7651 bytes  received 20 bytes  3068.40 bytes/sec
+total size is 16750790  speedup is 2183.65
+sending incremental file list
+
+sent 85 bytes  received 13 bytes  196.00 bytes/sec
+total size is 104853504  speedup is 1069933.71
+sending incremental file list
+operations_commerciales/DEMANDE ECHANTILLONS CL .xls
+operations_commerciales/chrono demande echantillons.xls
+operations_commerciales/GMS/RECAP DEMANDE ET CONFIRMATIONS HEBDO.xls
+deleting operations_commerciales/GMS/2013/RECAP DEMANDE ET CONFIRMATIONS HEBDO.xls
+operations_commerciales/GMS/2013/A-CENTRALES/GMS AUCHAN 2013-FUTUR MASTER.xls
+operations_commerciales/GMS/2013/A-CENTRALES/GMS CASINO 2013-FUTUR MASTER.xls
+operations_commerciales/GMS/2013/B-CONFIRMATIONS OPERATIONS/CONFIRMATIONS CASINO/GEANT/2013 GEANT PROMO DUO S44-45.xls
+operations_commerciales/GMS/2013/B-CONFIRMATIONS OPERATIONS/CONFIRMATIONS CASINO/GEANT/2013 GEANT PROMO DUO S47-48.xls
+operations_commerciales/GMS/2013/B-CONFIRMATIONS OPERATIONS/CONFIRMATIONS CASINO/GEANT/2013 GEANT PROMO DUO S51-52.xls
+operations_commerciales/GMS/2013/B-CONFIRMATIONS OPERATIONS/CONFIRMATIONS CASINO/SM CASINO/2013 SM ANNIVERSAIRE 2 TARTIFLETTE 800G.xls
+operations_commerciales/GMS/2013/D-REGIONS/GMS LECLERC 2013-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS CARREFOUR MN 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS CASINO 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS SYSTEME U 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/CASINO HM/2014 HM GROS VOLUMES CHANDELEUR NAA HYPER.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/SYSTEME U/2014 SYSTEME U FIDELISATION JANVIER PAUPIETTES LANGUE.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/SYSTEME U/2014 SYSTEME U TRAFIC NAA JANVIER.xls
+operations_commerciales/MDD/MODELES VB/CONF OPES ITM NETTO/2014/
+operations_commerciales/MDD/MODELES VB/CONF OPES ITM NETTO/2014/CONFIRMATION OPE_GENERALISTE_FEVRIER1.xls
+operations_commerciales/MDD/MODELES VB/DEM ECHANTILLONS/2013/Chrono 501 ITM 161013.XLS
+
+sent 375851 bytes  received 33967 bytes  117090.86 bytes/sec
+total size is 52570313  speedup is 128.28
+sending incremental file list
+mercuriales/gms/2013/CONTROLE TARIF 2013/11-NOVEMBRE/2013 CARREDFOUR PIZZAS.pdf
+
+sent 645827 bytes  received 5196 bytes  144671.78 bytes/sec
+total size is 35795290  speedup is 54.98
+sending incremental file list
+
+sent 5598 bytes  received 45 bytes  3762.00 bytes/sec
+total size is 9985067  speedup is 1769.46
+sending incremental file list
+
+sent 5677 bytes  received 23 bytes  3800.00 bytes/sec
+total size is 128680949  speedup is 22575.61
+sending incremental file list
+
+sent 4707 bytes  received 36 bytes  3162.00 bytes/sec
+total size is 46318934  speedup is 9765.75
+sending incremental file list
+
+sent 46167 bytes  received 86 bytes  18501.20 bytes/sec
+total size is 274589267  speedup is 5936.68
+sending incremental file list

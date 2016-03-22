@@ -1,0 +1,171 @@
+Démarrage : jeu sep  5 23:00:01 CEST 2013
+Arrêt     : jeu sep  5 23:00:43 CEST 2013
+
+
+
+Base MySQL sélectionnée: agis
+Nombre de serveur(s) Linux concerné(s): 4
+Nombre de dossier(s) à mettre à jour: 24
+
+sending incremental file list
+
+sent 7552 bytes  received 20 bytes  15144.00 bytes/sec
+total size is 16747404  speedup is 2211.75
+sending incremental file list
+
+sent 5440 bytes  received 44 bytes  3656.00 bytes/sec
+total size is 9508728  speedup is 1733.90
+sending incremental file list
+
+sent 45548 bytes  received 83 bytes  18252.40 bytes/sec
+total size is 271852115  speedup is 5957.62
+sending incremental file list
+
+sent 5589 bytes  received 33 bytes  3748.00 bytes/sec
+total size is 11358988  speedup is 2020.45
+sending incremental file list
+
+sent 63 bytes  received 12 bytes  50.00 bytes/sec
+total size is 77592576  speedup is 1034567.68
+sending incremental file list
+
+sent 7538 bytes  received 45 bytes  5055.33 bytes/sec
+total size is 9253358  speedup is 1220.28
+sending incremental file list
+
+sent 7552 bytes  received 20 bytes  5048.00 bytes/sec
+total size is 16747404  speedup is 2211.75
+sending incremental file list
+
+sent 4308 bytes  received 24 bytes  2888.00 bytes/sec
+total size is 6387982  speedup is 1474.60
+sending incremental file list
+mercuriales/gms/2013/CENTRALES 2013/SIMPLY MARKET 2013.xls
+mercuriales/mdd/2013/2013 MERCURIALE CARREFOUR ASIATIQUE.xls
+mercuriales/mdd/2013/2013 MERCURIALE CARREFOUR PLATS CUISINES.xls
+mercuriales/mdd/2013/2013 MERCURIALE GROUPE AUCHAN.xls
+mercuriales/mdd/2013/2013 MERCURIALE SYSTEME U.xls
+
+sent 69595 bytes  received 13193 bytes  33115.20 bytes/sec
+total size is 31583087  speedup is 381.49
+sending incremental file list
+
+sent 5047 bytes  received 27 bytes  3382.67 bytes/sec
+total size is 39173092  speedup is 7720.36
+sending incremental file list
+operations_commerciales/chrono demande echantillons.xls
+operations_commerciales/GMS/2013/RECAP DEMANDE ET CONFIRMATIONS HEBDO.xls
+operations_commerciales/GMS/2013/A-CENTRALES/GMS AUCHAN 2013-FUTUR MASTER.xls
+operations_commerciales/GMS/2013/A-CENTRALES/GMS AUCHAN.FR 2013-FUTUR MASTER.xls
+operations_commerciales/GMS/2013/A-CENTRALES/GMS CARREFOUR MARKET MN 2013-FUTUR MASTER.xls
+operations_commerciales/GMS/2013/A-CENTRALES/GMS CARREFOUR MN 2013-FUTUR MASTER.xls
+operations_commerciales/GMS/2013/A-CENTRALES/GMS CARREFOUR MN ASIE 2013-FUTUR MASTER.xls
+operations_commerciales/GMS/2013/A-CENTRALES/GMS CASINO 2013-FUTUR MASTER.xls
+operations_commerciales/GMS/2013/A-CENTRALES/GMS INTERMARCHE 2013-FUTUR MASTER.xls
+operations_commerciales/GMS/2013/A-CENTRALES/GMS SIMPLY MARKET 2013-FUTUR MASTER.xls
+operations_commerciales/GMS/2013/A-CENTRALES/GMS SYSTEME U 2013-FUTUR MASTER.xls
+operations_commerciales/GMS/2013/B-CONFIRMATIONS OPERATIONS/CONFIRMATIONS CARREFOUR/2013 CARREFOUR OP PROMO 46.xls
+operations_commerciales/GMS/2013/D-REGIONS/GMS LECLERC 2013-FUTUR MASTER.xls
+operations_commerciales/GMS/2013/D-REGIONS/GMS SU REGION  2013-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS CASINO 2014-FUTUR MASTER.xls
+operations_commerciales/MDD/MODELES CJ/AUCHAN ATAC SCHIEVER/CONF OP/2013/CONFIRMATION OPERATION AUCHAN NOV2.xls
+operations_commerciales/MDD/MODELES CJ/AUCHAN ATAC SCHIEVER/CONF OP/2013/CONFIRMATION OPERATION SCHIEVER FESTIFS 2013.xls
+operations_commerciales/MDD/MODELES CJ/AUCHAN ATAC SCHIEVER/CONF OP/2013/CONFIRMATION OPERATION SCHIEVER SEPTEMBRE 1.xls
+operations_commerciales/MDD/MODELES CJ/CARREFOUR/CONF OP/2013/CONFIRMATION OPERATION CRF CONTACT CITY .xls
+operations_commerciales/MDD/MODELES CJ/CONF OPES CORA MATCH/Chrono 388 Cora Agence Epsilon 050913.XLS
+operations_commerciales/MDD/MODELES CJ/CONF OPES CORA MATCH/2013/CORA/CONFIRMATION OPERATION_CORA_TRAFIC ETRENNES BLANC.xls
+operations_commerciales/MDD/MODELES CJ/SYSTEME U/CONF OP/CONFIRMATION OPERATION SU REMISES NOEL 13.xls
+operations_commerciales/MDD/MODELES CJ/SYSTEME U/CONF OP/CONFIRMATION OPERATION SU REVEILLON 13.xls
+operations_commerciales/MDD/OP MDD 2013/MDD AUCHAN 2013 FUTUR MASTER.xls
+operations_commerciales/MDD/OP MDD 2013/MDD CORA 2013 FUTUR MASTER.xls
+operations_commerciales/MDD/OP MDD 2013/MDD MATCH BE 2013 FUTUR MASTER.xls
+operations_commerciales/MDD/OP MDD 2013/MDD SCHIEVER 2013 FUTUR MASTER.xls
+operations_commerciales/MDD/OP MDD 2013/MDD SYSTEME U 2013 FUTURMASTER.xls
+
+sent 538086 bytes  received 59113 bytes  108581.64 bytes/sec
+total size is 92701600  speedup is 155.23
+sending incremental file list
+
+sent 18506 bytes  received 80 bytes  12390.67 bytes/sec
+total size is 41728031  speedup is 2245.13
+sending incremental file list
+
+sent 7502 bytes  received 13 bytes  5010.00 bytes/sec
+total size is 33724035  speedup is 4487.56
+sending incremental file list
+
+sent 63 bytes  received 12 bytes  150.00 bytes/sec
+total size is 77592576  speedup is 1034567.68
+sending incremental file list
+
+sent 7538 bytes  received 45 bytes  15166.00 bytes/sec
+total size is 9253358  speedup is 1220.28
+sending incremental file list
+
+sent 4308 bytes  received 24 bytes  8664.00 bytes/sec
+total size is 6387982  speedup is 1474.60
+sending incremental file list
+
+sent 7552 bytes  received 20 bytes  5048.00 bytes/sec
+total size is 16747404  speedup is 2211.75
+sending incremental file list
+
+sent 85 bytes  received 13 bytes  65.33 bytes/sec
+total size is 104853504  speedup is 1069933.71
+sending incremental file list
+operations_commerciales/chrono demande echantillons.xls
+operations_commerciales/GMS/2013/RECAP DEMANDE ET CONFIRMATIONS HEBDO.xls
+operations_commerciales/GMS/2013/A-CENTRALES/GMS AUCHAN 2013-FUTUR MASTER.xls
+operations_commerciales/GMS/2013/A-CENTRALES/GMS AUCHAN.FR 2013-FUTUR MASTER.xls
+operations_commerciales/GMS/2013/A-CENTRALES/GMS CARREFOUR MARKET MN 2013-FUTUR MASTER.xls
+operations_commerciales/GMS/2013/A-CENTRALES/GMS CARREFOUR MN 2013-FUTUR MASTER.xls
+operations_commerciales/GMS/2013/A-CENTRALES/GMS CARREFOUR MN ASIE 2013-FUTUR MASTER.xls
+operations_commerciales/GMS/2013/A-CENTRALES/GMS CASINO 2013-FUTUR MASTER.xls
+operations_commerciales/GMS/2013/A-CENTRALES/GMS INTERMARCHE 2013-FUTUR MASTER.xls
+operations_commerciales/GMS/2013/A-CENTRALES/GMS SIMPLY MARKET 2013-FUTUR MASTER.xls
+operations_commerciales/GMS/2013/A-CENTRALES/GMS SYSTEME U 2013-FUTUR MASTER.xls
+operations_commerciales/GMS/2013/B-CONFIRMATIONS OPERATIONS/CONFIRMATIONS CARREFOUR/2013 CARREFOUR OP PROMO 46.xls
+operations_commerciales/GMS/2013/D-REGIONS/GMS LECLERC 2013-FUTUR MASTER.xls
+operations_commerciales/GMS/2013/D-REGIONS/GMS SU REGION  2013-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS CASINO 2014-FUTUR MASTER.xls
+operations_commerciales/MDD/MODELES CJ/AUCHAN ATAC SCHIEVER/CONF OP/2013/CONFIRMATION OPERATION AUCHAN NOV2.xls
+operations_commerciales/MDD/MODELES CJ/AUCHAN ATAC SCHIEVER/CONF OP/2013/CONFIRMATION OPERATION SCHIEVER FESTIFS 2013.xls
+operations_commerciales/MDD/MODELES CJ/AUCHAN ATAC SCHIEVER/CONF OP/2013/CONFIRMATION OPERATION SCHIEVER SEPTEMBRE 1.xls
+operations_commerciales/MDD/MODELES CJ/CARREFOUR/CONF OP/2013/CONFIRMATION OPERATION CRF CONTACT CITY .xls
+operations_commerciales/MDD/MODELES CJ/CONF OPES CORA MATCH/Chrono 388 Cora Agence Epsilon 050913.XLS
+operations_commerciales/MDD/MODELES CJ/CONF OPES CORA MATCH/2013/CORA/CONFIRMATION OPERATION_CORA_TRAFIC ETRENNES BLANC.xls
+operations_commerciales/MDD/MODELES CJ/SYSTEME U/CONF OP/CONFIRMATION OPERATION SU REMISES NOEL 13.xls
+operations_commerciales/MDD/MODELES CJ/SYSTEME U/CONF OP/CONFIRMATION OPERATION SU REVEILLON 13.xls
+operations_commerciales/MDD/OP MDD 2013/MDD AUCHAN 2013 FUTUR MASTER.xls
+operations_commerciales/MDD/OP MDD 2013/MDD CORA 2013 FUTUR MASTER.xls
+operations_commerciales/MDD/OP MDD 2013/MDD MATCH BE 2013 FUTUR MASTER.xls
+operations_commerciales/MDD/OP MDD 2013/MDD SCHIEVER 2013 FUTUR MASTER.xls
+operations_commerciales/MDD/OP MDD 2013/MDD SYSTEME U 2013 FUTURMASTER.xls
+
+sent 538086 bytes  received 59113 bytes  132710.89 bytes/sec
+total size is 92701600  speedup is 155.23
+sending incremental file list
+mercuriales/gms/2013/CENTRALES 2013/SIMPLY MARKET 2013.xls
+mercuriales/mdd/2013/2013 MERCURIALE CARREFOUR ASIATIQUE.xls
+mercuriales/mdd/2013/2013 MERCURIALE CARREFOUR PLATS CUISINES.xls
+mercuriales/mdd/2013/2013 MERCURIALE GROUPE AUCHAN.xls
+mercuriales/mdd/2013/2013 MERCURIALE SYSTEME U.xls
+
+sent 69595 bytes  received 13193 bytes  55192.00 bytes/sec
+total size is 31583087  speedup is 381.49
+sending incremental file list
+
+sent 5440 bytes  received 44 bytes  3656.00 bytes/sec
+total size is 9508728  speedup is 1733.90
+sending incremental file list
+
+sent 5645 bytes  received 23 bytes  3778.67 bytes/sec
+total size is 128643061  speedup is 22696.38
+sending incremental file list
+
+sent 4707 bytes  received 36 bytes  9486.00 bytes/sec
+total size is 46318934  speedup is 9765.75
+sending incremental file list
+
+sent 18506 bytes  received 80 bytes  12390.67 bytes/sec
+total size is 41728031  speedup is 2245.13

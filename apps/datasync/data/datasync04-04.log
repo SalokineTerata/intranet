@@ -1,0 +1,264 @@
+Démarrage : ven avr  4 23:00:01 CEST 2014
+Arrêt     : ven avr  4 23:00:59 CEST 2014
+
+
+
+Base MySQL sélectionnée: agis
+Nombre de serveur(s) Linux concerné(s): 4
+Nombre de dossier(s) à mettre à jour: 27
+
+sending incremental file list
+
+sent 7051 bytes  received 49 bytes  4733.33 bytes/sec
+total size is 12693370  speedup is 1787.80
+sending incremental file list
+
+sent 6266 bytes  received 38 bytes  4202.67 bytes/sec
+total size is 12421591  speedup is 1970.43
+sending incremental file list
+
+sent 63 bytes  received 12 bytes  150.00 bytes/sec
+total size is 84160512  speedup is 1122140.16
+sending incremental file list
+
+sent 7538 bytes  received 45 bytes  15166.00 bytes/sec
+total size is 9253358  speedup is 1220.28
+sending incremental file list
+
+sent 7695 bytes  received 20 bytes  5143.33 bytes/sec
+total size is 16751789  speedup is 2171.33
+sending incremental file list
+
+sent 4308 bytes  received 24 bytes  2888.00 bytes/sec
+total size is 6387982  speedup is 1474.60
+sending incremental file list
+mercuriales/gms/2014/CENTRALES 2014/AUCHAN 2014.xls
+mercuriales/gms/2014/CENTRALES 2014/CARREFOUR 2014.xls
+mercuriales/mdd/2014/2014 MERCURIALE CASINO.xls
+
+sent 79292 bytes  received 11517 bytes  36323.60 bytes/sec
+total size is 30099219  speedup is 331.46
+sending incremental file list
+
+sent 5047 bytes  received 27 bytes  3382.67 bytes/sec
+total size is 39173092  speedup is 7720.36
+sending incremental file list
+operations_commerciales/DEMANDE ECHANTILLONS CL .xls
+operations_commerciales/chrono demande echantillons.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS CARREFOUR 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS CARREFOUR MARKET 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS CASINO 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS PLACE DU MARCHE 2014-FUTUR MASTER.xls
+
+sent 272548 bytes  received 24280 bytes  53968.73 bytes/sec
+total size is 49314712  speedup is 166.14
+sending incremental file list
+
+sent 20051 bytes  received 78 bytes  8051.60 bytes/sec
+total size is 98915848  speedup is 4914.10
+sending incremental file list
+gofast/INFORMATIONS_GENERALES/7_GOFAST_5S_280114.ppt
+
+sent 1391305 bytes  received 98 bytes  163694.47 bytes/sec
+total size is 21122238  speedup is 15.18
+sending incremental file list
+
+sent 9125 bytes  received 13 bytes  6092.00 bytes/sec
+total size is 43788288  speedup is 4791.89
+sending incremental file list
+
+sent 5781 bytes  received 30 bytes  3874.00 bytes/sec
+total size is 93132165  speedup is 16026.87
+sending incremental file list
+
+sent 63 bytes  received 12 bytes  150.00 bytes/sec
+total size is 84160512  speedup is 1122140.16
+sending incremental file list
+
+sent 7538 bytes  received 45 bytes  5055.33 bytes/sec
+total size is 9253358  speedup is 1220.28
+sending incremental file list
+
+sent 4308 bytes  received 24 bytes  2888.00 bytes/sec
+total size is 6387982  speedup is 1474.60
+sending incremental file list
+
+sent 7695 bytes  received 20 bytes  5143.33 bytes/sec
+total size is 16751789  speedup is 2171.33
+sending incremental file list
+
+sent 85 bytes  received 13 bytes  196.00 bytes/sec
+total size is 104853504  speedup is 1069933.71
+sending incremental file list
+operations_commerciales/DEMANDE ECHANTILLONS CL .xls
+operations_commerciales/chrono demande echantillons.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS CARREFOUR 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS CARREFOUR MARKET 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS CASINO 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS PLACE DU MARCHE 2014-FUTUR MASTER.xls
+
+sent 272548 bytes  received 24280 bytes  118731.20 bytes/sec
+total size is 49314712  speedup is 166.14
+sending incremental file list
+mercuriales/gms/2014/CENTRALES 2014/AUCHAN 2014.xls
+mercuriales/gms/2014/CENTRALES 2014/CARREFOUR 2014.xls
+mercuriales/mdd/2014/2014 MERCURIALE CASINO.xls
+
+sent 79292 bytes  received 11517 bytes  36323.60 bytes/sec
+total size is 30099219  speedup is 331.46
+sending incremental file list
+
+sent 9125 bytes  received 13 bytes  6092.00 bytes/sec
+total size is 43788288  speedup is 4791.89
+sending incremental file list
+
+sent 7051 bytes  received 49 bytes  14200.00 bytes/sec
+total size is 12693370  speedup is 1787.80
+sending incremental file list
+
+sent 5732 bytes  received 23 bytes  3836.67 bytes/sec
+total size is 129183193  speedup is 22447.12
+sending incremental file list
+
+sent 5610 bytes  received 39 bytes  3766.00 bytes/sec
+total size is 59049369  speedup is 10453.07
+sending incremental file list
+
+sent 50350 bytes  received 94 bytes  33629.33 bytes/sec
+total size is 291459155  speedup is 5777.88
+sending incremental file list
+rh_multi_sites/1% logement - Vilogia/
+rh_multi_sites/1% logement - Vilogia/Demande de logement locatif/
+rh_multi_sites/1% logement - Vilogia/Dossiers pr\#352ts et aides/
+rh_multi_sites/1% logement - Vilogia/PATRIMOINE VILOGIA/
+rh_multi_sites/1% logement - Vilogia/PATRIMOINE VILOGIA/PATRIMOINE VILOGIA/
+rh_multi_sites/1% logement - Vilogia/PLAQUETTES COMMUNICATION ENTREPRISES/
+rh_multi_sites/1% logement - Vilogia/liste du personnel/
+rh_multi_sites/1% logement - Vilogia/news letters 2013/
+rh_multi_sites/Accords d'entreprise/
+rh_multi_sites/Accords d'entreprise/Chartes/
+rh_multi_sites/Accords d'entreprise/R\#351glement Int\#351rieur/
+rh_multi_sites/Audit/
+rh_multi_sites/Classif/
+rh_multi_sites/Classif/2012/
+rh_multi_sites/GPEC/
+rh_multi_sites/GPEC/Ent annuel/
+rh_multi_sites/GPEC/Fiches m\#351tiers/
+rh_multi_sites/GPEC/Fiches m\#351tiers/FM Avignon 2013/
+rh_multi_sites/GPEC/Fiches m\#351tiers/FM Avignon 2013/01 R\#351ception/
+rh_multi_sites/GPEC/Fiches m\#351tiers/FM Avignon 2013/01 R\#351ception/Archives ancienne convention/
+rh_multi_sites/GPEC/Fiches m\#351tiers/FM Avignon 2013/03 Pr\#351paration/
+rh_multi_sites/GPEC/Fiches m\#351tiers/FM Avignon 2013/03 Pr\#351paration/Archives ancienne convention/
+rh_multi_sites/GPEC/Fiches m\#351tiers/FM Avignon 2013/04 Conditionnement/
+rh_multi_sites/GPEC/Fiches m\#351tiers/FM Avignon 2013/04 Conditionnement/Archives ancienne convention/
+rh_multi_sites/GPEC/Fiches m\#351tiers/FM Avignon 2013/06 Emballage-Cuisson/
+rh_multi_sites/GPEC/Fiches m\#351tiers/FM Avignon 2013/06 Emballage-Cuisson/Archives ancienne convention/
+rh_multi_sites/GPEC/Fiches m\#351tiers/FM Avignon 2013/08 Qualit\#351/
+rh_multi_sites/GPEC/Fiches m\#351tiers/FM Avignon 2013/08 Qualit\#351/Archives/
+rh_multi_sites/GPEC/Fiches m\#351tiers/FM Avignon 2013/09 Technique/
+rh_multi_sites/GPEC/Fiches m\#351tiers/FM Avignon 2013/09 Technique/Maintenance/
+rh_multi_sites/GPEC/Fiches m\#351tiers/FM Avignon 2013/10 Restaurant/
+rh_multi_sites/GPEC/Fiches m\#351tiers/FM Avignon 2013/11 Encadrement/
+rh_multi_sites/GPEC/Fiches m\#351tiers/FM Avignon 2013/11 Encadrement/Archive/
+rh_multi_sites/GPEC/Fiches m\#351tiers/FM Avignon 2013/Archives/
+rh_multi_sites/GPEC/Fiches m\#351tiers/FM Avignon 2013/Archives/Exp\#351dition/
+rh_multi_sites/GPEC/Fiches m\#351tiers/FM Avignon 2013/Archives/Pr\#351paration/
+rh_multi_sites/GPEC/Fiches m\#351tiers/FM Avignon 2013/BILANS/
+rh_multi_sites/GPEC/Fiches m\#351tiers/FM Herbignac/
+rh_multi_sites/GPEC/Fiches m\#351tiers/FM Herbignac/ARCHIVES/
+rh_multi_sites/GPEC/Fiches m\#351tiers/FM Herbignac/ARCHIVES/FDP perime asiatique/
+rh_multi_sites/GPEC/Fiches m\#351tiers/FM Herbignac/ARCHIVES/FDP perime expedition/
+rh_multi_sites/GPEC/Fiches m\#351tiers/FM Herbignac/ARCHIVES/FDP perime pan\#351/
+rh_multi_sites/GPEC/Fiches m\#351tiers/FM Herbignac/ARCHIVES/FDP qualit\#351 perime/
+rh_multi_sites/GPEC/Fiches m\#351tiers/FM Herbignac/ENVIRONNEMENT/
+rh_multi_sites/GPEC/Fiches m\#351tiers/FM Herbignac/FACONNAGE ASIATIQUE/
+rh_multi_sites/GPEC/Fiches m\#351tiers/FM Herbignac/FICHES DE FONCTION/
+rh_multi_sites/GPEC/Fiches m\#351tiers/FM Herbignac/FICHES DE FONCTION/p\#351rim\#351/
+rh_multi_sites/GPEC/Fiches m\#351tiers/FM Herbignac/PANES/
+rh_multi_sites/GPEC/Fiches m\#351tiers/FM Herbignac/PLATS CUISINES/
+rh_multi_sites/GPEC/Fiches m\#351tiers/FM Herbignac/R&D/
+rh_multi_sites/GPEC/Fiches m\#351tiers/FM Herbignac/RECEPTION/
+rh_multi_sites/GPEC/Fiches m\#351tiers/FM Herbignac/SUREMBALLAGE PLATS CUISINES/
+rh_multi_sites/GPEC/Fiches m\#351tiers/FM Herbignac/conditionnement asiatique/
+rh_multi_sites/GPEC/Fiches m\#351tiers/FM Herbignac/expedition/
+rh_multi_sites/GPEC/Fiches m\#351tiers/FM Herbignac/maintenance/
+rh_multi_sites/GPEC/Fiches m\#351tiers/FM Herbignac/qualite/
+rh_multi_sites/GPEC/Fiches m\#351tiers/Groupe LDC/
+rh_multi_sites/Maquettes/Maquette CDD/
+rh_multi_sites/PV CCE-n\#351gos/
+rh_multi_sites/Proc\#351dures/
+
+sent 20231 bytes  received 258 bytes  13659.33 bytes/sec
+total size is 98915848  speedup is 4827.75
+sending incremental file list
+gofast/
+gofast/CHANTIERS/
+gofast/CHANTIERS/1_CNP_DELEGATION_Cecile/
+gofast/CHANTIERS/1_CNP_DELEGATION_Cecile/1_EQUIPE/
+gofast/CHANTIERS/1_CNP_DELEGATION_Cecile/2_DEFIS/
+gofast/CHANTIERS/1_CNP_DELEGATION_Cecile/2_DEFIS/NOTATION_DDD/
+gofast/CHANTIERS/1_CNP_DELEGATION_Cecile/3_OBJECTIFS/
+gofast/CHANTIERS/1_CNP_DELEGATION_Cecile/4_GEMBA/
+gofast/CHANTIERS/1_CNP_DELEGATION_Cecile/4_GEMBA/AUTRES_SITES_LDC_TR/
+gofast/CHANTIERS/1_CNP_DELEGATION_Cecile/4_GEMBA/AUTRES_SITES_LDC_TR/DDD/
+gofast/CHANTIERS/1_CNP_DELEGATION_Cecile/5_STANDARDS/
+gofast/CHANTIERS/1_CNP_DELEGATION_Cecile/5_STANDARDS/DDD/
+gofast/CHANTIERS/1_CNP_DELEGATION_Cecile/6_BILAN/
+gofast/CHANTIERS/1_CNP_DELEGATION_Cecile/PLANNING_DVPT/
+gofast/CHANTIERS/2_FTK_CLIENTS_Mathieu/
+gofast/CHANTIERS/2_FTK_CLIENTS_Mathieu/1_EQUIPE/
+gofast/CHANTIERS/2_FTK_CLIENTS_Mathieu/2_DEFIS/
+gofast/CHANTIERS/2_FTK_CLIENTS_Mathieu/3_OBJECTIFS/
+gofast/CHANTIERS/2_FTK_CLIENTS_Mathieu/4_GEMBA/
+gofast/CHANTIERS/2_FTK_CLIENTS_Mathieu/5_STANDARDS/
+gofast/CHANTIERS/2_FTK_CLIENTS_Mathieu/6_BILAN/
+gofast/CHANTIERS/3_FTA_Boris/
+gofast/CHANTIERS/3_FTA_Boris/1_EQUIPE/
+gofast/CHANTIERS/3_FTA_Boris/2_DEFIS/
+gofast/CHANTIERS/3_FTA_Boris/3_OBJECTIFS/
+gofast/CHANTIERS/3_FTA_Boris/4_GEMBA/
+gofast/CHANTIERS/3_FTA_Boris/5_STANDARDS/
+gofast/CHANTIERS/3_FTA_Boris/6_BILAN/
+gofast/CHANTIERS/4_COTATION_Benjamin/
+gofast/CHANTIERS/4_COTATION_Benjamin/1_EQUIPE/
+gofast/CHANTIERS/4_COTATION_Benjamin/2_DEFIS/
+gofast/CHANTIERS/4_COTATION_Benjamin/3_OBJECTIFS/
+gofast/CHANTIERS/4_COTATION_Benjamin/4_GEMBA/
+gofast/CHANTIERS/4_COTATION_Benjamin/5_STANDARDS/
+gofast/CHANTIERS/4_COTATION_Benjamin/6_BILAN/
+gofast/CHANTIERS/5_PROCESS_Vincent/
+gofast/CHANTIERS/5_PROCESS_Vincent/1_EQUIPE/
+gofast/CHANTIERS/5_PROCESS_Vincent/2_DEFIS/
+gofast/CHANTIERS/5_PROCESS_Vincent/3_OBJECTIFS/
+gofast/CHANTIERS/5_PROCESS_Vincent/4_GEMBA/
+gofast/CHANTIERS/5_PROCESS_Vincent/5_STANDARDS/
+gofast/CHANTIERS/5_PROCESS_Vincent/6_BILAN/
+gofast/CHANTIERS/6_LANCEMENT_PDTS_Emeline/
+gofast/CHANTIERS/6_LANCEMENT_PDTS_Emeline/1_EQUIPE/
+gofast/CHANTIERS/6_LANCEMENT_PDTS_Emeline/2_DEFIS/
+gofast/CHANTIERS/6_LANCEMENT_PDTS_Emeline/3_OBJECTIFS/
+gofast/CHANTIERS/6_LANCEMENT_PDTS_Emeline/4_GEMBA/
+gofast/CHANTIERS/6_LANCEMENT_PDTS_Emeline/5_STANDARDS/
+gofast/CHANTIERS/6_LANCEMENT_PDTS_Emeline/6_BILAN/
+gofast/CHANTIERS/7_DONNEES_R&D_Morgane/
+gofast/CHANTIERS/7_DONNEES_R&D_Morgane/1_EQUIPE/
+gofast/CHANTIERS/7_DONNEES_R&D_Morgane/2_DEFIS/
+gofast/CHANTIERS/7_DONNEES_R&D_Morgane/3_OBJECTIFS/
+gofast/CHANTIERS/7_DONNEES_R&D_Morgane/4_GEMBA/
+gofast/CHANTIERS/7_DONNEES_R&D_Morgane/5_STANDARDS/
+gofast/CHANTIERS/7_DONNEES_R&D_Morgane/6_BILAN/
+gofast/CHANTIERS/8_ADVITIUM_Cecile/
+gofast/CHANTIERS/8_ADVITIUM_Cecile/1_EQUIPE/
+gofast/CHANTIERS/8_ADVITIUM_Cecile/2_DEFIS/
+gofast/CHANTIERS/8_ADVITIUM_Cecile/3_OBJECTIFS/
+gofast/CHANTIERS/8_ADVITIUM_Cecile/4_GEMBA/
+gofast/CHANTIERS/8_ADVITIUM_Cecile/5_STANDARDS/
+gofast/CHANTIERS/8_ADVITIUM_Cecile/6_BILAN/
+gofast/INFORMATIONS_GENERALES/
+gofast/INFORMATIONS_GENERALES/7_GOFAST_5S_280114.ppt
+gofast/INFORMATIONS_GENERALES/5S_exemples_AGIS/
+gofast/INFORMATIONS_GENERALES/5S_exemples_AGIS/JASMINE/
+gofast/PLANNING_GENERAL/
+
+sent 1391506 bytes  received 299 bytes  163741.76 bytes/sec
+total size is 21122238  speedup is 15.18

@@ -1,0 +1,137 @@
+Démarrage : lun jan 20 23:00:01 CET 2014
+Arrêt     : lun jan 20 23:00:42 CET 2014
+
+
+
+Base MySQL sélectionnée: agis
+Nombre de serveur(s) Linux concerné(s): 4
+Nombre de dossier(s) à mettre à jour: 24
+
+sending incremental file list
+
+sent 5691 bytes  received 45 bytes  3824.00 bytes/sec
+total size is 10159163  speedup is 1771.12
+sending incremental file list
+suivi_investissement/2013-2014/R\#351alis\#351 bud invest r\#351vis\#351 2013-2014/Bud invest AVI r\#351vis\#351 2013-2014.xls
+suivi_investissement/2013-2014/R\#351alis\#351 bud invest r\#351vis\#351 2013-2014/Bud invest HER r\#351vis\#351 2013-2014.xls
+suivi_investissement/2013-2014/R\#351alis\#351 bud invest r\#351vis\#351 2013-2014/Bud invest PFT r\#351vis\#351 2013-2014.xls
+suivi_investissement/2013-2014/R\#351alis\#351 bud invest r\#351vis\#351 2013-2014/Bud invest TAR r\#351vis\#351 2013-2014.xls
+suivi_investissement/2014-2015/R\#351alis\#351 bud invest 2014-2015/Bud invest AVI 2014 2015.xls
+suivi_investissement/2014-2015/R\#351alis\#351 bud invest 2014-2015/Bud invest PFT 2014-2015.xls
+suivi_investissement/2014-2015/R\#351alis\#351 bud invest 2014-2015/Bud invest TAR 2014-2015xls.xls
+
+sent 55949 bytes  received 3704 bytes  39768.67 bytes/sec
+total size is 12047230  speedup is 201.96
+sending incremental file list
+
+sent 63 bytes  received 12 bytes  50.00 bytes/sec
+total size is 83869696  speedup is 1118262.61
+sending incremental file list
+
+sent 7538 bytes  received 45 bytes  15166.00 bytes/sec
+total size is 9253358  speedup is 1220.28
+sending incremental file list
+
+sent 7695 bytes  received 20 bytes  5143.33 bytes/sec
+total size is 16751789  speedup is 2171.33
+sending incremental file list
+
+sent 4308 bytes  received 24 bytes  2888.00 bytes/sec
+total size is 6387982  speedup is 1474.60
+sending incremental file list
+mercuriales/gms/2014/CENTRALES 2014/AUCHAN 2014.xls
+mercuriales/gms/2014/REGIONS  2014/GALEC REGION MERCU JANVIER 2014.xls
+mercuriales/gms/2014/REGIONS  2014/SU R\#351gion JANVIER 2014.xls
+mercuriales/mdd/2014/2014 MERCURIALE EXPORT.xls
+mercuriales/mdd/2014/2014 MERCURIALE PROVERA.xls
+
+sent 51468 bytes  received 16229 bytes  27078.80 bytes/sec
+total size is 25752923  speedup is 380.41
+sending incremental file list
+
+sent 5047 bytes  received 27 bytes  3382.67 bytes/sec
+total size is 39173092  speedup is 7720.36
+sending incremental file list
+operations_commerciales/DEMANDE ECHANTILLONS CL .xls
+operations_commerciales/chrono demande echantillons.xls
+operations_commerciales/FZC/CONFIRMATIONS/2014/PICARD/PICARD_CONFIRMATION AVRIL 2014.xls
+operations_commerciales/FZC/OP FZC 2014/FZC PICARD 2014.xls
+operations_commerciales/GMS/RECAP DEMANDE ET CONFIRMATIONS HEBDO.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS CARREFOUR MARKET 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS CASINO 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/CASINO HM/2014 HM GROS VOLUMES CHANDELEUR NAA HYPER.xls
+operations_commerciales/GMS/2014/D-REGIONS/GMS LECLERC 2014-FUTUR MASTER.xls
+
+sent 364832 bytes  received 22815 bytes  70481.27 bytes/sec
+total size is 60581389  speedup is 156.28
+sending incremental file list
+
+sent 19775 bytes  received 78 bytes  7941.20 bytes/sec
+total size is 98318654  speedup is 4952.33
+sending incremental file list
+
+sent 7514 bytes  received 13 bytes  5018.00 bytes/sec
+total size is 33186816  speedup is 4409.04
+sending incremental file list
+
+sent 63 bytes  received 12 bytes  50.00 bytes/sec
+total size is 83869696  speedup is 1118262.61
+sending incremental file list
+
+sent 7538 bytes  received 45 bytes  5055.33 bytes/sec
+total size is 9253358  speedup is 1220.28
+sending incremental file list
+
+sent 4308 bytes  received 24 bytes  2888.00 bytes/sec
+total size is 6387982  speedup is 1474.60
+sending incremental file list
+
+sent 7695 bytes  received 20 bytes  5143.33 bytes/sec
+total size is 16751789  speedup is 2171.33
+sending incremental file list
+
+sent 85 bytes  received 13 bytes  65.33 bytes/sec
+total size is 104853504  speedup is 1069933.71
+sending incremental file list
+operations_commerciales/DEMANDE ECHANTILLONS CL .xls
+operations_commerciales/chrono demande echantillons.xls
+operations_commerciales/FZC/CONFIRMATIONS/2014/PICARD/PICARD_CONFIRMATION AVRIL 2014.xls
+operations_commerciales/FZC/OP FZC 2014/FZC PICARD 2014.xls
+operations_commerciales/GMS/RECAP DEMANDE ET CONFIRMATIONS HEBDO.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS CARREFOUR MARKET 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS CASINO 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/CASINO HM/2014 HM GROS VOLUMES CHANDELEUR NAA HYPER.xls
+operations_commerciales/GMS/2014/D-REGIONS/GMS LECLERC 2014-FUTUR MASTER.xls
+
+sent 364832 bytes  received 22815 bytes  110756.29 bytes/sec
+total size is 60581389  speedup is 156.28
+sending incremental file list
+mercuriales/gms/2014/CENTRALES 2014/AUCHAN 2014.xls
+mercuriales/gms/2014/REGIONS  2014/GALEC REGION MERCU JANVIER 2014.xls
+mercuriales/gms/2014/REGIONS  2014/SU R\#351gion JANVIER 2014.xls
+mercuriales/mdd/2014/2014 MERCURIALE EXPORT.xls
+mercuriales/mdd/2014/2014 MERCURIALE PROVERA.xls
+
+sent 51468 bytes  received 16229 bytes  45131.33 bytes/sec
+total size is 25752923  speedup is 380.41
+sending incremental file list
+
+sent 7514 bytes  received 13 bytes  5018.00 bytes/sec
+total size is 33186816  speedup is 4409.04
+sending incremental file list
+
+sent 5691 bytes  received 45 bytes  3824.00 bytes/sec
+total size is 10159163  speedup is 1771.12
+sending incremental file list
+
+sent 5677 bytes  received 23 bytes  3800.00 bytes/sec
+total size is 128675317  speedup is 22574.62
+sending incremental file list
+
+sent 5353 bytes  received 38 bytes  3594.00 bytes/sec
+total size is 56169881  speedup is 10419.20
+sending incremental file list
+
+sent 49783 bytes  received 94 bytes  33251.33 bytes/sec
+total size is 289455699  speedup is 5803.39
+sending incremental file list

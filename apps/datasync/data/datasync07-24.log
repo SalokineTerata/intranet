@@ -1,0 +1,163 @@
+Démarrage : jeu jui 24 23:00:01 CEST 2014
+Arrêt     : jeu jui 24 23:00:47 CEST 2014
+
+
+
+Base MySQL sélectionnée: agis
+Nombre de serveur(s) Linux concerné(s): 4
+Nombre de dossier(s) à mettre à jour: 29
+
+sending incremental file list
+
+sent 7280 bytes  received 49 bytes  4886.00 bytes/sec
+total size is 13584181  speedup is 1853.48
+sending incremental file list
+
+sent 6283 bytes  received 38 bytes  4214.00 bytes/sec
+total size is 12444119  speedup is 1968.69
+sending incremental file list
+
+sent 63 bytes  received 12 bytes  150.00 bytes/sec
+total size is 90648576  speedup is 1208647.68
+sending incremental file list
+
+sent 7593 bytes  received 45 bytes  5092.00 bytes/sec
+total size is 9254930  speedup is 1211.70
+sending incremental file list
+
+sent 7877 bytes  received 20 bytes  5264.67 bytes/sec
+total size is 16764158  speedup is 2122.85
+sending incremental file list
+
+sent 4308 bytes  received 24 bytes  2888.00 bytes/sec
+total size is 6387982  speedup is 1474.60
+sending incremental file list
+mercuriales/sync.ffs_db
+mercuriales/MERCURIALES - AGIS/FZC/FZC 2014/ARGEL 2014.xls
+mercuriales/MERCURIALES - AGIS/HD/2014/2014 MERCURIALE LEADER PRICE.xls
+mercuriales/MERCURIALES - AGIS/mdd/2014/2014 MERCURIALE AUCHAN.xls
+mercuriales/MERCURIALES - AGIS/mdd/2014/2014 MERCURIALE CARREFOUR ASIATIQUE.xls
+mercuriales/MERCURIALES - MARIE/2014/2014 MERCURIALES AUCHAN MARIE.xls
+mercuriales/MERCURIALES - MARIE/2014/2014 MERCURIALES DIA MARIE.xls
+
+sent 71958 bytes  received 10247 bytes  32882.00 bytes/sec
+total size is 36412914  speedup is 442.95
+sending incremental file list
+
+sent 5047 bytes  received 27 bytes  3382.67 bytes/sec
+total size is 39173092  speedup is 7720.36
+sending incremental file list
+operations_commerciales/chrono demande echantillons.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/INTERMARCHE/2014 INTERMARCHE NOVEMBRE 2 OP 61813.xls
+operations_commerciales/GMS/2014/D-REGIONS/GMS SU REGION  2014-FUTUR MASTER.xls
+
+sent 238503 bytes  received 6837 bytes  98136.00 bytes/sec
+total size is 56173727  speedup is 228.96
+sending incremental file list
+
+sent 20406 bytes  received 83 bytes  13659.33 bytes/sec
+total size is 99360776  speedup is 4849.47
+sending incremental file list
+gofast/sync.ffs_db
+gofast/CHANTIERS/2_FTK_CLIENTS_Mathieu/FTK_CLIENTS_Mathieu.ppt
+
+sent 9869 bytes  received 622 bytes  6994.00 bytes/sec
+total size is 52065717  speedup is 4962.89
+sending incremental file list
+deleting modeles/inco_compo_coupe_fe_verso-75x115-sato-D.lab
+deleting modeles/inco_compo_coupe_fe_reco-55x90-sato-H.lab
+modeles/dev_compo_coupe_fe_recto-55x90-sato-H.lab
+modeles/dev_compo_coupe_fe_verso-75x115-sato-D.lab
+modeles/dev_compo_pc_individuel_fef_verso-73x73-sato-H.lab
+modeles/dev_compo_pc_verso-60x105-sato-B.lab
+modeles/dev_compo_pc_verso-60x105-sato.lab
+
+sent 155904 bytes  received 108 bytes  62404.80 bytes/sec
+total size is 43580416  speedup is 279.34
+sending incremental file list
+
+sent 5781 bytes  received 30 bytes  3874.00 bytes/sec
+total size is 92829061  speedup is 15974.71
+sending incremental file list
+
+sent 63 bytes  received 12 bytes  50.00 bytes/sec
+total size is 90648576  speedup is 1208647.68
+sending incremental file list
+
+sent 7593 bytes  received 45 bytes  5092.00 bytes/sec
+total size is 9254930  speedup is 1211.70
+sending incremental file list
+
+sent 4308 bytes  received 24 bytes  2888.00 bytes/sec
+total size is 6387982  speedup is 1474.60
+sending incremental file list
+
+sent 7877 bytes  received 20 bytes  5264.67 bytes/sec
+total size is 16764158  speedup is 2122.85
+sending incremental file list
+
+sent 85 bytes  received 13 bytes  65.33 bytes/sec
+total size is 104853504  speedup is 1069933.71
+sending incremental file list
+operations_commerciales/chrono demande echantillons.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/INTERMARCHE/2014 INTERMARCHE NOVEMBRE 2 OP 61813.xls
+operations_commerciales/GMS/2014/D-REGIONS/GMS SU REGION  2014-FUTUR MASTER.xls
+
+sent 238503 bytes  received 6837 bytes  70097.14 bytes/sec
+total size is 56173727  speedup is 228.96
+sending incremental file list
+mercuriales/sync.ffs_db
+mercuriales/MERCURIALES - AGIS/FZC/FZC 2014/ARGEL 2014.xls
+mercuriales/MERCURIALES - AGIS/HD/2014/2014 MERCURIALE LEADER PRICE.xls
+mercuriales/MERCURIALES - AGIS/mdd/2014/2014 MERCURIALE AUCHAN.xls
+mercuriales/MERCURIALES - AGIS/mdd/2014/2014 MERCURIALE CARREFOUR ASIATIQUE.xls
+mercuriales/MERCURIALES - MARIE/2014/2014 MERCURIALES AUCHAN MARIE.xls
+mercuriales/MERCURIALES - MARIE/2014/2014 MERCURIALES DIA MARIE.xls
+
+sent 71958 bytes  received 10247 bytes  32882.00 bytes/sec
+total size is 36412914  speedup is 442.95
+sending incremental file list
+deleting modeles/inco_compo_coupe_fe_verso-75x115-sato-D.lab
+deleting modeles/inco_compo_coupe_fe_reco-55x90-sato-H.lab
+modeles/dev_compo_coupe_fe_recto-55x90-sato-H.lab
+modeles/dev_compo_coupe_fe_verso-75x115-sato-D.lab
+modeles/dev_compo_pc_individuel_fef_verso-73x73-sato-H.lab
+modeles/dev_compo_pc_verso-60x105-sato-B.lab
+modeles/dev_compo_pc_verso-60x105-sato.lab
+
+sent 155904 bytes  received 108 bytes  62404.80 bytes/sec
+total size is 43580416  speedup is 279.34
+sending incremental file list
+
+sent 7280 bytes  received 49 bytes  14658.00 bytes/sec
+total size is 13584181  speedup is 1853.48
+sending incremental file list
+
+sent 5745 bytes  received 23 bytes  3845.33 bytes/sec
+total size is 129159129  speedup is 22392.36
+sending incremental file list
+
+sent 5610 bytes  received 39 bytes  3766.00 bytes/sec
+total size is 59049369  speedup is 10453.07
+sending incremental file list
+
+sent 52256 bytes  received 97 bytes  34902.00 bytes/sec
+total size is 299490387  speedup is 5720.60
+sending incremental file list
+
+sent 20406 bytes  received 83 bytes  8195.60 bytes/sec
+total size is 99360776  speedup is 4849.47
+sending incremental file list
+gofast/sync.ffs_db
+gofast/CHANTIERS/2_FTK_CLIENTS_Mathieu/FTK_CLIENTS_Mathieu.ppt
+
+sent 9869 bytes  received 622 bytes  4196.40 bytes/sec
+total size is 52065717  speedup is 4962.89
+sending incremental file list
+
+sent 7877 bytes  received 20 bytes  5264.67 bytes/sec
+total size is 16764158  speedup is 2122.85
+sending incremental file list
+
+sent 7877 bytes  received 20 bytes  5264.67 bytes/sec
+total size is 16764158  speedup is 2122.85

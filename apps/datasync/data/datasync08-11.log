@@ -1,0 +1,177 @@
+Démarrage : lun aoû 11 23:00:02 CEST 2014
+Arrêt     : lun aoû 11 23:00:50 CEST 2014
+
+
+
+Base MySQL sélectionnée: agis
+Nombre de serveur(s) Linux concerné(s): 4
+Nombre de dossier(s) à mettre à jour: 29
+
+sending incremental file list
+
+sent 7305 bytes  received 49 bytes  4902.67 bytes/sec
+total size is 13622581  speedup is 1852.40
+sending incremental file list
+
+sent 6283 bytes  received 38 bytes  4214.00 bytes/sec
+total size is 12454871  speedup is 1970.40
+sending incremental file list
+
+sent 63 bytes  received 12 bytes  50.00 bytes/sec
+total size is 145690624  speedup is 1942541.65
+sending incremental file list
+
+sent 7593 bytes  received 45 bytes  5092.00 bytes/sec
+total size is 9254930  speedup is 1211.70
+sending incremental file list
+
+sent 7905 bytes  received 20 bytes  5283.33 bytes/sec
+total size is 16766350  speedup is 2115.63
+sending incremental file list
+
+sent 4308 bytes  received 24 bytes  2888.00 bytes/sec
+total size is 6387982  speedup is 1474.60
+sending incremental file list
+mercuriales/MERCURIALES - AGIS/gms/2014/REGIONS  2014/GALEC REGION MERCU AOUT 2014.xls
+
+sent 24165 bytes  received 5497 bytes  19774.67 bytes/sec
+total size is 37490167  speedup is 1263.91
+sending incremental file list
+
+sent 5047 bytes  received 27 bytes  3382.67 bytes/sec
+total size is 39173092  speedup is 7720.36
+sending incremental file list
+operations_commerciales/DEMANDE ECHANTILLONS CL .xls
+operations_commerciales/DEMANDE ECHANTILLONS GB.xls
+operations_commerciales/chrono demande echantillons.xls
+operations_commerciales/FZC/OP FZC 2014/FZC ARGEL 2014.xls
+operations_commerciales/GMS/RECAP DEMANDE ET CONFIRMATIONS HEBDO 2014.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS AUCHAN 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS CASINO 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS GALEC 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS PLACE DU MARCHE 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/GALEC/2014 GALEC OP BIEN VIVRE 3.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/GALEC/2014 GALEC OP BIEN VIVRE 4.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/GALEC/2014 GALEC OP BIEN VIVRE 6 REVEILLON.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/GALEC/2014 GALEC OP DEPENSER MOINS 10.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/GALEC/2014 GALEC OP DEPENSER MOINS 2.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/GALEC/2014 GALEC OP DEPENSER MOINS 8.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/GALEC/2014 GALEC regions.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/PLACE DU MARCHE/2014 PLACE DU MARCHE CYCLE 06.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/SIMPLY MARKET/2014 SIMPLY MARKET RDV PROMO 6.xls
+operations_commerciales/GMS/2014/D-REGIONS/GMS SCHIEVER 2014-FUTUR MASTER.xls
+operations_commerciales/MDD/MODELES CJ/CARREFOUR/DDE ECHANTILLONS/2014/demande \#351chantillons GUTENBERG 349.XLS
+operations_commerciales/MDD/MODELES CJ/CARREFOUR/DDE ECHANTILLONS/2014/demande \#351chantillons GUTENBERG 486.XLS
+operations_commerciales/MDD/MODELES VB/CONF OPE CASINO/2014/CONFIRMATION OPERATION CASINO HM 2 + 1 GT SEMAINE 45.xls
+operations_commerciales/MDD/MODELES VB/CONF OPE CASINO/2014/CONFIRMATION OPERATION CASINO HM RAMADHAN.xls
+operations_commerciales/MDD/MODELES VB/DEM ECHANTILLONS/2014/Chrono 493 CASINO 110814.XLS
+operations_commerciales/MDD/OP MDD 2014/MDD CASINO 2014.xls
+
+sent 522705 bytes  received 32445 bytes  123366.67 bytes/sec
+total size is 57095350  speedup is 102.85
+sending incremental file list
+
+sent 20406 bytes  received 83 bytes  13659.33 bytes/sec
+total size is 99360776  speedup is 4849.47
+sending incremental file list
+
+sent 6669 bytes  received 93 bytes  4508.00 bytes/sec
+total size is 52693702  speedup is 7792.62
+sending incremental file list
+
+sent 9081 bytes  received 13 bytes  6062.67 bytes/sec
+total size is 44623872  speedup is 4906.96
+sending incremental file list
+
+sent 5781 bytes  received 30 bytes  2324.40 bytes/sec
+total size is 92829061  speedup is 15974.71
+sending incremental file list
+
+sent 63 bytes  received 12 bytes  50.00 bytes/sec
+total size is 145690624  speedup is 1942541.65
+sending incremental file list
+
+sent 7593 bytes  received 45 bytes  5092.00 bytes/sec
+total size is 9254930  speedup is 1211.70
+sending incremental file list
+
+sent 4308 bytes  received 24 bytes  2888.00 bytes/sec
+total size is 6387982  speedup is 1474.60
+sending incremental file list
+
+sent 7905 bytes  received 20 bytes  5283.33 bytes/sec
+total size is 16766350  speedup is 2115.63
+sending incremental file list
+
+sent 85 bytes  received 13 bytes  65.33 bytes/sec
+total size is 104853504  speedup is 1069933.71
+sending incremental file list
+operations_commerciales/DEMANDE ECHANTILLONS CL .xls
+operations_commerciales/DEMANDE ECHANTILLONS GB.xls
+operations_commerciales/chrono demande echantillons.xls
+operations_commerciales/FZC/OP FZC 2014/FZC ARGEL 2014.xls
+operations_commerciales/GMS/RECAP DEMANDE ET CONFIRMATIONS HEBDO 2014.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS AUCHAN 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS CASINO 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS GALEC 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS PLACE DU MARCHE 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/GALEC/2014 GALEC OP BIEN VIVRE 3.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/GALEC/2014 GALEC OP BIEN VIVRE 4.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/GALEC/2014 GALEC OP BIEN VIVRE 6 REVEILLON.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/GALEC/2014 GALEC OP DEPENSER MOINS 10.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/GALEC/2014 GALEC OP DEPENSER MOINS 2.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/GALEC/2014 GALEC OP DEPENSER MOINS 8.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/GALEC/2014 GALEC regions.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/PLACE DU MARCHE/2014 PLACE DU MARCHE CYCLE 06.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/SIMPLY MARKET/2014 SIMPLY MARKET RDV PROMO 6.xls
+operations_commerciales/GMS/2014/D-REGIONS/GMS SCHIEVER 2014-FUTUR MASTER.xls
+operations_commerciales/MDD/MODELES CJ/CARREFOUR/DDE ECHANTILLONS/2014/demande \#351chantillons GUTENBERG 349.XLS
+operations_commerciales/MDD/MODELES CJ/CARREFOUR/DDE ECHANTILLONS/2014/demande \#351chantillons GUTENBERG 486.XLS
+operations_commerciales/MDD/MODELES VB/CONF OPE CASINO/2014/CONFIRMATION OPERATION CASINO HM 2 + 1 GT SEMAINE 45.xls
+operations_commerciales/MDD/MODELES VB/CONF OPE CASINO/2014/CONFIRMATION OPERATION CASINO HM RAMADHAN.xls
+operations_commerciales/MDD/MODELES VB/DEM ECHANTILLONS/2014/Chrono 493 CASINO 110814.XLS
+operations_commerciales/MDD/OP MDD 2014/MDD CASINO 2014.xls
+
+sent 522705 bytes  received 32445 bytes  123366.67 bytes/sec
+total size is 57095350  speedup is 102.85
+sending incremental file list
+mercuriales/MERCURIALES - AGIS/gms/2014/REGIONS  2014/GALEC REGION MERCU AOUT 2014.xls
+
+sent 24165 bytes  received 5497 bytes  11864.80 bytes/sec
+total size is 37490167  speedup is 1263.91
+sending incremental file list
+
+sent 9081 bytes  received 13 bytes  6062.67 bytes/sec
+total size is 44623872  speedup is 4906.96
+sending incremental file list
+
+sent 7305 bytes  received 49 bytes  4902.67 bytes/sec
+total size is 13622581  speedup is 1852.40
+sending incremental file list
+
+sent 5745 bytes  received 23 bytes  3845.33 bytes/sec
+total size is 129159129  speedup is 22392.36
+sending incremental file list
+
+sent 5610 bytes  received 39 bytes  3766.00 bytes/sec
+total size is 59049369  speedup is 10453.07
+sending incremental file list
+
+sent 52293 bytes  received 97 bytes  34926.67 bytes/sec
+total size is 299707475  speedup is 5720.70
+sending incremental file list
+
+sent 20406 bytes  received 83 bytes  8195.60 bytes/sec
+total size is 99360776  speedup is 4849.47
+sending incremental file list
+
+sent 6669 bytes  received 93 bytes  2704.80 bytes/sec
+total size is 52693702  speedup is 7792.62
+sending incremental file list
+
+sent 7905 bytes  received 20 bytes  5283.33 bytes/sec
+total size is 16766350  speedup is 2115.63
+sending incremental file list
+
+sent 7905 bytes  received 20 bytes  3170.00 bytes/sec
+total size is 16766350  speedup is 2115.63

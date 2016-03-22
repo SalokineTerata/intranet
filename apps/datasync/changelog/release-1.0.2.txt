@@ -1,0 +1,46 @@
+================================================================================
+Modification à apporter aux différentes versions du modules
+================================================================================
+Version en cours: 1.0.1
+
+[-]: Reste à effectuer
++++: Réalisé
+================================================================================
+Exemples:
+[+++] 23/05/2003: saisie_vierge_origine.php
+      Déplacer les informations de cette page au niveau du composant.
+
+[-] 28/07/2003: saisie_origine.php
+                Saisie de plusieurs origine sans cycle.
+                Rajouter dans la listedes origine:
+                         - Cf Origine MP
+                         - Cf Lieu dernière Transformation
+                         - Cf Origine Multiple
+                         - Cf Non défini
+                Bouton "Terminer Saisie"
+================================================================================
+Version 1.0.2:
+[+++] 02/01/2004: Le ncplogout est lancé à la fin du script de copie
+
+[+++] 02/01/2004: Modification de /etc/crontab
+
+[+++] 02/01/2004: Pendant la recopie, le fichier ou répertoire à l'extension ".tmp"
+                pour éviter qu'ils soient ouverts avant la fin de la recopie
+
+[+++] 02/01/2004: Le contenu des répertoires destinations est vidé avant la recopie.
+
+[+++] 02/01/2004: Date systématique des commandes dans le log
+
+
+
+================================================================================
+Version 1.0.1 - Released 02/12/2003
+[+++] 02/12/2003: La gestion de la connexion au serveur Netware est géré au niveau
+                de /etc/init.d/ncp* et de /etc/crontab
+
+[+++] 02/12/2003: Le contenu des répertoires est supprimés avant d'effectuer la copie
+
+
+================================================================================
+Version 1.0.0 - Released 27/11/2003
+[+++] 27/11/2003: Création de la première version du module

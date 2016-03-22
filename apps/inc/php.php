@@ -118,6 +118,8 @@ require_once('../lib/class/model/ClassificationRaccourcisModel.php');
 require_once('../lib/class/model/CodesoftEtiquettesLogoModel.php');
 require_once('../lib/class/model/CodesoftEtiquettesModel.php');
 require_once('../lib/class/model/CodesoftStyleParagrapheModel.php');
+require_once('../lib/class/model/DataSyncServeurModel.php');
+require_once('../lib/class/model/DataSyncTransfertModel.php');
 require_once('../lib/class/model/DroitftModel.php');
 require_once('../lib/class/model/UserModel.php');
 require_once('../lib/class/model/Fta2ArcadiaTransactionModel.php');

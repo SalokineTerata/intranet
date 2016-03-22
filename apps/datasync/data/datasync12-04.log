@@ -1,0 +1,165 @@
+Démarrage : mer déc  4 23:00:01 CET 2013
+Arrêt     : mer déc  4 23:00:59 CET 2013
+
+
+
+Base MySQL sélectionnée: agis
+Nombre de serveur(s) Linux concerné(s): 4
+Nombre de dossier(s) à mettre à jour: 24
+
+sending incremental file list
+
+sent 5598 bytes  received 45 bytes  3762.00 bytes/sec
+total size is 9985067  speedup is 1769.46
+sending incremental file list
+
+sent 5788 bytes  received 34 bytes  3881.33 bytes/sec
+total size is 11670607  speedup is 2004.57
+sending incremental file list
+
+sent 63 bytes  received 12 bytes  150.00 bytes/sec
+total size is 81426432  speedup is 1085685.76
+sending incremental file list
+
+sent 7538 bytes  received 45 bytes  5055.33 bytes/sec
+total size is 9253358  speedup is 1220.28
+sending incremental file list
+
+sent 7683 bytes  received 20 bytes  5135.33 bytes/sec
+total size is 16751831  speedup is 2174.72
+sending incremental file list
+
+sent 4308 bytes  received 24 bytes  2888.00 bytes/sec
+total size is 6387982  speedup is 1474.60
+sending incremental file list
+mercuriales/sync.ffs_db
+mercuriales/FZC/FZC 2014/SAROS 2014.xls
+mercuriales/gms/2013/CENTRALES 2013/SIMPLY MARKET 2013.xls
+mercuriales/gms/2013/CONTROLE TARIF 2013/12-DECEMBRE/
+mercuriales/gms/2013/CONTROLE TARIF 2013/12-DECEMBRE/2013 SIMPLY CHIPS CREVETTES.pdf
+mercuriales/gms/2014/CENTRALES 2014/CASINO 2014.xls
+mercuriales/gms/2014/CENTRALES 2014/SIMPLY MARKET 2014.xls
+
+sent 127056 bytes  received 14877 bytes  40552.29 bytes/sec
+total size is 48031530  speedup is 338.41
+sending incremental file list
+
+sent 5047 bytes  received 27 bytes  3382.67 bytes/sec
+total size is 39173092  speedup is 7720.36
+sending incremental file list
+operations_commerciales/DEMANDE ECHANTILLONS CL .xls
+operations_commerciales/chrono demande echantillons.xls
+operations_commerciales/GMS/RECAP DEMANDE ET CONFIRMATIONS HEBDO.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS CASINO 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS INTERMARCHE 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/CASINO HM/2014 HM DONNE C DONNE BEAUTE S15.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/CASINO HM/2014 HM FEUILLE DE CHOU S6 PAELLA 2.4KG 1.2KG.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/CASINO HM/2014 HM GROS VOLUMES CHANDELEUR NAA HYPER.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/CASINO HM/2014 HM PRIX CHOC S4 PAELLA 2.4KG.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/CASINO PROXI/2014 PROXI ANNIVERSAIRE S9 COUSCOUS.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/CASINO SM/2014 SM DONNE C DONNE S7 TARTIFLETTE PAELLA.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/CASINO SM/2014 SM RI+GRATUIT NAC GROS VOLUMES SUPER.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/CASINO SM/2014 SM SAGA 1 + MECA PRO + ANNIV MDD S9 TARTIFLETTE.xls
+operations_commerciales/MDD/MODELES VB/DEM ECHANTILLONS/2013/Chrono 669 Casino 041213.XLS
+operations_commerciales/MDD/OP MDD 2013/MDD AUCHAN 2013 FUTUR MASTER.xls
+
+sent 286950 bytes  received 19605 bytes  55737.27 bytes/sec
+total size is 58096206  speedup is 189.51
+sending incremental file list
+
+sent 20778 bytes  received 88 bytes  13910.67 bytes/sec
+total size is 98751548  speedup is 4732.65
+sending incremental file list
+modeles/echantillons-65x65mm.lab
+modeles/echantillons-65x65mm_surgele.lab
+modeles/echantillons-72x132mm.lab
+modeles/echantillons-72x132mm_surgele.lab
+modeles/echantillons-75x48mm.bak
+modeles/echantillons-75x48mm.lab
+
+sent 67747 bytes  received 4423 bytes  28868.00 bytes/sec
+total size is 32047104  speedup is 444.05
+sending incremental file list
+
+sent 63 bytes  received 12 bytes  50.00 bytes/sec
+total size is 81426432  speedup is 1085685.76
+sending incremental file list
+
+sent 7538 bytes  received 45 bytes  5055.33 bytes/sec
+total size is 9253358  speedup is 1220.28
+sending incremental file list
+
+sent 4308 bytes  received 24 bytes  2888.00 bytes/sec
+total size is 6387982  speedup is 1474.60
+sending incremental file list
+
+sent 7683 bytes  received 20 bytes  5135.33 bytes/sec
+total size is 16751831  speedup is 2174.72
+sending incremental file list
+
+sent 85 bytes  received 13 bytes  65.33 bytes/sec
+total size is 104853504  speedup is 1069933.71
+sending incremental file list
+operations_commerciales/DEMANDE ECHANTILLONS CL .xls
+operations_commerciales/chrono demande echantillons.xls
+operations_commerciales/GMS/RECAP DEMANDE ET CONFIRMATIONS HEBDO.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS CASINO 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS INTERMARCHE 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/CASINO HM/2014 HM DONNE C DONNE BEAUTE S15.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/CASINO HM/2014 HM FEUILLE DE CHOU S6 PAELLA 2.4KG 1.2KG.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/CASINO HM/2014 HM GROS VOLUMES CHANDELEUR NAA HYPER.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/CASINO HM/2014 HM PRIX CHOC S4 PAELLA 2.4KG.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/CASINO PROXI/2014 PROXI ANNIVERSAIRE S9 COUSCOUS.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/CASINO SM/2014 SM DONNE C DONNE S7 TARTIFLETTE PAELLA.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/CASINO SM/2014 SM RI+GRATUIT NAC GROS VOLUMES SUPER.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/CASINO SM/2014 SM SAGA 1 + MECA PRO + ANNIV MDD S9 TARTIFLETTE.xls
+operations_commerciales/MDD/MODELES VB/DEM ECHANTILLONS/2013/Chrono 669 Casino 041213.XLS
+operations_commerciales/MDD/OP MDD 2013/MDD AUCHAN 2013 FUTUR MASTER.xls
+
+sent 286950 bytes  received 19605 bytes  87587.14 bytes/sec
+total size is 58096206  speedup is 189.51
+sending incremental file list
+mercuriales/sync.ffs_db
+mercuriales/FZC/FZC 2014/SAROS 2014.xls
+mercuriales/gms/2013/CENTRALES 2013/SIMPLY MARKET 2013.xls
+mercuriales/gms/2013/CONTROLE TARIF 2013/12-DECEMBRE/
+mercuriales/gms/2013/CONTROLE TARIF 2013/12-DECEMBRE/2013 SIMPLY CHIPS CREVETTES.pdf
+mercuriales/gms/2014/CENTRALES 2014/CASINO 2014.xls
+mercuriales/gms/2014/CENTRALES 2014/SIMPLY MARKET 2014.xls
+
+sent 127056 bytes  received 14877 bytes  56773.20 bytes/sec
+total size is 48031530  speedup is 338.41
+sending incremental file list
+modeles/echantillons-65x65mm.lab
+modeles/echantillons-65x65mm_surgele.lab
+modeles/echantillons-72x132mm.lab
+modeles/echantillons-72x132mm_surgele.lab
+modeles/echantillons-75x48mm.bak
+modeles/echantillons-75x48mm.lab
+
+sent 67747 bytes  received 4423 bytes  28868.00 bytes/sec
+total size is 32047104  speedup is 444.05
+sending incremental file list
+
+sent 5598 bytes  received 45 bytes  3762.00 bytes/sec
+total size is 9985067  speedup is 1769.46
+sending incremental file list
+
+sent 5677 bytes  received 23 bytes  3800.00 bytes/sec
+total size is 128675317  speedup is 22574.62
+sending incremental file list
+qualite/REVUE DE DIRECTION/REVUE 65 04.10.13/
+qualite/REVUE DE DIRECTION/REVUE 65 04.10.13/R65_CROISSANCE_RENTABLE.pdf
+qualite/REVUE DE DIRECTION/REVUE 65 04.10.13/R65_ENVIRONNEMENT.ppt
+qualite/REVUE DE DIRECTION/REVUE 65 04.10.13/R65_QUALITE.pdf
+qualite/REVUE DE DIRECTION/REVUE 65 04.10.13/R65_SECURITE_ALIMENTAIRE.pdf
+qualite/REVUE DE DIRECTION/REVUE 65 04.10.13/R65_SOCIAL.pdf
+qualite/REVUE DE DIRECTION/REVUE 65 04.10.13/REVUE_65.doc
+
+sent 3339417 bytes  received 155 bytes  180517.41 bytes/sec
+total size is 56169881  speedup is 16.82
+sending incremental file list
+
+sent 47556 bytes  received 91 bytes  31764.67 bytes/sec
+total size is 279106131  speedup is 5857.79
+sending incremental file list

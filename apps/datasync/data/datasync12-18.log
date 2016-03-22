@@ -1,0 +1,162 @@
+Démarrage : mer déc 18 23:00:02 CET 2013
+Arrêt     : mer déc 18 23:02:02 CET 2013
+
+
+
+Base MySQL sélectionnée: agis
+Nombre de serveur(s) Linux concerné(s): 4
+Nombre de dossier(s) à mettre à jour: 24
+
+sending incremental file list
+
+sent 5598 bytes  received 45 bytes  3762.00 bytes/sec
+total size is 9985067  speedup is 1769.46
+sending incremental file list
+
+sent 5788 bytes  received 34 bytes  3881.33 bytes/sec
+total size is 11670607  speedup is 2004.57
+sending incremental file list
+erp_data.mdb
+
+sent 7687022 bytes  received 63255 bytes  186753.66 bytes/sec
+total size is 81426432  speedup is 10.51
+sending incremental file list
+
+sent 7538 bytes  received 45 bytes  5055.33 bytes/sec
+total size is 9253358  speedup is 1220.28
+sending incremental file list
+
+sent 7683 bytes  received 20 bytes  3081.20 bytes/sec
+total size is 16751831  speedup is 2174.72
+sending incremental file list
+
+sent 4308 bytes  received 24 bytes  2888.00 bytes/sec
+total size is 6387982  speedup is 1474.60
+sending incremental file list
+mercuriales/FZC/FZC 2014/THIRIET 2014.xls
+mercuriales/gms/2014/CENTRALES 2014/AUCHAN 2014.xls
+mercuriales/gms/2014/CENTRALES 2014/CARREFOUR 2014.xls
+mercuriales/gms/2014/CENTRALES 2014/CARREFOUR MARKET 2014.xls
+mercuriales/gms/2014/CENTRALES 2014/CASINO 2014.xls
+mercuriales/gms/2014/CENTRALES 2014/INTERMARCHE 2014.xls
+mercuriales/gms/2014/CENTRALES 2014/SIMPLY MARKET 2014.xls
+mercuriales/gms/2014/CENTRALES 2014/SYSTEME U 2014.xls
+mercuriales/gms/2014/CONTROLE TARIFS 2014/01-JANVIER/2014 GALEC NOUVEAUX PRIX.pdf
+mercuriales/gms/2014/REGIONS  2014/GALEC REGION MERCU JANVIER 2014.xls
+mercuriales/mdd/2014/2014 MERCURIALE CASINO.xls
+
+sent 343146 bytes  received 38303 bytes  84766.44 bytes/sec
+total size is 48855879  speedup is 128.08
+sending incremental file list
+
+sent 5047 bytes  received 27 bytes  3382.67 bytes/sec
+total size is 39173092  speedup is 7720.36
+sending incremental file list
+operations_commerciales/DEMANDE ECHANTILLONS CL .xls
+operations_commerciales/chrono demande echantillons.xls
+operations_commerciales/FZC/CONFIRMATIONS/2014/THIRIET/THIRIET_JANVIER 2014.xls
+operations_commerciales/FZC/DEM ECHANTILLONS/THIRIET_ECHANTILLONS_AO_GALETTE_CHRONO_694.XLS
+operations_commerciales/FZC/DEM ECHANTILLONS/TOUPARGEL_ECHANTILLONS_AO_GALETTE_CHRONO_694.XLS
+operations_commerciales/FZC/OP FZC 2014/FZC PICARD 2014.xls
+operations_commerciales/GMS/RECAP DEMANDE ET CONFIRMATIONS HEBDO.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS CASINO 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS GALEC 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/GALEC/2014 GALEC OP DEPENSER MOINS 2.xls
+operations_commerciales/GMS/2014/C-CONTROLE DES PRIX/2014 GALEC NAA.pdf
+operations_commerciales/GMS/2014/C-CONTROLE DES PRIX/2014 GALEC PROMO DU 29-09 AU 31-12.pdf
+operations_commerciales/GMS/2014/C-CONTROLE DES PRIX/2014 GALEC PROMO DU 30-06 AU 27-09.pdf
+operations_commerciales/GMS/2014/C-CONTROLE DES PRIX/2014 GALEC PROMO DU 31-03 AU 28-06.pdf
+operations_commerciales/GMS/2014/C-CONTROLE DES PRIX/GALEC PROMO DU 01-01 AU 29-03.pdf
+operations_commerciales/GMS/2014/D-REGIONS/GMS SCHIEVER 2014-FUTUR MASTER.xls
+operations_commerciales/MDD/MODELES CJ/SYSTEME U/CONF OP/CONFIRMATION OPERATION SU TRAFIC NAA 2014.xls
+operations_commerciales/MDD/OP MDD 2014/MDD SYSTEME U 2014.xls
+
+sent 391722 bytes  received 19514 bytes  117496.00 bytes/sec
+total size is 59910256  speedup is 145.68
+sending incremental file list
+
+sent 20908 bytes  received 88 bytes  13997.33 bytes/sec
+total size is 99120505  speedup is 4720.92
+sending incremental file list
+
+sent 7332 bytes  received 13 bytes  2938.00 bytes/sec
+total size is 32211968  speedup is 4385.56
+sending incremental file list
+erp_data.mdb
+
+sent 7687022 bytes  received 63255 bytes  191364.86 bytes/sec
+total size is 81426432  speedup is 10.51
+sending incremental file list
+
+sent 7538 bytes  received 45 bytes  5055.33 bytes/sec
+total size is 9253358  speedup is 1220.28
+sending incremental file list
+
+sent 4308 bytes  received 24 bytes  2888.00 bytes/sec
+total size is 6387982  speedup is 1474.60
+sending incremental file list
+
+sent 7683 bytes  received 20 bytes  5135.33 bytes/sec
+total size is 16751831  speedup is 2174.72
+sending incremental file list
+
+sent 85 bytes  received 13 bytes  65.33 bytes/sec
+total size is 104853504  speedup is 1069933.71
+sending incremental file list
+operations_commerciales/DEMANDE ECHANTILLONS CL .xls
+operations_commerciales/chrono demande echantillons.xls
+operations_commerciales/FZC/CONFIRMATIONS/2014/THIRIET/THIRIET_JANVIER 2014.xls
+operations_commerciales/FZC/DEM ECHANTILLONS/THIRIET_ECHANTILLONS_AO_GALETTE_CHRONO_694.XLS
+operations_commerciales/FZC/DEM ECHANTILLONS/TOUPARGEL_ECHANTILLONS_AO_GALETTE_CHRONO_694.XLS
+operations_commerciales/FZC/OP FZC 2014/FZC PICARD 2014.xls
+operations_commerciales/GMS/RECAP DEMANDE ET CONFIRMATIONS HEBDO.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS CASINO 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS GALEC 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/GALEC/2014 GALEC OP DEPENSER MOINS 2.xls
+operations_commerciales/GMS/2014/C-CONTROLE DES PRIX/2014 GALEC NAA.pdf
+operations_commerciales/GMS/2014/C-CONTROLE DES PRIX/2014 GALEC PROMO DU 29-09 AU 31-12.pdf
+operations_commerciales/GMS/2014/C-CONTROLE DES PRIX/2014 GALEC PROMO DU 30-06 AU 27-09.pdf
+operations_commerciales/GMS/2014/C-CONTROLE DES PRIX/2014 GALEC PROMO DU 31-03 AU 28-06.pdf
+operations_commerciales/GMS/2014/C-CONTROLE DES PRIX/GALEC PROMO DU 01-01 AU 29-03.pdf
+operations_commerciales/GMS/2014/D-REGIONS/GMS SCHIEVER 2014-FUTUR MASTER.xls
+operations_commerciales/MDD/MODELES CJ/SYSTEME U/CONF OP/CONFIRMATION OPERATION SU TRAFIC NAA 2014.xls
+operations_commerciales/MDD/OP MDD 2014/MDD SYSTEME U 2014.xls
+
+sent 391722 bytes  received 19514 bytes  117496.00 bytes/sec
+total size is 59910256  speedup is 145.68
+sending incremental file list
+mercuriales/FZC/FZC 2014/THIRIET 2014.xls
+mercuriales/gms/2014/CENTRALES 2014/AUCHAN 2014.xls
+mercuriales/gms/2014/CENTRALES 2014/CARREFOUR 2014.xls
+mercuriales/gms/2014/CENTRALES 2014/CARREFOUR MARKET 2014.xls
+mercuriales/gms/2014/CENTRALES 2014/CASINO 2014.xls
+mercuriales/gms/2014/CENTRALES 2014/INTERMARCHE 2014.xls
+mercuriales/gms/2014/CENTRALES 2014/SIMPLY MARKET 2014.xls
+mercuriales/gms/2014/CENTRALES 2014/SYSTEME U 2014.xls
+mercuriales/gms/2014/CONTROLE TARIFS 2014/01-JANVIER/2014 GALEC NOUVEAUX PRIX.pdf
+mercuriales/gms/2014/REGIONS  2014/GALEC REGION MERCU JANVIER 2014.xls
+mercuriales/mdd/2014/2014 MERCURIALE CASINO.xls
+
+sent 343146 bytes  received 38303 bytes  108985.43 bytes/sec
+total size is 48855879  speedup is 128.08
+sending incremental file list
+
+sent 7332 bytes  received 13 bytes  4896.67 bytes/sec
+total size is 32211968  speedup is 4385.56
+sending incremental file list
+
+sent 5598 bytes  received 45 bytes  3762.00 bytes/sec
+total size is 9985067  speedup is 1769.46
+sending incremental file list
+
+sent 5677 bytes  received 23 bytes  3800.00 bytes/sec
+total size is 128675317  speedup is 22574.62
+sending incremental file list
+
+sent 5353 bytes  received 38 bytes  3594.00 bytes/sec
+total size is 56169881  speedup is 10419.20
+sending incremental file list
+
+sent 48880 bytes  received 93 bytes  32648.67 bytes/sec
+total size is 282598995  speedup is 5770.51
+sending incremental file list

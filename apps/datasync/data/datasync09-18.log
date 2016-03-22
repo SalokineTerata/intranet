@@ -1,0 +1,131 @@
+Démarrage : mer sep 18 23:00:01 CEST 2013
+Arrêt     : mer sep 18 23:02:01 CEST 2013
+
+
+
+Base MySQL sélectionnée: agis
+Nombre de serveur(s) Linux concerné(s): 4
+Nombre de dossier(s) à mettre à jour: 24
+
+sending incremental file list
+
+sent 7552 bytes  received 20 bytes  15144.00 bytes/sec
+total size is 16747404  speedup is 2211.75
+sending incremental file list
+
+sent 5440 bytes  received 44 bytes  3656.00 bytes/sec
+total size is 9508728  speedup is 1733.90
+sending incremental file list
+
+sent 45570 bytes  received 83 bytes  18261.20 bytes/sec
+total size is 272226899  speedup is 5962.96
+sending incremental file list
+
+sent 5578 bytes  received 33 bytes  2244.40 bytes/sec
+total size is 11359500  speedup is 2024.51
+sending incremental file list
+erp_data.mdb
+
+sent 7256581 bytes  received 61701 bytes  180698.32 bytes/sec
+total size is 77592576  speedup is 10.60
+sending incremental file list
+
+sent 7538 bytes  received 45 bytes  5055.33 bytes/sec
+total size is 9253358  speedup is 1220.28
+sending incremental file list
+
+sent 7552 bytes  received 20 bytes  5048.00 bytes/sec
+total size is 16747404  speedup is 2211.75
+sending incremental file list
+
+sent 4308 bytes  received 24 bytes  2888.00 bytes/sec
+total size is 6387982  speedup is 1474.60
+sending incremental file list
+mercuriales/gms/2013/CENTRALES 2013/CASINO 2013.xls
+mercuriales/mdd/2013/2013 MERCURIALE CARREFOUR ASIATIQUE.xls
+mercuriales/mdd/2013/2013 MERCURIALE CARREFOUR PLATS CUISINES.xls
+mercuriales/mdd/2013/2013 MERCURIALE CASINO.xls
+mercuriales/mdd/2013/2013 MERCURIALE GROUPE AUCHAN.xls
+
+sent 230518 bytes  received 15251 bytes  70219.71 bytes/sec
+total size is 31946657  speedup is 129.99
+sending incremental file list
+
+sent 5047 bytes  received 27 bytes  3382.67 bytes/sec
+total size is 39173092  speedup is 7720.36
+sending incremental file list
+operations_commerciales/chrono demande echantillons.xls
+operations_commerciales/FZC/CONFIRMATIONS/2013/TOUPARGEL/TOUPARGEL_CONFIRMATION CYCLE 12 2013.xls
+operations_commerciales/FZC/OP FZC 2013/FZC TOUPARGEL 2013.xls
+operations_commerciales/GMS/2013/D-REGIONS/GMS INTERMARCHE REGION .2013-FUTUR MASTER.xls
+operations_commerciales/MDD/MODELES CJ/DEMANDE ECHANTILLONS CECILE.xls
+operations_commerciales/MDD/OP MDD 2013/MDD ITM FUTUR MASTER 2013 .xls
+operations_commerciales/MDD/OP MDD 2013/MDD NETTO 2013 FUTURMASTER.xls
+
+sent 259272 bytes  received 10967 bytes  60053.11 bytes/sec
+total size is 93089069  speedup is 344.47
+sending incremental file list
+
+sent 18506 bytes  received 80 bytes  12390.67 bytes/sec
+total size is 41728031  speedup is 2245.13
+sending incremental file list
+
+sent 7502 bytes  received 13 bytes  3006.00 bytes/sec
+total size is 33724035  speedup is 4487.56
+sending incremental file list
+erp_data.mdb
+
+sent 7256581 bytes  received 61701 bytes  190085.25 bytes/sec
+total size is 77592576  speedup is 10.60
+sending incremental file list
+
+sent 7538 bytes  received 45 bytes  5055.33 bytes/sec
+total size is 9253358  speedup is 1220.28
+sending incremental file list
+
+sent 4308 bytes  received 24 bytes  2888.00 bytes/sec
+total size is 6387982  speedup is 1474.60
+sending incremental file list
+
+sent 7552 bytes  received 20 bytes  5048.00 bytes/sec
+total size is 16747404  speedup is 2211.75
+sending incremental file list
+
+sent 85 bytes  received 13 bytes  65.33 bytes/sec
+total size is 104853504  speedup is 1069933.71
+sending incremental file list
+operations_commerciales/chrono demande echantillons.xls
+operations_commerciales/FZC/CONFIRMATIONS/2013/TOUPARGEL/TOUPARGEL_CONFIRMATION CYCLE 12 2013.xls
+operations_commerciales/FZC/OP FZC 2013/FZC TOUPARGEL 2013.xls
+operations_commerciales/GMS/2013/D-REGIONS/GMS INTERMARCHE REGION .2013-FUTUR MASTER.xls
+operations_commerciales/MDD/MODELES CJ/DEMANDE ECHANTILLONS CECILE.xls
+operations_commerciales/MDD/OP MDD 2013/MDD ITM FUTUR MASTER 2013 .xls
+operations_commerciales/MDD/OP MDD 2013/MDD NETTO 2013 FUTURMASTER.xls
+
+sent 259272 bytes  received 10967 bytes  77211.14 bytes/sec
+total size is 93089069  speedup is 344.47
+sending incremental file list
+mercuriales/gms/2013/CENTRALES 2013/CASINO 2013.xls
+mercuriales/mdd/2013/2013 MERCURIALE CARREFOUR ASIATIQUE.xls
+mercuriales/mdd/2013/2013 MERCURIALE CARREFOUR PLATS CUISINES.xls
+mercuriales/mdd/2013/2013 MERCURIALE CASINO.xls
+mercuriales/mdd/2013/2013 MERCURIALE GROUPE AUCHAN.xls
+
+sent 230518 bytes  received 15251 bytes  98307.60 bytes/sec
+total size is 31946657  speedup is 129.99
+sending incremental file list
+
+sent 5440 bytes  received 44 bytes  3656.00 bytes/sec
+total size is 9508728  speedup is 1733.90
+sending incremental file list
+
+sent 5645 bytes  received 23 bytes  3778.67 bytes/sec
+total size is 128643061  speedup is 22696.38
+sending incremental file list
+
+sent 4707 bytes  received 36 bytes  3162.00 bytes/sec
+total size is 46318934  speedup is 9765.75
+sending incremental file list
+
+sent 18506 bytes  received 80 bytes  12390.67 bytes/sec
+total size is 41728031  speedup is 2245.13

@@ -1,0 +1,186 @@
+Démarrage : jeu oct 31 23:00:01 CET 2013
+Arrêt     : jeu oct 31 23:01:57 CET 2013
+
+
+
+Base MySQL sélectionnée: agis
+Nombre de serveur(s) Linux concerné(s): 4
+Nombre de dossier(s) à mettre à jour: 25
+
+sending incremental file list
+
+sent 7651 bytes  received 20 bytes  15342.00 bytes/sec
+total size is 16750795  speedup is 2183.65
+sending incremental file list
+
+sent 5598 bytes  received 45 bytes  3762.00 bytes/sec
+total size is 9985067  speedup is 1769.46
+sending incremental file list
+suivi_investissement/2013-2014/suivi des travaux 2013.xls
+suivi_investissement/2014-2015/Bud invest AVI 2014 2015.xls
+
+sent 18421 bytes  received 2040 bytes  8184.40 bytes/sec
+total size is 11615823  speedup is 567.71
+sending incremental file list
+erp_data.mdb
+
+sent 7503268 bytes  received 62247 bytes  186802.84 bytes/sec
+total size is 78852096  speedup is 10.42
+sending incremental file list
+
+sent 7538 bytes  received 45 bytes  5055.33 bytes/sec
+total size is 9253358  speedup is 1220.28
+sending incremental file list
+batch/scanner.ini
+
+sent 8055 bytes  received 51 bytes  5404.00 bytes/sec
+total size is 16750795  speedup is 2066.47
+sending incremental file list
+
+sent 4308 bytes  received 24 bytes  2888.00 bytes/sec
+total size is 6387982  speedup is 1474.60
+sending incremental file list
+mercuriales/FZC/FZC 2014/ARGEL 2014.xls
+mercuriales/FZC/FZC 2014/BOFROST 2014.xls
+mercuriales/FZC/FZC 2014/PICARD 2014.xls
+mercuriales/FZC/FZC 2014/SAROS 2014.xls
+mercuriales/FZC/FZC 2014/THIRIET 2014.xls
+mercuriales/FZC/FZC 2014/TOUPARGEL 2014.xls
+mercuriales/HD/2014/
+mercuriales/HD/2014/2014  MERCURIALE ALDI.xls
+mercuriales/HD/2014/2014 MERCURIALE LEADER PRICE.xls
+mercuriales/HD/2014/2014 MERCURIALE NETTO.xls
+mercuriales/MDD SURG/2013/2013 LDP SURGELE.xls
+mercuriales/mdd/2013/2013 MERCURIALE CARREFOUR PLATS CUISINES.xls
+mercuriales/mdd/2013/2013 MERCURIALE CASINO.xls
+mercuriales/mdd/2013/2013 MERCURIALE GROUPE AUCHAN.xls
+mercuriales/mdd/2013/2013 MERCURIALE MONOPRIX .xls
+mercuriales/mdd/2013/2013 MERCURIALE PROVERA.xls
+mercuriales/mdd/2014/
+mercuriales/mdd/2014/2014 MERCURIALE CASINO.xls
+mercuriales/mdd/2014/2014 MERCURIALE INTERMARCHE.xls
+mercuriales/mdd/2014/2014 MERCURIALE MONOPRIX .xls
+
+sent 216712 bytes  received 13228 bytes  65697.14 bytes/sec
+total size is 42287102  speedup is 183.90
+sending incremental file list
+
+sent 5047 bytes  received 27 bytes  3382.67 bytes/sec
+total size is 39173092  speedup is 7720.36
+sending incremental file list
+operations_commerciales/DEMANDE ECHANTILLONS CL .xls
+operations_commerciales/DEMANDE ECHANTILLONS GB.xls
+operations_commerciales/chrono demande echantillons.xls
+operations_commerciales/FZC/OP FZC 2014/FZC ARGEL 2014.xls
+operations_commerciales/FZC/OP FZC 2014/FZC PICARD 2014.xls
+operations_commerciales/FZC/OP FZC 2014/FZC TOUPARGEL 2014.xls
+operations_commerciales/GMS/2013/A-CENTRALES/GMS AUCHAN.FR 2013-FUTUR MASTER.xls
+operations_commerciales/GMS/2013/A-CENTRALES/GMS CARREFOUR MARKET MN 2013-FUTUR MASTER.xls
+operations_commerciales/GMS/2013/A-CENTRALES/GMS CARREFOUR MN 2013-FUTUR MASTER.xls
+operations_commerciales/GMS/2013/A-CENTRALES/GMS SIMPLY MARKET 2013-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/INTERMARCHE/2014 INTERMARCHE FEVRIER 1 OP 61009.xls
+operations_commerciales/MDD/MODELES CJ/AUCHAN ATAC SCHIEVER/DDE ECHANTILLONS/DEMANDE ECHANTILLONS AUCHAN GOOD 527.xls
+operations_commerciales/MDD/OP MDD 2014/MDD CASINO 2014.xls
+operations_commerciales/MDD/OP MDD 2014/MDD ITM 2014 .xls
+operations_commerciales/MDD/OP MDD 2014/MDD MONOPRIX 2014 .xls
+
+sent 242902 bytes  received 26209 bytes  107644.40 bytes/sec
+total size is 54091096  speedup is 201.00
+sending incremental file list
+
+sent 18506 bytes  received 80 bytes  7434.40 bytes/sec
+total size is 41728031  speedup is 2245.13
+sending incremental file list
+deleting modeles/test_tiromat2.lab
+modeles/echantillons-72x132mm_menu_depart_PF.lab
+
+sent 11515 bytes  received 35 bytes  7700.00 bytes/sec
+total size is 30341120  speedup is 2626.94
+sending incremental file list
+erp_data.mdb
+
+sent 7503268 bytes  received 62247 bytes  186802.84 bytes/sec
+total size is 78852096  speedup is 10.42
+sending incremental file list
+
+sent 7538 bytes  received 45 bytes  5055.33 bytes/sec
+total size is 9253358  speedup is 1220.28
+sending incremental file list
+
+sent 4308 bytes  received 24 bytes  2888.00 bytes/sec
+total size is 6387982  speedup is 1474.60
+sending incremental file list
+batch/scanner.ini
+
+sent 8055 bytes  received 51 bytes  5404.00 bytes/sec
+total size is 16750795  speedup is 2066.47
+sending incremental file list
+
+sent 85 bytes  received 13 bytes  65.33 bytes/sec
+total size is 104853504  speedup is 1069933.71
+sending incremental file list
+operations_commerciales/DEMANDE ECHANTILLONS CL .xls
+operations_commerciales/DEMANDE ECHANTILLONS GB.xls
+operations_commerciales/chrono demande echantillons.xls
+operations_commerciales/FZC/OP FZC 2014/FZC ARGEL 2014.xls
+operations_commerciales/FZC/OP FZC 2014/FZC PICARD 2014.xls
+operations_commerciales/FZC/OP FZC 2014/FZC TOUPARGEL 2014.xls
+operations_commerciales/GMS/2013/A-CENTRALES/GMS AUCHAN.FR 2013-FUTUR MASTER.xls
+operations_commerciales/GMS/2013/A-CENTRALES/GMS CARREFOUR MARKET MN 2013-FUTUR MASTER.xls
+operations_commerciales/GMS/2013/A-CENTRALES/GMS CARREFOUR MN 2013-FUTUR MASTER.xls
+operations_commerciales/GMS/2013/A-CENTRALES/GMS SIMPLY MARKET 2013-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/INTERMARCHE/2014 INTERMARCHE FEVRIER 1 OP 61009.xls
+operations_commerciales/MDD/MODELES CJ/AUCHAN ATAC SCHIEVER/DDE ECHANTILLONS/DEMANDE ECHANTILLONS AUCHAN GOOD 527.xls
+operations_commerciales/MDD/OP MDD 2014/MDD CASINO 2014.xls
+operations_commerciales/MDD/OP MDD 2014/MDD ITM 2014 .xls
+operations_commerciales/MDD/OP MDD 2014/MDD MONOPRIX 2014 .xls
+
+sent 242902 bytes  received 26209 bytes  76888.86 bytes/sec
+total size is 54091096  speedup is 201.00
+sending incremental file list
+mercuriales/FZC/FZC 2014/ARGEL 2014.xls
+mercuriales/FZC/FZC 2014/BOFROST 2014.xls
+mercuriales/FZC/FZC 2014/PICARD 2014.xls
+mercuriales/FZC/FZC 2014/SAROS 2014.xls
+mercuriales/FZC/FZC 2014/THIRIET 2014.xls
+mercuriales/FZC/FZC 2014/TOUPARGEL 2014.xls
+mercuriales/HD/2014/
+mercuriales/HD/2014/2014  MERCURIALE ALDI.xls
+mercuriales/HD/2014/2014 MERCURIALE LEADER PRICE.xls
+mercuriales/HD/2014/2014 MERCURIALE NETTO.xls
+mercuriales/MDD SURG/2013/2013 LDP SURGELE.xls
+mercuriales/mdd/2013/2013 MERCURIALE CARREFOUR PLATS CUISINES.xls
+mercuriales/mdd/2013/2013 MERCURIALE CASINO.xls
+mercuriales/mdd/2013/2013 MERCURIALE GROUPE AUCHAN.xls
+mercuriales/mdd/2013/2013 MERCURIALE MONOPRIX .xls
+mercuriales/mdd/2013/2013 MERCURIALE PROVERA.xls
+mercuriales/mdd/2014/
+mercuriales/mdd/2014/2014 MERCURIALE CASINO.xls
+mercuriales/mdd/2014/2014 MERCURIALE INTERMARCHE.xls
+mercuriales/mdd/2014/2014 MERCURIALE MONOPRIX .xls
+
+sent 216712 bytes  received 13228 bytes  91976.00 bytes/sec
+total size is 42287102  speedup is 183.90
+sending incremental file list
+modeles/echantillons-72x132mm_menu_depart_PF.lab
+modeles/test_tiromat1.lab
+
+sent 21449 bytes  received 51 bytes  8600.00 bytes/sec
+total size is 30341120  speedup is 1411.21
+sending incremental file list
+
+sent 5598 bytes  received 45 bytes  3762.00 bytes/sec
+total size is 9985067  speedup is 1769.46
+sending incremental file list
+
+sent 5677 bytes  received 23 bytes  3800.00 bytes/sec
+total size is 128675317  speedup is 22574.62
+sending incremental file list
+
+sent 4707 bytes  received 36 bytes  9486.00 bytes/sec
+total size is 46318934  speedup is 9765.75
+sending incremental file list
+
+sent 46162 bytes  received 86 bytes  30832.00 bytes/sec
+total size is 275068499  speedup is 5947.68
+sending incremental file list

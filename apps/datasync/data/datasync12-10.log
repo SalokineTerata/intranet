@@ -1,0 +1,201 @@
+Démarrage : mar déc 10 23:00:02 CET 2013
+Arrêt     : mar déc 10 23:04:02 CET 2013
+
+
+
+Base MySQL sélectionnée: agis
+Nombre de serveur(s) Linux concerné(s): 4
+Nombre de dossier(s) à mettre à jour: 24
+
+sending incremental file list
+
+sent 5598 bytes  received 45 bytes  3762.00 bytes/sec
+total size is 9985067  speedup is 1769.46
+sending incremental file list
+suivi_investissement/2014-2015/Bud invest AVI 2014 2015.xls
+
+sent 11488 bytes  received 485 bytes  7982.00 bytes/sec
+total size is 11670607  speedup is 974.74
+sending incremental file list
+erp_data.mdb
+
+sent 10517319 bytes  received 63255 bytes  166623.21 bytes/sec
+total size is 81426432  speedup is 7.70
+sending incremental file list
+
+sent 7538 bytes  received 45 bytes  5055.33 bytes/sec
+total size is 9253358  speedup is 1220.28
+sending incremental file list
+
+sent 7683 bytes  received 20 bytes  5135.33 bytes/sec
+total size is 16751831  speedup is 2174.72
+sending incremental file list
+
+sent 4308 bytes  received 24 bytes  2888.00 bytes/sec
+total size is 6387982  speedup is 1474.60
+sending incremental file list
+mercuriales/sync.ffs_db
+mercuriales/gms/2014/CENTRALES 2014/AUCHAN 2014.xls
+mercuriales/gms/2014/CONTROLE TARIFS 2014/01-JANVIER/2014 CARREFOUR MARKET PRIX 2013 PROLONGES 28-03-2014.pdf
+mercuriales/gms/2014/CONTROLE TARIFS 2014/01-JANVIER/2014 CARREFOUR PRIX 2013 PROLONGES AU 28-02-2014.pdf
+mercuriales/gms/2014/CONTROLE TARIFS 2014/01-JANVIER/2014 SYSTEME U PRIX 2013 PROLONGES AU 28-02-2014.pdf
+mercuriales/mdd/2013/2013 MERCURIALE PROVERA.xls
+mercuriales/mdd/2014/2014 MERCURIALE AUCHAN.xls
+mercuriales/mdd/2014/2014 MERCURIALE PROVERA.xls
+
+sent 257307 bytes  received 7528 bytes  58852.22 bytes/sec
+total size is 48499736  speedup is 183.13
+sending incremental file list
+
+sent 5047 bytes  received 27 bytes  3382.67 bytes/sec
+total size is 39173092  speedup is 7720.36
+sending incremental file list
+operations_commerciales/DEMANDE ECHANTILLONS CL .xls
+operations_commerciales/chrono demande echantillons.xls
+operations_commerciales/sync.ffs_db
+operations_commerciales/FZC/OP FZC 2013/FZC THIRIET 2013.xls
+operations_commerciales/GMS/RECAP DEMANDE ET CONFIRMATIONS HEBDO.xls
+operations_commerciales/GMS/2013/D-REGIONS/GMS LECLERC 2013-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS AUCHAN 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS CARREFOUR 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS CASINO 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS SIMPLY MARKET 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS SYSTEME U 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/CARREFOUR/2014 CARREFOUR NAA.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/SIMPLY MARKET/2014 SIMPLY MARKET OP NAA.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/SYSTEME U/2014 SYSTEME U FIDELISATION JANVIER PAUPIETTES LANGUE.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/SYSTEME U/2014 SYSTEME U TRAFIC NAA JANVIER.xls
+operations_commerciales/GMS/2014/C-CONTROLE DES PRIX/2014 INTERMARCHE NAA SAUCES.pdf
+operations_commerciales/GMS/2014/D-REGIONS/GMS LECLERC 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/D-REGIONS/GMS SU REGION  2014-FUTUR MASTER.xls
+operations_commerciales/MDD/MODELES CJ/AUCHAN ATAC SCHIEVER/CONF OP/2014/CONFIRMATION OPERATION AUCHAN JANVIER 1.xls
+operations_commerciales/MDD/MODELES CJ/AUCHAN ATAC SCHIEVER/CONF OP/2014/CONFIRMATION OPERATION SCHIEVER JANVIER 1.xls
+operations_commerciales/MDD/MODELES CJ/AUCHAN ATAC SCHIEVER/CONF OP/2014/CONFIRMATION OPERATION SCHIEVER NAA 2014.xls
+operations_commerciales/MDD/OP MDD 2013/MDD AUCHAN 2013 FUTUR MASTER.xls
+operations_commerciales/MDD/OP MDD 2013/MDD CORA 2013 FUTUR MASTER.xls
+operations_commerciales/MDD/OP MDD 2013/MDD CORA BE 2013  FUTUR MASTER.xls
+operations_commerciales/MDD/OP MDD 2013/MDD CRF 2013 FUTUR MASTER.xls
+deleting operations_commerciales/MDD/OP MDD 2014/MDD SYSTEME U 2014 FUTURMASTER.xls
+deleting operations_commerciales/MDD/OP MDD 2014/MDD SIMPLY MARKET 2014 FUTUR MASTER.xls
+deleting operations_commerciales/MDD/OP MDD 2014/MDD MATCH 2014 FUTUR MASTER.xls
+deleting operations_commerciales/MDD/OP MDD 2014/MDD DIA 2014 FUTURMASTER.xls
+deleting operations_commerciales/MDD/OP MDD 2014/MDD CRF MKT 2014 FUTUR MASTER.xls
+deleting operations_commerciales/MDD/OP MDD 2014/MDD CRF 2014 FUTUR MASTER.xls
+deleting operations_commerciales/MDD/OP MDD 2014/MDD CORA 2014 FUTUR MASTER.xls
+operations_commerciales/MDD/OP MDD 2014/MDD CORA 2014.xls
+operations_commerciales/MDD/OP MDD 2014/MDD CRF 2014.xls
+operations_commerciales/MDD/OP MDD 2014/MDD CRF MKT 2014.xls
+operations_commerciales/MDD/OP MDD 2014/MDD DIA 2014.xls
+operations_commerciales/MDD/OP MDD 2014/MDD GROUPE AUCHAN 2014.xls
+operations_commerciales/MDD/OP MDD 2014/MDD MATCH 2014.xls
+operations_commerciales/MDD/OP MDD 2014/MDD SYSTEME U 2014.xls
+
+sent 555319 bytes  received 46240 bytes  133679.78 bytes/sec
+total size is 58313397  speedup is 96.94
+sending incremental file list
+
+sent 20778 bytes  received 88 bytes  8346.40 bytes/sec
+total size is 98751548  speedup is 4732.65
+sending incremental file list
+modeles/coupelle_compo_preimp.lab
+
+sent 11832 bytes  received 1400 bytes  8821.33 bytes/sec
+total size is 32211968  speedup is 2434.40
+sending incremental file list
+erp_data.mdb
+
+sent 10517319 bytes  received 63255 bytes  96626.25 bytes/sec
+total size is 81426432  speedup is 7.70
+sending incremental file list
+
+sent 7538 bytes  received 45 bytes  3033.20 bytes/sec
+total size is 9253358  speedup is 1220.28
+sending incremental file list
+
+sent 4308 bytes  received 24 bytes  1732.80 bytes/sec
+total size is 6387982  speedup is 1474.60
+sending incremental file list
+
+sent 7683 bytes  received 20 bytes  2200.86 bytes/sec
+total size is 16751831  speedup is 2174.72
+sending incremental file list
+
+sent 85 bytes  received 13 bytes  28.00 bytes/sec
+total size is 104853504  speedup is 1069933.71
+sending incremental file list
+operations_commerciales/DEMANDE ECHANTILLONS CL .xls
+operations_commerciales/chrono demande echantillons.xls
+operations_commerciales/sync.ffs_db
+operations_commerciales/FZC/OP FZC 2013/FZC THIRIET 2013.xls
+operations_commerciales/GMS/RECAP DEMANDE ET CONFIRMATIONS HEBDO.xls
+operations_commerciales/GMS/2013/D-REGIONS/GMS LECLERC 2013-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS AUCHAN 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS CARREFOUR 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS CASINO 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS SIMPLY MARKET 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS SYSTEME U 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/CARREFOUR/2014 CARREFOUR NAA.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/SIMPLY MARKET/2014 SIMPLY MARKET OP NAA.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/SYSTEME U/2014 SYSTEME U FIDELISATION JANVIER PAUPIETTES LANGUE.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/SYSTEME U/2014 SYSTEME U TRAFIC NAA JANVIER.xls
+operations_commerciales/GMS/2014/C-CONTROLE DES PRIX/2014 INTERMARCHE NAA SAUCES.pdf
+operations_commerciales/GMS/2014/D-REGIONS/GMS LECLERC 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/D-REGIONS/GMS SU REGION  2014-FUTUR MASTER.xls
+operations_commerciales/MDD/MODELES CJ/AUCHAN ATAC SCHIEVER/CONF OP/2014/CONFIRMATION OPERATION AUCHAN JANVIER 1.xls
+operations_commerciales/MDD/MODELES CJ/AUCHAN ATAC SCHIEVER/CONF OP/2014/CONFIRMATION OPERATION SCHIEVER JANVIER 1.xls
+operations_commerciales/MDD/MODELES CJ/AUCHAN ATAC SCHIEVER/CONF OP/2014/CONFIRMATION OPERATION SCHIEVER NAA 2014.xls
+operations_commerciales/MDD/OP MDD 2013/MDD AUCHAN 2013 FUTUR MASTER.xls
+operations_commerciales/MDD/OP MDD 2013/MDD CORA 2013 FUTUR MASTER.xls
+operations_commerciales/MDD/OP MDD 2013/MDD CORA BE 2013  FUTUR MASTER.xls
+operations_commerciales/MDD/OP MDD 2013/MDD CRF 2013 FUTUR MASTER.xls
+deleting operations_commerciales/MDD/OP MDD 2014/MDD SYSTEME U 2014 FUTURMASTER.xls
+deleting operations_commerciales/MDD/OP MDD 2014/MDD SIMPLY MARKET 2014 FUTUR MASTER.xls
+deleting operations_commerciales/MDD/OP MDD 2014/MDD MATCH 2014 FUTUR MASTER.xls
+deleting operations_commerciales/MDD/OP MDD 2014/MDD DIA 2014 FUTURMASTER.xls
+deleting operations_commerciales/MDD/OP MDD 2014/MDD CRF MKT 2014 FUTUR MASTER.xls
+deleting operations_commerciales/MDD/OP MDD 2014/MDD CRF 2014 FUTUR MASTER.xls
+deleting operations_commerciales/MDD/OP MDD 2014/MDD CORA 2014 FUTUR MASTER.xls
+operations_commerciales/MDD/OP MDD 2014/MDD CORA 2014.xls
+operations_commerciales/MDD/OP MDD 2014/MDD CRF 2014.xls
+operations_commerciales/MDD/OP MDD 2014/MDD CRF MKT 2014.xls
+operations_commerciales/MDD/OP MDD 2014/MDD DIA 2014.xls
+operations_commerciales/MDD/OP MDD 2014/MDD GROUPE AUCHAN 2014.xls
+operations_commerciales/MDD/OP MDD 2014/MDD MATCH 2014.xls
+operations_commerciales/MDD/OP MDD 2014/MDD SYSTEME U 2014.xls
+
+sent 555319 bytes  received 46240 bytes  63322.00 bytes/sec
+total size is 58313397  speedup is 96.94
+sending incremental file list
+mercuriales/sync.ffs_db
+mercuriales/gms/2014/CENTRALES 2014/AUCHAN 2014.xls
+mercuriales/gms/2014/CONTROLE TARIFS 2014/01-JANVIER/2014 CARREFOUR MARKET PRIX 2013 PROLONGES 28-03-2014.pdf
+mercuriales/gms/2014/CONTROLE TARIFS 2014/01-JANVIER/2014 CARREFOUR PRIX 2013 PROLONGES AU 28-02-2014.pdf
+mercuriales/gms/2014/CONTROLE TARIFS 2014/01-JANVIER/2014 SYSTEME U PRIX 2013 PROLONGES AU 28-02-2014.pdf
+mercuriales/mdd/2013/2013 MERCURIALE PROVERA.xls
+mercuriales/mdd/2014/2014 MERCURIALE AUCHAN.xls
+mercuriales/mdd/2014/2014 MERCURIALE PROVERA.xls
+
+sent 257307 bytes  received 7528 bytes  40743.85 bytes/sec
+total size is 48499736  speedup is 183.13
+sending incremental file list
+modeles/coupelle_compo_preimp.lab
+
+sent 11832 bytes  received 1400 bytes  2940.44 bytes/sec
+total size is 32211968  speedup is 2434.40
+sending incremental file list
+
+sent 5598 bytes  received 45 bytes  1254.00 bytes/sec
+total size is 9985067  speedup is 1769.46
+sending incremental file list
+
+sent 5677 bytes  received 23 bytes  3800.00 bytes/sec
+total size is 128675317  speedup is 22574.62
+sending incremental file list
+
+sent 5353 bytes  received 38 bytes  2156.40 bytes/sec
+total size is 56169881  speedup is 10419.20
+sending incremental file list
+
+sent 47569 bytes  received 91 bytes  10591.11 bytes/sec
+total size is 279142483  speedup is 5856.96
+sending incremental file list

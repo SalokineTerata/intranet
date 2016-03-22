@@ -1,0 +1,76 @@
+Démarrage : ven jun 13 23:00:02 CEST 2014
+Arrêt     : ven jun 13 23:01:17 CEST 2014
+
+
+
+Base MySQL sélectionnée: agis
+Nombre de serveur(s) Linux concerné(s): 4
+Nombre de dossier(s) à mettre à jour: 29
+
+sending incremental file list
+
+sent 63 bytes  received 12 bytes  50.00 bytes/sec
+total size is 90068992  speedup is 1200919.89
+sending incremental file list
+
+sent 7593 bytes  received 45 bytes  5092.00 bytes/sec
+total size is 9254930  speedup is 1211.70
+sending incremental file list
+
+sent 4308 bytes  received 24 bytes  2888.00 bytes/sec
+total size is 6387982  speedup is 1474.60
+sending incremental file list
+
+sent 7756 bytes  received 20 bytes  5184.00 bytes/sec
+total size is 16755943  speedup is 2154.83
+sending incremental file list
+
+sent 85 bytes  received 13 bytes  196.00 bytes/sec
+total size is 104853504  speedup is 1069933.71
+sending incremental file list
+operations_commerciales/DEMANDE ECHANTILLONS CL .xls
+operations_commerciales/chrono demande echantillons.xls
+operations_commerciales/GMS/RECAP DEMANDE ET CONFIRMATIONS HEBDO 2014.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS AUCHAN 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS CARREFOUR 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS GALEC 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS INTERMARCHE 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/D-REGIONS/GMS SIMPLY MARKET REGIONS  2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/D-REGIONS/GMS SU REGION  2014-FUTUR MASTER.xls
+
+sent 300406 bytes  received 32041 bytes  94984.86 bytes/sec
+total size is 51633051  speedup is 155.31
+sending incremental file list
+mercuriales/HD/2014/2014 MERCURIALE LEADER PRICE.xls
+mercuriales/HD/2014/2014 MERCURIALE LIDL.xls
+mercuriales/gms/2014/CENTRALES 2014/CARREFOUR 2014.xls
+mercuriales/gms/2014/CENTRALES 2014/INTERMARCHE 2014.xls
+mercuriales/mdd/2014/2014 MERCURIALE AUCHAN.xls
+mercuriales/mdd/2014/2014 MERCURIALE CARREFOUR ASIATIQUE.xls
+
+sent 56180 bytes  received 18605 bytes  29914.00 bytes/sec
+total size is 32801287  speedup is 438.61
+sending incremental file list
+
+sent 10004 bytes  received 13 bytes  6678.00 bytes/sec
+total size is 48314368  speedup is 4823.24
+sending incremental file list
+
+sent 20296 bytes  received 83 bytes  13586.00 bytes/sec
+total size is 99065320  speedup is 4861.15
+sending incremental file list
+gofast/sync.ffs_db
+gofast/CHANTIERS/4_COTATION_Benjamin/4_GEMBA/AUTRES_SITES/
+gofast/CHANTIERS/4_COTATION_Benjamin/4_GEMBA/AUTRES_SITES/TRAME PR 30.05.13_ESPRI
+gofast/CHANTIERS/4_COTATION_Benjamin/5_STANDARDS/2014_06_12_R\#351vision DDD - V3.xls
+
+sent 210076 bytes  received 171 bytes  60070.57 bytes/sec
+total size is 37700972  speedup is 179.32
+sending incremental file list
+
+sent 7756 bytes  received 20 bytes  3110.40 bytes/sec
+total size is 16755943  speedup is 2154.83
+sending incremental file list
+
+sent 7756 bytes  received 20 bytes  5184.00 bytes/sec
+total size is 16755943  speedup is 2154.83

@@ -1,0 +1,145 @@
+Démarrage : mer oct  2 23:00:02 CEST 2013
+Arrêt     : mer oct  2 23:01:59 CEST 2013
+
+
+
+Base MySQL sélectionnée: agis
+Nombre de serveur(s) Linux concerné(s): 4
+Nombre de dossier(s) à mettre à jour: 24
+
+sending incremental file list
+
+sent 7598 bytes  received 20 bytes  15236.00 bytes/sec
+total size is 16749755  speedup is 2198.71
+sending incremental file list
+
+sent 5440 bytes  received 44 bytes  3656.00 bytes/sec
+total size is 9508728  speedup is 1733.90
+sending incremental file list
+codesoft/Codesoft 7/Codes Produits/75372.bak
+codesoft/Codesoft 7/Codes Produits/75372.lab
+codesoft/Codesoft 7/Codes Produits/75372.old
+
+sent 90161 bytes  received 2195 bytes  36942.40 bytes/sec
+total size is 273754195  speedup is 2964.12
+sending incremental file list
+suivi_investissement/2014-2015/Bud invest AVI 2014 2015.xls
+
+sent 12895 bytes  received 485 bytes  5352.00 bytes/sec
+total size is 11410700  speedup is 852.82
+sending incremental file list
+erp_data.mdb
+
+sent 7205959 bytes  received 62247 bytes  179461.88 bytes/sec
+total size is 78852096  speedup is 10.85
+sending incremental file list
+
+sent 7538 bytes  received 45 bytes  5055.33 bytes/sec
+total size is 9253358  speedup is 1220.28
+sending incremental file list
+
+sent 7598 bytes  received 20 bytes  5078.67 bytes/sec
+total size is 16749755  speedup is 2198.71
+sending incremental file list
+
+sent 4308 bytes  received 24 bytes  2888.00 bytes/sec
+total size is 6387982  speedup is 1474.60
+sending incremental file list
+mercuriales/FZC/FZC 2013/ARGEL 2013.xls
+mercuriales/FZC/FZC 2013/TOUPARGEL 2013.xls
+mercuriales/gms/2013/CENTRALES 2013/CARREFOUR MN 2013.xls
+mercuriales/mdd/2013/2013 MERCURIALE CARREFOUR ASIATIQUE.xls
+mercuriales/mdd/2013/2013 MERCURIALE SCAMARK.xls
+
+sent 34595 bytes  received 7236 bytes  16732.40 bytes/sec
+total size is 32923045  speedup is 787.05
+sending incremental file list
+
+sent 5047 bytes  received 27 bytes  3382.67 bytes/sec
+total size is 39173092  speedup is 7720.36
+sending incremental file list
+operations_commerciales/chrono demande echantillons.xls
+operations_commerciales/FZC/CONFIRMATIONS/2014/THIRIET/THIRIET_JANVIER 2014.xls
+operations_commerciales/FZC/OP FZC 2013/FZC ARGEL 2013.xls
+operations_commerciales/FZC/OP FZC 2014/FZC THIRIET 2014.xls
+operations_commerciales/GMS/2013/RECAP DEMANDE ET CONFIRMATIONS HEBDO.xls
+operations_commerciales/GMS/2013/A-CENTRALES/GMS CARREFOUR MN ASIE 2013-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS AUCHAN 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS INTERMARCHE 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS SIMPLY MARKET 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS SYSTEME U 2014-FUTUR MASTER.xls
+operations_commerciales/MDD/MODELES CJ/AUCHAN ATAC SCHIEVER/DDE ECHANTILLONS/DEMANDE ECHANTILLONS AUCHAN GOOD 474.xls
+operations_commerciales/MDD/MODELES VB/CONF OPE CASINO/2013/CONFIRMATION OPERATION CASINO ANNIVERSAIRE 2 2013.xls
+
+sent 257479 bytes  received 29752 bytes  82066.00 bytes/sec
+total size is 51921045  speedup is 180.76
+sending incremental file list
+
+sent 18506 bytes  received 80 bytes  12390.67 bytes/sec
+total size is 41728031  speedup is 2245.13
+sending incremental file list
+
+sent 7556 bytes  received 13 bytes  5046.00 bytes/sec
+total size is 34205315  speedup is 4519.13
+sending incremental file list
+erp_data.mdb
+
+sent 7205959 bytes  received 62247 bytes  188784.57 bytes/sec
+total size is 78852096  speedup is 10.85
+sending incremental file list
+
+sent 7538 bytes  received 45 bytes  5055.33 bytes/sec
+total size is 9253358  speedup is 1220.28
+sending incremental file list
+
+sent 4308 bytes  received 24 bytes  2888.00 bytes/sec
+total size is 6387982  speedup is 1474.60
+sending incremental file list
+
+sent 7598 bytes  received 20 bytes  5078.67 bytes/sec
+total size is 16749755  speedup is 2198.71
+sending incremental file list
+
+sent 85 bytes  received 13 bytes  196.00 bytes/sec
+total size is 104853504  speedup is 1069933.71
+sending incremental file list
+operations_commerciales/chrono demande echantillons.xls
+operations_commerciales/FZC/CONFIRMATIONS/2014/THIRIET/THIRIET_JANVIER 2014.xls
+operations_commerciales/FZC/OP FZC 2013/FZC ARGEL 2013.xls
+operations_commerciales/FZC/OP FZC 2014/FZC THIRIET 2014.xls
+operations_commerciales/GMS/2013/RECAP DEMANDE ET CONFIRMATIONS HEBDO.xls
+operations_commerciales/GMS/2013/A-CENTRALES/GMS CARREFOUR MN ASIE 2013-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS AUCHAN 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS INTERMARCHE 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS SIMPLY MARKET 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS SYSTEME U 2014-FUTUR MASTER.xls
+operations_commerciales/MDD/MODELES CJ/AUCHAN ATAC SCHIEVER/DDE ECHANTILLONS/DEMANDE ECHANTILLONS AUCHAN GOOD 474.xls
+operations_commerciales/MDD/MODELES VB/CONF OPE CASINO/2013/CONFIRMATION OPERATION CASINO ANNIVERSAIRE 2 2013.xls
+
+sent 257479 bytes  received 29752 bytes  114892.40 bytes/sec
+total size is 51921045  speedup is 180.76
+sending incremental file list
+mercuriales/FZC/FZC 2013/ARGEL 2013.xls
+mercuriales/FZC/FZC 2013/TOUPARGEL 2013.xls
+mercuriales/gms/2013/CENTRALES 2013/CARREFOUR MN 2013.xls
+mercuriales/mdd/2013/2013 MERCURIALE CARREFOUR ASIATIQUE.xls
+mercuriales/mdd/2013/2013 MERCURIALE SCAMARK.xls
+
+sent 34595 bytes  received 7236 bytes  16732.40 bytes/sec
+total size is 32923045  speedup is 787.05
+sending incremental file list
+
+sent 5440 bytes  received 44 bytes  10968.00 bytes/sec
+total size is 9508728  speedup is 1733.90
+sending incremental file list
+
+sent 5618 bytes  received 23 bytes  3760.67 bytes/sec
+total size is 128643573  speedup is 22805.10
+sending incremental file list
+
+sent 4707 bytes  received 36 bytes  3162.00 bytes/sec
+total size is 46318934  speedup is 9765.75
+sending incremental file list
+
+sent 18506 bytes  received 80 bytes  12390.67 bytes/sec
+total size is 41728031  speedup is 2245.13

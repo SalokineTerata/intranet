@@ -1,0 +1,171 @@
+Démarrage : mer aoû  6 23:00:01 CEST 2014
+Arrêt     : mer aoû  6 23:00:58 CEST 2014
+
+
+
+Base MySQL sélectionnée: agis
+Nombre de serveur(s) Linux concerné(s): 4
+Nombre de dossier(s) à mettre à jour: 29
+
+sending incremental file list
+
+sent 7305 bytes  received 49 bytes  4902.67 bytes/sec
+total size is 13622581  speedup is 1852.40
+sending incremental file list
+
+sent 6283 bytes  received 38 bytes  2528.40 bytes/sec
+total size is 12454871  speedup is 1970.40
+sending incremental file list
+
+sent 63 bytes  received 12 bytes  50.00 bytes/sec
+total size is 145690624  speedup is 1942541.65
+sending incremental file list
+
+sent 7593 bytes  received 45 bytes  5092.00 bytes/sec
+total size is 9254930  speedup is 1211.70
+sending incremental file list
+
+sent 7905 bytes  received 20 bytes  5283.33 bytes/sec
+total size is 16766350  speedup is 2115.63
+sending incremental file list
+
+sent 4308 bytes  received 24 bytes  2888.00 bytes/sec
+total size is 6387982  speedup is 1474.60
+sending incremental file list
+mercuriales/MERCURIALES - AGIS/gms/2014/CENTRALES 2014/INTERMARCHE 2014.xls
+mercuriales/MERCURIALES - AGIS/gms/2014/CENTRALES 2014/SYSTEME U 2014.xls
+mercuriales/MERCURIALES - AGIS/mdd/2014/2014 MERCURIALE INTERMARCHE.xls
+mercuriales/MERCURIALES - AGIS/mdd/2014/2014 MERCURIALE PROVERA.xls
+
+sent 101433 bytes  received 11833 bytes  45306.40 bytes/sec
+total size is 37406790  speedup is 330.26
+sending incremental file list
+
+sent 5047 bytes  received 27 bytes  3382.67 bytes/sec
+total size is 39173092  speedup is 7720.36
+sending incremental file list
+operations_commerciales/DEMANDE ECHANTILLONS CL .xls
+operations_commerciales/chrono demande echantillons.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS AUCHAN 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS CARREFOUR 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS CARREFOUR MARKET 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS CASINO 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS INTERMARCHE 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS SYSTEME U 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/AUCHAN/2014 AUCHAN FESTIFS.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/AUCHAN/2014 AUCHAN MENU BL FESTIFS.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/CARREFOUR MARKET/2014 CARREFOUR MARKET FESTIFS -TRAFIC 50-51.xls
+deleting operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/CARREFOUR/2014 CARREFOUR OP FESTIFS.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/CARREFOUR/2014 CARREFOUR FESTIFS.xls
+deleting operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/INTERMARCHE/2014 INTERMARCHE NOVEMBRE OP 61810 PIZZAS.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/INTERMARCHE/2014 INTERMARCHE DECEMBRE FESTIFS COUPE.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/INTERMARCHE/2014 INTERMARCHE NOVEMBRE 1 OP 61810.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/INTERMARCHE/2014 INTERMARCHE NOVEMBRE 2 OP 61813.xls
+
+sent 468704 bytes  received 35961 bytes  112147.78 bytes/sec
+total size is 56736950  speedup is 112.42
+sending incremental file list
+
+sent 20406 bytes  received 83 bytes  13659.33 bytes/sec
+total size is 99360776  speedup is 4849.47
+sending incremental file list
+
+sent 6669 bytes  received 93 bytes  4508.00 bytes/sec
+total size is 52693702  speedup is 7792.62
+sending incremental file list
+modeles/compo_agis_sans_portion-v1.bak
+modeles/compo_agis_sans_portion-v1.lab
+
+sent 85641 bytes  received 2181 bytes  58548.00 bytes/sec
+total size is 44623872  speedup is 508.12
+sending incremental file list
+
+sent 5781 bytes  received 30 bytes  3874.00 bytes/sec
+total size is 92829061  speedup is 15974.71
+sending incremental file list
+
+sent 63 bytes  received 12 bytes  150.00 bytes/sec
+total size is 145690624  speedup is 1942541.65
+sending incremental file list
+
+sent 7593 bytes  received 45 bytes  5092.00 bytes/sec
+total size is 9254930  speedup is 1211.70
+sending incremental file list
+
+sent 4308 bytes  received 24 bytes  2888.00 bytes/sec
+total size is 6387982  speedup is 1474.60
+sending incremental file list
+
+sent 7905 bytes  received 20 bytes  1761.11 bytes/sec
+total size is 16766350  speedup is 2115.63
+sending incremental file list
+
+sent 85 bytes  received 13 bytes  65.33 bytes/sec
+total size is 104853504  speedup is 1069933.71
+sending incremental file list
+operations_commerciales/DEMANDE ECHANTILLONS CL .xls
+operations_commerciales/chrono demande echantillons.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS AUCHAN 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS CARREFOUR 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS CARREFOUR MARKET 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS CASINO 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS INTERMARCHE 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS SYSTEME U 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/AUCHAN/2014 AUCHAN FESTIFS.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/AUCHAN/2014 AUCHAN MENU BL FESTIFS.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/CARREFOUR MARKET/2014 CARREFOUR MARKET FESTIFS -TRAFIC 50-51.xls
+deleting operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/CARREFOUR/2014 CARREFOUR OP FESTIFS.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/CARREFOUR/2014 CARREFOUR FESTIFS.xls
+deleting operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/INTERMARCHE/2014 INTERMARCHE NOVEMBRE OP 61810 PIZZAS.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/INTERMARCHE/2014 INTERMARCHE DECEMBRE FESTIFS COUPE.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/INTERMARCHE/2014 INTERMARCHE NOVEMBRE 1 OP 61810.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/INTERMARCHE/2014 INTERMARCHE NOVEMBRE 2 OP 61813.xls
+
+sent 468704 bytes  received 35961 bytes  91757.27 bytes/sec
+total size is 56736950  speedup is 112.42
+sending incremental file list
+mercuriales/MERCURIALES - AGIS/gms/2014/CENTRALES 2014/INTERMARCHE 2014.xls
+mercuriales/MERCURIALES - AGIS/gms/2014/CENTRALES 2014/SYSTEME U 2014.xls
+mercuriales/MERCURIALES - AGIS/mdd/2014/2014 MERCURIALE INTERMARCHE.xls
+mercuriales/MERCURIALES - AGIS/mdd/2014/2014 MERCURIALE PROVERA.xls
+
+sent 101433 bytes  received 11833 bytes  32361.71 bytes/sec
+total size is 37406790  speedup is 330.26
+sending incremental file list
+modeles/compo_agis_sans_portion-v1.bak
+modeles/compo_agis_sans_portion-v1.lab
+
+sent 85641 bytes  received 2181 bytes  35128.80 bytes/sec
+total size is 44623872  speedup is 508.12
+sending incremental file list
+
+sent 7305 bytes  received 49 bytes  2941.60 bytes/sec
+total size is 13622581  speedup is 1852.40
+sending incremental file list
+
+sent 5745 bytes  received 23 bytes  2307.20 bytes/sec
+total size is 129159129  speedup is 22392.36
+sending incremental file list
+
+sent 5610 bytes  received 39 bytes  3766.00 bytes/sec
+total size is 59049369  speedup is 10453.07
+sending incremental file list
+
+sent 52293 bytes  received 97 bytes  14968.57 bytes/sec
+total size is 299707475  speedup is 5720.70
+sending incremental file list
+
+sent 20406 bytes  received 83 bytes  8195.60 bytes/sec
+total size is 99360776  speedup is 4849.47
+sending incremental file list
+
+sent 6669 bytes  received 93 bytes  2704.80 bytes/sec
+total size is 52693702  speedup is 7792.62
+sending incremental file list
+
+sent 7905 bytes  received 20 bytes  5283.33 bytes/sec
+total size is 16766350  speedup is 2115.63
+sending incremental file list
+
+sent 7905 bytes  received 20 bytes  5283.33 bytes/sec
+total size is 16766350  speedup is 2115.63

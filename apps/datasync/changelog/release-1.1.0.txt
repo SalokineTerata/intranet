@@ -1,0 +1,26 @@
+================================================================================
+Modifications à apporter aux différentes versions du modules
+================================================================================
+Version: x.x.x
+
+[ ]: Reste à effectuer
+[!]: Prioritaire
+[X]: Réalisé
+[.]: Abandonné
+================================================================================
+Exemples:
+[X] 23/05/2003: saisie_vierge_origine.php
+      Déplacer les informations de cette page au niveau du composant.
+
+[ ] 28/07/2003: saisie_origine.php
+                Saisie de plusieurs origine sans cycle.
+                Rajouter dans la listedes origine:
+                         - Cf Origine MP
+                         - Cf Lieu dernière Transformation
+                         - Cf Origine Multiple
+                         - Cf Non défini
+                Bouton "Terminer Saisie"
+================================================================================
+
+[X] 03/03/2004: Module "datasync"
+		Réécriture partielle du module pour contourner l'absence de PHP CLI sur le système.

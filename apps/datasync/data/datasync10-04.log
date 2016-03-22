@@ -1,0 +1,144 @@
+Démarrage : ven oct  4 23:00:01 CEST 2013
+Arrêt     : ven oct  4 23:02:28 CEST 2013
+
+
+
+Base MySQL sélectionnée: agis
+Nombre de serveur(s) Linux concerné(s): 4
+Nombre de dossier(s) à mettre à jour: 24
+
+sending incremental file list
+
+sent 7598 bytes  received 20 bytes  15236.00 bytes/sec
+total size is 16749755  speedup is 2198.71
+sending incremental file list
+
+sent 5440 bytes  received 44 bytes  3656.00 bytes/sec
+total size is 9508728  speedup is 1733.90
+sending incremental file list
+codesoft/Codesoft 7/PULP FICTION/75395_verso.bak
+codesoft/Codesoft 7/PULP FICTION/75395_verso.lab
+
+sent 58645 bytes  received 3659 bytes  17801.14 bytes/sec
+total size is 273926739  speedup is 4396.62
+sending incremental file list
+
+sent 5686 bytes  received 34 bytes  3813.33 bytes/sec
+total size is 11410700  speedup is 1994.88
+sending incremental file list
+erp_data.mdb
+
+sent 10041581 bytes  received 62247 bytes  192453.87 bytes/sec
+total size is 78852096  speedup is 7.80
+sending incremental file list
+
+sent 7538 bytes  received 45 bytes  5055.33 bytes/sec
+total size is 9253358  speedup is 1220.28
+sending incremental file list
+
+sent 7598 bytes  received 20 bytes  5078.67 bytes/sec
+total size is 16749755  speedup is 2198.71
+sending incremental file list
+
+sent 4308 bytes  received 24 bytes  2888.00 bytes/sec
+total size is 6387982  speedup is 1474.60
+sending incremental file list
+mercuriales/HD/2013/2013 MERCURIALE DIA.xls
+mercuriales/gms/2013/CONTROLE TARIF 2013/10-OCTOBRE/AUCHAN GAMME PC FE.pdf
+mercuriales/gms/2013/CONTROLE TARIF 2013/10-OCTOBRE/CARREFOUR GAMME PC FE.pdf
+deleting mercuriales/gms/2013/REGION 2013/GALEC REGION MERCU SEPT 2013.xls
+mercuriales/gms/2013/REGION 2013/GALEC REGION MERCU OCT 2013.xls
+mercuriales/mdd/2013/2013 MERCURIALE CARREFOUR PLATS CUISINES.xls
+mercuriales/mdd/2013/2013 MERCURIALE GROUPE AUCHAN.xls
+mercuriales/mdd/2013/2013 MERCURIALE PROVERA.xls
+
+sent 251223 bytes  received 9428 bytes  74471.71 bytes/sec
+total size is 32970871  speedup is 126.49
+sending incremental file list
+
+sent 5047 bytes  received 27 bytes  3382.67 bytes/sec
+total size is 39173092  speedup is 7720.36
+sending incremental file list
+operations_commerciales/chrono demande echantillons.xls
+operations_commerciales/FZC/OP FZC 2013/FZC TOUPARGEL 2013.xls
+operations_commerciales/GMS/2013/A-CENTRALES/GMS CARREFOUR MARKET MDD 2013-FUTUR MASTER.xls
+operations_commerciales/GMS/2013/D-REGIONS/GMS CARREFOUR REGIONS 2013-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS SYSTEME U 2014-FUTUR MASTER.xls
+operations_commerciales/MDD/MODELES CJ/CARREFOUR/CONF OP/CONFIRMATION OPERATION CRF MKT TRAFIC CHARC TRAITEUR.xls
+operations_commerciales/MDD/MODELES CJ/CARREFOUR/CONF OP/CONFIRMATION OPERATION CRF PLS PROMO 01xls.xls
+operations_commerciales/MDD/MODELES CJ/CARREFOUR/CONF OP/2013/CONFIRMATION OPERATION CRFMKT SHOPI DEC.xls
+operations_commerciales/MDD/OP MDD 2013/MDD AUCHAN 2013 FUTUR MASTER.xls
+operations_commerciales/MDD/OP MDD 2013/MDD CRF 2013 FUTUR MASTER.xls
+operations_commerciales/MDD/OP MDD 2013/MDD CRF MKT 2013 FUTUR MASTER.xls
+
+sent 286648 bytes  received 22157 bytes  88230.00 bytes/sec
+total size is 52028053  speedup is 168.48
+sending incremental file list
+
+sent 18506 bytes  received 80 bytes  12390.67 bytes/sec
+total size is 41728031  speedup is 2245.13
+sending incremental file list
+
+sent 7556 bytes  received 13 bytes  3027.60 bytes/sec
+total size is 34205315  speedup is 4519.13
+sending incremental file list
+erp_data.mdb
+
+sent 10041581 bytes  received 62247 bytes  188856.60 bytes/sec
+total size is 78852096  speedup is 7.80
+sending incremental file list
+
+sent 7538 bytes  received 45 bytes  5055.33 bytes/sec
+total size is 9253358  speedup is 1220.28
+sending incremental file list
+
+sent 4308 bytes  received 24 bytes  2888.00 bytes/sec
+total size is 6387982  speedup is 1474.60
+sending incremental file list
+
+sent 7598 bytes  received 20 bytes  5078.67 bytes/sec
+total size is 16749755  speedup is 2198.71
+sending incremental file list
+
+sent 85 bytes  received 13 bytes  196.00 bytes/sec
+total size is 104853504  speedup is 1069933.71
+sending incremental file list
+operations_commerciales/chrono demande echantillons.xls
+operations_commerciales/FZC/OP FZC 2013/FZC TOUPARGEL 2013.xls
+operations_commerciales/GMS/2013/A-CENTRALES/GMS CARREFOUR MARKET MDD 2013-FUTUR MASTER.xls
+operations_commerciales/GMS/2013/D-REGIONS/GMS CARREFOUR REGIONS 2013-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS SYSTEME U 2014-FUTUR MASTER.xls
+operations_commerciales/MDD/MODELES CJ/CARREFOUR/CONF OP/CONFIRMATION OPERATION CRF MKT TRAFIC CHARC TRAITEUR.xls
+operations_commerciales/MDD/MODELES CJ/CARREFOUR/CONF OP/CONFIRMATION OPERATION CRF PLS PROMO 01xls.xls
+operations_commerciales/MDD/MODELES CJ/CARREFOUR/CONF OP/2013/CONFIRMATION OPERATION CRFMKT SHOPI DEC.xls
+operations_commerciales/MDD/OP MDD 2013/MDD AUCHAN 2013 FUTUR MASTER.xls
+operations_commerciales/MDD/OP MDD 2013/MDD CRF 2013 FUTUR MASTER.xls
+operations_commerciales/MDD/OP MDD 2013/MDD CRF MKT 2013 FUTUR MASTER.xls
+
+sent 286648 bytes  received 22157 bytes  123522.00 bytes/sec
+total size is 52028053  speedup is 168.48
+sending incremental file list
+mercuriales/HD/2013/2013 MERCURIALE DIA.xls
+mercuriales/gms/2013/CONTROLE TARIF 2013/10-OCTOBRE/AUCHAN GAMME PC FE.pdf
+mercuriales/gms/2013/CONTROLE TARIF 2013/10-OCTOBRE/CARREFOUR GAMME PC FE.pdf
+deleting mercuriales/gms/2013/REGION 2013/GALEC REGION MERCU SEPT 2013.xls
+mercuriales/gms/2013/REGION 2013/GALEC REGION MERCU OCT 2013.xls
+mercuriales/mdd/2013/2013 MERCURIALE CARREFOUR PLATS CUISINES.xls
+mercuriales/mdd/2013/2013 MERCURIALE GROUPE AUCHAN.xls
+mercuriales/mdd/2013/2013 MERCURIALE PROVERA.xls
+
+sent 251223 bytes  received 9428 bytes  74471.71 bytes/sec
+total size is 32970871  speedup is 126.49
+sending incremental file list
+
+sent 5440 bytes  received 44 bytes  3656.00 bytes/sec
+total size is 9508728  speedup is 1733.90
+sending incremental file list
+
+sent 5618 bytes  received 23 bytes  3760.67 bytes/sec
+total size is 128644085  speedup is 22805.19
+sending incremental file list
+
+sent 4707 bytes  received 36 bytes  3162.00 bytes/sec
+total size is 46318934  speedup is 9765.75
+sending incremental file list

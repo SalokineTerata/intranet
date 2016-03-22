@@ -1,0 +1,150 @@
+Démarrage : mar nov 19 23:00:02 CET 2013
+Arrêt     : mar nov 19 23:02:00 CET 2013
+
+
+
+Base MySQL sélectionnée: agis
+Nombre de serveur(s) Linux concerné(s): 4
+Nombre de dossier(s) à mettre à jour: 24
+
+sending incremental file list
+
+sent 5598 bytes  received 45 bytes  3762.00 bytes/sec
+total size is 9985067  speedup is 1769.46
+sending incremental file list
+
+sent 5788 bytes  received 34 bytes  3881.33 bytes/sec
+total size is 11670607  speedup is 2004.57
+sending incremental file list
+erp_data.mdb
+
+sent 7605491 bytes  received 62247 bytes  180417.36 bytes/sec
+total size is 78852096  speedup is 10.28
+sending incremental file list
+
+sent 7538 bytes  received 45 bytes  5055.33 bytes/sec
+total size is 9253358  speedup is 1220.28
+sending incremental file list
+
+sent 7683 bytes  received 20 bytes  5135.33 bytes/sec
+total size is 16751831  speedup is 2174.72
+sending incremental file list
+
+sent 4308 bytes  received 24 bytes  2888.00 bytes/sec
+total size is 6387982  speedup is 1474.60
+sending incremental file list
+mercuriales/FZC/FZC 2014/THIRIET 2014.xls
+mercuriales/HD/2013/2013 MERCURIALE DIA.xls
+mercuriales/HD/2014/2014 MERCURIALE DIA.xls
+mercuriales/mdd/2013/2013 MERCURIALE GROUPE AUCHAN.xls
+mercuriales/mdd/2013/2013 MERCURIALE SCAMARK.xls
+mercuriales/mdd/2013/2013 MERCURIALE SYSTEME U.xls
+mercuriales/mdd/2014/2014 MERCURIALE SCAMARK.xls
+
+sent 56375 bytes  received 5426 bytes  24720.40 bytes/sec
+total size is 42728033  speedup is 691.38
+sending incremental file list
+
+sent 5047 bytes  received 27 bytes  3382.67 bytes/sec
+total size is 39173092  speedup is 7720.36
+sending incremental file list
+operations_commerciales/chrono demande echantillons.xls
+operations_commerciales/GMS/2013/A-CENTRALES/GMS CARREFOUR MARKET MDD 2013-FUTUR MASTER.xls
+operations_commerciales/GMS/2013/D-REGIONS/GMS SU REGION  2013-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS AUCHAN 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS CARREFOUR 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS CARREFOUR MARKET 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS CASINO 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS GALEC 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS INTERMARCHE 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS SIMPLY MARKET 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS SYSTEME U 2014-FUTUR MASTER.xls
+
+sent 309017 bytes  received 46056 bytes  101449.43 bytes/sec
+total size is 54617667  speedup is 153.82
+sending incremental file list
+
+sent 18506 bytes  received 80 bytes  12390.67 bytes/sec
+total size is 41728031  speedup is 2245.13
+sending incremental file list
+modeles/carton_ean_128_ubi_code_client.lab
+modeles/coupelle_compo.lab
+modeles/coupelle_compo_180.lab
+modeles/coupelle_compo_preimp.lab
+modeles/coupelle_compo_preimp_180.lab
+
+sent 56774 bytes  received 6462 bytes  25294.40 bytes/sec
+total size is 31701504  speedup is 501.32
+sending incremental file list
+erp_data.mdb
+
+sent 7605491 bytes  received 62247 bytes  189326.86 bytes/sec
+total size is 78852096  speedup is 10.28
+sending incremental file list
+
+sent 7538 bytes  received 45 bytes  5055.33 bytes/sec
+total size is 9253358  speedup is 1220.28
+sending incremental file list
+
+sent 4308 bytes  received 24 bytes  2888.00 bytes/sec
+total size is 6387982  speedup is 1474.60
+sending incremental file list
+
+sent 7683 bytes  received 20 bytes  5135.33 bytes/sec
+total size is 16751831  speedup is 2174.72
+sending incremental file list
+
+sent 85 bytes  received 13 bytes  65.33 bytes/sec
+total size is 104853504  speedup is 1069933.71
+sending incremental file list
+operations_commerciales/chrono demande echantillons.xls
+operations_commerciales/GMS/2013/A-CENTRALES/GMS CARREFOUR MARKET MDD 2013-FUTUR MASTER.xls
+operations_commerciales/GMS/2013/D-REGIONS/GMS SU REGION  2013-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS AUCHAN 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS CARREFOUR 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS CARREFOUR MARKET 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS CASINO 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS GALEC 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS INTERMARCHE 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS SIMPLY MARKET 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS SYSTEME U 2014-FUTUR MASTER.xls
+
+sent 309017 bytes  received 46056 bytes  101449.43 bytes/sec
+total size is 54617667  speedup is 153.82
+sending incremental file list
+mercuriales/FZC/FZC 2014/THIRIET 2014.xls
+mercuriales/HD/2013/2013 MERCURIALE DIA.xls
+mercuriales/HD/2014/2014 MERCURIALE DIA.xls
+mercuriales/mdd/2013/2013 MERCURIALE GROUPE AUCHAN.xls
+mercuriales/mdd/2013/2013 MERCURIALE SCAMARK.xls
+mercuriales/mdd/2013/2013 MERCURIALE SYSTEME U.xls
+mercuriales/mdd/2014/2014 MERCURIALE SCAMARK.xls
+
+sent 56375 bytes  received 5426 bytes  41200.67 bytes/sec
+total size is 42728033  speedup is 691.38
+sending incremental file list
+modeles/carton_ean_128_ubi_code_client.lab
+modeles/coupelle_compo.lab
+modeles/coupelle_compo_180.lab
+modeles/coupelle_compo_preimp.lab
+modeles/coupelle_compo_preimp_180.lab
+
+sent 56774 bytes  received 6462 bytes  42157.33 bytes/sec
+total size is 31701504  speedup is 501.32
+sending incremental file list
+
+sent 5598 bytes  received 45 bytes  3762.00 bytes/sec
+total size is 9985067  speedup is 1769.46
+sending incremental file list
+
+sent 5677 bytes  received 23 bytes  3800.00 bytes/sec
+total size is 128675317  speedup is 22574.62
+sending incremental file list
+
+sent 5161 bytes  received 37 bytes  3465.33 bytes/sec
+total size is 52194646  speedup is 10041.29
+sending incremental file list
+
+sent 47386 bytes  received 90 bytes  31650.67 bytes/sec
+total size is 278488659  speedup is 5865.88
+sending incremental file list

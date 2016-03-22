@@ -1,0 +1,122 @@
+Démarrage : lun déc 23 23:00:02 CET 2013
+Arrêt     : lun déc 23 23:00:42 CET 2013
+
+
+
+Base MySQL sélectionnée: agis
+Nombre de serveur(s) Linux concerné(s): 4
+Nombre de dossier(s) à mettre à jour: 24
+
+sending incremental file list
+
+sent 5598 bytes  received 45 bytes  3762.00 bytes/sec
+total size is 9985067  speedup is 1769.46
+sending incremental file list
+
+sent 5788 bytes  received 34 bytes  2328.80 bytes/sec
+total size is 11671119  speedup is 2004.66
+sending incremental file list
+
+sent 63 bytes  received 12 bytes  50.00 bytes/sec
+total size is 81426432  speedup is 1085685.76
+sending incremental file list
+
+sent 7538 bytes  received 45 bytes  5055.33 bytes/sec
+total size is 9253358  speedup is 1220.28
+sending incremental file list
+
+sent 7683 bytes  received 20 bytes  5135.33 bytes/sec
+total size is 16751831  speedup is 2174.72
+sending incremental file list
+
+sent 4308 bytes  received 24 bytes  2888.00 bytes/sec
+total size is 6387982  speedup is 1474.60
+sending incremental file list
+mercuriales/gms/2014/CENTRALES 2014/CASINO 2014.xls
+
+sent 29605 bytes  received 4941 bytes  13818.40 bytes/sec
+total size is 48858460  speedup is 1414.30
+sending incremental file list
+
+sent 5047 bytes  received 27 bytes  3382.67 bytes/sec
+total size is 39173092  speedup is 7720.36
+sending incremental file list
+operations_commerciales/DEMANDE ECHANTILLONS CL .xls
+operations_commerciales/chrono demande echantillons.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS AUCHAN 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS CASINO 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/CASINO HM/2014 HM PRIX CHOC S16 NOIX DE ST JACQUES.xls
+operations_commerciales/GMS/2014/D-REGIONS/GMS LECLERC 2014-FUTUR MASTER.xls
+operations_commerciales/MDD/MODELES VB/DEM ECHANTILLONS/2013/Chrono 707 Monoprix 231213.XLS
+
+sent 254526 bytes  received 19339 bytes  60858.89 bytes/sec
+total size is 60085360  speedup is 219.40
+sending incremental file list
+
+sent 20908 bytes  received 88 bytes  13997.33 bytes/sec
+total size is 99120505  speedup is 4720.92
+sending incremental file list
+modeles/coupelle_compo.bak
+modeles/coupelle_compo.lab
+
+sent 45256 bytes  received 1371 bytes  31084.67 bytes/sec
+total size is 32486400  speedup is 696.73
+sending incremental file list
+
+sent 63 bytes  received 12 bytes  50.00 bytes/sec
+total size is 81426432  speedup is 1085685.76
+sending incremental file list
+
+sent 7538 bytes  received 45 bytes  5055.33 bytes/sec
+total size is 9253358  speedup is 1220.28
+sending incremental file list
+
+sent 4308 bytes  received 24 bytes  2888.00 bytes/sec
+total size is 6387982  speedup is 1474.60
+sending incremental file list
+
+sent 7683 bytes  received 20 bytes  5135.33 bytes/sec
+total size is 16751831  speedup is 2174.72
+sending incremental file list
+
+sent 85 bytes  received 13 bytes  196.00 bytes/sec
+total size is 104853504  speedup is 1069933.71
+sending incremental file list
+operations_commerciales/DEMANDE ECHANTILLONS CL .xls
+operations_commerciales/chrono demande echantillons.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS AUCHAN 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS CASINO 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/CASINO HM/2014 HM PRIX CHOC S16 NOIX DE ST JACQUES.xls
+operations_commerciales/GMS/2014/D-REGIONS/GMS LECLERC 2014-FUTUR MASTER.xls
+operations_commerciales/MDD/MODELES VB/DEM ECHANTILLONS/2013/Chrono 707 Monoprix 231213.XLS
+
+sent 254526 bytes  received 19339 bytes  78247.14 bytes/sec
+total size is 60085360  speedup is 219.40
+sending incremental file list
+mercuriales/gms/2014/CENTRALES 2014/CASINO 2014.xls
+
+sent 29605 bytes  received 4941 bytes  13818.40 bytes/sec
+total size is 48858460  speedup is 1414.30
+sending incremental file list
+modeles/coupelle_compo.bak
+modeles/coupelle_compo.lab
+
+sent 45256 bytes  received 1371 bytes  31084.67 bytes/sec
+total size is 32486400  speedup is 696.73
+sending incremental file list
+
+sent 5598 bytes  received 45 bytes  3762.00 bytes/sec
+total size is 9985067  speedup is 1769.46
+sending incremental file list
+
+sent 5677 bytes  received 23 bytes  3800.00 bytes/sec
+total size is 128675317  speedup is 22574.62
+sending incremental file list
+
+sent 5353 bytes  received 38 bytes  3594.00 bytes/sec
+total size is 56169881  speedup is 10419.20
+sending incremental file list
+
+sent 48880 bytes  received 93 bytes  32648.67 bytes/sec
+total size is 282598995  speedup is 5770.51
+sending incremental file list

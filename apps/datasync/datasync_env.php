@@ -1,6 +1,6 @@
 <?php
 
-require_once('../inc/php.php');
+include '../inc/php.php';
 
 $globalConfig = new GlobalConfig();
 
@@ -18,17 +18,15 @@ $env = $globalConfig->getConf()->getExecEnvironment();
 
 switch ($env) {
     case EnvironmentConf::ENV_COD_NAME:
-echo exec('./cli/datasync_cod.sh '. $type );
+        echo exec('./cli/datasync_cod.sh ' . $type);
 
         break;
     case EnvironmentConf::ENV_DEV_NAME:
 
-echo exec('./cli/datasync_dev.sh '. $type );
+        echo exec('./cli/datasync_dev.sh ' . $type);
         break;
     case EnvironmentConf::ENV_PRD_NAME:
 
-echo exec('./cli/datasync_prd.sh '. $type );
+        echo exec('./cli/datasync_prd.sh ' . $type);
         break;
-
-   
 }

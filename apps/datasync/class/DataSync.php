@@ -23,5 +23,9 @@
  * @author tp4300001
  */
 class DataSync {
-    //put your code here
+
+    function __construct() {
+        
+    }
+
 }

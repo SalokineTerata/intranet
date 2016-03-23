@@ -15,12 +15,15 @@
 ini_set("session.use_cookies", 0);
 
 //Includes
-include ("../lib/session.php");
-include ("../lib/functions.php");
+require_once '../inc/main.php';
 
+$mode = Lib::getParameterFromRequest("mode");
+$env = Lib::getParameterFromRequest("env");
+
+$globalConfig = new GlobalConfig();
 //Dictionnaire des variables globales utilisées
 
-$bdd; //Base de données MySQL actuellement utilisée (cf. ../lib/session.php)
+$bdd = $globalConfig->getConf()->getMysqlDatabaseName(); //Base de données MySQL actuellement utilisée (cf. ../lib/session.php)
 //Définition des variables locales
 //Tout si le script est lancé via CGI ou CLI
 if ($mode) {
@@ -39,7 +42,7 @@ $CMD = "#!$SHELL\n"               //Liste des commandes envoyées au shell + Dat
         . "#Script permettant d'effectuer les copies Intersites\n"
         . "#ATTENTION !! Ce script a été autogénéré via datasync.sh\n"
         . "#Ne le modifiez qu'à l'aide du fichier PHP de l'intranet Agis\n"
-        . "echo Base MySQL sélectionnée: $bdd\n"
+        . "echo Base MySQL sélectionnée: " . $bdd . "\n"
 //           . "/data/etc/init.d/ncpmanager.sh restart\n"
 //           . "echo -n 'Démarrage de copie des données intersite à:'\n"
 //           . "date\n"
@@ -102,15 +105,21 @@ $REMOTE_USER = "root";
  */
 
 //Liste des serveurs Linux concernés
-$req = "SELECT * FROM datasync_serveur WHERE active_datasync_serveur=1 AND os_serveur_datasync_serveur='linux' ";
-$result = mysql_query($req);
 
-$CMD .="echo 'Nombre de serveur(s) Linux concerné(s): " . mysql_num_rows($result) . "'\n";
+$req = "SELECT " . DataSyncServeurModel::FIELDNAME_NOM_DATASYNC_SERVEUR . "," . DataSyncServeurModel::KEYNAME
+        . " FROM " . DataSyncServeurModel::TABLENAME . " WHERE " . DataSyncServeurModel::FIELDNAME_ACTIVE_DATASYNC_SERVEUR . "=" . DataSyncServeurModel::ACTIVE_DATASYNC_SERVEUR_TRUE
+        . " AND " . DataSyncServeurModel::FIELDNAME_OS_SERVEUR_DATASYNC_SERVEUR . "='linux' ";
+$array = DatabaseOperation::convertSqlStatementWithoutKeyToArray($req);
+
+$sqlResult = DatabaseOperation::queryPDO($req);
+$num = DatabaseOperation::getSqlNumRows($sqlResult);
+
+$CMD .="echo 'Nombre de serveur(s) Linux concerné(s): " . $num . "'\n";
 //Construction des chemins d'accès aux volumes des serveurs concernés
-while ($rows = mysql_fetch_array($result)) {
-    $MAP = "MAP_" . $rows["nom_datasync_serveur"];
+foreach ($array as $rows) {
+    $MAP = "MAP_" . $rows[DataSyncServeurModel::FIELDNAME_NOM_DATASYNC_SERVEUR];
     //$$MAP="ldcadm@".$rows["ip_datasync_serveur"].":".$MAP_ROOT_SMB."/";
-    $$MAP = $REMOTE_USER . "@" . $rows["ip_datasync_serveur"];
+    $$MAP = $REMOTE_USER . "@" . $rows[DataSyncServeurModel::KEYNAME];
 }
 
 //Lancement du script
@@ -120,22 +129,25 @@ switch ($argument_1) {
     case "-d":
     case "1":
         //Frequence de 1 (Quotidienne)
-        if (!$FREQUENCE)
+        if (!$FREQUENCE) {
             ($FREQUENCE = 1);
+        }
 
     case "--majweek":
     case "-w":
     case "2":
         //Frequence de 2 (Hebdomadaire)
-        if (!$FREQUENCE)
+        if (!$FREQUENCE) {
             ($FREQUENCE = 2);
+        }
 
     case "--virus":
     case "-v":
     case "3":
         //Frequence de groupe 3 (Antivirus)
-        if (!$FREQUENCE)
+        if (!$FREQUENCE) {
             ($FREQUENCE = 3);
+        }
 
 //Montage des systèmes de fichier Netware (ncpfs)
 //`/data/etc/init.d/ncpmanager.sh restart`;
@@ -170,21 +182,26 @@ switch ($argument_1) {
 //   $CMD .= "echo 'Logging désactivé'\n";
         }
         //Construction des commandes de copie
-        //$req="SELECT * FROM datasync_transfert WHERE frequence_synchronisation=$FREQUENCE";
-        $req = "
-          SELECT datasync_transfert . * , ORIGINE.nom_datasync_serveur AS SERVEUR_ORIGINE, DEST.nom_datasync_serveur AS SERVEUR_DEST
-          FROM datasync_transfert, datasync_serveur AS ORIGINE, datasync_serveur AS DEST
-          WHERE frequence_synchronisation =$FREQUENCE
-          AND ORIGINE.nom_datasync_serveur = nom_datasync_serveur_origine
-          AND DEST.nom_datasync_serveur = nom_datasync_serveur_destination
-          AND ORIGINE.active_datasync_serveur =1
-          AND DEST.active_datasync_serveur =1"
+        //$req="SELECT * FROM sync_transfert WHERE frequence_synchronisation=$FREQUENCE";
+        $req = "SELECT datasync_transfert . * , ORIGINE." . DataSyncServeurModel::FIELDNAME_NOM_DATASYNC_SERVEUR
+                . " AS SERVEUR_ORIGINE, DEST." . DataSyncServeurModel::FIELDNAME_NOM_DATASYNC_SERVEUR . " AS SERVEUR_DEST"
+                . " FROM " . DataSyncTransfertModel::TABLENAME . ", " . DataSyncServeurModel::TABLENAME . " AS ORIGINE, "
+                . DataSyncServeurModel::TABLENAME . " AS DEST"
+                . " WHERE " . DataSyncTransfertModel::FIELDNAME_FREQUENCE_SYNCHRONISATION . "=" . $FREQUENCE
+                . " AND ORIGINE." . DataSyncServeurModel::FIELDNAME_NOM_DATASYNC_SERVEUR . " = " . DataSyncTransfertModel::FIELDNAME_NOM_DATASYNC_SERVEUR_ORIGINE
+                . " AND DEST." . DataSyncServeurModel::FIELDNAME_NOM_DATASYNC_SERVEUR . " = " . DataSyncTransfertModel::FIELDNAME_NOM_DATASYNC_SERVEUR_DESTINATION
+                . " AND ORIGINE." . DataSyncServeurModel::FIELDNAME_ACTIVE_DATASYNC_SERVEUR . " =" . DataSyncServeurModel::ACTIVE_DATASYNC_SERVEUR_TRUE
+                . " AND DEST." . DataSyncServeurModel::FIELDNAME_ACTIVE_DATASYNC_SERVEUR . " =" . DataSyncServeurModel::ACTIVE_DATASYNC_SERVEUR_TRUE
+
         ;
-        $result1 = mysql_query($req);
+        $sqlResult = DatabaseOperation::queryPDO($req);
+        $num = DatabaseOperation::getSqlNumRows($sqlResult);
 
-        $CMD .="echo 'Nombre de dossier(s) à mettre à jour: " . mysql_num_rows($result1) . "'\necho \n";
+        $CMD .="echo 'Nombre de dossier(s) à mettre à jour: " . $num . "'\necho \n";
 
-        while ($rows1 = mysql_fetch_array($result1)) {
+        $array = DatabaseOperation::convertSqlStatementWithoutKeyToArray($req);
+
+        foreach ($array as $rows1) {
             $MAP_ORIGINE = "MAP_" . $rows1["nom_datasync_serveur_origine"];
             $MAP_DESTINATION = "MAP_" . $rows1["nom_datasync_serveur_destination"];
             $COMPLETE_FILE = $rows1["nom_fichier"];

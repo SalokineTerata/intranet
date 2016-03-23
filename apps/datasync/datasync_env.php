@@ -1,10 +1,10 @@
 <?php
 
 // Configuration des environnements
-require_once ('../conf/EnvironmentConf.php');
-require_once ('../conf/EnvironmentAbstract.php');
-require_once ('../conf/EnvironmentInit.php');
-require_once ('../lib/class/configuration/GlobalConfig.php');
+include ('../conf/EnvironmentConf.php');
+include ('../conf/EnvironmentAbstract.php');
+include ('../conf/EnvironmentInit.php');
+include ('../lib/class/configuration/GlobalConfig.php');
 
 
 $globalConfig = new GlobalConfig();

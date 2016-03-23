@@ -6,6 +6,6 @@
 TYPE="$1"
 
 
-php ./apps/upgrade/datasynch_env.php $TYPE
+php ./apps/datasync/datasync_env.php $TYPE
 
 

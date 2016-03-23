@@ -1,6 +1,6 @@
 <?php
 
-include '../inc/php.php';
+include './apps/inc/php.php';
 
 $globalConfig = new GlobalConfig();
 

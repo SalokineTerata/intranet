@@ -1,6 +1,6 @@
 <?php
 
-require_once '../inc/main.php';
+require_once('../inc/php.php');
 
 $globalConfig = new GlobalConfig();
 

@@ -12,7 +12,8 @@
  */
 class EnvironmentConf {
 
-    const CONFIG_INI_FILE = "../../config.ini";
+    const CONFIG_INI_FILE_SHELL = "/../../../../../config.ini";
+    const CONFIG_INI_FILE_NAVIGATEUR = "../../config.ini";
     const ENV_COD = 'ENV_COD';
     const ENV_COD_NAME = "Codeur";
     const ENV_DEV = 'ENV_DEV';

@@ -1,13 +1,13 @@
 <?php
 
 // Configuration des environnements
-require_once ('/u1/DATA01/webldc/cod-intranet/v3/apps/conf/EnvironmentConf.php');
-require_once ('/u1/DATA01/webldc/cod-intranet/v3/apps/conf/EnvironmentAbstract.php');
-require_once ('/u1/DATA01/webldc/cod-intranet/v3/apps/conf/EnvironmentInit.php');
-require_once ('/u1/DATA01/webldc/cod-intranet/v3/apps/lib/class/configuration/GlobalConfig.php');
+require_once ('/../../../../../../conf/EnvironmentConf.php');
+require_once ('/../../../../../../conf/EnvironmentAbstract.php');
+require_once ('/../../../../../../conf/EnvironmentInit.php');
+require_once ('/../../../../../../lib/class/configuration/GlobalConfig.php');
 
 
-$globalConfig = new GlobalConfig();
+$globalConfig = new GlobalConfig("SHELL");
 
 /**
  * Identification du type de sycnhronication

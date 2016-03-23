@@ -60,7 +60,7 @@ class GlobalConfig {
      */
     private $databaseconnexion;
 
-    function __construct() {
+    function __construct($paramEnvExec = NULL) {
 
         /**
          * Par défaut, on estime qu'il n'est pas nécessaire de reconstruire la 
@@ -102,7 +102,7 @@ class GlobalConfig {
          * la configuration de l'environnement, alors on le réalise.
          */
         if ($this->getNeedBuildConf()) {
-            $this->buildEnvironmentConf();
+            $this->buildEnvironmentConf($paramEnvExec);
         }
     }
 
@@ -185,7 +185,7 @@ class GlobalConfig {
         } //Fin des enregistrements MySQL en session
     }
 
-    function buildEnvironmentConf() {
+    function buildEnvironmentConf($paramExec = NULL) {
         /*
           Initialisation des variables de sessions et de connexions:
          */
@@ -193,7 +193,12 @@ class GlobalConfig {
         /*
          * Chargement de la configuration
          */
-        $initFile = parse_ini_file(EnvironmentConf::CONFIG_INI_FILE, TRUE);
+        if (!$paramExec) {
+            $envConfig = EnvironmentConf::CONFIG_INI_FILE_NAVIGATEUR;
+        } else {
+            $envConfig = EnvironmentConf::CONFIG_INI_FILE_SHELL;
+        }
+        $initFile = parse_ini_file($envConfig, TRUE);
         //print_r($initFile);
 
         /*
@@ -203,7 +208,7 @@ class GlobalConfig {
         if ($serverNameReal == NULL) {
             $serverNameReal = filter_input(INPUT_SERVER, 'SERVER_NAME');
         }
-        
+
         /*
          * Tableau de configuration du paramètres URL_SERVER_NAME 
          */

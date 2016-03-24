@@ -11,7 +11,7 @@ $type = $argv[1];
 /**
  * Détermination de l'environnement
  */
-$serverName = exec(`hostname`);
+$serverName = file_get_contents("/etc/hostname");
 
 switch ($serverName) {
     case "cod-intranet.agis.fr":

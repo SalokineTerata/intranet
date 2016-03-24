@@ -42,7 +42,6 @@ $CMD = "#!$SHELL\n"               //Liste des commandes envoyées au shell + Dat
         . "#Script permettant d'effectuer les copies Intersites\n"
         . "#ATTENTION !! Ce script a été autogénéré via datasync.sh\n"
         . "#Ne le modifiez qu'à l'aide du fichier PHP de l'intranet Agis\n"
-        . "echo Base MySQL sélectionnée: " . $bdd . "\n"
 //           . "/data/etc/init.d/ncpmanager.sh restart\n"
 //           . "echo -n 'Démarrage de copie des données intersite à:'\n"
 //           . "date\n"
@@ -183,8 +182,10 @@ switch ($argument_1) {
         }
         //Construction des commandes de copie
         //$req="SELECT * FROM sync_transfert WHERE frequence_synchronisation=$FREQUENCE";
-        $req = "SELECT datasync_transfert . * , ORIGINE." . DataSyncServeurModel::FIELDNAME_NOM_DATASYNC_SERVEUR
-                . " AS SERVEUR_ORIGINE, DEST." . DataSyncServeurModel::FIELDNAME_NOM_DATASYNC_SERVEUR . " AS SERVEUR_DEST"
+        $req = "SELECT " . DataSyncTransfertModel::FIELDNAME_NOM_DATASYNC_SERVEUR_DESTINATION
+                . "," . DataSyncTransfertModel::FIELDNAME_NOM_DATASYNC_SERVEUR_ORIGINE
+                . "," . DataSyncTransfertModel::FIELDNAME_NOM_FICHIER              
+                . "," . DataSyncTransfertModel::FIELDNAME_COPIE_SAUVEGARDE              
                 . " FROM " . DataSyncTransfertModel::TABLENAME . ", " . DataSyncServeurModel::TABLENAME . " AS ORIGINE, "
                 . DataSyncServeurModel::TABLENAME . " AS DEST"
                 . " WHERE " . DataSyncTransfertModel::FIELDNAME_FREQUENCE_SYNCHRONISATION . "=" . $FREQUENCE

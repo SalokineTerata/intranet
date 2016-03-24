@@ -25,7 +25,7 @@ case $TYPE in
   	#Génération et mise à jour des scripts utilis�s
 	echo -n "Démarrage : " >> $MAIL
 	date >> $MAIL
-	lynx -dump cod-intranet.agis.fr/v3/apps/datasync/index.php?mode=$TYPE&env=Codeur >> $LOG
+	lynx -dump -accept_all_cookies http://cod-intranet.agis.fr/v3/apps/datasync/index.php?mode=$TYPE&env=Codeur  >> $LOG
 	
 #	if [ $DEBUG = 1 ] ; then
 #	  $CHEMIN/netcopy.sh

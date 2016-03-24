@@ -11,6 +11,7 @@ $type = $argv[1];
 /**
  * Détermination de l'environnement
  */
+$serverName2 = $_SERVER["SERVER_ADDR"];
 $serverName = $_SERVER["SERVER_NAME"];
 
 switch ($serverName) {

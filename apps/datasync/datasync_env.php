@@ -11,8 +11,7 @@ $type = $argv[1];
 /**
  * Détermination de l'environnement
  */
-$serverName2 = $_SERVER["SERVER_ADDR"];
-$serverName = $_SERVER["SERVER_NAME"];
+$serverName = exec(`hostname`);
 
 switch ($serverName) {
     case "cod-intranet.agis.fr":
@@ -27,4 +26,7 @@ switch ($serverName) {
 
         echo exec('./cli/datasync_prd.sh ' . $type);
         break;
+    
+    default :
+        echo $serverName;
 }

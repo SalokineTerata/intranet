@@ -291,9 +291,9 @@ echo ('</select></br>');
 
 $type4 = 4;
 $arrayUserType4 = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
-                'SELECT ' . UserModel::FIELDNAME_NOM . ', ' . UserModel::FIELDNAME_PRENOM
-                . ', ' . CatsoproModel::FIELDNAME_INTITULE_CAT . ', ' . AccessMaterielServiceModel::FIELDNAME_NOM_SERVICE
-                . ' FROM ' . AccessMaterielServiceModel::TABLENAME . ',' . UserModel::TABLENAME
+                'SELECT DISTINCT ' . UserModel::FIELDNAME_NOM . ', ' . UserModel::FIELDNAME_PRENOM
+                . ', ' . CatsoproModel::FIELDNAME_INTITULE_CAT 
+                . ' FROM '  . UserModel::TABLENAME
                 . ', ' . CatsoproModel::TABLENAME
                 . ' WHERE ' . UserModel::TABLENAME . '.' . UserModel::FIELDNAME_ID_TYPE . '=' . $type4
                 . ' AND ' . UserModel::TABLENAME . '.' . UserModel::FIELDNAME_ID_CATSOPRO . '=' . CatsoproModel::TABLENAME . '.' . CatsoproModel::KEYNAME
@@ -303,12 +303,10 @@ if ($arrayUserType4) {
     foreach ($arrayUserType4 as $rowsUser) {
         $paramUserPrenom = $rowsUser[UserModel::FIELDNAME_PRENOM];
         $paramUserNom = $rowsUser[UserModel::FIELDNAME_NOM];
-        $intitule_ser = $rowsUser[AccessMaterielServiceModel::FIELDNAME_NOM_SERVICE];
         $intitule_cat = $rowsUser[CatsoproModel::FIELDNAME_INTITULE_CAT];
 
         echo ('<tr>');
         echo ('<td class=\'loginFFFFFF\'>' . $paramUserPrenom . ' ' . $paramUserNom . '</td>');
-        echo ('<td class=\'loginFFFFFF\'>' . $intitule_ser . '</td>');
         echo ('<td class=\'loginFFFFFF\'>' . $intitule_cat . '</td>');
         echo ('</tr>');
     }
@@ -322,8 +320,8 @@ if ($arrayUserType4) {
 $type3 = 3;
 $arrayUserType3 = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
                 'SELECT ' . UserModel::FIELDNAME_NOM . ', ' . UserModel::FIELDNAME_PRENOM
-                . ', ' . CatsoproModel::FIELDNAME_INTITULE_CAT . ', ' . AccessMaterielServiceModel::FIELDNAME_NOM_SERVICE
-                . ' FROM ' . AccessMaterielServiceModel::TABLENAME . ',' . UserModel::TABLENAME
+                . ', ' . CatsoproModel::FIELDNAME_INTITULE_CAT 
+                . ' FROM '  . UserModel::TABLENAME
                 . ', ' . CatsoproModel::TABLENAME
                 . ' WHERE ' . UserModel::TABLENAME . '.' . UserModel::FIELDNAME_ID_TYPE . '=' . $type3
                 . ' AND ' . UserModel::TABLENAME . '.' . UserModel::FIELDNAME_ID_CATSOPRO . '=' . CatsoproModel::TABLENAME . '.' . CatsoproModel::KEYNAME
@@ -333,13 +331,11 @@ if ($arrayUserType3) {
     foreach ($arrayUserType3 as $rowsUser) {
         $paramUserPrenom = $rowsUser[UserModel::FIELDNAME_PRENOM];
         $paramUserNom = $rowsUser[UserModel::FIELDNAME_NOM];
-        $intitule_ser = $rowsUser[AccessMaterielServiceModel::FIELDNAME_NOM_SERVICE];
         $intitule_cat = $rowsUser[CatsoproModel::FIELDNAME_INTITULE_CAT];
 
 
         echo ('<tr>');
         echo ('<td class=\'loginFFFFFF\'>' . $paramUserPrenom . ' ' . $paramUserNom . '</td>');
-        echo ('<td class=\'loginFFFFFF\'>' . $intitule_ser . '</td>');
         echo ('<td class=\'loginFFFFFF\'>' . $intitule_cat . '</td>');
         echo ('</tr>');
     }
@@ -353,8 +349,8 @@ if ($arrayUserType3) {
 $type2 = 2;
 $arrayUserType2 = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
                 'SELECT ' . UserModel::FIELDNAME_NOM . ', ' . UserModel::FIELDNAME_PRENOM
-                . ', ' . CatsoproModel::FIELDNAME_INTITULE_CAT . ', ' . AccessMaterielServiceModel::FIELDNAME_NOM_SERVICE
-                . ' FROM ' . AccessMaterielServiceModel::TABLENAME . ',' . UserModel::TABLENAME
+                . ', ' . CatsoproModel::FIELDNAME_INTITULE_CAT 
+                . ' FROM ' . UserModel::TABLENAME
                 . ', ' . CatsoproModel::TABLENAME
                 . ' WHERE ' . UserModel::TABLENAME . '.' . UserModel::FIELDNAME_ID_TYPE . '=' . $type2
                 . ' AND ' . UserModel::TABLENAME . '.' . UserModel::FIELDNAME_ID_CATSOPRO . '=' . CatsoproModel::TABLENAME . '.' . CatsoproModel::KEYNAME
@@ -364,13 +360,11 @@ if ($arrayUserType2) {
     foreach ($arrayUserType2 as $rowsUser) {
         $paramUserPrenom = $rowsUser[UserModel::FIELDNAME_PRENOM];
         $paramUserNom = $rowsUser[UserModel::FIELDNAME_NOM];
-        $intitule_ser = $rowsUser[AccessMaterielServiceModel::FIELDNAME_NOM_SERVICE];
         $intitule_cat = $rowsUser[CatsoproModel::FIELDNAME_INTITULE_CAT];
 
 
         echo ('<tr>');
         echo ('<td class=\'loginFFFFFF\'>' . $paramUserPrenom . ' ' . $paramUserNom . '</td>');
-        echo ('<td class=\'loginFFFFFF\'>' . $intitule_ser . '</td>');
         echo ('<td class=\'loginFFFFFF\'>' . $intitule_cat . '</td>');
         echo ('</tr>');
     }
@@ -384,8 +378,8 @@ if ($arrayUserType2) {
 $type1 = 1;
 $arrayUserType1 = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
                 'SELECT ' . UserModel::FIELDNAME_NOM . ', ' . UserModel::FIELDNAME_PRENOM
-                . ', ' . CatsoproModel::FIELDNAME_INTITULE_CAT . ', ' . AccessMaterielServiceModel::FIELDNAME_NOM_SERVICE
-                . ' FROM ' . AccessMaterielServiceModel::TABLENAME . ',' . UserModel::TABLENAME
+                . ', ' . CatsoproModel::FIELDNAME_INTITULE_CAT 
+                . ' FROM '  . UserModel::TABLENAME
                 . ', ' . CatsoproModel::TABLENAME
                 . ' WHERE ' . UserModel::TABLENAME . '.' . UserModel::FIELDNAME_ID_TYPE . '=' . $type1
                 . ' AND ' . UserModel::TABLENAME . '.' . UserModel::FIELDNAME_ID_CATSOPRO . '=' . CatsoproModel::TABLENAME . '.' . CatsoproModel::KEYNAME
@@ -395,12 +389,10 @@ if ($arrayUserType1) {
     foreach ($arrayUserType1 as $rowsUser) {
         $paramUserPrenom = $rowsUser[UserModel::FIELDNAME_PRENOM];
         $paramUserNom = $rowsUser[UserModel::FIELDNAME_NOM];
-        $intitule_ser = $rowsUser[AccessMaterielServiceModel::FIELDNAME_NOM_SERVICE];
         $intitule_cat = $rowsUser[CatsoproModel::FIELDNAME_INTITULE_CAT];
 
         echo ('<tr>');
         echo ('<td class=\'loginFFFFFF\'>' . $paramUserPrenom . ' ' . $paramUserNom . '</td>');
-        echo ('<td class=\'loginFFFFFF\'>' . $intitule_ser . '</td>');
         echo ('<td class=\'loginFFFFFF\'>' . $intitule_cat . '</td>');
         echo ('</tr>');
     }

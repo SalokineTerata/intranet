@@ -2145,4 +2145,130 @@ class FtaModel extends AbstractModel {
      * --> Si valeur existante alors affichage.
      */
 //    }
+
+    /**
+     * Vérification que les champs arcadia déduit de la classifcation
+     * sont correcte
+     * @param type $paramIdClassificationFta2
+     */
+    function checkArcadiaClassifData($paramIdClassificationFta2) {
+        /**
+         * Famille Budget
+         */
+        $idArcadiaFamilleBudget = $this->getDataField(FtaModel::FIELDNAME_ID_ARCADIA_FAMILLE_BUDGET)->getFieldValue();
+
+        if ($idArcadiaFamilleBudget) {
+            $reqFamilleBudget = "SELECT DISTINCT " . ArcadiaFamilleBudgetModel::KEYNAME . "," . ArcadiaFamilleBudgetModel::KEYNAME
+                    . " FROM " . ArcadiaFamilleBudgetModel::TABLENAME
+                    . " ORDER BY " . ArcadiaFamilleBudgetModel::KEYNAME;
+            $arrayClassificationArcadiaFamilleBudget = DatabaseOperation::convertSqlStatementWithKeyAndOneFieldToArray($reqFamilleBudget);
+
+            if (!in_array($idArcadiaFamilleBudget, $arrayClassificationArcadiaFamilleBudget)) {
+                $this->getDataField(FtaModel::FIELDNAME_ID_ARCADIA_FAMILLE_BUDGET)->setFieldValue(" ");
+            }
+        }
+
+
+        /**
+         * Famille de Ventes
+         */
+        $idArcadiaFamilleVente = $this->getDataField(FtaModel::FIELDNAME_ID_ARCADIA_FAMILLE_VENTE)->getFieldValue();
+        if ($idArcadiaFamilleVente) {
+            $idActivite = ClassificationFta2Model::getIdClassificationTypeByTypeNameAndIdClassificationFta2($paramIdClassificationFta2, ClassificationFta2Model::FIELDNAME_ID_ACTIVITE);
+
+            $arrayClassificationFamilleVenteArcadia = DatabaseOperation::convertSqlStatementWithKeyAndOneFieldToArray(
+                            'SELECT DISTINCT ' . ArcadiaFamilleVenteModel::TABLENAME . '.' . ArcadiaFamilleVenteModel::KEYNAME
+                            . ',' . ArcadiaFamilleVenteModel::TABLENAME . '.' . ArcadiaFamilleVenteModel::KEYNAME
+                            . ' FROM ' . ArcadiaFamilleVenteModel::TABLENAME . ',' . ClassificationActiviteFamilleVentesArcadiaModel::TABLENAME
+                            . ' WHERE ' . ArcadiaFamilleVenteModel::TABLENAME . '.' . ArcadiaFamilleVenteModel::KEYNAME
+                            . ' = ' . ClassificationActiviteFamilleVentesArcadiaModel::TABLENAME . '.' . ClassificationActiviteFamilleVentesArcadiaModel::FIELDNAME_ID_ARCADIA_FAMILLE_VENTE
+                            . ' AND ' . ClassificationActiviteFamilleVentesArcadiaModel::FIELDNAME_ID_ACTIVITE . '=' . $idActivite
+                            . ' ORDER BY ' . ArcadiaFamilleVenteModel::FIELDNAME_NOM_ARCADIA_FAMILLE_VENTE
+            );
+
+            if (!in_array($idArcadiaFamilleVente, $arrayClassificationFamilleVenteArcadia)) {
+                $this->getDataField(FtaModel::FIELDNAME_ID_ARCADIA_FAMILLE_VENTE)->setFieldValue(" ");
+            }
+        }
+
+        /**
+         * Gamme Coop
+         */
+        $idArcadiaGammeCoop = $this->getDataField(FtaModel::FIELDNAME_ID_ARCADIA_GAMME_COOP)->getFieldValue();
+
+        if ($idArcadiaGammeCoop) {
+            $reqGammeCoop = "SELECT DISTINCT " . ArcadiaGammeCoopModel::KEYNAME . "," . ArcadiaGammeCoopModel::KEYNAME
+                    . " FROM " . ArcadiaGammeCoopModel::TABLENAME
+                    . " ORDER BY " . ArcadiaGammeCoopModel::KEYNAME;
+            $arrayClassificationArcadiaGammeCoop = DatabaseOperation::convertSqlStatementWithKeyAndOneFieldToArray($reqGammeCoop);
+
+            if (!in_array($idArcadiaGammeCoop, $arrayClassificationArcadiaGammeCoop)) {
+                $this->getDataField(FtaModel::FIELDNAME_ID_ARCADIA_GAMME_COOP)->setFieldValue(" ");
+            }
+        }
+
+        /**
+         * Gamme Famille Budget
+         */
+        $idArcadiaGammeFamilleBudget = $this->getDataField(FtaModel::FIELDNAME_ID_ARCADIA_GAMME_FAMILLE_BUDGET)->getFieldValue();
+
+        if ($idArcadiaGammeFamilleBudget) {
+            $arrayGammeFamilleBudget = DatabaseOperation::convertSqlStatementWithKeyAndOneFieldToArray(
+                            'SELECT DISTINCT ' . ArcadiaGammeFamilleBudgetModel::TABLENAME . '.' . ArcadiaGammeFamilleBudgetModel::KEYNAME
+                            . ',' . ArcadiaGammeFamilleBudgetModel::TABLENAME . '.' . ArcadiaGammeFamilleBudgetModel::KEYNAME
+                            . ' FROM ' . ArcadiaGammeFamilleBudgetModel::TABLENAME . ',' . ClassificationGammeFamilleBudgetArcadiaModel::TABLENAME
+                            . ' WHERE ' . ArcadiaGammeFamilleBudgetModel::TABLENAME . '.' . ArcadiaGammeFamilleBudgetModel::KEYNAME
+                            . ' = ' . ClassificationGammeFamilleBudgetArcadiaModel::TABLENAME . '.' . ClassificationGammeFamilleBudgetArcadiaModel::FIELDNAME_ID_ARCADIA_GAMME_FAMILLE_BUDGET
+                            . ' AND ' . ClassificationGammeFamilleBudgetArcadiaModel::FIELDNAME_ID_FTA_CLASSIFICATION2 . '=' . $paramIdClassificationFta2
+                            . ' ORDER BY ' . ArcadiaGammeFamilleBudgetModel::KEYNAME
+            );
+            if (!in_array($idArcadiaGammeFamilleBudget, $arrayGammeFamilleBudget)) {
+                $this->getDataField(FtaModel::FIELDNAME_ID_ARCADIA_GAMME_FAMILLE_BUDGET)->setFieldValue(" ");
+            }
+        }
+
+        /**
+         * Arcadia Marque
+         */
+        $idArcadiaMarque = $this->getDataField(FtaModel::FIELDNAME_ID_ARCADIA_MARQUE)->getFieldValue();
+
+        if ($idArcadiaMarque) {
+            $idMarque = ClassificationFta2Model::getIdClassificationTypeByTypeNameAndIdClassificationFta2($paramIdClassificationFta2, ClassificationFta2Model::FIELDNAME_ID_MARQUE);
+            $arrayClassificationMarqueArcadia = DatabaseOperation::convertSqlStatementWithKeyAndOneFieldToArray(
+                            'SELECT DISTINCT ' . ArcadiaMarqueModel::TABLENAME . '.' . ArcadiaMarqueModel::KEYNAME
+                            . ',' . ArcadiaMarqueModel::TABLENAME . '.' . ArcadiaMarqueModel::KEYNAME
+                            . ' FROM ' . ArcadiaMarqueModel::TABLENAME . ',' . ClassificationMarqueArcadiaModel::TABLENAME
+                            . ' WHERE ' . ArcadiaMarqueModel::TABLENAME . '.' . ArcadiaMarqueModel::KEYNAME
+                            . ' = ' . ClassificationMarqueArcadiaModel::TABLENAME . '.' . ClassificationMarqueArcadiaModel::FIELDNAME_ID_ARCADIA_MARQUE
+                            . ' AND ' . ClassificationMarqueArcadiaModel::FIELDNAME_ID_MARQUE . '=' . $idMarque
+                            . ' ORDER BY ' . ArcadiaMarqueModel::FIELDNAME_NOM_ARCADIA_MARQUE
+            );
+            if (!in_array($idArcadiaMarque, $arrayClassificationMarqueArcadia)) {
+                $this->getDataField(FtaModel::FIELDNAME_ID_ARCADIA_MARQUE)->setFieldValue(" ");
+            }
+        }
+
+        /**
+         * Sous Famille
+         */
+        $idArcadiaSousFamille = $this->getDataField(FtaModel::FIELDNAME_ID_ARCADIA_SOUS_FAMILLE)->getFieldValue();
+        if ($idArcadiaSousFamille) {
+            $idActivite = ClassificationFta2Model::getIdClassificationTypeByTypeNameAndIdClassificationFta2($paramIdClassificationFta2, ClassificationFta2Model::FIELDNAME_ID_ACTIVITE);
+
+            $arrayClassificationActiviteSousFamilleArcadia = DatabaseOperation::convertSqlStatementWithKeyAndOneFieldToArray(
+                            'SELECT DISTINCT ' . ArcadiaSousFamilleModel::TABLENAME . '.' . ArcadiaSousFamilleModel::KEYNAME
+                            . ',' . ArcadiaSousFamilleModel::TABLENAME . '.' . ArcadiaSousFamilleModel::KEYNAME
+                            . ' FROM ' . ArcadiaSousFamilleModel::TABLENAME . ',' . ClassificationActiviteSousFamilleArcadiaModel::TABLENAME
+                            . ' WHERE ' . ArcadiaSousFamilleModel::TABLENAME . '.' . ArcadiaSousFamilleModel::KEYNAME
+                            . ' = ' . ClassificationActiviteSousFamilleArcadiaModel::TABLENAME . '.' . ClassificationActiviteSousFamilleArcadiaModel::FIELDNAME_ID_ARCADIA_SOUS_FAMILLE
+                            . ' AND ' . ClassificationActiviteSousFamilleArcadiaModel::FIELDNAME_ID_ACTIVITE . '=' . $idActivite
+                            . ' ORDER BY ' . ArcadiaSousFamilleModel::FIELDNAME_NOM_ARCADIA_SOUS_FAMILLE
+            );
+
+            if (!in_array($idArcadiaSousFamille, $arrayClassificationActiviteSousFamilleArcadia)) {
+                $this->getDataField(FtaModel::FIELDNAME_ID_ARCADIA_SOUS_FAMILLE)->setFieldValue(" ");
+            }
+        }
+    }
+
 }

@@ -767,6 +767,6 @@ class ClassificationFta2Model extends AbstractModel {
                 . AccueilFta::afficherRequeteEnListeDeroulante($reqClassification, $paramIdDefaut, $paramNomDefaut, $paramIsEditable, TRUE) . ' ' . $image_modif . '</td></tr>';
 
         return $listeClassification;
-    }
+    }    
 
 }

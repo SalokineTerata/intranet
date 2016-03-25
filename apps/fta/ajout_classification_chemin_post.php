@@ -55,6 +55,12 @@ if ($selection_saisonnalite) {
                     , $selection_rayon, $selection_environnement
                     , $selection_reseau, $selection_saisonnalite);
     $modelFta->getDataField(FtaModel::FIELDNAME_ID_FTA_CLASSIFICATION2)->setFieldValue($idClassification2);
+    
+     /**
+     * Vérification que la classification est des données correspondantes Arcadia
+     */
+    $modelFta->checkArcadiaClassifData($idClassification2);
+    
 }
 $abreviationFtaEtat = $modelFta->getModelFtaEtat()->getDataField(FtaEtatModel::FIELDNAME_ABREVIATION)->getFieldValue();
 

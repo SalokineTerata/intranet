@@ -377,44 +377,45 @@ if ($result) {
             $data_format[2] = "";
             fpdf_write_data($title, $data, $title_format, $data_format, $pdf);
 
-            $txt = "Valeurs nutritionnelles pour 100g";
+            if (FALSE) {
+                $txt = "Valeurs nutritionnelles pour 100g";
 
-            $pdf->MultiCell(0, 5, $txt, $border = 1, $align = 'C', $fill = 0);
+                $pdf->MultiCell(0, 5, $txt, $border = 1, $align = 'C', $fill = 0);
 
-            $data = "\n" . $val_nut_kcal
-                    . "\n" . $val_nut_kj
-                    . "\n" . $val_nut_mat_grasse
-                    . "\n" . $val_nut_acide_gras
-                    . "\n" . $val_nut_glucide
-                    . "\n" . $val_nut_sucre
-                    . "\n" . $val_nut_proteine
-                    . "\n" . $val_nut_sel;
+                $data = "\n" . $val_nut_kcal
+                        . "\n" . $val_nut_kj
+                        . "\n" . $val_nut_mat_grasse
+                        . "\n" . $val_nut_acide_gras
+                        . "\n" . $val_nut_glucide
+                        . "\n" . $val_nut_sucre
+                        . "\n" . $val_nut_proteine
+                        . "\n" . $val_nut_sel;
 
-            $data_table = array(
-                /**
-                 * Affichage des valeurs nutritionnelles pour 100g
-                 */
-                array($NOM_val_nut_kcal, $val_nut_kcal),
-                array($NOM_val_nut_kj, $val_nut_kj),
-                array($NOM_val_nut_mat_grasse, $val_nut_mat_grasse),
-                array($NOM_val_nut_acide_gras, $val_nut_acide_gras),
-                array($NOM_val_nut_glucide, $val_nut_glucide),
-                array($NOM_val_nut_sucre, $val_nut_sucre),
-                array($NOM_val_nut_proteine, $val_nut_proteine),
-                array($NOM_val_nut_sel, $val_nut_sel)
-            );
+                $data_table = array(
+                    /**
+                     * Affichage des valeurs nutritionnelles pour 100g
+                     */
+                    array($NOM_val_nut_kcal, $val_nut_kcal),
+                    array($NOM_val_nut_kj, $val_nut_kj),
+                    array($NOM_val_nut_mat_grasse, $val_nut_mat_grasse),
+                    array($NOM_val_nut_acide_gras, $val_nut_acide_gras),
+                    array($NOM_val_nut_glucide, $val_nut_glucide),
+                    array($NOM_val_nut_sucre, $val_nut_sucre),
+                    array($NOM_val_nut_proteine, $val_nut_proteine),
+                    array($NOM_val_nut_sel, $val_nut_sel)
+                );
 
-            foreach ($data_table as $information) {
-                $title = $information[0];
-                $data = $information[1];
+                foreach ($data_table as $information) {
+                    $title = $information[0];
+                    $data = $information[1];
 
-                $title_format = $t3_format;
-                $title_format[4] = 50;
-                $data_format = $contenu_format;
-                $data_format[4] = 0;   //Personalisation de la largeur de la colonne
-                fpdf_write_data($title, $data, $title_format, $data_format, $pdf);
+                    $title_format = $t3_format;
+                    $title_format[4] = 50;
+                    $data_format = $contenu_format;
+                    $data_format[4] = 0;   //Personalisation de la largeur de la colonne
+                    fpdf_write_data($title, $data, $title_format, $data_format, $pdf);
+                }
             }
-
 
             $marge_basse2 = $pdf->GetY();
 

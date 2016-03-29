@@ -663,10 +663,22 @@ class FtaView extends AbstractView {
              * Affichage Html
              */
             $htmlCodeProduitOptiv = $this->getHtmlDataField(FtaModel::FIELDNAME_ID_ARCADIA_CATEGEORIE_PRODUIT_OPTIVENTES);
-
-            $htmlReturn = $htmlCodeProduitOptiv;
+            $htmlReturn = '<tr class=titre_principal><td class>Classification ARCADIA</td></tr>';
+            $htmlReturn .= $htmlCodeProduitOptiv;
         }
         return $htmlReturn;
+    }
+
+    /**
+     * On affiche le raccourcis de classification
+     */
+    public function getHtmlClassificationRaccourcisView() {
+        $htmlClassificationRaccourcis = "";
+        $idClassificationFta2 = $this->getModel()->getDataField(FtaModel::FIELDNAME_ID_FTA_CLASSIFICATION2)->getFieldValue();
+        if ($idClassificationFta2) {
+            $htmlClassificationRaccourcis = $this->getHtmlClassificationRaccourcis();
+        }
+        return $htmlClassificationRaccourcis;
     }
 
     /**
@@ -683,14 +695,12 @@ class FtaView extends AbstractView {
             $htmlGammeCoop = $this->getHtmlDataField(FtaModel::FIELDNAME_ID_ARCADIA_GAMME_COOP);
 
             $htmlArcadiaGammeFamileBudget = $this->getHtmlArcadiaGammeFamileBudget();
-            $htmlClassificationRaccourcis = $this->getHtmlClassificationRaccourcis();
             $htmlArcadiaSousFamille = $this->getHtmlArcadiaSousFamille();
             $htmlArcadiaFamilleVente = $this->getHtmlArcadiaFamilleVenteArcadia();
             $htmlArcadiaMarque = $this->getHtmlArcadiaMarque();
 
 
-            $htmlReturn = $htmlClassificationRaccourcis
-                    . $htmlArcadiaMarque
+            $htmlReturn = $htmlArcadiaMarque
                     . $htmlArcadiaFamilleVente
                     . $htmlArcadiaSousFamille
                     . $htmlFamilleBudget
@@ -1990,9 +2000,8 @@ class FtaView extends AbstractView {
                 . '&demande_abreviation_fta_transition=' . $paramDemandeAbreviationFtaEtat
                 . '>' . FtaController::CALLBACK_LINK_TO_TRANSITER_PAGE . '</a></center></td>';
     }
-    
-    
-     /**
+
+    /**
      * Affiche le bouton de retour vers la Fta
      * @return string
      */
@@ -2007,4 +2016,5 @@ class FtaView extends AbstractView {
                 . $paramChapitres
                 . '>' . FtaController::CALLBACK_LINK_TO_TRANSITER_PAGE_VALIDATE . '</a></center></td>';
     }
+
 }

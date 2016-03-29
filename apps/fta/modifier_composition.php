@@ -742,18 +742,6 @@ $bloc .= "</td></tr>
         ";
 
 /**
- * Energie en kcal
- */
-//$bloc .= "<tr><td " . $color_modif . ">" . DatabaseDescription::getFieldDocLabel(FtaComposantModel::TABLENAME, FtaComposantModel::FIELDNAME_VAL_NUT_KCAL) . "</td><td " . $color_modif . ">";
-//if ($proprietaire) {
-//    $bloc .= "<input type=text name=" . FtaComposantModel::FIELDNAME_VAL_NUT_KCAL . " value='" . $val_nut_kcal . "' size=50/>";
-//} else {
-//    $bloc .=$val_nut_kcal;
-//    $bloc .= "<input type=hidden name=" . FtaComposantModel::FIELDNAME_VAL_NUT_KCAL . " value='" . $val_nut_kcal . "'/>";
-$bloc .=$ftaComposantView->getHtmlDataField(FtaComposantModel::FIELDNAME_VAL_NUT_KCAL);
-
-//}
-/**
  * Energie en kJ
  */
 //$bloc .= "<tr><td " . $color_modif . ">" . DatabaseDescription::getFieldDocLabel(FtaComposantModel::TABLENAME, FtaComposantModel::FIELDNAME_VAL_NUT_KJ) . "</td><td " . $color_modif . ">";
@@ -765,6 +753,19 @@ $bloc .=$ftaComposantView->getHtmlDataField(FtaComposantModel::FIELDNAME_VAL_NUT
 $bloc .=$ftaComposantView->getHtmlDataField(FtaComposantModel::FIELDNAME_VAL_NUT_KJ);
 
 //}
+//}
+
+
+/**
+ * Energie en kcal
+ */
+//$bloc .= "<tr><td " . $color_modif . ">" . DatabaseDescription::getFieldDocLabel(FtaComposantModel::TABLENAME, FtaComposantModel::FIELDNAME_VAL_NUT_KCAL) . "</td><td " . $color_modif . ">";
+//if ($proprietaire) {
+//    $bloc .= "<input type=text name=" . FtaComposantModel::FIELDNAME_VAL_NUT_KCAL . " value='" . $val_nut_kcal . "' size=50/>";
+//} else {
+//    $bloc .=$val_nut_kcal;
+//    $bloc .= "<input type=hidden name=" . FtaComposantModel::FIELDNAME_VAL_NUT_KCAL . " value='" . $val_nut_kcal . "'/>";
+$bloc .=$ftaComposantView->getHtmlDataField(FtaComposantModel::FIELDNAME_VAL_NUT_KCAL);
 
 /**
  * Matières grasses

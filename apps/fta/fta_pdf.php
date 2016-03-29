@@ -382,21 +382,12 @@ if ($result) {
 
                 $pdf->MultiCell(0, 5, $txt, $border = 1, $align = 'C', $fill = 0);
 
-                $data = "\n" . $val_nut_kcal
-                        . "\n" . $val_nut_kj
-                        . "\n" . $val_nut_mat_grasse
-                        . "\n" . $val_nut_acide_gras
-                        . "\n" . $val_nut_glucide
-                        . "\n" . $val_nut_sucre
-                        . "\n" . $val_nut_proteine
-                        . "\n" . $val_nut_sel;
-
                 $data_table = array(
                     /**
                      * Affichage des valeurs nutritionnelles pour 100g
                      */
-                    array($NOM_val_nut_kcal, $val_nut_kcal),
                     array($NOM_val_nut_kj, $val_nut_kj),
+                    array($NOM_val_nut_kcal, $val_nut_kcal),
                     array($NOM_val_nut_mat_grasse, $val_nut_mat_grasse),
                     array($NOM_val_nut_acide_gras, $val_nut_acide_gras),
                     array($NOM_val_nut_glucide, $val_nut_glucide),

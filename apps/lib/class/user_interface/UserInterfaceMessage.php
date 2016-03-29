@@ -100,6 +100,8 @@ class UserInterfaceMessage {
     const FR_WARNING_VALIDATION_RULES_LESS5 = " | Cette donnée a dépassé cinq caractères ";
     const FR_WARNING_VALIDATION_RULES_LESS8 = " | Cette donnée a dépassé huit caractères ";
     const FR_WARNING_VALIDATION_RULES_DATA_NOT_EMPTY = " | Cette donnée doit être saisie ";
+    const FR_WARNING_VALIDATION_RULES_DATA_NOT_SMALL = " | Cette donnée doit contenir que des majuscules ";
+    const FR_WARNING_VALIDATION_RULES_DATA_NOT_SPECIAL = " | Cette donnée ne doit pas contenir des caractères spéciaux ";
     const FR_WARNING_WORKFLOW_INACTIF_1 = "L'espace de travail \"";
     const FR_WARNING_WORKFLOW_INACTIF_2 = "\" est inactif";
     const FR_WARNING_WORKFLOW_INACTIF_TITLE = "Espace de travail inactif.";

@@ -40,7 +40,7 @@ class DataNotSmallRulesValidation extends AbstractRulesValidation {
         $result = TRUE;
         $valueToTest = $this->getValueTotest();
 
-        $checkCaractereNumber = ctype_upper($valueToTest);
+        $checkCaractereNumber = FtaController::isStringIsUperCase($valueToTest);
         if (!$checkCaractereNumber) {
             $result = FALSE;
         }

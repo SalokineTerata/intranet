@@ -194,6 +194,15 @@ class FtaController {
         }
     }
 
+    /**
+     * On vérifie si un text ne contient que des majuscule en excluant les espaces auparavant
+     * @param type $paramString
+     * @return type
+     */
+    public static function isStringIsUperCase($paramString) {
+        return ctype_upper(str_replace(' ', '', $paramString));
+    }
+
 }
 
 ?>

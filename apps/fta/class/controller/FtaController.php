@@ -1,5 +1,4 @@
 <?php
-
 /*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
@@ -203,6 +202,14 @@ class FtaController {
         return ctype_upper(str_replace(' ', '', $paramString));
     }
 
-}
+    /**
+     * On vérifie si un text contient des caractère spéciaux en excluant les espaces auparavant
+     * @param type $paramString
+     * @return type
+     */
+    public static function isStringHasSpecialCaracter($paramString, $paramCheckList) {
+        return preg_match($paramCheckList, str_replace(' ', '', $paramString));
+    }
 
-?>
+}
+?>s

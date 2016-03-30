@@ -92,6 +92,8 @@ class UserInterfaceMessage {
     const FR_WARNING_PARAM_ID_FTA_NOT_EXISTANT = "Erreur la Fta n'existe pas.<br><br>";
     const FR_WARNING_PARAM_ID_FTA_TITLE = "Affichage d'une Fta";
     const FR_WARNING_FTA_ETAT_REMOVE = "Etes vous certain de vouloir retirer cette Fiche Technique ? Les autres fiches du dossier resteront indems.";
+    const FR_WARNING_RECHERE = "Veuillez précisez votre recherche, votre demande a un résultat supèrieur à ";
+    const FR_WARNING_RECHERE_ERREUR = "Vos critères de recherche ne donnent aucun résultat.";
 
     /**
      * Toujours mettre un | devant les message de type Règle de validations

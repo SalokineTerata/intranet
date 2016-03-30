@@ -107,15 +107,13 @@ if (!$modificationGestionnaire) {
 switch ($modificationGestionnaire) {
     case "1";
         $action = "gestionnaire";
-        $ftaModel = new FtaModel($idFta);
-        $ftaModel->setIsEditable(TRUE);
-        $suffixeAgrologicFta = $ftaModel->getModelClassificationRacourcis()->getNameRaccourcisClassif();;
+        $idDossierFta = $idFta;
+
+
         break;
     case "2";
         $action = "gestionnaire1";
-        $ftaModel = new FtaModel($idFta);
-        $ftaModel->setIsEditable(TRUE);
-        $suffixeAgrologicFta = $ftaModel->getModelClassificationRacourcis()->getNameRaccourcisClassif();;
+        $idDossierFta = $idFta;
         break;
     default :
         $action = "valider";
@@ -138,6 +136,7 @@ $navigue . "
      <form " . $method . " action=" . $page_action . " name=form_action>
      <input type=hidden name=action value=" . $action . ">
      <input type=hidden name=id_fta id=id_fta value=" . $idFta . ">
+     <input type=hidden name=id_fta id=id_dossier_fta value=" . $idDossierFta . ">
      <input type=\"hidden\" name=\"synthese_action\" id=\"synthese_action\" value=\"" . $syntheseAction . "\" />
      <input type=\"hidden\" name=\"abreviation_fta_etat\" id=\"abreviation_fta_etat\" value=\"" . $abreviationFtaEtat . "\" />
      <input type=\"hidden\" name=\"id_fta_etat\" id=\"id_fta_etat\" value=\"" . $idFtaEtat . "\" />
@@ -160,7 +159,6 @@ $navigue . "
 
         
      </tr>
-     $suffixeAgrologicFta
      <tr>
         $bouton_retour_vers_fta
          $bouton_submit

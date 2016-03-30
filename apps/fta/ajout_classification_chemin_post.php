@@ -45,8 +45,6 @@ $selection_rayon = Lib::getParameterFromRequest('selection_rayon2');
 $selection_environnement = Lib::getParameterFromRequest('selection_environnement2');
 $selection_reseau = Lib::getParameterFromRequest('selection_reseau2');
 $selection_saisonnalite = Lib::getParameterFromRequest('selection_saisonnalite2');
-
-$modelFta = new FtaModel($paramIdFta);
 if ($selection_saisonnalite) {
     //Enregistrement du nouvel éléments de classification
     $idClassification2 = ClassificationFta2Model::getIdFtaClassification2(
@@ -54,17 +52,7 @@ if ($selection_saisonnalite) {
                     , $selection_marque, $selection_activite
                     , $selection_rayon, $selection_environnement
                     , $selection_reseau, $selection_saisonnalite);
-    $modelFta->getDataField(FtaModel::FIELDNAME_ID_FTA_CLASSIFICATION2)->setFieldValue($idClassification2);
-    
-     /**
-     * Vérification que la classification est des données correspondantes Arcadia
-     */
-    $modelFta->checkArcadiaClassifData($idClassification2);
-    
 }
-$abreviationFtaEtat = $modelFta->getModelFtaEtat()->getDataField(FtaEtatModel::FIELDNAME_ABREVIATION)->getFieldValue();
-
-$modelFta->saveToDatabase();
 
 switch ($action) {
 
@@ -72,7 +60,19 @@ switch ($action) {
       S'il n'y a pas d'actions défini
      */
     case 'valider':
+        $modelFta = new FtaModel($paramIdFta);
 
+
+        $modelFta->getDataField(FtaModel::FIELDNAME_ID_FTA_CLASSIFICATION2)->setFieldValue($idClassification2);
+
+        /**
+         * Vérification que la classification est des données correspondantes Arcadia
+         */
+        $modelFta->checkArcadiaClassifData($idClassification2);
+
+        $abreviationFtaEtat = $modelFta->getModelFtaEtat()->getDataField(FtaEtatModel::FIELDNAME_ABREVIATION)->getFieldValue();
+
+        $modelFta->saveToDatabase();
 
         //Redirection
         header('Location: modification_fiche.php?id_fta=' . $paramIdFta . '&id_fta_chapitre_encours=' . $paramIdFtaChapitreEncours . '&synthese_action=' . $paramSyntheseAction . '&id_fta_etat=' . $idFtaEtat . '&abreviation_fta_etat=' . $abreviationFtaEtat . '&id_fta_role=' . $idFtaRole);
@@ -81,7 +81,11 @@ switch ($action) {
 
     case 'gestionnaire':
 
-
+        $validation = DatabaseOperation::execute(
+                        "UPDATE " . FtaModel::TABLENAME
+                        . " SET " . FtaModel::FIELDNAME_ID_FTA_CLASSIFICATION2 . "=" . $idClassification2
+                        . " WHERE " . FtaModel::FIELDNAME_DOSSIER_FTA . "=" . $paramIdFta
+        );
 
         //Redirection
         header('Location: modification_classification.php');
@@ -91,6 +95,11 @@ switch ($action) {
     case 'gestionnaire1':
 
 
+        $validation = DatabaseOperation::execute(
+                        "UPDATE " . FtaModel::TABLENAME
+                        . " SET " . FtaModel::FIELDNAME_ID_FTA_CLASSIFICATION2 . "=" . $idClassification2
+                        . " WHERE " . FtaModel::FIELDNAME_DOSSIER_FTA . "=" . $paramIdFta
+        );
 
         //Redirection
         header('Location: ajout_classification.php');

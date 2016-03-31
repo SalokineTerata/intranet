@@ -195,12 +195,22 @@ class FtaController {
     }
 
     /**
-     * On vérifie si un text ne contient que des majuscule en excluant les espaces auparavant
+     * On vérifie si un text ne contient que des  lettres en majuscule et en excluant les espaces auparavant
      * @param type $paramString
      * @return type
      */
     public static function isStringIsUperCase($paramString) {
-        return ctype_upper(str_replace(' ', '', $paramString));
+        $temp = str_replace(' ', '', $paramString);
+        return ctype_upper(preg_replace('/[0-9]+/', '', $temp));
+    }
+
+    /**
+     * On vérifie si un text ne contient que des lettre en minuscule et en excluant les espaces auparavant
+     * @param type $paramString
+     * @return type
+     */
+    public static function isStringIsUperLower($paramString) {
+        return ctype_lower(str_replace(' ', '', $paramString));
     }
 
     /**
@@ -213,4 +223,5 @@ class FtaController {
     }
 
 }
+
 ?>

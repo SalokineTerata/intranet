@@ -79,6 +79,8 @@ class UserInterfaceMessage {
     const FR_WARNING_DATA_SITE_DE_PRODUCTION_TITLE = "Site de production d'une Fiche Technique Article";
     const FR_WARNING_DATA_VALIDATION_FTA_CODE_LDC = "Le Code LDC doit être unique.";
     const FR_WARNING_DUPLICATION_DE_FTA = " Attention, vous êtes sur le point de dupliquer la Fiche Technique Article suivante:<br>";
+    const FR_WARNING_DUREE_DE_VIE_COMPOSANT = " Attention, la Durée de Vie utilisée pour calculer la DLC etiquetée doit être renseigné<br>";
+    const FR_WARNING_MISSING_DATA = "Donnée manquante";
     const FR_WARNING_ECHEANCE_DEPASSEE = "Certaines échéances sont dépassées !";
     const FR_WARNING_EMBALLAGE_COLIS = "Il ne doit y avoir qu'un seul emballage Colis";
     const FR_WARNING_EMBALLAGE_COLIS_ARCADIA = "Il n'y a pas de correspondance sur Arcadia à cette emballage Colis";

@@ -7,6 +7,8 @@
  */
 class Navigation {
 
+    const FONT_COLOR_CHAPITRE_NON_ACCESSIBLE = "#000000";
+    const FONT_COLOR_CHAPITRE_AUTRE_ROLE = "#838383";
     const FONT_COLOR_CHAPITRE_ENCOURS = "#1D3FDA";
     const FONT_COLOR_CHAPITRE_PUBLIC = "#8977A9";
     const FONT_COLOR_CHAPITRE_NON_VALIDEE = "#FF0000";
@@ -307,6 +309,22 @@ class Navigation {
          */
         if (self::$synthese_action) {
             /*
+             * Nous récuperons les processus en cours.
+             */
+            $arrayAllProcessus = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
+                            'SELECT DISTINCT ' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_PROCESSUS
+                            . ' FROM ' . FtaWorkflowStructureModel::TABLENAME
+                            . ' WHERE ' . FtaWorkflowStructureModel::TABLENAME . '.' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_WORKFLOW . '=' . self::$id_fta_workflow
+            );
+            /**
+             * On récupère tous les processus
+             */
+            foreach ($arrayAllProcessus as $rowsAllProcessus) {
+                $ProcessusComplet[] = $rowsAllProcessus[FtaWorkflowStructureModel::FIELDNAME_ID_FTA_PROCESSUS];
+            }
+
+
+            /*
              * Etat d'avancement de la FTA et Recherche des processus validés (et donc en lecture-seule)             * 
              */
 
@@ -392,19 +410,17 @@ class Navigation {
 //                        }
                     }
                 }//Fin du balayage
-
-
 //                if ($ProcessusPrecedentVisible) {
-                    /*
-                     * Nous récupérons tous les processus validé pour vérifier plus tard si nous devons les affichers
-                     */
-                    foreach ($arrayProcessusValide as $rowsProcessusValide) {
-                        $taux_validation_processus = FtaProcessusModel::getValideProcessusEncours(self::$id_fta, $rowsProcessusValide[FtaProcessusModel::KEYNAME], self::$id_fta_workflow);
-                        if ($taux_validation_processus == 1) {
+                /*
+                 * Nous récupérons tous les processus validé pour vérifier plus tard si nous devons les affichers
+                 */
+                foreach ($arrayProcessusValide as $rowsProcessusValide) {
+                    $taux_validation_processus = FtaProcessusModel::getValideProcessusEncours(self::$id_fta, $rowsProcessusValide[FtaProcessusModel::KEYNAME], self::$id_fta_workflow);
+                    if ($taux_validation_processus == 1) {
 
-                            $ProcessusValide[] = $rowsProcessusValide[FtaProcessusModel::KEYNAME];
-                        }
+                        $ProcessusValide[] = $rowsProcessusValide[FtaProcessusModel::KEYNAME];
                     }
+                }
 //                }
             }
             /*
@@ -613,9 +629,10 @@ class Navigation {
                     $t_liste_processus[] .=$rowsProcessusByWorkflow[FtaWorkflowStructureModel::FIELDNAME_ID_FTA_PROCESSUS];
                 }
             }
+            self::$id_fta_processus = $t_liste_processus;
 
             //Récupération des Chapitres accessible dans le menu de naviguation
-            $menu_navigation = self::RecupChapitre($t_liste_processus);
+            $menu_navigation = self::RecupChapitre($ProcessusComplet);
             //Fin du controle de $synthese_action
         }
         return $menu_navigation;
@@ -629,6 +646,7 @@ class Navigation {
         $reqRecup = 'SELECT ' . FtaChapitreModel::TABLENAME . '.' . FtaChapitreModel::KEYNAME
                 . ', ' . FtaChapitreModel::TABLENAME . '.' . FtaChapitreModel::FIELDNAME_NOM_USUEL_CHAPITRE
                 . ', ' . FtaWorkflowStructureModel::TABLENAME . '.' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_PROCESSUS
+                . ', ' . FtaWorkflowStructureModel::TABLENAME . '.' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_ROLE
                 . ' FROM ' . FtaChapitreModel::TABLENAME . ' LEFT JOIN ' . FtaWorkflowStructureModel::TABLENAME
                 . ' ON ' . FtaWorkflowStructureModel::TABLENAME . '.' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_CHAPITRE
                 . '=' . FtaChapitreModel::TABLENAME . '.' . FtaChapitreModel::KEYNAME
@@ -647,6 +665,8 @@ class Navigation {
         foreach ($arrayRecup as $rowsRecup) {
             $id_fta_chapitre = $rowsRecup[FtaChapitreModel::KEYNAME];
             $nom_usuel_fta_chapitre = $rowsRecup[FtaChapitreModel::FIELDNAME_NOM_USUEL_CHAPITRE];
+            $idFtaProcessus = $rowsRecup[FtaWorkflowStructureModel::FIELDNAME_ID_FTA_PROCESSUS];
+            $idFtaRole = $rowsRecup[FtaWorkflowStructureModel::FIELDNAME_ID_FTA_ROLE];
 
             //Dans le cas où il n'y a pas de chapitre sélectionné, sélection du premier
             if (!self::$id_fta_chapitre_encours) {
@@ -664,8 +684,11 @@ class Navigation {
                 $image_flash1 = '-  ';
                 $image_flash2 = '  -';
             }
+
+
+
             //Ce chapitre est-il public?
-            if ($rowsRecup[FtaProcessusModel::KEYNAME] == 0) {
+            if ($idFtaProcessus == 0) {
                 $font_color = "color=" . self::FONT_COLOR_CHAPITRE_PUBLIC;
                 $num = 1;
             } else {
@@ -679,12 +702,27 @@ class Navigation {
                 $result1 = DatabaseOperation::queryPDO($req1);
                 $num = DatabaseOperation::getSqlNumRows($result1);
                 switch ($num) {
-                    case 0:  //Chapiter pas encore validé
-                        $font_color = "color=" . self::FONT_COLOR_CHAPITRE_NON_VALIDEE;
+                    case 0:
+                        /**
+                         * Chapitre pas encore validé
+                         *  - Chapitre encours en rouge 
+                         *  - Chapitre non accessible  en noir
+                         */
+                        if (in_array($idFtaProcessus, self::$id_fta_processus)) {
+                            $font_color = "color=" . self::FONT_COLOR_CHAPITRE_NON_VALIDEE;
+                            $link = TRUE;
+                        } elseif (self::$id_fta_role == $idFtaRole) {
+                            $font_color = "color=" . self::FONT_COLOR_CHAPITRE_NON_ACCESSIBLE;
+                            $link = FALSE;
+                        } else {
+                            $font_color = "color=" . self::FONT_COLOR_CHAPITRE_AUTRE_ROLE;
+                            $link = FALSE;
+                        }
                         break;
 
                     case 1:  //Chapitre validé
                         $font_color = "color=" . self::FONT_COLOR_CHAPITRE_VALIDEE;
+                        $link = TRUE;
                         break;
 
                     default: //Anomalie
@@ -700,20 +738,20 @@ class Navigation {
                 
             } else {
                 $b = "<font " . $font_size . " " . $font_color . "/>";
-                $menu_navigation .= $image_flash1 . '<a href=' . $page_default . '.php?'
-//                $menu_navigation .= '<a href=\'#\''
-//                        . ' onClick=\'navigation_' . $id_fta_chapitre . '();\''
-                        . 'id_fta=' . self::$id_fta
-                        . '&id_fta_chapitre_encours=' . $id_fta_chapitre
-                        . '&synthese_action=' . self::$synthese_action
-                        . '&id_fta_etat=' . self::$id_fta_etat
-                        . '&abreviation_fta_etat=' . self::$abreviation_etat
-//                        . '&comeback=' . self::$comeback
-                        . '&id_fta_role=' . self::$id_fta_role
-                        . '>' . $b . ''
-                        . $nom_usuel_fta_chapitre
-                        . '</a>'
-                        . '</b></font> ' . $image_flash2
+                $menu_navigation .= $image_flash1;
+                if ($link) {
+                    $menu_navigation .= '<a href=' . $page_default . '.php?'
+                            . 'id_fta=' . self::$id_fta
+                            . '&id_fta_chapitre_encours=' . $id_fta_chapitre
+                            . '&synthese_action=' . self::$synthese_action
+                            . '&id_fta_etat=' . self::$id_fta_etat
+                            . '&abreviation_fta_etat=' . self::$abreviation_etat
+                            . '&id_fta_role=' . self::$id_fta_role
+                            . '>';
+                }
+                $menu_navigation .= $b . ' ' . $nom_usuel_fta_chapitre;
+                $menu_navigation .= '</a>';
+                $menu_navigation .= '</b></font> ' . $image_flash2
                 ;
 
                 /**

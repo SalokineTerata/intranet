@@ -136,7 +136,6 @@ $navigue . "
      <form " . $method . " action=" . $page_action . " name=form_action>
      <input type=hidden name=action value=" . $action . ">
      <input type=hidden name=id_fta id=id_fta value=" . $idFta . ">
-     <input type=hidden name=id_fta id=id_dossier_fta value=" . $idDossierFta . ">
      <input type=\"hidden\" name=\"synthese_action\" id=\"synthese_action\" value=\"" . $syntheseAction . "\" />
      <input type=\"hidden\" name=\"abreviation_fta_etat\" id=\"abreviation_fta_etat\" value=\"" . $abreviationFtaEtat . "\" />
      <input type=\"hidden\" name=\"id_fta_etat\" id=\"id_fta_etat\" value=\"" . $idFtaEtat . "\" />

@@ -26,7 +26,10 @@ if (!$idFta) {
     $idFtaTmp = explode(',', $idFtaArray);
     foreach ($idFtaTmp as $rowsIdFtaTmp) {
         if ($rowsIdFtaTmp) {
-            $idFta[] = Lib::getParameterFromRequest('selection_fta_' . $rowsIdFtaTmp);
+            $tmpFta = Lib::getParameterFromRequest('selection_fta_' . $rowsIdFtaTmp);
+            if ($tmpFta) {
+                $idFta[] = $tmpFta;
+            }
         }
     }
 }
@@ -117,7 +120,7 @@ if (!$action) {
 
         $new_commentaire_maj_fta = $new_commentaire_maj_fta . "-" . $ListeDesChapitresComment;
 
-        
+
         $idFtaChapitreByDefault = FtaChapitreModel::getIdFtaChapitreByDefault($idFtaRole, $idFtaWorkflow, $ListeDesChapitres);
     }
 

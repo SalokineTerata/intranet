@@ -377,7 +377,6 @@ if ($result) {
             $data_format[2] = "";
             fpdf_write_data($title, $data, $title_format, $data_format, $pdf);
 
-            if (FALSE) {
                 $txt = "Valeurs nutritionnelles pour 100g";
 
                 $pdf->MultiCell(0, 5, $txt, $border = 1, $align = 'C', $fill = 0);
@@ -423,7 +422,7 @@ if ($result) {
 
             $pdf->Cell(0, 0, "", 1, 1);
             $pdf->SetY($pdf->GetY() + 2);
-        }
+        
         //$pdf->SetAutoPageBreak(0);
     }//Fin du parcours des composants
 }

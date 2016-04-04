@@ -212,7 +212,7 @@ class FtaTransitionModel {
             $idFtaEtat = $value[FtaEtatModel::KEYNAME];
         }
         if ($old_nouveau_maj_fta) {
-            $nouveau_maj_fta = $nouveau_maj_fta . $old_nouveau_maj_fta;
+            $nouveau_maj_fta = str_replace('"', '', $nouveau_maj_fta . $old_nouveau_maj_fta);
         }
 
         $req = "UPDATE " . FtaModel::TABLENAME
@@ -592,7 +592,8 @@ class FtaTransitionModel {
                 . "\n"
                 . "INFORMATIONS DE DEBUGGAGE:\n"
                 . $logTransition
-        ; {
+        ;
+        {
             $expediteur = $prenom . " " . $nom . " <" . $mail . ">";
             envoismail($sujetmail, $corp, $mail, $expediteur, $typeMail);
         }
@@ -708,7 +709,8 @@ class FtaTransitionModel {
                 . $text
                 . "\n\n"
                 . $paramLogTransition
-        ; {
+        ;
+        {
             $expediteur = $prenom . " " . $nom . " <" . $mailUser . ">";
             envoismail($sujetmail, $corp, $mailUser, $expediteur, $typeMail);
         }

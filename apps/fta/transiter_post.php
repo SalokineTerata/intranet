@@ -68,6 +68,7 @@ if (!$action) {
 //echo $action.'<br>'.$id_fta.'<br>'.$new_commentaire_maj_fta.'<br>';
 //echo $abreviation_fta_transition;
     $liste_global = array();    //Tableau contenant les emails et le nom des destinataire (cf fonction liste_diffusion_transition() )
+    $commentaire_maj_fta = "";
 //Dans le cas où il n'y aurait qu'une seule FTA a valider,
 //Le tableau est rempli avec cette unique valeur.
     if (!$selection_fta) {

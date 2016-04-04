@@ -206,7 +206,7 @@ class FtaTransitionModel {
         $arrayIdFtaEtat = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
                         "SELECT " . FtaEtatModel::KEYNAME
                         . " FROM " . FtaEtatModel::TABLENAME
-                        . " WHERE " . FtaEtatModel::FIELDNAME_ABREVIATION . "='$paramAbreviationFtaTransition'"
+                        . " WHERE " . FtaEtatModel::FIELDNAME_ABREVIATION . "=\"" . $paramAbreviationFtaTransition . "\""
         );
         foreach ($arrayIdFtaEtat as $value) {
             $idFtaEtat = $value[FtaEtatModel::KEYNAME];
@@ -592,8 +592,7 @@ class FtaTransitionModel {
                 . "\n"
                 . "INFORMATIONS DE DEBUGGAGE:\n"
                 . $logTransition
-        ;
-        {
+        ; {
             $expediteur = $prenom . " " . $nom . " <" . $mail . ">";
             envoismail($sujetmail, $corp, $mail, $expediteur, $typeMail);
         }
@@ -709,8 +708,7 @@ class FtaTransitionModel {
                 . $text
                 . "\n\n"
                 . $paramLogTransition
-        ;
-        {
+        ; {
             $expediteur = $prenom . " " . $nom . " <" . $mailUser . ">";
             envoismail($sujetmail, $corp, $mailUser, $expediteur, $typeMail);
         }

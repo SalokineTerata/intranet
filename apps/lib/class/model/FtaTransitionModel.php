@@ -206,13 +206,13 @@ class FtaTransitionModel {
         $arrayIdFtaEtat = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
                         "SELECT " . FtaEtatModel::KEYNAME
                         . " FROM " . FtaEtatModel::TABLENAME
-                        . " WHERE " . FtaEtatModel::FIELDNAME_ABREVIATION . "='$paramAbreviationFtaTransition'"
+                        . " WHERE " . FtaEtatModel::FIELDNAME_ABREVIATION . "=\"" . $paramAbreviationFtaTransition . "\""
         );
         foreach ($arrayIdFtaEtat as $value) {
             $idFtaEtat = $value[FtaEtatModel::KEYNAME];
         }
         if ($old_nouveau_maj_fta) {
-            $nouveau_maj_fta = $nouveau_maj_fta . $old_nouveau_maj_fta;
+            $nouveau_maj_fta = str_replace('"', '', $nouveau_maj_fta . $old_nouveau_maj_fta);
         }
 
         $req = "UPDATE " . FtaModel::TABLENAME

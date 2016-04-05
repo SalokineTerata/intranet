@@ -81,7 +81,7 @@ switch ($action) {
         $join = array();
         $y = 0;
         $z = 0;
-        $nb_limite_resultat = 1000;
+        $nb_limite_resultat = ModuleConfigLib::VALUE_MAX_MOTEUR_RECHERCHE;
         $join[$y][$z][1] = false;
 
         // Découpage des tableaux
@@ -389,7 +389,7 @@ switch ($action) {
 
         if (count($tab_resultat) > $nb_limite_resultat) {
             $titre = 'ERREUR';
-            $message = 'Votre demande a plus de 1000 résultats, veuillez précisez votre recherche !';
+            $message = UserInterfaceMessage::FR_WARNING_RECHERE . ModuleConfigLib::VALUE_MAX_MOTEUR_RECHERCHE;
             afficher_message($titre, $message, $redirection);
         } else {
             if (count($tab_resultat) > 0) {

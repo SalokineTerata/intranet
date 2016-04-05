@@ -14,6 +14,7 @@ class FtaController {
 
     const CALLBACK_LINK_TO_TRANSITER_PAGE = "Retour";
     const CALLBACK_LINK_TO_TRANSITER_PAGE_VALIDATE = "Confirmer";
+    const TEST= ModuleConfig::VALUE_MAX_MOTEUR_RECHERCHE;
 
     /**
      * Duplication d'une table donné par son id

@@ -124,8 +124,8 @@ class MoteurDeRecherche {
                 $titre = 'Moteur de Recherche';
                 $message = UserInterfaceMessage::FR_WARNING_RECHERE_ERREUR;
                 afficher_message($titre, $message, $redirection);
-            } elseif (count($result_requete_resultat) > ModuleConfig::VALUE_MAX_PAR_PAGE) {
-                $message = UserInterfaceMessage::FR_WARNING_RECHERE . ModuleConfig::VALUE_MAX_PAR_PAGE;
+            } elseif (count($result_requete_resultat) > ModuleConfig::VALUE_MAX_MOTEUR_RECHERCHE) {
+                $message = UserInterfaceMessage::FR_WARNING_RECHERE . ModuleConfig::VALUE_MAX_MOTEUR_RECHERCHE;
                 $redirection = "recherche.php";
                 afficher_message("Erreur", $message, $redirection);
             }
@@ -388,7 +388,7 @@ class MoteurDeRecherche {
 //$aux3.=$t;
                     $aux3.='moteur_de_recherche';
 
-                    $aux4 = $champ_recherche[$cpt_ligne][$cpt_col];
+                    $aux4 = str_replace("'", "", $champ_recherche[$cpt_ligne][$cpt_col]);                    
 
                     $desc5 = " SELECT " . $aux . "," . $aux2
                             . " FROM " . $t
@@ -475,7 +475,7 @@ WHERE id_intranet_moteur_de_recherche_operateur_sur_champ = '$enr2[0]'";
 
                         case $operateur_recherche[$cpt_ligne][$cpt_col] == 9 : //Liste
 
-                            $req_temp = "SELECT DISTINCT $nom_champ FROM $nom_table ORDER BY $nom_champ";
+                                $req_temp = "SELECT DISTINCT $nom_champ FROM $nom_table ORDER BY $nom_champ";
                             $result_temp = DatabaseOperation::convertSqlStatementKeyAndOneFieldToArray($req_temp);
                             $saisie_utilisateur = "<select size = 1 name = $name_val value = $temp>";
                             $verrou = 0;

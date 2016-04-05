@@ -263,9 +263,11 @@ require_once('../lib/class/html/DataFieldToHtmlInputNumber.php');
 require_once('../lib/class/html/DataFieldToHtmlTextArea.php');
 require_once('../lib/class/html/DataFieldToHtmlSubForm_R1N.php');
 require_once('../lib/class/html/DataFieldToHtmlSubForm_RNN.php');
+require_once('../lib/class/ModuleConfigLib.php');
 
 // Session utilisateur
 require_once('../lib/session.php');
+
 
 // Variables locales à la page PHP
 Lib::setModule();

@@ -51,6 +51,10 @@ abstract class ModuleConfig {
     const ENABLE_SHOW_DIFF_FTA = true;
 
     /**
+     * Nombre maximale de fta afficher sur le moteur de recherche
+     */
+    const VALUE_MAX_MOTEUR_RECHERCHE = 250;
+    /**
      * Nombre maximale de fta afficher sur la page d'acceuil en moficiation
      */
     const VALUE_MAX_PAR_PAGE = 100;

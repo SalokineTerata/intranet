@@ -45,4 +45,103 @@ class ClassificationArborescenceArticleCategorieContenuModel extends AbstractMod
         
     }
 
+    /**
+     * Affiche le tableau d'ajout d'une famille de ventes à une activité de classification
+     * @param string $paramIdElement
+     * @return string
+     */
+    public static function getHtmlTableClassificationElement($paramIdElement) {
+        $ClassificationElement = self::getArrayIdClassificationElementByIdElement($paramIdElement);
+
+        if ($ClassificationElement) {
+            $arrayClassificationElementtmp = array();
+            $tablesNameAndIdForeignKeyOfElementtmp = array();
+
+            foreach ($ClassificationElement as $rowsClassificationElement) {
+                $idClassificationElements = $rowsClassificationElement[self::KEYNAME];
+
+                $arrayIdClassificationElements[] = $idClassificationElements;
+
+
+                $ClassificationArborescenceArticleCategorieContenuModel = new ClassificationArborescenceArticleCategorieContenuModel($idClassificationElements);
+
+                /*
+                 * Tableau de données
+                 */
+                $arrayClassificationElementTmp = $ClassificationArborescenceArticleCategorieContenuModel->getArrayClassificationActiviteFamilleVentesArcadia();
+
+                $arrayClassificationElements = array_replace_recursive($arrayClassificationElementtmp, $arrayClassificationElementTmp);
+
+                $arrayClassificationElementtmp = $arrayClassificationElements;
+
+                /*
+                 * Cette array doit être utilisé de cette manière 
+                 * Array (
+                 * nom de table,
+                 * clé étrangère de la table présenté
+                 * valeur de la clé étrangère);
+                 */
+                $tablesNameAndIdForeignKeyOfClassificationElementTmp = $ClassificationArborescenceArticleCategorieContenuModel->getTablesNameAndIdForeignkeyOfClassificationActiviteFamilleVentesArcadia();
+
+
+                $tablesNameAndIdForeignKeyOfClassificationElement = ($tablesNameAndIdForeignKeyOfElementtmp + $tablesNameAndIdForeignKeyOfClassificationElementTmp);
+                $tablesNameAndIdForeignKeyOfElementtmp = $tablesNameAndIdForeignKeyOfClassificationElement;
+                /*
+                 * Vérifie si pour la Fta en cours les données ClassificationGammeFamilleBudgett sont renseigné
+                 */
+                if ($arrayClassificationElements) {
+                    $rightToAdd = Chapitre::NOT_EDITABLE;
+                } else {
+                    $rightToAdd = Chapitre::EDITABLE;
+                }
+            }
+            /**
+             * Labels
+             */
+            $className = $ClassificationArborescenceArticleCategorieContenuModel->getClassName();
+            $label = $ClassificationArborescenceArticleCategorieContenuModel->getDataField(self::FIELDNAME_ID_ARCADIA_FAMILLE_VENTE)->getFieldLabel();
+
+
+            /**
+             * Initilisation du tableau html
+             */
+            $htmlClassificationActiviteFamilleVentesArcadia = new HtmlSubForm_RNN($arrayClassificationElements, $className, $label, $tablesNameAndIdForeignKeyOfClassificationElement);
+            $htmlClassificationActiviteFamilleVentesArcadia->setIsEditable(Chapitre::EDITABLE);
+            $htmlClassificationActiviteFamilleVentesArcadia->setRightToAdd($rightToAdd);
+            $htmlClassificationActiviteFamilleVentesArcadia->setLienAjouter(self::getAddLinkAfterClassificationActiviteFamilleVentesArcadia($paramIdActivite));
+            $htmlClassificationActiviteFamilleVentesArcadia->setLien(self::getAddLinkBeforeClassificationActiviteFamilleVentesArcadia($paramIdActivite));
+            $htmlClassificationActiviteFamilleVentesArcadia->setLienSuppression(self::getDeleteLinkClassificationActiviteFamilleVentesArcadia($paramIdActivite, $arrayIdClassificationElements));
+            $htmlClassificationActiviteFamilleVentesArcadia->setTableLabel($ClassificationArborescenceArticleCategorieContenuModel->getTableClassificationActiviteFamilleVentesArcadiaLabel());
+            $return .= $htmlClassificationActiviteFamilleVentesArcadia->getHtmlResult();
+        } else {
+            /*
+             * Initialisation des modèles 
+             */
+            $label = self::LABEL_CLASSIFICATION_ACTIVITE_FAMILLE_VENTES;
+
+            $htmlClassificationActiviteFamilleVentesArcadia = new HtmlSubForm_RNN($arrayClassificationElements, $className, $label, $tablesNameAndIdForeignKeyOfClassificationElement);
+            $htmlClassificationActiviteFamilleVentesArcadia->setIsEditable(Chapitre::EDITABLE);
+            $htmlClassificationActiviteFamilleVentesArcadia->setRightToAdd(Chapitre::EDITABLE);
+            $htmlClassificationActiviteFamilleVentesArcadia->setLien(self::getAddLinkBeforeClassificationActiviteFamilleVentesArcadia($paramIdActivite));
+            $return .= $htmlClassificationActiviteFamilleVentesArcadia->getHtmlResult();
+        }
+        return $return;
+    }
+
+    /**
+     * Retour la liste des IdClassificationElement pour un elemnt donnée
+     * @param int $paramIdElement
+     * @return array
+     */
+    private static function getArrayIdClassificationElementByIdElement($paramIdElement) {
+
+        $array = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
+                        "SELECT " . self::KEYNAME
+                        . " FROM " . self::TABLENAME
+                        . " WHERE " . self::FIELDNAME_ID_CLASSIFICATION_ARBORESCENCE_ARTICLE_CATEGORIE . "=" . $paramIdElement
+        );
+
+        return $array;
+    }
+
 }

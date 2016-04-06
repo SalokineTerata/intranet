@@ -23,4 +23,25 @@ class ClassificationArborescenceArticleCategorieModel extends AbstractModel {
         
     }
 
+    /**
+     * Affiche la liste déroulante des elements d'arborescence d'une classification
+     * @param type $paramIdClaasifElement
+     * @param type $paramIsEditable
+     * @return string
+     */
+    public static function getListeDeroulanteClassifElement($paramIdClaasifElement, $paramIsEditable) {
+        //Contenu
+        $nom_liste = self::KEYNAME;
+        $reqListeActivite = "SELECT " . self::KEYNAME
+                . ", " . self::FIELDNAME_NOM_CLASSIFICATION_ARBORESCENCE_ARTICLE_CATEGORIE
+                . " FROM " . self::TABLENAME
+                . " ORDER BY " . self::KEYNAME
+        ;
+        $id_defaut = $paramIdClaasifElement;
+
+        $listeDesClassifElement = AccueilFta::afficherRequeteEnListeDeroulante($reqListeActivite, $id_defaut, $nom_liste, $paramIsEditable);
+
+        return $listeDesClassifElement;
+    }
+
 }

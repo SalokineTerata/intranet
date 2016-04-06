@@ -27,6 +27,8 @@ class UserInterfaceMessage {
     const FR_ARCADIA_SEND_DATA_MESSAGE = " Les données ont bien été envoyées vers Arcadia ";
     const FR_CALCUL_DUREE_DE_VIE_EN_ATTENTE = "Durée de vie production non saisie. Calcul en attente. ";
     const FR_CLASSIFICATION_ACTIVITE_MESSAGE = " Veuillez sélectionner une activité à associer ";
+    const FR_CLASSIFICATION_ELEMENT_MESSAGE = " Veuillez sélectionner un élement de la classification à associer ";
+    const FR_CLASSIFICATION_ADD_ELEMENT_MESSAGE = " Ajouter un élement ";
     const FR_CLASSIFICATION_MARQUE_MESSAGE = " Veuillez sélectionner une marque à associer ";
     const FR_DATABASE_MESSAGE_CHANGEMENT_ESPACE_DE_TRAVAIL_1 = " Changement de l'espace travail ";
     const FR_DATABASE_MESSAGE_CHANGEMENT_ESPACE_DE_TRAVAIL_2 = " vers l'espace de travail ";

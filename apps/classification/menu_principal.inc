@@ -13,13 +13,13 @@ $page = "../lib/gestion_table.php?module=$module&menu=menu_principal.inc";
   Menu accessible pour les utilisateurs ayant les droits
   en consultation sur ce module
  */
-if (Acl::getValueAccesRights($module_consultation)) {
-    echo "<br>
-        <a href=./doc/manuel_utilisateur.odt target=_top>Manuel Utilisateur</a>
-        <br>
-        ";
-}
-echo "...";
+//if (Acl::getValueAccesRights($module_consultation)) {
+//    echo "<br>
+//        <a href=./doc/manuel_utilisateur.odt target=_top>Manuel Utilisateur</a>
+//        <br>
+//        ";
+//}
+//echo "...";
 
 /*
   Menu accessible pour les utilisateurs ayant les droits
@@ -37,7 +37,7 @@ if (Acl::getValueAccesRights($module_modification)) {
 
     //Eléments de Classifications
     echo "<br>";
-    echo "<a href=$page&nom_table=classification_arborescence_article_categorie_contenu target=_top>Eléments</a>";
+    echo "<a href=gestion_elements.php target=_top>Eléments</a>";
     echo "<br>";
 }
 echo "...";

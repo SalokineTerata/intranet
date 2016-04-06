@@ -1,0 +1,151 @@
+Démarrage : mer aoû 20 23:00:01 CEST 2014
+Arrêt     : mer aoû 20 23:00:43 CEST 2014
+
+
+
+Base MySQL sélectionnée: agis
+Nombre de serveur(s) Linux concerné(s): 4
+Nombre de dossier(s) à mettre à jour: 29
+
+sending incremental file list
+
+sent 7305 bytes  received 49 bytes  4902.67 bytes/sec
+total size is 13622581  speedup is 1852.40
+sending incremental file list
+
+sent 6675 bytes  received 40 bytes  4476.67 bytes/sec
+total size is 12849623  speedup is 1913.57
+sending incremental file list
+
+sent 63 bytes  received 12 bytes  50.00 bytes/sec
+total size is 212826112  speedup is 2837681.49
+sending incremental file list
+
+sent 7593 bytes  received 45 bytes  5092.00 bytes/sec
+total size is 9254930  speedup is 1211.70
+sending incremental file list
+
+sent 7938 bytes  received 20 bytes  5305.33 bytes/sec
+total size is 16768700  speedup is 2107.15
+sending incremental file list
+
+sent 4308 bytes  received 24 bytes  8664.00 bytes/sec
+total size is 6387982  speedup is 1474.60
+sending incremental file list
+mercuriales/MERCURIALES - AGIS/HD/2014/2014 MERCURIALE NORMA.xls
+deleting mercuriales/MERCURIALES - AGIS/gms/2015/INTERMARCHE 2015.xls
+deleting mercuriales/MERCURIALES - AGIS/gms/2015/
+mercuriales/MERCURIALES - AGIS/gms/2014/CENTRALES 2014/INTERMARCHE 2014.xls
+mercuriales/MERCURIALES - AGIS/gms/2014/CENTRALES 2014/SYSTEME U 2014.xls
+mercuriales/MERCURIALES - AGIS/gms/2014/REGIONS  2014/SCHIEVER MERCU 2014.xls
+mercuriales/MERCURIALES - AGIS/mdd/2014/2014 MERCURIALE CARREFOUR ASIATIQUE.xls
+mercuriales/MERCURIALES - AGIS/mdd/2014/2014 MERCURIALE CARREFOUR PLATS CUISINES.xls
+mercuriales/MERCURIALES - MARIE/2014/2014 MERCURIALES LIDL MARIE.xls
+
+sent 173550 bytes  received 21323 bytes  77949.20 bytes/sec
+total size is 37684320  speedup is 193.38
+sending incremental file list
+
+sent 5047 bytes  received 27 bytes  3382.67 bytes/sec
+total size is 39173092  speedup is 7720.36
+sending incremental file list
+operations_commerciales/GMS/2014/A-CENTRALES/GMS AUCHAN 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS CASINO 2014-FUTUR MASTER.xls
+operations_commerciales/MDD/MODELES CJ/AUCHAN ATAC SCHIEVER/CONF OP/2014/CONFIRMATION OPERATION SCHIEVER SEPTEMBRE 3 PDTS FRAIS.xls
+operations_commerciales/MDD/OP MDD 2014/MDD GROUPE AUCHAN 2014.xls
+
+sent 95091 bytes  received 10880 bytes  70647.33 bytes/sec
+total size is 57306294  speedup is 540.77
+sending incremental file list
+
+sent 20406 bytes  received 83 bytes  13659.33 bytes/sec
+total size is 99360776  speedup is 4849.47
+sending incremental file list
+
+sent 6737 bytes  received 93 bytes  2732.00 bytes/sec
+total size is 53070050  speedup is 7770.14
+sending incremental file list
+
+sent 9529 bytes  received 13 bytes  6361.33 bytes/sec
+total size is 46518272  speedup is 4875.11
+sending incremental file list
+
+sent 5781 bytes  received 30 bytes  3874.00 bytes/sec
+total size is 92829061  speedup is 15974.71
+sending incremental file list
+
+sent 63 bytes  received 12 bytes  50.00 bytes/sec
+total size is 212826112  speedup is 2837681.49
+sending incremental file list
+
+sent 7593 bytes  received 45 bytes  5092.00 bytes/sec
+total size is 9254930  speedup is 1211.70
+sending incremental file list
+
+sent 4308 bytes  received 24 bytes  2888.00 bytes/sec
+total size is 6387982  speedup is 1474.60
+sending incremental file list
+
+sent 7938 bytes  received 20 bytes  5305.33 bytes/sec
+total size is 16768700  speedup is 2107.15
+sending incremental file list
+
+sent 85 bytes  received 13 bytes  65.33 bytes/sec
+total size is 104853504  speedup is 1069933.71
+sending incremental file list
+operations_commerciales/GMS/2014/A-CENTRALES/GMS AUCHAN 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS CASINO 2014-FUTUR MASTER.xls
+operations_commerciales/MDD/MODELES CJ/AUCHAN ATAC SCHIEVER/CONF OP/2014/CONFIRMATION OPERATION SCHIEVER SEPTEMBRE 3 PDTS FRAIS.xls
+operations_commerciales/MDD/OP MDD 2014/MDD GROUPE AUCHAN 2014.xls
+
+sent 95091 bytes  received 10880 bytes  42388.40 bytes/sec
+total size is 57306294  speedup is 540.77
+sending incremental file list
+mercuriales/MERCURIALES - AGIS/HD/2014/2014 MERCURIALE NORMA.xls
+deleting mercuriales/MERCURIALES - AGIS/gms/2015/INTERMARCHE 2015.xls
+deleting mercuriales/MERCURIALES - AGIS/gms/2015/
+mercuriales/MERCURIALES - AGIS/gms/2014/CENTRALES 2014/INTERMARCHE 2014.xls
+mercuriales/MERCURIALES - AGIS/gms/2014/CENTRALES 2014/SYSTEME U 2014.xls
+mercuriales/MERCURIALES - AGIS/gms/2014/REGIONS  2014/SCHIEVER MERCU 2014.xls
+mercuriales/MERCURIALES - AGIS/mdd/2014/2014 MERCURIALE CARREFOUR ASIATIQUE.xls
+mercuriales/MERCURIALES - AGIS/mdd/2014/2014 MERCURIALE CARREFOUR PLATS CUISINES.xls
+mercuriales/MERCURIALES - MARIE/2014/2014 MERCURIALES LIDL MARIE.xls
+
+sent 173550 bytes  received 21323 bytes  77949.20 bytes/sec
+total size is 37684320  speedup is 193.38
+sending incremental file list
+
+sent 9529 bytes  received 13 bytes  6361.33 bytes/sec
+total size is 46518272  speedup is 4875.11
+sending incremental file list
+
+sent 7305 bytes  received 49 bytes  4902.67 bytes/sec
+total size is 13622581  speedup is 1852.40
+sending incremental file list
+
+sent 5745 bytes  received 23 bytes  3845.33 bytes/sec
+total size is 129159129  speedup is 22392.36
+sending incremental file list
+
+sent 5610 bytes  received 39 bytes  3766.00 bytes/sec
+total size is 59049369  speedup is 10453.07
+sending incremental file list
+
+sent 52293 bytes  received 97 bytes  34926.67 bytes/sec
+total size is 299707475  speedup is 5720.70
+sending incremental file list
+
+sent 20406 bytes  received 83 bytes  13659.33 bytes/sec
+total size is 99360776  speedup is 4849.47
+sending incremental file list
+
+sent 6737 bytes  received 93 bytes  4553.33 bytes/sec
+total size is 53070050  speedup is 7770.14
+sending incremental file list
+
+sent 7938 bytes  received 20 bytes  3183.20 bytes/sec
+total size is 16768700  speedup is 2107.15
+sending incremental file list
+
+sent 7938 bytes  received 20 bytes  5305.33 bytes/sec
+total size is 16768700  speedup is 2107.15

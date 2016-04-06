@@ -1,0 +1,878 @@
+Démarrage : mar jui 22 23:00:01 CEST 2014
+Arrêt     : mar jui 22 23:02:18 CEST 2014
+
+
+
+Base MySQL sélectionnée: agis
+Nombre de serveur(s) Linux concerné(s): 4
+Nombre de dossier(s) à mettre à jour: 29
+
+sending incremental file list
+
+sent 7280 bytes  received 49 bytes  4886.00 bytes/sec
+total size is 13584181  speedup is 1853.48
+sending incremental file list
+
+sent 6283 bytes  received 38 bytes  4214.00 bytes/sec
+total size is 12444119  speedup is 1968.69
+sending incremental file list
+erp_data.mdb
+
+sent 8522174 bytes  received 66685 bytes  184706.65 bytes/sec
+total size is 90648576  speedup is 10.55
+sending incremental file list
+
+sent 7593 bytes  received 45 bytes  5092.00 bytes/sec
+total size is 9254930  speedup is 1211.70
+sending incremental file list
+
+sent 7814 bytes  received 20 bytes  5222.67 bytes/sec
+total size is 16759466  speedup is 2139.32
+sending incremental file list
+
+sent 4308 bytes  received 24 bytes  2888.00 bytes/sec
+total size is 6387982  speedup is 1474.60
+sending incremental file list
+deleting mercuriales/mdd/2014/2014 MERCURIALE SYSTEME U.xls
+deleting mercuriales/mdd/2014/2014 MERCURIALE SCAMARK.xls
+deleting mercuriales/mdd/2014/2014 MERCURIALE PROVERA.xls
+deleting mercuriales/mdd/2014/2014 MERCURIALE MONOPRIX .xls
+deleting mercuriales/mdd/2014/2014 MERCURIALE INTERMARCHE.xls
+deleting mercuriales/mdd/2014/2014 MERCURIALE FRANCAP.xls
+deleting mercuriales/mdd/2014/2014 MERCURIALE EXPORT.xls
+deleting mercuriales/mdd/2014/2014 MERCURIALE CASINO.xls
+deleting mercuriales/mdd/2014/2014 MERCURIALE CARREFOUR PLATS CUISINES.xls
+deleting mercuriales/mdd/2014/2014 MERCURIALE CARREFOUR BELGIQUE.xls
+deleting mercuriales/mdd/2014/2014 MERCURIALE CARREFOUR ASIATIQUE.xls
+deleting mercuriales/mdd/2014/2014 MERCURIALE AUCHAN.xls
+deleting mercuriales/mdd/2014/
+deleting mercuriales/mdd/2013/2013 PLACE DU MARCHE.xls
+deleting mercuriales/mdd/2013/2013 MERCURIALE SYSTEME U.xls
+deleting mercuriales/mdd/2013/2013 MERCURIALE SCAMARK.xls
+deleting mercuriales/mdd/2013/2013 MERCURIALE PROVERA.xls
+deleting mercuriales/mdd/2013/2013 MERCURIALE MONOPRIX .xls
+deleting mercuriales/mdd/2013/2013 MERCURIALE METRO.xls
+deleting mercuriales/mdd/2013/2013 MERCURIALE INTERMARCHE.xls
+deleting mercuriales/mdd/2013/2013 MERCURIALE GROUPE AUCHAN.xls
+deleting mercuriales/mdd/2013/2013 MERCURIALE EXPORT.xls
+deleting mercuriales/mdd/2013/2013 MERCURIALE DAILY MONOP.xls
+deleting mercuriales/mdd/2013/2013 MERCURIALE CASINO.xls
+deleting mercuriales/mdd/2013/2013 MERCURIALE CARREFOUR PLATS CUISINES.xls
+deleting mercuriales/mdd/2013/2013 MERCURIALE CARREFOUR ASIATIQUE.xls
+deleting mercuriales/mdd/2013/
+deleting mercuriales/mdd/2012/2012 PLACE DU MARCHE.xls
+deleting mercuriales/mdd/2012/2012 MERCURIALE SYSTEME U.xls
+deleting mercuriales/mdd/2012/2012 MERCURIALE SCAMARK.xls
+deleting mercuriales/mdd/2012/2012 MERCURIALE PROVERA.xls
+deleting mercuriales/mdd/2012/2012 MERCURIALE MONOPRIX .xls
+deleting mercuriales/mdd/2012/2012 MERCURIALE METRO.xls
+deleting mercuriales/mdd/2012/2012 MERCURIALE INTERMARCHE.xls
+deleting mercuriales/mdd/2012/2012 MERCURIALE GROUPE CARREFOUR.xls
+deleting mercuriales/mdd/2012/2012 MERCURIALE GROUPE AUCHAN.xls
+deleting mercuriales/mdd/2012/2012 MERCURIALE EXPORT.xls
+deleting mercuriales/mdd/2012/2012 MERCURIALE DAILY MONOP.xls
+deleting mercuriales/mdd/2012/2012 MERCURIALE CASINO.xls
+deleting mercuriales/mdd/2012/
+deleting mercuriales/mdd/2011/2011 PLACE DU MARCHE.xls
+deleting mercuriales/mdd/2011/2011 MERCURIALE SYSTEME U.xls
+deleting mercuriales/mdd/2011/2011 MERCURIALE SCAMARK.xls
+deleting mercuriales/mdd/2011/2011 MERCURIALE PROVERA.xls
+deleting mercuriales/mdd/2011/2011 MERCURIALE MONOPRIX .xls
+deleting mercuriales/mdd/2011/2011 MERCURIALE METRO.xls
+deleting mercuriales/mdd/2011/2011 MERCURIALE INTERMARCHE.xls
+deleting mercuriales/mdd/2011/2011 MERCURIALE GROUPE CARREFOUR.xls
+deleting mercuriales/mdd/2011/2011 MERCURIALE GROUPE AUCHAN.xls
+deleting mercuriales/mdd/2011/2011 MERCURIALE EXPORT.xls
+deleting mercuriales/mdd/2011/2011 MERCURIALE CASINO.xls
+deleting mercuriales/mdd/2011/
+deleting mercuriales/mdd/2010/2010 PLACE DU MARCHE.xls
+deleting mercuriales/mdd/2010/2010 MERCURIALE SYSTEME U.xls
+deleting mercuriales/mdd/2010/2010 MERCURIALE SCAMARK.xls
+deleting mercuriales/mdd/2010/2010 MERCURIALE PROVERA.xls
+deleting mercuriales/mdd/2010/2010 MERCURIALE NETTO.xls
+deleting mercuriales/mdd/2010/2010 MERCURIALE MONOPRIX .xls
+deleting mercuriales/mdd/2010/2010 MERCURIALE INTERMARCHE.xls
+deleting mercuriales/mdd/2010/2010 MERCURIALE GROUPE CARREFOUR.xls
+deleting mercuriales/mdd/2010/2010 MERCURIALE GROUPE AUCHAN.xls
+deleting mercuriales/mdd/2010/2010 MERCURIALE CASINO.xls
+deleting mercuriales/mdd/2010/
+deleting mercuriales/mdd/2009/2009 MERCURIALE SYSTEME U.xls
+deleting mercuriales/mdd/2009/2009 MERCURIALE SCAMARK.xls
+deleting mercuriales/mdd/2009/2009 MERCURIALE PROVERA.xls
+deleting mercuriales/mdd/2009/2009 MERCURIALE NETTO.xls
+deleting mercuriales/mdd/2009/2009 MERCURIALE MONOPRIX.xls
+deleting mercuriales/mdd/2009/2009 MERCURIALE INTERMARCHE.xls
+deleting mercuriales/mdd/2009/2009 MERCURIALE GROUPE CARREFOUR.xls
+deleting mercuriales/mdd/2009/2009 MERCURIALE GROUPE AUCHAN.xls
+deleting mercuriales/mdd/2009/2009 MERCURIALE FRANCAP.xls
+deleting mercuriales/mdd/2009/2009 MERCURIALE CASINO.xls
+deleting mercuriales/mdd/2009/
+deleting mercuriales/mdd/
+deleting mercuriales/RHF ET SOUS  TRAITANCE/MARIE 2010.xls
+deleting mercuriales/RHF ET SOUS  TRAITANCE/
+deleting mercuriales/RDS RHF/2012/2012 SAROS.xls
+deleting mercuriales/RDS RHF/2012/
+deleting mercuriales/RDS RHF/2011/2011 SAROS.xls
+deleting mercuriales/RDS RHF/2011/
+deleting mercuriales/RDS RHF/2010/SAROS 2010.xls
+deleting mercuriales/RDS RHF/2010/
+deleting mercuriales/RDS RHF/2009/SAROS 2009.xls
+deleting mercuriales/RDS RHF/2009/
+deleting mercuriales/RDS RHF/
+deleting mercuriales/MDD SURG/2014/2014 LDP SURGELE.xls
+deleting mercuriales/MDD SURG/2014/
+deleting mercuriales/MDD SURG/2013/2013 LDP SURGELE.xls
+deleting mercuriales/MDD SURG/2013/
+deleting mercuriales/MDD SURG/2012/2012 LDP SURGELE.xls
+deleting mercuriales/MDD SURG/2012/2012 CRF SURGELE.xls
+deleting mercuriales/MDD SURG/2012/
+deleting mercuriales/MDD SURG/2011/2011 LDP SURGELE.xls
+deleting mercuriales/MDD SURG/2011/2011 CRF SURGELE.xls
+deleting mercuriales/MDD SURG/2011/
+deleting mercuriales/MDD SURG/2010/MDD SURG 2010.xls
+deleting mercuriales/MDD SURG/2010/
+deleting mercuriales/MDD SURG/2009/MDD SURG 2009.xls
+deleting mercuriales/MDD SURG/2009/
+deleting mercuriales/MDD SURG/
+deleting mercuriales/HD/2014/2014 MERCURIALE NORMA.xls
+deleting mercuriales/HD/2014/2014 MERCURIALE NETTO.xls
+deleting mercuriales/HD/2014/2014 MERCURIALE LIDL.xls
+deleting mercuriales/HD/2014/2014 MERCURIALE LEADER PRICE.xls
+deleting mercuriales/HD/2014/2014 MERCURIALE LE MUTANT.xls
+deleting mercuriales/HD/2014/2014 MERCURIALE DIA.xls
+deleting mercuriales/HD/2014/2014  MERCURIALE ALDI.xls
+deleting mercuriales/HD/2014/
+deleting mercuriales/HD/2013/2013 MERCURIALE NORMA.xls
+deleting mercuriales/HD/2013/2013 MERCURIALE NETTO.xls
+deleting mercuriales/HD/2013/2013 MERCURIALE LE MUTANT.xls
+deleting mercuriales/HD/2013/2013 MERCURIALE DIA.xls
+deleting mercuriales/HD/2013/2013  MERCURIALE ALDI.xls
+deleting mercuriales/HD/2013/
+deleting mercuriales/HD/2012/2012 MERCURIALE NORMA.xls
+deleting mercuriales/HD/2012/2012 MERCURIALE NETTO.xls
+deleting mercuriales/HD/2012/2012 MERCURIALE LIDL.xls
+deleting mercuriales/HD/2012/2012 MERCURIALE LEADER PRICE.xls
+deleting mercuriales/HD/2012/2012 MERCURIALE ED.xls
+deleting mercuriales/HD/2012/2012  MERCURIALE ALDI.xls
+deleting mercuriales/HD/2012/
+deleting mercuriales/HD/2011/2011 MERCURIALE NORMA.xls
+deleting mercuriales/HD/2011/2011 MERCURIALE NETTO.xls
+deleting mercuriales/HD/2011/2011 MERCURIALE LIDL.xls
+deleting mercuriales/HD/2011/2011 MERCURIALE LIDL 2010.xls
+deleting mercuriales/HD/2011/2011 MERCURIALE LEADER PRICE.xls
+deleting mercuriales/HD/2011/2011 MERCURIALE ED.xls
+deleting mercuriales/HD/2011/2011 MERCURIALE AUCHAN SD.xls
+deleting mercuriales/HD/2011/2011  MERCURIALE ALDI.xls
+deleting mercuriales/HD/2011/
+deleting mercuriales/HD/2010/2013 MERCURIALE LEADER PRICE.xls
+deleting mercuriales/HD/2010/2010 MERCURIALE NORMA.xls
+deleting mercuriales/HD/2010/2010 MERCURIALE LIDL 2010.xls
+deleting mercuriales/HD/2010/2010 MERCURIALE LEADER PRICE.xls
+deleting mercuriales/HD/2010/2010 MERCURIALE ED.xls
+deleting mercuriales/HD/2010/2010 MERCURIALE ALDI.xls
+deleting mercuriales/HD/2010/
+deleting mercuriales/HD/2009/2009 MERCURIALE NORMA.xls
+deleting mercuriales/HD/2009/2009 MERCURIALE LEADER PRICE.xls
+deleting mercuriales/HD/2009/2009 MERCURIALE ED.xls
+deleting mercuriales/HD/2009/
+deleting mercuriales/HD/
+deleting mercuriales/FZC/FZC 2014/TOUPARGEL 2014.xls
+deleting mercuriales/FZC/FZC 2014/THIRIET 2014.xls
+deleting mercuriales/FZC/FZC 2014/SAROS 2014.xls
+deleting mercuriales/FZC/FZC 2014/PICARD 2014.xls
+deleting mercuriales/FZC/FZC 2014/BOFROST 2014.xls
+deleting mercuriales/FZC/FZC 2014/ARGEL 2014.xls
+deleting mercuriales/FZC/FZC 2014/
+deleting mercuriales/FZC/FZC 2013/TOUPARGEL 2013.xls
+deleting mercuriales/FZC/FZC 2013/THIRIET 2013.xls
+deleting mercuriales/FZC/FZC 2013/SAROS 2013.xls
+deleting mercuriales/FZC/FZC 2013/PICARD 2013.xls
+deleting mercuriales/FZC/FZC 2013/BOFROST 2013.xls
+deleting mercuriales/FZC/FZC 2013/ARGEL 2013.xls
+deleting mercuriales/FZC/FZC 2013/
+deleting mercuriales/FZC/FZC 2012/TOUPARGEL 2012.xls
+deleting mercuriales/FZC/FZC 2012/THIRIET 2012.xls
+deleting mercuriales/FZC/FZC 2012/PICARD 2012.xls
+deleting mercuriales/FZC/FZC 2012/BOFROST 2012.xls
+deleting mercuriales/FZC/FZC 2012/ARGEL 2012.xls
+deleting mercuriales/FZC/FZC 2012/
+deleting mercuriales/FZC/FZC 2011/TOUPARGEL 2011.xls
+deleting mercuriales/FZC/FZC 2011/THIRIET 2011.xls
+deleting mercuriales/FZC/FZC 2011/PICARD 2011.xls
+deleting mercuriales/FZC/FZC 2011/FREEZER CENTER 2011.xls
+deleting mercuriales/FZC/FZC 2011/EISMANN 2011.xls
+deleting mercuriales/FZC/FZC 2011/BOFROST BELGIQUE 2011.xls
+deleting mercuriales/FZC/FZC 2011/BOFROST 2011.xls
+deleting mercuriales/FZC/FZC 2011/ARGEL 2011.xls
+deleting mercuriales/FZC/FZC 2011/
+deleting mercuriales/FZC/FZC 2010/FREEZER CENTER 2010.xls
+deleting mercuriales/FZC/FZC 2010/
+deleting mercuriales/FZC/FZC 2009/FREEZER CENTER 2009.xls
+deleting mercuriales/FZC/FZC 2009/
+deleting mercuriales/FZC/
+deleting mercuriales/EXPORT/X-ARCHIVES/2013/controle tarif/2013 ALVILARDAN TARIF AU 01-01-2013.pdf
+deleting mercuriales/EXPORT/X-ARCHIVES/2013/controle tarif/
+deleting mercuriales/EXPORT/X-ARCHIVES/2013/
+deleting mercuriales/EXPORT/X-ARCHIVES/2012/CONTROLE TARIF/TOP SAVEURS 02-04-2012.doc
+deleting mercuriales/EXPORT/X-ARCHIVES/2012/CONTROLE TARIF/PHENE 02-04-2012.doc
+deleting mercuriales/EXPORT/X-ARCHIVES/2012/CONTROLE TARIF/ALVILARDAN 02-04-2012 .doc
+deleting mercuriales/EXPORT/X-ARCHIVES/2012/CONTROLE TARIF/
+deleting mercuriales/EXPORT/X-ARCHIVES/2012/PHENE 2012.xls
+deleting mercuriales/EXPORT/X-ARCHIVES/2012/MATCH BELUX 2012.xls
+deleting mercuriales/EXPORT/X-ARCHIVES/2012/ALVILARDAN 2012.xls
+deleting mercuriales/EXPORT/X-ARCHIVES/2012/
+deleting mercuriales/EXPORT/X-ARCHIVES/2011/SANTA MARIA 2011.xls
+deleting mercuriales/EXPORT/X-ARCHIVES/2011/PHENE 2011.xls
+deleting mercuriales/EXPORT/X-ARCHIVES/2011/MATCH BELUX 2011.xls
+deleting mercuriales/EXPORT/X-ARCHIVES/2011/HEMA 2011.xls
+deleting mercuriales/EXPORT/X-ARCHIVES/2011/ALVILARDAN 2011.xls
+deleting mercuriales/EXPORT/X-ARCHIVES/2011/
+deleting mercuriales/EXPORT/X-ARCHIVES/2010/SANTA MARIA 2010.xls
+deleting mercuriales/EXPORT/X-ARCHIVES/2010/PROVERA BELUX 2010.xls
+deleting mercuriales/EXPORT/X-ARCHIVES/2010/PHENE 2010.xls
+deleting mercuriales/EXPORT/X-ARCHIVES/2010/HEMA 2010.xls
+deleting mercuriales/EXPORT/X-ARCHIVES/2010/CHAMPION MESTDAGH 2010.xls
+deleting mercuriales/EXPORT/X-ARCHIVES/2010/ALVILARDAN 2010.xls
+deleting mercuriales/EXPORT/X-ARCHIVES/2010/
+deleting mercuriales/EXPORT/X-ARCHIVES/
+deleting mercuriales/EXPORT/2014/CONTROLE DES TARIFS/MATCH BELUX PRODUITS MDD.pdf
+deleting mercuriales/EXPORT/2014/CONTROLE DES TARIFS/MATCH BELUX 12-05-2014.pdf
+deleting mercuriales/EXPORT/2014/CONTROLE DES TARIFS/
+deleting mercuriales/EXPORT/2014/CLIENTS/MATCH BELUX 2014.xls
+deleting mercuriales/EXPORT/2014/CLIENTS/
+deleting mercuriales/EXPORT/2014/
+deleting mercuriales/EXPORT/
+deleting mercuriales/sync.ffs_lock
+deleting mercuriales/Nouveau Document texte.txt
+mercuriales/MERCURIALES - AGIS/FZC/FZC 2014/ARGEL 2014.xls
+mercuriales/MERCURIALES - AGIS/HD/2014/2014 MERCURIALE DIA.xls
+deleting mercuriales/MERCURIALES - AGIS/gms/2014/REGIONS  2014/SU R\#351gion JUIN 2014.xls
+mercuriales/MERCURIALES - AGIS/gms/2014/REGIONS  2014/SU R\#351gion OCT 2014.xls
+mercuriales/MERCURIALES - AGIS/gms/2014/REGIONS  2014/ARCHIVES/SU R\#351gion JUIN 2014.xls
+mercuriales/MERCURIALES - AGIS/mdd/2014/2014 MERCURIALE AUCHAN.xls
+mercuriales/MERCURIALES - AGIS/mdd/2014/2014 MERCURIALE CARREFOUR PLATS CUISINES.xls
+mercuriales/MERCURIALES - AGIS/mdd/2014/2014 MERCURIALE MONOPRIX .xls
+mercuriales/MERCURIALES - AGIS/mdd/2014/2014 MERCURIALE SYSTEME U.xls
+mercuriales/MERCURIALES - MARIE/2014/2014 MERCURIALES AUCHAN MARIE.xls
+deleting mercuriales/gms/2014/REGIONS  2014/ARCHIVES/SU R\#351gion JANVIER 2014.xls
+deleting mercuriales/gms/2014/REGIONS  2014/ARCHIVES/GALEC REGION MERCU JANVIER 2014.xls
+deleting mercuriales/gms/2014/REGIONS  2014/ARCHIVES/GALEC REGION MERCU AVRIL 2014.xls
+deleting mercuriales/gms/2014/REGIONS  2014/ARCHIVES/
+deleting mercuriales/gms/2014/REGIONS  2014/SU R\#351gion JUIN 2014.xls
+deleting mercuriales/gms/2014/REGIONS  2014/SIMPLY ENTREPOT JANV 2014.xls
+deleting mercuriales/gms/2014/REGIONS  2014/SEGUREL JANVIER 2014.xls
+deleting mercuriales/gms/2014/REGIONS  2014/SCHIEVER MERCU 2014.xls
+deleting mercuriales/gms/2014/REGIONS  2014/GALEC REGION MERCU JUIN 2014.xls
+deleting mercuriales/gms/2014/REGIONS  2014/
+deleting mercuriales/gms/2014/CONTROLE TARIFS 2014/09-SEPTEMBRE/2014 GALEC PLATEAUX SANS REM LANCEMENT.pdf
+deleting mercuriales/gms/2014/CONTROLE TARIFS 2014/09-SEPTEMBRE/2014 AUCHAN OPERATION NEM X2.pdf
+deleting mercuriales/gms/2014/CONTROLE TARIFS 2014/09-SEPTEMBRE/
+deleting mercuriales/gms/2014/CONTROLE TARIFS 2014/07-JUILLET/PDM PC FE AU 01-07-2014.pdf
+deleting mercuriales/gms/2014/CONTROLE TARIFS 2014/07-JUILLET/AUCHAN ROUILLE SETOISE R5.pdf
+deleting mercuriales/gms/2014/CONTROLE TARIFS 2014/07-JUILLET/
+deleting mercuriales/gms/2014/CONTROLE TARIFS 2014/06-JUIN/2014 SYSTEME U ROSBEEF NATIONAL.pdf
+deleting mercuriales/gms/2014/CONTROLE TARIFS 2014/06-JUIN/2014 SYSTEME U PLATEAUX.pdf
+deleting mercuriales/gms/2014/CONTROLE TARIFS 2014/06-JUIN/2014 SIMPLY MARKET PLATEAUX.pdf
+deleting mercuriales/gms/2014/CONTROLE TARIFS 2014/06-JUIN/2014 INTERMARCHE PLATEAUX.pdf
+deleting mercuriales/gms/2014/CONTROLE TARIFS 2014/06-JUIN/2014 GALEC PLATEAUX.pdf
+deleting mercuriales/gms/2014/CONTROLE TARIFS 2014/06-JUIN/2014 CASINO PLATEAUX APERITIFS.pdf
+deleting mercuriales/gms/2014/CONTROLE TARIFS 2014/06-JUIN/2014 CARREFOUR PLATEAUX.pdf
+deleting mercuriales/gms/2014/CONTROLE TARIFS 2014/06-JUIN/2014 CARREFOUR MARKET PLATEAUX.pdf
+deleting mercuriales/gms/2014/CONTROLE TARIFS 2014/06-JUIN/2014 CARREFOUR MARKET LB PV NOUVELLES REMISES.pdf
+deleting mercuriales/gms/2014/CONTROLE TARIFS 2014/06-JUIN/2014 CARREFOUR LB PV NOUVELLES REMISES.pdf
+deleting mercuriales/gms/2014/CONTROLE TARIFS 2014/06-JUIN/2014 AUCHAN.FR PLATEAUX.pdf
+deleting mercuriales/gms/2014/CONTROLE TARIFS 2014/06-JUIN/2014 AFFILIES PLATEAUX.pdf
+deleting mercuriales/gms/2014/CONTROLE TARIFS 2014/06-JUIN/2014 AFFILIES LB PV NOUVELLES REMISES.pdf
+deleting mercuriales/gms/2014/CONTROLE TARIFS 2014/06-JUIN/
+deleting mercuriales/gms/2014/CONTROLE TARIFS 2014/05-MAI/INTERMARCHE NOUVEAUX PRIX CREVETTES.pdf
+deleting mercuriales/gms/2014/CONTROLE TARIFS 2014/05-MAI/CASINO RAVIOLIS CHINOIS COUPE.pdf
+deleting mercuriales/gms/2014/CONTROLE TARIFS 2014/05-MAI/CASINO GAMME ASIE FE.pdf
+deleting mercuriales/gms/2014/CONTROLE TARIFS 2014/05-MAI/CARREFOUR RP.pdf
+deleting mercuriales/gms/2014/CONTROLE TARIFS 2014/05-MAI/CARREFOUR MARKET RP.pdf
+deleting mercuriales/gms/2014/CONTROLE TARIFS 2014/05-MAI/AFFILIES RP.pdf
+deleting mercuriales/gms/2014/CONTROLE TARIFS 2014/05-MAI/
+deleting mercuriales/gms/2014/CONTROLE TARIFS 2014/04-AVRIL/AUCHAN GAMME R5 R6 PC.pdf
+deleting mercuriales/gms/2014/CONTROLE TARIFS 2014/04-AVRIL/2014 SYSTEME U NOUVEAUX PRIX.pdf
+deleting mercuriales/gms/2014/CONTROLE TARIFS 2014/04-AVRIL/2014 SYSTEME U ANIMATIONS DIRECT.pdf
+deleting mercuriales/gms/2014/CONTROLE TARIFS 2014/04-AVRIL/2014 SIMPLY MARKET VIANDES.pdf
+deleting mercuriales/gms/2014/CONTROLE TARIFS 2014/04-AVRIL/2014 INTERMARCHE RP CRABE.pdf
+deleting mercuriales/gms/2014/CONTROLE TARIFS 2014/04-AVRIL/2014 INTERMARCHE GAMME PIZZAS 420G.pdf
+deleting mercuriales/gms/2014/CONTROLE TARIFS 2014/04-AVRIL/2014 INTERMARCHE GAMME PC REGIONALES.pdf
+deleting mercuriales/gms/2014/CONTROLE TARIFS 2014/04-AVRIL/2014 INTERMARCHE GAMME PC FE.pdf
+deleting mercuriales/gms/2014/CONTROLE TARIFS 2014/04-AVRIL/2014 GALEC RP CRABE.pdf
+deleting mercuriales/gms/2014/CONTROLE TARIFS 2014/04-AVRIL/2014 GALEC INNO SAUF RP CRABE.pdf
+deleting mercuriales/gms/2014/CONTROLE TARIFS 2014/04-AVRIL/2014 CASINO NOUVEAUX PRIX.pdf
+deleting mercuriales/gms/2014/CONTROLE TARIFS 2014/04-AVRIL/2014 CARREFOUR ROUILLE GARDIANNE.pdf
+deleting mercuriales/gms/2014/CONTROLE TARIFS 2014/04-AVRIL/2014 CARREFOUR NOUVEAUX PRIX.pdf
+deleting mercuriales/gms/2014/CONTROLE TARIFS 2014/04-AVRIL/2014 CARREFOUR MARKET NOUVEAUX PRIX.pdf
+deleting mercuriales/gms/2014/CONTROLE TARIFS 2014/04-AVRIL/2014 AUCHAN.FR NOUVEAUX PC.pdf
+deleting mercuriales/gms/2014/CONTROLE TARIFS 2014/04-AVRIL/2014 AUCHAN SAUCE AIGRE DOUCE NUOC MAM.pdf
+deleting mercuriales/gms/2014/CONTROLE TARIFS 2014/04-AVRIL/2014 AUCHAN ROULEAUX PRINTEMPS CRABE.pdf
+deleting mercuriales/gms/2014/CONTROLE TARIFS 2014/04-AVRIL/2014 AUCHAN NOUVEAUX PC FE.pdf
+deleting mercuriales/gms/2014/CONTROLE TARIFS 2014/04-AVRIL/
+deleting mercuriales/gms/2014/CONTROLE TARIFS 2014/03-MARS/2014 SYSTEME U PRIX PROLONGES AU 31-03-2014.pdf
+deleting mercuriales/gms/2014/CONTROLE TARIFS 2014/03-MARS/2014 SIMPLY MARKET HAUSSE CONJONCTURELLE.pdf
+deleting mercuriales/gms/2014/CONTROLE TARIFS 2014/03-MARS/2014 INTERMARCHE NOUVEAUX PRIX.pdf
+deleting mercuriales/gms/2014/CONTROLE TARIFS 2014/03-MARS/2014 INTERMARCHE GAMME ANIMATION.pdf
+deleting mercuriales/gms/2014/CONTROLE TARIFS 2014/03-MARS/2014 INTERMARCHE GAMME ANIMATION SAMOSSA VOLAILLE.pdf
+deleting mercuriales/gms/2014/CONTROLE TARIFS 2014/03-MARS/2014 GALEC ANIMATIONS.pdf
+deleting mercuriales/gms/2014/CONTROLE TARIFS 2014/03-MARS/2014 CASINO PRIX NOUVEAUX CODES.pdf
+deleting mercuriales/gms/2014/CONTROLE TARIFS 2014/03-MARS/2014 CARREFOUR MARKET CREPES.pdf
+deleting mercuriales/gms/2014/CONTROLE TARIFS 2014/03-MARS/2014 CARREFOUR DIRECT ANIMATIONS.pdf
+deleting mercuriales/gms/2014/CONTROLE TARIFS 2014/03-MARS/2014 AUCHAN.FR NOUVEAUX PRODUITS.pdf
+deleting mercuriales/gms/2014/CONTROLE TARIFS 2014/03-MARS/2014 AUCHAN.FR NOUVEAUX PRIX.pdf
+deleting mercuriales/gms/2014/CONTROLE TARIFS 2014/03-MARS/2014 AUCHAN VILLARS OP COUSCOUS PAELLA.pdf
+deleting mercuriales/gms/2014/CONTROLE TARIFS 2014/03-MARS/2014 AUCHAN NOUVEAUX PRIX TOP CHEF 31-03.pdf
+deleting mercuriales/gms/2014/CONTROLE TARIFS 2014/03-MARS/2014 AUCHAN NOUVEAUX PRIX AU 17-03-2014.pdf
+deleting mercuriales/gms/2014/CONTROLE TARIFS 2014/03-MARS/2014 AUCHAN NOUVEAUX PRIX AU 01-03.pdf
+deleting mercuriales/gms/2014/CONTROLE TARIFS 2014/03-MARS/2014 AUCHAN NOUVEAUX PRIX ASIE MEN 17-03-2014.pdf
+deleting mercuriales/gms/2014/CONTROLE TARIFS 2014/03-MARS/2014 AUCHAN NOUVEAUX PRIX 17-03 SANS RPP 5%.pdf
+deleting mercuriales/gms/2014/CONTROLE TARIFS 2014/03-MARS/2014 AUCHAN NOUVEAUX PLATEAUX.pdf
+deleting mercuriales/gms/2014/CONTROLE TARIFS 2014/03-MARS/2014 AUCHAN GAMME ANIMATION.pdf
+deleting mercuriales/gms/2014/CONTROLE TARIFS 2014/03-MARS/2014 AUCHAN ET .FR HAUSSE CONJONCTURELLE.pdf
+deleting mercuriales/gms/2014/CONTROLE TARIFS 2014/03-MARS/2014 AUCHAN DIRECT.pdf
+deleting mercuriales/gms/2014/CONTROLE TARIFS 2014/03-MARS/2014 AUCHAN ASIE MN RETOUR ANCIENS PRIX.pdf
+deleting mercuriales/gms/2014/CONTROLE TARIFS 2014/03-MARS/
+deleting mercuriales/gms/2014/CONTROLE TARIFS 2014/02-FEVRIER/2014 INTERMARCHE GAMME DRIVE ET PC.pdf
+deleting mercuriales/gms/2014/CONTROLE TARIFS 2014/02-FEVRIER/2014 GALEC TARIF CONJONCTUREL.pdf
+deleting mercuriales/gms/2014/CONTROLE TARIFS 2014/02-FEVRIER/2014 AUCHAN.FR GAMME TOP CHEF.pdf
+deleting mercuriales/gms/2014/CONTROLE TARIFS 2014/02-FEVRIER/2014 AUCHAN GAMME TOP CHEF.pdf
+deleting mercuriales/gms/2014/CONTROLE TARIFS 2014/02-FEVRIER/
+deleting mercuriales/gms/2014/CONTROLE TARIFS 2014/01-JANVIER/2014 SYSTEME U PRIX 2013 PROLONGES AU 28-02-2014.pdf
+deleting mercuriales/gms/2014/CONTROLE TARIFS 2014/01-JANVIER/2014 SIMPLY MARKET PRIX 2013 PROLONGES AU 28-02-2014.pdf
+deleting mercuriales/gms/2014/CONTROLE TARIFS 2014/01-JANVIER/2014 PLACE DU MARCHE NOUVEAUX PRODUITS 01-01-2014.pdf
+deleting mercuriales/gms/2014/CONTROLE TARIFS 2014/01-JANVIER/2014 INTERMARCHE PRIX 2013 PROLONGES AU 28-02-2014.pdf
+deleting mercuriales/gms/2014/CONTROLE TARIFS 2014/01-JANVIER/2014 GALEC PLAN PROMO 06-01-2014.pdf
+deleting mercuriales/gms/2014/CONTROLE TARIFS 2014/01-JANVIER/2014 GALEC NOUVEAUX PRIX.pdf
+deleting mercuriales/gms/2014/CONTROLE TARIFS 2014/01-JANVIER/2014 GALEC FOND DE RAYON 06-01-2014.pdf
+deleting mercuriales/gms/2014/CONTROLE TARIFS 2014/01-JANVIER/2014 CASINO PRIX 2013 PROLONGES AU 28-02-2014.pdf
+deleting mercuriales/gms/2014/CONTROLE TARIFS 2014/01-JANVIER/2014 CASINO NOUVEAUX PC ASIE.pdf
+deleting mercuriales/gms/2014/CONTROLE TARIFS 2014/01-JANVIER/2014 CASINO CHIPS CREVETTES.pdf
+deleting mercuriales/gms/2014/CONTROLE TARIFS 2014/01-JANVIER/2014 CARREFOUR PRIX 2013 PROLONGES AU 28-02-2014.pdf
+deleting mercuriales/gms/2014/CONTROLE TARIFS 2014/01-JANVIER/2014 CARREFOUR MARKET PRIX 2013 PROLONGES 28-03-2014.pdf
+deleting mercuriales/gms/2014/CONTROLE TARIFS 2014/01-JANVIER/2014 AUCHAN.FR.pdf
+deleting mercuriales/gms/2014/CONTROLE TARIFS 2014/01-JANVIER/2014 AUCHAN NOUVEAUX PRODUITS ASIE GAMME PC.pdf
+deleting mercuriales/gms/2014/CONTROLE TARIFS 2014/01-JANVIER/
+deleting mercuriales/gms/2014/CONTROLE TARIFS 2014/
+deleting mercuriales/gms/2014/CENTRALES 2014/SYSTEME U 2014.xls
+deleting mercuriales/gms/2014/CENTRALES 2014/SIMPLY MARKET 2014.xls
+deleting mercuriales/gms/2014/CENTRALES 2014/PLACE DU MARCHE 2014.xls
+deleting mercuriales/gms/2014/CENTRALES 2014/INTERMARCHE 2014.xls
+deleting mercuriales/gms/2014/CENTRALES 2014/CASINO 2014.xls
+deleting mercuriales/gms/2014/CENTRALES 2014/CARREFOUR MARKET 2014.xls
+deleting mercuriales/gms/2014/CENTRALES 2014/CARREFOUR 2014.xls
+deleting mercuriales/gms/2014/CENTRALES 2014/AUCHAN.FR 2014.xls
+deleting mercuriales/gms/2014/CENTRALES 2014/AUCHAN 2014.xls
+deleting mercuriales/gms/2014/CENTRALES 2014/
+
+sent 301951 bytes  received 8864 bytes  88804.29 bytes/sec
+total size is 36316668  speedup is 116.84
+sending incremental file list
+
+sent 5047 bytes  received 27 bytes  3382.67 bytes/sec
+total size is 39173092  speedup is 7720.36
+sending incremental file list
+operations_commerciales/chrono demande echantillons.xls
+deleting operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/CARREFOUR MARKET/2014 CARREFOUR MARKET TRAFIC 50-51 FESTIFS.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/CARREFOUR MARKET/2014 CARREFOUR MARKET FESTIFS -TRAFIC 50-51.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/INTERMARCHE/2014 INTERMARCHE DECEMBRE FESTIFS COUPE.xls
+operations_commerciales/GMS/2014/D-REGIONS/GMS LECLERC 2014-FUTUR MASTER.xls
+operations_commerciales/MDD/MODELES CJ/AUCHAN ATAC SCHIEVER/CONF OP/2014/CONFIRMATION OPERATION AUCHAN SEPT 1.xls
+operations_commerciales/MDD/MODELES CJ/CARREFOUR/CONF OP/CONFIRMATION OPERATION CRF CONTACT CITY.xls
+operations_commerciales/MDD/MODELES CJ/CARREFOUR/CONF OP/CONFIRMATION OPERATION CRF MKT COLLEC NOEL 14.xls
+operations_commerciales/MDD/MODELES CJ/CARREFOUR/CONF OP/2013/CONFIRMATION OPERATION CRF MKT NAA 2014 .xls
+operations_commerciales/MDD/MODELES CJ/PROVERA/Chrono 457 MATCH.XLS
+operations_commerciales/MDD/MODELES CJ/PROVERA/Chrono 458 AGENCE REYMANN.XLS
+operations_commerciales/MDD/MODELES CJ/PROVERA/CONF OPES CORA MATCH/2014/CORA/CONFIRMATION OPERATION_CORA 2014-14-11450-ITINERAIRE GAGNANT SEPTEMBRE.xls
+operations_commerciales/MDD/MODELES CJ/PROVERA/CONF OPES CORA MATCH/2014/MATCH/CONFIRMATION OPERATION_MATCH_2014-3076-MDDX2 VAGUE 4.xls
+operations_commerciales/MDD/MODELES CJ/SYSTEME U/CONF OP/CONFIRMATION OPERATION SU CARTE U SEPTEMBRE 14.xls
+operations_commerciales/MDD/OP MDD 2014/MDD CORA 2014.xls
+operations_commerciales/MDD/OP MDD 2014/MDD CRF MKT 2014.xls
+operations_commerciales/MDD/OP MDD 2014/MDD GROUPE AUCHAN 2014.xls
+operations_commerciales/MDD/OP MDD 2014/MDD MATCH 2014.xls
+operations_commerciales/MDD/OP MDD 2014/MDD SYSTEME U 2014.xls
+
+sent 369517 bytes  received 12800 bytes  109233.43 bytes/sec
+total size is 55824543  speedup is 146.02
+sending incremental file list
+
+sent 20406 bytes  received 83 bytes  13659.33 bytes/sec
+total size is 99360776  speedup is 4849.47
+sending incremental file list
+
+sent 6273 bytes  received 92 bytes  2546.00 bytes/sec
+total size is 52063160  speedup is 8179.60
+sending incremental file list
+
+sent 8710 bytes  received 13 bytes  5815.33 bytes/sec
+total size is 42695680  speedup is 4894.61
+sending incremental file list
+
+sent 5781 bytes  received 30 bytes  3874.00 bytes/sec
+total size is 92829061  speedup is 15974.71
+sending incremental file list
+erp_data.mdb
+
+sent 8522174 bytes  received 66685 bytes  184706.65 bytes/sec
+total size is 90648576  speedup is 10.55
+sending incremental file list
+
+sent 7593 bytes  received 45 bytes  5092.00 bytes/sec
+total size is 9254930  speedup is 1211.70
+sending incremental file list
+
+sent 4308 bytes  received 24 bytes  2888.00 bytes/sec
+total size is 6387982  speedup is 1474.60
+sending incremental file list
+
+sent 7814 bytes  received 20 bytes  5222.67 bytes/sec
+total size is 16759466  speedup is 2139.32
+sending incremental file list
+
+sent 85 bytes  received 13 bytes  65.33 bytes/sec
+total size is 104853504  speedup is 1069933.71
+sending incremental file list
+operations_commerciales/chrono demande echantillons.xls
+deleting operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/CARREFOUR MARKET/2014 CARREFOUR MARKET TRAFIC 50-51 FESTIFS.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/CARREFOUR MARKET/2014 CARREFOUR MARKET FESTIFS -TRAFIC 50-51.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/INTERMARCHE/2014 INTERMARCHE DECEMBRE FESTIFS COUPE.xls
+operations_commerciales/GMS/2014/D-REGIONS/GMS LECLERC 2014-FUTUR MASTER.xls
+operations_commerciales/MDD/MODELES CJ/AUCHAN ATAC SCHIEVER/CONF OP/2014/CONFIRMATION OPERATION AUCHAN SEPT 1.xls
+operations_commerciales/MDD/MODELES CJ/CARREFOUR/CONF OP/CONFIRMATION OPERATION CRF CONTACT CITY.xls
+operations_commerciales/MDD/MODELES CJ/CARREFOUR/CONF OP/CONFIRMATION OPERATION CRF MKT COLLEC NOEL 14.xls
+operations_commerciales/MDD/MODELES CJ/CARREFOUR/CONF OP/2013/CONFIRMATION OPERATION CRF MKT NAA 2014 .xls
+operations_commerciales/MDD/MODELES CJ/PROVERA/Chrono 457 MATCH.XLS
+operations_commerciales/MDD/MODELES CJ/PROVERA/Chrono 458 AGENCE REYMANN.XLS
+operations_commerciales/MDD/MODELES CJ/PROVERA/CONF OPES CORA MATCH/2014/CORA/CONFIRMATION OPERATION_CORA 2014-14-11450-ITINERAIRE GAGNANT SEPTEMBRE.xls
+operations_commerciales/MDD/MODELES CJ/PROVERA/CONF OPES CORA MATCH/2014/MATCH/CONFIRMATION OPERATION_MATCH_2014-3076-MDDX2 VAGUE 4.xls
+operations_commerciales/MDD/MODELES CJ/SYSTEME U/CONF OP/CONFIRMATION OPERATION SU CARTE U SEPTEMBRE 14.xls
+operations_commerciales/MDD/OP MDD 2014/MDD CORA 2014.xls
+operations_commerciales/MDD/OP MDD 2014/MDD CRF MKT 2014.xls
+operations_commerciales/MDD/OP MDD 2014/MDD GROUPE AUCHAN 2014.xls
+operations_commerciales/MDD/OP MDD 2014/MDD MATCH 2014.xls
+operations_commerciales/MDD/OP MDD 2014/MDD SYSTEME U 2014.xls
+
+sent 369517 bytes  received 12800 bytes  109233.43 bytes/sec
+total size is 55824543  speedup is 146.02
+sending incremental file list
+deleting mercuriales/mdd/2014/2014 MERCURIALE SYSTEME U.xls
+deleting mercuriales/mdd/2014/2014 MERCURIALE SCAMARK.xls
+deleting mercuriales/mdd/2014/2014 MERCURIALE PROVERA.xls
+deleting mercuriales/mdd/2014/2014 MERCURIALE MONOPRIX .xls
+deleting mercuriales/mdd/2014/2014 MERCURIALE INTERMARCHE.xls
+deleting mercuriales/mdd/2014/2014 MERCURIALE FRANCAP.xls
+deleting mercuriales/mdd/2014/2014 MERCURIALE EXPORT.xls
+deleting mercuriales/mdd/2014/2014 MERCURIALE CASINO.xls
+deleting mercuriales/mdd/2014/2014 MERCURIALE CARREFOUR PLATS CUISINES.xls
+deleting mercuriales/mdd/2014/2014 MERCURIALE CARREFOUR BELGIQUE.xls
+deleting mercuriales/mdd/2014/2014 MERCURIALE CARREFOUR ASIATIQUE.xls
+deleting mercuriales/mdd/2014/2014 MERCURIALE AUCHAN.xls
+deleting mercuriales/mdd/2014/
+deleting mercuriales/mdd/2013/2013 PLACE DU MARCHE.xls
+deleting mercuriales/mdd/2013/2013 MERCURIALE SYSTEME U.xls
+deleting mercuriales/mdd/2013/2013 MERCURIALE SCAMARK.xls
+deleting mercuriales/mdd/2013/2013 MERCURIALE PROVERA.xls
+deleting mercuriales/mdd/2013/2013 MERCURIALE MONOPRIX .xls
+deleting mercuriales/mdd/2013/2013 MERCURIALE METRO.xls
+deleting mercuriales/mdd/2013/2013 MERCURIALE INTERMARCHE.xls
+deleting mercuriales/mdd/2013/2013 MERCURIALE GROUPE AUCHAN.xls
+deleting mercuriales/mdd/2013/2013 MERCURIALE EXPORT.xls
+deleting mercuriales/mdd/2013/2013 MERCURIALE DAILY MONOP.xls
+deleting mercuriales/mdd/2013/2013 MERCURIALE CASINO.xls
+deleting mercuriales/mdd/2013/2013 MERCURIALE CARREFOUR PLATS CUISINES.xls
+deleting mercuriales/mdd/2013/2013 MERCURIALE CARREFOUR ASIATIQUE.xls
+deleting mercuriales/mdd/2013/
+deleting mercuriales/mdd/2012/2012 PLACE DU MARCHE.xls
+deleting mercuriales/mdd/2012/2012 MERCURIALE SYSTEME U.xls
+deleting mercuriales/mdd/2012/2012 MERCURIALE SCAMARK.xls
+deleting mercuriales/mdd/2012/2012 MERCURIALE PROVERA.xls
+deleting mercuriales/mdd/2012/2012 MERCURIALE MONOPRIX .xls
+deleting mercuriales/mdd/2012/2012 MERCURIALE METRO.xls
+deleting mercuriales/mdd/2012/2012 MERCURIALE INTERMARCHE.xls
+deleting mercuriales/mdd/2012/2012 MERCURIALE GROUPE CARREFOUR.xls
+deleting mercuriales/mdd/2012/2012 MERCURIALE GROUPE AUCHAN.xls
+deleting mercuriales/mdd/2012/2012 MERCURIALE EXPORT.xls
+deleting mercuriales/mdd/2012/2012 MERCURIALE DAILY MONOP.xls
+deleting mercuriales/mdd/2012/2012 MERCURIALE CASINO.xls
+deleting mercuriales/mdd/2012/
+deleting mercuriales/mdd/2011/2011 PLACE DU MARCHE.xls
+deleting mercuriales/mdd/2011/2011 MERCURIALE SYSTEME U.xls
+deleting mercuriales/mdd/2011/2011 MERCURIALE SCAMARK.xls
+deleting mercuriales/mdd/2011/2011 MERCURIALE PROVERA.xls
+deleting mercuriales/mdd/2011/2011 MERCURIALE MONOPRIX .xls
+deleting mercuriales/mdd/2011/2011 MERCURIALE METRO.xls
+deleting mercuriales/mdd/2011/2011 MERCURIALE INTERMARCHE.xls
+deleting mercuriales/mdd/2011/2011 MERCURIALE GROUPE CARREFOUR.xls
+deleting mercuriales/mdd/2011/2011 MERCURIALE GROUPE AUCHAN.xls
+deleting mercuriales/mdd/2011/2011 MERCURIALE EXPORT.xls
+deleting mercuriales/mdd/2011/2011 MERCURIALE CASINO.xls
+deleting mercuriales/mdd/2011/
+deleting mercuriales/mdd/2010/2010 PLACE DU MARCHE.xls
+deleting mercuriales/mdd/2010/2010 MERCURIALE SYSTEME U.xls
+deleting mercuriales/mdd/2010/2010 MERCURIALE SCAMARK.xls
+deleting mercuriales/mdd/2010/2010 MERCURIALE PROVERA.xls
+deleting mercuriales/mdd/2010/2010 MERCURIALE NETTO.xls
+deleting mercuriales/mdd/2010/2010 MERCURIALE MONOPRIX .xls
+deleting mercuriales/mdd/2010/2010 MERCURIALE INTERMARCHE.xls
+deleting mercuriales/mdd/2010/2010 MERCURIALE GROUPE CARREFOUR.xls
+deleting mercuriales/mdd/2010/2010 MERCURIALE GROUPE AUCHAN.xls
+deleting mercuriales/mdd/2010/2010 MERCURIALE CASINO.xls
+deleting mercuriales/mdd/2010/
+deleting mercuriales/mdd/2009/2009 MERCURIALE SYSTEME U.xls
+deleting mercuriales/mdd/2009/2009 MERCURIALE SCAMARK.xls
+deleting mercuriales/mdd/2009/2009 MERCURIALE PROVERA.xls
+deleting mercuriales/mdd/2009/2009 MERCURIALE NETTO.xls
+deleting mercuriales/mdd/2009/2009 MERCURIALE MONOPRIX.xls
+deleting mercuriales/mdd/2009/2009 MERCURIALE INTERMARCHE.xls
+deleting mercuriales/mdd/2009/2009 MERCURIALE GROUPE CARREFOUR.xls
+deleting mercuriales/mdd/2009/2009 MERCURIALE GROUPE AUCHAN.xls
+deleting mercuriales/mdd/2009/2009 MERCURIALE FRANCAP.xls
+deleting mercuriales/mdd/2009/2009 MERCURIALE CASINO.xls
+deleting mercuriales/mdd/2009/
+deleting mercuriales/mdd/
+deleting mercuriales/RHF ET SOUS  TRAITANCE/MARIE 2010.xls
+deleting mercuriales/RHF ET SOUS  TRAITANCE/
+deleting mercuriales/RDS RHF/2012/2012 SAROS.xls
+deleting mercuriales/RDS RHF/2012/
+deleting mercuriales/RDS RHF/2011/2011 SAROS.xls
+deleting mercuriales/RDS RHF/2011/
+deleting mercuriales/RDS RHF/2010/SAROS 2010.xls
+deleting mercuriales/RDS RHF/2010/
+deleting mercuriales/RDS RHF/2009/SAROS 2009.xls
+deleting mercuriales/RDS RHF/2009/
+deleting mercuriales/RDS RHF/
+deleting mercuriales/MDD SURG/2014/2014 LDP SURGELE.xls
+deleting mercuriales/MDD SURG/2014/
+deleting mercuriales/MDD SURG/2013/2013 LDP SURGELE.xls
+deleting mercuriales/MDD SURG/2013/
+deleting mercuriales/MDD SURG/2012/2012 LDP SURGELE.xls
+deleting mercuriales/MDD SURG/2012/2012 CRF SURGELE.xls
+deleting mercuriales/MDD SURG/2012/
+deleting mercuriales/MDD SURG/2011/2011 LDP SURGELE.xls
+deleting mercuriales/MDD SURG/2011/2011 CRF SURGELE.xls
+deleting mercuriales/MDD SURG/2011/
+deleting mercuriales/MDD SURG/2010/MDD SURG 2010.xls
+deleting mercuriales/MDD SURG/2010/
+deleting mercuriales/MDD SURG/2009/MDD SURG 2009.xls
+deleting mercuriales/MDD SURG/2009/
+deleting mercuriales/MDD SURG/
+deleting mercuriales/HD/2014/2014 MERCURIALE NORMA.xls
+deleting mercuriales/HD/2014/2014 MERCURIALE NETTO.xls
+deleting mercuriales/HD/2014/2014 MERCURIALE LIDL.xls
+deleting mercuriales/HD/2014/2014 MERCURIALE LEADER PRICE.xls
+deleting mercuriales/HD/2014/2014 MERCURIALE LE MUTANT.xls
+deleting mercuriales/HD/2014/2014 MERCURIALE DIA.xls
+deleting mercuriales/HD/2014/2014  MERCURIALE ALDI.xls
+deleting mercuriales/HD/2014/
+deleting mercuriales/HD/2013/2013 MERCURIALE NORMA.xls
+deleting mercuriales/HD/2013/2013 MERCURIALE NETTO.xls
+deleting mercuriales/HD/2013/2013 MERCURIALE LE MUTANT.xls
+deleting mercuriales/HD/2013/2013 MERCURIALE DIA.xls
+deleting mercuriales/HD/2013/2013  MERCURIALE ALDI.xls
+deleting mercuriales/HD/2013/
+deleting mercuriales/HD/2012/2012 MERCURIALE NORMA.xls
+deleting mercuriales/HD/2012/2012 MERCURIALE NETTO.xls
+deleting mercuriales/HD/2012/2012 MERCURIALE LIDL.xls
+deleting mercuriales/HD/2012/2012 MERCURIALE LEADER PRICE.xls
+deleting mercuriales/HD/2012/2012 MERCURIALE ED.xls
+deleting mercuriales/HD/2012/2012  MERCURIALE ALDI.xls
+deleting mercuriales/HD/2012/
+deleting mercuriales/HD/2011/2011 MERCURIALE NORMA.xls
+deleting mercuriales/HD/2011/2011 MERCURIALE NETTO.xls
+deleting mercuriales/HD/2011/2011 MERCURIALE LIDL.xls
+deleting mercuriales/HD/2011/2011 MERCURIALE LIDL 2010.xls
+deleting mercuriales/HD/2011/2011 MERCURIALE LEADER PRICE.xls
+deleting mercuriales/HD/2011/2011 MERCURIALE ED.xls
+deleting mercuriales/HD/2011/2011 MERCURIALE AUCHAN SD.xls
+deleting mercuriales/HD/2011/2011  MERCURIALE ALDI.xls
+deleting mercuriales/HD/2011/
+deleting mercuriales/HD/2010/2013 MERCURIALE LEADER PRICE.xls
+deleting mercuriales/HD/2010/2010 MERCURIALE NORMA.xls
+deleting mercuriales/HD/2010/2010 MERCURIALE LIDL 2010.xls
+deleting mercuriales/HD/2010/2010 MERCURIALE LEADER PRICE.xls
+deleting mercuriales/HD/2010/2010 MERCURIALE ED.xls
+deleting mercuriales/HD/2010/2010 MERCURIALE ALDI.xls
+deleting mercuriales/HD/2010/
+deleting mercuriales/HD/2009/2009 MERCURIALE NORMA.xls
+deleting mercuriales/HD/2009/2009 MERCURIALE LEADER PRICE.xls
+deleting mercuriales/HD/2009/2009 MERCURIALE ED.xls
+deleting mercuriales/HD/2009/
+deleting mercuriales/HD/
+deleting mercuriales/FZC/FZC 2014/TOUPARGEL 2014.xls
+deleting mercuriales/FZC/FZC 2014/THIRIET 2014.xls
+deleting mercuriales/FZC/FZC 2014/SAROS 2014.xls
+deleting mercuriales/FZC/FZC 2014/PICARD 2014.xls
+deleting mercuriales/FZC/FZC 2014/BOFROST 2014.xls
+deleting mercuriales/FZC/FZC 2014/ARGEL 2014.xls
+deleting mercuriales/FZC/FZC 2014/
+deleting mercuriales/FZC/FZC 2013/TOUPARGEL 2013.xls
+deleting mercuriales/FZC/FZC 2013/THIRIET 2013.xls
+deleting mercuriales/FZC/FZC 2013/SAROS 2013.xls
+deleting mercuriales/FZC/FZC 2013/PICARD 2013.xls
+deleting mercuriales/FZC/FZC 2013/BOFROST 2013.xls
+deleting mercuriales/FZC/FZC 2013/ARGEL 2013.xls
+deleting mercuriales/FZC/FZC 2013/
+deleting mercuriales/FZC/FZC 2012/TOUPARGEL 2012.xls
+deleting mercuriales/FZC/FZC 2012/THIRIET 2012.xls
+deleting mercuriales/FZC/FZC 2012/PICARD 2012.xls
+deleting mercuriales/FZC/FZC 2012/BOFROST 2012.xls
+deleting mercuriales/FZC/FZC 2012/ARGEL 2012.xls
+deleting mercuriales/FZC/FZC 2012/
+deleting mercuriales/FZC/FZC 2011/TOUPARGEL 2011.xls
+deleting mercuriales/FZC/FZC 2011/THIRIET 2011.xls
+deleting mercuriales/FZC/FZC 2011/PICARD 2011.xls
+deleting mercuriales/FZC/FZC 2011/FREEZER CENTER 2011.xls
+deleting mercuriales/FZC/FZC 2011/EISMANN 2011.xls
+deleting mercuriales/FZC/FZC 2011/BOFROST BELGIQUE 2011.xls
+deleting mercuriales/FZC/FZC 2011/BOFROST 2011.xls
+deleting mercuriales/FZC/FZC 2011/ARGEL 2011.xls
+deleting mercuriales/FZC/FZC 2011/
+deleting mercuriales/FZC/FZC 2010/FREEZER CENTER 2010.xls
+deleting mercuriales/FZC/FZC 2010/
+deleting mercuriales/FZC/FZC 2009/FREEZER CENTER 2009.xls
+deleting mercuriales/FZC/FZC 2009/
+deleting mercuriales/FZC/
+deleting mercuriales/EXPORT/X-ARCHIVES/2013/controle tarif/2013 ALVILARDAN TARIF AU 01-01-2013.pdf
+deleting mercuriales/EXPORT/X-ARCHIVES/2013/controle tarif/
+deleting mercuriales/EXPORT/X-ARCHIVES/2013/
+deleting mercuriales/EXPORT/X-ARCHIVES/2012/CONTROLE TARIF/TOP SAVEURS 02-04-2012.doc
+deleting mercuriales/EXPORT/X-ARCHIVES/2012/CONTROLE TARIF/PHENE 02-04-2012.doc
+deleting mercuriales/EXPORT/X-ARCHIVES/2012/CONTROLE TARIF/ALVILARDAN 02-04-2012 .doc
+deleting mercuriales/EXPORT/X-ARCHIVES/2012/CONTROLE TARIF/
+deleting mercuriales/EXPORT/X-ARCHIVES/2012/PHENE 2012.xls
+deleting mercuriales/EXPORT/X-ARCHIVES/2012/MATCH BELUX 2012.xls
+deleting mercuriales/EXPORT/X-ARCHIVES/2012/ALVILARDAN 2012.xls
+deleting mercuriales/EXPORT/X-ARCHIVES/2012/
+deleting mercuriales/EXPORT/X-ARCHIVES/2011/SANTA MARIA 2011.xls
+deleting mercuriales/EXPORT/X-ARCHIVES/2011/PHENE 2011.xls
+deleting mercuriales/EXPORT/X-ARCHIVES/2011/MATCH BELUX 2011.xls
+deleting mercuriales/EXPORT/X-ARCHIVES/2011/HEMA 2011.xls
+deleting mercuriales/EXPORT/X-ARCHIVES/2011/ALVILARDAN 2011.xls
+deleting mercuriales/EXPORT/X-ARCHIVES/2011/
+deleting mercuriales/EXPORT/X-ARCHIVES/2010/SANTA MARIA 2010.xls
+deleting mercuriales/EXPORT/X-ARCHIVES/2010/PROVERA BELUX 2010.xls
+deleting mercuriales/EXPORT/X-ARCHIVES/2010/PHENE 2010.xls
+deleting mercuriales/EXPORT/X-ARCHIVES/2010/HEMA 2010.xls
+deleting mercuriales/EXPORT/X-ARCHIVES/2010/CHAMPION MESTDAGH 2010.xls
+deleting mercuriales/EXPORT/X-ARCHIVES/2010/ALVILARDAN 2010.xls
+deleting mercuriales/EXPORT/X-ARCHIVES/2010/
+deleting mercuriales/EXPORT/X-ARCHIVES/
+deleting mercuriales/EXPORT/2014/CONTROLE DES TARIFS/MATCH BELUX PRODUITS MDD.pdf
+deleting mercuriales/EXPORT/2014/CONTROLE DES TARIFS/MATCH BELUX 12-05-2014.pdf
+deleting mercuriales/EXPORT/2014/CONTROLE DES TARIFS/
+deleting mercuriales/EXPORT/2014/CLIENTS/MATCH BELUX 2014.xls
+deleting mercuriales/EXPORT/2014/CLIENTS/
+deleting mercuriales/EXPORT/2014/
+deleting mercuriales/EXPORT/
+deleting mercuriales/sync.ffs_lock
+deleting mercuriales/Nouveau Document texte.txt
+mercuriales/MERCURIALES - AGIS/FZC/FZC 2014/ARGEL 2014.xls
+mercuriales/MERCURIALES - AGIS/HD/2014/2014 MERCURIALE DIA.xls
+deleting mercuriales/MERCURIALES - AGIS/gms/2014/REGIONS  2014/SU R\#351gion JUIN 2014.xls
+mercuriales/MERCURIALES - AGIS/gms/2014/REGIONS  2014/SU R\#351gion OCT 2014.xls
+mercuriales/MERCURIALES - AGIS/gms/2014/REGIONS  2014/ARCHIVES/SU R\#351gion JUIN 2014.xls
+mercuriales/MERCURIALES - AGIS/mdd/2014/2014 MERCURIALE AUCHAN.xls
+mercuriales/MERCURIALES - AGIS/mdd/2014/2014 MERCURIALE CARREFOUR PLATS CUISINES.xls
+mercuriales/MERCURIALES - AGIS/mdd/2014/2014 MERCURIALE MONOPRIX .xls
+mercuriales/MERCURIALES - AGIS/mdd/2014/2014 MERCURIALE SYSTEME U.xls
+mercuriales/MERCURIALES - MARIE/2014/2014 MERCURIALES AUCHAN MARIE.xls
+deleting mercuriales/gms/2014/REGIONS  2014/ARCHIVES/SU R\#351gion JANVIER 2014.xls
+deleting mercuriales/gms/2014/REGIONS  2014/ARCHIVES/GALEC REGION MERCU JANVIER 2014.xls
+deleting mercuriales/gms/2014/REGIONS  2014/ARCHIVES/GALEC REGION MERCU AVRIL 2014.xls
+deleting mercuriales/gms/2014/REGIONS  2014/ARCHIVES/
+deleting mercuriales/gms/2014/REGIONS  2014/SU R\#351gion JUIN 2014.xls
+deleting mercuriales/gms/2014/REGIONS  2014/SIMPLY ENTREPOT JANV 2014.xls
+deleting mercuriales/gms/2014/REGIONS  2014/SEGUREL JANVIER 2014.xls
+deleting mercuriales/gms/2014/REGIONS  2014/SCHIEVER MERCU 2014.xls
+deleting mercuriales/gms/2014/REGIONS  2014/GALEC REGION MERCU JUIN 2014.xls
+deleting mercuriales/gms/2014/REGIONS  2014/
+deleting mercuriales/gms/2014/CONTROLE TARIFS 2014/09-SEPTEMBRE/2014 GALEC PLATEAUX SANS REM LANCEMENT.pdf
+deleting mercuriales/gms/2014/CONTROLE TARIFS 2014/09-SEPTEMBRE/2014 AUCHAN OPERATION NEM X2.pdf
+deleting mercuriales/gms/2014/CONTROLE TARIFS 2014/09-SEPTEMBRE/
+deleting mercuriales/gms/2014/CONTROLE TARIFS 2014/07-JUILLET/PDM PC FE AU 01-07-2014.pdf
+deleting mercuriales/gms/2014/CONTROLE TARIFS 2014/07-JUILLET/AUCHAN ROUILLE SETOISE R5.pdf
+deleting mercuriales/gms/2014/CONTROLE TARIFS 2014/07-JUILLET/
+deleting mercuriales/gms/2014/CONTROLE TARIFS 2014/06-JUIN/2014 SYSTEME U ROSBEEF NATIONAL.pdf
+deleting mercuriales/gms/2014/CONTROLE TARIFS 2014/06-JUIN/2014 SYSTEME U PLATEAUX.pdf
+deleting mercuriales/gms/2014/CONTROLE TARIFS 2014/06-JUIN/2014 SIMPLY MARKET PLATEAUX.pdf
+deleting mercuriales/gms/2014/CONTROLE TARIFS 2014/06-JUIN/2014 INTERMARCHE PLATEAUX.pdf
+deleting mercuriales/gms/2014/CONTROLE TARIFS 2014/06-JUIN/2014 GALEC PLATEAUX.pdf
+deleting mercuriales/gms/2014/CONTROLE TARIFS 2014/06-JUIN/2014 CASINO PLATEAUX APERITIFS.pdf
+deleting mercuriales/gms/2014/CONTROLE TARIFS 2014/06-JUIN/2014 CARREFOUR PLATEAUX.pdf
+deleting mercuriales/gms/2014/CONTROLE TARIFS 2014/06-JUIN/2014 CARREFOUR MARKET PLATEAUX.pdf
+deleting mercuriales/gms/2014/CONTROLE TARIFS 2014/06-JUIN/2014 CARREFOUR MARKET LB PV NOUVELLES REMISES.pdf
+deleting mercuriales/gms/2014/CONTROLE TARIFS 2014/06-JUIN/2014 CARREFOUR LB PV NOUVELLES REMISES.pdf
+deleting mercuriales/gms/2014/CONTROLE TARIFS 2014/06-JUIN/2014 AUCHAN.FR PLATEAUX.pdf
+deleting mercuriales/gms/2014/CONTROLE TARIFS 2014/06-JUIN/2014 AFFILIES PLATEAUX.pdf
+deleting mercuriales/gms/2014/CONTROLE TARIFS 2014/06-JUIN/2014 AFFILIES LB PV NOUVELLES REMISES.pdf
+deleting mercuriales/gms/2014/CONTROLE TARIFS 2014/06-JUIN/
+deleting mercuriales/gms/2014/CONTROLE TARIFS 2014/05-MAI/INTERMARCHE NOUVEAUX PRIX CREVETTES.pdf
+deleting mercuriales/gms/2014/CONTROLE TARIFS 2014/05-MAI/CASINO RAVIOLIS CHINOIS COUPE.pdf
+deleting mercuriales/gms/2014/CONTROLE TARIFS 2014/05-MAI/CASINO GAMME ASIE FE.pdf
+deleting mercuriales/gms/2014/CONTROLE TARIFS 2014/05-MAI/CARREFOUR RP.pdf
+deleting mercuriales/gms/2014/CONTROLE TARIFS 2014/05-MAI/CARREFOUR MARKET RP.pdf
+deleting mercuriales/gms/2014/CONTROLE TARIFS 2014/05-MAI/AFFILIES RP.pdf
+deleting mercuriales/gms/2014/CONTROLE TARIFS 2014/05-MAI/
+deleting mercuriales/gms/2014/CONTROLE TARIFS 2014/04-AVRIL/AUCHAN GAMME R5 R6 PC.pdf
+deleting mercuriales/gms/2014/CONTROLE TARIFS 2014/04-AVRIL/2014 SYSTEME U NOUVEAUX PRIX.pdf
+deleting mercuriales/gms/2014/CONTROLE TARIFS 2014/04-AVRIL/2014 SYSTEME U ANIMATIONS DIRECT.pdf
+deleting mercuriales/gms/2014/CONTROLE TARIFS 2014/04-AVRIL/2014 SIMPLY MARKET VIANDES.pdf
+deleting mercuriales/gms/2014/CONTROLE TARIFS 2014/04-AVRIL/2014 INTERMARCHE RP CRABE.pdf
+deleting mercuriales/gms/2014/CONTROLE TARIFS 2014/04-AVRIL/2014 INTERMARCHE GAMME PIZZAS 420G.pdf
+deleting mercuriales/gms/2014/CONTROLE TARIFS 2014/04-AVRIL/2014 INTERMARCHE GAMME PC REGIONALES.pdf
+deleting mercuriales/gms/2014/CONTROLE TARIFS 2014/04-AVRIL/2014 INTERMARCHE GAMME PC FE.pdf
+deleting mercuriales/gms/2014/CONTROLE TARIFS 2014/04-AVRIL/2014 GALEC RP CRABE.pdf
+deleting mercuriales/gms/2014/CONTROLE TARIFS 2014/04-AVRIL/2014 GALEC INNO SAUF RP CRABE.pdf
+deleting mercuriales/gms/2014/CONTROLE TARIFS 2014/04-AVRIL/2014 CASINO NOUVEAUX PRIX.pdf
+deleting mercuriales/gms/2014/CONTROLE TARIFS 2014/04-AVRIL/2014 CARREFOUR ROUILLE GARDIANNE.pdf
+deleting mercuriales/gms/2014/CONTROLE TARIFS 2014/04-AVRIL/2014 CARREFOUR NOUVEAUX PRIX.pdf
+deleting mercuriales/gms/2014/CONTROLE TARIFS 2014/04-AVRIL/2014 CARREFOUR MARKET NOUVEAUX PRIX.pdf
+deleting mercuriales/gms/2014/CONTROLE TARIFS 2014/04-AVRIL/2014 AUCHAN.FR NOUVEAUX PC.pdf
+deleting mercuriales/gms/2014/CONTROLE TARIFS 2014/04-AVRIL/2014 AUCHAN SAUCE AIGRE DOUCE NUOC MAM.pdf
+deleting mercuriales/gms/2014/CONTROLE TARIFS 2014/04-AVRIL/2014 AUCHAN ROULEAUX PRINTEMPS CRABE.pdf
+deleting mercuriales/gms/2014/CONTROLE TARIFS 2014/04-AVRIL/2014 AUCHAN NOUVEAUX PC FE.pdf
+deleting mercuriales/gms/2014/CONTROLE TARIFS 2014/04-AVRIL/
+deleting mercuriales/gms/2014/CONTROLE TARIFS 2014/03-MARS/2014 SYSTEME U PRIX PROLONGES AU 31-03-2014.pdf
+deleting mercuriales/gms/2014/CONTROLE TARIFS 2014/03-MARS/2014 SIMPLY MARKET HAUSSE CONJONCTURELLE.pdf
+deleting mercuriales/gms/2014/CONTROLE TARIFS 2014/03-MARS/2014 INTERMARCHE NOUVEAUX PRIX.pdf
+deleting mercuriales/gms/2014/CONTROLE TARIFS 2014/03-MARS/2014 INTERMARCHE GAMME ANIMATION.pdf
+deleting mercuriales/gms/2014/CONTROLE TARIFS 2014/03-MARS/2014 INTERMARCHE GAMME ANIMATION SAMOSSA VOLAILLE.pdf
+deleting mercuriales/gms/2014/CONTROLE TARIFS 2014/03-MARS/2014 GALEC ANIMATIONS.pdf
+deleting mercuriales/gms/2014/CONTROLE TARIFS 2014/03-MARS/2014 CASINO PRIX NOUVEAUX CODES.pdf
+deleting mercuriales/gms/2014/CONTROLE TARIFS 2014/03-MARS/2014 CARREFOUR MARKET CREPES.pdf
+deleting mercuriales/gms/2014/CONTROLE TARIFS 2014/03-MARS/2014 CARREFOUR DIRECT ANIMATIONS.pdf
+deleting mercuriales/gms/2014/CONTROLE TARIFS 2014/03-MARS/2014 AUCHAN.FR NOUVEAUX PRODUITS.pdf
+deleting mercuriales/gms/2014/CONTROLE TARIFS 2014/03-MARS/2014 AUCHAN.FR NOUVEAUX PRIX.pdf
+deleting mercuriales/gms/2014/CONTROLE TARIFS 2014/03-MARS/2014 AUCHAN VILLARS OP COUSCOUS PAELLA.pdf
+deleting mercuriales/gms/2014/CONTROLE TARIFS 2014/03-MARS/2014 AUCHAN NOUVEAUX PRIX TOP CHEF 31-03.pdf
+deleting mercuriales/gms/2014/CONTROLE TARIFS 2014/03-MARS/2014 AUCHAN NOUVEAUX PRIX AU 17-03-2014.pdf
+deleting mercuriales/gms/2014/CONTROLE TARIFS 2014/03-MARS/2014 AUCHAN NOUVEAUX PRIX AU 01-03.pdf
+deleting mercuriales/gms/2014/CONTROLE TARIFS 2014/03-MARS/2014 AUCHAN NOUVEAUX PRIX ASIE MEN 17-03-2014.pdf
+deleting mercuriales/gms/2014/CONTROLE TARIFS 2014/03-MARS/2014 AUCHAN NOUVEAUX PRIX 17-03 SANS RPP 5%.pdf
+deleting mercuriales/gms/2014/CONTROLE TARIFS 2014/03-MARS/2014 AUCHAN NOUVEAUX PLATEAUX.pdf
+deleting mercuriales/gms/2014/CONTROLE TARIFS 2014/03-MARS/2014 AUCHAN GAMME ANIMATION.pdf
+deleting mercuriales/gms/2014/CONTROLE TARIFS 2014/03-MARS/2014 AUCHAN ET .FR HAUSSE CONJONCTURELLE.pdf
+deleting mercuriales/gms/2014/CONTROLE TARIFS 2014/03-MARS/2014 AUCHAN DIRECT.pdf
+deleting mercuriales/gms/2014/CONTROLE TARIFS 2014/03-MARS/2014 AUCHAN ASIE MN RETOUR ANCIENS PRIX.pdf
+deleting mercuriales/gms/2014/CONTROLE TARIFS 2014/03-MARS/
+deleting mercuriales/gms/2014/CONTROLE TARIFS 2014/02-FEVRIER/2014 INTERMARCHE GAMME DRIVE ET PC.pdf
+deleting mercuriales/gms/2014/CONTROLE TARIFS 2014/02-FEVRIER/2014 GALEC TARIF CONJONCTUREL.pdf
+deleting mercuriales/gms/2014/CONTROLE TARIFS 2014/02-FEVRIER/2014 AUCHAN.FR GAMME TOP CHEF.pdf
+deleting mercuriales/gms/2014/CONTROLE TARIFS 2014/02-FEVRIER/2014 AUCHAN GAMME TOP CHEF.pdf
+deleting mercuriales/gms/2014/CONTROLE TARIFS 2014/02-FEVRIER/
+deleting mercuriales/gms/2014/CONTROLE TARIFS 2014/01-JANVIER/2014 SYSTEME U PRIX 2013 PROLONGES AU 28-02-2014.pdf
+deleting mercuriales/gms/2014/CONTROLE TARIFS 2014/01-JANVIER/2014 SIMPLY MARKET PRIX 2013 PROLONGES AU 28-02-2014.pdf
+deleting mercuriales/gms/2014/CONTROLE TARIFS 2014/01-JANVIER/2014 PLACE DU MARCHE NOUVEAUX PRODUITS 01-01-2014.pdf
+deleting mercuriales/gms/2014/CONTROLE TARIFS 2014/01-JANVIER/2014 INTERMARCHE PRIX 2013 PROLONGES AU 28-02-2014.pdf
+deleting mercuriales/gms/2014/CONTROLE TARIFS 2014/01-JANVIER/2014 GALEC PLAN PROMO 06-01-2014.pdf
+deleting mercuriales/gms/2014/CONTROLE TARIFS 2014/01-JANVIER/2014 GALEC NOUVEAUX PRIX.pdf
+deleting mercuriales/gms/2014/CONTROLE TARIFS 2014/01-JANVIER/2014 GALEC FOND DE RAYON 06-01-2014.pdf
+deleting mercuriales/gms/2014/CONTROLE TARIFS 2014/01-JANVIER/2014 CASINO PRIX 2013 PROLONGES AU 28-02-2014.pdf
+deleting mercuriales/gms/2014/CONTROLE TARIFS 2014/01-JANVIER/2014 CASINO NOUVEAUX PC ASIE.pdf
+deleting mercuriales/gms/2014/CONTROLE TARIFS 2014/01-JANVIER/2014 CASINO CHIPS CREVETTES.pdf
+deleting mercuriales/gms/2014/CONTROLE TARIFS 2014/01-JANVIER/2014 CARREFOUR PRIX 2013 PROLONGES AU 28-02-2014.pdf
+deleting mercuriales/gms/2014/CONTROLE TARIFS 2014/01-JANVIER/2014 CARREFOUR MARKET PRIX 2013 PROLONGES 28-03-2014.pdf
+deleting mercuriales/gms/2014/CONTROLE TARIFS 2014/01-JANVIER/2014 AUCHAN.FR.pdf
+deleting mercuriales/gms/2014/CONTROLE TARIFS 2014/01-JANVIER/2014 AUCHAN NOUVEAUX PRODUITS ASIE GAMME PC.pdf
+deleting mercuriales/gms/2014/CONTROLE TARIFS 2014/01-JANVIER/
+deleting mercuriales/gms/2014/CONTROLE TARIFS 2014/
+deleting mercuriales/gms/2014/CENTRALES 2014/SYSTEME U 2014.xls
+deleting mercuriales/gms/2014/CENTRALES 2014/SIMPLY MARKET 2014.xls
+deleting mercuriales/gms/2014/CENTRALES 2014/PLACE DU MARCHE 2014.xls
+deleting mercuriales/gms/2014/CENTRALES 2014/INTERMARCHE 2014.xls
+deleting mercuriales/gms/2014/CENTRALES 2014/CASINO 2014.xls
+deleting mercuriales/gms/2014/CENTRALES 2014/CARREFOUR MARKET 2014.xls
+deleting mercuriales/gms/2014/CENTRALES 2014/CARREFOUR 2014.xls
+deleting mercuriales/gms/2014/CENTRALES 2014/AUCHAN.FR 2014.xls
+deleting mercuriales/gms/2014/CENTRALES 2014/AUCHAN 2014.xls
+deleting mercuriales/gms/2014/CENTRALES 2014/
+
+sent 301951 bytes  received 8864 bytes  88804.29 bytes/sec
+total size is 36316668  speedup is 116.84
+sending incremental file list
+
+sent 8710 bytes  received 13 bytes  5815.33 bytes/sec
+total size is 42695680  speedup is 4894.61
+sending incremental file list
+
+sent 7280 bytes  received 49 bytes  4886.00 bytes/sec
+total size is 13584181  speedup is 1853.48
+sending incremental file list
+
+sent 5745 bytes  received 23 bytes  3845.33 bytes/sec
+total size is 129159129  speedup is 22392.36
+sending incremental file list
+
+sent 5610 bytes  received 39 bytes  3766.00 bytes/sec
+total size is 59049369  speedup is 10453.07
+sending incremental file list
+codesoft/Codesoft 7/A SUPPRIMER/ITM FE/
+codesoft/Codesoft 7/A SUPPRIMER/ITM FE/43618_sam_porc_recto.bak
+codesoft/Codesoft 7/A SUPPRIMER/ITM FE/43618_sam_porc_recto.lab
+codesoft/Codesoft 7/A SUPPRIMER/ITM FE/43618_sam_porc_verso.bak
+codesoft/Codesoft 7/A SUPPRIMER/ITM FE/43618_sam_porc_verso.lab
+codesoft/Codesoft 7/A SUPPRIMER/ITM FE/43619_ass_asia_verso.bak
+codesoft/Codesoft 7/A SUPPRIMER/ITM FE/43619_ass_asia_verso.lab
+codesoft/Codesoft 7/A SUPPRIMER/ITM FE/43619_ass_asiatique_recto.bak
+codesoft/Codesoft 7/A SUPPRIMER/ITM FE/43619_ass_asiatique_recto.lab
+codesoft/Codesoft 7/A SUPPRIMER/ITM FE/43620_b_crev_panes_recto.bak
+codesoft/Codesoft 7/A SUPPRIMER/ITM FE/43620_b_crev_panes_recto.lab
+codesoft/Codesoft 7/A SUPPRIMER/ITM FE/43620_b_crev_panes_verso.bak
+codesoft/Codesoft 7/A SUPPRIMER/ITM FE/43620_b_crev_panes_verso.lab
+codesoft/Codesoft 7/A SUPPRIMER/ITM FE/43621_acras_recto.bak
+codesoft/Codesoft 7/A SUPPRIMER/ITM FE/43621_acras_recto.lab
+codesoft/Codesoft 7/A SUPPRIMER/ITM FE/43621_acras_verso.bak
+codesoft/Codesoft 7/A SUPPRIMER/ITM FE/43621_acras_verso.lab
+codesoft/Codesoft 7/A SUPPRIMER/ITM FE/rotation 180\#260/
+codesoft/Codesoft 7/A SUPPRIMER/ITM FE/rotation 180\#260/43618_sam_porc_recto_180.bak
+codesoft/Codesoft 7/A SUPPRIMER/ITM FE/rotation 180\#260/43618_sam_porc_recto_180.lab
+codesoft/Codesoft 7/A SUPPRIMER/ITM FE/rotation 180\#260/43619_ass_asiatique_recto_180.bak
+codesoft/Codesoft 7/A SUPPRIMER/ITM FE/rotation 180\#260/43619_ass_asiatique_recto_180.lab
+codesoft/Codesoft 7/A SUPPRIMER/ITM FE/rotation 180\#260/43620_b_crev_panes_recto_180.bak
+codesoft/Codesoft 7/A SUPPRIMER/ITM FE/rotation 180\#260/43620_b_crev_panes_recto_180.lab
+codesoft/Codesoft 7/A SUPPRIMER/ITM FE/rotation 180\#260/43621_acras_recto_180.bak
+codesoft/Codesoft 7/A SUPPRIMER/ITM FE/rotation 180\#260/43621_acras_recto_180.lab
+deleting codesoft/Codesoft 7/ITM FE/rotation 180\#260/43621_acras_recto_180.lab
+deleting codesoft/Codesoft 7/ITM FE/rotation 180\#260/43621_acras_recto_180.bak
+deleting codesoft/Codesoft 7/ITM FE/rotation 180\#260/43620_b_crev_panes_recto_180.lab
+deleting codesoft/Codesoft 7/ITM FE/rotation 180\#260/43620_b_crev_panes_recto_180.bak
+deleting codesoft/Codesoft 7/ITM FE/rotation 180\#260/43619_ass_asiatique_recto_180.lab
+deleting codesoft/Codesoft 7/ITM FE/rotation 180\#260/43619_ass_asiatique_recto_180.bak
+deleting codesoft/Codesoft 7/ITM FE/rotation 180\#260/43618_sam_porc_recto_180.lab
+deleting codesoft/Codesoft 7/ITM FE/rotation 180\#260/43618_sam_porc_recto_180.bak
+deleting codesoft/Codesoft 7/ITM FE/rotation 180\#260/
+deleting codesoft/Codesoft 7/ITM FE/43621_acras_verso.lab
+deleting codesoft/Codesoft 7/ITM FE/43621_acras_verso.bak
+deleting codesoft/Codesoft 7/ITM FE/43621_acras_recto.lab
+deleting codesoft/Codesoft 7/ITM FE/43621_acras_recto.bak
+deleting codesoft/Codesoft 7/ITM FE/43620_b_crev_panes_verso.lab
+deleting codesoft/Codesoft 7/ITM FE/43620_b_crev_panes_verso.bak
+deleting codesoft/Codesoft 7/ITM FE/43620_b_crev_panes_recto.lab
+deleting codesoft/Codesoft 7/ITM FE/43620_b_crev_panes_recto.bak
+deleting codesoft/Codesoft 7/ITM FE/43619_ass_asiatique_recto.lab
+deleting codesoft/Codesoft 7/ITM FE/43619_ass_asiatique_recto.bak
+deleting codesoft/Codesoft 7/ITM FE/43619_ass_asia_verso.lab
+deleting codesoft/Codesoft 7/ITM FE/43619_ass_asia_verso.bak
+deleting codesoft/Codesoft 7/ITM FE/43618_sam_porc_verso.lab
+deleting codesoft/Codesoft 7/ITM FE/43618_sam_porc_verso.bak
+deleting codesoft/Codesoft 7/ITM FE/43618_sam_porc_recto.lab
+deleting codesoft/Codesoft 7/ITM FE/43618_sam_porc_recto.bak
+
+sent 266265 bytes  received 559 bytes  106729.60 bytes/sec
+total size is 299490387  speedup is 1122.43
+sending incremental file list
+
+sent 20406 bytes  received 83 bytes  8195.60 bytes/sec
+total size is 99360776  speedup is 4849.47
+sending incremental file list
+
+sent 6273 bytes  received 92 bytes  2546.00 bytes/sec
+total size is 52063160  speedup is 8179.60
+sending incremental file list
+
+sent 7814 bytes  received 20 bytes  3133.60 bytes/sec
+total size is 16759466  speedup is 2139.32
+sending incremental file list
+
+sent 7814 bytes  received 20 bytes  5222.67 bytes/sec
+total size is 16759466  speedup is 2139.32

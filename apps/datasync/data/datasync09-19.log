@@ -1,0 +1,144 @@
+Démarrage : jeu sep 19 23:00:01 CEST 2013
+Arrêt     : jeu sep 19 23:00:43 CEST 2013
+
+
+
+Base MySQL sélectionnée: agis
+Nombre de serveur(s) Linux concerné(s): 4
+Nombre de dossier(s) à mettre à jour: 24
+
+sending incremental file list
+
+sent 7552 bytes  received 20 bytes  15144.00 bytes/sec
+total size is 16747404  speedup is 2211.75
+sending incremental file list
+
+sent 5440 bytes  received 44 bytes  2193.60 bytes/sec
+total size is 9508728  speedup is 1733.90
+sending incremental file list
+
+sent 45570 bytes  received 83 bytes  30435.33 bytes/sec
+total size is 272226899  speedup is 5962.96
+sending incremental file list
+suivi_investissement/2013-2014/Pr\#351pa budget invest r\#351vis\#351 2013-2014/Bud invest AVI r\#351vis\#351 2013-2014.xls
+
+sent 14141 bytes  received 520 bytes  9774.00 bytes/sec
+total size is 11358988  speedup is 774.78
+sending incremental file list
+
+sent 63 bytes  received 12 bytes  50.00 bytes/sec
+total size is 77592576  speedup is 1034567.68
+sending incremental file list
+
+sent 7538 bytes  received 45 bytes  5055.33 bytes/sec
+total size is 9253358  speedup is 1220.28
+sending incremental file list
+
+sent 7552 bytes  received 20 bytes  3028.80 bytes/sec
+total size is 16747404  speedup is 2211.75
+sending incremental file list
+
+sent 4308 bytes  received 24 bytes  2888.00 bytes/sec
+total size is 6387982  speedup is 1474.60
+sending incremental file list
+mercuriales/HD/2013/2013 MERCURIALE DIA.xls
+mercuriales/gms/2013/CENTRALES 2013/AUCHAN 2013.xls
+mercuriales/gms/2013/CENTRALES 2013/CARREFOUR MDD PC PIZZAS 2013.xls
+mercuriales/gms/2013/CENTRALES 2013/CASINO 2013.xls
+mercuriales/mdd/2013/2013 MERCURIALE CARREFOUR ASIATIQUE.xls
+mercuriales/mdd/2013/2013 MERCURIALE CARREFOUR PLATS CUISINES.xls
+mercuriales/mdd/2013/2013 MERCURIALE GROUPE AUCHAN.xls
+
+sent 144930 bytes  received 24805 bytes  67894.00 bytes/sec
+total size is 31959457  speedup is 188.29
+sending incremental file list
+
+sent 5047 bytes  received 27 bytes  3382.67 bytes/sec
+total size is 39173092  speedup is 7720.36
+sending incremental file list
+operations_commerciales/DEMANDE ECHANTILLONS CL .xls
+operations_commerciales/chrono demande echantillons.xls
+operations_commerciales/GMS/2013/A-CENTRALES/GMS CASINO 2013-FUTUR MASTER.xls
+operations_commerciales/GMS/2013/C-CONTROLES PRIX/AUCHAN/2013 AUCHAN.FR FESTIFS COUPE.pdf
+operations_commerciales/GMS/2013/C-CONTROLES PRIX/AUCHAN/2013 AUCHAN.FR FESTIFS MENU.pdf
+operations_commerciales/GMS/2013/C-CONTROLES PRIX/CARREFOUR MARKET/2013 PRODIM FESTIFS COUPE.pdf
+operations_commerciales/GMS/2013/D-REGIONS/GMS SU REGION  2013-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS INTERMARCHE 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS SYSTEME U 2014-FUTUR MASTER.xls
+operations_commerciales/MDD/MODELES VB/CONF OPES ITM NETTO/2013/CONFIRMATION OPE_SEPTEMBRE1.xls
+operations_commerciales/MDD/OP MDD 2013/MDD ITM FUTUR MASTER 2013 .xls
+
+sent 313657 bytes  received 20921 bytes  95593.71 bytes/sec
+total size is 93204375  speedup is 278.57
+sending incremental file list
+
+sent 18506 bytes  received 80 bytes  12390.67 bytes/sec
+total size is 41728031  speedup is 2245.13
+sending incremental file list
+
+sent 7502 bytes  received 13 bytes  3006.00 bytes/sec
+total size is 33724035  speedup is 4487.56
+sending incremental file list
+
+sent 63 bytes  received 12 bytes  50.00 bytes/sec
+total size is 77592576  speedup is 1034567.68
+sending incremental file list
+
+sent 7538 bytes  received 45 bytes  5055.33 bytes/sec
+total size is 9253358  speedup is 1220.28
+sending incremental file list
+
+sent 4308 bytes  received 24 bytes  2888.00 bytes/sec
+total size is 6387982  speedup is 1474.60
+sending incremental file list
+
+sent 7552 bytes  received 20 bytes  5048.00 bytes/sec
+total size is 16747404  speedup is 2211.75
+sending incremental file list
+
+sent 85 bytes  received 13 bytes  65.33 bytes/sec
+total size is 104853504  speedup is 1069933.71
+sending incremental file list
+operations_commerciales/DEMANDE ECHANTILLONS CL .xls
+operations_commerciales/chrono demande echantillons.xls
+operations_commerciales/GMS/2013/A-CENTRALES/GMS CASINO 2013-FUTUR MASTER.xls
+operations_commerciales/GMS/2013/C-CONTROLES PRIX/AUCHAN/2013 AUCHAN.FR FESTIFS COUPE.pdf
+operations_commerciales/GMS/2013/C-CONTROLES PRIX/AUCHAN/2013 AUCHAN.FR FESTIFS MENU.pdf
+operations_commerciales/GMS/2013/C-CONTROLES PRIX/CARREFOUR MARKET/2013 PRODIM FESTIFS COUPE.pdf
+operations_commerciales/GMS/2013/D-REGIONS/GMS SU REGION  2013-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS INTERMARCHE 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS SYSTEME U 2014-FUTUR MASTER.xls
+operations_commerciales/MDD/MODELES VB/CONF OPES ITM NETTO/2013/CONFIRMATION OPE_SEPTEMBRE1.xls
+operations_commerciales/MDD/OP MDD 2013/MDD ITM FUTUR MASTER 2013 .xls
+
+sent 313657 bytes  received 20921 bytes  95593.71 bytes/sec
+total size is 93204375  speedup is 278.57
+sending incremental file list
+mercuriales/HD/2013/2013 MERCURIALE DIA.xls
+mercuriales/gms/2013/CENTRALES 2013/AUCHAN 2013.xls
+mercuriales/gms/2013/CENTRALES 2013/CARREFOUR MDD PC PIZZAS 2013.xls
+mercuriales/gms/2013/CENTRALES 2013/CASINO 2013.xls
+mercuriales/mdd/2013/2013 MERCURIALE CARREFOUR ASIATIQUE.xls
+mercuriales/mdd/2013/2013 MERCURIALE CARREFOUR PLATS CUISINES.xls
+mercuriales/mdd/2013/2013 MERCURIALE GROUPE AUCHAN.xls
+
+sent 144930 bytes  received 24805 bytes  48495.71 bytes/sec
+total size is 31959457  speedup is 188.29
+sending incremental file list
+
+sent 5440 bytes  received 44 bytes  3656.00 bytes/sec
+total size is 9508728  speedup is 1733.90
+sending incremental file list
+organisation/Listes t\#351l\#351phoniques AGIS + LDC/Liste T\#351l\#351phonique PF 29062011.xls
+organisation/Listes t\#351l\#351phoniques AGIS + LDC/Liste t\#351l\#351phonique Cantubas au 13122012.xls
+
+sent 12478 bytes  received 463 bytes  8627.33 bytes/sec
+total size is 128643573  speedup is 9940.78
+sending incremental file list
+
+sent 4707 bytes  received 36 bytes  1897.20 bytes/sec
+total size is 46318934  speedup is 9765.75
+sending incremental file list
+
+sent 18506 bytes  received 80 bytes  12390.67 bytes/sec
+total size is 41728031  speedup is 2245.13

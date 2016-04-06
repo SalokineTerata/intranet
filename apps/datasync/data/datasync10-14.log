@@ -1,0 +1,162 @@
+Démarrage : lun oct 14 23:00:02 CEST 2013
+Arrêt     : lun oct 14 23:00:45 CEST 2013
+
+
+
+Base MySQL sélectionnée: agis
+Nombre de serveur(s) Linux concerné(s): 4
+Nombre de dossier(s) à mettre à jour: 24
+
+sending incremental file list
+
+sent 7651 bytes  received 20 bytes  5114.00 bytes/sec
+total size is 16750790  speedup is 2183.65
+sending incremental file list
+
+sent 5598 bytes  received 45 bytes  3762.00 bytes/sec
+total size is 9985067  speedup is 1769.46
+sending incremental file list
+
+sent 5686 bytes  received 34 bytes  2288.00 bytes/sec
+total size is 11410700  speedup is 1994.88
+sending incremental file list
+
+sent 63 bytes  received 12 bytes  50.00 bytes/sec
+total size is 78852096  speedup is 1051361.28
+sending incremental file list
+
+sent 7538 bytes  received 45 bytes  5055.33 bytes/sec
+total size is 9253358  speedup is 1220.28
+sending incremental file list
+
+sent 7651 bytes  received 20 bytes  5114.00 bytes/sec
+total size is 16750790  speedup is 2183.65
+sending incremental file list
+
+sent 4308 bytes  received 24 bytes  2888.00 bytes/sec
+total size is 6387982  speedup is 1474.60
+sending incremental file list
+mercuriales/gms/2013/CENTRALES 2013/INTERMARCHE 2013.xls
+mercuriales/gms/2013/REGION 2013/GALEC REGION MERCU OCT 2013.xls
+mercuriales/mdd/2013/2013 MERCURIALE CARREFOUR PLATS CUISINES.xls
+mercuriales/mdd/2013/2013 MERCURIALE CASINO.xls
+mercuriales/mdd/2013/2013 MERCURIALE EXPORT.xls
+mercuriales/mdd/2013/2013 MERCURIALE GROUPE AUCHAN.xls
+mercuriales/mdd/2013/2013 MERCURIALE MONOPRIX .xls
+mercuriales/mdd/2013/2013 MERCURIALE PROVERA BELUX.xls
+
+sent 108376 bytes  received 20947 bytes  51729.20 bytes/sec
+total size is 35769157  speedup is 276.59
+sending incremental file list
+
+sent 5047 bytes  received 27 bytes  3382.67 bytes/sec
+total size is 39173092  speedup is 7720.36
+sending incremental file list
+operations_commerciales/DEMANDE ECHANTILLONS CL .xls
+operations_commerciales/chrono demande echantillons.xls
+operations_commerciales/GMS/2013/RECAP DEMANDE ET CONFIRMATIONS HEBDO.xls
+operations_commerciales/GMS/2013/A-CENTRALES/GMS CARREFOUR MARKET MN 2013-FUTUR MASTER.xls
+operations_commerciales/GMS/2013/A-CENTRALES/GMS CARREFOUR MDD 2013-FUTUR MASTER.xls
+operations_commerciales/GMS/2013/A-CENTRALES/GMS CARREFOUR MN 2013-FUTUR MASTER.xls
+operations_commerciales/GMS/2013/B-CONFIRMATIONS OPERATIONS/CONFIRMATIONS CARREFOUR MARKET/2013 CARREFOUR MARKET OP FESTIFS.xls
+operations_commerciales/GMS/2013/B-CONFIRMATIONS OPERATIONS/CONFIRMATIONS CARREFOUR/2013 CARREFOUR OP FESTIFS.xls
+operations_commerciales/GMS/2013/D-REGIONS/GMS LECLERC 2013-FUTUR MASTER.xls
+operations_commerciales/GMS/2013/D-REGIONS/GMS SU REGION  2013-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS CASINO 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS INTERMARCHE 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS SYSTEME U 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/CASINO HM/2014 HM GROS VOLUMES CHANDELEUR NAA HYPER.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/CASINO SM/
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/CASINO SM/2014 SM RI+GRATUIT NAC GROS VOLUMES SUPER.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/INTERMARCHE/
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/INTERMARCHE/2014 INTERMARCHE JANVIER 1 OP 61000.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/SYSTEME U/
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/SYSTEME U/2014 SYSTEME U TRAFIC NAA JANVIER.xls
+operations_commerciales/GMS/2014/D-REGIONS/GMS LECLERC 2014-FUTUR MASTER.xls
+
+sent 411249 bytes  received 42609 bytes  100857.33 bytes/sec
+total size is 52156617  speedup is 114.92
+sending incremental file list
+
+sent 18506 bytes  received 80 bytes  12390.67 bytes/sec
+total size is 41728031  speedup is 2245.13
+sending incremental file list
+
+sent 7556 bytes  received 13 bytes  5046.00 bytes/sec
+total size is 34205315  speedup is 4519.13
+sending incremental file list
+
+sent 63 bytes  received 12 bytes  50.00 bytes/sec
+total size is 78852096  speedup is 1051361.28
+sending incremental file list
+
+sent 7538 bytes  received 45 bytes  5055.33 bytes/sec
+total size is 9253358  speedup is 1220.28
+sending incremental file list
+
+sent 4308 bytes  received 24 bytes  2888.00 bytes/sec
+total size is 6387982  speedup is 1474.60
+sending incremental file list
+
+sent 7651 bytes  received 20 bytes  3068.40 bytes/sec
+total size is 16750790  speedup is 2183.65
+sending incremental file list
+
+sent 85 bytes  received 13 bytes  65.33 bytes/sec
+total size is 104853504  speedup is 1069933.71
+sending incremental file list
+operations_commerciales/DEMANDE ECHANTILLONS CL .xls
+operations_commerciales/chrono demande echantillons.xls
+operations_commerciales/GMS/2013/RECAP DEMANDE ET CONFIRMATIONS HEBDO.xls
+operations_commerciales/GMS/2013/A-CENTRALES/GMS CARREFOUR MARKET MN 2013-FUTUR MASTER.xls
+operations_commerciales/GMS/2013/A-CENTRALES/GMS CARREFOUR MDD 2013-FUTUR MASTER.xls
+operations_commerciales/GMS/2013/A-CENTRALES/GMS CARREFOUR MN 2013-FUTUR MASTER.xls
+operations_commerciales/GMS/2013/B-CONFIRMATIONS OPERATIONS/CONFIRMATIONS CARREFOUR MARKET/2013 CARREFOUR MARKET OP FESTIFS.xls
+operations_commerciales/GMS/2013/B-CONFIRMATIONS OPERATIONS/CONFIRMATIONS CARREFOUR/2013 CARREFOUR OP FESTIFS.xls
+operations_commerciales/GMS/2013/D-REGIONS/GMS LECLERC 2013-FUTUR MASTER.xls
+operations_commerciales/GMS/2013/D-REGIONS/GMS SU REGION  2013-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS CASINO 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS INTERMARCHE 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS SYSTEME U 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/CASINO HM/2014 HM GROS VOLUMES CHANDELEUR NAA HYPER.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/CASINO SM/
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/CASINO SM/2014 SM RI+GRATUIT NAC GROS VOLUMES SUPER.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/INTERMARCHE/
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/INTERMARCHE/2014 INTERMARCHE JANVIER 1 OP 61000.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/SYSTEME U/
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/SYSTEME U/2014 SYSTEME U TRAFIC NAA JANVIER.xls
+operations_commerciales/GMS/2014/D-REGIONS/GMS LECLERC 2014-FUTUR MASTER.xls
+
+sent 411249 bytes  received 42609 bytes  129673.71 bytes/sec
+total size is 52156617  speedup is 114.92
+sending incremental file list
+mercuriales/gms/2013/CENTRALES 2013/INTERMARCHE 2013.xls
+mercuriales/gms/2013/REGION 2013/GALEC REGION MERCU OCT 2013.xls
+mercuriales/mdd/2013/2013 MERCURIALE CARREFOUR PLATS CUISINES.xls
+mercuriales/mdd/2013/2013 MERCURIALE CASINO.xls
+mercuriales/mdd/2013/2013 MERCURIALE EXPORT.xls
+mercuriales/mdd/2013/2013 MERCURIALE GROUPE AUCHAN.xls
+mercuriales/mdd/2013/2013 MERCURIALE MONOPRIX .xls
+mercuriales/mdd/2013/2013 MERCURIALE PROVERA BELUX.xls
+
+sent 108376 bytes  received 20947 bytes  51729.20 bytes/sec
+total size is 35769157  speedup is 276.59
+sending incremental file list
+
+sent 5598 bytes  received 45 bytes  3762.00 bytes/sec
+total size is 9985067  speedup is 1769.46
+sending incremental file list
+
+sent 5626 bytes  received 23 bytes  2259.60 bytes/sec
+total size is 128644085  speedup is 22772.90
+sending incremental file list
+
+sent 4707 bytes  received 36 bytes  3162.00 bytes/sec
+total size is 46318934  speedup is 9765.75
+sending incremental file list
+codesoft/Codesoft 7/Codes Produits/79105_verso.bak
+codesoft/Codesoft 7/Codes Produits/79105_verso.lab
+
+sent 58190 bytes  received 1692 bytes  23952.80 bytes/sec
+total size is 274589267  speedup is 4585.51
+sending incremental file list

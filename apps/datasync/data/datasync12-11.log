@@ -1,0 +1,143 @@
+Démarrage : mer déc 11 23:00:01 CET 2013
+Arrêt     : mer déc 11 23:00:42 CET 2013
+
+
+
+Base MySQL sélectionnée: agis
+Nombre de serveur(s) Linux concerné(s): 4
+Nombre de dossier(s) à mettre à jour: 24
+
+sending incremental file list
+
+sent 5598 bytes  received 45 bytes  3762.00 bytes/sec
+total size is 9985067  speedup is 1769.46
+sending incremental file list
+
+sent 5788 bytes  received 34 bytes  2328.80 bytes/sec
+total size is 11670607  speedup is 2004.57
+sending incremental file list
+
+sent 63 bytes  received 12 bytes  50.00 bytes/sec
+total size is 81426432  speedup is 1085685.76
+sending incremental file list
+
+sent 7538 bytes  received 45 bytes  5055.33 bytes/sec
+total size is 9253358  speedup is 1220.28
+sending incremental file list
+
+sent 7683 bytes  received 20 bytes  5135.33 bytes/sec
+total size is 16751831  speedup is 2174.72
+sending incremental file list
+
+sent 4308 bytes  received 24 bytes  2888.00 bytes/sec
+total size is 6387982  speedup is 1474.60
+sending incremental file list
+mercuriales/FZC/FZC 2014/THIRIET 2014.xls
+mercuriales/gms/2014/CENTRALES 2014/SIMPLY MARKET 2014.xls
+mercuriales/gms/2014/CONTROLE TARIFS 2014/01-JANVIER/2014 AUCHAN NOUVEAUX PRODUITS ASIE GAMME PC.pdf
+mercuriales/gms/2014/CONTROLE TARIFS 2014/01-JANVIER/2014 SIMPLY MARKET PRIX 2013 PROLONGES AU 28-02-2014.pdf
+mercuriales/mdd/2014/2014 MERCURIALE AUCHAN.xls
+mercuriales/mdd/2014/2014 MERCURIALE CARREFOUR ASIATIQUE.xls
+
+sent 105564 bytes  received 6384 bytes  31985.14 bytes/sec
+total size is 48560537  speedup is 433.78
+sending incremental file list
+
+sent 5047 bytes  received 27 bytes  3382.67 bytes/sec
+total size is 39173092  speedup is 7720.36
+sending incremental file list
+operations_commerciales/chrono demande echantillons.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS CARREFOUR 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/AUCHAN/2014 AUCHAN OP JANVIER 4 NAA.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/CARREFOUR/2014 CARREFOUR NAA.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/CARREFOUR/2014 CARREFOUR R20 PROMO 01 PIZZAS.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/SIMPLY MARKET/2014 SIMPLY MARKET OP NAA.xls
+operations_commerciales/GMS/2014/C-CONTROLE DES PRIX/2014 AUCHAN NAA.pdf
+operations_commerciales/GMS/2014/C-CONTROLE DES PRIX/2014 CARREFOUR NAA.pdf
+operations_commerciales/MDD/MODELES CJ/AUCHAN ATAC SCHIEVER/CONF OP/2014/CONFIRMATION OPERATION AUCHAN NAA 2014 OC ASS VAPEUR.xls
+operations_commerciales/MDD/MODELES CJ/LE MUTANT/CONFIRMATION OPERATION LE MUTANT NAA 2014.xls
+operations_commerciales/MDD/MODELES CJ/PROVERA/CONF OPES CORA MATCH/Chrono 682 Cora Agence Epsilon 201213.XLS
+operations_commerciales/MDD/MODELES CJ/PROVERA/CONF OPES CORA MATCH/2014/CORA/CONFIRMATION OPERATION_CORA_2014-14-10969-TRAFIC.xls
+operations_commerciales/MDD/OP MDD 2014/MDD CORA 2014.xls
+
+sent 367359 bytes  received 11245 bytes  108172.57 bytes/sec
+total size is 58589963  speedup is 154.75
+sending incremental file list
+rh_multi_sites/Accords d'entreprise/Accord CET - 01.01.2014.pdf
+rh_multi_sites/Accords d'entreprise/Diagnostic ctt g\#351n\#351ration d\#351c 2013.pdf
+rh_multi_sites/Accords d'entreprise/ctt g\#351n\#351ration d\#351c 2013 - sign\#351.pdf
+
+sent 339018 bytes  received 145 bytes  96903.71 bytes/sec
+total size is 99120505  speedup is 292.25
+sending incremental file list
+
+sent 7332 bytes  received 13 bytes  4896.67 bytes/sec
+total size is 32211968  speedup is 4385.56
+sending incremental file list
+
+sent 63 bytes  received 12 bytes  150.00 bytes/sec
+total size is 81426432  speedup is 1085685.76
+sending incremental file list
+
+sent 7538 bytes  received 45 bytes  15166.00 bytes/sec
+total size is 9253358  speedup is 1220.28
+sending incremental file list
+
+sent 4308 bytes  received 24 bytes  8664.00 bytes/sec
+total size is 6387982  speedup is 1474.60
+sending incremental file list
+
+sent 7683 bytes  received 20 bytes  5135.33 bytes/sec
+total size is 16751831  speedup is 2174.72
+sending incremental file list
+
+sent 85 bytes  received 13 bytes  65.33 bytes/sec
+total size is 104853504  speedup is 1069933.71
+sending incremental file list
+operations_commerciales/chrono demande echantillons.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS CARREFOUR 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/AUCHAN/2014 AUCHAN OP JANVIER 4 NAA.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/CARREFOUR/2014 CARREFOUR NAA.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/CARREFOUR/2014 CARREFOUR R20 PROMO 01 PIZZAS.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/SIMPLY MARKET/2014 SIMPLY MARKET OP NAA.xls
+operations_commerciales/GMS/2014/C-CONTROLE DES PRIX/2014 AUCHAN NAA.pdf
+operations_commerciales/GMS/2014/C-CONTROLE DES PRIX/2014 CARREFOUR NAA.pdf
+operations_commerciales/MDD/MODELES CJ/AUCHAN ATAC SCHIEVER/CONF OP/2014/CONFIRMATION OPERATION AUCHAN NAA 2014 OC ASS VAPEUR.xls
+operations_commerciales/MDD/MODELES CJ/LE MUTANT/CONFIRMATION OPERATION LE MUTANT NAA 2014.xls
+operations_commerciales/MDD/MODELES CJ/PROVERA/CONF OPES CORA MATCH/Chrono 682 Cora Agence Epsilon 201213.XLS
+operations_commerciales/MDD/MODELES CJ/PROVERA/CONF OPES CORA MATCH/2014/CORA/CONFIRMATION OPERATION_CORA_2014-14-10969-TRAFIC.xls
+operations_commerciales/MDD/OP MDD 2014/MDD CORA 2014.xls
+
+sent 367359 bytes  received 11245 bytes  108172.57 bytes/sec
+total size is 58589963  speedup is 154.75
+sending incremental file list
+mercuriales/FZC/FZC 2014/THIRIET 2014.xls
+mercuriales/gms/2014/CENTRALES 2014/SIMPLY MARKET 2014.xls
+mercuriales/gms/2014/CONTROLE TARIFS 2014/01-JANVIER/2014 AUCHAN NOUVEAUX PRODUITS ASIE GAMME PC.pdf
+mercuriales/gms/2014/CONTROLE TARIFS 2014/01-JANVIER/2014 SIMPLY MARKET PRIX 2013 PROLONGES AU 28-02-2014.pdf
+mercuriales/mdd/2014/2014 MERCURIALE AUCHAN.xls
+mercuriales/mdd/2014/2014 MERCURIALE CARREFOUR ASIATIQUE.xls
+
+sent 105564 bytes  received 6384 bytes  44779.20 bytes/sec
+total size is 48560537  speedup is 433.78
+sending incremental file list
+
+sent 7332 bytes  received 13 bytes  4896.67 bytes/sec
+total size is 32211968  speedup is 4385.56
+sending incremental file list
+
+sent 5598 bytes  received 45 bytes  11286.00 bytes/sec
+total size is 9985067  speedup is 1769.46
+sending incremental file list
+
+sent 5677 bytes  received 23 bytes  3800.00 bytes/sec
+total size is 128675317  speedup is 22574.62
+sending incremental file list
+
+sent 5353 bytes  received 38 bytes  3594.00 bytes/sec
+total size is 56169881  speedup is 10419.20
+sending incremental file list
+
+sent 47569 bytes  received 91 bytes  19064.00 bytes/sec
+total size is 279142483  speedup is 5856.96
+sending incremental file list

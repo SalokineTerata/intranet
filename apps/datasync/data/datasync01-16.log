@@ -1,0 +1,209 @@
+Démarrage : jeu jan 16 23:00:02 CET 2014
+Arrêt     : jeu jan 16 23:06:46 CET 2014
+
+
+
+Base MySQL sélectionnée: agis
+Nombre de serveur(s) Linux concerné(s): 4
+Nombre de dossier(s) à mettre à jour: 24
+
+sending incremental file list
+
+sent 5691 bytes  received 45 bytes  3824.00 bytes/sec
+total size is 10159163  speedup is 1771.12
+sending incremental file list
+deleting suivi_investissement/2012-2013/Pr\#351pa budget invest r\#351vis\#351 2012-2013/R\#351cap bud  invest r\#351vis\#351 2012-2013 valid\#351.xls
+deleting suivi_investissement/2012-2013/Pr\#351pa budget invest r\#351vis\#351 2012-2013/Pr\#351pa budget invest r\#351vis\#351 2012 Tarare.xls
+deleting suivi_investissement/2012-2013/Pr\#351pa budget invest r\#351vis\#351 2012-2013/Pr\#351pa budget invest r\#351vis\#351 2012 Info.xls
+deleting suivi_investissement/2012-2013/Pr\#351pa budget invest r\#351vis\#351 2012-2013/Pr\#351pa budget invest r\#351vis\#351 2012 Herbignac.xls
+deleting suivi_investissement/2012-2013/Pr\#351pa budget invest r\#351vis\#351 2012-2013/Pr\#351pa budget invest r\#351vis\#351 2012 Avignon.xls
+deleting suivi_investissement/2012-2013/Pr\#351pa budget invest r\#351vis\#351 2012-2013/Pr\#351pa budget invest r\#351vis\#351 2012 Agis.xls
+deleting suivi_investissement/2012-2013/Pr\#351pa budget invest r\#351vis\#351 2012-2013/Budget Invest r\#351vis\#351 TAR.pdf
+deleting suivi_investissement/2012-2013/Pr\#351pa budget invest r\#351vis\#351 2012-2013/Budget Invest r\#351vis\#351 PF TAR.pdf
+deleting suivi_investissement/2012-2013/Pr\#351pa budget invest r\#351vis\#351 2012-2013/Budget Invest r\#351vis\#351 HER.pdf
+deleting suivi_investissement/2012-2013/Pr\#351pa budget invest r\#351vis\#351 2012-2013/Budget Invest r\#351vis\#351 AVI.pdf
+deleting suivi_investissement/2012-2013/Pr\#351pa budget invest r\#351vis\#351 2012-2013/Bud invest r\#351vis\#351 2012 TAR valid\#351.xls
+deleting suivi_investissement/2012-2013/Pr\#351pa budget invest r\#351vis\#351 2012-2013/Bud invest r\#351vis\#351 2012 AVI valid\#351.xls
+deleting suivi_investissement/2012-2013/Pr\#351pa budget invest r\#351vis\#351 2012-2013/
+deleting suivi_investissement/2012-2013/Pr\#351pa budget invest 1 sem 2012-2013/R\#351cap bud  invest 2012-2013 valid\#351.xls
+deleting suivi_investissement/2012-2013/Pr\#351pa budget invest 1 sem 2012-2013/Budget invest 2012 TAR valid\#351.xls
+deleting suivi_investissement/2012-2013/Pr\#351pa budget invest 1 sem 2012-2013/
+deleting suivi_investissement/2012-2013/Communication suivi invest/Invest Agis TAR au 311012.pdf
+deleting suivi_investissement/2012-2013/Communication suivi invest/Invest Agis TAR au 301112.pdf
+deleting suivi_investissement/2012-2013/Communication suivi invest/Invest Agis TAR au 300912.pdf
+deleting suivi_investissement/2012-2013/Communication suivi invest/Invest Agis PFT au 311012.pdf
+deleting suivi_investissement/2012-2013/Communication suivi invest/Invest Agis PFT au 301112.pdf
+deleting suivi_investissement/2012-2013/Communication suivi invest/Invest Agis PFT au 300912.pdf
+deleting suivi_investissement/2012-2013/Communication suivi invest/Invest Agis HER au 311012.pdf
+deleting suivi_investissement/2012-2013/Communication suivi invest/Invest Agis HER au 301112.pdf
+deleting suivi_investissement/2012-2013/Communication suivi invest/Invest Agis HER au 300912.pdf
+deleting suivi_investissement/2012-2013/Communication suivi invest/Invest Agis AVI au 311012.pdf
+deleting suivi_investissement/2012-2013/Communication suivi invest/Invest Agis AVI au 301112.pdf
+deleting suivi_investissement/2012-2013/Communication suivi invest/Invest Agis AVI au 300912.pdf
+deleting suivi_investissement/2012-2013/Communication suivi invest/
+suivi_investissement/2012-2013/Projection bud invest 2012-2013/
+suivi_investissement/2012-2013/Projection bud invest 2012-2013/Budget invest 2012 TAR valid\#351.xls
+suivi_investissement/2012-2013/Projection bud invest 2012-2013/R\#351cap bud  invest 2012-2013 valid\#351.xls
+suivi_investissement/2012-2013/Projection bud invest 2012-2013/R\#351cap bud  invest r\#351vis\#351 2012-2013 valid\#351.xls
+suivi_investissement/2012-2013/Projection bud invest r\#351vis\#351 2012-2013/
+suivi_investissement/2012-2013/Projection bud invest r\#351vis\#351 2012-2013/D\#351tail budget TAR n\#260 8222 et n\#260 8226.xls
+suivi_investissement/2012-2013/Projection bud invest r\#351vis\#351 2012-2013/Project invest AVI 2 sem 2012.xls
+suivi_investissement/2012-2013/Projection bud invest r\#351vis\#351 2012-2013/Project invest HER 2 sem 2012.xls
+suivi_investissement/2012-2013/Projection bud invest r\#351vis\#351 2012-2013/Project invest PFT 2 sem 2012.xls
+suivi_investissement/2012-2013/Projection bud invest r\#351vis\#351 2012-2013/Project invest TAR 2 sem 2012.xls
+suivi_investissement/2012-2013/R\#351alis\#351 bud invest 2012-2013/
+suivi_investissement/2012-2013/R\#351alis\#351 bud invest 2012-2013/Bud invest r\#351vis\#351 2012 AVI valid\#351.xls
+suivi_investissement/2012-2013/R\#351alis\#351 bud invest 2012-2013/Bud invest r\#351vis\#351 2012 TAR valid\#351.xls
+suivi_investissement/2012-2013/R\#351alis\#351 bud invest 2012-2013/Budget Invest r\#351vis\#351 AVI.pdf
+suivi_investissement/2012-2013/R\#351alis\#351 bud invest 2012-2013/Budget Invest r\#351vis\#351 HER.pdf
+suivi_investissement/2012-2013/R\#351alis\#351 bud invest 2012-2013/Budget Invest r\#351vis\#351 PF TAR.pdf
+suivi_investissement/2012-2013/R\#351alis\#351 bud invest 2012-2013/Budget Invest r\#351vis\#351 TAR.pdf
+suivi_investissement/2012-2013/R\#351alis\#351 bud invest 2012-2013/Pr\#351pa budget invest r\#351vis\#351 2012 Agis.xls
+suivi_investissement/2012-2013/R\#351alis\#351 bud invest 2012-2013/Pr\#351pa budget invest r\#351vis\#351 2012 Avignon.xls
+suivi_investissement/2012-2013/R\#351alis\#351 bud invest 2012-2013/Pr\#351pa budget invest r\#351vis\#351 2012 Herbignac.xls
+suivi_investissement/2012-2013/R\#351alis\#351 bud invest 2012-2013/Pr\#351pa budget invest r\#351vis\#351 2012 Info.xls
+suivi_investissement/2012-2013/R\#351alis\#351 bud invest 2012-2013/Pr\#351pa budget invest r\#351vis\#351 2012 Tarare.xls
+suivi_investissement/2012-2013/R\#351alis\#351 bud invest r\#351vis\#351 2012-2013/
+suivi_investissement/2012-2013/R\#351alis\#351 bud invest r\#351vis\#351 2012-2013/Bud  invest AVI 2 sem 2012-2013.xls
+suivi_investissement/2012-2013/R\#351alis\#351 bud invest r\#351vis\#351 2012-2013/Bud  invest HER 2 sem 2012-2013.xls
+suivi_investissement/2012-2013/R\#351alis\#351 bud invest r\#351vis\#351 2012-2013/Bud  invest INF 2 sem 2012-2013.xls
+suivi_investissement/2012-2013/R\#351alis\#351 bud invest r\#351vis\#351 2012-2013/Bud  invest PFT 2 sem 2012-2013.xls
+suivi_investissement/2012-2013/R\#351alis\#351 bud invest r\#351vis\#351 2012-2013/Bud  invest TAR 2 sem 2012-2013.xls
+deleting suivi_investissement/2013-2014/Pr\#351pa budget invest r\#351vis\#351 2013-2014/Project bud invest 1 sem 2013-2014/Project bud invest TAR 1S 2013-2014.xls
+deleting suivi_investissement/2013-2014/Pr\#351pa budget invest r\#351vis\#351 2013-2014/Project bud invest 1 sem 2013-2014/Project bud invest PFT 1S 2013-2014.xls
+deleting suivi_investissement/2013-2014/Pr\#351pa budget invest r\#351vis\#351 2013-2014/Project bud invest 1 sem 2013-2014/Project bud invest INF 1S 2013-2014.ods
+deleting suivi_investissement/2013-2014/Pr\#351pa budget invest r\#351vis\#351 2013-2014/Project bud invest 1 sem 2013-2014/Project bud invest HER 1S 2013-2014.xls
+deleting suivi_investissement/2013-2014/Pr\#351pa budget invest r\#351vis\#351 2013-2014/Project bud invest 1 sem 2013-2014/Project bud invest AVI 1S 2013-2014.xls
+deleting suivi_investissement/2013-2014/Pr\#351pa budget invest r\#351vis\#351 2013-2014/Project bud invest 1 sem 2013-2014/
+deleting suivi_investissement/2013-2014/Pr\#351pa budget invest r\#351vis\#351 2013-2014/Bud invest TAR r\#351vis\#351 2013-2014.xls
+deleting suivi_investissement/2013-2014/Pr\#351pa budget invest r\#351vis\#351 2013-2014/Bud invest PFT r\#351vis\#351 2013-2014.xls
+deleting suivi_investissement/2013-2014/Pr\#351pa budget invest r\#351vis\#351 2013-2014/Bud invest HER r\#351vis\#351 2013-2014.xls
+deleting suivi_investissement/2013-2014/Pr\#351pa budget invest r\#351vis\#351 2013-2014/Bud invest AVI r\#351vis\#351 2013-2014.xls
+deleting suivi_investissement/2013-2014/Pr\#351pa budget invest r\#351vis\#351 2013-2014/
+deleting suivi_investissement/2013-2014/Pr\#351pa budget invest 1 sem 2013-2014/Project bud invest 2 sem 2012-2013/Project invest TAR 2 sem 2012.xls
+deleting suivi_investissement/2013-2014/Pr\#351pa budget invest 1 sem 2013-2014/Project bud invest 2 sem 2012-2013/Project invest PFT 2 sem 2012.xls
+deleting suivi_investissement/2013-2014/Pr\#351pa budget invest 1 sem 2013-2014/Project bud invest 2 sem 2012-2013/Project invest HER 2 sem 2012.xls
+deleting suivi_investissement/2013-2014/Pr\#351pa budget invest 1 sem 2013-2014/Project bud invest 2 sem 2012-2013/Project invest AVI 2 sem 2012.xls
+deleting suivi_investissement/2013-2014/Pr\#351pa budget invest 1 sem 2013-2014/Project bud invest 2 sem 2012-2013/D\#351tail budget TAR n\#260 8222 et n\#260 8226.xls
+deleting suivi_investissement/2013-2014/Pr\#351pa budget invest 1 sem 2013-2014/Project bud invest 2 sem 2012-2013/
+deleting suivi_investissement/2013-2014/Pr\#351pa budget invest 1 sem 2013-2014/Bud  invest TAR 2 sem 2012-2013.xls
+deleting suivi_investissement/2013-2014/Pr\#351pa budget invest 1 sem 2013-2014/Bud  invest TAR 1 sem 2013-2014.xls
+deleting suivi_investissement/2013-2014/Pr\#351pa budget invest 1 sem 2013-2014/Bud  invest PFT 2 sem 2012-2013.xls
+deleting suivi_investissement/2013-2014/Pr\#351pa budget invest 1 sem 2013-2014/Bud  invest PFT 1 sem 2013-2014.xls
+deleting suivi_investissement/2013-2014/Pr\#351pa budget invest 1 sem 2013-2014/Bud  invest INF 2 sem 2012-2013.xls
+deleting suivi_investissement/2013-2014/Pr\#351pa budget invest 1 sem 2013-2014/Bud  invest HER 2 sem 2012-2013.xls
+deleting suivi_investissement/2013-2014/Pr\#351pa budget invest 1 sem 2013-2014/Bud  invest HER 1 sem 2013-2014.xls
+deleting suivi_investissement/2013-2014/Pr\#351pa budget invest 1 sem 2013-2014/Bud  invest AVI 2 sem 2012-2013.xls
+deleting suivi_investissement/2013-2014/Pr\#351pa budget invest 1 sem 2013-2014/Bud  invest AVI 1 sem 2013-2014.xls
+deleting suivi_investissement/2013-2014/Pr\#351pa budget invest 1 sem 2013-2014/
+deleting suivi_investissement/2013-2014/suivi des travaux 2013.xls
+deleting suivi_investissement/2013-2014/R\#351cap Budget Arcadia 1S 2013-2014.xls
+deleting suivi_investissement/2013-2014/DOSSIER SUBVENTIONS AV.xls
+suivi_investissement/2013-2014/DOSSIER SUBVENTIONS AVI.xls
+suivi_investissement/2013-2014/Suivi des travaux AVI 2013-2014.xls
+suivi_investissement/2013-2014/Projection bud invest 2013-2014/
+suivi_investissement/2013-2014/Projection bud invest 2013-2014/Project bud invest AVI 1S 2013-2014.xls
+suivi_investissement/2013-2014/Projection bud invest 2013-2014/Project bud invest HER 1S 2013-2014.xls
+suivi_investissement/2013-2014/Projection bud invest 2013-2014/Project bud invest INF 1S 2013-2014.ods
+suivi_investissement/2013-2014/Projection bud invest 2013-2014/Project bud invest PFT 1S 2013-2014.xls
+suivi_investissement/2013-2014/Projection bud invest 2013-2014/Project bud invest TAR 1S 2013-2014.xls
+suivi_investissement/2013-2014/Projection bud invest r\#351vis\#351 2013-2014/
+suivi_investissement/2013-2014/Projection bud invest r\#351vis\#351 2013-2014/Projection invest AVI r\#351vis\#351 2013-2014.xls
+suivi_investissement/2013-2014/R\#351alis\#351 bud invest 2013-2014/
+suivi_investissement/2013-2014/R\#351alis\#351 bud invest 2013-2014/Bud  invest AVI 1 sem 2013-2014.xls
+suivi_investissement/2013-2014/R\#351alis\#351 bud invest 2013-2014/Bud  invest HER 1 sem 2013-2014.xls
+suivi_investissement/2013-2014/R\#351alis\#351 bud invest 2013-2014/Bud  invest PFT 1 sem 2013-2014.xls
+suivi_investissement/2013-2014/R\#351alis\#351 bud invest 2013-2014/Bud  invest TAR 1 sem 2013-2014.xls
+suivi_investissement/2013-2014/R\#351alis\#351 bud invest 2013-2014/R\#351cap Budget Arcadia 1S 2013-2014.xls
+suivi_investissement/2013-2014/R\#351alis\#351 bud invest r\#351vis\#351 2013-2014/
+suivi_investissement/2013-2014/R\#351alis\#351 bud invest r\#351vis\#351 2013-2014/Bud invest AVI r\#351vis\#351 2013-2014.xls
+suivi_investissement/2013-2014/R\#351alis\#351 bud invest r\#351vis\#351 2013-2014/Bud invest HER r\#351vis\#351 2013-2014.xls
+suivi_investissement/2013-2014/R\#351alis\#351 bud invest r\#351vis\#351 2013-2014/Bud invest PFT r\#351vis\#351 2013-2014.xls
+suivi_investissement/2013-2014/R\#351alis\#351 bud invest r\#351vis\#351 2013-2014/Bud invest TAR r\#351vis\#351 2013-2014.xls
+deleting suivi_investissement/2014-2015/Pr\#351pa budget invest 1 sem 2014-2015/
+deleting suivi_investissement/2014-2015/suivi investissements 2014 2015 avignon.xls
+deleting suivi_investissement/2014-2015/Bud invest AVI r\#351vis\#351 2013-2014.xls
+deleting suivi_investissement/2014-2015/Bud invest AVI 2014 2015.xls
+suivi_investissement/2014-2015/Org suivi budget invest.xls
+suivi_investissement/2014-2015/Suivi investissements AVI 2014 2015.xls
+suivi_investissement/2014-2015/Projection bud invest 2014-2015/
+suivi_investissement/2014-2015/Projection bud invest 2014-2015/Bud invest AVI 2014 2015.xls
+suivi_investissement/2014-2015/R\#351alis\#351 bud invest 2014-2015/
+
+sent 1240914 bytes  received 903 bytes  55191.87 bytes/sec
+total size is 11594110  speedup is 9.34
+sending incremental file list
+erp_data.mdb
+
+sent 7870120 bytes  received 64032 bytes  50057.74 bytes/sec
+total size is 83869696  speedup is 10.57
+sending incremental file list
+
+sent 7538 bytes  received 45 bytes  5055.33 bytes/sec
+total size is 9253358  speedup is 1220.28
+sending incremental file list
+
+sent 7695 bytes  received 20 bytes  3086.00 bytes/sec
+total size is 16751789  speedup is 2171.33
+sending incremental file list
+
+sent 4308 bytes  received 24 bytes  2888.00 bytes/sec
+total size is 6387982  speedup is 1474.60
+sending incremental file list
+mercuriales/FZC/FZC 2014/ARGEL 2014.xls
+mercuriales/mdd/2014/2014 MERCURIALE AUCHAN.xls
+mercuriales/mdd/2014/2014 MERCURIALE CARREFOUR ASIATIQUE.xls
+mercuriales/mdd/2014/2014 MERCURIALE EXPORT.xls
+
+sent 22443 bytes  received 2404 bytes  7099.14 bytes/sec
+total size is 25744217  speedup is 1036.11
+sending incremental file list
+
+sent 5047 bytes  received 27 bytes  3382.67 bytes/sec
+total size is 39173092  speedup is 7720.36
+sending incremental file list
+operations_commerciales/chrono demande echantillons.xls
+operations_commerciales/GMS/RECAP DEMANDE ET CONFIRMATIONS HEBDO.xls
+operations_commerciales/GMS/2013/A-CENTRALES/GMS AUCHAN 2013-FUTUR MASTER.xls
+operations_commerciales/GMS/2013/A-CENTRALES/GMS AUCHAN.FR 2013-FUTUR MASTER.xls
+operations_commerciales/GMS/2013/A-CENTRALES/GMS SIMPLY MARKET 2013-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS CASINO 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS SYSTEME U 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/CARREFOUR/2014 CARREFOUR NAA.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/CASINO HM/2014 HM PRIX CHOC S8.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/SYSTEME U/2014 SYSTEME U PAQUES ALI TIMBALE ST JACQUES.xls
+operations_commerciales/GMS/2014/D-REGIONS/GMS SCHIEVER 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/D-REGIONS/GMS SU REGION  2014-FUTUR MASTER.xls
+
+sent 390396 bytes  received 32966 bytes  40320.19 bytes/sec
+total size is 60413965  speedup is 142.70
+sending incremental file list
+
+sent 20908 bytes  received 88 bytes  8398.40 bytes/sec
+total size is 99120505  speedup is 4720.92
+sending incremental file list
+
+sent 7464 bytes  received 13 bytes  2990.80 bytes/sec
+total size is 32964096  speedup is 4408.73
+sending incremental file list
+
+sent 5691 bytes  received 45 bytes  3824.00 bytes/sec
+total size is 10159163  speedup is 1771.12
+sending incremental file list
+
+sent 5677 bytes  received 23 bytes  3800.00 bytes/sec
+total size is 128675317  speedup is 22574.62
+sending incremental file list
+
+sent 5353 bytes  received 38 bytes  3594.00 bytes/sec
+total size is 56169881  speedup is 10419.20
+sending incremental file list
+codesoft/Codesoft 7/Agis FE/43060_16 nem porc _recto.bak
+codesoft/Codesoft 7/Agis FE/43060_16 nem porc _recto.lab
+codesoft/Codesoft 7/Agis FE/43060_16 nems porc _verso.bak
+codesoft/Codesoft 7/Agis FE/43060_16 nems porc _verso.lab
+codesoft/Codesoft 7/Claude L\#351ger/43501 16 nem porc.lab
+codesoft/Codesoft 7/Claude L\#351ger/43501.bak
+
+sent 162979 bytes  received 210 bytes  65275.60 bytes/sec
+total size is 287944275  speedup is 1764.48

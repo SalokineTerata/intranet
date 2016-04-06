@@ -107,15 +107,13 @@ if (!$modificationGestionnaire) {
 switch ($modificationGestionnaire) {
     case "1";
         $action = "gestionnaire";
-        $ftaModel = new FtaModel($idFta);
-        $ftaModel->setIsEditable(TRUE);
-        $suffixeAgrologicFta = $ftaModel->getModelClassificationRacourcis()->getNameRaccourcisClassif();;
+        $idDossierFta = $idFta;
+
+
         break;
     case "2";
         $action = "gestionnaire1";
-        $ftaModel = new FtaModel($idFta);
-        $ftaModel->setIsEditable(TRUE);
-        $suffixeAgrologicFta = $ftaModel->getModelClassificationRacourcis()->getNameRaccourcisClassif();;
+        $idDossierFta = $idFta;
         break;
     default :
         $action = "valider";
@@ -160,7 +158,6 @@ $navigue . "
 
         
      </tr>
-     $suffixeAgrologicFta
      <tr>
         $bouton_retour_vers_fta
          $bouton_submit

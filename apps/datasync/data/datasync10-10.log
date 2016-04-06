@@ -1,0 +1,139 @@
+Démarrage : jeu oct 10 23:00:02 CEST 2013
+Arrêt     : jeu oct 10 23:00:48 CEST 2013
+
+
+
+Base MySQL sélectionnée: agis
+Nombre de serveur(s) Linux concerné(s): 4
+Nombre de dossier(s) à mettre à jour: 24
+
+sending incremental file list
+
+sent 7651 bytes  received 20 bytes  15342.00 bytes/sec
+total size is 16750790  speedup is 2183.65
+sending incremental file list
+
+sent 5555 bytes  received 45 bytes  3733.33 bytes/sec
+total size is 9704312  speedup is 1732.91
+sending incremental file list
+
+sent 5686 bytes  received 34 bytes  3813.33 bytes/sec
+total size is 11410700  speedup is 1994.88
+sending incremental file list
+
+sent 63 bytes  received 12 bytes  50.00 bytes/sec
+total size is 78852096  speedup is 1051361.28
+sending incremental file list
+
+sent 7538 bytes  received 45 bytes  5055.33 bytes/sec
+total size is 9253358  speedup is 1220.28
+sending incremental file list
+deleting batch/loma.vnc
+batch/Loma_Avignon.vnc
+
+sent 8168 bytes  received 42 bytes  5473.33 bytes/sec
+total size is 16750790  speedup is 2040.29
+sending incremental file list
+
+sent 4308 bytes  received 24 bytes  2888.00 bytes/sec
+total size is 6387982  speedup is 1474.60
+sending incremental file list
+mercuriales/gms/2013/CONTROLE TARIF 2013/11-NOVEMBRE/2013 CARREDFOUR PIZZAS.pdf
+mercuriales/mdd/2013/2013 MERCURIALE CARREFOUR PLATS CUISINES.xls
+mercuriales/mdd/2013/2013 MERCURIALE GROUPE AUCHAN.xls
+mercuriales/mdd/2013/2013 MERCURIALE SCAMARK.xls
+
+sent 662208 bytes  received 8169 bytes  121886.73 bytes/sec
+total size is 35192133  speedup is 52.50
+sending incremental file list
+
+sent 5047 bytes  received 27 bytes  3382.67 bytes/sec
+total size is 39173092  speedup is 7720.36
+sending incremental file list
+operations_commerciales/chrono demande echantillons.xls
+operations_commerciales/GMS/2013/A-CENTRALES/GMS AUCHAN 2013-FUTUR MASTER.xls
+operations_commerciales/GMS/2013/A-CENTRALES/GMS CARREFOUR MN 2013-FUTUR MASTER.xls
+operations_commerciales/GMS/2013/A-CENTRALES/GMS CARREFOUR MN ASIE 2013-FUTUR MASTER.xls
+operations_commerciales/GMS/2013/A-CENTRALES/GMS CASINO 2013-FUTUR MASTER.xls
+operations_commerciales/GMS/2013/A-CENTRALES/GMS PRODIM MN 2013-FUTUR MASTER.xls
+operations_commerciales/GMS/2013/C-CONTROLES PRIX/INTERMARCHE/2013 OP FESTIFS MENUS.pdf
+operations_commerciales/GMS/2013/D-REGIONS/GMS SCHIEVER 2013-FUTUR MASTER.xls
+deleting operations_commerciales/GMS/2014/A-CENTRALES/Copie de GMS GALEC 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS AUCHAN 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS CASINO 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS SYSTEME U 2014-FUTUR MASTER.xls
+
+sent 257804 bytes  received 42044 bytes  85670.86 bytes/sec
+total size is 51748041  speedup is 172.58
+sending incremental file list
+
+sent 18506 bytes  received 80 bytes  7434.40 bytes/sec
+total size is 41728031  speedup is 2245.13
+sending incremental file list
+
+sent 7556 bytes  received 13 bytes  5046.00 bytes/sec
+total size is 34205315  speedup is 4519.13
+sending incremental file list
+
+sent 63 bytes  received 12 bytes  50.00 bytes/sec
+total size is 78852096  speedup is 1051361.28
+sending incremental file list
+
+sent 7538 bytes  received 45 bytes  5055.33 bytes/sec
+total size is 9253358  speedup is 1220.28
+sending incremental file list
+
+sent 4308 bytes  received 24 bytes  2888.00 bytes/sec
+total size is 6387982  speedup is 1474.60
+sending incremental file list
+deleting batch/loma.vnc
+batch/Loma_Avignon.vnc
+batch/Loma_Tarare_Cantubas.vnc
+
+sent 8678 bytes  received 58 bytes  5824.00 bytes/sec
+total size is 16750790  speedup is 1917.44
+sending incremental file list
+
+sent 85 bytes  received 13 bytes  65.33 bytes/sec
+total size is 104853504  speedup is 1069933.71
+sending incremental file list
+operations_commerciales/chrono demande echantillons.xls
+operations_commerciales/GMS/2013/A-CENTRALES/GMS AUCHAN 2013-FUTUR MASTER.xls
+operations_commerciales/GMS/2013/A-CENTRALES/GMS CARREFOUR MN 2013-FUTUR MASTER.xls
+operations_commerciales/GMS/2013/A-CENTRALES/GMS CARREFOUR MN ASIE 2013-FUTUR MASTER.xls
+operations_commerciales/GMS/2013/A-CENTRALES/GMS CASINO 2013-FUTUR MASTER.xls
+operations_commerciales/GMS/2013/A-CENTRALES/GMS PRODIM MN 2013-FUTUR MASTER.xls
+operations_commerciales/GMS/2013/C-CONTROLES PRIX/INTERMARCHE/2013 OP FESTIFS MENUS.pdf
+operations_commerciales/GMS/2013/D-REGIONS/GMS SCHIEVER 2013-FUTUR MASTER.xls
+deleting operations_commerciales/GMS/2014/A-CENTRALES/Copie de GMS GALEC 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS AUCHAN 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS CASINO 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS SYSTEME U 2014-FUTUR MASTER.xls
+
+sent 257804 bytes  received 42044 bytes  85670.86 bytes/sec
+total size is 51748041  speedup is 172.58
+sending incremental file list
+mercuriales/gms/2013/CONTROLE TARIF 2013/11-NOVEMBRE/2013 CARREDFOUR PIZZAS.pdf
+mercuriales/mdd/2013/2013 MERCURIALE CARREFOUR PLATS CUISINES.xls
+mercuriales/mdd/2013/2013 MERCURIALE GROUPE AUCHAN.xls
+mercuriales/mdd/2013/2013 MERCURIALE SCAMARK.xls
+
+sent 662208 bytes  received 8169 bytes  148972.67 bytes/sec
+total size is 35192133  speedup is 52.50
+sending incremental file list
+
+sent 5555 bytes  received 45 bytes  3733.33 bytes/sec
+total size is 9704312  speedup is 1732.91
+sending incremental file list
+
+sent 5618 bytes  received 23 bytes  3760.67 bytes/sec
+total size is 128644085  speedup is 22805.19
+sending incremental file list
+
+sent 4707 bytes  received 36 bytes  3162.00 bytes/sec
+total size is 46318934  speedup is 9765.75
+sending incremental file list
+
+sent 46046 bytes  received 86 bytes  30754.67 bytes/sec
+total size is 274282579  speedup is 5945.60
+sending incremental file list

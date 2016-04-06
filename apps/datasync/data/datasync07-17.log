@@ -1,0 +1,245 @@
+Démarrage : jeu jui 17 23:00:02 CEST 2014
+Arrêt     : jeu jui 17 23:00:47 CEST 2014
+
+
+
+Base MySQL sélectionnée: agis
+Nombre de serveur(s) Linux concerné(s): 4
+Nombre de dossier(s) à mettre à jour: 29
+
+sending incremental file list
+
+sent 7280 bytes  received 49 bytes  2931.60 bytes/sec
+total size is 13584181  speedup is 1853.48
+sending incremental file list
+
+sent 6283 bytes  received 38 bytes  2528.40 bytes/sec
+total size is 12444119  speedup is 1968.69
+sending incremental file list
+
+sent 63 bytes  received 12 bytes  50.00 bytes/sec
+total size is 90648576  speedup is 1208647.68
+sending incremental file list
+
+sent 7593 bytes  received 45 bytes  5092.00 bytes/sec
+total size is 9254930  speedup is 1211.70
+sending incremental file list
+
+sent 7814 bytes  received 20 bytes  5222.67 bytes/sec
+total size is 16759466  speedup is 2139.32
+sending incremental file list
+
+sent 4308 bytes  received 24 bytes  2888.00 bytes/sec
+total size is 6387982  speedup is 1474.60
+sending incremental file list
+mercuriales/MERCURIALES - AGIS/HD/2014/2014 MERCURIALE DIA.xls
+mercuriales/MERCURIALES - AGIS/mdd/2014/2014 MERCURIALE AUCHAN.xls
+mercuriales/MERCURIALES - AGIS/mdd/2014/2014 MERCURIALE CASINO.xls
+mercuriales/MERCURIALES - AGIS/mdd/2014/2014 MERCURIALE PROVERA.xls
+mercuriales/MERCURIALES - MARIE/2014/2014  MERCURIALES EMG MARIE.xls
+mercuriales/MERCURIALES - MARIE/2014/2014 MERCURIALES CARREFOUR MARIE.xls
+mercuriales/MERCURIALES - MARIE/2014/2014 MERCURIALES DIA MARIE.xls
+mercuriales/MERCURIALES - MARIE/2014/2014 MERCURIALES LIDL MARIE.xls
+mercuriales/MERCURIALES - MARIE/2014/2014 MERCURIALES SCAMARK MARIE.xls
+mercuriales/MERCURIALES - MARIE/2014/2014 MERCURIALES SYSTEME U MARIE.xls
+
+sent 73490 bytes  received 7494 bytes  32393.60 bytes/sec
+total size is 35051050  speedup is 432.81
+sending incremental file list
+
+sent 5047 bytes  received 27 bytes  3382.67 bytes/sec
+total size is 39173092  speedup is 7720.36
+sending incremental file list
+operations_commerciales/chrono demande echantillons.xls
+operations_commerciales/FZC/CONFIRMATIONS/2014/THIRIET/THIRIET_SEPTEMBRE_ 2014.xls
+operations_commerciales/FZC/OP FZC 2014/FZC THIRIET 2014.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/CARREFOUR/2014 CARREFOUR PROMO 38 PAELLA.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/CARREFOUR/CARREFOUR PROMO 37.pdf
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/INTERMARCHE/2014 INTERMARCHE NOVEMBRE OP 61810 PIZZAS.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/INTERMARCHE/INTERMARCHE OP 61810 PIZZAS.pdf
+
+sent 426349 bytes  received 6190 bytes  123582.57 bytes/sec
+total size is 54871711  speedup is 126.86
+sending incremental file list
+
+sent 20406 bytes  received 83 bytes  13659.33 bytes/sec
+total size is 99360776  speedup is 4849.47
+sending incremental file list
+gofast/sync.ffs_db
+gofast/CHANTIERS/2_FTK_CLIENTS_Mathieu/5_STANDARDS/Besoins_clients_150714.xls
+
+sent 13530 bytes  received 454 bytes  9322.67 bytes/sec
+total size is 52062648  speedup is 3723.02
+sending incremental file list
+deleting modeles/echantillons-75x48mm.bak
+deleting modeles/coupelle_compo_preimp_180.bak
+deleting modeles/coupelle_compo_180.bak
+deleting modeles/coupelle_compo.bak
+deleting modeles/compo_pc_saveur_minute_verso_180_surgele.bak
+deleting modeles/compo_pc_saveur_minute_verso.bak
+deleting modeles/compo_pc_individuel_fef-2014_180.bak
+deleting modeles/compo_pc_individuel_fef-2014.bak
+deleting modeles/compo_pc_frais_emballe_recto_180.bak
+deleting modeles/compo_pc_frais_emballe_recto.bak
+deleting modeles/compo_pc_double_haut_kg.bak
+deleting modeles/compo_pc_double_haut_V2.bak
+deleting modeles/compo_pc_double_haut_180.bak
+deleting modeles/compo_pc_double_haut.bak
+deleting modeles/compo_pc_double_bas-v2_180.bak
+deleting modeles/compo_pc_double_bas-v2.old
+deleting modeles/compo_pc_double_bas-v2.bak
+deleting modeles/compo_asia_simply_double_haut_g.bak
+deleting modeles/compo_asia_sdv_les_marches_du_monde.bak
+deleting modeles/compo_asia_sdv_asian_les_marches_du_monde.bak
+deleting modeles/compo_asia_sdv_amigos.bak
+deleting modeles/compo_asia_sdv.bak
+deleting modeles/compo_asia_plateau_aperitif_recto.bak
+deleting modeles/compo_asia_hema_dessous-70x130.bak
+deleting modeles/compo_asia_hema-70x130.bak
+deleting modeles/compo_asia_double_haut_auchan_traiteur.bak
+deleting modeles/compo_asia_double_bas-60x105.bak
+deleting modeles/compo_asia_double_bas-60x100.bak
+deleting modeles/compo_asia_dessous-70x130.bak
+deleting modeles/compo_asia_coupe_agis_detachable.bak
+deleting modeles/compo_asia_claude_leger.old
+deleting modeles/compo_asia_argel-70x130.bak
+deleting modeles/compo_asia_ITM_gamme_permanente.bak
+deleting modeles/carton_ean_128_v2012_surgele.bak
+deleting modeles/carton_ean_128_v2012.bak
+deleting modeles/carton_ean_128_mini-v2013_180.bak
+deleting modeles/carton_ean_128_mini-v2013.bak
+deleting modeles/carton_ean_128_180_v2012_surgele.bak
+deleting modeles/carton_ean_128_180_v2012.bak
+modeles/inco_compo_coupe_fe_reco-55x90-sato-H.lab
+modeles/inco_compo_coupe_fe_verso-75x115-sato-D.lab
+
+sent 53680 bytes  received 5097 bytes  23510.80 bytes/sec
+total size is 42427392  speedup is 721.84
+sending incremental file list
+
+sent 5781 bytes  received 30 bytes  3874.00 bytes/sec
+total size is 92829061  speedup is 15974.71
+sending incremental file list
+
+sent 63 bytes  received 12 bytes  50.00 bytes/sec
+total size is 90648576  speedup is 1208647.68
+sending incremental file list
+
+sent 7593 bytes  received 45 bytes  5092.00 bytes/sec
+total size is 9254930  speedup is 1211.70
+sending incremental file list
+
+sent 4308 bytes  received 24 bytes  2888.00 bytes/sec
+total size is 6387982  speedup is 1474.60
+sending incremental file list
+
+sent 7814 bytes  received 20 bytes  5222.67 bytes/sec
+total size is 16759466  speedup is 2139.32
+sending incremental file list
+
+sent 85 bytes  received 13 bytes  65.33 bytes/sec
+total size is 104853504  speedup is 1069933.71
+sending incremental file list
+operations_commerciales/chrono demande echantillons.xls
+operations_commerciales/FZC/CONFIRMATIONS/2014/THIRIET/THIRIET_SEPTEMBRE_ 2014.xls
+operations_commerciales/FZC/OP FZC 2014/FZC THIRIET 2014.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/CARREFOUR/2014 CARREFOUR PROMO 38 PAELLA.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/CARREFOUR/CARREFOUR PROMO 37.pdf
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/INTERMARCHE/2014 INTERMARCHE NOVEMBRE OP 61810 PIZZAS.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/INTERMARCHE/INTERMARCHE OP 61810 PIZZAS.pdf
+
+sent 426349 bytes  received 6190 bytes  123582.57 bytes/sec
+total size is 54871711  speedup is 126.86
+sending incremental file list
+mercuriales/MERCURIALES - AGIS/HD/2014/2014 MERCURIALE DIA.xls
+mercuriales/MERCURIALES - AGIS/mdd/2014/2014 MERCURIALE AUCHAN.xls
+mercuriales/MERCURIALES - AGIS/mdd/2014/2014 MERCURIALE CASINO.xls
+mercuriales/MERCURIALES - AGIS/mdd/2014/2014 MERCURIALE PROVERA.xls
+mercuriales/MERCURIALES - MARIE/2014/2014  MERCURIALES EMG MARIE.xls
+mercuriales/MERCURIALES - MARIE/2014/2014 MERCURIALES CARREFOUR MARIE.xls
+mercuriales/MERCURIALES - MARIE/2014/2014 MERCURIALES DIA MARIE.xls
+mercuriales/MERCURIALES - MARIE/2014/2014 MERCURIALES LIDL MARIE.xls
+mercuriales/MERCURIALES - MARIE/2014/2014 MERCURIALES SCAMARK MARIE.xls
+mercuriales/MERCURIALES - MARIE/2014/2014 MERCURIALES SYSTEME U MARIE.xls
+
+sent 73490 bytes  received 7494 bytes  53989.33 bytes/sec
+total size is 35051050  speedup is 432.81
+sending incremental file list
+deleting modeles/echantillons-75x48mm.bak
+deleting modeles/coupelle_compo_preimp_180.bak
+deleting modeles/coupelle_compo_180.bak
+deleting modeles/coupelle_compo.bak
+deleting modeles/compo_pc_saveur_minute_verso_180_surgele.bak
+deleting modeles/compo_pc_saveur_minute_verso.bak
+deleting modeles/compo_pc_individuel_fef-2014_180.bak
+deleting modeles/compo_pc_individuel_fef-2014.bak
+deleting modeles/compo_pc_frais_emballe_recto_180.bak
+deleting modeles/compo_pc_frais_emballe_recto.bak
+deleting modeles/compo_pc_double_haut_kg.bak
+deleting modeles/compo_pc_double_haut_V2.bak
+deleting modeles/compo_pc_double_haut_180.bak
+deleting modeles/compo_pc_double_haut.bak
+deleting modeles/compo_pc_double_bas-v2_180.bak
+deleting modeles/compo_pc_double_bas-v2.old
+deleting modeles/compo_pc_double_bas-v2.bak
+deleting modeles/compo_asia_simply_double_haut_g.bak
+deleting modeles/compo_asia_sdv_les_marches_du_monde.bak
+deleting modeles/compo_asia_sdv_asian_les_marches_du_monde.bak
+deleting modeles/compo_asia_sdv_amigos.bak
+deleting modeles/compo_asia_sdv.bak
+deleting modeles/compo_asia_plateau_aperitif_recto.bak
+deleting modeles/compo_asia_hema_dessous-70x130.bak
+deleting modeles/compo_asia_hema-70x130.bak
+deleting modeles/compo_asia_double_haut_auchan_traiteur.bak
+deleting modeles/compo_asia_double_bas-60x105.bak
+deleting modeles/compo_asia_double_bas-60x100.bak
+deleting modeles/compo_asia_dessous-70x130.bak
+deleting modeles/compo_asia_coupe_agis_detachable.bak
+deleting modeles/compo_asia_claude_leger.old
+deleting modeles/compo_asia_argel-70x130.bak
+deleting modeles/compo_asia_ITM_gamme_permanente.bak
+deleting modeles/carton_ean_128_v2012_surgele.bak
+deleting modeles/carton_ean_128_v2012.bak
+deleting modeles/carton_ean_128_mini-v2013_180.bak
+deleting modeles/carton_ean_128_mini-v2013.bak
+deleting modeles/carton_ean_128_180_v2012_surgele.bak
+deleting modeles/carton_ean_128_180_v2012.bak
+modeles/inco_compo_coupe_fe_reco-55x90-sato-H.lab
+modeles/inco_compo_coupe_fe_verso-75x115-sato-D.lab
+
+sent 53680 bytes  received 5097 bytes  23510.80 bytes/sec
+total size is 42427392  speedup is 721.84
+sending incremental file list
+
+sent 7280 bytes  received 49 bytes  4886.00 bytes/sec
+total size is 13584181  speedup is 1853.48
+sending incremental file list
+
+sent 5745 bytes  received 23 bytes  11536.00 bytes/sec
+total size is 129159129  speedup is 22392.36
+sending incremental file list
+
+sent 5610 bytes  received 39 bytes  3766.00 bytes/sec
+total size is 59049369  speedup is 10453.07
+sending incremental file list
+
+sent 52221 bytes  received 96 bytes  34878.00 bytes/sec
+total size is 299490387  speedup is 5724.53
+sending incremental file list
+
+sent 20406 bytes  received 83 bytes  8195.60 bytes/sec
+total size is 99360776  speedup is 4849.47
+sending incremental file list
+gofast/sync.ffs_db
+gofast/CHANTIERS/2_FTK_CLIENTS_Mathieu/5_STANDARDS/Besoins_clients_150714.xls
+
+sent 13530 bytes  received 454 bytes  5593.60 bytes/sec
+total size is 52062648  speedup is 3723.02
+sending incremental file list
+
+sent 7814 bytes  received 20 bytes  5222.67 bytes/sec
+total size is 16759466  speedup is 2139.32
+sending incremental file list
+
+sent 7814 bytes  received 20 bytes  5222.67 bytes/sec
+total size is 16759466  speedup is 2139.32

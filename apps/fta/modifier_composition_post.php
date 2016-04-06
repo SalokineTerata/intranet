@@ -61,7 +61,7 @@ $etiquette_libelle_fta_composition = Lib::getParameterFromRequest(FtaComposantMo
 $etiquette_fta_composition = Lib::getParameterFromRequest(FtaComposantModel::FIELDNAME_ETIQUETTE);
 $etiquette_id_fta_composition = Lib::getParameterFromRequest(FtaComposantModel::FIELDNAME_ETIQUETTE_ID_FTA_COMPOSITION);
 $etiquette_supplementaire_fta_composition = Lib::getParameterFromRequest(FtaComposantModel::FIELDNAME_ETIQUETTE_SUPPLEMENTAIRE_FTA_COMPOSIITON);
-$etiquette_duree_vie_fta_composition = Lib::getParameterFromRequest(FtaComposantModel::FIELDNAME_ETIQUETTE_DUREE_VIE_FTA_COMPOSITION);
+$etiquette_duree_vie_fta_composition = Lib::getParameterFromRequest(FtaComposantModel::TABLENAME . "_" . FtaComposantModel::FIELDNAME_ETIQUETTE_DUREE_VIE_FTA_COMPOSITION . "_" . $id_fta_composant);
 $etiquette_poids_fta_composition = Lib::getParameterFromRequest(FtaComposantModel::FIELDNAME_ETIQUETTE_POIDS_FTA_COMPOSITION);
 $etiquette_quantite_fta_composition = Lib::getParameterFromRequest(FtaComposantModel::FIELDNAME_ETIQUETTE_QUANTITE_FTA_COMPOSITION);
 $taille_police_ingredient_fta_composition = Lib::getParameterFromRequest(FtaComposantModel::FIELDNAME_TAILLE_POLICE_INGREDIENT_FTA_COMPOSITION);
@@ -81,6 +81,10 @@ if ($mode_etiquette_fta_composition == AnnexeModeEtiquetteModel::PAS_DETIQUETTE)
             . ', ' . FtaComposantModel::FIELDNAME_K_ETIQUETTE_VERSO_FTA_COMPOSITION . '=' . "-1"
             . ' WHERE ' . FtaComposantModel::KEYNAME . '=' . $id_fta_composant
     );
+} elseif (empty($etiquette_duree_vie_fta_composition)) {
+    $titre = UserInterfaceMessage::FR_WARNING_MISSING_DATA;
+    $message = UserInterfaceMessage::FR_WARNING_DUREE_DE_VIE_COMPOSANT;
+    afficher_message($titre, $message, $redirection);
 }
 /*
   -----------------

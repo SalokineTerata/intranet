@@ -1,0 +1,231 @@
+Démarrage : jeu mar 20 23:00:01 CET 2014
+Arrêt     : jeu mar 20 23:00:51 CET 2014
+
+
+
+Base MySQL sélectionnée: agis
+Nombre de serveur(s) Linux concerné(s): 4
+Nombre de dossier(s) à mettre à jour: 27
+
+sending incremental file list
+gestion_crise/mise \#340 jour 2014/CONTACTS CLIENT GESTION DE CRISE 190314 MDD HD.xls
+gestion_crise/mise \#340 jour 2014/Contacts crises 190314 FZC.xls
+
+sent 21649 bytes  received 85 bytes  14489.33 bytes/sec
+total size is 12471599  speedup is 573.83
+sending incremental file list
+
+sent 6067 bytes  received 37 bytes  4069.33 bytes/sec
+total size is 12258686  speedup is 2008.30
+sending incremental file list
+
+sent 63 bytes  received 12 bytes  50.00 bytes/sec
+total size is 84160512  speedup is 1122140.16
+sending incremental file list
+
+sent 7538 bytes  received 45 bytes  5055.33 bytes/sec
+total size is 9253358  speedup is 1220.28
+sending incremental file list
+
+sent 7695 bytes  received 20 bytes  5143.33 bytes/sec
+total size is 16751789  speedup is 2171.33
+sending incremental file list
+
+sent 4308 bytes  received 24 bytes  2888.00 bytes/sec
+total size is 6387982  speedup is 1474.60
+sending incremental file list
+mercuriales/gms/2014/CENTRALES 2014/AUCHAN 2014.xls
+mercuriales/gms/2014/CENTRALES 2014/AUCHAN.FR 2014.xls
+mercuriales/gms/2014/CENTRALES 2014/SYSTEME U 2014.xls
+mercuriales/gms/2014/CONTROLE TARIFS 2014/03-MARS/AUCHAN NOUVEAUX PRIX 17-03 SANS RPP 5%.pdf
+mercuriales/mdd/2014/2014 MERCURIALE CASINO.xls
+mercuriales/mdd/2014/2014 MERCURIALE MONOPRIX .xls
+
+sent 139966 bytes  received 15635 bytes  44457.43 bytes/sec
+total size is 29678764  speedup is 190.74
+sending incremental file list
+
+sent 5047 bytes  received 27 bytes  2029.60 bytes/sec
+total size is 39173092  speedup is 7720.36
+sending incremental file list
+operations_commerciales/DEMANDE ECHANTILLONS CL .xls
+operations_commerciales/chrono demande echantillons.xls
+operations_commerciales/GMS/RECAP DEMANDE ET CONFIRMATIONS HEBDO.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS AUCHAN 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS CARREFOUR 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS CARREFOUR MARKET 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS CASINO 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS INTERMARCHE 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS SYSTEME U 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/AUCHAN/2014 AUCHAN OP AVRIL 4 ASIE.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/AUCHAN/2014 AUCHAN OP AVRIL TOP 100 ASIE ET PLATEAUX.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/AUCHAN/2014 AUCHAN OP MAI 1 PC TOP CHEF.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/AUCHAN/2014 AUCHAN OP MAI 3 ASIE.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/AUCHAN/2014 AUCHAN OP MAI 4 ENCORNETS FARCIS 300G.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/CARREFOUR MARKET/2014 CARREFOUR MARKET TRAFIC 15 CREPES.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/CARREFOUR MARKET/2014 CARREFOUR MARKET TRAFIC 17 PIZZAS.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/CARREFOUR MARKET/2014 CARREFOUR MARKET TRAFIC 19 PAELLA.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/CARREFOUR/2014 CARREFOUR PROMO 17 PAELLA.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/CASINO HM/2014 HM DONNE C DONNE S28.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/CASINO HM/2014 HM FEUILLE DE CHOU S27 HAUT DE CUISSE.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/CASINO HM/2014 HM MECA PRO BEAUTE S22 ASIE.xls
+deleting operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/INTERMARCHE/PLACE DU MARCHE/2014 PLACE DU MARCHE TRACT S11.xls
+deleting operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/INTERMARCHE/PLACE DU MARCHE/
+deleting operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/INTERMARCHE/2014 INTERMARCHE MARS 4 OP 61027.xls
+deleting operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/INTERMARCHE/2014 INTERMARCHE MAI 1 OP 61040.xls
+deleting operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/INTERMARCHE/2014 INTERMARCHE JUIN EURO 2 OP 61048.xls
+deleting operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/INTERMARCHE/2014 INTERMARCHE JUIN 1 OP 61055.xls
+deleting operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/INTERMARCHE/2014 INTERMARCHE JANVIER 1 OP 61000.xls
+deleting operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/INTERMARCHE/2014 INTERMARCHE FEVRIER 1 OP 61009.xls
+deleting operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/INTERMARCHE/2014 INTERMARCHE AVRIL 3 OP 61036.xls
+deleting operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/INTERMARCHE/2014 INTERMARCHE AVRIL 2 OP 61033.xls
+deleting operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/INTERMARCHE/2014 INTERMARCHE AVRIL 1 OP 61030.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/INTERMARCHE/2014 INTERMARCHE AVRIL 1 OP 61030 PLATEAUX COCKTAIL COUSCOUS PAELLA.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/INTERMARCHE/2014 INTERMARCHE AVRIL 2 OP 61033 PC COQUILLES AUMONIERES.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/INTERMARCHE/2014 INTERMARCHE AVRIL 3 OP 61036 ROULEAUX PRINTEMPS.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/INTERMARCHE/2014 INTERMARCHE FEVRIER 1 OP 61009 NAA.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/INTERMARCHE/2014 INTERMARCHE JANVIER 1 OP 61000 COUSCOUS PAELLA.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/INTERMARCHE/2014 INTERMARCHE JUILLET 1 OP 61060 ROULEAUX PRINTEMPS.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/INTERMARCHE/2014 INTERMARCHE JUIN 1 OP 61055 PLATEAUX APERO NEMS 65G.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/INTERMARCHE/2014 INTERMARCHE JUIN EURO 2 OP 61048 COUSCOUS PAELLA.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/INTERMARCHE/2014 INTERMARCHE MAI 1 OP 61040 CREPES GALETTES.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/INTERMARCHE/2014 INTERMARCHE MARS 4 OP 61027 PIZZAS.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/PLACE DU MARCHE/
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/PLACE DU MARCHE/2014 PLACE DU MARCHE TRACT S11.xls
+operations_commerciales/MDD/MODELES VB/DEM ECHANTILLONS/2014/Chrono 164 CASINO 200314.XLS
+operations_commerciales/MDD/MODELES VB/DEM ECHANTILLONS/2014/Chrono 165 CASINO 200314.XLS
+
+sent 519524 bytes  received 38089 bytes  53106.00 bytes/sec
+total size is 48131074  speedup is 86.32
+sending incremental file list
+
+sent 19988 bytes  received 78 bytes  8026.40 bytes/sec
+total size is 98797494  speedup is 4923.63
+sending incremental file list
+
+sent 3431 bytes  received 79 bytes  2340.00 bytes/sec
+total size is 16655550  speedup is 4745.17
+sending incremental file list
+
+sent 9125 bytes  received 13 bytes  6092.00 bytes/sec
+total size is 43767808  speedup is 4789.65
+sending incremental file list
+
+sent 5781 bytes  received 30 bytes  3874.00 bytes/sec
+total size is 93132165  speedup is 16026.87
+sending incremental file list
+
+sent 63 bytes  received 12 bytes  50.00 bytes/sec
+total size is 84160512  speedup is 1122140.16
+sending incremental file list
+
+sent 7538 bytes  received 45 bytes  5055.33 bytes/sec
+total size is 9253358  speedup is 1220.28
+sending incremental file list
+
+sent 4308 bytes  received 24 bytes  1732.80 bytes/sec
+total size is 6387982  speedup is 1474.60
+sending incremental file list
+
+sent 7695 bytes  received 20 bytes  5143.33 bytes/sec
+total size is 16751789  speedup is 2171.33
+sending incremental file list
+
+sent 85 bytes  received 13 bytes  196.00 bytes/sec
+total size is 104853504  speedup is 1069933.71
+sending incremental file list
+operations_commerciales/DEMANDE ECHANTILLONS CL .xls
+operations_commerciales/chrono demande echantillons.xls
+operations_commerciales/GMS/RECAP DEMANDE ET CONFIRMATIONS HEBDO.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS AUCHAN 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS CARREFOUR 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS CARREFOUR MARKET 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS CASINO 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS INTERMARCHE 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS SYSTEME U 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/AUCHAN/2014 AUCHAN OP AVRIL 4 ASIE.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/AUCHAN/2014 AUCHAN OP AVRIL TOP 100 ASIE ET PLATEAUX.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/AUCHAN/2014 AUCHAN OP MAI 1 PC TOP CHEF.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/AUCHAN/2014 AUCHAN OP MAI 3 ASIE.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/AUCHAN/2014 AUCHAN OP MAI 4 ENCORNETS FARCIS 300G.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/CARREFOUR MARKET/2014 CARREFOUR MARKET TRAFIC 15 CREPES.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/CARREFOUR MARKET/2014 CARREFOUR MARKET TRAFIC 17 PIZZAS.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/CARREFOUR MARKET/2014 CARREFOUR MARKET TRAFIC 19 PAELLA.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/CARREFOUR/2014 CARREFOUR PROMO 17 PAELLA.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/CASINO HM/2014 HM DONNE C DONNE S28.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/CASINO HM/2014 HM FEUILLE DE CHOU S27 HAUT DE CUISSE.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/CASINO HM/2014 HM MECA PRO BEAUTE S22 ASIE.xls
+deleting operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/INTERMARCHE/PLACE DU MARCHE/2014 PLACE DU MARCHE TRACT S11.xls
+deleting operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/INTERMARCHE/PLACE DU MARCHE/
+deleting operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/INTERMARCHE/2014 INTERMARCHE MARS 4 OP 61027.xls
+deleting operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/INTERMARCHE/2014 INTERMARCHE MAI 1 OP 61040.xls
+deleting operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/INTERMARCHE/2014 INTERMARCHE JUIN EURO 2 OP 61048.xls
+deleting operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/INTERMARCHE/2014 INTERMARCHE JUIN 1 OP 61055.xls
+deleting operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/INTERMARCHE/2014 INTERMARCHE JANVIER 1 OP 61000.xls
+deleting operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/INTERMARCHE/2014 INTERMARCHE FEVRIER 1 OP 61009.xls
+deleting operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/INTERMARCHE/2014 INTERMARCHE AVRIL 3 OP 61036.xls
+deleting operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/INTERMARCHE/2014 INTERMARCHE AVRIL 2 OP 61033.xls
+deleting operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/INTERMARCHE/2014 INTERMARCHE AVRIL 1 OP 61030.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/INTERMARCHE/2014 INTERMARCHE AVRIL 1 OP 61030 PLATEAUX COCKTAIL COUSCOUS PAELLA.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/INTERMARCHE/2014 INTERMARCHE AVRIL 2 OP 61033 PC COQUILLES AUMONIERES.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/INTERMARCHE/2014 INTERMARCHE AVRIL 3 OP 61036 ROULEAUX PRINTEMPS.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/INTERMARCHE/2014 INTERMARCHE FEVRIER 1 OP 61009 NAA.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/INTERMARCHE/2014 INTERMARCHE JANVIER 1 OP 61000 COUSCOUS PAELLA.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/INTERMARCHE/2014 INTERMARCHE JUILLET 1 OP 61060 ROULEAUX PRINTEMPS.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/INTERMARCHE/2014 INTERMARCHE JUIN 1 OP 61055 PLATEAUX APERO NEMS 65G.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/INTERMARCHE/2014 INTERMARCHE JUIN EURO 2 OP 61048 COUSCOUS PAELLA.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/INTERMARCHE/2014 INTERMARCHE MAI 1 OP 61040 CREPES GALETTES.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/INTERMARCHE/2014 INTERMARCHE MARS 4 OP 61027 PIZZAS.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/PLACE DU MARCHE/
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/PLACE DU MARCHE/2014 PLACE DU MARCHE TRACT S11.xls
+operations_commerciales/MDD/MODELES VB/DEM ECHANTILLONS/2014/Chrono 164 CASINO 200314.XLS
+operations_commerciales/MDD/MODELES VB/DEM ECHANTILLONS/2014/Chrono 165 CASINO 200314.XLS
+
+sent 519524 bytes  received 38089 bytes  159318.00 bytes/sec
+total size is 48131074  speedup is 86.32
+sending incremental file list
+mercuriales/gms/2014/CENTRALES 2014/AUCHAN 2014.xls
+mercuriales/gms/2014/CENTRALES 2014/AUCHAN.FR 2014.xls
+mercuriales/gms/2014/CENTRALES 2014/SYSTEME U 2014.xls
+mercuriales/gms/2014/CONTROLE TARIFS 2014/03-MARS/AUCHAN NOUVEAUX PRIX 17-03 SANS RPP 5%.pdf
+mercuriales/mdd/2014/2014 MERCURIALE CASINO.xls
+mercuriales/mdd/2014/2014 MERCURIALE MONOPRIX .xls
+
+sent 139966 bytes  received 15635 bytes  62240.40 bytes/sec
+total size is 29678764  speedup is 190.74
+sending incremental file list
+
+sent 9125 bytes  received 13 bytes  6092.00 bytes/sec
+total size is 43767808  speedup is 4789.65
+sending incremental file list
+gestion_crise/mise \#340 jour 2014/CONTACTS CLIENT GESTION DE CRISE 190314 MDD HD.xls
+gestion_crise/mise \#340 jour 2014/Contacts crises 190314 FZC.xls
+
+sent 21649 bytes  received 85 bytes  14489.33 bytes/sec
+total size is 12471599  speedup is 573.83
+sending incremental file list
+
+sent 5684 bytes  received 23 bytes  3804.67 bytes/sec
+total size is 129152473  speedup is 22630.54
+sending incremental file list
+
+sent 5610 bytes  received 39 bytes  11298.00 bytes/sec
+total size is 59049369  speedup is 10453.07
+sending incremental file list
+codesoft/Codesoft 7/Auchan  Atac/Atac_simply/simply_janv_14/79862_verso.bak
+codesoft/Codesoft 7/Auchan  Atac/Atac_simply/simply_janv_14/79862_verso.lab
+codesoft/Codesoft 7/Auchan  Atac/Atac_simply/simply_janv_14/79864_verso.bak
+codesoft/Codesoft 7/Auchan  Atac/Atac_simply/simply_janv_14/79864_verso.lab
+codesoft/Codesoft 7/Casino FE/43176_crev_pan\#351es_verso.bak
+codesoft/Codesoft 7/Casino FE/43176_crev_pan\#351es_verso.lab
+
+sent 88737 bytes  received 3798 bytes  37014.00 bytes/sec
+total size is 291459155  speedup is 3149.72
+sending incremental file list
+
+sent 19988 bytes  received 78 bytes  13377.33 bytes/sec
+total size is 98797494  speedup is 4923.63
+sending incremental file list
+
+sent 3431 bytes  received 79 bytes  2340.00 bytes/sec
+total size is 16655550  speedup is 4745.17

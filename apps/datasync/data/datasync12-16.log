@@ -1,0 +1,272 @@
+Démarrage : lun déc 16 23:00:01 CET 2013
+Arrêt     : lun déc 16 23:04:04 CET 2013
+
+
+
+Base MySQL sélectionnée: agis
+Nombre de serveur(s) Linux concerné(s): 4
+Nombre de dossier(s) à mettre à jour: 24
+
+sending incremental file list
+
+sent 5598 bytes  received 45 bytes  3762.00 bytes/sec
+total size is 9985067  speedup is 1769.46
+sending incremental file list
+
+sent 5788 bytes  received 34 bytes  3881.33 bytes/sec
+total size is 11670607  speedup is 2004.57
+sending incremental file list
+erp_data.mdb
+
+sent 10667261 bytes  received 63255 bytes  183427.62 bytes/sec
+total size is 81426432  speedup is 7.59
+sending incremental file list
+
+sent 7538 bytes  received 45 bytes  5055.33 bytes/sec
+total size is 9253358  speedup is 1220.28
+sending incremental file list
+
+sent 7683 bytes  received 20 bytes  5135.33 bytes/sec
+total size is 16751831  speedup is 2174.72
+sending incremental file list
+
+sent 4308 bytes  received 24 bytes  2888.00 bytes/sec
+total size is 6387982  speedup is 1474.60
+sending incremental file list
+mercuriales/sync.ffs_db
+mercuriales/FZC/FZC 2014/ARGEL 2014.xls
+mercuriales/gms/2014/CENTRALES 2014/AUCHAN 2014.xls
+mercuriales/gms/2014/CENTRALES 2014/AUCHAN.FR 2014.xls
+mercuriales/gms/2014/CENTRALES 2014/CASINO 2014.xls
+mercuriales/gms/2014/CONTROLE TARIFS 2014/01-JANVIER/2014 AUCHAN.FR.pdf
+mercuriales/mdd/2014/2014 MERCURIALE CARREFOUR ASIATIQUE.xls
+
+sent 112421 bytes  received 15217 bytes  28364.00 bytes/sec
+total size is 48635933  speedup is 381.05
+sending incremental file list
+
+sent 5047 bytes  received 27 bytes  3382.67 bytes/sec
+total size is 39173092  speedup is 7720.36
+sending incremental file list
+operations_commerciales/chrono demande echantillons.xls
+operations_commerciales/FZC/OP FZC 2012/FUTURMASTER/FZC ARGEL FUTUR MASTER.xls
+operations_commerciales/FZC/OP FZC 2013/FZC ARGEL 2013.xls
+operations_commerciales/FZC/OP FZC 2013/FZC PICARD 2013.xls
+operations_commerciales/FZC/OP FZC 2013/FZC THIRIET 2013.xls
+operations_commerciales/FZC/OP FZC 2013/FZC TOUPARGEL 2013.xls
+operations_commerciales/GMS/2013/A-CENTRALES/GMS AUCHAN 2013-FUTUR MASTER.xls
+operations_commerciales/GMS/2013/A-CENTRALES/GMS AUCHAN.FR 2013-FUTUR MASTER.xls
+operations_commerciales/GMS/2013/A-CENTRALES/GMS CARREFOUR MDD 2013-FUTUR MASTER.xls
+operations_commerciales/GMS/2013/A-CENTRALES/GMS CARREFOUR MN ASIE 2013-FUTUR MASTER.xls
+operations_commerciales/GMS/2013/A-CENTRALES/GMS CASINO 2013-FUTUR MASTER.xls
+operations_commerciales/GMS/2013/A-CENTRALES/GMS INTERMARCHE 2013-FUTUR MASTER.xls
+operations_commerciales/GMS/2013/D-REGIONS/GMS INTERMARCHE REGION .2013-FUTUR MASTER.xls
+operations_commerciales/GMS/2013/D-REGIONS/GMS LECLERC 2013-FUTUR MASTER.xls
+operations_commerciales/GMS/2013/D-REGIONS/GMS SCHIEVER 2013-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS AUCHAN 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS CARREFOUR 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS CASINO 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS INTERMARCHE 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS SIMPLY MARKET 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/AUCHAN/2014 AUCHAN OP FEVRIER 4 ENCORNETS FARCIS.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/CARREFOUR MARKET/2014 CARREFOUR MARKET NAA.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/CARREFOUR/2014 CARREFOUR R20 PROMO 07 PIZZAS.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/CASINO HM/2014 CARTE FEVRIER GYOZAS CREPES.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/CASINO HM/2014 HM GROS VOLUMES CHANDELEUR NAA HYPER.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/CASINO SM/2014 SM RI+GRATUIT NAC GROS VOLUMES SUPER.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/INTERMARCHE/2014 INTERMARCHE AVRIL 1 OP 61030.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/INTERMARCHE/2014 INTERMARCHE MARS 4 OP 61027.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/SIMPLY MARKET/2014 SIMPLY MARKET OP NAA.xls
+operations_commerciales/GMS/2014/D-REGIONS/GMS LECLERC 2014-FUTUR MASTER.xls
+operations_commerciales/MDD/MODELES CJ/CARREFOUR/DDE ECHANTILLONS/demande \#351chantillons GUTENBERG.XLS
+operations_commerciales/MDD/MODELES CJ/CARREFOUR/DDE ECHANTILLONS/demande \#351chantillons PICXYZ 689.XLS
+operations_commerciales/MDD/MODELES CJ/CARREFOUR/DDE ECHANTILLONS/demande \#351chantillons PICXYZ 690.XLS
+operations_commerciales/MDD/MODELES CJ/CARREFOUR/DDE ECHANTILLONS/demande \#351chantillons PICXYZ 691.XLS
+operations_commerciales/MDD/OP MDD 2013/MDD CASINO 2013 FUTUR MASTER.xls
+operations_commerciales/MDD/OP MDD 2013/MDD ITM FUTUR MASTER 2013 .xls
+operations_commerciales/MDD/OP MDD 2013/MDD NETTO 2013 FUTURMASTER.xls
+
+sent 685504 bytes  received 73641 bytes  138026.36 bytes/sec
+total size is 59196683  speedup is 77.98
+sending incremental file list
+
+sent 20908 bytes  received 88 bytes  13997.33 bytes/sec
+total size is 99120505  speedup is 4720.92
+sending incremental file list
+
+sent 7332 bytes  received 13 bytes  4896.67 bytes/sec
+total size is 32211968  speedup is 4385.56
+sending incremental file list
+erp_data.mdb
+
+sent 10667261 bytes  received 63255 bytes  96237.81 bytes/sec
+total size is 81426432  speedup is 7.59
+sending incremental file list
+
+sent 7538 bytes  received 45 bytes  2166.57 bytes/sec
+total size is 9253358  speedup is 1220.28
+sending incremental file list
+
+sent 4308 bytes  received 24 bytes  1237.71 bytes/sec
+total size is 6387982  speedup is 1474.60
+sending incremental file list
+
+sent 7683 bytes  received 20 bytes  2200.86 bytes/sec
+total size is 16751831  speedup is 2174.72
+sending incremental file list
+
+sent 85 bytes  received 13 bytes  28.00 bytes/sec
+total size is 104853504  speedup is 1069933.71
+sending incremental file list
+operations_commerciales/chrono demande echantillons.xls
+operations_commerciales/FZC/OP FZC 2012/FUTURMASTER/FZC ARGEL FUTUR MASTER.xls
+operations_commerciales/FZC/OP FZC 2013/FZC ARGEL 2013.xls
+operations_commerciales/FZC/OP FZC 2013/FZC PICARD 2013.xls
+operations_commerciales/FZC/OP FZC 2013/FZC THIRIET 2013.xls
+operations_commerciales/FZC/OP FZC 2013/FZC TOUPARGEL 2013.xls
+operations_commerciales/GMS/2013/A-CENTRALES/GMS AUCHAN 2013-FUTUR MASTER.xls
+operations_commerciales/GMS/2013/A-CENTRALES/GMS AUCHAN.FR 2013-FUTUR MASTER.xls
+operations_commerciales/GMS/2013/A-CENTRALES/GMS CARREFOUR MDD 2013-FUTUR MASTER.xls
+operations_commerciales/GMS/2013/A-CENTRALES/GMS CARREFOUR MN ASIE 2013-FUTUR MASTER.xls
+operations_commerciales/GMS/2013/A-CENTRALES/GMS CASINO 2013-FUTUR MASTER.xls
+operations_commerciales/GMS/2013/A-CENTRALES/GMS INTERMARCHE 2013-FUTUR MASTER.xls
+operations_commerciales/GMS/2013/D-REGIONS/GMS INTERMARCHE REGION .2013-FUTUR MASTER.xls
+operations_commerciales/GMS/2013/D-REGIONS/GMS LECLERC 2013-FUTUR MASTER.xls
+operations_commerciales/GMS/2013/D-REGIONS/GMS SCHIEVER 2013-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS AUCHAN 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS CARREFOUR 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS CASINO 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS INTERMARCHE 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS SIMPLY MARKET 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/AUCHAN/2014 AUCHAN OP FEVRIER 4 ENCORNETS FARCIS.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/CARREFOUR MARKET/2014 CARREFOUR MARKET NAA.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/CARREFOUR/2014 CARREFOUR R20 PROMO 07 PIZZAS.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/CASINO HM/2014 CARTE FEVRIER GYOZAS CREPES.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/CASINO HM/2014 HM GROS VOLUMES CHANDELEUR NAA HYPER.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/CASINO SM/2014 SM RI+GRATUIT NAC GROS VOLUMES SUPER.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/INTERMARCHE/2014 INTERMARCHE AVRIL 1 OP 61030.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/INTERMARCHE/2014 INTERMARCHE MARS 4 OP 61027.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/SIMPLY MARKET/2014 SIMPLY MARKET OP NAA.xls
+operations_commerciales/GMS/2014/D-REGIONS/GMS LECLERC 2014-FUTUR MASTER.xls
+operations_commerciales/MDD/MODELES CJ/CARREFOUR/DDE ECHANTILLONS/demande \#351chantillons GUTENBERG.XLS
+operations_commerciales/MDD/MODELES CJ/CARREFOUR/DDE ECHANTILLONS/demande \#351chantillons PICXYZ 689.XLS
+operations_commerciales/MDD/MODELES CJ/CARREFOUR/DDE ECHANTILLONS/demande \#351chantillons PICXYZ 690.XLS
+operations_commerciales/MDD/MODELES CJ/CARREFOUR/DDE ECHANTILLONS/demande \#351chantillons PICXYZ 691.XLS
+operations_commerciales/MDD/OP MDD 2013/MDD CASINO 2013 FUTUR MASTER.xls
+operations_commerciales/MDD/OP MDD 2013/MDD ITM FUTUR MASTER 2013 .xls
+operations_commerciales/MDD/OP MDD 2013/MDD NETTO 2013 FUTURMASTER.xls
+
+sent 685504 bytes  received 73641 bytes  72299.52 bytes/sec
+total size is 59196683  speedup is 77.98
+sending incremental file list
+mercuriales/sync.ffs_db
+mercuriales/FZC/FZC 2014/ARGEL 2014.xls
+mercuriales/gms/2014/CENTRALES 2014/AUCHAN 2014.xls
+mercuriales/gms/2014/CENTRALES 2014/AUCHAN.FR 2014.xls
+mercuriales/gms/2014/CENTRALES 2014/CASINO 2014.xls
+mercuriales/gms/2014/CONTROLE TARIFS 2014/01-JANVIER/2014 AUCHAN.FR.pdf
+mercuriales/mdd/2014/2014 MERCURIALE CARREFOUR ASIATIQUE.xls
+
+sent 112421 bytes  received 15217 bytes  23206.91 bytes/sec
+total size is 48635933  speedup is 381.05
+sending incremental file list
+
+sent 7332 bytes  received 13 bytes  2098.57 bytes/sec
+total size is 32211968  speedup is 4385.56
+sending incremental file list
+
+sent 5598 bytes  received 45 bytes  1612.29 bytes/sec
+total size is 9985067  speedup is 1769.46
+sending incremental file list
+
+sent 5677 bytes  received 23 bytes  1036.36 bytes/sec
+total size is 128675317  speedup is 22574.62
+sending incremental file list
+
+sent 5353 bytes  received 38 bytes  3594.00 bytes/sec
+total size is 56169881  speedup is 10419.20
+sending incremental file list
+codesoft/Codesoft 7/Auchan  Atac/Atac_simply/43478_recto.LAB
+codesoft/Codesoft 7/Auchan  Atac/Atac_simply/43478_recto.bak
+codesoft/Codesoft 7/Auchan  Atac/Atac_simply/simply_janv_14/79861_recto.bak
+codesoft/Codesoft 7/Auchan  Atac/Atac_simply/simply_janv_14/79861_recto.lab
+codesoft/Codesoft 7/Auchan  Atac/Atac_simply/simply_janv_14/79862_recto.bak
+codesoft/Codesoft 7/Auchan  Atac/Atac_simply/simply_janv_14/79862_recto.lab
+codesoft/Codesoft 7/Auchan  Atac/Atac_simply/simply_janv_14/79863_recto.bak
+codesoft/Codesoft 7/Auchan  Atac/Atac_simply/simply_janv_14/79863_recto.lab
+codesoft/Codesoft 7/Auchan  Atac/Atac_simply/simply_janv_14/79864_recto.bak
+codesoft/Codesoft 7/Auchan  Atac/Atac_simply/simply_janv_14/79864_recto.lab
+codesoft/Codesoft 7/Auchan  Atac/Atac_simply/simply_janv_14/nems_banane_chocolat_recto.lab
+codesoft/Codesoft 7/Auchan  Atac/Atac_simply/simply_janv_14/nems_banane_chocolat_verso.bak
+codesoft/Codesoft 7/Auchan  Atac/Atac_simply/simply_janv_14/nems_banane_chocolat_verso.lab
+codesoft/Codesoft 7/Auchan  Atac/Atac_simply/simply_janv_14/plateau_degustation_recto.lab
+codesoft/Codesoft 7/Auchan  Atac/Atac_simply/simply_janv_14/plateau_degustation_verso.bak
+codesoft/Codesoft 7/Auchan  Atac/Atac_simply/simply_janv_14/plateau_degustation_verso.lab
+codesoft/Codesoft 7/Auchan  Atac/Atac_simply/simply_janv_14/ravioli_recto.lab
+codesoft/Codesoft 7/Auchan  Atac/Atac_simply/simply_janv_14/ravioli_verso.bak
+codesoft/Codesoft 7/Auchan  Atac/Atac_simply/simply_janv_14/ravioli_verso.lab
+codesoft/Codesoft 7/Auchan  Atac/Atac_simply/simply_janv_14/sam_volaille_recto.lab
+codesoft/Codesoft 7/Auchan  Atac/Atac_simply/simply_janv_14/sam_volaille_verso.bak
+codesoft/Codesoft 7/Auchan  Atac/Atac_simply/simply_janv_14/sam_volaille_verso.lab
+deleting codesoft/Codesoft 7/Auchan  Atac/Auchan/Auchan le traiteur/En attente 2014/sam_40g_x4_verso.lab
+deleting codesoft/Codesoft 7/Auchan  Atac/Auchan/Auchan le traiteur/En attente 2014/sam_40g_x4_recto.lab
+deleting codesoft/Codesoft 7/Auchan  Atac/Auchan/Auchan le traiteur/En attente 2014/rav_poulet_25g_x_6_verso.lab
+deleting codesoft/Codesoft 7/Auchan  Atac/Auchan/Auchan le traiteur/En attente 2014/rav_poulet_25g_x_6_recto.lab
+deleting codesoft/Codesoft 7/Auchan  Atac/Auchan/Auchan le traiteur/En attente 2014/rav_porc_25g_x_6_verso.lab
+deleting codesoft/Codesoft 7/Auchan  Atac/Auchan/Auchan le traiteur/En attente 2014/rav_porc_25g_x_6_recto.lab
+deleting codesoft/Codesoft 7/Auchan  Atac/Auchan/Auchan le traiteur/En attente 2014/rav_crev_25g_x_6_verso.lab
+deleting codesoft/Codesoft 7/Auchan  Atac/Auchan/Auchan le traiteur/En attente 2014/rav_crev_25g_x_6_recto.lab
+deleting codesoft/Codesoft 7/Auchan  Atac/Auchan/Auchan le traiteur/En attente 2014/rav_boeuf_25g_x_6_verso.lab
+deleting codesoft/Codesoft 7/Auchan  Atac/Auchan/Auchan le traiteur/En attente 2014/rav_boeuf_25g_x_6_recto.lab
+deleting codesoft/Codesoft 7/Auchan  Atac/Auchan/Auchan le traiteur/En attente 2014/bcrev_20g_x_6_verso.lab
+deleting codesoft/Codesoft 7/Auchan  Atac/Auchan/Auchan le traiteur/En attente 2014/bcrev_20g_x_6_recto.lab
+deleting codesoft/Codesoft 7/Auchan  Atac/Auchan/Auchan le traiteur/En attente 2014/acras_20g_x_9_verso.lab
+deleting codesoft/Codesoft 7/Auchan  Atac/Auchan/Auchan le traiteur/En attente 2014/acras_20g_x_9_recto.lab
+codesoft/Codesoft 7/Auchan  Atac/Auchan/Auchan le traiteur/En attente 2014/79179_recto.lab
+codesoft/Codesoft 7/Auchan  Atac/Auchan/Auchan le traiteur/En attente 2014/79179_verso.bak
+codesoft/Codesoft 7/Auchan  Atac/Auchan/Auchan le traiteur/En attente 2014/79179_verso.lab
+codesoft/Codesoft 7/Auchan  Atac/Auchan/Auchan le traiteur/En attente 2014/79180_recto.lab
+codesoft/Codesoft 7/Auchan  Atac/Auchan/Auchan le traiteur/En attente 2014/79180_verso.bak
+codesoft/Codesoft 7/Auchan  Atac/Auchan/Auchan le traiteur/En attente 2014/79180_verso.lab
+codesoft/Codesoft 7/Auchan  Atac/Auchan/Auchan le traiteur/En attente 2014/79181_recto.lab
+codesoft/Codesoft 7/Auchan  Atac/Auchan/Auchan le traiteur/En attente 2014/79181_verso.bak
+codesoft/Codesoft 7/Auchan  Atac/Auchan/Auchan le traiteur/En attente 2014/79181_verso.lab
+codesoft/Codesoft 7/Auchan  Atac/Auchan/Auchan le traiteur/En attente 2014/79182_recto.lab
+codesoft/Codesoft 7/Auchan  Atac/Auchan/Auchan le traiteur/En attente 2014/79182_verso.bak
+codesoft/Codesoft 7/Auchan  Atac/Auchan/Auchan le traiteur/En attente 2014/79182_verso.lab
+codesoft/Codesoft 7/Auchan  Atac/Auchan/Auchan le traiteur/En attente 2014/79183_recto.lab
+codesoft/Codesoft 7/Auchan  Atac/Auchan/Auchan le traiteur/En attente 2014/79183_verso.bak
+codesoft/Codesoft 7/Auchan  Atac/Auchan/Auchan le traiteur/En attente 2014/79183_verso.lab
+codesoft/Codesoft 7/Auchan  Atac/Auchan/Auchan le traiteur/En attente 2014/79184_recto.lab
+codesoft/Codesoft 7/Auchan  Atac/Auchan/Auchan le traiteur/En attente 2014/79184_verso.bak
+codesoft/Codesoft 7/Auchan  Atac/Auchan/Auchan le traiteur/En attente 2014/79184_verso.lab
+codesoft/Codesoft 7/Auchan  Atac/Auchan/Auchan le traiteur/En attente 2014/79185_recto.lab
+codesoft/Codesoft 7/Auchan  Atac/Auchan/Auchan le traiteur/En attente 2014/79185_verso.bak
+codesoft/Codesoft 7/Auchan  Atac/Auchan/Auchan le traiteur/En attente 2014/79185_verso.lab
+deleting codesoft/Codesoft 7/Codes Produits/79132_verso.lab
+deleting codesoft/Codesoft 7/Codes Produits/79132_recto.lab
+deleting codesoft/Codesoft 7/Codes Produits/79103_verso.lab
+deleting codesoft/Codesoft 7/Codes Produits/79103_recto.lab
+codesoft/Codesoft 7/D\#351pannage/ass_asiatique_CARREFOUR_belgique.bak
+codesoft/Codesoft 7/D\#351pannage/ass_asiatique_CARREFOUR_belgique.lab
+codesoft/Codesoft 7/EN_ATTENTE_nems_rang\#351s/43638_recto.bak
+codesoft/Codesoft 7/EN_ATTENTE_nems_rang\#351s/43638_recto.lab
+codesoft/Codesoft 7/EN_ATTENTE_nems_rang\#351s/43639_recto.bak
+codesoft/Codesoft 7/EN_ATTENTE_nems_rang\#351s/43639_recto.lab
+codesoft/Codesoft 7/EN_ATTENTE_nems_rang\#351s/43680_recto.bak
+codesoft/Codesoft 7/EN_ATTENTE_nems_rang\#351s/43680_recto.lab
+codesoft/Codesoft 7/EN_ATTENTE_nems_rang\#351s/43681_recto.lab
+codesoft/Codesoft 7/EN_ATTENTE_nems_rang\#351s/75374_recto.bak
+codesoft/Codesoft 7/EN_ATTENTE_nems_rang\#351s/75374_recto.lab
+codesoft/Codesoft 7/EN_ATTENTE_nems_rang\#351s/75375_recto.bak
+codesoft/Codesoft 7/EN_ATTENTE_nems_rang\#351s/75375_recto.lab
+codesoft/Codesoft 7/EN_ATTENTE_nems_rang\#351s/79102_recto.bak
+codesoft/Codesoft 7/EN_ATTENTE_nems_rang\#351s/79102_recto.lab
+codesoft/Codesoft 7/EN_ATTENTE_nems_rang\#351s/nems_poisson_cocktail_rang\#351s_SIMPLY_recto.bak
+codesoft/Codesoft 7/EN_ATTENTE_nems_rang\#351s/nems_poisson_cocktail_rang\#351s_SIMPLY_recto.lab
+codesoft/Codesoft 7/EN_ATTENTE_nems_rang\#351s/nems_poisson_cocktail_rang\#351s_SIMPLY_verso.bak
+codesoft/Codesoft 7/EN_ATTENTE_nems_rang\#351s/nems_poisson_cocktail_rang\#351s_SIMPLY_verso.lab
+
+sent 568337 bytes  received 13455 bytes  61241.26 bytes/sec
+total size is 280635475  speedup is 482.36
+sending incremental file list

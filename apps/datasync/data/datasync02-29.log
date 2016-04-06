@@ -1,0 +1,123 @@
+Démarrage : mer fév 29 23:00:01 CET 2012
+Arrêt     : mer fév 29 23:00:31 CET 2012
+
+
+
+Base MySQL sélectionnée: agis
+Nombre de serveur(s) Linux concerné(s): 4
+Nombre de dossier(s) à mettre à jour: 22
+
+sending incremental file list
+
+sent 1579 bytes  received 18 bytes  1064.67 bytes/sec
+total size is 1609728  speedup is 1007.97
+sending incremental file list
+
+sent 2649 bytes  received 22 bytes  1780.67 bytes/sec
+total size is 7065435  speedup is 2645.24
+sending incremental file list
+
+sent 63 bytes  received 12 bytes  50.00 bytes/sec
+total size is 33048576  speedup is 440647.68
+sending incremental file list
+
+sent 7522 bytes  received 45 bytes  5044.67 bytes/sec
+total size is 9253358  speedup is 1222.86
+sending incremental file list
+
+sent 6860 bytes  received 20 bytes  4586.67 bytes/sec
+total size is 16724508  speedup is 2430.89
+sending incremental file list
+
+sent 4308 bytes  received 24 bytes  2888.00 bytes/sec
+total size is 6387982  speedup is 1474.60
+sending incremental file list
+mercuriales/gms/2012/CENTRALES 2012/AUCHAN 2012.xls
+mercuriales/gms/2012/CENTRALES 2012/CARREFOUR MN 2012.xls
+mercuriales/gms/2012/CENTRALES 2012/INTERMARCHE 2012.xls
+
+sent 32055 bytes  received 13032 bytes  30058.00 bytes/sec
+total size is 18237505  speedup is 404.50
+sending incremental file list
+
+sent 5039 bytes  received 27 bytes  3377.33 bytes/sec
+total size is 39173092  speedup is 7732.55
+sending incremental file list
+operations_commerciales/DEMANDE ECHANTILLONS CL.xls
+operations_commerciales/chrono demande echantillons.xls
+operations_commerciales/FZC/OP FZC 2012/FZ THIRIET 2012.xls
+operations_commerciales/FZC/OP FZC 2012/FZ TOUPARGEL 2012.xls
+operations_commerciales/GMS/CENTRALES 2012/GMS CONFIRMATIONS DES OPERATIONS/2012 AUCHAN.xls
+operations_commerciales/GMS/CENTRALES 2012/GMS CONFIRMATIONS DES OPERATIONS/2012 CASINO.xls
+operations_commerciales/GMS/CENTRALES 2012/GMS TABLEAUX DES OPERATIONS/GMS AUCHAN COUPE 2012.xls
+operations_commerciales/GMS/CENTRALES 2012/GMS TABLEAUX DES OPERATIONS/GMS CASINO COUPE 2012.xls
+operations_commerciales/GMS/CENTRALES 2012/GMS TABLEAUX DES OPERATIONS/GMS SYSTEME U COUPE 2012.xls
+operations_commerciales/MDD/MODELES VT/CONF OPE CASINO/2012/CONFIRMATION OPERATION CASINO HM SAGA 4.xls
+operations_commerciales/MDD/MODELES VT/DEM ECHANTILLONS/2012/CASINO/DDE_ECHANTILLONS_Casino_75.XLS
+operations_commerciales/MDD/OP MDD 2012/MDD CASINO 2012.xls
+
+sent 225543 bytes  received 18878 bytes  97768.40 bytes/sec
+total size is 51485231  speedup is 210.64
+sending incremental file list
+
+sent 13301 bytes  received 68 bytes  8912.67 bytes/sec
+total size is 25877478  speedup is 1935.63
+sending incremental file list
+
+sent 63 bytes  received 12 bytes  50.00 bytes/sec
+total size is 33048576  speedup is 440647.68
+sending incremental file list
+
+sent 7522 bytes  received 45 bytes  5044.67 bytes/sec
+total size is 9253358  speedup is 1222.86
+sending incremental file list
+
+sent 4308 bytes  received 24 bytes  2888.00 bytes/sec
+total size is 6387982  speedup is 1474.60
+sending incremental file list
+
+sent 6860 bytes  received 20 bytes  4586.67 bytes/sec
+total size is 16724508  speedup is 2430.89
+sending incremental file list
+
+sent 85 bytes  received 13 bytes  65.33 bytes/sec
+total size is 104853504  speedup is 1069933.71
+sending incremental file list
+operations_commerciales/DEMANDE ECHANTILLONS CL.xls
+operations_commerciales/chrono demande echantillons.xls
+operations_commerciales/FZC/OP FZC 2012/FZ THIRIET 2012.xls
+operations_commerciales/FZC/OP FZC 2012/FZ TOUPARGEL 2012.xls
+operations_commerciales/GMS/CENTRALES 2012/GMS CONFIRMATIONS DES OPERATIONS/2012 AUCHAN.xls
+operations_commerciales/GMS/CENTRALES 2012/GMS CONFIRMATIONS DES OPERATIONS/2012 CASINO.xls
+operations_commerciales/GMS/CENTRALES 2012/GMS TABLEAUX DES OPERATIONS/GMS AUCHAN COUPE 2012.xls
+operations_commerciales/GMS/CENTRALES 2012/GMS TABLEAUX DES OPERATIONS/GMS CASINO COUPE 2012.xls
+operations_commerciales/GMS/CENTRALES 2012/GMS TABLEAUX DES OPERATIONS/GMS SYSTEME U COUPE 2012.xls
+operations_commerciales/MDD/MODELES VT/CONF OPE CASINO/2012/CONFIRMATION OPERATION CASINO HM SAGA 4.xls
+operations_commerciales/MDD/MODELES VT/DEM ECHANTILLONS/2012/CASINO/DDE_ECHANTILLONS_Casino_75.XLS
+operations_commerciales/MDD/OP MDD 2012/MDD CASINO 2012.xls
+
+sent 225543 bytes  received 18878 bytes  97768.40 bytes/sec
+total size is 51485231  speedup is 210.64
+sending incremental file list
+mercuriales/gms/2012/CENTRALES 2012/AUCHAN 2012.xls
+mercuriales/gms/2012/CENTRALES 2012/CARREFOUR MN 2012.xls
+mercuriales/gms/2012/CENTRALES 2012/INTERMARCHE 2012.xls
+
+sent 32055 bytes  received 13032 bytes  30058.00 bytes/sec
+total size is 18237505  speedup is 404.50
+sending incremental file list
+
+sent 1579 bytes  received 18 bytes  1064.67 bytes/sec
+total size is 1609728  speedup is 1007.97
+sending incremental file list
+
+sent 5378 bytes  received 23 bytes  3600.67 bytes/sec
+total size is 130076646  speedup is 24083.81
+sending incremental file list
+
+sent 3057 bytes  received 32 bytes  2059.33 bytes/sec
+total size is 23546145  speedup is 7622.58
+sending incremental file list
+
+sent 13301 bytes  received 68 bytes  8912.67 bytes/sec
+total size is 25877478  speedup is 1935.63

@@ -124,119 +124,8 @@ class FtaComposantModel extends AbstractModel {
      * @param int $paramIdFta
      */
     public static function duplicateFtaComposantByIdFta($paramIdFtaOrig, $paramIdFtaNew) {
-        DatabaseOperation::execute(
-                ' INSERT INTO ' . FtaComposantModel::TABLENAME
-                . ' (' . FtaComposantModel::FIELDNAME_ASCENDANT_FTA_NOMENCLATURE
-                . ', ' . FtaComposantModel::FIELDNAME_CODE_PRODUIT_AGROLOGIC_FTA_NOMENCLATURE
-                . ', ' . FtaComposantModel::FIELDNAME_DESIGNATION_CODIFICATION
-                . ', ' . FtaComposantModel::FIELDNAME_DIN_FTA_NOMENCLATURE
-                . ', ' . FtaComposantModel::FIELDNAME_DUREE_VIE_TECHNIQUE_FTA_COMPOSITION
-                . ', ' . FtaComposantModel::FIELDNAME_ETAT_FTA_CODIFICATION
-                . ', ' . FtaComposantModel::FIELDNAME_ETIQUETTE
-                . ', ' . FtaComposantModel::FIELDNAME_ETIQUETTE_DUREE_VIE_FTA_COMPOSITION
-                . ', ' . FtaComposantModel::FIELDNAME_ETIQUETTE_ID_FTA_COMPOSITION
-                . ', ' . FtaComposantModel::FIELDNAME_ETIQUETTE_LIBELLE_FTA_COMPOSITION
-                . ', ' . FtaComposantModel::FIELDNAME_ETIQUETTE_LIBELLE_LEGAL_FTA_COMPOSITION
-                . ', ' . FtaComposantModel::FIELDNAME_ETIQUETTE_POIDS_FTA_COMPOSITION
-                . ', ' . FtaComposantModel::FIELDNAME_ETIQUETTE_DECOMPOSITION_POIDS_FTA_COMPOSANT
-                . ', ' . FtaComposantModel::FIELDNAME_ETIQUETTE_QUANTITE_FTA_COMPOSITION
-                . ', ' . FtaComposantModel::FIELDNAME_ETIQUETTE_SUPPLEMENTAIRE_FTA_COMPOSIITON
-                . ', ' . FtaComposantModel::FIELDNAME_ETIQUETTE_INFORMATION_COMPLEMENTAIRE_RECTO_FTA_COMPOSANT
-                . ', ' . FtaComposantModel::FIELDNAME_ID_ACCESS_RECETTE_RECETTE
-                . ', ' . FtaComposantModel::FIELDNAME_ID_ANNEXE_AGRO_ART_CODIFICATION
-                . ', ' . FtaComposantModel::FIELDNAME_ID_ANNEXE_UNITE
-                . ', ' . FtaComposantModel::FIELDNAME_ID_CODIFICATION
-                . ', ' . FtaComposantModel::FIELDNAME_ID_FTA_COMPOSTION
-                . ', ' . FtaComposantModel::FIELDNAME_ID_GEO
-                . ', ' . FtaComposantModel::FIELDNAME_INGREDIENT_FTA_COMPOSITION
-                . ', ' . FtaComposantModel::FIELDNAME_INGREDIENT_FTA_COMPOSITION1
-                . ', ' . FtaComposantModel::FIELDNAME_IS_COMPOSITION_FTA_COMPOSANT
-                . ', ' . FtaComposantModel::FIELDNAME_IS_NOMENCLATURE_FTA_COMPOSANT
-                . ', ' . FtaComposantModel::FIELDNAME_K_ETIQUETTE_FTA_COMPOSITION
-                . ', ' . FtaComposantModel::FIELDNAME_K_ETIQUETTE_VERSO_FTA_COMPOSITION
-                . ', ' . FtaComposantModel::FIELDNAME_K_CODESOFT_ETIQUETTE_LOGO
-                . ', ' . FtaComposantModel::FIELDNAME_K_STYLE_PARAGRAPHE_INGREDIENT_FTA_COMPOSITION
-                . ', ' . FtaComposantModel::FIELDNAME_MODE_ETIQUETTE_FTA_COMPOSITION
-                . ', ' . FtaComposantModel::FIELDNAME_NOM_FTA_COMPOSITION
-                . ', ' . FtaComposantModel::FIELDNAME_ORDRE_FTA_COMPOSITION
-                . ', ' . FtaComposantModel::FIELDNAME_POIDS_FTA_COMPOSITION
-                . ', ' . FtaComposantModel::FIELDNAME_POIDS_TOTAL_CARTON_VRAC_FTA_NOMENCLATURE
-                . ', ' . FtaComposantModel::FIELDNAME_POIDS_UNITAIRE_CODIFICATION
-                . ', ' . FtaComposantModel::FIELDNAME_QUANTITE_FTA_COMPOSITION
-                . ', ' . FtaComposantModel::FIELDNAME_QUANTITE_PIECE_PAR_CARTON
-                . ', ' . FtaComposantModel::FIELDNAME_SITE_PRODUCTION_FTA_CODIFICATION
-                . ', ' . FtaComposantModel::FIELDNAME_SUFFIXE_AGROLOGIC_FTA_NOMENCLATURE
-                . ', ' . FtaComposantModel::FIELDNAME_TAILLE_POLICE_INGREDIENT_FTA_COMPOSITION
-                . ', ' . FtaComposantModel::FIELDNAME_TAILLE_POLICE_NOM_FTA_COMPOSITION
-                . ', ' . FtaComposantModel::FIELDNAME_VERSION
-                . ', ' . FtaComposantModel::FIELDNAME_VAL_NUT_KCAL
-                . ', ' . FtaComposantModel::FIELDNAME_VAL_NUT_KJ
-                . ', ' . FtaComposantModel::FIELDNAME_VAL_MAT_GRASSE
-                . ', ' . FtaComposantModel::FIELDNAME_VAL_ACIDE_GRAS
-                . ', ' . FtaComposantModel::FIELDNAME_VAL_GLUCIDE
-                . ', ' . FtaComposantModel::FIELDNAME_VAL_SUCRE
-                . ', ' . FtaComposantModel::FIELDNAME_VAL_PROTEINE
-                . ', ' . FtaComposantModel::FIELDNAME_VAL_SEL
-                . ', ' . FtaComposantModel::FIELDNAME_QUANTITE_FTA_COMPOSITION_UVC
-                . ', ' . FtaComposantModel::FIELDNAME_LAST_ID_FTA_COMPOSANT
-                . ', ' . FtaComposantModel::FIELDNAME_ID_FTA . ')'
-                . ' SELECT ' . FtaComposantModel::FIELDNAME_ASCENDANT_FTA_NOMENCLATURE
-                . ', ' . FtaComposantModel::FIELDNAME_CODE_PRODUIT_AGROLOGIC_FTA_NOMENCLATURE
-                . ', ' . FtaComposantModel::FIELDNAME_DESIGNATION_CODIFICATION
-                . ', ' . FtaComposantModel::FIELDNAME_DIN_FTA_NOMENCLATURE
-                . ', ' . FtaComposantModel::FIELDNAME_DUREE_VIE_TECHNIQUE_FTA_COMPOSITION
-                . ', ' . FtaComposantModel::FIELDNAME_ETAT_FTA_CODIFICATION
-                . ', ' . FtaComposantModel::FIELDNAME_ETIQUETTE
-                . ', ' . FtaComposantModel::FIELDNAME_ETIQUETTE_DUREE_VIE_FTA_COMPOSITION
-                . ', ' . FtaComposantModel::FIELDNAME_ETIQUETTE_ID_FTA_COMPOSITION
-                . ', ' . FtaComposantModel::FIELDNAME_ETIQUETTE_LIBELLE_FTA_COMPOSITION
-                . ', ' . FtaComposantModel::FIELDNAME_ETIQUETTE_LIBELLE_LEGAL_FTA_COMPOSITION
-                . ', ' . FtaComposantModel::FIELDNAME_ETIQUETTE_POIDS_FTA_COMPOSITION
-                . ', ' . FtaComposantModel::FIELDNAME_ETIQUETTE_DECOMPOSITION_POIDS_FTA_COMPOSANT
-                . ', ' . FtaComposantModel::FIELDNAME_ETIQUETTE_QUANTITE_FTA_COMPOSITION
-                . ', ' . FtaComposantModel::FIELDNAME_ETIQUETTE_SUPPLEMENTAIRE_FTA_COMPOSIITON
-                . ', ' . FtaComposantModel::FIELDNAME_ETIQUETTE_INFORMATION_COMPLEMENTAIRE_RECTO_FTA_COMPOSANT
-                . ', ' . FtaComposantModel::FIELDNAME_ID_ACCESS_RECETTE_RECETTE
-                . ', ' . FtaComposantModel::FIELDNAME_ID_ANNEXE_AGRO_ART_CODIFICATION
-                . ', ' . FtaComposantModel::FIELDNAME_ID_ANNEXE_UNITE
-                . ', ' . FtaComposantModel::FIELDNAME_ID_CODIFICATION
-                . ', ' . FtaComposantModel::FIELDNAME_ID_FTA_COMPOSTION
-                . ', ' . FtaComposantModel::FIELDNAME_ID_GEO
-                . ', ' . FtaComposantModel::FIELDNAME_INGREDIENT_FTA_COMPOSITION
-                . ', ' . FtaComposantModel::FIELDNAME_INGREDIENT_FTA_COMPOSITION1
-                . ', ' . FtaComposantModel::FIELDNAME_IS_COMPOSITION_FTA_COMPOSANT
-                . ', ' . FtaComposantModel::FIELDNAME_IS_NOMENCLATURE_FTA_COMPOSANT
-                . ', ' . FtaComposantModel::FIELDNAME_K_ETIQUETTE_FTA_COMPOSITION
-                . ', ' . FtaComposantModel::FIELDNAME_K_ETIQUETTE_VERSO_FTA_COMPOSITION
-                . ', ' . FtaComposantModel::FIELDNAME_K_CODESOFT_ETIQUETTE_LOGO
-                . ', ' . FtaComposantModel::FIELDNAME_K_STYLE_PARAGRAPHE_INGREDIENT_FTA_COMPOSITION
-                . ', ' . FtaComposantModel::FIELDNAME_MODE_ETIQUETTE_FTA_COMPOSITION
-                . ', ' . FtaComposantModel::FIELDNAME_NOM_FTA_COMPOSITION
-                . ', ' . FtaComposantModel::FIELDNAME_ORDRE_FTA_COMPOSITION
-                . ', ' . FtaComposantModel::FIELDNAME_POIDS_FTA_COMPOSITION
-                . ', ' . FtaComposantModel::FIELDNAME_POIDS_TOTAL_CARTON_VRAC_FTA_NOMENCLATURE
-                . ', ' . FtaComposantModel::FIELDNAME_POIDS_UNITAIRE_CODIFICATION
-                . ', ' . FtaComposantModel::FIELDNAME_QUANTITE_FTA_COMPOSITION
-                . ', ' . FtaComposantModel::FIELDNAME_QUANTITE_PIECE_PAR_CARTON
-                . ', ' . FtaComposantModel::FIELDNAME_SITE_PRODUCTION_FTA_CODIFICATION
-                . ', ' . FtaComposantModel::FIELDNAME_SUFFIXE_AGROLOGIC_FTA_NOMENCLATURE
-                . ', ' . FtaComposantModel::FIELDNAME_TAILLE_POLICE_INGREDIENT_FTA_COMPOSITION
-                . ', ' . FtaComposantModel::FIELDNAME_TAILLE_POLICE_NOM_FTA_COMPOSITION
-                . ', ' . FtaComposantModel::FIELDNAME_VERSION
-                . ', ' . FtaComposantModel::FIELDNAME_VAL_NUT_KCAL
-                . ', ' . FtaComposantModel::FIELDNAME_VAL_NUT_KJ
-                . ', ' . FtaComposantModel::FIELDNAME_VAL_MAT_GRASSE
-                . ', ' . FtaComposantModel::FIELDNAME_VAL_ACIDE_GRAS
-                . ', ' . FtaComposantModel::FIELDNAME_VAL_GLUCIDE
-                . ', ' . FtaComposantModel::FIELDNAME_VAL_SUCRE
-                . ', ' . FtaComposantModel::FIELDNAME_VAL_PROTEINE
-                . ', ' . FtaComposantModel::FIELDNAME_VAL_SEL
-                . ', ' . FtaComposantModel::FIELDNAME_QUANTITE_FTA_COMPOSITION_UVC
-                . ', ' . FtaComposantModel::KEYNAME
-                . ', ' . $paramIdFtaNew
-                . ' FROM ' . FtaComposantModel::TABLENAME
-                . ' WHERE ' . FtaComposantModel::FIELDNAME_ID_FTA . '=' . $paramIdFtaOrig
-        );
+     
+        FtaController::duplicateWithNewId(self::TABLENAME, $paramIdFtaOrig, $paramIdFtaNew);
     }
 
     /**
@@ -398,7 +287,7 @@ class FtaComposantModel extends AbstractModel {
 
         return '<tr class=titre_tableau  align=center >' .
                 '<td ' . $border . '>' . $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_ID_ANNEXE_AGRO_ART_CODIFICATION)->getFieldLabel() . '</td>'
-                .'<td ' . $border . '>' . $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_CODE_PRODUIT_AGROLOGIC_FTA_NOMENCLATURE)->getFieldLabel() . '</td>'
+                . '<td ' . $border . '>' . $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_CODE_PRODUIT_AGROLOGIC_FTA_NOMENCLATURE)->getFieldLabel() . '</td>'
                 . '<td ' . $border . '>' . $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_NOM_FTA_COMPOSITION)->getFieldLabel() . '</td>'
                 . '<td ' . $border . '>' . $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_INGREDIENT_FTA_COMPOSITION)->getFieldLabel() . '</td>'
                 . '<td ' . $border . '>' . $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_ID_GEO)->getFieldLabel() . '</td>'

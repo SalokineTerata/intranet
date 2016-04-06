@@ -542,18 +542,19 @@ class Chapitre {
             $modifierEspaceDeTravail = "";
         }
 
-        $bloc.='<tr class=titre_principal><td class>Classification</td></tr>';
+        $bloc.='<tr class=titre_principal><td class>Classification FTA</td></tr>';
 
         /**
          * Classification
          *
          */
         $bloc.=$ftaView->listeClassification($isEditable, self::$id_fta_chapitre, $synthese_action, self::$id_fta_etat, self::$abrevation_etat, self::$id_fta_role);
-        /*
-         * Deviendra une liste deroulante dépendante des donné choisie dans la classification
-         */
-        //Codification
-//        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_SUFFIXE_AGROLOGIC_FTA);
+
+
+        //Raccoucis de classification
+        $bloc.=$ftaView->getHtmlClassificationRaccourcisView();
+      
+
         //Données lié à arcadia 
         $bloc.= $ftaView2->getHtmlArcadiaDataNotEditable();
 

@@ -1,0 +1,155 @@
+Démarrage : mer fév 19 23:00:01 CET 2014
+Arrêt     : mer fév 19 23:02:10 CET 2014
+
+
+
+Base MySQL sélectionnée: agis
+Nombre de serveur(s) Linux concerné(s): 4
+Nombre de dossier(s) à mettre à jour: 26
+
+sending incremental file list
+
+sent 6293 bytes  received 46 bytes  4226.00 bytes/sec
+total size is 11666224  speedup is 1840.39
+sending incremental file list
+
+sent 6047 bytes  received 37 bytes  2433.60 bytes/sec
+total size is 12177278  speedup is 2001.52
+sending incremental file list
+erp_data.mdb
+
+sent 7738497 bytes  received 64291 bytes  183595.01 bytes/sec
+total size is 84160512  speedup is 10.79
+sending incremental file list
+
+sent 7538 bytes  received 45 bytes  5055.33 bytes/sec
+total size is 9253358  speedup is 1220.28
+sending incremental file list
+
+sent 7695 bytes  received 20 bytes  5143.33 bytes/sec
+total size is 16751789  speedup is 2171.33
+sending incremental file list
+
+sent 4308 bytes  received 24 bytes  2888.00 bytes/sec
+total size is 6387982  speedup is 1474.60
+sending incremental file list
+mercuriales/HD/2014/2014 MERCURIALE DIA.xls
+mercuriales/HD/2014/2014 MERCURIALE NETTO.xls
+mercuriales/gms/2014/CENTRALES 2014/AUCHAN 2014.xls
+mercuriales/gms/2014/CENTRALES 2014/AUCHAN.FR 2014.xls
+mercuriales/gms/2014/CENTRALES 2014/INTERMARCHE 2014.xls
+mercuriales/gms/2014/CONTROLE TARIFS 2014/03-MARS/2014 AUCHAN GAMME ANIMATION.pdf
+mercuriales/gms/2014/CONTROLE TARIFS 2014/03-MARS/2014 AUCHAN NOUVEAUX PRIX AU 01-03.pdf
+mercuriales/gms/2014/CONTROLE TARIFS 2014/03-MARS/2014 AUCHAN.FR NOUVEAUX PRIX.pdf
+mercuriales/gms/2014/CONTROLE TARIFS 2014/03-MARS/2014 INTERMARCHE GAMME ANIMATION.pdf
+mercuriales/mdd/2014/2014 MERCURIALE CARREFOUR PLATS CUISINES.xls
+
+sent 265287 bytes  received 18428 bytes  63047.78 bytes/sec
+total size is 27628530  speedup is 97.38
+sending incremental file list
+
+sent 5047 bytes  received 27 bytes  3382.67 bytes/sec
+total size is 39173092  speedup is 7720.36
+sending incremental file list
+operations_commerciales/DEMANDE ECHANTILLONS CL .xls
+operations_commerciales/chrono demande echantillons.xls
+operations_commerciales/FZC/OP FZC 2014/FZC PICARD 2014.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS GALEC 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS INTERMARCHE 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS SIMPLY MARKET 2014-FUTUR MASTER.xls
+operations_commerciales/MDD/MODELES CJ/AUCHAN ATAC SCHIEVER/CONF OP/2014/CONFIRMATION OPERATION AUCHAN AVRIL 3 T2.xls
+operations_commerciales/MDD/MODELES CJ/ED/CONF OP/CONFIRMATION OPERATION DIA FID MARS.xls
+operations_commerciales/MDD/OP MDD 2014/MDD DIA 2014.xls
+operations_commerciales/MDD/OP MDD 2014/MDD GROUPE AUCHAN 2014.xls
+
+sent 243088 bytes  received 20799 bytes  47979.45 bytes/sec
+total size is 45942181  speedup is 174.10
+sending incremental file list
+
+sent 19842 bytes  received 78 bytes  5691.43 bytes/sec
+total size is 98501331  speedup is 4944.85
+sending incremental file list
+
+sent 3133 bytes  received 78 bytes  2140.67 bytes/sec
+total size is 13716502  speedup is 4271.72
+sending incremental file list
+
+sent 8871 bytes  received 13 bytes  5922.67 bytes/sec
+total size is 41009664  speedup is 4616.13
+sending incremental file list
+erp_data.mdb
+
+sent 7738497 bytes  received 64291 bytes  188018.99 bytes/sec
+total size is 84160512  speedup is 10.79
+sending incremental file list
+
+sent 7538 bytes  received 45 bytes  5055.33 bytes/sec
+total size is 9253358  speedup is 1220.28
+sending incremental file list
+
+sent 4308 bytes  received 24 bytes  2888.00 bytes/sec
+total size is 6387982  speedup is 1474.60
+sending incremental file list
+
+sent 7695 bytes  received 20 bytes  3086.00 bytes/sec
+total size is 16751789  speedup is 2171.33
+sending incremental file list
+
+sent 85 bytes  received 13 bytes  196.00 bytes/sec
+total size is 104853504  speedup is 1069933.71
+sending incremental file list
+operations_commerciales/DEMANDE ECHANTILLONS CL .xls
+operations_commerciales/chrono demande echantillons.xls
+operations_commerciales/FZC/OP FZC 2014/FZC PICARD 2014.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS GALEC 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS INTERMARCHE 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS SIMPLY MARKET 2014-FUTUR MASTER.xls
+operations_commerciales/MDD/MODELES CJ/AUCHAN ATAC SCHIEVER/CONF OP/2014/CONFIRMATION OPERATION AUCHAN AVRIL 3 T2.xls
+operations_commerciales/MDD/MODELES CJ/ED/CONF OP/CONFIRMATION OPERATION DIA FID MARS.xls
+operations_commerciales/MDD/OP MDD 2014/MDD DIA 2014.xls
+operations_commerciales/MDD/OP MDD 2014/MDD GROUPE AUCHAN 2014.xls
+
+sent 243088 bytes  received 20799 bytes  105554.80 bytes/sec
+total size is 45942181  speedup is 174.10
+sending incremental file list
+mercuriales/HD/2014/2014 MERCURIALE DIA.xls
+mercuriales/HD/2014/2014 MERCURIALE NETTO.xls
+mercuriales/gms/2014/CENTRALES 2014/AUCHAN 2014.xls
+mercuriales/gms/2014/CENTRALES 2014/AUCHAN.FR 2014.xls
+mercuriales/gms/2014/CENTRALES 2014/INTERMARCHE 2014.xls
+mercuriales/gms/2014/CONTROLE TARIFS 2014/03-MARS/2014 AUCHAN GAMME ANIMATION.pdf
+mercuriales/gms/2014/CONTROLE TARIFS 2014/03-MARS/2014 AUCHAN NOUVEAUX PRIX AU 01-03.pdf
+mercuriales/gms/2014/CONTROLE TARIFS 2014/03-MARS/2014 AUCHAN.FR NOUVEAUX PRIX.pdf
+mercuriales/gms/2014/CONTROLE TARIFS 2014/03-MARS/2014 INTERMARCHE GAMME ANIMATION.pdf
+mercuriales/mdd/2014/2014 MERCURIALE CARREFOUR PLATS CUISINES.xls
+
+sent 265287 bytes  received 18428 bytes  81061.43 bytes/sec
+total size is 27628530  speedup is 97.38
+sending incremental file list
+
+sent 8871 bytes  received 13 bytes  5922.67 bytes/sec
+total size is 41009664  speedup is 4616.13
+sending incremental file list
+
+sent 6293 bytes  received 46 bytes  4226.00 bytes/sec
+total size is 11666224  speedup is 1840.39
+sending incremental file list
+
+sent 5677 bytes  received 23 bytes  3800.00 bytes/sec
+total size is 128675317  speedup is 22574.62
+sending incremental file list
+
+sent 5353 bytes  received 38 bytes  3594.00 bytes/sec
+total size is 56169881  speedup is 10419.20
+sending incremental file list
+
+sent 50190 bytes  received 94 bytes  20113.60 bytes/sec
+total size is 290611795  speedup is 5779.41
+sending incremental file list
+
+sent 19842 bytes  received 78 bytes  13280.00 bytes/sec
+total size is 98501331  speedup is 4944.85
+sending incremental file list
+
+sent 3133 bytes  received 78 bytes  2140.67 bytes/sec
+total size is 13716502  speedup is 4271.72

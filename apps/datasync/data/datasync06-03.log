@@ -1,0 +1,179 @@
+Démarrage : mar jun  3 23:00:01 CEST 2014
+Arrêt     : mar jun  3 23:00:58 CEST 2014
+
+
+
+Base MySQL sélectionnée: agis
+Nombre de serveur(s) Linux concerné(s): 4
+Nombre de dossier(s) à mettre à jour: 29
+
+sending incremental file list
+
+sent 7070 bytes  received 49 bytes  2034.00 bytes/sec
+total size is 12774593  speedup is 1794.44
+sending incremental file list
+
+sent 6279 bytes  received 38 bytes  2526.80 bytes/sec
+total size is 12442583  speedup is 1969.70
+sending incremental file list
+
+sent 63 bytes  received 12 bytes  50.00 bytes/sec
+total size is 88092672  speedup is 1174568.96
+sending incremental file list
+
+sent 7593 bytes  received 45 bytes  5092.00 bytes/sec
+total size is 9254930  speedup is 1211.70
+sending incremental file list
+
+sent 7756 bytes  received 20 bytes  3110.40 bytes/sec
+total size is 16755943  speedup is 2154.83
+sending incremental file list
+
+sent 4308 bytes  received 24 bytes  2888.00 bytes/sec
+total size is 6387982  speedup is 1474.60
+sending incremental file list
+mercuriales/sync.ffs_db
+mercuriales/gms/2014/CENTRALES 2014/CARREFOUR 2014.xls
+mercuriales/gms/2014/CENTRALES 2014/CARREFOUR MARKET 2014.xls
+mercuriales/gms/2014/CENTRALES 2014/SYSTEME U 2014.xls
+mercuriales/gms/2014/CONTROLE TARIFS 2014/06-JUIN/2014 CASINO PLATEAUX APERITIFS.pdf
+mercuriales/gms/2014/REGIONS  2014/SCHIEVER MERCU 2014.xls
+mercuriales/mdd/2014/2014 MERCURIALE CARREFOUR PLATS CUISINES.xls
+
+sent 181632 bytes  received 22716 bytes  45410.67 bytes/sec
+total size is 32652844  speedup is 159.79
+sending incremental file list
+
+sent 5047 bytes  received 27 bytes  3382.67 bytes/sec
+total size is 39173092  speedup is 7720.36
+sending incremental file list
+operations_commerciales/DEMANDE ECHANTILLONS CL .xls
+operations_commerciales/INTERLOCUTEURS DEMANDES ECHANTILLONS.xls
+operations_commerciales/chrono demande echantillons.xls
+operations_commerciales/GMS/RECAP DEMANDE ET CONFIRMATIONS HEBDO 2014.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS AUCHAN 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS CARREFOUR 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS CARREFOUR MARKET 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS GALEC 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/D-REGIONS/GMS LECLERC 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/D-REGIONS/GMS SIMPLY MARKET REGIONS  2014-FUTUR MASTER.xls
+operations_commerciales/MDD/MODELES CJ/CARREFOUR/DDE ECHANTILLONS/2014/demande \#351chantillons GUTENBERG 349.XLS
+
+sent 377447 bytes  received 37905 bytes  63900.31 bytes/sec
+total size is 51441563  speedup is 123.85
+sending incremental file list
+
+sent 20296 bytes  received 83 bytes  5822.57 bytes/sec
+total size is 99065320  speedup is 4861.15
+sending incremental file list
+gofast/CHANTIERS/4_COTATION_Benjamin/4_GEMBA/E.RD.001-03 - Fiche de cotation_030614.xls
+
+sent 151606 bytes  received 101 bytes  60682.80 bytes/sec
+total size is 36200085  speedup is 238.62
+sending incremental file list
+
+sent 10004 bytes  received 13 bytes  4006.80 bytes/sec
+total size is 48321024  speedup is 4823.90
+sending incremental file list
+
+sent 5781 bytes  received 30 bytes  3874.00 bytes/sec
+total size is 93132165  speedup is 16026.87
+sending incremental file list
+
+sent 63 bytes  received 12 bytes  50.00 bytes/sec
+total size is 88092672  speedup is 1174568.96
+sending incremental file list
+
+sent 7593 bytes  received 45 bytes  5092.00 bytes/sec
+total size is 9254930  speedup is 1211.70
+sending incremental file list
+
+sent 4308 bytes  received 24 bytes  2888.00 bytes/sec
+total size is 6387982  speedup is 1474.60
+sending incremental file list
+
+sent 7756 bytes  received 20 bytes  5184.00 bytes/sec
+total size is 16755943  speedup is 2154.83
+sending incremental file list
+
+sent 85 bytes  received 13 bytes  65.33 bytes/sec
+total size is 104853504  speedup is 1069933.71
+sending incremental file list
+operations_commerciales/DEMANDE ECHANTILLONS CL .xls
+operations_commerciales/INTERLOCUTEURS DEMANDES ECHANTILLONS.xls
+operations_commerciales/chrono demande echantillons.xls
+operations_commerciales/GMS/RECAP DEMANDE ET CONFIRMATIONS HEBDO 2014.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS AUCHAN 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS CARREFOUR 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS CARREFOUR MARKET 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS GALEC 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/D-REGIONS/GMS LECLERC 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/D-REGIONS/GMS SIMPLY MARKET REGIONS  2014-FUTUR MASTER.xls
+operations_commerciales/MDD/MODELES CJ/CARREFOUR/DDE ECHANTILLONS/2014/demande \#351chantillons GUTENBERG 349.XLS
+
+sent 377447 bytes  received 37905 bytes  92300.44 bytes/sec
+total size is 51441563  speedup is 123.85
+sending incremental file list
+mercuriales/sync.ffs_db
+mercuriales/gms/2014/CENTRALES 2014/CARREFOUR 2014.xls
+mercuriales/gms/2014/CENTRALES 2014/CARREFOUR MARKET 2014.xls
+mercuriales/gms/2014/CENTRALES 2014/SYSTEME U 2014.xls
+mercuriales/gms/2014/CONTROLE TARIFS 2014/06-JUIN/2014 CASINO PLATEAUX APERITIFS.pdf
+mercuriales/gms/2014/REGIONS  2014/SCHIEVER MERCU 2014.xls
+mercuriales/mdd/2014/2014 MERCURIALE CARREFOUR PLATS CUISINES.xls
+
+sent 181632 bytes  received 22716 bytes  58385.14 bytes/sec
+total size is 32652844  speedup is 159.79
+sending incremental file list
+
+sent 10004 bytes  received 13 bytes  6678.00 bytes/sec
+total size is 48321024  speedup is 4823.90
+sending incremental file list
+
+sent 7070 bytes  received 49 bytes  4746.00 bytes/sec
+total size is 12774593  speedup is 1794.44
+sending incremental file list
+
+sent 5729 bytes  received 23 bytes  3834.67 bytes/sec
+total size is 129159129  speedup is 22454.65
+sending incremental file list
+
+sent 5610 bytes  received 39 bytes  11298.00 bytes/sec
+total size is 59049369  speedup is 10453.07
+sending incremental file list
+codesoft/Codesoft 7/Codes Produits/79964_recto.bak
+codesoft/Codesoft 7/Codes Produits/79964_recto.lab
+codesoft/Codesoft 7/Codes Produits/79965_recto.bak
+codesoft/Codesoft 7/Codes Produits/79965_recto.lab
+codesoft/Codesoft 7/Codes Produits/79966_recto.bak
+codesoft/Codesoft 7/Codes Produits/79966_recto.lab
+codesoft/Codesoft 7/Codes Produits/79979_recto.bak
+codesoft/Codesoft 7/Codes Produits/79979_recto.lab
+codesoft/Codesoft 7/Codes Produits/80930_recto.lab
+codesoft/Codesoft 7/Codes Produits/80930_verso.lab
+codesoft/Codesoft 7/Codes Produits/80931_recto.lab
+codesoft/Codesoft 7/Codes Produits/80931_verso.bak.lab
+codesoft/Codesoft 7/Codes Produits/80932_recto.lab
+codesoft/Codesoft 7/Codes Produits/80932_verso.lab
+codesoft/Codesoft 7/Codes Produits/80933_recto.lab
+codesoft/Codesoft 7/Codes Produits/80933_verso.lab
+
+sent 156507 bytes  received 7710 bytes  65686.80 bytes/sec
+total size is 298174547  speedup is 1815.73
+sending incremental file list
+
+sent 20296 bytes  received 83 bytes  8151.60 bytes/sec
+total size is 99065320  speedup is 4861.15
+sending incremental file list
+gofast/CHANTIERS/4_COTATION_Benjamin/4_GEMBA/E.RD.001-03 - Fiche de cotation_030614.xls
+
+sent 151606 bytes  received 101 bytes  101138.00 bytes/sec
+total size is 36200085  speedup is 238.62
+sending incremental file list
+
+sent 7756 bytes  received 20 bytes  5184.00 bytes/sec
+total size is 16755943  speedup is 2154.83
+sending incremental file list
+
+sent 7756 bytes  received 20 bytes  5184.00 bytes/sec
+total size is 16755943  speedup is 2154.83

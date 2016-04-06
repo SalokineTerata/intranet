@@ -1,0 +1,184 @@
+Démarrage : lun fév 17 23:00:01 CET 2014
+Arrêt     : lun fév 17 23:02:07 CET 2014
+
+
+
+Base MySQL sélectionnée: agis
+Nombre de serveur(s) Linux concerné(s): 4
+Nombre de dossier(s) à mettre à jour: 26
+
+sending incremental file list
+
+sent 6293 bytes  received 46 bytes  4226.00 bytes/sec
+total size is 11666224  speedup is 1840.39
+sending incremental file list
+suivi_investissement/2014-2015/R\#351alis\#351 bud invest 2014-2015/Bud invest HER 2014-2015.xls
+
+sent 14060 bytes  received 608 bytes  5867.20 bytes/sec
+total size is 12177278  speedup is 830.19
+sending incremental file list
+
+sent 63 bytes  received 12 bytes  50.00 bytes/sec
+total size is 84160512  speedup is 1122140.16
+sending incremental file list
+
+sent 7538 bytes  received 45 bytes  5055.33 bytes/sec
+total size is 9253358  speedup is 1220.28
+sending incremental file list
+
+sent 7695 bytes  received 20 bytes  5143.33 bytes/sec
+total size is 16751789  speedup is 2171.33
+sending incremental file list
+
+sent 4308 bytes  received 24 bytes  2888.00 bytes/sec
+total size is 6387982  speedup is 1474.60
+sending incremental file list
+mercuriales/gms/2014/CENTRALES 2014/AUCHAN 2014.xls
+mercuriales/gms/2014/REGIONS  2014/GALEC REGION MERCU AVRIL 2014.xls
+
+sent 52096 bytes  received 10482 bytes  17879.43 bytes/sec
+total size is 27360942  speedup is 437.23
+sending incremental file list
+
+sent 5047 bytes  received 27 bytes  3382.67 bytes/sec
+total size is 39173092  speedup is 7720.36
+sending incremental file list
+operations_commerciales/chrono demande echantillons.xls
+operations_commerciales/FZC/CONFIRMATIONS/2014/PICARD/PICARD_CONFIRMATION MAI 2014.xls
+operations_commerciales/FZC/OP FZC 2014/FZC PICARD 2014.xls
+operations_commerciales/FZC/OP FZC 2014/FZC TOUPARGEL 2014.xls
+operations_commerciales/GMS/RECAP DEMANDE ET CONFIRMATIONS HEBDO.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS CARREFOUR MARKET 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS CASINO 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS INTERMARCHE 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/CASINO HM/2014 CARTE JANVIER GAMME PC FE.xls
+deleting operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/GALEC/2014 GALEC OP BIEN VIVRE 8.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/GALEC/2014 GALEC OP DEPENSER MOINS 8.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/INTERMARCHE/2014 INTERMARCHE JUIN 1 OP 61055.xls
+operations_commerciales/GMS/2014/D-REGIONS/GMS LECLERC 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/D-REGIONS/GMS SU REGION  2014-FUTUR MASTER.xls
+
+sent 301498 bytes  received 28418 bytes  50756.31 bytes/sec
+total size is 45912485  speedup is 139.16
+sending incremental file list
+
+sent 19842 bytes  received 78 bytes  7968.00 bytes/sec
+total size is 98501331  speedup is 4944.85
+sending incremental file list
+deleting gofast/CHANTIERS/1_CNP_DELEGATION_Cecile/NOTATION_DDD/NOTATION_DDD_310114.xls
+deleting gofast/CHANTIERS/1_CNP_DELEGATION_Cecile/NOTATION_DDD/
+deleting gofast/CHANTIERS/1_CNP_DELEGATION_Cecile/DDD/Trame reco de lancement.xls
+deleting gofast/CHANTIERS/1_CNP_DELEGATION_Cecile/DDD/DDD_ESPRI_CABILLAUD.doc
+deleting gofast/CHANTIERS/1_CNP_DELEGATION_Cecile/DDD/DDD Bengal.xls
+deleting gofast/CHANTIERS/1_CNP_DELEGATION_Cecile/DDD/
+gofast/CHANTIERS/1_CNP_DELEGATION_Cecile/2_DEFIS/NOTATION_DDD/
+gofast/CHANTIERS/1_CNP_DELEGATION_Cecile/2_DEFIS/NOTATION_DDD/NOTATION_DDD_310114.xls
+gofast/CHANTIERS/1_CNP_DELEGATION_Cecile/4_GEMBA/AUTRES_SITES_LDC_TR/
+gofast/CHANTIERS/1_CNP_DELEGATION_Cecile/4_GEMBA/AUTRES_SITES_LDC_TR/Fonctionnement_DDD_autres_sites_p\#364leTR_170214.doc
+gofast/CHANTIERS/1_CNP_DELEGATION_Cecile/4_GEMBA/AUTRES_SITES_LDC_TR/DDD/
+gofast/CHANTIERS/1_CNP_DELEGATION_Cecile/4_GEMBA/AUTRES_SITES_LDC_TR/DDD/DDD Bengal.xls
+gofast/CHANTIERS/1_CNP_DELEGATION_Cecile/4_GEMBA/AUTRES_SITES_LDC_TR/DDD/DDD_ESPRI_CABILLAUD.doc
+gofast/CHANTIERS/1_CNP_DELEGATION_Cecile/4_GEMBA/AUTRES_SITES_LDC_TR/DDD/Trame reco de lancement.xls
+deleting gofast/CHANTIERS/1_CNP_DELEGATION_Cecile/5_STANDARDS/CNP_fonctionnement_CR_140214.doc
+gofast/CHANTIERS/1_CNP_DELEGATION_Cecile/5_STANDARDS/CNP_fonctionnement_CR_170214.doc
+gofast/CHANTIERS/1_CNP_DELEGATION_Cecile/6_BILAN/Fiche_Am\#260_Av-Ap_CNP_170214.xls
+
+sent 4894903 bytes  received 220 bytes  178004.47 bytes/sec
+total size is 13716502  speedup is 2.80
+sending incremental file list
+
+sent 8871 bytes  received 13 bytes  5922.67 bytes/sec
+total size is 41009664  speedup is 4616.13
+sending incremental file list
+
+sent 63 bytes  received 12 bytes  50.00 bytes/sec
+total size is 84160512  speedup is 1122140.16
+sending incremental file list
+
+sent 7538 bytes  received 45 bytes  5055.33 bytes/sec
+total size is 9253358  speedup is 1220.28
+sending incremental file list
+
+sent 4308 bytes  received 24 bytes  2888.00 bytes/sec
+total size is 6387982  speedup is 1474.60
+sending incremental file list
+
+sent 7695 bytes  received 20 bytes  5143.33 bytes/sec
+total size is 16751789  speedup is 2171.33
+sending incremental file list
+
+sent 85 bytes  received 13 bytes  65.33 bytes/sec
+total size is 104853504  speedup is 1069933.71
+sending incremental file list
+operations_commerciales/chrono demande echantillons.xls
+operations_commerciales/FZC/CONFIRMATIONS/2014/PICARD/PICARD_CONFIRMATION MAI 2014.xls
+operations_commerciales/FZC/OP FZC 2014/FZC PICARD 2014.xls
+operations_commerciales/FZC/OP FZC 2014/FZC TOUPARGEL 2014.xls
+operations_commerciales/GMS/RECAP DEMANDE ET CONFIRMATIONS HEBDO.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS CARREFOUR MARKET 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS CASINO 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS INTERMARCHE 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/CASINO HM/2014 CARTE JANVIER GAMME PC FE.xls
+deleting operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/GALEC/2014 GALEC OP BIEN VIVRE 8.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/GALEC/2014 GALEC OP DEPENSER MOINS 8.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/INTERMARCHE/2014 INTERMARCHE JUIN 1 OP 61055.xls
+operations_commerciales/GMS/2014/D-REGIONS/GMS LECLERC 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/D-REGIONS/GMS SU REGION  2014-FUTUR MASTER.xls
+
+sent 301498 bytes  received 28418 bytes  94261.71 bytes/sec
+total size is 45912485  speedup is 139.16
+sending incremental file list
+mercuriales/gms/2014/CENTRALES 2014/AUCHAN 2014.xls
+mercuriales/gms/2014/REGIONS  2014/GALEC REGION MERCU AVRIL 2014.xls
+
+sent 52096 bytes  received 10482 bytes  25031.20 bytes/sec
+total size is 27360942  speedup is 437.23
+sending incremental file list
+
+sent 8871 bytes  received 13 bytes  5922.67 bytes/sec
+total size is 41009664  speedup is 4616.13
+sending incremental file list
+
+sent 6293 bytes  received 46 bytes  4226.00 bytes/sec
+total size is 11666224  speedup is 1840.39
+sending incremental file list
+
+sent 5677 bytes  received 23 bytes  3800.00 bytes/sec
+total size is 128675317  speedup is 22574.62
+sending incremental file list
+
+sent 5353 bytes  received 38 bytes  3594.00 bytes/sec
+total size is 56169881  speedup is 10419.20
+sending incremental file list
+codesoft/Codesoft 7/Auchan  Atac/Auchan/Auchan le traiteur/plateau_asiatique_360g_recto.bak
+codesoft/Codesoft 7/Auchan  Atac/Auchan/Auchan le traiteur/plateau_asiatique_360g_recto.lab
+codesoft/Codesoft 7/Auchan  Atac/Auchan/Auchan le traiteur/plateau_asiatique_620g_recto.bak
+codesoft/Codesoft 7/Auchan  Atac/Auchan/Auchan le traiteur/plateau_asiatique_620g_recto.lab
+
+sent 64573 bytes  received 1618 bytes  18911.71 bytes/sec
+total size is 290611795  speedup is 4390.50
+sending incremental file list
+
+sent 19842 bytes  received 78 bytes  4426.67 bytes/sec
+total size is 98501331  speedup is 4944.85
+sending incremental file list
+deleting gofast/CHANTIERS/1_CNP_DELEGATION_Cecile/NOTATION_DDD/NOTATION_DDD_310114.xls
+deleting gofast/CHANTIERS/1_CNP_DELEGATION_Cecile/NOTATION_DDD/
+deleting gofast/CHANTIERS/1_CNP_DELEGATION_Cecile/DDD/Trame reco de lancement.xls
+deleting gofast/CHANTIERS/1_CNP_DELEGATION_Cecile/DDD/DDD_ESPRI_CABILLAUD.doc
+deleting gofast/CHANTIERS/1_CNP_DELEGATION_Cecile/DDD/DDD Bengal.xls
+deleting gofast/CHANTIERS/1_CNP_DELEGATION_Cecile/DDD/
+gofast/CHANTIERS/1_CNP_DELEGATION_Cecile/2_DEFIS/NOTATION_DDD/
+gofast/CHANTIERS/1_CNP_DELEGATION_Cecile/2_DEFIS/NOTATION_DDD/NOTATION_DDD_310114.xls
+gofast/CHANTIERS/1_CNP_DELEGATION_Cecile/4_GEMBA/AUTRES_SITES_LDC_TR/
+gofast/CHANTIERS/1_CNP_DELEGATION_Cecile/4_GEMBA/AUTRES_SITES_LDC_TR/Fonctionnement_DDD_autres_sites_p\#364leTR_170214.doc
+gofast/CHANTIERS/1_CNP_DELEGATION_Cecile/4_GEMBA/AUTRES_SITES_LDC_TR/DDD/
+gofast/CHANTIERS/1_CNP_DELEGATION_Cecile/4_GEMBA/AUTRES_SITES_LDC_TR/DDD/DDD Bengal.xls
+gofast/CHANTIERS/1_CNP_DELEGATION_Cecile/4_GEMBA/AUTRES_SITES_LDC_TR/DDD/DDD_ESPRI_CABILLAUD.doc
+gofast/CHANTIERS/1_CNP_DELEGATION_Cecile/4_GEMBA/AUTRES_SITES_LDC_TR/DDD/Trame reco de lancement.xls
+deleting gofast/CHANTIERS/1_CNP_DELEGATION_Cecile/5_STANDARDS/CNP_fonctionnement_CR_140214.doc
+gofast/CHANTIERS/1_CNP_DELEGATION_Cecile/5_STANDARDS/CNP_fonctionnement_CR_170214.doc
+gofast/CHANTIERS/1_CNP_DELEGATION_Cecile/6_BILAN/Fiche_Am\#260_Av-Ap_CNP_170214.xls
+
+sent 4894903 bytes  received 220 bytes  91497.63 bytes/sec
+total size is 13716502  speedup is 2.80

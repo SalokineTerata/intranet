@@ -1,0 +1,157 @@
+Démarrage : mar sep 10 23:00:01 CEST 2013
+Arrêt     : mar sep 10 23:00:39 CEST 2013
+
+
+
+Base MySQL sélectionnée: agis
+Nombre de serveur(s) Linux concerné(s): 4
+Nombre de dossier(s) à mettre à jour: 24
+
+sending incremental file list
+
+sent 7552 bytes  received 20 bytes  15144.00 bytes/sec
+total size is 16747404  speedup is 2211.75
+sending incremental file list
+
+sent 5440 bytes  received 44 bytes  3656.00 bytes/sec
+total size is 9508728  speedup is 1733.90
+sending incremental file list
+deleting codesoft/Codesoft 7/Codes Produits/nems_banane_chocolat_verso.lab
+deleting codesoft/Codesoft 7/Codes Produits/nems_banane_chocolat_recto.lab
+codesoft/Codesoft 7/Codes Produits/79103_recto.bak
+codesoft/Codesoft 7/Codes Produits/79103_recto.lab
+codesoft/Codesoft 7/Codes Produits/79103_verso.bak
+codesoft/Codesoft 7/Codes Produits/79103_verso.lab
+codesoft/Codesoft 7/Codes Produits/79103_verso_UBI.bak
+codesoft/Codesoft 7/Codes Produits/79103_verso_UBI.lab
+codesoft/Codesoft 7/Codes Produits/79132_recto.lab
+codesoft/Codesoft 7/Codes Produits/79132_verso.lab
+codesoft/Codesoft 7/Codes Produits/nems_banane_chocolat_recto.bak
+codesoft/Codesoft 7/Codes Produits/nems_banane_chocolat_verso.bak
+
+sent 125420 bytes  received 4571 bytes  51996.40 bytes/sec
+total size is 272207955  speedup is 2094.05
+sending incremental file list
+
+sent 5589 bytes  received 33 bytes  2248.80 bytes/sec
+total size is 11359500  speedup is 2020.54
+sending incremental file list
+
+sent 63 bytes  received 12 bytes  50.00 bytes/sec
+total size is 77592576  speedup is 1034567.68
+sending incremental file list
+
+sent 7538 bytes  received 45 bytes  5055.33 bytes/sec
+total size is 9253358  speedup is 1220.28
+sending incremental file list
+
+sent 7552 bytes  received 20 bytes  5048.00 bytes/sec
+total size is 16747404  speedup is 2211.75
+sending incremental file list
+
+sent 4308 bytes  received 24 bytes  2888.00 bytes/sec
+total size is 6387982  speedup is 1474.60
+sending incremental file list
+mercuriales/FZC/FZC 2013/BOFROST 2013.xls
+mercuriales/gms/2013/CENTRALES 2013/AUCHAN 2013.xls
+mercuriales/gms/2013/CENTRALES 2013/CARREFOUR MN 2013.xls
+mercuriales/gms/2013/CENTRALES 2013/CARREFOUR MN ASIE 2013.xls
+mercuriales/gms/2013/CENTRALES 2013/CARREFOUR PROXI MN 2013.xls
+mercuriales/gms/2013/CENTRALES 2013/SIMPLY MARKET 2013.xls
+mercuriales/gms/2013/CONTROLE TARIF 2013/09-SEPTEMBRE/SIMPLY MARKET REDEMARRAGE 23-09-2013.pdf
+mercuriales/mdd/2013/2013 MERCURIALE CARREFOUR PLATS CUISINES.xls
+
+sent 169913 bytes  received 29288 bytes  79680.40 bytes/sec
+total size is 31690657  speedup is 159.09
+sending incremental file list
+
+sent 5047 bytes  received 27 bytes  3382.67 bytes/sec
+total size is 39173092  speedup is 7720.36
+sending incremental file list
+operations_commerciales/DEMANDE ECHANTILLONS CL .xls
+operations_commerciales/chrono demande echantillons.xls
+operations_commerciales/FZC/OP FZC 2013/FZC PICARD 2013.xls
+operations_commerciales/GMS/2013/A-CENTRALES/GMS CASINO 2013-FUTUR MASTER.xls
+operations_commerciales/GMS/2013/A-CENTRALES/GMS SYSTEME U 2013-FUTUR MASTER.xls
+deleting operations_commerciales/GMS/2013/B-CONFIRMATIONS OPERATIONS/CONFIRMATIONS CASINO/GEANT/2013 GEANT 2 + 1 GRATUIT S34.xls
+operations_commerciales/GMS/2013/B-CONFIRMATIONS OPERATIONS/CONFIRMATIONS CASINO/GEANT/2013 GEANT +1 GRATUIT S34.xls
+operations_commerciales/GMS/2013/B-CONFIRMATIONS OPERATIONS/CONFIRMATIONS CASINO/GEANT/2013 GEANT CARTE OCTOBRE.xls
+operations_commerciales/GMS/2013/B-CONFIRMATIONS OPERATIONS/CONFIRMATIONS SYSTEME U/2013 SYSTEME U REMISES DE NOEL.xls
+operations_commerciales/GMS/2013/D-REGIONS/GMS LECLERC 2013-FUTUR MASTER.xls
+operations_commerciales/MDD/MODELES CJ/CARREFOUR/DDE ECHANTILLONS/demande \#351chantillons  CRF BELGIQUE.XLS
+operations_commerciales/MDD/MODELES CJ/CARREFOUR/DDE ECHANTILLONS/demande \#351chantillons  CRF HUC.XLS
+
+sent 285403 bytes  received 20108 bytes  87288.86 bytes/sec
+total size is 92917664  speedup is 304.14
+sending incremental file list
+
+sent 18506 bytes  received 80 bytes  12390.67 bytes/sec
+total size is 41728031  speedup is 2245.13
+sending incremental file list
+
+sent 7502 bytes  received 13 bytes  3006.00 bytes/sec
+total size is 33724035  speedup is 4487.56
+sending incremental file list
+
+sent 63 bytes  received 12 bytes  50.00 bytes/sec
+total size is 77592576  speedup is 1034567.68
+sending incremental file list
+
+sent 7538 bytes  received 45 bytes  5055.33 bytes/sec
+total size is 9253358  speedup is 1220.28
+sending incremental file list
+
+sent 4308 bytes  received 24 bytes  2888.00 bytes/sec
+total size is 6387982  speedup is 1474.60
+sending incremental file list
+
+sent 7552 bytes  received 20 bytes  5048.00 bytes/sec
+total size is 16747404  speedup is 2211.75
+sending incremental file list
+
+sent 85 bytes  received 13 bytes  65.33 bytes/sec
+total size is 104853504  speedup is 1069933.71
+sending incremental file list
+operations_commerciales/DEMANDE ECHANTILLONS CL .xls
+operations_commerciales/chrono demande echantillons.xls
+operations_commerciales/FZC/OP FZC 2013/FZC PICARD 2013.xls
+operations_commerciales/GMS/2013/A-CENTRALES/GMS CASINO 2013-FUTUR MASTER.xls
+operations_commerciales/GMS/2013/A-CENTRALES/GMS SYSTEME U 2013-FUTUR MASTER.xls
+deleting operations_commerciales/GMS/2013/B-CONFIRMATIONS OPERATIONS/CONFIRMATIONS CASINO/GEANT/2013 GEANT 2 + 1 GRATUIT S34.xls
+operations_commerciales/GMS/2013/B-CONFIRMATIONS OPERATIONS/CONFIRMATIONS CASINO/GEANT/2013 GEANT +1 GRATUIT S34.xls
+operations_commerciales/GMS/2013/B-CONFIRMATIONS OPERATIONS/CONFIRMATIONS CASINO/GEANT/2013 GEANT CARTE OCTOBRE.xls
+operations_commerciales/GMS/2013/B-CONFIRMATIONS OPERATIONS/CONFIRMATIONS SYSTEME U/2013 SYSTEME U REMISES DE NOEL.xls
+operations_commerciales/GMS/2013/D-REGIONS/GMS LECLERC 2013-FUTUR MASTER.xls
+operations_commerciales/MDD/MODELES CJ/CARREFOUR/DDE ECHANTILLONS/demande \#351chantillons  CRF BELGIQUE.XLS
+operations_commerciales/MDD/MODELES CJ/CARREFOUR/DDE ECHANTILLONS/demande \#351chantillons  CRF HUC.XLS
+
+sent 285403 bytes  received 20108 bytes  87288.86 bytes/sec
+total size is 92917664  speedup is 304.14
+sending incremental file list
+mercuriales/FZC/FZC 2013/BOFROST 2013.xls
+mercuriales/gms/2013/CENTRALES 2013/AUCHAN 2013.xls
+mercuriales/gms/2013/CENTRALES 2013/CARREFOUR MN 2013.xls
+mercuriales/gms/2013/CENTRALES 2013/CARREFOUR MN ASIE 2013.xls
+mercuriales/gms/2013/CENTRALES 2013/CARREFOUR PROXI MN 2013.xls
+mercuriales/gms/2013/CENTRALES 2013/SIMPLY MARKET 2013.xls
+mercuriales/gms/2013/CONTROLE TARIF 2013/09-SEPTEMBRE/SIMPLY MARKET REDEMARRAGE 23-09-2013.pdf
+mercuriales/mdd/2013/2013 MERCURIALE CARREFOUR PLATS CUISINES.xls
+
+sent 169913 bytes  received 29288 bytes  79680.40 bytes/sec
+total size is 31690657  speedup is 159.09
+sending incremental file list
+
+sent 5440 bytes  received 44 bytes  10968.00 bytes/sec
+total size is 9508728  speedup is 1733.90
+sending incremental file list
+
+sent 5645 bytes  received 23 bytes  3778.67 bytes/sec
+total size is 128643061  speedup is 22696.38
+sending incremental file list
+
+sent 4707 bytes  received 36 bytes  3162.00 bytes/sec
+total size is 46318934  speedup is 9765.75
+sending incremental file list
+
+sent 18506 bytes  received 80 bytes  12390.67 bytes/sec
+total size is 41728031  speedup is 2245.13

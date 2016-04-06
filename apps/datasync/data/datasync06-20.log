@@ -1,0 +1,161 @@
+Démarrage : ven jun 20 23:00:01 CEST 2014
+Arrêt     : ven jun 20 23:00:51 CEST 2014
+
+
+
+Base MySQL sélectionnée: agis
+Nombre de serveur(s) Linux concerné(s): 4
+Nombre de dossier(s) à mettre à jour: 29
+
+sending incremental file list
+
+sent 7070 bytes  received 49 bytes  4746.00 bytes/sec
+total size is 12774593  speedup is 1794.44
+sending incremental file list
+
+sent 6279 bytes  received 38 bytes  2526.80 bytes/sec
+total size is 12442583  speedup is 1969.70
+sending incremental file list
+
+sent 63 bytes  received 12 bytes  50.00 bytes/sec
+total size is 90068992  speedup is 1200919.89
+sending incremental file list
+
+sent 7593 bytes  received 45 bytes  5092.00 bytes/sec
+total size is 9254930  speedup is 1211.70
+sending incremental file list
+
+sent 7756 bytes  received 20 bytes  5184.00 bytes/sec
+total size is 16755943  speedup is 2154.83
+sending incremental file list
+
+sent 4308 bytes  received 24 bytes  2888.00 bytes/sec
+total size is 6387982  speedup is 1474.60
+sending incremental file list
+mercuriales/mdd/2014/2014 MERCURIALE CARREFOUR ASIATIQUE.xls
+mercuriales/mdd/2014/2014 MERCURIALE CARREFOUR PLATS CUISINES.xls
+mercuriales/mdd/2014/2014 MERCURIALE MONOPRIX .xls
+
+sent 24731 bytes  received 4276 bytes  8287.71 bytes/sec
+total size is 32886277  speedup is 1133.74
+sending incremental file list
+
+sent 5047 bytes  received 27 bytes  10148.00 bytes/sec
+total size is 39173092  speedup is 7720.36
+sending incremental file list
+operations_commerciales/DEMANDE ECHANTILLONS CL .xls
+operations_commerciales/DEMANDE ECHANTILLONS GB.xls
+operations_commerciales/chrono demande echantillons.xls
+operations_commerciales/FZC/CONFIRMATIONS/2014/THIRIET/THIRIET_AOUT_ 2014.xls
+operations_commerciales/FZC/OP FZC 2014/FZC THIRIET 2014.xls
+operations_commerciales/GMS/RECAP DEMANDE ET CONFIRMATIONS HEBDO 2014.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS CASINO 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS SYSTEME U 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/GALEC/2014 GALEC OP DEPENSER MOINS 10.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/SYSTEME U/2014 SYSTEME U FOIRE AUX PRIX LANGUE DE BOEUF.xls
+operations_commerciales/MDD/MODELES CJ/AUCHAN ATAC SCHIEVER/DDE ECHANTILLONS/2014/DEMANDE ECHANTILLONS AUCHAN GRAPHEMES 261.xls
+operations_commerciales/MDD/MODELES CJ/AUCHAN ATAC SCHIEVER/DDE ECHANTILLONS/2014/DEMANDE ECHANTILLONS AUCHAN GRAPHEMES 382.xls
+
+sent 317185 bytes  received 19184 bytes  74748.67 bytes/sec
+total size is 52148123  speedup is 155.03
+sending incremental file list
+
+sent 20347 bytes  received 83 bytes  8172.00 bytes/sec
+total size is 99184091  speedup is 4854.83
+sending incremental file list
+gofast/sync.ffs_db
+gofast/CHANTIERS/2_FTK_CLIENTS_Mathieu/Support_R\#351union_1_FTk_Clients_160614.ppt
+gofast/CHANTIERS/2_FTK_CLIENTS_Mathieu/6_BILAN/Bilan reunion 1.doc
+
+sent 29972 bytes  received 5850 bytes  14328.80 bytes/sec
+total size is 38652367  speedup is 1079.01
+sending incremental file list
+
+sent 10004 bytes  received 13 bytes  6678.00 bytes/sec
+total size is 48314368  speedup is 4823.24
+sending incremental file list
+
+sent 5781 bytes  received 30 bytes  3874.00 bytes/sec
+total size is 93132165  speedup is 16026.87
+sending incremental file list
+
+sent 63 bytes  received 12 bytes  50.00 bytes/sec
+total size is 90068992  speedup is 1200919.89
+sending incremental file list
+
+sent 7593 bytes  received 45 bytes  5092.00 bytes/sec
+total size is 9254930  speedup is 1211.70
+sending incremental file list
+
+sent 4308 bytes  received 24 bytes  2888.00 bytes/sec
+total size is 6387982  speedup is 1474.60
+sending incremental file list
+
+sent 7756 bytes  received 20 bytes  5184.00 bytes/sec
+total size is 16755943  speedup is 2154.83
+sending incremental file list
+
+sent 85 bytes  received 13 bytes  65.33 bytes/sec
+total size is 104853504  speedup is 1069933.71
+sending incremental file list
+operations_commerciales/DEMANDE ECHANTILLONS CL .xls
+operations_commerciales/DEMANDE ECHANTILLONS GB.xls
+operations_commerciales/chrono demande echantillons.xls
+operations_commerciales/FZC/CONFIRMATIONS/2014/THIRIET/THIRIET_AOUT_ 2014.xls
+operations_commerciales/FZC/OP FZC 2014/FZC THIRIET 2014.xls
+operations_commerciales/GMS/RECAP DEMANDE ET CONFIRMATIONS HEBDO 2014.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS CASINO 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS SYSTEME U 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/GALEC/2014 GALEC OP DEPENSER MOINS 10.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/SYSTEME U/2014 SYSTEME U FOIRE AUX PRIX LANGUE DE BOEUF.xls
+operations_commerciales/MDD/MODELES CJ/AUCHAN ATAC SCHIEVER/DDE ECHANTILLONS/2014/DEMANDE ECHANTILLONS AUCHAN GRAPHEMES 261.xls
+operations_commerciales/MDD/MODELES CJ/AUCHAN ATAC SCHIEVER/DDE ECHANTILLONS/2014/DEMANDE ECHANTILLONS AUCHAN GRAPHEMES 382.xls
+
+sent 317185 bytes  received 19184 bytes  96105.43 bytes/sec
+total size is 52148123  speedup is 155.03
+sending incremental file list
+mercuriales/mdd/2014/2014 MERCURIALE CARREFOUR ASIATIQUE.xls
+mercuriales/mdd/2014/2014 MERCURIALE CARREFOUR PLATS CUISINES.xls
+mercuriales/mdd/2014/2014 MERCURIALE MONOPRIX .xls
+
+sent 24731 bytes  received 4276 bytes  11602.80 bytes/sec
+total size is 32886277  speedup is 1133.74
+sending incremental file list
+
+sent 10004 bytes  received 13 bytes  6678.00 bytes/sec
+total size is 48314368  speedup is 4823.24
+sending incremental file list
+
+sent 7070 bytes  received 49 bytes  14238.00 bytes/sec
+total size is 12774593  speedup is 1794.44
+sending incremental file list
+
+sent 5745 bytes  received 23 bytes  3845.33 bytes/sec
+total size is 129159129  speedup is 22392.36
+sending incremental file list
+
+sent 5610 bytes  received 39 bytes  3766.00 bytes/sec
+total size is 59049369  speedup is 10453.07
+sending incremental file list
+
+sent 51949 bytes  received 96 bytes  20818.00 bytes/sec
+total size is 298268243  speedup is 5730.97
+sending incremental file list
+
+sent 20347 bytes  received 83 bytes  13620.00 bytes/sec
+total size is 99184091  speedup is 4854.83
+sending incremental file list
+gofast/sync.ffs_db
+gofast/CHANTIERS/2_FTK_CLIENTS_Mathieu/Support_R\#351union_1_FTk_Clients_160614.ppt
+gofast/CHANTIERS/2_FTK_CLIENTS_Mathieu/6_BILAN/Bilan reunion 1.doc
+
+sent 29972 bytes  received 5850 bytes  23881.33 bytes/sec
+total size is 38652367  speedup is 1079.01
+sending incremental file list
+
+sent 7756 bytes  received 20 bytes  3110.40 bytes/sec
+total size is 16755943  speedup is 2154.83
+sending incremental file list
+
+sent 7756 bytes  received 20 bytes  5184.00 bytes/sec
+total size is 16755943  speedup is 2154.83

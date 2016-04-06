@@ -10,6 +10,7 @@ fta.id_fta=fta_suivi_projet.id_fta
 #fta.id_fta=fta_tarif.id_fta
 #fta.id_fta_categorie=fta_categorie.id_fta_categorie
 fta.id_fta_workflow=fta_workflow.id_fta_workflow
+fta.id_classification_raccourcis=classification_raccourcis.id_classification_raccourcis
 
 #fta.id_fta=fta_nomenclature.id_fta
 #fta.id_fta=fta_composition.id_fta
@@ -18,7 +19,7 @@ fta.id_fta_workflow=fta_workflow.id_fta_workflow
 fta.id_fta=fta_conditionnement.id_fta
 fta.id_fta=classification_fta.id_fta
 
-fta.Site_de_production=geo.id_site
+fta.Site_de_production=geo.id_geo
 
 #access_arti2.id_access_arti2=fta.id_access_arti2
 #access_arti2.Site_de_production=geo.id_site

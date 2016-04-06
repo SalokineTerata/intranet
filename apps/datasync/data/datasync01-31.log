@@ -1,0 +1,198 @@
+Démarrage : ven jan 31 23:00:02 CET 2014
+Arrêt     : ven jan 31 23:02:41 CET 2014
+
+
+
+Base MySQL sélectionnée: agis
+Nombre de serveur(s) Linux concerné(s): 4
+Nombre de dossier(s) à mettre à jour: 26
+
+sending incremental file list
+
+sent 5876 bytes  received 45 bytes  3947.33 bytes/sec
+total size is 11123363  speedup is 1878.63
+sending incremental file list
+
+sent 5993 bytes  received 37 bytes  4020.00 bytes/sec
+total size is 12047230  speedup is 1997.88
+sending incremental file list
+erp_data.mdb
+
+sent 10677635 bytes  received 64291 bytes  190122.58 bytes/sec
+total size is 84160512  speedup is 7.83
+sending incremental file list
+
+sent 7538 bytes  received 45 bytes  5055.33 bytes/sec
+total size is 9253358  speedup is 1220.28
+sending incremental file list
+
+sent 7695 bytes  received 20 bytes  5143.33 bytes/sec
+total size is 16751789  speedup is 2171.33
+sending incremental file list
+
+sent 4308 bytes  received 24 bytes  2888.00 bytes/sec
+total size is 6387982  speedup is 1474.60
+sending incremental file list
+mercuriales/FZC/FZC 2014/THIRIET 2014.xls
+mercuriales/HD/2014/2014 MERCURIALE DIA.xls
+mercuriales/HD/2014/2014 MERCURIALE NETTO.xls
+mercuriales/mdd/2014/2014 MERCURIALE AUCHAN.xls
+mercuriales/mdd/2014/2014 MERCURIALE CARREFOUR PLATS CUISINES.xls
+mercuriales/mdd/2014/2014 MERCURIALE CASINO.xls
+mercuriales/mdd/2014/2014 MERCURIALE INTERMARCHE.xls
+
+sent 34459 bytes  received 4510 bytes  15587.60 bytes/sec
+total size is 26168733  speedup is 671.53
+sending incremental file list
+
+sent 5047 bytes  received 27 bytes  3382.67 bytes/sec
+total size is 39173092  speedup is 7720.36
+sending incremental file list
+operations_commerciales/chrono demande echantillons.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS AUCHAN 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS CASINO 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS GALEC 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/AUCHAN/2014 AUCHAN OP AVRIL 4 ASIE.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/AUCHAN/2014 AUCHAN OP AVRIL TOP 100 ASIE ET PLATEAUX.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/CASINO HM/2014 HM FETE DES MERES S21.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/CASINO SM/2014 SM GROS VOLUMES S20 COUSCOUS SEMOULE.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/CASINO SM/2014 SM MECA PRO BEAUTE S22 PAELLA PARMENTIER.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/GALEC/2014 GALEC OP BIEN VIVRE 4.xls
+operations_commerciales/MDD/MODELES CJ/AUCHAN ATAC SCHIEVER/DDE ECHANTILLONS/2014/DEMANDE ECHANTILLONS AUCHAN 51.xls
+
+sent 284760 bytes  received 19298 bytes  67568.44 bytes/sec
+total size is 44548005  speedup is 146.51
+sending incremental file list
+deleting rh_multi_sites/ben.txt
+rh_multi_sites/test.txt
+
+sent 19869 bytes  received 97 bytes  13310.67 bytes/sec
+total size is 98390370  speedup is 4927.90
+sending incremental file list
+deleting gofast/test/
+deleting gofast/ben.txt
+gofast/CHANTIERS/
+gofast/CHANTIERS/1_CNP_DELEGATION_Cecile/
+gofast/CHANTIERS/1_CNP_DELEGATION_Cecile/CNP_Cecile.ppt
+gofast/CHANTIERS/2_FTK_CLIENTS_Mathieu/
+gofast/CHANTIERS/2_FTK_CLIENTS_Mathieu/FTK_CLIENTS_Mathieu.ppt
+gofast/CHANTIERS/3_FTA_Boris/
+gofast/CHANTIERS/3_FTA_Boris/FTA_Boris.ppt
+gofast/CHANTIERS/4_COTATION_Benjamin/
+gofast/CHANTIERS/4_COTATION_Benjamin/COTATION_Benjamin.ppt
+gofast/CHANTIERS/5_PROCESS_Vincent/
+gofast/CHANTIERS/5_PROCESS_Vincent/PROCESS_Vincent.ppt
+gofast/CHANTIERS/6_LANCEMENT_PDTS_Emeline/
+gofast/CHANTIERS/6_LANCEMENT_PDTS_Emeline/LANCEMENT_PDT_Emeline.ppt
+gofast/CHANTIERS/7_DONNEES_R&D_Morgane/
+gofast/CHANTIERS/7_DONNEES_R&D_Morgane/DONNEES_R&d_Morgane.ppt
+gofast/CHANTIERS/8_ADVITIUM_Cecile/
+gofast/CHANTIERS/8_ADVITIUM_Cecile/ADV_Cecile.ppt
+gofast/INFORMATIONS_GENERALES/
+gofast/INFORMATIONS_GENERALES/1_GOFAST_pres_projet_280114.ppt
+gofast/PLANNING_GENERAL/
+gofast/PLANNING_GENERAL/Planning_equipes_GOFAST_valide.xls
+sending incremental file list
+
+sent 7705 bytes  received 13 bytes  5145.33 bytes/sec
+total size is 33815552  speedup is 4381.39
+sending incremental file list
+erp_data.mdb
+
+sent 10677635 bytes  received 64291 bytes  193548.22 bytes/sec
+total size is 84160512  speedup is 7.83
+sending incremental file list
+
+sent 7538 bytes  received 45 bytes  15166.00 bytes/sec
+total size is 9253358  speedup is 1220.28
+sending incremental file list
+
+sent 4308 bytes  received 24 bytes  8664.00 bytes/sec
+total size is 6387982  speedup is 1474.60
+sending incremental file list
+
+sent 7695 bytes  received 20 bytes  5143.33 bytes/sec
+total size is 16751789  speedup is 2171.33
+sending incremental file list
+
+sent 85 bytes  received 13 bytes  65.33 bytes/sec
+total size is 104853504  speedup is 1069933.71
+sending incremental file list
+operations_commerciales/chrono demande echantillons.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS AUCHAN 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS CASINO 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS GALEC 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/AUCHAN/2014 AUCHAN OP AVRIL 4 ASIE.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/AUCHAN/2014 AUCHAN OP AVRIL TOP 100 ASIE ET PLATEAUX.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/CASINO HM/2014 HM FETE DES MERES S21.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/CASINO SM/2014 SM GROS VOLUMES S20 COUSCOUS SEMOULE.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/CASINO SM/2014 SM MECA PRO BEAUTE S22 PAELLA PARMENTIER.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/GALEC/2014 GALEC OP BIEN VIVRE 4.xls
+operations_commerciales/MDD/MODELES CJ/AUCHAN ATAC SCHIEVER/DDE ECHANTILLONS/2014/DEMANDE ECHANTILLONS AUCHAN 51.xls
+
+sent 284760 bytes  received 19298 bytes  86873.71 bytes/sec
+total size is 44548005  speedup is 146.51
+sending incremental file list
+mercuriales/FZC/FZC 2014/THIRIET 2014.xls
+mercuriales/HD/2014/2014 MERCURIALE DIA.xls
+mercuriales/HD/2014/2014 MERCURIALE NETTO.xls
+mercuriales/mdd/2014/2014 MERCURIALE AUCHAN.xls
+mercuriales/mdd/2014/2014 MERCURIALE CARREFOUR PLATS CUISINES.xls
+mercuriales/mdd/2014/2014 MERCURIALE CASINO.xls
+mercuriales/mdd/2014/2014 MERCURIALE INTERMARCHE.xls
+
+sent 34459 bytes  received 4510 bytes  25979.33 bytes/sec
+total size is 26168733  speedup is 671.53
+sending incremental file list
+
+sent 7705 bytes  received 13 bytes  5145.33 bytes/sec
+total size is 33815552  speedup is 4381.39
+sending incremental file list
+
+sent 5876 bytes  received 45 bytes  3947.33 bytes/sec
+total size is 11123363  speedup is 1878.63
+sending incremental file list
+
+sent 5677 bytes  received 23 bytes  3800.00 bytes/sec
+total size is 128675317  speedup is 22574.62
+sending incremental file list
+
+sent 5353 bytes  received 38 bytes  3594.00 bytes/sec
+total size is 56169881  speedup is 10419.20
+sending incremental file list
+
+sent 49946 bytes  received 94 bytes  20016.00 bytes/sec
+total size is 289940563  speedup is 5794.18
+sending incremental file list
+deleting rh_multi_sites/ben.txt
+rh_multi_sites/test.txt
+
+sent 19869 bytes  received 97 bytes  7986.40 bytes/sec
+total size is 98390370  speedup is 4927.90
+sending incremental file list
+deleting gofast/test/
+deleting gofast/ben.txt
+gofast/CHANTIERS/
+gofast/CHANTIERS/1_CNP_DELEGATION_Cecile/
+gofast/CHANTIERS/1_CNP_DELEGATION_Cecile/CNP_Cecile.ppt
+gofast/CHANTIERS/2_FTK_CLIENTS_Mathieu/
+gofast/CHANTIERS/2_FTK_CLIENTS_Mathieu/FTK_CLIENTS_Mathieu.ppt
+gofast/CHANTIERS/3_FTA_Boris/
+gofast/CHANTIERS/3_FTA_Boris/FTA_Boris.ppt
+gofast/CHANTIERS/4_COTATION_Benjamin/
+gofast/CHANTIERS/4_COTATION_Benjamin/COTATION_Benjamin.ppt
+gofast/CHANTIERS/5_PROCESS_Vincent/
+gofast/CHANTIERS/5_PROCESS_Vincent/PROCESS_Vincent.ppt
+gofast/CHANTIERS/6_LANCEMENT_PDTS_Emeline/
+gofast/CHANTIERS/6_LANCEMENT_PDTS_Emeline/LANCEMENT_PDT_Emeline.ppt
+gofast/CHANTIERS/7_DONNEES_R&D_Morgane/
+gofast/CHANTIERS/7_DONNEES_R&D_Morgane/DONNEES_R&d_Morgane.ppt
+gofast/CHANTIERS/8_ADVITIUM_Cecile/
+gofast/CHANTIERS/8_ADVITIUM_Cecile/ADV_Cecile.ppt
+gofast/INFORMATIONS_GENERALES/
+gofast/INFORMATIONS_GENERALES/1_GOFAST_pres_projet_280114.ppt
+gofast/PLANNING_GENERAL/
+gofast/PLANNING_GENERAL/Planning_equipes_GOFAST_valide.xls
+
+sent 1017439 bytes  received 247 bytes  156567.08 bytes/sec
+total size is 1513984  speedup is 1.49

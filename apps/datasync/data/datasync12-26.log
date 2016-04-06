@@ -1,0 +1,132 @@
+Démarrage : jeu déc 26 23:00:02 CET 2013
+Arrêt     : jeu déc 26 23:00:46 CET 2013
+
+
+
+Base MySQL sélectionnée: agis
+Nombre de serveur(s) Linux concerné(s): 4
+Nombre de dossier(s) à mettre à jour: 24
+
+sending incremental file list
+gestion_crise/mise \#340 jour 2013/CONTACTS CLIENT GESTION DE CRISE 080313 MDD HD.xls
+
+sent 10156 bytes  received 358 bytes  4205.60 bytes/sec
+total size is 9985579  speedup is 949.74
+sending incremental file list
+suivi_investissement/2014-2015/Bud invest AVI 2014 2015.xls
+suivi_investissement/2014-2015/Bud invest AVI r\#351vis\#351 2013-2014.xls
+
+sent 23121 bytes  received 978 bytes  9639.60 bytes/sec
+total size is 11670095  speedup is 484.26
+sending incremental file list
+
+sent 63 bytes  received 12 bytes  50.00 bytes/sec
+total size is 81426432  speedup is 1085685.76
+sending incremental file list
+
+sent 7538 bytes  received 45 bytes  5055.33 bytes/sec
+total size is 9253358  speedup is 1220.28
+sending incremental file list
+
+sent 7683 bytes  received 20 bytes  3081.20 bytes/sec
+total size is 16751831  speedup is 2174.72
+sending incremental file list
+
+sent 4308 bytes  received 24 bytes  2888.00 bytes/sec
+total size is 6387982  speedup is 1474.60
+sending incremental file list
+
+sent 11976 bytes  received 78 bytes  4821.60 bytes/sec
+total size is 48858460  speedup is 4053.30
+sending incremental file list
+
+sent 5047 bytes  received 27 bytes  3382.67 bytes/sec
+total size is 39173092  speedup is 7720.36
+sending incremental file list
+operations_commerciales/chrono demande echantillons.xls
+operations_commerciales/FZC/CONFIRMATIONS/2014/ARGEL/ARGEL_CONFIRMATION CATALOGUE 3 2014.xls
+operations_commerciales/FZC/CONFIRMATIONS/2014/TOUPARGEL/TOUPARGEL_CYCLE3_2014.xls
+operations_commerciales/FZC/OP FZC 2014/FZC ARGEL 2014.xls
+operations_commerciales/FZC/OP FZC 2014/FZC TOUPARGEL 2014.xls
+operations_commerciales/GMS/RECAP DEMANDE ET CONFIRMATIONS HEBDO.xls
+operations_commerciales/GMS/2013/D-REGIONS/GMS SU REGION  2013-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS AUCHAN 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS CARREFOUR MARKET 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS CASINO 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/CASINO HM/2014 CARTE JANVIER GAMME PC FE.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/SIMPLY MARKET/2014 SIMPLY MARKET OP NAA.xls
+operations_commerciales/MDD/MODELES CJ/AUCHAN ATAC SCHIEVER/DDE ECHANTILLONS/DEMANDE ECHANTILLONS ATAC 711.xls
+
+sent 275269 bytes  received 23237 bytes  45924.00 bytes/sec
+total size is 60244592  speedup is 201.82
+sending incremental file list
+
+sent 20908 bytes  received 88 bytes  8398.40 bytes/sec
+total size is 99120505  speedup is 4720.92
+sending incremental file list
+
+sent 7378 bytes  received 13 bytes  4927.33 bytes/sec
+total size is 32486400  speedup is 4395.40
+sending incremental file list
+
+sent 63 bytes  received 12 bytes  50.00 bytes/sec
+total size is 81426432  speedup is 1085685.76
+sending incremental file list
+
+sent 7538 bytes  received 45 bytes  5055.33 bytes/sec
+total size is 9253358  speedup is 1220.28
+sending incremental file list
+
+sent 4308 bytes  received 24 bytes  8664.00 bytes/sec
+total size is 6387982  speedup is 1474.60
+sending incremental file list
+
+sent 7683 bytes  received 20 bytes  5135.33 bytes/sec
+total size is 16751831  speedup is 2174.72
+sending incremental file list
+
+sent 85 bytes  received 13 bytes  65.33 bytes/sec
+total size is 104853504  speedup is 1069933.71
+sending incremental file list
+operations_commerciales/chrono demande echantillons.xls
+operations_commerciales/FZC/CONFIRMATIONS/2014/ARGEL/ARGEL_CONFIRMATION CATALOGUE 3 2014.xls
+operations_commerciales/FZC/CONFIRMATIONS/2014/TOUPARGEL/TOUPARGEL_CYCLE3_2014.xls
+operations_commerciales/FZC/OP FZC 2014/FZC ARGEL 2014.xls
+operations_commerciales/FZC/OP FZC 2014/FZC TOUPARGEL 2014.xls
+operations_commerciales/GMS/RECAP DEMANDE ET CONFIRMATIONS HEBDO.xls
+operations_commerciales/GMS/2013/D-REGIONS/GMS SU REGION  2013-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS AUCHAN 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS CARREFOUR MARKET 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS CASINO 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/CASINO HM/2014 CARTE JANVIER GAMME PC FE.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/SIMPLY MARKET/2014 SIMPLY MARKET OP NAA.xls
+operations_commerciales/MDD/MODELES CJ/AUCHAN ATAC SCHIEVER/DDE ECHANTILLONS/DEMANDE ECHANTILLONS ATAC 711.xls
+
+sent 275269 bytes  received 23237 bytes  85287.43 bytes/sec
+total size is 60244592  speedup is 201.82
+sending incremental file list
+
+sent 11976 bytes  received 78 bytes  8036.00 bytes/sec
+total size is 48858460  speedup is 4053.30
+sending incremental file list
+
+sent 7378 bytes  received 13 bytes  4927.33 bytes/sec
+total size is 32486400  speedup is 4395.40
+sending incremental file list
+gestion_crise/mise \#340 jour 2013/CONTACTS CLIENT GESTION DE CRISE 080313 MDD HD.xls
+
+sent 10156 bytes  received 358 bytes  7009.33 bytes/sec
+total size is 9985579  speedup is 949.74
+sending incremental file list
+
+sent 5677 bytes  received 23 bytes  3800.00 bytes/sec
+total size is 128675317  speedup is 22574.62
+sending incremental file list
+
+sent 5353 bytes  received 38 bytes  3594.00 bytes/sec
+total size is 56169881  speedup is 10419.20
+sending incremental file list
+
+sent 48880 bytes  received 93 bytes  19589.20 bytes/sec
+total size is 282598995  speedup is 5770.51
+sending incremental file list

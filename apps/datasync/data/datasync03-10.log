@@ -1,0 +1,120 @@
+Démarrage : lun mar 10 23:00:01 CET 2014
+Arrêt     : lun mar 10 23:00:46 CET 2014
+
+
+
+Base MySQL sélectionnée: agis
+Nombre de serveur(s) Linux concerné(s): 4
+Nombre de dossier(s) à mettre à jour: 27
+
+sending incremental file list
+
+sent 6345 bytes  received 46 bytes  2556.40 bytes/sec
+total size is 11731248  speedup is 1835.59
+sending incremental file list
+
+sent 6067 bytes  received 37 bytes  2441.60 bytes/sec
+total size is 12258686  speedup is 2008.30
+sending incremental file list
+
+sent 63 bytes  received 12 bytes  50.00 bytes/sec
+total size is 84160512  speedup is 1122140.16
+sending incremental file list
+
+sent 7538 bytes  received 45 bytes  5055.33 bytes/sec
+total size is 9253358  speedup is 1220.28
+sending incremental file list
+
+sent 7695 bytes  received 20 bytes  5143.33 bytes/sec
+total size is 16751789  speedup is 2171.33
+sending incremental file list
+
+sent 4308 bytes  received 24 bytes  2888.00 bytes/sec
+total size is 6387982  speedup is 1474.60
+sending incremental file list
+mercuriales/gms/2014/REGIONS  2014/SCHIEVER MERCU 2014.xls
+
+sent 13145 bytes  received 4608 bytes  7101.20 bytes/sec
+total size is 29478428  speedup is 1660.48
+sending incremental file list
+
+sent 5047 bytes  received 27 bytes  3382.67 bytes/sec
+total size is 39173092  speedup is 7720.36
+sending incremental file list
+
+sent 36690 bytes  received 140 bytes  5666.15 bytes/sec
+total size is 47249922  speedup is 1282.92
+sending incremental file list
+
+sent 19882 bytes  received 78 bytes  7984.00 bytes/sec
+total size is 98562242  speedup is 4937.99
+sending incremental file list
+
+sent 3305 bytes  received 79 bytes  1353.60 bytes/sec
+total size is 16126730  speedup is 4765.58
+sending incremental file list
+
+sent 9125 bytes  received 13 bytes  6092.00 bytes/sec
+total size is 43699200  speedup is 4782.14
+sending incremental file list
+intranet/access/base_codesoft/codesoft.agismde
+
+sent 70547 bytes  received 9349 bytes  31958.40 bytes/sec
+total size is 93132165  speedup is 1165.67
+sending incremental file list
+
+sent 63 bytes  received 12 bytes  50.00 bytes/sec
+total size is 84160512  speedup is 1122140.16
+sending incremental file list
+
+sent 7538 bytes  received 45 bytes  5055.33 bytes/sec
+total size is 9253358  speedup is 1220.28
+sending incremental file list
+
+sent 4308 bytes  received 24 bytes  2888.00 bytes/sec
+total size is 6387982  speedup is 1474.60
+sending incremental file list
+
+sent 7695 bytes  received 20 bytes  5143.33 bytes/sec
+total size is 16751789  speedup is 2171.33
+sending incremental file list
+
+sent 85 bytes  received 13 bytes  65.33 bytes/sec
+total size is 104853504  speedup is 1069933.71
+sending incremental file list
+
+sent 36690 bytes  received 140 bytes  24553.33 bytes/sec
+total size is 47249922  speedup is 1282.92
+sending incremental file list
+mercuriales/gms/2014/REGIONS  2014/SCHIEVER MERCU 2014.xls
+
+sent 13145 bytes  received 4608 bytes  11835.33 bytes/sec
+total size is 29478428  speedup is 1660.48
+sending incremental file list
+
+sent 9125 bytes  received 13 bytes  6092.00 bytes/sec
+total size is 43699200  speedup is 4782.14
+sending incremental file list
+
+sent 6345 bytes  received 46 bytes  4260.67 bytes/sec
+total size is 11731248  speedup is 1835.59
+sending incremental file list
+
+sent 5684 bytes  received 23 bytes  2282.80 bytes/sec
+total size is 129152473  speedup is 22630.54
+sending incremental file list
+
+sent 5610 bytes  received 39 bytes  3766.00 bytes/sec
+total size is 59049369  speedup is 10453.07
+sending incremental file list
+
+sent 50262 bytes  received 94 bytes  14387.43 bytes/sec
+total size is 291024467  speedup is 5779.34
+sending incremental file list
+
+sent 19882 bytes  received 78 bytes  13306.67 bytes/sec
+total size is 98562242  speedup is 4937.99
+sending incremental file list
+
+sent 3305 bytes  received 79 bytes  1353.60 bytes/sec
+total size is 16126730  speedup is 4765.58

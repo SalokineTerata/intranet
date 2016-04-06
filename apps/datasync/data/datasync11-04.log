@@ -1,0 +1,166 @@
+Démarrage : lun nov  4 23:00:02 CET 2013
+Arrêt     : lun nov  4 23:00:51 CET 2013
+
+
+
+Base MySQL sélectionnée: agis
+Nombre de serveur(s) Linux concerné(s): 4
+Nombre de dossier(s) à mettre à jour: 25
+
+sending incremental file list
+
+sent 7651 bytes  received 20 bytes  15342.00 bytes/sec
+total size is 16750795  speedup is 2183.65
+sending incremental file list
+
+sent 5598 bytes  received 45 bytes  3762.00 bytes/sec
+total size is 9985067  speedup is 1769.46
+sending incremental file list
+
+sent 5753 bytes  received 34 bytes  3858.00 bytes/sec
+total size is 11615823  speedup is 2007.23
+sending incremental file list
+
+sent 63 bytes  received 12 bytes  50.00 bytes/sec
+total size is 78852096  speedup is 1051361.28
+sending incremental file list
+
+sent 7538 bytes  received 45 bytes  5055.33 bytes/sec
+total size is 9253358  speedup is 1220.28
+sending incremental file list
+
+sent 7651 bytes  received 20 bytes  5114.00 bytes/sec
+total size is 16750795  speedup is 2183.65
+sending incremental file list
+
+sent 4308 bytes  received 24 bytes  8664.00 bytes/sec
+total size is 6387982  speedup is 1474.60
+sending incremental file list
+deleting mercuriales/sync.ffs_lock
+mercuriales/sync.ffs_db
+mercuriales/FZC/FZC 2014/SAROS 2014.xls
+mercuriales/HD/2013/2013 MERCURIALE DIA.xls
+mercuriales/gms/2013/REGION 2013/GALEC REGION MERCU OCT 2013.xls
+mercuriales/gms/2014/CENTRALES 2014/AUCHAN 2014.xls
+mercuriales/mdd/2013/2013 MERCURIALE CARREFOUR ASIATIQUE.xls
+mercuriales/mdd/2013/2013 MERCURIALE GROUPE AUCHAN.xls
+mercuriales/mdd/2014/2014 MERCURIALE INTERMARCHE.xls
+
+sent 73220 bytes  received 14832 bytes  35220.80 bytes/sec
+total size is 42332300  speedup is 480.76
+sending incremental file list
+
+sent 5047 bytes  received 27 bytes  3382.67 bytes/sec
+total size is 39173092  speedup is 7720.36
+sending incremental file list
+deleting operations_commerciales/sync.ffs_lock
+operations_commerciales/chrono demande echantillons.xls
+operations_commerciales/sync.ffs_db
+operations_commerciales/GMS/RECAP DEMANDE ET CONFIRMATIONS HEBDO.xls
+operations_commerciales/GMS/2013/A-CENTRALES/GMS CARREFOUR MARKET MN 2013-FUTUR MASTER.xls
+operations_commerciales/GMS/2013/A-CENTRALES/GMS INTERMARCHE 2013-FUTUR MASTER.xls
+operations_commerciales/GMS/2013/A-CENTRALES/GMS PDM 2013-FUTUR MASTER.xls
+operations_commerciales/GMS/2013/A-CENTRALES/GMS SYSTEME U 2013-FUTUR MASTER.xls
+operations_commerciales/GMS/2013/D-REGIONS/GMS LECLERC 2013-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS CASINO 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS INTERMARCHE 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/D-REGIONS/GMS LECLERC 2014-FUTUR MASTER.xls
+operations_commerciales/MDD/MODELES CJ/CARREFOUR/DDE ECHANTILLONS/demande \#351chantillons GUTENBERG.XLS
+operations_commerciales/MDD/MODELES CJ/PROVERA/CONF OPES CORA MATCH/Chrono 552 Match.XLS
+operations_commerciales/MDD/MODELES CJ/PROVERA/CONF OPES CORA MATCH/2013/CORA BE/CONFIRMATION OPERATION_CORA_BE_FOLDER RELANCE FETE.xls
+operations_commerciales/MDD/MODELES CJ/PROVERA/CONF OPES CORA MATCH/2013/CORA BE/CONFIRMATION OPERATION_CORA_BE_FOLDER190313.xls
+operations_commerciales/MDD/MODELES CJ/PROVERA/CONF OPES CORA MATCH/2013/CORA/CONFIRMATION OPERATION_CORA_2014-12075-MOINS CHER PAR 2 JANVIER .xls
+operations_commerciales/MDD/MODELES CJ/PROVERA/CONF OPES CORA MATCH/2013/MATCH/CONFIRMATION OPERATION_MATCH_2014-2996 SUPERMAG FEVRIER.xls
+operations_commerciales/MDD/OP MDD 2013/MDD CORA 2013 FUTUR MASTER.xls
+operations_commerciales/MDD/OP MDD 2013/MDD CORA BE 2013  FUTUR MASTER.xls
+operations_commerciales/MDD/OP MDD 2014/MDD MATCH 2014 FUTUR MASTER.xls
+
+sent 391259 bytes  received 44074 bytes  124380.86 bytes/sec
+total size is 54266323  speedup is 124.65
+sending incremental file list
+
+sent 18506 bytes  received 80 bytes  12390.67 bytes/sec
+total size is 41728031  speedup is 2245.13
+sending incremental file list
+
+sent 6802 bytes  received 13 bytes  4543.33 bytes/sec
+total size is 30341120  speedup is 4452.11
+sending incremental file list
+
+sent 63 bytes  received 12 bytes  30.00 bytes/sec
+total size is 78852096  speedup is 1051361.28
+sending incremental file list
+
+sent 7538 bytes  received 45 bytes  5055.33 bytes/sec
+total size is 9253358  speedup is 1220.28
+sending incremental file list
+
+sent 4308 bytes  received 24 bytes  1732.80 bytes/sec
+total size is 6387982  speedup is 1474.60
+sending incremental file list
+
+sent 7651 bytes  received 20 bytes  3068.40 bytes/sec
+total size is 16750795  speedup is 2183.65
+sending incremental file list
+
+sent 85 bytes  received 13 bytes  65.33 bytes/sec
+total size is 104853504  speedup is 1069933.71
+sending incremental file list
+deleting operations_commerciales/sync.ffs_lock
+operations_commerciales/chrono demande echantillons.xls
+operations_commerciales/sync.ffs_db
+operations_commerciales/GMS/RECAP DEMANDE ET CONFIRMATIONS HEBDO.xls
+operations_commerciales/GMS/2013/A-CENTRALES/GMS CARREFOUR MARKET MN 2013-FUTUR MASTER.xls
+operations_commerciales/GMS/2013/A-CENTRALES/GMS INTERMARCHE 2013-FUTUR MASTER.xls
+operations_commerciales/GMS/2013/A-CENTRALES/GMS PDM 2013-FUTUR MASTER.xls
+operations_commerciales/GMS/2013/A-CENTRALES/GMS SYSTEME U 2013-FUTUR MASTER.xls
+operations_commerciales/GMS/2013/D-REGIONS/GMS LECLERC 2013-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS CASINO 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS INTERMARCHE 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/D-REGIONS/GMS LECLERC 2014-FUTUR MASTER.xls
+operations_commerciales/MDD/MODELES CJ/CARREFOUR/DDE ECHANTILLONS/demande \#351chantillons GUTENBERG.XLS
+operations_commerciales/MDD/MODELES CJ/PROVERA/CONF OPES CORA MATCH/Chrono 552 Match.XLS
+operations_commerciales/MDD/MODELES CJ/PROVERA/CONF OPES CORA MATCH/2013/CORA BE/CONFIRMATION OPERATION_CORA_BE_FOLDER RELANCE FETE.xls
+operations_commerciales/MDD/MODELES CJ/PROVERA/CONF OPES CORA MATCH/2013/CORA BE/CONFIRMATION OPERATION_CORA_BE_FOLDER190313.xls
+operations_commerciales/MDD/MODELES CJ/PROVERA/CONF OPES CORA MATCH/2013/CORA/CONFIRMATION OPERATION_CORA_2014-12075-MOINS CHER PAR 2 JANVIER .xls
+operations_commerciales/MDD/MODELES CJ/PROVERA/CONF OPES CORA MATCH/2013/MATCH/CONFIRMATION OPERATION_MATCH_2014-2996 SUPERMAG FEVRIER.xls
+operations_commerciales/MDD/OP MDD 2013/MDD CORA 2013 FUTUR MASTER.xls
+operations_commerciales/MDD/OP MDD 2013/MDD CORA BE 2013  FUTUR MASTER.xls
+operations_commerciales/MDD/OP MDD 2014/MDD MATCH 2014 FUTUR MASTER.xls
+
+sent 391259 bytes  received 44074 bytes  79151.45 bytes/sec
+total size is 54266323  speedup is 124.65
+sending incremental file list
+deleting mercuriales/sync.ffs_lock
+mercuriales/sync.ffs_db
+mercuriales/FZC/FZC 2014/SAROS 2014.xls
+mercuriales/HD/2013/2013 MERCURIALE DIA.xls
+mercuriales/gms/2013/REGION 2013/GALEC REGION MERCU OCT 2013.xls
+mercuriales/gms/2014/CENTRALES 2014/AUCHAN 2014.xls
+mercuriales/mdd/2013/2013 MERCURIALE CARREFOUR ASIATIQUE.xls
+mercuriales/mdd/2013/2013 MERCURIALE GROUPE AUCHAN.xls
+mercuriales/mdd/2014/2014 MERCURIALE INTERMARCHE.xls
+
+sent 73220 bytes  received 14832 bytes  35220.80 bytes/sec
+total size is 42332300  speedup is 480.76
+sending incremental file list
+
+sent 6802 bytes  received 13 bytes  2726.00 bytes/sec
+total size is 30341120  speedup is 4452.11
+sending incremental file list
+
+sent 5598 bytes  received 45 bytes  3762.00 bytes/sec
+total size is 9985067  speedup is 1769.46
+sending incremental file list
+
+sent 5677 bytes  received 23 bytes  2280.00 bytes/sec
+total size is 128675317  speedup is 22574.62
+sending incremental file list
+
+sent 4707 bytes  received 36 bytes  3162.00 bytes/sec
+total size is 46318934  speedup is 9765.75
+sending incremental file list
+
+sent 46162 bytes  received 86 bytes  10277.33 bytes/sec
+total size is 275068499  speedup is 5947.68
+sending incremental file list

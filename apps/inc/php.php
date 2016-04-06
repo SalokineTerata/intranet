@@ -74,6 +74,8 @@ require_once('../lib/class/database/DatabaseRecord.php');
 //Règles de validation
 require_once('../lib/class/rules_validation/AbstractRulesValidation.php');
 require_once('../lib/class/rules_validation/DataNotEmptyRulesValidation.php');
+require_once('../lib/class/rules_validation/DataNotSmallRulesValidation.php');
+require_once('../lib/class/rules_validation/DataNotSpecialRulesValidation.php');
 require_once('../lib/class/rules_validation/Less35CaractereRulesValidation.php');
 require_once('../lib/class/rules_validation/Less5CaractereRulesValidation.php');
 require_once('../lib/class/rules_validation/Less8CaractereRulesValidation.php');
@@ -118,6 +120,8 @@ require_once('../lib/class/model/ClassificationRaccourcisModel.php');
 require_once('../lib/class/model/CodesoftEtiquettesLogoModel.php');
 require_once('../lib/class/model/CodesoftEtiquettesModel.php');
 require_once('../lib/class/model/CodesoftStyleParagrapheModel.php');
+require_once('../lib/class/model/DataSyncServeurModel.php');
+require_once('../lib/class/model/DataSyncTransfertModel.php');
 require_once('../lib/class/model/DroitftModel.php');
 require_once('../lib/class/model/UserModel.php');
 require_once('../lib/class/model/Fta2ArcadiaTransactionModel.php');
@@ -152,6 +156,7 @@ require_once('../lib/class/model/ModesModel.php');
 require_once('../lib/class/model/PersoModel.php');
 require_once('../lib/class/model/PlanningPresenceDetailModel.php');
 require_once('../lib/class/model/ServicesModel.php');
+require_once('../lib/class/model/StaticStandardModel.php');
 require_once('../lib/class/model/TypeModel.php');
 
 // Standard HTML
@@ -258,9 +263,11 @@ require_once('../lib/class/html/DataFieldToHtmlInputNumber.php');
 require_once('../lib/class/html/DataFieldToHtmlTextArea.php');
 require_once('../lib/class/html/DataFieldToHtmlSubForm_R1N.php');
 require_once('../lib/class/html/DataFieldToHtmlSubForm_RNN.php');
+require_once('../lib/class/ModuleConfigLib.php');
 
 // Session utilisateur
 require_once('../lib/session.php');
+
 
 // Variables locales à la page PHP
 Lib::setModule();

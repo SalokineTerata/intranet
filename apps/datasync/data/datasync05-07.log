@@ -1,0 +1,186 @@
+Démarrage : mer mai  7 23:00:02 CEST 2014
+Arrêt     : mer mai  7 23:00:57 CEST 2014
+
+
+
+Base MySQL sélectionnée: agis
+Nombre de serveur(s) Linux concerné(s): 4
+Nombre de dossier(s) à mettre à jour: 29
+
+sending incremental file list
+
+sent 7051 bytes  received 49 bytes  4733.33 bytes/sec
+total size is 12693370  speedup is 1787.80
+sending incremental file list
+suivi_investissement/2014-2015/Suivi investissements AVI 2014 2015.xls
+
+sent 6554 bytes  received 2577 bytes  6087.33 bytes/sec
+total size is 12421591  speedup is 1360.38
+sending incremental file list
+
+sent 63 bytes  received 12 bytes  150.00 bytes/sec
+total size is 88092672  speedup is 1174568.96
+sending incremental file list
+
+sent 7538 bytes  received 45 bytes  15166.00 bytes/sec
+total size is 9253358  speedup is 1220.28
+sending incremental file list
+
+sent 7695 bytes  received 20 bytes  5143.33 bytes/sec
+total size is 16751789  speedup is 2171.33
+sending incremental file list
+
+sent 4308 bytes  received 24 bytes  2888.00 bytes/sec
+total size is 6387982  speedup is 1474.60
+sending incremental file list
+mercuriales/gms/2014/CENTRALES 2014/CASINO 2014.xls
+mercuriales/gms/2014/CENTRALES 2014/INTERMARCHE 2014.xls
+mercuriales/gms/2014/CONTROLE TARIFS 2014/05-MAI/INTERMARCHE NOUVEAUX PRIX CREVETTES.pdf
+mercuriales/gms/2014/CONTROLE TARIFS 2014/06-JUIN/2014 AFFILIES PLATEAUX.pdf
+mercuriales/gms/2014/CONTROLE TARIFS 2014/06-JUIN/2014 CARREFOUR MARKET PLATEAUX.pdf
+mercuriales/gms/2014/CONTROLE TARIFS 2014/06-JUIN/2014 CARREFOUR PLATEAUX.pdf
+mercuriales/gms/2014/CONTROLE TARIFS 2014/06-JUIN/2014 INTERMARCHE PLATEAUX.pdf
+mercuriales/gms/2014/CONTROLE TARIFS 2014/06-JUIN/2014 SIMPLY MARKET PLATEAUX.pdf
+mercuriales/gms/2014/CONTROLE TARIFS 2014/06-JUIN/2014 SYSTEME U PLATEAUX.pdf
+mercuriales/mdd/2014/2014 MERCURIALE CARREFOUR ASIATIQUE.xls
+mercuriales/mdd/2014/INTERMARCHE CHIFFRAGE INCO.xls
+
+sent 213787 bytes  received 11760 bytes  50121.56 bytes/sec
+total size is 31674916  speedup is 140.44
+sending incremental file list
+
+sent 5047 bytes  received 27 bytes  3382.67 bytes/sec
+total size is 39173092  speedup is 7720.36
+sending incremental file list
+operations_commerciales/FZC/OP FZC 2014/FZC TOUPARGEL 2014.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS CASINO 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/CASINO SM/2014 SM GROS VOLUMES S20 COUSCOUS SEMOULE.xls
+
+sent 48625 bytes  received 5773 bytes  15542.29 bytes/sec
+total size is 50231195  speedup is 923.40
+sending incremental file list
+deleting rh_multi_sites/PV CCE-n\#351gos/PV n\#351gos 11.12.13.pdf
+deleting rh_multi_sites/PV CCE-n\#351gos/PV d\#351saccord NAO 2014 - sign\#351.pdf
+deleting rh_multi_sites/PV CCE-n\#351gos/PV CCE 87 sign\#351.pdf
+deleting rh_multi_sites/PV CCE-n\#351gos/PV CCE 86 - sign\#351.pdf
+deleting rh_multi_sites/PV CCE-n\#351gos/PV 6\#350me r\#351union n\#351gos accords - 12.02.14 - sign\#351e.pdf
+deleting rh_multi_sites/PV CCE-n\#351gos/NAO - PV d\#351saccord - 2013.pdf
+rh_multi_sites/PV CCE-n\#351gos/CCE/
+rh_multi_sites/PV CCE-n\#351gos/CCE/PV CCE 86 - sign\#351.pdf
+rh_multi_sites/PV CCE-n\#351gos/CCE/PV CCE 87 sign\#351.pdf
+rh_multi_sites/PV CCE-n\#351gos/NAO/
+rh_multi_sites/PV CCE-n\#351gos/NAO/NAO - PV d\#351saccord - 2013.pdf
+rh_multi_sites/PV CCE-n\#351gos/NAO/PV d\#351saccord NAO 2014 - sign\#351.pdf
+rh_multi_sites/PV CCE-n\#351gos/N\#351gos/
+rh_multi_sites/PV CCE-n\#351gos/N\#351gos/PV 6\#350me r\#351union n\#351gos accords - 12.02.14 - sign\#351e.pdf
+rh_multi_sites/PV CCE-n\#351gos/N\#351gos/PV 7\#350me r\#351union n\#351gos accords - 26.03.14 - sign\#351e.pdf
+rh_multi_sites/PV CCE-n\#351gos/N\#351gos/PV n\#351gos 11.12.13.pdf
+
+sent 692148 bytes  received 227 bytes  106519.23 bytes/sec
+total size is 99065320  speedup is 143.08
+sending incremental file list
+
+sent 4380 bytes  received 82 bytes  2974.67 bytes/sec
+total size is 35609223  speedup is 7980.55
+sending incremental file list
+
+sent 9573 bytes  received 13 bytes  6390.67 bytes/sec
+total size is 45578752  speedup is 4754.72
+sending incremental file list
+
+sent 5781 bytes  received 30 bytes  3874.00 bytes/sec
+total size is 93132165  speedup is 16026.87
+sending incremental file list
+
+sent 63 bytes  received 12 bytes  150.00 bytes/sec
+total size is 88092672  speedup is 1174568.96
+sending incremental file list
+
+sent 7538 bytes  received 45 bytes  15166.00 bytes/sec
+total size is 9253358  speedup is 1220.28
+sending incremental file list
+
+sent 4308 bytes  received 24 bytes  8664.00 bytes/sec
+total size is 6387982  speedup is 1474.60
+sending incremental file list
+
+sent 7695 bytes  received 20 bytes  5143.33 bytes/sec
+total size is 16751789  speedup is 2171.33
+sending incremental file list
+
+sent 85 bytes  received 13 bytes  65.33 bytes/sec
+total size is 104853504  speedup is 1069933.71
+sending incremental file list
+operations_commerciales/FZC/OP FZC 2014/FZC TOUPARGEL 2014.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS CASINO 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/CASINO SM/2014 SM GROS VOLUMES S20 COUSCOUS SEMOULE.xls
+
+sent 48625 bytes  received 5773 bytes  36265.33 bytes/sec
+total size is 50231195  speedup is 923.40
+sending incremental file list
+mercuriales/gms/2014/CENTRALES 2014/CASINO 2014.xls
+mercuriales/gms/2014/CENTRALES 2014/INTERMARCHE 2014.xls
+mercuriales/gms/2014/CONTROLE TARIFS 2014/05-MAI/INTERMARCHE NOUVEAUX PRIX CREVETTES.pdf
+mercuriales/gms/2014/CONTROLE TARIFS 2014/06-JUIN/2014 AFFILIES PLATEAUX.pdf
+mercuriales/gms/2014/CONTROLE TARIFS 2014/06-JUIN/2014 CARREFOUR MARKET PLATEAUX.pdf
+mercuriales/gms/2014/CONTROLE TARIFS 2014/06-JUIN/2014 CARREFOUR PLATEAUX.pdf
+mercuriales/gms/2014/CONTROLE TARIFS 2014/06-JUIN/2014 INTERMARCHE PLATEAUX.pdf
+mercuriales/gms/2014/CONTROLE TARIFS 2014/06-JUIN/2014 SIMPLY MARKET PLATEAUX.pdf
+mercuriales/gms/2014/CONTROLE TARIFS 2014/06-JUIN/2014 SYSTEME U PLATEAUX.pdf
+mercuriales/mdd/2014/2014 MERCURIALE CARREFOUR ASIATIQUE.xls
+mercuriales/mdd/2014/INTERMARCHE CHIFFRAGE INCO.xls
+
+sent 213787 bytes  received 11760 bytes  64442.00 bytes/sec
+total size is 31674916  speedup is 140.44
+sending incremental file list
+
+sent 9573 bytes  received 13 bytes  6390.67 bytes/sec
+total size is 45578752  speedup is 4754.72
+sending incremental file list
+
+sent 7051 bytes  received 49 bytes  14200.00 bytes/sec
+total size is 12693370  speedup is 1787.80
+sending incremental file list
+
+sent 5732 bytes  received 23 bytes  3836.67 bytes/sec
+total size is 129183193  speedup is 22447.12
+sending incremental file list
+
+sent 5610 bytes  received 39 bytes  1614.00 bytes/sec
+total size is 59049369  speedup is 10453.07
+sending incremental file list
+
+sent 50984 bytes  received 95 bytes  20431.60 bytes/sec
+total size is 293510227  speedup is 5746.20
+sending incremental file list
+deleting rh_multi_sites/PV CCE-n\#351gos/PV n\#351gos 11.12.13.pdf
+deleting rh_multi_sites/PV CCE-n\#351gos/PV d\#351saccord NAO 2014 - sign\#351.pdf
+deleting rh_multi_sites/PV CCE-n\#351gos/PV CCE 87 sign\#351.pdf
+deleting rh_multi_sites/PV CCE-n\#351gos/PV CCE 86 - sign\#351.pdf
+deleting rh_multi_sites/PV CCE-n\#351gos/PV 6\#350me r\#351union n\#351gos accords - 12.02.14 - sign\#351e.pdf
+deleting rh_multi_sites/PV CCE-n\#351gos/NAO - PV d\#351saccord - 2013.pdf
+rh_multi_sites/PV CCE-n\#351gos/CCE/
+rh_multi_sites/PV CCE-n\#351gos/CCE/PV CCE 86 - sign\#351.pdf
+rh_multi_sites/PV CCE-n\#351gos/CCE/PV CCE 87 sign\#351.pdf
+rh_multi_sites/PV CCE-n\#351gos/NAO/
+rh_multi_sites/PV CCE-n\#351gos/NAO/NAO - PV d\#351saccord - 2013.pdf
+rh_multi_sites/PV CCE-n\#351gos/NAO/PV d\#351saccord NAO 2014 - sign\#351.pdf
+rh_multi_sites/PV CCE-n\#351gos/N\#351gos/
+rh_multi_sites/PV CCE-n\#351gos/N\#351gos/PV 6\#350me r\#351union n\#351gos accords - 12.02.14 - sign\#351e.pdf
+rh_multi_sites/PV CCE-n\#351gos/N\#351gos/PV 7\#350me r\#351union n\#351gos accords - 26.03.14 - sign\#351e.pdf
+rh_multi_sites/PV CCE-n\#351gos/N\#351gos/PV n\#351gos 11.12.13.pdf
+
+sent 692148 bytes  received 227 bytes  125886.36 bytes/sec
+total size is 99065320  speedup is 143.08
+sending incremental file list
+
+sent 4380 bytes  received 82 bytes  2974.67 bytes/sec
+total size is 35609223  speedup is 7980.55
+sending incremental file list
+
+sent 7695 bytes  received 20 bytes  2204.29 bytes/sec
+total size is 16751789  speedup is 2171.33
+sending incremental file list
+
+sent 7695 bytes  received 20 bytes  5143.33 bytes/sec
+total size is 16751789  speedup is 2171.33

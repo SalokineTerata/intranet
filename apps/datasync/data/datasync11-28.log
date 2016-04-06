@@ -1,0 +1,206 @@
+Démarrage : jeu nov 28 23:00:01 CET 2013
+Arrêt     : jeu nov 28 23:04:46 CET 2013
+
+
+
+Base MySQL sélectionnée: agis
+Nombre de serveur(s) Linux concerné(s): 4
+Nombre de dossier(s) à mettre à jour: 24
+
+sending incremental file list
+
+sent 5598 bytes  received 45 bytes  3762.00 bytes/sec
+total size is 9985067  speedup is 1769.46
+sending incremental file list
+
+sent 5788 bytes  received 34 bytes  2328.80 bytes/sec
+total size is 11670607  speedup is 2004.57
+sending incremental file list
+
+sent 63 bytes  received 12 bytes  50.00 bytes/sec
+total size is 81426432  speedup is 1085685.76
+sending incremental file list
+
+sent 7538 bytes  received 45 bytes  5055.33 bytes/sec
+total size is 9253358  speedup is 1220.28
+sending incremental file list
+
+sent 7683 bytes  received 20 bytes  5135.33 bytes/sec
+total size is 16751831  speedup is 2174.72
+sending incremental file list
+
+sent 4308 bytes  received 24 bytes  2888.00 bytes/sec
+total size is 6387982  speedup is 1474.60
+sending incremental file list
+mercuriales/sync.ffs_db
+mercuriales/HD/2014/2014 MERCURIALE DIA.xls
+mercuriales/gms/2013/CENTRALES 2013/INTERMARCHE 2013.xls
+mercuriales/gms/2014/REGIONS  2014/GALEC REGION MERCU JANVIER 2014.xls
+mercuriales/gms/2014/REGIONS  2014/SCHIEVER MERCU JANVIER 2014.xls
+mercuriales/gms/2014/REGIONS  2014/SEGUREL JANVIER 2014.xls
+mercuriales/gms/2014/REGIONS  2014/SU R\#351gion JANVIER 2014.xls
+mercuriales/mdd/2013/2013 MERCURIALE CARREFOUR PLATS CUISINES.xls
+mercuriales/mdd/2014/2014 MERCURIALE AUCHAN.xls
+mercuriales/mdd/2014/2014 MERCURIALE CARREFOUR ASIATIQUE.xls
+
+sent 107509 bytes  received 30135 bytes  39326.86 bytes/sec
+total size is 47476496  speedup is 344.92
+sending incremental file list
+
+sent 5047 bytes  received 27 bytes  3382.67 bytes/sec
+total size is 39173092  speedup is 7720.36
+sending incremental file list
+operations_commerciales/chrono demande echantillons.xls
+operations_commerciales/sync.ffs_db
+operations_commerciales/GMS/RECAP DEMANDE ET CONFIRMATIONS HEBDO.xls
+operations_commerciales/GMS/2013/B-CONFIRMATIONS OPERATIONS/CONFIRMATIONS CARREFOUR/2013 CARREFOUR OP FESTIFS.xls
+operations_commerciales/GMS/2013/C-CONTROLES PRIX/CARREFOUR/2013 CARREFOUR CHAPON FOIE GRAS 800G.pdf
+operations_commerciales/GMS/2013/D-REGIONS/GMS LECLERC 2013-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS CASINO 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/CASINO HM/2014 HM GROS VOLUMES CHANDELEUR NAA HYPER.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/SYSTEME U/2014 SYSTEME U TRAFIC NAA JANVIER.xls
+operations_commerciales/MDD/MODELES CJ/AUCHAN ATAC SCHIEVER/DDE ECHANTILLONS/DEMANDE ECHANTILLONS SIMPLY NAA 2014.xls
+operations_commerciales/MDD/MODELES CJ/CARREFOUR/DDE ECHANTILLONS/Fiche LIVRAISON ECHANTILLON vierge2-doc.zip
+
+sent 396447 bytes  received 17747 bytes  75308.00 bytes/sec
+total size is 57487036  speedup is 138.79
+sending incremental file list
+rh_multi_sites/1% logement - Vilogia/
+rh_multi_sites/1% logement - Vilogia/Vilogia partout en France.pdf
+rh_multi_sites/1% logement - Vilogia/bulletin de versement vilogia.pdf
+rh_multi_sites/1% logement - Vilogia/power point 2013 MFM rhone med1.pptx
+rh_multi_sites/1% logement - Vilogia/residence adoma exemple.pdf
+rh_multi_sites/1% logement - Vilogia/tableau produits et services PEEC \#340 novembre 2013.xls
+rh_multi_sites/1% logement - Vilogia/vilogia contact immo.pdf
+rh_multi_sites/1% logement - Vilogia/Demande de logement locatif/
+rh_multi_sites/1% logement - Vilogia/Demande de logement locatif/ENVOI DOSS DEM LOC CERFA-1.doc
+rh_multi_sites/1% logement - Vilogia/Demande de logement locatif/attestation employeur.pdf
+rh_multi_sites/1% logement - Vilogia/Demande de logement locatif/cerfa_14069[1].pdf
+rh_multi_sites/1% logement - Vilogia/Demande de logement locatif/notice_explicative_ddl_unique.pdf
+rh_multi_sites/1% logement - Vilogia/Dossiers pr\#352ts et aides/
+rh_multi_sites/1% logement - Vilogia/Dossiers pr\#352ts et aides/DEMANDE PRET ACHAT ANCIEN.pdf
+rh_multi_sites/1% logement - Vilogia/Dossiers pr\#352ts et aides/DEMANDE PRET ACHAT NEUF.pdf
+rh_multi_sites/1% logement - Vilogia/Dossiers pr\#352ts et aides/DEMANDE PRET TRAVAUX.pdf
+rh_multi_sites/1% logement - Vilogia/Dossiers pr\#352ts et aides/DOSSIER LOCA PASS.pdf
+rh_multi_sites/1% logement - Vilogia/Dossiers pr\#352ts et aides/DOSSIER MOBILI PASS.pdf
+rh_multi_sites/1% logement - Vilogia/Dossiers pr\#352ts et aides/MOBILIJEUNE.pdf
+rh_multi_sites/1% logement - Vilogia/Dossiers pr\#352ts et aides/attestation employeur demande de pr\#352t.pdf
+rh_multi_sites/1% logement - Vilogia/PATRIMOINE VILOGIA/
+rh_multi_sites/1% logement - Vilogia/PATRIMOINE VILOGIA/PATRIMOINE VILOGIA RHONE MEDITERRANEE.pdf
+rh_multi_sites/1% logement - Vilogia/PATRIMOINE VILOGIA/Thumbs.db
+rh_multi_sites/1% logement - Vilogia/PATRIMOINE VILOGIA/PATRIMOINE VILOGIA/
+rh_multi_sites/1% logement - Vilogia/PATRIMOINE VILOGIA/PATRIMOINE VILOGIA/VILOGIA GRAND EST.pdf
+rh_multi_sites/1% logement - Vilogia/PATRIMOINE VILOGIA/PATRIMOINE VILOGIA/VILOGIA GRAND NORD.pdf
+rh_multi_sites/1% logement - Vilogia/PATRIMOINE VILOGIA/PATRIMOINE VILOGIA/VILOGIA GRAND OUEST.pdf
+rh_multi_sites/1% logement - Vilogia/PATRIMOINE VILOGIA/PATRIMOINE VILOGIA/VILOGIA ILE DE FRANCE.pdf
+rh_multi_sites/1% logement - Vilogia/PATRIMOINE VILOGIA/PATRIMOINE VILOGIA/developpement PACA.pdf
+rh_multi_sites/1% logement - Vilogia/PLAQUETTES COMMUNICATION ENTREPRISES/
+rh_multi_sites/1% logement - Vilogia/PLAQUETTES COMMUNICATION ENTREPRISES/01-vilogia entreprise vous propose.pdf
+rh_multi_sites/1% logement - Vilogia/PLAQUETTES COMMUNICATION ENTREPRISES/02-partenaire de votre cadre de vie.pdf
+rh_multi_sites/1% logement - Vilogia/PLAQUETTES COMMUNICATION ENTREPRISES/03-toutes nos agences en france 1.pdf
+rh_multi_sites/1% logement - Vilogia/PLAQUETTES COMMUNICATION ENTREPRISES/04-les services location.pdf
+rh_multi_sites/1% logement - Vilogia/PLAQUETTES COMMUNICATION ENTREPRISES/05-avance loca pass.pdf
+rh_multi_sites/1% logement - Vilogia/PLAQUETTES COMMUNICATION ENTREPRISES/06-cil pass mobilite.pdf
+rh_multi_sites/1% logement - Vilogia/PLAQUETTES COMMUNICATION ENTREPRISES/07-mobili pass.pdf
+rh_multi_sites/1% logement - Vilogia/PLAQUETTES COMMUNICATION ENTREPRISES/08-mobili jeune.pdf
+rh_multi_sites/1% logement - Vilogia/PLAQUETTES COMMUNICATION ENTREPRISES/09-le conseil en financement.pdf
+rh_multi_sites/1% logement - Vilogia/PLAQUETTES COMMUNICATION ENTREPRISES/10-les prets accession.pdf
+rh_multi_sites/1% logement - Vilogia/PLAQUETTES COMMUNICATION ENTREPRISES/11-pret travaux.pdf
+rh_multi_sites/1% logement - Vilogia/PLAQUETTES COMMUNICATION ENTREPRISES/12-pass assistance.pdf
+rh_multi_sites/1% logement - Vilogia/PLAQUETTES COMMUNICATION ENTREPRISES/13- IZI Travaux.pdf
+rh_multi_sites/1% logement - Vilogia/PLAQUETTES COMMUNICATION ENTREPRISES/14-nexx.pdf
+rh_multi_sites/1% logement - Vilogia/PLAQUETTES COMMUNICATION ENTREPRISES/15-a-regroupements de cr\#351dits.pdf
+rh_multi_sites/1% logement - Vilogia/PLAQUETTES COMMUNICATION ENTREPRISES/15-b-regroupement de cr\#351dits affiche.pdf
+rh_multi_sites/1% logement - Vilogia/PLAQUETTES COMMUNICATION ENTREPRISES/Thumbs.db
+rh_multi_sites/1% logement - Vilogia/liste du personnel/
+rh_multi_sites/1% logement - Vilogia/liste du personnel/LISTE PERSONNEL.doc
+rh_multi_sites/1% logement - Vilogia/liste du personnel/Thumbs.db
+rh_multi_sites/1% logement - Vilogia/liste du personnel/liste personnel photo version \#340 imprimer.pdf
+rh_multi_sites/1% logement - Vilogia/news letters 2013/
+rh_multi_sites/1% logement - Vilogia/news letters 2013/04 AVRIL 2013 Le service Mobilit\#351 de Vilogia Entreprises.mht
+rh_multi_sites/1% logement - Vilogia/news letters 2013/MARS 2013 -  - L'INVESTISSEMENT LOCATIF 'DUFLOT' avec Vilogia (2).mht
+rh_multi_sites/1% logement - Vilogia/news letters 2013/Thumbs.db
+rh_multi_sites/1% logement - Vilogia/news letters 2013/fevrier 2013.pdf
+rh_multi_sites/1% logement - Vilogia/news letters 2013/janvier 2013.pdf
+rh_multi_sites/1% logement - Vilogia/news letters 2013/juillet 2013.pdf
+rh_multi_sites/1% logement - Vilogia/news letters 2013/mai 2013.pdf
+rh_multi_sites/1% logement - Vilogia/news letters 2013/octobre 2013.pdf
+
+sent 47974897 bytes  received 1100 bytes  197026.68 bytes/sec
+total size is 98751548  speedup is 2.06
+sending incremental file list
+
+sent 7156 bytes  received 13 bytes  2867.60 bytes/sec
+total size is 31676928  speedup is 4418.60
+sending incremental file list
+
+sent 63 bytes  received 12 bytes  50.00 bytes/sec
+total size is 81426432  speedup is 1085685.76
+sending incremental file list
+
+sent 7538 bytes  received 45 bytes  5055.33 bytes/sec
+total size is 9253358  speedup is 1220.28
+sending incremental file list
+
+sent 4308 bytes  received 24 bytes  2888.00 bytes/sec
+total size is 6387982  speedup is 1474.60
+sending incremental file list
+
+sent 7683 bytes  received 20 bytes  5135.33 bytes/sec
+total size is 16751831  speedup is 2174.72
+sending incremental file list
+
+sent 85 bytes  received 13 bytes  65.33 bytes/sec
+total size is 104853504  speedup is 1069933.71
+sending incremental file list
+operations_commerciales/chrono demande echantillons.xls
+operations_commerciales/sync.ffs_db
+operations_commerciales/GMS/RECAP DEMANDE ET CONFIRMATIONS HEBDO.xls
+operations_commerciales/GMS/2013/B-CONFIRMATIONS OPERATIONS/CONFIRMATIONS CARREFOUR/2013 CARREFOUR OP FESTIFS.xls
+operations_commerciales/GMS/2013/C-CONTROLES PRIX/CARREFOUR/2013 CARREFOUR CHAPON FOIE GRAS 800G.pdf
+operations_commerciales/GMS/2013/D-REGIONS/GMS LECLERC 2013-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS CASINO 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/CASINO HM/2014 HM GROS VOLUMES CHANDELEUR NAA HYPER.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/SYSTEME U/2014 SYSTEME U TRAFIC NAA JANVIER.xls
+operations_commerciales/MDD/MODELES CJ/AUCHAN ATAC SCHIEVER/DDE ECHANTILLONS/DEMANDE ECHANTILLONS SIMPLY NAA 2014.xls
+operations_commerciales/MDD/MODELES CJ/CARREFOUR/DDE ECHANTILLONS/Fiche LIVRAISON ECHANTILLON vierge2-doc.zip
+
+sent 396447 bytes  received 17747 bytes  118341.14 bytes/sec
+total size is 57487036  speedup is 138.79
+sending incremental file list
+mercuriales/sync.ffs_db
+mercuriales/HD/2014/2014 MERCURIALE DIA.xls
+mercuriales/gms/2013/CENTRALES 2013/INTERMARCHE 2013.xls
+mercuriales/gms/2014/REGIONS  2014/GALEC REGION MERCU JANVIER 2014.xls
+mercuriales/gms/2014/REGIONS  2014/SCHIEVER MERCU JANVIER 2014.xls
+mercuriales/gms/2014/REGIONS  2014/SEGUREL JANVIER 2014.xls
+mercuriales/gms/2014/REGIONS  2014/SU R\#351gion JANVIER 2014.xls
+mercuriales/mdd/2013/2013 MERCURIALE CARREFOUR PLATS CUISINES.xls
+mercuriales/mdd/2014/2014 MERCURIALE AUCHAN.xls
+mercuriales/mdd/2014/2014 MERCURIALE CARREFOUR ASIATIQUE.xls
+
+sent 107509 bytes  received 30135 bytes  55057.60 bytes/sec
+total size is 47476496  speedup is 344.92
+sending incremental file list
+
+sent 7156 bytes  received 13 bytes  4779.33 bytes/sec
+total size is 31676928  speedup is 4418.60
+sending incremental file list
+
+sent 5598 bytes  received 45 bytes  3762.00 bytes/sec
+total size is 9985067  speedup is 1769.46
+sending incremental file list
+
+sent 5677 bytes  received 23 bytes  3800.00 bytes/sec
+total size is 128675317  speedup is 22574.62
+sending incremental file list
+
+sent 5161 bytes  received 37 bytes  3465.33 bytes/sec
+total size is 52194646  speedup is 10041.29
+sending incremental file list
+codesoft/Codesoft 7/Codes Produits/ass_14_bouchees_paques.bak
+codesoft/Codesoft 7/Codes Produits/ass_14_bouchees_paques.lab
+
+sent 88153 bytes  received 131 bytes  25224.00 bytes/sec
+total size is 279072339  speedup is 3161.07
+sending incremental file list

@@ -1,0 +1,147 @@
+Démarrage : mar avr 22 23:00:01 CEST 2014
+Arrêt     : mar avr 22 23:02:15 CEST 2014
+
+
+
+Base MySQL sélectionnée: agis
+Nombre de serveur(s) Linux concerné(s): 4
+Nombre de dossier(s) à mettre à jour: 27
+
+sending incremental file list
+
+sent 7051 bytes  received 49 bytes  2840.00 bytes/sec
+total size is 12693370  speedup is 1787.80
+sending incremental file list
+
+sent 6274 bytes  received 38 bytes  4208.00 bytes/sec
+total size is 12421591  speedup is 1967.93
+sending incremental file list
+erp_data.mdb
+
+sent 8309727 bytes  received 64291 bytes  180086.41 bytes/sec
+total size is 84160512  speedup is 10.05
+sending incremental file list
+
+sent 7538 bytes  received 45 bytes  5055.33 bytes/sec
+total size is 9253358  speedup is 1220.28
+sending incremental file list
+
+sent 7695 bytes  received 20 bytes  5143.33 bytes/sec
+total size is 16751789  speedup is 2171.33
+sending incremental file list
+
+sent 4308 bytes  received 24 bytes  2888.00 bytes/sec
+total size is 6387982  speedup is 1474.60
+sending incremental file list
+mercuriales/gms/2014/CENTRALES 2014/CARREFOUR 2014.xls
+mercuriales/mdd/2014/2014 MERCURIALE AUCHAN.xls
+mercuriales/mdd/2014/2014 MERCURIALE CASINO.xls
+mercuriales/mdd/2014/2014 MERCURIALE PROVERA.xls
+
+sent 72709 bytes  received 7858 bytes  23019.14 bytes/sec
+total size is 30236858  speedup is 375.30
+sending incremental file list
+
+sent 5047 bytes  received 27 bytes  3382.67 bytes/sec
+total size is 39173092  speedup is 7720.36
+sending incremental file list
+deleting operations_commerciales/GMS/RECAP DEMANDE ET CONFIRMATIONS HEBDO.xls
+operations_commerciales/GMS/RECAP DEMANDE ET CONFIRMATIONS HEBDO 2014.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS CARREFOUR 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS PLACE DU MARCHE 2014-FUTUR MASTER.xls
+operations_commerciales/MDD/MODELES CJ/AUCHAN ATAC SCHIEVER/CONF OP/2014/CONFIRMATION OPERATION SCHIEVER MAI 3 AUCHAN PRODUITS FRAIS.xls
+operations_commerciales/MDD/OP MDD 2014/MDD GROUPE AUCHAN 2014.xls
+
+sent 84750 bytes  received 9809 bytes  21013.11 bytes/sec
+total size is 49736603  speedup is 525.98
+sending incremental file list
+
+sent 20135 bytes  received 80 bytes  13476.67 bytes/sec
+total size is 98915848  speedup is 4893.19
+sending incremental file list
+
+sent 3601 bytes  received 79 bytes  2453.33 bytes/sec
+total size is 21225150  speedup is 5767.70
+sending incremental file list
+deleting modeles/compo_asia_claude_leger.bak
+modeles/compo_asia_claude_leger.old
+modeles/compo_pc_double_haut.bak
+modeles/compo_pc_double_haut.lab
+
+sent 74060 bytes  received 1348 bytes  21545.14 bytes/sec
+total size is 43986432  speedup is 583.31
+sending incremental file list
+
+sent 5781 bytes  received 30 bytes  3874.00 bytes/sec
+total size is 93132165  speedup is 16026.87
+sending incremental file list
+erp_data.mdb
+
+sent 8309727 bytes  received 64291 bytes  188180.18 bytes/sec
+total size is 84160512  speedup is 10.05
+sending incremental file list
+
+sent 7538 bytes  received 45 bytes  5055.33 bytes/sec
+total size is 9253358  speedup is 1220.28
+sending incremental file list
+
+sent 4308 bytes  received 24 bytes  2888.00 bytes/sec
+total size is 6387982  speedup is 1474.60
+sending incremental file list
+
+sent 7695 bytes  received 20 bytes  5143.33 bytes/sec
+total size is 16751789  speedup is 2171.33
+sending incremental file list
+
+sent 85 bytes  received 13 bytes  196.00 bytes/sec
+total size is 104853504  speedup is 1069933.71
+sending incremental file list
+deleting operations_commerciales/GMS/RECAP DEMANDE ET CONFIRMATIONS HEBDO.xls
+operations_commerciales/GMS/RECAP DEMANDE ET CONFIRMATIONS HEBDO 2014.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS CARREFOUR 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS PLACE DU MARCHE 2014-FUTUR MASTER.xls
+operations_commerciales/MDD/MODELES CJ/AUCHAN ATAC SCHIEVER/CONF OP/2014/CONFIRMATION OPERATION SCHIEVER MAI 3 AUCHAN PRODUITS FRAIS.xls
+operations_commerciales/MDD/OP MDD 2014/MDD GROUPE AUCHAN 2014.xls
+
+sent 84750 bytes  received 9809 bytes  63039.33 bytes/sec
+total size is 49736603  speedup is 525.98
+sending incremental file list
+mercuriales/gms/2014/CENTRALES 2014/CARREFOUR 2014.xls
+mercuriales/mdd/2014/2014 MERCURIALE AUCHAN.xls
+mercuriales/mdd/2014/2014 MERCURIALE CASINO.xls
+mercuriales/mdd/2014/2014 MERCURIALE PROVERA.xls
+
+sent 72709 bytes  received 7858 bytes  32226.80 bytes/sec
+total size is 30236858  speedup is 375.30
+sending incremental file list
+deleting modeles/compo_asia_claude_leger.bak
+modeles/compo_asia_claude_leger.old
+modeles/compo_pc_double_haut.bak
+modeles/compo_pc_double_haut.lab
+
+sent 74060 bytes  received 1348 bytes  30163.20 bytes/sec
+total size is 43986432  speedup is 583.31
+sending incremental file list
+
+sent 7051 bytes  received 49 bytes  4733.33 bytes/sec
+total size is 12693370  speedup is 1787.80
+sending incremental file list
+
+sent 5732 bytes  received 23 bytes  3836.67 bytes/sec
+total size is 129183193  speedup is 22447.12
+sending incremental file list
+
+sent 5610 bytes  received 39 bytes  3766.00 bytes/sec
+total size is 59049369  speedup is 10453.07
+sending incremental file list
+
+sent 51049 bytes  received 95 bytes  20457.60 bytes/sec
+total size is 293866579  speedup is 5745.87
+sending incremental file list
+
+sent 20135 bytes  received 80 bytes  5775.71 bytes/sec
+total size is 98915848  speedup is 4893.19
+sending incremental file list
+
+sent 3601 bytes  received 79 bytes  1472.00 bytes/sec
+total size is 21225150  speedup is 5767.70

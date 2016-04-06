@@ -1,0 +1,158 @@
+Démarrage : lun avr  7 23:00:01 CEST 2014
+Arrêt     : lun avr  7 23:03:59 CEST 2014
+
+
+
+Base MySQL sélectionnée: agis
+Nombre de serveur(s) Linux concerné(s): 4
+Nombre de dossier(s) à mettre à jour: 27
+
+sending incremental file list
+
+sent 7051 bytes  received 49 bytes  2840.00 bytes/sec
+total size is 12693370  speedup is 1787.80
+sending incremental file list
+
+sent 6266 bytes  received 38 bytes  2521.60 bytes/sec
+total size is 12421591  speedup is 1970.43
+sending incremental file list
+erp_data.mdb
+
+sent 8195806 bytes  received 64291 bytes  94401.11 bytes/sec
+total size is 84160512  speedup is 10.19
+sending incremental file list
+
+sent 7538 bytes  received 45 bytes  1685.11 bytes/sec
+total size is 9253358  speedup is 1220.28
+sending incremental file list
+
+sent 7695 bytes  received 20 bytes  2204.29 bytes/sec
+total size is 16751789  speedup is 2171.33
+sending incremental file list
+
+sent 4308 bytes  received 24 bytes  1732.80 bytes/sec
+total size is 6387982  speedup is 1474.60
+sending incremental file list
+mercuriales/sync.ffs_db
+mercuriales/HD/2014/2014 MERCURIALE LEADER PRICE.xls
+mercuriales/gms/2014/CENTRALES 2014/CARREFOUR 2014.xls
+mercuriales/gms/2014/REGIONS  2014/GALEC REGION MERCU AVRIL 2014.xls
+
+sent 94123 bytes  received 15874 bytes  12940.82 bytes/sec
+total size is 30091543  speedup is 273.57
+sending incremental file list
+
+sent 5047 bytes  received 27 bytes  3382.67 bytes/sec
+total size is 39173092  speedup is 7720.36
+sending incremental file list
+operations_commerciales/chrono demande echantillons.xls
+operations_commerciales/sync.ffs_db
+operations_commerciales/FZC/OP FZC 2014/FZC ARGEL 2014.xls
+operations_commerciales/FZC/OP FZC 2014/FZC THIRIET 2014.xls
+operations_commerciales/FZC/OP FZC 2014/FZC TOUPARGEL 2014.xls
+operations_commerciales/GMS/2014/D-REGIONS/GMS LECLERC 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/D-REGIONS/GMS SCHIEVER 2014-FUTUR MASTER.xls
+operations_commerciales/MDD/OP MDD 2014/HD LEADER PRICE 2014 .xls
+
+sent 252756 bytes  received 12542 bytes  21223.84 bytes/sec
+total size is 49318302  speedup is 185.90
+sending incremental file list
+
+sent 20051 bytes  received 78 bytes  2368.12 bytes/sec
+total size is 98915848  speedup is 4914.10
+sending incremental file list
+gofast/CHANTIERS/4_COTATION_Benjamin/2014_04_04_CR R\#351union N\#2601 du 13.03.2014.doc
+
+sent 67414 bytes  received 98 bytes  12274.91 bytes/sec
+total size is 21222590  speedup is 314.35
+sending incremental file list
+modeles/compo_pc_double_simply.lab
+modeles/compo_pc_double_simply_180.lab
+
+sent 32351 bytes  received 2109 bytes  6265.45 bytes/sec
+total size is 43824640  speedup is 1271.75
+sending incremental file list
+
+sent 5781 bytes  received 30 bytes  1291.33 bytes/sec
+total size is 93132165  speedup is 16026.87
+sending incremental file list
+erp_data.mdb
+
+sent 8195806 bytes  received 64291 bytes  181540.59 bytes/sec
+total size is 84160512  speedup is 10.19
+sending incremental file list
+
+sent 7538 bytes  received 45 bytes  15166.00 bytes/sec
+total size is 9253358  speedup is 1220.28
+sending incremental file list
+
+sent 4308 bytes  received 24 bytes  8664.00 bytes/sec
+total size is 6387982  speedup is 1474.60
+sending incremental file list
+
+sent 7695 bytes  received 20 bytes  5143.33 bytes/sec
+total size is 16751789  speedup is 2171.33
+sending incremental file list
+
+sent 85 bytes  received 13 bytes  65.33 bytes/sec
+total size is 104853504  speedup is 1069933.71
+sending incremental file list
+operations_commerciales/chrono demande echantillons.xls
+operations_commerciales/sync.ffs_db
+operations_commerciales/FZC/OP FZC 2014/FZC ARGEL 2014.xls
+operations_commerciales/FZC/OP FZC 2014/FZC THIRIET 2014.xls
+operations_commerciales/FZC/OP FZC 2014/FZC TOUPARGEL 2014.xls
+operations_commerciales/GMS/2014/D-REGIONS/GMS LECLERC 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/D-REGIONS/GMS SCHIEVER 2014-FUTUR MASTER.xls
+operations_commerciales/MDD/OP MDD 2014/HD LEADER PRICE 2014 .xls
+
+sent 252756 bytes  received 12542 bytes  106119.20 bytes/sec
+total size is 49318302  speedup is 185.90
+sending incremental file list
+mercuriales/sync.ffs_db
+mercuriales/HD/2014/2014 MERCURIALE LEADER PRICE.xls
+mercuriales/gms/2014/CENTRALES 2014/CARREFOUR 2014.xls
+mercuriales/gms/2014/REGIONS  2014/GALEC REGION MERCU AVRIL 2014.xls
+
+sent 94123 bytes  received 15874 bytes  43998.80 bytes/sec
+total size is 30091543  speedup is 273.57
+sending incremental file list
+modeles/compo_pc_double_simply.lab
+modeles/compo_pc_double_simply_180.lab
+
+sent 32351 bytes  received 2109 bytes  22973.33 bytes/sec
+total size is 43824640  speedup is 1271.75
+sending incremental file list
+
+sent 7051 bytes  received 49 bytes  2028.57 bytes/sec
+total size is 12693370  speedup is 1787.80
+sending incremental file list
+
+sent 5732 bytes  received 23 bytes  1644.29 bytes/sec
+total size is 129183193  speedup is 22447.12
+sending incremental file list
+
+sent 5610 bytes  received 39 bytes  1614.00 bytes/sec
+total size is 59049369  speedup is 10453.07
+sending incremental file list
+codesoft/Codesoft 7/Casino FE/1.05.2014/
+codesoft/Codesoft 7/Casino FE/1.05.2014/acras_recto.lab
+codesoft/Codesoft 7/Casino FE/1.05.2014/acras_verso.lab
+codesoft/Codesoft 7/Casino FE/1.05.2014/ass_asia_recto.lab
+codesoft/Codesoft 7/Casino FE/1.05.2014/ass_asia_verso.lab
+codesoft/Codesoft 7/Casino FE/1.05.2014/crev_pan\#351es_recto.lab
+codesoft/Codesoft 7/Casino FE/1.05.2014/crev_pan\#351es_verso.lab
+codesoft/Codesoft 7/Casino FE/1.05.2014/sam_boeuf_recto.lab
+codesoft/Codesoft 7/Casino FE/1.05.2014/sam_boeuf_verso.lab
+
+sent 103363 bytes  received 252 bytes  18839.09 bytes/sec
+total size is 291854931  speedup is 2816.72
+sending incremental file list
+
+sent 20051 bytes  received 78 bytes  5751.14 bytes/sec
+total size is 98915848  speedup is 4914.10
+sending incremental file list
+gofast/CHANTIERS/4_COTATION_Benjamin/2014_04_04_CR R\#351union N\#2601 du 13.03.2014.doc
+
+sent 67414 bytes  received 98 bytes  45008.00 bytes/sec
+total size is 21222590  speedup is 314.35

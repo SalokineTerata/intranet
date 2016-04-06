@@ -1,0 +1,149 @@
+Démarrage : ven jui 18 23:00:01 CEST 2014
+Arrêt     : ven jui 18 23:02:13 CEST 2014
+
+
+
+Base MySQL sélectionnée: agis
+Nombre de serveur(s) Linux concerné(s): 4
+Nombre de dossier(s) à mettre à jour: 29
+
+sending incremental file list
+
+sent 7280 bytes  received 49 bytes  4886.00 bytes/sec
+total size is 13584181  speedup is 1853.48
+sending incremental file list
+
+sent 6283 bytes  received 38 bytes  2528.40 bytes/sec
+total size is 12444119  speedup is 1968.69
+sending incremental file list
+erp_data.mdb
+
+sent 8457526 bytes  received 66685 bytes  191555.30 bytes/sec
+total size is 90648576  speedup is 10.63
+sending incremental file list
+
+sent 7593 bytes  received 45 bytes  5092.00 bytes/sec
+total size is 9254930  speedup is 1211.70
+sending incremental file list
+
+sent 7814 bytes  received 20 bytes  5222.67 bytes/sec
+total size is 16759466  speedup is 2139.32
+sending incremental file list
+
+sent 4308 bytes  received 24 bytes  2888.00 bytes/sec
+total size is 6387982  speedup is 1474.60
+sending incremental file list
+mercuriales/MERCURIALES - AGIS/gms/2014/CONTROLE TARIFS 2014/07-JUILLET/INTERMARCHE AU 21.07.2014.xls
+mercuriales/MERCURIALES - AGIS/gms/2014/CONTROLE TARIFS 2014/07-JUILLET/INTERMARCHE PRIX AU 21.07.14.pdf
+mercuriales/MERCURIALES - AGIS/gms/2014/REGIONS  2014/SU R\#351gion JUIN 2014.xls
+mercuriales/MERCURIALES - AGIS/mdd/2014/2014 MERCURIALE AUCHAN.xls
+mercuriales/MERCURIALES - AGIS/mdd/2014/2014 MERCURIALE CARREFOUR PLATS CUISINES.xls
+mercuriales/MERCURIALES - AGIS/mdd/2014/2014 MERCURIALE MONOPRIX .xls
+
+sent 272388 bytes  received 10426 bytes  80804.00 bytes/sec
+total size is 35682728  speedup is 126.17
+sending incremental file list
+
+sent 5047 bytes  received 27 bytes  3382.67 bytes/sec
+total size is 39173092  speedup is 7720.36
+sending incremental file list
+operations_commerciales/chrono demande echantillons.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/CARREFOUR/2014 CARREFOUR OP FESTIFS.xls
+operations_commerciales/GMS/2014/D-REGIONS/GMS AUCHAN REGIONS 2014-FUTUR MASTER.xls
+
+sent 328688 bytes  received 5612 bytes  95514.29 bytes/sec
+total size is 55413919  speedup is 165.76
+sending incremental file list
+
+sent 20406 bytes  received 83 bytes  13659.33 bytes/sec
+total size is 99360776  speedup is 4849.47
+sending incremental file list
+gofast/sync.ffs_db
+gofast/CHANTIERS/2_FTK_CLIENTS_Mathieu/5_STANDARDS/Besoins_clients_150714.xls
+
+sent 18587 bytes  received 454 bytes  12694.00 bytes/sec
+total size is 52062134  speedup is 2734.21
+sending incremental file list
+
+sent 8690 bytes  received 13 bytes  5802.00 bytes/sec
+total size is 42427392  speedup is 4875.03
+sending incremental file list
+
+sent 5781 bytes  received 30 bytes  3874.00 bytes/sec
+total size is 92829061  speedup is 15974.71
+sending incremental file list
+erp_data.mdb
+
+sent 8457526 bytes  received 66685 bytes  191555.30 bytes/sec
+total size is 90648576  speedup is 10.63
+sending incremental file list
+
+sent 7593 bytes  received 45 bytes  5092.00 bytes/sec
+total size is 9254930  speedup is 1211.70
+sending incremental file list
+
+sent 4308 bytes  received 24 bytes  2888.00 bytes/sec
+total size is 6387982  speedup is 1474.60
+sending incremental file list
+
+sent 7814 bytes  received 20 bytes  5222.67 bytes/sec
+total size is 16759466  speedup is 2139.32
+sending incremental file list
+
+sent 85 bytes  received 13 bytes  65.33 bytes/sec
+total size is 104853504  speedup is 1069933.71
+sending incremental file list
+operations_commerciales/chrono demande echantillons.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/CARREFOUR/2014 CARREFOUR OP FESTIFS.xls
+operations_commerciales/GMS/2014/D-REGIONS/GMS AUCHAN REGIONS 2014-FUTUR MASTER.xls
+
+sent 328688 bytes  received 5612 bytes  95514.29 bytes/sec
+total size is 55413919  speedup is 165.76
+sending incremental file list
+mercuriales/MERCURIALES - AGIS/gms/2014/CONTROLE TARIFS 2014/07-JUILLET/INTERMARCHE AU 21.07.2014.xls
+mercuriales/MERCURIALES - AGIS/gms/2014/CONTROLE TARIFS 2014/07-JUILLET/INTERMARCHE PRIX AU 21.07.14.pdf
+mercuriales/MERCURIALES - AGIS/gms/2014/REGIONS  2014/SU R\#351gion JUIN 2014.xls
+mercuriales/MERCURIALES - AGIS/mdd/2014/2014 MERCURIALE AUCHAN.xls
+mercuriales/MERCURIALES - AGIS/mdd/2014/2014 MERCURIALE CARREFOUR PLATS CUISINES.xls
+mercuriales/MERCURIALES - AGIS/mdd/2014/2014 MERCURIALE MONOPRIX .xls
+
+sent 272388 bytes  received 10426 bytes  80804.00 bytes/sec
+total size is 35682728  speedup is 126.17
+sending incremental file list
+
+sent 8690 bytes  received 13 bytes  5802.00 bytes/sec
+total size is 42427392  speedup is 4875.03
+sending incremental file list
+
+sent 7280 bytes  received 49 bytes  4886.00 bytes/sec
+total size is 13584181  speedup is 1853.48
+sending incremental file list
+
+sent 5745 bytes  received 23 bytes  3845.33 bytes/sec
+total size is 129159129  speedup is 22392.36
+sending incremental file list
+
+sent 5610 bytes  received 39 bytes  11298.00 bytes/sec
+total size is 59049369  speedup is 10453.07
+sending incremental file list
+
+sent 52221 bytes  received 96 bytes  34878.00 bytes/sec
+total size is 299490387  speedup is 5724.53
+sending incremental file list
+
+sent 20406 bytes  received 83 bytes  8195.60 bytes/sec
+total size is 99360776  speedup is 4849.47
+sending incremental file list
+gofast/sync.ffs_db
+gofast/CHANTIERS/2_FTK_CLIENTS_Mathieu/5_STANDARDS/Besoins_clients_150714.xls
+
+sent 18587 bytes  received 454 bytes  12694.00 bytes/sec
+total size is 52062134  speedup is 2734.21
+sending incremental file list
+
+sent 7814 bytes  received 20 bytes  5222.67 bytes/sec
+total size is 16759466  speedup is 2139.32
+sending incremental file list
+
+sent 7814 bytes  received 20 bytes  5222.67 bytes/sec
+total size is 16759466  speedup is 2139.32

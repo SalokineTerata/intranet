@@ -1,0 +1,607 @@
+Démarrage : lun avr 28 23:00:01 CEST 2014
+Arrêt     : lun avr 28 23:03:57 CEST 2014
+
+
+
+Base MySQL sélectionnée: agis
+Nombre de serveur(s) Linux concerné(s): 4
+Nombre de dossier(s) à mettre à jour: 29
+
+sending incremental file list
+
+sent 7051 bytes  received 49 bytes  4733.33 bytes/sec
+total size is 12693370  speedup is 1787.80
+sending incremental file list
+
+sent 6274 bytes  received 38 bytes  4208.00 bytes/sec
+total size is 12421591  speedup is 1967.93
+sending incremental file list
+erp_data.mdb
+
+sent 11053588 bytes  received 65747 bytes  186879.58 bytes/sec
+total size is 88092672  speedup is 7.92
+sending incremental file list
+
+sent 7538 bytes  received 45 bytes  5055.33 bytes/sec
+total size is 9253358  speedup is 1220.28
+sending incremental file list
+
+sent 7695 bytes  received 20 bytes  5143.33 bytes/sec
+total size is 16751789  speedup is 2171.33
+sending incremental file list
+
+sent 4308 bytes  received 24 bytes  8664.00 bytes/sec
+total size is 6387982  speedup is 1474.60
+sending incremental file list
+mercuriales/sync.ffs_db
+mercuriales/HD/2014/2014 MERCURIALE DIA.xls
+mercuriales/gms/2014/CENTRALES 2014/CASINO 2014.xls
+mercuriales/gms/2014/CONTROLE TARIFS 2014/06-JUIN/2014 SYSTEME U ROSBEEF NATIONAL.pdf
+mercuriales/mdd/2014/2014 MERCURIALE AUCHAN.xls
+mercuriales/mdd/2014/2014 MERCURIALE CARREFOUR PLATS CUISINES.xls
+
+sent 101888 bytes  received 10489 bytes  20432.18 bytes/sec
+total size is 31203288  speedup is 277.67
+sending incremental file list
+
+sent 5047 bytes  received 27 bytes  3382.67 bytes/sec
+total size is 39173092  speedup is 7720.36
+sending incremental file list
+operations_commerciales/DEMANDE ECHANTILLONS CL .xls
+operations_commerciales/chrono demande echantillons.xls
+operations_commerciales/GMS/RECAP DEMANDE ET CONFIRMATIONS HEBDO 2014.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS AUCHAN 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS CARREFOUR 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS PLACE DU MARCHE 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/AUCHAN/2014 AUCHAN OP JUILLET 1 PC.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/AUCHAN/2014 AUCHAN OP JUILLET 2 ASIE.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/CARREFOUR/2014 CARREFOUR TABLOID 25 PLATEAU ASIE.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/PLACE DU MARCHE/2014 PLACE DU MARCHE CYCLE 4.xls
+
+sent 309233 bytes  received 21224 bytes  73434.89 bytes/sec
+total size is 49995163  speedup is 151.29
+sending incremental file list
+
+sent 20135 bytes  received 80 bytes  8086.00 bytes/sec
+total size is 98915848  speedup is 4893.19
+sending incremental file list
+gofast/sync.ffs_db
+
+sent 5776 bytes  received 122 bytes  2359.20 bytes/sec
+total size is 22273387  speedup is 3776.43
+sending incremental file list
+
+sent 9238 bytes  received 13 bytes  6167.33 bytes/sec
+total size is 43986432  speedup is 4754.78
+sending incremental file list
+
+sent 5781 bytes  received 30 bytes  3874.00 bytes/sec
+total size is 93132165  speedup is 16026.87
+sending incremental file list
+erp_data.mdb
+
+sent 11053588 bytes  received 65747 bytes  180802.20 bytes/sec
+total size is 88092672  speedup is 7.92
+sending incremental file list
+
+sent 7538 bytes  received 45 bytes  15166.00 bytes/sec
+total size is 9253358  speedup is 1220.28
+sending incremental file list
+
+sent 4308 bytes  received 24 bytes  8664.00 bytes/sec
+total size is 6387982  speedup is 1474.60
+sending incremental file list
+
+sent 7695 bytes  received 20 bytes  5143.33 bytes/sec
+total size is 16751789  speedup is 2171.33
+sending incremental file list
+
+sent 85 bytes  received 13 bytes  196.00 bytes/sec
+total size is 104853504  speedup is 1069933.71
+sending incremental file list
+operations_commerciales/DEMANDE ECHANTILLONS CL .xls
+operations_commerciales/chrono demande echantillons.xls
+operations_commerciales/GMS/RECAP DEMANDE ET CONFIRMATIONS HEBDO 2014.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS AUCHAN 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS CARREFOUR 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS PLACE DU MARCHE 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/AUCHAN/2014 AUCHAN OP JUILLET 1 PC.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/AUCHAN/2014 AUCHAN OP JUILLET 2 ASIE.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/CARREFOUR/2014 CARREFOUR TABLOID 25 PLATEAU ASIE.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/PLACE DU MARCHE/2014 PLACE DU MARCHE CYCLE 4.xls
+
+sent 309233 bytes  received 21224 bytes  132182.80 bytes/sec
+total size is 49995163  speedup is 151.29
+sending incremental file list
+mercuriales/sync.ffs_db
+mercuriales/HD/2014/2014 MERCURIALE DIA.xls
+mercuriales/gms/2014/CENTRALES 2014/CASINO 2014.xls
+mercuriales/gms/2014/CONTROLE TARIFS 2014/06-JUIN/2014 SYSTEME U ROSBEEF NATIONAL.pdf
+mercuriales/mdd/2014/2014 MERCURIALE AUCHAN.xls
+mercuriales/mdd/2014/2014 MERCURIALE CARREFOUR PLATS CUISINES.xls
+
+sent 101888 bytes  received 10489 bytes  74918.00 bytes/sec
+total size is 31203288  speedup is 277.67
+sending incremental file list
+
+sent 9238 bytes  received 13 bytes  6167.33 bytes/sec
+total size is 43986432  speedup is 4754.78
+sending incremental file list
+
+sent 7051 bytes  received 49 bytes  4733.33 bytes/sec
+total size is 12693370  speedup is 1787.80
+sending incremental file list
+
+sent 5732 bytes  received 23 bytes  11510.00 bytes/sec
+total size is 129183193  speedup is 22447.12
+sending incremental file list
+
+sent 5610 bytes  received 39 bytes  3766.00 bytes/sec
+total size is 59049369  speedup is 10453.07
+sending incremental file list
+
+sent 51070 bytes  received 95 bytes  34110.00 bytes/sec
+total size is 293952595  speedup is 5745.19
+sending incremental file list
+rh_multi_sites/1% logement - Vilogia/
+rh_multi_sites/1% logement - Vilogia/Demande de logement locatif/
+rh_multi_sites/1% logement - Vilogia/Dossiers pr\#352ts et aides/
+rh_multi_sites/1% logement - Vilogia/PATRIMOINE VILOGIA/
+rh_multi_sites/1% logement - Vilogia/PATRIMOINE VILOGIA/PATRIMOINE VILOGIA/
+rh_multi_sites/1% logement - Vilogia/PLAQUETTES COMMUNICATION ENTREPRISES/
+rh_multi_sites/1% logement - Vilogia/liste du personnel/
+rh_multi_sites/1% logement - Vilogia/news letters 2013/
+rh_multi_sites/Accords d'entreprise/
+rh_multi_sites/Accords d'entreprise/Chartes/
+rh_multi_sites/Accords d'entreprise/R\#351glement Int\#351rieur/
+rh_multi_sites/Audit/
+rh_multi_sites/Classif/
+rh_multi_sites/Classif/2012/
+rh_multi_sites/GPEC/
+rh_multi_sites/GPEC/Ent annuel/
+rh_multi_sites/GPEC/Fiches m\#351tiers/
+rh_multi_sites/GPEC/Fiches m\#351tiers/FM Avignon 2013/
+rh_multi_sites/GPEC/Fiches m\#351tiers/FM Avignon 2013/01 R\#351ception/
+rh_multi_sites/GPEC/Fiches m\#351tiers/FM Avignon 2013/01 R\#351ception/Archives ancienne convention/
+rh_multi_sites/GPEC/Fiches m\#351tiers/FM Avignon 2013/03 Pr\#351paration/
+rh_multi_sites/GPEC/Fiches m\#351tiers/FM Avignon 2013/03 Pr\#351paration/Archives ancienne convention/
+rh_multi_sites/GPEC/Fiches m\#351tiers/FM Avignon 2013/04 Conditionnement/
+rh_multi_sites/GPEC/Fiches m\#351tiers/FM Avignon 2013/04 Conditionnement/Archives ancienne convention/
+rh_multi_sites/GPEC/Fiches m\#351tiers/FM Avignon 2013/06 Emballage-Cuisson/
+rh_multi_sites/GPEC/Fiches m\#351tiers/FM Avignon 2013/06 Emballage-Cuisson/Archives ancienne convention/
+rh_multi_sites/GPEC/Fiches m\#351tiers/FM Avignon 2013/08 Qualit\#351/
+rh_multi_sites/GPEC/Fiches m\#351tiers/FM Avignon 2013/08 Qualit\#351/Archives/
+rh_multi_sites/GPEC/Fiches m\#351tiers/FM Avignon 2013/09 Technique/
+rh_multi_sites/GPEC/Fiches m\#351tiers/FM Avignon 2013/09 Technique/Maintenance/
+rh_multi_sites/GPEC/Fiches m\#351tiers/FM Avignon 2013/10 Restaurant/
+rh_multi_sites/GPEC/Fiches m\#351tiers/FM Avignon 2013/11 Encadrement/
+rh_multi_sites/GPEC/Fiches m\#351tiers/FM Avignon 2013/11 Encadrement/Archive/
+rh_multi_sites/GPEC/Fiches m\#351tiers/FM Avignon 2013/Archives/
+rh_multi_sites/GPEC/Fiches m\#351tiers/FM Avignon 2013/Archives/Exp\#351dition/
+rh_multi_sites/GPEC/Fiches m\#351tiers/FM Avignon 2013/Archives/Pr\#351paration/
+rh_multi_sites/GPEC/Fiches m\#351tiers/FM Avignon 2013/BILANS/
+rh_multi_sites/GPEC/Fiches m\#351tiers/FM Herbignac/
+rh_multi_sites/GPEC/Fiches m\#351tiers/FM Herbignac/ARCHIVES/
+rh_multi_sites/GPEC/Fiches m\#351tiers/FM Herbignac/ARCHIVES/FDP perime asiatique/
+rh_multi_sites/GPEC/Fiches m\#351tiers/FM Herbignac/ARCHIVES/FDP perime expedition/
+rh_multi_sites/GPEC/Fiches m\#351tiers/FM Herbignac/ARCHIVES/FDP perime pan\#351/
+rh_multi_sites/GPEC/Fiches m\#351tiers/FM Herbignac/ARCHIVES/FDP qualit\#351 perime/
+rh_multi_sites/GPEC/Fiches m\#351tiers/FM Herbignac/ENVIRONNEMENT/
+rh_multi_sites/GPEC/Fiches m\#351tiers/FM Herbignac/FACONNAGE ASIATIQUE/
+rh_multi_sites/GPEC/Fiches m\#351tiers/FM Herbignac/FICHES DE FONCTION/
+rh_multi_sites/GPEC/Fiches m\#351tiers/FM Herbignac/FICHES DE FONCTION/p\#351rim\#351/
+rh_multi_sites/GPEC/Fiches m\#351tiers/FM Herbignac/PANES/
+rh_multi_sites/GPEC/Fiches m\#351tiers/FM Herbignac/PLATS CUISINES/
+rh_multi_sites/GPEC/Fiches m\#351tiers/FM Herbignac/R&D/
+rh_multi_sites/GPEC/Fiches m\#351tiers/FM Herbignac/RECEPTION/
+rh_multi_sites/GPEC/Fiches m\#351tiers/FM Herbignac/SUREMBALLAGE PLATS CUISINES/
+rh_multi_sites/GPEC/Fiches m\#351tiers/FM Herbignac/conditionnement asiatique/
+rh_multi_sites/GPEC/Fiches m\#351tiers/FM Herbignac/expedition/
+rh_multi_sites/GPEC/Fiches m\#351tiers/FM Herbignac/maintenance/
+rh_multi_sites/GPEC/Fiches m\#351tiers/FM Herbignac/qualite/
+rh_multi_sites/GPEC/Fiches m\#351tiers/Groupe LDC/
+rh_multi_sites/Maquettes/Maquette CDD/
+rh_multi_sites/Marie- spot tv/
+rh_multi_sites/Marie- spot tv/Pr\#351s et films s\#351par\#351s/
+rh_multi_sites/PV CCE-n\#351gos/
+rh_multi_sites/Proc\#351dures/
+
+sent 20321 bytes  received 266 bytes  8234.80 bytes/sec
+total size is 98915848  speedup is 4804.77
+sending incremental file list
+gofast/
+gofast/sync.ffs_db
+gofast/CHANTIERS/
+gofast/CHANTIERS/1_CNP_DELEGATION_Cecile/
+gofast/CHANTIERS/1_CNP_DELEGATION_Cecile/1_EQUIPE/
+gofast/CHANTIERS/1_CNP_DELEGATION_Cecile/2_DEFIS/
+gofast/CHANTIERS/1_CNP_DELEGATION_Cecile/2_DEFIS/NOTATION_DDD/
+gofast/CHANTIERS/1_CNP_DELEGATION_Cecile/3_OBJECTIFS/
+gofast/CHANTIERS/1_CNP_DELEGATION_Cecile/4_GEMBA/
+gofast/CHANTIERS/1_CNP_DELEGATION_Cecile/4_GEMBA/AUTRES_SITES_LDC_TR/
+gofast/CHANTIERS/1_CNP_DELEGATION_Cecile/4_GEMBA/AUTRES_SITES_LDC_TR/DDD/
+gofast/CHANTIERS/1_CNP_DELEGATION_Cecile/5_STANDARDS/
+gofast/CHANTIERS/1_CNP_DELEGATION_Cecile/5_STANDARDS/DDD/
+gofast/CHANTIERS/1_CNP_DELEGATION_Cecile/6_BILAN/
+gofast/CHANTIERS/1_CNP_DELEGATION_Cecile/PLANNING_DVPT/
+gofast/CHANTIERS/2_FTK_CLIENTS_Mathieu/
+gofast/CHANTIERS/2_FTK_CLIENTS_Mathieu/1_EQUIPE/
+gofast/CHANTIERS/2_FTK_CLIENTS_Mathieu/2_DEFIS/
+gofast/CHANTIERS/2_FTK_CLIENTS_Mathieu/3_OBJECTIFS/
+gofast/CHANTIERS/2_FTK_CLIENTS_Mathieu/4_GEMBA/
+gofast/CHANTIERS/2_FTK_CLIENTS_Mathieu/5_STANDARDS/
+gofast/CHANTIERS/2_FTK_CLIENTS_Mathieu/6_BILAN/
+gofast/CHANTIERS/3_FTA_Boris/
+gofast/CHANTIERS/3_FTA_Boris/1_EQUIPE/
+gofast/CHANTIERS/3_FTA_Boris/2_DEFIS/
+gofast/CHANTIERS/3_FTA_Boris/3_OBJECTIFS/
+gofast/CHANTIERS/3_FTA_Boris/4_GEMBA/
+gofast/CHANTIERS/3_FTA_Boris/5_STANDARDS/
+gofast/CHANTIERS/3_FTA_Boris/6_BILAN/
+gofast/CHANTIERS/4_COTATION_Benjamin/
+gofast/CHANTIERS/4_COTATION_Benjamin/1_EQUIPE/
+gofast/CHANTIERS/4_COTATION_Benjamin/2_DEFIS/
+gofast/CHANTIERS/4_COTATION_Benjamin/3_OBJECTIFS/
+gofast/CHANTIERS/4_COTATION_Benjamin/4_GEMBA/
+gofast/CHANTIERS/4_COTATION_Benjamin/5_STANDARDS/
+gofast/CHANTIERS/4_COTATION_Benjamin/6_BILAN/
+gofast/CHANTIERS/5_PROCESS_Vincent/
+gofast/CHANTIERS/5_PROCESS_Vincent/1_EQUIPE/
+gofast/CHANTIERS/5_PROCESS_Vincent/2_DEFIS/
+gofast/CHANTIERS/5_PROCESS_Vincent/3_OBJECTIFS/
+gofast/CHANTIERS/5_PROCESS_Vincent/4_GEMBA/
+gofast/CHANTIERS/5_PROCESS_Vincent/5_STANDARDS/
+gofast/CHANTIERS/5_PROCESS_Vincent/6_BILAN/
+gofast/CHANTIERS/6_LANCEMENT_PDTS_Emeline/
+gofast/CHANTIERS/6_LANCEMENT_PDTS_Emeline/1_EQUIPE/
+gofast/CHANTIERS/6_LANCEMENT_PDTS_Emeline/2_DEFIS/
+gofast/CHANTIERS/6_LANCEMENT_PDTS_Emeline/3_OBJECTIFS/
+gofast/CHANTIERS/6_LANCEMENT_PDTS_Emeline/4_GEMBA/
+gofast/CHANTIERS/6_LANCEMENT_PDTS_Emeline/5_STANDARDS/
+gofast/CHANTIERS/6_LANCEMENT_PDTS_Emeline/6_BILAN/
+gofast/CHANTIERS/7_DONNEES_R&D_Morgane/
+gofast/CHANTIERS/7_DONNEES_R&D_Morgane/1_EQUIPE/
+gofast/CHANTIERS/7_DONNEES_R&D_Morgane/2_DEFIS/
+gofast/CHANTIERS/7_DONNEES_R&D_Morgane/3_OBJECTIFS/
+gofast/CHANTIERS/7_DONNEES_R&D_Morgane/4_GEMBA/
+gofast/CHANTIERS/7_DONNEES_R&D_Morgane/5_STANDARDS/
+gofast/CHANTIERS/7_DONNEES_R&D_Morgane/6_BILAN/
+gofast/CHANTIERS/8_ADVITIUM_Cecile/
+gofast/CHANTIERS/8_ADVITIUM_Cecile/1_EQUIPE/
+gofast/CHANTIERS/8_ADVITIUM_Cecile/2_DEFIS/
+gofast/CHANTIERS/8_ADVITIUM_Cecile/3_OBJECTIFS/
+gofast/CHANTIERS/8_ADVITIUM_Cecile/4_GEMBA/
+gofast/CHANTIERS/8_ADVITIUM_Cecile/5_STANDARDS/
+gofast/CHANTIERS/8_ADVITIUM_Cecile/6_BILAN/
+gofast/INFORMATIONS_GENERALES/
+gofast/INFORMATIONS_GENERALES/5S_exemples_AGIS/
+gofast/INFORMATIONS_GENERALES/5S_exemples_AGIS/JASMINE/
+gofast/PLANNING_GENERAL/
+
+sent 5977 bytes  received 323 bytes  2520.00 bytes/sec
+total size is 22273387  speedup is 3535.46
+sending incremental file list
+batch/ACS Immos.RDP
+batch/BddThermix (not sharable).dsn
+batch/COPILOTE (not sharable).dsn
+batch/COPILOTE_AVI (not sharable).dsn
+batch/COPILOTE_TAR (not sharable).dsn
+batch/CPAU.exe
+batch/Connexion Samba.lnk
+batch/Copie de ndir.ini
+batch/Cygwin Bash Shell.lnk
+batch/Dimarrage Scanvaegt.pif
+batch/D\#351marrage Scanvaegt.pif
+batch/Excel Files (not sharable).dsn
+batch/Fichiers Excel (not sharable).dsn
+batch/FoxPro Files (not sharable).dsn
+batch/Global.RDP
+batch/IMAGEDIT.EXE
+batch/IMAGEDIT.HLP
+batch/IMP047004.url
+batch/IMP047005.URL
+batch/INTRANET.BAT
+batch/ImportationClient.rdp
+batch/Intranet.lnk
+batch/Intranet.pif
+batch/LICENCE
+batch/Loma_Avignon.vnc
+batch/Loma_Tarare_Cantubas.vnc
+batch/MDB_Repair.exe
+batch/MS Access 97 Database (not sharable).dsn
+batch/MS Access Database (not sharable).dsn
+batch/Maintenance Windows 2000.lnk
+batch/Maintenance Windows NT.lnk
+batch/Maintenance Windows XP.lnk
+batch/MouseWheelDVPNoReg.dll
+batch/OLD_tempologic.cns
+batch/RAR.CFG
+batch/RAR.EXE
+batch/RAR.LOG
+batch/Runner.exe
+batch/Synchronisation Etiquettes.pif
+batch/Tempologic - Chrono.lnk
+batch/Tempologic - Editions.lnk
+batch/Tempologic - Messagerie.lnk
+batch/Text Files (not sharable).dsn
+batch/WDS043002-checkup_server.rdp
+batch/Windows Novell Directory.lnk
+batch/advitium-correctif-0.1.0.reg
+batch/agismde-w9x.reg
+batch/arret_windows.bat
+batch/autologin.vbs
+batch/base_rcp.bmp
+batch/bouton.png
+batch/bouton_base_rupture.png
+batch/bzip2.exe
+batch/codesoft.bmp
+batch/codesoft.rdp
+batch/codesoft_10.143.5.11.zip
+batch/cygwin.lnk
+batch/dBASE Files (not sharable).dsn
+batch/edi.rdp
+batch/ela3000.rdp
+batch/envoilog.bat
+batch/etiquettes_TFE.bmp
+batch/extension-image.reg
+batch/firewall_xpsp2-start.bat
+batch/firewall_xpsp2-stop.bat
+batch/ftpagis.bat
+batch/futurmaster-prod-frais.rdp
+batch/futurmaster-prod-promo.rdp
+batch/futurmaster-prod-surgele.rdp
+batch/futurmaster-prod.rdp
+batch/futurmaster-recette.rdp
+batch/gtc-avignon.vnc
+batch/gtc-plateforme.vnc
+batch/gtc-tarare.vnc
+batch/gtc.vnc~
+batch/gunzip.exe
+batch/gzip.exe
+batch/hensss.lst
+batch/ie6_setting.reg
+batch/immo.grpldc.com.rdp
+batch/install-SUS-client-dev.vbs
+batch/install-SUS-client.vbs
+batch/intranet.rdp
+batch/keyboard.reg
+batch/locales.reg
+batch/locales_short.reg
+batch/logon-mysql-odbc.reg
+batch/logon-word10-options.reg
+batch/maintenance.bat
+batch/maintenance_2000.bat
+batch/maintenance_all.bat
+batch/maintenance_all.bat~
+batch/maintenance_nt.bat
+batch/maintenance_w9x.bat
+batch/maintenance_xp.bat
+batch/mario.rdp
+batch/materiel.bmp
+batch/menus_festif.rdp
+batch/morton.rdp
+batch/msoffice-reg-1.ini
+batch/mysql-complet.dsn
+batch/mysql-lecture_seule.dsn
+batch/mysql-mise_a_jour.dsn
+batch/mysql.agis.fr (not sharable).dsn
+batch/mysql.dev-complet.dsn
+batch/mysql.dsn
+batch/ndir.ini
+batch/ooo.bmp
+batch/pageant.exe
+batch/plan_qualite.bmp
+batch/plink.exe
+batch/pscp.exe
+batch/psftp.exe
+batch/putty.cnt
+batch/putty.exe
+batch/putty.hlp
+batch/puttygen.exe
+batch/qualite.bmp
+batch/readme.txt
+batch/readme_eng.doc
+batch/readme_eng.txt
+batch/readme_rus.doc
+batch/readme_rus.txt
+batch/recettes.bmp
+batch/regini-msoffice.bat
+batch/robox-divergeur.vnc
+batch/robox-fourchette.vnc
+batch/routage-glf-xp.bat
+batch/run_satel_AVI_20.bat.lnk
+batch/runas.vbs
+batch/rupture.bmp
+batch/sauve-mssqlserver.bat
+batch/sauvegarde.bat
+batch/scanner.cnt
+batch/scanner.exe
+batch/scanner.hlp
+batch/scanner.ini
+batch/scanner.lst
+batch/setup.exe
+batch/spe047005.vnc
+batch/sqlnet.log
+batch/start-scanvaegt-avignon.bat
+batch/stinger.exe
+batch/stinger.opt
+batch/stop-w9x.bat
+batch/system.mdw
+batch/tar.bat
+batch/tar.exe
+batch/telephonie-ubixity.rdp
+batch/temp.dev.mdb
+batch/temp.mdb
+batch/template.vbs
+batch/tempologic_chrono.rdp
+batch/tempologic_chrono.rdp~
+batch/tempologic_editions.rdp
+batch/tempologic_editions.rdp~
+batch/tempologic_editions_simplifiees.rdp
+batch/tempologic_messagerie.rdp.old
+batch/test_access.dsn
+batch/tid043003.vnc
+batch/tid043007.vnc
+batch/trojans.lst
+batch/unins000.dat
+batch/unins000.exe
+batch/uninstall-SUS-client.vbs
+batch/update.pif
+batch/videosurveillance.bat
+batch/vnc.lst
+batch/vnc.lst~
+batch/website.url
+batch/wndir.bat
+batch/wndir.exe
+batch/bin/
+batch/bin/CPAU.exe.gz
+batch/bin/IMAGEDIT.EXE.gz
+batch/bin/INTRANET.BAT.gz
+batch/bin/MDB_Repair.exe.gz
+batch/bin/RAR.EXE.gz
+batch/bin/Runner.exe.gz
+batch/bin/Shortcut.exe.gz
+batch/bin/bzip2.exe.gz
+batch/bin/gunzip.exe.gz
+batch/bin/gzip.exe.gz
+batch/bin/pageant.exe.gz
+batch/bin/plink.exe.gz
+batch/bin/pscp.exe.gz
+batch/bin/psftp.exe.gz
+batch/bin/putty.exe.gz
+batch/bin/puttygen.exe.gz
+batch/bin/scanner.exe.gz
+batch/bin/setup.exe.gz
+batch/bin/stinger.exe.gz
+batch/bin/tar.exe.gz
+batch/bin/unins000.exe.gz
+batch/bin/uninstall_client_novell.bat.gz
+batch/bin/wndir.exe.gz
+batch/bin/ocx/
+batch/bin/ocx/ACTPMNT.OCX.gz
+batch/bin/ocx/AMOVIE.OCX.gz
+batch/bin/ocx/ASCTRLS.OCX.gz
+batch/bin/ocx/AXAUTCTL.OCX.gz
+batch/bin/ocx/AXCTRL32.OCX.gz
+batch/bin/ocx/AXPRF.OCX.gz
+batch/bin/ocx/BCGDateTime.lic.gz
+batch/bin/ocx/BCGDateTime.ocx.gz
+batch/bin/ocx/BCGDurationCtrl.lic.gz
+batch/bin/ocx/BCGDurationCtrl.ocx.gz
+batch/bin/ocx/BCGTimeIntervals.lic.gz
+batch/bin/ocx/BCGTimeIntervals.ocx.gz
+batch/bin/ocx/BR549.OCX.gz
+batch/bin/ocx/COMCT332.OCX.gz
+batch/bin/ocx/COMCTL32.OCX.gz
+batch/bin/ocx/COMDLG16.OCX.gz
+batch/bin/ocx/COMDLG32.OCX.gz
+batch/bin/ocx/Comct232.ocx.gz
+batch/bin/ocx/DAXCTLE.OCX.gz
+batch/bin/ocx/DBLIST32.OCX.gz
+batch/bin/ocx/Directory.ocx.gz
+batch/bin/ocx/EVYOCX.OCX.gz
+batch/bin/ocx/EYEDOG.OCX.gz
+batch/bin/ocx/HHOPEN.OCX.gz
+batch/bin/ocx/IMGADMIN.OCX.gz
+batch/bin/ocx/IMGEDIT.OCX.gz
+batch/bin/ocx/IMGSCAN.OCX.gz
+batch/bin/ocx/IMGTHUMB.OCX.gz
+batch/bin/ocx/MSCAL.OCX.gz
+batch/bin/ocx/MSINET.OCX.gz
+batch/bin/ocx/MSMAPI32.OCX.gz
+batch/bin/ocx/MSWINSCK.OCX.gz
+batch/bin/ocx/Msmask32.ocx.gz
+batch/bin/ocx/PLUGIN.OCX.gz
+batch/bin/ocx/PROCTEXE.OCX.gz
+batch/bin/ocx/Popup.ocx.gz
+batch/bin/ocx/RICHTX32.OCX.gz
+batch/bin/ocx/SNAPVIEW.OCX.gz
+batch/bin/ocx/TABCTL32.OCX.gz
+batch/bin/ocx/TDC.OCX.gz
+batch/bin/ocx/THREED16.OCX.gz
+batch/bin/ocx/THREED32.OCX.gz
+batch/bin/ocx/VAEN21.OLB.gz
+batch/bin/ocx/VBAEN32.OLB.gz
+batch/bin/ocx/VBAFR32.OLB.gz
+batch/bin/ocx/VEN2232.OLB.gz
+batch/bin/ocx/WSHOM.OCX.gz
+batch/bin/ocx/hhctrl.ocx.gz
+batch/bin/ocx/mscomct2.ocx.gz
+batch/bin/ocx/mscomctl.ocx.gz
+batch/bin/ocx/msdxm.ocx.gz
+batch/bin/ocx/msflxgrd.ocx.gz
+batch/bin/ocx/picclp32.ocx.gz
+batch/bin/ocx/readme.txt.gz
+batch/bin/ocx/swflash.ocx.gz
+batch/bin/ocx/sysinfo.ocx.gz
+batch/bin/ocx/wmidx.ocx.gz
+batch/bin/ocx/wmp.ocx.gz
+batch/bin/orgchart/
+batch/bin/orgchart/MSCREATE.DIR
+batch/bin/orgchart/ORGCHART.CNT
+batch/bin/orgchart/ORGCHART.EXE
+batch/bin/orgchart/ORGCHART.HLP
+batch/bin/orgchart/ORGCHART.SRG
+batch/bin/orgchart/OrgChart.GID
+batch/bin/orgchart/TEMPLATE.MSO
+batch/bin/regshot-1.7.2/
+batch/bin/regshot-1.7.2/language.ini.gz
+batch/bin/regshot-1.7.2/readme.txt.gz
+batch/bin/regshot-1.7.2/regshot.exe.gz
+batch/bin/regshot-1.7.2/regshot.ini.gz
+batch/bin/regshot-1.7.2/whatsnew.txt.gz
+batch/bin/snetcfg/
+batch/bin/snetcfg/snetcfg_wxp.exe.gz
+batch/bin/xset552/
+batch/bin/xset552/CONTENTS.TXT.gz
+batch/bin/xset552/DEMO.BAT.gz
+batch/bin/xset552/EASY.BAT.gz
+batch/bin/xset552/ERRLEVEL.EXE.gz
+batch/bin/xset552/FILE_ID.DIZ.gz
+batch/bin/xset552/PAD_FILE.XML.gz
+batch/bin/xset552/PATCHDOS.TXT.gz
+batch/bin/xset552/README.BAT.gz
+batch/bin/xset552/WHATSNEW.TXT.gz
+batch/bin/xset552/XSET.EXE.gz
+batch/bin/xset552/XSET.TXT.gz
+batch/bin/xset552/xset32.cmd.gz
+batch/conf/
+batch/conf/Copilote.lnk
+batch/conf/DEPRECATED-USER--conf.ie-1.0.reg
+batch/conf/DEPRECATED-USER-conf.ie-1.0.reg
+batch/conf/InfoQuery.lnk
+batch/conf/SYST-advitium-correctif-0.1.0.reg
+batch/conf/SYST-agismde-1.0-access2003.reg
+batch/conf/SYST-agismde-1.0-pro.reg
+batch/conf/SYST-agismde-1.0.reg
+batch/conf/SYST-agismde-w9x.reg
+batch/conf/SYST-keyboard.reg
+batch/conf/SYST-msoffice-reg-1.ini
+batch/conf/USER-ShellFolders-1.0.reg
+batch/conf/USER-conf.ie-1.1.reg
+batch/conf/USER-conf.ie-release.txt
+batch/conf/USER-conf.ie-release.txt~
+batch/conf/USER-extension-image.reg
+batch/conf/USER-locales-short_date.reg
+batch/conf/USER-locales.reg
+batch/conf/USER-logon-mysql-odbc.reg
+batch/conf/USER-logon-word10-options.reg
+batch/conf/UTILITY.MDA
+batch/conf/advitium-correctif-0.1.0.reg
+batch/conf/agismde-w9x.reg
+batch/conf/common.bat
+batch/conf/conf.ie-1.0.reg
+batch/conf/conf.ie-1.1.reg
+batch/conf/dao.reg
+batch/conf/extension-image.reg
+batch/conf/keyboard.reg
+batch/conf/locales.reg
+batch/conf/logon-mysql-odbc.reg
+batch/conf/logon-word10-options.reg
+
+sent 12770083 bytes  received 5931 bytes  183827.54 bytes/sec
+total size is 16751789  speedup is 1.31
+sending incremental file list
+
+sent 7695 bytes  received 20 bytes  5143.33 bytes/sec
+total size is 16751789  speedup is 2171.33

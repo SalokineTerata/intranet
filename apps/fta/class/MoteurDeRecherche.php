@@ -114,7 +114,6 @@ class MoteurDeRecherche {
 
 
         $choix = -1;    // pour que l'on affiche les entetes du tableau une seule fois
-        $tableau_fiche = '';
 
 
         if ($paramRequete) {
@@ -123,8 +122,12 @@ class MoteurDeRecherche {
             $result_requete_resultat = DatabaseOperation::convertSqlStatementWithoutKeyToArray($paramRequete);
             if (!$result_requete_resultat) {
                 $titre = 'Moteur de Recherche';
-                $message = 'Vos critères de recherche ne donnent aucun résultat.';
+                $message = UserInterfaceMessage::FR_WARNING_RECHERE_ERREUR;
                 afficher_message($titre, $message, $redirection);
+            } elseif (count($result_requete_resultat) > ModuleConfig::VALUE_MAX_MOTEUR_RECHERCHE) {
+                $message = UserInterfaceMessage::FR_WARNING_RECHERE . ModuleConfig::VALUE_MAX_MOTEUR_RECHERCHE;
+                $redirection = "recherche.php";
+                afficher_message("Erreur", $message, $redirection);
             }
 
 //Regroupement par Etat du résultat
@@ -137,31 +140,27 @@ class MoteurDeRecherche {
             if (!Acl::getValueAccesRights($module . "_modification") and $_SESSION["module"] == "fiches_mp_achats") {
                 $req.= "WHERE " . $abreviation_recherche_etat . "='V' OR " . $abreviation_recherche_etat . "='E' ";
             }
-            /**
-             * Augmente le temps d'execution temporairement
-             */
-            ini_set('max_execution_time', 300);
 
             $result = DatabaseOperation::convertSqlStatementWithoutKeyToArray($req);
 
             foreach ($result as $rows) {
 //Construction de la reqûete de resultat propre à cet Etat
                 $req1 = "$paramRequete AND " . $id_recherche_etat . "=" . $rows[$id_recherche_etat];
-                $result1 = DatabaseOperation::convertSqlStatementWithoutKeyToArray($req1);
+                $arrayFta = DatabaseOperation::convertSqlStatementWithoutKeyToArray($req1);
 
 //Si il y a des résltat on commence la construction du tableau
-                if ($result1) {
+                if ($arrayFta) {
 
 //Affichage de l'en-tête de regroupement
 
                     $return.= "<tr><td class=titre>" . $rows["nom_" . $etat_table] . "</td></tr>";
 
 //Affichage des fiches
-                    foreach ($result1 as $rows1) {
+                    foreach ($arrayFta as $rowsFta) {
 
 //echo $choix;
                         $return.= "<tr><td>"
-                                . visualiser_fiches($rows1[$id_recherche], $choix, 0, "")
+                                . TableauFicheView::getHtmlTable($rowsFta[$id_recherche], $choix, "0", "")
                                 . "</td></tr>"
                         ;
                     }
@@ -177,10 +176,10 @@ class MoteurDeRecherche {
         $return.= "</td></tr>
      </table>
      <br>
-     <img src=$paramImageBordure><img src=$paramImageBordure><img src=$paramImageBordure><img src=$paramImageBordure><img src=$paramImageBordure><img src=$paramImageBordure>
-     <img src=$paramImageBordure><img src=$paramImageBordure><img src=$paramImageBordure><img src=$paramImageBordure><img src=$paramImageBordure><img src=$paramImageBordure>
-     <img src=$paramImageBordure><img src=$paramImageBordure><img src=$paramImageBordure><img src=$paramImageBordure><img src=$paramImageBordure><img src=$paramImageBordure>
-     <img src=$paramImageBordure><img src=$paramImageBordure><img src=$paramImageBordure><img src=$paramImageBordure><img src=$paramImageBordure><img src=$paramImageBordure>
+     <img src=" . $paramImageBordure . "><img src=" . $paramImageBordure . "><img src=" . $paramImageBordure . "><img src=" . $paramImageBordure . "><img src=" . $paramImageBordure . "><img src=" . $paramImageBordure . ">
+     <img src=" . $paramImageBordure . "><img src=" . $paramImageBordure . "><img src=" . $paramImageBordure . "><img src=" . $paramImageBordure . "><img src=" . $paramImageBordure . "><img src=" . $paramImageBordure . ">
+     <img src=" . $paramImageBordure . "><img src=" . $paramImageBordure . "><img src=" . $paramImageBordure . "><img src=" . $paramImageBordure . "><img src=" . $paramImageBordure . "><img src=" . $paramImageBordure . ">
+     <img src=" . $paramImageBordure . "><img src=" . $paramImageBordure . "><img src=" . $paramImageBordure . "><img src=" . $paramImageBordure . "><img src=" . $paramImageBordure . "><img src=" . $paramImageBordure . ">
      ";
 
         return $return;
@@ -389,7 +388,7 @@ class MoteurDeRecherche {
 //$aux3.=$t;
                     $aux3.='moteur_de_recherche';
 
-                    $aux4 = $champ_recherche[$cpt_ligne][$cpt_col];
+                    $aux4 = str_replace("'", "", $champ_recherche[$cpt_ligne][$cpt_col]);                    
 
                     $desc5 = " SELECT " . $aux . "," . $aux2
                             . " FROM " . $t
@@ -476,7 +475,7 @@ WHERE id_intranet_moteur_de_recherche_operateur_sur_champ = '$enr2[0]'";
 
                         case $operateur_recherche[$cpt_ligne][$cpt_col] == 9 : //Liste
 
-                            $req_temp = "SELECT DISTINCT $nom_champ FROM $nom_table ORDER BY $nom_champ";
+                                $req_temp = "SELECT DISTINCT $nom_champ FROM $nom_table ORDER BY $nom_champ";
                             $result_temp = DatabaseOperation::convertSqlStatementKeyAndOneFieldToArray($req_temp);
                             $saisie_utilisateur = "<select size = 1 name = $name_val value = $temp>";
                             $verrou = 0;

@@ -1,0 +1,169 @@
+Démarrage : ven mar 14 23:00:01 CET 2014
+Arrêt     : ven mar 14 23:02:08 CET 2014
+
+
+
+Base MySQL sélectionnée: agis
+Nombre de serveur(s) Linux concerné(s): 4
+Nombre de dossier(s) à mettre à jour: 27
+
+sending incremental file list
+gestion_crise/mise \#340 jour 2014/Organisation si retrait TDA ou Marie.pdf
+
+sent 40342 bytes  received 65 bytes  16162.80 bytes/sec
+total size is 11793414  speedup is 291.87
+sending incremental file list
+
+sent 6067 bytes  received 37 bytes  4069.33 bytes/sec
+total size is 12258686  speedup is 2008.30
+sending incremental file list
+erp_data.mdb
+
+sent 7952502 bytes  received 64291 bytes  180152.65 bytes/sec
+total size is 84160512  speedup is 10.50
+sending incremental file list
+
+sent 7538 bytes  received 45 bytes  5055.33 bytes/sec
+total size is 9253358  speedup is 1220.28
+sending incremental file list
+
+sent 7695 bytes  received 20 bytes  5143.33 bytes/sec
+total size is 16751789  speedup is 2171.33
+sending incremental file list
+
+sent 4308 bytes  received 24 bytes  2888.00 bytes/sec
+total size is 6387982  speedup is 1474.60
+sending incremental file list
+mercuriales/gms/2014/REGIONS  2014/GALEC REGION MERCU AVRIL 2014.xls
+mercuriales/mdd/2014/2014 MERCURIALE AUCHAN.xls
+
+sent 57186 bytes  received 7069 bytes  25702.00 bytes/sec
+total size is 29509148  speedup is 459.25
+sending incremental file list
+
+sent 5047 bytes  received 27 bytes  3382.67 bytes/sec
+total size is 39173092  speedup is 7720.36
+sending incremental file list
+operations_commerciales/chrono demande echantillons.xls
+operations_commerciales/GMS/2014/D-REGIONS/GMS LECLERC 2014-FUTUR MASTER.xls
+operations_commerciales/MDD/MODELES CJ/AUCHAN ATAC SCHIEVER/CONF OP/2014/CONFIRMATION OPERATION AUCHAN JUIN 3 2014.xls
+operations_commerciales/MDD/MODELES CJ/AUCHAN ATAC SCHIEVER/CONF OP/2014/CONFIRMATION OPERATION AUCHAN JUIN 4 2014.xls
+operations_commerciales/MDD/MODELES CJ/AUCHAN ATAC SCHIEVER/CONF OP/2014/CONFIRMATION OPERATION SCHIEVER AVRIL 3.xls
+operations_commerciales/MDD/MODELES CJ/PROVERA/CONF OPES CORA MATCH/2014/MATCH/CONFIRMATION OPERATION_MATCH2014-3043-MDDX2 VAGUE 3.xls
+operations_commerciales/MDD/MODELES CJ/SYSTEME U/DDE ECHANTILLONS/DEMANDE ECHANTILLONS SU 145.xls
+operations_commerciales/MDD/OP MDD 2013/MDD CORA 2013 FUTUR MASTER.xls
+operations_commerciales/MDD/OP MDD 2014/MDD CORA 2014.xls
+operations_commerciales/MDD/OP MDD 2014/MDD GROUPE AUCHAN 2014.xls
+operations_commerciales/MDD/OP MDD 2014/MDD MATCH 2014.xls
+
+sent 283227 bytes  received 11827 bytes  65567.56 bytes/sec
+total size is 47527426  speedup is 161.08
+sending incremental file list
+deleting rh_multi_sites/Accords d'entreprise/NAO - PV d\#351saccord - 2013.pdf
+deleting rh_multi_sites/Accords d'entreprise/Minima ADEPALE - AGIS - HERBIGNAC 01.03.12.xls
+rh_multi_sites/Accords d'entreprise/Minima ADEPALE - AGIS 01.03.2014.xls
+deleting rh_multi_sites/GPEC/Ent annuel/support bilan annuel individuel non cadre 28.02.12.doc
+deleting rh_multi_sites/GPEC/Ent annuel/Groupe LDC - Trame entretien annuel \#351valuation 24.11.11.doc
+rh_multi_sites/GPEC/Ent annuel/Guide 2014 - codifi\#351.doc
+rh_multi_sites/GPEC/Ent annuel/support bilan annuel individuel AMcadres 2014-codifi\#351.DOC
+rh_multi_sites/GPEC/Ent annuel/support bilan annuel individuel OE 2014-codifi\#351.DOC
+rh_multi_sites/PV CCE-n\#351gos/NAO - PV d\#351saccord - 2013.pdf
+rh_multi_sites/PV CCE-n\#351gos/PV d\#351saccord NAO 2014 - sign\#351.pdf
+
+sent 297204 bytes  received 194 bytes  118959.20 bytes/sec
+total size is 98672054  speedup is 331.78
+sending incremental file list
+
+sent 3431 bytes  received 79 bytes  1404.00 bytes/sec
+total size is 16655550  speedup is 4745.17
+sending incremental file list
+
+sent 9125 bytes  received 13 bytes  6092.00 bytes/sec
+total size is 43749888  speedup is 4787.69
+sending incremental file list
+
+sent 5781 bytes  received 30 bytes  3874.00 bytes/sec
+total size is 93132165  speedup is 16026.87
+sending incremental file list
+erp_data.mdb
+
+sent 7952502 bytes  received 64291 bytes  188630.42 bytes/sec
+total size is 84160512  speedup is 10.50
+sending incremental file list
+
+sent 7538 bytes  received 45 bytes  5055.33 bytes/sec
+total size is 9253358  speedup is 1220.28
+sending incremental file list
+
+sent 4308 bytes  received 24 bytes  2888.00 bytes/sec
+total size is 6387982  speedup is 1474.60
+sending incremental file list
+
+sent 7695 bytes  received 20 bytes  5143.33 bytes/sec
+total size is 16751789  speedup is 2171.33
+sending incremental file list
+
+sent 85 bytes  received 13 bytes  65.33 bytes/sec
+total size is 104853504  speedup is 1069933.71
+sending incremental file list
+operations_commerciales/chrono demande echantillons.xls
+operations_commerciales/GMS/2014/D-REGIONS/GMS LECLERC 2014-FUTUR MASTER.xls
+operations_commerciales/MDD/MODELES CJ/AUCHAN ATAC SCHIEVER/CONF OP/2014/CONFIRMATION OPERATION AUCHAN JUIN 3 2014.xls
+operations_commerciales/MDD/MODELES CJ/AUCHAN ATAC SCHIEVER/CONF OP/2014/CONFIRMATION OPERATION AUCHAN JUIN 4 2014.xls
+operations_commerciales/MDD/MODELES CJ/AUCHAN ATAC SCHIEVER/CONF OP/2014/CONFIRMATION OPERATION SCHIEVER AVRIL 3.xls
+operations_commerciales/MDD/MODELES CJ/PROVERA/CONF OPES CORA MATCH/2014/MATCH/CONFIRMATION OPERATION_MATCH2014-3043-MDDX2 VAGUE 3.xls
+operations_commerciales/MDD/MODELES CJ/SYSTEME U/DDE ECHANTILLONS/DEMANDE ECHANTILLONS SU 145.xls
+operations_commerciales/MDD/OP MDD 2013/MDD CORA 2013 FUTUR MASTER.xls
+operations_commerciales/MDD/OP MDD 2014/MDD CORA 2014.xls
+operations_commerciales/MDD/OP MDD 2014/MDD GROUPE AUCHAN 2014.xls
+operations_commerciales/MDD/OP MDD 2014/MDD MATCH 2014.xls
+
+sent 283227 bytes  received 11827 bytes  118021.60 bytes/sec
+total size is 47527426  speedup is 161.08
+sending incremental file list
+mercuriales/gms/2014/REGIONS  2014/GALEC REGION MERCU AVRIL 2014.xls
+mercuriales/mdd/2014/2014 MERCURIALE AUCHAN.xls
+
+sent 57186 bytes  received 7069 bytes  42836.67 bytes/sec
+total size is 29509148  speedup is 459.25
+sending incremental file list
+
+sent 9125 bytes  received 13 bytes  18276.00 bytes/sec
+total size is 43749888  speedup is 4787.69
+sending incremental file list
+gestion_crise/mise \#340 jour 2014/Organisation si retrait TDA ou Marie.pdf
+
+sent 40342 bytes  received 65 bytes  26938.00 bytes/sec
+total size is 11793414  speedup is 291.87
+sending incremental file list
+
+sent 5684 bytes  received 23 bytes  3804.67 bytes/sec
+total size is 129152473  speedup is 22630.54
+sending incremental file list
+
+sent 5610 bytes  received 39 bytes  11298.00 bytes/sec
+total size is 59049369  speedup is 10453.07
+sending incremental file list
+codesoft/Codesoft 7/Destockage/79963.bak
+codesoft/Codesoft 7/Destockage/79963.lab
+
+sent 78019 bytes  received 134 bytes  52102.00 bytes/sec
+total size is 291345491  speedup is 3727.89
+sending incremental file list
+deleting rh_multi_sites/Accords d'entreprise/NAO - PV d\#351saccord - 2013.pdf
+deleting rh_multi_sites/Accords d'entreprise/Minima ADEPALE - AGIS - HERBIGNAC 01.03.12.xls
+rh_multi_sites/Accords d'entreprise/Minima ADEPALE - AGIS 01.03.2014.xls
+deleting rh_multi_sites/GPEC/Ent annuel/support bilan annuel individuel non cadre 28.02.12.doc
+deleting rh_multi_sites/GPEC/Ent annuel/Groupe LDC - Trame entretien annuel \#351valuation 24.11.11.doc
+rh_multi_sites/GPEC/Ent annuel/Guide 2014 - codifi\#351.doc
+rh_multi_sites/GPEC/Ent annuel/support bilan annuel individuel AMcadres 2014-codifi\#351.DOC
+rh_multi_sites/GPEC/Ent annuel/support bilan annuel individuel OE 2014-codifi\#351.DOC
+rh_multi_sites/PV CCE-n\#351gos/NAO - PV d\#351saccord - 2013.pdf
+rh_multi_sites/PV CCE-n\#351gos/PV d\#351saccord NAO 2014 - sign\#351.pdf
+
+sent 297204 bytes  received 194 bytes  84970.86 bytes/sec
+total size is 98672054  speedup is 331.78
+sending incremental file list
+
+sent 3431 bytes  received 79 bytes  1002.86 bytes/sec
+total size is 16655550  speedup is 4745.17

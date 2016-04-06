@@ -1,0 +1,173 @@
+Démarrage : lun nov 18 23:00:02 CET 2013
+Arrêt     : lun nov 18 23:00:44 CET 2013
+
+
+
+Base MySQL sélectionnée: agis
+Nombre de serveur(s) Linux concerné(s): 4
+Nombre de dossier(s) à mettre à jour: 24
+
+sending incremental file list
+
+sent 5598 bytes  received 45 bytes  3762.00 bytes/sec
+total size is 9985067  speedup is 1769.46
+sending incremental file list
+suivi_investissement/2013-2014/suivi des travaux 2013.xls
+suivi_investissement/2014-2015/Bud invest AVI r\#351vis\#351 2013-2014.xls
+
+sent 29728 bytes  received 1608 bytes  20890.67 bytes/sec
+total size is 11670607  speedup is 372.43
+sending incremental file list
+
+sent 63 bytes  received 12 bytes  50.00 bytes/sec
+total size is 78852096  speedup is 1051361.28
+sending incremental file list
+
+sent 7538 bytes  received 45 bytes  5055.33 bytes/sec
+total size is 9253358  speedup is 1220.28
+sending incremental file list
+
+sent 7683 bytes  received 20 bytes  5135.33 bytes/sec
+total size is 16751831  speedup is 2174.72
+sending incremental file list
+
+sent 4308 bytes  received 24 bytes  2888.00 bytes/sec
+total size is 6387982  speedup is 1474.60
+sending incremental file list
+mercuriales/sync.ffs_db
+mercuriales/gms/2014/CENTRALES 2014/AUCHAN 2014.xls
+mercuriales/gms/2014/CENTRALES 2014/SIMPLY MARKET 2014.xls
+
+sent 31225 bytes  received 9310 bytes  16214.00 bytes/sec
+total size is 42776161  speedup is 1055.29
+sending incremental file list
+
+sent 5047 bytes  received 27 bytes  3382.67 bytes/sec
+total size is 39173092  speedup is 7720.36
+sending incremental file list
+operations_commerciales/chrono demande echantillons.xls
+operations_commerciales/sync.ffs_db
+operations_commerciales/GMS/2013/A-CENTRALES/GMS CASINO 2013-FUTUR MASTER.xls
+operations_commerciales/GMS/2013/A-CENTRALES/GMS INTERMARCHE 2013-FUTUR MASTER.xls
+operations_commerciales/GMS/2013/A-CENTRALES/GMS SYSTEME U 2013-FUTUR MASTER.xls
+operations_commerciales/GMS/2013/D-REGIONS/GMS LECLERC 2013-FUTUR MASTER.xls
+deleting operations_commerciales/GMS/2014/A-CENTRALES/Copie de GMS SYSTEME U 2014-FUTUR MASTER.xls
+deleting operations_commerciales/GMS/2014/A-CENTRALES/Copie de GMS SIMPLY MARKET 2014-FUTUR MASTER.xls
+deleting operations_commerciales/GMS/2014/A-CENTRALES/Copie de GMS INTERMARCHE 2014-FUTUR MASTER.xls
+deleting operations_commerciales/GMS/2014/A-CENTRALES/Copie de GMS GALEC 2014-FUTUR MASTER.xls
+deleting operations_commerciales/GMS/2014/A-CENTRALES/Copie de GMS CASINO 2014-FUTUR MASTER.xls
+deleting operations_commerciales/GMS/2014/A-CENTRALES/Copie de GMS CARREFOUR MARKET 2014-FUTUR MASTER.xls
+deleting operations_commerciales/GMS/2014/A-CENTRALES/Copie de GMS CARREFOUR 2014-FUTUR MASTER.xls
+deleting operations_commerciales/GMS/2014/A-CENTRALES/Copie de GMS AUCHAN 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/INTERMARCHE/2014 INTERMARCHE FEVRIER 1 OP 61009.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/SIMPLY MARKET/2014 SIMPLY MARKET OP NAA.xls
+operations_commerciales/GMS/2014/D-REGIONS/GMS LECLERC 2014-FUTUR MASTER.xls
+operations_commerciales/MDD/MODELES CJ/CARREFOUR/DDE ECHANTILLONS/demande \#351chantillons GUTENBERG.XLS
+
+sent 354351 bytes  received 29181 bytes  85229.33 bytes/sec
+total size is 54626883  speedup is 142.43
+sending incremental file list
+
+sent 18506 bytes  received 80 bytes  7434.40 bytes/sec
+total size is 41728031  speedup is 2245.13
+sending incremental file list
+modeles/coupelle_compo.lab
+modeles/coupelle_compo_180.bak
+modeles/coupelle_compo_180.lab
+modeles/coupelle_compo_preimp.lab
+modeles/coupelle_compo_preimp_180.lab
+
+sent 69339 bytes  received 4776 bytes  29646.00 bytes/sec
+total size is 31723008  speedup is 428.02
+sending incremental file list
+
+sent 63 bytes  received 12 bytes  50.00 bytes/sec
+total size is 78852096  speedup is 1051361.28
+sending incremental file list
+
+sent 7538 bytes  received 45 bytes  5055.33 bytes/sec
+total size is 9253358  speedup is 1220.28
+sending incremental file list
+
+sent 4308 bytes  received 24 bytes  2888.00 bytes/sec
+total size is 6387982  speedup is 1474.60
+sending incremental file list
+
+sent 7683 bytes  received 20 bytes  5135.33 bytes/sec
+total size is 16751831  speedup is 2174.72
+sending incremental file list
+
+sent 85 bytes  received 13 bytes  65.33 bytes/sec
+total size is 104853504  speedup is 1069933.71
+sending incremental file list
+operations_commerciales/chrono demande echantillons.xls
+operations_commerciales/sync.ffs_db
+operations_commerciales/GMS/2013/A-CENTRALES/GMS CASINO 2013-FUTUR MASTER.xls
+operations_commerciales/GMS/2013/A-CENTRALES/GMS INTERMARCHE 2013-FUTUR MASTER.xls
+operations_commerciales/GMS/2013/A-CENTRALES/GMS SYSTEME U 2013-FUTUR MASTER.xls
+operations_commerciales/GMS/2013/D-REGIONS/GMS LECLERC 2013-FUTUR MASTER.xls
+deleting operations_commerciales/GMS/2014/A-CENTRALES/Copie de GMS SYSTEME U 2014-FUTUR MASTER.xls
+deleting operations_commerciales/GMS/2014/A-CENTRALES/Copie de GMS SIMPLY MARKET 2014-FUTUR MASTER.xls
+deleting operations_commerciales/GMS/2014/A-CENTRALES/Copie de GMS INTERMARCHE 2014-FUTUR MASTER.xls
+deleting operations_commerciales/GMS/2014/A-CENTRALES/Copie de GMS GALEC 2014-FUTUR MASTER.xls
+deleting operations_commerciales/GMS/2014/A-CENTRALES/Copie de GMS CASINO 2014-FUTUR MASTER.xls
+deleting operations_commerciales/GMS/2014/A-CENTRALES/Copie de GMS CARREFOUR MARKET 2014-FUTUR MASTER.xls
+deleting operations_commerciales/GMS/2014/A-CENTRALES/Copie de GMS CARREFOUR 2014-FUTUR MASTER.xls
+deleting operations_commerciales/GMS/2014/A-CENTRALES/Copie de GMS AUCHAN 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/INTERMARCHE/2014 INTERMARCHE FEVRIER 1 OP 61009.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/SIMPLY MARKET/2014 SIMPLY MARKET OP NAA.xls
+operations_commerciales/GMS/2014/D-REGIONS/GMS LECLERC 2014-FUTUR MASTER.xls
+operations_commerciales/MDD/MODELES CJ/CARREFOUR/DDE ECHANTILLONS/demande \#351chantillons GUTENBERG.XLS
+
+sent 354351 bytes  received 29181 bytes  109580.57 bytes/sec
+total size is 54626883  speedup is 142.43
+sending incremental file list
+mercuriales/sync.ffs_db
+mercuriales/gms/2014/CENTRALES 2014/AUCHAN 2014.xls
+mercuriales/gms/2014/CENTRALES 2014/SIMPLY MARKET 2014.xls
+
+sent 31225 bytes  received 9310 bytes  27023.33 bytes/sec
+total size is 42776161  speedup is 1055.29
+sending incremental file list
+modeles/coupelle_compo.lab
+modeles/coupelle_compo_180.bak
+modeles/coupelle_compo_180.lab
+modeles/coupelle_compo_preimp.lab
+modeles/coupelle_compo_preimp_180.lab
+
+sent 69339 bytes  received 4776 bytes  29646.00 bytes/sec
+total size is 31723008  speedup is 428.02
+sending incremental file list
+
+sent 5598 bytes  received 45 bytes  3762.00 bytes/sec
+total size is 9985067  speedup is 1769.46
+sending incremental file list
+
+sent 5677 bytes  received 23 bytes  3800.00 bytes/sec
+total size is 128675317  speedup is 22574.62
+sending incremental file list
+
+sent 5161 bytes  received 37 bytes  3465.33 bytes/sec
+total size is 52194646  speedup is 10041.29
+sending incremental file list
+codesoft/Codesoft 7/Agis FE/Nouveau dossier/
+codesoft/Codesoft 7/Auchan  Atac/Atac_simply/simply_janv_14/
+codesoft/Codesoft 7/Auchan  Atac/Atac_simply/simply_janv_14/acras_recto.lab
+codesoft/Codesoft 7/Auchan  Atac/Atac_simply/simply_janv_14/acras_verso.bak
+codesoft/Codesoft 7/Auchan  Atac/Atac_simply/simply_janv_14/acras_verso.lab
+codesoft/Codesoft 7/Auchan  Atac/Atac_simply/simply_janv_14/crev_pan\#351es_recto.bak
+codesoft/Codesoft 7/Auchan  Atac/Atac_simply/simply_janv_14/crev_pan\#351es_recto.lab
+codesoft/Codesoft 7/Auchan  Atac/Atac_simply/simply_janv_14/crev_pan\#351es_verso.bak
+codesoft/Codesoft 7/Auchan  Atac/Atac_simply/simply_janv_14/crev_pan\#351es_verso.lab
+codesoft/Codesoft 7/Auchan  Atac/Atac_simply/simply_janv_14/plateau_asia_recto.lab
+codesoft/Codesoft 7/Auchan  Atac/Atac_simply/simply_janv_14/plateau_asia_verso.bak
+codesoft/Codesoft 7/Auchan  Atac/Atac_simply/simply_janv_14/plateau_asia_verso.lab
+codesoft/Codesoft 7/Auchan  Atac/Atac_simply/simply_janv_14/plateau_ass_asia_recto.bak
+codesoft/Codesoft 7/Auchan  Atac/Atac_simply/simply_janv_14/plateau_ass_asia_recto.lab
+codesoft/Codesoft 7/Auchan  Atac/Atac_simply/simply_janv_14/plateau_ass_asia_verso.bak
+codesoft/Codesoft 7/Auchan  Atac/Atac_simply/simply_janv_14/plateau_ass_asia_verso.lab
+codesoft/Codesoft 7/Codes Produits/Nouveau dossier/
+
+sent 177018 bytes  received 369 bytes  70954.80 bytes/sec
+total size is 278488659  speedup is 1569.95
+sending incremental file list

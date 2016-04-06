@@ -1,0 +1,151 @@
+Démarrage : lun mar 31 23:00:01 CEST 2014
+Arrêt     : lun mar 31 23:02:02 CEST 2014
+
+
+
+Base MySQL sélectionnée: agis
+Nombre de serveur(s) Linux concerné(s): 4
+Nombre de dossier(s) à mettre à jour: 27
+
+sending incremental file list
+
+sent 7051 bytes  received 49 bytes  2840.00 bytes/sec
+total size is 12693370  speedup is 1787.80
+sending incremental file list
+
+sent 6266 bytes  received 38 bytes  2521.60 bytes/sec
+total size is 12421591  speedup is 1970.43
+sending incremental file list
+erp_data.mdb
+
+sent 165878 bytes  received 64291 bytes  41848.91 bytes/sec
+total size is 84160512  speedup is 365.65
+sending incremental file list
+
+sent 7538 bytes  received 45 bytes  5055.33 bytes/sec
+total size is 9253358  speedup is 1220.28
+sending incremental file list
+
+sent 7695 bytes  received 20 bytes  3086.00 bytes/sec
+total size is 16751789  speedup is 2171.33
+sending incremental file list
+
+sent 4308 bytes  received 24 bytes  2888.00 bytes/sec
+total size is 6387982  speedup is 1474.60
+sending incremental file list
+mercuriales/gms/2014/CENTRALES 2014/AUCHAN 2014.xls
+mercuriales/gms/2014/CENTRALES 2014/CASINO 2014.xls
+deleting mercuriales/gms/2014/CONTROLE TARIFS 2014/04-AVRIL/AUCHAN.FR NOUVEAUX PC.pdf
+mercuriales/gms/2014/CONTROLE TARIFS 2014/04-AVRIL/2014 AUCHAN.FR NOUVEAUX PC.pdf
+mercuriales/gms/2014/CONTROLE TARIFS 2014/04-AVRIL/2014 CARREFOUR ROUILLE GARDIANNE.pdf
+mercuriales/gms/2014/CONTROLE TARIFS 2014/04-AVRIL/2014 SYSTEME U ANIMATIONS DIRECT.pdf
+mercuriales/gms/2014/CONTROLE TARIFS 2014/06-JUIN/2014 GALEC PLATEAUX.pdf
+mercuriales/gms/2014/CONTROLE TARIFS 2014/09-SEPTEMBRE/
+mercuriales/gms/2014/CONTROLE TARIFS 2014/09-SEPTEMBRE/2014 GALEC PLATEAUX SANS REM LANCEMENT.pdf
+
+sent 161576 bytes  received 10792 bytes  10446.55 bytes/sec
+total size is 30024059  speedup is 174.19
+sending incremental file list
+
+sent 5047 bytes  received 27 bytes  3382.67 bytes/sec
+total size is 39173092  speedup is 7720.36
+sending incremental file list
+operations_commerciales/DEMANDE ECHANTILLONS CL .xls
+operations_commerciales/chrono demande echantillons.xls
+operations_commerciales/GMS/RECAP DEMANDE ET CONFIRMATIONS HEBDO.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS AUCHAN 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/AUCHAN/2014 AUCHAN OP JUIN 1 PLATEAU ASIE 360G.xls
+operations_commerciales/GMS/2014/D-REGIONS/GMS LECLERC 2014-FUTUR MASTER.xls
+
+sent 341438 bytes  received 18352 bytes  34265.71 bytes/sec
+total size is 49164404  speedup is 136.65
+sending incremental file list
+
+sent 20051 bytes  received 78 bytes  5751.14 bytes/sec
+total size is 98915848  speedup is 4914.10
+sending incremental file list
+gofast/CHANTIERS/1_CNP_DELEGATION_Cecile/5_STANDARDS/DDD/DDD_actuelle_QE026S00.xls
+
+sent 227183 bytes  received 98 bytes  90912.40 bytes/sec
+total size is 19648190  speedup is 86.45
+sending incremental file list
+
+sent 9125 bytes  received 13 bytes  3655.20 bytes/sec
+total size is 43788288  speedup is 4791.89
+sending incremental file list
+
+sent 5781 bytes  received 30 bytes  3874.00 bytes/sec
+total size is 93132165  speedup is 16026.87
+sending incremental file list
+erp_data.mdb
+
+sent 165878 bytes  received 64291 bytes  30689.20 bytes/sec
+total size is 84160512  speedup is 365.65
+sending incremental file list
+
+sent 7538 bytes  received 45 bytes  2166.57 bytes/sec
+total size is 9253358  speedup is 1220.28
+sending incremental file list
+
+sent 4308 bytes  received 24 bytes  1237.71 bytes/sec
+total size is 6387982  speedup is 1474.60
+sending incremental file list
+
+sent 7695 bytes  received 20 bytes  2204.29 bytes/sec
+total size is 16751789  speedup is 2171.33
+sending incremental file list
+
+sent 85 bytes  received 13 bytes  28.00 bytes/sec
+total size is 104853504  speedup is 1069933.71
+sending incremental file list
+operations_commerciales/DEMANDE ECHANTILLONS CL .xls
+operations_commerciales/chrono demande echantillons.xls
+operations_commerciales/GMS/RECAP DEMANDE ET CONFIRMATIONS HEBDO.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS AUCHAN 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/AUCHAN/2014 AUCHAN OP JUIN 1 PLATEAU ASIE 360G.xls
+operations_commerciales/GMS/2014/D-REGIONS/GMS LECLERC 2014-FUTUR MASTER.xls
+
+sent 341438 bytes  received 18352 bytes  42328.24 bytes/sec
+total size is 49164404  speedup is 136.65
+sending incremental file list
+mercuriales/gms/2014/CENTRALES 2014/AUCHAN 2014.xls
+mercuriales/gms/2014/CENTRALES 2014/CASINO 2014.xls
+deleting mercuriales/gms/2014/CONTROLE TARIFS 2014/04-AVRIL/AUCHAN.FR NOUVEAUX PC.pdf
+mercuriales/gms/2014/CONTROLE TARIFS 2014/04-AVRIL/2014 AUCHAN.FR NOUVEAUX PC.pdf
+mercuriales/gms/2014/CONTROLE TARIFS 2014/04-AVRIL/2014 CARREFOUR ROUILLE GARDIANNE.pdf
+mercuriales/gms/2014/CONTROLE TARIFS 2014/04-AVRIL/2014 SYSTEME U ANIMATIONS DIRECT.pdf
+mercuriales/gms/2014/CONTROLE TARIFS 2014/06-JUIN/2014 GALEC PLATEAUX.pdf
+mercuriales/gms/2014/CONTROLE TARIFS 2014/09-SEPTEMBRE/
+mercuriales/gms/2014/CONTROLE TARIFS 2014/09-SEPTEMBRE/2014 GALEC PLATEAUX SANS REM LANCEMENT.pdf
+
+sent 161576 bytes  received 10792 bytes  22982.40 bytes/sec
+total size is 30024059  speedup is 174.19
+sending incremental file list
+
+sent 9125 bytes  received 13 bytes  2030.67 bytes/sec
+total size is 43788288  speedup is 4791.89
+sending incremental file list
+
+sent 7051 bytes  received 49 bytes  4733.33 bytes/sec
+total size is 12693370  speedup is 1787.80
+sending incremental file list
+
+sent 5732 bytes  received 23 bytes  1046.36 bytes/sec
+total size is 129183193  speedup is 22447.12
+sending incremental file list
+
+sent 5610 bytes  received 39 bytes  491.22 bytes/sec
+total size is 59049369  speedup is 10453.07
+sending incremental file list
+
+sent 50350 bytes  received 94 bytes  7760.62 bytes/sec
+total size is 291459155  speedup is 5777.88
+sending incremental file list
+
+sent 20051 bytes  received 78 bytes  13419.33 bytes/sec
+total size is 98915848  speedup is 4914.10
+sending incremental file list
+gofast/CHANTIERS/1_CNP_DELEGATION_Cecile/5_STANDARDS/DDD/DDD_actuelle_QE026S00.xls
+
+sent 227183 bytes  received 98 bytes  90912.40 bytes/sec
+total size is 19648190  speedup is 86.45

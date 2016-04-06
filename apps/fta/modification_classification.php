@@ -58,7 +58,7 @@ if (!FtaRoleModel::isGestionnaire($idFtaRole)) {
 
 $bloc .= "<" . $html_table . "><tr class=titre>"
         . "<td>Espace de travail</td>"
-        . "<td width=10% >Etat - N°version</td>"
+        . "<td width=10% >Dossier FTA</td>"
         . "<td>Code Article</td>"
         . "<td>Désignation Commerciale</td>"
         . "<td>Classification actuelle</td>"
@@ -85,7 +85,8 @@ $arrayDossierComplet = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
                 . " IN (" . IntranetActionsModel::TABLENAME . "." . IntranetActionsModel::KEYNAME . ")"
                 . ' AND ( 0 ' . IntranetActionsModel::addIdIntranetAction($_SESSION[Acl::ACL_INTRANET_ACTIONS_VALIDE]) . ")"
                 . " AND " . IntranetDroitsAccesModel::FIELDNAME_NIVEAU_INTRANET_DROITS_ACCES . "=" . IntranetNiveauAccesModel::NIVEAU_GENERIC_TRUE
-                . " AND " . IntranetDroitsAccesModel::FIELDNAME_ID_USER . "=" . $idUser                                                  // Nous recuperons l'identifiant de l'utilisateur connecté
+                . " AND " . IntranetDroitsAccesModel::FIELDNAME_ID_USER . "=" . $idUser
+                . " GROUP BY " . FtaModel::FIELDNAME_DOSSIER_FTA                                                // Nous recuperons l'identifiant de l'utilisateur connecté
 );
 $nbDeResulta = count($arrayDossierComplet);
 
@@ -116,7 +117,8 @@ $arrayDossier = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
                 . " IN (" . IntranetActionsModel::TABLENAME . "." . IntranetActionsModel::KEYNAME . ")"
                 . ' AND ( 0 ' . IntranetActionsModel::addIdIntranetAction($_SESSION[Acl::ACL_INTRANET_ACTIONS_VALIDE]) . ")"
                 . " AND " . IntranetDroitsAccesModel::FIELDNAME_NIVEAU_INTRANET_DROITS_ACCES . "=" . IntranetNiveauAccesModel::NIVEAU_GENERIC_TRUE
-                . " AND " . IntranetDroitsAccesModel::FIELDNAME_ID_USER . "=" . $idUser                                                  // Nous recuperons l'identifiant de l'utilisateur connecté
+                . " AND " . IntranetDroitsAccesModel::FIELDNAME_ID_USER . "=" . $idUser
+                . " GROUP BY " . FtaModel::FIELDNAME_DOSSIER_FTA
                 . " ORDER BY " . FtaWorkflowModel::TABLENAME . "." . FtaWorkflowModel::KEYNAME
                 . "," . ClassificationFta2Model::TABLENAME . "." . ClassificationFta2Model::KEYNAME
                 . "," . FtaModel::FIELDNAME_ID_FTA_ETAT
@@ -129,8 +131,10 @@ $arrayDossier = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
  */
 foreach ($arrayDossier as $rowsDossier) {
     $idDossierFta = $rowsDossier[FtaModel::FIELDNAME_DOSSIER_FTA];
-    $arrayVersionDossier = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
-                    "SELECT  MAX( " . FtaModel::FIELDNAME_VERSION_DOSSIER_FTA . " ) as " . FtaModel::FIELDNAME_VERSION_DOSSIER_FTA
+    $arrayContenu = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
+                    "SELECT " . FtaWorkflowModel::FIELDNAME_DESCRIPTION_FTA_WORKFLOW
+                    . "," . FtaModel::FIELDNAME_DOSSIER_FTA . "," . FtaModel::TABLENAME . "." . FtaModel::FIELDNAME_ID_FTA_CLASSIFICATION2
+                    . "," . FtaModel::FIELDNAME_CODE_ARTICLE_LDC . "," . FtaModel::FIELDNAME_DESIGNATION_COMMERCIALE
                     . " FROM " . FtaModel::TABLENAME
                     . " , " . FtaActionSiteModel::TABLENAME
                     . " , " . FtaWorkflowModel::TABLENAME . " , " . IntranetDroitsAccesModel::TABLENAME
@@ -149,41 +153,16 @@ foreach ($arrayDossier as $rowsDossier) {
                     . ' AND ( 0 ' . IntranetActionsModel::addIdIntranetAction($_SESSION[Acl::ACL_INTRANET_ACTIONS_VALIDE]) . ")"
                     . " AND " . IntranetDroitsAccesModel::FIELDNAME_NIVEAU_INTRANET_DROITS_ACCES . "=" . IntranetNiveauAccesModel::NIVEAU_GENERIC_TRUE
                     . " AND " . IntranetDroitsAccesModel::FIELDNAME_ID_USER . "=" . $idUser
+                    . " GROUP BY " . FtaModel::FIELDNAME_DOSSIER_FTA
     );
-    foreach ($arrayVersionDossier as $rowsVersionDossier) {
-        $idVersionDossierFta = $rowsVersionDossier[FtaModel::FIELDNAME_VERSION_DOSSIER_FTA];
-    }
 
-    $arrayContenu = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
-                    " SELECT DISTINCT " . FtaWorkflowModel::FIELDNAME_DESCRIPTION_FTA_WORKFLOW . "," . FtaEtatModel::FIELDNAME_NOM_FTA_ETAT
-                    . "," . FtaModel::FIELDNAME_DOSSIER_FTA . "," . FtaModel::FIELDNAME_VERSION_DOSSIER_FTA
-                    . "," . FtaModel::FIELDNAME_CODE_ARTICLE_LDC . "," . FtaModel::FIELDNAME_DESIGNATION_COMMERCIALE
-                    . "," . ClassificationFta2Model::TABLENAME . "." . ClassificationFta2Model::KEYNAME
-                    . "," . FtaModel::KEYNAME . "," . FtaEtatModel::TABLENAME . "." . FtaEtatModel::KEYNAME
-                    . "," . FtaEtatModel::FIELDNAME_ABREVIATION
-                    . " FROM " . FtaModel::TABLENAME . "," . ClassificationFta2Model::TABLENAME
-                    . "," . FtaWorkflowModel::TABLENAME . "," . FtaEtatModel::TABLENAME
-                    . " WHERE " . FtaModel::TABLENAME . "." . FtaModel::FIELDNAME_ID_FTA_CLASSIFICATION2
-                    . "=" . ClassificationFta2Model::TABLENAME . "." . ClassificationFta2Model::KEYNAME
-                    . " AND " . FtaModel::TABLENAME . "." . FtaModel::FIELDNAME_ID_FTA_ETAT
-                    . "=" . FtaEtatModel::TABLENAME . "." . FtaEtatModel::KEYNAME
-                    . " AND " . FtaModel::TABLENAME . "." . FtaModel::FIELDNAME_WORKFLOW
-                    . "=" . FtaWorkflowModel::TABLENAME . "." . FtaWorkflowModel::KEYNAME
-                    . " AND " . FtaModel::FIELDNAME_DOSSIER_FTA . "=" . $idDossierFta
-                    . " AND " . FtaModel::FIELDNAME_VERSION_DOSSIER_FTA . "=" . $idVersionDossierFta
-    );
     if ($arrayContenu) {
         foreach ($arrayContenu as $rowsContenu) {
             $descriptionFtaWorkflow = $rowsContenu[FtaWorkflowModel::FIELDNAME_DESCRIPTION_FTA_WORKFLOW];
-            $nomFtaEtat = $rowsContenu[FtaEtatModel::FIELDNAME_NOM_FTA_ETAT];
-            $idFtaEtat = $rowsContenu[FtaEtatModel::KEYNAME];
-            $abrviationFtaEtat = $rowsContenu[FtaEtatModel::FIELDNAME_ABREVIATION];
             $idDossier = $rowsContenu[FtaModel::FIELDNAME_DOSSIER_FTA];
-            $idVersionDossier = $rowsContenu[FtaModel::FIELDNAME_VERSION_DOSSIER_FTA];
             $codeArticleLdc = $rowsContenu[FtaModel::FIELDNAME_CODE_ARTICLE_LDC];
             $designationCommercialeFta = $rowsContenu[FtaModel::FIELDNAME_DESIGNATION_COMMERCIALE];
             $idClassificationFta2 = $rowsContenu[ClassificationFta2Model::KEYNAME];
-            $idFta = $rowsContenu[FtaModel::KEYNAME];
 
             $classificationGroupe = ClassificationArborescenceArticleCategorieContenuModel::getElementClassificationFta($idClassificationFta2, ClassificationFta2Model::FIELDNAME_ID_PROPRIETAIRE_GROUPE);
             $classificationEnseigne = ClassificationArborescenceArticleCategorieContenuModel::getElementClassificationFta($idClassificationFta2, ClassificationFta2Model::FIELDNAME_ID_PROPRIETAIRE_ENSEIGNE);
@@ -196,7 +175,7 @@ foreach ($arrayDossier as $rowsDossier) {
 
 
             $bloc.= "<tr  class=contenu ><td>" . $descriptionFtaWorkflow . "</td>"
-                    . "<td>" . $nomFtaEtat . " - V" . $idVersionDossier . "</td>"
+                    . "<td>" . $idDossier . "</td>"
                     . "<td>" . $codeArticleLdc . "</td>"
                     . "<td>" . $designationCommercialeFta . "</td>"
                     . "<td>" . $classificationGroupe
@@ -209,11 +188,11 @@ foreach ($arrayDossier as $rowsDossier) {
                     . "/" . $classificationSaisonalite
                     . "</td>"
                     . "<td>  <a href="
-                    . "ajout_classification_chemin.php?id_fta=" . $idFta
+                    . "ajout_classification_chemin.php?id_fta=" . $idDossier
                     . "&id_fta_chapitre_encours=1"
                     . "&synthese_action=encours"
-                    . "&id_fta_etat=" . $idFtaEtat
-                    . "&abreviation_fta_etat=" . $abrviationFtaEtat
+                    . "&id_fta_etat=1"
+                    . "&abreviation_fta_etat=I"
                     . "&id_fta_role=" . $idFtaRole
                     . "&id_fta_classification2=" . $idClassificationFta2
                     . "&gestionnaire=1 > Modifier une classification</td></tr>"

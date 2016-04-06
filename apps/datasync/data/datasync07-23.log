@@ -1,0 +1,180 @@
+Démarrage : mer jui 23 23:00:01 CEST 2014
+Arrêt     : mer jui 23 23:00:47 CEST 2014
+
+
+
+Base MySQL sélectionnée: agis
+Nombre de serveur(s) Linux concerné(s): 4
+Nombre de dossier(s) à mettre à jour: 29
+
+sending incremental file list
+
+sent 7280 bytes  received 49 bytes  2931.60 bytes/sec
+total size is 13584181  speedup is 1853.48
+sending incremental file list
+suivi_investissement/2014-2015/Suivi investissements AVI 2014 2015.xls
+
+sent 16947 bytes  received 2757 bytes  7881.60 bytes/sec
+total size is 12444119  speedup is 631.55
+sending incremental file list
+
+sent 63 bytes  received 12 bytes  50.00 bytes/sec
+total size is 90648576  speedup is 1208647.68
+sending incremental file list
+
+sent 7593 bytes  received 45 bytes  5092.00 bytes/sec
+total size is 9254930  speedup is 1211.70
+sending incremental file list
+batch/DTL043002.vnc
+batch/DTL043003.vnc
+batch/DTL043004.vnc
+batch/DTL043005.vnc
+
+sent 10200 bytes  received 96 bytes  6864.00 bytes/sec
+total size is 16764158  speedup is 1628.22
+sending incremental file list
+
+sent 4308 bytes  received 24 bytes  2888.00 bytes/sec
+total size is 6387982  speedup is 1474.60
+sending incremental file list
+mercuriales/sync.ffs_db
+mercuriales/MERCURIALES - AGIS/gms/2014/REGIONS  2014/GALEC REGION MERCU JUIN 2014.xls
+mercuriales/MERCURIALES - AGIS/mdd/2014/2014 MERCURIALE AUCHAN.xls
+mercuriales/MERCURIALES - AGIS/mdd/2014/2014 MERCURIALE CASINO.xls
+mercuriales/MERCURIALES - AGIS/mdd/2014/2014 MERCURIALE PROVERA.xls
+deleting mercuriales/gms/2014/
+
+sent 51145 bytes  received 9341 bytes  24194.40 bytes/sec
+total size is 36346524  speedup is 600.91
+sending incremental file list
+
+sent 5047 bytes  received 27 bytes  3382.67 bytes/sec
+total size is 39173092  speedup is 7720.36
+sending incremental file list
+operations_commerciales/chrono demande echantillons.xls
+operations_commerciales/FZC/OP FZC 2014/FZC THIRIET 2014.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/INTERMARCHE/2014 INTERMARCHE DECEMBRE FESTIFS COUPE.xls
+operations_commerciales/MDD/MODELES CJ/AUCHAN ATAC SCHIEVER/CONF OP/2014/CONFIRMATION OPERATION AUCHAN OCTOBRE 3 TRAFIC.xls
+operations_commerciales/MDD/MODELES CJ/AUCHAN ATAC SCHIEVER/CONF OP/2014/CONFIRMATION OPERATION AUCHAN OCTOBRE 4 LES GRATUITS.xls
+operations_commerciales/MDD/MODELES CJ/AUCHAN ATAC SCHIEVER/CONF OP/2014/CONFIRMATION OPERATION SCHIEVER AOUT 4.xls
+operations_commerciales/MDD/MODELES CJ/PROVERA/Chrono 461 AGENCE REPUBLICAIN LORRAIN.XLS
+operations_commerciales/MDD/MODELES CJ/PROVERA/Chrono 462 AGENCE EPSILON.XLS
+operations_commerciales/MDD/MODELES CJ/PROVERA/Chrono 463 AGENCE REYMANN.XLS
+operations_commerciales/MDD/MODELES CJ/PROVERA/CONF OPES CORA MATCH/2014/CORA/CONFIRMATION OPERATION_CORA 2014-67-11125-TERROIR SUD OUEST TRAFIC.xls
+operations_commerciales/MDD/MODELES CJ/PROVERA/CONF OPES CORA MATCH/2014/CORA/CONFIRMATION OPERATION_CORA 2014-71-11126 TRAFIC.xls
+operations_commerciales/MDD/MODELES CJ/PROVERA/CONF OPES CORA MATCH/2014/CORA/CONFIRMATION OPERATION_CORA_2014-76-11133-TRAFIC.xls
+operations_commerciales/MDD/OP MDD 2014/MDD CORA 2014.xls
+operations_commerciales/MDD/OP MDD 2014/MDD GROUPE AUCHAN 2014.xls
+
+sent 323901 bytes  received 7734 bytes  94752.86 bytes/sec
+total size is 56139935  speedup is 169.28
+sending incremental file list
+
+sent 20406 bytes  received 83 bytes  8195.60 bytes/sec
+total size is 99360776  speedup is 4849.47
+sending incremental file list
+
+sent 6273 bytes  received 92 bytes  2546.00 bytes/sec
+total size is 52063160  speedup is 8179.60
+sending incremental file list
+modeles/compo_asia_double_haut.lab
+
+sent 14769 bytes  received 1082 bytes  10567.33 bytes/sec
+total size is 42738688  speedup is 2696.28
+sending incremental file list
+
+sent 5781 bytes  received 30 bytes  3874.00 bytes/sec
+total size is 92829061  speedup is 15974.71
+sending incremental file list
+
+sent 63 bytes  received 12 bytes  50.00 bytes/sec
+total size is 90648576  speedup is 1208647.68
+sending incremental file list
+
+sent 7593 bytes  received 45 bytes  5092.00 bytes/sec
+total size is 9254930  speedup is 1211.70
+sending incremental file list
+
+sent 4308 bytes  received 24 bytes  2888.00 bytes/sec
+total size is 6387982  speedup is 1474.60
+sending incremental file list
+batch/DTL043002.vnc
+batch/DTL043003.vnc
+batch/DTL043004.vnc
+batch/DTL043005.vnc
+
+sent 10200 bytes  received 96 bytes  6864.00 bytes/sec
+total size is 16764158  speedup is 1628.22
+sending incremental file list
+
+sent 85 bytes  received 13 bytes  196.00 bytes/sec
+total size is 104853504  speedup is 1069933.71
+sending incremental file list
+operations_commerciales/chrono demande echantillons.xls
+operations_commerciales/FZC/OP FZC 2014/FZC THIRIET 2014.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/INTERMARCHE/2014 INTERMARCHE DECEMBRE FESTIFS COUPE.xls
+operations_commerciales/MDD/MODELES CJ/AUCHAN ATAC SCHIEVER/CONF OP/2014/CONFIRMATION OPERATION AUCHAN OCTOBRE 3 TRAFIC.xls
+operations_commerciales/MDD/MODELES CJ/AUCHAN ATAC SCHIEVER/CONF OP/2014/CONFIRMATION OPERATION AUCHAN OCTOBRE 4 LES GRATUITS.xls
+operations_commerciales/MDD/MODELES CJ/AUCHAN ATAC SCHIEVER/CONF OP/2014/CONFIRMATION OPERATION SCHIEVER AOUT 4.xls
+operations_commerciales/MDD/MODELES CJ/PROVERA/Chrono 461 AGENCE REPUBLICAIN LORRAIN.XLS
+operations_commerciales/MDD/MODELES CJ/PROVERA/Chrono 462 AGENCE EPSILON.XLS
+operations_commerciales/MDD/MODELES CJ/PROVERA/Chrono 463 AGENCE REYMANN.XLS
+operations_commerciales/MDD/MODELES CJ/PROVERA/CONF OPES CORA MATCH/2014/CORA/CONFIRMATION OPERATION_CORA 2014-67-11125-TERROIR SUD OUEST TRAFIC.xls
+operations_commerciales/MDD/MODELES CJ/PROVERA/CONF OPES CORA MATCH/2014/CORA/CONFIRMATION OPERATION_CORA 2014-71-11126 TRAFIC.xls
+operations_commerciales/MDD/MODELES CJ/PROVERA/CONF OPES CORA MATCH/2014/CORA/CONFIRMATION OPERATION_CORA_2014-76-11133-TRAFIC.xls
+operations_commerciales/MDD/OP MDD 2014/MDD CORA 2014.xls
+operations_commerciales/MDD/OP MDD 2014/MDD GROUPE AUCHAN 2014.xls
+
+sent 323901 bytes  received 7734 bytes  94752.86 bytes/sec
+total size is 56139935  speedup is 169.28
+sending incremental file list
+mercuriales/sync.ffs_db
+mercuriales/MERCURIALES - AGIS/gms/2014/REGIONS  2014/GALEC REGION MERCU JUIN 2014.xls
+mercuriales/MERCURIALES - AGIS/mdd/2014/2014 MERCURIALE AUCHAN.xls
+mercuriales/MERCURIALES - AGIS/mdd/2014/2014 MERCURIALE CASINO.xls
+mercuriales/MERCURIALES - AGIS/mdd/2014/2014 MERCURIALE PROVERA.xls
+deleting mercuriales/gms/2014/
+
+sent 51145 bytes  received 9341 bytes  24194.40 bytes/sec
+total size is 36346524  speedup is 600.91
+sending incremental file list
+modeles/compo_asia_double_haut.lab
+
+sent 14769 bytes  received 1082 bytes  10567.33 bytes/sec
+total size is 42738688  speedup is 2696.28
+sending incremental file list
+
+sent 7280 bytes  received 49 bytes  4886.00 bytes/sec
+total size is 13584181  speedup is 1853.48
+sending incremental file list
+
+sent 5745 bytes  received 23 bytes  3845.33 bytes/sec
+total size is 129159129  speedup is 22392.36
+sending incremental file list
+
+sent 5610 bytes  received 39 bytes  3766.00 bytes/sec
+total size is 59049369  speedup is 10453.07
+sending incremental file list
+
+sent 52256 bytes  received 97 bytes  20941.20 bytes/sec
+total size is 299490387  speedup is 5720.60
+sending incremental file list
+
+sent 20406 bytes  received 83 bytes  8195.60 bytes/sec
+total size is 99360776  speedup is 4849.47
+sending incremental file list
+
+sent 6273 bytes  received 92 bytes  4243.33 bytes/sec
+total size is 52063160  speedup is 8179.60
+sending incremental file list
+batch/DTL043002.vnc
+batch/DTL043003.vnc
+batch/DTL043004.vnc
+batch/DTL043005.vnc
+
+sent 10200 bytes  received 96 bytes  6864.00 bytes/sec
+total size is 16764158  speedup is 1628.22
+sending incremental file list
+
+sent 7877 bytes  received 20 bytes  5264.67 bytes/sec
+total size is 16764158  speedup is 2122.85

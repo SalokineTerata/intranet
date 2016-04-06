@@ -14,6 +14,30 @@ class FtaController {
 
     const CALLBACK_LINK_TO_TRANSITER_PAGE = "Retour";
     const CALLBACK_LINK_TO_TRANSITER_PAGE_VALIDATE = "Confirmer";
+    const TEST= ModuleConfig::VALUE_MAX_MOTEUR_RECHERCHE;
+
+    /**
+     * Duplication d'une table donné par son id
+     * @param string $paramTable
+     * @param int $paramId
+     * @return int
+     */
+    public static function duplicateId($paramTable, $paramId) {
+        $key = StaticStandardModel::duplicateRowsById($paramTable, $paramId);
+
+        return $key;
+    }
+
+    /**
+     * Duplication d'une table avec un nouvelle id 
+     * @param type $paramTable
+     * @param type $paramIdOLD
+     * @param type $paramIdNEW
+     * @return type
+     */
+    public static function duplicateWithNewId($paramTable, $paramIdOLD, $paramIdNEW) {
+        StaticStandardModel::duplicateRowsByIdReplaceLast($paramTable, $paramIdOLD, $paramIdNEW);
+    }
 
     /**
      *  Génère le commentaire d'un changement d'espace de travail
@@ -169,6 +193,34 @@ class FtaController {
             default:
                 break;
         }
+    }
+
+    /**
+     * On vérifie si un text ne contient que des  lettres en majuscule et en excluant les espaces auparavant
+     * @param type $paramString
+     * @return type
+     */
+    public static function isStringIsUperCase($paramString) {
+        $temp = str_replace(' ', '', $paramString);
+        return ctype_upper(preg_replace('/[0-9]+/', '', $temp));
+    }
+
+    /**
+     * On vérifie si un text ne contient que des lettre en minuscule et en excluant les espaces auparavant
+     * @param type $paramString
+     * @return type
+     */
+    public static function isStringIsUperLower($paramString) {
+        return ctype_lower(str_replace(' ', '', $paramString));
+    }
+
+    /**
+     * On vérifie si un text contient des caractère spéciaux en excluant les espaces auparavant
+     * @param type $paramString
+     * @return type
+     */
+    public static function isStringHasSpecialCaracter($paramString, $paramCheckList) {
+        return preg_match($paramCheckList, str_replace(' ', '', $paramString));
     }
 
 }

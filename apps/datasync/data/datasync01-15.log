@@ -1,0 +1,155 @@
+Démarrage : mer jan 15 23:00:01 CET 2014
+Arrêt     : mer jan 15 23:00:43 CET 2014
+
+
+
+Base MySQL sélectionnée: agis
+Nombre de serveur(s) Linux concerné(s): 4
+Nombre de dossier(s) à mettre à jour: 24
+
+sending incremental file list
+
+sent 5691 bytes  received 45 bytes  2294.40 bytes/sec
+total size is 10159163  speedup is 1771.12
+sending incremental file list
+suivi_investissement/2013-2014/Pr\#351pa budget invest r\#351vis\#351 2013-2014/Bud invest AVI r\#351vis\#351 2013-2014.xls
+suivi_investissement/2013-2014/Pr\#351pa budget invest r\#351vis\#351 2013-2014/Bud invest HER r\#351vis\#351 2013-2014.xls
+suivi_investissement/2013-2014/Pr\#351pa budget invest r\#351vis\#351 2013-2014/Bud invest PFT r\#351vis\#351 2013-2014.xls
+suivi_investissement/2013-2014/Pr\#351pa budget invest r\#351vis\#351 2013-2014/Bud invest TAR r\#351vis\#351 2013-2014.xls
+
+sent 41899 bytes  received 2133 bytes  29354.67 bytes/sec
+total size is 11907663  speedup is 270.43
+sending incremental file list
+
+sent 63 bytes  received 12 bytes  150.00 bytes/sec
+total size is 83456000  speedup is 1112746.67
+sending incremental file list
+
+sent 7538 bytes  received 45 bytes  5055.33 bytes/sec
+total size is 9253358  speedup is 1220.28
+sending incremental file list
+
+sent 7695 bytes  received 20 bytes  5143.33 bytes/sec
+total size is 16751789  speedup is 2171.33
+sending incremental file list
+
+sent 4308 bytes  received 24 bytes  2888.00 bytes/sec
+total size is 6387982  speedup is 1474.60
+sending incremental file list
+mercuriales/sync.ffs_db
+mercuriales/gms/2014/CENTRALES 2014/AUCHAN 2014.xls
+mercuriales/gms/2014/CENTRALES 2014/CASINO 2014.xls
+mercuriales/mdd/2014/2014 MERCURIALE AUCHAN.xls
+mercuriales/mdd/2014/2014 MERCURIALE CARREFOUR ASIATIQUE.xls
+mercuriales/mdd/2014/2014 MERCURIALE CARREFOUR PLATS CUISINES.xls
+mercuriales/mdd/2014/2014 MERCURIALE PROVERA.xls
+
+sent 50935 bytes  received 13333 bytes  25707.20 bytes/sec
+total size is 25732441  speedup is 400.39
+sending incremental file list
+
+sent 5047 bytes  received 27 bytes  3382.67 bytes/sec
+total size is 39173092  speedup is 7720.36
+sending incremental file list
+operations_commerciales/DEMANDE ECHANTILLONS CL .xls
+operations_commerciales/chrono demande echantillons.xls
+operations_commerciales/sync.ffs_db
+operations_commerciales/GMS/RECAP DEMANDE ET CONFIRMATIONS HEBDO.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS CARREFOUR 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS CASINO 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS GALEC 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS INTERMARCHE 2014-FUTUR MASTER.xls
+
+sent 297317 bytes  received 27172 bytes  72108.67 bytes/sec
+total size is 60341261  speedup is 185.96
+sending incremental file list
+
+sent 20908 bytes  received 88 bytes  13997.33 bytes/sec
+total size is 99120505  speedup is 4720.92
+sending incremental file list
+
+sent 7464 bytes  received 13 bytes  2990.80 bytes/sec
+total size is 32964096  speedup is 4408.73
+sending incremental file list
+
+sent 63 bytes  received 12 bytes  50.00 bytes/sec
+total size is 83456000  speedup is 1112746.67
+sending incremental file list
+
+sent 7538 bytes  received 45 bytes  5055.33 bytes/sec
+total size is 9253358  speedup is 1220.28
+sending incremental file list
+
+sent 4308 bytes  received 24 bytes  2888.00 bytes/sec
+total size is 6387982  speedup is 1474.60
+sending incremental file list
+
+sent 7695 bytes  received 20 bytes  5143.33 bytes/sec
+total size is 16751789  speedup is 2171.33
+sending incremental file list
+
+sent 85 bytes  received 13 bytes  65.33 bytes/sec
+total size is 104853504  speedup is 1069933.71
+sending incremental file list
+operations_commerciales/DEMANDE ECHANTILLONS CL .xls
+operations_commerciales/chrono demande echantillons.xls
+operations_commerciales/sync.ffs_db
+operations_commerciales/GMS/RECAP DEMANDE ET CONFIRMATIONS HEBDO.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS CARREFOUR 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS CASINO 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS GALEC 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS INTERMARCHE 2014-FUTUR MASTER.xls
+
+sent 297317 bytes  received 27172 bytes  92711.14 bytes/sec
+total size is 60341261  speedup is 185.96
+sending incremental file list
+mercuriales/sync.ffs_db
+mercuriales/gms/2014/CENTRALES 2014/AUCHAN 2014.xls
+mercuriales/gms/2014/CENTRALES 2014/CASINO 2014.xls
+mercuriales/mdd/2014/2014 MERCURIALE AUCHAN.xls
+mercuriales/mdd/2014/2014 MERCURIALE CARREFOUR ASIATIQUE.xls
+mercuriales/mdd/2014/2014 MERCURIALE CARREFOUR PLATS CUISINES.xls
+mercuriales/mdd/2014/2014 MERCURIALE PROVERA.xls
+
+sent 50935 bytes  received 13333 bytes  25707.20 bytes/sec
+total size is 25732441  speedup is 400.39
+sending incremental file list
+
+sent 7464 bytes  received 13 bytes  4984.67 bytes/sec
+total size is 32964096  speedup is 4408.73
+sending incremental file list
+
+sent 5691 bytes  received 45 bytes  11472.00 bytes/sec
+total size is 10159163  speedup is 1771.12
+sending incremental file list
+
+sent 5677 bytes  received 23 bytes  3800.00 bytes/sec
+total size is 128675317  speedup is 22574.62
+sending incremental file list
+
+sent 5353 bytes  received 38 bytes  3594.00 bytes/sec
+total size is 56169881  speedup is 10419.20
+sending incremental file list
+codesoft/Codesoft 7/Codes Produits/79128_sam l\#351gumes 25g SDV_400p.bak
+codesoft/Codesoft 7/Codes Produits/79128_sam l\#351gumes 25g SDV_400p.lab
+codesoft/Codesoft 7/Codes Produits/79133_sam l\#351gumes 25g SDV_100p.bak
+codesoft/Codesoft 7/Codes Produits/79133_sam l\#351gumes 25g SDV_100p.lab
+codesoft/Codesoft 7/Codes Produits/79918_rouleau mexicain SDV.bak
+codesoft/Codesoft 7/Codes Produits/79918_rouleau mexicain SDV.lab
+codesoft/Codesoft 7/Codes Produits/rouleau boeuf SDV.bak
+codesoft/Codesoft 7/ITM FE/43618_sam_porc_recto.bak
+codesoft/Codesoft 7/ITM FE/43618_sam_porc_recto.lab
+codesoft/Codesoft 7/ITM FE/43618_sam_porc_verso.bak
+codesoft/Codesoft 7/ITM FE/43618_sam_porc_verso.lab
+codesoft/Codesoft 7/ITM FE/43619_ass_asia_verso.bak
+codesoft/Codesoft 7/ITM FE/43619_ass_asia_verso.lab
+codesoft/Codesoft 7/ITM FE/43619_ass_asiatique_recto.bak
+codesoft/Codesoft 7/ITM FE/43619_ass_asiatique_recto.lab
+codesoft/Codesoft 7/ITM FE/43620_b_crev_panes_recto.bak
+codesoft/Codesoft 7/ITM FE/43620_b_crev_panes_recto.lab
+codesoft/Codesoft 7/ITM FE/43621_acras_recto.bak
+codesoft/Codesoft 7/ITM FE/43621_acras_recto.lab
+
+sent 641037 bytes  received 19005 bytes  146676.00 bytes/sec
+total size is 286561875  speedup is 434.16
+sending incremental file list

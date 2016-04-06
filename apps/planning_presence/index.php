@@ -6,7 +6,6 @@
  */
 //$module = substr(strrchr(`pwd`, '/'), 1);
 //$module = trim($module);
-
 //echo "<h1><table>";
 //foreach ($_SERVER as $key => $value) {
 //    
@@ -204,7 +203,11 @@ echo "</tr>";
 
 //Construction du planning
 //Affichage des différents groupes
-$req1 = "select geo,id_geo from geo WHERE id_site IS NOT NULL AND ordre_planning_presence_geo<>0 AND site_actif=1 order by ordre_planning_presence_geo asc";
+$req1 = "SELECT " . GeoModel::FIELDNAME_GEO . "," . GeoModel::KEYNAME
+        . " FROM " . GeoModel::TABLENAME
+        . " WHERE " . GeoModel::FIELDNAME_ORDRE_PLANNING_PRESENCE_GEO . "<>0"
+        . " AND " . GeoModel::FIELDNAME_SITE_ACTIF . "=1"
+        . " ORDER BY " . GeoModel::FIELDNAME_ORDRE_PLANNING_PRESENCE_GEO . " ASC";
 $result1 = DatabaseOperation::convertSqlStatementWithoutKeyToArray($req1);
 echo "<table class=contenu width=100% border=1>";
 if ($result1) {

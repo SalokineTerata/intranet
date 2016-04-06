@@ -1,0 +1,37 @@
+#!/bin/sh
+CHEMIN="$(dirname $0)"
+
+#Recherche pour savoir si on est dans "intranet" ou "intranet.dev"
+case "$CHEMIN" in *intranet.dev*) SITE=".dev" ;; esac
+
+case $1 in
+  -d | -w | -v )
+	LOG="/data/var/www/system/log/datasync$SITE.err"
+	
+  	#Génération et mise à jour des scripts utilisés
+	echo -n "Démarrage " >> $LOG
+	date >> $LOG
+	lynx -dump intranet$SITE.agis.fr/lib/ncptools/ncpmanager.php
+	lynx -dump intranet$SITE.agis.fr/datasync/index.php?mode=$1  
+	
+	#Lancement de la recopie
+	/data/etc/init.d/ncpmanager.sh start >> $LOG
+	$CHEMIN/netcopy.sh >> $LOG
+	/data/etc/init.d/ncpmanager.sh stop >> $LOG
+	
+	echo -n "Arrêt " >> $LOG
+	date >> $LOG
+	echo "##############################################################################" >> $LOG
+    ;;
+
+
+  *)
+    	echo "Usage: $0 [OPTIONS]"
+	echo "  OPTIONS LIST:"
+	echo "  -d  daily network copy"
+	echo "  -w  weekly network copy"
+	echo "  -v  database virus copy"
+    ;;
+esac
+
+

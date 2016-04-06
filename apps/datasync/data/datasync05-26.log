@@ -1,0 +1,139 @@
+Démarrage : lun mai 26 23:00:01 CEST 2014
+Arrêt     : lun mai 26 23:02:17 CEST 2014
+
+
+
+Base MySQL sélectionnée: agis
+Nombre de serveur(s) Linux concerné(s): 4
+Nombre de dossier(s) à mettre à jour: 29
+
+sending incremental file list
+gestion_crise/mise \#340 jour 2014/CASINO/PR  ALERTE METIERS COUPE TEL BUREAU 2014.pdf
+
+sent 84263 bytes  received 68 bytes  33732.40 bytes/sec
+total size is 12774593  speedup is 151.48
+sending incremental file list
+
+sent 6279 bytes  received 38 bytes  2526.80 bytes/sec
+total size is 12442583  speedup is 1969.70
+sending incremental file list
+erp_data.mdb
+
+sent 8252763 bytes  received 65747 bytes  175126.53 bytes/sec
+total size is 88092672  speedup is 10.59
+sending incremental file list
+
+sent 7538 bytes  received 45 bytes  5055.33 bytes/sec
+total size is 9253358  speedup is 1220.28
+sending incremental file list
+
+sent 7756 bytes  received 20 bytes  3110.40 bytes/sec
+total size is 16755943  speedup is 2154.83
+sending incremental file list
+
+sent 4308 bytes  received 24 bytes  2888.00 bytes/sec
+total size is 6387982  speedup is 1474.60
+sending incremental file list
+mercuriales/sync.ffs_lock
+
+sent 9826 bytes  received 90 bytes  3966.40 bytes/sec
+total size is 32502048  speedup is 3277.74
+sending incremental file list
+
+sent 5047 bytes  received 27 bytes  3382.67 bytes/sec
+total size is 39173092  speedup is 7720.36
+sending incremental file list
+operations_commerciales/FZC/CONFIRMATIONS/2014/PICARD/PICARD_CONFIRMATION OCTOBRE 2014.xls
+operations_commerciales/FZC/OP FZC 2014/FZC ARGEL 2014.xls
+operations_commerciales/FZC/OP FZC 2014/FZC PICARD 2014.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/CASINO HM/2014 HM DCD S28.xls
+
+sent 53462 bytes  received 984 bytes  9899.27 bytes/sec
+total size is 51244955  speedup is 941.21
+sending incremental file list
+
+sent 20296 bytes  received 83 bytes  5822.57 bytes/sec
+total size is 99065320  speedup is 4861.15
+sending incremental file list
+
+sent 4380 bytes  received 82 bytes  1784.80 bytes/sec
+total size is 35609223  speedup is 7980.55
+sending incremental file list
+
+sent 9956 bytes  received 13 bytes  6646.00 bytes/sec
+total size is 47981568  speedup is 4813.08
+sending incremental file list
+
+sent 5781 bytes  received 30 bytes  3874.00 bytes/sec
+total size is 93132165  speedup is 16026.87
+sending incremental file list
+erp_data.mdb
+
+sent 8252763 bytes  received 65747 bytes  191230.11 bytes/sec
+total size is 88092672  speedup is 10.59
+sending incremental file list
+
+sent 7538 bytes  received 45 bytes  5055.33 bytes/sec
+total size is 9253358  speedup is 1220.28
+sending incremental file list
+
+sent 4308 bytes  received 24 bytes  2888.00 bytes/sec
+total size is 6387982  speedup is 1474.60
+sending incremental file list
+
+sent 7756 bytes  received 20 bytes  5184.00 bytes/sec
+total size is 16755943  speedup is 2154.83
+sending incremental file list
+
+sent 85 bytes  received 13 bytes  196.00 bytes/sec
+total size is 104853504  speedup is 1069933.71
+sending incremental file list
+operations_commerciales/FZC/CONFIRMATIONS/2014/PICARD/PICARD_CONFIRMATION OCTOBRE 2014.xls
+operations_commerciales/FZC/OP FZC 2014/FZC ARGEL 2014.xls
+operations_commerciales/FZC/OP FZC 2014/FZC PICARD 2014.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/CASINO HM/2014 HM DCD S28.xls
+
+sent 53462 bytes  received 984 bytes  21778.40 bytes/sec
+total size is 51244955  speedup is 941.21
+sending incremental file list
+mercuriales/sync.ffs_lock
+
+sent 9826 bytes  received 90 bytes  6610.67 bytes/sec
+total size is 32502060  speedup is 3277.74
+sending incremental file list
+
+sent 9956 bytes  received 13 bytes  6646.00 bytes/sec
+total size is 47981568  speedup is 4813.08
+sending incremental file list
+gestion_crise/mise \#340 jour 2014/CASINO/PR  ALERTE METIERS COUPE TEL BUREAU 2014.pdf
+
+sent 84263 bytes  received 68 bytes  56220.67 bytes/sec
+total size is 12774593  speedup is 151.48
+sending incremental file list
+
+sent 5729 bytes  received 23 bytes  3834.67 bytes/sec
+total size is 129159129  speedup is 22454.65
+sending incremental file list
+
+sent 5610 bytes  received 39 bytes  3766.00 bytes/sec
+total size is 59049369  speedup is 10453.07
+sending incremental file list
+
+sent 51032 bytes  received 95 bytes  34084.67 bytes/sec
+total size is 293774419  speedup is 5745.97
+sending incremental file list
+
+sent 20296 bytes  received 83 bytes  13586.00 bytes/sec
+total size is 99065320  speedup is 4861.15
+sending incremental file list
+
+sent 4380 bytes  received 82 bytes  2974.67 bytes/sec
+total size is 35609223  speedup is 7980.55
+sending incremental file list
+
+sent 7756 bytes  received 20 bytes  5184.00 bytes/sec
+total size is 16755943  speedup is 2154.83
+sending incremental file list
+
+sent 7756 bytes  received 20 bytes  5184.00 bytes/sec
+total size is 16755943  speedup is 2154.83

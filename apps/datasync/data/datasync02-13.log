@@ -1,0 +1,196 @@
+Démarrage : jeu fév 13 23:00:01 CET 2014
+Arrêt     : jeu fév 13 23:01:13 CET 2014
+
+
+
+Base MySQL sélectionnée: agis
+Nombre de serveur(s) Linux concerné(s): 4
+Nombre de dossier(s) à mettre à jour: 26
+
+sending incremental file list
+deleting gestion_crise/Dument type n\#351cessaire pour retrait/E.QT.021-01 -Affichette Rappel .docx
+deleting gestion_crise/Dument type n\#351cessaire pour retrait/E.QT.016-01 - Compte rendu Post crise.docx
+deleting gestion_crise/Dument type n\#351cessaire pour retrait/E.QT.015-01 _ FICHE APPEL JOURNALISTE.docx
+deleting gestion_crise/Dument type n\#351cessaire pour retrait/E.QT.013-01 - Message Clients Retrait Rappels.doc
+deleting gestion_crise/Dument type n\#351cessaire pour retrait/E.QT.008-01_Fiche_gestion_appels.doc
+deleting gestion_crise/Dument type n\#351cessaire pour retrait/E.QT.001.004 - CR de situation et ETUDE D_IMPACT.doc
+deleting gestion_crise/Dument type n\#351cessaire pour retrait/
+gestion_crise/Document type n\#351cessaire pour retrait/
+gestion_crise/Document type n\#351cessaire pour retrait/E.QT.001.004 - CR de situation et ETUDE D_IMPACT.doc
+gestion_crise/Document type n\#351cessaire pour retrait/E.QT.008-01_Fiche_gestion_appels.doc
+gestion_crise/Document type n\#351cessaire pour retrait/E.QT.013-01 - Message Clients Retrait Rappels.doc
+gestion_crise/Document type n\#351cessaire pour retrait/E.QT.015-01 _ FICHE APPEL JOURNALISTE.docx
+gestion_crise/Document type n\#351cessaire pour retrait/E.QT.016-01 - Compte rendu Post crise.docx
+gestion_crise/Document type n\#351cessaire pour retrait/E.QT.021-01 -Affichette Rappel .docx
+
+sent 311546 bytes  received 163 bytes  89059.71 bytes/sec
+total size is 11666224  speedup is 37.43
+sending incremental file list
+
+sent 5993 bytes  received 37 bytes  4020.00 bytes/sec
+total size is 12050302  speedup is 1998.39
+sending incremental file list
+
+sent 63 bytes  received 12 bytes  50.00 bytes/sec
+total size is 84160512  speedup is 1122140.16
+sending incremental file list
+
+sent 7538 bytes  received 45 bytes  5055.33 bytes/sec
+total size is 9253358  speedup is 1220.28
+sending incremental file list
+
+sent 7695 bytes  received 20 bytes  5143.33 bytes/sec
+total size is 16751789  speedup is 2171.33
+sending incremental file list
+
+sent 4308 bytes  received 24 bytes  8664.00 bytes/sec
+total size is 6387982  speedup is 1474.60
+sending incremental file list
+
+sent 7351 bytes  received 64 bytes  4943.33 bytes/sec
+total size is 27357870  speedup is 3689.53
+sending incremental file list
+
+sent 5047 bytes  received 27 bytes  3382.67 bytes/sec
+total size is 39173092  speedup is 7720.36
+sending incremental file list
+
+sent 35770 bytes  received 139 bytes  14363.60 bytes/sec
+total size is 45606309  speedup is 1270.05
+sending incremental file list
+
+sent 19842 bytes  received 78 bytes  7968.00 bytes/sec
+total size is 98501331  speedup is 4944.85
+sending incremental file list
+gofast/sync.ffs_db
+gofast/CHANTIERS/1_CNP_DELEGATION_Cecile/CNP_fonctionnement_CR_030214.doc
+gofast/CHANTIERS/1_CNP_DELEGATION_Cecile/1_EQUIPE/Equipe_200114.JPG
+gofast/CHANTIERS/1_CNP_DELEGATION_Cecile/4_GEMBA/Bilan_CNP_1ersem13.doc
+gofast/CHANTIERS/1_CNP_DELEGATION_Cecile/DDD/DDD_ESPRI_CABILLAUD.doc
+gofast/CHANTIERS/1_CNP_DELEGATION_Cecile/NOTATION_DDD/NOTATION_DDD_310114.xls
+gofast/CHANTIERS/1_CNP_DELEGATION_Cecile/PLANNING_DVPT/
+gofast/CHANTIERS/2_FTK_CLIENTS_Mathieu/1_EQUIPE/
+gofast/CHANTIERS/2_FTK_CLIENTS_Mathieu/2_DEFIS/
+gofast/CHANTIERS/2_FTK_CLIENTS_Mathieu/3_OBJECTIFS/
+gofast/CHANTIERS/2_FTK_CLIENTS_Mathieu/4_GEMBA/
+gofast/CHANTIERS/2_FTK_CLIENTS_Mathieu/5_STANDARDS/
+gofast/CHANTIERS/2_FTK_CLIENTS_Mathieu/6_BILAN/
+gofast/CHANTIERS/3_FTA_Boris/GOFAST_reunion_preparation_chantier_BS__220114.doc
+gofast/CHANTIERS/3_FTA_Boris/1_EQUIPE/
+gofast/CHANTIERS/3_FTA_Boris/2_DEFIS/
+gofast/CHANTIERS/3_FTA_Boris/3_OBJECTIFS/
+gofast/CHANTIERS/3_FTA_Boris/4_GEMBA/
+gofast/CHANTIERS/3_FTA_Boris/5_STANDARDS/
+gofast/CHANTIERS/3_FTA_Boris/6_BILAN/
+gofast/CHANTIERS/4_COTATION_Benjamin/1_EQUIPE/
+gofast/CHANTIERS/4_COTATION_Benjamin/2_DEFIS/
+gofast/CHANTIERS/4_COTATION_Benjamin/3_OBJECTIFS/
+gofast/CHANTIERS/4_COTATION_Benjamin/4_GEMBA/
+gofast/CHANTIERS/4_COTATION_Benjamin/5_STANDARDS/
+gofast/CHANTIERS/4_COTATION_Benjamin/6_BILAN/
+gofast/CHANTIERS/5_PROCESS_Vincent/1_EQUIPE/
+gofast/CHANTIERS/5_PROCESS_Vincent/2_DEFIS/
+gofast/CHANTIERS/5_PROCESS_Vincent/3_OBJECTIFS/
+gofast/CHANTIERS/5_PROCESS_Vincent/4_GEMBA/
+gofast/CHANTIERS/5_PROCESS_Vincent/5_STANDARDS/
+gofast/CHANTIERS/5_PROCESS_Vincent/6_BILAN/
+gofast/CHANTIERS/6_LANCEMENT_PDTS_Emeline/1_EQUIPE/
+gofast/CHANTIERS/6_LANCEMENT_PDTS_Emeline/2_DEFIS/
+gofast/CHANTIERS/6_LANCEMENT_PDTS_Emeline/3_OBJECTIFS/
+gofast/CHANTIERS/6_LANCEMENT_PDTS_Emeline/4_GEMBA/
+gofast/CHANTIERS/6_LANCEMENT_PDTS_Emeline/5_STANDARDS/
+gofast/CHANTIERS/6_LANCEMENT_PDTS_Emeline/6_BILAN/
+gofast/CHANTIERS/7_DONNEES_R&D_Morgane/1_EQUIPE/
+gofast/CHANTIERS/7_DONNEES_R&D_Morgane/2_DEFIS/
+gofast/CHANTIERS/7_DONNEES_R&D_Morgane/3_OBJECTIFS/
+gofast/CHANTIERS/7_DONNEES_R&D_Morgane/4_GEMBA/
+gofast/CHANTIERS/7_DONNEES_R&D_Morgane/5_STANDARDS/
+gofast/CHANTIERS/7_DONNEES_R&D_Morgane/6_BILAN/
+gofast/CHANTIERS/8_ADVITIUM_Cecile/1_EQUIPE/
+gofast/CHANTIERS/8_ADVITIUM_Cecile/2_DEFIS/
+gofast/CHANTIERS/8_ADVITIUM_Cecile/3_OBJECTIFS/
+gofast/CHANTIERS/8_ADVITIUM_Cecile/4_GEMBA/
+gofast/CHANTIERS/8_ADVITIUM_Cecile/5_STANDARDS/
+gofast/CHANTIERS/8_ADVITIUM_Cecile/6_BILAN/
+gofast/INFORMATIONS_GENERALES/1_GOFAST_pres_projet_280114.ppt
+gofast/INFORMATIONS_GENERALES/2_GOFAST_Am_Continue_Generalites_280114.ppt
+gofast/INFORMATIONS_GENERALES/MEMO_chantier_100114.doc
+gofast/INFORMATIONS_GENERALES/5S_exemples_AGIS/
+gofast/PLANNING_GENERAL/Planning_equipes_GOFAST_valide.xls
+
+sent 6195615 bytes  received 418 bytes  184956.21 bytes/sec
+total size is 8855062  speedup is 1.43
+sending incremental file list
+
+sent 8787 bytes  received 13 bytes  5866.67 bytes/sec
+total size is 40294400  speedup is 4578.91
+sending incremental file list
+
+sent 63 bytes  received 12 bytes  150.00 bytes/sec
+total size is 84160512  speedup is 1122140.16
+sending incremental file list
+
+sent 7538 bytes  received 45 bytes  15166.00 bytes/sec
+total size is 9253358  speedup is 1220.28
+sending incremental file list
+
+sent 4308 bytes  received 24 bytes  8664.00 bytes/sec
+total size is 6387982  speedup is 1474.60
+sending incremental file list
+
+sent 7695 bytes  received 20 bytes  5143.33 bytes/sec
+total size is 16751789  speedup is 2171.33
+sending incremental file list
+
+sent 85 bytes  received 13 bytes  65.33 bytes/sec
+total size is 104853504  speedup is 1069933.71
+sending incremental file list
+
+sent 35770 bytes  received 139 bytes  23939.33 bytes/sec
+total size is 45606309  speedup is 1270.05
+sending incremental file list
+
+sent 7351 bytes  received 64 bytes  2966.00 bytes/sec
+total size is 27357870  speedup is 3689.53
+sending incremental file list
+
+sent 8787 bytes  received 13 bytes  5866.67 bytes/sec
+total size is 40294400  speedup is 4578.91
+sending incremental file list
+deleting gestion_crise/Dument type n\#351cessaire pour retrait/E.QT.021-01 -Affichette Rappel .docx
+deleting gestion_crise/Dument type n\#351cessaire pour retrait/E.QT.016-01 - Compte rendu Post crise.docx
+deleting gestion_crise/Dument type n\#351cessaire pour retrait/E.QT.015-01 _ FICHE APPEL JOURNALISTE.docx
+deleting gestion_crise/Dument type n\#351cessaire pour retrait/E.QT.013-01 - Message Clients Retrait Rappels.doc
+deleting gestion_crise/Dument type n\#351cessaire pour retrait/E.QT.008-01_Fiche_gestion_appels.doc
+deleting gestion_crise/Dument type n\#351cessaire pour retrait/E.QT.001.004 - CR de situation et ETUDE D_IMPACT.doc
+deleting gestion_crise/Dument type n\#351cessaire pour retrait/
+gestion_crise/Document type n\#351cessaire pour retrait/
+gestion_crise/Document type n\#351cessaire pour retrait/E.QT.001.004 - CR de situation et ETUDE D_IMPACT.doc
+gestion_crise/Document type n\#351cessaire pour retrait/E.QT.008-01_Fiche_gestion_appels.doc
+gestion_crise/Document type n\#351cessaire pour retrait/E.QT.013-01 - Message Clients Retrait Rappels.doc
+gestion_crise/Document type n\#351cessaire pour retrait/E.QT.015-01 _ FICHE APPEL JOURNALISTE.docx
+gestion_crise/Document type n\#351cessaire pour retrait/E.QT.016-01 - Compte rendu Post crise.docx
+gestion_crise/Document type n\#351cessaire pour retrait/E.QT.021-01 -Affichette Rappel .docx
+
+sent 311546 bytes  received 163 bytes  89059.71 bytes/sec
+total size is 11666224  speedup is 37.43
+sending incremental file list
+
+sent 5677 bytes  received 23 bytes  3800.00 bytes/sec
+total size is 128675317  speedup is 22574.62
+sending incremental file list
+
+sent 5353 bytes  received 38 bytes  3594.00 bytes/sec
+total size is 56169881  speedup is 10419.20
+sending incremental file list
+
+sent 50143 bytes  received 94 bytes  33491.33 bytes/sec
+total size is 290527827  speedup is 5783.14
+sending incremental file list
+
+sent 19842 bytes  received 78 bytes  13280.00 bytes/sec
+total size is 98501331  speedup is 4944.85
+sending incremental file list
+
+sent 2820 bytes  received 77 bytes  1931.33 bytes/sec
+total size is 8855062  speedup is 3056.63

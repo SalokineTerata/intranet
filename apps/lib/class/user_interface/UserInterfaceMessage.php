@@ -79,6 +79,8 @@ class UserInterfaceMessage {
     const FR_WARNING_DATA_SITE_DE_PRODUCTION_TITLE = "Site de production d'une Fiche Technique Article";
     const FR_WARNING_DATA_VALIDATION_FTA_CODE_LDC = "Le Code LDC doit être unique.";
     const FR_WARNING_DUPLICATION_DE_FTA = " Attention, vous êtes sur le point de dupliquer la Fiche Technique Article suivante:<br>";
+    const FR_WARNING_DUREE_DE_VIE_COMPOSANT = " Attention, la Durée de Vie utilisée pour calculer la DLC etiquetée doit être renseigné<br>";
+    const FR_WARNING_MISSING_DATA = "Donnée manquante";
     const FR_WARNING_ECHEANCE_DEPASSEE = "Certaines échéances sont dépassées !";
     const FR_WARNING_EMBALLAGE_COLIS = "Il ne doit y avoir qu'un seul emballage Colis";
     const FR_WARNING_EMBALLAGE_COLIS_ARCADIA = "Il n'y a pas de correspondance sur Arcadia à cette emballage Colis";
@@ -92,6 +94,8 @@ class UserInterfaceMessage {
     const FR_WARNING_PARAM_ID_FTA_NOT_EXISTANT = "Erreur la Fta n'existe pas.<br><br>";
     const FR_WARNING_PARAM_ID_FTA_TITLE = "Affichage d'une Fta";
     const FR_WARNING_FTA_ETAT_REMOVE = "Etes vous certain de vouloir retirer cette Fiche Technique ? Les autres fiches du dossier resteront indems.";
+    const FR_WARNING_RECHERE = "Veuillez précisez votre recherche, votre demande a un résultat supèrieur à ";
+    const FR_WARNING_RECHERE_ERREUR = "Vos critères de recherche ne donnent aucun résultat.";
 
     /**
      * Toujours mettre un | devant les message de type Règle de validations
@@ -100,6 +104,8 @@ class UserInterfaceMessage {
     const FR_WARNING_VALIDATION_RULES_LESS5 = " | Cette donnée a dépassé cinq caractères ";
     const FR_WARNING_VALIDATION_RULES_LESS8 = " | Cette donnée a dépassé huit caractères ";
     const FR_WARNING_VALIDATION_RULES_DATA_NOT_EMPTY = " | Cette donnée doit être saisie ";
+    const FR_WARNING_VALIDATION_RULES_DATA_NOT_SMALL = " | Cette donnée doit contenir que des majuscules ";
+    const FR_WARNING_VALIDATION_RULES_DATA_NOT_SPECIAL = " | Cette donnée ne doit pas contenir des caractères spéciaux ";
     const FR_WARNING_WORKFLOW_INACTIF_1 = "L'espace de travail \"";
     const FR_WARNING_WORKFLOW_INACTIF_2 = "\" est inactif";
     const FR_WARNING_WORKFLOW_INACTIF_TITLE = "Espace de travail inactif.";

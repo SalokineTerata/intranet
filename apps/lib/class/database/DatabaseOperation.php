@@ -264,6 +264,21 @@ class DatabaseOperation {
     }
 
     /**
+     * Retourne les noms des colonnes de la table 
+     * @param string $paramTableName
+     * @return array
+     */
+    public static function getArrayFiledsNamesTable($paramTableName) {
+        $pdo = DatabaseOperation::databaseAcces();
+        $recordset = $pdo->query("SHOW COLUMNS FROM " . $paramTableName);
+        $fields = $recordset->fetchAll(PDO::FETCH_ASSOC);
+        foreach ($fields as $field) {
+            $fieldNames[] = $field['Field'];
+        }
+        return $fieldNames;
+    }
+
+    /**
      * Permet l'acces aux fonctions d'execution de PDO
      * @return type
      */

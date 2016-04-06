@@ -1,0 +1,139 @@
+Démarrage : ven mai  9 23:00:01 CEST 2014
+Arrêt     : ven mai  9 23:02:31 CEST 2014
+
+
+
+Base MySQL sélectionnée: agis
+Nombre de serveur(s) Linux concerné(s): 4
+Nombre de dossier(s) à mettre à jour: 29
+
+sending incremental file list
+
+sent 7051 bytes  received 49 bytes  2840.00 bytes/sec
+total size is 12693370  speedup is 1787.80
+sending incremental file list
+
+sent 6274 bytes  received 38 bytes  4208.00 bytes/sec
+total size is 12421591  speedup is 1967.93
+sending incremental file list
+erp_data.mdb
+
+sent 8149078 bytes  received 65747 bytes  184602.81 bytes/sec
+total size is 88092672  speedup is 10.72
+sending incremental file list
+
+sent 7538 bytes  received 45 bytes  2166.57 bytes/sec
+total size is 9253358  speedup is 1220.28
+sending incremental file list
+
+sent 7695 bytes  received 20 bytes  3086.00 bytes/sec
+total size is 16751789  speedup is 2171.33
+sending incremental file list
+
+sent 4308 bytes  received 24 bytes  2888.00 bytes/sec
+total size is 6387982  speedup is 1474.60
+sending incremental file list
+
+sent 9473 bytes  received 67 bytes  1467.69 bytes/sec
+total size is 31674916  speedup is 3320.22
+sending incremental file list
+
+sent 5047 bytes  received 27 bytes  3382.67 bytes/sec
+total size is 39173092  speedup is 7720.36
+sending incremental file list
+operations_commerciales/chrono demande echantillons.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS CARREFOUR MARKET 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS CASINO 2014-FUTUR MASTER.xls
+operations_commerciales/MDD/MODELES CJ/PROVERA/Chrono 291 AGENCE REYMANN.XLS
+operations_commerciales/MDD/MODELES CJ/PROVERA/CONF OPES CORA MATCH/2014/CORA/CONFIRMATION OPERATION_CORA_2014-43-11108-TRAFIC.xls
+operations_commerciales/MDD/OP MDD 2014/MDD CORA 2014.xls
+
+sent 246756 bytes  received 15518 bytes  24978.48 bytes/sec
+total size is 50312603  speedup is 191.83
+sending incremental file list
+
+sent 20296 bytes  received 83 bytes  8151.60 bytes/sec
+total size is 99065320  speedup is 4861.15
+sending incremental file list
+
+sent 4380 bytes  received 82 bytes  1784.80 bytes/sec
+total size is 35609223  speedup is 7980.55
+sending incremental file list
+
+sent 9573 bytes  received 13 bytes  6390.67 bytes/sec
+total size is 45578752  speedup is 4754.72
+sending incremental file list
+
+sent 5781 bytes  received 30 bytes  2324.40 bytes/sec
+total size is 93132165  speedup is 16026.87
+sending incremental file list
+erp_data.mdb
+
+sent 8149078 bytes  received 65747 bytes  188846.55 bytes/sec
+total size is 88092672  speedup is 10.72
+sending incremental file list
+
+sent 7538 bytes  received 45 bytes  15166.00 bytes/sec
+total size is 9253358  speedup is 1220.28
+sending incremental file list
+
+sent 4308 bytes  received 24 bytes  2888.00 bytes/sec
+total size is 6387982  speedup is 1474.60
+sending incremental file list
+
+sent 7695 bytes  received 20 bytes  3086.00 bytes/sec
+total size is 16751789  speedup is 2171.33
+sending incremental file list
+
+sent 85 bytes  received 13 bytes  196.00 bytes/sec
+total size is 104853504  speedup is 1069933.71
+sending incremental file list
+operations_commerciales/chrono demande echantillons.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS CARREFOUR MARKET 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS CASINO 2014-FUTUR MASTER.xls
+operations_commerciales/MDD/MODELES CJ/PROVERA/Chrono 291 AGENCE REYMANN.XLS
+operations_commerciales/MDD/MODELES CJ/PROVERA/CONF OPES CORA MATCH/2014/CORA/CONFIRMATION OPERATION_CORA_2014-43-11108-TRAFIC.xls
+operations_commerciales/MDD/OP MDD 2014/MDD CORA 2014.xls
+
+sent 246756 bytes  received 15518 bytes  104909.60 bytes/sec
+total size is 50312603  speedup is 191.83
+sending incremental file list
+
+sent 9473 bytes  received 67 bytes  3816.00 bytes/sec
+total size is 31674916  speedup is 3320.22
+sending incremental file list
+
+sent 9573 bytes  received 13 bytes  6390.67 bytes/sec
+total size is 45578752  speedup is 4754.72
+sending incremental file list
+
+sent 7051 bytes  received 49 bytes  4733.33 bytes/sec
+total size is 12693370  speedup is 1787.80
+sending incremental file list
+
+sent 5732 bytes  received 23 bytes  2302.00 bytes/sec
+total size is 129183193  speedup is 22447.12
+sending incremental file list
+
+sent 5610 bytes  received 39 bytes  2259.60 bytes/sec
+total size is 59049369  speedup is 10453.07
+sending incremental file list
+
+sent 50984 bytes  received 95 bytes  11350.89 bytes/sec
+total size is 293510227  speedup is 5746.20
+sending incremental file list
+
+sent 20296 bytes  received 83 bytes  8151.60 bytes/sec
+total size is 99065320  speedup is 4861.15
+sending incremental file list
+
+sent 4380 bytes  received 82 bytes  2974.67 bytes/sec
+total size is 35609223  speedup is 7980.55
+sending incremental file list
+
+sent 7695 bytes  received 20 bytes  5143.33 bytes/sec
+total size is 16751789  speedup is 2171.33
+sending incremental file list
+
+sent 7695 bytes  received 20 bytes  5143.33 bytes/sec
+total size is 16751789  speedup is 2171.33

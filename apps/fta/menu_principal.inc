@@ -14,6 +14,7 @@ $module_modification = $module . '_modification';
 $idFtaRole = Lib::getParameterFromRequest(FtaRoleModel::KEYNAME, $idFtaRoleEncoursDefault);
 $fta_definition = Acl::getValueAccesRights('fta_definition');
 $fta_composition = Acl::getValueAccesRights('fta_composition');
+$ftaCoupeFE = Acl::getValueAccesRights(FtaModel::TABLENAME . "_" . FtaWorkflowModel::NOM_FTA_WORKFLOW_FE_AVEC);
 
 /*
   Menu accessible pour les utilisateurs ayant les droits
@@ -76,6 +77,11 @@ if (
     //echo '<a href=archivage.php><img src=../lib/images/bouton_menu-gestion_des_archives.png border=0></a>';
 }
 
+if ($id_user and $ftaCoupeFE) {
+
+    echo '<br>';
+    echo '<a href=coupe_fe_csv.php><img src=../lib/images/bouton_menu-fta_excel.PNG border=0></a>';
+}
 
 
 /*

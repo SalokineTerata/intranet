@@ -97,12 +97,23 @@ $texte_courant = Lib::getParameterFromRequest('texte_courant');             // V
 $nb_col_courant = Lib::getParameterFromRequest('nb_col_courant');           // numero de la colonne courante
 $nb_ligne_courant = Lib::getParameterFromRequest("nb_ligne_courant");       // numero de la ligne courante
 $ajout_col = Lib::getParameterFromRequest('ajout_col');                     //si $ajout_col = 1 : ajout d'une colonne dans la ligne courante
+$rechercheRapide = Lib::getParameterFromRequest("rechercheRapide");
 $requete_resultat = Lib::getParameterFromRequest("requete_resultat");
 $tab_resultat = Lib::getParameterFromRequest("tab_resultat");
 
 $module_table = Lib::getParameterFromRequest('module_table');               // nom du module auquel appartient la table
 $champ_retour = Lib::getParameterFromRequest('champ_retour');                // nom du champ reponse de la requete
-
+if ($rechercheRapide) {
+    if (is_numeric($rechercheRapide)) {
+        $condition = FtaModel::TABLENAME . "." . FtaModel::FIELDNAME_CODE_ARTICLE_LDC;
+    } else {
+        $condition = FtaModel::TABLENAME . "." . FtaModel::FIELDNAME_DESIGNATION_COMMERCIALE;
+    }
+    $requete_resultat = "SELECT DISTINCT " . FtaModel::TABLENAME . "." . FtaModel::KEYNAME
+            . " FROM " . FtaModel::TABLENAME
+            . " WHERE " . $condition
+            . " LIKE \"%" . $rechercheRapide . "%\"";
+}
 /*
   Récupération des données MySQL
  */
@@ -127,21 +138,21 @@ $champ_retour = Lib::getParameterFromRequest('champ_retour');                // 
   MOTEUR DE RECHERCHE
  * ***************************************************************************** */
 
-$module = "fta";
+$module = FtaModel::TABLENAME;
 if (!$module_table) {
     $module_table = $module;
 }
-$etat_table = "fta_etat";
-$id_recherche = "id_fta";
-$id_recherche_etat = "id_fta_etat";
-$abreviation_recherche_etat = "abreviation_fta_etat";
-$nom_recherche_recherche_etat = "nom_fta_etat";
+$etat_table = FtaEtatModel::TABLENAME;
+$id_recherche = FtaModel::KEYNAME;
+$id_recherche_etat = FtaEtatModel::KEYNAME;
+$abreviation_recherche_etat = FtaEtatModel::FIELDNAME_ABREVIATION;
+$nom_recherche_recherche_etat = FtaEtatModel::FIELDNAME_NOM_FTA_ETAT;
 if (!$champ_retour) {
-    $champ_retour = 'fta.id_fta';
+    $champ_retour = FtaModel::TABLENAME . '.' . FtaModel::KEYNAME;
 }
 $image_bordure = "../lib/images/s7.gif";
 $image_recherche = "../lib/images/search.gif";
-$nb_limite_resultat = 1000;
+$nb_limite_resultat = ModuleConfig::VALUE_MAX_PAR_PAGE;
 
 
 

@@ -285,6 +285,22 @@ if ($result) {
         $taille_nom_fta_composition = $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_TAILLE_POLICE_NOM_FTA_COMPOSITION)->getFieldValue();
         $ingredient_fta_composition = $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_INGREDIENT_FTA_COMPOSITION)->getFieldValue();
         $ingredient_fta_composition1 = $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_INGREDIENT_FTA_COMPOSITION1)->getFieldValue();
+        $val_nut_kcal = $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_VAL_NUT_KCAL)->getFieldValue();
+        $NOM_val_nut_kcal = $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_VAL_NUT_KCAL)->getFieldLabel();
+        $val_nut_kj = $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_VAL_NUT_KJ)->getFieldValue();
+        $NOM_val_nut_kj = $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_VAL_NUT_KJ)->getFieldLabel();
+        $val_nut_mat_grasse = $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_VAL_MAT_GRASSE)->getFieldValue();
+        $NOM_val_nut_mat_grasse = $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_VAL_MAT_GRASSE)->getFieldLabel();
+        $val_nut_acide_gras = $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_VAL_ACIDE_GRAS)->getFieldValue();
+        $NOM_val_nut_acide_gras = $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_VAL_ACIDE_GRAS)->getFieldLabel();
+        $val_nut_glucide = $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_VAL_GLUCIDE)->getFieldValue();
+        $NOM_val_nut_glucide = $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_VAL_GLUCIDE)->getFieldLabel();
+        $val_nut_sucre = $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_VAL_SUCRE)->getFieldValue();
+        $NOM_val_nut_sucre = $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_VAL_SUCRE)->getFieldLabel();
+        $val_nut_proteine = $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_VAL_PROTEINE)->getFieldValue();
+        $NOM_val_nut_proteine = $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_VAL_PROTEINE)->getFieldLabel();
+        $val_nut_sel = $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_VAL_SEL)->getFieldValue();
+        $NOM_val_nut_sel = $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_VAL_SEL)->getFieldLabel();
         /**
          * Verification que l'on est outes les données nécéssaire
          */
@@ -351,6 +367,8 @@ if ($result) {
             if ($ingredient_fta_composition1) {
                 $data .= "\n" . $ingredient_fta_composition1;
             }
+
+
             $title_format = $t3_format;
             //$title_format[4]+=20;//Personalisation de la largeur de la colonne
             $data_format = $contenu_format;
@@ -358,6 +376,36 @@ if ($result) {
             $data_format[4] = 0;   //Personalisation de la largeur de la colonne
             $data_format[2] = "";
             fpdf_write_data($title, $data, $title_format, $data_format, $pdf);
+
+                $txt = "Valeurs nutritionnelles pour 100g";
+
+                $pdf->MultiCell(0, 5, $txt, $border = 1, $align = 'C', $fill = 0);
+
+                $data_table = array(
+                    /**
+                     * Affichage des valeurs nutritionnelles pour 100g
+                     */
+                    array($NOM_val_nut_kj, $val_nut_kj),
+                    array($NOM_val_nut_kcal, $val_nut_kcal),
+                    array($NOM_val_nut_mat_grasse, $val_nut_mat_grasse),
+                    array($NOM_val_nut_acide_gras, $val_nut_acide_gras),
+                    array($NOM_val_nut_glucide, $val_nut_glucide),
+                    array($NOM_val_nut_sucre, $val_nut_sucre),
+                    array($NOM_val_nut_proteine, $val_nut_proteine),
+                    array($NOM_val_nut_sel, $val_nut_sel)
+                );
+
+                foreach ($data_table as $information) {
+                    $title = $information[0];
+                    $data = $information[1];
+
+                    $title_format = $t3_format;
+                    $title_format[4] = 50;
+                    $data_format = $contenu_format;
+                    $data_format[4] = 0;   //Personalisation de la largeur de la colonne
+                    fpdf_write_data($title, $data, $title_format, $data_format, $pdf);
+                }
+            }
 
             $marge_basse2 = $pdf->GetY();
 
@@ -374,7 +422,7 @@ if ($result) {
 
             $pdf->Cell(0, 0, "", 1, 1);
             $pdf->SetY($pdf->GetY() + 2);
-        }
+        
         //$pdf->SetAutoPageBreak(0);
     }//Fin du parcours des composants
 }

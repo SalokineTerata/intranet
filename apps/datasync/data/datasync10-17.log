@@ -1,0 +1,149 @@
+Démarrage : jeu oct 17 23:00:02 CEST 2013
+Arrêt     : jeu oct 17 23:00:38 CEST 2013
+
+
+
+Base MySQL sélectionnée: agis
+Nombre de serveur(s) Linux concerné(s): 4
+Nombre de dossier(s) à mettre à jour: 24
+
+sending incremental file list
+
+sent 7651 bytes  received 20 bytes  15342.00 bytes/sec
+total size is 16750790  speedup is 2183.65
+sending incremental file list
+
+sent 5598 bytes  received 45 bytes  3762.00 bytes/sec
+total size is 9985067  speedup is 1769.46
+sending incremental file list
+
+sent 5715 bytes  received 34 bytes  3832.67 bytes/sec
+total size is 11514959  speedup is 2002.95
+sending incremental file list
+
+sent 63 bytes  received 12 bytes  50.00 bytes/sec
+total size is 78852096  speedup is 1051361.28
+sending incremental file list
+
+sent 7538 bytes  received 45 bytes  5055.33 bytes/sec
+total size is 9253358  speedup is 1220.28
+sending incremental file list
+
+sent 7651 bytes  received 20 bytes  5114.00 bytes/sec
+total size is 16750790  speedup is 2183.65
+sending incremental file list
+
+sent 4308 bytes  received 24 bytes  2888.00 bytes/sec
+total size is 6387982  speedup is 1474.60
+sending incremental file list
+mercuriales/gms/2013/CENTRALES 2013/CASINO 2013.xls
+mercuriales/mdd/2013/2013 MERCURIALE CARREFOUR ASIATIQUE.xls
+mercuriales/mdd/2013/2013 MERCURIALE CARREFOUR PLATS CUISINES.xls
+mercuriales/mdd/2013/2013 MERCURIALE MONOPRIX .xls
+mercuriales/mdd/2013/2013 MERCURIALE PROVERA.xls
+
+sent 27221 bytes  received 13036 bytes  16102.80 bytes/sec
+total size is 35795802  speedup is 889.18
+sending incremental file list
+
+sent 5047 bytes  received 27 bytes  3382.67 bytes/sec
+total size is 39173092  speedup is 7720.36
+sending incremental file list
+operations_commerciales/chrono demande echantillons.xls
+operations_commerciales/FZC/CONFIRMATIONS/2014/ARGEL/
+operations_commerciales/FZC/CONFIRMATIONS/2014/ARGEL/ARGEL_CONFIRMATION CATALOGUE 1 2014.xls
+operations_commerciales/FZC/OP FZC 2014/FZC ARGEL 2014.xls
+operations_commerciales/FZC/OP FZC 2014/FZC TOUPARGEL 2014.xls
+operations_commerciales/GMS/2013/A-CENTRALES/GMS CARREFOUR MDD 2013-FUTUR MASTER.xls
+operations_commerciales/GMS/2013/A-CENTRALES/GMS CASINO 2013-FUTUR MASTER.xls
+operations_commerciales/GMS/2013/B-CONFIRMATIONS OPERATIONS/CONFIRMATIONS CARREFOUR/2013 CARREFOUR MDD FLUX POUSSE PIZZAS.xls
+operations_commerciales/GMS/2013/B-CONFIRMATIONS OPERATIONS/CONFIRMATIONS CASINO/GEANT/2013 GEANT PROMO DUO S44-45.xls
+operations_commerciales/GMS/2013/B-CONFIRMATIONS OPERATIONS/CONFIRMATIONS CASINO/GEANT/2013 GEANT PROMO DUO S47-48.xls
+operations_commerciales/GMS/2013/B-CONFIRMATIONS OPERATIONS/CONFIRMATIONS CASINO/GEANT/2013 GEANT PROMO DUO S51-52.xls
+operations_commerciales/GMS/2013/D-REGIONS/GMS LECLERC 2013-FUTUR MASTER.xls
+operations_commerciales/MDD/MODELES CJ/CARREFOUR/DDE ECHANTILLONS/demande \#351chantillons  CRF .XLS
+operations_commerciales/MDD/OP MDD 2013/MDD MATCH 2013 FUTUR MASTER.xls
+
+sent 286766 bytes  received 21067 bytes  87952.29 bytes/sec
+total size is 52617929  speedup is 170.93
+sending incremental file list
+
+sent 18506 bytes  received 80 bytes  12390.67 bytes/sec
+total size is 41728031  speedup is 2245.13
+sending incremental file list
+modeles/compo_agis_sans_portion-v2.lab
+modeles/compo_agis_sans_portion-v2_180.lab
+modeles/compo_festif_132x72.lab
+modeles/compo_festif_132x72.lab.old
+modeles/compo_festif_monoportion_pm_75x48.lab
+modeles/compo_festif_monoportion_pm_75x48.lab.old
+modeles/compo_festif_pc_4_parts.lab
+modeles/compo_festif_pc_4_parts.lab.old
+
+sent 214289 bytes  received 4593 bytes  87552.80 bytes/sec
+total size is 35250307  speedup is 161.05
+sending incremental file list
+
+sent 63 bytes  received 12 bytes  50.00 bytes/sec
+total size is 78852096  speedup is 1051361.28
+sending incremental file list
+
+sent 7538 bytes  received 45 bytes  15166.00 bytes/sec
+total size is 9253358  speedup is 1220.28
+sending incremental file list
+
+sent 4308 bytes  received 24 bytes  8664.00 bytes/sec
+total size is 6387982  speedup is 1474.60
+sending incremental file list
+
+sent 7651 bytes  received 20 bytes  5114.00 bytes/sec
+total size is 16750790  speedup is 2183.65
+sending incremental file list
+
+sent 85 bytes  received 13 bytes  65.33 bytes/sec
+total size is 104853504  speedup is 1069933.71
+sending incremental file list
+operations_commerciales/chrono demande echantillons.xls
+operations_commerciales/FZC/CONFIRMATIONS/2014/ARGEL/
+operations_commerciales/FZC/CONFIRMATIONS/2014/ARGEL/ARGEL_CONFIRMATION CATALOGUE 1 2014.xls
+operations_commerciales/FZC/OP FZC 2014/FZC ARGEL 2014.xls
+operations_commerciales/FZC/OP FZC 2014/FZC TOUPARGEL 2014.xls
+operations_commerciales/GMS/2013/A-CENTRALES/GMS CARREFOUR MDD 2013-FUTUR MASTER.xls
+operations_commerciales/GMS/2013/A-CENTRALES/GMS CASINO 2013-FUTUR MASTER.xls
+operations_commerciales/GMS/2013/B-CONFIRMATIONS OPERATIONS/CONFIRMATIONS CARREFOUR/2013 CARREFOUR MDD FLUX POUSSE PIZZAS.xls
+operations_commerciales/GMS/2013/B-CONFIRMATIONS OPERATIONS/CONFIRMATIONS CASINO/GEANT/2013 GEANT PROMO DUO S44-45.xls
+operations_commerciales/GMS/2013/B-CONFIRMATIONS OPERATIONS/CONFIRMATIONS CASINO/GEANT/2013 GEANT PROMO DUO S47-48.xls
+operations_commerciales/GMS/2013/B-CONFIRMATIONS OPERATIONS/CONFIRMATIONS CASINO/GEANT/2013 GEANT PROMO DUO S51-52.xls
+operations_commerciales/GMS/2013/D-REGIONS/GMS LECLERC 2013-FUTUR MASTER.xls
+operations_commerciales/MDD/MODELES CJ/CARREFOUR/DDE ECHANTILLONS/demande \#351chantillons  CRF .XLS
+operations_commerciales/MDD/OP MDD 2013/MDD MATCH 2013 FUTUR MASTER.xls
+
+sent 286766 bytes  received 21067 bytes  123133.20 bytes/sec
+total size is 52617929  speedup is 170.93
+sending incremental file list
+mercuriales/gms/2013/CENTRALES 2013/CASINO 2013.xls
+mercuriales/mdd/2013/2013 MERCURIALE CARREFOUR ASIATIQUE.xls
+mercuriales/mdd/2013/2013 MERCURIALE CARREFOUR PLATS CUISINES.xls
+mercuriales/mdd/2013/2013 MERCURIALE MONOPRIX .xls
+mercuriales/mdd/2013/2013 MERCURIALE PROVERA.xls
+
+sent 27221 bytes  received 13036 bytes  16102.80 bytes/sec
+total size is 35795802  speedup is 889.18
+sending incremental file list
+
+sent 5598 bytes  received 45 bytes  3762.00 bytes/sec
+total size is 9985067  speedup is 1769.46
+sending incremental file list
+organisation/Listes t\#351l\#351phoniques AGIS + LDC/LISTE TELEPHONIQUE TARARE OCTOBRE 2013.xls
+
+sent 12541 bytes  received 360 bytes  5160.40 bytes/sec
+total size is 128675317  speedup is 9974.06
+sending incremental file list
+
+sent 4707 bytes  received 36 bytes  3162.00 bytes/sec
+total size is 46318934  speedup is 9765.75
+sending incremental file list
+
+sent 46167 bytes  received 86 bytes  30835.33 bytes/sec
+total size is 274589267  speedup is 5936.68
+sending incremental file list

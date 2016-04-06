@@ -1,0 +1,133 @@
+Démarrage : ven aoû  1 23:00:02 CEST 2014
+Arrêt     : ven aoû  1 23:02:29 CEST 2014
+
+
+
+Base MySQL sélectionnée: agis
+Nombre de serveur(s) Linux concerné(s): 4
+Nombre de dossier(s) à mettre à jour: 29
+
+sending incremental file list
+
+sent 7292 bytes  received 49 bytes  4894.00 bytes/sec
+total size is 13584181  speedup is 1850.45
+sending incremental file list
+
+sent 6283 bytes  received 38 bytes  4214.00 bytes/sec
+total size is 12454871  speedup is 1970.40
+sending incremental file list
+erp_data.mdb
+
+sent 9835168 bytes  received 84570 bytes  185415.66 bytes/sec
+total size is 145690624  speedup is 14.69
+sending incremental file list
+
+sent 7593 bytes  received 45 bytes  5092.00 bytes/sec
+total size is 9254930  speedup is 1211.70
+sending incremental file list
+
+sent 7905 bytes  received 20 bytes  5283.33 bytes/sec
+total size is 16766350  speedup is 2115.63
+sending incremental file list
+
+sent 4308 bytes  received 24 bytes  2888.00 bytes/sec
+total size is 6387982  speedup is 1474.60
+sending incremental file list
+mercuriales/sync.ffs_db
+
+sent 16905 bytes  received 191 bytes  6838.40 bytes/sec
+total size is 37243231  speedup is 2178.48
+sending incremental file list
+
+sent 5047 bytes  received 27 bytes  3382.67 bytes/sec
+total size is 39173092  speedup is 7720.36
+sending incremental file list
+operations_commerciales/GMS/2014/D-REGIONS/GMS LECLERC 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/D-REGIONS/GMS SU REGION  2014-FUTUR MASTER.xls
+
+sent 135843 bytes  received 5912 bytes  56702.00 bytes/sec
+total size is 56643766  speedup is 399.59
+sending incremental file list
+
+sent 20406 bytes  received 83 bytes  13659.33 bytes/sec
+total size is 99360776  speedup is 4849.47
+sending incremental file list
+
+sent 6669 bytes  received 93 bytes  4508.00 bytes/sec
+total size is 52693702  speedup is 7792.62
+sending incremental file list
+
+sent 9043 bytes  received 13 bytes  6037.33 bytes/sec
+total size is 44437504  speedup is 4906.97
+sending incremental file list
+
+sent 5781 bytes  received 30 bytes  3874.00 bytes/sec
+total size is 92829061  speedup is 15974.71
+sending incremental file list
+erp_data.mdb
+
+sent 9835168 bytes  received 84570 bytes  178734.02 bytes/sec
+total size is 145690624  speedup is 14.69
+sending incremental file list
+
+sent 7593 bytes  received 45 bytes  5092.00 bytes/sec
+total size is 9254930  speedup is 1211.70
+sending incremental file list
+
+sent 4308 bytes  received 24 bytes  2888.00 bytes/sec
+total size is 6387982  speedup is 1474.60
+sending incremental file list
+
+sent 7905 bytes  received 20 bytes  5283.33 bytes/sec
+total size is 16766350  speedup is 2115.63
+sending incremental file list
+
+sent 85 bytes  received 13 bytes  65.33 bytes/sec
+total size is 104853504  speedup is 1069933.71
+sending incremental file list
+operations_commerciales/GMS/2014/D-REGIONS/GMS LECLERC 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/D-REGIONS/GMS SU REGION  2014-FUTUR MASTER.xls
+
+sent 135843 bytes  received 5912 bytes  56702.00 bytes/sec
+total size is 56643766  speedup is 399.59
+sending incremental file list
+mercuriales/sync.ffs_db
+
+sent 16905 bytes  received 191 bytes  6838.40 bytes/sec
+total size is 37243231  speedup is 2178.48
+sending incremental file list
+
+sent 9043 bytes  received 13 bytes  6037.33 bytes/sec
+total size is 44437504  speedup is 4906.97
+sending incremental file list
+
+sent 7292 bytes  received 49 bytes  14682.00 bytes/sec
+total size is 13584181  speedup is 1850.45
+sending incremental file list
+
+sent 5745 bytes  received 23 bytes  3845.33 bytes/sec
+total size is 129159129  speedup is 22392.36
+sending incremental file list
+
+sent 5610 bytes  received 39 bytes  3766.00 bytes/sec
+total size is 59049369  speedup is 10453.07
+sending incremental file list
+
+sent 52293 bytes  received 97 bytes  34926.67 bytes/sec
+total size is 299707475  speedup is 5720.70
+sending incremental file list
+
+sent 20406 bytes  received 83 bytes  8195.60 bytes/sec
+total size is 99360776  speedup is 4849.47
+sending incremental file list
+
+sent 6669 bytes  received 93 bytes  2704.80 bytes/sec
+total size is 52693702  speedup is 7792.62
+sending incremental file list
+
+sent 7905 bytes  received 20 bytes  3170.00 bytes/sec
+total size is 16766350  speedup is 2115.63
+sending incremental file list
+
+sent 7905 bytes  received 20 bytes  5283.33 bytes/sec
+total size is 16766350  speedup is 2115.63

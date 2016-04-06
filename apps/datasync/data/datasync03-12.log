@@ -1,0 +1,139 @@
+Démarrage : mer mar 12 23:00:01 CET 2014
+Arrêt     : mer mar 12 23:00:40 CET 2014
+
+
+
+Base MySQL sélectionnée: agis
+Nombre de serveur(s) Linux concerné(s): 4
+Nombre de dossier(s) à mettre à jour: 27
+
+sending incremental file list
+
+sent 6345 bytes  received 46 bytes  2556.40 bytes/sec
+total size is 11731248  speedup is 1835.59
+sending incremental file list
+
+sent 6067 bytes  received 37 bytes  4069.33 bytes/sec
+total size is 12258686  speedup is 2008.30
+sending incremental file list
+
+sent 63 bytes  received 12 bytes  50.00 bytes/sec
+total size is 84160512  speedup is 1122140.16
+sending incremental file list
+
+sent 7538 bytes  received 45 bytes  5055.33 bytes/sec
+total size is 9253358  speedup is 1220.28
+sending incremental file list
+
+sent 7695 bytes  received 20 bytes  3086.00 bytes/sec
+total size is 16751789  speedup is 2171.33
+sending incremental file list
+
+sent 4308 bytes  received 24 bytes  2888.00 bytes/sec
+total size is 6387982  speedup is 1474.60
+sending incremental file list
+mercuriales/mdd/2014/2014 MERCURIALE EXPORT.xls
+
+sent 19496 bytes  received 992 bytes  13658.67 bytes/sec
+total size is 29500444  speedup is 1439.89
+sending incremental file list
+
+sent 5047 bytes  received 27 bytes  3382.67 bytes/sec
+total size is 39173092  speedup is 7720.36
+sending incremental file list
+operations_commerciales/GMS/2014/D-REGIONS/GMS LECLERC 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/D-REGIONS/GMS SCHIEVER 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/D-REGIONS/GMS SU REGION  2014-FUTUR MASTER.xls
+
+sent 141460 bytes  received 6349 bytes  42231.14 bytes/sec
+total size is 47314434  speedup is 320.11
+sending incremental file list
+
+sent 19882 bytes  received 78 bytes  7984.00 bytes/sec
+total size is 98562242  speedup is 4937.99
+sending incremental file list
+gofast/sync.ffs_db
+gofast/CHANTIERS/1_CNP_DELEGATION_Cecile/2_DEFIS/NOTATION_DDD/NOTATION_DDD_310114.xls
+gofast/CHANTIERS/1_CNP_DELEGATION_Cecile/5_STANDARDS/DDD/DDD_nouvelle_100314_QE026S01.xls
+
+sent 144090 bytes  received 3292 bytes  98254.67 bytes/sec
+total size is 16316200  speedup is 110.71
+sending incremental file list
+modeles/compo_asia_double_bas-60x100.lab
+modeles/compo_asia_double_bas_auchan_traiteur.bak
+modeles/compo_asia_double_bas_auchan_traiteur.lab
+modeles/compo_asia_double_haut.lab
+
+sent 95051 bytes  received 5219 bytes  66846.67 bytes/sec
+total size is 43749888  speedup is 436.32
+sending incremental file list
+
+sent 5781 bytes  received 30 bytes  3874.00 bytes/sec
+total size is 93132165  speedup is 16026.87
+sending incremental file list
+
+sent 63 bytes  received 12 bytes  50.00 bytes/sec
+total size is 84160512  speedup is 1122140.16
+sending incremental file list
+
+sent 7538 bytes  received 45 bytes  5055.33 bytes/sec
+total size is 9253358  speedup is 1220.28
+sending incremental file list
+
+sent 4308 bytes  received 24 bytes  2888.00 bytes/sec
+total size is 6387982  speedup is 1474.60
+sending incremental file list
+
+sent 7695 bytes  received 20 bytes  5143.33 bytes/sec
+total size is 16751789  speedup is 2171.33
+sending incremental file list
+
+sent 85 bytes  received 13 bytes  65.33 bytes/sec
+total size is 104853504  speedup is 1069933.71
+sending incremental file list
+operations_commerciales/GMS/2014/D-REGIONS/GMS LECLERC 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/D-REGIONS/GMS SCHIEVER 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/D-REGIONS/GMS SU REGION  2014-FUTUR MASTER.xls
+
+sent 141460 bytes  received 6349 bytes  59123.60 bytes/sec
+total size is 47314434  speedup is 320.11
+sending incremental file list
+mercuriales/mdd/2014/2014 MERCURIALE EXPORT.xls
+
+sent 19496 bytes  received 992 bytes  13658.67 bytes/sec
+total size is 29500444  speedup is 1439.89
+sending incremental file list
+modeles/compo_asia_double_bas-60x100.lab
+modeles/compo_asia_double_bas_auchan_traiteur.bak
+modeles/compo_asia_double_bas_auchan_traiteur.lab
+modeles/compo_asia_double_haut.lab
+
+sent 95051 bytes  received 5219 bytes  40108.00 bytes/sec
+total size is 43749888  speedup is 436.32
+sending incremental file list
+
+sent 6345 bytes  received 46 bytes  4260.67 bytes/sec
+total size is 11731248  speedup is 1835.59
+sending incremental file list
+
+sent 5684 bytes  received 23 bytes  3804.67 bytes/sec
+total size is 129152473  speedup is 22630.54
+sending incremental file list
+
+sent 5610 bytes  received 39 bytes  3766.00 bytes/sec
+total size is 59049369  speedup is 10453.07
+sending incremental file list
+
+sent 50270 bytes  received 94 bytes  33576.00 bytes/sec
+total size is 291113043  speedup is 5780.18
+sending incremental file list
+
+sent 19882 bytes  received 78 bytes  7984.00 bytes/sec
+total size is 98562242  speedup is 4937.99
+sending incremental file list
+gofast/sync.ffs_db
+gofast/CHANTIERS/1_CNP_DELEGATION_Cecile/2_DEFIS/NOTATION_DDD/NOTATION_DDD_310114.xls
+gofast/CHANTIERS/1_CNP_DELEGATION_Cecile/5_STANDARDS/DDD/DDD_nouvelle_100314_QE026S01.xls
+
+sent 144090 bytes  received 3292 bytes  58952.80 bytes/sec
+total size is 16316200  speedup is 110.71

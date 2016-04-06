@@ -1,0 +1,149 @@
+Démarrage : ven jan  3 23:00:02 CET 2014
+Arrêt     : ven jan  3 23:00:42 CET 2014
+
+
+
+Base MySQL sélectionnée: agis
+Nombre de serveur(s) Linux concerné(s): 4
+Nombre de dossier(s) à mettre à jour: 24
+
+sending incremental file list
+gestion_crise/mise \#340 jour 2013/CONTACTS CLIENT GESTION DE CRISE 080313 MDD HD.xls
+gestion_crise/mise \#340 jour 2013/ALDI/Tr _ R\#351p. _ coordonn\#351es qualit\#351 AlDi.pdf
+gestion_crise/mise \#340 jour 2013/ALDI/envie coordonn\#351s Agis \#340 aldi .pdf
+
+sent 170132 bytes  received 402 bytes  68213.60 bytes/sec
+total size is 10159163  speedup is 59.57
+sending incremental file list
+
+sent 5788 bytes  received 34 bytes  3881.33 bytes/sec
+total size is 11670095  speedup is 2004.48
+sending incremental file list
+
+sent 63 bytes  received 12 bytes  50.00 bytes/sec
+total size is 81426432  speedup is 1085685.76
+sending incremental file list
+
+sent 7538 bytes  received 45 bytes  5055.33 bytes/sec
+total size is 9253358  speedup is 1220.28
+sending incremental file list
+batch/Maintenance Windows NT.lnk
+batch/run_satel_AVI_20.bat.lnk
+
+sent 8512 bytes  received 82 bytes  5729.33 bytes/sec
+total size is 16751789  speedup is 1949.24
+sending incremental file list
+
+sent 4308 bytes  received 24 bytes  2888.00 bytes/sec
+total size is 6387982  speedup is 1474.60
+sending incremental file list
+mercuriales/sync.ffs_db
+mercuriales/mdd/2014/2014 MERCURIALE EXPORT.xls
+mercuriales/mdd/2014/2014 MERCURIALE PROVERA.xls
+
+sent 17718 bytes  received 1534 bytes  7700.80 bytes/sec
+total size is 25016960  speedup is 1299.45
+sending incremental file list
+
+sent 5047 bytes  received 27 bytes  3382.67 bytes/sec
+total size is 39173092  speedup is 7720.36
+sending incremental file list
+operations_commerciales/FZC/OP FZC 2013/FZC TOUPARGEL 2013.xls
+operations_commerciales/GMS/RECAP DEMANDE ET CONFIRMATIONS HEBDO.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS CARREFOUR 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS INTERMARCHE 2014-FUTUR MASTER.xls
+deleting operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/CARREFOUR/2014 CARREFOUR R20 PROMO 07 PIZZAS.xls
+deleting operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/CARREFOUR/2014 CARREFOUR R20 PROMO 01 PIZZAS.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/CARREFOUR/2014 CARREFOUR PROMO 01 PIZZAS.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/CARREFOUR/2014 CARREFOUR PROMO 07 PIZZAS.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/CARREFOUR/2014 CARREFOUR TABLOID S8 PAELLA.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/CASINO HM/2014 HM PROMO DUO S17.xls
+
+sent 111028 bytes  received 12423 bytes  35271.71 bytes/sec
+total size is 60601198  speedup is 490.89
+sending incremental file list
+
+sent 20908 bytes  received 88 bytes  8398.40 bytes/sec
+total size is 99120505  speedup is 4720.92
+sending incremental file list
+
+sent 7378 bytes  received 13 bytes  4927.33 bytes/sec
+total size is 32486400  speedup is 4395.40
+sending incremental file list
+
+sent 63 bytes  received 12 bytes  50.00 bytes/sec
+total size is 81426432  speedup is 1085685.76
+sending incremental file list
+
+sent 7538 bytes  received 45 bytes  5055.33 bytes/sec
+total size is 9253358  speedup is 1220.28
+sending incremental file list
+
+sent 4308 bytes  received 24 bytes  2888.00 bytes/sec
+total size is 6387982  speedup is 1474.60
+sending incremental file list
+batch/Maintenance Windows NT.lnk
+batch/run_satel_AVI_20.bat.lnk
+
+sent 8512 bytes  received 82 bytes  5729.33 bytes/sec
+total size is 16751789  speedup is 1949.24
+sending incremental file list
+
+sent 85 bytes  received 13 bytes  65.33 bytes/sec
+total size is 104853504  speedup is 1069933.71
+sending incremental file list
+operations_commerciales/FZC/OP FZC 2013/FZC TOUPARGEL 2013.xls
+operations_commerciales/GMS/RECAP DEMANDE ET CONFIRMATIONS HEBDO.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS CARREFOUR 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS INTERMARCHE 2014-FUTUR MASTER.xls
+deleting operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/CARREFOUR/2014 CARREFOUR R20 PROMO 07 PIZZAS.xls
+deleting operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/CARREFOUR/2014 CARREFOUR R20 PROMO 01 PIZZAS.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/CARREFOUR/2014 CARREFOUR PROMO 01 PIZZAS.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/CARREFOUR/2014 CARREFOUR PROMO 07 PIZZAS.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/CARREFOUR/2014 CARREFOUR TABLOID S8 PAELLA.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/CASINO HM/2014 HM PROMO DUO S17.xls
+
+sent 111028 bytes  received 12423 bytes  49380.40 bytes/sec
+total size is 60601198  speedup is 490.89
+sending incremental file list
+mercuriales/sync.ffs_db
+mercuriales/mdd/2014/2014 MERCURIALE EXPORT.xls
+mercuriales/mdd/2014/2014 MERCURIALE PROVERA.xls
+
+sent 17718 bytes  received 1534 bytes  12834.67 bytes/sec
+total size is 25016960  speedup is 1299.45
+sending incremental file list
+
+sent 7378 bytes  received 13 bytes  4927.33 bytes/sec
+total size is 32486400  speedup is 4395.40
+sending incremental file list
+gestion_crise/mise \#340 jour 2013/CONTACTS CLIENT GESTION DE CRISE 080313 MDD HD.xls
+gestion_crise/mise \#340 jour 2013/ALDI/Tr _ R\#351p. _ coordonn\#351es qualit\#351 AlDi.pdf
+gestion_crise/mise \#340 jour 2013/ALDI/envie coordonn\#351s Agis \#340 aldi .pdf
+
+sent 170132 bytes  received 402 bytes  68213.60 bytes/sec
+total size is 10159163  speedup is 59.57
+sending incremental file list
+
+sent 5677 bytes  received 23 bytes  3800.00 bytes/sec
+total size is 128675317  speedup is 22574.62
+sending incremental file list
+
+sent 5353 bytes  received 38 bytes  3594.00 bytes/sec
+total size is 56169881  speedup is 10419.20
+sending incremental file list
+codesoft/Codesoft 7/Auchan  Atac/Auchan/23290.LAB
+codesoft/Codesoft 7/Auchan  Atac/Auchan/23290.bak
+codesoft/Codesoft 7/Auchan  Atac/Auchan/52434.LAB
+codesoft/Codesoft 7/Auchan  Atac/Auchan/52434.bak
+codesoft/Codesoft 7/Auchan  Atac/Auchan/Auchan le traiteur/AUCHAN COUPE/
+codesoft/Codesoft 7/Auchan  Atac/Auchan/Auchan le traiteur/AUCHAN COUPE/79186.bak
+codesoft/Codesoft 7/Auchan  Atac/Auchan/Auchan le traiteur/AUCHAN COUPE/79186.lab
+codesoft/Codesoft 7/Auchan  Atac/Auchan/Auchan le traiteur/AUCHAN COUPE/79188.bak
+codesoft/Codesoft 7/Auchan  Atac/Auchan/Auchan le traiteur/AUCHAN COUPE/79188.lab
+codesoft/Codesoft 7/Auchan  Atac/Auchan/Auchan le traiteur/AUCHAN COUPE/79190.bak
+codesoft/Codesoft 7/Auchan  Atac/Auchan/Auchan le traiteur/AUCHAN COUPE/79190.lab
+
+sent 186068 bytes  received 4453 bytes  54434.57 bytes/sec
+total size is 283323475  speedup is 1487.10
+sending incremental file list

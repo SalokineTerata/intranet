@@ -1,0 +1,140 @@
+Démarrage : ven nov  8 23:00:01 CET 2013
+Arrêt     : ven nov  8 23:02:29 CET 2013
+
+
+
+Base MySQL sélectionnée: agis
+Nombre de serveur(s) Linux concerné(s): 4
+Nombre de dossier(s) à mettre à jour: 25
+
+sending incremental file list
+
+sent 7651 bytes  received 20 bytes  15342.00 bytes/sec
+total size is 16750795  speedup is 2183.65
+sending incremental file list
+
+sent 5598 bytes  received 45 bytes  3762.00 bytes/sec
+total size is 9985067  speedup is 1769.46
+sending incremental file list
+
+sent 5753 bytes  received 34 bytes  3858.00 bytes/sec
+total size is 11615823  speedup is 2007.23
+sending incremental file list
+erp_data.mdb
+
+sent 10400124 bytes  received 62247 bytes  185174.71 bytes/sec
+total size is 78852096  speedup is 7.54
+sending incremental file list
+
+sent 7538 bytes  received 45 bytes  5055.33 bytes/sec
+total size is 9253358  speedup is 1220.28
+sending incremental file list
+
+sent 7651 bytes  received 20 bytes  5114.00 bytes/sec
+total size is 16750795  speedup is 2183.65
+sending incremental file list
+
+sent 4308 bytes  received 24 bytes  2888.00 bytes/sec
+total size is 6387982  speedup is 1474.60
+sending incremental file list
+mercuriales/FZC/FZC 2014/ARGEL 2014.xls
+mercuriales/mdd/2013/2013 MERCURIALE GROUPE AUCHAN.xls
+mercuriales/mdd/2013/2013 MERCURIALE SYSTEME U.xls
+
+sent 40695 bytes  received 3952 bytes  17858.80 bytes/sec
+total size is 42395265  speedup is 949.57
+sending incremental file list
+
+sent 5047 bytes  received 27 bytes  3382.67 bytes/sec
+total size is 39173092  speedup is 7720.36
+sending incremental file list
+operations_commerciales/chrono demande echantillons.xls
+operations_commerciales/GMS/2014/D-REGIONS/GMS LECLERC 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/D-REGIONS/GMS SCHIEVER 2014-FUTUR MASTER.xls
+operations_commerciales/MDD/MODELES CJ/AUCHAN ATAC SCHIEVER/DDE ECHANTILLONS/DEMANDE ECHANTILLONS SIMPLY LES ULIS.xls
+operations_commerciales/MDD/OP MDD 2013/MDD ITM FUTUR MASTER 2013 .xls
+
+sent 287370 bytes  received 9224 bytes  84741.14 bytes/sec
+total size is 54439379  speedup is 183.55
+sending incremental file list
+
+sent 18506 bytes  received 80 bytes  12390.67 bytes/sec
+total size is 41728031  speedup is 2245.13
+sending incremental file list
+modeles/compo_pc_FEFST-v3.lab
+modeles/compo_pc_FEFST-v3_180.lab
+modeles/compo_pc_double_bas-v2.bak
+modeles/compo_pc_double_bas-v2.lab
+modeles/compo_pc_double_bas-v2_180.bak
+modeles/compo_pc_double_bas-v2_180.lab
+modeles/coupelle_compo.lab
+modeles/coupelle_compo_180.lab
+
+sent 117548 bytes  received 8691 bytes  50495.60 bytes/sec
+total size is 30671872  speedup is 242.97
+sending incremental file list
+erp_data.mdb
+
+sent 10400124 bytes  received 62247 bytes  191970.11 bytes/sec
+total size is 78852096  speedup is 7.54
+sending incremental file list
+
+sent 7538 bytes  received 45 bytes  5055.33 bytes/sec
+total size is 9253358  speedup is 1220.28
+sending incremental file list
+
+sent 4308 bytes  received 24 bytes  2888.00 bytes/sec
+total size is 6387982  speedup is 1474.60
+sending incremental file list
+
+sent 7651 bytes  received 20 bytes  5114.00 bytes/sec
+total size is 16750795  speedup is 2183.65
+sending incremental file list
+
+sent 85 bytes  received 13 bytes  196.00 bytes/sec
+total size is 104853504  speedup is 1069933.71
+sending incremental file list
+operations_commerciales/chrono demande echantillons.xls
+operations_commerciales/GMS/2014/D-REGIONS/GMS LECLERC 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/D-REGIONS/GMS SCHIEVER 2014-FUTUR MASTER.xls
+operations_commerciales/MDD/MODELES CJ/AUCHAN ATAC SCHIEVER/DDE ECHANTILLONS/DEMANDE ECHANTILLONS SIMPLY LES ULIS.xls
+operations_commerciales/MDD/OP MDD 2013/MDD ITM FUTUR MASTER 2013 .xls
+
+sent 287370 bytes  received 9224 bytes  118637.60 bytes/sec
+total size is 54439379  speedup is 183.55
+sending incremental file list
+mercuriales/FZC/FZC 2014/ARGEL 2014.xls
+mercuriales/mdd/2013/2013 MERCURIALE GROUPE AUCHAN.xls
+mercuriales/mdd/2013/2013 MERCURIALE SYSTEME U.xls
+
+sent 40695 bytes  received 3952 bytes  17858.80 bytes/sec
+total size is 42395265  speedup is 949.57
+sending incremental file list
+modeles/compo_pc_FEFST-v3.lab
+modeles/compo_pc_FEFST-v3_180.lab
+modeles/compo_pc_double_bas-v2.bak
+modeles/compo_pc_double_bas-v2.lab
+modeles/compo_pc_double_bas-v2_180.bak
+modeles/compo_pc_double_bas-v2_180.lab
+modeles/coupelle_compo.lab
+modeles/coupelle_compo_180.lab
+
+sent 117548 bytes  received 8691 bytes  50495.60 bytes/sec
+total size is 30671872  speedup is 242.97
+sending incremental file list
+
+sent 5598 bytes  received 45 bytes  11286.00 bytes/sec
+total size is 9985067  speedup is 1769.46
+sending incremental file list
+
+sent 5677 bytes  received 23 bytes  3800.00 bytes/sec
+total size is 128675317  speedup is 22574.62
+sending incremental file list
+
+sent 4707 bytes  received 36 bytes  3162.00 bytes/sec
+total size is 46318934  speedup is 9765.75
+sending incremental file list
+
+sent 46162 bytes  received 86 bytes  30832.00 bytes/sec
+total size is 275068499  speedup is 5947.68
+sending incremental file list

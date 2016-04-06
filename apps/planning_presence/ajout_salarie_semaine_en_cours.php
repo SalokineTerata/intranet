@@ -85,8 +85,7 @@ echo "$txt1";
 //pouvant être saisies dans le planning des présences
 $req1 = "SELECT salaries.id_user, salaries.nom, salaries.prenom, geo.id_geo ";
 $req1.= "FROM geo, salaries, access_materiel_service ";
-$req1.= "WHERE (geo.id_geo=$id_groupe ";
-$req1.= "AND salaries.id_service=access_materiel_service.K_service) ";
+$req1.= "WHERE geo.id_geo=$id_groupe ";
 $req1.= "AND salaries.actif='oui' ";
 //Restriction des comptes spéciaux
 $req1.= "AND salaries.nom<>'SYSTEM' ";

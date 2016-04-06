@@ -1,0 +1,107 @@
+Démarrage : dim jan 12 23:00:02 CET 2014
+Arrêt     : dim jan 12 23:00:38 CET 2014
+
+
+
+Base MySQL sélectionnée: agis
+Nombre de serveur(s) Linux concerné(s): 4
+Nombre de dossier(s) à mettre à jour: 24
+
+sending incremental file list
+
+sent 5691 bytes  received 45 bytes  2294.40 bytes/sec
+total size is 10159163  speedup is 1771.12
+sending incremental file list
+
+sent 5891 bytes  received 35 bytes  3950.67 bytes/sec
+total size is 11905615  speedup is 2009.05
+sending incremental file list
+
+sent 63 bytes  received 12 bytes  50.00 bytes/sec
+total size is 83456000  speedup is 1112746.67
+sending incremental file list
+
+sent 7538 bytes  received 45 bytes  5055.33 bytes/sec
+total size is 9253358  speedup is 1220.28
+sending incremental file list
+
+sent 7695 bytes  received 20 bytes  3086.00 bytes/sec
+total size is 16751789  speedup is 2171.33
+sending incremental file list
+
+sent 4308 bytes  received 24 bytes  2888.00 bytes/sec
+total size is 6387982  speedup is 1474.60
+sending incremental file list
+
+sent 6828 bytes  received 60 bytes  4592.00 bytes/sec
+total size is 25648466  speedup is 3723.64
+sending incremental file list
+
+sent 5047 bytes  received 27 bytes  10148.00 bytes/sec
+total size is 39173092  speedup is 7720.36
+sending incremental file list
+
+sent 42500 bytes  received 165 bytes  17066.00 bytes/sec
+total size is 60739027  speedup is 1423.63
+sending incremental file list
+
+sent 20908 bytes  received 88 bytes  13997.33 bytes/sec
+total size is 99120505  speedup is 4720.92
+sending incremental file list
+
+sent 7378 bytes  received 13 bytes  2956.40 bytes/sec
+total size is 32486400  speedup is 4395.40
+sending incremental file list
+
+sent 63 bytes  received 12 bytes  50.00 bytes/sec
+total size is 83456000  speedup is 1112746.67
+sending incremental file list
+
+sent 7538 bytes  received 45 bytes  5055.33 bytes/sec
+total size is 9253358  speedup is 1220.28
+sending incremental file list
+
+sent 4308 bytes  received 24 bytes  2888.00 bytes/sec
+total size is 6387982  speedup is 1474.60
+sending incremental file list
+
+sent 7695 bytes  received 20 bytes  5143.33 bytes/sec
+total size is 16751789  speedup is 2171.33
+sending incremental file list
+
+sent 85 bytes  received 13 bytes  196.00 bytes/sec
+total size is 104853504  speedup is 1069933.71
+sending incremental file list
+
+sent 42500 bytes  received 165 bytes  28443.33 bytes/sec
+total size is 60739027  speedup is 1423.63
+sending incremental file list
+
+sent 6828 bytes  received 60 bytes  4592.00 bytes/sec
+total size is 25648466  speedup is 3723.64
+sending incremental file list
+
+sent 7378 bytes  received 13 bytes  4927.33 bytes/sec
+total size is 32486400  speedup is 4395.40
+sending incremental file list
+
+sent 5691 bytes  received 45 bytes  3824.00 bytes/sec
+total size is 10159163  speedup is 1771.12
+sending incremental file list
+
+sent 5677 bytes  received 23 bytes  3800.00 bytes/sec
+total size is 128675317  speedup is 22574.62
+sending incremental file list
+
+sent 5353 bytes  received 38 bytes  3594.00 bytes/sec
+total size is 56169881  speedup is 10419.20
+sending incremental file list
+deleting codesoft/Codesoft 7/Agis FE/79132_verso.lab
+codesoft/Codesoft 7/Codes Produits/79132_recto.bak
+codesoft/Codesoft 7/Codes Produits/79132_recto.lab
+codesoft/Codesoft 7/Codes Produits/79132_verso.bak
+codesoft/Codesoft 7/Codes Produits/79132_verso.lab
+
+sent 82134 bytes  received 1552 bytes  33474.40 bytes/sec
+total size is 284467795  speedup is 3399.23
+sending incremental file list

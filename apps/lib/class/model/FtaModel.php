@@ -1727,83 +1727,9 @@ class FtaModel extends AbstractModel {
      * @return int
      */
     public static function duplicationIdFta($paramIdFta) {
-        $pdo = DatabaseOperation::executeComplete(
-                        " INSERT INTO " . FtaModel::TABLENAME . " (id_access_arti2, OLD_numft, id_fta_workflow,
- commentaire, OLD_id_fta_palettisation, id_dossier_fta, id_version_dossier_fta,
- OLD_champ_maj_fta, id_fta_etat, createur_fta, date_derniere_maj_fta,
- commentaire_maj_fta, date_echeance_fta, OLD_duree_apres_dernier_processus_fta, OLD_periode_commercialisation_fta,
- code_douane_fta, OLD_code_douane_libelle_fta, poids_emballages_uvc_fta, poids_brut_uvc_fta,
- poids_net_uvc_fta, suffixe_agrologic_fta, OLD_synoptique_valide_fta, origine_transformation_fta,
- remarque_fta, OLD_presentation_fta, apres_ouverture_fta, conseil_rechauffage_valide_fta,
- reference_externe_fta, OLD_duree_vie_technique_fta, designation_commerciale_fta, OLD_nom_abrege_fta,
- site_expedition_fta, conseil_rechauffage_experimentale_fta, OLD_synoptique_experimental_fta, OLD_unite_affichage_fta,
- OLD_signature_validation_fta, OLD_old_gamdesc, OLD_old_segdesc, OLD_old_condition,
- OLD_old_conservation, id_article_agrologic, OLD_id_annexe_environnement_conservation, origine_matiere_fta,
- allergenes_matiere_fta, description_emballage, OLD_date_transfert_industriel, liste_chapitre_maj_fta,
- verrouillage_libelle_etiquette_fta, nombre_portion_fta, OLD_last_id_fta, OLD_id_arcadia_type_calibre,
- OLD_nom_client_demandeur, OLD_besoin_fiche_technique, OLD_echeance_demandeur, OLD_besoin_compostage_fta,
- OLD_calibre_defaut, OLD_id_arcadia_emballage_type, OLD_id_arcadia_client_segment, OLD_quantite_hebdomadaire_estime_commande,
- OLD_nom_machine_fta, OLD_frequence_hebdomadaire_estime_commande, OLD_tare_fta, OLD_perte_matiere_fta,
- OLD_besoin_fiche_rendement, OLD_nom_demandeur_fta, OLD_id_arcadia_atelier, OLD_id_arcadia_client_circuit,
- OLD_id_annexe_environnement_conservation_groupe, OLD_societe_demandeur_fta, OLD_type_marinade_fta, OLD_besoin_fiche_productivite_fta,
- OLD_id_arcadia_poste, OLD_date_demandeur_fta, id_annexe_unite_facturation, OLD_type_minerai,
- OLD_id_arcadia_client_reseau, OLD_id_arcadia_maquette_etiquette, OLD_etude_prix_fta, OLD_bon_fabrication_atelier,
- date_creation, CODE_ARTICLE, code_article_client, code_article_ldc,
- LIBELLE, LIBELLE_CLIENT, NB_UNIT_ELEM, OLD_NB_UV_PAR_US1,
- Poids_ELEM, OLD_REGROUPEMENT, OLD_UL2, OLD_RGR2,
- OLD_Unite_Facturation, Rayon, actif, Site_de_production,
- Duree_de_vie, Duree_de_vie_technique, OLD_code_barre_specifique, OLD_transfert_PF,
- OLD_Zone_picking, OLD_fiche_palette_specifique, OLD_TARIF, pvc_article,
- pvc_article_kg, OLD_FAMILLE_BUDGET, OLD_FAMILLE_ARTICLE, OLD_id_access_familles_gammes,
- OLD_Cout_Denree, OLD_Cout_Emballage, OLD_Cout_Autre, OLD_Cout_PF,
- OLD_FAMILLE_MKTG, Composition, composition1, libelle_multilangue,
- K_etat, EAN_UVC, EAN_COLIS, EAN_PALETTE,
- OLD_nouvel_article, OLD_k_gestion_lot, activation_codesoft_arti2, id_etiquette_codesoft_arti2,
- atmosphere_protectrice, image_eco_emballage, libelle_code_article_client, id_service_consommateur,
- nom_societe, id_fta_classification2,pourcentage_avancement, liste_id_fta_role,code_article_ldc_mere,
- id_arcadia_categeorie_produit_optiventes,id_arcadia_gamme_famille_budget,id_classification_raccourcis,
-  id_arcadia_famille_budget,id_arcadia_gamme_coop,id_arcadia_famille_vente,id_arcadia_sous_famille,id_arcadia_marque,
-  date_de_validation_fta,is_duree_de_vie_calculate)"
-                        . " SELECT id_access_arti2, OLD_numft, id_fta_workflow,
- commentaire, OLD_id_fta_palettisation, id_dossier_fta, id_version_dossier_fta,
- OLD_champ_maj_fta, id_fta_etat, createur_fta, date_derniere_maj_fta,
- commentaire_maj_fta, date_echeance_fta, OLD_duree_apres_dernier_processus_fta, OLD_periode_commercialisation_fta,
- code_douane_fta, OLD_code_douane_libelle_fta, poids_emballages_uvc_fta, poids_brut_uvc_fta,
- poids_net_uvc_fta, suffixe_agrologic_fta, OLD_synoptique_valide_fta, origine_transformation_fta,
- remarque_fta, OLD_presentation_fta, apres_ouverture_fta, conseil_rechauffage_valide_fta,
- reference_externe_fta, OLD_duree_vie_technique_fta, designation_commerciale_fta, OLD_nom_abrege_fta,
- site_expedition_fta, conseil_rechauffage_experimentale_fta, OLD_synoptique_experimental_fta, OLD_unite_affichage_fta,
- OLD_signature_validation_fta, OLD_old_gamdesc, OLD_old_segdesc, OLD_old_condition,
- OLD_old_conservation, id_article_agrologic, OLD_id_annexe_environnement_conservation, origine_matiere_fta,
- allergenes_matiere_fta, description_emballage, OLD_date_transfert_industriel, liste_chapitre_maj_fta,
- verrouillage_libelle_etiquette_fta, nombre_portion_fta, OLD_last_id_fta, OLD_id_arcadia_type_calibre,
- OLD_nom_client_demandeur, OLD_besoin_fiche_technique, OLD_echeance_demandeur, OLD_besoin_compostage_fta,
- OLD_calibre_defaut, OLD_id_arcadia_emballage_type, OLD_id_arcadia_client_segment, OLD_quantite_hebdomadaire_estime_commande,
- OLD_nom_machine_fta, OLD_frequence_hebdomadaire_estime_commande, OLD_tare_fta, OLD_perte_matiere_fta,
- OLD_besoin_fiche_rendement, OLD_nom_demandeur_fta, OLD_id_arcadia_atelier, OLD_id_arcadia_client_circuit,
- OLD_id_annexe_environnement_conservation_groupe, OLD_societe_demandeur_fta, OLD_type_marinade_fta, OLD_besoin_fiche_productivite_fta,
- OLD_id_arcadia_poste, OLD_date_demandeur_fta, id_annexe_unite_facturation, OLD_type_minerai,
- OLD_id_arcadia_client_reseau, OLD_id_arcadia_maquette_etiquette, OLD_etude_prix_fta, OLD_bon_fabrication_atelier,
- date_creation, CODE_ARTICLE, code_article_client, code_article_ldc,
- LIBELLE, LIBELLE_CLIENT, NB_UNIT_ELEM, OLD_NB_UV_PAR_US1,
- Poids_ELEM, OLD_REGROUPEMENT, OLD_UL2, OLD_RGR2,
- OLD_Unite_Facturation, Rayon, actif, Site_de_production,
- Duree_de_vie, Duree_de_vie_technique, OLD_code_barre_specifique, OLD_transfert_PF,
- OLD_Zone_picking, OLD_fiche_palette_specifique, OLD_TARIF, pvc_article,
- pvc_article_kg, OLD_FAMILLE_BUDGET, OLD_FAMILLE_ARTICLE, OLD_id_access_familles_gammes,
- OLD_Cout_Denree, OLD_Cout_Emballage, OLD_Cout_Autre, OLD_Cout_PF,
- OLD_FAMILLE_MKTG, Composition, composition1, libelle_multilangue,
- K_etat, EAN_UVC, EAN_COLIS, EAN_PALETTE,
- OLD_nouvel_article, OLD_k_gestion_lot, activation_codesoft_arti2, id_etiquette_codesoft_arti2,
- atmosphere_protectrice, image_eco_emballage, libelle_code_article_client, id_service_consommateur,
- nom_societe, id_fta_classification2 ,pourcentage_avancement, liste_id_fta_role,code_article_ldc_mere,
- id_arcadia_categeorie_produit_optiventes,id_arcadia_gamme_famille_budget,id_classification_raccourcis,
- id_arcadia_famille_budget,id_arcadia_gamme_coop,id_arcadia_famille_vente,id_arcadia_sous_famille,id_arcadia_marque,
- date_de_validation_fta,is_duree_de_vie_calculate"
-                        . " FROM " . FtaModel::TABLENAME
-                        . " WHERE " . FtaModel::KEYNAME . "=" . $paramIdFta
-        );
-        $key = $pdo->lastInsertId();
+
+        $key = FtaController::duplicateId(self::TABLENAME, $paramIdFta);
+
         return $key;
     }
 
@@ -2219,4 +2145,130 @@ class FtaModel extends AbstractModel {
      * --> Si valeur existante alors affichage.
      */
 //    }
+
+    /**
+     * Vérification que les champs arcadia déduit de la classifcation
+     * sont correcte
+     * @param type $paramIdClassificationFta2
+     */
+    function checkArcadiaClassifData($paramIdClassificationFta2) {
+        /**
+         * Famille Budget
+         */
+        $idArcadiaFamilleBudget = $this->getDataField(FtaModel::FIELDNAME_ID_ARCADIA_FAMILLE_BUDGET)->getFieldValue();
+
+        if ($idArcadiaFamilleBudget) {
+            $reqFamilleBudget = "SELECT DISTINCT " . ArcadiaFamilleBudgetModel::KEYNAME . "," . ArcadiaFamilleBudgetModel::KEYNAME
+                    . " FROM " . ArcadiaFamilleBudgetModel::TABLENAME
+                    . " ORDER BY " . ArcadiaFamilleBudgetModel::KEYNAME;
+            $arrayClassificationArcadiaFamilleBudget = DatabaseOperation::convertSqlStatementWithKeyAndOneFieldToArray($reqFamilleBudget);
+
+            if (!in_array($idArcadiaFamilleBudget, $arrayClassificationArcadiaFamilleBudget)) {
+                $this->getDataField(FtaModel::FIELDNAME_ID_ARCADIA_FAMILLE_BUDGET)->setFieldValue(" ");
+            }
+        }
+
+
+        /**
+         * Famille de Ventes
+         */
+        $idArcadiaFamilleVente = $this->getDataField(FtaModel::FIELDNAME_ID_ARCADIA_FAMILLE_VENTE)->getFieldValue();
+        if ($idArcadiaFamilleVente) {
+            $idActivite = ClassificationFta2Model::getIdClassificationTypeByTypeNameAndIdClassificationFta2($paramIdClassificationFta2, ClassificationFta2Model::FIELDNAME_ID_ACTIVITE);
+
+            $arrayClassificationFamilleVenteArcadia = DatabaseOperation::convertSqlStatementWithKeyAndOneFieldToArray(
+                            'SELECT DISTINCT ' . ArcadiaFamilleVenteModel::TABLENAME . '.' . ArcadiaFamilleVenteModel::KEYNAME
+                            . ',' . ArcadiaFamilleVenteModel::TABLENAME . '.' . ArcadiaFamilleVenteModel::KEYNAME
+                            . ' FROM ' . ArcadiaFamilleVenteModel::TABLENAME . ',' . ClassificationActiviteFamilleVentesArcadiaModel::TABLENAME
+                            . ' WHERE ' . ArcadiaFamilleVenteModel::TABLENAME . '.' . ArcadiaFamilleVenteModel::KEYNAME
+                            . ' = ' . ClassificationActiviteFamilleVentesArcadiaModel::TABLENAME . '.' . ClassificationActiviteFamilleVentesArcadiaModel::FIELDNAME_ID_ARCADIA_FAMILLE_VENTE
+                            . ' AND ' . ClassificationActiviteFamilleVentesArcadiaModel::FIELDNAME_ID_ACTIVITE . '=' . $idActivite
+                            . ' ORDER BY ' . ArcadiaFamilleVenteModel::FIELDNAME_NOM_ARCADIA_FAMILLE_VENTE
+            );
+
+            if (!in_array($idArcadiaFamilleVente, $arrayClassificationFamilleVenteArcadia)) {
+                $this->getDataField(FtaModel::FIELDNAME_ID_ARCADIA_FAMILLE_VENTE)->setFieldValue(" ");
+            }
+        }
+
+        /**
+         * Gamme Coop
+         */
+        $idArcadiaGammeCoop = $this->getDataField(FtaModel::FIELDNAME_ID_ARCADIA_GAMME_COOP)->getFieldValue();
+
+        if ($idArcadiaGammeCoop) {
+            $reqGammeCoop = "SELECT DISTINCT " . ArcadiaGammeCoopModel::KEYNAME . "," . ArcadiaGammeCoopModel::KEYNAME
+                    . " FROM " . ArcadiaGammeCoopModel::TABLENAME
+                    . " ORDER BY " . ArcadiaGammeCoopModel::KEYNAME;
+            $arrayClassificationArcadiaGammeCoop = DatabaseOperation::convertSqlStatementWithKeyAndOneFieldToArray($reqGammeCoop);
+
+            if (!in_array($idArcadiaGammeCoop, $arrayClassificationArcadiaGammeCoop)) {
+                $this->getDataField(FtaModel::FIELDNAME_ID_ARCADIA_GAMME_COOP)->setFieldValue(" ");
+            }
+        }
+
+        /**
+         * Gamme Famille Budget
+         */
+        $idArcadiaGammeFamilleBudget = $this->getDataField(FtaModel::FIELDNAME_ID_ARCADIA_GAMME_FAMILLE_BUDGET)->getFieldValue();
+
+        if ($idArcadiaGammeFamilleBudget) {
+            $arrayGammeFamilleBudget = DatabaseOperation::convertSqlStatementWithKeyAndOneFieldToArray(
+                            'SELECT DISTINCT ' . ArcadiaGammeFamilleBudgetModel::TABLENAME . '.' . ArcadiaGammeFamilleBudgetModel::KEYNAME
+                            . ',' . ArcadiaGammeFamilleBudgetModel::TABLENAME . '.' . ArcadiaGammeFamilleBudgetModel::KEYNAME
+                            . ' FROM ' . ArcadiaGammeFamilleBudgetModel::TABLENAME . ',' . ClassificationGammeFamilleBudgetArcadiaModel::TABLENAME
+                            . ' WHERE ' . ArcadiaGammeFamilleBudgetModel::TABLENAME . '.' . ArcadiaGammeFamilleBudgetModel::KEYNAME
+                            . ' = ' . ClassificationGammeFamilleBudgetArcadiaModel::TABLENAME . '.' . ClassificationGammeFamilleBudgetArcadiaModel::FIELDNAME_ID_ARCADIA_GAMME_FAMILLE_BUDGET
+                            . ' AND ' . ClassificationGammeFamilleBudgetArcadiaModel::FIELDNAME_ID_FTA_CLASSIFICATION2 . '=' . $paramIdClassificationFta2
+                            . ' ORDER BY ' . ArcadiaGammeFamilleBudgetModel::KEYNAME
+            );
+            if (!in_array($idArcadiaGammeFamilleBudget, $arrayGammeFamilleBudget)) {
+                $this->getDataField(FtaModel::FIELDNAME_ID_ARCADIA_GAMME_FAMILLE_BUDGET)->setFieldValue(" ");
+            }
+        }
+
+        /**
+         * Arcadia Marque
+         */
+        $idArcadiaMarque = $this->getDataField(FtaModel::FIELDNAME_ID_ARCADIA_MARQUE)->getFieldValue();
+
+        if ($idArcadiaMarque) {
+            $idMarque = ClassificationFta2Model::getIdClassificationTypeByTypeNameAndIdClassificationFta2($paramIdClassificationFta2, ClassificationFta2Model::FIELDNAME_ID_MARQUE);
+            $arrayClassificationMarqueArcadia = DatabaseOperation::convertSqlStatementWithKeyAndOneFieldToArray(
+                            'SELECT DISTINCT ' . ArcadiaMarqueModel::TABLENAME . '.' . ArcadiaMarqueModel::KEYNAME
+                            . ',' . ArcadiaMarqueModel::TABLENAME . '.' . ArcadiaMarqueModel::KEYNAME
+                            . ' FROM ' . ArcadiaMarqueModel::TABLENAME . ',' . ClassificationMarqueArcadiaModel::TABLENAME
+                            . ' WHERE ' . ArcadiaMarqueModel::TABLENAME . '.' . ArcadiaMarqueModel::KEYNAME
+                            . ' = ' . ClassificationMarqueArcadiaModel::TABLENAME . '.' . ClassificationMarqueArcadiaModel::FIELDNAME_ID_ARCADIA_MARQUE
+                            . ' AND ' . ClassificationMarqueArcadiaModel::FIELDNAME_ID_MARQUE . '=' . $idMarque
+                            . ' ORDER BY ' . ArcadiaMarqueModel::FIELDNAME_NOM_ARCADIA_MARQUE
+            );
+            if (!in_array($idArcadiaMarque, $arrayClassificationMarqueArcadia)) {
+                $this->getDataField(FtaModel::FIELDNAME_ID_ARCADIA_MARQUE)->setFieldValue(" ");
+            }
+        }
+
+        /**
+         * Sous Famille
+         */
+        $idArcadiaSousFamille = $this->getDataField(FtaModel::FIELDNAME_ID_ARCADIA_SOUS_FAMILLE)->getFieldValue();
+        if ($idArcadiaSousFamille) {
+            $idActivite = ClassificationFta2Model::getIdClassificationTypeByTypeNameAndIdClassificationFta2($paramIdClassificationFta2, ClassificationFta2Model::FIELDNAME_ID_ACTIVITE);
+
+            $arrayClassificationActiviteSousFamilleArcadia = DatabaseOperation::convertSqlStatementWithKeyAndOneFieldToArray(
+                            'SELECT DISTINCT ' . ArcadiaSousFamilleModel::TABLENAME . '.' . ArcadiaSousFamilleModel::KEYNAME
+                            . ',' . ArcadiaSousFamilleModel::TABLENAME . '.' . ArcadiaSousFamilleModel::KEYNAME
+                            . ' FROM ' . ArcadiaSousFamilleModel::TABLENAME . ',' . ClassificationActiviteSousFamilleArcadiaModel::TABLENAME
+                            . ' WHERE ' . ArcadiaSousFamilleModel::TABLENAME . '.' . ArcadiaSousFamilleModel::KEYNAME
+                            . ' = ' . ClassificationActiviteSousFamilleArcadiaModel::TABLENAME . '.' . ClassificationActiviteSousFamilleArcadiaModel::FIELDNAME_ID_ARCADIA_SOUS_FAMILLE
+                            . ' AND ' . ClassificationActiviteSousFamilleArcadiaModel::FIELDNAME_ID_ACTIVITE . '=' . $idActivite
+                            . ' ORDER BY ' . ArcadiaSousFamilleModel::FIELDNAME_NOM_ARCADIA_SOUS_FAMILLE
+            );
+
+            if (!in_array($idArcadiaSousFamille, $arrayClassificationActiviteSousFamilleArcadia)) {
+                $this->getDataField(FtaModel::FIELDNAME_ID_ARCADIA_SOUS_FAMILLE)->setFieldValue(" ");
+            }
+        }
+    }
+
 }

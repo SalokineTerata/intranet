@@ -21,7 +21,7 @@ $fta_modification = Acl::getValueAccesRights('fta_modification');
 
 $recherche = Lib::getParameterFromRequest("recherche");
 if ($recherche == "0") {
-    $message = "Votre demande a plus de 1000 résultats, veuillez précisez votre recherche ! ";
+    $message = UserInterfaceMessage::FR_WARNING_RECHERE . ModuleConfig::VALUE_MAX_PAR_PAGE;
     $redirection = "recherche.php";
     afficher_message("Erreur", $message, $redirection);
 }
@@ -65,30 +65,19 @@ $dossierUrL = $globalConfig->getConf()->getUrlRoot();
 //echo $type_recherche;
 //http://intranet.dev.agis.fr/fta/recherche.php?url_page_depart=(/fta/recherche.php)&requete_resultat=SELECT+DISTINCT+fta.id_fta+FROM+fta+WHERE+fta.id_article_agrologic%3D%27666%27&nb_limite_resultat=1000&champ_recherche=4||1||&operateur_recherche=1||4||&texte_recherche=666||666||&nbcol=1&nbligne=2&nb_col_courant=0&nb_ligne_courant=1&ajout_col=0
 if (is_numeric($recherche)) {
-    switch ($type_recherche) {
-        case "regate":
-            //Recherche du code Regate
-            $search_table = "fta";
-            $search_id = "fta.id_fta";
-            $search_req = "fta.code_article_ldc%3D%27" . $recherche . "%27+";
-            //SELECT+DISTINCT+fta.id_fta+FROM+access_arti2%2Cfta+WHERE+access_arti2.code_article_ldc%3D%2742099%27+AND+access_arti2.id_access_arti2%3Dfta.id_access_arti2%0D%0A+AND++1&nb_limite_resultat=1000&champ_recherche=6&operateur_recherche=4&texte_recherche=42099&nbcol=1&nbligne=1&nb_col_courant=0&nb_ligne_courant=0&ajout_col=0
-            $champ_recherche = 6;
-            break;
-        case "agrologic":
-            //Recherche du code Agrologic
-            $search_table = "fta";
-            $search_id = "$search_table.id_fta";
-            $search_req = "fta.id_article_agrologic%3D%27" . $recherche . "%27+";
-            $champ_recherche = 1;
-            break;
-    }
+
+    //Recherche du code Regate
+//    $search_table = "fta";
+//    $search_id = "fta.id_fta";
+//    $search_req = "fta.code_article_ldc%3D%27" . $recherche . "%27+";
+    $champ_recherche = 6;
     $operateur_recherche = 4;
 } else {
     if ($recherche) {
         //Recherche dans la désignation Commerciale
-        $search_table = "fta";
-        $search_id = "$search_table.id_fta";
-        $search_req = "fta.designation_commerciale_fta++LIKE+%28+%27%25" . $recherche . "%25%27+%29+";
+//        $search_table = "fta";
+//        $search_id = "$search_table.id_fta";
+//        $search_req = "fta.designation_commerciale_fta++LIKE+%28+%27%25" . $recherche . "%25%27+%29+";
         $operateur_recherche = 1;
         $champ_recherche = 4;
     } else {
@@ -97,7 +86,7 @@ if (is_numeric($recherche)) {
         afficher_message("Erreur", $message, $redirection);
     }
 }
-header("Location: ./recherche.php?url_page_depart=(/" . $dossierUrL . "/apps/fta/recherche.php)&requete_resultat=SELECT+DISTINCT+$search_id+FROM+$search_table+WHERE+$search_req&nb_limite_resultat=1000&champ_recherche=$champ_recherche&operateur_recherche=$operateur_recherche&texte_recherche=$recherche&nbcol=1&nbligne=1&nb_col_courant=0&nb_ligne_courant=1&ajout_col=0&id_fta_role=$idFtaRole");
+header("Location: ./recherche.php?url_page_depart=(/" . $dossierUrL . "/apps/fta/recherche.php)&rechercheRapide=$recherche&nb_limite_resultat=1000&champ_recherche=$champ_recherche&operateur_recherche=$operateur_recherche&texte_recherche=$recherche&nbcol=1&nbligne=1&nb_col_courant=0&nb_ligne_courant=1&ajout_col=0&id_fta_role=$idFtaRole");
 
 
 /* * **********

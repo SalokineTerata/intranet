@@ -529,35 +529,7 @@ class FtaConditionnementModel extends AbstractModel {
      * @param type $paramIdFta
      */
     public static function duplicateFtaConditionnementByIdFta($paramIdFtaOrig, $paramIdFtaNew) {
-        DatabaseOperation::execute(
-                ' INSERT INTO ' . FtaConditionnementModel::TABLENAME
-                . ' (' . FtaConditionnementModel::FIELDNAME_HAUTEUR_EMBALLAGE_FTA_CONDITIONNEMENT
-                . ', ' . FtaConditionnementModel::FIELDNAME_HAUTEUR_FTA_CONDITIONNEMENT
-                . ', ' . FtaConditionnementModel::FIELDNAME_ID_ANNEXE_EMBALLAGE
-                . ', ' . FtaConditionnementModel::FIELDNAME_ID_ANNEXE_EMBALLAGE_GROUPE
-                . ', ' . FtaConditionnementModel::FIELDNAME_ID_ANNEXE_EMBALLAGE_GROUPE_TYPE
-                . ', ' . FtaConditionnementModel::FIELDNAME_LARGEUR_FTA_CONDITIONNEMENT
-                . ', ' . FtaConditionnementModel::FIELDNAME_LONGUEUR_FTA_CONDITIONNEMENT
-                . ', ' . FtaConditionnementModel::FIELDNAME_NOMBRE_COUCHE_FTA_CONDITIONNEMENT
-                . ', ' . FtaConditionnementModel::FIELDNAME_POIDS_FTA_CONDITIONNEMENT
-                . ', ' . FtaConditionnementModel::FIELDNAME_QUANTITE_PAR_COUCHE_FTA_CONDITIONNEMENT
-                . ', ' . FtaConditionnementModel::FIELDNAME_LAST_ID_FTA_CONDITIONNEMENT
-                . ', ' . FtaConditionnementModel::FIELDNAME_ID_FTA . ')'
-                . ' SELECT ' . FtaConditionnementModel::FIELDNAME_HAUTEUR_EMBALLAGE_FTA_CONDITIONNEMENT
-                . ', ' . FtaConditionnementModel::FIELDNAME_HAUTEUR_FTA_CONDITIONNEMENT
-                . ', ' . FtaConditionnementModel::FIELDNAME_ID_ANNEXE_EMBALLAGE
-                . ', ' . FtaConditionnementModel::FIELDNAME_ID_ANNEXE_EMBALLAGE_GROUPE
-                . ', ' . FtaConditionnementModel::FIELDNAME_ID_ANNEXE_EMBALLAGE_GROUPE_TYPE
-                . ', ' . FtaConditionnementModel::FIELDNAME_LARGEUR_FTA_CONDITIONNEMENT
-                . ', ' . FtaConditionnementModel::FIELDNAME_LONGUEUR_FTA_CONDITIONNEMENT
-                . ', ' . FtaConditionnementModel::FIELDNAME_NOMBRE_COUCHE_FTA_CONDITIONNEMENT
-                . ', ' . FtaConditionnementModel::FIELDNAME_POIDS_FTA_CONDITIONNEMENT
-                . ', ' . FtaConditionnementModel::FIELDNAME_QUANTITE_PAR_COUCHE_FTA_CONDITIONNEMENT
-                . ', ' . FtaConditionnementModel::KEYNAME
-                . ', ' . $paramIdFtaNew
-                . ' FROM ' . FtaConditionnementModel::TABLENAME
-                . ' WHERE ' . FtaConditionnementModel::FIELDNAME_ID_FTA . '=' . $paramIdFtaOrig
-        );
+        FtaController::duplicateWithNewId(self::TABLENAME, $paramIdFtaOrig, $paramIdFtaNew);
     }
 
     /**

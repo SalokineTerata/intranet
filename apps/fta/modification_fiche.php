@@ -232,7 +232,7 @@ echo '
      <input type=\'hidden\' name=\'synthese_action\' id=synthese_action value=\'' . $synthese_action . '\' />
      <input type=\'hidden\' name=\'nom_fta_chapitre_encours\' value=\'' . $nom_fta_chapitre_encours . '\' />
      <input type=\'hidden\' name=\'comeback\' id=comeback value=\'' . $comeback . '\' />
-    
+
      ' . $javascript . '
      <' . $html_table . '>
      <tr><td>

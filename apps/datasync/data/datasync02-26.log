@@ -1,0 +1,150 @@
+Démarrage : mer fév 26 23:00:01 CET 2014
+Arrêt     : mer fév 26 23:00:58 CET 2014
+
+
+
+Base MySQL sélectionnée: agis
+Nombre de serveur(s) Linux concerné(s): 4
+Nombre de dossier(s) à mettre à jour: 26
+
+sending incremental file list
+gestion_crise/mise \#340 jour 2014/PICARD/LC PICARD PC MAJ CONTACTS CRISE TARARE.doc
+
+sent 39674 bytes  received 65 bytes  15895.60 bytes/sec
+total size is 11731248  speedup is 295.21
+sending incremental file list
+
+sent 6047 bytes  received 37 bytes  4056.00 bytes/sec
+total size is 12258174  speedup is 2014.82
+sending incremental file list
+
+sent 63 bytes  received 12 bytes  50.00 bytes/sec
+total size is 84160512  speedup is 1122140.16
+sending incremental file list
+
+sent 7538 bytes  received 45 bytes  15166.00 bytes/sec
+total size is 9253358  speedup is 1220.28
+sending incremental file list
+
+sent 7695 bytes  received 20 bytes  5143.33 bytes/sec
+total size is 16751789  speedup is 2171.33
+sending incremental file list
+
+sent 4308 bytes  received 24 bytes  2888.00 bytes/sec
+total size is 6387982  speedup is 1474.60
+sending incremental file list
+mercuriales/sync.ffs_db
+mercuriales/gms/2014/CENTRALES 2014/CASINO 2014.xls
+mercuriales/gms/2014/CONTROLE TARIFS 2014/03-MARS/2014 SIMPLY MARKET HAUSSE CONJONCTURELLE.pdf
+mercuriales/gms/2014/CONTROLE TARIFS 2014/06-JUIN/
+mercuriales/gms/2014/CONTROLE TARIFS 2014/06-JUIN/2014 INTERMARCHE PLATEAUX.pdf
+mercuriales/mdd/2014/2014 MERCURIALE AUCHAN.xls
+mercuriales/mdd/2014/2014 MERCURIALE CASINO.xls
+
+sent 89368 bytes  received 7154 bytes  21449.33 bytes/sec
+total size is 28890163  speedup is 299.31
+sending incremental file list
+
+sent 5047 bytes  received 27 bytes  3382.67 bytes/sec
+total size is 39173092  speedup is 7720.36
+sending incremental file list
+operations_commerciales/GMS/2014/A-CENTRALES/GMS CARREFOUR 2014-FUTUR MASTER.xls
+operations_commerciales/MDD/OP MDD 2013/MDD CRF BELGIQUE 2013 FUTUR MASTER.xls
+
+sent 50884 bytes  received 5000 bytes  15966.86 bytes/sec
+total size is 46649253  speedup is 834.75
+sending incremental file list
+
+sent 19882 bytes  received 78 bytes  13306.67 bytes/sec
+total size is 98562242  speedup is 4937.99
+sending incremental file list
+
+sent 3133 bytes  received 78 bytes  1284.40 bytes/sec
+total size is 13716658  speedup is 4271.77
+sending incremental file list
+modeles/compo_ITM_gamme_permanente.lab
+modeles/compo_asia_hema_dessous-70x130.lab
+modeles/compo_asia_sdv_amigos_surgele.lab
+modeles/compo_asia_sdv_asian_select_surgele.lab
+modeles/compo_asia_sdv_les_marches_du_monde_surgele.lab
+modeles/compo_asia_simply_double_haut_g.lab
+
+sent 863106 bytes  received 3877 bytes  133382.00 bytes/sec
+total size is 43125248  speedup is 49.74
+sending incremental file list
+
+sent 63 bytes  received 12 bytes  50.00 bytes/sec
+total size is 84160512  speedup is 1122140.16
+sending incremental file list
+
+sent 7538 bytes  received 45 bytes  5055.33 bytes/sec
+total size is 9253358  speedup is 1220.28
+sending incremental file list
+
+sent 4308 bytes  received 24 bytes  2888.00 bytes/sec
+total size is 6387982  speedup is 1474.60
+sending incremental file list
+
+sent 7695 bytes  received 20 bytes  5143.33 bytes/sec
+total size is 16751789  speedup is 2171.33
+sending incremental file list
+
+sent 85 bytes  received 13 bytes  65.33 bytes/sec
+total size is 104853504  speedup is 1069933.71
+sending incremental file list
+operations_commerciales/GMS/2014/A-CENTRALES/GMS CARREFOUR 2014-FUTUR MASTER.xls
+operations_commerciales/MDD/OP MDD 2013/MDD CRF BELGIQUE 2013 FUTUR MASTER.xls
+
+sent 50884 bytes  received 5000 bytes  22353.60 bytes/sec
+total size is 46649253  speedup is 834.75
+sending incremental file list
+mercuriales/sync.ffs_db
+mercuriales/gms/2014/CENTRALES 2014/CASINO 2014.xls
+mercuriales/gms/2014/CONTROLE TARIFS 2014/03-MARS/2014 SIMPLY MARKET HAUSSE CONJONCTURELLE.pdf
+mercuriales/gms/2014/CONTROLE TARIFS 2014/06-JUIN/
+mercuriales/gms/2014/CONTROLE TARIFS 2014/06-JUIN/2014 INTERMARCHE PLATEAUX.pdf
+mercuriales/mdd/2014/2014 MERCURIALE AUCHAN.xls
+mercuriales/mdd/2014/2014 MERCURIALE CASINO.xls
+
+sent 89368 bytes  received 7154 bytes  38608.80 bytes/sec
+total size is 28890163  speedup is 299.31
+sending incremental file list
+modeles/compo_ITM_gamme_permanente.lab
+modeles/compo_asia_hema_dessous-70x130.lab
+modeles/compo_asia_sdv_amigos_surgele.lab
+modeles/compo_asia_sdv_asian_select_surgele.lab
+modeles/compo_asia_sdv_les_marches_du_monde_surgele.lab
+modeles/compo_asia_simply_double_haut_g.lab
+
+sent 863106 bytes  received 3877 bytes  157633.27 bytes/sec
+total size is 43125248  speedup is 49.74
+sending incremental file list
+gestion_crise/mise \#340 jour 2014/PICARD/LC PICARD PC MAJ CONTACTS CRISE TARARE.doc
+
+sent 39674 bytes  received 65 bytes  26492.67 bytes/sec
+total size is 11731248  speedup is 295.21
+sending incremental file list
+organisation/Listes t\#351l\#351phoniques AGIS + LDC/Liste t\#351l\#351phonique cantubas alpha.pdf
+
+sent 433560 bytes  received 42 bytes  123886.29 bytes/sec
+total size is 129153497  speedup is 297.86
+sending incremental file list
+
+sent 5353 bytes  received 38 bytes  3594.00 bytes/sec
+total size is 56169881  speedup is 10419.20
+sending incremental file list
+codesoft/Codesoft 7/Auchan  Atac/Auchan/Auchan le traiteur/79975_verso.bak
+codesoft/Codesoft 7/Auchan  Atac/Auchan/Auchan le traiteur/79975_verso.lab
+codesoft/Codesoft 7/Auchan  Atac/Auchan/Auchan le traiteur/79976_verso.bak
+codesoft/Codesoft 7/Auchan  Atac/Auchan/Auchan le traiteur/79976_verso.lab
+
+sent 84298 bytes  received 4030 bytes  19628.44 bytes/sec
+total size is 291009107  speedup is 3294.64
+sending incremental file list
+
+sent 19882 bytes  received 78 bytes  13306.67 bytes/sec
+total size is 98562242  speedup is 4937.99
+sending incremental file list
+
+sent 3133 bytes  received 78 bytes  2140.67 bytes/sec
+total size is 13716658  speedup is 4271.77

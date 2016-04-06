@@ -1,0 +1,169 @@
+Démarrage : ven fév 14 23:00:01 CET 2014
+Arrêt     : ven fév 14 23:01:03 CET 2014
+
+
+
+Base MySQL sélectionnée: agis
+Nombre de serveur(s) Linux concerné(s): 4
+Nombre de dossier(s) à mettre à jour: 26
+
+sending incremental file list
+
+sent 6293 bytes  received 46 bytes  4226.00 bytes/sec
+total size is 11666224  speedup is 1840.39
+sending incremental file list
+suivi_investissement/2013-2014/R\#351alis\#351 bud invest r\#351vis\#351 2013-2014/Bud invest HER r\#351vis\#351 2013-2014.xls
+suivi_investissement/2014-2015/Projection bud invest 2014-2015/Projection bud invest HER 2014-2015.xls
+suivi_investissement/2014-2015/R\#351alis\#351 bud invest 2014-2015/Bud invest HER 2014-2015.xls
+
+sent 49307 bytes  received 712 bytes  20007.60 bytes/sec
+total size is 12177278  speedup is 243.45
+sending incremental file list
+
+sent 63 bytes  received 12 bytes  50.00 bytes/sec
+total size is 84160512  speedup is 1122140.16
+sending incremental file list
+
+sent 7538 bytes  received 45 bytes  5055.33 bytes/sec
+total size is 9253358  speedup is 1220.28
+sending incremental file list
+
+sent 7695 bytes  received 20 bytes  5143.33 bytes/sec
+total size is 16751789  speedup is 2171.33
+sending incremental file list
+
+sent 4308 bytes  received 24 bytes  2888.00 bytes/sec
+total size is 6387982  speedup is 1474.60
+sending incremental file list
+mercuriales/gms/2014/REGIONS  2014/GALEC REGION MERCU AVRIL 2014.xls
+
+sent 19535 bytes  received 5411 bytes  9978.40 bytes/sec
+total size is 27358382  speedup is 1096.70
+sending incremental file list
+
+sent 5047 bytes  received 27 bytes  3382.67 bytes/sec
+total size is 39173092  speedup is 7720.36
+sending incremental file list
+operations_commerciales/chrono demande echantillons.xls
+operations_commerciales/GMS/RECAP DEMANDE ET CONFIRMATIONS HEBDO.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS AUCHAN 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS CASINO 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS GALEC 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/CASINO HM/2014 HM FEUILLE DE CHOU S23 PIZZAS.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/CASINO HM/2014 HM RAMADAN S24 PIZZAS PAELLA.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/CASINO HM/2014 HM RAMADAN S26 PC PAELLA ASIE.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/CASINO SM/2014 SM DCD OP BRESIL S24 PAELLA PLATEAUX.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/CASINO SM/2014 SM MECA PRO S26.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/CASINO SM/2014 SM RAMADAN S25 COUSCOUS.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/GALEC/2014 GALEC OP BIEN VIVRE 8.xls
+
+sent 306428 bytes  received 22431 bytes  59792.55 bytes/sec
+total size is 45841829  speedup is 139.40
+sending incremental file list
+
+sent 19842 bytes  received 78 bytes  7968.00 bytes/sec
+total size is 98501331  speedup is 4944.85
+sending incremental file list
+deleting gofast/CHANTIERS/1_CNP_DELEGATION_Cecile/CNP_fonctionnement_CR_030214.doc
+gofast/CHANTIERS/1_CNP_DELEGATION_Cecile/5_STANDARDS/CNP_fonctionnement_CR_140214.doc
+gofast/INFORMATIONS_GENERALES/3_GOFAST_GEMBA_280114.ppt
+gofast/INFORMATIONS_GENERALES/5S_exemples_AGIS/Equipiers_KAISEN_140214.ppt
+
+sent 788493 bytes  received 134 bytes  143386.73 bytes/sec
+total size is 10552854  speedup is 13.38
+sending incremental file list
+deleting modeles/compo_asia_argel-70x130.lab
+modeles/compo_agis_sans_portion-v2.lab
+modeles/compo_agis_sans_portion-v2_180.lab
+modeles/compo_asia_argel-70x130_surgele.lab
+modeles/compo_asia_claude_leger.lab
+modeles/compo_asia_coupe_agis_detachable.lab
+modeles/compo_asia_double_bas_auchan_traiteur.lab
+modeles/compo_asia_double_haut_auchan_traiteur.lab
+modeles/compo_asia_hema_dessous-70x130.lab
+
+sent 221475 bytes  received 8961 bytes  18434.88 bytes/sec
+total size is 41009664  speedup is 177.97
+sending incremental file list
+
+sent 63 bytes  received 12 bytes  50.00 bytes/sec
+total size is 84160512  speedup is 1122140.16
+sending incremental file list
+
+sent 7538 bytes  received 45 bytes  5055.33 bytes/sec
+total size is 9253358  speedup is 1220.28
+sending incremental file list
+
+sent 4308 bytes  received 24 bytes  2888.00 bytes/sec
+total size is 6387982  speedup is 1474.60
+sending incremental file list
+
+sent 7695 bytes  received 20 bytes  5143.33 bytes/sec
+total size is 16751789  speedup is 2171.33
+sending incremental file list
+
+sent 85 bytes  received 13 bytes  65.33 bytes/sec
+total size is 104853504  speedup is 1069933.71
+sending incremental file list
+operations_commerciales/chrono demande echantillons.xls
+operations_commerciales/GMS/RECAP DEMANDE ET CONFIRMATIONS HEBDO.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS AUCHAN 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS CASINO 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS GALEC 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/CASINO HM/2014 HM FEUILLE DE CHOU S23 PIZZAS.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/CASINO HM/2014 HM RAMADAN S24 PIZZAS PAELLA.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/CASINO HM/2014 HM RAMADAN S26 PC PAELLA ASIE.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/CASINO SM/2014 SM DCD OP BRESIL S24 PAELLA PLATEAUX.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/CASINO SM/2014 SM MECA PRO S26.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/CASINO SM/2014 SM RAMADAN S25 COUSCOUS.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/GALEC/2014 GALEC OP BIEN VIVRE 8.xls
+
+sent 306428 bytes  received 22431 bytes  93959.71 bytes/sec
+total size is 45841829  speedup is 139.40
+sending incremental file list
+mercuriales/gms/2014/REGIONS  2014/GALEC REGION MERCU AVRIL 2014.xls
+
+sent 19535 bytes  received 5411 bytes  16630.67 bytes/sec
+total size is 27358382  speedup is 1096.70
+sending incremental file list
+deleting modeles/compo_asia_argel-70x130.lab
+modeles/compo_agis_sans_portion-v2.lab
+modeles/compo_agis_sans_portion-v2_180.lab
+modeles/compo_asia_argel-70x130_surgele.lab
+modeles/compo_asia_claude_leger.lab
+modeles/compo_asia_coupe_agis_detachable.lab
+modeles/compo_asia_double_bas_auchan_traiteur.lab
+modeles/compo_asia_double_haut_auchan_traiteur.lab
+modeles/compo_asia_hema_dessous-70x130.lab
+
+sent 221475 bytes  received 8961 bytes  92174.40 bytes/sec
+total size is 41009664  speedup is 177.97
+sending incremental file list
+
+sent 6293 bytes  received 46 bytes  4226.00 bytes/sec
+total size is 11666224  speedup is 1840.39
+sending incremental file list
+
+sent 5677 bytes  received 23 bytes  3800.00 bytes/sec
+total size is 128675317  speedup is 22574.62
+sending incremental file list
+
+sent 5353 bytes  received 38 bytes  3594.00 bytes/sec
+total size is 56169881  speedup is 10419.20
+sending incremental file list
+
+sent 50143 bytes  received 94 bytes  33491.33 bytes/sec
+total size is 290527827  speedup is 5783.14
+sending incremental file list
+
+sent 19842 bytes  received 78 bytes  7968.00 bytes/sec
+total size is 98501331  speedup is 4944.85
+sending incremental file list
+deleting gofast/CHANTIERS/1_CNP_DELEGATION_Cecile/CNP_fonctionnement_CR_030214.doc
+gofast/CHANTIERS/1_CNP_DELEGATION_Cecile/5_STANDARDS/CNP_fonctionnement_CR_140214.doc
+deleting gofast/INFORMATIONS_GENERALES/test/
+gofast/INFORMATIONS_GENERALES/3_GOFAST_GEMBA_280114.ppt
+gofast/INFORMATIONS_GENERALES/5S_exemples_AGIS/Equipiers_KAISEN_140214.ppt
+
+sent 788493 bytes  received 134 bytes  143386.73 bytes/sec
+total size is 10552854  speedup is 13.38

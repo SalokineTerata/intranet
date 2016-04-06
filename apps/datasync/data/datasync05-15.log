@@ -1,0 +1,181 @@
+Démarrage : jeu mai 15 23:00:01 CEST 2014
+Arrêt     : jeu mai 15 23:00:56 CEST 2014
+
+
+
+Base MySQL sélectionnée: agis
+Nombre de serveur(s) Linux concerné(s): 4
+Nombre de dossier(s) à mettre à jour: 29
+
+sending incremental file list
+
+sent 7051 bytes  received 49 bytes  2840.00 bytes/sec
+total size is 12693370  speedup is 1787.80
+sending incremental file list
+suivi_investissement/2014-2015/Suivi investissements AVI 2014 2015.xls
+suivi_investissement/2014-2015/R\#351alis\#351 bud invest 2014-2015/Bud invest AVI 2014 2015.xls
+
+sent 24042 bytes  received 3100 bytes  10856.80 bytes/sec
+total size is 12432343  speedup is 458.05
+sending incremental file list
+
+sent 63 bytes  received 12 bytes  50.00 bytes/sec
+total size is 88092672  speedup is 1174568.96
+sending incremental file list
+
+sent 7538 bytes  received 45 bytes  5055.33 bytes/sec
+total size is 9253358  speedup is 1220.28
+sending incremental file list
+
+sent 7733 bytes  received 20 bytes  5168.67 bytes/sec
+total size is 16753895  speedup is 2160.96
+sending incremental file list
+
+sent 4308 bytes  received 24 bytes  2888.00 bytes/sec
+total size is 6387982  speedup is 1474.60
+sending incremental file list
+mercuriales/sync.ffs_db
+mercuriales/HD/2014/2014 MERCURIALE NORMA.xls
+deleting mercuriales/mdd/2014/INTERMARCHE CHIFFRAGE INCO.xls
+mercuriales/mdd/2014/2014 MERCURIALE AUCHAN.xls
+mercuriales/mdd/2014/2014 MERCURIALE CARREFOUR PLATS CUISINES.xls
+mercuriales/mdd/2014/2014 MERCURIALE CASINO.xls
+mercuriales/mdd/2014/2014 MERCURIALE INTERMARCHE.xls
+mercuriales/mdd/2014/2014 MERCURIALE PROVERA.xls
+mercuriales/mdd/2014/2014 MERCURIALE SCAMARK.xls
+
+sent 55815 bytes  received 7687 bytes  14111.56 bytes/sec
+total size is 32233704  speedup is 507.60
+sending incremental file list
+
+sent 5047 bytes  received 27 bytes  3382.67 bytes/sec
+total size is 39173092  speedup is 7720.36
+sending incremental file list
+operations_commerciales/chrono demande echantillons.xls
+operations_commerciales/FZC/OP FZC 2014/FZC ARGEL 2014.xls
+operations_commerciales/FZC/OP FZC 2014/FZC PICARD 2014.xls
+operations_commerciales/FZC/OP FZC 2014/FZC THIRIET 2014.xls
+operations_commerciales/FZC/OP FZC 2014/FZC TOUPARGEL 2014.xls
+operations_commerciales/MDD/MODELES VB/DEM ECHANTILLONS/2014/Chrono 304 CASINO 150514.XLS
+operations_commerciales/MDD/MODELES VB/DEM ECHANTILLONS/2014/Chrono 305 CASINO 150514.XLS
+operations_commerciales/MDD/OP MDD 2014/MDD ITM 2014 .xls
+
+sent 255760 bytes  received 6932 bytes  35025.60 bytes/sec
+total size is 50629019  speedup is 192.73
+sending incremental file list
+
+sent 20296 bytes  received 83 bytes  8151.60 bytes/sec
+total size is 99065320  speedup is 4861.15
+sending incremental file list
+
+sent 4380 bytes  received 82 bytes  1784.80 bytes/sec
+total size is 35609223  speedup is 7980.55
+sending incremental file list
+modeles/carton_ean_128_mini-v2013.lab
+modeles/carton_ean_128_mini-v2013_180.lab
+modeles/carton_ean_128_mini-v2013_180_surgele.lab
+modeles/carton_ean_128_mini-v2013_surgele.lab
+modeles/compo_asia_plateau_aperitif_recto.lab
+modeles/compo_asia_plateau_aperitif_verso.lab
+modeles/compo_pc_saveur_minute_recto.lab
+modeles/compo_pc_saveur_minute_recto_180.lab
+modeles/compo_pc_saveur_minute_recto_180_surgele.lab
+modeles/compo_pc_saveur_minute_recto_surgele.lab
+
+sent 105213 bytes  received 15719 bytes  34552.00 bytes/sec
+total size is 46571008  speedup is 385.10
+sending incremental file list
+
+sent 5781 bytes  received 30 bytes  3874.00 bytes/sec
+total size is 93132165  speedup is 16026.87
+sending incremental file list
+
+sent 63 bytes  received 12 bytes  50.00 bytes/sec
+total size is 88092672  speedup is 1174568.96
+sending incremental file list
+
+sent 7538 bytes  received 45 bytes  5055.33 bytes/sec
+total size is 9253358  speedup is 1220.28
+sending incremental file list
+
+sent 4308 bytes  received 24 bytes  2888.00 bytes/sec
+total size is 6387982  speedup is 1474.60
+sending incremental file list
+
+sent 7733 bytes  received 20 bytes  5168.67 bytes/sec
+total size is 16753895  speedup is 2160.96
+sending incremental file list
+
+sent 85 bytes  received 13 bytes  65.33 bytes/sec
+total size is 104853504  speedup is 1069933.71
+sending incremental file list
+operations_commerciales/chrono demande echantillons.xls
+operations_commerciales/FZC/OP FZC 2014/FZC ARGEL 2014.xls
+operations_commerciales/FZC/OP FZC 2014/FZC PICARD 2014.xls
+operations_commerciales/FZC/OP FZC 2014/FZC THIRIET 2014.xls
+operations_commerciales/FZC/OP FZC 2014/FZC TOUPARGEL 2014.xls
+operations_commerciales/MDD/MODELES VB/DEM ECHANTILLONS/2014/Chrono 304 CASINO 150514.XLS
+operations_commerciales/MDD/MODELES VB/DEM ECHANTILLONS/2014/Chrono 305 CASINO 150514.XLS
+operations_commerciales/MDD/OP MDD 2014/MDD ITM 2014 .xls
+
+sent 255760 bytes  received 6932 bytes  75054.86 bytes/sec
+total size is 50629019  speedup is 192.73
+sending incremental file list
+mercuriales/sync.ffs_db
+mercuriales/HD/2014/2014 MERCURIALE NORMA.xls
+deleting mercuriales/mdd/2014/INTERMARCHE CHIFFRAGE INCO.xls
+mercuriales/mdd/2014/2014 MERCURIALE AUCHAN.xls
+mercuriales/mdd/2014/2014 MERCURIALE CARREFOUR PLATS CUISINES.xls
+mercuriales/mdd/2014/2014 MERCURIALE CASINO.xls
+mercuriales/mdd/2014/2014 MERCURIALE INTERMARCHE.xls
+mercuriales/mdd/2014/2014 MERCURIALE PROVERA.xls
+mercuriales/mdd/2014/2014 MERCURIALE SCAMARK.xls
+
+sent 55815 bytes  received 7687 bytes  42334.67 bytes/sec
+total size is 32233704  speedup is 507.60
+sending incremental file list
+modeles/carton_ean_128_mini-v2013.lab
+modeles/carton_ean_128_mini-v2013_180.lab
+modeles/carton_ean_128_mini-v2013_180_surgele.lab
+modeles/carton_ean_128_mini-v2013_surgele.lab
+modeles/compo_asia_plateau_aperitif_recto.lab
+modeles/compo_asia_plateau_aperitif_verso.lab
+modeles/compo_pc_saveur_minute_recto.lab
+modeles/compo_pc_saveur_minute_recto_180.lab
+modeles/compo_pc_saveur_minute_recto_180_surgele.lab
+modeles/compo_pc_saveur_minute_recto_surgele.lab
+
+sent 105213 bytes  received 15719 bytes  80621.33 bytes/sec
+total size is 46571008  speedup is 385.10
+sending incremental file list
+
+sent 7051 bytes  received 49 bytes  4733.33 bytes/sec
+total size is 12693370  speedup is 1787.80
+sending incremental file list
+
+sent 5732 bytes  received 23 bytes  3836.67 bytes/sec
+total size is 129183193  speedup is 22447.12
+sending incremental file list
+
+sent 5610 bytes  received 39 bytes  3766.00 bytes/sec
+total size is 59049369  speedup is 10453.07
+sending incremental file list
+
+sent 50984 bytes  received 95 bytes  20431.60 bytes/sec
+total size is 293555795  speedup is 5747.09
+sending incremental file list
+
+sent 20296 bytes  received 83 bytes  8151.60 bytes/sec
+total size is 99065320  speedup is 4861.15
+sending incremental file list
+
+sent 4380 bytes  received 82 bytes  2974.67 bytes/sec
+total size is 35609223  speedup is 7980.55
+sending incremental file list
+
+sent 7733 bytes  received 20 bytes  3101.20 bytes/sec
+total size is 16753895  speedup is 2160.96
+sending incremental file list
+
+sent 7733 bytes  received 20 bytes  5168.67 bytes/sec
+total size is 16753895  speedup is 2160.96

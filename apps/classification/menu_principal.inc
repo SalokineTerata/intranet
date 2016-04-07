@@ -28,8 +28,8 @@ $page = "../lib/gestion_table.php?module=$module&menu=menu_principal.inc";
 if (Acl::getValueAccesRights($module_modification)) {
 
     //Catégorie de classification
-    echo "<br>";
-    echo "<a href=$page&nom_table=classification_arborescence_article_categorie target=_top>Catégories</a>";
+//    echo "<br>";
+//    echo "<a href=$page&nom_table=classification_arborescence_article_categorie target=_top>Catégories</a>";
     echo "<br>";
     echo "<a href=gestion_activite.php target=_top> Gestion des activités</a>";
     echo "<br>";
@@ -37,7 +37,7 @@ if (Acl::getValueAccesRights($module_modification)) {
 
     //Eléments de Classifications
     echo "<br>";
-    echo "<a href=gestion_elements.php target=_top>Eléments</a>";
+    echo "<a href=gestion_elements.php target=_top>Ajout d'éléments</a>";
     echo "<br>";
 }
 echo "...";

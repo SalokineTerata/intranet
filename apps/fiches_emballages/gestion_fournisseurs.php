@@ -47,20 +47,15 @@ $html_table = 'table '              //Permet d'harmoniser les tableaux
         . 'class=contenu '
 ;
 
-$paramIdClaasifElement = Lib::getParameterFromRequest(ClassificationArborescenceArticleCategorieModel::KEYNAME);
 
-if ($paramIdClaasifElement) {
-    $globalConfig = new GlobalConfig();
-    $globalConfig->refreshTableInDatabaseDescription(ClassificationArborescenceArticleCategorieContenuModel::TABLENAME);
-    $titre = UserInterfaceMessage::FR_CLASSIFICATION_ADD_ELEMENT_MESSAGE;
-    $htmlTableClassificationElement = ClassificationArborescenceArticleCategorieContenuModel::getHtmlTableClassificationElement($paramIdClaasifElement);
-} else {
-    $titre = UserInterfaceMessage::FR_CLASSIFICATION_ELEMENT_MESSAGE;
-}
 
-$listeDesClassifElement = ClassificationArborescenceArticleCategorieModel::getListeDeroulanteClassifElement($paramIdClaasifElement, Chapitre::EDITABLE);
+$globalConfig = new GlobalConfig();
+$globalConfig->refreshTableInDatabaseDescription(FteFournisseurModel::TABLENAME);
 
-$bloc = $listeDesClassifElement . $htmlTableClassificationElement;
+$titre = UserInterfaceMessage::FR_CLASSIFICATION_ADD_ELEMENT_MESSAGE;
+$htmlTableFteFournisseur = FteFournisseurModel::getHtmlTableFteElement();
+
+$bloc = $htmlTableFteFournisseur;
 
 
 /*

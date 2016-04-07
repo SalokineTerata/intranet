@@ -145,9 +145,7 @@ class GlobalConfig {
      */
     function buildDatabaseDescription() {
 
-        if (GlobalConfig::getDatabaseDescriptionIsInitialized() == NULL
-//                ||                $this->getConf()->getSessionDebugEnable()
-        ) {
+        if (GlobalConfig::getDatabaseDescriptionIsInitialized() == NULL) {
             DatabaseDescription::buildDatabaseDescription($this->getConf()->getMysqlDatabaseName());
 
             /**
@@ -185,6 +183,14 @@ class GlobalConfig {
         } //Fin des enregistrements MySQL en session
     }
 
+    /**
+     * Actualisation d'une table de la description de la base de données en memoire 
+     * @param type $paramTableName
+     */
+    function refreshTableInDatabaseDescription($paramTableName) {
+        DatabaseDescription::reBuildDatabaseDescription($paramTableName);
+    }
+    
     function buildEnvironmentConf($paramExec = NULL) {
         /*
           Initialisation des variables de sessions et de connexions:

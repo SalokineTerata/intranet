@@ -30,38 +30,48 @@ switch ($output) {
  * *********** */
 
 
+$idFteFournisseur = Lib::getParameterFromRequest(FteFournisseurModel::KEYNAME);
+$action = Lib::getParameterFromRequest("action");
 
-/*
-  Initialisation des variables
- */
-print_page_begin($disable_full_page, $menu_file);
-flush();
-$page_default = substr(strrchr($_SERVER['PHP_SELF'], '/'), '1', '-4');
-$page_query = $_SERVER['QUERY_STRING'];
-$page_action = $page_default . '.php';
-$page_pdf = $page_default . '_pdf.php';
-$method = 'POST';             //Pour une url > 2000 caractères, ne pas utiliser utiliser GET
-$html_table = 'table '              //Permet d'harmoniser les tableaux
-        . 'border=0 '
-        . 'width=100% '
-        . 'class=contenu '
-;
+switch ($action) {
 
-$paramIdClaasifElement = Lib::getParameterFromRequest(ClassificationArborescenceArticleCategorieModel::KEYNAME);
+    case FteFournisseurModel::AJOUTER:
 
-if ($paramIdClaasifElement) {
-    $globalConfig = new GlobalConfig();
-    $globalConfig->refreshTableInDatabaseDescription(ClassificationArborescenceArticleCategorieContenuModel::TABLENAME);
-    $titre = UserInterfaceMessage::FR_CLASSIFICATION_ADD_ELEMENT_MESSAGE;
-    $htmlTableClassificationElement = ClassificationArborescenceArticleCategorieContenuModel::getHtmlTableClassificationElement($paramIdClaasifElement);
-} else {
-    $titre = UserInterfaceMessage::FR_CLASSIFICATION_ELEMENT_MESSAGE;
+        /*
+          Initialisation des variables
+         */
+        print_page_begin($disable_full_page, $menu_file);
+        flush();
+        $page_default = substr(strrchr($_SERVER['PHP_SELF'], '/'), '1', '-4');
+        $page_query = $_SERVER['QUERY_STRING'];
+        $page_action = $page_default . '.php';
+        $page_pdf = $page_default . '_pdf.php';
+        $method = 'POST';             //Pour une url > 2000 caractères, ne pas utiliser utiliser GET
+        $html_table = 'table '              //Permet d'harmoniser les tableaux
+                . 'border=0 '
+                . 'width=100% '
+                . 'class=contenu '
+        ;
+
+        $idFteFournisseur = FteFournisseurModel::createNewRecordset();
+        $FteFournisseurModel = new FteFournisseurModel($idFteFournisseur);
+        $FteFournisseurModel->setIsEditable(TRUE);
+        $htmlNomFteFournisseur = $FteFournisseurModel->getHtmlDataField(FteFournisseurModel::FIELDNAME_NOM_FTE_FOURNISSEUR);
+
+
+        $bloc = $htmlNomFteFournisseur;
+
+        break;
+
+    case FteFournisseurModel::SUPPRIMER:
+
+        $FteFournisseurModel = new FteFournisseurModel($idFteFournisseur);
+
+        $FteFournisseurModel->deleteFteFournisseurs();
+
+        header("Location: gestion_fournisseurs.php");
+        break;
 }
-
-$listeDesClassifElement = ClassificationArborescenceArticleCategorieModel::getListeDeroulanteClassifElement($paramIdClaasifElement, Chapitre::EDITABLE);
-
-$bloc = $listeDesClassifElement . $htmlTableClassificationElement;
-
 
 /*
   Sélection du mode d'affichage
@@ -120,15 +130,15 @@ switch ($output) {
         echo '
              <form method=' . $method . ' action=' . $page_action . ' name=\'form_action\'>
              <input type=hidden name=action value=' . $action . ' >
-             <input type=hidden name=current_page value=' . $page_default . '.php >
         
 
              <' . $html_table . '>
              <tr class=titre_principal><td>
-                 <h2>' . $titre . '</h2>
 
     
-                </tr>
+                 <br>
+                 Ajout d\'un ' . $FteFournisseurModel->getDataField(FteFournisseurModel::KEYNAME)->getFieldLabel()
+        . ' </td></tr>
              </table>
              <' . $html_table . '>
              <tr><td width=\'20%\'>
@@ -136,6 +146,15 @@ switch ($output) {
              </td></tr>
              </table>          
 
+             <' . $html_table . '>
+             <tr><td>
+
+                 <center>
+                 <a href=gestion_fournisseurs.php>Validation</a>
+                     </center>
+
+             </td></tr>
+             </table>
 
              </form>
              ';

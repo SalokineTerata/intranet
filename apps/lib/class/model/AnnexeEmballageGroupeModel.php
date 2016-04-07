@@ -45,6 +45,30 @@ class AnnexeEmballageGroupeModel extends AbstractModel {
         
     }
 
+    /**
+     * Valeurs par défaut en cas de création
+     * d'un nouvel enregistrement
+     * @return mixed
+     */
+    static public function createNewRecordset($paramForeignKeysValuesArray = NULL) {
+
+
+        $pdo = DatabaseOperation::executeComplete(
+                        'INSERT INTO ' . self::TABLENAME
+                        . '(' . self::FIELDNAME_ID_ANNEXE_EMBALLAGE_GROUPE_CONFIGURATION . ')'
+                        . 'VALUES (' . $paramForeignKeysValuesArray[self::FIELDNAME_ID_ANNEXE_EMBALLAGE_GROUPE_CONFIGURATION] . ')'
+        );
+        $key = $pdo->lastInsertId();
+        return $key;
+    }
+
+    function deleteAnnexeEmballageGroupe() {
+        DatabaseOperation::executeComplete(
+                'DELETE FROM ' . self::TABLENAME
+                . ' WHERE ' . self::KEYNAME . '=' . $this->getKeyValue()
+        );
+    }
+
 }
 
 ?>

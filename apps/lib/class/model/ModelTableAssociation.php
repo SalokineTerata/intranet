@@ -46,6 +46,8 @@ class ModelTableAssociation {
         'classification_activite_famille_ventes_arcadia' => 'ClassificationActiviteFamilleVentesArcadiaModel',
         'classification_activite_sous_famille_arcadia' => 'ClassificationActiviteSousFamilleArcadiaModel',
         'classification_marque_arcadia' => 'ClassificationMarqueArcadiaModel',
+        'classification_arborescence_article_categorie_contenu' => 'ClassificationArborescenceArticleCategorieContenuModel',
+        'fte_fournisseur' => 'FteFournisseurModel',
     );
 
     static public function getModelName($paramTableName) {

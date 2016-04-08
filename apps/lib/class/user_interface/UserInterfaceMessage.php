@@ -54,6 +54,14 @@ class UserInterfaceMessage {
 ";
     const FR_TRANSITION_FTA_TITLE = "Transiter l'Etat d'une Fiche Technique Article";
     const FR_WARNING_TITLE = "AVERTISSEMENT";
+    const FR_WARNING_FTE_FOURNISSEUR = "Vous ne pouvez pas supprimer ce fournisseur d'emballage.<br>
+                    En effet, il est encore utilisé dans certaines Fiches Techniques Emballages.<br><br>
+                    <b><u><i>Liste des modèles:</b></u></i><br>";
+    const FR_WARNING_FTE_FOURNISSEUR_TITLE = "Suppression d'un fournisseur";
+    const FR_WARNING_CLASSIFICATION_ELEMENT_TITLE = "Suppression d'un element";
+    const FR_WARNING_CLASSIFICATION_ELEMENT = "Vous ne pouvez pas supprimer cet élément de classification.<br>
+                    En effet, il est encore utilisé dans certaines Fiches Techniques Articles.<br><br>
+                    <b><u><i>Liste des modèles:</b></u></i><br>";
     const FR_WARNING_ACCES_RIGHTS_ROLES = "Erreur, vous n'avez aucun droits d'accès Rôles sur le module Fta.<br><br>Veuillez vous déconnecter et contactez l'administrateur de l'intranet";
     const FR_WARNING_ACCES_RIGHTS = "Vous n'avez pas les droits d'accès nécessaire.<br><br>";
     const FR_WARNING_ACCES_RIGHTS_TITLE = "Erreur d'accès";

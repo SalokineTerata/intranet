@@ -101,11 +101,41 @@ class FteFournisseurModel extends AbstractModel {
         return $key;
     }
 
+    /**
+     * Suppression d'un fournisseur 
+     */
     function deleteFteFournisseurs() {
+
+        $this->checkFteFournisseurUsed();
         DatabaseOperation::executeComplete(
                 'DELETE FROM ' . self::TABLENAME
                 . ' WHERE ' . self::KEYNAME . '=' . $this->getKeyValue()
         );
+    }
+
+    /**
+     * On vérifie si la Fte qui va e^tre supprimé est utilisé
+     */
+    function checkFteFournisseurUsed() {
+        $array = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
+                        "SELECT " . AnnexeEmballageModel::KEYNAME . "," . AnnexeEmballageModel::FIELDNAME_REFERENCE_FOURNISSEUR_ANNEXE_EMBALLAGE
+                        . " FROM " . AnnexeEmballageModel::TABLENAME
+                        . " WHERE " . AnnexeEmballageModel::FIELDNAME_ID_FTE_FOURNISSEUR . "=" . $this->getKeyValue()
+        );
+
+        if ($array) {
+            //Liste des modèles concernés
+            $liste = "";
+            foreach ($array as $rows) {
+                $liste.= $rows[AnnexeEmballageModel::FIELDNAME_REFERENCE_FOURNISSEUR_ANNEXE_EMBALLAGE] . "<br>";
+            }
+            //Averissement
+            $titre = UserInterfaceMessage::FR_WARNING_FTE_FOURNISSEUR_TITLE;
+            $message = UserInterfaceMessage::FR_WARNING_FTE_FOURNISSEUR
+                    . $liste
+            ;
+            afficher_message($titre, $message, $redirection);
+        }
     }
 
     /**

@@ -188,10 +188,44 @@ class ClassificationArborescenceArticleCategorieContenuModel extends AbstractMod
     }
 
     function deleteClassificationElements() {
+        $this->checkClassificationUsed();
         DatabaseOperation::executeComplete(
                 'DELETE FROM ' . self::TABLENAME
                 . ' WHERE ' . self::KEYNAME . '=' . $this->getKeyValue()
         );
+    }
+
+    /**
+     * On vérifie si la l'element qui va être supprimé est utilisé
+     */
+    function checkClassificationUsed() {
+        $array = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
+                        "SELECT " . FtaModel::KEYNAME . "," . FtaModel::FIELDNAME_LIBELLE
+                        . " FROM " . ClassificationFta2Model::TABLENAME . "," . FtaModel::TABLENAME
+                        . " WHERE (" . ClassificationFta2Model::FIELDNAME_ID_PROPRIETAIRE_GROUPE . "=" . $this->getKeyValue()
+                        . " OR " . ClassificationFta2Model::FIELDNAME_ID_PROPRIETAIRE_ENSEIGNE . "=" . $this->getKeyValue()
+                        . " OR " . ClassificationFta2Model::FIELDNAME_ID_ACTIVITE . "=" . $this->getKeyValue()
+                        . " OR " . ClassificationFta2Model::FIELDNAME_ID_MARQUE . "=" . $this->getKeyValue()
+                        . " OR " . ClassificationFta2Model::FIELDNAME_ID_RAYON . "=" . $this->getKeyValue()
+                        . " OR " . ClassificationFta2Model::FIELDNAME_ID_ENVIRONNEMENT . "=" . $this->getKeyValue()
+                        . " OR " . ClassificationFta2Model::FIELDNAME_ID_RESEAU . "=" . $this->getKeyValue()
+                        . " OR " . ClassificationFta2Model::FIELDNAME_ID_SAISONNALITE . "=" . $this->getKeyValue() . ")"
+                        . " AND " . ClassificationFta2Model::TABLENAME . "." . ClassificationFta2Model::KEYNAME . "=" . FtaModel::TABLENAME . "." . FtaModel::FIELDNAME_ID_FTA_CLASSIFICATION2
+        );
+
+        if ($array) {
+            //Liste des modèles concernés
+            $liste = "";
+            foreach ($array as $rows) {
+                $liste.= $rows[FtaModel::FIELDNAME_LIBELLE] . "<br>";
+            }
+            //Averissement
+            $titre = UserInterfaceMessage::FR_WARNING_CLASSIFICATION_ELEMENT_TITLE;
+            $message = UserInterfaceMessage::FR_WARNING_CLASSIFICATION_ELEMENT
+                    . $liste
+            ;
+            afficher_message($titre, $message, $redirection);
+        }
     }
 
     /**

@@ -362,6 +362,26 @@ class FtaView extends AbstractView {
     }
 
     /**
+     * Affichage de la liste déroulante de gestion des etiquette recto
+     * @return string
+     */
+    function getHtmlGestionEtiquetteRecto() {
+
+        $htmlGetionEtiquetteRecto = $this->getModel()->getHtmlGestionEtiquetteRecto();
+        return $htmlGetionEtiquetteRecto;
+    }
+
+    /**
+     * Affichage de la liste déroulante de gestion des etiquette verso
+     * @return string
+     */
+    function getHtmlGestionEtiquetteVerso() {
+
+        $htmlGetionEtiquetteRecto = $this->getModel()->getHtmlGestionEtiquetteVerso();
+        return $htmlGetionEtiquetteRecto;
+    }
+
+    /**
      * Affichage Html de l'ean article
      * @return string
      */

@@ -118,9 +118,10 @@ class FteFournisseurModel extends AbstractModel {
      */
     function checkFteFournisseurUsed() {
         $array = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
-                        "SELECT " . AnnexeEmballageModel::KEYNAME . "," . AnnexeEmballageModel::FIELDNAME_REFERENCE_FOURNISSEUR_ANNEXE_EMBALLAGE
+                        "SELECT DISTINCT " . AnnexeEmballageModel::KEYNAME . "," . AnnexeEmballageModel::FIELDNAME_REFERENCE_FOURNISSEUR_ANNEXE_EMBALLAGE
                         . " FROM " . AnnexeEmballageModel::TABLENAME
                         . " WHERE " . AnnexeEmballageModel::FIELDNAME_ID_FTE_FOURNISSEUR . "=" . $this->getKeyValue()
+                        . " ORDER BY " . AnnexeEmballageModel::FIELDNAME_REFERENCE_FOURNISSEUR_ANNEXE_EMBALLAGE
         );
 
         if ($array) {

@@ -200,7 +200,7 @@ class ClassificationArborescenceArticleCategorieContenuModel extends AbstractMod
      */
     function checkClassificationUsed() {
         $array = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
-                        "SELECT " . FtaModel::KEYNAME . "," . FtaModel::FIELDNAME_LIBELLE
+                        "SELECT DISTINCT " . FtaModel::FIELDNAME_CODE_ARTICLE_LDC . "," . FtaModel::FIELDNAME_LIBELLE
                         . " FROM " . ClassificationFta2Model::TABLENAME . "," . FtaModel::TABLENAME
                         . " WHERE (" . ClassificationFta2Model::FIELDNAME_ID_PROPRIETAIRE_GROUPE . "=" . $this->getKeyValue()
                         . " OR " . ClassificationFta2Model::FIELDNAME_ID_PROPRIETAIRE_ENSEIGNE . "=" . $this->getKeyValue()
@@ -211,13 +211,14 @@ class ClassificationArborescenceArticleCategorieContenuModel extends AbstractMod
                         . " OR " . ClassificationFta2Model::FIELDNAME_ID_RESEAU . "=" . $this->getKeyValue()
                         . " OR " . ClassificationFta2Model::FIELDNAME_ID_SAISONNALITE . "=" . $this->getKeyValue() . ")"
                         . " AND " . ClassificationFta2Model::TABLENAME . "." . ClassificationFta2Model::KEYNAME . "=" . FtaModel::TABLENAME . "." . FtaModel::FIELDNAME_ID_FTA_CLASSIFICATION2
+                        . " ORDER BY " .FtaModel::FIELDNAME_CODE_ARTICLE_LDC
         );
 
         if ($array) {
             //Liste des modèles concernés
             $liste = "";
             foreach ($array as $rows) {
-                $liste.= $rows[FtaModel::FIELDNAME_LIBELLE] . "<br>";
+                $liste.= $rows[FtaModel::FIELDNAME_CODE_ARTICLE_LDC] . " " . $rows[FtaModel::FIELDNAME_LIBELLE] . "<br>";
             }
             //Averissement
             $titre = UserInterfaceMessage::FR_WARNING_CLASSIFICATION_ELEMENT_TITLE;

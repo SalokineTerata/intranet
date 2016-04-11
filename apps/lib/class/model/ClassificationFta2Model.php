@@ -565,11 +565,38 @@ class ClassificationFta2Model extends AbstractModel {
      * Suppression d'une classification
      * @param int $paramIdClassification2
      */
-    public static function SuppressionClassification($paramIdClassification2) {
+    function suppressionClassification() {
+        $this->checkClassificationUsed();
         DatabaseOperation::execute(
                 'DELETE FROM ' . ClassificationFta2Model::TABLENAME
-                . ' WHERE ' . ClassificationFta2Model::KEYNAME . '=' . $paramIdClassification2
+                . ' WHERE ' . ClassificationFta2Model::KEYNAME . '=' . $this->getKeyValue()
         );
+    }
+
+    /**
+     * On vérifie si la classification qui va être supprimé est utilisé
+     */
+    function checkClassificationUsed() {
+        $array = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
+                        "SELECT DISTINCT " . FtaModel::FIELDNAME_CODE_ARTICLE_LDC . "," . FtaModel::FIELDNAME_LIBELLE
+                        . " FROM " . FtaModel::TABLENAME
+                        . " WHERE " . FtaModel::FIELDNAME_ID_FTA_CLASSIFICATION2 . "=" . $this->getKeyValue()
+                        . " ORDER BY " . FtaModel::FIELDNAME_CODE_ARTICLE_LDC
+        );
+
+        if ($array) {
+            //Liste des modèles concernés
+            $liste = "";
+            foreach ($array as $rows) {
+                $liste.= $rows[FtaModel::FIELDNAME_CODE_ARTICLE_LDC] . " " . $rows[FtaModel::FIELDNAME_LIBELLE] . "<br>";
+            }
+            //Averissement
+            $titre = UserInterfaceMessage::FR_WARNING_CLASSIFICATION_ELEMENT_TITLE;
+            $message = UserInterfaceMessage::FR_WARNING_CLASSIFICATION_ELEMENT
+                    . $liste
+            ;
+            afficher_message($titre, $message, $redirection);
+        }
     }
 
     /**

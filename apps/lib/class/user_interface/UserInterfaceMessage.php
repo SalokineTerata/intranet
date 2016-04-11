@@ -58,6 +58,10 @@ class UserInterfaceMessage {
                     En effet, il est encore utilisé dans certaines Fiches Techniques Emballages.<br><br>
                     <b><u><i>Liste des modèles:</b></u></i><br>";
     const FR_WARNING_FTE_FOURNISSEUR_TITLE = "Suppression d'un fournisseur";
+    const FR_WARNING_CLASSIFICATION_DELETE_TITLE = "Suppression d'une classification";
+    const FR_WARNING_CLASSIFICATION_DELETE = "Vous ne pouvez pas supprimer cette classification.<br>
+                    En effet, elle est encore utilisé dans certaines Fiches Techniques Articles.<br><br>
+                    <b><u><i>Liste des modèles:</b></u></i><br>";
     const FR_WARNING_CLASSIFICATION_ELEMENT_TITLE = "Suppression d'un element";
     const FR_WARNING_CLASSIFICATION_ELEMENT = "Vous ne pouvez pas supprimer cet élément de classification.<br>
                     En effet, il est encore utilisé dans certaines Fiches Techniques Articles.<br><br>

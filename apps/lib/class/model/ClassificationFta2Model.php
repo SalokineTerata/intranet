@@ -591,8 +591,8 @@ class ClassificationFta2Model extends AbstractModel {
                 $liste.= $rows[FtaModel::FIELDNAME_CODE_ARTICLE_LDC] . " " . $rows[FtaModel::FIELDNAME_LIBELLE] . "<br>";
             }
             //Averissement
-            $titre = UserInterfaceMessage::FR_WARNING_CLASSIFICATION_ELEMENT_TITLE;
-            $message = UserInterfaceMessage::FR_WARNING_CLASSIFICATION_ELEMENT
+            $titre = UserInterfaceMessage::FR_WARNING_CLASSIFICATION_DELETE_TITLE;
+            $message = UserInterfaceMessage::FR_WARNING_CLASSIFICATION_DELETE
                     . $liste
             ;
             afficher_message($titre, $message, $redirection);

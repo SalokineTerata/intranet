@@ -49,7 +49,7 @@ switch ($output) {
 
 $id_fta_classification2 = Lib::getParameterFromRequest(ClassificationFta2Model::KEYNAME);
 $action = Lib::getParameterFromRequest('action');
-$isEditable = TRUE;
+$isEditable = Lib::getParameterFromRequest('isEditable');
 /* * ***********
   Début Code PHP
  * *********** */
@@ -89,12 +89,17 @@ if ($id_fta_classification2) {
     $CategorieOptiventes = $ClassificationFta2Model->getHtmlDataField(ClassificationFta2Model::FIELDNAME_CATEGORIE_PRODUIT_OPTIVENTES);
 
     $RaccourcisClassif = $ClassificationFta2Model->getHtmlClassificationRaccourcis($action);
-    
+
     $GammeFamilleBudget = $ClassificationFta2Model->getHtmlArcadiaGammeFamilleBudget($action);
 }
 
 if ($action == 'modifier') {
-    $titre = "Modification de la classification  identifiant n°" . $id_fta_classification2;
+    if ($isEditable) {
+        $theme = "Modification";
+    } else {
+        $theme = "Consultation";
+    }
+    $titre = $theme . " de la classification  identifiant n°" . $id_fta_classification2;
     $action = "modifier";
 
     $HtmlDonnesArcadia = $CategorieOptiventes

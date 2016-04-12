@@ -245,19 +245,18 @@ class ClassificationActiviteFamilleVentesArcadiaModel extends AbstractModel {
 
     /**
      * On affiche la liste des familles de ventes à une activité de classification
-     * @param int $paramIdFta
+     * @param object $paramFtaModel
      * @param int $paramIdClassificationFta2
      * @param boolean $paramIsEditable
      * @return string
      */
-    public static function getHtmlListeClassificationActiviteFamilleVentesArcadia($paramIdFta, $paramIdClassificationFta2, $paramIsEditable) {
+    public static function getHtmlListeClassificationActiviteFamilleVentesArcadia(FtaModel $paramFtaModel, $paramIdClassificationFta2, $paramIsEditable) {
         $htmlList = new HtmlListSelect();
 
-        $ftaModel = new FtaModel($paramIdFta);
-        $ftaModel->setDataFtaTableToCompare();
+        $paramFtaModel->setDataFtaTableToCompare();
 
         $idActivite = ClassificationFta2Model::getIdClassificationTypeByTypeNameAndIdClassificationFta2($paramIdClassificationFta2, ClassificationFta2Model::FIELDNAME_ID_ACTIVITE);
-        $dataFieldIdArcadiaFamilleVente = $ftaModel->getDataField(FtaModel::FIELDNAME_ID_ARCADIA_FAMILLE_VENTE);
+        $dataFieldIdArcadiaFamilleVente = $paramFtaModel->getDataField(FtaModel::FIELDNAME_ID_ARCADIA_FAMILLE_VENTE);
         $arrayClassificationFamilleVenteArcadia = DatabaseOperation::convertSqlStatementWithKeyAndOneFieldToArray(
                         'SELECT DISTINCT ' . ArcadiaFamilleVenteModel::TABLENAME . '.' . ArcadiaFamilleVenteModel::KEYNAME
                         . ', CONCAT_WS(  \' - \',' . ArcadiaFamilleVenteModel::TABLENAME . '.' . ArcadiaFamilleVenteModel::KEYNAME
@@ -298,7 +297,7 @@ class ClassificationActiviteFamilleVentesArcadiaModel extends AbstractModel {
                 . '_'
                 . FtaModel::FIELDNAME_ID_ARCADIA_FAMILLE_VENTE
                 . '_'
-                . $paramIdFta
+                . $paramFtaModel->getKeyValue()
         ;
 
         /**
@@ -308,9 +307,11 @@ class ClassificationActiviteFamilleVentesArcadiaModel extends AbstractModel {
 
         if ($dataFieldIdArcadiaFamilleVente->getDataValidationSuccessful() == TRUE) {
             $htmlList->setIsWarningMessage($dataFieldIdArcadiaFamilleVente->getDataValidationSuccessful());
+            $paramFtaModel->setDataValidationSuccessfulToTrue();
         } else {
             $htmlList->setIsWarningMessage($dataFieldIdArcadiaFamilleVente->getDataValidationSuccessful());
             $htmlList->setWarningMessage($dataFieldIdArcadiaFamilleVente->getDataWarningMessage());
+            $paramFtaModel->setDataValidationSuccessfulToFalse();
         }
 
         $htmlList->getAttributes()->getName()->setValue(FtaModel::FIELDNAME_ID_ARCADIA_FAMILLE_VENTE);
@@ -325,7 +326,7 @@ class ClassificationActiviteFamilleVentesArcadiaModel extends AbstractModel {
                 , $htmlList->getIsWarningMessage()
                 , $htmlList->getWarningMessage()
         );
-        $htmlList->getEventsForm()->setOnChangeWithAjaxAutoSave(FtaModel::TABLENAME, FtaModel::KEYNAME, $paramIdFta, FtaModel::FIELDNAME_ID_ARCADIA_FAMILLE_VENTE);
+        $htmlList->getEventsForm()->setOnChangeWithAjaxAutoSave(FtaModel::TABLENAME, FtaModel::KEYNAME, $paramFtaModel->getKeyValue(), FtaModel::FIELDNAME_ID_ARCADIA_FAMILLE_VENTE);
 
         $listeClassificationRaccourcis = $htmlList->getHtmlResult();
 

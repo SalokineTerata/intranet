@@ -534,9 +534,9 @@ class FtaModel extends AbstractModel {
     public function isDataValidationSuccessful() {
         return $this->dataValidationSuccessful;
     }
-
+   
     function setDataValidationSuccessful($paramDataValidationSuccessful) {
-        $this->dataValidationSuccessful = $paramDataValidationSuccessful;
+        $this->dataValidationSuccessful += $paramDataValidationSuccessful;
     }
 
     function setDataValidationSuccessfulToTrue() {

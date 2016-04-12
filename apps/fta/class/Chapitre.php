@@ -590,8 +590,8 @@ class Chapitre {
 
         //Code Regate Mère sur la Fta
         $bloc.=$ftaView->getHtmlCodeArticleLdcMere();
-
-        if ($ftaView->isDataValidationSuccessful() == "0") {
+        $tmp = $ftaView->isDataValidationSuccessful();
+        if ($tmp == "0") {
             self::setDataValidationSuccessfulToTrue();
         }
         return $bloc;

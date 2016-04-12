@@ -697,6 +697,15 @@ class FtaView extends AbstractView {
         $idClassificationFta2 = $this->getModel()->getDataField(FtaModel::FIELDNAME_ID_FTA_CLASSIFICATION2)->getFieldValue();
         if ($idClassificationFta2) {
             $htmlClassificationRaccourcis = $this->getHtmlClassificationRaccourcis();
+
+            /**
+             * On initie la vérification des data validation
+             */
+            if ($this->getModel()->isDataValidationSuccessful()) {
+                $this->setDataValidationSuccessfulToFalse();
+            } else {
+                $this->setDataValidationSuccessfulToTrue();
+            }
         }
         return $htmlClassificationRaccourcis;
     }
@@ -713,11 +722,19 @@ class FtaView extends AbstractView {
         if ($idClassificationFta2) {
             $htmlFamilleBudget = $this->getHtmlDataField(FtaModel::FIELDNAME_ID_ARCADIA_FAMILLE_BUDGET);
             $htmlGammeCoop = $this->getHtmlDataField(FtaModel::FIELDNAME_ID_ARCADIA_GAMME_COOP);
-
-            $htmlArcadiaGammeFamileBudget = $this->getHtmlArcadiaGammeFamileBudget();
-            $htmlArcadiaSousFamille = $this->getHtmlArcadiaSousFamille();
-            $htmlArcadiaFamilleVente = $this->getHtmlArcadiaFamilleVenteArcadia();
             $htmlArcadiaMarque = $this->getHtmlArcadiaMarque();
+            $htmlArcadiaFamilleVente = $this->getHtmlArcadiaFamilleVenteArcadia();
+            $htmlArcadiaSousFamille = $this->getHtmlArcadiaSousFamille();
+            $htmlArcadiaGammeFamileBudget = $this->getHtmlArcadiaGammeFamileBudget();
+
+            /**
+             * On initie la vérification des data validation
+             */
+            if ($this->getModel()->isDataValidationSuccessful()) {
+                $this->setDataValidationSuccessfulToFalse();
+            } else {
+                $this->setDataValidationSuccessfulToTrue();
+            }
 
 
             $htmlReturn = $htmlArcadiaMarque
@@ -740,59 +757,59 @@ class FtaView extends AbstractView {
         $htmlReturn = NULL;
         $idClassificationFta2 = $this->getModel()->getDataField(FtaModel::FIELDNAME_ID_FTA_CLASSIFICATION2)->getFieldValue();
         if ($idClassificationFta2) {
-            $htmlReturn = ClassificationGammeFamilleBudgetArcadiaModel::getHtmlClassificationGammeFamilleBudget($this->getModel()->getKeyValue(), $idClassificationFta2, $this->getIsEditable());
+            $htmlReturn = ClassificationGammeFamilleBudgetArcadiaModel::getHtmlClassificationGammeFamilleBudget($this->getModel(), $idClassificationFta2, $this->getIsEditable());
         }
         return $htmlReturn;
     }
 
     /**
-     * On affiche le ou les choix de gamme famille budget si une classification est renseigné
+     * On affiche le ou les choix de raccourcis si une classification est renseigné
      * @return string
      */
     function getHtmlClassificationRaccourcis() {
         $htmlReturn = NULL;
         $idClassificationFta2 = $this->getModel()->getDataField(FtaModel::FIELDNAME_ID_FTA_CLASSIFICATION2)->getFieldValue();
         if ($idClassificationFta2) {
-            $htmlReturn = ClassificationRaccourcisAssociationModel::getHtmlClassificationRaccourcisAssociation($this->getModel()->getKeyValue(), $idClassificationFta2, $this->getIsEditable());
+            $htmlReturn = ClassificationRaccourcisAssociationModel::getHtmlClassificationRaccourcisAssociation($this->getModel(), $idClassificationFta2, $this->getIsEditable());
         }
         return $htmlReturn;
     }
 
     /**
-     * On affiche le ou les choix de gamme famille budget si une classification est renseigné
+     * On affiche le ou les choix de sous famille si une classification est renseigné
      * @return string
      */
     function getHtmlArcadiaSousFamille() {
         $htmlReturn = NULL;
         $idClassificationFta2 = $this->getModel()->getDataField(FtaModel::FIELDNAME_ID_FTA_CLASSIFICATION2)->getFieldValue();
         if ($idClassificationFta2) {
-            $htmlReturn = ClassificationActiviteSousFamilleArcadiaModel::getHtmlListeClassificationActiviteSousFamilleArcadia($this->getModel()->getKeyValue(), $idClassificationFta2, $this->getIsEditable());
+            $htmlReturn = ClassificationActiviteSousFamilleArcadiaModel::getHtmlListeClassificationActiviteSousFamilleArcadia($this->getModel(), $idClassificationFta2, $this->getIsEditable());
         }
         return $htmlReturn;
     }
 
     /**
-     * On affiche le ou les choix de gamme famille budget si une classification est renseigné
+     * On affiche le ou les choix de  famille de ventes si une classification est renseigné
      * @return string
      */
     function getHtmlArcadiaFamilleVenteArcadia() {
         $htmlReturn = NULL;
         $idClassificationFta2 = $this->getModel()->getDataField(FtaModel::FIELDNAME_ID_FTA_CLASSIFICATION2)->getFieldValue();
         if ($idClassificationFta2) {
-            $htmlReturn = ClassificationActiviteFamilleVentesArcadiaModel::getHtmlListeClassificationActiviteFamilleVentesArcadia($this->getModel()->getKeyValue(), $idClassificationFta2, $this->getIsEditable());
+            $htmlReturn = ClassificationActiviteFamilleVentesArcadiaModel::getHtmlListeClassificationActiviteFamilleVentesArcadia($this->getModel(), $idClassificationFta2, $this->getIsEditable());
         }
         return $htmlReturn;
     }
 
     /**
-     * On affiche le ou les choix de gamme famille budget si une classification est renseigné
+     * On affiche le ou les choix de marque si une classification est renseigné
      * @return string
      */
     function getHtmlArcadiaMarque() {
         $htmlReturn = NULL;
         $idClassificationFta2 = $this->getModel()->getDataField(FtaModel::FIELDNAME_ID_FTA_CLASSIFICATION2)->getFieldValue();
         if ($idClassificationFta2) {
-            $htmlReturn = ClassificationMarqueArcadiaModel::getHtmlListeClassificationMarqueArcadia($this->getModel()->getKeyValue(), $idClassificationFta2, $this->getIsEditable());
+            $htmlReturn = ClassificationMarqueArcadiaModel::getHtmlListeClassificationMarqueArcadia($this->getModel(), $idClassificationFta2, $this->getIsEditable());
         }
         return $htmlReturn;
     }

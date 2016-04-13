@@ -14,7 +14,7 @@ class FtaController {
 
     const CALLBACK_LINK_TO_TRANSITER_PAGE = "Retour";
     const CALLBACK_LINK_TO_TRANSITER_PAGE_VALIDATE = "Confirmer";
-    const TEST= ModuleConfig::VALUE_MAX_MOTEUR_RECHERCHE;
+    const TEST = ModuleConfig::VALUE_MAX_MOTEUR_RECHERCHE;
 
     /**
      * Duplication d'une table donné par son id
@@ -221,6 +221,38 @@ class FtaController {
      */
     public static function isStringHasSpecialCaracter($paramString, $paramCheckList) {
         return preg_match($paramCheckList, str_replace(' ', '', $paramString));
+    }
+
+    /**
+     * Indique si une valeur appartient à un tableau
+     * @param string $paramValue
+     * @param array $paramArray
+     * @return boolean
+     */
+    public static function isValueInArray($paramValue, $paramArray) {
+        if ($paramArray) {
+            $checkData = in_array($paramValue, $paramArray);
+        } else {
+            $checkData = FALSE;
+        }
+
+        return $checkData;
+    }
+
+    /**
+     * Vérifie si une clé existe dans un tableau
+     * @param string $paramKey
+     * @param array $paramArray
+     * @return boolean
+     */
+    public static function isValueIsInKeyArray($paramKey, $paramArray) {
+        if ($paramArray) {
+            $checkData = array_key_exists($paramKey, $paramArray);
+        } else {
+            $checkData = FALSE;
+        }
+
+        return $checkData;
     }
 
 }

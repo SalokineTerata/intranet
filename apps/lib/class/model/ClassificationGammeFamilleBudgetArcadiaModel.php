@@ -168,17 +168,17 @@ class ClassificationGammeFamilleBudgetArcadiaModel extends AbstractModel {
 
     /**
      * On affiche la liste des gammes famille budget associé à une classification
-     * @param int $paramIdFta
+     * @param object $paramFtaModel FtaModel
      * @param int $paramIdClassificationFta2
      * @param boolean $paramIsEditable
      * @return string
      */
-    public static function getHtmlClassificationGammeFamilleBudget($paramIdFta, $paramIdClassificationFta2, $paramIsEditable) {
+    public static function getHtmlClassificationGammeFamilleBudget(FtaModel $paramFtaModel, $paramIdClassificationFta2, $paramIsEditable) {
         $htmlList = new HtmlListSelect();
 
-        $ftaModel = new FtaModel($paramIdFta);
-        $ftaModel->setDataFtaTableToCompare();
-        $dataFieldIdArcadiaGammeFamilleBudget = $ftaModel->getDataField(FtaModel::FIELDNAME_ID_ARCADIA_GAMME_FAMILLE_BUDGET);
+
+        $paramFtaModel->setDataFtaTableToCompare();
+        $dataFieldIdArcadiaGammeFamilleBudget = $paramFtaModel->getDataField(FtaModel::FIELDNAME_ID_ARCADIA_GAMME_FAMILLE_BUDGET);
         $arrayGammeFamilleBudget = DatabaseOperation::convertSqlStatementWithKeyAndOneFieldToArray(
                         'SELECT DISTINCT ' . ArcadiaGammeFamilleBudgetModel::TABLENAME . '.' . ArcadiaGammeFamilleBudgetModel::KEYNAME
                         . ', CONCAT_WS(  \' - \',' . ArcadiaGammeFamilleBudgetModel::TABLENAME
@@ -219,7 +219,7 @@ class ClassificationGammeFamilleBudgetArcadiaModel extends AbstractModel {
                 . '_'
                 . FtaModel::FIELDNAME_ID_ARCADIA_GAMME_FAMILLE_BUDGET
                 . '_'
-                . $paramIdFta
+                . $paramFtaModel->getKeyValue()
         ;
         /**
          * Vérification des règle de validation
@@ -228,10 +228,12 @@ class ClassificationGammeFamilleBudgetArcadiaModel extends AbstractModel {
 
         if ($dataFieldIdArcadiaGammeFamilleBudget->getDataValidationSuccessful() == TRUE) {
             $htmlList->setIsWarningMessage($dataFieldIdArcadiaGammeFamilleBudget->getDataValidationSuccessful());
+            $paramFtaModel->setDataValidationSuccessfulToTrue();
         } else {
             $htmlList->setIsWarningMessage($dataFieldIdArcadiaGammeFamilleBudget->getDataValidationSuccessful());
             $htmlList->setWarningMessage($dataFieldIdArcadiaGammeFamilleBudget->getDataWarningMessage());
-        }           
+            $paramFtaModel->setDataValidationSuccessfulToFalse();
+        }
 
         $htmlList->getAttributes()->getName()->setValue(FtaModel::FIELDNAME_ID_ARCADIA_GAMME_FAMILLE_BUDGET);
         $htmlList->setLabel(DatabaseDescription::getFieldDocLabel(FtaModel::TABLENAME, FtaModel::FIELDNAME_ID_ARCADIA_GAMME_FAMILLE_BUDGET));
@@ -245,7 +247,7 @@ class ClassificationGammeFamilleBudgetArcadiaModel extends AbstractModel {
                 , $htmlList->getIsWarningMessage()
                 , $htmlList->getWarningMessage()
         );
-        $htmlList->getEventsForm()->setOnChangeWithAjaxAutoSave(FtaModel::TABLENAME, FtaModel::KEYNAME, $paramIdFta, FtaModel::FIELDNAME_ID_ARCADIA_GAMME_FAMILLE_BUDGET);
+        $htmlList->getEventsForm()->setOnChangeWithAjaxAutoSave(FtaModel::TABLENAME, FtaModel::KEYNAME, $paramFtaModel->getKeyValue(), FtaModel::FIELDNAME_ID_ARCADIA_GAMME_FAMILLE_BUDGET);
 
         $listeGammeFamilleBudget = $htmlList->getHtmlResult();
 

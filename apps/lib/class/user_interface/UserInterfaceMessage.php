@@ -27,6 +27,8 @@ class UserInterfaceMessage {
     const FR_ARCADIA_SEND_DATA_MESSAGE = " Les données ont bien été envoyées vers Arcadia ";
     const FR_CALCUL_DUREE_DE_VIE_EN_ATTENTE = "Durée de vie production non saisie. Calcul en attente. ";
     const FR_CLASSIFICATION_ACTIVITE_MESSAGE = " Veuillez sélectionner une activité à associer ";
+    const FR_CLASSIFICATION_ELEMENT_MESSAGE = " Veuillez sélectionner un élement de la classification à associer ";
+    const FR_CLASSIFICATION_ADD_ELEMENT_MESSAGE = " Ajouter un élement ";
     const FR_CLASSIFICATION_MARQUE_MESSAGE = " Veuillez sélectionner une marque à associer ";
     const FR_DATABASE_MESSAGE_CHANGEMENT_ESPACE_DE_TRAVAIL_1 = " Changement de l'espace travail ";
     const FR_DATABASE_MESSAGE_CHANGEMENT_ESPACE_DE_TRAVAIL_2 = " vers l'espace de travail ";
@@ -52,6 +54,18 @@ class UserInterfaceMessage {
 ";
     const FR_TRANSITION_FTA_TITLE = "Transiter l'Etat d'une Fiche Technique Article";
     const FR_WARNING_TITLE = "AVERTISSEMENT";
+    const FR_WARNING_FTE_FOURNISSEUR = "Vous ne pouvez pas supprimer ce fournisseur d'emballage.<br>
+                    En effet, il est encore utilisé dans certaines Fiches Techniques Emballages.<br><br>
+                    <b><u><i>Liste des modèles:</b></u></i><br>";
+    const FR_WARNING_FTE_FOURNISSEUR_TITLE = "Suppression d'un fournisseur";
+    const FR_WARNING_CLASSIFICATION_DELETE_TITLE = "Suppression d'une classification";
+    const FR_WARNING_CLASSIFICATION_DELETE = "Vous ne pouvez pas supprimer cette classification.<br>
+                    En effet, elle est encore utilisée dans certaines Fiches Techniques Articles.<br><br>
+                    <b><u><i>Liste des modèles:</b></u></i><br>";
+    const FR_WARNING_CLASSIFICATION_ELEMENT_TITLE = "Suppression d'un element";
+    const FR_WARNING_CLASSIFICATION_ELEMENT = "Vous ne pouvez pas supprimer cet élément de classification.<br>
+                    En effet, il est encore utilisé dans certaines Fiches Techniques Articles.<br><br>
+                    <b><u><i>Liste des modèles:</b></u></i><br>";
     const FR_WARNING_ACCES_RIGHTS_ROLES = "Erreur, vous n'avez aucun droits d'accès Rôles sur le module Fta.<br><br>Veuillez vous déconnecter et contactez l'administrateur de l'intranet";
     const FR_WARNING_ACCES_RIGHTS = "Vous n'avez pas les droits d'accès nécessaire.<br><br>";
     const FR_WARNING_ACCES_RIGHTS_TITLE = "Erreur d'accès";

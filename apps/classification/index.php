@@ -46,7 +46,6 @@ switch ($output) {
         require_once '../inc/main.php';
         print_page_begin($disable_full_page, $menu_file);
         flush();
-
 }//Fin de la sélection du mode d'affichage de la page
 
 
@@ -82,6 +81,13 @@ if ($idUser) {
     $selection_saisonnalite = Lib::getParameterFromRequest('selection_saisonnalite');
 
     $classificationModifier = ClassificationFta2Model::getClassificationModification($idUser);
+
+    $classificationConsultation = Acl::getValueAccesRights("classification_consultation");
+    if ($classificationModifier) {
+        $editable = TRUE;
+    } elseif ($classificationConsultation) {
+        $editable = FALSE;
+    }
     $isEditable = TRUE;
 
     if (!$selection_proprietaire1) {
@@ -183,10 +189,11 @@ if ($idUser) {
         $key = $value[ClassificationFta2Model::KEYNAME];
         $bloc .="<tr class=\"contenu\" name=id_fta_classification2 value=" . $key . ">";
 //Modifier
+
+        $bloc.="<td><a href=classification_modifier.php?id_fta_classification2=" . $key . "&action=modifier&isEditable=$editable > "
+                . "<img src=../lib/images/next.png alt=Modifier  width=24 height=24 border=0 />"
+                . "</a>";
         if ($classificationModifier) {
-            $bloc.="<td><a href=classification_modifier.php?id_fta_classification2=" . $key . "&action=modifier > "
-                    . "<img src=../lib/images/next.png alt=Modifier  width=24 height=24 border=0 />"
-                    . "</a>";
             $bloc.="<a href=# onClick=confirmation_correction_classification" . $key . "() > "
                     . "<img src=../lib/images/supprimer.png alt=Supprimer cette Classification  width=24 height=24 border=0 />"
                     . "</a></td>";

@@ -124,7 +124,7 @@ class FtaComposantModel extends AbstractModel {
      * @param int $paramIdFta
      */
     public static function duplicateFtaComposantByIdFta($paramIdFtaOrig, $paramIdFtaNew) {
-     
+
         FtaController::duplicateWithNewId(self::TABLENAME, $paramIdFtaOrig, $paramIdFtaNew);
     }
 
@@ -651,6 +651,20 @@ class FtaComposantModel extends AbstractModel {
                         . ' ORDER BY ' . CodesoftEtiquettesModel::FIELDNAME_DESIGNATION_CODESOFT_ETIQUETTES
         );
 
+        /**
+         * Vérification de l'étiquette choisie par le chef de projet
+         */
+        $idGestionEtiquetteRecto = $this->getModelFta()->getDataField(FtaModel::FIELDNAME_GESTION_ETIQUETTE_RECTO)->getFieldValue();
+        if ($idGestionEtiquetteRecto <> AnnexeGestionEtiquetteRectoVersoModel::GESTION_PAR_LA_QUALITE_ID) {
+            $this->getDataField(FtaComposantModel::FIELDNAME_K_ETIQUETTE_FTA_COMPOSITION)->setFieldValue($idGestionEtiquetteRecto);
+            DatabaseOperation::execute(
+                    "UPDATE " . self::TABLENAME
+                    . " SET " . FtaComposantModel::FIELDNAME_K_ETIQUETTE_FTA_COMPOSITION . "=" . $idGestionEtiquetteRecto
+                    . " WHERE " . self::KEYNAME . "=" . $this->getKeyValue()
+            );
+            $HtmlList->setDefaultValue($idGestionEtiquetteRecto);
+            $paramIsEditable = Chapitre::NOT_EDITABLE;
+        }
         $HtmlList->setArrayListContent($arrayEtiquette);
 
         $HtmlTableName = FtaComposantModel::TABLENAME
@@ -697,6 +711,21 @@ class FtaComposantModel extends AbstractModel {
                         . ' AND ' . CodesoftEtiquettesModel::FIELDNAME_IS_ENABLED_FTA . '=1'
                         . ' ORDER BY ' . CodesoftEtiquettesModel::FIELDNAME_DESIGNATION_CODESOFT_ETIQUETTES
         );
+
+        /**
+         * Vérification de l'étiquette choisie par le chef de projet
+         */
+        $idGestionEtiquetteVerso = $this->getModelFta()->getDataField(FtaModel::FIELDNAME_GESTION_ETIQUETTE_VERSO)->getFieldValue();
+        if ($idGestionEtiquetteVerso <> AnnexeGestionEtiquetteRectoVersoModel::GESTION_PAR_LA_QUALITE_ID) {
+            $this->getDataField(FtaComposantModel::FIELDNAME_K_ETIQUETTE_VERSO_FTA_COMPOSITION)->setFieldValue($idGestionEtiquetteVerso);
+            DatabaseOperation::execute(
+                    "UPDATE " . self::TABLENAME
+                    . " SET " . FtaComposantModel::FIELDNAME_K_ETIQUETTE_VERSO_FTA_COMPOSITION . "=" . $idGestionEtiquetteVerso
+                    . " WHERE " . self::KEYNAME . "=" . $this->getKeyValue()
+            );
+            $HtmlList->setDefaultValue($idGestionEtiquetteVerso);
+            $paramIsEditable = Chapitre::NOT_EDITABLE;
+        }
         $HtmlList->setArrayListContent($arrayEtiquette);
 
         $HtmlTableName = FtaComposantModel::TABLENAME

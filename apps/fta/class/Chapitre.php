@@ -553,7 +553,7 @@ class Chapitre {
 
         //Raccoucis de classification
         $bloc.=$ftaView->getHtmlClassificationRaccourcisView();
-      
+
 
         //Données lié à arcadia 
         $bloc.= $ftaView2->getHtmlArcadiaDataNotEditable();
@@ -590,8 +590,8 @@ class Chapitre {
 
         //Code Regate Mère sur la Fta
         $bloc.=$ftaView->getHtmlCodeArticleLdcMere();
-
-        if ($ftaView->isDataValidationSuccessful() == "0") {
+        $tmp = $ftaView->isDataValidationSuccessful();
+        if ($tmp == "0") {
             self::setDataValidationSuccessfulToTrue();
         }
         return $bloc;
@@ -1117,6 +1117,12 @@ class Chapitre {
 
         //Activer le système d'impression Base Etiquette Codesoft
         $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_ACTIVATION_CODESOFT);
+
+        //Gestion etiquette recto
+        $bloc.=$ftaView->getHtmlGestionEtiquetteRecto();
+
+        //Gestion etiquette verso
+        $bloc.=$ftaView->getHtmlGestionEtiquetteVerso();
 
 //        //Libellé etiquette carton:
 //        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_LIBELLE_CLIENT);

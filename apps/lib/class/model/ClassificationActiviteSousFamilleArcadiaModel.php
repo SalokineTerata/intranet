@@ -245,20 +245,20 @@ class ClassificationActiviteSousFamilleArcadiaModel extends AbstractModel {
 
     /**
      * On affiche la liste des sous famille à une activité de classification
-     * @param int $paramIdFta
+     * @param objet $paramFtaModel
      * @param int $paramIdClassificationFta2
      * @param boolean $paramIsEditable
      * @return string
      */
-    public static function getHtmlListeClassificationActiviteSousFamilleArcadia($paramIdFta, $paramIdClassificationFta2, $paramIsEditable) {
+    public static function getHtmlListeClassificationActiviteSousFamilleArcadia(FtaModel $paramFtaModel, $paramIdClassificationFta2, $paramIsEditable) {
         $htmlList = new HtmlListSelect();
 
-        $ftaModel = new FtaModel($paramIdFta);
-        $ftaModel->setDataFtaTableToCompare();
+
+        $paramFtaModel->setDataFtaTableToCompare();
 
         $idActivite = ClassificationFta2Model::getIdClassificationTypeByTypeNameAndIdClassificationFta2($paramIdClassificationFta2, ClassificationFta2Model::FIELDNAME_ID_ACTIVITE);
 
-        $dataFieldIdArcadiaSousFamille = $ftaModel->getDataField(FtaModel::FIELDNAME_ID_ARCADIA_SOUS_FAMILLE);
+        $dataFieldIdArcadiaSousFamille = $paramFtaModel->getDataField(FtaModel::FIELDNAME_ID_ARCADIA_SOUS_FAMILLE);
 
         $arrayClassificationActiviteSousFamilleArcadia = DatabaseOperation::convertSqlStatementWithKeyAndOneFieldToArray(
                         'SELECT DISTINCT ' . ArcadiaSousFamilleModel::TABLENAME . '.' . ArcadiaSousFamilleModel::KEYNAME
@@ -300,7 +300,7 @@ class ClassificationActiviteSousFamilleArcadiaModel extends AbstractModel {
                 . '_'
                 . FtaModel::FIELDNAME_ID_ARCADIA_SOUS_FAMILLE
                 . '_'
-                . $paramIdFta
+                . $paramFtaModel->getKeyValue()
         ;
 
 
@@ -311,9 +311,11 @@ class ClassificationActiviteSousFamilleArcadiaModel extends AbstractModel {
 
         if ($dataFieldIdArcadiaSousFamille->getDataValidationSuccessful() == TRUE) {
             $htmlList->setIsWarningMessage($dataFieldIdArcadiaSousFamille->getDataValidationSuccessful());
+            $paramFtaModel->setDataValidationSuccessfulToTrue();
         } else {
             $htmlList->setIsWarningMessage($dataFieldIdArcadiaSousFamille->getDataValidationSuccessful());
             $htmlList->setWarningMessage($dataFieldIdArcadiaSousFamille->getDataWarningMessage());
+            $paramFtaModel->setDataValidationSuccessfulToFalse();
         }
         $htmlList->getAttributes()->getName()->setValue(FtaModel::FIELDNAME_ID_ARCADIA_SOUS_FAMILLE);
         $htmlList->setLabel(DatabaseDescription::getFieldDocLabel(self::TABLENAME, self::FIELDNAME_ID_ARCADIA_SOUS_FAMILLE));
@@ -327,7 +329,7 @@ class ClassificationActiviteSousFamilleArcadiaModel extends AbstractModel {
                 , $htmlList->getIsWarningMessage()
                 , $htmlList->getWarningMessage()
         );
-        $htmlList->getEventsForm()->setOnChangeWithAjaxAutoSave(FtaModel::TABLENAME, FtaModel::KEYNAME, $paramIdFta, FtaModel::FIELDNAME_ID_ARCADIA_SOUS_FAMILLE);
+        $htmlList->getEventsForm()->setOnChangeWithAjaxAutoSave(FtaModel::TABLENAME, FtaModel::KEYNAME, $paramFtaModel->getKeyValue(), FtaModel::FIELDNAME_ID_ARCADIA_SOUS_FAMILLE);
 
         $listeClassificationSousFamilleArcadia = $htmlList->getHtmlResult();
 

@@ -245,19 +245,19 @@ class ClassificationMarqueArcadiaModel extends AbstractModel {
 
     /**
      * On affiche la liste des Marques arcadia à une marque de classification
-     * @param int $paramIdFta
+     * @param object $paramFtaModel
      * @param int $paramIdClassificationFta2
      * @param boolean $paramIsEditable
      * @return string
      */
-    public static function getHtmlListeClassificationMarqueArcadia($paramIdFta, $paramIdClassificationFta2, $paramIsEditable) {
+    public static function getHtmlListeClassificationMarqueArcadia(FtaModel $paramFtaModel, $paramIdClassificationFta2, $paramIsEditable) {
         $htmlList = new HtmlListSelect();
 
-        $ftaModel = new FtaModel($paramIdFta);
-        $ftaModel->setDataFtaTableToCompare();
+
+        $paramFtaModel->setDataFtaTableToCompare();
 
         $idMarque = ClassificationFta2Model::getIdClassificationTypeByTypeNameAndIdClassificationFta2($paramIdClassificationFta2, ClassificationFta2Model::FIELDNAME_ID_MARQUE);
-        $dataFieldIdArcadiaMarque = $ftaModel->getDataField(FtaModel::FIELDNAME_ID_ARCADIA_MARQUE);
+        $dataFieldIdArcadiaMarque = $paramFtaModel->getDataField(FtaModel::FIELDNAME_ID_ARCADIA_MARQUE);
         $arrayClassificationMarqueArcadia = DatabaseOperation::convertSqlStatementWithKeyAndOneFieldToArray(
                         'SELECT DISTINCT ' . ArcadiaMarqueModel::TABLENAME . '.' . ArcadiaMarqueModel::KEYNAME
                         . ', CONCAT_WS(  \' - \',' . ArcadiaMarqueModel::TABLENAME . '.' . ArcadiaMarqueModel::KEYNAME
@@ -297,7 +297,7 @@ class ClassificationMarqueArcadiaModel extends AbstractModel {
                 . '_'
                 . FtaModel::FIELDNAME_ID_ARCADIA_MARQUE
                 . '_'
-                . $paramIdFta
+                . $paramFtaModel->getKeyValue()
         ;
 
 
@@ -308,9 +308,11 @@ class ClassificationMarqueArcadiaModel extends AbstractModel {
 
         if ($dataFieldIdArcadiaMarque->getDataValidationSuccessful() == TRUE) {
             $htmlList->setIsWarningMessage($dataFieldIdArcadiaMarque->getDataValidationSuccessful());
+            $paramFtaModel->setDataValidationSuccessfulToTrue();
         } else {
             $htmlList->setIsWarningMessage($dataFieldIdArcadiaMarque->getDataValidationSuccessful());
             $htmlList->setWarningMessage($dataFieldIdArcadiaMarque->getDataWarningMessage());
+            $paramFtaModel->setDataValidationSuccessfulToFalse();
         }
 
 
@@ -326,7 +328,7 @@ class ClassificationMarqueArcadiaModel extends AbstractModel {
                 , $htmlList->getIsWarningMessage()
                 , $htmlList->getWarningMessage()
         );
-        $htmlList->getEventsForm()->setOnChangeWithAjaxAutoSave(FtaModel::TABLENAME, FtaModel::KEYNAME, $paramIdFta, FtaModel::FIELDNAME_ID_ARCADIA_MARQUE);
+        $htmlList->getEventsForm()->setOnChangeWithAjaxAutoSave(FtaModel::TABLENAME, FtaModel::KEYNAME, $paramFtaModel->getKeyValue(), FtaModel::FIELDNAME_ID_ARCADIA_MARQUE);
 
         $listeClassificationRaccourcis = $htmlList->getHtmlResult();
 

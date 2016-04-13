@@ -165,18 +165,17 @@ class ClassificationRaccourcisAssociationModel extends AbstractModel {
 
     /**
      * On affiche la liste des raccourcis de classification associé à une classification
-     * @param int $paramIdFta
+     * @param objet $paramFtaModel
      * @param int $paramIdClassificationFta2
      * @param boolean $paramIsEditable
      * @return string
      */
-    public static function getHtmlClassificationRaccourcisAssociation($paramIdFta, $paramIdClassificationFta2, $paramIsEditable) {
+    public static function getHtmlClassificationRaccourcisAssociation(FtaModel $paramFtaModel, $paramIdClassificationFta2, $paramIsEditable) {
         $htmlList = new HtmlListSelect();
 
-        $ftaModel = new FtaModel($paramIdFta);
-        $ftaModel->setDataFtaTableToCompare();
+        $paramFtaModel->setDataFtaTableToCompare();
 
-        $dataFieldIdClassificationRaccourcis = $ftaModel->getDataField(FtaModel::FIELDNAME_ID_CLASSIFICATION_RACCOURCIS);
+        $dataFieldIdClassificationRaccourcis = $paramFtaModel->getDataField(FtaModel::FIELDNAME_ID_CLASSIFICATION_RACCOURCIS);
         $arrayClassificationRaccourcis = DatabaseOperation::convertSqlStatementWithKeyAndOneFieldToArray(
                         'SELECT DISTINCT ' . ClassificationRaccourcisModel::TABLENAME . '.' . ClassificationRaccourcisModel::KEYNAME
                         . ',' . ClassificationRaccourcisModel::TABLENAME . '.' . ClassificationRaccourcisModel::FIELDNAME_NOM_CLASSIFICATION_RACCOURCIS
@@ -209,14 +208,26 @@ class ClassificationRaccourcisAssociationModel extends AbstractModel {
 //                $paramIsEditable = Chapitre::NOT_EDITABLE;
 //            }
 //        }
+
+
         $htmlList->setArrayListContent($arrayClassificationRaccourcis);
+
+        /**
+         * On vérifie si la donnée en BDD se trouve dans le tableau
+         * Sinon alors on vide la donnée de la BDD
+         */
+        $checkDataResgister = FtaController::isValueIsInKeyArray($dataFieldIdClassificationRaccourcis->getFieldValue(), $arrayClassificationRaccourcis);
+        if (!$checkDataResgister) {
+            $dataFieldIdClassificationRaccourcis->setFieldValue("");
+        }
+
 
 
         $HtmlTableName = FtaModel::TABLENAME
                 . '_'
                 . FtaModel::FIELDNAME_ID_CLASSIFICATION_RACCOURCIS
                 . '_'
-                . $paramIdFta
+                . $paramFtaModel->getKeyValue()
         ;
         /**
          * Vérification des règle de validation
@@ -225,9 +236,11 @@ class ClassificationRaccourcisAssociationModel extends AbstractModel {
 
         if ($dataFieldIdClassificationRaccourcis->getDataValidationSuccessful() == TRUE) {
             $htmlList->setIsWarningMessage($dataFieldIdClassificationRaccourcis->getDataValidationSuccessful());
+            $paramFtaModel->setDataValidationSuccessfulToTrue();
         } else {
             $htmlList->setIsWarningMessage($dataFieldIdClassificationRaccourcis->getDataValidationSuccessful());
             $htmlList->setWarningMessage($dataFieldIdClassificationRaccourcis->getDataWarningMessage());
+            $paramFtaModel->setDataValidationSuccessfulToFalse();
         }
 
         $htmlList->setSelectedValue($dataFieldIdClassificationRaccourcis->getFieldValue());
@@ -243,7 +256,7 @@ class ClassificationRaccourcisAssociationModel extends AbstractModel {
                 , $htmlList->getIsWarningMessage()
                 , $htmlList->getWarningMessage()
         );
-        $htmlList->getEventsForm()->setOnChangeWithAjaxAutoSave(FtaModel::TABLENAME, FtaModel::KEYNAME, $paramIdFta, FtaModel::FIELDNAME_ID_CLASSIFICATION_RACCOURCIS);
+        $htmlList->getEventsForm()->setOnChangeWithAjaxAutoSave(FtaModel::TABLENAME, FtaModel::KEYNAME, $paramFtaModel->getKeyValue(), FtaModel::FIELDNAME_ID_CLASSIFICATION_RACCOURCIS);
 
         $listeClassificationRaccourcis = $htmlList->getHtmlResult();
 

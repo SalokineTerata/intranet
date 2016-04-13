@@ -97,7 +97,8 @@ switch ($action) {
 
     case 'supprimer':
         if ($id_fta_classification2) {
-            ClassificationFta2Model::SuppressionClassification($id_fta_classification2);
+             $ClassificationFta2Model = new ClassificationFta2Model($id_fta_classification2);
+            $ClassificationFta2Model->suppressionClassification();
         }
 
         //Redirection

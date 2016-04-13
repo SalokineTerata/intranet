@@ -30,13 +30,12 @@ switch ($output) {
  * *********** */
 
 
-$idActivite = Lib::getParameterFromRequest(ClassificationActiviteFamilleVentesArcadiaModel::FIELDNAME_ID_ACTIVITE);
+$idFteFournisseur = Lib::getParameterFromRequest(FteFournisseurModel::KEYNAME);
 $action = Lib::getParameterFromRequest("action");
-$idClassificationActiviteFamilleVentesArcadia = Lib::getParameterFromRequest(ClassificationActiviteFamilleVentesArcadiaModel::KEYNAME);
 
 switch ($action) {
 
-    case ClassificationActiviteFamilleVentesArcadiaModel::AJOUTER:
+    case FteFournisseurModel::AJOUTER:
 
         /*
           Initialisation des variables
@@ -54,25 +53,23 @@ switch ($action) {
                 . 'class=contenu '
         ;
 
-        $id_classification_activite_famille_ventes_arcadia = ClassificationActiviteFamilleVentesArcadiaModel::createNewRecordset(
-                        array(ClassificationActiviteFamilleVentesArcadiaModel::FIELDNAME_ID_ACTIVITE => $idActivite)
-        );
-        $classificationActiviteFamilleVentesArcadiaModel = new ClassificationActiviteFamilleVentesArcadiaModel($id_classification_activite_famille_ventes_arcadia);
-        $classificationActiviteFamilleVentesArcadiaModel->setIsEditable(TRUE);
-        $htmlFamilleVentes = $classificationActiviteFamilleVentesArcadiaModel->getHtmlDataField(ClassificationActiviteFamilleVentesArcadiaModel::FIELDNAME_ID_ARCADIA_FAMILLE_VENTE);
+        $idFteFournisseur = FteFournisseurModel::createNewRecordset();
+        $FteFournisseurModel = new FteFournisseurModel($idFteFournisseur);
+        $FteFournisseurModel->setIsEditable(TRUE);
+        $htmlNomFteFournisseur = $FteFournisseurModel->getHtmlDataField(FteFournisseurModel::FIELDNAME_NOM_FTE_FOURNISSEUR);
 
 
-        $bloc = $htmlFamilleVentes;
+        $bloc = $htmlNomFteFournisseur;
 
         break;
 
-    case ClassificationActiviteFamilleVentesArcadiaModel::SUPPRIMER:
+    case FteFournisseurModel::SUPPRIMER:
 
-        $classificationActiviteFamilleVentesArcadiaModel = new ClassificationActiviteFamilleVentesArcadiaModel($idClassificationActiviteFamilleVentesArcadia);
+        $FteFournisseurModel = new FteFournisseurModel($idFteFournisseur);
 
-        $classificationActiviteFamilleVentesArcadiaModel->deleteClassificationActiviteFamilleVentesArcadia();
+        $FteFournisseurModel->deleteFteFournisseurs();
 
-        header("Location: gestion_activite.php?id_Activite=" . $idActivite);
+        header("Location: gestion_fournisseurs.php");
         break;
 }
 
@@ -140,7 +137,7 @@ switch ($output) {
 
     
                  <br>
-                 Ajout d\'une nouvelle ' . $classificationActiviteFamilleVentesArcadiaModel->getDataField(ClassificationActiviteFamilleVentesArcadiaModel::FIELDNAME_ID_ARCADIA_FAMILLE_VENTE)->getFieldLabel()
+                 Ajout d\'un ' . $FteFournisseurModel->getDataField(FteFournisseurModel::KEYNAME)->getFieldLabel()
         . ' </td></tr>
              </table>
              <' . $html_table . '>
@@ -153,7 +150,7 @@ switch ($output) {
              <tr><td>
 
                  <center>
-                 <a href=gestion_activite.php?' . ClassificationActiviteFamilleVentesArcadiaModel::FIELDNAME_ID_ACTIVITE . '=' . $idActivite . '>Validation</a>
+                 <a href=gestion_fournisseurs.php>Validation</a>
                      </center>
 
              </td></tr>

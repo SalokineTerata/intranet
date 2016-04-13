@@ -30,13 +30,13 @@ switch ($output) {
  * *********** */
 
 
-$idActivite = Lib::getParameterFromRequest(ClassificationActiviteFamilleVentesArcadiaModel::FIELDNAME_ID_ACTIVITE);
+$idElements = Lib::getParameterFromRequest(ClassificationArborescenceArticleCategorieModel::KEYNAME);
 $action = Lib::getParameterFromRequest("action");
-$idClassificationActiviteFamilleVentesArcadia = Lib::getParameterFromRequest(ClassificationActiviteFamilleVentesArcadiaModel::KEYNAME);
+$idClassificationArborescenceArticleCategorieContenu = Lib::getParameterFromRequest(ClassificationArborescenceArticleCategorieContenuModel::KEYNAME);
 
 switch ($action) {
 
-    case ClassificationActiviteFamilleVentesArcadiaModel::AJOUTER:
+    case ClassificationArborescenceArticleCategorieContenuModel::AJOUTER:
 
         /*
           Initialisation des variables
@@ -54,25 +54,25 @@ switch ($action) {
                 . 'class=contenu '
         ;
 
-        $id_classification_activite_famille_ventes_arcadia = ClassificationActiviteFamilleVentesArcadiaModel::createNewRecordset(
-                        array(ClassificationActiviteFamilleVentesArcadiaModel::FIELDNAME_ID_ACTIVITE => $idActivite)
+        $idClassificationArborescenceArticleCategorieContenu = ClassificationArborescenceArticleCategorieContenuModel::createNewRecordset(
+                        array(ClassificationArborescenceArticleCategorieContenuModel::FIELDNAME_ID_CLASSIFICATION_ARBORESCENCE_ARTICLE_CATEGORIE => $idElements)
         );
-        $classificationActiviteFamilleVentesArcadiaModel = new ClassificationActiviteFamilleVentesArcadiaModel($id_classification_activite_famille_ventes_arcadia);
-        $classificationActiviteFamilleVentesArcadiaModel->setIsEditable(TRUE);
-        $htmlFamilleVentes = $classificationActiviteFamilleVentesArcadiaModel->getHtmlDataField(ClassificationActiviteFamilleVentesArcadiaModel::FIELDNAME_ID_ARCADIA_FAMILLE_VENTE);
+        $classificationArborescenceArticleCategorieContenuModel = new ClassificationArborescenceArticleCategorieContenuModel($idClassificationArborescenceArticleCategorieContenu);
+        $classificationArborescenceArticleCategorieContenuModel->setIsEditable(TRUE);
+        $htmlFamilleVentes = $classificationArborescenceArticleCategorieContenuModel->getHtmlAddClassificationElements();
 
 
         $bloc = $htmlFamilleVentes;
 
         break;
 
-    case ClassificationActiviteFamilleVentesArcadiaModel::SUPPRIMER:
+    case ClassificationArborescenceArticleCategorieContenuModel::SUPPRIMER:
 
-        $classificationActiviteFamilleVentesArcadiaModel = new ClassificationActiviteFamilleVentesArcadiaModel($idClassificationActiviteFamilleVentesArcadia);
+        $classificationArborescenceArticleCategorieContenuModel = new ClassificationArborescenceArticleCategorieContenuModel($idClassificationArborescenceArticleCategorieContenu);
 
-        $classificationActiviteFamilleVentesArcadiaModel->deleteClassificationActiviteFamilleVentesArcadia();
+        $classificationArborescenceArticleCategorieContenuModel->deleteClassificationElements();
 
-        header("Location: gestion_activite.php?id_Activite=" . $idActivite);
+        header("Location: gestion_elements.php?" . ClassificationArborescenceArticleCategorieModel::KEYNAME . "=" . $idElements);
         break;
 }
 
@@ -140,7 +140,7 @@ switch ($output) {
 
     
                  <br>
-                 Ajout d\'une nouvelle ' . $classificationActiviteFamilleVentesArcadiaModel->getDataField(ClassificationActiviteFamilleVentesArcadiaModel::FIELDNAME_ID_ARCADIA_FAMILLE_VENTE)->getFieldLabel()
+                 Ajout d\'une nouvelle ' . $classificationArborescenceArticleCategorieContenuModel->getDataField(ClassificationArborescenceArticleCategorieContenuModel::KEYNAME)->getFieldLabel()
         . ' </td></tr>
              </table>
              <' . $html_table . '>
@@ -153,7 +153,7 @@ switch ($output) {
              <tr><td>
 
                  <center>
-                 <a href=gestion_activite.php?' . ClassificationActiviteFamilleVentesArcadiaModel::FIELDNAME_ID_ACTIVITE . '=' . $idActivite . '>Validation</a>
+                 <a href=gestion_elements.php?' . ClassificationArborescenceArticleCategorieModel::KEYNAME . '=' . $idElements . '>Validation</a>
                      </center>
 
              </td></tr>

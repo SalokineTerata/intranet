@@ -59,6 +59,8 @@ class FtaModel extends AbstractModel {
     const FIELDNAME_ETIQUETTE_CODESOFT = "id_etiquette_codesoft_arti2";
     const FIELDNAME_ETUDE_PRIX_FTA = "etude_prix_fta";
     const FIELDNAME_FREQUENCE_HEBDOMADAIRE_ESTIMEE_COMMANDE = "frequence_hebdomadaire_estime_commande";
+    const FIELDNAME_GESTION_ETIQUETTE_RECTO = "gestion_etiquette_recto";
+    const FIELDNAME_GESTION_ETIQUETTE_VERSO = "gestion_etiquette_verso";
     const FIELDNAME_ID_ARCADIA_CATEGEORIE_PRODUIT_OPTIVENTES = "id_arcadia_categeorie_produit_optiventes";
     const FIELDNAME_ID_ARCADIA_FAMILLE_BUDGET = "id_arcadia_famille_budget";
     const FIELDNAME_ID_ARCADIA_FAMILLE_VENTE = "id_arcadia_famille_vente";
@@ -532,9 +534,9 @@ class FtaModel extends AbstractModel {
     public function isDataValidationSuccessful() {
         return $this->dataValidationSuccessful;
     }
-
+   
     function setDataValidationSuccessful($paramDataValidationSuccessful) {
-        $this->dataValidationSuccessful = $paramDataValidationSuccessful;
+        $this->dataValidationSuccessful += $paramDataValidationSuccessful;
     }
 
     function setDataValidationSuccessfulToTrue() {
@@ -1404,6 +1406,134 @@ class FtaModel extends AbstractModel {
             }
         }
         return $req;
+    }
+
+    /**
+     * On vérifie la valeur que le chef de projet à sélectionner con
+     * @return boolean
+     */
+    function checkEtiquetteVerso() {
+        $check = $this->getDataField(FtaModel::FIELDNAME_GESTION_ETIQUETTE_VERSO)->getFieldValue();
+        if ($check) {
+            return TRUE;
+        } else {
+            return FALSE;
+        }
+    }
+
+    /**
+     * Gestion des etiquette recto par le chef de projet
+     * Si Auncun alors verrouiller sur Auncun au niveau de la qualité (étiquette composition)
+     * Si A définir par l'étiquette composition alors les choix est libre à la qualité 
+     * Si étiquette sélectionner alors verrouiller sur l'étiquette au niveau de la qualité
+     * @return string 
+     * 
+     */
+    function getHtmlGestionEtiquetteRecto() {
+        $HtmlList = new HtmlListSelect();
+
+        $arrayEtiquette = DatabaseOperation::convertSqlStatementWithKeyAndOneFieldToArray(
+                        'SELECT DISTINCT ' . CodesoftEtiquettesModel::KEYNAME . ',' . CodesoftEtiquettesModel::FIELDNAME_DESIGNATION_CODESOFT_ETIQUETTES
+                        . ' FROM ' . CodesoftEtiquettesModel::TABLENAME
+                        . ' WHERE (' . CodesoftEtiquettesModel::FIELDNAME_K_SITE . '=' . $this->getDataField(FtaModel::FIELDNAME_SITE_PRODUCTION)->getFieldValue()
+                        . ' OR ' . CodesoftEtiquettesModel::FIELDNAME_K_SITE . '=0)'
+                        . ' AND (' . CodesoftEtiquettesModel::FIELDNAME_K_TYPE_ETIQUETTE_CODESOFT_ETIQUETTES . '=2'
+                        . ' OR ' . CodesoftEtiquettesModel::FIELDNAME_K_TYPE_ETIQUETTE_CODESOFT_ETIQUETTES . '=0' . ')'
+                        . ' AND ' . CodesoftEtiquettesModel::FIELDNAME_IS_ENABLED_FTA . '=1'
+                        . ' ORDER BY ' . CodesoftEtiquettesModel::FIELDNAME_DESIGNATION_CODESOFT_ETIQUETTES
+        );
+
+        $arrayEtiquetteGestion = DatabaseOperation::convertSqlStatementWithKeyAndOneFieldToArray(
+                        'SELECT DISTINCT ' . AnnexeGestionEtiquetteRectoVersoModel::KEYNAME . ',' . AnnexeGestionEtiquetteRectoVersoModel::FIELDNAME_NOM_ANNEXE_ETIQUETTE_RECTO_VERSO
+                        . ' FROM ' . AnnexeGestionEtiquetteRectoVersoModel::TABLENAME
+        );
+
+        $arrayComplete = $arrayEtiquetteGestion + $arrayEtiquette;
+
+        $HtmlList->setArrayListContent($arrayComplete);
+
+        $HtmlTableName = FtaModel::TABLENAME
+                . '_'
+                . FtaModel::FIELDNAME_GESTION_ETIQUETTE_RECTO
+                . '_'
+                . $this->getKeyValue()
+        ;
+        $HtmlList->getAttributes()->getName()->setValue(FtaModel::FIELDNAME_GESTION_ETIQUETTE_RECTO);
+        $HtmlList->setLabel(DatabaseDescription::getFieldDocLabel(FtaModel::TABLENAME, FtaModel::FIELDNAME_GESTION_ETIQUETTE_RECTO));
+        $HtmlList->setIsEditable($this->getIsEditable());
+        $HtmlList->initAbstractHtmlSelect(
+                $HtmlTableName
+                , $HtmlList->getLabel()
+                , $this->getDataField(FtaModel::FIELDNAME_GESTION_ETIQUETTE_RECTO)->getFieldValue()
+                , $this->getDataField(FtaModel::FIELDNAME_GESTION_ETIQUETTE_RECTO)->isFieldDiff()
+                , $HtmlList->getArrayListContent());
+        $HtmlList->getEventsForm()->setOnChangeWithAjaxAutoSave(
+                FtaModel::TABLENAME
+                , FtaModel::KEYNAME
+                , $this->getKeyValue()
+                , FtaModel::FIELDNAME_GESTION_ETIQUETTE_RECTO
+        );
+        $listeCodesoftEtiquettes = $HtmlList->getHtmlResult();
+
+        return $listeCodesoftEtiquettes;
+    }
+
+    /**
+     * Gestion des etiquette recto par le chef de projet
+     * Si Auncun alors verrouiller sur Auncun au niveau de la qualité (étiquette composition)
+     * Si A définir par l'étiquette composition alors les choix est libre à la qualité 
+     * Si étiquette sélectionner alors verrouiller sur l'étiquette au niveau de la qualité
+     * @return string 
+     * 
+     */
+    function getHtmlGestionEtiquetteVerso() {
+        $HtmlList = new HtmlListSelect();
+
+
+        $arrayEtiquette = DatabaseOperation::convertSqlStatementWithKeyAndOneFieldToArray(
+                        'SELECT DISTINCT ' . CodesoftEtiquettesModel::KEYNAME . ',' . CodesoftEtiquettesModel::FIELDNAME_DESIGNATION_CODESOFT_ETIQUETTES
+                        . ' FROM ' . CodesoftEtiquettesModel::TABLENAME
+                        . ' WHERE (' . CodesoftEtiquettesModel::FIELDNAME_K_SITE . '=' . $this->getDataField(FtaModel::FIELDNAME_SITE_PRODUCTION)->getFieldValue()
+                        . ' OR ' . CodesoftEtiquettesModel::FIELDNAME_K_SITE . '=0)'
+                        . ' AND (' . CodesoftEtiquettesModel::FIELDNAME_K_TYPE_ETIQUETTE_CODESOFT_ETIQUETTES . '=3'
+                        . ' OR ' . CodesoftEtiquettesModel::FIELDNAME_K_TYPE_ETIQUETTE_CODESOFT_ETIQUETTES . '=0' . ')'
+                        . ' AND ' . CodesoftEtiquettesModel::FIELDNAME_IS_ENABLED_FTA . '=1'
+                        . ' ORDER BY ' . CodesoftEtiquettesModel::FIELDNAME_DESIGNATION_CODESOFT_ETIQUETTES
+        );
+
+        $arrayEtiquetteGestion = DatabaseOperation::convertSqlStatementWithKeyAndOneFieldToArray(
+                        'SELECT DISTINCT ' . AnnexeGestionEtiquetteRectoVersoModel::KEYNAME . ',' . AnnexeGestionEtiquetteRectoVersoModel::FIELDNAME_NOM_ANNEXE_ETIQUETTE_RECTO_VERSO
+                        . ' FROM ' . AnnexeGestionEtiquetteRectoVersoModel::TABLENAME
+        );
+
+        $arrayComplete = $arrayEtiquetteGestion + $arrayEtiquette;
+
+        $HtmlList->setArrayListContent($arrayComplete);
+
+        $HtmlTableName = FtaModel::TABLENAME
+                . '_'
+                . FtaModel::FIELDNAME_GESTION_ETIQUETTE_VERSO
+                . '_'
+                . $this->getKeyValue()
+        ;
+        $HtmlList->getAttributes()->getName()->setValue(FtaModel::FIELDNAME_GESTION_ETIQUETTE_VERSO);
+        $HtmlList->setLabel(DatabaseDescription::getFieldDocLabel(FtaModel::TABLENAME, FtaModel::FIELDNAME_GESTION_ETIQUETTE_VERSO));
+        $HtmlList->setIsEditable($this->getIsEditable());
+        $HtmlList->initAbstractHtmlSelect(
+                $HtmlTableName
+                , $HtmlList->getLabel()
+                , $this->getDataField(FtaModel::FIELDNAME_GESTION_ETIQUETTE_VERSO)->getFieldValue()
+                , $this->getDataField(FtaModel::FIELDNAME_GESTION_ETIQUETTE_VERSO)->isFieldDiff()
+                , $HtmlList->getArrayListContent());
+        $HtmlList->getEventsForm()->setOnChangeWithAjaxAutoSave(
+                FtaModel::TABLENAME
+                , FtaModel::KEYNAME
+                , $this->getKeyValue()
+                , FtaModel::FIELDNAME_GESTION_ETIQUETTE_VERSO
+        );
+        $listeCodesoftEtiquettes = $HtmlList->getHtmlResult();
+
+        return $listeCodesoftEtiquettes;
     }
 
     /**

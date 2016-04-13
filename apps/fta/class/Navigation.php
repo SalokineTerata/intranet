@@ -8,9 +8,9 @@
 class Navigation {
 
     const FONT_COLOR_CHAPITRE_NON_ACCESSIBLE = "#000000";
-    const FONT_COLOR_CHAPITRE_AUTRE_ROLE = "#838383";
+    const FONT_COLOR_CHAPITRE_AUTRE_ROLE = "#AAAAAA";
     const FONT_COLOR_CHAPITRE_ENCOURS = "#1D3FDA";
-    const FONT_COLOR_CHAPITRE_PUBLIC = "#8977A9";
+    const FONT_COLOR_CHAPITRE_PUBLIC = "#CC33CC";
     const FONT_COLOR_CHAPITRE_NON_VALIDEE = "#FF0000";
     const FONT_COLOR_CHAPITRE_VALIDEE = "#00CC00";
     const FONT_SIZE_CHAPITRE_ENCOURS = "3";
@@ -711,11 +711,17 @@ class Navigation {
                         if (in_array($idFtaProcessus, self::$id_fta_processus)) {
                             $font_color = "color=" . self::FONT_COLOR_CHAPITRE_NON_VALIDEE;
                             $link = TRUE;
+                            $i = "";
+                            $iEnd = "";
                         } elseif (self::$id_fta_role == $idFtaRole) {
                             $font_color = "color=" . self::FONT_COLOR_CHAPITRE_NON_ACCESSIBLE;
                             $link = FALSE;
+                            $i = "";
+                            $iEnd = "";
                         } else {
                             $font_color = "color=" . self::FONT_COLOR_CHAPITRE_AUTRE_ROLE;
+                            $i = " <i> ";
+                            $iEnd = " </i> ";
                             $link = FALSE;
                         }
                         break;
@@ -723,6 +729,8 @@ class Navigation {
                     case 1:  //Chapitre validé
                         $font_color = "color=" . self::FONT_COLOR_CHAPITRE_VALIDEE;
                         $link = TRUE;
+                        $i = "";
+                        $iEnd = "";
                         break;
 
                     default: //Anomalie
@@ -737,7 +745,7 @@ class Navigation {
             if ($num == 0 and self::$synthese_action === 'attente') {
                 
             } else {
-                $b = "<font " . $font_size . " " . $font_color . "/>";
+                $b = $i . "<font " . $font_size . " " . $font_color . ">";
                 $menu_navigation .= $image_flash1;
                 if ($link) {
                     $menu_navigation .= '<a href=' . $page_default . '.php?'
@@ -751,7 +759,7 @@ class Navigation {
                 }
                 $menu_navigation .= $b . ' ' . $nom_usuel_fta_chapitre;
                 $menu_navigation .= '</a>';
-                $menu_navigation .= '</b></font> ' . $image_flash2
+                $menu_navigation .= '</b></font> ' . $iEnd . $image_flash2
                 ;
 
                 /**

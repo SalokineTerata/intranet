@@ -30,51 +30,38 @@ switch ($output) {
  * *********** */
 
 
-$idActivite = Lib::getParameterFromRequest(ClassificationActiviteFamilleVentesArcadiaModel::FIELDNAME_ID_ACTIVITE);
-$action = Lib::getParameterFromRequest("action");
-$idClassificationActiviteFamilleVentesArcadia = Lib::getParameterFromRequest(ClassificationActiviteFamilleVentesArcadiaModel::KEYNAME);
 
-switch ($action) {
+/*
+  Initialisation des variables
+ */
+print_page_begin($disable_full_page, $menu_file);
+flush();
+$page_default = substr(strrchr($_SERVER['PHP_SELF'], '/'), '1', '-4');
+$page_query = $_SERVER['QUERY_STRING'];
+$page_action = $page_default . '.php';
+$page_pdf = $page_default . '_pdf.php';
+$method = 'POST';             //Pour une url > 2000 caractères, ne pas utiliser utiliser GET
+$html_table = 'table '              //Permet d'harmoniser les tableaux
+        . 'border=0 '
+        . 'width=100% '
+        . 'class=contenu '
+;
 
-    case ClassificationActiviteFamilleVentesArcadiaModel::AJOUTER:
+$paramIdClaasifElement = Lib::getParameterFromRequest(ClassificationArborescenceArticleCategorieModel::KEYNAME);
 
-        /*
-          Initialisation des variables
-         */
-        print_page_begin($disable_full_page, $menu_file);
-        flush();
-        $page_default = substr(strrchr($_SERVER['PHP_SELF'], '/'), '1', '-4');
-        $page_query = $_SERVER['QUERY_STRING'];
-        $page_action = $page_default . '.php';
-        $page_pdf = $page_default . '_pdf.php';
-        $method = 'POST';             //Pour une url > 2000 caractères, ne pas utiliser utiliser GET
-        $html_table = 'table '              //Permet d'harmoniser les tableaux
-                . 'border=0 '
-                . 'width=100% '
-                . 'class=contenu '
-        ;
-
-        $id_classification_activite_famille_ventes_arcadia = ClassificationActiviteFamilleVentesArcadiaModel::createNewRecordset(
-                        array(ClassificationActiviteFamilleVentesArcadiaModel::FIELDNAME_ID_ACTIVITE => $idActivite)
-        );
-        $classificationActiviteFamilleVentesArcadiaModel = new ClassificationActiviteFamilleVentesArcadiaModel($id_classification_activite_famille_ventes_arcadia);
-        $classificationActiviteFamilleVentesArcadiaModel->setIsEditable(TRUE);
-        $htmlFamilleVentes = $classificationActiviteFamilleVentesArcadiaModel->getHtmlDataField(ClassificationActiviteFamilleVentesArcadiaModel::FIELDNAME_ID_ARCADIA_FAMILLE_VENTE);
-
-
-        $bloc = $htmlFamilleVentes;
-
-        break;
-
-    case ClassificationActiviteFamilleVentesArcadiaModel::SUPPRIMER:
-
-        $classificationActiviteFamilleVentesArcadiaModel = new ClassificationActiviteFamilleVentesArcadiaModel($idClassificationActiviteFamilleVentesArcadia);
-
-        $classificationActiviteFamilleVentesArcadiaModel->deleteClassificationActiviteFamilleVentesArcadia();
-
-        header("Location: gestion_activite.php?id_Activite=" . $idActivite);
-        break;
+if ($paramIdClaasifElement) {
+    $globalConfig = new GlobalConfig();
+    $globalConfig->refreshTableInDatabaseDescription(ClassificationArborescenceArticleCategorieContenuModel::TABLENAME);
+    $titre = UserInterfaceMessage::FR_CLASSIFICATION_ADD_ELEMENT_MESSAGE;
+    $htmlTableClassificationElement = ClassificationArborescenceArticleCategorieContenuModel::getHtmlTableClassificationElement($paramIdClaasifElement);
+} else {
+    $titre = UserInterfaceMessage::FR_CLASSIFICATION_ELEMENT_MESSAGE;
 }
+
+$listeDesClassifElement = ClassificationArborescenceArticleCategorieModel::getListeDeroulanteClassifElement($paramIdClaasifElement, Chapitre::EDITABLE);
+
+$bloc = $listeDesClassifElement . $htmlTableClassificationElement;
+
 
 /*
   Sélection du mode d'affichage
@@ -133,15 +120,15 @@ switch ($output) {
         echo '
              <form method=' . $method . ' action=' . $page_action . ' name=\'form_action\'>
              <input type=hidden name=action value=' . $action . ' >
+             <input type=hidden name=current_page value=' . $page_default . '.php >
         
 
              <' . $html_table . '>
              <tr class=titre_principal><td>
+                 <h2>' . $titre . '</h2>
 
     
-                 <br>
-                 Ajout d\'une nouvelle ' . $classificationActiviteFamilleVentesArcadiaModel->getDataField(ClassificationActiviteFamilleVentesArcadiaModel::FIELDNAME_ID_ARCADIA_FAMILLE_VENTE)->getFieldLabel()
-        . ' </td></tr>
+                </tr>
              </table>
              <' . $html_table . '>
              <tr><td width=\'20%\'>
@@ -149,15 +136,6 @@ switch ($output) {
              </td></tr>
              </table>          
 
-             <' . $html_table . '>
-             <tr><td>
-
-                 <center>
-                 <a href=gestion_activite.php?' . ClassificationActiviteFamilleVentesArcadiaModel::FIELDNAME_ID_ACTIVITE . '=' . $idActivite . '>Validation</a>
-                     </center>
-
-             </td></tr>
-             </table>
 
              </form>
              ';

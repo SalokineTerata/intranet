@@ -81,7 +81,7 @@ if ($mode_etiquette_fta_composition == AnnexeModeEtiquetteModel::PAS_DETIQUETTE)
             . ', ' . FtaComposantModel::FIELDNAME_K_ETIQUETTE_VERSO_FTA_COMPOSITION . '=' . "-1"
             . ' WHERE ' . FtaComposantModel::KEYNAME . '=' . $id_fta_composant
     );
-} elseif (empty($etiquette_duree_vie_fta_composition)) {
+} elseif ($mode_etiquette_fta_composition == AnnexeModeEtiquetteModel::ETIQUETTE_PERSONALISE and empty($etiquette_duree_vie_fta_composition)) {
     $titre = UserInterfaceMessage::FR_WARNING_MISSING_DATA;
     $message = UserInterfaceMessage::FR_WARNING_DUREE_DE_VIE_COMPOSANT;
     afficher_message($titre, $message, $redirection);

@@ -214,10 +214,10 @@ if ($paramValider == 'valider') {
  * Quand un salarie est cree, envoi d'un mail pour lui donner son profil
  */
 $sujet = 'Inscription Intranet Agis';
-$corpsmail = 'Bonjour,\n '
-        . 'Votre profil vient d\'être créé dans l\'intranet AGIS.\n'
-        . 'Votre login est : ' . $paramUserLogin . '\n'
-        . '\nL\'administrateur Agis.\n';
+$corpsmail = 'Bonjour,<br> '
+        . 'Votre profil vient d\'être créé dans l\'intranet AGIS.<br>'
+        . 'Votre login est : ' . $paramUserLogin . '<br>'
+        . '<br>L\'administrateur Agis.<br>';
 $typeMail = 'Inscription';
 envoismail($sujet, $corpsmail, $paramUserMail, 'postmaster@agis-sa.fr', $typeMail);
 ?>

@@ -18,6 +18,7 @@ class IntranetNiveauAccesModel extends AbstractModel {
     const NIVEAU_FTA_DIFFUSION = '3';
     const NIVEAU_FTA_CONSULTATION = '1';
     const NIVEAU_FTA_MODIFICATION = '2';
+    const NIVEAU_FTA_IMPRESSION = '7';
 
     protected function setDefaultValues() {
         

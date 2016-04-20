@@ -328,6 +328,22 @@ class DatabaseOperation {
         return $return;
     }
 
+    /**
+     * Convertie un statement SQL en tableau PHP complet
+     * @param type $paramStatement
+     * @return type
+     */
+    public static function convertSqlStatementWithoutKeyToArrayComplete($paramStatement) {
+
+        $statement = DatabaseOperation::queryPDO($paramStatement);
+        if ($statement) {
+            $return = $statement->fetchAll(PDO::FETCH_COLUMN);
+            $statement->closeCursor();
+        }
+
+        return $return;
+    }
+
     public static function getRowsNumberOverLimitInSqlStatement($paramStatement) {
         $statement = DatabaseOperation::queryPDO($paramStatement);
         if ($statement) {

@@ -85,37 +85,96 @@ $result_action = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
                 . " WHERE " . IntranetActionsModel::FIELDNAME_MODULE_INTRANET_ACTIONS . " = '" . IntranetModulesModel::ID_MODULES_FTA . "' "
                 . " ORDER BY " . IntranetActionsModel::FIELDNAME_NOM_INTRANET_ACTIONS
 );
-$bloc = "";
-foreach ($result_action as $rows_action) {
-    $bloc.= "<" . $html_table . "><tr class=titre_principal><td>"
-            . $rows_action[IntranetActionsModel::FIELDNAME_DESCRIPTION_INTRANET_ACTIONS]
-            . "</td></tr>"
-    ;
+$bloc.= "<" . $html_table . "><th>"
+        . "Utilisateurs"
+        . "</th><th>"
+        . "Accès général"
+        . "</th><th>"
+        . "Diffusion"
+        . "</th><th>"
+        . "Impression"
+        . "</th><th>"
+        . "Espace de travail"
+        . "</th>";
 
 //Pour chaque niveaux, lister les utilisateur concernés
 
-    $result_user = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
-                    "SELECT DISTINCT " . UserModel::FIELDNAME_NOM
-                    . "," . UserModel::FIELDNAME_PRENOM
-                    . "," . IntranetDroitsAccesModel::FIELDNAME_NIVEAU_INTRANET_DROITS_ACCES
-                    . " FROM " . IntranetDroitsAccesModel::TABLENAME . ", " . UserModel::TABLENAME
-                    . ", " . IntranetModulesModel::TABLENAME . " , " . IntranetActionsModel::TABLENAME
-                    . " WHERE " . IntranetDroitsAccesModel::TABLENAME . "." . IntranetDroitsAccesModel::FIELDNAME_ID_USER . " = " . UserModel::TABLENAME . "." . UserModel::KEYNAME                              //Liaison
-                    . " AND " . IntranetDroitsAccesModel::TABLENAME . "." . IntranetDroitsAccesModel::FIELDNAME_ID_INTRANET_MODULES . " = " . IntranetModulesModel::TABLENAME . "." . IntranetModulesModel::KEYNAME   //liaison
-                    . " AND " . IntranetDroitsAccesModel::TABLENAME . "." . IntranetDroitsAccesModel::FIELDNAME_ID_INTRANET_ACTIONS . " = " . IntranetActionsModel::TABLENAME . "." . IntranetActionsModel::KEYNAME  //liaison
-                    . " AND " . IntranetActionsModel::TABLENAME . "." . IntranetActionsModel::KEYNAME . " = '" . $rows_action[IntranetDroitsAccesModel::FIELDNAME_ID_INTRANET_ACTIONS] . "' "
-                    . " AND " . IntranetModulesModel::TABLENAME . "." . IntranetModulesModel::KEYNAME . " = '" . IntranetModulesModel::ID_MODULES_FTA . "' "
-                    . " AND " . IntranetDroitsAccesModel::TABLENAME . "." . IntranetDroitsAccesModel::FIELDNAME_NIVEAU_INTRANET_DROITS_ACCES . " <>'" . IntranetNiveauAccesModel::NIVEAU_GENERIC_FALSE
-                    . "' ORDER BY niveau_intranet_droits_acces, login "
-    );
-    foreach ($result_user as $rows_user) {
-        $bloc .= "<tr><td>" . $rows_user[UserModel::FIELDNAME_PRENOM] . " " . $rows_user[UserModel::FIELDNAME_NOM] . "</td>";
+$arrayUser = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
+                "SELECT DISTINCT " . UserModel::TABLENAME . "." . UserModel::KEYNAME
+                . "," . UserModel::FIELDNAME_NOM
+                . "," . UserModel::FIELDNAME_PRENOM
+                . "," . UserModel::FIELDNAME_LIEU_GEO
+                . " FROM " . IntranetDroitsAccesModel::TABLENAME . ", " . UserModel::TABLENAME
+                . " WHERE " . IntranetDroitsAccesModel::TABLENAME . "." . IntranetDroitsAccesModel::FIELDNAME_ID_USER . " = " . UserModel::TABLENAME . "." . UserModel::KEYNAME                              //Liaison
+                . " AND " . IntranetDroitsAccesModel::TABLENAME . "." . IntranetDroitsAccesModel::FIELDNAME_ID_INTRANET_MODULES . " = '" . IntranetModulesModel::ID_MODULES_FTA . "' "   //liaison
+                . " AND " . IntranetDroitsAccesModel::TABLENAME . "." . IntranetDroitsAccesModel::FIELDNAME_NIVEAU_INTRANET_DROITS_ACCES . " <>'" . IntranetNiveauAccesModel::NIVEAU_GENERIC_FALSE . "'"
+                . " AND " . UserModel::TABLENAME . "." . UserModel::FIELDNAME_ACTIF . " = '" . UserModel::USER_ACTIF
+                . "' ORDER BY " . UserModel::FIELDNAME_NOM . "," . UserModel::FIELDNAME_PRENOM
+);
 
-        if ($rows_user[IntranetDroitsAccesModel::FIELDNAME_NIVEAU_INTRANET_DROITS_ACCES] <> 1) {
-            $bloc .= "<td>Niveau = " . $rows_user[IntranetDroitsAccesModel::FIELDNAME_NIVEAU_INTRANET_DROITS_ACCES] . "</<td></tr>";
+foreach ($arrayUser as $rowsUser) {
+    $arrayAction = DatabaseOperation::convertSqlStatementWithoutKeyToArrayComplete(
+                    "SELECT DISTINCT " . IntranetDroitsAccesModel::FIELDNAME_ID_INTRANET_ACTIONS
+                    . " FROM " . IntranetDroitsAccesModel::TABLENAME
+                    . " WHERE " . IntranetDroitsAccesModel::TABLENAME . "." . IntranetDroitsAccesModel::FIELDNAME_ID_USER . " = " . $rowsUser[UserModel::KEYNAME]                             //Liaison
+                    . " AND " . IntranetDroitsAccesModel::TABLENAME . "." . IntranetDroitsAccesModel::FIELDNAME_ID_INTRANET_MODULES . " = '" . IntranetModulesModel::ID_MODULES_FTA . "' "   //liaison
+                    . " AND " . IntranetDroitsAccesModel::TABLENAME . "." . IntranetDroitsAccesModel::FIELDNAME_NIVEAU_INTRANET_DROITS_ACCES . " <>'" . IntranetNiveauAccesModel::NIVEAU_GENERIC_FALSE . "'"
+    );
+    $bloc.= "<tr class=titre_principal><td>"
+            . $rowsUser[UserModel::FIELDNAME_PRENOM] . " " . $rowsUser[UserModel::FIELDNAME_NOM]
+            . "</td>"
+    ;
+    $checkModification = in_array(IntranetNiveauAccesModel::NIVEAU_FTA_MODIFICATION, $arrayAction);
+    $checkConsultation = in_array(IntranetNiveauAccesModel::NIVEAU_FTA_CONSULTATION, $arrayAction);
+    $checkDiffusion = in_array(IntranetNiveauAccesModel::NIVEAU_FTA_DIFFUSION, $arrayAction);
+    $checkImpression = in_array(IntranetNiveauAccesModel::NIVEAU_FTA_IMPRESSION, $arrayAction);
+
+    if ($checkModification) {
+        $accesGeneralValue = "Modification";
+        $diffusion = "Voir espaces de Travail";
+        $arrayIdIntranetParents = DatabaseOperation::convertSqlStatementWithoutKeyToArrayComplete(
+                        " SELECT " . IntranetActionsModel::FIELDNAME_MODULE_INTRANET_ACTIONS . ", " . IntranetActionsModel::FIELDNAME_PARENT_INTRANET_ACTIONS
+                        . " FROM  " . IntranetActionsModel::TABLENAME
+                        . " WHERE " . IntranetActionsModel::FIELDNAME_PARENT_INTRANET_ACTIONS . " IS NOT NULL"
+                        . " GROUP BY  " . IntranetActionsModel::FIELDNAME_PARENT_INTRANET_ACTIONS);
+        $arrayIdActionWorkflow = array_intersect($arrayIdIntranetParents, $arrayAction);
+        $lienWorkflow = array_intersect($arrayIdIntranetParents, $arrayAction);
+    } elseif ($checkConsultation) {
+        $accesGeneralValue = "Consultation";
+        if ($checkDiffusion) {
+            $diffusion = "Siege";
+        } else {
+            $diffusion = "Non";
+        }
+    } else {
+        $accesGeneralValue = "Non";
+        if ($checkDiffusion) {
+            $geoModel = new GeoModel($rowsUser[UserModel::FIELDNAME_LIEU_GEO]);
+            $diffusion = $geoModel->getDataField(GeoModel::FIELDNAME_GEO)->getFieldValue();
+        } else {
+            $diffusion = "Non";
         }
     }
+    if ($checkImpression) {
+        $impression = "Oui";
+    } else {
+        $impression = "Non";
+    }
+    $bloc.="<td>" . $accesGeneralValue . "</td>"
+            . "<td>" . $diffusion . "</td>"
+            . "<td>" . $impression . "</td>"
+            . "<td>" . $lienWorkflow . "</td></tr>"
+    ;
 }
+//foreach ($result_action as $rows_action) {
+//    foreach ($result_user as $rows_user) {
+//        $bloc .= "<tr><td>" . $rows_user[UserModel::FIELDNAME_PRENOM] . " " . $rows_user[UserModel::FIELDNAME_NOM] . "</td>";
+//
+//        if ($rows_user[IntranetDroitsAccesModel::FIELDNAME_NIVEAU_INTRANET_DROITS_ACCES] <> 1) {
+//            $bloc .= "<td>Niveau = " . $rows_user[IntranetDroitsAccesModel::FIELDNAME_NIVEAU_INTRANET_DROITS_ACCES] . "</<td></tr>";
+//        }
+//    }
+//}
 
 
 

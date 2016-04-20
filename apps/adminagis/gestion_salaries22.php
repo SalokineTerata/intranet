@@ -253,7 +253,7 @@ if ($paramRech == '1') {
                                          * ***************************Boris Sanègre  2003.03.25 
                                          * ***************************Franck Amofa 2015.08.07 */
                                         // require ('droits_acces.inc');  
-                                        IntranetDroitsAccesModel::BuildHtmlDroitsAcces($paramIdUser);
+                                        IntranetDroitsAccesModel::buildHtmlDroitsAcces($paramIdUser);
                                         ?>
                                         <table width='500' border='0' cellspacing='4' cellpadding='0' align='center'>
                                             <tr>

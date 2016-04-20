@@ -17,6 +17,9 @@ class IntranetModulesModel extends AbstractModel {
     const FIELDNAME_VISIBLE_INTRANET_MODULES = 'visible_intranet_modules';
     const FIELDNAME_PUBLIC_INTRANET_MODULES = 'public_intranet_modules';
     const FIELDNAME_CSS_INTRANET_MODULES = 'css_intranet_module';
+    const FIELDNAME_ADMINISTRATION_MODULE = 'administration_module';
+    const ADMINISTRATION_MODULE_TRUE = '1';
+    const ADMINISTRATION_MODULE_FALSE = '0';
     const ID_MODULES_FTA = '19';
 
     protected function setDefaultValues() {

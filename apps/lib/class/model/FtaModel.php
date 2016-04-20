@@ -534,7 +534,7 @@ class FtaModel extends AbstractModel {
     public function isDataValidationSuccessful() {
         return $this->dataValidationSuccessful;
     }
-   
+
     function setDataValidationSuccessful($paramDataValidationSuccessful) {
         $this->dataValidationSuccessful += $paramDataValidationSuccessful;
     }
@@ -2399,6 +2399,13 @@ class FtaModel extends AbstractModel {
                 $this->getDataField(FtaModel::FIELDNAME_ID_ARCADIA_SOUS_FAMILLE)->setFieldValue(" ");
             }
         }
+    }
+
+    function updateCategorieProduitOptivente($paramCategorieProduitOptiventesValue) {
+        DatabaseOperation::execute("UPDATE " . self::TABLENAME
+                . " SET " . self::FIELDNAME_ID_ARCADIA_CATEGEORIE_PRODUIT_OPTIVENTES . "=" . $paramCategorieProduitOptiventesValue
+                . " WHERE " . self::KEYNAME . "=" . $this->getKeyValue()
+        );
     }
 
 }

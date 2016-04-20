@@ -1,23 +1,42 @@
 #!/bin/sh
 CHEMIN="$(dirname $0)"
-MAILTO="InformatiqueSupport.Avignon@agis-sa.fr"
+COD="/u1/DATA01/webldc/cod-intranet/v3/apps/datasync/cli"
+DEV="/u1/DATA01/webldc/dev-intranet/v3/apps/datasync/cli"
+PRD="/u1/DATA01/webldc/fta05401/v3/apps/datasync/cli"
+MAILTO="Informatique.AGIS@agis-sa.fr"
 #MAIL=/tmp/save.mail.tmp
 #LOG_ARCHIVE_FILE=/u1/Admin/Log/datasync`date +%m-%d`.log
-LOG_ARCHIVE_DIR="/u1/DATA01/webldc/cod-intranet/v3/apps/datasync/data"
-LOG_ARCHIVE_FILE="$LOG_ARCHIVE_DIR/datasync`date +%m-%d`.log"
-MAIL="$LOG_ARCHIVE_DIR/mail.tmp.txt"
 TYPE=$1
-ENV=".cod"
 DEBUG=1
 
+case $CHEMIN in
+
+  $COD)
+    ENV="COD"
+    LOG_ARCHIVE_DIR="/u1/DATA01/webldc/cod-intranet/v3/apps/datasync/data"
+
+ ;;
+  $DEV)
+    ENV="DEV"
+    LOG_ARCHIVE_DIR="/u1/DATA01/webldc/dev-intranet/v3/apps/datasync/data"
+ ;;
+  $PRD)
+    ENV="PRD"
+    LOG_ARCHIVE_DIR="/u1/DATA01/webldc/fta05401/v3/apps/datasync/data"
+ ;;
+
+esac
+
+MAIL="$LOG_ARCHIVE_DIR/mail.tmp.txt"
+LOG_ARCHIVE_FILE="$LOG_ARCHIVE_DIR/datasync`date +%m-%d`.log"
 
 #Génération du fichier de synchronisation dans l'environnment codeur
 
 
 case $TYPE in
-  -d | -w | -v )
-	#LOG="/data/var/www/system/log/datasync$ENV.log"
-	LOG="$LOG_ARCHIVE_DIR/datasync$ENV.log"
+  -d | -w )
+	#LOG="/data/var/www/system/log/datasync.log"
+	LOG="$LOG_ARCHIVE_DIR/datasync.log"
 	>$LOG
 	>$MAIL
 	>$LOG_ARCHIVE_FILE
@@ -25,7 +44,7 @@ case $TYPE in
   	#Génération et mise à jour des scripts utilis�s
 	echo -n "Démarrage : " >> $MAIL
 	date >> $MAIL
-	lynx -dump -accept_all_cookies http://cod-intranet.agis.fr/v3/apps/datasync/index.php?mode=$TYPE&env=Codeur  >> $LOG
+	php ./apps/datasync/index.php $TYPE $ENV  >> $LOG
 	
 #	if [ $DEBUG = 1 ] ; then
 #	  $CHEMIN/netcopy.sh
@@ -48,7 +67,9 @@ case $TYPE in
 	echo "  OPTIONS LIST:"
 	echo "  -d  daily network copy"
 	echo "  -w  weekly network copy"
-	echo "  -v  database virus copy"
+	
     ;;
 esac
+
+
 

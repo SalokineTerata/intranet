@@ -73,7 +73,7 @@ switch ($actionClassifcation) {
 
         $ClassificationRaccourcisAssociationModel->deleteClassificationRaccourcisAssociation();
 
-        header("Location: classification_modifier.php?id_fta_classification2=" . $idClassifcationFta2 . "&action=modifier");
+        header("Location: classification_modifier.php?id_fta_classification2=" . $idClassifcationFta2 . "&action=modifier&isEditable=1");
         break;
 }
 
@@ -155,7 +155,7 @@ switch ($output) {
              <tr><td>
 
                  <center>
-                 <a href=classification_modifier.php?id_fta_classification2=' . $idClassifcationFta2 . '&action=modifier>Validation</a>
+                 <a href=classification_modifier.php?id_fta_classification2=' . $idClassifcationFta2 . '&action=modifier&isEditable=1>Validation</a>
                      </center>
 
              </td></tr>

@@ -22,24 +22,44 @@ $html_table = 'table '                     //Permet d'harmoniser les tableaux
         . 'class=titre '
 ;
 
-$arrayData = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
+$arrayDataCoupeFe = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
                 "SELECT DISTINCT " . FtaModel::FIELDNAME_LIBELLE . "," . FtaModel::FIELDNAME_EAN_UVC
                 . "," . FtaModel::FIELDNAME_CODE_ARTICLE_LDC . "," . FtaModel::FIELDNAME_NOMBRE_UVC_PAR_CARTON
                 . "," . FtaComposantModel::FIELDNAME_INGREDIENT_FTA_COMPOSITION . "," . FtaModel::FIELDNAME_LISTE_ALLERGENE
                 . "," . FtaModel::FIELDNAME_ORIGINE_MATIERE_PREMIERE . "," . FtaModel::FIELDNAME_DUREE_DE_VIE
-                . "," . FtaModel::FIELDNAME_CONSEIL_DE_RECHAUFFAGE. "," . FtaComposantModel::FIELDNAME_VAL_NUT_KCAL
-                . "," . FtaComposantModel::FIELDNAME_VAL_NUT_KJ. "," . FtaComposantModel::FIELDNAME_VAL_MAT_GRASSE
-                . "," . FtaComposantModel::FIELDNAME_VAL_ACIDE_GRAS. "," . FtaComposantModel::FIELDNAME_VAL_GLUCIDE
-                . "," . FtaComposantModel::FIELDNAME_VAL_SUCRE. "," . FtaComposantModel::FIELDNAME_VAL_PROTEINE
+                . "," . FtaModel::FIELDNAME_CONSEIL_DE_RECHAUFFAGE . "," . FtaComposantModel::FIELDNAME_VAL_NUT_KCAL
+                . "," . FtaComposantModel::FIELDNAME_VAL_NUT_KJ . "," . FtaComposantModel::FIELDNAME_VAL_MAT_GRASSE
+                . "," . FtaComposantModel::FIELDNAME_VAL_ACIDE_GRAS . "," . FtaComposantModel::FIELDNAME_VAL_GLUCIDE
+                . "," . FtaComposantModel::FIELDNAME_VAL_SUCRE . "," . FtaComposantModel::FIELDNAME_VAL_PROTEINE
                 . "," . FtaComposantModel::FIELDNAME_VAL_SEL
-                
                 . " FROM " . FtaComposantModel::TABLENAME . "," . FtaModel::TABLENAME
                 . " WHERE " . FtaComposantModel::TABLENAME . "." . FtaComposantModel::FIELDNAME_ID_FTA
                 . "=" . FtaModel::TABLENAME . "." . FtaModel::KEYNAME
                 . " AND " . FtaModel::FIELDNAME_ID_FTA_ETAT . "=" . FtaEtatModel::ID_VALUE_VALIDE
                 . " AND " . FtaModel::FIELDNAME_WORKFLOW . "=" . FtaWorkflowModel::ID_WORKFLOW_COUPE_FE
+                . " AND " . FtaComposantModel::FIELDNAME_IS_COMPOSITION_FTA_COMPOSANT . "=" . FtaComposantModel::DEFAULT_VALUE_QTE_UVC
                 . " ORDER BY " . FtaModel::FIELDNAME_CODE_ARTICLE_LDC
 );
+$arrayDataInter = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
+                "SELECT DISTINCT " . FtaModel::FIELDNAME_LIBELLE . "," . FtaModel::FIELDNAME_EAN_UVC
+                . "," . FtaModel::FIELDNAME_CODE_ARTICLE_LDC . "," . FtaModel::FIELDNAME_NOMBRE_UVC_PAR_CARTON
+                . "," . FtaComposantModel::FIELDNAME_INGREDIENT_FTA_COMPOSITION . "," . FtaModel::FIELDNAME_LISTE_ALLERGENE
+                . "," . FtaModel::FIELDNAME_ORIGINE_MATIERE_PREMIERE . "," . FtaModel::FIELDNAME_DUREE_DE_VIE
+                . "," . FtaModel::FIELDNAME_CONSEIL_DE_RECHAUFFAGE . "," . FtaComposantModel::FIELDNAME_VAL_NUT_KCAL
+                . "," . FtaComposantModel::FIELDNAME_VAL_NUT_KJ . "," . FtaComposantModel::FIELDNAME_VAL_MAT_GRASSE
+                . "," . FtaComposantModel::FIELDNAME_VAL_ACIDE_GRAS . "," . FtaComposantModel::FIELDNAME_VAL_GLUCIDE
+                . "," . FtaComposantModel::FIELDNAME_VAL_SUCRE . "," . FtaComposantModel::FIELDNAME_VAL_PROTEINE
+                . "," . FtaComposantModel::FIELDNAME_VAL_SEL
+                . " FROM " . FtaComposantModel::TABLENAME . "," . FtaModel::TABLENAME
+                . " WHERE " . FtaComposantModel::TABLENAME . "." . FtaComposantModel::FIELDNAME_ID_FTA
+                . "=" . FtaModel::TABLENAME . "." . FtaModel::KEYNAME
+                . " AND " . FtaModel::FIELDNAME_ID_FTA_ETAT . "=" . FtaEtatModel::ID_VALUE_VALIDE
+                . " AND " . FtaModel::FIELDNAME_WORKFLOW . "=" . FtaWorkflowModel::ID_WORKFLOW_INTERF
+                . " AND " . FtaComposantModel::FIELDNAME_IS_COMPOSITION_FTA_COMPOSANT . "=" . FtaComposantModel::DEFAULT_VALUE_QTE_UVC
+                . " ORDER BY " . FtaModel::FIELDNAME_CODE_ARTICLE_LDC
+);
+
+$arrayData = array_merge($arrayDataInter, $arrayDataCoupeFe);
 $titres = array(
     "NOM du produit",
     "GENCOD",
@@ -83,11 +103,11 @@ echo "
              <" . $html_table . ">
              <tr class=titre_principal><td>
 
-                 <h1>Téléchargement des Fta validé de l'espace de travail CoupeFe sous le format excel</h1>
+                 <h1>Téléchargement des Fta validé de l'espace de travail CoupeFe et Interfilliale sous le format excel</h1>
 
              </td></tr>
              <tr class=contenu><td>
-                                             <h2> <a href=./download/coupe_fe.csv target=_top>Téléchargé ICI</a></h2> 
+                                             <h2> <a href=./download/coupe_fe.csv target=_top>Télécharger ICI</a></h2> 
                  <h3>º Nous vous conseillons d'utiliser le logiciel Libre Office afin d'ouvrir le fichier correctement<br>
                  <br>
                  º Afin d'utiliser le fichier sous Microsoft Excel veuillez suivre la méthode suivante :</h3><br>

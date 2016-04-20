@@ -6,8 +6,8 @@
  */
 class DataSyncTransfertModel extends AbstractModel {
 
-    const TABLENAME = 'ip_datasync_serveur';
-    const KEYNAME = 'id_datasync_transfert';
+    const TABLENAME = 'datasync_transfert';
+    const KEYNAME = 'ip_datasync_transfert';
     const FIELDNAME_NOM_DATASYNC_SERVEUR_ORIGINE = 'nom_datasync_serveur_origine';
     const FIELDNAME_NOM_FICHIER = 'nom_fichier';
     const FIELDNAME_NOM_DATASYNC_SERVEUR_DESTINATION = 'nom_datasync_serveur_destination';

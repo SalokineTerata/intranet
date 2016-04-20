@@ -167,6 +167,7 @@ class GlobalConfig {
                             . ', ' . IntranetModulesModel::FIELDNAME_VERSION_INTRANET_MODULES
                             . ', ' . IntranetModulesModel::FIELDNAME_VISIBLE_INTRANET_MODULES
                             . ', ' . IntranetModulesModel::FIELDNAME_CSS_INTRANET_MODULES
+                            . ', ' . IntranetModulesModel::FIELDNAME_ADMINISTRATION_MODULE
                             . ', ' . IntranetModulesModel::KEYNAME
                             . ' FROM ' . IntranetModulesModel::TABLENAME);
             foreach ($array as $rows) {
@@ -178,6 +179,7 @@ class GlobalConfig {
                 $_SESSION[IntranetModulesModel::TABLENAME][$rows[IntranetModulesModel::FIELDNAME_NOM_INTRANET_MODULES]][IntranetModulesModel::FIELDNAME_CLASSEMENT_INTRANET_MODULES] = $rows[IntranetModulesModel::FIELDNAME_CLASSEMENT_INTRANET_MODULES];
                 $_SESSION[IntranetModulesModel::TABLENAME][$rows[IntranetModulesModel::FIELDNAME_NOM_INTRANET_MODULES]][IntranetModulesModel::FIELDNAME_PUBLIC_INTRANET_MODULES] = $rows[IntranetModulesModel::FIELDNAME_PUBLIC_INTRANET_MODULES];
                 $_SESSION[IntranetModulesModel::TABLENAME][$rows[IntranetModulesModel::FIELDNAME_NOM_INTRANET_MODULES]][IntranetModulesModel::FIELDNAME_CSS_INTRANET_MODULES] = $rows[IntranetModulesModel::FIELDNAME_CSS_INTRANET_MODULES];
+                $_SESSION[IntranetModulesModel::TABLENAME][$rows[IntranetModulesModel::FIELDNAME_NOM_INTRANET_MODULES]][IntranetModulesModel::FIELDNAME_ADMINISTRATION_MODULE] = $rows[IntranetModulesModel::FIELDNAME_ADMINISTRATION_MODULE];
             }
             $this->setDatabaseIsInitializedToTrue();
         } //Fin des enregistrements MySQL en session

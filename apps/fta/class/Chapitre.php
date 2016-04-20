@@ -1353,6 +1353,9 @@ class Chapitre {
          */
         $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_ENVIRONNEMENT_CONSERVATION);
 
+        //Agrément CE
+        $bloc.=$ftaView->getHtmlSiteAgrement();
+
         /**
          * Remarque
          */
@@ -1394,6 +1397,9 @@ class Chapitre {
          */
         $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_ENVIRONNEMENT_CONSERVATION);
 
+        //Agrément CE
+        $bloc.=$ftaView->getHtmlSiteAgrement();
+
         /**
          * Remarque
          */
@@ -1434,6 +1440,9 @@ class Chapitre {
          * Environnement de conservation
          */
         $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_ENVIRONNEMENT_CONSERVATION);
+
+        //Agrément CE
+        $bloc.=$ftaView->getHtmlSiteAgrement();
 
         /**
          * Remarque

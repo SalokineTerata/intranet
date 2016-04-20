@@ -34,6 +34,9 @@ class GeoModel extends AbstractModel {
     const ID_SITE_NON_DEFINIE = '-1';
     const ID_SITE_PLB = '20';
     const ID_SITE_CORNER = '54';
+    const ID_SITE_ROEZE_SUR_SARTHE = '12';
+    const ID_SITE_REGALETTE = '13';
+    const ID_SITE_KIRN = '335';
 
     public function __construct($paramId = NULL, $paramIsCreateRecordsetInDatabaseIfKeyDoesntExist = AbstractModel::DEFAULT_IS_CREATE_RECORDSET_IN_DATABASE_IF_KEY_DOESNT_EXIST) {
         parent::__construct($paramId, $paramIsCreateRecordsetInDatabaseIfKeyDoesntExist);

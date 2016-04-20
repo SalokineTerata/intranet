@@ -164,7 +164,7 @@ class IntranetDroitsAccesModel extends AbstractModel {
      * Franck Amofa 2015.08.07
      * @param int $paramSalUser
      */
-    public static function BuildHtmlDroitsAcces($paramSalUser = NULL) {
+    public static function buildHtmlDroitsAcces($paramSalUser = NULL) {
         echo '<br>';
         echo '</center>';
         echo '</td>';
@@ -182,7 +182,7 @@ class IntranetDroitsAccesModel extends AbstractModel {
         $arrayModule = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
                         'SELECT ' . IntranetModulesModel::KEYNAME . ',' . IntranetModulesModel::FIELDNAME_NOM_USUEL_INTRANET_MODULES
                         . ' FROM ' . IntranetModulesModel::TABLENAME
-                        . ' WHERE ' . IntranetModulesModel::FIELDNAME_VISIBLE_INTRANET_MODULES . '=' . '1'
+                        . ' WHERE ' . IntranetModulesModel::FIELDNAME_ADMINISTRATION_MODULE . '=' . IntranetModulesModel::ADMINISTRATION_MODULE_TRUE
                         . ' ORDER BY ' . IntranetModulesModel::FIELDNAME_NOM_USUEL_INTRANET_MODULES . ' ASC');
         $colonne = 6;
 
@@ -240,7 +240,7 @@ class IntranetDroitsAccesModel extends AbstractModel {
                     $Role = NULL;
                     if ($arrayActions) {
                         if ($paramSalUser) {
-                            $checked = self::CheckValueByNiveauAcces($paramSalUser, $rowsActionsWorkflow[IntranetActionsModel::KEYNAME], $idIntranetModules);
+                            $checked = self::checkValueByNiveauAcces($paramSalUser, $rowsActionsWorkflow[IntranetActionsModel::KEYNAME], $idIntranetModules);
                         }
                         if ($checked) {
                             $visible = 'visibility';
@@ -256,7 +256,7 @@ class IntranetDroitsAccesModel extends AbstractModel {
                         foreach ($arrayActions as $rowsActions) {
                             if ($rowsActions[IntranetActionsModel::FIELDNAME_TAG_INTRANET_ACTIONS] == 'site') {
                                 if ($paramSalUser) {
-                                    $checked = self::CheckValueByNiveauAcces($paramSalUser, $rowsActions[IntranetActionsModel::KEYNAME], $idIntranetModules);
+                                    $checked = self::checkValueByNiveauAcces($paramSalUser, $rowsActions[IntranetActionsModel::KEYNAME], $idIntranetModules);
                                 }
                                 if ($checked) {
                                     $visible = 'visibility';
@@ -268,7 +268,7 @@ class IntranetDroitsAccesModel extends AbstractModel {
                                         . ' value=1 ' . $checked . '/>' . $rowsActions[IntranetActionsModel::FIELDNAME_DESCRIPTION_INTRANET_ACTIONS] . '</td></tr></td>';
                             } else {
                                 if ($paramSalUser) {
-                                    $checked = self::CheckValueByNiveauAcces($paramSalUser, $rowsActions[IntranetActionsModel::KEYNAME], $idIntranetModules);
+                                    $checked = self::checkValueByNiveauAcces($paramSalUser, $rowsActions[IntranetActionsModel::KEYNAME], $idIntranetModules);
                                 }
                                 if ($checked) {
                                     $visible = 'visibility';
@@ -297,7 +297,7 @@ class IntranetDroitsAccesModel extends AbstractModel {
                 $ftaDroitsAccesGlobaux = '<table width=500 border=1>';
                 foreach ($arrayActionsGlobaux as $rowsActionsGlobaux) {
                     if ($paramSalUser) {
-                        $checked = self::CheckValueByNiveauAcces($paramSalUser, $rowsActionsGlobaux[IntranetActionsModel::KEYNAME], $idIntranetModules);
+                        $checked = self::checkValueByNiveauAcces($paramSalUser, $rowsActionsGlobaux[IntranetActionsModel::KEYNAME], $idIntranetModules);
                     }
                     $ftaDroitsAccesGlobaux .='<td  align=left width=100><input type=checkbox onclick=Change()'
                             . ' id=' . $rowsActionsGlobaux[IntranetActionsModel::FIELDNAME_NOM_INTRANET_ACTIONS]
@@ -477,7 +477,7 @@ class IntranetDroitsAccesModel extends AbstractModel {
      * @param type $paramIdIntranetActions
      * @return string
      */
-    private static function CheckValueByNiveauAcces($paramIdUser, $paramIdIntranetActions, $paramIdIntranetModule) {
+    private static function checkValueByNiveauAcces($paramIdUser, $paramIdIntranetActions, $paramIdIntranetModule) {
         $arrayNiveauAcces = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
                         ' SELECT ' . self::FIELDNAME_NIVEAU_INTRANET_DROITS_ACCES
                         . ' FROM ' . self::TABLENAME

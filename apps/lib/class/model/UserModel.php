@@ -91,7 +91,7 @@ class UserModel extends AbstractModel {
                             . ' AND ' . FtaWorkflowModel::TABLENAME . '.' . FtaWorkflowModel::KEYNAME
                             . '=' . FtaModel::TABLENAME . '.' . FtaModel::FIELDNAME_WORKFLOW
                             . ' AND ' . FtaModel::TABLENAME . '.' . FtaModel::FIELDNAME_SITE_PRODUCTION
-                            . '=' . GeoModel::TABLENAME . '.' . GeoModel::KEYNAME                          
+                            . '=' . GeoModel::TABLENAME . '.' . GeoModel::KEYNAME
                             . ' ORDER BY ' . $paramOrderBy
                             . ',' . FtaModel::TABLENAME . '.' . FtaModel::FIELDNAME_WORKFLOW
                             . ',' . UserModel::FIELDNAME_PRENOM . ' ASC' . ',' . UserModel::FIELDNAME_NOM . ' ASC'
@@ -122,7 +122,7 @@ class UserModel extends AbstractModel {
                             . ' AND ' . FtaWorkflowModel::TABLENAME . '.' . FtaWorkflowModel::KEYNAME
                             . '=' . FtaModel::TABLENAME . '.' . FtaModel::FIELDNAME_WORKFLOW
                             . ' AND ' . FtaModel::TABLENAME . '.' . FtaModel::FIELDNAME_SITE_PRODUCTION
-                            . '=' . GeoModel::TABLENAME . '.' . GeoModel::KEYNAME                          
+                            . '=' . GeoModel::TABLENAME . '.' . GeoModel::KEYNAME
                             . ' ORDER BY ' . $paramOrderBy
                             . ',' . FtaModel::TABLENAME . '.' . FtaModel::FIELDNAME_WORKFLOW
                             . ',' . UserModel::FIELDNAME_PRENOM . ' ASC'
@@ -282,7 +282,8 @@ class UserModel extends AbstractModel {
                 . ' AND ' . IntranetDroitsAccesModel::TABLENAME . '.' . IntranetDroitsAccesModel::FIELDNAME_ID_INTRANET_ACTIONS
                 . '=' . IntranetActionsModel::TABLENAME . '.' . IntranetActionsModel::KEYNAME
                 . ' AND ' . IntranetActionsModel::TABLENAME . '.' . IntranetActionsModel::KEYNAME . '=' . $paramArrayIdIntranetActions["0"]
-                . ' AND ' . IntranetDroitsAccesModel::TABLENAME . '.' . self::KEYNAME
+                . ' AND ' . self::TABLENAME . '.' . self::FIELDNAME_ACTIF . '=\'' . self::USER_ACTIF
+                . '\' AND ' . IntranetDroitsAccesModel::TABLENAME . '.' . self::KEYNAME
                 . ' IN ( SELECT DISTINCT ' . self::KEYNAME
                 . ' FROM ' . IntranetDroitsAccesModel::TABLENAME
                 . ' WHERE ' . IntranetDroitsAccesModel::FIELDNAME_ID_INTRANET_ACTIONS . '=' . $paramArrayIdIntranetActions["1"]

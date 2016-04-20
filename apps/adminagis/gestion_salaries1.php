@@ -278,7 +278,7 @@ if ($modifier == 'modifier') {
                  * Construction des droits d'accès pour tous les modules:
                  * Boris Sanègre 2003.03.25                
                  */
-                IntranetDroitsAccesModel::BuildHtmlDroitsAcces();
+                IntranetDroitsAccesModel::buildHtmlDroitsAcces();
 
 // Fin de la page
 

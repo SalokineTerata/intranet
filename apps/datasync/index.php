@@ -14,22 +14,58 @@
 //Récupération des variables globale dans le cas d'une navigation
 ini_set("session.use_cookies", 0);
 
-//Includes
-require_once '../inc/main.php';
 
-$mode = Lib::getParameterFromRequest("mode");
-$env = Lib::getParameterFromRequest("env");
+$paramMode = $argv[1];
+$paramChemin = $argv[2];
+$COD = "COD";
+$DEV = "DEV";
+$PRD = "PRD";
+$MYSQL_SERVER_NAME = "MYSQL_SERVER_NAME";
+$MYSQL_DATABASE_NAME = "MYSQL_DATABASE_NAME";
+$MYSQL_AUTHENTIFICATION_USER_NAME = "MYSQL_AUTHENTIFICATION_USER_NAME";
+$MYSQL_AUTHENTIFICATION_PASSWORD = "MYSQL_AUTHENTIFICATION_PASSWORD";
 
-$globalConfig = new GlobalConfig();
+
+switch ($paramChemin) {
+    case $COD:
+        $paramEnvName = "ENV_COD";
+        $paramEnvChemin = "cod-intranet";
+
+        break;
+    case $DEV:
+        $paramEnvName = "ENV_DEV";
+        $paramEnvChemin = "dev-intranet";
+
+        break;
+    case $PRD:
+        $paramEnvName = "ENV_PRD";
+        $paramEnvChemin = "fta05401";
+
+        break;
+
+    default:
+        echo 'Environnment non identifié';
+        break;
+}
+
+/**
+ * Config init
+ */
+$paramInit = parse_ini_file("/u1/DATA01/webldc/$paramEnvChemin/v3/config.ini", TRUE);
 //Dictionnaire des variables globales utilisées
 
-$bdd = $globalConfig->getConf()->getMysqlDatabaseName(); //Base de données MySQL actuellement utilisée (cf. ../lib/session.php)
+$bdd = new PDO('mysql:host=' . $paramInit[$MYSQL_SERVER_NAME][$paramEnvName] //Base de données MySQL actuellement utilisée
+        . ';dbname=' . $paramInit[$MYSQL_DATABASE_NAME][$paramEnvName]
+        , $paramInit[$MYSQL_AUTHENTIFICATION_USER_NAME][$paramEnvName]
+        , $paramInit[$MYSQL_AUTHENTIFICATION_PASSWORD][$paramEnvName]
+);
+
 //Définition des variables locales
 //Tout si le script est lancé via CGI ou CLI
-if ($mode) {
-    $argument_1 = $mode;              //Variable passée en URL
+if ($paramMode) {
+    $argument_1 = $paramMode;              //Variable passée en URL
     $SHELL = "/bin/sh";               //Shell utilisé
-    $SCRIPTNAME = "cli/netcopy.sh";   //Script généré
+    $SCRIPTNAME = "/u1/DATA01/webldc/$paramEnvChemin/v3/apps/datasync/cli/netcopy.sh";   //Script généré
     $SCRIPTEXE = 1;                   //Exécuter le script shell après sa génération ?
 } else {
     $argument_1 = $argv[1];           //Premier argument donné en ligne de commande
@@ -42,6 +78,7 @@ $CMD = "#!$SHELL\n"               //Liste des commandes envoyées au shell + Dat
         . "#Script permettant d'effectuer les copies Intersites\n"
         . "#ATTENTION !! Ce script a été autogénéré via datasync.sh\n"
         . "#Ne le modifiez qu'à l'aide du fichier PHP de l'intranet Agis\n"
+        . "echo Base MySQL sélectionnée: " . $paramInit[$MYSQL_DATABASE_NAME][$paramEnvName] . "\n"
 //           . "/data/etc/init.d/ncpmanager.sh restart\n"
 //           . "echo -n 'Démarrage de copie des données intersite à:'\n"
 //           . "date\n"
@@ -64,7 +101,7 @@ $RC = "\n";                         //Formatage des retours charriots
 $TMP = "";                          //Extension des fichiers temporaires
 $REP_CONTENT = "";                  //Variable contenant (ou pas) la valeur "/*"
 //$MAIL_TO="<informatiquesupport.avignon@agis-sa.fr>";
-$MAIL_TO = "InformatiqueSupport.Avignon@agis-sa.fr";
+$MAIL_TO = "Informatique.AGIS@agis-sa.fr";
 
 #racine du chemin d'accès
 $MAP_ROOT = "/mnt/ncp/ldcadm/";
@@ -84,7 +121,7 @@ $TAR = "tar -cf";
 $BZIP2 = "bzip2 -f";
 $RSYNC = "rsync -avzO --delete --no-p";
 $SSH = "ssh -t";
-$REMOTE_USER = "root";
+$REMOTE_USER = "ldcadm";
 /*
   Récupération des données MySQL
  */
@@ -105,20 +142,24 @@ $REMOTE_USER = "root";
 
 //Liste des serveurs Linux concernés
 
-$req = "SELECT " . DataSyncServeurModel::FIELDNAME_NOM_DATASYNC_SERVEUR . "," . DataSyncServeurModel::KEYNAME
-        . " FROM " . DataSyncServeurModel::TABLENAME . " WHERE " . DataSyncServeurModel::FIELDNAME_ACTIVE_DATASYNC_SERVEUR . "=" . DataSyncServeurModel::ACTIVE_DATASYNC_SERVEUR_TRUE
-        . " AND " . DataSyncServeurModel::FIELDNAME_OS_SERVEUR_DATASYNC_SERVEUR . "='linux' ";
-$array = DatabaseOperation::convertSqlStatementWithoutKeyToArray($req);
+$req = "SELECT nom_datasync_serveur,ip_datasync_serveur"
+        . " FROM datasync_serveur WHERE active_datasync_serveur=1"
+        . " AND os_serveur_datasync_serveur='linux' ";
+$sqlResult = $bdd->query($req);
+if ($sqlResult) {
+    $array = $sqlResult->fetchAll("2");
+    $sqlResult->closeCursor();
+}
 
-$sqlResult = DatabaseOperation::queryPDO($req);
-$num = DatabaseOperation::getSqlNumRows($sqlResult);
+$num = $sqlResult->rowCount();
+
 
 $CMD .="echo 'Nombre de serveur(s) Linux concerné(s): " . $num . "'\n";
 //Construction des chemins d'accès aux volumes des serveurs concernés
 foreach ($array as $rows) {
-    $MAP = "MAP_" . $rows[DataSyncServeurModel::FIELDNAME_NOM_DATASYNC_SERVEUR];
+    $MAP = "MAP_" . $rows["nom_datasync_serveur"];
     //$$MAP="ldcadm@".$rows["ip_datasync_serveur"].":".$MAP_ROOT_SMB."/";
-    $$MAP = $REMOTE_USER . "@" . $rows[DataSyncServeurModel::KEYNAME];
+    $$MAP = $REMOTE_USER . "@" . $rows["ip_datasync_serveur"];
 }
 
 //Lancement du script
@@ -140,13 +181,6 @@ switch ($argument_1) {
             ($FREQUENCE = 2);
         }
 
-    case "--virus":
-    case "-v":
-    case "3":
-        //Frequence de groupe 3 (Antivirus)
-        if (!$FREQUENCE) {
-            ($FREQUENCE = 3);
-        }
 
 //Montage des systèmes de fichier Netware (ncpfs)
 //`/data/etc/init.d/ncpmanager.sh restart`;
@@ -182,25 +216,30 @@ switch ($argument_1) {
         }
         //Construction des commandes de copie
         //$req="SELECT * FROM sync_transfert WHERE frequence_synchronisation=$FREQUENCE";
-        $req = "SELECT " . DataSyncTransfertModel::FIELDNAME_NOM_DATASYNC_SERVEUR_DESTINATION
-                . "," . DataSyncTransfertModel::FIELDNAME_NOM_DATASYNC_SERVEUR_ORIGINE
-                . "," . DataSyncTransfertModel::FIELDNAME_NOM_FICHIER              
-                . "," . DataSyncTransfertModel::FIELDNAME_COPIE_SAUVEGARDE              
-                . " FROM " . DataSyncTransfertModel::TABLENAME . ", " . DataSyncServeurModel::TABLENAME . " AS ORIGINE, "
-                . DataSyncServeurModel::TABLENAME . " AS DEST"
-                . " WHERE " . DataSyncTransfertModel::FIELDNAME_FREQUENCE_SYNCHRONISATION . "=" . $FREQUENCE
-                . " AND ORIGINE." . DataSyncServeurModel::FIELDNAME_NOM_DATASYNC_SERVEUR . " = " . DataSyncTransfertModel::FIELDNAME_NOM_DATASYNC_SERVEUR_ORIGINE
-                . " AND DEST." . DataSyncServeurModel::FIELDNAME_NOM_DATASYNC_SERVEUR . " = " . DataSyncTransfertModel::FIELDNAME_NOM_DATASYNC_SERVEUR_DESTINATION
-                . " AND ORIGINE." . DataSyncServeurModel::FIELDNAME_ACTIVE_DATASYNC_SERVEUR . " =" . DataSyncServeurModel::ACTIVE_DATASYNC_SERVEUR_TRUE
-                . " AND DEST." . DataSyncServeurModel::FIELDNAME_ACTIVE_DATASYNC_SERVEUR . " =" . DataSyncServeurModel::ACTIVE_DATASYNC_SERVEUR_TRUE
+        $req = "SELECT nom_datasync_serveur_destination"
+                . ",nom_datasync_serveur_origine"
+                . ",nom_fichier"
+                . ",copie_sauvegarde"
+                . " FROM datasync_transfert, datasync_serveur AS ORIGINE, "
+                . "datasync_serveur AS DEST"
+                . " WHERE frequence_synchronisation=" . $FREQUENCE
+                . " AND ORIGINE.nom_datasync_serveur = nom_datasync_serveur_origine"
+                . " AND DEST.nom_datasync_serveur = nom_datasync_serveur_destination"
+                . " AND ORIGINE.active_datasync_serveur =1"
+                . " AND DEST.active_datasync_serveur =1"
 
         ;
-        $sqlResult = DatabaseOperation::queryPDO($req);
-        $num = DatabaseOperation::getSqlNumRows($sqlResult);
+        $sqlResult = $bdd->query($req);
+        if ($sqlResult) {
+            $array = $sqlResult->fetchAll("2");
+            $sqlResult->closeCursor();
+        }
+
+        $num = $sqlResult->rowCount();
+
 
         $CMD .="echo 'Nombre de dossier(s) à mettre à jour: " . $num . "'\necho \n";
 
-        $array = DatabaseOperation::convertSqlStatementWithoutKeyToArray($req);
 
         foreach ($array as $rows1) {
             $MAP_ORIGINE = "MAP_" . $rows1["nom_datasync_serveur_origine"];
@@ -208,33 +247,13 @@ switch ($argument_1) {
             $COMPLETE_FILE = $rows1["nom_fichier"];
             $PATH = pathinfo($COMPLETE_FILE);
             $DIR = $PATH["dirname"];
-            $EXTENSION = $PATH["extension"];
+            $check = array_key_exists("extension", $PATH);
+            if ($check) {
+                $EXTENSION = $PATH["extension"];
+            }
             $FILE = basename($PATH["basename"], $EXTENSION);
             $ENABLE_COPY = 1;
             $ENABLE_ARCHIVE = $rows1["copie_sauvegarde"];  //Non implémenté sur Samba
-            //Pour les fichiers Access, il est necessaire de vérifier si les bases ne sont pas ouvertes
-            if (strtoupper($EXTENSION) == "MDB") {
-
-                //Test de l'existance d'un vérrou
-                $FILE_LOCK = $$MAP_DESTINATION . $DIR . "/" . $FILE . "ldb";
-                if (file_exists($FILE_LOCK)) {
-                    $ENABLE_COPY = 0;
-                    $mail_to = $MAIL_TO;
-                    $mail_from = "<linux@agis.fr>";
-                    $mail_subject = "Intranet Datasync";
-                    $mail_message = "Impossible de mettre à jour le fichier:$RC"
-                            . $$MAP_DESTINATION . $COMPLETE_FILE
-                            . "$RC" . "Un verrou de type '.ldb' était présent lors de la tentative de copie à la date suivante:$RC"
-                            . date("F j, Y, g:i a")
-                            . "."
-                    ;
-                    //Envoi du mail
-                    envoismail($mail_subject, $mail_message, $mail_to, $mail_from);
-
-                    //Enregistrement dans le Log
-                    $CMD .="echo [ERREUR]: Copie Annulée car le Fichier " . $$MAP_DESTINATION . $COMPLETE_FILE . " est Ouvert\n";
-                }
-            }
             if ($ENABLE_COPY) {
                 //Suppression du fichier si ce n'est pas un répertoire
                 if (!$EXTENSION) {
@@ -245,20 +264,12 @@ switch ($argument_1) {
                     $TMP = "tmp";
                     $REP_CONTENT = "";
                 }
-                //$CMD.=$RM." ".$$MAP_DESTINATION.$COMPLETE_FILE.$REP_CONTENT."\n";
-                //$CMD.= $CP." ".$$MAP_ORIGINE.$COMPLETE_FILE." ".$$MAP_DESTINATION.$DIR.$DIR_BACKUP."/".$FILE.$TMP.$RC;
-                //$CMD.= $CP." ".$$MAP_ORIGINE.$COMPLETE_FILE.$REP_CONTENT." ".$$MAP_DESTINATION.$COMPLETE_FILE.$RC;
-                //$CMD.= $MV." ".$$MAP_DESTINATION.$DIR.$DIR_BACKUP."/".$FILE.$TMP.$REP_CONTENT." ".$$MAP_DESTINATION.$COMPLETE_FILE."$RC";
                 $CMD.= $SSH . " " . $$MAP_ORIGINE . " " . $RSYNC . " " . $MAP_ROOT_SMB . $COMPLETE_FILE . " " . $$MAP_DESTINATION . ":" . $MAP_ROOT_SMB . $DIR . $RC;
-
-                //Utile si il reste des résidus
-                //$CMD.= $RM." ".$$MAP_DESTINATION.$DIR.$DIR_BACKUP."/".$FILE.$TMP.$RC;
             }
 
             //Archivage distant de secours
             if ($ENABLE_ARCHIVE) {
                 //Si l'élément à sauvegarde est un répertoire
-                //if(is_dir($$MAP_ORIGINE.$COMPLETE_FILE)) (cette commande ne marche pas pour des fichiers distant
                 if (!$EXTENSION) {
                     $EXTENSION_BACKUP_COMPRESS = $EXTENSION_BACKUP . "." . $EXTENSION_COMPRESS;
                     $ENABLE_TAR = 1;
@@ -295,14 +306,11 @@ switch ($argument_1) {
         }
 
 
-        //Déconnexion des serveurs Netware
-        $CMD .=$CMD_FIN;
 
         //Utile lorsqu'on lance le script depuis la console
-        //echo $CMD;
         //Création du script ou excution direct des commandes shell
-        if ($mode) {
-            $buffer = fopen($SCRIPTNAME, w);
+        if ($paramMode) {
+            $buffer = fopen($SCRIPTNAME, "w");
             fwrite($buffer, $CMD);
             `chmod +x $SCRIPTNAME`;
         } else {

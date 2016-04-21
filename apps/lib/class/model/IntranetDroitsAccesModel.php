@@ -579,4 +579,179 @@ class IntranetDroitsAccesModel extends AbstractModel {
         return $isIdUserHaveRightsOnSiteProd;
     }
 
+    /**
+     * Affiche le tableau de récapitulatif des droits d'accès sur le module Fta
+     * @return string
+     */
+    public static function getHtmlArrayAccesRightUser() {
+
+        /**
+         * Entête du tableau
+         */
+        $bloc.= "<" . "table " . "border=1 " . "width=100% " . "class=contenu " . ">"
+                . "<th>" . "Utilisateurs" . "</th><th>" . "Accès général" . "</th><th>" . "Diffusion" . "</th><th>" . "Impression" . "</th><th>" . "Espace de travail" . "</th>";
+
+//lister les utilisateurs concernés
+
+        $arrayUser = self::getArrayUserWithAccesRightsToFta();
+        foreach ($arrayUser as $rowsUser) {
+            $lienWorkflow = "";
+            $listeRole = "";
+            $virgule = "";
+            $virgule2 = "";
+            //Tableau des id intranet actions Fta
+            $arrayAction = self::getArrayIdIntranetActionWithAccesRightsToFtaByUser($rowsUser[UserModel::KEYNAME]);
+
+
+            $bloc.= "<tr class=contenu><td>"
+                    . $rowsUser[UserModel::FIELDNAME_PRENOM] . " " . $rowsUser[UserModel::FIELDNAME_NOM]
+                    . "</td>"
+            ;
+            /**
+             * Vérification des droits d'accès généraux
+             */
+            $checkModification = FtaController::isValueInArray(IntranetNiveauAccesModel::NIVEAU_FTA_MODIFICATION, $arrayAction);
+            $checkConsultation = FtaController::isValueInArray(IntranetNiveauAccesModel::NIVEAU_FTA_CONSULTATION, $arrayAction);
+            $checkDiffusion = FtaController::isValueInArray(IntranetNiveauAccesModel::NIVEAU_FTA_DIFFUSION, $arrayAction);
+            $checkImpression = FtaController::isValueInArray(IntranetNiveauAccesModel::NIVEAU_FTA_IMPRESSION, $arrayAction);
+
+            /**
+             * Si accès Fta Modif
+             */
+            if ($checkModification) {
+                $accesGeneralValue = "Modification";
+                $diffusion = "Voir espaces de Travail";
+                /**
+                 * Identification des Id intranet action workflow
+                 */
+                $arrayIdIntranetParents = DatabaseOperation::convertSqlStatementWithoutKeyToArrayComplete(
+                                " SELECT " . IntranetActionsModel::KEYNAME
+                                . " FROM  " . IntranetActionsModel::TABLENAME
+                                . " WHERE " . IntranetActionsModel::FIELDNAME_TAG_INTRANET_ACTIONS . "='" . IntranetActionsModel::VALUE_WORKFLOW . "' "
+                );
+
+                $arrayIdActionWorkflow = array_intersect($arrayIdIntranetParents, $arrayAction);
+
+                if ($arrayIdActionWorkflow) {
+                    foreach ($arrayIdActionWorkflow as $rowsIdActionWorkflow) {
+                        $listeRole = "";
+                        $virgule2 = "";
+                        /**
+                         * Identification du workflow
+                         */
+                        $arrayIdIntranetParents = DatabaseOperation::convertSqlStatementWithoutKeyToArrayComplete(
+                                        " SELECT " . FtaWorkflowModel::FIELDNAME_DESCRIPTION_FTA_WORKFLOW
+                                        . " FROM  " . FtaWorkflowModel::TABLENAME
+                                        . " WHERE " . FtaWorkflowModel::FIELDNAME_ID_INTRANET_ACTIONS . "=" . $rowsIdActionWorkflow
+                        );
+                        /**
+                         * Identification des Id intranet action  role du workflow
+                         */
+                        $arrayIdIntranetRole = DatabaseOperation::convertSqlStatementWithoutKeyToArrayComplete(
+                                        " SELECT " . IntranetActionsModel::KEYNAME
+                                        . " FROM  " . IntranetActionsModel::TABLENAME
+                                        . " WHERE " . IntranetActionsModel::FIELDNAME_TAG_INTRANET_ACTIONS . "='" . IntranetActionsModel::VALUE_ROLE . "' "
+                                        . " AND " . IntranetActionsModel::FIELDNAME_PARENT_INTRANET_ACTIONS . "=" . $rowsIdActionWorkflow
+                        );
+                        $arrayIdActionRole = array_intersect($arrayIdIntranetRole, $arrayAction);
+                        if ($arrayIdActionRole) {
+                            foreach ($arrayIdActionRole as $rowsIdActionRole) {
+                                /**
+                                 * Liste des rôles attribué pour le workflow
+                                 */
+                                $arrayRole = DatabaseOperation::convertSqlStatementWithoutKeyToArrayComplete(
+                                                " SELECT " . FtaRoleModel::FIELDNAME_DESCRIPTION_FTA_ROLE
+                                                . " FROM  " . FtaRoleModel::TABLENAME . "," . FtaActionRoleModel::TABLENAME
+                                                . " WHERE " . FtaActionRoleModel::FIELDNAME_ID_INTRANET_ACTIONS . "=" . $rowsIdActionRole
+                                                . " AND " . FtaRoleModel::TABLENAME . "." . FtaRoleModel::KEYNAME . "=" . FtaActionRoleModel::TABLENAME . "." . FtaActionRoleModel::FIELDNAME_ID_FTA_ROLE
+                                );
+                                $listeRole .= $virgule2 . $arrayRole["0"];
+                                $virgule2 = ", ";
+                            }
+                        }
+                        $lienWorkflow .= $virgule . "<span title=\" " . $listeRole . " \" >" . $arrayIdIntranetParents["0"] . "</span>";
+                        $virgule = ", ";
+                    }
+                }
+                /**
+                 * Si accès Fta Consultation
+                 */
+            } elseif ($checkConsultation) {
+                $accesGeneralValue = "Consultation";
+                /**
+                 * Droits de difussion
+                 */
+                if ($checkDiffusion) {
+                    $geoModel = new GeoModel($rowsUser[UserModel::FIELDNAME_LIEU_GEO]);
+                    $diffusion = $geoModel->getDataField(GeoModel::FIELDNAME_GEO)->getFieldValue();
+                } else {
+                    $diffusion = "Non";
+                }
+                /**
+                 * Droits de difussion
+                 */
+            } else {
+                $accesGeneralValue = "Non";
+                if ($checkDiffusion) {
+                    $geoModel = new GeoModel($rowsUser[UserModel::FIELDNAME_LIEU_GEO]);
+                    $diffusion = $geoModel->getDataField(GeoModel::FIELDNAME_GEO)->getFieldValue();
+                } else {
+                    $diffusion = "Non";
+                }
+            }
+            /**
+             * Droits d'impression
+             */
+            if ($checkImpression) {
+                $impression = "Oui";
+            } else {
+                $impression = "Non";
+            }
+            $bloc.="<td>" . $accesGeneralValue . "</td>"
+                    . "<td>" . $diffusion . "</td>"
+                    . "<td>" . $impression . "</td>"
+                    . "<td>" . $lienWorkflow . "</td></tr>"
+            ;
+        }
+
+        return $bloc;
+    }
+
+    /**
+     * On récupère le tableau des utilisateurs par l'id, le nom, prenom, lieu géographique ayant accès aux module FTA
+     * @return array
+     */
+    public static function getArrayUserWithAccesRightsToFta() {
+        $array = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
+                        "SELECT DISTINCT " . UserModel::TABLENAME . "." . UserModel::KEYNAME
+                        . "," . UserModel::FIELDNAME_NOM
+                        . "," . UserModel::FIELDNAME_PRENOM
+                        . "," . UserModel::FIELDNAME_LIEU_GEO
+                        . " FROM " . IntranetDroitsAccesModel::TABLENAME . ", " . UserModel::TABLENAME
+                        . " WHERE " . IntranetDroitsAccesModel::TABLENAME . "." . IntranetDroitsAccesModel::FIELDNAME_ID_USER . " = " . UserModel::TABLENAME . "." . UserModel::KEYNAME                              //Liaison
+                        . " AND " . IntranetDroitsAccesModel::TABLENAME . "." . IntranetDroitsAccesModel::FIELDNAME_ID_INTRANET_MODULES . " = '" . IntranetModulesModel::ID_MODULES_FTA . "' "   //liaison
+                        . " AND " . IntranetDroitsAccesModel::TABLENAME . "." . IntranetDroitsAccesModel::FIELDNAME_NIVEAU_INTRANET_DROITS_ACCES . " <>'" . IntranetNiveauAccesModel::NIVEAU_GENERIC_FALSE . "'"
+                        . " AND " . UserModel::TABLENAME . "." . UserModel::FIELDNAME_ACTIF . " = '" . UserModel::USER_ACTIF
+                        . "' ORDER BY " . UserModel::FIELDNAME_NOM . "," . UserModel::FIELDNAME_PRENOM
+        );
+
+        return $array;
+    }
+
+    /**
+     * On récupère le tableau la liste des id intranet Action  ayant accès aux module FTA par utilsateur
+     * @return array
+     */
+    public static function getArrayIdIntranetActionWithAccesRightsToFtaByUser($paramIdUser) {
+        $arrayAction = DatabaseOperation::convertSqlStatementWithoutKeyToArrayComplete(
+                        "SELECT DISTINCT " . IntranetDroitsAccesModel::FIELDNAME_ID_INTRANET_ACTIONS
+                        . " FROM " . IntranetDroitsAccesModel::TABLENAME
+                        . " WHERE " . IntranetDroitsAccesModel::TABLENAME . "." . IntranetDroitsAccesModel::FIELDNAME_ID_USER . " = " . $paramIdUser                          //Liaison
+                        . " AND " . IntranetDroitsAccesModel::TABLENAME . "." . IntranetDroitsAccesModel::FIELDNAME_ID_INTRANET_MODULES . " = '" . IntranetModulesModel::ID_MODULES_FTA . "' "   //liaison
+                        . " AND " . IntranetDroitsAccesModel::TABLENAME . "." . IntranetDroitsAccesModel::FIELDNAME_NIVEAU_INTRANET_DROITS_ACCES . " <>'" . IntranetNiveauAccesModel::NIVEAU_GENERIC_FALSE . "'"
+        );
+
+        return $arrayAction;
+    }
+
 }

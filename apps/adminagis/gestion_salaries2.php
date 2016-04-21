@@ -7,6 +7,7 @@ $globalConfig = new GlobalConfig();
 $login = $globalConfig->getAuthenticatedUser()->getKeyValue();
 $pass = $globalConfig->getAuthenticatedUser()->getDataField(UserModel::FIELDNAME_PASSWORD)->getFieldValue();
 $id_type = $globalConfig->getAuthenticatedUser()->getDataField(UserModel::FIELDNAME_ID_TYPE)->getFieldValue();
+$mail = $globalConfig->getAuthenticatedUser()->getDataField(UserModel::FIELDNAME_MAIL)->getFieldValue();
 
 
 $paramUserLogin = Lib::getParameterFromRequest('sal_login');
@@ -75,12 +76,18 @@ if ($paramValider == 'valider') {
                         . ' FROM ' . UserModel::TABLENAME
                         . ' WHERE ' . UserModel::FIELDNAME_LOGIN . '=\'' . $paramUserLogin . '\' ');
 
-        if (!$arrayIdUser)
+        if (!$arrayIdUser) {
             echo ('La requete de recherche de l\'ID salarie a echoue');
-        else {
+        } elseif (count($arrayIdUser) == "1") {
             foreach ($arrayIdUser as $rowsIdUser) {
                 $idUser = $rowsIdUser[UserModel::KEYNAME];
             }
+        } else {
+            $titre = ' L\'insertion du salarié ' . $paramUserNom . ' ' . $paramUserPrenom;
+            $message = 'L\'insertion dans la table SALARIES a reussie mais le login ' . $paramUserLogin . ' est utilisé'
+                    . ' Ainsi les droits d\'accès n\'ont pas été tenu compte';
+            $redirection = '';
+            afficher_message($titre, $message, $redirection);
         }
 
         /*         * ******************************************
@@ -128,6 +135,7 @@ if ($paramValider == 'valider') {
     $arrayUserDetail = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
                     'SELECT ' . UserModel::FIELDNAME_ECRITURE
                     . ', ' . UserModel::FIELDNAME_ID_CATSOPRO
+                    . ', ' . UserModel::FIELDNAME_LOGIN
                     . ', ' . UserModel::FIELDNAME_ID_SERVICE
                     . ', ' . UserModel::FIELDNAME_LIEU_GEO
                     . ', ' . UserModel::FIELDNAME_MAIL
@@ -214,12 +222,9 @@ if ($paramValider == 'valider') {
  * Quand un salarie est cree, envoi d'un mail pour lui donner son profil
  */
 $sujet = 'Inscription Intranet Agis';
-$corpsmail = 'Bonjour,<br> '
-        . 'Votre profil vient d\'être créé dans l\'intranet AGIS.<br>'
-        . 'Votre login est : ' . $paramUserLogin . '<br>'
-        . '<br>L\'administrateur Agis.<br>';
+$corpsmail = UserInterfaceMessage::FR_MAIIL_INSCRIPTION;
 $typeMail = 'Inscription';
-envoismail($sujet, $corpsmail, $paramUserMail, 'postmaster@agis-sa.fr', $typeMail);
+envoismail($sujet, $corpsmail, $paramUserMail, $mail, $typeMail);
 ?>
 <html>
     <head>
@@ -283,7 +288,7 @@ envoismail($sujet, $corpsmail, $paramUserMail, 'postmaster@agis-sa.fr', $typeMai
                                                 <td class='loginFFCC66droit' width='33%'><b>Login :<b></td>
                                                             <td class='loginFFCC66' width='53%'>
                                                                 <?php
-                                                                echo ($paramUserLogin);
+                                                                echo $paramUserLogin;
                                                                 ?>
                                                             </td>
                                                             <td width='15%' class='loginFFCC66'>&nbsp;</td>
@@ -309,7 +314,7 @@ envoismail($sujet, $corpsmail, $paramUserMail, 'postmaster@agis-sa.fr', $typeMai
                                                                 <td class='loginFFCC66droit' width='33%'><b>Mail :</b></td>
                                                                 <td class='loginFFCC66' width='53%'>
                                                                     <?php
-                                                                    echo ($paramUserMail);
+                                                                    echo $paramUserMail;
                                                                     ?>
                                                                 </td>
                                                                 <td width='15%'>&nbsp; </td>

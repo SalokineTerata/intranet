@@ -177,6 +177,14 @@ if ($idFta) {
         if ($idFtaRole == FtaRoleModel::ID_FTA_ROLE_COMMUN) {
             $arrayIdFtaRoleAcces = FtaRoleModel::getArrayIdFtaRoleByIdUserAndWorkflow($idUser, $idWorkflowFtaEncours);
             $idFtaRole = $arrayIdFtaRoleAcces["0"];
+            if (!$arrayIdFtaRoleAcces and $idFtaEtat == FtaEtatModel::ID_VALUE_MODIFICATION) {
+                $titre = UserInterfaceMessage::FR_WARNING_ACCES_RIGHTS_TITLE;
+                $message = UserInterfaceMessage::FR_WARNING_ACCES_RIGHTS_WORKFLOW;
+                $redirection = "index.php";
+                afficher_message($titre, $message, $redirection);
+            } elseif (!$arrayIdFtaRoleAcces) {
+                $idFtaRole = FtaRoleModel::ID_FTA_ROLE_COMMUN;
+            }
         }
     }
 

@@ -45,6 +45,9 @@ class UserInterfaceMessage {
     const FR_LAST_50_FTA = "Consultation des dernières FTA";
     const FR_LOGIN_PROCESS_ACCOUNT_LOCKED = "Votre compte est bloqué suite à trois tentatives ratées.<br><br>Contactez un Administrateur pour réactiver votre compte.<br>";
     const FR_NONE_FTA = "Aucune Fta identifiée.<br><br>";
+    const FR_MAIIL_INSCRIPTION = "Bonjour,<br> Votre accès à l'Intranet est maintenant créé.<br> 
+            Pour vous authentifier, utilisez le même identifiant et le même mot de passe que ceux utilisés pour ouvrir votre session Windows.<br>
+        Pour tout complément d'information, n'hésitez pas à contacter votre service Informatique.<br>";
     const FR_SESSION_EXPIRED = "Erreur, la session précédement connecté à expirer.<br>Veuillez vous reconnecter.<br>";
     const FR_SESSION_EXPIRED_TITLE = "Déconnexion";
     const FR_TRANSITION_FTA = " La transition de l'état d'une fiche permet de changer son état tout en laissant le système contrôler la cohérence et la version de la fiche.<br>
@@ -67,6 +70,7 @@ class UserInterfaceMessage {
                     En effet, il est encore utilisé dans certaines Fiches Techniques Articles.<br><br>
                     <b><u><i>Liste des modèles:</b></u></i><br>";
     const FR_WARNING_ACCES_RIGHTS_ROLES = "Erreur, vous n'avez aucun droits d'accès Rôles sur le module Fta.<br><br>Veuillez vous déconnecter et contactez l'administrateur de l'intranet";
+    const FR_WARNING_ACCES_RIGHTS_WORKFLOW = "Erreur, vous n'avez aucun droits d'accès sur cette Espace de trvail.";
     const FR_WARNING_ACCES_RIGHTS = "Vous n'avez pas les droits d'accès nécessaire.<br><br>";
     const FR_WARNING_ACCES_RIGHTS_TITLE = "Erreur d'accès";
     const FR_WARNING_CHAPITRES = " Veuillez selectionner un chapitre<br>";

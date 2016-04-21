@@ -146,8 +146,9 @@ foreach ($arrayDossier as $rowsDossier) {
                     . ' AND ( 0 ' . IntranetActionsModel::addIdIntranetAction($_SESSION[Acl::ACL_INTRANET_ACTIONS_VALIDE]) . ")"
                     . " AND " . IntranetDroitsAccesModel::FIELDNAME_NIVEAU_INTRANET_DROITS_ACCES . "=" . IntranetNiveauAccesModel::NIVEAU_GENERIC_TRUE
                     . " AND " . IntranetDroitsAccesModel::FIELDNAME_ID_USER . "=" . $idUser
-                    . " GROUP BY " . FtaModel::FIELDNAME_DOSSIER_FTA
+                    
     );
+
 
     if ($arrayContenu) {
         foreach ($arrayContenu as $rowsContenu) {

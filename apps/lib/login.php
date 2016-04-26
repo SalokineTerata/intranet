@@ -114,7 +114,7 @@ if ($login) {
 
                         /* envois du mail d'information à l'utilisateur concerné */
                         $corpsmail = 'Votre compte ' . $login . ' de l\'intranet Agis a été bloqué à ' . date("H:m:s") . ' le ' . date("d/m/Y") . ' suite à trois tentatives de connexion avec un mot de passe invalide.
-                                      Contactez un Administrateur pour réactiver votre compte.';
+Contactez un Administrateur pour réactiver votre compte.';
 
                         $arrayMailAdmin = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
                                         'SELECT ' . UserModel::FIELDNAME_MAIL
@@ -122,7 +122,7 @@ if ($login) {
                                         . ' WHERE ' . UserModel::FIELDNAME_ID_TYPE . ' =4'
                                         . ' AND ' . UserModel::FIELDNAME_ACTIF . ' =\'' . UserModel::USER_ACTIF . '\'');
                         foreach ($arrayMailAdmin as $rowsmail) {
-                            $corpsmail.=' - ' . $rowsmail[UserModel::FIELDNAME_MAIL] . ' <br>';
+                            $corpsmail.=' - ' . $rowsmail[UserModel::FIELDNAME_MAIL] ;
                         }
 
                         $adrfrom = 'postmaster@agis-sa.fr';

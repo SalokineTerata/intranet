@@ -51,7 +51,7 @@ if (!FtaRoleModel::isGestionnaire($idFtaRole)) {
     $titre = UserInterfaceMessage::FR_WARNING_ACCES_RIGHTS_TITLE;
     $message = UserInterfaceMessage::FR_WARNING_ACCES_RIGHTS;
     $redirection = "index.php";
-    afficher_message($titre, $message, $redirection, TRUE);
+    Lib::showMessage($titre, $message, $redirection, TRUE);
 }
 
 $bloc .= "<" . $html_table . "><tr class=titre>"

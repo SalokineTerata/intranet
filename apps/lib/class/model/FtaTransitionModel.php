@@ -106,7 +106,7 @@ class FtaTransitionModel {
                     $titre = "Action vérrouillée";
                     $message = "Cette fiche est déjà en cours de modification.";
                     $redirection = "";
-                    afficher_message($titre, $message, $redirection);
+                    Lib::showMessage($titre, $message, $redirection);
                     $return["0"] = "1";
                     return $return;
                     exit;
@@ -443,7 +443,7 @@ class FtaTransitionModel {
                         . "</pre>"
                 ;
                 $redirection = "";
-                afficher_message($titre, $message, $redirection);
+                Lib::showMessage($titre, $message, $redirection);
                 $return = 0;
             }
             $return["log"] = $logTransition;

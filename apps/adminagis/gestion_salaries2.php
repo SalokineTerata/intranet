@@ -65,7 +65,7 @@ if ($paramValider == 'valider') {
             $titre = ' L\'insertion du salarié ' . $paramUserNom . ' ' . $paramUserPrenom;
             $message = 'L\'insertion dans la table SALARIES n\'a pas reussie';
             $redirection = '';
-            afficher_message($titre, $message, $redirection);
+            Lib::showMessage($titre, $message, $redirection);
         }
         /*
          * Recherche de l'id du nouveau salarie
@@ -87,7 +87,7 @@ if ($paramValider == 'valider') {
             $message = 'L\'insertion dans la table SALARIES a reussie mais le login ' . $paramUserLogin . ' est utilisé'
                     . ' Ainsi les droits d\'accès n\'ont pas été tenu compte';
             $redirection = '';
-            afficher_message($titre, $message, $redirection);
+            Lib::showMessage($titre, $message, $redirection);
         }
 
         /*         * ******************************************
@@ -189,7 +189,7 @@ if ($paramValider == 'valider') {
         $titre = '  Recherche des niveaux de references dans la table CATSOPRO pour l\'identifiant ' . $paramUserCatsopro;
         $message = 'La requete de recherche des niveaux de reference a échoué';
         $redirection = '';
-        afficher_message($titre, $message, $redirection);
+        Lib::showMessage($titre, $message, $redirection);
     }
 
     /* Insertions dans la table MODES via la table de reference CATSOPRO */

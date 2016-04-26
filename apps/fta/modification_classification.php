@@ -53,7 +53,7 @@ if (!FtaRoleModel::isGestionnaire($idFtaRole)) {
     $titre = UserInterfaceMessage::FR_WARNING_ACCES_RIGHTS_TITLE;
     $message = UserInterfaceMessage::FR_WARNING_ACCES_RIGHTS;
     $redirection = "index.php";
-    afficher_message($titre, $message, $redirection, TRUE);
+    Lib::showMessage($titre, $message, $redirection, TRUE);
 }
 
 $bloc .= "<" . $html_table . "><tr class=titre>"
@@ -153,7 +153,7 @@ foreach ($arrayDossier as $rowsDossier) {
                     . ' AND ( 0 ' . IntranetActionsModel::addIdIntranetAction($_SESSION[Acl::ACL_INTRANET_ACTIONS_VALIDE]) . ")"
                     . " AND " . IntranetDroitsAccesModel::FIELDNAME_NIVEAU_INTRANET_DROITS_ACCES . "=" . IntranetNiveauAccesModel::NIVEAU_GENERIC_TRUE
                     . " AND " . IntranetDroitsAccesModel::FIELDNAME_ID_USER . "=" . $idUser
-                    . " GROUP BY " . FtaModel::FIELDNAME_DOSSIER_FTA
+                   
     );
 
     if ($arrayContenu) {

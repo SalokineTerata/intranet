@@ -47,7 +47,7 @@ if (!$fta_consultation) {
     $message = UserInterfaceMessage::FR_WARNING_ACCES_RIGHTS
             . " Veuillez vous déconnecter et contactez l'administrateur de l'intranet";
     $redirection = "index.php";
-    afficher_message($titre, $message, $redirection, TRUE);
+    Lib::showMessage($titre, $message, $redirection, TRUE);
 }
 /*
   Initialisation des variables

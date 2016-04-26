@@ -595,7 +595,7 @@ class ClassificationFta2Model extends AbstractModel {
             $message = UserInterfaceMessage::FR_WARNING_CLASSIFICATION_DELETE
                     . $liste
             ;
-            afficher_message($titre, $message, $redirection);
+            Lib::showMessage($titre, $message, $redirection);
         }
     }
 

@@ -47,19 +47,19 @@ if ($idFtaWorkflow == FtaWorkflowModel::ID_FTA_WORKFLOW_NON_DEFINI) {
     //Averissement
     $titre = UserInterfaceMessage::FR_WARNING_DATA_ESPACE_DE_TRAVAIL_TITLE;
     $message = UserInterfaceMessage::FR_WARNING_DATA_ESPACE_DE_TRAVAIL;
-    afficher_message($titre, $message, $redirection);
+    Lib::showMessage($titre, $message, $redirection);
 }
 if ($siteDeProduction == GeoModel::ID_SITE_NON_DEFINIE) {
     //Averissement
     $titre = UserInterfaceMessage::FR_WARNING_DATA_SITE_DE_PRODUCTION_TITLE;
     $message = UserInterfaceMessage::FR_WARNING_DATA_SITE_DE_PRODUCTION;
-    afficher_message($titre, $message, $redirection);
+    Lib::showMessage($titre, $message, $redirection);
 }
 if (!$designationCommercialeFta) {
     //Averissement
     $titre = UserInterfaceMessage::FR_WARNING_DATA_DESIGNATION_COMMERCIALE_TITLE;
     $message = UserInterfaceMessage::FR_WARNING_DATA_DESIGNATION_COMMERCIALE;
-    afficher_message($titre, $message, $redirection);
+    Lib::showMessage($titre, $message, $redirection);
 }
 
 If ($idFtaWorkflow == '2' and $idFtaRole == FtaRoleModel::ID_FTA_ROLE_CHEF_DE_PROJET) {
@@ -194,7 +194,7 @@ switch ($action) {
             $titre = "Manque de donnée id_fta";
             $message = "Veuillez saisir un id_fta existant à dupliquer .<br><br>"
             ;
-            afficher_message($titre, $message, $redirection);
+            Lib::showMessage($titre, $message, $redirection);
         }
         if ($arrayFta) {
             //Redirection
@@ -209,7 +209,7 @@ switch ($action) {
             //Averissement
             $titre = UserInterfaceMessage::FR_WARNING_DATA_ID_FTA_TITLE;
             $message = UserInterfaceMessage::FR_WARNING_DATA_ID_FTA;
-            afficher_message($titre, $message, $redirection);
+            Lib::showMessage($titre, $message, $redirection);
         }
         break;
 

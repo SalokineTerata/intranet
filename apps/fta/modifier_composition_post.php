@@ -84,7 +84,7 @@ if ($mode_etiquette_fta_composition == AnnexeModeEtiquetteModel::PAS_DETIQUETTE)
 } elseif ($mode_etiquette_fta_composition == AnnexeModeEtiquetteModel::ETIQUETTE_PERSONALISE and empty($etiquette_duree_vie_fta_composition)) {
     $titre = UserInterfaceMessage::FR_WARNING_MISSING_DATA;
     $message = UserInterfaceMessage::FR_WARNING_DUREE_DE_VIE_COMPOSANT;
-    afficher_message($titre, $message, $redirection);
+    Lib::showMessage($titre, $message, $redirection);
 }
 /*
   -----------------

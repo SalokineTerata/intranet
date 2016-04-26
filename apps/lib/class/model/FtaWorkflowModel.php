@@ -85,7 +85,7 @@ class FtaWorkflowModel extends AbstractModel {
                 $titre = self::WORKFLOW_NON_ACTIF_TITLE;
                 $message = self::WORKFLOW_NON_ACTIF_1 . $nom . self::WORKFLOW_NON_ACTIF_2;
                 $redirection = "";
-                afficher_message($titre, $message, $redirection);
+                Lib::showMessage($titre, $message, $redirection);
             }
         }
     }

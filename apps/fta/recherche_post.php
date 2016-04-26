@@ -23,7 +23,7 @@ $recherche = Lib::getParameterFromRequest("recherche");
 if ($recherche == "0") {
     $message = UserInterfaceMessage::FR_WARNING_RECHERE . ModuleConfig::VALUE_MAX_PAR_PAGE;
     $redirection = "recherche.php";
-    afficher_message("Erreur", $message, $redirection);
+    Lib::showMessage("Erreur", $message, $redirection);
 }
 $type_recherche = Lib::getParameterFromRequest("type_recherche");
 
@@ -83,7 +83,7 @@ if (is_numeric($recherche)) {
     } else {
         $message = "Veuillez saisir un code article arcadia ou une Désignation interne";
         $redirection = "recherche.php";
-        afficher_message("Erreur", $message, $redirection);
+        Lib::showMessage("Erreur", $message, $redirection);
     }
 }
 header("Location: ./recherche.php?url_page_depart=(/" . $dossierUrL . "/apps/fta/recherche.php)&rechercheRapide=$recherche&nb_limite_resultat=1000&champ_recherche=$champ_recherche&operateur_recherche=$operateur_recherche&texte_recherche=$recherche&nbcol=1&nbligne=1&nb_col_courant=0&nb_ligne_courant=1&ajout_col=0&id_fta_role=$idFtaRole");

@@ -188,7 +188,7 @@ class Html {
                 break;
 
             default:
-                afficher_message("Erreur", "Type d'objet <b>" . $TypeOfHtmlObject . "</b> inconnu." . " Champs concerné:" . $paramDataField->getFieldName() . " ", $redirection);
+                Lib::showMessage("Erreur", "Type d'objet <b>" . $TypeOfHtmlObject . "</b> inconnu." . " Champs concerné:" . $paramDataField->getFieldName() . " ", $redirection);
 //                throw new Exception();
         }
 

@@ -94,13 +94,13 @@ class Navigation {
                 $titre = UserInterfaceMessage::FR_WARNING_PARAM_ID_FTA_TITLE;
                 $message = UserInterfaceMessage::FR_WARNING_PARAM_ID_FTA_NOT_EXISTANT;
                 $redirection = "index.php";
-                afficher_message($titre, $message, $redirection);
+                Lib::showMessage($titre, $message, $redirection);
             }
         } else {
             $titre = UserInterfaceMessage::FR_WARNING_PARAM_ID_FTA_TITLE;
             $message = UserInterfaceMessage::FR_WARNING_PARAM_ID_FTA;
             $redirection = "index.php";
-            afficher_message($titre, $message, $redirection);
+            Lib::showMessage($titre, $message, $redirection);
         }
         //Récupère la page en cours
         $arrayFtaEtatAndFta = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
@@ -736,7 +736,7 @@ class Navigation {
                     default: //Anomalie
                         $titre = 'Erreur Grave !';
                         $message = 'La fonction afficher_navigation() vient de trouver des doublons de validation des chapitres dans la table fta_suivi_projet';
-                        afficher_message($titre, $message, $redirection);
+                        Lib::showMessage($titre, $message, $redirection);
                         break;
                 }
             }//Fin du test public

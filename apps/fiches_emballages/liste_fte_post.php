@@ -63,7 +63,7 @@ switch ($action) {
             //Averissement
             $titre = UserInterfaceMessage::FR_WARNING_EMBALLAGE_SUPPRESION_TITLE;
             $message = UserInterfaceMessage::FR_WARNING_EMBALLAGE_SUPPRESION;
-            afficher_message($titre, $message, $redirection);
+            Lib::showMessage($titre, $message, $redirection);
         } else {
 
             //Suppression de la FTE

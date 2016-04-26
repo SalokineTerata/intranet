@@ -92,7 +92,7 @@ class HtmlListSelect extends AbstractHtmlList {
      * Retourne le code HTML pour présenter la liste en mode consultation
      */
     public function getHtmlViewedContent() {
-        if ($this->getSelectedValue()) {
+        if ($this->getSelectedValue() <> NULL) {
             $return = $this->getSelectedContent();
         } else {
             $return = self::LIST_NO_SELECTION_VALUE;

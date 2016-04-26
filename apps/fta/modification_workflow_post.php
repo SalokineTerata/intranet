@@ -121,7 +121,7 @@ switch ($action) {
         } else {
             $titre = UserInterfaceMessage::FR_WARNING_DATA_ESPACE_DE_TRAVAIL_TITLE;
             $message = UserInterfaceMessage::FR_WARNING_DATA_ESPACE_DE_TRAVAIL_CHANGEMENT;
-            afficher_message($titre, $message, $redirection);
+            Lib::showMessage($titre, $message, $redirection);
         }
 
         break;

@@ -84,7 +84,7 @@ switch ($action) {
                     . "<b><u><i>Liste des modèles:</b></u></i><br>"
                     . $liste
             ;
-            afficher_message($titre, $message, $redirection);
+            Lib::showMessage($titre, $message, $redirection);
         } else {
             //Supprimer le groupe
             $annexeEmbalalgeGroupeModel = new AnnexeEmballageGroupeModel($id_annexe_emballage_groupe);

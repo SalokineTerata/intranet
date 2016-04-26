@@ -403,7 +403,7 @@ class FtaModel extends AbstractModel {
         if ($return != "0") {
             $titre = self::MESSAGE_DATA_MISSING;
             $message = $this->getMessageErreurDataValidation();
-            afficher_message($titre, $message, $redirection);
+            Lib::showMessage($titre, $message, $redirection);
         }
 
         return $return;
@@ -952,14 +952,14 @@ class FtaModel extends AbstractModel {
             if (count($array) > 1) {
                 $titre = UserInterfaceMessage::FR_WARNING_NOT_HANDLE_TITLE;
                 $message = UserInterfaceMessage::FR_WARNING_EMBALLAGE_COLIS;
-                afficher_message($titre, $message, $redirection, TRUE);
+                Lib::showMessage($titre, $message, $redirection, TRUE);
             }
         }
         if ($paramGroupeType == AnnexeEmballageGroupeTypeModel::EMBALLAGE_PALETTE) {
             if (count($array) > 1) {
                 $titre = UserInterfaceMessage::FR_WARNING_NOT_HANDLE_TITLE;
                 $message = UserInterfaceMessage::FR_WARNING_EMBALLAGE_PALETTE;
-                afficher_message($titre, $message, $redirection, TRUE);
+                Lib::showMessage($titre, $message, $redirection, TRUE);
             }
         }
 
@@ -1651,6 +1651,7 @@ class FtaModel extends AbstractModel {
                         . ", " . FtaModel::FIELDNAME_EAN_PALETTE . "=" . "0"                                                                   //Suppression EAN Palette
                         . ", " . FtaModel::FIELDNAME_POURCENTAGE_AVANCEMENT . "=" . "\"0%\""                                                                   //Suppression EAN Palette
                         . ", " . FtaModel::FIELDNAME_CREATEUR . "=" . $idUser
+                        . ", " . FtaModel::FIELDNAME_LISTE_ID_FTA_ROLE . "=" . "NULL" 
                         . " WHERE " . FtaModel::KEYNAME . "=" . $idFtaNew
                 );
                 break;

@@ -245,7 +245,7 @@ class UserModel extends AbstractModel {
             $titre = UserInterfaceMessage::FR_SESSION_EXPIRED;
             $message = UserInterfaceMessage::FR_SESSION_EXPIRED_TITLE;
             $redirection = "index.php";
-            afficher_message($titre, $message, $redirection);
+            Lib::showMessage($titre, $message, $redirection);
         }
     }
 

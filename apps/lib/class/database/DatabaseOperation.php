@@ -780,7 +780,7 @@ class DatabaseOperation {
         $SetClause = '`' . $paramFieldName . '` =  ' . self::convertDataForQuery($paramFieldValue);
         $WhereClause = '`' . $paramTableName . '`.`' . $paramKeyName . '` =  \'' . $paramKeyValue . '\'';
 
-        Logger::AddDebug($SetClause, __METHOD__);
+//        Logger::AddDebug($SetClause, __METHOD__);
 
         DatabaseOperation::doSqlUpdate($TableClause, $SetClause, $WhereClause);
     }

@@ -671,17 +671,15 @@ class FtaView extends AbstractView {
         $htmlReturn = NULL;
         $idClassificationFta2 = $this->getModel()->getDataField(FtaModel::FIELDNAME_ID_FTA_CLASSIFICATION2)->getFieldValue();
         if ($idClassificationFta2) {
-
             /**
              * Enregistrement de la donnée catégorie produit optiventes
              */
-            if (!$this->getModel()->getDataField(FtaModel::FIELDNAME_ID_ARCADIA_CATEGEORIE_PRODUIT_OPTIVENTES)->getFieldValue()) {
-                $classificationFta2Model = new ClassificationFta2Model($idClassificationFta2);
-                $categorieProduitOptiventesValue = $classificationFta2Model->getDataField(ClassificationFta2Model::FIELDNAME_CATEGORIE_PRODUIT_OPTIVENTES)->getFieldValue();
-                $this->getModel()->getDataField(FtaModel::FIELDNAME_ID_ARCADIA_CATEGEORIE_PRODUIT_OPTIVENTES)->setFieldValue($categorieProduitOptiventesValue);
+            $classificationFta2Model = new ClassificationFta2Model($idClassificationFta2);
+            $categorieProduitOptiventesValue = $classificationFta2Model->getDataField(ClassificationFta2Model::FIELDNAME_CATEGORIE_PRODUIT_OPTIVENTES)->getFieldValue();
+            $this->getModel()->getDataField(FtaModel::FIELDNAME_ID_ARCADIA_CATEGEORIE_PRODUIT_OPTIVENTES)->setFieldValue($categorieProduitOptiventesValue);
 //                $this->getModel()->updateCategorieProduitOptivente($categorieProduitOptiventesValue);
-                $this->getModel()->saveToDatabase();
-            }
+            $this->getModel()->saveToDatabase();
+
             /**
              * Affichage Html
              */

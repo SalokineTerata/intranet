@@ -98,7 +98,7 @@ if (!$fta_consultation) {
                     $titre = UserInterfaceMessage::FR_WARNING_ACCES_RIGHTS_TITLE;
                     $message = UserInterfaceMessage::FR_WARNING_ACCES_RIGHTS_ROLES;
                     $redirection = "index.php";
-                    afficher_message($titre, $message, $redirection);
+                     Lib::showMessage($titre, $message, $redirection);
                 }
             } else {
                 $synthese_action = FtaEtatModel::ETAT_AVANCEMENT_VALUE_ALL;

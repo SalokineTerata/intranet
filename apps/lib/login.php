@@ -89,7 +89,7 @@ if ($login) {
         $titre = "Accès aux modules de l'Intranet";
         $message = "Veuillez saisir votre mot de passe.<br><br>"
         ;
-        afficher_message($titre, $message, $redirection);
+        Lib::showMessage($titre, $message, $redirection);
     }
 
     if (!identification1($mysql_table_authentification, $login, $pass, TRUE)) {
@@ -113,9 +113,9 @@ if ($login) {
                     if ($reponse != 1) {
 
                         /* envois du mail d'information à l'utilisateur concerné */
-                        $corpsmail = 'Votre compte pour l\'intranet Agis a été bloqué suite à trois tentatives de connexion <br>';
-                        $corpsmail.='avec un mot de passe invalide.<br>';
-                        $corpsmail.='Contactez un Administrateur pour réactiver votre compte.<br>';
+                        $corpsmail = 'Votre compte ' . $login . ' de l\'intranet Agis a été bloqué le ' . date("d/m/Y") . ' suite à trois tentatives de connexion \n';
+                        $corpsmail.='avec un mot de passe invalide.\n';
+                        $corpsmail.='Contactez un Administrateur pour réactiver votre compte.\n';
 
                         $arrayMailAdmin = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
                                         'SELECT ' . UserModel::FIELDNAME_MAIL
@@ -139,14 +139,14 @@ if ($login) {
                         //Averissement
                         $titre = "Accès aux modules de l'Intranet";
                         $message = UserInterfaceMessage::FR_LOGIN_PROCESS_ACCOUNT_LOCKED;
-                        afficher_message($titre, $message, $redirection);
+                        Lib::showMessage($titre, $message, $redirection);
                     }
                 } else {
                     $_SESSION['tentative'] = "0";
                     $titre = "Erreur d'identification ";
                     $message = "L'identifiant $login n'existe pas dans la base de données.<br><br>"
                     ;
-                    afficher_message($titre, $message, $redirection);
+                    Lib::showMessage($titre, $message, $redirection);
                 }
             } else {
                 $_SESSION['identite'] = $login;
@@ -173,7 +173,7 @@ if ($login) {
                 $titre = "Erreur d'identification ";
                 $message = "L'identifiant $login n'existe pas dans la base de données.<br><br>"
                 ;
-                afficher_message($titre, $message, $redirection);
+                Lib::showMessage($titre, $message, $redirection);
             }
         }
 
@@ -275,7 +275,7 @@ if ($login) {
             } else {
                 $message = UserInterfaceMessage::FR_WARNING_CONNEXION;
                 $titre = UserInterfaceMessage::FR_WARNING_CONNEXION_TITLE;
-                afficher_message($titre, $message, $redirection);
+                Lib::showMessage($titre, $message, $redirection);
             }
             header('Location: ' . $page);
         }

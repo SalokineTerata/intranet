@@ -281,7 +281,7 @@ switch (0) {
             $titre = "Envoi Réussi !";
             $message = "Votre mail à bien été envoyé à:<br>$adresse_to";
             $redirection = "";
-            afficher_message($titre, $message, $redirection);
+            Lib::showMessage($titre, $message, $redirection);
             //echo 'Mail sent!';
         }//echo $GLOBALS['smtp_ip'];
         break;

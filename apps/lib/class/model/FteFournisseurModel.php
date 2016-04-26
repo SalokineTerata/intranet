@@ -135,7 +135,7 @@ class FteFournisseurModel extends AbstractModel {
             $message = UserInterfaceMessage::FR_WARNING_FTE_FOURNISSEUR
                     . $liste
             ;
-            afficher_message($titre, $message, $redirection);
+            Lib::showMessage($titre, $message, $redirection);
         }
     }
 

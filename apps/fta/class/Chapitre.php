@@ -2618,7 +2618,9 @@ class Chapitre {
     protected static function buildHtmlSubmitButton() {
         $return = '';
         if (self::$is_editable == true and self::$is_data_validation_successful == TRUE) {
-            $return = '<input type=submit value=\'Confirmer\'  >';
+            $return = '<input type=submit value=\'Confirmer\'  >'
+                    . '<input type=hidden name=is_data_validation_successful  id=is_data_validation_successful value=' . "0" . '>'
+            ;
         }
         return $return;
     }

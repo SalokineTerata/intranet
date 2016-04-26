@@ -390,7 +390,7 @@ switch ($action) {
         if (count($tab_resultat) > $nb_limite_resultat) {
             $titre = 'ERREUR';
             $message = UserInterfaceMessage::FR_WARNING_RECHERE . ModuleConfigLib::VALUE_MAX_MOTEUR_RECHERCHE;
-            afficher_message($titre, $message, $redirection);
+            Lib::showMessage($titre, $message, $redirection);
         } else {
             if (count($tab_resultat) > 0) {
                 $tab_resultat = array_unique($tab_resultat);
@@ -562,19 +562,19 @@ switch ($action) {
                 // premiere liste vide
                 $titre = 'ERREUR';
                 $message = 'Choisissez une catégorie dans la première liste';
-                afficher_message($titre, $message, $redirection);
+                Lib::showMessage($titre, $message, $redirection);
             } else {
                 if ($operateur_recherche_aux [$nb_ligne_courant][$nb_col_courant] == '') {
                     //la deuxieme liste est vide
                     $titre = 'ERREUR';
                     $message = 'Choisissez un oprérateur dans la deuxième liste';
-                    afficher_message($titre, $message, $redirection);
+                    Lib::showMessage($titre, $message, $redirection);
                 } else {
                     if ($texte_courant == '') {
                         //Pas de valeur a rechercher
                         $titre = 'ERREUR';
                         $message = 'Entrez un mot à rechercher';
-                        afficher_message($titre, $message, $redirection);
+                        Lib::showMessage($titre, $message, $redirection);
                     } else {
                         // tout est rempli
                         //On insere la valeur a rechercher dans le tableau des valeurs

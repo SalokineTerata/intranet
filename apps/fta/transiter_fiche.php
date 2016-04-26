@@ -165,7 +165,7 @@ switch ($output) {
             //Averissement
             $titre = UserInterfaceMessage::FR_WARNING_CHAPITRES_TITLE;
             $message = UserInterfaceMessage::FR_WARNING_CHAPITRES;
-            afficher_message($titre, $message, $redirection);
+            Lib::showMessage($titre, $message, $redirection);
         }
 
 

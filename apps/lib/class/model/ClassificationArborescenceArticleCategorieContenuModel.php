@@ -225,7 +225,7 @@ class ClassificationArborescenceArticleCategorieContenuModel extends AbstractMod
             $message = UserInterfaceMessage::FR_WARNING_CLASSIFICATION_ELEMENT
                     . $liste
             ;
-            afficher_message($titre, $message, $redirection);
+            Lib::showMessage($titre, $message, $redirection);
         }
     }
 

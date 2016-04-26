@@ -81,14 +81,14 @@ if (!$fta_consultation) {
     $message = UserInterfaceMessage::FR_WARNING_ACCES_RIGHTS
             . " Veuillez vous déconnecter et contactez l'administrateur de l'intranet";
     $redirection = "index.php";
-    afficher_message($titre, $message, $redirection, TRUE);
+    Lib::showMessage($titre, $message, $redirection, TRUE);
 } elseif ($fta_modification) {
     $idFtaRoleEncoursDefault = FtaRoleModel::getKeyNameOfFirstRoleByIdUser($idUser);
     if (!$idFtaRoleEncoursDefault) {
         $titre = UserInterfaceMessage::FR_WARNING_ACCES_RIGHTS_TITLE;
         $message = UserInterfaceMessage::FR_WARNING_ACCES_RIGHTS_ROLES;
         $redirection = "index.php";
-        afficher_message($titre, $message, $redirection);
+        Lib::showMessage($titre, $message, $redirection);
     }
 }
 
@@ -131,7 +131,7 @@ if ($idFta) {
         $titre = UserInterfaceMessage::FR_WARNING_ACCES_RIGHTS_TITLE;
         $message = UserInterfaceMessage::FR_WARNING_ACCES_RIGHTS;
         $redirection = "index.php";
-        afficher_message($titre, $message, $redirection);
+        Lib::showMessage($titre, $message, $redirection);
     }
 
 
@@ -161,7 +161,7 @@ if ($idFta) {
             $titre = UserInterfaceMessage::FR_WARNING_ACCES_RIGHTS_TITLE;
             $message = UserInterfaceMessage::FR_WARNING_ACCES_RIGHTS;
             $redirection = "index.php";
-            afficher_message($titre, $message, $redirection);
+            Lib::showMessage($titre, $message, $redirection);
         } else {
             /**
              * On affecte un IdFtaRole seulement dans le cas ou on est vient de la page de recherche
@@ -181,7 +181,7 @@ if ($idFta) {
                 $titre = UserInterfaceMessage::FR_WARNING_ACCES_RIGHTS_TITLE;
                 $message = UserInterfaceMessage::FR_WARNING_ACCES_RIGHTS_WORKFLOW;
                 $redirection = "index.php";
-                afficher_message($titre, $message, $redirection);
+                Lib::showMessage($titre, $message, $redirection);
             } elseif (!$arrayIdFtaRoleAcces) {
                 $idFtaRole = FtaRoleModel::ID_FTA_ROLE_COMMUN;
             }
@@ -221,7 +221,7 @@ if ($idFta) {
     $titre = UserInterfaceMessage::FR_WARNING_PARAM_ID_FTA_TITLE;
     $message = UserInterfaceMessage::FR_WARNING_PARAM_ID_FTA;
     $redirection = "index.php";
-    afficher_message($titre, $message, $redirection);
+    Lib::showMessage($titre, $message, $redirection);
 }
 
 echo '

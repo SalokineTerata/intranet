@@ -46,7 +46,7 @@ if (!$action) {
     $titre = 'Erreur';
     $message = 'Vous devez choisir une transition';
     $redirection = '';
-    afficher_message($titre, $message, $redirection);
+    Lib::showMessage($titre, $message, $redirection);
 } else {
 
     /*
@@ -93,7 +93,7 @@ if (!$action) {
     ) {
         $titre = 'Informations manquantes';
         $message = 'Vous devez spécifier un commentaire sur la mise à jour.';
-        afficher_message($titre, $message, $redirection);
+        Lib::showMessage($titre, $message, $redirection);
         $error = 1;
     }
 
@@ -115,7 +115,7 @@ if (!$action) {
         if (!$ok) {
             $titre = 'Informations manquantes';
             $message = 'Vous devez sélectionner au moins un chapitre à mettre à jour.';
-            afficher_message($titre, $message, $redirection);
+            Lib::showMessage($titre, $message, $redirection);
             $error = 1;
         }
 
@@ -165,14 +165,14 @@ if (!$action) {
                         $titre = 'Action vérrouillée';
                         $message = 'Cette fiche est déjà en cours de modification.';
                         $redirection = '';
-                        afficher_message($titre, $message, $redirection);
+                        Lib::showMessage($titre, $message, $redirection);
                         break;
 
                     case 3:
                         $titre = 'Erreur sur la FTA ' . $idFta;
                         $message = 'Impossible de valider cette FTA';
                         $redirection = '';
-                        afficher_message($titre, $message, $redirection);
+                        Lib::showMessage($titre, $message, $redirection);
                         break;
                 }
             }//Fin de la diffusion des FTA Validée

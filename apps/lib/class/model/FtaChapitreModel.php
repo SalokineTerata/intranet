@@ -148,7 +148,7 @@ class FtaChapitreModel extends AbstractModel {
             }
             $titre = 'Liste des Processus dévalidés';
             if (!$option['no_message_ecran']) {
-                afficher_message($titre, $message, $redirection);
+                Lib::showMessage($titre, $message, $redirection);
             }
 
             //Envoi des mails

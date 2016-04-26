@@ -92,7 +92,7 @@ switch ($action) {
         } else {
             $titre = UserInterfaceMessage::FR_WARNING_DATA_GESTIONNAIRE_TITLE;
             $message = UserInterfaceMessage::FR_WARNING_DATA_GESTIONNAIRE;
-            afficher_message($titre, $message, $redirection);
+            Lib::showMessage($titre, $message, $redirection);
         }
 
         break;

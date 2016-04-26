@@ -199,7 +199,7 @@ if ($id_fta_composant) {
     } else {
         $titre = "Erreur ";
         $message = "Veuillez utiliser les boutons de navigation";
-        afficher_message($titre, $message, $redirection);
+        Lib::showMessage($titre, $message, $redirection);
     }
 
 //Ce composant sera géré dans la composition

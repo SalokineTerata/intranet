@@ -146,7 +146,7 @@ function envoismail($sujetmail, $text, $destinataire, $expediteur, $paramTypeMai
      * Génération de log
      */
     $paramLog = $paramTypeMail . " " . $expediteur . " " . $destinataire . "\n" . $sujetmail . "\n" . $text;
-    Logger::AddMail($paramLog, $paramTypeMail);
+//    Logger::AddMail($paramLog, $paramTypeMail);
 }
 
 /**

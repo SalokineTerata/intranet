@@ -123,13 +123,13 @@ class MoteurDeRecherche {
             if (!$result_requete_resultat) {
                 $titre = 'Moteur de Recherche';
                 $message = UserInterfaceMessage::FR_WARNING_RECHERE_ERREUR;
-                afficher_message($titre, $message, $redirection);
+                Lib::showMessage($titre, $message, $redirection);
             } elseif (count($result_requete_resultat) > ModuleConfig::VALUE_MAX_MOTEUR_RECHERCHE) {
                 $message = UserInterfaceMessage::FR_WARNING_RECHERE . ModuleConfig::VALUE_MAX_MOTEUR_RECHERCHE;
                 $redirection = "recherche.php";
-                afficher_message("Erreur", $message, $redirection);
+                Lib::showMessage("Erreur", $message, $redirection);
             }
-
+            
 //Regroupement par Etat du résultat
             $req = "SELECT * FROM $etat_table ";
 
@@ -683,7 +683,7 @@ WHERE id_intranet_moteur_de_recherche_operateur_sur_champ = '$enr2[0]'";
                 $titre = 'ERREUR';
                 $message = 'Probleme d\'ouverture du fichier ';
                 $message .=$file;
-                afficher_message($titre, $message, $redirection);
+                Lib::showMessage($titre, $message, $redirection);
                 exit();
             }
         } else {
@@ -691,7 +691,7 @@ WHERE id_intranet_moteur_de_recherche_operateur_sur_champ = '$enr2[0]'";
             $message = 'Le fichier ';
             $message .=$file;
             $message .= " n'existe pas ! ";
-            afficher_message($titre, $message, $redirection);
+            Lib::showMessage($titre, $message, $redirection);
             exit();
         }
 
@@ -783,7 +783,7 @@ WHERE id_intranet_moteur_de_recherche_operateur_sur_champ = '$enr2[0]'";
                 $message .=$chemin;
                 $message .= "n'est pas reliée à la table  ";
                 $message .=$table_rech;
-                afficher_message($titre, $message, $redirection);
+                Lib::showMessage($titre, $message, $redirection);
             } else {
                 // On change $table_rech
                 // la table du champ de recherche devient le nom de la table
@@ -858,7 +858,7 @@ WHERE id_intranet_moteur_de_recherche_operateur_sur_champ = '$enr2[0]'";
                     $message .=$table_rech;
                     $message .= " n'est pas reliée à la table  ";
                     $message .=$table_champ_retour;
-                    afficher_message($titre, $message, $redirection);
+                    Lib::showMessage($titre, $message, $redirection);
                     exit();
                 } else {
                     // ecriture de la requete

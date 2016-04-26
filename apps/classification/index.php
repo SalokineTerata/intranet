@@ -210,7 +210,7 @@ if ($idUser) {
                                    }
                            </SCRIPT>
                            ';
-            $Ajout = " Ajout d'une classification:<a href=classification_modifier.php><img src=\"../lib/images/plus.png\"/\" alt=\"\" width=\"10\" height=\"10\" border=\"0\" /></a>";
+            $Ajout = " Ajout d'une classification:<a href=classification_modifier.php?isEditable=TRUE><img src=\"../lib/images/plus.png\"/\" alt=\"\" width=\"10\" height=\"10\" border=\"0\" /></a>";
         }
 
         $bloc.= "<td >" . ClassificationFta2Model::getNameClassification($value[ClassificationFta2Model::FIELDNAME_ID_PROPRIETAIRE_GROUPE]) . "</td>"

@@ -1711,7 +1711,7 @@ class FtaView extends AbstractView {
     function getHtmlSiteAgrement() {
 
         return Html::convertDataFieldToHtml(
-                        $this->getModel()->getModelSiteExpedition()->getDataField(GeoModel::FIELDNAME_SITE_AGREMENT_CE)
+                        $this->getModel()->getModelSiteProduction()->getDataField(GeoModel::FIELDNAME_SITE_AGREMENT_CE)
                         , false
         );
     }

@@ -113,9 +113,8 @@ if ($login) {
                     if ($reponse != 1) {
 
                         /* envois du mail d'information à l'utilisateur concerné */
-                        $corpsmail = 'Votre compte ' . $login . ' de l\'intranet Agis a été bloqué le ' . date("d/m/Y") . ' suite à trois tentatives de connexion \n';
-                        $corpsmail.='avec un mot de passe invalide.\n';
-                        $corpsmail.='Contactez un Administrateur pour réactiver votre compte.\n';
+                        $corpsmail = 'Votre compte ' . $login . ' de l\'intranet Agis a été bloqué à ' . date("H:m:s") . ' le ' . date("d/m/Y") . ' suite à trois tentatives de connexion avec un mot de passe invalide.
+                                      Contactez un Administrateur pour réactiver votre compte.';
 
                         $arrayMailAdmin = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
                                         'SELECT ' . UserModel::FIELDNAME_MAIL

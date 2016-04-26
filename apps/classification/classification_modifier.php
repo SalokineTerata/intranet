@@ -96,11 +96,14 @@ if ($id_fta_classification2) {
 if ($action == 'modifier') {
     if ($isEditable) {
         $theme = "Modification";
+        $bouton = "Enregistrer";
+        $action = "modifier";
     } else {
         $theme = "Consultation";
+        $bouton = "Retour";
+        $action = "consultation";
     }
     $titre = $theme . " de la classification  identifiant n°" . $id_fta_classification2;
-    $action = "modifier";
 
     $HtmlDonnesArcadia = $CategorieOptiventes
             . $RaccourcisClassif
@@ -220,7 +223,7 @@ switch ($output) {
                 " . $HtmlDonnesArcadia . "
              <tr><td>            
                  <center>
-                 <input type=submit value=Enregistrer>
+                 <input type=submit value=" . $bouton . ">
                  </center>
 
              </td>   

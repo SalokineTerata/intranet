@@ -17,19 +17,20 @@ case $CHEMIN in
   $DIR_COD_CLI)
     ENV="COD"
     LOG_ARCHIVE_DIR=$DIR_COD_ROOT"apps/datasync/data"
-    DIR_ENV_DATASYNC = $DIR_COD_ROOT"apps/datasync"
-    DIR_ENV_CLI = $DIR_COD_CLI
+    DIR_ENV_DATASYNC=$DIR_COD_ROOT"apps/datasync"
+    DIR_ENV_CLI=$DIR_COD_CLI
  ;;
   $DIR_DEV_CLI)
     ENV="DEV"
     LOG_ARCHIVE_DIR=$DIR_DEV_ROOT"apps/datasync/data"
-    DIR_ENV_DATASYNC = $DIR_DEV_ROOT"apps/datasync"
-    DIR_ENV_CLI = $DDIR_DEV_CLI
+    DIR_ENV_DATASYNC=$DIR_DEV_ROOT"apps/datasync"
+    DIR_ENV_CLI=$DIR_DEV_CLI
  ;;
   $DIR_PRD_CLI)
     ENV="PRD"
     LOG_ARCHIVE_DIR=$DIR_PRD_ROOT"apps/datasync/data"
-    DIR_ENV_CLI = $DIR_PRD_CLI
+    DIR_ENV_DATASYNC=$DIR_PRD_ROOT"apps/datasync"
+    DIR_ENV_CLI=$DIR_PRD_CLI
  ;;
 
 esac

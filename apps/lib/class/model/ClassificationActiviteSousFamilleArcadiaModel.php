@@ -258,7 +258,7 @@ class ClassificationActiviteSousFamilleArcadiaModel extends AbstractModel {
 
         $idActivite = ClassificationFta2Model::getIdClassificationTypeByTypeNameAndIdClassificationFta2($paramIdClassificationFta2, ClassificationFta2Model::FIELDNAME_ID_ACTIVITE);
 
-        $dataFieldIdArcadiaSousFamille = $paramFtaModel->getDataField(FtaModel::FIELDNAME_ID_ARCADIA_SOUS_FAMILLE);
+        $dataFieldIdArcadiaSousFamilleTMP = $paramFtaModel->getDataField(FtaModel::FIELDNAME_ID_ARCADIA_SOUS_FAMILLE);
 
         $arrayClassificationActiviteSousFamilleArcadia = DatabaseOperation::convertSqlStatementWithKeyAndOneFieldToArray(
                         'SELECT DISTINCT ' . ArcadiaSousFamilleModel::TABLENAME . '.' . ArcadiaSousFamilleModel::KEYNAME
@@ -294,6 +294,12 @@ class ClassificationActiviteSousFamilleArcadiaModel extends AbstractModel {
 //            }
 //        }
         $htmlList->setArrayListContent($arrayClassificationActiviteSousFamilleArcadia);
+
+        /**
+         * On vérifie si la donnée en BDD se trouve dans le tableau
+         * Sinon alors on vide la donnée de la BDD
+         */
+        $dataFieldIdArcadiaSousFamille = FtaController::checkDataInArrayKeyList($dataFieldIdArcadiaSousFamilleTMP, $arrayClassificationActiviteSousFamilleArcadia);
 
 
         $HtmlTableName = FtaModel::TABLENAME

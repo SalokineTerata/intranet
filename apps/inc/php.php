@@ -79,6 +79,7 @@ require_once('../lib/class/rules_validation/DataNotSpecialRulesValidation.php');
 require_once('../lib/class/rules_validation/Less35CaractereRulesValidation.php');
 require_once('../lib/class/rules_validation/Less5CaractereRulesValidation.php');
 require_once('../lib/class/rules_validation/Less8CaractereRulesValidation.php');
+require_once('../lib/class/rules_validation/Mandatory14CaractereRulesValidation.php');
 
 
 // Configuration des models de base de données

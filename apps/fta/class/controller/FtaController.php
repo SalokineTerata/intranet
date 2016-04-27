@@ -255,6 +255,22 @@ class FtaController {
         return $checkData;
     }
 
+    /**
+     * On vérifie si la donnée en BDD se trouve dans le tableau
+     * Sinon alors on vide la donnée de la BDD
+     * @param DatabaseDataField $paramDataField
+     * @param array $paramArray
+     * @return \DatabaseDataField
+     */
+    public static function checkDataInArrayKeyList(DatabaseDataField $paramDataField, $paramArray) {
+        $checkDataResgister = FtaController::isValueIsInKeyArray($paramDataField->getFieldValue(), $paramArray);
+        if (!$checkDataResgister) {
+            $paramDataField->setFieldValue("");
+        }
+
+        return $paramDataField;
+    }
+
 }
 
 ?>

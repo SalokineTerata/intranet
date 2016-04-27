@@ -1,8 +1,11 @@
 #!/bin/sh
 CHEMIN="$(dirname $0)"
-COD="/u1/DATA01/webldc/cod-intranet/v3/apps/datasync/cli"
-DEV="/u1/DATA01/webldc/dev-intranet/v3/apps/datasync/cli"
-PRD="/u1/DATA01/webldc/fta05401/v3/apps/datasync/cli"
+DIR_COD_ROOT="/u1/DATA01/webldc/cod-intranet/v3/"
+DIR_COD_CLI=$DIR_COD_ROOT"apps/datasync/cli"
+DIR_DEV_ROOT="/u1/DATA01/webldc/dev-intranet/v3/"
+DIR_DEV_CLI=$DIR_DEV_ROOT"apps/datasync/cli"
+DIR_PRD_ROOT="/u1/DATA01/webldc/fta05401/v3/"
+DIR_PRD_CLI=$DIR_PRD_ROOT"apps/datasync/cli"
 MAILTO="Informatique.AGIS@agis-sa.fr"
 #MAIL=/tmp/save.mail.tmp
 #LOG_ARCHIVE_FILE=/u1/Admin/Log/datasync`date +%m-%d`.log
@@ -11,18 +14,20 @@ DEBUG=1
 
 case $CHEMIN in
 
-  $COD)
+  $DIR_COD_CLI)
     ENV="COD"
-    LOG_ARCHIVE_DIR="/u1/DATA01/webldc/cod-intranet/v3/apps/datasync/data"
-
+    LOG_ARCHIVE_DIR=$DIR_COD_ROOT"apps/datasync/data"
+    DIR_ENV_DATASYNC = $DIR_COD_ROOT"/apps/datasync"
  ;;
-  $DEV)
+  $DIR_DEV_CLI)
     ENV="DEV"
-    LOG_ARCHIVE_DIR="/u1/DATA01/webldc/dev-intranet/v3/apps/datasync/data"
+    LOG_ARCHIVE_DIR=$DIR_DEV_ROOT"apps/datasync/data"
+    DIR_ENV_DATASYNC = $DIR_DEV_ROOT"/apps/datasync"
  ;;
-  $PRD)
+  $DIR_PRD_CLI)
     ENV="PRD"
-    LOG_ARCHIVE_DIR="/u1/DATA01/webldc/fta05401/v3/apps/datasync/data"
+    LOG_ARCHIVE_DIR=$DIR_PRD_ROOT"apps/datasync/data"
+    DIR_ENV_DATASYNC = $DIR_PRD_ROOT"/apps/datasync"
  ;;
 
 esac
@@ -44,7 +49,7 @@ case $TYPE in
   	#Génération et mise à jour des scripts utilis�s
 	echo -n "Démarrage : " >> $MAIL
 	date >> $MAIL
-	php ./apps/datasync/index.php $TYPE $ENV  >> $LOG
+	php $DIR_ENV_DATASYNC/index.php $TYPE $ENV  >> $LOG
 	
 #	if [ $DEBUG = 1 ] ; then
 #	  $CHEMIN/netcopy.sh

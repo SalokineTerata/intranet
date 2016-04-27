@@ -445,7 +445,8 @@ class FtaView extends AbstractView {
      */
     function getHtmlEANColis() {
         $id_fta = $this->getModel()->getKeyValue();
-        $eanColisValue = $this->getModel()->getDataField(FtaModel::FIELDNAME_EAN_COLIS)->getFieldValue();
+        $dataFieldEanColis = $this->getModel()->getDataField(FtaModel::FIELDNAME_EAN_COLIS);
+        $eanColisValue = $dataFieldEanColis->getFieldValue();
         $eanColis = new HtmlInputText();
         $HtmlTableName = FtaModel::TABLENAME
                 . '_'
@@ -453,6 +454,16 @@ class FtaView extends AbstractView {
                 . '_'
                 . $id_fta
         ;
+        /**
+         * On initie la vérification des data validation
+         */
+        $dataFieldEanColis->checkValidationRules();
+
+        if ($dataFieldEanColis->getDataValidationSuccessful()) {
+            $this->setDataValidationSuccessfulToTrue();
+        } else {
+            $this->setDataValidationSuccessfulToFalse();
+        }
         $eanColis->setLabel(DatabaseDescription::getFieldDocLabel(FtaModel::TABLENAME, FtaModel::FIELDNAME_EAN_COLIS));
         $eanColis->getAttributes()->getValue()->setValue($eanColisValue);
         $eanColis->getAttributes()->getPattern()->setValue("[0-9]{1,14}");
@@ -462,7 +473,9 @@ class FtaView extends AbstractView {
                 $HtmlTableName
                 , $eanColis->getLabel()
                 , $eanColisValue
-                , $this->getModel()->getDataField(FtaModel::FIELDNAME_EAN_COLIS)->isFieldDiff()
+                , $dataFieldEanColis->isFieldDiff()
+                , $dataFieldEanColis->getDataValidationSuccessful()
+                , $dataFieldEanColis->getDataWarningMessage()
         );
         $eanColis->getEventsForm()->setOnChangeWithAjaxAutoSave(FtaModel::TABLENAME, FtaModel::KEYNAME, $id_fta, FtaModel::FIELDNAME_EAN_COLIS);
         return $eanColis->getHtmlResult();
@@ -474,7 +487,8 @@ class FtaView extends AbstractView {
      */
     function getHtmlEANPalette() {
         $id_fta = $this->getModel()->getKeyValue();
-        $eanPaletteValue = $this->getModel()->getDataField(FtaModel::FIELDNAME_EAN_PALETTE)->getFieldValue();
+        $dataFieldEanPalette = $this->getModel()->getDataField(FtaModel::FIELDNAME_EAN_PALETTE);
+        $eanPaletteValue = $dataFieldEanPalette->getFieldValue();
         $eanPalette = new HtmlInputText();
         $HtmlTableName = FtaModel::TABLENAME
                 . '_'
@@ -482,6 +496,17 @@ class FtaView extends AbstractView {
                 . '_'
                 . $id_fta
         ;
+
+        /**
+         * On initie la vérification des data validation
+         */
+        $dataFieldEanPalette->checkValidationRules();
+
+        if ($dataFieldEanPalette->getDataValidationSuccessful()) {
+            $this->setDataValidationSuccessfulToTrue();
+        } else {
+            $this->setDataValidationSuccessfulToFalse();
+        }
         $eanPalette->setLabel(DatabaseDescription::getFieldDocLabel(FtaModel::TABLENAME, FtaModel::FIELDNAME_EAN_PALETTE));
         $eanPalette->getAttributes()->getValue()->setValue($eanPaletteValue);
         $eanPalette->getAttributes()->getPattern()->setValue("[0-9]{1,14}");
@@ -491,7 +516,9 @@ class FtaView extends AbstractView {
                 $HtmlTableName
                 , $eanPalette->getLabel()
                 , $eanPaletteValue
-                , $this->getModel()->getDataField(FtaModel::FIELDNAME_EAN_PALETTE)->isFieldDiff()
+                , $dataFieldEanPalette->isFieldDiff()
+                , $dataFieldEanPalette->getDataValidationSuccessful()
+                , $dataFieldEanPalette->getDataWarningMessage()
         );
         $eanPalette->getEventsForm()->setOnChangeWithAjaxAutoSave(FtaModel::TABLENAME, FtaModel::KEYNAME, $id_fta, FtaModel::FIELDNAME_EAN_PALETTE);
         return $eanPalette->getHtmlResult();

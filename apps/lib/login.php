@@ -122,11 +122,11 @@ Contactez un Administrateur pour réactiver votre compte.';
                                         . ' WHERE ' . UserModel::FIELDNAME_ID_TYPE . ' =4'
                                         . ' AND ' . UserModel::FIELDNAME_ACTIF . ' =\'' . UserModel::USER_ACTIF . '\'');
                         foreach ($arrayMailAdmin as $rowsmail) {
-                            $corpsmail.=' - ' . $rowsmail[UserModel::FIELDNAME_MAIL] ;
+                            $corpsmail.=' - ' . $rowsmail[UserModel::FIELDNAME_MAIL];
                         }
 
                         $adrfrom = 'postmaster@agis-sa.fr';
-                        $recupmail = DatabaseOperation::convertSqlStatementWithoutKeyToArray('select mail from salaries where login=\'' . $identite . '\'');
+                        $recupmail = DatabaseOperation::convertSqlStatementWithoutKeyToArray('SELECT mail FROM salaries WHERE login=\'' . $identite . '\'');
                         foreach ($recupmail as $colonnemail) {
                             $adrTo = $colonnemail[UserModel::FIELDNAME_MAIL];
                         }
@@ -134,7 +134,10 @@ Contactez un Administrateur pour réactiver votre compte.';
                         $typeDeMail = 'CompteBloquer';
                         /* Constition du corps du mail */
                         $rep = envoismail($sujet, $corpsmail, $adrTo, $adrfrom, $typeDeMail);
-                        $titou = DatabaseOperation::execute('update salaries set blocage=\'oui\' where (login=\'' . $identite . '\')');
+                        $titou = DatabaseOperation::execute('UPDATE ' . UserModel::TABLENAME
+                                        . ' SET ' . UserModel::FIELDNAME_BLOCAGE . '=\'oui\''
+                                        . ' WHERE ' . UserModel::FIELDNAME_LOGIN . '=\'' . $identite . '\''
+                                        . ' AND ' . UserModel::FIELDNAME_DATE_BLOCAGE . '=' . date("Y-m-d"));
                         //Averissement
                         $titre = "Accès aux modules de l'Intranet";
                         $message = UserInterfaceMessage::FR_LOGIN_PROCESS_ACCOUNT_LOCKED;

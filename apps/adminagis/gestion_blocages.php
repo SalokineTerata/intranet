@@ -9,11 +9,13 @@ $pass = $globalConfig->getAuthenticatedUser()->getDataField(UserModel::FIELDNAME
 $id_type = $globalConfig->getAuthenticatedUser()->getDataField(UserModel::FIELDNAME_ID_TYPE)->getFieldValue();
 $quidonc = Lib::getParameterFromRequest('quidonc');
 $action = Lib::getParameterFromRequest('action');
-identification1("salaries", $login, $pass,FALSE);
+identification1("salaries", $login, $pass, FALSE);
 
 
 if ($action == "debloquer") {
-    DatabaseOperation::query("update salaries set blocage='non' where (id_user='$quidonc')");
+    DatabaseOperation::execute("UPDATE " . UserModel::TABLENAME
+            . " SET " . UserModel::FIELDNAME_BLOCAGE . " ='non'"
+            . " WHERE (" . UserModel::FIELDNAME_LOGIN . " ='$quidonc')");
 }
 ?>
 <html>
@@ -68,12 +70,14 @@ if ($action == "debloquer") {
                         <table width="600" border="1" cellspacing="2" cellpadding="0" align="center">
                             <?php
                             /* Affichage du contenu de la table CATSOPRO */
-                            $req = "select nom, prenom, id_user from salaries where blocage='oui'";
+                            $req = "SELECT " . UserModel::FIELDNAME_NOM . "," . UserModel::FIELDNAME_PRENOM
+                                    . "," . UserModel::KEYNAME . "," . UserModel::FIELDNAME_DATE_BLOCAGE
+                                    . " FROM " . UserModel::TABLENAME . " WHERE " . UserModel::FIELDNAME_BLOCAGE . " ='oui'";
                             $result = DatabaseOperation::convertSqlStatementWithoutKeyToArray($req);
                             if ($result) {
                                 foreach ($result as $rows) {
-                                    echo"<tr><td align=\"center\" width=\"70%\">$rows[nom] $rows[prenom]</td>";
-                                    echo"<td align=\"center\"><a href=\"$PHP_SELF?action=debloquer&quidonc=$rows[id_user]\">débloquer le compte</a></td></tr>";
+                                    echo"<tr><td align=\"center\" width=\"70%\">" . $rows[UserModel::FIELDNAME_NOM] . " " . $rows[UserModel::FIELDNAME_PRENOM] . " - " . $rows[UserModel::FIELDNAME_DATE_BLOCAGE] . "</td>";
+                                    echo"<td align=\"center\"><a href=\"" . $PHP_SELF . "?action=debloquer&quidonc=" . $rows[UserModel::KEYNAME] . "\">débloquer le compte</a></td></tr>";
                                 }
                             } else {
                                 echo "Aucun comptes à déverrouiller";
@@ -83,6 +87,6 @@ if ($action == "debloquer") {
                 </td>
             </tr>
         </table>
-<?php include ("../adminagis/cadrebas.php"); ?>
+        <?php include ("../adminagis/cadrebas.php"); ?>
     </body>
 </html>

@@ -178,7 +178,7 @@ class ClassificationGammeFamilleBudgetArcadiaModel extends AbstractModel {
 
 
         $paramFtaModel->setDataFtaTableToCompare();
-        $dataFieldIdArcadiaGammeFamilleBudget = $paramFtaModel->getDataField(FtaModel::FIELDNAME_ID_ARCADIA_GAMME_FAMILLE_BUDGET);
+        $dataFieldIdArcadiaGammeFamilleBudgetTMP = $paramFtaModel->getDataField(FtaModel::FIELDNAME_ID_ARCADIA_GAMME_FAMILLE_BUDGET);
         $arrayGammeFamilleBudget = DatabaseOperation::convertSqlStatementWithKeyAndOneFieldToArray(
                         'SELECT DISTINCT ' . ArcadiaGammeFamilleBudgetModel::TABLENAME . '.' . ArcadiaGammeFamilleBudgetModel::KEYNAME
                         . ', CONCAT_WS(  \' - \',' . ArcadiaGammeFamilleBudgetModel::TABLENAME
@@ -214,6 +214,13 @@ class ClassificationGammeFamilleBudgetArcadiaModel extends AbstractModel {
 //        }
         $htmlList->setArrayListContent($arrayGammeFamilleBudget);
 
+           /**
+         * On vérifie si la donnée en BDD se trouve dans le tableau
+         * Sinon alors on vide la donnée de la BDD
+         */
+        $dataFieldIdArcadiaGammeFamilleBudget = FtaController::checkDataInArrayKeyList($dataFieldIdArcadiaGammeFamilleBudgetTMP, $arrayGammeFamilleBudget);
+
+        
 
         $HtmlTableName = FtaModel::TABLENAME
                 . '_'

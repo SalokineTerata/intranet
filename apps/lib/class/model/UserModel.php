@@ -24,6 +24,7 @@ class UserModel extends AbstractModel {
     const FIELDNAME_NEWSDEFIL = 'newsdefil';
     const FIELDNAME_BLOCAGE = 'blocage';
     const FIELDNAME_DATE_CREATION_SALARIES = 'date_creation_salaries';
+    const FIELDNAME_DATE_BLOCAGE = 'date_blocage';
     const FIELDNAME_ASENDANT_ID_SALARIES = 'ascendant_id_salaries';
     const FIELDNAME_PORTAIL_WIKI_SALARIES = 'portail_wiki_salaries';
     const FIELDNAME_LIEU_GEO = 'lieu_geo';

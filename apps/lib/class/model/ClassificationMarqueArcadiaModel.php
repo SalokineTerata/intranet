@@ -257,7 +257,7 @@ class ClassificationMarqueArcadiaModel extends AbstractModel {
         $paramFtaModel->setDataFtaTableToCompare();
 
         $idMarque = ClassificationFta2Model::getIdClassificationTypeByTypeNameAndIdClassificationFta2($paramIdClassificationFta2, ClassificationFta2Model::FIELDNAME_ID_MARQUE);
-        $dataFieldIdArcadiaMarque = $paramFtaModel->getDataField(FtaModel::FIELDNAME_ID_ARCADIA_MARQUE);
+        $dataFieldIdArcadiaMarqueTMP = $paramFtaModel->getDataField(FtaModel::FIELDNAME_ID_ARCADIA_MARQUE);
         $arrayClassificationMarqueArcadia = DatabaseOperation::convertSqlStatementWithKeyAndOneFieldToArray(
                         'SELECT DISTINCT ' . ArcadiaMarqueModel::TABLENAME . '.' . ArcadiaMarqueModel::KEYNAME
                         . ', CONCAT_WS(  \' - \',' . ArcadiaMarqueModel::TABLENAME . '.' . ArcadiaMarqueModel::KEYNAME
@@ -292,6 +292,12 @@ class ClassificationMarqueArcadiaModel extends AbstractModel {
 //        }
         $htmlList->setArrayListContent($arrayClassificationMarqueArcadia);
 
+        /**
+         * On vérifie si la donnée en BDD se trouve dans le tableau
+         * Sinon alors on vide la donnée de la BDD
+         */
+        $dataFieldIdArcadiaMarque = FtaController::checkDataInArrayKeyList($dataFieldIdArcadiaMarqueTMP, $arrayClassificationMarqueArcadia);
+        
 
         $HtmlTableName = FtaModel::TABLENAME
                 . '_'

@@ -175,7 +175,7 @@ class ClassificationRaccourcisAssociationModel extends AbstractModel {
 
         $paramFtaModel->setDataFtaTableToCompare();
 
-        $dataFieldIdClassificationRaccourcis = $paramFtaModel->getDataField(FtaModel::FIELDNAME_ID_CLASSIFICATION_RACCOURCIS);
+        $dataFieldIdClassificationRaccourcisTMP = $paramFtaModel->getDataField(FtaModel::FIELDNAME_ID_CLASSIFICATION_RACCOURCIS);
         $arrayClassificationRaccourcis = DatabaseOperation::convertSqlStatementWithKeyAndOneFieldToArray(
                         'SELECT DISTINCT ' . ClassificationRaccourcisModel::TABLENAME . '.' . ClassificationRaccourcisModel::KEYNAME
                         . ',' . ClassificationRaccourcisModel::TABLENAME . '.' . ClassificationRaccourcisModel::FIELDNAME_NOM_CLASSIFICATION_RACCOURCIS
@@ -216,10 +216,7 @@ class ClassificationRaccourcisAssociationModel extends AbstractModel {
          * On vérifie si la donnée en BDD se trouve dans le tableau
          * Sinon alors on vide la donnée de la BDD
          */
-        $checkDataResgister = FtaController::isValueIsInKeyArray($dataFieldIdClassificationRaccourcis->getFieldValue(), $arrayClassificationRaccourcis);
-        if (!$checkDataResgister) {
-            $dataFieldIdClassificationRaccourcis->setFieldValue("");
-        }
+        $dataFieldIdClassificationRaccourcis = FtaController::checkDataInArrayKeyList($dataFieldIdClassificationRaccourcisTMP, $arrayClassificationRaccourcis);
 
 
 

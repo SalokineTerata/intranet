@@ -10,12 +10,12 @@ $id_type = $globalConfig->getAuthenticatedUser()->getDataField(UserModel::FIELDN
 $quidonc = Lib::getParameterFromRequest('quidonc');
 $action = Lib::getParameterFromRequest('action');
 identification1("salaries", $login, $pass, FALSE);
-
+$page_default = substr(strrchr($_SERVER['PHP_SELF'], '/'), '1', '-4');
 
 if ($action == "debloquer") {
     DatabaseOperation::execute("UPDATE " . UserModel::TABLENAME
             . " SET " . UserModel::FIELDNAME_BLOCAGE . " ='non'"
-            . " WHERE (" . UserModel::FIELDNAME_LOGIN . " ='$quidonc')");
+            . " WHERE (" . UserModel::KEYNAME . " ='$quidonc')");
 }
 ?>
 <html>
@@ -77,7 +77,7 @@ if ($action == "debloquer") {
                             if ($result) {
                                 foreach ($result as $rows) {
                                     echo"<tr><td align=\"center\" width=\"70%\">" . $rows[UserModel::FIELDNAME_NOM] . " " . $rows[UserModel::FIELDNAME_PRENOM] . " - " . $rows[UserModel::FIELDNAME_DATE_BLOCAGE] . "</td>";
-                                    echo"<td align=\"center\"><a href=\"" . $PHP_SELF . "?action=debloquer&quidonc=" . $rows[UserModel::KEYNAME] . "\">débloquer le compte</a></td></tr>";
+                                    echo"<td align=\"center\"><a href=\"" . $page_default . ".php?action=debloquer&quidonc=" . $rows[UserModel::KEYNAME] . "\">débloquer le compte</a></td></tr>";
                                 }
                             } else {
                                 echo "Aucun comptes à déverrouiller";

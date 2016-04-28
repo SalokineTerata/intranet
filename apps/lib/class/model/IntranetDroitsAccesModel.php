@@ -589,7 +589,7 @@ class IntranetDroitsAccesModel extends AbstractModel {
          * Entête du tableau
          */
         $bloc.= "<" . "table " . "border=1 " . "width=100% " . "class=contenu " . ">"
-                . "<th>" . "Utilisateurs" . "</th><th>" . "Accès général" . "</th><th>" . "Diffusion" . "</th><th>" . "Impression" . "</th><th>" . "Espace de travail" . "</th>";
+                . "<th>" . "Utilisateurs" . "</th><th>" . "Accès général" . "</th><th>" . "Diffusion" . "</th><th>" . "Impression" . "</th><th>" . "Espace de travail <br>(Mettre la souris sur un espace de travail pour voir le détail) " . "</th>";
 
 //lister les utilisateurs concernés
 

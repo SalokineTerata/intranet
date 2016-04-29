@@ -606,12 +606,12 @@ class FtaTransitionModel {
      * @param string $paramLogTransition
      */
     public static function buildEnvoiMailGlobal($paramSelectionFta, $paramListeDiffusion, $paramSubject, $paramLogTransition) {
-
         /**
          * Utilisateur connecté
          */
         $globalConfig = new GlobalConfig();
         $idUser = $globalConfig->getAuthenticatedUser()->getKeyValue();
+        $url = $globalConfig->getConf()->getUrlFullRoot();
         $userModel = new UserModel($idUser);
         $nom = $userModel->getDataField(UserModel::FIELDNAME_NOM)->getFieldValue();
         $prenom = $userModel->getDataField(UserModel::FIELDNAME_PRENOM)->getFieldValue();
@@ -664,7 +664,8 @@ class FtaTransitionModel {
 //                }
 //            }
             //Insertion de la ligne d'article
-            $text.= "<a href=modification_fiche.php?" . FtaModel::KEYNAME . "=".$rowsFta[FtaModel::KEYNAME]."&synthese_action=all&comeback=0&" . FtaEtatModel::KEYNAME . "=3&" . FtaEtatModel::FIELDNAME_ABREVIATION . "=V&" . FtaRoleModel::KEYNAME . "=0 >" . $rowsFta[FtaModel::FIELDNAME_CODE_ARTICLE_LDC] . " " . $rowsFta[FtaModel::FIELDNAME_LIBELLE] . " </a>"
+//            $text.= "<a href=" . $url . "/fta/modification_fiche.php?" . FtaModel::KEYNAME . "=" . $rowsFta[FtaModel::KEYNAME] . "&synthese_action=all&comeback=0&" . FtaEtatModel::KEYNAME . "=3&" . FtaEtatModel::FIELDNAME_ABREVIATION . "=V&" . FtaRoleModel::KEYNAME . "=0 >" . $rowsFta[FtaModel::FIELDNAME_CODE_ARTICLE_LDC] . " " . $rowsFta[FtaModel::FIELDNAME_LIBELLE] . " </a>"
+            $text.= $rowsFta[FtaModel::FIELDNAME_CODE_ARTICLE_LDC] . " " . $rowsFta[FtaModel::FIELDNAME_LIBELLE]
 //                    . "\t\t" . $text_prod 
                     . "\n"
             ;

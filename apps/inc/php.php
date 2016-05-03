@@ -142,6 +142,7 @@ require_once('../lib/class/model/FtaProcessusDelaiModel.php');
 require_once('../lib/class/model/FtaProcessusMultisiteModel.php');
 require_once('../lib/class/model/FtaRoleModel.php');
 require_once('../lib/class/model/FtaTransitionModel.php');
+require_once('../lib/class/model/FtaVerrouillageChampsModel.php');
 require_once('../lib/class/model/FtaWorkflowModel.php');
 require_once('../lib/class/model/FtaWorkflowStructureModel.php');
 require_once('../lib/class/model/FteFournisseurModel.php');

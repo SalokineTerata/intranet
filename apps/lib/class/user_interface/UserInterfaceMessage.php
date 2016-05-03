@@ -85,6 +85,8 @@ class UserInterfaceMessage {
     const FR_WARNING_DATA_DATE_ECHEANCE_INCOHERENCE = "Veuillez saisir une date d'écheance supérieur à la date d'aujourd'hui .<br><br>";
     const FR_WARNING_DATA_DESIGNATION_COMMERCIALE = "Veuillez saisir une désignation commerciale .<br><br>";
     const FR_WARNING_DATA_DESIGNATION_COMMERCIALE_TITLE = "Désignation commerciale d'une Fiche Technique Article";
+    const FR_WARNING_DATA_DOSSIER_FTA = "Le dossier Fta ou code Article Arcadia saisi n'existe pas";
+    const FR_WARNING_DATA_DOSSIER_FTA_TITLE = "Code Article Arcadia Primaire";
     const FR_WARNING_DATA_ESPACE_DE_TRAVAIL = "Veuillez selectionner un espace de travail .<br><br>";
     const FR_WARNING_DATA_ESPACE_DE_TRAVAIL_CHANGEMENT = "Veuillez selectionner un espace de travail différents.<br><br>";
     const FR_WARNING_DATA_ESPACE_DE_TRAVAIL_TITLE = "Espace de travail d'une Fiche Technique Article";

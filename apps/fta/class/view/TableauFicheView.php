@@ -273,7 +273,7 @@ class TableauFicheView {
         return $lienHistorique;
     }
 
-    static private function getHtmlCellBgColor($paramAbreviationFtaEtat) {
+    static public function getHtmlCellBgColor($paramAbreviationFtaEtat) {
 
         $bgcolor = self::HTML_CELL_BGCOLOR_DEFAULT;
         /*
@@ -493,7 +493,7 @@ class TableauFicheView {
         return $lien;
     }
 
-    static private function getStringDINCompacted($paramDesignationCommercialeFta, $paramLibelle, $paramNbUnitElem, $PoidsElem) {
+    static public function getStringDINCompacted($paramDesignationCommercialeFta, $paramLibelle, $paramNbUnitElem, $PoidsElem) {
         $din = "";
 
         if ($paramLibelle) {

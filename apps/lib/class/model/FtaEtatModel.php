@@ -157,7 +157,7 @@ class FtaEtatModel extends AbstractModel {
                 break;
 
 
-            case FtaEtatModel::ETAT_AVANCEMENT_VALUE_EN_COURS:               
+            case FtaEtatModel::ETAT_AVANCEMENT_VALUE_EN_COURS:
                 //Récupération des suivis de projet gérés par l'utilisateur et non validé
 
                 /*
@@ -239,7 +239,7 @@ class FtaEtatModel extends AbstractModel {
                 break;
 
 
-            case FtaEtatModel::ETAT_AVANCEMENT_VALUE_EFFECTUES:             
+            case FtaEtatModel::ETAT_AVANCEMENT_VALUE_EFFECTUES:
                 //Récupération de la liste fta pour le role concernés 
                 /*
                  * On obtient les fta à vérifié dont tous les chapitres sont validés
@@ -357,6 +357,11 @@ class FtaEtatModel extends AbstractModel {
         return $array;
     }
 
+    /**
+     * On récupère le nom de l'état par l'id
+     * @param int $paramIdEtat
+     * @return string
+     */
     public static function getNameEtatByIdEtat($paramIdEtat) {
         $arrayIdEtat = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
                         'SELECT ' . FtaEtatModel::FIELDNAME_NOM_FTA_ETAT
@@ -366,6 +371,22 @@ class FtaEtatModel extends AbstractModel {
 
 
         return $arrayIdEtat[0][FtaEtatModel::FIELDNAME_NOM_FTA_ETAT];
+    }
+
+    /**
+     * On récupère l'abréviation de l'état par l'id
+     * @param int $paramIdEtat
+     * @return string
+     */
+    public static function getAbreviationEtatByIdEtat($paramIdEtat) {
+        $arrayIdEtat = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
+                        'SELECT ' . FtaEtatModel::FIELDNAME_ABREVIATION
+                        . ' FROM ' . FtaEtatModel::TABLENAME
+                        . ' WHERE ' . FtaEtatModel::KEYNAME . '=' . $paramIdEtat
+        );
+
+
+        return $arrayIdEtat[0][FtaEtatModel::FIELDNAME_ABREVIATION];
     }
 
 }

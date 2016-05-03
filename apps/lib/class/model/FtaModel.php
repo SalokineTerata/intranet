@@ -47,6 +47,7 @@ class FtaModel extends AbstractModel {
     const FIELDNAME_DESCRIPTION_EMBALLAGE = "description_emballage";
     const FIELDNAME_DESIGNATION_COMMERCIALE = "designation_commerciale_fta";
     const FIELDNAME_DOSSIER_FTA = "id_dossier_fta";
+    const FIELDNAME_DOSSIER_FTA_PRIMAIRE = "dossier_fta_primaire";
     const FIELDNAME_DUREE_DE_VIE = "Duree_de_vie";
     const FIELDNAME_DUREE_DE_VIE_TECHNIQUE_PRODUCTION = "Duree_de_vie_technique";
     const FIELDNAME_DUREE_DE_VIE_TECHNIQUE_MAXIMALE = "duree_vie_technique_fta";

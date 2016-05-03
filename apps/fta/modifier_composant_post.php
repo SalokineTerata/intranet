@@ -99,6 +99,9 @@ switch ($action) {
                         or (
                         $prefixe_code_produit_agrologic_fta_nomenclature == "15"
                         )
+                        or (
+                        $prefixe_code_produit_agrologic_fta_nomenclature == "13"
+                        )
                 ) {
                     if ($creation) {
                         //Valeur par défaut      

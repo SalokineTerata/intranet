@@ -68,6 +68,7 @@ switch ($action) {
             if ($idAnnexeAgroArtCodification) {
                 $annexexAgrologicModel = new AnnexeAgrologicArticleCodificationModel($idAnnexeAgroArtCodification);
                 $prefixe_code_produit_agrologic_fta_nomenclature = $annexexAgrologicModel->getDataField(AnnexeAgrologicArticleCodificationModel::FIELDNAME_PREFIXE_ANNEXE_AGRO_ART_COD)->getFieldValue();
+                $isComposition = $annexexAgrologicModel->getDataField(AnnexeAgrologicArticleCodificationModel::FIELDNAME_IS_COMPOSITION)->getFieldValue();
 
                 /**
                  * Les Produits toujours en Kg
@@ -86,23 +87,7 @@ switch ($action) {
                 /**
                  * Création de la nomenclature orpheline
                  */
-                if (
-                        (//Cas Général (sauf Tarare)
-                        $prefixe_code_produit_agrologic_fta_nomenclature == "30"
-                        )
-                        or ( //Cas Tarare)
-                        $prefixe_code_produit_agrologic_fta_nomenclature == "14"
-                        )
-                        or ( //Cas Tarare)
-                        $prefixe_code_produit_agrologic_fta_nomenclature == "29"
-                        )
-                        or (
-                        $prefixe_code_produit_agrologic_fta_nomenclature == "15"
-                        )
-                        or (
-                        $prefixe_code_produit_agrologic_fta_nomenclature == "13"
-                        )
-                ) {
+                if ($isComposition) {
                     if ($creation) {
                         //Valeur par défaut      
                         $nom_fta_nomenclature = $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_DESIGNATION_CODIFICATION)->getFieldValue();

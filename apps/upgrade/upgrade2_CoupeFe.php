@@ -83,7 +83,7 @@ if ($arrayClassifIncomplete) {
                 . ' WHERE id_fta'
                 . '=' . $idFta
                 . ' AND id_fta_chapitre'
-                . '=19'
+                . '=27'
         ;
         $resultCheckIdSuiviProjet2 = mysql_query($sql4);
         $arrayCheckIdSuiviProjet2 = mysql_fetch_array($resultCheckIdSuiviProjet2, MYSQL_ASSOC);
@@ -92,7 +92,7 @@ if ($arrayClassifIncomplete) {
                     "UPDATE fta_suivi_projet"
                     . " SET signature_validation_suivi_projet=\"" . $arrayCheckIdSuiviProjet2["signature_validation_suivi_projet"]
                     . "\" WHERE id_fta=" . $idFta
-                    . " AND id_fta_chapitre=" . "41"
+                    . " AND id_fta_chapitre=" . "29"
             );
             if ($validation) {
                 echo "id_fta=" . $idFta . " OK \n";

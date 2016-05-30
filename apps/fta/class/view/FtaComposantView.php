@@ -117,7 +117,7 @@ class FtaComposantView extends AbstractView {
         );
     }
 
-     /**
+    /**
      * On autorise la modification selon l'état de champs verrouillable
      * @param DatabaseDataField $paramDataField
      * @return boolean
@@ -141,7 +141,7 @@ class FtaComposantView extends AbstractView {
         }
         return $isEditable;
     }
-    
+
     /**
      * Affiche la liste déroulante des sites de production pour les composants et compositions
      * @param HtmlListSelect $paramObjet
@@ -201,16 +201,38 @@ class FtaComposantView extends AbstractView {
                 . '_'
                 . $id_fta_composant
         ;
+
+        /**
+         * Champ verrouillable condition
+         */
+        /**
+         * Vérification du champ initialisé
+         */
+        $isFieldLock = FtaVerrouillageChampsModel::isFieldLock(FtaComposantModel::FIELDNAME_CODE_PRODUIT_AGROLOGIC_FTA_NOMENCLATURE, $this->getFtaModel());
+        /**
+         * Génération du lien pour verrouillé/déverrouillé
+         */
+        $linkFieldLock = FtaVerrouillageChampsModel::linkFieldLock($isFieldLock, FtaComposantModel::FIELDNAME_CODE_PRODUIT_AGROLOGIC_FTA_NOMENCLATURE, $this->getFtaModel(), $this->getIsEditable());
+
+        /**
+         * Affectation de la modification d'un champ ou non
+         */
+        $isEditable = FtaVerrouillageChampsModel::isEditableLockField($isFieldLock, $this->getIsEditable());
+
         $codePSF->setLabel(DatabaseDescription::getFieldDocLabel(FtaComposantModel::TABLENAME, FtaComposantModel::FIELDNAME_CODE_PRODUIT_AGROLOGIC_FTA_NOMENCLATURE));
         $codePSF->getAttributes()->getValue()->setValue($codePSFValue);
         $codePSF->getAttributes()->getPattern()->setValue("[0-9]{1,6}");
         $codePSF->getAttributes()->getMaxLength()->setValue("6");
-        $codePSF->setIsEditable($this->getIsEditable());
+        $codePSF->setIsEditable($isEditable);
         $codePSF->initAbstractHtmlInput(
                 $HtmlTableName
                 , $codePSF->getLabel()
                 , $codePSFValue
                 , $this->getFtaComposantModel()->getDataField(FtaComposantModel::FIELDNAME_CODE_PRODUIT_AGROLOGIC_FTA_NOMENCLATURE)->isFieldDiff()
+                , NULL
+                , NULL
+                , $isFieldLock
+                , $linkFieldLock
         );
         $codePSF->getEventsForm()->setOnChangeWithAjaxAutoSave(FtaComposantModel::TABLENAME, FtaComposantModel::KEYNAME, $id_fta_composant, FtaComposantModel::FIELDNAME_CODE_PRODUIT_AGROLOGIC_FTA_NOMENCLATURE);
         return $codePSF->getHtmlResult();

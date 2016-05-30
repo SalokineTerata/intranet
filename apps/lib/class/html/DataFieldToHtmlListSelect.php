@@ -22,6 +22,8 @@ class DataFieldToHtmlListSelect extends HtmlListSelect {
                 , $this->getDataField()->getFieldContentArray()
                 , $this->getDataField()->getDataValidationSuccessful()
                 , $this->getDataField()->getDataWarningMessage()
+                , $this->getDataField()->getIsFieldLock()
+                , $this->getDataField()->getLinkFieldLock()
         );
 
         $this->getEventsForm()->setOnChangeWithAjaxAutoSave(

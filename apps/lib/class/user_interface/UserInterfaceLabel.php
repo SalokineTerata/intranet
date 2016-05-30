@@ -29,7 +29,11 @@ class UserInterfaceLabel {
     const FR_GESTIONAIRE_FTA = "Gestionnaire de la Fiche Technique Article";
     const FR_MODIFICATION_ESPACE_DE_TRAVAIL = "Modification de l'espace de travail";
     const FR_MODIFICATION_GESTIONNAIRE_FTA = "Modification du gestionnaire de la Fta";
+    const FR_FTA_PRIMAIRE = " Code Article Arcadia Primaire ";
+    const FR_FTA_SECONDAIRE = " Code Articles Arcadia Secondaires ";
     const FR_MODIFICATION_RAPPEL_ESPACE_DE_TRAVAIL = "Rappel : la modification de l'espace de travail concerne son dossier";
     const FR_TRANSITION_MODIFICATION = "Liste des Chapitres pouvant être mis à jour";
+    const FR_SAISI_CODE_ARTICLE_ARCADIA = "Veuillez saisir le code article Arcadia à rechercher";
+    const FR_SAISI_DOSSIER_FTA = "Veuillez saisir le dossier Fta à rechercher";
 
 }

@@ -588,10 +588,10 @@ class Chapitre {
         //Commentaire sur la Fta
         $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_COMMENTAIRE);
 
-        //Code Regate Mère sur la Fta
-        $bloc.=$ftaView->getHtmlCodeArticleLdcMere();
-        $tmp = $ftaView->isDataValidationSuccessful();
-        if ($tmp == "0") {
+        //Code Article Arcadia Priamire ou Secondaire sur la Fta
+        $bloc.=$ftaView->getHtmlCodeArticleArcadiaPrimaireSecondaire($isEditable, self::$id_fta_chapitre, $synthese_action, self::$comeback, self::$id_fta_etat, self::$abrevation_etat, self::$id_fta_role);
+
+        if ($ftaView->isDataValidationSuccessful() == "0") {
             self::setDataValidationSuccessfulToTrue();
         }
         return $bloc;

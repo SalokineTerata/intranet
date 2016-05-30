@@ -73,6 +73,12 @@ class UserInterfaceMessage {
     const FR_WARNING_ACCES_RIGHTS_WORKFLOW = "Erreur, vous n'avez aucun droits d'accès sur cette Espace de trvail.";
     const FR_WARNING_ACCES_RIGHTS = "Vous n'avez pas les droits d'accès nécessaire.<br><br>";
     const FR_WARNING_ACCES_RIGHTS_TITLE = "Erreur d'accès";
+    const FR_WARNING_ARTICLE_PRIMAIRE = "Vous ne pouvez associer cette Fta avec une Fta ayant le même code Article Arcadia ou dossier Fta";
+    const FR_WARNING_ARTICLE_PRIMAIRE_CHECK = "Vous ne pouvez associer cette Fta Primaire avec une autre Fta,<br> vous devez associer les Fta depuis les Secondaires";
+    const FR_WARNING_ARTICLE_PRIMAIRE_CHECK2 = "Le nombre de composant dans cette Fta Primaire n'est pas le même que la Fta que vous souhaitez associer.";
+    const FR_WARNING_ARTICLE_PRIMAIRE_TITLE = "Code Article Arcadia Primaire";
+    const FR_WARNING_ARTICLE_SECONDAIRE = "Ce Code Article Arcadia ou dossier Fta est déjà associé à une Fta Primaire";
+    const FR_WARNING_ARTICLE_SECONDAIRE_TITLE = "Code Article Arcadia Secondaire";
     const FR_WARNING_CHAPITRES = " Veuillez selectionner un chapitre<br>";
     const FR_WARNING_CHAPITRES_TITLE = " Chapitres Fta<br>";
     const FR_WARNING_CHAPITRES_DE_FTA = " Attention, vous êtes sur le point de dévalider aussi les chapitres suivants:<br>";
@@ -86,12 +92,15 @@ class UserInterfaceMessage {
     const FR_WARNING_DATA_DESIGNATION_COMMERCIALE = "Veuillez saisir une désignation commerciale .<br><br>";
     const FR_WARNING_DATA_DESIGNATION_COMMERCIALE_TITLE = "Désignation commerciale d'une Fiche Technique Article";
     const FR_WARNING_DATA_DOSSIER_FTA = "Le dossier Fta ou code Article Arcadia saisi n'existe pas";
+    const FR_WARNING_DATA_DOSSIER_FTA_NON_SAISIE = "Le dossier Fta ou code Article Arcadia  n'a pas été saisi";
     const FR_WARNING_DATA_DOSSIER_FTA_TITLE = "Code Article Arcadia Primaire";
     const FR_WARNING_DATA_ESPACE_DE_TRAVAIL = "Veuillez selectionner un espace de travail .<br><br>";
     const FR_WARNING_DATA_ESPACE_DE_TRAVAIL_CHANGEMENT = "Veuillez selectionner un espace de travail différents.<br><br>";
     const FR_WARNING_DATA_ESPACE_DE_TRAVAIL_TITLE = "Espace de travail d'une Fiche Technique Article";
     const FR_WARNING_DATA_GESTIONNAIRE = "Veuillez selectionner un gestionnaire de Fiche Technique Article différents.<br><br>";
     const FR_WARNING_DATA_GESTIONNAIRE_TITLE = "Gestionnaire d'une Fiche Technique Article";
+    const FR_WARNING_DATA_VERROUILLAGE = "Ce champ ne fait pas partie de liste des champs à verrouillé";
+    const FR_WARNING_DATA_VERROUILLAGE_TITLE = "Champ verrouillé";
     const FR_WARNING_DATA_ID_FTA = "Veuillez saisir un id_fta existant à dupliquer .<br><br>";
     const FR_WARNING_DATA_ID_FTA_TITLE = "Manque de donnée id_fta";
     const FR_WARNING_DATA_MISSING_TITLE = "Manque de donnée";
@@ -127,6 +136,8 @@ class UserInterfaceMessage {
     const FR_WARNING_VALIDATION_RULES_DATA_NOT_EMPTY = " | Cette donnée doit être saisie ";
     const FR_WARNING_VALIDATION_RULES_DATA_NOT_SMALL = " | Cette donnée doit contenir que des majuscules ";
     const FR_WARNING_VALIDATION_RULES_DATA_NOT_SPECIAL = " | Cette donnée ne doit pas contenir des caractères spéciaux ";
+    const FR_WARNING_VERROUILLAGE_CHAMPS = " Il n'y a aucun champ par défaut à verrouiller veuillez contacter l'admmistrateur du site ";
+    const FR_WARNING_VERROUILLAGE_CHAMPS_TITLE = " Verrouillage des champs par défaut ";
     const FR_WARNING_WORKFLOW_INACTIF_1 = "L'espace de travail \"";
     const FR_WARNING_WORKFLOW_INACTIF_2 = "\" est inactif";
     const FR_WARNING_WORKFLOW_INACTIF_TITLE = "Espace de travail inactif.";

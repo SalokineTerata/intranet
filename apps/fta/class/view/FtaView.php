@@ -157,6 +157,18 @@ class FtaView extends AbstractView {
 
         $dataField = $this->getModel()->getDataField($paramFieldName);
 
+        /**
+         * On vérifie si le champ est verrouillable
+         */
+        $dataField->checkLockField($this->getModel(),  $this->getIsEditable());
+
+        /**
+         * On autorise la modification selon l'état de champs verrouillable
+         */
+        $isEditable = $this->isEditableLockField($dataField);
+        /**
+         * On vérifie les Règles de validation du champ
+         */
         $dataField->checkValidationRules();
 
         if ($dataField->getDataValidationSuccessful() == TRUE) {
@@ -167,8 +179,34 @@ class FtaView extends AbstractView {
 
         return Html::convertDataFieldToHtml(
                         $dataField
-                        , $this->getIsEditable()
+                        , $isEditable
         );
+    }
+
+    
+    /**
+     * On autorise la modification selon l'état de champs verrouillable
+     * @param DatabaseDataField $paramDataField
+     * @return boolean
+     */
+    function isEditableLockField(DatabaseDataField $paramDataField) {
+        $isLockValue = $paramDataField->getIsFieldLock();
+        $isEditable = $this->getIsEditable();
+        switch ($isLockValue) {
+            case FtaVerrouillageChampsModel::FIELD_LOCK_PRIMARY_FALSE:
+            case FtaVerrouillageChampsModel::FIELD_LOCK_SECONDARY_FALSE:
+
+
+
+                break;
+            case FtaVerrouillageChampsModel::FIELD_LOCK_PRIMARY_TRUE:
+            case FtaVerrouillageChampsModel::FIELD_LOCK_SECONDARY_TRUE:
+
+                $isEditable = FALSE;
+
+                break;
+        }
+        return $isEditable;
     }
 
     /**
@@ -307,6 +345,13 @@ class FtaView extends AbstractView {
         } else {
             $return = $this->getHtmlDataField(FtaModel::FIELDNAME_LIBELLE);
         }
+        /**
+         * Si le chef de projet laisse l'informatique de gestion gérer l'etiquette colis et qu'elle est vide alors on renseigne la DIN
+         */
+        $this->getModel()->getDataField(FtaModel::FIELDNAME_LIBELLE)->setFieldValue($DIN);
+        if (!$this->getModel()->getDataField(FtaModel::FIELDNAME_VERROUILLAGE_LIBELLE_ETIQUETTE)->getFieldValue() and ! $this->getModel()->getDataField(FtaModel::FIELDNAME_LIBELLE_CLIENT)->getFieldValue()) {
+            $this->getModel()->getDataField(FtaModel::FIELDNAME_LIBELLE_CLIENT)->setFieldValue($DIN);
+        }
 
         return $return;
     }
@@ -411,32 +456,42 @@ class FtaView extends AbstractView {
     }
 
     /**
-     * Affichage Html du code artilce ldc mere
+     * Gestionnaire de l'affichage Html du code artilce arcadia primaire
+     * et les codes articles arcadia secondaires
      * @return string
      */
-    function getHtmlCodeArticleLdcMere() {
-        $id_fta = $this->getModel()->getKeyValue();
-        $codeArticleLdcMereValue = $this->getModel()->getDataField(FtaModel::FIELDNAME_CODE_ARTICLE_LDC_MERE)->getFieldValue();
-        $codeArticleMere = new HtmlInputText();
-        $HtmlTableName = FtaModel::TABLENAME
-                . '_'
-                . FtaModel::FIELDNAME_CODE_ARTICLE_LDC_MERE
-                . '_'
-                . $id_fta
-        ;
-        $codeArticleMere->setLabel(DatabaseDescription::getFieldDocLabel(FtaModel::TABLENAME, FtaModel::FIELDNAME_CODE_ARTICLE_LDC_MERE));
-        $codeArticleMere->getAttributes()->getValue()->setValue($codeArticleLdcMereValue);
-        $codeArticleMere->getAttributes()->getPattern()->setValue("[0-9]{1,5}");
-        $codeArticleMere->getAttributes()->getMaxLength()->setValue("5");
-        $codeArticleMere->setIsEditable($this->getIsEditable());
-        $codeArticleMere->initAbstractHtmlInput(
-                $HtmlTableName
-                , $codeArticleMere->getLabel()
-                , $codeArticleLdcMereValue
-                , $this->getModel()->getDataField(FtaModel::FIELDNAME_CODE_ARTICLE_LDC_MERE)->isFieldDiff()
-        );
-        $codeArticleMere->getEventsForm()->setOnChangeWithAjaxAutoSave(FtaModel::TABLENAME, FtaModel::KEYNAME, $id_fta, FtaModel::FIELDNAME_CODE_ARTICLE_LDC_MERE);
-        return $codeArticleMere->getHtmlResult();
+    function getHtmlCodeArticleArcadiaPrimaireSecondaire($paramIsEditable, $paramIdFtaChapitre, $paramSyntheseAction, $paramComeback, $paramIdFtaEtat, $paramAbrevationEtat, $paramIdFtaRole) {
+        $idFtaSecondary = $this->getModel()->getKeyValue();
+        /**
+         * On vérifie si le dosssier de la Fta encours  est utilisé comme dossier primaire
+         */
+        $isDosssierFtaPrimary = $this->getModel()->isDossierFtaPrimary();
+
+        /**
+         * Si oui alors on affiche la liste des Fta secondaires
+         */
+        if ($isDosssierFtaPrimary) {
+            $html = $this->getModel()->getLinkToSecondaryFta($paramIdFtaChapitre, $paramSyntheseAction, $paramComeback, $paramIdFtaRole);
+        } else {
+            /**
+             * Sinon on vérifie si elle est rataché à un dossier primaire (donc si il s'agis d'une secondaire)
+             */
+            $dossierFtaPrimaire = $this->getModel()->getDataField(FtaModel::FIELDNAME_DOSSIER_FTA_PRIMAIRE)->getFieldValue();
+            /**
+             * Si oui on affiche le lien vers la Fta primaire  
+             */
+            if ($dossierFtaPrimaire) {
+                $idFtaPrimaireValue = $this->getModel()->getIdFtaFromDossierFtaPrimary($dossierFtaPrimaire);
+                $ftaModelPrimaire = new FtaModel($idFtaPrimaireValue);
+                $html = $ftaModelPrimaire->getLinkToPrimaryFta($paramIdFtaChapitre, $paramSyntheseAction, $paramComeback, $paramIdFtaEtat, $paramAbrevationEtat, $paramIdFtaRole, $dossierFtaPrimaire, $idFtaSecondary, $paramIsEditable);
+            } elseif ($paramIsEditable) {
+                /**
+                 * Sinon on propose d'ajouter un lien avec une Fta Primaire
+                 */
+                $html = $this->getModel()->getLinkToPrimaryFta($paramIdFtaChapitre, $paramSyntheseAction, $paramComeback, $paramIdFtaEtat, $paramAbrevationEtat, $paramIdFtaRole, $dossierFtaPrimaire, $idFtaSecondary, $paramIsEditable);
+            }
+        }
+        return $html;
     }
 
     /**
@@ -1053,6 +1108,12 @@ class FtaView extends AbstractView {
     /**
      * Accès à la page de modification du gestionnaire de la Fta
      * @param boolean $paramIsEditable
+     * @param string $paramIdFtaChapitre
+     * @param string $paramSyntheseAction
+     * @param string $paramComeback
+     * @param string $paramIdFtaEtat
+     * @param string $paramAbrevationEtat
+     * @param string $paramIdFtaRole
      * @return string
      */
     function gestionnaireChangeList($paramIsEditable, $paramIdFtaChapitre, $paramSyntheseAction, $paramComeback, $paramIdFtaEtat, $paramAbrevationEtat, $paramIdFtaRole) {

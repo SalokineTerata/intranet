@@ -88,7 +88,7 @@ switch ($action) {
         if ($idFtaWorkflowOLD <> $idFtaWorkflowNEW) {
 
             $modelFta = new FtaModel($paramIdFta);
-            $idDossierFta = $modelFta->getDataField(FtaModel::FIELDNAME_DOSSIER_FTA)->getFieldValue();
+            $idDossierFta = $modelFta->getDossierFta();
 
             /**
              * Liste des IdFta changeant d'espace de travail

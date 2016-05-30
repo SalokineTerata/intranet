@@ -162,6 +162,11 @@ class DatabaseDescription {
      * Dans le cas d'une vérification de la donnée saisi
      */
     const ARRAY_NAME_DOC_TAGS_VALIDATION_RULES = "TagsValidationRules";
+    
+    /**
+     * Dans le cas d'un verrouillage par défaut de données
+     */
+    const ARRAY_NAME_DOC_DEFAULT_FIELD_LOCK_PRIMARY_FTA = "DefaultFieldLockPrimaryFta";
 
     /**
      * Nom de la variable contenant le nom du champ (défini par MySQL)
@@ -396,6 +401,7 @@ class DatabaseDescription {
             $rightToAdd = $rowsDoc['right_to_add'];
             $conditionSql = $rowsDoc['sql_condition_content_intranet_column_info'];
             $tagsValidationRules = $rowsDoc['tags_validation_rules_intranet_column_info'];
+            $defaultFieldToLockForPrimaryFta = $rowsDoc['default_field_to_lock_for_primary_fta'];
 
 
             /**
@@ -418,7 +424,8 @@ class DatabaseDescription {
                 self::ARRAY_NAME_DOC_FIELDS_TO_ORDER => $fieldsToOrder,
                 self::ARRAY_NAME_DOC_RIGHT_TO_ADD => $rightToAdd,
                 self::ARRAY_NAME_DOC_CONDITION_SQL => $conditionSql,
-                self::ARRAY_NAME_DOC_TAGS_VALIDATION_RULES => $tagsValidationRules
+                self::ARRAY_NAME_DOC_TAGS_VALIDATION_RULES => $tagsValidationRules,
+                self::ARRAY_NAME_DOC_DEFAULT_FIELD_LOCK_PRIMARY_FTA => $defaultFieldToLockForPrimaryFta
             );
         }
     }
@@ -700,6 +707,16 @@ class DatabaseDescription {
     public static function getTagsValidationRules($paramTableName, $paramFieldName) {
         return $_SESSION[get_class()][$paramTableName][self::ARRAY_NAME_FIELDS]
                 [$paramFieldName][self::ARRAY_NAME_DOC][self::ARRAY_NAME_DOC_TAGS_VALIDATION_RULES];
+    }
+    /**
+     * Indique si le champ doit être verrouillé par défaut
+     * @param string $paramTableName Nom de la table
+     * @param string $paramFieldName Nom du champs
+     * @return boolean Retourne un boolean
+     */
+    public static function getDefaultFieldLockPrimaryFta($paramTableName, $paramFieldName) {
+        return $_SESSION[get_class()][$paramTableName][self::ARRAY_NAME_FIELDS]
+                [$paramFieldName][self::ARRAY_NAME_DOC][self::ARRAY_NAME_DOC_DEFAULT_FIELD_LOCK_PRIMARY_FTA];
     }
 
     /**

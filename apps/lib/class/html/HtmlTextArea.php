@@ -38,12 +38,20 @@ class HtmlTextArea extends AbstractHtmlGlobalElement {
     , $paramLabel
     , $paramValue
     , $paramIsWarningUpdate
+    , $paramIsWarningMessage
+    , $paramWarningMessage
+    , $paramIsFieldLock = NULL
+    , $paramLinkFieldLock = NULL
     ) {
         $id = $paramName;
         parent::initAbstractHtmlGlobalElement(
                 $id
                 , $paramLabel
                 , $paramIsWarningUpdate
+                , $paramIsWarningMessage
+                , $paramWarningMessage
+                , $paramIsFieldLock
+                , $paramLinkFieldLock
         );
 
         $this->getAttributes()->getName()->setValue($paramName);
@@ -87,8 +95,9 @@ class HtmlTextArea extends AbstractHtmlGlobalElement {
     public function getHtmlViewedContent() {
         return nl2br(Html::showValue($this->getTextAreaContent()));
     }
+
     public function getHtmlAddContent() {
-        return ;
+        return;
     }
 
 }

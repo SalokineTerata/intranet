@@ -42,6 +42,8 @@ abstract class AbstractHtmlInput extends AbstractHtmlGlobalElement {
     , $paramIsWarningUpdate
     , $paramIsWarningMessage = NULL
     , $paramWarningMessage = NULL
+    , $paramIsFieldLock = NULL
+    , $paramLinkFieldLock = NULL
     ) {
         $id = $paramName;
         parent::initAbstractHtmlGlobalElement(
@@ -50,6 +52,8 @@ abstract class AbstractHtmlInput extends AbstractHtmlGlobalElement {
                 , $paramIsWarningUpdate
                 , $paramIsWarningMessage
                 , $paramWarningMessage
+                , $paramIsFieldLock
+                , $paramLinkFieldLock
         );
 
         $this->getAttributes()->getName()->setValue($paramName);

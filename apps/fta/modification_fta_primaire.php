@@ -40,7 +40,7 @@ $html_table = "table "                     //Permet d'harmoniser les tableaux
 /*
   Récupération des données MySQL
  */
-$idFta = Lib::getParameterFromRequest('id_fta');
+$idFta = Lib::getParameterFromRequest(FtaModel::KEYNAME);
 $id_fta_chapitre_encours = Lib::getParameterFromRequest('id_fta_chapitre_encours');
 $syntheseAction = Lib::getParameterFromRequest('synthese_action');
 $comeback = Lib::getParameterFromRequest('comeback');
@@ -49,26 +49,32 @@ $abreviationFtaEtat = Lib::getParameterFromRequest(FtaEtatModel::FIELDNAME_ABREV
 $idFtaRole = Lib::getParameterFromRequest(FtaRoleModel::KEYNAME);
 $modeDeRecherche = Lib::getParameterFromRequest("modeDeRecherche");
 
+
+
 /**
- * Initialisation des modèles
+ * Contrôle
  */
 $ftaModel = new FtaModel($idFta);
+$arrayIdFtaSeondaire = $ftaModel->getArrayIdFtaSecondaireByDossierPrimaire();
 
-
-$dossierFtaPrimaire = $ftaModel->getDataField(FtaModel::FIELDNAME_DOSSIER_FTA_PRIMAIRE)->getFieldValue();
-
-if ($dossierFtaPrimaire) {
-    "Message";
+/**
+ * On vérifie qu'il ne s'agit pas d'une Fta primaire
+ */
+if ($arrayIdFtaSeondaire) {
+    $message = UserInterfaceMessage::FR_WARNING_ARTICLE_PRIMAIRE_CHECK;
+    $titre = UserInterfaceMessage::FR_WARNING_ARTICLE_PRIMAIRE_TITLE;
+    Lib::showMessage($titre, $message);
 }
+
 
 
 switch ($modeDeRecherche) {
     case FtaModel::FIELDNAME_DOSSIER_FTA:
         $label = FtaModel::FIELDNAME_DOSSIER_FTA;
-        $titre = "Veuillez saisir le dossier Fta à rechercher";
+        $titre = UserInterfaceLabel::FR_SAISI_DOSSIER_FTA;
         break;
     case FtaModel::FIELDNAME_CODE_ARTICLE_LDC:
-        $titre = "Veuillez saisir le code article Arcadia à rechercher";
+        $titre = UserInterfaceLabel::FR_SAISI_CODE_ARTICLE_ARCADIA;
         $label = FtaModel::FIELDNAME_CODE_ARTICLE_LDC;
         break;
 
@@ -133,7 +139,7 @@ $navigue . "
      <input type=\"hidden\" name=\"comeback\" id=\"comeback\" value=\"" . $comeback . "\" />     
      <input type=\"hidden\" name=\"id_fta_chapitre_encours\" id=\"id_fta_chapitre_encours\" value=\"" . $id_fta_chapitre_encours . "\" />
      <input type=\"hidden\" name=\"modeDeRecherche\" id=\"modeDeRecherche\" value=\"" . $modeDeRecherche . "\" />
-
+     <br><br><br><br><br><br><br><br><br><br><br>
      <" . $html_table . ">
          
      <tr class=titre_principal><td>

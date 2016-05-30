@@ -303,7 +303,7 @@ switch ($output) {
              <tr class=titre_principal><td>
 
                  ' . $ftaModel->getDataField(FtaModel::FIELDNAME_DESIGNATION_COMMERCIALE)->getFieldValue()
-        . ' - ' . $ftaModel->getDataField(FtaModel::FIELDNAME_DOSSIER_FTA)->getFieldValue()
+        . ' - ' . $ftaModel->getDossierFta()
         . 'v' . $ftaModel->getDataField(FtaModel::FIELDNAME_VERSION_DOSSIER_FTA)->getFieldValue() . '
                  <br>
                  Ajout d\'un nouvel ' . $annexeEmballageGroupeTypeModel->getDataField(AnnexeEmballageGroupeTypeModel::FIELDNAME_NOM_ANNEXE_EMBALLAGE_GROUPE_TYPE)->getFieldValue()

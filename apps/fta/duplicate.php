@@ -81,13 +81,13 @@ $html_table = 'table '              //Permet d'harmoniser les tableaux
 
 //Informations de la Fiche Originale
 
-$id_dossier_fta_original = $ftaOrigModel->getDataField(FtaModel::FIELDNAME_DOSSIER_FTA)->getFieldValue();
+$id_dossier_fta_original = $ftaOrigModel->getDossierFta();
 $id_version_dossier_fta_original = $ftaOrigModel->getDataField(FtaModel::FIELDNAME_VERSION_DOSSIER_FTA)->getFieldValue();
 
 
-//Informations de la Fiche Originale
+//Informations de la Nouvelle Fiche   
 
-$id_dossier_fta_new = $ftaNewModel->getDataField(FtaModel::FIELDNAME_DOSSIER_FTA)->getFieldValue();
+$id_dossier_fta_new = $ftaNewModel->getDossierFta();
 $id_version_dossier_fta_new = $ftaNewModel->getDataField(FtaModel::FIELDNAME_VERSION_DOSSIER_FTA)->getFieldValue();
 
 

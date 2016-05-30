@@ -72,10 +72,10 @@ $html_table = 'table '              //Permet d'harmoniser les tableaux
   Récupération des données MySQL
  */
 $action = Lib::getParameterFromRequest('action');
-$idFta = Lib::getParameterFromRequest('id_fta');
-$idFtaRole = Lib::getParameterFromRequest('id_fta_role');
-$idFtaWorkflow = Lib::getParameterFromRequest('id_fta_workflow');
-$abreviation_fta_etat = Lib::getParameterFromRequest('abreviation_fta_etat');
+$idFta = Lib::getParameterFromRequest(FtaModel::KEYNAME);
+$idFtaRole = Lib::getParameterFromRequest(FtaRoleModel::KEYNAME);
+$idFtaWorkflow = Lib::getParameterFromRequest(FtaWorkflowModel::KEYNAME);
+$abreviation_fta_etat = Lib::getParameterFromRequest(FtaEtatModel::FIELDNAME_ABREVIATION);
 $htmlResult = new HtmlResult2();
 $idFtaProcessusEffectue = array();
 /*
@@ -187,6 +187,7 @@ switch ($output) {
                 <input type=hidden name=' . FtaModel::TABLENAME . '_' . FtaModel::FIELDNAME_COMMENTAIRE_MAJ_FTA . '_' . $idFta . ' value=`' . $commentaireMajFta . '`>
                 <input type=hidden name=demande_abreviation_fta_transition value=' . $demande_abreviation_fta_transition . '>
                 <input type=hidden name=synthese_action value=' . $syntheseAction . '>
+                    <br><br><br><br><br><br><br><br><br><br><br>
              <' . $html_table . '>
                 <tr class=titre_principal><td align=center>
 

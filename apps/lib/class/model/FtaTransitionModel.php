@@ -37,7 +37,7 @@ class FtaTransitionModel {
          */
         $ftaModel = new FtaModel($paramIdFta);
         $idFtaEtatByIdFta = $ftaModel->getDataField(FtaModel::FIELDNAME_ID_FTA_ETAT)->getFieldValue();
-        $idDossierFta = $ftaModel->getDataField(FtaModel::FIELDNAME_DOSSIER_FTA)->getFieldValue();
+        $idDossierFta = $ftaModel->getDossierFta();
         $codeArticleLdc = $ftaModel->getDataField(FtaModel::FIELDNAME_CODE_ARTICLE_LDC)->getFieldValue();
         $siteDeProduction = $ftaModel->getDataField(FtaModel::FIELDNAME_SITE_PRODUCTION)->getFieldValue();
         $old_nouveau_maj_fta = $ftaModel->getDataField(FtaModel::FIELDNAME_COMMENTAIRE_MAJ_FTA)->getFieldValue();
@@ -69,6 +69,11 @@ class FtaTransitionModel {
                  * Préparation des données
                  */
                 $nouveau_maj_fta = FtaController::getComment("Validation d'une Fta", $nomPrenom, NULL);
+
+                /**
+                 * Gestion des Code Article Arcadia Primaire/Secondaires
+                 */
+                $ftaModel->manageFtaPrimaireSecondaire();
 
                 break;
 //            case $paramAbreviationFtaTransition == FtaEtatModel::ETAT_ABREVIATION_VALUE_WORKFLOW:
@@ -197,7 +202,7 @@ class FtaTransitionModel {
          * ***************************************************************************** */
 
         /**
-         * Mise à jour de la date de validation
+         * Mise à jour de la date derniere modification de l'état de la Fta
          */
         $ftaModel->getDataField(FtaModel::FIELDNAME_DATE_DERNIERE_MAJ_FTA)->setFieldValue(date('Y-m-d'));
         $ftaModel->saveToDatabase();
@@ -216,8 +221,8 @@ class FtaTransitionModel {
         }
 
         $req = "UPDATE " . FtaModel::TABLENAME
-                . " SET " . FtaModel::FIELDNAME_ID_FTA_ETAT . "=" . $idFtaEtat //Identifiant de "retirer"
-                . ", " . FtaModel::FIELDNAME_COMMENTAIRE_MAJ_FTA . "=\"" . $nouveau_maj_fta //Identifiant de "retirer"
+                . " SET " . FtaModel::FIELDNAME_ID_FTA_ETAT . "=" . $idFtaEtat
+                . ", " . FtaModel::FIELDNAME_COMMENTAIRE_MAJ_FTA . "=\"" . $nouveau_maj_fta
                 . "\" WHERE " . FtaModel::KEYNAME . "=\"" . $paramIdFta . "\" "
         ;
         DatabaseOperation::execute($req);
@@ -592,7 +597,8 @@ class FtaTransitionModel {
                 . "\n"
                 . "INFORMATIONS DE DEBUGGAGE:\n"
                 . $logTransition
-        ; {
+        ;
+        {
             $expediteur = $prenom . " " . $nom . " <" . $mail . ">";
             envoismail($sujetmail, $corp, $mail, $expediteur, $typeMail);
         }
@@ -711,7 +717,8 @@ class FtaTransitionModel {
                 . $text
                 . "\n\n"
                 . $paramLogTransition
-        ; {
+        ;
+        {
             $expediteur = $prenom . " " . $nom . " <" . $mailUser . ">";
             envoismail($sujetmail, $corp, $mailUser, $expediteur, $typeMail);
         }

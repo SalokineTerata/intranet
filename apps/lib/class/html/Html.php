@@ -16,6 +16,10 @@ class Html {
     const DEFAULT_HTML_IMAGE_LOADING = AttributesGlobal::DEFAULT_HTML_IMAGE_LOADING;
     const DEFAULT_HTML_IMAGE_OK = AttributesGlobal::DEFAULT_HTML_IMAGE_OK;
     const DEFAULT_HTML_IMAGE_UNDO = AttributesGlobal::DEFAULT_HTML_IMAGE_UNDO;
+    const DEFAULT_HTML_IMAGE_DEVERROUILLE_MODIFIABLE = AttributesGlobal::DEFAULT_HTML_IMAGE_DEVERROUILLE_MODIFIABLE;
+    const DEFAULT_HTML_IMAGE_DEVERROUILLE_NON_MODIFIABLE = AttributesGlobal::DEFAULT_HTML_IMAGE_DEVERROUILLE_NON_MODIFIABLE;
+    const DEFAULT_HTML_IMAGE_VERROUILLE_NON_MODIFIABLE = AttributesGlobal::DEFAULT_HTML_IMAGE_VERROUILLE_NON_MODIFIABLE;
+    const DEFAULT_HTML_IMAGE_VERROUILLE_MODIFIABLE = AttributesGlobal::DEFAULT_HTML_IMAGE_VERROUILLE_MODIFIABLE;
     const DEFAULT_HTML_WARNING_UPDATE_IMAGE = "<img src=../lib/images/exclamation.png alt=\"\" title=\"Information mise à jour\" width=\"20\" height=\"18\" border=\"0\" />";
     const DEFAULT_HTML_WARNING_UPDATE_BGCOLOR = "background-color:#B0FFFE;";
     const DEFAULT_HTML_WARNING_MESSAGE_BGCOLOR = "background-color:#FF5B5B;";
@@ -181,7 +185,7 @@ class Html {
                 break;
 
             case Html::TYPE_OF_OBJECT_SUBFORM_RNN:
-                $htmlObject = new DataFieldToHtmlSubform_RNN($paramDataField, $param,$param2);
+                $htmlObject = new DataFieldToHtmlSubform_RNN($paramDataField, $param, $param2);
                 break;
             case Html::TYPE_OF_OBJECT_INPUTNUMBER:
                 $htmlObject = new DataFieldToHtmlInputNumber($paramDataField);
@@ -203,7 +207,7 @@ class Html {
     public static function convertDataFieldToHtml(DatabaseDataField $paramDataField, $paramIsEditable) {
 
         $htmlObject = self::getHtmlObjectFromDataField($paramDataField);
-        $htmlObject->setIsEditable($paramIsEditable);       
+        $htmlObject->setIsEditable($paramIsEditable);
 
         return $htmlObject->getHtmlResult();
     }

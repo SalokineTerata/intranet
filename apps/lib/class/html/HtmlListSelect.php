@@ -73,6 +73,8 @@ class HtmlListSelect extends AbstractHtmlList {
     , $paramArrayListContent
     , $paramIsWarningMessage = NULL
     , $paramWarningMessage = NULL
+    , $paramIsFieldLock = NULL
+    , $paramLinkFieldLock = NULL
     ) {
         $id = $paramName;
         parent::initAbstractHtmlGlobalElement(
@@ -81,6 +83,8 @@ class HtmlListSelect extends AbstractHtmlList {
                 , $paramIsWarningUpdate
                 , $paramIsWarningMessage
                 , $paramWarningMessage
+                , $paramIsFieldLock
+                , $paramLinkFieldLock
         );
 
         $this->getAttributes()->getName()->setValue($paramName);

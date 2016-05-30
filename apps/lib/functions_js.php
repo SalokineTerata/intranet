@@ -30,8 +30,36 @@
         document.getElementById('chargement').style.display = 'none';
         document.getElementById('site').style.visibility = 'visible';
     }
-    
-     function ajaxDoAction(ParamTagId, ParamCallFile, ParamUrlParameter, ParamCallbackFunction, ParamCallbackFunctionParameters) {
+    function lockFields(ParamFieldName, ParamIdFta) {
+
+        if (confirm("Etes vous certain de vouloir modifier l\'état de ce champ ? Car les Fta Secondaires seront aussi affectées."))
+        {
+            location.href = "modification_fta_primaire_etat.php?FieldName=" + ParamFieldName
+                    + "&id_fta=" + ParamIdFta;
+        }
+        else {
+        }
+
+
+    }
+    function desactivationLockFields(ParamIdFta, ParamIdFtaChapitreEncours, ParamSyntheseAction, ParamComeback, ParamIdFtaEtat, ParamAbreviationFtaEtat, ParamIdFtaRole) {
+
+        if (confirm("Etes vous certain de vouloir désactiver le Code  Primaire de cette Fta ?"))
+        {
+            location.href = "modification_fta_primaire_desactivation.php?id_fta=" + ParamIdFta
+                    + "&id_fta_chapitre_encours=" + ParamIdFtaChapitreEncours
+                    + "&synthese_action=" + ParamSyntheseAction
+                    + "&comeback=" + ParamComeback
+                    + "&id_fta_etat=" + ParamIdFtaEtat
+                    + "&abreviation_fta_etat=" + ParamAbreviationFtaEtat
+                    + "&id_fta_role=" + ParamIdFtaRole;
+        }
+        else {
+        }
+
+
+    }
+    function ajaxDoAction(ParamTagId, ParamCallFile, ParamUrlParameter, ParamCallbackFunction, ParamCallbackFunctionParameters) {
 
 
         var TagId = ParamTagId;
@@ -100,4 +128,5 @@
 //            }
         }
     }
+
 </script>

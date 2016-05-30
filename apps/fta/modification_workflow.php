@@ -91,7 +91,7 @@ $navigue . "
      <input type=\"hidden\" name=\"comeback\" id=\"comeback\" value=\"" . $comeback . "\" />
      <input type=\"hidden\" name=\"id_fta_workflow\" id=\"id_fta_workflow\" value=\"" . $idFtaWorkflow . "\" />
      <input type=\"hidden\" name=\"id_fta_chapitre_encours\" id=\"id_fta_chapitre_encours\" value=\"" . $id_fta_chapitre_encours . "\" />
-
+     <br><br><br><br><br><br><br><br><br><br><br>
      <" . $html_table . ">
          
      <tr class=titre_principal><td>

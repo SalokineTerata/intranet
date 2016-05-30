@@ -43,7 +43,6 @@ require_once '../inc/main.php';
 /*
   Récupération des données MySQL
  */
-$action = Lib::getParameterFromRequest('action');
 $paramIdFta = Lib::getParameterFromRequest(FtaModel::KEYNAME);
 $paramIdFtaChapitreEncours = Lib::getParameterFromRequest('id_fta_chapitre_encours');
 $paramSyntheseAction = Lib::getParameterFromRequest('synthese_action');
@@ -52,40 +51,18 @@ $idFtaRole = Lib::getParameterFromRequest(FtaRoleModel::KEYNAME);
 $idFtaEtat = Lib::getParameterFromRequest(FtaEtatModel::KEYNAME);
 $abreviationFtaEtat = Lib::getParameterFromRequest(FtaEtatModel::FIELDNAME_ABREVIATION);
 $comeback = Lib::getParameterFromRequest(FtaEtatModel::KEYNAME);
-$idFtaDossier = Lib::getParameterFromRequest(FtaModel::FIELDNAME_DOSSIER_FTA);
-$idFtaPrimaire = Lib::getParameterFromRequest("selection_fta");
+
+
 
 /**
  * Initialisation
  */
-if ($idFtaPrimaire) {
+$ftaModel = new FtaModel($paramIdFta);
 
-    DatabaseOperation::execute(
-            "UPDATE " . FtaModel::TABLENAME
-            . " SET " . FtaModel::FIELDNAME_DOSSIER_FTA_PRIMAIRE . "=" . $idFtaDossier
-            . " WHERE " . FtaModel::KEYNAME . "=" . $paramIdFta
-    );
+//Fonction de désactivation de la fonctionnalité Code Article Arcadia Primaire/Secondaire
+$ftaModel->disabledCodePrimaire();
 
-    $arrayFtaDossierChampsVerrouiller = FtaVerrouillageChampsModel::getArrayFtaLockDefaultByPrimaryFolder($idFtaDossier);
-
-    if (!$arrayFtaDossierChampsVerrouiller) {
-        /**
-         * On insert les champs à verrouiller par défaut
-         */
-        FtaVerrouillageChampsModel::insertDefaultFieldToLock($idFtaDossier);
-    }
-
-    /**
-     * Synchronisation des données
-     */
-    FtaVerrouillageChampsModel::dataSynchronizeFtaPrimarySecondary($idFtaPrimaire, $paramIdFta, $idFtaDossier,FALSE);
-
-    //Redirection
-    header('Location: modification_fiche.php?id_fta=' . $paramIdFta . '&id_fta_chapitre_encours=' . $paramIdFtaChapitreEncours . '&synthese_action=' . $paramSyntheseAction . '&id_fta_etat=' . $idFtaEtat . '&abreviation_fta_etat=' . $abreviationFtaEtat . '&id_fta_role=' . FtaRoleModel::ID_FTA_ROLE_COMMUN);
-} else {
-    $titre = UserInterfaceMessage::FR_WARNING_DATA_GESTIONNAIRE_TITLE;
-    $message = UserInterfaceMessage::FR_WARNING_DATA_GESTIONNAIRE;
-    Lib::showMessage($titre, $message, $redirection);
-}
+//Redirection
+header('Location: modification_fiche.php?id_fta=' . $paramIdFta . '&id_fta_chapitre_encours=' . $paramIdFtaChapitreEncours . '&synthese_action=' . $paramSyntheseAction . '&id_fta_etat=' . $idFtaEtat . '&abreviation_fta_etat=' . $abreviationFtaEtat . '&id_fta_role=' . FtaRoleModel::ID_FTA_ROLE_COMMUN);
 ?>
 

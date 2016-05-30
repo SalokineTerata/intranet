@@ -73,7 +73,14 @@ $codePrimaire = Lib::getParameterFromRequest(FtaModel::FIELDNAME_DOSSIER_FTA_PRI
 $largeur_html_C1 = TableauFicheView::HTML_CELL_WIDTH_C1; // largeur cellule type
 $largeur_html_C3 = TableauFicheView::HTML_CELL_WIDTH_C3; // largeur cellule type
 $selection_width = TableauFicheView::HTML_CELL_WIDTH_SELECTION;
-
+/**
+ * Contrôle
+ */
+if (!$codePrimaire) {
+    $titre = UserInterfaceMessage::FR_WARNING_DATA_DOSSIER_FTA_TITLE;
+    $message = UserInterfaceMessage::FR_WARNING_DATA_DOSSIER_FTA_NON_SAISIE;
+    Lib::showMessage($titre, $message, $redirection);
+}
 
 switch ($modeDeRecherche) {
 
@@ -91,8 +98,8 @@ switch ($modeDeRecherche) {
                         . "," . FtaModel::FIELDNAME_DESIGNATION_COMMERCIALE . "," . FtaModel::FIELDNAME_POIDS_ELEMENTAIRE
                         . "," . FtaModel::FIELDNAME_NOMBRE_UVC_PAR_CARTON . "," . FtaModel::FIELDNAME_CODE_ARTICLE_LDC
                         . " FROM " . FtaModel::TABLENAME
-                        . " WHERE " . FtaModel::FIELDNAME_DOSSIER_FTA . "=" . $codePrimaire
-                        . " ORDER BY " . FtaModel::FIELDNAME_ID_FTA_ETAT . "," . FtaModel::FIELDNAME_VERSION_DOSSIER_FTA . " DESC"
+                        . " WHERE " . FtaModel::FIELDNAME_DOSSIER_FTA . "=\"" . $codePrimaire
+                        . "\" ORDER BY " . FtaModel::FIELDNAME_ID_FTA_ETAT . "," . FtaModel::FIELDNAME_VERSION_DOSSIER_FTA . " DESC"
         );
 
 
@@ -109,8 +116,8 @@ switch ($modeDeRecherche) {
                         . "," . FtaModel::FIELDNAME_DESIGNATION_COMMERCIALE . "," . FtaModel::FIELDNAME_POIDS_ELEMENTAIRE
                         . "," . FtaModel::FIELDNAME_NOMBRE_UVC_PAR_CARTON . "," . FtaModel::FIELDNAME_CODE_ARTICLE_LDC
                         . " FROM " . FtaModel::TABLENAME
-                        . " WHERE " . FtaModel::FIELDNAME_CODE_ARTICLE_LDC . "=" . $codePrimaire
-                        . " ORDER BY " . FtaModel::FIELDNAME_ID_FTA_ETAT . "," . FtaModel::FIELDNAME_VERSION_DOSSIER_FTA . " DESC"
+                        . " WHERE " . FtaModel::FIELDNAME_CODE_ARTICLE_LDC . "=\"" . $codePrimaire
+                        . "\" ORDER BY " . FtaModel::FIELDNAME_ID_FTA_ETAT . "," . FtaModel::FIELDNAME_VERSION_DOSSIER_FTA . " DESC"
         );
 
 
@@ -126,8 +133,20 @@ if ($arrayDossierFta) {
 
     foreach ($arrayDossierFta as $rowsDossierFta) {
         $idFta = $rowsDossierFta[FtaModel::KEYNAME];
+        /**
+         * Contrôle
+         */
         if ($idFta == $paramIdFta) {
-            $message = "Vous ne pouvez associer cette Fta avec une Fta ayant le même code Article Arcadia ou dossier Fta";
+            $message = UserInterfaceMessage::FR_WARNING_ARTICLE_PRIMAIRE;
+            $titre = UserInterfaceMessage::FR_WARNING_ARTICLE_PRIMAIRE_TITLE;
+            Lib::showMessage($titre, $message);
+        }
+        $ftaCheckModel = new FtaModel($idFta);
+        $dossierPrimaireCheck = $ftaCheckModel->getDossierPrimaire();
+        if ($dossierPrimaireCheck) {
+            $message = UserInterfaceMessage::FR_WARNING_ARTICLE_SECONDAIRE;
+            $titre = UserInterfaceMessage::FR_WARNING_ARTICLE_SECONDAIRE_TITLE;
+            Lib::showMessage($titre, $message);
         }
         $designation_commerciale_fta = $rowsDossierFta[FtaModel::FIELDNAME_DESIGNATION_COMMERCIALE];
         $id_dossier_fta = $rowsDossierFta[FtaModel::FIELDNAME_DOSSIER_FTA];
@@ -165,50 +184,6 @@ if ($arrayDossierFta) {
 
         $tableau_fiches.="<td $bgcolor width=\"1%\"> <b><font size=\"2\" color=\"#0000FF\">" . $code_article_ldc . "</font></b></td>";
         $tableau_fiches.="</tr>";
-    }
-
-    /**
-     * Identification automatique de la Fta à traité
-     */
-    if (FALSE) {
-        $arrayDossierFtaModification = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
-                        "SELECT " . FtaModel::KEYNAME
-                        . " FROM " . FtaModel::TABLENAME
-                        . " WHERE " . FtaModel::FIELDNAME_DOSSIER_FTA . "=" . $codePrimaire
-                        . " AND " . FtaModel::FIELDNAME_ID_FTA_ETAT . "=" . FtaEtatModel::ID_VALUE_MODIFICATION
-        );
-        $arrayDossierFtaValide = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
-                        "SELECT " . FtaModel::KEYNAME
-                        . " FROM " . FtaModel::TABLENAME
-                        . " WHERE " . FtaModel::FIELDNAME_DOSSIER_FTA . "=" . $codePrimaire
-                        . " AND " . FtaModel::FIELDNAME_ID_FTA_ETAT . "=" . FtaEtatModel::ID_VALUE_VALIDE
-        );
-        $arrayDossierFtaLastVersion = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
-                        "SELECT " . FtaModel::FIELDNAME_DOSSIER_FTA . ", MAX (" . FtaModel::FIELDNAME_VERSION_DOSSIER_FTA . ")"
-                        . " FROM " . FtaModel::TABLENAME
-                        . " WHERE " . FtaModel::FIELDNAME_DOSSIER_FTA . "=" . $codePrimaire
-        );
-        if ($arrayDossierFtaModification) {
-            foreach ($arrayDossierFtaModification as $rowsDossierFtaModification) {
-                $idFtaPrimaire = $rowsDossierFtaModification[FtaModel::KEYNAME];
-            }
-        } elseif ($arrayDossierFtaValide) {
-            foreach ($arrayDossierFtaValide as $rowsDossierFtaValide) {
-                $idFtaPrimaire = $rowsDossierFtaValide[FtaModel::KEYNAME];
-            }
-        } else {
-            foreach ($arrayDossierFtaLastVersion as $rowsDossierFtaLastVersion) {
-                $arrayDossierFtaLastVersionFinal = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
-                                "SELECT " . FtaModel::KEYNAME
-                                . " FROM " . FtaModel::TABLENAME
-                                . " WHERE " . FtaModel::FIELDNAME_DOSSIER_FTA . "=" . $rowsDossierFtaLastVersion[FtaModel::FIELDNAME_DOSSIER_FTA]
-                                . " AND " . FtaModel::FIELDNAME_VERSION_DOSSIER_FTA . "=" . $rowsDossierFtaLastVersion[FtaModel::FIELDNAME_VERSION_DOSSIER_FTA]
-                );
-                foreach ($arrayDossierFtaLastVersionFinal as $rowsDossierFtaLastVersionFinal) {
-                    $idFtaPrimaire = $rowsDossierFtaLastVersionFinal[FtaModel::KEYNAME];
-                }
-            }
-        }
     }
 } else {
     $titre = UserInterfaceMessage::FR_WARNING_DATA_DOSSIER_FTA_TITLE;

@@ -467,7 +467,6 @@
         abreviationFtaEtat = document.getElementById("abreviation_fta_etat").value;
         idFtaRole = document.getElementById("id_fta_role").value;
         gestionnaire = document.getElementById("gestionnaire").value;
-
         //if (i == 0) return;
         url = "ajout_classification_chemin.php?id_fta=" + idFta
                 + "&id_fta_chapitre_encours=" + id_fta_chapitre_encours
@@ -493,7 +492,6 @@
         abreviationFtaEtat = document.getElementById("abreviation_fta_etat").value;
         idFtaRole = document.getElementById("id_fta_role").value;
         gestionnaire = document.getElementById("gestionnaire").value;
-
         //if (i == 0) return;
         url = "ajout_classification_chemin.php?id_fta=" + idFta
                 + "&id_fta_chapitre_encours=" + id_fta_chapitre_encours
@@ -521,7 +519,6 @@
         abreviationFtaEtat = document.getElementById("abreviation_fta_etat").value;
         idFtaRole = document.getElementById("id_fta_role").value;
         gestionnaire = document.getElementById("gestionnaire").value;
-
         url = "ajout_classification_chemin.php?id_fta=" + idFta
                 + "&id_fta_chapitre_encours=" + id_fta_chapitre_encours
                 + "&synthese_action=" + syntheseAction
@@ -550,7 +547,6 @@
         abreviationFtaEtat = document.getElementById("abreviation_fta_etat").value;
         idFtaRole = document.getElementById("id_fta_role").value;
         gestionnaire = document.getElementById("gestionnaire").value;
-
         //if (i == 0) return;
         url = "ajout_classification_chemin.php?id_fta=" + idFta
                 + "&id_fta_chapitre_encours=" + id_fta_chapitre_encours
@@ -582,7 +578,6 @@
         abreviationFtaEtat = document.getElementById("abreviation_fta_etat").value;
         idFtaRole = document.getElementById("id_fta_role").value;
         gestionnaire = document.getElementById("gestionnaire").value;
-
         //if (i == 0) return;
         url = "ajout_classification_chemin.php?id_fta=" + idFta
                 + "&id_fta_chapitre_encours=" + id_fta_chapitre_encours
@@ -616,7 +611,6 @@
         abreviationFtaEtat = document.getElementById("abreviation_fta_etat").value;
         idFtaRole = document.getElementById("id_fta_role").value;
         gestionnaire = document.getElementById("gestionnaire").value;
-
         //if (i == 0) return;
         url = "ajout_classification_chemin.php?id_fta=" + idFta
                 + "&id_fta_chapitre_encours=" + id_fta_chapitre_encours
@@ -648,7 +642,6 @@
         syntheseAction = document.getElementById("synthese_action").value;
         id_fta_chapitre_encours = document.getElementById("id_fta_chapitre_encours").value;
         gestionnaire = document.getElementById("gestionnaire").value;
-
 //        comeback = document.getElementById("comeback").value;
         idFtaEtat = document.getElementById("id_fta_etat").value;
         abreviationFtaEtat = document.getElementById("abreviation_fta_etat").value;
@@ -690,7 +683,6 @@
         abreviationFtaEtat = document.getElementById("abreviation_fta_etat").value;
         idFtaRole = document.getElementById("id_fta_role").value;
         gestionnaire = document.getElementById("gestionnaire").value;
-
         //if (i == 0) return;
         url = "ajout_classification_chemin.php?id_fta=" + idFta
                 + "&id_fta_chapitre_encours=" + id_fta_chapitre_encours

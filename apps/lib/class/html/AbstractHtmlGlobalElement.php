@@ -99,6 +99,18 @@ abstract class AbstractHtmlGlobalElement {
     private $warningMessage;
 
     /**
+     * Le champ est-il verrouillé 
+     * @var string 
+     */
+    private $isFieldLock;
+
+    /**
+     * Lien du changement d'état d'un champ primaire
+     * @var string 
+     */
+    private $linkFieldLock;
+
+    /**
      * Information complémentaire affichée après l'objet HTML
      * @var String
      */
@@ -165,12 +177,16 @@ abstract class AbstractHtmlGlobalElement {
     , $paramIsWarningUpdate
     , $paramIsWarningMessage = NULL
     , $paramWarningMessage = NULL
+    , $paramIsFieldLock = NULL
+    , $paramLinkFieldLock = NULL
     ) {
 
         $this->setLabel($paramLabel);
         $this->setIsWarningUpdate($paramIsWarningUpdate);
         $this->setIsWarningMessage($paramIsWarningMessage);
         $this->setWarningMessage($paramWarningMessage);
+        $this->setIsFieldLock($paramIsFieldLock);
+        $this->setLinkFieldLock($paramLinkFieldLock);
         $this->getAttributesGlobal()->getId()->setValue($paramId);
     }
 
@@ -330,6 +346,22 @@ abstract class AbstractHtmlGlobalElement {
         $this->warningMessage = $warningMessage;
     }
 
+    function getIsFieldLock() {
+        return $this->isFieldLock;
+    }
+
+    function setIsFieldLock($isFieldLock) {
+        $this->isFieldLock = $isFieldLock;
+    }
+
+    function getLinkFieldLock() {
+        return $this->linkFieldLock;
+    }
+
+    function setLinkFieldLock($linkFieldLock) {
+        $this->linkFieldLock = $linkFieldLock;
+    }
+
     public function getAdditionnalTextInfo() {
         return $this->additionnalTextInfo;
     }
@@ -385,12 +417,19 @@ abstract class AbstractHtmlGlobalElement {
             $color_modif = Html::DEFAULT_HTML_WARNING_MESSAGE_BGCOLOR;
         }
 
+        //Traitement du verrouillage du champs
+        if ($this->getIsFieldLock()) {
+            $linkFieldLock = $this->getLinkFieldLock();
+        }
+
         //Rendu HTML - début encapsulation
         switch ($this->getHtmlRender()) {
             case self::HTML_RENDER_TO_FORM:
                 $html_result .= '<tr ' . $idRow . ' ' . $style . ' class=contenu width=75%>';
-//                $html_result .= '<tr ' . $idRow . ' style=' . $style . ' class=contenu>';
-                $html_result .= '<td align=left style=\'' . $color_modif . '\' width=25%>' . $label . '</td>';
+                $html_result .= '<td align=left style=\'' . $color_modif . '\' width=25%>'
+                        . '<div>' . $label . '</div>'
+                        . $linkFieldLock
+                        . '</td>';
                 break;
 
             case self::HTML_RENDER_TO_TABLE:

@@ -704,8 +704,8 @@ class DatabaseRecord extends SessionSaveAndRestoreAbstract {
          * Initilisation de l'information de success ou pas
          */
         $this->setDataValidationSuccessful($isDataValidationSuccessful);
-    }
-
+    } 
+ 
     public function isNeedUpdateRecordsetInDatabase($paramIsAutoSaving = FALSE) {
         /**
          * isNeedUpdateRecordInDatabase: Doit-on mettre à jour la base de données ?

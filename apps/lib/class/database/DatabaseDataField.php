@@ -37,6 +37,18 @@ class DatabaseDataField extends DatabaseDescriptionField {
     private $dataWarningMessage;
 
     /**
+     * Le dataField en cours est-elle verrouillé ?
+     * @var boolean
+     */
+    private $isFieldLock;
+
+    /**
+     * Lien du changment d'état d'un champ verrouillé/déverrouillé
+     * @var string
+     */
+    private $linkFieldLock;
+
+    /**
      * Création de l'objet
      * @param string $paramFieldName Nom du champs
      * @param DatabaseRecord $paramRecordset Référence au recordset
@@ -86,6 +98,9 @@ class DatabaseDataField extends DatabaseDescriptionField {
         return $this->getRecordsetRef()->isFieldDiff(parent::getFieldName());
     }
 
+    /**
+     * Initialisation de la vérification des règles de validation
+     */
     public function checkValidationRules() {
         /**
          * Vérification du champ initialisé
@@ -96,6 +111,28 @@ class DatabaseDataField extends DatabaseDescriptionField {
          */
         $this->setDataValidationSuccessful();
         $this->setDataWarningMessage();
+    }
+
+  
+    /**
+     * Initialisation de la vérification du verrouillage du champs
+     * @param FtaModel $paramFtaModel
+     * @param boolean $paramIsEditable
+     */
+    public function checkLockField(FtaModel $paramFtaModel,$paramIsEditable) {
+        /**
+         * Vérification du champ initialisé
+         */
+        $isFieldLock = FtaVerrouillageChampsModel::isFieldLock($this, $paramFtaModel);
+        /**
+         * Génération du lien pour verrouillé/déverrouillé
+         */
+        $linkFieldLock = FtaVerrouillageChampsModel::linkFieldLock($isFieldLock, $this, $paramFtaModel,$paramIsEditable);
+        /**
+         * Inialisation du résultat
+         */
+        $this->setIsFieldLock($isFieldLock);
+        $this->setLinkFieldLock($linkFieldLock);
     }
 
     function getDataValidationSuccessful() {
@@ -112,6 +149,22 @@ class DatabaseDataField extends DatabaseDescriptionField {
 
     function setDataWarningMessage() {
         $this->dataWarningMessage = $this->getRecordsetRef()->getDataWarningMessage();
+    }
+
+    function getIsFieldLock() {
+        return $this->isFieldLock;
+    }
+
+    function setIsFieldLock($isLockField) {
+        $this->isFieldLock = $isLockField;
+    }
+
+    function getLinkFieldLock() {
+        return $this->linkFieldLock;
+    }
+
+    function setLinkFieldLock($linkFieldLock) {
+        $this->linkFieldLock = $linkFieldLock;
     }
 
     /**

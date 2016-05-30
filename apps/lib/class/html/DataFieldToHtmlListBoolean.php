@@ -20,6 +20,10 @@ class DataFieldToHtmlListBoolean extends HtmlListBoolean {
                 , $this->getDataField()->getFieldValue()
                 , $this->getDataField()->isFieldDiff()
                 , HtmlListBoolean::getArrayListContentBoolean()
+                , $this->getDataField()->getDataValidationSuccessful()
+                , $this->getDataField()->getDataWarningMessage()
+                , $this->getDataField()->getIsFieldLock()
+                , $this->getDataField()->getLinkFieldLock()
         );
 
         $this->getEventsForm()->setOnChangeWithAjaxAutoSave(

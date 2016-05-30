@@ -123,11 +123,11 @@ class DatabaseDataField extends DatabaseDescriptionField {
         /**
          * Vérification du champ initialisé
          */
-        $isFieldLock = FtaVerrouillageChampsModel::isFieldLock($this, $paramFtaModel);
+        $isFieldLock = FtaVerrouillageChampsModel::isFieldLock($this->getFieldName(), $paramFtaModel);
         /**
          * Génération du lien pour verrouillé/déverrouillé
          */
-        $linkFieldLock = FtaVerrouillageChampsModel::linkFieldLock($isFieldLock, $this, $paramFtaModel,$paramIsEditable);
+        $linkFieldLock = FtaVerrouillageChampsModel::linkFieldLock($isFieldLock, $this->getFieldName(), $paramFtaModel,$paramIsEditable);
         /**
          * Inialisation du résultat
          */

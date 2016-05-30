@@ -160,12 +160,12 @@ class FtaView extends AbstractView {
         /**
          * On vérifie si le champ est verrouillable
          */
-        $dataField->checkLockField($this->getModel(),  $this->getIsEditable());
+        $dataField->checkLockField($this->getModel(), $this->getIsEditable());
 
         /**
          * On autorise la modification selon l'état de champs verrouillable
          */
-        $isEditable = $this->isEditableLockField($dataField);
+        $isEditable = $this->isEditableLockField($dataField->getIsFieldLock());
         /**
          * On vérifie les Règles de validation du champ
          */
@@ -183,16 +183,14 @@ class FtaView extends AbstractView {
         );
     }
 
-    
     /**
      * On autorise la modification selon l'état de champs verrouillable
-     * @param DatabaseDataField $paramDataField
+     * @param $paramIsLockValue
      * @return boolean
      */
-    function isEditableLockField(DatabaseDataField $paramDataField) {
-        $isLockValue = $paramDataField->getIsFieldLock();
+    function isEditableLockField($paramIsLockValue) {
         $isEditable = $this->getIsEditable();
-        switch ($isLockValue) {
+        switch ($paramIsLockValue) {
             case FtaVerrouillageChampsModel::FIELD_LOCK_PRIMARY_FALSE:
             case FtaVerrouillageChampsModel::FIELD_LOCK_SECONDARY_FALSE:
 
@@ -629,14 +627,29 @@ class FtaView extends AbstractView {
     public function getHtmlVerrouillageEtiquetteWithEtiquetteColis() {
         //Initialisation des variables locales
         $htmlReturn = NULL;
+
+        $dataFieldVerrouillageLibelleEtiquette = $this->getModel()->getDataField(FtaModel::FIELDNAME_VERROUILLAGE_LIBELLE_ETIQUETTE);
+        $dataFieldLibelleColis = $this->getModel()->getDataField(FtaModel::FIELDNAME_LIBELLE_CLIENT);
+
+        /**
+         * On vérifie si le champ est verrouillable
+         */
+        $dataFieldVerrouillageLibelleEtiquette->checkLockField($this->getModel(), $this->getIsEditable());
+        $dataFieldLibelleColis->checkLockField($this->getModel(), $this->getIsEditable());
+
+        /**
+         * On autorise la modification selon l'état de champs verrouillable
+         */
+        $isEditableVerrouillageLibelleEtiquette = $this->isEditableLockField($dataFieldVerrouillageLibelleEtiquette->getIsFieldLock());
+        $isEditableLibelleColis = $this->isEditableLockField($dataFieldLibelleColis->getIsFieldLock());
         $htmlObjectVerrouillageEtiquette = new DataFieldToHtmlListSelect(
-                $this->getModel()->getDataField(FtaModel::FIELDNAME_VERROUILLAGE_LIBELLE_ETIQUETTE)
+                $dataFieldVerrouillageLibelleEtiquette
         );
         $htmlObjectEtiquetteColis = new DataFieldToHtmlInputText(
-                $this->getModel()->getDataField(FtaModel::FIELDNAME_LIBELLE_CLIENT)
+                $dataFieldLibelleColis
         );
 
-        $htmlObjectVerrouillageEtiquette->setIsEditable($this->getIsEditable());
+        $htmlObjectVerrouillageEtiquette->setIsEditable($isEditableVerrouillageLibelleEtiquette);
         $htmlObjectVerrouillageEtiquette->getEventsForm()->setCallbackJavaScriptFunctionOnChange(self::JAVASCRIPT_CALLBACK_VERROUILLAGE_ETIQ);
         $callbackJavaScriptFunctionOnChangeParameters = $htmlObjectVerrouillageEtiquette->getAttributesGlobal()->getId()->getValue()
                 . ","
@@ -646,7 +659,7 @@ class FtaView extends AbstractView {
 
         $htmlReturn.=$htmlObjectVerrouillageEtiquette->getHtmlResult();
 
-        $htmlObjectEtiquetteColis->setIsEditable($this->getIsEditable());
+        $htmlObjectEtiquetteColis->setIsEditable($isEditableLibelleColis);
 
         if ($htmlObjectVerrouillageEtiquette->getDataField()->getFieldValue() === FtaModel::ETIQUETTE_COLIS_VERROUILLAGE_TRUE) {
             /**
@@ -1177,14 +1190,37 @@ class FtaView extends AbstractView {
                 . '_'
                 . $this->getModel()->getKeyValue()
         ;
+        /**
+         * Champ verrouillable condition
+         */
+        /**
+         * Vérification du champ initialisé
+         */
+        $isFieldLock = FtaVerrouillageChampsModel::isFieldLock(FtaModel::FIELDNAME_ETIQUETTE_CODESOFT, $this->getModel());
+        /**
+         * Génération du lien pour verrouillé/déverrouillé
+         */
+        $linkFieldLock = FtaVerrouillageChampsModel::linkFieldLock($isFieldLock, FtaModel::FIELDNAME_ETIQUETTE_CODESOFT, $this->getModel(), $paramIsEditable);
+
+        /**
+         * Affectation de la modification d'un champ ou non
+         */
+        $isEditable = FtaVerrouillageChampsModel::isEditableLockField($isFieldLock, $paramIsEditable);
+
+
         $HtmlList->getAttributes()->getName()->setValue(FtaModel::FIELDNAME_ETIQUETTE_CODESOFT);
         $HtmlList->setLabel(DatabaseDescription::getFieldDocLabel(FtaModel::TABLENAME, FtaModel::FIELDNAME_ETIQUETTE_CODESOFT));
-        $HtmlList->setIsEditable($paramIsEditable);
+        $HtmlList->setIsEditable($isEditable);
         $HtmlList->initAbstractHtmlSelect(
-                $HtmlTableName, $HtmlList->getLabel()
+                $HtmlTableName
+                , $HtmlList->getLabel()
                 , $paramEtiqetteCodesoft
                 , $this->getModel()->getDataField(FtaModel::FIELDNAME_ETIQUETTE_CODESOFT)->isFieldDiff()
                 , $HtmlList->getArrayListContent()
+                , NULL
+                , NULL
+                , $isFieldLock
+                , $linkFieldLock
         );
         $HtmlList->getEventsForm()->setOnChangeWithAjaxAutoSave(FtaModel::TABLENAME, FtaModel::KEYNAME, $this->getModel()->getKeyValue(), FtaModel::FIELDNAME_ETIQUETTE_CODESOFT);
         $listeCodesoftEtiquettes = $HtmlList->getHtmlResult();

@@ -91,6 +91,18 @@ class FtaComposantView extends AbstractView {
 
         $dataField = $this->getFtaComposantModel()->getDataField($paramFieldName);
 
+        /**
+         * On vérifie si le champ est verrouillable
+         */
+        $dataField->checkLockField($this->getFtaModel(), $this->getIsEditable());
+
+        /**
+         * On autorise la modification selon l'état de champs verrouillable
+         */
+        $isEditable = $this->isEditableLockField($dataField);
+        /**
+         * On vérifie les Règles de validation du champ
+         */
         $dataField->checkValidationRules();
 
         if ($dataField->getDataValidationSuccessful() == TRUE) {
@@ -101,10 +113,35 @@ class FtaComposantView extends AbstractView {
 
         return Html::convertDataFieldToHtml(
                         $dataField
-                        , $this->getIsEditable()
+                        , $isEditable
         );
     }
 
+     /**
+     * On autorise la modification selon l'état de champs verrouillable
+     * @param DatabaseDataField $paramDataField
+     * @return boolean
+     */
+    function isEditableLockField(DatabaseDataField $paramDataField) {
+        $isLockValue = $paramDataField->getIsFieldLock();
+        $isEditable = $this->getIsEditable();
+        switch ($isLockValue) {
+            case FtaVerrouillageChampsModel::FIELD_LOCK_PRIMARY_FALSE:
+            case FtaVerrouillageChampsModel::FIELD_LOCK_SECONDARY_FALSE:
+
+
+
+                break;
+            case FtaVerrouillageChampsModel::FIELD_LOCK_PRIMARY_TRUE:
+            case FtaVerrouillageChampsModel::FIELD_LOCK_SECONDARY_TRUE:
+
+                $isEditable = FALSE;
+
+                break;
+        }
+        return $isEditable;
+    }
+    
     /**
      * Affiche la liste déroulante des sites de production pour les composants et compositions
      * @param HtmlListSelect $paramObjet

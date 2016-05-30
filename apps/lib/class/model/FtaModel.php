@@ -1462,15 +1462,38 @@ class FtaModel extends AbstractModel {
                 . '_'
                 . $this->getKeyValue()
         ;
+
+        /**
+         * Champ verrouillable condition
+         */
+        /**
+         * Vérification du champ initialisé
+         */
+        $isFieldLock = FtaVerrouillageChampsModel::isFieldLock(FtaModel::FIELDNAME_GESTION_ETIQUETTE_RECTO, $this);
+        /**
+         * Génération du lien pour verrouillé/déverrouillé
+         */
+        $linkFieldLock = FtaVerrouillageChampsModel::linkFieldLock($isFieldLock, FtaModel::FIELDNAME_GESTION_ETIQUETTE_RECTO, $this, $this->getIsEditable());
+
+        /**
+         * Affectation de la modification d'un champ ou non
+         */
+        $isEditable = FtaVerrouillageChampsModel::isEditableLockField($isFieldLock, $this->getIsEditable());
+
         $HtmlList->getAttributes()->getName()->setValue(FtaModel::FIELDNAME_GESTION_ETIQUETTE_RECTO);
         $HtmlList->setLabel(DatabaseDescription::getFieldDocLabel(FtaModel::TABLENAME, FtaModel::FIELDNAME_GESTION_ETIQUETTE_RECTO));
-        $HtmlList->setIsEditable($this->getIsEditable());
+        $HtmlList->setIsEditable($isEditable);
         $HtmlList->initAbstractHtmlSelect(
                 $HtmlTableName
                 , $HtmlList->getLabel()
                 , $this->getDataField(FtaModel::FIELDNAME_GESTION_ETIQUETTE_RECTO)->getFieldValue()
                 , $this->getDataField(FtaModel::FIELDNAME_GESTION_ETIQUETTE_RECTO)->isFieldDiff()
-                , $HtmlList->getArrayListContent());
+                , $HtmlList->getArrayListContent()
+                , NULL
+                , NULL
+                , $isFieldLock
+                , $linkFieldLock
+        );
         $HtmlList->getEventsForm()->setOnChangeWithAjaxAutoSave(
                 FtaModel::TABLENAME
                 , FtaModel::KEYNAME
@@ -1520,15 +1543,37 @@ class FtaModel extends AbstractModel {
                 . '_'
                 . $this->getKeyValue()
         ;
+        /**
+         * Champ verrouillable condition
+         */
+        /**
+         * Vérification du champ initialisé
+         */
+        $isFieldLock = FtaVerrouillageChampsModel::isFieldLock(FtaModel::FIELDNAME_GESTION_ETIQUETTE_VERSO, $this);
+        /**
+         * Génération du lien pour verrouillé/déverrouillé
+         */
+        $linkFieldLock = FtaVerrouillageChampsModel::linkFieldLock($isFieldLock, FtaModel::FIELDNAME_GESTION_ETIQUETTE_VERSO, $this, $this->getIsEditable());
+
+        /**
+         * Affectation de la modification d'un champ ou non
+         */
+        $isEditable = FtaVerrouillageChampsModel::isEditableLockField($isFieldLock, $this->getIsEditable());
+
         $HtmlList->getAttributes()->getName()->setValue(FtaModel::FIELDNAME_GESTION_ETIQUETTE_VERSO);
         $HtmlList->setLabel(DatabaseDescription::getFieldDocLabel(FtaModel::TABLENAME, FtaModel::FIELDNAME_GESTION_ETIQUETTE_VERSO));
-        $HtmlList->setIsEditable($this->getIsEditable());
+        $HtmlList->setIsEditable($isEditable);
         $HtmlList->initAbstractHtmlSelect(
                 $HtmlTableName
                 , $HtmlList->getLabel()
                 , $this->getDataField(FtaModel::FIELDNAME_GESTION_ETIQUETTE_VERSO)->getFieldValue()
                 , $this->getDataField(FtaModel::FIELDNAME_GESTION_ETIQUETTE_VERSO)->isFieldDiff()
-                , $HtmlList->getArrayListContent());
+                , $HtmlList->getArrayListContent()
+                , NULL
+                , NULL
+                , $isFieldLock
+                , $linkFieldLock
+        );
         $HtmlList->getEventsForm()->setOnChangeWithAjaxAutoSave(
                 FtaModel::TABLENAME
                 , FtaModel::KEYNAME
@@ -2001,6 +2046,7 @@ class FtaModel extends AbstractModel {
         );
         return $arrayIdFtaChange;
     }
+
     /**
      * Tableau des idFta et de l'id de l'etat selon le dossier primaire Fta
      * @param int $paramIdDossierPrimaireFta

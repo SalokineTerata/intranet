@@ -42,7 +42,7 @@ class IntranetColumnInfoModel extends AbstractModel {
         $arrayIntranetColumInfoLockField = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
                         "SELECT DISTINCT " . IntranetColumnInfoModel::FIELDNAME_TABLE_NAME_INTRANET_COLUMN_INFO
                         . "," . IntranetColumnInfoModel::FIELDNAME_COLUMN_NAME_INTRANET_COLUMN_INO
-                        . "," . IntranetColumnInfoModel::DEFAULT_FIELD_TO_LOCK_FOR_PRIMARY_FTA_VALUES
+                        . "," . IntranetColumnInfoModel::FIELDNAME_DEFAULT_FIELD_TO_LOCK_FOR_PRIMARY_FTA
                         . " FROM " . IntranetColumnInfoModel::TABLENAME
                         . " WHERE " . IntranetColumnInfoModel::FIELDNAME_DEFAULT_FIELD_TO_LOCK_FOR_PRIMARY_FTA . "=" . IntranetColumnInfoModel::DEFAULT_FIELD_TO_LOCK_FOR_PRIMARY_FTA_VALUES
                         . " OR " . IntranetColumnInfoModel::FIELDNAME_DEFAULT_FIELD_TO_LOCK_FOR_PRIMARY_FTA . "=" . IntranetColumnInfoModel::DEFAULT_FIELD_NOT_TO_LOCK_FOR_PRIMARY_FTA_VALUES

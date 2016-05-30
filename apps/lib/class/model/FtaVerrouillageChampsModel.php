@@ -345,20 +345,20 @@ class FtaVerrouillageChampsModel extends AbstractModel {
      *  3 déverouillé non-modifiable(secondaires)
      *  4 verrouillé non-modifiable(secondaires)
      *  0 champ normal
-     * @param DatabaseDataField $paramDataField
+     * @param $paramDataFieldFieldName
      * @param FtaModel $paramFtaModel
      */
-    public static function isFieldLock(DatabaseDataField $paramDataField, FtaModel $paramFtaModel) {
+    public static function isFieldLock($paramDataFieldFieldName, FtaModel $paramFtaModel) {
         $isFieldLock = FALSE;
-        $ftaValue = $paramFtaModel->checkFtaPrimaireSecondaire($paramDataField->getFieldName());
+        $ftaValue = $paramFtaModel->checkFtaPrimaireSecondaire($paramDataFieldFieldName);
 
         switch ($ftaValue) {
             case FtaModel::FTA_PRIMAIRE:
-                $isFieldLock = self::isFieldNameLock($paramFtaModel, $paramDataField->getFieldName(), FtaModel::FTA_PRIMAIRE);
+                $isFieldLock = self::isFieldNameLock($paramFtaModel, $paramDataFieldFieldName, FtaModel::FTA_PRIMAIRE);
 
                 break;
             case FtaModel::FTA_SECONDAIRE:
-                $isFieldLock = self::isFieldNameLock($paramFtaModel, $paramDataField->getFieldName(), FtaModel::FTA_SECONDAIRE);
+                $isFieldLock = self::isFieldNameLock($paramFtaModel, $paramDataFieldFieldName, FtaModel::FTA_SECONDAIRE);
 
                 break;
             case FtaModel::FTA_NORMAL:
@@ -429,12 +429,12 @@ class FtaVerrouillageChampsModel extends AbstractModel {
     /**
      * Géneration du lien ou non des cadenas pour les champs verrouillé/déverrouillé
      * @param int $paramIsFieldLock
-     * @param DatabaseDataField $paramDataField
+     * @param $paramDataFieldFieldName
      * @param FtaModel $paramFtaModel
      * @param boolean $paramIsEditable
      * @return string
      */
-    public static function linkFieldLock($paramIsFieldLock, DatabaseDataField $paramDataField, FtaModel $paramFtaModel, $paramIsEditable) {
+    public static function linkFieldLock($paramIsFieldLock, $paramDataFieldFieldName, FtaModel $paramFtaModel, $paramIsEditable) {
         switch ($paramIsFieldLock) {
             /**
              * Cadenas déverrouillé modifiable
@@ -442,7 +442,7 @@ class FtaVerrouillageChampsModel extends AbstractModel {
             case self::FIELD_LOCK_PRIMARY_FALSE:
                 $image_locked = Html::DEFAULT_HTML_IMAGE_DEVERROUILLE_MODIFIABLE;
                 if ($paramIsEditable) {
-                    $linkJavaScriptLock = '<a href="#" onclick="lockFields(\'' . $paramDataField->getFieldName() . '\',\'' . $paramFtaModel->getKeyValue() . '\')" >';
+                    $linkJavaScriptLock = '<a href="#" onclick="lockFields(\'' . $paramDataFieldFieldName . '\',\'' . $paramFtaModel->getKeyValue() . '\')" >';
                 }
                 break;
             /**
@@ -451,7 +451,7 @@ class FtaVerrouillageChampsModel extends AbstractModel {
             case self::FIELD_LOCK_PRIMARY_TRUE:
                 $image_locked = Html::DEFAULT_HTML_IMAGE_VERROUILLE_MODIFIABLE;
                 if ($paramIsEditable) {
-                    $linkJavaScriptLock = '<a href="#" onClick="lockFields(\'' . $paramDataField->getFieldName()
+                    $linkJavaScriptLock = '<a href="#" onClick="lockFields(\'' . $paramDataFieldFieldName
                             . '\',\'' . $paramFtaModel->getKeyValue() . '\')" >';
                 }
                 break;
@@ -501,6 +501,30 @@ class FtaVerrouillageChampsModel extends AbstractModel {
             ;
             DatabaseOperation::execute($req);
         }
+    }
+
+    /**
+     * On autorise la modification selon l'état de champs verrouillable
+     * @param $paramIsLockValue
+     * @return boolean
+     */
+    public static function isEditableLockField($paramIsLockValue, $isEditable) {
+
+        switch ($paramIsLockValue) {
+            case FtaVerrouillageChampsModel::FIELD_LOCK_PRIMARY_FALSE:
+            case FtaVerrouillageChampsModel::FIELD_LOCK_SECONDARY_FALSE:
+
+
+
+                break;
+            case FtaVerrouillageChampsModel::FIELD_LOCK_PRIMARY_TRUE:
+            case FtaVerrouillageChampsModel::FIELD_LOCK_SECONDARY_TRUE:
+
+                $isEditable = FALSE;
+
+                break;
+        }
+        return $isEditable;
     }
 
 }

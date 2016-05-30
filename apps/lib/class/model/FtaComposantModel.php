@@ -581,6 +581,8 @@ class FtaComposantModel extends AbstractModel {
 
 //        $ftaModel = new FtaModel($paramIdFta);
 //        $siteDeProductionFta = $ftaModel->getDataField(FtaModel::FIELDNAME_SITE_ASSEMBLAGE)->getFieldValue();
+
+        $labelSiteDeProductionDataField = $this->getDataField($paramLabelSiteDeProduction);
         $arraySite = DatabaseOperation::convertSqlStatementWithKeyAndOneFieldToArray(
                         'SELECT DISTINCT ' . GeoModel::KEYNAME . ',' . GeoModel::FIELDNAME_GEO
                         . ' FROM ' . GeoModel::TABLENAME
@@ -611,15 +613,37 @@ class FtaComposantModel extends AbstractModel {
 //        else {
 //            $paramObjet->setDefaultValue($siteDeProductionFta);
 //        }
+
+        /**
+         * Champ verrouillable condition
+         */
+        /**
+         * Vérification du champ initialisé
+         */
+        $isFieldLock = FtaVerrouillageChampsModel::isFieldLock($paramLabelSiteDeProduction, $this->getModelFta());
+        /**
+         * Génération du lien pour verrouillé/déverrouillé
+         */
+        $linkFieldLock = FtaVerrouillageChampsModel::linkFieldLock($isFieldLock, $paramLabelSiteDeProduction, $this->getModelFta(), $paramIsEditable);
+
+        /**
+         * Affectation de la modification d'un champ ou non
+         */
+        $isEditable = FtaVerrouillageChampsModel::isEditableLockField($isFieldLock, $paramIsEditable);
+
         $paramObjet->getAttributes()->getName()->setValue($paramLabelSiteDeProduction);
         $paramObjet->setLabel(DatabaseDescription::getFieldDocLabel(GeoModel::TABLENAME, GeoModel::FIELDNAME_GEO));
-        $paramObjet->setIsEditable($paramIsEditable);
+        $paramObjet->setIsEditable($isEditable);
         $paramObjet->initAbstractHtmlSelect(
                 $HtmlTableName
                 , $paramObjet->getLabel()
-                , $this->getDataField($paramLabelSiteDeProduction)->getFieldValue()
-                , $this->getDataField($paramLabelSiteDeProduction)->isFieldDiff()
+                , $labelSiteDeProductionDataField->getFieldValue()
+                , $labelSiteDeProductionDataField->isFieldDiff()
                 , $paramObjet->getArrayListContent()
+                , NULL
+                , NULL
+                , $isFieldLock
+                , $linkFieldLock
         );
         $paramObjet->getEventsForm()->setOnChangeWithAjaxAutoSave(
                 FtaComposantModel::TABLENAME

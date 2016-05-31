@@ -35,5 +35,6 @@ class UserInterfaceLabel {
     const FR_TRANSITION_MODIFICATION = "Liste des Chapitres pouvant être mis à jour";
     const FR_SAISI_CODE_ARTICLE_ARCADIA = "Veuillez saisir le code article Arcadia à rechercher";
     const FR_SAISI_DOSSIER_FTA = "Veuillez saisir le dossier Fta à rechercher";
+    const FR_VERROUILLABLE_TITRE = "Les champs ci-dessous seront verrouillables";
 
 }

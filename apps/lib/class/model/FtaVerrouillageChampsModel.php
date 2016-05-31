@@ -15,7 +15,20 @@ class FtaVerrouillageChampsModel extends AbstractModel {
     const FIELDNAME_DOSSIER_FTA_PRIMAIRE = 'dossier_fta_primaire';
     const FIELDNAME_FIELD_LOCK = 'field_lock';
     const FIELDNAME_FIELD_CHANGE_STATE = 'field_change_state';
-    const CHANGE_STATE_TRUE = '1';
+
+    /**
+     * Si un chanmp verrouillé à été modifié actualisé l'information sur les Fta Seondaire validé
+     */
+    const CHANGE_STATE_TRUE_VALIDATION_FTA = '2';
+
+    /**
+     * Si un chanmp verrouillé à été modifié actualisé l'information sur les Fta Seondaire modifié
+     */
+    const CHANGE_STATE_TRUE_VALIDATION_CHAPITRE = '1';
+
+    /**
+     * Champ non traité qui doit être synchronisé
+     */
     const CHANGE_STATE_FALSE = '0';
     const FIELD_LOCK_TRUE = '1';
     const FIELD_LOCK_FALSE = '0';
@@ -37,7 +50,6 @@ class FtaVerrouillageChampsModel extends AbstractModel {
      * On modifie l'etat de celui-ci
      */
     function changeStateFieldLock() {
-        $this->getDataField(FtaVerrouillageChampsModel::FIELDNAME_FIELD_CHANGE_STATE)->setFieldValue(FtaVerrouillageChampsModel::CHANGE_STATE_TRUE);
         $lockState = $this->getDataField(FtaVerrouillageChampsModel::FIELDNAME_FIELD_LOCK)->getFieldValue();
 
         switch ($lockState) {
@@ -155,7 +167,13 @@ class FtaVerrouillageChampsModel extends AbstractModel {
      * Retour le tableau donnant la liste de champs à verrouillable
      * @param int $paramIdFtaDossierPrimaire
      */
-    public static function getArrayFtaLockChangeStateByPrimaryFolder($paramIdFtaDossierPrimaire) {
+    public static function getArrayFtaLockChangeStateByPrimaryFolder($paramIdFtaDossierPrimaire, $paramState = NULL) {
+
+        if ($paramState == FtaVerrouillageChampsModel::CHANGE_STATE_TRUE_VALIDATION_CHAPITRE) {
+            $paramState = $paramState
+                    . " OR " . FtaVerrouillageChampsModel::FIELDNAME_FIELD_CHANGE_STATE . "=" . FtaVerrouillageChampsModel::CHANGE_STATE_FALSE;
+        }
+
         $array = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
                         "SELECT DISTINCT " . self::FIELDNAME_TABLE_NAME
                         . "," . self::FIELDNAME_FIELD_NAME
@@ -163,7 +181,7 @@ class FtaVerrouillageChampsModel extends AbstractModel {
                         . "," . self::FIELDNAME_FIELD_LOCK
                         . " FROM " . self::TABLENAME
                         . " WHERE " . self::FIELDNAME_DOSSIER_FTA_PRIMAIRE . "=" . $paramIdFtaDossierPrimaire
-                        . " AND " . self::FIELDNAME_FIELD_CHANGE_STATE . "=" . self::CHANGE_STATE_TRUE
+                        . " AND " . self::FIELDNAME_FIELD_CHANGE_STATE . "=" . $paramState
                         . " ORDER BY " . self::FIELDNAME_TABLE_NAME . " DESC"
         );
 
@@ -175,18 +193,18 @@ class FtaVerrouillageChampsModel extends AbstractModel {
      * @param int $paramIdFtaPrimaire
      * @param int $paramIdFtaSecondaire
      * @param int $paramFtaDossierPrimaire
-     * @param boolean $paramState
+     * @param int $paramState
      */
-    public static function dataSynchronizeFtaPrimarySecondary($paramIdFtaPrimaire, $paramIdFtaSecondaire, $paramFtaDossierPrimaire, $paramState) {
+    public static function dataSynchronizeFtaPrimarySecondary($paramIdFtaPrimaire, $paramIdFtaSecondaire, $paramFtaDossierPrimaire, $paramState = NULL) {
 
         /**
          * Tableau Affichant la liste des champ à traité ordonné par nom de table
          * Ainsi pour chaque table on insert les nouvelles données
          */
-        if ($paramState) {
-            $arrayFtaDossierChampsVerrouiller = self::getArrayFtaLockChangeStateByPrimaryFolder($paramFtaDossierPrimaire);
-        } else {
+        if ($paramState == NULL) {
             $arrayFtaDossierChampsVerrouiller = self::getArrayFtaLockedByPrimaryFolder($paramFtaDossierPrimaire);
+        } else {
+            $arrayFtaDossierChampsVerrouiller = self::getArrayFtaLockChangeStateByPrimaryFolder($paramFtaDossierPrimaire, $paramState);
         }
 
         if ($arrayFtaDossierChampsVerrouiller) {
@@ -325,10 +343,12 @@ class FtaVerrouillageChampsModel extends AbstractModel {
                         . ", " . self::FIELDNAME_FIELD_NAME
                         . ", " . self::FIELDNAME_DOSSIER_FTA_PRIMAIRE
                         . ", " . self::FIELDNAME_FIELD_LOCK
+                        . ", " . self::FIELDNAME_FIELD_CHANGE_STATE
                         . " ) VALUES ( \"" . $rowIntranetColumInfoLockField[IntranetColumnInfoModel::FIELDNAME_TABLE_NAME_INTRANET_COLUMN_INFO]
                         . "\", \"" . $rowIntranetColumInfoLockField[IntranetColumnInfoModel::FIELDNAME_COLUMN_NAME_INTRANET_COLUMN_INO]
                         . "\", \"" . $paramFtaDossierPrimaire
-                        . "\", \"" . $lockValue . "\" ) "
+                        . "\", \"" . $lockValue
+                        . "\", \"" . self::CHANGE_STATE_TRUE_VALIDATION_FTA . "\" ) "
                 );
             }
         } else {
@@ -513,11 +533,11 @@ class FtaVerrouillageChampsModel extends AbstractModel {
         switch ($paramIsLockValue) {
             case FtaVerrouillageChampsModel::FIELD_LOCK_PRIMARY_FALSE:
             case FtaVerrouillageChampsModel::FIELD_LOCK_SECONDARY_FALSE:
-
+            case FtaVerrouillageChampsModel::FIELD_LOCK_PRIMARY_TRUE:
 
 
                 break;
-            case FtaVerrouillageChampsModel::FIELD_LOCK_PRIMARY_TRUE:
+
             case FtaVerrouillageChampsModel::FIELD_LOCK_SECONDARY_TRUE:
 
                 $isEditable = FALSE;
@@ -525,6 +545,41 @@ class FtaVerrouillageChampsModel extends AbstractModel {
                 break;
         }
         return $isEditable;
+    }
+
+    /**
+     * Actualise l'état d'un champ verrouillé si le champ à était mise à jour.
+     * @param string $paramTableName
+     * @param string $paramKeyValue
+     * @param string $paramFieldName
+     */
+    public static function doUpdateLockField($paramTableName, $paramKeyValue, $paramFieldName) {
+        $mondelName = ModelTableAssociation::getModelName($paramTableName);
+
+        $model = new $mondelName($paramKeyValue);
+
+        $idFta = $model->getDataField(FtaModel::KEYNAME)->getFieldValue();
+        if ($idFta) {
+            $modelFta = new FtaModel($idFta);
+            $idFtaDossier = $modelFta->getDossierFta();
+        }
+        $arrayFieldToLockChap = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
+                        "SELECT " . self::KEYNAME
+                        . " FROM " . self::TABLENAME
+                        . " WHERE " . self::FIELDNAME_TABLE_NAME . "=\"" . $paramTableName
+                        . "\" AND " . self::FIELDNAME_FIELD_NAME . "=\"" . $paramFieldName
+                        . "\" AND " . self::FIELDNAME_DOSSIER_FTA_PRIMAIRE . "=\"" . $idFtaDossier
+                        . "\" AND " . self::FIELDNAME_FIELD_LOCK . "=" . self::FIELD_LOCK_TRUE
+        );
+        if ($arrayFieldToLockChap) {
+            DatabaseOperation::execute(
+                    "UPDATE " . self::TABLENAME
+                    . " SET " . self::FIELDNAME_FIELD_CHANGE_STATE . "=" . self::CHANGE_STATE_FALSE
+                    . " WHERE " . self::FIELDNAME_TABLE_NAME . "=\"" . $paramTableName
+                    . "\" AND " . self::FIELDNAME_FIELD_NAME . "=\"" . $paramFieldName
+                    . "\" AND " . self::FIELDNAME_DOSSIER_FTA_PRIMAIRE . "=\"" . $idFtaDossier . "\""
+            );
+        }
     }
 
 }

@@ -35,3 +35,4 @@ $fieldValue = Lib::getParameterFromRequest("FieldValue");
 DatabaseOperation::doSqlUpdateFromOneField($tableName, $keyName, $keyValue, $fieldName, $fieldValue);
 
 
+FtaVerrouillageChampsModel::doUpdateLockField($tableName,$keyValue,$fieldName);

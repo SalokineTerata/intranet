@@ -386,15 +386,15 @@ class FtaModel extends AbstractModel {
      * Ce test vérifie le renseignement des données obligatoires.
      * @return boolean     
      */
-    public function isFtaDataValidationSuccess($paramIdFtaChapitre) {
+    public function isFtaDataValidationSuccess() {
         $return = "0";
 
         /*
          * Liste des Contrôles 
          */
-        if ($paramIdFtaChapitre == FtaChapitreModel::ID_CHAPITRE_IDENTITE) {
+//        if ($paramIdFtaChapitre == FtaChapitreModel::ID_CHAPITRE_IDENTITE) {
             $return += $this->checkDataValidationClassification();
-        }
+//        }
         /**
          * Si la Fta est un création (v0) alors la date d'échéance est obligatoire
          */
@@ -2291,6 +2291,19 @@ class FtaModel extends AbstractModel {
         $paramHtmlObjet->setArrayListContent($arraySite);
 
         /**
+         * On vérifie si le champ est verrouillable
+         */
+        $dataFieldSiteDeProduction->checkLockField($this, $paramIsEditable);
+
+
+        /**
+         * On autorise la modification selon l'état de champs verrouillable
+         */
+        $isEditable = FtaVerrouillageChampsModel::isEditableLockField($dataFieldSiteDeProduction->getIsFieldLock(), $paramIsEditable);
+
+
+
+        /**
          * Verification des règles de validation
          */
         $dataFieldSiteDeProduction->checkValidationRules();
@@ -2308,14 +2321,17 @@ class FtaModel extends AbstractModel {
         ;
         $paramHtmlObjet->getAttributes()->getName()->setValue(FtaModel::FIELDNAME_SITE_PRODUCTION);
         $paramHtmlObjet->setLabel(DatabaseDescription::getFieldDocLabel(GeoModel::TABLENAME, GeoModel::FIELDNAME_GEO));
-        $paramHtmlObjet->setIsEditable($paramIsEditable);
+        $paramHtmlObjet->setIsEditable($isEditable);
         $paramHtmlObjet->initAbstractHtmlSelect(
-                $HtmlTableName, $paramHtmlObjet->getLabel()
+                $HtmlTableName
+                , $paramHtmlObjet->getLabel()
                 , $dataFieldSiteDeProduction->getFieldValue()
                 , $dataFieldSiteDeProduction->isFieldDiff()
                 , $paramHtmlObjet->getArrayListContent()
                 , $dataFieldSiteDeProduction->getDataValidationSuccessful()
-                , $dataFieldSiteDeProduction->getDataWarningMessage());
+                , $dataFieldSiteDeProduction->getDataWarningMessage()
+                , $dataFieldSiteDeProduction->getIsFieldLock()
+                , $dataFieldSiteDeProduction->getLinkFieldLock());
         $paramHtmlObjet->getEventsForm()->setOnChangeWithAjaxAutoSave(FtaModel::TABLENAME, FtaModel::KEYNAME, $this->getKeyValue(), FtaModel::FIELDNAME_SITE_PRODUCTION);
         $listeSiteProduction = $paramHtmlObjet->getHtmlResult();
 
@@ -2779,15 +2795,14 @@ class FtaModel extends AbstractModel {
      * ordonné par dossier Fta puis par l'état de la Fta 
      * @return array
      */
-    function getArrayIdFtaSecondaireByDossierPrimaire() {
+    function getArrayIdFtaSecondaireByDossierPrimaire($paramTypeSynchro) {
         $dossierFta = $this->getDossierFta();
 
         $arrayIdFtaSeondaire = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
                         "SELECT " . self::KEYNAME . "," . self::FIELDNAME_DOSSIER_FTA
                         . " FROM " . self::TABLENAME
                         . " WHERE " . self::FIELDNAME_DOSSIER_FTA_PRIMAIRE . "=" . $dossierFta
-                        . " AND (" . self::FIELDNAME_ID_FTA_ETAT . "=" . FtaEtatModel::ID_VALUE_MODIFICATION
-                        . " OR " . self::FIELDNAME_ID_FTA_ETAT . "=" . FtaEtatModel::ID_VALUE_VALIDE . ")"
+                        . " AND " . self::FIELDNAME_ID_FTA_ETAT . "=" . $paramTypeSynchro
                         . " ORDER BY " . self::FIELDNAME_DOSSIER_FTA . ", " . self::FIELDNAME_ID_FTA_ETAT
         );
 
@@ -2805,11 +2820,18 @@ class FtaModel extends AbstractModel {
     }
 
     /**
+
+     */
+
+    /**
      * On gère les conditions des Codes Articles Primaires et Secondaires
      * Dans le cas d'une validation d'un Fta Priamire, on synchronise les données de la Fta Primaires avec toutes les Secondaire
      * La mise à jour est faîte sur la Fta Modifié > Validé
+     * FtaEtatModel::ID_VALUE_MODIFICATION - synchronisation que des fta modifié
+     * FtaEtatModel::ID_VALUE_VALIDE - synchronisation que des fta validé
+     * @param string $paramTypeSynchro
      */
-    function manageFtaPrimaireSecondaire() {
+    function manageFtaPrimaireSecondaire($paramTypeSynchro, $paramState = NULL) {
         /**
          * Vérification de l'état de la Fta
          */
@@ -2818,7 +2840,7 @@ class FtaModel extends AbstractModel {
         switch ($ftaValue) {
             case FtaModel::FTA_PRIMAIRE:
                 //Synchronisation des données de la Fta primaire avec les secondaires
-                $arrayIdFtaSeondaire = $this->getArrayIdFtaSecondaireByDossierPrimaire();
+                $arrayIdFtaSeondaire = $this->getArrayIdFtaSecondaireByDossierPrimaire($paramTypeSynchro);
                 if ($arrayIdFtaSeondaire) {
                     foreach ($arrayIdFtaSeondaire as $rowsIdFtaSeondaire) {
                         $dossierTmp = $rowsIdFtaSeondaire[self::FIELDNAME_DOSSIER_FTA];
@@ -2828,15 +2850,48 @@ class FtaModel extends AbstractModel {
                          * Ordonnance du tableau permet ce traitement
                          */
                         if ($dossierUse <> $dossierTmp) {
-                            FtaVerrouillageChampsModel::dataSynchronizeFtaPrimarySecondary($this->getKeyValue(), $rowsIdFtaSeondaire[self::KEYNAME], $this->getDossierFta(), TRUE);
+                            FtaVerrouillageChampsModel::dataSynchronizeFtaPrimarySecondary($this->getKeyValue(), $rowsIdFtaSeondaire[self::KEYNAME], $this->getDossierFta(), $paramState);
                             $dossierUse = $dossierTmp;
                         }
+                    }
+                    switch ($paramState) {
+                        /**
+                         * Changement de l'état afin de synchroniser les données avec les Fta validées
+                         */
+                        case FtaVerrouillageChampsModel::CHANGE_STATE_FALSE:
+                            $check = $paramState;
+                            $changeState = FtaVerrouillageChampsModel::CHANGE_STATE_TRUE_VALIDATION_CHAPITRE;
+                            break;
+                        /**
+                         * Changement de l'état afin de les considérés les données avec les Fta validées synchronisé
+                         */
+                        case FtaVerrouillageChampsModel::CHANGE_STATE_TRUE_VALIDATION_CHAPITRE:
+                            $check = $paramState
+                                    . " OR " . FtaVerrouillageChampsModel::FIELDNAME_FIELD_CHANGE_STATE . "=" . FtaVerrouillageChampsModel::CHANGE_STATE_FALSE;
+                            $changeState = FtaVerrouillageChampsModel::CHANGE_STATE_TRUE_VALIDATION_FTA;
+                            break;
+                    }
+
+                    $arrayKeyFtaVerrouillage = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
+                                    "SELECT DISTINCT " . FtaVerrouillageChampsModel::KEYNAME
+                                    . " FROM " . FtaVerrouillageChampsModel::TABLENAME
+                                    . " WHERE " . FtaVerrouillageChampsModel::FIELDNAME_DOSSIER_FTA_PRIMAIRE . "=" . $this->getDossierFta()
+                                    . " AND " . FtaVerrouillageChampsModel::FIELDNAME_FIELD_CHANGE_STATE . "=" . $check
+                    );
+
+                    if ($arrayKeyFtaVerrouillage) {
+                        DatabaseOperation::execute(
+                                "UPDATE " . FtaVerrouillageChampsModel::TABLENAME
+                                . " SET " . FtaVerrouillageChampsModel::FIELDNAME_FIELD_CHANGE_STATE . "='" . $changeState
+                                . "' WHERE " . FtaVerrouillageChampsModel::FIELDNAME_DOSSIER_FTA_PRIMAIRE . "=" . $this->getDossierFta()
+                                . " AND " . FtaVerrouillageChampsModel::FIELDNAME_FIELD_CHANGE_STATE . "=" . $check
+                        );
                     }
                 }
                 /**
                  * Réinitialisation du changement d'état
                  */
-                FtaVerrouillageChampsModel::resetChangeStateFieldLock($this->getDossierFta());
+//                FtaVerrouillageChampsModel::resetChangeStateFieldLock($this->getDossierFta());
 
 
                 break;

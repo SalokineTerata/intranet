@@ -78,7 +78,7 @@ if ($idFtaPrimaire) {
     /**
      * Synchronisation des données
      */
-    FtaVerrouillageChampsModel::dataSynchronizeFtaPrimarySecondary($idFtaPrimaire, $paramIdFta, $idFtaDossier,FALSE);
+    FtaVerrouillageChampsModel::dataSynchronizeFtaPrimarySecondary($idFtaPrimaire, $paramIdFta, $idFtaDossier);
 
     //Redirection
     header('Location: modification_fiche.php?id_fta=' . $paramIdFta . '&id_fta_chapitre_encours=' . $paramIdFtaChapitreEncours . '&synthese_action=' . $paramSyntheseAction . '&id_fta_etat=' . $idFtaEtat . '&abreviation_fta_etat=' . $abreviationFtaEtat . '&id_fta_role=' . FtaRoleModel::ID_FTA_ROLE_COMMUN);

@@ -55,12 +55,13 @@ $modeDeRecherche = Lib::getParameterFromRequest("modeDeRecherche");
  * Contrôle
  */
 $ftaModel = new FtaModel($idFta);
-$arrayIdFtaSeondaire = $ftaModel->getArrayIdFtaSecondaireByDossierPrimaire();
+$arrayIdFtaSeondaire = $ftaModel->getArrayIdFtaSecondaireByDossierPrimaire(FtaEtatModel::ID_VALUE_MODIFICATION);
+$arrayIdFtaSeondaire2 = $ftaModel->getArrayIdFtaSecondaireByDossierPrimaire(FtaEtatModel::ID_VALUE_VALIDE);
 
 /**
  * On vérifie qu'il ne s'agit pas d'une Fta primaire
  */
-if ($arrayIdFtaSeondaire) {
+if ($arrayIdFtaSeondaire or $arrayIdFtaSeondaire2) {
     $message = UserInterfaceMessage::FR_WARNING_ARTICLE_PRIMAIRE_CHECK;
     $titre = UserInterfaceMessage::FR_WARNING_ARTICLE_PRIMAIRE_TITLE;
     Lib::showMessage($titre, $message);

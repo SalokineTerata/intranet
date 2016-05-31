@@ -193,11 +193,10 @@ class FtaView extends AbstractView {
         switch ($paramIsLockValue) {
             case FtaVerrouillageChampsModel::FIELD_LOCK_PRIMARY_FALSE:
             case FtaVerrouillageChampsModel::FIELD_LOCK_SECONDARY_FALSE:
-
+            case FtaVerrouillageChampsModel::FIELD_LOCK_PRIMARY_TRUE:
 
 
                 break;
-            case FtaVerrouillageChampsModel::FIELD_LOCK_PRIMARY_TRUE:
             case FtaVerrouillageChampsModel::FIELD_LOCK_SECONDARY_TRUE:
 
                 $isEditable = FALSE;
@@ -430,7 +429,20 @@ class FtaView extends AbstractView {
      */
     function getHtmlEANArticle() {
         $id_fta = $this->getModel()->getKeyValue();
-        $eanArticleValue = $this->getModel()->getDataField(FtaModel::FIELDNAME_EAN_UVC)->getFieldValue();
+        $eanArticleDataField = $this->getModel()->getDataField(FtaModel::FIELDNAME_EAN_UVC);
+        $eanArticleValue = $eanArticleDataField->getFieldValue();
+
+        /**
+         * On vérifie si le champ est verrouillable
+         */
+        $eanArticleDataField->checkLockField($this->getModel(), $this->getIsEditable());
+
+        /**
+         * On autorise la modification selon l'état de champs verrouillable
+         */
+        $isEditable = $this->isEditableLockField($eanArticleDataField->getIsFieldLock());
+
+
         $eanArticle = new HtmlInputText();
         $HtmlTableName = FtaModel::TABLENAME
                 . '_'
@@ -442,12 +454,16 @@ class FtaView extends AbstractView {
         $eanArticle->getAttributes()->getValue()->setValue($eanArticleValue);
         $eanArticle->getAttributes()->getPattern()->setValue("[0-9]{1,13}");
         $eanArticle->getAttributes()->getMaxLength()->setValue("13");
-        $eanArticle->setIsEditable($this->getIsEditable());
+        $eanArticle->setIsEditable($isEditable);
         $eanArticle->initAbstractHtmlInput(
                 $HtmlTableName
                 , $eanArticle->getLabel()
                 , $eanArticleValue
-                , $this->getModel()->getDataField(FtaModel::FIELDNAME_EAN_UVC)->isFieldDiff()
+                , $eanArticleDataField->isFieldDiff()
+                , NULL
+                , NULL
+                , $eanArticleDataField->getIsFieldLock()
+                , $eanArticleDataField->getLinkFieldLock()
         );
         $eanArticle->getEventsForm()->setOnChangeWithAjaxAutoSave(FtaModel::TABLENAME, FtaModel::KEYNAME, $id_fta, FtaModel::FIELDNAME_EAN_UVC);
         return $eanArticle->getHtmlResult();
@@ -642,6 +658,10 @@ class FtaView extends AbstractView {
          */
         $isEditableVerrouillageLibelleEtiquette = $this->isEditableLockField($dataFieldVerrouillageLibelleEtiquette->getIsFieldLock());
         $isEditableLibelleColis = $this->isEditableLockField($dataFieldLibelleColis->getIsFieldLock());
+
+        /**
+         * Initialisation des objets
+         */
         $htmlObjectVerrouillageEtiquette = new DataFieldToHtmlListSelect(
                 $dataFieldVerrouillageLibelleEtiquette
         );

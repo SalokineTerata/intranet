@@ -866,7 +866,7 @@ class Chapitre {
         $ftaView->setIsEditable($isEditable);
         $ftaView->setFtaChapitreModelById(self::ID_CHAPITRE_IDENTITE);
 
-        //Site d'assemblage
+        //Site de production
         $bloc.=$ftaView->listeSiteByAcces(self::$idUser, $isEditable);
 
 

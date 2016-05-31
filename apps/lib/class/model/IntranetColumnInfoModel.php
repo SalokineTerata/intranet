@@ -51,4 +51,26 @@ class IntranetColumnInfoModel extends AbstractModel {
         return $arrayIntranetColumInfoLockField;
     }
 
+    /**
+     * On récupère le label un champ
+     * @param string $paramTableName
+     * @param string $paramColumnName
+     * @return string
+     */
+    public static function getLabelByTableNameAndColummName($paramTableName, $paramColumnName) {
+        $arrayIntranetColumnLabel = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
+                        "SELECT DISTINCT " . IntranetColumnInfoModel::FIELDNAME_LABEL_INTRANET_COLUMN_INFO
+                        . " FROM " . IntranetColumnInfoModel::TABLENAME
+                        . " WHERE " . IntranetColumnInfoModel::FIELDNAME_TABLE_NAME_INTRANET_COLUMN_INFO . "='" . $paramTableName
+                        . "' AND " . IntranetColumnInfoModel::FIELDNAME_COLUMN_NAME_INTRANET_COLUMN_INO . "='" . $paramColumnName ."'"
+        );
+        if ($arrayIntranetColumnLabel) {
+            foreach ($arrayIntranetColumnLabel as $rowsIntranetColumnLabel) {
+                $label = $rowsIntranetColumnLabel[IntranetColumnInfoModel::FIELDNAME_LABEL_INTRANET_COLUMN_INFO];
+            }
+        }
+        
+        return $label;
+    }
+
 }

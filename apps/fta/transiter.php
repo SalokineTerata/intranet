@@ -223,6 +223,9 @@ if ($action == FtaEtatModel::ETAT_ABREVIATION_VALUE_MODIFICATION or $action == '
     if (!FtaRoleModel::isGestionnaire($idFtaRole)) {
         $reqRestrictionListeChapitre = ' AND ' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_ROLE . '=' . $idFtaRole;
     }
+    if ($action == FtaEtatModel::ETAT_ABREVIATION_VALUE_MODIFICATION and $abreviationFtaEtat == FtaEtatModel::ETAT_ABREVIATION_VALUE_RETIRE) {
+        $reqRestrictionListeChapitre = ' AND ' . FtaWorkflowStructureModel::TABLENAME . "." . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_CHAPITRE . '=' . FtaChapitreModel::ID_CHAPITRE_IDENTITE;
+    }
 
     $reqListesChapitre = 'SELECT ' . FtaWorkflowStructureModel::TABLENAME . '.' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_CHAPITRE
             . ',' . FtaChapitreModel::FIELDNAME_NOM_USUEL_CHAPITRE

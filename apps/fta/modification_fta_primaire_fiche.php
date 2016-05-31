@@ -130,6 +130,21 @@ switch ($modeDeRecherche) {
 
 if ($arrayDossierFta) {
 
+    /**
+     * On récupère la liste des Champs verrouillables
+     */
+    $arrayFtaLock = IntranetColumnInfoModel::getArrayDefaultLockField();
+    $separateur = "";
+    $htmlListTitre = UserInterfaceLabel::FR_VERROUILLABLE_TITRE;
+    foreach ($arrayFtaLock as $rowsFtaLock) {
+        $tableName = $rowsFtaLock[IntranetColumnInfoModel::FIELDNAME_TABLE_NAME_INTRANET_COLUMN_INFO];
+        $fieldName = $rowsFtaLock[IntranetColumnInfoModel::FIELDNAME_COLUMN_NAME_INTRANET_COLUMN_INO];
+
+        $label = IntranetColumnInfoModel::getLabelByTableNameAndColummName($tableName, $fieldName);
+        $htmlList .= $separateur . $label;
+        $separateur = "<br>";
+        
+    }
 
     foreach ($arrayDossierFta as $rowsDossierFta) {
         $idFta = $rowsDossierFta[FtaModel::KEYNAME];
@@ -226,6 +241,16 @@ $navigue . "
          
          $bouton_retour_vers_fta
              $bouton_submit
+       </tr>
+        <tr>
+         <td colspan=4 align=center>
+        $htmlListTitre
+                 </td>
+       </tr>
+        <tr>
+         <td colspan=4 align=center>
+        $htmlList
+                 </td>
        </tr>
    
      </table>

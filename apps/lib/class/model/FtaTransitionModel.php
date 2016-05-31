@@ -73,7 +73,7 @@ class FtaTransitionModel {
                 /**
                  * Gestion des Code Article Arcadia Primaire/Secondaires
                  */
-                $ftaModel->manageFtaPrimaireSecondaire();
+                $ftaModel->manageFtaPrimaireSecondaire(FtaEtatModel::ID_VALUE_VALIDE,  FtaVerrouillageChampsModel::CHANGE_STATE_TRUE_VALIDATION_CHAPITRE);
 
                 break;
 //            case $paramAbreviationFtaTransition == FtaEtatModel::ETAT_ABREVIATION_VALUE_WORKFLOW:
@@ -118,7 +118,7 @@ class FtaTransitionModel {
                 }
 
                 /**
-                 * Transition d'une Fta Archivé vers Modifier doit être la dernier version du dossier
+                 * Transition d'une Fta Archivévers Modifier doit être la dernier version du dossier
                  * afin d'éviter les doublons
                  */
                 if ($initial_abreviation_fta_etat == FtaEtatModel::ETAT_ABREVIATION_VALUE_ARCHIVE or $initial_abreviation_fta_etat == FtaEtatModel::ETAT_ABREVIATION_VALUE_VALIDE) {

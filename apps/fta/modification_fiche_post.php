@@ -128,13 +128,16 @@ switch ($action) {
             /*             * q
              * Enregistrement de la signature
              */
-            $isFtaDataValidationSuccess = $modelFtaSuiviProjet->getModelFta()->isFtaDataValidationSuccess($paramIdFtaChapitreEncours);
+//            $isFtaDataValidationSuccess = $modelFtaSuiviProjet->getModelFta()->isFtaDataValidationSuccess($paramIdFtaChapitreEncours);
+            $isFtaDataValidationSuccess = $modelFtaSuiviProjet->getModelFta()->isFtaDataValidationSuccess();
 
 
             if ($paramSignatureValidationSuiviProjet and $isFtaDataValidationSuccess == "0") {
                 $modelFtaSuiviProjet->getDataField(FtaSuiviProjetModel::FIELDNAME_DATE_VALIDATION_SUIVI_PROJET)->setFieldValue(date("Y-m-d"));
                 $modelFtaSuiviProjet->setSigned($paramSignatureValidationSuiviProjet);
                 $modelFtaSuiviProjet->saveToDatabase();
+                
+               $modelFta->manageFtaPrimaireSecondaire(FtaEtatModel::ID_VALUE_MODIFICATION,  FtaVerrouillageChampsModel::CHANGE_STATE_FALSE);
             }
         } else {
             $titre = 'Informations';

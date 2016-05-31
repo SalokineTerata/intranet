@@ -128,11 +128,10 @@ class FtaComposantView extends AbstractView {
         switch ($isLockValue) {
             case FtaVerrouillageChampsModel::FIELD_LOCK_PRIMARY_FALSE:
             case FtaVerrouillageChampsModel::FIELD_LOCK_SECONDARY_FALSE:
-
+            case FtaVerrouillageChampsModel::FIELD_LOCK_PRIMARY_TRUE:
 
 
                 break;
-            case FtaVerrouillageChampsModel::FIELD_LOCK_PRIMARY_TRUE:
             case FtaVerrouillageChampsModel::FIELD_LOCK_SECONDARY_TRUE:
 
                 $isEditable = FALSE;

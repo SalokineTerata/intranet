@@ -306,7 +306,7 @@ class FtaTransitionModel {
                 . " AND " . FtaEtatModel::TABLENAME . "." . FtaEtatModel::KEYNAME
                 . "=" . FtaModel::TABLENAME . "." . FtaModel::FIELDNAME_ID_FTA_ETAT        //Liaison
         ;
-        $logTransition .= "\n\nLISTE DIFFUSION\n" . $req . "\n";
+        $logTransition .= "<br /><br />LISTE DIFFUSION<br />" . $req . "<br />";
         $arrayFta = DatabaseOperation::convertSqlStatementWithoutKeyToArray($req);
 
         foreach ($arrayFta as $rowsFta) {
@@ -328,7 +328,7 @@ class FtaTransitionModel {
                         . " AND " . FtaWorkflowStructureModel::TABLENAME . "." . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_WORKFLOW
                         . "=" . FtaProcessusCycleModel::TABLENAME . "." . FtaProcessusCycleModel::FIELDNAME_WORKFLOW
                 ;
-                $logTransition.="\n\n" . $req . "\n";
+                $logTransition.="<br /><br />" . $req . "<br />";
                 $arrayIdChapitreInitiateur = DatabaseOperation::convertSqlStatementWithoutKeyToArray($req);
 
                 //L'un des chapitres initiateurs est-il dans la liste des chapitres mis à jour sur la fta ?
@@ -343,10 +343,10 @@ class FtaTransitionModel {
 
             if ($rowsFta[FtaModel::FIELDNAME_VERSION_DOSSIER_FTA] == 0 or $ok == 1) {
                 //Log de la diffusion globale
-                $logTransition.="\n\nDiffusion Globale Activée";
+                $logTransition.="<br /><br />Diffusion Globale Activée";
             } else {
                 //Log de la diffusion globale
-                $logTransition.="\n\nDiffusion Globale Désactivée";
+                $logTransition.="<br /><br />Diffusion Globale Désactivée";
             }
 
 
@@ -406,7 +406,7 @@ class FtaTransitionModel {
 
 
                 ;
-                $logTransition.="\n\n" . $req . "\nFIN DIFFUSION\n";
+                $logTransition.="<br /><br />" . $req . "<br />FIN DIFFUSION<br />";
                 $r_liste_destinataire = DatabaseOperation::convertSqlStatementWithoutKeyToArray($req);
                 foreach ($r_liste_destinataire as $rows_destinataire) {
                     $return[$rows_destinataire[UserModel::KEYNAME]]["mail"] = $rows_destinataire[UserModel::FIELDNAME_MAIL];
@@ -522,24 +522,24 @@ class FtaTransitionModel {
          */
         $sujetmail = "FTA/Validée: \"" . $CodeArticleLdc . " - " . $Libelle . "\"";
         $text = "La Fiche Technique Article \"" . $CodeArticleLdc . " - " . $Libelle . "\" "
-                . "vient d'être validée.\n"
-                . "Cet Article est maintenant actif et disponible dans l'ensemble de notre système informatique.\n"
-                . "\n"
-                . "INFORMATIONS PRINCIPALES:\n"
-                . $ftamodel->getDataField(FtaModel::FIELDNAME_SITE_PRODUCTION)->getFieldLabel() . ": " . $libelleSiteAgis . "\n"
+                . "vient d'être validée.<br />"
+                . "Cet Article est maintenant actif et disponible dans l'ensemble de notre système informatique.<br />"
+                . "<br />"
+                . "INFORMATIONS PRINCIPALES:<br />"
+                . $ftamodel->getDataField(FtaModel::FIELDNAME_SITE_PRODUCTION)->getFieldLabel() . ": " . $libelleSiteAgis . "<br />"
 //                . "Identifiant dans Agrologic: " . $CodeArticle . "\n"
-                . "\n"
-                . "Listes des produits créés:\n"
-                . $text_prod . "\n"
-                . "\n"
-                . "INFORMATIONS SUPPLEMENTAIRES:\n"
-                . $ftamodel->getDataField(FtaModel::FIELDNAME_CODE_ARTICLE_LDC)->getFieldLabel() . ": " . $ftamodel->getDataField(FtaModel::FIELDNAME_CODE_ARTICLE_LDC)->getFieldValue() . "\n"
-                . $ftamodel->getDataField(FtaModel::FIELDNAME_EAN_UVC)->getFieldLabel() . ": " . $ftamodel->getDataField(FtaModel::FIELDNAME_EAN_UVC)->getFieldValue() . "\n"
-                . $ftamodel->getDataField(FtaModel::FIELDNAME_EAN_COLIS)->getFieldLabel() . ": " . $ftamodel->getDataField(FtaModel::FIELDNAME_EAN_COLIS)->getFieldValue() . "\n"
-                . $ftamodel->getDataField(FtaModel::FIELDNAME_NOMBRE_UVC_PAR_CARTON)->getFieldLabel() . ": " . $ftamodel->getDataField(FtaModel::FIELDNAME_NOMBRE_UVC_PAR_CARTON)->getFieldValue() . "\n"
-                . $ftamodel->getDataField(FtaModel::FIELDNAME_POIDS_ELEMENTAIRE)->getFieldLabel() . ": " . $ftamodel->getDataField(FtaModel::FIELDNAME_POIDS_ELEMENTAIRE)->getFieldValue() . "\n"
+                . "<br />"
+                . "Listes des produits créés:<br />"
+                . $text_prod . "<br />"
+                . "<br />"
+                . "INFORMATIONS SUPPLEMENTAIRES:<br />"
+                . $ftamodel->getDataField(FtaModel::FIELDNAME_CODE_ARTICLE_LDC)->getFieldLabel() . ": " . $ftamodel->getDataField(FtaModel::FIELDNAME_CODE_ARTICLE_LDC)->getFieldValue() . "<br />"
+                . $ftamodel->getDataField(FtaModel::FIELDNAME_EAN_UVC)->getFieldLabel() . ": " . $ftamodel->getDataField(FtaModel::FIELDNAME_EAN_UVC)->getFieldValue() . "<br />"
+                . $ftamodel->getDataField(FtaModel::FIELDNAME_EAN_COLIS)->getFieldLabel() . ": " . $ftamodel->getDataField(FtaModel::FIELDNAME_EAN_COLIS)->getFieldValue() . "<br />"
+                . $ftamodel->getDataField(FtaModel::FIELDNAME_NOMBRE_UVC_PAR_CARTON)->getFieldLabel() . ": " . $ftamodel->getDataField(FtaModel::FIELDNAME_NOMBRE_UVC_PAR_CARTON)->getFieldValue() . "<br />"
+                . $ftamodel->getDataField(FtaModel::FIELDNAME_POIDS_ELEMENTAIRE)->getFieldLabel() . ": " . $ftamodel->getDataField(FtaModel::FIELDNAME_POIDS_ELEMENTAIRE)->getFieldValue() . "<br />"
                 . "Identifiant du Dossier Technique: " . $ftamodel->getDataField(FtaModel::FIELDNAME_DOSSIER_FTA)->getFieldValue()
-                . "-v" . $ftamodel->getDataField(FtaModel::FIELDNAME_VERSION_DOSSIER_FTA)->getFieldValue() . "\n"
+                . "-v" . $ftamodel->getDataField(FtaModel::FIELDNAME_VERSION_DOSSIER_FTA)->getFieldValue() . "<br />"
         ;
         switch ($UniteFacturation) {
             case 2: //Pièce
@@ -549,22 +549,22 @@ class FtaTransitionModel {
                 $temp = "Kilo";
                 break;
         }
-        $text.= $ftamodel->getDataField(FtaModel::FIELDNAME_UNITE_FACTURATION)->getFieldLabel() . ": " . $temp . "\n"
-                . $ftamodel->getDataField(FtaModel::FIELDNAME_DUREE_DE_VIE)->getFieldLabel() . ": " . $ftamodel->getDataField(FtaModel::FIELDNAME_DUREE_DE_VIE)->getFieldValue() . "\n"
-                . $ftamodel->getDataField(FtaModel::FIELDNAME_DUREE_DE_VIE_TECHNIQUE_PRODUCTION)->getFieldLabel() . ": " . $ftamodel->getDataField(FtaModel::FIELDNAME_DUREE_DE_VIE_TECHNIQUE_PRODUCTION)->getFieldValue() . "\n"
-                . $ftamodel->getDataField(FtaModel::FIELDNAME_DESIGNATION_COMMERCIALE)->getFieldLabel() . ": " . $ftamodel->getDataField(FtaModel::FIELDNAME_DESIGNATION_COMMERCIALE)->getFieldValue() . "\n"
-                . "\n"
-                . "\n"
+        $text.= $ftamodel->getDataField(FtaModel::FIELDNAME_UNITE_FACTURATION)->getFieldLabel() . ": " . $temp . "<br />"
+                . $ftamodel->getDataField(FtaModel::FIELDNAME_DUREE_DE_VIE)->getFieldLabel() . ": " . $ftamodel->getDataField(FtaModel::FIELDNAME_DUREE_DE_VIE)->getFieldValue() . "<br />"
+                . $ftamodel->getDataField(FtaModel::FIELDNAME_DUREE_DE_VIE_TECHNIQUE_PRODUCTION)->getFieldLabel() . ": " . $ftamodel->getDataField(FtaModel::FIELDNAME_DUREE_DE_VIE_TECHNIQUE_PRODUCTION)->getFieldValue() . "<br />"
+                . $ftamodel->getDataField(FtaModel::FIELDNAME_DESIGNATION_COMMERCIALE)->getFieldLabel() . ": " . $ftamodel->getDataField(FtaModel::FIELDNAME_DESIGNATION_COMMERCIALE)->getFieldValue() . "<br />"
+                . "<br />"
+                . "<br />"
         ;
         if ($paramCommentaire) {
             $text.= "COMMENTAIRE:\n"
                     . stripslashes($paramCommentaire)
-                    . "\n"
-                    . "\n"
+                    . "<br />"
+                    . "<br />"
             ;
         }
-        $text.= "Bonne journée à tous.\n"
-                . "Ce message a été envoyé automatiquement par le module Intranet - Fiche Technique Article.\n"
+        $text.= "Bonne journée à tous.<br />"
+                . "Ce message a été envoyé automatiquement par le module Intranet - Fiche Technique Article.<br />"
         ;
         $typeMail = "Validation";
 
@@ -588,14 +588,14 @@ class FtaTransitionModel {
          * Envoi du mail de contrôle
          */
         $sujetmail = "FTA/Information \"" . $CodeArticleLdc . " - " . $Libelle . "\"";
-        $corp = "DESTINATAIRES:\n"
-                . $liste_destinataire . "\n"
-                . "\n"
-                . "Message envoyé:\n"
-                . "\n"
+        $corp = "DESTINATAIRES:<br />"
+                . $liste_destinataire . "<br />"
+                . "<br />"
+                . "Message envoyé:<br />"
+                . "<br />"
                 . $text
-                . "\n"
-                . "INFORMATIONS DE DEBUGGAGE:\n"
+                . "<br />"
+                . "INFORMATIONS DE DEBUGGAGE:<br />"
                 . $logTransition
         ;
         {
@@ -624,8 +624,8 @@ class FtaTransitionModel {
         $mailUser = $userModel->getDataField(UserModel::FIELDNAME_MAIL)->getFieldValue();
 
 
-        $text = "Bonjour,\n"
-                . "\tNous vous informons de la validation des Fiches Techniques Articles suivantes:\n"
+        $text = "Bonjour,<br />"
+                . "&emsp&emspNous vous informons de la validation des Fiches Techniques Articles suivantes:<br />"
         ;
 
         $req = " SELECT " . GeoModel::FIELDNAME_LIBELLE_SITE_AGIS
@@ -636,7 +636,7 @@ class FtaTransitionModel {
                 . " AND " . GeoModel::TABLENAME . "." . GeoModel::KEYNAME . "=" . FtaModel::TABLENAME . "." . FtaModel::FIELDNAME_SITE_PRODUCTION
                 . " ORDER BY " . GeoModel::FIELDNAME_LIBELLE_SITE_AGIS;
 
-        $paramLogTransition .="\n\n" . $req;
+        $paramLogTransition .="<br /><br />" . $req;
         $arrayFta = DatabaseOperation::convertSqlStatementWithoutKeyToArray($req);
 
         $typeMail = "Validation";
@@ -644,7 +644,7 @@ class FtaTransitionModel {
         foreach ($arrayFta as $rowsFta) {
             //Classement par site d'assemblage
             if ($last_site <> $rowsFta[GeoModel::FIELDNAME_LIBELLE_SITE_AGIS]) {
-                $text.="\n\nSite d'assemblage: " . $rowsFta[GeoModel::FIELDNAME_LIBELLE_SITE_AGIS] . "\n";
+                $text.="<br /><br />Site d'assemblage: " . $rowsFta[GeoModel::FIELDNAME_LIBELLE_SITE_AGIS] . "<br />";
             }
 
             //Récupération de la liste des produits
@@ -657,7 +657,7 @@ class FtaTransitionModel {
                     . "=" . AnnexeAgrologicArticleCodificationModel::TABLENAME . "." . AnnexeAgrologicArticleCodificationModel::KEYNAME . " "
                     . " ORDER BY " . AnnexeAgrologicArticleCodificationModel::FIELDNAME_PREFIXE_ANNEXE_AGRO_ART_COD . " ASC, " . FtaComposantModel::FIELDNAME_DESIGNATION_CODIFICATION
             ;
-            $paramLogTransition.="\n\n" . $req;
+            $paramLogTransition.="<br /><br />" . $req;
             $arrayProd = DatabaseOperation::convertSqlStatementWithoutKeyToArray($req);
             if ($arrayProd) {
                 foreach ($arrayProd as $rowsProd) {
@@ -677,21 +677,21 @@ class FtaTransitionModel {
                             . FtaRoleModel::KEYNAME . "=0' >"
                             . $rowsFta[FtaModel::FIELDNAME_CODE_ARTICLE_LDC] . " " . $rowsFta[FtaModel::FIELDNAME_LIBELLE] . " </a>"
 //            $text.= $rowsFta[FtaModel::FIELDNAME_CODE_ARTICLE_LDC] . " " . $rowsFta[FtaModel::FIELDNAME_LIBELLE]
-                    . "\t\t" . $text_prod
-                    . "\n"
+                    . "&emsp&emsp&emsp&emsp" . $text_prod
+                    . "<br />"
             ;
 
             //Enregistrement du site
             $last_site = $rowsFta[GeoModel::FIELDNAME_LIBELLE_SITE_AGIS];
         }
         $sujetmail = "FTA/Validation: " . $paramSubject;
-        $text.= "\n"
+        $text.= "<br />"
                 . "Ces Articles sont maintenant disponibles et à jour dans l'ensemble de notre système informatique\n"
-                . "\n"
+                . "<br />"
                 . "Bonne journée.\n"
-                . "Intranet - FTA\n"
-                . "\n"
-                . "\n"
+                . "Intranet - FTA<br />"
+                . "<br />"
+                . "<br />"
                 . "NB : une ligne d'article est composée du code Article Arcadia, du libellé et des codes des composants(Code PSF)";
 
         /**
@@ -714,13 +714,13 @@ class FtaTransitionModel {
          * Envoi du mail de contrôle
          */
         $sujetmail = "FTA/Information \"" . $paramSubject;
-        $corp = "DESTINATAIRES:\n"
-                . $liste_destinataire . "\n"
-                . "\n"
+        $corp = "DESTINATAIRES:<br />"
+                . $liste_destinataire . "<br />"
+                . "<br />"
                 . "Message envoyé:\n"
-                . "\n"
+                . "<br />"
                 . $text
-                . "\n\n"
+                . "<br /><br />"
                 . $paramLogTransition
         ;
         {

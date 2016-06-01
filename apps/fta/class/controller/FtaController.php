@@ -90,11 +90,11 @@ class FtaController {
         } else {
             $paramDate = FtaController::changementDuFormatDeDateFR($paramDate);
         }
-        $newComment = "\n"
-                . "==============================\n\n"
-                . "Action : " . $paramAction . " \n"
-                . "Date: " . $paramDate . "\n"
-                . "Utilisateur: " . $paramUser . "\n";
+        $newComment = "<br />"
+                . "==============================<br /><br />"
+                . "Action : " . $paramAction . " <br />"
+                . "Date: " . $paramDate . "<br />"
+                . "Utilisateur: " . $paramUser . "<br />";
 
         if ($paramCommentaire) {
             $newComment .= "Commentaire:   " . $paramCommentaire;

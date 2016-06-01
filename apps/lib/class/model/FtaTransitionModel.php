@@ -474,6 +474,7 @@ class FtaTransitionModel {
         $UniteFacturation = $ftamodel->getDataField(FtaModel::FIELDNAME_UNITE_FACTURATION)->getFieldValue();
         $globalConfig = new GlobalConfig();
         $idUser = $globalConfig->getAuthenticatedUser()->getKeyValue();
+        $url = $globalConfig->getConf()->getUrlFullRoot();
         $userModel = new UserModel($idUser);
         $nom = $userModel->getDataField(UserModel::FIELDNAME_NOM)->getFieldValue();
         $prenom = $userModel->getDataField(UserModel::FIELDNAME_PRENOM)->getFieldValue();
@@ -524,6 +525,14 @@ class FtaTransitionModel {
         $text = "La Fiche Technique Article \"" . $CodeArticleLdc . " - " . $Libelle . "\" "
                 . "vient d'être validée.\n"
                 . "Cet Article est maintenant actif et disponible dans l'ensemble de notre système informatique.\n"
+                . "\n"
+                . "Lien de la Fta sur l'intranet "
+                . "<a href='" . $url . "/fta/modification_fiche.php?"
+                . FtaModel::KEYNAME . "=" . $paramIdFta
+                . "&synthese_action=all&comeback=0&" . FtaEtatModel::KEYNAME . "=3&"
+                . FtaEtatModel::FIELDNAME_ABREVIATION . "=V&"
+                . FtaRoleModel::KEYNAME . "=0' >"
+                . $ftamodel->getDataField(FtaModel::FIELDNAME_CODE_ARTICLE_LDC)->getFieldValue() . " " . $ftamodel->getDataField(FtaModel::FIELDNAME_LIBELLE)->getFieldValue() . " </a>"
                 . "\n"
                 . "INFORMATIONS PRINCIPALES:\n"
                 . $ftamodel->getDataField(FtaModel::FIELDNAME_SITE_PRODUCTION)->getFieldLabel() . ": " . $libelleSiteAgis . "\n"
@@ -597,8 +606,7 @@ class FtaTransitionModel {
                 . "\n"
                 . "INFORMATIONS DE DEBUGGAGE:\n"
                 . $logTransition
-        ;
-        {
+        ; {
             $expediteur = $prenom . " " . $nom . " <" . $mail . ">";
             envoismail($sujetmail, $corp, $mail, $expediteur, $typeMail);
         }
@@ -648,36 +656,36 @@ class FtaTransitionModel {
             }
 
             //Récupération de la liste des produits
-            $text_prod = "";
-            $req = "SELECT " . AnnexeAgrologicArticleCodificationModel::FIELDNAME_PREFIXE_ANNEXE_AGRO_ART_COD . "," . FtaComposantModel::FIELDNAME_CODE_PRODUIT_AGROLOGIC_FTA_NOMENCLATURE
-                    . " FROM " . FtaComposantModel::TABLENAME . ", " . AnnexeAgrologicArticleCodificationModel::TABLENAME
-                    . " WHERE " . FtaComposantModel::TABLENAME . "." . FtaComposantModel::FIELDNAME_ID_FTA
-                    . "=" . $rowsFta[FtaModel::KEYNAME]
-                    . " AND " . FtaComposantModel::TABLENAME . "." . FtaComposantModel::FIELDNAME_ID_ANNEXE_AGRO_ART_CODIFICATION
-                    . "=" . AnnexeAgrologicArticleCodificationModel::TABLENAME . "." . AnnexeAgrologicArticleCodificationModel::KEYNAME . " "
-                    . " ORDER BY " . AnnexeAgrologicArticleCodificationModel::FIELDNAME_PREFIXE_ANNEXE_AGRO_ART_COD . " ASC, " . FtaComposantModel::FIELDNAME_DESIGNATION_CODIFICATION
-            ;
-            $paramLogTransition.="\n\n" . $req;
-            $arrayProd = DatabaseOperation::convertSqlStatementWithoutKeyToArray($req);
-            if ($arrayProd) {
-                foreach ($arrayProd as $rowsProd) {
-                    //Chargement du code de codification
-
-                    $text_prod.= $rowsProd[AnnexeAgrologicArticleCodificationModel::FIELDNAME_PREFIXE_ANNEXE_AGRO_ART_COD]
-                            . $rowsProd[FtaComposantModel::FIELDNAME_CODE_PRODUIT_AGROLOGIC_FTA_NOMENCLATURE]
-                            . ", "
-                    ;
-                }
-            }
+//            $text_prod = "";
+//            $req = "SELECT " . AnnexeAgrologicArticleCodificationModel::FIELDNAME_PREFIXE_ANNEXE_AGRO_ART_COD . "," . FtaComposantModel::FIELDNAME_CODE_PRODUIT_AGROLOGIC_FTA_NOMENCLATURE
+//                    . " FROM " . FtaComposantModel::TABLENAME . ", " . AnnexeAgrologicArticleCodificationModel::TABLENAME
+//                    . " WHERE " . FtaComposantModel::TABLENAME . "." . FtaComposantModel::FIELDNAME_ID_FTA
+//                    . "=" . $rowsFta[FtaModel::KEYNAME]
+//                    . " AND " . FtaComposantModel::TABLENAME . "." . FtaComposantModel::FIELDNAME_ID_ANNEXE_AGRO_ART_CODIFICATION
+//                    . "=" . AnnexeAgrologicArticleCodificationModel::TABLENAME . "." . AnnexeAgrologicArticleCodificationModel::KEYNAME . " "
+//                    . " ORDER BY " . AnnexeAgrologicArticleCodificationModel::FIELDNAME_PREFIXE_ANNEXE_AGRO_ART_COD . " ASC, " . FtaComposantModel::FIELDNAME_DESIGNATION_CODIFICATION
+//            ;
+//            $paramLogTransition.="\n\n" . $req;
+//            $arrayProd = DatabaseOperation::convertSqlStatementWithoutKeyToArray($req);
+//            if ($arrayProd) {
+//                foreach ($arrayProd as $rowsProd) {
+//                    //Chargement du code de codification
+//
+//                    $text_prod.= $rowsProd[AnnexeAgrologicArticleCodificationModel::FIELDNAME_PREFIXE_ANNEXE_AGRO_ART_COD]
+//                            . $rowsProd[FtaComposantModel::FIELDNAME_CODE_PRODUIT_AGROLOGIC_FTA_NOMENCLATURE]
+//                            . ", "
+//                    ;
+//                }
+//            }
             //Insertion de la ligne d'article
             $text.= "<a href='" . $url . "/fta/modification_fiche.php?"
-                            . FtaModel::KEYNAME . "=" . $rowsFta[FtaModel::KEYNAME]
-                            . "&synthese_action=all&comeback=0&" . FtaEtatModel::KEYNAME . "=3&"
-                            . FtaEtatModel::FIELDNAME_ABREVIATION . "=V&"
-                            . FtaRoleModel::KEYNAME . "=0' >"
-                            . $rowsFta[FtaModel::FIELDNAME_CODE_ARTICLE_LDC] . " " . $rowsFta[FtaModel::FIELDNAME_LIBELLE] . " </a>"
+                    . FtaModel::KEYNAME . "=" . $rowsFta[FtaModel::KEYNAME]
+                    . "&synthese_action=all&comeback=0&" . FtaEtatModel::KEYNAME . "=3&"
+                    . FtaEtatModel::FIELDNAME_ABREVIATION . "=V&"
+                    . FtaRoleModel::KEYNAME . "=0' >"
+                    . $rowsFta[FtaModel::FIELDNAME_CODE_ARTICLE_LDC] . " " . $rowsFta[FtaModel::FIELDNAME_LIBELLE] . " </a>"
 //            $text.= $rowsFta[FtaModel::FIELDNAME_CODE_ARTICLE_LDC] . " " . $rowsFta[FtaModel::FIELDNAME_LIBELLE]
-                    . "\t\t" . $text_prod
+//                    . "\t\t" . $text_prod
                     . "\n"
             ;
 
@@ -722,8 +730,7 @@ class FtaTransitionModel {
                 . $text
                 . "\n\n"
                 . $paramLogTransition
-        ;
-        {
+        ; {
             $expediteur = $prenom . " " . $nom . " <" . $mailUser . ">";
             envoismail($sujetmail, $corp, $mailUser, $expediteur, $typeMail);
         }

@@ -112,8 +112,7 @@ function envoismail($sujetmail, $text, $destinataire, $expediteur, $paramTypeMai
         // Set the From and Reply-To headers
         $mail->setFrom($expediteur);
         $mail->setReturnPath($expediteur);
-        $mail->setHTML($text);
-
+       
         // Set the Subject
         $mail->setSubject($sujetmail);
 
@@ -124,8 +123,8 @@ function envoismail($sujetmail, $text, $destinataire, $expediteur, $paramTypeMai
         $mail->setHTMLCharset("UTF-8");
         $mail->setHeadCharset("UTF-8");
 
-        // Set the body
-        $mail->setText($text);
+        // Set the body       
+         $mail->setHTML(nl2br($text));
         //$result = $mail->send(array($adresse_to), 'smtp');
         //$result = $mail->send(array($destinataire), 'smtp');
 

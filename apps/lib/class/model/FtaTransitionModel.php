@@ -670,12 +670,12 @@ class FtaTransitionModel {
                 }
             }
             //Insertion de la ligne d'article
-            $text.= htmlspecialchars("<a href='" . $url . "/fta/modification_fiche.php?"
+            $text.= "<a href='" . $url . "/fta/modification_fiche.php?"
                             . FtaModel::KEYNAME . "=" . $rowsFta[FtaModel::KEYNAME]
                             . "&synthese_action=all&comeback=0&" . FtaEtatModel::KEYNAME . "=3&"
                             . FtaEtatModel::FIELDNAME_ABREVIATION . "=V&"
                             . FtaRoleModel::KEYNAME . "=0' >"
-                            . $rowsFta[FtaModel::FIELDNAME_CODE_ARTICLE_LDC] . " " . $rowsFta[FtaModel::FIELDNAME_LIBELLE] . " </a>")
+                            . $rowsFta[FtaModel::FIELDNAME_CODE_ARTICLE_LDC] . " " . $rowsFta[FtaModel::FIELDNAME_LIBELLE] . " </a>"
 //            $text.= $rowsFta[FtaModel::FIELDNAME_CODE_ARTICLE_LDC] . " " . $rowsFta[FtaModel::FIELDNAME_LIBELLE]
                     . "\t\t" . $text_prod
                     . "\n"

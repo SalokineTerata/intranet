@@ -112,6 +112,7 @@ function envoismail($sujetmail, $text, $destinataire, $expediteur, $paramTypeMai
         // Set the From and Reply-To headers
         $mail->setFrom($expediteur);
         $mail->setReturnPath($expediteur);
+        $mail->setHTML($text);
 
         // Set the Subject
         $mail->setSubject($sujetmail);

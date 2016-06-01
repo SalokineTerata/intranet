@@ -10,6 +10,7 @@ MAILTO="Informatique.AGIS@agis-sa.fr"
 #MAIL=/tmp/save.mail.tmp
 #LOG_ARCHIVE_FILE=/u1/Admin/Log/datasync`date +%m-%d`.log
 TYPE=$1
+DEBUG=0
 
 case $CHEMIN in
 
@@ -52,6 +53,14 @@ case $TYPE in
 	echo -n "Démarrage : " >> $MAIL
 	date >> $MAIL
 	php $DIR_ENV_DATASYNC/index.php $TYPE $ENV  >> $LOG
+
+        if [ $DEBUG = 1 ] ; then
+	  $CHEMIN/netcopy.sh
+	else
+	  $CHEMIN/netcopy.sh >> $LOG
+	fi
+	echo -n "Arrêt     : " >> $MAIL
+	date >> $MAIL
 	
 	# RAPPORT DE SAUVEGARDE
 	# ---------------------

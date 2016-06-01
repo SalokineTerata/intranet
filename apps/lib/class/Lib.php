@@ -34,7 +34,7 @@ class Lib {
                        </a>
                        ";
         }
-        $bouton_valider = '
+            $bouton_valider = '
                        <a href=' . $redirection . '>
                        <img src=../lib/images/bouton_valider_jaune.gif border=0>
                        </a>

@@ -72,7 +72,7 @@ class UserInterfaceMessage {
     const FR_WARNING_ACCES_RIGHTS_ROLES = "Erreur, vous n'avez aucun droits d'accès Rôles sur le module Fta.<br><br>Veuillez vous déconnecter et contactez l'administrateur de l'intranet";
     const FR_WARNING_ACCES_RIGHTS_WORKFLOW = "Erreur, vous n'avez aucun droits d'accès sur cette Espace de trvail.";
     const FR_WARNING_ACCES_RIGHTS = "Vous n'avez pas les droits d'accès nécessaire.<br><br>";
-    const FR_WARNING_ACCES_RIGHTS_TITLE = "Erreur d'accès";
+    const FR_WARNING_ACCES_RIGHTS_TITLE = "Droits manquant";
     const FR_WARNING_ARTICLE_PRIMAIRE = "Vous ne pouvez associer cette Fta avec une Fta ayant le même code Article Arcadia ou dossier Fta";
     const FR_WARNING_ARTICLE_PRIMAIRE_CHECK = "Vous ne pouvez associer cette Fta Primaire avec une autre Fta,<br> vous devez associer les Fta depuis les Secondaires";
     const FR_WARNING_ARTICLE_PRIMAIRE_CHECK2 = "Le nombre de composant dans cette Fta Primaire n'est pas le même que la Fta que vous souhaitez associer.";
@@ -107,6 +107,8 @@ class UserInterfaceMessage {
     const FR_WARNING_DATA_SITE_DE_PRODUCTION = "Veuillez selectionner un site de production .<br><br>";
     const FR_WARNING_DATA_SITE_DE_PRODUCTION_TITLE = "Site de production d'une Fiche Technique Article";
     const FR_WARNING_DATA_VALIDATION_FTA_CODE_LDC = "Le Code LDC doit être unique.";
+    const FR_WARNING_DECONNECTION = "Veuillez vous connectez à l'intranet afin d'accèder à la Fta.";
+    const FR_WARNING_DECONNECTION_TITLE = "Connexion à l'intranet.";
     const FR_WARNING_DUPLICATION_DE_FTA = " Attention, vous êtes sur le point de dupliquer la Fiche Technique Article suivante:<br>";
     const FR_WARNING_DUREE_DE_VIE_COMPOSANT = " Attention, la Durée de Vie utilisée pour calculer la DLC etiquetée doit être renseigné<br>";
     const FR_WARNING_MISSING_DATA = "Donnée manquante";

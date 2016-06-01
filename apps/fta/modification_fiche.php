@@ -71,6 +71,10 @@ $globalConfig = new GlobalConfig();
 
 if ($globalConfig->getAuthenticatedUser()) {
     $idUser = $globalConfig->getAuthenticatedUser()->getKeyValue();
+} else {
+    $titre = UserInterfaceMessage::FR_WARNING_DECONNECTION_TITLE;
+    $message = UserInterfaceMessage::FR_WARNING_DECONNECTION;
+    Lib::showMessage($titre, $message,$redirection);
 }
 
 $fta_consultation = Acl::getValueAccesRights('fta_consultation');

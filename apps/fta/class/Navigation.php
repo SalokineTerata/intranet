@@ -13,7 +13,8 @@ class Navigation {
     const FONT_COLOR_CHAPITRE_PUBLIC = "#CC33CC";
     const FONT_COLOR_CHAPITRE_NON_VALIDEE = "#FF0000";
     const FONT_COLOR_CHAPITRE_COMMENTAIRE = "#2A2A2A";
-    const FONT_COLOR_CHAPITRE_VALIDEE = "#00CC00";
+    const FONT_COLOR_CHAPITRE_VALIDEE = "#009400";
+//    const FONT_COLOR_CHAPITRE_VALIDEE = "#00CC00";
     const FONT_SIZE_CHAPITRE_ENCOURS = "3";
     const FONT_SIZE_DEFAULT = "2";
 
@@ -155,7 +156,7 @@ class Navigation {
         } elseif ($_SESSION["comeback_url"] == "") {
             $_SESSION["comeback_url"] = 'index.php?id_fta_etat=' . self::$id_fta_etat . '&nom_fta_etat=' . self::$abreviation_etat . '&id_fta_role=' . self::$id_fta_role . '&synthese_action=' . self::$synthese_action;
         }
-        $menu_navigation.= '</td></tr><tr><td>
+        $menu_navigation.= '</tr><tr><td colspan=6 >
     <a href=' . $_SESSION["comeback_url"] . '><img src=../lib/images/bouton_retour.png alt=\'\' title=\'Retour\' width=\'18\' height=\'15\' border=\'0\' /> Retour</a> |
     ';
         if ($paramActivationComplete) {
@@ -542,6 +543,7 @@ class Navigation {
 
     protected static function RecupChapitre($paramT_Liste_Processus) {
         $page_default = "modification_fiche";
+        $first = "";
         /*
          *  Nous récupérons les chapitres obligatoirement présent ce qui implique que les autre chapitres doivent être attribués.
          */
@@ -560,7 +562,10 @@ class Navigation {
                     . '=\'' . $value . '\'';
         }
         $reqRecup .=' ) AND ' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_WORKFLOW . '=' . self::$id_fta_workflow
-                . ' ORDER BY ' . FtaChapitreModel::TABLENAME . '.' . FtaChapitreModel::KEYNAME;
+                . ' ORDER BY ' . FtaWorkflowStructureModel::TABLENAME . '.' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_ROLE
+                . ',' . FtaWorkflowStructureModel::TABLENAME . '.' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_PROCESSUS
+                . ',' . FtaChapitreModel::TABLENAME . '.' . FtaChapitreModel::KEYNAME
+        ;
         $arrayRecup = DatabaseOperation::convertSqlStatementWithoutKeyToArray($reqRecup);
 
         //Balyage des chapitres trouvés
@@ -570,7 +575,7 @@ class Navigation {
             $idFtaProcessus = $rowsRecup[FtaWorkflowStructureModel::FIELDNAME_ID_FTA_PROCESSUS];
             $idFtaRole = $rowsRecup[FtaWorkflowStructureModel::FIELDNAME_ID_FTA_ROLE];
 
-            //Dans le cas où il n'y a pas de chapitre sélectionné, sélection du premier
+            //Dans le cas où il n'y a pas de chapitre sélectionné, sélection du chapitre identité
             if (!self::$id_fta_chapitre_encours) {
                 self::$id_fta_chapitre_encours = $id_fta_chapitre;
             }
@@ -592,6 +597,7 @@ class Navigation {
             //Ce chapitre est-il public?
             if ($idFtaProcessus == 0) {
                 $font_color = "color=" . self::FONT_COLOR_CHAPITRE_PUBLIC;
+                $link = TRUE;
                 $num = 1;
             } else {
                 //Le chapitre est-il validé ?
@@ -663,40 +669,26 @@ class Navigation {
                 $menu_navigation .= '</a>';
                 $menu_navigation .= '</b></font> ' . $iEnd . $image_flash2
                 ;
-
                 /**
-                 * Version avec le module rewrite
+                 * Mise en forme des chapitres de la barre de navigation regroupé par Rôle
                  */
-//                $menu_navigation .= '<a href=' . $page_default
-////                $menu_navigation .= '<a href=\'#\''
-////                        . ' onClick=\'navigation_' . $id_fta_chapitre . '();\''
-//                        . '-' . self::$id_fta
-//                        . '-' . $id_fta_chapitre
-//                        . '-' . self::$synthese_action
-//                        . '-' . self::$id_fta_etat
-//                        . '-' . self::$abreviation_etat
-//                        . '-' . self::$comeback
-//                        . '-' . self::$id_fta_role
-//                        . '.html >' . $b . ''
-//                        . $image1 . $nom_usuel_fta_chapitre . $image2
-//                        . '</a>'
-//                        . '</b></font> '
-//                ;
-//                $menu_navigation .= '<SCRIPT LANGUAGE=JavaScript> 
-//                          function navigation_' . $id_fta_chapitre . '() {  
-//                                        document.navigation.id_fta.value=\'' . self::$id_fta . '\'; 
-//                                        document.navigation.id_fta_chapitre_encours.value=\'' . $id_fta_chapitre . '\'; 
-//                                        document.navigation.id_fta_role.value=\'' . self::$id_fta_role . '\'; 
-//                                        document.navigation.id_fta_etat.value=\'' . self::$id_fta_etat . '\'; 
-//                                        document.navigation.synthese_action.value=\'' . self::$synthese_action . '\'; 
-//                                        document.navigation.abreviation_fta_etat.value=\'' . self::$abreviation_etat . '\'; 
-//                                        document.navigation.comeback.value=\'' . self::$comeback . '\'; 
-//                                        navigation.submit();                                         
-//                                        return true; 
-//                                    }  </SCRIPT> ';
+                if ($idFtaRoleTmp == $idFtaRole or ! $first) {
+                    $roleMenu .= $menu_navigation;
+                    $menu_navigation = "";
+                    $idFtaRoleTmp = $idFtaRole;
+                    $first = "1";
+                } else {
+                    $color = FtaRoleModel::getColorByRole($idFtaRoleTmp);
+                    $roleMenuFinal .="<td style='border-style:solid; border-bottom-width: 10px; border-color: " . $color . "' >" . $roleMenu . "</td>";
+                    $roleMenu = $menu_navigation;
+                    $menu_navigation = "";
+                    $idFtaRoleTmp = $idFtaRole;
+                }
             }
         }
-        return $menu_navigation;
+        $color = FtaRoleModel::getColorByRole($idFtaRoleTmp);
+        $roleMenuFinal .="<td style='border-style:solid; border-bottom-width: 10px; border-color: " . $color . "' >" . $roleMenu . "</td>";
+        return $roleMenuFinal;
     }
 
 //Fin de la création des chapitres
@@ -809,8 +801,7 @@ class Navigation {
                     . '<br>  Espace de Travail : ' . $paramRowsFtaEtatAndFta[FtaWorkflowModel::FIELDNAME_DESCRIPTION_FTA_WORKFLOW]
                     . '</td></tr></table>
                      <' . $paramHtmlTable . '>
-                           <tr class = titre>
-                                <td>';
+                           <tr class = titre>';
         } else {
             $menu_navigation = '<' . $paramHtmlTable . '><tr><td class=titre_principal> <div align=\'left\'>
                             ' . $identifiant . '- ' . $nom . ' &nbsp;&nbsp;&nbsp;&nbsp;<i>(gérée par ' . $paramCreateur . ')</i></div>'
@@ -824,8 +815,7 @@ class Navigation {
                     . '<br>  Espace de Travail : ' . $paramRowsFtaEtatAndFta[FtaWorkflowModel::FIELDNAME_DESCRIPTION_FTA_WORKFLOW]
                     . '</td></tr></table>
                     <' . $paramHtmlTable . '>
-                           <tr class = titre>
-                                <td>';
+                           <tr class = titre>';
         }
 
         return $menu_navigation;

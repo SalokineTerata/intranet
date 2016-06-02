@@ -13,6 +13,7 @@ class FtaRoleModel extends AbstractModel {
     const FIELDNAME_DESCRIPTION_FTA_ROLE = 'description_fta_role';
     const FIELDNAME_NOM_FTA_ROLE = 'nom_fta_role';
     const FIELDNAME_IS_GESTIONNAIRE = 'is_gestionnaire';
+    const FIELDNAME_COLOR_FTA_ROLE = 'color_fta_role';
     const IS_GESTIONNAIRE_TRUE = '1';
     const IS_GESTIONNAIRE_FALSE = '0';
     const ID_FTA_ROLE_CHEF_DE_PROJET = '1';
@@ -358,6 +359,17 @@ class FtaRoleModel extends AbstractModel {
         }
 
         return $RoleNavigation;
+    }
+    /**
+     * On récupère la couleur correspondante à un rôle
+     * @param int $paramIdFtaRole
+     * @return string
+     */
+    public static function getColorByRole($paramIdFtaRole){
+        $ftaRoleModel = new FtaRoleModel($paramIdFtaRole);
+        $color = $ftaRoleModel->getDataField(self::FIELDNAME_COLOR_FTA_ROLE)->getFieldValue();
+        
+        return $color;
     }
 
 }

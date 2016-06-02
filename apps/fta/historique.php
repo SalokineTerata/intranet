@@ -116,9 +116,6 @@ if ($id_fta) {
            ' . DatabaseDescription::getFieldDocLabel(FtaRoleModel::TABLENAME, FtaRoleModel::FIELDNAME_DESCRIPTION_FTA_ROLE) . '
            </td>
            <td>
-           ' . DatabaseDescription::getFieldDocLabel(FtaProcessusModel::TABLENAME, FtaProcessusModel::FIELDNAME_NOM) . '
-           </td>
-           <td>
            ' . DatabaseDescription::getFieldDocLabel(FtaChapitreModel::TABLENAME, FtaChapitreModel::FIELDNAME_NOM_CHAPITRE) . '
            </td>
            <td>
@@ -196,9 +193,7 @@ if ($id_fta) {
                     <td >
                    &nbsp;' . $service_fta_processus . '
                    </td>
-                   <td >
-                   &nbsp;' . $nom_fta_processus . '
-                   </td> <td>   
+                  <td>   
                    ' . $champChapitre . '
                   </td> <td >
                    &nbsp;' . round($taux * "100", "2") . '%

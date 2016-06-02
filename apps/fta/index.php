@@ -98,7 +98,7 @@ if (!$fta_consultation) {
                     $titre = UserInterfaceMessage::FR_WARNING_ACCES_RIGHTS_TITLE;
                     $message = UserInterfaceMessage::FR_WARNING_ACCES_RIGHTS_ROLES;
                     $redirection = "index.php";
-                     Lib::showMessage($titre, $message, $redirection);
+                    Lib::showMessage($titre, $message, $redirection);
                 }
             } else {
                 $synthese_action = FtaEtatModel::ETAT_AVANCEMENT_VALUE_ALL;
@@ -236,7 +236,7 @@ if (!$fta_consultation) {
 
 
 //Construction de la page <td>&nbsp</td>
-        echo '
+        echo '    
     <form name=\'modification_fiche\' method=post action=' . $page_action . ' id=\'idOfForm\' >
         <input type=hidden name=id_fta_etat value=' . $id_fta_etat_encours . '>
         <input type=hidden name=nom_fta_etat value=' . $nom_fta_etat_encours . '> 

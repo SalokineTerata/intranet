@@ -79,6 +79,7 @@ $CMD = "#!$SHELL\n"               //Liste des commandes envoyées au shell + Dat
         . "#ATTENTION !! Ce script a été autogénéré via datasync.sh\n"
         . "#Ne le modifiez qu'à l'aide du fichier PHP de l'intranet Agis\n"
         . "echo Base MySQL sélectionnée: " . $paramInit[$MYSQL_DATABASE_NAME][$paramEnvName] . "\n"
+        . "echo Date de génération du fichier: " . date(DATE_RFC2822) . "\n"
 //           . "/data/etc/init.d/ncpmanager.sh restart\n"
 //           . "echo -n 'Démarrage de copie des données intersite à:'\n"
 //           . "date\n"

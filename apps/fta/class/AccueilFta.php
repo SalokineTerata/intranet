@@ -12,13 +12,16 @@ class AccueilFta {
     protected static $arrayFtaRole;
     protected static $arrayFtaWorkflow;
     protected static $arrayIdFtaAndIdWorkflow;
+    protected static $arrayIdFtaAndIdWorkflowEncours;
     protected static $arrayIdFtaByUserAndWorkflow;
+    protected static $arrayIdFtaByUserAndWorkflowEncours;
     protected static $arraNameSiteByWorkflow;
     protected static $idFtaRole;
     protected static $idFtaEtat;
     protected static $idUser;
     protected static $lieuGeo;
     protected static $nombreFta;
+    protected static $nombreFtaEncours;
     protected static $orderBy;
     protected static $syntheseAction;
     protected static $ftaModification;
@@ -76,13 +79,26 @@ class AccueilFta {
          * $arrayIdFtaAndIdWorkflow[1] sont les id_fta
          * $arrayIdFtaAndIdWorkflow[2] sont les nom des workflows correspondant aux  id_fta
          */
-        self::$arrayIdFtaAndIdWorkflow = FtaEtatModel::getIdFtaByEtatAvancement(self::$syntheseAction, self::$idFtaRole, self::$idUser, self::$idFtaEtat, self::$ftaModification, self::$lieuGeo);
+        if (self::$syntheseAction == FtaEtatModel::ETAT_AVANCEMENT_VALUE_EN_COURS or self::$idFtaEtat <> FtaEtatModel::ID_VALUE_MODIFICATION) {
+            self::$arrayIdFtaAndIdWorkflow = FtaEtatModel::getIdFtaByEtatAvancement(self::$syntheseAction, self::$idFtaRole, self::$idUser, self::$idFtaEtat, self::$ftaModification, self::$lieuGeo);
 
-        self::$arrayIdFtaByUserAndWorkflow = UserModel::getIdFtaByUserAndWorkflow(self::$arrayIdFtaAndIdWorkflow, self::$orderBy, $debut, self::$ftaModification);
+            self::$arrayIdFtaByUserAndWorkflow = UserModel::getIdFtaByUserAndWorkflow(self::$arrayIdFtaAndIdWorkflow, self::$orderBy, $debut, self::$ftaModification);
 
-        self::$arraNameSiteByWorkflow = IntranetActionsModel::getNameSiteByWorkflow(self::$idUser, self::$arrayIdFtaByUserAndWorkflow['3']);
+            self::$arraNameSiteByWorkflow = IntranetActionsModel::getNameSiteByWorkflow(self::$idUser, self::$arrayIdFtaByUserAndWorkflow['3']);
 
-        self::$nombreFta = self::$arrayIdFtaByUserAndWorkflow['2'];
+            self::$nombreFta = self::$arrayIdFtaByUserAndWorkflow['2'];
+        } else {
+            self::$arrayIdFtaAndIdWorkflow = FtaEtatModel::getIdFtaByEtatAvancement(self::$syntheseAction, self::$idFtaRole, self::$idUser, self::$idFtaEtat, self::$ftaModification, self::$lieuGeo);
+            self::$arrayIdFtaAndIdWorkflowEncours = FtaEtatModel::getIdFtaByEtatAvancement(FtaEtatModel::ETAT_AVANCEMENT_VALUE_EN_COURS, self::$idFtaRole, self::$idUser, self::$idFtaEtat, self::$ftaModification, self::$lieuGeo);
+
+            self::$arrayIdFtaByUserAndWorkflow = UserModel::getIdFtaByUserAndWorkflow(self::$arrayIdFtaAndIdWorkflow, self::$orderBy, $debut, self::$ftaModification);
+            self::$arrayIdFtaByUserAndWorkflowEncours = UserModel::getIdFtaByUserAndWorkflow(self::$arrayIdFtaAndIdWorkflowEncours, self::$orderBy, $debut, self::$ftaModification);
+
+            self::$arraNameSiteByWorkflow = IntranetActionsModel::getNameSiteByWorkflow(self::$idUser, self::$arrayIdFtaByUserAndWorkflow['3']);
+
+            self::$nombreFta = self::$arrayIdFtaByUserAndWorkflow['2'];
+            self::$nombreFtaEncours = self::$arrayIdFtaByUserAndWorkflowEncours['2'];
+        }
     }
 
     public static function getTableauSythese() {
@@ -348,6 +364,9 @@ class AccueilFta {
                         . '&nom_fta_etat=' . FtaEtatModel::ETAT_ABREVIATION_VALUE_MODIFICATION
                         . '&id_fta_role=' . $paramIdFtaRole
                         . '&synthese_action=attente >En attente' . $nombreFta1 . '</a>';
+                if (self::$syntheseAction <> FtaEtatModel::ETAT_AVANCEMENT_VALUE_EN_COURS) {
+                    $nombreFta2 = ' (' . self::$nombreFtaEncours . ')';
+                }
                 $lien['1'] = ' <a href=index.php?id_fta_etat=1'
                         . '&nom_fta_etat=' . FtaEtatModel::ETAT_ABREVIATION_VALUE_MODIFICATION
                         . '&id_fta_role=' . $paramIdFtaRole

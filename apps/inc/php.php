@@ -74,6 +74,7 @@ require_once('../lib/class/database/DatabaseRecord.php');
 //Règles de validation
 require_once('../lib/class/rules_validation/AbstractRulesValidation.php');
 require_once('../lib/class/rules_validation/DataNotEmptyRulesValidation.php');
+require_once('../lib/class/rules_validation/DataNotRealEmptyRulesValidation.php');
 require_once('../lib/class/rules_validation/DataNotSmallRulesValidation.php');
 require_once('../lib/class/rules_validation/DataNotSpecialRulesValidation.php');
 require_once('../lib/class/rules_validation/Less35CaractereRulesValidation.php');

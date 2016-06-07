@@ -308,7 +308,56 @@ class IntranetDroitsAccesModel extends AbstractModel {
 
                 $ftaDroitsAccesGlobaux.= '</table>';
 
-                echo $ftaDroitsAccesGlobaux . $ftaDroitsAcces . '</td>';
+                /**
+                 * Drois d'accès au module Fta
+                 */
+                echo '<table>';
+                echo '<tr>';
+                $arrayActionsAccesModuleFta = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
+                                'SELECT DISTINCT ' . IntranetActionsModel::KEYNAME
+                                . ', ' . IntranetActionsModel::FIELDNAME_NOM_INTRANET_ACTIONS
+                                . ', ' . IntranetActionsModel::FIELDNAME_DESCRIPTION_INTRANET_ACTIONS
+                                . ', ' . IntranetActionsModel::FIELDNAME_MODULE_INTRANET_ACTIONS
+                                . ' FROM ' . IntranetActionsModel::TABLENAME
+                                . ' WHERE ' . IntranetActionsModel::FIELDNAME_TAG_INTRANET_ACTIONS . '=\'' . IntranetActionsModel::VALUE_FTA . '\''
+                );
+
+                self::getHtmlListeAccesFta($arrayActionsAccesModuleFta, $idIntranetModules, $paramSalUser);
+                $arrayActionsDiffusionImpression = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
+                                'SELECT DISTINCT ' . IntranetActionsModel::KEYNAME
+                                . ', ' . IntranetActionsModel::FIELDNAME_NOM_INTRANET_ACTIONS
+                                . ', ' . IntranetActionsModel::FIELDNAME_DESCRIPTION_INTRANET_ACTIONS
+                                . ' FROM ' . IntranetModulesModel::TABLENAME . ',' . IntranetActionsModel::TABLENAME
+                                . ' WHERE ' . IntranetActionsModel::FIELDNAME_MODULE_INTRANET_ACTIONS . '=' . '0'
+                                . ' AND ' . IntranetActionsModel::KEYNAME . '<>\'' . IntranetNiveauAccesModel::NIVEAU_FTA_CONSULTATION . '\''
+                                . ' AND ' . IntranetActionsModel::KEYNAME . '<>\'' . IntranetNiveauAccesModel::NIVEAU_FTA_MODIFICATION . '\''
+                );
+
+                self::getHtmlListeAccesFta($arrayActionsDiffusionImpression, $idIntranetModules, $paramSalUser);
+
+                $arrayActionsAccesDiffusionFta = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
+                                'SELECT DISTINCT ' . IntranetActionsModel::KEYNAME
+                                . ', ' . IntranetActionsModel::FIELDNAME_NOM_INTRANET_ACTIONS
+                                . ', ' . IntranetActionsModel::FIELDNAME_DESCRIPTION_INTRANET_ACTIONS
+                                . ', ' . IntranetActionsModel::FIELDNAME_MODULE_INTRANET_ACTIONS
+                                . ' FROM ' . IntranetActionsModel::TABLENAME
+                                . ' WHERE ' . IntranetActionsModel::FIELDNAME_NOM_INTRANET_ACTIONS . '=\'' . IntranetActionsModel::NAME_DIFFUSION_FTA . '\''
+                );
+
+                self::getHtmlListeAccesFta($arrayActionsAccesDiffusionFta, $idIntranetModules, $paramSalUser);
+
+                echo '</tr>';
+                echo '</table>';
+
+//                echo $ftaDroitsAccesGlobaux . $ftaDroitsAcces . '</td>';
+                /**
+                 * On détermine l'affichage des droits d'acces sur l'espace de travail
+                 */
+                $acccesModuleFta = self::getAccesModuleFtaValue($paramSalUser);
+                $style = self::getStyleAdministrationBouttonByAccesModuleFtaValue($acccesModuleFta, IntranetActionsModel::NAME_DROIT_MODIFICATION);
+
+                
+                echo '<div id=' . IntranetActionsModel::NAME_DROIT_MODIFICATION . ' ' . $style . '>' . $ftaDroitsAcces . '</div></td>';
             } else {
 
                 /*
@@ -490,10 +539,10 @@ class IntranetDroitsAccesModel extends AbstractModel {
                 $niveauAcces = $rowsNiveauAcces[self::FIELDNAME_NIVEAU_INTRANET_DROITS_ACCES];
             }
         } else {
-            $niveauAcces = 0;
+            $niveauAcces = IntranetNiveauAccesModel::NIVEAU_GENERIC_FALSE;
         }
 
-        if ($niveauAcces == 1) {
+        if ($niveauAcces == IntranetNiveauAccesModel::NIVEAU_GENERIC_TRUE) {
             $checked = 'checked';
         } else {
             $checked = '';
@@ -752,6 +801,366 @@ class IntranetDroitsAccesModel extends AbstractModel {
         );
 
         return $arrayAction;
+    }
+
+    /**
+     * Droits globaux pour le module Fta
+     * @param type $paramArrayIdIntranetAcces
+     */
+    private static function getHtmlListeAccesFta($paramArrayIdIntranetAcces, $paramIdIntranetModules, $paramSalUser) {
+
+        if ($paramArrayIdIntranetAcces) {
+            /**
+             * On récupère la valeur de l'accès au module Fta
+             */
+            foreach ($paramArrayIdIntranetAcces as $rowsActionsAccesModuleFta) {
+                $idIntranetActions = $rowsActionsAccesModuleFta[IntranetActionsModel::KEYNAME];
+                $descriptionIntranetActions = $rowsActionsAccesModuleFta[IntranetActionsModel::FIELDNAME_DESCRIPTION_INTRANET_ACTIONS];
+                $nomIntranetActions = $rowsActionsAccesModuleFta[IntranetActionsModel::FIELDNAME_NOM_INTRANET_ACTIONS];
+                
+                /**
+                 * On détermine l'affichage des droits globaux du module Fta
+                 */
+                $acccesModuleFta = self::getAccesModuleFtaValue($paramSalUser);
+                $style = self::getStyleAdministrationBouttonByAccesModuleFtaValue($acccesModuleFta, $nomIntranetActions);
+
+                /*
+                 * Recherche de niveaux spécifiques
+                 */
+                $arrayNiveauSpecAcces = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
+                                'SELECT ' . IntranetNiveauAccesModel::FIELDNAME_ID_INTRANET_NIVEAU_ACCES
+                                . ',' . IntranetNiveauAccesModel::FIELDNAME_NOM_INTRANET_NIVEAU_ACCES
+                                . ' FROM ' . IntranetNiveauAccesModel::TABLENAME
+                                . ' WHERE ' . IntranetNiveauAccesModel::FIELDNAME_ID_INTRANET_MODULES . '=' . $paramIdIntranetModules
+                                . ' AND ' . IntranetNiveauAccesModel::FIELDNAME_ID_INTRANET_ACTIONS . '=' . $idIntranetActions
+                );
+                if (!$arrayNiveauSpecAcces) {
+                    $arrayNiveauSpecAcces = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
+                                    'SELECT ' . IntranetNiveauAccesModel::FIELDNAME_ID_INTRANET_NIVEAU_ACCES
+                                    . ',' . IntranetNiveauAccesModel::FIELDNAME_NOM_INTRANET_NIVEAU_ACCES
+                                    . ' FROM ' . IntranetNiveauAccesModel::TABLENAME
+                                    . ' WHERE ' . IntranetNiveauAccesModel::FIELDNAME_ID_INTRANET_MODULES . '=0'
+                                    . ' AND ' . IntranetNiveauAccesModel::FIELDNAME_ID_INTRANET_ACTIONS . '=0');
+                    $nomIntranetActions = $nomIntranetActions . "_" . $idIntranetActions;
+                }
+                /**
+                 * Si le droit d'acces encours est acces_module_fta alors on ajoute la fonction js 
+                 * afin de gérer l'affichage des autres droits d'accès
+                 */
+                if ($nomIntranetActions == IntranetActionsModel::NAME_ACCES_MODULE_FTA) {
+                    $java = 'onchange=\'changeFta()\'';
+                    $accesModuleFta = 'id=' . IntranetActionsModel::NAME_ACCES_MODULE_FTA;
+                } else {
+                    $java = "";
+                    $accesModuleFta = "";
+                }
+                /**
+                 * On détermine id de la cellule afin de gérer l'affichage du drtois d'accès
+                 */
+                $idNomIntranetActions = $nomIntranetActions;
+                /**
+                 * On enlève l'id acces_module_fta pour la cellue pour ne pas avoir de doublon avec la liste déroulante
+                 */
+                if ($accesModuleFta) {
+                    $idNomIntranetActions = "";
+                }
+
+                echo '<td class=loginFFFFFFdroit valign=top width=172 id=' . $idNomIntranetActions . ' ' . $style . ' >';
+                echo '<div >';
+                echo '<center>';
+                echo $descriptionIntranetActions . '<br>';
+                $list1 = '<select ' . $accesModuleFta . ' ' . $java . ' name=' . $nomIntranetActions . '>';
+                foreach ($arrayNiveauSpecAcces as $rowsNiveau) {
+                    /*
+                     * Création des variables necessaires à la liste
+                     */
+                    $idIntranetNiveauAcces = $rowsNiveau[IntranetNiveauAccesModel::FIELDNAME_ID_INTRANET_NIVEAU_ACCES];
+                    $nomIntranetNiveauAcces = $rowsNiveau[IntranetNiveauAccesModel::FIELDNAME_NOM_INTRANET_NIVEAU_ACCES];
+                    if
+                    (
+                            isset($paramIdIntranetModules)
+                            and isset($idIntranetActions)
+                            and isset($idIntranetNiveauAcces)
+                            and isset($paramSalUser)
+                    ) {
+
+                        $arrayDroitsAcces = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
+                                        'SELECT ' . self::FIELDNAME_ID_INTRANET_ACTIONS
+                                        . ' FROM ' . self::TABLENAME
+                                        . ' WHERE ' . self::FIELDNAME_ID_INTRANET_MODULES . '=' . $paramIdIntranetModules
+                                        . ' AND ' . self::FIELDNAME_ID_INTRANET_ACTIONS . '= ' . $idIntranetActions
+                                        . ' AND ' . self::FIELDNAME_NIVEAU_INTRANET_DROITS_ACCES . '=' . $idIntranetNiveauAcces
+                                        . ' AND ' . self::FIELDNAME_ID_USER . '=' . $paramSalUser
+                        );
+
+                        /*
+                         * Si oui, alors il est pris par défaut
+                         */
+                        if ($arrayDroitsAcces) {
+                            $selected = 'selected';
+                        } else {
+                            $selected = '';
+                        }
+                    }
+                    //Création de la liste
+                    $list1.='<option value=' . $idIntranetNiveauAcces . ' ' . $selected . '> ';
+                    $list1.=$nomIntranetNiveauAcces;
+                    $list1.=' </option>';
+                }
+                $list1.='</select>';
+                echo $list1;
+                echo '<br>';
+                echo '</center>';
+                echo '</div>';
+                echo '</td>';
+            }
+        }
+    }
+
+    /**
+     * Gestion des droits d'accès pour les droits spécifique acces_module_fta et diffusion_fta
+     * @param int $paramIdUser
+     */
+    public static function manageAccesRightToFta($paramIdUser) {
+        $arrayActionsAccesModuleFta = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
+                        'SELECT DISTINCT ' . IntranetActionsModel::KEYNAME
+                        . ', ' . IntranetActionsModel::FIELDNAME_NOM_INTRANET_ACTIONS
+                        . ', ' . IntranetActionsModel::FIELDNAME_DESCRIPTION_INTRANET_ACTIONS
+                        . ', ' . IntranetActionsModel::FIELDNAME_MODULE_INTRANET_ACTIONS
+                        . ' FROM ' . IntranetActionsModel::TABLENAME
+                        . ' WHERE (' . IntranetActionsModel::FIELDNAME_TAG_INTRANET_ACTIONS . '=\'' . IntranetActionsModel::VALUE_FTA . '\''
+                        . ' OR ' . IntranetActionsModel::FIELDNAME_NOM_INTRANET_ACTIONS . '=\'' . IntranetActionsModel::NAME_DIFFUSION_FTA . '\')'
+        );
+        foreach ($arrayActionsAccesModuleFta as $rowsActionsAccesModuleFta) {
+            $nom_niveau_intranet_droits_acces = $rowsActionsAccesModuleFta[IntranetActionsModel::FIELDNAME_NOM_INTRANET_ACTIONS];
+
+            $niveau_intranet_droits_acces = Lib::getParameterFromRequest($nom_niveau_intranet_droits_acces);
+            $consultation = "consultation_" . IntranetNiveauAccesModel::NIVEAU_FTA_CONSULTATION;
+            $modification = "modification_" . IntranetNiveauAccesModel::NIVEAU_FTA_MODIFICATION;
+            $diffusion = "diffusion_" . IntranetNiveauAccesModel::NIVEAU_FTA_DIFFUSION;
+            $impression = "impression_" . IntranetNiveauAccesModel::NIVEAU_FTA_IMPRESSION;
+            if ($nom_niveau_intranet_droits_acces == IntranetActionsModel::NAME_ACCES_MODULE_FTA) {
+                switch ($niveau_intranet_droits_acces) {
+                    /**
+                     * Aucun accès au module Fta
+                     */
+                    case IntranetNiveauAccesModel::NIVEAU_GENERIC_FALSE:
+
+                        Lib::setParameterFromRequest($consultation, IntranetNiveauAccesModel::NIVEAU_GENERIC_FALSE);
+                        Lib::setParameterFromRequest($modification, IntranetNiveauAccesModel::NIVEAU_GENERIC_FALSE);
+                        Lib::setParameterFromRequest($diffusion, IntranetNiveauAccesModel::NIVEAU_GENERIC_FALSE);
+                        Lib::setParameterFromRequest($impression, IntranetNiveauAccesModel::NIVEAU_GENERIC_FALSE);
+
+                        break;
+                    /**
+                     * Accès en consultation
+                     */
+                    case IntranetNiveauAccesModel::NIVEAU_FTA_CONSULTATION:
+                        Lib::setParameterFromRequest($consultation, IntranetNiveauAccesModel::NIVEAU_GENERIC_TRUE);
+                        Lib::setParameterFromRequest($modification, IntranetNiveauAccesModel::NIVEAU_GENERIC_FALSE);
+
+
+                        break;
+                    /**
+                     * Accès en modification
+                     */
+                    case IntranetNiveauAccesModel::NIVEAU_FTA_MODIFICATION:
+                        Lib::setParameterFromRequest($consultation, IntranetNiveauAccesModel::NIVEAU_GENERIC_TRUE);
+                        Lib::setParameterFromRequest($modification, IntranetNiveauAccesModel::NIVEAU_GENERIC_TRUE);
+
+
+                        break;
+                }
+            }
+            /*
+             * Enregistrement/Suppression du droit d'accès
+             */
+            $id_intranet_modules = $rowsActionsAccesModuleFta[IntranetActionsModel::FIELDNAME_MODULE_INTRANET_ACTIONS];
+            $id_intranet_actions = $rowsActionsAccesModuleFta[IntranetActionsModel::KEYNAME];
+
+            /*
+             * Suppression des anciens accès
+             */
+            DatabaseOperation::execute(
+                    'DELETE FROM ' . IntranetDroitsAccesModel::TABLENAME
+                    . ' WHERE ' . IntranetDroitsAccesModel::FIELDNAME_ID_INTRANET_MODULES . '=' . $id_intranet_modules
+                    . ' AND ' . IntranetDroitsAccesModel::FIELDNAME_ID_USER . '=' . $paramIdUser
+                    . ' AND ' . IntranetDroitsAccesModel::FIELDNAME_ID_INTRANET_ACTIONS . '=' . $id_intranet_actions
+            );
+
+            /*
+             * Réécriture du droits d'accès
+             */
+            DatabaseOperation::execute(
+                    'INSERT INTO ' . IntranetDroitsAccesModel::TABLENAME
+                    . ' SET ' . IntranetDroitsAccesModel::FIELDNAME_ID_INTRANET_MODULES . '=' . $id_intranet_modules
+                    . ', ' . IntranetDroitsAccesModel::FIELDNAME_ID_USER . '=' . $paramIdUser
+                    . ', ' . IntranetDroitsAccesModel::FIELDNAME_ID_INTRANET_ACTIONS . '=' . $id_intranet_actions
+                    . ', ' . IntranetDroitsAccesModel::FIELDNAME_NIVEAU_INTRANET_DROITS_ACCES . '=' . $niveau_intranet_droits_acces
+            );
+        }
+    }
+
+    /**
+     * Récupération des droits d'accès faisable dans l'Intranet
+     * @param int $paramIdUser
+     * @param boolean $paramCheck
+     * @param int $paramConsultation
+     * @param int $paramModification
+     */
+    public static function manageAccesRightToIntranet($paramIdUser, $paramCheck, $paramConsultation = NULL, $paramModification = NULL) {
+        $arrayModule = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
+                        'SELECT ' . IntranetModulesModel::TABLENAME . '.*'
+                        . ', ' . IntranetActionsModel::TABLENAME . '.*'
+                        . ' FROM ' . IntranetActionsModel::TABLENAME . ', ' . IntranetModulesModel::TABLENAME
+                        . ' WHERE (' . IntranetActionsModel::TABLENAME . '.' . IntranetActionsModel::FIELDNAME_MODULE_INTRANET_ACTIONS
+                        . '=' . IntranetModulesModel::TABLENAME . '.' . IntranetModulesModel::KEYNAME
+                        . ' OR ' . IntranetActionsModel::TABLENAME . '.' . IntranetActionsModel::FIELDNAME_MODULE_INTRANET_ACTIONS . '=0 )'
+                        . ' AND ' . IntranetActionsModel::FIELDNAME_TAG_INTRANET_ACTIONS . '<>\'' . IntranetActionsModel::VALUE_FTA . '\''
+                        . ' AND ' . IntranetActionsModel::FIELDNAME_NOM_INTRANET_ACTIONS . '<>\'' . IntranetActionsModel::NAME_DIFFUSION_FTA . '\''
+        );
+        foreach ($arrayModule as $rowsModule) {
+            /*
+             * Déclaration du droits d'accès fourni par droits_acces.inc et récupération de son niveau d'accès
+             */
+            if ($rowsModule[IntranetModulesModel::KEYNAME] <> IntranetModulesModel::ID_MODULES_FTA) {
+                $nom_niveau_intranet_droits_acces = 'module' . $rowsModule[IntranetModulesModel::KEYNAME] . '_action' . $rowsModule[IntranetActionsModel::KEYNAME];
+            } else {
+                $nom_niveau_intranet_droits_acces = $rowsModule[IntranetActionsModel::FIELDNAME_NOM_INTRANET_ACTIONS] . '_' . $rowsModule[IntranetActionsModel::KEYNAME];
+
+                /**
+                 * Devons-nous vérifier l'incohérence de l'attribution des droits d'accès
+                 */
+                if ($paramCheck) {
+                    if (!$paramModification) {
+                        if ($rowsModule[IntranetActionsModel::FIELDNAME_TAG_INTRANET_ACTIONS] == IntranetActionsModel::VALUE_ROLE) {
+                            $nom_niveau_intranet_droits_acces = Null;
+                        }
+                        if ($rowsModule[IntranetActionsModel::FIELDNAME_TAG_INTRANET_ACTIONS] == IntranetActionsModel::VALUE_SITE) {
+                            $nom_niveau_intranet_droits_acces = Null;
+                        }
+                        if ($rowsModule[IntranetActionsModel::FIELDNAME_TAG_INTRANET_ACTIONS] == IntranetActionsModel::VALUE_WORKFLOW) {
+                            $nom_niveau_intranet_droits_acces = Null;
+                        }
+                        if ($paramConsultation) {
+                            if ($nom_niveau_intranet_droits_acces == "diffusion_" . IntranetNiveauAccesModel::NIVEAU_FTA_DIFFUSION) {
+                                $nom_niveau_intranet_droits_acces = Null;
+                            }
+                        }
+                    }
+                }
+            }
+            $niveau_intranet_droits_acces = Lib::getParameterFromRequest($nom_niveau_intranet_droits_acces);
+
+
+            /*
+             * Enregistrement/Suppression du droit d'accès
+             */
+            $id_intranet_modules = $rowsModule[IntranetModulesModel::KEYNAME];
+            $id_intranet_actions = $rowsModule[IntranetActionsModel::KEYNAME];
+            /*
+             * Suppression des anciens accès
+             */
+            DatabaseOperation::execute(
+                    'DELETE FROM ' . IntranetDroitsAccesModel::TABLENAME
+                    . ' WHERE ' . IntranetDroitsAccesModel::FIELDNAME_ID_INTRANET_MODULES . '=' . $id_intranet_modules
+                    . ' AND ' . IntranetDroitsAccesModel::FIELDNAME_ID_USER . '=' . $paramIdUser
+                    . ' AND ' . IntranetDroitsAccesModel::FIELDNAME_ID_INTRANET_ACTIONS . '=' . $id_intranet_actions
+            );
+
+            if ($niveau_intranet_droits_acces) {
+                /*
+                 * Réécriture du droits d'accès
+                 */
+                DatabaseOperation::execute(
+                        'INSERT INTO ' . IntranetDroitsAccesModel::TABLENAME
+                        . ' SET ' . IntranetDroitsAccesModel::FIELDNAME_ID_INTRANET_MODULES . '=' . $id_intranet_modules
+                        . ', ' . IntranetDroitsAccesModel::FIELDNAME_ID_USER . '=' . $paramIdUser
+                        . ', ' . IntranetDroitsAccesModel::FIELDNAME_ID_INTRANET_ACTIONS . '=' . $id_intranet_actions
+                        . ', ' . IntranetDroitsAccesModel::FIELDNAME_NIVEAU_INTRANET_DROITS_ACCES . '=' . $niveau_intranet_droits_acces
+                );
+            }
+        }
+    }
+
+    /**
+     * On récupère le niveau du droits d'accès acces module fta
+     * 0 NON
+     * 1 Consultation
+     * 2 Modification
+     * @param int $paramIdUser
+     * @return int
+     */
+    public static function getAccesModuleFtaValue($paramIdUser = NULL) {
+        if ($paramIdUser) {
+            $arrayDroitsAcces = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
+                            'SELECT ' . self::FIELDNAME_NIVEAU_INTRANET_DROITS_ACCES
+                            . ' FROM ' . self::TABLENAME .','. IntranetActionsModel::TABLENAME
+                            . ' WHERE ' . self::FIELDNAME_ID_INTRANET_MODULES . '=' . IntranetModulesModel::ID_MODULES_FTA
+                            . ' AND ' . self::TABLENAME . '.' . self::FIELDNAME_ID_INTRANET_ACTIONS
+                            . ' = ' . IntranetActionsModel::TABLENAME . '.' . IntranetActionsModel::KEYNAME
+                            . ' AND ' . self::TABLENAME . '.' . self::FIELDNAME_ID_INTRANET_MODULES
+                            . ' = ' . IntranetActionsModel::TABLENAME . '.' . IntranetActionsModel::FIELDNAME_MODULE_INTRANET_ACTIONS
+                            . ' AND ' . self::FIELDNAME_ID_USER . '=' . $paramIdUser
+                            . ' AND ' . IntranetActionsModel::FIELDNAME_TAG_INTRANET_ACTIONS . '=\'' . IntranetActionsModel::VALUE_FTA . '\''
+            );
+
+            if ($arrayDroitsAcces) {
+                foreach ($arrayDroitsAcces as $rowsDroitsAcces) {
+                    $value = $rowsDroitsAcces[self::FIELDNAME_NIVEAU_INTRANET_DROITS_ACCES];
+                }
+            }
+        } else {
+            $value = IntranetNiveauAccesModel::ACCES_MODULE_FTA_NON_VALUE;
+        }
+        return $value;
+    }
+
+    /**
+     * On détermine l'affichage des droits d'accès.
+     * @param int $paramAccesModuleFtaValue
+     * @param strng $paramNom
+     * @return string
+     */
+    public static function getStyleAdministrationBouttonByAccesModuleFtaValue($paramAccesModuleFtaValue, $paramNom) {
+        $style = "";
+
+        switch ($paramNom) {
+            case IntranetActionsModel::NAME_IMPRESSION:
+                if ($paramAccesModuleFtaValue <> IntranetNiveauAccesModel::ACCES_MODULE_FTA_NON_VALUE) {
+                    $style = "";
+                } else {
+                    $style = "style=display:none;";
+                }
+
+                break;
+            case IntranetActionsModel::NAME_DIFFUSION:
+                if ($paramAccesModuleFtaValue == IntranetNiveauAccesModel::ACCES_MODULE_FTA_MODIFICATION_VALUE) {
+                    $style = "";
+                } else {
+                    $style = "style=display:none;";
+                }
+
+                break;
+            case IntranetActionsModel::NAME_DIFFUSION_FTA:
+                if ($paramAccesModuleFtaValue == IntranetNiveauAccesModel::ACCES_MODULE_FTA_CONSULTATION_VALUE) {
+                    $style = "";
+                } else {
+                    $style = "style=display:none;";
+                }
+
+                break;
+            case IntranetActionsModel::NAME_DROIT_MODIFICATION:
+                if ($paramAccesModuleFtaValue == IntranetNiveauAccesModel::ACCES_MODULE_FTA_MODIFICATION_VALUE) {
+                    $style = "";
+                } else {
+                    $style = "style=display:none;";
+                }
+
+                break;
+        }
+
+        return $style;
     }
 
 }

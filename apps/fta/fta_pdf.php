@@ -269,6 +269,7 @@ $req = "SELECT " . FtaComposantModel::KEYNAME
         . " AND " . FtaComposantModel::FIELDNAME_IS_COMPOSITION_FTA_COMPOSANT . "=1 "
         . " ORDER BY " . FtaComposantModel::FIELDNAME_ORDRE_FTA_COMPOSITION . ", " . FtaComposantModel::FIELDNAME_NOM_FTA_COMPOSITION . " ";
 $result = DatabaseOperation::convertSqlStatementWithoutKeyToArray($req);
+//$nbdeCompo=count($result);
 if ($result) {
     foreach ($result as $rows) {
         $pdf->SetAutoPageBreak(0);

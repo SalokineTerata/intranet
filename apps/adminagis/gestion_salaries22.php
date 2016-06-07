@@ -37,7 +37,10 @@ if ($paramRech == '1') {
                     . ' WHERE ' . UserModel::KEYNAME . '=' . $paramIdUser
     );
     if (!$arrayUserDetail) {
-        echo ('La requete de recherche de l\'ID salarie a echoue');
+        $titre = "Utilisateur inexistant";
+        $message = "La requete de recherche de l'ID salarie a echoue";
+        Lib::showMessage($titre, $message);
+      
     } else {
         foreach ($arrayUserDetail as $rowsUserDetail) {
             $userNom = $rowsUserDetail[UserModel::FIELDNAME_NOM];

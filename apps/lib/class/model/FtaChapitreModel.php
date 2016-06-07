@@ -178,7 +178,10 @@ class FtaChapitreModel extends AbstractModel {
             if ($option['mail_gestionnaire']) {
                 $ftaModel = new FtaModel($paramIdFta);
                 $idGestionnaire = $ftaModel->getModelCreateur()->getKeyValue();
-                if ($idGestionnaire <> $idUser) {
+                //Tableau des id intranet actions Fta
+                $arrayAction = IntranetDroitsAccesModel::getArrayIdIntranetActionWithAccesRightsToFtaByUser($idGestionnaire);
+                $checkDiffusion = FtaController::isValueInArray(IntranetNiveauAccesModel::NIVEAU_FTA_DIFFUSION, $arrayAction);
+                if ($idGestionnaire <> $idUser and $checkDiffusion) {
                     $mailGestionnaire = $ftaModel->getModelCreateur()->getDataField(UserModel::FIELDNAME_MAIL)->getFieldValue();
                     $sujetmail = 'FTA/Mise en Correction: ' . $sujetElements . ' par ' . $nomPrenom;
                     $destinataire = $mailGestionnaire;

@@ -431,19 +431,23 @@ class TableauFicheView {
         return $return;
     }
 
-    static private function getHmlLinkTransiter($paramIdFta, $paramIdFtaRole, $paramAbreviationFtaEtat, $paramCheckAccesButton
-    , $paramAccesTransitionButton, $paramSyntheseAction, $paramTauxRound) {
+    public static function getHmlLinkTransiter($paramIdFta, $paramIdFtaRole, $paramAbreviationFtaEtat, $paramCheckAccesButton
+    , $paramAccesTransitionButton, $paramSyntheseAction, $paramTauxRound,$paramTaille = NULL) {
         $return = "";
         if (
                 self::isUserRightsLinkTransiter($paramIdFtaRole, $paramAbreviationFtaEtat, $paramCheckAccesButton
                         , $paramAccesTransitionButton, $paramSyntheseAction, $paramTauxRound)
         ) {
+            
+            if(!$paramTaille){
+                $paramTaille = "30";
+            }
             $return = '<a '
                     . 'href=transiter.php'
                     . '?id_fta=' . $paramIdFta
                     . '&id_fta_role=' . $paramIdFtaRole
                     . '&comeback=1'
-                    . '><img src=./images/transiter.png alt=\'\' title=\'Transiter\' width=\'30\' height=\'30\' border=\'0\' />'
+                    . '><img src=./images/transiter.png alt=\'\' title=\'Transiter\' width=\''.$paramTaille.'\' height=\''.$paramTaille.'\' border=\'0\' />'
                     . '</a>'
             ;
         }

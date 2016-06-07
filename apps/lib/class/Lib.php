@@ -34,7 +34,7 @@ class Lib {
                        </a>
                        ";
         }
-            $bouton_valider = '
+        $bouton_valider = '
                        <a href=' . $redirection . '>
                        <img src=../lib/images/bouton_valider_jaune.gif border=0>
                        </a>
@@ -110,6 +110,15 @@ class Lib {
         }
 
         return $result;
+    }
+
+    /**
+     * Initiation de la valeur d'un paramètre passé par requête HTTP (GET ou POST)
+     * @param <type> $variable_name Nom de la variable
+     * @param <type> $variable_set_value Valeur à affecter
+     */
+    public static function setParameterFromRequest($variable_name, $variable_set_value) {
+        $_REQUEST[$variable_name] = $variable_set_value;
     }
 
     /**

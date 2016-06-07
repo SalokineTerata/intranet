@@ -389,57 +389,21 @@ envoismail($sujet, $corpsmail, $paramUserMail, $mail, $typeMail);
                                                             echo '</tr>';
 
 
+                                                            /**
+                                                             * Drois d'accès au module Fta
+                                                             */
+                                                            IntranetDroitsAccesModel::manageAccesRightToFta($idUser);
+
                                                             //Droits d'accès du module
                                                             /*
-                                                             * Récupération des droits d'accès faisable dans l'Intranet
+                                                             * Récupération des droits d'accès de l'Intranet
                                                              */
 
-                                                            $arrayModule = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
-                                                                            'SELECT ' . IntranetModulesModel::TABLENAME . '.*'
-                                                                            . ', ' . IntranetActionsModel::TABLENAME . '.*'
-                                                                            . ' FROM ' . IntranetActionsModel::TABLENAME . ', ' . IntranetModulesModel::TABLENAME
-                                                                            . ' WHERE (' . IntranetActionsModel::TABLENAME . '.' . IntranetActionsModel::FIELDNAME_MODULE_INTRANET_ACTIONS
-                                                                            . '=' . IntranetModulesModel::TABLENAME . '.' . IntranetModulesModel::KEYNAME
-                                                                            . ' OR ' . IntranetActionsModel::TABLENAME . '.' . IntranetActionsModel::FIELDNAME_MODULE_INTRANET_ACTIONS . '=0 )'
-                                                            );
-                                                            foreach ($arrayModule as $rowsModule) {
-
-                                                                /*
-                                                                 * Déclaration du droits d'accès fourni par droits_acces.inc et récupération de son niveau d'accès
-                                                                 */
-                                                                if ($rowsModule[IntranetModulesModel::KEYNAME] <> IntranetModulesModel::ID_MODULES_FTA) {
-                                                                    $nom_niveau_intranet_droits_acces = 'module' . $rowsModule[IntranetModulesModel::KEYNAME] . '_action' . $rowsModule[IntranetActionsModel::KEYNAME];
-                                                                } else {
-                                                                    $nom_niveau_intranet_droits_acces = $rowsModule[IntranetActionsModel::FIELDNAME_NOM_INTRANET_ACTIONS] . '_' . $rowsModule[IntranetActionsModel::KEYNAME];
-                                                                }
-                                                                $niveau_intranet_droits_acces = Lib::getParameterFromRequest($nom_niveau_intranet_droits_acces);
-
-                                                                /*
-                                                                 * Enregistrement/Suppression du droit d'accès
-                                                                 */
-                                                                $id_intranet_modules = $rowsModule[IntranetModulesModel::KEYNAME];
-                                                                $id_intranet_actions = $rowsModule[IntranetActionsModel::KEYNAME];
-
-
-                                                                if ($niveau_intranet_droits_acces) {
-                                                                    /*
-                                                                     * Réécriture du droits d'accès
-                                                                     */
-                                                                    DatabaseOperation::execute(
-                                                                            'INSERT INTO ' . IntranetDroitsAccesModel::TABLENAME
-                                                                            . ' SET ' . IntranetDroitsAccesModel::FIELDNAME_ID_INTRANET_MODULES . '=' . $id_intranet_modules
-                                                                            . ', ' . IntranetDroitsAccesModel::FIELDNAME_ID_USER . '=' . $idUser
-                                                                            . ', ' . IntranetDroitsAccesModel::FIELDNAME_ID_INTRANET_ACTIONS . '=' . $id_intranet_actions
-                                                                            . ', ' . IntranetDroitsAccesModel::FIELDNAME_NIVEAU_INTRANET_DROITS_ACCES . '=' . $niveau_intranet_droits_acces
-                                                                    );
-                                                                }
-                                                                /**
-                                                                 * Post-traitement
-                                                                 * Vérification et correction des incohérences de droits d'accès.
-                                                                 */
-                                                                echo '</tr>';
-//    echo '</table>';
-                                                            }
+                                                            IntranetDroitsAccesModel::manageAccesRightToIntranet($idUser,FALSE);
+                                                            /**
+                                                             * Post-traitement
+                                                             * Vérification et correction des incohérences de droits d'accès.
+                                                             */
                                                             Acl::checkHeritedRightsRemovedByUser($idUser);
 
                                                             echo '<br>';

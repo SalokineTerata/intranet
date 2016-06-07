@@ -161,6 +161,15 @@ class Navigation {
     ';
         if ($paramActivationComplete) {
             //Corps du menu
+            $accesTransitionButton = FtaTransitionModel::isAccesTransitionButton(self::$id_fta_role, self::$id_fta_workflow);
+            $idIntranetActionsSiteDeProduction = FtaActionSiteModel::getArrayIdIntranetActionByWorkflowAndSiteDeProduction(self::$id_fta_workflow, $siteDeProduction);
+            $checkAccesButtonBySiteProd = IntranetActionsModel::isAccessFtaActionByIdUserFtaWorkflowAndSiteDeProduction($idUser, self::$id_fta_workflow, $idIntranetActionsSiteDeProduction);
+            $tauxRound = FtaSuiviProjetModel::getPourcentageFtaTauxValidation(self::$ftaModel);
+            $transition = TableauFicheView::getHmlLinkTransiter(self::$id_fta, self::$id_fta_role, self::$abreviation_etat, $checkAccesButtonBySiteProd
+                            , $accesTransitionButton, self::$synthese_action, $tauxRound,"18");
+            if($transition){
+                $transition =  " | ". $transition;
+            }
             $menu_navigation.='
                     <a href=historique-' . self::$id_fta
                     . '-' . self::$id_fta_chapitre_encours
@@ -169,7 +178,9 @@ class Navigation {
                     . '-' . self::$id_fta_role
                     . '-' . self::$synthese_action
 //                    . '-1'
-                    . '.html ><img src=./images/graphique.png alt=\'\' title=\'Etat d\'avancement\' width=\'18\' height=\'15\' border=\'0\' /> Etat d\'avancement</a>
+                    . '.html ><img src=./images/graphique.png alt=\'\' title=\'Etat d\'avancement\' width=\'18\' height=\'15\' border=\'0\' /> Etat d\'avancement</a>'
+                    . $transition .
+            '
                        </td></tr>                       
                        </table>
                        ';

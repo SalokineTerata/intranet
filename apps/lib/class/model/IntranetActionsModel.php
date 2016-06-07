@@ -15,9 +15,18 @@ class IntranetActionsModel extends AbstractModel {
     const FIELDNAME_DESCRIPTION_INTRANET_ACTIONS = 'description_intranet_actions';
     const FIELDNAME_TAG_INTRANET_ACTIONS = 'tag_intranet_actions';
     const FIELDNAME_PARENT_INTRANET_ACTIONS = 'parent_intranet_actions';
+    const NAME_DIFFUSION_FTA= 'diffusion_fta';
+    const VALUE_FTA= 'fta';
     const VALUE_ROLE = 'role';
     const VALUE_SITE = 'site';
     const VALUE_WORKFLOW = 'workflow';
+    const NAME_ACCES_MODULE_FTA = 'acces_module_fta';
+    const NAME_CONSULTATION= 'consultation';
+    const NAME_MODIFICATION= 'modification';
+    const NAME_IMPRESSION= 'impression';
+    const NAME_DIFFUSION= 'diffusion';
+    const NAME_DROIT_MODIFICATION= 'droit_modification';
+    
 
     public function __construct($paramId = NULL, $paramIsCreateRecordsetInDatabaseIfKeyDoesntExist = AbstractModel::DEFAULT_IS_CREATE_RECORDSET_IN_DATABASE_IF_KEY_DOESNT_EXIST) {
         parent::__construct($paramId, $paramIsCreateRecordsetInDatabaseIfKeyDoesntExist);

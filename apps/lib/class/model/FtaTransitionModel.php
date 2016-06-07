@@ -416,13 +416,27 @@ class FtaTransitionModel {
                 $reqConsultation = "SELECT DISTINCT " . UserModel::TABLENAME . "." . UserModel::KEYNAME . ", " . UserModel::FIELDNAME_NOM . ", " . UserModel::FIELDNAME_PRENOM . ", " . UserModel::FIELDNAME_MAIL
                         . " FROM " . UserModel::TABLENAME
                         . ", " . IntranetDroitsAccesModel::TABLENAME
+                        . ", " . IntranetActionsModel::TABLENAME
+                        . ", " . IntranetNiveauAccesModel::TABLENAME
                         //Début Droits d'accès de diffusion
                         . " WHERE " . UserModel::TABLENAME . "." . UserModel::KEYNAME
                         . " = " . IntranetDroitsAccesModel::TABLENAME . "." . IntranetDroitsAccesModel::FIELDNAME_ID_USER
                         . " AND " . UserModel::TABLENAME . "." . UserModel::FIELDNAME_ACTIF . " ='" . UserModel::USER_ACTIF . "' "
                         . " AND " . IntranetDroitsAccesModel::TABLENAME . "." . IntranetDroitsAccesModel::FIELDNAME_ID_INTRANET_ACTIONS
-                        . " = " . IntranetNiveauAccesModel::NIVEAU_FTA_DIFFUSION
+                        . " = " . IntranetActionsModel::TABLENAME . "." . IntranetActionsModel::KEYNAME
+                        . " AND " . IntranetDroitsAccesModel::TABLENAME . "." . IntranetDroitsAccesModel::FIELDNAME_ID_INTRANET_MODULES
+                        . " = " . IntranetActionsModel::TABLENAME . "." . IntranetActionsModel::FIELDNAME_MODULE_INTRANET_ACTIONS
+                        . " AND " . IntranetDroitsAccesModel::TABLENAME . "." . IntranetDroitsAccesModel::FIELDNAME_ID_INTRANET_ACTIONS
+                        . " = " . IntranetNiveauAccesModel::TABLENAME . "." . IntranetNiveauAccesModel::FIELDNAME_ID_INTRANET_ACTIONS
+                        . " AND " . IntranetDroitsAccesModel::TABLENAME . "." . IntranetDroitsAccesModel::FIELDNAME_ID_INTRANET_MODULES
+                        . " = " . IntranetNiveauAccesModel::TABLENAME . "." . IntranetNiveauAccesModel::FIELDNAME_ID_INTRANET_MODULES
+                        . " AND " . IntranetActionsModel::FIELDNAME_NOM_INTRANET_ACTIONS . "='" . IntranetActionsModel::NAME_DIFFUSION_FTA
+                        //On récupère les utilisateurs correspondant à leur site de rattechement (lieu geo) et les utilisateurs voulant recevoir les info de toutes les Fta
+                        . "' AND ((" . UserModel::FIELDNAME_LIEU_GEO . "=" . $rowsFta[FtaModel::FIELDNAME_SITE_PRODUCTION]
+                        . " AND " . IntranetNiveauAccesModel::FIELDNAME_ID_INTRANET_NIVEAU_ACCES . "=" . IntranetNiveauAccesModel::DIFFUSION_FTA_OUI_LIEU_RATTACHEMENT_VALUE
+                        . ") OR " . IntranetNiveauAccesModel::FIELDNAME_ID_INTRANET_NIVEAU_ACCES . "=" . IntranetNiveauAccesModel::DIFFUSION_FTA_OUI_TOUT_VALUE . ")"
                         . " AND " . IntranetDroitsAccesModel::TABLENAME . "." . IntranetDroitsAccesModel::FIELDNAME_ID_USER . " NOT IN ("
+                        // On exclue les utilisateur ayant un droit de modification
                         . " SELECT DISTINCT " . UserModel::TABLENAME . "." . UserModel::KEYNAME
                         . " FROM " . UserModel::TABLENAME
                         . ", " . IntranetDroitsAccesModel::TABLENAME
@@ -433,9 +447,11 @@ class FtaTransitionModel {
                         . " = " . IntranetNiveauAccesModel::NIVEAU_FTA_MODIFICATION . ")"
                 ;
                 $r_liste_destinataire_consultation = DatabaseOperation::convertSqlStatementWithoutKeyToArray($reqConsultation);
-                foreach ($r_liste_destinataire_consultation as $rows_destinataire_consultation) {
-                    $return[$rows_destinataire_consultation[UserModel::KEYNAME]]["mail"] = $rows_destinataire_consultation[UserModel::FIELDNAME_MAIL];
-                    $return[$rows_destinataire_consultation[UserModel::KEYNAME]]["prenom_nom"] = $rows_destinataire_consultation[UserModel::FIELDNAME_NOM] . " " . $rows_destinataire_consultation[UserModel::FIELDNAME_PRENOM];
+                if ($r_liste_destinataire_consultation) {
+                    foreach ($r_liste_destinataire_consultation as $rows_destinataire_consultation) {
+                        $return[$rows_destinataire_consultation[UserModel::KEYNAME]]["mail"] = $rows_destinataire_consultation[UserModel::FIELDNAME_MAIL];
+                        $return[$rows_destinataire_consultation[UserModel::KEYNAME]]["prenom_nom"] = $rows_destinataire_consultation[UserModel::FIELDNAME_NOM] . " " . $rows_destinataire_consultation[UserModel::FIELDNAME_PRENOM];
+                    }
                 }
             } else {
                 //Erreur critique, risque de diffusion généralisée à l'ensemble de l'Intranet

@@ -16,6 +16,7 @@ class Navigation {
     const FONT_COLOR_CHAPITRE_VALIDEE = "#009400";
 //    const FONT_COLOR_CHAPITRE_VALIDEE = "#00CC00";
     const FONT_SIZE_CHAPITRE_ENCOURS = "3";
+    const FONT_SIZE_ROLE_ENCOURS = "3";
     const FONT_SIZE_DEFAULT = "2";
 
     protected static $abreviation_etat;

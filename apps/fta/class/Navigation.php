@@ -12,6 +12,7 @@ class Navigation {
     const FONT_COLOR_CHAPITRE_ENCOURS = "#1D3FDA";
     const FONT_COLOR_CHAPITRE_PUBLIC = "#CC33CC";
     const FONT_COLOR_CHAPITRE_NON_VALIDEE = "#FF0000";
+    const FONT_COLOR_DOSSIER_FTA = "#DD0000";
     const FONT_COLOR_CHAPITRE_COMMENTAIRE = "#2A2A2A";
     const FONT_COLOR_CHAPITRE_VALIDEE = "#009400";
 //    const FONT_COLOR_CHAPITRE_VALIDEE = "#00CC00";
@@ -169,7 +170,7 @@ class Navigation {
             $transition = TableauFicheView::getHmlLinkTransiter(self::$id_fta, self::$id_fta_role, self::$abreviation_etat, $checkAccesButtonBySiteProd
                             , $accesTransitionButton, self::$synthese_action, $tauxRound,"18");
             if($transition){
-                $transition =  " | ". $transition;
+                $transition =  " | ". $transition . " Transiter";
             }
             $menu_navigation.='
                     <a href=historique-' . self::$id_fta
@@ -181,7 +182,7 @@ class Navigation {
 //                    . '-1'
                     . '.html ><img src=./images/graphique.png alt=\'\' title=\'Etat d\'avancement\' width=\'18\' height=\'15\' border=\'0\' /> Etat d\'avancement</a>'
                     . $transition .
-            '
+            ' 
                        </td></tr>                       
                        </table>
                        ';
@@ -594,7 +595,7 @@ class Navigation {
             if (self::$id_fta_chapitre_encours == $id_fta_chapitre) {
                 $font_size = "size=" . self::FONT_SIZE_CHAPITRE_ENCOURS;
                 $font_flash_color = "color=" . self::FONT_COLOR_CHAPITRE_ENCOURS;
-                $font_flash = "<font " . $font_size . " " . $font_flash_color . "><b>";
+                $font_flash = "<font " . $font_size . " " . $font_flash_color . ">";
                 $image_flash1 = $font_flash . '[  ' . "</font>";
                 $image_flash2 = $font_flash . '  ]' . "</font>";
                 $num = 1;
@@ -679,7 +680,7 @@ class Navigation {
                 }
                 $menu_navigation .= $b . ' ' . $nom_usuel_fta_chapitre;
                 $menu_navigation .= '</a>';
-                $menu_navigation .= '</b></font> ' . $iEnd . $image_flash2
+                $menu_navigation .= '</font> ' . $iEnd . $image_flash2
                 ;
                 /**
                  * Mise en forme des chapitres de la barre de navigation regroupé par Rôle
@@ -789,7 +790,7 @@ class Navigation {
         if ($paramRowsFtaEtatAndFta[FtaModel::FIELDNAME_CODE_ARTICLE_LDC]) {
             $identifiant = '<b><font size=\'2\' color=\'#0000FF\'>' . $paramRowsFtaEtatAndFta[FtaModel::FIELDNAME_CODE_ARTICLE_LDC] . '</font></b>';
         } else {
-            $identifiant = '<b><font size=\'2\' color=\'' . self::FONT_COLOR_CHAPITRE_NON_VALIDEE . '\'>' . $paramRowsFtaEtatAndFta[FtaModel::FIELDNAME_DOSSIER_FTA] . 'v' . $paramRowsFtaEtatAndFta[FtaModel::FIELDNAME_VERSION_DOSSIER_FTA] . '</font></b>';
+            $identifiant = '<b><font size=\'2\' color=\'' . self::FONT_COLOR_DOSSIER_FTA . '\'>' . $paramRowsFtaEtatAndFta[FtaModel::FIELDNAME_DOSSIER_FTA] . 'v' . $paramRowsFtaEtatAndFta[FtaModel::FIELDNAME_VERSION_DOSSIER_FTA] . '</font></b>';
         }
         if ($paramRowsFtaEtatAndFta[FtaModel::FIELDNAME_COMMENTAIRE]) {
             $commentaire = '<br><b><font size=\'2\' color=\'' . self::FONT_COLOR_CHAPITRE_COMMENTAIRE . '\'>' . $paramRowsFtaEtatAndFta[FtaModel::FIELDNAME_COMMENTAIRE] . '</font></b>';

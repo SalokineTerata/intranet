@@ -310,7 +310,7 @@ class FtaRoleModel extends AbstractModel {
                          */
                         if ($arrayCheckRole["0"] == $paramIdFtaRoleEncours) {
                             $font_size = "size=" . Navigation::FONT_SIZE_ROLE_ENCOURS;
-                            $font_flash = "<font " . $font_size . "><b>";
+                            $font_flash = "<font " . $font_size . ">";
                             $image_flash1 = $font_flash . '[  ' . "</font>";
                             $image_flash2 = $font_flash . '  ]' . "</font>";
                         } else {

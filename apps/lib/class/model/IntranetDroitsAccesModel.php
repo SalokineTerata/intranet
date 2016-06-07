@@ -313,6 +313,8 @@ class IntranetDroitsAccesModel extends AbstractModel {
                  */
                 echo '<table>';
                 echo '<tr>';
+                
+                //Acces Module Fta
                 $arrayActionsAccesModuleFta = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
                                 'SELECT DISTINCT ' . IntranetActionsModel::KEYNAME
                                 . ', ' . IntranetActionsModel::FIELDNAME_NOM_INTRANET_ACTIONS
@@ -323,6 +325,20 @@ class IntranetDroitsAccesModel extends AbstractModel {
                 );
 
                 self::getHtmlListeAccesFta($arrayActionsAccesModuleFta, $idIntranetModules, $paramSalUser);
+                
+                //Diffusion Consultation Fta
+                  $arrayActionsAccesDiffusionFta = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
+                                'SELECT DISTINCT ' . IntranetActionsModel::KEYNAME
+                                . ', ' . IntranetActionsModel::FIELDNAME_NOM_INTRANET_ACTIONS
+                                . ', ' . IntranetActionsModel::FIELDNAME_DESCRIPTION_INTRANET_ACTIONS
+                                . ', ' . IntranetActionsModel::FIELDNAME_MODULE_INTRANET_ACTIONS
+                                . ' FROM ' . IntranetActionsModel::TABLENAME
+                                . ' WHERE ' . IntranetActionsModel::FIELDNAME_NOM_INTRANET_ACTIONS . '=\'' . IntranetActionsModel::NAME_DIFFUSION_FTA . '\''
+                );
+
+                self::getHtmlListeAccesFta($arrayActionsAccesDiffusionFta, $idIntranetModules, $paramSalUser);
+
+                //Impression Diffusion
                 $arrayActionsDiffusionImpression = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
                                 'SELECT DISTINCT ' . IntranetActionsModel::KEYNAME
                                 . ', ' . IntranetActionsModel::FIELDNAME_NOM_INTRANET_ACTIONS
@@ -335,17 +351,7 @@ class IntranetDroitsAccesModel extends AbstractModel {
 
                 self::getHtmlListeAccesFta($arrayActionsDiffusionImpression, $idIntranetModules, $paramSalUser);
 
-                $arrayActionsAccesDiffusionFta = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
-                                'SELECT DISTINCT ' . IntranetActionsModel::KEYNAME
-                                . ', ' . IntranetActionsModel::FIELDNAME_NOM_INTRANET_ACTIONS
-                                . ', ' . IntranetActionsModel::FIELDNAME_DESCRIPTION_INTRANET_ACTIONS
-                                . ', ' . IntranetActionsModel::FIELDNAME_MODULE_INTRANET_ACTIONS
-                                . ' FROM ' . IntranetActionsModel::TABLENAME
-                                . ' WHERE ' . IntranetActionsModel::FIELDNAME_NOM_INTRANET_ACTIONS . '=\'' . IntranetActionsModel::NAME_DIFFUSION_FTA . '\''
-                );
-
-                self::getHtmlListeAccesFta($arrayActionsAccesDiffusionFta, $idIntranetModules, $paramSalUser);
-
+              
                 echo '</tr>';
                 echo '</table>';
 

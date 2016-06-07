@@ -1109,6 +1109,8 @@ class IntranetDroitsAccesModel extends AbstractModel {
                 foreach ($arrayDroitsAcces as $rowsDroitsAcces) {
                     $value = $rowsDroitsAcces[self::FIELDNAME_NIVEAU_INTRANET_DROITS_ACCES];
                 }
+            }else{
+                $value = IntranetNiveauAccesModel::ACCES_MODULE_FTA_NON_VALUE;
             }
         } else {
             $value = IntranetNiveauAccesModel::ACCES_MODULE_FTA_NON_VALUE;

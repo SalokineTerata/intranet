@@ -233,7 +233,7 @@ fpdf_write_data($description_emballage_label, $description_emballage, $title_for
 
 
 //conseil_rechauffage_valide_fta
-$conseil_rechauffage_valide_fta = $ftaModel->getDataField(FtaModel::FIELDNAME_CONSEIL_DE_RECHAUFFAGE)->getFieldValue();
+$conseil_rechauffage_valide_fta = rtrim($ftaModel->getDataField(FtaModel::FIELDNAME_CONSEIL_DE_RECHAUFFAGE)->getFieldValue());
 $conseil_rechauffage_valide_fta_label = $ftaModel->getDataField(FtaModel::FIELDNAME_CONSEIL_DE_RECHAUFFAGE)->getFieldLabel();
 $data = $$champ;
 $title_format = $t3_format;

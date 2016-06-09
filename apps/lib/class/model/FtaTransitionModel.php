@@ -430,11 +430,13 @@ class FtaTransitionModel {
                         . " = " . IntranetNiveauAccesModel::TABLENAME . "." . IntranetNiveauAccesModel::FIELDNAME_ID_INTRANET_ACTIONS
                         . " AND " . IntranetDroitsAccesModel::TABLENAME . "." . IntranetDroitsAccesModel::FIELDNAME_ID_INTRANET_MODULES
                         . " = " . IntranetNiveauAccesModel::TABLENAME . "." . IntranetNiveauAccesModel::FIELDNAME_ID_INTRANET_MODULES
-                        . " AND " . IntranetActionsModel::FIELDNAME_NOM_INTRANET_ACTIONS . "='" . IntranetActionsModel::NAME_DIFFUSION_FTA
+
                         //On récupère les utilisateurs correspondant à leur site de rattechement (lieu geo) et les utilisateurs voulant recevoir les info de toutes les Fta
                         . "' AND ((" . UserModel::FIELDNAME_LIEU_GEO . "=" . $rowsFta[FtaModel::FIELDNAME_SITE_PRODUCTION]
-                        . " AND " . IntranetNiveauAccesModel::FIELDNAME_ID_INTRANET_NIVEAU_ACCES . "=" . IntranetNiveauAccesModel::DIFFUSION_FTA_OUI_LIEU_RATTACHEMENT_VALUE
-                        . ") OR " . IntranetNiveauAccesModel::FIELDNAME_ID_INTRANET_NIVEAU_ACCES . "=" . IntranetNiveauAccesModel::DIFFUSION_FTA_OUI_TOUT_VALUE . ")"
+                        . " AND " . IntranetActionsModel::FIELDNAME_NOM_INTRANET_ACTIONS . "='" . IntranetActionsModel::NAME_DIFFUSION_FTA
+                        . " AND " . IntranetDroitsAccesModel::FIELDNAME_NIVEAU_INTRANET_DROITS_ACCES . "=" . IntranetNiveauAccesModel::DIFFUSION_FTA_OUI_LIEU_RATTACHEMENT_VALUE
+                        . ") OR (" . IntranetDroitsAccesModel::FIELDNAME_NIVEAU_INTRANET_DROITS_ACCES . "=" . IntranetNiveauAccesModel::DIFFUSION_FTA_OUI_TOUT_VALUE
+                        . " AND " . IntranetActionsModel::FIELDNAME_NOM_INTRANET_ACTIONS . "='" . IntranetActionsModel::NAME_DIFFUSION_FTA . "))"
                         . " AND " . IntranetDroitsAccesModel::TABLENAME . "." . IntranetDroitsAccesModel::FIELDNAME_ID_USER . " NOT IN ("
                         // On exclue les utilisateur ayant un droit de modification
                         . " SELECT DISTINCT " . UserModel::TABLENAME . "." . UserModel::KEYNAME
@@ -444,7 +446,9 @@ class FtaTransitionModel {
                         . " = " . IntranetDroitsAccesModel::TABLENAME . "." . IntranetDroitsAccesModel::FIELDNAME_ID_USER
                         . " AND " . UserModel::TABLENAME . "." . UserModel::FIELDNAME_ACTIF . " ='" . UserModel::USER_ACTIF . "' "
                         . " AND " . IntranetDroitsAccesModel::TABLENAME . "." . IntranetDroitsAccesModel::FIELDNAME_ID_INTRANET_ACTIONS
-                        . " = " . IntranetNiveauAccesModel::NIVEAU_FTA_MODIFICATION . ")"
+                        . " = " . IntranetNiveauAccesModel::NIVEAU_FTA_MODIFICATION
+                        . " AND " . IntranetDroitsAccesModel::FIELDNAME_NIVEAU_INTRANET_DROITS_ACCES . "=" . IntranetNiveauAccesModel::NIVEAU_GENERIC_TRUE
+                        . ")"
                 ;
                 $r_liste_destinataire_consultation = DatabaseOperation::convertSqlStatementWithoutKeyToArray($reqConsultation);
                 if ($r_liste_destinataire_consultation) {
@@ -622,7 +626,8 @@ class FtaTransitionModel {
                 . "\n"
                 . "INFORMATIONS DE DEBUGGAGE:\n"
                 . $logTransition
-        ; {
+        ;
+        {
             $expediteur = $prenom . " " . $nom . " <" . $mail . ">";
             envoismail($sujetmail, $corp, $mail, $expediteur, $typeMail);
         }
@@ -746,7 +751,8 @@ class FtaTransitionModel {
                 . $text
                 . "\n\n"
                 . $paramLogTransition
-        ; {
+        ;
+        {
             $expediteur = $prenom . " " . $nom . " <" . $mailUser . ">";
             envoismail($sujetmail, $corp, $mailUser, $expediteur, $typeMail);
         }

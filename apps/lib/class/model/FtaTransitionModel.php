@@ -432,11 +432,11 @@ class FtaTransitionModel {
                         . " = " . IntranetNiveauAccesModel::TABLENAME . "." . IntranetNiveauAccesModel::FIELDNAME_ID_INTRANET_MODULES
 
                         //On récupère les utilisateurs correspondant à leur site de rattechement (lieu geo) et les utilisateurs voulant recevoir les info de toutes les Fta
-                        . "' AND ((" . UserModel::FIELDNAME_LIEU_GEO . "=" . $rowsFta[FtaModel::FIELDNAME_SITE_PRODUCTION]
+                        . " AND ((" . UserModel::FIELDNAME_LIEU_GEO . "=" . $rowsFta[FtaModel::FIELDNAME_SITE_PRODUCTION]
                         . " AND " . IntranetActionsModel::FIELDNAME_NOM_INTRANET_ACTIONS . "='" . IntranetActionsModel::NAME_DIFFUSION_FTA
-                        . " AND " . IntranetDroitsAccesModel::FIELDNAME_NIVEAU_INTRANET_DROITS_ACCES . "=" . IntranetNiveauAccesModel::DIFFUSION_FTA_OUI_LIEU_RATTACHEMENT_VALUE
+                        . "' AND " . IntranetDroitsAccesModel::FIELDNAME_NIVEAU_INTRANET_DROITS_ACCES . "=" . IntranetNiveauAccesModel::DIFFUSION_FTA_OUI_LIEU_RATTACHEMENT_VALUE
                         . ") OR (" . IntranetDroitsAccesModel::FIELDNAME_NIVEAU_INTRANET_DROITS_ACCES . "=" . IntranetNiveauAccesModel::DIFFUSION_FTA_OUI_TOUT_VALUE
-                        . " AND " . IntranetActionsModel::FIELDNAME_NOM_INTRANET_ACTIONS . "='" . IntranetActionsModel::NAME_DIFFUSION_FTA . "))"
+                        . " AND " . IntranetActionsModel::FIELDNAME_NOM_INTRANET_ACTIONS . "='" . IntranetActionsModel::NAME_DIFFUSION_FTA . "'))"
                         . " AND " . IntranetDroitsAccesModel::TABLENAME . "." . IntranetDroitsAccesModel::FIELDNAME_ID_USER . " NOT IN ("
                         // On exclue les utilisateur ayant un droit de modification
                         . " SELECT DISTINCT " . UserModel::TABLENAME . "." . UserModel::KEYNAME

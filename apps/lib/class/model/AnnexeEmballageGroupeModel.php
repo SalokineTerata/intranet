@@ -13,6 +13,7 @@ class AnnexeEmballageGroupeModel extends AbstractModel {
     const FIELDNAME_NOM_ANNEXE_EMBALLAGE_GROUPE = 'nom_annexe_emballage_groupe';
     const FIELDNAME_ID_ANNEXE_EMBALLAGE_GROUPE_CONFIGURATION = 'id_annexe_emballage_groupe_configuration';
     const FIELDNAME_POIDS_VARIABLE_FTA_EMBALLAGE_GROUPE = 'poids_variable_fta_emballage_groupe';
+    const ID_ANNEXE_EMBALLAGE_GROUPE_PALETTE = '10';
 
     public static function getArrayIdAnnexeEmballageGroupe($paramEmballageGroupeType) {
         if ($paramEmballageGroupeType == 2) {

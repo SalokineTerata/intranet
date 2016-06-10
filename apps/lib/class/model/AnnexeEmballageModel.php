@@ -23,6 +23,7 @@ class AnnexeEmballageModel extends AbstractModel {
     const FIELDNAME_QUANTITE_PAR_COUCHE_ANNEXE_EMBALLAGE = 'quantite_par_couche_annexe_emballage';
     const FIELDNAME_NOMBRE_COUCHE_ANNEXE_EMBALLAGE = 'nombre_couche_annexe_emballage';
     const FIELDNAME_DATE_MAJ_ANNEXE_EMBALLAGE = 'date_maj_annexe_emballage';
+    const ID_ANNEXE_EMBALLAGE_PALETTE = '126';
 
     /**
      * ArcadiaTypeCarton associée

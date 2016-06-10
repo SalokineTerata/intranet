@@ -164,6 +164,8 @@ switch ($action) {
                 }
             }
         }
+        //Création d'une palette
+        FtaConditionnementModel::createPalette($idFta);
 
         //Redirection
         header('Location: modification_fiche.php?id_fta=' . $idFta

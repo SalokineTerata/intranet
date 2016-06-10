@@ -611,6 +611,31 @@ class FtaConditionnementModel extends AbstractModel {
         return $return;
     }
 
+    /**
+     * Création d'une palette
+     * @param int $paramIdFta
+     */
+    public static function createPalette($paramIdFta) {
+        /*
+         * Initialisation du modele
+         */
+        $annexeEmballageModel = new AnnexeEmballageModel(AnnexeEmballageModel::ID_ANNEXE_EMBALLAGE_PALETTE);
+        /*
+         * Enregistrement de l'emballage affecter à cette FTA
+         */
+        //Récuperation des données
+        $nbCoucheFtaConditionnement = "1"; //Une seule couche par UVC
+        $hauteurFtaConditionnement = $annexeEmballageModel->getDataField(AnnexeEmballageModel::FIELDNAME_HAUTEUR_ANNEXE_EMBALLAGE)->getFieldValue();
+        $longeurFtaConditionnement = $annexeEmballageModel->getDataField(AnnexeEmballageModel::FIELDNAME_LONGUEUR_ANNEXE_EMBALLAGE)->getFieldValue();
+        $largeurFtaConditionnement = $annexeEmballageModel->getDataField(AnnexeEmballageModel::FIELDNAME_LARGEUR_ANNEXE_EMBALLAGE)->getFieldValue();
+        $poidsFtaConditionnement = $annexeEmballageModel->getDataField(AnnexeEmballageModel::FIELDNAME_POIDS_ANNEXE_EMBALLAGE)->getFieldValue();             //Poids des emballages qui ont peuvent varier selon les articles (comme des films)
+        $qteCoucheFtaConditionnement = "1"; //Quantité par UVC
+
+        FtaConditionnementModel::addFtaConditionnement($paramIdFta, AnnexeEmballageModel::ID_ANNEXE_EMBALLAGE_PALETTE, AnnexeEmballageGroupeModel::ID_ANNEXE_EMBALLAGE_GROUPE_PALETTE
+                , AnnexeEmballageGroupeTypeModel::EMBALLAGE_PALETTE, $hauteurFtaConditionnement, $longeurFtaConditionnement
+                , $largeurFtaConditionnement, $poidsFtaConditionnement, $nbCoucheFtaConditionnement, $qteCoucheFtaConditionnement);
+    }
+
 }
 
 ?>

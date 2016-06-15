@@ -47,6 +47,17 @@ class IntranetColumnInfoModel extends AbstractModel {
     }
 
     /**
+     * Suppression d'un fichier d'un champ
+     */
+    function suppressionFile() {
+
+        DatabaseOperation::execute(
+                ' UPDATE ' . self::TABLENAME . ' SET ' . self::FIELDNAME_UPLOAD_NAME_FILE . '=\'\''
+                . ' WHERE ' . self::KEYNAME . '=' . $this->getKeyValue()
+        );
+    }
+
+    /**
      * Tableau donnant la liste des champs verrouillé par défaut
      * @return array
      */

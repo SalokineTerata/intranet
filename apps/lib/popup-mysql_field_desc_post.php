@@ -45,10 +45,18 @@ switch ($action) {
 
 
         //Redirection
-        header("Location: popup-mysql_field_desc.php?id_intranet_column_info=" . $idIntranetColumnInfo."&action=");
+        header("Location: popup-mysql_field_desc.php?id_intranet_column_info=" . $idIntranetColumnInfo . "&edit_mode=1");
 
         break;
+    case 'supprimer':
 
+        if ($idIntranetColumnInfo) {
+            $intranetColumnInfoModel = new IntranetColumnInfoModel($idIntranetColumnInfo);
+            $intranetColumnInfoModel->suppressionFile();
+        }
+
+//Redirection
+        header("Location: popup-mysql_field_desc.php?id_intranet_column_info=" . $idIntranetColumnInfo . "&edit_mode=1");
 
 
     /*     * **********

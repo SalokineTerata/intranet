@@ -54,13 +54,17 @@ $htmlTexArea = new HtmlTextArea();
 $htmlTexArea->setTextAreaContent($explication_intranet_description);
 $htmlTexArea->setHtmlRenderToTable();
 $content = $htmlTexArea->getHtmlResult();
+if($fichier){
 $image_modif = " <$html_table>
                <tr class=titre_principal>
                 <td>        
                 <span > <a href=upload/" . $fichier . " onclick=\"window.open(this.href); return false;\" >" . $fichier . "</a></span>
                 </tr> 
               </table>";
-
+$image_supp = "<td>        
+                <span > <a href=popup-mysql_field_desc_post.php?id_intranet_column_info=" . $idIntranetColumnInfo . "&action=supprimer >Supprimer le fichier</a></span>
+                </tr> ";
+}
 $bouton_record = "";
 
 /**
@@ -204,6 +208,7 @@ switch ($output) {
 
              </form>
               $image_modif
+                  $image_supp
              ";
 
 

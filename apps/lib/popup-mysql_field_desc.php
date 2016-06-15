@@ -86,8 +86,8 @@ if ($edit_mode) {
                 <span > <a href=upload/" . $fichier . " onclick=\"window.open(this.href); return false;\" >" . $fichier . "</a></span>
                 </td>
                 <td>
-                <!-- On limite le fichier à 100Ko -->
-                <input type=hidden name=MAX_FILE_SIZE value=100000>
+                <!-- On limite le fichier à 100Go -->
+                <input type=hidden name=MAX_FILE_SIZE value=858993459200>
                 <input type=hidden name=id_intranet_column_info value=$idIntranetColumnInfo>
                 Fichier : <input type=file name=avatar >
                 <input type=submit name=envoyer value=\"Envoyer le fichier\" >

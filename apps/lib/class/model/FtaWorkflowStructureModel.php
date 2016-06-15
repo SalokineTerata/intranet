@@ -200,4 +200,23 @@ class FtaWorkflowStructureModel extends AbstractModel {
         return $IdFtaRole;
     }
 
+    /**
+     * On récupère l'id Fta role correspondant au chapitre et workflow
+     * @param int $paramIdFtaChapitre
+     * @param int $paramIdFtaWorkflow
+     */
+    public static function getIdFtaRoleByChapitreAndWorkflow($paramIdFtaChapitre, $paramIdFtaWorkflow) {
+        $arrayRole = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
+                        "SELECT " . self::FIELDNAME_ID_FTA_ROLE
+                        . " FROM " . self::TABLENAME
+                        . " WHERE " . self::FIELDNAME_ID_FTA_CHAPITRE . "=" . $paramIdFtaChapitre
+                        . " AND " . self::FIELDNAME_ID_FTA_WORKFLOW . "=" . $paramIdFtaWorkflow
+        );
+        foreach ($arrayRole as $rowsRole) {
+            $idFtaRole = $rowsRole[self::FIELDNAME_ID_FTA_ROLE];
+        }
+
+        return $idFtaRole;
+    }
+
 }

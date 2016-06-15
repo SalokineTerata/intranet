@@ -24,6 +24,7 @@ class Navigation {
     protected static $id_fta;
     protected static $id_fta_etat;
     protected static $id_fta_role;
+    protected static $id_fta_role_encours;
     protected static $comeback;
     protected static $comeback_url;
     protected static $ftaConsultation;
@@ -69,6 +70,7 @@ class Navigation {
         self::$id_fta_role = $id_fta_role;
         self::$ftaModel = new FtaModel(self::$id_fta);
         self::$id_fta_workflow = self::$ftaModel->getDataField(FtaModel::FIELDNAME_WORKFLOW)->getFieldValue();
+        self::$id_fta_role_encours = FtaWorkflowStructureModel::getIdFtaRoleByChapitreAndWorkflow(self::$id_fta_chapitre_encours,  self::$id_fta_workflow );
         $ftaWorkflowModel = new FtaWorkflowModel(self::$id_fta_workflow);
         self::$id_parent_intranet_actions = $ftaWorkflowModel->getDataField(FtaWorkflowModel::FIELDNAME_ID_INTRANET_ACTIONS)->getFieldValue();
 
@@ -168,9 +170,9 @@ class Navigation {
             $checkAccesButtonBySiteProd = IntranetActionsModel::isAccessFtaActionByIdUserFtaWorkflowAndSiteDeProduction($idUser, self::$id_fta_workflow, $idIntranetActionsSiteDeProduction);
             $tauxRound = FtaSuiviProjetModel::getPourcentageFtaTauxValidation(self::$ftaModel);
             $transition = TableauFicheView::getHmlLinkTransiter(self::$id_fta, self::$id_fta_role, self::$abreviation_etat, $checkAccesButtonBySiteProd
-                            , $accesTransitionButton, self::$synthese_action, $tauxRound,"18"," Transiter");
-            if($transition){
-                $transition =  " | ". $transition  ;
+                            , $accesTransitionButton, self::$synthese_action, $tauxRound, "18", " Transiter");
+            if ($transition) {
+                $transition = " | " . $transition;
             }
             $menu_navigation.='
                     <a href=historique-' . self::$id_fta
@@ -182,7 +184,7 @@ class Navigation {
 //                    . '-1'
                     . '.html ><img src=./images/graphique.png alt=\'\' title=\'Etat d\'avancement\' width=\'18\' height=\'15\' border=\'0\' /> Etat d\'avancement</a>'
                     . $transition .
-            ' 
+                    ' 
                        </td></tr>                       
                        </table>
                        ';
@@ -692,7 +694,8 @@ class Navigation {
                     $first = "1";
                 } else {
                     $color = FtaRoleModel::getColorByRole($idFtaRoleTmp);
-                    $roleMenuFinal .="<td style='border-style:solid; border-bottom-width: 10px; border-color: " . $color . "' >" . $roleMenu . "</td>";
+                    $border = FtaRoleModel::getBoderByRole($idFtaRoleTmp, self::$id_fta_role_encours);
+                    $roleMenuFinal .="<td style='border-style:solid; border-bottom-width: $border; border-color: " . $color . "' >" . $roleMenu . "</td>";
                     $roleMenu = $menu_navigation;
                     $menu_navigation = "";
                     $idFtaRoleTmp = $idFtaRole;
@@ -700,7 +703,8 @@ class Navigation {
             }
         }
         $color = FtaRoleModel::getColorByRole($idFtaRoleTmp);
-        $roleMenuFinal .="<td style='border-style:solid; border-bottom-width: 10px; border-color: " . $color . "' >" . $roleMenu . "</td>";
+        $border = FtaRoleModel::getBoderByRole($idFtaRoleTmp, self::$id_fta_role_encours);
+        $roleMenuFinal .="<td style='border-style:solid; border-bottom-width: $border; border-color: " . $color . "' >" . $roleMenu . "</td>";
         return $roleMenuFinal;
     }
 

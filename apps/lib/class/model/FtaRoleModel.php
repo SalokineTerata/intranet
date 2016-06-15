@@ -339,7 +339,7 @@ class FtaRoleModel extends AbstractModel {
                                 /**
                                  * Liien vers l'historique sans la navigation
                                  */
-                                $roles.= $image_flash1 . $ftaRoleModel->getDataField(FtaRoleModel::FIELDNAME_DESCRIPTION_FTA_ROLE)->getFieldValue(). $image_flash2. ' ';
+                                $roles.= $image_flash1 . $ftaRoleModel->getDataField(FtaRoleModel::FIELDNAME_DESCRIPTION_FTA_ROLE)->getFieldValue() . $image_flash2 . ' ';
                             }
                         } elseif ($taux == "1" or ( $taux <> "0" and $taux <> "1")) {
                             $ftaRoleModel = new FtaRoleModel($arrayCheckRole["0"]);
@@ -350,7 +350,7 @@ class FtaRoleModel extends AbstractModel {
                                     . '&id_fta_etat=' . $ftaModel->getDataField(FtaModel::FIELDNAME_ID_FTA_ETAT)->getFieldValue()
                                     . '&abreviation_fta_etat=' . $ftaModel->getModelFtaEtat()->getDataField(FtaEtatModel::FIELDNAME_ABREVIATION)->getFieldValue()
 //                                        . '&comeback=' . self::$comeback
-                                    . '&id_fta_role=' . $arrayCheckRole["0"] . '>' . $ftaRoleModel->getDataField(FtaRoleModel::FIELDNAME_DESCRIPTION_FTA_ROLE)->getFieldValue() . '</a> ' . $image_flash2. ' ';
+                                    . '&id_fta_role=' . $arrayCheckRole["0"] . '>' . $ftaRoleModel->getDataField(FtaRoleModel::FIELDNAME_DESCRIPTION_FTA_ROLE)->getFieldValue() . '</a> ' . $image_flash2 . ' ';
                         }
                     }
                 }
@@ -360,16 +360,32 @@ class FtaRoleModel extends AbstractModel {
 
         return $RoleNavigation;
     }
+
     /**
      * On récupère la couleur correspondante à un rôle
      * @param int $paramIdFtaRole
      * @return string
      */
-    public static function getColorByRole($paramIdFtaRole){
+    public static function getColorByRole($paramIdFtaRole) {
         $ftaRoleModel = new FtaRoleModel($paramIdFtaRole);
         $color = $ftaRoleModel->getDataField(self::FIELDNAME_COLOR_FTA_ROLE)->getFieldValue();
-        
+
         return $color;
+    }
+
+    /**
+     * On recupère la taille du bandeau du bas
+     * @param int $paramIdFtaRole
+     * @param int $paramIdFtaRoleCheck
+     * @return string
+     */
+    public static function getBoderByRole($paramIdFtaRole, $paramIdFtaRoleCheck) {
+        if ($paramIdFtaRoleCheck == $paramIdFtaRole) {
+            $border = "12px";
+        } else {
+            $border = "5px";
+        }
+        return $border;
     }
 
 }

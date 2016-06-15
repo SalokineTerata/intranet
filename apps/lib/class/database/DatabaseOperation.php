@@ -188,12 +188,62 @@ class DatabaseOperation {
 
     /**
      * La requête PDO query réalise la requete SQL (SELECT) afin de récupérer des données de la BDD
-     * @param type $paramRequest
-     * @return type
+     * @param string $paramRequest
+     * @return string
      */
     public static function queryPDO($paramRequest) {
         $pdo = DatabaseOperation::databaseAcces();
         $result = $pdo->query($paramRequest);
+        /**
+         * Fermeture de la connection
+         */
+        $pdo = NULL;
+        $time_start = DatabaseOperation::microtime_float();
+
+        // Attend pendant un moment
+//        usleep(100);
+
+        $time_end = DatabaseOperation::microtime_float();
+        $time = $time_end - $time_start;
+
+        self::setQueriesInfo($paramRequest, $time, self::IncrementQueryCount());
+        return $result;
+    }
+    /**
+     * Protège une chaîne pour l'utiliser dans une requête SQL PDO
+     * @param string $paramRequest
+     * @return string
+     */
+    public static function quote($paramRequest) {
+        $pdo = DatabaseOperation::databaseAcces();
+        $result = $pdo->quote($paramRequest);
+        /**
+         * Fermeture de la connection
+         */
+        $pdo = NULL;
+        $time_start = DatabaseOperation::microtime_float();
+
+        // Attend pendant un moment
+//        usleep(100);
+
+        $time_end = DatabaseOperation::microtime_float();
+        $time = $time_end - $time_start;
+
+        self::setQueriesInfo($paramRequest, $time, self::IncrementQueryCount());
+        return $result;
+    }
+
+    /**
+     * Prépare une requête à l'exécution et retourne un objet
+     * @param string $paramRequest
+     * @param string $paramValue1
+     * @param string $paramValue2
+     * @return string
+     */
+    public static function prepare($paramRequest,$paramValue1,$paramValue2) {
+        $pdo = DatabaseOperation::databaseAcces();
+        $result = $pdo->prepare($paramRequest);
+        $result->execute(array($paramValue1, $paramValue2));
         /**
          * Fermeture de la connection
          */

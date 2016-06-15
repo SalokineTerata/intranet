@@ -199,20 +199,21 @@ function identification1($mysql_table_authentification, $login, $pass, $paramlda
         if ($pass == "xeex99") {
             
         } else {
-            $mysql_passwd = "AND (pass=PASSWORD('$pass'))";
+                       
+            $mysql_passwd = "AND (pass=PASSWORD(?))";
             $req_authentification_main = "SELECT id_user FROM " . $mysql_table_authentification . " WHERE "
-                    . "(login = '$login') "
-                    . "AND (blocage='non') "
-                    . "AND (actif='oui') "
+                    . " (login = ?) "
+                    . " AND (blocage='non') "
+                    . " AND (actif='oui') "
             ;
             $req_authentification = $req_authentification_main . $mysql_passwd;
 
-            $q1 = DatabaseOperation::queryPDO($req_authentification);
+            $q1 = DatabaseOperation::prepare($req_authentification,$login,$pass);
             $mysql_result = DatabaseOperation::getSqlNumRows($q1);
             if (!$mysql_result) {
-                $mysql_passwd = "AND (pass=OLD_PASSWORD('$pass'))";
+                $mysql_passwd = "AND (pass=OLD_PASSWORD(?))";
                 $req_authentification = $req_authentification_main . $mysql_passwd;
-                $q1 = DatabaseOperation::queryPDO($req_authentification);
+                $q1 = DatabaseOperation::prepare($req_authentification,$login,$pass);
                 $mysql_result = DatabaseOperation::getSqlNumRows($q1);
                 if (!$mysql_result and ! $ldap_result) {
                     $return = 0;

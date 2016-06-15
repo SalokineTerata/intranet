@@ -936,6 +936,8 @@ class FtaView extends AbstractView {
      */
     public function getHtmlCreateurFta() {
 
+        $dataFieldCreateur = $this->getModel()->getDataField(FtaModel::FIELDNAME_CREATEUR);
+
         $htmlObject = new htmlInputText();
         $HtmlTableName = FtaModel::TABLENAME
                 . '_'
@@ -943,11 +945,14 @@ class FtaView extends AbstractView {
                 . '_'
                 . $this->getModel()->getKeyValue()
         ;
-        $htmlObject->setLabel($this->getModel()->getDataField(FtaModel::FIELDNAME_CREATEUR)->getFieldLabel());
+        $htmlObject->setLabel($dataFieldCreateur->getFieldLabel());
         $htmlObject->initAbstractHtmlInput($HtmlTableName, $htmlObject->getLabel()
                 , $this->getModel()->getModelCreateur()->getPrenomNom()
-                , $this->getModel()->getDataField(FtaModel::FIELDNAME_CREATEUR)->isFieldDiff());
+                , $dataFieldCreateur->isFieldDiff());
         $htmlObject->setIsEditable(FALSE);
+        $htmlObject->setHelp(IntranetColumnInfoModel::getFieldDesc($dataFieldCreateur->getTableName(), $dataFieldCreateur->getFieldName()
+                        , $dataFieldCreateur->getFieldLabel(), $htmlObject
+        ));
         return $htmlObject->getHtmlResult();
     }
 

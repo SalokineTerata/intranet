@@ -521,7 +521,7 @@ class Chapitre {
         $ftaModel->setDataFtaTableToCompare();
 
         $ftaView = new FtaView($ftaModel);
-        $ftaView->setIsEditable($isEditable);
+        $ftaView->setIsEditable($isEditable);        
 
         $ftaView->setFtaChapitreModelById(self::ID_CHAPITRE_IDENTITE);
         /**
@@ -2611,7 +2611,8 @@ class Chapitre {
 //        } else {
 //            $return = false;
 //        }
-
+        IntranetColumnInfoModel::setOwner($return);
+        
         return $return;
     }
 

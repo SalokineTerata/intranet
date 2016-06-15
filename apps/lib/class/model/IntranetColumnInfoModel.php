@@ -27,8 +27,20 @@ class IntranetColumnInfoModel extends AbstractModel {
     const FIELDNAME_SQL_CONDITION_CONTENT_INTRANET_COLUMN_INFO = 'sql_condition_content_intranet_column_info';
     const FIELDNAME_TAGS_VALIDATION_RULES_INTRANET_COLUMN_INFO = 'tags_validation_rules_intranet_column_info';
     const FIELDNAME_DEFAULT_FIELD_TO_LOCK_FOR_PRIMARY_FTA = 'default_field_to_lock_for_primary_fta';
+    const FIELDNAME_IS_ENABLED_INTRANET_DESCRIPTION = 'is_enabled_intranet_description';
+    const FIELDNAME_UPLOAD_NAME_FILE = 'upload_name_file';
     const DEFAULT_FIELD_TO_LOCK_FOR_PRIMARY_FTA_VALUES = '1';
     const DEFAULT_FIELD_NOT_TO_LOCK_FOR_PRIMARY_FTA_VALUES = '2';
+    const DEFAULT_MESSAGE = "Aucune explication communiquée par le responsable de cette information.";
+    const HREF_POPUP = "../lib/popup-mysql_field_desc.php";
+    const HREF_JAVASCRIPT_BEGIN = "javascript:; onClick=MM_openBrWindow('";
+    const HREF_JAVASCRIPT_END = "','pop','scrollbars=no,width=510,height=550')";
+    const IS_ENABLED_INTRANET_DESCRIPTION_TRUE = '1';
+    const IS_ENABLED_INTRANET_DESCRIPTION_FALSE = '0';
+
+    public function __construct($paramId = NULL, $paramIsCreateRecordsetInDatabaseIfKeyDoesntExist = AbstractModel::DEFAULT_IS_CREATE_RECORDSET_IN_DATABASE_IF_KEY_DOESNT_EXIST) {
+        parent::__construct($paramId, $paramIsCreateRecordsetInDatabaseIfKeyDoesntExist);
+    }
 
     protected function setDefaultValues() {
         
@@ -62,15 +74,102 @@ class IntranetColumnInfoModel extends AbstractModel {
                         "SELECT DISTINCT " . IntranetColumnInfoModel::FIELDNAME_LABEL_INTRANET_COLUMN_INFO
                         . " FROM " . IntranetColumnInfoModel::TABLENAME
                         . " WHERE " . IntranetColumnInfoModel::FIELDNAME_TABLE_NAME_INTRANET_COLUMN_INFO . "='" . $paramTableName
-                        . "' AND " . IntranetColumnInfoModel::FIELDNAME_COLUMN_NAME_INTRANET_COLUMN_INO . "='" . $paramColumnName ."'"
+                        . "' AND " . IntranetColumnInfoModel::FIELDNAME_COLUMN_NAME_INTRANET_COLUMN_INO . "='" . $paramColumnName . "'"
         );
         if ($arrayIntranetColumnLabel) {
             foreach ($arrayIntranetColumnLabel as $rowsIntranetColumnLabel) {
                 $label = $rowsIntranetColumnLabel[IntranetColumnInfoModel::FIELDNAME_LABEL_INTRANET_COLUMN_INFO];
             }
         }
-        
+
         return $label;
+    }
+
+    /**
+     * Récupération de la description d'un champ
+     * @param string $paramNameTable
+     * @param string $paramNameVariable
+     * @param string $paramLabel
+     * @param object $paramHtmlObject
+     * @return string
+     */
+    public static function getFieldDesc($paramNameTable, $paramNameVariable, $paramLabel, $paramHtmlObject) {
+        //Recherche des informations d'aide en ligne (format Pop-up)
+
+        $req_explication = "SELECT " . self::FIELDNAME_TABLE_NAME_INTRANET_COLUMN_INFO
+                . "," . self::FIELDNAME_COLUMN_NAME_INTRANET_COLUMN_INO
+                . "," . self::FIELDNAME_EXPLICATION_INTRANET_COLUMN_INFO
+                . "," . self::FIELDNAME_IS_ENABLED_INTRANET_DESCRIPTION
+                . "," . self::FIELDNAME_UPLOAD_NAME_FILE
+                . "," . self::KEYNAME
+                . " FROM " . self::TABLENAME
+                . " WHERE " . self::FIELDNAME_TABLE_NAME_INTRANET_COLUMN_INFO . "='" . $paramNameTable . "' "
+                . "AND " . self::FIELDNAME_COLUMN_NAME_INTRANET_COLUMN_INO . "='" . $paramNameVariable . "' "
+        ;
+        $arrayIntranetDescription = DatabaseOperation::convertSqlStatementWithoutKeyToArray($req_explication);
+
+        if ($arrayIntranetDescription) {
+            foreach ($arrayIntranetDescription as $rowsIntranetDescription) {
+                $id_intranet_column_info = $rowsIntranetDescription[self::KEYNAME];
+                $explication_intranet_description = $rowsIntranetDescription[self::FIELDNAME_EXPLICATION_INTRANET_COLUMN_INFO];
+                $show_help = $rowsIntranetDescription[self::FIELDNAME_IS_ENABLED_INTRANET_DESCRIPTION];
+                $file = $rowsIntranetDescription[self::FIELDNAME_UPLOAD_NAME_FILE];
+            }
+        } else {
+            $id_intranet_column_info = self::insertIntranetDescription($paramNameTable, $paramNameVariable);
+            $show_help = self::IS_ENABLED_INTRANET_DESCRIPTION_TRUE;
+        }
+        if ($file) {
+            $paperClipLink = Html::DEFAULT_HTML_IMAGE_PIECE_JOINTE;
+            $paramHtmlObject->setShowImage("<div align=right width=25% ><a href=../lib/upload/" . $file . " onclick=\"window.open(this.href); return false;\" >" . $paperClipLink . "</a>");
+        }
+
+        $paramHtmlObject->setShowHelp($show_help);
+        if ($show_help) {
+            //Ajout des liens hypertextes
+            $return .="<a title=\"" . $explication_intranet_description . "\" "
+                    . " href="
+                    . self::HREF_JAVASCRIPT_BEGIN
+                    . self::HREF_POPUP
+                    . "?id_intranet_column_info=" . $id_intranet_column_info
+                    . self::HREF_JAVASCRIPT_END
+                    . "  CLASS=link1 />"
+                    . $paramLabel
+                    . "</a>"
+            ;
+        }
+
+        return $return;
+    }
+
+    /**
+     * Ajout d'une Description
+     * @param string $paramNameTable
+     * @param string $paramNameVariable
+     * @return int
+     */
+    public static function insertIntranetDescription($paramNameTable, $paramNameVariable) {
+        $pdo = DatabaseOperation::executeComplete(
+                        "INSERT INTO " . self::TABLENAME
+                        . "(" . self::FIELDNAME_TABLE_NAME_INTRANET_COLUMN_INFO
+                        . "," . self::FIELDNAME_COLUMN_NAME_INTRANET_COLUMN_INO
+                        . "," . self::FIELDNAME_EXPLICATION_INTRANET_COLUMN_INFO
+                        . ")"
+                        . "VALUES ('" . $paramNameTable
+                        . "','" . $paramNameVariable
+                        . "','" . self::DEFAULT_MESSAGE
+                        . "')"
+        );
+        $key = $pdo->lastInsertId();
+        return $key;
+    }
+
+    public static function setOwner($paramIsOwner) {
+        $_SESSION["Owner"] = $paramIsOwner;
+    }
+
+    public static function getOwner() {
+        return $_SESSION["Owner"];
     }
 
 }

@@ -86,7 +86,7 @@ class FtaController {
      */
     public static function getComment($paramAction, $paramUser, $paramCommentaire, $paramDate = NULL) {
         if (!$paramDate) {
-            $paramDate = date('d-m-Y');
+            $paramDate = date('d-m-Y H:i:s');
         } else {
             $paramDate = FtaController::changementDuFormatDeDateFR($paramDate);
         }
@@ -109,7 +109,7 @@ class FtaController {
      * @return boolean
      */
     public static function isCheckDateFormat($value) {
-        $result = DateTime::createFromFormat("d-m-Y", $value);
+        $result = DateTime::createFromFormat("d-m-Y H:i:s", $value);
         return $result;
     }
 
@@ -133,6 +133,9 @@ class FtaController {
             $annee = substr($paramValeurDate, 6, 9);
             $mois = substr($paramValeurDate, 3, 2);
             $jours = substr($paramValeurDate, 0, 2);
+            $heure = substr($paramValeurDate, 11, 2);
+            $minute = substr($paramValeurDate, 14, 2);
+            $seconde = substr($paramValeurDate, 17, 2);
         } else {
             /**
              * Extraction de l'année
@@ -141,8 +144,11 @@ class FtaController {
             $annee = substr($paramValeurDate, 0, 4);
             $mois = substr($paramValeurDate, 5, 2);
             $jours = substr($paramValeurDate, 8, 2);
+            $heure = substr($paramValeurDate, 11, 2);
+            $minute = substr($paramValeurDate, 14, 2);
+            $seconde = substr($paramValeurDate, 17, 2);
         }
-        $return = $jours . "-" . $mois . "-" . $annee;
+        $return = $jours . "-" . $mois . "-" . $annee . " " . $heure . ":" . $minute . ":" . $seconde;
         return $return;
     }
 

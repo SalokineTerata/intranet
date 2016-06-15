@@ -168,9 +168,9 @@ class Navigation {
             $checkAccesButtonBySiteProd = IntranetActionsModel::isAccessFtaActionByIdUserFtaWorkflowAndSiteDeProduction($idUser, self::$id_fta_workflow, $idIntranetActionsSiteDeProduction);
             $tauxRound = FtaSuiviProjetModel::getPourcentageFtaTauxValidation(self::$ftaModel);
             $transition = TableauFicheView::getHmlLinkTransiter(self::$id_fta, self::$id_fta_role, self::$abreviation_etat, $checkAccesButtonBySiteProd
-                            , $accesTransitionButton, self::$synthese_action, $tauxRound,"18");
+                            , $accesTransitionButton, self::$synthese_action, $tauxRound,"18"," Transiter");
             if($transition){
-                $transition =  " | ". $transition . " Transiter";
+                $transition =  " | ". $transition  ;
             }
             $menu_navigation.='
                     <a href=historique-' . self::$id_fta

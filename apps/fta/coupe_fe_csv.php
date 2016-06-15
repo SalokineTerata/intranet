@@ -27,11 +27,11 @@ $arrayDataCoupeFe = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
                 . "," . FtaModel::FIELDNAME_CODE_ARTICLE_LDC . "," . FtaModel::FIELDNAME_NOMBRE_UVC_PAR_CARTON
                 . "," . FtaComposantModel::FIELDNAME_INGREDIENT_FTA_COMPOSITION . "," . FtaModel::FIELDNAME_LISTE_ALLERGENE
                 . "," . FtaModel::FIELDNAME_ORIGINE_MATIERE_PREMIERE . "," . FtaModel::FIELDNAME_DUREE_DE_VIE
-                . "," . FtaModel::FIELDNAME_CONSEIL_DE_RECHAUFFAGE . "," . FtaComposantModel::FIELDNAME_VAL_NUT_KCAL
-                . "," . FtaComposantModel::FIELDNAME_VAL_NUT_KJ . "," . FtaComposantModel::FIELDNAME_VAL_MAT_GRASSE
-                . "," . FtaComposantModel::FIELDNAME_VAL_ACIDE_GRAS . "," . FtaComposantModel::FIELDNAME_VAL_GLUCIDE
-                . "," . FtaComposantModel::FIELDNAME_VAL_SUCRE . "," . FtaComposantModel::FIELDNAME_VAL_PROTEINE
-                . "," . FtaComposantModel::FIELDNAME_VAL_SEL
+                . "," . FtaModel::FIELDNAME_CODE_DOUANE_FTA . "," . FtaModel::FIELDNAME_CONSEIL_DE_RECHAUFFAGE
+                . "," . FtaComposantModel::FIELDNAME_VAL_NUT_KCAL . "," . FtaComposantModel::FIELDNAME_VAL_NUT_KJ
+                . "," . FtaComposantModel::FIELDNAME_VAL_MAT_GRASSE . "," . FtaComposantModel::FIELDNAME_VAL_ACIDE_GRAS
+                . "," . FtaComposantModel::FIELDNAME_VAL_GLUCIDE . "," . FtaComposantModel::FIELDNAME_VAL_SUCRE
+                . "," . FtaComposantModel::FIELDNAME_VAL_PROTEINE . "," . FtaComposantModel::FIELDNAME_VAL_SEL
                 . " FROM " . FtaComposantModel::TABLENAME . "," . FtaModel::TABLENAME
                 . " WHERE " . FtaComposantModel::TABLENAME . "." . FtaComposantModel::FIELDNAME_ID_FTA
                 . "=" . FtaModel::TABLENAME . "." . FtaModel::KEYNAME
@@ -45,11 +45,11 @@ $arrayDataInter = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
                 . "," . FtaModel::FIELDNAME_CODE_ARTICLE_LDC . "," . FtaModel::FIELDNAME_NOMBRE_UVC_PAR_CARTON
                 . "," . FtaComposantModel::FIELDNAME_INGREDIENT_FTA_COMPOSITION . "," . FtaModel::FIELDNAME_LISTE_ALLERGENE
                 . "," . FtaModel::FIELDNAME_ORIGINE_MATIERE_PREMIERE . "," . FtaModel::FIELDNAME_DUREE_DE_VIE
-                . "," . FtaModel::FIELDNAME_CONSEIL_DE_RECHAUFFAGE . "," . FtaComposantModel::FIELDNAME_VAL_NUT_KCAL
-                . "," . FtaComposantModel::FIELDNAME_VAL_NUT_KJ . "," . FtaComposantModel::FIELDNAME_VAL_MAT_GRASSE
-                . "," . FtaComposantModel::FIELDNAME_VAL_ACIDE_GRAS . "," . FtaComposantModel::FIELDNAME_VAL_GLUCIDE
-                . "," . FtaComposantModel::FIELDNAME_VAL_SUCRE . "," . FtaComposantModel::FIELDNAME_VAL_PROTEINE
-                . "," . FtaComposantModel::FIELDNAME_VAL_SEL
+                . "," . FtaModel::FIELDNAME_CODE_DOUANE_FTA . "," . FtaModel::FIELDNAME_CONSEIL_DE_RECHAUFFAGE
+                . "," . FtaComposantModel::FIELDNAME_VAL_NUT_KCAL . "," . FtaComposantModel::FIELDNAME_VAL_NUT_KJ
+                . "," . FtaComposantModel::FIELDNAME_VAL_MAT_GRASSE . "," . FtaComposantModel::FIELDNAME_VAL_ACIDE_GRAS
+                . "," . FtaComposantModel::FIELDNAME_VAL_GLUCIDE . "," . FtaComposantModel::FIELDNAME_VAL_SUCRE
+                . "," . FtaComposantModel::FIELDNAME_VAL_PROTEINE . "," . FtaComposantModel::FIELDNAME_VAL_SEL
                 . " FROM " . FtaComposantModel::TABLENAME . "," . FtaModel::TABLENAME
                 . " WHERE " . FtaComposantModel::TABLENAME . "." . FtaComposantModel::FIELDNAME_ID_FTA
                 . "=" . FtaModel::TABLENAME . "." . FtaModel::KEYNAME
@@ -69,6 +69,7 @@ $titres = array(
     "Listes des allergènes",
     "Origines matières premières",
     "DLC",
+    "Code Douane",
     "Conseils de réchauffage",
     "Energie (kcal)",
     "Energie (kJ)",

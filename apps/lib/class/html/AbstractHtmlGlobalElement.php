@@ -131,6 +131,23 @@ abstract class AbstractHtmlGlobalElement {
     private $showLabel;
 
     /**
+     * Doit-on affiche la description du champ ?
+     * @var boolean
+     */
+    private $showHelp;
+
+    /**
+     * La description du champ ?
+     * @var boolean
+     */
+    private $help;
+    /**
+     * La description du champ ?
+     * @var boolean
+     */
+    private $showImage;
+
+    /**
      * Peut-on ajouter une donnée ?
      * @var boolean
      */
@@ -378,6 +395,31 @@ abstract class AbstractHtmlGlobalElement {
         $this->label = $paramLabel;
     }
 
+    function getShowHelp() {
+        return $this->showHelp;
+    }
+
+    function setShowHelp($showHelp) {
+        $this->showHelp = $showHelp;
+    }
+
+    function getHelp() {
+        return $this->help;
+    }
+
+    function setHelp($help) {
+        $this->help = $help;
+    }
+
+    function getShowImage() {
+        return $this->showImage;
+    }
+
+    function setShowImage($showImage) {
+        $this->showImage = $showImage;
+    }
+
+        
     function getRightToAdd() {
         return $this->rightToAdd;
     }
@@ -403,6 +445,9 @@ abstract class AbstractHtmlGlobalElement {
          */
         if ($this->getShowLabel()) {
             $label = $this->getLabel();
+            if ($this->getShowHelp()) {
+             $label = $this->getHelp();   
+            }
         }
 
         //Traitement du Warning Update
@@ -421,6 +466,10 @@ abstract class AbstractHtmlGlobalElement {
         if ($this->getIsFieldLock()) {
             $linkFieldLock = $this->getLinkFieldLock();
         }
+        //Traitement de la description d'un champ
+        if ($this->getShowImage()) {
+            $linkPieceJointe = $this->getShowImage();
+        }
 
         //Rendu HTML - début encapsulation
         switch ($this->getHtmlRender()) {
@@ -429,6 +478,7 @@ abstract class AbstractHtmlGlobalElement {
                 $html_result .= '<td align=left style=\'' . $color_modif . '\' width=25%>'
                         . '<div>' . $label . '</div>'
                         . $linkFieldLock
+                        . $linkPieceJointe
                         . '</td>';
                 break;
 

@@ -597,7 +597,7 @@ function print_page_begin($disable_full_page = FALSE, $menu_file = NULL, $conf =
     /**
      * Si le module Fta doit être affiché on selectionne le css du config.ini sinon celui de la base de données
      */
-    if ($module == "fta" or $module == "adminagis") {
+    if ($module == "fta" or $module == "adminagis" or $module == "lib") {
         $css_intranet_module = $conf->getConf()->getCssFta();
     } else {
         $css_intranet_module = $_SESSION["intranet_modules"][$module]["css_intranet_module"];
@@ -623,7 +623,7 @@ function print_page_begin($disable_full_page = FALSE, $menu_file = NULL, $conf =
     /**
      * Css de la config.ini
      */
-    if ($module == "fta" or $module == "adminagis") {
+    if ($module == "fta" or $module == "adminagis" or $module == "lib") {
         echo "<style>
         body {background-color:" . $conf->getConf()->getCssBackgroundValue() . ";}
         .tableauFiche.table.td:hover   {background-color:" . $conf->getConf()->getCssBackgroundValue() . ";}

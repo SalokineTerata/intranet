@@ -16,6 +16,7 @@ class Html {
     const DEFAULT_HTML_IMAGE_LOADING = AttributesGlobal::DEFAULT_HTML_IMAGE_LOADING;
     const DEFAULT_HTML_IMAGE_OK = AttributesGlobal::DEFAULT_HTML_IMAGE_OK;
     const DEFAULT_HTML_IMAGE_UNDO = AttributesGlobal::DEFAULT_HTML_IMAGE_UNDO;
+    const DEFAULT_HTML_IMAGE_PIECE_JOINTE= AttributesGlobal::DEFAULT_HTML_IMAGE_PIECE_JOINTE;
     const DEFAULT_HTML_IMAGE_DEVERROUILLE_MODIFIABLE = AttributesGlobal::DEFAULT_HTML_IMAGE_DEVERROUILLE_MODIFIABLE;
     const DEFAULT_HTML_IMAGE_DEVERROUILLE_NON_MODIFIABLE = AttributesGlobal::DEFAULT_HTML_IMAGE_DEVERROUILLE_NON_MODIFIABLE;
     const DEFAULT_HTML_IMAGE_VERROUILLE_NON_MODIFIABLE = AttributesGlobal::DEFAULT_HTML_IMAGE_VERROUILLE_NON_MODIFIABLE;
@@ -208,6 +209,9 @@ class Html {
 
         $htmlObject = self::getHtmlObjectFromDataField($paramDataField);
         $htmlObject->setIsEditable($paramIsEditable);
+        $htmlObject->setHelp(IntranetColumnInfoModel::getFieldDesc($paramDataField->getTableName(), $paramDataField->getFieldName()
+                        , $paramDataField->getFieldLabel(), $htmlObject
+        ));
 
         return $htmlObject->getHtmlResult();
     }

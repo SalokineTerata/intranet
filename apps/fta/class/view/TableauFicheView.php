@@ -432,14 +432,14 @@ class TableauFicheView {
     }
 
     public static function getHmlLinkTransiter($paramIdFta, $paramIdFtaRole, $paramAbreviationFtaEtat, $paramCheckAccesButton
-    , $paramAccesTransitionButton, $paramSyntheseAction, $paramTauxRound,$paramTaille = NULL) {
+    , $paramAccesTransitionButton, $paramSyntheseAction, $paramTauxRound, $paramTaille = NULL, $paramName = NULL) {
         $return = "";
         if (
                 self::isUserRightsLinkTransiter($paramIdFtaRole, $paramAbreviationFtaEtat, $paramCheckAccesButton
                         , $paramAccesTransitionButton, $paramSyntheseAction, $paramTauxRound)
         ) {
-            
-            if(!$paramTaille){
+
+            if (!$paramTaille) {
                 $paramTaille = "30";
             }
             $return = '<a '
@@ -447,8 +447,9 @@ class TableauFicheView {
                     . '?id_fta=' . $paramIdFta
                     . '&id_fta_role=' . $paramIdFtaRole
                     . '&comeback=1'
-                    . '><img src=./images/transiter.png alt=\'\' title=\'Transiter\' width=\''.$paramTaille.'\' height=\''.$paramTaille.'\' border=\'0\' />'
-                    . '</a>'
+                    . '><img src=./images/transiter.png alt=\'\' title=\'Transiter\' width=\'' . $paramTaille . '\' height=\'' . $paramTaille . '\' border=\'0\' />'
+                    . $paramName . '</a>'
+
             ;
         }
         return $return;

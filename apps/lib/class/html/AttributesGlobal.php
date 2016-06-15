@@ -31,6 +31,7 @@ class AttributesGlobal extends StandardGlobalAttributes {
     const DEFAULT_HTML_IMAGE_NEXT = "<img src=../lib/images/next.png width=22  border=0 valign=middle halign=right />";
     const DEFAULT_HTML_IMAGE_OK = "<img src=../lib/images/bouton_valide.png width=22  border=0 valign=middle halign=right />";
     const DEFAULT_HTML_IMAGE_UNDO = "<img src=../lib/images/undo.png width=22  border=0 valign=middle halign=right />";
+    const DEFAULT_HTML_IMAGE_PIECE_JOINTE = "<img src=../lib/images/paper_clip.png width=22  border=0 valign=middle halign=right />";
     const DEFAULT_HTML_IMAGE_DEVERROUILLE_MODIFIABLE = "<img src=../lib/images/cadenas_ouvert_vert.png width=22  border=0 valign=middle halign=right title=\"Les Fta Secondaires ont ce champs déverrouillé.\" />";
     const DEFAULT_HTML_IMAGE_DEVERROUILLE_NON_MODIFIABLE = "<img src=../lib/images/deverrouille_non_modifiable.png width=22  border=0 valign=middle halign=right title=\"Ce champ est non-modifiable car la Fta est lié à un Code Article Primaire.\" />";
     const DEFAULT_HTML_IMAGE_VERROUILLE_NON_MODIFIABLE = "<img src=../lib/images/verrouille_non_modifiable.png width=22  border=0 valign=middle halign=right title=\"Ce champ est non-modifiable car la Fta est lié à un Code Article Primaire.\" />";

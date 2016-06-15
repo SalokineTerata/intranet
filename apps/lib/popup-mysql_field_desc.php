@@ -1,123 +1,102 @@
 <?php
 
-/*
-  Module d'appartenance (valeur obligatoire)
-  Par défaut, le nom du module est le répertoire courant
- */
-/*    $module=substr(strrchr(`pwd`, '/'), 1);
-  $module=trim($module);
- */
+/* * *******
+  Inclusions
+ * ******* */
 
-//Founi en URL
-//echo "TEST:".$_SERVER["QUERY_STRING"];
-
-/*
-  Si la page peut être appelée depuis n'importe quel module,
-  décommentez la ligne suivante
- */
-
-//   $module='';
-//Sélection du mode de visualisation de la page
-switch ($output) {
-
-    case 'visualiser':
-        //Inclusions
-        //include ("../lib/session.php");         //Récupération des variables de sessions
-        include ("../lib/functions.php");       //On inclus seulement les fonctions sans construire de page
-        include ("functions.php");              //Fonctions du module
-        echo "
-            <link rel=stylesheet type=text/css href=../lib/css/intra01.css />
-            <link rel=stylesheet type=text/css href=visualiser.css />
-       ";
-
-    //break;
-    case 'pdf':
-        break;
-
-    default:
-        //Inclusions
-        //include ("../lib/session.php");         //Récupération des variables de sessions
-        $module_save = $module;
-        require_once ("../lib/debut_page.php");      //Construction d'une nouvelle
-        $module = $module_save;
-        //include ("../lib/functions.php");       //On inclus seulement les fonctions sans construire de page
-        if (isset($menu)) {                       //Si existant, utilisation du menu demandé                                       //en variable
-            include ("./$menu");
-        } else {
-            //include ("./popup-mysql_field_desc-menu_principal.inc");    //Sinon, menu par défaut
-        }
-}//Fin de la sélection du mode d'affichage de la page
-
-/* * ***********
-  Début Code PHP
- * *********** */
-//echo $_REQUEST["id_intranet_description"];
-
-$id_intranet_description = Lib::getParameterFromRequest("id_intranet_description");    //Fourni par URL
+require_once '../inc/main.php';
+print_page_begin(TRUE, $menu_file);
 /*
   Initialisation des variables
  */
 $page_default = substr(strrchr($_SERVER["PHP_SELF"], '/'), '1', '-4');
-$page_action = $page_default . ".php"
-        . "?edit_allow=$edit_allow"
-        . "&id_intranet_description=$id_intranet_description"
-        . "&module=$module"
-        . "&champ_intranet_description=$champ_intranet_description"
-        . "&nom_intranet_actions=$nom_intranet_actions"
-        . "&disable_full_page=1"
-;
+$page_action = $page_default . "_post.php";
 $page_pdf = $page_default . "_pdf.php";
-//$action = '';                              //Action proposée à la page _post.php
-$method = 'POST';                          //Pour une url > 2000 caractères, ne pas utiliser utiliser GET
+$method = 'POST';
 $html_table = "table "                     //Permet d'harmoniser les tableaux
         . "border=1 "
         . "width=100% "
-        . "class=contenu "
-;
-$edit_mode;                                //Si =1, alors mode edition de l'aide en ligne
-$edit_allow = $GLOBALS{$module . "_" . $nom_intranet_actions};   //L'utilisateur a-t-il la permission de modifier le manuel ?
-$table_intranet_column = "intranet_column_info";
+        . "class=contenu ";
 
-require_once ("./popup-mysql_field_desc-menu_principal.inc");
-if ($action == "record") {
-    $id_intranet_description;
-    $explication_intranet_description = Lib::getParameterFromRequest("explication_intranet_description");
-    $request = "UPDATE $table_intranet_column "
-            . "SET `explication_intranet_column_info`='" . $explication_intranet_description . "' "
-            . "WHERE `id_intranet_column_info`='" . $id_intranet_description . "' ";
-    DatabaseOperation::query($request);
-    $action = '';
-}
+/*
+  Récupération des données MySQL
+ */
+$idIntranetColumnInfo = Lib::getParameterFromRequest(IntranetColumnInfoModel::KEYNAME);    //Fourni par URL
+$edit_mode = Lib::getParameterFromRequest('edit_mode');
+$action = Lib::getParameterFromRequest('action');
+//Récupération des droits d'accès necessaire
+$fta_consultation = Acl::getValueAccesRights('fta_consultation');
+$fta_modification = Acl::getValueAccesRights('fta_modification');
+$owner = IntranetColumnInfoModel::getOwner();
+$QUERY_STRING = $_SERVER['QUERY_STRING'];
+/**
+ * Initilisation
+ */
+$intranetColumInfoModel = new IntranetColumnInfoModel($idIntranetColumnInfo);
+$explication_intranet_description = $intranetColumInfoModel->getDataField(IntranetColumnInfoModel::FIELDNAME_EXPLICATION_INTRANET_COLUMN_INFO)->getFieldValue();
+$nom_table = $intranetColumInfoModel->getDataField(IntranetColumnInfoModel::FIELDNAME_TABLE_NAME_INTRANET_COLUMN_INFO)->getFieldValue();
+$nom_variable = $intranetColumInfoModel->getDataField(IntranetColumnInfoModel::FIELDNAME_COLUMN_NAME_INTRANET_COLUMN_INO)->getFieldValue();
+$fichier = $intranetColumInfoModel->getDataField(IntranetColumnInfoModel::FIELDNAME_UPLOAD_NAME_FILE)->getFieldValue();
+$title = DatabaseDescription::getFieldDocLabel($nom_table, $nom_variable);
+
+
+
+//L'utilisateur a-t-il la permission de modifier le manuel ?
 if ($edit_mode) {
 
     $action = 'record';
 }
-/*
-  Récupération des données MySQL
+
+/**
+ * Affichage de la description
  */
-//   Exemple: mysql_table_load('nom_de_ma_table');
-//echo   $GLOBALS{$module."_".$nom_intranet_actions};
+$htmlTexArea = new HtmlTextArea();
+$htmlTexArea->setTextAreaContent($explication_intranet_description);
+$htmlTexArea->setHtmlRenderToTable();
+$content = $htmlTexArea->getHtmlResult();
+$image_modif = " <$html_table>
+               <tr class=titre_principal>
+                <td>        
+                <span > <a href=upload/" . $fichier . " onclick=\"window.open(this.href); return false;\" >" . $fichier . "</a></span>
+                </tr> 
+              </table>";
 
-$id_intranet_column_info = $id_intranet_description;
-$request = "SELECT * FROM $table_intranet_column "
-        . "WHERE `id_intranet_column_info`='" . $id_intranet_description . "' ";
-$result = DatabaseOperation::query($request);
-$explication_intranet_description = mysql_result($result, 0,  "explication_intranet_column_info");
-$nom_table = mysql_result($result, 0, "table_name_intranet_column_info");
-$nom_variable = mysql_result($result, 0, "column_name_intranet_column_info");
-$show_help = 0;
-$title = DatabaseDescription::getColumnLabel($nom_table, $nom_variable);
-
-$content = html_view_txt($explication_intranet_description);
 $bouton_record = "";
+
+/**
+ * Modification de la description
+ */
 if ($edit_mode) {
     $bouton_record = "<tr><td>
                    <center>
                    <input type=submit value='Enregistrer'>
                    </center>
                    ";
-    $content = "<textarea name=explication_intranet_description rows=24 cols=57>$explication_intranet_description</textarea>";
+    $htmlTexArea->setIsEditable(TRUE);
+    $htmlTexArea->initObject(IntranetColumnInfoModel::FIELDNAME_EXPLICATION_INTRANET_COLUMN_INFO, NULL
+            , $htmlTexArea->getTextAreaContent(), NULL
+            , NULL, NULL
+    );
+    $content = $htmlTexArea->getHtmlResult();
+
+    $image_modif = "<form method=POST action=upload.php enctype=multipart/form-data>	
+              <$html_table>
+               <tr class=titre_principal>
+                <td>        
+                <span > <a href=upload/" . $fichier . " onclick=\"window.open(this.href); return false;\" >" . $fichier . "</a></span>
+                </td>
+                <td>
+                <!-- On limite le fichier à 100Ko -->
+                <input type=hidden name=MAX_FILE_SIZE value=100000>
+                <input type=hidden name=id_intranet_column_info value=$idIntranetColumnInfo>
+                Fichier : <input type=file name=avatar >
+                <input type=submit name=envoyer value=\"Envoyer le fichier\" >
+             </td></tr> 
+              </table>
+            </form>";
 }
+
+
 
 
 /*
@@ -169,17 +148,36 @@ switch ($output) {
 
 
 
-    /****************
+    /*     * **************
       Début Code HTML
      * ************ */
     default:
+        //Construction de la page des tables annexes
+
+        echo "<$html_table>";
+        echo "<tr class=\"contenu\">";
+
+        /*
+          Menu accessible pour les utilisateurs ayant les droits
+          en modifications sur ce module
+         */
+        if ($fta_modification AND $owner) {
+            //Exemple d'un menu
+            echo "<td align=\"right\">";
+            echo "<a href=popup-mysql_field_desc.php?$QUERY_STRING&edit_mode=1><img src=\"../lib/images/stylo.jpeg\" width=\"30\" height=\"45\" border=\"0\" alt=\"\" /><br>Editer</a>";
+            echo "</td>";
+        }
+        echo "</tr></table>";
+
+//Génération du cadre de droite contenant la page .php
+        echo "<td width=100%>";
 
         echo "
              <form method=$method action=$page_action>
              <input type=hidden name=explication_intranet_description; value=$explication_intranet_description;>
              <input type=hidden name=table_intranet_description value=$table_intranet_description>
-             <input type=hidden name=$champ_intranet_description value=$champ_intranet_description>
-             <input type=hidden name=id_intranet_description value=$id_intranet_description>
+             <input type=hidden name=champ_intranet_description value=$nom_variable>
+             <input type=hidden name=id_intranet_column_info value=$idIntranetColumnInfo>
              <input type=hidden name=module value=$module>
              <input type=hidden name=action value=$action>
              <!input type=hidden name=edit_mode value=$edit_mode>
@@ -190,11 +188,9 @@ switch ($output) {
                  $title 
 
              </td></tr>
-             <tr><td>
-                 <br><br>
+             <tr>
                  $content
-                 <br><br>
-             </td></tr>
+                </tr>
             <tr><td align=right>
 
                 <i><small>$nom_table.$nom_variable</small></i>
@@ -207,6 +203,7 @@ switch ($output) {
              </table>
 
              </form>
+              $image_modif
              ";
 
 

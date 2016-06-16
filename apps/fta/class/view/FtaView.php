@@ -466,6 +466,15 @@ class FtaView extends AbstractView {
                 , $eanArticleDataField->getLinkFieldLock()
         );
         $eanArticle->getEventsForm()->setOnChangeWithAjaxAutoSave(FtaModel::TABLENAME, FtaModel::KEYNAME, $id_fta, FtaModel::FIELDNAME_EAN_UVC);
+
+        /**
+         * Description d'un champ
+         */
+        $eanArticle->setHelp(IntranetColumnInfoModel::getFieldDesc($eanArticleDataField->getTableName(), $eanArticleDataField->getFieldName()
+                        , $eanArticleDataField->getFieldLabel(), $eanArticle
+        ));
+
+
         return $eanArticle->getHtmlResult();
     }
 
@@ -547,6 +556,16 @@ class FtaView extends AbstractView {
                 , $dataFieldEanColis->getDataWarningMessage()
         );
         $eanColis->getEventsForm()->setOnChangeWithAjaxAutoSave(FtaModel::TABLENAME, FtaModel::KEYNAME, $id_fta, FtaModel::FIELDNAME_EAN_COLIS);
+
+        /**
+         * Description d'un champ
+         */
+        $eanColis->setHelp(IntranetColumnInfoModel::getFieldDesc($dataFieldEanColis->getTableName(), $dataFieldEanColis->getFieldName()
+                        , $dataFieldEanColis->getFieldLabel(), $eanColis
+        ));
+
+
+
         return $eanColis->getHtmlResult();
     }
 
@@ -590,6 +609,13 @@ class FtaView extends AbstractView {
                 , $dataFieldEanPalette->getDataWarningMessage()
         );
         $eanPalette->getEventsForm()->setOnChangeWithAjaxAutoSave(FtaModel::TABLENAME, FtaModel::KEYNAME, $id_fta, FtaModel::FIELDNAME_EAN_PALETTE);
+        /**
+         * Description d'un champ
+         */
+        $eanPalette->setHelp(IntranetColumnInfoModel::getFieldDesc($dataFieldEanPalette->getTableName(), $dataFieldEanPalette->getFieldName()
+                        , $dataFieldEanPalette->getFieldLabel(), $eanPalette
+        ));
+
         return $eanPalette->getHtmlResult();
     }
 
@@ -677,6 +703,13 @@ class FtaView extends AbstractView {
         ;
         $htmlObjectVerrouillageEtiquette->getEventsForm()->setCallbackJavaScriptFunctionOnChangeParameters($callbackJavaScriptFunctionOnChangeParameters);
 
+        /**
+         * Description d'un champ
+         */
+        $htmlObjectVerrouillageEtiquette->setHelp(IntranetColumnInfoModel::getFieldDesc($dataFieldVerrouillageLibelleEtiquette->getTableName(), $dataFieldVerrouillageLibelleEtiquette->getFieldName()
+                        , $dataFieldVerrouillageLibelleEtiquette->getFieldLabel(), $htmlObjectVerrouillageEtiquette
+        ));
+
         $htmlReturn.=$htmlObjectVerrouillageEtiquette->getHtmlResult();
 
         $htmlObjectEtiquetteColis->setIsEditable($isEditableLibelleColis);
@@ -701,6 +734,14 @@ class FtaView extends AbstractView {
              */
             $htmlObjectEtiquetteColis->getStyleCSS()->setDisplayToNone();
         }
+
+        /**
+         * Description d'un champ
+         */
+        $htmlObjectEtiquetteColis->setHelp(IntranetColumnInfoModel::getFieldDesc($dataFieldLibelleColis->getTableName(), $dataFieldLibelleColis->getFieldName()
+                        , $dataFieldLibelleColis->getFieldLabel(), $htmlObjectEtiquetteColis
+        ));
+
         $htmlReturn.=$htmlObjectEtiquetteColis->getHtmlResult();
         return $htmlReturn;
     }
@@ -740,6 +781,14 @@ class FtaView extends AbstractView {
         ;
         $htmlObjectIsDureeDeVieCalculate->getEventsForm()->setCallbackJavaScriptFunctionOnChangeParameters($callbackJavaScriptFunctionOnChangeParameters);
 
+        /**
+         * Description d'un champ
+         */
+        $htmlObjectIsDureeDeVieCalculate->setHelp(IntranetColumnInfoModel::getFieldDesc($dataIsDureeDeVieCalculate->getTableName(), $dataIsDureeDeVieCalculate->getFieldName()
+                        , $dataIsDureeDeVieCalculate->getFieldLabel(), $htmlObjectIsDureeDeVieCalculate
+        ));
+
+
         $htmlReturn.=$htmlObjectIsDureeDeVieCalculate->getHtmlResult();
 
         // durée de vie garantie client
@@ -772,6 +821,14 @@ class FtaView extends AbstractView {
              */
             $htmlObjectDureeDeVieClient->getAttributes()->getDisabled()->setFalse();
         }
+
+
+        /**
+         * Description d'un champ
+         */
+        $htmlObjectDureeDeVieClient->setHelp(IntranetColumnInfoModel::getFieldDesc($dataIsDureeDeVie->getTableName(), $dataIsDureeDeVie->getFieldName()
+                        , $dataIsDureeDeVie->getFieldLabel(), $htmlObjectDureeDeVieClient
+        ));
         $htmlReturn.=$htmlObjectDureeDeVieClient->getHtmlResult() . $message;
         return $htmlReturn;
     }
@@ -1232,7 +1289,8 @@ class FtaView extends AbstractView {
          */
         $isEditable = FtaVerrouillageChampsModel::isEditableLockField($isFieldLock, $paramIsEditable);
 
-
+            $etiquetteCodesoftDataField = $this->getModel()->getDataField(FtaModel::FIELDNAME_ETIQUETTE_CODESOFT);
+        
         $HtmlList->getAttributes()->getName()->setValue(FtaModel::FIELDNAME_ETIQUETTE_CODESOFT);
         $HtmlList->setLabel(DatabaseDescription::getFieldDocLabel(FtaModel::TABLENAME, FtaModel::FIELDNAME_ETIQUETTE_CODESOFT));
         $HtmlList->setIsEditable($isEditable);
@@ -1240,7 +1298,7 @@ class FtaView extends AbstractView {
                 $HtmlTableName
                 , $HtmlList->getLabel()
                 , $paramEtiqetteCodesoft
-                , $this->getModel()->getDataField(FtaModel::FIELDNAME_ETIQUETTE_CODESOFT)->isFieldDiff()
+                , $etiquetteCodesoftDataField->isFieldDiff()
                 , $HtmlList->getArrayListContent()
                 , NULL
                 , NULL
@@ -1248,6 +1306,15 @@ class FtaView extends AbstractView {
                 , $linkFieldLock
         );
         $HtmlList->getEventsForm()->setOnChangeWithAjaxAutoSave(FtaModel::TABLENAME, FtaModel::KEYNAME, $this->getModel()->getKeyValue(), FtaModel::FIELDNAME_ETIQUETTE_CODESOFT);
+
+        /**
+         * Description d'un champ
+         */
+        $HtmlList->setHelp(IntranetColumnInfoModel::getFieldDesc($etiquetteCodesoftDataField->getTableName(), $etiquetteCodesoftDataField->getFieldName()
+                        , $etiquetteCodesoftDataField->getFieldLabel(), $HtmlList
+        ));
+
+
         $listeCodesoftEtiquettes = $HtmlList->getHtmlResult();
 
         return $listeCodesoftEtiquettes;

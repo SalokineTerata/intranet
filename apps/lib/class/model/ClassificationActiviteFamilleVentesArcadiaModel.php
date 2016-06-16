@@ -334,6 +334,14 @@ class ClassificationActiviteFamilleVentesArcadiaModel extends AbstractModel {
         );
         $htmlList->getEventsForm()->setOnChangeWithAjaxAutoSave(FtaModel::TABLENAME, FtaModel::KEYNAME, $paramFtaModel->getKeyValue(), FtaModel::FIELDNAME_ID_ARCADIA_FAMILLE_VENTE);
 
+        
+         /**
+         * Description d'un champ
+         */
+        $htmlList->setHelp(IntranetColumnInfoModel::getFieldDesc($dataFieldIdArcadiaFamilleVente->getTableName(), $dataFieldIdArcadiaFamilleVente->getFieldName()
+                        , $dataFieldIdArcadiaFamilleVente->getFieldLabel(), $htmlList
+        ));
+        
         $listeClassificationRaccourcis = $htmlList->getHtmlResult();
 
         return $listeClassificationRaccourcis;

@@ -336,6 +336,14 @@ class ClassificationMarqueArcadiaModel extends AbstractModel {
         );
         $htmlList->getEventsForm()->setOnChangeWithAjaxAutoSave(FtaModel::TABLENAME, FtaModel::KEYNAME, $paramFtaModel->getKeyValue(), FtaModel::FIELDNAME_ID_ARCADIA_MARQUE);
 
+         /**
+         * Description d'un champ
+         */
+        $htmlList->setHelp(IntranetColumnInfoModel::getFieldDesc($dataFieldIdArcadiaMarque->getTableName(), $dataFieldIdArcadiaMarque->getFieldName()
+                        , $dataFieldIdArcadiaMarque->getFieldLabel(), $htmlList
+        ));
+
+        
         $listeClassificationRaccourcis = $htmlList->getHtmlResult();
 
         return $listeClassificationRaccourcis;

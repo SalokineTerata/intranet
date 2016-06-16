@@ -351,7 +351,7 @@ class Chapitre {
                 break;
             default:
             case 'emballage':
-                self::$html_chapitre_emballage = self::buildChapitreEmballage();
+                self::$html_chapitre_emballage = self::buildChapitreEmballagePrimaire();
                 $return = self::$html_chapitre_emballage;
                 break;
             default:
@@ -957,7 +957,7 @@ class Chapitre {
         return $bloc;
     }
 
-    public static function buildChapitreEmballage() {
+    public static function buildChapitreEmballagePrimaire() {
 
         $bloc = '';
         $id_fta = self::$id_fta;

@@ -217,6 +217,8 @@ class FtaComposantView extends AbstractView {
          * Affectation de la modification d'un champ ou non
          */
         $isEditable = FtaVerrouillageChampsModel::isEditableLockField($isFieldLock, $this->getIsEditable());
+        
+       $codePSFDataField= $this->getFtaComposantModel()->getDataField(FtaComposantModel::FIELDNAME_CODE_PRODUIT_AGROLOGIC_FTA_NOMENCLATURE);
 
         $codePSF->setLabel(DatabaseDescription::getFieldDocLabel(FtaComposantModel::TABLENAME, FtaComposantModel::FIELDNAME_CODE_PRODUIT_AGROLOGIC_FTA_NOMENCLATURE));
         $codePSF->getAttributes()->getValue()->setValue($codePSFValue);
@@ -227,13 +229,21 @@ class FtaComposantView extends AbstractView {
                 $HtmlTableName
                 , $codePSF->getLabel()
                 , $codePSFValue
-                , $this->getFtaComposantModel()->getDataField(FtaComposantModel::FIELDNAME_CODE_PRODUIT_AGROLOGIC_FTA_NOMENCLATURE)->isFieldDiff()
+                , $codePSFDataField->isFieldDiff()
                 , NULL
                 , NULL
                 , $isFieldLock
                 , $linkFieldLock
         );
         $codePSF->getEventsForm()->setOnChangeWithAjaxAutoSave(FtaComposantModel::TABLENAME, FtaComposantModel::KEYNAME, $id_fta_composant, FtaComposantModel::FIELDNAME_CODE_PRODUIT_AGROLOGIC_FTA_NOMENCLATURE);
+
+        /**
+         * Description d'un champ
+         */
+        $codePSF->setHelp(IntranetColumnInfoModel::getFieldDesc($codePSFDataField->getTableName(), $codePSFDataField->getFieldName()
+                        , $codePSFDataField->getFieldLabel(), $codePSF
+        ));
+
         return $codePSF->getHtmlResult();
     }
 
@@ -290,6 +300,8 @@ class FtaComposantView extends AbstractView {
                 . '_'
                 . $id_fta_composant
         ;
+        $codePSFDataField =$this->getFtaComposantModel()->getDataField(FtaComposantModel::FIELDNAME_CODE_PRODUIT_AGROLOGIC_FTA_NOMENCLATURE);
+        
         $codePSF->setLabel(DatabaseDescription::getFieldDocLabel(FtaComposantModel::TABLENAME, FtaComposantModel::FIELDNAME_CODE_PRODUIT_AGROLOGIC_FTA_NOMENCLATURE));
         $codePSF->getAttributes()->getValue()->setValue($completeCode);
         $codePSF->getAttributes()->getPattern()->setValue("[0-9]{1,6}");
@@ -299,9 +311,17 @@ class FtaComposantView extends AbstractView {
                 $HtmlTableName
                 , $codePSF->getLabel()
                 , $completeCode
-                , $this->getFtaComposantModel()->getDataField(FtaComposantModel::FIELDNAME_CODE_PRODUIT_AGROLOGIC_FTA_NOMENCLATURE)->isFieldDiff()
+                , $codePSFDataField->isFieldDiff()
         );
         $codePSF->getEventsForm()->setOnChangeWithAjaxAutoSave(FtaComposantModel::TABLENAME, FtaComposantModel::KEYNAME, $id_fta_composant, FtaComposantModel::FIELDNAME_CODE_PRODUIT_AGROLOGIC_FTA_NOMENCLATURE);
+       
+        /**
+         * Description d'un champ
+         */
+        $codePSF->setHelp(IntranetColumnInfoModel::getFieldDesc($codePSFDataField->getTableName(), $codePSFDataField->getFieldName()
+                        , $codePSFDataField->getFieldLabel(), $codePSF
+        ));
+        
         return $codePSF->getHtmlResult();
     }
 

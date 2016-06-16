@@ -240,6 +240,7 @@ class ClassificationRaccourcisAssociationModel extends AbstractModel {
             $paramFtaModel->setDataValidationSuccessfulToFalse();
         }
 
+
         $htmlList->setSelectedValue($dataFieldIdClassificationRaccourcis->getFieldValue());
         $htmlList->getAttributes()->getName()->setValue(FtaModel::FIELDNAME_ID_CLASSIFICATION_RACCOURCIS);
         $htmlList->setLabel(DatabaseDescription::getFieldDocLabel(ClassificationRaccourcisAssociationModel::TABLENAME, ClassificationRaccourcisAssociationModel::FIELDNAME_ID_CLASSIFICATION_RACCOURCIS));
@@ -254,6 +255,13 @@ class ClassificationRaccourcisAssociationModel extends AbstractModel {
                 , $htmlList->getWarningMessage()
         );
         $htmlList->getEventsForm()->setOnChangeWithAjaxAutoSave(FtaModel::TABLENAME, FtaModel::KEYNAME, $paramFtaModel->getKeyValue(), FtaModel::FIELDNAME_ID_CLASSIFICATION_RACCOURCIS);
+
+        /**
+         * Description d'un champ
+         */
+        $htmlList->setHelp(IntranetColumnInfoModel::getFieldDesc($dataFieldIdClassificationRaccourcis->getTableName(), $dataFieldIdClassificationRaccourcis->getFieldName()
+                        , $dataFieldIdClassificationRaccourcis->getFieldLabel(), $htmlList
+        ));
 
         $listeClassificationRaccourcis = $htmlList->getHtmlResult();
 

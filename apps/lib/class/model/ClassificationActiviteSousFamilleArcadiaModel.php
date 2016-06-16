@@ -337,6 +337,13 @@ class ClassificationActiviteSousFamilleArcadiaModel extends AbstractModel {
         );
         $htmlList->getEventsForm()->setOnChangeWithAjaxAutoSave(FtaModel::TABLENAME, FtaModel::KEYNAME, $paramFtaModel->getKeyValue(), FtaModel::FIELDNAME_ID_ARCADIA_SOUS_FAMILLE);
 
+        /**
+         * Description d'un champ
+         */
+        $htmlList->setHelp(IntranetColumnInfoModel::getFieldDesc($dataFieldIdArcadiaSousFamille->getTableName(), $dataFieldIdArcadiaSousFamille->getFieldName()
+                        , $dataFieldIdArcadiaSousFamille->getFieldLabel(), $htmlList
+        ));
+
         $listeClassificationSousFamilleArcadia = $htmlList->getHtmlResult();
 
         return $listeClassificationSousFamilleArcadia;

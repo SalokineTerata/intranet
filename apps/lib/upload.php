@@ -4,7 +4,7 @@
 require_once '../inc/main.php';
 $idIntranetColumnInfo = Lib::getParameterFromRequest(IntranetColumnInfoModel::KEYNAME);
 $retour = "<br><a href=popup-mysql_field_desc.php?id_intranet_column_info=" . $idIntranetColumnInfo . "&edit_mode=1 >Retour</a>";
-$dossier = 'upload/';
+$dossier = ModuleConfigLib::CHEMIN_ACCES_UPLOAD;
 $fichier = basename($_FILES['avatar']['name']);
 
 

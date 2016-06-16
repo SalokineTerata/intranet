@@ -393,7 +393,7 @@ class FtaModel extends AbstractModel {
          * Liste des Contrôles 
          */
 //        if ($paramIdFtaChapitre == FtaChapitreModel::ID_CHAPITRE_IDENTITE) {
-            $return += $this->checkDataValidationClassification();
+        $return += $this->checkDataValidationClassification();
 //        }
         /**
          * Si la Fta est un création (v0) alors la date d'échéance est obligatoire
@@ -1480,14 +1480,16 @@ class FtaModel extends AbstractModel {
          */
         $isEditable = FtaVerrouillageChampsModel::isEditableLockField($isFieldLock, $this->getIsEditable());
 
+        $gestionEtiquetteRectoDataField = $this->getDataField(FtaModel::FIELDNAME_GESTION_ETIQUETTE_RECTO);
+
         $HtmlList->getAttributes()->getName()->setValue(FtaModel::FIELDNAME_GESTION_ETIQUETTE_RECTO);
         $HtmlList->setLabel(DatabaseDescription::getFieldDocLabel(FtaModel::TABLENAME, FtaModel::FIELDNAME_GESTION_ETIQUETTE_RECTO));
         $HtmlList->setIsEditable($isEditable);
         $HtmlList->initAbstractHtmlSelect(
                 $HtmlTableName
                 , $HtmlList->getLabel()
-                , $this->getDataField(FtaModel::FIELDNAME_GESTION_ETIQUETTE_RECTO)->getFieldValue()
-                , $this->getDataField(FtaModel::FIELDNAME_GESTION_ETIQUETTE_RECTO)->isFieldDiff()
+                , $gestionEtiquetteRectoDataField->getFieldValue()
+                , $gestionEtiquetteRectoDataField->isFieldDiff()
                 , $HtmlList->getArrayListContent()
                 , NULL
                 , NULL
@@ -1500,6 +1502,14 @@ class FtaModel extends AbstractModel {
                 , $this->getKeyValue()
                 , FtaModel::FIELDNAME_GESTION_ETIQUETTE_RECTO
         );
+
+        /**
+         * Description d'un champ
+         */
+        $HtmlList->setHelp(IntranetColumnInfoModel::getFieldDesc($gestionEtiquetteRectoDataField->getTableName(), $gestionEtiquetteRectoDataField->getFieldName()
+                        , $gestionEtiquetteRectoDataField->getFieldLabel(), $HtmlList
+        ));
+
         $listeCodesoftEtiquettes = $HtmlList->getHtmlResult();
 
         return $listeCodesoftEtiquettes;
@@ -1560,14 +1570,16 @@ class FtaModel extends AbstractModel {
          */
         $isEditable = FtaVerrouillageChampsModel::isEditableLockField($isFieldLock, $this->getIsEditable());
 
+        $gestionEtiquetteVersoDataField = $this->getDataField(FtaModel::FIELDNAME_GESTION_ETIQUETTE_VERSO);
+
         $HtmlList->getAttributes()->getName()->setValue(FtaModel::FIELDNAME_GESTION_ETIQUETTE_VERSO);
         $HtmlList->setLabel(DatabaseDescription::getFieldDocLabel(FtaModel::TABLENAME, FtaModel::FIELDNAME_GESTION_ETIQUETTE_VERSO));
         $HtmlList->setIsEditable($isEditable);
         $HtmlList->initAbstractHtmlSelect(
                 $HtmlTableName
                 , $HtmlList->getLabel()
-                , $this->getDataField(FtaModel::FIELDNAME_GESTION_ETIQUETTE_VERSO)->getFieldValue()
-                , $this->getDataField(FtaModel::FIELDNAME_GESTION_ETIQUETTE_VERSO)->isFieldDiff()
+                , $gestionEtiquetteVersoDataField->getFieldValue()
+                , $gestionEtiquetteVersoDataField->isFieldDiff()
                 , $HtmlList->getArrayListContent()
                 , NULL
                 , NULL
@@ -1580,6 +1592,15 @@ class FtaModel extends AbstractModel {
                 , $this->getKeyValue()
                 , FtaModel::FIELDNAME_GESTION_ETIQUETTE_VERSO
         );
+
+        /**
+         * Description d'un champ
+         */
+        $HtmlList->setHelp(IntranetColumnInfoModel::getFieldDesc($gestionEtiquetteVersoDataField->getTableName(), $gestionEtiquetteVersoDataField->getFieldName()
+                        , $gestionEtiquetteVersoDataField->getFieldLabel(), $HtmlList
+        ));
+
+
         $listeCodesoftEtiquettes = $HtmlList->getHtmlResult();
 
         return $listeCodesoftEtiquettes;
@@ -2333,6 +2354,14 @@ class FtaModel extends AbstractModel {
                 , $dataFieldSiteDeProduction->getIsFieldLock()
                 , $dataFieldSiteDeProduction->getLinkFieldLock());
         $paramHtmlObjet->getEventsForm()->setOnChangeWithAjaxAutoSave(FtaModel::TABLENAME, FtaModel::KEYNAME, $this->getKeyValue(), FtaModel::FIELDNAME_SITE_PRODUCTION);
+
+        /**
+         * Description d'un champ
+         */
+        $paramHtmlObjet->setHelp(IntranetColumnInfoModel::getFieldDesc($dataFieldSiteDeProduction->getTableName(), $dataFieldSiteDeProduction->getFieldName()
+                        , $dataFieldSiteDeProduction->getFieldLabel(), $paramHtmlObjet
+        ));
+
         $listeSiteProduction = $paramHtmlObjet->getHtmlResult();
 
         return $listeSiteProduction;

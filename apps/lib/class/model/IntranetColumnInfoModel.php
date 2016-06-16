@@ -51,6 +51,11 @@ class IntranetColumnInfoModel extends AbstractModel {
      */
     function suppressionFile() {
 
+        $link = ModuleConfigLib::CHEMIN_ACCES_UPLOAD . $this->getDataField(self::FIELDNAME_UPLOAD_NAME_FILE)->getFieldValue();
+        if (file_exists($link)) {
+            unlink($link);
+        }
+
         DatabaseOperation::execute(
                 ' UPDATE ' . self::TABLENAME . ' SET ' . self::FIELDNAME_UPLOAD_NAME_FILE . '=\'\''
                 . ' WHERE ' . self::KEYNAME . '=' . $this->getKeyValue()
@@ -132,7 +137,7 @@ class IntranetColumnInfoModel extends AbstractModel {
         }
         if ($file) {
             $paperClipLink = Html::DEFAULT_HTML_IMAGE_PIECE_JOINTE;
-            $paramHtmlObject->setShowImage("<div align=right width=25% ><a href=../lib/upload/" . $file . " onclick=\"window.open(this.href); return false;\" >" . $paperClipLink . "</a>");
+            $paramHtmlObject->setShowImage("<div align=right width=25% ><a href=" . ModuleConfigLib::CHEMIN_ACCES_UPLOAD . $file . " onclick=\"window.open(this.href); return false;\" >" . $paperClipLink . "</a>");
         }
 
         $paramHtmlObject->setShowHelp($show_help);

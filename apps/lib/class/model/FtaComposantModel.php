@@ -650,7 +650,16 @@ class FtaComposantModel extends AbstractModel {
                 , FtaComposantModel::KEYNAME
                 , $this->getKeyValue()
                 , $paramLabelSiteDeProduction);
+        /**
+         * Description d'un champ
+         */
+        $paramObjet->setHelp(IntranetColumnInfoModel::getFieldDesc($labelSiteDeProductionDataField->getTableName(), $labelSiteDeProductionDataField->getFieldName()
+                        , $labelSiteDeProductionDataField->getFieldLabel(), $paramObjet
+        ));
+
+
         $listeSiteProduction = $paramObjet->getHtmlResult();
+
 
         return $listeSiteProduction;
     }
@@ -697,14 +706,16 @@ class FtaComposantModel extends AbstractModel {
                 . '_'
                 . $this->getKeyValue()
         ;
+        $etiquetteRecto = $this->getDataField(FtaComposantModel::FIELDNAME_K_ETIQUETTE_FTA_COMPOSITION);
+
         $HtmlList->getAttributes()->getName()->setValue(FtaComposantModel::FIELDNAME_K_ETIQUETTE_FTA_COMPOSITION);
         $HtmlList->setLabel(DatabaseDescription::getFieldDocLabel(FtaComposantModel::TABLENAME, FtaComposantModel::FIELDNAME_K_ETIQUETTE_FTA_COMPOSITION));
         $HtmlList->setIsEditable($paramIsEditable);
         $HtmlList->initAbstractHtmlSelect(
                 $HtmlTableName
                 , $HtmlList->getLabel()
-                , $this->getDataField(FtaComposantModel::FIELDNAME_K_ETIQUETTE_FTA_COMPOSITION)->getFieldValue()
-                , $this->getDataField(FtaComposantModel::FIELDNAME_K_ETIQUETTE_FTA_COMPOSITION)->isFieldDiff()
+                , $etiquetteRecto->getFieldValue()
+                , $etiquetteRecto->isFieldDiff()
                 , $HtmlList->getArrayListContent());
         $HtmlList->getEventsForm()->setOnChangeWithAjaxAutoSave(
                 FtaComposantModel::TABLENAME
@@ -712,6 +723,14 @@ class FtaComposantModel extends AbstractModel {
                 , $this->getKeyValue()
                 , FtaComposantModel::FIELDNAME_K_ETIQUETTE_FTA_COMPOSITION
         );
+
+        /**
+         * Description d'un champ
+         */
+        $HtmlList->setHelp(IntranetColumnInfoModel::getFieldDesc($etiquetteRecto->getTableName(), $etiquetteRecto->getFieldName()
+                        , $etiquetteRecto->getFieldLabel(), $HtmlList
+        ));
+
         $listeCodesoftEtiquettes = $HtmlList->getHtmlResult();
 
         return $listeCodesoftEtiquettes;
@@ -758,20 +777,31 @@ class FtaComposantModel extends AbstractModel {
                 . '_'
                 . $this->getKeyValue()
         ;
+
+        $etiquetteVerso = $this->getDataField(FtaComposantModel::FIELDNAME_K_ETIQUETTE_VERSO_FTA_COMPOSITION);
+
         $HtmlList->getAttributes()->getName()->setValue(FtaComposantModel::FIELDNAME_K_ETIQUETTE_VERSO_FTA_COMPOSITION);
         $HtmlList->setLabel(DatabaseDescription::getFieldDocLabel(FtaComposantModel::TABLENAME, FtaComposantModel::FIELDNAME_K_ETIQUETTE_VERSO_FTA_COMPOSITION));
         $HtmlList->setIsEditable($paramIsEditable);
         $HtmlList->initAbstractHtmlSelect(
                 $HtmlTableName
                 , $HtmlList->getLabel()
-                , $this->getDataField(FtaComposantModel::FIELDNAME_K_ETIQUETTE_VERSO_FTA_COMPOSITION)->getFieldValue()
-                , $this->getDataField(FtaComposantModel::FIELDNAME_K_ETIQUETTE_VERSO_FTA_COMPOSITION)->isFieldDiff()
+                , $etiquetteVerso->getFieldValue()
+                , $etiquetteVerso->isFieldDiff()
                 , $HtmlList->getArrayListContent());
         $HtmlList->getEventsForm()->setOnChangeWithAjaxAutoSave(
                 FtaComposantModel::TABLENAME
                 , FtaComposantModel::KEYNAME
                 , $this->getKeyValue()
                 , FtaComposantModel::FIELDNAME_K_ETIQUETTE_VERSO_FTA_COMPOSITION);
+
+        /**
+         * Description d'un champ
+         */
+        $HtmlList->setHelp(IntranetColumnInfoModel::getFieldDesc($etiquetteVerso->getTableName(), $etiquetteVerso->getFieldName()
+                        , $etiquetteVerso->getFieldLabel(), $HtmlList
+        ));
+
         $listeCodesoftEtiquettes = $HtmlList->getHtmlResult();
 
         return $listeCodesoftEtiquettes;
@@ -807,20 +837,33 @@ class FtaComposantModel extends AbstractModel {
                 . '_'
                 . $this->getKeyValue()
         ;
+
+        $modeEtiquetteDataField = $this->getDataField(FtaComposantModel::FIELDNAME_MODE_ETIQUETTE_FTA_COMPOSITION);
+
+
         $HtmlList->getAttributes()->getName()->setValue(FtaComposantModel::FIELDNAME_MODE_ETIQUETTE_FTA_COMPOSITION);
         $HtmlList->setLabel(DatabaseDescription::getFieldDocLabel(FtaComposantModel::TABLENAME, FtaComposantModel::FIELDNAME_MODE_ETIQUETTE_FTA_COMPOSITION));
         $HtmlList->setIsEditable($paramIsEditable);
         $HtmlList->initAbstractHtmlSelect(
                 $HtmlTableName
                 , $HtmlList->getLabel()
-                , $this->getDataField(FtaComposantModel::FIELDNAME_MODE_ETIQUETTE_FTA_COMPOSITION)->getFieldValue()
-                , $this->getDataField(FtaComposantModel::FIELDNAME_MODE_ETIQUETTE_FTA_COMPOSITION)->isFieldDiff()
+                , $modeEtiquetteDataField->getFieldValue()
+                , $modeEtiquetteDataField->isFieldDiff()
                 , $HtmlList->getArrayListContent());
         $HtmlList->getEventsForm()->setOnChangeWithAjaxAutoSave(
                 FtaComposantModel::TABLENAME
                 , FtaComposantModel::KEYNAME
                 , $this->getKeyValue()
                 , FtaComposantModel::FIELDNAME_MODE_ETIQUETTE_FTA_COMPOSITION);
+
+        /**
+         * Description d'un champ
+         */
+        $HtmlList->setHelp(IntranetColumnInfoModel::getFieldDesc($modeEtiquetteDataField->getTableName(), $modeEtiquetteDataField->getFieldName()
+                        , $modeEtiquetteDataField->getFieldLabel(), $HtmlList
+        ));
+
+
         $listeModeEtiquettes = $HtmlList->getHtmlResult();
 
         return $listeModeEtiquettes;

@@ -83,7 +83,7 @@ echo "$txt1";
 
 //Requête de récupération de la liste des salariés
 //pouvant être saisies dans le planning des présences
-$req1 = "SELECT salaries.id_user, salaries.nom, salaries.prenom, geo.id_geo ";
+$req1 = "SELECT DISTINCT salaries.id_user, salaries.nom, salaries.prenom, geo.id_geo ";
 $req1.= "FROM geo, salaries, access_materiel_service ";
 $req1.= "WHERE geo.id_geo=$id_groupe ";
 $req1.= "AND salaries.actif='oui' ";

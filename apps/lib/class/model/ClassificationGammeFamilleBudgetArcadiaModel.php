@@ -214,13 +214,13 @@ class ClassificationGammeFamilleBudgetArcadiaModel extends AbstractModel {
 //        }
         $htmlList->setArrayListContent($arrayGammeFamilleBudget);
 
-           /**
+        /**
          * On vérifie si la donnée en BDD se trouve dans le tableau
          * Sinon alors on vide la donnée de la BDD
          */
         $dataFieldIdArcadiaGammeFamilleBudget = FtaController::checkDataInArrayKeyList($dataFieldIdArcadiaGammeFamilleBudgetTMP, $arrayGammeFamilleBudget);
 
-        
+
 
         $HtmlTableName = FtaModel::TABLENAME
                 . '_'
@@ -255,6 +255,13 @@ class ClassificationGammeFamilleBudgetArcadiaModel extends AbstractModel {
                 , $htmlList->getWarningMessage()
         );
         $htmlList->getEventsForm()->setOnChangeWithAjaxAutoSave(FtaModel::TABLENAME, FtaModel::KEYNAME, $paramFtaModel->getKeyValue(), FtaModel::FIELDNAME_ID_ARCADIA_GAMME_FAMILLE_BUDGET);
+
+        /**
+         * Description d'un champ
+         */
+        $htmlList->setHelp(IntranetColumnInfoModel::getFieldDesc($dataFieldIdArcadiaGammeFamilleBudget->getTableName(), $dataFieldIdArcadiaGammeFamilleBudget->getFieldName()
+                        , $dataFieldIdArcadiaGammeFamilleBudget->getFieldLabel(), $htmlList
+        ));
 
         $listeGammeFamilleBudget = $htmlList->getHtmlResult();
 

@@ -1,26 +1,8 @@
 <?php
 
-//Redirection vers la page par défaut du module
-//header ('Location: indexft.php');
-
-/*
-  Module d'appartenance (valeur obligatoire)
-  Par défaut, le nom du module est le répetoire courant
- */
-//include ('../lib/session.php');         //Récupération des variables de sessions
-//$module.'<br>'.$_SERVER['REQUEST_URI'];
-
-/*
-  Si la page peut être appelée depuis n'importe quel module,
-  décommentez la ligne suivante
- */
-
-//   $module='fta';
-
 /* * *******
   Inclusions
  * ******* */
-//include ('../lib/debut_page.php');      //Affichage des éléments commun à l'Intranet
 require_once '../inc/main.php';
 print_page_begin($disable_full_page, $menu_file);
 flush();
@@ -129,49 +111,12 @@ if (!$fta_consultation) {
           Fin Code PHP
          * ********* */
 
-
-        /*         * ************
-          Début Code HTML
-         * ************ */
-
-        /*
-         * *******************************************************************************
-          MOTEUR DE RECHERCHE
-         * ***************************************************************************** */
-
-        $module = 'fta';
-        $module_table = $module;
-        $etat_table = 'fta_etat';
-        $id_recherche = 'id_fta';
-        $id_recherche_etat = 'id_fta_etat';
-        $abreviation_recherche_etat = 'abreviation_fta_etat';
-        $nom_recherche_recherche_etat = 'nom_fta_etat';
-        $champ_retour = 'fta.id_fta';
-
-        $image_bordure = '../lib/images/s7.gif';
-        $image_recherche = '../lib/images/search.gif';
-        $nb_limite_resultat = 1000;
-
-
         $id_fta_etat_encours = $id_fta_etat;
         $ftaEtatModel = new FtaEtatModel($id_fta_etat);
 
-//$receivedKey['id_fta_etat'] = $id_fta_etat;
-//$record_fta_etat = new Database('fta_etat', $receivedKey);
-//$nom_fta_etat=$record_fta_etat->getValue('nom_fta_etat');
+
         $nom_fta_etat_encours = $ftaEtatModel->getDataField(FtaEtatModel::FIELDNAME_NOM_FTA_ETAT)->getFieldValue();
 
-//echo $nom_fta_etat;
-//Suivant le droit d'acces de l'utilisateur
-//Si l'utilisateur  des droits d'acces defini pout ce module
-//if($fta_consultation or $fta_modification)
-////{
-//    $req_where = ' AND (fta_etat.abreviation_fta_etat='V' OR fta_etat.abreviation_fta_etat='A' OR fta_etat.abreviation_fta_etat='I') ';
-//
-//    //Si l'utilisateur a les droits de modification, il voit l'ensemble des etats
-//    if ($fta_modification) {
-//        $req_where = '';
-//    }
         /*         * *****************************************************************************
           TABLEAU DE SYNTHESE
          * ***************************************************************************** */
@@ -218,22 +163,11 @@ if (!$fta_consultation) {
 //                $fileAriane = AccueilFta::getFileAriane();
                 $pagination = AccueilFta::paginer(ModuleConfig::VALUE_MAX_PAR_PAGE, $numeroDePageCourante, '4', '4', '1', '1');
             }
-            /*
-              //        if ($isLimit) {
-              //            $titre_tableau = '<h4>Listes des ' . $_SESSION['visualiser_fiche_total_fta'] . ' dernières fiches en état $nom_fta_etat_encours </h4><br>'
-              //                    . '<i><a href=index.php'
-              //                    . '?id_fta_etat=$id_fta_etat'
-              //                    . '&nom_fta_etat=$abreviation_fta_etat'
-              //                    . '&synthese_action=all'
-              //                    . '&isLimit=0'
-              //                    . '>Voir toutes les fiches'
-              //                    . '</a></i><br>'
-              //            ;
-              //        } else {
-              //            $titre_tableau = 'Listes des fiches : état $nom_fta_etat_encours <br>Il a actuellement ' . $_SESSION['visualiser_fiche_total_fta'] . ' fiches';
-              //        } */
+          
         }
-
+        /*         * ************
+          Début Code HTML
+         * ************ */
 
 //Construction de la page <td>&nbsp</td>
         echo '    

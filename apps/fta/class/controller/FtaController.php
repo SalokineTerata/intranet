@@ -148,7 +148,11 @@ class FtaController {
             $minute = substr($paramValeurDate, 14, 2);
             $seconde = substr($paramValeurDate, 17, 2);
         }
-        $return = $jours . "-" . $mois . "-" . $annee . " " . $heure . ":" . $minute . ":" . $seconde;
+        $date = $jours . "-" . $mois . "-" . $annee . " ";
+        if ($heure AND $minute AND $seconde) {
+            $temps = $heure . ":" . $minute . ":" . $seconde;
+        }
+        $return = $date . $temps;
         return $return;
     }
 

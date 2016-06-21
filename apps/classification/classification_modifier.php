@@ -90,7 +90,7 @@ if ($id_fta_classification2) {
 
     $RaccourcisClassif = $ClassificationFta2Model->getHtmlClassificationRaccourcis($action);
 
-    $GammeFamilleBudget = $ClassificationFta2Model->getHtmlArcadiaGammeFamilleBudget($action);
+//    $GammeFamilleBudget = $ClassificationFta2Model->getHtmlArcadiaGammeFamilleBudget($action);
 }
 
 if ($action == 'modifier') {

@@ -294,7 +294,7 @@ $bloc .=$ftaComposantView->getHtmlDataField(FtaComposantModel::FIELDNAME_POIDS_F
 //    $bloc .= "<input type=text name=" . FtaComposantModel::FIELDNAME_QUANTITE_FTA_COMPOSITION . " value='" . $quantite_fta_composition . "' size=50/>";
 //} else {
 //    $bloc .=$quantite_fta_composition;
-$bloc .=$ftaComposantView->getHtmlDataField(FtaComposantModel::FIELDNAME_QUANTITE_FTA_COMPOSITION_UVC);
+$bloc .=$ftaComposantView->getHtmlDataField(FtaComposantModel::FIELDNAME_QUANTITE_FTA_COMPOSITION);
 
 //}
 //$bloc.="</td></tr>";

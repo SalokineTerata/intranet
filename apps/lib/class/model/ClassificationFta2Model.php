@@ -568,6 +568,10 @@ class ClassificationFta2Model extends AbstractModel {
     function suppressionClassification() {
         $this->checkClassificationUsed();
         DatabaseOperation::execute(
+                'DELETE FROM ' . ClassificationRaccourcisAssociationModel::TABLENAME
+                . ' WHERE ' . ClassificationFta2Model::KEYNAME . '=' . $this->getKeyValue()
+        );
+        DatabaseOperation::execute(
                 'DELETE FROM ' . ClassificationFta2Model::TABLENAME
                 . ' WHERE ' . ClassificationFta2Model::KEYNAME . '=' . $this->getKeyValue()
         );

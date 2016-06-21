@@ -32,7 +32,9 @@ switch ($output) {
 
 $idMarque = Lib::getParameterFromRequest(ClassificationMarqueArcadiaModel::FIELDNAME_ID_MARQUE);
 $action = Lib::getParameterFromRequest("action");
+$type = Lib::getParameterFromRequest("type");
 $idClassificationMarqueArcadia = Lib::getParameterFromRequest(ClassificationMarqueArcadiaModel::KEYNAME);
+$idClassificationGammeFamilleBudgetArcadia = Lib::getParameterFromRequest(ClassificationGammeFamilleBudgetArcadiaModel::KEYNAME);
 
 switch ($action) {
 
@@ -54,23 +56,51 @@ switch ($action) {
                 . 'class=contenu '
         ;
 
-        $id_classification_marque_arcadia = ClassificationMarqueArcadiaModel::createNewRecordset(
-                        array(ClassificationMarqueArcadiaModel::FIELDNAME_ID_MARQUE => $idMarque)
-        );
-        $classificationMarqueArcadiaModel = new ClassificationMarqueArcadiaModel($id_classification_marque_arcadia);
-        $classificationMarqueArcadiaModel->setIsEditable(TRUE);
-        $htmlFamilleVentes = $classificationMarqueArcadiaModel->getHtmlDataField(ClassificationMarqueArcadiaModel::FIELDNAME_ID_ARCADIA_MARQUE);
+        switch ($type) {
+            case ClassificationMarqueArcadiaModel::TYPE_MARQUE:
+                $id_classification_marque_arcadia = ClassificationMarqueArcadiaModel::createNewRecordset(
+                                array(ClassificationMarqueArcadiaModel::FIELDNAME_ID_MARQUE => $idMarque)
+                );
+                $classificationMarqueArcadiaModel = new ClassificationMarqueArcadiaModel($id_classification_marque_arcadia);
+                $classificationMarqueArcadiaModel->setIsEditable(TRUE);
+                $htmlFamilleVentes = $classificationMarqueArcadiaModel->getHtmlDataField(ClassificationMarqueArcadiaModel::FIELDNAME_ID_ARCADIA_MARQUE);
+                $titre = $classificationMarqueArcadiaModel->getDataField(ClassificationMarqueArcadiaModel::FIELDNAME_ID_ARCADIA_MARQUE)->getFieldLabel();
+
+                $bloc = $htmlFamilleVentes;
+
+                break;
+            case ClassificationGammeFamilleBudgetArcadiaModel::TYPE_GAMME:
+
+                $id_classification_GammeFamilleBudget_arcadia = ClassificationGammeFamilleBudgetArcadiaModel::createNewRecordsetGammeMarque(
+                                array(ClassificationGammeFamilleBudgetArcadiaModel::FIELDNAME_ID_MARQUE => $idMarque)
+                );
+                $classificationGammeFamilleBudgetArcadiaModel = new ClassificationGammeFamilleBudgetArcadiaModel($id_classification_GammeFamilleBudget_arcadia);
+                $classificationGammeFamilleBudgetArcadiaModel->setIsEditable(TRUE);
+                $htmlFamilleVentes = $classificationGammeFamilleBudgetArcadiaModel->getHtmlDataField(ClassificationGammeFamilleBudgetArcadiaModel::FIELDNAME_ID_ARCADIA_GAMME_FAMILLE_BUDGET);
+                /**
+                 * Titre
+                 */
+                $titre = $classificationGammeFamilleBudgetArcadiaModel->getDataField(ClassificationGammeFamilleBudgetArcadiaModel::FIELDNAME_ID_ARCADIA_GAMME_FAMILLE_BUDGET)->getFieldLabel();
 
 
-        $bloc = $htmlFamilleVentes;
+                $bloc = $htmlFamilleVentes;
+                break;
+        }
+
 
         break;
 
     case ClassificationMarqueArcadiaModel::SUPPRIMER:
 
-        $classificationMarqueArcadiaModel = new ClassificationMarqueArcadiaModel($idClassificationMarqueArcadia);
+        if ($idClassificationMarqueArcadia) {
+            $classificationMarqueArcadiaModel = new ClassificationMarqueArcadiaModel($idClassificationMarqueArcadia);
 
-        $classificationMarqueArcadiaModel->deleteClassificationMarqueArcadia();
+            $classificationMarqueArcadiaModel->deleteClassificationMarqueArcadia();
+        } elseif ($idClassificationGammeFamilleBudgetArcadia) {
+            $classificationGammeFamilleBudgetArcadiaModel = new ClassificationGammeFamilleBudgetArcadiaModel($idClassificationGammeFamilleBudgetArcadia);
+
+            $classificationGammeFamilleBudgetArcadiaModel->deleteClassificationGammeFamilleBudgetArcadia();
+        }
 
         header("Location: gestion_marque.php?id_Marque=" . $idMarque);
         break;
@@ -141,7 +171,7 @@ switch ($output) {
 
     
                  <br>
-                 Ajout d\'une nouvelle ' . $classificationMarqueArcadiaModel->getDataField(ClassificationMarqueArcadiaModel::FIELDNAME_ID_ARCADIA_MARQUE)->getFieldLabel()
+                 Ajout d\'une nouvelle ' . $titre
         . ' </td></tr>
              </table>
              <' . $html_table . '>

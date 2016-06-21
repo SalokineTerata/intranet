@@ -14,6 +14,7 @@ class ClassificationMarqueArcadiaModel extends AbstractModel {
     const LABEL_CLASSIFICATION_MARQUE = 'Marque Arcadia';
     const AJOUTER = 'ajouter';
     const SUPPRIMER = 'supprimer';
+    const TYPE_MARQUE = 'marque';
 
     public function __construct($paramId = NULL, $paramIsCreateRecordsetInDatabaseIfKeyDoesntExist = AbstractModel::DEFAULT_IS_CREATE_RECORDSET_IN_DATABASE_IF_KEY_DOESNT_EXIST) {
         parent::__construct($paramId, $paramIsCreateRecordsetInDatabaseIfKeyDoesntExist);
@@ -207,6 +208,7 @@ class ClassificationMarqueArcadiaModel extends AbstractModel {
         return 'modification_marque.php?'
                 . self::FIELDNAME_ID_MARQUE . '=' . $paramIdClassificationFta2
                 . '&action=' . self::AJOUTER
+                . '&type=' . self::TYPE_MARQUE
 
         ;
     }
@@ -239,7 +241,7 @@ class ClassificationMarqueArcadiaModel extends AbstractModel {
     private static function getAddLinkAfterClassificationMarqueArcadia($paramIdActivite) {
         return '<a href=modification_marque.php?'
                 . self::FIELDNAME_ID_MARQUE . '=' . $paramIdActivite
-                . '&action=' . self::AJOUTER . '><img src=../lib/images/plus.png width=22  border=0 valign=middle halign=right />'
+                . '&action=' . self::AJOUTER . '&type=' . self::TYPE_MARQUE . '><img src=../lib/images/plus.png width=22  border=0 valign=middle halign=right />'
                 . '</a><br>';
     }
 
@@ -297,7 +299,7 @@ class ClassificationMarqueArcadiaModel extends AbstractModel {
          * Sinon alors on vide la donnée de la BDD
          */
         $dataFieldIdArcadiaMarque = FtaController::checkDataInArrayKeyList($dataFieldIdArcadiaMarqueTMP, $arrayClassificationMarqueArcadia);
-        
+
 
         $HtmlTableName = FtaModel::TABLENAME
                 . '_'
@@ -336,14 +338,14 @@ class ClassificationMarqueArcadiaModel extends AbstractModel {
         );
         $htmlList->getEventsForm()->setOnChangeWithAjaxAutoSave(FtaModel::TABLENAME, FtaModel::KEYNAME, $paramFtaModel->getKeyValue(), FtaModel::FIELDNAME_ID_ARCADIA_MARQUE);
 
-         /**
+        /**
          * Description d'un champ
          */
         $htmlList->setHelp(IntranetColumnInfoModel::getFieldDesc($dataFieldIdArcadiaMarque->getTableName(), $dataFieldIdArcadiaMarque->getFieldName()
                         , $dataFieldIdArcadiaMarque->getFieldLabel(), $htmlList
         ));
 
-        
+
         $listeClassificationRaccourcis = $htmlList->getHtmlResult();
 
         return $listeClassificationRaccourcis;

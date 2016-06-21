@@ -383,16 +383,30 @@ class FtaConditionnementModel extends AbstractModel {
 
     /**
      * Affiche le label du tableau Embalage
-     * @param int $paramIdFtaConditionnment
+     * @param int $paramTypeQuant
      * @return string
      */
-    function getTableConditionnementLabel() {
+    function getTableConditionnementLabel($paramTypeQuant) {
         $border = "style=\"border:1px solid #000;\"";
 
         if ($this->getIsEditable()) {
             $action = '<td ' . $border . '>Actions</td>';
         } else {
             $action = '';
+        }
+        switch ($paramTypeQuant) {
+            case AnnexeEmballageGroupeTypeModel::EMBALLAGE_UVC:
+                $quantite = "Quantité par UVC";
+
+                break;
+            case AnnexeEmballageGroupeTypeModel::EMBALLAGE_PAR_COLIS:
+                $quantite = "Quantité par Colis";
+
+                break;
+            case AnnexeEmballageGroupeTypeModel::EMBALLAGE_PALETTE:
+                $quantite = "Quantité";
+
+                break;
         }
 
         return '<tr class=titre_tableau  align=center >' .
@@ -402,7 +416,7 @@ class FtaConditionnementModel extends AbstractModel {
                 . '<td ' . $border . '>' . $this->getDataField(FtaConditionnementModel::FIELDNAME_LARGEUR_FTA_CONDITIONNEMENT)->getFieldLabel() . '</td>'
                 . '<td ' . $border . '>' . $this->getDataField(FtaConditionnementModel::FIELDNAME_HAUTEUR_FTA_CONDITIONNEMENT)->getFieldLabel() . '</td>'
                 . '<td ' . $border . '>' . $this->getDataField(FtaConditionnementModel::FIELDNAME_POIDS_FTA_CONDITIONNEMENT)->getFieldLabel() . '</td>'
-                . '<td ' . $border . '>' . $this->getDataField(FtaConditionnementModel::FIELDNAME_QUANTITE_PAR_COUCHE_FTA_CONDITIONNEMENT)->getFieldLabel() . '</td>'
+                . '<td ' . $border . '>' . $quantite . '</td>'
                 . $action
                 . '</tr>';
     }

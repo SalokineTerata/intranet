@@ -1054,7 +1054,7 @@ class FtaModel extends AbstractModel {
 
                 //Les Calculs de la table composant        
                 $arrayComposant = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
-                                "SELECT " . FtaComposantModel::FIELDNAME_QUANTITE_FTA_COMPOSITION_UVC
+                                "SELECT " . FtaComposantModel::FIELDNAME_QUANTITE_FTA_COMPOSITION
                                 . "," . FtaComposantModel::FIELDNAME_POIDS_FTA_COMPOSITION
                                 . " FROM " . FtaComposantModel::TABLENAME
                                 . " WHERE " . FtaComposantModel::FIELDNAME_ID_FTA . "=" . $this->getKeyValue()
@@ -1066,8 +1066,8 @@ class FtaModel extends AbstractModel {
                     foreach ($arrayComposant as $rowsComposant) {
 
                         // Calcul du Poids net du colis
-                        $return[FtaConditionnementModel::COLIS_EMBALLAGE_NET] = FtaConditionnementModel::getCalculGenericMultiplication(
-                                        $rowsComposant[FtaComposantModel::FIELDNAME_QUANTITE_FTA_COMPOSITION_UVC]
+                        $return[FtaConditionnementModel::COLIS_EMBALLAGE_NET] += FtaConditionnementModel::getCalculGenericMultiplication(
+                                        $rowsComposant[FtaComposantModel::FIELDNAME_QUANTITE_FTA_COMPOSITION]
                                         , $rowsComposant[FtaComposantModel::FIELDNAME_POIDS_UNITAIRE_CODIFICATION]
                         );
                     }
@@ -1170,7 +1170,7 @@ class FtaModel extends AbstractModel {
         } else {
             //Les Calculs de la table composant        
             $arrayComposant = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
-                            "SELECT " . FtaComposantModel::FIELDNAME_QUANTITE_FTA_COMPOSITION_UVC
+                            "SELECT " . FtaComposantModel::FIELDNAME_QUANTITE_FTA_COMPOSITION
                             . "," . FtaComposantModel::FIELDNAME_POIDS_FTA_COMPOSITION
                             . " FROM " . FtaComposantModel::TABLENAME
                             . " WHERE " . FtaComposantModel::FIELDNAME_ID_FTA . "=" . $this->getKeyValue()
@@ -1182,8 +1182,8 @@ class FtaModel extends AbstractModel {
                 foreach ($arrayComposant as $rowsComposant) {
 
                     // Calcul du Poids net du colis
-                    $return[FtaConditionnementModel::COLIS_EMBALLAGE_NET] = FtaConditionnementModel::getCalculGenericMultiplication(
-                                    $rowsComposant[FtaComposantModel::FIELDNAME_QUANTITE_FTA_COMPOSITION_UVC]
+                    $return[FtaConditionnementModel::COLIS_EMBALLAGE_NET] += FtaConditionnementModel::getCalculGenericMultiplication(
+                                    $rowsComposant[FtaComposantModel::FIELDNAME_QUANTITE_FTA_COMPOSITION]
                                     , $rowsComposant[FtaComposantModel::FIELDNAME_POIDS_FTA_COMPOSITION]
                     );
                 }

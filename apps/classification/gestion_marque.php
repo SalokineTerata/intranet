@@ -49,12 +49,13 @@ $idClassifcationFta2Marque = Lib::getParameterFromRequest(ClassificationFta2Mode
 $listeDesMarque = ClassificationFta2Model::getListeDeroulanteMarque($idClassifcationFta2Marque, Chapitre::EDITABLE);
 
 if ($idClassifcationFta2Marque) {
-    $htmlTableClassificationFamilleVentes = ClassificationMarqueArcadiaModel::getHtmlTableClassificationMarqueArcadia($idClassifcationFta2Marque);
+    $htmlTableClassificationMarqueArcadia = ClassificationMarqueArcadiaModel::getHtmlTableClassificationMarqueArcadia($idClassifcationFta2Marque);
+    $htmlTableClassificationGammeFamilleBudget = ClassificationGammeFamilleBudgetArcadiaModel::getHtmlTableClassificationGammeFamilleBudgetArcadia($idClassifcationFta2Marque);
 } {
     $message = UserInterfaceMessage::FR_CLASSIFICATION_MARQUE_MESSAGE;
 }
 
-$bloc .=$listeDesMarque . $htmlTableClassificationFamilleVentes ;
+$bloc .=$listeDesMarque . $htmlTableClassificationMarqueArcadia . $htmlTableClassificationGammeFamilleBudget;
 
 
 

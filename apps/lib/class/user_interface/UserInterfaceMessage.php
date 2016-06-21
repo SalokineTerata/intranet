@@ -114,7 +114,7 @@ class UserInterfaceMessage {
     const FR_WARNING_MISSING_DATA = "Donnée manquante";
     const FR_WARNING_ECHEANCE_DEPASSEE = "Certaines échéances sont dépassées !";
     const FR_WARNING_EMBALLAGE_COLIS = "Il ne doit y avoir qu'un seul emballage Colis";
-    const FR_WARNING_EMBALLAGE_COLIS_ARCADIA = "Il n'y a pas de correspondance sur Arcadia à cette emballage Colis";
+    const FR_WARNING_EMBALLAGE_COLIS_ARCADIA = "Il n'y a pas de correspondance pour cet emballage Colis dans Arcadia";
     const FR_WARNING_EMBALLAGE_PALETTE = "Il ne doit y avoir qu'une seule Palette";
     const FR_WARNING_EMBALLAGE_SUPPRESION = "Vous ne pouvez pas supprimer cette Fiche Technique Emballage.<br><br>
                     En effet, elle est encore utilisée dans certaines Fiches Techniques Articles.<br><br>";

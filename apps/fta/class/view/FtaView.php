@@ -913,9 +913,9 @@ class FtaView extends AbstractView {
             $htmlReturn = $htmlArcadiaMarque
                     . $htmlArcadiaFamilleVente
                     . $htmlArcadiaSousFamille
+                    . $htmlGammeCoop
                     . $htmlFamilleBudget
                     . $htmlArcadiaGammeFamileBudget
-                    . $htmlGammeCoop
 
             ;
         }
@@ -1289,8 +1289,8 @@ class FtaView extends AbstractView {
          */
         $isEditable = FtaVerrouillageChampsModel::isEditableLockField($isFieldLock, $paramIsEditable);
 
-            $etiquetteCodesoftDataField = $this->getModel()->getDataField(FtaModel::FIELDNAME_ETIQUETTE_CODESOFT);
-        
+        $etiquetteCodesoftDataField = $this->getModel()->getDataField(FtaModel::FIELDNAME_ETIQUETTE_CODESOFT);
+
         $HtmlList->getAttributes()->getName()->setValue(FtaModel::FIELDNAME_ETIQUETTE_CODESOFT);
         $HtmlList->setLabel(DatabaseDescription::getFieldDocLabel(FtaModel::TABLENAME, FtaModel::FIELDNAME_ETIQUETTE_CODESOFT));
         $HtmlList->setIsEditable($isEditable);
@@ -1396,7 +1396,7 @@ class FtaView extends AbstractView {
             $htmlEmballageUVC->setLienAjouter(FtaConditionnementModel::getAddLinkAfterConditionnement($paramIdFta, $paramChapitre, AnnexeEmballageGroupeTypeModel::EMBALLAGE_UVC, $paramSyntheseAction, $paramIdFtaEtat, $paramAbreviationEtat, $paramIdFtaRole));
             $htmlEmballageUVC->setLien(FtaConditionnementModel::getAddLinkBeforeConditionnement($paramIdFta, $paramChapitre, AnnexeEmballageGroupeTypeModel::EMBALLAGE_UVC, $paramSyntheseAction, $paramIdFtaEtat, $paramAbreviationEtat, $paramIdFtaRole));
             $htmlEmballageUVC->setLienSuppression(FtaConditionnementModel::getDeleteLinkConditionnement($paramIdFta, $paramChapitre, $arrayIdFtaCondtionnement, $paramSyntheseAction, $paramIdFtaEtat, $paramAbreviationEtat, $paramIdFtaRole));
-            $htmlEmballageUVC->setTableLabel($ftaConditionnmentModel->getTableConditionnementLabel());
+            $htmlEmballageUVC->setTableLabel($ftaConditionnmentModel->getTableConditionnementLabel(AnnexeEmballageGroupeTypeModel::EMBALLAGE_UVC));
             $return .= $htmlEmballageUVC->getHtmlResult();
         } else {
             /*
@@ -1492,7 +1492,7 @@ class FtaView extends AbstractView {
             $htmlEmballageParColis->setLienAjouter(FtaConditionnementModel::getAddLinkAfterConditionnement($paramIdFta, $paramChapitre, AnnexeEmballageGroupeTypeModel::EMBALLAGE_PAR_COLIS, $paramSyntheseAction, $paramIdFtaEtat, $paramAbreviationEtat, $paramIdFtaRole));
             $htmlEmballageParColis->setLien(FtaConditionnementModel::getAddLinkBeforeConditionnement($paramIdFta, $paramChapitre, AnnexeEmballageGroupeTypeModel::EMBALLAGE_PAR_COLIS, $paramSyntheseAction, $paramIdFtaEtat, $paramAbreviationEtat, $paramIdFtaRole));
             $htmlEmballageParColis->setLienSuppression(FtaConditionnementModel::getDeleteLinkConditionnement($paramIdFta, $paramChapitre, $arrayIdFtaCondtionnement, $paramSyntheseAction, $paramIdFtaEtat, $paramAbreviationEtat, $paramIdFtaRole));
-            $htmlEmballageParColis->setTableLabel($ftaConditionnmentModel->getTableConditionnementLabel());
+            $htmlEmballageParColis->setTableLabel($ftaConditionnmentModel->getTableConditionnementLabel(AnnexeEmballageGroupeTypeModel::EMBALLAGE_PAR_COLIS));
             $return .= $htmlEmballageParColis->getHtmlResult();
         } else {
             /*
@@ -1695,7 +1695,7 @@ class FtaView extends AbstractView {
             $htmlEmballagePalette->setLienAjouter(FtaConditionnementModel::getAddLinkAfterConditionnement($paramIdFta, $paramChapitre, AnnexeEmballageGroupeTypeModel::EMBALLAGE_PALETTE, $paramSyntheseAction, $paramIdFtaEtat, $paramAbreviationEtat, $paramIdFtaRole));
             $htmlEmballagePalette->setLien(FtaConditionnementModel::getAddLinkBeforeConditionnement($paramIdFta, $paramChapitre, AnnexeEmballageGroupeTypeModel::EMBALLAGE_PALETTE, $paramSyntheseAction, $paramIdFtaEtat, $paramAbreviationEtat, $paramIdFtaRole));
             $htmlEmballagePalette->setLienSuppression(FtaConditionnementModel::getDeleteLinkConditionnement($paramIdFta, $paramChapitre, $arrayIdFtaCondtionnement, $paramSyntheseAction, $paramIdFtaEtat, $paramAbreviationEtat, $paramIdFtaRole));
-            $htmlEmballagePalette->setTableLabel($ftaConditionnmentModel->getTableConditionnementLabel());
+            $htmlEmballagePalette->setTableLabel($ftaConditionnmentModel->getTableConditionnementLabel(AnnexeEmballageGroupeTypeModel::EMBALLAGE_PALETTE));
             $return .= $htmlEmballagePalette->getHtmlResult();
             if (count($FtaConditionnement) > "1") {
                 $return.= "<tr class=contenu><td bgcolor=#FFAA55 align=\"center\" valign=\"middle\">";
@@ -2210,30 +2210,30 @@ class FtaView extends AbstractView {
             /**
              * Calcul type emballage UVC
              */
-            $returnUVC = $this->getModel()->buildArrayEmballageTypeUVC();
-            $uvc_net = $returnUVC[FtaConditionnementModel::UVC_EMBALLAGE_NET];
-
+            $returnColis = $this->getModel()->buildArrayEmballageTypeDuColis();
+            $colis_pds_net = $returnColis[FtaConditionnementModel::COLIS_EMBALLAGE_NET];
             /**
              * Calcul type emballage Colis
              */
-            $poidsUVC = $this->getModel()->getDataField(FtaModel::FIELDNAME_POIDS_ELEMENTAIRE)->getFieldValue();
-            $check1 = strval($poidsUVC);
-            $check2 = strval($uvc_net / "1000");
+            $returnUVC = $this->getModel()->buildArrayEmballageTypeUVC();
+            $uvc_net = $returnUVC[FtaConditionnementModel::UVC_EMBALLAGE_NET];
+            $tabEmballagesColis = $this->getModel()->poidsDesEmballagesColis();
+            $pcb = $tabEmballagesColis[FtaModel::FIELDNAME_NOMBRE_UVC_PAR_CARTON];
+
+            $check1 = strval($uvc_net * $pcb / "1000");
+            $check2 = strval($colis_pds_net);
             if ($check1 <> $check2) {
-                $html_warning = "ATTENTION, poids net de l'uvc est différents de celui défini dans le chapitre Indentié <img src=../lib/images/exclamation.png width=15 height=15 border=0/><br><br>";
+                $html_warning = "ATTENTION, poids net du Colis est différent de la multiplication défini dans les chapitres PCB et Identité pour la gestion de l'unité de facturation<img src=../lib/images/exclamation.png width=15 height=15 border=0/><br><br>";
                 $bgcolor = "#FFAA55";
             } else {
                 $bgcolor = "#AFFF5A";
                 $html_warning = "";
             }
-            if ($poidsUVC) {
-                $bloc.= "<tr class=contenu><td bgcolor=$bgcolor align=\"center\" valign=\"middle\">";
-                $bloc.="Poids net de UVC (en Kg): ";
-                $bloc.="</td><td bgcolor=$bgcolor align=\"center\" valign=\"middle\">"
-                        . "<h4><br>$check2</h4><br>$html_warning</td></tr>";
-            } else {
-                $bloc = "";
-            }
+
+            $bloc.= "<tr class=contenu><td bgcolor=$bgcolor align=\"center\" valign=\"middle\">";
+            $bloc.="Contrôle du Poids net du Colis (en Kg): ";
+            $bloc.="</td><td bgcolor=$bgcolor align=\"center\" valign=\"middle\">"
+                    . "<h4><br>$check2</h4><br>$html_warning</td></tr>";
         } else {
             $bloc = "";
         }

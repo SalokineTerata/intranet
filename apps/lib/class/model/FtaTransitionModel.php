@@ -626,8 +626,7 @@ class FtaTransitionModel {
                 . "\n"
                 . "INFORMATIONS DE DEBUGGAGE:\n"
                 . $logTransition
-        ;
-        {
+        ; {
             $expediteur = $prenom . " " . $nom . " <" . $mail . ">";
             envoismail($sujetmail, $corp, $mail, $expediteur, $typeMail);
         }
@@ -676,28 +675,6 @@ class FtaTransitionModel {
                 $text.="\n\nSite d'assemblage: " . $rowsFta[GeoModel::FIELDNAME_LIBELLE_SITE_AGIS] . "\n";
             }
 
-            //Récupération de la liste des produits
-//            $text_prod = "";
-//            $req = "SELECT " . AnnexeAgrologicArticleCodificationModel::FIELDNAME_PREFIXE_ANNEXE_AGRO_ART_COD . "," . FtaComposantModel::FIELDNAME_CODE_PRODUIT_AGROLOGIC_FTA_NOMENCLATURE
-//                    . " FROM " . FtaComposantModel::TABLENAME . ", " . AnnexeAgrologicArticleCodificationModel::TABLENAME
-//                    . " WHERE " . FtaComposantModel::TABLENAME . "." . FtaComposantModel::FIELDNAME_ID_FTA
-//                    . "=" . $rowsFta[FtaModel::KEYNAME]
-//                    . " AND " . FtaComposantModel::TABLENAME . "." . FtaComposantModel::FIELDNAME_ID_ANNEXE_AGRO_ART_CODIFICATION
-//                    . "=" . AnnexeAgrologicArticleCodificationModel::TABLENAME . "." . AnnexeAgrologicArticleCodificationModel::KEYNAME . " "
-//                    . " ORDER BY " . AnnexeAgrologicArticleCodificationModel::FIELDNAME_PREFIXE_ANNEXE_AGRO_ART_COD . " ASC, " . FtaComposantModel::FIELDNAME_DESIGNATION_CODIFICATION
-//            ;
-//            $paramLogTransition.="\n\n" . $req;
-//            $arrayProd = DatabaseOperation::convertSqlStatementWithoutKeyToArray($req);
-//            if ($arrayProd) {
-//                foreach ($arrayProd as $rowsProd) {
-//                    //Chargement du code de codification
-//
-//                    $text_prod.= $rowsProd[AnnexeAgrologicArticleCodificationModel::FIELDNAME_PREFIXE_ANNEXE_AGRO_ART_COD]
-//                            . $rowsProd[FtaComposantModel::FIELDNAME_CODE_PRODUIT_AGROLOGIC_FTA_NOMENCLATURE]
-//                            . ", "
-//                    ;
-//                }
-//            }
             //Insertion de la ligne d'article
             $text.= "<a href='" . $url . "/fta/modification_fiche.php?"
                     . FtaModel::KEYNAME . "=" . $rowsFta[FtaModel::KEYNAME]
@@ -721,7 +698,7 @@ class FtaTransitionModel {
                 . "Intranet - FTA\n"
                 . "\n"
                 . "\n"
-                . "NB : une ligne d'article est composée du code Article Arcadia, du libellé et des codes des composants(Code PSF)";
+                . "NB : une ligne d'article est composée du code Article Arcadia et la DIN";
 
         /**
          * Envoi du mail d'information
@@ -751,8 +728,7 @@ class FtaTransitionModel {
                 . $text
                 . "\n\n"
                 . $paramLogTransition
-        ;
-        {
+        ; {
             $expediteur = $prenom . " " . $nom . " <" . $mailUser . ">";
             envoismail($sujetmail, $corp, $mailUser, $expediteur, $typeMail);
         }

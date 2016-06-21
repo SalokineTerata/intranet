@@ -278,7 +278,7 @@ if ($result) {
         //$id_fta_composition=$rows["id_fta_composition"];
         $id_fta_composant = $rows[FtaComposantModel::KEYNAME];
         $ftaComposantModel = new FtaComposantModel($id_fta_composant);
-
+        $checkNutri = FALSE;
         //Préparation des données de sortie
         $nom_fta_composition = $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_NOM_FTA_COMPOSITION)->getFieldValue();
         $quantite_fta_composition = $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_QUANTITE_FTA_COMPOSITION_UVC)->getFieldValue();
@@ -302,8 +302,24 @@ if ($result) {
         $NOM_val_nut_proteine = $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_VAL_PROTEINE)->getFieldLabel();
         $val_nut_sel = $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_VAL_SEL)->getFieldValue();
         $NOM_val_nut_sel = $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_VAL_SEL)->getFieldLabel();
+
         /**
-         * Verification que l'on est outes les données nécéssaire
+         * Détermination de l'affichage des valeurs nutritionnelles
+         */
+        $arrayValNutri = array($val_nut_kcal, $val_nut_kj
+            , $val_nut_mat_grasse, $val_nut_acide_gras
+            , $val_nut_glucide, $val_nut_sucre
+            , $val_nut_proteine, $val_nut_sel);
+
+        foreach ($arrayValNutri as $value) {
+            if (FtaController::checkValNutri($value)) {
+                $checkNutri = TRUE;
+            }
+        }
+
+
+        /**
+         * Verification que l'on est toutes les données nécéssaire
          */
         if ($poids_fta_compositionTmp and $quantite_fta_composition) {
 //            $taux_poids_composant = ($poids_fta_compositionTmp * $quantite_fta_composition) / $poids_net_colis;
@@ -377,7 +393,7 @@ if ($result) {
             $data_format[4] = 0;   //Personalisation de la largeur de la colonne
             $data_format[2] = "";
             fpdf_write_data($title, $data, $title_format, $data_format, $pdf);
-
+            if ($checkNutri) {
                 $txt = "Valeurs nutritionnelles pour 100g";
 
                 $pdf->MultiCell(0, 5, $txt, $border = 1, $align = 'C', $fill = 0);
@@ -407,23 +423,24 @@ if ($result) {
                     fpdf_write_data($title, $data, $title_format, $data_format, $pdf);
                 }
             }
+        }
 
-            $marge_basse2 = $pdf->GetY();
+        $marge_basse2 = $pdf->GetY();
 
-            if ($marge_basse2 > $marge_basse1) {
-                $new_marge = $marge_basse2;
-            } else {
-                $new_marge = $marge_basse1;
-            }
+        if ($marge_basse2 > $marge_basse1) {
+            $new_marge = $marge_basse2;
+        } else {
+            $new_marge = $marge_basse1;
+        }
 
-            $pdf->SetY($new_marge);
-            $pdf->SetLeftMargin($marge_gauche);
-            $pdf->SetX($marge_gauche);
-            $pdf->SetAutoPageBreak(1, 40);
+        $pdf->SetY($new_marge);
+        $pdf->SetLeftMargin($marge_gauche);
+        $pdf->SetX($marge_gauche);
+        $pdf->SetAutoPageBreak(1, 40);
 
-            $pdf->Cell(0, 0, "", 1, 1);
-            $pdf->SetY($pdf->GetY() + 2);
-        
+        $pdf->Cell(0, 0, "", 1, 1);
+        $pdf->SetY($pdf->GetY() + 2);
+
         //$pdf->SetAutoPageBreak(0);
     }//Fin du parcours des composants
 }

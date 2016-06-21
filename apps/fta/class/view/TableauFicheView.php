@@ -341,18 +341,21 @@ class TableauFicheView {
         return $lien;
     }
 
-    static private function getHtmlLinkPDF($paramAbreviationFtaEtat, $paramIdFta, $paramIdWorkflow) {
+    static public function getHtmlLinkPDF($paramAbreviationFtaEtat, $paramIdFta, $paramIdWorkflow, $paramTaille = NULL, $paramName = NULL) {
 
         $lien = "";
         if (
                 (Acl::getValueAccesRights(Acl::ACL_FTA_IMPRESSION) and ( $paramAbreviationFtaEtat == FtaEtatModel::ETAT_ABREVIATION_VALUE_VALIDE ))or ( $paramIdWorkflow == FtaWorkflowModel::ID_WORKFLOW_PRESENTATION)
         ) {
+            if (!$paramTaille) {
+                $paramTaille = "30";
+            }
 
             $lien .= "  "
                     . "<a "
                     . "href=pdf.php?id_fta=" . $paramIdFta . "&mode=client "
                     . "target=_blank"
-                    . "><img src=./images/pdf.png alt=\"\" title=\"Exportation PDF\" width=\"30\" height=\"25\" border=\"0\" />"
+                    . "><img src=./images/pdf.png alt=\"\" title=\"Exportation PDF\" width=\"$paramTaille\" height=\"$paramTaille\" border=\"0\" /> $paramName"
                     . "</a>"
             ;
         }

@@ -292,7 +292,7 @@ class FtaComposantModel extends AbstractModel {
                 . '<td ' . $border . '>' . $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_INGREDIENT_FTA_COMPOSITION)->getFieldLabel() . '</td>'
                 . '<td ' . $border . '>' . $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_ID_GEO)->getFieldLabel() . '</td>'
                 . '<td ' . $border . '>' . $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_POIDS_FTA_COMPOSITION)->getFieldLabel() . '</td>'
-                . '<td ' . $border . '>' . $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_QUANTITE_FTA_COMPOSITION_UVC)->getFieldLabel() . '</td>'
+                . '<td ' . $border . '>' . $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_QUANTITE_FTA_COMPOSITION)->getFieldLabel() . '</td>'
                 . '<td ' . $border . '>Actions</td>'
                 . '</tr>';
     }

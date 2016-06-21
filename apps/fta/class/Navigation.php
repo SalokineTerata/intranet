@@ -70,7 +70,7 @@ class Navigation {
         self::$id_fta_role = $id_fta_role;
         self::$ftaModel = new FtaModel(self::$id_fta);
         self::$id_fta_workflow = self::$ftaModel->getDataField(FtaModel::FIELDNAME_WORKFLOW)->getFieldValue();
-        self::$id_fta_role_encours = FtaWorkflowStructureModel::getIdFtaRoleByChapitreAndWorkflow(self::$id_fta_chapitre_encours,  self::$id_fta_workflow );
+        self::$id_fta_role_encours = FtaWorkflowStructureModel::getIdFtaRoleByChapitreAndWorkflow(self::$id_fta_chapitre_encours, self::$id_fta_workflow);
         $ftaWorkflowModel = new FtaWorkflowModel(self::$id_fta_workflow);
         self::$id_parent_intranet_actions = $ftaWorkflowModel->getDataField(FtaWorkflowModel::FIELDNAME_ID_INTRANET_ACTIONS)->getFieldValue();
 
@@ -169,10 +169,20 @@ class Navigation {
             $idIntranetActionsSiteDeProduction = FtaActionSiteModel::getArrayIdIntranetActionByWorkflowAndSiteDeProduction(self::$id_fta_workflow, $siteDeProduction);
             $checkAccesButtonBySiteProd = IntranetActionsModel::isAccessFtaActionByIdUserFtaWorkflowAndSiteDeProduction($idUser, self::$id_fta_workflow, $idIntranetActionsSiteDeProduction);
             $tauxRound = FtaSuiviProjetModel::getPourcentageFtaTauxValidation(self::$ftaModel);
+            /**
+             * Bouton de trasition
+             */
             $transition = TableauFicheView::getHmlLinkTransiter(self::$id_fta, self::$id_fta_role, self::$abreviation_etat, $checkAccesButtonBySiteProd
                             , $accesTransitionButton, self::$synthese_action, $tauxRound, "18", " Transiter");
+            /**
+             * Bouton d'accès au rendu PDF de la FTA
+             */
+            $pdf = TableauFicheView::getHtmlLinkPDF(self::$abreviation_etat, self::$id_fta, self::$id_fta_workflow,"18", "Export PDF");
             if ($transition) {
                 $transition = " | " . $transition;
+            }
+            if ($pdf) {
+                $pdf = " | " . $pdf;
             }
             $menu_navigation.='
                     <a href=historique-' . self::$id_fta
@@ -183,7 +193,8 @@ class Navigation {
                     . '-' . self::$synthese_action
 //                    . '-1'
                     . '.html ><img src=./images/graphique.png alt=\'\' title=\'Etat d\'avancement\' width=\'18\' height=\'15\' border=\'0\' /> Etat d\'avancement</a>'
-                    . $transition .
+                    . $transition 
+                    . $pdf .
                     ' 
                        </td></tr>                       
                        </table>

@@ -281,6 +281,20 @@ class FtaController {
         return $paramDataField;
     }
 
+    /**
+     * On vérifie si la valeur nutritionnelle est saisi.
+     * @param string $paramValue
+     * @return boolean
+     */
+    public static function checkValNutri($paramValue){
+        $result =TRUE;
+        if($paramValue === "0" or $paramValue === "0.0" or $paramValue === "0.00"){
+            $result =FALSE ;
+        }
+        
+        return $result;
+    }
+    
 }
 
 ?>

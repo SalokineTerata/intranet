@@ -361,7 +361,7 @@ class ClassificationGammeFamilleBudgetArcadiaModel extends AbstractModel {
             /*
              * Initialisation des modèles 
              */
-            $label = self::LABEL_CLASSIFICATION_MARQUE;
+            $label = self::LABEL_CLASSIFICATION_GAMME_FAMILLE_BUDGET;
 
             $htmlClassificationGammeFamilleBudgetArcadia = new HtmlSubForm_RNN($arrayClassificationGammeFamilleBudgetArcadia, $className, $label, $tablesNameAndIdForeignKeyOfClassificationGammeFamilleBudgetArcadia);
             $htmlClassificationGammeFamilleBudgetArcadia->setIsEditable(Chapitre::EDITABLE);

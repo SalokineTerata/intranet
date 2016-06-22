@@ -187,6 +187,10 @@ if ($id_fta_composant) {
         $id_fta_composant = FtaComposantModel::createNewRecordset(
                         array(FtaComposantModel::FIELDNAME_ID_FTA => $id_fta)
         );
+        /**
+         * L'ajout d'une composition doit être notifié puisqu'il s'agit d'un champ verrouilé
+         */
+        FtaVerrouillageChampsModel::doUpdateLockField(FtaComposantModel::TABLENAME, $id_fta_composant, FtaComposantModel::KEYNAME);
         $ftaComposantModel = new FtaComposantModel($id_fta_composant);
         $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_QUANTITE_FTA_COMPOSITION_UVC)->setFieldValue(FtaComposantModel::DEFAULT_VALUE_QTE_UVC);
         $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_IS_COMPOSITION_FTA_COMPOSANT)->setFieldValue("1");

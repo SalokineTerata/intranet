@@ -75,7 +75,7 @@ class UserInterfaceMessage {
     const FR_WARNING_ACCES_RIGHTS_TITLE = "Droits manquant";
     const FR_WARNING_ARTICLE_PRIMAIRE = "Vous ne pouvez associer cette Fta avec une Fta ayant le même code Article Arcadia ou dossier Fta";
     const FR_WARNING_ARTICLE_PRIMAIRE_CHECK = "Vous ne pouvez associer cette Fta Primaire avec une autre Fta,<br> vous devez associer les Fta depuis les Secondaires";
-    const FR_WARNING_ARTICLE_PRIMAIRE_CHECK2 = "Le nombre de composant dans cette Fta Primaire n'est pas le même que la Fta que vous souhaitez associer.";
+    const FR_WARNING_ARTICLE_PRIMAIRE_CHECK2 = "Le nombre de composant dans cette Fta Primaire est inférieur au nombre de composant dans l'une des Fta que vous souhaitez associer.";
     const FR_WARNING_ARTICLE_PRIMAIRE_TITLE = "Code Article Arcadia Primaire";
     const FR_WARNING_ARTICLE_SECONDAIRE = "Ce Code Article Arcadia ou dossier Fta est déjà associé à une Fta Primaire";
     const FR_WARNING_ARTICLE_SECONDAIRE_TITLE = "Code Article Arcadia Secondaire";

@@ -239,7 +239,29 @@ class FtaVerrouillageChampsModel extends AbstractModel {
                         );
                         $nbSecondary = count($arrayIdFtaComposantSecondaire);
 
-                        if ($nbPrimary <> $nbSecondary) {
+                        if ($nbPrimary > $nbSecondary) {
+                            /**
+                             * Si des composant 
+                             */
+                            $add = $nbPrimary - $nbSecondary;
+                            $addCompo = $nbSecondary;
+                            for ($nbSecondary; $addCompo <= $nbPrimary; $addCompo++) {
+                                $idFtaComposantAdd = $arrayValue[$addCompo][FtaComposantModel::KEYNAME];
+                                /**
+                                 * Création d'un composant dans les secondaires car ajouter dans le primaires.
+                                 */
+                                $newIdFtaComposant = FtaComposantModel::duplicationIdFtaComposant($idFtaComposantAdd);
+
+                                /**
+                                 * On remplace l'id du primaire par le nouveau
+                                 */
+                                DatabaseOperation::execute(
+                                        "UPDATE " . $tableName
+                                        . " SET " . FtaModel::KEYNAME . "=\"" . $paramIdFtaSecondaire
+                                        . "\" WHERE " . FtaComposantModel::KEYNAME . "=" . $newIdFtaComposant
+                                );
+                            }
+                        } elseif ($nbPrimary < $nbSecondary) {
                             $titre = UserInterfaceMessage::FR_WARNING_ARTICLE_PRIMAIRE_TITLE;
                             $message = UserInterfaceMessage::FR_WARNING_ARTICLE_PRIMAIRE_CHECK2;
                             Lib::showMessage($titre, $message, $redirection);
@@ -258,53 +280,55 @@ class FtaVerrouillageChampsModel extends AbstractModel {
                         break;
                 }
 
+                if ($columnName <> FtaComposantModel::KEYNAME) {
+                    foreach ($arrayValue as $rowsValue) {
+                        $columnValue = $rowsValue[$columnName];
 
-                foreach ($arrayValue as $rowsValue) {
-                    $columnValue = $rowsValue[$columnName];
+                        /**
+                         * On synchronise la donnée de la fta primaire avec la secondaire
+                         */
+                        if ($fieldLock) {
 
-                    /**
-                     * On synchronise la donnée de la fta primaire avec la secondaire
-                     */
-                    if ($fieldLock) {
+                            switch ($tableName) {
+                                case FtaModel::TABLENAME:
+                                    DatabaseOperation::execute(
+                                            "UPDATE " . $tableName
+                                            . " SET " . $columnName . "=\"" . $columnValue
+                                            . "\" WHERE " . FtaModel::KEYNAME . "=" . $paramIdFtaSecondaire
+                                    );
 
-                        switch ($tableName) {
-                            case FtaModel::TABLENAME:
-                                DatabaseOperation::execute(
-                                        "UPDATE " . $tableName
-                                        . " SET " . $columnName . "=\"" . $columnValue
-                                        . "\" WHERE " . FtaModel::KEYNAME . "=" . $paramIdFtaSecondaire
-                                );
+                                    break;
+                                case FtaComposantModel::TABLENAME:
+                                    /**
+                                     * Gestionnaire des sous table Ftacomposant
+                                     */
+                                    $arrayIdFtaComposantSecondaire = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
+                                                    "SELECT " . FtaComposantModel::KEYNAME . "," . $columnName
+                                                    . " FROM " . $tableName
+                                                    . " WHERE " . FtaModel::KEYNAME . "=" . $paramIdFtaSecondaire
+                                    );
 
-                                break;
-                            case FtaComposantModel::TABLENAME:
-                                /**
-                                 * Gestionnaire des sous table Ftacomposant
-                                 */
-                                $arrayIdFtaComposantSecondaire = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
-                                                "SELECT " . FtaComposantModel::KEYNAME . "," . $columnName
-                                                . " FROM " . $tableName
-                                                . " WHERE " . FtaModel::KEYNAME . "=" . $paramIdFtaSecondaire
-                                );
+                                    $idFtaComposant = $arrayIdFtaComposantSecondaire[$i][FtaComposantModel::KEYNAME];
 
-                                $idFtaComposant = $arrayIdFtaComposantSecondaire[$i][FtaComposantModel::KEYNAME];
-                                DatabaseOperation::execute(
-                                        "UPDATE " . $tableName
-                                        . " SET " . $columnName . "=\"" . $columnValue
-                                        . "\" WHERE " . FtaModel::KEYNAME . "=" . $paramIdFtaSecondaire
-                                        . " AND " . FtaComposantModel::KEYNAME . "=" . $idFtaComposant
-                                );
+                                    DatabaseOperation::execute(
+                                            "UPDATE " . $tableName
+                                            . " SET " . $columnName . "=\"" . $columnValue
+                                            . "\" WHERE " . FtaModel::KEYNAME . "=" . $paramIdFtaSecondaire
+                                            . " AND " . FtaComposantModel::KEYNAME . "=" . $idFtaComposant
+                                    );
 
-                                $i++;
-                                break;
+                                    $i++;
+                                    break;
 
-                            default:
-                                DatabaseOperation::execute(
-                                        "UPDATE " . $tableName
-                                        . " SET " . $columnName . "=\"" . $columnValue
-                                        . "\" WHERE " . FtaModel::KEYNAME . "=" . $paramIdFtaSecondaire
-                                );
+                                default:
+                                    DatabaseOperation::execute(
+                                            "UPDATE " . $tableName
+                                            . " SET " . $columnName . "=\"" . $columnValue
+                                            . "\" WHERE " . FtaModel::KEYNAME . "=" . $paramIdFtaSecondaire
+                                    );
 
-                                break;
+                                    break;
+                            }
                         }
                     }
                 }

@@ -2826,6 +2826,10 @@ class FtaModel extends AbstractModel {
      */
     function getArrayIdFtaSecondaireByDossierPrimaire($paramTypeSynchro) {
         $dossierFta = $this->getDossierFta();
+        if ($paramTypeSynchro == FtaEtatModel::ID_VALUE_VALIDE) {
+            $paramTypeSynchro = $paramTypeSynchro
+                    . " OR " . self::FIELDNAME_ID_FTA_ETAT . "=" . FtaEtatModel::ID_VALUE_MODIFICATION;
+        }
 
         $arrayIdFtaSeondaire = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
                         "SELECT " . self::KEYNAME . "," . self::FIELDNAME_DOSSIER_FTA

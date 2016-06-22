@@ -129,6 +129,17 @@ class FtaComposantModel extends AbstractModel {
     }
 
     /**
+     * Duplication d'un Composant
+     * @param int $paramIdFtaComposant
+     * @return int
+     */
+    public static function duplicationIdFtaComposant($paramIdFtaComposant) {
+
+        $key = FtaController::duplicateId(self::TABLENAME, $paramIdFtaComposant);
+
+        return $key;
+    }
+    /**
      * On obtient la liste des composants
      * @param int $paramIdFta
      * @return array

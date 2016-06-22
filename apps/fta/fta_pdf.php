@@ -281,7 +281,7 @@ if ($result) {
         $checkNutri = FALSE;
         //Préparation des données de sortie
         $nom_fta_composition = $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_NOM_FTA_COMPOSITION)->getFieldValue();
-        $quantite_fta_composition = $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_QUANTITE_FTA_COMPOSITION_UVC)->getFieldValue();
+        $quantite_fta_composition = $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_QUANTITE_FTA_COMPOSITION)->getFieldValue();
         $poids_fta_compositionTmp = $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_POIDS_FTA_COMPOSITION)->getFieldValue();
         $taille_nom_fta_composition = $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_TAILLE_POLICE_NOM_FTA_COMPOSITION)->getFieldValue();
         $ingredient_fta_composition = $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_INGREDIENT_FTA_COMPOSITION)->getFieldValue();

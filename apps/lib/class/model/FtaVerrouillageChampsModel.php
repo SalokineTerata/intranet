@@ -241,11 +241,11 @@ class FtaVerrouillageChampsModel extends AbstractModel {
 
                         if ($nbPrimary > $nbSecondary) {
                             /**
-                             * Si des composant 
+                             * Si des composants ont été ajouté dans la Fta primaire
                              */
-                            $add = $nbPrimary - $nbSecondary;
+                           
                             $addCompo = $nbSecondary;
-                            for ($nbSecondary; $addCompo <= $nbPrimary; $addCompo++) {
+                            for ($addCompo; $addCompo < $nbPrimary; $addCompo++) {
                                 $idFtaComposantAdd = $arrayValue[$addCompo][FtaComposantModel::KEYNAME];
                                 /**
                                  * Création d'un composant dans les secondaires car ajouter dans le primaires.

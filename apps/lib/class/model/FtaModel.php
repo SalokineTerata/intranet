@@ -2827,15 +2827,17 @@ class FtaModel extends AbstractModel {
     function getArrayIdFtaSecondaireByDossierPrimaire($paramTypeSynchro) {
         $dossierFta = $this->getDossierFta();
         if ($paramTypeSynchro == FtaEtatModel::ID_VALUE_VALIDE) {
-            $paramTypeSynchro = $paramTypeSynchro
-                    . " OR " . self::FIELDNAME_ID_FTA_ETAT . "=" . FtaEtatModel::ID_VALUE_MODIFICATION;
+            $paramTypeSynchro = " ( " . self::FIELDNAME_ID_FTA_ETAT . "=" . $paramTypeSynchro
+                    . " OR " . self::FIELDNAME_ID_FTA_ETAT . "=" . FtaEtatModel::ID_VALUE_MODIFICATION . " ) ";
+        } else {
+            $paramTypeSynchro = self::FIELDNAME_ID_FTA_ETAT . "=" . $paramTypeSynchro;
         }
 
         $arrayIdFtaSeondaire = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
                         "SELECT " . self::KEYNAME . "," . self::FIELDNAME_DOSSIER_FTA
                         . " FROM " . self::TABLENAME
                         . " WHERE " . self::FIELDNAME_DOSSIER_FTA_PRIMAIRE . "=" . $dossierFta
-                        . " AND " . self::FIELDNAME_ID_FTA_ETAT . "=" . $paramTypeSynchro
+                        . " AND " . $paramTypeSynchro
                         . " ORDER BY " . self::FIELDNAME_DOSSIER_FTA . ", " . self::FIELDNAME_ID_FTA_ETAT
         );
 

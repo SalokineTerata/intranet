@@ -636,7 +636,7 @@ function print_page_begin($disable_full_page = FALSE, $menu_file = NULL, $conf =
 
 
     echo "<body $printable leftmargin=0 topmargin=0 marginwidth=0 marginheight=0 onload=chargement();>";
-    echo "<link rel=search type=application/opensearchdescription+xml title=Intranet Wiki href=wiki-agis.xml>";
+    echo "<link rel=search type=application/opensearchdescription+xml title=Intranet Wiki href=../lib/wiki-agis.xml>";
 
     echo "<div class=display_none id=chargement style=width:100%;height:75px;color:red;font-weight:bold;font-size:14px;background:white;>
            <img src= ../lib/images/ajax_loader.gif> Chargement ...

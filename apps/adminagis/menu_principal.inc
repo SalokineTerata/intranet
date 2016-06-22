@@ -12,35 +12,35 @@ $page="../lib/gestion_table.php?module=$module&menu=menu_principal.inc";
 Menu accessible pour les utilisateurs ayant les droits
 en consultation sur ce module
 */
-if (Acl::getValueAccesRights($module_consultation))
-{
-   /*
-   //Exemple d'un menu
-   echo "<br>";
-   echo "<a href=./index.php target=_top>Index du module</a>";
-   echo "<br>";
-   */
-   echo "<br>";
-   echo "<a href=consultation.php><img src=../lib/images/bouton_creation.gif  border=0></a>";
-   echo "<br>";
-}
-   echo "...";
+//if (Acl::getValueAccesRights($module_consultation))
+//{
+//   /*
+//   //Exemple d'un menu
+//   echo "<br>";
+//   echo "<a href=./index.php target=_top>Index du module</a>";
+//   echo "<br>";
+//   */
+//   echo "<br>";
+//   echo "<a href=consultation.php><img src=../lib/images/bouton_creation.gif  border=0></a>";
+//   echo "<br>";
+//}
+//   echo "...";
 
 /*
 Menu accessible pour les utilisateurs ayant les droits
 en modifications sur ce module
 */
-if (Acl::getValueAccesRights($module_modification))
-{
-   //Exemple d'un menu
-   echo "<br>";
-   echo "<a href=./index.php target=_top>Menu Avancé</a>";
-   echo "<br>";
-   echo "<a href=./migration.php target=_top>Migration</a>";
-   echo "<br>";
-
-}
-   echo "...";
+//if (Acl::getValueAccesRights($module_modification))
+//{
+//   //Exemple d'un menu
+//   echo "<br>";
+//   echo "<a href=./index.php target=_top>Menu Avancé</a>";
+//   echo "<br>";
+//   echo "<a href=./migration.php target=_top>Migration</a>";
+//   echo "<br>";
+//
+//}
+//   echo "...";
 
 echo "</td>";
 

@@ -733,6 +733,12 @@ class FtaView extends AbstractView {
              * Sinon on n'affiche pas le libellé etiquette colis
              */
             $htmlObjectEtiquetteColis->getStyleCSS()->setDisplayToNone();
+            /**
+             * De plus on récupère la DIN 
+             */
+            $dinValue = $this->getModel()->getDataField(FtaModel::FIELDNAME_LIBELLE)->getFieldValue();
+            $dataFieldLibelleColis->setFieldValue($dinValue);
+            $dataFieldLibelleColis->getRecordsetRef()->saveToDatabase();
         }
 
         /**

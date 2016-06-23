@@ -125,7 +125,7 @@ switch ($action) {
             FtaController::refreshDureeDeVieMDD($nomFtaWorkflow, $nomFtaChapitre, $modelFtaSuiviProjet->getModelFta());
 
 
-            /*             * q
+            /*
              * Enregistrement de la signature
              */
 //            $isFtaDataValidationSuccess = $modelFtaSuiviProjet->getModelFta()->isFtaDataValidationSuccess($paramIdFtaChapitreEncours);
@@ -136,8 +136,8 @@ switch ($action) {
                 $modelFtaSuiviProjet->getDataField(FtaSuiviProjetModel::FIELDNAME_DATE_VALIDATION_SUIVI_PROJET)->setFieldValue(date("Y-m-d H:i:s"));
                 $modelFtaSuiviProjet->setSigned($paramSignatureValidationSuiviProjet);
                 $modelFtaSuiviProjet->saveToDatabase();
-                
-               $modelFta->manageFtaPrimaireSecondaire(FtaEtatModel::ID_VALUE_MODIFICATION,  FtaVerrouillageChampsModel::CHANGE_STATE_FALSE);
+
+                $modelFta->manageFtaPrimaireSecondaire(FtaEtatModel::ID_VALUE_MODIFICATION, FtaVerrouillageChampsModel::CHANGE_STATE_FALSE);
             }
         } else {
             $titre = 'Informations';

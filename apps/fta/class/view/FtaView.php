@@ -337,18 +337,22 @@ class FtaView extends AbstractView {
 
             $DIN = strtoupper($DIN);
             $this->getModel()->getDataField(FtaModel::FIELDNAME_LIBELLE)->setFieldValue($DIN);
+            if (!$this->getModel()->getDataField(FtaModel::FIELDNAME_VERROUILLAGE_LIBELLE_ETIQUETTE)->getFieldValue()) {
+                $this->getModel()->getDataField(FtaModel::FIELDNAME_LIBELLE_CLIENT)->setFieldValue($DIN);
+            }
             $this->getModel()->saveToDatabase();
             $return = $this->getHtmlDataField(FtaModel::FIELDNAME_LIBELLE);
         } else {
             $return = $this->getHtmlDataField(FtaModel::FIELDNAME_LIBELLE);
+            /**
+             * Si le chef de projet laisse l'informatique de gestion gérer l'etiquette colis et qu'elle est vide alors on renseigne la DIN
+             */
+            if (!$this->getModel()->getDataField(FtaModel::FIELDNAME_VERROUILLAGE_LIBELLE_ETIQUETTE)->getFieldValue()) {
+                $this->getModel()->getDataField(FtaModel::FIELDNAME_LIBELLE_CLIENT)->setFieldValue($DIN);
+                $this->getModel()->saveToDatabase();
+            }
         }
-        /**
-         * Si le chef de projet laisse l'informatique de gestion gérer l'etiquette colis et qu'elle est vide alors on renseigne la DIN
-         */
-        $this->getModel()->getDataField(FtaModel::FIELDNAME_LIBELLE)->setFieldValue($DIN);
-        if (!$this->getModel()->getDataField(FtaModel::FIELDNAME_VERROUILLAGE_LIBELLE_ETIQUETTE)->getFieldValue() and ! $this->getModel()->getDataField(FtaModel::FIELDNAME_LIBELLE_CLIENT)->getFieldValue()) {
-            $this->getModel()->getDataField(FtaModel::FIELDNAME_LIBELLE_CLIENT)->setFieldValue($DIN);
-        }
+
 
         return $return;
     }

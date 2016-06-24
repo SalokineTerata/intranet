@@ -15,12 +15,25 @@ class ClassificationRaccourcisAssociationModel extends AbstractModel {
     const AJOUTER = 'ajout';
     const SUPPRIMER = 'suppression';
 
+    /**
+     * Nom de la fonction de gestion des versions
+     */
+    private $nameDataTableToCompare;
+
     public function __construct($paramId = NULL, $paramIsCreateRecordsetInDatabaseIfKeyDoesntExist = AbstractModel::DEFAULT_IS_CREATE_RECORDSET_IN_DATABASE_IF_KEY_DOESNT_EXIST) {
         parent::__construct($paramId, $paramIsCreateRecordsetInDatabaseIfKeyDoesntExist);
     }
 
     protected function setDefaultValues() {
         
+    }
+
+    function getNameDataTableToCompare() {
+        return $this->nameDataTableToCompare;
+    }
+
+    function setNameDataTableToCompare() {
+        $this->nameDataTableToCompare = NULL;
     }
 
     /**

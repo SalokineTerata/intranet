@@ -16,8 +16,21 @@ class ClassificationMarqueArcadiaModel extends AbstractModel {
     const SUPPRIMER = 'supprimer';
     const TYPE_MARQUE = 'marque';
 
+    /**
+     * Nom de la fonction de gestion des versions
+     */
+    private $nameDataTableToCompare;
+
     public function __construct($paramId = NULL, $paramIsCreateRecordsetInDatabaseIfKeyDoesntExist = AbstractModel::DEFAULT_IS_CREATE_RECORDSET_IN_DATABASE_IF_KEY_DOESNT_EXIST) {
         parent::__construct($paramId, $paramIsCreateRecordsetInDatabaseIfKeyDoesntExist);
+    }
+
+    function getNameDataTableToCompare() {
+        return $this->nameDataTableToCompare;
+    }
+
+    function setNameDataTableToCompare() {
+        $this->nameDataTableToCompare = NULL;
     }
 
     protected function setDefaultValues() {

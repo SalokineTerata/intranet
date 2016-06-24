@@ -213,7 +213,11 @@ class HtmlSubForm_RNN extends HtmlSubForm {
                 /**
                  * On récupère le nom de la fonction gérant la gestion des versions
                  */
-                $NameDataTableToCompare = $this->getNameDataTableToCompare();
+                if (!$this->getNameDataTableToCompare()) {
+                    $NameDataTableToCompare = $modelSubForm->getNameDataTableToCompare();
+                } else {
+                    $NameDataTableToCompare = $this->getNameDataTableToCompare();
+                }
                 if ($NameDataTableToCompare) {
                     $modelSubForm->$NameDataTableToCompare();
                 }

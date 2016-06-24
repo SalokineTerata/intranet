@@ -73,6 +73,11 @@ class FtaConditionnementModel extends AbstractModel {
      */
     private $modelAnnexeEmballage;
 
+    /**
+     * Nom de la fonction de gestion des versions
+     */
+    private $nameDataTableToCompare;
+
     public function __construct($paramId = NULL, $paramIsCreateRecordsetInDatabaseIfKeyDoesntExist = AbstractModel::DEFAULT_IS_CREATE_RECORDSET_IN_DATABASE_IF_KEY_DOESNT_EXIST) {
         parent::__construct($paramId, $paramIsCreateRecordsetInDatabaseIfKeyDoesntExist);
 
@@ -80,10 +85,20 @@ class FtaConditionnementModel extends AbstractModel {
                 $this->getDataField(self::FIELDNAME_ID_FTA)->getFieldValue());
         $this->setModelAnnexeEmballage(
                 new AnnexeEmballageModel($this->getDataField(self::FIELDNAME_ID_ANNEXE_EMBALLAGE)->getFieldValue()));
+    
+        $this->setNameDataTableToCompare();
     }
 
     protected function setDefaultValues() {
         
+    }
+
+    function getNameDataTableToCompare() {
+        return $this->nameDataTableToCompare;
+    }
+
+    function setNameDataTableToCompare() {
+        $this->nameDataTableToCompare = self::FONCTIONNAME_VERSIONNING;
     }
 
     /**

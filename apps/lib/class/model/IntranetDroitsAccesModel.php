@@ -2,9 +2,8 @@
 
 /**
  * Description of IntranetDroitsAccesModel
- * Table des utilisateurs
- *
- * @author tp4300001
+ * Table des droits d'accès utilisateurs *
+ * @author franckwastaken
  */
 class IntranetDroitsAccesModel extends AbstractModel {
 

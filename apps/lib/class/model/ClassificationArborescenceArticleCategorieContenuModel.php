@@ -17,21 +17,8 @@ class ClassificationArborescenceArticleCategorieContenuModel extends AbstractMod
     const AJOUTER = 'ajouter';
     const SUPPRIMER = 'supprimer';
 
-    /**
-     * Nom de la fonction de gestion des versions
-     */
-    private $nameDataTableToCompare;
-
     public function __construct($paramId = NULL, $paramIsCreateRecordsetInDatabaseIfKeyDoesntExist = AbstractModel::DEFAULT_IS_CREATE_RECORDSET_IN_DATABASE_IF_KEY_DOESNT_EXIST) {
         parent::__construct($paramId, $paramIsCreateRecordsetInDatabaseIfKeyDoesntExist);
-    }
-
-    function getNameDataTableToCompare() {
-        return $this->nameDataTableToCompare;
-    }
-
-    function setNameDataTableToCompare() {
-        $this->nameDataTableToCompare = NULL;
     }
 
     /**
@@ -224,7 +211,7 @@ class ClassificationArborescenceArticleCategorieContenuModel extends AbstractMod
                         . " OR " . ClassificationFta2Model::FIELDNAME_ID_RESEAU . "=" . $this->getKeyValue()
                         . " OR " . ClassificationFta2Model::FIELDNAME_ID_SAISONNALITE . "=" . $this->getKeyValue() . ")"
                         . " AND " . ClassificationFta2Model::TABLENAME . "." . ClassificationFta2Model::KEYNAME . "=" . FtaModel::TABLENAME . "." . FtaModel::FIELDNAME_ID_FTA_CLASSIFICATION2
-                        . " ORDER BY " . FtaModel::FIELDNAME_CODE_ARTICLE_LDC
+                        . " ORDER BY " .FtaModel::FIELDNAME_CODE_ARTICLE_LDC
         );
 
         if ($array) {

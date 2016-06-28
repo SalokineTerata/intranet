@@ -4,7 +4,7 @@
  * Description of FtaActionRoleModel
  * Table des utilisateurs
  *
- * @author tp4300001
+ * @author franckwastaken
  */
 class FtaActionRoleModel extends AbstractModel {
 

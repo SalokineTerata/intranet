@@ -2,8 +2,6 @@
 
 /**
  * Description of IntranetDescriptionModel
- * Table des utilisateurs
- *
  * @author franckwastaken
  */
 class IntranetDescriptionModel extends AbstractModel {

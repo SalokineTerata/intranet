@@ -1,8 +1,7 @@
 <?php
 
 /**
- * Description of AnnexeGestionEtiquetteRectoVersoModel
- * 
+ * Description of AnnexeGestionEtiquetteRectoVersoModel 
  * @author franckwastaken
  */
 class AnnexeGestionEtiquetteRectoVersoModel extends AbstractModel {

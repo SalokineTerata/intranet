@@ -1,10 +1,8 @@
 <?php
 
 /**
- * Description of IntranetModulesModel
- * Table des utilisateurs
- *
- * @author tp4300001
+ * Description of IntranetModulesModel *
+ * @author franckwastaken
  */
 class IntranetModulesModel extends AbstractModel {
 

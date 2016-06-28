@@ -177,7 +177,7 @@ class Navigation {
             /**
              * Bouton d'accès au rendu PDF de la FTA
              */
-            $pdf = TableauFicheView::getHtmlLinkPDF(self::$abreviation_etat, self::$id_fta, self::$id_fta_workflow,"18", "Export PDF");
+            $pdf = TableauFicheView::getHtmlLinkPDF(self::$abreviation_etat, self::$id_fta, self::$id_fta_workflow, "18", "Export PDF");
             if ($transition) {
                 $transition = " | " . $transition;
             }
@@ -193,7 +193,21 @@ class Navigation {
                     . '-' . self::$synthese_action
 //                    . '-1'
                     . '.html ><img src=./images/graphique.png alt=\'\' title=\'Etat d\'avancement\' width=\'18\' height=\'15\' border=\'0\' /> Etat d\'avancement</a>'
-                    . $transition 
+                    . ' | <a href=modification_fta_historique.php?' . FtaModel::KEYNAME . '=' . self::$id_fta
+                    . '&id_fta_chapitre_encours=' . self::$id_fta_chapitre_encours
+                    . '&' . FtaEtatModel::KEYNAME . '=' . self::$id_fta_etat
+                    . '&' . FtaEtatModel::FIELDNAME_ABREVIATION . '=' . self::$abreviation_etat
+                    . '&' . FtaRoleModel::KEYNAME . '=' . self::$id_fta_role
+                    . '&synthese_action=' . self::$synthese_action
+                    . ' ><img src=./images/dossier.png alt=\'\' title=\'Historique des modifications Fta width=\'18\' height=\'15\' border=\'0\' /> Historique des modifications Fta</a>'
+                    . ' | <a href=fta2arcadia_summary.php?' . FtaModel::KEYNAME . '=' . self::$id_fta
+                    . '&id_fta_chapitre_encours=' . self::$id_fta_chapitre_encours
+                    . '&' . FtaEtatModel::KEYNAME . '=' . self::$id_fta_etat
+                    . '&' . FtaEtatModel::FIELDNAME_ABREVIATION . '=' . self::$abreviation_etat
+                    . '&' . FtaRoleModel::KEYNAME . '=' . self::$id_fta_role
+                    . '&synthese_action=' . self::$synthese_action
+                    . ' ><img src=./images/icone_information.png alt=\'\' title=\'Fta2Arcadia width=\'18\' height=\'15\' border=\'0\' /> Fta2Arcadia</a>'
+                    . $transition
                     . $pdf .
                     ' 
                        </td></tr>                       

@@ -1,9 +1,7 @@
 <?php
 
 /**
- * Description of ArcadiaFamilleVenteModel
- * Table des ArcadiaFamilleVenteModel
- *
+ * Description of ArcadiaFamilleVenteModel 
  * @author franckwastaken
  */
 class ArcadiaFamilleVenteModel extends AbstractModel {

@@ -1,5 +1,8 @@
 <?php
-
+/**
+ * Description of CodesoftEtiquettesModel
+ * @author franckwastaken
+ */
 class CodesoftEtiquettesModel extends AbstractModel {
 
     const TABLENAME = 'codesoft_etiquettes';

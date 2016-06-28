@@ -1,9 +1,7 @@
 <?php
 
 /**
- * Description of ArcadiaCategorieProduitOptiventesModel
- * Table des ArcadiaCategorieProduitOptiventesModel
- *
+ * Description of ArcadiaCategorieProduitOptiventesModel 
  * @author franckwastaken
  */
 class ArcadiaCategorieProduitOptiventesModel extends AbstractModel {

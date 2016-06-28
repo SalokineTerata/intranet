@@ -10,7 +10,7 @@ require_once '../inc/main.php';
 $action = Lib::getParameterFromRequest("action");
 $idIntranetColumnInfo = Lib::getParameterFromRequest(IntranetColumnInfoModel::KEYNAME);
 $explication_intranet_description = Lib::getParameterFromRequest(IntranetColumnInfoModel::FIELDNAME_EXPLICATION_INTRANET_COLUMN_INFO);
-
+$explication_intranet_description_controle = str_replace('"', '', $explication_intranet_description);
 /*
   -----------------
   ACTION A TRAITER
@@ -38,7 +38,7 @@ switch ($action) {
          * Ennregistrement de la nouvelle description du champs
          */
         $request = "UPDATE " . IntranetColumnInfoModel::TABLENAME
-                . " SET " . IntranetColumnInfoModel::FIELDNAME_EXPLICATION_INTRANET_COLUMN_INFO . "=\"" . $explication_intranet_description . "\" "
+                . " SET " . IntranetColumnInfoModel::FIELDNAME_EXPLICATION_INTRANET_COLUMN_INFO . "=\"" . $explication_intranet_description_controle . "\" "
                 . " WHERE " . IntranetColumnInfoModel::KEYNAME . "='" . $idIntranetColumnInfo . "' ";
         DatabaseOperation::execute($request);
 

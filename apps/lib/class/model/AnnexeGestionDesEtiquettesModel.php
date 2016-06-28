@@ -1,5 +1,9 @@
 <?php
 
+/**
+ * Description of AnnexeGestionDesEtiquettesModel 
+ * @author franckwastaken
+ */
 class AnnexeGestionDesEtiquettesModel extends AbstractModel {
 
     const ACTIVATION_ETIQUETTE_COLIS = "1";

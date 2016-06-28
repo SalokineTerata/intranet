@@ -3,7 +3,7 @@
 /**
  * Description of ClassificationRaccourcisModel
  * Tables des raccourcis de classification 
- * @author tp4300001
+ * @author franckwastaken
  */
 class ClassificationRaccourcisModel extends AbstractModel {
 

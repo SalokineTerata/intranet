@@ -316,14 +316,6 @@ switch ($output) {
              
                ' . $bloc . '
 
-
-             <tr><td>
-
-                 <!center>
-                 <!input type=submit value=\'Enregistrer\'>
-                 <!/center>
-
-             </td></tr>
              </table>
              </form>
              ';

@@ -1,5 +1,8 @@
 <?php
-
+/**
+ * Description of FtaMoteurDeRechercheModel
+ * @author franckwastaken
+ */
 class FtaMoteurDeRechercheModel extends AbstractModel {
 
     const TABLENAME = 'fta_moteur_de_recherche';

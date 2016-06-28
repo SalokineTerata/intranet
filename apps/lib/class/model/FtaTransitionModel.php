@@ -1,5 +1,9 @@
 <?php
 
+/**
+ * Description of FtaTransitionModel
+ * @author franckwastaken
+ */
 class FtaTransitionModel {
 
     const TABLENAME = "fta_transition";
@@ -40,6 +44,7 @@ class FtaTransitionModel {
         $idDossierFta = $ftaModel->getDossierFta();
         $codeArticleLdc = $ftaModel->getDataField(FtaModel::FIELDNAME_CODE_ARTICLE_LDC)->getFieldValue();
         $siteDeProduction = $ftaModel->getDataField(FtaModel::FIELDNAME_SITE_PRODUCTION)->getFieldValue();
+        $versionDossierFta = $ftaModel->getDataField(FtaModel::FIELDNAME_VERSION_DOSSIER_FTA)->getFieldValue();
         $old_nouveau_maj_fta = $ftaModel->getDataField(FtaModel::FIELDNAME_COMMENTAIRE_MAJ_FTA)->getFieldValue();
         $ftaEtatModel = new FtaEtatModel($idFtaEtatByIdFta);
         $initial_abreviation_fta_etat = $ftaEtatModel->getDataField(FtaEtatModel::FIELDNAME_ABREVIATION)->getFieldValue();
@@ -47,6 +52,7 @@ class FtaTransitionModel {
         UserModel::checkUserSessionExpired($globalConfig);
 
         $nomPrenom = $globalConfig->getAuthenticatedUser()->getPrenomNom();
+        $idUser = $globalConfig->getAuthenticatedUser()->getKeyValue();
 
 
         /*         * *****************************************************************************
@@ -226,6 +232,12 @@ class FtaTransitionModel {
                 . "\" WHERE " . FtaModel::KEYNAME . "=\"" . $paramIdFta . "\" "
         ;
         DatabaseOperation::execute($req);
+
+        /**
+         * Historisation du changement d'état de la Fta
+         */
+        FtaEtatHistoriqueModel::setFtaEtatHistorique($paramIdFta, $idDossierFta, $versionDossierFta,$idFtaEtatByIdFta, $idFtaEtat, $idUser, $initial_abreviation_fta_etat);
+
         //Fin Traitement Commun
 
         /*         * *****************************************************************************
@@ -626,7 +638,8 @@ class FtaTransitionModel {
                 . "\n"
                 . "INFORMATIONS DE DEBUGGAGE:\n"
                 . $logTransition
-        ; {
+        ;
+        {
             $expediteur = $prenom . " " . $nom . " <" . $mail . ">";
             envoismail($sujetmail, $corp, $mail, $expediteur, $typeMail);
         }
@@ -728,7 +741,8 @@ class FtaTransitionModel {
                 . $text
                 . "\n\n"
                 . $paramLogTransition
-        ; {
+        ;
+        {
             $expediteur = $prenom . " " . $nom . " <" . $mailUser . ">";
             envoismail($sujetmail, $corp, $mailUser, $expediteur, $typeMail);
         }

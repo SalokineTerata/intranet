@@ -1,9 +1,7 @@
 <?php
 
 /**
- * Description of ArcadiaGammeCoopModel
- * Table des ArcadiaGammeCoopModel
- *
+ * Description of ArcadiaGammeCoopModel 
  * @author franckwastaken
  */
 class ArcadiaGammeCoopModel extends AbstractModel {

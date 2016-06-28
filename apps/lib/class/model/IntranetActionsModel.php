@@ -4,7 +4,7 @@
  * Description of IntranetActionsModel
  * Table des utilisateurs
  *
- * @author tp4300001
+ * @author franckwastaken
  */
 class IntranetActionsModel extends AbstractModel {
 

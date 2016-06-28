@@ -134,6 +134,7 @@ require_once('../lib/class/model/FtaConditionnementModel.php');
 require_once('../lib/class/model/FtaComposantModel.php');
 require_once('../lib/class/model/FtaProcessusCycleModel.php');
 require_once('../lib/class/model/FtaModel.php');
+require_once('../lib/class/model/FtaEtatHistoriqueModel.php');
 require_once('../lib/class/model/FtaEtatModel.php');
 require_once('../lib/class/model/FtaProcessusEtatModel.php');
 require_once('../lib/class/model/FtaProcessusModel.php');

@@ -1,5 +1,8 @@
 <?php
-
+/**
+ * Description of AnnexeEnvironnementConservationGroupeModel 
+ * @author franckwastaken
+ */
 class AnnexeEnvironnementConservationGroupeModel extends AbstractModel {
 
     const TABLENAME = 'annexe_environnement_conservation_groupe';

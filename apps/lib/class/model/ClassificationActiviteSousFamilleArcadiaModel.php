@@ -2,7 +2,7 @@
 
 /**
  * Description of ClassificationActiviteSousFamilleArcadiaModel
- * @author tp4300001
+ * @author franckwastaken
  */
 class ClassificationActiviteSousFamilleArcadiaModel extends AbstractModel {
 
@@ -15,25 +15,12 @@ class ClassificationActiviteSousFamilleArcadiaModel extends AbstractModel {
     const AJOUTER = 'ajouter';
     const SUPPRIMER = 'supprimer';
 
-    /**
-     * Nom de la fonction de gestion des versions
-     */
-    private $nameDataTableToCompare;
-
     public function __construct($paramId = NULL, $paramIsCreateRecordsetInDatabaseIfKeyDoesntExist = AbstractModel::DEFAULT_IS_CREATE_RECORDSET_IN_DATABASE_IF_KEY_DOESNT_EXIST) {
-        parent::__construct($paramId, $paramIsCreateRecordsetInDatabaseIfKeyDoesntExist);        
+        parent::__construct($paramId, $paramIsCreateRecordsetInDatabaseIfKeyDoesntExist);
     }
 
     protected function setDefaultValues() {
         
-    }
-
-    function getNameDataTableToCompare() {
-        return $this->nameDataTableToCompare;
-    }
-
-    function setNameDataTableToCompare() {
-        $this->nameDataTableToCompare = NULL;
     }
 
     /**

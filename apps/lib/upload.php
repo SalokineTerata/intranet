@@ -2,13 +2,18 @@
 
 //Inclusions
 require_once '../inc/main.php';
+/**
+ * Initialisation
+ */
 $idIntranetColumnInfo = Lib::getParameterFromRequest(IntranetColumnInfoModel::KEYNAME);
 $retour = "<br><a href=popup-mysql_field_desc.php?id_intranet_column_info=" . $idIntranetColumnInfo . "&edit_mode=1 >Retour</a>";
 $dossier = ModuleConfigLib::CHEMIN_ACCES_UPLOAD;
 $fichier = basename($_FILES['avatar']['name']);
 
 
-
+/**
+ * Affichage du type d'erreur
+ */
 switch ($_FILES['avatar']['error']) {
     case UPLOAD_ERR_OK:
 
@@ -21,7 +26,7 @@ switch ($_FILES['avatar']['error']) {
         /**
          * Valeur : 2. La taille du fichier téléchargé excède la valeur de MAX_FILE_SIZE, qui a été spécifiée dans le formulaire HTML.
          */
-        $erreur .= ' - Le fichier est trop gros (limit of 100Go dans  le code ou excède la valeur de upload_max_filesize, configurée dans le php.ini).';
+        $erreur .= ' - Le fichier est trop gros (limit of 10Go dans  le code ou excède la valeur de upload_max_filesize, configurée dans le php.ini).';
         break;
     case UPLOAD_ERR_PARTIAL:
         $erreur .= ' - Le fichier n\'a été que partiellement téléchargé.';
@@ -53,6 +58,9 @@ if (!isset($erreur)) { //S'il n'y a pas d'erreur, on upload
     $fichier = strtr($fichier, 'ÀÁÂÃÄÅÇÈÉÊËÌÍÎÏÒÓÔÕÖÙÚÛÜÝàáâãäåçèéêëìíîïðòóôõöùúûüýÿ', 'AAAAAACEEEEIIIIOOOOOUUUUYaaaaaaceeeeiiiioooooouuuuyy');
     $fichier = preg_replace('/([^.a-z0-9]+)/i', '-', $fichier);
     if (move_uploaded_file($_FILES['avatar']['tmp_name'], $dossier . $fichier)) { //Si la fonction renvoie TRUE, c'est que ça a fonctionné...
+        /**
+         * Enregistrement du nom du fichier en BDD
+         */
         $intranetColumInfoModel = new IntranetColumnInfoModel($idIntranetColumnInfo);
         $intranetColumInfoModel->getDataField(IntranetColumnInfoModel::FIELDNAME_UPLOAD_NAME_FILE)->setFieldValue($fichier);
         $intranetColumInfoModel->saveToDatabase();

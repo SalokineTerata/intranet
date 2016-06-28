@@ -1,5 +1,8 @@
 <?php
-
+/**
+ * Description of CodesoftStyleParagrapheModel
+ * @author franckwastaken
+ */
 class CodesoftStyleParagrapheModel extends AbstractModel {
 
     const TABLENAME = 'codesoft_style_paragraphe';

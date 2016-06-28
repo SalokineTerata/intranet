@@ -1,9 +1,7 @@
 <?php
 
 /**
- * Description of ArcadiaMarqueModel
- * Table des ArcadiaMarqueModel
- *
+ * Description of ArcadiaMarqueModel 
  * @author franckwastaken
  */
 class ArcadiaMarqueModel extends AbstractModel {

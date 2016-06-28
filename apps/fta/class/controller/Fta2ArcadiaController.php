@@ -29,8 +29,8 @@ class Fta2ArcadiaController {
     const TABULATION = "    ";
     const TABLE_START = "    <Tables>\n";
     const TABLE_END = "    </Tables>\n";
-    const ARTICLE_REF_START = "        <ARTICLE_REF>\n";
-    const ARTICLE_REF_END = "        </ARTICLE_REF>\n";
+    const ARTICLE_REF_START = "        <ARTICLE_TRAIT_NEW>\n";
+    const ARTICLE_REF_END = "        </ARTICLE_TRAIT_NEW>\n";
     const DATA_IMPORT_START = "            <DataToImport>\n";
     const DATA_IMPORT_END = "            </DataToImport>\n";
     const ESP_PRODUITS_FINIS_START = "        <ESP_PRODUITS_FINIS>\n";
@@ -184,7 +184,7 @@ class Fta2ArcadiaController {
 
     public function __construct
             
-    ($paramFtaModel) {
+    ($paramFtaModel, $paramToNotGenerateFile = NULL) {
     /**
      * Inisialisation du model Fta
      */
@@ -194,7 +194,7 @@ class Fta2ArcadiaController {
     /**
      * On récupère et initialise le model de l'idFta à comparer
      */
-    $this->setDatabaseRecordToCompare();
+    $this-> setDatabaseRecordToCompare();
 
     /**
      * Generation de la proposal en BDD
@@ -228,8 +228,12 @@ class Fta2ArcadiaController {
 
     /**
      * Géneration du fichier xml
+     * Vide ou false on génère le fichier
+     * TRUE on ne genère pas le fichier XML
      */
-    $this->saveExportXmlToFile();
+    if (!$paramToNotGenerateFile) {
+        $this->saveExportXmlToFile();
+    }
 }
 
 function getGlobalConfigModel() {
@@ -2504,7 +2508,8 @@ function generateXmlText() {
 
 /**
  * Géneration du fichier xml
- */ function saveExportXmlToFile() {
+ */
+function saveExportXmlToFile() {
     $linkData = $this->linkXmlFileDataSend();
     $linkOk = $this->linkXmlFileOkSend();
     /**
@@ -2518,6 +2523,18 @@ function generateXmlText() {
     if ($linkOk) {
         file_put_contents($linkOk, "ok");
     }
+}
+
+/**
+ * Affiche le code XML 
+ */
+function showExportXmlFile() {
+    $xmlText = $this->getXmlText();
+    /**
+     * Mise en forme
+     */
+    $return = "<td >Fichier XML</td><tr class=contenu><td>Fichier XML</td><td > <pre style=font-size:medium;>" . htmlspecialchars($xmlText) . "</pre></td ></tr>";
+    return $return;
 }
 
 /**

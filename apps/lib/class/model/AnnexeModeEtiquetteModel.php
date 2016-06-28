@@ -1,5 +1,8 @@
 <?php
-
+/**
+ * Description of AnnexeModeEtiquetteModel 
+ * @author franckwastaken
+ */
 class AnnexeModeEtiquetteModel extends AbstractModel {
 
     const TABLENAME = 'annexe_mode_etiquette';

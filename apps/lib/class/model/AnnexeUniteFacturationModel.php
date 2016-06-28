@@ -1,9 +1,8 @@
 <?php
 
 /**
- * Description of AnnexeUniteFacturationModel
- *
- * @author tp4300001
+ * Description of AnnexeUniteFacturationModel 
+ * @author franckwastaken
  */
 class AnnexeUniteFacturationModel extends AbstractModel {
 

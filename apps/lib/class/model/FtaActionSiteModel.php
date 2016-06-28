@@ -4,7 +4,7 @@
  * Description of FtaActionSiteModel
  * Table des utilisateurs
  *
- * @author tp4300001
+ * @author franckwastaken
  */
 class FtaActionSiteModel extends AbstractModel {
 

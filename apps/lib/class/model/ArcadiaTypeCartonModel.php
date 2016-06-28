@@ -1,9 +1,7 @@
 <?php
 
 /**
- * Description of ArcadiaTypeCartonModel
- * Table ArcadiaTypeCartonModel
- *
+ * Description of ArcadiaTypeCartonModel 
  * @author franckwastaken
  */
 class ArcadiaTypeCartonModel extends AbstractModel {

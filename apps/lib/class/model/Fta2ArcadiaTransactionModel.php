@@ -20,7 +20,7 @@
 /**
  * Description of Fta2ArcadiaTransactionModel
  *
- * @author tp4300001
+ * @author franckwastaken
  */
 class Fta2ArcadiaTransactionModel extends AbstractModel {
 

@@ -20,7 +20,7 @@
 /**
  * Description of StaticStandardModel
  *
- * @author tp4300001
+ * @author franckwastaken
  */
 class StaticStandardModel {
 

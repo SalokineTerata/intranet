@@ -156,8 +156,10 @@ class FtaEtatHistoriqueModel extends AbstractModel {
                         $check = $model->getDataField($rowsChamps[IntranetColumnInfoModel::FIELDNAME_COLUMN_NAME_INTRANET_COLUMN_INFO])->isFieldDiff();
 
                         if ($check) {
-                            $oldValue = $model->getDataToCompare()->getFieldValue($rowsChamps[IntranetColumnInfoModel::FIELDNAME_COLUMN_NAME_INTRANET_COLUMN_INFO]);
-                            $newValue = $model->getDataField($rowsChamps[IntranetColumnInfoModel::FIELDNAME_COLUMN_NAME_INTRANET_COLUMN_INFO])->getFieldValue();
+                            $htmlObjetOld = Html::getHtmlObjectFromDataField($model->getDataToCompare()->getDataFieldByFieldName($rowsChamps[IntranetColumnInfoModel::FIELDNAME_COLUMN_NAME_INTRANET_COLUMN_INFO]));
+                            $oldValue = $htmlObjetOld->getRawContent();
+                            $htmlObjetNew = Html::getHtmlObjectFromDataField($model->getDataField($rowsChamps[IntranetColumnInfoModel::FIELDNAME_COLUMN_NAME_INTRANET_COLUMN_INFO]));
+                            $newValue = $htmlObjetNew->getRawContent();
                             $label = $rowsChamps[IntranetColumnInfoModel::FIELDNAME_LABEL_INTRANET_COLUMN_INFO];
                             $idFtaChapitreTmp = $rowsChamps[IntranetColumnInfoModel::FIELDNAME_ID_LISTE_CHAPITRE_HISTORIQUE];
                             $idFtaChapitreArray = explode(',', $idFtaChapitreTmp);
@@ -201,8 +203,10 @@ class FtaEtatHistoriqueModel extends AbstractModel {
                                 $check = $model->getDataField($rowsChamps[IntranetColumnInfoModel::FIELDNAME_COLUMN_NAME_INTRANET_COLUMN_INFO])->isFieldDiff();
 
                                 if ($check) {
-                                    $oldValue = $model->getDataToCompare()->getFieldValue($rowsChamps[IntranetColumnInfoModel::FIELDNAME_COLUMN_NAME_INTRANET_COLUMN_INFO]);
-                                    $newValue = $model->getDataField($rowsChamps[IntranetColumnInfoModel::FIELDNAME_COLUMN_NAME_INTRANET_COLUMN_INFO])->getFieldValue();
+                                    $htmlObjetOld = Html::getHtmlObjectFromDataField($model->getDataToCompare()->getDataFieldByFieldName($rowsChamps[IntranetColumnInfoModel::FIELDNAME_COLUMN_NAME_INTRANET_COLUMN_INFO]));
+                                    $oldValue = $htmlObjetOld->getRawContent();
+                                    $htmlObjetNew = Html::getHtmlObjectFromDataField($model->getDataField($rowsChamps[IntranetColumnInfoModel::FIELDNAME_COLUMN_NAME_INTRANET_COLUMN_INFO]));
+                                    $newValue = $htmlObjetNew->getRawContent();
                                     $label = $rowsChamps[IntranetColumnInfoModel::FIELDNAME_LABEL_INTRANET_COLUMN_INFO];
                                     $idFtaChapitreTmp = $rowsChamps[IntranetColumnInfoModel::FIELDNAME_ID_LISTE_CHAPITRE_HISTORIQUE];
                                     $idFtaChapitreArray = explode(',', $idFtaChapitreTmp);
@@ -254,8 +258,10 @@ class FtaEtatHistoriqueModel extends AbstractModel {
                                 $check = $model->getDataField($rowsChamps[IntranetColumnInfoModel::FIELDNAME_COLUMN_NAME_INTRANET_COLUMN_INFO])->isFieldDiff();
 
                                 if ($check) {
-                                    $oldValue = $model->getDataToCompare()->getFieldValue($rowsChamps[IntranetColumnInfoModel::FIELDNAME_COLUMN_NAME_INTRANET_COLUMN_INFO]);
-                                    $newValue = $model->getDataField($rowsChamps[IntranetColumnInfoModel::FIELDNAME_COLUMN_NAME_INTRANET_COLUMN_INFO])->getFieldValue();
+                                    $htmlObjetOld = Html::getHtmlObjectFromDataField($model->getDataToCompare()->getDataFieldByFieldName($rowsChamps[IntranetColumnInfoModel::FIELDNAME_COLUMN_NAME_INTRANET_COLUMN_INFO]));
+                                    $oldValue = $htmlObjetOld->getRawContent();
+                                    $htmlObjetNew = Html::getHtmlObjectFromDataField($model->getDataField($rowsChamps[IntranetColumnInfoModel::FIELDNAME_COLUMN_NAME_INTRANET_COLUMN_INFO]));
+                                    $newValue = $htmlObjetNew->getRawContent();
                                     $label = $rowsChamps[IntranetColumnInfoModel::FIELDNAME_LABEL_INTRANET_COLUMN_INFO];
                                     $idFtaChapitreTmp = $rowsChamps[IntranetColumnInfoModel::FIELDNAME_ID_LISTE_CHAPITRE_HISTORIQUE];
                                     $idFtaChapitreArray = explode(',', $idFtaChapitreTmp);

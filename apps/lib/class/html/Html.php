@@ -16,7 +16,7 @@ class Html {
     const DEFAULT_HTML_IMAGE_LOADING = AttributesGlobal::DEFAULT_HTML_IMAGE_LOADING;
     const DEFAULT_HTML_IMAGE_OK = AttributesGlobal::DEFAULT_HTML_IMAGE_OK;
     const DEFAULT_HTML_IMAGE_UNDO = AttributesGlobal::DEFAULT_HTML_IMAGE_UNDO;
-    const DEFAULT_HTML_IMAGE_PIECE_JOINTE= AttributesGlobal::DEFAULT_HTML_IMAGE_PIECE_JOINTE;
+    const DEFAULT_HTML_IMAGE_PIECE_JOINTE = AttributesGlobal::DEFAULT_HTML_IMAGE_PIECE_JOINTE;
     const DEFAULT_HTML_IMAGE_DEVERROUILLE_MODIFIABLE = AttributesGlobal::DEFAULT_HTML_IMAGE_DEVERROUILLE_MODIFIABLE;
     const DEFAULT_HTML_IMAGE_DEVERROUILLE_NON_MODIFIABLE = AttributesGlobal::DEFAULT_HTML_IMAGE_DEVERROUILLE_NON_MODIFIABLE;
     const DEFAULT_HTML_IMAGE_VERROUILLE_NON_MODIFIABLE = AttributesGlobal::DEFAULT_HTML_IMAGE_VERROUILLE_NON_MODIFIABLE;
@@ -157,12 +157,14 @@ class Html {
      */
     public static function getHtmlObjectFromDataField(DatabaseDataField $paramDataField, $param = FALSE, $param2 = FALSE) {
         $htmlObject = NULL;
+        $RawContent = NULL;
         $TypeOfHtmlObject = $paramDataField->getFieldTypeOfHtmlObject();
 
         switch ($TypeOfHtmlObject) {
 
             case Html::TYPE_OF_OBJECT_CALENDAR:
                 $htmlObject = new DataFieldToHtmlInputCalendar($paramDataField);
+                $RawContent = $htmlObject->getHtmlViewedContent();
                 break;
 
             case Html::TYPE_OF_OBJECT_INPUTTEXT:

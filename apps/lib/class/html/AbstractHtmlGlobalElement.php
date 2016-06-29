@@ -141,6 +141,7 @@ abstract class AbstractHtmlGlobalElement {
      * @var boolean
      */
     private $help;
+
     /**
      * La description du champ ?
      * @var boolean
@@ -391,6 +392,11 @@ abstract class AbstractHtmlGlobalElement {
         return $this->label;
     }
 
+    /**
+     * Retourne le contenu brut du DataField
+     */
+    public abstract function getRawContent();
+
     public function setLabel($paramLabel) {
         $this->label = $paramLabel;
     }
@@ -419,7 +425,6 @@ abstract class AbstractHtmlGlobalElement {
         $this->showImage = $showImage;
     }
 
-        
     function getRightToAdd() {
         return $this->rightToAdd;
     }
@@ -446,7 +451,7 @@ abstract class AbstractHtmlGlobalElement {
         if ($this->getShowLabel()) {
             $label = $this->getLabel();
             if ($this->getShowHelp()) {
-             $label = $this->getHelp();   
+                $label = $this->getHelp();
             }
         }
 

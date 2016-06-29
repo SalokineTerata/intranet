@@ -1427,7 +1427,7 @@ class FtaModel extends AbstractModel {
 
     /**
      * Gestion des etiquette recto par le chef de projet
-     * Si Auncun alors verrouiller sur Auncun au niveau de la qualité (étiquette composition)
+     * Si Aucun alors verrouiller sur Aucun au niveau de la qualité (étiquette composition)
      * Si A définir par l'étiquette composition alors les choix est libre à la qualité 
      * Si étiquette sélectionner alors verrouiller sur l'étiquette au niveau de la qualité
      * @return string 

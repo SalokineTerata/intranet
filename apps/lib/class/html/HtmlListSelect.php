@@ -212,6 +212,13 @@ class HtmlListSelect extends AbstractHtmlList {
     }
 
     /**
+     * Retourne le contenu brut du DataField
+     */
+    public function getRawContent(){
+        return $this->getSelectedContent();
+    }
+    
+    /**
      * Retourne le libellé de la valeur sélectionnée dans la liste
      * @return mixed
      */

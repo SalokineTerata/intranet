@@ -285,6 +285,9 @@ class FtaEtatHistoriqueModel extends AbstractModel {
                 }
             }
         }
+        /**
+         * Affichage du tableau
+         */
         if (is_array($arrayHistoModif)) {
             FtaController::arraySortByColumn($arrayHistoModif, "date");
 

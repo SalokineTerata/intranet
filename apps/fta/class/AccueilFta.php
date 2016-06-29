@@ -1046,6 +1046,15 @@ class AccueilFta {
                             . '</a>'
                     ;
                 }
+                /**
+                 * Historique de modification
+                 */
+                $actions .= ' <a href=modification_fta_historique.php?' . FtaModel::KEYNAME . '=' . $idFta
+                        . '&' . FtaEtatModel::KEYNAME . '=' . self::$idFtaEtat
+                        . '&' . FtaEtatModel::FIELDNAME_ABREVIATION . '=' . self::$abreviationFtaEtat
+                        . '&' . FtaRoleModel::KEYNAME . '=' . self::$idFtaRole
+                        . '&synthese_action=' . self::$syntheseAction
+                        . ' ><img src=./images/dossier.png alt=\'\' title=\'Historique des modifications Fta width=\'30\' height=\'30\' border=\'0\' /></a>';
                 /*
                  * Transiter
                  */

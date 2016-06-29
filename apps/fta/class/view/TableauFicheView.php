@@ -130,7 +130,12 @@ class TableauFicheView {
          * Bouton d'accès au détail de la FTA
          */
         $lien .= self::getHtmlLinkModify($abreviation_fta_etat, $paramIdFta, $synthese_action, $idFtaEtat, $checkAccesButtonBySiteProd);
+      
 
+        /**
+         * Historique de modification
+         */
+         $lien .= self::getHtmlLinkHistoriqueModfify($abreviation_fta_etat, $paramIdFta, $synthese_action, $idFtaEtat);
         /**
          * Bouton d'accès au rendu PDF de la FTA
          */
@@ -318,6 +323,29 @@ class TableauFicheView {
         return $iconHeader;
     }
 
+    /**
+     * Historique de modification
+     * @param type $paramAbreviationFtaEtat
+     * @param type $paramIdFta
+     * @param type $paramSyntheseAction
+     * @param type $paramIdFtaEtat
+     * @param type $paramIdFtaRole
+     * @return string
+     */
+    static private function getHtmlLinkHistoriqueModfify($paramAbreviationFtaEtat, $paramIdFta, $paramSyntheseAction, $paramIdFtaEtat, $paramIdFtaRole = FtaRoleModel::ID_FTA_ROLE_COMMUN) {
+ 
+
+            $lien .=' <a href=modification_fta_historique.php?' . FtaModel::KEYNAME . '=' . $paramIdFta
+                . '&' . FtaEtatModel::KEYNAME . '=' . $paramIdFtaEtat
+                . '&' . FtaEtatModel::FIELDNAME_ABREVIATION . '=' . $paramAbreviationFtaEtat
+                . '&' . FtaRoleModel::KEYNAME . '=' . $paramIdFtaRole
+                . '&synthese_action=' . $paramSyntheseAction
+                . ' ><img src=./images/dossier.png alt=\'\' title=\'Historique des modifications Fta width=\'30\' height=\'25\' border=\'0\' /></a>';
+
+        
+
+        return $lien;
+    }
     static private function getHtmlLinkModify($paramAbreviationFtaEtat, $paramIdFta, $paramSyntheseAction, $paramIdFtaEtat, $paramAccesBouton, $paramIdFtaRole = FtaRoleModel::ID_FTA_ROLE_COMMUN) {
         $lien = "";
         if (

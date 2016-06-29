@@ -92,6 +92,18 @@ DatabaseOperation::execute(
         . "='" . FtaModel::TABLENAME."'"
 );
 /**
+ * Exigence client
+ */
+DatabaseOperation::execute(
+        "UPDATE " . IntranetColumnInfoModel::TABLENAME
+        . " SET " . IntranetColumnInfoModel::FIELDNAME_IS_ENABLED_INTRANET_HISTORIQUE . "='1'"
+        . ", " . IntranetColumnInfoModel::FIELDNAME_ID_LISTE_CHAPITRE_HISTORIQUE . "='42,19'"
+        . " WHERE " . IntranetColumnInfoModel::FIELDNAME_COLUMN_NAME_INTRANET_COLUMN_INO
+        . "='" . FtaModel::FIELDNAME_DUREE_DE_VIE . "'"
+        . " AND " . IntranetColumnInfoModel::FIELDNAME_TABLE_NAME_INTRANET_COLUMN_INFO
+        . "='" . FtaModel::TABLENAME."'"
+);
+/**
  * ExpeditionEtEANS
  */
 DatabaseOperation::execute(

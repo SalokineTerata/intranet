@@ -20,7 +20,6 @@ class FtaConditionnementModel extends AbstractModel {
     const FIELDNAME_LARGEUR_FTA_CONDITIONNEMENT = 'largeur_fta_conditionnement';
     const FIELDNAME_LONGUEUR_FTA_CONDITIONNEMENT = 'longueur_fta_conditionnement';
     const FIELDNAME_NOMBRE_COUCHE_FTA_CONDITIONNEMENT = 'nombre_couche_fta_conditionnement';
-    const FIELDNAME_PCB_FTA_CONDITIONNEMENT = 'pcb_fta_conditionnement';
     const FIELDNAME_POIDS_FTA_CONDITIONNEMENT = 'poids_fta_conditionnement';
     const FIELDNAME_QUANTITE_PAR_COUCHE_FTA_CONDITIONNEMENT = 'quantite_par_couche_fta_conditionnement';
     const FIELDNAME_VIRTUAL_HAUTEUR_FTA_CONDITIONNEMENT = 'VIRTUAL_hauteur_fta_conditionnement';
@@ -85,7 +84,7 @@ class FtaConditionnementModel extends AbstractModel {
                 $this->getDataField(self::FIELDNAME_ID_FTA)->getFieldValue());
         $this->setModelAnnexeEmballage(
                 new AnnexeEmballageModel($this->getDataField(self::FIELDNAME_ID_ANNEXE_EMBALLAGE)->getFieldValue()));
-    
+
         $this->setNameDataTableToCompare();
     }
 
@@ -181,6 +180,20 @@ class FtaConditionnementModel extends AbstractModel {
         }
 
         return $idFtaConditionnementToCompare;
+    }
+
+    /**
+     * On obtient la liste des emballages
+     * @param int $paramIdFta
+     * @return array
+     */
+    public static function getArrayIdFtaConditionnement($paramIdFta) {
+        $arrayIdFtaConditionnement = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
+                        'SELECT ' . self::KEYNAME
+                        . ' FROM ' . self::TABLENAME
+                        . ' WHERE ' . self::FIELDNAME_ID_FTA . '=' . $paramIdFta
+        );
+        return $arrayIdFtaConditionnement;
     }
 
     /**
@@ -280,20 +293,20 @@ class FtaConditionnementModel extends AbstractModel {
      */
     public static function getIdFtaConditionnementByArrayIdAnnexeEmballageAndIdFtaAndIdEmballageGroupeType($paramArrayIdAnnexeEmballage, $paramIdFta, $paramIdEmballageGroupeType) {
 
-        $req = 'SELECT DISTINCT ' . FtaConditionnementModel::KEYNAME
-                . ' FROM ' . FtaConditionnementModel::TABLENAME
+        $req = 'SELECT DISTINCT ' . self::KEYNAME
+                . ' FROM ' . self::TABLENAME
                 . ' WHERE ( 0 ';
 
         $req .=AnnexeEmballageModel::AddIdAnnexeEmballage($paramArrayIdAnnexeEmballage);
 
-        $req .= ') AND ' . FtaConditionnementModel::FIELDNAME_ID_FTA . '=' . $paramIdFta
-                . ' AND ' . FtaConditionnementModel::FIELDNAME_ID_ANNEXE_EMBALLAGE_GROUPE_TYPE . '=' . $paramIdEmballageGroupeType
+        $req .= ') AND ' . self::FIELDNAME_ID_FTA . '=' . $paramIdFta
+                . ' AND ' . self::FIELDNAME_ID_ANNEXE_EMBALLAGE_GROUPE_TYPE . '=' . $paramIdEmballageGroupeType
         ;
 
         $arrayIdFtaConditionnement = DatabaseOperation::convertSqlStatementWithoutKeyToArray($req);
         if ($arrayIdFtaConditionnement) {
             foreach ($arrayIdFtaConditionnement as $rowsIdFtaConditionnement) {
-                $IdFtaConditionnement[] = $rowsIdFtaConditionnement[FtaConditionnementModel::KEYNAME];
+                $IdFtaConditionnement[] = $rowsIdFtaConditionnement[self::KEYNAME];
             }
         } else {
             $IdFtaConditionnement = 0;
@@ -310,16 +323,16 @@ class FtaConditionnementModel extends AbstractModel {
      */
     public static function getIdAnnexeEmballageFromFtaConditionnement($paramIdFtaConditionnement, $paramIdFta) {
 
-        $req = 'SELECT DISTINCT ' . FtaConditionnementModel::FIELDNAME_ID_ANNEXE_EMBALLAGE
-                . ' FROM ' . FtaConditionnementModel::TABLENAME
-                . ' WHERE ' . FtaConditionnementModel::KEYNAME . '=' . $paramIdFtaConditionnement
-                . '  AND ' . FtaConditionnementModel::FIELDNAME_ID_FTA . '=' . $paramIdFta
+        $req = 'SELECT DISTINCT ' . self::FIELDNAME_ID_ANNEXE_EMBALLAGE
+                . ' FROM ' . self::TABLENAME
+                . ' WHERE ' . self::KEYNAME . '=' . $paramIdFtaConditionnement
+                . '  AND ' . self::FIELDNAME_ID_FTA . '=' . $paramIdFta
         ;
 
         $arrayIdAnnexeEmballage = DatabaseOperation::convertSqlStatementWithoutKeyToArray($req);
         if ($arrayIdAnnexeEmballage) {
             foreach ($arrayIdAnnexeEmballage as $rowsIdAnnexeEmballage) {
-                $IdAnnexeEmballage = $rowsIdAnnexeEmballage[FtaConditionnementModel::FIELDNAME_ID_ANNEXE_EMBALLAGE];
+                $IdAnnexeEmballage = $rowsIdAnnexeEmballage[self::FIELDNAME_ID_ANNEXE_EMBALLAGE];
             }
         } else {
             $IdAnnexeEmballage = 0;
@@ -336,12 +349,12 @@ class FtaConditionnementModel extends AbstractModel {
      */
     public static function getIdAnnexeEmballageAndGroupeTypeAndGroupeAndIdFtaConditionnementFromFtaConditionnement($paramIdFtaConditionnement, $paramIdFta) {
 
-        $req = 'SELECT DISTINCT ' . FtaConditionnementModel::KEYNAME
-                . ',' . FtaConditionnementModel::FIELDNAME_ID_ANNEXE_EMBALLAGE
-                . ',' . FtaConditionnementModel::FIELDNAME_ID_ANNEXE_EMBALLAGE_GROUPE_TYPE
-                . ' FROM ' . FtaConditionnementModel::TABLENAME
-                . ' WHERE ( 0 ' . FtaConditionnementModel::addIdFtaConditionnement($paramIdFtaConditionnement)
-                . ' ) AND ' . FtaConditionnementModel::FIELDNAME_ID_FTA . '=' . $paramIdFta
+        $req = 'SELECT DISTINCT ' . self::KEYNAME
+                . ',' . self::FIELDNAME_ID_ANNEXE_EMBALLAGE
+                . ',' . self::FIELDNAME_ID_ANNEXE_EMBALLAGE_GROUPE_TYPE
+                . ' FROM ' . self::TABLENAME
+                . ' WHERE ( 0 ' . self::addIdFtaConditionnement($paramIdFtaConditionnement)
+                . ' ) AND ' . self::FIELDNAME_ID_FTA . '=' . $paramIdFta
         ;
 
         $arrayIdAnnexeEmballageGroupe = DatabaseOperation::convertSqlStatementWithoutKeyToArray($req);
@@ -357,13 +370,13 @@ class FtaConditionnementModel extends AbstractModel {
     function getArrayFtaConditonnement() {
 
         $array[$this->getKeyValue()] = array(
-            FtaConditionnementModel::FIELDNAME_VIRTUAL_NOM_FTA_CONDITIONNEMENT_GROUPE => $this->getDataField(FtaConditionnementModel::FIELDNAME_ID_ANNEXE_EMBALLAGE_GROUPE)->getFieldValue(),
-            FtaConditionnementModel::FIELDNAME_VIRTUAL_REFERENCE_FOURNISSEUR_FTA_CONDITIONNEMENT => $this->getDataField(FtaConditionnementModel::FIELDNAME_ID_ANNEXE_EMBALLAGE),
-            FtaConditionnementModel::FIELDNAME_VIRTUAL_LONGUEUR_FTA_CONDITIONNEMENT => $this->getDataField(FtaConditionnementModel::FIELDNAME_LONGUEUR_FTA_CONDITIONNEMENT)->getFieldValue(),
-            FtaConditionnementModel::FIELDNAME_VIRTUAL_LARGEUR_FTA_CONDITIONNEMENT => $this->getDataField(FtaConditionnementModel::FIELDNAME_LARGEUR_FTA_CONDITIONNEMENT)->getFieldValue(),
-            FtaConditionnementModel::FIELDNAME_VIRTUAL_HAUTEUR_FTA_CONDITIONNEMENT => $this->getDataField(FtaConditionnementModel::FIELDNAME_HAUTEUR_FTA_CONDITIONNEMENT)->getFieldValue(),
-            FtaConditionnementModel::FIELDNAME_VIRTUAL_POIDS_FTA_CONDITIONNEMENT => $this->getDataField(FtaConditionnementModel::FIELDNAME_POIDS_FTA_CONDITIONNEMENT)->getFieldValue(),
-            FtaConditionnementModel::FIELDNAME_VIRTUAL_QUANTITE_PAR_COUCHE_FTA_CONDITIONNEMENT => $this->getDataField(FtaConditionnementModel::FIELDNAME_QUANTITE_PAR_COUCHE_FTA_CONDITIONNEMENT)->getFieldValue()
+            self::FIELDNAME_VIRTUAL_NOM_FTA_CONDITIONNEMENT_GROUPE => $this->getDataField(self::FIELDNAME_ID_ANNEXE_EMBALLAGE_GROUPE)->getFieldValue(),
+            self::FIELDNAME_VIRTUAL_REFERENCE_FOURNISSEUR_FTA_CONDITIONNEMENT => $this->getDataField(self::FIELDNAME_ID_ANNEXE_EMBALLAGE),
+            self::FIELDNAME_VIRTUAL_LONGUEUR_FTA_CONDITIONNEMENT => $this->getDataField(self::FIELDNAME_LONGUEUR_FTA_CONDITIONNEMENT)->getFieldValue(),
+            self::FIELDNAME_VIRTUAL_LARGEUR_FTA_CONDITIONNEMENT => $this->getDataField(self::FIELDNAME_LARGEUR_FTA_CONDITIONNEMENT)->getFieldValue(),
+            self::FIELDNAME_VIRTUAL_HAUTEUR_FTA_CONDITIONNEMENT => $this->getDataField(self::FIELDNAME_HAUTEUR_FTA_CONDITIONNEMENT)->getFieldValue(),
+            self::FIELDNAME_VIRTUAL_POIDS_FTA_CONDITIONNEMENT => $this->getDataField(self::FIELDNAME_POIDS_FTA_CONDITIONNEMENT)->getFieldValue(),
+            self::FIELDNAME_VIRTUAL_QUANTITE_PAR_COUCHE_FTA_CONDITIONNEMENT => $this->getDataField(self::FIELDNAME_QUANTITE_PAR_COUCHE_FTA_CONDITIONNEMENT)->getFieldValue()
         );
 
         return $array;
@@ -388,9 +401,9 @@ class FtaConditionnementModel extends AbstractModel {
      */
     public static function getTablesNameAndIdForeignKeyOfFtaConditionnement($paramIdFta, $paramIdAnnexeEmballage, $paramIdAnnexeEmballageGroupeType, $paramIdFtaConditionnement) {
         $tablesNameAndIdForeignKeyOfFtaConditionnement[$paramIdFtaConditionnement] = array(
-            array(AnnexeEmballageModel::TABLENAME, FtaConditionnementModel::FIELDNAME_ID_ANNEXE_EMBALLAGE, $paramIdAnnexeEmballage),
-            array(AnnexeEmballageGroupeTypeModel::TABLENAME, FtaConditionnementModel::FIELDNAME_ID_ANNEXE_EMBALLAGE_GROUPE_TYPE, $paramIdAnnexeEmballageGroupeType),
-            array(FtaModel::TABLENAME, FtaConditionnementModel::FIELDNAME_ID_FTA, $paramIdFta),
+            array(AnnexeEmballageModel::TABLENAME, self::FIELDNAME_ID_ANNEXE_EMBALLAGE, $paramIdAnnexeEmballage),
+            array(AnnexeEmballageGroupeTypeModel::TABLENAME, self::FIELDNAME_ID_ANNEXE_EMBALLAGE_GROUPE_TYPE, $paramIdAnnexeEmballageGroupeType),
+            array(FtaModel::TABLENAME, self::FIELDNAME_ID_FTA, $paramIdFta),
         );
 
         return $tablesNameAndIdForeignKeyOfFtaConditionnement;
@@ -425,12 +438,12 @@ class FtaConditionnementModel extends AbstractModel {
         }
 
         return '<tr class=titre_tableau  align=center >' .
-                '<td ' . $border . '>' . $this->getDataField(FtaConditionnementModel::FIELDNAME_ID_ANNEXE_EMBALLAGE_GROUPE)->getFieldLabel() . '</td>'
-                . '<td ' . $border . '>' . $this->getDataField(FtaConditionnementModel::FIELDNAME_ID_ANNEXE_EMBALLAGE)->getFieldLabel() . '</td>'
-                . '<td ' . $border . '>' . $this->getDataField(FtaConditionnementModel::FIELDNAME_LONGUEUR_FTA_CONDITIONNEMENT)->getFieldLabel() . '</td>'
-                . '<td ' . $border . '>' . $this->getDataField(FtaConditionnementModel::FIELDNAME_LARGEUR_FTA_CONDITIONNEMENT)->getFieldLabel() . '</td>'
-                . '<td ' . $border . '>' . $this->getDataField(FtaConditionnementModel::FIELDNAME_HAUTEUR_FTA_CONDITIONNEMENT)->getFieldLabel() . '</td>'
-                . '<td ' . $border . '>' . $this->getDataField(FtaConditionnementModel::FIELDNAME_POIDS_FTA_CONDITIONNEMENT)->getFieldLabel() . '</td>'
+                '<td ' . $border . '>' . $this->getDataField(self::FIELDNAME_ID_ANNEXE_EMBALLAGE_GROUPE)->getFieldLabel() . '</td>'
+                . '<td ' . $border . '>' . $this->getDataField(self::FIELDNAME_ID_ANNEXE_EMBALLAGE)->getFieldLabel() . '</td>'
+                . '<td ' . $border . '>' . $this->getDataField(self::FIELDNAME_LONGUEUR_FTA_CONDITIONNEMENT)->getFieldLabel() . '</td>'
+                . '<td ' . $border . '>' . $this->getDataField(self::FIELDNAME_LARGEUR_FTA_CONDITIONNEMENT)->getFieldLabel() . '</td>'
+                . '<td ' . $border . '>' . $this->getDataField(self::FIELDNAME_HAUTEUR_FTA_CONDITIONNEMENT)->getFieldLabel() . '</td>'
+                . '<td ' . $border . '>' . $this->getDataField(self::FIELDNAME_POIDS_FTA_CONDITIONNEMENT)->getFieldLabel() . '</td>'
                 . '<td ' . $border . '>' . $quantite . '</td>'
                 . $action
                 . '</tr>';
@@ -452,14 +465,14 @@ class FtaConditionnementModel extends AbstractModel {
 
 
         return '<tr class=titre_tableau >' .
-                '<td ' . $border . '>' . $this->getDataField(FtaConditionnementModel::FIELDNAME_ID_ANNEXE_EMBALLAGE_GROUPE)->getFieldLabel() . '</td>'
-                . '<td ' . $border . '>' . $this->getDataField(FtaConditionnementModel::FIELDNAME_ID_ANNEXE_EMBALLAGE)->getFieldLabel() . '</td>'
-                . '<td ' . $border . '>' . $this->getDataField(FtaConditionnementModel::FIELDNAME_LONGUEUR_FTA_CONDITIONNEMENT)->getFieldLabel() . '</td>'
-                . '<td ' . $border . '>' . $this->getDataField(FtaConditionnementModel::FIELDNAME_LARGEUR_FTA_CONDITIONNEMENT)->getFieldLabel() . '</td>'
-                . '<td ' . $border . '>' . $this->getDataField(FtaConditionnementModel::FIELDNAME_HAUTEUR_FTA_CONDITIONNEMENT)->getFieldLabel() . '</td>'
-                . '<td ' . $border . '>' . $this->getDataField(FtaConditionnementModel::FIELDNAME_POIDS_FTA_CONDITIONNEMENT)->getFieldLabel() . '</td>'
-                . '<td ' . $border . '>' . $this->getDataField(FtaConditionnementModel::FIELDNAME_NOMBRE_COUCHE_FTA_CONDITIONNEMENT)->getFieldLabel() . '</td>'
-                . '<td ' . $border . '>' . $this->getDataField(FtaConditionnementModel::FIELDNAME_QUANTITE_PAR_COUCHE_FTA_CONDITIONNEMENT)->getFieldLabel() . '</td>'
+                '<td ' . $border . '>' . $this->getDataField(self::FIELDNAME_ID_ANNEXE_EMBALLAGE_GROUPE)->getFieldLabel() . '</td>'
+                . '<td ' . $border . '>' . $this->getDataField(self::FIELDNAME_ID_ANNEXE_EMBALLAGE)->getFieldLabel() . '</td>'
+                . '<td ' . $border . '>' . $this->getDataField(self::FIELDNAME_LONGUEUR_FTA_CONDITIONNEMENT)->getFieldLabel() . '</td>'
+                . '<td ' . $border . '>' . $this->getDataField(self::FIELDNAME_LARGEUR_FTA_CONDITIONNEMENT)->getFieldLabel() . '</td>'
+                . '<td ' . $border . '>' . $this->getDataField(self::FIELDNAME_HAUTEUR_FTA_CONDITIONNEMENT)->getFieldLabel() . '</td>'
+                . '<td ' . $border . '>' . $this->getDataField(self::FIELDNAME_POIDS_FTA_CONDITIONNEMENT)->getFieldLabel() . '</td>'
+                . '<td ' . $border . '>' . $this->getDataField(self::FIELDNAME_NOMBRE_COUCHE_FTA_CONDITIONNEMENT)->getFieldLabel() . '</td>'
+                . '<td ' . $border . '>' . $this->getDataField(self::FIELDNAME_QUANTITE_PAR_COUCHE_FTA_CONDITIONNEMENT)->getFieldLabel() . '</td>'
                 . $action
                 . '</tr>';
     }
@@ -473,14 +486,14 @@ class FtaConditionnementModel extends AbstractModel {
 
 
         $array[$this->getKeyValue()] = array(
-            FtaConditionnementModel::FIELDNAME_VIRTUAL_NOM_FTA_CONDITIONNEMENT_GROUPE => $this->getDataField(FtaConditionnementModel::FIELDNAME_ID_ANNEXE_EMBALLAGE_GROUPE)->getFieldValue(),
-            FtaConditionnementModel::FIELDNAME_VIRTUAL_REFERENCE_FOURNISSEUR_FTA_CONDITIONNEMENT => $this->getDataField(FtaConditionnementModel::FIELDNAME_ID_ANNEXE_EMBALLAGE)->getFieldValue(),
-            FtaConditionnementModel::FIELDNAME_VIRTUAL_LONGUEUR_FTA_CONDITIONNEMENT => $this->getDataField(FtaConditionnementModel::FIELDNAME_LONGUEUR_FTA_CONDITIONNEMENT)->getFieldValue(),
-            FtaConditionnementModel::FIELDNAME_VIRTUAL_LARGEUR_FTA_CONDITIONNEMENT => $this->getDataField(FtaConditionnementModel::FIELDNAME_LARGEUR_FTA_CONDITIONNEMENT)->getFieldValue(),
-            FtaConditionnementModel::FIELDNAME_VIRTUAL_HAUTEUR_FTA_CONDITIONNEMENT => $this->getDataField(FtaConditionnementModel::FIELDNAME_HAUTEUR_FTA_CONDITIONNEMENT)->getFieldValue(),
-            FtaConditionnementModel::FIELDNAME_VIRTUAL_POIDS_FTA_CONDITIONNEMENT => $this->getDataField(FtaConditionnementModel::FIELDNAME_POIDS_FTA_CONDITIONNEMENT)->getFieldValue(),
-            FtaConditionnementModel::FIELDNAME_VIRTUAL_NOMBRE_COUCHE_FTA_CONDITIONNEMENT => $this->getDataField(FtaConditionnementModel::FIELDNAME_NOMBRE_COUCHE_FTA_CONDITIONNEMENT)->getFieldValue(),
-            FtaConditionnementModel::FIELDNAME_VIRTUAL_QUANTITE_PAR_COUCHE_FTA_CONDITIONNEMENT => $this->getDataField(FtaConditionnementModel::FIELDNAME_QUANTITE_PAR_COUCHE_FTA_CONDITIONNEMENT)->getFieldValue()
+            self::FIELDNAME_VIRTUAL_NOM_FTA_CONDITIONNEMENT_GROUPE => $this->getDataField(self::FIELDNAME_ID_ANNEXE_EMBALLAGE_GROUPE)->getFieldValue(),
+            self::FIELDNAME_VIRTUAL_REFERENCE_FOURNISSEUR_FTA_CONDITIONNEMENT => $this->getDataField(self::FIELDNAME_ID_ANNEXE_EMBALLAGE)->getFieldValue(),
+            self::FIELDNAME_VIRTUAL_LONGUEUR_FTA_CONDITIONNEMENT => $this->getDataField(self::FIELDNAME_LONGUEUR_FTA_CONDITIONNEMENT)->getFieldValue(),
+            self::FIELDNAME_VIRTUAL_LARGEUR_FTA_CONDITIONNEMENT => $this->getDataField(self::FIELDNAME_LARGEUR_FTA_CONDITIONNEMENT)->getFieldValue(),
+            self::FIELDNAME_VIRTUAL_HAUTEUR_FTA_CONDITIONNEMENT => $this->getDataField(self::FIELDNAME_HAUTEUR_FTA_CONDITIONNEMENT)->getFieldValue(),
+            self::FIELDNAME_VIRTUAL_POIDS_FTA_CONDITIONNEMENT => $this->getDataField(self::FIELDNAME_POIDS_FTA_CONDITIONNEMENT)->getFieldValue(),
+            self::FIELDNAME_VIRTUAL_NOMBRE_COUCHE_FTA_CONDITIONNEMENT => $this->getDataField(self::FIELDNAME_NOMBRE_COUCHE_FTA_CONDITIONNEMENT)->getFieldValue(),
+            self::FIELDNAME_VIRTUAL_QUANTITE_PAR_COUCHE_FTA_CONDITIONNEMENT => $this->getDataField(self::FIELDNAME_QUANTITE_PAR_COUCHE_FTA_CONDITIONNEMENT)->getFieldValue()
         );
 
 
@@ -504,17 +517,17 @@ class FtaConditionnementModel extends AbstractModel {
     public static function addFtaConditionnement($paramIdFta, $paramIdAnnexeEmballage, $paramIdAnnexeEmballageGroupe, $paramIdAnnexeEmballageGroupeType, $paramHauteurFtaConditionnement, $paramLongeurFtaConditionnement, $paramLargeurFtaConditionnement, $paramPoidsFtaConditionnement, $paramNbCoucheFtaConditionnement, $paramQteCoucheFtaConditionnement) {
 
         return DatabaseOperation::execute(
-                        'INSERT INTO ' . FtaConditionnementModel::TABLENAME
-                        . '(' . FtaConditionnementModel::FIELDNAME_ID_FTA
-                        . ', ' . FtaConditionnementModel::FIELDNAME_ID_ANNEXE_EMBALLAGE
-                        . ', ' . FtaConditionnementModel::FIELDNAME_ID_ANNEXE_EMBALLAGE_GROUPE
-                        . ', ' . FtaConditionnementModel::FIELDNAME_ID_ANNEXE_EMBALLAGE_GROUPE_TYPE
-                        . ', ' . FtaConditionnementModel::FIELDNAME_LONGUEUR_FTA_CONDITIONNEMENT
-                        . ', ' . FtaConditionnementModel::FIELDNAME_LARGEUR_FTA_CONDITIONNEMENT
-                        . ', ' . FtaConditionnementModel::FIELDNAME_HAUTEUR_FTA_CONDITIONNEMENT
-                        . ', ' . FtaConditionnementModel::FIELDNAME_POIDS_FTA_CONDITIONNEMENT
-                        . ', ' . FtaConditionnementModel::FIELDNAME_NOMBRE_COUCHE_FTA_CONDITIONNEMENT
-                        . ', ' . FtaConditionnementModel::FIELDNAME_QUANTITE_PAR_COUCHE_FTA_CONDITIONNEMENT
+                        'INSERT INTO ' . self::TABLENAME
+                        . '(' . self::FIELDNAME_ID_FTA
+                        . ', ' . self::FIELDNAME_ID_ANNEXE_EMBALLAGE
+                        . ', ' . self::FIELDNAME_ID_ANNEXE_EMBALLAGE_GROUPE
+                        . ', ' . self::FIELDNAME_ID_ANNEXE_EMBALLAGE_GROUPE_TYPE
+                        . ', ' . self::FIELDNAME_LONGUEUR_FTA_CONDITIONNEMENT
+                        . ', ' . self::FIELDNAME_LARGEUR_FTA_CONDITIONNEMENT
+                        . ', ' . self::FIELDNAME_HAUTEUR_FTA_CONDITIONNEMENT
+                        . ', ' . self::FIELDNAME_POIDS_FTA_CONDITIONNEMENT
+                        . ', ' . self::FIELDNAME_NOMBRE_COUCHE_FTA_CONDITIONNEMENT
+                        . ', ' . self::FIELDNAME_QUANTITE_PAR_COUCHE_FTA_CONDITIONNEMENT
                         . ') VALUES (' . $paramIdFta
                         . ', ' . $paramIdAnnexeEmballage
                         . ', ' . $paramIdAnnexeEmballageGroupe
@@ -535,8 +548,8 @@ class FtaConditionnementModel extends AbstractModel {
      */
     public static function deleteFtaConditionnement($paramIdFtaConditionnement) {
         return DatabaseOperation::execute(
-                        ' DELETE FROM ' . FtaConditionnementModel::TABLENAME . ' WHERE ' .
-                        FtaConditionnementModel::KEYNAME . '=' . $paramIdFtaConditionnement);
+                        ' DELETE FROM ' . self::TABLENAME . ' WHERE ' .
+                        self::KEYNAME . '=' . $paramIdFtaConditionnement);
     }
 
     /**
@@ -547,7 +560,7 @@ class FtaConditionnementModel extends AbstractModel {
     public static function addIdFtaConditionnement($paramIdFtaConditionnement) {
         if ($paramIdFtaConditionnement) {
             foreach ($paramIdFtaConditionnement as $value) {
-                $req .= ' OR ' . FtaConditionnementModel::TABLENAME . '.' . FtaConditionnementModel::KEYNAME . '=' . $value . ' ';
+                $req .= ' OR ' . self::TABLENAME . '.' . self::KEYNAME . '=' . $value . ' ';
             }
         }
         return $req;
@@ -660,7 +673,7 @@ class FtaConditionnementModel extends AbstractModel {
         $poidsFtaConditionnement = $annexeEmballageModel->getDataField(AnnexeEmballageModel::FIELDNAME_POIDS_ANNEXE_EMBALLAGE)->getFieldValue();             //Poids des emballages qui ont peuvent varier selon les articles (comme des films)
         $qteCoucheFtaConditionnement = "1"; //Quantité par UVC
 
-        FtaConditionnementModel::addFtaConditionnement($paramIdFta, AnnexeEmballageModel::ID_ANNEXE_EMBALLAGE_PALETTE, AnnexeEmballageGroupeModel::ID_ANNEXE_EMBALLAGE_GROUPE_PALETTE
+        self::addFtaConditionnement($paramIdFta, AnnexeEmballageModel::ID_ANNEXE_EMBALLAGE_PALETTE, AnnexeEmballageGroupeModel::ID_ANNEXE_EMBALLAGE_GROUPE_PALETTE
                 , AnnexeEmballageGroupeTypeModel::EMBALLAGE_PALETTE, $hauteurFtaConditionnement, $longeurFtaConditionnement
                 , $largeurFtaConditionnement, $poidsFtaConditionnement, $nbCoucheFtaConditionnement, $qteCoucheFtaConditionnement);
     }

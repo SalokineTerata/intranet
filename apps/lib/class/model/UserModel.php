@@ -30,7 +30,7 @@ class UserModel extends AbstractModel {
     const FIELDNAME_LIEU_GEO = 'lieu_geo';
     const USER_ACTIF = 'oui';
     const USER_NON_ACTIF = 'non';
-    const TEST = 'non';
+    const USER_NON_DEFINIE = 'Non définie';
 
     public function __construct($paramId = NULL, $paramIsCreateRecordsetInDatabaseIfKeyDoesntExist = AbstractModel::DEFAULT_IS_CREATE_RECORDSET_IN_DATABASE_IF_KEY_DOESNT_EXIST) {
         parent::__construct($paramId, $paramIsCreateRecordsetInDatabaseIfKeyDoesntExist);

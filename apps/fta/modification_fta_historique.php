@@ -62,9 +62,6 @@ $idFtaRole = Lib::getParameterFromRequest(FtaRoleModel::KEYNAME);
  * Initialisation
  */
 $ftaModel = new FtaModel($id_fta);
-$versionFta = "V" . $ftaModel->getVersionDossierFta();
-$ftaView = new FtaView($ftaModel);
-$ftaView->setIsEditable(Chapitre::NOT_EDITABLE);
 $dossierFta = $ftaModel->getDossierFta();
 $idFtaWorkflow = $ftaModel->getDataField(FtaModel::FIELDNAME_WORKFLOW)->getFieldValue();
 $globalConfig = new GlobalConfig();
@@ -106,7 +103,9 @@ $detail_id_fta;              //Identifiant de la fiche sur laquelle on souhaite 
 Navigation::initNavigation($id_fta, $id_fta_chapitre, $synthese_action, $comeback, $idFtaEtat, $abreviationFtaEtat, $idFtaRole, TRUE);
 $navigue = Navigation::getHtmlNavigationBar();
 
-
+/**
+ * Historisation des changement d'état initialisé en modification
+ */
 $arrayHistoValidationFta = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
                 "SELECT DISTINCT " . FtaEtatHistoriqueModel::FIELDNAME_ID_DOSSIER_FTA
                 . "," . FtaEtatHistoriqueModel::FIELDNAME_ID_DOSSIER_VERSION_FTA . "," . FtaEtatHistoriqueModel::FIELDNAME_ID_FTA_ETAT_DEST
@@ -119,99 +118,69 @@ $arrayHistoValidationFta = DatabaseOperation::convertSqlStatementWithoutKeyToArr
                 . " ORDER BY " . FtaEtatHistoriqueModel::FIELDNAME_STATE_CHANGE_DATE . " DESC "
 );
 
-foreach ($arrayHistoValidationFta as $rowsHistoValidationFta) {
-    $ftaEtatModel = new FtaEtatModel($rowsHistoValidationFta[FtaEtatHistoriqueModel::FIELDNAME_ID_FTA_ETAT_DEST]);
-    $nomFtaEtat = $ftaEtatModel->getDataField(FtaEtatModel::FIELDNAME_NOM_FTA_ETAT)->getFieldValue();
-    $versionEncours =  "V" .$rowsHistoValidationFta[FtaEtatHistoriqueModel::FIELDNAME_ID_DOSSIER_VERSION_FTA];
-    $nomSignataire =  $rowsUserName[UserModel::FIELDNAME_PRENOM] . " " . $rowsUserName[UserModel::FIELDNAME_NOM];
-    $dateValidation =  $rowsUserName[FtaEtatHistoriqueModel::FIELDNAME_STATE_CHANGE_DATE] ;
-     $arrayHistoModif[] = array("date"=> $dateValidation
-                        ,"nom"=> $nomSignataire 
-                        ,"version"=> $versionEncours 
-                        ,"etat"=> $nomFtaEtat 
-                        ,"oldValue"=> $oldValue
-        ,"newValue"=> $newValue 
-                        );
+if ($arrayHistoValidationFta) {
+    foreach ($arrayHistoValidationFta as $rowsHistoValidationFta) {
+        $ftaEtatModel = new FtaEtatModel($rowsHistoValidationFta[FtaEtatHistoriqueModel::FIELDNAME_ID_FTA_ETAT_DEST]);
+        $nomFtaEtat = $ftaEtatModel->getDataField(FtaEtatModel::FIELDNAME_NOM_FTA_ETAT)->getFieldValue();
+        $versionEncours = "V" . $rowsHistoValidationFta[FtaEtatHistoriqueModel::FIELDNAME_ID_DOSSIER_VERSION_FTA];
+        $nomSignataire = $rowsUserName[UserModel::FIELDNAME_PRENOM] . " " . $rowsUserName[UserModel::FIELDNAME_NOM];
+        $dateValidation = $rowsUserName[FtaEtatHistoriqueModel::FIELDNAME_STATE_CHANGE_DATE];
+        $arrayHistoModif[] = array("date" => $dateValidation
+            , "nom" => $nomSignataire
+            , "version" => $versionEncours
+            , "etat" => $nomFtaEtat
+            , "oldValue" => $oldValue
+            , "newValue" => $newValue
+        );
+    }
 }
-
 /**
  * Listes des tables Fta à vérifier
  */
 $arrayTableCheck = array(FtaModel::TABLENAME, FtaComposantModel::TABLENAME, FtaConditionnementModel::TABLENAME);
-
+/**
+ * Historiques des changement de données par les utilisateurs
+ */
 foreach ($arrayTableCheck as $rowsTableCheck) {
+
     /**
-     * Listes des noms des champs avec le label de la table encours
+     * Tableau des Fta selon le dossier encours
      */
-    if ($rowsTableCheck == FtaModel::TABLENAME) {
-        $model = new FtaModel($id_fta);
-        $model->setDataFtaTableToCompare();
-
-        $arrayChamps = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
-                        "SELECT DISTINCT " . IntranetColumnInfoModel::FIELDNAME_COLUMN_NAME_INTRANET_COLUMN_INO
-                        . "," . IntranetColumnInfoModel::FIELDNAME_LABEL_INTRANET_COLUMN_INFO
-                        . "," . IntranetColumnInfoModel::FIELDNAME_ID_LISTE_CHAPITRE_HISTORIQUE
-                        . " FROM " . IntranetColumnInfoModel::TABLENAME
-                        . " WHERE " . IntranetColumnInfoModel::FIELDNAME_TABLE_NAME_INTRANET_COLUMN_INFO . "='" . $rowsTableCheck . "'"
-                        . " AND " . IntranetColumnInfoModel::FIELDNAME_IS_ENABLED_INTRANET_HISTORIQUE . "=" . IntranetColumnInfoModel::IS_ENABLED_INTRANET_HISTORIQUE_TRUE
-        );
-        foreach ($arrayChamps as $rowsChamps) {
-
-            $check = $model->getDataField($rowsChamps[IntranetColumnInfoModel::FIELDNAME_COLUMN_NAME_INTRANET_COLUMN_INO])->isFieldDiff();
-
-            if ($check) {
-                $oldValue = $model->getDataToCompare()->getFieldValue($rowsChamps[IntranetColumnInfoModel::FIELDNAME_COLUMN_NAME_INTRANET_COLUMN_INO]);
-                $newValue = $model->getDataField($rowsChamps[IntranetColumnInfoModel::FIELDNAME_COLUMN_NAME_INTRANET_COLUMN_INO])->getFieldValue();
-                $versionFta;
-                $label = $rowsChamps[IntranetColumnInfoModel::FIELDNAME_LABEL_INTRANET_COLUMN_INFO];
-                $idFtaChapitreTmp = $rowsChamps[IntranetColumnInfoModel::FIELDNAME_ID_LISTE_CHAPITRE_HISTORIQUE];
-                $idFtaChapitreArray = explode(',', $idFtaChapitreTmp);
-                $idFtaChapitre = FtaWorkflowStructureModel::getIdFtaChapitreBetweenArrayByWorkflowAndArrayByColumn($idFtaWorkflow, $idFtaChapitreArray);
-                $nomSignataire = FtaSuiviProjetModel::getUserNameByIdFtaChapitreAndIdFta($id_fta, $idFtaChapitre);
-                $dateValidation = FtaSuiviProjetModel::getValidationDateByIdFtaChapitreAndIdFta($id_fta, $idFtaChapitre);
-                $arrayHistoModif[] = array("date" => $dateValidation
-                    , "nom" => $nomSignataire
-                    , "version" => $versionFta
-                    , "etat" => $label
-                    , "oldValue" => $oldValue
-                    , "newValue" => $newValue
-                );
-            }
-        }
-    } elseif ($rowsTableCheck == FtaComposantModel::TABLENAME) {
+    $arrayIdFta = FtaModel::getArrayIdFtaByIdDossierFta($dossierFta);
+    foreach ($arrayIdFta as $rowsIdFta) {
+        $idFtaEncours = $rowsIdFta[FtaModel::KEYNAME];
+        $ftaModelEncours = new FtaModel($idFtaEncours);
+        $versionFta = "V" . $ftaModelEncours->getDataField(FtaModel::FIELDNAME_VERSION_DOSSIER_FTA)->getFieldValue();
         /**
-         * On récupère la liste des composants
+         * Listes des noms des champs avec le label de la table encours
          */
-        $arraIdFtaComposant = FtaComposantModel::getArrayIdFtaComposantTable($id_fta);
-        if ($arraIdFtaComposant) {
-            foreach ($arraIdFtaComposant as $rowsIdFtaComposant) {
-                $idFtaComposant = $rowsIdFtaComposant[FtaComposantModel::KEYNAME];
+        if ($rowsTableCheck == FtaModel::TABLENAME) {
+            $model = new FtaModel($idFtaEncours);
+            $model->setDataFtaTableToCompare();
 
-                $model = new FtaComposantModel($idFtaComposant);
-                $model->setDataFtaComposantTableToCompare();
+            $arrayChamps = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
+                            "SELECT DISTINCT " . IntranetColumnInfoModel::FIELDNAME_COLUMN_NAME_INTRANET_COLUMN_INO
+                            . "," . IntranetColumnInfoModel::FIELDNAME_LABEL_INTRANET_COLUMN_INFO
+                            . "," . IntranetColumnInfoModel::FIELDNAME_ID_LISTE_CHAPITRE_HISTORIQUE
+                            . " FROM " . IntranetColumnInfoModel::TABLENAME
+                            . " WHERE " . IntranetColumnInfoModel::FIELDNAME_TABLE_NAME_INTRANET_COLUMN_INFO . "='" . $rowsTableCheck . "'"
+                            . " AND " . IntranetColumnInfoModel::FIELDNAME_IS_ENABLED_INTRANET_HISTORIQUE . "=" . IntranetColumnInfoModel::IS_ENABLED_INTRANET_HISTORIQUE_TRUE
+            );
+            foreach ($arrayChamps as $rowsChamps) {
 
-                $arrayChamps = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
-                                "SELECT DISTINCT " . IntranetColumnInfoModel::FIELDNAME_COLUMN_NAME_INTRANET_COLUMN_INO
-                                . "," . IntranetColumnInfoModel::FIELDNAME_LABEL_INTRANET_COLUMN_INFO
-                                . "," . IntranetColumnInfoModel::FIELDNAME_ID_LISTE_CHAPITRE_HISTORIQUE
-                                . " FROM " . IntranetColumnInfoModel::TABLENAME
-                                . " WHERE " . IntranetColumnInfoModel::FIELDNAME_TABLE_NAME_INTRANET_COLUMN_INFO . "='" . $rowsTableCheck . "'"
-                                . " AND " . IntranetColumnInfoModel::FIELDNAME_IS_ENABLED_INTRANET_HISTORIQUE . "=" . IntranetColumnInfoModel::IS_ENABLED_INTRANET_HISTORIQUE_TRUE
-                );
-                foreach ($arrayChamps as $rowsChamps) {
+                $check = $model->getDataField($rowsChamps[IntranetColumnInfoModel::FIELDNAME_COLUMN_NAME_INTRANET_COLUMN_INO])->isFieldDiff();
 
-                    $check = $model->getDataField($rowsChamps[IntranetColumnInfoModel::FIELDNAME_COLUMN_NAME_INTRANET_COLUMN_INO])->isFieldDiff();
+                if ($check) {
+                    $oldValue = $model->getDataToCompare()->getFieldValue($rowsChamps[IntranetColumnInfoModel::FIELDNAME_COLUMN_NAME_INTRANET_COLUMN_INO]);
+                    $newValue = $model->getDataField($rowsChamps[IntranetColumnInfoModel::FIELDNAME_COLUMN_NAME_INTRANET_COLUMN_INO])->getFieldValue();
+                    $label = $rowsChamps[IntranetColumnInfoModel::FIELDNAME_LABEL_INTRANET_COLUMN_INFO];
+                    $idFtaChapitreTmp = $rowsChamps[IntranetColumnInfoModel::FIELDNAME_ID_LISTE_CHAPITRE_HISTORIQUE];
+                    $idFtaChapitreArray = explode(',', $idFtaChapitreTmp);
+                    $idFtaChapitre = FtaWorkflowStructureModel::getIdFtaChapitreBetweenArrayByWorkflowAndArrayByColumn($idFtaWorkflow, $idFtaChapitreArray);
+                    if ($idFtaChapitre) {
+                        $nomSignataire = FtaSuiviProjetModel::getUserNameByIdFtaChapitreAndIdFta($idFtaEncours, $idFtaChapitre);
+                        $dateValidation = FtaSuiviProjetModel::getValidationDateByIdFtaChapitreAndIdFta($idFtaEncours, $idFtaChapitre);
 
-                    if ($check) {
-                        $oldValue = $model->getDataToCompare()->getFieldValue($rowsChamps[IntranetColumnInfoModel::FIELDNAME_COLUMN_NAME_INTRANET_COLUMN_INO]);
-                        $newValue = $model->getDataField($rowsChamps[IntranetColumnInfoModel::FIELDNAME_COLUMN_NAME_INTRANET_COLUMN_INO])->getFieldValue();
-                        $versionFta;
-                        $label = $rowsChamps[IntranetColumnInfoModel::FIELDNAME_LABEL_INTRANET_COLUMN_INFO];
-                        $idFtaChapitreTmp = $rowsChamps[IntranetColumnInfoModel::FIELDNAME_ID_LISTE_CHAPITRE_HISTORIQUE];
-                        $idFtaChapitreArray = explode(',', $idFtaChapitreTmp);
-                        $idFtaChapitre = FtaWorkflowStructureModel::getIdFtaChapitreBetweenArrayByWorkflowAndArrayByColumn($idFtaWorkflow, $idFtaChapitreArray);
-                        $nomSignataire = FtaSuiviProjetModel::getUserNameByIdFtaChapitreAndIdFta($id_fta, $idFtaChapitre);
-                        $dateValidation = FtaSuiviProjetModel::getValidationDateByIdFtaChapitreAndIdFta($id_fta, $idFtaChapitre);
                         $arrayHistoModif[] = array("date" => $dateValidation
                             , "nom" => $nomSignataire
                             , "version" => $versionFta
@@ -222,147 +191,142 @@ foreach ($arrayTableCheck as $rowsTableCheck) {
                     }
                 }
             }
-        }
-    } elseif ($rowsTableCheck == FtaConditionnementModel::TABLENAME) {
-        $arraIdFtaConditionnment = FtaConditionnementModel::getArrayIdFtaConditionnement($id_fta);
-        /**
-         * On récupère la liste des embalalges
-         */
-        if ($arraIdFtaConditionnment) {
-            foreach ($arraIdFtaConditionnment as $rowsIdFtaConditionnment) {
-                $idFtaConditionnement = $rowsIdFtaConditionnment[FtaConditionnementModel::KEYNAME];
+        } elseif ($rowsTableCheck == FtaComposantModel::TABLENAME) {
+            /**
+             * On récupère la liste des composants
+             */
+            $arraIdFtaComposant = FtaComposantModel::getArrayIdFtaComposantTable($idFtaEncours);
+            if ($arraIdFtaComposant) {
+                foreach ($arraIdFtaComposant as $rowsIdFtaComposant) {
+                    $idFtaComposant = $rowsIdFtaComposant[FtaComposantModel::KEYNAME];
 
-                $model = new FtaConditionnementModel($idFtaConditionnement);
-                /**
-                 * On vérifie si l'un des champs de l'emballage encours est différents de la version précedentes
-                 */
-                $model->setDataFtaConditionnementTableToCompare();
+                    $model = new FtaComposantModel($idFtaComposant);
+                    $model->setDataFtaComposantTableToCompare();
 
-                /**
-                 * restraiendre la liste des champs
-                 */
-                $arrayChamps = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
-                                "SELECT DISTINCT " . IntranetColumnInfoModel::FIELDNAME_COLUMN_NAME_INTRANET_COLUMN_INO
-                                . "," . IntranetColumnInfoModel::FIELDNAME_LABEL_INTRANET_COLUMN_INFO
-                                . " FROM " . IntranetColumnInfoModel::TABLENAME
-                                . " WHERE " . IntranetColumnInfoModel::FIELDNAME_TABLE_NAME_INTRANET_COLUMN_INFO . "='" . $rowsTableCheck . "'"
-                                . " AND " . IntranetColumnInfoModel::FIELDNAME_IS_ENABLED_INTRANET_HISTORIQUE . "=" . IntranetColumnInfoModel::IS_ENABLED_INTRANET_HISTORIQUE_TRUE
-                );
-                foreach ($arrayChamps as $rowsChamps) {
+                    $arrayChamps = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
+                                    "SELECT DISTINCT " . IntranetColumnInfoModel::FIELDNAME_COLUMN_NAME_INTRANET_COLUMN_INO
+                                    . "," . IntranetColumnInfoModel::FIELDNAME_LABEL_INTRANET_COLUMN_INFO
+                                    . "," . IntranetColumnInfoModel::FIELDNAME_ID_LISTE_CHAPITRE_HISTORIQUE
+                                    . " FROM " . IntranetColumnInfoModel::TABLENAME
+                                    . " WHERE " . IntranetColumnInfoModel::FIELDNAME_TABLE_NAME_INTRANET_COLUMN_INFO . "='" . $rowsTableCheck . "'"
+                                    . " AND " . IntranetColumnInfoModel::FIELDNAME_IS_ENABLED_INTRANET_HISTORIQUE . "=" . IntranetColumnInfoModel::IS_ENABLED_INTRANET_HISTORIQUE_TRUE
+                    );
+                    foreach ($arrayChamps as $rowsChamps) {
+
+                        $check = $model->getDataField($rowsChamps[IntranetColumnInfoModel::FIELDNAME_COLUMN_NAME_INTRANET_COLUMN_INO])->isFieldDiff();
+
+                        if ($check) {                           
+                            $oldValue = $model->getDataToCompare()->getFieldValue($rowsChamps[IntranetColumnInfoModel::FIELDNAME_COLUMN_NAME_INTRANET_COLUMN_INO]);
+                            $newValue = $model->getDataField($rowsChamps[IntranetColumnInfoModel::FIELDNAME_COLUMN_NAME_INTRANET_COLUMN_INO])->getFieldValue();
+                            $label = $rowsChamps[IntranetColumnInfoModel::FIELDNAME_LABEL_INTRANET_COLUMN_INFO];
+                            $idFtaChapitreTmp = $rowsChamps[IntranetColumnInfoModel::FIELDNAME_ID_LISTE_CHAPITRE_HISTORIQUE];
+                            $idFtaChapitreArray = explode(',', $idFtaChapitreTmp);
+                            $idFtaChapitre = FtaWorkflowStructureModel::getIdFtaChapitreBetweenArrayByWorkflowAndArrayByColumn($idFtaWorkflow, $idFtaChapitreArray);
+                            if ($idFtaChapitre) {
+                                $nomSignataire = FtaSuiviProjetModel::getUserNameByIdFtaChapitreAndIdFta($idFtaEncours, $idFtaChapitre);
+                                $dateValidation = FtaSuiviProjetModel::getValidationDateByIdFtaChapitreAndIdFta($idFtaEncours, $idFtaChapitre);
+
+                                $arrayHistoModif[] = array("date" => $dateValidation
+                                    , "nom" => $nomSignataire
+                                    , "version" => $versionFta
+                                    , "etat" => $label
+                                    , "oldValue" => $oldValue
+                                    , "newValue" => $newValue
+                                );
+                            }
+                        }
+                    }
+                }
+            }
+        } elseif ($rowsTableCheck == FtaConditionnementModel::TABLENAME) {
+            $arraIdFtaConditionnment = FtaConditionnementModel::getArrayIdFtaConditionnement($idFtaEncours);
+            /**
+             * On récupère la liste des embalalges
+             */
+            if ($arraIdFtaConditionnment) {
+                foreach ($arraIdFtaConditionnment as $rowsIdFtaConditionnment) {
+                    $idFtaConditionnement = $rowsIdFtaConditionnment[FtaConditionnementModel::KEYNAME];
+
+                    $model = new FtaConditionnementModel($idFtaConditionnement);
+                    /**
+                     * On vérifie si l'un des champs de l'emballage encours est différents de la version précedentes
+                     */
+                    $model->setDataFtaConditionnementTableToCompare();
+
+                    /**
+                     * restraiendre la liste des champs
+                     */
+                    $arrayChamps = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
+                                    "SELECT DISTINCT " . IntranetColumnInfoModel::FIELDNAME_COLUMN_NAME_INTRANET_COLUMN_INO
+                                    . "," . IntranetColumnInfoModel::FIELDNAME_LABEL_INTRANET_COLUMN_INFO
+                                    . " FROM " . IntranetColumnInfoModel::TABLENAME
+                                    . " WHERE " . IntranetColumnInfoModel::FIELDNAME_TABLE_NAME_INTRANET_COLUMN_INFO . "='" . $rowsTableCheck . "'"
+                                    . " AND " . IntranetColumnInfoModel::FIELDNAME_IS_ENABLED_INTRANET_HISTORIQUE . "=" . IntranetColumnInfoModel::IS_ENABLED_INTRANET_HISTORIQUE_TRUE
+                    );
+                    foreach ($arrayChamps as $rowsChamps) {
 
 
-                    $check = $model->getDataField($rowsChamps[IntranetColumnInfoModel::FIELDNAME_COLUMN_NAME_INTRANET_COLUMN_INO])->isFieldDiff();
+                        $check = $model->getDataField($rowsChamps[IntranetColumnInfoModel::FIELDNAME_COLUMN_NAME_INTRANET_COLUMN_INO])->isFieldDiff();
 
-                    if ($check) {
-                        $oldValue = $model->getDataToCompare()->getFieldValue($rowsChamps[IntranetColumnInfoModel::FIELDNAME_COLUMN_NAME_INTRANET_COLUMN_INO]);
-                        $newValue = $model->getDataField($rowsChamps[IntranetColumnInfoModel::FIELDNAME_COLUMN_NAME_INTRANET_COLUMN_INO])->getFieldValue();
-                        $versionFta;
-                        $label = $rowsChamps[IntranetColumnInfoModel::FIELDNAME_LABEL_INTRANET_COLUMN_INFO];
-                        $idFtaChapitreTmp = $rowsChamps[IntranetColumnInfoModel::FIELDNAME_ID_LISTE_CHAPITRE_HISTORIQUE];
-                        $idFtaChapitreArray = explode(',', $idFtaChapitreTmp);
-                        $idFtaChapitre = FtaWorkflowStructureModel::getIdFtaChapitreBetweenArrayByWorkflowAndArrayByColumn($idFtaWorkflow, $idFtaChapitreArray);
-                        $nomSignataire = FtaSuiviProjetModel::getUserNameByIdFtaChapitreAndIdFta($id_fta, $idFtaChapitre);
-                        $dateValidation = FtaSuiviProjetModel::getValidationDateByIdFtaChapitreAndIdFta($id_fta, $idFtaChapitre);
+                        if ($check) {
+                            $oldValue = $model->getDataToCompare()->getFieldValue($rowsChamps[IntranetColumnInfoModel::FIELDNAME_COLUMN_NAME_INTRANET_COLUMN_INO]);
+                            $newValue = $model->getDataField($rowsChamps[IntranetColumnInfoModel::FIELDNAME_COLUMN_NAME_INTRANET_COLUMN_INO])->getFieldValue();
+                            $label = $rowsChamps[IntranetColumnInfoModel::FIELDNAME_LABEL_INTRANET_COLUMN_INFO];
+                            $idFtaChapitreTmp = $rowsChamps[IntranetColumnInfoModel::FIELDNAME_ID_LISTE_CHAPITRE_HISTORIQUE];
+                            $idFtaChapitreArray = explode(',', $idFtaChapitreTmp);
+                            $idFtaChapitre = FtaWorkflowStructureModel::getIdFtaChapitreBetweenArrayByWorkflowAndArrayByColumn($idFtaWorkflow, $idFtaChapitreArray);
+                            if ($idFtaChapitre) {
+                                $nomSignataire = FtaSuiviProjetModel::getUserNameByIdFtaChapitreAndIdFta($idFtaEncours, $idFtaChapitre);
+                                $dateValidation = FtaSuiviProjetModel::getValidationDateByIdFtaChapitreAndIdFta($idFtaEncours, $idFtaChapitre);
 
-                        $arrayHistoModif[] = array("date" => $dateValidation
-                            , "nom" => $nomSignataire
-                            , "version" => $versionFta
-                            , "etat" => $label
-                            , "oldValue" => $oldValue
-                            , "newValue" => $newValue
-                        );
+                                $arrayHistoModif[] = array("date" => $dateValidation
+                                    , "nom" => $nomSignataire
+                                    , "version" => $versionFta
+                                    , "etat" => $label
+                                    , "oldValue" => $oldValue
+                                    , "newValue" => $newValue
+                                );
+                            }
+                        }
                     }
                 }
             }
         }
     }
 }
+if (is_array($arrayHistoModif)) {
+    FtaController::arraySortByColumn($arrayHistoModif, "date");
 
-FtaController::arraySortByColumn($arrayHistoModif,"date" );
+    $tableauFiche .= '<th>'
+            . 'Date'
+            . '</th><th>'
+            . 'Ultilisateur'
+            . '</th><th>'
+            . 'Version du dossier FTA'
+            . '</th><th>'
+            . 'Colonne'
+            . '</th><th>'
+            . 'Ancienne valeur'
+            . '</th><th>'
+            . 'Nouvelle valeur'
+            . '</th>';
 
-$arrayHistoModif;
-//Données lié à arcadia 
-$bloc.= $ftaView->getHtmlArcadiaDataNotEditable();
-$bloc.=$ftaView->getHtmlArcadiaDataVariableEditable();
+    foreach ($arrayHistoModif as $rowsHistoModif) {
 
-//Désignation commerciale
-$bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_DESIGNATION_COMMERCIALE);
-
-//Poids net de l’UVF
-$bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_POIDS_ELEMENTAIRE);
-
-/**
- * Site de production
- */
-$bloc.="<td align=center>Site de production</td>" . $ftaView->listeSiteByAcces($idUser, $isEditable);
-
-
-/**
- * Expédition, EANS, Facturation
- */
-//Site d'expedition
-$bloc.="<td align=center>Expédition, EANS, Facturation</td>" . $ftaView->getHtmlDataField(FtaModel::FIELDNAME_SITE_EXPEDITION_FTA);
-
-//Unité de Facturation
-$bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_UNITE_FACTURATION);
-
-//Gencod EAN Article
-$bloc.=$ftaView->getHtmlEANArticle();
-
-//Gencod EAN Colis
-$bloc.=$ftaView->getHtmlEANColis();
-
-//Gencod EAN Palette
-$bloc.=$ftaView->getHtmlEANPalette();
-
-
-/**
- * Exigence client
- */
-$bloc.="<td align=center>Exigence client</td>";
-if ($idFtaWorkflow == FtaWorkflowModel::ID_WORKFLOW_MDD_AVEC or $idFtaWorkflow == FtaWorkflowModel::ID_WORKFLOW_MDD_SANS) {
-    //Durée de vie garantie client (en jours)
-    $bloc.=$ftaView->getHtmlIsDureeDeVieCalculateWithDureeDeVieClient();
-} else {
-    //Durée de vie garantie client (en jours)
-    $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_DUREE_DE_VIE);
+        $tableauFiche .= '<tr class=contenu >'
+                . '<td width=8%> ' . $rowsHistoModif["date"] . '</td>'//Date de modif
+                . '<td >' . $rowsHistoModif["nom"] . '</td>'//Utilisateur ayant fait la modification
+                . '<td >' . $rowsHistoModif["version"] . '</td>'//Version du dossier Fta
+                . '<td >' . $rowsHistoModif["etat"] . '</td>'// Etat de la Fta ou nom de la colonne
+                . '<td >' . $rowsHistoModif["oldValue"] . '</td>'// Ancienne valeur de la Fta
+                . '<td >' . $rowsHistoModif["newValue"] . '</td>'// Nouvelle valeur de la Fta
+                . '</tr >';
+    }
 }
-
-
 /**
- * PCB
+ * Affichage du tableau
+ * Rechercher une page similaire
  */
-//Nombre d’UVC par colis
-$bloc.="<td align=center>PCB</td>" . $ftaView->getHtmlDataField(FtaModel::FIELDNAME_NOMBRE_UVC_PAR_CARTON);
-
-
-/**
- * Emballages du Colis
- */
-$bloc.="<td align=center>Emballages du Colis</td>" . $ftaView->getHtmlEmballageDuColis($id_fta, $idChapitre, $synthese_action, $idFtaEtat, $abreviationFtaEtat, $idFtaRole);
-
-//Vérification que l'enballage sélectionner soit existant sur Arcadia
-$bloc.=$ftaView->checkEmballageColisValide();
-
-//Palette
-$bloc.=$ftaView->getHtmlEmballagePalette($id_fta, $idChapitre, $synthese_action, $idFtaEtat, $abreviationFtaEtat, $idFtaRole);
-
-/**
- * Codification
- */
-//Désignation Abrégée
-$bloc.="<td >Codification</td>" . $ftaView->getHtmlNomAbrege();
-
-//Désignation Interne Agis
-//        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_LIBELLE);
-$bloc.=$ftaView->getHtmlDesignationInterneAgis();
-
-//Code Article LDC, code Article arcadia
-$bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_CODE_ARTICLE_LDC);
-
-$fta2ArcadiaController = new Fta2ArcadiaController($ftaModel, TRUE);
-$ficherXML = $fta2ArcadiaController->showExportXmlFile();
-
 /*
   Sélection du mode d'affichage
  */
@@ -423,8 +387,7 @@ switch ($output) {
 
              <' . $html_table . '>
             <tr>
-                ' . $bloc
-        . $ficherXML . '
+                ' . $tableauFiche . '
             </tr>
              </table>
              </form>

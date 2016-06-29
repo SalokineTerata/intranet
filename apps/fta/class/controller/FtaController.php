@@ -286,15 +286,45 @@ class FtaController {
      * @param string $paramValue
      * @return boolean
      */
-    public static function checkValNutri($paramValue){
-        $result =TRUE;
-        if($paramValue === "0" or $paramValue === "0.0" or $paramValue === "0.00"){
-            $result =FALSE ;
+    public static function checkValNutri($paramValue) {
+        $result = TRUE;
+        if ($paramValue === "0" or $paramValue === "0.0" or $paramValue === "0.00") {
+            $result = FALSE;
         }
-        
+
         return $result;
     }
-    
+
+    /**
+     * Calcule l'intersection de tableaux et retourne la première valeur
+     * @param array $paramArray1
+     * @param array $paramArray2
+     * @return string
+     */
+    public static function getFirstValueArrayInterset($paramArray1, $paramArray2) {
+
+        $arrayResult = array_intersect($paramArray1, $paramArray2);
+        foreach ($arrayResult as $key => $value) {
+            $return = $value;
+        }
+        return $return;
+    }
+
+    /**
+     * Ordonnace d'un tableau par une colonne donnée
+     * @param array $paramArray
+     * @param string $paramColumn
+     */
+    public static function arraySortByColumn(&$paramArray, $paramColumn) {
+        $reference_array = array();
+
+        foreach ($paramArray as $key => $row) {
+            $reference_array[$key] = $row[$paramColumn];
+        }
+
+        array_multisort($reference_array, SORT_DESC, $paramArray);
+    }
+
 }
 
 ?>

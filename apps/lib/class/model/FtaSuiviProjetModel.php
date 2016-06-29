@@ -58,6 +58,50 @@ class FtaSuiviProjetModel extends AbstractModel {
     }
 
     /**
+     * On récupère le nom du signataire pour une id fta et un chapitre donnée
+     * @param int $paramIdFta
+     * @param int $paramIdFtaChapitre
+     * @return string
+     */
+    public static function getUserNameByIdFtaChapitreAndIdFta($paramIdFta, $paramIdFtaChapitre) {
+        $arrayUserName = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
+                        "SELECT " . UserModel::FIELDNAME_NOM . "," . UserModel::FIELDNAME_PRENOM
+                        . " FROM " . self::TABLENAME . "," . UserModel::TABLENAME
+                        . " WHERE " . self::FIELDNAME_ID_FTA_CHAPITRE . "=" . $paramIdFtaChapitre
+                        . " AND " . self::FIELDNAME_ID_FTA . "=" . $paramIdFta
+                        . " AND " . self::FIELDNAME_SIGNATURE_VALIDATION_SUIVI_PROJET . "=" . UserModel::KEYNAME
+        );
+        if ($arrayUserName) {
+            foreach ($arrayUserName as $rowsUserName) {
+                $userName = $rowsUserName[UserModel::FIELDNAME_PRENOM] . " " . $rowsUserName[UserModel::FIELDNAME_NOM];
+            }
+        } else {
+            $userName = UserModel::USER_NON_DEFINIE;
+        }
+        return $userName;
+    }
+
+    /**
+     * On récupère la date de validation pour une id fta et un chapitre donnée
+     * @param int $paramIdFta
+     * @param int $paramIdFtaChapitre
+     * @return string
+     */
+    public static function getValidationDateByIdFtaChapitreAndIdFta($paramIdFta, $paramIdFtaChapitre) {
+        $arrayDateDeValidation = DatabaseOperation::convertSqlStatementWithoutKeyToArrayComplete(
+                        "SELECT " . self::FIELDNAME_DATE_VALIDATION_SUIVI_PROJET
+                        . " FROM " . self::TABLENAME
+                        . " WHERE " . self::FIELDNAME_ID_FTA_CHAPITRE . "=" . $paramIdFtaChapitre
+                        . " AND " . self::FIELDNAME_ID_FTA . "=" . $paramIdFta
+        );
+        /**
+         * Changment de format de date
+         */
+        $date = FtaController::changementDuFormatDeDateFR($arrayDateDeValidation["0"]);
+        return $date;
+    }
+
+    /**
      * Duplication des données d'un Fta dans la table Suivi de Projet
      * @param type $paramIdFtaOrig
      * @param type $paramIdFtaNew

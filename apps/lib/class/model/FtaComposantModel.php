@@ -92,9 +92,9 @@ class FtaComposantModel extends AbstractModel {
 
 
         $pdo = DatabaseOperation::executeComplete(
-                        'INSERT INTO ' . FtaComposantModel::TABLENAME
-                        . '(' . FtaComposantModel::FIELDNAME_ID_FTA . ')'
-                        . 'VALUES (' . $paramForeignKeysValuesArray[FtaComposantModel::FIELDNAME_ID_FTA] . ')'
+                        'INSERT INTO ' . self::TABLENAME
+                        . '(' . self::FIELDNAME_ID_FTA . ')'
+                        . 'VALUES (' . $paramForeignKeysValuesArray[self::FIELDNAME_ID_FTA] . ')'
         );
         $key = $pdo->lastInsertId();
         return $key;
@@ -139,6 +139,21 @@ class FtaComposantModel extends AbstractModel {
 
         return $key;
     }
+
+    /**
+     * On obtient la liste des composants et compositions
+     * @param int $paramIdFta
+     * @return array
+     */
+    public static function getArrayIdFtaComposantTable($paramIdFta) {
+        $arrayIdFtaComposant = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
+                        'SELECT ' . self::KEYNAME
+                        . ' FROM ' . self::TABLENAME
+                        . ' WHERE ' . self::FIELDNAME_ID_FTA . '=' . $paramIdFta
+        );
+        return $arrayIdFtaComposant;
+    }
+
     /**
      * On obtient la liste des composants
      * @param int $paramIdFta
@@ -146,10 +161,10 @@ class FtaComposantModel extends AbstractModel {
      */
     public static function getIdFtaComposant($paramIdFta) {
         $arrayIdFtaComposant = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
-                        'SELECT ' . FtaComposantModel::KEYNAME
-                        . ' FROM ' . FtaComposantModel::TABLENAME
-                        . ' WHERE ' . FtaComposantModel::FIELDNAME_ID_FTA . '=' . $paramIdFta
-                        . ' AND ' . FtaComposantModel::FIELDNAME_IS_NOMENCLATURE_FTA_COMPOSANT . '=1'
+                        'SELECT ' . self::KEYNAME
+                        . ' FROM ' . self::TABLENAME
+                        . ' WHERE ' . self::FIELDNAME_ID_FTA . '=' . $paramIdFta
+                        . ' AND ' . self::FIELDNAME_IS_NOMENCLATURE_FTA_COMPOSANT . '=1'
         );
         return $arrayIdFtaComposant;
     }
@@ -161,10 +176,10 @@ class FtaComposantModel extends AbstractModel {
      */
     public static function getIdFtaComposition($paramIdFta) {
         $arrayIdFtaComposant = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
-                        'SELECT ' . FtaComposantModel::KEYNAME . ',' . FtaComposantModel::FIELDNAME_IS_NOMENCLATURE_FTA_COMPOSANT
-                        . ' FROM ' . FtaComposantModel::TABLENAME
-                        . ' WHERE ' . FtaComposantModel::FIELDNAME_ID_FTA . '=' . $paramIdFta
-                        . ' AND ' . FtaComposantModel::FIELDNAME_IS_COMPOSITION_FTA_COMPOSANT . '=1'
+                        'SELECT ' . self::KEYNAME . ',' . self::FIELDNAME_IS_NOMENCLATURE_FTA_COMPOSANT
+                        . ' FROM ' . self::TABLENAME
+                        . ' WHERE ' . self::FIELDNAME_ID_FTA . '=' . $paramIdFta
+                        . ' AND ' . self::FIELDNAME_IS_COMPOSITION_FTA_COMPOSANT . '=1'
         );
         return $arrayIdFtaComposant;
     }
@@ -177,23 +192,23 @@ class FtaComposantModel extends AbstractModel {
     public static function getArrayFtaConditonnement($paramIdFtaComposant) {
 
         $arrayTmp = DatabaseOperation::convertSqlStatementWithKeyAsFirstFieldToArray(
-                        'SELECT ' . FtaComposantModel::KEYNAME
-                        . ',' . FtaComposantModel::FIELDNAME_NOM_FTA_COMPOSITION
-                        . ',' . FtaComposantModel::FIELDNAME_INGREDIENT_FTA_COMPOSITION
-                        . ',' . FtaComposantModel::FIELDNAME_ID_GEO
-                        . ',' . FtaComposantModel::FIELDNAME_POIDS_FTA_COMPOSITION
-                        . ',' . FtaComposantModel::FIELDNAME_QUANTITE_FTA_COMPOSITION_UVC
-                        . ' FROM ' . FtaComposantModel::TABLENAME
-                        . ' WHERE ' . FtaComposantModel::KEYNAME . '=' . $paramIdFtaComposant);
+                        'SELECT ' . self::KEYNAME
+                        . ',' . self::FIELDNAME_NOM_FTA_COMPOSITION
+                        . ',' . self::FIELDNAME_INGREDIENT_FTA_COMPOSITION
+                        . ',' . self::FIELDNAME_ID_GEO
+                        . ',' . self::FIELDNAME_POIDS_FTA_COMPOSITION
+                        . ',' . self::FIELDNAME_QUANTITE_FTA_COMPOSITION_UVC
+                        . ' FROM ' . self::TABLENAME
+                        . ' WHERE ' . self::KEYNAME . '=' . $paramIdFtaComposant);
 
         if ($arrayTmp) {
             foreach ($arrayTmp as $key => $rows) {
                 $array[$key] = array(
-                    FtaComposantModel::FIELDNAME_VIRTUAL_NOM_DU_COMPOSANT => $rows[FtaComposantModel::FIELDNAME_NOM_FTA_COMPOSITION],
-                    FtaComposantModel::FIELDNAME_VIRTUAL_INGREDIENT_FTA_COMPOSITION => $rows[FtaComposantModel::FIELDNAME_INGREDIENT_FTA_COMPOSITION],
-                    FtaComposantModel::FIELDNAME_VIRTUAL_SITE_DE_PRODUCTION => $rows[FtaComposantModel::FIELDNAME_ID_GEO],
-                    FtaComposantModel::FIELDNAME_VIRTUAL_POIDS_FTA_COMPOSITION => $rows[FtaComposantModel::FIELDNAME_POIDS_FTA_COMPOSITION],
-                    FtaComposantModel::FIELDNAME_VIRTUAL_QUANTITE_FTA_COMPOSITION => $rows[FtaComposantModel::FIELDNAME_QUANTITE_FTA_COMPOSITION_UVC],
+                    self::FIELDNAME_VIRTUAL_NOM_DU_COMPOSANT => $rows[self::FIELDNAME_NOM_FTA_COMPOSITION],
+                    self::FIELDNAME_VIRTUAL_INGREDIENT_FTA_COMPOSITION => $rows[self::FIELDNAME_INGREDIENT_FTA_COMPOSITION],
+                    self::FIELDNAME_VIRTUAL_SITE_DE_PRODUCTION => $rows[self::FIELDNAME_ID_GEO],
+                    self::FIELDNAME_VIRTUAL_POIDS_FTA_COMPOSITION => $rows[self::FIELDNAME_POIDS_FTA_COMPOSITION],
+                    self::FIELDNAME_VIRTUAL_QUANTITE_FTA_COMPOSITION => $rows[self::FIELDNAME_QUANTITE_FTA_COMPOSITION_UVC],
                 );
             }
         } else {
@@ -210,8 +225,8 @@ class FtaComposantModel extends AbstractModel {
      */
     public static function getTablesNameAndIdForeignKeyOfFtaComposant($paramIdFta, $paramIdFtaComposant) {
         $tablesNameAndIdForeignKeyOfFtaConditionnement[$paramIdFtaComposant] = array(
-            array(FtaModel::TABLENAME, FtaComposantModel::FIELDNAME_ID_FTA, $paramIdFta),
-            array(FtaComposantModel::TABLENAME, FtaComposantModel::KEYNAME, $paramIdFtaComposant),
+            array(FtaModel::TABLENAME, self::FIELDNAME_ID_FTA, $paramIdFta),
+            array(self::TABLENAME, self::KEYNAME, $paramIdFtaComposant),
         );
 
         return $tablesNameAndIdForeignKeyOfFtaConditionnement;
@@ -297,13 +312,13 @@ class FtaComposantModel extends AbstractModel {
         $border = "style=\"border:1px solid #000;\"";
 
         return '<tr class=titre_tableau  align=center >' .
-                '<td ' . $border . '>' . $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_ID_ANNEXE_AGRO_ART_CODIFICATION)->getFieldLabel() . '</td>'
-                . '<td ' . $border . '>' . $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_CODE_PRODUIT_AGROLOGIC_FTA_NOMENCLATURE)->getFieldLabel() . '</td>'
-                . '<td ' . $border . '>' . $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_NOM_FTA_COMPOSITION)->getFieldLabel() . '</td>'
-                . '<td ' . $border . '>' . $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_INGREDIENT_FTA_COMPOSITION)->getFieldLabel() . '</td>'
-                . '<td ' . $border . '>' . $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_ID_GEO)->getFieldLabel() . '</td>'
-                . '<td ' . $border . '>' . $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_POIDS_FTA_COMPOSITION)->getFieldLabel() . '</td>'
-                . '<td ' . $border . '>' . $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_QUANTITE_FTA_COMPOSITION)->getFieldLabel() . '</td>'
+                '<td ' . $border . '>' . $ftaComposantModel->getDataField(self::FIELDNAME_ID_ANNEXE_AGRO_ART_CODIFICATION)->getFieldLabel() . '</td>'
+                . '<td ' . $border . '>' . $ftaComposantModel->getDataField(self::FIELDNAME_CODE_PRODUIT_AGROLOGIC_FTA_NOMENCLATURE)->getFieldLabel() . '</td>'
+                . '<td ' . $border . '>' . $ftaComposantModel->getDataField(self::FIELDNAME_NOM_FTA_COMPOSITION)->getFieldLabel() . '</td>'
+                . '<td ' . $border . '>' . $ftaComposantModel->getDataField(self::FIELDNAME_INGREDIENT_FTA_COMPOSITION)->getFieldLabel() . '</td>'
+                . '<td ' . $border . '>' . $ftaComposantModel->getDataField(self::FIELDNAME_ID_GEO)->getFieldLabel() . '</td>'
+                . '<td ' . $border . '>' . $ftaComposantModel->getDataField(self::FIELDNAME_POIDS_FTA_COMPOSITION)->getFieldLabel() . '</td>'
+                . '<td ' . $border . '>' . $ftaComposantModel->getDataField(self::FIELDNAME_QUANTITE_FTA_COMPOSITION)->getFieldLabel() . '</td>'
                 . '<td ' . $border . '>Actions</td>'
                 . '</tr>';
     }
@@ -318,24 +333,24 @@ class FtaComposantModel extends AbstractModel {
         $border = "style=\"border:1px solid #000;\"";
 
         return '<tr class=titre_tableau  align=center >' .
-                '<td ' . $border . '>' . $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_ID_ANNEXE_AGRO_ART_CODIFICATION)->getFieldLabel() . '</td>'
-                . '<td ' . $border . '>' . $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_CODE_PRODUIT_AGROLOGIC_FTA_NOMENCLATURE)->getFieldLabel() . '</td>'
-                . '<td ' . $border . '>' . $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_DESIGNATION_CODIFICATION)->getFieldLabel() . '</td>'
-                . '<td ' . $border . '>' . $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_POIDS_UNITAIRE_CODIFICATION)->getFieldLabel() . '</td>'
-                . '<td ' . $border . '>' . $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_ID_ANNEXE_UNITE)->getFieldLabel() . '</td>'
-                . '<td ' . $border . '>' . $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_SITE_PRODUCTION_FTA_CODIFICATION)->getFieldLabel() . '</td>'
-                . '<td ' . $border . '>' . $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_ETAT_FTA_CODIFICATION)->getFieldLabel() . '</td>'
-                . '<td ' . $border . '>' . $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_QUANTITE_PIECE_PAR_CARTON)->getFieldLabel() . '</td>'
-                . '<td ' . $border . '>' . $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_POIDS_TOTAL_CARTON_VRAC_FTA_NOMENCLATURE)->getFieldLabel() . '</td>'
+                '<td ' . $border . '>' . $ftaComposantModel->getDataField(self::FIELDNAME_ID_ANNEXE_AGRO_ART_CODIFICATION)->getFieldLabel() . '</td>'
+                . '<td ' . $border . '>' . $ftaComposantModel->getDataField(self::FIELDNAME_CODE_PRODUIT_AGROLOGIC_FTA_NOMENCLATURE)->getFieldLabel() . '</td>'
+                . '<td ' . $border . '>' . $ftaComposantModel->getDataField(self::FIELDNAME_DESIGNATION_CODIFICATION)->getFieldLabel() . '</td>'
+                . '<td ' . $border . '>' . $ftaComposantModel->getDataField(self::FIELDNAME_POIDS_UNITAIRE_CODIFICATION)->getFieldLabel() . '</td>'
+                . '<td ' . $border . '>' . $ftaComposantModel->getDataField(self::FIELDNAME_ID_ANNEXE_UNITE)->getFieldLabel() . '</td>'
+                . '<td ' . $border . '>' . $ftaComposantModel->getDataField(self::FIELDNAME_SITE_PRODUCTION_FTA_CODIFICATION)->getFieldLabel() . '</td>'
+                . '<td ' . $border . '>' . $ftaComposantModel->getDataField(self::FIELDNAME_ETAT_FTA_CODIFICATION)->getFieldLabel() . '</td>'
+                . '<td ' . $border . '>' . $ftaComposantModel->getDataField(self::FIELDNAME_QUANTITE_PIECE_PAR_CARTON)->getFieldLabel() . '</td>'
+                . '<td ' . $border . '>' . $ftaComposantModel->getDataField(self::FIELDNAME_POIDS_TOTAL_CARTON_VRAC_FTA_NOMENCLATURE)->getFieldLabel() . '</td>'
                 . '<td ' . $border . '>Actions</td>'
                 . '</tr>';
     }
 
     public static function insertFtaComposant($paramIdFta) {
         $pdo = DatabaseOperation::executeComplete(
-                        'INSERT INTO ' . FtaComposantModel::TABLENAME
-                        . '(' . FtaComposantModel::FIELDNAME_ID_FTA
-                        . ',' . FtaComposantModel::FIELDNAME_IS_NOMENCLATURE_FTA_COMPOSANT . ')'
+                        'INSERT INTO ' . self::TABLENAME
+                        . '(' . self::FIELDNAME_ID_FTA
+                        . ',' . self::FIELDNAME_IS_NOMENCLATURE_FTA_COMPOSANT . ')'
                         . 'VALUES (' . $paramIdFta . ',' . '1' . ')'
         );
         $key = $pdo->lastInsertId();
@@ -345,10 +360,10 @@ class FtaComposantModel extends AbstractModel {
 
     public static function insertFtaComposition($paramIdFta) {
         $pdo = DatabaseOperation::executeComplete(
-                        'INSERT INTO ' . FtaComposantModel::TABLENAME
-                        . '(' . FtaComposantModel::FIELDNAME_ID_FTA
-                        . ',' . FtaComposantModel::FIELDNAME_IS_COMPOSITION_FTA_COMPOSANT
-                        . ',' . FtaComposantModel::FIELDNAME_IS_NOMENCLATURE_FTA_COMPOSANT . ')'
+                        'INSERT INTO ' . self::TABLENAME
+                        . '(' . self::FIELDNAME_ID_FTA
+                        . ',' . self::FIELDNAME_IS_COMPOSITION_FTA_COMPOSANT
+                        . ',' . self::FIELDNAME_IS_NOMENCLATURE_FTA_COMPOSANT . ')'
                         . 'VALUES (' . $paramIdFta . ',' . '1' . ',' . '0' . ')'
         );
         $key = $pdo->lastInsertId();
@@ -363,8 +378,8 @@ class FtaComposantModel extends AbstractModel {
      */
     public static function deleteFtaComposant($paramIdFtaComposant) {
         return DatabaseOperation::execute(
-                        ' DELETE FROM ' . FtaComposantModel::TABLENAME . ' WHERE ' .
-                        FtaComposantModel::KEYNAME . '=' . $paramIdFtaComposant);
+                        ' DELETE FROM ' . self::TABLENAME . ' WHERE ' .
+                        self::KEYNAME . '=' . $paramIdFtaComposant);
     }
 
     /**
@@ -504,29 +519,29 @@ class FtaComposantModel extends AbstractModel {
 
         $paramObjet->setArrayListContent($arraySite);
 
-        $HtmlTableName = FtaComposantModel::TABLENAME
+        $HtmlTableName = self::TABLENAME
                 . '_'
-                . FtaComposantModel::FIELDNAME_ID_ANNEXE_AGRO_ART_CODIFICATION
+                . self::FIELDNAME_ID_ANNEXE_AGRO_ART_CODIFICATION
                 . '_'
                 . $paramIdFtaComposant
         ;
         $arrayIdPrefixeCodePSFComposant = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
-                        'SELECT DISTINCT ' . FtaComposantModel::FIELDNAME_ID_ANNEXE_AGRO_ART_CODIFICATION
-                        . ' FROM ' . FtaComposantModel::TABLENAME
-                        . ' WHERE ' . FtaComposantModel::KEYNAME . '=' . $paramIdFtaComposant
+                        'SELECT DISTINCT ' . self::FIELDNAME_ID_ANNEXE_AGRO_ART_CODIFICATION
+                        . ' FROM ' . self::TABLENAME
+                        . ' WHERE ' . self::KEYNAME . '=' . $paramIdFtaComposant
         );
         if ($arrayIdPrefixeCodePSFComposant) {
             foreach ($arrayIdPrefixeCodePSFComposant as $value) {
-                $IdPrefixeCodePSF = $value[FtaComposantModel::FIELDNAME_ID_ANNEXE_AGRO_ART_CODIFICATION];
+                $IdPrefixeCodePSF = $value[self::FIELDNAME_ID_ANNEXE_AGRO_ART_CODIFICATION];
                 $paramObjet->setDefaultValue($IdPrefixeCodePSF);
             }
         }
-        $paramObjet->getAttributes()->getName()->setValue(FtaComposantModel::FIELDNAME_ID_ANNEXE_AGRO_ART_CODIFICATION);
-        $paramObjet->setLabel(DatabaseDescription::getFieldDocLabel(FtaComposantModel::TABLENAME, FtaComposantModel::FIELDNAME_ID_ANNEXE_AGRO_ART_CODIFICATION));
+        $paramObjet->getAttributes()->getName()->setValue(self::FIELDNAME_ID_ANNEXE_AGRO_ART_CODIFICATION);
+        $paramObjet->setLabel(DatabaseDescription::getFieldDocLabel(self::TABLENAME, self::FIELDNAME_ID_ANNEXE_AGRO_ART_CODIFICATION));
         $paramObjet->setIsEditable($paramIsEditable);
         $paramObjet->initAbstractHtmlSelect(
-                $HtmlTableName, $paramObjet->getLabel(), $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_ID_ANNEXE_AGRO_ART_CODIFICATION)->getFieldValue(), NULL, $paramObjet->getArrayListContent());
-        $paramObjet->getEventsForm()->setOnChangeWithAjaxAutoSave(FtaComposantModel::TABLENAME, FtaComposantModel::KEYNAME, $paramIdFtaComposant, FtaComposantModel::FIELDNAME_ID_ANNEXE_AGRO_ART_CODIFICATION);
+                $HtmlTableName, $paramObjet->getLabel(), $ftaComposantModel->getDataField(self::FIELDNAME_ID_ANNEXE_AGRO_ART_CODIFICATION)->getFieldValue(), NULL, $paramObjet->getArrayListContent());
+        $paramObjet->getEventsForm()->setOnChangeWithAjaxAutoSave(self::TABLENAME, self::KEYNAME, $paramIdFtaComposant, self::FIELDNAME_ID_ANNEXE_AGRO_ART_CODIFICATION);
         $listePrefixeCodePSF = $paramObjet->getHtmlResult();
 
         return $listePrefixeCodePSF;
@@ -603,7 +618,7 @@ class FtaComposantModel extends AbstractModel {
 
         $paramObjet->setArrayListContent($arraySite);
 
-        $HtmlTableName = FtaComposantModel::TABLENAME
+        $HtmlTableName = self::TABLENAME
                 . '_'
                 . $paramLabelSiteDeProduction
                 . '_'
@@ -611,8 +626,8 @@ class FtaComposantModel extends AbstractModel {
         ;
         $arraySiteComposant = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
                         'SELECT DISTINCT ' . $paramLabelSiteDeProduction
-                        . ' FROM ' . FtaComposantModel::TABLENAME
-                        . ' WHERE ' . FtaComposantModel::KEYNAME . '=' . $this->getKeyValue()
+                        . ' FROM ' . self::TABLENAME
+                        . ' WHERE ' . self::KEYNAME . '=' . $this->getKeyValue()
         );
         foreach ($arraySiteComposant as $value) {
             $SiteDeProduction = $value[$paramLabelSiteDeProduction];
@@ -657,8 +672,8 @@ class FtaComposantModel extends AbstractModel {
                 , $linkFieldLock
         );
         $paramObjet->getEventsForm()->setOnChangeWithAjaxAutoSave(
-                FtaComposantModel::TABLENAME
-                , FtaComposantModel::KEYNAME
+                self::TABLENAME
+                , self::KEYNAME
                 , $this->getKeyValue()
                 , $paramLabelSiteDeProduction);
         /**
@@ -700,10 +715,10 @@ class FtaComposantModel extends AbstractModel {
          */
         $idGestionEtiquetteRecto = $this->getModelFta()->getDataField(FtaModel::FIELDNAME_GESTION_ETIQUETTE_RECTO)->getFieldValue();
         if ($idGestionEtiquetteRecto <> AnnexeGestionEtiquetteRectoVersoModel::GESTION_PAR_LA_QUALITE_ID) {
-            $this->getDataField(FtaComposantModel::FIELDNAME_K_ETIQUETTE_FTA_COMPOSITION)->setFieldValue($idGestionEtiquetteRecto);
+            $this->getDataField(self::FIELDNAME_K_ETIQUETTE_FTA_COMPOSITION)->setFieldValue($idGestionEtiquetteRecto);
             DatabaseOperation::execute(
                     "UPDATE " . self::TABLENAME
-                    . " SET " . FtaComposantModel::FIELDNAME_K_ETIQUETTE_FTA_COMPOSITION . "=" . $idGestionEtiquetteRecto
+                    . " SET " . self::FIELDNAME_K_ETIQUETTE_FTA_COMPOSITION . "=" . $idGestionEtiquetteRecto
                     . " WHERE " . self::KEYNAME . "=" . $this->getKeyValue()
             );
             $HtmlList->setDefaultValue($idGestionEtiquetteRecto);
@@ -711,16 +726,16 @@ class FtaComposantModel extends AbstractModel {
         }
         $HtmlList->setArrayListContent($arrayEtiquette);
 
-        $HtmlTableName = FtaComposantModel::TABLENAME
+        $HtmlTableName = self::TABLENAME
                 . '_'
-                . FtaComposantModel::FIELDNAME_K_ETIQUETTE_FTA_COMPOSITION
+                . self::FIELDNAME_K_ETIQUETTE_FTA_COMPOSITION
                 . '_'
                 . $this->getKeyValue()
         ;
-        $etiquetteRecto = $this->getDataField(FtaComposantModel::FIELDNAME_K_ETIQUETTE_FTA_COMPOSITION);
+        $etiquetteRecto = $this->getDataField(self::FIELDNAME_K_ETIQUETTE_FTA_COMPOSITION);
 
-        $HtmlList->getAttributes()->getName()->setValue(FtaComposantModel::FIELDNAME_K_ETIQUETTE_FTA_COMPOSITION);
-        $HtmlList->setLabel(DatabaseDescription::getFieldDocLabel(FtaComposantModel::TABLENAME, FtaComposantModel::FIELDNAME_K_ETIQUETTE_FTA_COMPOSITION));
+        $HtmlList->getAttributes()->getName()->setValue(self::FIELDNAME_K_ETIQUETTE_FTA_COMPOSITION);
+        $HtmlList->setLabel(DatabaseDescription::getFieldDocLabel(self::TABLENAME, self::FIELDNAME_K_ETIQUETTE_FTA_COMPOSITION));
         $HtmlList->setIsEditable($paramIsEditable);
         $HtmlList->initAbstractHtmlSelect(
                 $HtmlTableName
@@ -729,10 +744,10 @@ class FtaComposantModel extends AbstractModel {
                 , $etiquetteRecto->isFieldDiff()
                 , $HtmlList->getArrayListContent());
         $HtmlList->getEventsForm()->setOnChangeWithAjaxAutoSave(
-                FtaComposantModel::TABLENAME
-                , FtaComposantModel::KEYNAME
+                self::TABLENAME
+                , self::KEYNAME
                 , $this->getKeyValue()
-                , FtaComposantModel::FIELDNAME_K_ETIQUETTE_FTA_COMPOSITION
+                , self::FIELDNAME_K_ETIQUETTE_FTA_COMPOSITION
         );
 
         /**
@@ -771,10 +786,10 @@ class FtaComposantModel extends AbstractModel {
          */
         $idGestionEtiquetteVerso = $this->getModelFta()->getDataField(FtaModel::FIELDNAME_GESTION_ETIQUETTE_VERSO)->getFieldValue();
         if ($idGestionEtiquetteVerso <> AnnexeGestionEtiquetteRectoVersoModel::GESTION_PAR_LA_QUALITE_ID) {
-            $this->getDataField(FtaComposantModel::FIELDNAME_K_ETIQUETTE_VERSO_FTA_COMPOSITION)->setFieldValue($idGestionEtiquetteVerso);
+            $this->getDataField(self::FIELDNAME_K_ETIQUETTE_VERSO_FTA_COMPOSITION)->setFieldValue($idGestionEtiquetteVerso);
             DatabaseOperation::execute(
                     "UPDATE " . self::TABLENAME
-                    . " SET " . FtaComposantModel::FIELDNAME_K_ETIQUETTE_VERSO_FTA_COMPOSITION . "=" . $idGestionEtiquetteVerso
+                    . " SET " . self::FIELDNAME_K_ETIQUETTE_VERSO_FTA_COMPOSITION . "=" . $idGestionEtiquetteVerso
                     . " WHERE " . self::KEYNAME . "=" . $this->getKeyValue()
             );
             $HtmlList->setDefaultValue($idGestionEtiquetteVerso);
@@ -782,17 +797,17 @@ class FtaComposantModel extends AbstractModel {
         }
         $HtmlList->setArrayListContent($arrayEtiquette);
 
-        $HtmlTableName = FtaComposantModel::TABLENAME
+        $HtmlTableName = self::TABLENAME
                 . '_'
-                . FtaComposantModel::FIELDNAME_K_ETIQUETTE_VERSO_FTA_COMPOSITION
+                . self::FIELDNAME_K_ETIQUETTE_VERSO_FTA_COMPOSITION
                 . '_'
                 . $this->getKeyValue()
         ;
 
-        $etiquetteVerso = $this->getDataField(FtaComposantModel::FIELDNAME_K_ETIQUETTE_VERSO_FTA_COMPOSITION);
+        $etiquetteVerso = $this->getDataField(self::FIELDNAME_K_ETIQUETTE_VERSO_FTA_COMPOSITION);
 
-        $HtmlList->getAttributes()->getName()->setValue(FtaComposantModel::FIELDNAME_K_ETIQUETTE_VERSO_FTA_COMPOSITION);
-        $HtmlList->setLabel(DatabaseDescription::getFieldDocLabel(FtaComposantModel::TABLENAME, FtaComposantModel::FIELDNAME_K_ETIQUETTE_VERSO_FTA_COMPOSITION));
+        $HtmlList->getAttributes()->getName()->setValue(self::FIELDNAME_K_ETIQUETTE_VERSO_FTA_COMPOSITION);
+        $HtmlList->setLabel(DatabaseDescription::getFieldDocLabel(self::TABLENAME, self::FIELDNAME_K_ETIQUETTE_VERSO_FTA_COMPOSITION));
         $HtmlList->setIsEditable($paramIsEditable);
         $HtmlList->initAbstractHtmlSelect(
                 $HtmlTableName
@@ -801,10 +816,10 @@ class FtaComposantModel extends AbstractModel {
                 , $etiquetteVerso->isFieldDiff()
                 , $HtmlList->getArrayListContent());
         $HtmlList->getEventsForm()->setOnChangeWithAjaxAutoSave(
-                FtaComposantModel::TABLENAME
-                , FtaComposantModel::KEYNAME
+                self::TABLENAME
+                , self::KEYNAME
                 , $this->getKeyValue()
-                , FtaComposantModel::FIELDNAME_K_ETIQUETTE_VERSO_FTA_COMPOSITION);
+                , self::FIELDNAME_K_ETIQUETTE_VERSO_FTA_COMPOSITION);
 
         /**
          * Description d'un champ
@@ -826,7 +841,7 @@ class FtaComposantModel extends AbstractModel {
     function getListeModeEtiquette($paramIsEditable) {
         $HtmlList = new HtmlListSelect();
         $activationCodification = $this->getModelFta()->getDataField(FtaModel::FIELDNAME_ACTIVATION_CODESOFT)->getFieldValue();
-        $codePSFValue = $this->getDataField(FtaComposantModel::FIELDNAME_CODE_PRODUIT_AGROLOGIC_FTA_NOMENCLATURE)->getFieldValue();
+        $codePSFValue = $this->getDataField(self::FIELDNAME_CODE_PRODUIT_AGROLOGIC_FTA_NOMENCLATURE)->getFieldValue();
         if (($activationCodification == AnnexeGestionDesEtiquettesModel::ACTIVATION_ETIQUETTE_COLIS_ET_COMPOSITION or $activationCodification == AnnexeGestionDesEtiquettesModel::ACTIVATION_ETIQUETTE_COMPOSITION) and $codePSFValue) {
             $sqlCondi = " ";
         } else {
@@ -842,18 +857,18 @@ class FtaComposantModel extends AbstractModel {
 
         $HtmlList->setArrayListContent($arrayModeEtiquette);
 
-        $HtmlTableName = FtaComposantModel::TABLENAME
+        $HtmlTableName = self::TABLENAME
                 . '_'
-                . FtaComposantModel::FIELDNAME_MODE_ETIQUETTE_FTA_COMPOSITION
+                . self::FIELDNAME_MODE_ETIQUETTE_FTA_COMPOSITION
                 . '_'
                 . $this->getKeyValue()
         ;
 
-        $modeEtiquetteDataField = $this->getDataField(FtaComposantModel::FIELDNAME_MODE_ETIQUETTE_FTA_COMPOSITION);
+        $modeEtiquetteDataField = $this->getDataField(self::FIELDNAME_MODE_ETIQUETTE_FTA_COMPOSITION);
 
 
-        $HtmlList->getAttributes()->getName()->setValue(FtaComposantModel::FIELDNAME_MODE_ETIQUETTE_FTA_COMPOSITION);
-        $HtmlList->setLabel(DatabaseDescription::getFieldDocLabel(FtaComposantModel::TABLENAME, FtaComposantModel::FIELDNAME_MODE_ETIQUETTE_FTA_COMPOSITION));
+        $HtmlList->getAttributes()->getName()->setValue(self::FIELDNAME_MODE_ETIQUETTE_FTA_COMPOSITION);
+        $HtmlList->setLabel(DatabaseDescription::getFieldDocLabel(self::TABLENAME, self::FIELDNAME_MODE_ETIQUETTE_FTA_COMPOSITION));
         $HtmlList->setIsEditable($paramIsEditable);
         $HtmlList->initAbstractHtmlSelect(
                 $HtmlTableName
@@ -862,10 +877,10 @@ class FtaComposantModel extends AbstractModel {
                 , $modeEtiquetteDataField->isFieldDiff()
                 , $HtmlList->getArrayListContent());
         $HtmlList->getEventsForm()->setOnChangeWithAjaxAutoSave(
-                FtaComposantModel::TABLENAME
-                , FtaComposantModel::KEYNAME
+                self::TABLENAME
+                , self::KEYNAME
                 , $this->getKeyValue()
-                , FtaComposantModel::FIELDNAME_MODE_ETIQUETTE_FTA_COMPOSITION);
+                , self::FIELDNAME_MODE_ETIQUETTE_FTA_COMPOSITION);
 
         /**
          * Description d'un champ

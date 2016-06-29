@@ -219,4 +219,15 @@ class FtaWorkflowStructureModel extends AbstractModel {
         return $idFtaRole;
     }
 
+    public static function getIdFtaChapitreBetweenArrayByWorkflowAndArrayByColumn($paramIdFtaWorkflow, $paramArrayByColumn) {
+        $arrayByWorkflow = DatabaseOperation::convertSqlStatementWithoutKeyToArrayComplete(
+                        "SELECT " . self::FIELDNAME_ID_FTA_CHAPITRE
+                        . " FROM " . self::TABLENAME
+                        . " WHERE " . self::FIELDNAME_ID_FTA_WORKFLOW . "=" . $paramIdFtaWorkflow
+        );
+        $value = FtaController::getFirstValueArrayInterset($paramArrayByColumn, $arrayByWorkflow);
+
+        return $value;
+    }
+
 }

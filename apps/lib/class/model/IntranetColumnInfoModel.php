@@ -28,6 +28,8 @@ class IntranetColumnInfoModel extends AbstractModel {
     const FIELDNAME_TAGS_VALIDATION_RULES_INTRANET_COLUMN_INFO = 'tags_validation_rules_intranet_column_info';
     const FIELDNAME_DEFAULT_FIELD_TO_LOCK_FOR_PRIMARY_FTA = 'default_field_to_lock_for_primary_fta';
     const FIELDNAME_IS_ENABLED_INTRANET_DESCRIPTION = 'is_enabled_intranet_description';
+    const FIELDNAME_IS_ENABLED_INTRANET_HISTORIQUE = 'is_enabled_intranet_historique';
+    const FIELDNAME_ID_LISTE_CHAPITRE_HISTORIQUE = 'id_liste_chapitre_historique';
     const FIELDNAME_UPLOAD_NAME_FILE = 'upload_name_file';
     const DEFAULT_FIELD_TO_LOCK_FOR_PRIMARY_FTA_VALUES = '1';
     const DEFAULT_FIELD_NOT_TO_LOCK_FOR_PRIMARY_FTA_VALUES = '2';
@@ -35,6 +37,8 @@ class IntranetColumnInfoModel extends AbstractModel {
     const HREF_POPUP = "../lib/popup-mysql_field_desc.php";
     const HREF_JAVASCRIPT_BEGIN = "javascript:; onClick=MM_openBrWindow('";
     const HREF_JAVASCRIPT_END = "','pop','scrollbars=no,width=510,height=550')";
+    const IS_ENABLED_INTRANET_HISTORIQUE_TRUE = '1';
+    const IS_ENABLED_INTRANET_HISTORIQUE_FALSE = '0';
     const IS_ENABLED_INTRANET_DESCRIPTION_TRUE = '1';
     const IS_ENABLED_INTRANET_DESCRIPTION_FALSE = '0';
 

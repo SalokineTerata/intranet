@@ -2855,9 +2855,16 @@ class FtaModel extends AbstractModel {
     }
 
     /**
-
+     * On récupère l'id de la version du dossier Fta en cours
+     * @return int
      */
+    function getVersionDossierFta() {
+        $versionDossierFta = $this->getDataField(self::FIELDNAME_VERSION_DOSSIER_FTA)->getFieldValue();
 
+        return $versionDossierFta;
+    }
+
+   
     /**
      * On gère les conditions des Codes Articles Primaires et Secondaires
      * Dans le cas d'une validation d'un Fta Priamire, on synchronise les données de la Fta Primaires avec toutes les Secondaire

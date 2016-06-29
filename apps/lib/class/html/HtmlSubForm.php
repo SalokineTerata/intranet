@@ -47,6 +47,13 @@ class HtmlSubForm extends AbstractHtmlList {
         ;
     }
 
+    /**
+     * Retourne le contenu brut du DataField
+     */
+    public function getRawContent() {
+        
+    }
+
     public function getHtmlAddContent() {
         return $this->getHtmlAddContent();
     }

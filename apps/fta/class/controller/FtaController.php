@@ -319,7 +319,7 @@ class FtaController {
         $reference_array = array();
 
         foreach ($paramArray as $key => $row) {
-            $reference_array[$key] = $row[$paramColumn];
+            $reference_array[$key] = strtotime($row[$paramColumn]);
         }
 
         array_multisort($reference_array, SORT_DESC, $paramArray);

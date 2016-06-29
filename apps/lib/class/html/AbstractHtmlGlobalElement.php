@@ -392,11 +392,6 @@ abstract class AbstractHtmlGlobalElement {
         return $this->label;
     }
 
-    /**
-     * Retourne le contenu brut du DataField
-     */
-    public abstract function getRawContent();
-
     public function setLabel($paramLabel) {
         $this->label = $paramLabel;
     }

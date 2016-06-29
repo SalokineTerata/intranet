@@ -35,7 +35,7 @@ $QUERY_STRING = $_SERVER['QUERY_STRING'];
 $intranetColumInfoModel = new IntranetColumnInfoModel($idIntranetColumnInfo);
 $explication_intranet_description = $intranetColumInfoModel->getDataField(IntranetColumnInfoModel::FIELDNAME_EXPLICATION_INTRANET_COLUMN_INFO)->getFieldValue();
 $nom_table = $intranetColumInfoModel->getDataField(IntranetColumnInfoModel::FIELDNAME_TABLE_NAME_INTRANET_COLUMN_INFO)->getFieldValue();
-$nom_variable = $intranetColumInfoModel->getDataField(IntranetColumnInfoModel::FIELDNAME_COLUMN_NAME_INTRANET_COLUMN_INO)->getFieldValue();
+$nom_variable = $intranetColumInfoModel->getDataField(IntranetColumnInfoModel::FIELDNAME_COLUMN_NAME_INTRANET_COLUMN_INFO)->getFieldValue();
 $fichier = $intranetColumInfoModel->getDataField(IntranetColumnInfoModel::FIELDNAME_UPLOAD_NAME_FILE)->getFieldValue();
 $title = DatabaseDescription::getFieldDocLabel($nom_table, $nom_variable);
 

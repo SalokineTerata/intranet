@@ -135,7 +135,7 @@ class FtaVerrouillageChampsModel extends AbstractModel {
                         . "," . self::FIELDNAME_FIELD_LOCK
                         . " FROM " . self::TABLENAME . "," . IntranetColumnInfoModel::TABLENAME
                         . " WHERE " . self::FIELDNAME_DOSSIER_FTA_PRIMAIRE . "=" . $paramIdFtaDossierPrimaire
-                        . " AND " . self::FIELDNAME_FIELD_NAME . "=" . IntranetColumnInfoModel::FIELDNAME_COLUMN_NAME_INTRANET_COLUMN_INO
+                        . " AND " . self::FIELDNAME_FIELD_NAME . "=" . IntranetColumnInfoModel::FIELDNAME_COLUMN_NAME_INTRANET_COLUMN_INFO
                         . " AND " . self::FIELDNAME_TABLE_NAME . "=" . IntranetColumnInfoModel::FIELDNAME_TABLE_NAME_INTRANET_COLUMN_INFO
                         . " AND " . IntranetColumnInfoModel::FIELDNAME_DEFAULT_FIELD_TO_LOCK_FOR_PRIMARY_FTA . "=" . IntranetColumnInfoModel::DEFAULT_FIELD_TO_LOCK_FOR_PRIMARY_FTA_VALUES
                         . " ORDER BY " . self::FIELDNAME_TABLE_NAME
@@ -369,7 +369,7 @@ class FtaVerrouillageChampsModel extends AbstractModel {
                         . ", " . self::FIELDNAME_FIELD_LOCK
                         . ", " . self::FIELDNAME_FIELD_CHANGE_STATE
                         . " ) VALUES ( \"" . $rowIntranetColumInfoLockField[IntranetColumnInfoModel::FIELDNAME_TABLE_NAME_INTRANET_COLUMN_INFO]
-                        . "\", \"" . $rowIntranetColumInfoLockField[IntranetColumnInfoModel::FIELDNAME_COLUMN_NAME_INTRANET_COLUMN_INO]
+                        . "\", \"" . $rowIntranetColumInfoLockField[IntranetColumnInfoModel::FIELDNAME_COLUMN_NAME_INTRANET_COLUMN_INFO]
                         . "\", \"" . $paramFtaDossierPrimaire
                         . "\", \"" . $lockValue
                         . "\", \"" . self::CHANGE_STATE_TRUE_VALIDATION_FTA . "\" ) "

@@ -68,6 +68,14 @@ abstract class AbstractHtmlInput extends AbstractHtmlGlobalElement {
         return;
     }
 
+    /**
+     * Retourne le contenu brut du DataField
+     */
+    public function getRawContent() {
+        $return = $this->getAttributes()->getValue()->getValue();
+        return $return;
+    }
+
     function getHtmlEditableContent() {
 
 

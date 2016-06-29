@@ -101,7 +101,7 @@ class HtmlSubForm_RNN extends HtmlSubForm {
         $this->setSecondaryTableNamesAndIdKeyValue($secondaryTableNamesAndIdKeyValue);
         $this->setNameDataTableToCompare($NameDataFtaConditionnementTableToCompare);
     }
-
+   
     function getNameDataTableToCompare() {
         return $this->nameDataTableToCompare;
     }

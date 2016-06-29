@@ -138,7 +138,7 @@ if ($arrayDossierFta) {
     $htmlListTitre = UserInterfaceLabel::FR_VERROUILLABLE_TITRE;
     foreach ($arrayFtaLock as $rowsFtaLock) {
         $tableName = $rowsFtaLock[IntranetColumnInfoModel::FIELDNAME_TABLE_NAME_INTRANET_COLUMN_INFO];
-        $fieldName = $rowsFtaLock[IntranetColumnInfoModel::FIELDNAME_COLUMN_NAME_INTRANET_COLUMN_INO];
+        $fieldName = $rowsFtaLock[IntranetColumnInfoModel::FIELDNAME_COLUMN_NAME_INTRANET_COLUMN_INFO];
 
         $label = IntranetColumnInfoModel::getLabelByTableNameAndColummName($tableName, $fieldName);
         $htmlList .= $separateur . $label;

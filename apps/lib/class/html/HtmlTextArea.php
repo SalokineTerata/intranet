@@ -59,6 +59,14 @@ class HtmlTextArea extends AbstractHtmlGlobalElement {
     }
 
     /**
+     * Retourne le contenu brut du DataField
+     */
+    public function getRawContent() {
+        $return = $this->getTextAreaContent();
+        return $return;
+    }
+
+    /**
      * 
      * @return AttributesTextArea
      */

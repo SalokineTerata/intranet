@@ -11,7 +11,7 @@ class IntranetColumnInfoModel extends AbstractModel {
     const TABLENAME = 'intranet_column_info';
     const KEYNAME = 'id_intranet_column_info';
     const FIELDNAME_TABLE_NAME_INTRANET_COLUMN_INFO = 'table_name_intranet_column_info';
-    const FIELDNAME_COLUMN_NAME_INTRANET_COLUMN_INO = 'column_name_intranet_column_info';
+    const FIELDNAME_COLUMN_NAME_INTRANET_COLUMN_INFO = 'column_name_intranet_column_info';
     const FIELDNAME_TYPE_OF_STORAGE = 'type_of_storage';
     const FIELDNAME_LABEL_INTRANET_COLUMN_INFO = 'label_intranet_column_info';
     const FIELDNAME_EXPLICATION_INTRANET_COLUMN_INFO = 'explication_intranet_column_info';
@@ -73,7 +73,7 @@ class IntranetColumnInfoModel extends AbstractModel {
     public static function getArrayDefaultLockField() {
         $arrayIntranetColumInfoLockField = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
                         "SELECT DISTINCT " . IntranetColumnInfoModel::FIELDNAME_TABLE_NAME_INTRANET_COLUMN_INFO
-                        . "," . IntranetColumnInfoModel::FIELDNAME_COLUMN_NAME_INTRANET_COLUMN_INO
+                        . "," . IntranetColumnInfoModel::FIELDNAME_COLUMN_NAME_INTRANET_COLUMN_INFO
                         . "," . IntranetColumnInfoModel::FIELDNAME_DEFAULT_FIELD_TO_LOCK_FOR_PRIMARY_FTA
                         . " FROM " . IntranetColumnInfoModel::TABLENAME
                         . " WHERE " . IntranetColumnInfoModel::FIELDNAME_DEFAULT_FIELD_TO_LOCK_FOR_PRIMARY_FTA . "=" . IntranetColumnInfoModel::DEFAULT_FIELD_TO_LOCK_FOR_PRIMARY_FTA_VALUES
@@ -94,7 +94,7 @@ class IntranetColumnInfoModel extends AbstractModel {
                         "SELECT DISTINCT " . IntranetColumnInfoModel::FIELDNAME_LABEL_INTRANET_COLUMN_INFO
                         . " FROM " . IntranetColumnInfoModel::TABLENAME
                         . " WHERE " . IntranetColumnInfoModel::FIELDNAME_TABLE_NAME_INTRANET_COLUMN_INFO . "='" . $paramTableName
-                        . "' AND " . IntranetColumnInfoModel::FIELDNAME_COLUMN_NAME_INTRANET_COLUMN_INO . "='" . $paramColumnName . "'"
+                        . "' AND " . IntranetColumnInfoModel::FIELDNAME_COLUMN_NAME_INTRANET_COLUMN_INFO . "='" . $paramColumnName . "'"
         );
         if ($arrayIntranetColumnLabel) {
             foreach ($arrayIntranetColumnLabel as $rowsIntranetColumnLabel) {
@@ -117,14 +117,14 @@ class IntranetColumnInfoModel extends AbstractModel {
         //Recherche des informations d'aide en ligne (format Pop-up)
 
         $req_explication = "SELECT " . self::FIELDNAME_TABLE_NAME_INTRANET_COLUMN_INFO
-                . "," . self::FIELDNAME_COLUMN_NAME_INTRANET_COLUMN_INO
+                . "," . self::FIELDNAME_COLUMN_NAME_INTRANET_COLUMN_INFO
                 . "," . self::FIELDNAME_EXPLICATION_INTRANET_COLUMN_INFO
                 . "," . self::FIELDNAME_IS_ENABLED_INTRANET_DESCRIPTION
                 . "," . self::FIELDNAME_UPLOAD_NAME_FILE
                 . "," . self::KEYNAME
                 . " FROM " . self::TABLENAME
                 . " WHERE " . self::FIELDNAME_TABLE_NAME_INTRANET_COLUMN_INFO . "='" . $paramNameTable . "' "
-                . "AND " . self::FIELDNAME_COLUMN_NAME_INTRANET_COLUMN_INO . "='" . $paramNameVariable . "' "
+                . "AND " . self::FIELDNAME_COLUMN_NAME_INTRANET_COLUMN_INFO . "='" . $paramNameVariable . "' "
         ;
         $arrayIntranetDescription = DatabaseOperation::convertSqlStatementWithoutKeyToArray($req_explication);
 
@@ -172,7 +172,7 @@ class IntranetColumnInfoModel extends AbstractModel {
         $pdo = DatabaseOperation::executeComplete(
                         "INSERT INTO " . self::TABLENAME
                         . "(" . self::FIELDNAME_TABLE_NAME_INTRANET_COLUMN_INFO
-                        . "," . self::FIELDNAME_COLUMN_NAME_INTRANET_COLUMN_INO
+                        . "," . self::FIELDNAME_COLUMN_NAME_INTRANET_COLUMN_INFO
                         . "," . self::FIELDNAME_EXPLICATION_INTRANET_COLUMN_INFO
                         . ")"
                         . "VALUES ('" . $paramNameTable

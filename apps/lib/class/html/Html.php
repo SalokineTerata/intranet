@@ -157,14 +157,12 @@ class Html {
      */
     public static function getHtmlObjectFromDataField(DatabaseDataField $paramDataField, $param = FALSE, $param2 = FALSE) {
         $htmlObject = NULL;
-        $RawContent = NULL;
         $TypeOfHtmlObject = $paramDataField->getFieldTypeOfHtmlObject();
 
         switch ($TypeOfHtmlObject) {
 
             case Html::TYPE_OF_OBJECT_CALENDAR:
                 $htmlObject = new DataFieldToHtmlInputCalendar($paramDataField);
-                $RawContent = $htmlObject->getHtmlViewedContent();
                 break;
 
             case Html::TYPE_OF_OBJECT_INPUTTEXT:

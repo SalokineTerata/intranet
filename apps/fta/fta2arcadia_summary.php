@@ -102,7 +102,7 @@ $detail_id_fta;              //Identifiant de la fiche sur laquelle on souhaite 
   Récupération des données MySQL
  */
 
-Navigation::initNavigation($id_fta, $id_fta_chapitre, $synthese_action, $comeback, $idFtaEtat, $abreviationFtaEtat, $idFtaRole, TRUE);
+Navigation::initNavigation($id_fta, $id_fta_chapitre, $synthese_action, $comeback, $idFtaEtat, $abreviationFtaEtat, $idFtaRole, TRUE,TRUE);
 $navigue = Navigation::getHtmlNavigationBar();
 
 
@@ -160,6 +160,17 @@ if ($idFtaWorkflow == FtaWorkflowModel::ID_WORKFLOW_MDD_AVEC or $idFtaWorkflow =
     $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_DUREE_DE_VIE);
 }
 
+/**
+ * Durrée de vie 
+ */
+$bloc.="<td align=center>Durrée de vie</td>";
+//Durée de vie Production (en jours)
+$bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_DUREE_DE_VIE_TECHNIQUE_PRODUCTION);
+
+
+//Code Douane 
+$bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_CODE_DOUANE_FTA);
+
 
 /**
  * PCB
@@ -171,14 +182,16 @@ $bloc.="<td align=center>PCB</td>" . $ftaView->getHtmlDataField(FtaModel::FIELDN
 /**
  * Emballages du Colis
  */
-$bloc.="<td align=center>Emballages du Colis</td>" . $ftaView->getHtmlEmballageDuColis($id_fta, $idChapitre, $synthese_action, $idFtaEtat, $abreviationFtaEtat, $idFtaRole);
+AnnexeEmballageGroupeTypeModel::initEmballage($id_fta);
+$bloc.="<td align=center>Emballages du Colis</td>" . $ftaView->getHtmlEmballageDuColis($id_fta, $id_fta_chapitre_encours, $synthese_action, $idFtaEtat, $abreviationFtaEtat, $idFtaRole);
 
 //Vérification que l'enballage sélectionner soit existant sur Arcadia
 $bloc.=$ftaView->checkEmballageColisValide();
 
 //Palette
-$bloc.=$ftaView->getHtmlEmballagePalette($id_fta, $idChapitre, $synthese_action, $idFtaEtat, $abreviationFtaEtat, $idFtaRole);
+//Nombre total de Carton par palette:
 
+$bloc.=$ftaView->getHtmlColisTotalUVC();
 /**
  * Codification
  */
@@ -192,8 +205,8 @@ $bloc.=$ftaView->getHtmlDesignationInterneAgis();
 //Code Article LDC, code Article arcadia
 $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_CODE_ARTICLE_LDC);
 
-$fta2ArcadiaController = new Fta2ArcadiaController($ftaModel,TRUE);
-$ficherXML = $fta2ArcadiaController->showExportXmlFile() ;
+$fta2ArcadiaController = new Fta2ArcadiaController($ftaModel, TRUE);
+$ficherXML = $fta2ArcadiaController->showExportXmlFile();
 
 /*
   Sélection du mode d'affichage

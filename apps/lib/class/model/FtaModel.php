@@ -1068,7 +1068,7 @@ class FtaModel extends AbstractModel {
                         // Calcul du Poids net du colis
                         $return[FtaConditionnementModel::COLIS_EMBALLAGE_NET] += FtaConditionnementModel::getCalculGenericMultiplication(
                                         $rowsComposant[FtaComposantModel::FIELDNAME_QUANTITE_FTA_COMPOSITION]
-                                        , $rowsComposant[FtaComposantModel::FIELDNAME_POIDS_UNITAIRE_CODIFICATION]
+                                        , $rowsComposant[FtaComposantModel::FIELDNAME_POIDS_FTA_COMPOSITION]
                         );
                     }
                 } else {

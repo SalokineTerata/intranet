@@ -39,12 +39,13 @@ class Navigation {
     protected static $id_fta_processus;
     protected static $id_fta_workflow;
     protected static $id_parent_intranet_actions;
+    protected static $selectionChap;
 
     public static function getHtmlNavigationBar() {
         return self::$html_navigation_bar;
     }
 
-    public static function initNavigation($id_fta, $id_fta_chapitre_encours, $synthese_action, $comeback, $id_fta_etat, $abrevation_etat, $id_fta_role, $paramActivationComplete) {
+    public static function initNavigation($id_fta, $id_fta_chapitre_encours, $synthese_action, $comeback, $id_fta_etat, $abrevation_etat, $id_fta_role, $paramActivationComplete,$paramSelectionChap) {
 
         /**
          * Modification
@@ -58,6 +59,7 @@ class Navigation {
 
 
 
+        self::$selectionChap= $paramSelectionChap;
         self::$id_fta = $id_fta;
         self::$id_fta_chapitre_encours = $id_fta_chapitre_encours;
         self::$synthese_action = $synthese_action;
@@ -184,6 +186,7 @@ class Navigation {
             if ($pdf) {
                 $pdf = " | " . $pdf;
             }
+            $historique = " | " . TableauFicheView::getHtmlLinkHistoriqueModfify(self::$abreviation_etat, self::$id_fta, self::$synthese_action, self::$id_fta_etat, self::$id_fta_role, "18","Historique de modification");
             $menu_navigation.='
                     <a href=historique-' . self::$id_fta
                     . '-' . self::$id_fta_chapitre_encours
@@ -193,13 +196,7 @@ class Navigation {
                     . '-' . self::$synthese_action
 //                    . '-1'
                     . '.html ><img src=./images/graphique.png alt=\'\' title=\'Etat d\'avancement\' width=\'18\' height=\'15\' border=\'0\' /> Etat d\'avancement</a>'
-                    . ' | <a href=modification_fta_historique.php?' . FtaModel::KEYNAME . '=' . self::$id_fta
-                    . '&id_fta_chapitre_encours=' . self::$id_fta_chapitre_encours
-                    . '&' . FtaEtatModel::KEYNAME . '=' . self::$id_fta_etat
-                    . '&' . FtaEtatModel::FIELDNAME_ABREVIATION . '=' . self::$abreviation_etat
-                    . '&' . FtaRoleModel::KEYNAME . '=' . self::$id_fta_role
-                    . '&synthese_action=' . self::$synthese_action
-                    . ' ><img src=./images/dossier.png alt=\'\' title=\'Historique des modifications Fta width=\'18\' height=\'15\' border=\'0\' /> Historique des modifications Fta</a>'
+                    . $historique
                     . ' | <a href=fta2arcadia_summary.php?' . FtaModel::KEYNAME . '=' . self::$id_fta
                     . '&id_fta_chapitre_encours=' . self::$id_fta_chapitre_encours
                     . '&' . FtaEtatModel::KEYNAME . '=' . self::$id_fta_etat
@@ -619,7 +616,7 @@ class Navigation {
             if (!self::$id_fta_chapitre_encours) {
                 self::$id_fta_chapitre_encours = $id_fta_chapitre;
             }
-            if (self::$id_fta_chapitre_encours == $id_fta_chapitre) {
+            if (self::$id_fta_chapitre_encours == $id_fta_chapitre and !self::$selectionChap) {
                 $font_size = "size=" . self::FONT_SIZE_CHAPITRE_ENCOURS;
                 $font_flash_color = "color=" . self::FONT_COLOR_CHAPITRE_ENCOURS;
                 $font_flash = "<font " . $font_size . " " . $font_flash_color . ">";

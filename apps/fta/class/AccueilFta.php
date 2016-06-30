@@ -1054,7 +1054,7 @@ class AccueilFta {
                         . '&' . FtaEtatModel::FIELDNAME_ABREVIATION . '=' . self::$abreviationFtaEtat
                         . '&' . FtaRoleModel::KEYNAME . '=' . self::$idFtaRole
                         . '&synthese_action=' . self::$syntheseAction
-                        . ' ><img src=./images/dossier.png alt=\'\' title=\'Historique des modifications Fta width=\'30\' height=\'30\' border=\'0\' /></a>';
+                        . ' ><img src=./images/dossier.png alt=\'\' title=\'Historique des modifications Fta\' width=\'30\' height=\'30\' border=\'0\' /></a>';
                 /*
                  * Transiter
                  */

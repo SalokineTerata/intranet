@@ -100,7 +100,7 @@ if ($selection_saisonnalite) {
 if (!$modificationGestionnaire) {
     $bouton_retour_vers_fta = FtaView::getHtmlButtonReturnFta($idFta, $id_fta_chapitre_encours, $syntheseAction, $idFtaEtat, $abreviationFtaEtat, $idFtaRole);
 
-    Navigation::initNavigation($idFta, $id_fta_chapitre_encours, $syntheseAction, $comeback, $idFtaEtat, $abreviationFtaEtat, $idFtaRole, FALSE);
+    Navigation::initNavigation($idFta, $id_fta_chapitre_encours, $syntheseAction, $comeback, $idFtaEtat, $abreviationFtaEtat, $idFtaRole, FALSE, TRUE);
 
     $navigue = Navigation::getHtmlNavigationBar();
 }

@@ -2495,7 +2495,7 @@ function generateXmlText() {
             . self::TABLE_START
             . $this->xmlArticleRef()
             . $this->xmlProduitFinis()
-//            . $this->xmlArtSite()
+            . $this->xmlArtSite()
             . $this->xmlDunc14()
             . self::TABLE_END . self::SAUT_DE_LIGNE
             . "</Transaction>" . self::SAUT_DE_LIGNE
@@ -2560,6 +2560,13 @@ function linkXmlFileDataSend() {
 
             break;
         case EnvironmentConf::ENV_PRD_NAME :
+            $link = $this->getGlobalConfigModel()->getConf()->getUrlEai() . "/export/data/fta2arcadia-40-"
+                    . $this->getKeyValuePorposal()
+                    . "-" . $this->getFtaModel()->getDataField(FtaModel::KEYNAME)->getFieldValue()
+                    . "-proposal.xml";
+
+            break;
+        case EnvironmentConf::ENV_COP :
             $link = $this->getGlobalConfigModel()->getConf()->getUrlEai() . "/export/data/fta2arcadia-40-"
                     . $this->getKeyValuePorposal()
                     . "-" . $this->getFtaModel()->getDataField(FtaModel::KEYNAME)->getFieldValue()

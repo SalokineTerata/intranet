@@ -269,10 +269,6 @@ class FtaModel extends AbstractModel {
                 new ClassificationRaccourcisModel($this->getDataField(self::FIELDNAME_ID_CLASSIFICATION_RACCOURCIS)->getFieldValue()
                 , DatabaseRecord::VALUE_DONT_CREATE_RECORD_IN_DATABASE_IF_KEY_DOESNT_EXIST)
         );
-        /**
-         * Initialisation de la Fta à comparer
-         */
-        $this->setDataFtaTableToCompare();
     }
 
     /**

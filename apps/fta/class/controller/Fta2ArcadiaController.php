@@ -625,7 +625,7 @@ function transformCodeDouane() {
     $checkDiff = $this->getFtaModel()->getDataField(FtaModel::FIELDNAME_CODE_DOUANE_FTA)->isFieldDiff();
     if ($checkDiff or $this->getActionProposal() == self::CREATE) {
         $codeDouaneTmp = $this->getFtaModel()->getDataField(FtaModel::FIELDNAME_CODE_DOUANE_FTA)->getFieldValue();
-        $codeDouaneValue = FtaController::getFirstStringNumber($codeDouaneTmp, 0, self::LIMIT_NUMBER_COD_NDP);
+        $codeDouaneValue = FtaController::getFirstStringNumber($codeDouaneTmp,self::LIMIT_NUMBER_COD_NDP);
         $this->setXMLArcadiaCodeDouane($codeDouaneValue);
     }
 }

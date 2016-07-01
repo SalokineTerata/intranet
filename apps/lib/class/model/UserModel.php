@@ -173,7 +173,7 @@ class UserModel extends AbstractModel {
                 . ' WHERE ' . LuModel::FILEDNAME_ID_USER . '=' . $paramIdSalaries);
         DatabaseOperation::execute(
                 'DELETE FROM ' . PlanningPresenceDetailModel::TABLENAME
-                . ' WHERE ' . PlanningPresenceDetailModel::FILEDNAME_ID_USER . '=' . $paramIdSalaries);
+                . ' WHERE ' . PlanningPresenceDetailModel::FIELDNAME_ID_USER . '=' . $paramIdSalaries);
         DatabaseOperation::execute(
                 'DELETE FROM ' . PersoModel::TABLENAME
                 . ' WHERE ' . PersoModel::KEYNAME . '=' . $paramIdSalaries);

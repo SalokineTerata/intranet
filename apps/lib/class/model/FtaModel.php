@@ -129,6 +129,7 @@ class FtaModel extends AbstractModel {
     const FTA_PRIMAIRE = '1';
     const FTA_SECONDAIRE = '2';
     const FTA_NORMAL = '0';
+    const FTA_DOSSIER_VERSION_0 = '0';
 
     /**
      * Utilisateur ayant créé la FTA
@@ -268,6 +269,10 @@ class FtaModel extends AbstractModel {
                 new ClassificationRaccourcisModel($this->getDataField(self::FIELDNAME_ID_CLASSIFICATION_RACCOURCIS)->getFieldValue()
                 , DatabaseRecord::VALUE_DONT_CREATE_RECORD_IN_DATABASE_IF_KEY_DOESNT_EXIST)
         );
+        /**
+         * Initialisation de la Fta à comparer
+         */
+        $this->setDataFtaTableToCompare();
     }
 
     /**
@@ -2191,12 +2196,37 @@ class FtaModel extends AbstractModel {
         return parent::getDataToCompare();
     }
 
+    /**
+     * Type d'action create ou update pour Fta2Arcadia
+     * @return string
+     */
     function getActionProposal() {
         $action = Fta2ArcadiaController::CREATE;
-        if ($this->getDataField(self::FIELDNAME_CODE_ARTICLE_LDC)->getFieldValue()) {
+        $earlierIdFtaVersionCodeArticleArcadia = $this->getDataToCompare()->getFieldValue(self::FIELDNAME_CODE_ARTICLE_LDC);
+        /**
+         * Dans le cas où la Fta en cours est une version 0 alors Creation
+         * Dans le cas où la Fta en cours n'est pas une version 0
+         * et que la version précedente à la Fta n'a pas de Code Article Arcadia alors  Creation
+         * Sinon il s'agit d'un update.
+         */
+        if (!$this->getVersionDossierFta() == self::FTA_DOSSIER_VERSION_0 AND ! $earlierIdFtaVersionCodeArticleArcadia) {
+
             $action = Fta2ArcadiaController::UPDATE;
         }
         return $action;
+    }
+
+    /**
+     * On récupère l'id de la Fta de la version précedente en cours
+     * @return string
+     */
+    function getEarlierIdFtaVersion() {
+        if (!$this->getVersionDossierFta() == self::FTA_DOSSIER_VERSION_0) {
+            $return = $this->getDataToCompare()->getFieldValue(self::KEYNAME);
+        } else {
+            $return = self::FTA_DOSSIER_VERSION_0;
+        }
+        return $return;
     }
 
     /**
@@ -2864,7 +2894,6 @@ class FtaModel extends AbstractModel {
         return $versionDossierFta;
     }
 
-   
     /**
      * On gère les conditions des Codes Articles Primaires et Secondaires
      * Dans le cas d'une validation d'un Fta Priamire, on synchronise les données de la Fta Primaires avec toutes les Secondaire

@@ -518,7 +518,7 @@ class Chapitre {
 
         //Identifiant FTA
         $ftaModel = new FtaModel($id_fta);
-        $ftaModel->setDataFtaTableToCompare();
+
 
         $ftaView = new FtaView($ftaModel);
         $ftaView->setIsEditable($isEditable);        
@@ -650,7 +650,7 @@ class Chapitre {
         //Identifiant FTA
         $idFta = $id_fta;
         $ftaModel = new FtaModel($idFta);
-        $ftaModel->setDataFtaTableToCompare();
+
         $ftaView = new FtaView($ftaModel);
         $ftaView->setIsEditable($isEditable);
 
@@ -825,7 +825,7 @@ class Chapitre {
 
         //Identifiant FTA
         $ftaModel = new FtaModel($id_fta);
-        $ftaModel->setDataFtaTableToCompare();
+
         $ftaView = new FtaView($ftaModel);
         $ftaView->setIsEditable($isEditable);
         $ftaView->setFtaChapitreModelById(self::ID_CHAPITRE_IDENTITE);
@@ -861,7 +861,7 @@ class Chapitre {
 
         //Identifiant FTA
         $ftaModel = new FtaModel($id_fta);
-        $ftaModel->setDataFtaTableToCompare();
+
         $ftaView = new FtaView($ftaModel);
         $ftaView->setIsEditable($isEditable);
         $ftaView->setFtaChapitreModelById(self::ID_CHAPITRE_IDENTITE);
@@ -886,7 +886,7 @@ class Chapitre {
 
         //Identifiant FTA
         $ftaModel = new FtaModel($id_fta);
-        $ftaModel->setDataFtaTableToCompare();
+
         $ftaView = new FtaView($ftaModel);
         $ftaView->setIsEditable($isEditable);
         $ftaView->setFtaChapitreModelById(self::ID_CHAPITRE_IDENTITE);
@@ -911,7 +911,7 @@ class Chapitre {
 
         //Identifiant FTA
         $ftaModel = new FtaModel($id_fta);
-        $ftaModel->setDataFtaTableToCompare();
+
         $ftaView = new FtaView($ftaModel);
         $ftaView->setIsEditable($isEditable);
         $ftaView->setFtaChapitreModelById(self::ID_CHAPITRE_IDENTITE);
@@ -940,7 +940,7 @@ class Chapitre {
 
         //Identifiant FTA
         $ftaModel = new FtaModel($id_fta);
-        $ftaModel->setDataFtaTableToCompare();
+
         $ftaView = new FtaView($ftaModel);
         $ftaView->setIsEditable($isEditable);
         $ftaView->setFtaChapitreModelById(self::ID_CHAPITRE_IDENTITE);
@@ -968,7 +968,7 @@ class Chapitre {
 
         //Identifiant FTA
         $ftaModel = new FtaModel($id_fta);
-        $ftaModel->setDataFtaTableToCompare();
+
         $ftaView = new FtaView($ftaModel);
         $ftaView->setIsEditable($isEditable);
         $ftaView->setFtaChapitreModelById(self::ID_CHAPITRE_IDENTITE);
@@ -1001,7 +1001,7 @@ class Chapitre {
 
         //Identifiant FTA
         $ftaModel = new FtaModel($id_fta);
-        $ftaModel->setDataFtaTableToCompare();
+
         $ftaView = new FtaView($ftaModel);
         $ftaView->setIsEditable($isEditable);
         $ftaView->setFtaChapitreModelById(self::ID_CHAPITRE_IDENTITE);
@@ -1030,7 +1030,7 @@ class Chapitre {
 
         //Identifiant FTA
         $ftaModel = new FtaModel($id_fta);
-        $ftaModel->setDataFtaTableToCompare();
+
         $ftaView = new FtaView($ftaModel);
         $ftaView->setIsEditable($isEditable);
 
@@ -1063,7 +1063,7 @@ class Chapitre {
 
         //Identifiant FTA
         $ftaModel = new FtaModel($id_fta);
-        $ftaModel->setDataFtaTableToCompare();
+
         $ftaView = new FtaView($ftaModel);
         $ftaView->setIsEditable($isEditable);
         $ftaView->setFtaChapitreModelById(self::ID_CHAPITRE_IDENTITE);
@@ -1110,7 +1110,7 @@ class Chapitre {
 
         //Identifiant FTA
         $ftaModel = new FtaModel($id_fta);
-        $ftaModel->setDataFtaTableToCompare();
+
         $ftaView = new FtaView($ftaModel);
         $ftaView->setIsEditable($isEditable);
         $ftaView->setFtaChapitreModelById(self::ID_CHAPITRE_IDENTITE);
@@ -1144,7 +1144,7 @@ class Chapitre {
 
         //Identifiant FTA
         $ftaModel = new FtaModel($id_fta);
-        $ftaModel->setDataFtaTableToCompare();
+
         $ftaView = new FtaView($ftaModel);
         $ftaView->setIsEditable($isEditable);
         $ftaView->setFtaChapitreModelById(self::ID_CHAPITRE_IDENTITE);
@@ -1183,7 +1183,7 @@ class Chapitre {
 
         //Identifiant FTA
         $ftaModel = new FtaModel($id_fta);
-        $ftaModel->setDataFtaTableToCompare();
+
         $ftaView = new FtaView($ftaModel);
         $ftaView->setIsEditable($isEditable);
         $ftaView->setFtaChapitreModelById(self::ID_CHAPITRE_IDENTITE);
@@ -1210,7 +1210,7 @@ class Chapitre {
 
         //Identifiant FTA
         $ftaModel = new FtaModel($id_fta);
-        $ftaModel->setDataFtaTableToCompare();
+
         $ftaView = new FtaView($ftaModel);
         $ftaView->setIsEditable($isEditable);
         $ftaView->setFtaChapitreModelById(self::ID_CHAPITRE_IDENTITE);
@@ -1251,7 +1251,7 @@ class Chapitre {
 
         //Identifiant FTA
         $ftaModel = new FtaModel($id_fta);
-        $ftaModel->setDataFtaTableToCompare();
+
         $ftaView = new FtaView($ftaModel);
         $ftaView->setIsEditable($isEditable);
         $ftaView->setFtaChapitreModelById(self::ID_CHAPITRE_IDENTITE);
@@ -1292,7 +1292,7 @@ class Chapitre {
 
         //Identifiant FTA
         $ftaModel = new FtaModel($id_fta);
-        $ftaModel->setDataFtaTableToCompare();
+
         $ftaView = new FtaView($ftaModel);
         $ftaView->setIsEditable($isEditable);
         $ftaView->setFtaChapitreModelById(self::ID_CHAPITRE_IDENTITE);
@@ -1333,7 +1333,7 @@ class Chapitre {
 
         //Identifiant FTA
         $ftaModel = new FtaModel($id_fta);
-        $ftaModel->setDataFtaTableToCompare();
+
         $ftaView = new FtaView($ftaModel);
         $ftaView->setIsEditable($isEditable);
         $ftaView->setFtaChapitreModelById(self::ID_CHAPITRE_IDENTITE);
@@ -1377,7 +1377,7 @@ class Chapitre {
 
         //Identifiant FTA
         $ftaModel = new FtaModel($id_fta);
-        $ftaModel->setDataFtaTableToCompare();
+
         $ftaView = new FtaView($ftaModel);
         $ftaView->setIsEditable($isEditable);
         $ftaView->setFtaChapitreModelById(self::ID_CHAPITRE_IDENTITE);
@@ -1421,7 +1421,7 @@ class Chapitre {
 
         //Identifiant FTA
         $ftaModel = new FtaModel($id_fta);
-        $ftaModel->setDataFtaTableToCompare();
+
         $ftaView = new FtaView($ftaModel);
         $ftaView->setIsEditable($isEditable);
         $ftaView->setFtaChapitreModelById(self::ID_CHAPITRE_IDENTITE);
@@ -1997,7 +1997,7 @@ class Chapitre {
         //
         //Identifiant FTA
         $ftaModel = new FtaModel($id_fta);
-        $ftaModel->setDataFtaTableToCompare();
+
         $ftaView = new FtaView($ftaModel);
         $ftaView->setIsEditable($isEditable);
         $ftaView->setFtaChapitreModelById(self::ID_CHAPITRE_IDENTITE);
@@ -2042,7 +2042,7 @@ class Chapitre {
         //
         //Identifiant FTA
         $ftaModel = new FtaModel($id_fta);
-        $ftaModel->setDataFtaTableToCompare();
+
         $ftaView = new FtaView($ftaModel);
         $ftaView->setIsEditable($isEditable);
         $ftaView->setFtaChapitreModelById(self::ID_CHAPITRE_IDENTITE);

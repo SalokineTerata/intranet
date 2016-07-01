@@ -62,7 +62,6 @@ $idFtaRole = Lib::getParameterFromRequest(FtaRoleModel::KEYNAME);
  * Initialisation
  */
 $ftaModel = new FtaModel($id_fta);
-$ftaModel->setDataFtaTableToCompare();
 $ftaView = new FtaView($ftaModel);
 $ftaView->setIsEditable(Chapitre::NOT_EDITABLE);
 $idFtaWorkflow = $ftaModel->getDataField(FtaModel::FIELDNAME_WORKFLOW)->getFieldValue();

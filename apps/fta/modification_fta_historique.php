@@ -65,6 +65,14 @@ $ftaModel = new FtaModel($id_fta);
 $dossierFta = $ftaModel->getDossierFta();
 $idFtaWorkflow = $ftaModel->getDataField(FtaModel::FIELDNAME_WORKFLOW)->getFieldValue();
 $globalConfig = new GlobalConfig();
+
+if ($globalConfig->getAuthenticatedUser()) {
+    $idUser = $globalConfig->getAuthenticatedUser()->getKeyValue();
+} else {
+    $titre = UserInterfaceMessage::FR_WARNING_DECONNECTION_TITLE;
+    $message = UserInterfaceMessage::FR_WARNING_DECONNECTION;
+    Lib::showMessage($titre, $message, $redirection);
+}
 $idUser = $globalConfig->getAuthenticatedUser()->getKeyValue();
 /**
  * Contrôle du rôle attribué

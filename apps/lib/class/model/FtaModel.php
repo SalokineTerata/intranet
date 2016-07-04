@@ -2205,7 +2205,7 @@ class FtaModel extends AbstractModel {
          * et que la version précedente à la Fta n'a pas de Code Article Arcadia alors  Creation
          * Sinon il s'agit d'un update.
          */
-        if (!$this->getVersionDossierFta() == self::FTA_DOSSIER_VERSION_0 AND ! $earlierIdFtaVersionCodeArticleArcadia) {
+        if ($this->getVersionDossierFta() <> self::FTA_DOSSIER_VERSION_0 AND ! $earlierIdFtaVersionCodeArticleArcadia) {
 
             $action = Fta2ArcadiaController::UPDATE;
         }

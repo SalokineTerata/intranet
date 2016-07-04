@@ -20,7 +20,7 @@
 /**
  * Description of Fta2ArcadiaController
  *
- * @author tp4300001
+ * @author franckwastaken
  */
 class Fta2ArcadiaController {
 
@@ -29,8 +29,10 @@ class Fta2ArcadiaController {
     const TABULATION = "    ";
     const TABLE_START = "    <Tables>\n";
     const TABLE_END = "    </Tables>\n";
-    const ARTICLE_REF_START = "        <ARTICLE_TRAIT_NEW>\n";
-    const ARTICLE_REF_END = "        </ARTICLE_TRAIT_NEW>\n";
+//    const ARTICLE_REF_START = "        <ARTICLE_TRAIT_NEW>\n";
+    const ARTICLE_REF_START = "        <ARTICLE_REF>\n";
+    const ARTICLE_REF_END = "        </ARTICLE_REF>\n";
+//    const ARTICLE_REF_END = "        </ARTICLE_TRAIT_NEW>\n";
     const DATA_IMPORT_START = "            <DataToImport>\n";
     const DATA_IMPORT_END = "            </DataToImport>\n";
     const ESP_PRODUITS_FINIS_START = "        <ESP_PRODUITS_FINIS>\n";

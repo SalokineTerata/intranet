@@ -72,7 +72,7 @@ if ($globalConfig->getAuthenticatedUser()) {
 } else {
     $titre = UserInterfaceMessage::FR_WARNING_DECONNECTION_TITLE;
     $message = UserInterfaceMessage::FR_WARNING_DECONNECTION;
-    Lib::showMessage($titre, $message,$redirection);
+    Lib::showMessage($titre, $message, $redirection);
 }
 
 $idUser = $globalConfig->getAuthenticatedUser()->getKeyValue();
@@ -111,7 +111,7 @@ $detail_id_fta;              //Identifiant de la fiche sur laquelle on souhaite 
   Récupération des données MySQL
  */
 
-Navigation::initNavigation($id_fta, $id_fta_chapitre, $synthese_action, $comeback, $idFtaEtat, $abreviationFtaEtat, $idFtaRole, TRUE,TRUE);
+Navigation::initNavigation($id_fta, $id_fta_chapitre, $synthese_action, $comeback, $idFtaEtat, $abreviationFtaEtat, $idFtaRole, TRUE, TRUE);
 $navigue = Navigation::getHtmlNavigationBar();
 
 
@@ -213,6 +213,13 @@ $bloc.=$ftaView->getHtmlDesignationInterneAgis();
 
 //Code Article LDC, code Article arcadia
 $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_CODE_ARTICLE_LDC);
+
+//Famille Eco Emballage Arcadia
+$bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_ID_ARCADIA_FAMILLE_ECO_EMBALLAGES);
+
+//Cellule Article Arcadia
+$bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_ID_ARCADIA_CELLULE_ARTICLE);
+
 
 $fta2ArcadiaController = new Fta2ArcadiaController($ftaModel, TRUE);
 $ficherXML = $fta2ArcadiaController->showExportXmlFile();

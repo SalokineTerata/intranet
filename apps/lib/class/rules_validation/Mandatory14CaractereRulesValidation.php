@@ -18,7 +18,7 @@
  */
 
 /**
- * Description of Less8CaractereRulesValidation
+ * Description of Mandatory14CaractereRulesValidation
  *
  * @author franckwastken
  */

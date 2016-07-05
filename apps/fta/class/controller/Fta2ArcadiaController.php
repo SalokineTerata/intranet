@@ -122,6 +122,8 @@ class Fta2ArcadiaController {
     private $XMLarcadiaPoidsMaxiBarq;
     private $XMLarcadiaPoidsCstUvc;
     private $XMLarcadiaUniteDeFacturation;
+    private $XMLarcadiaCelluleArticle;
+    private $XMLarcadiaFamilleEcoEmballages;
     private $XMLarcadiaCNUF;
     private $XMLarcadiaCodPoidsCstUvc;
     private $XMLarcadiaCodSociete;
@@ -325,6 +327,7 @@ function transformAll() {
     $this->transformDTS();
     $this->transformPoidsMaxiAndMini();
     $this->transformUniteFacturation();
+    $this->transformMarqueArcadia();
     $this->transformCREATE();
     $this->transformSiteDePorduction();
     $this->transformGammeCoop();
@@ -486,7 +489,6 @@ function transformSiteDePorduction() {
     if ($checkDiff or $this->getActionProposal() == self::CREATE) {
         $geoModel = $this->getFtaModel()->getModelSiteProduction();
         $this->setXMLArcadiaSiteDeProd($geoModel);
-        $this->setXMLArcadiaSiteRefEcoEmb($geoModel->getDataField(geomodel::FIELDNAME_ID_SITE_GROUPE)->getFieldValue());
         $this->setXMLArcadiaFamilleDeclCaClient($geoModel->getDataField(geomodel::FIELDNAME_ID_SITE_GROUPE)->getFieldValue());
     }
 }
@@ -627,7 +629,7 @@ function transformCodeDouane() {
     $checkDiff = $this->getFtaModel()->getDataField(FtaModel::FIELDNAME_CODE_DOUANE_FTA)->isFieldDiff();
     if ($checkDiff or $this->getActionProposal() == self::CREATE) {
         $codeDouaneTmp = $this->getFtaModel()->getDataField(FtaModel::FIELDNAME_CODE_DOUANE_FTA)->getFieldValue();
-        $codeDouaneValue = FtaController::getFirstStringNumber($codeDouaneTmp,self::LIMIT_NUMBER_COD_NDP);
+        $codeDouaneValue = FtaController::getFirstStringNumber($codeDouaneTmp, self::LIMIT_NUMBER_COD_NDP);
         $this->setXMLArcadiaCodeDouane($codeDouaneValue);
     }
 }
@@ -645,6 +647,8 @@ function transformLogoEmballage() {
         $idRayon = ClassificationFta2Model::getIdClassificationTypeByTypeNameAndIdClassificationFta2($idClassificationFta2, ClassificationFta2Model::FIELDNAME_ID_RAYON);
         if ($idRayon == ClassificationFta2Model::ID_CLASSIFICATION_LIBRE_SERVICE) {
             $logoEmballageValue = self::OUI;
+            $geoModel = $this->getFtaModel()->getModelSiteProduction();
+            $this->setXMLArcadiaSiteRefEcoEmb($geoModel->getDataField(geomodel::FIELDNAME_ID_SITE_GROUPE)->getFieldValue());
         } else {
             $logoEmballageValue = self::NON;
         }
@@ -660,6 +664,28 @@ function transformUniteFacturation() {
     if (($checkDiff and $this->IsArcadiaPublicDataCheck()) or $this->getActionProposal() == self::CREATE) {
         $uniteFacturationArcadiaValue = $this->getFtaModel()->getModelAnnexeUniteFacturation()->getDataField(AnnexeUniteFacturationModel::FIELDNAME_ID_ARCADIA_UNITE_FACTURATION)->getFieldValue();
         $this->setXMLArcadiaUniteDeFacturation($uniteFacturationArcadiaValue);
+    }
+}
+
+/**
+ * On vérifie si la cellule de l'article arcadia a été modifié
+ */
+function transformCelluleArticleArcadia() {
+    $checkDiff = $this->getFtaModel()->getDataField(FtaModel::FIELDNAME_ID_ARCADIA_CELLULE_ARTICLE)->isFieldDiff();
+    if (($checkDiff and $this->IsArcadiaPublicDataCheck()) or $this->getActionProposal() == self::CREATE) {
+        $CelluleArticleArcadiaValue = $this->getFtaModel()->getDataField(FtaModel::FIELDNAME_ID_ARCADIA_CELLULE_ARTICLE)->getFieldValue();
+        $this->setXMLArcadiaCelluleArticle($CelluleArticleArcadiaValue);
+    }
+}
+
+/**
+ * On vérifie si la famille eco emballages arcadia a été modifié
+ */
+function transformFamilleEcoEmballagesArcadia() {
+    $checkDiff = $this->getFtaModel()->getDataField(FtaModel::FIELDNAME_ID_ARCADIA_FAMILLE_ECO_EMBALLAGES)->isFieldDiff();
+    if (($checkDiff and $this->IsArcadiaPublicDataCheck()) or $this->getActionProposal() == self::CREATE) {
+        $FamilleEcoEmballagesArcadiaValue = $this->getFtaModel()->getDataField(FtaModel::FIELDNAME_ID_ARCADIA_FAMILLE_ECO_EMBALLAGES)->getFieldValue();
+        $this->setXMLArcadiaFamilleEcoEmballages("0" . $FamilleEcoEmballagesArcadiaValue);
     }
 }
 
@@ -1514,6 +1540,24 @@ function setXMLArcadiaUniteDeFacturation($paramArcadiaUniteDeFacturation) {
             . "<UNITE_FACT_PRIVE>" . $paramArcadiaUniteDeFacturation . "</UNITE_FACT_PRIVE>" . self::SAUT_DE_LIGNE;
 }
 
+function getXMLArcadiaCelluleArticle() {
+    return $this->XMLarcadiaCelluleArticle;
+}
+
+function getXMLArcadiaFamilleEcoEmballages() {
+    return $this->XMLarcadiaFamilleEcoEmballages;
+}
+
+function setXMLArcadiaCelluleArticle($paramArcadiaCelluleArticle) {
+    $this->XMLarcadiaCelluleArticle = self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION
+            . "<CELLULE>" . $paramArcadiaCelluleArticle . "</CELLULE>" . self::SAUT_DE_LIGNE;
+}
+
+function setXMLArcadiaFamilleEcoEmballages($paramArcadiaFamilleEcoEmballages) {
+    $this->XMLarcadiaFamilleEcoEmballages = self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION
+            . "<COD_FAMECOEMB>" . $paramArcadiaFamilleEcoEmballages . "</COD_FAMECOEMB>" . self::SAUT_DE_LIGNE;
+}
+
 function getXMLArcadiaPoidsMini() {
     return $this->XMLarcadiaPoidsMini;
 }
@@ -2190,6 +2234,7 @@ function checkCommentClassIdent() {
  */
 function checkCommentInfoGenerale() {
     if ($this->getXMLArcadiaUtilisableGroupe()
+            or $this->getXMLArcadiaCelluleArticle()
     ) {
         $this->setXMLCommentInfoGenerale();
     }
@@ -2262,7 +2307,7 @@ function checkCommentInfoFact() {
 function checkCommentExportCompta() {
     if ($this->getXMLArcadiaCodeDouane()
     ) {
-        $this->setXMLCommentInfoProd2();
+        $this->setXMLCommentExportCompta();
     }
 }
 
@@ -2282,6 +2327,7 @@ function checkCommentOptiventes() {
 function checkCommentFourniture() {
     if ($this->getXMLArcadiaLogoEcoEmballage()
             or $this->getXMLArcadiaSiteRefEcoEmb()
+            or $this->getXMLArcadiaFamilleEcoEmballages()
     ) {
         $this->setXMLCommentFourniture();
     }
@@ -2424,6 +2470,7 @@ function xmlArticleRef() {
             // <!-- Info générales -->
             . $this->getXMLCommentInfoGenerale()
             . $this->getXMLArcadiaUtilisableGroupe()
+            . $this->getXMLArcadiaCelluleArticle()
             // <!-- Class./Ident. -->
             . $this->getXMLCommentClassIdent()
             . $this->getXMLArcadiaEanArticle()
@@ -2469,6 +2516,7 @@ function xmlArticleRef() {
             //<!-- Fourniture -->
             . $this->getXMLCommentFourniture()
             . $this->getXMLArcadiaLogoEcoEmballage()
+            . $this->getXMLArcadiaFamilleEcoEmballages()
             . $this->getXMLArcadiaSiteRefEcoEmb()
             //<!-- Regate -->
             . $this->getXMLCommentRegate()

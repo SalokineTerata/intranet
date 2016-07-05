@@ -521,7 +521,7 @@ class Chapitre {
         $ftaModel->setDataFtaTableToCompare();
 
         $ftaView = new FtaView($ftaModel);
-        $ftaView->setIsEditable($isEditable);        
+        $ftaView->setIsEditable($isEditable);
 
         $ftaView->setFtaChapitreModelById(self::ID_CHAPITRE_IDENTITE);
         /**
@@ -2014,6 +2014,13 @@ class Chapitre {
         //Code Article LDC, code Article arcadia
         $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_CODE_ARTICLE_LDC);
 
+        //Famille Eco Emballage Arcadia
+        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_ID_ARCADIA_FAMILLE_ECO_EMBALLAGES);
+
+        //Cellule Article Arcadia
+        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_ID_ARCADIA_CELLULE_ARTICLE);
+
+
         //Gencod EAN Article
         $bloc.=$ftaView->getHtmlEANArticle();
 
@@ -2612,7 +2619,7 @@ class Chapitre {
 //            $return = false;
 //        }
         IntranetColumnInfoModel::setOwner($return);
-        
+
         return $return;
     }
 

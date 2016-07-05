@@ -63,7 +63,9 @@ class FtaModel extends AbstractModel {
     const FIELDNAME_GESTION_ETIQUETTE_RECTO = "gestion_etiquette_recto";
     const FIELDNAME_GESTION_ETIQUETTE_VERSO = "gestion_etiquette_verso";
     const FIELDNAME_ID_ARCADIA_CATEGEORIE_PRODUIT_OPTIVENTES = "id_arcadia_categeorie_produit_optiventes";
+    const FIELDNAME_ID_ARCADIA_CELLULE_ARTICLE= "id_arcadia_cellule_article";
     const FIELDNAME_ID_ARCADIA_FAMILLE_BUDGET = "id_arcadia_famille_budget";
+    const FIELDNAME_ID_ARCADIA_FAMILLE_ECO_EMBALLAGES= "id_arcadia_famille_eco_emballages";
     const FIELDNAME_ID_ARCADIA_FAMILLE_VENTE = "id_arcadia_famille_vente";
     const FIELDNAME_ID_ARCADIA_MARQUE = "id_arcadia_marque";
     const FIELDNAME_ID_ARCADIA_GAMME_COOP = "id_arcadia_gamme_coop";

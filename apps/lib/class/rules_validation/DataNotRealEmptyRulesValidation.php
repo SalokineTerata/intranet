@@ -18,7 +18,7 @@
  */
 
 /**
- * Description of Less8CaractereRulesValidation
+ * Description of DataNotRealEmptyRulesValidation
  *
  * @author franckwastken
  */
@@ -37,9 +37,6 @@ class DataNotRealEmptyRulesValidation extends AbstractRulesValidation {
      * Ce qui suit est considéré comme étant vide :
      *
      *  "" (une chaîne vide)
-     *  0 (0 en tant qu'entier)
-     *  0.0 (0 en tant que nombre à virgule flottante)
-     *  "0" (0 en tant que chaîne de caractères)
      *  NULL
      *  FALSE
      * array() (un tableau vide)

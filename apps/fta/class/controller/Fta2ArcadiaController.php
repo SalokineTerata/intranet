@@ -327,6 +327,8 @@ function transformAll() {
     $this->transformDTS();
     $this->transformPoidsMaxiAndMini();
     $this->transformUniteFacturation();
+    $this->transformCelluleArticleArcadia();
+    $this->transformFamilleEcoEmballagesArcadia();
     $this->transformMarqueArcadia();
     $this->transformCREATE();
     $this->transformSiteDePorduction();

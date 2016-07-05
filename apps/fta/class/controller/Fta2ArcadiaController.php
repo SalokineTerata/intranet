@@ -320,6 +320,7 @@ function transformAll() {
     $this->transformEnvironConserv();
     $this->transformCodFamVte();
     $this->transformCodSousFamille();
+    $this->transformLibelleTarif();
     $this->transformCodeDouane();
     $this->transformLogoEmballage();
     $this->transformDLC();

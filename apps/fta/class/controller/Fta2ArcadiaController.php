@@ -863,7 +863,7 @@ function transformAcregQuantieEmplacement() {
 }
 
 /**
- * On vérifiesi le PCB a été modifié et on adapte la table Dun14 en fonction
+ * On vérifie si le PCB a été modifié et on adapte la table Dun14 en fonction
  */
 function transformCodPCB() {
     $checkDiff = $this->getFtaModel()->getDataField(FtaModel::FIELDNAME_NOMBRE_UVC_PAR_CARTON)->isFieldDiff();
@@ -918,9 +918,10 @@ function transformCodPCB() {
 function checkDun14ActionType() {
     if ($this->getActionProposal() == self::CREATE) {
         /**
-         * Si l'action est un create alors on n'affiche pas la table Dun14
+         * Lors des test il a fallut désactiver la table dun14 afin de le rendre fonctionnelle
          */
-        $this->setArcadiaDun14CreateFalse();
+//        $this->setArcadiaDun14CreateFalse();
+        $this->setArcadiaDun14CreateTrue();
     } else {
         $this->setArcadiaDun14CreateTrue();
     }
@@ -2358,7 +2359,7 @@ function checkCommentRegate() {
 function xmlDunc14() {
     $xmlText = "";
 
-    if ($this->getArcadiaDun14Create()) {
+//    if ($this->getArcadiaDun14Create()) {
         if ($this->getArcadiaDun14Check()) {
             $xmlText = self::DUN14_START
                     . self::DATA_IMPORT_START
@@ -2375,7 +2376,7 @@ function xmlDunc14() {
 
             ;
         }
-    }
+//    }
     return $xmlText;
 }
 
@@ -2548,8 +2549,8 @@ function generateXmlText() {
             . self::TABLE_START
             . $this->xmlArticleRef()
 //            . $this->xmlProduitFinis()
-            . $this->xmlArtSite()
-//            . $this->xmlDunc14()
+//            . $this->xmlArtSite()
+            . $this->xmlDunc14()
             . self::TABLE_END . self::SAUT_DE_LIGNE
             . "</Transaction>" . self::SAUT_DE_LIGNE
             . self::SAUT_DE_LIGNE

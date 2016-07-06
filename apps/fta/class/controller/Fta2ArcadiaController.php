@@ -1994,7 +1994,7 @@ function getXMLRecordsetBaliseEspProduitFini() {
 
 function setXMLRecordsetBaliseEspProduitFini() {
     $this->XMLrecordsetBaliseEspProduitFini = self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION
-            . "<Recordset id=\"1\" action=\"" . self::UPDATE . "\">" . self::SAUT_DE_LIGNE;
+            . "<Recordset id=\"1\" action=\"" . self::CREATE . "\">" . self::SAUT_DE_LIGNE;
 }
 
 function getArcadiaDun14RecordValue() {

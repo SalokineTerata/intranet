@@ -2429,7 +2429,7 @@ function xmlProduitFinis() {
     /**
      * On l'active que pour un créate
      */
-    if ($this->getActionProposal() == self::CREATE) {
+//    if ($this->getActionProposal() == self::CREATE) {
         $xmlText = self::ESP_PRODUITS_FINIS_START
                 . self::DATA_IMPORT_START
                 . $this->getXMLRecordsetBaliseEspProduitFini()
@@ -2448,7 +2448,7 @@ function xmlProduitFinis() {
                 . self::RECORDSET_END
                 . self::DATA_IMPORT_END
                 . self::ESP_PRODUITS_FINIS_END;
-    }
+//    }
     return $xmlText;
 }
 

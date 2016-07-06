@@ -306,7 +306,7 @@ function setActionProposal($actionProposal) {
     $fta2ArcadiaTrasactionModel->getDataField(Fta2ArcadiaTransactionModel::FIELDNAME_TAG_TYPE_TRANSACTION)->setFieldValue($actionProposal);
     $fta2ArcadiaTrasactionModel->saveToDatabase();
     $this->setXMLRecordsetBalise($actionProposal);
-    $this->setXMLRecordsetBaliseEspProduitFini($actionProposal);
+    $this->setXMLRecordsetBaliseEspProduitFini();
     $this->actionProposal = $actionProposal;
 }
 
@@ -1992,9 +1992,9 @@ function getXMLRecordsetBaliseEspProduitFini() {
     return $this->XMLrecordsetBaliseEspProduitFini;
 }
 
-function setXMLRecordsetBaliseEspProduitFini($paramAction) {
+function setXMLRecordsetBaliseEspProduitFini() {
     $this->XMLrecordsetBaliseEspProduitFini = self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION
-            . "<Recordset id=\"1\" action=\"" . $paramAction . "\">" . self::SAUT_DE_LIGNE;
+            . "<Recordset id=\"1\" action=\"" . self::UPDATE . "\">" . self::SAUT_DE_LIGNE;
 }
 
 function getArcadiaDun14RecordValue() {
@@ -2425,25 +2425,29 @@ function xmlArtSite() {
 function xmlProduitFinis() {
     $xmlText = "";
 
-    $xmlText = self::ESP_PRODUITS_FINIS_START
-            . self::DATA_IMPORT_START
-            . $this->getXMLRecordsetBaliseEspProduitFini()
-            . $this->getXMLCommentEntete()
-            . $this->getXMLArcadiaCodProduit()
-            . $this->getXMLCommentRegateAcAchat()
-            . $this->getXMLArcadiaAcregSite()
-            . $this->getXMLArcadiaAcregLieu()
-            . $this->getXMLArcadiaAcregNoQuai()
-            . $this->getXMLArcadiaAcregNoMethode()
-            . $this->getXMLCommentRegateAcStock()
-            . $this->getXMLArcadiaAcregSiteSecondaire()
-            . $this->getXMLArcadiaAcregLieuSecondaire()
-            . $this->getXMLArcadiaAcregTypeProdEmplacement()
-            . $this->getXMLArcadiaAcregQuantiteEmplacement()
-            . self::RECORDSET_END
-            . self::DATA_IMPORT_END
-            . self::ESP_PRODUITS_FINIS_END;
-
+    /**
+     * On l'active que pour un créate
+     */
+    if ($this->getActionProposal() == self::CREATE) {
+        $xmlText = self::ESP_PRODUITS_FINIS_START
+                . self::DATA_IMPORT_START
+                . $this->getXMLRecordsetBaliseEspProduitFini()
+                . $this->getXMLCommentEntete()
+                . $this->getXMLArcadiaCodProduit()
+                . $this->getXMLCommentRegateAcAchat()
+                . $this->getXMLArcadiaAcregSite()
+                . $this->getXMLArcadiaAcregLieu()
+                . $this->getXMLArcadiaAcregNoQuai()
+                . $this->getXMLArcadiaAcregNoMethode()
+                . $this->getXMLCommentRegateAcStock()
+                . $this->getXMLArcadiaAcregSiteSecondaire()
+                . $this->getXMLArcadiaAcregLieuSecondaire()
+                . $this->getXMLArcadiaAcregTypeProdEmplacement()
+                . $this->getXMLArcadiaAcregQuantiteEmplacement()
+                . self::RECORDSET_END
+                . self::DATA_IMPORT_END
+                . self::ESP_PRODUITS_FINIS_END;
+    }
     return $xmlText;
 }
 
@@ -2543,8 +2547,8 @@ function generateXmlText() {
             . $this->getXMLArcadiaParametre()
             . self::TABLE_START
             . $this->xmlArticleRef()
-            . $this->xmlProduitFinis()
-//            . $this->xmlArtSite()
+//            . $this->xmlProduitFinis()
+            . $this->xmlArtSite()
 //            . $this->xmlDunc14()
             . self::TABLE_END . self::SAUT_DE_LIGNE
             . "</Transaction>" . self::SAUT_DE_LIGNE

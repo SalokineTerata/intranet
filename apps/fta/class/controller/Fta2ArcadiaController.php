@@ -918,7 +918,7 @@ function transformCodPCB() {
 function checkDun14ActionType() {
     if ($this->getActionProposal() == self::CREATE) {
         /**
-         * Si l'action est unn crate alors on n'affiche pas la table Dun14
+         * Si l'action est un create alors on n'affiche pas la table Dun14
          */
         $this->setArcadiaDun14CreateFalse();
     } else {
@@ -2546,8 +2546,8 @@ function generateXmlText() {
             . "<Transaction id=\"" . $this->getKeyValuePorposal() . "\" version=\"1.1\" type=\"proposal\">" . self::SAUT_DE_LIGNE
             . $this->getXMLArcadiaParametre()
             . self::TABLE_START
-            . $this->xmlArticleRef()
-//            . $this->xmlProduitFinis()
+//            . $this->xmlArticleRef()
+            . $this->xmlProduitFinis()
 //            . $this->xmlArtSite()
 //            . $this->xmlDunc14()
             . self::TABLE_END . self::SAUT_DE_LIGNE

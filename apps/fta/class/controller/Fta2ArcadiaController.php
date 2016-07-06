@@ -1994,7 +1994,7 @@ function getXMLRecordsetBaliseEspProduitFini() {
 
 function setXMLRecordsetBaliseEspProduitFini() {
     $this->XMLrecordsetBaliseEspProduitFini = self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION
-            . "<Recordset id=\"1\" action=\"" . self::CREATE . "\">" . self::SAUT_DE_LIGNE;
+            . "<Recordset id=\"1\" action=\"" . self::UPDATE . "\">" . self::SAUT_DE_LIGNE;
 }
 
 function getArcadiaDun14RecordValue() {
@@ -2546,7 +2546,7 @@ function generateXmlText() {
             . "<Transaction id=\"" . $this->getKeyValuePorposal() . "\" version=\"1.1\" type=\"proposal\">" . self::SAUT_DE_LIGNE
             . $this->getXMLArcadiaParametre()
             . self::TABLE_START
-//            . $this->xmlArticleRef()
+            . $this->xmlArticleRef()
             . $this->xmlProduitFinis()
 //            . $this->xmlArtSite()
 //            . $this->xmlDunc14()

@@ -308,6 +308,7 @@ class FtaModel extends AbstractModel {
         if ($arrayIdFtaConditionnemntDuColis) {
             foreach ($arrayIdFtaConditionnemntDuColis as $key => $paramId) {
                 $ftaConditionnmentModel = new FtaConditionnementModel($paramId);
+                $ftaConditionnmentModel->setDataFtaConditionnementTableToCompare();
                 $checkdiff = $ftaConditionnmentModel->getDataField(FtaConditionnementModel::FIELDNAME_ID_ANNEXE_EMBALLAGE)->isFieldDiff();
             }
         }

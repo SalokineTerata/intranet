@@ -873,7 +873,7 @@ function transformCodPCB() {
          * Activation : ACTION_DELETE_ENABLED
          * Désactivation : ACTION_DELETE_DISABLED
          */
-        if (self::ACTION_DELETE_ENABLED) {
+        if (self::ACTION_DELETE_DISABLED) {
             $pcbOldVersionData = $this->getFtaModel()->getDataToCompare();
             $pcbOldVersionValue = $pcbOldVersionData->getFieldValue(FtaModel::FIELDNAME_NOMBRE_UVC_PAR_CARTON);
             $this->setArcadiaDun14RecordValue(self::AJOUT_DUN_RECORDSET);
@@ -886,7 +886,7 @@ function transformCodPCB() {
         $this->setArcadiaDun14RecordValue(self::AJOUT_DUN_RECORDSET);
         $this->setXMLRecordsetBaliseDun14($action);
         /**
-         * Le PCB a été modifié dont il faut affihcer la table dun14 dans tous les cas
+         * Le PCB a été modifié dont il faut afficher la table dun14 dans tous les cas
          */
         $this->setArcadiaDun14CheckTrue();
     } else {
@@ -2547,7 +2547,7 @@ function generateXmlText() {
             . "<Transaction id=\"" . $this->getKeyValuePorposal() . "\" version=\"1.1\" type=\"proposal\">" . self::SAUT_DE_LIGNE
             . $this->getXMLArcadiaParametre()
             . self::TABLE_START
-            . $this->xmlArticleRef()
+//            . $this->xmlArticleRef()
 //            . $this->xmlProduitFinis()
 //            . $this->xmlArtSite()
             . $this->xmlDunc14()

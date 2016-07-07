@@ -2570,9 +2570,9 @@ function generateXmlText() {
             . $this->getXMLArcadiaParametre()
             . self::TABLE_START
             . $this->xmlArticleRef()
-            . $this->xmlProduitFinis()
+//            . $this->xmlProduitFinis()
 //            . $this->xmlArtSite()
-//            . $this->xmlDunc14()
+            . $this->xmlDunc14()
             . self::TABLE_END . self::SAUT_DE_LIGNE
             . "</Transaction>" . self::SAUT_DE_LIGNE
             . self::SAUT_DE_LIGNE

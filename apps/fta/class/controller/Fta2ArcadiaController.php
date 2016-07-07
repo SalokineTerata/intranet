@@ -307,7 +307,7 @@ function setActionProposal($actionProposal) {
     $fta2ArcadiaTrasactionModel->getDataField(Fta2ArcadiaTransactionModel::FIELDNAME_TAG_TYPE_TRANSACTION)->setFieldValue($actionProposal);
     $fta2ArcadiaTrasactionModel->saveToDatabase();
     $this->setXMLRecordsetBalise($actionProposal);
-    $this->setXMLRecordsetBaliseEspProduitFini();
+    $this->setXMLRecordsetBaliseEspProduitFini($actionProposal);
     $this->actionProposal = $actionProposal;
 }
 
@@ -1232,8 +1232,14 @@ function getXMLArcadiaNoArtKey() {
 }
 
 function setXMLArcadiaNoArtKey($paramCodeArticleLDC) {
-    $this->XMLarcadiaNoArtKey = self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION
-            . "<NO_ART key=\"TRUE\">" . $paramCodeArticleLDC . "</NO_ART>" . self::SAUT_DE_LIGNE;
+    if ($paramCodeArticleLDC == " ") {
+        $xmlArtKey = self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION
+                . "<NO_ART key=\"TRUE\"></NO_ART>" . self::SAUT_DE_LIGNE;
+    } else {
+        $xmlArtKey = self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION
+                . "<NO_ART key=\"TRUE\">" . $paramCodeArticleLDC . "</NO_ART>" . self::SAUT_DE_LIGNE;
+    }
+    $this->XMLarcadiaNoArtKey = $xmlArtKey;
 }
 
 function getXMLArcadiaParametre() {
@@ -2007,9 +2013,9 @@ function getXMLRecordsetBaliseEspProduitFini() {
     return $this->XMLrecordsetBaliseEspProduitFini;
 }
 
-function setXMLRecordsetBaliseEspProduitFini() {
+function setXMLRecordsetBaliseEspProduitFini($paramActionProposal) {
     $this->XMLrecordsetBaliseEspProduitFini = self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION
-            . "<Recordset id=\"1\" action=\"" . self::UPDATE . "\">" . self::SAUT_DE_LIGNE;
+            . "<Recordset id=\"1\" action=\"" . $paramActionProposal . "\">" . self::SAUT_DE_LIGNE;
 }
 
 function getArcadiaDun14RecordValue() {

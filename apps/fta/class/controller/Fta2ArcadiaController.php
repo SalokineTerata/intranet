@@ -332,7 +332,7 @@ function setActionProposal($actionProposal, $paramType) {
         $fta2ArcadiaTrasactionModel->getDataField(Fta2ArcadiaTransactionModel::FIELDNAME_TAG_TYPE_TRANSACTION)->setFieldValue($actionProposal);
         $fta2ArcadiaTrasactionModel->saveToDatabase();
         $this->setXMLRecordsetBalise($actionProposal);
-        $this->setXMLRecordsetBaliseEspProduitFini($actionProposal);
+        $this->setXMLRecordsetBaliseEspProduitFini();
         $this->actionProposal = $actionProposal;
     }
 }
@@ -405,7 +405,7 @@ function transformCREATE() {
         $this->transformCodSociete();
         $this->transformProlongationDLC();
         $this->transformIsHallal();
-        $this->transformGeneriqueFm();  // voir comentaire de la fonction
+//        $this->transformGeneriqueFm();  // voir comentaire de la fonction
         $this->transformTypeConditPub();
         $this->transformUniteConditionnement();
         $this->transformAcregLieu();
@@ -2077,9 +2077,9 @@ function getXMLRecordsetBaliseEspProduitFini() {
     return $this->XMLrecordsetBaliseEspProduitFini;
 }
 
-function setXMLRecordsetBaliseEspProduitFini($paramActionProposal) {
+function setXMLRecordsetBaliseEspProduitFini() {
     $this->XMLrecordsetBaliseEspProduitFini = self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION
-            . "<Recordset id=\"1\" action=\"" . $paramActionProposal . "\">" . self::SAUT_DE_LIGNE;
+            . "<Recordset id=\"1\" action=\"" . self::UPDATE . "\">" . self::SAUT_DE_LIGNE;
 }
 
 function getArcadiaDun14RecordValue() {

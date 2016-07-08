@@ -332,7 +332,7 @@ function setActionProposal($actionProposal, $paramType) {
         $fta2ArcadiaTrasactionModel->getDataField(Fta2ArcadiaTransactionModel::FIELDNAME_TAG_TYPE_TRANSACTION)->setFieldValue($actionProposal);
         $fta2ArcadiaTrasactionModel->saveToDatabase();
         $this->setXMLRecordsetBalise($actionProposal);
-        $this->setXMLRecordsetBaliseEspProduitFini();
+        $this->setXMLRecordsetBaliseEspProduitFini($actionProposal);
         $this->actionProposal = $actionProposal;
     }
 }
@@ -2077,9 +2077,9 @@ function getXMLRecordsetBaliseEspProduitFini() {
     return $this->XMLrecordsetBaliseEspProduitFini;
 }
 
-function setXMLRecordsetBaliseEspProduitFini() {
+function setXMLRecordsetBaliseEspProduitFini($paramActionType) {
     $this->XMLrecordsetBaliseEspProduitFini = self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION
-            . "<Recordset id=\"1\" action=\"" . self::UPDATE . "\">" . self::SAUT_DE_LIGNE;
+            . "<Recordset id=\"1\" action=\"" . $paramActionType . "\">" . self::SAUT_DE_LIGNE;
 }
 
 function getArcadiaDun14RecordValue() {

@@ -30,8 +30,9 @@ mysql_select_db($nameOfBDDTarget);
 mysql_query('SET NAMES utf8');
 
 $folder = scandir($linkFolder);
-
+echo  "folder = " . $folder ."/n";
 foreach ($folder as $file) {
+    echo  "file = " . $file ."/n";
     $xml = XMLReader::open($file);
     $xml->setParserProperty(XMLReader::VALIDATE, true);
     $valide = $xml->isValid();

@@ -157,6 +157,8 @@ class Fta2ArcadiaController {
     private $XMLarcadiaCodPCB;
     private $XMLarcadiaDun14;
     private $XMLarcadiaDunPalette;
+    private $XMLarcadiaColisSpecifique;
+    private $XMLarcadiaColisStandard;
     private $XMLarcadiaTypeCarton;
     private $XMLarcadiaArtSiteDateDebutEffet;
     private $XMLarcadiaArtSiteDateFinEffet;
@@ -403,7 +405,7 @@ function transformCREATE() {
         $this->transformCodSociete();
         $this->transformProlongationDLC();
         $this->transformIsHallal();
-//        $this->transformGeneriqueFm();  // voir comentaire de la fonction
+        $this->transformGeneriqueFm();  // voir comentaire de la fonction
         $this->transformTypeConditPub();
         $this->transformUniteConditionnement();
         $this->transformAcregLieu();
@@ -437,6 +439,20 @@ function transformAcregLieu() {
 }
 
 /**
+ * Initialisation des balises dont la valeur ne change pas
+ */
+function transformColisageSpecifique() {
+    $this->setXMLArcadiaColisSpecifique();
+}
+
+/**
+ * Initialisation des balises dont la valeur ne change pas
+ */
+function transformColisageStandard() {
+    $this->setXMLArcadiaColisStandard();
+}
+
+/**
  * Initialisation des balises dont la valeur ne change pas 
  */
 function transformTypeConditPub() {
@@ -445,8 +461,8 @@ function transformTypeConditPub() {
 
 /**
  * Initialisation des balises dont la valeur ne change pas
- * Cette fonction n'est pas actve mais implémenté
- * Lors de la création d'un article ce chap et automatiquement renseigné
+ * Cette fonction n'est pas active mais implémenté
+ * Lors de la création d'un article ce champ et automatiquement renseigné
  * et il ne bouge pas lors des mise à jour. 
  */
 function transformGeneriqueFm() {
@@ -936,6 +952,12 @@ function transformCodPCB() {
      */
     $pcbValue = $this->getFtaModel()->getDataField(FtaModel::FIELDNAME_NOMBRE_UVC_PAR_CARTON)->getFieldValue();
     $this->setXMLArcadiaCodPCB($pcbValue);
+
+    /**
+     * Initialisation des colisages pour le nouvelle enregistrement
+     */
+    $this->transformColisageSpecifique();
+    $this->transformColisageStandard();
 }
 
 /**
@@ -1806,6 +1828,24 @@ function setXMLArcadiaTypeCarton($XMLarcadiaTypeCarton) {
             . "<TYPE_CARTON>" . $XMLarcadiaTypeCarton . "</TYPE_CARTON>" . self::SAUT_DE_LIGNE;
 }
 
+function getXMLArcadiaColisSpecifique() {
+    return $this->XMLarcadiaColisSpecifique;
+}
+
+function getXMLArcadiaColisStandard() {
+    return $this->XMLarcadiaColisStandard;
+}
+
+function setXMLArcadiaColisSpecifique() {
+    $this->XMLarcadiaColisSpecifique = self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION
+            . "<IS_SPECIFIQUE>" . self::NON . "</IS_SPECIFIQUE>" . self::SAUT_DE_LIGNE;
+}
+
+function setXMLArcadiaColisStandard() {
+    $this->XMLarcadiaColisStandard = self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION
+            . "<IS_STANDARD>" . self::OUI . "</IS_STANDARD>" . self::SAUT_DE_LIGNE;
+}
+
 function getArcadiaDun14Check() {
     return $this->arcadiaDun14Check;
 }
@@ -2414,6 +2454,8 @@ function xmlDunc14() {
                 . $this->getXMLArcadiaCodPCB()
                 . $this->getXMLArcadiaDun14()
                 . $this->getXMLArcadiaTypeCarton()
+                . $this->getXMLArcadiaColisStandard()
+                . $this->getXMLArcadiaColisSpecifique()
                 . $this->getXMLArcadiaDunPalette()
                 . self::RECORDSET_END
                 . self::DATA_IMPORT_END

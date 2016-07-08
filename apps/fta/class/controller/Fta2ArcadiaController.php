@@ -189,7 +189,7 @@ class Fta2ArcadiaController {
 
     public function __construct
             
-    ($paramFtaModel, $paramToNotGenerateFile = NULL) {
+    ($paramFtaModel, $paramType, $paramToNotGenerateFile = NULL) {
     /**
      * Inisialisation du model Fta
      */
@@ -199,45 +199,55 @@ class Fta2ArcadiaController {
     /**
      * On récupère et initialise le model de l'idFta à comparer
      */
-    $this-> setDatabaseRecordToCompare();
+    $this->  setDatabaseRecordToCompare();
 
     /**
      * Generation de la proposal en BDD
      */
-    $this->setActionProposal($this->getFtaModel()->getActionProposal());
+    $this->setActionProposal($this->getFtaModel()->getActionProposal(), $paramType);
 
     /**
-     * Initialisation des balises
+     * On vérifie si un id transaction est initialisé pou l'id Fta encours
      */
-    $this->setAllBalise();
+    if ($this->getKeyValuePorposal()) {
+        /**
+         * Initialisation des balises
+         */
+        $this->setAllBalise();
 
-    /**
-     * On décide si oui ou non affcihe les données publiques
-     */
-    $this->setPublicBalise();
+        /**
+         * On décide si oui ou non affcihe les données publiques
+         */
+        $this->setPublicBalise();
 
-    /**
-     * On vérifie les champs différents de la version précédent.
-     */
-    $this->transformAll();
+        /**
+         * On vérifie les champs différents de la version précédent.
+         */
+        $this->transformAll();
 
-    /**
-     * On vérifie si un commentaitre doit être ajouter
-     */
-    $this->checkComment();
+        /**
+         * On vérifie si un commentaitre doit être ajouter
+         */
+        $this->checkComment();
 
-    /**
-     * Generation du text xml
-     */
-    $this->generateXmlText();
+        /**
+         * Generation du text xml
+         */
+        $this->generateXmlText();
 
-    /**
-     * Géneration du fichier xml
-     * Vide ou false on génère le fichier
-     * TRUE on ne genère pas le fichier XML
-     */
-    if (!$paramToNotGenerateFile) {
-        $this->saveExportXmlToFile();
+        /**
+         * Géneration du fichier xml
+         * Vide ou false on génère le fichier
+         * TRUE on ne genère pas le fichier XML
+         */
+        if (!$paramToNotGenerateFile) {
+            $this->saveExportXmlToFile();
+        }
+    } else {
+        /**
+         * Affichage du message informant de la non génération du fichier XML
+         */
+        $this->generateXmlTextNO();
     }
 }
 
@@ -285,30 +295,44 @@ function getKeyValuePorposal() {
     return $this->keyValuePorposal;
 }
 
-function setKeyValuePorposal() {
+function setKeyValuePorposal($paramType) {
     $codeArticleLdc = $this->getFtaModel()->getDataField(FtaModel::FIELDNAME_CODE_ARTICLE_LDC)->getFieldValue();
-    $this->keyValuePorposal = Fta2ArcadiaTransactionModel::createNewRecordset($codeArticleLdc);
+    $idFta = $this->getFtaModel()->getKeyValue();
+    switch ($paramType) {
+        case Fta2ArcadiaTransactionModel::SUMMARY_PAGE:
+            $this->keyValuePorposal = Fta2ArcadiaTransactionModel::checkIdArcadiaTransaction($idFta);
+
+            break;
+        case Fta2ArcadiaTransactionModel::XML:
+
+            $this->keyValuePorposal = Fta2ArcadiaTransactionModel::createNewRecordset(
+                            array(Fta2ArcadiaTransactionModel::FIELDNAME_ID_FTA => $idFta
+                                , Fta2ArcadiaTransactionModel::FIELDNAME_CODE_ARTICLE_LDC => $codeArticleLdc));
+            break;
+    }
 }
 
 function getActionProposal() {
     return $this->actionProposal;
 }
 
-function setActionProposal($actionProposal) {
+function setActionProposal($actionProposal, $paramType) {
     /**
      * Initialisation de la key proposal en BDD
      */
-    $this->setKeyValuePorposal();
+    $this->setKeyValuePorposal($paramType);
 
     /**
      * Actualisation du type d'action
      */
-    $fta2ArcadiaTrasactionModel = new Fta2ArcadiaTransactionModel($this->getKeyValuePorposal());
-    $fta2ArcadiaTrasactionModel->getDataField(Fta2ArcadiaTransactionModel::FIELDNAME_TAG_TYPE_TRANSACTION)->setFieldValue($actionProposal);
-    $fta2ArcadiaTrasactionModel->saveToDatabase();
-    $this->setXMLRecordsetBalise($actionProposal);
-    $this->setXMLRecordsetBaliseEspProduitFini($actionProposal);
-    $this->actionProposal = $actionProposal;
+    if ($this->getKeyValuePorposal()) {
+        $fta2ArcadiaTrasactionModel = new Fta2ArcadiaTransactionModel($this->getKeyValuePorposal());
+        $fta2ArcadiaTrasactionModel->getDataField(Fta2ArcadiaTransactionModel::FIELDNAME_TAG_TYPE_TRANSACTION)->setFieldValue($actionProposal);
+        $fta2ArcadiaTrasactionModel->saveToDatabase();
+        $this->setXMLRecordsetBalise($actionProposal);
+        $this->setXMLRecordsetBaliseEspProduitFini($actionProposal);
+        $this->actionProposal = $actionProposal;
+    }
 }
 
 /**
@@ -2577,6 +2601,16 @@ function generateXmlText() {
             . "</Transaction>" . self::SAUT_DE_LIGNE
             . self::SAUT_DE_LIGNE
     ;
+
+
+    $this->setXmlText($xmlText);
+}
+
+/**
+ * Message informant de la non génération du fichier XML 
+ */
+function generateXmlTextNO() {
+    $xmlText .= UserInterfaceMessage::FR_ARCADIA_XML_NOT_GENERATE;
 
 
     $this->setXmlText($xmlText);

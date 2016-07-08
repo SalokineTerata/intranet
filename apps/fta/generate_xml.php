@@ -22,7 +22,7 @@ $paramIdFta = Lib::getParameterFromRequest(FtaModel::KEYNAME);
 
 $ftaModel = new FtaModel($paramIdFta);
 $ftaModel->setDataFtaTableToCompare();
-$fta2ArcadiaContoller = new Fta2ArcadiaController($ftaModel);
+$fta2ArcadiaContoller = new Fta2ArcadiaController($ftaModel, Fta2ArcadiaTransactionModel::XML);
 
 header("Location: modification_fiche.php?id_fta=" . $paramIdFta . "&id_fta_chapitre_encours=33&synthese_action=encours&id_fta_etat=1&abreviation_fta_etat=I&id_fta_role=5&checkArcadiaData=ok");
 //// Instance de la class DomDocumen

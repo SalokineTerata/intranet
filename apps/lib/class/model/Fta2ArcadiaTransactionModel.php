@@ -26,9 +26,12 @@ class Fta2ArcadiaTransactionModel extends AbstractModel {
 
     const TABLENAME = 'fta2arcadia_transaction';
     const KEYNAME = 'id_arcadia_transaction';
+    const FIELDNAME_ID_FTA = 'id_fta';
     const FIELDNAME_CODE_ARTICLE_LDC = 'code_article_ldc';
     const FIELDNAME_TAG_TYPE_TRANSACTION = 'tag_type_transaction';
     const FIELDNAME_CODE_REPLY = 'code_reply';
+    const XML = 'XML';
+    const SUMMARY_PAGE = 'summary_page';
 
     public function __construct($paramId = NULL, $paramIsCreateRecordsetInDatabaseIfKeyDoesntExist = AbstractModel::DEFAULT_IS_CREATE_RECORDSET_IN_DATABASE_IF_KEY_DOESNT_EXIST) {
         parent::__construct($paramId, $paramIsCreateRecordsetInDatabaseIfKeyDoesntExist);
@@ -41,22 +44,46 @@ class Fta2ArcadiaTransactionModel extends AbstractModel {
     /**
      * Valeurs par défaut en cas de création
      * d'un nouvel enregistrement
-     * @param type $paramForeignKeysValuesArray
-     * @return type
+     * @param array $paramForeignKeysValuesArray
+     * @return int
      */
     static public function createNewRecordset($paramForeignKeysValuesArray = NULL) {
         $pdo = DatabaseOperation::executeComplete(
                         'INSERT INTO ' . self::TABLENAME
                         . '(' . self::KEYNAME
+                        . ',' . self::FIELDNAME_ID_FTA
                         . ',' . self::FIELDNAME_CODE_ARTICLE_LDC
                         . ',' . self::FIELDNAME_TAG_TYPE_TRANSACTION
                         . ')'
                         . 'VALUES (' . "\"NULL\""
-                        . ',' . "\"" . $paramForeignKeysValuesArray . "\""
+                        . ',' . "\"" . $paramForeignKeysValuesArray[self::FIELDNAME_ID_FTA] . "\""
+                        . ',' . "\"" . $paramForeignKeysValuesArray[self::FIELDNAME_CODE_ARTICLE_LDC] . "\""
                         . ',' . "\"" . "\""
                         . ')'
         );
         $key = $pdo->lastInsertId();
+        return $key;
+    }
+
+    /**
+     * On vérifie si pour l'id Fta en cours un id Transaction existe
+     * @param int $paramIdFta
+     * @return int
+     */
+    public static function checkIdArcadiaTransaction($paramIdFta) {
+        $arrayCheck = DatabaseOperation::convertSqlStatementWithoutKeyToArrayComplete(
+                        "SELECT " . self::KEYNAME
+                        . " FROM " . self::TABLENAME
+                        . " WHERE " . self::FIELDNAME_ID_FTA . "=" . $paramIdFta
+                        . " ORDER BY " . self::KEYNAME . " DESC "
+        );
+
+        if ($arrayCheck) {
+            $key = $arrayCheck["0"];
+        } else {
+            $key = NULL;
+        }
+
         return $key;
     }
 

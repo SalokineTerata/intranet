@@ -221,7 +221,7 @@ $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_ID_ARCADIA_FAMILLE_ECO_EMB
 $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_ID_ARCADIA_CELLULE_ARTICLE);
 
 
-$fta2ArcadiaController = new Fta2ArcadiaController($ftaModel, TRUE);
+$fta2ArcadiaController = new Fta2ArcadiaController($ftaModel, Fta2ArcadiaTransactionModel::SUMMARY_PAGE, TRUE);
 $ficherXML = $fta2ArcadiaController->showExportXmlFile();
 
 /*

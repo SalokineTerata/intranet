@@ -26,3 +26,5 @@ case $CHEMIN in
 $DIR_COP_ROOT)
     ./apps/upgrade/upgrade2_Fta2Arcadia_data_cop.sh
  ;;
+
+esac

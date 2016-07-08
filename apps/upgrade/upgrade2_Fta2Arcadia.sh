@@ -15,16 +15,16 @@ DIR_COP_ROOT="/u1/DATA01/webldc/cop-fta05401/v3/apps/upgrade/"
 case $CHEMIN in
 
   $DIR_COD_ROOT)
-   ./apps/upgrade/upgrade2_Fta2Arcadia_data_cod.sh
+  bash -x apps/upgrade/upgrade2_Fta2Arcadia_data_cod.sh
  ;;
   $DIR_DEV_ROOT)
-    ./apps/upgrade/upgrade2_Fta2Arcadia_data_dev.sh
+  bash -x apps/upgrade/upgrade2_Fta2Arcadia_data_dev.sh
  ;;
   $DIR_PRD_ROOT)
-   ./apps/upgrade/upgrade2_Fta2Arcadia_data_prd.sh
+ bash -x apps/upgrade/upgrade2_Fta2Arcadia_data_prd.sh
  ;;
 $DIR_COP_ROOT)
-    ./apps/upgrade/upgrade2_Fta2Arcadia_data_cop.sh
+  bash -x apps/upgrade/upgrade2_Fta2Arcadia_data_cop.sh
  ;;
 
 esac

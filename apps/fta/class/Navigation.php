@@ -45,7 +45,7 @@ class Navigation {
         return self::$html_navigation_bar;
     }
 
-    public static function initNavigation($id_fta, $id_fta_chapitre_encours, $synthese_action, $comeback, $id_fta_etat, $abrevation_etat, $id_fta_role, $paramActivationComplete,$paramSelectionChap) {
+    public static function initNavigation($id_fta, $id_fta_chapitre_encours, $synthese_action, $comeback, $id_fta_etat, $abrevation_etat, $id_fta_role, $paramActivationComplete, $paramSelectionChap) {
 
         /**
          * Modification
@@ -59,7 +59,7 @@ class Navigation {
 
 
 
-        self::$selectionChap= $paramSelectionChap;
+        self::$selectionChap = $paramSelectionChap;
         self::$id_fta = $id_fta;
         self::$id_fta_chapitre_encours = $id_fta_chapitre_encours;
         self::$synthese_action = $synthese_action;
@@ -186,7 +186,7 @@ class Navigation {
             if ($pdf) {
                 $pdf = " | " . $pdf;
             }
-            $historique = " | " . TableauFicheView::getHtmlLinkHistoriqueModfify(self::$abreviation_etat, self::$id_fta, self::$synthese_action, self::$id_fta_etat, self::$id_fta_role, "18","Historique de modification");
+            $historique = " | " . TableauFicheView::getHtmlLinkHistoriqueModfify(self::$abreviation_etat, self::$id_fta, self::$synthese_action, self::$id_fta_etat, self::$id_fta_role, "18", "Historique de modification");
             $menu_navigation.='
                     <a href=historique-' . self::$id_fta
                     . '-' . self::$id_fta_chapitre_encours
@@ -616,7 +616,7 @@ class Navigation {
             if (!self::$id_fta_chapitre_encours) {
                 self::$id_fta_chapitre_encours = $id_fta_chapitre;
             }
-            if (self::$id_fta_chapitre_encours == $id_fta_chapitre and !self::$selectionChap) {
+            if (self::$id_fta_chapitre_encours == $id_fta_chapitre and ! self::$selectionChap) {
                 $font_size = "size=" . self::FONT_SIZE_CHAPITRE_ENCOURS;
                 $font_flash_color = "color=" . self::FONT_COLOR_CHAPITRE_ENCOURS;
                 $font_flash = "<font " . $font_size . " " . $font_flash_color . ">";

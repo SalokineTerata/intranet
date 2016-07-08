@@ -75,6 +75,9 @@ if ($idFtaRole == FtaRoleModel::ID_FTA_ROLE_COMMUN) {
     }
     $arrayIdFtaRoleAcces = FtaRoleModel::getArrayIdFtaRoleByIdUserAndWorkflow($idUser, $idFtaWorkflow);
     $idFtaRole = $arrayIdFtaRoleAcces["0"];
+    if (!$idFtaRole) {
+        $idFtaRole = FtaRoleModel::ID_FTA_ROLE_COMMUN;
+    }
 }
 $id_fta_chapitre = $id_fta_chapitre_encours;
 

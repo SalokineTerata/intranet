@@ -31,7 +31,8 @@ mysql_query('SET NAMES utf8');
 echo "link = " . $linkFolder;
 $folder = scandir($linkFolder);
 echo "folder = " . array_values($folder);
-foreach ($folder as $file) {
+echo "NBfolder = " . count($folder);
+for ($i = 0; $i <= count($folder); $i++) {
     echo "file = " . $file;
     $xml = XMLReader::open($file);
     $xml->setParserProperty(XMLReader::VALIDATE, true);
@@ -62,6 +63,28 @@ foreach ($folder as $file) {
             echo "[OK]\n";
         } else {
             echo "[FAILED]\n";
+        }
+    }
+}
+
+while ($rowsFta = mysql_fetch_array($arrayFta)) {
+    $arrayIdFtaClassfication = mysql_query(
+            "SELECT DISTINCT id_fta_classification2 "
+            . " FROM " . $nameOfBDDTarget . ".classification_fta, " . $nameOfBDDTarget . ".classification_fta2"
+            . " WHERE " . $nameOfBDDTarget . ".classification_fta.id_classification_arborescence_article = " . $nameOfBDDTarget . ".classification_fta2.id_arborescence"
+            . " AND " . $nameOfBDDTarget . ".classification_fta.id_fta = " . $rowsFta['id_fta']
+    );
+    if ($arrayIdFtaClassfication) {
+        while ($value = mysql_fetch_array($arrayIdFtaClassfication)) {
+            $sql_inter = "UPDATE " . $nameOfBDDTarget . "." . "fta"
+                    . " SET " . "id_fta_classification2" . "=" . $value["id_fta_classification2"]
+                    . " WHERE " . 'id_fta' . "=" . $rowsFta['id_fta'];
+            echo "UPDATE " . $nameOfBDDTarget . "." . "fta." . 'id_fta' . "=" . $rowsFta['id_fta'] . " id_fta_classification2" . "=" . $value["id_fta_classification2"] . " ...";
+            if (mysql_query($sql_inter)) {
+                echo "[OK]\n";
+            } else {
+                echo "[FAILED]\n";
+            }
         }
     }
 }

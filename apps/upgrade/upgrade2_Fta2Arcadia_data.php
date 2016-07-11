@@ -29,17 +29,16 @@ $donnee = mysql_pconnect($hostname_connect, $username_connect, $password_connect
 mysql_select_db($nameOfBDDTarget);
 mysql_query('SET NAMES utf8');
 echo "link = " . $linkFolder;
-$folder = scandir($linkFolder,1);
-echo "folder = " . array_values($folder);
+$folder = scandir($linkFolder, 1);
 echo "NBfolder = " . count($folder);
 for ($i = 0; $i < count($folder); $i++) {
     $file = $folder[$i];
     echo "file = " . $file;
-    $xml = XMLReader::open($file);
+    $xml = XMLReader::open($linkFolder . $file);
     $xml->setParserProperty(XMLReader::VALIDATE, true);
     $valide = $xml->isValid();
     if ($valide) {
-        $parametres = simplexml_load_file($file);
+        $parametres = simplexml_load_file($linkFolder . $file);
         $dom = new DomDocument;
         $dom->load($file);
         $Transaction = $dom->getElementsByTagName("Transaction");

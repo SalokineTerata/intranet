@@ -48,9 +48,9 @@ for ($i = 0; $i < count($folder); $i++) {
             $idTransaction = $value->getAttribute("id");
         }
 
-        $idFta = $parametres->xpath("IdFta");
-        $codeReply = $parametres->xpath("CodeReply");
-        $codeArticleArcadia = $parametres->xpath("IdArcadia");
+        $idFta = $parametres["IdFta"];
+        $codeReply = $parametres["CodeReply"];
+        $codeArticleArcadia = $parametres["IdArcadia"];
 
         $sql_inter = "UPDATE " . $nameOfBDDTarget . "." . "fta2arcadia_transaction"
                 . " SET " . "code_reply" . "=" . $codeReply

@@ -47,9 +47,9 @@ for ($i = 0; $i < count($folder); $i++) {
             $idTransaction = $value->getAttribute("id");
         }
 
-        $idFta = $dom->getElementsByTagName("IdFta");
-        $codeReply = $dom->getElementsByTagName("CodeReply");
-        $codeArticleArcadia = $dom->getElementsByTagName("IdArcadia");
+//        $idFta = $dom->getElementsByTagName("IdFta");
+//        $codeReply = $dom->getElementsByTagName("CodeReply");
+//        $codeArticleArcadia = $dom->getElementsByTagName("IdArcadia");
 
         echo 'id_fta=' .$idFta;
         echo 'CodeReply=' .$codeReply;

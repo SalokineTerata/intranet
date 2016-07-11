@@ -32,7 +32,8 @@ echo "link = " . $linkFolder;
 $folder = scandir($linkFolder);
 echo "folder = " . array_values($folder);
 echo "NBfolder = " . count($folder);
-for ($i = 0; $i <= count($folder); $i++) {
+for ($i = 0; $i < count($folder); $i++) {
+    $file = $folder[$i];
     echo "file = " . $file;
     $xml = XMLReader::open($file);
     $xml->setParserProperty(XMLReader::VALIDATE, true);

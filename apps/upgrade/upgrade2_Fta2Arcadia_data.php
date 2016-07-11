@@ -32,7 +32,7 @@ mysql_query('SET NAMES utf8');
 $folder = scandir($linkFolder);
 echo "folder = " . array_values($folder) . "<br>";
 foreach ($folder as $file) {
-    echo "file = " . array_values($file) . "<br>";
+    echo "file = " . $file . "<br>";
     $xml = XMLReader::open($file);
     $xml->setParserProperty(XMLReader::VALIDATE, true);
     $valide = $xml->isValid();

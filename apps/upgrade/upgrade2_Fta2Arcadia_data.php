@@ -20,7 +20,7 @@ $hostname_connect = $argv[2]; //nom du serveur MySQL de connection � la base d
 $username_connect = $argv[3]; //login de la base MySQL
 //$password_connect = "8ale!ne"; //mot de passe de la base MySQL
 $password_connect = $argv[4];
- //mot de passe de la base MySQL
+//mot de passe de la base MySQL
 
 $linkFolder = $argv[5];
 
@@ -30,9 +30,9 @@ mysql_select_db($nameOfBDDTarget);
 mysql_query('SET NAMES utf8');
 
 $folder = scandir($linkFolder);
-echo  "folder = " . $folder ."/n";
+echo "folder = " . array_values($folder) . "<br>";
 foreach ($folder as $file) {
-    echo  "file = " . $file ."/n";
+    echo "file = " . $file . "<br>";
     $xml = XMLReader::open($file);
     $xml->setParserProperty(XMLReader::VALIDATE, true);
     $valide = $xml->isValid();

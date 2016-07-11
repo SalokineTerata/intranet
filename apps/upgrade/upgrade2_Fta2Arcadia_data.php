@@ -39,7 +39,6 @@ for ($i = 0; $i < count($folder); $i++) {
     $xml->setParserProperty(XMLReader::VALIDATE, true);
     $valide = $xml->isValid();
     if ($valide) {
-        $parametres = simplexml_load_string($fileContent);
         $dom = new DomDocument;
         $dom->load($linkFolder . $file);
         $Transaction = $dom->getElementsByTagName("Transaction");
@@ -48,10 +47,9 @@ for ($i = 0; $i < count($folder); $i++) {
             $idTransaction = $value->getAttribute("id");
         }
 
-        echo 'id Trasaction'.$idTransaction;
-        $idFta = $parametres["IdFta"];
-        $codeReply = $parametres["CodeReply"];
-        $codeArticleArcadia = $parametres["IdArcadia"];
+        $idFta = $dom->getElementsByTagName("IdFta");
+        $codeReply = $dom->getElementsByTagName("CodeReply");
+        $codeArticleArcadia = $dom->getElementsByTagName("IdArcadia");
 
         $sql_inter = "UPDATE " . $nameOfBDDTarget . "." . "fta2arcadia_transaction"
                 . " SET " . "code_reply" . "=" . $codeReply

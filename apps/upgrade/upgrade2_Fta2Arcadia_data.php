@@ -69,7 +69,7 @@ for ($i = 0; $i < count($folder); $i++) {
             foreach ($IdArcadia as $IdArcadiaValue) {
                 $codeArticleArcadia = $IdArcadiaValue->nodeValue;
             }
-            echo '$IdArcadia' . $IdArcadia;
+//            echo '$IdArcadia' . $IdArcadia;
 
 
             $sql_inter = "UPDATE " . $nameOfBDDTarget . "." . "fta2arcadia_transaction"

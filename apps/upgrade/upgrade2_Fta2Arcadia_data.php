@@ -28,20 +28,34 @@ $linkFolder = $argv[5];
 $donnee = mysql_pconnect($hostname_connect, $username_connect, $password_connect);
 mysql_select_db($nameOfBDDTarget);
 mysql_query('SET NAMES utf8');
-echo "link = " . $linkFolder;
+
+/**
+ * Fichiers ordonné dans un ordre décroissant
+ */
 $folder = scandir($linkFolder, 1);
-echo "NBfolder = " . count($folder);
+
 for ($i = 0; $i < count($folder); $i++) {
+    /**
+     * Nom du fichier
+     */
     $file = $folder[$i];
-    echo "file = " . $file;
+    
+    /**
+     * Contenue du fichier
+     */
     $fileContent = file_get_contents($linkFolder . $file);
+    
+    /**
+     * Vérification que le fichier soit un XML
+     */
     $xml = XMLReader::open($linkFolder . $file);
     $xml->setParserProperty(XMLReader::VALIDATE, true);
     $valide = $xml->isValid();
     if ($valide) {
-        $parametres = simplexml_load_string($fileContent);
+        /**
+         * Début du traitement d'actualisation des données de BDD
+         */
         $dom = new DomDocument;
-//        $dom->load($linkFolder . $file);
         if ($fileContent) {
             $dom->loadXML($fileContent);
             $Transaction = $dom->getElementsByTagName("Transaction");
@@ -49,43 +63,34 @@ for ($i = 0; $i < count($folder); $i++) {
             foreach ($Transaction as $value) {
                 $idTransaction = $value->getAttribute("id");
             }
-            echo 'id Trasaction' . $idTransaction;
 
             $IdFta = $dom->getElementsByTagName("IdFta");
 
             foreach ($IdFta as $IdFtaValue) {
                 $idFta = $IdFtaValue->nodeValue;
             }
-            echo '$idFta' . $idFta;
 
             $CodeReply = $dom->getElementsByTagName("CodeReply");
 
             foreach ($CodeReply as $CodeReplyValue) {
                 $codeReply = $CodeReplyValue->nodeValue;
             }
-            echo '$codeReply' . $codeReply;
+
             $IdArcadia = $dom->getElementsByTagName("IdArcadia");
 
             foreach ($IdArcadia as $IdArcadiaValue) {
                 $codeArticleArcadia = $IdArcadiaValue->nodeValue;
             }
-//            echo '$IdArcadia' . $IdArcadia;
-
 
             $sql_inter = "UPDATE " . $nameOfBDDTarget . "." . "fta2arcadia_transaction"
                     . " SET " . "code_reply" . "=" . $codeReply
                     . ", " . "code_article_ldc" . "=" . $codeArticleArcadia
                     . " WHERE " . 'id_fta' . "=" . $idFta
                     . " AND " . 'id_arcadia_transaction' . "=" . $idTransaction;
-//            echo "UPDATE " . $nameOfBDDTarget . "." . "fta2arcadia_transaction"
-//            . " SET " . "code_reply" . "=" . $codeReply
-//            . ", " . "code_article_ldc" . "=" . $codeArticleArcadia
-//            . " WHERE " . 'id_fta' . "=" . $idFta
-//            . " AND " . 'id_arcadia_transaction' . "=" . $idTransaction . " ...";
             if (mysql_query($sql_inter)) {
-                echo "[OK]\n";
+                echo "[OK] id_Trasaction" . $idTransaction . "\n";
             } else {
-                echo "[FAILED]\n";
+                echo "[FAILED] id_Trasaction" . $idTransaction . "\n";
             }
         }
     }

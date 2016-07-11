@@ -28,11 +28,11 @@ $linkFolder = $argv[5];
 $donnee = mysql_pconnect($hostname_connect, $username_connect, $password_connect);
 mysql_select_db($nameOfBDDTarget);
 mysql_query('SET NAMES utf8');
-
+echo "link = " . $linkFolder;
 $folder = scandir($linkFolder);
-echo "folder = " . array_values($folder) . "<br>";
+echo "folder = " . array_values($folder);
 foreach ($folder as $file) {
-    echo "file = " . $file . "<br>";
+    echo "file = " . $file;
     $xml = XMLReader::open($file);
     $xml->setParserProperty(XMLReader::VALIDATE, true);
     $valide = $xml->isValid();

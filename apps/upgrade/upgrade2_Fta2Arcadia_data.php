@@ -60,8 +60,8 @@ for ($i = 0; $i < count($folder); $i++) {
 
             $CodeReply = $dom->getElementsByTagName("CodeReply");
 
-            foreach ($CodeReply as $IdArcadiaValue) {
-                $codeReply = $IdArcadiaValue->nodeValue;
+            foreach ($CodeReply as $CodeReplyValue) {
+                $codeReply = $CodeReplyValue->nodeValue;
             }
             echo '$codeReply' . $codeReply;
             $IdArcadia = $dom->getElementsByTagName("IdArcadia");

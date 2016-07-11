@@ -3,7 +3,7 @@
 # Script d'actualisation des données des Fta par Arcadia
 #
 # Author: franckwastaken - 07/07/2016
-#
+# MAJ franckwastaken - 11/07/2016
 #
 
 CHEMIN_OLD="$(dirname $0)"

@@ -2,7 +2,7 @@
 #
 #
 # Author: franckwastaken - 07/07/2016
-#
+# MAJ franckwastaken - 11/07/2016
 #
 # VARIABLES (garder l'ordre du script d'appel !
 # ---------------------------------------------
@@ -13,5 +13,5 @@ MYSQL_USER_PASSWORD_DEST="agis"
 DIR_EAI="./u1/DATA01/eai/intranet-prd/import/data/"
 
 
-./apps/upgrade/upgrade2_Fta2Arcadia_data.sh $DB_NAME_TO_CREATE $MYSQL_USER_NAME_DEST $MYSQL_USER_PASSWORD_DEST $DIR_EAI
+./apps/upgrade/upgrade2_Fta2Arcadia_data.sh $DB_NAME_TO_CREATE $MYSQL_SERVER_NAME_DEST $MYSQL_USER_NAME_DEST $MYSQL_USER_PASSWORD_DEST $DIR_EAI
 

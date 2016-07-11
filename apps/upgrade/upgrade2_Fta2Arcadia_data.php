@@ -42,32 +42,51 @@ for ($i = 0; $i < count($folder); $i++) {
         $parametres = simplexml_load_string($fileContent);
         $dom = new DomDocument;
 //        $dom->load($linkFolder . $file);
-        $dom->loadXML($fileContent);
-        $Transaction = $dom->getElementsByTagName("Transaction");
+        if ($fileContent) {
+            $dom->loadXML($fileContent);
+            $Transaction = $dom->getElementsByTagName("Transaction");
 
-        foreach ($Transaction as $value) {
-            $idTransaction = $value->getAttribute("id");
-        }
+            foreach ($Transaction as $value) {
+                $idTransaction = $value->getAttribute("id");
+            }
+            echo 'id Trasaction' . $idTransaction;
 
-        echo 'id Trasaction'.$idTransaction;
-        $idFta = $parametres["IdFta"];
-        $codeReply = $parametres["CodeReply"];
-        $codeArticleArcadia = $parametres["IdArcadia"];
+            $IdFta = $dom->getElementsByTagName("IdFta");
 
-        $sql_inter = "UPDATE " . $nameOfBDDTarget . "." . "fta2arcadia_transaction"
-                . " SET " . "code_reply" . "=" . $codeReply
-                . ", " . "code_article_ldc" . "=" . $codeArticleArcadia
-                . " WHERE " . 'id_fta' . "=" . $idFta
-                . " AND " . 'id_arcadia_transaction' . "=" . $idTransaction;
-        echo "UPDATE " . $nameOfBDDTarget . "." . "fta2arcadia_transaction"
-        . " SET " . "code_reply" . "=" . $codeReply
-        . ", " . "code_article_ldc" . "=" . $codeArticleArcadia
-        . " WHERE " . 'id_fta' . "=" . $idFta
-        . " AND " . 'id_arcadia_transaction' . "=" . $idTransaction . " ...";
-        if (mysql_query($sql_inter)) {
-            echo "[OK]\n";
-        } else {
-            echo "[FAILED]\n";
+            foreach ($IdFta as $IdFtaValue) {
+                $idFta = $IdFtaValue->nodeValue;
+            }
+            echo '$idFta' . $idFta;
+
+            $CodeReply = $dom->getElementsByTagName("CodeReply");
+
+            foreach ($CodeReply as $IdArcadiaValue) {
+                $codeReply = $IdArcadiaValue->nodeValue;
+            }
+            echo '$codeReply' . $codeReply;
+            $IdArcadia = $dom->getElementsByTagName("IdArcadia");
+
+            foreach ($IdArcadia as $IdArcadiaValue) {
+                $codeArticleArcadia = $IdArcadiaValue->nodeValue;
+            }
+            echo '$IdArcadia' . $IdArcadia;
+
+
+            $sql_inter = "UPDATE " . $nameOfBDDTarget . "." . "fta2arcadia_transaction"
+                    . " SET " . "code_reply" . "=" . $codeReply
+                    . ", " . "code_article_ldc" . "=" . $codeArticleArcadia
+                    . " WHERE " . 'id_fta' . "=" . $idFta
+                    . " AND " . 'id_arcadia_transaction' . "=" . $idTransaction;
+            echo "UPDATE " . $nameOfBDDTarget . "." . "fta2arcadia_transaction"
+            . " SET " . "code_reply" . "=" . $codeReply
+            . ", " . "code_article_ldc" . "=" . $codeArticleArcadia
+            . " WHERE " . 'id_fta' . "=" . $idFta
+            . " AND " . 'id_arcadia_transaction' . "=" . $idTransaction . " ...";
+            if (mysql_query($sql_inter)) {
+                echo "[OK]\n";
+            } else {
+                echo "[FAILED]\n";
+            }
         }
     }
 }

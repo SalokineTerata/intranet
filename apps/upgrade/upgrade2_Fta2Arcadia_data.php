@@ -39,7 +39,7 @@ for ($i = 0; $i < count($folder); $i++) {
     $xml->setParserProperty(XMLReader::VALIDATE, true);
     $valide = $xml->isValid();
     if ($valide) {
-        $parametres = simplexml_load_file($fileContent);
+        $parametres = simplexml_load_string($fileContent);
         $dom = new DomDocument;
         $dom->load($linkFolder . $file);
         $Transaction = $dom->getElementsByTagName("Transaction");

@@ -29,7 +29,7 @@ $donnee = mysql_pconnect($hostname_connect, $username_connect, $password_connect
 mysql_select_db($nameOfBDDTarget);
 mysql_query('SET NAMES utf8');
 echo "link = " . $linkFolder;
-$folder = scandir($linkFolder);
+$folder = scandir($linkFolder,1);
 echo "folder = " . array_values($folder);
 echo "NBfolder = " . count($folder);
 for ($i = 0; $i < count($folder); $i++) {

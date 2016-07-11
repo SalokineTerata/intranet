@@ -77,11 +77,11 @@ for ($i = 0; $i < count($folder); $i++) {
                     . ", " . "code_article_ldc" . "=" . $codeArticleArcadia
                     . " WHERE " . 'id_fta' . "=" . $idFta
                     . " AND " . 'id_arcadia_transaction' . "=" . $idTransaction;
-            echo "UPDATE " . $nameOfBDDTarget . "." . "fta2arcadia_transaction"
-            . " SET " . "code_reply" . "=" . $codeReply
-            . ", " . "code_article_ldc" . "=" . $codeArticleArcadia
-            . " WHERE " . 'id_fta' . "=" . $idFta
-            . " AND " . 'id_arcadia_transaction' . "=" . $idTransaction . " ...";
+//            echo "UPDATE " . $nameOfBDDTarget . "." . "fta2arcadia_transaction"
+//            . " SET " . "code_reply" . "=" . $codeReply
+//            . ", " . "code_article_ldc" . "=" . $codeArticleArcadia
+//            . " WHERE " . 'id_fta' . "=" . $idFta
+//            . " AND " . 'id_arcadia_transaction' . "=" . $idTransaction . " ...";
             if (mysql_query($sql_inter)) {
                 echo "[OK]\n";
             } else {

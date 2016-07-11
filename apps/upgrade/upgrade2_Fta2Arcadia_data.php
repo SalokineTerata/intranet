@@ -41,7 +41,8 @@ for ($i = 0; $i < count($folder); $i++) {
     if ($valide) {
         $parametres = simplexml_load_string($fileContent);
         $dom = new DomDocument;
-        $dom->loadXML($linkFolder . $file);
+//        $dom->load($linkFolder . $file);
+        $dom->loadXML($fileContent);
         $Transaction = $dom->getElementsByTagName("Transaction");
 
         foreach ($Transaction as $value) {

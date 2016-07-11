@@ -47,13 +47,24 @@ for ($i = 0; $i < count($folder); $i++) {
             $idTransaction = $value->getAttribute("id");
         }
 
-        $idFta = $dom->getElementsByTagName("IdFta");
-        $codeReply = $dom->getElementsByTagName("CodeReply");
+        $IdFta = $dom->getElementsByTagName("IdFta");
+        foreach ($IdFta as $idFtaValue) {
+            $idFta = $idFtaValue->nodeValue;
+        }
+        $CodeReply = $dom->getElementsByTagName("CodeReply");
+        foreach ($CodeReply as $CodeReplyValue) {
+            $codeReply = $CodeReplyValue->nodeValue;
+        }
+
         $codeArticleArcadia = $dom->getElementsByTagName("IdArcadia");
 
-        echo 'id_fta=' .$idFta;
-        echo 'CodeReply=' .$codeReply;
-        echo 'IdArcadia=' .$codeArticleArcadia;
+        foreach ($CodeArticleArcadia as $codeArticleArcadiaValue) {
+            $codeArticleArcadia = $codeArticleArcadiaValue->nodeValue;
+        }
+
+//        echo 'id_fta=' .$idFta;
+//        echo 'CodeReply=' .$codeReply;
+//        echo 'IdArcadia=' .$codeArticleArcadia;
         $sql_inter = "UPDATE " . $nameOfBDDTarget . "." . "fta2arcadia_transaction"
                 . " SET " . "code_reply" . "=" . $codeReply
                 . ", " . "code_article_ldc" . "=" . $codeArticleArcadia

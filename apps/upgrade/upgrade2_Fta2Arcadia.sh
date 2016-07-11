@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 #
 # Script d'actualisation des données des Fta par Arcadia
 #
@@ -6,7 +6,7 @@
 #
 #
 
-CHEMIN="$dirname $0"
+CHEMIN="($dirname $0)"
 DIR_COD_ROOT="/u1/DATA01/webldc/cod-intranet/v3/apps/upgrade/"
 DIR_DEV_ROOT="/u1/DATA01/webldc/dev-intranet/v3/apps/upgrade/"
 DIR_PRD_ROOT="/u1/DATA01/webldc/fta05401/v3/apps/upgrade/"

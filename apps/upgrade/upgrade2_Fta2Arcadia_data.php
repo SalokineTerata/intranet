@@ -34,35 +34,40 @@ echo "NBfolder = " . count($folder);
 for ($i = 0; $i < count($folder); $i++) {
     $file = $folder[$i];
     echo "file = " . $file;
+    $fileContent=file_get_contents($linkFolder . $file);
     $xml = XMLReader::open($linkFolder . $file);
     $xml->setParserProperty(XMLReader::VALIDATE, true);
     $valide = $xml->isValid();
     if ($valide) {
-        $parametres = simplexml_load_file($linkFolder . $file);
-        $dom = new DomDocument;
-        $dom->load($file);
-        $Transaction = $dom->getElementsByTagName("Transaction");
-        foreach ($Transaction as $value) {
-            $idTransaction = $value->getAttribute("id");
-        }
-        $idFta = $parametres->xpath("IdFta");
-        $codeReply = $parametres->xpath("CodeReply");
-        $codeArticleArcadia = $parametres->xpath("IdArcadia");
+        $parametres = simplexml_load_file($fileContent);
+        if (is_object($parametres)) {
+            $dom = new DomDocument;
+            $dom->load($linkFolder . $file);
+            $Transaction = $dom->getElementsByTagName("Transaction");
+            if ($Transaction) {
+                foreach ($Transaction as $value) {
+                    $idTransaction = $value->getAttribute("id");
+                }
+            }
+            $idFta = $parametres->xpath("IdFta");
+            $codeReply = $parametres->xpath("CodeReply");
+            $codeArticleArcadia = $parametres->xpath("IdArcadia");
 
-        $sql_inter = "UPDATE " . $nameOfBDDTarget . "." . "fta2arcadia_transaction"
-                . " SET " . "code_reply" . "=" . $codeReply
-                . ", " . "code_article_ldc" . "=" . $codeArticleArcadia
-                . " WHERE " . 'id_fta' . "=" . $idFta
-                . " AND " . 'id_arcadia_transaction' . "=" . $idTransaction;
-        echo "UPDATE " . $nameOfBDDTarget . "." . "fta2arcadia_transaction"
-        . " SET " . "code_reply" . "=" . $codeReply
-        . ", " . "code_article_ldc" . "=" . $codeArticleArcadia
-        . " WHERE " . 'id_fta' . "=" . $idFta
-        . " AND " . 'id_arcadia_transaction' . "=" . $idTransaction . " ...";
-        if (mysql_query($sql_inter)) {
-            echo "[OK]\n";
-        } else {
-            echo "[FAILED]\n";
+            $sql_inter = "UPDATE " . $nameOfBDDTarget . "." . "fta2arcadia_transaction"
+                    . " SET " . "code_reply" . "=" . $codeReply
+                    . ", " . "code_article_ldc" . "=" . $codeArticleArcadia
+                    . " WHERE " . 'id_fta' . "=" . $idFta
+                    . " AND " . 'id_arcadia_transaction' . "=" . $idTransaction;
+            echo "UPDATE " . $nameOfBDDTarget . "." . "fta2arcadia_transaction"
+            . " SET " . "code_reply" . "=" . $codeReply
+            . ", " . "code_article_ldc" . "=" . $codeArticleArcadia
+            . " WHERE " . 'id_fta' . "=" . $idFta
+            . " AND " . 'id_arcadia_transaction' . "=" . $idTransaction . " ...";
+            if (mysql_query($sql_inter)) {
+                echo "[OK]\n";
+            } else {
+                echo "[FAILED]\n";
+            }
         }
     }
 }

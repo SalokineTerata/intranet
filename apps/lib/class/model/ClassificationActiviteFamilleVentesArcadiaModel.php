@@ -15,12 +15,23 @@ class ClassificationActiviteFamilleVentesArcadiaModel extends AbstractModel {
     const AJOUTER = 'ajouter';
     const SUPPRIMER = 'supprimer';
 
+    private $nameDataTableToCompare;
+
     public function __construct($paramId = NULL, $paramIsCreateRecordsetInDatabaseIfKeyDoesntExist = AbstractModel::DEFAULT_IS_CREATE_RECORDSET_IN_DATABASE_IF_KEY_DOESNT_EXIST) {
         parent::__construct($paramId, $paramIsCreateRecordsetInDatabaseIfKeyDoesntExist);
+        $this->setNameDataTableToCompare();
     }
 
     protected function setDefaultValues() {
         
+    }
+
+    function getNameDataTableToCompare() {
+        return $this->nameDataTableToCompare;
+    }
+
+    function setNameDataTableToCompare() {
+        $this->nameDataTableToCompare = NULL;
     }
 
     /**
@@ -298,7 +309,7 @@ class ClassificationActiviteFamilleVentesArcadiaModel extends AbstractModel {
          * Sinon alors on vide la donnée de la BDD
          */
         $dataFieldIdArcadiaFamilleVente = FtaController::checkDataInArrayKeyList($dataFieldIdArcadiaFamilleVenteTMP, $arrayClassificationFamilleVenteArcadia);
-        
+
         $HtmlTableName = FtaModel::TABLENAME
                 . '_'
                 . FtaModel::FIELDNAME_ID_ARCADIA_FAMILLE_VENTE
@@ -334,14 +345,14 @@ class ClassificationActiviteFamilleVentesArcadiaModel extends AbstractModel {
         );
         $htmlList->getEventsForm()->setOnChangeWithAjaxAutoSave(FtaModel::TABLENAME, FtaModel::KEYNAME, $paramFtaModel->getKeyValue(), FtaModel::FIELDNAME_ID_ARCADIA_FAMILLE_VENTE);
 
-        
-         /**
+
+        /**
          * Description d'un champ
          */
         $htmlList->setHelp(IntranetColumnInfoModel::getFieldDesc($dataFieldIdArcadiaFamilleVente->getTableName(), $dataFieldIdArcadiaFamilleVente->getFieldName()
                         , $dataFieldIdArcadiaFamilleVente->getFieldLabel(), $htmlList
         ));
-        
+
         $listeClassificationRaccourcis = $htmlList->getHtmlResult();
 
         return $listeClassificationRaccourcis;

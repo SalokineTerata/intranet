@@ -16,8 +16,24 @@ class FteFournisseurModel extends AbstractModel {
     const AJOUTER = 'ajouter';
     const SUPPRIMER = 'supprimer';
 
+    private $nameDataTableToCompare;
+
+    public function __construct($paramId = NULL, $paramIsCreateRecordsetInDatabaseIfKeyDoesntExist = AbstractModel::DEFAULT_IS_CREATE_RECORDSET_IN_DATABASE_IF_KEY_DOESNT_EXIST) {
+        parent::__construct($paramId, $paramIsCreateRecordsetInDatabaseIfKeyDoesntExist);
+
+        $this->setNameDataTableToCompare();
+    }
+
     protected function setDefaultValues() {
         
+    }
+
+    function getNameDataTableToCompare() {
+        return $this->nameDataTableToCompare;
+    }
+
+    function setNameDataTableToCompare() {
+        $this->nameDataTableToCompare = NULL;
     }
 
     /**

@@ -21,12 +21,23 @@ class ClassificationGammeFamilleBudgetArcadiaModel extends AbstractModel {
     const SUPPRIMER = 'supprimer';
     const TYPE_GAMME = 'gamme';
 
+    private $nameDataTableToCompare;
+
     public function __construct($paramId = NULL, $paramIsCreateRecordsetInDatabaseIfKeyDoesntExist = AbstractModel::DEFAULT_IS_CREATE_RECORDSET_IN_DATABASE_IF_KEY_DOESNT_EXIST) {
         parent::__construct($paramId, $paramIsCreateRecordsetInDatabaseIfKeyDoesntExist);
+        $this->setNameDataTableToCompare();
     }
 
     protected function setDefaultValues() {
         
+    }
+
+    function getNameDataTableToCompare() {
+        return $this->nameDataTableToCompare;
+    }
+
+    function setNameDataTableToCompare() {
+        $this->nameDataTableToCompare = NULL;
     }
 
     /**
@@ -45,6 +56,7 @@ class ClassificationGammeFamilleBudgetArcadiaModel extends AbstractModel {
         $key = $pdo->lastInsertId();
         return $key;
     }
+
     /**
      * Valeurs par défaut en cas de création
      * d'un nouvel enregistrement
@@ -410,7 +422,7 @@ class ClassificationGammeFamilleBudgetArcadiaModel extends AbstractModel {
         return $array;
     }
 
-     /**
+    /**
      * On identifie les clé étrangères de la table classification GammeFamilleBudget
      * Cette array doit être utilisé de cette manière 
      * Array (
@@ -427,9 +439,8 @@ class ClassificationGammeFamilleBudgetArcadiaModel extends AbstractModel {
 
         return $tablesNameAndIdForeignKeyOfClassificationRaccourcisAssociation;
     }
-    
-    
-       /**
+
+    /**
      * Affiche le label du tableau d'une GammeFamilleBudget arcadia à une marque de classification
      * @return string
      */
@@ -486,14 +497,14 @@ class ClassificationGammeFamilleBudgetArcadiaModel extends AbstractModel {
                 . '&action=' . self::AJOUTER . '&type=' . self::TYPE_GAMME . '><img src=../lib/images/plus.png width=22  border=0 valign=middle halign=right />'
                 . '</a><br>';
     }
-    
-    
+
     function deleteClassificationGammeFamilleBudgetArcadia() {
         DatabaseOperation::executeComplete(
                 'DELETE FROM ' . self::TABLENAME
                 . ' WHERE ' . self::KEYNAME . '=' . $this->getKeyValue()
         );
     }
+
 }
 
 ?>

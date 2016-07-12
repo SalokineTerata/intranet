@@ -39,12 +39,12 @@ for ($i = 0; $i < count($folder); $i++) {
      * Nom du fichier
      */
     $file = $folder[$i];
-    
+
     /**
      * Contenue du fichier
      */
     $fileContent = file_get_contents($linkFolder . $file);
-    
+
     /**
      * Vérification que le fichier soit un XML
      */
@@ -56,6 +56,9 @@ for ($i = 0; $i < count($folder); $i++) {
          * Début du traitement d'actualisation des données de BDD
          */
         $dom = new DomDocument;
+        /**
+         * Intégration du fichier
+         */
         if ($fileContent) {
             $dom->loadXML($fileContent);
             $Transaction = $dom->getElementsByTagName("Transaction");
@@ -85,10 +88,38 @@ for ($i = 0; $i < count($folder); $i++) {
             $sql_inter = "UPDATE " . $nameOfBDDTarget . "." . "fta2arcadia_transaction"
                     . " SET " . "code_reply" . "=" . $codeReply
                     . ", " . "code_article_ldc" . "=" . $codeArticleArcadia
+                    . ", " . "date_retour" . "=" . date("Y-m-d H:i:s")
                     . " WHERE " . 'id_fta' . "=" . $idFta
                     . " AND " . 'id_arcadia_transaction' . "=" . $idTransaction;
             if (mysql_query($sql_inter)) {
                 echo "[OK] id_Trasaction" . $idTransaction . "\n";
+                /**
+                 * On vérifie si la transaction en cours est actif
+                 */
+                $arrayIdArcadiaTransaction = mysql_query("SELECT DISTINCT actif,notification_mail "
+                        . " FROM " . $nameOfBDDTarget . ".fta2arcadia_transaction"
+                        . " WHERE " . $nameOfBDDTarget . ".id_arcadia_transaction = " . $idTransaction
+                );
+                if ($arrayIdArcadiaTransaction) {
+                    while ($value = mysql_fetch_array($arrayIdArcadiaTransaction)) {
+                        $actifTransaction = $value["actif"];
+                        $notificationMailTransaction = $value["notification_mail"];
+                    }
+                }
+
+                /**
+                 * On actualise le code Article Arcadia de la Fta
+                 */
+                if ($actifTransaction) {
+                    if ($codeReply == "0") {
+                        $sql_fta = "UPDATE " . $nameOfBDDTarget . "." . "fta"
+                                . " SET " . "code_article_ldc" . "=" . $codeArticleArcadia
+                                . " WHERE " . 'id_fta' . "=" . $idFta;
+                        mysql_query($sql_fta);
+                    }
+                    envoi_mail($corpsmail, $adrFrom, $adrTo, $sujet);
+                    
+                }
             } else {
                 echo "[FAILED] id_Trasaction" . $idTransaction . "\n";
             }

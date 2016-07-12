@@ -306,10 +306,14 @@ function setKeyValuePorposal($paramType) {
 
             break;
         case Fta2ArcadiaTransactionModel::XML:
-
+            $idUser = $this->getGlobalConfigModel()->getAuthenticatedUser()->getKeyValue();
             $this->keyValuePorposal = Fta2ArcadiaTransactionModel::createNewRecordset(
                             array(Fta2ArcadiaTransactionModel::FIELDNAME_ID_FTA => $idFta
-                                , Fta2ArcadiaTransactionModel::FIELDNAME_CODE_ARTICLE_LDC => $codeArticleLdc));
+                                , Fta2ArcadiaTransactionModel::FIELDNAME_CODE_ARTICLE_LDC => $codeArticleLdc
+                                , Fta2ArcadiaTransactionModel::FIELDNAME_DATE_ENVOI => date("Y-m-d H:i:s")
+                                , Fta2ArcadiaTransactionModel::FIELDNAME_ID_USER => $idUser
+                    ));
+            Fta2ArcadiaTransactionModel::updateIdArcadiaTransaction($idFta,  $this->keyValuePorposal);
             break;
     }
 }

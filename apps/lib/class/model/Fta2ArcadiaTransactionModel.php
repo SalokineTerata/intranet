@@ -30,6 +30,13 @@ class Fta2ArcadiaTransactionModel extends AbstractModel {
     const FIELDNAME_CODE_ARTICLE_LDC = 'code_article_ldc';
     const FIELDNAME_TAG_TYPE_TRANSACTION = 'tag_type_transaction';
     const FIELDNAME_CODE_REPLY = 'code_reply';
+    const FIELDNAME_ACTIF = 'actif';
+    const FIELDNAME_DATE_ENVOI = 'date_envoi';
+    const FIELDNAME_ID_USER = 'id_user';
+    const FIELDNAME_DATE_RETOUR = 'date_retour';
+    const FIELDNAME_NOTIFICATION_MAIL = 'notification_mail';
+    const OUI = '1';
+    const NON = '0';
     const XML = 'XML';
     const SUMMARY_PAGE = 'summary_page';
 
@@ -54,11 +61,17 @@ class Fta2ArcadiaTransactionModel extends AbstractModel {
                         . ',' . self::FIELDNAME_ID_FTA
                         . ',' . self::FIELDNAME_CODE_ARTICLE_LDC
                         . ',' . self::FIELDNAME_TAG_TYPE_TRANSACTION
+                        . ',' . self::FIELDNAME_ACTIF
+                        . ',' . self::FIELDNAME_DATE_ENVOI
+                        . ',' . self::FIELDNAME_ID_USER
                         . ')'
                         . 'VALUES (' . "\"NULL\""
                         . ',' . "\"" . $paramForeignKeysValuesArray[self::FIELDNAME_ID_FTA] . "\""
                         . ',' . "\"" . $paramForeignKeysValuesArray[self::FIELDNAME_CODE_ARTICLE_LDC] . "\""
                         . ',' . "\"" . "\""
+                        . ',' . "\"" . self::OUI . "\""
+                        . ',' . "\"" . $paramForeignKeysValuesArray[self::FIELDNAME_DATE_ENVOI] . "\""
+                        . ',' . "\"" . $paramForeignKeysValuesArray[self::FIELDNAME_ID_USER] . "\""
                         . ')'
         );
         $key = $pdo->lastInsertId();
@@ -80,11 +93,36 @@ class Fta2ArcadiaTransactionModel extends AbstractModel {
 
         if ($arrayCheck) {
             $key = $arrayCheck["0"];
+            self::updateIdArcadiaTransaction($paramIdFta, $key);
         } else {
             $key = NULL;
         }
 
         return $key;
+    }
+
+    /**
+     * Désactivation des anciennes transactions
+     * @param int  $paramIdFta
+     * @param int $paramIdArcadiaTransaction
+     */
+    public static function updateIdArcadiaTransaction($paramIdFta, $paramIdArcadiaTransaction) {
+        $arrayCheck = DatabaseOperation::convertSqlStatementWithoutKeyToArrayComplete(
+                        "SELECT " . self::KEYNAME
+                        . " FROM " . self::TABLENAME
+                        . " WHERE " . self::FIELDNAME_ID_FTA . "=" . $paramIdFta
+                        . " AND " . self::KEYNAME . "<>" . $paramIdArcadiaTransaction
+                        . " ORDER BY " . self::KEYNAME . " DESC "
+        );
+
+        if ($arrayCheck) {
+            foreach ($arrayCheck as $rowsCheck) {
+                $sql = "UPDATE " . self::TABLENAME
+                        . " SET " . self::FIELDNAME_ACTIF . "=" . self::NON
+                        . " WHERE " . self::KEYNAME . "=" . $rowsCheck[self::KEYNAME];
+                DatabaseOperation::execute($sql);
+            }
+        }
     }
 
 }

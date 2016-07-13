@@ -132,7 +132,7 @@ for ($i = 0; $i < count($folder); $i++) {
                         $arrayIdUserTransaction = mysql_query(
                                 "SELECT DISTINCT mail "
                                 . " FROM " . $nameOfBDDTarget . ".salaries "
-                                . " WHERE " . $nameOfBDDTarget . ".id_user = '" . $idUserTransaction . "'"
+                                . " WHERE " . "id_user = '" . $idUserTransaction . "'"
                         );
                         if ($arrayIdUserTransaction) {
                             while ($value = mysql_fetch_array($arrayIdUserTransaction)) {

@@ -14,6 +14,7 @@ class EnvironmentConf {
 
     const CONFIG_INI_FILE_SHELL = "/u1/DATA01/webldc/dev-intranet/v3/config.ini";
     const CONFIG_INI_FILE_NAVIGATEUR = "../../config.ini";
+    const ENV_CLI = 'ENV_CLI';
     const ENV_COP = 'ENV_COP';
     const ENV_COD = 'ENV_COD';
     const ENV_COD_NAME = "Codeur";

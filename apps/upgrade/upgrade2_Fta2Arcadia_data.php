@@ -108,13 +108,13 @@ for ($i = 0; $i < count($folder); $i++) {
                         $idUserTransaction = $value["id_user"];
                     }
                 } else {
-                    echo "Erreur de la génaration du tableau pour la transaction " . $idTransaction;
+                    echo "Erreur de la génération du tableau pour la transaction " . $idTransaction;
                 }
 
                 /**
                  * On actualise le code Article Arcadia de la Fta
                  */
-                echo "Transaction " . $idTransaction . " actif = " . $actifTransaction;
+                echo "Transaction " . $idTransaction . " actif = " . $actifTransaction . "  Mail = " . $notificationMailTransaction . " user = " .$idUserTransaction;
                 if ($actifTransaction) {
 
                     if ($codeReply == "0") {
@@ -143,6 +143,7 @@ for ($i = 0; $i < count($folder); $i++) {
                                 envoismail($sujet, $corpsmail, $adrTo, $adrFrom);
                             }
                         }
+                        echo "Erreur de la génération du tableau pour le mail concernant la transaction " . $idTransaction;
                     }
                 }
             } else {

@@ -212,7 +212,7 @@ class Arcadia2FtaController {
                         /**
                          * Suppression du fichier
                          */
-                        unlink($file);
+                        unlink($linkFolder . $file);
                     } else {
                         echo "[FAILED] id_Trasaction " . $idTransaction . "\n";
                     }

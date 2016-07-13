@@ -19,5 +19,5 @@ DIR_EAI="$5"
 
 echo "*** Requêtes SQL:"
 echo "  * Actualisation des Fta de la base de données DB_NAME_V3 "
-php ./apps/upgrade/upgrade2_Fta2Arcadia_data.php $DB_NAME_V3  $MYSQL_SERVER_NAME_DEST $MYSQL_USER_NAME_DEST $MYSQL_USER_PASSWORD_DEST $DIR_EAI
+php ./apps/fta2Arcadia/upgrade2_Fta2Arcadia_data.php $DB_NAME_V3  $MYSQL_SERVER_NAME_DEST $MYSQL_USER_NAME_DEST $MYSQL_USER_PASSWORD_DEST $DIR_EAI
 

@@ -31,14 +31,18 @@ require __DIR__ . '/../lib/functions.mysql.php';
 //require __DIR__ . '/../lib/class/acl/Acl.php';
 require __DIR__ . '/../lib/class/Lib.php';
 //require __DIR__ . '/../lib/class/log/Logger.php';
-//require __DIR__ . '/../lib/class/user_interface/UserInterfaceMessage.php';
-//require __DIR__ . '/../lib/class/user_interface/UserInterfaceLabel.php';
+require __DIR__ . '/../lib/class/user_interface/UserInterfaceMessage.php';
+require __DIR__ . '/../lib/class/user_interface/UserInterfaceLabel.php';
 //require __DIR__ . '/../lib/class/session/SessionSaveAndRestoreAbstract.php';
 
 // Configuration des environnements
 require __DIR__ . '/../conf/EnvironmentConf.php';
 require __DIR__ . '/../conf/EnvironmentAbstract.php';
 require __DIR__ . '/../conf/EnvironmentInit.php';
+
+// Fta2Arcadia 
+require __DIR__ . '/../fta2Arcadia/class/controller/Fta2ArcadiaController.php';
+require __DIR__ . '/../fta2Arcadia/class/controller/Arcadia2FtaController.php';
 
 // Fta (Model
 //require __DIR__ . '/../fta/class/AccueilFta.php';
@@ -56,7 +60,6 @@ require __DIR__ . '/../conf/EnvironmentInit.php';
 //require __DIR__ . '/../fta/class/view/TableauFicheView.php';
 
 // Controller
-//require __DIR__ . '/../fta/class/controller/Fta2ArcadiaController.php';
 //require __DIR__ . '/../fta/class/controller/FtaController.php';
 
 // Moteur de base de données
@@ -125,14 +128,14 @@ require __DIR__ . '/../conf/EnvironmentInit.php';
 //require __DIR__ . '/../lib/class/model/DataSyncServeurModel.php';
 //require __DIR__ . '/../lib/class/model/DataSyncTransfertModel.php';
 //require __DIR__ . '/../lib/class/model/DroitftModel.php';
-//require __DIR__ . '/../lib/class/model/UserModel.php';
-//require __DIR__ . '/../lib/class/model/Fta2ArcadiaTransactionModel.php';
+require __DIR__ . '/../lib/class/model/UserModel.php';
+require __DIR__ . '/../lib/class/model/Fta2ArcadiaTransactionModel.php';
 //require __DIR__ . '/../lib/class/model/FtaActionRoleModel.php';
 //require __DIR__ . '/../lib/class/model/FtaActionSiteModel.php';
 //require __DIR__ . '/../lib/class/model/FtaConditionnementModel.php';
 //require __DIR__ . '/../lib/class/model/FtaComposantModel.php';
 //require __DIR__ . '/../lib/class/model/FtaProcessusCycleModel.php';
-//require __DIR__ . '/../lib/class/model/FtaModel.php';
+require __DIR__ . '/../lib/class/model/FtaModel.php';
 //require __DIR__ . '/../lib/class/model/FtaEtatHistoriqueModel.php';
 //require __DIR__ . '/../lib/class/model/FtaEtatModel.php';
 //require __DIR__ . '/../lib/class/model/FtaProcessusEtatModel.php';

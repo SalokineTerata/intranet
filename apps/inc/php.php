@@ -43,6 +43,10 @@ require_once('../conf/EnvironmentConf.php');
 require_once('../conf/EnvironmentAbstract.php');
 require_once('../conf/EnvironmentInit.php');
 
+// Fta2Arcadia 
+require_once('../fta2Arcadia/class/controller/Fta2ArcadiaController.php');
+require_once('../fta2Arcadia/class/controller/Arcadia2FtaController.php');
+
 // Fta (Model)
 require_once('../fta/class/AccueilFta.php');
 require_once('../fta/class/Chapitre.php');
@@ -59,7 +63,6 @@ require_once('../fta/class/view/FtaProcessusDelaiView.php');
 require_once('../fta/class/view/TableauFicheView.php');
 
 // Controller
-require_once('../fta/class/controller/Fta2ArcadiaController.php');
 require_once('../fta/class/controller/FtaController.php');
 
 // Moteur de base de données

@@ -190,18 +190,19 @@ class Fta2ArcadiaController {
     private $arcadiaDun14Create;
 
     public function __construct
-            
-    ($paramFtaModel, $paramType, $paramToNotGenerateFile = NULL) {
+             (FtaModel $paramFtaModel,
+
+    $paramType, $paramToNotGenerateFile = NULL) {
     /**
      * Inisialisation du model Fta
      */
-    $this-> setFtaModel(
+    $this->  setFtaModel(
+            $paramFtaModel);
 
-    $paramFtaModel);
     /**
      * On récupère et initialise le model de l'idFta à comparer
      */
-    $this->  setDatabaseRecordToCompare();
+    $this->setDatabaseRecordToCompare();
 
     /**
      * Generation de la proposal en BDD
@@ -312,8 +313,8 @@ function setKeyValuePorposal($paramType) {
                                 , Fta2ArcadiaTransactionModel::FIELDNAME_CODE_ARTICLE_LDC => $codeArticleLdc
                                 , Fta2ArcadiaTransactionModel::FIELDNAME_DATE_ENVOI => date("Y-m-d H:i:s")
                                 , Fta2ArcadiaTransactionModel::FIELDNAME_ID_USER => $idUser
-                    ));
-            Fta2ArcadiaTransactionModel::updateIdArcadiaTransaction($idFta,  $this->keyValuePorposal);
+            ));
+            Fta2ArcadiaTransactionModel::updateIdArcadiaTransaction($idFta, $this->keyValuePorposal);
             break;
     }
 }

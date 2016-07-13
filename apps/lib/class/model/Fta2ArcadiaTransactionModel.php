@@ -204,4 +204,43 @@ class Fta2ArcadiaTransactionModel extends AbstractModel {
         }
     }
 
+    /**
+     * Retour la  requète SQL MAJ la transaction en cours
+     * @param string $paramNameOfBDDTarget
+     * @param string $paramCodeReply
+     * @param string $paramCodeArticleArcadia
+     * @param string $paramIdFta
+     * @param string $paramIdTransaction
+     * @return string
+     */
+    public static function getSQLUpdateFta2ArcadiaTransaction(
+    $paramNameOfBDDTarget, $paramCodeReply, $paramCodeArticleArcadia, $paramIdFta, $paramIdTransaction) {
+        $req = "UPDATE " . $paramNameOfBDDTarget . "." . self::TABLENAME
+                . " SET " . self::FIELDNAME_CODE_REPLY . "='" . $paramCodeReply
+                . "', " . self::FIELDNAME_CODE_ARTICLE_LDC . "='" . $paramCodeArticleArcadia
+                . "', " . self::FIELDNAME_DATE_RETOUR . "='" . date("Y-m-d H:i:s")
+                . "' WHERE " . self::FIELDNAME_ID_FTA . "='" . $paramIdFta
+                . "' AND " . self::KEYNAME . "='" . $paramIdTransaction . "'";
+
+        return $req;
+    }
+
+    /**
+     * On vérifie si la transaction en cours est actif
+     * @param string $paramNameOfBDDTarget
+     * @param string $paramIdTransaction
+     * @return string
+     */
+    public static function getSQLIdUserMailNotifFta2ArcadiaTransaction(
+    $paramNameOfBDDTarget, $paramIdTransaction) {
+        $req = "SELECT DISTINCT " . self::FIELDNAME_ACTIF
+                . ", " . self::FIELDNAME_NOTIFICATION_MAIL
+                . ", " . self::FIELDNAME_ID_USER
+                . " FROM " . $paramNameOfBDDTarget . "." . self::TABLENAME
+                . " WHERE " . self::KEYNAME . "= '" . $paramIdTransaction . "'";
+
+        return $req;
+    }
+    
+    
 }

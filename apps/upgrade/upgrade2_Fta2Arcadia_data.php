@@ -141,10 +141,12 @@ for ($i = 0; $i < count($folder); $i++) {
                                 $sujet = " Le fichier " . $file . " est revenu ";
                                 $adrTo = $value["mail"];
                                 $adrFrom = "Informatique.AGIS@agis-sa.fr";
-                              
+
                                 //Création du mail
                                 $mail = new htmlMimeMail5();
-                                $mail->setSMTPParams($initFile[EnvironmentInit::SMTP_SERVER_NAME]);
+                                $smtp = $initFile[EnvironmentInit::SMTP_SERVER_NAME];
+                                echo 'SMTP = ' . $smtp;
+                                $mail->setSMTPParams();
 
                                 // Set the From and Reply-To headers
                                 $mail->setFrom($adrFrom);
@@ -161,7 +163,7 @@ for ($i = 0; $i < count($folder); $i++) {
                                 $mail->setHeadCharset("UTF-8");
 
                                 // Set the body       
-                                $mail->setHTML(nl2br($corpsmail));   
+                                $mail->setHTML(nl2br($corpsmail));
                                 /**
                                  * L'envoi réel du mail n'est pas réalisé en environnement Codeur
                                  */

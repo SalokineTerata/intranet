@@ -194,7 +194,7 @@ class Arcadia2FtaController {
                                         //Création du mail
 
                                         $smtp = $initFile[EnvironmentInit::SMTP_SERVER_NAME][EnvironmentConf::ENV_CLI];
-
+                                        print_r($initFile . " - " . $smtp);
                                         $result = $this->sendMail($sujet, $corpsmail, $adrTo, $adrFrom, $smtp);
                                         if ($result) {
                                             echo UserInterfaceMessage::FR_ARCADIA_OK_SCRIT_MESSAGE_MAIL;

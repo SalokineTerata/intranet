@@ -24,6 +24,8 @@
  * @author franckwastaken
  */
 class Arcadia2FtaController {
+    
+    const MAIL_FROM =  "Informatique.AGIS@agis-sa.fr";
 
     private $linkFolder;
     private $nameOfBDDTarget;
@@ -189,12 +191,12 @@ class Arcadia2FtaController {
                                     while ($value = mysql_fetch_array($arrayIdUserTransaction)) {
                                         $sujet = " Le fichier " . $file . " est revenu ";
                                         $adrTo = $value[UserModel::FIELDNAME_MAIL];
-                                        $adrFrom = "Informatique.AGIS@agis-sa.fr";
+                                        $adrFrom = self::MAIL_FROM;
 
                                         //Création du mail
 
                                         $smtp = $initFile[EnvironmentInit::SMTP_SERVER_NAME][EnvironmentConf::ENV_CLI];
-                                        print_r($initFile . " - " . $smtp);
+
                                         $result = $this->sendMail($sujet, $corpsmail, $adrTo, $adrFrom, $smtp);
                                         if ($result) {
                                             echo UserInterfaceMessage::FR_ARCADIA_OK_SCRIT_MESSAGE_MAIL;

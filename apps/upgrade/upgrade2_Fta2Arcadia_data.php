@@ -26,15 +26,15 @@ $password_connect = $argv[4];
 
 $linkFolder = $argv[5];
 
-
-$donnee = mysql_pconnect($hostname_connect, $username_connect, $password_connect);
-mysql_select_db($nameOfBDDTarget);
-mysql_query('SET NAMES utf8');
+//
+//$donnee = mysql_pconnect($hostname_connect, $username_connect, $password_connect);
+//mysql_select_db($nameOfBDDTarget);
+//mysql_query('SET NAMES utf8');
 
 /**
  * Class gérant l'actualisation des données Arcadia2Fta
  */
-$arcadia2Fta =  new Arcadia2FtaController($nameOfBDDTarget, $hostname_connect, $username_connect, $password_connect, $linkFolder);
+$arcadia2Fta =  new Arcadia2FtaController($nameOfBDDTarget, $hostname_connect, $username_connect, $password_connect, $linkFolder,$initFile);
 
 $arcadia2Fta->updateBDDFtaFromArcadiaData();
 $debut = date("H:i:s");

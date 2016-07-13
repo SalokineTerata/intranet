@@ -173,7 +173,7 @@ class Arcadia2FtaController {
                                 $sql_fta = FtaModel::getSQLFta2ArcadiaTransactionUpdateFtaTable($nameOfBDDTarget, $idFta, $codeArticleArcadia);
                                 mysql_query($sql_fta);
 
-                                $corpsmail = UserInterfaceMessage::FR_ARCADIA_SCRIT_MESSAGE_OK;
+                                $corpsmail = UserInterfaceMessage::FR_ARCADIA_OK_SCRIT_MESSAGE;
                             }
                             if ($notificationMailTransaction) {
                                 if ($codeReply <> "0") {
@@ -195,7 +195,12 @@ class Arcadia2FtaController {
 
                                         $smtp = $initFile[EnvironmentInit::SMTP_SERVER_NAME][EnvironmentConf::ENV_CLI];
 
-                                        $this->sendMail($sujet, $corpsmail, $adrTo, $adrFrom, $smtp);
+                                        $result = $this->sendMail($sujet, $corpsmail, $adrTo, $adrFrom, $smtp);
+                                        if ($result) {
+                                            echo UserInterfaceMessage::FR_ARCADIA_OK_SCRIT_MESSAGE_MAIL;
+                                        } else {
+                                            echo UserInterfaceMessage::FR_ARCADIA_ERREUR_SCRIT_MESSAGE_MAIL_2 . $idTransaction;
+                                        }
                                     }
                                 } else {
                                     echo UserInterfaceMessage::FR_ARCADIA_ERREUR_SCRIT_MESSAGE_MAIL . $idTransaction;
@@ -210,6 +215,15 @@ class Arcadia2FtaController {
         }
     }
 
+    /**
+     * Envoie de mail sur l'evolution des données de la transactions depuis Arcadia
+     * @param string $paramSujet
+     * @param string $paramCorpMail
+     * @param string $paramArdTto
+     * @param string $paramArdFrom
+     * @param string $paramUrlSmtp
+     * @return string
+     */
     function sendMail($paramSujet, $paramCorpMail, $paramArdTto, $paramArdFrom, $paramUrlSmtp) {
         //Création du mail
         $mail = new htmlMimeMail5();
@@ -236,7 +250,9 @@ class Arcadia2FtaController {
         /**
          * L'envoi réel du mail n'est pas réalisé en environnement Codeur
          */
-        $mail->send(array($paramArdTto), 'smtp');
+        $result = $mail->send(array($paramArdTto), 'smtp');
+
+        return $result;
     }
 
 }

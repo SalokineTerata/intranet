@@ -27,7 +27,9 @@ class UserInterfaceMessage {
     const FR_ARCADIA_ERREUR_SCRIT_MESSAGE_TRANSACTION = " Erreur de la génération du tableau pour la transaction ";
     const FR_ARCADIA_ERREUR_SCRIT_MESSAGE_CODE_REPLY = " Une erreur s'est produite durant l'envoi d'informations vers Arcadia.";
     const FR_ARCADIA_ERREUR_SCRIT_MESSAGE_MAIL= " Erreur de la génération du tableau pour le mail concernant la transaction ";
-    const FR_ARCADIA_SCRIT_MESSAGE_OK= " Tout s'est bien passé pour l'envoi d'informations vers Arcadia. ";
+    const FR_ARCADIA_ERREUR_SCRIT_MESSAGE_MAIL_2= " Erreur de la génération du mail concernant la transaction ";
+    const FR_ARCADIA_OK_SCRIT_MESSAGE= " Tout s'est bien passé pour l'envoi d'informations vers Arcadia. ";
+    const FR_ARCADIA_OK_SCRIT_MESSAGE_MAIL= " L'envoie de mail est un succès. ";
     const FR_ARCADIA_CONSOMME_DATA_MESSAGE = " La transaction demandée à Arcadia s’est déroulée sans incident";
     const FR_ARCADIA_REJET_TASKS_DATA_MESSAGE = " Arcadia refuse d’intégrer le message EAI car la forme du fichier est incorrect ";
     const FR_ARCADIA_REFUSE_DATA_MESSAGE = " L’utilisateur Arcadia a annulé toute de la transaction ";

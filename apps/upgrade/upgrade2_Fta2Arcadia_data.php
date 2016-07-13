@@ -4,6 +4,7 @@
   Inclusions
  * ******* */
 require __DIR__ . '/../inc/php_cli.php';
+$initFile = parse_ini_file('../../config.ini', TRUE);
 /* * ***********
   Début Code PHP
  * *********** */
@@ -139,10 +140,10 @@ for ($i = 0; $i < count($folder); $i++) {
                                 $sujet = " Le fichier " . $file . " est revenu ";
                                 $adrTo = $value["mail"];
                                 $adrFrom = "Informatique.AGIS@agis-sa.fr";
-                                echo $corpsmail;
+                              
                                 //Création du mail
                                 $mail = new htmlMimeMail5();
-                                $mail->setSMTPParams("172.20.3.11");
+                                $mail->setSMTPParams($initFile[EnvironmentInit::SMTP_SERVER_NAME]);
 
                                 // Set the From and Reply-To headers
                                 $mail->setFrom($adrFrom);
@@ -159,10 +160,7 @@ for ($i = 0; $i < count($folder); $i++) {
                                 $mail->setHeadCharset("UTF-8");
 
                                 // Set the body       
-                                $mail->setHTML(nl2br($corpsmail));
-                              
-
-
+                                $mail->setHTML(nl2br($corpsmail));   
                                 /**
                                  * L'envoi réel du mail n'est pas réalisé en environnement Codeur
                                  */

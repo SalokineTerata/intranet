@@ -24,8 +24,8 @@
  * @author franckwastaken
  */
 class Arcadia2FtaController {
-    
-    const MAIL_FROM =  "Informatique.AGIS@agis-sa.fr";
+
+    const MAIL_FROM = "Informatique.AGIS@agis-sa.fr";
 
     private $linkFolder;
     private $nameOfBDDTarget;
@@ -209,6 +209,10 @@ class Arcadia2FtaController {
                                 }
                             }
                         }
+                        /**
+                         * Suppression du fichier
+                         */
+                        unlink($file);
                     } else {
                         echo "[FAILED] id_Trasaction " . $idTransaction . "\n";
                     }

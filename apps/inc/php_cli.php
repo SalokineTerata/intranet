@@ -41,8 +41,8 @@ require __DIR__ . '/../conf/EnvironmentAbstract.php';
 require __DIR__ . '/../conf/EnvironmentInit.php';
 
 // Fta2Arcadia 
-require __DIR__ . '../fta2Arcadia/class/controller/Fta2ArcadiaController.php';
-require __DIR__ . '../fta2Arcadia/class/controller/Arcadia2FtaController.php';
+require __DIR__ . '/../fta2Arcadia/class/controller/Fta2ArcadiaController.php';
+require __DIR__ . '/../fta2Arcadia/class/controller/Arcadia2FtaController.php';
 
 // Fta (Model
 //require __DIR__ . '/../fta/class/AccueilFta.php';

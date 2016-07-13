@@ -99,7 +99,7 @@ for ($i = 0; $i < count($folder); $i++) {
                 $arrayIdArcadiaTransaction = mysql_query(
                         "SELECT DISTINCT actif,notification_mail,id_user "
                         . " FROM " . $nameOfBDDTarget . ".fta2arcadia_transaction"
-                        . " WHERE " . $nameOfBDDTarget . ".id_arcadia_transaction = " . $idTransaction
+                        . " WHERE " . $nameOfBDDTarget . ".id_arcadia_transaction = '" . $idTransaction . "'"
                 );
                 if ($arrayIdArcadiaTransaction) {
                     while ($value = mysql_fetch_array($arrayIdArcadiaTransaction)) {
@@ -116,8 +116,8 @@ for ($i = 0; $i < count($folder); $i++) {
 
                     if ($codeReply == "0") {
                         $sql_fta = "UPDATE " . $nameOfBDDTarget . "." . "fta"
-                                . " SET " . "code_article_ldc" . "=" . $codeArticleArcadia
-                                . " WHERE " . 'id_fta' . "=" . $idFta;
+                                . " SET " . "code_article_ldc" . "='" . $codeArticleArcadia
+                                . "' WHERE " . 'id_fta' . "='" . $idFta . "'";
                         mysql_query($sql_fta);
 
                         $corpsmail = " Tout s'est bien passé pour l'envoi d'informations vers Arcadia.";
@@ -129,7 +129,7 @@ for ($i = 0; $i < count($folder); $i++) {
                         $arrayIdUserTransaction = mysql_query(
                                 "SELECT DISTINCT mail "
                                 . " FROM " . $nameOfBDDTarget . ".salaries "
-                                . " WHERE " . $nameOfBDDTarget . ".id_user = " . $idUserTransaction
+                                . " WHERE " . $nameOfBDDTarget . ".id_user = '" . $idUserTransaction ."'"
                         );
                         if ($arrayIdUserTransaction) {
                             while ($value = mysql_fetch_array($arrayIdUserTransaction)) {

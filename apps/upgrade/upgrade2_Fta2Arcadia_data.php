@@ -3,7 +3,7 @@
 /* * *******
   Inclusions
  * ******* */
-require  __DIR__ .'/../inc/php_cli.php';
+require __DIR__ . '/../inc/php_cli.php';
 /* * ***********
   Début Code PHP
  * *********** */
@@ -140,8 +140,33 @@ for ($i = 0; $i < count($folder); $i++) {
                                 $adrTo = $value["mail"];
                                 $adrFrom = "Informatique.AGIS@agis-sa.fr";
                                 echo $corpsmail;
-                                header("../upgrade_palette.php");
-//                                envoismail($sujet, $corpsmail, $adrTo, $adrFrom);
+                                //Création du mail
+                                $mail = new htmlMimeMail5();
+                                $mail->setSMTPParams("1");
+
+                                // Set the From and Reply-To headers
+                                $mail->setFrom($adrFrom);
+                                $mail->setReturnPath($adrFrom);
+
+                                // Set the Subject
+                                $mail->setSubject($sujet);
+
+                                /**
+                                 * Encodement en utf-8
+                                 */
+                                $mail->setTextCharset("UTF-8");
+                                $mail->setHTMLCharset("UTF-8");
+                                $mail->setHeadCharset("UTF-8");
+
+                                // Set the body       
+                                $mail->setHTML(nl2br($corpsmail));
+                              
+
+
+                                /**
+                                 * L'envoi réel du mail n'est pas réalisé en environnement Codeur
+                                 */
+                                $result = $mail->send(array($adrTo), 'smtp');
                             }
                         } else {
                             echo "Erreur de la génération du tableau pour le mail concernant la transaction " . $idTransaction;

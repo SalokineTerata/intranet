@@ -88,7 +88,7 @@ require __DIR__ . '/../../fta2Arcadia/class/controller/Arcadia2FtaController.php
 
 
 // Modèles des tables en base de données
-//require __DIR__ . '/../lib/class/model/AbstractModelInterface.php';
+require __DIR__ . '/../lib/class/model/AbstractModelInterface.php';
 require __DIR__ . '/../lib/class/model/AbstractModel.php';
 //require __DIR__ . '/../lib/class/model/AccessMaterielServiceModel.php';
 //require __DIR__ . '/../lib/class/model/AnnexeModeEtiquetteModel.php';

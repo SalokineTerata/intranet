@@ -4,7 +4,8 @@
   Inclusions
  * ******* */
 require __DIR__ . '/../inc/php_cli.php';
-$initFile = parse_ini_file('../../config.ini', TRUE);
+$initFile = parse_ini_file('./../../config.ini', TRUE);
+//require_once './../../config.ini';
 /* * ***********
   Début Code PHP
  * *********** */

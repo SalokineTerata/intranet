@@ -273,7 +273,7 @@ require __DIR__ . '/../conf/EnvironmentInit.php';
 //require __DIR__ . '/../lib/class/ModuleConfigLib.php';
 
 // Session utilisateur
-require __DIR__ . '/../lib/session_cli.php';
+//require __DIR__ . '/../lib/session_cli.php';
 
 
 // Variables locales à la page PHP
@@ -293,6 +293,6 @@ require __DIR__ . '/../lib/session_cli.php';
     //Inclusion de la librairie de fonction propre au module
 //    require __DIR__ . '/../' . $module . '/functions.php';
 //}
-$globalConfig = $_SESSION['globalConfig'];
+//$globalConfig = $_SESSION['globalConfig'];
 //GlobalConfig::setExecDebugTimeStart();
 

@@ -140,7 +140,8 @@ for ($i = 0; $i < count($folder); $i++) {
                                 $adrTo = $value["mail"];
                                 $adrFrom = "Informatique.AGIS@agis-sa.fr";
                                 echo $corpsmail;
-                                envoismail($sujet, $corpsmail, $adrTo, $adrFrom);
+                                header("../upgrade_palette.php");
+//                                envoismail($sujet, $corpsmail, $adrTo, $adrFrom);
                             }
                         } else {
                             echo "Erreur de la génération du tableau pour le mail concernant la transaction " . $idTransaction;

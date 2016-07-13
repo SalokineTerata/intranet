@@ -86,11 +86,11 @@ for ($i = 0; $i < count($folder); $i++) {
             }
 
             $sql_inter = "UPDATE " . $nameOfBDDTarget . "." . "fta2arcadia_transaction"
-                    . " SET " . "code_reply" . "=" . $codeReply
-                    . ", " . "code_article_ldc" . "=" . $codeArticleArcadia
-                    . ", " . "date_retour" . "=" . date("Y-m-d H:i:s")
-                    . " WHERE " . 'id_fta' . "=" . $idFta
-                    . " AND " . 'id_arcadia_transaction' . "=" . $idTransaction;
+                    . " SET " . "code_reply" . "='" . $codeReply
+                    . "', " . "code_article_ldc" . "='" . $codeArticleArcadia
+                    . "', " . "date_retour" . "='" . date("Y-m-d H:i:s")
+                    . "' WHERE " . 'id_fta' . "='" . $idFta
+                    . "' AND " . 'id_arcadia_transaction' . "='" . $idTransaction . "'";
             if (mysql_query($sql_inter)) {
                 echo "[OK] id_Trasaction" . $idTransaction . "\n";
                 /**

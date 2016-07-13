@@ -97,9 +97,9 @@ for ($i = 0; $i < count($folder); $i++) {
                  * On vérifie si la transaction en cours est actif
                  */
                 $arrayIdArcadiaTransaction = mysql_query(
-                        "SELECT DISTINCT actif,notification_mail,id_user "
+                        "SELECT DISTINCT actif, notification_mail, id_user "
                         . " FROM " . $nameOfBDDTarget . ".fta2arcadia_transaction"
-                        . " WHERE " . $nameOfBDDTarget . ".id_arcadia_transaction = '" . $idTransaction . "'"
+                        . " WHERE " . "id_arcadia_transaction = '" . $idTransaction . "'"
                 );
                 if ($arrayIdArcadiaTransaction) {
                     while ($value = mysql_fetch_array($arrayIdArcadiaTransaction)) {
@@ -107,6 +107,8 @@ for ($i = 0; $i < count($folder); $i++) {
                         $notificationMailTransaction = $value["notification_mail"];
                         $idUserTransaction = $value["id_user"];
                     }
+                } else {
+                    echo "Erreur de la génaration du tableau pour la transaction " . $idTransaction;
                 }
 
                 /**
@@ -129,13 +131,14 @@ for ($i = 0; $i < count($folder); $i++) {
                         $arrayIdUserTransaction = mysql_query(
                                 "SELECT DISTINCT mail "
                                 . " FROM " . $nameOfBDDTarget . ".salaries "
-                                . " WHERE " . $nameOfBDDTarget . ".id_user = '" . $idUserTransaction ."'"
+                                . " WHERE " . $nameOfBDDTarget . ".id_user = '" . $idUserTransaction . "'"
                         );
                         if ($arrayIdUserTransaction) {
                             while ($value = mysql_fetch_array($arrayIdUserTransaction)) {
                                 $sujet = " Le fichier " . $file . " est revenu ";
                                 $adrTo = $value["mail"];
                                 $adrFrom = "Informatique.AGIS@agis-sa.fr";
+                                echo $corpsmail;
                                 envoismail($sujet, $corpsmail, $adrTo, $adrFrom);
                             }
                         }

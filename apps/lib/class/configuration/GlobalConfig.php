@@ -249,7 +249,7 @@ class GlobalConfig {
 
         if ($isEnvFound == FALSE) {
             echo EnvironmentConf::ENVIRONMENT_DONT_EXIST_MESSAGE;
-            print_r($urlServerNameConfig);
+            print_r($urlServerNameConfig  . " ENV en cours = " . $serverNameReal);
             $envToInit = null;
         }
 

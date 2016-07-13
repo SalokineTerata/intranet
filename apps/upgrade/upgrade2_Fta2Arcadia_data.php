@@ -114,6 +114,7 @@ for ($i = 0; $i < count($folder); $i++) {
                 /**
                  * On actualise le code Article Arcadia de la Fta
                  */
+                echo "Transaction " . $idTransaction . " actif = " . $actifTransaction;
                 if ($actifTransaction) {
 
                     if ($codeReply == "0") {

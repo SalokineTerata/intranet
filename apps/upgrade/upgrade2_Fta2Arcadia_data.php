@@ -3,7 +3,7 @@
 /* * *******
   Inclusions
  * ******* */
-require  __DIR__ .'/../inc/php.php';
+require  __DIR__ .'/../inc/php_cli.php';
 /* * ***********
   Début Code PHP
  * *********** */

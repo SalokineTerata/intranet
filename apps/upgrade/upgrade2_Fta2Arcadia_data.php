@@ -142,7 +142,7 @@ for ($i = 0; $i < count($folder); $i++) {
                                 echo $corpsmail;
                                 //Création du mail
                                 $mail = new htmlMimeMail5();
-                                $mail->setSMTPParams("1");
+                                $mail->setSMTPParams("172.20.3.11");
 
                                 // Set the From and Reply-To headers
                                 $mail->setFrom($adrFrom);

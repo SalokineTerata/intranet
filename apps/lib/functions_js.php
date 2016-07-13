@@ -40,7 +40,6 @@
         else {
         }
 
-
     }
     function desactivationLockFields(ParamIdFta, ParamIdFtaChapitreEncours, ParamSyntheseAction, ParamComeback, ParamIdFtaEtat, ParamAbreviationFtaEtat, ParamIdFtaRole) {
 

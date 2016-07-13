@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Transaction id="70" version="1.1" type="proposal">
+    <Parameters>
+        <IdFirm>40</IdFirm><!-- Agis -->
+        <IdArcadia> </IdArcadia><!-- Code article dans Arcadia -->
+        <IdFta>16013</IdFta><!-- N° de la FTA -->
+    </Parameters>
+    <Tables>
+        <ARTICLE_TRAIT_NEW>
+            <DataToImport>
+                <Recordset id="1" action="create">
+
+                    <!-- Entête -->
+                    <NO_ART key="TRUE"></NO_ART>
+                    <LIB_CCIAL><![CDATA[PLT CORDR DESTK 8X240G DESTK 8X240G]]></LIB_CCIAL><!-- DIN de la FTA -->
+                    <COD_MARQUE>63</COD_MARQUE>
+                    <LIB_PRODUCTION><![CDATA[PLT CORDR DESTK 8X240G DESTK 8X240G]]></LIB_PRODUCTION><!-- DIN de la FTA -->
+
+                    <!-- Info générales -->
+                    <UTILISABLE_SITE>1</UTILISABLE_SITE><!-- Oui -->
+                    <CELLULE>2</CELLULE>
+
+                    <!-- Class./Ident. -->
+                    <COD_GENCOD_ADM>3366760037531</COD_GENCOD_ADM>
+                    <CNUF>336676</CNUF>
+                    <COD_FAMVTE>181</COD_FAMVTE>
+                    <IS_EXPORT>0</IS_EXPORT>
+                    <IS_HALLAL>0</IS_HALLAL><!-- Non --> 
+                    <COD_SOUSFAM>345</COD_SOUSFAM>
+                    <COD_SOCIETE_RESP_PV>40</COD_SOCIETE_RESP_PV><!-- Agis --> 
+
+                    <!-- Qualite -->
+                    <DLC_CCIAL>180</DLC_CCIAL>
+                    <DUREE_VIE>540</DUREE_VIE>
+                    <DTS>360</DTS>
+                    <PROLOGATION_DLC>0</PROLOGATION_DLC><!-- Non --> 
+
+                    <!-- Info Prod 1 -->
+                    <POIDS_MOY_CALCULE>240</POIDS_MOY_CALCULE>
+                    <COD_POIDS_MINI_BARQ>240</COD_POIDS_MINI_BARQ>
+                    <POIDS_MAXI_BARQ>240</POIDS_MAXI_BARQ>
+                    <COD_POID_CST_UVC>1</COD_POID_CST_UVC>
+                    <POIDS_CST_UVC>240</POIDS_CST_UVC>
+
+                    <!-- Info Prod 2 -->
+                    <FRAIS_CONGELE>5</FRAIS_CONGELE>
+                    <COD_TYP_CONDIT_PUB>0</COD_TYP_CONDIT_PUB>
+                    <SITE_PROD_EE>46</SITE_PROD_EE><!-- Tarare -->
+                    <UC>1</UC>
+
+                    <!-- Pds Mini/Maxi -->
+                    <POIDS_MINI>240</POIDS_MINI>
+                    <POIDS_MAXI>240</POIDS_MAXI>
+
+                    <!-- Info Fact -->
+                    <UNITE_FACT>0</UNITE_FACT>
+                    <UNITE_FACT_PRIVE>0</UNITE_FACT_PRIVE>
+
+                    <!-- Export/Compta -->
+                    <COD_NDP>16023230</COD_NDP>
+
+                    <!-- OPTIVENTES -->
+                    <COD_CIRCUIT>3</COD_CIRCUIT>
+
+                    <!-- Fourniture -->
+                    <SOUMIS_ECO_EMBALLAGE>1</SOUMIS_ECO_EMBALLAGE>
+                    <COD_FAMECOEMB>034700</COD_FAMECOEMB>
+                    <SITE_REF_ECO_EMB>46</SITE_REF_ECO_EMB>
+
+                    <!-- Regate -->
+                    <LIBELLE_TARIF><![CDATA[N PLT CORIANDRE DESTK 8 X 240G]]></LIBELLE_TARIF>
+                    <COD_FAM_BUDGET>250</COD_FAM_BUDGET>
+                    <COD_GAM_FAM_BUDGET>0</COD_GAM_FAM_BUDGET>
+                    <COD_GAM_COOP>200</COD_GAM_COOP>
+                    <COD_FESTIF>0</COD_FESTIF>
+                    <COD_FAM_DECL_CA_CLIENT>46</COD_FAM_DECL_CA_CLIENT>
+
+                </Recordset>
+            </DataToImport>
+        </ARTICLE_TRAIT_NEW>
+        <ESP_PRODUITS_FINIS>
+            <DataToImport>
+                <Recordset id="1" action="create">
+
+                    <!-- Entête -->
+                    <COD_PRODUIT key="TRUE"> </COD_PRODUIT>
+                    <NO_VAR>0</NO_VAR><!-- Numéro variante -->
+
+                    <!-- RegateAC Achat -->
+                    <ACREG_SITE>46</ACREG_SITE><!-- Tarare -->
+                    <ACREG_LIEU>1</ACREG_LIEU>
+                    <ACREG_NOQUAI>301</ACREG_NOQUAI>
+                    <ACREG_NOMETHODE>619</ACREG_NOMETHODE>
+
+                    <!-- RegateAC Stock -->
+                    <ACREG_SITESECONDAIRE>46</ACREG_SITESECONDAIRE><!-- Tarare -->
+                    <ACREG_LIEUSECONDAIRE>1</ACREG_LIEUSECONDAIRE>
+                    <SITE_VALO>46</SITE_VALO><!-- Tarare -->
+                    <ACREG_TYPE_PROD_EMPLACEMENT>50</ACREG_TYPE_PROD_EMPLACEMENT>
+                </Recordset>
+            </DataToImport>
+        </ESP_PRODUITS_FINIS>
+        <ART_SITE>
+            <DataToImport>
+                <Recordset id="1" action="create">
+                    <NO_ART key="TRUE"></NO_ART>
+                    <COD_SITE_GRP key="TRUE">46</COD_SITE_GRP><!--Tarare -->
+                    <NIVEAU key="TRUE">1</NIVEAU><!-- Primaire -->
+                    <DATE_DEBUT_EFFET>12/07/2016</DATE_DEBUT_EFFET>
+                    <DATE_FIN_EFFET>31/12/2029</DATE_FIN_EFFET>
+                    <COD_POSTE_CC>2</COD_POSTE_CC>
+                    <COD_ATELIER>1</COD_ATELIER>
+                    <SIT_AFFECT_RES>46</SIT_AFFECT_RES>
+                </Recordset>
+            </DataToImport>
+        </ART_SITE>
+        <DUN14>
+            <DataToImport>
+                <Recordset id="1" action="create">
+                    <NO_ART key="TRUE"></NO_ART>
+                    <COD_PCB key="TRUE">8</COD_PCB>
+                    <DUN14>13366760037538</DUN14>
+                    <TYPE_CARTON>96</TYPE_CARTON>
+                    <IS_STANDARD>1</IS_STANDARD>
+                    <IS_SPECIFIQUE>0</IS_SPECIFIQUE>
+                    <DUN_PALETTE>23366760037535</DUN_PALETTE>
+                </Recordset>
+            </DataToImport>
+        </DUN14>
+    </Tables>
+
+</Transaction>
+

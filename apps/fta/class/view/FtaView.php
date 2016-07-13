@@ -34,24 +34,10 @@ class FtaView extends AbstractView {
      * du champs Duree_de_vie
      */
     const JAVASCRIPT_CALLBACK_DUREE_DE_VIE = "disabledDureeDeVie";
-
-    /**
-     * Fonction JavaScript appelée pour actualiser la visibilité
-     * du champs Poids_ELEM
-     */
     const CALLBACK_LINK_TO_FTA_VALUE = "Retour vers la Fta";
-
-    /**
-     * Fonction JavaScript appelée pour actualiser la visibilité
-     * du champs Poids_ELEM
-     */
     const LINK_TO_FTA_XML_FILE = "Chargement des données vers Arcadia";
-
-    /**
-     * Fonction JavaScript appelée pour actualiser la visibilité
-     * du champs Poids_ELEM
-     */
     const LINK_TO_FTA_XML_FILE_AGAIN = "Actualisation des données vers Arcadia";
+    const LINK_TO_FTA_XML_FILE_CANCEL = "Désactiver la transaction en cours vers Arcadia";
 
     /**
      * Model de donnée d'une FTA
@@ -227,34 +213,120 @@ class FtaView extends AbstractView {
 
     /**
      * Stade 1 
-     * On affiche l'option de préchargement des données vers arcadia qu dans le cas d'une création d'un article
-     * (manque d'information sur la mise à jour)
+     * On affiche l'option de préchargement des données vers arcadia 
      * @return string
      */
-    function getHtmlLinkGenerateXmlFile($paramCheckArcadiaData) {
+    function getHtmlLinkGenerateXmlFile() {
         $lienFta2Arcadia = null;
+        /**
+         * Par défaut on ne peut pas valider le chapitre
+         */
+        $this->setDataValidationSuccessfulToTrue();
         if ($this->getIsEditable()) {
-            if (!$paramCheckArcadiaData) {
+
+            /**
+             * On vérifie si le fichier à déja été envoyé
+             */
+            $keyValue = Fta2ArcadiaTransactionModel::checkIdArcadiaTransaction($this->getModel()->getKeyValue());
+            if ($keyValue) {
+                $checkArcadiaData = "ok";
+                $Fta2ArcadiaTransactionModel = new Fta2ArcadiaTransactionModel($keyValue);
+                $isEditable = $Fta2ArcadiaTransactionModel->isEditableNotificationMail();
+                $codeReply = $Fta2ArcadiaTransactionModel->getDataField(Fta2ArcadiaTransactionModel::FIELDNAME_CODE_REPLY)->getFieldValue();
+                /**
+                 * On peut valider le chapitre si la trasaction en cours est actif,
+                 * tant que le fichier de retour n'est pas était récupéré NULL
+                 * et que le fichier de retour ne soit pas en Erreur (1,2,3,4)
+                 */
+                if ($codeReply <> Fta2ArcadiaTransactionModel::CONSOMME) {
+                    $this->setDataValidationSuccessfulToFalse();
+                }
+                $message = $this->getMessageArcadiaInfo($codeReply);
+                $Fta2ArcadiaTransactionModel->setIsEditable($isEditable);
+                $notificationMail = $Fta2ArcadiaTransactionModel->getHtmlDataField(Fta2ArcadiaTransactionModel::FIELDNAME_NOTIFICATION_MAIL);
+            }
+
+            if (!$checkArcadiaData) {
                 $lienFta2Arcadia = $this->generateXmlFile();
+                /**
+                 * On peut valider le chapitre si il n'y a pas de transaction
+                 */
             } else {
-                $lienFta2Arcadia = $this->getMessageSendDataToArcadia();
+                $lienFta2Arcadia = $this->getMessageSendDataToArcadia($Fta2ArcadiaTransactionModel);
             }
         }
-        return $lienFta2Arcadia;
+        return $lienFta2Arcadia . $message . $notificationMail;
     }
 
     /**
      * Affiche une message de confirmation que les données ont bien été envoyé
+     * @param Fta2ArcadiaTransactionModel $paramFta2ArcadiaTransactionModel
+     * @return string
      */
-    function getMessageSendDataToArcadia() {
-        return '<td class="contenu"><center>' . UserInterfaceMessage::FR_ARCADIA_SEND_DATA_MESSAGE . '</center></td>' . $this->getMessageSendDataToArcadiaAgain();
+    function getMessageSendDataToArcadia(Fta2ArcadiaTransactionModel $paramFta2ArcadiaTransactionModel) {
+        /**
+         * Utilisateur ayant envoyer la donnée
+         */
+        $idUser = $paramFta2ArcadiaTransactionModel->getDataField(Fta2ArcadiaTransactionModel::FIELDNAME_ID_USER)->getFieldValue();
+        $userModel = new UserModel($idUser);
+        $prenomNom = $userModel->getPrenomNom();
+        /**
+         * Date d'envoie du fichier
+         */
+        $dateEnvoitmp = $paramFta2ArcadiaTransactionModel->getDataField(Fta2ArcadiaTransactionModel::FIELDNAME_DATE_ENVOI)->getFieldValue();
+        $dateEnvoi = FtaController::changementDuFormatDeDateFR($dateEnvoitmp);
+        $message = '<td class="contenu"><center>' . UserInterfaceMessage::FR_ARCADIA_SEND_DATA_MESSAGE
+                . ' par ' . $prenomNom
+                . ' le ' . $dateEnvoi
+                . ' </center></td>' . $this->getMessageSendDataToArcadiaAgainAndCancel();
+        return $message;
     }
 
-    function getMessageSendDataToArcadiaAgain() {
-        return'<td class="contenu"><center>'
-                . '<a href=generate_xml.php?'
+    /**
+     * Lien de renvoi du fichier XML et de désactivation
+     * @return string
+     */
+    function getMessageSendDataToArcadiaAgainAndCancel() {
+        return '<td class="contenu"><center>'
+                . '<a href=#'
+                . ' onclick=confirmationNouvelleEnvoiArcadia(' . $this->getModel()->getKeyValue()
+                . ') >' . self::LINK_TO_FTA_XML_FILE_AGAIN . '</a>'
+                . '  --  <a href=generate_xml.php?'
                 . 'id_fta=' . $this->getModel()->getKeyValue()
-                . '>' . self::LINK_TO_FTA_XML_FILE_AGAIN . '</a></center></td>';
+                . '&desactivation=' . Fta2ArcadiaTransactionModel::OUI
+                . '>' . self::LINK_TO_FTA_XML_FILE_CANCEL . '</a>'
+                . '</center></td>';
+    }
+
+    /**
+     * Retourne le message sur le traitement d'envoie et de récupération entre Arcadia et Fta
+     * @param string $paramCodeReply
+     * @return string
+     */
+    function getMessageArcadiaInfo($paramCodeReply) {
+        $start = "<tr><td class=contenu><center>Informations Arcadia</center></td>";
+        switch ($paramCodeReply) {
+            case Fta2ArcadiaTransactionModel::CONSOMME:
+                $message = $start . "<td " . TableauFicheView::HTML_CELL_BGCOLOR_ARCADIA_OK . " ><center>" . UserInterfaceMessage::FR_ARCADIA_CONSOMME_DATA_MESSAGE . "</center></td></tr>";
+
+                break;
+            case Fta2ArcadiaTransactionModel::REJET_TASKS:
+                $message = $start . "<td " . TableauFicheView::HTML_CELL_BGCOLOR_ARCADIA_ERREUR . " ><center>" . UserInterfaceMessage::FR_ARCADIA_REJET_TASKS_DATA_MESSAGE . "</center></td></tr>";
+
+                break;
+            case Fta2ArcadiaTransactionModel::REFUSE:
+                $message = $start . "<td " . TableauFicheView::HTML_CELL_BGCOLOR_ARCADIA_ERREUR . " ><center>" . UserInterfaceMessage::FR_ARCADIA_REFUSE_DATA_MESSAGE . "</center></td></tr>";
+
+                break;
+            case Fta2ArcadiaTransactionModel::CLOTURE_AUTO:
+                $message = $start . "<td " . TableauFicheView::HTML_CELL_BGCOLOR_ARCADIA_ERREUR . " ><center>" . UserInterfaceMessage::FR_ARCADIA_CLOTURE_AUTO_DATA_MESSAGE . "</center></td></tr>";
+            default :
+                $message = $start . "<td " . TableauFicheView::HTML_CELL_BGCOLOR_ARCADIA_ATTENTE. " ><center>" . UserInterfaceMessage::FR_ARCADIA_PROCESSING_DATA_MESSAGE . "</center></td></tr>";
+
+                break;
+        }
+
+        return $message;
     }
 
     /**

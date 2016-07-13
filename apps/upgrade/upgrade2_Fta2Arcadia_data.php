@@ -96,7 +96,8 @@ for ($i = 0; $i < count($folder); $i++) {
                 /**
                  * On vérifie si la transaction en cours est actif
                  */
-                $arrayIdArcadiaTransaction = mysql_query("SELECT DISTINCT actif,notification_mail "
+                $arrayIdArcadiaTransaction = mysql_query(
+                        "SELECT DISTINCT actif,notification_mail,id_user "
                         . " FROM " . $nameOfBDDTarget . ".fta2arcadia_transaction"
                         . " WHERE " . $nameOfBDDTarget . ".id_arcadia_transaction = " . $idTransaction
                 );
@@ -104,6 +105,7 @@ for ($i = 0; $i < count($folder); $i++) {
                     while ($value = mysql_fetch_array($arrayIdArcadiaTransaction)) {
                         $actifTransaction = $value["actif"];
                         $notificationMailTransaction = $value["notification_mail"];
+                        $idUserTransaction = $value["id_user"];
                     }
                 }
 
@@ -111,14 +113,33 @@ for ($i = 0; $i < count($folder); $i++) {
                  * On actualise le code Article Arcadia de la Fta
                  */
                 if ($actifTransaction) {
+
                     if ($codeReply == "0") {
                         $sql_fta = "UPDATE " . $nameOfBDDTarget . "." . "fta"
                                 . " SET " . "code_article_ldc" . "=" . $codeArticleArcadia
                                 . " WHERE " . 'id_fta' . "=" . $idFta;
                         mysql_query($sql_fta);
+
+                        $corpsmail = " Tout s'est bien passé pour l'envoi d'informations vers Arcadia.";
                     }
-                    envoi_mail($corpsmail, $adrFrom, $adrTo, $sujet);
-                    
+                    if ($notificationMailTransaction) {
+                        if ($codeReply <> "0") {
+                            $corpsmail = " Une erreur s'est produite durant l'envoi d'informations vers Arcadia.";
+                        }
+                        $arrayIdUserTransaction = mysql_query(
+                                "SELECT DISTINCT mail "
+                                . " FROM " . $nameOfBDDTarget . ".salaries "
+                                . " WHERE " . $nameOfBDDTarget . ".id_user = " . $idUserTransaction
+                        );
+                        if ($arrayIdUserTransaction) {
+                            while ($value = mysql_fetch_array($arrayIdUserTransaction)) {
+                                $sujet = " Le fichier " . $file . " est revenu ";
+                                $adrTo = $value["mail"];
+                                $adrFrom = "Informatique.AGIS@agis-sa.fr";
+                                envoismail($sujet, $corpsmail, $adrTo, $adrFrom);
+                            }
+                        }
+                    }
                 }
             } else {
                 echo "[FAILED] id_Trasaction" . $idTransaction . "\n";

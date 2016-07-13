@@ -22,6 +22,18 @@
     }
 
     /**
+     * Pop up confirmant l'envie de l'utilisateur d'actualisé les données Arcadia
+     * @param {type} ParamIdFta
+     * @returns {undefined}
+     */
+    function confirmationNouvelleEnvoiArcadia(ParamIdFta) {
+        if (confirm("Êtes-vous certain de vouloir actualiser les données de la transaction en cours ?"))
+        {
+            location.href = "generate_xml.php?id_fta=" + ParamIdFta;
+        }
+    }
+
+    /**
      * Rechargement de la page courante avec une nouvelle valeur
      * @returns {undefined}
      */

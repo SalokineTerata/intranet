@@ -2001,6 +2001,15 @@ class Chapitre {
         $ftaView = new FtaView($ftaModel);
         $ftaView->setIsEditable($isEditable);
         $ftaView->setFtaChapitreModelById(self::ID_CHAPITRE_IDENTITE);
+        $ftaView2 = new FtaView($ftaModel);
+        if(self::$checkArcadiaData){
+            $isEditable = self::NOT_EDITABLE;
+        }  else {
+            $isEditable = self::EDITABLE;
+        }
+        
+        $ftaView2->setIsEditable($isEditable);
+        $ftaView2->setFtaChapitreModelById(self::ID_CHAPITRE_IDENTITE);
 
         $bloc.='<tr class=titre_principal><td class>Codification</td></tr>';
 
@@ -2012,7 +2021,8 @@ class Chapitre {
         $bloc.=$ftaView->getHtmlDesignationInterneAgis();
 
         //Code Article LDC, code Article arcadia
-        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_CODE_ARTICLE_LDC);
+        ;
+        $bloc.=$ftaView2->getHtmlDataField(FtaModel::FIELDNAME_CODE_ARTICLE_LDC);
 
         //Famille Eco Emballage Arcadia
         $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_ID_ARCADIA_FAMILLE_ECO_EMBALLAGES);
@@ -2031,7 +2041,7 @@ class Chapitre {
         $bloc.=$ftaView->getHtmlEANPalette();
 
         //Fta2Arcadia
-        $bloc.=$ftaView->getHtmlLinkGenerateXmlFile(self::$checkArcadiaData);
+        $bloc.=$ftaView->getHtmlLinkGenerateXmlFile();
 
         if ($ftaView->isDataValidationSuccessful() == "0") {
             self::setDataValidationSuccessfulToTrue();

@@ -74,7 +74,7 @@ if ($globalConfig->getAuthenticatedUser()) {
 } else {
     $titre = UserInterfaceMessage::FR_WARNING_DECONNECTION_TITLE;
     $message = UserInterfaceMessage::FR_WARNING_DECONNECTION;
-    Lib::showMessage($titre, $message,$redirection);
+    Lib::showMessage($titre, $message, $redirection);
 }
 
 $fta_consultation = Acl::getValueAccesRights('fta_consultation');
@@ -108,7 +108,7 @@ if ($idFta) {
     /**
      * Récupérations des paramètres
      */
-    $checkArcadiaData = Lib::getParameterFromRequest('checkArcadiaData');
+    $checkArcadiaData = Fta2ArcadiaTransactionModel::isIdArcadiaTransactionActif($idFta);
     $id_fta_chapitre_encours = Lib::getParameterFromRequest('id_fta_chapitre_encours', '1');
     $synthese_action = Lib::isDefined('synthese_action');
     $comeback = Lib::isDefined('comeback');
@@ -194,7 +194,7 @@ if ($idFta) {
 
     $affichgeDesChapitres = TRUE;
 
-    Navigation::initNavigation($idFta, $id_fta_chapitre_encours, $synthese_action, $comeback, $idFtaEtat, $abreviationFtaEtat, $idFtaRole, $affichgeDesChapitres,FALSE, FALSE);
+    Navigation::initNavigation($idFta, $id_fta_chapitre_encours, $synthese_action, $comeback, $idFtaEtat, $abreviationFtaEtat, $idFtaRole, $affichgeDesChapitres, FALSE, FALSE);
 
     $navigue = Navigation::getHtmlNavigationBar();
 

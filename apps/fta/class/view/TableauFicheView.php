@@ -30,6 +30,9 @@ class TableauFicheView {
     const HTML_CELL_BGCOLOR_MODIFY = "";
     const HTML_CELL_BGCOLOR_VALIDATE = " bgcolor=#AFFF5A";
     const HTML_CELL_BGCOLOR_DEFAULT = " bgcolor=#A5A5CE";
+    const HTML_CELL_BGCOLOR_ARCADIA_ATTENTE = " bgcolor=#99FFFF";
+    const HTML_CELL_BGCOLOR_ARCADIA_ERREUR = " bgcolor=#99FFFF";
+    const HTML_CELL_BGCOLOR_ARCADIA_OK = " bgcolor=#99FF99";
     const HTML_TEXT_COLOR_DIN = " color=#808080";
     const HTML_IMAGE_ECHEANCE_EXPIRED = "../lib/images/exclamation.png";
     CONST HTML_CLASS_RED = " class=couleur_rouge";
@@ -113,6 +116,8 @@ class TableauFicheView {
          * Attribution des couleurs de fonds suivant l'état de la FTA
          */
         $bgcolor = self::getHtmlCellBgColor($abreviation_fta_etat);
+        $bgcolorArcadia = self::getHtmlCellBgColorArcadia($paramIdFta, $bgcolor);
+
         $tauxRound = FtaSuiviProjetModel::getPourcentageFtaTauxValidation($ftaModel);
 
         /**
@@ -215,7 +220,7 @@ class TableauFicheView {
         $tableau_fiches.="<td $bgcolor $largeur_html_C1><a title=$createur_link />" . $din . "</a></td>"
                 . "<td $bgcolor width=3%>" . $id_dossier_fta . "v" . $id_version_dossier_fta . "</td>";
 
-        $tableau_fiches.="<td $bgcolor width=\"1%\"> <b><font size=\"2\" color=\"#0000FF\">" . $code_article_ldc . "</font></b></td>";
+        $tableau_fiches.="<td $bgcolorArcadia width=\"1%\"> <b><font size=\"2\" color=\"#0000FF\">" . $code_article_ldc . "</font></b></td>";
         if ($abreviation_fta_etat == FtaEtatModel::ETAT_ABREVIATION_VALUE_MODIFICATION) {
             $tableau_fiches.='<td ' . $bgcolor . $largeur_html_C3 . ' align=center>' . $dateEcheanceFta . '</td>'; //échance de validation
         } else {
@@ -278,6 +283,11 @@ class TableauFicheView {
         return $lienHistorique;
     }
 
+    /**
+     * Détermine le font de couleur suivant l'état de la Fta
+     * @param string $paramAbreviationFtaEtat
+     * @return string
+     */
     static public function getHtmlCellBgColor($paramAbreviationFtaEtat) {
 
         $bgcolor = self::HTML_CELL_BGCOLOR_DEFAULT;
@@ -293,6 +303,42 @@ class TableauFicheView {
                 break;
         }
         return $bgcolor;
+    }
+
+    /**
+     * Détermine le font de couleur suivant le code de retour de la transaction vers Arcadia
+     * @param string $paramAbreviationFtaEtat
+     * @return string
+     */
+    static public function getHtmlCellBgColorArcadia($paramIdFta, $paramBgColor) {
+        $bgcolorArcadia = $paramBgColor;
+
+        $keyValue = Fta2ArcadiaTransactionModel::checkIdArcadiaTransaction($paramIdFta);
+        if ($keyValue) {
+            $Fta2ArcadiaTransactionModel = new Fta2ArcadiaTransactionModel($keyValue);
+            $codeReply = $Fta2ArcadiaTransactionModel->getDataField(Fta2ArcadiaTransactionModel::FIELDNAME_CODE_REPLY)->getFieldValue();
+            switch ($codeReply) {
+                case Fta2ArcadiaTransactionModel::CONSOMME:
+                    $bgcolorArcadia = TableauFicheView::HTML_CELL_BGCOLOR_ARCADIA_OK;
+
+                    break;
+                case Fta2ArcadiaTransactionModel::REJET_TASKS:
+                    $bgcolorArcadia = TableauFicheView::HTML_CELL_BGCOLOR_ARCADIA_ERREUR;
+
+                    break;
+                case Fta2ArcadiaTransactionModel::REFUSE:
+                    $bgcolorArcadia = TableauFicheView::HTML_CELL_BGCOLOR_ARCADIA_ERREUR;
+
+                    break;
+                case Fta2ArcadiaTransactionModel::CLOTURE_AUTO:
+                    $bgcolorArcadia = TableauFicheView::HTML_CELL_BGCOLOR_ARCADIA_ERREUR;
+                default :
+                    $bgcolorArcadia = TableauFicheView::HTML_CELL_BGCOLOR_ARCADIA_ATTENTE;
+
+                    break;
+            }
+        }
+        return $bgcolorArcadia;
     }
 
     static private function getHtmlBgColorIconHeader($paramAbreviationFtaEtat, $paramIdFta) {

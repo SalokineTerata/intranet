@@ -1,7 +1,7 @@
 <?php
 
 /*
- * Copyright (C) 2016 tp4300001
+ * Copyright (C) 2016 franckwastaken
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -19,12 +19,21 @@
 
 require_once '../inc/main.php';
 $paramIdFta = Lib::getParameterFromRequest(FtaModel::KEYNAME);
+$paramDesactivation = Lib::getParameterFromRequest("desactivation");
 
-$ftaModel = new FtaModel($paramIdFta);
-$ftaModel->setDataFtaTableToCompare();
-$fta2ArcadiaContoller = new Fta2ArcadiaController($ftaModel, Fta2ArcadiaTransactionModel::XML);
+switch ($paramDesactivation) {
+    case Fta2ArcadiaTransactionModel::OUI:
+        Fta2ArcadiaTransactionModel::cancelIdArcadiaTransaction($paramIdFta);
+        break;
 
-header("Location: modification_fiche.php?id_fta=" . $paramIdFta . "&id_fta_chapitre_encours=33&synthese_action=encours&id_fta_etat=1&abreviation_fta_etat=I&id_fta_role=5&checkArcadiaData=ok");
+    default:
+        $ftaModel = new FtaModel($paramIdFta);
+        $ftaModel->setDataFtaTableToCompare();
+        $fta2ArcadiaContoller = new Fta2ArcadiaController($ftaModel, Fta2ArcadiaTransactionModel::XML);
+        break;
+}
+
+header("Location: modification_fiche.php?id_fta=" . $paramIdFta . "&id_fta_chapitre_encours=33&synthese_action=encours&id_fta_etat=1&abreviation_fta_etat=I&id_fta_role=5");
 //// Instance de la class DomDocumen
 //$xml = new DOMDocument();
 //

@@ -24,6 +24,11 @@
  */
 class UserInterfaceMessage {
 
+    const FR_ARCADIA_CONSOMME_DATA_MESSAGE = " La transaction demandée à Arcadia s’est déroulée sans incident";
+    const FR_ARCADIA_REJET_TASKS_DATA_MESSAGE = " Arcadia refuse d’intégrer le message EAI car la forme du fichier est incorrect ";
+    const FR_ARCADIA_REFUSE_DATA_MESSAGE = " L’utilisateur Arcadia a annulé toute de la transaction ";
+    const FR_ARCADIA_CLOTURE_AUTO_DATA_MESSAGE = " Arcadia a clôturé la transaction qui n’était pas finie d’être consommée ";
+    const FR_ARCADIA_PROCESSING_DATA_MESSAGE = " La transaction est en cours de traitement ";
     const FR_ARCADIA_SEND_DATA_MESSAGE = " Les données ont bien été envoyées vers Arcadia ";
     const FR_ARCADIA_XML_NOT_GENERATE = " Fichier XML pour cette Fta non généré ";
     const FR_CALCUL_DUREE_DE_VIE_EN_ATTENTE = "Durée de vie production non saisie. Calcul en attente. ";

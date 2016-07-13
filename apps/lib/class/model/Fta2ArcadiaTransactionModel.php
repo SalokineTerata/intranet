@@ -37,6 +37,10 @@ class Fta2ArcadiaTransactionModel extends AbstractModel {
     const FIELDNAME_NOTIFICATION_MAIL = 'notification_mail';
     const OUI = '1';
     const NON = '0';
+    const CONSOMME = '0';
+    const REJET_TASKS = '1';
+    const REFUSE = '2';
+    const CLOTURE_AUTO = '4';
     const XML = 'XML';
     const SUMMARY_PAGE = 'summary_page';
 
@@ -79,6 +83,23 @@ class Fta2ArcadiaTransactionModel extends AbstractModel {
     }
 
     /**
+     * On vérifie si l'utilisateur connecter est le propriétaire de la transaction en cours.
+     * @return boolean
+     */
+    function isEditableNotificationMail() {
+        $globalConf = new GlobalConfig();
+        $idUser = $globalConf->getAuthenticatedUser()->getKeyValue();
+        $idUserRegister = $this->getDataField(self::FIELDNAME_ID_USER)->getFieldValue();
+
+        if ($idUser == $idUserRegister) {
+            $isEditable = Chapitre::EDITABLE;
+        } else {
+            $isEditable = Chapitre::NOT_EDITABLE;
+        }
+        return $isEditable;
+    }
+
+    /**
      * On vérifie si pour l'id Fta en cours un id Transaction existe
      * @param int $paramIdFta
      * @return int
@@ -88,6 +109,7 @@ class Fta2ArcadiaTransactionModel extends AbstractModel {
                         "SELECT " . self::KEYNAME
                         . " FROM " . self::TABLENAME
                         . " WHERE " . self::FIELDNAME_ID_FTA . "=" . $paramIdFta
+                        . " AND " . self::FIELDNAME_ACTIF . "=" . self::OUI
                         . " ORDER BY " . self::KEYNAME . " DESC "
         );
 
@@ -102,12 +124,69 @@ class Fta2ArcadiaTransactionModel extends AbstractModel {
     }
 
     /**
+     * On vérifie si il y a une transaction actif et on retour l'information
+     * @param int $paramIdFta
+     * @return string
+     */
+    public static function isIdArcadiaTransactionActif($paramIdFta) {
+        $checkArcadiaData = "";
+        $keyValue = Fta2ArcadiaTransactionModel::checkIdArcadiaTransaction($paramIdFta);
+        if ($keyValue) {
+            $fta2ArcadiaTransactionModel = new Fta2ArcadiaTransactionModel($keyValue);
+            $codeReply = $fta2ArcadiaTransactionModel->getDataField(self::FIELDNAME_CODE_REPLY)->getFieldValue();
+            if ($codeReply == NULL or $codeReply == self::CONSOMME) {
+                $checkArcadiaData = "ok";
+            }
+        }
+        return $checkArcadiaData;
+    }
+
+    /**
+     * On retourne le code reply de la transaction en cours
+     * @param int $paramIdFta
+     * @return boolean
+     */
+    public static function getCodeReplyByIdFta($paramIdFta) {
+        $key = self::checkIdArcadiaTransaction($paramIdFta);
+        if ($key) {
+            $fta2ArcadiaTransactionModel = new Fta2ArcadiaTransactionModel($key);
+            $codeReply = $fta2ArcadiaTransactionModel->getDataField(self::FIELDNAME_CODE_REPLY)->getFieldValue();
+        } else {
+            $codeReply = FALSE;
+        }
+        return $codeReply;
+    }
+
+    /**
+     * On désactive pour l'id Fta en cours son id Transaction
+     * @param int $paramIdFta
+     */
+    public static function cancelIdArcadiaTransaction($paramIdFta) {
+        $arrayCheck = DatabaseOperation::convertSqlStatementWithoutKeyToArrayComplete(
+                        "SELECT " . self::KEYNAME
+                        . " FROM " . self::TABLENAME
+                        . " WHERE " . self::FIELDNAME_ID_FTA . "=" . $paramIdFta
+                        . " AND " . self::FIELDNAME_ACTIF . "=" . self::OUI
+                        . " ORDER BY " . self::KEYNAME . " DESC "
+        );
+
+        if ($arrayCheck) {
+            $key = $arrayCheck["0"];
+            DatabaseOperation::execute(
+                    "UPDATE " . self::TABLENAME
+                    . " SET " . self::FIELDNAME_ACTIF . "=" . self::NON
+                    . " WHERE " . self::KEYNAME . "=" . $key
+            );
+        }
+    }
+
+    /**
      * Désactivation des anciennes transactions
      * @param int  $paramIdFta
      * @param int $paramIdArcadiaTransaction
      */
     public static function updateIdArcadiaTransaction($paramIdFta, $paramIdArcadiaTransaction) {
-        $arrayCheck = DatabaseOperation::convertSqlStatementWithoutKeyToArrayComplete(
+        $arrayCheck = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
                         "SELECT " . self::KEYNAME
                         . " FROM " . self::TABLENAME
                         . " WHERE " . self::FIELDNAME_ID_FTA . "=" . $paramIdFta

@@ -144,7 +144,8 @@ for ($i = 0; $i < count($folder); $i++) {
 
                                 //Création du mail
                                 $mail = new htmlMimeMail5();
-                                $smtp = $initFile[EnvironmentInit::SMTP_SERVER_NAME];
+                                print_r($initFile);
+                                $smtp = $initFile["0"][EnvironmentInit::SMTP_SERVER_NAME];
                                 echo 'SMTP = ' . $smtp;
                                 $mail->setSMTPParams();
 

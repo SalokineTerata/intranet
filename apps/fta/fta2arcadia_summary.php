@@ -121,6 +121,8 @@ $navigue = Navigation::getHtmlNavigationBar();
 //Raccoucis de classification
 $bloc.="<td align=center>Identité</td>" . $ftaView->getHtmlClassificationRaccourcisView();
 
+//Commentaire sur la Fta
+$bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_COMMENTAIRE);
 
 //Données lié à arcadia 
 $bloc.= $ftaView->getHtmlArcadiaDataNotEditable();

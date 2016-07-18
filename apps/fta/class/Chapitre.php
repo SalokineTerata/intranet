@@ -2002,12 +2002,12 @@ class Chapitre {
         $ftaView->setIsEditable($isEditable);
         $ftaView->setFtaChapitreModelById(self::ID_CHAPITRE_IDENTITE);
         $ftaView2 = new FtaView($ftaModel);
-        if(self::$checkArcadiaData){
+        if (self::$checkArcadiaData) {
             $isEditable = self::NOT_EDITABLE;
-        }  else {
+        } else {
             $isEditable = self::EDITABLE;
         }
-        
+
         $ftaView2->setIsEditable($isEditable);
         $ftaView2->setFtaChapitreModelById(self::ID_CHAPITRE_IDENTITE);
 
@@ -2021,15 +2021,7 @@ class Chapitre {
         $bloc.=$ftaView->getHtmlDesignationInterneAgis();
 
         //Code Article LDC, code Article arcadia
-        ;
         $bloc.=$ftaView2->getHtmlDataField(FtaModel::FIELDNAME_CODE_ARTICLE_LDC);
-
-        //Famille Eco Emballage Arcadia
-        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_ID_ARCADIA_FAMILLE_ECO_EMBALLAGES);
-
-        //Cellule Article Arcadia
-        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_ID_ARCADIA_CELLULE_ARTICLE);
-
 
         //Gencod EAN Article
         $bloc.=$ftaView->getHtmlEANArticle();
@@ -2040,6 +2032,13 @@ class Chapitre {
         //Gencod EAN Palette
         $bloc.=$ftaView->getHtmlEANPalette();
 
+        $bloc.='<tr class=titre_principal><td class>Arcadia</td></tr>';
+
+        //Famille Eco Emballage Arcadia
+        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_ID_ARCADIA_FAMILLE_ECO_EMBALLAGES);
+
+        //Cellule Article Arcadia
+        $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_ID_ARCADIA_CELLULE_ARTICLE);
         //Fta2Arcadia
         $bloc.=$ftaView->getHtmlLinkGenerateXmlFile();
 

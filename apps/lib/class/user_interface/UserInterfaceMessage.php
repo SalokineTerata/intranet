@@ -144,6 +144,7 @@ class UserInterfaceMessage {
      * Toujours mettre un | devant les message de type Règle de validations
      */
     const FR_WARNING_VALIDATION_RULES_MANDATORY14 = " | Cette donnée doit contenir quatorze caractères ";
+    const FR_WARNING_VALIDATION_RULES_LESS255 = " | Cette donnée a dépassé deux cent cinquante cinq caractères ";
     const FR_WARNING_VALIDATION_RULES_LESS35 = " | Cette donnée a dépassé trente-cinq caractères ";
     const FR_WARNING_VALIDATION_RULES_LESS5 = " | Cette donnée a dépassé cinq caractères ";
     const FR_WARNING_VALIDATION_RULES_LESS8 = " | Cette donnée a dépassé huit caractères ";

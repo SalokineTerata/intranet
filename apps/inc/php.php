@@ -80,6 +80,7 @@ require_once('../lib/class/rules_validation/DataNotEmptyRulesValidation.php');
 require_once('../lib/class/rules_validation/DataNotRealEmptyRulesValidation.php');
 require_once('../lib/class/rules_validation/DataNotSmallRulesValidation.php');
 require_once('../lib/class/rules_validation/DataNotSpecialRulesValidation.php');
+require_once('../lib/class/rules_validation/Less255CaractereRulesValidation.php');
 require_once('../lib/class/rules_validation/Less35CaractereRulesValidation.php');
 require_once('../lib/class/rules_validation/Less5CaractereRulesValidation.php');
 require_once('../lib/class/rules_validation/Less8CaractereRulesValidation.php');

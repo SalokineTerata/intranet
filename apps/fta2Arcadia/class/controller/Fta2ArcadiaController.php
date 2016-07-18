@@ -101,6 +101,7 @@ class Fta2ArcadiaController {
     private $XMLarcadiaParametre;
     private $XMLarcadiaEanArticle;
     private $XMLarcadiaDLC;
+    private $XMLarcadiaCommentairePrive;
     private $XMLarcadiaDureeDeVie;
     private $XMLrecordsetBalise;
     private $XMLrecordsetBaliseEspProduitFini;
@@ -356,6 +357,7 @@ function transformAll() {
     $this->transformCodeDouane();
     $this->transformLogoEmballage();
     $this->transformDLC();
+    $this->transformCommentairePrive();
     $this->transformDureeDeVie();
     $this->transformDTS();
     $this->transformPoidsMaxiAndMini();
@@ -640,6 +642,20 @@ function transformDLC() {
     if ($checkDiff or $this->getActionProposal() == self::CREATE) {
         $dlcValue = $this->getFtaModel()->getDataField(FtaModel::FIELDNAME_DUREE_DE_VIE)->getFieldValue();
         $this->setXMLArcadiaDLC($dlcValue);
+    }
+}
+
+/**
+ * On vérifie si le commentaire sur la Fta a été modifié
+ * En effet cette données concerne le commentaire privée
+ */
+function transformCommentairePrive() {
+    $checkDiff = $this->getFtaModel()->getDataField(FtaModel::FIELDNAME_COMMENTAIRE)->isFieldDiff();
+    if ($checkDiff or $this->getActionProposal() == self::CREATE) {
+        $commentairePriveValue = $this->getFtaModel()->getDataField(FtaModel::FIELDNAME_COMMENTAIRE)->getFieldValue();
+        if ($commentairePriveValue) {
+            $this->setXMLArcadiaCommentairePrive($commentairePriveValue);
+        }
     }
 }
 
@@ -1700,6 +1716,15 @@ function setXMLArcadiaDLC($arcadiaDLC) {
             . "<DLC_CCIAL>" . $arcadiaDLC . "</DLC_CCIAL>" . self::SAUT_DE_LIGNE;
 }
 
+function getXMLArcadiaCommentairePrive() {
+    return $this->XMLarcadiaCommentairePrive;
+}
+
+function setXMLArcadiaCommentairePrive($XMLarcadiaCommentairePrive) {
+    $this->XMLarcadiaCommentairePrive = self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION
+            . "<COM_PRIVE>" . $XMLarcadiaCommentairePrive . "</COM_PRIVE>" . self::SAUT_DE_LIGNE;
+}
+
 function setXMLArcadiaDureeDeVie($arcadiaDureeDeVie) {
     $this->XMLarcadiaDureeDeVie = self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION
             . "<DUREE_VIE>" . $arcadiaDureeDeVie . "</DUREE_VIE>" . self::SAUT_DE_LIGNE;
@@ -2318,6 +2343,7 @@ function checkCommentClassIdent() {
             or $this->getXMLArcadiaCodSousFam()
             or $this->getXMLArcadiaCodGeneriqueFm()
             or $this->getXMLArcadiaCodSociete()
+            or $this->getXMLArcadiaCommentairePrive()
     ) {
         $this->setXMLCommentClassIdent();
     }
@@ -2578,6 +2604,7 @@ function xmlArticleRef() {
             . $this->getXMLArcadiaCodSousFam()
             . $this->getXMLArcadiaCodGeneriqueFm()
             . $this->getXMLArcadiaCodSociete()
+            . $this->getXMLArcadiaCommentairePrive()
             // <!-- Qualite -->
             . $this->getXMLCommentQualite()
             . $this->getXMLArcadiaDLC()

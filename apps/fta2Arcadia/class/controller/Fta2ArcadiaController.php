@@ -1722,7 +1722,7 @@ function getXMLArcadiaCommentairePrive() {
 
 function setXMLArcadiaCommentairePrive($XMLarcadiaCommentairePrive) {
     $this->XMLarcadiaCommentairePrive = self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION
-            . "<COM_PRIVE>" . $XMLarcadiaCommentairePrive . "</COM_PRIVE>" . self::SAUT_DE_LIGNE;
+            . "<COM_PRIVE>" . self::CDATA_OPEN . $XMLarcadiaCommentairePrive . self::CDATA_CLOSE . "</COM_PRIVE>" . self::SAUT_DE_LIGNE;
 }
 
 function setXMLArcadiaDureeDeVie($arcadiaDureeDeVie) {

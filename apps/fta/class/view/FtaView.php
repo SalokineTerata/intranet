@@ -320,8 +320,9 @@ class FtaView extends AbstractView {
                 break;
             case Fta2ArcadiaTransactionModel::CLOTURE_AUTO:
                 $message = $start . "<td " . TableauFicheView::HTML_CELL_BGCOLOR_ARCADIA_ERREUR . " ><center>" . UserInterfaceMessage::FR_ARCADIA_CLOTURE_AUTO_DATA_MESSAGE . "</center></td></tr>";
+                break;
             default :
-                $message = $start . "<td " . TableauFicheView::HTML_CELL_BGCOLOR_ARCADIA_ATTENTE. " ><center>" . UserInterfaceMessage::FR_ARCADIA_PROCESSING_DATA_MESSAGE . "</center></td></tr>";
+                $message = $start . "<td " . TableauFicheView::HTML_CELL_BGCOLOR_ARCADIA_ATTENTE . " ><center>" . UserInterfaceMessage::FR_ARCADIA_PROCESSING_DATA_MESSAGE . "</center></td></tr>";
 
                 break;
         }

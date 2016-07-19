@@ -31,7 +31,7 @@ class TableauFicheView {
     const HTML_CELL_BGCOLOR_VALIDATE = " bgcolor=#AFFF5A";
     const HTML_CELL_BGCOLOR_DEFAULT = " bgcolor=#A5A5CE";
     const HTML_CELL_BGCOLOR_ARCADIA_ATTENTE = " bgcolor=#99FFFF";
-    const HTML_CELL_BGCOLOR_ARCADIA_ERREUR = " bgcolor=#99FFFF";
+    const HTML_CELL_BGCOLOR_ARCADIA_ERREUR = " bgcolor=#FF9999";
     const HTML_CELL_BGCOLOR_ARCADIA_OK = " bgcolor=#99FF99";
     const HTML_TEXT_COLOR_DIN = " color=#808080";
     const HTML_IMAGE_ECHEANCE_EXPIRED = "../lib/images/exclamation.png";

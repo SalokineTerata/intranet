@@ -606,7 +606,7 @@ function print_page_begin($disable_full_page = FALSE, $menu_file = NULL, $conf =
     echo "<!DOCTYPE html><html>";
 
     echo "<head>";
-    
+
     /**
      * Vidage des caches
      */
@@ -631,13 +631,20 @@ function print_page_begin($disable_full_page = FALSE, $menu_file = NULL, $conf =
         .contenu {background-color: " . $conf->getConf()->getCssContentValue() . ";}
         </style>";
     }
+    /**
+     * Icone intranet
+     */
+    echo "<link rel=icon type=image/png href=../lib/images/icone_intranet2.png />";
     echo "<link type=\"text/css\" rel=\"stylesheet\" href=\"../plugins/dhtmlgoodies_calendar/dhtmlgoodies_calendar/dhtmlgoodies_calendar.css?random=20051112\" media=\"screen\"></link>";
     echo "</head>";
 
 
     echo "<body $printable leftmargin=0 topmargin=0 marginwidth=0 marginheight=0 onload=chargement();>";
+    /**
+     * Moteur de recherche WIKI(Redfish)
+     */
     echo "<link rel=search type=application/opensearchdescription+xml title=Intranet Wiki href=../lib/wiki-agis.xml>";
-
+    
     echo "<div class=display_none id=chargement style=width:100%;height:75px;color:red;font-weight:bold;font-size:14px;background:white;>
            <img src= ../lib/images/ajax_loader.gif> Chargement ...
           </div>";

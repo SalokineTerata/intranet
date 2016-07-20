@@ -182,6 +182,7 @@ class Fta2ArcadiaController {
     private $XMLCommentRegateAcStock;
     private $actionProposal;
     private $arcadiaExportResult;
+    private $arcadiaProduitFiniCheck;
     private $arcadiaDun14Check;
     private $arcadiaDun14RecordValue;
     private $arcadiaArtSiteCheck;
@@ -558,6 +559,10 @@ function transformSiteDePreparationReception() {
         $this->transformFileDePrepAndMethodeDePrep();
 
         /**
+         * Si le site d'expedition change on affiche la table Produit Fini
+         */
+        $this->setArcadiaProduitFiniCheckTrue();
+        /**
          * On vérifie sie le site d'expediction est PLB 
          * si oui 
          */
@@ -581,6 +586,11 @@ function transformSiteDePreparationReception() {
             $XMLarcadiaAcregTypeProdEmplacement = GeoArcadiaModel::CODE_TYPE_PRODUIT_PLATEFORME;
         }
         $this->setXMLArcadiaAcregTypeProdEmplacement($XMLarcadiaAcregTypeProdEmplacement);
+    } else {
+        /**
+         * Si le site d'expedition ne change  pas on n'affiche pas la table Produit Fini
+         */
+        $this->setArcadiaProduitFiniCheckFalse();
     }
 }
 
@@ -1892,6 +1902,22 @@ function setArcadiaDun14CheckTrue() {
     $this->setArcadiaDun14Check(self::TRUE);
 }
 
+function getArcadiaProduitFiniCheck() {
+    return $this->arcadiaProduitFiniCheck;
+}
+
+function setArcadiaProduitFiniCheck($arcadiaProduitFiniCheck) {
+    $this->arcadiaProduitFiniCheck = $arcadiaProduitFiniCheck;
+}
+
+function setArcadiaProduitFiniCheckFalse() {
+    $this->setArcadiaProduitFiniCheck(self::FALSE);
+}
+
+function setArcadiaProduitFiniCheckTrue() {
+    $this->setArcadiaProduitFiniCheck(self::TRUE);
+}
+
 function getArcadiaDun14Create() {
     return $this->arcadiaDun14Create;
 }
@@ -2547,27 +2573,27 @@ function xmlProduitFinis() {
     /**
      * On l'active que pour un créate
      */
-//    if ($this->getActionProposal() == self::CREATE) {
-    $xmlText = self::ESP_PRODUITS_FINIS_START
-            . self::DATA_IMPORT_START
-            . $this->getXMLRecordsetBaliseEspProduitFini()
-            . $this->getXMLCommentEntete()
-            . $this->getXMLArcadiaCodProduit()
-            . $this->getXMLCommentRegateAcAchat()
-            . $this->getXMLArcadiaAcregSite()
-            . $this->getXMLArcadiaAcregLieu()
-            . $this->getXMLArcadiaAcregNoQuai()
-            . $this->getXMLArcadiaAcregNoMethode()
-            . $this->getXMLCommentRegateAcStock()
-            . $this->getXMLArcadiaAcregSiteSecondaire()
-            . $this->getXMLArcadiaAcregLieuSecondaire()
-            . $this->getXMLarcadiaSiteValo()
-            . $this->getXMLArcadiaAcregTypeProdEmplacement()
-            . $this->getXMLArcadiaAcregQuantiteEmplacement()
-            . self::RECORDSET_END
-            . self::DATA_IMPORT_END
-            . self::ESP_PRODUITS_FINIS_END;
-//    }
+    if ($this->getArcadiaProduitFiniCheck()) {
+        $xmlText = self::ESP_PRODUITS_FINIS_START
+                . self::DATA_IMPORT_START
+                . $this->getXMLRecordsetBaliseEspProduitFini()
+                . $this->getXMLCommentEntete()
+                . $this->getXMLArcadiaCodProduit()
+                . $this->getXMLCommentRegateAcAchat()
+                . $this->getXMLArcadiaAcregSite()
+                . $this->getXMLArcadiaAcregLieu()
+                . $this->getXMLArcadiaAcregNoQuai()
+                . $this->getXMLArcadiaAcregNoMethode()
+                . $this->getXMLCommentRegateAcStock()
+                . $this->getXMLArcadiaAcregSiteSecondaire()
+                . $this->getXMLArcadiaAcregLieuSecondaire()
+                . $this->getXMLarcadiaSiteValo()
+                . $this->getXMLArcadiaAcregTypeProdEmplacement()
+                . $this->getXMLArcadiaAcregQuantiteEmplacement()
+                . self::RECORDSET_END
+                . self::DATA_IMPORT_END
+                . self::ESP_PRODUITS_FINIS_END;
+    }
     return $xmlText;
 }
 

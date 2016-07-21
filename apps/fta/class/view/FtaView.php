@@ -35,9 +35,9 @@ class FtaView extends AbstractView {
      */
     const JAVASCRIPT_CALLBACK_DUREE_DE_VIE = "disabledDureeDeVie";
     const CALLBACK_LINK_TO_FTA_VALUE = "Retour vers la Fta";
-    const LINK_TO_FTA_XML_FILE = "Chargement des données vers Arcadia";
-    const LINK_TO_FTA_XML_FILE_AGAIN = "Actualisation des données vers Arcadia";
-    const LINK_TO_FTA_XML_FILE_CANCEL = "Désactiver la transaction en cours vers Arcadia";
+    const LINK_TO_FTA_XML_FILE = "Envoie de données vers Arcadia";
+    const LINK_TO_FTA_XML_FILE_AGAIN = "Réenvoyer les données vers Arcadia";
+    const LINK_TO_FTA_XML_FILE_CANCEL = "Annuler la transaction en cours vers Arcadia";
 
     /**
      * Model de donnée d'une FTA
@@ -932,15 +932,26 @@ class FtaView extends AbstractView {
             $classificationFta2Model = new ClassificationFta2Model($idClassificationFta2);
             $categorieProduitOptiventesValue = $classificationFta2Model->getDataField(ClassificationFta2Model::FIELDNAME_CATEGORIE_PRODUIT_OPTIVENTES)->getFieldValue();
             $this->getModel()->getDataField(FtaModel::FIELDNAME_ID_ARCADIA_CATEGEORIE_PRODUIT_OPTIVENTES)->setFieldValue($categorieProduitOptiventesValue);
-//                $this->getModel()->updateCategorieProduitOptivente($categorieProduitOptiventesValue);
+
+            /**
+             * On vérrifie si l'article est soumis à un eco emballage
+             * suivant la classification
+             */
+            $idRayon = ClassificationFta2Model::getIdClassificationTypeByTypeNameAndIdClassificationFta2($idClassificationFta2, ClassificationFta2Model::FIELDNAME_ID_RAYON);
+            if ($idRayon == ClassificationFta2Model::ID_CLASSIFICATION_LIBRE_SERVICE) {
+                $this->getModel()->getDataField(FtaModel::FIELDNAME_ID_ARCADIA_SOUMIS_ECO_EMBALLAGE)->setFieldValue(Fta2ArcadiaController::OUI);
+            } else {
+                $this->getModel()->getDataField(FtaModel::FIELDNAME_ID_ARCADIA_SOUMIS_ECO_EMBALLAGE)->setFieldValue(Fta2ArcadiaController::NON);
+            }
             $this->getModel()->saveToDatabase();
 
             /**
              * Affichage Html
              */
             $htmlCodeProduitOptiv = $this->getHtmlDataField(FtaModel::FIELDNAME_ID_ARCADIA_CATEGEORIE_PRODUIT_OPTIVENTES);
+            $htmlSoumisEcoEmball = $this->getHtmlDataField(FtaModel::FIELDNAME_ID_ARCADIA_SOUMIS_ECO_EMBALLAGE);
             $htmlReturn = '<tr class=titre_principal><td class>Classification ARCADIA</td></tr>';
-            $htmlReturn .= $htmlCodeProduitOptiv;
+            $htmlReturn .= $htmlCodeProduitOptiv . $htmlSoumisEcoEmball;
         }
         return $htmlReturn;
     }
@@ -1674,7 +1685,11 @@ class FtaView extends AbstractView {
             $htmlEmballageDuColis->setLien(FtaConditionnementModel::getAddLinkBeforeConditionnement($paramIdFta, $paramChapitre, AnnexeEmballageGroupeTypeModel::EMBALLAGE_DU_COLIS, $paramSyntheseAction, $paramIdFtaEtat, $paramAbreviationEtat, $paramIdFtaRole));
             $htmlEmballageDuColis->setLienSuppression(FtaConditionnementModel::getDeleteLinkConditionnement($paramIdFta, $paramChapitre, $arrayIdFtaCondtionnement, $paramSyntheseAction, $paramIdFtaEtat, $paramAbreviationEtat, $paramIdFtaRole));
             $htmlEmballageDuColis->setTableLabel($ftaConditionnmentModel->getTableConditionnementLabelDuColis());
-
+            /**
+             * Vérrouille tous les champs du tableau emballage colis 
+             * quand une données est renseigné
+             */
+            $htmlEmballageDuColis->setContentLocked(TRUE);
             $return .= $htmlEmballageDuColis->getHtmlResult();
             if (count($FtaConditionnement) > "1") {
                 $return.= "<tr class=contenu><td bgcolor=#FFAA55 align=\"center\" valign=\"middle\">";

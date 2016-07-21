@@ -32,11 +32,12 @@ class DataFieldToHtmlListSelect extends HtmlListSelect {
                 , $this->getDataField()->getKeyValue()
                 , $this->getDataField()->getFieldName()
         );
-    
+        /**
+         * Détermine si le datafield encours doit être non éditiable
+         */
         $this->setContentLocked($paramDataField->getFieldsToLock());
-
     }
-        
+
 }
 
 ?>

@@ -32,6 +32,11 @@ class DataFieldToHtmlListBoolean extends HtmlListBoolean {
                 , $this->getDataField()->getKeyValue()
                 , $this->getDataField()->getFieldName()
         );
+
+        /**
+         * Détermine si le datafield encours doit être non éditiable
+         */
+        $this->setContentLocked($paramDataField->getFieldsToLock());
     }
 
     public function getHtmlViewedContent() {

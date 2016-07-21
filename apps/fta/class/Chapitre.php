@@ -2348,6 +2348,7 @@ class Chapitre {
 
         $bloc.='<tr class=titre_principal><td class>Informations Générales de l\'UVC</td></tr>';
 
+        //Poids total de l'emballage de l'UVC
         $bloc.=$ftaView->getHtmlPoidsEmballageUVC();
 
         //Poids Net UVC (en g):

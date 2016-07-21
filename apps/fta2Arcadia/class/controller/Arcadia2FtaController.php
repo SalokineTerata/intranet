@@ -27,12 +27,32 @@ class Arcadia2FtaController {
 
     const MAIL_FROM = "Informatique.AGIS@agis-sa.fr";
 
+    /**
+     * Lien du dossier contenant le fichier XML.OK
+     * @var string 
+     */
+    private $linkFolderOK;
+
+    /**
+     * Lien du dossier contenant le fichier XML
+     * @var string 
+     */
     private $linkFolder;
+
+    /**
+     * Nom de la BDD
+     * @var string 
+     */
     private $nameOfBDDTarget;
+
+    /**
+     * Tableau de la config.ini
+     * @var array 
+     */
     private $initFile;
 
     public function __construct($paramNameOfBDDTarget, $paramHostNameConnect, $paramUserNameConnect
-    , $paramPasswordConnect, $paramLinkFolder, $paramInitFile) {
+    , $paramPasswordConnect, $paramLinkFolder, $paramInitFile, $paramLinkFolderOk) {
         /**
          * Connection à la BDD
          */
@@ -43,8 +63,17 @@ class Arcadia2FtaController {
          * Initialisation
          */
         $this->setLinkFolder($paramLinkFolder);
+        $this->setLinkFolderOK($paramLinkFolderOk);
         $this->setNameOfBDDTarget($paramNameOfBDDTarget);
         $this->setInitFile($paramInitFile);
+    }
+
+    function getLinkFolderOK() {
+        return $this->linkFolderOK;
+    }
+
+    function setLinkFolderOK($linkFolderOK) {
+        $this->linkFolderOK = $linkFolderOK;
     }
 
     function getInitFile() {
@@ -75,6 +104,7 @@ class Arcadia2FtaController {
      * Actualisation des données Fta à partir du fichier de retour d'Arcadia
      */
     function updateBDDFtaFromArcadiaData() {
+        $linkFolderOK = $this->getLinkFolderOK();
         $linkFolder = $this->getLinkFolder();
         $nameOfBDDTarget = $this->getNameOfBDDTarget();
         $initFile = $this->getInitFile();
@@ -210,9 +240,10 @@ class Arcadia2FtaController {
                             }
                         }
                         /**
-                         * Suppression du fichier
+                         * Suppression des fichiers
                          */
                         unlink($linkFolder . $file);
+                        unlink($linkFolderOK . $file . ".ok");
                     } else {
                         echo "[FAILED] id_Trasaction " . $idTransaction . "\n";
                     }

@@ -725,7 +725,7 @@ class AccueilFta {
                 $bgcolor = 'bgcolor=#AFFF5A';
 
                 break;
-        }         
+        }
         if (substr($URL, -2) == 'pp') {
             $URL = $URL . 's/fta/index.php?';
         }
@@ -879,10 +879,7 @@ class AccueilFta {
                  */
                 $createur_link = '\'Géré par ' . $createurPrenom . ' ' . $createurNom . '\'';
 
-                /**
-                 * Détermine le fond de la cellule suivant le code de retour de la transaction vers Fta
-                 */
-                 $bgcolorArcadia = TableauFicheView::getHtmlCellBgColorArcadia($idFta, $bgcolor);
+
 
                 /**
                  * Lien vers l'historique de la Fta
@@ -932,6 +929,11 @@ class AccueilFta {
 //                            $bgcolor = 'bgcolor=#009dd1 ';
                     }
                 }
+
+                /**
+                 * Détermine le fond de la cellule suivant le code de retour de la transaction vers Fta
+                 */
+                $bgcolorArcadia = TableauFicheView::getHtmlCellBgColorArcadia($idFta, $bgcolor);
 
                 $HTML_date_echeance_fta = FtaProcessusDelaiModel::getArraytFtaDelaiAvancement($idFta);
 //$return['status']

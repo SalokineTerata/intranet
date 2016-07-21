@@ -42,6 +42,11 @@ class DataFieldToHtmlInputText extends HtmlInputText {
          * Taille spécifique du champs si renseignée.
          */
         $this->setSpecificFieldSize();
+
+        /**
+         * Détermine si le datafield encours doit être non éditiable
+         */
+        $this->setContentLocked($paramDataField->getFieldsToLock());
     }
 
     /**

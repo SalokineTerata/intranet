@@ -115,7 +115,8 @@ class DatabaseDataField extends DatabaseDescriptionField {
 
   
     /**
-     * Initialisation de la vérification du verrouillage du champs
+     * Initialisation de la vérification du verrouillage du champs 
+     * (Fonctionalitée Code Primaire/Secondaire)
      * @param FtaModel $paramFtaModel
      * @param boolean $paramIsEditable
      */

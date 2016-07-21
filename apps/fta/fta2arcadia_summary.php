@@ -158,6 +158,14 @@ $bloc.=$ftaView->getHtmlEANColis();
 //Gencod EAN Palette
 $bloc.=$ftaView->getHtmlEANPalette();
 
+/**
+ * Methode de préarationet type d'acquisition
+ */
+$methodeDePreparationArcadiaValue= $ftaModel->getModelAnnexeUniteFacturation()->getDataField(AnnexeUniteFacturationModel::FIELDNAME_ID_ARCADIA_METHODE_DE_PREPARATION)->getFieldValue();
+$typePreparationAcquisitionArcadiaValue= $ftaModel->getModelAnnexeUniteFacturation()->getDataField(AnnexeUniteFacturationModel::FIELDNAME_ID_ARCADIA_TYPE_PREPA_ACQUISITION)->getFieldValue();
+
+$bloc.="<tr class=contenu><td align=left>Methode de Preparation</td><td>".$methodeDePreparationArcadiaValue . "</td></tr>";
+$bloc.="<tr class=contenu><td align=left>Type prepa Acquisition</td><td>".$typePreparationAcquisitionArcadiaValue . "</td></tr>";
 
 /**
  * Exigence client
@@ -203,6 +211,9 @@ $bloc.=$ftaView->checkEmballageColisValide();
 //Nombre total de Carton par palette:
 
 $bloc.=$ftaView->getHtmlColisTotalUVC();
+
+//Poids total de l'emballage de l'UVC
+$bloc.=$ftaView->getHtmlPoidsEmballageUVC();
 /**
  * Codification
  */

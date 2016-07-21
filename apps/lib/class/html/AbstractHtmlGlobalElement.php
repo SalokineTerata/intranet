@@ -252,6 +252,16 @@ abstract class AbstractHtmlGlobalElement {
         $this->htmlRender = self::HTML_RENDER_TO_TABLE_LABEL;
     }
 
+    /**
+     * Quels sont les éléments du sous formulaire qui sont vérrouillés ?
+     *   - Si l'attribut $isEditable du sous-formulaire est FALSE,
+     *     Cet attribut n'apporte aucune modification car tous les champs du
+     *     sous-formulaire sont déjà vérouillés.
+     *   - Si l'attribut $isEditable du sous-formulaire est TRUE,
+     *     Cet attribut de type tableau contient la liste des champs qu'il faut
+     *     tout de même vérouiller.
+     * @return string
+     */
     function getContentLocked() {
         return $this->ContentLocked;
     }

@@ -123,6 +123,8 @@ class Fta2ArcadiaController {
     private $XMLarcadiaPoidsMaxiBarq;
     private $XMLarcadiaPoidsCstUvc;
     private $XMLarcadiaUniteDeFacturation;
+    private $XMLarcadiaMethodeDePreparation;
+    private $XMLarcadiaTypePreparationAcquisition;
     private $XMLarcadiaCelluleArticle;
     private $XMLarcadiaFamilleEcoEmballages;
     private $XMLarcadiaCNUF;
@@ -167,17 +169,17 @@ class Fta2ArcadiaController {
     private $XMLarcadiaArtSiteCodAtelier;
     private $XMLarcadiaArtSiteSiteAffectRes;
     private $XMLCommentEntete;
-    private $XMLCommentInfoGenerale;
-    private $XMLCommentClassIdent;
+    private $XMLCommentAdmPole;
+    private $XMLCommentContGestion;
     private $XMLCommentQualite;
-    private $XMLCommentInfoProd1;
-    private $XMLCommentInfoProd2;
+    private $XMLCommentAdv;
+    private $XMLCommentPreparCde;
     private $XMLCommentPdsMiniMaxi;
     private $XMLCommentInfoFact;
     private $XMLCommentExportCompta;
-    private $XMLCommentOptiventes;
+    private $XMLCommentTelevente;
     private $XMLCommentFourniture;
-    private $XMLCommentRegate;
+    private $XMLCommentInfoTech;
     private $XMLCommentRegateAcAchat;
     private $XMLCommentRegateAcStock;
     private $actionProposal;
@@ -376,6 +378,7 @@ function transformAll() {
     $this->transformOptiventes();
     $this->transformSiteDePreparationReception();
     $this->transformCodPCB();
+    $this->transformAcregQuantieEmplacement();
     $this->transformDun14();
     $this->transformTypeCarton();
     $this->transformDunPalette();
@@ -719,16 +722,12 @@ function transformCodeDouane() {
 function transformLogoEmballage() {
     $checkDiff = $this->getFtaModel()->getDataField(FtaModel::FIELDNAME_ID_FTA_CLASSIFICATION2)->isFieldDiff();
     if (($checkDiff and $this->IsArcadiaPublicDataCheck()) or $this->getActionProposal() == self::CREATE) {
-        $idClassificationFta2 = $this->getFtaModel()->getDataField(FtaModel::FIELDNAME_ID_FTA_CLASSIFICATION2)->getFieldValue();
-        $idRayon = ClassificationFta2Model::getIdClassificationTypeByTypeNameAndIdClassificationFta2($idClassificationFta2, ClassificationFta2Model::FIELDNAME_ID_RAYON);
-        if ($idRayon == ClassificationFta2Model::ID_CLASSIFICATION_LIBRE_SERVICE) {
-            $logoEmballageValue = self::OUI;
+        $soumiEcoEmballageValue = $this->getFtaModel()->getDataField(FtaModel::FIELDNAME_ID_ARCADIA_SOUMIS_ECO_EMBALLAGE)->getFieldValue();
+        if ($soumiEcoEmballageValue) {
             $geoModel = $this->getFtaModel()->getModelSiteProduction();
             $this->setXMLArcadiaSiteRefEcoEmb($geoModel->getDataField(geomodel::FIELDNAME_ID_SITE_GROUPE)->getFieldValue());
-        } else {
-            $logoEmballageValue = self::NON;
         }
-        $this->setXMLArcadiaLogoEcoEmballage($logoEmballageValue);
+        $this->setXMLArcadiaLogoEcoEmballage($soumiEcoEmballageValue);
     }
 }
 
@@ -739,7 +738,11 @@ function transformUniteFacturation() {
     $checkDiff = $this->getFtaModel()->getDataField(FtaModel::FIELDNAME_UNITE_FACTURATION)->isFieldDiff();
     if (($checkDiff and $this->IsArcadiaPublicDataCheck()) or $this->getActionProposal() == self::CREATE) {
         $uniteFacturationArcadiaValue = $this->getFtaModel()->getModelAnnexeUniteFacturation()->getDataField(AnnexeUniteFacturationModel::FIELDNAME_ID_ARCADIA_UNITE_FACTURATION)->getFieldValue();
+        $methodeDePreparationArcadiaValue = $this->getFtaModel()->getModelAnnexeUniteFacturation()->getDataField(AnnexeUniteFacturationModel::FIELDNAME_ID_ARCADIA_METHODE_DE_PREPARATION)->getFieldValue();
+        $typePreparationAcquisitionArcadiaValue = $this->getFtaModel()->getModelAnnexeUniteFacturation()->getDataField(AnnexeUniteFacturationModel::FIELDNAME_ID_ARCADIA_TYPE_PREPA_ACQUISITION)->getFieldValue();
         $this->setXMLArcadiaUniteDeFacturation($uniteFacturationArcadiaValue);
+        $this->setXMLArcadiaMethodeDePreparation($methodeDePreparationArcadiaValue);
+        $this->setXMLArcadiaTypePreparationAcquisition($typePreparationAcquisitionArcadiaValue);
     }
 }
 
@@ -1641,6 +1644,24 @@ function setXMLArcadiaUniteDeFacturation($paramArcadiaUniteDeFacturation) {
             . "<UNITE_FACT_PRIVE>" . $paramArcadiaUniteDeFacturation . "</UNITE_FACT_PRIVE>" . self::SAUT_DE_LIGNE;
 }
 
+function getXMLArcadiaMethodeDePreparation() {
+    return $this->XMLarcadiaMethodeDePreparation;
+}
+
+function getXMLArcadiaTypePreparationAcquisition() {
+    return $this->XMLarcadiaTypePreparationAcquisition;
+}
+
+function setXMLArcadiaMethodeDePreparation($XMLarcadiaMethodeDePreparation) {
+    $this->XMLarcadiaMethodeDePreparation = self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION
+            . "<REG_METH_PREPA>" . $XMLarcadiaMethodeDePreparation . "</REG_METH_PREPA>" . self::SAUT_DE_LIGNE;
+}
+
+function setXMLArcadiaTypePreparationAcquisition($XMLarcadiaTypePreparationAcquisition) {
+    $this->XMLarcadiaTypePreparationAcquisition = self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION
+            . "<REG_TYPREPA_ACQUISITION>" . $XMLarcadiaTypePreparationAcquisition . "</REG_TYPREPA_ACQUISITION>" . self::SAUT_DE_LIGNE;
+}
+
 function getXMLArcadiaCelluleArticle() {
     return $this->XMLarcadiaCelluleArticle;
 }
@@ -2150,24 +2171,24 @@ function getXMLCommentEntete() {
     return $this->XMLCommentEntete;
 }
 
-function getXMLCommentInfoGenerale() {
-    return $this->XMLCommentInfoGenerale;
+function getXMLCommentAdmPole() {
+    return $this->XMLCommentAdmPole;
 }
 
-function getXMLCommentClassIdent() {
-    return $this->XMLCommentClassIdent;
+function getXMLCommentContGestion() {
+    return $this->XMLCommentContGestion;
 }
 
 function getXMLCommentQualite() {
     return $this->XMLCommentQualite;
 }
 
-function getXMLCommentInfoProd1() {
-    return $this->XMLCommentInfoProd1;
+function getXMLCommentAdv() {
+    return $this->XMLCommentAdv;
 }
 
-function getXMLCommentInfoProd2() {
-    return $this->XMLCommentInfoProd2;
+function getXMLCommentPreparCde() {
+    return $this->XMLCommentPreparCde;
 }
 
 function getXMLCommentPdsMiniMaxi() {
@@ -2182,16 +2203,16 @@ function getXMLCommentExportCompta() {
     return $this->XMLCommentExportCompta;
 }
 
-function getXMLCommentOptiventes() {
-    return $this->XMLCommentOptiventes;
+function getXMLCommentTelevente() {
+    return $this->XMLCommentTelevente;
 }
 
 function getXMLCommentFourniture() {
     return $this->XMLCommentFourniture;
 }
 
-function getXMLCommentRegate() {
-    return $this->XMLCommentRegate;
+function getXMLCommentInfoTech() {
+    return $this->XMLCommentInfoTech;
 }
 
 function setXMLCommentEntete() {
@@ -2200,16 +2221,16 @@ function setXMLCommentEntete() {
             . "<!-- Entête -->" . self::SAUT_DE_LIGNE;
 }
 
-function setXMLCommentInfoGenerale() {
-    $this->XMLCommentInfoGenerale = self::ESPACE . self::SAUT_DE_LIGNE
+function setXMLCommentAdmPole() {
+    $this->XMLCommentAdmPole = self::ESPACE . self::SAUT_DE_LIGNE
             . self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION
-            . "<!-- Info générales -->" . self::SAUT_DE_LIGNE;
+            . "<!-- Adm.Pole -->" . self::SAUT_DE_LIGNE;
 }
 
-function setXMLCommentClassIdent() {
-    $this->XMLCommentClassIdent = self::ESPACE . self::SAUT_DE_LIGNE
+function setXMLCommentContGestion() {
+    $this->XMLCommentContGestion = self::ESPACE . self::SAUT_DE_LIGNE
             . self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION
-            . "<!-- Class./Ident. -->" . self::SAUT_DE_LIGNE;
+            . "<!-- Cont.Gestion -->" . self::SAUT_DE_LIGNE;
 }
 
 function setXMLCommentQualite() {
@@ -2218,16 +2239,16 @@ function setXMLCommentQualite() {
             . "<!-- Qualite -->" . self::SAUT_DE_LIGNE;
 }
 
-function setXMLCommentInfoProd1() {
-    $this->XMLCommentInfoProd1 = self::ESPACE . self::SAUT_DE_LIGNE
+function setXMLCommentAdv() {
+    $this->XMLCommentAdv = self::ESPACE . self::SAUT_DE_LIGNE
             . self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION
-            . "<!-- Info Prod 1 -->" . self::SAUT_DE_LIGNE;
+            . "<!-- ADV -->" . self::SAUT_DE_LIGNE;
 }
 
-function setXMLCommentInfoProd2() {
-    $this->XMLCommentInfoProd2 = self::ESPACE . self::SAUT_DE_LIGNE
+function setXMLCommentPreparCde() {
+    $this->XMLCommentPreparCde = self::ESPACE . self::SAUT_DE_LIGNE
             . self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION
-            . "<!-- Info Prod 2 -->" . self::SAUT_DE_LIGNE;
+            . "<!-- Prepar.Cde -->" . self::SAUT_DE_LIGNE;
 }
 
 function setXMLCommentPdsMiniMaxi() {
@@ -2245,13 +2266,13 @@ function setXMLCommentInfoFact() {
 function setXMLCommentExportCompta() {
     $this->XMLCommentExportCompta = self::ESPACE . self::SAUT_DE_LIGNE
             . self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION
-            . "<!-- Export/Compta -->" . self::SAUT_DE_LIGNE;
+            . "<!-- Export -->" . self::SAUT_DE_LIGNE;
 }
 
-function setXMLCommentOptiventes() {
-    $this->XMLCommentOptiventes = self::ESPACE . self::SAUT_DE_LIGNE
+function setXMLCommentTelevente() {
+    $this->XMLCommentTelevente = self::ESPACE . self::SAUT_DE_LIGNE
             . self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION
-            . "<!-- OPTIVENTES -->" . self::SAUT_DE_LIGNE;
+            . "<!-- Televente -->" . self::SAUT_DE_LIGNE;
 }
 
 function setXMLCommentFourniture() {
@@ -2260,10 +2281,10 @@ function setXMLCommentFourniture() {
             . "<!-- Fourniture -->" . self::SAUT_DE_LIGNE;
 }
 
-function setXMLCommentRegate() {
-    $this->XMLCommentRegate = self::ESPACE . self::SAUT_DE_LIGNE
+function setXMLCommentInfoTech() {
+    $this->XMLCommentInfoTech = self::ESPACE . self::SAUT_DE_LIGNE
             . self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION
-            . "<!-- Regate -->" . self::SAUT_DE_LIGNE;
+            . "<!-- Info Tech -->" . self::SAUT_DE_LIGNE;
 }
 
 function getXMLCommentRegateAcAchat() {
@@ -2292,17 +2313,14 @@ function setXMLCommentRegateAcStock() {
 function checkComment() {
     $this->checkCommentEnteteProdFini();
     $this->checkCommentEntete();
-    $this->checkCommentInfoGenerale();
-    $this->checkCommentClassIdent();
+    $this->checkCommentAdmPole();
+    $this->checkCommentContGestion();
+    $this->checkCommentAdv();
+    $this->checkCommentPreparCde();
     $this->checkCommentQualite();
-    $this->checkCommentInfoProd1();
-    $this->checkCommentInfoProd2();
-    $this->checkCommentPdsMiniMaxi();
-    $this->checkCommentInfoFact();
     $this->checkCommentExportCompta();
-    $this->checkCommentOptiventes();
-    $this->checkCommentFourniture();
-    $this->checkCommentRegate();
+    $this->checkCommentTelevente();
+    $this->checkCommentInfoTech();
     $this->checkCommentEnteteProdFini();
     $this->checkCommentRegateAcAchat();
     $this->checkCommentRegateAcStock();
@@ -2315,7 +2333,8 @@ function checkCommentEntete() {
     if ($this->getXMLArcadiaNoArtKey() //<!-- Entête -->
             or $this->getXMLArcadiaArticleRefLicCcial()
             or $this->getXMLArcadiaMarque()
-            or $this->getXMLArcadiaArticleRefLicProduction()
+            or $this->getXMLArcadiaCodFamVte()
+            or $this->getXMLArcadiaCodSousFam()
     ) {
         $this->setXMLCommentEntete();
     }
@@ -2358,31 +2377,42 @@ function checkCommentRegateAcStock() {
 }
 
 /**
- * Si un élement de class/ident est présent on affiche le commentaire
+ * Si un élement de Cont.Gestion est présent on affiche le commentaire
  */
-function checkCommentClassIdent() {
-    if ($this->getXMLArcadiaEanArticle()
-            or $this->getXMLArcadiaCNUF()
-            or $this->getXMLArcadiaCodFamVte()
-            or $this->getXMLArcadiaExport()
-            or $this->getXMLArcadiaIsHallal()
-            or $this->getXMLArcadiaCodSousFam()
-            or $this->getXMLArcadiaCodGeneriqueFm()
-            or $this->getXMLArcadiaCodSociete()
+function checkCommentContGestion() {
+    if ($this->getXMLArcadiaArticleRefLicProduction()
+            or $this->getXMLArcadiaSiteDeProd()
             or $this->getXMLArcadiaCommentairePrive()
+            or $this->getXMLArcadiaFestif()
+            or $this->getXMLArcadiaPoidsMoyenCal()
+            or $this->getXMLArcadiaPoidsMini()
+            or $this->getXMLArcadiaPoidsMaxi()
+            or $this->getXMLArcadiaPoidsMiniBarq()
+            or $this->getXMLArcadiaPoidsMaxiBarq()
+            or $this->getXMLArcadiaCodPoidsCstUvc()
+            or $this->getXMLArcadiaPoidsCstUvc()
     ) {
-        $this->setXMLCommentClassIdent();
+        $this->setXMLCommentContGestion();
     }
 }
 
 /**
- * Si un élement d'info générale est présent on affiche le commentaire
+ * Si un élement d'Administration Pole est présent on affiche le commentaire
  */
-function checkCommentInfoGenerale() {
+function checkCommentAdmPole() {
     if ($this->getXMLArcadiaUtilisableGroupe()
-            or $this->getXMLArcadiaCelluleArticle()
+            or $this->getXMLArcadiaEanArticle()
+            or $this->getXMLArcadiaCNUF()
+            or $this->getXMLArcadiaLogoEcoEmballage()
+            or $this->getXMLArcadiaFamilleEcoEmballages()
+            or $this->getXMLArcadiaSiteRefEcoEmb()
+            or $this->getXMLArcadiaIsHallal()
+            or $this->getXMLArcadiaExport()
+            or $this->getXMLArcadiaEnvironConserv()
+            or $this->getXMLArcadiaCodTypeConditPub()
+            or $this->getXMLArcadiaUniteDeFacturation()
     ) {
-        $this->setXMLCommentInfoGenerale();
+        $this->setXMLCommentAdmPole();
     }
 }
 
@@ -2400,29 +2430,28 @@ function checkCommentQualite() {
 }
 
 /**
- * Si un élement d'info prod 1 est présent on affiche le commentaire
+ * Si un élement d'Adv est présent on affiche le commentaire
  */
-function checkCommentInfoProd1() {
-    if ($this->getXMLArcadiaPoidsMoyenCal()
-            or $this->getXMLArcadiaPoidsMiniBarq()
-            or $this->getXMLArcadiaPoidsMaxiBarq()
-            or $this->getXMLArcadiaCodPoidsCstUvc()
-            or $this->getXMLArcadiaPoidsCstUvc()
+function checkCommentAdv() {
+    if ($this->getXMLArcadiaCodSociete()
+            or $this->getXMLArcadiaUniteConditionnement()
+            or $this->getXMLArcadiaLibelleTarif()
+            or $this->getXMLArcadiaGammeCoop()
+            or $this->getXMLArcadiaFamilleBudget()
+            or $this->getXMLArcadiaGammeFamilleBudget()
     ) {
-        $this->setXMLCommentInfoProd1();
+        $this->setXMLCommentAdv();
     }
 }
 
 /**
- * Si un élement d'info prod 2 est présent on affiche le commentaire
+ * Si un élement de Prepar.Cde est présent on affiche le commentaire
  */
-function checkCommentInfoProd2() {
-    if ($this->getXMLArcadiaEnvironConserv()
-            or $this->getXMLArcadiaCodTypeConditPub()
-            or $this->getXMLArcadiaSiteDeProd()
-            or $this->getXMLArcadiaUniteConditionnement()
+function checkCommentPreparCde() {
+    if ($this->getXMLArcadiaMethodeDePreparation()
+            or $this->getXMLArcadiaTypePreparationAcquisition()
     ) {
-        $this->setXMLCommentInfoProd2();
+        $this->setXMLCommentPreparCde();
     }
 }
 
@@ -2458,12 +2487,12 @@ function checkCommentExportCompta() {
 }
 
 /**
- * Si un élement optivente est présent on affiche le commentaire
+ * Si un élement de Televente est présent on affiche le commentaire
  */
-function checkCommentOptiventes() {
+function checkCommentTelevente() {
     if ($this->getXMLArcadiaOptiventes()
     ) {
-        $this->setXMLCommentOptiventes();
+        $this->setXMLCommentTelevente();
     }
 }
 
@@ -2480,17 +2509,13 @@ function checkCommentFourniture() {
 }
 
 /**
- * Si un élement de Regate est présent on affiche le commentaire
+ * Si un élement de Info Tech est présent on affiche le commentaire
  */
-function checkCommentRegate() {
-    if ($this->getXMLArcadiaLibelleTarif()
-            or $this->getXMLArcadiaFamilleBudget()
-            or $this->getXMLArcadiaGammeFamilleBudget()
-            or $this->getXMLArcadiaGammeCoop()
-            or $this->getXMLArcadiaFestif()
+function checkCommentInfoTech() {
+    if ($this->getXMLArcadiaCelluleArticle()
             or $this->getXMLArcadiaFamilleDeclCaClient()
     ) {
-        $this->setXMLCommentRegate();
+        $this->setXMLCommentInfoTech();
     }
 }
 
@@ -2615,67 +2640,63 @@ function xmlArticleRef() {
             . $this->getXMLArcadiaNoArtKey()
             . $this->getXMLArcadiaArticleRefLicCcial()
             . $this->getXMLArcadiaMarque()
-            . $this->getXMLArcadiaArticleRefLicProduction()
-            // <!-- Info générales -->
-            . $this->getXMLCommentInfoGenerale()
+            . $this->getXMLArcadiaCodFamVte()
+            . $this->getXMLArcadiaCodSousFam()
+            // <!-- Adm. Pole -->
+            . $this->getXMLCommentAdmPole()
             . $this->getXMLArcadiaUtilisableGroupe()
-            . $this->getXMLArcadiaCelluleArticle()
-            // <!-- Class./Ident. -->
-            . $this->getXMLCommentClassIdent()
             . $this->getXMLArcadiaEanArticle()
             . $this->getXMLArcadiaCNUF()
-            . $this->getXMLArcadiaCodFamVte()
-            . $this->getXMLArcadiaExport()
+            . $this->getXMLArcadiaLogoEcoEmballage()
+            . $this->getXMLArcadiaFamilleEcoEmballages()
+            . $this->getXMLArcadiaSiteRefEcoEmb()
             . $this->getXMLArcadiaIsHallal()
-            . $this->getXMLArcadiaCodSousFam()
-            . $this->getXMLArcadiaCodGeneriqueFm()
-            . $this->getXMLArcadiaCodSociete()
+            . $this->getXMLArcadiaExport()
+            . $this->getXMLArcadiaEnvironConserv()
+            . $this->getXMLArcadiaCodTypeConditPub()
+            . $this->getXMLArcadiaUniteDeFacturation()
+            // <!-- Cont.Gestion -->
+            . $this->getXMLCommentContGestion()
+            . $this->getXMLArcadiaArticleRefLicProduction()
+            . $this->getXMLArcadiaSiteDeProd()
             . $this->getXMLArcadiaCommentairePrive()
+            . $this->getXMLArcadiaFestif()
+            . $this->getXMLArcadiaPoidsMoyenCal()
+            . $this->getXMLArcadiaPoidsMini()
+            . $this->getXMLArcadiaPoidsMaxi()
+            . $this->getXMLArcadiaPoidsMiniBarq()
+            . $this->getXMLArcadiaPoidsMaxiBarq()
+            . $this->getXMLArcadiaCodPoidsCstUvc()
+            . $this->getXMLArcadiaPoidsCstUvc()
+            //<!-- ADV-->
+//            . $this->getXMLArcadiaCodGeneriqueFm()
+            . $this->getXMLCommentAdv()
+            . $this->getXMLArcadiaCodSociete()
+            . $this->getXMLArcadiaUniteConditionnement()
+            . $this->getXMLArcadiaLibelleTarif()
+            . $this->getXMLArcadiaGammeCoop()
+            . $this->getXMLArcadiaFamilleBudget()
+            . $this->getXMLArcadiaGammeFamilleBudget()
+            //<!-- Prepar.Cde -->
+            . $this->getXMLCommentPreparCde()
+            . $this->getXMLArcadiaMethodeDePreparation()
+            . $this->getXMLArcadiaTypePreparationAcquisition()
             // <!-- Qualite -->
             . $this->getXMLCommentQualite()
             . $this->getXMLArcadiaDLC()
             . $this->getXMLArcadiaDureeDeVie()
             . $this->getXMLArcadiaDTS()
             . $this->getXMLArcadiaProlongationDLC()
-            //<!-- Info Prod 1 -->
-            . $this->getXMLCommentInfoProd1()
-            . $this->getXMLArcadiaPoidsMoyenCal()
-            . $this->getXMLArcadiaPoidsMiniBarq()
-            . $this->getXMLArcadiaPoidsMaxiBarq()
-            . $this->getXMLArcadiaCodPoidsCstUvc()
-            . $this->getXMLArcadiaPoidsCstUvc()
-            //<!-- Info Prod 2 -->
-            . $this->getXMLCommentInfoProd2()
-            . $this->getXMLArcadiaEnvironConserv()
-            . $this->getXMLArcadiaCodTypeConditPub()
-            . $this->getXMLArcadiaSiteDeProd()
-            . $this->getXMLArcadiaUniteConditionnement()
-            //<!-- Pds Mini/Maxi -->
-            . $this->getXMLCommentPdsMiniMaxi()
-            . $this->getXMLArcadiaPoidsMini()
-            . $this->getXMLArcadiaPoidsMaxi()
-            //<!-- Info Fact -->
-            . $this->getXMLCommentInfoFact()
-            . $this->getXMLArcadiaUniteDeFacturation()
-            //<!-- Export/Compta -->
+            //<!-- Televente -->
+            . $this->getXMLCommentTelevente()
+            . $this->getXMLArcadiaOptiventes()
+            //<!-- Export -->
             . $this->getXMLCommentExportCompta()
             . $this->getXMLArcadiaCodeDouane()
-            //<!-- OPTIVENTES -->
-            . $this->getXMLCommentOptiventes()
-            . $this->getXMLArcadiaOptiventes()
-            //<!-- Fourniture -->
-            . $this->getXMLCommentFourniture()
-            . $this->getXMLArcadiaLogoEcoEmballage()
-            . $this->getXMLArcadiaFamilleEcoEmballages()
-            . $this->getXMLArcadiaSiteRefEcoEmb()
-            //<!-- Regate -->
-            . $this->getXMLCommentRegate()
-            . $this->getXMLArcadiaLibelleTarif()
-            . $this->getXMLArcadiaFamilleBudget()
-            . $this->getXMLArcadiaGammeFamilleBudget()
-            . $this->getXMLArcadiaGammeCoop()
-            . $this->getXMLArcadiaFestif()
+            //<!-- Info Tech -->
+            . $this->getXMLCommentInfoTech()
             . $this->getXMLArcadiaFamilleDeclCaClient()
+            . $this->getXMLArcadiaCelluleArticle()
             . self::ESPACE . self::SAUT_DE_LIGNE
             . self::RECORDSET_END
             . self::DATA_IMPORT_END

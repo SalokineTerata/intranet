@@ -20,16 +20,16 @@ DIR_COP_ROOT=$DIR_COP"apps/fta2Arcadia/import_Arcadia2Fta.sh"
 case $CHEMIN in
 
   $DIR_COD_ROOT)
-  bash -x $DIR_CODapps/fta2Arcadia/import_Arcadia2Fta_data_cod.sh $DIR_COD
+  bash -x $DIR_COD_ROOTDapps/fta2Arcadia/import_Arcadia2Fta_data_cod.sh $DIR_COD
  ;;
   $DIR_DEV_ROOT)
-  bash -x $DIR_DEVapps/fta2Arcadia/import_Arcadia2Fta_data_dev.sh $DIR_DEV
+  bash -x $DIR_DEV_ROOTapps/fta2Arcadia/import_Arcadia2Fta_data_dev.sh $DIR_DEV
  ;;
   $DIR_PRD_ROOT)
- bash -x $DIR_PRDapps/fta2Arcadia/import_Arcadia2Fta_data_prd.sh $DIR_PRD
+ bash -x $DIR_PRD_ROOTapps/fta2Arcadia/import_Arcadia2Fta_data_prd.sh $DIR_PRD
  ;;
 $DIR_COP_ROOT)
-  bash -x $DIR_COPapps/fta2Arcadia/import_Arcadia2Fta_data_cop.sh $DIR_COP
+  bash -x $DIR_COP_ROOTapps/fta2Arcadia/import_Arcadia2Fta_data_cop.sh $DIR_COP
  ;;
 
 esac

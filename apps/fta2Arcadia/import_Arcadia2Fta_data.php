@@ -19,10 +19,9 @@ $username_connect = $argv[3]; //login de la base MySQL
 $password_connect = $argv[4];
 //mot de passe de la base MySQL
 
-$linkFolderEnd = $argv[5];
+$linkFolder = $argv[5];
 $linkFolderOK = $argv[6];
 $linkFolderBegin = $argv[7];
-$linkFolder = $linkFolderBegin . $linkFolderEnd;
 
 /* * *******
   Inclusions

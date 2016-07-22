@@ -1,10 +1,5 @@
 <?php
 
-/* * *******
-  Inclusions
- * ******* */
-require __DIR__ . '/../inc/php_cli.php';
-$initFile = parse_ini_file("config.ini", TRUE);
 //require_once './../../config.ini';
 /* * ***********
   Début Code PHP
@@ -29,6 +24,11 @@ $linkFolderOK = $argv[6];
 $linkFolderBegin = $argv[7];
 $linkFolder = $linkFolderBegin . $linkFolderEnd;
 
+/* * *******
+  Inclusions
+ * ******* */
+require __DIR__ . '/../inc/php_cli.php';
+$initFile = parse_ini_file($linkFolderBegin . "config.ini", TRUE);
 //
 //$donnee = mysql_pconnect($hostname_connect, $username_connect, $password_connect);
 //mysql_select_db($nameOfBDDTarget);

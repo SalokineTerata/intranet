@@ -24,8 +24,10 @@ $username_connect = $argv[3]; //login de la base MySQL
 $password_connect = $argv[4];
 //mot de passe de la base MySQL
 
-$linkFolder = $argv[5];
+$linkFolderEnd = $argv[5];
 $linkFolderOK = $argv[6];
+$linkFolderBegin = $argv[7];
+$linkFolder = $linkFolderBegin . $linkFolderEnd;
 
 //
 //$donnee = mysql_pconnect($hostname_connect, $username_connect, $password_connect);
@@ -35,7 +37,7 @@ $linkFolderOK = $argv[6];
 /**
  * Class gérant l'actualisation des données Arcadia2Fta
  */
-$arcadia2Fta =  new Arcadia2FtaController($nameOfBDDTarget, $hostname_connect, $username_connect, $password_connect, $linkFolder,$initFile,$linkFolderOK);
+$arcadia2Fta = new Arcadia2FtaController($nameOfBDDTarget, $hostname_connect, $username_connect, $password_connect, $linkFolder, $initFile, $linkFolderOK);
 
 $arcadia2Fta->updateBDDFtaFromArcadiaData();
 $debut = date("H:i:s");

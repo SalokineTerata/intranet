@@ -241,7 +241,7 @@ class FtaView extends AbstractView {
                 if ($codeReply <> Fta2ArcadiaTransactionModel::CONSOMME) {
                     $this->setDataValidationSuccessfulToFalse();
                 }
-                $message = $this->getMessageArcadiaInfo($codeReply);
+                $message = $this->getMessageArcadiaInfo($codeReply, $keyValue);
                 $Fta2ArcadiaTransactionModel->setIsEditable($isEditable);
                 $notificationMail = $Fta2ArcadiaTransactionModel->getHtmlDataField(Fta2ArcadiaTransactionModel::FIELDNAME_NOTIFICATION_MAIL);
             }
@@ -303,26 +303,26 @@ class FtaView extends AbstractView {
      * @param string $paramCodeReply
      * @return string
      */
-    function getMessageArcadiaInfo($paramCodeReply) {
+    function getMessageArcadiaInfo($paramCodeReply, $paramIdTransaction) {
         $start = "<tr><td class=contenu><center>Informations Arcadia</center></td>";
         switch ($paramCodeReply) {
             case Fta2ArcadiaTransactionModel::CONSOMME:
-                $message = $start . "<td " . TableauFicheView::HTML_CELL_BGCOLOR_ARCADIA_OK . " ><center>" . UserInterfaceMessage::FR_ARCADIA_CONSOMME_DATA_MESSAGE . "</center></td></tr>";
+                $message = $start . "<td " . TableauFicheView::HTML_CELL_BGCOLOR_ARCADIA_OK . " ><center>" . UserInterfaceMessage::FR_ARCADIA_CONSOMME_DATA_MESSAGE . " (" . $paramIdTransaction . ") " . "</center></td></tr>";
 
                 break;
             case Fta2ArcadiaTransactionModel::REJET_TASKS:
-                $message = $start . "<td " . TableauFicheView::HTML_CELL_BGCOLOR_ARCADIA_ERREUR . " ><center>" . UserInterfaceMessage::FR_ARCADIA_REJET_TASKS_DATA_MESSAGE . "</center></td></tr>";
+                $message = $start . "<td " . TableauFicheView::HTML_CELL_BGCOLOR_ARCADIA_ERREUR . " ><center>" . UserInterfaceMessage::FR_ARCADIA_REJET_TASKS_DATA_MESSAGE . " (" . $paramIdTransaction . ") " . "</center></td></tr>";
 
                 break;
             case Fta2ArcadiaTransactionModel::REFUSE:
-                $message = $start . "<td " . TableauFicheView::HTML_CELL_BGCOLOR_ARCADIA_ERREUR . " ><center>" . UserInterfaceMessage::FR_ARCADIA_REFUSE_DATA_MESSAGE . "</center></td></tr>";
+                $message = $start . "<td " . TableauFicheView::HTML_CELL_BGCOLOR_ARCADIA_ERREUR . " ><center>" . UserInterfaceMessage::FR_ARCADIA_REFUSE_DATA_MESSAGE . " (" . $paramIdTransaction . ") " . "</center></td></tr>";
 
                 break;
             case Fta2ArcadiaTransactionModel::CLOTURE_AUTO:
-                $message = $start . "<td " . TableauFicheView::HTML_CELL_BGCOLOR_ARCADIA_ERREUR . " ><center>" . UserInterfaceMessage::FR_ARCADIA_CLOTURE_AUTO_DATA_MESSAGE . "</center></td></tr>";
+                $message = $start . "<td " . TableauFicheView::HTML_CELL_BGCOLOR_ARCADIA_ERREUR . " ><center>" . UserInterfaceMessage::FR_ARCADIA_CLOTURE_AUTO_DATA_MESSAGE . " (" . $paramIdTransaction . ") " . "</center></td></tr>";
                 break;
             default :
-                $message = $start . "<td " . TableauFicheView::HTML_CELL_BGCOLOR_ARCADIA_ATTENTE . " ><center>" . UserInterfaceMessage::FR_ARCADIA_PROCESSING_DATA_MESSAGE . "</center></td></tr>";
+                $message = $start . "<td " . TableauFicheView::HTML_CELL_BGCOLOR_ARCADIA_ATTENTE . " ><center>" . UserInterfaceMessage::FR_ARCADIA_PROCESSING_DATA_MESSAGE . " (" . $paramIdTransaction . ") " . "</center></td></tr>";
 
                 break;
         }

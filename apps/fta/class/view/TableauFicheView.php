@@ -332,6 +332,7 @@ class TableauFicheView {
                     break;
                 case Fta2ArcadiaTransactionModel::CLOTURE_AUTO:
                     $bgcolorArcadia = TableauFicheView::HTML_CELL_BGCOLOR_ARCADIA_ERREUR;
+                    break;
                 default :
                     $bgcolorArcadia = TableauFicheView::HTML_CELL_BGCOLOR_ARCADIA_ATTENTE;
 

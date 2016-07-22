@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Transaction id="81" version="1.1" type="proposal">
+    <Parameters>
+        <IdFirm>40</IdFirm><!-- Agis -->
+        <IdArcadia>74625</IdArcadia><!-- Code article dans Arcadia -->
+        <IdFta>15431</IdFta><!-- N° de la FTA -->
+    </Parameters>
+    <Tables>
+        <ARTICLE_TRAIT_NEW>
+            <DataToImport>
+                <Recordset id="1" action="update">
+
+                    <!-- Entête -->
+                    <NO_ART key="TRUE">74625</NO_ART>
+                    <LIB_CCIAL><![CDATA[GARN AUMON CREV LSLDC 2X2KG]]></LIB_CCIAL><!-- DIN de la FTA -->
+
+                    <!-- Cont.Gestion -->
+                    <LIB_PRODUCTION><![CDATA[GARN AUMON CREV LSLDC 2X2KG]]></LIB_PRODUCTION><!-- DIN de la FTA -->
+
+                    <!-- ADV -->
+                    <LIBELLE_TARIF><![CDATA[GARN MINI AUMONIERE CREVETTE RATATOUILLE 2KG REGALETTE]]></LIBELLE_TARIF>
+
+                    <!-- Televente -->
+                    <COD_CIRCUIT>7</COD_CIRCUIT>
+
+                </Recordset>
+            </DataToImport>
+        </ARTICLE_TRAIT_NEW>
+    </Tables>
+
+</Transaction>
+

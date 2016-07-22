@@ -2002,9 +2002,13 @@ class Chapitre {
         $ftaView->setIsEditable($isEditable);
         $ftaView->setFtaChapitreModelById(self::ID_CHAPITRE_IDENTITE);
         $ftaView2 = new FtaView($ftaModel);
+        /**
+         * Gestion de l'edition du code article arcadia 
+         * suivant l'activation de la fonctionnalité Fta2Arcadia
+         */
         if (self::$checkArcadiaData) {
             $isEditable = self::NOT_EDITABLE;
-        } else {
+        } elseif($isEditable) {
             $isEditable = self::EDITABLE;
         }
 

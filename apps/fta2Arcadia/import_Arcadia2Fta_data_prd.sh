@@ -14,5 +14,5 @@ DIR_EAI="/u1/DATA01/eai/intranet-prd/import/data/"
 DIR_EAI_OK="/u1/DATA01/eai/intranet-prd/import/ok/"
 DIR="$1"
 
-$DIR./u1/DATA01/webldc/fta05401/v3/apps/fta2Arcadia/import_Arcadia2Fta_data.sh $DB_NAME_TO_CREATE $MYSQL_SERVER_NAME_DEST $MYSQL_USER_NAME_DEST $MYSQL_USER_PASSWORD_DEST $DIR_EAI $DIR
+$DIRapps/fta2Arcadia/import_Arcadia2Fta_data.sh $DB_NAME_TO_CREATE $MYSQL_SERVER_NAME_DEST $MYSQL_USER_NAME_DEST $MYSQL_USER_PASSWORD_DEST $DIR_EAI $DIR
 

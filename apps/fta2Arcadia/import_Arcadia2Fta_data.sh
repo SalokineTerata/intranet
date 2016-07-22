@@ -21,5 +21,5 @@ DIR="$7"
 
 echo "*** Requêtes SQL:"
 echo "  * Actualisation des Fta de la base de données DB_NAME_V3 "
-php $DIR/apps/fta2Arcadia/import_Arcadia2Fta_data.php $DB_NAME_V3  $MYSQL_SERVER_NAME_DEST $MYSQL_USER_NAME_DEST $MYSQL_USER_PASSWORD_DEST $DIR_EAI $DIR_EAI_OK $DIR
+php $DIRapps/fta2Arcadia/import_Arcadia2Fta_data.php $DB_NAME_V3  $MYSQL_SERVER_NAME_DEST $MYSQL_USER_NAME_DEST $MYSQL_USER_PASSWORD_DEST $DIR_EAI $DIR_EAI_OK $DIR
 

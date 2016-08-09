@@ -291,6 +291,13 @@ class FtaModel extends AbstractModel {
                 $idArcadiaTypeCarton = $ftaConditionnmentModel->getModelAnnexeEmballage()->getDataField(AnnexeEmballageModel::FIELDNAME_ID_ARCADIA_TYPE_CARTON)->getFieldValue();
                 $ftaConditionnmentModel->getDataField(FtaConditionnementModel::FIELDNAME_ID_ANNEXE_EMBALLAGE)->isFieldDiff();
             }
+        }else{
+            /**
+             * si aucun carton est renseigné dans le chapitre emballage colis 
+             * par défaut on met 0 (NON comunniqué)
+             */
+            
+            $idArcadiaTypeCarton ="0";
         }
         return $idArcadiaTypeCarton;
     }

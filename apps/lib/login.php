@@ -126,7 +126,11 @@ Contactez un Administrateur pour réactiver votre compte.';
                         }
 
                         $adrfrom = 'postmaster@agis-sa.fr';
-                        $recupmail = DatabaseOperation::convertSqlStatementWithoutKeyToArray('SELECT mail FROM salaries WHERE login=\'' . $identite . '\'');
+                        $recupmail = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
+                                        'SELECT ' . UserModel::FIELDNAME_MAIL
+                                        . ' FROM ' . UserModel::TABLENAME
+                                        . ' WHERE ' . UserModel::FIELDNAME_LOGIN . '=\'' . $identite . '\''
+                        );
                         foreach ($recupmail as $colonnemail) {
                             $adrTo = $colonnemail[UserModel::FIELDNAME_MAIL];
                         }
@@ -134,10 +138,12 @@ Contactez un Administrateur pour réactiver votre compte.';
                         $typeDeMail = 'CompteBloquer';
                         /* Constition du corps du mail */
                         $rep = envoismail($sujet, $corpsmail, $adrTo, $adrfrom, $typeDeMail);
-                        $titou = DatabaseOperation::execute('UPDATE ' . UserModel::TABLENAME
+                        $titou = DatabaseOperation::execute(
+                                        'UPDATE ' . UserModel::TABLENAME
                                         . ' SET ' . UserModel::FIELDNAME_BLOCAGE . '=\'oui\''
+                                        . ' , ' . UserModel::FIELDNAME_DATE_BLOCAGE . '=\'' . date("Y-m-d H:i:s") . '\''
                                         . ' WHERE ' . UserModel::FIELDNAME_LOGIN . '=\'' . $identite . '\''
-                                        . ' AND ' . UserModel::FIELDNAME_DATE_BLOCAGE . '=' . date("Y-m-d"));
+                        );
                         //Averissement
                         $titre = "Accès aux modules de l'Intranet";
                         $message = UserInterfaceMessage::FR_LOGIN_PROCESS_ACCOUNT_LOCKED;

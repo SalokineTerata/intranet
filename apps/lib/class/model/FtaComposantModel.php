@@ -197,7 +197,7 @@ class FtaComposantModel extends AbstractModel {
                         . ',' . self::FIELDNAME_INGREDIENT_FTA_COMPOSITION
                         . ',' . self::FIELDNAME_ID_GEO
                         . ',' . self::FIELDNAME_POIDS_FTA_COMPOSITION
-                        . ',' . self::FIELDNAME_QUANTITE_FTA_COMPOSITION_UVC
+                        . ',' . self::FIELDNAME_QUANTITE_FTA_COMPOSITION
                         . ' FROM ' . self::TABLENAME
                         . ' WHERE ' . self::KEYNAME . '=' . $paramIdFtaComposant);
 
@@ -208,7 +208,7 @@ class FtaComposantModel extends AbstractModel {
                     self::FIELDNAME_VIRTUAL_INGREDIENT_FTA_COMPOSITION => $rows[self::FIELDNAME_INGREDIENT_FTA_COMPOSITION],
                     self::FIELDNAME_VIRTUAL_SITE_DE_PRODUCTION => $rows[self::FIELDNAME_ID_GEO],
                     self::FIELDNAME_VIRTUAL_POIDS_FTA_COMPOSITION => $rows[self::FIELDNAME_POIDS_FTA_COMPOSITION],
-                    self::FIELDNAME_VIRTUAL_QUANTITE_FTA_COMPOSITION => $rows[self::FIELDNAME_QUANTITE_FTA_COMPOSITION_UVC],
+                    self::FIELDNAME_VIRTUAL_QUANTITE_FTA_COMPOSITION => $rows[self::FIELDNAME_QUANTITE_FTA_COMPOSITION],
                 );
             }
         } else {

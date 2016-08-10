@@ -89,14 +89,19 @@ switch ($action) {
                  */
                 if ($isComposition) {
                     if ($creation) {
+
+                        $ftaModel = new FtaModel($id_fta);
+                        $DureeDeVieTechnique = $ftaModel->getDataField(FtaModel::FIELDNAME_DUREE_DE_VIE_TECHNIQUE_PRODUCTION)->getFieldValue();
+                        $poidsUVFValueKG = $ftaModel->getDataField(FtaModel::FIELDNAME_POIDS_ELEMENTAIRE)->getFieldValue();
+                        $poidsUVFValueG = $poidsUVFValueKG * "1000";
                         //Valeur par défaut      
                         $nom_fta_nomenclature = $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_DESIGNATION_CODIFICATION)->getFieldValue();
                         $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_NOM_FTA_COMPOSITION)->setFieldValue($nom_fta_nomenclature);
                         $site_production_fta_nomenclature = $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_SITE_PRODUCTION_FTA_CODIFICATION)->getFieldValue();
                         $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_ID_GEO)->setFieldValue($site_production_fta_nomenclature);
                         $poids_fta_nomenclature = $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_POIDS_UNITAIRE_CODIFICATION)->getFieldValue();
-                        $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_POIDS_FTA_COMPOSITION)->setFieldValue($poids_fta_nomenclature);
-                        $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_QUANTITE_FTA_COMPOSITION_UVC)->setFieldValue("1");
+                        $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_POIDS_FTA_COMPOSITION)->setFieldValue($poidsUVFValueG);
+                        $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_DUREE_VIE_TECHNIQUE_FTA_COMPOSITION)->setFieldValue($DureeDeVieTechnique);
                     }
                     $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_IS_COMPOSITION_FTA_COMPOSANT)->setFieldValue("1");
                 } else {

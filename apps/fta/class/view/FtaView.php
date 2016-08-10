@@ -1713,7 +1713,7 @@ class FtaView extends AbstractView {
 
 
         /**
-         * Initialisation du reésultat des règles de validation
+         * Initialisation du résultat des règles de validation
          */
         $this->setDataValidationSuccessful($htmlEmballageDuColis->isDataValidationSuccessful());
         return $return;
@@ -2140,7 +2140,7 @@ class FtaView extends AbstractView {
 
         $htmlPoidColisUVC = new HtmlInputText();
 
-        $htmlPoidColisUVC->setLabel(DatabaseDescription::getFieldDocLabel(FtaModel::TABLENAME, FtaModel::FIELDNAME_POIDS_EMBALLAGES_UVC));
+        $htmlPoidColisUVC->setLabel(FtaConditionnementModel::UVC_EMBALLAGE_EMBALLAGE_POIDS_LABEL);
         $htmlPoidColisUVC->getAttributes()->getValue()->setValue($return[FtaConditionnementModel::COLIS_EMBALLAGE]);
         $htmlPoidColisUVC->setIsEditable(FALSE);
 

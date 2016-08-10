@@ -30,7 +30,7 @@ class FtaConditionnementModel extends AbstractModel {
     const FIELDNAME_VIRTUAL_QUANTITE_PAR_COUCHE_FTA_CONDITIONNEMENT = 'VIRTUAL_quantite_par_couche_fta_conditionnement';
     const FIELDNAME_VIRTUAL_REFERENCE_FOURNISSEUR_FTA_CONDITIONNEMENT = 'VIRTUAL_reference_fournisseur_fta_conditionnement';
     const FIELDNAME_VIRTUAL_NOM_FTA_CONDITIONNEMENT_GROUPE = 'VIRTUAL_nom_fta_conditionnement_groupe';
-    const EMBALLAGES_UVC = '1';
+    const EMBALLAGES_UVF = '1';
     const EMBALLAGES_PAR_COLIS = '2';
     const EMBALLAGES_DU_COLIS = '3';
     const EMBALLAGES_PALETTE = '4';
@@ -42,7 +42,8 @@ class FtaConditionnementModel extends AbstractModel {
     const UVC_EMBALLAGE_DIMENSION_HAUTEUR = 'dimension_uvc_hauteur';
     const UVC_EMBALLAGE_DIMENSION_LONGEUR = 'dimension_uvc_longueur';
     const UVC_EMBALLAGE_DIMENSION_LARGEUR = 'dimension_uvc_largeur';
-    const UVC_EMBALLAGE_DIMENSION_LABEL = 'Dimension de l\'UVC (en mm):';
+    const UVC_EMBALLAGE_DIMENSION_LABEL = 'Dimension de l\'UVF (en mm):';
+    const UVC_EMBALLAGE_EMBALLAGE_POIDS_LABEL = 'Poids des Emballages (en g)';
     const COLIS_EMBALLAGE = 'colis_emballage';
     const COLIS_EMBALLAGE_TYPE_2 = 'colis_emballage_2';
     const COLIS_EMBALLAGE_TYPE_3 = 'colis_emballage_3';
@@ -424,7 +425,7 @@ class FtaConditionnementModel extends AbstractModel {
         }
         switch ($paramTypeQuant) {
             case AnnexeEmballageGroupeTypeModel::EMBALLAGE_UVC:
-                $quantite = "Quantité par UVC";
+                $quantite = "Quantité par UVF";
 
                 break;
             case AnnexeEmballageGroupeTypeModel::EMBALLAGE_PAR_COLIS:

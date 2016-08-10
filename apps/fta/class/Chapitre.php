@@ -2350,19 +2350,19 @@ class Chapitre {
 
 //        $bloc.='<tr class=titre_principal><td class>Palettisasion</td></tr>';
 
-        $bloc.='<tr class=titre_principal><td class>Informations Générales de l\'UVC</td></tr>';
+        $bloc.='<tr class=titre_principal><td class>Informations Générales de l\'UVF</td></tr>';
 
-        //Poids total de l'emballage de l'UVC
+        //Poids total de l'emballage de l'UVF
         $bloc.=$ftaView->getHtmlPoidsEmballageUVC();
 
-        //Poids Net UVC (en g):
+        //Poids Net UVF (en g):
         $bloc.=$ftaView->getHtmlPoidsNetEmballageUVC();
 
-        //Poids Brut UVC (en g):
+        //Poids Brut UVF (en g):
 
         $bloc.=$ftaView->getHtmlPoidsBrutEmballageUVC();
 
-        //Dimension de l'UVC (en mm):
+        //Dimension de l'UVF (en mm):
 
         $bloc.=$ftaView->getHtmlDimensionEmballageUVC();
 

@@ -894,7 +894,7 @@ class FtaModel extends AbstractModel {
     }
 
     public function getArrayEmballageTypeUVC() {
-        $this->setDonneeEmballageUVC($this->arrayEmballages(FtaConditionnementModel::EMBALLAGES_UVC));
+        $this->setDonneeEmballageUVC($this->arrayEmballages(FtaConditionnementModel::EMBALLAGES_UVF));
     }
 
     public function getArrayEmballageTypeParColis() {
@@ -1071,7 +1071,7 @@ class FtaModel extends AbstractModel {
                                 . " FROM " . FtaComposantModel::TABLENAME
                                 . " WHERE " . FtaComposantModel::FIELDNAME_ID_FTA . "=" . $this->getKeyValue()
                                 . " AND " . FtaComposantModel::FIELDNAME_IS_COMPOSITION_FTA_COMPOSANT
-                                . "=" . FtaConditionnementModel::EMBALLAGES_UVC
+                                . "=" . FtaConditionnementModel::EMBALLAGES_UVF
                 );
 
                 if ($arrayComposant) {
@@ -1187,7 +1187,7 @@ class FtaModel extends AbstractModel {
                             . " FROM " . FtaComposantModel::TABLENAME
                             . " WHERE " . FtaComposantModel::FIELDNAME_ID_FTA . "=" . $this->getKeyValue()
                             . " AND " . FtaComposantModel::FIELDNAME_IS_COMPOSITION_FTA_COMPOSANT
-                            . "=" . FtaConditionnementModel::EMBALLAGES_UVC
+                            . "=" . FtaConditionnementModel::EMBALLAGES_UVF
             );
 
             if ($arrayComposant) {

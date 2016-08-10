@@ -24,6 +24,7 @@
  */
 class UserInterfaceMessage {
 
+    const FR_ARCADIA_ID_MESSAGE_TRANSACTION = " \n Le code Article Arcadia concerné est le ";
     const FR_ARCADIA_ERREUR_SCRIT_MESSAGE_TRANSACTION = " Erreur de la génération du tableau pour la transaction ";
     const FR_ARCADIA_ERREUR_SCRIT_MESSAGE_CODE_REPLY = " Une erreur s'est produite durant l'envoi d'informations vers Arcadia.";
     const FR_ARCADIA_ERREUR_SCRIT_MESSAGE_MAIL= " Erreur de la génération du tableau pour le mail concernant la transaction ";
@@ -32,7 +33,7 @@ class UserInterfaceMessage {
     const FR_ARCADIA_OK_SCRIT_MESSAGE_MAIL= " L'envoie de mail est un succès. ";
     const FR_ARCADIA_CONSOMME_DATA_MESSAGE = " La transaction demandée à Arcadia s’est déroulée sans incident. ";
     const FR_ARCADIA_REJET_TASKS_DATA_MESSAGE = " Arcadia refuse d’intégrer le message EAI car la forme du fichier est incorrect. ";
-    const FR_ARCADIA_REFUSE_DATA_MESSAGE = " L’utilisateur Arcadia a annulé toute de la transaction. ";
+    const FR_ARCADIA_REFUSE_DATA_MESSAGE = " L’utilisateur a annulé  la transaction depuis Arcadia. ";
     const FR_ARCADIA_CLOTURE_AUTO_DATA_MESSAGE = " Arcadia a clôturé la transaction qui n’a pas finie d’être consommée. ";
     const FR_ARCADIA_PROCESSING_DATA_MESSAGE = " La transaction est en cours de traitement ";
     const FR_ARCADIA_SEND_DATA_MESSAGE = " Les données ont bien été envoyées vers Arcadia ";

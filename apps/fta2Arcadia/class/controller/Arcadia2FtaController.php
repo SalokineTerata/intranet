@@ -211,6 +211,7 @@ class Arcadia2FtaController {
                                 if ($codeReply <> "0") {
                                     $corpsmail = UserInterfaceMessage::FR_ARCADIA_ERREUR_SCRIT_MESSAGE_CODE_REPLY;
                                 }
+                                $corpsmail .=UserInterfaceMessage::FR_ARCADIA_ID_MESSAGE_TRANSACTION . $codeArticleArcadia;
                                 /**
                                  * Récupération du mail de l'utilisateur
                                  */

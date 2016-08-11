@@ -152,7 +152,10 @@ if (!isset($annee_en_cours)) {
 }
 
 //Construction de la barre de recherche d'une semaine
-echo "<form name=recherche_semaine method=post action=index.php>";
+echo "<form name=recherche_semaine method=post action=index_post.php>";
+echo "<input type=hidden name=semaine_en_cours value=" . $semaine_en_cours . ">";
+echo "<input type=hidden name=annee_en_cours value=" . $annee_en_cours . ">";
+
 echo "<table class=titre border=0 width=100%>";
 echo "<tr>";
 echo "<td >";
@@ -176,6 +179,9 @@ echo "</form>";
 //Lien premettant de définir si la semaine est visible ou non
 //Droits d'accès
 if ($planning_presence_modification == 1) {
+    $boutonEnregistrementDonnee = "<td><input type=submit value=Enregistrer></td>";
+
+
     echo "<td>";
     $req1 = "SELECT " . PlanningPresenceSemaineVisibleModel::FIELDNAME_VISIBLE_PLANNING_PRESENCE_SEMAINE_VISIBLE
             . " FROM " . PlanningPresenceSemaineVisibleModel::TABLENAME
@@ -207,6 +213,9 @@ if ($planning_presence_modification == 1) {
 echo "<td>";
 echo "<a href=index.php>Semaine en cours</a>";
 echo "</td>";
+
+echo $boutonEnregistrementDonnee;
+
 echo "</tr>";
 
 //Construction du planning
@@ -285,13 +294,18 @@ if ($result1) {
                             //Détermination des lieux par journée
                             $result5 = tableau_planning_selectionne_jour($semaine_en_cours, $annee_en_cours, $rows4[id_salaries], $i);
                             $count5 = mysql_num_rows($result5);
-                            $txt1 = "<a href=modification_lieu_salarie.php";
-                            $txt1.= "?id_salaries=$rows4[id_salaries]";
-                            $txt1.= "&id_jour=$i";
-                            $txt1.= "&id_semaine=$semaine_en_cours";
-                            $txt1.= "&annee=$annee_en_cours";
-                            $txt1.= ">";
-                            $txt3 = "</a>";
+
+//                            $txt1 = "<a href=modification_lieu_salarie.php";
+//                            $txt1.= "?id_salaries=$rows4[id_salaries]";
+//                            $txt1.= "&id_jour=$i";
+//                            $txt1.= "&id_semaine=$semaine_en_cours";
+//                            $txt1.= "&annee=$annee_en_cours";
+//                            $txt1.= ">";
+                            $txt1 = "<input type=text name=Id_user" . $rows4[id_salaries]
+                                    . "_IdAnnee" . $annee_en_cours
+                                    . "_IdSemaine" . $semaine_en_cours
+                                    . "_IdJours" . $i . " value=";
+                            $txt3 = " />";
                             if ($count5 == 0) {
                                 $txt2 = "?";
                             } else {
@@ -310,7 +324,7 @@ if ($result1) {
                                 }
                             }
 
-//Affichage du lieu
+                            //Affichage du lieu
 //Droit d'accès sur la possibilité de pouvoir modifier le lieu défini
                             echo "<td align=center>";
                             if ($planning_presence_modification == 0) {

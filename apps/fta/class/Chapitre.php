@@ -1174,6 +1174,10 @@ class Chapitre {
         return $bloc;
     }
 
+    /**
+     * Chapitre nomenclature
+     * @return type
+     */
     public static function buildChapitreEtiquetteRD() {
 
         $bloc = '';

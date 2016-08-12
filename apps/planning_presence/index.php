@@ -301,6 +301,7 @@ if ($result1) {
 //                            $txt1.= "&id_semaine=$semaine_en_cours";
 //                            $txt1.= "&annee=$annee_en_cours";
 //                            $txt1.= ">";
+//                            $txt3 = "</a>";
                             $txt1 = "<input type=text name=Id_user" . $rows4[id_salaries]
                                     . "_IdAnnee" . $annee_en_cours
                                     . "_IdSemaine" . $semaine_en_cours

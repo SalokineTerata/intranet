@@ -103,6 +103,7 @@ require_once('../lib/class/model/AnnexeEmballageModel.php');
 require_once('../lib/class/model/AnnexeEnvironnementConservationGroupeModel.php');
 require_once('../lib/class/model/AnnexeGestionDesEtiquettesModel.php');
 require_once('../lib/class/model/AnnexeGestionEtiquetteRectoVersoModel.php');
+require_once('../lib/class/model/AnnexeListeAllergeneDicoModel.php');
 require_once('../lib/class/model/AnnexeUniteFacturationModel.php');
 require_once('../lib/class/model/ArcadiaCategorieProduitOptiventesModel.php');
 require_once('../lib/class/model/ArcadiaCelluleArticleModel.php');

@@ -55,6 +55,12 @@ echo '...';
   en modifications sur ce module
  */
 
+if (Acl::getValueAccesRights($module_modification)) {
+    echo '<br>';
+    echo '<a href=dictionnaire_allergene.php?id_fta_role=' . $idFtaRole . '><img src=../lib/images/bouton_menu-allergene.png border=0></a>';
+    echo '<br>';
+}
+
 /*
   Fonctions propres aux Assistantes de Direction Commerciales
  */
@@ -68,7 +74,6 @@ if (
 //    echo '<a href=modification_classification.php><img src=../lib/images/bouton_menu-classification.PNG border=0></a>';
 //    echo '<br>';
 //    echo '<a href=ajout_classification.php><img src=../lib/images/bouton_menu-classification_ajout.PNG border=0></a>';
-
     //Mettre à jour une Fiche Technique Article existante
     //echo '<br>';
     //echo '<a href=modification0.php><img src=../lib/images/bouton_menu-mise_a_jour_une_fiche.png border=0></a>';

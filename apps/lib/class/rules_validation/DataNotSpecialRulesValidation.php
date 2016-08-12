@@ -26,9 +26,16 @@ class DataNotSpecialRulesValidation extends AbstractRulesValidation {
 
     const WARNING_MESSAGE = UserInterfaceMessage::FR_WARNING_VALIDATION_RULES_DATA_NOT_SPECIAL;
     const LISTE_DES_CARACTERE_SPECIAUX = "`^[[:alpha:]]+[ -]?[[:alpha:]]+$`";
+    //Lettre avec - _ , ; . etc
     const LISTE_DES_CARACTERE_SPECIAUX_LETTRE = "`[A-Za-z_\-\.]`";
+    //Chiffre avec - _ , ; . etc
     const LISTE_DES_CARACTERE_SPECIAUX_CHIFFRE = "`[0-9_\-\.]`";
+    //Lettre et chifre avec - _ , ; . etc
     const LISTE_DES_CARACTERE_CHIFFRE_LETTRE = "<^[A-Za-z0-9_.-]*$>";
+    //Lettre 
+    const LISTE_DES_CARACTERE_SPECIAUX_LETTRE_SEUL = "`[^a-zA-Z]`";
+    //Chifre
+    const LISTE_DES_CARACTERE_SPECIAUX_CHIFFRE_ET_LETTRE = "`[^a-zA-Z0-9]`";
 
     public function __construct($paramValueToTest = NULL) {
         parent::__construct($paramValueToTest);
@@ -42,7 +49,7 @@ class DataNotSpecialRulesValidation extends AbstractRulesValidation {
     function isValide() {
         $result = TRUE;
         $valueToTest = $this->getValueTotest();
-        $checkCaractereNumber = FtaController::isStringHasSpecialCaracter($valueToTest, self::LISTE_DES_CARACTERE_CHIFFRE_LETTRE);
+        $checkCaractereNumber = FtaController::isStringHasSpecialCaracter($valueToTest, self::LISTE_DES_CARACTERE_SPECIAUX_LETTRE_SEUL);
         if (!$checkCaractereNumber) {
             $result = FALSE;
         }

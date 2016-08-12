@@ -48,6 +48,7 @@ class ModelTableAssociation {
         'classification_marque_arcadia' => 'ClassificationMarqueArcadiaModel',
         'classification_arborescence_article_categorie_contenu' => 'ClassificationArborescenceArticleCategorieContenuModel',
         'fte_fournisseur' => 'FteFournisseurModel',
+        'annexe_liste_allergene_dico' => 'AnnexeListeAllergeneDicoModel',
     );
 
     static public function getModelName($paramTableName) {

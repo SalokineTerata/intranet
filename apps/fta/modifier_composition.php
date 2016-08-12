@@ -95,8 +95,9 @@ if ($proprietaire) {
     $action = "valider";
     $bouton_valider = "
             <input type=\"checkbox\" name=\"valider_saisie\" value=1 />Valider et revenir sur la FTA<br>
-            <input type=submit value='Enregistrer les modifications'>
+            <input type=submit name=Traitement value='" . FtaComposantModel::ENREGISTRER_LES_MODIFICATIONS . "'>
             ";
+    $bouton_allergene = "<input type=submit name=Traitement value='" . FtaComposantModel::MISE_EN_EVIDENCE_ALLERGENES . "'>";
 } else {
     $editable = FALSE;
     $action = "consulter";
@@ -953,7 +954,7 @@ switch ($output) {
              <tr><td>
 
                  <center>
-                 " . $bouton_valider . "
+                 " . $bouton_valider . $bouton_allergene . "
                  </center>
 
              </td></tr>

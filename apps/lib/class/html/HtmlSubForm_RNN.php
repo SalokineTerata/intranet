@@ -27,7 +27,7 @@
  * - 2ème champs = intitulé de la ligne
  * - 3ème champs = champs à gérer et pouvant être modifié par l'utilisateur
  * 
- * @author tp4300001
+ * @author franckwastaken
  */
 class HtmlSubForm_RNN extends HtmlSubForm {
 

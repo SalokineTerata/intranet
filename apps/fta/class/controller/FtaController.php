@@ -206,6 +206,73 @@ class FtaController {
     }
 
     /**
+     * Convertire une chaine de caractère en majuscule sans accents
+     * @param type $paramString
+     * @return type
+     */
+    public static function stringToUperCaseNoAccent($paramString) {
+        $result = self::stringToNoAccent($paramString);
+
+        $string = mb_strtoupper($result, "UTF-8");
+
+        return $string;
+    }
+
+    /**
+     * Convertire une chaine de caractère en minuscule
+     * @param type $paramString
+     * @return type
+     */
+    public static function stringToLowerCase($paramString) {
+
+        $string = mb_strtolower($paramString, "UTF-8");
+
+        return $string;
+    }
+
+    /**
+     * Convertir une chaine de caractère contenant des accents 
+     * en une chiane sans accents
+     * @param string $paramString
+     * @return string
+     */
+    public static function stringToNoAccent($paramString) {
+        $result = str_replace(
+                array(
+            'à', 'â', 'ä', 'á', 'ã', 'å',
+            'î', 'ï', 'ì', 'í',
+            'ô', 'ö', 'ò', 'ó', 'õ', 'ø',
+            'ù', 'û', 'ü', 'ú',
+            'é', 'è', 'ê', 'ë',
+            'ç', 'ÿ', 'ñ',
+            'À', 'Â', 'Ä', 'Á', 'Ã', 'Å',
+            'Î', 'Ï', 'Ì', 'Í',
+            'Ô', 'Ö', 'Ò', 'Ó', 'Õ', 'Ø',
+            'Ù', 'Û', 'Ü', 'Ú',
+            'É', 'È', 'Ê', 'Ë',
+            'Ç', 'Ÿ', 'Ñ',
+                ), array(
+            'a', 'a', 'a', 'a', 'a', 'a',
+            'i', 'i', 'i', 'i',
+            'o', 'o', 'o', 'o', 'o', 'o',
+            'u', 'u', 'u', 'u',
+            'e', 'e', 'e', 'e',
+            'c', 'y', 'n',
+            'A', 'A', 'A', 'A', 'A', 'A',
+            'I', 'I', 'I', 'I',
+            'O', 'O', 'O', 'O', 'O', 'O',
+            'U', 'U', 'U', 'U',
+            'E', 'E', 'E', 'E',
+            'C', 'Y', 'N',
+                ), $paramString);
+        return $result;
+    }
+
+    /**
+     * 
+     */
+
+    /**
      * On vérifie si un text ne contient que des  lettres en majuscule et en excluant les espaces auparavant
      * @param type $paramString
      * @return type

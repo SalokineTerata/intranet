@@ -23,6 +23,10 @@ class ClassificationActiviteSousFamilleArcadiaModel extends AbstractModel {
         
     }
 
+    function getNameDataTableToCompare() {
+        return $this->nameDataTableToCompare;
+    }
+
     /**
      * Affiche le tableau d'ajout d'une sous famille à une activité de classification
      * @param string $paramIdActivite

@@ -277,7 +277,7 @@ switch ($traitement) {
         if ($arrayCheckStrings) {
             foreach ($arrayCheckStrings as $key => $rowsString) {
                 if ($rowsString) {
-
+                    $stringCorrige ="";
                     //Convertion du text en majuscule sans accents
 //                    $string = FtaController::stringToUperCaseNoAccent($rowsString);
 

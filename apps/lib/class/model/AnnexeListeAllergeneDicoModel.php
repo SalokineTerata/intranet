@@ -40,6 +40,7 @@ class AnnexeListeAllergeneDicoModel extends AbstractModel {
         $arrayTmp = DatabaseOperation::convertSqlStatementWithKeyAsFirstFieldToArray(
                         "SELECT " . self::KEYNAME . ',' . self::FIELDNAME_NOM_ANNEXE_LISTE_ALLERGENE_DICO
                         . " FROM " . self::TABLENAME
+                        . " ORDER BY " . self::FIELDNAME_NOM_ANNEXE_LISTE_ALLERGENE_DICO
         );
 
         if ($arrayTmp) {

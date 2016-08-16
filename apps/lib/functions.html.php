@@ -645,6 +645,11 @@ function print_page_begin($disable_full_page = FALSE, $menu_file = NULL, $conf =
      */
     echo "<link rel=search type=application/opensearchdescription+xml title=Intranet Wiki href=../lib/wiki-agis.xml>";
     
+    /**
+     * jQuery
+     */
+//    echo "<script src=../plugins/jQuery-3-1-0/jquery-3.1.0.min.js></script>";
+    
     echo "<div class=display_none id=chargement style=width:100%;height:75px;color:red;font-weight:bold;font-size:14px;background:white;>
            <img src= ../lib/images/ajax_loader.gif> Chargement ...
           </div>";

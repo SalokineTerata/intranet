@@ -92,6 +92,7 @@ switch ($action) {
 
                         $ftaModel = new FtaModel($id_fta);
                         $DureeDeVieTechnique = $ftaModel->getDataField(FtaModel::FIELDNAME_DUREE_DE_VIE_TECHNIQUE_PRODUCTION)->getFieldValue();
+                         $PCB = $ftaModel->getDataField(FtaModel::FIELDNAME_NOMBRE_UVC_PAR_CARTON)->getFieldValue();
                         $poidsUVFValueKG = $ftaModel->getDataField(FtaModel::FIELDNAME_POIDS_ELEMENTAIRE)->getFieldValue();
                         $poidsUVFValueG = $poidsUVFValueKG * "1000";
                         //Valeur par défaut      
@@ -102,6 +103,7 @@ switch ($action) {
                         $poids_fta_nomenclature = $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_POIDS_UNITAIRE_CODIFICATION)->getFieldValue();
                         $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_POIDS_FTA_COMPOSITION)->setFieldValue($poidsUVFValueG);
                         $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_DUREE_VIE_TECHNIQUE_FTA_COMPOSITION)->setFieldValue($DureeDeVieTechnique);
+                        $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_QUANTITE_FTA_COMPOSITION)->setFieldValue($PCB);
                     }
                     $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_IS_COMPOSITION_FTA_COMPOSANT)->setFieldValue("1");
                 } else {

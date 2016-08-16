@@ -97,7 +97,7 @@ if ($proprietaire) {
             <input type=\"checkbox\" name=\"valider_saisie\" value=1 />Valider et revenir sur la FTA<br>
             <input type=submit name=Traitement value='" . FtaComposantModel::ENREGISTRER_LES_MODIFICATIONS . "'>
             ";
-    $bouton_allergene = "<input type=submit name=Traitement value='" . FtaComposantModel::MISE_EN_EVIDENCE_ALLERGENES . "'>";
+    $bouton_allergene = "<input onclick=allergerne_js() type=submit name=Traitement value='" . FtaComposantModel::MISE_EN_EVIDENCE_ALLERGENES . "'>";
 } else {
     $editable = FALSE;
     $action = "consulter";
@@ -193,15 +193,16 @@ if ($id_fta_composant) {
          */
         FtaVerrouillageChampsModel::doUpdateLockField(FtaComposantModel::TABLENAME, $id_fta_composant, FtaComposantModel::KEYNAME);
         $ftaComposantModel = new FtaComposantModel($id_fta_composant);
-//        $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_QUANTITE_FTA_COMPOSITION_UVC)->setFieldValue(FtaComposantModel::DEFAULT_VALUE_QTE_UVC);
         $ftaModel = new FtaModel($id_fta);
         $DureeDeVieTechnique = $ftaModel->getDataField(FtaModel::FIELDNAME_DUREE_DE_VIE_TECHNIQUE_PRODUCTION)->getFieldValue();
+        $PCB = $ftaModel->getDataField(FtaModel::FIELDNAME_NOMBRE_UVC_PAR_CARTON)->getFieldValue();
         $poidsUVFValueKG = $ftaModel->getDataField(FtaModel::FIELDNAME_POIDS_ELEMENTAIRE)->getFieldValue();
         $poidsUVFValueG = $poidsUVFValueKG * "1000";
         $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_IS_COMPOSITION_FTA_COMPOSANT)->setFieldValue("1");
         $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_IS_NOMENCLATURE_FTA_COMPOSANT)->setFieldValue("0");
         $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_POIDS_FTA_COMPOSITION)->setFieldValue($poidsUVFValueG);
         $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_DUREE_VIE_TECHNIQUE_FTA_COMPOSITION)->setFieldValue($DureeDeVieTechnique);
+        $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_QUANTITE_FTA_COMPOSITION)->setFieldValue($PCB);
         $ftaComposantModel->saveToDatabase();
         $ftaComposantView = new FtaComposantView($ftaComposantModel);
         $ftaComposantView->setIsEditable($editable);

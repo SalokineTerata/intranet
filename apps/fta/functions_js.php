@@ -21,6 +21,17 @@
         parent.location.href = url;
     }
 
+    function allergerne_js() {
+        if (confirm("Le programme de mise en majuscule des allergènes transforme aussi les mots qui se compose d'un mot de la liste d'allergènes.\n\n\
+                     Exemple: blé sera remplacé par BLE et possible par possiBLE "))
+        {
+
+        }
+    }
+
+//    jQuery(document).ready(function () {
+//        alert("jQuery est prêt !");
+//    });
     /**
      * Pop up confirmant l'envie de l'utilisateur d'actualisé les données Arcadia
      * @param {type} ParamIdFta

@@ -35,7 +35,7 @@ function tableau_planning_selectionne($semaine_en_cours, $annee_en_cours, $servi
     $req1.= "AND (annee_planning_presence_semaine_visible='$annee_en_cours') ";
     $req1.= "AND (id_service='$service') ";
     $req1.= "AND (geo.id_geo='$site') ";
-    $req1.= "ORDER BY nom ASC";
+    $req1.= "ORDER BY nom,prenom ASC";
 
 //echo $req1;
 //Execution de la requête SQL

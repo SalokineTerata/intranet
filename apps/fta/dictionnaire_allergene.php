@@ -40,7 +40,7 @@ $html_table = 'table '              //Permet d'harmoniser les tableaux
 
 $globalConfig = new GlobalConfig();
 $globalConfig->refreshTableInDatabaseDescription(AnnexeListeAllergeneDicoModel::TABLENAME);
-$titre = "Liste des Allergenes en MAJUSCULE";
+$titre = "Liste des Allergènes en MAJUSCULE";
 $htmlTableClassificationElement = AnnexeListeAllergeneDicoModel::getHtmlTableListeAllergene();
 
 

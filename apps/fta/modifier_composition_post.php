@@ -274,14 +274,13 @@ switch ($traitement) {
             $ingredient_fta_composition, $ingredient_fta_composition1
             , $etiquette_fta_composition, $etiquette_supplementaire_fta_composition);
 
+        $ftaComposantModel = new FtaComposantModel($id_fta_composant);
         if ($arrayCheckStrings) {
             foreach ($arrayCheckStrings as $key => $rowsString) {
                 if ($rowsString) {
-                    $stringCorrige ="";
+                    $stringCorrige = "";
                     //Convertion du text en majuscule sans accents
 //                    $string = FtaController::stringToUperCaseNoAccent($rowsString);
-
-                    
                     //Récupération des mots du DICO des listes d'allergènes
 
                     $arrayValues = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
@@ -310,7 +309,6 @@ switch ($traitement) {
                     /**
                      * Enregistrement en BDD
                      */
-                    $ftaComposantModel = new FtaComposantModel($id_fta_composant);
                     switch ($key) {
                         case "0":
                             $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_INGREDIENT_FTA_COMPOSITION)->setFieldValue($stringCorrige);

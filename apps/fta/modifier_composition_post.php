@@ -303,7 +303,8 @@ switch ($traitement) {
                             $mot = FtaController::stringToLowerCase($valueToTest);
 
                             //Remplace tous les caractères du text
-                            $stringCorrige = str_replace($mot, $valueToTest, $rowsString);
+//                            $stringCorrige = str_replace($mot, $valueToTest, $rowsString);
+                            $stringCorrige = preg_replace('/\b'.$mot.'\b/i',$valueToTest,$rowsString, 1);
                         }
                     }
                     /**

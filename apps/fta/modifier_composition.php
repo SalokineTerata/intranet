@@ -97,7 +97,7 @@ if ($proprietaire) {
             <input type=\"checkbox\" name=\"valider_saisie\" value=1 />Valider et revenir sur la FTA<br>
             <input type=submit name=Traitement value='" . FtaComposantModel::ENREGISTRER_LES_MODIFICATIONS . "'>
             ";
-    $bouton_allergene = "<input onclick= type=submit name=Traitement value='" . FtaComposantModel::MISE_EN_EVIDENCE_ALLERGENES . "'>";
+    $bouton_allergene = "<input type=submit name=Traitement value='" . FtaComposantModel::MISE_EN_EVIDENCE_ALLERGENES . "'>";
 } else {
     $editable = FALSE;
     $action = "consulter";

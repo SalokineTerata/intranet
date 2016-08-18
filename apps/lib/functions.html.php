@@ -597,7 +597,7 @@ function print_page_begin($disable_full_page = FALSE, $menu_file = NULL, $conf =
     /**
      * Si le module Fta doit être affiché on selectionne le css du config.ini sinon celui de la base de données
      */
-    if ($module == "fta" or $module == "adminagis" or $module == "lib") {
+    if ($module == "fta" or $module == "adminagis" or $module == "lib" or $module == "test") {
         $css_intranet_module = $conf->getConf()->getCssFta();
     } else {
         $css_intranet_module = $_SESSION["intranet_modules"][$module]["css_intranet_module"];
@@ -648,7 +648,13 @@ function print_page_begin($disable_full_page = FALSE, $menu_file = NULL, $conf =
     /**
      * jQuery
      */
-//    echo "<script src=../plugins/jQuery-3-1-0/jquery-3.1.0.min.js></script>";
+    //Javascript
+    echo "<script src=../plugins/jQuery-3.1.0/jquery-3.1.0.min.js></script>";
+    echo "<script src=../plugins/jQuery-ui-1.12.0.custom/jquery-ui.min.js></script>";
+    //CSS
+    echo "<link href=../plugins/jQuery-ui-1.12.0.custom/jquery-ui.min.css rel=stylesheet type=text/css>";
+    echo "<link href=../plugins/jQuery-ui-1.12.0.custom/jquery-ui.theme.min.css rel=stylesheet type=text/css>";
+    echo "<link href=../plugins/jQuery-ui-1.12.0.custom/jquery-ui.structure.min.css rel=stylesheet type=text/css>";
     
     echo "<div class=display_none id=chargement style=width:100%;height:75px;color:red;font-weight:bold;font-size:14px;background:white;>
            <img src= ../lib/images/ajax_loader.gif> Chargement ...

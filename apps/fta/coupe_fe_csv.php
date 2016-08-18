@@ -24,6 +24,7 @@ $html_table = 'table '                     //Permet d'harmoniser les tableaux
 
 $arrayDataCoupeFe = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
                 "SELECT DISTINCT " . FtaModel::FIELDNAME_LIBELLE . "," . FtaModel::FIELDNAME_EAN_UVC
+                . "," . FtaModel::FIELDNAME_EAN_COLIS . "," . FtaModel::FIELDNAME_EAN_PALETTE
                 . "," . FtaModel::FIELDNAME_CODE_ARTICLE_LDC . "," . FtaModel::FIELDNAME_NOMBRE_UVC_PAR_CARTON
                 . "," . FtaComposantModel::FIELDNAME_INGREDIENT_FTA_COMPOSITION . "," . FtaModel::FIELDNAME_LISTE_ALLERGENE
                 . "," . FtaModel::FIELDNAME_ORIGINE_MATIERE_PREMIERE . "," . FtaModel::FIELDNAME_DUREE_DE_VIE
@@ -42,6 +43,7 @@ $arrayDataCoupeFe = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
 );
 $arrayDataInter = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
                 "SELECT DISTINCT " . FtaModel::FIELDNAME_LIBELLE . "," . FtaModel::FIELDNAME_EAN_UVC
+                . "," . FtaModel::FIELDNAME_EAN_COLIS . "," . FtaModel::FIELDNAME_EAN_PALETTE
                 . "," . FtaModel::FIELDNAME_CODE_ARTICLE_LDC . "," . FtaModel::FIELDNAME_NOMBRE_UVC_PAR_CARTON
                 . "," . FtaComposantModel::FIELDNAME_INGREDIENT_FTA_COMPOSITION . "," . FtaModel::FIELDNAME_LISTE_ALLERGENE
                 . "," . FtaModel::FIELDNAME_ORIGINE_MATIERE_PREMIERE . "," . FtaModel::FIELDNAME_DUREE_DE_VIE
@@ -62,7 +64,9 @@ $arrayDataInter = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
 $arrayData = array_merge($arrayDataInter, $arrayDataCoupeFe);
 $titres = array(
     "NOM du produit",
-    "GENCOD",
+    "Gencod EAN Article",
+    "Gencod EAN Colis",
+    "Gencod EAN Palette",
     "Code Article Arcadia",
     "PCB",
     "Listes des ingrédients",

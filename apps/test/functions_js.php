@@ -100,7 +100,7 @@
 
 
 
-    function handleAJAXReturn( ParamHttp, ParamCallbackFunction, ParamCallbackFunctionParameters)
+    function handleAJAXReturn(ParamHttp, ParamCallbackFunction, ParamCallbackFunctionParameters)
     {
 
         //Définition des variables
@@ -658,4 +658,26 @@
                 ;
         parent.location.href = url;
     }
+
+
+    /**
+     * Test jQquery
+     */
+    function test() {
+//        var liste = [
+//            "Draggable",
+//            "Droppable",
+//            "Resizable",
+//            "Selectable",
+//            "Sortable"
+//        ];
+        
+        $('#recherche').autocomplete(
+                {
+//                     minLength:2, 
+
+                    source: "source.php?id_fta=34"
+                });
+    }
+
 </script>

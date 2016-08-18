@@ -1,5 +1,7 @@
 <?php
-//require_once '../inc/main.php';
+require_once '../inc/main.php';
+print_page_begin($disable_full_page, $menu_file);
+flush();
 
 //
 //$arrayValue = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
@@ -38,3 +40,15 @@
 //
 //    $franck = "franck";
 //}
+
+echo "
+<form>
+    <label for=search>Pays:</label>
+    <input onclick=test() type=text id=recherche />
+</form>
+";
+
+/* * *********************
+  Inclusion de fin de page
+ * ********************* */
+include ('../lib/fin_page.inc');

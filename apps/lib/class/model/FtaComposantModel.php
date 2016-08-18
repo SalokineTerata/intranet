@@ -70,6 +70,7 @@ class FtaComposantModel extends AbstractModel {
     const FIELDNAME_VIRTUAL_QUANTITE_FTA_COMPOSITION = 'virtual_quantite_fta_composition';
     const FIELDNAME_VIRTUAL_SITE_DE_PRODUCTION = 'virtual_site_de_production';
     const DEFAULT_VALUE_QTE_UVC = "1";
+    const REVENIR_SURE_LA_FTA= "Revenir sur la FTA";
     const ENREGISTRER_LES_MODIFICATIONS= "Enregistrer les modifications";
     const MISE_EN_EVIDENCE_ALLERGENES= "Mise en évidence allergènes";
 

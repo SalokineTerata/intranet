@@ -50,7 +50,7 @@ class DataNotSpecialRulesValidation extends AbstractRulesValidation {
         $result = TRUE;
         $valueToTest = $this->getValueTotest();
         $checkCaractereNumber = FtaController::isStringHasSpecialCaracter($valueToTest, self::LISTE_DES_CARACTERE_SPECIAUX_LETTRE_SEUL);
-        if (!$checkCaractereNumber) {
+        if ($checkCaractereNumber) {
             $result = FALSE;
         }
         return $result;

@@ -664,20 +664,20 @@
      * Test jQquery
      */
     function test() {
-//        var liste = [
-//            "Draggable",
-//            "Droppable",
-//            "Resizable",
-//            "Selectable",
-//            "Sortable"
-//        ];
-        
         $('#recherche').autocomplete(
                 {
 //                     minLength:2, 
 
-                    source: "source.php?id_fta=34"
+                    source: "../lib/source.php?value=test",
+                    select: function (event, ui) {
+                        $(this).val(ui.item.label); // display the selected text
+                        $('#rechercheid').val(ui.item.id) // save selected id to hidden input
+//                        console.log("selected id: ", ui.item.label)
+                    }
+
                 });
     }
+
+    
 
 </script>

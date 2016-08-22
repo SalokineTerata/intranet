@@ -70,6 +70,43 @@ class AnnexeEmballageGroupeModel extends AbstractModel {
         );
     }
 
+    /**
+     * On retourne l'id annexe groupe emballage selon l'id annexe emballage et le type d'emballage
+     * @param int $paramIdAnnexeEmballage
+     * @param int $paramIdAnnexeAmballageGroupeType
+     * @return string
+     */
+    public static function getIdAnnexeEmballageGroupeByIdAnnexeEmballageAndIdAnnexeGroupeType($paramIdAnnexeEmballage, $paramIdAnnexeAmballageGroupeType) {
+        //Dans le cas d'emballage UVC, on peut avoir de l'emballage primaire
+        if ($paramIdAnnexeAmballageGroupeType == 2) {
+            $op = '<=';
+        } else {
+            $op = '=';
+        }
+
+        $arrayIdAnnexeEmballageGroupe = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
+                        "SELECT " . self::TABLENAME . "." . self::KEYNAME
+                        . " FROM " . self::TABLENAME . "," . AnnexeEmballageGroupeTypeModel::TABLENAME . "," . AnnexeEmballageModel::TABLENAME
+                        . " WHERE " . self::TABLENAME . "." . self::FIELDNAME_ID_ANNEXE_EMBALLAGE_GROUPE_CONFIGURATION
+                        . "=" . AnnexeEmballageGroupeTypeModel::TABLENAME . "." . AnnexeEmballageGroupeTypeModel::KEYNAME
+                        . " AND " . self::TABLENAME . "." . self::KEYNAME
+                        . "=" . AnnexeEmballageModel::TABLENAME . "." . AnnexeEmballageModel::FIELDNAME_ID_ANNEXE_EMBALLAGE_GROUPE
+                        . " AND " . self::TABLENAME . '.' . AnnexeEmballageGroupeModel::FIELDNAME_ID_ANNEXE_EMBALLAGE_GROUPE_CONFIGURATION
+                        . $op . $paramIdAnnexeAmballageGroupeType
+                        . " AND " . AnnexeEmballageModel::TABLENAME . '.' . AnnexeEmballageModel::KEYNAME
+                        . "=" . $paramIdAnnexeEmballage
+        );
+
+        //Récupération de l'id Groupe
+        if ($arrayIdAnnexeEmballageGroupe) {
+            foreach ($arrayIdAnnexeEmballageGroupe as $rowsIdAnnexeEmballageGroupe) {
+                $IdAnnexeEmballageGroupe = $rowsIdAnnexeEmballageGroupe[self::KEYNAME];
+            }
+        }
+
+        return $IdAnnexeEmballageGroupe;
+    }
+
 }
 
 ?>

@@ -72,6 +72,7 @@ require_once('../lib/class/database/DatabaseDescription.php');
 require_once('../lib/class/database/DatabaseDescriptionField.php');
 require_once('../lib/class/database/DatabaseDescriptionTable.php');
 require_once('../lib/class/database/DatabaseDataField.php');
+require_once('../lib/class/database/DatabaseDataJquery.php');
 require_once('../lib/class/database/DatabaseRecord.php');
 
 //Règles de validation

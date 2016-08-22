@@ -42,9 +42,16 @@ flush();
 //}
 
 echo "
-<form>
-    <label for=search>Pays:</label>
-    <input onclick=test() type=text id=recherche />
+<form method=get action=test_post.php>
+    <label for=search>TEST:</label>
+    <input onclick=test() type=text id=recherche name=recherche />
+    <input type=hidden name=rechercheid id=rechercheid />
+    <input name=submit type=submit value=valider>
+    <br>
+    <label >Liste des toutes les Fiches Techniques Emballages (FTE): </label>
+    <input onclick=listeEmballage() type=text id=emballage name=emballage />
+    <input type=hidden name=emballageid id=emballageid />
+    <input name=submit type=submit value=valider>
 </form>
 ";
 

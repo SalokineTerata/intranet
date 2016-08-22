@@ -79,6 +79,7 @@ $etiquette_supplementaire_fta_composition = Lib::getParameterFromRequest(FtaComp
 switch ($traitement) {
 
     case FtaComposantModel::ENREGISTRER_LES_MODIFICATIONS :
+    case FtaComposantModel::REVENIR_SURE_LA_FTA :
         $_SESSION['checkCreation'] = "0";
 
         if ($mode_etiquette_fta_composition == AnnexeModeEtiquetteModel::PAS_DETIQUETTE) {

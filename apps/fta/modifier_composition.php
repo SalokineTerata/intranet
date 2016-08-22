@@ -102,8 +102,7 @@ if ($proprietaire) {
     $editable = FALSE;
     $action = "consulter";
     $bouton_valider = "
-            <input type=submit value='Revenir sur la FTA'>
-            ";
+            <input name=Traitement type=submit value='" . FtaComposantModel::REVENIR_SURE_LA_FTA . "'>";
 }
 //Mode Création/Modification d'une nomenclature
 /*

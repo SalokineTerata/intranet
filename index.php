@@ -22,11 +22,11 @@ $ServerName = $_SERVER['SERVER_NAME'];
 /**
  * Redirection vers le proxy de production (tester en copie prod)
  */
-//if ($ServerName == "fta05401.grpldc.com" or $ServerName == "intranet.agis.fr"
+if ($ServerName == "fta05401.grpldc.com" or $ServerName == "intranet.agis.fr"
 ////        or $ServerName == "cop-fta05401.svlidc.com"
-//        ) {
+) {
 ////    header('Location: https://cop-fta05401.lesidc.com/v3/apps/index.php');
-//    header('Location: https://fta05401.lesidc.com/v3/apps/index.php');
-//} else {
+    header('Location: https://fta05401.lesidc.com/v3/apps/index.php');
+} else {
     header('Location: apps/index.php');
-//}
+}

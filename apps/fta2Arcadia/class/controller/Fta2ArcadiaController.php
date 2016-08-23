@@ -1369,7 +1369,7 @@ function setXMLArcadiaArticleRefLicCcial($paramArcadiaArticleRefLicCcial) {
         $value = self::CDATA_OPEN . $paramArcadiaArticleRefLicCcial . self::CDATA_CLOSE;
     }
     $this->XMLarcadiaArticleRefLicCcial = self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION
-            . "<LIB_CCIAL>" . $value . "</LIB_CCIAL><!-- DIN de la FTA -->" . self::SAUT_DE_LIGNE;
+            . "<LIB_CCIAL>" . $value . "</LIB_CCIAL>" . self::SAUT_DE_LIGNE;
 }
 
 function setXMLArcadiaArticleRefLicProduction($paramArcadiaArticleRefLicProduction) {
@@ -1378,7 +1378,7 @@ function setXMLArcadiaArticleRefLicProduction($paramArcadiaArticleRefLicProducti
         $value = self::CDATA_OPEN . $paramArcadiaArticleRefLicProduction . self::CDATA_CLOSE;
     }
     $this->XMLarcadiaArticleRefLicProduction = self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION
-            . "<LIB_PRODUCTION>" . $value . "</LIB_PRODUCTION><!-- DIN de la FTA -->" . self::SAUT_DE_LIGNE;
+            . "<LIB_PRODUCTION>" . $value . "</LIB_PRODUCTION>" . self::SAUT_DE_LIGNE;
 }
 
 function getXMLArcadiaEanArticle() {
@@ -2096,8 +2096,15 @@ function getXMLArcadiaArtSiteSiteAffectRes() {
 }
 
 function setXMLArcadiaArtSiteDateDebutEffet() {
+    /**
+     * Date+1 jours
+     */
+    $date = date_create(date("d-m-Y"));
+    date_modify($date, '+1 day');
+    $date1 = date_format($date, "d/m/Y");
+
     $this->XMLarcadiaArtSiteDateDebutEffet = self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION
-            . "<DATE_DEBUT_EFFET>" . date("d/m/Y") . "</DATE_DEBUT_EFFET>" . self::SAUT_DE_LIGNE;
+            . "<DATE_DEBUT_EFFET>" . $date1 . "</DATE_DEBUT_EFFET>" . self::SAUT_DE_LIGNE;
 }
 
 function setXMLArcadiaArtSiteDateFinEffet() {
@@ -2117,7 +2124,7 @@ function setXMLArcadiaArtSiteCodAtelier($XMLarcadiaArtSiteCodAtelier) {
 
 function setXMLArcadiaArtSiteSiteAffectRes() {
     $this->XMLarcadiaArtSiteSiteAffectRes = self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION
-            . "<SIT_AFFECT_RES>" . $this->getFtaModel()->getModelSiteExpedition()->getDataField(GeoModel::FIELDNAME_ID_SITE_GROUPE)->getFieldValue() . "</SIT_AFFECT_RES>" . self::SAUT_DE_LIGNE;
+            . "<SIT_AFFECT_RES>" . $this->getFtaModel()->getModelSiteProduction()->getDataField(GeoModel::FIELDNAME_ID_SITE_GROUPE)->getFieldValue() . "</SIT_AFFECT_RES>" . self::SAUT_DE_LIGNE;
 }
 
 function getXMLRecordsetArtSiteTwo() {

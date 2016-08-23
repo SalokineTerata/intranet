@@ -198,18 +198,29 @@ class Arcadia2FtaController {
                         . " = " . $actifTransaction . "  Mail = " . $notificationMailTransaction . " user = " . $idUserTransaction;
                         if ($actifTransaction) {
 
-                            if ($codeReply == "0") {
-                                /**
-                                 * Requète de MAJ de la table Fta
-                                 */
-                                $sql_fta = FtaModel::getSQLFta2ArcadiaTransactionUpdateFtaTable($nameOfBDDTarget, $idFta, $codeArticleArcadia);
-                                mysql_query($sql_fta);
-
-                                $corpsmail = UserInterfaceMessage::FR_ARCADIA_OK_SCRIT_MESSAGE;
-                            }
                             if ($notificationMailTransaction) {
-                                if ($codeReply <> "0") {
-                                    $corpsmail = UserInterfaceMessage::FR_ARCADIA_ERREUR_SCRIT_MESSAGE_CODE_REPLY;
+                                switch ($codeReply) {
+                                    case Fta2ArcadiaTransactionModel::CONSOMME:
+                                        /**
+                                         * Requète de MAJ de la table Fta
+                                         */
+                                        $sql_fta = FtaModel::getSQLFta2ArcadiaTransactionUpdateFtaTable($nameOfBDDTarget, $idFta, $codeArticleArcadia);
+                                        mysql_query($sql_fta);
+
+                                        $corpsmail = UserInterfaceMessage::FR_ARCADIA_OK_SCRIT_MESSAGE;
+
+                                        break;
+                                    case Fta2ArcadiaTransactionModel::REJET_TASKS:
+                                        $corpsmail = UserInterfaceMessage::FR_ARCADIA_REJET_TASKS_DATA_MESSAGE;
+
+                                        break;
+                                    case Fta2ArcadiaTransactionModel::REFUSE:
+                                        $corpsmail = UserInterfaceMessage::FR_ARCADIA_REFUSE_DATA_MESSAGE;
+
+                                        break;
+                                    case Fta2ArcadiaTransactionModel::CLOTURE_AUTO:
+                                        $corpsmail = UserInterfaceMessage::FR_ARCADIA_CLOTURE_AUTO_DATA_MESSAGE;
+                                        break;
                                 }
                                 $corpsmail .=UserInterfaceMessage::FR_ARCADIA_ID_MESSAGE_TRANSACTION . $codeArticleArcadia;
                                 /**

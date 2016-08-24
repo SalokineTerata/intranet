@@ -124,6 +124,9 @@ $bloc.="<td align=center>Identité</td>" . $ftaView->getHtmlClassificationRaccou
 //Commentaire sur la Fta
 $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_COMMENTAIRE);
 
+//Environnement de conservation
+$bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_ENVIRONNEMENT_CONSERVATION);
+
 //Données lié à arcadia 
 $bloc.= $ftaView->getHtmlArcadiaDataNotEditable();
 $bloc.=$ftaView->getHtmlArcadiaDataVariableEditable();
@@ -161,11 +164,11 @@ $bloc.=$ftaView->getHtmlEANPalette();
 /**
  * Methode de préarationet type d'acquisition
  */
-$methodeDePreparationArcadiaValue= $ftaModel->getModelAnnexeUniteFacturation()->getDataField(AnnexeUniteFacturationModel::FIELDNAME_ID_ARCADIA_METHODE_DE_PREPARATION)->getFieldValue();
-$typePreparationAcquisitionArcadiaValue= $ftaModel->getModelAnnexeUniteFacturation()->getDataField(AnnexeUniteFacturationModel::FIELDNAME_ID_ARCADIA_TYPE_PREPA_ACQUISITION)->getFieldValue();
+$methodeDePreparationArcadiaValue = $ftaModel->getModelAnnexeUniteFacturation()->getDataField(AnnexeUniteFacturationModel::FIELDNAME_ID_ARCADIA_METHODE_DE_PREPARATION)->getFieldValue();
+$typePreparationAcquisitionArcadiaValue = $ftaModel->getModelAnnexeUniteFacturation()->getDataField(AnnexeUniteFacturationModel::FIELDNAME_ID_ARCADIA_TYPE_PREPA_ACQUISITION)->getFieldValue();
 
-$bloc.="<tr class=contenu><td align=left>Methode de Preparation</td><td>".$methodeDePreparationArcadiaValue . "</td></tr>";
-$bloc.="<tr class=contenu><td align=left>Type prepa Acquisition</td><td>".$typePreparationAcquisitionArcadiaValue . "</td></tr>";
+$bloc.="<tr class=contenu><td align=left>Methode de Preparation</td><td>" . $methodeDePreparationArcadiaValue . "</td></tr>";
+$bloc.="<tr class=contenu><td align=left>Type prepa Acquisition</td><td>" . $typePreparationAcquisitionArcadiaValue . "</td></tr>";
 
 /**
  * Exigence client

@@ -67,12 +67,12 @@ abstract class ModuleConfig {
     /**
      * Nombre de jour attribué pour une première notification sur la date de validation d'une fta afficher sur la page d'acceuil
      */
-    const VALUE_DATE_NOTIFICATION = 15;
+    const VALUE_DATE_NOTIFICATION = 30;
 
     /**
      * Nombre de jour attribué pour une deuxième notification sur la date de validation d'une fta afficher sur la page d'acceuil
      */
-    const VALUE_DATE_NOTIFICATION2 = 30;
+    const VALUE_DATE_NOTIFICATION2 = 15;
 
     /**
      * Nombre de jour par défaut d'une date d'échéance de validation d'une Fta en création

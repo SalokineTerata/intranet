@@ -61,12 +61,16 @@ $page_reload = Lib::getParameterFromRequest('page_reload');
 $ftaModel = new FtaModel($idFta);
 $annexeEmballageGroupeTypeModel = new AnnexeEmballageGroupeTypeModel($idAnnexeEmballageGroupeType);
 $annexeEmballageModel = new AnnexeEmballageModel($idAnnexeEmballage);
+$annexeEmballageGroupeModel = new AnnexeEmballageGroupeModel($idAnnexeEmballageGroupe);
 
-if (($idAnnexeEmballage and $idAnnexeEmballageGroupeType) and ! $idAnnexeEmballageGroupe) {
-    $idAnnexeEmballageGroupe = AnnexeEmballageGroupeModel::getIdAnnexeEmballageGroupeByIdAnnexeEmballageAndIdAnnexeGroupeType($idAnnexeEmballage, $idAnnexeEmballageGroupeType);
-
-    $annexeEmballageGroupeModel = new AnnexeEmballageGroupeModel($idAnnexeEmballageGroupe);
-}
+/**
+ * jQuery
+ */
+//if (($idAnnexeEmballage and $idAnnexeEmballageGroupeType) and ! $idAnnexeEmballageGroupe) {
+//    $idAnnexeEmballageGroupe = AnnexeEmballageGroupeModel::getIdAnnexeEmballageGroupeByIdAnnexeEmballageAndIdAnnexeGroupeType($idAnnexeEmballage, $idAnnexeEmballageGroupeType);
+//
+//    $annexeEmballageGroupeModel = new AnnexeEmballageGroupeModel($idAnnexeEmballageGroupe);
+//}
 
 /*
   Récupération des données MySQL
@@ -85,36 +89,36 @@ if (!$action) {                    //Si aucun groupe d'emballage n'a était sél
 switch ($action) {
     case 'etape1': //Sélection du groupe d'emballage
         //Dans le cas d'emballage UVC, on peut avoir de l'emballage primaire
-//        if ($idAnnexeEmballageGroupeType == 2) {
-//            $op = '<=';
-//        } else {
-//            $op = '=';
-//        }
-//
-//        //Type d'emballage
-//        $nom_liste = AnnexeEmballageGroupeModel::KEYNAME;
-//        $requete = 'SELECT ' . AnnexeEmballageGroupeModel::KEYNAME . ',' . AnnexeEmballageGroupeModel::FIELDNAME_NOM_ANNEXE_EMBALLAGE_GROUPE
-//                . ' FROM ' . AnnexeEmballageGroupeModel::TABLENAME
-//                . ' WHERE ' . AnnexeEmballageGroupeModel::FIELDNAME_ID_ANNEXE_EMBALLAGE_GROUPE_CONFIGURATION . $op . $idAnnexeEmballageGroupeType //Emballage Primaire et UVC
-//                . ' ORDER BY ' . AnnexeEmballageGroupeModel::FIELDNAME_NOM_ANNEXE_EMBALLAGE_GROUPE
-//        ;
-//
-//        $id_defaut = '';
-//        $nom_defaut = AnnexeEmballageGroupeModel::KEYNAME;
-//        $liste_emballage_groupe = DatabaseDescription::getFieldDocLabel(AnnexeEmballageGroupeModel::TABLENAME, AnnexeEmballageGroupeModel::FIELDNAME_NOM_ANNEXE_EMBALLAGE_GROUPE)
-//                . '</td><td>'
-//                . AccueilFta::afficherRequeteEnListeDeroulante($requete, $id_defaut, $nom_defaut, TRUE);
-//        $bloc.=$liste_emballage_groupe . '</tr></table><' . $html_table . '><tr class=titre_principal><td width=\'50%\'>';
+        if ($idAnnexeEmballageGroupeType == 2) {
+            $op = '<=';
+        } else {
+            $op = '=';
+        }
+
+        //Type d'emballage
+        $nom_liste = AnnexeEmballageGroupeModel::KEYNAME;
+        $requete = 'SELECT ' . AnnexeEmballageGroupeModel::KEYNAME . ',' . AnnexeEmballageGroupeModel::FIELDNAME_NOM_ANNEXE_EMBALLAGE_GROUPE
+                . ' FROM ' . AnnexeEmballageGroupeModel::TABLENAME
+                . ' WHERE ' . AnnexeEmballageGroupeModel::FIELDNAME_ID_ANNEXE_EMBALLAGE_GROUPE_CONFIGURATION . $op . $idAnnexeEmballageGroupeType //Emballage Primaire et UVC
+                . ' ORDER BY ' . AnnexeEmballageGroupeModel::FIELDNAME_NOM_ANNEXE_EMBALLAGE_GROUPE
+        ;
+
+        $id_defaut = '';
+        $nom_defaut = AnnexeEmballageGroupeModel::KEYNAME;
+        $liste_emballage_groupe = DatabaseDescription::getFieldDocLabel(AnnexeEmballageGroupeModel::TABLENAME, AnnexeEmballageGroupeModel::FIELDNAME_NOM_ANNEXE_EMBALLAGE_GROUPE)
+                . '</td><td>'
+                . AccueilFta::afficherRequeteEnListeDeroulante($requete, $id_defaut, $nom_defaut, TRUE);
+        $bloc.=$liste_emballage_groupe . '</tr></table><' . $html_table . '><tr class=titre_principal><td width=\'50%\'>';
         /**
          * Fonction autocomplete affichant la liste des emballage suivant le type choisie (UVF - Colis - Palette)
          */
-        $bloc.="<input onclick=listeEmballage(" . $idAnnexeEmballageGroupeType . ") type=text size=100 id=" . AnnexeEmballageModel::TABLENAME . " name=" . AnnexeEmballageModel::TABLENAME . " />
-    <input type=hidden name=" . AnnexeEmballageModel::KEYNAME . " id=" . AnnexeEmballageModel::KEYNAME . " />";
+//        $bloc.="<input onclick=listeEmballage(" . $idAnnexeEmballageGroupeType . ") type=text size=100 id=" . AnnexeEmballageModel::TABLENAME . " name=" . AnnexeEmballageModel::TABLENAME . " />
+//    <input type=hidden name=" . AnnexeEmballageModel::KEYNAME . " id=" . AnnexeEmballageModel::KEYNAME . " />";
 
         break;
 
     /**
-     * Etape 2 désactivé
+     * Etape 2 
      */
     case 'etape2': //Sélection d'une FTE
         //Création de la liste prédéfini des Emballages

@@ -62,6 +62,33 @@ switch ($action) {
         //Renvoi sur la page d'ajout avec cette nouvelle information de groupe d'emballage sélectionné
         header('Location: ajout_conditionnement.php?id_fta=' . $idFta
                 . '&id_annexe_emballage_groupe_type=' . $idAnnexeEmballageGroupeType
+                . '&id_annexe_emballage_groupe=' . $idAnnexeEmballageGroupe
+                . '&action=etape2&id_fta_chapitre=' . $idFtaChapitreEncours
+                . '&synthese_action=' . $syntheseAction
+                . '&comeback=' . $comeback
+                . '&id_fta_etat=' . $idFtaEtat
+                . '&abreviation_fta_etat=' . $abreviationFtaEtat
+                . '&id_fta_role=' . $idFtaRole);
+        /**
+         * jQuery
+         */
+//        header('Location: ajout_conditionnement.php?id_fta=' . $idFta
+//                . '&id_annexe_emballage_groupe_type=' . $idAnnexeEmballageGroupeType
+//                . '&id_annexe_emballage=' . $idAnnexeEmballage
+//                . '&action=etape3&id_fta_chapitre=' . $idFtaChapitreEncours
+//                . '&synthese_action=' . $syntheseAction
+//                . '&comeback=' . $comeback
+//                . '&id_fta_etat=' . $idFtaEtat
+//                . '&abreviation_fta_etat=' . $abreviationFtaEtat
+//                . '&id_fta_role=' . $idFtaRole);
+
+        break;
+
+    case 'etape2': //Un emballage précis a été sélectionné
+        //Renvoi sur la page d'ajout avec cette nouvelle information de groupe d'emballage sélectionné
+        header('Location: ajout_conditionnement.php?id_fta=' . $idFta
+                . '&id_annexe_emballage_groupe_type=' . $idAnnexeEmballageGroupeType
+                . '&id_annexe_emballage_groupe=' . $idAnnexeEmballageGroupe
                 . '&id_annexe_emballage=' . $idAnnexeEmballage
                 . '&action=etape3&id_fta_chapitre=' . $idFtaChapitreEncours
                 . '&synthese_action=' . $syntheseAction
@@ -70,21 +97,6 @@ switch ($action) {
                 . '&abreviation_fta_etat=' . $abreviationFtaEtat
                 . '&id_fta_role=' . $idFtaRole);
 
-        break;
-//
-//    case 'etape2': //Un emballage précis a été sélectionné
-//        //Renvoi sur la page d'ajout avec cette nouvelle information de groupe d'emballage sélectionné
-//        header('Location: ajout_conditionnement.php?id_fta=' . $idFta
-//                . '&id_annexe_emballage_groupe_type=' . $idAnnexeEmballageGroupeType
-//                . '&id_annexe_emballage_groupe=' . $idAnnexeEmballageGroupe
-//                . '&id_annexe_emballage=' . $idAnnexeEmballage
-//                . '&action=etape3&id_fta_chapitre=' . $idFtaChapitreEncours
-//                . '&synthese_action=' . $syntheseAction
-//                . '&comeback=' . $comeback
-//                . '&id_fta_etat=' . $idFtaEtat
-//                . '&abreviation_fta_etat=' . $abreviationFtaEtat
-//                . '&id_fta_role=' . $idFtaRole);
-//
 //        break;
 
     case 'etape3': //Un emballage a été sélectionné

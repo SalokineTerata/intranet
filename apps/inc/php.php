@@ -44,6 +44,7 @@ require_once('../conf/EnvironmentAbstract.php');
 require_once('../conf/EnvironmentInit.php');
 
 // Fta2Arcadia 
+require_once('../fta2Arcadia/class/configuration/Fta2ArcadiaConfig.php');
 require_once('../fta2Arcadia/class/controller/Fta2ArcadiaController.php');
 require_once('../fta2Arcadia/class/controller/Arcadia2FtaController.php');
 

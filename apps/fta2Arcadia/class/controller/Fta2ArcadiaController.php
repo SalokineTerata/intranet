@@ -216,7 +216,7 @@ class Fta2ArcadiaController {
     /**
      * On vérifie si un id transaction est initialisé pou l'id Fta encours
      */
-    if ($this->getKeyValuePorposal()) {
+    if ($this->getKeyValueProposal()) {
         /**
          * Initialisation des balises
          */
@@ -298,7 +298,7 @@ function setXmlText($xmlText) {
     $this->xmlText .= $xmlText;
 }
 
-function getKeyValuePorposal() {
+function getKeyValueProposal() {
     return $this->keyValuePorposal;
 }
 
@@ -336,8 +336,8 @@ function setActionProposal($actionProposal, $paramType) {
     /**
      * Actualisation du type d'action
      */
-    if ($this->getKeyValuePorposal()) {
-        $fta2ArcadiaTrasactionModel = new Fta2ArcadiaTransactionModel($this->getKeyValuePorposal());
+    if ($this->getKeyValueProposal()) {
+        $fta2ArcadiaTrasactionModel = new Fta2ArcadiaTransactionModel($this->getKeyValueProposal());
         $fta2ArcadiaTrasactionModel->getDataField(Fta2ArcadiaTransactionModel::FIELDNAME_TAG_TYPE_TRANSACTION)->setFieldValue($actionProposal);
         $fta2ArcadiaTrasactionModel->saveToDatabase();
         $this->setXMLRecordsetBalise($actionProposal);
@@ -2718,7 +2718,7 @@ function xmlArticleRef() {
  */
 function generateXmlText() {
     $xmlText .= '<?xml version="1.0" encoding="UTF-8"?>' . self::SAUT_DE_LIGNE . self::ESPACE
-            . "<Transaction id=\"" . $this->getKeyValuePorposal() . "\" version=\"1.1\" type=\"proposal\">" . self::SAUT_DE_LIGNE
+            . "<Transaction id=\"" . $this->getKeyValueProposal() . "\" version=\"1.1\" type=\"proposal\">" . self::SAUT_DE_LIGNE
             . $this->getXMLArcadiaParametre()
             . self::TABLE_START
             . $this->xmlArticleRef()
@@ -2749,17 +2749,22 @@ function generateXmlTextNO() {
  */
 function saveExportXmlToFile() {
     $linkData = $this->linkXmlFileDataSend();
+    $returnData = FALSE;
     $linkOk = $this->linkXmlFileOkSend();
+    $returnOk = FALSE;
+
     /**
      * On créer le  nouveau fichier si un lien est initialiser
-     */ if ($linkData) {
-        file_put_contents($linkData, $this->getXmlText());
+     */
+    if ($linkData) {
+        $holdpwd = getcwd();
+        $returnData = file_put_contents($linkData, $this->getXmlText());
     }
     /**
      * On créer le  nouveau fichier si un lien est initialiser
      */
     if ($linkOk) {
-        file_put_contents($linkOk, "ok");
+        $returnOk = file_put_contents($linkOk, "ok");
     }
 }
 
@@ -2780,39 +2785,10 @@ function showExportXmlFile() {
  * @return string
  */
 function linkXmlFileDataSend() {
-    $env = $this->getGlobalConfigModel()->getConf()->getExecEnvironment();
-    $link = "";
-    switch ($env) {
-        case EnvironmentConf::ENV_COD_NAME :
-            $link = $this->getGlobalConfigModel()->getConf()->getUrlEai() . "/fta2arcadia-40-"
-                    . $this->getKeyValuePorposal()
-                    . "-" . $this->getFtaModel()->getDataField(FtaModel::KEYNAME)->getFieldValue()
-                    . "-proposal.xml";
-
-            break;
-        case EnvironmentConf::ENV_DEV_NAME:
-            $link = $this->getGlobalConfigModel()->getConf()->getUrlEai() . "/export/data/fta2arcadia-40-"
-                    . $this->getKeyValuePorposal()
-                    . "-" . $this->getFtaModel()->getDataField(FtaModel::KEYNAME)->getFieldValue()
-                    . "-proposal.xml";
-
-            break;
-        case EnvironmentConf::ENV_PRD_NAME :
-            $link = $this->getGlobalConfigModel()->getConf()->getUrlEai() . "/export/data/fta2arcadia-40-"
-                    . $this->getKeyValuePorposal()
-                    . "-" . $this->getFtaModel()->getDataField(FtaModel::KEYNAME)->getFieldValue()
-                    . "-proposal.xml";
-
-            break;
-        case EnvironmentConf::ENV_COP :
-            $link = $this->getGlobalConfigModel()->getConf()->getUrlEai() . "/export/data/fta2arcadia-40-"
-                    . $this->getKeyValuePorposal()
-                    . "-" . $this->getFtaModel()->getDataField(FtaModel::KEYNAME)->getFieldValue()
-                    . "-proposal.xml";
-
-            break;
-    }
-
+    $link = $this->getlinkProposalXml(
+            Fta2ArcadiaConfig::EAI_EXPORT_DATA_SUBDIR
+            , Fta2ArcadiaConfig::EAI_FILENAME_PROPOSAL_EXTENSION_DATA
+    );
     return $link;
 }
 
@@ -2821,29 +2797,20 @@ function linkXmlFileDataSend() {
  * @return string
  */
 function linkXmlFileOkSend() {
-    $env = $this->getGlobalConfigModel()->getConf()->getExecEnvironment();
-    $link = "";
-    switch ($env) {
-        case EnvironmentConf::ENV_COD_NAME :
-            $link = "";
+    $link = $this->getlinkProposalXml(
+            Fta2ArcadiaConfig::EAI_EXPORT_OK_SUBDIR
+            , Fta2ArcadiaConfig::EAI_FILENAME_PROPOSAL_EXTENSION_OK
+    );
+    return $link;
+}
 
-            break;
-        case EnvironmentConf::ENV_DEV_NAME:
-            $link = $this->getGlobalConfigModel()->getConf()->getUrlEai() . "/export/ok/fta2arcadia-40-"
-                    . $this->getKeyValuePorposal()
-                    . "-" . $this->getFtaModel()->getDataField(FtaModel::KEYNAME)->getFieldValue()
-                    . "-proposal.xml.ok";
-
-            break;
-        case EnvironmentConf::ENV_PRD_NAME:
-            $link = $this->getGlobalConfigModel()->getConf()->getUrlEai() . "/export/ok/fta2arcadia-40-"
-                    . $this->getKeyValuePorposal()
-                    . "-" . $this->getFtaModel()->getDataField(FtaModel::KEYNAME)->getFieldValue()
-                    . "-proposal.xml.ok";
-
-            break;
-    }
-
+private function getlinkProposalXml($paramSubdir, $paramExtension) {
+    $link = $this->getGlobalConfigModel()->getConf()->getUrlEai() . "/"
+            . $paramSubdir . "/"
+            . Fta2ArcadiaConfig::EAI_FILENAME_PREFIXE . Fta2ArcadiaConfig::EAI_FILENAME_DELIMITER
+            . $this->getKeyValueProposal() . Fta2ArcadiaConfig::EAI_FILENAME_DELIMITER
+            . $this->getFtaModel()->getDataField(FtaModel::KEYNAME)->getFieldValue() . Fta2ArcadiaConfig::EAI_FILENAME_DELIMITER
+            . $paramExtension;
     return $link;
 }
 

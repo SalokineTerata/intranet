@@ -13,7 +13,7 @@
 class GlobalConfig {
 
     /**
-     * Nom du script PHP chargé de répartir les post-traotements.
+     * Nom du script PHP chargé de répartir les post-traitements.
      */
     const DISPATCHER_SCRIPTNAME = 'dispatcher';
     const DISPATCHER_VARNAME = 'dispatcher';
@@ -30,7 +30,8 @@ class GlobalConfig {
     const APPS_LOG_DIR = 'log';
     const APPS_LOG_FILE_MAIL_TRANSACTION = 'mail-transactions';
     const APPS_LOG_HISTORY_DIR = 'log/history';
-
+    
+   
     /**
      * Le fichier est sous la forme 'mail-S' + N°de la semaine du 2 digit + '.log'
      */

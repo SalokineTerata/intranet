@@ -38,11 +38,11 @@ if (empty($session_id)) {
 
 if ($session == 'logout') {
     if ($id_user) {
-        DatabaseOperation::execute(
-                'UPDATE ' . LogModel::TABLENAME . ' SET ' . LogModel::FIELDNAME_DATE . ' = now()'
-                . ' WHERE ((' . LogModel::KEYNAME . '=\'' . $num_log . '\')'
-                . ' AND (' . LogModel::FIELDNAME_ID_USER . '=' . $id_user . '))'
-        );
+//        DatabaseOperation::execute(
+//                'UPDATE ' . LogModel::TABLENAME . ' SET ' . LogModel::FIELDNAME_DATE . ' = now()'
+//                . ' WHERE ((' . LogModel::KEYNAME . '=\'' . $num_log . '\')'
+//                . ' AND (' . LogModel::FIELDNAME_ID_USER . '=' . $id_user . '))'
+//        );
     }
     $pass = '';
     $id_user = '';
@@ -273,10 +273,10 @@ Contactez un Administrateur pour réactiver votre compte.';
                   $erreur=0;
                  */
                 /* creation de la ligne user dans la table log */
-                $req = DatabaseOperation::executeComplete('insert into log (id_user, date) values( ' . $id_user . ', NOW())');
+                //$req = DatabaseOperation::executeComplete('insert into log (id_user, date) values( ' . $id_user . ', NOW())');
                 //$ng=DatabaseOperation::query('select * from log');
                 //$num_log=mysql_num_rows($ng);
-                $num_log = $req->lastInsertId();
+                //$num_log = $req->lastInsertId();
                 /* --- redirection si ok sur groupe et service propre --- */
                 //$q1 = DatabaseOperation::query('SELECT * FROM $mysql_table_authentification WHERE ((login = '$login') AND (pass = '$pass'))');
                 //Page par défaut après un login réussi

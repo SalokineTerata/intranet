@@ -215,7 +215,7 @@ class Fta2ArcadiaTransactionModel extends AbstractModel {
      */
     public static function getSQLUpdateFta2ArcadiaTransaction(
     $paramNameOfBDDTarget, $paramCodeReply, $paramCodeArticleArcadia, $paramIdFta, $paramIdTransaction) {
-        $req = "UPDATE " . $paramNameOfBDDTarget . "." . self::TABLENAME
+        $req = "UPDATE " . "`" . $paramNameOfBDDTarget . "`" . "." . self::TABLENAME
                 . " SET " . self::FIELDNAME_CODE_REPLY . "='" . $paramCodeReply
                 . "', " . self::FIELDNAME_CODE_ARTICLE_LDC . "='" . $paramCodeArticleArcadia
                 . "', " . self::FIELDNAME_DATE_RETOUR . "='" . date("Y-m-d H:i:s")
@@ -236,11 +236,10 @@ class Fta2ArcadiaTransactionModel extends AbstractModel {
         $req = "SELECT DISTINCT " . self::FIELDNAME_ACTIF
                 . ", " . self::FIELDNAME_NOTIFICATION_MAIL
                 . ", " . self::FIELDNAME_ID_USER
-                . " FROM " . $paramNameOfBDDTarget . "." . self::TABLENAME
+                . " FROM " . "`" . $paramNameOfBDDTarget . "`" . "." . self::TABLENAME
                 . " WHERE " . self::KEYNAME . "= '" . $paramIdTransaction . "'";
 
         return $req;
     }
-    
-    
+
 }

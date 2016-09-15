@@ -5,31 +5,87 @@
 # Author: franckwastaken - 07/07/2016
 # MAJ franckwastaken - 11/07/2016
 # MAJ franckwastaken - 21/07/2016
+# MAJ bs4300280@ldc.fr - 14/09/2016
+
+source $(dirname $0)/../../config.sh
+
+SCRIPTNAME_SH="import_Arcadia2Fta.sh"
+SCRIPTNAME_DATA_BEGIN="import_Arcadia2Fta_data_"
+SUB_DIR="apps/fta2Arcadia"
 
 CHEMIN_OLD="$(dirname $0)"
 CHEMIN="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/$(basename "${BASH_SOURCE[0]}")"
-DIR_COD="/u1/DATA01/webldc/cod-intranet/v3/"
-DIR_COD_ROOT=$DIR_COD"apps/fta2Arcadia/import_Arcadia2Fta.sh"
-DIR_DEV="/u1/DATA01/webldc/dev-intranet/v3/"
-DIR_DEV_ROOT=$DIR_DEV"apps/fta2Arcadia/import_Arcadia2Fta.sh"
-DIR_PRD="/u1/DATA01/webldc/fta05401/v3/"
-DIR_PRD_ROOT=$DIR_PRD"apps/fta2Arcadia/import_Arcadia2Fta.sh"
-DIR_COP="/u1/DATA01/webldc/cop-fta05401/v3/"
-DIR_COP_ROOT=$DIR_COP"apps/fta2Arcadia/import_Arcadia2Fta.sh"
+
+    DIR_COD=$GC_DIR_COD
+    DIR_COD_ROOT=$DIR_COD/$SUB_DIR/$SCRIPTNAME_SH
+    DIR_DEV=$GC_DIR_DEV
+    DIR_DEV_ROOT=$DIR_DEV/$SUB_DIR/$SCRIPTNAME_SH
+    DIR_PRD=$GC_DIR_PRD
+    DIR_PRD_ROOT=$DIR_PRD/$SUB_DIR/$SCRIPTNAME_SH
+    DIR_COP=$GC_DIR_COP
+    DIR_COP_ROOT=$DIR_COP/$SUB_DIR/$SCRIPTNAME_SH
 
 case $CHEMIN in
 
   $DIR_COD_ROOT)
-  bash -x /u1/DATA01/webldc/cod-intranet/v3/apps/fta2Arcadia/import_Arcadia2Fta_data_cod.sh $DIR_COD
- ;;
+    DIR_TARGET=$DIR_COD
+    ENV_NAME=$GC_ENV_SHORTNAME_COD
+    DB_NAME_TO_CREATE=$GC_DBNAME_COD
+    MYSQL_SERVER_NAME_DEST=$GC_DBSRVNAME_COD
+    MYSQL_USER_NAME_DEST=$GC_DBUSRNAME_COD
+    MYSQL_USER_PASSWORD_DEST=$GC_DBUSRPASS_COD
+    DIR_EAI=${GC_DIR_COD}/${GC_SUBDIR_EAI_IMPORT_DATA}
+    DIR_EAI_OK=${GC_DIR_COD}/${GC_SUBDIR_EAI_IMPORT_OK}
+    DIR_ROOT=$GC_DIR_COD
+    ;;
+
   $DIR_DEV_ROOT)
-  bash -x /u1/DATA01/webldc/dev-intranet/v3/apps/fta2Arcadia/import_Arcadia2Fta_data_dev.sh $DIR_DEV
- ;;
+    DIR_TARGET=$DIR_DEV
+    ENV_NAME=$GC_ENV_SHORTNAME_DEV
+    DB_NAME_TO_CREATE=$GC_DBNAME_DEV
+    MYSQL_SERVER_NAME_DEST=$GC_DBSRVNAME_DEV
+    MYSQL_USER_NAME_DEST=$GC_DBUSRNAME_DEV
+    MYSQL_USER_PASSWORD_DEST=$GC_DBUSRPASS_DEV
+    DIR_EAI=${GC_DIR_DEV}/${GC_SUBDIR_EAI_IMPORT_DATA}
+    DIR_EAI_OK=${GC_DIR_DEV}/${GC_SUBDIR_EAI_IMPORT_OK}
+    DIR_ROOT=$GC_DIR_DEV
+    ;;
+
   $DIR_PRD_ROOT)
- bash -x /u1/DATA01/webldc/fta05401/v3/apps/fta2Arcadia/import_Arcadia2Fta_data_prd.sh $DIR_PRD
- ;;
-$DIR_COP_ROOT)
-  bash -x /u1/DATA01/webldc/cop-fta05401/v3/apps/fta2Arcadia/import_Arcadia2Fta_data_cop.sh $DIR_COP
- ;;
+    DIR_TARGET=$DIR_PRD
+    ENV_NAME=$GC_ENV_SHORTNAME_PRD
+    DB_NAME_TO_CREATE=$GC_DBNAME_PRD
+    MYSQL_SERVER_NAME_DEST=$GC_DBSRVNAME_PRD
+    MYSQL_USER_NAME_DEST=$GC_DBUSRNAME_PRD
+    MYSQL_USER_PASSWORD_DEST=$GC_DBUSRPASS_PRD
+    DIR_EAI=${GC_DIR_PRD}/${GC_SUBDIR_EAI_IMPORT_DATA}
+    DIR_EAI_OK=${GC_DIR_PRD}/${GC_SUBDIR_EAI_IMPORT_OK}
+    DIR_ROOT=$GC_DIR_PRD
+    ;;
+
+  $DIR_COP_ROOT)
+    DIR_TARGET=$DIR_COP
+    ENV_NAME=$GC_ENV_SHORTNAME_COP
+    DB_NAME_TO_CREATE=$GC_DBNAME_COP
+    MYSQL_SERVER_NAME_DEST=$GC_DBSRVNAME_COP
+    MYSQL_USER_NAME_DEST=$GC_DBUSRNAME_COP
+    MYSQL_USER_PASSWORD_DEST=$GC_DBUSRPASS_COP
+    DIR_EAI=${GC_DIR_COP}/${GC_SUBDIR_EAI_IMPORT_DATA}
+    DIR_EAI_OK=${GC_DIR_COP}/${GC_SUBDIR_EAI_IMPORT_OK}
+    DIR_ROOT=$GC_DIR_COP
+    ;;
 
 esac
+
+# VARIABLES (garder l'ordre du script d'appel !
+# ---------------------------------------------
+ARG1=$DB_NAME_TO_CREATE
+ARG2=$MYSQL_SERVER_NAME_DEST
+ARG3=$MYSQL_USER_NAME_DEST
+ARG4=$MYSQL_USER_PASSWORD_DEST
+ARG5=$DIR_EAI
+ARG6=$DIR_EAI_OK
+ARG7=$DIR_ROOT
+
+#bash -x ${DIR_TARGET}/${SUB_DIR}/${SCRIPTNAME_DATA_BEGIN}${ENV_NAME}.sh ${DIR_TARGET}
+php ${DIR_ROOT}/apps/fta2Arcadia/import_Arcadia2Fta_data.php $ARG1 $ARG2 $ARG3 $ARG4 $ARG5 $ARG6 $ARG7

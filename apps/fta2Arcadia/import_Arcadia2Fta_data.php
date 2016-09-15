@@ -8,30 +8,47 @@
 /*
   Initialisation des variables
  */
+
+/**
+ * Nom de la base de données
+ */
 $nameOfBDDTarget = $argv[1];
 
+/**
+ * Nom du serveur de base de données
+ */
+$hostname_connect = $argv[2];
 
-//$hostname_connect = "dev-intranet.agis.fr"; //nom du serveur MySQL de connection � la base de donn�e
-$hostname_connect = $argv[2]; //nom du serveur MySQL de connection � la base de donn�e
-//$username_connect = "root"; //login de la base MySQL
-$username_connect = $argv[3]; //login de la base MySQL
-//$password_connect = "8ale!ne"; //mot de passe de la base MySQL
+/**
+ * Utilisateur de la base de données
+ */
+$username_connect = $argv[3];
+
+/**
+ * Mot de passe de l'utilisateur de la base de données.
+ */
 $password_connect = $argv[4];
-//mot de passe de la base MySQL
 
+/**
+ * Répertoire EAI d'importation des données
+ */
 $linkFolder = $argv[5];
+
+/**
+ * Répertoire EAI de vérification de l'importation des données
+ */
 $linkFolderOK = $argv[6];
+
+/**
+ * Répertoire racine
+ */
 $linkFolderBegin = $argv[7];
 
 /* * *******
   Inclusions
  * ******* */
 require __DIR__ . '/../inc/php_cli.php';
-$initFile = parse_ini_file($linkFolderBegin . "config.ini", TRUE);
-//
-//$donnee = mysql_pconnect($hostname_connect, $username_connect, $password_connect);
-//mysql_select_db($nameOfBDDTarget);
-//mysql_query('SET NAMES utf8');
+$initFile = parse_ini_file($linkFolderBegin . "/config.ini", TRUE);
 
 /**
  * Class gérant l'actualisation des données Arcadia2Fta

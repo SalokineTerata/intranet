@@ -60,7 +60,7 @@ class GlobalConfig {
      */
     private $databaseconnexion;
 
-    function __construct() {
+    function __construct($paramEnvExec = NULL) {
 
         /**
          * Par défaut, on estime qu'il n'est pas nécessaire de reconstruire la 
@@ -102,7 +102,7 @@ class GlobalConfig {
          * la configuration de l'environnement, alors on le réalise.
          */
         if ($this->getNeedBuildConf()) {
-            $this->buildEnvironmentConf();
+            $this->buildEnvironmentConf($paramEnvExec);
         }
     }
 
@@ -145,9 +145,7 @@ class GlobalConfig {
      */
     function buildDatabaseDescription() {
 
-        if (GlobalConfig::getDatabaseDescriptionIsInitialized() == NULL
-//                ||                $this->getConf()->getSessionDebugEnable()
-        ) {
+        if (GlobalConfig::getDatabaseDescriptionIsInitialized() == NULL) {
             DatabaseDescription::buildDatabaseDescription($this->getConf()->getMysqlDatabaseName());
 
             /**
@@ -169,6 +167,7 @@ class GlobalConfig {
                             . ', ' . IntranetModulesModel::FIELDNAME_VERSION_INTRANET_MODULES
                             . ', ' . IntranetModulesModel::FIELDNAME_VISIBLE_INTRANET_MODULES
                             . ', ' . IntranetModulesModel::FIELDNAME_CSS_INTRANET_MODULES
+                            . ', ' . IntranetModulesModel::FIELDNAME_ADMINISTRATION_MODULE
                             . ', ' . IntranetModulesModel::KEYNAME
                             . ' FROM ' . IntranetModulesModel::TABLENAME);
             foreach ($array as $rows) {
@@ -180,12 +179,21 @@ class GlobalConfig {
                 $_SESSION[IntranetModulesModel::TABLENAME][$rows[IntranetModulesModel::FIELDNAME_NOM_INTRANET_MODULES]][IntranetModulesModel::FIELDNAME_CLASSEMENT_INTRANET_MODULES] = $rows[IntranetModulesModel::FIELDNAME_CLASSEMENT_INTRANET_MODULES];
                 $_SESSION[IntranetModulesModel::TABLENAME][$rows[IntranetModulesModel::FIELDNAME_NOM_INTRANET_MODULES]][IntranetModulesModel::FIELDNAME_PUBLIC_INTRANET_MODULES] = $rows[IntranetModulesModel::FIELDNAME_PUBLIC_INTRANET_MODULES];
                 $_SESSION[IntranetModulesModel::TABLENAME][$rows[IntranetModulesModel::FIELDNAME_NOM_INTRANET_MODULES]][IntranetModulesModel::FIELDNAME_CSS_INTRANET_MODULES] = $rows[IntranetModulesModel::FIELDNAME_CSS_INTRANET_MODULES];
+                $_SESSION[IntranetModulesModel::TABLENAME][$rows[IntranetModulesModel::FIELDNAME_NOM_INTRANET_MODULES]][IntranetModulesModel::FIELDNAME_ADMINISTRATION_MODULE] = $rows[IntranetModulesModel::FIELDNAME_ADMINISTRATION_MODULE];
             }
             $this->setDatabaseIsInitializedToTrue();
         } //Fin des enregistrements MySQL en session
     }
 
-    function buildEnvironmentConf() {
+    /**
+     * Actualisation d'une table de la description de la base de données en memoire 
+     * @param type $paramTableName
+     */
+    function refreshTableInDatabaseDescription($paramTableName) {
+        DatabaseDescription::reBuildDatabaseDescription($paramTableName);
+    }
+    
+    function buildEnvironmentConf($paramExec = NULL) {
         /*
           Initialisation des variables de sessions et de connexions:
          */
@@ -193,7 +201,12 @@ class GlobalConfig {
         /*
          * Chargement de la configuration
          */
-        $initFile = parse_ini_file(EnvironmentConf::CONFIG_INI_FILE, TRUE);
+        if (!$paramExec) {
+            $envConfig = EnvironmentConf::CONFIG_INI_FILE_NAVIGATEUR;
+        } else {
+            $envConfig = EnvironmentConf::CONFIG_INI_FILE_SHELL;
+        }
+        $initFile = parse_ini_file($envConfig, TRUE);
         //print_r($initFile);
 
         /*
@@ -203,7 +216,7 @@ class GlobalConfig {
         if ($serverNameReal == NULL) {
             $serverNameReal = filter_input(INPUT_SERVER, 'SERVER_NAME');
         }
-        
+
         /*
          * Tableau de configuration du paramètres URL_SERVER_NAME 
          */

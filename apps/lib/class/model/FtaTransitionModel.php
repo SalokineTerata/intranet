@@ -1,5 +1,9 @@
 <?php
 
+/**
+ * Description of FtaTransitionModel
+ * @author franckwastaken
+ */
 class FtaTransitionModel {
 
     const TABLENAME = "fta_transition";
@@ -21,7 +25,7 @@ class FtaTransitionModel {
      * @param type $paramListeChapitres
      * @return array
      */
-    public static function BuildTransitionFta($paramIdFta, $paramAbreviationFtaTransition, $paramCommentaireMajFta, $paramIdWorkflow, $paramListeChapitres) {
+    public static function buildTransitionFta($paramIdFta, $paramAbreviationFtaTransition, $paramCommentaireMajFta, $paramIdWorkflow, $paramListeChapitres, $dateEcheanceFta) {
         /*
          * Codes de retour de la fonction:
          */
@@ -37,27 +41,19 @@ class FtaTransitionModel {
          */
         $ftaModel = new FtaModel($paramIdFta);
         $idFtaEtatByIdFta = $ftaModel->getDataField(FtaModel::FIELDNAME_ID_FTA_ETAT)->getFieldValue();
-        $idDossierFta = $ftaModel->getDataField(FtaModel::FIELDNAME_DOSSIER_FTA)->getFieldValue();
+        $idDossierFta = $ftaModel->getDossierFta();
         $codeArticleLdc = $ftaModel->getDataField(FtaModel::FIELDNAME_CODE_ARTICLE_LDC)->getFieldValue();
         $siteDeProduction = $ftaModel->getDataField(FtaModel::FIELDNAME_SITE_PRODUCTION)->getFieldValue();
+        $versionDossierFta = $ftaModel->getDataField(FtaModel::FIELDNAME_VERSION_DOSSIER_FTA)->getFieldValue();
+        $old_nouveau_maj_fta = $ftaModel->getDataField(FtaModel::FIELDNAME_COMMENTAIRE_MAJ_FTA)->getFieldValue();
         $ftaEtatModel = new FtaEtatModel($idFtaEtatByIdFta);
         $initial_abreviation_fta_etat = $ftaEtatModel->getDataField(FtaEtatModel::FIELDNAME_ABREVIATION)->getFieldValue();
         $globalConfig = new GlobalConfig();
         UserModel::checkUserSessionExpired($globalConfig);
 
+        $nomPrenom = $globalConfig->getAuthenticatedUser()->getPrenomNom();
         $idUser = $globalConfig->getAuthenticatedUser()->getKeyValue();
-        $userModel = new UserModel($idUser);
-        $login = $userModel->getDataField(UserModel::FIELDNAME_LOGIN)->getFieldValue();
-        /*
-         * Préparation des données
-         */
-        $nouveau_maj_fta = "\n\n"
-                . "==============================\n"
-                . "==============================\n"
-                . "Date: " . date('Y-m-d') . "\n"
-                . "Login du modificateur: " . $login . "\n\n"
-                . $paramCommentaireMajFta
-        ;
+
 
         /*         * *****************************************************************************
           Pré-traitement spécifique
@@ -72,13 +68,18 @@ class FtaTransitionModel {
                 $result = DatabaseOperation::execute($req);
 
                 //Mise à jour de la date de validation
-                $ftaModel->getDataField(FtaModel::FIELDNAME_DATE_DERNIERE_MAJ_FTA)->setFieldValue(date('Y-m-d'));
-                $ftaModel->saveToDatabase();
+//                $ftaModel->getDataField(FtaModel::FIELDNAME_DATE_DERNIERE_MAJ_FTA)->setFieldValue(date('d-m-Y'));
+//                $ftaModel->saveToDatabase();
 
-                //Suppression du vérrou pour qu'on puisse à nouveau modifier cette fiche - DEBUGGER
-                //$verrou_transite_fta=0;
-                //Pas de commentaire pour une validation
-                $nouveau_maj_fta = "";
+                /*
+                 * Préparation des données
+                 */
+                $nouveau_maj_fta = FtaController::getComment("Validation d'une Fta", $nomPrenom, NULL);
+
+                /**
+                 * Gestion des Code Article Arcadia Primaire/Secondaires
+                 */
+                $ftaModel->manageFtaPrimaireSecondaire(FtaEtatModel::ID_VALUE_VALIDE, FtaVerrouillageChampsModel::CHANGE_STATE_TRUE_VALIDATION_CHAPITRE);
 
                 break;
 //            case $paramAbreviationFtaTransition == FtaEtatModel::ETAT_ABREVIATION_VALUE_WORKFLOW:
@@ -116,14 +117,14 @@ class FtaTransitionModel {
                     $titre = "Action vérrouillée";
                     $message = "Cette fiche est déjà en cours de modification.";
                     $redirection = "";
-                    afficher_message($titre, $message, $redirection);
+                    Lib::showMessage($titre, $message, $redirection);
                     $return["0"] = "1";
                     return $return;
                     exit;
                 }
 
                 /**
-                 * Transition d'une Fta Archivé vers Modifier doit être la dernier version du dossier
+                 * Transition d'une Fta Archivévers Modifier doit être la dernier version du dossier
                  * afin d'éviter les doublons
                  */
                 if ($initial_abreviation_fta_etat == FtaEtatModel::ETAT_ABREVIATION_VALUE_ARCHIVE or $initial_abreviation_fta_etat == FtaEtatModel::ETAT_ABREVIATION_VALUE_VALIDE) {
@@ -152,6 +153,10 @@ class FtaTransitionModel {
                 }
 
 
+                /**
+                 * Commentaire de transition
+                 */
+                $nouveau_maj_fta = FtaController::getComment("Correction d'une Fta", $nomPrenom, $paramCommentaireMajFta);
 
                 // Retirer la FTA de présentation avant de créer la nouvelle version en modification.
                 if ($initial_abreviation_fta_etat == FtaEtatModel::ETAT_ABREVIATION_VALUE_PRESENTATION) {
@@ -164,46 +169,75 @@ class FtaTransitionModel {
                 }
 
                 //Duplication de la fiche
-                $nouveau_maj_fta = addslashes($nouveau_maj_fta);
                 $id_fta_original = $paramIdFta;
                 $action_duplication = "version";
                 $option_duplication["abreviation_etat_destination"] = $paramAbreviationFtaTransition;
                 $option_duplication["selection_chapitre"] = $paramListeChapitres;
-                $option_duplication["nouveau_maj_fta"] = $nouveau_maj_fta;
                 $option_duplication["site_de_production"] = $siteDeProduction;
                 $option_duplication["id_version_dossier_fta"] = $IdDossierVersion;
-                $idFtaNew = FtaModel::BuildDuplicationFta($id_fta_original, $action_duplication, $option_duplication, $paramIdWorkflow);
+                $option_duplication["date_echeance_fta"] = $dateEcheanceFta;
+                $option_duplication["nouveau_maj_fta"] = $nouveau_maj_fta;
+                $idFtaNew = FtaModel::buildDuplicationFta($id_fta_original, $action_duplication, $option_duplication, $paramIdWorkflow);
                 $ftaModel = new FtaModel($idFtaNew);
                 $codeArticleLdc = $ftaModel->getDataField(FtaModel::FIELDNAME_CODE_ARTICLE_LDC)->getFieldValue();
                 $paramIdFta = $idFtaNew;
                 break;
 
+            case $paramAbreviationFtaTransition == FtaEtatModel::ETAT_ABREVIATION_VALUE_RETIRE: //Passer en Retirer
+
+                /*
+                 * Préparation des données
+                 */
+                $nouveau_maj_fta = FtaController::getComment("Retirer une Fta", $nomPrenom, NULL);
+
+                break;
+            case $paramAbreviationFtaTransition == FtaEtatModel::ETAT_ABREVIATION_VALUE_ARCHIVE: //Passer en Archivé
+
+                /*
+                 * Préparation des données
+                 */
+                $nouveau_maj_fta = FtaController::getComment("Archivage d'une Fta", $nomPrenom, NULL);
+                break;
             default;
 
                 break;
         }//Fin Pré-traitement spécifique
 
-        /*         * *****************************************************************************
+        /*         * ************************************************************* 1****************
           Traitement Commun
          * ***************************************************************************** */
+
+        /**
+         * Mise à jour de la date derniere modification de l'état de la Fta
+         */
+        $ftaModel->getDataField(FtaModel::FIELDNAME_DATE_DERNIERE_MAJ_FTA)->setFieldValue(date('Y-m-d'));
+        $ftaModel->saveToDatabase();
 
         //Récupération du nouvel état de la fiche
         $arrayIdFtaEtat = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
                         "SELECT " . FtaEtatModel::KEYNAME
                         . " FROM " . FtaEtatModel::TABLENAME
-                        . " WHERE " . FtaEtatModel::FIELDNAME_ABREVIATION . "='$paramAbreviationFtaTransition'"
+                        . " WHERE " . FtaEtatModel::FIELDNAME_ABREVIATION . "=\"" . $paramAbreviationFtaTransition . "\""
         );
         foreach ($arrayIdFtaEtat as $value) {
             $idFtaEtat = $value[FtaEtatModel::KEYNAME];
         }
+        if ($old_nouveau_maj_fta) {
+            $nouveau_maj_fta = str_replace('"', '', $nouveau_maj_fta . $old_nouveau_maj_fta);
+        }
 
-        //$_SESSION["signature_validation_fta"] = $_SESSION["id_user"];
         $req = "UPDATE " . FtaModel::TABLENAME
-                . " SET " . FtaModel::FIELDNAME_ID_FTA_ETAT . "=" . $idFtaEtat //Identifiant de "retirer"
-                . ", " . FtaModel::FIELDNAME_COMMENTAIRE_MAJ_FTA . "='" . $nouveau_maj_fta //Identifiant de "retirer"
-                . "' WHERE " . FtaModel::KEYNAME . "='" . $paramIdFta . "' "
+                . " SET " . FtaModel::FIELDNAME_ID_FTA_ETAT . "=" . $idFtaEtat
+                . ", " . FtaModel::FIELDNAME_COMMENTAIRE_MAJ_FTA . "=\"" . $nouveau_maj_fta
+                . "\" WHERE " . FtaModel::KEYNAME . "=\"" . $paramIdFta . "\" "
         ;
         DatabaseOperation::execute($req);
+
+        /**
+         * Historisation du changement d'état de la Fta
+         */
+        FtaEtatHistoriqueModel::setFtaEtatHistorique($paramIdFta, $idDossierFta, $versionDossierFta,$idFtaEtatByIdFta, $idFtaEtat, $idUser, $initial_abreviation_fta_etat);
+
         //Fin Traitement Commun
 
         /*         * *****************************************************************************
@@ -224,7 +258,8 @@ class FtaTransitionModel {
                 $req = "UPDATE " . FtaModel::TABLENAME
                         . " SET " . FtaModel::FIELDNAME_CODE_ARTICLE . "=NULL "
                         . "," . FtaModel::FIELDNAME_ACTIF . "='0'"
-                        . " WHERE " . FtaModel::FIELDNAME_CODE_ARTICLE_LDC . "='" . $codeArticleLdc . "' "
+                        . "," . FtaModel::FIELDNAME_DATE_DE_VALIDATION_FTA . "='" . date("Y-m-d")
+                        . "' WHERE " . FtaModel::FIELDNAME_CODE_ARTICLE_LDC . "='" . $codeArticleLdc . "' "
                         . " AND " . FtaModel::KEYNAME . "='" . $paramIdFta . "' "
                 ;
                 DatabaseOperation::execute($req);
@@ -268,7 +303,7 @@ class FtaTransitionModel {
      * @param int $id_fta
      * @return array
      */
-    public static function BuildListeDiffusionTransition($id_fta) {
+    public static function buildListeDiffusionTransition($id_fta) {
 
         $logTransition = "";
 //Déclaration des variables
@@ -357,8 +392,8 @@ class FtaTransitionModel {
                                 . ", " . IntranetDroitsAccesModel::TABLENAME
                                 . " WHERE " . UserModel::TABLENAME . "." . UserModel::KEYNAME
                                 . " = " . IntranetDroitsAccesModel::TABLENAME . "." . IntranetDroitsAccesModel::FIELDNAME_ID_USER
-                                . " AND " . UserModel::TABLENAME . "." . UserModel::FIELDNAME_ACTIF . " ='oui' "
-                                . " AND " . IntranetDroitsAccesModel::TABLENAME . "." . IntranetDroitsAccesModel::FIELDNAME_ID_INTRANET_MODULES . " = 19"
+                                . " AND " . UserModel::TABLENAME . "." . UserModel::FIELDNAME_ACTIF . " ='" . UserModel::USER_ACTIF . "' "
+                                . " AND " . IntranetDroitsAccesModel::TABLENAME . "." . IntranetDroitsAccesModel::FIELDNAME_ID_INTRANET_MODULES . " = " . IntranetModulesModel::ID_MODULES_FTA
                                 . " AND " . IntranetDroitsAccesModel::TABLENAME . "." . IntranetDroitsAccesModel::FIELDNAME_NIVEAU_INTRANET_DROITS_ACCES . " = " . IntranetNiveauAccesModel::NIVEAU_GENERIC_TRUE
                                 . ' AND ' . IntranetDroitsAccesModel::FIELDNAME_ID_INTRANET_ACTIONS . '=' . IntranetNiveauAccesModel::NIVEAU_FTA_DIFFUSION
                 );
@@ -370,12 +405,11 @@ class FtaTransitionModel {
                 $req = "SELECT DISTINCT " . UserModel::TABLENAME . "." . UserModel::KEYNAME . ", " . UserModel::FIELDNAME_NOM . ", " . UserModel::FIELDNAME_PRENOM . ", " . UserModel::FIELDNAME_MAIL
                         . " FROM " . UserModel::TABLENAME
                         . ", " . IntranetDroitsAccesModel::TABLENAME
-                        . ", " . IntranetModulesModel::TABLENAME
                         . ", " . IntranetActionsModel::TABLENAME
                         //Début Droits d'accès de diffusion
                         . " WHERE " . UserModel::TABLENAME . "." . UserModel::KEYNAME
                         . " = " . IntranetDroitsAccesModel::TABLENAME . "." . IntranetDroitsAccesModel::FIELDNAME_ID_USER
-                        . " AND " . UserModel::TABLENAME . "." . UserModel::FIELDNAME_ACTIF . " ='oui' "
+                        . " AND " . UserModel::TABLENAME . "." . UserModel::FIELDNAME_ACTIF . " ='" . UserModel::USER_ACTIF . "' "
                         . " AND ( 0 " . UserModel::AddIdUser($idUser) . ')'
                         . " AND " . IntranetDroitsAccesModel::TABLENAME . "." . IntranetDroitsAccesModel::FIELDNAME_ID_INTRANET_ACTIONS
                         . " = " . IntranetActionsModel::TABLENAME . "." . IntranetActionsModel::KEYNAME      //Liaison
@@ -390,6 +424,51 @@ class FtaTransitionModel {
                     $return[$rows_destinataire[UserModel::KEYNAME]]["mail"] = $rows_destinataire[UserModel::FIELDNAME_MAIL];
                     $return[$rows_destinataire[UserModel::KEYNAME]]["prenom_nom"] = $rows_destinataire[UserModel::FIELDNAME_NOM] . " " . $rows_destinataire[UserModel::FIELDNAME_PRENOM];
                 }
+
+                $reqConsultation = "SELECT DISTINCT " . UserModel::TABLENAME . "." . UserModel::KEYNAME . ", " . UserModel::FIELDNAME_NOM . ", " . UserModel::FIELDNAME_PRENOM . ", " . UserModel::FIELDNAME_MAIL
+                        . " FROM " . UserModel::TABLENAME
+                        . ", " . IntranetDroitsAccesModel::TABLENAME
+                        . ", " . IntranetActionsModel::TABLENAME
+                        . ", " . IntranetNiveauAccesModel::TABLENAME
+                        //Début Droits d'accès de diffusion
+                        . " WHERE " . UserModel::TABLENAME . "." . UserModel::KEYNAME
+                        . " = " . IntranetDroitsAccesModel::TABLENAME . "." . IntranetDroitsAccesModel::FIELDNAME_ID_USER
+                        . " AND " . UserModel::TABLENAME . "." . UserModel::FIELDNAME_ACTIF . " ='" . UserModel::USER_ACTIF . "' "
+                        . " AND " . IntranetDroitsAccesModel::TABLENAME . "." . IntranetDroitsAccesModel::FIELDNAME_ID_INTRANET_ACTIONS
+                        . " = " . IntranetActionsModel::TABLENAME . "." . IntranetActionsModel::KEYNAME
+                        . " AND " . IntranetDroitsAccesModel::TABLENAME . "." . IntranetDroitsAccesModel::FIELDNAME_ID_INTRANET_MODULES
+                        . " = " . IntranetActionsModel::TABLENAME . "." . IntranetActionsModel::FIELDNAME_MODULE_INTRANET_ACTIONS
+                        . " AND " . IntranetDroitsAccesModel::TABLENAME . "." . IntranetDroitsAccesModel::FIELDNAME_ID_INTRANET_ACTIONS
+                        . " = " . IntranetNiveauAccesModel::TABLENAME . "." . IntranetNiveauAccesModel::FIELDNAME_ID_INTRANET_ACTIONS
+                        . " AND " . IntranetDroitsAccesModel::TABLENAME . "." . IntranetDroitsAccesModel::FIELDNAME_ID_INTRANET_MODULES
+                        . " = " . IntranetNiveauAccesModel::TABLENAME . "." . IntranetNiveauAccesModel::FIELDNAME_ID_INTRANET_MODULES
+
+                        //On récupère les utilisateurs correspondant à leur site de rattechement (lieu geo) et les utilisateurs voulant recevoir les info de toutes les Fta
+                        . " AND ((" . UserModel::FIELDNAME_LIEU_GEO . "=" . $rowsFta[FtaModel::FIELDNAME_SITE_PRODUCTION]
+                        . " AND " . IntranetActionsModel::FIELDNAME_NOM_INTRANET_ACTIONS . "='" . IntranetActionsModel::NAME_DIFFUSION_FTA
+                        . "' AND " . IntranetDroitsAccesModel::FIELDNAME_NIVEAU_INTRANET_DROITS_ACCES . "=" . IntranetNiveauAccesModel::DIFFUSION_FTA_OUI_LIEU_RATTACHEMENT_VALUE
+                        . ") OR (" . IntranetDroitsAccesModel::FIELDNAME_NIVEAU_INTRANET_DROITS_ACCES . "=" . IntranetNiveauAccesModel::DIFFUSION_FTA_OUI_TOUT_VALUE
+                        . " AND " . IntranetActionsModel::FIELDNAME_NOM_INTRANET_ACTIONS . "='" . IntranetActionsModel::NAME_DIFFUSION_FTA . "'))"
+                        . " AND " . IntranetDroitsAccesModel::TABLENAME . "." . IntranetDroitsAccesModel::FIELDNAME_ID_USER . " NOT IN ("
+                        // On exclue les utilisateur ayant un droit de modification
+                        . " SELECT DISTINCT " . UserModel::TABLENAME . "." . UserModel::KEYNAME
+                        . " FROM " . UserModel::TABLENAME
+                        . ", " . IntranetDroitsAccesModel::TABLENAME
+                        . " WHERE " . UserModel::TABLENAME . "." . UserModel::KEYNAME
+                        . " = " . IntranetDroitsAccesModel::TABLENAME . "." . IntranetDroitsAccesModel::FIELDNAME_ID_USER
+                        . " AND " . UserModel::TABLENAME . "." . UserModel::FIELDNAME_ACTIF . " ='" . UserModel::USER_ACTIF . "' "
+                        . " AND " . IntranetDroitsAccesModel::TABLENAME . "." . IntranetDroitsAccesModel::FIELDNAME_ID_INTRANET_ACTIONS
+                        . " = " . IntranetNiveauAccesModel::NIVEAU_FTA_MODIFICATION
+                        . " AND " . IntranetDroitsAccesModel::FIELDNAME_NIVEAU_INTRANET_DROITS_ACCES . "=" . IntranetNiveauAccesModel::NIVEAU_GENERIC_TRUE
+                        . ")"
+                ;
+                $r_liste_destinataire_consultation = DatabaseOperation::convertSqlStatementWithoutKeyToArray($reqConsultation);
+                if ($r_liste_destinataire_consultation) {
+                    foreach ($r_liste_destinataire_consultation as $rows_destinataire_consultation) {
+                        $return[$rows_destinataire_consultation[UserModel::KEYNAME]]["mail"] = $rows_destinataire_consultation[UserModel::FIELDNAME_MAIL];
+                        $return[$rows_destinataire_consultation[UserModel::KEYNAME]]["prenom_nom"] = $rows_destinataire_consultation[UserModel::FIELDNAME_NOM] . " " . $rows_destinataire_consultation[UserModel::FIELDNAME_PRENOM];
+                    }
+                }
             } else {
                 //Erreur critique, risque de diffusion généralisée à l'ensemble de l'Intranet
                 $titre = "Erreur critique dans la liste de diffusion";
@@ -401,7 +480,7 @@ class FtaTransitionModel {
                         . "</pre>"
                 ;
                 $redirection = "";
-                afficher_message($titre, $message, $redirection);
+                Lib::showMessage($titre, $message, $redirection);
                 $return = 0;
             }
             $return["log"] = $logTransition;
@@ -415,7 +494,7 @@ class FtaTransitionModel {
      * @param type $paramListeDiffusion
      * @param type $paramCommentaire
      */
-    public static function BuildEnvoiMailDetail($paramIdFta, $paramListeDiffusion, $paramCommentaire) {
+    public static function buildEnvoiMailDetail($paramIdFta, $paramListeDiffusion, $paramCommentaire) {
 
         /**
          * Initilisation
@@ -427,6 +506,7 @@ class FtaTransitionModel {
         $UniteFacturation = $ftamodel->getDataField(FtaModel::FIELDNAME_UNITE_FACTURATION)->getFieldValue();
         $globalConfig = new GlobalConfig();
         $idUser = $globalConfig->getAuthenticatedUser()->getKeyValue();
+        $url = $globalConfig->getConf()->getUrlFullRoot();
         $userModel = new UserModel($idUser);
         $nom = $userModel->getDataField(UserModel::FIELDNAME_NOM)->getFieldValue();
         $prenom = $userModel->getDataField(UserModel::FIELDNAME_PRENOM)->getFieldValue();
@@ -477,6 +557,14 @@ class FtaTransitionModel {
         $text = "La Fiche Technique Article \"" . $CodeArticleLdc . " - " . $Libelle . "\" "
                 . "vient d'être validée.\n"
                 . "Cet Article est maintenant actif et disponible dans l'ensemble de notre système informatique.\n"
+                . "\n"
+                . "Lien de la Fta sur l'intranet "
+                . "<a href='" . $url . "/fta/modification_fiche.php?"
+                . FtaModel::KEYNAME . "=" . $paramIdFta
+                . "&synthese_action=all&comeback=0&" . FtaEtatModel::KEYNAME . "=3&"
+                . FtaEtatModel::FIELDNAME_ABREVIATION . "=V&"
+                . FtaRoleModel::KEYNAME . "=0' >"
+                . $ftamodel->getDataField(FtaModel::FIELDNAME_CODE_ARTICLE_LDC)->getFieldValue() . " " . $ftamodel->getDataField(FtaModel::FIELDNAME_LIBELLE)->getFieldValue() . " </a>"
                 . "\n"
                 . "INFORMATIONS PRINCIPALES:\n"
                 . $ftamodel->getDataField(FtaModel::FIELDNAME_SITE_PRODUCTION)->getFieldLabel() . ": " . $libelleSiteAgis . "\n"
@@ -564,13 +652,13 @@ class FtaTransitionModel {
      * @param string $paramSubject
      * @param string $paramLogTransition
      */
-    public static function BuildEnvoiMailGlobal($paramSelectionFta, $paramListeDiffusion, $paramSubject, $paramLogTransition) {
-
+    public static function buildEnvoiMailGlobal($paramSelectionFta, $paramListeDiffusion, $paramSubject, $paramLogTransition) {
         /**
          * Utilisateur connecté
          */
         $globalConfig = new GlobalConfig();
         $idUser = $globalConfig->getAuthenticatedUser()->getKeyValue();
+        $url = $globalConfig->getConf()->getUrlFullRoot();
         $userModel = new UserModel($idUser);
         $nom = $userModel->getDataField(UserModel::FIELDNAME_NOM)->getFieldValue();
         $prenom = $userModel->getDataField(UserModel::FIELDNAME_PRENOM)->getFieldValue();
@@ -585,7 +673,7 @@ class FtaTransitionModel {
                 . "," . FtaModel::KEYNAME . "," . FtaModel::FIELDNAME_CODE_ARTICLE_LDC
                 . "," . FtaModel::FIELDNAME_LIBELLE
                 . " FROM " . FtaModel::TABLENAME . ",  " . GeoModel::TABLENAME
-                . " WHERE ( 0 " . FtaModel::AddIdFta($paramSelectionFta) . " ) "
+                . " WHERE ( 0 " . FtaModel::addIdFta($paramSelectionFta) . " ) "
                 . " AND " . GeoModel::TABLENAME . "." . GeoModel::KEYNAME . "=" . FtaModel::TABLENAME . "." . FtaModel::FIELDNAME_SITE_PRODUCTION
                 . " ORDER BY " . GeoModel::FIELDNAME_LIBELLE_SITE_AGIS;
 
@@ -600,31 +688,17 @@ class FtaTransitionModel {
                 $text.="\n\nSite d'assemblage: " . $rowsFta[GeoModel::FIELDNAME_LIBELLE_SITE_AGIS] . "\n";
             }
 
-            //Récupération de la liste des produits
-            $text_prod = "";
-            $req = "SELECT " . AnnexeAgrologicArticleCodificationModel::FIELDNAME_PREFIXE_ANNEXE_AGRO_ART_COD . "," . FtaComposantModel::FIELDNAME_CODE_PRODUIT_AGROLOGIC_FTA_NOMENCLATURE
-                    . " FROM " . FtaComposantModel::TABLENAME . ", " . AnnexeAgrologicArticleCodificationModel::TABLENAME
-                    . " WHERE " . FtaComposantModel::TABLENAME . "." . FtaComposantModel::FIELDNAME_ID_FTA
-                    . "=" . $rowsFta[FtaModel::KEYNAME]
-                    . " AND " . FtaComposantModel::TABLENAME . "." . FtaComposantModel::FIELDNAME_ID_ANNEXE_AGRO_ART_CODIFICATION
-                    . "=" . AnnexeAgrologicArticleCodificationModel::TABLENAME . "." . AnnexeAgrologicArticleCodificationModel::KEYNAME . " "
-                    . " ORDER BY " . AnnexeAgrologicArticleCodificationModel::FIELDNAME_PREFIXE_ANNEXE_AGRO_ART_COD . " ASC, " . FtaComposantModel::FIELDNAME_DESIGNATION_CODIFICATION
-            ;
-            $paramLogTransition.="\n\n" . $req;
-            $arrayProd = DatabaseOperation::convertSqlStatementWithoutKeyToArray($req);
-            if ($arrayProd) {
-                foreach ($arrayProd as $rowsProd) {
-                    //Chargement du code de codification
-
-                    $text_prod.= $rowsProd[AnnexeAgrologicArticleCodificationModel::FIELDNAME_PREFIXE_ANNEXE_AGRO_ART_COD]
-                            . $rowsProd[FtaComposantModel::FIELDNAME_CODE_PRODUIT_AGROLOGIC_FTA_NOMENCLATURE]
-                            . ", "
-                    ;
-                }
-            }
-
             //Insertion de la ligne d'article
-            $text.= $rowsFta[FtaModel::FIELDNAME_CODE_ARTICLE_LDC] . " " . $rowsFta[FtaModel::FIELDNAME_LIBELLE] . "\t\t" . $text_prod . "\n";
+            $text.= "<a href='" . $url . "/fta/modification_fiche.php?"
+                    . FtaModel::KEYNAME . "=" . $rowsFta[FtaModel::KEYNAME]
+                    . "&synthese_action=all&comeback=0&" . FtaEtatModel::KEYNAME . "=3&"
+                    . FtaEtatModel::FIELDNAME_ABREVIATION . "=V&"
+                    . FtaRoleModel::KEYNAME . "=0' >"
+                    . $rowsFta[FtaModel::FIELDNAME_CODE_ARTICLE_LDC] . " " . $rowsFta[FtaModel::FIELDNAME_LIBELLE] . " </a>"
+//            $text.= $rowsFta[FtaModel::FIELDNAME_CODE_ARTICLE_LDC] . " " . $rowsFta[FtaModel::FIELDNAME_LIBELLE]
+//                    . "\t\t" . $text_prod
+                    . "\n"
+            ;
 
             //Enregistrement du site
             $last_site = $rowsFta[GeoModel::FIELDNAME_LIBELLE_SITE_AGIS];
@@ -637,7 +711,7 @@ class FtaTransitionModel {
                 . "Intranet - FTA\n"
                 . "\n"
                 . "\n"
-                . "NB : une ligne d'article est composée du code Article Arcadia, du libellé et des codes des composants(Code PSF)";
+                . "NB : une ligne d'article est composée du code Article Arcadia et la DIN";
 
         /**
          * Envoi du mail d'information

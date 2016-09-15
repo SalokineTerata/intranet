@@ -20,6 +20,7 @@ $paramUserNom = Lib::getParameterFromRequest('sal_nom');
 $paramUserPrenom = Lib::getParameterFromRequest('sal_prenom');
 $paramUserPass = Lib::getParameterFromRequest('sal_pass');
 $paramUserCatsopro = Lib::getParameterFromRequest('sal_catsopro');
+$paramUserLieuGeo = Lib::getParameterFromRequest('sal_lieu_geo');
 $paramDateCreationUser = Lib::getParameterFromRequest(UserModel::TABLENAME . '_' . UserModel::FIELDNAME_DATE_CREATION_SALARIES . '_' . $idUser);
 $paramUserMail = Lib::getParameterFromRequest('sal_mail');
 $paramModifier = Lib::getParameterFromRequest('modifier');
@@ -37,7 +38,9 @@ if ($paramModifier == 'modifier') {
             . ' SET ' . UserModel::FIELDNAME_NOM . '=\'' . $paramUserNom . '\''
             . ', ' . UserModel::FIELDNAME_PRENOM . '=\'' . $paramUserPrenom . '\''
             . ', ' . UserModel::FIELDNAME_ID_CATSOPRO . '=\'' . $paramUserCatsopro . '\''
+            . ', ' . UserModel::FIELDNAME_LIEU_GEO . '=\'' . $paramUserLieuGeo . '\''
             . ', ' . UserModel::FIELDNAME_LOGIN . '=\'' . $paramUserLogin . '\','
+
     ;
     if ($paramUserPass) {
         $req .= UserModel::FIELDNAME_PASSWORD . '=PASSWORD(\'' . $paramUserPass . '\'), ';
@@ -88,73 +91,23 @@ if ($paramModifier == 'modifier') {
      * ********************Boris Sanègre 2003.03.28**
      * ********************Boris Sanègre 2007.01.09 */
 
+    /**
+     * Drois d'accès au module Fta
+     */
+    IntranetDroitsAccesModel::manageAccesRightToFta($idUser);
+
+    /**
+     * Initialisation
+     */
+    $paramConsultation = Lib::getParameterFromRequest('consultation_1');
+    $paramModification = Lib::getParameterFromRequest('modification_2');
+
     /*
      * Récupération des droits d'accès faisable dans l'Intranet
      */
 
-    $arrayModule = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
-                    'SELECT ' . IntranetModulesModel::TABLENAME . '.*'
-                    . ', ' . IntranetActionsModel::TABLENAME . '.*'
-                    . ' FROM ' . IntranetActionsModel::TABLENAME . ', ' . IntranetModulesModel::TABLENAME
-                    . ' WHERE (' . IntranetActionsModel::TABLENAME . '.' . IntranetActionsModel::FIELDNAME_MODULE_INTRANET_ACTIONS
-                    . '=' . IntranetModulesModel::TABLENAME . '.' . IntranetModulesModel::KEYNAME
-                    . ' OR ' . IntranetActionsModel::TABLENAME . '.' . IntranetActionsModel::FIELDNAME_MODULE_INTRANET_ACTIONS . '=0 )'
-    );
-    foreach ($arrayModule as $rowsModule) {
+    IntranetDroitsAccesModel::manageAccesRightToIntranet($idUser, TRUE, $paramConsultation,$paramModification);
 
-        /*
-         * Déclaration du droits d'accès fourni par droits_acces.inc et récupération de son niveau d'accès
-         */
-        if ($rowsModule[IntranetModulesModel::KEYNAME] <> IntranetModulesModel::ID_MODULES_FTA) {
-            $nom_niveau_intranet_droits_acces = 'module' . $rowsModule[IntranetModulesModel::KEYNAME] . '_action' . $rowsModule[IntranetActionsModel::KEYNAME];
-        } else {
-            $nom_niveau_intranet_droits_acces = $rowsModule[IntranetActionsModel::FIELDNAME_NOM_INTRANET_ACTIONS] . '_' . $rowsModule[IntranetActionsModel::KEYNAME];
-
-            if (!$paramConsultation) {
-                if ($rowsModule[IntranetActionsModel::FIELDNAME_TAG_INTRANET_ACTIONS] == IntranetActionsModel::VALUE_SITE) {
-                    $nom_niveau_intranet_droits_acces = Null;
-                }
-                if ($rowsModule[IntranetActionsModel::FIELDNAME_TAG_INTRANET_ACTIONS] == IntranetActionsModel::VALUE_WORKFLOW) {
-                    $nom_niveau_intranet_droits_acces = Null;
-                }
-            }
-            if (!$paramModification) {
-                if ($rowsModule[IntranetActionsModel::FIELDNAME_TAG_INTRANET_ACTIONS] == IntranetActionsModel::VALUE_ROLE) {
-                    $nom_niveau_intranet_droits_acces = Null;
-                }
-            }
-        }
-        $niveau_intranet_droits_acces = Lib::getParameterFromRequest($nom_niveau_intranet_droits_acces);
-
-
-        /*
-         * Enregistrement/Suppression du droit d'accès
-         */
-        $id_intranet_modules = $rowsModule[IntranetModulesModel::KEYNAME];
-        $id_intranet_actions = $rowsModule[IntranetActionsModel::KEYNAME];
-        /*
-         * Suppression des anciens accès
-         */
-        DatabaseOperation::execute(
-                'DELETE FROM ' . IntranetDroitsAccesModel::TABLENAME
-                . ' WHERE ' . IntranetDroitsAccesModel::FIELDNAME_ID_INTRANET_MODULES . '=' . $id_intranet_modules
-                . ' AND ' . IntranetDroitsAccesModel::FIELDNAME_ID_USER . '=' . $idUser
-                . ' AND ' . IntranetDroitsAccesModel::FIELDNAME_ID_INTRANET_ACTIONS . '=' . $id_intranet_actions
-        );
-
-        if ($niveau_intranet_droits_acces) {
-            /*
-             * Réécriture du droits d'accès
-             */
-            DatabaseOperation::execute(
-                    'INSERT INTO ' . IntranetDroitsAccesModel::TABLENAME
-                    . ' SET ' . IntranetDroitsAccesModel::FIELDNAME_ID_INTRANET_MODULES . '=' . $id_intranet_modules
-                    . ', ' . IntranetDroitsAccesModel::FIELDNAME_ID_USER . '=' . $idUser
-                    . ', ' . IntranetDroitsAccesModel::FIELDNAME_ID_INTRANET_ACTIONS . '=' . $id_intranet_actions
-                    . ', ' . IntranetDroitsAccesModel::FIELDNAME_NIVEAU_INTRANET_DROITS_ACCES . '=' . $niveau_intranet_droits_acces
-            );
-        }
-    }
 
     /**
      * Post-traitement
@@ -170,8 +123,14 @@ if ($paramModifier == 'modifier') {
 /*
  *  Suppression de l'utilisateur
  */
-if ($paramModifier == 'supprimer') {
-    UserModel::suppressionIntranetUtilisateur($idUser);
+//if ($paramModifier == 'supprimer') {
+//    UserModel::suppressionIntranetUtilisateur($idUser);
+//}
+/*
+ *  Désactivation du compte utilisateur
+ */
+if ($paramModifier == 'desactivation') {
+    UserModel::desactivationUser($idUser);
 }
 ?>
 <html>
@@ -197,12 +156,12 @@ if ($paramModifier == 'supprimer') {
     </head>
 
     <body onLoad='StartTimer(<?php
-$time = timeout($id_user);
-echo $time;
-?>)' bgcolor='#FFCC66' text='#000000' leftmargin='0' topmargin='0' marginwidth='0' marginheight='0'>
-    <?php
-          include ('cadrehautent.php');
-          ?>
+    $time = timeout($id_user);
+    echo $time;
+    ?>)' bgcolor='#FFCC66' text='#000000' leftmargin='0' topmargin='0' marginwidth='0' marginheight='0'>
+              <?php
+              include ('cadrehautent.php');
+              ?>
         <form name='rechnom' method='post' action='gestion_salaries22.php'>
             <table width='620' border='0' cellspacing='0' cellpadding='0'>
                 <tr>
@@ -227,30 +186,30 @@ echo $time;
                                 <td class='loginFFFFFF'>
                                     <div align='center'>
                                         Nom du salari&eacute; &agrave; modifier
-<?php
-echo '</td>';
-echo '</tr>';
-echo '<tr>';
-echo '<td>';
+                                        <?php
+                                        echo '</td>';
+                                        echo '</tr>';
+                                        echo '<tr>';
+                                        echo '<td>';
 
-echo '<div align=center>';
-echo ('<select name=\'sal_user\' size=20>');
-/* Constitution de la liste déroulante des noms */
-$arrayIdUser = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
-                'SELECT ' . UserModel::KEYNAME
-                . ', ' . UserModel::FIELDNAME_NOM
-                . ', ' . UserModel::FIELDNAME_PRENOM
-                . ' FROM ' . UserModel::TABLENAME
-                . ' WHERE ' . UserModel::FIELDNAME_ACTIF . '=\'oui\''
-                . ' ORDER BY ' . UserModel::FIELDNAME_NOM . ',' . UserModel::FIELDNAME_PRENOM
-);
-if ($arrayIdUser) {
-    foreach ($arrayIdUser as $rowIdUser) {
-        echo ('<option value=' . $rowIdUser[UserModel::KEYNAME] . '>' . $rowIdUser[UserModel::FIELDNAME_NOM] . ' ' . $rowIdUser[UserModel::FIELDNAME_PRENOM] . '</option>');
-    }
-}
-echo ('</select></br>');
-?>
+                                        echo '<div align=center>';
+                                        echo ('<select name=\'sal_user\' size=20>');
+                                        /* Constitution de la liste déroulante des noms */
+                                        $arrayIdUser = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
+                                                        'SELECT ' . UserModel::KEYNAME
+                                                        . ', ' . UserModel::FIELDNAME_NOM
+                                                        . ', ' . UserModel::FIELDNAME_PRENOM
+                                                        . ' FROM ' . UserModel::TABLENAME
+                                                        . ' WHERE ' . UserModel::FIELDNAME_ACTIF . '=\'' . UserModel::USER_ACTIF . '\''
+                                                        . ' ORDER BY ' . UserModel::FIELDNAME_NOM . ',' . UserModel::FIELDNAME_PRENOM
+                                        );
+                                        if ($arrayIdUser) {
+                                            foreach ($arrayIdUser as $rowIdUser) {
+                                                echo ('<option value=' . $rowIdUser[UserModel::KEYNAME] . '>' . $rowIdUser[UserModel::FIELDNAME_NOM] . ' ' . $rowIdUser[UserModel::FIELDNAME_PRENOM] . '</option>');
+                                            }
+                                        }
+                                        echo ('</select></br>');
+                                        ?>
                                     </div>
                                 </td>
                             </tr>
@@ -270,137 +229,125 @@ echo ('</select></br>');
                                             <td colspan='3'><b>SUPER ADMINISTRATEUR</b></td>
                                         </tr>
 
-<?php
-/* Recherche des salaries qui sont super admin */
-/* echo  $req='select nom, prenom, intitule_cat, intitule_ser
-  from services, salaries, catsopro
-  where salaries.id_type=4 and
-  salaries.id_service=services.id_service
-  and salaries.id_catsopro=catsopro.id_catsopro
-  and actif='oui' order by nom';
- */
+                                        <?php
+                                        /* Recherche des salaries qui sont super admin */
+                                        /* echo  $req='select nom, prenom, intitule_cat, intitule_ser
+                                          from services, salaries, catsopro
+                                          where salaries.id_type=4 and
+                                          salaries.id_service=services.id_service
+                                          and salaries.id_catsopro=catsopro.id_catsopro
+                                          and actif='oui' order by nom';
+                                         */
 
-$type4 = 4;
-$arrayUserType4 = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
-                'SELECT ' . UserModel::FIELDNAME_NOM . ', ' . UserModel::FIELDNAME_PRENOM
-                . ', ' . CatsoproModel::FIELDNAME_INTITULE_CAT . ', ' . AccessMaterielServiceModel::FIELDNAME_NOM_SERVICE
-                . ' FROM ' . AccessMaterielServiceModel::TABLENAME . ',' . UserModel::TABLENAME
-                . ', ' . CatsoproModel::TABLENAME
-                . ' WHERE ' . UserModel::TABLENAME . '.' . UserModel::FIELDNAME_ID_TYPE . '=' . $type4
-                . ' AND ' . UserModel::TABLENAME . '.' . UserModel::FIELDNAME_ID_SERVICE . '=' . AccessMaterielServiceModel::TABLENAME . '.' . AccessMaterielServiceModel::FIELDNAME_K_SERVICE
-                . ' AND ' . UserModel::TABLENAME . '.' . UserModel::FIELDNAME_ID_CATSOPRO . '=' . CatsoproModel::TABLENAME . '.' . CatsoproModel::KEYNAME
-                . ' AND ' . UserModel::FIELDNAME_ACTIF . '=\'oui\' ORDER BY ' . UserModel::FIELDNAME_NOM);
-if ($arrayUserType4) {
+                                        $type4 = 4;
+                                        $arrayUserType4 = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
+                                                        'SELECT DISTINCT ' . UserModel::FIELDNAME_NOM . ', ' . UserModel::FIELDNAME_PRENOM
+                                                        . ', ' . CatsoproModel::FIELDNAME_INTITULE_CAT
+                                                        . ' FROM ' . UserModel::TABLENAME
+                                                        . ', ' . CatsoproModel::TABLENAME
+                                                        . ' WHERE ' . UserModel::TABLENAME . '.' . UserModel::FIELDNAME_ID_TYPE . '=' . $type4
+                                                        . ' AND ' . UserModel::TABLENAME . '.' . UserModel::FIELDNAME_ID_CATSOPRO . '=' . CatsoproModel::TABLENAME . '.' . CatsoproModel::KEYNAME
+                                                        . ' AND ' . UserModel::FIELDNAME_ACTIF . '=\'' . UserModel::USER_ACTIF . '\' ORDER BY ' . UserModel::FIELDNAME_NOM);
+                                        if ($arrayUserType4) {
 
-    foreach ($arrayUserType4 as $rowsUser) {
-        $paramUserPrenom = $rowsUser[UserModel::FIELDNAME_PRENOM];
-        $paramUserNom = $rowsUser[UserModel::FIELDNAME_NOM];
-        $intitule_ser = $rowsUser[AccessMaterielServiceModel::FIELDNAME_NOM_SERVICE];
-        $intitule_cat = $rowsUser[CatsoproModel::FIELDNAME_INTITULE_CAT];
+                                            foreach ($arrayUserType4 as $rowsUser) {
+                                                $paramUserPrenom = $rowsUser[UserModel::FIELDNAME_PRENOM];
+                                                $paramUserNom = $rowsUser[UserModel::FIELDNAME_NOM];
+                                                $intitule_cat = $rowsUser[CatsoproModel::FIELDNAME_INTITULE_CAT];
 
-        echo ('<tr>');
-        echo ('<td class=\'loginFFFFFF\'>' . $paramUserPrenom . ' ' . $paramUserNom . '</td>');
-        echo ('<td class=\'loginFFFFFF\'>' . $intitule_ser . '</td>');
-        echo ('<td class=\'loginFFFFFF\'>' . $intitule_cat . '</td>');
-        echo ('</tr>');
-    }
-}
-?>
+                                                echo ('<tr>');
+                                                echo ('<td class=\'loginFFFFFF\'>' . $paramUserPrenom . ' ' . $paramUserNom . '</td>');
+                                                echo ('<td class=\'loginFFFFFF\'>' . $intitule_cat . '</td>');
+                                                echo ('</tr>');
+                                            }
+                                        }
+                                        ?>
                                         <tr>
                                             <td colspan='3'><b>ADMINISTRATEUR</b></td>
                                         </tr>
-<?php
-/* Recherche des salaries qui sont super admin */
-$type3 = 3;
-$arrayUserType3 = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
-                'SELECT ' . UserModel::FIELDNAME_NOM . ', ' . UserModel::FIELDNAME_PRENOM
-                . ', ' . CatsoproModel::FIELDNAME_INTITULE_CAT . ', ' . AccessMaterielServiceModel::FIELDNAME_NOM_SERVICE
-                . ' FROM ' . AccessMaterielServiceModel::TABLENAME . ',' . UserModel::TABLENAME
-                . ', ' . CatsoproModel::TABLENAME
-                . ' WHERE ' . UserModel::TABLENAME . '.' . UserModel::FIELDNAME_ID_TYPE . '=' . $type3
-                . ' AND ' . UserModel::TABLENAME . '.' . UserModel::FIELDNAME_ID_SERVICE . '=' . AccessMaterielServiceModel::TABLENAME . '.' . AccessMaterielServiceModel::FIELDNAME_K_SERVICE
-                . ' AND ' . UserModel::TABLENAME . '.' . UserModel::FIELDNAME_ID_CATSOPRO . '=' . CatsoproModel::TABLENAME . '.' . CatsoproModel::KEYNAME
-                . ' AND ' . UserModel::FIELDNAME_ACTIF . '=\'oui\' ORDER BY ' . UserModel::FIELDNAME_NOM);
-if ($arrayUserType3) {
+                                        <?php
+                                        /* Recherche des salaries qui sont super admin */
+                                        $type3 = 3;
+                                        $arrayUserType3 = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
+                                                        'SELECT ' . UserModel::FIELDNAME_NOM . ', ' . UserModel::FIELDNAME_PRENOM
+                                                        . ', ' . CatsoproModel::FIELDNAME_INTITULE_CAT
+                                                        . ' FROM ' . UserModel::TABLENAME
+                                                        . ', ' . CatsoproModel::TABLENAME
+                                                        . ' WHERE ' . UserModel::TABLENAME . '.' . UserModel::FIELDNAME_ID_TYPE . '=' . $type3
+                                                        . ' AND ' . UserModel::TABLENAME . '.' . UserModel::FIELDNAME_ID_CATSOPRO . '=' . CatsoproModel::TABLENAME . '.' . CatsoproModel::KEYNAME
+                                                        . ' AND ' . UserModel::FIELDNAME_ACTIF . '=\'' . UserModel::USER_ACTIF . '\' ORDER BY ' . UserModel::FIELDNAME_NOM);
+                                        if ($arrayUserType3) {
 
-    foreach ($arrayUserType3 as $rowsUser) {
-        $paramUserPrenom = $rowsUser[UserModel::FIELDNAME_PRENOM];
-        $paramUserNom = $rowsUser[UserModel::FIELDNAME_NOM];
-        $intitule_ser = $rowsUser[AccessMaterielServiceModel::FIELDNAME_NOM_SERVICE];
-        $intitule_cat = $rowsUser[CatsoproModel::FIELDNAME_INTITULE_CAT];
+                                            foreach ($arrayUserType3 as $rowsUser) {
+                                                $paramUserPrenom = $rowsUser[UserModel::FIELDNAME_PRENOM];
+                                                $paramUserNom = $rowsUser[UserModel::FIELDNAME_NOM];
+                                                $intitule_cat = $rowsUser[CatsoproModel::FIELDNAME_INTITULE_CAT];
 
 
-        echo ('<tr>');
-        echo ('<td class=\'loginFFFFFF\'>' . $paramUserPrenom . ' ' . $paramUserNom . '</td>');
-        echo ('<td class=\'loginFFFFFF\'>' . $intitule_ser . '</td>');
-        echo ('<td class=\'loginFFFFFF\'>' . $intitule_cat . '</td>');
-        echo ('</tr>');
-    }
-}
-?>
+                                                echo ('<tr>');
+                                                echo ('<td class=\'loginFFFFFF\'>' . $paramUserPrenom . ' ' . $paramUserNom . '</td>');
+                                                echo ('<td class=\'loginFFFFFF\'>' . $intitule_cat . '</td>');
+                                                echo ('</tr>');
+                                            }
+                                        }
+                                        ?>
                                         <tr>
                                             <td colspan='3'><b>PUBLICATEUR-MODIFICATEUR</b></td>
                                         </tr>
-<?php
-/* Recherche des salaries qui sont super admin */
-$type2 = 2;
-$arrayUserType2 = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
-                'SELECT ' . UserModel::FIELDNAME_NOM . ', ' . UserModel::FIELDNAME_PRENOM
-                . ', ' . CatsoproModel::FIELDNAME_INTITULE_CAT . ', ' . AccessMaterielServiceModel::FIELDNAME_NOM_SERVICE
-                . ' FROM ' . AccessMaterielServiceModel::TABLENAME . ',' . UserModel::TABLENAME
-                . ', ' . CatsoproModel::TABLENAME
-                . ' WHERE ' . UserModel::TABLENAME . '.' . UserModel::FIELDNAME_ID_TYPE . '=' . $type2
-                . ' AND ' . UserModel::TABLENAME . '.' . UserModel::FIELDNAME_ID_SERVICE . '=' . AccessMaterielServiceModel::TABLENAME . '.' . AccessMaterielServiceModel::FIELDNAME_K_SERVICE
-                . ' AND ' . UserModel::TABLENAME . '.' . UserModel::FIELDNAME_ID_CATSOPRO . '=' . CatsoproModel::TABLENAME . '.' . CatsoproModel::KEYNAME
-                . ' AND ' . UserModel::FIELDNAME_ACTIF . '=\'oui\' ORDER BY ' . UserModel::FIELDNAME_NOM);
-if ($arrayUserType2) {
+                                        <?php
+                                        /* Recherche des salaries qui sont super admin */
+                                        $type2 = 2;
+                                        $arrayUserType2 = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
+                                                        'SELECT ' . UserModel::FIELDNAME_NOM . ', ' . UserModel::FIELDNAME_PRENOM
+                                                        . ', ' . CatsoproModel::FIELDNAME_INTITULE_CAT
+                                                        . ' FROM ' . UserModel::TABLENAME
+                                                        . ', ' . CatsoproModel::TABLENAME
+                                                        . ' WHERE ' . UserModel::TABLENAME . '.' . UserModel::FIELDNAME_ID_TYPE . '=' . $type2
+                                                        . ' AND ' . UserModel::TABLENAME . '.' . UserModel::FIELDNAME_ID_CATSOPRO . '=' . CatsoproModel::TABLENAME . '.' . CatsoproModel::KEYNAME
+                                                        . ' AND ' . UserModel::FIELDNAME_ACTIF . '=\'' . UserModel::USER_ACTIF . '\' ORDER BY ' . UserModel::FIELDNAME_NOM);
+                                        if ($arrayUserType2) {
 
-    foreach ($arrayUserType2 as $rowsUser) {
-        $paramUserPrenom = $rowsUser[UserModel::FIELDNAME_PRENOM];
-        $paramUserNom = $rowsUser[UserModel::FIELDNAME_NOM];
-        $intitule_ser = $rowsUser[AccessMaterielServiceModel::FIELDNAME_NOM_SERVICE];
-        $intitule_cat = $rowsUser[CatsoproModel::FIELDNAME_INTITULE_CAT];
+                                            foreach ($arrayUserType2 as $rowsUser) {
+                                                $paramUserPrenom = $rowsUser[UserModel::FIELDNAME_PRENOM];
+                                                $paramUserNom = $rowsUser[UserModel::FIELDNAME_NOM];
+                                                $intitule_cat = $rowsUser[CatsoproModel::FIELDNAME_INTITULE_CAT];
 
 
-        echo ('<tr>');
-        echo ('<td class=\'loginFFFFFF\'>' . $paramUserPrenom . ' ' . $paramUserNom . '</td>');
-        echo ('<td class=\'loginFFFFFF\'>' . $intitule_ser . '</td>');
-        echo ('<td class=\'loginFFFFFF\'>' . $intitule_cat . '</td>');
-        echo ('</tr>');
-    }
-}
-?>
+                                                echo ('<tr>');
+                                                echo ('<td class=\'loginFFFFFF\'>' . $paramUserPrenom . ' ' . $paramUserNom . '</td>');
+                                                echo ('<td class=\'loginFFFFFF\'>' . $intitule_cat . '</td>');
+                                                echo ('</tr>');
+                                            }
+                                        }
+                                        ?>
                                         <tr>
                                             <td colspan='3'><b>LECTEUR</b></td>
                                         </tr>
-<?php
-/* Recherche des salaries qui sont super admin */
-$type1 = 1;
-$arrayUserType1 = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
-                'SELECT ' . UserModel::FIELDNAME_NOM . ', ' . UserModel::FIELDNAME_PRENOM
-                . ', ' . CatsoproModel::FIELDNAME_INTITULE_CAT . ', ' . AccessMaterielServiceModel::FIELDNAME_NOM_SERVICE
-                . ' FROM ' . AccessMaterielServiceModel::TABLENAME . ',' . UserModel::TABLENAME
-                . ', ' . CatsoproModel::TABLENAME
-                . ' WHERE ' . UserModel::TABLENAME . '.' . UserModel::FIELDNAME_ID_TYPE . '=' . $type1
-                . ' AND ' . UserModel::TABLENAME . '.' . UserModel::FIELDNAME_ID_SERVICE . '=' . AccessMaterielServiceModel::TABLENAME . '.' . AccessMaterielServiceModel::FIELDNAME_K_SERVICE
-                . ' AND ' . UserModel::TABLENAME . '.' . UserModel::FIELDNAME_ID_CATSOPRO . '=' . CatsoproModel::TABLENAME . '.' . CatsoproModel::KEYNAME
-                . ' AND ' . UserModel::FIELDNAME_ACTIF . '=\'oui\' ORDER BY ' . UserModel::FIELDNAME_NOM);
-if ($arrayUserType1) {
+                                        <?php
+                                        /* Recherche des salaries qui sont super admin */
+                                        $type1 = 1;
+                                        $arrayUserType1 = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
+                                                        'SELECT ' . UserModel::FIELDNAME_NOM . ', ' . UserModel::FIELDNAME_PRENOM
+                                                        . ', ' . CatsoproModel::FIELDNAME_INTITULE_CAT
+                                                        . ' FROM ' . UserModel::TABLENAME
+                                                        . ', ' . CatsoproModel::TABLENAME
+                                                        . ' WHERE ' . UserModel::TABLENAME . '.' . UserModel::FIELDNAME_ID_TYPE . '=' . $type1
+                                                        . ' AND ' . UserModel::TABLENAME . '.' . UserModel::FIELDNAME_ID_CATSOPRO . '=' . CatsoproModel::TABLENAME . '.' . CatsoproModel::KEYNAME
+                                                        . ' AND ' . UserModel::FIELDNAME_ACTIF . '=\'' . UserModel::USER_ACTIF . '\' ORDER BY ' . UserModel::FIELDNAME_NOM);
+                                        if ($arrayUserType1) {
 
-    foreach ($arrayUserType1 as $rowsUser) {
-        $paramUserPrenom = $rowsUser[UserModel::FIELDNAME_PRENOM];
-        $paramUserNom = $rowsUser[UserModel::FIELDNAME_NOM];
-        $intitule_ser = $rowsUser[AccessMaterielServiceModel::FIELDNAME_NOM_SERVICE];
-        $intitule_cat = $rowsUser[CatsoproModel::FIELDNAME_INTITULE_CAT];
+                                            foreach ($arrayUserType1 as $rowsUser) {
+                                                $paramUserPrenom = $rowsUser[UserModel::FIELDNAME_PRENOM];
+                                                $paramUserNom = $rowsUser[UserModel::FIELDNAME_NOM];
+                                                $intitule_cat = $rowsUser[CatsoproModel::FIELDNAME_INTITULE_CAT];
 
-        echo ('<tr>');
-        echo ('<td class=\'loginFFFFFF\'>' . $paramUserPrenom . ' ' . $paramUserNom . '</td>');
-        echo ('<td class=\'loginFFFFFF\'>' . $intitule_ser . '</td>');
-        echo ('<td class=\'loginFFFFFF\'>' . $intitule_cat . '</td>');
-        echo ('</tr>');
-    }
-}
-?>
+                                                echo ('<tr>');
+                                                echo ('<td class=\'loginFFFFFF\'>' . $paramUserPrenom . ' ' . $paramUserNom . '</td>');
+                                                echo ('<td class=\'loginFFFFFF\'>' . $intitule_cat . '</td>');
+                                                echo ('</tr>');
+                                            }
+                                        }
+                                        ?>
                                     </table>
                                 </td>
                             </tr>
@@ -414,6 +361,6 @@ if ($arrayUserType1) {
                     </td>
                 </tr>
             </table>
-<?php include ('../adminagis/cadrebas.php'); ?>
+            <?php include ('../adminagis/cadrebas.php'); ?>
     </body>
 </html>

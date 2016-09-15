@@ -1,0 +1,193 @@
+Démarrage : mar jui 15 23:00:01 CEST 2014
+Arrêt     : mar jui 15 23:02:22 CEST 2014
+
+
+
+Base MySQL sélectionnée: agis
+Nombre de serveur(s) Linux concerné(s): 4
+Nombre de dossier(s) à mettre à jour: 29
+
+sending incremental file list
+
+sent 7280 bytes  received 49 bytes  4886.00 bytes/sec
+total size is 13584181  speedup is 1853.48
+sending incremental file list
+
+sent 6283 bytes  received 38 bytes  4214.00 bytes/sec
+total size is 12444119  speedup is 1968.69
+sending incremental file list
+
+sent 63 bytes  received 12 bytes  50.00 bytes/sec
+total size is 90648576  speedup is 1208647.68
+sending incremental file list
+
+sent 7593 bytes  received 45 bytes  5092.00 bytes/sec
+total size is 9254930  speedup is 1211.70
+sending incremental file list
+
+sent 7814 bytes  received 20 bytes  5222.67 bytes/sec
+total size is 16759466  speedup is 2139.32
+sending incremental file list
+
+sent 4308 bytes  received 24 bytes  2888.00 bytes/sec
+total size is 6387982  speedup is 1474.60
+sending incremental file list
+mercuriales/Nouveau Document texte.txt
+mercuriales/sync.ffs_db
+mercuriales/MERCURIALES - AGIS/MDD SURG/2014/2014 LDP SURGELE.xls
+mercuriales/MERCURIALES - AGIS/mdd/2014/2014 MERCURIALE AUCHAN.xls
+
+sent 29535 bytes  received 2562 bytes  12838.80 bytes/sec
+total size is 35032285  speedup is 1091.45
+sending incremental file list
+
+sent 5047 bytes  received 27 bytes  3382.67 bytes/sec
+total size is 39173092  speedup is 7720.36
+sending incremental file list
+operations_commerciales/FZC/OP FZC 2014/FZC ARGEL 2014.xls
+operations_commerciales/FZC/OP FZC 2014/FZC THIRIET 2014.xls
+operations_commerciales/FZC/OP FZC 2014/FZC TOUPARGEL 2014.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/AUCHAN/2014 AUCHAN OP OCTOBRE 1 ASIE.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/AUCHAN/2014 AUCHAN OP OCTOBRE 3 PC FE - GRATINS 300G.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/AUCHAN/AUCHAN OP OCTOBRE 1 du 01 au 07.10.14.pdf
+
+sent 133275 bytes  received 1133 bytes  53763.20 bytes/sec
+total size is 54314863  speedup is 404.10
+sending incremental file list
+
+sent 20406 bytes  received 83 bytes  13659.33 bytes/sec
+total size is 99360776  speedup is 4849.47
+sending incremental file list
+deleting gofast/CHANTIERS/2_FTK_CLIENTS_Mathieu/Fiches \#340 remplir pour les clients (LPM)/Fiches Marketing/Fiche Composition Produit Auchan fr PLATEAU ESPAGNOL AGIS.xls
+deleting gofast/CHANTIERS/2_FTK_CLIENTS_Mathieu/Fiches \#340 remplir pour les clients (LPM)/Fiches Marketing/Fiche Carrefour BLANQUETTE DE VEAU 1.2KG.ppt
+deleting gofast/CHANTIERS/2_FTK_CLIENTS_Mathieu/Fiches \#340 remplir pour les clients (LPM)/Fiches Marketing/FICHE SYSTEME U ROULEAUX DE PRINTEMPS AU BOEUF.ppt
+deleting gofast/CHANTIERS/2_FTK_CLIENTS_Mathieu/Fiches \#340 remplir pour les clients (LPM)/Fiches Marketing/Catalogue Produit CDS gamme PC Octobre 2014 MAJ 26.05.2014.ppt
+deleting gofast/CHANTIERS/2_FTK_CLIENTS_Mathieu/Fiches \#340 remplir pour les clients (LPM)/Fiches Marketing/3366760030679_LECLERC Plateau Italien 280g.xls
+deleting gofast/CHANTIERS/2_FTK_CLIENTS_Mathieu/Fiches \#340 remplir pour les clients (LPM)/Fiches Marketing/
+deleting gofast/CHANTIERS/2_FTK_CLIENTS_Mathieu/Fiches \#340 remplir pour les clients (LPM)/Fiches Commercial/FICHES TECHNIQUES PAR ENSEIGNE.xls
+deleting gofast/CHANTIERS/2_FTK_CLIENTS_Mathieu/Fiches \#340 remplir pour les clients (LPM)/Fiches Commercial/
+deleting gofast/CHANTIERS/2_FTK_CLIENTS_Mathieu/Fiches \#340 remplir pour les clients (LPM)/Fiche sp\#351cifique/FME INTERMARCHE nos recettes traiteur INCO - 4 NEMS CREV CRABE SCE NM.xls
+deleting gofast/CHANTIERS/2_FTK_CLIENTS_Mathieu/Fiches \#340 remplir pour les clients (LPM)/Fiche sp\#351cifique/
+deleting gofast/CHANTIERS/2_FTK_CLIENTS_Mathieu/Fiches \#340 remplir pour les clients (LPM)/
+gofast/CHANTIERS/2_FTK_CLIENTS_Mathieu/4_GEMBA/Fiches \#340 remplir pour les clients (LPM)/
+gofast/CHANTIERS/2_FTK_CLIENTS_Mathieu/4_GEMBA/Fiches \#340 remplir pour les clients (LPM)/Fiche sp\#351cifique/
+gofast/CHANTIERS/2_FTK_CLIENTS_Mathieu/4_GEMBA/Fiches \#340 remplir pour les clients (LPM)/Fiche sp\#351cifique/FME INTERMARCHE nos recettes traiteur INCO - 4 NEMS CREV CRABE SCE NM.xls
+gofast/CHANTIERS/2_FTK_CLIENTS_Mathieu/4_GEMBA/Fiches \#340 remplir pour les clients (LPM)/Fiches Commercial/
+gofast/CHANTIERS/2_FTK_CLIENTS_Mathieu/4_GEMBA/Fiches \#340 remplir pour les clients (LPM)/Fiches Commercial/FICHES TECHNIQUES PAR ENSEIGNE.xls
+gofast/CHANTIERS/2_FTK_CLIENTS_Mathieu/4_GEMBA/Fiches \#340 remplir pour les clients (LPM)/Fiches Marketing/
+gofast/CHANTIERS/2_FTK_CLIENTS_Mathieu/4_GEMBA/Fiches \#340 remplir pour les clients (LPM)/Fiches Marketing/3366760030679_LECLERC Plateau Italien 280g.xls
+gofast/CHANTIERS/2_FTK_CLIENTS_Mathieu/4_GEMBA/Fiches \#340 remplir pour les clients (LPM)/Fiches Marketing/Catalogue Produit CDS gamme PC Octobre 2014 MAJ 26.05.2014.ppt
+gofast/CHANTIERS/2_FTK_CLIENTS_Mathieu/4_GEMBA/Fiches \#340 remplir pour les clients (LPM)/Fiches Marketing/FICHE SYSTEME U ROULEAUX DE PRINTEMPS AU BOEUF.ppt
+gofast/CHANTIERS/2_FTK_CLIENTS_Mathieu/4_GEMBA/Fiches \#340 remplir pour les clients (LPM)/Fiches Marketing/Fiche Carrefour BLANQUETTE DE VEAU 1.2KG.ppt
+gofast/CHANTIERS/2_FTK_CLIENTS_Mathieu/4_GEMBA/Fiches \#340 remplir pour les clients (LPM)/Fiches Marketing/Fiche Composition Produit Auchan fr PLATEAU ESPAGNOL AGIS.xls
+gofast/CHANTIERS/2_FTK_CLIENTS_Mathieu/5_STANDARDS/Besoins_clients_150714.xls
+gofast/CHANTIERS/2_FTK_CLIENTS_Mathieu/6_BILAN/Fiche_Am\#260_Av-Ap_FTk_080714.xls
+
+sent 9448819 bytes  received 3743 bytes  176683.40 bytes/sec
+total size is 52061594  speedup is 5.51
+sending incremental file list
+
+sent 10143 bytes  received 13 bytes  4062.40 bytes/sec
+total size is 48979968  speedup is 4822.76
+sending incremental file list
+
+sent 5781 bytes  received 30 bytes  3874.00 bytes/sec
+total size is 92745093  speedup is 15960.26
+sending incremental file list
+
+sent 63 bytes  received 12 bytes  50.00 bytes/sec
+total size is 90648576  speedup is 1208647.68
+sending incremental file list
+
+sent 7593 bytes  received 45 bytes  5092.00 bytes/sec
+total size is 9254930  speedup is 1211.70
+sending incremental file list
+
+sent 4308 bytes  received 24 bytes  2888.00 bytes/sec
+total size is 6387982  speedup is 1474.60
+sending incremental file list
+
+sent 7814 bytes  received 20 bytes  5222.67 bytes/sec
+total size is 16759466  speedup is 2139.32
+sending incremental file list
+
+sent 85 bytes  received 13 bytes  65.33 bytes/sec
+total size is 104853504  speedup is 1069933.71
+sending incremental file list
+operations_commerciales/FZC/OP FZC 2014/FZC ARGEL 2014.xls
+operations_commerciales/FZC/OP FZC 2014/FZC THIRIET 2014.xls
+operations_commerciales/FZC/OP FZC 2014/FZC TOUPARGEL 2014.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/AUCHAN/2014 AUCHAN OP OCTOBRE 1 ASIE.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/AUCHAN/2014 AUCHAN OP OCTOBRE 3 PC FE - GRATINS 300G.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/AUCHAN/AUCHAN OP OCTOBRE 1 du 01 au 07.10.14.pdf
+
+sent 133275 bytes  received 1133 bytes  53763.20 bytes/sec
+total size is 54314863  speedup is 404.10
+sending incremental file list
+mercuriales/Nouveau Document texte.txt
+mercuriales/sync.ffs_db
+mercuriales/MERCURIALES - AGIS/MDD SURG/2014/2014 LDP SURGELE.xls
+mercuriales/MERCURIALES - AGIS/mdd/2014/2014 MERCURIALE AUCHAN.xls
+
+sent 29535 bytes  received 2562 bytes  21398.00 bytes/sec
+total size is 35032285  speedup is 1091.45
+sending incremental file list
+
+sent 10143 bytes  received 13 bytes  6770.67 bytes/sec
+total size is 48979968  speedup is 4822.76
+sending incremental file list
+
+sent 7280 bytes  received 49 bytes  14658.00 bytes/sec
+total size is 13584181  speedup is 1853.48
+sending incremental file list
+
+sent 5745 bytes  received 23 bytes  3845.33 bytes/sec
+total size is 129159129  speedup is 22392.36
+sending incremental file list
+
+sent 5610 bytes  received 39 bytes  3766.00 bytes/sec
+total size is 59049369  speedup is 10453.07
+sending incremental file list
+
+sent 52221 bytes  received 96 bytes  34878.00 bytes/sec
+total size is 299490387  speedup is 5724.53
+sending incremental file list
+
+sent 20406 bytes  received 83 bytes  8195.60 bytes/sec
+total size is 99360776  speedup is 4849.47
+sending incremental file list
+deleting gofast/CHANTIERS/2_FTK_CLIENTS_Mathieu/Fiches \#340 remplir pour les clients (LPM)/Fiches Marketing/Fiche Composition Produit Auchan fr PLATEAU ESPAGNOL AGIS.xls
+deleting gofast/CHANTIERS/2_FTK_CLIENTS_Mathieu/Fiches \#340 remplir pour les clients (LPM)/Fiches Marketing/Fiche Carrefour BLANQUETTE DE VEAU 1.2KG.ppt
+deleting gofast/CHANTIERS/2_FTK_CLIENTS_Mathieu/Fiches \#340 remplir pour les clients (LPM)/Fiches Marketing/FICHE SYSTEME U ROULEAUX DE PRINTEMPS AU BOEUF.ppt
+deleting gofast/CHANTIERS/2_FTK_CLIENTS_Mathieu/Fiches \#340 remplir pour les clients (LPM)/Fiches Marketing/Catalogue Produit CDS gamme PC Octobre 2014 MAJ 26.05.2014.ppt
+deleting gofast/CHANTIERS/2_FTK_CLIENTS_Mathieu/Fiches \#340 remplir pour les clients (LPM)/Fiches Marketing/3366760030679_LECLERC Plateau Italien 280g.xls
+deleting gofast/CHANTIERS/2_FTK_CLIENTS_Mathieu/Fiches \#340 remplir pour les clients (LPM)/Fiches Marketing/
+deleting gofast/CHANTIERS/2_FTK_CLIENTS_Mathieu/Fiches \#340 remplir pour les clients (LPM)/Fiches Commercial/FICHES TECHNIQUES PAR ENSEIGNE.xls
+deleting gofast/CHANTIERS/2_FTK_CLIENTS_Mathieu/Fiches \#340 remplir pour les clients (LPM)/Fiches Commercial/
+deleting gofast/CHANTIERS/2_FTK_CLIENTS_Mathieu/Fiches \#340 remplir pour les clients (LPM)/Fiche sp\#351cifique/FME INTERMARCHE nos recettes traiteur INCO - 4 NEMS CREV CRABE SCE NM.xls
+deleting gofast/CHANTIERS/2_FTK_CLIENTS_Mathieu/Fiches \#340 remplir pour les clients (LPM)/Fiche sp\#351cifique/
+deleting gofast/CHANTIERS/2_FTK_CLIENTS_Mathieu/Fiches \#340 remplir pour les clients (LPM)/
+gofast/CHANTIERS/2_FTK_CLIENTS_Mathieu/4_GEMBA/Fiches \#340 remplir pour les clients (LPM)/
+gofast/CHANTIERS/2_FTK_CLIENTS_Mathieu/4_GEMBA/Fiches \#340 remplir pour les clients (LPM)/Fiche sp\#351cifique/
+gofast/CHANTIERS/2_FTK_CLIENTS_Mathieu/4_GEMBA/Fiches \#340 remplir pour les clients (LPM)/Fiche sp\#351cifique/FME INTERMARCHE nos recettes traiteur INCO - 4 NEMS CREV CRABE SCE NM.xls
+gofast/CHANTIERS/2_FTK_CLIENTS_Mathieu/4_GEMBA/Fiches \#340 remplir pour les clients (LPM)/Fiches Commercial/
+gofast/CHANTIERS/2_FTK_CLIENTS_Mathieu/4_GEMBA/Fiches \#340 remplir pour les clients (LPM)/Fiches Commercial/FICHES TECHNIQUES PAR ENSEIGNE.xls
+gofast/CHANTIERS/2_FTK_CLIENTS_Mathieu/4_GEMBA/Fiches \#340 remplir pour les clients (LPM)/Fiches Marketing/
+gofast/CHANTIERS/2_FTK_CLIENTS_Mathieu/4_GEMBA/Fiches \#340 remplir pour les clients (LPM)/Fiches Marketing/3366760030679_LECLERC Plateau Italien 280g.xls
+gofast/CHANTIERS/2_FTK_CLIENTS_Mathieu/4_GEMBA/Fiches \#340 remplir pour les clients (LPM)/Fiches Marketing/Catalogue Produit CDS gamme PC Octobre 2014 MAJ 26.05.2014.ppt
+gofast/CHANTIERS/2_FTK_CLIENTS_Mathieu/4_GEMBA/Fiches \#340 remplir pour les clients (LPM)/Fiches Marketing/FICHE SYSTEME U ROULEAUX DE PRINTEMPS AU BOEUF.ppt
+gofast/CHANTIERS/2_FTK_CLIENTS_Mathieu/4_GEMBA/Fiches \#340 remplir pour les clients (LPM)/Fiches Marketing/Fiche Carrefour BLANQUETTE DE VEAU 1.2KG.ppt
+gofast/CHANTIERS/2_FTK_CLIENTS_Mathieu/4_GEMBA/Fiches \#340 remplir pour les clients (LPM)/Fiches Marketing/Fiche Composition Produit Auchan fr PLATEAU ESPAGNOL AGIS.xls
+gofast/CHANTIERS/2_FTK_CLIENTS_Mathieu/5_STANDARDS/Besoins_clients_150714.xls
+gofast/CHANTIERS/2_FTK_CLIENTS_Mathieu/6_BILAN/Fiche_Am\#260_Av-Ap_FTk_080714.xls
+
+sent 9448819 bytes  received 3743 bytes  190960.85 bytes/sec
+total size is 52061594  speedup is 5.51
+sending incremental file list
+
+sent 7814 bytes  received 20 bytes  3133.60 bytes/sec
+total size is 16759466  speedup is 2139.32
+sending incremental file list
+
+sent 7814 bytes  received 20 bytes  5222.67 bytes/sec
+total size is 16759466  speedup is 2139.32

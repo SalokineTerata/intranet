@@ -27,16 +27,14 @@ $modifier = Lib::getParameterFromRequest('modifier');
 $userModel = new UserModel($idUser);
 $userView = new UserView($userModel);
 $userView->setIsEditable(TRUE);
-identification1('salaries', $idUser, $pass,FALSE);
+identification1('salaries', $idUser, $pass, FALSE);
 //  include('functions.php');
 //  include('functions.js');
-
 //if ($erreur == 'oui') {
 //    echo ('<script language=\'JavaScript\'>\n');
 //    echo ('alert(\'Ce salarié existe déjà\')');
 //    echo ('</script>\n');
 //}
-
 //if ($erreur == 'pass') {
 //    echo ('<script language=\'JavaScript\'>\n');
 //    echo ('alert(\'Erreur de mot de passe\')');
@@ -129,7 +127,7 @@ if ($modifier == 'modifier') {
                             $bloc .='<tr><td align=right>'
                                     . DatabaseDescription::getFieldDocLabel(UserModel::TABLENAME, UserModel::FIELDNAME_DATE_CREATION_SALARIES)
                                     . '</td><td align=left><input type=text name=' . UserModel::FIELDNAME_DATE_CREATION_SALARIES . ' size=15  value='
-                                    . date('Y-m-d') . ' />'
+                                    . date('d-m-Y') . ' />'
                                     . '</td></tr>'
                             ;
 
@@ -248,6 +246,31 @@ if ($modifier == 'modifier') {
                         ?>
                     </center>
                     </td>
+                    <td  class='loginFFFFFFdroit'>
+                    <center><br>
+                        <span class='loginFFFFFFdroit'>Lieu Geo</span> <br>
+                        <?php
+                        echo ('<select name=\'lieu_geo\'>\n');
+                        /*
+                         *  Constitution de la liste déroulante des lieu géogrphique 
+                         */
+                        $arrayLieuGeo = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
+                                        "SELECT " . GeoModel::KEYNAME
+                                        . ", " . GeoModel::FIELDNAME_GEO
+                                        . " FROM " . GeoModel::TABLENAME
+                                        . " WHERE " . GeoModel::FIELDNAME_SITE_ACTIF . "=1"
+                                        . " ORDER BY " . GeoModel::KEYNAME
+                        );
+                        if ($arrayLieuGeo) {
+                            foreach ($arrayLieuGeo as $rowsLieuGeo) {
+                                echo ('<option value=\'' . $rowsLieuGeo[GeoModel::KEYNAME] . '\'>' . $rowsLieuGeo[GeoModel::FIELDNAME_GEO] . '</option>');
+                            }
+                        }
+
+                        echo ('</select>');
+                        ?>
+                    </center>
+                    </td>
                     </tr>
                 </table><br>
                 <?php
@@ -255,7 +278,7 @@ if ($modifier == 'modifier') {
                  * Construction des droits d'accès pour tous les modules:
                  * Boris Sanègre 2003.03.25                
                  */
-                IntranetDroitsAccesModel::BuildHtmlDroitsAcces();
+                IntranetDroitsAccesModel::buildHtmlDroitsAcces();
 
 // Fin de la page
 

@@ -2,8 +2,10 @@
 //Barre de navigation du module
 
 //Récupération des droits d'accès necessaire
-$module_consultation = $module. "_consultation";
-$module_modification = $module. "_modification";
+$fta_consultation = Acl::getValueAccesRights('fta_consultation');
+$fta_modification = Acl::getValueAccesRights('fta_modification');
+$owner = IntranetColumnInfoModel::getOwner();
+$QUERY_STRING = $_SERVER['QUERY_STRING'];
 
 //Construction de la page des tables annexes
 //$page="../lib/gestion_table.php?module=$module&menu=menu_principal.inc";
@@ -22,7 +24,7 @@ $module_modification = $module. "_modification";
 Menu accessible pour les utilisateurs ayant les droits
 en consultation sur ce module
 */
-if ($_SESSION[$module_consultation])
+if ($fta_consultation)
 {
    /*
    //Exemple d'un menu
@@ -36,11 +38,11 @@ if ($_SESSION[$module_consultation])
 Menu accessible pour les utilisateurs ayant les droits
 en modifications sur ce module
 */
-if ($_SESSION[$module_modification])
+if ($fta_modification AND $owner )
 {
    //Exemple d'un menu
    echo "<td align=\"right\">";
-   echo "<a href=$page_action&edit_mode=1><img src=\"../lib/images/stylo.jpeg\" width=\"30\" height=\"45\" border=\"0\" alt=\"\" /><br>Editer</a>";
+   echo "<a href=popup-mysql_field_desc.php?$QUERY_STRING&edit_mode=1><img src=\"../lib/images/stylo.jpeg\" width=\"30\" height=\"45\" border=\"0\" alt=\"\" /><br>Editer</a>";
    echo "</td>";
 
 }

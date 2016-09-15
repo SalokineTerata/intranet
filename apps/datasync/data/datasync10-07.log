@@ -1,0 +1,210 @@
+Démarrage : lun oct  7 23:00:01 CEST 2013
+Arrêt     : lun oct  7 23:02:53 CEST 2013
+
+
+
+Base MySQL sélectionnée: agis
+Nombre de serveur(s) Linux concerné(s): 4
+Nombre de dossier(s) à mettre à jour: 24
+
+sending incremental file list
+
+sent 7598 bytes  received 20 bytes  5078.67 bytes/sec
+total size is 16749755  speedup is 2198.71
+sending incremental file list
+gestion_crise/Couurier de retrait/
+gestion_crise/Couurier de retrait/E.QT.013-01 - Message Clients Retrait Rappels.doc
+deleting gestion_crise/mise \#340 jour 2013/INTERLOCUTEURS CRISE 2013.xls
+gestion_crise/mise \#340 jour 2013/INTERLOCUTEURS CRISE  coupe et FE 2013.xls
+
+sent 155815 bytes  received 86 bytes  62360.40 bytes/sec
+total size is 9704312  speedup is 62.25
+sending incremental file list
+codesoft/Codesoft 7/A SUPPRIMER/
+codesoft/Codesoft 7/A SUPPRIMER/43638_recto.bak
+codesoft/Codesoft 7/A SUPPRIMER/43638_recto.lab
+codesoft/Codesoft 7/A SUPPRIMER/43638_verso.bak
+codesoft/Codesoft 7/A SUPPRIMER/43638_verso.lab
+codesoft/Codesoft 7/A SUPPRIMER/43639_recto.bak
+codesoft/Codesoft 7/A SUPPRIMER/43639_recto.lab
+codesoft/Codesoft 7/A SUPPRIMER/43639_verso.bak
+codesoft/Codesoft 7/A SUPPRIMER/43639_verso.lab
+codesoft/Codesoft 7/A SUPPRIMER/43671_recto.bak
+codesoft/Codesoft 7/A SUPPRIMER/43671_recto.lab
+codesoft/Codesoft 7/A SUPPRIMER/43671_verso.bak
+codesoft/Codesoft 7/A SUPPRIMER/43671_verso.lab
+codesoft/Codesoft 7/A SUPPRIMER/43672_recto.bak
+codesoft/Codesoft 7/A SUPPRIMER/43672_recto.lab
+codesoft/Codesoft 7/A SUPPRIMER/43672_verso.bak
+codesoft/Codesoft 7/A SUPPRIMER/43672_verso.lab
+codesoft/Codesoft 7/A SUPPRIMER/43680_recto.bak
+codesoft/Codesoft 7/A SUPPRIMER/43680_recto.lab
+codesoft/Codesoft 7/A SUPPRIMER/43680_verso.bak
+codesoft/Codesoft 7/A SUPPRIMER/43680_verso.lab
+codesoft/Codesoft 7/A SUPPRIMER/43681_recto.bak
+codesoft/Codesoft 7/A SUPPRIMER/43681_recto.lab
+codesoft/Codesoft 7/A SUPPRIMER/43681_verso.bak
+codesoft/Codesoft 7/A SUPPRIMER/43681_verso.lab
+deleting codesoft/Codesoft 7/Codes Produits/43681_verso.lab
+deleting codesoft/Codesoft 7/Codes Produits/43681_verso.bak
+deleting codesoft/Codesoft 7/Codes Produits/43681_recto.lab
+deleting codesoft/Codesoft 7/Codes Produits/43681_recto.bak
+deleting codesoft/Codesoft 7/Codes Produits/43680_verso.lab
+deleting codesoft/Codesoft 7/Codes Produits/43680_verso.bak
+deleting codesoft/Codesoft 7/Codes Produits/43680_recto.lab
+deleting codesoft/Codesoft 7/Codes Produits/43680_recto.bak
+deleting codesoft/Codesoft 7/Codes Produits/43672_verso.lab
+deleting codesoft/Codesoft 7/Codes Produits/43672_verso.bak
+deleting codesoft/Codesoft 7/Codes Produits/43672_recto.lab
+deleting codesoft/Codesoft 7/Codes Produits/43672_recto.bak
+deleting codesoft/Codesoft 7/Codes Produits/43671_verso.lab
+deleting codesoft/Codesoft 7/Codes Produits/43671_verso.bak
+deleting codesoft/Codesoft 7/Codes Produits/43671_recto.lab
+deleting codesoft/Codesoft 7/Codes Produits/43671_recto.bak
+deleting codesoft/Codesoft 7/Codes Produits/43639_verso.lab
+deleting codesoft/Codesoft 7/Codes Produits/43639_verso.bak
+deleting codesoft/Codesoft 7/Codes Produits/43639_recto.lab
+deleting codesoft/Codesoft 7/Codes Produits/43639_recto.bak
+deleting codesoft/Codesoft 7/Codes Produits/43638_verso.lab
+deleting codesoft/Codesoft 7/Codes Produits/43638_verso.bak
+deleting codesoft/Codesoft 7/Codes Produits/43638_recto.lab
+deleting codesoft/Codesoft 7/Codes Produits/43638_recto.bak
+codesoft/Codesoft 7/Codes Produits/79105_verso.bak
+codesoft/Codesoft 7/Codes Produits/79105_verso.lab
+codesoft/Codesoft 7/Codes Produits/79106_verso.bak
+codesoft/Codesoft 7/Codes Produits/79106_verso.lab
+
+sent 370469 bytes  received 623 bytes  82464.89 bytes/sec
+total size is 274282579  speedup is 739.12
+sending incremental file list
+suivi_investissement/2013-2014/suivi des travaux 2013.xls
+
+sent 15802 bytes  received 1589 bytes  6956.40 bytes/sec
+total size is 11410700  speedup is 656.13
+sending incremental file list
+erp_data.mdb
+
+sent 7287387 bytes  received 62247 bytes  97346.15 bytes/sec
+total size is 78852096  speedup is 10.73
+sending incremental file list
+
+sent 7538 bytes  received 45 bytes  5055.33 bytes/sec
+total size is 9253358  speedup is 1220.28
+sending incremental file list
+
+sent 7598 bytes  received 20 bytes  3047.20 bytes/sec
+total size is 16749755  speedup is 2198.71
+sending incremental file list
+
+sent 4308 bytes  received 24 bytes  1732.80 bytes/sec
+total size is 6387982  speedup is 1474.60
+sending incremental file list
+mercuriales/FZC/FZC 2013/TOUPARGEL 2013.xls
+mercuriales/gms/2013/CENTRALES 2013/AUCHAN 2013.xls
+mercuriales/gms/2013/CENTRALES 2013/INTERMARCHE 2013.xls
+mercuriales/mdd/2013/2013 MERCURIALE CARREFOUR ASIATIQUE.xls
+mercuriales/mdd/2013/2013 MERCURIALE MONOPRIX .xls
+mercuriales/mdd/2013/2013 MERCURIALE PROVERA.xls
+
+sent 68236 bytes  received 14383 bytes  18359.78 bytes/sec
+total size is 32972919  speedup is 399.10
+sending incremental file list
+
+sent 5047 bytes  received 27 bytes  3382.67 bytes/sec
+total size is 39173092  speedup is 7720.36
+sending incremental file list
+operations_commerciales/DEMANDE ECHANTILLONS CL .xls
+operations_commerciales/chrono demande echantillons.xls
+operations_commerciales/FZC/CONFIRMATIONS/2013/TOUPARGEL/TOUPARGEL_CONFIRMATION CYCLE 13-14 2013.xls
+operations_commerciales/FZC/OP FZC 2013/FZC THIRIET 2013.xls
+operations_commerciales/FZC/OP FZC 2013/FZC TOUPARGEL 2013.xls
+operations_commerciales/GMS/2013/A-CENTRALES/GMS AUCHAN 2013-FUTUR MASTER.xls
+operations_commerciales/GMS/2013/A-CENTRALES/GMS CARREFOUR MDD 2013-FUTUR MASTER.xls
+operations_commerciales/GMS/2013/A-CENTRALES/GMS CARREFOUR MN 2013-FUTUR MASTER.xls
+operations_commerciales/GMS/2013/A-CENTRALES/GMS CARREFOUR MN ASIE 2013-FUTUR MASTER.xls
+operations_commerciales/GMS/2013/A-CENTRALES/GMS PRODIM MN 2013-FUTUR MASTER.xls
+operations_commerciales/GMS/2013/D-REGIONS/GMS CARREFOUR REGIONS 2013-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS CARREFOUR MARKET MN 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS CARREFOUR MN 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS CARREFOUR MN ASIE 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS CASINO 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS INTERMARCHE 2014-FUTUR MASTER.xls
+
+sent 363284 bytes  received 50248 bytes  48650.82 bytes/sec
+total size is 52583573  speedup is 127.16
+sending incremental file list
+
+sent 18506 bytes  received 80 bytes  7434.40 bytes/sec
+total size is 41728031  speedup is 2245.13
+sending incremental file list
+
+sent 7556 bytes  received 13 bytes  3027.60 bytes/sec
+total size is 34205315  speedup is 4519.13
+sending incremental file list
+erp_data.mdb
+
+sent 7287387 bytes  received 62247 bytes  186066.68 bytes/sec
+total size is 78852096  speedup is 10.73
+sending incremental file list
+
+sent 7538 bytes  received 45 bytes  5055.33 bytes/sec
+total size is 9253358  speedup is 1220.28
+sending incremental file list
+
+sent 4308 bytes  received 24 bytes  2888.00 bytes/sec
+total size is 6387982  speedup is 1474.60
+sending incremental file list
+
+sent 7598 bytes  received 20 bytes  5078.67 bytes/sec
+total size is 16749755  speedup is 2198.71
+sending incremental file list
+
+sent 85 bytes  received 13 bytes  65.33 bytes/sec
+total size is 104853504  speedup is 1069933.71
+sending incremental file list
+operations_commerciales/DEMANDE ECHANTILLONS CL .xls
+operations_commerciales/chrono demande echantillons.xls
+operations_commerciales/FZC/CONFIRMATIONS/2013/TOUPARGEL/TOUPARGEL_CONFIRMATION CYCLE 13-14 2013.xls
+operations_commerciales/FZC/OP FZC 2013/FZC THIRIET 2013.xls
+operations_commerciales/FZC/OP FZC 2013/FZC TOUPARGEL 2013.xls
+operations_commerciales/GMS/2013/A-CENTRALES/GMS AUCHAN 2013-FUTUR MASTER.xls
+operations_commerciales/GMS/2013/A-CENTRALES/GMS CARREFOUR MDD 2013-FUTUR MASTER.xls
+operations_commerciales/GMS/2013/A-CENTRALES/GMS CARREFOUR MN 2013-FUTUR MASTER.xls
+operations_commerciales/GMS/2013/A-CENTRALES/GMS CARREFOUR MN ASIE 2013-FUTUR MASTER.xls
+operations_commerciales/GMS/2013/A-CENTRALES/GMS PRODIM MN 2013-FUTUR MASTER.xls
+operations_commerciales/GMS/2013/D-REGIONS/GMS CARREFOUR REGIONS 2013-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS CARREFOUR MARKET MN 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS CARREFOUR MN 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS CARREFOUR MN ASIE 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS CASINO 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS INTERMARCHE 2014-FUTUR MASTER.xls
+
+sent 363284 bytes  received 50248 bytes  118152.00 bytes/sec
+total size is 52583573  speedup is 127.16
+sending incremental file list
+mercuriales/FZC/FZC 2013/TOUPARGEL 2013.xls
+mercuriales/gms/2013/CENTRALES 2013/AUCHAN 2013.xls
+mercuriales/gms/2013/CENTRALES 2013/INTERMARCHE 2013.xls
+mercuriales/mdd/2013/2013 MERCURIALE CARREFOUR ASIATIQUE.xls
+mercuriales/mdd/2013/2013 MERCURIALE MONOPRIX .xls
+mercuriales/mdd/2013/2013 MERCURIALE PROVERA.xls
+
+sent 68236 bytes  received 14383 bytes  55079.33 bytes/sec
+total size is 32972919  speedup is 399.10
+sending incremental file list
+gestion_crise/Couurier de retrait/
+gestion_crise/Couurier de retrait/E.QT.013-01 - Message Clients Retrait Rappels.doc
+deleting gestion_crise/mise \#340 jour 2013/INTERLOCUTEURS CRISE 2013.xls
+gestion_crise/mise \#340 jour 2013/INTERLOCUTEURS CRISE  coupe et FE 2013.xls
+
+sent 155815 bytes  received 86 bytes  44543.14 bytes/sec
+total size is 9704312  speedup is 62.25
+sending incremental file list
+
+sent 5618 bytes  received 23 bytes  3760.67 bytes/sec
+total size is 128644085  speedup is 22805.19
+sending incremental file list
+
+sent 4707 bytes  received 36 bytes  3162.00 bytes/sec
+total size is 46318934  speedup is 9765.75
+sending incremental file list

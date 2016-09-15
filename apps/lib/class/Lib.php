@@ -16,13 +16,23 @@ class Lib {
     public static $module = '';
     public static $title = '';
 
-    public static function showMessage($titre, $message, $redirection = NULL) {
+    public static function showMessage($titre, $message, $redirection = NULL, $paramButtonCheck = NULL) {
         /*
           Dictionnaire des variables:
          * **************************
          */
-        if ($redirection == NULL) {
-            $redirection = '\'Javascript:;\' onClick=\'history.go(-1);return(false);\'';
+
+        require_once('../inc/javascript.php');
+
+        if (!$redirection) {
+            $redirection = "'Javascript:;' onClick='history.go(-1);return(false);'";
+        }
+        if (!$paramButtonCheck) {
+            $bouton_valider = "
+                       <a href='$redirection'>
+                       <img src=../lib/images/bouton_valider_jaune.gif border=0>
+                       </a>
+                       ";
         }
         $bouton_valider = '
                        <a href=' . $redirection . '>
@@ -30,32 +40,31 @@ class Lib {
                        </a>
                        ';
         echo
-        '
+        "
          <TABLE>
          <TR>
              <td id=tableProps width=70 valign=top align=center>
                  <IMG id=pagerrorImg SRC=../lib/images/icone_information.png width=20 height=38>
 
              </td><TD id=tablePropsWidth width=400>
-                      <h1 id=errortype style=\'font:14pt/16pt verdana;
-        color:#4e4e4e\'>
-        <id id = \'Comment1\'><!--Problem--></id><id id = \'errorText\'>' . $titre . '</id></h1>
-        <id id = \'Comment2\'><!--Probable causes:< --></id><id id = \'errordesc\'><font style = \'font:9pt/12pt verdana; color:black\'>
-        ' . $message . '
-        </id>
-        <br><br>
-        <hr size = 1 color = \'blue\'>
-        <br>
-        <ID id = term1>
-       ' . $bouton_valider . '
-        </ID>
-        <P>
-        </ul>
-        <BR>
-        </TD>
-        </TR>
-        <!/TABLE>
-        ';
+                      <h1 id=errortype style='font:14pt/16pt verdana; color:#4e4e4e'>
+                      <id id='Comment1'><!--Problem--></id><id id='errorText'>$titre</id></h1>
+                      <id id='Comment2'><!--Probable causes:<--></id><id id='errordesc'><font style='font:9pt/12pt verdana; color:black'>
+                      $message
+                      </id>
+                      <br><br>
+                      <hr size=1 color='blue'>
+                      <br>
+                      <ID  id=term1>
+                      $bouton_valider
+                      </ID>
+                      <P>
+                      </ul>
+                      <BR>
+             </TD>
+         </TR>
+         <!/TABLE>        
+     ";
         exit;
         //include ('../lib/fin_page.inc');
     }
@@ -101,6 +110,15 @@ class Lib {
         }
 
         return $result;
+    }
+
+    /**
+     * Initiation de la valeur d'un paramètre passé par requête HTTP (GET ou POST)
+     * @param <type> $variable_name Nom de la variable
+     * @param <type> $variable_set_value Valeur à affecter
+     */
+    public static function setParameterFromRequest($variable_name, $variable_set_value) {
+        $_REQUEST[$variable_name] = $variable_set_value;
     }
 
     /**
@@ -168,7 +186,7 @@ class Lib {
                     . ' - '
                     . $_SESSION['intranet_modules'][self::$module]['nom_usuel_intranet_modules']
 //                    . ' (v' . $_SESSION['intranet_modules'][self::$module]['version_intranet_modules'] . ')'
-                    ;
+            ;
             $return = $title;
         } else {
             $return = $title;

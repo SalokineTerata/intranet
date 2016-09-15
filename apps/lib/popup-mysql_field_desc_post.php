@@ -1,60 +1,69 @@
 <?php
+
 /*
-Module d'appartenance (valeur obligatoire)
-Par défaut, le nom du module est le répetoire courant
-*/
-
-$module=substr(strrchr(`pwd`, '/'), 1);
-$module=trim($module);
-
+  Module d'appartenance (valeur obligatoire)
+  Par défaut, le nom du module est le répetoire courant
+ */
 
 //Inclusions
-include ("../lib/session.php");
-include ("../lib/functions.php");
-//include ("../lib/functions.php");
-//include ("../lib/functions.js");
-include ("./functions.php");
-//include ("./functions.js");
-
-
+require_once '../inc/main.php';
+$action = Lib::getParameterFromRequest("action");
+$idIntranetColumnInfo = Lib::getParameterFromRequest(IntranetColumnInfoModel::KEYNAME);
+$explication_intranet_description = Lib::getParameterFromRequest(IntranetColumnInfoModel::FIELDNAME_EXPLICATION_INTRANET_COLUMN_INFO);
+$explication_intranet_description_controle = str_replace('"', '', $explication_intranet_description);
 /*
------------------
- ACTION A TRAITER
------------------
------------------------------------
- Détermination de l'action en cours
------------------------------------
+  -----------------
+  ACTION A TRAITER
+  -----------------
+  -----------------------------------
+  Détermination de l'action en cours
+  -----------------------------------
 
- Cette page est appelée pour effectuer un traitement particulier
- en fonction de la variable "$action". Ensuite elle redirige le
- résultat vers une autre page.
+  Cette page est appelée pour effectuer un traitement particulier
+  en fonction de la variable "$action". Ensuite elle redirige le
+  résultat vers une autre page.
 
- Le plus souvent, le traitement est délocalisé sous forme de
- fonction située dans le fichier "functions.php"
+  Le plus souvent, le traitement est délocalisé sous forme de
+  fonction située dans le fichier "functions.php"
 
-*/
-switch ($action)
-{
-
- /*
- S'il n'y a pas d'actions défini
  */
-     case '':
+switch ($action) {
 
-     //Redirection
-     header ("Location: index.php");
+    /*
+      S'il n'y a pas d'actions défini
+     */
+    case 'record':
 
-     break;
+        /**
+         * Ennregistrement de la nouvelle description du champs
+         */
+        $request = "UPDATE " . IntranetColumnInfoModel::TABLENAME
+                . " SET " . IntranetColumnInfoModel::FIELDNAME_EXPLICATION_INTRANET_COLUMN_INFO . "=\"" . $explication_intranet_description_controle . "\" "
+                . " WHERE " . IntranetColumnInfoModel::KEYNAME . "='" . $idIntranetColumnInfo . "' ";
+        DatabaseOperation::execute($request);
 
 
 
-/************
-Fin de switch
-************/
+        //Redirection
+        header("Location: popup-mysql_field_desc.php?id_intranet_column_info=" . $idIntranetColumnInfo . "&edit_mode=1");
 
+        break;
+    case 'supprimer':
+
+        if ($idIntranetColumnInfo) {
+            $intranetColumnInfoModel = new IntranetColumnInfoModel($idIntranetColumnInfo);
+            $intranetColumnInfoModel->suppressionFile();
+        }
+
+//Redirection
+        header("Location: popup-mysql_field_desc.php?id_intranet_column_info=" . $idIntranetColumnInfo . "&edit_mode=1");
+
+
+    /*     * **********
+      Fin de switch
+     * ********** */
 }
 //include ("./action_bs.php");
 //include ("./action_sm.php");
-
 ?>
 

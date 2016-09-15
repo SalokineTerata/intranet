@@ -58,7 +58,7 @@ $listeWorkflow = FtaWorkflowModel::showListeDeroulanteNomWorkflow($idFtaWorkflow
 
 
 $bouton_submit = FtaView::getHtmlButtonSubmit();
-$bouton_retour_vers_fta = FtaView::getHtmlButtonReturnFta($idFta, $id_fta_chapitre_encours, $syntheseAction, $comeback, $idFtaEtat, $abreviationFtaEtat, FtaRoleModel::ID_FTA_ROLE_COMMUN);
+$bouton_retour_vers_fta = FtaView::getHtmlButtonReturnFta($idFta, $id_fta_chapitre_encours, $syntheseAction,$idFtaEtat, $abreviationFtaEtat, FtaRoleModel::ID_FTA_ROLE_COMMUN);
 
 
 
@@ -91,12 +91,17 @@ $navigue . "
      <input type=\"hidden\" name=\"comeback\" id=\"comeback\" value=\"" . $comeback . "\" />
      <input type=\"hidden\" name=\"id_fta_workflow\" id=\"id_fta_workflow\" value=\"" . $idFtaWorkflow . "\" />
      <input type=\"hidden\" name=\"id_fta_chapitre_encours\" id=\"id_fta_chapitre_encours\" value=\"" . $id_fta_chapitre_encours . "\" />
-
+     <br><br><br><br><br><br><br><br><br><br><br>
      <" . $html_table . ">
          
      <tr class=titre_principal><td>
 
-         Espace de Travail de la Fiche Technique Article
+        " . UserInterfaceLabel::FR_ESPACE_DE_TRAVAIL . "
+
+     </td>
+     <td>
+
+        " . UserInterfaceLabel::FR_MODIFICATION_RAPPEL_ESPACE_DE_TRAVAIL . "    
 
      </td>
      </tr>

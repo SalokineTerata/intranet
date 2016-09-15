@@ -12,13 +12,16 @@ class AccueilFta {
     protected static $arrayFtaRole;
     protected static $arrayFtaWorkflow;
     protected static $arrayIdFtaAndIdWorkflow;
+    protected static $arrayIdFtaAndIdWorkflowEncours;
     protected static $arrayIdFtaByUserAndWorkflow;
+    protected static $arrayIdFtaByUserAndWorkflowEncours;
     protected static $arraNameSiteByWorkflow;
     protected static $idFtaRole;
     protected static $idFtaEtat;
     protected static $idUser;
     protected static $lieuGeo;
     protected static $nombreFta;
+    protected static $nombreFtaEncours;
     protected static $orderBy;
     protected static $syntheseAction;
     protected static $ftaModification;
@@ -35,9 +38,10 @@ class AccueilFta {
      * @param type $IdFtaRole
      * @param type $OrderBy
      */
-    public static function initAccueil($id_user, $idFtaEtat, $abreviationFtaEtat, $syntheseAction, $IdFtaRole, $OrderBy, $debut, $numeroDePageCourante) {
+    public static function initAccueil($id_user, $idFtaEtat, $abreviationFtaEtat, $syntheseAction, $IdFtaRole, $OrderBy, $debut, $numeroDePageCourante, $paramLieuGeo) {
 
         self::$idUser = $id_user;
+        self::$lieuGeo = $paramLieuGeo;
         self::$abreviationFtaEtat = $abreviationFtaEtat;
         self::$syntheseAction = $syntheseAction;
         self::$idFtaRole = $IdFtaRole;
@@ -75,20 +79,33 @@ class AccueilFta {
          * $arrayIdFtaAndIdWorkflow[1] sont les id_fta
          * $arrayIdFtaAndIdWorkflow[2] sont les nom des workflows correspondant aux  id_fta
          */
-        self::$arrayIdFtaAndIdWorkflow = FtaEtatModel::getIdFtaByEtatAvancement(self::$syntheseAction, self::$abreviationFtaEtat, self::$idFtaRole, self::$idUser, self::$idFtaEtat, self::$ftaModification);
+        if (self::$syntheseAction == FtaEtatModel::ETAT_AVANCEMENT_VALUE_EN_COURS or self::$idFtaEtat <> FtaEtatModel::ID_VALUE_MODIFICATION) {
+            self::$arrayIdFtaAndIdWorkflow = FtaEtatModel::getIdFtaByEtatAvancement(self::$syntheseAction, self::$idFtaRole, self::$idUser, self::$idFtaEtat, self::$ftaModification, self::$lieuGeo);
 
-        self::$arrayIdFtaByUserAndWorkflow = UserModel::getIdFtaByUserAndWorkflow(self::$arrayIdFtaAndIdWorkflow, self::$orderBy, $debut, self::$ftaModification);
+            self::$arrayIdFtaByUserAndWorkflow = UserModel::getIdFtaByUserAndWorkflow(self::$arrayIdFtaAndIdWorkflow, self::$orderBy, $debut, self::$ftaModification);
 
-        self::$arraNameSiteByWorkflow = IntranetActionsModel::getNameSiteByWorkflow(self::$idUser, self::$arrayIdFtaByUserAndWorkflow['3']);
+            self::$arraNameSiteByWorkflow = IntranetActionsModel::getNameSiteByWorkflow(self::$idUser, self::$arrayIdFtaByUserAndWorkflow['3']);
 
-        self::$nombreFta = self::$arrayIdFtaByUserAndWorkflow['2'];
+            self::$nombreFta = self::$arrayIdFtaByUserAndWorkflow['2'];
+        } else {
+            self::$arrayIdFtaAndIdWorkflow = FtaEtatModel::getIdFtaByEtatAvancement(self::$syntheseAction, self::$idFtaRole, self::$idUser, self::$idFtaEtat, self::$ftaModification, self::$lieuGeo);
+            self::$arrayIdFtaAndIdWorkflowEncours = FtaEtatModel::getIdFtaByEtatAvancement(FtaEtatModel::ETAT_AVANCEMENT_VALUE_EN_COURS, self::$idFtaRole, self::$idUser, self::$idFtaEtat, self::$ftaModification, self::$lieuGeo);
+
+            self::$arrayIdFtaByUserAndWorkflow = UserModel::getIdFtaByUserAndWorkflow(self::$arrayIdFtaAndIdWorkflow, self::$orderBy, $debut, self::$ftaModification);
+            self::$arrayIdFtaByUserAndWorkflowEncours = UserModel::getIdFtaByUserAndWorkflow(self::$arrayIdFtaAndIdWorkflowEncours, self::$orderBy, $debut, self::$ftaModification);
+
+            self::$arraNameSiteByWorkflow = IntranetActionsModel::getNameSiteByWorkflow(self::$idUser, self::$arrayIdFtaByUserAndWorkflow['3']);
+
+            self::$nombreFta = self::$arrayIdFtaByUserAndWorkflow['2'];
+            self::$nombreFtaEncours = self::$arrayIdFtaByUserAndWorkflowEncours['2'];
+        }
     }
 
     public static function getTableauSythese() {
 
         $tableau_synthese = AccueilFta::getHtmlTableauSythese(self::$arrayFtaRole, self::$arrayFtaEtat, self::$abreviationFtaEtat, self::$idFtaRole, self::$syntheseAction);
-        $tableau_syntheseWorkflow = AccueilFta::getHtmlTableauSytheseWorkflow(self::$arrayIdFtaByUserAndWorkflow['3'], self::$arraNameSiteByWorkflow);
-        $tableau_synthese.=$tableau_syntheseWorkflow;
+//        $tableau_syntheseWorkflow = AccueilFta::getHtmlTableauSytheseWorkflow(self::$arrayIdFtaByUserAndWorkflow['3'], self::$arraNameSiteByWorkflow);
+//        $tableau_synthese.=$tableau_syntheseWorkflow;
         return $tableau_synthese;
     }
 
@@ -226,6 +243,60 @@ class AccueilFta {
 //                    . '&numeroPage=' . $nb_pages . '.html" title="Dernière page">&raquo;&raquo;</a>&nbsp;';
         }
 
+        /**
+         * Augmentation de la taille d'affichage
+         */
+        $resultat = "<h3>" . $resultat . "</h3>";
+// On retourne le resultat
+        return $resultat;
+    }
+
+    public static function paginerClassification($nb_results_p_page, $numero_page_courante, $nb_avant, $nb_apres, $premiere, $derniere, $paramNbDeResultat) {
+// Initialisation de la variable a retourner
+        $resultat = '';
+
+// nombre total de pages
+        $nb_pages = ceil($paramNbDeResultat / $nb_results_p_page);
+// nombre de pages avant
+        $avant = $numero_page_courante > ($nb_avant + 1) ? $nb_avant : $numero_page_courante - 1;
+// nombre de pages apres
+        $apres = $numero_page_courante <= $nb_pages - $nb_apres ? $nb_apres : $nb_pages - $numero_page_courante;
+
+// premiere page
+        if ($premiere && $numero_page_courante - $avant > 1) {
+            $resultat .= '<a href="' . htmlspecialchars($_SERVER['PHP_SELF']) . '?numeroPage=1'
+                    . '" title="Première page">&laquo;&laquo;</a>&nbsp;';
+        }
+
+// page precedente
+        if ($numero_page_courante > 1) {
+            $resultat .= '<a href="' . htmlspecialchars($_SERVER['PHP_SELF']) . '?numeroPage=' . ($numero_page_courante - 1)
+                    . '" title="Page précédente ' . ($numero_page_courante - 1) . '">&laquo;</a>&nbsp;';
+        }
+
+// affichage des numeros de page
+        for ($i = $numero_page_courante - $avant; $i <= $numero_page_courante + $apres; $i++) {
+// page courante
+            if ($i == $numero_page_courante) {
+                $resultat .= '&nbsp;[<strong>' . $i . '</strong>]&nbsp;';
+            } else {
+                $resultat .= '&nbsp;[<a href="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES) . '?numeroPage=' . $i
+                        . '" title="Consulter la page ' . $i . '">' . $i . '</a>]&nbsp;';
+            }
+        }
+
+// page suivante
+        if ($numero_page_courante < $nb_pages) {
+            $resultat .= '<a href="' . htmlspecialchars($_SERVER['PHP_SELF']) . '?numeroPage=' . ($numero_page_courante + 1)
+                    . '" title="Consulter la page ' . ($numero_page_courante + 1) . ' !">&raquo;</a>&nbsp;';
+        }
+
+// derniere page     
+        if ($derniere && ($numero_page_courante + $apres) < $nb_pages) {
+            $resultat .= '<a href="' . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES) . '?numeroPage=' . $nb_pages
+                    . '" title="Dernière page">&raquo;&raquo;</a>&nbsp;';
+        }
+
 // On retourne le resultat
         return $resultat;
     }
@@ -293,6 +364,9 @@ class AccueilFta {
                         . '&nom_fta_etat=' . FtaEtatModel::ETAT_ABREVIATION_VALUE_MODIFICATION
                         . '&id_fta_role=' . $paramIdFtaRole
                         . '&synthese_action=attente >En attente' . $nombreFta1 . '</a>';
+                if (self::$syntheseAction <> FtaEtatModel::ETAT_AVANCEMENT_VALUE_EN_COURS) {
+                    $nombreFta2 = ' (' . self::$nombreFtaEncours . ')';
+                }
                 $lien['1'] = ' <a href=index.php?id_fta_etat=1'
                         . '&nom_fta_etat=' . FtaEtatModel::ETAT_ABREVIATION_VALUE_MODIFICATION
                         . '&id_fta_role=' . $paramIdFtaRole
@@ -378,7 +452,7 @@ class AccueilFta {
                  * Entête de la barre de navigation de la page d'accueil
                  */
                 . '<TR>'
-                . '<TH>Role </TH> <TH>Etat FTA</TH> <TH>' . UserInterfaceLabel::FR_AVANCEMENT_FTA . '</TH>'
+                . '<TH>Rôle</TH> <TH>Etat FTA</TH> <TH>' . UserInterfaceLabel::FR_AVANCEMENT_FTA . '</TH>'
                 . '</TR>';
         /*
          * Données du tableau
@@ -658,30 +732,31 @@ class AccueilFta {
         if ((substr($URL, -2)) == 'v3') {
             $URL = $URL . '/apps/fta/index.php?';
         }
-        $tableauFiche .= '<th><a href=' . $URL . '&order_common=Site_de_production&numeroPage=' . self::$numeroDePageCourante . '><img src=../lib/images/order-AZ.png title=\'Ordonné par Nom de Site de Production\'  border=\'0\' /></a>'
+        $tableauFiche .= '<th><a href=' . $URL . '&order_common=' . FtaModel::FIELDNAME_SITE_PRODUCTION . '&numeroPage=' . self::$numeroDePageCourante . '><img src=../lib/images/order-AZ.png title=\'Ordonné par Nom de Site de Production\'  border=\'0\' /></a>'
                 . 'Site'
                 . '</th><th>'
-                . '<a href=' . $URL . '&order_common=id_fta&numeroPage=' . self::$numeroDePageCourante . '><img src=../lib/images/order-AZ.png title=\'Ordonné par Nom du Propriétaire\'  border=\'0\' /></a>'
+                . '<a href=' . $URL . '&order_common=' . FtaModel::FIELDNAME_ID_FTA_CLASSIFICATION2 . '&numeroPage=' . self::$numeroDePageCourante . '><img src=../lib/images/order-AZ.png title=\'Ordonné par Nom du Propriétaire\'  border=\'0\' /></a>'
                 . 'Client'
                 . '</th><th>'
-                . '<a href=' . $URL . '&order_common=suffixe_agrologic_fta&numeroPage=' . self::$numeroDePageCourante . ' ><img src=../lib/images/order-AZ.png title=\'Ordonné par Nom de Classification\'  border=\'0\' /></a>'
+                . '<a href=' . $URL . '&order_common=' . FtaModel::FIELDNAME_ID_CLASSIFICATION_RACCOURCIS . '&numeroPage=' . self::$numeroDePageCourante . ' ><img src=../lib/images/order-AZ.png title=\'Ordonné par Nom de Classification\'  border=\'0\' /></a>'
                 . 'Class.'
                 . '</th><th>'
-                . '<a href=' . $URL . '&order_common=designation_commerciale_fta&numeroPage=' . self::$numeroDePageCourante . ' ><img src=../lib/images/order-AZ.png title=\'Ordonné par Noms du Produit\'  border=\'0\' /></a>'
+                . '<a href=' . $URL . '&order_common=' . FtaModel::FIELDNAME_DESIGNATION_COMMERCIALE . '&numeroPage=' . self::$numeroDePageCourante . ' ><img src=../lib/images/order-AZ.png title=\'Ordonné par Noms du Produit\'  border=\'0\' /></a>'
                 . 'Produits'
                 . '</th><th>'
-                . '<a href=' . $URL . '&order_common=id_dossier_fta&numeroPage=' . self::$numeroDePageCourante . ' ><img src=../lib/images/order-AZ.png title=\'Ordonné par code Fta\'  border=\'0\' /></a>'
+                . '<a href=' . $URL . '&order_common=' . FtaModel::FIELDNAME_DOSSIER_FTA . '&numeroPage=' . self::$numeroDePageCourante . ' ><img src=../lib/images/order-AZ.png title=\'Ordonné par code Fta\'  border=\'0\' /></a>'
                 . 'Dossier FTA'
                 . '</th><th>'
-                . '<a href=' . $URL . '&order_common=code_article_ldc&numeroPage=' . self::$numeroDePageCourante . ' ><img src=../lib/images/order-AZ.png title=\'Ordonné par code arcadia\'  border=\'0\' /></a>'
+                . '<a href=' . $URL . '&order_common=' . FtaModel::FIELDNAME_CODE_ARTICLE_LDC . '&numeroPage=' . self::$numeroDePageCourante . ' ><img src=../lib/images/order-AZ.png title=\'Ordonné par code arcadia\'  border=\'0\' /></a>'
                 . 'Code Article Arcadia'
                 . '</th><th>'
-                . '<a href=' . $URL . '&order_common=date_echeance_fta&numeroPage=' . self::$numeroDePageCourante . ' ><img src=../lib/images/order-AZ.png title=\'Ordonné par Date\'  border=\'0\' /></a>'
+                . '<a href=' . $URL . '&order_common=' . FtaModel::FIELDNAME_DATE_ECHEANCE_FTA . '&numeroPage=' . self::$numeroDePageCourante . ' ><img src=../lib/images/order-AZ.png title=\'Ordonné par Date\'  border=\'0\' /></a>'
                 . 'Echéance de validation'
                 . '</th><th>'
+                . '<a href=' . $URL . '&order_common=' . FtaModel::FIELDNAME_POURCENTAGE_AVANCEMENT . '&numeroPage=' . self::$numeroDePageCourante . ' ><img src=../lib/images/order-AZ.png title=\'Ordonné par ' . UserInterfaceLabel::FR_AVANCEMENT_FTA . '\'  border=\'0\' /></a>'
                 . UserInterfaceLabel::FR_AVANCEMENT_FTA
                 . '</th><th>'
-                . 'Service'
+                . 'Rôles'
                 . '</th><th>'
                 . 'Actions'
                 . '</th><th>'
@@ -739,12 +814,12 @@ class AccueilFta {
                 $idFta = $rowsDetail[FtaModel::KEYNAME];
                 $abreviationFtaEtat = $rowsDetail[FtaEtatModel::FIELDNAME_ABREVIATION];
                 $LIBELLE = $rowsDetail[FtaModel::FIELDNAME_LIBELLE];
-                $suffixeAgrologicFta = $rowsDetail[FtaModel::FIELDNAME_SUFFIXE_AGROLOGIC_FTA];
+                $idClassificationRaccourcis = $rowsDetail[FtaModel::FIELDNAME_ID_CLASSIFICATION_RACCOURCIS];
                 $designationCommercialeFta = $rowsDetail[FtaModel::FIELDNAME_DESIGNATION_COMMERCIALE];
                 $idDossierFta = $rowsDetail[FtaModel::FIELDNAME_DOSSIER_FTA];
                 $idVersionDossierFta = $rowsDetail[FtaModel::FIELDNAME_VERSION_DOSSIER_FTA];
                 $codeArticleLdc = $rowsDetail[FtaModel::FIELDNAME_CODE_ARTICLE_LDC];
-                $dateEcheanceFta = $rowsDetail[FtaModel::FIELDNAME_DATE_ECHEANCE_FTA];
+                $dateEcheanceFtatmp = $rowsDetail[FtaModel::FIELDNAME_DATE_ECHEANCE_FTA];
                 $createurFta = $rowsDetail[FtaModel::FIELDNAME_CREATEUR];
                 $nomSiteProduction = $rowsDetail[GeoModel::FIELDNAME_GEO];
                 $idWorkflowFtaEncours = $rowsDetail[FtaModel::FIELDNAME_WORKFLOW];
@@ -753,9 +828,18 @@ class AccueilFta {
                 $listeIdFtaRole = $rowsDetail[FtaModel::FIELDNAME_LISTE_ID_FTA_ROLE];
 
                 if ($recap[$idFta] == NULL) {
-                    $recap[$idFta] = "";
+                    $recap[$idFta] = "0%";
                 }
 
+                /**
+                 * On récupère le nom de la classification
+                 */
+                $suffixeAgrologicFta = ClassificationRaccourcisModel::getNameRaccroucisClassifById($idClassificationRaccourcis);
+
+                /**
+                 * Changment du format de date en Fr
+                 */
+                $dateEcheanceFta = FtaController::changementDuFormatDeDateFR($dateEcheanceFtatmp);
 
                 /**
                  * Donne accès aux bouton de transition 
@@ -769,8 +853,8 @@ class AccueilFta {
                  */
                 $ftaModel = new FtaModel($idFta);
                 $commentaireDataField = $ftaModel->getDataField(FtaModel::FIELDNAME_COMMENTAIRE);
-                $htmlField = html::getHtmlObjectFromDataField($commentaireDataField);
-                $htmlField->setHtmlRenderToTable();
+                $htmlFieldCommentaire = html::getHtmlObjectFromDataField($commentaireDataField);
+                $htmlFieldCommentaire->setHtmlRenderToTable();
 
 
                 /**
@@ -778,6 +862,8 @@ class AccueilFta {
                  */
                 if ($idclassification) {
                     $classification = ClassificationArborescenceArticleCategorieContenuModel::getElementClassificationFta($idclassification, ClassificationFta2Model::FIELDNAME_ID_PROPRIETAIRE_GROUPE);
+                } else {
+                    $classification = "";
                 }
 
                 /*
@@ -794,17 +880,21 @@ class AccueilFta {
                 $createur_link = '\'Géré par ' . $createurPrenom . ' ' . $createurNom . '\'';
 
 
+
                 /**
                  * Lien vers l'historique de la Fta
+                 * Il ne s'affiche que  pour le Fta Validé et Modifier
                  */
-                $lienHistorique = ' <a href=historique-' . $idFta
-                        . '-1'
-                        . '-' . self::$idFtaEtat
-                        . '-' . self::$abreviationFtaEtat
-                        . '-' . self::$idFtaRole
-                        . '-' . self::$syntheseAction
-                        . '-1'
-                        . '.html >' . $recap[$idFta] . '</a>';
+                if (self::$abreviationFtaEtat == FtaEtatModel::ETAT_ABREVIATION_VALUE_VALIDE or self::$abreviationFtaEtat == FtaEtatModel::ETAT_ABREVIATION_VALUE_MODIFICATION) {
+                    $lienHistorique = ' <a href=historique-' . $idFta
+                            . '-1'
+                            . '-' . self::$idFtaEtat
+                            . '-' . self::$abreviationFtaEtat
+                            . '-' . self::$idFtaRole
+                            . '-' . self::$syntheseAction
+                            . '-1'
+                            . '.html >' . $recap[$idFta] . '</a>';
+                }
                 /*
                  * Designation commerciale
                  */
@@ -839,6 +929,11 @@ class AccueilFta {
 //                            $bgcolor = 'bgcolor=#009dd1 ';
                     }
                 }
+
+                /**
+                 * Détermine le fond de la cellule suivant le code de retour de la transaction vers Fta
+                 */
+                $bgcolorArcadia = TableauFicheView::getHtmlCellBgColorArcadia($idFta, $bgcolor);
 
                 $HTML_date_echeance_fta = FtaProcessusDelaiModel::getArraytFtaDelaiAvancement($idFta);
 //$return['status']
@@ -957,6 +1052,15 @@ class AccueilFta {
                             . '</a>'
                     ;
                 }
+                /**
+                 * Historique de modification
+                 */
+                $actions .= ' <a href=modification_fta_historique.php?' . FtaModel::KEYNAME . '=' . $idFta
+                        . '&' . FtaEtatModel::KEYNAME . '=' . self::$idFtaEtat
+                        . '&' . FtaEtatModel::FIELDNAME_ABREVIATION . '=' . self::$abreviationFtaEtat
+                        . '&' . FtaRoleModel::KEYNAME . '=' . self::$idFtaRole
+                        . '&synthese_action=' . self::$syntheseAction
+                        . ' ><img src=./images/dossier.png alt=\'\' title=\'Historique des modifications Fta\' width=\'30\' height=\'30\' border=\'0\' /></a>';
                 /*
                  * Transiter
                  */
@@ -989,12 +1093,15 @@ class AccueilFta {
                          * que la Fta soit valider,
                          * on accède au boutton de transition
                          */
-                        or ( self::$ftaModification and self::$abreviationFtaEtat == FtaEtatModel::ETAT_ABREVIATION_VALUE_VALIDE and $accesTransitionButton == TRUE)
+                        or ( self::$ftaModification and self::$abreviationFtaEtat == FtaEtatModel::ETAT_ABREVIATION_VALUE_VALIDE
+//                                and $accesTransitionButton == TRUE
+                        )
                 ) {
                     $actions .= '<a '
                             . 'href=transiter.php'
                             . '?id_fta=' . $idFta
                             . '&id_fta_role=' . self::$idFtaRole
+                            . '&comeback=1'
                             . '><img src=./images/transiter.png alt=\'\' title=\'Transiter\' width=\'30\' height=\'30\' border=\'0\' />'
                             . '</a>'
                     ;
@@ -1042,6 +1149,7 @@ class AccueilFta {
                             . '?action=dupliquer_fiche'
                             . '&id_fta=' . $idFta
                             . '&id_fta_role=' . self::$idFtaRole
+                            . '&comeback=1'
                             . '><img src=../lib/images/copie.png alt=\'\' title=\'Dupliquer\' width=\'30\' height=\'30\' border=\'0\' />'
                             . '</a>'
                     ;
@@ -1051,252 +1159,293 @@ class AccueilFta {
                 /*
                  * Noms des services dans lequel la Fta se trouve
                  */
-//                $service = FtaRoleModel::getListeIdFtaRoleEncoursByIdFta($idFta, $idWorkflowFtaEncours);
                 $service = FtaRoleModel::getNameServiceEncours($listeIdFtaRole);
-
-                if ($recap[$idFta] <> '100%') {
-                    $createurFtaTr = $createurFta;
-                    $workflowTR = $workflowDescription;
-                    $diffWorkflowTr = $workflowTR <> $workflowTrTmp;
-                    if ($diffWorkflowTr) {
-                        $tableauFicheTr2 .= $tableauFicheTrWork . $tableauFicheTr;
-                        $nombreDeCellule = '12';
-                        $tableauFicheTrWork = '<tbody  id=\'' . $workflowName . '\' >'
-                                . '<tr class=contenu>'
-                                . '<td  class=titre COLSPAN=' . $nombreDeCellule . '>' . $workflowDescription . '</td>'
-                                . '</tr>';
-                        $workflowTrTmp = $rowsDetail[FtaWorkflowModel::FIELDNAME_DESCRIPTION_FTA_WORKFLOW];
-                        $tableauFicheTr = NULL;
-                        $tmp = $rowsDetail[FtaWorkflowModel::FIELDNAME_DESCRIPTION_FTA_WORKFLOW];
-                    }
-                } else {
-                    $createurFtaN = $createurFta;
-                    $workflowN = $workflowDescription;
-                    $diffWorkflowN = $workflowN <> $workflowNTmp;
-                    if ($diffWorkflowN) {
-                        $tableauFicheN2.= $tableauFicheNWork . $tableauFicheN;
-                        $nombreDeCellule = '12';
-                        $tableauFicheNWork = '<tbody  id=\'' . $workflowName . '\' >'
-                                . '<tr class=contenu>'
-                                . '<td  class=titre COLSPAN=' . $nombreDeCellule . '>' . $workflowDescription . '</td>'
-                                . '</tr>';
-                        $workflowNTmp = $rowsDetail[FtaWorkflowModel::FIELDNAME_DESCRIPTION_FTA_WORKFLOW];
-                        $tableauFicheN = NULL;
-                        $tmp = $rowsDetail[FtaWorkflowModel::FIELDNAME_DESCRIPTION_FTA_WORKFLOW];
-                    }
-                }
-                /**
-                 * TableauN les idFta à 100% et tableauTr les autres
-                 * Tableau avec Tmp sont les lignes sans le noms du créateur
-                 * Conditions :
-                 * - l'utilisateur connecté est il le créateur de la Fta
-                 * - l'utilisateur précedent est il le même créateur de la Fta actuel
-                 * - la Fta actuel est-elle à 100%
-                 * - Avons-nous changer de workflow ?
-                 * - Les fta créer par l'utilisateur connectée doivent vu en priorité
-                 */
-                switch (self::$idUser) {
-                    case $createurFta:
-                        /*
-                         * Commentaire de la Fta
-                         */
-                        $htmlField->setIsEditable(TRUE);
-                        $commentaire = $htmlField->getHtmlResult();
-                        if ($recap[$idFta] == '100%') {
-                            if ($createurFtaN <> $createurNTmp or $diffWorkflowN) {
-                                $tableauFicheN = '<tr class=contenu>'
-                                        . '<td COLSPAN=' . $nombreDeCellule . ' ><font size=2 >' . $createurPrenom . ' ' . $createurNom . ' </td>'
-                                        . '</tr>'
-                                        . '<tr class=contenu >'
-                                        . '<td ' . $bgcolor_header . ' width=\'' . $selection_width . '\' > ' . $icon_header . $selection . '</td>'//Ordre de priorisation
-                                        . '<td ' . $bgcolor . ' width=8%>' . $nomSiteProduction . '</td>'//Site
-                                        . '<td ' . $bgcolor . ' width=6%>' . $classification . '</td>'//Client
-                                        . '<td ' . $bgcolor . ' width=6%>' . $suffixeAgrologicFta . '</td>'// Raccourcie Class.
-                                        . '<td ' . $bgcolor . $largeur_html_C1 . '><a title=' . $createur_link . '/>' . $din . '</a></td>'// Produits
-                                        . '<td ' . $bgcolor . ' width=3%>' . $idDossierFta . 'v' . $idVersionDossierFta . '</td>'//Dossier Fta
-                                        . '<td ' . $bgcolor . ' width=\'3%\' align=center> <b><font size=\'2\' color=\'#0000FF\' >' . $codeArticleLdc . '</font></b></td>'; //Code regate
-
-                                if ($abreviationFtaEtat == FtaEtatModel::ETAT_ABREVIATION_VALUE_MODIFICATION) {
-                                    $tableauFicheN.='<td ' . $bgcolor . $largeur_html_C3 . ' align=center>' . $dateEcheanceFta . '</td>'; //échance de validation
-                                } else {
-                                    $tableauFicheN.='<td ' . $bgcolor . $largeur_html_C3 . ' align=center>' . $dateEcheanceFta . '</td>'; //échance de validation
-                                }
-                                $tableauFicheN .= '<td ' . $bgcolor . ' width=5% align=center >' . $lienHistorique . '</td>'//% Avancement FTA
-                                        . '<td ' . $bgcolor . $largeur_html_C3 . ' align=center >' . $service . '</td>' //Service               
-                                        . '<td ' . $bgcolor . $largeur_html_C3_action . ' align=center >' . $actions . '</td>'// Actions
-                                        . $commentaire . '</tr >'; // Commentaires
-                                $createurNTmp = $createurFtaN;
-                            } else {
-                                $tableauFicheN .= '<tr class=contenu >'
-                                        . '<td ' . $bgcolor_header . ' width=\'' . $selection_width . '\' >' . $icon_header . $selection . '</td>'//Ordre de priorisation
-                                        . '<td ' . $bgcolor . ' width=8%>' . $nomSiteProduction . '</td>'//Site
-                                        . '<td ' . $bgcolor . ' width=6%>' . $classification . '</td>'//Client
-                                        . '<td ' . $bgcolor . ' width=6%>' . $suffixeAgrologicFta . '</td>'// Raccourcie Class.
-                                        . '<td ' . $bgcolor . $largeur_html_C1 . '><a title=' . $createur_link . '/>' . $din . '</a></td>'// Produits
-                                        . '<td ' . $bgcolor . ' width=3%>' . $idDossierFta . 'v' . $idVersionDossierFta . '</td>'//Dossier Fta
-                                        . '<td ' . $bgcolor . ' width=\'3%\' align=center> <b><font size=\'2\' color=\'#0000FF\' >' . $codeArticleLdc . '</font></b></td>'; //Code regate
-
-                                if ($abreviationFtaEtat == FtaEtatModel::ETAT_ABREVIATION_VALUE_MODIFICATION) {
-                                    $tableauFicheN.='<td ' . $bgcolor . $largeur_html_C3 . ' align=center>' . $dateEcheanceFta . '</td>'; //échance de validation
-                                } else {
-                                    $tableauFicheN.='<td ' . $bgcolor . $largeur_html_C3 . '></td>';
-                                }
-                                $tableauFicheN .= '<td ' . $bgcolor . ' width=5% align=center>' . $lienHistorique . '</td>'//% Avancement FTA
-                                        . '<td ' . $bgcolor . $largeur_html_C3 . ' align=center >' . $service . '</td>' //Service               
-                                        . '<td ' . $bgcolor . $largeur_html_C3_action . ' align=center >' . $actions . '</td>'// Actions
-                                        . $commentaire . '</tr >'; // Commentaires
-                            }
-                        } else {
-                            if ($createurFtaTr <> $createurTrTmp or $diffWorkflowTr) {
-                                $tableauFicheTr .= '<tr class=contenu>'
-                                        . '<td COLSPAN=' . $nombreDeCellule . ' ><font size=2 >' . $createurPrenom . ' ' . $createurNom . ' </td>'
-                                        . '</tr>'
-                                        . '<tr class=contenu >'
-                                        . '<td ' . $bgcolor_header . ' width=\'' . $selection_width . '\' >' . $icon_header . $selection . '</td>'//Ordre de priorisation
-                                        . '<td ' . $bgcolor . ' width=8%>' . $nomSiteProduction . '</td>'//Site
-                                        . '<td ' . $bgcolor . ' width=6%>' . $classification . '</td>'//Client
-                                        . '<td ' . $bgcolor . ' width=6%>' . $suffixeAgrologicFta . '</td>'/// Raccourcie Class.
-                                        . '<td ' . $bgcolor . $largeur_html_C1 . '><a title=' . $createur_link . '/>' . $din . '</a></td>'// Produits
-                                        . '<td ' . $bgcolor . ' width=3%>' . $idDossierFta . 'v' . $idVersionDossierFta . '</td>'//Dossier Fta
-                                        . '<td ' . $bgcolor . ' width=\'3%\' align=center> <b><font size=\'2\' color=\'#0000FF\' >' . $codeArticleLdc . '</font></b></td>'; //Code regate
-
-                                if ($abreviationFtaEtat == FtaEtatModel::ETAT_ABREVIATION_VALUE_MODIFICATION) {
-                                    $tableauFicheTr.='<td ' . $bgcolor . $largeur_html_C3 . ' align=center>' . $dateEcheanceFta . '</td>'; //échance de validation
-                                } else {
-                                    $tableauFicheTr.='<td ' . $bgcolor . $largeur_html_C3 . '></td>';
-                                }
-                                $tableauFicheTr .= '<td ' . $bgcolor . ' width=5% align=center>' . $lienHistorique . '</td>'//% Avancement FTA
-                                        . '<td ' . $bgcolor . $largeur_html_C3 . ' align=center >' . $service . '</td>' //Service               
-                                        . '<td ' . $bgcolor . $largeur_html_C3_action . ' align=center >' . $actions . '</td>'// Actions
-                                        . $commentaire . '</tr >'; // Commentaires
-                                $createurTrTmp = $createurFtaTr;
-                            } else {
-                                $tableauFicheTr .= '<tr class=contenu >'
-                                        . '<td ' . $bgcolor_header . ' width=\'' . $selection_width . '\' >' . $icon_header . $selection . '</td>'//Ordre de priorisation
-                                        . '<td ' . $bgcolor . ' width=8%>' . $nomSiteProduction . '</td>'//Site
-                                        . '<td ' . $bgcolor . ' width=6%>' . $classification . '</td>'//Client
-                                        . '<td ' . $bgcolor . ' width=6%>' . $suffixeAgrologicFta . '</td>'// Raccourcie Class.
-                                        . '<td ' . $bgcolor . $largeur_html_C1 . '><a title=' . $createur_link . '/>' . $din . '</a></td>'// Produits
-                                        . '<td ' . $bgcolor . ' width=3%>' . $idDossierFta . 'v' . $idVersionDossierFta . '</td>'//Dossier Fta
-                                        . '<td ' . $bgcolor . ' width=\'3%\' align=center> <b><font size=\'2\' color=\'#0000FF\' >' . $codeArticleLdc . '</font></b></td>'; //Code regate
-
-                                if ($abreviationFtaEtat == FtaEtatModel::ETAT_ABREVIATION_VALUE_MODIFICATION) {
-                                    $tableauFicheTr.='<td ' . $bgcolor . $largeur_html_C3 . ' align=center>' . $dateEcheanceFta . '</td>'; //échance de validation
-                                } else {
-                                    $tableauFicheTr.='<td ' . $bgcolor . $largeur_html_C3 . ' ></td>';
-                                }
-                                $tableauFicheTr .= '<td ' . $bgcolor . ' width=5% align=center>' . $lienHistorique . '</td>'//% Avancement FTA
-                                        . '<td ' . $bgcolor . $largeur_html_C3 . ' align=center >' . $service . '</td>' //Service               
-                                        . '<td ' . $bgcolor . $largeur_html_C3_action . ' align=center >' . $actions . '</td>'// Actions
-                                        . $commentaire . '</tr >'; // Commentaires
-                            }
+                if (self::$ftaModification) {
+                    /**
+                     * Affichage de la page d'accueil avec regroupement
+                     *  pour les utilisateurs intervenant sur les Fta
+                     */
+                    if ($recap[$idFta] <> '100%') {
+                        $createurFtaTr = $createurFta;
+                        $workflowTR = $workflowDescription;
+                        $diffWorkflowTr = $workflowTR <> $workflowTrTmp;
+                        if ($diffWorkflowTr) {
+                            $tableauFicheTr2 .= $tableauFicheTrWork . $tableauFicheTr;
+                            $nombreDeCellule = '13';
+                            $tableauFicheTrWork = '<tbody  id=\'' . $workflowName . '\' >'
+                                    . '<tr class=contenu>'
+                                    . '<td  class=titre COLSPAN=' . $nombreDeCellule . '>' . $workflowDescription . '</td>'
+                                    . '</tr>';
+                            $workflowTrTmp = $rowsDetail[FtaWorkflowModel::FIELDNAME_DESCRIPTION_FTA_WORKFLOW];
+                            $tableauFicheTr = NULL;
+                            $tmp = $rowsDetail[FtaWorkflowModel::FIELDNAME_DESCRIPTION_FTA_WORKFLOW];
                         }
-                        break;
-
-
-                    default :
-                        /*
-                         * Commentaire de la Fta
-                         */
-
-                        $htmlField->setIsEditable(FALSE);
-                        $commentaire = $htmlField->getHtmlResult();
-
-                        /*
-                         * Nouvelle ligne pour créateur
-                         */
-                        if ($recap[$idFta] == '100%') {
-                            if ($createurFtaN <> $createurNTmp or $diffWorkflowN) {
-                                $tableauFicheTmp .= '<tr class=contenu>'
-                                        . '<td COLSPAN=' . $nombreDeCellule . ' > <font size=2 >' . $createurPrenom . ' ' . $createurNom . ' </td>'
-                                        . '</tr>'
-                                        . '<tr class=contenu >'
-                                        . '<td ' . $bgcolor_header . ' width=\'' . $selection_width . '\' >' . $icon_header . $selection . '</td>'//Ordre de priorisation
-                                        . '<td ' . $bgcolor . ' width=8%>' . $nomSiteProduction . '</td>'//Site
-                                        . '<td ' . $bgcolor . ' width=6%>' . $classification . '</td>'//Client
-                                        . '<td ' . $bgcolor . ' width=6%>' . $suffixeAgrologicFta . '</td>'// Raccourcie Class.
-                                        . '<td ' . $bgcolor . $largeur_html_C1 . '><a title=' . $createur_link . '/>' . $din . '</a></td>'// Produits
-                                        . '<td ' . $bgcolor . ' width=3%>' . $idDossierFta . 'v' . $idVersionDossierFta . '</td>'//Dossier Fta
-                                        . '<td ' . $bgcolor . ' width=\'3%\' align=center> <b><font size=\'2\' color=\'#0000FF\' >' . $codeArticleLdc . '</font></b></td>'; //Code regate
-
-                                if ($abreviationFtaEtat == FtaEtatModel::ETAT_ABREVIATION_VALUE_MODIFICATION) {
-                                    $tableauFicheTmp.='<td ' . $bgcolor . $largeur_html_C3 . ' align=center>' . $dateEcheanceFta . '</td>'; //échance de validation
-                                } else {
-                                    $tableauFicheTmp.='<td ' . $bgcolor . $largeur_html_C3 . ' ></td>';
-                                }
-                                $tableauFicheTmp .= '<td ' . $bgcolor . ' width=5% align=center>' . $lienHistorique . '</td>'//% Avancement FTA
-                                        . '<td ' . $bgcolor . $largeur_html_C3 . ' align=center >' . $service . '</td>' //Service               
-                                        . '<td ' . $bgcolor . $largeur_html_C3_action . ' align=center >' . $actions . '</td>'// Actions
-                                        . $commentaire . '</tr >'; // Commentaires
-                                $createurNTmp = $createurFtaN;
-                            } else {
-                                $tableauFicheTmp .= '<tr class=contenu >'
-                                        . '<td ' . $bgcolor_header . ' width=\'' . $selection_width . '\' >' . $icon_header . $selection . '</td>'//Ordre de priorisation
-                                        . '<td ' . $bgcolor . ' width=8%>' . $nomSiteProduction . '</td>'//Site
-                                        . '<td ' . $bgcolor . ' width=6%>' . $classification . '</td>'//Client
-                                        . '<td ' . $bgcolor . ' width=6%>' . $suffixeAgrologicFta . '</td>'// Raccourcie Class.
-                                        . '<td ' . $bgcolor . $largeur_html_C1 . '><a title=' . $createur_link . '/>' . $din . '</a></td>'// Produits
-                                        . '<td ' . $bgcolor . ' width=3%>' . $idDossierFta . 'v' . $idVersionDossierFta . '</td>'//Dossier Fta
-                                        . '<td ' . $bgcolor . ' width=\'3%\' align=center> <b><font size=\'2\' color=\'#0000FF\' >' . $codeArticleLdc . '</font></b></td>'; //Code regate
-
-
-                                if ($abreviationFtaEtat == FtaEtatModel::ETAT_ABREVIATION_VALUE_MODIFICATION) {
-                                    $tableauFicheTmp.='<td ' . $bgcolor . $largeur_html_C3 . ' align=center>' . $dateEcheanceFta . '</td>'; //échance de validation
-                                } else {
-                                    $tableauFicheTmp.='<td ' . $bgcolor . $largeur_html_C3 . ' ></td>';
-                                }
-                                $tableauFicheTmp .='<td ' . $bgcolor . ' width=5% align=center>' . $lienHistorique . '</td>'//% Avancement FTA
-                                        . '<td ' . $bgcolor . $largeur_html_C3 . ' align=center >' . $service . '</td>' //Service               
-                                        . '<td ' . $bgcolor . $largeur_html_C3_action . ' align=center >' . $actions . '</td>'// Actions
-                                        . $commentaire . '</tr >'; // Commentaires
-                            }
-                        } else {
-                            if ($createurFtaTr <> $createurTrTmp or $diffWorkflowTr) {
-                                $tableauFicheTrTmp .= '<tr class=contenu>'
-                                        . '<td COLSPAN=' . $nombreDeCellule . ' > <font size=2 >' . $createurPrenom . ' ' . $createurNom . ' </td>'
-                                        . '</tr>'
-                                        . '<tr class=contenu >'
-                                        . '<td ' . $bgcolor_header . ' width=\'' . $selection_width . '\' >' . $icon_header . $selection . '</td>'//Ordre de priorisation
-                                        . '<td ' . $bgcolor . ' width=8%>' . $nomSiteProduction . '</td>'//Site
-                                        . '<td ' . $bgcolor . ' width=6%>' . $classification . '</td>'//Client
-                                        . '<td ' . $bgcolor . ' width=6%>' . $suffixeAgrologicFta . '</td>'// Raccourcie Class.
-                                        . '<td ' . $bgcolor . $largeur_html_C1 . '><a title=' . $createur_link . '/>' . $din . '</a></td>'// Produits
-                                        . '<td ' . $bgcolor . ' width=3%>' . $idDossierFta . 'v' . $idVersionDossierFta . '</td>'//Dossier Fta
-                                        . '<td ' . $bgcolor . ' width=\'3%\' align=center> <b><font size=\'2\' color=\'#0000FF\' >' . $codeArticleLdc . '</font></b></td>'; //Code regate
-
-
-                                if ($abreviationFtaEtat == FtaEtatModel::ETAT_ABREVIATION_VALUE_MODIFICATION) {
-                                    $tableauFicheTrTmp.='<td ' . $bgcolor . $largeur_html_C3 . ' align=center>' . $dateEcheanceFta . '</td>'; //échance de validation
-                                } else {
-                                    $tableauFicheTrTmp.='<td ' . $bgcolor . $largeur_html_C3 . ' ></td>';
-                                }
-                                $tableauFicheTrTmp .= '<td ' . $bgcolor . ' width=5% align=center>' . $lienHistorique . '</td>'//% Avancement FTA
-                                        . '<td ' . $bgcolor . $largeur_html_C3 . ' align=center >' . $service . '</td>' //Service               
-                                        . '<td ' . $bgcolor . $largeur_html_C3_action . ' align=center >' . $actions . '</td>'// Actions
-                                        . $commentaire . '</tr >'; // Commentaires
-                                $createurTrTmp = $createurFtaTr;
-                            } else {
-                                $tableauFicheTrTmp .= '<tr class=contenu >'
-                                        . '<td ' . $bgcolor_header . ' width=\'' . $selection_width . '\' >' . $icon_header . $selection . '</td>'//Ordre de priorisation
-                                        . '<td ' . $bgcolor . ' width=8%>' . $nomSiteProduction . '</td>'//Site
-                                        . '<td ' . $bgcolor . ' width=6%>' . $classification . '</td>'//Client
-                                        . '<td ' . $bgcolor . ' width=6%>' . $suffixeAgrologicFta . '</td>'// Raccourcie Class.
-                                        . '<td ' . $bgcolor . $largeur_html_C1 . '><a title=' . $createur_link . '/>' . $din . '</a></td>'// Produits
-                                        . '<td ' . $bgcolor . ' width=3%>' . $idDossierFta . 'v' . $idVersionDossierFta . '</td>'//Dossier Fta
-                                        . '<td ' . $bgcolor . ' width=\'3%\' align=center> <b><font size=\'2\' color=\'#0000FF\' >' . $codeArticleLdc . '</font></b></td>'; //Code regate
-
-                                if ($abreviationFtaEtat == FtaEtatModel::ETAT_ABREVIATION_VALUE_MODIFICATION) {
-                                    $tableauFicheTrTmp.='<td ' . $bgcolor . $largeur_html_C3 . ' align=center>' . $dateEcheanceFta . '</td>'; //échance de validation
-                                } else {
-                                    $tableauFicheTrTmp.='<td ' . $bgcolor . $largeur_html_C3 . ' ></td>';
-                                }
-                                $tableauFicheTrTmp .='<td ' . $bgcolor . ' width=5% align=center>' . $lienHistorique . '</td>'//% Avancement FTA
-                                        . '<td ' . $bgcolor . $largeur_html_C3 . ' align=center >' . $service . '</td>' //Service               
-                                        . '<td ' . $bgcolor . $largeur_html_C3_action . ' align=center >' . $actions . '</td>'// Actions
-                                        . $commentaire . '</tr >'; // Commentaires
-                            }
+                    } else {
+                        $createurFtaN = $createurFta;
+                        $workflowN = $workflowDescription;
+                        $diffWorkflowN = $workflowN <> $workflowNTmp;
+                        if ($diffWorkflowN) {
+                            $tableauFicheN2.= $tableauFicheNWork . $tableauFicheN;
+                            $nombreDeCellule = '13';
+                            $tableauFicheNWork = '<tbody  id=\'' . $workflowName . '\' >'
+                                    . '<tr class=contenu>'
+                                    . '<td  class=titre COLSPAN=' . $nombreDeCellule . '>' . $workflowDescription . '</td>'
+                                    . '</tr>';
+                            $workflowNTmp = $rowsDetail[FtaWorkflowModel::FIELDNAME_DESCRIPTION_FTA_WORKFLOW];
+                            $tableauFicheN = NULL;
+                            $tmp = $rowsDetail[FtaWorkflowModel::FIELDNAME_DESCRIPTION_FTA_WORKFLOW];
                         }
-                        break;
+                    }
+                    /**
+                     * TableauN les idFta à 100% et tableauTr les autres
+                     * Tableau avec Tmp sont les lignes sans le noms du créateur
+                     * Conditions :
+                     * - l'utilisateur connecté est il le créateur de la Fta
+                     * - l'utilisateur précedent est il le même créateur de la Fta actuel
+                     * - la Fta actuel est-elle à 100%
+                     * - Avons-nous changer de workflow ?
+                     * - Les fta créer par l'utilisateur connectée doivent vu en priorité
+                     */
+                    switch (self::$idUser) {
+                        case $createurFta:
+                            /*
+                             * Commentaire de la Fta et code Regate Mère
+                             */
+                            $htmlFieldCommentaire->setIsEditable(TRUE);
+                            $commentaire = $htmlFieldCommentaire->getHtmlResult();
+                            if ($recap[$idFta] == '100%') {
+                                if ($createurFtaN <> $createurNTmp or $diffWorkflowN) {
+                                    $tableauFicheN .= '<tr class=contenu>'
+                                            . '<td COLSPAN=' . $nombreDeCellule . ' ><font size=2 >' . $createurPrenom . ' ' . $createurNom . ' </td>'
+                                            . '</tr>'
+                                            . '<tr class=contenu >'
+                                            . '<td ' . $bgcolor_header . ' width=\'' . $selection_width . '\' > ' . $icon_header . $selection . '</td>'//Ordre de priorisation
+                                            . '<td ' . $bgcolor . ' width=8%>' . $nomSiteProduction . '</td>'//Site
+                                            . '<td ' . $bgcolor . ' width=6%>' . $classification . '</td>'//Client
+                                            . '<td ' . $bgcolor . ' width=6%>' . $suffixeAgrologicFta . '</td>'// Raccourcie Class.
+                                            . '<td ' . $bgcolor . $largeur_html_C1 . '><a title=' . $createur_link . '/>' . $din . '</a></td>'// Produits
+                                            . '<td ' . $bgcolor . ' width=3%>' . $idDossierFta . 'v' . $idVersionDossierFta . '</td>'//Dossier Fta
+                                            . '<td ' . $bgcolorArcadia . ' width=\'3%\' align=center> <b><font size=\'2\' color=\'#0000FF\' >' . $codeArticleLdc . '</font></b></td>'; //Code regate
+
+                                    if ($abreviationFtaEtat == FtaEtatModel::ETAT_ABREVIATION_VALUE_MODIFICATION) {
+                                        $tableauFicheN.='<td ' . $bgcolor . $largeur_html_C3 . ' align=center>' . $dateEcheanceFta . '</td>'; //échance de validation
+                                    } else {
+                                        $tableauFicheN.='<td ' . $bgcolor . $largeur_html_C3 . ' align=center>' . $dateEcheanceFta . '</td>'; //échance de validation
+                                    }
+                                    $tableauFicheN .= '<td ' . $bgcolor . ' width=5% align=center >' . $lienHistorique . '</td>'//% Avancement FTA
+                                            . '<td ' . $bgcolor . $largeur_html_C3 . ' align=center >' . $service . '</td>' //Service               
+                                            . '<td ' . $bgcolor . $largeur_html_C3_action . ' align=center >' . $actions . '</td>'// Actions
+                                            . $commentaire  // Commentaires
+                                            . '</tr >';
+                                    $createurNTmp = $createurFtaN;
+                                } else {
+                                    $tableauFicheN .= '<tr class=contenu >'
+                                            . '<td ' . $bgcolor_header . ' width=\'' . $selection_width . '\' >' . $icon_header . $selection . '</td>'//Ordre de priorisation
+                                            . '<td ' . $bgcolor . ' width=8%>' . $nomSiteProduction . '</td>'//Site
+                                            . '<td ' . $bgcolor . ' width=6%>' . $classification . '</td>'//Client
+                                            . '<td ' . $bgcolor . ' width=6%>' . $suffixeAgrologicFta . '</td>'// Raccourcie Class.
+                                            . '<td ' . $bgcolor . $largeur_html_C1 . '><a title=' . $createur_link . '/>' . $din . '</a></td>'// Produits
+                                            . '<td ' . $bgcolor . ' width=3%>' . $idDossierFta . 'v' . $idVersionDossierFta . '</td>'//Dossier Fta
+                                            . '<td ' . $bgcolorArcadia . ' width=\'3%\' align=center> <b><font size=\'2\' color=\'#0000FF\' >' . $codeArticleLdc . '</font></b></td>'; //Code regate
+
+                                    if ($abreviationFtaEtat == FtaEtatModel::ETAT_ABREVIATION_VALUE_MODIFICATION) {
+                                        $tableauFicheN.='<td ' . $bgcolor . $largeur_html_C3 . ' align=center>' . $dateEcheanceFta . '</td>'; //échance de validation
+                                    } else {
+                                        $tableauFicheN.='<td ' . $bgcolor . $largeur_html_C3 . '></td>';
+                                    }
+                                    $tableauFicheN .= '<td ' . $bgcolor . ' width=5% align=center>' . $lienHistorique . '</td>'//% Avancement FTA
+                                            . '<td ' . $bgcolor . $largeur_html_C3 . ' align=center >' . $service . '</td>' //Service               
+                                            . '<td ' . $bgcolor . $largeur_html_C3_action . ' align=center >' . $actions . '</td>'// Actions
+                                            . $commentaire  // Commentaires
+                                            . '</tr >';
+                                }
+                            } else {
+                                if ($createurFtaTr <> $createurTrTmp or $diffWorkflowTr) {
+                                    $tableauFicheTr .= '<tr class=contenu>'
+                                            . '<td COLSPAN=' . $nombreDeCellule . ' ><font size=2 >' . $createurPrenom . ' ' . $createurNom . ' </td>'
+                                            . '</tr>'
+                                            . '<tr class=contenu >'
+                                            . '<td ' . $bgcolor_header . ' width=\'' . $selection_width . '\' >' . $icon_header . $selection . '</td>'//Ordre de priorisation
+                                            . '<td ' . $bgcolor . ' width=8%>' . $nomSiteProduction . '</td>'//Site
+                                            . '<td ' . $bgcolor . ' width=6%>' . $classification . '</td>'//Client
+                                            . '<td ' . $bgcolor . ' width=6%>' . $suffixeAgrologicFta . '</td>'/// Raccourcie Class.
+                                            . '<td ' . $bgcolor . $largeur_html_C1 . '><a title=' . $createur_link . '/>' . $din . '</a></td>'// Produits
+                                            . '<td ' . $bgcolor . ' width=3%>' . $idDossierFta . 'v' . $idVersionDossierFta . '</td>'//Dossier Fta
+                                            . '<td ' . $bgcolorArcadia . ' width=\'3%\' align=center> <b><font size=\'2\' color=\'#0000FF\' >' . $codeArticleLdc . '</font></b></td>'; //Code regate
+
+                                    if ($abreviationFtaEtat == FtaEtatModel::ETAT_ABREVIATION_VALUE_MODIFICATION) {
+                                        $tableauFicheTr.='<td ' . $bgcolor . $largeur_html_C3 . ' align=center>' . $dateEcheanceFta . '</td>'; //échance de validation
+                                    } else {
+                                        $tableauFicheTr.='<td ' . $bgcolor . $largeur_html_C3 . '></td>';
+                                    }
+                                    $tableauFicheTr .= '<td ' . $bgcolor . ' width=5% align=center>' . $lienHistorique . '</td>'//% Avancement FTA
+                                            . '<td ' . $bgcolor . $largeur_html_C3 . ' align=center >' . $service . '</td>' //Service               
+                                            . '<td ' . $bgcolor . $largeur_html_C3_action . ' align=center >' . $actions . '</td>'// Actions
+                                            . $commentaire  // Commentaires
+                                            . '</tr >';
+                                    $createurTrTmp = $createurFtaTr;
+                                } else {
+                                    $tableauFicheTr .= '<tr class=contenu >'
+                                            . '<td ' . $bgcolor_header . ' width=\'' . $selection_width . '\' >' . $icon_header . $selection . '</td>'//Ordre de priorisation
+                                            . '<td ' . $bgcolor . ' width=8%>' . $nomSiteProduction . '</td>'//Site
+                                            . '<td ' . $bgcolor . ' width=6%>' . $classification . '</td>'//Client
+                                            . '<td ' . $bgcolor . ' width=6%>' . $suffixeAgrologicFta . '</td>'// Raccourcie Class.
+                                            . '<td ' . $bgcolor . $largeur_html_C1 . '><a title=' . $createur_link . '/>' . $din . '</a></td>'// Produits
+                                            . '<td ' . $bgcolor . ' width=3%>' . $idDossierFta . 'v' . $idVersionDossierFta . '</td>'//Dossier Fta
+                                            . '<td ' . $bgcolorArcadia . ' width=\'3%\' align=center> <b><font size=\'2\' color=\'#0000FF\' >' . $codeArticleLdc . '</font></b></td>'; //Code regate
+
+                                    if ($abreviationFtaEtat == FtaEtatModel::ETAT_ABREVIATION_VALUE_MODIFICATION) {
+                                        $tableauFicheTr.='<td ' . $bgcolor . $largeur_html_C3 . ' align=center>' . $dateEcheanceFta . '</td>'; //échance de validation
+                                    } else {
+                                        $tableauFicheTr.='<td ' . $bgcolor . $largeur_html_C3 . ' ></td>';
+                                    }
+                                    $tableauFicheTr .= '<td ' . $bgcolor . ' width=5% align=center>' . $lienHistorique . '</td>'//% Avancement FTA
+                                            . '<td ' . $bgcolor . $largeur_html_C3 . ' align=center >' . $service . '</td>' //Service               
+                                            . '<td ' . $bgcolor . $largeur_html_C3_action . ' align=center >' . $actions . '</td>'// Actions
+                                            . $commentaire  // Commentaires
+                                            . '</tr >';
+                                }
+                            }
+                            break;
+
+
+                        default :
+                            /*
+                             * Commentaire de la Fta
+                             */
+
+                            $htmlFieldCommentaire->setIsEditable(FALSE);
+                            $commentaire = $htmlFieldCommentaire->getHtmlResult();
+                            /*
+                             * Nouvelle ligne pour créateur
+                             */
+                            if ($recap[$idFta] == '100%') {
+                                if ($createurFtaN <> $createurNTmp or $diffWorkflowN) {
+                                    $tableauFicheTmp .= '<tr class=contenu>'
+                                            . '<td COLSPAN=' . $nombreDeCellule . ' > <font size=2 >' . $createurPrenom . ' ' . $createurNom . ' </td>'
+                                            . '</tr>'
+                                            . '<tr class=contenu >'
+                                            . '<td ' . $bgcolor_header . ' width=\'' . $selection_width . '\' >' . $icon_header . $selection . '</td>'//Ordre de priorisation
+                                            . '<td ' . $bgcolor . ' width=8%>' . $nomSiteProduction . '</td>'//Site
+                                            . '<td ' . $bgcolor . ' width=6%>' . $classification . '</td>'//Client
+                                            . '<td ' . $bgcolor . ' width=6%>' . $suffixeAgrologicFta . '</td>'// Raccourcie Class.
+                                            . '<td ' . $bgcolor . $largeur_html_C1 . '><a title=' . $createur_link . '/>' . $din . '</a></td>'// Produits
+                                            . '<td ' . $bgcolor . ' width=3%>' . $idDossierFta . 'v' . $idVersionDossierFta . '</td>'//Dossier Fta
+                                            . '<td ' . $bgcolorArcadia . ' width=\'3%\' align=center> <b><font size=\'2\' color=\'#0000FF\' >' . $codeArticleLdc . '</font></b></td>'; //Code regate
+
+                                    if ($abreviationFtaEtat == FtaEtatModel::ETAT_ABREVIATION_VALUE_MODIFICATION) {
+                                        $tableauFicheTmp.='<td ' . $bgcolor . $largeur_html_C3 . ' align=center>' . $dateEcheanceFta . '</td>'; //échance de validation
+                                    } else {
+                                        $tableauFicheTmp.='<td ' . $bgcolor . $largeur_html_C3 . ' ></td>';
+                                    }
+                                    $tableauFicheTmp .= '<td ' . $bgcolor . ' width=5% align=center>' . $lienHistorique . '</td>'//% Avancement FTA
+                                            . '<td ' . $bgcolor . $largeur_html_C3 . ' align=center >' . $service . '</td>' //Service               
+                                            . '<td ' . $bgcolor . $largeur_html_C3_action . ' align=center >' . $actions . '</td>'// Actions
+                                            . $commentaire  // Commentaires
+                                            . '</tr >';
+                                    $createurNTmp = $createurFtaN;
+                                } else {
+                                    $tableauFicheTmp .= '<tr class=contenu >'
+                                            . '<td ' . $bgcolor_header . ' width=\'' . $selection_width . '\' >' . $icon_header . $selection . '</td>'//Ordre de priorisation
+                                            . '<td ' . $bgcolor . ' width=8%>' . $nomSiteProduction . '</td>'//Site
+                                            . '<td ' . $bgcolor . ' width=6%>' . $classification . '</td>'//Client
+                                            . '<td ' . $bgcolor . ' width=6%>' . $suffixeAgrologicFta . '</td>'// Raccourcie Class.
+                                            . '<td ' . $bgcolor . $largeur_html_C1 . '><a title=' . $createur_link . '/>' . $din . '</a></td>'// Produits
+                                            . '<td ' . $bgcolor . ' width=3%>' . $idDossierFta . 'v' . $idVersionDossierFta . '</td>'//Dossier Fta
+                                            . '<td ' . $bgcolor . ' width=\'3%\' align=center> <b><font size=\'2\' color=\'#0000FF\' >' . $codeArticleLdc . '</font></b></td>'; //Code regate
+
+
+                                    if ($abreviationFtaEtat == FtaEtatModel::ETAT_ABREVIATION_VALUE_MODIFICATION) {
+                                        $tableauFicheTmp.='<td ' . $bgcolor . $largeur_html_C3 . ' align=center>' . $dateEcheanceFta . '</td>'; //échance de validation
+                                    } else {
+                                        $tableauFicheTmp.='<td ' . $bgcolor . $largeur_html_C3 . ' ></td>';
+                                    }
+                                    $tableauFicheTmp .='<td ' . $bgcolor . ' width=5% align=center>' . $lienHistorique . '</td>'//% Avancement FTA
+                                            . '<td ' . $bgcolor . $largeur_html_C3 . ' align=center >' . $service . '</td>' //Service               
+                                            . '<td ' . $bgcolor . $largeur_html_C3_action . ' align=center >' . $actions . '</td>'// Actions
+                                            . $commentaire  // Commentaires
+                                            . '</tr >';
+                                }
+                            } else {
+                                if ($createurFtaTr <> $createurTrTmp or $diffWorkflowTr) {
+                                    $tableauFicheTrTmp .= '<tr class=contenu>'
+                                            . '<td COLSPAN=' . $nombreDeCellule . ' > <font size=2 >' . $createurPrenom . ' ' . $createurNom . ' </td>'
+                                            . '</tr>'
+                                            . '<tr class=contenu >'
+                                            . '<td ' . $bgcolor_header . ' width=\'' . $selection_width . '\' >' . $icon_header . $selection . '</td>'//Ordre de priorisation
+                                            . '<td ' . $bgcolor . ' width=8%>' . $nomSiteProduction . '</td>'//Site
+                                            . '<td ' . $bgcolor . ' width=6%>' . $classification . '</td>'//Client
+                                            . '<td ' . $bgcolor . ' width=6%>' . $suffixeAgrologicFta . '</td>'// Raccourcie Class.
+                                            . '<td ' . $bgcolor . $largeur_html_C1 . '><a title=' . $createur_link . '/>' . $din . '</a></td>'// Produits
+                                            . '<td ' . $bgcolor . ' width=3%>' . $idDossierFta . 'v' . $idVersionDossierFta . '</td>'//Dossier Fta
+                                            . '<td ' . $bgcolorArcadia . ' width=\'3%\' align=center> <b><font size=\'2\' color=\'#0000FF\' >' . $codeArticleLdc . '</font></b></td>'; //Code regate
+
+
+                                    if ($abreviationFtaEtat == FtaEtatModel::ETAT_ABREVIATION_VALUE_MODIFICATION) {
+                                        $tableauFicheTrTmp.='<td ' . $bgcolor . $largeur_html_C3 . ' align=center>' . $dateEcheanceFta . '</td>'; //échance de validation
+                                    } else {
+                                        $tableauFicheTrTmp.='<td ' . $bgcolor . $largeur_html_C3 . ' ></td>';
+                                    }
+                                    $tableauFicheTrTmp .= '<td ' . $bgcolor . ' width=5% align=center>' . $lienHistorique . '</td>'//% Avancement FTA
+                                            . '<td ' . $bgcolor . $largeur_html_C3 . ' align=center >' . $service . '</td>' //Service               
+                                            . '<td ' . $bgcolor . $largeur_html_C3_action . ' align=center >' . $actions . '</td>'// Actions
+                                            . $commentaire  // Commentaires
+                                            . '</tr >';
+                                    $createurTrTmp = $createurFtaTr;
+                                } else {
+                                    $tableauFicheTrTmp .= '<tr class=contenu >'
+                                            . '<td ' . $bgcolor_header . ' width=\'' . $selection_width . '\' >' . $icon_header . $selection . '</td>'//Ordre de priorisation
+                                            . '<td ' . $bgcolor . ' width=8%>' . $nomSiteProduction . '</td>'//Site
+                                            . '<td ' . $bgcolor . ' width=6%>' . $classification . '</td>'//Client
+                                            . '<td ' . $bgcolor . ' width=6%>' . $suffixeAgrologicFta . '</td>'// Raccourcie Class.
+                                            . '<td ' . $bgcolor . $largeur_html_C1 . '><a title=' . $createur_link . '/>' . $din . '</a></td>'// Produits
+                                            . '<td ' . $bgcolor . ' width=3%>' . $idDossierFta . 'v' . $idVersionDossierFta . '</td>'//Dossier Fta
+                                            . '<td ' . $bgcolorArcadia . ' width=\'3%\' align=center> <b><font size=\'2\' color=\'#0000FF\' >' . $codeArticleLdc . '</font></b></td>'; //Code regate
+
+                                    if ($abreviationFtaEtat == FtaEtatModel::ETAT_ABREVIATION_VALUE_MODIFICATION) {
+                                        $tableauFicheTrTmp.='<td ' . $bgcolor . $largeur_html_C3 . ' align=center>' . $dateEcheanceFta . '</td>'; //échance de validation
+                                    } else {
+                                        $tableauFicheTrTmp.='<td ' . $bgcolor . $largeur_html_C3 . ' ></td>';
+                                    }
+                                    $tableauFicheTrTmp .='<td ' . $bgcolor . ' width=5% align=center>' . $lienHistorique . '</td>'//% Avancement FTA
+                                            . '<td ' . $bgcolor . $largeur_html_C3 . ' align=center >' . $service . '</td>' //Service               
+                                            . '<td ' . $bgcolor . $largeur_html_C3_action . ' align=center >' . $actions . '</td>'// Actions
+                                            . $commentaire  // Commentaires
+                                            . '</tr >';
+                                }
+                            }
+                            break;
+                    }
+
+                    /**
+                     * Affichage de la page d'accueil sans regroupement pour les utilisateurs en consultation
+                     */
+                } elseif (self::$ftaConsultation) {
+                    /*
+                     * Commentaire de la Fta
+                     */
+
+                    $htmlFieldCommentaire->setIsEditable(FALSE);
+                    $commentaire = $htmlFieldCommentaire->getHtmlResult();
+                    $tableauFicheTmp .= '<tr class=contenu >'
+                            . '<td ' . $bgcolor_header . ' width=\'' . $selection_width . '\' >' . $icon_header . $selection . '</td>'//Ordre de priorisation
+                            . '<td ' . $bgcolor . ' width=8%>' . $nomSiteProduction . '</td>'//Site
+                            . '<td ' . $bgcolor . ' width=6%>' . $classification . '</td>'//Client
+                            . '<td ' . $bgcolor . ' width=6%>' . $suffixeAgrologicFta . '</td>'// Raccourcie Class.
+                            . '<td ' . $bgcolor . $largeur_html_C1 . '><a title=' . $createur_link . '/>' . $din . '</a></td>'// Produits
+                            . '<td ' . $bgcolor . ' width=3%>' . $idDossierFta . 'v' . $idVersionDossierFta . '</td>'//Dossier Fta
+                            . '<td ' . $bgcolorArcadia . ' width=\'3%\' align=center> <b><font size=\'2\' color=\'#0000FF\' >' . $codeArticleLdc . '</font></b></td>'; //Code regate
+
+                    if ($abreviationFtaEtat == FtaEtatModel::ETAT_ABREVIATION_VALUE_MODIFICATION) {
+                        $tableauFicheTmp.='<td ' . $bgcolor . $largeur_html_C3 . ' align=center>' . $dateEcheanceFta . '</td>'; //échance de validation
+                    } else {
+                        $tableauFicheTmp.='<td ' . $bgcolor . $largeur_html_C3 . ' ></td>';
+                    }
+                    $tableauFicheTmp .= '<td ' . $bgcolor . ' width=5% align=center>' . $lienHistorique . '</td>'//% Avancement FTA
+                            . '<td ' . $bgcolor . $largeur_html_C3 . ' align=center >' . $service . '</td>' //Service               
+                            . '<td ' . $bgcolor . $largeur_html_C3_action . ' align=center >' . $actions . '</td>'// Actions
+                            . $commentaire  // Commentaires
+                            . '</tr >';
                 }
 
                 $tableauFicheN.= $tableauFicheTmp;
@@ -1382,6 +1531,8 @@ class AccueilFta {
      * Fonction de création d'une liste déroulante basée sur une requete SQL
       le premier champ retourné par la requête est désigné comme Clef de la liste
       le second alimente le contenu de la liste déroulante
+     * Le dernier paramètre est un boolean qui permet d'afficher l'élément "tous"
+     * dans la liste déroulante pour valeur "0"
      * @param string $paramRequeteSQL
      * @param int $paramIdDefaut
      * @param string $paramNomDefaut
@@ -1401,7 +1552,7 @@ class AccueilFta {
                 }
 
                 //Création de la liste déroulante
-                $html_liste = '<select name=' . $paramNomDefaut . ' onChange=' . $paramNomDefaut . '_js()>';
+                $html_liste = '<select id=' . $paramNomDefaut . ' name=' . $paramNomDefaut . ' onChange=' . $paramNomDefaut . '_js()>';
                 if ($paramTous) {
                     $html_liste .='<option value=0 >Tous</option>';
                 }

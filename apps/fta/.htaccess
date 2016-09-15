@@ -4,6 +4,9 @@ Options +FollowSymLinks
 Options +Indexes
 RewriteEngine on
 
+#suppresion du comeback dans les URL
+
+
 #Url sans le chapitre
 #RewriteRule ^modification_fiche-([0-9]+)-(.+)-([0-9]+)-([0-9]+)-(.+)-([0-9]+).html$  modification_fiche.php?id_fta=$1&synthese_action=$2&comeback=$3&id_fta_etat=$4&abreviation_fta_etat=$5&id_fta_role=$6 [L]
 #Url avec le chapitre
@@ -20,5 +23,6 @@ RewriteEngine on
 #RewriteRule ^index&order_common=(.+).html$  index.php?&order_common=$1 [L]
 #Url de l'historique
 RewriteRule ^historique-([0-9]+)-([0-9]+)-([0-9]+)-(.+)-([0-9]+)-(.+)-([0-9]+).html$  historique.php?id_fta=$1&id_fta_chapitre_encours=$2&id_fta_etat=$3&abreviation_fta_etat=$4&id_fta_role=$5&synthese_action=$6&comeback=$7 [L]
+RewriteRule ^historique-([0-9]+)-([0-9]+)-([0-9]+)-(.+)-([0-9]+)-(.+).html$  historique.php?id_fta=$1&id_fta_chapitre_encours=$2&id_fta_etat=$3&abreviation_fta_etat=$4&id_fta_role=$5&synthese_action=$6 [L]
 
 

@@ -16,8 +16,14 @@ class Html {
     const DEFAULT_HTML_IMAGE_LOADING = AttributesGlobal::DEFAULT_HTML_IMAGE_LOADING;
     const DEFAULT_HTML_IMAGE_OK = AttributesGlobal::DEFAULT_HTML_IMAGE_OK;
     const DEFAULT_HTML_IMAGE_UNDO = AttributesGlobal::DEFAULT_HTML_IMAGE_UNDO;
+    const DEFAULT_HTML_IMAGE_PIECE_JOINTE = AttributesGlobal::DEFAULT_HTML_IMAGE_PIECE_JOINTE;
+    const DEFAULT_HTML_IMAGE_DEVERROUILLE_MODIFIABLE = AttributesGlobal::DEFAULT_HTML_IMAGE_DEVERROUILLE_MODIFIABLE;
+    const DEFAULT_HTML_IMAGE_DEVERROUILLE_NON_MODIFIABLE = AttributesGlobal::DEFAULT_HTML_IMAGE_DEVERROUILLE_NON_MODIFIABLE;
+    const DEFAULT_HTML_IMAGE_VERROUILLE_NON_MODIFIABLE = AttributesGlobal::DEFAULT_HTML_IMAGE_VERROUILLE_NON_MODIFIABLE;
+    const DEFAULT_HTML_IMAGE_VERROUILLE_MODIFIABLE = AttributesGlobal::DEFAULT_HTML_IMAGE_VERROUILLE_MODIFIABLE;
     const DEFAULT_HTML_WARNING_UPDATE_IMAGE = "<img src=../lib/images/exclamation.png alt=\"\" title=\"Information mise à jour\" width=\"20\" height=\"18\" border=\"0\" />";
     const DEFAULT_HTML_WARNING_UPDATE_BGCOLOR = "background-color:#B0FFFE;";
+    const DEFAULT_HTML_WARNING_MESSAGE_BGCOLOR = "background-color:#FF5B5B;";
     const DEFAULT_HTML_TABLE_TITRE = "table border=0 width=100% class=titre";
     const DEFAULT_HTML_TABLE_CONTENU = "table border=0 width=100% class=titre";
     const PREFIXE_ID_ROW = AttributesGlobal::PREFIXE_ID_ROW;
@@ -180,14 +186,14 @@ class Html {
                 break;
 
             case Html::TYPE_OF_OBJECT_SUBFORM_RNN:
-                $htmlObject = new DataFieldToHtmlSubform_RNN($paramDataField, $param,$param2);
+                $htmlObject = new DataFieldToHtmlSubform_RNN($paramDataField, $param, $param2);
                 break;
             case Html::TYPE_OF_OBJECT_INPUTNUMBER:
                 $htmlObject = new DataFieldToHtmlInputNumber($paramDataField);
                 break;
 
             default:
-                afficher_message("Erreur", "Type d'objet <b>" . $TypeOfHtmlObject . "</b> inconnu." . " Champs concerné:" . $paramDataField->getFieldName() . " ", $redirection);
+                Lib::showMessage("Erreur", "Type d'objet <b>" . $TypeOfHtmlObject . "</b> inconnu." . " Champs concerné:" . $paramDataField->getFieldName() . " ", $redirection);
 //                throw new Exception();
         }
 
@@ -202,7 +208,10 @@ class Html {
     public static function convertDataFieldToHtml(DatabaseDataField $paramDataField, $paramIsEditable) {
 
         $htmlObject = self::getHtmlObjectFromDataField($paramDataField);
-        $htmlObject->setIsEditable($paramIsEditable);       
+        $htmlObject->setIsEditable($paramIsEditable);
+        $htmlObject->setHelp(IntranetColumnInfoModel::getFieldDesc($paramDataField->getTableName(), $paramDataField->getFieldName()
+                        , $paramDataField->getFieldLabel(), $htmlObject
+        ));
 
         return $htmlObject->getHtmlResult();
     }

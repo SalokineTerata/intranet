@@ -1,0 +1,145 @@
+Démarrage : ven mai 30 23:00:01 CEST 2014
+Arrêt     : ven mai 30 23:01:09 CEST 2014
+
+
+
+Base MySQL sélectionnée: agis
+Nombre de serveur(s) Linux concerné(s): 4
+Nombre de dossier(s) à mettre à jour: 29
+
+sending incremental file list
+
+sent 7070 bytes  received 49 bytes  2847.60 bytes/sec
+total size is 12774593  speedup is 1794.44
+sending incremental file list
+
+sent 6279 bytes  received 38 bytes  1804.86 bytes/sec
+total size is 12442583  speedup is 1969.70
+sending incremental file list
+erp_data.mdb
+
+sent 67722 bytes  received 65747 bytes  24267.09 bytes/sec
+total size is 88092672  speedup is 660.02
+sending incremental file list
+plan_qualite/Listing BF Bourguignon.rep
+
+sent 8200 bytes  received 64 bytes  3305.60 bytes/sec
+total size is 9254930  speedup is 1119.91
+sending incremental file list
+
+sent 7756 bytes  received 20 bytes  3110.40 bytes/sec
+total size is 16755943  speedup is 2154.83
+sending incremental file list
+
+sent 4308 bytes  received 24 bytes  2888.00 bytes/sec
+total size is 6387982  speedup is 1474.60
+sending incremental file list
+mercuriales/gms/2014/CENTRALES 2014/CARREFOUR 2014.xls
+mercuriales/gms/2014/CENTRALES 2014/CARREFOUR MARKET 2014.xls
+mercuriales/gms/2014/REGIONS  2014/GALEC REGION MERCU JUIN 2014.xls
+mercuriales/mdd/2014/2014 MERCURIALE CARREFOUR BELGIQUE.xls
+
+sent 91595 bytes  received 15891 bytes  19542.91 bytes/sec
+total size is 32536615  speedup is 302.71
+sending incremental file list
+
+sent 5047 bytes  received 27 bytes  3382.67 bytes/sec
+total size is 39173092  speedup is 7720.36
+sending incremental file list
+operations_commerciales/chrono demande echantillons.xls
+operations_commerciales/GMS/2014/D-REGIONS/GMS CARREFOUR REGIONS 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/D-REGIONS/GMS LECLERC 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/D-REGIONS/GMS SIMPLY MARKET REGIONS  2014-FUTUR MASTER.xls
+
+sent 225802 bytes  received 18668 bytes  32596.00 bytes/sec
+total size is 51271067  speedup is 209.72
+sending incremental file list
+
+sent 20296 bytes  received 83 bytes  5822.57 bytes/sec
+total size is 99065320  speedup is 4861.15
+sending incremental file list
+
+sent 4380 bytes  received 82 bytes  1784.80 bytes/sec
+total size is 35609223  speedup is 7980.55
+sending incremental file list
+
+sent 10004 bytes  received 13 bytes  6678.00 bytes/sec
+total size is 48321024  speedup is 4823.90
+sending incremental file list
+
+sent 5781 bytes  received 30 bytes  2324.40 bytes/sec
+total size is 93132165  speedup is 16026.87
+sending incremental file list
+erp_data.mdb
+
+sent 67722 bytes  received 65747 bytes  38134.00 bytes/sec
+total size is 88092672  speedup is 660.02
+sending incremental file list
+plan_qualite/Listing BF Bourguignon.rep
+
+sent 8200 bytes  received 64 bytes  16528.00 bytes/sec
+total size is 9254930  speedup is 1119.91
+sending incremental file list
+
+sent 4308 bytes  received 24 bytes  8664.00 bytes/sec
+total size is 6387982  speedup is 1474.60
+sending incremental file list
+
+sent 7756 bytes  received 20 bytes  5184.00 bytes/sec
+total size is 16755943  speedup is 2154.83
+sending incremental file list
+
+sent 85 bytes  received 13 bytes  65.33 bytes/sec
+total size is 104853504  speedup is 1069933.71
+sending incremental file list
+operations_commerciales/chrono demande echantillons.xls
+operations_commerciales/GMS/2014/D-REGIONS/GMS CARREFOUR REGIONS 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/D-REGIONS/GMS LECLERC 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/D-REGIONS/GMS SIMPLY MARKET REGIONS  2014-FUTUR MASTER.xls
+
+sent 225802 bytes  received 18668 bytes  97788.00 bytes/sec
+total size is 51271067  speedup is 209.72
+sending incremental file list
+mercuriales/gms/2014/CENTRALES 2014/CARREFOUR 2014.xls
+mercuriales/gms/2014/CENTRALES 2014/CARREFOUR MARKET 2014.xls
+mercuriales/gms/2014/REGIONS  2014/GALEC REGION MERCU JUIN 2014.xls
+mercuriales/mdd/2014/2014 MERCURIALE CARREFOUR BELGIQUE.xls
+
+sent 91595 bytes  received 15891 bytes  42994.40 bytes/sec
+total size is 32536615  speedup is 302.71
+sending incremental file list
+
+sent 10004 bytes  received 13 bytes  4006.80 bytes/sec
+total size is 48321024  speedup is 4823.90
+sending incremental file list
+
+sent 7070 bytes  received 49 bytes  4746.00 bytes/sec
+total size is 12774593  speedup is 1794.44
+sending incremental file list
+
+sent 5729 bytes  received 23 bytes  3834.67 bytes/sec
+total size is 129159129  speedup is 22454.65
+sending incremental file list
+
+sent 5610 bytes  received 39 bytes  3766.00 bytes/sec
+total size is 59049369  speedup is 10453.07
+sending incremental file list
+
+sent 51711 bytes  received 96 bytes  20722.80 bytes/sec
+total size is 297069139  speedup is 5734.15
+sending incremental file list
+
+sent 20296 bytes  received 83 bytes  8151.60 bytes/sec
+total size is 99065320  speedup is 4861.15
+sending incremental file list
+
+sent 4380 bytes  received 82 bytes  2974.67 bytes/sec
+total size is 35609223  speedup is 7980.55
+sending incremental file list
+
+sent 7756 bytes  received 20 bytes  3110.40 bytes/sec
+total size is 16755943  speedup is 2154.83
+sending incremental file list
+
+sent 7756 bytes  received 20 bytes  5184.00 bytes/sec
+total size is 16755943  speedup is 2154.83

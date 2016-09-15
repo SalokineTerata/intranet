@@ -208,7 +208,7 @@
         } else {
             var elems = document.getElementsByClassName("site");
             for (var i = 0; i < elems.length; i++) {
-                elems[i].style.visibility = 'hidden';              
+                elems[i].style.visibility = 'hidden';
             }
             var elems2 = document.getElementsByClassName("id_fta_workflow");
             for (var i = 0; i < elems2.length; i++) {
@@ -230,17 +230,62 @@
 
     }
 
+    function changeFta() {
+        var diffusion_fta;
+        var acces_module_fta;
+        var impression;
+        var diffusion;
+        diffusion_fta = document.getElementById('<?php echo IntranetActionsModel::NAME_DIFFUSION_FTA ?>');
+        impression = document.getElementById('<?php echo "impression_" . IntranetNiveauAccesModel::NIVEAU_FTA_IMPRESSION ?>');
+        diffusion = document.getElementById('<?php echo "diffusion_" . IntranetNiveauAccesModel::NIVEAU_FTA_DIFFUSION ?>');
+        acces_module_fta = document.getElementById('<?php echo IntranetActionsModel::NAME_ACCES_MODULE_FTA ?>');
+        droit_modification = document.getElementById('droit_modification');
+        var accesModuleFtaValue = acces_module_fta.value;
+        switch (accesModuleFtaValue) {
+            case '0':
+                impression.style.display = "none";
+                diffusion.style.display = "none";
+                diffusion_fta.style.display = "none";
+                droit_modification.style.display = "none";
+                break;
+            case '1':
+                impression.style.display = "";
+                diffusion.style.display = "none";
+                diffusion_fta.style.display = "";
+                droit_modification.style.display = "none";
+                break;
+            case '2':
+                diffusion_fta.style.display = "none";
+                impression.style.display = "";
+                diffusion.style.display = "";
+                droit_modification.style.display = "";
+                break;
+        }
+    }
+
     function confirmation(paramIdUser) {
         var idUser = paramIdUser;
         {
-            if (confirm('vous etes sur le point de supprimer un utilisateur'))
+            if (confirm('Vous etes sur le point de supprimer un utilisateur.'))
             {
                 location.href = "gestion_salaries11.php?modifier=supprimer&sal_user=" + idUser;
             }
             else {
             }
         }
-
     }
+
+    function confirmation_desactivation(paramIdUser) {
+        var idUser = paramIdUser;
+        {
+            if (confirm('Vous êtes sur le point de désactiver ce compte utilisateur.'))
+            {
+                location.href = "gestion_salaries11.php?modifier=desactivation&sal_user=" + idUser;
+            }
+            else {
+            }
+        }
+    }
+
 </script>
 

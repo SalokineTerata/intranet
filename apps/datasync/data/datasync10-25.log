@@ -1,0 +1,134 @@
+Démarrage : ven oct 25 23:00:01 CEST 2013
+Arrêt     : ven oct 25 23:00:39 CEST 2013
+
+
+
+Base MySQL sélectionnée: agis
+Nombre de serveur(s) Linux concerné(s): 4
+Nombre de dossier(s) à mettre à jour: 24
+
+sending incremental file list
+
+sent 7651 bytes  received 20 bytes  15342.00 bytes/sec
+total size is 16750790  speedup is 2183.65
+sending incremental file list
+
+sent 5598 bytes  received 45 bytes  2257.20 bytes/sec
+total size is 9985067  speedup is 1769.46
+sending incremental file list
+suivi_investissement/2014-2015/Bud invest AVI 2014 2015.xls
+
+sent 17043 bytes  received 491 bytes  11689.33 bytes/sec
+total size is 11615823  speedup is 662.47
+sending incremental file list
+
+sent 63 bytes  received 12 bytes  50.00 bytes/sec
+total size is 78852096  speedup is 1051361.28
+sending incremental file list
+
+sent 7538 bytes  received 45 bytes  5055.33 bytes/sec
+total size is 9253358  speedup is 1220.28
+sending incremental file list
+
+sent 7651 bytes  received 20 bytes  3068.40 bytes/sec
+total size is 16750790  speedup is 2183.65
+sending incremental file list
+
+sent 4308 bytes  received 24 bytes  2888.00 bytes/sec
+total size is 6387982  speedup is 1474.60
+sending incremental file list
+mercuriales/gms/2013/CENTRALES 2013/AUCHAN.FR 2013.xls
+mercuriales/gms/2013/CENTRALES 2013/CARREFOUR MARKET MDD PC PIZZAS 2013.xls
+mercuriales/gms/2013/CENTRALES 2013/CARREFOUR MARKET MN 2013.xls
+mercuriales/gms/2014/CENTRALES 2014/AUCHAN.FR 2014.xls
+
+sent 157164 bytes  received 14556 bytes  68688.00 bytes/sec
+total size is 41440051  speedup is 241.32
+sending incremental file list
+
+sent 5047 bytes  received 27 bytes  3382.67 bytes/sec
+total size is 39173092  speedup is 7720.36
+sending incremental file list
+operations_commerciales/DEMANDE ECHANTILLONS CL .xls
+operations_commerciales/chrono demande echantillons.xls
+operations_commerciales/GMS/2013/A-CENTRALES/GMS AUCHAN.FR 2013-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS CASINO 2014-FUTUR MASTER.xls
+
+sent 205614 bytes  received 14680 bytes  62941.14 bytes/sec
+total size is 54121940  speedup is 245.68
+sending incremental file list
+
+sent 18506 bytes  received 80 bytes  7434.40 bytes/sec
+total size is 41728031  speedup is 2245.13
+sending incremental file list
+deleting modeles/compo_festif_monoportion-v2.old
+deleting modeles/compo_agis_sans_portion-v1.bak
+modeles/compo_festif_132x72-v2.lab
+modeles/compo_festif_132x72-v2_180.lab
+modeles/compo_festif_monoportion-v2.lab
+modeles/compo_festif_monoportion-v2_180.lab
+modeles/coupelle_compo.lab
+modeles/coupelle_compo_180.lab
+modeles/echantillons-72x132mm_depart_PF.lab
+modeles/echantillons-72x132mm_syst_u.lab
+
+sent 137471 bytes  received 4467 bytes  56775.20 bytes/sec
+total size is 37610627  speedup is 264.98
+sending incremental file list
+
+sent 63 bytes  received 12 bytes  50.00 bytes/sec
+total size is 78852096  speedup is 1051361.28
+sending incremental file list
+
+sent 7538 bytes  received 45 bytes  5055.33 bytes/sec
+total size is 9253358  speedup is 1220.28
+sending incremental file list
+
+sent 4308 bytes  received 24 bytes  2888.00 bytes/sec
+total size is 6387982  speedup is 1474.60
+sending incremental file list
+
+sent 7651 bytes  received 20 bytes  5114.00 bytes/sec
+total size is 16750790  speedup is 2183.65
+sending incremental file list
+
+sent 85 bytes  received 13 bytes  65.33 bytes/sec
+total size is 104853504  speedup is 1069933.71
+sending incremental file list
+operations_commerciales/DEMANDE ECHANTILLONS CL .xls
+operations_commerciales/chrono demande echantillons.xls
+operations_commerciales/GMS/2013/A-CENTRALES/GMS AUCHAN.FR 2013-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS CASINO 2014-FUTUR MASTER.xls
+
+sent 205614 bytes  received 14680 bytes  88117.60 bytes/sec
+total size is 54121940  speedup is 245.68
+sending incremental file list
+mercuriales/gms/2013/CENTRALES 2013/AUCHAN.FR 2013.xls
+mercuriales/gms/2013/CENTRALES 2013/CARREFOUR MARKET MDD PC PIZZAS 2013.xls
+mercuriales/gms/2013/CENTRALES 2013/CARREFOUR MARKET MN 2013.xls
+mercuriales/gms/2014/CENTRALES 2014/AUCHAN.FR 2014.xls
+
+sent 157164 bytes  received 14556 bytes  68688.00 bytes/sec
+total size is 41440051  speedup is 241.32
+sending incremental file list
+
+sent 5598 bytes  received 45 bytes  3762.00 bytes/sec
+total size is 9985067  speedup is 1769.46
+sending incremental file list
+
+sent 5677 bytes  received 23 bytes  3800.00 bytes/sec
+total size is 128675317  speedup is 22574.62
+sending incremental file list
+
+sent 4707 bytes  received 36 bytes  9486.00 bytes/sec
+total size is 46318934  speedup is 9765.75
+sending incremental file list
+deleting codesoft/Codesoft 7/Codes Produits/75372.lab
+deleting codesoft/Codesoft 7/Codes Produits/75372.bak
+deleting codesoft/Codesoft 7/Codes Produits/23250.LAB
+codesoft/Codesoft 7/D\#351pannage/Gammes_coupe_logo_agis/carrefour_coupe/75372.bak
+codesoft/Codesoft 7/D\#351pannage/Gammes_coupe_logo_agis/carrefour_coupe/75372.lab
+
+sent 95735 bytes  received 126 bytes  38344.40 bytes/sec
+total size is 275068499  speedup is 2869.45
+sending incremental file list

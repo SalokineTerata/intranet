@@ -159,6 +159,16 @@ class DatabaseDescription {
     const ARRAY_NAME_DOC_CONDITION_SQL = "ConditionSQL";
 
     /**
+     * Dans le cas d'une vérification de la donnée saisi
+     */
+    const ARRAY_NAME_DOC_TAGS_VALIDATION_RULES = "TagsValidationRules";
+    
+    /**
+     * Dans le cas d'un verrouillage par défaut de données
+     */
+    const ARRAY_NAME_DOC_DEFAULT_FIELD_LOCK_PRIMARY_FTA = "DefaultFieldLockPrimaryFta";
+
+    /**
      * Nom de la variable contenant le nom du champ (défini par MySQL)
      */
     const ARRAY_NAME_SQL_FIELDNAME = "Field";
@@ -251,9 +261,9 @@ class DatabaseDescription {
         self::buildSqlDescription();
 
         /**
-         * Recherche de la documentation des champs
+         * Recherche de la documentation des champs 
          */
-        self::buildApplicationDocumentationDescription();
+        self::buildApplicationDocumentationDescriptionFull();
 
         /**
          * Récupération des relations des tables dans le schéma de la
@@ -264,7 +274,29 @@ class DatabaseDescription {
         /**
          * Enregistrement du résultat final en session PHP $_SESSION
          */
+        self::registerResultInSession();
+    }
+
+    public static function reBuildDatabaseDescription($paramTableName) {
+        self::loadSessionInResult();
+
+        self::applicationDocumentationDescription($paramTableName);
+
+        self::registerResultInSession();
+    }
+
+    /**
+     * Enregistrement du résultat final en session PHP $_SESSION
+     */
+    private static function registerResultInSession() {
         $_SESSION[get_class()] = self::$resultInSession;
+    }
+
+    /**
+     * Enregistrement dans résultat de la session PHP $_SESSION
+     */
+    private static function loadSessionInResult() {
+        self::$resultInSession = $_SESSION[get_class()];
     }
 
     public static function buildSqlDescription() {
@@ -306,32 +338,45 @@ class DatabaseDescription {
         }//Fin WHILE de parcours des tables
     }
 
-    public static function buildApplicationDocumentationDescription() {
+    /**
+     * Recherche de la documentation des champs 
+     */
+    public static function buildApplicationDocumentationDescriptionFull() {
+
+        self::applicationDocumentationDescription();
+    }
+
+    /**
+     * Enregistrement dans result in session de la documentation de intranet column info
+     * @param string $paramTableName
+     */
+    private static function applicationDocumentationDescription($paramTableName = NULL) {
+        /**
+         * Requete complete ou d'une table
+         */
+        if ($paramTableName) {
+            $req = self::getTableRequestIntranetColumInfo($paramTableName);
+        } else {
+            $req = self::getFullRequestIntranetColumInfo();
+        }
         /**
          * Recherche de la documentation des champs
          */
-        $arrayDoc = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
-                        'SELECT table_name_intranet_column_info'
-                        . ',column_name_intranet_column_info'
-                        . ',label_intranet_column_info'
-                        . ',explication_intranet_column_info'
-                        . ',id_intranet_column_info'
-                        . ',sql_request_content_intranet_column_info'
-                        . ',size_of_html_object_intranet_column_info'
-                        . ',type_of_html_object_intranet_column_info'
-                        . ',type_of_storage'
-                        . ',referenced_table_name'
-                        . ',referenced_column_name'
-                        . ',fields_to_display'
-                        . ',fields_to_lock'
-                        . ',fields_to_order'
-                        . ',right_to_add'
-                        . ',sql_condition_content_intranet_column_info'
-                        . ' FROM `intranet_column_info` ');
+        $arrayDoc = DatabaseOperation::convertSqlStatementWithoutKeyToArray($req);
+
+
+        self::registerDocumentationDescription($arrayDoc);
+    }
+
+    /**
+     * Enregistrement dans resultInSession d'une ou des tables d'intranet column info
+     * @param type $paramArray
+     */
+    private static function registerDocumentationDescription($paramArray) {
         /**
          * Parcours du résultat de la recherche
          */
-        foreach ($arrayDoc as $rowsDoc) {
+        foreach ($paramArray as $rowsDoc) {
             $tableName = $rowsDoc['table_name_intranet_column_info'];
             $columnName = $rowsDoc['column_name_intranet_column_info'];
             $label = $rowsDoc['label_intranet_column_info'];
@@ -355,6 +400,8 @@ class DatabaseDescription {
             $fieldsToOrder = $rowsDoc['fields_to_order'];
             $rightToAdd = $rowsDoc['right_to_add'];
             $conditionSql = $rowsDoc['sql_condition_content_intranet_column_info'];
+            $tagsValidationRules = $rowsDoc['tags_validation_rules_intranet_column_info'];
+            $defaultFieldToLockForPrimaryFta = $rowsDoc['default_field_to_lock_for_primary_fta'];
 
 
             /**
@@ -376,9 +423,44 @@ class DatabaseDescription {
                 self::ARRAY_NAME_DOC_FIELDS_TO_LOCK => $fieldsToLock,
                 self::ARRAY_NAME_DOC_FIELDS_TO_ORDER => $fieldsToOrder,
                 self::ARRAY_NAME_DOC_RIGHT_TO_ADD => $rightToAdd,
-                self::ARRAY_NAME_DOC_CONDITION_SQL => $conditionSql
+                self::ARRAY_NAME_DOC_CONDITION_SQL => $conditionSql,
+                self::ARRAY_NAME_DOC_TAGS_VALIDATION_RULES => $tagsValidationRules,
+                self::ARRAY_NAME_DOC_DEFAULT_FIELD_LOCK_PRIMARY_FTA => $defaultFieldToLockForPrimaryFta
             );
         }
+    }
+
+    /**
+     * Requête de la table complete Intranet Colum info
+     * @return string
+     */
+    private static function getFullRequestIntranetColumInfo() {
+        $req = 'SELECT table_name_intranet_column_info'
+                . ',column_name_intranet_column_info'
+                . ',label_intranet_column_info'
+                . ',explication_intranet_column_info'
+                . ',id_intranet_column_info'
+                . ',sql_request_content_intranet_column_info'
+                . ',size_of_html_object_intranet_column_info'
+                . ',type_of_html_object_intranet_column_info'
+                . ',type_of_storage'
+                . ',referenced_table_name'
+                . ',referenced_column_name'
+                . ',fields_to_display'
+                . ',fields_to_lock'
+                . ',fields_to_order'
+                . ',right_to_add'
+                . ',sql_condition_content_intranet_column_info'
+                . ',tags_validation_rules_intranet_column_info'
+                . ' FROM `intranet_column_info` ';
+
+        return $req;
+    }
+
+    private static function getTableRequestIntranetColumInfo($paramTableName) {
+        $req = self::getFullRequestIntranetColumInfo() . " WHERE table_name_intranet_column_info='" . $paramTableName . "'";
+
+        return $req;
     }
 
 //    public static function buildSchemaRelationshipDescription() {
@@ -614,6 +696,27 @@ class DatabaseDescription {
     public static function getConditionSql($paramTableName, $paramFieldName) {
         return $_SESSION[get_class()][$paramTableName][self::ARRAY_NAME_FIELDS]
                 [$paramFieldName][self::ARRAY_NAME_DOC][self::ARRAY_NAME_DOC_CONDITION_SQL];
+    }
+
+    /**
+     * Retourne le ou les tage de cohérence de donnée saisi.
+     * @param string $paramTableName Nom de la table
+     * @param string $paramFieldName Nom du champs
+     * @return string Retourne une condition d'une reqête sql  pour son éxécution
+     */
+    public static function getTagsValidationRules($paramTableName, $paramFieldName) {
+        return $_SESSION[get_class()][$paramTableName][self::ARRAY_NAME_FIELDS]
+                [$paramFieldName][self::ARRAY_NAME_DOC][self::ARRAY_NAME_DOC_TAGS_VALIDATION_RULES];
+    }
+    /**
+     * Indique si le champ doit être verrouillé par défaut
+     * @param string $paramTableName Nom de la table
+     * @param string $paramFieldName Nom du champs
+     * @return boolean Retourne un boolean
+     */
+    public static function getDefaultFieldLockPrimaryFta($paramTableName, $paramFieldName) {
+        return $_SESSION[get_class()][$paramTableName][self::ARRAY_NAME_FIELDS]
+                [$paramFieldName][self::ARRAY_NAME_DOC][self::ARRAY_NAME_DOC_DEFAULT_FIELD_LOCK_PRIMARY_FTA];
     }
 
     /**

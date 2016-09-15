@@ -33,6 +33,10 @@ class DataFieldToHtmlInputCalendar extends HtmlInputCalendar {
                 , $this->getDataField()->getFieldName()
         );
         $this->setHtmlResultOnClick();
+        /**
+         * Détermine si le datafield encours doit être non éditiable
+         */
+        $this->setContentLocked($paramDataField->getFieldsToLock());
     }
 
 }

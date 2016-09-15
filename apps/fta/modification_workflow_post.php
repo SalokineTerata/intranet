@@ -54,7 +54,7 @@ $paramSyntheseAction = Lib::getParameterFromRequest('synthese_action');
 $idFtaEtat = Lib::getParameterFromRequest(FtaEtatModel::KEYNAME);
 $abreviationFtaEtat = Lib::getParameterFromRequest(FtaEtatModel::FIELDNAME_ABREVIATION);
 $comeback = Lib::getParameterFromRequest(FtaEtatModel::KEYNAME);
-$idFtaWorkflowOLD = Lib::getParameterFromRequest('id_fta_workflow');
+$idFtaWorkflowOLD = Lib::getParameterFromRequest(FtaWorkflowModel::KEYNAME);
 $idFtaWorkflowNEW = Lib::getParameterFromRequest(FtaWorkflowModel::TABLENAME . '_' . FtaWorkflowModel::KEYNAME);
 /**
  * Initialisation
@@ -67,7 +67,7 @@ $ftaWorflowModelOLD = new FtaWorkflowModel($idFtaWorkflowOLD);
 $ftaWorflowModelNEW = new FtaWorkflowModel($idFtaWorkflowNEW);
 $nomWorkflowOLD = $ftaWorflowModelOLD->getDataField(FtaWorkflowModel::FIELDNAME_DESCRIPTION_FTA_WORKFLOW)->getFieldValue();
 $nomWorkflowNEW = $ftaWorflowModelNEW->getDataField(FtaWorkflowModel::FIELDNAME_DESCRIPTION_FTA_WORKFLOW)->getFieldValue();
-$commentaire = "\n\n" . FtaController::getCommentWorkflowChange($nomWorkflowOLD, $nomWorkflowNEW, $nomPrenomConnect) . "\n";
+$commentaire = FtaController::getCommentWorkflowChange($nomWorkflowOLD, $nomWorkflowNEW, $nomPrenomConnect);
 
 
 
@@ -88,7 +88,7 @@ switch ($action) {
         if ($idFtaWorkflowOLD <> $idFtaWorkflowNEW) {
 
             $modelFta = new FtaModel($paramIdFta);
-            $idDossierFta = $modelFta->getDataField(FtaModel::FIELDNAME_DOSSIER_FTA)->getFieldValue();
+            $idDossierFta = $modelFta->getDossierFta();
 
             /**
              * Liste des IdFta changeant d'espace de travail
@@ -106,20 +106,22 @@ switch ($action) {
                  */
                 $ftaModel = new FtaModel($idFta);
                 $ftaModel->getDataField(FtaModel::FIELDNAME_WORKFLOW)->setFieldValue($idFtaWorkflowNEW);
+                $oldComment = $ftaModel->getDataField(FtaModel::FIELDNAME_COMMENTAIRE_MAJ_FTA)->getFieldValue();
+                $ftaModel->getDataField(FtaModel::FIELDNAME_COMMENTAIRE_MAJ_FTA)->setFieldValue($commentaire . $oldComment);
                 $ftaModel->saveToDatabase();
 
-                FtaSuiviProjetModel::createNewChapitresFromNewWorkflow($idFta, $idFtaWorkflowNEW, $arbreviationFta, $idUser, $commentaire);
+                FtaSuiviProjetModel::createNewChapitresFromNewWorkflow($idFta, $idFtaWorkflowNEW, $arbreviationFta, $idUser);
                 /**
                  * Suppression des chapitres de l'ancien espace de travail
                  */
                 FtaSuiviProjetModel::deleteOldChapitreFromOldWorkflow($idFta, $idFtaWorkflowNEW);
             }
             //Redirection
-            header('Location: modification_fiche.php?id_fta=' . $paramIdFta . '&id_fta_chapitre_encours=' . $paramIdFtaChapitreEncours . '&synthese_action=' . $paramSyntheseAction . '&comeback=' . $comeback . '&id_fta_etat=' . $idFtaEtat . '&abreviation_fta_etat=' . $abreviationFtaEtat . '&id_fta_role=' . FtaRoleModel::ID_FTA_ROLE_COMMUN);
+            header('Location: modification_fiche.php?id_fta=' . $paramIdFta . '&id_fta_chapitre_encours=' . $paramIdFtaChapitreEncours . '&synthese_action=' . $paramSyntheseAction . '&id_fta_etat=' . $idFtaEtat . '&abreviation_fta_etat=' . $abreviationFtaEtat . '&id_fta_role=' . FtaRoleModel::ID_FTA_ROLE_COMMUN);
         } else {
             $titre = UserInterfaceMessage::FR_WARNING_DATA_ESPACE_DE_TRAVAIL_TITLE;
             $message = UserInterfaceMessage::FR_WARNING_DATA_ESPACE_DE_TRAVAIL_CHANGEMENT;
-            afficher_message($titre, $message, $redirection);
+            Lib::showMessage($titre, $message, $redirection);
         }
 
         break;

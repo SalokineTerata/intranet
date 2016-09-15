@@ -7,17 +7,24 @@
  */
 class Navigation {
 
+    const FONT_COLOR_CHAPITRE_NON_ACCESSIBLE = "#000000";
+    const FONT_COLOR_CHAPITRE_AUTRE_ROLE = "#AAAAAA";
     const FONT_COLOR_CHAPITRE_ENCOURS = "#1D3FDA";
-    const FONT_COLOR_CHAPITRE_PUBLIC = "#8977A9";
+    const FONT_COLOR_CHAPITRE_PUBLIC = "#CC33CC";
     const FONT_COLOR_CHAPITRE_NON_VALIDEE = "#FF0000";
-    const FONT_COLOR_CHAPITRE_VALIDEE = "#00CC00";
+    const FONT_COLOR_DOSSIER_FTA = "#DD0000";
+    const FONT_COLOR_CHAPITRE_COMMENTAIRE = "#2A2A2A";
+    const FONT_COLOR_CHAPITRE_VALIDEE = "#009400";
+//    const FONT_COLOR_CHAPITRE_VALIDEE = "#00CC00";
     const FONT_SIZE_CHAPITRE_ENCOURS = "3";
+    const FONT_SIZE_ROLE_ENCOURS = "3";
     const FONT_SIZE_DEFAULT = "2";
 
     protected static $abreviation_etat;
     protected static $id_fta;
     protected static $id_fta_etat;
     protected static $id_fta_role;
+    protected static $id_fta_role_encours;
     protected static $comeback;
     protected static $comeback_url;
     protected static $ftaConsultation;
@@ -32,12 +39,13 @@ class Navigation {
     protected static $id_fta_processus;
     protected static $id_fta_workflow;
     protected static $id_parent_intranet_actions;
+    protected static $selectionChap;
 
     public static function getHtmlNavigationBar() {
         return self::$html_navigation_bar;
     }
 
-    public static function initNavigation($id_fta, $id_fta_chapitre_encours, $synthese_action, $comeback, $id_fta_etat, $abrevation_etat, $id_fta_role, $paramActivationComplete) {
+    public static function initNavigation($id_fta, $id_fta_chapitre_encours, $synthese_action, $comeback, $id_fta_etat, $abrevation_etat, $id_fta_role, $paramActivationComplete, $paramSelectionChap) {
 
         /**
          * Modification
@@ -51,6 +59,7 @@ class Navigation {
 
 
 
+        self::$selectionChap = $paramSelectionChap;
         self::$id_fta = $id_fta;
         self::$id_fta_chapitre_encours = $id_fta_chapitre_encours;
         self::$synthese_action = $synthese_action;
@@ -63,6 +72,7 @@ class Navigation {
         self::$id_fta_role = $id_fta_role;
         self::$ftaModel = new FtaModel(self::$id_fta);
         self::$id_fta_workflow = self::$ftaModel->getDataField(FtaModel::FIELDNAME_WORKFLOW)->getFieldValue();
+        self::$id_fta_role_encours = FtaWorkflowStructureModel::getIdFtaRoleByChapitreAndWorkflow(self::$id_fta_chapitre_encours, self::$id_fta_workflow);
         $ftaWorkflowModel = new FtaWorkflowModel(self::$id_fta_workflow);
         self::$id_parent_intranet_actions = $ftaWorkflowModel->getDataField(FtaWorkflowModel::FIELDNAME_ID_INTRANET_ACTIONS)->getFieldValue();
 
@@ -76,7 +86,7 @@ class Navigation {
      */
     protected static function buildNavigationBar($paramActivationComplete) {
         //Variables
-        $listeRole = array();
+
         $globalConfig = new GlobalConfig();
         UserModel::checkUserSessionExpired($globalConfig);
         $idUser = $globalConfig->getAuthenticatedUser()->getKeyValue();
@@ -92,13 +102,13 @@ class Navigation {
                 $titre = UserInterfaceMessage::FR_WARNING_PARAM_ID_FTA_TITLE;
                 $message = UserInterfaceMessage::FR_WARNING_PARAM_ID_FTA_NOT_EXISTANT;
                 $redirection = "index.php";
-                afficher_message($titre, $message, $redirection);
+                Lib::showMessage($titre, $message, $redirection);
             }
         } else {
             $titre = UserInterfaceMessage::FR_WARNING_PARAM_ID_FTA_TITLE;
             $message = UserInterfaceMessage::FR_WARNING_PARAM_ID_FTA;
             $redirection = "index.php";
-            afficher_message($titre, $message, $redirection);
+            Lib::showMessage($titre, $message, $redirection);
         }
         //Récupère la page en cours
         $arrayFtaEtatAndFta = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
@@ -107,6 +117,7 @@ class Navigation {
                         . ', ' . FtaModel::FIELDNAME_VERSION_DOSSIER_FTA . ', ' . FtaModel::FIELDNAME_LIBELLE
                         . ', ' . FtaModel::FIELDNAME_DESIGNATION_COMMERCIALE . ', ' . FtaModel::FIELDNAME_CODE_ARTICLE_LDC
                         . ', ' . FtaWorkflowModel::FIELDNAME_DESCRIPTION_FTA_WORKFLOW
+                        . ', ' . FtaModel::FIELDNAME_COMMENTAIRE
                         . ' FROM ' . FtaModel::TABLENAME . ',' . FtaEtatModel::TABLENAME . ',' . FtaWorkflowModel::TABLENAME
                         . ' WHERE ' . FtaModel::KEYNAME . '=' . self::$id_fta
                         . ' AND ' . FtaEtatModel::TABLENAME . '.' . FtaEtatModel::KEYNAME
@@ -119,62 +130,7 @@ class Navigation {
          */
         $arrayRoleWorkflow = FtaRoleModel::getArrayIdFtaRoleByIdUserAndWorkflow($idUser, self::$id_fta_workflow);
         if (count($arrayRoleWorkflow) > "1") {
-            //Calcul du taux
-            $taux_temp = FtaSuiviProjetModel::getArrayFtaTauxValidation(self::$ftaModel, TRUE);
-            if ($taux_temp["1"]) {
-                foreach ($taux_temp["1"] as $id_fta_processus => $taux) {
-                    /**
-                     * On obtient le rôle pour lequel le processus correspond
-                     */
-                    $arrayCheckRole = FtaWorkflowStructureModel::getArrayRoleByProcessusAndWorkflow($id_fta_processus, self::$id_fta_workflow);
-                    $checkRole1 = array_intersect($arrayCheckRole, $arrayRoleWorkflow);
-                    if ($checkRole1) {
-                        $checkRole2 = array_intersect($arrayCheckRole, $listeRole);
-                        if (!$checkRole2) {
-                            /**
-                             * 0 en attente 
-                             * entre 0 et 1 cours
-                             * 1 validé
-                             */
-                            $listeRole[] = $arrayCheckRole["0"];
-                            if ($taux == "0") {
-                                /**
-                                 * Vérification que tous les processus précédent soit validé si oui le processus est encours
-                                 */
-                                $taux_validation_processus = FtaProcessusModel::getFtaProcessusNonValidePrecedent(self::$id_fta, $id_fta_processus, self::$id_fta_workflow);
-                                if ($taux_validation_processus == "1" or $taux_validation_processus === NULL) {
-                                    $ftaRoleModel = new FtaRoleModel($arrayCheckRole["0"]);
-                                    $roles.= ' | <a href=' . 'modification_fiche' . '.php?'
-                                            . 'id_fta=' . self::$id_fta
-                                            . '&id_fta_chapitre_encours=' . self::$id_fta_chapitre_encours
-                                            . '&synthese_action=' . self::$synthese_action
-                                            . '&id_fta_etat=' . self::$id_fta_etat
-                                            . '&abreviation_fta_etat=' . self::$abreviation_etat
-                                            . '&comeback=' . self::$comeback
-                                            . '&id_fta_role=' . $arrayCheckRole["0"] . '>' . $ftaRoleModel->getDataField(FtaRoleModel::FIELDNAME_DESCRIPTION_FTA_ROLE)->getFieldValue() . '</a> ';
-                                } else {
-                                    $ftaRoleModel = new FtaRoleModel($arrayCheckRole["0"]);
-                                    /**
-                                     * Liien vers l'historique sans la navigation
-                                     */
-                                    $roles.= ' | ' . $ftaRoleModel->getDataField(FtaRoleModel::FIELDNAME_DESCRIPTION_FTA_ROLE)->getFieldValue();
-                                }
-                            } elseif ($taux == "1" or ( $taux <> "0" and $taux <> "1")) {
-                                $ftaRoleModel = new FtaRoleModel($arrayCheckRole["0"]);
-                                $roles.= ' | <a href=' . 'modification_fiche' . '.php?'
-                                        . 'id_fta=' . self::$id_fta
-                                        . '&id_fta_chapitre_encours=' . self::$id_fta_chapitre_encours
-                                        . '&synthese_action=' . self::$synthese_action
-                                        . '&id_fta_etat=' . self::$id_fta_etat
-                                        . '&abreviation_fta_etat=' . self::$abreviation_etat
-                                        . '&comeback=' . self::$comeback
-                                        . '&id_fta_role=' . $arrayCheckRole["0"] . '>' . $ftaRoleModel->getDataField(FtaRoleModel::FIELDNAME_DESCRIPTION_FTA_ROLE)->getFieldValue() . '</a> ';
-                            }
-                        }
-                    }
-                }
-                $RoleNavigation = '  Rôles  ' . $roles;
-            }
+            $RoleNavigation = FtaRoleModel::getRolesNavigationBar($idUser, self::$id_fta_workflow, self::$ftaModel, self::$synthese_action, self::$id_fta_chapitre_encours, self::$id_fta_role);
         } else {
             $ftaRoleModel = new FtaRoleModel(self::$id_fta_role);
         }
@@ -183,56 +139,11 @@ class Navigation {
         foreach ($arrayFtaEtatAndFta as $rowsFtaEtatAndFta) {
             //Récupération des informations préalables
             //Nom de l'assistante de projet responsable:
-            $array = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
-                            'SELECT ' . UserModel::FIELDNAME_PRENOM . ',' . UserModel::FIELDNAME_NOM
-                            . ' FROM ' . UserModel::TABLENAME
-                            . ' WHERE ' . UserModel::KEYNAME
-                            . '=\'' . $rowsFtaEtatAndFta[FtaModel::FIELDNAME_CREATEUR] . '\' ');
-            foreach ($array as $rows) {
-                $createur = $rows[UserModel::FIELDNAME_PRENOM] . ' ' . $rows[UserModel::FIELDNAME_NOM];
-            }
+            $userModel = new UserModel($rowsFtaEtatAndFta[FtaModel::FIELDNAME_CREATEUR]);
+            $createur = $userModel->getPrenomNom();
 
             //Construction du Menu
-            if ($rowsFtaEtatAndFta[FtaModel::FIELDNAME_ARTICLE_AGROLOGIC]) {
-                $identifiant = $rowsFtaEtatAndFta[FtaModel::FIELDNAME_ARTICLE_AGROLOGIC];
-            } else {
-                $identifiant = $rowsFtaEtatAndFta[FtaModel::FIELDNAME_DOSSIER_FTA] . 'v' . $rowsFtaEtatAndFta[FtaModel::FIELDNAME_VERSION_DOSSIER_FTA];
-            }
-            if ($rowsFtaEtatAndFta[FtaModel::FIELDNAME_LIBELLE]) {
-                $nom = $rowsFtaEtatAndFta[FtaModel::FIELDNAME_LIBELLE];
-            } else {
-                $nom = $rowsFtaEtatAndFta[FtaModel::FIELDNAME_DESIGNATION_COMMERCIALE];
-            }
-            if (count($arrayRoleWorkflow) > "1") {
-                $menu_navigation = '<' . $html_table . '><tr><td class=titre_principal> <div align=\'left\'>
-                            <b><font size=\'2\' color=\'#0000FF\'>' . $rowsFtaEtatAndFta[FtaModel::FIELDNAME_CODE_ARTICLE_LDC] . '</font></b> - ' . $nom . ' &nbsp;&nbsp;&nbsp;&nbsp;<i>(gérée par ' . $createur . ')</i>  '
-                        . '</div></td>'
-                        . '<td width=25% class=titre_principal>';
-                if (self::$abreviation_etat == FtaEtatModel::ETAT_ABREVIATION_VALUE_MODIFICATION) {
-                    $menu_navigation .= $RoleNavigation;
-                }
-                $menu_navigation .= '<br>  Site de Production : ' . $geoModel->getDataField(GeoModel::FIELDNAME_GEO)->getFieldValue()
-                        . '<br>  Espace de Travail : ' . $rowsFtaEtatAndFta[FtaWorkflowModel::FIELDNAME_DESCRIPTION_FTA_WORKFLOW]
-                        . '</td></tr></table>
-                     <' . $html_table . '>
-                           <tr class = titre>
-                                <td>';
-            } else {
-                $menu_navigation = '<' . $html_table . '><tr><td class=titre_principal> <div align=\'left\'>
-                            <b><font size=\'2\' color=\'#0000FF\'>' . $rowsFtaEtatAndFta[FtaModel::FIELDNAME_CODE_ARTICLE_LDC] . '</font></b> - ' . $nom . ' &nbsp;&nbsp;&nbsp;&nbsp;<i>(gérée par ' . $createur . ')</i>  '
-                        . '</div></td>'
-                        . '<td width=25% class=titre_principal>';
-                if (self::$abreviation_etat == FtaEtatModel::ETAT_ABREVIATION_VALUE_MODIFICATION) {
-                    $menu_navigation .= '  Rôle : ' . $ftaRoleModel->getDataField(FtaRoleModel::FIELDNAME_DESCRIPTION_FTA_ROLE)->getFieldValue();
-                }
-
-                $menu_navigation .= '<br>  Site de Production : ' . $geoModel->getDataField(GeoModel::FIELDNAME_GEO)->getFieldValue()
-                        . '<br>  Espace de Travail : ' . $rowsFtaEtatAndFta[FtaWorkflowModel::FIELDNAME_DESCRIPTION_FTA_WORKFLOW]
-                        . '</td></tr></table>
-                    <' . $html_table . '>
-                           <tr class = titre>
-                                <td>';
-            }
+            $menu_navigation = self::buildMenu($arrayRoleWorkflow, $rowsFtaEtatAndFta, $html_table, $RoleNavigation, $geoModel, $createur, $ftaRoleModel);
         }
         if ($paramActivationComplete) {
             //Si une action est donnée, alors construction du menu des chapitres    
@@ -240,17 +151,42 @@ class Navigation {
         }
         //Lien de retour rapide
 
-        self::$comeback_url = 'index.php?id_fta_etat=' . self::$id_fta_etat . '&nom_fta_etat=' . self::$abreviation_etat . '&id_fta_role=' . self::$id_fta_role . '&synthese_action=' . self::$synthese_action;
         /**
          * Version avec le rewrite
          */
 //        self::$comeback_url = 'index-' . self::$id_fta_etat . '-' . self::$abreviation_etat . '-' . self::$id_fta_role . '-' . self::$synthese_action . '.html';
 
-        $menu_navigation.= '</td></tr><tr><td>
-    <a href=' . self::$comeback_url . '><img src=../lib/images/bouton_retour.png alt=\'\' title=\'Retour à la synthèse\' width=\'18\' height=\'15\' border=\'0\' /> Retour vers la synthèse</a> |
+        if (self::$comeback == "1") {
+//                   self::$comeback_url = 'index.php?id_fta_etat=' . self::$id_fta_etat . '&nom_fta_etat=' . self::$abreviation_etat . '&id_fta_role=' . self::$id_fta_role . '&synthese_action=' . self::$synthese_action;
+            $_SESSION["comeback_url"] = $_SERVER["HTTP_REFERER"];
+        } elseif ($_SESSION["comeback_url"] == "") {
+            $_SESSION["comeback_url"] = 'index.php?id_fta_etat=' . self::$id_fta_etat . '&nom_fta_etat=' . self::$abreviation_etat . '&id_fta_role=' . self::$id_fta_role . '&synthese_action=' . self::$synthese_action;
+        }
+        $menu_navigation.= '</tr><tr><td colspan=6 >
+    <a href=' . $_SESSION["comeback_url"] . '><img src=../lib/images/bouton_retour.png alt=\'\' title=\'Retour\' width=\'18\' height=\'15\' border=\'0\' /> Retour</a> |
     ';
         if ($paramActivationComplete) {
             //Corps du menu
+            $accesTransitionButton = FtaTransitionModel::isAccesTransitionButton(self::$id_fta_role, self::$id_fta_workflow);
+            $idIntranetActionsSiteDeProduction = FtaActionSiteModel::getArrayIdIntranetActionByWorkflowAndSiteDeProduction(self::$id_fta_workflow, $siteDeProduction);
+            $checkAccesButtonBySiteProd = IntranetActionsModel::isAccessFtaActionByIdUserFtaWorkflowAndSiteDeProduction($idUser, self::$id_fta_workflow, $idIntranetActionsSiteDeProduction);
+            $tauxRound = FtaSuiviProjetModel::getPourcentageFtaTauxValidation(self::$ftaModel);
+            /**
+             * Bouton de trasition
+             */
+            $transition = TableauFicheView::getHmlLinkTransiter(self::$id_fta, self::$id_fta_role, self::$abreviation_etat, $checkAccesButtonBySiteProd
+                            , $accesTransitionButton, self::$synthese_action, $tauxRound, "18", " Transiter");
+            /**
+             * Bouton d'accès au rendu PDF de la FTA
+             */
+            $pdf = TableauFicheView::getHtmlLinkPDF(self::$abreviation_etat, self::$id_fta, self::$id_fta_workflow, "18", "Export PDF");
+            if ($transition) {
+                $transition = " | " . $transition;
+            }
+            if ($pdf) {
+                $pdf = " | " . $pdf;
+            }
+            $historique = " | " . TableauFicheView::getHtmlLinkHistoriqueModfify(self::$abreviation_etat, self::$id_fta, self::$synthese_action, self::$id_fta_etat, self::$id_fta_role, "18", "Historique de modification");
             $menu_navigation.='
                     <a href=historique-' . self::$id_fta
                     . '-' . self::$id_fta_chapitre_encours
@@ -258,8 +194,19 @@ class Navigation {
                     . '-' . self::$abreviation_etat
                     . '-' . self::$id_fta_role
                     . '-' . self::$synthese_action
-                    . '-1'
-                    . '.html ><img src=./images/graphique.png alt=\'\' title=\'Etat d\'avancement\' width=\'18\' height=\'15\' border=\'0\' /> Etat d\'avancement</a>
+//                    . '-1'
+                    . '.html ><img src=./images/graphique.png alt=\'\' title=\'Etat d\'avancement\' width=\'18\' height=\'15\' border=\'0\' /> Etat d\'avancement</a>'
+                    . $historique
+                    . ' | <a href=fta2arcadia_summary.php?' . FtaModel::KEYNAME . '=' . self::$id_fta
+                    . '&id_fta_chapitre_encours=' . self::$id_fta_chapitre_encours
+                    . '&' . FtaEtatModel::KEYNAME . '=' . self::$id_fta_etat
+                    . '&' . FtaEtatModel::FIELDNAME_ABREVIATION . '=' . self::$abreviation_etat
+                    . '&' . FtaRoleModel::KEYNAME . '=' . self::$id_fta_role
+                    . '&synthese_action=' . self::$synthese_action
+                    . ' ><img src=./images/icone_information.png alt=\'\' title=\'Fta2Arcadia width=\'18\' height=\'15\' border=\'0\' /> Fta2Arcadia</a>'
+                    . $transition
+                    . $pdf .
+                    ' 
                        </td></tr>                       
                        </table>
                        ';
@@ -273,7 +220,7 @@ class Navigation {
      * @return String
      */
     protected static function CheckSyntheseAction() {
-
+        $nbProcessusPreceValide = "0";
         $ProcessusEncoursVisible = array();
         $ProcessusPrecedentVisible = array();
         $ProcessusValide = array();
@@ -301,6 +248,22 @@ class Navigation {
          * Si une action est donnée, alors construction du menu des chapitres
          */
         if (self::$synthese_action) {
+            /*
+             * Nous récuperons les processus en cours.
+             */
+            $arrayAllProcessus = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
+                            'SELECT DISTINCT ' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_PROCESSUS
+                            . ' FROM ' . FtaWorkflowStructureModel::TABLENAME
+                            . ' WHERE ' . FtaWorkflowStructureModel::TABLENAME . '.' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_WORKFLOW . '=' . self::$id_fta_workflow
+            );
+            /**
+             * On récupère tous les processus
+             */
+            foreach ($arrayAllProcessus as $rowsAllProcessus) {
+                $ProcessusComplet[] = $rowsAllProcessus[FtaWorkflowStructureModel::FIELDNAME_ID_FTA_PROCESSUS];
+            }
+
+
             /*
              * Etat d'avancement de la FTA et Recherche des processus validés (et donc en lecture-seule)             * 
              */
@@ -339,12 +302,23 @@ class Navigation {
                             . '\' AND ' . IntranetDroitsAccesModel::FIELDNAME_NIVEAU_INTRANET_DROITS_ACCES . '=' . IntranetNiveauAccesModel::NIVEAU_GENERIC_TRUE  //L'utilisateur est propriétaire
             );
 
+            /**
+             * On ne récuère que les processus d'init validé
+             */
+//            $arrayProcessusValide = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
+//                            'SELECT DISTINCT ' . FtaProcessusCycleModel::FIELDNAME_PROCESSUS_INIT . ' as ' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_PROCESSUS
+//                            . ' FROM ' . FtaProcessusCycleModel::TABLENAME
+//                            . ' WHERE ' . FtaProcessusCycleModel::FIELDNAME_FTA_ETAT . '=\'' . FtaEtatModel::ETAT_ABREVIATION_VALUE_MODIFICATION . '\''
+//                            . ' AND ' . FtaProcessusCycleModel::FIELDNAME_WORKFLOW
+//                            . '=\'' . self::$id_fta_workflow . '\' '
+            /**
+             * On récuère les processus validé
+             */
             $arrayProcessusValide = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
-                            'SELECT DISTINCT ' . FtaProcessusCycleModel::FIELDNAME_PROCESSUS_INIT . ' as ' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_PROCESSUS
-                            . ' FROM ' . FtaProcessusCycleModel::TABLENAME
-                            . ' WHERE ' . FtaProcessusCycleModel::FIELDNAME_FTA_ETAT . '=\'' . FtaEtatModel::ETAT_ABREVIATION_VALUE_MODIFICATION . '\''
-                            . ' AND ' . FtaProcessusCycleModel::FIELDNAME_WORKFLOW
-                            . '=\'' . self::$id_fta_workflow . '\' '
+                            'SELECT DISTINCT ' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_PROCESSUS
+                            . ' FROM ' . FtaWorkflowStructureModel::TABLENAME
+                            . ' WHERE ' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_WORKFLOW . '=\'' . self::$id_fta_workflow . '\''
+                            . ' AND ' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_PROCESSUS . '<>\'' . FtaProcessusModel::PROCESSUS_PUBLIC . '\''
             );
             if ($req AND $arrayProcessusValide) {
                 /*
@@ -376,20 +350,18 @@ class Navigation {
 //                        }
                     }
                 }//Fin du balayage
+//                if ($ProcessusPrecedentVisible) {
+                /*
+                 * Nous récupérons tous les processus validé pour vérifier plus tard si nous devons les affichers
+                 */
+                foreach ($arrayProcessusValide as $rowsProcessusValide) {
+                    $taux_validation_processus = FtaProcessusModel::getValideProcessusEncours(self::$id_fta, $rowsProcessusValide[FtaProcessusModel::KEYNAME], self::$id_fta_workflow);
+                    if ($taux_validation_processus == 1) {
 
-
-                if ($ProcessusPrecedentVisible) {
-                    /*
-                     * Nous récupérons tous les processus validé pour vérifier plus tard si nous devons les affichers
-                     */
-                    foreach ($arrayProcessusValide as $rowsProcessusValide) {
-                        $taux_validation_processus = FtaProcessusModel::getValideProcessusEncours(self::$id_fta, $rowsProcessusValide[FtaProcessusModel::KEYNAME], self::$id_fta_workflow);
-                        if ($taux_validation_processus == 1) {
-
-                            $ProcessusValide[] = $rowsProcessusValide[FtaProcessusModel::KEYNAME];
-                        }
+                        $ProcessusValide[] = $rowsProcessusValide[FtaProcessusModel::KEYNAME];
                     }
                 }
+//                }
             }
             /*
              * Nous récuperons la liste des processus non valider  qui sont en cours
@@ -495,13 +467,15 @@ class Navigation {
                         /*
                          * Vérifie si tous les processus précédent du processus en cours a des chapitres non validé
                          */
+                        $nbProcessusPrece = count($arrayInit);
                         foreach ($arrayInit as $rowsInit) {
 
                             $tauxValidationProcessus = FtaProcessusModel::getValideProcessusEncours(self::$id_fta, $rowsInit[FtaProcessusCycleModel::FIELDNAME_PROCESSUS_INIT], self::$id_fta_workflow);
                             if ($tauxValidationProcessus != 0) {
-                                $ProcessusEnLecture[] = $rowsInit[FtaProcessusCycleModel::FIELDNAME_PROCESSUS_INIT];
+                                $nbProcessusPreceValide = $nbProcessusPreceValide + 1;
                                 //Enregistrement du processus en tant que processus en cours
-                                if ($tauxValidationProcessus == "1") {
+                                if ($tauxValidationProcessus == "1" and $nbProcessusPreceValide == $nbProcessusPrece) {
+                                    $ProcessusEnLecture[] = $rowsInit[FtaProcessusCycleModel::FIELDNAME_PROCESSUS_INIT];
                                     $ProcessusEncoursVisible[] = $rowsNext[FtaProcessusCycleModel::FIELDNAME_PROCESSUS_NEXT];
                                 }
 //                            }
@@ -583,7 +557,7 @@ class Navigation {
             if (self::$id_fta_etat == '1') {
 
                 //Création de la liste des processus dans la barre de navigation          
-                $t_liste_processus = array_merge($ProcessusEncoursVisible, $ProcessusPrecedentVisible, $ProcessusEnLecture);
+                $t_liste_processus = array_merge($ProcessusEncoursVisible, $ProcessusPrecedentVisible, $ProcessusEnLecture, $ProcessusValide);
             } else {
                 $arrayProcessusByWorkflow = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
                                 'SELECT DISTINCT ' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_PROCESSUS
@@ -595,9 +569,10 @@ class Navigation {
                     $t_liste_processus[] .=$rowsProcessusByWorkflow[FtaWorkflowStructureModel::FIELDNAME_ID_FTA_PROCESSUS];
                 }
             }
+            self::$id_fta_processus = $t_liste_processus;
 
             //Récupération des Chapitres accessible dans le menu de naviguation
-            $menu_navigation = self::RecupChapitre($t_liste_processus);
+            $menu_navigation = self::RecupChapitre($ProcessusComplet);
             //Fin du controle de $synthese_action
         }
         return $menu_navigation;
@@ -605,12 +580,14 @@ class Navigation {
 
     protected static function RecupChapitre($paramT_Liste_Processus) {
         $page_default = "modification_fiche";
+        $first = "";
         /*
          *  Nous récupérons les chapitres obligatoirement présent ce qui implique que les autre chapitres doivent être attribués.
          */
         $reqRecup = 'SELECT ' . FtaChapitreModel::TABLENAME . '.' . FtaChapitreModel::KEYNAME
                 . ', ' . FtaChapitreModel::TABLENAME . '.' . FtaChapitreModel::FIELDNAME_NOM_USUEL_CHAPITRE
                 . ', ' . FtaWorkflowStructureModel::TABLENAME . '.' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_PROCESSUS
+                . ', ' . FtaWorkflowStructureModel::TABLENAME . '.' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_ROLE
                 . ' FROM ' . FtaChapitreModel::TABLENAME . ' LEFT JOIN ' . FtaWorkflowStructureModel::TABLENAME
                 . ' ON ' . FtaWorkflowStructureModel::TABLENAME . '.' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_CHAPITRE
                 . '=' . FtaChapitreModel::TABLENAME . '.' . FtaChapitreModel::KEYNAME
@@ -622,22 +599,27 @@ class Navigation {
                     . '=\'' . $value . '\'';
         }
         $reqRecup .=' ) AND ' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_WORKFLOW . '=' . self::$id_fta_workflow
-                . ' ORDER BY ' . FtaChapitreModel::TABLENAME . '.' . FtaChapitreModel::KEYNAME;
+                . ' ORDER BY ' . FtaWorkflowStructureModel::TABLENAME . '.' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_ROLE
+                . ',' . FtaWorkflowStructureModel::TABLENAME . '.' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_PROCESSUS
+                . ',' . FtaChapitreModel::TABLENAME . '.' . FtaChapitreModel::KEYNAME
+        ;
         $arrayRecup = DatabaseOperation::convertSqlStatementWithoutKeyToArray($reqRecup);
 
         //Balyage des chapitres trouvés
         foreach ($arrayRecup as $rowsRecup) {
             $id_fta_chapitre = $rowsRecup[FtaChapitreModel::KEYNAME];
             $nom_usuel_fta_chapitre = $rowsRecup[FtaChapitreModel::FIELDNAME_NOM_USUEL_CHAPITRE];
+            $idFtaProcessus = $rowsRecup[FtaWorkflowStructureModel::FIELDNAME_ID_FTA_PROCESSUS];
+            $idFtaRole = $rowsRecup[FtaWorkflowStructureModel::FIELDNAME_ID_FTA_ROLE];
 
-            //Dans le cas où il n'y a pas de chapitre sélectionné, sélection du premier
+            //Dans le cas où il n'y a pas de chapitre sélectionné, sélection du chapitre identité
             if (!self::$id_fta_chapitre_encours) {
                 self::$id_fta_chapitre_encours = $id_fta_chapitre;
             }
-            if (self::$id_fta_chapitre_encours == $id_fta_chapitre) {
+            if (self::$id_fta_chapitre_encours == $id_fta_chapitre and ! self::$selectionChap) {
                 $font_size = "size=" . self::FONT_SIZE_CHAPITRE_ENCOURS;
                 $font_flash_color = "color=" . self::FONT_COLOR_CHAPITRE_ENCOURS;
-                $font_flash = "<font " . $font_size . " " . $font_flash_color . "><b>";
+                $font_flash = "<font " . $font_size . " " . $font_flash_color . ">";
                 $image_flash1 = $font_flash . '[  ' . "</font>";
                 $image_flash2 = $font_flash . '  ]' . "</font>";
                 $num = 1;
@@ -646,9 +628,13 @@ class Navigation {
                 $image_flash1 = '-  ';
                 $image_flash2 = '  -';
             }
+
+
+
             //Ce chapitre est-il public?
-            if ($rowsRecup[FtaProcessusModel::KEYNAME] == 0) {
+            if ($idFtaProcessus == 0) {
                 $font_color = "color=" . self::FONT_COLOR_CHAPITRE_PUBLIC;
+                $link = TRUE;
                 $num = 1;
             } else {
                 //Le chapitre est-il validé ?
@@ -656,23 +642,46 @@ class Navigation {
                         . ' FROM ' . FtaSuiviProjetModel::TABLENAME
                         . ' WHERE ' . FtaSuiviProjetModel::FIELDNAME_ID_FTA . '=' . self::$id_fta
                         . ' AND ' . FtaSuiviProjetModel::FIELDNAME_ID_FTA_CHAPITRE . '=' . $id_fta_chapitre
-                        . ' AND ' . FtaSuiviProjetModel::FIELDNAME_SIGNATURE_VALIDATION_SUIVI_PROJET . '<> '.FtaSuiviProjetModel::SIGNATURE_VALIDATION_SUIVI_PROJET_FALSE
+                        . ' AND ' . FtaSuiviProjetModel::FIELDNAME_SIGNATURE_VALIDATION_SUIVI_PROJET . '<> ' . FtaSuiviProjetModel::SIGNATURE_VALIDATION_SUIVI_PROJET_FALSE
                 ;
                 $result1 = DatabaseOperation::queryPDO($req1);
                 $num = DatabaseOperation::getSqlNumRows($result1);
                 switch ($num) {
-                    case 0:  //Chapiter pas encore validé
-                        $font_color = "color=" . self::FONT_COLOR_CHAPITRE_NON_VALIDEE;
+                    case 0:
+                        /**
+                         * Chapitre pas encore validé
+                         *  - Chapitre encours en rouge 
+                         *  - Chapitre non accessible  en noir
+                         */
+                        if (in_array($idFtaProcessus, self::$id_fta_processus)) {
+                            $font_color = "color=" . self::FONT_COLOR_CHAPITRE_NON_VALIDEE;
+                            $link = TRUE;
+                            $i = "";
+                            $iEnd = "";
+                        } elseif (self::$id_fta_role == $idFtaRole) {
+                            $font_color = "color=" . self::FONT_COLOR_CHAPITRE_NON_ACCESSIBLE;
+                            $link = FALSE;
+                            $i = "";
+                            $iEnd = "";
+                        } else {
+                            $font_color = "color=" . self::FONT_COLOR_CHAPITRE_AUTRE_ROLE;
+                            $i = " <i> ";
+                            $iEnd = " </i> ";
+                            $link = FALSE;
+                        }
                         break;
 
                     case 1:  //Chapitre validé
                         $font_color = "color=" . self::FONT_COLOR_CHAPITRE_VALIDEE;
+                        $link = TRUE;
+                        $i = "";
+                        $iEnd = "";
                         break;
 
                     default: //Anomalie
                         $titre = 'Erreur Grave !';
                         $message = 'La fonction afficher_navigation() vient de trouver des doublons de validation des chapitres dans la table fta_suivi_projet';
-                        afficher_message($titre, $message, $redirection);
+                        Lib::showMessage($titre, $message, $redirection);
                         break;
                 }
             }//Fin du test public
@@ -681,56 +690,44 @@ class Navigation {
             if ($num == 0 and self::$synthese_action === 'attente') {
                 
             } else {
-                $b = "<font " . $font_size . " " . $font_color . "/>";
-                $menu_navigation .= $image_flash1 . '<a href=' . $page_default . '.php?'
-//                $menu_navigation .= '<a href=\'#\''
-//                        . ' onClick=\'navigation_' . $id_fta_chapitre . '();\''
-                        . 'id_fta=' . self::$id_fta
-                        . '&id_fta_chapitre_encours=' . $id_fta_chapitre
-                        . '&synthese_action=' . self::$synthese_action
-                        . '&id_fta_etat=' . self::$id_fta_etat
-                        . '&abreviation_fta_etat=' . self::$abreviation_etat
-                        . '&comeback=' . self::$comeback
-                        . '&id_fta_role=' . self::$id_fta_role
-                        . '>' . $b . ''
-                        . $nom_usuel_fta_chapitre
-                        . '</a>'
-                        . '</b></font> ' . $image_flash2
+                $b = $i . "<font " . $font_size . " " . $font_color . ">";
+                $menu_navigation .= $image_flash1;
+                if ($link) {
+                    $menu_navigation .= '<a href=' . $page_default . '.php?'
+                            . 'id_fta=' . self::$id_fta
+                            . '&id_fta_chapitre_encours=' . $id_fta_chapitre
+                            . '&synthese_action=' . self::$synthese_action
+                            . '&id_fta_etat=' . self::$id_fta_etat
+                            . '&abreviation_fta_etat=' . self::$abreviation_etat
+                            . '&id_fta_role=' . self::$id_fta_role
+                            . '>';
+                }
+                $menu_navigation .= $b . ' ' . $nom_usuel_fta_chapitre;
+                $menu_navigation .= '</a>';
+                $menu_navigation .= '</font> ' . $iEnd . $image_flash2
                 ;
-
                 /**
-                 * Version avec le module rewrite
+                 * Mise en forme des chapitres de la barre de navigation regroupé par Rôle
                  */
-//                $menu_navigation .= '<a href=' . $page_default
-////                $menu_navigation .= '<a href=\'#\''
-////                        . ' onClick=\'navigation_' . $id_fta_chapitre . '();\''
-//                        . '-' . self::$id_fta
-//                        . '-' . $id_fta_chapitre
-//                        . '-' . self::$synthese_action
-//                        . '-' . self::$id_fta_etat
-//                        . '-' . self::$abreviation_etat
-//                        . '-' . self::$comeback
-//                        . '-' . self::$id_fta_role
-//                        . '.html >' . $b . ''
-//                        . $image1 . $nom_usuel_fta_chapitre . $image2
-//                        . '</a>'
-//                        . '</b></font> '
-//                ;
-//                $menu_navigation .= '<SCRIPT LANGUAGE=JavaScript> 
-//                          function navigation_' . $id_fta_chapitre . '() {  
-//                                        document.navigation.id_fta.value=\'' . self::$id_fta . '\'; 
-//                                        document.navigation.id_fta_chapitre_encours.value=\'' . $id_fta_chapitre . '\'; 
-//                                        document.navigation.id_fta_role.value=\'' . self::$id_fta_role . '\'; 
-//                                        document.navigation.id_fta_etat.value=\'' . self::$id_fta_etat . '\'; 
-//                                        document.navigation.synthese_action.value=\'' . self::$synthese_action . '\'; 
-//                                        document.navigation.abreviation_fta_etat.value=\'' . self::$abreviation_etat . '\'; 
-//                                        document.navigation.comeback.value=\'' . self::$comeback . '\'; 
-//                                        navigation.submit();                                         
-//                                        return true; 
-//                                    }  </SCRIPT> ';
+                if ($idFtaRoleTmp == $idFtaRole or ! $first) {
+                    $roleMenu .= $menu_navigation;
+                    $menu_navigation = "";
+                    $idFtaRoleTmp = $idFtaRole;
+                    $first = "1";
+                } else {
+                    $color = FtaRoleModel::getColorByRole($idFtaRoleTmp);
+                    $border = FtaRoleModel::getBoderByRole($idFtaRoleTmp, self::$id_fta_role_encours);
+                    $roleMenuFinal .="<td style='border-style:solid; border-bottom-width: $border; border-color: " . $color . "' >" . $roleMenu . "</td>";
+                    $roleMenu = $menu_navigation;
+                    $menu_navigation = "";
+                    $idFtaRoleTmp = $idFtaRole;
+                }
             }
         }
-        return $menu_navigation;
+        $color = FtaRoleModel::getColorByRole($idFtaRoleTmp);
+        $border = FtaRoleModel::getBoderByRole($idFtaRoleTmp, self::$id_fta_role_encours);
+        $roleMenuFinal .="<td style='border-style:solid; border-bottom-width: $border; border-color: " . $color . "' >" . $roleMenu . "</td>";
+        return $roleMenuFinal;
     }
 
 //Fin de la création des chapitres
@@ -803,4 +800,64 @@ class Navigation {
       }
       return $paramT_Processus_Encours;
       } */
+
+    /**
+     * Construction du Menu
+     * @param array $paramArrayRoleWorkflow
+     * @param array $paramRowsFtaEtatAndFta
+     * @param string $paramHtmlTable
+     * @param string $paramRoleNavigation
+     * @param GeoModel $paramGeoModel
+     * @param string $paramCreateur
+     * @param FtaRoleModel $paramFtaRoleModel
+     * @return string
+     */
+    private static function buildMenu($paramArrayRoleWorkflow, $paramRowsFtaEtatAndFta, $paramHtmlTable, $paramRoleNavigation, GeoModel $paramGeoModel, $paramCreateur, FtaRoleModel $paramFtaRoleModel = NULL) {
+        if ($paramRowsFtaEtatAndFta[FtaModel::FIELDNAME_CODE_ARTICLE_LDC]) {
+            $identifiant = '<b><font size=\'2\' color=\'#0000FF\'>' . $paramRowsFtaEtatAndFta[FtaModel::FIELDNAME_CODE_ARTICLE_LDC] . '</font></b>';
+        } else {
+            $identifiant = '<b><font size=\'2\' color=\'' . self::FONT_COLOR_DOSSIER_FTA . '\'>' . $paramRowsFtaEtatAndFta[FtaModel::FIELDNAME_DOSSIER_FTA] . 'v' . $paramRowsFtaEtatAndFta[FtaModel::FIELDNAME_VERSION_DOSSIER_FTA] . '</font></b>';
+        }
+        if ($paramRowsFtaEtatAndFta[FtaModel::FIELDNAME_COMMENTAIRE]) {
+            $commentaire = '<br><b><font size=\'2\' color=\'' . self::FONT_COLOR_CHAPITRE_COMMENTAIRE . '\'>' . $paramRowsFtaEtatAndFta[FtaModel::FIELDNAME_COMMENTAIRE] . '</font></b>';
+        } else {
+            $commentaire = '';
+        }
+        if ($paramRowsFtaEtatAndFta[FtaModel::FIELDNAME_LIBELLE]) {
+            $nom = $paramRowsFtaEtatAndFta[FtaModel::FIELDNAME_LIBELLE];
+        } else {
+            $nom = $paramRowsFtaEtatAndFta[FtaModel::FIELDNAME_DESIGNATION_COMMERCIALE];
+        }
+        if (count($paramArrayRoleWorkflow) > "1") {
+            $menu_navigation = '<' . $paramHtmlTable . '><tr><td class=titre_principal> <div align=\'left\'>
+                            ' . $identifiant . ' - ' . $nom . ' &nbsp;&nbsp;&nbsp;&nbsp;<i>(gérée par ' . $paramCreateur . ')</i></div>'
+                    . '<div align=\'left\'>' . $commentaire . '</div></td>'
+                    . '<td width=25% class=titre_principal>';
+            if (self::$abreviation_etat == FtaEtatModel::ETAT_ABREVIATION_VALUE_MODIFICATION) {
+                $menu_navigation .= $paramRoleNavigation;
+            }
+            $menu_navigation .= '<br>  Site de Production : ' . $paramGeoModel->getDataField(GeoModel::FIELDNAME_GEO)->getFieldValue()
+                    . '<br>  Espace de Travail : ' . $paramRowsFtaEtatAndFta[FtaWorkflowModel::FIELDNAME_DESCRIPTION_FTA_WORKFLOW]
+                    . '</td></tr></table>
+                     <' . $paramHtmlTable . '>
+                           <tr class = titre>';
+        } else {
+            $menu_navigation = '<' . $paramHtmlTable . '><tr><td class=titre_principal> <div align=\'left\'>
+                            ' . $identifiant . '- ' . $nom . ' &nbsp;&nbsp;&nbsp;&nbsp;<i>(gérée par ' . $paramCreateur . ')</i></div>'
+                    . '<div>' . $commentaire . '</div></td>'
+                    . '<td width=25% class=titre_principal>';
+            if (self::$abreviation_etat == FtaEtatModel::ETAT_ABREVIATION_VALUE_MODIFICATION) {
+                $menu_navigation .= '  Rôle : ' . $paramFtaRoleModel->getDataField(FtaRoleModel::FIELDNAME_DESCRIPTION_FTA_ROLE)->getFieldValue();
+            }
+
+            $menu_navigation .= '<br>  Site de Production : ' . $paramGeoModel->getDataField(GeoModel::FIELDNAME_GEO)->getFieldValue()
+                    . '<br>  Espace de Travail : ' . $paramRowsFtaEtatAndFta[FtaWorkflowModel::FIELDNAME_DESCRIPTION_FTA_WORKFLOW]
+                    . '</td></tr></table>
+                    <' . $paramHtmlTable . '>
+                           <tr class = titre>';
+        }
+
+        return $menu_navigation;
+    }
+
 }

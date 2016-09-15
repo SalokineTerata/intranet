@@ -52,7 +52,7 @@
  *                            DEBUT DES FONCTIONS                              *
  * ******************************************************************************
  */
-function afficher_message($titre, $message, $redirection) {
+function afficher_message($titre, $message, $redirection, $paramButtonCheck = NULL) {
     /*
       Dictionnaire des variables:
      * **************************
@@ -62,11 +62,13 @@ function afficher_message($titre, $message, $redirection) {
     if (!$redirection) {
         $redirection = "'Javascript:;' onClick='history.go(-1);return(false);'";
     }
-    $bouton_valider = "
+    if (!$paramButtonCheck) {
+        $bouton_valider = "
                        <a href='$redirection'>
                        <img src=../lib/images/bouton_valider_jaune.gif border=0>
                        </a>
                        ";
+    }
     echo
     "
          <TABLE>
@@ -595,14 +597,22 @@ function print_page_begin($disable_full_page = FALSE, $menu_file = NULL, $conf =
     /**
      * Si le module Fta doit être affiché on selectionne le css du config.ini sinon celui de la base de données
      */
-    if ($module == "fta" or  $module == "adminagis") {
+    if ($module == "fta" or $module == "adminagis" or $module == "lib" or $module == "test") {
         $css_intranet_module = $conf->getConf()->getCssFta();
     } else {
         $css_intranet_module = $_SESSION["intranet_modules"][$module]["css_intranet_module"];
     }
     header('Content-type: text/html; charset=utf-8');
     echo "<!DOCTYPE html><html>";
+
     echo "<head>";
+
+    /**
+     * Vidage des caches
+     */
+    echo "<meta http-equiv=\"Cache-Control\" content=\"no-cache, no-store, must-revalidate\">
+        <meta http-equiv=\"Pragma\" content=\"no-cache\">
+        <meta http-equiv=\"Expires\" content=\"0\">";
     echo "<title>" . $title . "</title>";
 
     //Configuration du CSS
@@ -613,7 +623,7 @@ function print_page_begin($disable_full_page = FALSE, $menu_file = NULL, $conf =
     /**
      * Css de la config.ini
      */
-    if ($module == "fta" or  $module == "adminagis") {
+    if ($module == "fta" or $module == "adminagis" or $module == "lib") {
         echo "<style>
         body {background-color:" . $conf->getConf()->getCssBackgroundValue() . ";}
         .tableauFiche.table.td:hover   {background-color:" . $conf->getConf()->getCssBackgroundValue() . ";}
@@ -621,14 +631,33 @@ function print_page_begin($disable_full_page = FALSE, $menu_file = NULL, $conf =
         .contenu {background-color: " . $conf->getConf()->getCssContentValue() . ";}
         </style>";
     }
+    /**
+     * Icone intranet
+     */
+    echo "<link rel=icon type=image/png href=../lib/images/icone_intranet2.png />";
     echo "<link type=\"text/css\" rel=\"stylesheet\" href=\"../plugins/dhtmlgoodies_calendar/dhtmlgoodies_calendar/dhtmlgoodies_calendar.css?random=20051112\" media=\"screen\"></link>";
     echo "</head>";
 
 
     echo "<body $printable leftmargin=0 topmargin=0 marginwidth=0 marginheight=0 onload=chargement();>";
-
+    /**
+     * Moteur de recherche WIKI(Redfish)
+     */
+    echo "<link rel=search type=application/opensearchdescription+xml title=Intranet Wiki href=../lib/wiki-agis.xml>";
+    
+    /**
+     * jQuery
+     */
+    //Javascript
+    echo "<script src=../plugins/jQuery-3.1.0/jquery-3.1.0.min.js></script>";
+    echo "<script src=../plugins/jQuery-ui-1.12.0.custom/jquery-ui.min.js></script>";
+    //CSS
+    echo "<link href=../plugins/jQuery-ui-1.12.0.custom/jquery-ui.min.css rel=stylesheet type=text/css>";
+    echo "<link href=../plugins/jQuery-ui-1.12.0.custom/jquery-ui.theme.min.css rel=stylesheet type=text/css>";
+    echo "<link href=../plugins/jQuery-ui-1.12.0.custom/jquery-ui.structure.min.css rel=stylesheet type=text/css>";
+    
     echo "<div class=display_none id=chargement style=width:100%;height:75px;color:red;font-weight:bold;font-size:14px;background:white;>
-           <img src= ..\lib\images\ajax_loader.gif> Chargement ...
+           <img src= ../lib/images/ajax_loader.gif> Chargement ...
           </div>";
 
 
@@ -636,7 +665,7 @@ function print_page_begin($disable_full_page = FALSE, $menu_file = NULL, $conf =
         echo "<div class=display_none id=site width=100%; >";
         echo "<table border=0 cellspacing=0 cellpadding=0 height=534>";
         echo "<tr>";
-        echo "<td valign=top  align=center><div id=menu class=display_none>";
+        echo "<td valign=top align=center ><div id=menu >";
         include("../inc/connexion.php");
         include("../inc/navigue.php");
         if ($menu_file != NULL) {                       //Si existant, utilisation du menu demandé

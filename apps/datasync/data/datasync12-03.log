@@ -1,0 +1,161 @@
+Démarrage : mar déc  3 23:00:01 CET 2013
+Arrêt     : mar déc  3 23:00:44 CET 2013
+
+
+
+Base MySQL sélectionnée: agis
+Nombre de serveur(s) Linux concerné(s): 4
+Nombre de dossier(s) à mettre à jour: 24
+
+sending incremental file list
+
+sent 5598 bytes  received 45 bytes  2257.20 bytes/sec
+total size is 9985067  speedup is 1769.46
+sending incremental file list
+suivi_investissement/2014-2015/Bud invest AVI 2014 2015.xls
+
+sent 12267 bytes  received 485 bytes  8501.33 bytes/sec
+total size is 11670607  speedup is 915.20
+sending incremental file list
+erp_data.mdb
+
+sent 56010 bytes  received 63255 bytes  26503.33 bytes/sec
+total size is 81426432  speedup is 682.74
+sending incremental file list
+
+sent 7538 bytes  received 45 bytes  5055.33 bytes/sec
+total size is 9253358  speedup is 1220.28
+sending incremental file list
+
+sent 7683 bytes  received 20 bytes  3081.20 bytes/sec
+total size is 16751831  speedup is 2174.72
+sending incremental file list
+
+sent 4308 bytes  received 24 bytes  2888.00 bytes/sec
+total size is 6387982  speedup is 1474.60
+sending incremental file list
+mercuriales/sync.ffs_db
+mercuriales/mdd/2013/2013 MERCURIALE MONOPRIX .xls
+mercuriales/mdd/2014/2014 MERCURIALE AUCHAN.xls
+mercuriales/mdd/2014/2014 MERCURIALE CARREFOUR PLATS CUISINES.xls
+mercuriales/mdd/2014/2014 MERCURIALE CASINO.xls
+mercuriales/mdd/2014/2014 MERCURIALE MONOPRIX .xls
+
+sent 45226 bytes  received 3631 bytes  19542.80 bytes/sec
+total size is 47971761  speedup is 981.88
+sending incremental file list
+
+sent 5047 bytes  received 27 bytes  3382.67 bytes/sec
+total size is 39173092  speedup is 7720.36
+sending incremental file list
+operations_commerciales/DEMANDE ECHANTILLONS CL .xls
+operations_commerciales/chrono demande echantillons.xls
+operations_commerciales/sync.ffs_db
+operations_commerciales/FZC/CONFIRMATIONS/2014/ARGEL/ARGEL_CONFIRMATION CATALOGUE 2 2014.xls
+operations_commerciales/FZC/CONFIRMATIONS/2014/PICARD/PICARD_CONFIRMATION FEVRIER 2014.xls
+operations_commerciales/FZC/CONFIRMATIONS/2014/PICARD/PICARD_CONFIRMATION JANVIER 2014.xls
+operations_commerciales/FZC/OP FZC 2014/FZC ARGEL 2014.xls
+operations_commerciales/FZC/OP FZC 2014/FZC PICARD 2014.xls
+operations_commerciales/GMS/RECAP DEMANDE ET CONFIRMATIONS HEBDO.xls
+operations_commerciales/GMS/2013/A-CENTRALES/GMS CASINO 2013-FUTUR MASTER.xls
+operations_commerciales/GMS/2013/B-CONFIRMATIONS OPERATIONS/CONFIRMATIONS CASINO/GEANT/2013 GEANT SPOT RADIO S50.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS CASINO 2014-FUTUR MASTER.xls
+operations_commerciales/MDD/MODELES CJ/CARREFOUR/DDE ECHANTILLONS/demande \#351chantillons  CRF .XLS
+operations_commerciales/MDD/MODELES VB/CONF OPE CASINO/2014/CONFIRMATION OPERATION CASINO SM RI GRATUITE NAC ST VAL.xls
+operations_commerciales/MDD/OP MDD 2014/MDD CASINO 2014.xls
+operations_commerciales/MDD/OP MDD 2014/MDD ITM 2014 .xls
+
+sent 290523 bytes  received 19880 bytes  88686.57 bytes/sec
+total size is 57978958  speedup is 186.79
+sending incremental file list
+
+sent 20778 bytes  received 88 bytes  8346.40 bytes/sec
+total size is 98751548  speedup is 4732.65
+sending incremental file list
+modeles/compo_pc_FEFST-v3.lab
+modeles/compo_pc_FEFST-v3_180.lab
+
+sent 19260 bytes  received 3027 bytes  14858.00 bytes/sec
+total size is 31724032  speedup is 1423.43
+sending incremental file list
+erp_data.mdb
+
+sent 56010 bytes  received 63255 bytes  34075.71 bytes/sec
+total size is 81426432  speedup is 682.74
+sending incremental file list
+
+sent 7538 bytes  received 45 bytes  5055.33 bytes/sec
+total size is 9253358  speedup is 1220.28
+sending incremental file list
+
+sent 4308 bytes  received 24 bytes  2888.00 bytes/sec
+total size is 6387982  speedup is 1474.60
+sending incremental file list
+
+sent 7683 bytes  received 20 bytes  3081.20 bytes/sec
+total size is 16751831  speedup is 2174.72
+sending incremental file list
+
+sent 85 bytes  received 13 bytes  196.00 bytes/sec
+total size is 104853504  speedup is 1069933.71
+sending incremental file list
+operations_commerciales/DEMANDE ECHANTILLONS CL .xls
+operations_commerciales/chrono demande echantillons.xls
+operations_commerciales/sync.ffs_db
+operations_commerciales/FZC/CONFIRMATIONS/2014/ARGEL/ARGEL_CONFIRMATION CATALOGUE 2 2014.xls
+operations_commerciales/FZC/CONFIRMATIONS/2014/PICARD/PICARD_CONFIRMATION FEVRIER 2014.xls
+operations_commerciales/FZC/CONFIRMATIONS/2014/PICARD/PICARD_CONFIRMATION JANVIER 2014.xls
+operations_commerciales/FZC/OP FZC 2014/FZC ARGEL 2014.xls
+operations_commerciales/FZC/OP FZC 2014/FZC PICARD 2014.xls
+operations_commerciales/GMS/RECAP DEMANDE ET CONFIRMATIONS HEBDO.xls
+operations_commerciales/GMS/2013/A-CENTRALES/GMS CASINO 2013-FUTUR MASTER.xls
+operations_commerciales/GMS/2013/B-CONFIRMATIONS OPERATIONS/CONFIRMATIONS CASINO/GEANT/2013 GEANT SPOT RADIO S50.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS CASINO 2014-FUTUR MASTER.xls
+operations_commerciales/MDD/MODELES CJ/CARREFOUR/DDE ECHANTILLONS/demande \#351chantillons  CRF .XLS
+operations_commerciales/MDD/MODELES VB/CONF OPE CASINO/2014/CONFIRMATION OPERATION CASINO SM RI GRATUITE NAC ST VAL.xls
+operations_commerciales/MDD/OP MDD 2014/MDD CASINO 2014.xls
+operations_commerciales/MDD/OP MDD 2014/MDD ITM 2014 .xls
+
+sent 290523 bytes  received 19880 bytes  124161.20 bytes/sec
+total size is 57978958  speedup is 186.79
+sending incremental file list
+mercuriales/sync.ffs_db
+mercuriales/mdd/2013/2013 MERCURIALE MONOPRIX .xls
+mercuriales/mdd/2014/2014 MERCURIALE AUCHAN.xls
+mercuriales/mdd/2014/2014 MERCURIALE CARREFOUR PLATS CUISINES.xls
+mercuriales/mdd/2014/2014 MERCURIALE CASINO.xls
+mercuriales/mdd/2014/2014 MERCURIALE MONOPRIX .xls
+
+sent 45226 bytes  received 3631 bytes  19542.80 bytes/sec
+total size is 47971761  speedup is 981.88
+sending incremental file list
+modeles/compo_pc_FEFST-v3.lab
+modeles/compo_pc_FEFST-v3_180.lab
+
+sent 19260 bytes  received 3027 bytes  14858.00 bytes/sec
+total size is 31724032  speedup is 1423.43
+sending incremental file list
+
+sent 5598 bytes  received 45 bytes  3762.00 bytes/sec
+total size is 9985067  speedup is 1769.46
+sending incremental file list
+
+sent 5677 bytes  received 23 bytes  11400.00 bytes/sec
+total size is 128675317  speedup is 22574.62
+sending incremental file list
+
+sent 5161 bytes  received 37 bytes  3465.33 bytes/sec
+total size is 52194646  speedup is 10041.29
+sending incremental file list
+codesoft/Codesoft 7/Auchan  Atac/Atac_simply/simply_janv_14/79861_recto.bak
+codesoft/Codesoft 7/Auchan  Atac/Atac_simply/simply_janv_14/79861_recto.lab
+codesoft/Codesoft 7/Auchan  Atac/Atac_simply/simply_janv_14/79862_recto.bak
+codesoft/Codesoft 7/Auchan  Atac/Atac_simply/simply_janv_14/79862_recto.lab
+codesoft/Codesoft 7/Auchan  Atac/Atac_simply/simply_janv_14/79863_recto.bak
+codesoft/Codesoft 7/Auchan  Atac/Atac_simply/simply_janv_14/79863_recto.lab
+codesoft/Codesoft 7/Codes Produits/79852.bak
+codesoft/Codesoft 7/Codes Produits/79852.lab
+
+sent 92152 bytes  received 4957 bytes  38843.60 bytes/sec
+total size is 279106131  speedup is 2874.15
+sending incremental file list

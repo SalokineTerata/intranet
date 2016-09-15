@@ -81,13 +81,13 @@ $html_table = 'table '              //Permet d'harmoniser les tableaux
 
 //Informations de la Fiche Originale
 
-$id_dossier_fta_original = $ftaOrigModel->getDataField(FtaModel::FIELDNAME_DOSSIER_FTA)->getFieldValue();
+$id_dossier_fta_original = $ftaOrigModel->getDossierFta();
 $id_version_dossier_fta_original = $ftaOrigModel->getDataField(FtaModel::FIELDNAME_VERSION_DOSSIER_FTA)->getFieldValue();
 
 
-//Informations de la Fiche Originale
+//Informations de la Nouvelle Fiche   
 
-$id_dossier_fta_new = $ftaNewModel->getDataField(FtaModel::FIELDNAME_DOSSIER_FTA)->getFieldValue();
+$id_dossier_fta_new = $ftaNewModel->getDossierFta();
 $id_version_dossier_fta_new = $ftaNewModel->getDataField(FtaModel::FIELDNAME_VERSION_DOSSIER_FTA)->getFieldValue();
 
 
@@ -129,7 +129,7 @@ echo '
      <tr><td>
 
          <center>
-         <a href=modification_fiche.php?id_fta=' . $id_fta_new . '&comeback=1&synthese_action=encours&id_fta_etat=1&abreviation_fta_etat=I&id_fta_role=' . $idFtaRole . '>
+         <a href=modification_fiche.php?id_fta=' . $id_fta_new . '&synthese_action=encours&id_fta_etat=1&abreviation_fta_etat=I&id_fta_role=' . $idFtaRole . '>
          <font size=\'3\'>Suivant >></font></a>
          </center>
      </td></tr>

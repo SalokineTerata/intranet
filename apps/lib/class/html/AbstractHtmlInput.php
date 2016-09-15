@@ -40,12 +40,20 @@ abstract class AbstractHtmlInput extends AbstractHtmlGlobalElement {
     , $paramLabel
     , $paramValue
     , $paramIsWarningUpdate
+    , $paramIsWarningMessage = NULL
+    , $paramWarningMessage = NULL
+    , $paramIsFieldLock = NULL
+    , $paramLinkFieldLock = NULL
     ) {
         $id = $paramName;
         parent::initAbstractHtmlGlobalElement(
                 $id
                 , $paramLabel
                 , $paramIsWarningUpdate
+                , $paramIsWarningMessage
+                , $paramWarningMessage
+                , $paramIsFieldLock
+                , $paramLinkFieldLock
         );
 
         $this->getAttributes()->getName()->setValue($paramName);
@@ -55,8 +63,17 @@ abstract class AbstractHtmlInput extends AbstractHtmlGlobalElement {
     public function getHtmlViewedContent() {
         return Html::showValue($this->getAttributes()->getValue()->getValue());
     }
+
     public function getHtmlAddContent() {
-        return ;
+        return;
+    }
+
+    /**
+     * Retourne le contenu brut du DataField
+     */
+    public function getRawContent() {
+        $return = $this->getAttributes()->getValue()->getValue();
+        return $return;
     }
 
     function getHtmlEditableContent() {

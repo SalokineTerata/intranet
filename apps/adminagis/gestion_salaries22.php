@@ -28,6 +28,7 @@ if ($paramRech == '1') {
                     'SELECT ' . UserModel::FIELDNAME_NOM
                     . ',' . UserModel::FIELDNAME_PRENOM
                     . ',' . UserModel::FIELDNAME_ID_CATSOPRO
+                    . ',' . UserModel::FIELDNAME_LIEU_GEO
                     . ',' . UserModel::FIELDNAME_LOGIN
                     . ',' . UserModel::FIELDNAME_PASSWORD
                     . ',' . UserModel::FIELDNAME_MAIL
@@ -35,13 +36,17 @@ if ($paramRech == '1') {
                     . ' FROM ' . UserModel::TABLENAME
                     . ' WHERE ' . UserModel::KEYNAME . '=' . $paramIdUser
     );
-    if (!$arrayUserDetail)
-        echo ('La requete de recherche de l\'ID salarie a echoue');
-    else {
+    if (!$arrayUserDetail) {
+        $titre = "Utilisateur inexistant";
+        $message = "La requete de recherche de l'ID salarie a echoue";
+        Lib::showMessage($titre, $message);
+      
+    } else {
         foreach ($arrayUserDetail as $rowsUserDetail) {
             $userNom = $rowsUserDetail[UserModel::FIELDNAME_NOM];
             $userPrenom = $rowsUserDetail[UserModel::FIELDNAME_PRENOM];
             $userCatsopro = $rowsUserDetail[UserModel::FIELDNAME_ID_CATSOPRO];
+            $userLieuGeo = $rowsUserDetail[UserModel::FIELDNAME_LIEU_GEO];
             $userLogin = $rowsUserDetail[UserModel::FIELDNAME_LOGIN];
             $userPass = $rowsUserDetail[UserModel::FIELDNAME_PASSWORD];
 
@@ -219,6 +224,30 @@ if ($paramRech == '1') {
                                                 ?>
                                             </center>
                                             </td>
+                                            <td  class='loginFFFFFFdroit'>
+                                            <center><br>
+                                                Lieu Geo <br>
+                                                <?php
+                                                echo ('<select name=\'sal_lieu_geo\'>');
+                                                /* Constitution de la liste déroulante des noms des csp */
+                                                $arrayLieuGeo = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
+                                                                "SELECT " . GeoModel::KEYNAME . "," . GeoModel::FIELDNAME_GEO
+                                                                . " FROM " . GeoModel::TABLENAME
+                                                                . " WHERE " . GeoModel::FIELDNAME_SITE_ACTIF . "=1"
+                                                                . " ORDER BY " . GeoModel::FIELDNAME_GEO
+                                                );
+                                                if ($arrayLieuGeo) {
+                                                    foreach ($arrayLieuGeo as $rowsLieuGeo) {
+                                                        echo ('<option value=\'' . $rowsLieuGeo[GeoModel::KEYNAME] . '\'');
+                                                        if ($rowsLieuGeo[GeoModel::KEYNAME] == $userLieuGeo)
+                                                            echo ('selected');
+                                                        echo ('>' . $rowsLieuGeo[GeoModel::FIELDNAME_GEO] . '</option>');
+                                                    }
+                                                }
+                                                echo ('</select>');
+                                                ?>
+                                            </center>
+                                            </td>
                                         </table>  
                                         <br>                 
                                         <?php
@@ -227,7 +256,7 @@ if ($paramRech == '1') {
                                          * ***************************Boris Sanègre  2003.03.25 
                                          * ***************************Franck Amofa 2015.08.07 */
                                         // require ('droits_acces.inc');  
-                                        IntranetDroitsAccesModel::BuildHtmlDroitsAcces($paramIdUser);
+                                        IntranetDroitsAccesModel::buildHtmlDroitsAcces($paramIdUser);
                                         ?>
                                         <table width='500' border='0' cellspacing='4' cellpadding='0' align='center'>
                                             <tr>
@@ -243,7 +272,7 @@ if ($paramRech == '1') {
                                                     <table width='350' border='0' cellspacing='0' cellpadding='0' align='center'>
                                                         <tr>
                                                             <td colspan='2'>
-                                                                <div align='center'><input type='image' src='../zimages/modifier-j.gif' width='130' height='20'>&nbsp;&nbsp;<a href='#' onClick='confirmation(<?php echo $paramIdUser; ?>);'><img src='../images-index/supprimer.gif' border=0></a></div>
+                                                                <div align='center'><input type='image' src='../zimages/modifier-j.gif' width='130' height='20'>&nbsp;&nbsp;<a href='#' onClick='confirmation_desactivation(<?php echo $paramIdUser; ?>);'><img src='../images-index/supprimer.gif' border=0></a></div>
 
                                                                 <input type='hidden' name='modifier' value='modifier'>
                                                             </td>

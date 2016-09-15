@@ -1,0 +1,132 @@
+Démarrage : mar oct 15 23:00:02 CEST 2013
+Arrêt     : mar oct 15 23:02:00 CEST 2013
+
+
+
+Base MySQL sélectionnée: agis
+Nombre de serveur(s) Linux concerné(s): 4
+Nombre de dossier(s) à mettre à jour: 24
+
+sending incremental file list
+
+sent 7651 bytes  received 20 bytes  15342.00 bytes/sec
+total size is 16750790  speedup is 2183.65
+sending incremental file list
+
+sent 5598 bytes  received 45 bytes  2257.20 bytes/sec
+total size is 9985067  speedup is 1769.46
+sending incremental file list
+suivi_investissement/2013-2014/Validation groupe 2013-2014/Valid budget AGIS 2S 2013-2014.pdf
+
+sent 109687 bytes  received 53 bytes  43896.00 bytes/sec
+total size is 11514959  speedup is 104.93
+sending incremental file list
+erp_data.mdb
+
+sent 7383971 bytes  received 62247 bytes  183857.23 bytes/sec
+total size is 78852096  speedup is 10.59
+sending incremental file list
+
+sent 7538 bytes  received 45 bytes  5055.33 bytes/sec
+total size is 9253358  speedup is 1220.28
+sending incremental file list
+
+sent 7651 bytes  received 20 bytes  5114.00 bytes/sec
+total size is 16750790  speedup is 2183.65
+sending incremental file list
+
+sent 4308 bytes  received 24 bytes  2888.00 bytes/sec
+total size is 6387982  speedup is 1474.60
+sending incremental file list
+mercuriales/FZC/FZC 2013/TOUPARGEL 2013.xls
+mercuriales/HD/2013/2013  MERCURIALE ALDI.xls
+mercuriales/mdd/2013/2013 MERCURIALE EXPORT.xls
+mercuriales/mdd/2013/2013 MERCURIALE INTERMARCHE.xls
+mercuriales/mdd/2013/2013 MERCURIALE MONOPRIX .xls
+
+sent 32013 bytes  received 2992 bytes  14002.00 bytes/sec
+total size is 35783493  speedup is 1022.24
+sending incremental file list
+
+sent 5047 bytes  received 27 bytes  3382.67 bytes/sec
+total size is 39173092  speedup is 7720.36
+sending incremental file list
+operations_commerciales/chrono demande echantillons.xls
+operations_commerciales/GMS/2013/D-REGIONS/GMS LECLERC 2013-FUTUR MASTER.xls
+operations_commerciales/GMS/2013/D-REGIONS/GMS SCHIEVER 2013-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/D-REGIONS/GMS SU REGION  2014-FUTUR MASTER.xls
+operations_commerciales/MDD/MODELES VB/CONF OPES MONOPRIX/2014/
+operations_commerciales/MDD/MODELES VB/CONF OPES MONOPRIX/2014/CONFIRMATION OPERATION_MONOPRIX_MINI PRIX 3.xls
+operations_commerciales/MDD/MODELES VB/DEM ECHANTILLONS/2013/Chrono  500 Monoprix 151013.XLS
+operations_commerciales/MDD/OP MDD 2014/MDD MONOPRIX FUTUR MASTER 2014 .xls
+
+sent 328348 bytes  received 10693 bytes  75342.44 bytes/sec
+total size is 52368073  speedup is 154.46
+sending incremental file list
+
+sent 18506 bytes  received 80 bytes  7434.40 bytes/sec
+total size is 41728031  speedup is 2245.13
+sending incremental file list
+
+sent 7556 bytes  received 13 bytes  3027.60 bytes/sec
+total size is 34205315  speedup is 4519.13
+sending incremental file list
+erp_data.mdb
+
+sent 7383971 bytes  received 62247 bytes  188511.85 bytes/sec
+total size is 78852096  speedup is 10.59
+sending incremental file list
+
+sent 7538 bytes  received 45 bytes  5055.33 bytes/sec
+total size is 9253358  speedup is 1220.28
+sending incremental file list
+
+sent 4308 bytes  received 24 bytes  2888.00 bytes/sec
+total size is 6387982  speedup is 1474.60
+sending incremental file list
+
+sent 7651 bytes  received 20 bytes  5114.00 bytes/sec
+total size is 16750790  speedup is 2183.65
+sending incremental file list
+
+sent 85 bytes  received 13 bytes  65.33 bytes/sec
+total size is 104853504  speedup is 1069933.71
+sending incremental file list
+operations_commerciales/chrono demande echantillons.xls
+operations_commerciales/GMS/2013/D-REGIONS/GMS LECLERC 2013-FUTUR MASTER.xls
+operations_commerciales/GMS/2013/D-REGIONS/GMS SCHIEVER 2013-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/D-REGIONS/GMS SU REGION  2014-FUTUR MASTER.xls
+operations_commerciales/MDD/MODELES VB/CONF OPES MONOPRIX/2014/
+operations_commerciales/MDD/MODELES VB/CONF OPES MONOPRIX/2014/CONFIRMATION OPERATION_MONOPRIX_MINI PRIX 3.xls
+operations_commerciales/MDD/MODELES VB/DEM ECHANTILLONS/2013/Chrono  500 Monoprix 151013.XLS
+operations_commerciales/MDD/OP MDD 2014/MDD MONOPRIX FUTUR MASTER 2014 .xls
+
+sent 328348 bytes  received 10693 bytes  96868.86 bytes/sec
+total size is 52368073  speedup is 154.46
+sending incremental file list
+mercuriales/FZC/FZC 2013/TOUPARGEL 2013.xls
+mercuriales/HD/2013/2013  MERCURIALE ALDI.xls
+mercuriales/mdd/2013/2013 MERCURIALE EXPORT.xls
+mercuriales/mdd/2013/2013 MERCURIALE INTERMARCHE.xls
+mercuriales/mdd/2013/2013 MERCURIALE MONOPRIX .xls
+
+sent 32013 bytes  received 2992 bytes  14002.00 bytes/sec
+total size is 35783493  speedup is 1022.24
+sending incremental file list
+
+sent 5598 bytes  received 45 bytes  3762.00 bytes/sec
+total size is 9985067  speedup is 1769.46
+sending incremental file list
+organisation/Listes t\#351l\#351phoniques AGIS + LDC/LISTE TELEPHONIQUE TARARE OCTOBRE 2013.xls
+
+sent 15320 bytes  received 42 bytes  10241.33 bytes/sec
+total size is 128680949  speedup is 8376.58
+sending incremental file list
+
+sent 4707 bytes  received 36 bytes  3162.00 bytes/sec
+total size is 46318934  speedup is 9765.75
+sending incremental file list
+
+sent 46167 bytes  received 86 bytes  30835.33 bytes/sec
+total size is 274589267  speedup is 5936.68
+sending incremental file list

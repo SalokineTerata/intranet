@@ -1,0 +1,149 @@
+Démarrage : ven mai 23 23:00:01 CEST 2014
+Arrêt     : ven mai 23 23:02:52 CEST 2014
+
+
+
+Base MySQL sélectionnée: agis
+Nombre de serveur(s) Linux concerné(s): 4
+Nombre de dossier(s) à mettre à jour: 29
+
+sending incremental file list
+
+sent 7051 bytes  received 49 bytes  2840.00 bytes/sec
+total size is 12693370  speedup is 1787.80
+sending incremental file list
+
+sent 6279 bytes  received 38 bytes  2526.80 bytes/sec
+total size is 12442583  speedup is 1969.70
+sending incremental file list
+erp_data.mdb
+
+sent 11227745 bytes  received 65747 bytes  186669.29 bytes/sec
+total size is 88092672  speedup is 7.80
+sending incremental file list
+
+sent 7538 bytes  received 45 bytes  5055.33 bytes/sec
+total size is 9253358  speedup is 1220.28
+sending incremental file list
+
+sent 7756 bytes  received 20 bytes  3110.40 bytes/sec
+total size is 16755943  speedup is 2154.83
+sending incremental file list
+
+sent 4308 bytes  received 24 bytes  2888.00 bytes/sec
+total size is 6387982  speedup is 1474.60
+sending incremental file list
+
+sent 9661 bytes  received 71 bytes  2780.57 bytes/sec
+total size is 32499737  speedup is 3339.47
+sending incremental file list
+
+sent 5047 bytes  received 27 bytes  2029.60 bytes/sec
+total size is 39173092  speedup is 7720.36
+sending incremental file list
+operations_commerciales/chrono demande echantillons.xls
+operations_commerciales/GMS/RECAP DEMANDE ET CONFIRMATIONS HEBDO 2014.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS CARREFOUR 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS CASINO 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/AUCHAN/2014 AUCHAN OP AOUT 1 ENCORNETS FARCIS.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/AUCHAN/2014 AUCHAN OP AOUT 2 GAMME PC FE.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/AUCHAN/2014 AUCHAN OP AOUT 3 ASIE.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/CARREFOUR/2014 CARREFOUR PROMO 27 PIZZAS.xls
+operations_commerciales/GMS/2014/D-REGIONS/GMS LECLERC 2014-FUTUR MASTER.xls
+
+sent 362676 bytes  received 21523 bytes  45199.88 bytes/sec
+total size is 51163547  speedup is 133.17
+sending incremental file list
+
+sent 20296 bytes  received 83 bytes  5822.57 bytes/sec
+total size is 99065320  speedup is 4861.15
+sending incremental file list
+
+sent 4380 bytes  received 82 bytes  1784.80 bytes/sec
+total size is 35609223  speedup is 7980.55
+sending incremental file list
+modeles/carton_ean_128_mini-v2013_180.bak
+modeles/carton_ean_128_mini-v2013_180.lab
+
+sent 15846 bytes  received 2565 bytes  7364.40 bytes/sec
+total size is 47981568  speedup is 2606.14
+sending incremental file list
+
+sent 5781 bytes  received 30 bytes  3874.00 bytes/sec
+total size is 93132165  speedup is 16026.87
+sending incremental file list
+erp_data.mdb
+
+sent 11227745 bytes  received 65747 bytes  189806.59 bytes/sec
+total size is 88092672  speedup is 7.80
+sending incremental file list
+
+sent 7538 bytes  received 45 bytes  5055.33 bytes/sec
+total size is 9253358  speedup is 1220.28
+sending incremental file list
+
+sent 4308 bytes  received 24 bytes  2888.00 bytes/sec
+total size is 6387982  speedup is 1474.60
+sending incremental file list
+
+sent 7756 bytes  received 20 bytes  5184.00 bytes/sec
+total size is 16755943  speedup is 2154.83
+sending incremental file list
+
+sent 85 bytes  received 13 bytes  196.00 bytes/sec
+total size is 104853504  speedup is 1069933.71
+sending incremental file list
+operations_commerciales/chrono demande echantillons.xls
+operations_commerciales/GMS/RECAP DEMANDE ET CONFIRMATIONS HEBDO 2014.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS CARREFOUR 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS CASINO 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/AUCHAN/2014 AUCHAN OP AOUT 1 ENCORNETS FARCIS.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/AUCHAN/2014 AUCHAN OP AOUT 2 GAMME PC FE.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/AUCHAN/2014 AUCHAN OP AOUT 3 ASIE.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/CARREFOUR/2014 CARREFOUR PROMO 27 PIZZAS.xls
+operations_commerciales/GMS/2014/D-REGIONS/GMS LECLERC 2014-FUTUR MASTER.xls
+
+sent 362676 bytes  received 21523 bytes  109771.14 bytes/sec
+total size is 51163547  speedup is 133.17
+sending incremental file list
+
+sent 9661 bytes  received 71 bytes  6488.00 bytes/sec
+total size is 32499737  speedup is 3339.47
+sending incremental file list
+modeles/carton_ean_128_mini-v2013_180.bak
+modeles/carton_ean_128_mini-v2013_180.lab
+
+sent 15846 bytes  received 2565 bytes  12274.00 bytes/sec
+total size is 47981568  speedup is 2606.14
+sending incremental file list
+
+sent 7051 bytes  received 49 bytes  4733.33 bytes/sec
+total size is 12693370  speedup is 1787.80
+sending incremental file list
+
+sent 5732 bytes  received 23 bytes  11510.00 bytes/sec
+total size is 129183193  speedup is 22447.12
+sending incremental file list
+
+sent 5610 bytes  received 39 bytes  3766.00 bytes/sec
+total size is 59049369  speedup is 10453.07
+sending incremental file list
+
+sent 51032 bytes  received 95 bytes  34084.67 bytes/sec
+total size is 293774419  speedup is 5745.97
+sending incremental file list
+
+sent 20296 bytes  received 83 bytes  13586.00 bytes/sec
+total size is 99065320  speedup is 4861.15
+sending incremental file list
+
+sent 4380 bytes  received 82 bytes  2974.67 bytes/sec
+total size is 35609223  speedup is 7980.55
+sending incremental file list
+
+sent 7756 bytes  received 20 bytes  5184.00 bytes/sec
+total size is 16755943  speedup is 2154.83
+sending incremental file list
+
+sent 7756 bytes  received 20 bytes  5184.00 bytes/sec
+total size is 16755943  speedup is 2154.83

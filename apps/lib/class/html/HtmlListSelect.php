@@ -71,12 +71,20 @@ class HtmlListSelect extends AbstractHtmlList {
     , $paramValue
     , $paramIsWarningUpdate
     , $paramArrayListContent
+    , $paramIsWarningMessage = NULL
+    , $paramWarningMessage = NULL
+    , $paramIsFieldLock = NULL
+    , $paramLinkFieldLock = NULL
     ) {
         $id = $paramName;
         parent::initAbstractHtmlGlobalElement(
                 $id
                 , $paramLabel
                 , $paramIsWarningUpdate
+                , $paramIsWarningMessage
+                , $paramWarningMessage
+                , $paramIsFieldLock
+                , $paramLinkFieldLock
         );
 
         $this->getAttributes()->getName()->setValue($paramName);
@@ -88,7 +96,7 @@ class HtmlListSelect extends AbstractHtmlList {
      * Retourne le code HTML pour présenter la liste en mode consultation
      */
     public function getHtmlViewedContent() {
-        if ($this->getSelectedValue()) {
+        if ($this->getSelectedValue() <> NULL) {
             $return = $this->getSelectedContent();
         } else {
             $return = self::LIST_NO_SELECTION_VALUE;
@@ -203,6 +211,13 @@ class HtmlListSelect extends AbstractHtmlList {
         return $this->selectedValue;
     }
 
+    /**
+     * Retourne le contenu brut du DataField
+     */
+    public function getRawContent(){
+        return $this->getSelectedContent();
+    }
+    
     /**
      * Retourne le libellé de la valeur sélectionnée dans la liste
      * @return mixed

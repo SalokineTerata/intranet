@@ -1,0 +1,169 @@
+Démarrage : jeu aoû 28 23:00:01 CEST 2014
+Arrêt     : jeu aoû 28 23:00:49 CEST 2014
+
+
+
+Base MySQL sélectionnée: agis
+Nombre de serveur(s) Linux concerné(s): 4
+Nombre de dossier(s) à mettre à jour: 29
+
+sending incremental file list
+
+sent 7305 bytes  received 49 bytes  4902.67 bytes/sec
+total size is 13622581  speedup is 1852.40
+sending incremental file list
+
+sent 6675 bytes  received 40 bytes  4476.67 bytes/sec
+total size is 12850647  speedup is 1913.72
+sending incremental file list
+
+sent 63 bytes  received 12 bytes  150.00 bytes/sec
+total size is 212826112  speedup is 2837681.49
+sending incremental file list
+
+sent 7593 bytes  received 45 bytes  15276.00 bytes/sec
+total size is 9254930  speedup is 1211.70
+sending incremental file list
+
+sent 7938 bytes  received 20 bytes  5305.33 bytes/sec
+total size is 16768700  speedup is 2107.15
+sending incremental file list
+
+sent 4308 bytes  received 24 bytes  2888.00 bytes/sec
+total size is 6387982  speedup is 1474.60
+sending incremental file list
+mercuriales/MERCURIALES - AGIS/mdd/2014/2014 MERCURIALE CARREFOUR PLATS CUISINES.xls
+
+sent 12136 bytes  received 3865 bytes  10667.33 bytes/sec
+total size is 37744102  speedup is 2358.86
+sending incremental file list
+
+sent 5047 bytes  received 27 bytes  3382.67 bytes/sec
+total size is 39173092  speedup is 7720.36
+sending incremental file list
+operations_commerciales/DEMANDE ECHANTILLONS GB.xls
+operations_commerciales/chrono demande echantillons.xls
+operations_commerciales/GMS/RECAP DEMANDE ET CONFIRMATIONS HEBDO 2014.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS CARREFOUR MARKET 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS CASINO 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS INTERMARCHE 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS PLACE DU MARCHE 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/CASINO HM/2014 CARTE OCTOBRE ASIE FE.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/PLACE DU MARCHE/2014 PLACE DU MARCHE CYCLE 06.xls
+operations_commerciales/GMS/2015/GMS CASINO 2015-FUTUR MASTER.xls
+operations_commerciales/GMS/2015/GMS INTERMARCHE 2015-FUTUR MASTER.xls
+
+sent 346580 bytes  received 36864 bytes  109555.43 bytes/sec
+total size is 62147254  speedup is 162.08
+sending incremental file list
+
+sent 20406 bytes  received 83 bytes  8195.60 bytes/sec
+total size is 99360776  speedup is 4849.47
+sending incremental file list
+gofast/CHANTIERS/6_LANCEMENT_PDTS_Emeline/5_STANDARDS/Procedure_lancement/
+gofast/CHANTIERS/6_LANCEMENT_PDTS_Emeline/5_STANDARDS/Procedure_lancement/Proc\#351dure Lancement de produit 270814.xls
+gofast/CHANTIERS/6_LANCEMENT_PDTS_Emeline/5_STANDARDS/RECOS_exemples_reunion_280814/
+gofast/CHANTIERS/6_LANCEMENT_PDTS_Emeline/5_STANDARDS/RECOS_exemples_reunion_280814/Reco Lancement & Bilan Lancement pulpe.xls
+gofast/CHANTIERS/6_LANCEMENT_PDTS_Emeline/5_STANDARDS/RECOS_exemples_reunion_280814/Reco lancement & bilans gamme th\#351matique 14_07_2014 V2.xls
+gofast/CHANTIERS/6_LANCEMENT_PDTS_Emeline/5_STANDARDS/RECOS_exemples_reunion_280814/reco de lancement Hacaos Picard_280814.xls
+gofast/CHANTIERS/6_LANCEMENT_PDTS_Emeline/5_STANDARDS/RECOS_exemples_reunion_280814/reco lancement galette RDP_280814.xls
+
+sent 265195 bytes  received 196 bytes  106156.40 bytes/sec
+total size is 53653218  speedup is 202.17
+sending incremental file list
+modeles/dev_inco_compo_auchan_le_traiteur_recto-60x79-sato-H.lab
+modeles/dev_inco_compo_plateau_apero_recto-75x100-sato-D.lab
+modeles/dev_inco_compo_plateau_apero_verso-100x180-sato-B.lab
+
+sent 70426 bytes  received 70 bytes  46997.33 bytes/sec
+total size is 51878912  speedup is 735.91
+sending incremental file list
+
+sent 5794 bytes  received 30 bytes  3882.67 bytes/sec
+total size is 94942597  speedup is 16301.96
+sending incremental file list
+
+sent 63 bytes  received 12 bytes  50.00 bytes/sec
+total size is 212826112  speedup is 2837681.49
+sending incremental file list
+
+sent 7593 bytes  received 45 bytes  5092.00 bytes/sec
+total size is 9254930  speedup is 1211.70
+sending incremental file list
+
+sent 4308 bytes  received 24 bytes  2888.00 bytes/sec
+total size is 6387982  speedup is 1474.60
+sending incremental file list
+
+sent 7938 bytes  received 20 bytes  5305.33 bytes/sec
+total size is 16768700  speedup is 2107.15
+sending incremental file list
+
+sent 85 bytes  received 13 bytes  196.00 bytes/sec
+total size is 104853504  speedup is 1069933.71
+sending incremental file list
+operations_commerciales/DEMANDE ECHANTILLONS GB.xls
+operations_commerciales/chrono demande echantillons.xls
+operations_commerciales/GMS/RECAP DEMANDE ET CONFIRMATIONS HEBDO 2014.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS CARREFOUR MARKET 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS CASINO 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS INTERMARCHE 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS PLACE DU MARCHE 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/CASINO HM/2014 CARTE OCTOBRE ASIE FE.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/PLACE DU MARCHE/2014 PLACE DU MARCHE CYCLE 06.xls
+operations_commerciales/GMS/2015/GMS CASINO 2015-FUTUR MASTER.xls
+operations_commerciales/GMS/2015/GMS INTERMARCHE 2015-FUTUR MASTER.xls
+
+sent 346580 bytes  received 36864 bytes  109555.43 bytes/sec
+total size is 62147254  speedup is 162.08
+sending incremental file list
+mercuriales/MERCURIALES - AGIS/mdd/2014/2014 MERCURIALE CARREFOUR PLATS CUISINES.xls
+
+sent 12136 bytes  received 3865 bytes  10667.33 bytes/sec
+total size is 37744102  speedup is 2358.86
+sending incremental file list
+modeles/dev_inco_compo_auchan_le_traiteur_recto-60x79-sato-H.lab
+modeles/dev_inco_compo_plateau_apero_recto-75x100-sato-D.lab
+modeles/dev_inco_compo_plateau_apero_verso-100x180-sato-B.lab
+
+sent 70426 bytes  received 70 bytes  28198.40 bytes/sec
+total size is 51878912  speedup is 735.91
+sending incremental file list
+
+sent 7305 bytes  received 49 bytes  4902.67 bytes/sec
+total size is 13622581  speedup is 1852.40
+sending incremental file list
+
+sent 5745 bytes  received 23 bytes  3845.33 bytes/sec
+total size is 129159129  speedup is 22392.36
+sending incremental file list
+
+sent 5610 bytes  received 39 bytes  3766.00 bytes/sec
+total size is 59049369  speedup is 10453.07
+sending incremental file list
+
+sent 52293 bytes  received 97 bytes  20956.00 bytes/sec
+total size is 299963475  speedup is 5725.59
+sending incremental file list
+
+sent 20406 bytes  received 83 bytes  8195.60 bytes/sec
+total size is 99360776  speedup is 4849.47
+sending incremental file list
+gofast/CHANTIERS/6_LANCEMENT_PDTS_Emeline/5_STANDARDS/Procedure_lancement/
+gofast/CHANTIERS/6_LANCEMENT_PDTS_Emeline/5_STANDARDS/Procedure_lancement/Proc\#351dure Lancement de produit 270814.xls
+gofast/CHANTIERS/6_LANCEMENT_PDTS_Emeline/5_STANDARDS/RECOS_exemples_reunion_280814/
+gofast/CHANTIERS/6_LANCEMENT_PDTS_Emeline/5_STANDARDS/RECOS_exemples_reunion_280814/Reco Lancement & Bilan Lancement pulpe.xls
+gofast/CHANTIERS/6_LANCEMENT_PDTS_Emeline/5_STANDARDS/RECOS_exemples_reunion_280814/Reco lancement & bilans gamme th\#351matique 14_07_2014 V2.xls
+gofast/CHANTIERS/6_LANCEMENT_PDTS_Emeline/5_STANDARDS/RECOS_exemples_reunion_280814/reco de lancement Hacaos Picard_280814.xls
+gofast/CHANTIERS/6_LANCEMENT_PDTS_Emeline/5_STANDARDS/RECOS_exemples_reunion_280814/reco lancement galette RDP_280814.xls
+
+sent 265195 bytes  received 196 bytes  75826.00 bytes/sec
+total size is 53653218  speedup is 202.17
+sending incremental file list
+
+sent 7938 bytes  received 20 bytes  5305.33 bytes/sec
+total size is 16768700  speedup is 2107.15
+sending incremental file list
+
+sent 7938 bytes  received 20 bytes  5305.33 bytes/sec
+total size is 16768700  speedup is 2107.15

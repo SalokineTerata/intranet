@@ -115,6 +115,8 @@ class FtaProcessusModel extends AbstractModel {
                     $tauxValidationProcessusEncours = $tauxValidationProcessus / $nombre_total_processus_precedent;
                 }
             }
+        } else {
+            $tauxValidationProcessusEncours = NULL;
         }
         $return = $tauxValidationProcessusEncours;
 
@@ -347,6 +349,69 @@ class FtaProcessusModel extends AbstractModel {
 
     static public function getSqlResultAuthorizedProcessusByUser($paramIdUser) {
         return DatabaseOperation::query(self::getSqlStatementAuthorizedProcessusByUser($paramIdUser));
+    }
+
+    public static function addIdFtaProcessus($paramIdEffectue) {
+        if ($paramIdEffectue) {
+            foreach ($paramIdEffectue as $value) {
+                if ($value) {
+                    $req .= " OR " . self::KEYNAME . "=" . $value . " ";
+                }
+            }
+        }
+        return $req;
+    }
+
+    /**
+     * 
+     * @param int $paramIdFta
+     * @param int $paramIdProcessus
+     * @param int $paramIdFtaWorkflow
+     * @param string $paramAbreviation_fta_etat
+     * @param HtmlResult2 $htmlResult
+     * @param array $idFtaProcessusEffectue
+     * @param string $paramFirstPass
+     * @return array
+     */
+    public static function getProcessusNextFromIdFtaChapitres($paramIdFta, $paramIdProcessus, $paramIdFtaWorkflow, $paramAbreviation_fta_etat, HtmlResult2 $htmlResult, $idFtaProcessusEffectue, $paramFirstPass = NULL) {
+
+        /**
+         * On vérifie si le processus à deja été utilisé.
+         */
+        $cheackIdFtaProcessus = in_array($paramIdProcessus, $idFtaProcessusEffectue);
+        if (!$cheackIdFtaProcessus) {
+            $idFtaProcessusEffectue[] = $paramIdProcessus;
+            //Recherches des processus suivants
+            $arrayProcessusCycle = FtaProcessusCycleModel::getArrayProccusNextValidateFromIdFta($paramIdFta, $paramIdFtaWorkflow, $paramAbreviation_fta_etat, $paramIdProcessus);
+
+            //Enregistrement du processus
+            if ($paramFirstPass) {
+                $htmlResult->setProcessus($paramIdProcessus);
+            }
+            if ($htmlResult->getHtmlResult() == NULL) {
+                $array = array(
+                    'processus' => $htmlResult->getProcessus(),
+                );
+                $htmlResult->setHtmlResult($array);
+            } else {
+                $array = $htmlResult->getHtmlResult();
+                $arrayTmp = array(
+                    'processus' => $htmlResult->getProcessus(),
+                );
+                $array3 = array_merge_recursive($arrayTmp, $array);
+                $htmlResult->setHtmlResult($array3);
+            }
+            if ($arrayProcessusCycle != NULL) {
+                foreach ($arrayProcessusCycle as $rowsProcessusCycle) {
+                    $paramIdProcessus = $rowsProcessusCycle[FtaProcessusCycleModel::FIELDNAME_PROCESSUS_NEXT];
+                    $paramFirstPass = "1";
+                    //Appel récursif de la fonction pour continuer à dévalider les processus suivants
+                    FtaProcessusModel::getProcessusNextFromIdFtaChapitres($paramIdFta, $paramIdProcessus, $paramIdFtaWorkflow, $paramAbreviation_fta_etat, $htmlResult, $idFtaProcessusEffectue, $paramFirstPass);
+                }
+            }
+            //Retour de la fonction
+            return $htmlResult->getHtmlResult();
+        }
     }
 
 }

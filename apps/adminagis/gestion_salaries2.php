@@ -7,6 +7,7 @@ $globalConfig = new GlobalConfig();
 $login = $globalConfig->getAuthenticatedUser()->getKeyValue();
 $pass = $globalConfig->getAuthenticatedUser()->getDataField(UserModel::FIELDNAME_PASSWORD)->getFieldValue();
 $id_type = $globalConfig->getAuthenticatedUser()->getDataField(UserModel::FIELDNAME_ID_TYPE)->getFieldValue();
+$mail = $globalConfig->getAuthenticatedUser()->getDataField(UserModel::FIELDNAME_MAIL)->getFieldValue();
 
 
 $paramUserLogin = Lib::getParameterFromRequest('sal_login');
@@ -15,7 +16,8 @@ $paramUserPrenom = Lib::getParameterFromRequest('sal_prenom');
 $paramUserPass = Lib::getParameterFromRequest('sal_pass');
 $paramUserPass2 = Lib::getParameterFromRequest('sal_pass2');
 $paramUserCatsopro = Lib::getParameterFromRequest('catsopro');
-$paramDateCreationUser = Lib::getParameterFromRequest('date_creation_salaries', date('Y-m-d'));
+$paramUserLieuGeo = Lib::getParameterFromRequest('lieu_geo');
+$paramDateCreationUser = date('Y-m-d');
 $paramNewsDefil = Lib::getParameterFromRequest('newsdefil');
 $paramUserMail = Lib::getParameterFromRequest('sal_mail');
 $paramModifier = Lib::getParameterFromRequest('modifier');
@@ -47,11 +49,15 @@ if ($paramValider == 'valider') {
         $resultInsertionUser = DatabaseOperation::execute(
                         'INSERT INTO ' . UserModel::TABLENAME
                         . ' (' . UserModel::FIELDNAME_NOM . ', ' . UserModel::FIELDNAME_PRENOM
-                        . ', ' . UserModel::FIELDNAME_DATE_CREATION_SALARIES . ', ' . UserModel::FIELDNAME_ID_CATSOPRO
+                        . ', ' . UserModel::FIELDNAME_DATE_CREATION_SALARIES
+                        . ', ' . UserModel::FIELDNAME_ID_CATSOPRO
+                        . ', ' . UserModel::FIELDNAME_LIEU_GEO
                         . ', ' . UserModel::FIELDNAME_LOGIN . ', ' . UserModel::FIELDNAME_PASSWORD
                         . ', ' . UserModel::FIELDNAME_MAIL
                         . ') VALUES (\'' . $paramUserNom . '\', \'' . $paramUserPrenom
-                        . '\', \'' . $paramDateCreationUser . '\', \'' . $paramUserCatsopro
+                        . '\', \'' . $paramDateCreationUser
+                        . '\', \'' . $paramUserCatsopro
+                        . '\', \'' . $paramUserLieuGeo
                         . '\', \'' . $paramUserLogin . '\',  PASSWORD(\'' . $paramUserPass
                         . '\'),\'' . $paramUserMail . '\')'
         );
@@ -59,7 +65,7 @@ if ($paramValider == 'valider') {
             $titre = ' L\'insertion du salarié ' . $paramUserNom . ' ' . $paramUserPrenom;
             $message = 'L\'insertion dans la table SALARIES n\'a pas reussie';
             $redirection = '';
-            afficher_message($titre, $message, $redirection);
+            Lib::showMessage($titre, $message, $redirection);
         }
         /*
          * Recherche de l'id du nouveau salarie
@@ -70,12 +76,18 @@ if ($paramValider == 'valider') {
                         . ' FROM ' . UserModel::TABLENAME
                         . ' WHERE ' . UserModel::FIELDNAME_LOGIN . '=\'' . $paramUserLogin . '\' ');
 
-        if (!$arrayIdUser)
+        if (!$arrayIdUser) {
             echo ('La requete de recherche de l\'ID salarie a echoue');
-        else {
+        } elseif (count($arrayIdUser) == "1") {
             foreach ($arrayIdUser as $rowsIdUser) {
                 $idUser = $rowsIdUser[UserModel::KEYNAME];
             }
+        } else {
+            $titre = ' L\'insertion du salarié ' . $paramUserNom . ' ' . $paramUserPrenom;
+            $message = 'L\'insertion dans la table SALARIES a reussie mais le login ' . $paramUserLogin . ' est utilisé'
+                    . ' Ainsi les droits d\'accès n\'ont pas été tenu compte';
+            $redirection = '';
+            Lib::showMessage($titre, $message, $redirection);
         }
 
         /*         * ******************************************
@@ -123,6 +135,7 @@ if ($paramValider == 'valider') {
     $arrayUserDetail = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
                     'SELECT ' . UserModel::FIELDNAME_ECRITURE
                     . ', ' . UserModel::FIELDNAME_ID_CATSOPRO
+                    . ', ' . UserModel::FIELDNAME_LOGIN
                     . ', ' . UserModel::FIELDNAME_ID_SERVICE
                     . ', ' . UserModel::FIELDNAME_LIEU_GEO
                     . ', ' . UserModel::FIELDNAME_MAIL
@@ -176,7 +189,7 @@ if ($paramValider == 'valider') {
         $titre = '  Recherche des niveaux de references dans la table CATSOPRO pour l\'identifiant ' . $paramUserCatsopro;
         $message = 'La requete de recherche des niveaux de reference a échoué';
         $redirection = '';
-        afficher_message($titre, $message, $redirection);
+        Lib::showMessage($titre, $message, $redirection);
     }
 
     /* Insertions dans la table MODES via la table de reference CATSOPRO */
@@ -209,12 +222,9 @@ if ($paramValider == 'valider') {
  * Quand un salarie est cree, envoi d'un mail pour lui donner son profil
  */
 $sujet = 'Inscription Intranet Agis';
-$corpsmail = 'Bonjour,\n '
-        . 'Votre profil vient d\'être créé dans l\'intranet AGIS.\n'
-        . 'Votre login est : ' . $paramUserLogin . '\n'
-        . '\nL\'administrateur Agis.\n';
+$corpsmail = UserInterfaceMessage::FR_MAIIL_INSCRIPTION;
 $typeMail = 'Inscription';
-envoismail($sujet, $corpsmail, $paramUserMail, 'postmaster@agis-sa.fr', $typeMail);
+envoismail($sujet, $corpsmail, $paramUserMail, $mail, $typeMail);
 ?>
 <html>
     <head>
@@ -278,7 +288,7 @@ envoismail($sujet, $corpsmail, $paramUserMail, 'postmaster@agis-sa.fr', $typeMai
                                                 <td class='loginFFCC66droit' width='33%'><b>Login :<b></td>
                                                             <td class='loginFFCC66' width='53%'>
                                                                 <?php
-                                                                echo ($paramUserLogin);
+                                                                echo $paramUserLogin;
                                                                 ?>
                                                             </td>
                                                             <td width='15%' class='loginFFCC66'>&nbsp;</td>
@@ -304,7 +314,7 @@ envoismail($sujet, $corpsmail, $paramUserMail, 'postmaster@agis-sa.fr', $typeMai
                                                                 <td class='loginFFCC66droit' width='33%'><b>Mail :</b></td>
                                                                 <td class='loginFFCC66' width='53%'>
                                                                     <?php
-                                                                    echo ($paramUserMail);
+                                                                    echo $paramUserMail;
                                                                     ?>
                                                                 </td>
                                                                 <td width='15%'>&nbsp; </td>
@@ -337,6 +347,22 @@ envoismail($sujet, $corpsmail, $paramUserMail, 'postmaster@agis-sa.fr', $typeMai
                                                                             $intitule_cat = stripslashes($intitule_cat);
                                                                             echo ($intitule_cat);
                                                                         }
+                                                                        /*
+                                                                         * Affichage de l'intitule de la CSP
+                                                                         */
+                                                                        $arrayLieuGeo = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
+                                                                                        "SELECT " . GeoModel::FIELDNAME_GEO
+                                                                                        . " FROM " . GeoModel::TABLENAME
+                                                                                        . " WHERE " . GeoModel::FIELDNAME_SITE_ACTIF . "=1"
+                                                                                        . " AND " . GeoModel::KEYNAME . "=" . $paramUserLieuGeo
+                                                                        );
+                                                                        if ($arrayLieuGeo) {
+                                                                            foreach ($arrayLieuGeo as $rowsLieuGeo) {
+                                                                                $lieu_geo = $rowsLieuGeo[GeoModel::FIELDNAME_GEO];
+                                                                            }
+                                                                            $lieu_geo = stripslashes($lieu_geo);
+                                                                            echo ($lieu_geo);
+                                                                        }
                                                                         ?>
                                                                     </p>
                                                                 </center>
@@ -363,59 +389,23 @@ envoismail($sujet, $corpsmail, $paramUserMail, 'postmaster@agis-sa.fr', $typeMai
                                                             echo '</tr>';
 
 
+                                                            /**
+                                                             * Drois d'accès au module Fta
+                                                             */
+                                                            IntranetDroitsAccesModel::manageAccesRightToFta($idUser);
+
                                                             //Droits d'accès du module
                                                             /*
-                                                             * Récupération des droits d'accès faisable dans l'Intranet
+                                                             * Récupération des droits d'accès de l'Intranet
                                                              */
 
-                                                            $arrayModule = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
-                                                                            'SELECT ' . IntranetModulesModel::TABLENAME . '.*'
-                                                                            . ', ' . IntranetActionsModel::TABLENAME . '.*'
-                                                                            . ' FROM ' . IntranetActionsModel::TABLENAME . ', ' . IntranetModulesModel::TABLENAME
-                                                                            . ' WHERE (' . IntranetActionsModel::TABLENAME . '.' . IntranetActionsModel::FIELDNAME_MODULE_INTRANET_ACTIONS
-                                                                            . '=' . IntranetModulesModel::TABLENAME . '.' . IntranetModulesModel::KEYNAME
-                                                                            . ' OR ' . IntranetActionsModel::TABLENAME . '.' . IntranetActionsModel::FIELDNAME_MODULE_INTRANET_ACTIONS . '=0 )'
-                                                            );
-                                                            foreach ($arrayModule as $rowsModule) {
+                                                            IntranetDroitsAccesModel::manageAccesRightToIntranet($idUser,FALSE);
+                                                            /**
+                                                             * Post-traitement
+                                                             * Vérification et correction des incohérences de droits d'accès.
+                                                             */
+                                                            Acl::checkHeritedRightsRemovedByUser($idUser);
 
-                                                                /*
-                                                                 * Déclaration du droits d'accès fourni par droits_acces.inc et récupération de son niveau d'accès
-                                                                 */
-                                                                if ($rowsModule[IntranetModulesModel::KEYNAME] <> IntranetModulesModel::ID_MODULES_FTA) {
-                                                                    $nom_niveau_intranet_droits_acces = 'module' . $rowsModule[IntranetModulesModel::KEYNAME] . '_action' . $rowsModule[IntranetActionsModel::KEYNAME];
-                                                                } else {
-                                                                    $nom_niveau_intranet_droits_acces = $rowsModule[IntranetActionsModel::FIELDNAME_NOM_INTRANET_ACTIONS] . '_' . $rowsModule[IntranetActionsModel::KEYNAME];
-                                                                }
-                                                                $niveau_intranet_droits_acces = Lib::getParameterFromRequest($nom_niveau_intranet_droits_acces);
-
-                                                                /*
-                                                                 * Enregistrement/Suppression du droit d'accès
-                                                                 */
-                                                                $id_intranet_modules = $rowsModule[IntranetModulesModel::KEYNAME];
-                                                                $id_intranet_actions = $rowsModule[IntranetActionsModel::KEYNAME];
-
-
-                                                                if ($niveau_intranet_droits_acces) {
-                                                                    /*
-                                                                     * Réécriture du droits d'accès
-                                                                     */
-                                                                    DatabaseOperation::execute(
-                                                                            'INSERT INTO ' . IntranetDroitsAccesModel::TABLENAME
-                                                                            . ' SET ' . IntranetDroitsAccesModel::FIELDNAME_ID_INTRANET_MODULES . '=' . $id_intranet_modules
-                                                                            . ', ' . IntranetDroitsAccesModel::FIELDNAME_ID_USER . '=' . $idUser
-                                                                            . ', ' . IntranetDroitsAccesModel::FIELDNAME_ID_INTRANET_ACTIONS . '=' . $id_intranet_actions
-                                                                            . ', ' . IntranetDroitsAccesModel::FIELDNAME_NIVEAU_INTRANET_DROITS_ACCES . '=' . $niveau_intranet_droits_acces
-                                                                    );
-                                                                }
-                                                                /**
-                                                                 * Post-traitement
-                                                                 * Vérification et correction des incohérences de droits d'accès.
-                                                                 */
-                                                                Acl::checkHeritedRightsRemovedByUser($paramIdUser);
-
-                                                                echo '</tr>';
-//    echo '</table>';
-                                                            }
                                                             echo '<br>';
                                                             ?>
                                                             </table>

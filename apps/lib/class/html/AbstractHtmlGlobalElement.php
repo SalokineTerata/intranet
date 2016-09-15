@@ -87,6 +87,30 @@ abstract class AbstractHtmlGlobalElement {
     private $isWarningUpdate;
 
     /**
+     * Doit-on informer qu'une règle de validation de la donnée n'est pas respecter ?
+     * @var boolean 
+     */
+    private $isWarningMessage;
+
+    /**
+     * Récupération du message 
+     * @var string 
+     */
+    private $warningMessage;
+
+    /**
+     * Le champ est-il verrouillé 
+     * @var string 
+     */
+    private $isFieldLock;
+
+    /**
+     * Lien du changement d'état d'un champ primaire
+     * @var string 
+     */
+    private $linkFieldLock;
+
+    /**
      * Information complémentaire affichée après l'objet HTML
      * @var String
      */
@@ -105,6 +129,24 @@ abstract class AbstractHtmlGlobalElement {
      * @var boolean
      */
     private $showLabel;
+
+    /**
+     * Doit-on affiche la description du champ ?
+     * @var boolean
+     */
+    private $showHelp;
+
+    /**
+     * La description du champ ?
+     * @var boolean
+     */
+    private $help;
+
+    /**
+     * La description du champ ?
+     * @var boolean
+     */
+    private $showImage;
 
     /**
      * Peut-on ajouter une donnée ?
@@ -151,10 +193,18 @@ abstract class AbstractHtmlGlobalElement {
     $paramId
     , $paramLabel
     , $paramIsWarningUpdate
+    , $paramIsWarningMessage = NULL
+    , $paramWarningMessage = NULL
+    , $paramIsFieldLock = NULL
+    , $paramLinkFieldLock = NULL
     ) {
 
         $this->setLabel($paramLabel);
         $this->setIsWarningUpdate($paramIsWarningUpdate);
+        $this->setIsWarningMessage($paramIsWarningMessage);
+        $this->setWarningMessage($paramWarningMessage);
+        $this->setIsFieldLock($paramIsFieldLock);
+        $this->setLinkFieldLock($paramLinkFieldLock);
         $this->getAttributesGlobal()->getId()->setValue($paramId);
     }
 
@@ -202,6 +252,16 @@ abstract class AbstractHtmlGlobalElement {
         $this->htmlRender = self::HTML_RENDER_TO_TABLE_LABEL;
     }
 
+    /**
+     * Quels sont les éléments du sous formulaire qui sont vérrouillés ?
+     *   - Si l'attribut $isEditable du sous-formulaire est FALSE,
+     *     Cet attribut n'apporte aucune modification car tous les champs du
+     *     sous-formulaire sont déjà vérouillés.
+     *   - Si l'attribut $isEditable du sous-formulaire est TRUE,
+     *     Cet attribut de type tableau contient la liste des champs qu'il faut
+     *     tout de même vérouiller.
+     * @return string
+     */
     function getContentLocked() {
         return $this->ContentLocked;
     }
@@ -217,7 +277,7 @@ abstract class AbstractHtmlGlobalElement {
     function setCheckTableForm($CheckTableForm) {
         $this->CheckTableForm = $CheckTableForm;
     }
-        
+
     /**
      * 
      * @return AttributesGlobal
@@ -298,6 +358,38 @@ abstract class AbstractHtmlGlobalElement {
         $this->isWarningUpdate = $paramIsWarningUpdate;
     }
 
+    function getIsWarningMessage() {
+        return $this->isWarningMessage;
+    }
+
+    function setIsWarningMessage($isWarningMessage) {
+        $this->isWarningMessage = $isWarningMessage;
+    }
+
+    function getWarningMessage() {
+        return $this->warningMessage;
+    }
+
+    function setWarningMessage($warningMessage) {
+        $this->warningMessage = $warningMessage;
+    }
+
+    function getIsFieldLock() {
+        return $this->isFieldLock;
+    }
+
+    function setIsFieldLock($isFieldLock) {
+        $this->isFieldLock = $isFieldLock;
+    }
+
+    function getLinkFieldLock() {
+        return $this->linkFieldLock;
+    }
+
+    function setLinkFieldLock($linkFieldLock) {
+        $this->linkFieldLock = $linkFieldLock;
+    }
+
     public function getAdditionnalTextInfo() {
         return $this->additionnalTextInfo;
     }
@@ -314,6 +406,30 @@ abstract class AbstractHtmlGlobalElement {
         $this->label = $paramLabel;
     }
 
+    function getShowHelp() {
+        return $this->showHelp;
+    }
+
+    function setShowHelp($showHelp) {
+        $this->showHelp = $showHelp;
+    }
+
+    function getHelp() {
+        return $this->help;
+    }
+
+    function setHelp($help) {
+        $this->help = $help;
+    }
+
+    function getShowImage() {
+        return $this->showImage;
+    }
+
+    function setShowImage($showImage) {
+        $this->showImage = $showImage;
+    }
+
     function getRightToAdd() {
         return $this->rightToAdd;
     }
@@ -326,18 +442,22 @@ abstract class AbstractHtmlGlobalElement {
 
         //Définition des variables locales
         $image_modif = '';
+        $warning_message = '';
         $color_modif = '';
         $html_result = '';
         $label = NULL;
         $idRow = $this->getAttributesGlobal()->getIdRowToHtml();
         $style = $this->getStyleCSS()->getStyleAttribute();
 //        $style = $this->getAttributesGlobal()->getStyle()->getValue();
-              
+
         /**
          * Doit-on afficher le label ?
          */
         if ($this->getShowLabel()) {
             $label = $this->getLabel();
+            if ($this->getShowHelp()) {
+                $label = $this->getHelp();
+            }
         }
 
         //Traitement du Warning Update
@@ -346,12 +466,30 @@ abstract class AbstractHtmlGlobalElement {
             $color_modif = Html::DEFAULT_HTML_WARNING_UPDATE_BGCOLOR;
         }
 
+        //Traitement du warning message
+        if ($this->getIsWarningMessage() === FALSE) {
+            $warning_message = $this->getWarningMessage();
+            $color_modif = Html::DEFAULT_HTML_WARNING_MESSAGE_BGCOLOR;
+        }
+
+        //Traitement du verrouillage du champs
+        if ($this->getIsFieldLock()) {
+            $linkFieldLock = $this->getLinkFieldLock();
+        }
+        //Traitement de la description d'un champ
+        if ($this->getShowImage()) {
+            $linkPieceJointe = $this->getShowImage();
+        }
+
         //Rendu HTML - début encapsulation
         switch ($this->getHtmlRender()) {
             case self::HTML_RENDER_TO_FORM:
                 $html_result .= '<tr ' . $idRow . ' ' . $style . ' class=contenu width=75%>';
-//                $html_result .= '<tr ' . $idRow . ' style=' . $style . ' class=contenu>';
-                $html_result .= '<td align=left style=\'' . $color_modif . '\' width=25%>' . $label . '</td>';
+                $html_result .= '<td align=left style=\'' . $color_modif . '\' width=25%>'
+                        . '<div>' . $label . '</div>'
+                        . $linkFieldLock
+                        . $linkPieceJointe
+                        . '</td>';
                 break;
 
             case self::HTML_RENDER_TO_TABLE:
@@ -386,11 +524,11 @@ abstract class AbstractHtmlGlobalElement {
         //Rendu HTML - fin encapsulation
         switch ($this->getHtmlRender()) {
             case self::HTML_RENDER_TO_FORM:
-                $html_result.= $image_modif . '</td></tr>';
+                $html_result.= $image_modif . $warning_message . '</td></tr>';
                 break;
 
             case self::HTML_RENDER_TO_TABLE:
-                $html_result.= $image_modif . '</td>';
+                $html_result.= $image_modif . $warning_message . '</td>';
                 break;
         }
 

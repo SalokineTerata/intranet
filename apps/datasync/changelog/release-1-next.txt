@@ -1,0 +1,36 @@
+================================================================================
+Modifications à apporter aux différentes versions du modules
+================================================================================
+
+[-1-]: Bug mineur
+[-2-]: Bug important
+[--3--]: Bug critique
+[V]: Réalisé
+[A]: Abandonné
+================================================================================
+Exemples:
+[V] 23/05/2003: saisie_vierge_origine.php
+      Déplacer les informations de cette page au niveau du composant.
+
+[ ] 28/07/2003: saisie_origine.php
+                Saisie de plusieurs origine sans cycle.
+                Rajouter dans la listedes origine:
+                         - Cf Origine MP
+                         - Cf Lieu dernière Transformation
+                         - Cf Origine Multiple
+                         - Cf Non défini
+                Bouton "Terminer Saisie"
+================================================================================
+
+[ ] 2005-05-30: Superposition de copie.
+    Mettre en place un système de vérrouillage façon ".pid"
+
+    1. vérification de la présence du fichier ".pid".
+    2. Si un pid est déjà existant, recenser dans le log et quitter
+    3. Sinon, création du fichier ".pid" et Démarrage de la recopie.
+    4. Une fois la recopie terminée, destruction du fichier ".pid".
+
+[ ] En cas de vérrou trouvé (type .ldb), mettre ce verrou en pièce jointe du message de notification.
+
+[ ] Faire en sorte que les sauvegarde soit en J-1
+

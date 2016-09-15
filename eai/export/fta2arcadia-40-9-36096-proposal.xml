@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Transaction id="9" version="1" type="proposal">
+	<Parameters>
+		<IdFirm>40</IdFirm><!-- Agis -->
+		<IdArcadia>36096</IdArcadia><!-- Code article dans Arcadia -->
+		<IdFta>14790</IdFta><!-- N° de la FTA -->
+	</Parameters>
+	<Tables>
+		<ARTICLE_REF>
+			<DataToImport>
+				<Recordset id="1" action="update">
+
+					<!-- Entête -->
+					<NO_ART key="TRUE">36096</NO_ART>
+					<LIB_CCIAL><![CDATA[PLT CITRON PDT SDL 6X300G]]></LIB_CCIAL><!-- DIN de la FTA -->
+					<LIB_PRODUCTION><![CDATA[PLT CITRON PDT SDL 6X300G]]></LIB_PRODUCTION><!-- DIN de la FTA -->
+
+				</Recordset>
+			</DataToImport>
+		</ARTICLE_REF>
+	</Tables>
+</Transaction>
+

@@ -1,0 +1,182 @@
+Démarrage : jeu nov 14 23:00:01 CET 2013
+Arrêt     : jeu nov 14 23:02:05 CET 2013
+
+
+
+Base MySQL sélectionnée: agis
+Nombre de serveur(s) Linux concerné(s): 4
+Nombre de dossier(s) à mettre à jour: 24
+
+sending incremental file list
+
+sent 5598 bytes  received 45 bytes  3762.00 bytes/sec
+total size is 9985067  speedup is 1769.46
+sending incremental file list
+
+sent 5753 bytes  received 34 bytes  3858.00 bytes/sec
+total size is 11615823  speedup is 2007.23
+sending incremental file list
+erp_data.mdb
+
+sent 7587403 bytes  received 62247 bytes  188880.25 bytes/sec
+total size is 78852096  speedup is 10.31
+sending incremental file list
+
+sent 7538 bytes  received 45 bytes  5055.33 bytes/sec
+total size is 9253358  speedup is 1220.28
+sending incremental file list
+
+sent 7683 bytes  received 20 bytes  5135.33 bytes/sec
+total size is 16751831  speedup is 2174.72
+sending incremental file list
+
+sent 4308 bytes  received 24 bytes  2888.00 bytes/sec
+total size is 6387982  speedup is 1474.60
+sending incremental file list
+deleting mercuriales/mdd/2013/2013 MERCURIALE PROVERA BELUX.xls
+mercuriales/mdd/2013/2013 MERCURIALE CARREFOUR ASIATIQUE.xls
+mercuriales/mdd/2013/2013 MERCURIALE EXPORT.xls
+mercuriales/mdd/2014/2014 MERCURIALE AUCHAN.xls
+mercuriales/mdd/2014/2014 MERCURIALE CARREFOUR ASIATIQUE.xls
+mercuriales/mdd/2014/2014 MERCURIALE EXPORT.xls
+
+sent 57848 bytes  received 3750 bytes  24639.20 bytes/sec
+total size is 42903154  speedup is 696.50
+sending incremental file list
+
+sent 5047 bytes  received 27 bytes  3382.67 bytes/sec
+total size is 39173092  speedup is 7720.36
+sending incremental file list
+operations_commerciales/DEMANDE ECHANTILLONS CL .xls
+operations_commerciales/chrono demande echantillons.xls
+operations_commerciales/GMS/2013/A-CENTRALES/GMS AUCHAN 2013-FUTUR MASTER.xls
+operations_commerciales/GMS/2013/D-REGIONS/GMS LECLERC 2013-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS AUCHAN 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS CARREFOUR 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS SIMPLY MARKET 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/CARREFOUR/2014 CARREFOUR NAA.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/SIMPLY MARKET/
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/SIMPLY MARKET/2014 SIMPLY MARKET OP NAA.xls
+operations_commerciales/GMS/2014/D-REGIONS/GMS LECLERC 2014-FUTUR MASTER.xls
+operations_commerciales/MDD/MODELES VB/DEM ECHANTILLONS/2013/Chrono 623 ALDI.XLS
+
+sent 387275 bytes  received 32074 bytes  119814.00 bytes/sec
+total size is 54478302  speedup is 129.91
+sending incremental file list
+
+sent 18506 bytes  received 80 bytes  12390.67 bytes/sec
+total size is 41728031  speedup is 2245.13
+sending incremental file list
+
+sent 7101 bytes  received 13 bytes  4742.67 bytes/sec
+total size is 31546368  speedup is 4434.41
+sending incremental file list
+erp_data.mdb
+
+sent 7587403 bytes  received 62247 bytes  188880.25 bytes/sec
+total size is 78852096  speedup is 10.31
+sending incremental file list
+
+sent 7538 bytes  received 45 bytes  5055.33 bytes/sec
+total size is 9253358  speedup is 1220.28
+sending incremental file list
+
+sent 4308 bytes  received 24 bytes  2888.00 bytes/sec
+total size is 6387982  speedup is 1474.60
+sending incremental file list
+
+sent 7683 bytes  received 20 bytes  5135.33 bytes/sec
+total size is 16751831  speedup is 2174.72
+sending incremental file list
+
+sent 85 bytes  received 13 bytes  65.33 bytes/sec
+total size is 104853504  speedup is 1069933.71
+sending incremental file list
+operations_commerciales/DEMANDE ECHANTILLONS CL .xls
+operations_commerciales/chrono demande echantillons.xls
+operations_commerciales/GMS/2013/A-CENTRALES/GMS AUCHAN 2013-FUTUR MASTER.xls
+operations_commerciales/GMS/2013/D-REGIONS/GMS LECLERC 2013-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS AUCHAN 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS CARREFOUR 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS SIMPLY MARKET 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/CARREFOUR/2014 CARREFOUR NAA.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/SIMPLY MARKET/
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/SIMPLY MARKET/2014 SIMPLY MARKET OP NAA.xls
+operations_commerciales/GMS/2014/D-REGIONS/GMS LECLERC 2014-FUTUR MASTER.xls
+operations_commerciales/MDD/MODELES VB/DEM ECHANTILLONS/2013/Chrono 623 ALDI.XLS
+
+sent 387275 bytes  received 32074 bytes  119814.00 bytes/sec
+total size is 54478302  speedup is 129.91
+sending incremental file list
+deleting mercuriales/mdd/2013/2013 MERCURIALE PROVERA BELUX.xls
+mercuriales/mdd/2013/2013 MERCURIALE CARREFOUR ASIATIQUE.xls
+mercuriales/mdd/2013/2013 MERCURIALE EXPORT.xls
+mercuriales/mdd/2014/2014 MERCURIALE AUCHAN.xls
+mercuriales/mdd/2014/2014 MERCURIALE CARREFOUR ASIATIQUE.xls
+mercuriales/mdd/2014/2014 MERCURIALE EXPORT.xls
+
+sent 57848 bytes  received 3750 bytes  41065.33 bytes/sec
+total size is 42903154  speedup is 696.50
+sending incremental file list
+
+sent 7101 bytes  received 13 bytes  4742.67 bytes/sec
+total size is 31546368  speedup is 4434.41
+sending incremental file list
+
+sent 5598 bytes  received 45 bytes  3762.00 bytes/sec
+total size is 9985067  speedup is 1769.46
+sending incremental file list
+
+sent 5677 bytes  received 23 bytes  3800.00 bytes/sec
+total size is 128675317  speedup is 22574.62
+sending incremental file list
+qualite/SECURITE/PLATE FORME/P\#351nibilit\#351/
+qualite/SECURITE/PLATE FORME/P\#351nibilit\#351/D\#351marche p\#351nibilit\#351.xls
+qualite/SECURITE/PLATE FORME/P\#351nibilit\#351/Fiche_terrain.doc
+qualite/SECURITE/PLATE FORME/P\#351nibilit\#351/Poids bac.xls
+qualite/SECURITE/PLATE FORME/P\#351nibilit\#351/Pr\#351sentation P\#351nibilit\#351 Secteur.doc
+qualite/SECURITE/PLATE FORME/P\#351nibilit\#351/Support P\#351nibilit\#351 gr diagnotic_presentation salari\#351s.ppt
+qualite/SECURITE/PLATE FORME/P\#351nibilit\#351/Support P\#351nibilit\#351 pr\#351sentation secteur .ppt
+qualite/SECURITE/PLATE FORME/P\#351nibilit\#351/TABLEAU_PENIBILITE_fabrication_crepiere_par_activit\#351.xls
+qualite/SECURITE/PLATE FORME/P\#351nibilit\#351/aout2013_RECAP_penibilit\#351_par_poste.xls
+qualite/SECURITE/PLATE FORME/P\#351nibilit\#351/p\#351nibilit\#351 Feuille terrain.xls
+
+sent 1355677 bytes  received 211 bytes  159516.24 bytes/sec
+total size is 52194646  speedup is 38.49
+sending incremental file list
+codesoft/Codesoft 7/Auchan  Atac/Auchan/Auchan le traiteur/En attente 2014/acras_20g_x_9_recto.bak
+codesoft/Codesoft 7/Auchan  Atac/Auchan/Auchan le traiteur/En attente 2014/acras_20g_x_9_recto.lab
+codesoft/Codesoft 7/Auchan  Atac/Auchan/Auchan le traiteur/En attente 2014/acras_20g_x_9_verso.bak
+codesoft/Codesoft 7/Auchan  Atac/Auchan/Auchan le traiteur/En attente 2014/acras_20g_x_9_verso.lab
+codesoft/Codesoft 7/Auchan  Atac/Auchan/Auchan le traiteur/En attente 2014/bcrev_20g_x_6_recto.bak
+codesoft/Codesoft 7/Auchan  Atac/Auchan/Auchan le traiteur/En attente 2014/bcrev_20g_x_6_recto.lab
+codesoft/Codesoft 7/Auchan  Atac/Auchan/Auchan le traiteur/En attente 2014/bcrev_20g_x_6_verso.bak
+codesoft/Codesoft 7/Auchan  Atac/Auchan/Auchan le traiteur/En attente 2014/bcrev_20g_x_6_verso.lab
+codesoft/Codesoft 7/Auchan  Atac/Auchan/Auchan le traiteur/En attente 2014/rav_boeuf_25g_x_6_recto.bak
+codesoft/Codesoft 7/Auchan  Atac/Auchan/Auchan le traiteur/En attente 2014/rav_boeuf_25g_x_6_recto.lab
+codesoft/Codesoft 7/Auchan  Atac/Auchan/Auchan le traiteur/En attente 2014/rav_boeuf_25g_x_6_verso.bak
+codesoft/Codesoft 7/Auchan  Atac/Auchan/Auchan le traiteur/En attente 2014/rav_boeuf_25g_x_6_verso.lab
+codesoft/Codesoft 7/Auchan  Atac/Auchan/Auchan le traiteur/En attente 2014/rav_crev_25g_x_6_recto.bak
+codesoft/Codesoft 7/Auchan  Atac/Auchan/Auchan le traiteur/En attente 2014/rav_crev_25g_x_6_recto.lab
+codesoft/Codesoft 7/Auchan  Atac/Auchan/Auchan le traiteur/En attente 2014/rav_crev_25g_x_6_verso.bak
+codesoft/Codesoft 7/Auchan  Atac/Auchan/Auchan le traiteur/En attente 2014/rav_crev_25g_x_6_verso.lab
+codesoft/Codesoft 7/Auchan  Atac/Auchan/Auchan le traiteur/En attente 2014/rav_porc_25g_x_6_recto.bak
+codesoft/Codesoft 7/Auchan  Atac/Auchan/Auchan le traiteur/En attente 2014/rav_porc_25g_x_6_recto.lab
+codesoft/Codesoft 7/Auchan  Atac/Auchan/Auchan le traiteur/En attente 2014/rav_porc_25g_x_6_verso.bak
+codesoft/Codesoft 7/Auchan  Atac/Auchan/Auchan le traiteur/En attente 2014/rav_porc_25g_x_6_verso.lab
+codesoft/Codesoft 7/Auchan  Atac/Auchan/Auchan le traiteur/En attente 2014/rav_poulet_25g_x_6_recto.bak
+codesoft/Codesoft 7/Auchan  Atac/Auchan/Auchan le traiteur/En attente 2014/rav_poulet_25g_x_6_recto.lab
+codesoft/Codesoft 7/Auchan  Atac/Auchan/Auchan le traiteur/En attente 2014/rav_poulet_25g_x_6_verso.bak
+codesoft/Codesoft 7/Auchan  Atac/Auchan/Auchan le traiteur/En attente 2014/rav_poulet_25g_x_6_verso.lab
+codesoft/Codesoft 7/Auchan  Atac/Auchan/Auchan le traiteur/En attente 2014/sam_40g_x4_recto.bak
+codesoft/Codesoft 7/Auchan  Atac/Auchan/Auchan le traiteur/En attente 2014/sam_40g_x4_recto.lab
+codesoft/Codesoft 7/Auchan  Atac/Auchan/Auchan le traiteur/En attente 2014/sam_40g_x4_verso.bak
+codesoft/Codesoft 7/Auchan  Atac/Auchan/Auchan le traiteur/En attente 2014/sam_40g_x4_verso.lab
+codesoft/Codesoft 7/Codes Produits/79105_verso.bak
+codesoft/Codesoft 7/Codes Produits/79105_verso.lab
+codesoft/Codesoft 7/Codes Produits/79106_verso.bak
+codesoft/Codesoft 7/Codes Produits/79106_verso.lab
+
+sent 205320 bytes  received 17877 bytes  89278.80 bytes/sec
+total size is 277663827  speedup is 1244.03
+sending incremental file list

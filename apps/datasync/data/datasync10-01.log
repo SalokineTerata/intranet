@@ -1,0 +1,151 @@
+Démarrage : mar oct  1 23:00:02 CEST 2013
+Arrêt     : mar oct  1 23:00:44 CEST 2013
+
+
+
+Base MySQL sélectionnée: agis
+Nombre de serveur(s) Linux concerné(s): 4
+Nombre de dossier(s) à mettre à jour: 24
+
+sending incremental file list
+
+sent 7598 bytes  received 20 bytes  15236.00 bytes/sec
+total size is 16749755  speedup is 2198.71
+sending incremental file list
+
+sent 5440 bytes  received 44 bytes  3656.00 bytes/sec
+total size is 9508728  speedup is 1733.90
+sending incremental file list
+codesoft/Codesoft 7/Carrefour/75376_verso.bak
+codesoft/Codesoft 7/Carrefour/75376_verso.lab
+
+sent 59002 bytes  received 1240 bytes  24096.80 bytes/sec
+total size is 273619539  speedup is 4542.01
+sending incremental file list
+
+sent 5686 bytes  received 34 bytes  2288.00 bytes/sec
+total size is 11410188  speedup is 1994.79
+sending incremental file list
+
+sent 63 bytes  received 12 bytes  50.00 bytes/sec
+total size is 78852096  speedup is 1051361.28
+sending incremental file list
+
+sent 7538 bytes  received 45 bytes  5055.33 bytes/sec
+total size is 9253358  speedup is 1220.28
+sending incremental file list
+batch/tid043003.vnc
+batch/tid043007.vnc
+
+sent 8738 bytes  received 58 bytes  5864.00 bytes/sec
+total size is 16749755  speedup is 1904.25
+sending incremental file list
+
+sent 4308 bytes  received 24 bytes  2888.00 bytes/sec
+total size is 6387982  speedup is 1474.60
+sending incremental file list
+mercuriales/FZC/FZC 2013/ARGEL 2013.xls
+mercuriales/FZC/FZC 2013/TOUPARGEL 2013.xls
+mercuriales/HD/2013/2013 MERCURIALE LE MUTANT.xls
+mercuriales/gms/2013/CENTRALES 2013/CASINO 2013.xls
+mercuriales/gms/2013/CENTRALES 2013/INTERMARCHE 2013.xls
+mercuriales/gms/2013/CONTROLE TARIF 2013/11-NOVEMBRE/2013 CARREFOUR NOUVEAUX PRODUITS.pdf
+mercuriales/gms/2013/CONTROLE TARIF 2013/11-NOVEMBRE/2013 CASINO CADENCIER FESTIFS.pdf
+mercuriales/gms/2013/CONTROLE TARIF 2013/11-NOVEMBRE/2013 INTERMARCHE CREPES ET GALETTES.pdf
+mercuriales/mdd/2013/2013 MERCURIALE CARREFOUR ASIATIQUE.xls
+mercuriales/mdd/2013/2013 MERCURIALE PROVERA.xls
+
+sent 96327 bytes  received 13745 bytes  44028.80 bytes/sec
+total size is 32912293  speedup is 299.01
+sending incremental file list
+
+sent 5047 bytes  received 27 bytes  2029.60 bytes/sec
+total size is 39173092  speedup is 7720.36
+sending incremental file list
+deleting operations_commerciales/sync.ffs_db
+deleting operations_commerciales/SyncToy_5d871e77-4feb-4984-81a2-dd668e771e50.dat
+deleting operations_commerciales/127D6760
+operations_commerciales/DEMANDE ECHANTILLONS CL .xls
+operations_commerciales/chrono demande echantillons.xls
+operations_commerciales/GMS/2013/A-CENTRALES/GMS AUCHAN 2013-FUTUR MASTER.xls
+operations_commerciales/GMS/2013/D-REGIONS/GMS LECLERC 2013-FUTUR MASTER.xls
+operations_commerciales/GMS/2013/D-REGIONS/GMS SU REGION  2013-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS AUCHAN 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS SIMPLY MARKET 2014-FUTUR MASTER.xls
+
+sent 270079 bytes  received 24227 bytes  65401.33 bytes/sec
+total size is 51826325  speedup is 176.10
+sending incremental file list
+
+sent 18506 bytes  received 80 bytes  7434.40 bytes/sec
+total size is 41728031  speedup is 2245.13
+sending incremental file list
+
+sent 7556 bytes  received 13 bytes  3027.60 bytes/sec
+total size is 34205315  speedup is 4519.13
+sending incremental file list
+
+sent 63 bytes  received 12 bytes  50.00 bytes/sec
+total size is 78852096  speedup is 1051361.28
+sending incremental file list
+
+sent 7538 bytes  received 45 bytes  5055.33 bytes/sec
+total size is 9253358  speedup is 1220.28
+sending incremental file list
+
+sent 4308 bytes  received 24 bytes  2888.00 bytes/sec
+total size is 6387982  speedup is 1474.60
+sending incremental file list
+batch/tid043003.vnc
+batch/tid043007.vnc
+
+sent 8738 bytes  received 58 bytes  5864.00 bytes/sec
+total size is 16749755  speedup is 1904.25
+sending incremental file list
+
+sent 85 bytes  received 13 bytes  65.33 bytes/sec
+total size is 104853504  speedup is 1069933.71
+sending incremental file list
+deleting operations_commerciales/sync.ffs_db
+deleting operations_commerciales/SyncToy_5d871e77-4feb-4984-81a2-dd668e771e50.dat
+deleting operations_commerciales/127D6760
+operations_commerciales/DEMANDE ECHANTILLONS CL .xls
+operations_commerciales/chrono demande echantillons.xls
+operations_commerciales/GMS/2013/A-CENTRALES/GMS AUCHAN 2013-FUTUR MASTER.xls
+operations_commerciales/GMS/2013/D-REGIONS/GMS LECLERC 2013-FUTUR MASTER.xls
+operations_commerciales/GMS/2013/D-REGIONS/GMS SU REGION  2013-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS AUCHAN 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS SIMPLY MARKET 2014-FUTUR MASTER.xls
+
+sent 270079 bytes  received 24227 bytes  84087.43 bytes/sec
+total size is 51826325  speedup is 176.10
+sending incremental file list
+mercuriales/FZC/FZC 2013/ARGEL 2013.xls
+mercuriales/FZC/FZC 2013/TOUPARGEL 2013.xls
+mercuriales/HD/2013/2013 MERCURIALE LE MUTANT.xls
+mercuriales/gms/2013/CENTRALES 2013/CASINO 2013.xls
+mercuriales/gms/2013/CENTRALES 2013/INTERMARCHE 2013.xls
+mercuriales/gms/2013/CONTROLE TARIF 2013/11-NOVEMBRE/2013 CARREFOUR NOUVEAUX PRODUITS.pdf
+mercuriales/gms/2013/CONTROLE TARIF 2013/11-NOVEMBRE/2013 CASINO CADENCIER FESTIFS.pdf
+mercuriales/gms/2013/CONTROLE TARIF 2013/11-NOVEMBRE/2013 INTERMARCHE CREPES ET GALETTES.pdf
+mercuriales/mdd/2013/2013 MERCURIALE CARREFOUR ASIATIQUE.xls
+mercuriales/mdd/2013/2013 MERCURIALE PROVERA.xls
+
+sent 96327 bytes  received 13745 bytes  44028.80 bytes/sec
+total size is 32912293  speedup is 299.01
+sending incremental file list
+
+sent 5440 bytes  received 44 bytes  3656.00 bytes/sec
+total size is 9508728  speedup is 1733.90
+sending incremental file list
+
+sent 5618 bytes  received 23 bytes  3760.67 bytes/sec
+total size is 128643573  speedup is 22805.10
+sending incremental file list
+
+sent 4707 bytes  received 36 bytes  3162.00 bytes/sec
+total size is 46318934  speedup is 9765.75
+sending incremental file list
+
+sent 18506 bytes  received 80 bytes  12390.67 bytes/sec
+total size is 41728031  speedup is 2245.13

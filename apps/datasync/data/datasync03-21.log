@@ -1,0 +1,186 @@
+Démarrage : ven mar 21 23:00:01 CET 2014
+Arrêt     : ven mar 21 23:02:41 CET 2014
+
+
+
+Base MySQL sélectionnée: agis
+Nombre de serveur(s) Linux concerné(s): 4
+Nombre de dossier(s) à mettre à jour: 27
+
+sending incremental file list
+gestion_crise/chemin acc\#351s base LOTUS/
+gestion_crise/chemin acc\#351s base LOTUS/Chemin d'acc\#351s base doc gestion de crise.doc
+deleting gestion_crise/mise \#340 jour 2014/INTERLOCUTEURS CRISE  coupe et FE 2014.xls
+deleting gestion_crise/mise \#340 jour 2014/Contacts crises 09032014 FZC.xls
+deleting gestion_crise/mise \#340 jour 2014/CONTACTS CLIENT GESTION DE CRISE 080313 MDD HD.xls
+gestion_crise/mise \#340 jour 2014/CONTACTS CLIENT GESTION DE CRISE 190314 MDD HD.xls
+gestion_crise/mise \#340 jour 2014/INTERLOCUTEURS CRISE coupe et FE  2014.xls
+gestion_crise/mise \#340 jour 2014/CASINO/3. QUAL - Retrait rappel - Courrier fournisseurs interlocuteurs crise EMC 122011.doc
+gestion_crise/mise \#340 jour 2014/ITM/Nouvel intrelocuteurr ITM.pdf
+gestion_crise/mise \#340 jour 2014/archive contact/
+gestion_crise/mise \#340 jour 2014/archive contact/CONTACTS CLIENT GESTION DE CRISE 080313 MDD HD.xls
+gestion_crise/mise \#340 jour 2014/archive contact/Contacts crises 09032014 FZC.xls
+gestion_crise/mise \#340 jour 2014/archive contact/INTERLOCUTEURS CRISE  coupe et FE 2014.xls
+
+sent 204820 bytes  received 2529 bytes  82939.60 bytes/sec
+total size is 12693370  speedup is 61.22
+sending incremental file list
+
+sent 6067 bytes  received 37 bytes  2441.60 bytes/sec
+total size is 12258686  speedup is 2008.30
+sending incremental file list
+erp_data.mdb
+
+sent 10907344 bytes  received 64291 bytes  187549.32 bytes/sec
+total size is 84160512  speedup is 7.67
+sending incremental file list
+
+sent 7538 bytes  received 45 bytes  5055.33 bytes/sec
+total size is 9253358  speedup is 1220.28
+sending incremental file list
+
+sent 7695 bytes  received 20 bytes  5143.33 bytes/sec
+total size is 16751789  speedup is 2171.33
+sending incremental file list
+
+sent 4308 bytes  received 24 bytes  2888.00 bytes/sec
+total size is 6387982  speedup is 1474.60
+sending incremental file list
+mercuriales/HD/2014/2014 MERCURIALE DIA.xls
+mercuriales/gms/2014/CENTRALES 2014/AUCHAN 2014.xls
+mercuriales/gms/2014/CENTRALES 2014/AUCHAN.FR 2014.xls
+mercuriales/gms/2014/REGIONS  2014/GALEC REGION MERCU AVRIL 2014.xls
+mercuriales/gms/2014/REGIONS  2014/SCHIEVER MERCU 2014.xls
+mercuriales/mdd/2013/2013 MERCURIALE GROUPE AUCHAN.xls
+mercuriales/mdd/2014/2014 MERCURIALE AUCHAN.xls
+mercuriales/mdd/2014/2014 MERCURIALE CARREFOUR PLATS CUISINES.xls
+
+sent 162417 bytes  received 27973 bytes  42308.89 bytes/sec
+total size is 29711532  speedup is 156.06
+sending incremental file list
+
+sent 5047 bytes  received 27 bytes  3382.67 bytes/sec
+total size is 39173092  speedup is 7720.36
+sending incremental file list
+operations_commerciales/chrono demande echantillons.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS CARREFOUR 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS CARREFOUR MARKET 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS CASINO 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS INTERMARCHE 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/D-REGIONS/GMS INTERMARCHE REGION 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/D-REGIONS/GMS SU REGION  2014-FUTUR MASTER.xls
+operations_commerciales/MDD/MODELES VB/DEM ECHANTILLONS/2014/Chrono 168 Monoprix 210314.XLS
+operations_commerciales/MDD/OP MDD 2012/FUTURMASTER/MDD CRF 2012 FUTUR MASTER 2012.xls
+operations_commerciales/MDD/OP MDD 2012/FUTURMASTER/MDD CRF MKT 2012 FUTUR MASTER.xls
+operations_commerciales/MDD/OP MDD 2013/MDD CRF 2013 FUTUR MASTER.xls
+operations_commerciales/MDD/OP MDD 2013/MDD CRF MKT 2013 FUTUR MASTER.xls
+
+sent 473501 bytes  received 28872 bytes  111638.44 bytes/sec
+total size is 48707074  speedup is 96.95
+sending incremental file list
+
+sent 19988 bytes  received 78 bytes  13377.33 bytes/sec
+total size is 98797494  speedup is 4923.63
+sending incremental file list
+
+sent 3431 bytes  received 79 bytes  2340.00 bytes/sec
+total size is 16655550  speedup is 4745.17
+sending incremental file list
+
+sent 9125 bytes  received 13 bytes  3655.20 bytes/sec
+total size is 43767808  speedup is 4789.65
+sending incremental file list
+
+sent 5781 bytes  received 30 bytes  3874.00 bytes/sec
+total size is 93132165  speedup is 16026.87
+sending incremental file list
+erp_data.mdb
+
+sent 10907344 bytes  received 64291 bytes  194188.23 bytes/sec
+total size is 84160512  speedup is 7.67
+sending incremental file list
+
+sent 7538 bytes  received 45 bytes  5055.33 bytes/sec
+total size is 9253358  speedup is 1220.28
+sending incremental file list
+
+sent 4308 bytes  received 24 bytes  2888.00 bytes/sec
+total size is 6387982  speedup is 1474.60
+sending incremental file list
+
+sent 7695 bytes  received 20 bytes  5143.33 bytes/sec
+total size is 16751789  speedup is 2171.33
+sending incremental file list
+
+sent 85 bytes  received 13 bytes  65.33 bytes/sec
+total size is 104853504  speedup is 1069933.71
+sending incremental file list
+operations_commerciales/chrono demande echantillons.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS CARREFOUR 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS CARREFOUR MARKET 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS CASINO 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS INTERMARCHE 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/D-REGIONS/GMS INTERMARCHE REGION 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/D-REGIONS/GMS SU REGION  2014-FUTUR MASTER.xls
+operations_commerciales/MDD/MODELES VB/DEM ECHANTILLONS/2014/Chrono 168 Monoprix 210314.XLS
+operations_commerciales/MDD/OP MDD 2012/FUTURMASTER/MDD CRF 2012 FUTUR MASTER 2012.xls
+operations_commerciales/MDD/OP MDD 2012/FUTURMASTER/MDD CRF MKT 2012 FUTUR MASTER.xls
+operations_commerciales/MDD/OP MDD 2013/MDD CRF 2013 FUTUR MASTER.xls
+operations_commerciales/MDD/OP MDD 2013/MDD CRF MKT 2013 FUTUR MASTER.xls
+
+sent 473501 bytes  received 28872 bytes  143535.14 bytes/sec
+total size is 48707074  speedup is 96.95
+sending incremental file list
+mercuriales/HD/2014/2014 MERCURIALE DIA.xls
+mercuriales/gms/2014/CENTRALES 2014/AUCHAN 2014.xls
+mercuriales/gms/2014/CENTRALES 2014/AUCHAN.FR 2014.xls
+mercuriales/gms/2014/REGIONS  2014/GALEC REGION MERCU AVRIL 2014.xls
+mercuriales/gms/2014/REGIONS  2014/SCHIEVER MERCU 2014.xls
+mercuriales/mdd/2013/2013 MERCURIALE GROUPE AUCHAN.xls
+mercuriales/mdd/2014/2014 MERCURIALE AUCHAN.xls
+mercuriales/mdd/2014/2014 MERCURIALE CARREFOUR PLATS CUISINES.xls
+
+sent 162417 bytes  received 27973 bytes  54397.14 bytes/sec
+total size is 29711532  speedup is 156.06
+sending incremental file list
+
+sent 9125 bytes  received 13 bytes  6092.00 bytes/sec
+total size is 43767808  speedup is 4789.65
+sending incremental file list
+gestion_crise/chemin acc\#351s base LOTUS/
+gestion_crise/chemin acc\#351s base LOTUS/Chemin d'acc\#351s base doc gestion de crise.doc
+deleting gestion_crise/mise \#340 jour 2014/INTERLOCUTEURS CRISE  coupe et FE 2014.xls
+deleting gestion_crise/mise \#340 jour 2014/Contacts crises 09032014 FZC.xls
+deleting gestion_crise/mise \#340 jour 2014/CONTACTS CLIENT GESTION DE CRISE 080313 MDD HD.xls
+gestion_crise/mise \#340 jour 2014/CONTACTS CLIENT GESTION DE CRISE 190314 MDD HD.xls
+gestion_crise/mise \#340 jour 2014/INTERLOCUTEURS CRISE coupe et FE  2014.xls
+gestion_crise/mise \#340 jour 2014/CASINO/3. QUAL - Retrait rappel - Courrier fournisseurs interlocuteurs crise EMC 122011.doc
+gestion_crise/mise \#340 jour 2014/ITM/Nouvel intrelocuteurr ITM.pdf
+gestion_crise/mise \#340 jour 2014/archive contact/
+gestion_crise/mise \#340 jour 2014/archive contact/CONTACTS CLIENT GESTION DE CRISE 080313 MDD HD.xls
+gestion_crise/mise \#340 jour 2014/archive contact/Contacts crises 09032014 FZC.xls
+gestion_crise/mise \#340 jour 2014/archive contact/INTERLOCUTEURS CRISE  coupe et FE 2014.xls
+
+sent 204820 bytes  received 2529 bytes  82939.60 bytes/sec
+total size is 12693370  speedup is 61.22
+sending incremental file list
+organisation/Listes t\#351l\#351phoniques AGIS + LDC/BRIEC mars 2014.doc
+
+sent 10201 bytes  received 42 bytes  6828.67 bytes/sec
+total size is 129182681  speedup is 12611.80
+sending incremental file list
+
+sent 5610 bytes  received 39 bytes  3766.00 bytes/sec
+total size is 59049369  speedup is 10453.07
+sending incremental file list
+
+sent 50350 bytes  received 94 bytes  33629.33 bytes/sec
+total size is 291459155  speedup is 5777.88
+sending incremental file list
+
+sent 19988 bytes  received 78 bytes  13377.33 bytes/sec
+total size is 98797494  speedup is 4923.63
+sending incremental file list
+
+sent 3431 bytes  received 79 bytes  2340.00 bytes/sec
+total size is 16655550  speedup is 4745.17

@@ -1,0 +1,129 @@
+Démarrage : ven jan 24 23:00:01 CET 2014
+Arrêt     : ven jan 24 23:01:57 CET 2014
+
+
+
+Base MySQL sélectionnée: agis
+Nombre de serveur(s) Linux concerné(s): 4
+Nombre de dossier(s) à mettre à jour: 24
+
+sending incremental file list
+
+sent 5691 bytes  received 45 bytes  3824.00 bytes/sec
+total size is 10159163  speedup is 1771.12
+sending incremental file list
+suivi_investissement/2013-2014/R\#351alis\#351 bud invest r\#351vis\#351 2013-2014/Bud invest AVI r\#351vis\#351 2013-2014.xls
+suivi_investissement/2013-2014/R\#351alis\#351 bud invest r\#351vis\#351 2013-2014/Bud invest HER r\#351vis\#351 2013-2014.xls
+suivi_investissement/2013-2014/R\#351alis\#351 bud invest r\#351vis\#351 2013-2014/Bud invest TAR r\#351vis\#351 2013-2014.xls
+suivi_investissement/2014-2015/R\#351alis\#351 bud invest 2014-2015/Bud invest AVI 2014 2015.xls
+
+sent 15162 bytes  received 2261 bytes  11615.33 bytes/sec
+total size is 12047230  speedup is 691.46
+sending incremental file list
+erp_data.mdb
+
+sent 7643970 bytes  received 64186 bytes  185738.70 bytes/sec
+total size is 83869696  speedup is 10.88
+sending incremental file list
+
+sent 7538 bytes  received 45 bytes  5055.33 bytes/sec
+total size is 9253358  speedup is 1220.28
+sending incremental file list
+
+sent 7695 bytes  received 20 bytes  3086.00 bytes/sec
+total size is 16751789  speedup is 2171.33
+sending incremental file list
+
+sent 4308 bytes  received 24 bytes  2888.00 bytes/sec
+total size is 6387982  speedup is 1474.60
+sending incremental file list
+mercuriales/sync.ffs_db
+mercuriales/HD/2013/2013 MERCURIALE DIA.xls
+mercuriales/HD/2014/2014 MERCURIALE LEADER PRICE.xls
+mercuriales/gms/2014/CENTRALES 2014/AUCHAN 2014.xls
+mercuriales/mdd/2014/2014 MERCURIALE CASINO.xls
+
+sent 25483 bytes  received 11021 bytes  14601.60 bytes/sec
+total size is 25767275  speedup is 705.88
+sending incremental file list
+
+sent 5047 bytes  received 27 bytes  3382.67 bytes/sec
+total size is 39173092  speedup is 7720.36
+sending incremental file list
+operations_commerciales/DEMANDE ECHANTILLONS CL .xls
+operations_commerciales/chrono demande echantillons.xls
+operations_commerciales/sync.ffs_db
+operations_commerciales/MDD/MODELES CJ/AUCHAN ATAC SCHIEVER/CONF OP/2014/CONFIRMATION OPERATION SCHIEVER OP 10 MARS 2.xls
+operations_commerciales/MDD/OP MDD 2014/MDD GROUPE AUCHAN 2014.xls
+
+sent 236562 bytes  received 7070 bytes  69609.14 bytes/sec
+total size is 60127238  speedup is 246.80
+sending incremental file list
+rh_multi_sites/PV CCE/PV CCE 86 - sign\#351.pdf
+
+sent 90906 bytes  received 99 bytes  36402.00 bytes/sec
+total size is 98390370  speedup is 1081.15
+sending incremental file list
+
+sent 7705 bytes  received 13 bytes  5145.33 bytes/sec
+total size is 33815552  speedup is 4381.39
+sending incremental file list
+erp_data.mdb
+
+sent 7643970 bytes  received 64186 bytes  190324.84 bytes/sec
+total size is 83869696  speedup is 10.88
+sending incremental file list
+
+sent 7538 bytes  received 45 bytes  5055.33 bytes/sec
+total size is 9253358  speedup is 1220.28
+sending incremental file list
+
+sent 4308 bytes  received 24 bytes  2888.00 bytes/sec
+total size is 6387982  speedup is 1474.60
+sending incremental file list
+
+sent 7695 bytes  received 20 bytes  5143.33 bytes/sec
+total size is 16751789  speedup is 2171.33
+sending incremental file list
+
+sent 85 bytes  received 13 bytes  196.00 bytes/sec
+total size is 104853504  speedup is 1069933.71
+sending incremental file list
+operations_commerciales/DEMANDE ECHANTILLONS CL .xls
+operations_commerciales/chrono demande echantillons.xls
+operations_commerciales/sync.ffs_db
+operations_commerciales/MDD/MODELES CJ/AUCHAN ATAC SCHIEVER/CONF OP/2014/CONFIRMATION OPERATION SCHIEVER OP 10 MARS 2.xls
+operations_commerciales/MDD/OP MDD 2014/MDD GROUPE AUCHAN 2014.xls
+
+sent 236562 bytes  received 7070 bytes  97452.80 bytes/sec
+total size is 60127238  speedup is 246.80
+sending incremental file list
+mercuriales/sync.ffs_db
+mercuriales/HD/2013/2013 MERCURIALE DIA.xls
+mercuriales/HD/2014/2014 MERCURIALE LEADER PRICE.xls
+mercuriales/gms/2014/CENTRALES 2014/AUCHAN 2014.xls
+mercuriales/mdd/2014/2014 MERCURIALE CASINO.xls
+
+sent 25483 bytes  received 11021 bytes  14601.60 bytes/sec
+total size is 25767275  speedup is 705.88
+sending incremental file list
+
+sent 7705 bytes  received 13 bytes  5145.33 bytes/sec
+total size is 33815552  speedup is 4381.39
+sending incremental file list
+
+sent 5691 bytes  received 45 bytes  11472.00 bytes/sec
+total size is 10159163  speedup is 1771.12
+sending incremental file list
+
+sent 5677 bytes  received 23 bytes  3800.00 bytes/sec
+total size is 128675317  speedup is 22574.62
+sending incremental file list
+
+sent 5353 bytes  received 38 bytes  3594.00 bytes/sec
+total size is 56169881  speedup is 10419.20
+sending incremental file list
+
+sent 49946 bytes  received 94 bytes  33360.00 bytes/sec
+total size is 289940563  speedup is 5794.18
+sending incremental file list

@@ -1,0 +1,150 @@
+Démarrage : mer mai 28 23:00:01 CEST 2014
+Arrêt     : mer mai 28 23:02:24 CEST 2014
+
+
+
+Base MySQL sélectionnée: agis
+Nombre de serveur(s) Linux concerné(s): 4
+Nombre de dossier(s) à mettre à jour: 29
+
+sending incremental file list
+
+sent 7070 bytes  received 49 bytes  2847.60 bytes/sec
+total size is 12774593  speedup is 1794.44
+sending incremental file list
+
+sent 6279 bytes  received 38 bytes  2526.80 bytes/sec
+total size is 12442583  speedup is 1969.70
+sending incremental file list
+erp_data.mdb
+
+sent 8363656 bytes  received 65747 bytes  177461.12 bytes/sec
+total size is 88092672  speedup is 10.45
+sending incremental file list
+
+sent 7538 bytes  received 45 bytes  5055.33 bytes/sec
+total size is 9253358  speedup is 1220.28
+sending incremental file list
+
+sent 7756 bytes  received 20 bytes  3110.40 bytes/sec
+total size is 16755943  speedup is 2154.83
+sending incremental file list
+
+sent 4308 bytes  received 24 bytes  2888.00 bytes/sec
+total size is 6387982  speedup is 1474.60
+sending incremental file list
+mercuriales/sync.ffs_db
+mercuriales/FZC/FZC 2014/ARGEL 2014.xls
+
+sent 16467 bytes  received 829 bytes  4941.71 bytes/sec
+total size is 32513063  speedup is 1879.80
+sending incremental file list
+
+sent 5047 bytes  received 27 bytes  3382.67 bytes/sec
+total size is 39173092  speedup is 7720.36
+sending incremental file list
+operations_commerciales/FZC/CONFIRMATIONS/2014/TOUPARGEL/TOUPARGEL_CYCLE 9_2014.xls
+operations_commerciales/FZC/OP FZC 2014/FZC TOUPARGEL 2014.xls
+
+sent 47004 bytes  received 448 bytes  7300.31 bytes/sec
+total size is 51271067  speedup is 1080.48
+sending incremental file list
+
+sent 20296 bytes  received 83 bytes  8151.60 bytes/sec
+total size is 99065320  speedup is 4861.15
+sending incremental file list
+
+sent 4380 bytes  received 82 bytes  1784.80 bytes/sec
+total size is 35609223  speedup is 7980.55
+sending incremental file list
+modeles/compo_pc_saveur_minute_verso_180_surgele.bak
+modeles/compo_pc_saveur_minute_verso_180_surgele.lab
+
+sent 41458 bytes  received 1395 bytes  17141.20 bytes/sec
+total size is 48321024  speedup is 1127.60
+sending incremental file list
+
+sent 5781 bytes  received 30 bytes  3874.00 bytes/sec
+total size is 93132165  speedup is 16026.87
+sending incremental file list
+erp_data.mdb
+
+sent 8363656 bytes  received 65747 bytes  189424.79 bytes/sec
+total size is 88092672  speedup is 10.45
+sending incremental file list
+
+sent 7538 bytes  received 45 bytes  5055.33 bytes/sec
+total size is 9253358  speedup is 1220.28
+sending incremental file list
+
+sent 4308 bytes  received 24 bytes  2888.00 bytes/sec
+total size is 6387982  speedup is 1474.60
+sending incremental file list
+
+sent 7756 bytes  received 20 bytes  5184.00 bytes/sec
+total size is 16755943  speedup is 2154.83
+sending incremental file list
+
+sent 85 bytes  received 13 bytes  65.33 bytes/sec
+total size is 104853504  speedup is 1069933.71
+sending incremental file list
+operations_commerciales/FZC/CONFIRMATIONS/2014/TOUPARGEL/TOUPARGEL_CYCLE 9_2014.xls
+operations_commerciales/FZC/OP FZC 2014/FZC TOUPARGEL 2014.xls
+
+sent 47004 bytes  received 448 bytes  18980.80 bytes/sec
+total size is 51271067  speedup is 1080.48
+sending incremental file list
+mercuriales/sync.ffs_db
+mercuriales/FZC/FZC 2014/ARGEL 2014.xls
+
+sent 16467 bytes  received 829 bytes  11530.67 bytes/sec
+total size is 32513063  speedup is 1879.80
+sending incremental file list
+modeles/compo_pc_saveur_minute_verso_180_surgele.bak
+modeles/compo_pc_saveur_minute_verso_180_surgele.lab
+
+sent 41458 bytes  received 1395 bytes  17141.20 bytes/sec
+total size is 48321024  speedup is 1127.60
+sending incremental file list
+
+sent 7070 bytes  received 49 bytes  14238.00 bytes/sec
+total size is 12774593  speedup is 1794.44
+sending incremental file list
+
+sent 5729 bytes  received 23 bytes  3834.67 bytes/sec
+total size is 129159129  speedup is 22454.65
+sending incremental file list
+
+sent 5610 bytes  received 39 bytes  3766.00 bytes/sec
+total size is 59049369  speedup is 10453.07
+sending incremental file list
+codesoft/Codesoft 7/Codes Produits/79966_verso.bak
+codesoft/Codesoft 7/Codes Produits/79966_verso.lab
+codesoft/Codesoft 7/ITM FE/rotation 180\#260/
+codesoft/Codesoft 7/ITM FE/rotation 180\#260/43618_sam_porc_recto_180.bak
+codesoft/Codesoft 7/ITM FE/rotation 180\#260/43618_sam_porc_recto_180.lab
+codesoft/Codesoft 7/ITM FE/rotation 180\#260/43619_ass_asiatique_recto_180.bak
+codesoft/Codesoft 7/ITM FE/rotation 180\#260/43619_ass_asiatique_recto_180.lab
+codesoft/Codesoft 7/ITM FE/rotation 180\#260/43620_b_crev_panes_recto_180.bak
+codesoft/Codesoft 7/ITM FE/rotation 180\#260/43620_b_crev_panes_recto_180.lab
+codesoft/Codesoft 7/ITM FE/rotation 180\#260/43621_acras_recto_180.bak
+codesoft/Codesoft 7/ITM FE/rotation 180\#260/43621_acras_recto_180.lab
+
+sent 106410 bytes  received 5075 bytes  74323.33 bytes/sec
+total size is 297069139  speedup is 2664.66
+sending incremental file list
+
+sent 20296 bytes  received 83 bytes  8151.60 bytes/sec
+total size is 99065320  speedup is 4861.15
+sending incremental file list
+
+sent 4380 bytes  received 82 bytes  2974.67 bytes/sec
+total size is 35609223  speedup is 7980.55
+sending incremental file list
+
+sent 7756 bytes  received 20 bytes  5184.00 bytes/sec
+total size is 16755943  speedup is 2154.83
+sending incremental file list
+
+sent 7756 bytes  received 20 bytes  5184.00 bytes/sec
+total size is 16755943  speedup is 2154.83

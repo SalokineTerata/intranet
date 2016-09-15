@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Description of ClassificationFtaModel
+ * Description of ClassificationFta2Model
  * Table de classification Fta2
  *
  * @author franckwastaken
@@ -10,6 +10,7 @@ class ClassificationFta2Model extends AbstractModel {
 
     const TABLENAME = 'classification_fta2';
     const KEYNAME = 'id_fta_classification2';
+    const FIELDNAME_CATEGORIE_PRODUIT_OPTIVENTES = 'categeorie_produit_optiventes';
     const FIELDNAME_ID_PROPRIETAIRE_GROUPE = 'id_Proprietaire_Groupe';
     const FIELDNAME_ID_PROPRIETAIRE_ENSEIGNE = 'id_Proprietaire_Enseigne';
     const FIELDNAME_ID_MARQUE = 'id_Marque';
@@ -18,6 +19,14 @@ class ClassificationFta2Model extends AbstractModel {
     const FIELDNAME_ID_ENVIRONNEMENT = 'id_Environnement';
     const FIELDNAME_ID_RESEAU = 'id_Reseau';
     const FIELDNAME_ID_SAISONNALITE = 'id_Saisonnalite';
+    const ID_CLASSIFICATION_TRADITION_DASIE = '33';
+    const ID_CLASSIFICATION_MARIE = '121';
+    const ID_CLASSIFICATION_EXPORT = '22';
+    const ID_CLASSIFICATION_LIASIA = '184';
+    const ID_CLASSIFICATION_LIBRE_SERVICE = '5';
+    const ID_CLASSIFICATION_FESTIF = '71';
+    const LABEL_CLASSIFICATION_GAMME_FAMILLE_BUDGET = 'Gamme Famille Budget';
+    const LABEL_CLASSIFICATION_RACOURCIS = 'Raccourcis Classification';
 
     protected static $idProprietaireGroupe;
     protected static $idProprietaireEnseigne;
@@ -27,13 +36,14 @@ class ClassificationFta2Model extends AbstractModel {
     protected static $idEnvironnement;
     protected static $idReseau;
     protected static $idSaisonnalite;
+    protected static $paramWarningUpdate;
 
     protected function setDefaultValues() {
         
     }
 
     public static function initClassification($paramProprietaireGroupe, $paramProprietaireEnseigne, $paramMarque
-    , $paramActivite, $paramRayon, $paramEnvironnement, $paramReseau, $paramSaisonnalite) {
+    , $paramActivite, $paramRayon, $paramEnvironnement, $paramReseau, $paramSaisonnalite, $paramWarningUpdate = NULL) {
         self::$idProprietaireGroupe = $paramProprietaireGroupe;
         self::$idProprietaireEnseigne = $paramProprietaireEnseigne;
         self::$idMarque = $paramMarque;
@@ -42,6 +52,7 @@ class ClassificationFta2Model extends AbstractModel {
         self::$idEnvironnement = $paramEnvironnement;
         self::$idReseau = $paramReseau;
         self::$idSaisonnalite = $paramSaisonnalite;
+        self::$paramWarningUpdate = $paramWarningUpdate;
     }
 
     /**
@@ -60,6 +71,238 @@ class ClassificationFta2Model extends AbstractModel {
             $NomClassification = $rowsNomClassification[ClassificationArborescenceArticleCategorieContenuModel::FIELDNAME_NOM_CLASSIFICATION_ARBORESCENCE_ARTICLE_CATEGORIE_CONTENU];
         }
         return $NomClassification;
+    }
+
+    /**
+     * Affiche le tableau d'ajout de gamme famille budget
+     * @param string $paramAction
+     * @return string
+     */
+    function getHtmlArcadiaGammeFamilleBudget($paramAction) {
+        $idClassificationFta2 = $this->getKeyValue();
+        $ClassificationGammeFamilleBudget = ClassificationGammeFamilleBudgetArcadiaModel::getArrayIdClassificationGammeFamilleBudgetByIdClassificationFta2($idClassificationFta2);
+
+        if ($ClassificationGammeFamilleBudget) {
+            $arrayClassificationGammeFamilleBudgettmp = array();
+            $tablesNameAndIdForeignKeyOfClassificationGammeFamilleBudgettmp = array();
+
+            foreach ($ClassificationGammeFamilleBudget as $rowsClassificationGammeFamilleBudget) {
+                $idClassificationGammeFamilleBudgetArcadia = $rowsClassificationGammeFamilleBudget[ClassificationGammeFamilleBudgetArcadiaModel::KEYNAME];
+
+                $arrayIdClassificationGammeFamilleBudgetArcadia[] = $idClassificationGammeFamilleBudgetArcadia;
+
+
+                $ClassificationGammeFamilleBudgetArcadiaModel = new ClassificationGammeFamilleBudgetArcadiaModel($idClassificationGammeFamilleBudgetArcadia);
+
+                /*
+                 * Tableau de données
+                 */
+                $arrayClassificationGammeFamilleBudgetTmp = $ClassificationGammeFamilleBudgetArcadiaModel->getArrayClassificationGammeFamilleBudget();
+
+                $arrayClassificationGammeFamilleBudgetArcadia = array_replace_recursive($arrayClassificationGammeFamilleBudgettmp, $arrayClassificationGammeFamilleBudgetTmp);
+
+                $arrayClassificationGammeFamilleBudgettmp = $arrayClassificationGammeFamilleBudgetArcadia;
+
+                /*
+                 * Cette array doit être utilisé de cette manière 
+                 * Array (
+                 * nom de table,
+                 * clé étrangère de la table présenté
+                 * valeur de la clé étrangère);
+                 */
+                $tablesNameAndIdForeignKeyOfClassificationGammeFamilleBudgetTmp = $ClassificationGammeFamilleBudgetArcadiaModel->getTablesNameAndIdForeignkeyOfClassificationGammeFamilleBudget();
+
+
+                $tablesNameAndIdForeignKeyOfClassificationGammeFamilleBudget = ($tablesNameAndIdForeignKeyOfClassificationGammeFamilleBudgettmp + $tablesNameAndIdForeignKeyOfClassificationGammeFamilleBudgetTmp);
+                $tablesNameAndIdForeignKeyOfClassificationGammeFamilleBudgettmp = $tablesNameAndIdForeignKeyOfClassificationGammeFamilleBudget;
+                /*
+                 * Vérifie si pour la Fta en cours les données ClassificationGammeFamilleBudgett sont renseigné
+                 */
+                if ($arrayClassificationGammeFamilleBudgetArcadia) {
+                    $rightToAdd = FALSE;
+                } else {
+                    $rightToAdd = TRUE;
+                }
+            }
+            /**
+             * Labels
+             */
+            $className = $ClassificationGammeFamilleBudgetArcadiaModel->getClassName();
+            $label = $ClassificationGammeFamilleBudgetArcadiaModel->getDataField(ClassificationGammeFamilleBudgetArcadiaModel::FIELDNAME_ID_ARCADIA_GAMME_FAMILLE_BUDGET)->getFieldLabel();
+
+
+            /**
+             * Initilisation du tableau html
+             */
+            $htmlClassificationGammeFamilleBudget = new HtmlSubForm_RNN($arrayClassificationGammeFamilleBudgetArcadia, $className, $label, $tablesNameAndIdForeignKeyOfClassificationGammeFamilleBudget);
+            $htmlClassificationGammeFamilleBudget->setIsEditable($this->getIsEditable());
+            $htmlClassificationGammeFamilleBudget->setRightToAdd($rightToAdd);
+            $htmlClassificationGammeFamilleBudget->setLienAjouter(ClassificationGammeFamilleBudgetArcadiaModel::getAddLinkAfterClassificationGammeFamilleBudget($this->getKeyValue(), $paramAction));
+            $htmlClassificationGammeFamilleBudget->setLien(ClassificationGammeFamilleBudgetArcadiaModel::getAddLinkBeforeClassificationGammeFamilleBudget($this->getKeyValue(), $paramAction));
+            $htmlClassificationGammeFamilleBudget->setLienSuppression(ClassificationGammeFamilleBudgetArcadiaModel::getDeleteLinkClassificationGammeFamilleBudget($this->getKeyValue(), $paramAction, $arrayIdClassificationGammeFamilleBudgetArcadia));
+            $htmlClassificationGammeFamilleBudget->setTableLabel($ClassificationGammeFamilleBudgetArcadiaModel->getTableGammeFamilleBudgetLabel());
+            $return .= $htmlClassificationGammeFamilleBudget->getHtmlResult();
+        } else {
+            /*
+             * Initialisation des modèles 
+             */
+            $label = self::LABEL_CLASSIFICATION_GAMME_FAMILLE_BUDGET;
+
+            $htmlClassificationGammeFamilleBudget = new HtmlSubForm_RNN($arrayClassificationGammeFamilleBudgetArcadia, $className, $label, $tablesNameAndIdForeignKeyOfClassificationGammeFamilleBudget);
+            $htmlClassificationGammeFamilleBudget->setIsEditable($this->getIsEditable());
+            $htmlClassificationGammeFamilleBudget->setRightToAdd(TRUE);
+            $htmlClassificationGammeFamilleBudget->setLien(ClassificationGammeFamilleBudgetArcadiaModel::getAddLinkBeforeClassificationGammeFamilleBudget($this->getKeyValue(), $paramAction));
+            $return .= $htmlClassificationGammeFamilleBudget->getHtmlResult();
+        }
+        return $return;
+    }
+
+    /**
+     * Affiche le tableau d'ajout de racourcis de classification à une classification
+     * @param string $paramAction
+     * @return string
+     */
+    function getHtmlClassificationRaccourcis($paramAction) {
+        $idClassificationFta2 = $this->getKeyValue();
+        $ClassificationRaccourcisAssociation = ClassificationRaccourcisAssociationModel::getArrayIdClassificationRaccourcisAssociationByIdClassificationFta2($idClassificationFta2);
+
+        if ($ClassificationRaccourcisAssociation) {
+            $arrayClassificationRaccourcistmp = array();
+            $tablesNameAndIdForeignKeyOfRaccourcistmp = array();
+
+            foreach ($ClassificationRaccourcisAssociation as $rowsClassificationRaccourcisAssociation) {
+                $idClassificationRaccourcisAssociation = $rowsClassificationRaccourcisAssociation[ClassificationRaccourcisAssociationModel::KEYNAME];
+
+                $arrayIdClassificationRaccourcis[] = $idClassificationRaccourcisAssociation;
+
+
+                $ClassificationRaccourcisAssociationModel = new ClassificationRaccourcisAssociationModel($idClassificationRaccourcisAssociation);
+
+                /*
+                 * Tableau de données
+                 */
+                $arrayClassificationRaccourcisAssociationTmp = $ClassificationRaccourcisAssociationModel->getArrayClassificationRaccourcisAssociation();
+
+                $arrayClassificationRaccourcisAssociation = array_replace_recursive($arrayClassificationRaccourcistmp, $arrayClassificationRaccourcisAssociationTmp);
+
+                $arrayClassificationRaccourcistmp = $arrayClassificationRaccourcisAssociation;
+
+                /*
+                 * Cette array doit être utilisé de cette manière 
+                 * Array (
+                 * nom de table,
+                 * clé étrangère de la table présenté
+                 * valeur de la clé étrangère);
+                 */
+                $tablesNameAndIdForeignKeyOfClassificationRaccourcisAssociationTmp = $ClassificationRaccourcisAssociationModel->getTablesNameAndIdForeignkeyOfClassificationRaccourcisAssociation();
+
+
+                $tablesNameAndIdForeignKeyOfClassificationRaccourcisAssociation = ($tablesNameAndIdForeignKeyOfRaccourcistmp + $tablesNameAndIdForeignKeyOfClassificationRaccourcisAssociationTmp);
+                $tablesNameAndIdForeignKeyOfRaccourcistmp = $tablesNameAndIdForeignKeyOfClassificationRaccourcisAssociation;
+                /*
+                 * Vérifie si pour la Fta en cours les données ClassificationGammeFamilleBudgett sont renseigné
+                 */
+                if ($arrayClassificationRaccourcisAssociation) {
+                    $rightToAdd = FALSE;
+                } else {
+                    $rightToAdd = TRUE;
+                }
+            }
+            /**
+             * Labels
+             */
+            $className = $ClassificationRaccourcisAssociationModel->getClassName();
+            $label = $ClassificationRaccourcisAssociationModel->getDataField(ClassificationRaccourcisAssociationModel::FIELDNAME_ID_CLASSIFICATION_RACCOURCIS)->getFieldLabel();
+
+
+            /**
+             * Initilisation du tableau html
+             */
+            $htmlClassificationRaccourcisAssociation = new HtmlSubForm_RNN($arrayClassificationRaccourcisAssociation, $className, $label, $tablesNameAndIdForeignKeyOfClassificationRaccourcisAssociation);
+            $htmlClassificationRaccourcisAssociation->setIsEditable($this->getIsEditable());
+            $htmlClassificationRaccourcisAssociation->setRightToAdd($rightToAdd);
+            $htmlClassificationRaccourcisAssociation->setLienAjouter(ClassificationRaccourcisAssociationModel::getAddLinkAfterClassificationRaccourcisAssociation($this->getKeyValue(), $paramAction));
+            $htmlClassificationRaccourcisAssociation->setLien(ClassificationRaccourcisAssociationModel::getAddLinkBeforeClassificationRaccourcisAssociation($this->getKeyValue(), $paramAction));
+            $htmlClassificationRaccourcisAssociation->setLienSuppression(ClassificationRaccourcisAssociationModel::getDeleteLinkClassificationRaccourcisAssociation($this->getKeyValue(), $paramAction, $arrayIdClassificationRaccourcis));
+            $htmlClassificationRaccourcisAssociation->setTableLabel($ClassificationRaccourcisAssociationModel->getTableClassificationRaccourcisAssociationLabel());
+            $return .= $htmlClassificationRaccourcisAssociation->getHtmlResult();
+        } else {
+            /*
+             * Initialisation des modèles 
+             */
+            $label = self::LABEL_CLASSIFICATION_RACOURCIS;
+
+            $htmlClassificationRaccourcisAssociation = new HtmlSubForm_RNN($arrayClassificationRaccourcisAssociation, $className, $label, $tablesNameAndIdForeignKeyOfClassificationRaccourcisAssociation);
+            $htmlClassificationRaccourcisAssociation->setIsEditable($this->getIsEditable());
+            $htmlClassificationRaccourcisAssociation->setRightToAdd(TRUE);
+            $htmlClassificationRaccourcisAssociation->setLien(ClassificationRaccourcisAssociationModel::getAddLinkBeforeClassificationRaccourcisAssociation($this->getKeyValue(), $paramAction));
+            $return .= $htmlClassificationRaccourcisAssociation->getHtmlResult();
+        }
+        return $return;
+    }
+
+    /**
+     * On obtient l'id du nom de la classification en paramêtre
+     * @param string $paramFieldNameClasssification2
+     * @return int
+     */
+    function getIdClassificationByTypeName($paramFieldNameClasssification2) {
+        $idType = $this->getDataField($paramFieldNameClasssification2)->getFieldValue();
+        return $idType;
+    }
+
+    /**
+     * On obtient l'id du nom de la classification en paramêtre
+     * @return int
+     */
+    public static function getIdClassificationTypeByTypeNameAndIdClassificationFta2($paramIdClassif, $paramSelect) {
+        $classificationFta2 = new ClassificationFta2Model($paramIdClassif);
+        $idType = $classificationFta2->getIdClassificationByTypeName($paramSelect);
+        return $idType;
+    }
+
+    /**
+     * Affiche la liste déroulante des activités possible pour une classification
+     * @param type $paramIdActivite
+     * @param type $paramIsEditable
+     * @return string
+     */
+    public static function getListeDeroulanteActivite($paramIdActivite, $paramIsEditable) {
+        //Contenu
+        $nom_liste = ClassificationFta2Model::FIELDNAME_ID_ACTIVITE;
+        $reqListeActivite = "SELECT " . ClassificationArborescenceArticleCategorieContenuModel::KEYNAME
+                . ", " . ClassificationArborescenceArticleCategorieContenuModel::FIELDNAME_NOM_CLASSIFICATION_ARBORESCENCE_ARTICLE_CATEGORIE_CONTENU
+                . " FROM " . ClassificationArborescenceArticleCategorieContenuModel::TABLENAME
+                . " WHERE " . ClassificationArborescenceArticleCategorieContenuModel::FIELDNAME_ID_CLASSIFICATION_ARBORESCENCE_ARTICLE_CATEGORIE . "=" . ClassificationArborescenceArticleCategorieModel::ID_CATEGORIE_ACTIVITE
+                . " ORDER BY " . ClassificationArborescenceArticleCategorieContenuModel::FIELDNAME_NOM_CLASSIFICATION_ARBORESCENCE_ARTICLE_CATEGORIE_CONTENU
+        ;
+        $id_defaut = $paramIdActivite;
+
+        $listeDesActivite = AccueilFta::afficherRequeteEnListeDeroulante($reqListeActivite, $id_defaut, $nom_liste, $paramIsEditable);
+
+        return $listeDesActivite;
+    }
+
+    /**
+     * Affiche la liste déroulante des activités possible pour une classification
+     * @param type $paramIdMarque
+     * @param type $paramIsEditable
+     * @return string
+     */
+    public static function getListeDeroulanteMarque($paramIdMarque, $paramIsEditable) {
+        //Contenu
+        $nom_liste = ClassificationFta2Model::FIELDNAME_ID_MARQUE;
+        $reqListeMarque = "SELECT " . ClassificationArborescenceArticleCategorieContenuModel::KEYNAME
+                . ", " . ClassificationArborescenceArticleCategorieContenuModel::FIELDNAME_NOM_CLASSIFICATION_ARBORESCENCE_ARTICLE_CATEGORIE_CONTENU
+                . " FROM " . ClassificationArborescenceArticleCategorieContenuModel::TABLENAME
+                . " WHERE " . ClassificationArborescenceArticleCategorieContenuModel::FIELDNAME_ID_CLASSIFICATION_ARBORESCENCE_ARTICLE_CATEGORIE . "=" . ClassificationArborescenceArticleCategorieModel::ID_CATEGORIE_MARQUE
+                . " ORDER BY " . ClassificationArborescenceArticleCategorieContenuModel::FIELDNAME_NOM_CLASSIFICATION_ARBORESCENCE_ARTICLE_CATEGORIE_CONTENU
+        ;
+        $id_defaut = $paramIdMarque;
+
+        $listeDesMarque = AccueilFta::afficherRequeteEnListeDeroulante($reqListeMarque, $id_defaut, $nom_liste, $paramIsEditable);
+
+        return $listeDesMarque;
     }
 
     /**
@@ -87,6 +330,12 @@ class ClassificationFta2Model extends AbstractModel {
      * @return string
      */
     public static function getListeClassificationProprietaireGroupeLabel($paramIdDefaut, $paramIsEditable) {
+        //Traitement du Warning Update
+        if (self::$paramWarningUpdate) {
+            $image_modif = Html::DEFAULT_HTML_WARNING_UPDATE_IMAGE;
+            $color_modif = Html::DEFAULT_HTML_WARNING_UPDATE_BGCOLOR;
+        }
+
         $req = 'SELECT ' . ClassificationArborescenceArticleCategorieContenuModel::KEYNAME . ',' . ClassificationArborescenceArticleCategorieContenuModel::FIELDNAME_NOM_CLASSIFICATION_ARBORESCENCE_ARTICLE_CATEGORIE_CONTENU
                 . ' FROM ' . ClassificationArborescenceArticleCategorieContenuModel::TABLENAME
                 . ' WHERE ' . ClassificationArborescenceArticleCategorieContenuModel::FIELDNAME_ID_CLASSIFICATION_ARBORESCENCE_ARTICLE_CATEGORIE . '=' . '1'
@@ -94,9 +343,9 @@ class ClassificationFta2Model extends AbstractModel {
                 . ' ORDER BY ' . ClassificationArborescenceArticleCategorieContenuModel::FIELDNAME_NOM_CLASSIFICATION_ARBORESCENCE_ARTICLE_CATEGORIE_CONTENU;
 
         $paramNomDefaut = 'selection_proprietaire1';
-        $listeClassification = '<td class=contenu >' . DatabaseDescription::getFieldDocLabel(ClassificationFta2Model::TABLENAME, ClassificationFta2Model::FIELDNAME_ID_PROPRIETAIRE_GROUPE)
-                . '</td><td class=contenu width=75% >'
-                . AccueilFta::afficherRequeteEnListeDeroulante($req, $paramIdDefaut, $paramNomDefaut, $paramIsEditable, TRUE) . '</tr>';
+        $listeClassification = '<td class=contenu style=\'' . $color_modif . '\' >' . DatabaseDescription::getFieldDocLabel(ClassificationFta2Model::TABLENAME, ClassificationFta2Model::FIELDNAME_ID_PROPRIETAIRE_GROUPE)
+                . '</td><td class=contenu width=75% style=\'' . $color_modif . '\' >'
+                . AccueilFta::afficherRequeteEnListeDeroulante($req, $paramIdDefaut, $paramNomDefaut, $paramIsEditable, TRUE) . ' ' . $image_modif . '</td></tr>';
 
         return $listeClassification;
     }
@@ -108,10 +357,11 @@ class ClassificationFta2Model extends AbstractModel {
      * @return string
      */
     public static function getListeClassificationProprietaireGroupeLabel2($paramIdDefaut, $paramIsEditable) {
-        $req = 'SELECT ' . ClassificationArborescenceArticleCategorieContenuModel::KEYNAME . ',' . ClassificationArborescenceArticleCategorieContenuModel::FIELDNAME_NOM_CLASSIFICATION_ARBORESCENCE_ARTICLE_CATEGORIE_CONTENU
-                . ' FROM ' . ClassificationArborescenceArticleCategorieContenuModel::TABLENAME
+        $req = 'SELECT DISTINCT ' . ClassificationArborescenceArticleCategorieContenuModel::KEYNAME . ',' . ClassificationArborescenceArticleCategorieContenuModel::FIELDNAME_NOM_CLASSIFICATION_ARBORESCENCE_ARTICLE_CATEGORIE_CONTENU
+                . ' FROM ' . ClassificationArborescenceArticleCategorieContenuModel::TABLENAME . ',' . ClassificationFta2Model::TABLENAME
                 . ' WHERE ' . ClassificationArborescenceArticleCategorieContenuModel::FIELDNAME_ID_CLASSIFICATION_ARBORESCENCE_ARTICLE_CATEGORIE . '=' . '1'
                 . ' AND ' . ClassificationArborescenceArticleCategorieContenuModel::KEYNAME . '<>' . '0'
+                . ' AND ' . ClassificationArborescenceArticleCategorieContenuModel::KEYNAME . '=' . ClassificationFta2Model::FIELDNAME_ID_PROPRIETAIRE_GROUPE
                 . ' ORDER BY ' . ClassificationArborescenceArticleCategorieContenuModel::FIELDNAME_NOM_CLASSIFICATION_ARBORESCENCE_ARTICLE_CATEGORIE_CONTENU;
 
         $paramNomDefaut = 'selection_proprietaire12';
@@ -303,7 +553,7 @@ class ClassificationFta2Model extends AbstractModel {
     public static function InsertClassification() {
         $pdo = DatabaseOperation::executeComplete(
                         'INSERT INTO ' . ClassificationFta2Model::TABLENAME
-                        . ' VALUES (NULL ,  \'\',  \'\',  \'\',  \'\',  \'\',  \'\',  \'\',  \'\')'
+                        . ' VALUES (NULL ,  \'\',  \'\',  \'\',  \'\',  \'\',  \'\',  \'\',  \'\',  \'\')'
         );
 
         $key = $pdo->lastInsertId();
@@ -315,11 +565,42 @@ class ClassificationFta2Model extends AbstractModel {
      * Suppression d'une classification
      * @param int $paramIdClassification2
      */
-    public static function SuppressionClassification($paramIdClassification2) {
+    function suppressionClassification() {
+        $this->checkClassificationUsed();
+        DatabaseOperation::execute(
+                'DELETE FROM ' . ClassificationRaccourcisAssociationModel::TABLENAME
+                . ' WHERE ' . ClassificationFta2Model::KEYNAME . '=' . $this->getKeyValue()
+        );
         DatabaseOperation::execute(
                 'DELETE FROM ' . ClassificationFta2Model::TABLENAME
-                . ' WHERE ' . ClassificationFta2Model::KEYNAME . '=' . $paramIdClassification2
+                . ' WHERE ' . ClassificationFta2Model::KEYNAME . '=' . $this->getKeyValue()
         );
+    }
+
+    /**
+     * On vérifie si la classification qui va être supprimé est utilisé
+     */
+    function checkClassificationUsed() {
+        $array = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
+                        "SELECT DISTINCT " . FtaModel::FIELDNAME_CODE_ARTICLE_LDC . "," . FtaModel::FIELDNAME_LIBELLE
+                        . " FROM " . FtaModel::TABLENAME
+                        . " WHERE " . FtaModel::FIELDNAME_ID_FTA_CLASSIFICATION2 . "=" . $this->getKeyValue()
+                        . " ORDER BY " . FtaModel::FIELDNAME_CODE_ARTICLE_LDC
+        );
+
+        if ($array) {
+            //Liste des modèles concernés
+            $liste = "";
+            foreach ($array as $rows) {
+                $liste.= $rows[FtaModel::FIELDNAME_CODE_ARTICLE_LDC] . " " . $rows[FtaModel::FIELDNAME_LIBELLE] . "<br>";
+            }
+            //Averissement
+            $titre = UserInterfaceMessage::FR_WARNING_CLASSIFICATION_DELETE_TITLE;
+            $message = UserInterfaceMessage::FR_WARNING_CLASSIFICATION_DELETE
+                    . $liste
+            ;
+            Lib::showMessage($titre, $message, $redirection);
+        }
     }
 
     /**
@@ -327,7 +608,7 @@ class ClassificationFta2Model extends AbstractModel {
      * @param boolean$ paramIsEditable
      * @return string
      */
-    public static function ShowListeDeroulanteClassification($paramIsEditable) {
+    public static function showListeDeroulanteClassification($paramIsEditable) {
 
 
         $bloc.= ClassificationFta2Model::getListeClassificationProprietaireGroupeLabel(self::$idProprietaireGroupe, $paramIsEditable);
@@ -399,7 +680,7 @@ class ClassificationFta2Model extends AbstractModel {
      * @param boolean$ paramIsEditable
      * @return string
      */
-    public static function ShowListeDeroulanteClassification2($paramIsEditable) {
+    public static function showListeDeroulanteClassification2($paramIsEditable) {
 
 
         $bloc.= ClassificationFta2Model::getListeClassificationProprietaireGroupeLabel2(self::$idProprietaireGroupe, $paramIsEditable);
@@ -500,15 +781,21 @@ class ClassificationFta2Model extends AbstractModel {
                 $return[] = $value[$paramSelect];
             }
         }
+        //Traitement du Warning Update
+        if (self::$paramWarningUpdate) {
+            $image_modif = Html::DEFAULT_HTML_WARNING_UPDATE_IMAGE;
+            $color_modif = Html::DEFAULT_HTML_WARNING_UPDATE_BGCOLOR;
+        }
+
         $reqClassification = 'SELECT ' . ClassificationArborescenceArticleCategorieContenuModel::KEYNAME . ',' . ClassificationArborescenceArticleCategorieContenuModel::FIELDNAME_NOM_CLASSIFICATION_ARBORESCENCE_ARTICLE_CATEGORIE_CONTENU
                 . ' FROM ' . ClassificationArborescenceArticleCategorieContenuModel::TABLENAME
                 . ' WHERE ( 0 ' . ClassificationFta2Model::AddIdClassificationArborescenceArticleCategorieContenu($return)
                 . ') ORDER BY ' . ClassificationArborescenceArticleCategorieContenuModel::FIELDNAME_NOM_CLASSIFICATION_ARBORESCENCE_ARTICLE_CATEGORIE_CONTENU
         ;
 
-        $listeClassification = '<tr><td class=contenu >' . DatabaseDescription::getFieldDocLabel(ClassificationFta2Model::TABLENAME, $paramSelect)
-                . '</td><td class=contenu width=75%>'
-                . AccueilFta::afficherRequeteEnListeDeroulante($reqClassification, $paramIdDefaut, $paramNomDefaut, $paramIsEditable, TRUE) . '</tr>';
+        $listeClassification = '<tr><td class=contenu style=\'' . $color_modif . '\' >' . DatabaseDescription::getFieldDocLabel(ClassificationFta2Model::TABLENAME, $paramSelect)
+                . '</td><td class=contenu width=75%  style=\'' . $color_modif . '\' >'
+                . AccueilFta::afficherRequeteEnListeDeroulante($reqClassification, $paramIdDefaut, $paramNomDefaut, $paramIsEditable, TRUE) . ' ' . $image_modif . '</td></tr>';
 
         return $listeClassification;
     }

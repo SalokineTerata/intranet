@@ -12,7 +12,7 @@
 /* * ***************************************************************************
   Inclusion des plugins
  * ************************************************************************** */
-require_once('../plugins/htmlMimeMail-2.5.1/htmlMimeMail.php');
+require_once('../plugins/htmlMimeMail-2.5.1/htmlMimeMail5.php');
 
 //Free PDF: Classe Racine
 $fpdf_path = '../plugins/fpdf/';
@@ -43,6 +43,10 @@ require_once('../conf/EnvironmentConf.php');
 require_once('../conf/EnvironmentAbstract.php');
 require_once('../conf/EnvironmentInit.php');
 
+// Fta2Arcadia 
+require_once('../fta2Arcadia/class/controller/Fta2ArcadiaController.php');
+require_once('../fta2Arcadia/class/controller/Arcadia2FtaController.php');
+
 // Fta (Model)
 require_once('../fta/class/AccueilFta.php');
 require_once('../fta/class/Chapitre.php');
@@ -51,6 +55,7 @@ require_once('../fta/class/Navigation.php');
 require_once('../fta/class/ObjectFta.php');
 
 // View
+require_once('../fta/class/view/AbstractView.php');
 require_once('../fta/class/view/FtaView.php');
 require_once('../fta/class/view/UserView.php');
 require_once('../fta/class/view/FtaComposantView.php');
@@ -67,7 +72,21 @@ require_once('../lib/class/database/DatabaseDescription.php');
 require_once('../lib/class/database/DatabaseDescriptionField.php');
 require_once('../lib/class/database/DatabaseDescriptionTable.php');
 require_once('../lib/class/database/DatabaseDataField.php');
+require_once('../lib/class/database/DatabaseDataJquery.php');
 require_once('../lib/class/database/DatabaseRecord.php');
+
+//Règles de validation
+require_once('../lib/class/rules_validation/AbstractRulesValidation.php');
+require_once('../lib/class/rules_validation/DataNotEmptyRulesValidation.php');
+require_once('../lib/class/rules_validation/DataNotRealEmptyRulesValidation.php');
+require_once('../lib/class/rules_validation/DataNotSmallRulesValidation.php');
+require_once('../lib/class/rules_validation/DataNotSpecialRulesValidation.php');
+require_once('../lib/class/rules_validation/Less255CaractereRulesValidation.php');
+require_once('../lib/class/rules_validation/Less35CaractereRulesValidation.php');
+require_once('../lib/class/rules_validation/Less5CaractereRulesValidation.php');
+require_once('../lib/class/rules_validation/Less8CaractereRulesValidation.php');
+require_once('../lib/class/rules_validation/Mandatory14CaractereRulesValidation.php');
+
 
 // Configuration des models de base de données
 require_once('../lib/class/model/ModelTableAssociation.php');
@@ -77,28 +96,53 @@ require_once('../lib/class/model/ModelTableAssociation.php');
 require_once('../lib/class/model/AbstractModelInterface.php');
 require_once('../lib/class/model/AbstractModel.php');
 require_once('../lib/class/model/AccessMaterielServiceModel.php');
+require_once('../lib/class/model/AnnexeModeEtiquetteModel.php');
 require_once('../lib/class/model/AnnexeAgrologicArticleCodificationModel.php');
 require_once('../lib/class/model/AnnexeEmballageGroupeModel.php');
 require_once('../lib/class/model/AnnexeEmballageGroupeTypeModel.php');
 require_once('../lib/class/model/AnnexeEmballageModel.php');
 require_once('../lib/class/model/AnnexeEnvironnementConservationGroupeModel.php');
+require_once('../lib/class/model/AnnexeGestionDesEtiquettesModel.php');
+require_once('../lib/class/model/AnnexeGestionEtiquetteRectoVersoModel.php');
+require_once('../lib/class/model/AnnexeListeAllergeneDicoModel.php');
+require_once('../lib/class/model/AnnexeUniteFacturationModel.php');
+require_once('../lib/class/model/ArcadiaCategorieProduitOptiventesModel.php');
+require_once('../lib/class/model/ArcadiaCelluleArticleModel.php');
+require_once('../lib/class/model/ArcadiaFamilleBudgetModel.php');
+require_once('../lib/class/model/ArcadiaFamilleEcoEmballagesModel.php');
+require_once('../lib/class/model/ArcadiaFamilleVenteModel.php');
+require_once('../lib/class/model/ArcadiaGammeCoopModel.php');
+require_once('../lib/class/model/ArcadiaGammeFamilleBudgetModel.php');
+require_once('../lib/class/model/ArcadiaMarqueModel.php');
+require_once('../lib/class/model/ArcadiaSousFamilleModel.php');
+require_once('../lib/class/model/ArcadiaTypeCartonModel.php');
 require_once('../lib/class/model/CatsoproModel.php');
+require_once('../lib/class/model/ClassificationActiviteFamilleVentesArcadiaModel.php');
+require_once('../lib/class/model/ClassificationActiviteSousFamilleArcadiaModel.php');
 require_once('../lib/class/model/ClassificationArborescenceArticleCategorieContenuModel.php');
 require_once('../lib/class/model/ClassificationArborescenceArticleCategorieModel.php');
 require_once('../lib/class/model/ClassificationArborescenceArticleModel.php');
 require_once('../lib/class/model/ClassificationFtaModel.php');
 require_once('../lib/class/model/ClassificationFta2Model.php');
+require_once('../lib/class/model/ClassificationGammeFamilleBudgetArcadiaModel.php');
+require_once('../lib/class/model/ClassificationMarqueArcadiaModel.php');
+require_once('../lib/class/model/ClassificationRaccourcisAssociationModel.php');
+require_once('../lib/class/model/ClassificationRaccourcisModel.php');
 require_once('../lib/class/model/CodesoftEtiquettesLogoModel.php');
 require_once('../lib/class/model/CodesoftEtiquettesModel.php');
 require_once('../lib/class/model/CodesoftStyleParagrapheModel.php');
+require_once('../lib/class/model/DataSyncServeurModel.php');
+require_once('../lib/class/model/DataSyncTransfertModel.php');
 require_once('../lib/class/model/DroitftModel.php');
 require_once('../lib/class/model/UserModel.php');
+require_once('../lib/class/model/Fta2ArcadiaTransactionModel.php');
 require_once('../lib/class/model/FtaActionRoleModel.php');
 require_once('../lib/class/model/FtaActionSiteModel.php');
 require_once('../lib/class/model/FtaConditionnementModel.php');
 require_once('../lib/class/model/FtaComposantModel.php');
 require_once('../lib/class/model/FtaProcessusCycleModel.php');
 require_once('../lib/class/model/FtaModel.php');
+require_once('../lib/class/model/FtaEtatHistoriqueModel.php');
 require_once('../lib/class/model/FtaEtatModel.php');
 require_once('../lib/class/model/FtaProcessusEtatModel.php');
 require_once('../lib/class/model/FtaProcessusModel.php');
@@ -108,12 +152,16 @@ require_once('../lib/class/model/FtaProcessusDelaiModel.php');
 require_once('../lib/class/model/FtaProcessusMultisiteModel.php');
 require_once('../lib/class/model/FtaRoleModel.php');
 require_once('../lib/class/model/FtaTransitionModel.php');
+require_once('../lib/class/model/FtaVerrouillageChampsModel.php');
 require_once('../lib/class/model/FtaWorkflowModel.php');
 require_once('../lib/class/model/FtaWorkflowStructureModel.php');
 require_once('../lib/class/model/FteFournisseurModel.php');
+require_once('../lib/class/model/GeoArcadiaModel.php');
 require_once('../lib/class/model/GeoModel.php');
 require_once('../lib/class/model/HtmlResultModel.php');
 require_once('../lib/class/model/IntranetActionsModel.php');
+require_once('../lib/class/model/IntranetColumnInfoModel.php');
+require_once('../lib/class/model/IntranetDescriptionModel.php');
 require_once('../lib/class/model/IntranetDroitsAccesModel.php');
 require_once('../lib/class/model/IntranetModulesModel.php');
 require_once('../lib/class/model/IntranetNiveauAccesModel.php');
@@ -122,7 +170,9 @@ require_once('../lib/class/model/LuModel.php');
 require_once('../lib/class/model/ModesModel.php');
 require_once('../lib/class/model/PersoModel.php');
 require_once('../lib/class/model/PlanningPresenceDetailModel.php');
+require_once('../lib/class/model/PlanningPresenceSemaineVisibleModel.php');
 require_once('../lib/class/model/ServicesModel.php');
+require_once('../lib/class/model/StaticStandardModel.php');
 require_once('../lib/class/model/TypeModel.php');
 
 // Standard HTML
@@ -229,9 +279,11 @@ require_once('../lib/class/html/DataFieldToHtmlInputNumber.php');
 require_once('../lib/class/html/DataFieldToHtmlTextArea.php');
 require_once('../lib/class/html/DataFieldToHtmlSubForm_R1N.php');
 require_once('../lib/class/html/DataFieldToHtmlSubForm_RNN.php');
+require_once('../lib/class/ModuleConfigLib.php');
 
 // Session utilisateur
 require_once('../lib/session.php');
+
 
 // Variables locales à la page PHP
 Lib::setModule();

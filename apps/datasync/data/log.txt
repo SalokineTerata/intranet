@@ -1,0 +1,920 @@
+Démarrage Datasyncmer mar  3 15:25:04 CET 2004
+
+   Logging activé.
+
+Stopping Netware Connexions:
+  -> unmounting ncp-filesystem...
+   OK
+  -> logout from NDS...
+   OK
+Starting Netware Connections:
+  -> login to NDS...
+mounted on:/mnt/ncp/knoppix/10.1.1.5/SYS
+   OK
+  ->  mounting ncp-filesystem...
+mounted on:/mnt/ncp/knoppix/10.1.1.5/VOL1
+mounted on:/mnt/ncp/knoppix/10.3.1.5/VOL1
+   OK
+Démarrage de copie des données intersite à:mer mar  3 15:26:25 CET 2004
+détruit `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/batch/bzip2.exe'
+détruit `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/batch/envoilog.bat'
+détruit `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/batch/gunzip.exe'
+détruit `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/batch/gzip.exe'
+détruit `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/batch/maintenance.bat'
+détruit `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/batch/Maintenance Windows 2000.lnk'
+détruit `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/batch/Maintenance Windows 98.pif'
+détruit `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/batch/RAR.CFG'
+détruit `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/batch/RAR.EXE'
+détruit `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/batch/rar.log'
+détruit `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/batch/readme.txt'
+détruit `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/batch/sauvegarde.bat'
+détruit `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/batch/system.mdw'
+détruit `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/batch/tar.exe'
+`/mnt/ncp/knoppix/10.1.1.5/VOL1/applications/batch' -> `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/.backup/batch.tmp'
+`/mnt/ncp/knoppix/10.1.1.5/VOL1/applications/batch/envoilog.bat' -> `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/.backup/batch.tmp/envoilog.bat'
+`/mnt/ncp/knoppix/10.1.1.5/VOL1/applications/batch/Maintenance Windows 98.pif' -> `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/.backup/batch.tmp/Maintenance Windows 98.pif'
+`/mnt/ncp/knoppix/10.1.1.5/VOL1/applications/batch/system.mdw' -> `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/.backup/batch.tmp/system.mdw'
+`/mnt/ncp/knoppix/10.1.1.5/VOL1/applications/batch/sauvegarde.bat' -> `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/.backup/batch.tmp/sauvegarde.bat'
+`/mnt/ncp/knoppix/10.1.1.5/VOL1/applications/batch/Maintenance Windows 2000.lnk' -> `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/.backup/batch.tmp/Maintenance Windows 2000.lnk'
+`/mnt/ncp/knoppix/10.1.1.5/VOL1/applications/batch/readme.txt' -> `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/.backup/batch.tmp/readme.txt'
+`/mnt/ncp/knoppix/10.1.1.5/VOL1/applications/batch/gzip.exe' -> `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/.backup/batch.tmp/gzip.exe'
+`/mnt/ncp/knoppix/10.1.1.5/VOL1/applications/batch/gunzip.exe' -> `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/.backup/batch.tmp/gunzip.exe'
+`/mnt/ncp/knoppix/10.1.1.5/VOL1/applications/batch/tar.exe' -> `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/.backup/batch.tmp/tar.exe'
+`/mnt/ncp/knoppix/10.1.1.5/VOL1/applications/batch/rar.log' -> `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/.backup/batch.tmp/rar.log'
+`/mnt/ncp/knoppix/10.1.1.5/VOL1/applications/batch/bzip2.exe' -> `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/.backup/batch.tmp/bzip2.exe'
+`/mnt/ncp/knoppix/10.1.1.5/VOL1/applications/batch/RAR.EXE' -> `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/.backup/batch.tmp/RAR.EXE'
+`/mnt/ncp/knoppix/10.1.1.5/VOL1/applications/batch/RAR.CFG' -> `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/.backup/batch.tmp/RAR.CFG'
+`/mnt/ncp/knoppix/10.1.1.5/VOL1/applications/batch/maintenance.bat' -> `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/.backup/batch.tmp/maintenance.bat'
+mer mar  3 15:28:28 CET 2004
+`/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/.backup/batch.tmp/bzip2.exe' -> `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/batch/bzip2.exe'
+`/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/.backup/batch.tmp/envoilog.bat' -> `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/batch/envoilog.bat'
+`/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/.backup/batch.tmp/gunzip.exe' -> `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/batch/gunzip.exe'
+`/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/.backup/batch.tmp/gzip.exe' -> `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/batch/gzip.exe'
+`/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/.backup/batch.tmp/maintenance.bat' -> `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/batch/maintenance.bat'
+`/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/.backup/batch.tmp/Maintenance Windows 2000.lnk' -> `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/batch/Maintenance Windows 2000.lnk'
+`/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/.backup/batch.tmp/Maintenance Windows 98.pif' -> `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/batch/Maintenance Windows 98.pif'
+`/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/.backup/batch.tmp/RAR.CFG' -> `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/batch/RAR.CFG'
+`/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/.backup/batch.tmp/RAR.EXE' -> `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/batch/RAR.EXE'
+`/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/.backup/batch.tmp/rar.log' -> `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/batch/rar.log'
+`/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/.backup/batch.tmp/readme.txt' -> `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/batch/readme.txt'
+`/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/.backup/batch.tmp/sauvegarde.bat' -> `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/batch/sauvegarde.bat'
+`/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/.backup/batch.tmp/system.mdw' -> `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/batch/system.mdw'
+`/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/.backup/batch.tmp/tar.exe' -> `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/batch/tar.exe'
+mer mar  3 15:28:46 CET 2004
+détruire le répertoire: `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/.backup/batch.tmp'
+mer mar  3 15:28:48 CET 2004
+mer mar  3 15:28:48 CET 2004
+mnt/ncp/knoppix/10.1.1.5/VOL1/applications/batch/
+mnt/ncp/knoppix/10.1.1.5/VOL1/applications/batch/envoilog.bat
+mnt/ncp/knoppix/10.1.1.5/VOL1/applications/batch/Maintenance Windows 98.pif
+mnt/ncp/knoppix/10.1.1.5/VOL1/applications/batch/system.mdw
+mnt/ncp/knoppix/10.1.1.5/VOL1/applications/batch/sauvegarde.bat
+mnt/ncp/knoppix/10.1.1.5/VOL1/applications/batch/Maintenance Windows 2000.lnk
+mnt/ncp/knoppix/10.1.1.5/VOL1/applications/batch/readme.txt
+mnt/ncp/knoppix/10.1.1.5/VOL1/applications/batch/gzip.exe
+mnt/ncp/knoppix/10.1.1.5/VOL1/applications/batch/gunzip.exe
+mnt/ncp/knoppix/10.1.1.5/VOL1/applications/batch/tar.exe
+mnt/ncp/knoppix/10.1.1.5/VOL1/applications/batch/rar.log
+mnt/ncp/knoppix/10.1.1.5/VOL1/applications/batch/bzip2.exe
+mnt/ncp/knoppix/10.1.1.5/VOL1/applications/batch/RAR.EXE
+mnt/ncp/knoppix/10.1.1.5/VOL1/applications/batch/RAR.CFG
+mnt/ncp/knoppix/10.1.1.5/VOL1/applications/batch/maintenance.bat
+mer mar  3 15:28:48 CET 2004
+mer mar  3 15:28:49 CET 2004
+`/mnt/ncp/knoppix/10.1.1.5/VOL1/applications/.backup/batch.tar.bz2' -> `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/.backup/batch.tar.bz2'
+mer mar  3 15:30:00 CET 2004
+`/mnt/ncp/knoppix/10.1.1.5/VOL1/bases_access/test.mdb' -> `/mnt/ncp/knoppix/10.1.1.5/VOL1/bases_access/.backup/test.mdb'
+mer mar  3 15:30:00 CET 2004
+mer mar  3 15:30:00 CET 2004
+`/mnt/ncp/knoppix/10.1.1.5/VOL1/bases_access/.backup/test.mdb.bz2' -> `/mnt/ncp/knoppix/10.3.1.5/VOL1/bases_access/.backup/test.mdb.bz2'
+mer mar  3 15:30:03 CET 2004
+Fin de copie des données intersites à:mer mar  3 15:30:03 CET 2004
+Stopping Netware Connexions:
+  -> unmounting ncp-filesystem...
+   OK
+  -> logout from NDS...
+Successfully logged out from AGIS1998
+Successfully logged out from all trees.
+   OK
+Arrêt Datasyncmer mar  3 15:30:13 CET 2004
+Démarrage Datasyncmer mar  3 15:32:11 CET 2004
+
+   Logging activé.
+
+Stopping Netware Connexions:
+  -> unmounting ncp-filesystem...
+   OK
+  -> logout from NDS...
+   OK
+Starting Netware Connections:
+  -> login to NDS...
+mounted on:/mnt/ncp/knoppix/10.1.1.5/SYS
+   OK
+  ->  mounting ncp-filesystem...
+mounted on:/mnt/ncp/knoppix/10.1.1.5/VOL1
+mounted on:/mnt/ncp/knoppix/10.3.1.5/VOL1
+   OK
+Démarrage de copie des données intersite à:mer mar  3 15:33:31 CET 2004
+détruit `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/batch/bzip2.exe'
+détruit `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/batch/envoilog.bat'
+détruit `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/batch/gunzip.exe'
+détruit `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/batch/gzip.exe'
+détruit `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/batch/maintenance.bat'
+détruit `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/batch/Maintenance Windows 2000.lnk'
+détruit `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/batch/Maintenance Windows 98.pif'
+détruit `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/batch/RAR.CFG'
+détruit `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/batch/RAR.EXE'
+détruit `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/batch/rar.log'
+détruit `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/batch/readme.txt'
+détruit `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/batch/sauvegarde.bat'
+détruit `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/batch/system.mdw'
+détruit `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/batch/tar.exe'
+`/mnt/ncp/knoppix/10.1.1.5/VOL1/applications/batch' -> `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/.backup/batch.tmp'
+`/mnt/ncp/knoppix/10.1.1.5/VOL1/applications/batch/envoilog.bat' -> `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/.backup/batch.tmp/envoilog.bat'
+`/mnt/ncp/knoppix/10.1.1.5/VOL1/applications/batch/Maintenance Windows 98.pif' -> `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/.backup/batch.tmp/Maintenance Windows 98.pif'
+`/mnt/ncp/knoppix/10.1.1.5/VOL1/applications/batch/system.mdw' -> `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/.backup/batch.tmp/system.mdw'
+`/mnt/ncp/knoppix/10.1.1.5/VOL1/applications/batch/sauvegarde.bat' -> `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/.backup/batch.tmp/sauvegarde.bat'
+`/mnt/ncp/knoppix/10.1.1.5/VOL1/applications/batch/Maintenance Windows 2000.lnk' -> `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/.backup/batch.tmp/Maintenance Windows 2000.lnk'
+`/mnt/ncp/knoppix/10.1.1.5/VOL1/applications/batch/readme.txt' -> `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/.backup/batch.tmp/readme.txt'
+`/mnt/ncp/knoppix/10.1.1.5/VOL1/applications/batch/gzip.exe' -> `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/.backup/batch.tmp/gzip.exe'
+`/mnt/ncp/knoppix/10.1.1.5/VOL1/applications/batch/gunzip.exe' -> `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/.backup/batch.tmp/gunzip.exe'
+`/mnt/ncp/knoppix/10.1.1.5/VOL1/applications/batch/tar.exe' -> `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/.backup/batch.tmp/tar.exe'
+`/mnt/ncp/knoppix/10.1.1.5/VOL1/applications/batch/rar.log' -> `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/.backup/batch.tmp/rar.log'
+`/mnt/ncp/knoppix/10.1.1.5/VOL1/applications/batch/bzip2.exe' -> `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/.backup/batch.tmp/bzip2.exe'
+`/mnt/ncp/knoppix/10.1.1.5/VOL1/applications/batch/RAR.EXE' -> `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/.backup/batch.tmp/RAR.EXE'
+`/mnt/ncp/knoppix/10.1.1.5/VOL1/applications/batch/RAR.CFG' -> `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/.backup/batch.tmp/RAR.CFG'
+`/mnt/ncp/knoppix/10.1.1.5/VOL1/applications/batch/maintenance.bat' -> `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/.backup/batch.tmp/maintenance.bat'
+mer mar  3 15:35:35 CET 2004
+`/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/.backup/batch.tmp/bzip2.exe' -> `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/batch/bzip2.exe'
+`/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/.backup/batch.tmp/envoilog.bat' -> `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/batch/envoilog.bat'
+`/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/.backup/batch.tmp/gunzip.exe' -> `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/batch/gunzip.exe'
+`/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/.backup/batch.tmp/gzip.exe' -> `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/batch/gzip.exe'
+`/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/.backup/batch.tmp/maintenance.bat' -> `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/batch/maintenance.bat'
+`/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/.backup/batch.tmp/Maintenance Windows 2000.lnk' -> `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/batch/Maintenance Windows 2000.lnk'
+`/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/.backup/batch.tmp/Maintenance Windows 98.pif' -> `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/batch/Maintenance Windows 98.pif'
+`/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/.backup/batch.tmp/RAR.CFG' -> `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/batch/RAR.CFG'
+`/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/.backup/batch.tmp/RAR.EXE' -> `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/batch/RAR.EXE'
+`/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/.backup/batch.tmp/rar.log' -> `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/batch/rar.log'
+`/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/.backup/batch.tmp/readme.txt' -> `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/batch/readme.txt'
+`/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/.backup/batch.tmp/sauvegarde.bat' -> `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/batch/sauvegarde.bat'
+`/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/.backup/batch.tmp/system.mdw' -> `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/batch/system.mdw'
+`/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/.backup/batch.tmp/tar.exe' -> `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/batch/tar.exe'
+mer mar  3 15:35:54 CET 2004
+détruire le répertoire: `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/.backup/batch.tmp'
+mer mar  3 15:35:55 CET 2004
+mer mar  3 15:35:55 CET 2004
+mnt/ncp/knoppix/10.1.1.5/VOL1/applications/batch/
+mnt/ncp/knoppix/10.1.1.5/VOL1/applications/batch/envoilog.bat
+mnt/ncp/knoppix/10.1.1.5/VOL1/applications/batch/Maintenance Windows 98.pif
+mnt/ncp/knoppix/10.1.1.5/VOL1/applications/batch/system.mdw
+mnt/ncp/knoppix/10.1.1.5/VOL1/applications/batch/sauvegarde.bat
+mnt/ncp/knoppix/10.1.1.5/VOL1/applications/batch/Maintenance Windows 2000.lnk
+mnt/ncp/knoppix/10.1.1.5/VOL1/applications/batch/readme.txt
+mnt/ncp/knoppix/10.1.1.5/VOL1/applications/batch/gzip.exe
+mnt/ncp/knoppix/10.1.1.5/VOL1/applications/batch/gunzip.exe
+mnt/ncp/knoppix/10.1.1.5/VOL1/applications/batch/tar.exe
+mnt/ncp/knoppix/10.1.1.5/VOL1/applications/batch/rar.log
+mnt/ncp/knoppix/10.1.1.5/VOL1/applications/batch/bzip2.exe
+mnt/ncp/knoppix/10.1.1.5/VOL1/applications/batch/RAR.EXE
+mnt/ncp/knoppix/10.1.1.5/VOL1/applications/batch/RAR.CFG
+mnt/ncp/knoppix/10.1.1.5/VOL1/applications/batch/maintenance.bat
+mer mar  3 15:35:56 CET 2004
+mer mar  3 15:35:56 CET 2004
+`/mnt/ncp/knoppix/10.1.1.5/VOL1/applications/.backup/batch.tar.bz2' -> `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/.backup/batch.tar.bz2'
+mer mar  3 15:37:07 CET 2004
+détruit `/mnt/ncp/knoppix/10.3.1.5/VOL1/bases_access/test.mdb'
+`/mnt/ncp/knoppix/10.1.1.5/VOL1/bases_access/test.mdb' -> `/mnt/ncp/knoppix/10.3.1.5/VOL1/bases_access/.backup/test.tmp'
+mer mar  3 15:37:22 CET 2004
+`/mnt/ncp/knoppix/10.3.1.5/VOL1/bases_access/.backup/test.tmp' -> `/mnt/ncp/knoppix/10.3.1.5/VOL1/bases_access/test.mdb'
+mer mar  3 15:37:23 CET 2004
+mer mar  3 15:37:24 CET 2004
+`/mnt/ncp/knoppix/10.1.1.5/VOL1/bases_access/test.mdb' -> `/mnt/ncp/knoppix/10.1.1.5/VOL1/bases_access/.backup/test.mdb'
+mer mar  3 15:37:24 CET 2004
+mer mar  3 15:37:24 CET 2004
+`/mnt/ncp/knoppix/10.1.1.5/VOL1/bases_access/.backup/test.mdb.bz2' -> `/mnt/ncp/knoppix/10.3.1.5/VOL1/bases_access/.backup/test.mdb.bz2'
+mer mar  3 15:37:27 CET 2004
+Fin de copie des données intersites à:mer mar  3 15:37:27 CET 2004
+Stopping Netware Connexions:
+  -> unmounting ncp-filesystem...
+   OK
+  -> logout from NDS...
+Successfully logged out from AGIS1998
+Successfully logged out from all trees.
+   OK
+Arrêt Datasyncmer mar  3 15:37:37 CET 2004
+Démarrage Datasync mer mar  3 16:39:04 CET 2004
+
+   Logging activé.
+
+Stopping Netware Connexions:
+  -> unmounting ncp-filesystem...
+   OK
+  -> logout from NDS...
+   OK
+Starting Netware Connections:
+  -> login to NDS...
+mounted on:/mnt/ncp/knoppix/10.1.1.5/SYS
+   OK
+  ->  mounting ncp-filesystem...
+mounted on:/mnt/ncp/knoppix/10.1.1.5/VOL1
+mounted on:/mnt/ncp/knoppix/10.3.1.5/VOL1
+   OK
+Démarrage de copie des données intersite à:mer mar  3 16:40:25 CET 2004
+détruit `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/batch/bzip2.exe'
+détruit `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/batch/envoilog.bat'
+détruit `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/batch/gunzip.exe'
+détruit `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/batch/gzip.exe'
+détruit `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/batch/maintenance.bat'
+détruit `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/batch/Maintenance Windows 2000.lnk'
+détruit `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/batch/Maintenance Windows 98.pif'
+détruit `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/batch/RAR.CFG'
+détruit `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/batch/RAR.EXE'
+détruit `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/batch/rar.log'
+détruit `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/batch/readme.txt'
+détruit `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/batch/sauvegarde.bat'
+détruit `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/batch/system.mdw'
+détruit `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/batch/tar.exe'
+`/mnt/ncp/knoppix/10.1.1.5/VOL1/applications/batch' -> `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/.backup/batch.tmp'
+`/mnt/ncp/knoppix/10.1.1.5/VOL1/applications/batch/envoilog.bat' -> `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/.backup/batch.tmp/envoilog.bat'
+`/mnt/ncp/knoppix/10.1.1.5/VOL1/applications/batch/Maintenance Windows 98.pif' -> `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/.backup/batch.tmp/Maintenance Windows 98.pif'
+`/mnt/ncp/knoppix/10.1.1.5/VOL1/applications/batch/system.mdw' -> `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/.backup/batch.tmp/system.mdw'
+`/mnt/ncp/knoppix/10.1.1.5/VOL1/applications/batch/sauvegarde.bat' -> `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/.backup/batch.tmp/sauvegarde.bat'
+`/mnt/ncp/knoppix/10.1.1.5/VOL1/applications/batch/Maintenance Windows 2000.lnk' -> `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/.backup/batch.tmp/Maintenance Windows 2000.lnk'
+`/mnt/ncp/knoppix/10.1.1.5/VOL1/applications/batch/readme.txt' -> `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/.backup/batch.tmp/readme.txt'
+`/mnt/ncp/knoppix/10.1.1.5/VOL1/applications/batch/gzip.exe' -> `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/.backup/batch.tmp/gzip.exe'
+`/mnt/ncp/knoppix/10.1.1.5/VOL1/applications/batch/gunzip.exe' -> `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/.backup/batch.tmp/gunzip.exe'
+`/mnt/ncp/knoppix/10.1.1.5/VOL1/applications/batch/tar.exe' -> `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/.backup/batch.tmp/tar.exe'
+`/mnt/ncp/knoppix/10.1.1.5/VOL1/applications/batch/rar.log' -> `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/.backup/batch.tmp/rar.log'
+`/mnt/ncp/knoppix/10.1.1.5/VOL1/applications/batch/bzip2.exe' -> `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/.backup/batch.tmp/bzip2.exe'
+`/mnt/ncp/knoppix/10.1.1.5/VOL1/applications/batch/RAR.EXE' -> `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/.backup/batch.tmp/RAR.EXE'
+`/mnt/ncp/knoppix/10.1.1.5/VOL1/applications/batch/RAR.CFG' -> `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/.backup/batch.tmp/RAR.CFG'
+`/mnt/ncp/knoppix/10.1.1.5/VOL1/applications/batch/maintenance.bat' -> `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/.backup/batch.tmp/maintenance.bat'
+mer mar  3 16:42:27 CET 2004
+`/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/.backup/batch.tmp/bzip2.exe' -> `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/batch/bzip2.exe'
+`/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/.backup/batch.tmp/envoilog.bat' -> `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/batch/envoilog.bat'
+`/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/.backup/batch.tmp/gunzip.exe' -> `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/batch/gunzip.exe'
+`/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/.backup/batch.tmp/gzip.exe' -> `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/batch/gzip.exe'
+`/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/.backup/batch.tmp/maintenance.bat' -> `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/batch/maintenance.bat'
+`/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/.backup/batch.tmp/Maintenance Windows 2000.lnk' -> `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/batch/Maintenance Windows 2000.lnk'
+`/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/.backup/batch.tmp/Maintenance Windows 98.pif' -> `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/batch/Maintenance Windows 98.pif'
+`/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/.backup/batch.tmp/RAR.CFG' -> `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/batch/RAR.CFG'
+`/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/.backup/batch.tmp/RAR.EXE' -> `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/batch/RAR.EXE'
+`/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/.backup/batch.tmp/rar.log' -> `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/batch/rar.log'
+`/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/.backup/batch.tmp/readme.txt' -> `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/batch/readme.txt'
+`/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/.backup/batch.tmp/sauvegarde.bat' -> `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/batch/sauvegarde.bat'
+`/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/.backup/batch.tmp/system.mdw' -> `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/batch/system.mdw'
+`/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/.backup/batch.tmp/tar.exe' -> `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/batch/tar.exe'
+mer mar  3 16:42:46 CET 2004
+détruire le répertoire: `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/.backup/batch.tmp'
+mer mar  3 16:42:49 CET 2004
+mer mar  3 16:42:49 CET 2004
+mnt/ncp/knoppix/10.1.1.5/VOL1/applications/batch/
+mnt/ncp/knoppix/10.1.1.5/VOL1/applications/batch/envoilog.bat
+mnt/ncp/knoppix/10.1.1.5/VOL1/applications/batch/Maintenance Windows 98.pif
+mnt/ncp/knoppix/10.1.1.5/VOL1/applications/batch/system.mdw
+mnt/ncp/knoppix/10.1.1.5/VOL1/applications/batch/sauvegarde.bat
+mnt/ncp/knoppix/10.1.1.5/VOL1/applications/batch/Maintenance Windows 2000.lnk
+mnt/ncp/knoppix/10.1.1.5/VOL1/applications/batch/readme.txt
+mnt/ncp/knoppix/10.1.1.5/VOL1/applications/batch/gzip.exe
+mnt/ncp/knoppix/10.1.1.5/VOL1/applications/batch/gunzip.exe
+mnt/ncp/knoppix/10.1.1.5/VOL1/applications/batch/tar.exe
+mnt/ncp/knoppix/10.1.1.5/VOL1/applications/batch/rar.log
+mnt/ncp/knoppix/10.1.1.5/VOL1/applications/batch/bzip2.exe
+mnt/ncp/knoppix/10.1.1.5/VOL1/applications/batch/RAR.EXE
+mnt/ncp/knoppix/10.1.1.5/VOL1/applications/batch/RAR.CFG
+mnt/ncp/knoppix/10.1.1.5/VOL1/applications/batch/maintenance.bat
+mer mar  3 16:42:50 CET 2004
+mer mar  3 16:42:51 CET 2004
+`/mnt/ncp/knoppix/10.1.1.5/VOL1/applications/.backup/batch.tar.bz2' -> `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/.backup/batch.tar.bz2'
+mer mar  3 16:44:40 CET 2004
+Fin de copie des données intersites à:mer mar  3 16:44:40 CET 2004
+Stopping Netware Connexions:
+  -> unmounting ncp-filesystem...
+   OK
+  -> logout from NDS...
+Successfully logged out from AGIS1998
+Successfully logged out from all trees.
+   OK
+Arrêt Datasync mer mar  3 16:44:50 CET 2004
+##############################################################################
+Démarrage mer mar  3 17:09:00 CET 2004
+
+                                   Not Found
+
+   The requested URL /lib/ncptools/ncpmanager.php was not found on this
+   server.
+     _________________________________________________________________
+
+
+    Apache/1.3.29 Server at intranet.agis.fr Port 80
+
+                             [1][logoagis.gif] 
+
+                          Vous n'êtes pas connecté
+
+   nom d'utilisateur
+   _______________
+   mot de passe
+   _______________ [go.gif]-Submit
+   [2][oubli_passe_bouton.gif] 
+
+
+   [vague.gif]
+
+                                  [3]News 
+
+                             Fiches Techniques
+
+                                Statistiques
+
+   Warning: mysql_fetch_array(): supplied argument is not a valid MySQL
+   result resource in /mnt/sda3/var/www/intranet/navigue.inc on line 66
+   ......
+   Où trouver le fichier Log ?
+        Le fichier log est dans /var/log/datasync.log
+
+Références
+
+   1. http://intranet.agis.fr/index.php
+   2. http://intranet.agis.fr/datasync/index.php?mode=-w
+   3. http://intranet.agis.fr/news/entreprise.php?service=1
+Stopping Netware Connexions:
+  -> unmounting ncp-filesystem...
+   OK
+  -> logout from NDS...
+   OK
+Starting Netware Connections:
+  -> login to NDS...
+mounted on:/mnt/ncp/knoppix/10.1.1.5/SYS
+   OK
+  ->  mounting ncp-filesystem...
+mounted on:/mnt/ncp/knoppix/10.1.1.5/VOL1
+mounted on:/mnt/ncp/knoppix/10.3.1.5/VOL1
+   OK
+Démarrage de copie des données intersite à:mer mar  3 17:09:35 CET 2004
+détruit `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/batch/bzip2.exe'
+détruit `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/batch/envoilog.bat'
+détruit `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/batch/gunzip.exe'
+détruit `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/batch/gzip.exe'
+détruit `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/batch/maintenance.bat'
+détruit `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/batch/Maintenance Windows 2000.lnk'
+détruit `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/batch/Maintenance Windows 98.pif'
+détruit `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/batch/RAR.CFG'
+détruit `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/batch/RAR.EXE'
+détruit `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/batch/rar.log'
+détruit `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/batch/readme.txt'
+détruit `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/batch/sauvegarde.bat'
+détruit `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/batch/system.mdw'
+détruit `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/batch/tar.exe'
+`/mnt/ncp/knoppix/10.1.1.5/VOL1/applications/batch' -> `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/.backup/batch.tmp'
+`/mnt/ncp/knoppix/10.1.1.5/VOL1/applications/batch/envoilog.bat' -> `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/.backup/batch.tmp/envoilog.bat'
+`/mnt/ncp/knoppix/10.1.1.5/VOL1/applications/batch/Maintenance Windows 98.pif' -> `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/.backup/batch.tmp/Maintenance Windows 98.pif'
+`/mnt/ncp/knoppix/10.1.1.5/VOL1/applications/batch/system.mdw' -> `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/.backup/batch.tmp/system.mdw'
+`/mnt/ncp/knoppix/10.1.1.5/VOL1/applications/batch/sauvegarde.bat' -> `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/.backup/batch.tmp/sauvegarde.bat'
+`/mnt/ncp/knoppix/10.1.1.5/VOL1/applications/batch/Maintenance Windows 2000.lnk' -> `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/.backup/batch.tmp/Maintenance Windows 2000.lnk'
+`/mnt/ncp/knoppix/10.1.1.5/VOL1/applications/batch/readme.txt' -> `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/.backup/batch.tmp/readme.txt'
+`/mnt/ncp/knoppix/10.1.1.5/VOL1/applications/batch/gzip.exe' -> `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/.backup/batch.tmp/gzip.exe'
+`/mnt/ncp/knoppix/10.1.1.5/VOL1/applications/batch/gunzip.exe' -> `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/.backup/batch.tmp/gunzip.exe'
+`/mnt/ncp/knoppix/10.1.1.5/VOL1/applications/batch/tar.exe' -> `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/.backup/batch.tmp/tar.exe'
+`/mnt/ncp/knoppix/10.1.1.5/VOL1/applications/batch/rar.log' -> `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/.backup/batch.tmp/rar.log'
+`/mnt/ncp/knoppix/10.1.1.5/VOL1/applications/batch/bzip2.exe' -> `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/.backup/batch.tmp/bzip2.exe'
+`/mnt/ncp/knoppix/10.1.1.5/VOL1/applications/batch/RAR.EXE' -> `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/.backup/batch.tmp/RAR.EXE'
+`/mnt/ncp/knoppix/10.1.1.5/VOL1/applications/batch/RAR.CFG' -> `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/.backup/batch.tmp/RAR.CFG'
+`/mnt/ncp/knoppix/10.1.1.5/VOL1/applications/batch/maintenance.bat' -> `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/.backup/batch.tmp/maintenance.bat'
+mer mar  3 17:11:41 CET 2004
+`/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/.backup/batch.tmp/bzip2.exe' -> `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/batch/bzip2.exe'
+`/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/.backup/batch.tmp/envoilog.bat' -> `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/batch/envoilog.bat'
+`/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/.backup/batch.tmp/gunzip.exe' -> `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/batch/gunzip.exe'
+`/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/.backup/batch.tmp/gzip.exe' -> `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/batch/gzip.exe'
+`/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/.backup/batch.tmp/maintenance.bat' -> `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/batch/maintenance.bat'
+`/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/.backup/batch.tmp/Maintenance Windows 2000.lnk' -> `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/batch/Maintenance Windows 2000.lnk'
+`/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/.backup/batch.tmp/Maintenance Windows 98.pif' -> `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/batch/Maintenance Windows 98.pif'
+`/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/.backup/batch.tmp/RAR.CFG' -> `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/batch/RAR.CFG'
+`/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/.backup/batch.tmp/RAR.EXE' -> `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/batch/RAR.EXE'
+`/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/.backup/batch.tmp/rar.log' -> `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/batch/rar.log'
+`/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/.backup/batch.tmp/readme.txt' -> `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/batch/readme.txt'
+`/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/.backup/batch.tmp/sauvegarde.bat' -> `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/batch/sauvegarde.bat'
+`/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/.backup/batch.tmp/system.mdw' -> `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/batch/system.mdw'
+`/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/.backup/batch.tmp/tar.exe' -> `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/batch/tar.exe'
+mer mar  3 17:11:59 CET 2004
+détruire le répertoire: `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/.backup/batch.tmp'
+mer mar  3 17:12:00 CET 2004
+mer mar  3 17:12:00 CET 2004
+mnt/ncp/knoppix/10.1.1.5/VOL1/applications/batch/
+mnt/ncp/knoppix/10.1.1.5/VOL1/applications/batch/envoilog.bat
+mnt/ncp/knoppix/10.1.1.5/VOL1/applications/batch/Maintenance Windows 98.pif
+mnt/ncp/knoppix/10.1.1.5/VOL1/applications/batch/system.mdw
+mnt/ncp/knoppix/10.1.1.5/VOL1/applications/batch/sauvegarde.bat
+mnt/ncp/knoppix/10.1.1.5/VOL1/applications/batch/Maintenance Windows 2000.lnk
+mnt/ncp/knoppix/10.1.1.5/VOL1/applications/batch/readme.txt
+mnt/ncp/knoppix/10.1.1.5/VOL1/applications/batch/gzip.exe
+mnt/ncp/knoppix/10.1.1.5/VOL1/applications/batch/gunzip.exe
+mnt/ncp/knoppix/10.1.1.5/VOL1/applications/batch/tar.exe
+mnt/ncp/knoppix/10.1.1.5/VOL1/applications/batch/rar.log
+mnt/ncp/knoppix/10.1.1.5/VOL1/applications/batch/bzip2.exe
+mnt/ncp/knoppix/10.1.1.5/VOL1/applications/batch/RAR.EXE
+mnt/ncp/knoppix/10.1.1.5/VOL1/applications/batch/RAR.CFG
+mnt/ncp/knoppix/10.1.1.5/VOL1/applications/batch/maintenance.bat
+mer mar  3 17:12:01 CET 2004
+mer mar  3 17:12:01 CET 2004
+`/mnt/ncp/knoppix/10.1.1.5/VOL1/applications/.backup/batch.tar.bz2' -> `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/.backup/batch.tar.bz2'
+mer mar  3 17:13:11 CET 2004
+Fin de copie des données intersites à:mer mar  3 17:13:11 CET 2004
+Stopping Netware Connexions:
+  -> unmounting ncp-filesystem...
+   OK
+  -> logout from NDS...
+Successfully logged out from AGIS1998
+Successfully logged out from all trees.
+   OK
+Arrêt mer mar  3 17:13:22 CET 2004
+##############################################################################
+Démarrage mer mar  3 17:17:43 CET 2004
+
+   Mise à jour du script de connexoin auprès de la NDS
+   Script actualisé
+   Note: Se script est lancé via CRON. Pour sa configuration, regarder le
+   fichier /etc/crontab
+
+   Logging activé.
+
+Stopping Netware Connexions:
+  -> unmounting ncp-filesystem...
+   OK
+  -> logout from NDS...
+   OK
+Starting Netware Connections:
+  -> login to NDS...
+mounted on:/mnt/ncp/knoppix/10.1.1.5/SYS
+   OK
+  ->  mounting ncp-filesystem...
+mounted on:/mnt/ncp/knoppix/10.1.1.5/VOL1
+mounted on:/mnt/ncp/knoppix/10.3.1.5/VOL1
+   OK
+Démarrage de copie des données intersite à:mer mar  3 17:19:04 CET 2004
+détruit `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/batch/bzip2.exe'
+détruit `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/batch/envoilog.bat'
+détruit `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/batch/gunzip.exe'
+détruit `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/batch/gzip.exe'
+détruit `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/batch/maintenance.bat'
+détruit `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/batch/Maintenance Windows 2000.lnk'
+détruit `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/batch/Maintenance Windows 98.pif'
+détruit `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/batch/RAR.CFG'
+détruit `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/batch/RAR.EXE'
+détruit `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/batch/rar.log'
+détruit `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/batch/readme.txt'
+détruit `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/batch/sauvegarde.bat'
+détruit `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/batch/system.mdw'
+détruit `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/batch/tar.exe'
+`/mnt/ncp/knoppix/10.1.1.5/VOL1/applications/batch' -> `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/.backup/batch.tmp'
+`/mnt/ncp/knoppix/10.1.1.5/VOL1/applications/batch/envoilog.bat' -> `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/.backup/batch.tmp/envoilog.bat'
+`/mnt/ncp/knoppix/10.1.1.5/VOL1/applications/batch/Maintenance Windows 98.pif' -> `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/.backup/batch.tmp/Maintenance Windows 98.pif'
+`/mnt/ncp/knoppix/10.1.1.5/VOL1/applications/batch/system.mdw' -> `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/.backup/batch.tmp/system.mdw'
+`/mnt/ncp/knoppix/10.1.1.5/VOL1/applications/batch/sauvegarde.bat' -> `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/.backup/batch.tmp/sauvegarde.bat'
+`/mnt/ncp/knoppix/10.1.1.5/VOL1/applications/batch/Maintenance Windows 2000.lnk' -> `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/.backup/batch.tmp/Maintenance Windows 2000.lnk'
+`/mnt/ncp/knoppix/10.1.1.5/VOL1/applications/batch/readme.txt' -> `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/.backup/batch.tmp/readme.txt'
+`/mnt/ncp/knoppix/10.1.1.5/VOL1/applications/batch/gzip.exe' -> `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/.backup/batch.tmp/gzip.exe'
+`/mnt/ncp/knoppix/10.1.1.5/VOL1/applications/batch/gunzip.exe' -> `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/.backup/batch.tmp/gunzip.exe'
+`/mnt/ncp/knoppix/10.1.1.5/VOL1/applications/batch/tar.exe' -> `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/.backup/batch.tmp/tar.exe'
+`/mnt/ncp/knoppix/10.1.1.5/VOL1/applications/batch/rar.log' -> `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/.backup/batch.tmp/rar.log'
+`/mnt/ncp/knoppix/10.1.1.5/VOL1/applications/batch/bzip2.exe' -> `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/.backup/batch.tmp/bzip2.exe'
+`/mnt/ncp/knoppix/10.1.1.5/VOL1/applications/batch/RAR.EXE' -> `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/.backup/batch.tmp/RAR.EXE'
+`/mnt/ncp/knoppix/10.1.1.5/VOL1/applications/batch/RAR.CFG' -> `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/.backup/batch.tmp/RAR.CFG'
+`/mnt/ncp/knoppix/10.1.1.5/VOL1/applications/batch/maintenance.bat' -> `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/.backup/batch.tmp/maintenance.bat'
+mer mar  3 17:21:10 CET 2004
+`/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/.backup/batch.tmp/bzip2.exe' -> `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/batch/bzip2.exe'
+`/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/.backup/batch.tmp/envoilog.bat' -> `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/batch/envoilog.bat'
+`/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/.backup/batch.tmp/gunzip.exe' -> `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/batch/gunzip.exe'
+`/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/.backup/batch.tmp/gzip.exe' -> `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/batch/gzip.exe'
+`/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/.backup/batch.tmp/maintenance.bat' -> `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/batch/maintenance.bat'
+`/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/.backup/batch.tmp/Maintenance Windows 2000.lnk' -> `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/batch/Maintenance Windows 2000.lnk'
+`/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/.backup/batch.tmp/Maintenance Windows 98.pif' -> `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/batch/Maintenance Windows 98.pif'
+`/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/.backup/batch.tmp/RAR.CFG' -> `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/batch/RAR.CFG'
+`/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/.backup/batch.tmp/RAR.EXE' -> `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/batch/RAR.EXE'
+`/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/.backup/batch.tmp/rar.log' -> `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/batch/rar.log'
+`/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/.backup/batch.tmp/readme.txt' -> `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/batch/readme.txt'
+`/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/.backup/batch.tmp/sauvegarde.bat' -> `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/batch/sauvegarde.bat'
+`/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/.backup/batch.tmp/system.mdw' -> `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/batch/system.mdw'
+`/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/.backup/batch.tmp/tar.exe' -> `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/batch/tar.exe'
+mer mar  3 17:21:28 CET 2004
+détruire le répertoire: `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/.backup/batch.tmp'
+mer mar  3 17:21:30 CET 2004
+mer mar  3 17:21:30 CET 2004
+mnt/ncp/knoppix/10.1.1.5/VOL1/applications/batch/
+mnt/ncp/knoppix/10.1.1.5/VOL1/applications/batch/envoilog.bat
+mnt/ncp/knoppix/10.1.1.5/VOL1/applications/batch/Maintenance Windows 98.pif
+mnt/ncp/knoppix/10.1.1.5/VOL1/applications/batch/system.mdw
+mnt/ncp/knoppix/10.1.1.5/VOL1/applications/batch/sauvegarde.bat
+mnt/ncp/knoppix/10.1.1.5/VOL1/applications/batch/Maintenance Windows 2000.lnk
+mnt/ncp/knoppix/10.1.1.5/VOL1/applications/batch/readme.txt
+mnt/ncp/knoppix/10.1.1.5/VOL1/applications/batch/gzip.exe
+mnt/ncp/knoppix/10.1.1.5/VOL1/applications/batch/gunzip.exe
+mnt/ncp/knoppix/10.1.1.5/VOL1/applications/batch/tar.exe
+mnt/ncp/knoppix/10.1.1.5/VOL1/applications/batch/rar.log
+mnt/ncp/knoppix/10.1.1.5/VOL1/applications/batch/bzip2.exe
+mnt/ncp/knoppix/10.1.1.5/VOL1/applications/batch/RAR.EXE
+mnt/ncp/knoppix/10.1.1.5/VOL1/applications/batch/RAR.CFG
+mnt/ncp/knoppix/10.1.1.5/VOL1/applications/batch/maintenance.bat
+mer mar  3 17:21:31 CET 2004
+mer mar  3 17:21:32 CET 2004
+`/mnt/ncp/knoppix/10.1.1.5/VOL1/applications/.backup/batch.tar.bz2' -> `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/.backup/batch.tar.bz2'
+mer mar  3 17:22:42 CET 2004
+Fin de copie des données intersites à:mer mar  3 17:22:42 CET 2004
+Stopping Netware Connexions:
+  -> unmounting ncp-filesystem...
+   OK
+  -> logout from NDS...
+Successfully logged out from AGIS1998
+Successfully logged out from all trees.
+   OK
+Arrêt mer mar  3 17:22:52 CET 2004
+##############################################################################
+Démarrage mer mar  3 17:35:07 CET 2004
+
+   Mise à jour du script de connexion auprès de la NDS
+   Script actualisé
+   Note: Se script est lancé via CRON. Pour sa configuration, regarder le
+   fichier /etc/crontab
+
+   Logging activé.
+
+Stopping Netware Connections:
+  -> unmounting ncp-filesystem...
+   OK
+  -> logout from NDS...
+   OK
+Starting Netware Connections:
+  -> login to NDS...
+mounted on:/mnt/ncp/knoppix/10.1.1.5/SYS
+   OK
+  ->  mounting ncp-filesystem...
+mounted on:/mnt/ncp/knoppix/10.1.1.5/VOL1
+mounted on:/mnt/ncp/knoppix/10.3.1.5/VOL1
+   OK
+Démarrage de copie des données intersite à:mer mar  3 17:36:28 CET 2004
+détruit `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/batch/bzip2.exe'
+détruit `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/batch/envoilog.bat'
+détruit `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/batch/gunzip.exe'
+détruit `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/batch/gzip.exe'
+détruit `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/batch/maintenance.bat'
+détruit `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/batch/Maintenance Windows 2000.lnk'
+détruit `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/batch/Maintenance Windows 98.pif'
+détruit `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/batch/RAR.CFG'
+détruit `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/batch/RAR.EXE'
+détruit `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/batch/rar.log'
+détruit `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/batch/readme.txt'
+détruit `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/batch/sauvegarde.bat'
+détruit `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/batch/system.mdw'
+détruit `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/batch/tar.exe'
+`/mnt/ncp/knoppix/10.1.1.5/VOL1/applications/batch' -> `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/.backup/batch.tmp'
+`/mnt/ncp/knoppix/10.1.1.5/VOL1/applications/batch/envoilog.bat' -> `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/.backup/batch.tmp/envoilog.bat'
+`/mnt/ncp/knoppix/10.1.1.5/VOL1/applications/batch/Maintenance Windows 98.pif' -> `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/.backup/batch.tmp/Maintenance Windows 98.pif'
+`/mnt/ncp/knoppix/10.1.1.5/VOL1/applications/batch/system.mdw' -> `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/.backup/batch.tmp/system.mdw'
+`/mnt/ncp/knoppix/10.1.1.5/VOL1/applications/batch/sauvegarde.bat' -> `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/.backup/batch.tmp/sauvegarde.bat'
+`/mnt/ncp/knoppix/10.1.1.5/VOL1/applications/batch/Maintenance Windows 2000.lnk' -> `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/.backup/batch.tmp/Maintenance Windows 2000.lnk'
+`/mnt/ncp/knoppix/10.1.1.5/VOL1/applications/batch/readme.txt' -> `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/.backup/batch.tmp/readme.txt'
+`/mnt/ncp/knoppix/10.1.1.5/VOL1/applications/batch/gzip.exe' -> `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/.backup/batch.tmp/gzip.exe'
+`/mnt/ncp/knoppix/10.1.1.5/VOL1/applications/batch/gunzip.exe' -> `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/.backup/batch.tmp/gunzip.exe'
+`/mnt/ncp/knoppix/10.1.1.5/VOL1/applications/batch/tar.exe' -> `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/.backup/batch.tmp/tar.exe'
+`/mnt/ncp/knoppix/10.1.1.5/VOL1/applications/batch/rar.log' -> `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/.backup/batch.tmp/rar.log'
+`/mnt/ncp/knoppix/10.1.1.5/VOL1/applications/batch/bzip2.exe' -> `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/.backup/batch.tmp/bzip2.exe'
+`/mnt/ncp/knoppix/10.1.1.5/VOL1/applications/batch/RAR.EXE' -> `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/.backup/batch.tmp/RAR.EXE'
+`/mnt/ncp/knoppix/10.1.1.5/VOL1/applications/batch/RAR.CFG' -> `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/.backup/batch.tmp/RAR.CFG'
+`/mnt/ncp/knoppix/10.1.1.5/VOL1/applications/batch/maintenance.bat' -> `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/.backup/batch.tmp/maintenance.bat'
+mer mar  3 17:38:31 CET 2004
+`/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/.backup/batch.tmp/bzip2.exe' -> `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/batch/bzip2.exe'
+`/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/.backup/batch.tmp/envoilog.bat' -> `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/batch/envoilog.bat'
+`/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/.backup/batch.tmp/gunzip.exe' -> `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/batch/gunzip.exe'
+`/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/.backup/batch.tmp/gzip.exe' -> `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/batch/gzip.exe'
+`/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/.backup/batch.tmp/maintenance.bat' -> `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/batch/maintenance.bat'
+`/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/.backup/batch.tmp/Maintenance Windows 2000.lnk' -> `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/batch/Maintenance Windows 2000.lnk'
+`/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/.backup/batch.tmp/Maintenance Windows 98.pif' -> `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/batch/Maintenance Windows 98.pif'
+`/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/.backup/batch.tmp/RAR.CFG' -> `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/batch/RAR.CFG'
+`/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/.backup/batch.tmp/RAR.EXE' -> `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/batch/RAR.EXE'
+`/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/.backup/batch.tmp/rar.log' -> `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/batch/rar.log'
+`/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/.backup/batch.tmp/readme.txt' -> `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/batch/readme.txt'
+`/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/.backup/batch.tmp/sauvegarde.bat' -> `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/batch/sauvegarde.bat'
+`/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/.backup/batch.tmp/system.mdw' -> `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/batch/system.mdw'
+`/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/.backup/batch.tmp/tar.exe' -> `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/batch/tar.exe'
+mer mar  3 17:38:49 CET 2004
+détruire le répertoire: `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/.backup/batch.tmp'
+mer mar  3 17:38:51 CET 2004
+mer mar  3 17:38:51 CET 2004
+mnt/ncp/knoppix/10.1.1.5/VOL1/applications/batch/
+mnt/ncp/knoppix/10.1.1.5/VOL1/applications/batch/envoilog.bat
+mnt/ncp/knoppix/10.1.1.5/VOL1/applications/batch/Maintenance Windows 98.pif
+mnt/ncp/knoppix/10.1.1.5/VOL1/applications/batch/system.mdw
+mnt/ncp/knoppix/10.1.1.5/VOL1/applications/batch/sauvegarde.bat
+mnt/ncp/knoppix/10.1.1.5/VOL1/applications/batch/Maintenance Windows 2000.lnk
+mnt/ncp/knoppix/10.1.1.5/VOL1/applications/batch/readme.txt
+mnt/ncp/knoppix/10.1.1.5/VOL1/applications/batch/gzip.exe
+mnt/ncp/knoppix/10.1.1.5/VOL1/applications/batch/gunzip.exe
+mnt/ncp/knoppix/10.1.1.5/VOL1/applications/batch/tar.exe
+mnt/ncp/knoppix/10.1.1.5/VOL1/applications/batch/rar.log
+mnt/ncp/knoppix/10.1.1.5/VOL1/applications/batch/bzip2.exe
+mnt/ncp/knoppix/10.1.1.5/VOL1/applications/batch/RAR.EXE
+mnt/ncp/knoppix/10.1.1.5/VOL1/applications/batch/RAR.CFG
+mnt/ncp/knoppix/10.1.1.5/VOL1/applications/batch/maintenance.bat
+mer mar  3 17:38:51 CET 2004
+mer mar  3 17:38:52 CET 2004
+`/mnt/ncp/knoppix/10.1.1.5/VOL1/applications/.backup/batch.tar.bz2' -> `/mnt/ncp/knoppix/10.3.1.5/VOL1/applications/.backup/batch.tar.bz2'
+mer mar  3 17:40:07 CET 2004
+Fin de copie des données intersites à:mer mar  3 17:40:07 CET 2004
+Stopping Netware Connections:
+  -> unmounting ncp-filesystem...
+   OK
+  -> logout from NDS...
+Successfully logged out from AGIS1998
+Successfully logged out from all trees.
+   OK
+Arrêt mer mar  3 17:40:17 CET 2004
+##############################################################################
+Démarrage mer mai 19 08:59:25 CEST 2004
+
+   Mise à jour du script de connexion auprès de la NDS
+   Script actualisé
+
+   Logging activé.
+
+Stopping Netware Connections:
+  -> unmounting ncp-filesystem...
+   OK
+  -> logout from NDS...
+   OK
+Starting Netware Connections:
+  -> login to NDS...
+mounted on:/mnt/ncp/root/10.1.1.5/SYS
+   OK
+  ->  mounting ncp-filesystem...
+mounted on:/mnt/ncp/root/10.1.1.5/VOL1
+mounted on:/mnt/ncp/root/10.3.1.5/VOL1
+   OK
+Démarrage de copie des données intersite à:mer mai 19 09:00:46 CEST 2004
+mer mai 19 09:00:46 CEST 2004
+mer mai 19 09:00:46 CEST 2004
+mer mai 19 09:00:46 CEST 2004
+mer mai 19 09:00:46 CEST 2004
+mer mai 19 09:00:46 CEST 2004
+mer mai 19 09:00:46 CEST 2004
+Fin de copie des données intersites à:mer mai 19 09:00:46 CEST 2004
+Stopping Netware Connections:
+  -> unmounting ncp-filesystem...
+   OK
+  -> logout from NDS...
+Successfully logged out from AGIS1998
+Successfully logged out from AGIS1998
+Successfully logged out from TAR0899
+Successfully logged out from all trees.
+   OK
+Arrêt mer mai 19 09:00:57 CEST 2004
+##############################################################################
+Démarrage mer mai 19 09:01:56 CEST 2004
+
+   Mise à jour du script de connexion auprès de la NDS
+   Script actualisé
+
+   Logging activé.
+
+Stopping Netware Connections:
+  -> unmounting ncp-filesystem...
+   OK
+  -> logout from NDS...
+   OK
+Starting Netware Connections:
+  -> login to NDS...
+mounted on:/mnt/ncp/root/10.1.1.5/SYS
+   OK
+  ->  mounting ncp-filesystem...
+mounted on:/mnt/ncp/root/10.1.1.5/VOL1
+mounted on:/mnt/ncp/root/10.3.1.5/VOL1
+   OK
+Démarrage de copie des données intersite à:mer mai 19 09:03:17 CEST 2004
+mer mai 19 09:03:17 CEST 2004
+mer mai 19 09:03:17 CEST 2004
+mer mai 19 09:03:17 CEST 2004
+mer mai 19 09:03:17 CEST 2004
+mer mai 19 09:03:17 CEST 2004
+mer mai 19 09:03:17 CEST 2004
+Fin de copie des données intersites à:mer mai 19 09:03:17 CEST 2004
+Stopping Netware Connections:
+  -> unmounting ncp-filesystem...
+   OK
+  -> logout from NDS...
+Successfully logged out from AGIS1998
+Successfully logged out from AGIS1998
+Successfully logged out from TAR0899
+Successfully logged out from all trees.
+   OK
+Arrêt mer mai 19 09:03:28 CEST 2004
+##############################################################################
+Démarrage mer mai 19 09:09:29 CEST 2004
+
+   Mise à jour du script de connexion auprès de la NDS
+   Script actualisé
+
+   Logging activé.
+
+Stopping Netware Connections:
+  -> unmounting ncp-filesystem...
+   OK
+  -> logout from NDS...
+Successfully logged out from AGIS1998
+Successfully logged out from AGIS1998
+Successfully logged out from TAR0899
+Successfully logged out from all trees.
+   OK
+Starting Netware Connections:
+  -> login to NDS...
+mounted on:/mnt/ncp/root/10.1.1.5/SYS
+   OK
+  ->  mounting ncp-filesystem...
+mounted on:/mnt/ncp/root/10.1.1.5/VOL1
+mounted on:/mnt/ncp/root/10.3.1.5/VOL1
+   OK
+Démarrage de copie des données intersite à:mer mai 19 09:10:50 CEST 2004
+mer mai 19 09:10:50 CEST 2004
+mer mai 19 09:10:50 CEST 2004
+mer mai 19 09:10:50 CEST 2004
+mer mai 19 09:10:50 CEST 2004
+mer mai 19 09:10:50 CEST 2004
+mer mai 19 09:10:50 CEST 2004
+Fin de copie des données intersites à:mer mai 19 09:10:50 CEST 2004
+Stopping Netware Connections:
+  -> unmounting ncp-filesystem...
+   OK
+  -> logout from NDS...
+Successfully logged out from AGIS1998
+Successfully logged out from AGIS1998
+Successfully logged out from TAR0899
+Successfully logged out from all trees.
+   OK
+Arrêt mer mai 19 09:11:00 CEST 2004
+##############################################################################
+Démarrage mer mai 19 09:12:36 CEST 2004
+
+   Mise à jour du script de connexion auprès de la NDS
+   Script actualisé
+
+   Logging activé.
+
+Stopping Netware Connections:
+  -> unmounting ncp-filesystem...
+   OK
+  -> logout from NDS...
+   OK
+Starting Netware Connections:
+  -> login to NDS...
+mounted on:/mnt/ncp/knoppix/10.1.1.5/SYS
+   OK
+  ->  mounting ncp-filesystem...
+mounted on:/mnt/ncp/knoppix/10.1.1.5/VOL1
+mounted on:/mnt/ncp/knoppix/10.3.1.5/VOL1
+   OK
+Démarrage de copie des données intersite à:mer mai 19 09:13:57 CEST 2004
+détruit `/mnt/ncp/knoppix/10.3.1.5/VOL1/bases_access/test.mdb'
+`/mnt/ncp/knoppix/10.1.1.5/VOL1/bases_access/test.mdb' -> `/mnt/ncp/knoppix/10.3.1.5/VOL1/bases_access/.backup/test.tmp'
+mer mai 19 09:14:10 CEST 2004
+`/mnt/ncp/knoppix/10.3.1.5/VOL1/bases_access/.backup/test.tmp' -> `/mnt/ncp/knoppix/10.3.1.5/VOL1/bases_access/test.mdb'
+mer mai 19 09:14:11 CEST 2004
+mer mai 19 09:14:11 CEST 2004
+`/mnt/ncp/knoppix/10.1.1.5/VOL1/bases_access/test.mdb' -> `/mnt/ncp/knoppix/10.1.1.5/VOL1/bases_access/.backup/test.mdb'
+mer mai 19 09:14:11 CEST 2004
+mer mai 19 09:14:11 CEST 2004
+`/mnt/ncp/knoppix/10.1.1.5/VOL1/bases_access/.backup/test.mdb.bz2' -> `/mnt/ncp/knoppix/10.3.1.5/VOL1/bases_access/.backup/test.mdb.bz2'
+mer mai 19 09:14:14 CEST 2004
+Fin de copie des données intersites à:mer mai 19 09:14:14 CEST 2004
+Stopping Netware Connections:
+  -> unmounting ncp-filesystem...
+   OK
+  -> logout from NDS...
+Successfully logged out from AGIS1998
+Successfully logged out from all trees.
+   OK
+Arrêt mer mai 19 09:14:24 CEST 2004
+##############################################################################
+Démarrage mer mai 19 09:26:38 CEST 2004
+
+   Mise à jour du script de connexion auprès de la NDS
+   Script actualisé
+
+   Logging activé.
+
+Stopping Netware Connections:
+  -> unmounting ncp-filesystem...
+   OK
+  -> logout from NDS...
+   OK
+Starting Netware Connections:
+  -> login to NDS...
+mounted on:/mnt/ncp/knoppix/10.1.1.5/SYS
+   OK
+  ->  mounting ncp-filesystem...
+mounted on:/mnt/ncp/knoppix/10.1.1.5/VOL1
+mounted on:/mnt/ncp/knoppix/10.3.1.5/VOL1
+   OK
+Démarrage de copie des données intersite à:mer mai 19 09:27:58 CEST 2004
+détruit `/mnt/ncp/knoppix/10.3.1.5/VOL1/bases_access/test.mdb'
+`/mnt/ncp/knoppix/10.1.1.5/VOL1/bases_access/test.mdb' -> `/mnt/ncp/knoppix/10.3.1.5/VOL1/bases_access/.backup/test.tmp'
+mer mai 19 09:28:11 CEST 2004
+`/mnt/ncp/knoppix/10.3.1.5/VOL1/bases_access/.backup/test.tmp' -> `/mnt/ncp/knoppix/10.3.1.5/VOL1/bases_access/test.mdb'
+mer mai 19 09:28:12 CEST 2004
+mer mai 19 09:28:13 CEST 2004
+`/mnt/ncp/knoppix/10.1.1.5/VOL1/bases_access/test.mdb' -> `/mnt/ncp/knoppix/10.1.1.5/VOL1/bases_access/.backup/test.mdb'
+mer mai 19 09:28:13 CEST 2004
+mer mai 19 09:28:13 CEST 2004
+`/mnt/ncp/knoppix/10.1.1.5/VOL1/bases_access/.backup/test.mdb.bz2' -> `/mnt/ncp/knoppix/10.3.1.5/VOL1/bases_access/.backup/test.mdb.bz2'
+mer mai 19 09:28:15 CEST 2004
+Fin de copie des données intersites à:mer mai 19 09:28:16 CEST 2004
+Stopping Netware Connections:
+  -> unmounting ncp-filesystem...
+   OK
+  -> logout from NDS...
+Successfully logged out from AGIS1998
+Successfully logged out from all trees.
+   OK
+Arrêt mer mai 19 09:28:26 CEST 2004
+##############################################################################
+Démarrage mer mai 19 09:31:39 CEST 2004
+
+   Mise à jour du script de connexion auprès de la NDS
+   Script actualisé
+
+   Logging activé.
+
+Stopping Netware Connections:
+  -> unmounting ncp-filesystem...
+   OK
+  -> logout from NDS...
+   OK
+Starting Netware Connections:
+  -> login to NDS...
+mounted on:/mnt/ncp/knoppix/10.1.1.5/SYS
+   OK
+  ->  mounting ncp-filesystem...
+mounted on:/mnt/ncp/knoppix/10.1.1.5/VOL1
+mounted on:/mnt/ncp/knoppix/10.3.1.5/VOL1
+   OK
+Démarrage de copie des données intersite à:mer mai 19 09:33:01 CEST 2004
+détruit `/mnt/ncp/knoppix/10.3.1.5/VOL1/bases_access/test.mdb'
+`/mnt/ncp/knoppix/10.1.1.5/VOL1/bases_access/test.mdb' -> `/mnt/ncp/knoppix/10.3.1.5/VOL1/bases_access/.backup/test.tmp'
+mer mai 19 09:33:13 CEST 2004
+`/mnt/ncp/knoppix/10.3.1.5/VOL1/bases_access/.backup/test.tmp' -> `/mnt/ncp/knoppix/10.3.1.5/VOL1/bases_access/test.mdb'
+mer mai 19 09:33:14 CEST 2004
+mer mai 19 09:33:15 CEST 2004
+`/mnt/ncp/knoppix/10.1.1.5/VOL1/bases_access/test.mdb' -> `/mnt/ncp/knoppix/10.1.1.5/VOL1/bases_access/.backup/test.mdb'
+mer mai 19 09:33:15 CEST 2004
+mer mai 19 09:33:15 CEST 2004
+`/mnt/ncp/knoppix/10.1.1.5/VOL1/bases_access/.backup/test.mdb.bz2' -> `/mnt/ncp/knoppix/10.3.1.5/VOL1/bases_access/.backup/test.mdb.bz2'
+mer mai 19 09:33:17 CEST 2004
+Fin de copie des données intersites à:mer mai 19 09:33:18 CEST 2004
+Stopping Netware Connections:
+  -> unmounting ncp-filesystem...
+   OK
+  -> logout from NDS...
+Successfully logged out from AGIS1998
+Successfully logged out from all trees.
+   OK
+Arrêt mer mai 19 09:33:28 CEST 2004
+##############################################################################
+Démarrage jeu avr 28 16:22:36 CEST 2005
+
+   Mise à jour du script de connexion auprès de la NDS
+   Script actualisé
+
+   Logging activé.
+
+Stopping Netware Connections:
+  -> unmounting ncp-filesystem...
+   OK
+  -> logout from NDS...
+   OK
+Starting Netware Connections:
+  -> login to NDS...
+mounted on:/mnt/ncp/knoppix/10.1.1.5/SYS
+   OK
+  ->  mounting ncp-filesystem...
+mounted on:/mnt/ncp/knoppix/10.1.1.5/VOL1
+mounted on:/mnt/ncp/knoppix/10.3.1.5/VOL1
+   OK
+Démarrage de copie des données intersite à:jeu avr 28 16:23:53 CEST 2005
+détruit `/mnt/ncp/knoppix/10.3.1.5/VOL1/bases_access/test.mdb'
+`/mnt/ncp/knoppix/10.1.1.5/VOL1/bases_access/test.mdb' -> `/mnt/ncp/knoppix/10.3.1.5/VOL1/bases_access/.backup/test.tmp'
+jeu avr 28 16:24:07 CEST 2005
+`/mnt/ncp/knoppix/10.3.1.5/VOL1/bases_access/.backup/test.tmp' -> `/mnt/ncp/knoppix/10.3.1.5/VOL1/bases_access/test.mdb'
+jeu avr 28 16:24:07 CEST 2005
+jeu avr 28 16:24:07 CEST 2005
+`/mnt/ncp/knoppix/10.1.1.5/VOL1/bases_access/test.mdb' -> `/mnt/ncp/knoppix/10.1.1.5/VOL1/bases_access/.backup/test.mdb'
+jeu avr 28 16:24:07 CEST 2005
+jeu avr 28 16:24:08 CEST 2005
+`/mnt/ncp/knoppix/10.1.1.5/VOL1/bases_access/.backup/test.mdb.bz2' -> `/mnt/ncp/knoppix/10.3.1.5/VOL1/bases_access/.backup/test.mdb.bz2'
+jeu avr 28 16:24:11 CEST 2005
+Fin de copie des données intersites à:jeu avr 28 16:24:11 CEST 2005
+Stopping Netware Connections:
+  -> unmounting ncp-filesystem...
+   OK
+  -> logout from NDS...
+Successfully logged out from AGIS1998
+Successfully logged out from all trees.
+   OK
+Arrêt jeu avr 28 16:24:21 CEST 2005
+##############################################################################

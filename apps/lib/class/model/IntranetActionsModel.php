@@ -4,7 +4,7 @@
  * Description of IntranetActionsModel
  * Table des utilisateurs
  *
- * @author tp4300001
+ * @author franckwastaken
  */
 class IntranetActionsModel extends AbstractModel {
 
@@ -15,9 +15,18 @@ class IntranetActionsModel extends AbstractModel {
     const FIELDNAME_DESCRIPTION_INTRANET_ACTIONS = 'description_intranet_actions';
     const FIELDNAME_TAG_INTRANET_ACTIONS = 'tag_intranet_actions';
     const FIELDNAME_PARENT_INTRANET_ACTIONS = 'parent_intranet_actions';
+    const NAME_DIFFUSION_FTA= 'diffusion_fta';
+    const VALUE_FTA= 'fta';
     const VALUE_ROLE = 'role';
     const VALUE_SITE = 'site';
     const VALUE_WORKFLOW = 'workflow';
+    const NAME_ACCES_MODULE_FTA = 'acces_module_fta';
+    const NAME_CONSULTATION= 'consultation';
+    const NAME_MODIFICATION= 'modification';
+    const NAME_IMPRESSION= 'impression';
+    const NAME_DIFFUSION= 'diffusion';
+    const NAME_DROIT_MODIFICATION= 'droit_modification';
+    
 
     public function __construct($paramId = NULL, $paramIsCreateRecordsetInDatabaseIfKeyDoesntExist = AbstractModel::DEFAULT_IS_CREATE_RECORDSET_IN_DATABASE_IF_KEY_DOESNT_EXIST) {
         parent::__construct($paramId, $paramIsCreateRecordsetInDatabaseIfKeyDoesntExist);
@@ -79,7 +88,7 @@ class IntranetActionsModel extends AbstractModel {
                                 . ' AND ' . FtaActionRoleModel::TABLENAME . '.' . FtaActionRoleModel::FIELDNAME_ID_FTA_ROLE
                                 . '=' . $paramIdFtaRole
                                 . ' AND ' . FtaWorkflowStructureModel::TABLENAME . '.' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_WORKFLOW
-                                . '=' . FtaActionRoleModel::TABLENAME . '.' . FtaActionRoleModel::FIELDNAME_ID_FTA_WROKFLOW
+                                . '=' . FtaActionRoleModel::TABLENAME . '.' . FtaActionRoleModel::FIELDNAME_ID_FTA_WORKFLOW
                                 . ' AND ' . self::TABLENAME . '.' . self::KEYNAME
                                 . '=' . IntranetDroitsAccesModel::TABLENAME . '.' . IntranetDroitsAccesModel::FIELDNAME_ID_INTRANET_ACTIONS
                                 . ' AND ' . IntranetDroitsAccesModel::TABLENAME . '.' . IntranetDroitsAccesModel::FIELDNAME_ID_INTRANET_ACTIONS
@@ -182,6 +191,11 @@ class IntranetActionsModel extends AbstractModel {
         return $idActionT;
     }
 
+    /**
+     * Ajout d'une liste d'intranet actions avec la conddition or
+     * @param array $paramIdIntranetActions
+     * @return string
+     */
     public static function addIdIntranetAction($paramIdIntranetActions) {
         if ($paramIdIntranetActions) {
             foreach ($paramIdIntranetActions as $value) {
@@ -191,6 +205,11 @@ class IntranetActionsModel extends AbstractModel {
         return $req;
     }
 
+    /**
+     * Ajout d'une liste d'intranet actions parent
+     * @param array $paramIdIntranetActionsParent
+     * @return string
+     */
     public static function addIdIntranetActionParent($paramIdIntranetActionsParent) {
         if ($paramIdIntranetActionsParent) {
             foreach ($paramIdIntranetActionsParent as $value) {
@@ -269,6 +288,28 @@ class IntranetActionsModel extends AbstractModel {
         }
 
         return $result;
+    }
+
+    /**
+     * Tableau des id intranet actions gestionnaire selon l'espace de travail et le site de production  
+     * @param int $paramWorkflow
+     * @param int $paramSiteDeProd
+     * @return array
+     */
+    public static function getArrayIdIntranetActionByWorkflowAndSiteDeProdAndGestionnaire($paramWorkflow, $paramSiteDeProd) {
+        /**
+         *  Nous recuperons le tableau des id intranet actions selon l'espace de travail  et le role (gestionnaire) 
+         */
+        $arrayIdIntranetActionsGestionnaire = FtaActionRoleModel::getArrayIdIntranetActionsByWorkflowAndGestionnaire($paramWorkflow);
+        /**
+         * Nous recuperons le tableau des id intranet actions selon l'espace de travail et le site de production
+         */
+        $arrayIdIntranetActionsSiteDeProd = FtaActionSiteModel::getArrayIdIntranetActionsByWorkflowAndSiteDeProd($paramWorkflow, $paramSiteDeProd);
+
+        $arrayIdIntranetActions = array_merge($arrayIdIntranetActionsGestionnaire, $arrayIdIntranetActionsSiteDeProd);
+
+
+        return $arrayIdIntranetActions;
     }
 
 }

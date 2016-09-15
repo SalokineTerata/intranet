@@ -4256,3 +4256,218 @@ INFORMATIONS DE DEBUGGAGE:
 
 
 SELECT code_produit_agrologic_fta_nomenclature,prefixe_annexe_agrologic_article_codification FROM fta_composant, annexe_agrologic_article_codification WHERE fta_composant.id_fta=14677 AND is_composition_fta_composant=1  AND fta_composant.id_annexe_agrologic_article_codification=annexe_agrologic_article_codification.id_annexe_agrologic_article_codification ORDER BY prefixe_annexe_agrologic_article_codification ASC, nom_fta_nomenclature
+2016-01-15 09:38:54 MSG 10.143.35.42 Inscription : Inscription postmaster@agis-sa.fr test@gmail.com
+Inscription Intranet Agis
+Bonjour,\n Votre profil vient d'être créé dans l'intranet AGIS.\nVotre login est : \n\nL'administrateur Agis.\n
+2016-01-22 14:26:09 MSG 10.143.35.42 Validation : Validation superviseur SYSTEM <InformatiqueSupport.AVIGNON@agis-sa.fr> InformatiqueSupport.AVIGNON@agis-sa.fr
+FTA/Validée: "34280 - TEST DE NOUVELLE DESIGNATION COMMERCIALE  X0G"
+La Fiche Technique Article "34280 - TEST DE NOUVELLE DESIGNATION COMMERCIALE  X0G" vient d'être validée.
+Cet Article est maintenant actif et disponible dans l'ensemble de notre système informatique.
+
+INFORMATIONS PRINCIPALES:
+Site de production: AVIGNON
+
+Listes des produits créés:
+00, 30845845, 
+
+INFORMATIONS SUPPLEMENTAIRES:
+Code Article LDC: 34280
+Gencod EAN Article: 
+Gencod EAN Colis: 
+Nombre d'UVC par colis: 
+Poids net de l'unité de vente facturée (en Kg): 
+Identifiant du Dossier Technique: 14771-v0
+Unité de facturation: 
+Durée de vie garantie client (en jours): 
+Durée de vie Production (en jours): 
+Désignation Commerciale: test de nouvelle designation commerciale
+
+
+COMMENTAIRE:
+``
+
+Bonne journée à tous.
+Ce message a été envoyé automatiquement par le module Intranet - Fiche Technique Article.
+
+2016-01-22 14:26:09 MSG 10.143.35.42 Validation : Validation superviseur SYSTEM <InformatiqueSupport.AVIGNON@agis-sa.fr> franck.amofa@agis-sa.fr
+FTA/Validée: "34280 - TEST DE NOUVELLE DESIGNATION COMMERCIALE  X0G"
+La Fiche Technique Article "34280 - TEST DE NOUVELLE DESIGNATION COMMERCIALE  X0G" vient d'être validée.
+Cet Article est maintenant actif et disponible dans l'ensemble de notre système informatique.
+
+INFORMATIONS PRINCIPALES:
+Site de production: AVIGNON
+
+Listes des produits créés:
+00, 30845845, 
+
+INFORMATIONS SUPPLEMENTAIRES:
+Code Article LDC: 34280
+Gencod EAN Article: 
+Gencod EAN Colis: 
+Nombre d'UVC par colis: 
+Poids net de l'unité de vente facturée (en Kg): 
+Identifiant du Dossier Technique: 14771-v0
+Unité de facturation: 
+Durée de vie garantie client (en jours): 
+Durée de vie Production (en jours): 
+Désignation Commerciale: test de nouvelle designation commerciale
+
+
+COMMENTAIRE:
+``
+
+Bonne journée à tous.
+Ce message a été envoyé automatiquement par le module Intranet - Fiche Technique Article.
+
+2016-01-22 14:26:09 MSG 10.143.35.42 Validation : Validation superviseur SYSTEM <InformatiqueSupport.AVIGNON@agis-sa.fr> InformatiqueSupport.AVIGNON@agis-sa.fr
+FTA/Information "34280 - TEST DE NOUVELLE DESIGNATION COMMERCIALE  X0G"
+DESTINATAIRES:
+SYSTEM superviseur: InformatiqueSupport.AVIGNON@agis-sa.fr
+AMOFA Franck: franck.amofa@agis-sa.fr
+
+
+Message envoyé:
+
+La Fiche Technique Article "34280 - TEST DE NOUVELLE DESIGNATION COMMERCIALE  X0G" vient d'être validée.
+Cet Article est maintenant actif et disponible dans l'ensemble de notre système informatique.
+
+INFORMATIONS PRINCIPALES:
+Site de production: AVIGNON
+
+Listes des produits créés:
+00, 30845845, 
+
+INFORMATIONS SUPPLEMENTAIRES:
+Code Article LDC: 34280
+Gencod EAN Article: 
+Gencod EAN Colis: 
+Nombre d'UVC par colis: 
+Poids net de l'unité de vente facturée (en Kg): 
+Identifiant du Dossier Technique: 14771-v0
+Unité de facturation: 
+Durée de vie garantie client (en jours): 
+Durée de vie Production (en jours): 
+Désignation Commerciale: test de nouvelle designation commerciale
+
+
+COMMENTAIRE:
+``
+
+Bonne journée à tous.
+Ce message a été envoyé automatiquement par le module Intranet - Fiche Technique Article.
+
+INFORMATIONS DE DEBUGGAGE:
+
+
+SELECT code_produit_agrologic_fta_nomenclature,prefixe_annexe_agrologic_article_codification FROM fta_composant, annexe_agrologic_article_codification WHERE fta_composant.id_fta=14771 AND is_composition_fta_composant=1  AND fta_composant.id_annexe_agrologic_article_codification=annexe_agrologic_article_codification.id_annexe_agrologic_article_codification ORDER BY prefixe_annexe_agrologic_article_codification ASC, nom_fta_nomenclature
+2016-01-22 14:30:37 MSG 10.143.35.42 Validation : Validation superviseur SYSTEM <InformatiqueSupport.AVIGNON@agis-sa.fr> InformatiqueSupport.AVIGNON@agis-sa.fr
+FTA/Validée: "34280 - TEST DE NOUVELLE DESIGNATION COMMERCIALE  X0G"
+La Fiche Technique Article "34280 - TEST DE NOUVELLE DESIGNATION COMMERCIALE  X0G" vient d'être validée.
+Cet Article est maintenant actif et disponible dans l'ensemble de notre système informatique.
+
+INFORMATIONS PRINCIPALES:
+Site de production: AVIGNON
+
+Listes des produits créés:
+00, 30845845, 
+
+INFORMATIONS SUPPLEMENTAIRES:
+Code Article LDC: 34280
+Gencod EAN Article: 
+Gencod EAN Colis: 
+Nombre d'UVC par colis: 
+Poids net de l'unité de vente facturée (en Kg): 
+Identifiant du Dossier Technique: 14771-v1
+Unité de facturation: 
+Durée de vie garantie client (en jours): 
+Durée de vie Production (en jours): 
+Désignation Commerciale: test de nouvelle designation commerciale
+
+
+COMMENTAIRE:
+`
+
+Bonne journée à tous.
+Ce message a été envoyé automatiquement par le module Intranet - Fiche Technique Article.
+
+2016-01-22 14:30:37 MSG 10.143.35.42 Validation : Validation superviseur SYSTEM <InformatiqueSupport.AVIGNON@agis-sa.fr> franck.amofa@agis-sa.fr
+FTA/Validée: "34280 - TEST DE NOUVELLE DESIGNATION COMMERCIALE  X0G"
+La Fiche Technique Article "34280 - TEST DE NOUVELLE DESIGNATION COMMERCIALE  X0G" vient d'être validée.
+Cet Article est maintenant actif et disponible dans l'ensemble de notre système informatique.
+
+INFORMATIONS PRINCIPALES:
+Site de production: AVIGNON
+
+Listes des produits créés:
+00, 30845845, 
+
+INFORMATIONS SUPPLEMENTAIRES:
+Code Article LDC: 34280
+Gencod EAN Article: 
+Gencod EAN Colis: 
+Nombre d'UVC par colis: 
+Poids net de l'unité de vente facturée (en Kg): 
+Identifiant du Dossier Technique: 14771-v1
+Unité de facturation: 
+Durée de vie garantie client (en jours): 
+Durée de vie Production (en jours): 
+Désignation Commerciale: test de nouvelle designation commerciale
+
+
+COMMENTAIRE:
+`
+
+Bonne journée à tous.
+Ce message a été envoyé automatiquement par le module Intranet - Fiche Technique Article.
+
+2016-01-22 14:30:37 MSG 10.143.35.42 Validation : Validation superviseur SYSTEM <InformatiqueSupport.AVIGNON@agis-sa.fr> InformatiqueSupport.AVIGNON@agis-sa.fr
+FTA/Information "34280 - TEST DE NOUVELLE DESIGNATION COMMERCIALE  X0G"
+DESTINATAIRES:
+SYSTEM superviseur: InformatiqueSupport.AVIGNON@agis-sa.fr
+AMOFA Franck: franck.amofa@agis-sa.fr
+
+
+Message envoyé:
+
+La Fiche Technique Article "34280 - TEST DE NOUVELLE DESIGNATION COMMERCIALE  X0G" vient d'être validée.
+Cet Article est maintenant actif et disponible dans l'ensemble de notre système informatique.
+
+INFORMATIONS PRINCIPALES:
+Site de production: AVIGNON
+
+Listes des produits créés:
+00, 30845845, 
+
+INFORMATIONS SUPPLEMENTAIRES:
+Code Article LDC: 34280
+Gencod EAN Article: 
+Gencod EAN Colis: 
+Nombre d'UVC par colis: 
+Poids net de l'unité de vente facturée (en Kg): 
+Identifiant du Dossier Technique: 14771-v1
+Unité de facturation: 
+Durée de vie garantie client (en jours): 
+Durée de vie Production (en jours): 
+Désignation Commerciale: test de nouvelle designation commerciale
+
+
+COMMENTAIRE:
+`
+
+Bonne journée à tous.
+Ce message a été envoyé automatiquement par le module Intranet - Fiche Technique Article.
+
+INFORMATIONS DE DEBUGGAGE:
+
+
+SELECT code_produit_agrologic_fta_nomenclature,prefixe_annexe_agrologic_article_codification FROM fta_composant, annexe_agrologic_article_codification WHERE fta_composant.id_fta=14772 AND is_composition_fta_composant=1  AND fta_composant.id_annexe_agrologic_article_codification=annexe_agrologic_article_codification.id_annexe_agrologic_article_codification ORDER BY prefixe_annexe_agrologic_article_codification ASC, nom_fta_nomenclature
+2016-01-22 14:34:28 MSG 10.143.35.42  :  InformatiqueSupport.AVIGNON@agis-sa.fr InformatiqueSupport.AVIGNON@agis-sa.fr,
+FTA/Mise à jour de l'emballage: 1 - 
+Bonjour,
+La Fiche Technique Emballage (FTE) "1 - " vient d'être actualisée.
+
+Les Fiches Techniques Articles validées suivantes sont maintenant à jour:
+
+Bonne journée.
+Intranet Agis
+

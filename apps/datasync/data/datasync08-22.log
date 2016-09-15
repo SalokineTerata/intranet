@@ -1,0 +1,145 @@
+Démarrage : ven aoû 22 23:00:01 CEST 2014
+Arrêt     : ven aoû 22 23:00:56 CEST 2014
+
+
+
+Base MySQL sélectionnée: agis
+Nombre de serveur(s) Linux concerné(s): 4
+Nombre de dossier(s) à mettre à jour: 29
+
+sending incremental file list
+
+sent 7305 bytes  received 49 bytes  4902.67 bytes/sec
+total size is 13622581  speedup is 1852.40
+sending incremental file list
+
+sent 6675 bytes  received 40 bytes  4476.67 bytes/sec
+total size is 12849623  speedup is 1913.57
+sending incremental file list
+erp_data.mdb
+
+sent 16232 bytes  received 102189 bytes  13931.88 bytes/sec
+total size is 212826112  speedup is 1797.20
+sending incremental file list
+
+sent 7593 bytes  received 45 bytes  5092.00 bytes/sec
+total size is 9254930  speedup is 1211.70
+sending incremental file list
+
+sent 7938 bytes  received 20 bytes  5305.33 bytes/sec
+total size is 16768700  speedup is 2107.15
+sending incremental file list
+
+sent 4308 bytes  received 24 bytes  2888.00 bytes/sec
+total size is 6387982  speedup is 1474.60
+sending incremental file list
+mercuriales/MERCURIALES - AGIS/FZC/FZC 2014/THIRIET 2014.xls
+mercuriales/MERCURIALES - AGIS/HD/2014/2014  MERCURIALE ALDI.xls
+mercuriales/MERCURIALES - AGIS/gms/2014/CENTRALES 2014/CARREFOUR 2014.xls
+mercuriales/MERCURIALES - AGIS/gms/2014/CENTRALES 2014/CARREFOUR MARKET 2014.xls
+mercuriales/MERCURIALES - AGIS/gms/2014/CENTRALES 2014/INTERMARCHE 2014.xls
+mercuriales/MERCURIALES - AGIS/gms/2014/CENTRALES 2014/PLACE DU MARCHE 2014.xls
+
+sent 137224 bytes  received 21400 bytes  63449.60 bytes/sec
+total size is 37700192  speedup is 237.67
+sending incremental file list
+
+sent 5047 bytes  received 27 bytes  3382.67 bytes/sec
+total size is 39173092  speedup is 7720.36
+sending incremental file list
+operations_commerciales/GMS/2014/A-CENTRALES/GMS CARREFOUR 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS CARREFOUR MARKET 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS CASINO 2014-FUTUR MASTER.xls
+
+sent 96076 bytes  received 14541 bytes  44246.80 bytes/sec
+total size is 57309366  speedup is 518.09
+sending incremental file list
+
+sent 20406 bytes  received 83 bytes  13659.33 bytes/sec
+total size is 99360776  speedup is 4849.47
+sending incremental file list
+
+sent 6737 bytes  received 93 bytes  2732.00 bytes/sec
+total size is 53070050  speedup is 7770.14
+sending incremental file list
+
+sent 9529 bytes  received 13 bytes  6361.33 bytes/sec
+total size is 46763520  speedup is 4900.81
+sending incremental file list
+
+sent 5794 bytes  received 30 bytes  3882.67 bytes/sec
+total size is 95071621  speedup is 16324.11
+sending incremental file list
+erp_data.mdb
+
+sent 16232 bytes  received 102189 bytes  15789.47 bytes/sec
+total size is 212826112  speedup is 1797.20
+sending incremental file list
+
+sent 7593 bytes  received 45 bytes  5092.00 bytes/sec
+total size is 9254930  speedup is 1211.70
+sending incremental file list
+
+sent 4308 bytes  received 24 bytes  2888.00 bytes/sec
+total size is 6387982  speedup is 1474.60
+sending incremental file list
+
+sent 7938 bytes  received 20 bytes  5305.33 bytes/sec
+total size is 16768700  speedup is 2107.15
+sending incremental file list
+
+sent 85 bytes  received 13 bytes  65.33 bytes/sec
+total size is 104853504  speedup is 1069933.71
+sending incremental file list
+operations_commerciales/GMS/2014/A-CENTRALES/GMS CARREFOUR 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS CARREFOUR MARKET 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS CASINO 2014-FUTUR MASTER.xls
+
+sent 96076 bytes  received 14541 bytes  44246.80 bytes/sec
+total size is 57309366  speedup is 518.09
+sending incremental file list
+mercuriales/MERCURIALES - AGIS/FZC/FZC 2014/THIRIET 2014.xls
+mercuriales/MERCURIALES - AGIS/HD/2014/2014  MERCURIALE ALDI.xls
+mercuriales/MERCURIALES - AGIS/gms/2014/CENTRALES 2014/CARREFOUR 2014.xls
+mercuriales/MERCURIALES - AGIS/gms/2014/CENTRALES 2014/CARREFOUR MARKET 2014.xls
+mercuriales/MERCURIALES - AGIS/gms/2014/CENTRALES 2014/INTERMARCHE 2014.xls
+mercuriales/MERCURIALES - AGIS/gms/2014/CENTRALES 2014/PLACE DU MARCHE 2014.xls
+
+sent 137224 bytes  received 21400 bytes  63449.60 bytes/sec
+total size is 37700192  speedup is 237.67
+sending incremental file list
+
+sent 9529 bytes  received 13 bytes  6361.33 bytes/sec
+total size is 46763520  speedup is 4900.81
+sending incremental file list
+
+sent 7305 bytes  received 49 bytes  4902.67 bytes/sec
+total size is 13622581  speedup is 1852.40
+sending incremental file list
+
+sent 5745 bytes  received 23 bytes  3845.33 bytes/sec
+total size is 129159129  speedup is 22392.36
+sending incremental file list
+
+sent 5610 bytes  received 39 bytes  3766.00 bytes/sec
+total size is 59049369  speedup is 10453.07
+sending incremental file list
+
+sent 52293 bytes  received 97 bytes  34926.67 bytes/sec
+total size is 299707475  speedup is 5720.70
+sending incremental file list
+
+sent 20406 bytes  received 83 bytes  8195.60 bytes/sec
+total size is 99360776  speedup is 4849.47
+sending incremental file list
+
+sent 6737 bytes  received 93 bytes  2732.00 bytes/sec
+total size is 53070050  speedup is 7770.14
+sending incremental file list
+
+sent 7938 bytes  received 20 bytes  3183.20 bytes/sec
+total size is 16768700  speedup is 2107.15
+sending incremental file list
+
+sent 7938 bytes  received 20 bytes  5305.33 bytes/sec
+total size is 16768700  speedup is 2107.15

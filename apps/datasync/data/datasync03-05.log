@@ -1,0 +1,119 @@
+Démarrage : mer mar  5 23:00:01 CET 2014
+Arrêt     : mer mar  5 23:00:41 CET 2014
+
+
+
+Base MySQL sélectionnée: agis
+Nombre de serveur(s) Linux concerné(s): 4
+Nombre de dossier(s) à mettre à jour: 27
+
+sending incremental file list
+
+sent 6345 bytes  received 46 bytes  2556.40 bytes/sec
+total size is 11731248  speedup is 1835.59
+sending incremental file list
+
+sent 6067 bytes  received 37 bytes  4069.33 bytes/sec
+total size is 12258686  speedup is 2008.30
+sending incremental file list
+
+sent 63 bytes  received 12 bytes  50.00 bytes/sec
+total size is 84160512  speedup is 1122140.16
+sending incremental file list
+
+sent 7538 bytes  received 45 bytes  5055.33 bytes/sec
+total size is 9253358  speedup is 1220.28
+sending incremental file list
+
+sent 7695 bytes  received 20 bytes  5143.33 bytes/sec
+total size is 16751789  speedup is 2171.33
+sending incremental file list
+
+sent 4308 bytes  received 24 bytes  2888.00 bytes/sec
+total size is 6387982  speedup is 1474.60
+sending incremental file list
+mercuriales/sync.ffs_lock
+
+sent 8521 bytes  received 84 bytes  5736.67 bytes/sec
+total size is 29316952  speedup is 3406.97
+sending incremental file list
+
+sent 5047 bytes  received 27 bytes  10148.00 bytes/sec
+total size is 39173092  speedup is 7720.36
+sending incremental file list
+
+sent 36526 bytes  received 140 bytes  14666.40 bytes/sec
+total size is 46929317  speedup is 1279.91
+sending incremental file list
+
+sent 19882 bytes  received 78 bytes  13306.67 bytes/sec
+total size is 98562242  speedup is 4937.99
+sending incremental file list
+
+sent 3305 bytes  received 79 bytes  1353.60 bytes/sec
+total size is 16126642  speedup is 4765.56
+sending incremental file list
+
+sent 9019 bytes  received 13 bytes  6021.33 bytes/sec
+total size is 43396608  speedup is 4804.76
+sending incremental file list
+
+sent 5780 bytes  received 30 bytes  3873.33 bytes/sec
+total size is 93683077  speedup is 16124.45
+sending incremental file list
+
+sent 63 bytes  received 12 bytes  50.00 bytes/sec
+total size is 84160512  speedup is 1122140.16
+sending incremental file list
+
+sent 7538 bytes  received 45 bytes  5055.33 bytes/sec
+total size is 9253358  speedup is 1220.28
+sending incremental file list
+
+sent 4308 bytes  received 24 bytes  8664.00 bytes/sec
+total size is 6387982  speedup is 1474.60
+sending incremental file list
+
+sent 7695 bytes  received 20 bytes  5143.33 bytes/sec
+total size is 16751789  speedup is 2171.33
+sending incremental file list
+
+sent 85 bytes  received 13 bytes  65.33 bytes/sec
+total size is 104853504  speedup is 1069933.71
+sending incremental file list
+
+sent 36526 bytes  received 140 bytes  24444.00 bytes/sec
+total size is 46929317  speedup is 1279.91
+sending incremental file list
+mercuriales/sync.ffs_lock
+
+sent 8521 bytes  received 84 bytes  5736.67 bytes/sec
+total size is 29316955  speedup is 3406.97
+sending incremental file list
+
+sent 9019 bytes  received 13 bytes  6021.33 bytes/sec
+total size is 43396608  speedup is 4804.76
+sending incremental file list
+
+sent 6345 bytes  received 46 bytes  4260.67 bytes/sec
+total size is 11731248  speedup is 1835.59
+sending incremental file list
+
+sent 5684 bytes  received 23 bytes  3804.67 bytes/sec
+total size is 129152473  speedup is 22630.54
+sending incremental file list
+
+sent 5610 bytes  received 39 bytes  3766.00 bytes/sec
+total size is 59049369  speedup is 10453.07
+sending incremental file list
+
+sent 50262 bytes  received 94 bytes  14387.43 bytes/sec
+total size is 291009107  speedup is 5779.04
+sending incremental file list
+
+sent 19882 bytes  received 78 bytes  13306.67 bytes/sec
+total size is 98562242  speedup is 4937.99
+sending incremental file list
+
+sent 3305 bytes  received 79 bytes  2256.00 bytes/sec
+total size is 16126642  speedup is 4765.56

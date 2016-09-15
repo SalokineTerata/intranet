@@ -1,5 +1,8 @@
 <?php
-
+/**
+ * Description of HtmlResult
+ * @author franckwastaken
+ */
 class HtmlResult {
 
     const ROOT_VALUE = 1;

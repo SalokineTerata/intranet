@@ -5,7 +5,7 @@
  *
  * @author franckwastaken
  */
-class FtaComposantView {
+class FtaComposantView extends AbstractView {
 
     /**
      * Model de donnée d'un composant
@@ -21,11 +21,31 @@ class FtaComposantView {
     private $isEditable;
 
     /**
+     * Model de donnée d'une FTA
+     * @var FtaModel 
+     */
+    private $ftaModel;
+
+    /**
+     * Model de donnée d'une AnnexeAgrologicArticleCodification
+     * @var AnnexeAgrologicArticleCodificationModel 
+     */
+    private $annexeAgrologicArticleCodificationModel;
+
+    /**
      * 
      * @param FtaComposantModel $ParamFtaComposantModel
      */
     public function __construct(FtaComposantModel $ParamFtaComposantModel) {
         $this->setFtaComposantModel($ParamFtaComposantModel);
+        $this->setFtaModel(
+                new FtaModel($ParamFtaComposantModel->getDataField(FtaComposantModel::FIELDNAME_ID_FTA)->getFieldValue()
+                , DatabaseRecord::VALUE_DONT_CREATE_RECORD_IN_DATABASE_IF_KEY_DOESNT_EXIST)
+        );
+        $this->setAnnexeAgrologicArticleCodificationModel(
+                new AnnexeAgrologicArticleCodificationModel($ParamFtaComposantModel->getDataField(FtaComposantModel::FIELDNAME_ID_ANNEXE_AGRO_ART_CODIFICATION)->getFieldValue()
+                , DatabaseRecord::VALUE_DONT_CREATE_RECORD_IN_DATABASE_IF_KEY_DOESNT_EXIST)
+        );
     }
 
     private function getFtaComposantModel() {
@@ -35,6 +55,26 @@ class FtaComposantView {
     private function setFtaComposantModel(FtaComposantModel $FtaComposantModel) {
         if ($FtaComposantModel instanceof FtaComposantModel) {
             $this->FtaComposantModel = $FtaComposantModel;
+        }
+    }
+
+    function getFtaModel() {
+        return $this->ftaModel;
+    }
+
+    function setFtaModel(FtaModel $ftaModel) {
+        if ($ftaModel instanceof FtaModel) {
+            $this->ftaModel = $ftaModel;
+        }
+    }
+
+    function getAnnexeAgrologicArticleCodificationModel() {
+        return $this->annexeAgrologicArticleCodificationModel;
+    }
+
+    function setAnnexeAgrologicArticleCodificationModel(AnnexeAgrologicArticleCodificationModel $annexeAgrologicArticleCodificationModel) {
+        if ($annexeAgrologicArticleCodificationModel instanceof AnnexeAgrologicArticleCodificationModel) {
+            $this->annexeAgrologicArticleCodificationModel = $annexeAgrologicArticleCodificationModel;
         }
     }
 
@@ -48,13 +88,109 @@ class FtaComposantView {
     }
 
     public function getHtmlDataField($paramFieldName) {
+
+        $dataField = $this->getFtaComposantModel()->getDataField($paramFieldName);
+
+        /**
+         * On vérifie si le champ est verrouillable
+         */
+        $dataField->checkLockField($this->getFtaModel(), $this->getIsEditable());
+
+        /**
+         * On autorise la modification selon l'état de champs verrouillable
+         */
+        $isEditable = $this->isEditableLockField($dataField);
+        /**
+         * On vérifie les Règles de validation du champ
+         */
+        $dataField->checkValidationRules();
+
+        if ($dataField->getDataValidationSuccessful() == TRUE) {
+            $this->setDataValidationSuccessfulToTrue();
+        } else {
+            $this->setDataValidationSuccessfulToFalse();
+        }
+
         return Html::convertDataFieldToHtml(
-                        $this->getFtaComposantModel()->getDataField($paramFieldName)
-                        , $this->getIsEditable()
+                        $dataField
+                        , $isEditable
         );
     }
 
-    public function getHtmlCodePSF() {
+    /**
+     * On autorise la modification selon l'état de champs verrouillable
+     * @param DatabaseDataField $paramDataField
+     * @return boolean
+     */
+    function isEditableLockField(DatabaseDataField $paramDataField) {
+        $isLockValue = $paramDataField->getIsFieldLock();
+        $isEditable = $this->getIsEditable();
+        switch ($isLockValue) {
+            case FtaVerrouillageChampsModel::FIELD_LOCK_PRIMARY_FALSE:
+            case FtaVerrouillageChampsModel::FIELD_LOCK_SECONDARY_FALSE:
+            case FtaVerrouillageChampsModel::FIELD_LOCK_PRIMARY_TRUE:
+
+
+                break;
+            case FtaVerrouillageChampsModel::FIELD_LOCK_SECONDARY_TRUE:
+
+                $isEditable = FALSE;
+
+                break;
+        }
+        return $isEditable;
+    }
+
+    /**
+     * Affiche la liste déroulante des sites de production pour les composants et compositions
+     * @param HtmlListSelect $paramObjet
+     * @param boolean $paramIsEditable
+     * @param boolean $paramLabelSiteDeProduction
+     * @return string
+     */
+    function showListeDeroulanteSiteProdForComposant(HtmlListSelect $paramObjet, $paramIsEditable, $paramLabelSiteDeProduction) {
+
+        $listeSiteProduction = $this->getFtaComposantModel()->showListeDeroulanteSiteProdForComposant($paramObjet, $paramIsEditable, $paramLabelSiteDeProduction);
+
+        return $listeSiteProduction;
+    }
+
+    /**
+     * Liste des étiqettes recto
+     * @param boolean $paramIsEditable
+     * @return string
+     */
+    function getListeCodesoftEtiquettesRecto($paramIsEditable) {
+
+        $listeCodesoftEtiquettes = $this->getFtaComposantModel()->getListeCodesoftEtiquettesRecto($paramIsEditable);
+
+        return $listeCodesoftEtiquettes;
+    }
+
+    /**
+     * Liste des étiqettes verso 
+     * @param boolean $paramIsEditable
+     * @return string
+     */
+    function getListeCodesoftEtiquettesVerso($paramIsEditable) {
+        $listeCodesoftEtiquettes = $this->getFtaComposantModel()->getListeCodesoftEtiquettesVerso($paramIsEditable);
+
+        return $listeCodesoftEtiquettes;
+    }
+
+    /**
+     * Liste des options étiqettes
+     * @param boolean $paramIsEditable
+     * @return string
+     */
+    function getListeModeEtiquette($paramIsEditable) {
+
+        $listeModeEtiquettes = $this->getFtaComposantModel()->getListeModeEtiquette($paramIsEditable);
+
+        return $listeModeEtiquettes;
+    }
+
+    function getHtmlCodePSF() {
         $id_fta_composant = $this->getFtaComposantModel()->getKeyValue();
         $codePSFValue = $this->getFtaComposantModel()->getDataField(FtaComposantModel::FIELDNAME_CODE_PRODUIT_AGROLOGIC_FTA_NOMENCLATURE)->getFieldValue();
         $codePSF = new HtmlInputText();
@@ -64,48 +200,129 @@ class FtaComposantView {
                 . '_'
                 . $id_fta_composant
         ;
+
+        /**
+         * Champ verrouillable condition
+         */
+        /**
+         * Vérification du champ initialisé
+         */
+        $isFieldLock = FtaVerrouillageChampsModel::isFieldLock(FtaComposantModel::FIELDNAME_CODE_PRODUIT_AGROLOGIC_FTA_NOMENCLATURE, $this->getFtaModel());
+        /**
+         * Génération du lien pour verrouillé/déverrouillé
+         */
+        $linkFieldLock = FtaVerrouillageChampsModel::linkFieldLock($isFieldLock, FtaComposantModel::FIELDNAME_CODE_PRODUIT_AGROLOGIC_FTA_NOMENCLATURE, $this->getFtaModel(), $this->getIsEditable());
+
+        /**
+         * Affectation de la modification d'un champ ou non
+         */
+        $isEditable = FtaVerrouillageChampsModel::isEditableLockField($isFieldLock, $this->getIsEditable());
+        
+       $codePSFDataField= $this->getFtaComposantModel()->getDataField(FtaComposantModel::FIELDNAME_CODE_PRODUIT_AGROLOGIC_FTA_NOMENCLATURE);
+
         $codePSF->setLabel(DatabaseDescription::getFieldDocLabel(FtaComposantModel::TABLENAME, FtaComposantModel::FIELDNAME_CODE_PRODUIT_AGROLOGIC_FTA_NOMENCLATURE));
         $codePSF->getAttributes()->getValue()->setValue($codePSFValue);
         $codePSF->getAttributes()->getPattern()->setValue("[0-9]{1,6}");
         $codePSF->getAttributes()->getMaxLength()->setValue("6");
-        $codePSF->setIsEditable($this->getIsEditable());
-        $codePSF->initAbstractHtmlInput($HtmlTableName, $codePSF->getLabel(), $codePSFValue, NULL);
+        $codePSF->setIsEditable($isEditable);
+        $codePSF->initAbstractHtmlInput(
+                $HtmlTableName
+                , $codePSF->getLabel()
+                , $codePSFValue
+                , $codePSFDataField->isFieldDiff()
+                , NULL
+                , NULL
+                , $isFieldLock
+                , $linkFieldLock
+        );
         $codePSF->getEventsForm()->setOnChangeWithAjaxAutoSave(FtaComposantModel::TABLENAME, FtaComposantModel::KEYNAME, $id_fta_composant, FtaComposantModel::FIELDNAME_CODE_PRODUIT_AGROLOGIC_FTA_NOMENCLATURE);
+
+        /**
+         * Description d'un champ
+         */
+        $codePSF->setHelp(IntranetColumnInfoModel::getFieldDesc($codePSFDataField->getTableName(), $codePSFDataField->getFieldName()
+                        , $codePSFDataField->getFieldLabel(), $codePSF
+        ));
+
         return $codePSF->getHtmlResult();
     }
 
     /**
- * Liste des étiqettes recto
- * @param int $paramIdFta
- * @param boolean $paramIsEditable
- * @return string
- */
-    function ListeCodesoftEtiquettesRecto($paramIdFta, $paramIsEditable) {
+     * Liste des étiqettes recto
+     * @param boolean $paramIsEditable
+     * @return string
+     */
+    function listeCodesoftEtiquettesRecto($paramIsEditable) {
 
-        $ftaModel = new FtaModel($paramIdFta);
-        $SiteDeProduction = $ftaModel->getDataField(FtaModel::FIELDNAME_SITE_PRODUCTION)->getFieldValue();
-        $etiqetteCodesoftRecto = $this->getFtaComposantModel()->getDataField(FtaComposantModel::FIELDNAME_K_ETIQUETTE_FTA_COMPOSITION)->getFieldValue();
-        $idFtaComposant = $this->getFtaComposantModel()->getKeyValue();
-        $listeCodesoftEtiquettesRecto = CodesoftEtiquettesModel::getListeCodesoftEtiquettesRecto($idFtaComposant, $paramIsEditable, $SiteDeProduction, $etiqetteCodesoftRecto);
+        $listeCodesoftEtiquettesRecto = $this->getListeCodesoftEtiquettesRecto($paramIsEditable);
 
         return $listeCodesoftEtiquettesRecto;
     }
-/**
- * Liste des étiqettes verso
- * @param int $paramIdFta
- * @param boolean $paramIsEditable
- * @return string
- */
-    function ListeCodesoftEtiquettesVerso($paramIdFta, $paramIsEditable) {
 
-        $ftaModel = new FtaModel($paramIdFta);
-        $SiteDeProduction = $ftaModel->getDataField(FtaModel::FIELDNAME_SITE_PRODUCTION)->getFieldValue();
-        $etiqetteCodesoft = $this->getFtaComposantModel()->getDataField(FtaComposantModel::FIELDNAME_K_ETIQUETTE_VERSO_FTA_COMPOSITION)->getFieldValue();
-        $idFtaComposant = $this->getFtaComposantModel()->getKeyValue();
+    /**
+     * Liste des étiqettes verso
+     * @param boolean $paramIsEditable
+     * @return string
+     */
+    function listeCodesoftEtiquettesVerso($paramIsEditable) {
 
-        $listeCodesoftEtiquettesVerso = CodesoftEtiquettesModel::getListeCodesoftEtiquettesVerso($idFtaComposant, $paramIsEditable, $SiteDeProduction, $etiqetteCodesoft);
+        $listeCodesoftEtiquettesVerso = $this->getListeCodesoftEtiquettesVerso($paramIsEditable);
 
         return $listeCodesoftEtiquettesVerso;
+    }
+
+    /**
+     * Liste des modes etiquettes
+     * @param boolean $paramIsEditable
+     * @return string
+     */
+    function listeModeEtiquette($paramIsEditable) {
+
+        $listeModeEtiquettes = $this->getListeModeEtiquette($paramIsEditable);
+
+        return $listeModeEtiquettes;
+    }
+
+    /**
+     * Affiche le le COde PSF avec le prefixe
+     * @return string
+     */
+    function getHtmlPrefixeIdCodePSF() {
+        $id_fta_composant = $this->getFtaComposantModel()->getKeyValue();
+        $prefixe = $this->getAnnexeAgrologicArticleCodificationModel()->getDataField(AnnexeAgrologicArticleCodificationModel::FIELDNAME_PREFIXE_ANNEXE_AGRO_ART_COD)->getFieldValue();
+
+        $codePSFValue = $this->getFtaComposantModel()->getDataField(FtaComposantModel::FIELDNAME_CODE_PRODUIT_AGROLOGIC_FTA_NOMENCLATURE)->getFieldValue();
+        $completeCode = $prefixe . $codePSFValue;
+        $codePSF = new HtmlInputText();
+        $HtmlTableName = FtaComposantModel::TABLENAME
+                . '_'
+                . FtaComposantModel::FIELDNAME_CODE_PRODUIT_AGROLOGIC_FTA_NOMENCLATURE
+                . '_'
+                . $id_fta_composant
+        ;
+        $codePSFDataField =$this->getFtaComposantModel()->getDataField(FtaComposantModel::FIELDNAME_CODE_PRODUIT_AGROLOGIC_FTA_NOMENCLATURE);
+        
+        $codePSF->setLabel(DatabaseDescription::getFieldDocLabel(FtaComposantModel::TABLENAME, FtaComposantModel::FIELDNAME_CODE_PRODUIT_AGROLOGIC_FTA_NOMENCLATURE));
+        $codePSF->getAttributes()->getValue()->setValue($completeCode);
+        $codePSF->getAttributes()->getPattern()->setValue("[0-9]{1,6}");
+        $codePSF->getAttributes()->getMaxLength()->setValue("6");
+        $codePSF->setIsEditable(FALSE);
+        $codePSF->initAbstractHtmlInput(
+                $HtmlTableName
+                , $codePSF->getLabel()
+                , $completeCode
+                , $codePSFDataField->isFieldDiff()
+        );
+        $codePSF->getEventsForm()->setOnChangeWithAjaxAutoSave(FtaComposantModel::TABLENAME, FtaComposantModel::KEYNAME, $id_fta_composant, FtaComposantModel::FIELDNAME_CODE_PRODUIT_AGROLOGIC_FTA_NOMENCLATURE);
+       
+        /**
+         * Description d'un champ
+         */
+        $codePSF->setHelp(IntranetColumnInfoModel::getFieldDesc($codePSFDataField->getTableName(), $codePSFDataField->getFieldName()
+                        , $codePSFDataField->getFieldLabel(), $codePSF
+        ));
+        
+        return $codePSF->getHtmlResult();
     }
 
 }

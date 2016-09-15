@@ -6,7 +6,6 @@
  */
 //$module = substr(strrchr(`pwd`, '/'), 1);
 //$module = trim($module);
-
 //echo "<h1><table>";
 //foreach ($_SERVER as $key => $value) {
 //    
@@ -137,16 +136,26 @@ $selection_semaine_en_cours = Lib::isDefined('selection_semaine_en_cours');
   selection_semaine_en_cours est de la forme SS-AAAA (ex: 02-2003)
   $semaine_en_cours est au format numérique (ex: 2)
  */
+//if (!isset($semaine_en_cours)) {
+//    $semaine_en_cours = recuperation_semaine_en_cours($selection_semaine_en_cours, $planning_presence_modification);
+//}
+//
+//if (!isset($annee_en_cours)) {
+//    $annee_en_cours = recuperation_annee_en_cours($selection_semaine_en_cours, $planning_presence_modification);
+//}
 if (!isset($semaine_en_cours)) {
-    $semaine_en_cours = recuperation_semaine_en_cours($selection_semaine_en_cours, $planning_presence_modification);
+    $semaine_en_cours = PlanningPresenceDetailModel::getSemaineEnCours($selection_semaine_en_cours, $planning_presence_modification);
 }
 
 if (!isset($annee_en_cours)) {
-    $annee_en_cours = recuperation_annee_en_cours($selection_semaine_en_cours, $planning_presence_modification);
+    $annee_en_cours = PlanningPresenceDetailModel::getAnneeEnCours($selection_semaine_en_cours, $planning_presence_modification);
 }
 
 //Construction de la barre de recherche d'une semaine
-echo "<form name=recherche_semaine method=post action=index.php>";
+echo "<form name=recherche_semaine method=post action=index_post.php>";
+echo "<input type=hidden name=semaine_en_cours value=" . $semaine_en_cours . ">";
+echo "<input type=hidden name=annee_en_cours value=" . $annee_en_cours . ">";
+
 echo "<table class=titre border=0 width=100%>";
 echo "<tr>";
 echo "<td >";
@@ -170,27 +179,31 @@ echo "</form>";
 //Lien premettant de définir si la semaine est visible ou non
 //Droits d'accès
 if ($planning_presence_modification == 1) {
+    $boutonEnregistrementDonnee = "<td><input type=submit value=Enregistrer></td>";
+
+
     echo "<td>";
-    $req1 = "SELECT * FROM planning_presence_semaine_visible ";
-    $req1.= "WHERE id_planning_presence_semaine_visible=$semaine_en_cours ";
-    $req1.= "AND annee_planning_presence_semaine_visible=$annee_en_cours";
-    $result1 = mysql_query($req1);
-    if (mysql_num_rows($result1)) {
-        $semaine_visible = mysql_result($result1, 0, visible_planning_presence_semaine_visible);
-        $txt1 = "Etat: ";
-        if ($semaine_visible == 1) {
-            $txt1.= "Publié";
-        } else {
-            $txt1.= "En cours de modifications";
+    $req1 = "SELECT " . PlanningPresenceSemaineVisibleModel::FIELDNAME_VISIBLE_PLANNING_PRESENCE_SEMAINE_VISIBLE
+            . " FROM " . PlanningPresenceSemaineVisibleModel::TABLENAME
+            . " WHERE " . PlanningPresenceSemaineVisibleModel::KEYNAME . "=" . $semaine_en_cours
+            . " AND " . PlanningPresenceSemaineVisibleModel::FIELDNAME_ANNEE_PLANNING_PRESENCE_SEMAINE_VISIBLE . "=" . $annee_en_cours;
+    $arraySemaineVisible = DatabaseOperation::convertSqlStatementWithoutKeyToArray($req1);
+    if ($arraySemaineVisible) {
+        foreach ($arraySemaineVisible as $rowsSemaineVisible) {
+            $semaine_visible = $rowsSemaineVisible[PlanningPresenceSemaineVisibleModel::FIELDNAME_VISIBLE_PLANNING_PRESENCE_SEMAINE_VISIBLE];
+            $txt1 = "Etat: ";
+            if ($semaine_visible == 1) {
+                $txt1.= "Publié";
+            } else {
+                $txt1.= "En cours de modifications";
+            }
+            $lien1 = "<a href=action.php?action=etat_semaine_visible"
+                    . "&etat_semaine_visible=" . $semaine_visible
+                    . "&semaine_en_cours=" . $semaine_en_cours
+                    . "&annee_en_cours=" . $annee_en_cours . ">"
+                    . $txt1
+                    . "</a>";
         }
-        $lien1 = "<a href=action.php";
-        $lien1.= "?action=etat_semaine_visible";
-        $lien1.= "&etat_semaine_visible=$semaine_visible";
-        $lien1.= "&semaine_en_cours=$semaine_en_cours";
-        $lien1.= "&annee_en_cours=$annee_en_cours";
-        $lien1.= ">";
-        $lien1.= "$txt1";
-        $lien1.= "</a>";
         echo "$lien1";
     }
     echo "</td>";
@@ -200,11 +213,18 @@ if ($planning_presence_modification == 1) {
 echo "<td>";
 echo "<a href=index.php>Semaine en cours</a>";
 echo "</td>";
+
+echo $boutonEnregistrementDonnee;
+
 echo "</tr>";
 
 //Construction du planning
 //Affichage des différents groupes
-$req1 = "select geo,id_geo from geo WHERE id_site IS NOT NULL AND ordre_planning_presence_geo<>0 AND site_actif=1 order by ordre_planning_presence_geo asc";
+$req1 = "SELECT " . GeoModel::FIELDNAME_GEO . "," . GeoModel::KEYNAME
+        . " FROM " . GeoModel::TABLENAME
+        . " WHERE " . GeoModel::FIELDNAME_ORDRE_PLANNING_PRESENCE_GEO . "<>0"
+        . " AND " . GeoModel::FIELDNAME_SITE_ACTIF . "=1"
+        . " ORDER BY " . GeoModel::FIELDNAME_ORDRE_PLANNING_PRESENCE_GEO . " ASC";
 $result1 = DatabaseOperation::convertSqlStatementWithoutKeyToArray($req1);
 echo "<table class=contenu width=100% border=1>";
 if ($result1) {
@@ -274,13 +294,19 @@ if ($result1) {
                             //Détermination des lieux par journée
                             $result5 = tableau_planning_selectionne_jour($semaine_en_cours, $annee_en_cours, $rows4[id_salaries], $i);
                             $count5 = mysql_num_rows($result5);
-                            $txt1 = "<a href=modification_lieu_salarie.php";
-                            $txt1.= "?id_salaries=$rows4[id_salaries]";
-                            $txt1.= "&id_jour=$i";
-                            $txt1.= "&id_semaine=$semaine_en_cours";
-                            $txt1.= "&annee=$annee_en_cours";
-                            $txt1.= ">";
-                            $txt3 = "</a>";
+
+//                            $txt1 = "<a href=modification_lieu_salarie.php";
+//                            $txt1.= "?id_salaries=$rows4[id_salaries]";
+//                            $txt1.= "&id_jour=$i";
+//                            $txt1.= "&id_semaine=$semaine_en_cours";
+//                            $txt1.= "&annee=$annee_en_cours";
+//                            $txt1.= ">";
+//                            $txt3 = "</a>";
+                            $txt1 = "<input type=text name=Id_user" . $rows4[id_salaries]
+                                    . "_IdAnnee" . $annee_en_cours
+                                    . "_IdSemaine" . $semaine_en_cours
+                                    . "_IdJours" . $i . " value=";
+                            $txt3 = " />";
                             if ($count5 == 0) {
                                 $txt2 = "?";
                             } else {
@@ -299,7 +325,7 @@ if ($result1) {
                                 }
                             }
 
-//Affichage du lieu
+                            //Affichage du lieu
 //Droit d'accès sur la possibilité de pouvoir modifier le lieu défini
                             echo "<td align=center>";
                             if ($planning_presence_modification == 0) {

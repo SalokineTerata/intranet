@@ -1,0 +1,125 @@
+Démarrage : dim aoû 10 23:00:01 CEST 2014
+Arrêt     : dim aoû 10 23:00:44 CEST 2014
+
+
+
+Base MySQL sélectionnée: agis
+Nombre de serveur(s) Linux concerné(s): 4
+Nombre de dossier(s) à mettre à jour: 29
+
+sending incremental file list
+
+sent 7305 bytes  received 49 bytes  4902.67 bytes/sec
+total size is 13622581  speedup is 1852.40
+sending incremental file list
+
+sent 6283 bytes  received 38 bytes  2528.40 bytes/sec
+total size is 12454871  speedup is 1970.40
+sending incremental file list
+
+sent 63 bytes  received 12 bytes  50.00 bytes/sec
+total size is 145690624  speedup is 1942541.65
+sending incremental file list
+
+sent 7593 bytes  received 45 bytes  5092.00 bytes/sec
+total size is 9254930  speedup is 1211.70
+sending incremental file list
+
+sent 7905 bytes  received 20 bytes  5283.33 bytes/sec
+total size is 16766350  speedup is 2115.63
+sending incremental file list
+
+sent 4308 bytes  received 24 bytes  2888.00 bytes/sec
+total size is 6387982  speedup is 1474.60
+sending incremental file list
+
+sent 11718 bytes  received 82 bytes  4720.00 bytes/sec
+total size is 37490167  speedup is 3177.13
+sending incremental file list
+
+sent 5047 bytes  received 27 bytes  3382.67 bytes/sec
+total size is 39173092  speedup is 7720.36
+sending incremental file list
+
+sent 43732 bytes  received 142 bytes  29249.33 bytes/sec
+total size is 56810166  speedup is 1294.85
+sending incremental file list
+
+sent 20406 bytes  received 83 bytes  13659.33 bytes/sec
+total size is 99360776  speedup is 4849.47
+sending incremental file list
+
+sent 6669 bytes  received 93 bytes  4508.00 bytes/sec
+total size is 52693702  speedup is 7792.62
+sending incremental file list
+
+sent 9081 bytes  received 13 bytes  6062.67 bytes/sec
+total size is 44623872  speedup is 4906.96
+sending incremental file list
+
+sent 5781 bytes  received 30 bytes  3874.00 bytes/sec
+total size is 92829061  speedup is 15974.71
+sending incremental file list
+
+sent 63 bytes  received 12 bytes  50.00 bytes/sec
+total size is 145690624  speedup is 1942541.65
+sending incremental file list
+
+sent 7593 bytes  received 45 bytes  5092.00 bytes/sec
+total size is 9254930  speedup is 1211.70
+sending incremental file list
+
+sent 4308 bytes  received 24 bytes  2888.00 bytes/sec
+total size is 6387982  speedup is 1474.60
+sending incremental file list
+
+sent 7905 bytes  received 20 bytes  5283.33 bytes/sec
+total size is 16766350  speedup is 2115.63
+sending incremental file list
+
+sent 85 bytes  received 13 bytes  65.33 bytes/sec
+total size is 104853504  speedup is 1069933.71
+sending incremental file list
+
+sent 43732 bytes  received 142 bytes  29249.33 bytes/sec
+total size is 56810166  speedup is 1294.85
+sending incremental file list
+
+sent 11718 bytes  received 82 bytes  4720.00 bytes/sec
+total size is 37490167  speedup is 3177.13
+sending incremental file list
+
+sent 9081 bytes  received 13 bytes  6062.67 bytes/sec
+total size is 44623872  speedup is 4906.96
+sending incremental file list
+
+sent 7305 bytes  received 49 bytes  4902.67 bytes/sec
+total size is 13622581  speedup is 1852.40
+sending incremental file list
+
+sent 5745 bytes  received 23 bytes  2307.20 bytes/sec
+total size is 129159129  speedup is 22392.36
+sending incremental file list
+
+sent 5610 bytes  received 39 bytes  3766.00 bytes/sec
+total size is 59049369  speedup is 10453.07
+sending incremental file list
+
+sent 52293 bytes  received 97 bytes  34926.67 bytes/sec
+total size is 299707475  speedup is 5720.70
+sending incremental file list
+
+sent 20406 bytes  received 83 bytes  8195.60 bytes/sec
+total size is 99360776  speedup is 4849.47
+sending incremental file list
+
+sent 6669 bytes  received 93 bytes  4508.00 bytes/sec
+total size is 52693702  speedup is 7792.62
+sending incremental file list
+
+sent 7905 bytes  received 20 bytes  5283.33 bytes/sec
+total size is 16766350  speedup is 2115.63
+sending incremental file list
+
+sent 7905 bytes  received 20 bytes  5283.33 bytes/sec
+total size is 16766350  speedup is 2115.63

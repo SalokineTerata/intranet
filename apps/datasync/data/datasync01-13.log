@@ -1,0 +1,189 @@
+Démarrage : lun jan 13 23:00:01 CET 2014
+Arrêt     : lun jan 13 23:02:05 CET 2014
+
+
+
+Base MySQL sélectionnée: agis
+Nombre de serveur(s) Linux concerné(s): 4
+Nombre de dossier(s) à mettre à jour: 24
+
+sending incremental file list
+
+sent 5691 bytes  received 45 bytes  3824.00 bytes/sec
+total size is 10159163  speedup is 1771.12
+sending incremental file list
+
+sent 5891 bytes  received 35 bytes  2370.40 bytes/sec
+total size is 11905615  speedup is 2009.05
+sending incremental file list
+erp_data.mdb
+
+sent 7657694 bytes  received 64032 bytes  186065.69 bytes/sec
+total size is 83456000  speedup is 10.81
+sending incremental file list
+
+sent 7538 bytes  received 45 bytes  5055.33 bytes/sec
+total size is 9253358  speedup is 1220.28
+sending incremental file list
+batch/scanner.ini
+
+sent 8106 bytes  received 51 bytes  3262.80 bytes/sec
+total size is 16751789  speedup is 2053.67
+sending incremental file list
+
+sent 4308 bytes  received 24 bytes  2888.00 bytes/sec
+total size is 6387982  speedup is 1474.60
+sending incremental file list
+mercuriales/sync.ffs_db
+mercuriales/FZC/FZC 2014/ARGEL 2014.xls
+mercuriales/gms/2014/CENTRALES 2014/CASINO 2014.xls
+mercuriales/mdd/2014/2014 MERCURIALE SYSTEME U.xls
+
+sent 22877 bytes  received 5758 bytes  11454.00 bytes/sec
+total size is 25648984  speedup is 895.72
+sending incremental file list
+
+sent 5047 bytes  received 27 bytes  3382.67 bytes/sec
+total size is 39173092  speedup is 7720.36
+sending incremental file list
+operations_commerciales/DEMANDE ECHANTILLONS CL .xls
+operations_commerciales/chrono demande echantillons.xls
+operations_commerciales/FZC/CONFIRMATIONS/2014/TOUPARGEL/TOUPARGEL_CYCLE 4_2014.xls
+operations_commerciales/FZC/OP FZC 2014/FZC TOUPARGEL 2014.xls
+deleting operations_commerciales/GMS/2013/A-CENTRALES/GMS PRODIM MN 2013-FUTUR MASTER.xls
+operations_commerciales/GMS/2013/A-CENTRALES/GMS AUCHAN 2013-FUTUR MASTER.xls
+operations_commerciales/GMS/2013/A-CENTRALES/GMS AUCHAN.FR 2013-FUTUR MASTER.xls
+operations_commerciales/GMS/2013/A-CENTRALES/GMS CARREFOUR MARKET MDD 2013-FUTUR MASTER.xls
+operations_commerciales/GMS/2013/A-CENTRALES/GMS CARREFOUR MARKET MN 2013-FUTUR MASTER.xls
+operations_commerciales/GMS/2013/A-CENTRALES/GMS CARREFOUR MN 2013-FUTUR MASTER.xls
+operations_commerciales/GMS/2013/A-CENTRALES/GMS CARREFOUR MN ASIE 2013-FUTUR MASTER.xls
+operations_commerciales/GMS/2013/A-CENTRALES/GMS CASINO 2013-FUTUR MASTER.xls
+operations_commerciales/GMS/2013/A-CENTRALES/GMS INTERMARCHE 2013-FUTUR MASTER.xls
+operations_commerciales/GMS/2013/A-CENTRALES/GMS SYSTEME U 2013-FUTUR MASTER.xls
+operations_commerciales/GMS/2013/D-REGIONS/GMS LECLERC 2013-FUTUR MASTER.xls
+operations_commerciales/GMS/2013/D-REGIONS/GMS SCHIEVER 2013-FUTUR MASTER.xls
+operations_commerciales/GMS/2013/D-REGIONS/GMS SU REGION  2013-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS CASINO 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS SYSTEME U 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/D-REGIONS/GMS LECLERC 2014-FUTUR MASTER.xls
+operations_commerciales/MDD/MODELES VB/DEM ECHANTILLONS/2014/
+operations_commerciales/MDD/MODELES VB/DEM ECHANTILLONS/2014/Chrono 16 Daily Monop 130114.XLS
+operations_commerciales/MDD/OP MDD 2013/MDD CORA 2013 FUTUR MASTER.xls
+operations_commerciales/MDD/OP MDD 2013/MDD CRF 2013 FUTUR MASTER.xls
+operations_commerciales/MDD/OP MDD 2013/MDD ITM FUTUR MASTER 2013 .xls
+operations_commerciales/MDD/OP MDD 2013/MDD NETTO 2013 FUTURMASTER.xls
+
+sent 505818 bytes  received 70163 bytes  88612.46 bytes/sec
+total size is 60331987  speedup is 104.75
+sending incremental file list
+
+sent 20908 bytes  received 88 bytes  8398.40 bytes/sec
+total size is 99120505  speedup is 4720.92
+sending incremental file list
+modeles/compo_pc_double_haut_g.lab
+modeles/compo_pc_double_haut_kg.lab
+modeles/compo_pc_double_haut_kg_180.lab
+modeles/compo_pc_top_chef_auchan.lab
+modeles/compo_pc_top_chef_auchan_180.lab
+
+sent 63793 bytes  received 2700 bytes  44328.67 bytes/sec
+total size is 32964096  speedup is 495.75
+sending incremental file list
+erp_data.mdb
+
+sent 7657694 bytes  received 64032 bytes  190659.90 bytes/sec
+total size is 83456000  speedup is 10.81
+sending incremental file list
+
+sent 7538 bytes  received 45 bytes  5055.33 bytes/sec
+total size is 9253358  speedup is 1220.28
+sending incremental file list
+
+sent 4308 bytes  received 24 bytes  2888.00 bytes/sec
+total size is 6387982  speedup is 1474.60
+sending incremental file list
+batch/scanner.ini
+
+sent 8106 bytes  received 51 bytes  5438.00 bytes/sec
+total size is 16751789  speedup is 2053.67
+sending incremental file list
+
+sent 85 bytes  received 13 bytes  65.33 bytes/sec
+total size is 104853504  speedup is 1069933.71
+sending incremental file list
+operations_commerciales/DEMANDE ECHANTILLONS CL .xls
+operations_commerciales/chrono demande echantillons.xls
+operations_commerciales/FZC/CONFIRMATIONS/2014/TOUPARGEL/TOUPARGEL_CYCLE 4_2014.xls
+operations_commerciales/FZC/OP FZC 2014/FZC TOUPARGEL 2014.xls
+deleting operations_commerciales/GMS/2013/A-CENTRALES/GMS PRODIM MN 2013-FUTUR MASTER.xls
+operations_commerciales/GMS/2013/A-CENTRALES/GMS AUCHAN 2013-FUTUR MASTER.xls
+operations_commerciales/GMS/2013/A-CENTRALES/GMS AUCHAN.FR 2013-FUTUR MASTER.xls
+operations_commerciales/GMS/2013/A-CENTRALES/GMS CARREFOUR MARKET MDD 2013-FUTUR MASTER.xls
+operations_commerciales/GMS/2013/A-CENTRALES/GMS CARREFOUR MARKET MN 2013-FUTUR MASTER.xls
+operations_commerciales/GMS/2013/A-CENTRALES/GMS CARREFOUR MN 2013-FUTUR MASTER.xls
+operations_commerciales/GMS/2013/A-CENTRALES/GMS CARREFOUR MN ASIE 2013-FUTUR MASTER.xls
+operations_commerciales/GMS/2013/A-CENTRALES/GMS CASINO 2013-FUTUR MASTER.xls
+operations_commerciales/GMS/2013/A-CENTRALES/GMS INTERMARCHE 2013-FUTUR MASTER.xls
+operations_commerciales/GMS/2013/A-CENTRALES/GMS SYSTEME U 2013-FUTUR MASTER.xls
+operations_commerciales/GMS/2013/D-REGIONS/GMS LECLERC 2013-FUTUR MASTER.xls
+operations_commerciales/GMS/2013/D-REGIONS/GMS SCHIEVER 2013-FUTUR MASTER.xls
+operations_commerciales/GMS/2013/D-REGIONS/GMS SU REGION  2013-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS CASINO 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS SYSTEME U 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/D-REGIONS/GMS LECLERC 2014-FUTUR MASTER.xls
+operations_commerciales/MDD/MODELES VB/DEM ECHANTILLONS/2014/
+operations_commerciales/MDD/MODELES VB/DEM ECHANTILLONS/2014/Chrono 16 Daily Monop 130114.XLS
+operations_commerciales/MDD/OP MDD 2013/MDD CORA 2013 FUTUR MASTER.xls
+operations_commerciales/MDD/OP MDD 2013/MDD CRF 2013 FUTUR MASTER.xls
+operations_commerciales/MDD/OP MDD 2013/MDD ITM FUTUR MASTER 2013 .xls
+operations_commerciales/MDD/OP MDD 2013/MDD NETTO 2013 FUTURMASTER.xls
+
+sent 505818 bytes  received 70163 bytes  127995.78 bytes/sec
+total size is 60331987  speedup is 104.75
+sending incremental file list
+mercuriales/sync.ffs_db
+mercuriales/FZC/FZC 2014/ARGEL 2014.xls
+mercuriales/gms/2014/CENTRALES 2014/CASINO 2014.xls
+mercuriales/mdd/2014/2014 MERCURIALE SYSTEME U.xls
+
+sent 22877 bytes  received 5758 bytes  19090.00 bytes/sec
+total size is 25648984  speedup is 895.72
+sending incremental file list
+modeles/compo_pc_double_haut_g.lab
+modeles/compo_pc_double_haut_kg.lab
+modeles/compo_pc_double_haut_kg_180.lab
+modeles/compo_pc_top_chef_auchan.lab
+modeles/compo_pc_top_chef_auchan_180.lab
+
+sent 63793 bytes  received 2700 bytes  26597.20 bytes/sec
+total size is 32964096  speedup is 495.75
+sending incremental file list
+
+sent 5691 bytes  received 45 bytes  11472.00 bytes/sec
+total size is 10159163  speedup is 1771.12
+sending incremental file list
+
+sent 5677 bytes  received 23 bytes  3800.00 bytes/sec
+total size is 128675317  speedup is 22574.62
+sending incremental file list
+
+sent 5353 bytes  received 38 bytes  3594.00 bytes/sec
+total size is 56169881  speedup is 10419.20
+sending incremental file list
+deleting codesoft/Codesoft 7/Agis FE/79103_plateau d\#351gustatiion_recto.lab
+codesoft/Codesoft 7/Agis FE/79103_recto.bak
+codesoft/Codesoft 7/Agis FE/79103_recto.lab
+deleting codesoft/Codesoft 7/Auchan  Atac/Atac_simply/simply_janv_14/plateau_degustation_verso.lab
+deleting codesoft/Codesoft 7/Auchan  Atac/Atac_simply/simply_janv_14/plateau_degustation_recto.lab
+codesoft/Codesoft 7/Auchan  Atac/Atac_simply/simply_janv_14/79915_recto.lab
+codesoft/Codesoft 7/Auchan  Atac/Atac_simply/simply_janv_14/79915_verso.lab
+codesoft/Codesoft 7/Auchan  Atac/Atac_simply/simply_janv_14/79916_verso.bak
+codesoft/Codesoft 7/Auchan  Atac/Atac_simply/simply_janv_14/79916_verso.lab
+codesoft/Codesoft 7/Codes Produits/79132_recto.bak
+codesoft/Codesoft 7/Codes Produits/79132_recto.lab
+codesoft/Codesoft 7/EN_ATTENTE_nems_rang\#351s/nems_poisson_cocktail_rang\#351s_SIMPLY_verso.bak
+codesoft/Codesoft 7/EN_ATTENTE_nems_rang\#351s/nems_poisson_cocktail_rang\#351s_SIMPLY_verso.lab
+
+sent 96256 bytes  received 5204 bytes  40584.00 bytes/sec
+total size is 284396627  speedup is 2803.04
+sending incremental file list

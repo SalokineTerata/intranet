@@ -1,0 +1,261 @@
+Démarrage : mar oct 29 23:00:02 CET 2013
+Arrêt     : mar oct 29 23:01:58 CET 2013
+
+
+
+Base MySQL sélectionnée: agis
+Nombre de serveur(s) Linux concerné(s): 4
+Nombre de dossier(s) à mettre à jour: 25
+
+sending incremental file list
+
+sent 7651 bytes  received 20 bytes  15342.00 bytes/sec
+total size is 16750790  speedup is 2183.65
+sending incremental file list
+
+sent 5598 bytes  received 45 bytes  3762.00 bytes/sec
+total size is 9985067  speedup is 1769.46
+sending incremental file list
+suivi_investissement/2014-2015/Bud invest AVI 2014 2015.xls
+
+sent 10731 bytes  received 485 bytes  4486.40 bytes/sec
+total size is 11615823  speedup is 1035.65
+sending incremental file list
+erp_data.mdb
+
+sent 7492459 bytes  received 62247 bytes  186535.95 bytes/sec
+total size is 78852096  speedup is 10.44
+sending incremental file list
+
+sent 7538 bytes  received 45 bytes  5055.33 bytes/sec
+total size is 9253358  speedup is 1220.28
+sending incremental file list
+
+sent 7651 bytes  received 20 bytes  5114.00 bytes/sec
+total size is 16750790  speedup is 2183.65
+sending incremental file list
+
+sent 4308 bytes  received 24 bytes  8664.00 bytes/sec
+total size is 6387982  speedup is 1474.60
+sending incremental file list
+mercuriales/sync.ffs_db
+mercuriales/sync.ffs_lock
+mercuriales/gms/2013/CENTRALES 2013/AUCHAN.FR 2013.xls
+mercuriales/gms/2013/CENTRALES 2013/CASINO 2013.xls
+mercuriales/gms/2014/CENTRALES 2014/AUCHAN 2014.xls
+mercuriales/gms/2014/CENTRALES 2014/AUCHAN.FR 2014.xls
+mercuriales/mdd/2013/2013 MERCURIALE CARREFOUR ASIATIQUE.xls
+mercuriales/mdd/2013/2013 MERCURIALE GROUPE AUCHAN.xls
+mercuriales/mdd/2013/2013 MERCURIALE PROVERA.xls
+
+sent 79757 bytes  received 24503 bytes  41704.00 bytes/sec
+total size is 41449470  speedup is 397.56
+sending incremental file list
+
+sent 5047 bytes  received 27 bytes  3382.67 bytes/sec
+total size is 39173092  speedup is 7720.36
+sending incremental file list
+operations_commerciales/chrono demande echantillons.xls
+operations_commerciales/sync.ffs_db
+operations_commerciales/sync.ffs_lock
+operations_commerciales/GMS/RECAP DEMANDE ET CONFIRMATIONS HEBDO.xls
+operations_commerciales/GMS/2013/A-CENTRALES/GMS AUCHAN.FR 2013-FUTUR MASTER.xls
+operations_commerciales/GMS/2013/A-CENTRALES/GMS CARREFOUR MN ASIE 2013-FUTUR MASTER.xls
+operations_commerciales/GMS/2013/A-CENTRALES/GMS INTERMARCHE 2013-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS AUCHAN 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/AUCHAN/2014 AUCHAN OP JANVIER 4 NAA.xls
+operations_commerciales/MDD/MODELES CJ/SYSTEME U/DDE ECHANTILLONS/DEMANDE ECHANTILLONS SU PIXELIS.xls
+operations_commerciales/MDD/MODELES CJ/SYSTEME U/DDE ECHANTILLONS/DEMANDE ECHANTILLONS SU.xls
+operations_commerciales/MDD/MODELES VB/CONF OPE CASINO/2014/CONFIRMATION OPERATION CASINO SM NAA 2014.xls
+operations_commerciales/MDD/MODELES VB/CONF OPES MONOPRIX/2014/CONFIRMATION OPERATION_MONOPRIX_MINI PRIX 3.xls
+operations_commerciales/MDD/OP MDD 2013/MDD AUCHAN 2013 FUTUR MASTER.xls
+operations_commerciales/MDD/OP MDD 2014/MDD CASINO 2014.xls
+
+sent 268106 bytes  received 27774 bytes  118352.00 bytes/sec
+total size is 53861208  speedup is 182.04
+sending incremental file list
+
+sent 18506 bytes  received 80 bytes  12390.67 bytes/sec
+total size is 41728031  speedup is 2245.13
+sending incremental file list
+deleting modeles/sachet_auchan_180.bak
+deleting modeles/sachet_auchan.bak
+deleting modeles/echantillons_RD.bak
+deleting modeles/echantillons-72x132mm_surgele.bak
+deleting modeles/echantillons-65x65mm_surgele.bak
+deleting modeles/coupelle_compo_180.bak
+deleting modeles/coupelle_compo.bak
+deleting modeles/compo_ronde_v2_180.bak
+deleting modeles/compo_ronde_v2.bak
+deleting modeles/compo_pc_individuel_fef-v1_180.bak
+deleting modeles/compo_pc_individuel_fef-v1.bak
+deleting modeles/compo_pc_individuel_fef-2014_180.bak
+deleting modeles/compo_pc_fe_ete-v1_180.bak
+deleting modeles/compo_pc_double_simply_180.bak
+deleting modeles/compo_pc_double_simply.bak
+deleting modeles/compo_pc_double_haut_kg_180.bak
+deleting modeles/compo_pc_double_haut_kg.bak
+deleting modeles/compo_pc_double_haut_g_180.bak
+deleting modeles/compo_pc_double_haut_180.bak
+deleting modeles/compo_pc_double_haut.bak
+deleting modeles/compo_pc_double_bas-v2_180.bak
+deleting modeles/compo_pc_bicompart_180.bak
+deleting modeles/compo_pc_bicompart.bak
+deleting modeles/compo_norma_lemutant_NAA_180.bak
+deleting modeles/compo_gencod_uniquement.bak
+deleting modeles/compo_festif_pc_4_parts_180.bak
+deleting modeles/compo_festif_pc_4_parts.bak
+deleting modeles/compo_festif_monoportion_pm_75x48_180.bak2
+deleting modeles/compo_festif_monoportion_pm_75x48_180.bak
+deleting modeles/compo_festif_monoportion_pm_75x48.bak
+deleting modeles/compo_festif_monoportion_180.bak
+deleting modeles/compo_festif_monoportion.bak
+deleting modeles/compo_festif_132x72_180.bak
+deleting modeles/compo_festif_132x72.bak
+deleting modeles/compo_coupelle_TRFST_180.bak
+deleting modeles/compo_coupelle_TRFST.bak
+deleting modeles/compo_claude_leger-v2_180.bak
+deleting modeles/compo_claude_leger-v2.bak
+deleting modeles/compo_box_AUC.bak
+deleting modeles/compo_agis_sans_portion-v1_180.bak
+deleting modeles/compo_ITM_gamme_permanente_180.bak
+deleting modeles/compo_ITM_gamme_permanente.bak
+deleting modeles/compo_165x100_dlc_lot.bak
+deleting modeles/carton_ean_128_v2012_surgele.bak
+deleting modeles/carton_ean_128_v2010_surgele.bak
+deleting modeles/carton_ean_128_v2010.bak
+deleting modeles/carton_ean_128_ubi_code_client.bak
+deleting modeles/carton_ean128-sato-RH.bak
+deleting modeles/carton_ean128-sato-LH.bak
+deleting modeles/README.TXT
+modeles/coupelle_compo.lab
+modeles/coupelle_compo_180.lab
+
+sent 24205 bytes  received 2031 bytes  17490.67 bytes/sec
+total size is 30168064  speedup is 1149.87
+sending incremental file list
+erp_data.mdb
+
+sent 7492459 bytes  received 62247 bytes  186535.95 bytes/sec
+total size is 78852096  speedup is 10.44
+sending incremental file list
+
+sent 7538 bytes  received 45 bytes  5055.33 bytes/sec
+total size is 9253358  speedup is 1220.28
+sending incremental file list
+
+sent 4308 bytes  received 24 bytes  2888.00 bytes/sec
+total size is 6387982  speedup is 1474.60
+sending incremental file list
+
+sent 7651 bytes  received 20 bytes  5114.00 bytes/sec
+total size is 16750790  speedup is 2183.65
+sending incremental file list
+
+sent 85 bytes  received 13 bytes  65.33 bytes/sec
+total size is 104853504  speedup is 1069933.71
+sending incremental file list
+operations_commerciales/chrono demande echantillons.xls
+operations_commerciales/sync.ffs_db
+operations_commerciales/sync.ffs_lock
+operations_commerciales/GMS/RECAP DEMANDE ET CONFIRMATIONS HEBDO.xls
+operations_commerciales/GMS/2013/A-CENTRALES/GMS AUCHAN.FR 2013-FUTUR MASTER.xls
+operations_commerciales/GMS/2013/A-CENTRALES/GMS CARREFOUR MN ASIE 2013-FUTUR MASTER.xls
+operations_commerciales/GMS/2013/A-CENTRALES/GMS INTERMARCHE 2013-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS AUCHAN 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/AUCHAN/2014 AUCHAN OP JANVIER 4 NAA.xls
+operations_commerciales/MDD/MODELES CJ/SYSTEME U/DDE ECHANTILLONS/DEMANDE ECHANTILLONS SU PIXELIS.xls
+operations_commerciales/MDD/MODELES CJ/SYSTEME U/DDE ECHANTILLONS/DEMANDE ECHANTILLONS SU.xls
+operations_commerciales/MDD/MODELES VB/CONF OPE CASINO/2014/CONFIRMATION OPERATION CASINO SM NAA 2014.xls
+operations_commerciales/MDD/MODELES VB/CONF OPES MONOPRIX/2014/CONFIRMATION OPERATION_MONOPRIX_MINI PRIX 3.xls
+operations_commerciales/MDD/OP MDD 2013/MDD AUCHAN 2013 FUTUR MASTER.xls
+operations_commerciales/MDD/OP MDD 2014/MDD CASINO 2014.xls
+
+sent 268106 bytes  received 27774 bytes  84537.14 bytes/sec
+total size is 53861208  speedup is 182.04
+sending incremental file list
+mercuriales/sync.ffs_db
+mercuriales/sync.ffs_lock
+mercuriales/gms/2013/CENTRALES 2013/AUCHAN.FR 2013.xls
+mercuriales/gms/2013/CENTRALES 2013/CASINO 2013.xls
+mercuriales/gms/2014/CENTRALES 2014/AUCHAN 2014.xls
+mercuriales/gms/2014/CENTRALES 2014/AUCHAN.FR 2014.xls
+mercuriales/mdd/2013/2013 MERCURIALE CARREFOUR ASIATIQUE.xls
+mercuriales/mdd/2013/2013 MERCURIALE GROUPE AUCHAN.xls
+mercuriales/mdd/2013/2013 MERCURIALE PROVERA.xls
+
+sent 79757 bytes  received 24503 bytes  69506.67 bytes/sec
+total size is 41449470  speedup is 397.56
+sending incremental file list
+deleting modeles/sachet_auchan_180.bak
+deleting modeles/sachet_auchan.bak
+deleting modeles/echantillons_RD.bak
+deleting modeles/echantillons-72x132mm_surgele.bak
+deleting modeles/echantillons-65x65mm_surgele.bak
+deleting modeles/coupelle_compo_180.bak
+deleting modeles/coupelle_compo.bak
+deleting modeles/compo_ronde_v2_180.bak
+deleting modeles/compo_ronde_v2.bak
+deleting modeles/compo_pc_individuel_fef-v1_180.bak
+deleting modeles/compo_pc_individuel_fef-v1.bak
+deleting modeles/compo_pc_individuel_fef-2014_180.bak
+deleting modeles/compo_pc_fe_ete-v1_180.bak
+deleting modeles/compo_pc_double_simply_180.bak
+deleting modeles/compo_pc_double_simply.bak
+deleting modeles/compo_pc_double_haut_kg_180.bak
+deleting modeles/compo_pc_double_haut_kg.bak
+deleting modeles/compo_pc_double_haut_g_180.bak
+deleting modeles/compo_pc_double_haut_180.bak
+deleting modeles/compo_pc_double_haut.bak
+deleting modeles/compo_pc_double_bas-v2_180.bak
+deleting modeles/compo_pc_bicompart_180.bak
+deleting modeles/compo_pc_bicompart.bak
+deleting modeles/compo_norma_lemutant_NAA_180.bak
+deleting modeles/compo_gencod_uniquement.bak
+deleting modeles/compo_festif_pc_4_parts_180.bak
+deleting modeles/compo_festif_pc_4_parts.bak
+deleting modeles/compo_festif_monoportion_pm_75x48_180.bak2
+deleting modeles/compo_festif_monoportion_pm_75x48_180.bak
+deleting modeles/compo_festif_monoportion_pm_75x48.bak
+deleting modeles/compo_festif_monoportion_180.bak
+deleting modeles/compo_festif_monoportion.bak
+deleting modeles/compo_festif_132x72_180.bak
+deleting modeles/compo_festif_132x72.bak
+deleting modeles/compo_coupelle_TRFST_180.bak
+deleting modeles/compo_coupelle_TRFST.bak
+deleting modeles/compo_claude_leger-v2_180.bak
+deleting modeles/compo_claude_leger-v2.bak
+deleting modeles/compo_box_AUC.bak
+deleting modeles/compo_agis_sans_portion-v1_180.bak
+deleting modeles/compo_ITM_gamme_permanente_180.bak
+deleting modeles/compo_ITM_gamme_permanente.bak
+deleting modeles/compo_165x100_dlc_lot.bak
+deleting modeles/carton_ean_128_v2012_surgele.bak
+deleting modeles/carton_ean_128_v2010_surgele.bak
+deleting modeles/carton_ean_128_v2010.bak
+deleting modeles/carton_ean_128_ubi_code_client.bak
+deleting modeles/carton_ean128-sato-RH.bak
+deleting modeles/carton_ean128-sato-LH.bak
+deleting modeles/README.TXT
+modeles/coupelle_compo.lab
+modeles/coupelle_compo_180.lab
+
+sent 24205 bytes  received 2031 bytes  17490.67 bytes/sec
+total size is 30168064  speedup is 1149.87
+sending incremental file list
+
+sent 5598 bytes  received 45 bytes  11286.00 bytes/sec
+total size is 9985067  speedup is 1769.46
+sending incremental file list
+
+sent 5677 bytes  received 23 bytes  3800.00 bytes/sec
+total size is 128675317  speedup is 22574.62
+sending incremental file list
+
+sent 4707 bytes  received 36 bytes  3162.00 bytes/sec
+total size is 46318934  speedup is 9765.75
+sending incremental file list
+
+sent 46162 bytes  received 86 bytes  30832.00 bytes/sec
+total size is 275068499  speedup is 5947.68
+sending incremental file list

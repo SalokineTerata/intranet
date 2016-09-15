@@ -20,7 +20,7 @@
 /**
  * Description of TableRelationshipToHtmlSubform_RNN
  *
- * @author tp4300001
+ * @author franckwastaken
  */
 class DataFieldToHtmlSubform_RNN extends HtmlSubForm_RNN {
 

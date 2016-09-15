@@ -1,0 +1,167 @@
+Démarrage : ven jui 25 23:00:01 CEST 2014
+Arrêt     : ven jui 25 23:00:43 CEST 2014
+
+
+
+Base MySQL sélectionnée: agis
+Nombre de serveur(s) Linux concerné(s): 4
+Nombre de dossier(s) à mettre à jour: 29
+
+sending incremental file list
+
+sent 7292 bytes  received 49 bytes  4894.00 bytes/sec
+total size is 13584181  speedup is 1850.45
+sending incremental file list
+suivi_investissement/2014-2015/Suivi investissements AVI 2014 2015.xls
+
+sent 19402 bytes  received 2757 bytes  14772.67 bytes/sec
+total size is 12444119  speedup is 561.58
+sending incremental file list
+
+sent 63 bytes  received 12 bytes  50.00 bytes/sec
+total size is 90648576  speedup is 1208647.68
+sending incremental file list
+
+sent 7593 bytes  received 45 bytes  5092.00 bytes/sec
+total size is 9254930  speedup is 1211.70
+sending incremental file list
+
+sent 7877 bytes  received 20 bytes  5264.67 bytes/sec
+total size is 16764158  speedup is 2122.85
+sending incremental file list
+
+sent 4308 bytes  received 24 bytes  2888.00 bytes/sec
+total size is 6387982  speedup is 1474.60
+sending incremental file list
+mercuriales/MERCURIALES - AGIS/FZC/FZC 2014/ARGEL 2014.xls
+mercuriales/MERCURIALES - AGIS/FZC/FZC 2014/BOFROST 2014.xls
+mercuriales/MERCURIALES - AGIS/HD/2014/2014 MERCURIALE LEADER PRICE.xls
+mercuriales/MERCURIALES - AGIS/mdd/2014/2014 MERCURIALE AUCHAN.xls
+mercuriales/MERCURIALES - AGIS/mdd/2014/2014 MERCURIALE MONOPRIX .xls
+mercuriales/MERCURIALES - AGIS/mdd/2014/2014 MERCURIALE SYSTEME U.xls
+mercuriales/MERCURIALES - MARIE/2014/2014 MERCURIALES AUCHAN MARIE.xls
+mercuriales/MERCURIALES - MARIE/2014/2014 MERCURIALES CARREFOUR MARIE.xls
+mercuriales/MERCURIALES - MARIE/2014/2014 MERCURIALES SCAMARK MARIE.xls
+
+sent 62072 bytes  received 11029 bytes  48734.00 bytes/sec
+total size is 36413426  speedup is 498.12
+sending incremental file list
+
+sent 5047 bytes  received 27 bytes  10148.00 bytes/sec
+total size is 39173092  speedup is 7720.36
+sending incremental file list
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/AUCHAN/2014 AUCHAN FESTIFS.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/AUCHAN/2014 AUCHAN MENU BL FESTIFS.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/INTERMARCHE/2014 INTERMARCHE DECEMBRE FESTIFS COUPE.xls
+operations_commerciales/GMS/2014/D-REGIONS/GMS LECLERC 2014-FUTUR MASTER.xls
+
+sent 75640 bytes  received 5098 bytes  53825.33 bytes/sec
+total size is 56241311  speedup is 696.59
+sending incremental file list
+
+sent 20406 bytes  received 83 bytes  13659.33 bytes/sec
+total size is 99360776  speedup is 4849.47
+sending incremental file list
+gofast/sync.ffs_db
+deleting gofast/CHANTIERS/2_FTK_CLIENTS_Mathieu/5_STANDARDS/Besoins_clients_150714.xls
+gofast/CHANTIERS/2_FTK_CLIENTS_Mathieu/5_STANDARDS/Besoins_clients_250714.xls
+gofast/CHANTIERS/2_FTK_CLIENTS_Mathieu/5_STANDARDS/Besoins_clients_JESS_240714.xls
+gofast/CHANTIERS/2_FTK_CLIENTS_Mathieu/5_STANDARDS/Besoins_clients_TAR_240714.xls
+gofast/CHANTIERS/2_FTK_CLIENTS_Mathieu/5_STANDARDS/Charte_EXIGENCES_etiquetage_INCO_v8_170714.doc
+
+sent 51313 bytes  received 217 bytes  34353.33 bytes/sec
+total size is 52227508  speedup is 1013.54
+sending incremental file list
+
+sent 8894 bytes  received 13 bytes  5938.00 bytes/sec
+total size is 43580416  speedup is 4892.83
+sending incremental file list
+
+sent 5781 bytes  received 30 bytes  11622.00 bytes/sec
+total size is 92829061  speedup is 15974.71
+sending incremental file list
+
+sent 63 bytes  received 12 bytes  150.00 bytes/sec
+total size is 90648576  speedup is 1208647.68
+sending incremental file list
+
+sent 7593 bytes  received 45 bytes  5092.00 bytes/sec
+total size is 9254930  speedup is 1211.70
+sending incremental file list
+
+sent 4308 bytes  received 24 bytes  2888.00 bytes/sec
+total size is 6387982  speedup is 1474.60
+sending incremental file list
+
+sent 7877 bytes  received 20 bytes  5264.67 bytes/sec
+total size is 16764158  speedup is 2122.85
+sending incremental file list
+
+sent 85 bytes  received 13 bytes  65.33 bytes/sec
+total size is 104853504  speedup is 1069933.71
+sending incremental file list
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/AUCHAN/2014 AUCHAN FESTIFS.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/AUCHAN/2014 AUCHAN MENU BL FESTIFS.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/INTERMARCHE/2014 INTERMARCHE DECEMBRE FESTIFS COUPE.xls
+operations_commerciales/GMS/2014/D-REGIONS/GMS LECLERC 2014-FUTUR MASTER.xls
+
+sent 75640 bytes  received 5098 bytes  53825.33 bytes/sec
+total size is 56241311  speedup is 696.59
+sending incremental file list
+mercuriales/MERCURIALES - AGIS/FZC/FZC 2014/ARGEL 2014.xls
+mercuriales/MERCURIALES - AGIS/FZC/FZC 2014/BOFROST 2014.xls
+mercuriales/MERCURIALES - AGIS/HD/2014/2014 MERCURIALE LEADER PRICE.xls
+mercuriales/MERCURIALES - AGIS/mdd/2014/2014 MERCURIALE AUCHAN.xls
+mercuriales/MERCURIALES - AGIS/mdd/2014/2014 MERCURIALE MONOPRIX .xls
+mercuriales/MERCURIALES - AGIS/mdd/2014/2014 MERCURIALE SYSTEME U.xls
+mercuriales/MERCURIALES - MARIE/2014/2014 MERCURIALES AUCHAN MARIE.xls
+mercuriales/MERCURIALES - MARIE/2014/2014 MERCURIALES CARREFOUR MARIE.xls
+mercuriales/MERCURIALES - MARIE/2014/2014 MERCURIALES SCAMARK MARIE.xls
+
+sent 62072 bytes  received 11029 bytes  48734.00 bytes/sec
+total size is 36413426  speedup is 498.12
+sending incremental file list
+
+sent 8894 bytes  received 13 bytes  5938.00 bytes/sec
+total size is 43580416  speedup is 4892.83
+sending incremental file list
+
+sent 7292 bytes  received 49 bytes  4894.00 bytes/sec
+total size is 13584181  speedup is 1850.45
+sending incremental file list
+
+sent 5745 bytes  received 23 bytes  3845.33 bytes/sec
+total size is 129159129  speedup is 22392.36
+sending incremental file list
+
+sent 5610 bytes  received 39 bytes  3766.00 bytes/sec
+total size is 59049369  speedup is 10453.07
+sending incremental file list
+deleting codesoft/Codesoft 7/Destockage/sam_boeuf_60g.lab
+codesoft/Codesoft 7/Destockage/80983.lab
+codesoft/Codesoft 7/Destockage/sam_boeuf_60g.bak
+
+sent 82898 bytes  received 137 bytes  33214.00 bytes/sec
+total size is 299707475  speedup is 3609.41
+sending incremental file list
+
+sent 20406 bytes  received 83 bytes  8195.60 bytes/sec
+total size is 99360776  speedup is 4849.47
+sending incremental file list
+gofast/sync.ffs_db
+deleting gofast/CHANTIERS/2_FTK_CLIENTS_Mathieu/5_STANDARDS/Besoins_clients_150714.xls
+gofast/CHANTIERS/2_FTK_CLIENTS_Mathieu/5_STANDARDS/Besoins_clients_250714.xls
+gofast/CHANTIERS/2_FTK_CLIENTS_Mathieu/5_STANDARDS/Besoins_clients_JESS_240714.xls
+gofast/CHANTIERS/2_FTK_CLIENTS_Mathieu/5_STANDARDS/Besoins_clients_TAR_240714.xls
+gofast/CHANTIERS/2_FTK_CLIENTS_Mathieu/5_STANDARDS/Charte_EXIGENCES_etiquetage_INCO_v8_170714.doc
+
+sent 51313 bytes  received 217 bytes  34353.33 bytes/sec
+total size is 52227508  speedup is 1013.54
+sending incremental file list
+
+sent 7877 bytes  received 20 bytes  3158.80 bytes/sec
+total size is 16764158  speedup is 2122.85
+sending incremental file list
+
+sent 7877 bytes  received 20 bytes  5264.67 bytes/sec
+total size is 16764158  speedup is 2122.85

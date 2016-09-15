@@ -1,0 +1,188 @@
+Démarrage : ven sep 20 23:00:02 CEST 2013
+Arrêt     : ven sep 20 23:00:45 CEST 2013
+
+
+
+Base MySQL sélectionnée: agis
+Nombre de serveur(s) Linux concerné(s): 4
+Nombre de dossier(s) à mettre à jour: 24
+
+sending incremental file list
+
+sent 7552 bytes  received 20 bytes  15144.00 bytes/sec
+total size is 16747404  speedup is 2211.75
+sending incremental file list
+
+sent 5440 bytes  received 44 bytes  3656.00 bytes/sec
+total size is 9508728  speedup is 1733.90
+sending incremental file list
+codesoft/Codesoft 7/PULP FICTION/75390_recto.bak
+codesoft/Codesoft 7/PULP FICTION/75390_recto.lab
+codesoft/Codesoft 7/PULP FICTION/75390_verso.bak
+codesoft/Codesoft 7/PULP FICTION/75390_verso.lab
+codesoft/Codesoft 7/PULP FICTION/75393_recto.bak
+codesoft/Codesoft 7/PULP FICTION/75393_recto.lab
+codesoft/Codesoft 7/PULP FICTION/75393_verso.bak
+codesoft/Codesoft 7/PULP FICTION/75393_verso.lab
+codesoft/Codesoft 7/PULP FICTION/75394_recto.bak
+codesoft/Codesoft 7/PULP FICTION/75394_recto.lab
+codesoft/Codesoft 7/PULP FICTION/75394_verso.bak
+codesoft/Codesoft 7/PULP FICTION/75394_verso.lab
+codesoft/Codesoft 7/PULP FICTION/75395_recto.bak
+codesoft/Codesoft 7/PULP FICTION/75395_recto.lab
+codesoft/Codesoft 7/PULP FICTION/75395_verso.bak
+codesoft/Codesoft 7/PULP FICTION/75395_verso.lab
+codesoft/Codesoft 7/PULP FICTION/75396_recto.bak
+codesoft/Codesoft 7/PULP FICTION/75396_recto.lab
+codesoft/Codesoft 7/PULP FICTION/75396_verso.bak
+codesoft/Codesoft 7/PULP FICTION/75396_verso.lab
+codesoft/Codesoft 7/PULP FICTION/75397_recto.bak
+codesoft/Codesoft 7/PULP FICTION/75397_recto.lab
+codesoft/Codesoft 7/PULP FICTION/75397_verso.bak
+codesoft/Codesoft 7/PULP FICTION/75397_verso.lab
+codesoft/Codesoft 7/PULP FICTION/75398_recto.bak
+codesoft/Codesoft 7/PULP FICTION/75398_recto.lab
+codesoft/Codesoft 7/PULP FICTION/75398_verso.bak
+codesoft/Codesoft 7/PULP FICTION/75398_verso.lab
+codesoft/Codesoft 7/PULP FICTION/75399_recto.bak
+codesoft/Codesoft 7/PULP FICTION/75399_recto.lab
+codesoft/Codesoft 7/PULP FICTION/75399_verso.bak
+codesoft/Codesoft 7/PULP FICTION/75399_verso.lab
+codesoft/Codesoft 7/PULP FICTION/75400_recto.bak
+codesoft/Codesoft 7/PULP FICTION/75400_recto.lab
+codesoft/Codesoft 7/PULP FICTION/75400_verso.bak
+codesoft/Codesoft 7/PULP FICTION/75400_verso.lab
+codesoft/Codesoft 7/PULP FICTION/79101_recto.bak
+codesoft/Codesoft 7/PULP FICTION/79101_recto.lab
+codesoft/Codesoft 7/PULP FICTION/79101_verso.bak
+codesoft/Codesoft 7/PULP FICTION/79101_verso.lab
+
+sent 276771 bytes  received 49211 bytes  93137.71 bytes/sec
+total size is 272220243  speedup is 835.08
+sending incremental file list
+suivi_investissement/2013-2014/suivi des travaux 2013.xls
+suivi_investissement/2013-2014/Pr\#351pa budget invest r\#351vis\#351 2013-2014/Bud invest AVI r\#351vis\#351 2013-2014.xls
+suivi_investissement/2013-2014/Pr\#351pa budget invest r\#351vis\#351 2013-2014/Bud invest HER r\#351vis\#351 2013-2014.xls
+suivi_investissement/2013-2014/Pr\#351pa budget invest r\#351vis\#351 2013-2014/Bud invest PFT r\#351vis\#351 2013-2014.xls
+suivi_investissement/2013-2014/Pr\#351pa budget invest r\#351vis\#351 2013-2014/Bud invest TAR r\#351vis\#351 2013-2014.xls
+
+sent 41362 bytes  received 3632 bytes  17997.60 bytes/sec
+total size is 11360012  speedup is 252.48
+sending incremental file list
+
+sent 63 bytes  received 12 bytes  50.00 bytes/sec
+total size is 77592576  speedup is 1034567.68
+sending incremental file list
+
+sent 7538 bytes  received 45 bytes  5055.33 bytes/sec
+total size is 9253358  speedup is 1220.28
+sending incremental file list
+
+sent 7552 bytes  received 20 bytes  5048.00 bytes/sec
+total size is 16747404  speedup is 2211.75
+sending incremental file list
+
+sent 4308 bytes  received 24 bytes  2888.00 bytes/sec
+total size is 6387982  speedup is 1474.60
+sending incremental file list
+mercuriales/HD/2013/2013  MERCURIALE ALDI.xls
+mercuriales/HD/2013/2013 MERCURIALE DIA.xls
+mercuriales/gms/2013/REGION 2013/GALEC REGION MERCU JUIN 2013.xls
+mercuriales/mdd/2013/2013 MERCURIALE CARREFOUR ASIATIQUE.xls
+mercuriales/mdd/2013/2013 MERCURIALE CARREFOUR PLATS CUISINES.xls
+mercuriales/mdd/2013/2013 MERCURIALE GROUPE AUCHAN.xls
+mercuriales/mdd/2013/2013 MERCURIALE MONOPRIX .xls
+
+sent 148953 bytes  received 15523 bytes  65790.40 bytes/sec
+total size is 31960993  speedup is 194.32
+sending incremental file list
+
+sent 5047 bytes  received 27 bytes  3382.67 bytes/sec
+total size is 39173092  speedup is 7720.36
+sending incremental file list
+operations_commerciales/DEMANDE ECHANTILLONS CL .xls
+operations_commerciales/chrono demande echantillons.xls
+operations_commerciales/GMS/2013/D-REGIONS/GMS LECLERC 2013-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS INTERMARCHE 2014-FUTUR MASTER.xls
+deleting operations_commerciales/MDD/MODELES CJ/AUCHAN ATAC SCHIEVER/CONF OP/2013/CONFIRMATION OPERATION AUCHAN OCT 3 BRANDADE.xls
+operations_commerciales/MDD/MODELES CJ/AUCHAN ATAC SCHIEVER/CONF OP/2013/CONFIRMATION OPERATION AUCHAN OCT 3 BRANDADE SAUMON.xls
+operations_commerciales/MDD/MODELES CJ/AUCHAN ATAC SCHIEVER/CONF OP/2013/CONFIRMATION OPERATION SCHIEVER OCT 3.xls
+operations_commerciales/MDD/MODELES CJ/CARREFOUR/CONF OP/2013/CONFIRMATION OPERATION CRF MKT LES JOURS COMPLICES FRAIS.xls
+operations_commerciales/MDD/OP MDD 2013/MDD AUCHAN 2013 FUTUR MASTER.xls
+operations_commerciales/MDD/OP MDD 2013/MDD CRF MKT 2013 FUTUR MASTER.xls
+operations_commerciales/MDD/OP MDD 2013/MDD ITM FUTUR MASTER 2013 .xls
+operations_commerciales/MDD/OP MDD 2013/MDD SCHIEVER 2013 FUTUR MASTER.xls
+
+sent 266005 bytes  received 16377 bytes  43443.38 bytes/sec
+total size is 93259671  speedup is 330.26
+sending incremental file list
+
+sent 18506 bytes  received 80 bytes  12390.67 bytes/sec
+total size is 41728031  speedup is 2245.13
+sending incremental file list
+
+sent 7502 bytes  received 13 bytes  5010.00 bytes/sec
+total size is 33724035  speedup is 4487.56
+sending incremental file list
+
+sent 63 bytes  received 12 bytes  50.00 bytes/sec
+total size is 77592576  speedup is 1034567.68
+sending incremental file list
+
+sent 7538 bytes  received 45 bytes  5055.33 bytes/sec
+total size is 9253358  speedup is 1220.28
+sending incremental file list
+
+sent 4308 bytes  received 24 bytes  2888.00 bytes/sec
+total size is 6387982  speedup is 1474.60
+sending incremental file list
+
+sent 7552 bytes  received 20 bytes  5048.00 bytes/sec
+total size is 16747404  speedup is 2211.75
+sending incremental file list
+
+sent 85 bytes  received 13 bytes  65.33 bytes/sec
+total size is 104853504  speedup is 1069933.71
+sending incremental file list
+operations_commerciales/DEMANDE ECHANTILLONS CL .xls
+operations_commerciales/chrono demande echantillons.xls
+operations_commerciales/GMS/2013/D-REGIONS/GMS LECLERC 2013-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS INTERMARCHE 2014-FUTUR MASTER.xls
+deleting operations_commerciales/MDD/MODELES CJ/AUCHAN ATAC SCHIEVER/CONF OP/2013/CONFIRMATION OPERATION AUCHAN OCT 3 BRANDADE.xls
+operations_commerciales/MDD/MODELES CJ/AUCHAN ATAC SCHIEVER/CONF OP/2013/CONFIRMATION OPERATION AUCHAN OCT 3 BRANDADE SAUMON.xls
+operations_commerciales/MDD/MODELES CJ/AUCHAN ATAC SCHIEVER/CONF OP/2013/CONFIRMATION OPERATION SCHIEVER OCT 3.xls
+operations_commerciales/MDD/MODELES CJ/CARREFOUR/CONF OP/2013/CONFIRMATION OPERATION CRF MKT LES JOURS COMPLICES FRAIS.xls
+operations_commerciales/MDD/OP MDD 2013/MDD AUCHAN 2013 FUTUR MASTER.xls
+operations_commerciales/MDD/OP MDD 2013/MDD CRF MKT 2013 FUTUR MASTER.xls
+operations_commerciales/MDD/OP MDD 2013/MDD ITM FUTUR MASTER 2013 .xls
+operations_commerciales/MDD/OP MDD 2013/MDD SCHIEVER 2013 FUTUR MASTER.xls
+
+sent 266005 bytes  received 16377 bytes  80680.57 bytes/sec
+total size is 93259671  speedup is 330.26
+sending incremental file list
+mercuriales/HD/2013/2013  MERCURIALE ALDI.xls
+mercuriales/HD/2013/2013 MERCURIALE DIA.xls
+mercuriales/gms/2013/REGION 2013/GALEC REGION MERCU JUIN 2013.xls
+mercuriales/mdd/2013/2013 MERCURIALE CARREFOUR ASIATIQUE.xls
+mercuriales/mdd/2013/2013 MERCURIALE CARREFOUR PLATS CUISINES.xls
+mercuriales/mdd/2013/2013 MERCURIALE GROUPE AUCHAN.xls
+mercuriales/mdd/2013/2013 MERCURIALE MONOPRIX .xls
+
+sent 148953 bytes  received 15523 bytes  65790.40 bytes/sec
+total size is 31960993  speedup is 194.32
+sending incremental file list
+
+sent 5440 bytes  received 44 bytes  3656.00 bytes/sec
+total size is 9508728  speedup is 1733.90
+sending incremental file list
+
+sent 5618 bytes  received 23 bytes  3760.67 bytes/sec
+total size is 128643573  speedup is 22805.10
+sending incremental file list
+
+sent 4707 bytes  received 36 bytes  9486.00 bytes/sec
+total size is 46318934  speedup is 9765.75
+sending incremental file list
+
+sent 18506 bytes  received 80 bytes  12390.67 bytes/sec
+total size is 41728031  speedup is 2245.13

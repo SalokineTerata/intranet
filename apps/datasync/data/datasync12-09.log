@@ -1,0 +1,211 @@
+Démarrage : lun déc  9 23:00:01 CET 2013
+Arrêt     : lun déc  9 23:02:02 CET 2013
+
+
+
+Base MySQL sélectionnée: agis
+Nombre de serveur(s) Linux concerné(s): 4
+Nombre de dossier(s) à mettre à jour: 24
+
+sending incremental file list
+
+sent 5598 bytes  received 45 bytes  3762.00 bytes/sec
+total size is 9985067  speedup is 1769.46
+sending incremental file list
+suivi_investissement/2013-2014/suivi des travaux 2013.xls
+
+sent 13903 bytes  received 1595 bytes  10332.00 bytes/sec
+total size is 11670607  speedup is 753.04
+sending incremental file list
+erp_data.mdb
+
+sent 7567857 bytes  received 63255 bytes  188422.52 bytes/sec
+total size is 81426432  speedup is 10.67
+sending incremental file list
+
+sent 7538 bytes  received 45 bytes  5055.33 bytes/sec
+total size is 9253358  speedup is 1220.28
+sending incremental file list
+
+sent 7683 bytes  received 20 bytes  5135.33 bytes/sec
+total size is 16751831  speedup is 2174.72
+sending incremental file list
+
+sent 4308 bytes  received 24 bytes  2888.00 bytes/sec
+total size is 6387982  speedup is 1474.60
+sending incremental file list
+mercuriales/FZC/FZC 2014/ARGEL 2014.xls
+mercuriales/HD/2014/2014 MERCURIALE DIA.xls
+mercuriales/gms/2014/CENTRALES 2014/CASINO 2014.xls
+mercuriales/gms/2014/CENTRALES 2014/INTERMARCHE 2014.xls
+mercuriales/gms/2014/CONTROLE TARIFS 2014/01-JANVIER/2014 CASINO NOUVEAUX PC ASIE.pdf
+mercuriales/gms/2014/CONTROLE TARIFS 2014/01-JANVIER/2014 INTERMARCHE PRIX 2013 PROLONGES AU 28-02-2014.pdf
+mercuriales/gms/2014/CONTROLE TARIFS 2014/01-JANVIER/2014 PLACE DU MARCHE NOUVEAUX PRODUITS 01-01-2014.pdf
+mercuriales/gms/2014/CONTROLE TARIFS 2014/01-JANVIER/2014 SIMPLY MARKET PRIX 2013 PROLONGES AU 28-02-2014.pdf
+mercuriales/mdd/2014/2014 MERCURIALE CASINO.xls
+mercuriales/mdd/2014/2014 MERCURIALE SCAMARK.xls
+
+sent 172979 bytes  received 10954 bytes  52552.29 bytes/sec
+total size is 48290899  speedup is 262.55
+sending incremental file list
+
+sent 5047 bytes  received 27 bytes  3382.67 bytes/sec
+total size is 39173092  speedup is 7720.36
+sending incremental file list
+operations_commerciales/DEMANDE ECHANTILLONS CL .xls
+operations_commerciales/chrono demande echantillons.xls
+operations_commerciales/FZC/OP FZC 2014/FZC ARGEL 2014.xls
+operations_commerciales/GMS/2013/D-REGIONS/GMS LECLERC 2013-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS CARREFOUR 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS CASINO 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS INTERMARCHE 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/CASINO SM/2014 SM RI+GRATUIT NAC GROS VOLUMES SUPER.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/INTERMARCHE/2014 INTERMARCHE FEVRIER 1 OP 61009.xls
+operations_commerciales/GMS/2014/C-CONTROLE DES PRIX/2014 CASINO HM NAA.pdf
+operations_commerciales/GMS/2014/C-CONTROLE DES PRIX/2014 CASINO SM NAA.pdf
+operations_commerciales/GMS/2014/C-CONTROLE DES PRIX/2014 INTERMARCHE NAA.pdf
+operations_commerciales/GMS/2014/C-CONTROLE DES PRIX/2014 INTERMARCHE OP 61009 CREPES.pdf
+operations_commerciales/MDD/MODELES CJ/AUCHAN ATAC SCHIEVER/CONF OP/2014/CONFIRMATION OPERATION AUCHAN JANVIER 1.xls
+operations_commerciales/MDD/MODELES CJ/AUCHAN ATAC SCHIEVER/CONF OP/2014/CONFIRMATION OPERATION SIMPLY NAA 2014.xls
+operations_commerciales/MDD/MODELES CJ/CARREFOUR/CONF OP/CONFIRMATION OPERATION CRF CASH OP 3 .xls
+operations_commerciales/MDD/MODELES CJ/CARREFOUR/CONF OP/CONFIRMATION OPERATION CRF CONTACT CITY .xls
+operations_commerciales/MDD/MODELES CJ/CARREFOUR/CONF OP/CONFIRMATION OPERATION CRF MKT TRAFIC 11.xls
+operations_commerciales/MDD/MODELES CJ/CARREFOUR/CONF OP/CONFIRMATION OPERATION CRF PLS NON FERME PROMO 11 .xls
+operations_commerciales/MDD/MODELES CJ/CARREFOUR/CONF OP/2013/CONFIRMATION OPERATION CRF DRIVE NAA 2014 .xls
+operations_commerciales/MDD/MODELES CJ/PROVERA/Chrono 677 AGENCE REPUBLICAIN .XLS
+operations_commerciales/MDD/MODELES CJ/PROVERA/CONF OPES CORA MATCH/2014/CORA/CONFIRMATION OPERATION_CORA_2014-11-10967-TRAFIC.xls
+deleting operations_commerciales/MDD/MODELES CJ/SCAMARK/DDE ECHANTILLONS/DEMANDE ECHANTILLONS SOCAMAINE.xls
+deleting operations_commerciales/MDD/MODELES CJ/SCAMARK/DDE ECHANTILLONS/DEMANDE ECHANTILLONS SCAPNOR1.xls
+deleting operations_commerciales/MDD/MODELES CJ/SCAMARK/DDE ECHANTILLONS/DEMANDE ECHANTILLONS SCAPNOR.xls
+deleting operations_commerciales/MDD/MODELES CJ/SCAMARK/DDE ECHANTILLONS/DEMANDE ECHANTILLONS SCAOUEST.xls
+deleting operations_commerciales/MDD/MODELES CJ/SCAMARK/DDE ECHANTILLONS/DEMANDE ECHANTILLONS SCAMARK L&B.xls
+deleting operations_commerciales/MDD/MODELES CJ/SCAMARK/DDE ECHANTILLONS/DEMANDE ECHANTILLONS SCAMARK INFOMIL.xls
+deleting operations_commerciales/MDD/MODELES CJ/SCAMARK/DDE ECHANTILLONS/DEMANDE ECHANTILLONS SCAMARK GRAPHEMES.xls
+deleting operations_commerciales/MDD/MODELES CJ/SCAMARK/DDE ECHANTILLONS/DEMANDE ECHANTILLONS SCAMARK DECLIC.xls
+deleting operations_commerciales/MDD/MODELES CJ/SCAMARK/DDE ECHANTILLONS/DEMANDE ECHANTILLONS SCAMARK DDB.xls
+deleting operations_commerciales/MDD/MODELES CJ/SCAMARK/DDE ECHANTILLONS/DEMANDE ECHANTILLONS SCAMARK CHRONO 210.xls
+deleting operations_commerciales/MDD/MODELES CJ/SCAMARK/DDE ECHANTILLONS/DEMANDE ECHANTILLONS SCAMARK ADN MARKETING1.xls
+deleting operations_commerciales/MDD/MODELES CJ/SCAMARK/DDE ECHANTILLONS/DEMANDE ECHANTILLONS SCAMARK ADN MARKETING.xls
+operations_commerciales/MDD/MODELES CJ/SCAMARK/DDE ECHANTILLONS/DEMANDE ECHANTILLONS INFOMIL.xls
+operations_commerciales/MDD/MODELES CJ/SCAMARK/DDE ECHANTILLONS/DEMANDE ECHANTILLONS SCAMARK.xls
+operations_commerciales/MDD/OP MDD 2013/MDD AUCHAN 2013 FUTUR MASTER.xls
+operations_commerciales/MDD/OP MDD 2014/MDD CORA 2014 FUTUR MASTER.xls
+operations_commerciales/MDD/OP MDD 2014/MDD CRF 2014 FUTUR MASTER.xls
+operations_commerciales/MDD/OP MDD 2014/MDD CRF MKT 2014 FUTUR MASTER.xls
+operations_commerciales/MDD/OP MDD 2014/MDD ITM 2014 .xls
+
+sent 626948 bytes  received 27295 bytes  145387.33 bytes/sec
+total size is 58167433  speedup is 88.91
+sending incremental file list
+
+sent 20778 bytes  received 88 bytes  13910.67 bytes/sec
+total size is 98751548  speedup is 4732.65
+sending incremental file list
+modeles/compo_festif_monoportion_pm_75x48_sans_gencod.lab
+modeles/compo_festif_monoportion_pm_75x48_sans_gencod_180.lab
+
+sent 44406 bytes  received 51 bytes  17782.80 bytes/sec
+total size is 32307712  speedup is 726.72
+sending incremental file list
+erp_data.mdb
+
+sent 7567857 bytes  received 63255 bytes  188422.52 bytes/sec
+total size is 81426432  speedup is 10.67
+sending incremental file list
+
+sent 7538 bytes  received 45 bytes  5055.33 bytes/sec
+total size is 9253358  speedup is 1220.28
+sending incremental file list
+
+sent 4308 bytes  received 24 bytes  2888.00 bytes/sec
+total size is 6387982  speedup is 1474.60
+sending incremental file list
+
+sent 7683 bytes  received 20 bytes  5135.33 bytes/sec
+total size is 16751831  speedup is 2174.72
+sending incremental file list
+
+sent 85 bytes  received 13 bytes  65.33 bytes/sec
+total size is 104853504  speedup is 1069933.71
+sending incremental file list
+operations_commerciales/DEMANDE ECHANTILLONS CL .xls
+operations_commerciales/chrono demande echantillons.xls
+operations_commerciales/FZC/OP FZC 2014/FZC ARGEL 2014.xls
+operations_commerciales/GMS/2013/D-REGIONS/GMS LECLERC 2013-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS CARREFOUR 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS CASINO 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS INTERMARCHE 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/CASINO SM/2014 SM RI+GRATUIT NAC GROS VOLUMES SUPER.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/INTERMARCHE/2014 INTERMARCHE FEVRIER 1 OP 61009.xls
+operations_commerciales/GMS/2014/C-CONTROLE DES PRIX/2014 CASINO HM NAA.pdf
+operations_commerciales/GMS/2014/C-CONTROLE DES PRIX/2014 CASINO SM NAA.pdf
+operations_commerciales/GMS/2014/C-CONTROLE DES PRIX/2014 INTERMARCHE NAA.pdf
+operations_commerciales/GMS/2014/C-CONTROLE DES PRIX/2014 INTERMARCHE OP 61009 CREPES.pdf
+operations_commerciales/MDD/MODELES CJ/AUCHAN ATAC SCHIEVER/CONF OP/2014/CONFIRMATION OPERATION AUCHAN JANVIER 1.xls
+operations_commerciales/MDD/MODELES CJ/AUCHAN ATAC SCHIEVER/CONF OP/2014/CONFIRMATION OPERATION SIMPLY NAA 2014.xls
+operations_commerciales/MDD/MODELES CJ/CARREFOUR/CONF OP/CONFIRMATION OPERATION CRF CASH OP 3 .xls
+operations_commerciales/MDD/MODELES CJ/CARREFOUR/CONF OP/CONFIRMATION OPERATION CRF CONTACT CITY .xls
+operations_commerciales/MDD/MODELES CJ/CARREFOUR/CONF OP/CONFIRMATION OPERATION CRF MKT TRAFIC 11.xls
+operations_commerciales/MDD/MODELES CJ/CARREFOUR/CONF OP/CONFIRMATION OPERATION CRF PLS NON FERME PROMO 11 .xls
+operations_commerciales/MDD/MODELES CJ/CARREFOUR/CONF OP/2013/CONFIRMATION OPERATION CRF DRIVE NAA 2014 .xls
+operations_commerciales/MDD/MODELES CJ/PROVERA/Chrono 677 AGENCE REPUBLICAIN .XLS
+operations_commerciales/MDD/MODELES CJ/PROVERA/CONF OPES CORA MATCH/2014/CORA/CONFIRMATION OPERATION_CORA_2014-11-10967-TRAFIC.xls
+deleting operations_commerciales/MDD/MODELES CJ/SCAMARK/DDE ECHANTILLONS/DEMANDE ECHANTILLONS SOCAMAINE.xls
+deleting operations_commerciales/MDD/MODELES CJ/SCAMARK/DDE ECHANTILLONS/DEMANDE ECHANTILLONS SCAPNOR1.xls
+deleting operations_commerciales/MDD/MODELES CJ/SCAMARK/DDE ECHANTILLONS/DEMANDE ECHANTILLONS SCAPNOR.xls
+deleting operations_commerciales/MDD/MODELES CJ/SCAMARK/DDE ECHANTILLONS/DEMANDE ECHANTILLONS SCAOUEST.xls
+deleting operations_commerciales/MDD/MODELES CJ/SCAMARK/DDE ECHANTILLONS/DEMANDE ECHANTILLONS SCAMARK L&B.xls
+deleting operations_commerciales/MDD/MODELES CJ/SCAMARK/DDE ECHANTILLONS/DEMANDE ECHANTILLONS SCAMARK INFOMIL.xls
+deleting operations_commerciales/MDD/MODELES CJ/SCAMARK/DDE ECHANTILLONS/DEMANDE ECHANTILLONS SCAMARK GRAPHEMES.xls
+deleting operations_commerciales/MDD/MODELES CJ/SCAMARK/DDE ECHANTILLONS/DEMANDE ECHANTILLONS SCAMARK DECLIC.xls
+deleting operations_commerciales/MDD/MODELES CJ/SCAMARK/DDE ECHANTILLONS/DEMANDE ECHANTILLONS SCAMARK DDB.xls
+deleting operations_commerciales/MDD/MODELES CJ/SCAMARK/DDE ECHANTILLONS/DEMANDE ECHANTILLONS SCAMARK CHRONO 210.xls
+deleting operations_commerciales/MDD/MODELES CJ/SCAMARK/DDE ECHANTILLONS/DEMANDE ECHANTILLONS SCAMARK ADN MARKETING1.xls
+deleting operations_commerciales/MDD/MODELES CJ/SCAMARK/DDE ECHANTILLONS/DEMANDE ECHANTILLONS SCAMARK ADN MARKETING.xls
+operations_commerciales/MDD/MODELES CJ/SCAMARK/DDE ECHANTILLONS/DEMANDE ECHANTILLONS INFOMIL.xls
+operations_commerciales/MDD/MODELES CJ/SCAMARK/DDE ECHANTILLONS/DEMANDE ECHANTILLONS SCAMARK.xls
+operations_commerciales/MDD/OP MDD 2013/MDD AUCHAN 2013 FUTUR MASTER.xls
+operations_commerciales/MDD/OP MDD 2014/MDD CORA 2014 FUTUR MASTER.xls
+operations_commerciales/MDD/OP MDD 2014/MDD CRF 2014 FUTUR MASTER.xls
+operations_commerciales/MDD/OP MDD 2014/MDD CRF MKT 2014 FUTUR MASTER.xls
+operations_commerciales/MDD/OP MDD 2014/MDD ITM 2014 .xls
+
+sent 626948 bytes  received 27295 bytes  145387.33 bytes/sec
+total size is 58167433  speedup is 88.91
+sending incremental file list
+mercuriales/FZC/FZC 2014/ARGEL 2014.xls
+mercuriales/HD/2014/2014 MERCURIALE DIA.xls
+mercuriales/gms/2014/CENTRALES 2014/CASINO 2014.xls
+mercuriales/gms/2014/CENTRALES 2014/INTERMARCHE 2014.xls
+mercuriales/gms/2014/CONTROLE TARIFS 2014/01-JANVIER/2014 CASINO NOUVEAUX PC ASIE.pdf
+mercuriales/gms/2014/CONTROLE TARIFS 2014/01-JANVIER/2014 INTERMARCHE PRIX 2013 PROLONGES AU 28-02-2014.pdf
+mercuriales/gms/2014/CONTROLE TARIFS 2014/01-JANVIER/2014 PLACE DU MARCHE NOUVEAUX PRODUITS 01-01-2014.pdf
+mercuriales/gms/2014/CONTROLE TARIFS 2014/01-JANVIER/2014 SIMPLY MARKET PRIX 2013 PROLONGES AU 28-02-2014.pdf
+mercuriales/mdd/2014/2014 MERCURIALE CASINO.xls
+mercuriales/mdd/2014/2014 MERCURIALE SCAMARK.xls
+
+sent 172979 bytes  received 10954 bytes  73573.20 bytes/sec
+total size is 48290899  speedup is 262.55
+sending incremental file list
+modeles/compo_festif_monoportion_pm_75x48_sans_gencod.lab
+modeles/compo_festif_monoportion_pm_75x48_sans_gencod_180.lab
+
+sent 44406 bytes  received 51 bytes  29638.00 bytes/sec
+total size is 32307712  speedup is 726.72
+sending incremental file list
+
+sent 5598 bytes  received 45 bytes  3762.00 bytes/sec
+total size is 9985067  speedup is 1769.46
+sending incremental file list
+
+sent 5677 bytes  received 23 bytes  3800.00 bytes/sec
+total size is 128675317  speedup is 22574.62
+sending incremental file list
+
+sent 5353 bytes  received 38 bytes  3594.00 bytes/sec
+total size is 56169881  speedup is 10419.20
+sending incremental file list
+
+sent 47569 bytes  received 91 bytes  31773.33 bytes/sec
+total size is 279142483  speedup is 5856.96
+sending incremental file list

@@ -69,49 +69,26 @@ $html_table = "table "              //Permet d'harmoniser les tableaux
         . "class=contenu "
 ;
 
+
 /*
   Récupération des données MySQL
  */
 
 //echo $module;
-$id_intranet_modules = Lib::getModuleId();
-$intranetModulesModel = new IntranetModulesModel($id_intranet_modules);
+
+$intranetModulesModel = new IntranetModulesModel(IntranetModulesModel::ID_MODULES_FTA);
 $nom_usuel_intranet_modules = $intranetModulesModel->getDataField(IntranetModulesModel::FIELDNAME_NOM_USUEL_INTRANET_MODULES)->getFieldValue();
-//Lister les actions possibles sur le module
 
-$result_action = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
-                "SELECT id_intranet_actions,description_intranet_actions FROM intranet_actions "
-                . " WHERE module_intranet_actions = '0' "
-                . " OR module_intranet_actions = '" . $id_intranet_modules . "' "
-                . " ORDER BY module_intranet_actions, nom_intranet_actions ");
-$bloc = "";
-foreach ($result_action as $rows_action) {
-    $bloc.= "<" . $html_table . "><tr class=titre_principal><td>"
-            . $rows_action["description_intranet_actions"]
-            . "</td></tr>"
-    ;
-
-//Pour chaque niveaux, lister les utilisateur concernés
-
-    $result_user = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
-                    "SELECT DISTINCT * FROM intranet_droits_acces, salaries, intranet_modules , intranet_actions "
-                    . " WHERE ( `intranet_droits_acces`.`id_user` = `salaries`.`id_user` "                               //Liaison
-                    . " AND `intranet_droits_acces`.`id_intranet_modules` = `intranet_modules`.`id_intranet_modules` "   //liaison
-                    . " AND `intranet_droits_acces`.`id_intranet_actions` = `intranet_actions`.`id_intranet_actions` "   //liaison
-                    . " AND `intranet_actions`.`id_intranet_actions` = '" . $rows_action["id_intranet_actions"] . "' "
-                    . " AND `intranet_modules`.`id_intranet_modules` = '" . $id_intranet_modules . "' "
-                    . " AND `intranet_droits_acces`.`niveau_intranet_droits_acces` <> 0 "
-                    . ")"
-                    . " ORDER BY niveau_intranet_droits_acces, login "
-    );
-    foreach ($result_user as $rows_user) {
-        $bloc .= "<tr><td>" . $rows_user["prenom"] . " " . $rows_user["nom"] . "</td>";
-
-        if ($rows_user["niveau_intranet_droits_acces"] <> 1) {
-            $bloc .= "<td>Niveau = " . $rows_user["niveau_intranet_droits_acces"] . "</<td></tr>";
-        }
-    }
-}
+$bloc .= IntranetDroitsAccesModel::getHtmlArrayAccesRightUser();
+//foreach ($result_action as $rows_action) {
+//    foreach ($result_user as $rows_user) {
+//        $bloc .= "<tr><td>" . $rows_user[UserModel::FIELDNAME_PRENOM] . " " . $rows_user[UserModel::FIELDNAME_NOM] . "</td>";
+//
+//        if ($rows_user[IntranetDroitsAccesModel::FIELDNAME_NIVEAU_INTRANET_DROITS_ACCES] <> 1) {
+//            $bloc .= "<td>Niveau = " . $rows_user[IntranetDroitsAccesModel::FIELDNAME_NIVEAU_INTRANET_DROITS_ACCES] . "</<td></tr>";
+//        }
+//    }
+//}
 
 
 

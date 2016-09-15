@@ -71,7 +71,7 @@ switch ($action) {
         $ClassificationFta2Model->saveToDatabase();
 
         //Redirection
-        header("Location: index.php");
+        header("Location: classification_arcadia.php?" . ClassificationFta2Model::KEYNAME . "=" . $idClassification2);
 
         break;
 
@@ -97,12 +97,18 @@ switch ($action) {
 
     case 'supprimer':
         if ($id_fta_classification2) {
-            ClassificationFta2Model::SuppressionClassification($id_fta_classification2);
+            $ClassificationFta2Model = new ClassificationFta2Model($id_fta_classification2);
+            $ClassificationFta2Model->suppressionClassification();
         }
 
         //Redirection
         header("Location: index.php");
 
+        break;
+        
+    case 'consultation':
+        //Redirection
+        header("Location: index.php");
         break;
 }
 

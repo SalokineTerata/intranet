@@ -134,5 +134,36 @@
         parent.location.href = url;
     }
 
+    /**
+     * Rechargement de la page courante avec une nouvelle valeur
+     * @returns {undefined}
+     */
+    function id_Activite_js() {
+        current_page = document.form_action.current_page.value;
+        id_Activite = document.getElementById('id_Activite').value ;
+        url = current_page + "?id_Activite=" + id_Activite;
+        parent.location.href = url;
+    }
+    /**
+     * Rechargement de la page courante avec une nouvelle valeur
+     * @returns {undefined}
+     */
+    function id_Marque_js() {
+        current_page = document.form_action.current_page.value;
+        id_Marque = document.getElementById('id_Marque').value ;
+        url = current_page + "?id_Marque=" + id_Marque;
+        parent.location.href = url;
+    }
+    /**
+     * Rechargement de la page courante avec une nouvelle valeur
+     * @returns {undefined}
+     */
+    function id_classification_arborescence_article_categorie_js() {
+        current_page = document.form_action.current_page.value;
+        id_classification_arborescence_article_categorie = document.getElementById('id_classification_arborescence_article_categorie').value ;
+        url = current_page + "?id_classification_arborescence_article_categorie=" + id_classification_arborescence_article_categorie;
+        parent.location.href = url;
+    }
+
 
 </script>

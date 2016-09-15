@@ -1,0 +1,154 @@
+Démarrage : ven fév 28 23:00:02 CET 2014
+Arrêt     : ven fév 28 23:02:24 CET 2014
+
+
+
+Base MySQL sélectionnée: agis
+Nombre de serveur(s) Linux concerné(s): 4
+Nombre de dossier(s) à mettre à jour: 26
+
+sending incremental file list
+
+sent 6345 bytes  received 46 bytes  4260.67 bytes/sec
+total size is 11731248  speedup is 1835.59
+sending incremental file list
+
+sent 6047 bytes  received 37 bytes  2433.60 bytes/sec
+total size is 12258174  speedup is 2014.82
+sending incremental file list
+erp_data.mdb
+
+sent 7945411 bytes  received 64291 bytes  184131.08 bytes/sec
+total size is 84160512  speedup is 10.51
+sending incremental file list
+
+sent 7538 bytes  received 45 bytes  15166.00 bytes/sec
+total size is 9253358  speedup is 1220.28
+sending incremental file list
+
+sent 7695 bytes  received 20 bytes  5143.33 bytes/sec
+total size is 16751789  speedup is 2171.33
+sending incremental file list
+
+sent 4308 bytes  received 24 bytes  1732.80 bytes/sec
+total size is 6387982  speedup is 1474.60
+sending incremental file list
+mercuriales/gms/2014/CENTRALES 2014/AUCHAN 2014.xls
+mercuriales/gms/2014/CENTRALES 2014/CARREFOUR MARKET 2014.xls
+mercuriales/gms/2014/CENTRALES 2014/CASINO 2014.xls
+mercuriales/gms/2014/CONTROLE TARIFS 2014/03-MARS/2014 AUCHAN ASIE MN RETOUR ANCIENS PRIX.pdf
+mercuriales/gms/2014/CONTROLE TARIFS 2014/03-MARS/2014 CARREFOUR MARKET CREPES.pdf
+mercuriales/gms/2014/CONTROLE TARIFS 2014/03-MARS/2014 CASINO PRIX NOUVEAUX CODES.pdf
+mercuriales/mdd/2014/2014 MERCURIALE AUCHAN.xls
+mercuriales/mdd/2014/2014 MERCURIALE CARREFOUR ASIATIQUE.xls
+mercuriales/mdd/2014/2014 MERCURIALE PROVERA.xls
+
+sent 146188 bytes  received 17084 bytes  46649.14 bytes/sec
+total size is 29024483  speedup is 177.77
+sending incremental file list
+
+sent 5047 bytes  received 27 bytes  3382.67 bytes/sec
+total size is 39173092  speedup is 7720.36
+sending incremental file list
+operations_commerciales/DEMANDE ECHANTILLONS GB.xls
+operations_commerciales/chrono demande echantillons.xls
+operations_commerciales/FZC/OP FZC 2014/FZC BOFROST 2014.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS AUCHAN 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS CASINO 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/D-REGIONS/GMS LECLERC 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/D-REGIONS/GMS SU REGION  2014-FUTUR MASTER.xls
+operations_commerciales/MDD/MODELES CJ/AUCHAN ATAC SCHIEVER/CONF OP/2014/CONFIRMATION OPERATION SCHIEVER AVRIL 1.xls
+operations_commerciales/MDD/OP MDD 2014/MDD CRF MKT 2014.xls
+operations_commerciales/MDD/OP MDD 2014/MDD GROUPE AUCHAN 2014.xls
+
+sent 279135 bytes  received 21712 bytes  66854.89 bytes/sec
+total size is 46694821  speedup is 155.21
+sending incremental file list
+
+sent 19882 bytes  received 78 bytes  4435.56 bytes/sec
+total size is 98562242  speedup is 4937.99
+sending incremental file list
+gofast/CHANTIERS/1_CNP_DELEGATION_Cecile/5_STANDARDS/Projets_MAT_TR_bilan_2sem13_280214.xls
+gofast/INFORMATIONS_GENERALES/2_GOFAST_Am_Continue_Generalites_280114.ppt
+gofast/INFORMATIONS_GENERALES/4_GOFAST_3principes_280114.ppt
+gofast/INFORMATIONS_GENERALES/5_GOFAST_MUDA_280114.ppt
+
+sent 2552260 bytes  received 7096 bytes  176507.31 bytes/sec
+total size is 16071858  speedup is 6.28
+sending incremental file list
+modeles/carton_ean_128_mini-v2013.lab
+modeles/carton_ean_128_mini-v2013_180.lab
+
+sent 31344 bytes  received 1779 bytes  13249.20 bytes/sec
+total size is 43238912  speedup is 1305.40
+sending incremental file list
+erp_data.mdb
+
+sent 7945411 bytes  received 64291 bytes  188463.58 bytes/sec
+total size is 84160512  speedup is 10.51
+sending incremental file list
+
+sent 7538 bytes  received 45 bytes  5055.33 bytes/sec
+total size is 9253358  speedup is 1220.28
+sending incremental file list
+
+sent 4308 bytes  received 24 bytes  2888.00 bytes/sec
+total size is 6387982  speedup is 1474.60
+sending incremental file list
+
+sent 7695 bytes  received 20 bytes  5143.33 bytes/sec
+total size is 16751789  speedup is 2171.33
+sending incremental file list
+
+sent 85 bytes  received 13 bytes  65.33 bytes/sec
+total size is 104853504  speedup is 1069933.71
+sending incremental file list
+operations_commerciales/DEMANDE ECHANTILLONS GB.xls
+operations_commerciales/chrono demande echantillons.xls
+operations_commerciales/FZC/OP FZC 2014/FZC BOFROST 2014.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS AUCHAN 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS CASINO 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/D-REGIONS/GMS LECLERC 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/D-REGIONS/GMS SU REGION  2014-FUTUR MASTER.xls
+operations_commerciales/MDD/MODELES CJ/AUCHAN ATAC SCHIEVER/CONF OP/2014/CONFIRMATION OPERATION SCHIEVER AVRIL 1.xls
+operations_commerciales/MDD/OP MDD 2014/MDD CRF MKT 2014.xls
+operations_commerciales/MDD/OP MDD 2014/MDD GROUPE AUCHAN 2014.xls
+
+sent 279135 bytes  received 21712 bytes  85956.29 bytes/sec
+total size is 46694821  speedup is 155.21
+sending incremental file list
+mercuriales/gms/2014/CENTRALES 2014/AUCHAN 2014.xls
+mercuriales/gms/2014/CENTRALES 2014/CARREFOUR MARKET 2014.xls
+mercuriales/gms/2014/CENTRALES 2014/CASINO 2014.xls
+mercuriales/gms/2014/CONTROLE TARIFS 2014/03-MARS/2014 AUCHAN ASIE MN RETOUR ANCIENS PRIX.pdf
+mercuriales/gms/2014/CONTROLE TARIFS 2014/03-MARS/2014 CARREFOUR MARKET CREPES.pdf
+mercuriales/gms/2014/CONTROLE TARIFS 2014/03-MARS/2014 CASINO PRIX NOUVEAUX CODES.pdf
+mercuriales/mdd/2014/2014 MERCURIALE AUCHAN.xls
+mercuriales/mdd/2014/2014 MERCURIALE CARREFOUR ASIATIQUE.xls
+mercuriales/mdd/2014/2014 MERCURIALE PROVERA.xls
+
+sent 146188 bytes  received 17084 bytes  65308.80 bytes/sec
+total size is 29024483  speedup is 177.77
+sending incremental file list
+modeles/carton_ean_128_mini-v2013.lab
+modeles/carton_ean_128_mini-v2013_180.lab
+
+sent 31344 bytes  received 1779 bytes  22082.00 bytes/sec
+total size is 43238912  speedup is 1305.40
+sending incremental file list
+
+sent 6345 bytes  received 46 bytes  4260.67 bytes/sec
+total size is 11731248  speedup is 1835.59
+sending incremental file list
+organisation/Listes t\#351l\#351phoniques AGIS + LDC/LISTE TELEPHONIQUE avignon mai 2013.xls
+
+sent 13809 bytes  received 384 bytes  9462.00 bytes/sec
+total size is 129152473  speedup is 9099.73
+sending incremental file list
+
+sent 5610 bytes  received 39 bytes  3766.00 bytes/sec
+total size is 59049369  speedup is 10453.07
+sending incremental file list
+
+sent 50262 bytes  received 94 bytes  20142.40 bytes/sec
+total size is 291009107  speedup is 5779.04

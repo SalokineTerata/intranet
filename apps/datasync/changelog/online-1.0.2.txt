@@ -1,0 +1,38 @@
+================================================================================
+Fiches et Tables à basculer de intranet.dev.agis.fr vers intranet.agis.fr:
+================================================================================
+Version en cours: 1.0.2
+
+[-]: Reste à effectuer
++++: Réalisé
+================================================================================
+
+Pour les copies MYSQL [DS]:
+---------------------------
+[DS]: DATA et STRUCTURE
+[D_]: DATA seulement
+[_S]: STRUCTURE seulement
+=================================================================================
+[Version 1.0.2]
+[+++] 02/01/2004: /datasync
+
+
+
+=================================================================================
+[Version 1.0.0]
++++ 12/08/2003: MYSQL [D_]: intranet_modules
++++ 12/08/2003: /template
++++ 25/11/2003: /datasync
++++ 12/08/2003: MYSQL [DS]: datasync_serveur
++++ 12/08/2003: MYSQL [DS]: datasync_file
++++ 25/11/2003: /fonction_mail
++++ 26/11/2003: /lib/session.php
+
+[Version 0.0.1]
+
+
+
+
+
+
+

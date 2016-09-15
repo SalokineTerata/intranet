@@ -78,12 +78,18 @@ if ($login) {
       $q1 = DatabaseOperation::query($req_authentification);
       $nb1 = mysql_numrows($q1);
      */
-    $login = str_replace("OR", "", $login);
+
+    $remplacements = array("OR" => "",
+        "SELECT" => "",
+        "'" => "",
+        '"' => "");
+    $login = strtr($login, $remplacements);
+
     if (!$pass) {
         $titre = "Accès aux modules de l'Intranet";
         $message = "Veuillez saisir votre mot de passe.<br><br>"
         ;
-        afficher_message($titre, $message, $redirection);
+        Lib::showMessage($titre, $message, $redirection);
     }
 
     if (!identification1($mysql_table_authentification, $login, $pass, TRUE)) {
@@ -107,40 +113,48 @@ if ($login) {
                     if ($reponse != 1) {
 
                         /* envois du mail d'information à l'utilisateur concerné */
-                        $corpsmail = 'Votre compte pour l\'intranet Agis a été bloqué suite à trois tentatives de connexion <br>';
-                        $corpsmail.='avec un mot de passe invalide.<br>';
-                        $corpsmail.='Contactez un Administrateur pour réactiver votre compte.<br>';
+                        $corpsmail = 'Votre compte ' . $login . ' de l\'intranet Agis a été bloqué à ' . date("H:m:s") . ' le ' . date("d/m/Y") . ' suite à trois tentatives de connexion avec un mot de passe invalide.
+Contactez un Administrateur pour réactiver votre compte.';
 
                         $arrayMailAdmin = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
                                         'SELECT ' . UserModel::FIELDNAME_MAIL
                                         . ' FROM ' . UserModel::TABLENAME
                                         . ' WHERE ' . UserModel::FIELDNAME_ID_TYPE . ' =4'
-                                        . ' AND ' . UserModel::FIELDNAME_ACTIF . ' =\'oui\'');
+                                        . ' AND ' . UserModel::FIELDNAME_ACTIF . ' =\'' . UserModel::USER_ACTIF . '\'');
                         foreach ($arrayMailAdmin as $rowsmail) {
-                            $corpsmail.=' - ' . $rowsmail[UserModel::FIELDNAME_MAIL] . ' <br>';
+                            $corpsmail.=' - ' . $rowsmail[UserModel::FIELDNAME_MAIL];
                         }
 
                         $adrfrom = 'postmaster@agis-sa.fr';
-                        $recupmail = DatabaseOperation::convertSqlStatementWithoutKeyToArray('select mail from salaries where login=\'' . $identite . '\'');
+                        $recupmail = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
+                                        'SELECT ' . UserModel::FIELDNAME_MAIL
+                                        . ' FROM ' . UserModel::TABLENAME
+                                        . ' WHERE ' . UserModel::FIELDNAME_LOGIN . '=\'' . $identite . '\''
+                        );
                         foreach ($recupmail as $colonnemail) {
                             $adrTo = $colonnemail[UserModel::FIELDNAME_MAIL];
                         }
                         $sujet = 'connexion intranet Agis';
                         $typeDeMail = 'CompteBloquer';
                         /* Constition du corps du mail */
-                        $rep = envoismail($sujet, $corpsmail, $adrTo, $adrfrom,$typeDeMail);
-                        $titou = DatabaseOperation::execute('update salaries set blocage=\'oui\' where (login=\'' . $identite . '\')');
+                        $rep = envoismail($sujet, $corpsmail, $adrTo, $adrfrom, $typeDeMail);
+                        $titou = DatabaseOperation::execute(
+                                        'UPDATE ' . UserModel::TABLENAME
+                                        . ' SET ' . UserModel::FIELDNAME_BLOCAGE . '=\'oui\''
+                                        . ' , ' . UserModel::FIELDNAME_DATE_BLOCAGE . '=\'' . date("Y-m-d H:i:s") . '\''
+                                        . ' WHERE ' . UserModel::FIELDNAME_LOGIN . '=\'' . $identite . '\''
+                        );
                         //Averissement
                         $titre = "Accès aux modules de l'Intranet";
                         $message = UserInterfaceMessage::FR_LOGIN_PROCESS_ACCOUNT_LOCKED;
-                        afficher_message($titre, $message, $redirection);
+                        Lib::showMessage($titre, $message, $redirection);
                     }
                 } else {
                     $_SESSION['tentative'] = "0";
                     $titre = "Erreur d'identification ";
                     $message = "L'identifiant $login n'existe pas dans la base de données.<br><br>"
                     ;
-                    afficher_message($titre, $message, $redirection);
+                    Lib::showMessage($titre, $message, $redirection);
                 }
             } else {
                 $_SESSION['identite'] = $login;
@@ -167,7 +181,7 @@ if ($login) {
                 $titre = "Erreur d'identification ";
                 $message = "L'identifiant $login n'existe pas dans la base de données.<br><br>"
                 ;
-                afficher_message($titre, $message, $redirection);
+                Lib::showMessage($titre, $message, $redirection);
             }
         }
 
@@ -267,9 +281,9 @@ if ($login) {
                 //$q1 = DatabaseOperation::query('SELECT * FROM $mysql_table_authentification WHERE ((login = '$login') AND (pass = '$pass'))');
                 //Page par défaut après un login réussi
             } else {
-                $message = "La connection est un succès mais vous n'avez pas les droits d'accès sur l'intranet.<br><br>
-                             Veuillez contacter l'administrateur du site.";
-                afficher_message("Connection à l'intranet", $message, $redirection);
+                $message = UserInterfaceMessage::FR_WARNING_CONNEXION;
+                $titre = UserInterfaceMessage::FR_WARNING_CONNEXION_TITLE;
+                Lib::showMessage($titre, $message, $redirection);
             }
             header('Location: ' . $page);
         }

@@ -51,6 +51,10 @@ abstract class ModuleConfig {
     const ENABLE_SHOW_DIFF_FTA = true;
 
     /**
+     * Nombre maximale de fta afficher sur le moteur de recherche
+     */
+    const VALUE_MAX_MOTEUR_RECHERCHE = 250;
+    /**
      * Nombre maximale de fta afficher sur la page d'acceuil en moficiation
      */
     const VALUE_MAX_PAR_PAGE = 100;
@@ -68,7 +72,18 @@ abstract class ModuleConfig {
     /**
      * Nombre de jour attribué pour une deuxième notification sur la date de validation d'une fta afficher sur la page d'acceuil
      */
-    const VALUE_DATE_NOTIFICATION2 = 30;
+    const VALUE_DATE_NOTIFICATION2 = 7;
+
+    /**
+     * Nombre de jour par défaut d'une date d'échéance de validation d'une Fta en création
+     * par rapport à la date actuelle
+     */
+    const VALUE_DATE_PLUS_CREATION = 35;
+    /**
+     * Nombre de jour par défaut d'une date d'échéance de validation d'une Fta mise à jour
+     * par rapport à la date actuelle
+     */
+    const VALUE_DATE_PLUS_MISE_A_JOUR = 14;
 
 }
 

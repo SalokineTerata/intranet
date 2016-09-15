@@ -23,6 +23,18 @@ class DatabaseDescriptionField {
     private $table;
 
     /**
+     * Liste des règles de validation
+     * @var DatabaseDescriptionTable 
+     */
+    private $tagsValidationRules;
+
+    /**
+     * Boolean verrouillage d'un champ
+     * @var DatabaseDescriptionTable 
+     */
+    private $defaultFieldLockPrimaryFta;
+
+    /**
      * Construit un champs
      * @param DatabaseDescriptionTable $paramTable Table du champs
      * @param string $paramFieldName Nom du champs
@@ -30,6 +42,8 @@ class DatabaseDescriptionField {
     public function __construct(DatabaseDescriptionTable $paramTable, $paramFieldName) {
         $this->setTable($paramTable);
         $this->setFieldName($paramFieldName);
+        $this->setTagsValidationRules();
+        $this->setDefaultFieldLockPrimaryFta();
     }
 
     /**
@@ -86,6 +100,28 @@ class DatabaseDescriptionField {
      */
     public function getTableName() {
         return $this->getTable()->getTableName();
+    }
+
+    function getTagsValidationRules() {
+        return $this->tagsValidationRules;
+    }
+
+    function setTagsValidationRules() {
+        $this->tagsValidationRules = DatabaseDescription::getTagsValidationRules
+                        ($this->getTableName(), $this->getFieldName());
+    }
+
+    /*     * *
+     * Return un boolean déterminant si le champs doit être verrouilé par défaut
+     */
+
+    function getDefaultFieldLockPrimaryFta() {
+        return $this->defaultFieldLockPrimaryFta;
+    }
+
+    function setDefaultFieldLockPrimaryFta() {
+        $this->defaultFieldLockPrimaryFta = DatabaseDescription::getDefaultFieldLockPrimaryFta
+                        ($this->getTableName(), $this->getFieldName());
     }
 
     /**

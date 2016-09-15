@@ -57,8 +57,36 @@ $comeback = Lib::getParameterFromRequest('comeback');
 $idFtaEtat = Lib::getParameterFromRequest(FtaEtatModel::KEYNAME);
 $abreviationFtaEtat = Lib::getParameterFromRequest(FtaEtatModel::FIELDNAME_ABREVIATION);
 $idFtaRole = Lib::getParameterFromRequest(FtaRoleModel::KEYNAME);
-$id_fta_chapitre = $id_fta_chapitre_encours;
+
+/**
+ * Initialisation
+ */
 $ftaModel = new FtaModel($id_fta);
+$date_echeance_fta = $ftaModel->getDataField(FtaModel::FIELDNAME_DATE_ECHEANCE_FTA)->getFieldValue();
+$idFtaWorkflow = $ftaModel->getDataField(FtaModel::FIELDNAME_WORKFLOW)->getFieldValue();
+$globalConfig = new GlobalConfig();
+
+if ($globalConfig->getAuthenticatedUser()) {
+    $idUser = $globalConfig->getAuthenticatedUser()->getKeyValue();
+} else {
+    $titre = UserInterfaceMessage::FR_WARNING_DECONNECTION_TITLE;
+    $message = UserInterfaceMessage::FR_WARNING_DECONNECTION;
+    Lib::showMessage($titre, $message,$redirection);
+}
+
+$idUser = $globalConfig->getAuthenticatedUser()->getKeyValue();
+/**
+ * Contrôle du rôle attribué
+ */
+if ($idFtaRole == FtaRoleModel::ID_FTA_ROLE_COMMUN) {
+    if ($abreviationFtaEtat == FtaEtatModel::ETAT_ABREVIATION_VALUE_MODIFICATION) {
+        $synthese_action = FtaEtatModel::ETAT_AVANCEMENT_VALUE_EN_COURS;
+    }
+    $arrayIdFtaRoleAcces = FtaRoleModel::getArrayIdFtaRoleByIdUserAndWorkflow($idUser, $idFtaWorkflow);
+    $idFtaRole = $arrayIdFtaRoleAcces["0"];
+}
+$id_fta_chapitre = $id_fta_chapitre_encours;
+
 /* * ***********
   Début Code PHP
  * *********** */
@@ -81,7 +109,7 @@ $detail_id_fta;              //Identifiant de la fiche sur laquelle on souhaite 
   Récupération des données MySQL
  */
 
-Navigation::initNavigation($id_fta, $id_fta_chapitre, $synthese_action, $comeback, $idFtaEtat, $abreviationFtaEtat, $idFtaRole,TRUE);
+Navigation::initNavigation($id_fta, $id_fta_chapitre, $synthese_action, $comeback, $idFtaEtat, $abreviationFtaEtat, $idFtaRole, TRUE,TRUE);
 $navigue = Navigation::getHtmlNavigationBar();
 //Calcul du taux
 $taux_temp = FtaSuiviProjetModel::getArrayFtaTauxValidation($ftaModel, TRUE);
@@ -95,9 +123,6 @@ if ($id_fta) {
        <tr class=titre>
            <td>
            ' . DatabaseDescription::getFieldDocLabel(FtaRoleModel::TABLENAME, FtaRoleModel::FIELDNAME_DESCRIPTION_FTA_ROLE) . '
-           </td>
-           <td>
-           ' . DatabaseDescription::getFieldDocLabel('fta_processus', 'nom_fta_processus') . '
            </td>
            <td>
            ' . DatabaseDescription::getFieldDocLabel(FtaChapitreModel::TABLENAME, FtaChapitreModel::FIELDNAME_NOM_CHAPITRE) . '
@@ -126,8 +151,7 @@ if ($id_fta) {
             //Chargement des données
 
             $ftaProcessusModel = new FtaProcessusModel($id_fta_processus);
-            $date_echeance_fta = $ftaModel->getDataField(FtaModel::FIELDNAME_DATE_ECHEANCE_FTA)->getFieldValue();
-            $idFtaWorkflow = $ftaModel->getDataField(FtaModel::FIELDNAME_WORKFLOW)->getFieldValue();
+
             /**
              * 1 en attente 
              * 2 en cours
@@ -178,9 +202,7 @@ if ($id_fta) {
                     <td >
                    &nbsp;' . $service_fta_processus . '
                    </td>
-                   <td >
-                   &nbsp;' . $nom_fta_processus . '
-                   </td> <td>   
+                  <td>   
                    ' . $champChapitre . '
                   </td> <td >
                    &nbsp;' . round($taux * "100", "2") . '%
@@ -200,11 +222,20 @@ if ($id_fta) {
         }
     }
 }
+$checkValue = FtaController::isCheckDateFormat($date_echeance_fta);
+if ($checkValue) {
 
-//Echéance de validation de la FTA
-$annee_date_echeance_fta = substr($date_echeance_fta, 0, 4);
-$mois_date_echeance_fta = substr($date_echeance_fta, 5, 2);
-$jour_date_echeance_fta = substr($date_echeance_fta, 8, 2);
+    //Echéance de validation de la FTA
+    $annee_date_echeance_fta = substr($date_echeance_fta, 6, 9);
+    $mois_date_echeance_fta = substr($date_echeance_fta, 3, 2);
+    $jour_date_echeance_fta = substr($date_echeance_fta, 0, 2);
+} else {
+    //Echéance de validation de la FTA
+    $annee_date_echeance_fta = substr($date_echeance_fta, 0, 4);
+    $mois_date_echeance_fta = substr($date_echeance_fta, 5, 2);
+    $jour_date_echeance_fta = substr($date_echeance_fta, 8, 2);
+}
+
 
 //$jour_restant = mktime(0,0,0,$mois_date_echeance_processus - date('m'), $jour_date_echeance_processus - date('d'), $annee_date_echeance_processus - date ('Y'));
 $echeance_timestamp = mktime(0, 0, 0, $mois_date_echeance_fta, $jour_date_echeance_fta, $annee_date_echeance_fta);
@@ -219,8 +250,8 @@ if ($jour_restant < 0) {
 } else {
     $txt_echeance = 'reste';
 }
-
-$HTML_echeance_fta = 'A valider avant le: ' . $date_echeance_fta . ' <i>(' . $txt_echeance . ' ' . $jour_restant . 'jours)</i>';
+$dateEcheanceFtaFr = FtaController::changementDuFormatDeDateFR($date_echeance_fta);
+$HTML_echeance_fta = 'A valider avant le: ' . $dateEcheanceFtaFr . ' <i>(' . $txt_echeance . ' ' . $jour_restant . 'jours)</i>';
 
 /*
   Sélection du mode d'affichage
@@ -294,14 +325,6 @@ switch ($output) {
              
                ' . $bloc . '
 
-
-             <tr><td>
-
-                 <!center>
-                 <!input type=submit value=\'Enregistrer\'>
-                 <!/center>
-
-             </td></tr>
              </table>
              </form>
              ';

@@ -12,11 +12,17 @@
  */
 class EnvironmentConf {
 
-    const CONFIG_INI_FILE = "../../config.ini";
+    const CONFIG_INI_FILE_SHELL = "/u1/DATA01/webldc/dev-intranet/v3/config.ini";
+    const CONFIG_INI_FILE_NAVIGATEUR = "../../config.ini";
+    const ENV_CLI = 'ENV_CLI';
+    const ENV_COP = 'ENV_COP';
     const ENV_COD = 'ENV_COD';
+    const ENV_COD_NAME = "Codeur";
     const ENV_DEV = 'ENV_DEV';
+    const ENV_DEV_NAME = "Developpement";
     const ENV_REC = 'ENV_REC';
     const ENV_PRD = 'ENV_PRD';
+    const ENV_PRD_NAME = "Production";
 //    const SITE_COD = '127.0.0.1';
 //    const SITE_DEV = 'dev-intranet.agis.fr';
 //    const SITE_REC = 'rec-fta05401.grpldc.com';
@@ -62,6 +68,7 @@ class EnvironmentConf {
     private $urlServer = null;
     private $reverseProxyName = null;
     private $urlSubdir = null;
+    private $urlEai = null;
     private $cssBackgroundValue = null;
     private $cssContentValue = null;
     private $cssFta = null;
@@ -226,6 +233,14 @@ class EnvironmentConf {
         return $this->urlSubdir;
     }
 
+    function getUrlEai() {
+        return $this->urlEai;
+    }
+
+    function setUrlEai($urlEai) {
+        $this->urlEai = $urlEai;
+    }
+        
     public function setApplicationName($applicationName) {
         $this->applicationName = $applicationName;
     }

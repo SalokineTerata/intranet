@@ -1,0 +1,176 @@
+Démarrage : lun nov 25 23:00:01 CET 2013
+Arrêt     : lun nov 25 23:02:21 CET 2013
+
+
+
+Base MySQL sélectionnée: agis
+Nombre de serveur(s) Linux concerné(s): 4
+Nombre de dossier(s) à mettre à jour: 24
+
+sending incremental file list
+
+sent 5598 bytes  received 45 bytes  2257.20 bytes/sec
+total size is 9985067  speedup is 1769.46
+sending incremental file list
+suivi_investissement/2013-2014/suivi des travaux 2013.xls
+suivi_investissement/2014-2015/Bud invest AVI r\#351vis\#351 2013-2014.xls
+
+sent 19343 bytes  received 2082 bytes  8570.00 bytes/sec
+total size is 11670607  speedup is 544.72
+sending incremental file list
+erp_data.mdb
+
+sent 7495582 bytes  received 63255 bytes  182140.65 bytes/sec
+total size is 81426432  speedup is 10.77
+sending incremental file list
+
+sent 7538 bytes  received 45 bytes  5055.33 bytes/sec
+total size is 9253358  speedup is 1220.28
+sending incremental file list
+
+sent 7683 bytes  received 20 bytes  5135.33 bytes/sec
+total size is 16751831  speedup is 2174.72
+sending incremental file list
+
+sent 4308 bytes  received 24 bytes  2888.00 bytes/sec
+total size is 6387982  speedup is 1474.60
+sending incremental file list
+mercuriales/gms/2014/CENTRALES 2014/AUCHAN 2014.xls
+mercuriales/gms/2014/CENTRALES 2014/AUCHAN.FR 2014.xls
+mercuriales/gms/2014/CENTRALES 2014/CARREFOUR 2014.xls
+mercuriales/gms/2014/CENTRALES 2014/CARREFOUR MARKET 2014.xls
+mercuriales/gms/2014/CENTRALES 2014/CASINO 2014.xls
+mercuriales/gms/2014/CENTRALES 2014/INTERMARCHE 2014.xls
+mercuriales/gms/2014/CENTRALES 2014/PLACE DU MARCHE 2014.xls
+mercuriales/gms/2014/CENTRALES 2014/SIMPLY MARKET 2014.xls
+mercuriales/gms/2014/CENTRALES 2014/SYSTEME U 2014.xls
+mercuriales/mdd/2014/2014 MERCURIALE CARREFOUR ASIATIQUE.xls
+
+sent 120242 bytes  received 40289 bytes  35673.56 bytes/sec
+total size is 47259308  speedup is 294.39
+sending incremental file list
+
+sent 5047 bytes  received 27 bytes  3382.67 bytes/sec
+total size is 39173092  speedup is 7720.36
+sending incremental file list
+operations_commerciales/DEMANDE ECHANTILLONS CL .xls
+operations_commerciales/chrono demande echantillons.xls
+operations_commerciales/GMS/2013/A-CENTRALES/GMS AUCHAN 2013-FUTUR MASTER.xls
+operations_commerciales/GMS/2013/A-CENTRALES/GMS CARREFOUR MARKET MN 2013-FUTUR MASTER.xls
+operations_commerciales/GMS/2013/A-CENTRALES/GMS CARREFOUR MN 2013-FUTUR MASTER.xls
+operations_commerciales/GMS/2013/A-CENTRALES/GMS CARREFOUR MN ASIE 2013-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS AUCHAN 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS CARREFOUR 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS SIMPLY MARKET 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/AUCHAN/2014 AUCHAN OP JANVIER 4 NAA.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/SIMPLY MARKET/2014 SIMPLY MARKET OP NAA.xls
+operations_commerciales/GMS/2014/D-REGIONS/GMS LECLERC 2014-FUTUR MASTER.xls
+deleting operations_commerciales/MDD/MODELES CJ/CARREFOUR/DDE ECHANTILLONS/Fiche LIVRAISON ECHANTILLON vierge2-doc.zip
+operations_commerciales/MDD/MODELES CJ/CARREFOUR/DDE ECHANTILLONS/Fiche produit \#340 remplir.xls
+operations_commerciales/MDD/MODELES CJ/CARREFOUR/DDE ECHANTILLONS/demande \#351chantillons PICXYZ.XLS
+operations_commerciales/MDD/MODELES CJ/CARREFOUR/DDE ECHANTILLONS/FICHE PRODUIT GUTENBERG/
+operations_commerciales/MDD/MODELES CJ/CARREFOUR/DDE ECHANTILLONS/FICHE PRODUIT GUTENBERG/Fiche produit \#340 remplir Sam boeuf Carrefour 251113.xls
+
+sent 2239337 bytes  received 42638 bytes  169035.19 bytes/sec
+total size is 56760429  speedup is 24.87
+sending incremental file list
+
+sent 18506 bytes  received 80 bytes  7434.40 bytes/sec
+total size is 41728031  speedup is 2245.13
+sending incremental file list
+
+sent 7156 bytes  received 13 bytes  4779.33 bytes/sec
+total size is 31677440  speedup is 4418.67
+sending incremental file list
+erp_data.mdb
+
+sent 7495582 bytes  received 63255 bytes  191362.96 bytes/sec
+total size is 81426432  speedup is 10.77
+sending incremental file list
+
+sent 7538 bytes  received 45 bytes  5055.33 bytes/sec
+total size is 9253358  speedup is 1220.28
+sending incremental file list
+
+sent 4308 bytes  received 24 bytes  8664.00 bytes/sec
+total size is 6387982  speedup is 1474.60
+sending incremental file list
+
+sent 7683 bytes  received 20 bytes  5135.33 bytes/sec
+total size is 16751831  speedup is 2174.72
+sending incremental file list
+
+sent 85 bytes  received 13 bytes  65.33 bytes/sec
+total size is 104853504  speedup is 1069933.71
+sending incremental file list
+operations_commerciales/DEMANDE ECHANTILLONS CL .xls
+operations_commerciales/chrono demande echantillons.xls
+operations_commerciales/GMS/2013/A-CENTRALES/GMS AUCHAN 2013-FUTUR MASTER.xls
+operations_commerciales/GMS/2013/A-CENTRALES/GMS CARREFOUR MARKET MN 2013-FUTUR MASTER.xls
+operations_commerciales/GMS/2013/A-CENTRALES/GMS CARREFOUR MN 2013-FUTUR MASTER.xls
+operations_commerciales/GMS/2013/A-CENTRALES/GMS CARREFOUR MN ASIE 2013-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS AUCHAN 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS CARREFOUR 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS SIMPLY MARKET 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/AUCHAN/2014 AUCHAN OP JANVIER 4 NAA.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/SIMPLY MARKET/2014 SIMPLY MARKET OP NAA.xls
+operations_commerciales/GMS/2014/D-REGIONS/GMS LECLERC 2014-FUTUR MASTER.xls
+deleting operations_commerciales/MDD/MODELES CJ/CARREFOUR/DDE ECHANTILLONS/Fiche LIVRAISON ECHANTILLON vierge2-doc.zip
+operations_commerciales/MDD/MODELES CJ/CARREFOUR/DDE ECHANTILLONS/Fiche produit \#340 remplir.xls
+operations_commerciales/MDD/MODELES CJ/CARREFOUR/DDE ECHANTILLONS/demande \#351chantillons PICXYZ.XLS
+operations_commerciales/MDD/MODELES CJ/CARREFOUR/DDE ECHANTILLONS/FICHE PRODUIT GUTENBERG/
+operations_commerciales/MDD/MODELES CJ/CARREFOUR/DDE ECHANTILLONS/FICHE PRODUIT GUTENBERG/Fiche produit \#340 remplir Sam boeuf Carrefour 251113.xls
+
+sent 2239337 bytes  received 42638 bytes  182558.00 bytes/sec
+total size is 56760429  speedup is 24.87
+sending incremental file list
+mercuriales/gms/2014/CENTRALES 2014/AUCHAN 2014.xls
+mercuriales/gms/2014/CENTRALES 2014/AUCHAN.FR 2014.xls
+mercuriales/gms/2014/CENTRALES 2014/CARREFOUR 2014.xls
+mercuriales/gms/2014/CENTRALES 2014/CARREFOUR MARKET 2014.xls
+mercuriales/gms/2014/CENTRALES 2014/CASINO 2014.xls
+mercuriales/gms/2014/CENTRALES 2014/INTERMARCHE 2014.xls
+mercuriales/gms/2014/CENTRALES 2014/PLACE DU MARCHE 2014.xls
+mercuriales/gms/2014/CENTRALES 2014/SIMPLY MARKET 2014.xls
+mercuriales/gms/2014/CENTRALES 2014/SYSTEME U 2014.xls
+mercuriales/mdd/2014/2014 MERCURIALE CARREFOUR ASIATIQUE.xls
+
+sent 120242 bytes  received 40289 bytes  64212.40 bytes/sec
+total size is 47259308  speedup is 294.39
+sending incremental file list
+
+sent 7156 bytes  received 13 bytes  2867.60 bytes/sec
+total size is 31677440  speedup is 4418.67
+sending incremental file list
+
+sent 5598 bytes  received 45 bytes  3762.00 bytes/sec
+total size is 9985067  speedup is 1769.46
+sending incremental file list
+
+sent 5677 bytes  received 23 bytes  3800.00 bytes/sec
+total size is 128675317  speedup is 22574.62
+sending incremental file list
+
+sent 5161 bytes  received 37 bytes  3465.33 bytes/sec
+total size is 52194646  speedup is 10041.29
+sending incremental file list
+codesoft/Codesoft 7/Auchan  Atac/Atac_simply/simply_janv_14/acras_recto.bak
+codesoft/Codesoft 7/Auchan  Atac/Atac_simply/simply_janv_14/acras_recto.lab
+codesoft/Codesoft 7/Auchan  Atac/Atac_simply/simply_janv_14/crev_pan\#351es_recto.bak
+codesoft/Codesoft 7/Auchan  Atac/Atac_simply/simply_janv_14/crev_pan\#351es_recto.lab
+codesoft/Codesoft 7/Auchan  Atac/Atac_simply/simply_janv_14/crev_pan\#351es_verso.bak
+codesoft/Codesoft 7/Auchan  Atac/Atac_simply/simply_janv_14/crev_pan\#351es_verso.lab
+codesoft/Codesoft 7/Auchan  Atac/Atac_simply/simply_janv_14/plateau_asia_recto.bak
+codesoft/Codesoft 7/Auchan  Atac/Atac_simply/simply_janv_14/plateau_asia_recto.lab
+codesoft/Codesoft 7/Auchan  Atac/Atac_simply/simply_janv_14/plateau_ass_asia_recto.bak
+codesoft/Codesoft 7/Auchan  Atac/Atac_simply/simply_janv_14/plateau_ass_asia_recto.lab
+codesoft/Codesoft 7/Auchan  Atac/Atac_simply/simply_janv_14/plateau_ass_asia_verso.bak
+codesoft/Codesoft 7/Auchan  Atac/Atac_simply/simply_janv_14/plateau_ass_asia_verso.lab
+codesoft/Codesoft 7/Codes Produits/79105_verso.bak
+codesoft/Codesoft 7/Codes Produits/79105_verso.lab
+codesoft/Codesoft 7/Codes Produits/79106_verso.bak
+codesoft/Codesoft 7/Codes Produits/79106_verso.lab
+
+sent 129134 bytes  received 8306 bytes  54976.00 bytes/sec
+total size is 278621779  speedup is 2027.22
+sending incremental file list

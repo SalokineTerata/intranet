@@ -69,6 +69,18 @@ switch ($action) {
                 . '&id_fta_etat=' . $idFtaEtat
                 . '&abreviation_fta_etat=' . $abreviationFtaEtat
                 . '&id_fta_role=' . $idFtaRole);
+        /**
+         * jQuery
+         */
+//        header('Location: ajout_conditionnement.php?id_fta=' . $idFta
+//                . '&id_annexe_emballage_groupe_type=' . $idAnnexeEmballageGroupeType
+//                . '&id_annexe_emballage=' . $idAnnexeEmballage
+//                . '&action=etape3&id_fta_chapitre=' . $idFtaChapitreEncours
+//                . '&synthese_action=' . $syntheseAction
+//                . '&comeback=' . $comeback
+//                . '&id_fta_etat=' . $idFtaEtat
+//                . '&abreviation_fta_etat=' . $abreviationFtaEtat
+//                . '&id_fta_role=' . $idFtaRole);
 
         break;
 
@@ -85,7 +97,7 @@ switch ($action) {
                 . '&abreviation_fta_etat=' . $abreviationFtaEtat
                 . '&id_fta_role=' . $idFtaRole);
 
-        break;
+//        break;
 
     case 'etape3': //Un emballage a été sélectionné
     case 'saisie_manuel':
@@ -116,7 +128,7 @@ switch ($action) {
 
 
 
-        header('Location: modification_fiche.php?id_fta=' . $idFta . '&id_fta_chapitre_encours=' . $idFtaChapitreEncours . '&synthese_action=encours'. '&id_fta_etat=' . $idFtaEtat . '&abreviation_fta_etat=' . $abreviationFtaEtat.'&comeback=' . $comeback  . '&id_fta_role=' . $idFtaRole);
+        header('Location: modification_fiche.php?id_fta=' . $idFta . '&id_fta_chapitre_encours=' . $idFtaChapitreEncours . '&synthese_action=encours'. '&id_fta_etat=' . $idFtaEtat . '&abreviation_fta_etat=' . $abreviationFtaEtat. '&id_fta_role=' . $idFtaRole);
          /**
           * Version avec le rewrite
           */

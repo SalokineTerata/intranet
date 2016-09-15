@@ -30,6 +30,9 @@ class TableauFicheView {
     const HTML_CELL_BGCOLOR_MODIFY = "";
     const HTML_CELL_BGCOLOR_VALIDATE = " bgcolor=#AFFF5A";
     const HTML_CELL_BGCOLOR_DEFAULT = " bgcolor=#A5A5CE";
+    const HTML_CELL_BGCOLOR_ARCADIA_ATTENTE = " bgcolor=#99FFFF";
+    const HTML_CELL_BGCOLOR_ARCADIA_ERREUR = " bgcolor=#FF9999";
+    const HTML_CELL_BGCOLOR_ARCADIA_OK = " bgcolor=#99FF99";
     const HTML_TEXT_COLOR_DIN = " color=#808080";
     const HTML_IMAGE_ECHEANCE_EXPIRED = "../lib/images/exclamation.png";
     CONST HTML_CLASS_RED = " class=couleur_rouge";
@@ -68,12 +71,12 @@ class TableauFicheView {
         $LIBELLE = $ftaModel->getDataField(FtaModel::FIELDNAME_LIBELLE)->getFieldValue();
         $NB_UNIT_ELEM = $ftaModel->getDataField(FtaModel::FIELDNAME_NOMBRE_UVC_PAR_CARTON)->getFieldValue();
         $Poids_ELEM = $ftaModel->getDataField(FtaModel::FIELDNAME_POIDS_ELEMENTAIRE)->getFieldValue();
-        $suffixe_agrologic_fta = $ftaModel->getDataField(FtaModel::FIELDNAME_SUFFIXE_AGROLOGIC_FTA)->getFieldValue();
+        $suffixe_agrologic_fta = $ftaModel->getModelClassificationRacourcis()->getNameRaccourcisClassif();
         $designation_commerciale_fta = $ftaModel->getDataField(FtaModel::FIELDNAME_DESIGNATION_COMMERCIALE)->getFieldValue();
         $id_dossier_fta = $ftaModel->getDataField(FtaModel::FIELDNAME_DOSSIER_FTA)->getFieldValue();
         $id_version_dossier_fta = $ftaModel->getDataField(FtaModel::FIELDNAME_VERSION_DOSSIER_FTA)->getFieldValue();
         $code_article_ldc = $ftaModel->getDataField(FtaModel::FIELDNAME_CODE_ARTICLE_LDC)->getFieldValue();
-        $dateEcheanceFta = $ftaModel->getDataField(FtaModel::FIELDNAME_DATE_ECHEANCE_FTA)->getFieldValue();
+        $dateEcheanceFtatmp = $ftaModel->getDataField(FtaModel::FIELDNAME_DATE_ECHEANCE_FTA)->getFieldValue();
         $createur_nom = $ftaModel->getModelCreateur()->getDataField(UserModel::FIELDNAME_NOM)->getFieldValue();
         $createur_prenom = $ftaModel->getModelCreateur()->getDataField(UserModel::FIELDNAME_PRENOM)->getFieldValue();
         $workflowName = $ftaModel->getModelFtaWorkflow()->getDataField(FtaWorkflowModel::FIELDNAME_DESCRIPTION_FTA_WORKFLOW)->getFieldValue();
@@ -83,6 +86,12 @@ class TableauFicheView {
         $listeIdFtaRole = $ftaModel->getDataField(FtaModel::FIELDNAME_LISTE_ID_FTA_ROLE)->getFieldValue();
         $idSiteDeProduction = $ftaModel->getDataField(FtaModel::FIELDNAME_SITE_PRODUCTION)->getFieldValue();
         $idFtaEtat = $ftaModel->getDataField(FtaModel::FIELDNAME_ID_FTA_ETAT)->getFieldValue();
+
+        /**
+         * Changment du format de date en Fr
+         */
+        $dateEcheanceFta = FtaController::changementDuFormatDeDateFR($dateEcheanceFtatmp);
+
 
         /**
          * On obtient IdintranetAction du site de production
@@ -107,12 +116,14 @@ class TableauFicheView {
          * Attribution des couleurs de fonds suivant l'état de la FTA
          */
         $bgcolor = self::getHtmlCellBgColor($abreviation_fta_etat);
+        $bgcolorArcadia = self::getHtmlCellBgColorArcadia($paramIdFta, $bgcolor);
+
         $tauxRound = FtaSuiviProjetModel::getPourcentageFtaTauxValidation($ftaModel);
 
         /**
          * Lien vers l'historique de la Fta
          */
-        $lienHistorique = self::getHtmlLinkHistorique($abreviation_fta_etat, $paramIdFta, $idFtaRole, $synthese_action, $tauxRound, $checkAccesButtonBySiteProd);
+        $lienHistorique = self::getHtmlLinkHistorique($abreviation_fta_etat, $paramIdFta, FtaRoleModel::ID_FTA_ROLE_COMMUN, $synthese_action, $tauxRound, $checkAccesButtonBySiteProd, $idFtaEtat);
 
         /**
          * Gestion des icones en fonction des délais
@@ -125,10 +136,15 @@ class TableauFicheView {
          */
         $lien .= self::getHtmlLinkModify($abreviation_fta_etat, $paramIdFta, $synthese_action, $idFtaEtat, $checkAccesButtonBySiteProd);
 
+
+        /**
+         * Historique de modification
+         */
+        $lien .= self::getHtmlLinkHistoriqueModfify($abreviation_fta_etat, $paramIdFta, $synthese_action, $idFtaEtat);
         /**
          * Bouton d'accès au rendu PDF de la FTA
          */
-        $lien .= self::getHtmlLinkPDF($abreviation_fta_etat, $paramIdFta);
+        $lien .= self::getHtmlLinkPDF($abreviation_fta_etat, $paramIdFta, $idWorkflowFtaEncours);
 
         /**
          * Bouton d'accès à la transition
@@ -157,13 +173,8 @@ class TableauFicheView {
         /*
          * Noms des services dans lequel la Fta se trouve
          */
-        if ($abreviation_fta_etat == FtaEtatModel::ETAT_ABREVIATION_VALUE_MODIFICATION) {
-            if ($checkAccesButtonBySiteProd) {
-                $service = FtaRoleModel::getNameServiceEncours($listeIdFtaRole);
-            }
-        } else {
-            $service = FtaRoleModel::getNameServiceEncours($listeIdFtaRole);
-        }
+        $service = FtaRoleModel::getNameServiceEncours($listeIdFtaRole);
+
 
 //        switch (TRUE) {
 //            /**
@@ -209,7 +220,7 @@ class TableauFicheView {
         $tableau_fiches.="<td $bgcolor $largeur_html_C1><a title=$createur_link />" . $din . "</a></td>"
                 . "<td $bgcolor width=3%>" . $id_dossier_fta . "v" . $id_version_dossier_fta . "</td>";
 
-        $tableau_fiches.="<td $bgcolor width=\"1%\"> <b><font size=\"2\" color=\"#0000FF\">" . $code_article_ldc . "</font></b></td>";
+        $tableau_fiches.="<td $bgcolorArcadia width=\"1%\"> <b><font size=\"2\" color=\"#0000FF\">" . $code_article_ldc . "</font></b></td>";
         if ($abreviation_fta_etat == FtaEtatModel::ETAT_ABREVIATION_VALUE_MODIFICATION) {
             $tableau_fiches.='<td ' . $bgcolor . $largeur_html_C3 . ' align=center>' . $dateEcheanceFta . '</td>'; //échance de validation
         } else {
@@ -242,32 +253,42 @@ class TableauFicheView {
 
     /**
      * Lien vers l'historique de la Fta
-     * @param type $paramAbreviationFtaEtat
-     * @param type $paramIdFta
-     * @param type $paramIdFtaRole
-     * @param type $paramSyntheseAction
-     * @param type $paramTauxRound
+     * @param string $paramAbreviationFtaEtat
+     * @param int $paramIdFta
+     * @param int $paramIdFtaRole
+     * @param string $paramSyntheseAction
+     * @param string $paramTauxRound
+     * @param boolean $paramCheckAccesButton
+     * @param int $paramIdFtaEtat
+     * @return string
      */
-    static public function getHtmlLinkHistorique($paramAbreviationFtaEtat, $paramIdFta, $paramIdFtaRole, $paramSyntheseAction, $paramTauxRound, $paramCheckAccesButton) {
+    static public function getHtmlLinkHistorique($paramAbreviationFtaEtat, $paramIdFta, $paramIdFtaRole, $paramSyntheseAction, $paramTauxRound, $paramCheckAccesButton, $paramIdFtaEtat) {
         $lienHistorique = NULL;
 
         /**
          * Lien vers l'historique de la Fta
          */
-        if ($paramCheckAccesButton AND ( $paramAbreviationFtaEtat == FtaEtatModel::ETAT_ABREVIATION_VALUE_MODIFICATION)) {
+        if ($paramCheckAccesButton AND ( Acl::getValueAccesRights(Acl::ACL_FTA_MODIFICATION))) {
             $lienHistorique = ' <a href=historique-' . $paramIdFta
                     . '-1'
-                    . '-' . $paramIdFta
+                    . '-' . $paramIdFtaEtat
                     . '-' . $paramAbreviationFtaEtat
                     . '-' . $paramIdFtaRole
                     . '-' . $paramSyntheseAction
                     . '-1'
                     . '.html >' . $paramTauxRound . '</a>';
+        } else {
+            $lienHistorique = $paramTauxRound;
         }
         return $lienHistorique;
     }
 
-    static private function getHtmlCellBgColor($paramAbreviationFtaEtat) {
+    /**
+     * Détermine le font de couleur suivant l'état de la Fta
+     * @param string $paramAbreviationFtaEtat
+     * @return string
+     */
+    static public function getHtmlCellBgColor($paramAbreviationFtaEtat) {
 
         $bgcolor = self::HTML_CELL_BGCOLOR_DEFAULT;
         /*
@@ -282,6 +303,43 @@ class TableauFicheView {
                 break;
         }
         return $bgcolor;
+    }
+
+    /**
+     * Détermine le font de couleur suivant le code de retour de la transaction vers Arcadia
+     * @param string $paramAbreviationFtaEtat
+     * @return string
+     */
+    static public function getHtmlCellBgColorArcadia($paramIdFta, $paramBgColor) {
+        $bgcolorArcadia = $paramBgColor;
+
+        $keyValue = Fta2ArcadiaTransactionModel::checkIdArcadiaTransaction($paramIdFta);
+        if ($keyValue) {
+            $Fta2ArcadiaTransactionModel = new Fta2ArcadiaTransactionModel($keyValue);
+            $codeReply = $Fta2ArcadiaTransactionModel->getDataField(Fta2ArcadiaTransactionModel::FIELDNAME_CODE_REPLY)->getFieldValue();
+            switch ($codeReply) {
+                case Fta2ArcadiaTransactionModel::CONSOMME:
+                    $bgcolorArcadia = TableauFicheView::HTML_CELL_BGCOLOR_ARCADIA_OK;
+
+                    break;
+                case Fta2ArcadiaTransactionModel::REJET_TASKS:
+                    $bgcolorArcadia = TableauFicheView::HTML_CELL_BGCOLOR_ARCADIA_ERREUR;
+
+                    break;
+                case Fta2ArcadiaTransactionModel::REFUSE:
+                    $bgcolorArcadia = TableauFicheView::HTML_CELL_BGCOLOR_ARCADIA_ERREUR;
+
+                    break;
+                case Fta2ArcadiaTransactionModel::CLOTURE_AUTO:
+                    $bgcolorArcadia = TableauFicheView::HTML_CELL_BGCOLOR_ARCADIA_ERREUR;
+                    break;
+                default :
+                    $bgcolorArcadia = TableauFicheView::HTML_CELL_BGCOLOR_ARCADIA_ATTENTE;
+
+                    break;
+            }
+        }
+        return $bgcolorArcadia;
     }
 
     static private function getHtmlBgColorIconHeader($paramAbreviationFtaEtat, $paramIdFta) {
@@ -312,6 +370,32 @@ class TableauFicheView {
         return $iconHeader;
     }
 
+    /**
+     * Historique de modification
+     * @param type $paramAbreviationFtaEtat
+     * @param type $paramIdFta
+     * @param type $paramSyntheseAction
+     * @param type $paramIdFtaEtat
+     * @param type $paramIdFtaRole
+     * @return string
+     */
+    static public function getHtmlLinkHistoriqueModfify($paramAbreviationFtaEtat, $paramIdFta, $paramSyntheseAction, $paramIdFtaEtat, $paramIdFtaRole = FtaRoleModel::ID_FTA_ROLE_COMMUN, $paramTaille = NULL, $paramText = NULL) {
+        if (!$paramTaille) {
+            $paramTaille = "30";
+        }
+
+        $lien .=' <a href=modification_fta_historique.php?' . FtaModel::KEYNAME . '=' . $paramIdFta
+                . '&' . FtaEtatModel::KEYNAME . '=' . $paramIdFtaEtat
+                . '&' . FtaEtatModel::FIELDNAME_ABREVIATION . '=' . $paramAbreviationFtaEtat
+                . '&' . FtaRoleModel::KEYNAME . '=' . $paramIdFtaRole
+                . '&synthese_action=' . $paramSyntheseAction
+                . ' ><img src=./images/dossier.png alt=\'\' title=\'Historique des modifications Fta\' width=\'' . $paramTaille . '\' height=\'' . $paramTaille . '\' border=\'0\' /> ' . $paramText . ' </a>';
+
+
+
+        return $lien;
+    }
+
     static private function getHtmlLinkModify($paramAbreviationFtaEtat, $paramIdFta, $paramSyntheseAction, $paramIdFtaEtat, $paramAccesBouton, $paramIdFtaRole = FtaRoleModel::ID_FTA_ROLE_COMMUN) {
         $lien = "";
         if (
@@ -335,18 +419,21 @@ class TableauFicheView {
         return $lien;
     }
 
-    static private function getHtmlLinkPDF($paramAbreviationFtaEtat, $paramIdFta) {
+    static public function getHtmlLinkPDF($paramAbreviationFtaEtat, $paramIdFta, $paramIdWorkflow, $paramTaille = NULL, $paramName = NULL) {
 
         $lien = "";
         if (
-                (Acl::getValueAccesRights(Acl::ACL_FTA_IMPRESSION) and ( $paramAbreviationFtaEtat == FtaEtatModel::ETAT_ABREVIATION_VALUE_VALIDE ))
+                (Acl::getValueAccesRights(Acl::ACL_FTA_IMPRESSION) and ( $paramAbreviationFtaEtat == FtaEtatModel::ETAT_ABREVIATION_VALUE_VALIDE ))or ( $paramIdWorkflow == FtaWorkflowModel::ID_WORKFLOW_PRESENTATION)
         ) {
+            if (!$paramTaille) {
+                $paramTaille = "30";
+            }
 
             $lien .= "  "
                     . "<a "
                     . "href=pdf.php?id_fta=" . $paramIdFta . "&mode=client "
                     . "target=_blank"
-                    . "><img src=./images/pdf.png alt=\"\" title=\"Exportation PDF\" width=\"30\" height=\"25\" border=\"0\" />"
+                    . "><img src=./images/pdf.png alt=\"\" title=\"Exportation PDF\" width=\"$paramTaille\" height=\"$paramTaille\" border=\"0\" /> $paramName"
                     . "</a>"
             ;
         }
@@ -370,7 +457,7 @@ class TableauFicheView {
             Acl::getValueAccesRights(Acl::ACL_FTA_MODIFICATION)
             AND ( FtaRoleModel::isGestionnaire($paramIdFtaRole) )
             AND ( $paramAbreviationFtaEtat == FtaEtatModel::ETAT_ABREVIATION_VALUE_MODIFICATION
-            AND $paramSyntheseAction == FtaEtatModel::ETAT_AVANCEMENT_VALUE_EFFECTUES
+            AND $paramSyntheseAction == FtaEtatModel::ETAT_AVANCEMENT_VALUE_ALL
             AND $paramCheckAccesButton
 
             )
@@ -413,7 +500,7 @@ class TableauFicheView {
              */
             case (
             Acl::getValueAccesRights(Acl::ACL_FTA_MODIFICATION)
-            AND $paramAccesTransitionButton == TRUE
+//            AND $paramAccesTransitionButton == TRUE
             AND ( $paramAbreviationFtaEtat == FtaEtatModel::ETAT_ABREVIATION_VALUE_VALIDE)
             AND $paramCheckAccesButton
 
@@ -425,19 +512,25 @@ class TableauFicheView {
         return $return;
     }
 
-    static private function getHmlLinkTransiter($paramIdFta, $paramIdFtaRole, $paramAbreviationFtaEtat, $paramCheckAccesButton
-    , $paramAccesTransitionButton, $paramSyntheseAction, $paramTauxRound) {
+    public static function getHmlLinkTransiter($paramIdFta, $paramIdFtaRole, $paramAbreviationFtaEtat, $paramCheckAccesButton
+    , $paramAccesTransitionButton, $paramSyntheseAction, $paramTauxRound, $paramTaille = NULL, $paramName = NULL) {
         $return = "";
         if (
                 self::isUserRightsLinkTransiter($paramIdFtaRole, $paramAbreviationFtaEtat, $paramCheckAccesButton
                         , $paramAccesTransitionButton, $paramSyntheseAction, $paramTauxRound)
         ) {
+
+            if (!$paramTaille) {
+                $paramTaille = "30";
+            }
             $return = '<a '
                     . 'href=transiter.php'
                     . '?id_fta=' . $paramIdFta
                     . '&id_fta_role=' . $paramIdFtaRole
-                    . '><img src=./images/transiter.png alt=\'\' title=\'Transiter\' width=\'30\' height=\'30\' border=\'0\' />'
-                    . '</a>'
+                    . '&comeback=1'
+                    . '><img src=./images/transiter.png alt=\'\' title=\'Transiter\' width=\'' . $paramTaille . '\' height=\'' . $paramTaille . '\' border=\'0\' />'
+                    . $paramName . '</a>'
+
             ;
         }
         return $return;
@@ -479,13 +572,14 @@ class TableauFicheView {
                 . '?action=dupliquer_fiche'
                 . '&id_fta=' . $paramIdFta
                 . '&id_fta_role=' . $idFtaRole
+                . '&comeback=1'
                 . '><img src=../lib/images/copie.png alt=\'\' title=\'Dupliquer\' width=\'30\' height=\'30\' border=\'0\' />'
                 . '</a>'
         ;
         return $lien;
     }
 
-    static private function getStringDINCompacted($paramDesignationCommercialeFta, $paramLibelle, $paramNbUnitElem, $PoidsElem) {
+    static public function getStringDINCompacted($paramDesignationCommercialeFta, $paramLibelle, $paramNbUnitElem, $PoidsElem) {
         $din = "";
 
         if ($paramLibelle) {

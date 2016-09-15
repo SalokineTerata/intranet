@@ -68,6 +68,7 @@ switch ($action) {
             if ($idAnnexeAgroArtCodification) {
                 $annexexAgrologicModel = new AnnexeAgrologicArticleCodificationModel($idAnnexeAgroArtCodification);
                 $prefixe_code_produit_agrologic_fta_nomenclature = $annexexAgrologicModel->getDataField(AnnexeAgrologicArticleCodificationModel::FIELDNAME_PREFIXE_ANNEXE_AGRO_ART_COD)->getFieldValue();
+                $isComposition = $annexexAgrologicModel->getDataField(AnnexeAgrologicArticleCodificationModel::FIELDNAME_IS_COMPOSITION)->getFieldValue();
 
                 /**
                  * Les Produits toujours en Kg
@@ -86,29 +87,23 @@ switch ($action) {
                 /**
                  * Création de la nomenclature orpheline
                  */
-                if (
-                        (//Cas Général (sauf Tarare)
-                        $prefixe_code_produit_agrologic_fta_nomenclature == "30"
-                        )
-                        or ( //Cas Tarare)
-                        $prefixe_code_produit_agrologic_fta_nomenclature == "14"
-                        )
-                        or ( //Cas Tarare)
-                        $prefixe_code_produit_agrologic_fta_nomenclature == "29"
-                        )
-                        or (
-                        $prefixe_code_produit_agrologic_fta_nomenclature == "15"
-                        )
-                ) {
+                if ($isComposition) {
                     if ($creation) {
+
+                        $ftaModel = new FtaModel($id_fta);
+                        $DureeDeVieTechnique = $ftaModel->getDataField(FtaModel::FIELDNAME_DUREE_DE_VIE_TECHNIQUE_PRODUCTION)->getFieldValue();
+                         $PCB = $ftaModel->getDataField(FtaModel::FIELDNAME_NOMBRE_UVC_PAR_CARTON)->getFieldValue();
+                        $poidsUVFValueKG = $ftaModel->getDataField(FtaModel::FIELDNAME_POIDS_ELEMENTAIRE)->getFieldValue();
+                        $poidsUVFValueG = $poidsUVFValueKG * "1000";
                         //Valeur par défaut      
                         $nom_fta_nomenclature = $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_DESIGNATION_CODIFICATION)->getFieldValue();
                         $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_NOM_FTA_COMPOSITION)->setFieldValue($nom_fta_nomenclature);
                         $site_production_fta_nomenclature = $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_SITE_PRODUCTION_FTA_CODIFICATION)->getFieldValue();
                         $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_ID_GEO)->setFieldValue($site_production_fta_nomenclature);
                         $poids_fta_nomenclature = $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_POIDS_UNITAIRE_CODIFICATION)->getFieldValue();
-                        $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_POIDS_FTA_COMPOSITION)->setFieldValue($poids_fta_nomenclature);
-                        $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_QUANTITE_FTA_COMPOSITION_UVC)->setFieldValue("1");
+                        $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_POIDS_FTA_COMPOSITION)->setFieldValue($poidsUVFValueG);
+                        $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_DUREE_VIE_TECHNIQUE_FTA_COMPOSITION)->setFieldValue($DureeDeVieTechnique);
+                        $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_QUANTITE_FTA_COMPOSITION)->setFieldValue($PCB);
                     }
                     $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_IS_COMPOSITION_FTA_COMPOSANT)->setFieldValue("1");
                 } else {
@@ -122,7 +117,7 @@ switch ($action) {
                 . "?id_fta=" . $id_fta
                 . "&id_fta_chapitre_encours=" . $id_fta_chapitre_encours
                 . "&synthese_action=" . $synthese_action
-                . "&comeback=" . $comeback
+//                . "&comeback=" . $comeback
                 . "&id_fta_etat=" . $idFtaEtat
                 . "&abreviation_fta_etat=" . $abreviationFtaEtat
                 . "&id_fta_role=" . $idFtaRole

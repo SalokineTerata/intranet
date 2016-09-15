@@ -1,0 +1,166 @@
+Démarrage : mer jan 22 23:00:01 CET 2014
+Arrêt     : mer jan 22 23:00:41 CET 2014
+
+
+
+Base MySQL sélectionnée: agis
+Nombre de serveur(s) Linux concerné(s): 4
+Nombre de dossier(s) à mettre à jour: 24
+
+sending incremental file list
+
+sent 5691 bytes  received 45 bytes  3824.00 bytes/sec
+total size is 10159163  speedup is 1771.12
+sending incremental file list
+
+sent 5977 bytes  received 37 bytes  2405.60 bytes/sec
+total size is 12047230  speedup is 2003.20
+sending incremental file list
+
+sent 63 bytes  received 12 bytes  50.00 bytes/sec
+total size is 83869696  speedup is 1118262.61
+sending incremental file list
+
+sent 7538 bytes  received 45 bytes  5055.33 bytes/sec
+total size is 9253358  speedup is 1220.28
+sending incremental file list
+
+sent 7695 bytes  received 20 bytes  5143.33 bytes/sec
+total size is 16751789  speedup is 2171.33
+sending incremental file list
+
+sent 4308 bytes  received 24 bytes  2888.00 bytes/sec
+total size is 6387982  speedup is 1474.60
+sending incremental file list
+mercuriales/mdd/2014/2014 MERCURIALE MONOPRIX .xls
+
+sent 8139 bytes  received 369 bytes  3403.20 bytes/sec
+total size is 25766751  speedup is 3028.53
+sending incremental file list
+
+sent 5047 bytes  received 27 bytes  3382.67 bytes/sec
+total size is 39173092  speedup is 7720.36
+sending incremental file list
+operations_commerciales/chrono demande echantillons.xls
+operations_commerciales/GMS/2013/A-CENTRALES/GMS AUCHAN.FR 2013-FUTUR MASTER.xls
+operations_commerciales/MDD/MODELES CJ/PROVERA/Chrono 29 MATCH 220114.XLS
+operations_commerciales/MDD/MODELES CJ/PROVERA/Chrono 30 AGENCE REYMANN.XLS
+operations_commerciales/MDD/MODELES CJ/PROVERA/Chrono 31 AGENCE REYMANN.XLS
+deleting operations_commerciales/MDD/MODELES CJ/PROVERA/CONF OPES CORA MATCH/Chrono 682 Cora Agence Epsilon 201213.XLS
+deleting operations_commerciales/MDD/MODELES CJ/PROVERA/CONF OPES CORA MATCH/Chrono 650 PROVERA.XLS
+deleting operations_commerciales/MDD/MODELES CJ/PROVERA/CONF OPES CORA MATCH/Chrono 552 Match.XLS
+deleting operations_commerciales/MDD/MODELES CJ/PROVERA/CONF OPES CORA MATCH/Chrono 510 Cora Agence Reymann 181013.XLS
+deleting operations_commerciales/MDD/MODELES CJ/PROVERA/CONF OPES CORA MATCH/Chrono 509 MATCH 251013.XLS
+deleting operations_commerciales/MDD/MODELES CJ/PROVERA/CONF OPES CORA MATCH/Chrono 508 MATCH 251013.XLS
+deleting operations_commerciales/MDD/MODELES CJ/PROVERA/CONF OPES CORA MATCH/Chrono 507 Cora Agence Reymann 181013.XLS
+deleting operations_commerciales/MDD/MODELES CJ/PROVERA/CONF OPES CORA MATCH/Chrono 461 Match 300913.XLS
+deleting operations_commerciales/MDD/MODELES CJ/PROVERA/CONF OPES CORA MATCH/Chrono 460 Match 300913.XLS
+deleting operations_commerciales/MDD/MODELES CJ/PROVERA/CONF OPES CORA MATCH/Chrono 388 Cora Agence Epsilon 201213.XLS
+deleting operations_commerciales/MDD/MODELES CJ/PROVERA/CONF OPES CORA MATCH/Chrono 388 Cora Agence Epsilon 050913.XLS
+deleting operations_commerciales/MDD/MODELES CJ/PROVERA/CONF OPES CORA MATCH/Chrono 334 Cora Agence Reymann 010813.XLS
+deleting operations_commerciales/MDD/MODELES CJ/PROVERA/CONF OPES CORA MATCH/Chrono 314 Match 160713.XLS
+deleting operations_commerciales/MDD/MODELES CJ/PROVERA/CONF OPES CORA MATCH/Chrono 313 Cora Agence Reymann 160713.XLS
+operations_commerciales/MDD/MODELES CJ/PROVERA/CONF OPES CORA MATCH/2014/CORA/CONFIRMATION OPERATION_CORA_ITINERAIRE GAGNANT AVRIL.xls
+operations_commerciales/MDD/MODELES CJ/PROVERA/CONF OPES CORA MATCH/2014/CORA/CONFIRMATION OPERATION_CORA_ITINERAIRE GAGNANT MARS.xls
+operations_commerciales/MDD/MODELES CJ/PROVERA/CONF OPES CORA MATCH/2014/MATCH/
+operations_commerciales/MDD/MODELES CJ/PROVERA/CONF OPES CORA MATCH/2014/MATCH/CONFIRMATION OPERATION_MATCH_2014_MDD VAGUE 2.xls
+operations_commerciales/MDD/OP MDD 2013/MDD AUCHAN 2013 FUTUR MASTER.xls
+operations_commerciales/MDD/OP MDD 2013/MDD SCHIEVER 2013 FUTUR MASTER.xls
+operations_commerciales/MDD/OP MDD 2013/MDD SIMPLY MARKET 2013 FUTUR MASTER.xls
+operations_commerciales/MDD/OP MDD 2014/MDD CORA 2014.xls
+operations_commerciales/MDD/OP MDD 2014/MDD CORA BE 2014  FUTUR MASTER.xls
+operations_commerciales/MDD/OP MDD 2014/MDD MATCH 2014.xls
+
+sent 330238 bytes  received 12382 bytes  76137.78 bytes/sec
+total size is 60101230  speedup is 175.42
+sending incremental file list
+
+sent 19775 bytes  received 78 bytes  13235.33 bytes/sec
+total size is 98318654  speedup is 4952.33
+sending incremental file list
+
+sent 7514 bytes  received 13 bytes  5018.00 bytes/sec
+total size is 33255424  speedup is 4418.15
+sending incremental file list
+
+sent 63 bytes  received 12 bytes  150.00 bytes/sec
+total size is 83869696  speedup is 1118262.61
+sending incremental file list
+
+sent 7538 bytes  received 45 bytes  5055.33 bytes/sec
+total size is 9253358  speedup is 1220.28
+sending incremental file list
+
+sent 4308 bytes  received 24 bytes  2888.00 bytes/sec
+total size is 6387982  speedup is 1474.60
+sending incremental file list
+
+sent 7695 bytes  received 20 bytes  5143.33 bytes/sec
+total size is 16751789  speedup is 2171.33
+sending incremental file list
+
+sent 85 bytes  received 13 bytes  65.33 bytes/sec
+total size is 104853504  speedup is 1069933.71
+sending incremental file list
+operations_commerciales/chrono demande echantillons.xls
+operations_commerciales/GMS/2013/A-CENTRALES/GMS AUCHAN.FR 2013-FUTUR MASTER.xls
+operations_commerciales/MDD/MODELES CJ/PROVERA/Chrono 29 MATCH 220114.XLS
+operations_commerciales/MDD/MODELES CJ/PROVERA/Chrono 30 AGENCE REYMANN.XLS
+operations_commerciales/MDD/MODELES CJ/PROVERA/Chrono 31 AGENCE REYMANN.XLS
+deleting operations_commerciales/MDD/MODELES CJ/PROVERA/CONF OPES CORA MATCH/Chrono 682 Cora Agence Epsilon 201213.XLS
+deleting operations_commerciales/MDD/MODELES CJ/PROVERA/CONF OPES CORA MATCH/Chrono 650 PROVERA.XLS
+deleting operations_commerciales/MDD/MODELES CJ/PROVERA/CONF OPES CORA MATCH/Chrono 552 Match.XLS
+deleting operations_commerciales/MDD/MODELES CJ/PROVERA/CONF OPES CORA MATCH/Chrono 510 Cora Agence Reymann 181013.XLS
+deleting operations_commerciales/MDD/MODELES CJ/PROVERA/CONF OPES CORA MATCH/Chrono 509 MATCH 251013.XLS
+deleting operations_commerciales/MDD/MODELES CJ/PROVERA/CONF OPES CORA MATCH/Chrono 508 MATCH 251013.XLS
+deleting operations_commerciales/MDD/MODELES CJ/PROVERA/CONF OPES CORA MATCH/Chrono 507 Cora Agence Reymann 181013.XLS
+deleting operations_commerciales/MDD/MODELES CJ/PROVERA/CONF OPES CORA MATCH/Chrono 461 Match 300913.XLS
+deleting operations_commerciales/MDD/MODELES CJ/PROVERA/CONF OPES CORA MATCH/Chrono 460 Match 300913.XLS
+deleting operations_commerciales/MDD/MODELES CJ/PROVERA/CONF OPES CORA MATCH/Chrono 388 Cora Agence Epsilon 201213.XLS
+deleting operations_commerciales/MDD/MODELES CJ/PROVERA/CONF OPES CORA MATCH/Chrono 388 Cora Agence Epsilon 050913.XLS
+deleting operations_commerciales/MDD/MODELES CJ/PROVERA/CONF OPES CORA MATCH/Chrono 334 Cora Agence Reymann 010813.XLS
+deleting operations_commerciales/MDD/MODELES CJ/PROVERA/CONF OPES CORA MATCH/Chrono 314 Match 160713.XLS
+deleting operations_commerciales/MDD/MODELES CJ/PROVERA/CONF OPES CORA MATCH/Chrono 313 Cora Agence Reymann 160713.XLS
+operations_commerciales/MDD/MODELES CJ/PROVERA/CONF OPES CORA MATCH/2014/CORA/CONFIRMATION OPERATION_CORA_ITINERAIRE GAGNANT AVRIL.xls
+operations_commerciales/MDD/MODELES CJ/PROVERA/CONF OPES CORA MATCH/2014/CORA/CONFIRMATION OPERATION_CORA_ITINERAIRE GAGNANT MARS.xls
+operations_commerciales/MDD/MODELES CJ/PROVERA/CONF OPES CORA MATCH/2014/MATCH/
+operations_commerciales/MDD/MODELES CJ/PROVERA/CONF OPES CORA MATCH/2014/MATCH/CONFIRMATION OPERATION_MATCH_2014_MDD VAGUE 2.xls
+operations_commerciales/MDD/OP MDD 2013/MDD AUCHAN 2013 FUTUR MASTER.xls
+operations_commerciales/MDD/OP MDD 2013/MDD SCHIEVER 2013 FUTUR MASTER.xls
+operations_commerciales/MDD/OP MDD 2013/MDD SIMPLY MARKET 2013 FUTUR MASTER.xls
+operations_commerciales/MDD/OP MDD 2014/MDD CORA 2014.xls
+operations_commerciales/MDD/OP MDD 2014/MDD CORA BE 2014  FUTUR MASTER.xls
+operations_commerciales/MDD/OP MDD 2014/MDD MATCH 2014.xls
+
+sent 330238 bytes  received 12382 bytes  97891.43 bytes/sec
+total size is 60101230  speedup is 175.42
+sending incremental file list
+mercuriales/mdd/2014/2014 MERCURIALE MONOPRIX .xls
+
+sent 8139 bytes  received 369 bytes  5672.00 bytes/sec
+total size is 25766751  speedup is 3028.53
+sending incremental file list
+
+sent 7514 bytes  received 13 bytes  5018.00 bytes/sec
+total size is 33255424  speedup is 4418.15
+sending incremental file list
+
+sent 5691 bytes  received 45 bytes  3824.00 bytes/sec
+total size is 10159163  speedup is 1771.12
+sending incremental file list
+
+sent 5677 bytes  received 23 bytes  3800.00 bytes/sec
+total size is 128675317  speedup is 22574.62
+sending incremental file list
+
+sent 5353 bytes  received 38 bytes  3594.00 bytes/sec
+total size is 56169881  speedup is 10419.20
+sending incremental file list
+codesoft/Codesoft 7/Agis FE/43054_crev_pan\#351es_verso comp.bak
+codesoft/Codesoft 7/Agis FE/43054_crev_pan\#351es_verso comp.lab
+codesoft/Codesoft 7/Codes Produits/79918_rouleau mexicain SDV.bak
+codesoft/Codesoft 7/Codes Produits/79918_rouleau mexicain SDV.lab
+
+sent 125482 bytes  received 7012 bytes  88329.33 bytes/sec
+total size is 289940563  speedup is 2188.33
+sending incremental file list

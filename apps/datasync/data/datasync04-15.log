@@ -1,0 +1,169 @@
+Démarrage : mar avr 15 23:00:01 CEST 2014
+Arrêt     : mar avr 15 23:00:46 CEST 2014
+
+
+
+Base MySQL sélectionnée: agis
+Nombre de serveur(s) Linux concerné(s): 4
+Nombre de dossier(s) à mettre à jour: 27
+
+sending incremental file list
+
+sent 7051 bytes  received 49 bytes  4733.33 bytes/sec
+total size is 12693370  speedup is 1787.80
+sending incremental file list
+
+sent 6274 bytes  received 38 bytes  2524.80 bytes/sec
+total size is 12421591  speedup is 1967.93
+sending incremental file list
+
+sent 63 bytes  received 12 bytes  50.00 bytes/sec
+total size is 84160512  speedup is 1122140.16
+sending incremental file list
+
+sent 7538 bytes  received 45 bytes  5055.33 bytes/sec
+total size is 9253358  speedup is 1220.28
+sending incremental file list
+
+sent 7695 bytes  received 20 bytes  5143.33 bytes/sec
+total size is 16751789  speedup is 2171.33
+sending incremental file list
+
+sent 4308 bytes  received 24 bytes  2888.00 bytes/sec
+total size is 6387982  speedup is 1474.60
+sending incremental file list
+mercuriales/sync.ffs_db
+mercuriales/sync.ffs_lock
+mercuriales/FZC/FZC 2014/TOUPARGEL 2014.xls
+mercuriales/gms/2014/CENTRALES 2014/CASINO 2014.xls
+
+sent 23270 bytes  received 6058 bytes  6517.33 bytes/sec
+total size is 30191851  speedup is 1029.45
+sending incremental file list
+
+sent 5047 bytes  received 27 bytes  3382.67 bytes/sec
+total size is 39173092  speedup is 7720.36
+sending incremental file list
+operations_commerciales/GMS/2014/D-REGIONS/GMS LECLERC 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/D-REGIONS/GMS SCHIEVER 2014-FUTUR MASTER.xls
+
+sent 60702 bytes  received 5484 bytes  12033.82 bytes/sec
+total size is 49501083  speedup is 747.91
+sending incremental file list
+
+sent 20051 bytes  received 78 bytes  13419.33 bytes/sec
+total size is 98915848  speedup is 4914.10
+sending incremental file list
+
+sent 3601 bytes  received 79 bytes  2453.33 bytes/sec
+total size is 21222590  speedup is 5767.01
+sending incremental file list
+modeles/compo_pc_top_chef_auchan-v2.lab
+modeles/compo_pc_top_chef_auchan-v2_180.lab
+
+sent 21638 bytes  received 51 bytes  14459.33 bytes/sec
+total size is 43946496  speedup is 2026.21
+sending incremental file list
+
+sent 5781 bytes  received 30 bytes  3874.00 bytes/sec
+total size is 93132165  speedup is 16026.87
+sending incremental file list
+
+sent 63 bytes  received 12 bytes  50.00 bytes/sec
+total size is 84160512  speedup is 1122140.16
+sending incremental file list
+
+sent 7538 bytes  received 45 bytes  5055.33 bytes/sec
+total size is 9253358  speedup is 1220.28
+sending incremental file list
+
+sent 4308 bytes  received 24 bytes  2888.00 bytes/sec
+total size is 6387982  speedup is 1474.60
+sending incremental file list
+
+sent 7695 bytes  received 20 bytes  5143.33 bytes/sec
+total size is 16751789  speedup is 2171.33
+sending incremental file list
+
+sent 85 bytes  received 13 bytes  65.33 bytes/sec
+total size is 104853504  speedup is 1069933.71
+sending incremental file list
+operations_commerciales/GMS/2014/D-REGIONS/GMS LECLERC 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/D-REGIONS/GMS SCHIEVER 2014-FUTUR MASTER.xls
+
+sent 60702 bytes  received 5484 bytes  26474.40 bytes/sec
+total size is 49501083  speedup is 747.91
+sending incremental file list
+mercuriales/sync.ffs_db
+mercuriales/sync.ffs_lock
+mercuriales/FZC/FZC 2014/TOUPARGEL 2014.xls
+mercuriales/gms/2014/CENTRALES 2014/CASINO 2014.xls
+
+sent 23270 bytes  received 6058 bytes  19552.00 bytes/sec
+total size is 30191855  speedup is 1029.45
+sending incremental file list
+modeles/compo_pc_top_chef_auchan-v2.lab
+modeles/compo_pc_top_chef_auchan-v2_180.lab
+
+sent 21638 bytes  received 51 bytes  8675.60 bytes/sec
+total size is 43946496  speedup is 2026.21
+sending incremental file list
+
+sent 7051 bytes  received 49 bytes  4733.33 bytes/sec
+total size is 12693370  speedup is 1787.80
+sending incremental file list
+
+sent 5732 bytes  received 23 bytes  3836.67 bytes/sec
+total size is 129183193  speedup is 22447.12
+sending incremental file list
+
+sent 5610 bytes  received 39 bytes  3766.00 bytes/sec
+total size is 59049369  speedup is 10453.07
+sending incremental file list
+deleting codesoft/Codesoft 7/Casino FE/1.05.2014/sam_boeuf_verso.lab
+deleting codesoft/Codesoft 7/Casino FE/1.05.2014/sam_boeuf_recto.lab
+deleting codesoft/Codesoft 7/Casino FE/1.05.2014/plateau_ass_asia_verso.lab
+deleting codesoft/Codesoft 7/Casino FE/1.05.2014/plateau_ass_asia_recto.lab
+deleting codesoft/Codesoft 7/Casino FE/1.05.2014/crev_pan\#351es_verso.lab
+deleting codesoft/Codesoft 7/Casino FE/1.05.2014/crev_pan\#351es_recto.lab
+deleting codesoft/Codesoft 7/Casino FE/1.05.2014/ass_asia_verso.lab
+deleting codesoft/Codesoft 7/Casino FE/1.05.2014/ass_asia_recto.lab
+deleting codesoft/Codesoft 7/Casino FE/1.05.2014/acras_verso.lab
+deleting codesoft/Codesoft 7/Casino FE/1.05.2014/acras_recto.lab
+codesoft/Codesoft 7/Casino FE/1.05.2014/80900_verso.bak
+codesoft/Codesoft 7/Casino FE/1.05.2014/80900_verso.lab
+codesoft/Codesoft 7/Casino FE/1.05.2014/80902_recto.bak
+codesoft/Codesoft 7/Casino FE/1.05.2014/80902_recto.lab
+codesoft/Codesoft 7/Casino FE/1.05.2014/80902_verso.bak
+codesoft/Codesoft 7/Casino FE/1.05.2014/80902_verso.lab
+codesoft/Codesoft 7/Casino FE/1.05.2014/80903_recto.bak
+codesoft/Codesoft 7/Casino FE/1.05.2014/80903_recto.lab
+codesoft/Codesoft 7/Casino FE/1.05.2014/80903_verso.bak
+codesoft/Codesoft 7/Casino FE/1.05.2014/80903_verso.lab
+codesoft/Codesoft 7/Casino FE/1.05.2014/80904_recto.bak
+codesoft/Codesoft 7/Casino FE/1.05.2014/80904_recto.lab
+codesoft/Codesoft 7/Casino FE/1.05.2014/80904_verso.bak
+codesoft/Codesoft 7/Casino FE/1.05.2014/80904_verso.lab
+codesoft/Codesoft 7/Casino FE/1.05.2014/80905_recto.bak
+codesoft/Codesoft 7/Casino FE/1.05.2014/80905_recto.lab
+codesoft/Codesoft 7/Casino FE/1.05.2014/80905_verso.bak
+codesoft/Codesoft 7/Casino FE/1.05.2014/80905_verso.lab
+codesoft/Codesoft 7/Casino FE/1.05.2014/80906_recto.bak
+codesoft/Codesoft 7/Casino FE/1.05.2014/80906_recto.lab
+codesoft/Codesoft 7/Casino FE/1.05.2014/80906_verso.bak
+codesoft/Codesoft 7/Casino FE/1.05.2014/80906_verso.lab
+codesoft/Codesoft 7/Codes Produits/43144.Lab
+codesoft/Codesoft 7/Codes Produits/43144.bak
+codesoft/Codesoft 7/Codes Produits/43407 Nem poulet argel.Lab
+codesoft/Codesoft 7/Codes Produits/43407 Nem poulet argel.bak
+
+sent 339895 bytes  received 6441 bytes  98953.14 bytes/sec
+total size is 293866579  speedup is 848.50
+sending incremental file list
+
+sent 20051 bytes  received 78 bytes  8051.60 bytes/sec
+total size is 98915848  speedup is 4914.10
+sending incremental file list
+
+sent 3601 bytes  received 79 bytes  1472.00 bytes/sec
+total size is 21222590  speedup is 5767.01

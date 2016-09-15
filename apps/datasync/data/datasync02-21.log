@@ -1,0 +1,145 @@
+Démarrage : ven fév 21 23:00:01 CET 2014
+Arrêt     : ven fév 21 23:02:12 CET 2014
+
+
+
+Base MySQL sélectionnée: agis
+Nombre de serveur(s) Linux concerné(s): 4
+Nombre de dossier(s) à mettre à jour: 26
+
+sending incremental file list
+
+sent 6293 bytes  received 46 bytes  4226.00 bytes/sec
+total size is 11666224  speedup is 1840.39
+sending incremental file list
+
+sent 6047 bytes  received 37 bytes  4056.00 bytes/sec
+total size is 12177278  speedup is 2001.52
+sending incremental file list
+erp_data.mdb
+
+sent 7867140 bytes  received 64291 bytes  174317.16 bytes/sec
+total size is 84160512  speedup is 10.61
+sending incremental file list
+
+sent 7538 bytes  received 45 bytes  5055.33 bytes/sec
+total size is 9253358  speedup is 1220.28
+sending incremental file list
+
+sent 7695 bytes  received 20 bytes  5143.33 bytes/sec
+total size is 16751789  speedup is 2171.33
+sending incremental file list
+
+sent 4308 bytes  received 24 bytes  2888.00 bytes/sec
+total size is 6387982  speedup is 1474.60
+sending incremental file list
+mercuriales/HD/2014/2014 MERCURIALE DIA.xls
+mercuriales/gms/2014/CENTRALES 2014/CASINO 2014.xls
+mercuriales/gms/2014/CONTROLE TARIFS 2014/02-FEVRIER/2014 AUCHAN.FR GAMME TOP CHEF.pdf
+mercuriales/gms/2014/CONTROLE TARIFS 2014/04-AVRIL/2014 GALEC RP CRABE.pdf
+mercuriales/gms/2014/REGIONS  2014/GALEC REGION MERCU AVRIL 2014.xls
+mercuriales/gms/2014/REGIONS  2014/SCHIEVER MERCU 2014.xls
+
+sent 133771 bytes  received 16078 bytes  59939.60 bytes/sec
+total size is 27867338  speedup is 185.97
+sending incremental file list
+
+sent 5047 bytes  received 27 bytes  2029.60 bytes/sec
+total size is 39173092  speedup is 7720.36
+sending incremental file list
+operations_commerciales/chrono demande echantillons.xls
+operations_commerciales/GMS/2014/D-REGIONS/GMS LECLERC 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/D-REGIONS/GMS SU REGION  2014-FUTUR MASTER.xls
+
+sent 225377 bytes  received 10698 bytes  94430.00 bytes/sec
+total size is 45972389  speedup is 194.74
+sending incremental file list
+
+sent 19842 bytes  received 78 bytes  13280.00 bytes/sec
+total size is 98501331  speedup is 4944.85
+sending incremental file list
+gofast/sync.ffs_db
+
+sent 4079 bytes  received 109 bytes  2792.00 bytes/sec
+total size is 13716658  speedup is 3275.23
+sending incremental file list
+
+sent 8871 bytes  received 13 bytes  5922.67 bytes/sec
+total size is 41009664  speedup is 4616.13
+sending incremental file list
+erp_data.mdb
+
+sent 7867140 bytes  received 64291 bytes  170568.41 bytes/sec
+total size is 84160512  speedup is 10.61
+sending incremental file list
+
+sent 7538 bytes  received 45 bytes  5055.33 bytes/sec
+total size is 9253358  speedup is 1220.28
+sending incremental file list
+
+sent 4308 bytes  received 24 bytes  2888.00 bytes/sec
+total size is 6387982  speedup is 1474.60
+sending incremental file list
+
+sent 7695 bytes  received 20 bytes  5143.33 bytes/sec
+total size is 16751789  speedup is 2171.33
+sending incremental file list
+
+sent 85 bytes  received 13 bytes  65.33 bytes/sec
+total size is 104853504  speedup is 1069933.71
+sending incremental file list
+operations_commerciales/chrono demande echantillons.xls
+operations_commerciales/GMS/2014/D-REGIONS/GMS LECLERC 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/D-REGIONS/GMS SU REGION  2014-FUTUR MASTER.xls
+
+sent 225377 bytes  received 10698 bytes  67450.00 bytes/sec
+total size is 45972389  speedup is 194.74
+sending incremental file list
+mercuriales/HD/2014/2014 MERCURIALE DIA.xls
+mercuriales/gms/2014/CENTRALES 2014/CASINO 2014.xls
+mercuriales/gms/2014/CONTROLE TARIFS 2014/02-FEVRIER/2014 AUCHAN.FR GAMME TOP CHEF.pdf
+mercuriales/gms/2014/CONTROLE TARIFS 2014/04-AVRIL/2014 GALEC RP CRABE.pdf
+mercuriales/gms/2014/REGIONS  2014/GALEC REGION MERCU AVRIL 2014.xls
+mercuriales/gms/2014/REGIONS  2014/SCHIEVER MERCU 2014.xls
+
+sent 133771 bytes  received 16078 bytes  59939.60 bytes/sec
+total size is 27867338  speedup is 185.97
+sending incremental file list
+
+sent 8871 bytes  received 13 bytes  5922.67 bytes/sec
+total size is 41009664  speedup is 4616.13
+sending incremental file list
+
+sent 6293 bytes  received 46 bytes  4226.00 bytes/sec
+total size is 11666224  speedup is 1840.39
+sending incremental file list
+
+sent 5677 bytes  received 23 bytes  3800.00 bytes/sec
+total size is 128675317  speedup is 22574.62
+sending incremental file list
+
+sent 5353 bytes  received 38 bytes  3594.00 bytes/sec
+total size is 56169881  speedup is 10419.20
+sending incremental file list
+deleting codesoft/Codesoft 7/Auchan  Atac/Auchan/Auchan le traiteur/plateau_asiatique_620g_verso.lab
+deleting codesoft/Codesoft 7/Auchan  Atac/Auchan/Auchan le traiteur/plateau_asiatique_620g_recto.lab
+deleting codesoft/Codesoft 7/Auchan  Atac/Auchan/Auchan le traiteur/plateau_asiatique_360g_verso.lab
+deleting codesoft/Codesoft 7/Auchan  Atac/Auchan/Auchan le traiteur/plateau_asiatique_360g_recto.lab
+codesoft/Codesoft 7/Auchan  Atac/Auchan/Auchan le traiteur/79975_recto.lab
+codesoft/Codesoft 7/Auchan  Atac/Auchan/Auchan le traiteur/79975_verso.bak
+codesoft/Codesoft 7/Auchan  Atac/Auchan/Auchan le traiteur/79975_verso.lab
+codesoft/Codesoft 7/Auchan  Atac/Auchan/Auchan le traiteur/79976_recto.lab
+codesoft/Codesoft 7/Auchan  Atac/Auchan/Auchan le traiteur/79976_verso.bak
+codesoft/Codesoft 7/Auchan  Atac/Auchan/Auchan le traiteur/79976_verso.lab
+
+sent 126534 bytes  received 210 bytes  50697.60 bytes/sec
+total size is 290814547  speedup is 2294.50
+sending incremental file list
+
+sent 19842 bytes  received 78 bytes  13280.00 bytes/sec
+total size is 98501331  speedup is 4944.85
+sending incremental file list
+gofast/sync.ffs_db
+
+sent 4079 bytes  received 109 bytes  2792.00 bytes/sec
+total size is 13716658  speedup is 3275.23

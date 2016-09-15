@@ -26,6 +26,10 @@ class DataFieldToHtmlTextArea extends HtmlTextArea {
                 , $this->getDataField()->getFieldLabel()
                 , $this->getDataField()->getFieldValue()
                 , $this->getDataField()->isFieldDiff()
+                , $this->getDataField()->getDataValidationSuccessful()
+                , $this->getDataField()->getDataWarningMessage()
+                , $this->getDataField()->getIsFieldLock()
+                , $this->getDataField()->getLinkFieldLock()
         );
         $this->getEventsForm()->setOnChangeWithAjaxAutoSave(
                 $this->getDataField()->getTableName()

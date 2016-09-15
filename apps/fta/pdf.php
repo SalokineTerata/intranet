@@ -115,7 +115,7 @@ class temp_xfpdf extends xfpdf {
     function Footer() {
         $globalConfig = new GlobalConfig();
 
-        //Positionnement à 1cm du bas
+        //Positionnement à 1.5cm du bas
         $marge_pied_page = -15;
         $this->SetY($marge_pied_page);
         //Police Arial italique 6
@@ -150,6 +150,7 @@ class temp_xfpdf extends xfpdf {
 //Constructeur
 $pdf = new temp_xfpdf();
 $pdf->AliasNbPages(); //Remplace {nb} par le nombre total de page
+$pdf->SetAutoPageBreak(TRUE,10); //Le second paramètre représente la distance par rapport au bas de la page qui déclenche le saut
 //Déclaration des variables de formatages
 $police_standard = "Arial";
 $t1_police = $police_standard;
@@ -281,7 +282,7 @@ switch (0) {
             $titre = "Envoi Réussi !";
             $message = "Votre mail à bien été envoyé à:<br>$adresse_to";
             $redirection = "";
-            afficher_message($titre, $message, $redirection);
+            Lib::showMessage($titre, $message, $redirection);
             //echo 'Mail sent!';
         }//echo $GLOBALS['smtp_ip'];
         break;

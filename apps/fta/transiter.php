@@ -42,7 +42,9 @@ flush();
 /*
   Initialisation des variables
  */
-$page_action = substr(strrchr($_SERVER['PHP_SELF'], '/'), '1', '-4') . '_post.php';
+$page_default = substr(strrchr($_SERVER['PHP_SELF'], '/'), '1', '-4');
+$page_query = $_SERVER['QUERY_STRING'];
+$page_action = $page_default . '_post.php';
 //   $action = '';                       //Action proposée à la page _post.php
 $method = 'method=POST';             //Pour une url > 2000 caractères, utiliser POST
 $html_table = 'table '              //Permet d'harmoniser les tableaux
@@ -56,11 +58,18 @@ $html_table = 'table '              //Permet d'harmoniser les tableaux
  */
 
 $idFta = Lib::getParameterFromRequest('id_fta');
+$comeback = Lib::getParameterFromRequest('comeback');
 
-
+/**
+ * Initialisation du bouton de retour de synthèse
+ */
+if ($comeback) {
+    $_SESSION["comeback_url"] = $_SERVER["HTTP_REFERER"];
+}
 $action = Lib::getParameterFromRequest('action');
 $demande_abreviation_fta_transition = Lib::getParameterFromRequest('demande_abreviation_fta_transition');
 $syntheseAction = Lib::getParameterFromRequest('synthese_action');
+$checkPost = Lib::getParameterFromRequest('checkPost');
 
 
 /*
@@ -75,17 +84,14 @@ $idUser = $globalConfig->getAuthenticatedUser()->getKeyValue();
 $idFtaWorkflow = $ftaModel->getDataField(FtaModel::FIELDNAME_WORKFLOW)->getFieldValue();
 $arrayIdFtaRoleAcces = FtaRoleModel::getArrayIdFtaRoleByIdUserAndWorkflow($idUser, $idFtaWorkflow);
 $idFtaRole = $arrayIdFtaRoleAcces["0"];
-$ftaView = new FtaView($ftaModel);
-$dataFieldCommentaire = $ftaModel->getDataField(FtaModel::FIELDNAME_COMMENTAIRE_MAJ_FTA);
-$htmlFieldCommentaire = Html::getHtmlObjectFromDataField($dataFieldCommentaire);
-$htmlFieldCommentaire->getAttributesGlobal()->setIsIconNextEnabledToFalse();
-$htmlFieldCommentaire->setHtmlRenderToTable();
-$htmlFieldCommentaire->setIsEditable(TRUE);
-$NOM_commentaire_maj_fta = $htmlFieldCommentaire->getHtmlResult();
-//$NOM_commentaire_maj_fta = str_replace('<>');
+
 /**
  * Affichage commentaire à modifier
  */
+$NOM_commentaire_maj_fta = $ftaModel->getHtmlCommentaireMajFta();
+
+//$NOM_commentaire_maj_fta = str_replace('<>');
+
 /**
  * Recupération des élement de la Fta en cours
  */
@@ -166,6 +172,12 @@ foreach ($arrayFtaTransition as $rowsFtaTransition) {
     } else {
         $selected = '';
     }
+    /**
+     * Si une action n'est pas renseigné alors on affiche la première action possible
+     */
+    if (!$action) {
+        $action = $rowsFtaTransition[FtaTransitionModel::FIELDNAME_ABREVIATION_FTA_TRANSITION];
+    }
 
     $tableau_transition .='<option value=\'' . $rowsFtaTransition[FtaTransitionModel::FIELDNAME_ABREVIATION_FTA_TRANSITION] . '\' ' . $selected . '>'
             . $rowsFtaTransition[FtaTransitionModel::FIELDNAME_NOM_USUEL_FTA_TRANSITION] . '</option>'
@@ -182,28 +194,80 @@ $tableau_transition.='</select>';
 
 //Tableau des chapitres
 if ($action == FtaEtatModel::ETAT_ABREVIATION_VALUE_MODIFICATION or $action == 'W') {
+    /**
+     * Changement de la page d'action
+     */
+    if (!$checkPost) {
+        $page_action = "transiter_fiche.php";
+    } else {
+        $affichageCommentaire = " <tr>
+            <td class=titre_principal>
+                Historiques des commentaire de mise à jour
+            </td>
+        </tr>
+        <tr  class=contenu>
+     
+           " . $NOM_commentaire_maj_fta . "
+
+        </tr>";
+    }
+    /**
+     * Affichage de la date d'échéances
+     */
+    $ftaModel->setIsEditable(Chapitre::EDITABLE);
+    $dateEcheanceFtaHtml = $ftaModel->getHtmlDateEcheance(TRUE);
     $tableau_chapitre = '<' . $html_table . '>'
-            . '<tr class=titre><td>Liste des Chapitres pouvant être mis à jour</td></tr>'
+            . '<tr class=titre><td>' . UserInterfaceLabel::FR_TRANSITION_MODIFICATION . '</td></tr>'
             . '<tr><td><' . $html_table . '>'
     ;
+    if (!FtaRoleModel::isGestionnaire($idFtaRole)) {
+        $reqRestrictionListeChapitre = ' AND ' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_ROLE . '=' . $idFtaRole;
+    }
+    if ($action == FtaEtatModel::ETAT_ABREVIATION_VALUE_MODIFICATION and $abreviationFtaEtat == FtaEtatModel::ETAT_ABREVIATION_VALUE_RETIRE) {
+        $reqRestrictionListeChapitre = ' AND ' . FtaWorkflowStructureModel::TABLENAME . "." . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_CHAPITRE . '=' . FtaChapitreModel::ID_CHAPITRE_IDENTITE;
+    }
 
-    $arrrayFtaChapitre = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
-                    'SELECT ' . FtaWorkflowStructureModel::TABLENAME . '.' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_CHAPITRE . ',' . FtaChapitreModel::FIELDNAME_NOM_USUEL_CHAPITRE
-                    . ' FROM ' . FtaChapitreModel::TABLENAME . ',' . FtaWorkflowStructureModel::TABLENAME
-                    . ' WHERE ' . FtaWorkflowStructureModel::TABLENAME . '.' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_CHAPITRE
-                    . '=' . FtaChapitreModel::TABLENAME . '.' . FtaChapitreModel::KEYNAME
-                    . ' AND ' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_WORKFLOW . '=' . $idFtaWorkflow
-                    . ' AND ' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_PROCESSUS . '<>' . FtaProcessusModel::PROCESSUS_PUBLIC
-                    . ' ORDER BY ' . FtaChapitreModel::FIELDNAME_NOM_USUEL_CHAPITRE
+    $reqListesChapitre = 'SELECT ' . FtaWorkflowStructureModel::TABLENAME . '.' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_CHAPITRE
+            . ',' . FtaChapitreModel::FIELDNAME_NOM_USUEL_CHAPITRE
+            . ' FROM ' . FtaChapitreModel::TABLENAME . ',' . FtaWorkflowStructureModel::TABLENAME
+            . ' WHERE ' . FtaWorkflowStructureModel::TABLENAME . '.' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_CHAPITRE
+            . '=' . FtaChapitreModel::TABLENAME . '.' . FtaChapitreModel::KEYNAME
+            . ' AND ' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_WORKFLOW . '=' . $idFtaWorkflow
+            . ' AND ' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_PROCESSUS . '<>' . FtaProcessusModel::PROCESSUS_PUBLIC
+            . $reqRestrictionListeChapitre
+            . ' ORDER BY ' . FtaChapitreModel::FIELDNAME_NOM_USUEL_CHAPITRE;
+    $arrrayFtaChapitre = DatabaseOperation::convertSqlStatementWithoutKeyToArray($reqListesChapitre
     );
+    /**
+     * On attribut un code couleur selon les éléments sélectionner à dévalider     * 
+     */
     foreach ($arrrayFtaChapitre as $rowsChapitre) {
+        if (Lib::getParameterFromRequest(FtaChapitreModel::FIELDNAME_NOM_CHAPITRE . '_' . $rowsChapitre[FtaWorkflowStructureModel::FIELDNAME_ID_FTA_CHAPITRE]) == 1) {
+            /**
+             * Elements sélectionner par l'utilisateur
+             */
+            $checked = 'checked';
+            $bgcolor = TableauFicheView::HTML_CELL_BGCOLOR_VALIDATE;
+            $din = "";
+        } elseif (Lib::getParameterFromRequest(FtaChapitreModel::FIELDNAME_NOM_CHAPITRE . '_' . $rowsChapitre[FtaWorkflowStructureModel::FIELDNAME_ID_FTA_CHAPITRE]) == 2) {
+            /**
+             * Elements grisé en conséquence de la sélection par l'utilisateur
+             */
+            $checked = 'checked';
+            $din = TableauFicheView::HTML_TEXT_COLOR_DIN;
+            $bgcolor = TableauFicheView::HTML_CELL_BGCOLOR_DEFAULT;
+        } else {
+            $checked = "";
+            $bgcolor = "";
+            $din = "";
+        }
         $tableau_chapitre.= '<tr>'
-                . '<td><input type=checkbox name=' . FtaChapitreModel::FIELDNAME_NOM_CHAPITRE . '-' . $rowsChapitre[FtaChapitreModel::KEYNAME] . ' value=1 /></td>'
-                . '<td>' . $rowsChapitre[FtaChapitreModel::FIELDNAME_NOM_USUEL_CHAPITRE] . '</td>'
+                . '<td><input type=checkbox   name=' . FtaChapitreModel::FIELDNAME_NOM_CHAPITRE . '_' . $rowsChapitre[FtaChapitreModel::KEYNAME] . ' value=1  ' . $checked . '/></td>'
+                . '<td ' . $bgcolor . '><font  ' . $din . '>' . $rowsChapitre[FtaChapitreModel::FIELDNAME_NOM_USUEL_CHAPITRE] . '</font></td>'
                 . '</tr>'
         ;
     }
-    $tableau_chapitre.= '</table></td></tr>'
+    $tableau_chapitre.= $dateEcheanceFtaHtml . '</table></td></tr>'
             . '</table>'
     ;
 }
@@ -221,12 +285,12 @@ if ($action == FtaEtatModel::ETAT_ABREVIATION_VALUE_MODIFICATION or $action == '
 //}
 //Validation_matiere_premiere
 //Boris 2005-09-15: risque de mettre une date antérieure à la dernière date de mise à jour
-$nom_date = 'date_derniere_maj_fta';
-//$nom_date='date_dernier_changement_etat_new';
-$nom_liste = 'selection_' . $nom_date;
-$date_defaut = date('Y-m-d');
-$$nom_liste = selection_date_pour_mysql($nom_date, $date_defaut);
-$selection_date_derniere_maj_fta;
+//$nom_date = 'date_derniere_maj_fta';
+////$nom_date='date_dernier_changement_etat_new';
+//$nom_liste = 'selection_' . $nom_date;
+//$date_defaut = date('d-m-Y');
+//$$nom_liste = selection_date_pour_mysql($nom_date, $date_defaut);
+//$selection_date_derniere_maj_fta;
 
 /* * *********
   Fin Code PHP
@@ -239,19 +303,21 @@ echo '
 
 <form ' . $method . ' action=\'' . $page_action . '\' name=\'form_action\'>
      <!input type=hidden name=action value=' . $action . '>
+     <input type=hidden name=current_page value=' . $page_default . '.php >
+     <input type=hidden name=current_query value=' . $page_query . ' >
      <input type=hidden name=abreviation_fta_etat value=' . $abreviationFtaEtat . '>
      <input type=hidden name=id_fta value=' . $idFta . '>
      <input type=hidden name=id_fta_role value=' . $idFtaRole . '>
      <input type=hidden name=id_fta_workflow value=' . $idFtaWorkflow . '>
      <input type=hidden name=id_dossier_fta value=' . $idDossierFta . '>
-     <input type=hidden name=commentaire_maj_fta value=`' . $commentaireMajFta . '`>
+     <input type=hidden name=' . FtaModel::TABLENAME . '_' . FtaModel::FIELDNAME_COMMENTAIRE_MAJ_FTA . '_' . $idFta . ' value=`' . $commentaireMajFta . '`>
      <input type=hidden name=demande_abreviation_fta_transition value=' . $demande_abreviation_fta_transition . '>
      <input type=hidden name=synthese_action value=' . $syntheseAction . '>
     <' . $html_table . '>
         <tr class=titre_principal>
             <td>
 
-                Transiter l\'Etat d\'une Fiche Technique Article
+                ' . UserInterfaceMessage::FR_TRANSITION_FTA_TITLE . '
 
             </td>
         </tr>
@@ -260,11 +326,7 @@ echo '
 
                 <img src=../lib/images/transiter.png>
                 &nbsp&nbsp&nbsp&nbsp
-                La transition de l\'état d\'une fiche permet de changer son état tout en laissant le système contrôler la cohérence et la version de la fiche.<br>
-                <br>
-                Suivant l\'état de votre fiche, seuls certains états sont accessibles. Vous pouvez considérer la transition de l\'état d\'une fiche comme un contrôle sur son cycle de vie.<br>
-                <br>
-
+               ' . UserInterfaceMessage::FR_TRANSITION_FTA . '
             </td>
         </tr>
         <tr class=titre_principal>
@@ -313,16 +375,7 @@ echo '
             </td>
         </tr>
     </table>
-        <tr>
-            <td class=titre_principal>
-                Historiques des commentaire de mise à jour
-            </td>
-        </tr>
-        <tr>
-     
-           ' . $NOM_commentaire_maj_fta . '
-
-        </tr>
+       ' . $affichageCommentaire . '
         <tr>
             <td>
           <center>

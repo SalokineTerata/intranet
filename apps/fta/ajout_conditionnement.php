@@ -24,7 +24,6 @@ switch ($output) {
         require_once '../inc/main.php';
         print_page_begin($disable_full_page, $menu_file);
         flush();
-
 }//Fin de la sélection du mode d'affichage de la page
 
 
@@ -61,9 +60,17 @@ $page_reload = Lib::getParameterFromRequest('page_reload');
 //Initialisation des modele
 $ftaModel = new FtaModel($idFta);
 $annexeEmballageGroupeTypeModel = new AnnexeEmballageGroupeTypeModel($idAnnexeEmballageGroupeType);
-$annexeEmballageGroupeModel = new AnnexeEmballageGroupeModel($idAnnexeEmballageGroupe);
 $annexeEmballageModel = new AnnexeEmballageModel($idAnnexeEmballage);
+$annexeEmballageGroupeModel = new AnnexeEmballageGroupeModel($idAnnexeEmballageGroupe);
 
+/**
+ * jQuery
+ */
+//if (($idAnnexeEmballage and $idAnnexeEmballageGroupeType) and ! $idAnnexeEmballageGroupe) {
+//    $idAnnexeEmballageGroupe = AnnexeEmballageGroupeModel::getIdAnnexeEmballageGroupeByIdAnnexeEmballageAndIdAnnexeGroupeType($idAnnexeEmballage, $idAnnexeEmballageGroupeType);
+//
+//    $annexeEmballageGroupeModel = new AnnexeEmballageGroupeModel($idAnnexeEmballageGroupe);
+//}
 
 /*
   Récupération des données MySQL
@@ -100,22 +107,28 @@ switch ($action) {
         $nom_defaut = AnnexeEmballageGroupeModel::KEYNAME;
         $liste_emballage_groupe = DatabaseDescription::getFieldDocLabel(AnnexeEmballageGroupeModel::TABLENAME, AnnexeEmballageGroupeModel::FIELDNAME_NOM_ANNEXE_EMBALLAGE_GROUPE)
                 . '</td><td>'
-                . AccueilFta::afficherRequeteEnListeDeroulante($requete, $id_defaut, $nom_defaut,TRUE);
-
-
+                . AccueilFta::afficherRequeteEnListeDeroulante($requete, $id_defaut, $nom_defaut, TRUE);
         $bloc.=$liste_emballage_groupe . '</tr></table><' . $html_table . '><tr class=titre_principal><td width=\'50%\'>';
+        /**
+         * Fonction autocomplete affichant la liste des emballage suivant le type choisie (UVF - Colis - Palette)
+         */
+//        $bloc.="<input onclick=listeEmballage(" . $idAnnexeEmballageGroupeType . ") type=text size=100 id=" . AnnexeEmballageModel::TABLENAME . " name=" . AnnexeEmballageModel::TABLENAME . " />
+//    <input type=hidden name=" . AnnexeEmballageModel::KEYNAME . " id=" . AnnexeEmballageModel::KEYNAME . " />";
 
         break;
 
+    /**
+     * Etape 2 
+     */
     case 'etape2': //Sélection d'une FTE
         //Création de la liste prédéfini des Emballages
         //Recherche du site de production de la fta actuelle
         //Construction des éléments de requêtes communs
         $common_select = 'SELECT DISTINCT ' . AnnexeEmballageModel::TABLENAME . '.' . AnnexeEmballageModel::KEYNAME
                 . ', CONCAT_WS(\'\', ' . FteFournisseurModel::FIELDNAME_NOM_FTE_FOURNISSEUR . ', \' : \',' . AnnexeEmballageModel::FIELDNAME_REFERENCE_FOURNISSEUR_ANNEXE_EMBALLAGE
-                . ',\' (\', ' . AnnexeEmballageModel::FIELDNAME_HAUTEUR_ANNEXE_EMBALLAGE
-                . ', \'x\', ' . AnnexeEmballageModel::FIELDNAME_LONGUEUR_ANNEXE_EMBALLAGE
-                . ', \'x\', ' . AnnexeEmballageModel::FIELDNAME_LARGEUR_ANNEXE_EMBALLAGE . ', \')\' ) AS INTITULE '
+                . ',\' (\', ' . AnnexeEmballageModel::FIELDNAME_LONGUEUR_ANNEXE_EMBALLAGE
+                . ', \'x\', ' . AnnexeEmballageModel::FIELDNAME_LARGEUR_ANNEXE_EMBALLAGE
+                . ', \'x\', ' . AnnexeEmballageModel::FIELDNAME_HAUTEUR_ANNEXE_EMBALLAGE . ', \')\' ) AS INTITULE '
         ;
         $common_from = ' FROM ' . AnnexeEmballageModel::TABLENAME . ',' . FteFournisseurModel::TABLENAME;
         $common_where = ' WHERE ' . AnnexeEmballageModel::TABLENAME . '.' . AnnexeEmballageModel::FIELDNAME_ID_ANNEXE_EMBALLAGE_GROUPE
@@ -159,7 +172,7 @@ switch ($action) {
         $req_liste_emballage;
         $bloc .=$title
                 . ': <br><br>'
-                . AccueilFta::afficherRequeteEnListeDeroulante($req_liste_emballage, $id_defaut, $nom_liste,TRUE);
+                . AccueilFta::afficherRequeteEnListeDeroulante($req_liste_emballage, $id_defaut, $nom_liste, TRUE);
         $bloc .='</td><tr>';
 
         $bloc .='<tr><td>'
@@ -176,12 +189,13 @@ switch ($action) {
 
         $annexeEmballageModel->setIsEditable($is_editable);
 
-        //Hauteur de l'emballage
-        $bloc.=$annexeEmballageModel->getHtmlDataField(AnnexeEmballageModel::FIELDNAME_HAUTEUR_ANNEXE_EMBALLAGE);
+
         //Longueur de l'emballage
         $bloc.=$annexeEmballageModel->getHtmlDataField(AnnexeEmballageModel::FIELDNAME_LONGUEUR_ANNEXE_EMBALLAGE);
         //Largeur de l'emballage
         $bloc.=$annexeEmballageModel->getHtmlDataField(AnnexeEmballageModel::FIELDNAME_LARGEUR_ANNEXE_EMBALLAGE);
+        //Hauteur de l'emballage
+        $bloc.=$annexeEmballageModel->getHtmlDataField(AnnexeEmballageModel::FIELDNAME_HAUTEUR_ANNEXE_EMBALLAGE);
         //Poids de l'emballage           
         $bloc.=$annexeEmballageModel->getHtmlDataField(AnnexeEmballageModel::FIELDNAME_POIDS_ANNEXE_EMBALLAGE);
 
@@ -303,7 +317,7 @@ switch ($output) {
              <tr class=titre_principal><td>
 
                  ' . $ftaModel->getDataField(FtaModel::FIELDNAME_DESIGNATION_COMMERCIALE)->getFieldValue()
-        . ' - ' . $ftaModel->getDataField(FtaModel::FIELDNAME_DOSSIER_FTA)->getFieldValue()
+        . ' - ' . $ftaModel->getDossierFta()
         . 'v' . $ftaModel->getDataField(FtaModel::FIELDNAME_VERSION_DOSSIER_FTA)->getFieldValue() . '
                  <br>
                  Ajout d\'un nouvel ' . $annexeEmballageGroupeTypeModel->getDataField(AnnexeEmballageGroupeTypeModel::FIELDNAME_NOM_ANNEXE_EMBALLAGE_GROUPE_TYPE)->getFieldValue()

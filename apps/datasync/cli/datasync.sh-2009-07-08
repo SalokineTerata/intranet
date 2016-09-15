@@ -1,0 +1,45 @@
+#!/bin/sh
+CHEMIN="$(dirname $0)"
+MAILTO="InformatiqueSupport.Avignon@agis-sa.fr"
+MAIL=/tmp/save.mail.tmp
+LOG_ARCHIVE_FILE=/u1/Admin/Log/datasync`date +%m-%d`.log
+
+#Recherche pour savoir si on est dans "intranet" ou "intranet.dev"
+case "$CHEMIN" in *intranet.dev*) SITE=".dev" ;; esac
+
+case $1 in
+  -d | -w | -v )
+	LOG="/data/var/www/system/log/datasync$SITE.log"
+	>$LOG
+	>$MAIL
+	>$LOG_ARCHIVE_FILE
+	
+  	#Génération et mise à jour des scripts utilisés
+	echo -n "Démarrage : " >> $MAIL
+	date >> $MAIL
+	lynx -dump intranet$SITE.agis.fr/datasync/index.php?mode=$1 >> $LOG
+	
+	$CHEMIN/netcopy.sh >> $LOG
+	echo -n "Arrêt     : " >> $MAIL
+	date >> $MAIL
+
+	# RAPPORT DE SAUVEGARDE
+	# ---------------------
+	cat $MAIL $LOG >> $LOG_ARCHIVE_FILE
+	#cat $LOG | uuencode rapport.log | tee -a $MAIL
+	#cat $MAIL | mail -s "[AVI1203]: Rapport Intranet/DataSync ($1)" $MAILTO
+
+
+    ;;
+
+
+  *)
+    	echo "Usage: $0 [OPTIONS]"
+	echo "  OPTIONS LIST:"
+	echo "  -d  daily network copy"
+	echo "  -w  weekly network copy"
+	echo "  -v  database virus copy"
+    ;;
+esac
+
+

@@ -20,6 +20,10 @@ class DataFieldToHtmlListBoolean extends HtmlListBoolean {
                 , $this->getDataField()->getFieldValue()
                 , $this->getDataField()->isFieldDiff()
                 , HtmlListBoolean::getArrayListContentBoolean()
+                , $this->getDataField()->getDataValidationSuccessful()
+                , $this->getDataField()->getDataWarningMessage()
+                , $this->getDataField()->getIsFieldLock()
+                , $this->getDataField()->getLinkFieldLock()
         );
 
         $this->getEventsForm()->setOnChangeWithAjaxAutoSave(
@@ -28,11 +32,16 @@ class DataFieldToHtmlListBoolean extends HtmlListBoolean {
                 , $this->getDataField()->getKeyValue()
                 , $this->getDataField()->getFieldName()
         );
+
+        /**
+         * Détermine si le datafield encours doit être non éditiable
+         */
+        $this->setContentLocked($paramDataField->getFieldsToLock());
     }
 
     public function getHtmlViewedContent() {
         $return = '';
-        if ($this->selected_value) {
+        if ($this->getSelectedValue()) {
             $return = Html::showValue(self::YES_LABEL);
         } else {
             $return = Html::showValue(self::NO_LABEL);

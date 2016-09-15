@@ -28,6 +28,8 @@ class FtaChapitreModel extends AbstractModel {
     const KEYNAME = 'id_fta_chapitre';
     const FIELDNAME_NOM_CHAPITRE = 'nom_fta_chapitre';
     const FIELDNAME_NOM_USUEL_CHAPITRE = 'nom_usuel_fta_chapitre';
+    const ID_CHAPITRE_IDENTITE = '1';
+    const NOM_CHAPITRE_DUREE_DE_VIE = 'duree_de_vie';
 
     public function __construct($paramId = NULL, $paramIsCreateRecordsetInDatabaseIfKeyDoesntExist = AbstractModel::DEFAULT_IS_CREATE_RECORDSET_IN_DATABASE_IF_KEY_DOESNT_EXIST) {
         parent::__construct($paramId, $paramIsCreateRecordsetInDatabaseIfKeyDoesntExist);
@@ -45,34 +47,25 @@ class FtaChapitreModel extends AbstractModel {
      * @param type $option
      * @return int
      */
-    public static function BuildCorrectionChapitre($paramIdFta, $paramIdChapitre, $option) {
+    public static function buildCorrectionChapitre($paramIdFta, $paramIdChapitre, $option) {
         $option['no_message_ecran'];                       //0=affichage à l'ecran, 1=rien
         $option['correction_fta_suivi_projet'];            //Commentaire justifiant la correction du chapitre
+        $option['mail_gestionnaire'];            //Informe le gestionnaire de la Fta de la mise en correction de sa Fta
         $HtmlResult = new HtmlResult2();
 
         $globalConfig = new GlobalConfig();
         UserModel::checkUserSessionExpired($globalConfig);
-
+        //Récupération des informations préalables
+        //Nom de l'assistante de projet responsable:
         $idUser = $globalConfig->getAuthenticatedUser()->getKeyValue();
+        $mailExpediteur = $globalConfig->getAuthenticatedUser()->getDataField(UserModel::FIELDNAME_MAIL)->getFieldValue();
+        $nomPrenom = $globalConfig->getAuthenticatedUser()->getPrenomNom();
         $idFtaWorkflowStructure = FtaWorkflowStructureModel::getIdFtaWorkflowStructureByIdFtaAndIdChapitre(
                         $paramIdFta, $paramIdChapitre);
         $ftaWorkflowStructureModel = new FtaWorkflowStructureModel($idFtaWorkflowStructure, $paramIdChapitre);
         $idFtaProcessus = $ftaWorkflowStructureModel->getDataField(FtaWorkflowStructureModel::FIELDNAME_ID_FTA_PROCESSUS)->getFieldValue();
+        $idFtaWorkflow = $ftaWorkflowStructureModel->getDataField(FtaWorkflowStructureModel::FIELDNAME_ID_FTA_WORKFLOW)->getFieldValue();
 
-
-        //Récupération des informations préalables
-        //Nom de l'assistante de projet responsable:
-        $array = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
-                        'SELECT ' . UserModel::FIELDNAME_PRENOM . ',' . UserModel::FIELDNAME_NOM
-                        . ', ' . UserModel::FIELDNAME_MAIL
-                        . ' FROM ' . UserModel::TABLENAME
-                        . ' WHERE ' . UserModel::KEYNAME
-                        . '=\'' . $idUser . '\' ');
-        foreach ($array as $rows) {
-            $prenom = $rows[UserModel::FIELDNAME_PRENOM];
-            $nom = $rows[UserModel::FIELDNAME_NOM];
-            $mailExpediteur = $rows[UserModel::FIELDNAME_MAIL];
-        }
 
         $arrayFtaSuiviCorrection = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
                         'SELECT ' . FtaSuiviProjetModel::FIELDNAME_CORRECTION_FTA_SUIVI_PROJET . ',' . FtaSuiviProjetModel::FIELDNAME_NOTIFICATION_FTA_SUIVI_PROJET
@@ -86,13 +79,11 @@ class FtaChapitreModel extends AbstractModel {
                 $notificationFtaSuiviProjet = $rowsFtaSuiviCorrection[FtaSuiviProjetModel::FIELDNAME_CORRECTION_FTA_SUIVI_PROJET];
             }
         }
-        //Intégration du commentaire de la correction
-        $newCorrectionFtaSuiviProjet.= $current_correction_fta_suivi_projet
-                . '<br/><br/>'
-                . date('Y-m-d') . ': '
-                . $prenom . ' ' . $nom . ': <br/>'//table salaries
-                . $option[FtaSuiviProjetModel::FIELDNAME_CORRECTION_FTA_SUIVI_PROJET]
-        ;
+        //Intégration du commentaire de la correction        
+        if ($current_correction_fta_suivi_projet and $option[FtaSuiviProjetModel::FIELDNAME_CORRECTION_FTA_SUIVI_PROJET]) {
+            $fullComment = $option[FtaSuiviProjetModel::FIELDNAME_CORRECTION_FTA_SUIVI_PROJET] . '\n\n' . $current_correction_fta_suivi_projet;
+            $newCorrectionFtaSuiviProjet = FtaController::getComment("Correction d'une Fta", $nomPrenom, $fullComment);
+        }
 //        $newCorrectionFtaSuiviProjet = mysql_real_escape_string($newCorrectionFtaSuiviProjet);
         $newCorrectionFtaSuiviProjet = str_replace("<br/>", "\n", $newCorrectionFtaSuiviProjet);
 
@@ -113,7 +104,7 @@ class FtaChapitreModel extends AbstractModel {
 
         // FtaProcessusDelaiModel::BuildFtaProcessusValidationDelai($paramIdFta, $idFtaProcessus, $idFtaWorkflow);
         //Dévalidation des processus suivants
-        $return = FtaChapitreModel::BuildDevalidationChapitre($paramIdFta, $idFtaProcessus, $HtmlResult);
+        $return = FtaChapitreModel::buildDevalidationChapitre($paramIdFta, $idFtaProcessus, $HtmlResult);
 
         /**
          * Actualisation du pourcentage de validation de la Fta
@@ -144,6 +135,7 @@ class FtaChapitreModel extends AbstractModel {
                                 . ' WHERE ' . FtaWorkflowStructureModel::TABLENAME . '.' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_PROCESSUS
                                 . '=' . FtaProcessusModel::TABLENAME . '.' . FtaProcessusModel::KEYNAME
                                 . ' AND ' . FtaWorkflowStructureModel::TABLENAME . '.' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_PROCESSUS . '=' . $idFtaProcessus
+                                . ' AND ' . FtaWorkflowStructureModel::TABLENAME . '.' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_WORKFLOW . '=' . $idFtaWorkflow
                 );
                 if ($arrayFtaProcessus) {
                     foreach ($arrayFtaProcessus as $rowsFtaProcessus) {
@@ -156,23 +148,21 @@ class FtaChapitreModel extends AbstractModel {
             }
             $titre = 'Liste des Processus dévalidés';
             if (!$option['no_message_ecran']) {
-                afficher_message($titre, $message, $redirection);
+                Lib::showMessage($titre, $message, $redirection);
             }
 
             //Envoi des mails
-            $show_din = FtaModel::ShowDin($paramIdFta);
-            $name = $show_din;
+            $show_din = FtaModel::showDin($paramIdFta);
+            $sujetElements = $show_din;
 
             if ($return['mail']) {
                 $return['mail'] = array_unique($return['mail']);
                 foreach ($return['mail'] as $mail) {
-                    $sujetmail = 'FTA/Correction: ' . $name;
+                    $sujetmail = 'FTA/Correction: ' . $sujetElements;
                     $destinataire = $mail;
-                    $expediteur = $prenom . ' ' . $nom . ' <' . $mailExpediteur . '>';
+                    $expediteur = $nomPrenom . ' <' . $mailExpediteur . '>';
                     $text = 'Vos chapitres viennent d\'être dévalidés suite à une correction apportée par '
-                            . $prenom
-                            . ' '
-                            . $nom . '.\n\n'
+                            . $nomPrenom . '.\n\n'
                             . 'OBJET DE LA CORRECTION:\n'
                             . '\t' . stripslashes($option[FtaSuiviProjetModel::FIELDNAME_CORRECTION_FTA_SUIVI_PROJET])
                     ;
@@ -180,6 +170,28 @@ class FtaChapitreModel extends AbstractModel {
                     if ($notificationFtaSuiviProjet) {
                         envoismail($sujetmail, $text, $destinataire, $expediteur, $typeMail);
                     }
+                }
+            }
+            /**
+             * Génération d'un mail informant le gestionnaire de la Fta
+             */
+            if ($option['mail_gestionnaire']) {
+                $ftaModel = new FtaModel($paramIdFta);
+                $idGestionnaire = $ftaModel->getModelCreateur()->getKeyValue();
+                //Tableau des id intranet actions Fta
+                $arrayAction = IntranetDroitsAccesModel::getArrayIdIntranetActionWithAccesRightsToFtaByUser($idGestionnaire);
+                $checkDiffusion = FtaController::isValueInArray(IntranetNiveauAccesModel::NIVEAU_FTA_DIFFUSION, $arrayAction);
+                if ($idGestionnaire <> $idUser and $checkDiffusion) {
+                    $mailGestionnaire = $ftaModel->getModelCreateur()->getDataField(UserModel::FIELDNAME_MAIL)->getFieldValue();
+                    $sujetmail = 'FTA/Mise en Correction: ' . $sujetElements . ' par ' . $nomPrenom;
+                    $destinataire = $mailGestionnaire;
+                    $expediteur = $nomPrenom . ' <' . $mailExpediteur . '>';
+                    $text = 'Une nouvelle version vient d\'être crée, la correction apportée par '
+                            . $nomPrenom . ' est au sujet de :\n'
+                            . '\t' . stripslashes($option[FtaSuiviProjetModel::FIELDNAME_CORRECTION_FTA_SUIVI_PROJET])
+                    ;
+                    $typeMail = 'CorrectionValidation2Modification';
+                    envoismail($sujetmail, $text, $destinataire, $expediteur, $typeMail);
                 }
             }
         }//Fin du traitement des processus suivants
@@ -194,7 +206,7 @@ class FtaChapitreModel extends AbstractModel {
      * @param type $htmlResult
      * @return type
      */
-    public static function BuildDevalidationChapitre($paramIdFta, $paramIdProcessus, $htmlResult) {
+    public static function buildDevalidationChapitre($paramIdFta, $paramIdProcessus, $htmlResult) {
         //Déclarion des variables
         $modelFta = new FtaModel($paramIdFta);
         $id_fta_workflow = $modelFta->getDataField(FtaModel::FIELDNAME_WORKFLOW)->getFieldValue();
@@ -228,26 +240,7 @@ class FtaChapitreModel extends AbstractModel {
         DatabaseOperation::execute($reqDenotification);
 
         //Recherches des processus suivants
-        $arrayProcessusCycle = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
-                        'SELECT DISTINCT ' . FtaProcessusCycleModel::FIELDNAME_PROCESSUS_NEXT . ',' . FtaProcessusModel::FIELDNAME_MULTISITE_FTA_PROCESSUS
-                        . ' FROM ' . FtaProcessusCycleModel::TABLENAME . ',' . FtaProcessusModel::TABLENAME
-                        . ',' . FtaSuiviProjetModel::TABLENAME . ',' . FtaWorkflowStructureModel::TABLENAME
-                        . ' WHERE ' . FtaProcessusCycleModel::FIELDNAME_FTA_ETAT . '=\'' . $abreviation_fta_etat . '\' '
-                        . ' AND ' . FtaProcessusModel::TABLENAME . '.' . FtaProcessusModel::KEYNAME
-                        . '=' . FtaProcessusCycleModel::TABLENAME . '.' . FtaProcessusCycleModel::FIELDNAME_PROCESSUS_NEXT
-                        . ' AND ' . FtaWorkflowStructureModel::TABLENAME . '.' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_PROCESSUS
-                        . '=' . FtaProcessusCycleModel::TABLENAME . '.' . FtaProcessusCycleModel::FIELDNAME_PROCESSUS_NEXT
-                        . ' AND ' . FtaWorkflowStructureModel::TABLENAME . '.' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_WORKFLOW
-                        . '=' . FtaProcessusCycleModel::TABLENAME . '.' . FtaProcessusCycleModel::FIELDNAME_WORKFLOW
-                        . ' AND ' . FtaWorkflowStructureModel::TABLENAME . '.' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_CHAPITRE
-                        . '=' . FtaSuiviProjetModel::TABLENAME . '.' . FtaSuiviProjetModel::FIELDNAME_ID_FTA_CHAPITRE
-                        . ' AND ' . FtaProcessusCycleModel::FIELDNAME_PROCESSUS_INIT . '=\'' . $paramIdProcessus . '\' '
-                        . ' AND ' . FtaProcessusCycleModel::FIELDNAME_PROCESSUS_NEXT . ' IS NOT NULL'
-                        . ' AND ' . FtaSuiviProjetModel::FIELDNAME_SIGNATURE_VALIDATION_SUIVI_PROJET . ' <> 0'
-                        . ' AND ' . FtaSuiviProjetModel::FIELDNAME_ID_FTA . '=' . $paramIdFta
-                        . ' AND ' . FtaWorkflowStructureModel::TABLENAME . '.' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_WORKFLOW . '=' . $id_fta_workflow
-        );
-
+        $arrayProcessusCycle = FtaProcessusCycleModel::getArrayProccusNextValidateFromIdFta($paramIdFta, $id_fta_workflow, $abreviation_fta_etat, $paramIdProcessus);
         //Enregistrement du processus
         $htmlResult->setProcessus($paramIdProcessus);
 
@@ -281,9 +274,7 @@ class FtaChapitreModel extends AbstractModel {
                         . ' AND ' . FtaSuiviProjetModel::TABLENAME . '.' . FtaSuiviProjetModel::FIELDNAME_ID_FTA . ' = \'' . $paramIdFta . '\' ) )'
                 ;
                 DatabaseOperation::execute($reqDevalidation);
-                /**
-                 * rejouter le workflow
-                 */
+
                 if ($reqDevalidation) { //Si le processus a été dévalidé, alors on informe
                     //Dénotification
                     $reqDenotification = 'UPDATE ' . FtaWorkflowStructureModel::TABLENAME . ',' . FtaSuiviProjetModel::TABLENAME
@@ -309,7 +300,7 @@ class FtaChapitreModel extends AbstractModel {
                             . ',' . FtaActionRoleModel::TABLENAME
                             . ' WHERE ( ' . FtaWorkflowStructureModel::TABLENAME . '.' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_ROLE
                             . '=' . FtaActionRoleModel::TABLENAME . '.' . FtaActionRoleModel::FIELDNAME_ID_FTA_ROLE
-                            . ' AND ' . FtaActionRoleModel::TABLENAME . '.' . FtaActionRoleModel::FIELDNAME_ID_FTA_WROKFLOW
+                            . ' AND ' . FtaActionRoleModel::TABLENAME . '.' . FtaActionRoleModel::FIELDNAME_ID_FTA_WORKFLOW
                             . '=' . FtaWorkflowStructureModel::TABLENAME . '.' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_WORKFLOW
                             . ' AND ' . FtaActionRoleModel::TABLENAME . '.' . FtaActionRoleModel::FIELDNAME_ID_INTRANET_ACTIONS
                             . '=' . IntranetActionsModel::TABLENAME . '.' . IntranetActionsModel::KEYNAME
@@ -323,6 +314,7 @@ class FtaChapitreModel extends AbstractModel {
                             . '=' . FtaWorkflowStructureModel::TABLENAME . '.' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_CHAPITRE . ') '
                             . ' AND ' . IntranetDroitsAccesModel::TABLENAME . '.' . IntranetDroitsAccesModel::FIELDNAME_NIVEAU_INTRANET_DROITS_ACCES . ' = ' . IntranetNiveauAccesModel::NIVEAU_GENERIC_TRUE
                             . ' AND ' . FtaSuiviProjetModel::TABLENAME . '.' . FtaSuiviProjetModel::FIELDNAME_ID_FTA . ' = \'' . $paramIdFta . '\'  '
+                            . ' AND ' . UserModel::TABLENAME . '.' . UserModel::FIELDNAME_ACTIF . ' = \'' . UserModel::USER_ACTIF . '\'  '
                             . ' GROUP BY ' . UserModel::TABLENAME . '.' . UserModel::FIELDNAME_MAIL
                     ;
                     /**
@@ -346,7 +338,7 @@ class FtaChapitreModel extends AbstractModel {
                 BuildFtaProcessusValidationDelai($paramIdFta, $paramIdProcessus);
 
                 //Appel récursif de la fonction pour continuer à dévalider les processus suivants
-                FtaChapitreModel::BuildDevalidationChapitre($paramIdFta, $paramIdProcessus, $htmlResult);
+                FtaChapitreModel::buildDevalidationChapitre($paramIdFta, $paramIdProcessus, $htmlResult);
             }
         }
         //Retour de la fonction
@@ -372,6 +364,57 @@ class FtaChapitreModel extends AbstractModel {
         foreach ($rarrayChapitreDefaut as $rowsChapitreDefaut) {
             return $rowsChapitreDefaut[FtaProcessusModel::KEYNAME];
         }
+    }
+
+    /**
+     * On obtient le tableau des id Fta chapitre pour lesquelle l'utilisateur connecté à les droits d'accès
+     * @param array $paramArrayProcessus
+     */
+    public static function getIdFtaChapitreByArrayProcessusAndWorkflow($paramArrayProcessus, $paramIdFtaWorkflow) {
+        $arrayIdFtaChapitre = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
+                        'SELECT DISTINCT ' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_CHAPITRE
+                        . ' FROM ' . FtaWorkflowStructureModel::TABLENAME
+                        . ' WHERE ( 0 ' . FtaProcessusModel::addIdFtaProcessus($paramArrayProcessus) . ')'
+                        . ' AND  ' . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_WORKFLOW . '=' . $paramIdFtaWorkflow
+        );
+        foreach ($arrayIdFtaChapitre as $rowsIdFtaChapitre) {
+            $ListeIdFtaChapitre[] = $rowsIdFtaChapitre[self::KEYNAME];
+        }
+
+        return $ListeIdFtaChapitre;
+    }
+
+    /**
+     * On obtient le chapitre par défaut en redirection
+     * @param int $paramIdFtaRole
+     * @param int $paramIdFtaWorkflow
+     * @param array $paramListeDesChapitres
+     * @return array
+     */
+    public static function getIdFtaChapitreByDefault($paramIdFtaRole, $paramIdFtaWorkflow, $paramListeDesChapitres) {
+
+        $arrayProcessusAcces = FtaWorkflowStructureModel::getArrayProcessusByRoleAndWorkflow($paramIdFtaRole, $paramIdFtaWorkflow);
+        $ListeDesChapitresByUser = FtaChapitreModel::getIdFtaChapitreByArrayProcessusAndWorkflow($arrayProcessusAcces, $paramIdFtaWorkflow);
+
+        if ($paramListeDesChapitres) {
+            $ListeDesChapitresAcces = array_intersect($paramListeDesChapitres, $ListeDesChapitresByUser);
+        }
+        foreach ($ListeDesChapitresAcces as $key => $value) {
+            $idFtaChapitre = $value;
+        }
+        if (!$idFtaChapitre) {
+            $idFtaChapitre = FtaChapitreModel::ID_CHAPITRE_IDENTITE;
+        }
+        return $idFtaChapitre;
+    }
+
+    public static function addIdFtaChapitre($paramIdEffectue) {
+        if ($paramIdEffectue) {
+            foreach ($paramIdEffectue as $value) {
+                $req .= " OR " . self::KEYNAME . "=" . $value . " ";
+            }
+        }
+        return $req;
     }
 
 }

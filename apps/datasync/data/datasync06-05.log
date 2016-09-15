@@ -1,0 +1,151 @@
+Démarrage : jeu jun  5 23:00:01 CEST 2014
+Arrêt     : jeu jun  5 23:03:52 CEST 2014
+
+
+
+Base MySQL sélectionnée: agis
+Nombre de serveur(s) Linux concerné(s): 4
+Nombre de dossier(s) à mettre à jour: 29
+
+sending incremental file list
+
+sent 7070 bytes  received 49 bytes  1582.00 bytes/sec
+total size is 12774593  speedup is 1794.44
+sending incremental file list
+
+sent 6279 bytes  received 38 bytes  1403.78 bytes/sec
+total size is 12442583  speedup is 1969.70
+sending incremental file list
+erp_data.mdb
+
+sent 8449004 bytes  received 65747 bytes  93057.39 bytes/sec
+total size is 88092672  speedup is 10.35
+sending incremental file list
+
+sent 7593 bytes  received 45 bytes  2182.29 bytes/sec
+total size is 9254930  speedup is 1211.70
+sending incremental file list
+
+sent 7756 bytes  received 20 bytes  2221.71 bytes/sec
+total size is 16755943  speedup is 2154.83
+sending incremental file list
+
+sent 4308 bytes  received 24 bytes  1237.71 bytes/sec
+total size is 6387982  speedup is 1474.60
+sending incremental file list
+mercuriales/HD/2014/2014 MERCURIALE DIA.xls
+mercuriales/HD/2014/2014 MERCURIALE LIDL.xls
+mercuriales/mdd/2014/2014 MERCURIALE CARREFOUR ASIATIQUE.xls
+mercuriales/mdd/2014/2014 MERCURIALE CARREFOUR BELGIQUE.xls
+
+sent 28376 bytes  received 2451 bytes  4742.62 bytes/sec
+total size is 32701996  speedup is 1060.82
+sending incremental file list
+
+sent 5047 bytes  received 27 bytes  1449.71 bytes/sec
+total size is 39173092  speedup is 7720.36
+sending incremental file list
+operations_commerciales/chrono demande echantillons.xls
+operations_commerciales/FZC/OP FZC 2014/FZC TOUPARGEL 2014.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS GALEC 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/D-REGIONS/GMS SU REGION  2014-FUTUR MASTER.xls
+
+sent 221895 bytes  received 11276 bytes  16080.76 bytes/sec
+total size is 51461531  speedup is 220.70
+sending incremental file list
+
+sent 20296 bytes  received 83 bytes  3705.27 bytes/sec
+total size is 99065320  speedup is 4861.15
+sending incremental file list
+gofast/CHANTIERS/2_FTK_CLIENTS_Mathieu/5_STANDARDS/Changer_ameliorer.ppt
+
+sent 100323 bytes  received 101 bytes  22316.44 bytes/sec
+total size is 36354222  speedup is 362.01
+sending incremental file list
+modeles/compo_asia_double_bas_auchan_traiteur.bak
+modeles/compo_asia_double_bas_auchan_traiteur.lab
+
+sent 25552 bytes  received 3159 bytes  11484.40 bytes/sec
+total size is 48314368  speedup is 1682.78
+sending incremental file list
+
+sent 5781 bytes  received 30 bytes  2324.40 bytes/sec
+total size is 93132165  speedup is 16026.87
+sending incremental file list
+erp_data.mdb
+
+sent 8449004 bytes  received 65747 bytes  191342.72 bytes/sec
+total size is 88092672  speedup is 10.35
+sending incremental file list
+
+sent 7593 bytes  received 45 bytes  5092.00 bytes/sec
+total size is 9254930  speedup is 1211.70
+sending incremental file list
+
+sent 4308 bytes  received 24 bytes  2888.00 bytes/sec
+total size is 6387982  speedup is 1474.60
+sending incremental file list
+
+sent 7756 bytes  received 20 bytes  5184.00 bytes/sec
+total size is 16755943  speedup is 2154.83
+sending incremental file list
+
+sent 85 bytes  received 13 bytes  65.33 bytes/sec
+total size is 104853504  speedup is 1069933.71
+sending incremental file list
+operations_commerciales/chrono demande echantillons.xls
+operations_commerciales/FZC/OP FZC 2014/FZC TOUPARGEL 2014.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS GALEC 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/D-REGIONS/GMS SU REGION  2014-FUTUR MASTER.xls
+
+sent 221895 bytes  received 11276 bytes  66620.29 bytes/sec
+total size is 51461531  speedup is 220.70
+sending incremental file list
+mercuriales/HD/2014/2014 MERCURIALE DIA.xls
+mercuriales/HD/2014/2014 MERCURIALE LIDL.xls
+mercuriales/mdd/2014/2014 MERCURIALE CARREFOUR ASIATIQUE.xls
+mercuriales/mdd/2014/2014 MERCURIALE CARREFOUR BELGIQUE.xls
+
+sent 28376 bytes  received 2451 bytes  20551.33 bytes/sec
+total size is 32701996  speedup is 1060.82
+sending incremental file list
+modeles/compo_asia_double_bas_auchan_traiteur.bak
+modeles/compo_asia_double_bas_auchan_traiteur.lab
+
+sent 25552 bytes  received 3159 bytes  19140.67 bytes/sec
+total size is 48314368  speedup is 1682.78
+sending incremental file list
+
+sent 7070 bytes  received 49 bytes  2034.00 bytes/sec
+total size is 12774593  speedup is 1794.44
+sending incremental file list
+
+sent 5729 bytes  received 23 bytes  1643.43 bytes/sec
+total size is 129159129  speedup is 22454.65
+sending incremental file list
+
+sent 5610 bytes  received 39 bytes  1027.09 bytes/sec
+total size is 59049369  speedup is 10453.07
+sending incremental file list
+codesoft/Codesoft 7/Codes Produits/43489.bak
+codesoft/Codesoft 7/Codes Produits/43489.lab
+
+sent 92976 bytes  received 2332 bytes  38123.20 bytes/sec
+total size is 298226259  speedup is 3129.08
+sending incremental file list
+
+sent 20296 bytes  received 83 bytes  13586.00 bytes/sec
+total size is 99065320  speedup is 4861.15
+sending incremental file list
+gofast/CHANTIERS/2_FTK_CLIENTS_Mathieu/5_STANDARDS/Changer_ameliorer.ppt
+
+sent 100323 bytes  received 101 bytes  40169.60 bytes/sec
+total size is 36354222  speedup is 362.01
+sending incremental file list
+
+sent 7756 bytes  received 20 bytes  5184.00 bytes/sec
+total size is 16755943  speedup is 2154.83
+sending incremental file list
+
+sent 7756 bytes  received 20 bytes  5184.00 bytes/sec
+total size is 16755943  speedup is 2154.83

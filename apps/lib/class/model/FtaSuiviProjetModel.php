@@ -11,6 +11,7 @@ class FtaSuiviProjetModel extends AbstractModel {
 
     const TABLENAME = 'fta_suivi_projet';
     const KEYNAME = 'id_fta_suivi_projet';
+    const FIELDNAME_ID_FTA_SUIVI_PROJET = 'last_id_fta_suivi_projet';
     const FIELDNAME_ID_FTA = 'id_fta';
     const FIELDNAME_ID_FTA_CHAPITRE = 'id_fta_chapitre';
     const FIELDNAME_COMMENTAIRE_SUIVI_PROJET = 'commentaire_suivi_projet';
@@ -57,32 +58,56 @@ class FtaSuiviProjetModel extends AbstractModel {
     }
 
     /**
+     * On récupère le nom du signataire pour une id fta et un chapitre donnée
+     * @param int $paramIdFta
+     * @param int $paramIdFtaChapitre
+     * @return string
+     */
+    public static function getUserNameByIdFtaChapitreAndIdFta($paramIdFta, $paramIdFtaChapitre) {
+        $arrayUserName = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
+                        "SELECT " . UserModel::FIELDNAME_NOM . "," . UserModel::FIELDNAME_PRENOM
+                        . " FROM " . self::TABLENAME . "," . UserModel::TABLENAME
+                        . " WHERE " . self::FIELDNAME_ID_FTA_CHAPITRE . "=" . $paramIdFtaChapitre
+                        . " AND " . self::FIELDNAME_ID_FTA . "=" . $paramIdFta
+                        . " AND " . self::FIELDNAME_SIGNATURE_VALIDATION_SUIVI_PROJET . "=" . UserModel::KEYNAME
+        );
+        if ($arrayUserName) {
+            foreach ($arrayUserName as $rowsUserName) {
+                $userName = $rowsUserName[UserModel::FIELDNAME_PRENOM] . " " . $rowsUserName[UserModel::FIELDNAME_NOM];
+            }
+        } else {
+            $userName = UserModel::USER_NON_DEFINIE;
+        }
+        return $userName;
+    }
+
+    /**
+     * On récupère la date de validation pour une id fta et un chapitre donnée
+     * @param int $paramIdFta
+     * @param int $paramIdFtaChapitre
+     * @return string
+     */
+    public static function getValidationDateByIdFtaChapitreAndIdFta($paramIdFta, $paramIdFtaChapitre) {
+        $arrayDateDeValidation = DatabaseOperation::convertSqlStatementWithoutKeyToArrayComplete(
+                        "SELECT " . self::FIELDNAME_DATE_VALIDATION_SUIVI_PROJET
+                        . " FROM " . self::TABLENAME
+                        . " WHERE " . self::FIELDNAME_ID_FTA_CHAPITRE . "=" . $paramIdFtaChapitre
+                        . " AND " . self::FIELDNAME_ID_FTA . "=" . $paramIdFta
+        );
+        /**
+         * Changment de format de date
+         */
+        $date = FtaController::changementDuFormatDeDateFR($arrayDateDeValidation["0"]);
+        return $date;
+    }
+
+    /**
      * Duplication des données d'un Fta dans la table Suivi de Projet
      * @param type $paramIdFtaOrig
      * @param type $paramIdFtaNew
      */
     public static function duplicateFtaSuiviProjetByIdFta($paramIdFtaOrig, $paramIdFtaNew) {
-        DatabaseOperation::execute(
-                ' INSERT INTO ' . FtaSuiviProjetModel::TABLENAME
-                . ' (' . FtaSuiviProjetModel::FIELDNAME_COMMENTAIRE_SUIVI_PROJET
-                . ', ' . FtaSuiviProjetModel::FIELDNAME_ID_FTA_CHAPITRE
-                . ', ' . FtaSuiviProjetModel::FIELDNAME_DATE_VALIDATION_SUIVI_PROJET
-                . ', ' . FtaSuiviProjetModel::FIELDNAME_SIGNATURE_VALIDATION_SUIVI_PROJET
-                . ', ' . FtaSuiviProjetModel::FIELDNAME_DATE_DEMARRAGE_CHAPITRE_FTA_SUIVI_PROJET
-                . ', ' . FtaSuiviProjetModel::FIELDNAME_CORRECTION_FTA_SUIVI_PROJET
-                . ', ' . FtaSuiviProjetModel::FIELDNAME_ID_FTA
-                . ', ' . FtaSuiviProjetModel::FIELDNAME_NOTIFICATION_FTA_SUIVI_PROJET . ')'
-                . ' SELECT ' . FtaSuiviProjetModel::FIELDNAME_COMMENTAIRE_SUIVI_PROJET
-                . ', ' . FtaSuiviProjetModel::FIELDNAME_ID_FTA_CHAPITRE
-                . ', ' . FtaSuiviProjetModel::FIELDNAME_DATE_VALIDATION_SUIVI_PROJET
-                . ', ' . FtaSuiviProjetModel::FIELDNAME_SIGNATURE_VALIDATION_SUIVI_PROJET
-                . ', ' . FtaSuiviProjetModel::FIELDNAME_DATE_DEMARRAGE_CHAPITRE_FTA_SUIVI_PROJET
-                . ', ' . FtaSuiviProjetModel::FIELDNAME_CORRECTION_FTA_SUIVI_PROJET
-                . ', ' . $paramIdFtaNew
-                . ', ' . FtaSuiviProjetModel::FIELDNAME_NOTIFICATION_FTA_SUIVI_PROJET
-                . ' FROM ' . FtaSuiviProjetModel::TABLENAME
-                . ' WHERE ' . FtaSuiviProjetModel::FIELDNAME_ID_FTA . '=' . $paramIdFtaOrig
-        );
+        FtaController::duplicateWithNewId(self::TABLENAME, $paramIdFtaOrig, $paramIdFtaNew);
     }
 
     /**
@@ -109,7 +134,8 @@ class FtaSuiviProjetModel extends AbstractModel {
         return $array[0][$keyName];
     }
 
-    /**
+    /*     * *
+     * Fonction non actif
      * Cette fonction notifie les processus en fonction de l'état d'avancement du suivi du projet.
      * Cet état d'avancement est géré par la table fta_suivi_projet
      * Elle ne fait que de l'information, et ne modifie pas l'état de la fiche mais uniquement son suivi
@@ -117,6 +143,7 @@ class FtaSuiviProjetModel extends AbstractModel {
      * @param type $paramIdChapitre
      * @return string
      */
+
     public static function getListeUsersAndNotificationSuiviProjet($paramIdFta, $paramIdChapitre) {
 
         $idFtaSuiviProjet = FtaSuiviProjetModel::getIdFtaSuiviProjetByIdFtaAndIdChapitre($paramIdFta, $paramIdChapitre);
@@ -415,9 +442,10 @@ class FtaSuiviProjetModel extends AbstractModel {
                                 . '(' . FtaSuiviProjetModel::FIELDNAME_ID_FTA
                                 . ', ' . FtaSuiviProjetModel::FIELDNAME_ID_FTA_CHAPITRE
                                 . ', ' . FtaSuiviProjetModel::FIELDNAME_SIGNATURE_VALIDATION_SUIVI_PROJET
+                                . ', ' . FtaSuiviProjetModel::FIELDNAME_DATE_DEMARRAGE_CHAPITRE_FTA_SUIVI_PROJET
                                 . ') VALUES (' . $paramIdFta
                                 . ', ' . $rowsChapitre[FtaWorkflowStructureModel::FIELDNAME_ID_FTA_CHAPITRE]
-                                . ', 1 )'
+                                . ', 1 ,\'' . date("Y-m-d") . '\')'
                         );
                     } else {
                         DatabaseOperation::execute(
@@ -425,9 +453,10 @@ class FtaSuiviProjetModel extends AbstractModel {
                                 . '(' . FtaSuiviProjetModel::FIELDNAME_ID_FTA
                                 . ', ' . FtaSuiviProjetModel::FIELDNAME_ID_FTA_CHAPITRE
                                 . ', ' . FtaSuiviProjetModel::FIELDNAME_SIGNATURE_VALIDATION_SUIVI_PROJET
+                                . ', ' . FtaSuiviProjetModel::FIELDNAME_DATE_DEMARRAGE_CHAPITRE_FTA_SUIVI_PROJET
                                 . ') VALUES (' . $paramIdFta
                                 . ', ' . $rowsChapitre[FtaWorkflowStructureModel::FIELDNAME_ID_FTA_CHAPITRE]
-                                . ', 0 )'
+                                . ', 0 ,\'' . date("Y-m-d") . '\')'
                         );
                     }
                 }
@@ -468,7 +497,7 @@ class FtaSuiviProjetModel extends AbstractModel {
      *  1/Etat validé:
      *  Créer les nouveaux suivis de projet manquant pour l'esapce de travail destination
      *  Signer les nouveaux chapitres automatiquement avec les identifiants de l'utilisateur ayant provoquer la changement d'espace.
-     *  Dans le commentaire des suivis de projet nouvellement créés, ajouter la mention "Changement de l'espace travail $WF_ORIGINE vers l'espace de travail $WF_DESTINATION par $USER le $DATE_$HEURE".
+     *  Dans le commentaire des suivis de projet nouvellement créés, ajouter la mention "Changement de l'espace travail $WF_ORIGINE vers l'espace de travail $WF_DESTINATION par $USER le $DATE_$HEURE". (ancienne version)
      *  Supprimer les suivis de projet des chapitres n'appartenant plus à l'espace de travail destination.
      * 2/Etat modifié:
      *  Supprimer les suivis de projet des chapitres n'appartenant plus à l'espace de travail destination.
@@ -476,15 +505,14 @@ class FtaSuiviProjetModel extends AbstractModel {
      * 3/Etat archivé / Etat retiré:
      * Supprimer les suivis de projet des chapitres n'appartenant plus à l'espace de travail destination.
      * Créer les nouveaux suivis de projet manquant pour l'esapce de travail destination
-     *  Dans le commentaire des suivis de projet nouvellement créés, ajouter la mention "Changement de l'espace travail $WF_ORIGINE vers l'espace de travail $WF_DESTINATION par $USER le $DATE_$HEURE".
+     *  Dans le commentaire des suivis de projet nouvellement créés, ajouter la mention "Changement de l'espace travail $WF_ORIGINE vers l'espace de travail $WF_DESTINATION par $USER le $DATE_$HEURE".(ancienne version)
      * Signer tous chapitres non-signés automatiquement avec les identifiants de l'utilisateur ayant provoquer la changement d'espace.
      * @param int $paramIdFta
      * @param int $paramIdFtaWorkflowNew
      * @param string $paramArbreviationFta
      * @param int $paramIdUser
-     * @param string $paramCommentaire
      */
-    public static function createNewChapitresFromNewWorkflow($paramIdFta, $paramIdFtaWorkflowNew, $paramArbreviationFta, $paramIdUser, $paramCommentaire) {
+    public static function createNewChapitresFromNewWorkflow($paramIdFta, $paramIdFtaWorkflowNew, $paramArbreviationFta, $paramIdUser) {
         /**
          * Initialisation des nouveau chapitres de l'espace de travail
          */
@@ -520,11 +548,9 @@ class FtaSuiviProjetModel extends AbstractModel {
                     DatabaseOperation::execute(
                             "INSERT INTO " . FtaSuiviProjetModel::TABLENAME
                             . "(" . FtaSuiviProjetModel::FIELDNAME_ID_FTA
-                            . ", " . FtaSuiviProjetModel::FIELDNAME_COMMENTAIRE_SUIVI_PROJET
                             . ", " . FtaSuiviProjetModel::FIELDNAME_ID_FTA_CHAPITRE
                             . ", " . FtaSuiviProjetModel::FIELDNAME_SIGNATURE_VALIDATION_SUIVI_PROJET
                             . ") VALUES (" . $paramIdFta
-                            . ", " . "\"" . $paramCommentaire . "\""
                             . ", " . $rowsChapitre[FtaWorkflowStructureModel::FIELDNAME_ID_FTA_CHAPITRE]
                             . ", " . $paramIdUser . " )"
                     );
@@ -656,11 +682,50 @@ class FtaSuiviProjetModel extends AbstractModel {
         }
     }
 
+    /**
+     * Affiche la date de validition d'un chapitre
+     * @return string
+     */
+    function getHtmlDateValidationSuiviFta() {
+        $idFtaSuivieProjet = $this->getKeyValue();
+        $dateValidationValueTmp = $this->getDataField(self::FIELDNAME_DATE_VALIDATION_SUIVI_PROJET)->getFieldValue();
+        $dateValidationValue = FtaController::changementDuFormatDeDateFR($dateValidationValueTmp);
+
+        $signatureValidationObjet = new HtmlInputText();
+        $HtmlTableName = self::TABLENAME
+                . '_'
+                . self::FIELDNAME_DATE_VALIDATION_SUIVI_PROJET
+                . '_'
+                . $idFtaSuivieProjet
+        ;
+        $signatureValidationObjet->setLabel(DatabaseDescription::getFieldDocLabel(self::TABLENAME, self::FIELDNAME_DATE_VALIDATION_SUIVI_PROJET));
+        $signatureValidationObjet->getAttributes()->getValue()->setValue($dateValidationValue);
+        $signatureValidationObjet->setIsEditable($this->getIsEditable());
+        $signatureValidationObjet->initAbstractHtmlInput(
+                $HtmlTableName
+                , $signatureValidationObjet->getLabel()
+                , $dateValidationValue
+                , NULL);
+        $signatureValidationObjet->getEventsForm()->setOnChangeWithAjaxAutoSave(self::TABLENAME, self::KEYNAME, $idFtaSuivieProjet, self::FIELDNAME_DATE_VALIDATION_SUIVI_PROJET);
+        return $signatureValidationObjet->getHtmlResult();
+    }
+
+    /**
+     * 
+     * @param type $paramFtaModel
+     * @return type
+     */
     public static function getPourcentageFtaTauxValidation($paramFtaModel) {
         $tauxTemp = FtaSuiviProjetModel::getArrayFtaTauxValidation($paramFtaModel, FALSE);
         return round($tauxTemp[0] * 100, 0) . "%";
     }
 
+    /**
+     * 
+     * @param type $paramFtaModel
+     * @param type $paramTableauProcessus
+     * @return type
+     */
     public static function getArrayFtaTauxValidation($paramFtaModel, $paramTableauProcessus) {
 
 //Dictionnaire des données
@@ -732,9 +797,18 @@ class FtaSuiviProjetModel extends AbstractModel {
         return $return;
     }
 
+    /**
+     * On obtient les commentaires de chaque chapitres
+     * @param int $paramIdFta
+     * @param int $paramIdFtaWorkflow
+     * @return int
+     */
     public static function getAllCommentsFromChapitres($paramIdFta, $paramIdFtaWorkflow) {
         $arrayCommentaireAllChapitre = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
-                        "SELECT " . FtaSuiviProjetModel::FIELDNAME_COMMENTAIRE_SUIVI_PROJET . "," . UserModel::FIELDNAME_PRENOM . "," . UserModel::FIELDNAME_NOM
+                        "SELECT " . FtaSuiviProjetModel::FIELDNAME_COMMENTAIRE_SUIVI_PROJET
+                        . "," . UserModel::FIELDNAME_PRENOM . "," . UserModel::FIELDNAME_NOM
+                        . "," . FtaSuiviProjetModel::TABLENAME . "." . FtaSuiviProjetModel::FIELDNAME_ID_FTA_CHAPITRE
+                        . "," . FtaSuiviProjetModel::TABLENAME . "." . FtaSuiviProjetModel::FIELDNAME_DATE_VALIDATION_SUIVI_PROJET
                         . " FROM " . FtaSuiviProjetModel::TABLENAME . ", " . UserModel::TABLENAME . ", " . FtaWorkflowStructureModel::TABLENAME
                         . " WHERE ( " . FtaSuiviProjetModel::TABLENAME . "." . FtaSuiviProjetModel::FIELDNAME_SIGNATURE_VALIDATION_SUIVI_PROJET
                         . " = " . UserModel::TABLENAME . "." . UserModel::KEYNAME . " ) "
@@ -742,19 +816,66 @@ class FtaSuiviProjetModel extends AbstractModel {
                         . " AND " . FtaWorkflowStructureModel::TABLENAME . "." . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_WORKFLOW . " = " . $paramIdFtaWorkflow
                         . " AND " . FtaWorkflowStructureModel::TABLENAME . "." . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_CHAPITRE
                         . " = " . FtaSuiviProjetModel::TABLENAME . "." . FtaSuiviProjetModel::FIELDNAME_ID_FTA_CHAPITRE
-                        . " ORDER BY " . FtaSuiviProjetModel::FIELDNAME_DATE_VALIDATION_SUIVI_PROJET
+                        . " ORDER BY " . FtaSuiviProjetModel::FIELDNAME_DATE_VALIDATION_SUIVI_PROJET . " DESC "
         );
         if ($arrayCommentaireAllChapitre) {
             foreach ($arrayCommentaireAllChapitre as $rowsCommentaireAllChapitre) {
                 if ($rowsCommentaireAllChapitre[FtaSuiviProjetModel::FIELDNAME_COMMENTAIRE_SUIVI_PROJET]) {
-                    $return.= "<br>" . $rowsCommentaireAllChapitre[UserModel::FIELDNAME_PRENOM] . " " . $rowsCommentaireAllChapitre[UserModel::FIELDNAME_NOM] . " a écrit:<br>"
-                            . $rowsCommentaireAllChapitre[FtaSuiviProjetModel::FIELDNAME_COMMENTAIRE_SUIVI_PROJET] . "<br>"
-                    ;
+                    $idFtaChapitre = $rowsCommentaireAllChapitre[FtaSuiviProjetModel::FIELDNAME_ID_FTA_CHAPITRE];
+                    $dateDeValidation = $rowsCommentaireAllChapitre[FtaSuiviProjetModel::FIELDNAME_DATE_VALIDATION_SUIVI_PROJET];
+                    $ftaChapitreModel = new FtaChapitreModel($idFtaChapitre);
+                    $nomChapitre = $ftaChapitreModel->getDataField(FtaChapitreModel::FIELDNAME_NOM_USUEL_CHAPITRE)->getFieldValue();
+                    $action = "Chapitre " . $nomChapitre;
+                    $nomPrenom = $rowsCommentaireAllChapitre[UserModel::FIELDNAME_PRENOM] . " " . $rowsCommentaireAllChapitre[UserModel::FIELDNAME_NOM];
+                    $comment = $rowsCommentaireAllChapitre[FtaSuiviProjetModel::FIELDNAME_COMMENTAIRE_SUIVI_PROJET];
+                    $return.= FtaController::getComment($action, $nomPrenom, $comment, $dateDeValidation) . "\n";
                 }
             }
             $return = "<tr class=contenu><td> Commentaires sur les Chapitres</td><td>" . $return . "</td></tr>";
         } else {
             $return = "<tr class=contenu><td> Commentaires sur les Chapitres</td><td></td></tr>";
+        }
+
+        return str_replace("  ", "&nbsp;&nbsp;", nl2br($return));
+    }
+
+    /**
+     * On obtient les corrections de chaque chapitres
+     * @param int $paramIdFta
+     * @param int $paramIdFtaWorkflow
+     * @return int
+     */
+    public static function getAllCorrectionsFromChapitres($paramIdFta, $paramIdFtaWorkflow) {
+        $arrayCommentaireAllChapitre = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
+                        "SELECT " . FtaSuiviProjetModel::FIELDNAME_CORRECTION_FTA_SUIVI_PROJET
+                        . "," . UserModel::FIELDNAME_PRENOM . "," . UserModel::FIELDNAME_NOM
+                        . "," . FtaSuiviProjetModel::TABLENAME . "." . FtaSuiviProjetModel::FIELDNAME_ID_FTA_CHAPITRE
+                        . "," . FtaSuiviProjetModel::TABLENAME . "." . FtaSuiviProjetModel::FIELDNAME_DATE_VALIDATION_SUIVI_PROJET
+                        . " FROM " . FtaSuiviProjetModel::TABLENAME . ", " . UserModel::TABLENAME . ", " . FtaWorkflowStructureModel::TABLENAME
+                        . " WHERE ( " . FtaSuiviProjetModel::TABLENAME . "." . FtaSuiviProjetModel::FIELDNAME_SIGNATURE_VALIDATION_SUIVI_PROJET
+                        . " = " . UserModel::TABLENAME . "." . UserModel::KEYNAME . " ) "
+                        . " AND " . FtaSuiviProjetModel::TABLENAME . "." . FtaSuiviProjetModel::FIELDNAME_ID_FTA . " = " . $paramIdFta
+                        . " AND " . FtaWorkflowStructureModel::TABLENAME . "." . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_WORKFLOW . " = " . $paramIdFtaWorkflow
+                        . " AND " . FtaWorkflowStructureModel::TABLENAME . "." . FtaWorkflowStructureModel::FIELDNAME_ID_FTA_CHAPITRE
+                        . " = " . FtaSuiviProjetModel::TABLENAME . "." . FtaSuiviProjetModel::FIELDNAME_ID_FTA_CHAPITRE
+                        . " ORDER BY " . FtaSuiviProjetModel::FIELDNAME_DATE_VALIDATION_SUIVI_PROJET . " DESC "
+        );
+        if ($arrayCommentaireAllChapitre) {
+            foreach ($arrayCommentaireAllChapitre as $rowsCommentaireAllChapitre) {
+                if ($rowsCommentaireAllChapitre[FtaSuiviProjetModel::FIELDNAME_CORRECTION_FTA_SUIVI_PROJET]) {
+                    $idFtaChapitre = $rowsCommentaireAllChapitre[FtaSuiviProjetModel::FIELDNAME_ID_FTA_CHAPITRE];
+                    $dateDeValidation = $rowsCommentaireAllChapitre[FtaSuiviProjetModel::FIELDNAME_DATE_VALIDATION_SUIVI_PROJET];
+                    $ftaChapitreModel = new FtaChapitreModel($idFtaChapitre);
+                    $nomChapitre = $ftaChapitreModel->getDataField(FtaChapitreModel::FIELDNAME_NOM_USUEL_CHAPITRE)->getFieldValue();
+                    $action = "Chapitre " . $nomChapitre;
+                    $nomPrenom = $rowsCommentaireAllChapitre[UserModel::FIELDNAME_PRENOM] . " " . $rowsCommentaireAllChapitre[UserModel::FIELDNAME_NOM];
+                    $comment = $rowsCommentaireAllChapitre[FtaSuiviProjetModel::FIELDNAME_CORRECTION_FTA_SUIVI_PROJET];
+                    $return.= FtaController::getComment($action, $nomPrenom, $comment, $dateDeValidation) . "\n";
+                }
+            }
+            $return = "<tr class=contenu><td> Récapitulatif des corrections</td><td>" . $return . "</td></tr>";
+        } else {
+            $return = "<tr class=contenu><td> Récapitulatif des corrections</td><td></td></tr>";
         }
 
         return str_replace("  ", "&nbsp;&nbsp;", nl2br($return));
@@ -819,6 +940,10 @@ class FtaSuiviProjetModel extends AbstractModel {
         return $paramIdFtaChapitre;
     }
 
+    /**
+     *  
+     * @return FtaModel
+     */
     public function getModelFta() {
         return $this->modelFta;
     }

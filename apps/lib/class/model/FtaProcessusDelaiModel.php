@@ -146,7 +146,7 @@ class FtaProcessusDelaiModel extends AbstractModel {
         if ($arrayIdFtaDate) {
 
             foreach ($arrayIdFtaDate as $rowsIdFtaDate) {
-                $dateEcheanceFta = $rowsIdFtaDate[FtaModel::FIELDNAME_DATE_ECHEANCE_FTA];
+                $dateEcheanceFta = $rowsIdFtaDate[FtaModel::FIELDNAME_DATE_ECHEANCE_FTA];              
                 $jour_restant = ((strtotime($dateEcheanceFta) - strtotime(date('Y-m-d')))) / 86400;
             }
             /**
@@ -154,10 +154,11 @@ class FtaProcessusDelaiModel extends AbstractModel {
              */
             if ($dateEcheanceFta == '0000-00-00' or $dateEcheanceFta == '') {
                 $return[self::KEYWORD_DELAI_AVANCEMENT_STATUS] = self::VALUE_DELAI_AVANCEMENT_NO_DATE;
-            } else if (($jour_restant <= "0") OR ( $jour_restant <= ModuleConfig::VALUE_DATE_NOTIFICATION2)) {
-                $return[self::KEYWORD_DELAI_AVANCEMENT_STATUS] = self::VALUE_DELAI_AVANCEMENT_ALL_FTA_EXPIRED;
-            } else if ($jour_restant <= ModuleConfig::VALUE_DATE_NOTIFICATION) {
+            } else if (($jour_restant <= "0") OR ( $jour_restant <= ModuleConfig::VALUE_DATE_NOTIFICATION)) {
                 $return[self::KEYWORD_DELAI_AVANCEMENT_STATUS] = self::VALUE_DELAI_AVANCEMENT_ONE_PROCESSUS_EXPIRED;
+                if ($jour_restant <= ModuleConfig::VALUE_DATE_NOTIFICATION2) {
+                    $return[self::KEYWORD_DELAI_AVANCEMENT_STATUS] = self::VALUE_DELAI_AVANCEMENT_ALL_FTA_EXPIRED;
+                }
             }
             $return[self::KEYWORD_DELAI_AVANCEMENT_HTML_SYNTHESE] .= $dateEcheanceFta;
         } else {

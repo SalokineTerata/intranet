@@ -73,6 +73,7 @@ $id_fta_chapitre_encours = Lib::getParameterFromRequest('id_fta_chapitre_encours
 $idFtaClassification2 = Lib::getParameterFromRequest('id_fta_classification2');
 $checkIdFtaClasssification = Lib::getParameterFromRequest('checkIdFtaClasssification');
 
+$modificationGestionnaire = Lib::getParameterFromRequest('gestionnaire');
 
 
 
@@ -91,16 +92,33 @@ ClassificationFta2Model::initClassification($selection_proprietaire1, $selection
         , $selection_activite, $selection_rayon, $selection_environnement, $selection_reseau, $selection_saisonnalite);
 
 
-$ListeCLassification = ClassificationFta2Model::ShowListeDeroulanteClassification2(TRUE);
+$ListeCLassification = ClassificationFta2Model::showListeDeroulanteClassification2(TRUE);
 
 if ($selection_saisonnalite) {
     $bouton_submit = FtaView::getHtmlButtonSubmit();
 }
-$bouton_retour_vers_fta = FtaView::getHtmlButtonReturnFta($idFta,$id_fta_chapitre_encours,$syntheseAction,$comeback,$idFtaEtat,$abreviationFtaEtat,$idFtaRole);
+if (!$modificationGestionnaire) {
+    $bouton_retour_vers_fta = FtaView::getHtmlButtonReturnFta($idFta, $id_fta_chapitre_encours, $syntheseAction, $idFtaEtat, $abreviationFtaEtat, $idFtaRole);
 
-Navigation::initNavigation($idFta, $id_fta_chapitre_encours, $syntheseAction, $comeback, $idFtaEtat, $abreviationFtaEtat, $idFtaRole, FALSE);
+    Navigation::initNavigation($idFta, $id_fta_chapitre_encours, $syntheseAction, $comeback, $idFtaEtat, $abreviationFtaEtat, $idFtaRole, FALSE, TRUE);
 
-$navigue = Navigation::getHtmlNavigationBar();
+    $navigue = Navigation::getHtmlNavigationBar();
+}
+switch ($modificationGestionnaire) {
+    case "1";
+        $action = "gestionnaire";
+        $idDossierFta = $idFta;
+
+
+        break;
+    case "2";
+        $action = "gestionnaire1";
+        $idDossierFta = $idFta;
+        break;
+    default :
+        $action = "valider";
+        break;
+}
 
 
 
@@ -122,6 +140,7 @@ $navigue . "
      <input type=\"hidden\" name=\"abreviation_fta_etat\" id=\"abreviation_fta_etat\" value=\"" . $abreviationFtaEtat . "\" />
      <input type=\"hidden\" name=\"id_fta_etat\" id=\"id_fta_etat\" value=\"" . $idFtaEtat . "\" />
      <input type=\"hidden\" name=\"id_fta_role\" id=\"id_fta_role\" value=\"" . $idFtaRole . "\" />
+     <input type=\"hidden\" name=\"gestionnaire\" id=\"gestionnaire\" value=\"" . $modificationGestionnaire . "\" />
      <input type=\"hidden\" name=\"comeback\" id=\"comeback\" value=\"" . $comeback . "\" />
      <input type=\"hidden\" name=\"id_fta_chapitre_encours\" id=\"id_fta_chapitre_encours\" value=\"" . $id_fta_chapitre_encours . "\" />
 

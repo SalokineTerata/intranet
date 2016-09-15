@@ -13,6 +13,9 @@ class FtaRoleModel extends AbstractModel {
     const FIELDNAME_DESCRIPTION_FTA_ROLE = 'description_fta_role';
     const FIELDNAME_NOM_FTA_ROLE = 'nom_fta_role';
     const FIELDNAME_IS_GESTIONNAIRE = 'is_gestionnaire';
+    const FIELDNAME_COLOR_FTA_ROLE = 'color_fta_role';
+    const IS_GESTIONNAIRE_TRUE = '1';
+    const IS_GESTIONNAIRE_FALSE = '0';
     const ID_FTA_ROLE_CHEF_DE_PROJET = '1';
     const ID_FTA_ROLE_COMMUN = '0';
     const ID_FTA_ROLE_EMBALLAGE = '4';
@@ -26,7 +29,7 @@ class FtaRoleModel extends AbstractModel {
     }
 
     /**
-     * On obtient l'id du rôle le plus en amot dans le cycle de validation
+     * On obtient l'id du rôle le plus en amont dans le cycle de validation
      * @param int $paramIdUser
      * @return array
      */
@@ -95,7 +98,7 @@ class FtaRoleModel extends AbstractModel {
                         . '=' . FtaActionRoleModel::TABLENAME . '.' . FtaActionRoleModel::FIELDNAME_ID_INTRANET_ACTIONS
                         . ' AND ' . FtaActionRoleModel::TABLENAME . '.' . FtaActionRoleModel::FIELDNAME_ID_FTA_ROLE
                         . '=' . self::TABLENAME . '.' . self::KEYNAME
-                        . ' AND ' . FtaActionRoleModel::TABLENAME . '.' . FtaActionRoleModel::FIELDNAME_ID_FTA_WROKFLOW . '=' . $paramIdFtaWorkflow
+                        . ' AND ' . FtaActionRoleModel::TABLENAME . '.' . FtaActionRoleModel::FIELDNAME_ID_FTA_WORKFLOW . '=' . $paramIdFtaWorkflow
         );
         if ($arrayIdFtaRole) {
             foreach ($arrayIdFtaRole as $rowsIdFtaRole) {
@@ -266,6 +269,123 @@ class FtaRoleModel extends AbstractModel {
         }
 
         return $isIdRoleRightsAcces;
+    }
+
+    /**
+     * Liste des Rôles auxquelles l'utilisateur à accès pour un workflow donnée
+     * @param int $paramIdUser
+     * @param int $paramWorkflow
+     * @param FtaModel $ftaModel
+     * @param string $paramSytheseAction
+     * @param int $paramIdftaChapitreEncours
+     * @return string
+     */
+    public static function getRolesNavigationBar($paramIdUser, $paramWorkflow, FtaModel $ftaModel, $paramSytheseAction, $paramIdftaChapitreEncours, $paramIdFtaRoleEncours) {
+        //Variable
+        $listeRole = array();
+
+
+
+        $arrayRoleWorkflow = FtaRoleModel::getArrayIdFtaRoleByIdUserAndWorkflow($paramIdUser, $paramWorkflow);
+        //Calcul du taux
+        $taux_temp = FtaSuiviProjetModel::getArrayFtaTauxValidation($ftaModel, TRUE);
+        if ($taux_temp["1"]) {
+            foreach ($taux_temp["1"] as $id_fta_processus => $taux) {
+                /**
+                 * On obtient le rôle pour lequel le processus correspond
+                 */
+                $arrayCheckRole = FtaWorkflowStructureModel::getArrayRoleByProcessusAndWorkflow($id_fta_processus, $paramWorkflow);
+                $checkRole1 = array_intersect($arrayCheckRole, $arrayRoleWorkflow);
+                if ($checkRole1) {
+                    $checkRole2 = array_intersect($arrayCheckRole, $listeRole);
+                    if (!$checkRole2) {
+                        /**
+                         * 0 en attente 
+                         * entre 0 et 1 cours
+                         * 1 validé
+                         */
+                        $listeRole[] = $arrayCheckRole["0"];
+                        /**
+                         * Mise en forme du rôle en cours
+                         */
+                        if ($arrayCheckRole["0"] == $paramIdFtaRoleEncours) {
+                            $font_size = "size=" . Navigation::FONT_SIZE_ROLE_ENCOURS;
+                            $font_flash = "<font " . $font_size . ">";
+                            $image_flash1 = $font_flash . '[  ' . "</font>";
+                            $image_flash2 = $font_flash . '  ]' . "</font>";
+                        } else {
+                            $font_size = "";
+                            $image_flash1 = '-  ';
+                            $image_flash2 = '  -';
+                        }
+
+                        if ($taux == "0") {
+                            /**
+                             * Vérification que tous les processus précédent soit validé si oui le processus est encours
+                             */
+                            $taux_validation_processus = FtaProcessusModel::getFtaProcessusNonValidePrecedent($ftaModel->getKeyValue(), $id_fta_processus, $paramWorkflow);
+                            if ($taux_validation_processus == "1" or $taux_validation_processus === NULL) {
+                                $ftaRoleModel = new FtaRoleModel($arrayCheckRole["0"]);
+                                $roles.= $image_flash1 . ' <a href=' . 'modification_fiche' . '.php?'
+                                        . 'id_fta=' . $ftaModel->getKeyValue()
+                                        . '&id_fta_chapitre_encours=' . $paramIdftaChapitreEncours
+                                        . '&synthese_action=' . $paramSytheseAction
+                                        . '&id_fta_etat=' . $ftaModel->getDataField(FtaModel::FIELDNAME_ID_FTA_ETAT)->getFieldValue()
+                                        . '&abreviation_fta_etat=' . $ftaModel->getModelFtaEtat()->getDataField(FtaEtatModel::FIELDNAME_ABREVIATION)->getFieldValue()
+//                                            . '&comeback=' . self::$comeback
+                                        . '&id_fta_role=' . $arrayCheckRole["0"] . '>' . $ftaRoleModel->getDataField(FtaRoleModel::FIELDNAME_DESCRIPTION_FTA_ROLE)->getFieldValue() . '</a> ' . $image_flash2 . ' ';
+                            } else {
+                                $ftaRoleModel = new FtaRoleModel($arrayCheckRole["0"]);
+                                /**
+                                 * Liien vers l'historique sans la navigation
+                                 */
+                                $roles.= $image_flash1 . $ftaRoleModel->getDataField(FtaRoleModel::FIELDNAME_DESCRIPTION_FTA_ROLE)->getFieldValue() . $image_flash2 . ' ';
+                            }
+                        } elseif ($taux == "1" or ( $taux <> "0" and $taux <> "1")) {
+                            $ftaRoleModel = new FtaRoleModel($arrayCheckRole["0"]);
+                            $roles.= $image_flash1 . ' <a href=' . 'modification_fiche' . '.php?'
+                                    . 'id_fta=' . $ftaModel->getKeyValue()
+                                    . '&id_fta_chapitre_encours=' . $paramIdftaChapitreEncours
+                                    . '&synthese_action=' . $paramSytheseAction
+                                    . '&id_fta_etat=' . $ftaModel->getDataField(FtaModel::FIELDNAME_ID_FTA_ETAT)->getFieldValue()
+                                    . '&abreviation_fta_etat=' . $ftaModel->getModelFtaEtat()->getDataField(FtaEtatModel::FIELDNAME_ABREVIATION)->getFieldValue()
+//                                        . '&comeback=' . self::$comeback
+                                    . '&id_fta_role=' . $arrayCheckRole["0"] . '>' . $ftaRoleModel->getDataField(FtaRoleModel::FIELDNAME_DESCRIPTION_FTA_ROLE)->getFieldValue() . '</a> ' . $image_flash2 . ' ';
+                        }
+                    }
+                }
+            }
+            $RoleNavigation = '  Rôles  ' . $roles;
+        }
+
+        return $RoleNavigation;
+    }
+
+    /**
+     * On récupère la couleur correspondante à un rôle
+     * @param int $paramIdFtaRole
+     * @return string
+     */
+    public static function getColorByRole($paramIdFtaRole) {
+        $ftaRoleModel = new FtaRoleModel($paramIdFtaRole);
+        $color = $ftaRoleModel->getDataField(self::FIELDNAME_COLOR_FTA_ROLE)->getFieldValue();
+
+        return $color;
+    }
+
+    /**
+     * On recupère la taille du bandeau du bas
+     * @param int $paramIdFtaRole
+     * @param int $paramIdFtaRoleCheck
+     * @return string
+     */
+    public static function getBoderByRole($paramIdFtaRole, $paramIdFtaRoleCheck) {
+        if ($paramIdFtaRoleCheck == $paramIdFtaRole) {
+            $border = "12px";
+        } else {
+            $border = "5px";
+        }
+        return $border;
     }
 
 }

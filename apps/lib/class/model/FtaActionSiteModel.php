@@ -4,7 +4,7 @@
  * Description of FtaActionSiteModel
  * Table des utilisateurs
  *
- * @author tp4300001
+ * @author franckwastaken
  */
 class FtaActionSiteModel extends AbstractModel {
 
@@ -27,23 +27,46 @@ class FtaActionSiteModel extends AbstractModel {
     public static function getArrayIdIntranetActionByWorkflowAndSiteDeProduction($paramIdFtaWorkflow, $paramIdFtaSiteDeProduction) {
 
 
-        $req = 'SELECT ' . FtaActionSiteModel::FIELDNAME_ID_INTRANET_ACTIONS
-                . ' FROM ' . FtaActionSiteModel::TABLENAME
-                . ' WHERE ' . FtaActionSiteModel::FIELDNAME_ID_FTA_WORKFLOW . '=' . $paramIdFtaWorkflow;
+        $req = 'SELECT ' . self::FIELDNAME_ID_INTRANET_ACTIONS
+                . ' FROM ' . self::TABLENAME
+                . ' WHERE ' . self::FIELDNAME_ID_FTA_WORKFLOW . '=' . $paramIdFtaWorkflow;
         /**
          * on ne verifie que l'espace de travail pour les site non défiie
          */
         if ($paramIdFtaSiteDeProduction != GeoModel::ID_SITE_NON_DEFINIE) {
-            $req.= ' AND ' . FtaActionSiteModel::FIELDNAME_ID_SITE . '=' . $paramIdFtaSiteDeProduction;
-        } 
+            $req.= ' AND ' . self::FIELDNAME_ID_SITE . '=' . $paramIdFtaSiteDeProduction;
+        }
         $array = DatabaseOperation::convertSqlStatementWithoutKeyToArray($req);
         if ($array) {
             foreach ($array as $value) {
-                $idIntranetActions[] = $value[FtaActionSiteModel::FIELDNAME_ID_INTRANET_ACTIONS];
+                $idIntranetActions[] = $value[self::FIELDNAME_ID_INTRANET_ACTIONS];
             }
         }
 
         return $idIntranetActions;
+    }
+
+    /**
+     * On obtient le tableau des id intranet action du site de rpooduction
+     * pour un espace de travail donné
+     * @param int $paramWorkflow
+     * @param int $paramSiteDeProd
+     * @return array
+     */
+    public static function getArrayIdIntranetActionsByWorkflowAndSiteDeProd($paramWorkflow, $paramSiteDeProd) {
+        $arrayIdIntranetActions = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
+                        'SELECT ' . self::TABLENAME . '.' . self::FIELDNAME_ID_INTRANET_ACTIONS
+                        . ' FROM ' . self::TABLENAME
+                        . ' WHERE ' . self::TABLENAME . '.' . self::FIELDNAME_ID_FTA_WORKFLOW . '=' . $paramWorkflow
+                        . ' AND ' . self::TABLENAME . '.' . self::FIELDNAME_ID_SITE . '=' . $paramSiteDeProd
+        );
+
+        if ($arrayIdIntranetActions) {
+            foreach ($arrayIdIntranetActions as $value) {
+                $result[] = $value[self::FIELDNAME_ID_INTRANET_ACTIONS];
+            }
+            return $result;
+        }
     }
 
 }

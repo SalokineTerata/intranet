@@ -27,7 +27,7 @@
  * - 2ème champs = intitulé de la ligne
  * - 3ème champs = champs à gérer et pouvant être modifié par l'utilisateur
  * 
- * @author tp4300001
+ * @author franckwastaken
  */
 class HtmlSubForm_RNN extends HtmlSubForm {
 
@@ -86,14 +86,28 @@ class HtmlSubForm_RNN extends HtmlSubForm {
      */
     private $tableLabel;
 
+    /**
+     * Nom de la fonction de gestion des versions
+     */
+    private $nameDataTableToCompare;
+
     const VIRTUAL = 'VIRTUAL';
 
-    function __construct($paramArrayPrimaryContent = NULL, $paramSubFormPrimaryModelClassName = NULL, $paramPrimaryLabel = NULL, $secondaryTableNamesAndIdKeyValue = NULL) {
+    function __construct($paramArrayPrimaryContent = NULL, $paramSubFormPrimaryModelClassName = NULL, $paramPrimaryLabel = NULL, $secondaryTableNamesAndIdKeyValue = NULL, $NameDataFtaConditionnementTableToCompare = NULL) {
         parent::__construct();
         parent::setLabel($paramPrimaryLabel);
         $this->setArrayPrimaryContent($paramArrayPrimaryContent);
         $this->setSubFormPrimaryModelClassName($paramSubFormPrimaryModelClassName);
         $this->setSecondaryTableNamesAndIdKeyValue($secondaryTableNamesAndIdKeyValue);
+        $this->setNameDataTableToCompare($NameDataFtaConditionnementTableToCompare);
+    }
+   
+    function getNameDataTableToCompare() {
+        return $this->nameDataTableToCompare;
+    }
+
+    function setNameDataTableToCompare($nameDataTableToCompare) {
+        $this->nameDataTableToCompare = $nameDataTableToCompare;
     }
 
     function getTableLabel() {
@@ -197,6 +211,18 @@ class HtmlSubForm_RNN extends HtmlSubForm {
                 $modelSubForm = new $subFormModelClassName($key);
 
                 /**
+                 * On récupère le nom de la fonction gérant la gestion des versions
+                 */
+                if (!$this->getNameDataTableToCompare()) {
+                    $NameDataTableToCompare = $modelSubForm->getNameDataTableToCompare();
+                } else {
+                    $NameDataTableToCompare = $this->getNameDataTableToCompare();
+                }
+                if ($NameDataTableToCompare) {
+                    $modelSubForm->$NameDataTableToCompare();
+                }
+
+                /**
                  * Récupération de la liste des champs à représenter
                  */
                 $valueArrayKeys = array_keys($valueArray);
@@ -217,6 +243,17 @@ class HtmlSubForm_RNN extends HtmlSubForm {
                      * Chargement du DataField correspondant au champs concerné.
                      */
                     $dataField = $modelSubForm->getDataField($fieldName);
+
+                    /**
+                     * Verification des règles de validation
+                     */
+                    $dataField->checkValidationRules();
+
+                    if ($dataField->getDataValidationSuccessful() == TRUE) {
+                        $this->setDataValidationSuccessfulToTrue();
+                    } else {
+                        $this->setDataValidationSuccessfulToFalse();
+                    }
 
                     /**
                      * Conversion du DataField en HtmlField
@@ -246,7 +283,7 @@ class HtmlSubForm_RNN extends HtmlSubForm {
                      * et que le champs ne fait pas partie de la liste des champs
                      * vérrouillés, alors le champs sera modifiable par l'utilisateur.
                      */
-                    if (parent::getIsEditable() && $htmlField->getContentLocked() == NULL) {
+                    if (parent::getIsEditable() && $htmlField->getContentLocked() == NULL && $this->getContentLocked() == NULL) {
 
                         /**
                          * Le champs est modifiable.
@@ -258,6 +295,13 @@ class HtmlSubForm_RNN extends HtmlSubForm {
                          * Le champs n'est pas modifiable.
                          */
                         $htmlField->setIsEditable(FALSE);
+                    }
+                    /**
+                     * On vérifie si le champ en cours est différents de la version précédente
+                     */
+                    $check = strstr($fieldName, "VIRTUAL_");
+                    if (!$check) {
+                        $htmlField->setIsWarningUpdate($modelSubForm->getDataField($fieldName)->isFieldDiff());
                     }
                     $return.=$htmlField->getHtmlResult();
                 }

@@ -1,0 +1,173 @@
+Démarrage : lun sep  1 23:00:01 CEST 2014
+Arrêt     : lun sep  1 23:01:06 CEST 2014
+
+
+
+Base MySQL sélectionnée: agis
+Nombre de serveur(s) Linux concerné(s): 4
+Nombre de dossier(s) à mettre à jour: 29
+
+sending incremental file list
+
+sent 7305 bytes  received 49 bytes  4902.67 bytes/sec
+total size is 13622581  speedup is 1852.40
+sending incremental file list
+suivi_investissement/2014-2015/R\#351alis\#351 bud invest r\#351vis\#351 2014-2015/Bud invest r\#351vis\#351 AVI 2014 2015.xls
+suivi_investissement/2014-2015/R\#351alis\#351 bud invest r\#351vis\#351 2014-2015/Bud invest r\#351vis\#351 HER 2014-2015.xls
+suivi_investissement/2014-2015/R\#351alis\#351 bud invest r\#351vis\#351 2014-2015/Bud invest r\#351vis\#351 PFT 2014-2015.xls
+suivi_investissement/2014-2015/R\#351alis\#351 bud invest r\#351vis\#351 2014-2015/Bud invest r\#351vis\#351 TAR 2014-2015xls.xls
+
+sent 31738 bytes  received 1904 bytes  22428.00 bytes/sec
+total size is 12851671  speedup is 382.01
+sending incremental file list
+
+sent 63 bytes  received 12 bytes  50.00 bytes/sec
+total size is 212826112  speedup is 2837681.49
+sending incremental file list
+
+sent 7593 bytes  received 45 bytes  5092.00 bytes/sec
+total size is 9254930  speedup is 1211.70
+sending incremental file list
+
+sent 7938 bytes  received 20 bytes  5305.33 bytes/sec
+total size is 16768700  speedup is 2107.15
+sending incremental file list
+
+sent 4308 bytes  received 24 bytes  2888.00 bytes/sec
+total size is 6387982  speedup is 1474.60
+sending incremental file list
+mercuriales/sync.ffs_db
+mercuriales/MERCURIALES - AGIS/mdd/2014/2014 MERCURIALE CARREFOUR PLATS CUISINES.xls
+mercuriales/MERCURIALES - AGIS/mdd/2014/2014 MERCURIALE CASINO.xls
+mercuriales/MERCURIALES - MARIE/2014/2014 MERCURIALES CARREFOUR MARIE.xls
+
+sent 49794 bytes  received 5362 bytes  36770.67 bytes/sec
+total size is 37741558  speedup is 684.27
+sending incremental file list
+
+sent 5047 bytes  received 27 bytes  10148.00 bytes/sec
+total size is 39173092  speedup is 7720.36
+sending incremental file list
+operations_commerciales/chrono demande echantillons.xls
+operations_commerciales/FZC/CONFIRMATIONS/2014/TOUPARGEL/TOUPARGEL_CYCLE 13_2014.xls
+operations_commerciales/FZC/OP FZC 2014/FZC TOUPARGEL 2014.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS CASINO 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS GALEC 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/CASINO SM/2014 SM FEUILLE DE CHOU FETE DE LA LUNE.xls
+operations_commerciales/GMS/2014/D-REGIONS/GMS LECLERC 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/D-REGIONS/GMS SCHIEVER 2014-FUTUR MASTER.xls
+
+sent 287257 bytes  received 21661 bytes  123567.20 bytes/sec
+total size is 62226102  speedup is 201.43
+sending incremental file list
+deleting rh_multi_sites/Accords d'entreprise/Accord d\#351blocage part-int - 18.07.13.pdf
+deleting rh_multi_sites/Accords d'entreprise/Accord de participation P\#364le Traiteur 28.08.2012.pdf
+deleting rh_multi_sites/Accords d'entreprise/Accord Int\#351ressement LDC Traiteur 28.08.2012.pdf
+rh_multi_sites/Accords d'entreprise/Int\#351ressement - participation/
+rh_multi_sites/Accords d'entreprise/Int\#351ressement - participation/Accord Int\#351ressement LDC Traiteur 28.08.2012.pdf
+rh_multi_sites/Accords d'entreprise/Int\#351ressement - participation/Accord de participation P\#364le Traiteur 28.08.2012.pdf
+rh_multi_sites/Accords d'entreprise/Int\#351ressement - participation/Accord d\#351blocage part-int - 18.07.13.pdf
+rh_multi_sites/Accords d'entreprise/Int\#351ressement - participation/Anenant n\#2602 28.08.2014
+rh_multi_sites/Accords d'entreprise/Int\#351ressement - participation/Av Accord int\#351ressement P\#364le Traiteur 26.08.2013.pdf
+
+sent 2099113 bytes  received 182 bytes  167943.60 bytes/sec
+total size is 99898922  speedup is 47.59
+sending incremental file list
+gofast/CHANTIERS/4_COTATION_Benjamin/5_STANDARDS/2014_07_28_R\#351vision DDD - V4 - Version Marie.xls
+
+sent 61390 bytes  received 2995 bytes  25754.00 bytes/sec
+total size is 54177661  speedup is 841.46
+sending incremental file list
+
+sent 10288 bytes  received 13 bytes  6867.33 bytes/sec
+total size is 51878912  speedup is 5036.30
+sending incremental file list
+
+sent 5794 bytes  received 30 bytes  3882.67 bytes/sec
+total size is 94942597  speedup is 16301.96
+sending incremental file list
+
+sent 63 bytes  received 12 bytes  50.00 bytes/sec
+total size is 212826112  speedup is 2837681.49
+sending incremental file list
+
+sent 7593 bytes  received 45 bytes  5092.00 bytes/sec
+total size is 9254930  speedup is 1211.70
+sending incremental file list
+
+sent 4308 bytes  received 24 bytes  2888.00 bytes/sec
+total size is 6387982  speedup is 1474.60
+sending incremental file list
+
+sent 7938 bytes  received 20 bytes  5305.33 bytes/sec
+total size is 16768700  speedup is 2107.15
+sending incremental file list
+
+sent 85 bytes  received 13 bytes  196.00 bytes/sec
+total size is 104853504  speedup is 1069933.71
+sending incremental file list
+operations_commerciales/chrono demande echantillons.xls
+operations_commerciales/FZC/CONFIRMATIONS/2014/TOUPARGEL/TOUPARGEL_CYCLE 13_2014.xls
+operations_commerciales/FZC/OP FZC 2014/FZC TOUPARGEL 2014.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS CASINO 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS GALEC 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/CASINO SM/2014 SM FEUILLE DE CHOU FETE DE LA LUNE.xls
+operations_commerciales/GMS/2014/D-REGIONS/GMS LECLERC 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/D-REGIONS/GMS SCHIEVER 2014-FUTUR MASTER.xls
+
+sent 287257 bytes  received 21661 bytes  123567.20 bytes/sec
+total size is 62226102  speedup is 201.43
+sending incremental file list
+mercuriales/sync.ffs_db
+mercuriales/MERCURIALES - AGIS/mdd/2014/2014 MERCURIALE CARREFOUR PLATS CUISINES.xls
+mercuriales/MERCURIALES - AGIS/mdd/2014/2014 MERCURIALE CASINO.xls
+mercuriales/MERCURIALES - MARIE/2014/2014 MERCURIALES CARREFOUR MARIE.xls
+
+sent 49794 bytes  received 5362 bytes  22062.40 bytes/sec
+total size is 37741558  speedup is 684.27
+sending incremental file list
+
+sent 10288 bytes  received 13 bytes  6867.33 bytes/sec
+total size is 51878912  speedup is 5036.30
+sending incremental file list
+
+sent 7305 bytes  received 49 bytes  4902.67 bytes/sec
+total size is 13622581  speedup is 1852.40
+sending incremental file list
+
+sent 5745 bytes  received 23 bytes  3845.33 bytes/sec
+total size is 129159129  speedup is 22392.36
+sending incremental file list
+
+sent 5610 bytes  received 39 bytes  3766.00 bytes/sec
+total size is 59049369  speedup is 10453.07
+sending incremental file list
+
+sent 52408 bytes  received 98 bytes  35004.00 bytes/sec
+total size is 316197459  speedup is 6022.12
+sending incremental file list
+deleting rh_multi_sites/Accords d'entreprise/Accord d\#351blocage part-int - 18.07.13.pdf
+deleting rh_multi_sites/Accords d'entreprise/Accord de participation P\#364le Traiteur 28.08.2012.pdf
+deleting rh_multi_sites/Accords d'entreprise/Accord Int\#351ressement LDC Traiteur 28.08.2012.pdf
+rh_multi_sites/Accords d'entreprise/Int\#351ressement - participation/
+rh_multi_sites/Accords d'entreprise/Int\#351ressement - participation/Accord Int\#351ressement LDC Traiteur 28.08.2012.pdf
+rh_multi_sites/Accords d'entreprise/Int\#351ressement - participation/Accord de participation P\#364le Traiteur 28.08.2012.pdf
+rh_multi_sites/Accords d'entreprise/Int\#351ressement - participation/Accord d\#351blocage part-int - 18.07.13.pdf
+rh_multi_sites/Accords d'entreprise/Int\#351ressement - participation/Anenant n\#2602 28.08.2014
+rh_multi_sites/Accords d'entreprise/Int\#351ressement - participation/Av Accord int\#351ressement P\#364le Traiteur 26.08.2013.pdf
+
+sent 2099113 bytes  received 182 bytes  167943.60 bytes/sec
+total size is 99898922  speedup is 47.59
+sending incremental file list
+gofast/CHANTIERS/4_COTATION_Benjamin/5_STANDARDS/2014_07_28_R\#351vision DDD - V4 - Version Marie.xls
+
+sent 61390 bytes  received 2995 bytes  25754.00 bytes/sec
+total size is 54177661  speedup is 841.46
+sending incremental file list
+
+sent 7938 bytes  received 20 bytes  5305.33 bytes/sec
+total size is 16768700  speedup is 2107.15
+sending incremental file list
+
+sent 7938 bytes  received 20 bytes  5305.33 bytes/sec
+total size is 16768700  speedup is 2107.15

@@ -1,0 +1,165 @@
+Démarrage : lun jui  7 23:00:02 CEST 2014
+Arrêt     : lun jui  7 23:01:38 CEST 2014
+
+
+
+Base MySQL sélectionnée: agis
+Nombre de serveur(s) Linux concerné(s): 4
+Nombre de dossier(s) à mettre à jour: 29
+
+sending incremental file list
+gestion_crise/mise \#340 jour 2014/TOUPARGEL/contacts Agis Tarare pour Toupargel.odt
+gestion_crise/mise \#340 jour 2014/TOUPARGEL/doc crise Toupargel compl\#351t\#351 Tarare 2014.pdf
+
+sent 239783 bytes  received 87 bytes  68534.29 bytes/sec
+total size is 13584181  speedup is 56.63
+sending incremental file list
+
+sent 6283 bytes  received 38 bytes  2528.40 bytes/sec
+total size is 12444119  speedup is 1968.69
+sending incremental file list
+
+sent 63 bytes  received 12 bytes  50.00 bytes/sec
+total size is 90648576  speedup is 1208647.68
+sending incremental file list
+
+sent 7593 bytes  received 45 bytes  5092.00 bytes/sec
+total size is 9254930  speedup is 1211.70
+sending incremental file list
+
+sent 7756 bytes  received 20 bytes  5184.00 bytes/sec
+total size is 16755943  speedup is 2154.83
+sending incremental file list
+
+sent 4308 bytes  received 24 bytes  8664.00 bytes/sec
+total size is 6387982  speedup is 1474.60
+sending incremental file list
+mercuriales/sync.ffs_db
+mercuriales/gms/2014/CENTRALES 2014/CARREFOUR 2014.xls
+mercuriales/gms/2014/REGIONS  2014/SCHIEVER MERCU 2014.xls
+
+sent 33259 bytes  received 10329 bytes  17435.20 bytes/sec
+total size is 33193490  speedup is 761.53
+sending incremental file list
+
+sent 5047 bytes  received 27 bytes  3382.67 bytes/sec
+total size is 39173092  speedup is 7720.36
+sending incremental file list
+operations_commerciales/DEMANDE ECHANTILLONS CL .xls
+operations_commerciales/chrono demande echantillons.xls
+operations_commerciales/FZC/OP FZC 2014/FZC PICARD 2014.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS CARREFOUR 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/D-REGIONS/GMS SCHIEVER 2014-FUTUR MASTER.xls
+
+sent 255944 bytes  received 11944 bytes  59530.67 bytes/sec
+total size is 53822875  speedup is 200.92
+sending incremental file list
+
+sent 20347 bytes  received 83 bytes  8172.00 bytes/sec
+total size is 99184091  speedup is 4854.83
+sending incremental file list
+gofast/sync.ffs_db
+deleting gofast/CHANTIERS/2_FTK_CLIENTS_Mathieu/Support_R\#351union_1_FTk_Clients_160614.ppt
+gofast/CHANTIERS/2_FTK_CLIENTS_Mathieu/Support_R\#351union_1&2_FTk_Clients_160614.ppt
+gofast/CHANTIERS/2_FTK_CLIENTS_Mathieu/4_GEMBA/FT RAV CREV 20G SAROS.doc
+gofast/CHANTIERS/2_FTK_CLIENTS_Mathieu/4_GEMBA/FT samossa dorade 25g.xls
+gofast/CHANTIERS/2_FTK_CLIENTS_Mathieu/5_STANDARDS/Changer_ameliorer.ppt
+gofast/CHANTIERS/2_FTK_CLIENTS_Mathieu/6_BILAN/Fiche_Am\#260_Av-Ap_FTk_020714.xls
+gofast/CHANTIERS/2_FTK_CLIENTS_Mathieu/Fiches \#340 remplir pour les clients (LPM)/Fiches Marketing/Catalogue Produit CDS gamme PC Octobre 2014 MAJ 26.05.2014.ppt
+gofast/CHANTIERS/2_FTK_CLIENTS_Mathieu/Fiches \#340 remplir pour les clients (LPM)/Fiches Marketing/Fiche Composition Produit Auchan fr PLATEAU ESPAGNOL AGIS.xls
+
+sent 3899353 bytes  received 8127 bytes  181743.26 bytes/sec
+total size is 50818273  speedup is 13.01
+sending incremental file list
+
+sent 10004 bytes  received 13 bytes  6678.00 bytes/sec
+total size is 48314368  speedup is 4823.24
+sending incremental file list
+
+sent 5781 bytes  received 30 bytes  3874.00 bytes/sec
+total size is 93132165  speedup is 16026.87
+sending incremental file list
+
+sent 63 bytes  received 12 bytes  50.00 bytes/sec
+total size is 90648576  speedup is 1208647.68
+sending incremental file list
+
+sent 7593 bytes  received 45 bytes  5092.00 bytes/sec
+total size is 9254930  speedup is 1211.70
+sending incremental file list
+
+sent 4308 bytes  received 24 bytes  2888.00 bytes/sec
+total size is 6387982  speedup is 1474.60
+sending incremental file list
+
+sent 7756 bytes  received 20 bytes  5184.00 bytes/sec
+total size is 16755943  speedup is 2154.83
+sending incremental file list
+
+sent 85 bytes  received 13 bytes  65.33 bytes/sec
+total size is 104853504  speedup is 1069933.71
+sending incremental file list
+operations_commerciales/DEMANDE ECHANTILLONS CL .xls
+operations_commerciales/chrono demande echantillons.xls
+operations_commerciales/FZC/OP FZC 2014/FZC PICARD 2014.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS CARREFOUR 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/D-REGIONS/GMS SCHIEVER 2014-FUTUR MASTER.xls
+
+sent 255944 bytes  received 11944 bytes  76539.43 bytes/sec
+total size is 53822875  speedup is 200.92
+sending incremental file list
+mercuriales/sync.ffs_db
+mercuriales/gms/2014/CENTRALES 2014/CARREFOUR 2014.xls
+mercuriales/gms/2014/REGIONS  2014/SCHIEVER MERCU 2014.xls
+
+sent 33259 bytes  received 10329 bytes  29058.67 bytes/sec
+total size is 33193490  speedup is 761.53
+sending incremental file list
+
+sent 10004 bytes  received 13 bytes  6678.00 bytes/sec
+total size is 48314368  speedup is 4823.24
+sending incremental file list
+gestion_crise/mise \#340 jour 2014/TOUPARGEL/contacts Agis Tarare pour Toupargel.odt
+gestion_crise/mise \#340 jour 2014/TOUPARGEL/doc crise Toupargel compl\#351t\#351 Tarare 2014.pdf
+
+sent 239783 bytes  received 87 bytes  68534.29 bytes/sec
+total size is 13584181  speedup is 56.63
+sending incremental file list
+
+sent 5745 bytes  received 23 bytes  2307.20 bytes/sec
+total size is 129159129  speedup is 22392.36
+sending incremental file list
+
+sent 5610 bytes  received 39 bytes  2259.60 bytes/sec
+total size is 59049369  speedup is 10453.07
+sending incremental file list
+codesoft/Codesoft 7/Codes Produits/80968.bak
+codesoft/Codesoft 7/Codes Produits/80968.lab
+
+sent 99433 bytes  received 136 bytes  28448.29 bytes/sec
+total size is 299490387  speedup is 3007.87
+sending incremental file list
+
+sent 20347 bytes  received 83 bytes  13620.00 bytes/sec
+total size is 99184091  speedup is 4854.83
+sending incremental file list
+gofast/sync.ffs_db
+deleting gofast/CHANTIERS/2_FTK_CLIENTS_Mathieu/Support_R\#351union_1_FTk_Clients_160614.ppt
+gofast/CHANTIERS/2_FTK_CLIENTS_Mathieu/Support_R\#351union_1&2_FTk_Clients_160614.ppt
+gofast/CHANTIERS/2_FTK_CLIENTS_Mathieu/4_GEMBA/FT RAV CREV 20G SAROS.doc
+gofast/CHANTIERS/2_FTK_CLIENTS_Mathieu/4_GEMBA/FT samossa dorade 25g.xls
+gofast/CHANTIERS/2_FTK_CLIENTS_Mathieu/5_STANDARDS/Changer_ameliorer.ppt
+gofast/CHANTIERS/2_FTK_CLIENTS_Mathieu/6_BILAN/Fiche_Am\#260_Av-Ap_FTk_020714.xls
+gofast/CHANTIERS/2_FTK_CLIENTS_Mathieu/Fiches \#340 remplir pour les clients (LPM)/Fiches Marketing/Catalogue Produit CDS gamme PC Octobre 2014 MAJ 26.05.2014.ppt
+gofast/CHANTIERS/2_FTK_CLIENTS_Mathieu/Fiches \#340 remplir pour les clients (LPM)/Fiches Marketing/Fiche Composition Produit Auchan fr PLATEAU ESPAGNOL AGIS.xls
+
+sent 3899353 bytes  received 8127 bytes  153234.51 bytes/sec
+total size is 50818273  speedup is 13.01
+sending incremental file list
+
+sent 7756 bytes  received 20 bytes  3110.40 bytes/sec
+total size is 16755943  speedup is 2154.83
+sending incremental file list
+
+sent 7756 bytes  received 20 bytes  5184.00 bytes/sec
+total size is 16755943  speedup is 2154.83

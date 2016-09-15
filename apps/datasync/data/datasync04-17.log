@@ -1,0 +1,149 @@
+Démarrage : jeu avr 17 23:00:01 CEST 2014
+Arrêt     : jeu avr 17 23:00:48 CEST 2014
+
+
+
+Base MySQL sélectionnée: agis
+Nombre de serveur(s) Linux concerné(s): 4
+Nombre de dossier(s) à mettre à jour: 27
+
+sending incremental file list
+
+sent 7051 bytes  received 49 bytes  4733.33 bytes/sec
+total size is 12693370  speedup is 1787.80
+sending incremental file list
+
+sent 6274 bytes  received 38 bytes  2524.80 bytes/sec
+total size is 12421591  speedup is 1967.93
+sending incremental file list
+
+sent 63 bytes  received 12 bytes  50.00 bytes/sec
+total size is 84160512  speedup is 1122140.16
+sending incremental file list
+
+sent 7538 bytes  received 45 bytes  5055.33 bytes/sec
+total size is 9253358  speedup is 1220.28
+sending incremental file list
+
+sent 7695 bytes  received 20 bytes  5143.33 bytes/sec
+total size is 16751789  speedup is 2171.33
+sending incremental file list
+
+sent 4308 bytes  received 24 bytes  2888.00 bytes/sec
+total size is 6387982  speedup is 1474.60
+sending incremental file list
+mercuriales/gms/2014/REGIONS  2014/SCHIEVER MERCU 2014.xls
+
+sent 19178 bytes  received 4605 bytes  9513.20 bytes/sec
+total size is 30216362  speedup is 1270.50
+sending incremental file list
+
+sent 5047 bytes  received 27 bytes  3382.67 bytes/sec
+total size is 39173092  speedup is 7720.36
+sending incremental file list
+operations_commerciales/chrono demande echantillons.xls
+operations_commerciales/GMS/RECAP DEMANDE ET CONFIRMATIONS HEBDO.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS CARREFOUR 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS CASINO 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/CARREFOUR/2014 CARREFOUR PROMO 24 PLATEAUX APERO PIZZA.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/CASINO HM/2014 CARTE AVRIL PC FE.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/CASINO HM/2014 CARTE MAI CREPES ET GALETTES.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/CASINO HM/2014 HM FEUILLE DE CHOU S33 PC COUPE ET FE.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/CASINO HM/2014 HM MECA PRO S30 ASIE GRATINS.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/CASINO HM/2014 HM PRIX CHOC S36.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/CASINO HM/2014 HM RENTREE 3 PAELLA COUSCOUS.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/CASINO HM/2014 SM MECA PRO S35 ENCORNETS MOUSSAKA.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/CASINO HM/2014 SM MECA PRO S35 PAELLA COUSCOUS.xls
+operations_commerciales/GMS/2014/D-REGIONS/GMS LECLERC 2014-FUTUR MASTER.xls
+
+sent 357809 bytes  received 23784 bytes  58706.62 bytes/sec
+total size is 49973659  speedup is 130.96
+sending incremental file list
+
+sent 20051 bytes  received 78 bytes  8051.60 bytes/sec
+total size is 98915848  speedup is 4914.10
+sending incremental file list
+gofast/CHANTIERS/2_FTK_CLIENTS_Mathieu/FTK_CLIENTS_Mathieu.ppt
+
+sent 4285 bytes  received 560 bytes  3230.00 bytes/sec
+total size is 21225150  speedup is 4380.84
+sending incremental file list
+
+sent 9204 bytes  received 13 bytes  2633.43 bytes/sec
+total size is 43946496  speedup is 4767.98
+sending incremental file list
+
+sent 5781 bytes  received 30 bytes  3874.00 bytes/sec
+total size is 93132165  speedup is 16026.87
+sending incremental file list
+
+sent 63 bytes  received 12 bytes  50.00 bytes/sec
+total size is 84160512  speedup is 1122140.16
+sending incremental file list
+
+sent 7538 bytes  received 45 bytes  5055.33 bytes/sec
+total size is 9253358  speedup is 1220.28
+sending incremental file list
+
+sent 4308 bytes  received 24 bytes  2888.00 bytes/sec
+total size is 6387982  speedup is 1474.60
+sending incremental file list
+
+sent 7695 bytes  received 20 bytes  5143.33 bytes/sec
+total size is 16751789  speedup is 2171.33
+sending incremental file list
+
+sent 85 bytes  received 13 bytes  196.00 bytes/sec
+total size is 104853504  speedup is 1069933.71
+sending incremental file list
+operations_commerciales/chrono demande echantillons.xls
+operations_commerciales/GMS/RECAP DEMANDE ET CONFIRMATIONS HEBDO.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS CARREFOUR 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/A-CENTRALES/GMS CASINO 2014-FUTUR MASTER.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/CARREFOUR/2014 CARREFOUR PROMO 24 PLATEAUX APERO PIZZA.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/CASINO HM/2014 CARTE AVRIL PC FE.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/CASINO HM/2014 CARTE MAI CREPES ET GALETTES.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/CASINO HM/2014 HM FEUILLE DE CHOU S33 PC COUPE ET FE.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/CASINO HM/2014 HM MECA PRO S30 ASIE GRATINS.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/CASINO HM/2014 HM PRIX CHOC S36.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/CASINO HM/2014 HM RENTREE 3 PAELLA COUSCOUS.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/CASINO HM/2014 SM MECA PRO S35 ENCORNETS MOUSSAKA.xls
+operations_commerciales/GMS/2014/B-CONFIRMATIONS OPERATIONS/CASINO HM/2014 SM MECA PRO S35 PAELLA COUSCOUS.xls
+operations_commerciales/GMS/2014/D-REGIONS/GMS LECLERC 2014-FUTUR MASTER.xls
+
+sent 357809 bytes  received 23784 bytes  109026.57 bytes/sec
+total size is 49973659  speedup is 130.96
+sending incremental file list
+mercuriales/gms/2014/REGIONS  2014/SCHIEVER MERCU 2014.xls
+
+sent 19178 bytes  received 4605 bytes  15855.33 bytes/sec
+total size is 30216362  speedup is 1270.50
+sending incremental file list
+
+sent 9204 bytes  received 13 bytes  6144.67 bytes/sec
+total size is 43946496  speedup is 4767.98
+sending incremental file list
+
+sent 7051 bytes  received 49 bytes  4733.33 bytes/sec
+total size is 12693370  speedup is 1787.80
+sending incremental file list
+
+sent 5732 bytes  received 23 bytes  11510.00 bytes/sec
+total size is 129183193  speedup is 22447.12
+sending incremental file list
+
+sent 5610 bytes  received 39 bytes  3766.00 bytes/sec
+total size is 59049369  speedup is 10453.07
+sending incremental file list
+
+sent 51049 bytes  received 95 bytes  20457.60 bytes/sec
+total size is 293866579  speedup is 5745.87
+sending incremental file list
+
+sent 20051 bytes  received 78 bytes  8051.60 bytes/sec
+total size is 98915848  speedup is 4914.10
+sending incremental file list
+gofast/CHANTIERS/2_FTK_CLIENTS_Mathieu/FTK_CLIENTS_Mathieu.ppt
+
+sent 4285 bytes  received 560 bytes  3230.00 bytes/sec
+total size is 21225150  speedup is 4380.84

@@ -39,6 +39,7 @@ flush();
   Initialisation des variables
  */
 $page_default = substr(strrchr($_SERVER['PHP_SELF'], '/'), '1', '-4');
+$page_query = $_SERVER['QUERY_STRING'];
 $page_action = $page_default . '_post.php';
 $page_pdf = $page_default . '_pdf.php';
 $action = 'valider';                       //Action proposée à la page _post.php
@@ -60,8 +61,40 @@ $show_help = 1;                              //Activer l'aide en ligne Pop-up
   echo '<br>';
   echo htmlspecialchars($comeback);
  */
+/**
+ * Vérification des droits d'accès
+ */
+/*
+ * Initilisation
+ */
+$globalConfig = new GlobalConfig();
 
+if ($globalConfig->getAuthenticatedUser()) {
+    $idUser = $globalConfig->getAuthenticatedUser()->getKeyValue();
+} else {
+    $titre = UserInterfaceMessage::FR_WARNING_DECONNECTION_TITLE;
+    $message = UserInterfaceMessage::FR_WARNING_DECONNECTION;
+    Lib::showMessage($titre, $message, $redirection);
+}
 
+$fta_consultation = Acl::getValueAccesRights('fta_consultation');
+$fta_modification = Acl::getValueAccesRights('fta_modification');
+
+if (!$fta_consultation) {
+    $titre = UserInterfaceMessage::FR_WARNING_ACCES_RIGHTS_TITLE;
+    $message = UserInterfaceMessage::FR_WARNING_ACCES_RIGHTS
+            . " Veuillez vous déconnecter et contactez l'administrateur de l'intranet";
+    $redirection = "index.php";
+    Lib::showMessage($titre, $message, $redirection, TRUE);
+} elseif ($fta_modification) {
+    $idFtaRoleEncoursDefault = FtaRoleModel::getKeyNameOfFirstRoleByIdUser($idUser);
+    if (!$idFtaRoleEncoursDefault) {
+        $titre = UserInterfaceMessage::FR_WARNING_ACCES_RIGHTS_TITLE;
+        $message = UserInterfaceMessage::FR_WARNING_ACCES_RIGHTS_ROLES;
+        $redirection = "index.php";
+        Lib::showMessage($titre, $message, $redirection);
+    }
+}
 
 //Paramètre d'URL
 $idFta = Lib::getParameterFromRequest(FtaModel::KEYNAME);
@@ -75,6 +108,7 @@ if ($idFta) {
     /**
      * Récupérations des paramètres
      */
+    $checkArcadiaData = Fta2ArcadiaTransactionModel::isIdArcadiaTransactionActif($idFta);
     $id_fta_chapitre_encours = Lib::getParameterFromRequest('id_fta_chapitre_encours', '1');
     $synthese_action = Lib::isDefined('synthese_action');
     $comeback = Lib::isDefined('comeback');
@@ -87,10 +121,12 @@ if ($idFta) {
      * Initilisation
      */
     $ftaModel = new FtaModel($idFta); //Rien ne garantie que l'utilisateur est mis un idFta existant
-    $globalConfig = new GlobalConfig();
-    $idUser = $globalConfig->getAuthenticatedUser()->getKeyValue();
     $idWorkflowFtaEncours = $ftaModel->getDataField(FtaModel::FIELDNAME_WORKFLOW)->getFieldValue();
     $idSiteDeProduction = $ftaModel->getDataField(FtaModel::FIELDNAME_SITE_PRODUCTION)->getFieldValue();
+    /**
+     * Ticket 49823 en 3.1 activation/désactivation d'un workflow
+     */
+//    FtaWorkflowModel::checkActifWorkflow($idWorkflowFtaEncours);
 
     /**
      * Verification des droits d'accès sur une Fta en modification
@@ -99,38 +135,21 @@ if ($idFta) {
         $titre = UserInterfaceMessage::FR_WARNING_ACCES_RIGHTS_TITLE;
         $message = UserInterfaceMessage::FR_WARNING_ACCES_RIGHTS;
         $redirection = "index.php";
-        afficher_message($titre, $message, $redirection);
+        Lib::showMessage($titre, $message, $redirection);
     }
 
 
-    /**
-     * Récuparation des données pour la classification
-     */
-    $idFtaClassification2 = $ftaModel->getDataField(FtaModel::FIELDNAME_ID_FTA_CLASSIFICATION2)->getFieldValue();
-    $selection_proprietaire1 = Lib::getParameterFromRequest('selection_proprietaire1');
-    $selection_proprietaire2 = Lib::getParameterFromRequest('selection_proprietaire2');
-    $selection_marque = Lib::getParameterFromRequest('selection_marque');
-    $selection_activite = Lib::getParameterFromRequest('selection_activite');
-    $selection_rayon = Lib::getParameterFromRequest('selection_rayon');
-    $selection_environnement = Lib::getParameterFromRequest('selection_environnement');
-    $selection_reseau = Lib::getParameterFromRequest('selection_reseau');
-    $selection_saisonnalite = Lib::getParameterFromRequest('selection_saisonnalite');
-    $checkIdFtaClasssification = Lib::getParameterFromRequest('checkIdFtaClasssification');
 
-    /**
-     * Verification pour la classification
-     */
-    if ($idFtaClassification2 and ! $checkIdFtaClasssification) {
-        $ClassificationFta2Model = new ClassificationFta2Model($idFtaClassification2);
-        $selection_proprietaire1 = $ClassificationFta2Model->getDataField(ClassificationFta2Model::FIELDNAME_ID_PROPRIETAIRE_GROUPE)->getFieldValue();
-        $selection_proprietaire2 = $ClassificationFta2Model->getDataField(ClassificationFta2Model::FIELDNAME_ID_PROPRIETAIRE_ENSEIGNE)->getFieldValue();
-        $selection_marque = $ClassificationFta2Model->getDataField(ClassificationFta2Model::FIELDNAME_ID_MARQUE)->getFieldValue();
-        $selection_activite = $ClassificationFta2Model->getDataField(ClassificationFta2Model::FIELDNAME_ID_ACTIVITE)->getFieldValue();
-        $selection_rayon = $ClassificationFta2Model->getDataField(ClassificationFta2Model::FIELDNAME_ID_RAYON)->getFieldValue();
-        $selection_environnement = $ClassificationFta2Model->getDataField(ClassificationFta2Model::FIELDNAME_ID_ENVIRONNEMENT)->getFieldValue();
-        $selection_reseau = $ClassificationFta2Model->getDataField(ClassificationFta2Model::FIELDNAME_ID_RESEAU)->getFieldValue();
-        $selection_saisonnalite = $ClassificationFta2Model->getDataField(ClassificationFta2Model::FIELDNAME_ID_SAISONNALITE)->getFieldValue();
-    }
+//    $selection_proprietaire1 = Lib::getParameterFromRequest('selection_proprietaire1');
+//    $selection_proprietaire2 = Lib::getParameterFromRequest('selection_proprietaire2');
+//    $selection_marque = Lib::getParameterFromRequest('selection_marque');
+//    $selection_activite = Lib::getParameterFromRequest('selection_activite');
+//    $selection_rayon = Lib::getParameterFromRequest('selection_rayon');
+//    $selection_environnement = Lib::getParameterFromRequest('selection_environnement');
+//    $selection_reseau = Lib::getParameterFromRequest('selection_reseau');
+//    $selection_saisonnalite = Lib::getParameterFromRequest('selection_saisonnalite');
+//    $checkIdFtaClasssification = Lib::getParameterFromRequest('checkIdFtaClasssification');
+
 
 
     /**
@@ -146,7 +165,7 @@ if ($idFta) {
             $titre = UserInterfaceMessage::FR_WARNING_ACCES_RIGHTS_TITLE;
             $message = UserInterfaceMessage::FR_WARNING_ACCES_RIGHTS;
             $redirection = "index.php";
-            afficher_message($titre, $message, $redirection);
+            Lib::showMessage($titre, $message, $redirection);
         } else {
             /**
              * On affecte un IdFtaRole seulement dans le cas ou on est vient de la page de recherche
@@ -155,11 +174,27 @@ if ($idFta) {
                 $idFtaRole = $arrayIdFtaRoleAcces["0"];
             }
         }
+    } elseif ($ftaModification) {
+        /**
+         * On affecte un IdFtaRole seulement dans le cas ou on est vient de la page de recherche
+         */
+        if ($idFtaRole == FtaRoleModel::ID_FTA_ROLE_COMMUN) {
+            $arrayIdFtaRoleAcces = FtaRoleModel::getArrayIdFtaRoleByIdUserAndWorkflow($idUser, $idWorkflowFtaEncours);
+            $idFtaRole = $arrayIdFtaRoleAcces["0"];
+            if (!$arrayIdFtaRoleAcces and $idFtaEtat == FtaEtatModel::ID_VALUE_MODIFICATION) {
+                $titre = UserInterfaceMessage::FR_WARNING_ACCES_RIGHTS_TITLE;
+                $message = UserInterfaceMessage::FR_WARNING_ACCES_RIGHTS_WORKFLOW;
+                $redirection = "index.php";
+                Lib::showMessage($titre, $message, $redirection);
+            } elseif (!$arrayIdFtaRoleAcces) {
+                $idFtaRole = FtaRoleModel::ID_FTA_ROLE_COMMUN;
+            }
+        }
     }
 
     $affichgeDesChapitres = TRUE;
 
-    Navigation::initNavigation($idFta, $id_fta_chapitre_encours, $synthese_action, $comeback, $idFtaEtat, $abreviationFtaEtat, $idFtaRole, $affichgeDesChapitres);
+    Navigation::initNavigation($idFta, $id_fta_chapitre_encours, $synthese_action, $comeback, $idFtaEtat, $abreviationFtaEtat, $idFtaRole, $affichgeDesChapitres, FALSE, FALSE);
 
     $navigue = Navigation::getHtmlNavigationBar();
 
@@ -183,23 +218,22 @@ if ($idFta) {
 </SCRIPT>
 ';
 
-    ClassificationFta2Model::initClassification($selection_proprietaire1, $selection_proprietaire2, $selection_marque
-            , $selection_activite, $selection_rayon, $selection_environnement, $selection_reseau, $selection_saisonnalite);
-
-    Chapitre::initChapitre($idFta, $id_fta_chapitre, $synthese_action, $comeback, $idFtaEtat, $abreviationFtaEtat, $idFtaRole);
+    Chapitre::initChapitre($idFta, $id_fta_chapitre, $synthese_action, $comeback, $idFtaEtat, $abreviationFtaEtat, $idFtaRole, $checkArcadiaData);
 
     $bloc.= Chapitre::getHtmlChapitreAll();
 } else {
     $titre = UserInterfaceMessage::FR_WARNING_PARAM_ID_FTA_TITLE;
     $message = UserInterfaceMessage::FR_WARNING_PARAM_ID_FTA;
     $redirection = "index.php";
-    afficher_message($titre, $message, $redirection);
+    Lib::showMessage($titre, $message, $redirection);
 }
 
 echo '
      ' . $navigue . '
      <form ' . $method . ' action=\'' . $page_action . '\' name=\'form_action\' method=\'post\'>
      <input type=hidden name=action value=' . $action . '>
+     <input type=hidden name=current_page value=' . $page_default . '.php >
+     <input type=hidden name=current_query value=' . $page_query . ' >
      <input type=hidden name=id_fta id=id_fta value=' . $idFta . '>
      <input type=hidden name=abreviation_fta_etat id=abreviation_fta_etat value=' . $abreviationFtaEtat . '>
      <input type=hidden name=id_fta_chapitre_encours id=id_fta_chapitre_encours value=' . $id_fta_chapitre_encours . '>
@@ -210,7 +244,7 @@ echo '
      <input type=\'hidden\' name=\'synthese_action\' id=synthese_action value=\'' . $synthese_action . '\' />
      <input type=\'hidden\' name=\'nom_fta_chapitre_encours\' value=\'' . $nom_fta_chapitre_encours . '\' />
      <input type=\'hidden\' name=\'comeback\' id=comeback value=\'' . $comeback . '\' />
-    
+
      ' . $javascript . '
      <' . $html_table . '>
      <tr><td>

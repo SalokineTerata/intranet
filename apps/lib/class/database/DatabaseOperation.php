@@ -188,12 +188,62 @@ class DatabaseOperation {
 
     /**
      * La requête PDO query réalise la requete SQL (SELECT) afin de récupérer des données de la BDD
-     * @param type $paramRequest
-     * @return type
+     * @param string $paramRequest
+     * @return string
      */
     public static function queryPDO($paramRequest) {
         $pdo = DatabaseOperation::databaseAcces();
         $result = $pdo->query($paramRequest);
+        /**
+         * Fermeture de la connection
+         */
+        $pdo = NULL;
+        $time_start = DatabaseOperation::microtime_float();
+
+        // Attend pendant un moment
+//        usleep(100);
+
+        $time_end = DatabaseOperation::microtime_float();
+        $time = $time_end - $time_start;
+
+        self::setQueriesInfo($paramRequest, $time, self::IncrementQueryCount());
+        return $result;
+    }
+    /**
+     * Protège une chaîne pour l'utiliser dans une requête SQL PDO
+     * @param string $paramRequest
+     * @return string
+     */
+    public static function quote($paramRequest) {
+        $pdo = DatabaseOperation::databaseAcces();
+        $result = $pdo->quote($paramRequest);
+        /**
+         * Fermeture de la connection
+         */
+        $pdo = NULL;
+        $time_start = DatabaseOperation::microtime_float();
+
+        // Attend pendant un moment
+//        usleep(100);
+
+        $time_end = DatabaseOperation::microtime_float();
+        $time = $time_end - $time_start;
+
+        self::setQueriesInfo($paramRequest, $time, self::IncrementQueryCount());
+        return $result;
+    }
+
+    /**
+     * Prépare une requête à l'exécution et retourne un objet
+     * @param string $paramRequest
+     * @param string $paramValue1
+     * @param string $paramValue2
+     * @return string
+     */
+    public static function prepare($paramRequest,$paramValue1,$paramValue2) {
+        $pdo = DatabaseOperation::databaseAcces();
+        $result = $pdo->prepare($paramRequest);
+        $result->execute(array($paramValue1, $paramValue2));
         /**
          * Fermeture de la connection
          */
@@ -264,6 +314,21 @@ class DatabaseOperation {
     }
 
     /**
+     * Retourne les noms des colonnes de la table 
+     * @param string $paramTableName
+     * @return array
+     */
+    public static function getArrayFiledsNamesTable($paramTableName) {
+        $pdo = DatabaseOperation::databaseAcces();
+        $recordset = $pdo->query("SHOW COLUMNS FROM " . $paramTableName);
+        $fields = $recordset->fetchAll(PDO::FETCH_ASSOC);
+        foreach ($fields as $field) {
+            $fieldNames[] = $field['Field'];
+        }
+        return $fieldNames;
+    }
+
+    /**
      * Permet l'acces aux fonctions d'execution de PDO
      * @return type
      */
@@ -307,6 +372,22 @@ class DatabaseOperation {
         $statement = DatabaseOperation::queryPDO($paramStatement);
         if ($statement) {
             $return = $statement->fetchAll(PDO::FETCH_ASSOC);
+            $statement->closeCursor();
+        }
+
+        return $return;
+    }
+
+    /**
+     * Convertie un statement SQL en tableau PHP complet
+     * @param type $paramStatement
+     * @return type
+     */
+    public static function convertSqlStatementWithoutKeyToArrayComplete($paramStatement) {
+
+        $statement = DatabaseOperation::queryPDO($paramStatement);
+        if ($statement) {
+            $return = $statement->fetchAll(PDO::FETCH_COLUMN);
             $statement->closeCursor();
         }
 
@@ -503,7 +584,7 @@ class DatabaseOperation {
 
     /**
      * Prépare une données PHP a être insérée dans une requête qui va être exécutée par le SGBD<br>
-     * la donnée subit des transformation pour echaper les caractères pouvants<br>
+     * la donnée subit des transformations pour echaper les caractères pouvants<br>
      * poser soucis lors de l'interprétation de la requête par le SGBD<br>
      * @param string $data Donnée à protéger
      * @return string Donnée protégée
@@ -749,7 +830,7 @@ class DatabaseOperation {
         $SetClause = '`' . $paramFieldName . '` =  ' . self::convertDataForQuery($paramFieldValue);
         $WhereClause = '`' . $paramTableName . '`.`' . $paramKeyName . '` =  \'' . $paramKeyValue . '\'';
 
-        Logger::AddDebug($SetClause, __METHOD__);
+//        Logger::AddDebug($SetClause, __METHOD__);
 
         DatabaseOperation::doSqlUpdate($TableClause, $SetClause, $WhereClause);
     }

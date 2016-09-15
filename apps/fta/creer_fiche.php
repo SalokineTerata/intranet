@@ -37,7 +37,18 @@ flush();
 /* * ***********
   Début Code PHP
  * *********** */
+/**
+ * Vérification des droits d'accès
+ */
+$fta_consultation = Acl::getValueAccesRights('fta_consultation');
 
+if (!$fta_consultation) {
+    $titre = UserInterfaceMessage::FR_WARNING_ACCES_RIGHTS_TITLE;
+    $message = UserInterfaceMessage::FR_WARNING_ACCES_RIGHTS
+            . " Veuillez vous déconnecter et contactez l'administrateur de l'intranet";
+    $redirection = "index.php";
+    Lib::showMessage($titre, $message, $redirection, TRUE);
+}
 /*
   Initialisation des variables
  */
@@ -72,6 +83,16 @@ if ($id_fta) {
     $idFtaWorkflow = $ftaModel->getDataField(FtaModel::FIELDNAME_WORKFLOW)->getFieldValue();
     $SiteDeProduction = $ftaModel->getDataField(FtaModel::FIELDNAME_SITE_PRODUCTION)->getFieldValue();
     $designationCommercialeFta = $ftaModel->getDataField(FtaModel::FIELDNAME_DESIGNATION_COMMERCIALE)->getFieldValue();
+    $arrayIdFtaRoleAcces = FtaRoleModel::getArrayIdFtaRoleByIdUserAndWorkflow($idUser, $idFtaWorkflow);
+    $idFtaRole = $arrayIdFtaRoleAcces["0"];
+    $comeback = Lib::getParameterFromRequest('comeback');
+
+    /**
+     * Initialisation du bouton de retour de synthèse
+     */
+    if ($comeback) {
+        $_SESSION["comeback_url"] = $_SERVER["HTTP_REFERER"];
+    }
 } else {
     $checked_vierge = 'checked';
 }
@@ -92,7 +113,7 @@ $listeWorkflow = FtaWorkflowModel::showListeDeroulanteNomWorkflowByAcces($idUser
  * Site de production FTA
  */
 
-$listeSiteProduction = GeoModel::ShowListeDeroulanteSiteProdByAcces($idUser, $HtmlList, TRUE, $SiteDeProduction);
+$listeSiteProduction = GeoModel::showListeDeroulanteSiteProdByAcces($idUser, $HtmlList, TRUE, $SiteDeProduction);
 
 
 

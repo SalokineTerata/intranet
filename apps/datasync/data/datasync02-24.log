@@ -1,0 +1,157 @@
+Démarrage : lun fév 24 23:00:01 CET 2014
+Arrêt     : lun fév 24 23:01:20 CET 2014
+
+
+
+Base MySQL sélectionnée: agis
+Nombre de serveur(s) Linux concerné(s): 4
+Nombre de dossier(s) à mettre à jour: 26
+
+sending incremental file list
+
+sent 6293 bytes  received 46 bytes  1408.67 bytes/sec
+total size is 11666224  speedup is 1840.39
+sending incremental file list
+
+sent 6047 bytes  received 37 bytes  2433.60 bytes/sec
+total size is 12177278  speedup is 2001.52
+sending incremental file list
+
+sent 63 bytes  received 12 bytes  50.00 bytes/sec
+total size is 84160512  speedup is 1122140.16
+sending incremental file list
+
+sent 7538 bytes  received 45 bytes  5055.33 bytes/sec
+total size is 9253358  speedup is 1220.28
+sending incremental file list
+
+sent 7695 bytes  received 20 bytes  3086.00 bytes/sec
+total size is 16751789  speedup is 2171.33
+sending incremental file list
+
+sent 4308 bytes  received 24 bytes  1732.80 bytes/sec
+total size is 6387982  speedup is 1474.60
+sending incremental file list
+mercuriales/sync.ffs_db
+mercuriales/FZC/FZC 2014/ARGEL 2014.xls
+mercuriales/gms/2014/CENTRALES 2014/INTERMARCHE 2014.xls
+mercuriales/gms/2014/CENTRALES 2014/SYSTEME U 2014.xls
+mercuriales/gms/2014/CONTROLE TARIFS 2014/03-MARS/2014 AUCHAN GAMME ANIMATION.pdf
+mercuriales/gms/2014/CONTROLE TARIFS 2014/03-MARS/2014 CARREFOUR DIRECT ANIMATIONS.pdf
+mercuriales/gms/2014/CONTROLE TARIFS 2014/03-MARS/2014 SYSTEME U PRIX PROLONGES AU 31-03-2014.pdf
+mercuriales/gms/2014/CONTROLE TARIFS 2014/04-AVRIL/2014 INTERMARCHE RP CRABE.pdf
+mercuriales/gms/2014/REGIONS  2014/GALEC REGION MERCU AVRIL 2014.xls
+mercuriales/gms/2014/REGIONS  2014/SCHIEVER MERCU 2014.xls
+mercuriales/mdd/2014/2014 MERCURIALE AUCHAN.xls
+mercuriales/mdd/2014/2014 MERCURIALE EXPORT.xls
+mercuriales/mdd/2014/2014 MERCURIALE SCAMARK.xls
+
+sent 210023 bytes  received 23099 bytes  20271.48 bytes/sec
+total size is 28009977  speedup is 120.15
+sending incremental file list
+
+sent 5047 bytes  received 27 bytes  3382.67 bytes/sec
+total size is 39173092  speedup is 7720.36
+sending incremental file list
+operations_commerciales/DEMANDE ECHANTILLONS CL .xls
+operations_commerciales/chrono demande echantillons.xls
+operations_commerciales/FZC/OP FZC 2014/FZC ARGEL 2014.xls
+operations_commerciales/FZC/OP FZC 2014/FZC PICARD 2014.xls
+operations_commerciales/FZC/OP FZC 2014/FZC THIRIET 2014.xls
+operations_commerciales/FZC/OP FZC 2014/FZC TOUPARGEL 2014.xls
+operations_commerciales/GMS/RECAP DEMANDE ET CONFIRMATIONS HEBDO.xls
+operations_commerciales/GMS/2014/A-CENTRALES/OPERATIONS CARREFOUR MARKET 2014-FUTUR MASTER.xls
+operations_commerciales/MDD/MODELES VB/DEM ECHANTILLONS/2014/Chrono 105 ITM 240214.XLS
+
+sent 354914 bytes  received 10118 bytes  31741.91 bytes/sec
+total size is 46562213  speedup is 127.56
+sending incremental file list
+
+sent 19842 bytes  received 78 bytes  5691.43 bytes/sec
+total size is 98501331  speedup is 4944.85
+sending incremental file list
+
+sent 3133 bytes  received 78 bytes  1284.40 bytes/sec
+total size is 13716658  speedup is 4271.77
+sending incremental file list
+
+sent 8871 bytes  received 13 bytes  5922.67 bytes/sec
+total size is 41009664  speedup is 4616.13
+sending incremental file list
+
+sent 63 bytes  received 12 bytes  50.00 bytes/sec
+total size is 84160512  speedup is 1122140.16
+sending incremental file list
+
+sent 7538 bytes  received 45 bytes  5055.33 bytes/sec
+total size is 9253358  speedup is 1220.28
+sending incremental file list
+
+sent 4308 bytes  received 24 bytes  2888.00 bytes/sec
+total size is 6387982  speedup is 1474.60
+sending incremental file list
+
+sent 7695 bytes  received 20 bytes  5143.33 bytes/sec
+total size is 16751789  speedup is 2171.33
+sending incremental file list
+
+sent 85 bytes  received 13 bytes  65.33 bytes/sec
+total size is 104853504  speedup is 1069933.71
+sending incremental file list
+operations_commerciales/DEMANDE ECHANTILLONS CL .xls
+operations_commerciales/chrono demande echantillons.xls
+operations_commerciales/FZC/OP FZC 2014/FZC ARGEL 2014.xls
+operations_commerciales/FZC/OP FZC 2014/FZC PICARD 2014.xls
+operations_commerciales/FZC/OP FZC 2014/FZC THIRIET 2014.xls
+operations_commerciales/FZC/OP FZC 2014/FZC TOUPARGEL 2014.xls
+operations_commerciales/GMS/RECAP DEMANDE ET CONFIRMATIONS HEBDO.xls
+operations_commerciales/GMS/2014/A-CENTRALES/OPERATIONS CARREFOUR MARKET 2014-FUTUR MASTER.xls
+operations_commerciales/MDD/MODELES VB/DEM ECHANTILLONS/2014/Chrono 105 ITM 240214.XLS
+
+sent 354914 bytes  received 10118 bytes  104294.86 bytes/sec
+total size is 46562213  speedup is 127.56
+sending incremental file list
+mercuriales/sync.ffs_db
+mercuriales/FZC/FZC 2014/ARGEL 2014.xls
+mercuriales/gms/2014/CENTRALES 2014/INTERMARCHE 2014.xls
+mercuriales/gms/2014/CENTRALES 2014/SYSTEME U 2014.xls
+mercuriales/gms/2014/CONTROLE TARIFS 2014/03-MARS/2014 AUCHAN GAMME ANIMATION.pdf
+mercuriales/gms/2014/CONTROLE TARIFS 2014/03-MARS/2014 CARREFOUR DIRECT ANIMATIONS.pdf
+mercuriales/gms/2014/CONTROLE TARIFS 2014/03-MARS/2014 SYSTEME U PRIX PROLONGES AU 31-03-2014.pdf
+mercuriales/gms/2014/CONTROLE TARIFS 2014/04-AVRIL/2014 INTERMARCHE RP CRABE.pdf
+mercuriales/gms/2014/REGIONS  2014/GALEC REGION MERCU AVRIL 2014.xls
+mercuriales/gms/2014/REGIONS  2014/SCHIEVER MERCU 2014.xls
+mercuriales/mdd/2014/2014 MERCURIALE AUCHAN.xls
+mercuriales/mdd/2014/2014 MERCURIALE EXPORT.xls
+mercuriales/mdd/2014/2014 MERCURIALE SCAMARK.xls
+
+sent 210023 bytes  received 23099 bytes  66606.29 bytes/sec
+total size is 28009977  speedup is 120.15
+sending incremental file list
+
+sent 8871 bytes  received 13 bytes  5922.67 bytes/sec
+total size is 41009664  speedup is 4616.13
+sending incremental file list
+
+sent 6293 bytes  received 46 bytes  2535.60 bytes/sec
+total size is 11666224  speedup is 1840.39
+sending incremental file list
+
+sent 5677 bytes  received 23 bytes  3800.00 bytes/sec
+total size is 128675317  speedup is 22574.62
+sending incremental file list
+
+sent 5353 bytes  received 38 bytes  2156.40 bytes/sec
+total size is 56169881  speedup is 10419.20
+sending incremental file list
+
+sent 50241 bytes  received 94 bytes  5298.42 bytes/sec
+total size is 290814547  speedup is 5777.58
+sending incremental file list
+
+sent 19842 bytes  received 78 bytes  7968.00 bytes/sec
+total size is 98501331  speedup is 4944.85
+sending incremental file list
+
+sent 3133 bytes  received 78 bytes  1284.40 bytes/sec
+total size is 13716658  speedup is 4271.77

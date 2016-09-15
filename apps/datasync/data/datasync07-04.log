@@ -1,0 +1,143 @@
+Démarrage : ven jui  4 23:00:01 CEST 2014
+Arrêt     : ven jui  4 23:02:45 CEST 2014
+
+
+
+Base MySQL sélectionnée: agis
+Nombre de serveur(s) Linux concerné(s): 4
+Nombre de dossier(s) à mettre à jour: 29
+
+sending incremental file list
+
+sent 7177 bytes  received 49 bytes  4817.33 bytes/sec
+total size is 13277142  speedup is 1837.41
+sending incremental file list
+
+sent 6283 bytes  received 38 bytes  4214.00 bytes/sec
+total size is 12444119  speedup is 1968.69
+sending incremental file list
+erp_data.mdb
+
+sent 11463601 bytes  received 66685 bytes  184484.58 bytes/sec
+total size is 90648576  speedup is 7.86
+sending incremental file list
+
+sent 7593 bytes  received 45 bytes  5092.00 bytes/sec
+total size is 9254930  speedup is 1211.70
+sending incremental file list
+
+sent 7756 bytes  received 20 bytes  5184.00 bytes/sec
+total size is 16755943  speedup is 2154.83
+sending incremental file list
+
+sent 4308 bytes  received 24 bytes  2888.00 bytes/sec
+total size is 6387982  speedup is 1474.60
+sending incremental file list
+mercuriales/HD/2014/2014 MERCURIALE LEADER PRICE.xls
+mercuriales/gms/2014/CENTRALES 2014/INTERMARCHE 2014.xls
+mercuriales/mdd/2014/2014 MERCURIALE CARREFOUR PLATS CUISINES.xls
+
+sent 59314 bytes  received 13569 bytes  29153.20 bytes/sec
+total size is 33193937  speedup is 455.44
+sending incremental file list
+
+sent 5047 bytes  received 27 bytes  3382.67 bytes/sec
+total size is 39173092  speedup is 7720.36
+sending incremental file list
+operations_commerciales/DEMANDE ECHANTILLONS CL .xls
+operations_commerciales/chrono demande echantillons.xls
+
+sent 218830 bytes  received 6035 bytes  64247.14 bytes/sec
+total size is 53820827  speedup is 239.35
+sending incremental file list
+
+sent 20347 bytes  received 83 bytes  13620.00 bytes/sec
+total size is 99184091  speedup is 4854.83
+sending incremental file list
+gofast/CHANTIERS/2_FTK_CLIENTS_Mathieu/6_BILAN/Fiche_Am\#260_Av-Ap_FTk_020714.xls
+
+sent 11979 bytes  received 3350 bytes  10219.33 bytes/sec
+total size is 46894305  speedup is 3059.19
+sending incremental file list
+
+sent 10004 bytes  received 13 bytes  6678.00 bytes/sec
+total size is 48314368  speedup is 4823.24
+sending incremental file list
+
+sent 5781 bytes  received 30 bytes  11622.00 bytes/sec
+total size is 93132165  speedup is 16026.87
+sending incremental file list
+erp_data.mdb
+
+sent 11463601 bytes  received 66685 bytes  190583.24 bytes/sec
+total size is 90648576  speedup is 7.86
+sending incremental file list
+
+sent 7593 bytes  received 45 bytes  5092.00 bytes/sec
+total size is 9254930  speedup is 1211.70
+sending incremental file list
+
+sent 4308 bytes  received 24 bytes  2888.00 bytes/sec
+total size is 6387982  speedup is 1474.60
+sending incremental file list
+
+sent 7756 bytes  received 20 bytes  5184.00 bytes/sec
+total size is 16755943  speedup is 2154.83
+sending incremental file list
+
+sent 85 bytes  received 13 bytes  196.00 bytes/sec
+total size is 104853504  speedup is 1069933.71
+sending incremental file list
+operations_commerciales/DEMANDE ECHANTILLONS CL .xls
+operations_commerciales/chrono demande echantillons.xls
+
+sent 218830 bytes  received 6035 bytes  64247.14 bytes/sec
+total size is 53820827  speedup is 239.35
+sending incremental file list
+mercuriales/HD/2014/2014 MERCURIALE LEADER PRICE.xls
+mercuriales/gms/2014/CENTRALES 2014/INTERMARCHE 2014.xls
+mercuriales/mdd/2014/2014 MERCURIALE CARREFOUR PLATS CUISINES.xls
+
+sent 59314 bytes  received 13569 bytes  29153.20 bytes/sec
+total size is 33193937  speedup is 455.44
+sending incremental file list
+
+sent 10004 bytes  received 13 bytes  6678.00 bytes/sec
+total size is 48314368  speedup is 4823.24
+sending incremental file list
+
+sent 7177 bytes  received 49 bytes  4817.33 bytes/sec
+total size is 13277142  speedup is 1837.41
+sending incremental file list
+
+sent 5745 bytes  received 23 bytes  3845.33 bytes/sec
+total size is 129159129  speedup is 22392.36
+sending incremental file list
+
+sent 5610 bytes  received 39 bytes  3766.00 bytes/sec
+total size is 59049369  speedup is 10453.07
+sending incremental file list
+codesoft/Codesoft 7/Codes Produits/80969.bak
+codesoft/Codesoft 7/Codes Produits/80969.lab
+codesoft/Codesoft 7/Codes Produits/80970.bak
+codesoft/Codesoft 7/Codes Produits/80970.lab
+
+sent 129570 bytes  received 174 bytes  86496.00 bytes/sec
+total size is 299171411  speedup is 2305.86
+sending incremental file list
+
+sent 20347 bytes  received 83 bytes  8172.00 bytes/sec
+total size is 99184091  speedup is 4854.83
+sending incremental file list
+gofast/CHANTIERS/2_FTK_CLIENTS_Mathieu/6_BILAN/Fiche_Am\#260_Av-Ap_FTk_020714.xls
+
+sent 11979 bytes  received 3350 bytes  6131.60 bytes/sec
+total size is 46894305  speedup is 3059.19
+sending incremental file list
+
+sent 7756 bytes  received 20 bytes  5184.00 bytes/sec
+total size is 16755943  speedup is 2154.83
+sending incremental file list
+
+sent 7756 bytes  received 20 bytes  5184.00 bytes/sec
+total size is 16755943  speedup is 2154.83

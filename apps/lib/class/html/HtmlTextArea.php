@@ -33,21 +33,37 @@ class HtmlTextArea extends AbstractHtmlGlobalElement {
         $this->getAttributes()->getRows()->setValue(self::DEFAULT_ROWS_SIZE);
     }
 
-    protected function initObject(
+    public function initObject(
     $paramName
     , $paramLabel
     , $paramValue
     , $paramIsWarningUpdate
+    , $paramIsWarningMessage
+    , $paramWarningMessage
+    , $paramIsFieldLock = NULL
+    , $paramLinkFieldLock = NULL
     ) {
         $id = $paramName;
         parent::initAbstractHtmlGlobalElement(
                 $id
                 , $paramLabel
                 , $paramIsWarningUpdate
+                , $paramIsWarningMessage
+                , $paramWarningMessage
+                , $paramIsFieldLock
+                , $paramLinkFieldLock
         );
 
         $this->getAttributes()->getName()->setValue($paramName);
         $this->setTextAreaContent($paramValue);
+    }
+
+    /**
+     * Retourne le contenu brut du DataField
+     */
+    public function getRawContent() {
+        $return = $this->getTextAreaContent();
+        return $return;
     }
 
     /**
@@ -87,8 +103,9 @@ class HtmlTextArea extends AbstractHtmlGlobalElement {
     public function getHtmlViewedContent() {
         return nl2br(Html::showValue($this->getTextAreaContent()));
     }
+
     public function getHtmlAddContent() {
-        return ;
+        return;
     }
 
 }

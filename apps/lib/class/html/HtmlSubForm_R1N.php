@@ -153,6 +153,7 @@ class HtmlSubForm_R1N extends HtmlSubForm {
                  * Chargement de l'enregistrement
                  */
                 $modelSubForm = new $subFormModelClassName($key);
+                $modelSubForm->setDataFtaComposantTableToCompare();
 
 
                 /**
@@ -191,6 +192,17 @@ class HtmlSubForm_R1N extends HtmlSubForm {
                      * Chargement du DataField correspondant au champs concerné.
                      */
                     $dataField = $modelSubForm->getDataField($fieldName);
+
+                    /**
+                     * Verification des règles de validation
+                     */
+                    $dataField->checkValidationRules();
+
+                    if ($dataField->getDataValidationSuccessful() == TRUE) {
+                        $this->setDataValidationSuccessfulToTrue();
+                    } else {
+                        $this->setDataValidationSuccessfulToFalse();
+                    }
 
                     /**
                      * Conversion du DataField en HtmlField
@@ -256,6 +268,13 @@ class HtmlSubForm_R1N extends HtmlSubForm {
                          * Le champs n'est pas modifiable.
                          */
                         $htmlField->setIsEditable(FALSE);
+                    }
+                    /**
+                     * On vérifie si le champ en cours est différents de la version précédente
+                     */
+                    $check = strstr($fieldName, "VIRTUAL_");
+                    if (!$check) {
+                        $htmlField->setIsWarningUpdate($modelSubForm->getDataField($fieldName)->isFieldDiff());
                     }
                     $return.=$htmlField->getHtmlResult();
                 }

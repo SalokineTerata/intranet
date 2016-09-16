@@ -1,0 +1,1 @@
+Ce répertoire doit être vidé de tout fichier (sauf celui-ci ;-)) avant d'être commité.

@@ -2586,7 +2586,7 @@ class FtaModel extends AbstractModel {
                         . " AND " . FtaModel::FIELDNAME_ID_FTA_ETAT . "=" . FtaEtatModel::ID_VALUE_VALIDE
         );
         $arrayDossierFtaLastVersion = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
-                        "SELECT " . FtaModel::FIELDNAME_DOSSIER_FTA . ", MAX(" . FtaModel::FIELDNAME_VERSION_DOSSIER_FTA . ")"
+                        "SELECT " . FtaModel::FIELDNAME_DOSSIER_FTA . ", MAX(" . FtaModel::FIELDNAME_VERSION_DOSSIER_FTA . ") AS " . FtaModel::FIELDNAME_VERSION_DOSSIER_FTA
                         . " FROM " . FtaModel::TABLENAME
                         . " WHERE " . FtaModel::FIELDNAME_DOSSIER_FTA . "=" . $paramDossierFtaPrimaire
         );
@@ -2600,12 +2600,12 @@ class FtaModel extends AbstractModel {
             }
         } else {
             foreach ($arrayDossierFtaLastVersion as $rowsDossierFtaLastVersion) {
-                $arrayDossierFtaLastVersionFinal = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
-                                "SELECT " . FtaModel::KEYNAME
-                                . " FROM " . FtaModel::TABLENAME
-                                . " WHERE " . FtaModel::FIELDNAME_DOSSIER_FTA . "=" . $rowsDossierFtaLastVersion[FtaModel::FIELDNAME_DOSSIER_FTA]
-                                . " AND " . FtaModel::FIELDNAME_VERSION_DOSSIER_FTA . "=" . $rowsDossierFtaLastVersion[FtaModel::FIELDNAME_VERSION_DOSSIER_FTA]
-                );
+                $sqlDossierFtaLastVersionFinal = "SELECT " . FtaModel::KEYNAME
+                        . " FROM " . FtaModel::TABLENAME
+                        . " WHERE " . FtaModel::FIELDNAME_DOSSIER_FTA . "=" . $rowsDossierFtaLastVersion[FtaModel::FIELDNAME_DOSSIER_FTA]
+                        . " AND " . FtaModel::FIELDNAME_VERSION_DOSSIER_FTA . "=" . $rowsDossierFtaLastVersion[FtaModel::FIELDNAME_VERSION_DOSSIER_FTA]
+                ;
+                $arrayDossierFtaLastVersionFinal = DatabaseOperation::convertSqlStatementWithoutKeyToArray($sqlDossierFtaLastVersionFinal);
                 foreach ($arrayDossierFtaLastVersionFinal as $rowsDossierFtaLastVersionFinal) {
                     $idFtaPrimaire = $rowsDossierFtaLastVersionFinal[FtaModel::KEYNAME];
                 }

@@ -301,7 +301,7 @@ class UserModel extends AbstractModel {
      */
     public static function getSqlMailFromIdUserFta2ArcadiaTransaction($paramNameOfBDDTarget, $paramIdUserTransaction) {
         $sqlMail = "SELECT DISTINCT " . self::FIELDNAME_MAIL
-                . " FROM " . $paramNameOfBDDTarget . "." . self::TABLENAME
+                . " FROM " . "`" . $paramNameOfBDDTarget . "`" . "." . self::TABLENAME
                 . " WHERE " . self::KEYNAME . " = '" . $paramIdUserTransaction . "'";
 
         return $sqlMail;

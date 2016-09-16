@@ -347,7 +347,7 @@ class TableauFicheView {
         if ($paramAbreviationFtaEtat == FtaEtatModel::ETAT_ABREVIATION_VALUE_MODIFICATION) {
             switch (FtaProcessusDelaiModel::getFtaDelaiAvancementStatus($paramIdFta)) {
                 case FtaProcessusDelaiModel::VALUE_DELAI_AVANCEMENT_ONE_PROCESSUS_EXPIRED:
-                    $return = getHtmlCellBgColor($paramAbreviationFtaEtat);
+                    $return = self::getHtmlCellBgColor($paramAbreviationFtaEtat);
                     break;
                 case FtaProcessusDelaiModel::VALUE_DELAI_AVANCEMENT_ALL_FTA_EXPIRED:
                     $return = self::HTML_CLASS_RED;

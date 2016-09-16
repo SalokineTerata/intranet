@@ -108,6 +108,9 @@ class Arcadia2FtaController {
         $linkFolder = $this->getLinkFolder();
         $nameOfBDDTarget = $this->getNameOfBDDTarget();
         $initFile = $this->getInitFile();
+        $actifTransaction = FALSE;
+        $idUserTransaction = FALSE;
+
         /**
          * Fichiers ordonné dans un ordre décroissant
          */
@@ -122,12 +125,12 @@ class Arcadia2FtaController {
             /**
              * Contenue du fichier
              */
-            $fileContent = file_get_contents($linkFolder . $file);
+            $fileContent = file_get_contents($linkFolder . "/" . $file);
 
             /**
              * Vérification que le fichier soit un XML
              */
-            $xml = XMLReader::open($linkFolder . $file);
+            $xml = XMLReader::open($linkFolder . "/" . $file);
             $xml->setParserProperty(XMLReader::VALIDATE, true);
             $valide = $xml->isValid();
             if ($valide) {
@@ -198,69 +201,93 @@ class Arcadia2FtaController {
                         . " = " . $actifTransaction . "  Mail = " . $notificationMailTransaction . " user = " . $idUserTransaction;
                         if ($actifTransaction) {
 
-                            if ($notificationMailTransaction) {
-                                switch ($codeReply) {
-                                    case Fta2ArcadiaTransactionModel::CONSOMME:
-                                        /**
-                                         * Requète de MAJ de la table Fta
-                                         */
-                                        $sql_fta = FtaModel::getSQLFta2ArcadiaTransactionUpdateFtaTable($nameOfBDDTarget, $idFta, $codeArticleArcadia);
-                                        mysql_query($sql_fta);
-
-                                        $corpsmail = UserInterfaceMessage::FR_ARCADIA_OK_SCRIT_MESSAGE;
-
-                                        break;
-                                    case Fta2ArcadiaTransactionModel::REJET_TASKS:
-                                        $corpsmail = UserInterfaceMessage::FR_ARCADIA_REJET_TASKS_DATA_MESSAGE;
-
-                                        break;
-                                    case Fta2ArcadiaTransactionModel::REFUSE:
-                                        $corpsmail = UserInterfaceMessage::FR_ARCADIA_REFUSE_DATA_MESSAGE;
-
-                                        break;
-                                    case Fta2ArcadiaTransactionModel::CLOTURE_AUTO:
-                                        $corpsmail = UserInterfaceMessage::FR_ARCADIA_CLOTURE_AUTO_DATA_MESSAGE;
-                                        break;
-                                }
-                                $corpsmail .=UserInterfaceMessage::FR_ARCADIA_ID_MESSAGE_TRANSACTION . $codeArticleArcadia;
+                            if ($codeReply == Fta2ArcadiaTransactionModel::CONSOMME) {
                                 /**
-                                 * Récupération du mail de l'utilisateur
+                                 * Requète de MAJ de la table Fta
                                  */
-                                $sqlMail = UserModel::getSqlMailFromIdUserFta2ArcadiaTransaction($nameOfBDDTarget, $idUserTransaction);
-                                $arrayIdUserTransaction = mysql_query($sqlMail);
+                                $sql_fta = FtaModel::getSQLFta2ArcadiaTransactionUpdateFtaTable($nameOfBDDTarget, $idFta, $codeArticleArcadia);
+                                mysql_query($sql_fta);
+                            }
 
-                                if ($arrayIdUserTransaction) {
-                                    while ($value = mysql_fetch_array($arrayIdUserTransaction)) {
-                                        $sujet = " Le fichier " . $file . " est revenu ";
-                                        $adrTo = $value[UserModel::FIELDNAME_MAIL];
-                                        $adrFrom = self::MAIL_FROM;
-
-                                        //Création du mail
-
-                                        $smtp = $initFile[EnvironmentInit::SMTP_SERVER_NAME][EnvironmentConf::ENV_CLI];
-
-                                        $result = $this->sendMail($sujet, $corpsmail, $adrTo, $adrFrom, $smtp);
-                                        if ($result) {
-                                            echo UserInterfaceMessage::FR_ARCADIA_OK_SCRIT_MESSAGE_MAIL;
-                                        } else {
-                                            echo UserInterfaceMessage::FR_ARCADIA_ERREUR_SCRIT_MESSAGE_MAIL_2 . $idTransaction;
-                                        }
-                                    }
-                                } else {
-                                    echo UserInterfaceMessage::FR_ARCADIA_ERREUR_SCRIT_MESSAGE_MAIL . $idTransaction;
-                                }
+                            if ($notificationMailTransaction) {
+                                $this->sendNotificationMail($codeReply
+                                        , $codeArticleArcadia
+                                        , $nameOfBDDTarget
+                                        , $idUserTransaction
+                                        , $initFile
+                                        , $file
+                                        , $idTransaction
+                                );
                             }
                         }
                         /**
                          * Suppression des fichiers
                          */
-                        unlink($linkFolder . $file);
-                        unlink($linkFolderOK . $file . ".ok");
+                        unlink($linkFolder . "/" . $file);
+                        unlink($linkFolderOK . "/" . $file . ".ok");
                     } else {
                         echo "[FAILED] id_Trasaction " . $idTransaction . "\n";
                     }
                 }
             }
+        }
+    }
+
+    private function sendNotificationMail($paramCodeReply
+    , $paramCodeArticleArcadia
+    , $paramNameOfBDDTarget
+    , $paramIdUserTransaction
+    , $paramInitFile
+    , $paramFile
+    , $paramIdTransaction
+    ) {
+
+        $corpsmail = "";
+        $sqlMail = "";
+        switch ($paramCodeReply) {
+            case Fta2ArcadiaTransactionModel::CONSOMME:
+                $corpsmail = UserInterfaceMessage::FR_ARCADIA_OK_SCRIT_MESSAGE;
+
+                break;
+            case Fta2ArcadiaTransactionModel::REJET_TASKS:
+                $corpsmail = UserInterfaceMessage::FR_ARCADIA_REJET_TASKS_DATA_MESSAGE;
+
+                break;
+            case Fta2ArcadiaTransactionModel::REFUSE:
+                $corpsmail = UserInterfaceMessage::FR_ARCADIA_REFUSE_DATA_MESSAGE;
+
+                break;
+            case Fta2ArcadiaTransactionModel::CLOTURE_AUTO:
+                $corpsmail = UserInterfaceMessage::FR_ARCADIA_CLOTURE_AUTO_DATA_MESSAGE;
+                break;
+        }
+        $corpsmail .=UserInterfaceMessage::FR_ARCADIA_ID_MESSAGE_TRANSACTION . $paramCodeArticleArcadia;
+
+        /**
+         * Récupération du mail de l'utilisateur
+         */
+        $sqlMail .= UserModel::getSqlMailFromIdUserFta2ArcadiaTransaction($paramNameOfBDDTarget, $paramIdUserTransaction);
+        $arrayIdUserTransaction = mysql_query($sqlMail);
+
+        if ($arrayIdUserTransaction) {
+            while ($value = mysql_fetch_array($arrayIdUserTransaction)) {
+                $sujet = " Le fichier " . $paramFile . " est revenu ";
+                $adrTo = $value[UserModel::FIELDNAME_MAIL];
+                $adrFrom = self::MAIL_FROM;
+
+                //Création du mail
+
+                $smtp = $paramInitFile[EnvironmentInit::SMTP_SERVER_NAME][EnvironmentConf::ENV_CLI];
+
+                $result = $this->sendMail($sujet, $corpsmail, $adrTo, $adrFrom, $smtp);
+                if ($result) {
+                    echo UserInterfaceMessage::FR_ARCADIA_OK_SCRIT_MESSAGE_MAIL;
+                } else {
+                    echo UserInterfaceMessage::FR_ARCADIA_ERREUR_SCRIT_MESSAGE_MAIL_2 . $paramIdTransaction;
+                }
+            }
+        } else {
+            echo UserInterfaceMessage::FR_ARCADIA_ERREUR_SCRIT_MESSAGE_MAIL . $paramIdTransaction;
         }
     }
 

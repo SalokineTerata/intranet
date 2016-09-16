@@ -291,13 +291,12 @@ class FtaModel extends AbstractModel {
                 $idArcadiaTypeCarton = $ftaConditionnmentModel->getModelAnnexeEmballage()->getDataField(AnnexeEmballageModel::FIELDNAME_ID_ARCADIA_TYPE_CARTON)->getFieldValue();
                 $ftaConditionnmentModel->getDataField(FtaConditionnementModel::FIELDNAME_ID_ANNEXE_EMBALLAGE)->isFieldDiff();
             }
-        }else{
+        } else {
             /**
              * si aucun carton est renseigné dans le chapitre emballage colis 
              * par défaut on met 0 (NON comunniqué)
              */
-            
-            $idArcadiaTypeCarton ="0";
+            $idArcadiaTypeCarton = "0";
         }
         return $idArcadiaTypeCarton;
     }
@@ -2989,7 +2988,7 @@ class FtaModel extends AbstractModel {
      * @return string
      */
     public static function getSQLFta2ArcadiaTransactionUpdateFtaTable($paramNameOfBDDTarget, $paramIdFta, $paramCodeArticle) {
-        $req = "UPDATE " . $paramNameOfBDDTarget . "." . self::TABLENAME
+        $req = "UPDATE " . "`" . $paramNameOfBDDTarget . "`" . "." . self::TABLENAME
                 . " SET " . self::FIELDNAME_CODE_ARTICLE_LDC . "='" . $paramCodeArticle
                 . "' WHERE " . self::KEYNAME . "='" . $paramIdFta . "'";
 

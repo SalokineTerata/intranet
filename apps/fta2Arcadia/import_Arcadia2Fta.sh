@@ -89,3 +89,4 @@ ARG7=$DIR_ROOT
 
 #bash -x ${DIR_TARGET}/${SUB_DIR}/${SCRIPTNAME_DATA_BEGIN}${ENV_NAME}.sh ${DIR_TARGET}
 php ${DIR_ROOT}/apps/fta2Arcadia/import_Arcadia2Fta_data.php $ARG1 $ARG2 $ARG3 $ARG4 $ARG5 $ARG6 $ARG7
+

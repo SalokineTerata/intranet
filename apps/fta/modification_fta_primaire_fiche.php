@@ -143,7 +143,6 @@ if ($arrayDossierFta) {
         $label = IntranetColumnInfoModel::getLabelByTableNameAndColummName($tableName, $fieldName);
         $htmlList .= $separateur . $label;
         $separateur = "<br>";
-        
     }
 
     foreach ($arrayDossierFta as $rowsDossierFta) {
@@ -187,8 +186,7 @@ if ($arrayDossierFta) {
          */
         $bgcolor = TableauFicheView::getHtmlCellBgColor($abreviation_fta_etat);
 
-        $selection = '<input type=\'radio\' name=selection_fta value=\'' . $idFta . '\'  />' . $conseille
-                . "<input type=\"hidden\" name=\"id_dossier_fta\" id=\"id_dossier_fta\" value=\"" . $id_dossier_fta . "\" />";
+        $selection = '<input type=\'radio\' name=selection_fta value=\'' . $idFta . '\'  />' . $conseille;
 
         $tableau_fiches.= "<tr class=contenu>
                               <td $bgcolor_header " . $selection_width . " > $icon_header $selection</td>

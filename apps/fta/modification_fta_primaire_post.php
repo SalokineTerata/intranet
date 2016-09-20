@@ -52,13 +52,19 @@ $idFtaRole = Lib::getParameterFromRequest(FtaRoleModel::KEYNAME);
 $idFtaEtat = Lib::getParameterFromRequest(FtaEtatModel::KEYNAME);
 $abreviationFtaEtat = Lib::getParameterFromRequest(FtaEtatModel::FIELDNAME_ABREVIATION);
 $comeback = Lib::getParameterFromRequest(FtaEtatModel::KEYNAME);
-$idFtaDossier = Lib::getParameterFromRequest(FtaModel::FIELDNAME_DOSSIER_FTA);
+//$idFtaDossier = Lib::getParameterFromRequest(FtaModel::FIELDNAME_DOSSIER_FTA);
 $idFtaPrimaire = Lib::getParameterFromRequest("selection_fta");
 
 /**
  * Initialisation
  */
 if ($idFtaPrimaire) {
+
+    /**
+     * Détermination du numéro de dossier de la FTA primaire sélectionnée:
+     */
+    $modelFtaPrimaire = new FtaModel($idFtaPrimaire);
+    $idFtaDossier = $modelFtaPrimaire->getDossierFta();
 
     DatabaseOperation::execute(
             "UPDATE " . FtaModel::TABLENAME

@@ -2006,13 +2006,16 @@ class Chapitre {
         $ftaView->setIsEditable($isEditable);
         $ftaView->setFtaChapitreModelById(self::ID_CHAPITRE_IDENTITE);
         $ftaView2 = new FtaView($ftaModel);
+        $ftaView2->setIsEditable(self::NOT_EDITABLE);
+        $ftaView2->setFtaChapitreModelById(self::ID_CHAPITRE_IDENTITE);
+
         /**
          * Gestion de l'edition du code article arcadia 
          * suivant l'activation de la fonctionnalité Fta2Arcadia
          */
         if (self::$checkArcadiaData) {
             $isEditable = self::NOT_EDITABLE;
-        } elseif($isEditable) {
+        } elseif ($isEditable) {
             $isEditable = self::EDITABLE;
         }
 
@@ -2047,7 +2050,15 @@ class Chapitre {
 
         //Cellule Article Arcadia
         $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_ID_ARCADIA_CELLULE_ARTICLE);
+
+        //Données lié à arcadia 
+        $bloc.= $ftaView2->getHtmlArcadiaDataNotEditable();
+
+        $bloc.=$ftaView->getHtmlArcadiaDataVariableEditable();
+
         //Fta2Arcadia
+        $bloc.='<tr class=titre_principal><td class>Fta2Arcadia</td></tr>';
+
         $bloc.=$ftaView->getHtmlLinkGenerateXmlFile();
 
         if ($ftaView->isDataValidationSuccessful() == "0") {

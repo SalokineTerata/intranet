@@ -68,7 +68,7 @@ class GlobalConfig {
          * configuration de la session.
          */
         $this->setNeedBuildConf(FALSE);
-
+        
         /**
          * Si la GlobalConfig n'existe pas en session PHP, alors il faut
          * la reconstruire.

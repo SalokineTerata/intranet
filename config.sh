@@ -28,7 +28,7 @@ GC_ENV_SHORTNAME_COP="cop"
 #Base de données
 GC_DBNAME_COD="cod-fta05401"
 GC_DBNAME_DEV="dev-fta05401"
-GC_DBNAME_PRD="fta05401"
+GC_DBNAME_PRD="intranet_v3_0_prd"
 GC_DBNAME_COP="cop-fta05401"
 
 #Serveur de base de données

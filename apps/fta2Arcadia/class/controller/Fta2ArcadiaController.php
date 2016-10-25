@@ -1618,9 +1618,14 @@ function getXMLarcadiaSiteValo() {
 
 function setXMLarcadiaSiteValo(GeoModel $paramArcadiaSiteDeProdModel) {
 
+    $recordsetGeoArcadia = new GeoArcadiaModel($paramArcadiaSiteDeProdModel->getKeyValue());
+    $idSiteValorisation = $recordsetGeoArcadia->getDataField(GeoArcadiaModel::FIELDNAME_ID_SITE_VALORISATION)->getFieldValue();
+
     $this->XMLarcadiaSiteValo = self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION
             . "<SITE_VALO>"
-            . $paramArcadiaSiteDeProdModel->getDataField(GeoModel::FIELDNAME_ID_SITE_GROUPE)->getFieldValue() . "</SITE_VALO><!-- "
+            //. $paramArcadiaSiteDeProdModel->getDataField(GeoModel::FIELDNAME_ID_SITE_GROUPE)->getFieldValue() 
+            . $idSiteValorisation
+            . "</SITE_VALO><!-- "
             . $paramArcadiaSiteDeProdModel->getDataField(GeoModel::FIELDNAME_GEO)->getFieldValue() . " -->" . self::SAUT_DE_LIGNE;
 }
 

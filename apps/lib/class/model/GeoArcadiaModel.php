@@ -13,6 +13,7 @@ class GeoArcadiaModel extends AbstractModel {
     const FIELDNAME_FILE_PREP = 'file_prep';
     const FIELDNAME_METHODE_PREP = 'methode_prep';
     const FIELDNAME_CODE_POSTE_ARCADIA = 'code_poste_arcadia';
+    const FIELDNAME_ID_SITE_VALORISATION = 'id_site_valorisation';
     const CODE_TYPE_PRODUIT_PLATEFORME = '50';
     const CODE_TYPE_PRODUIT_PLB_AGIS = '3';
     const CODE_TYPE_PRODUIT_PLB_MARIE_TDA = '2';

@@ -12,8 +12,10 @@
  */
 class EnvironmentInit extends EnvironmentAbstract {
 
-    const APPLICATION_HTML_MESSAGE_BEGIN = '<CENTER><BR><FONT SIZE=4><marquee>Environnement ';
-    const APPLICATION_HTML_MESSAGE_END = '</marquee></FONT></CENTER>';
+    //const APPLICATION_HTML_MESSAGE_BEGIN = '<CENTER><BR><FONT SIZE=4><marquee>Environnement ';
+    const APPLICATION_HTML_MESSAGE_BEGIN = '<CENTER><BR><FONT SIZE=1>Environnement ';
+    //const APPLICATION_HTML_MESSAGE_END = '</marquee></FONT></CENTER>';
+    const APPLICATION_HTML_MESSAGE_END = '</FONT></CENTER>';
     const APPLICATION_LOGO = "APPLICATION_LOGO";
     const APPLICATION_LOGO_PDF = "APPLICATION_LOGO_PDF";
     const APPLICATION_NAME = "APPLICATION_NAME";
@@ -81,6 +83,8 @@ class EnvironmentInit extends EnvironmentAbstract {
         $this->getConf()->setApplicationLogoMessage(
                 self::APPLICATION_HTML_MESSAGE_BEGIN
                 . $paramInit[self::EXECUTION_ENVIRONMENT_NAME][$paramEnvName]
+                . "<br>Version: "
+                . $this->getConf()->getApplicationVersion()
                 . self::APPLICATION_HTML_MESSAGE_END
         );
         $this->getConf()->setExecEnvironmentDebugEnable($paramInit[self::IS_DEBUG_EXEC_ENVIRONMENT_ENABLED][$paramEnvName]);

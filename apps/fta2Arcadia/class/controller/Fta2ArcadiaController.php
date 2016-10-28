@@ -2707,7 +2707,7 @@ function xmlArticleRef() {
             . $this->getXMLArcadiaCodeDouane()
             //<!-- Info Tech -->
             . $this->getXMLCommentInfoTech()
-            . $this->getXMLArcadiaFamilleDeclCaClient()
+            //. $this->getXMLArcadiaFamilleDeclCaClient()
             . $this->getXMLArcadiaCelluleArticle()
             . self::ESPACE . self::SAUT_DE_LIGNE
             . self::RECORDSET_END

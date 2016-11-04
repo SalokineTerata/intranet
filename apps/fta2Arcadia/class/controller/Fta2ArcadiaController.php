@@ -888,7 +888,7 @@ function transformExport() {
     $classification2Model = new ClassificationFta2Model($idClassification2);
     $idClassificationCheck = $classification2Model->getIdClassificationByTypeName(ClassificationFta2Model::FIELDNAME_ID_RESEAU);
     if ($idClassificationCheck == ClassificationFta2Model::ID_CLASSIFICATION_EXPORT) {
-        $exportValue = self::oui;
+        $exportValue = self::OUI;
     }
     /**
      * Vérifie l'actualisation de la données

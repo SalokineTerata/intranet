@@ -73,6 +73,7 @@ $codePrimaire = Lib::getParameterFromRequest(FtaModel::FIELDNAME_DOSSIER_FTA_PRI
 $largeur_html_C1 = TableauFicheView::HTML_CELL_WIDTH_C1; // largeur cellule type
 $largeur_html_C3 = TableauFicheView::HTML_CELL_WIDTH_C3; // largeur cellule type
 $selection_width = TableauFicheView::HTML_CELL_WIDTH_SELECTION;
+$ftaModel = new FtaModel($paramIdFta);
 /**
  * Contrôle
  */
@@ -109,16 +110,19 @@ switch ($modeDeRecherche) {
         /**
          * On vérifie si le code Article Arcadia existe
          */
-        $arrayDossierFta = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
-                        "SELECT DISTINCT " . FtaModel::KEYNAME . "," . FtaModel::FIELDNAME_ID_FTA_ETAT
-                        . "," . FtaModel::FIELDNAME_DOSSIER_FTA . "," . FtaModel::FIELDNAME_VERSION_DOSSIER_FTA
-                        . "," . FtaModel::FIELDNAME_DESIGNATION_COMMERCIALE . "," . FtaModel::FIELDNAME_LIBELLE
-                        . "," . FtaModel::FIELDNAME_DESIGNATION_COMMERCIALE . "," . FtaModel::FIELDNAME_POIDS_ELEMENTAIRE
-                        . "," . FtaModel::FIELDNAME_NOMBRE_UVC_PAR_CARTON . "," . FtaModel::FIELDNAME_CODE_ARTICLE_LDC
-                        . " FROM " . FtaModel::TABLENAME
-                        . " WHERE " . FtaModel::FIELDNAME_CODE_ARTICLE_LDC . "=\"" . $codePrimaire
-                        . "\" ORDER BY " . FtaModel::FIELDNAME_ID_FTA_ETAT . "," . FtaModel::FIELDNAME_VERSION_DOSSIER_FTA . " DESC"
-        );
+        $sql = "SELECT DISTINCT " . FtaModel::KEYNAME . "," . FtaModel::TABLENAME . "." . FtaModel::FIELDNAME_ID_FTA_ETAT
+                . "," . FtaModel::FIELDNAME_DOSSIER_FTA . "," . FtaModel::FIELDNAME_VERSION_DOSSIER_FTA
+                . "," . FtaModel::FIELDNAME_DESIGNATION_COMMERCIALE . "," . FtaModel::FIELDNAME_LIBELLE
+                . "," . FtaModel::FIELDNAME_DESIGNATION_COMMERCIALE . "," . FtaModel::FIELDNAME_POIDS_ELEMENTAIRE
+                . "," . FtaModel::FIELDNAME_NOMBRE_UVC_PAR_CARTON . "," . FtaModel::FIELDNAME_CODE_ARTICLE_LDC
+                . " FROM " . FtaModel::TABLENAME
+                . ", " . FtaEtatModel::TABLENAME
+                . " WHERE " . FtaModel::FIELDNAME_CODE_ARTICLE_LDC . "=\"" . $codePrimaire . "\""
+                . " AND " . FtaModel::TABLENAME . "." . FtaModel::FIELDNAME_ID_FTA_ETAT . "=" . FtaEtatModel::TABLENAME . "." . FtaEtatModel::KEYNAME
+                . " AND " . FtaEtatModel::FIELDNAME_ABREVIATION . "=" . "'" . FtaEtatModel::ETAT_ABREVIATION_VALUE_VALIDE . "'"
+                . "ORDER BY " . FtaModel::TABLENAME . "." . FtaModel::FIELDNAME_ID_FTA_ETAT . ", " . FtaModel::FIELDNAME_VERSION_DOSSIER_FTA . " DESC"
+        ;
+        $arrayDossierFta = DatabaseOperation::convertSqlStatementWithoutKeyToArray($sql);
 
 
         break;
@@ -173,30 +177,33 @@ if ($arrayDossierFta) {
 
         //Désignation commerciale
         $din = TableauFicheView::getStringDINCompacted($designation_commerciale_fta, $LIBELLE, $NB_UNIT_ELEM, $Poids_ELEM);
+
         //Etat de la Fta
         $nomEtat = FtaEtatModel::getNameEtatByIdEtat($rowsDossierFta[FtaModel::FIELDNAME_ID_FTA_ETAT]);
         if (!$use) {
             $conseille = "(conseillé)";
             $use = "1";
+            $checked = "checked";
         } else {
             $conseille = "";
+            $checked = "";
         }
         /*
          * Attribution des couleurs de fonds suivant l'état de la FTA
          */
         $bgcolor = TableauFicheView::getHtmlCellBgColor($abreviation_fta_etat);
 
-        $selection = '<input type=\'radio\' name=selection_fta value=\'' . $idFta . '\'  />' . $conseille;
 
-        $tableau_fiches.= "<tr class=contenu>
-                              <td $bgcolor_header " . $selection_width . " > $icon_header $selection</td>
-                              ";
-
-        $tableau_fiches.="<td align=center $bgcolor $largeur_html_C1>" . $din . " (" . $nomEtat . ") " . "</a></td>"
-                . "<td $bgcolor width=3%>" . $id_dossier_fta . "v" . $id_version_dossier_fta . "</td>";
-
-        $tableau_fiches.="<td $bgcolor width=\"1%\"> <b><font size=\"2\" color=\"#0000FF\">" . $code_article_ldc . "</font></b></td>";
-        $tableau_fiches.="</tr>";
+        $tableau_fiches.=
+                "<tr class = contenu>"
+                . "<td " . $bgcolor_header . " " . $selection_width . " />"
+                . $icon_header . "<input type=radio name=selection_fta value=" . $idFta . " " . $checked . "/>" . $conseille
+                . "</td>"
+                . "<td align = center $bgcolor $largeur_html_C1>" . $din . " (" . $nomEtat . ") " . "</td>"
+                . "<td $bgcolor width = 3%>" . $id_dossier_fta . "v" . $id_version_dossier_fta . "</td>"
+                . "<td $bgcolor width = \"1%\"> <b><font size=\"2\" color=\"#0000FF\">" . $code_article_ldc . "</font></b></td>"
+                . "</tr>"
+        ;
     }
 } else {
     $titre = UserInterfaceMessage::FR_WARNING_DATA_DOSSIER_FTA_TITLE;

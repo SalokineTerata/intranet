@@ -17,12 +17,12 @@ class FtaVerrouillageChampsModel extends AbstractModel {
     const FIELDNAME_FIELD_CHANGE_STATE = 'field_change_state';
 
     /**
-     * Si un chanmp verrouillé à été modifié actualisé l'information sur les Fta Seondaire validé
+     * Si un chanmp verrouillé a été modifié actualiser l'information sur les Fta Secondaires validées
      */
     const CHANGE_STATE_TRUE_VALIDATION_FTA = '2';
 
     /**
-     * Si un chanmp verrouillé à été modifié actualisé l'information sur les Fta Seondaire modifié
+     * Si un chanmp verrouillé a été modifié actualiser l'information sur les Fta Secondaires modifiées
      */
     const CHANGE_STATE_TRUE_VALIDATION_CHAPITRE = '1';
 
@@ -189,7 +189,7 @@ class FtaVerrouillageChampsModel extends AbstractModel {
     }
 
     /**
-     * Synchronise les données verrouillé
+     * Synchronise les données verrouillées
      * @param int $paramIdFtaPrimaire
      * @param int $paramIdFtaSecondaire
      * @param int $paramFtaDossierPrimaire
@@ -198,7 +198,7 @@ class FtaVerrouillageChampsModel extends AbstractModel {
     public static function dataSynchronizeFtaPrimarySecondary($paramIdFtaPrimaire, $paramIdFtaSecondaire, $paramFtaDossierPrimaire, $paramState = NULL) {
 
         /**
-         * Tableau Affichant la liste des champ à traité ordonné par nom de table
+         * Tableau Affichant la liste des champs à traiter ordonnés par nom de table
          * Ainsi pour chaque table on insert les nouvelles données
          */
         if ($paramState == NULL) {
@@ -243,7 +243,6 @@ class FtaVerrouillageChampsModel extends AbstractModel {
                             /**
                              * Si des composants ont été ajouté dans la Fta primaire
                              */
-                           
                             $addCompo = $nbSecondary;
                             for ($addCompo; $addCompo < $nbPrimary; $addCompo++) {
                                 $idFtaComposantAdd = $arrayValue[$addCompo][FtaComposantModel::KEYNAME];
@@ -394,7 +393,7 @@ class FtaVerrouillageChampsModel extends AbstractModel {
      */
     public static function isFieldLock($paramDataFieldFieldName, FtaModel $paramFtaModel) {
         $isFieldLock = FALSE;
-        $ftaValue = $paramFtaModel->checkFtaPrimaireSecondaire($paramDataFieldFieldName);
+        $ftaValue = $paramFtaModel->isFtaPrimaireOrSecondaire($paramDataFieldFieldName);
 
         switch ($ftaValue) {
             case FtaModel::FTA_PRIMAIRE:

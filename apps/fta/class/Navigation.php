@@ -172,7 +172,7 @@ class Navigation {
             $checkAccesButtonBySiteProd = IntranetActionsModel::isAccessFtaActionByIdUserFtaWorkflowAndSiteDeProduction($idUser, self::$id_fta_workflow, $idIntranetActionsSiteDeProduction);
             $tauxRound = FtaSuiviProjetModel::getPourcentageFtaTauxValidation(self::$ftaModel);
             /**
-             * Bouton de trasition
+             * Bouton de transition
              */
             $transition = TableauFicheView::getHmlLinkTransiter(self::$id_fta, self::$id_fta_role, self::$abreviation_etat, $checkAccesButtonBySiteProd
                             , $accesTransitionButton, self::$synthese_action, $tauxRound, "18", " Transiter");
@@ -813,11 +813,21 @@ class Navigation {
      * @return string
      */
     private static function buildMenu($paramArrayRoleWorkflow, $paramRowsFtaEtatAndFta, $paramHtmlTable, $paramRoleNavigation, GeoModel $paramGeoModel, $paramCreateur, FtaRoleModel $paramFtaRoleModel = NULL) {
+
+        $codeArticleLdc = "";
+        $idFta = $paramRowsFtaEtatAndFta[FtaModel::KEYNAME];
+        $ftaModel = new FtaModel($idFta);
+        $nomEtat = $ftaModel->getModelFtaEtat()->getDataField(FtaEtatModel::FIELDNAME_NOM_FTA_ETAT)->getFieldValue();
+
         if ($paramRowsFtaEtatAndFta[FtaModel::FIELDNAME_CODE_ARTICLE_LDC]) {
-            $identifiant = '<b><font size=\'2\' color=\'#0000FF\'>' . $paramRowsFtaEtatAndFta[FtaModel::FIELDNAME_CODE_ARTICLE_LDC] . '</font></b>';
-        } else {
-            $identifiant = '<b><font size=\'2\' color=\'' . self::FONT_COLOR_DOSSIER_FTA . '\'>' . $paramRowsFtaEtatAndFta[FtaModel::FIELDNAME_DOSSIER_FTA] . 'v' . $paramRowsFtaEtatAndFta[FtaModel::FIELDNAME_VERSION_DOSSIER_FTA] . '</font></b>';
+            $codeArticleLdc = '<b><font size=\'2\' color=\'#0000FF\'>' . $paramRowsFtaEtatAndFta[FtaModel::FIELDNAME_CODE_ARTICLE_LDC] . '</font></b> - ';
         }
+        $identifiant = '<font size=\'2\' />'
+                . 'N°Fta: ' . $paramRowsFtaEtatAndFta[FtaModel::FIELDNAME_DOSSIER_FTA] . 'v' . $paramRowsFtaEtatAndFta[FtaModel::FIELDNAME_VERSION_DOSSIER_FTA]
+                . " - Etat: " . $nomEtat . " "
+                . '</font> '
+        ;
+
         if ($paramRowsFtaEtatAndFta[FtaModel::FIELDNAME_COMMENTAIRE]) {
             $commentaire = '<br><b><font size=\'2\' color=\'' . self::FONT_COLOR_CHAPITRE_COMMENTAIRE . '\'>' . $paramRowsFtaEtatAndFta[FtaModel::FIELDNAME_COMMENTAIRE] . '</font></b>';
         } else {
@@ -828,11 +838,15 @@ class Navigation {
         } else {
             $nom = $paramRowsFtaEtatAndFta[FtaModel::FIELDNAME_DESIGNATION_COMMERCIALE];
         }
+        $menu_navigation = '<' . $paramHtmlTable . '><tr><td class=titre_principal> <div align=\'left\'>
+                            ' . $codeArticleLdc . $nom . ' &nbsp;&nbsp;&nbsp;&nbsp;<i>(gérée par ' . $paramCreateur . ')</i>'
+                . "<br>" . $identifiant
+                . '</div>'
+                . '<div align=\'left\'>' . $commentaire . '</div></td>'
+                . '<td width=25% class=titre_principal>'
+        ;
         if (count($paramArrayRoleWorkflow) > "1") {
-            $menu_navigation = '<' . $paramHtmlTable . '><tr><td class=titre_principal> <div align=\'left\'>
-                            ' . $identifiant . ' - ' . $nom . ' &nbsp;&nbsp;&nbsp;&nbsp;<i>(gérée par ' . $paramCreateur . ')</i></div>'
-                    . '<div align=\'left\'>' . $commentaire . '</div></td>'
-                    . '<td width=25% class=titre_principal>';
+
             if (self::$abreviation_etat == FtaEtatModel::ETAT_ABREVIATION_VALUE_MODIFICATION) {
                 $menu_navigation .= $paramRoleNavigation;
             }
@@ -842,10 +856,6 @@ class Navigation {
                      <' . $paramHtmlTable . '>
                            <tr class = titre>';
         } else {
-            $menu_navigation = '<' . $paramHtmlTable . '><tr><td class=titre_principal> <div align=\'left\'>
-                            ' . $identifiant . '- ' . $nom . ' &nbsp;&nbsp;&nbsp;&nbsp;<i>(gérée par ' . $paramCreateur . ')</i></div>'
-                    . '<div>' . $commentaire . '</div></td>'
-                    . '<td width=25% class=titre_principal>';
             if (self::$abreviation_etat == FtaEtatModel::ETAT_ABREVIATION_VALUE_MODIFICATION) {
                 $menu_navigation .= '  Rôle : ' . $paramFtaRoleModel->getDataField(FtaRoleModel::FIELDNAME_DESCRIPTION_FTA_ROLE)->getFieldValue();
             }

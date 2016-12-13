@@ -556,25 +556,25 @@ class FtaView extends AbstractView {
     }
 
     /**
-     * Gestionnaire de l'affichage Html du code artilce arcadia primaire
+     * Gestionnaire de l'affichage Html du code article arcadia primaire
      * et les codes articles arcadia secondaires
      * @return string
      */
     function getHtmlCodeArticleArcadiaPrimaireSecondaire($paramIsEditable, $paramIdFtaChapitre, $paramSyntheseAction, $paramComeback, $paramIdFtaEtat, $paramAbrevationEtat, $paramIdFtaRole) {
         $idFtaSecondary = $this->getModel()->getKeyValue();
         /**
-         * On vérifie si le dosssier de la Fta encours  est utilisé comme dossier primaire
+         * On vérifie si le dossier de la Fta encours  est utilisé comme dossier primaire
          */
-        $isDosssierFtaPrimary = $this->getModel()->isDossierFtaPrimary();
+        $isDossierFtaPrimary = $this->getModel()->isDossierFtaPrimary();
 
         /**
          * Si oui alors on affiche la liste des Fta secondaires
          */
-        if ($isDosssierFtaPrimary) {
+        if ($isDossierFtaPrimary) {
             $html = $this->getModel()->getLinkToSecondaryFta($paramIdFtaChapitre, $paramSyntheseAction, $paramComeback, $paramIdFtaRole);
         } else {
             /**
-             * Sinon on vérifie si elle est rataché à un dossier primaire (donc si il s'agis d'une secondaire)
+             * Sinon on vérifie si elle est rattachée à un dossier primaire (donc si il s'agis d'une secondaire)
              */
             $dossierFtaPrimaire = $this->getModel()->getDataField(FtaModel::FIELDNAME_DOSSIER_FTA_PRIMAIRE)->getFieldValue();
             /**

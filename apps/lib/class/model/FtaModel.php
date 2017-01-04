@@ -2896,7 +2896,7 @@ class FtaModel extends AbstractModel {
     }
 
     /**
-     * Tableau des idFta secondaires validé ou modifié de la Fta primaire en cours 
+     * Tableau des idFta secondaires validées ou modifiées associées à la Fta primaire en cours 
      * ordonné par dossier Fta puis par l'état de la Fta 
      * @return array
      */
@@ -2959,6 +2959,9 @@ class FtaModel extends AbstractModel {
         $ftaValue = $this->isFtaPrimaireOrSecondaire();
 
         switch ($ftaValue) {
+            /**
+             * Si la FTA actuelle est une primaire
+             */
             case FtaModel::FTA_PRIMAIRE:
                 //Synchronisation des données de la Fta primaire vers les secondaires
                 $arrayIdFtaSecondaire = $this->getArrayIdFtaSecondaireByDossierPrimaire($paramTypeSynchro);
@@ -2970,10 +2973,10 @@ class FtaModel extends AbstractModel {
                          * Sinon elle seront faîtes sur les Fta Validé
                          * Ordonnance du tableau permet ce traitement
                          */
-                        if ($dossierUse <> $dossierTmp) {
+                        //if ($dossierUse <> $dossierTmp) {
                             FtaVerrouillageChampsModel::dataSynchronizeFtaPrimarySecondary($this->getKeyValue(), $rowsIdFtaSeondaire[self::KEYNAME], $this->getDossierFta(), $paramState);
                             $dossierUse = $dossierTmp;
-                        }
+                        //}
                     }
                     switch ($paramState) {
                         /**

@@ -145,7 +145,7 @@ class FtaVerrouillageChampsModel extends AbstractModel {
     }
 
     /**
-     * Retour le tableau donnant la liste de champs à verrouillable
+     * Retour le tableau donnant la liste de champs verrouillés
      * @param int $paramIdFtaDossierPrimaire
      */
     public static function getArrayFtaLockedByPrimaryFolder($paramIdFtaDossierPrimaire) {
@@ -189,7 +189,7 @@ class FtaVerrouillageChampsModel extends AbstractModel {
     }
 
     /**
-     * Synchronise les données verrouillées
+     * Synchronise les données verrouillées de la FTA primaire vers le FTA secondaire
      * @param int $paramIdFtaPrimaire
      * @param int $paramIdFtaSecondaire
      * @param int $paramFtaDossierPrimaire
@@ -201,11 +201,11 @@ class FtaVerrouillageChampsModel extends AbstractModel {
          * Tableau Affichant la liste des champs à traiter ordonnés par nom de table
          * Ainsi pour chaque table on insert les nouvelles données
          */
-        if ($paramState == NULL) {
-            $arrayFtaDossierChampsVerrouiller = self::getArrayFtaLockedByPrimaryFolder($paramFtaDossierPrimaire);
-        } else {
-            $arrayFtaDossierChampsVerrouiller = self::getArrayFtaLockChangeStateByPrimaryFolder($paramFtaDossierPrimaire, $paramState);
-        }
+        //if ($paramState == NULL) {
+        $arrayFtaDossierChampsVerrouiller = self::getArrayFtaLockedByPrimaryFolder($paramFtaDossierPrimaire);
+//        } else {
+//            $arrayFtaDossierChampsVerrouiller = self::getArrayFtaLockChangeStateByPrimaryFolder($paramFtaDossierPrimaire, $paramState);
+//        }
 
         if ($arrayFtaDossierChampsVerrouiller) {
             foreach ($arrayFtaDossierChampsVerrouiller as $rowsFtaDossierChampsVerrouiller) {
@@ -226,108 +226,204 @@ class FtaVerrouillageChampsModel extends AbstractModel {
                         break;
                     case FtaComposantModel::TABLENAME:
 
+                        /**
+                         * Liste des composants primaires ayant un code semi-fini
+                         * et donc à synchroniser.
+                         */
                         $arrayValue = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
-                                        "SELECT " . FtaComposantModel::KEYNAME . "," . $columnName
+                                        "SELECT " . FtaComposantModel::KEYNAME . "," . $columnName . "," . FtaComposantModel::FIELDNAME_CODE_PRODUIT_AGROLOGIC_FTA_NOMENCLATURE
                                         . " FROM " . $tableName
                                         . " WHERE " . FtaModel::KEYNAME . "=" . $paramIdFtaPrimaire
+                                        . " AND " . FtaComposantModel::FIELDNAME_CODE_PRODUIT_AGROLOGIC_FTA_NOMENCLATURE . " IS NOT NULL"
+                                        . " AND " . FtaComposantModel::FIELDNAME_CODE_PRODUIT_AGROLOGIC_FTA_NOMENCLATURE . " != ''"
                         );
-                        $nbPrimary = count($arrayValue);
+
+                        //$nbPrimary = count($arrayValue);
+
+                        /**
+                         * Liste des composants secondaires ayant un code semi-fini
+                         * et donc à synchroniser.
+                         */
                         $arrayIdFtaComposantSecondaire = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
-                                        "SELECT " . FtaComposantModel::KEYNAME . "," . $columnName
+                                        "SELECT " . FtaComposantModel::KEYNAME . "," . $columnName . "," . FtaComposantModel::FIELDNAME_CODE_PRODUIT_AGROLOGIC_FTA_NOMENCLATURE
                                         . " FROM " . $tableName
                                         . " WHERE " . FtaModel::KEYNAME . "=" . $paramIdFtaSecondaire
+                                        . " AND " . FtaComposantModel::FIELDNAME_CODE_PRODUIT_AGROLOGIC_FTA_NOMENCLATURE . " IS NOT NULL"
+                                        . " AND " . FtaComposantModel::FIELDNAME_CODE_PRODUIT_AGROLOGIC_FTA_NOMENCLATURE . " != ''"
                         );
-                        $nbSecondary = count($arrayIdFtaComposantSecondaire);
+                        //$nbSecondary = count($arrayIdFtaComposantSecondaire);
 
-                        if ($nbPrimary > $nbSecondary) {
-                            /**
-                             * Si des composants ont été ajouté dans la Fta primaire
-                             */
-                            $addCompo = $nbSecondary;
-                            for ($addCompo; $addCompo < $nbPrimary; $addCompo++) {
-                                $idFtaComposantAdd = $arrayValue[$addCompo][FtaComposantModel::KEYNAME];
-                                /**
-                                 * Création d'un composant dans les secondaires car ajouter dans le primaires.
-                                 */
-                                $newIdFtaComposant = FtaComposantModel::duplicationIdFtaComposant($idFtaComposantAdd);
-
-                                /**
-                                 * On remplace l'id du primaire par le nouveau
-                                 */
-                                DatabaseOperation::execute(
-                                        "UPDATE " . $tableName
-                                        . " SET " . FtaModel::KEYNAME . "=\"" . $paramIdFtaSecondaire
-                                        . "\" WHERE " . FtaComposantModel::KEYNAME . "=" . $newIdFtaComposant
-                                );
-                            }
-                        } elseif ($nbPrimary < $nbSecondary) {
-                            $titre = UserInterfaceMessage::FR_WARNING_ARTICLE_PRIMAIRE_TITLE;
-                            $message = UserInterfaceMessage::FR_WARNING_ARTICLE_PRIMAIRE_CHECK2;
-                            Lib::showMessage($titre, $message, $redirection);
-                        }
                         /**
-                         * Gestionnaire des sous table Ftacomposant
+                         * Listes des composants à synchroniser
+                         * $arrayFtaComposantToSync[id_fta_composant Primaire] = id_fta_composant Secondaire
                          */
-                        $i = "0";
+                        $arrayIdFtaComposantToSync = array();
+
+                        /**
+                         * Listes des composants à ajouter
+                         * $arrayFtaComposantToAdd[id_fta_composant Primaire] = id_fta_composant Secondaire
+                         */
+                        $arrayIdFtaComposantToAdd = array();
+                        $arrayIsCodeProduitSecondaireFoundInPrimaire = array();
+
+                        /**
+                         * Parcours des composants primaires à synchroniser
+                         */
+                        foreach ($arrayValue as $keyFtaComposantPrimaire => $valueFtaComposantPrimaire) {
+
+                            /**
+                             * Récupération du code produit semi-fini
+                             */
+                            $codeProduitAgrologicFtaNomenclaturePrimaire = $valueFtaComposantPrimaire[FtaComposantModel::FIELDNAME_CODE_PRODUIT_AGROLOGIC_FTA_NOMENCLATURE];
+                            $isCodeProduitPrimaireFoundInSecondaire = FALSE;
+
+                            /**
+                             * Parcours des composants secondaires à synchroniser
+                             */
+                            foreach ($arrayIdFtaComposantSecondaire as $valueFtaComposantSecondaire) {
+
+                                /**
+                                 * Liste des semi-finis secondaires qui seraient inexistant dans la FTA primaires
+                                 * Si le code n'a pas encore été recherché, alors on le déclare comme introuvable dans la primaire par défaut.
+                                 */
+                                if (array_key_exists($valueFtaComposantSecondaire[FtaComposantModel::FIELDNAME_CODE_PRODUIT_AGROLOGIC_FTA_NOMENCLATURE], $arrayIsCodeProduitSecondaireFoundInPrimaire) == FALSE) {
+                                    $arrayIsCodeProduitSecondaireFoundInPrimaire[$valueFtaComposantSecondaire[FtaComposantModel::FIELDNAME_CODE_PRODUIT_AGROLOGIC_FTA_NOMENCLATURE]] = FALSE;
+                                }
+
+                                /**
+                                 * Si le même code produit finis est trouvé, alors il faut synchroniser
+                                 */
+                                if ($valueFtaComposantSecondaire[FtaComposantModel::FIELDNAME_CODE_PRODUIT_AGROLOGIC_FTA_NOMENCLATURE] == $codeProduitAgrologicFtaNomenclaturePrimaire) {
+                                    /**
+                                     * Ajout du couple de données Id composant secondaire + valeur à mettre à jour
+                                     */
+                                    $temp[FtaComposantModel::KEYNAME] = $valueFtaComposantSecondaire[FtaComposantModel::KEYNAME];
+                                    $temp[$columnName] = $valueFtaComposantPrimaire[$columnName];
+
+                                    /**
+                                     * Actualisation de la liste des composants à synchroniser
+                                     */
+                                    $arrayIdFtaComposantToSync[$valueFtaComposantPrimaire[FtaComposantModel::KEYNAME]] = $temp;
+
+                                    /**
+                                     * Ce composant existant dans la FTA primaire ne sera donc pas à ajouter dans la FTA secondaire
+                                     */
+                                    $isCodeProduitPrimaireFoundInSecondaire = TRUE;
+
+                                    /**
+                                     * Inversement, le code de la FTA secondaire, existe bien dans la FTA primaire et ne sera donc pas à supprimer
+                                     */
+                                    $arrayIsCodeProduitSecondaireFoundInPrimaire[$valueFtaComposantSecondaire[FtaComposantModel::FIELDNAME_CODE_PRODUIT_AGROLOGIC_FTA_NOMENCLATURE]] = TRUE;
+                                }
+                            }
+
+                            /**
+                             * Si après avoir parcourus tous les composants du secondaire, le code produit n'a pas été trouvé alors il faudra ajouter le composant
+                             */
+                            if ($isCodeProduitPrimaireFoundInSecondaire == FALSE) {
+                                $arrayIdFtaComposantToAdd[] = $valueFtaComposantPrimaire[FtaComposantModel::KEYNAME];
+                            }
+                        }
+
+                        /**
+                         * Ajout des composants manquants dans la FTA secondaire
+                         */
+                        foreach ($arrayIdFtaComposantToAdd as $value) {
+
+                            $idFtaComposantAdd = $value[FtaComposantModel::KEYNAME];
+
+                            /**
+                             * Création d'un composant dans les secondaires car ajouter dans le primaires.
+                             */
+                            $newIdFtaComposant = FtaComposantModel::duplicationIdFtaComposant($idFtaComposantAdd);
+
+                            /**
+                             * On remplace l'id du primaire par le nouveau
+                             */
+                            DatabaseOperation::execute(
+                                    "UPDATE " . $tableName
+                                    . " SET " . FtaModel::KEYNAME . "=\"" . $paramIdFtaSecondaire
+                                    . "\" WHERE " . FtaComposantModel::KEYNAME . "=" . $newIdFtaComposant
+                            );
+                        }
+
+                        /**
+                         * Suppression des composants en trop dans la FTA secondaire
+                         */
+                        foreach ($arrayIsCodeProduitSecondaireFoundInPrimaire as $keyCodeProduitSecondaireFoundInPrimaire => $valueCodeProduitSecondaireFoundInPrimaire) {
+
+                            /**
+                             * Le code produit semi-fini de la secondaire est-il introuvable dans la FTA primaire ?
+                             */
+                            if ($valueCodeProduitSecondaireFoundInPrimaire == FALSE) {
+
+                                $paramWhereClause = FtaComposantModel::FIELDNAME_ID_FTA . "=" . $paramIdFtaSecondaire
+                                        . " AND " . FtaComposantModel::FIELDNAME_CODE_PRODUIT_AGROLOGIC_FTA_NOMENCLATURE . "=" . $keyCodeProduitSecondaireFoundInPrimaire
+                                ;
+                                /**
+                                 * Suppression du composant dans la FTA secondaire
+                                 */
+                                DatabaseOperation::doSqlDelete($tableName, $paramWhereClause);
+                            }
+                        }
                         break;
-                    default :
-                        $arrayValue = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
-                                        "SELECT " . $columnName
-                                        . " FROM " . $tableName
-                                        . " WHERE " . FtaModel::KEYNAME . "=" . $paramIdFtaPrimaire
-                        );
-                        break;
+//                    default :
+//                        $arrayValue = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
+//                                        "SELECT " . $columnName
+//                                        . " FROM " . $tableName
+//                                        . " WHERE " . FtaModel::KEYNAME . "=" . $paramIdFtaPrimaire
+//                        );
+//                        break;
                 }
 
+                /**
+                 * Ecrasement des valeurs vérrouillées de la secondaire par les valeurs de la primaire.
+                 */
                 if ($columnName <> FtaComposantModel::KEYNAME) {
-                    foreach ($arrayValue as $rowsValue) {
-                        $columnValue = $rowsValue[$columnName];
 
-                        /**
-                         * On synchronise la donnée de la fta primaire avec la secondaire
-                         */
-                        if ($fieldLock) {
 
-                            switch ($tableName) {
-                                case FtaModel::TABLENAME:
+                    /**
+                     * On synchronise la donnée de la fta primaire avec la secondaire
+                     */
+                    if ($fieldLock) {
+
+                        switch ($tableName) {
+                            case FtaModel::TABLENAME:
+
+                                foreach ($arrayValue as $value) {
+
+                                    $columnValue = $value[$columnName];
                                     DatabaseOperation::execute(
                                             "UPDATE " . $tableName
                                             . " SET " . $columnName . "=\"" . $columnValue
                                             . "\" WHERE " . FtaModel::KEYNAME . "=" . $paramIdFtaSecondaire
                                     );
+                                }
+                                break;
 
-                                    break;
-                                case FtaComposantModel::TABLENAME:
-                                    /**
-                                     * Gestionnaire des sous table Ftacomposant
-                                     */
-                                    $arrayIdFtaComposantSecondaire = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
-                                                    "SELECT " . FtaComposantModel::KEYNAME . "," . $columnName
-                                                    . " FROM " . $tableName
-                                                    . " WHERE " . FtaModel::KEYNAME . "=" . $paramIdFtaSecondaire
-                                    );
+                            case FtaComposantModel::TABLENAME:
 
-                                    $idFtaComposant = $arrayIdFtaComposantSecondaire[$i][FtaComposantModel::KEYNAME];
+                                foreach ($arrayIdFtaComposantToSync as $dataFtaComposantToSyncSecondaire) {
+                                    $columnValue = $dataFtaComposantToSyncSecondaire[$columnName];
+                                    $idFtaComposant = $dataFtaComposantToSyncSecondaire[FtaComposantModel::KEYNAME];
 
                                     DatabaseOperation::execute(
                                             "UPDATE " . $tableName
                                             . " SET " . $columnName . "=\"" . $columnValue
-                                            . "\" WHERE " . FtaModel::KEYNAME . "=" . $paramIdFtaSecondaire
-                                            . " AND " . FtaComposantModel::KEYNAME . "=" . $idFtaComposant
+                                            . "\" WHERE " . FtaComposantModel::KEYNAME . "=" . $idFtaComposant
                                     );
+                                }
+                                break;
 
-                                    $i++;
-                                    break;
-
-                                default:
-                                    DatabaseOperation::execute(
-                                            "UPDATE " . $tableName
-                                            . " SET " . $columnName . "=\"" . $columnValue
-                                            . "\" WHERE " . FtaModel::KEYNAME . "=" . $paramIdFtaSecondaire
-                                    );
-
-                                    break;
-                            }
+//                            default:
+//                                
+//                                DatabaseOperation::execute(
+//                                        "UPDATE " . $tableName
+//                                        . " SET " . $columnName . "=\"" . $columnValue
+//                                        . "\" WHERE " . FtaModel::KEYNAME . "=" . $paramIdFtaSecondaire
+//                                );
+//
+//                                break;
                         }
                     }
                 }

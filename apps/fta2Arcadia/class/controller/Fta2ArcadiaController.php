@@ -140,6 +140,7 @@ class Fta2ArcadiaController {
     private $XMLarcadiaCodTypeConditPub;
     private $XMLarcadiaUniteConditionnement;
     private $XMLarcadiaSiteRefEcoEmb;
+    private $XMLarcadiaSiteRefInco;
     private $XMLarcadiaOptiventes;
     private $XMLarcadiaFamilleBudget;
     private $XMLarcadiaGammeFamilleBudget;
@@ -157,17 +158,21 @@ class Fta2ArcadiaController {
     private $XMLarcadiaAcregTypeProdEmplacement;
     private $XMLarcadiaAcregQuantiteEmplacement;
     private $XMLarcadiaSiteValo;
+    private $XMLarcadiaSiteAffect;
     private $XMLarcadiaCodPCB;
     private $XMLarcadiaDun14;
     private $XMLarcadiaDunPalette;
     private $XMLarcadiaColisSpecifique;
     private $XMLarcadiaColisStandard;
+    private $XMLarcadiaDun14NbColisCouche;
+    private $XMLarcadiaDun14NbCouchePalette;
     private $XMLarcadiaTypeCarton;
     private $XMLarcadiaArtSiteDateDebutEffet;
     private $XMLarcadiaArtSiteDateFinEffet;
     private $XMLarcadiaArtSiteCodPosteCC;
     private $XMLarcadiaArtSiteCodAtelier;
     private $XMLarcadiaArtSiteSiteAffectRes;
+    private $XMLarcadiaArtSiteSiteAnalytique;
     private $XMLCommentEntete;
     private $XMLCommentAdmPole;
     private $XMLCommentContGestion;
@@ -369,7 +374,7 @@ function transformAll() {
     $this->transformFamilleEcoEmballagesArcadia();
     $this->transformMarqueArcadia();
     $this->transformCREATE();
-    $this->transformSiteDePorduction();
+    $this->transformSiteDeProduction();
     $this->transformGammeCoop();
     $this->transformGammeFamilleBudget();
     $this->transformFamilleBudget();
@@ -539,12 +544,14 @@ function transformCodPoidsCstUvc() {
 /**
  * On vérifie si le site de production de la Fta a été modifié
  */
-function transformSiteDePorduction() {
+function transformSiteDeProduction() {
     $checkDiff = $this->getFtaModel()->getDataField(FtaModel::FIELDNAME_SITE_PRODUCTION)->isFieldDiff();
     if ($checkDiff or $this->getActionProposal() == self::CREATE) {
         $geoModel = $this->getFtaModel()->getModelSiteProduction();
         $this->setXMLArcadiaSiteDeProd($geoModel);
+        $this->setXMLarcadiaSiteRefInco($geoModel);
         $this->setXMLarcadiaSiteValo($geoModel);
+        $this->setXMLarcadiaSiteAffect($geoModel);
         $this->setXMLArcadiaFamilleDeclCaClient($geoModel->getDataField(geomodel::FIELDNAME_ID_SITE_GROUPE)->getFieldValue());
     }
 }
@@ -1037,6 +1044,8 @@ function transformTypeCarton() {
         $idTypeCartonArcadia = $this->getFtaModel()->getIdArcadiaTypeCarton();
 
         $this->setXMLArcadiaTypeCarton($idTypeCartonArcadia);
+        $this->setXMLArcadiaDun14NbColisCouche();
+        $this->setXMLArcadiaDun14NbCouchePalette();
         /**
          * Si l'EAN Palette a été modifié alors on affiche la table Dun14
          */
@@ -1214,6 +1223,7 @@ function initiateArtSiteRecordsetTwo() {
     $this->setXMLArcadiaArtSiteCodPosteCC($ArtSiteCodPosteCC);
     $this->setXMLArcadiaArtSiteCodAtelier(GeoArcadiaModel::CODE_ATELIER);
     $this->setXMLArcadiaArtSiteSiteAffectRes();
+    $this->setXMLArcadiaArtSiteSiteAnalytique();
     $this->setXMLArcadiaArtSiteDateDebutEffet();
     $this->setXMLArcadiaArtSiteDateFinEffet();
 
@@ -1222,7 +1232,9 @@ function initiateArtSiteRecordsetTwo() {
      */
     $XMLrecordsetArtSiteTwo = $this->getXMLArcadiaArtSiteCodPosteCC()
             . $this->getXMLArcadiaArtSiteCodAtelier()
-            . $this->getXMLArcadiaArtSiteSiteAffectRes();
+            . $this->getXMLArcadiaArtSiteSiteAffectRes()
+            . $this->getXMLArcadiaArtSiteSiteAnalytique()
+    ;
     $this->setXMLrecordsetArtSiteTwo($XMLrecordsetArtSiteTwo);
 }
 
@@ -1237,6 +1249,7 @@ function initiateArtSiteRecordsetOne() {
     $this->setXMLArcadiaArtSiteCodPosteCC($ArtSiteCodPosteCC);
     $this->setXMLArcadiaArtSiteCodAtelier(GeoArcadiaModel::CODE_ATELIER);
     $this->setXMLArcadiaArtSiteSiteAffectRes();
+    $this->setXMLArcadiaArtSiteSiteAnalytique();
     $this->setXMLArcadiaArtSiteDateDebutEffet();
     $this->setXMLArcadiaArtSiteDateFinEffet();
 }
@@ -1612,6 +1625,23 @@ function setXMLArcadiaSiteDeProd(GeoModel $paramArcadiaSiteDeProdModel) {
             . $paramArcadiaSiteDeProdModel->getDataField(GeoModel::FIELDNAME_GEO)->getFieldValue() . " -->" . self::SAUT_DE_LIGNE;
 }
 
+function getXMLArcadiaSiteRefInco() {
+    return $this->XMLarcadiaSiteRefInco;
+}
+
+function setXMLarcadiaSiteRefInco(GeoModel $paramArcadiaSiteDeProdModel) {
+
+    $recordsetGeoArcadia = new GeoArcadiaModel($paramArcadiaSiteDeProdModel->getKeyValue());
+    $idSiteRefInco = $recordsetGeoArcadia->getDataField(GeoArcadiaModel::FIELDNAME_ID_SITE_VALORISATION)->getFieldValue();
+
+    $this->XMLarcadiaSiteRefInco = self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION
+            . "<SITE_REF_INCO>"
+            //. $paramArcadiaSiteDeProdModel->getDataField(GeoModel::FIELDNAME_ID_SITE_GROUPE)->getFieldValue() 
+            . $idSiteRefInco
+            . "</SITE_REF_INCO><!-- "
+            . $paramArcadiaSiteDeProdModel->getDataField(GeoModel::FIELDNAME_GEO)->getFieldValue() . " -->" . self::SAUT_DE_LIGNE;
+}
+
 function getXMLarcadiaSiteValo() {
     return $this->XMLarcadiaSiteValo;
 }
@@ -1626,6 +1656,23 @@ function setXMLarcadiaSiteValo(GeoModel $paramArcadiaSiteDeProdModel) {
             //. $paramArcadiaSiteDeProdModel->getDataField(GeoModel::FIELDNAME_ID_SITE_GROUPE)->getFieldValue() 
             . $idSiteValorisation
             . "</SITE_VALO><!-- "
+            . $paramArcadiaSiteDeProdModel->getDataField(GeoModel::FIELDNAME_GEO)->getFieldValue() . " -->" . self::SAUT_DE_LIGNE;
+}
+
+function getXMLarcadiaSiteAffect() {
+    return $this->XMLarcadiaSiteAffect;
+}
+
+function setXMLarcadiaSiteAffect(GeoModel $paramArcadiaSiteDeProdModel) {
+
+    $recordsetGeoArcadia = new GeoArcadiaModel($paramArcadiaSiteDeProdModel->getKeyValue());
+    $idSiteAffect = $recordsetGeoArcadia->getDataField(GeoArcadiaModel::FIELDNAME_ID_SITE_VALORISATION)->getFieldValue();
+
+    $this->XMLarcadiaSiteAffect = self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION
+            . "<ACREG_SITE_AFFECT>"
+            //. $paramArcadiaSiteDeProdModel->getDataField(GeoModel::FIELDNAME_ID_SITE_GROUPE)->getFieldValue() 
+            . $idSiteAffect
+            . "</ACREG_SITE_AFFECT><!-- "
             . $paramArcadiaSiteDeProdModel->getDataField(GeoModel::FIELDNAME_GEO)->getFieldValue() . " -->" . self::SAUT_DE_LIGNE;
 }
 
@@ -1902,6 +1949,28 @@ function getXMLArcadiaColisStandard() {
     return $this->XMLarcadiaColisStandard;
 }
 
+function getXMLArcadiaDun14NbColisCouche() {
+    return $this->XMLarcadiaDun14NbColisCouche;
+}
+
+function setXMLArcadiaDun14NbColisCouche() {
+    $arrayEmballageTypePalette = $this->getFtaModel()->buildArrayEmballageTypePalette();
+    $nbColisCouche = $arrayEmballageTypePalette[FtaConditionnementModel::PALETTE_NOMBRE_COLIS_PAR_COUCHE];
+    $this->XMLarcadiaDun14NbColisCouche = self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION
+            . "<NB_COLIS_COUCHE>" . $nbColisCouche . "</NB_COLIS_COUCHE>" . self::SAUT_DE_LIGNE;
+}
+
+function getXMLArcadiaDun14NbCouchePalette() {
+    return $this->XMLarcadiaDun14NbCouchePalette;
+}
+
+function setXMLArcadiaDun14NbCouchePalette() {
+    $arrayEmballageTypePalette = $this->getFtaModel()->buildArrayEmballageTypePalette();
+    $nbCouchePalette = $arrayEmballageTypePalette[FtaConditionnementModel::PALETTE_NOMBRE_DE_COUCHE];
+    $this->XMLarcadiaDun14NbCouchePalette = self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION
+            . "<NB_COUCHE_PALETTE>" . $nbCouchePalette . "</NB_COUCHE_PALETTE>" . self::SAUT_DE_LIGNE;
+}
+
 function setXMLArcadiaColisSpecifique() {
     $this->XMLarcadiaColisSpecifique = self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION
             . "<IS_SPECIFIQUE>" . self::NON . "</IS_SPECIFIQUE>" . self::SAUT_DE_LIGNE;
@@ -2100,6 +2169,10 @@ function getXMLArcadiaArtSiteSiteAffectRes() {
     return $this->XMLarcadiaArtSiteSiteAffectRes;
 }
 
+function getXMLArcadiaArtSiteSiteAnalytique() {
+    return $this->XMLarcadiaArtSiteSiteAnalytique;
+}
+
 function setXMLArcadiaArtSiteDateDebutEffet() {
     /**
      * Date+1 jours
@@ -2130,6 +2203,16 @@ function setXMLArcadiaArtSiteCodAtelier($XMLarcadiaArtSiteCodAtelier) {
 function setXMLArcadiaArtSiteSiteAffectRes() {
     $this->XMLarcadiaArtSiteSiteAffectRes = self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION
             . "<SIT_AFFECT_RES>" . $this->getFtaModel()->getModelSiteProduction()->getDataField(GeoModel::FIELDNAME_ID_SITE_GROUPE)->getFieldValue() . "</SIT_AFFECT_RES>" . self::SAUT_DE_LIGNE;
+}
+
+function setXMLArcadiaArtSiteSiteAnalytique() {
+    $id_geo = $this->getFtaModel()->getModelSiteProduction()->getKeyValue();
+    $geoArcadiaModel = new GeoArcadiaModel($id_geo);
+    $id_site_anaytique = $geoArcadiaModel->getDataField(GeoArcadiaModel::FIELDNAME_ID_SITE_ANALYTIQUE)->getFieldValue();
+    $this->XMLarcadiaArtSiteSiteAnalytique = self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION
+            . "<SIT_ANALYTIQUE>" . $id_site_anaytique
+            . "</SIT_ANALYTIQUE>" . self::SAUT_DE_LIGNE
+    ;
 }
 
 function getXMLRecordsetArtSiteTwo() {
@@ -2549,6 +2632,8 @@ function xmlDunc14() {
                 . $this->getXMLArcadiaDun14()
                 . $this->getXMLArcadiaTypeCarton()
                 . $this->getXMLArcadiaColisStandard()
+                . $this->getXMLArcadiaDun14NbColisCouche()
+                . $this->getXMLArcadiaDun14NbCouchePalette()
                 . $this->getXMLArcadiaColisSpecifique()
                 . $this->getXMLArcadiaDunPalette()
                 . self::RECORDSET_END
@@ -2591,6 +2676,7 @@ function xmlArtSite() {
                 . $this->getXMLArcadiaArtSiteCodPosteCC()
                 . $this->getXMLArcadiaArtSiteCodAtelier()
                 . $this->getXMLArcadiaArtSiteSiteAffectRes()
+                . $this->getXMLArcadiaArtSiteSiteAnalytique()
                 . self::RECORDSET_END
                 . $xmlTextRecordSetTwo
                 . self::DATA_IMPORT_END
@@ -2625,6 +2711,7 @@ function xmlProduitFinis() {
                 . $this->getXMLArcadiaAcregSiteSecondaire()
                 . $this->getXMLArcadiaAcregLieuSecondaire()
                 . $this->getXMLarcadiaSiteValo()
+                . $this->getXMLarcadiaSiteAffect()
                 . $this->getXMLArcadiaAcregTypeProdEmplacement()
                 . $this->getXMLArcadiaAcregQuantiteEmplacement()
                 . self::RECORDSET_END
@@ -2671,6 +2758,7 @@ function xmlArticleRef() {
             . $this->getXMLCommentContGestion()
             . $this->getXMLArcadiaArticleRefLicProduction()
             . $this->getXMLArcadiaSiteDeProd()
+            . $this->getXMLArcadiaSiteRefInco()
             . $this->getXMLArcadiaCommentairePrive()
             . $this->getXMLArcadiaFestif()
             . $this->getXMLArcadiaPoidsMoyenCal()

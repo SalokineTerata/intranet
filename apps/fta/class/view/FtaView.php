@@ -234,8 +234,8 @@ class FtaView extends AbstractView {
                 $isEditable = $Fta2ArcadiaTransactionModel->isEditableNotificationMail();
                 $codeReply = $Fta2ArcadiaTransactionModel->getDataField(Fta2ArcadiaTransactionModel::FIELDNAME_CODE_REPLY)->getFieldValue();
                 /**
-                 * On peut valider le chapitre si la trasaction en cours est actif,
-                 * tant que le fichier de retour n'est pas était récupéré NULL
+                 * On peut valider le chapitre si la transaction en cours est actif,
+                 * tant que le fichier de retour n'a pas été récupéré NULL
                  * et que le fichier de retour ne soit pas en Erreur (1,2,3,4)
                  */
                 if ($codeReply <> Fta2ArcadiaTransactionModel::CONSOMME) {

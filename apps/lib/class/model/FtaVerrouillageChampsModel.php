@@ -330,7 +330,7 @@ class FtaVerrouillageChampsModel extends AbstractModel {
                          */
                         foreach ($arrayIdFtaComposantToAdd as $value) {
 
-                            $idFtaComposantAdd = $value[FtaComposantModel::KEYNAME];
+                            $idFtaComposantAdd = $value;
 
                             /**
                              * Création d'un composant dans les secondaires car ajouter dans le primaires.

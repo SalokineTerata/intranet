@@ -843,7 +843,7 @@ class DatabaseOperation {
      */
     public static function doSqlDelete($paramTableClause, $paramWhereClause) {
         return DatabaseOperation::execute(
-                        'DELETE FROM ' . $paramTableClause . ' '
+                        'DELETE FROM ' . $paramTableClause . ' WHERE '
                         . $paramWhereClause
         );
     }

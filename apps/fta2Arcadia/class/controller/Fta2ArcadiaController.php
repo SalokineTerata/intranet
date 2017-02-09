@@ -93,7 +93,7 @@ class Fta2ArcadiaController {
      * @var string
      */
     private $xmlText;
-    private $XMLarcadiaUtilisableGroupe;
+    private $XMLarcadiaArticleUtilisableSite;
     private $XMLarcadiaSiteDeProd;
     private $XMLarcadiaArticleRefLicCcial;
     private $XMLarcadiaArticleRefLicProduction;
@@ -118,6 +118,10 @@ class Fta2ArcadiaController {
     private $XMLarcadiaDTS;
     private $XMLarcadiaPoidsMini;
     private $XMLarcadiaPoidsMaxi;
+    private $XMLarcadiaArticleTarePrivee;
+    private $XMLarcadiaArticleLongueurProduit;
+    private $XMLarcadiaArticleLargeurProduit;
+    private $XMLarcadiaArticleHauteurProduit;
     private $XMLarcadiaPoidsMoyenCal;
     private $XMLarcadiaPoidsMiniBarq;
     private $XMLarcadiaPoidsMaxiBarq;
@@ -517,7 +521,8 @@ function transformCodSociete() {
  * Initialisation des balises dont la valeur ne change pas 
  */
 function transformUtilisableGroupe() {
-    $this->setXMLArcadiaUtilisableGroupe();
+    $this->setXMLArcadiaArticleUtilisableGroupe();
+    $this->setXMLArcadiaArticleUtilisableSite();
 }
 
 /**
@@ -921,6 +926,12 @@ function transformPoidsMaxiAndMini() {
         $this->setXMLArcadiaPoidsMaxiBarq($poidsUVFValueCalcul);
         $this->setXMLArcadiaPoidsCstUvc($poidsUVFValueCalcul);
         $this->setXMLArcadiaPoidsMoyenCal($poidsUVFValueCalcul);
+
+        $arrayEmballageTypeUVC = $this->getFtaModel()->buildArrayEmballageTypeUVC();
+        $this->setXMLArcadiaArticleTarePrivee($arrayEmballageTypeUVC[FtaConditionnementModel::UVC_EMBALLAGE_BRUT]);
+        $this->setXMLArcadiaArticleLongueurProduit($arrayEmballageTypeUVC[FtaConditionnementModel::UVC_EMBALLAGE_DIMENSION_LONGUEUR]);
+        $this->setXMLArcadiaArticleLargeurProduit($arrayEmballageTypeUVC[FtaConditionnementModel::UVC_EMBALLAGE_DIMENSION_LARGEUR]);
+        $this->setXMLArcadiaArticleHauteurProduit($arrayEmballageTypeUVC[FtaConditionnementModel::UVC_EMBALLAGE_DIMENSION_HAUTEUR]);
     }
 }
 
@@ -1430,6 +1441,15 @@ function setXMLArcadiaIsHallal() {
             . "<IS_HALLAL>" . self::NON . "</IS_HALLAL><!-- Non --> " . self::SAUT_DE_LIGNE;
 }
 
+function getXMLArcadiaArticleUtilisableGroupe() {
+    return $this->XMLarcadiaArticleUtilisableGroupe;
+}
+
+function setXMLArcadiaArticleUtilisableGroupe() {
+    $this->XMLarcadiaArticleUtilisableGroupe = self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION
+            . "<UTILISABLE_GROUPE>" . self::OUI . "</UTILISABLE_GROUPE><!-- Oui --> " . self::SAUT_DE_LIGNE;
+}
+
 function getXMLArcadiaCodGeneriqueFm() {
     return $this->XMLarcadiaCodGeneriqueFm;
 }
@@ -1605,12 +1625,12 @@ function setXMLArcadiaCNUF() {
             . "<CNUF>" . self::CNUF_AGIS . "</CNUF>" . self::SAUT_DE_LIGNE;
 }
 
-function getXMLArcadiaUtilisableGroupe() {
-    return $this->XMLarcadiaUtilisableGroupe;
+function getXMLArcadiaArticleUtilisableSite() {
+    return $this->XMLarcadiaArticleUtilisableSite;
 }
 
-function setXMLArcadiaUtilisableGroupe() {
-    $this->XMLarcadiaUtilisableGroupe = self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION
+function setXMLArcadiaArticleUtilisableSite() {
+    $this->XMLarcadiaArticleUtilisableSite = self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION
             . "<UTILISABLE_SITE>" . self::OUI . "</UTILISABLE_SITE><!-- Oui -->" . self::SAUT_DE_LIGNE;
 }
 
@@ -1754,6 +1774,10 @@ function getXMLArcadiaPoidsMoyenCal() {
     return $this->XMLarcadiaPoidsMoyenCal;
 }
 
+function getXMLArcadiaArticleTarePrivee() {
+    return $this->XMLarcadiaArticleTarePrivee;
+}
+
 function getXMLArcadiaPoidsMiniBarq() {
     return $this->XMLarcadiaPoidsMiniBarq;
 }
@@ -1764,6 +1788,38 @@ function getXMLArcadiaPoidsCstUvc() {
 
 function getXMLArcadiaPoidsMaxiBarq() {
     return $this->XMLarcadiaPoidsMaxiBarq;
+}
+
+function getXMLArcadiaArticleLongueurProduit() {
+    return $this->XMLarcadiaArticleLongueurProduit;
+}
+
+function getXMLArcadiaArticleLargeurProduit() {
+    return $this->XMLarcadiaArticleLargeurProduit;
+}
+
+function getXMLArcadiaArticleHauteurProduit() {
+    return $this->XMLarcadiaArticleHauteurProduit;
+}
+
+function setXMLArcadiaArticleTarePrivee($paramArcadiaArticleTarePrivee) {
+    $this->XMLarcadiaArticleTarePrivee = self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION
+            . "<TARE_PRIVE>" . $paramArcadiaArticleTarePrivee . "</TARE_PRIVE>" . self::SAUT_DE_LIGNE;
+}
+
+function setXMLArcadiaArticleLongueurProduit($paramArcadiaArticleLongueurProduit) {
+    $this->XMLarcadiaArticleLongueurProduit = self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION
+            . "<LONGUEUR_PRODUIT>" . $paramArcadiaArticleLongueurProduit . "</LONGUEUR_PRODUIT>" . self::SAUT_DE_LIGNE;
+}
+
+function setXMLArcadiaArticleLargeurProduit($paramArcadiaArticleLargeurProduit) {
+    $this->XMLarcadiaArticleLargeurProduit = self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION
+            . "<LARGUEUR_PRODUIT>" . $paramArcadiaArticleLargeurProduit . "</LARGUEUR_PRODUIT>" . self::SAUT_DE_LIGNE;
+}
+
+function setXMLArcadiaArticleHauteurProduit($paramArcadiaArticleHauteurProduit) {
+    $this->XMLarcadiaArticleHauteurProduit = self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION
+            . "<HAUTEUR_PRODUIT>" . $paramArcadiaArticleHauteurProduit . "</HAUTEUR_PRODUIT>" . self::SAUT_DE_LIGNE;
 }
 
 function setXMLArcadiaPoidsMoyenCal($paramArcadiaPoidsMoyenCal) {
@@ -2511,6 +2567,10 @@ function checkCommentContGestion() {
             or $this->getXMLArcadiaSiteDeProd()
             or $this->getXMLArcadiaCommentairePrive()
             or $this->getXMLArcadiaFestif()
+            or $this->getXMLArcadiaArticleTarePrivee()
+            or $this->getXMLArcadiaArticleLongueurProduit()
+            or $this->getXMLArcadiaArticleLargeurProduit()
+            or $this->getXMLArcadiaArticleHauteurProduit()
             or $this->getXMLArcadiaPoidsMoyenCal()
             or $this->getXMLArcadiaPoidsMini()
             or $this->getXMLArcadiaPoidsMaxi()
@@ -2527,7 +2587,8 @@ function checkCommentContGestion() {
  * Si un élement d'Administration Pole est présent on affiche le commentaire
  */
 function checkCommentAdmPole() {
-    if ($this->getXMLArcadiaUtilisableGroupe()
+    if ($this->getXMLArcadiaArticleUtilisableSite()
+            or $this->getXMLArcadiaArticleUtilisableGroupe()
             or $this->getXMLArcadiaEanArticle()
             or $this->getXMLArcadiaCNUF()
             or $this->getXMLArcadiaLogoEcoEmballage()
@@ -2775,7 +2836,8 @@ function xmlArticleRef() {
             . $this->getXMLArcadiaCodSousFam()
             // <!-- Adm. Pole -->
             . $this->getXMLCommentAdmPole()
-            . $this->getXMLArcadiaUtilisableGroupe()
+            . $this->getXMLArcadiaArticleUtilisableGroupe()
+            . $this->getXMLArcadiaArticleUtilisableSite()
             . $this->getXMLArcadiaEanArticle()
             . $this->getXMLArcadiaCNUF()
             . $this->getXMLArcadiaLogoEcoEmballage()
@@ -2793,6 +2855,10 @@ function xmlArticleRef() {
             . $this->getXMLArcadiaSiteRefInco()
             . $this->getXMLArcadiaCommentairePrive()
             . $this->getXMLArcadiaFestif()
+            . $this->getXMLArcadiaArticleTarePrivee()
+            . $this->getXMLArcadiaArticleLongueurProduit()
+            . $this->getXMLArcadiaArticleLargeurProduit()
+            . $this->getXMLArcadiaArticleHauteurProduit()
             . $this->getXMLArcadiaPoidsMoyenCal()
             . $this->getXMLArcadiaPoidsMini()
             . $this->getXMLArcadiaPoidsMaxi()

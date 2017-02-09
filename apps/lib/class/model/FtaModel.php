@@ -993,13 +993,13 @@ class FtaModel extends AbstractModel {
                 $return[FtaConditionnementModel::UVC_EMBALLAGE_DIMENSION] = FtaConditionnementModel::getCalculDimensionEmballageUvc(
                                 $return[FtaConditionnementModel::UVC_EMBALLAGE_DIMENSION_HAUTEUR]
                                 , $rows[FtaConditionnementModel::FIELDNAME_HAUTEUR_FTA_CONDITIONNEMENT]
-                                , $return[FtaConditionnementModel::UVC_EMBALLAGE_DIMENSION_LONGEUR]
+                                , $return[FtaConditionnementModel::UVC_EMBALLAGE_DIMENSION_LONGUEUR]
                                 , $rows[FtaConditionnementModel::FIELDNAME_LONGUEUR_FTA_CONDITIONNEMENT]
                                 , $return[FtaConditionnementModel::UVC_EMBALLAGE_DIMENSION_LARGEUR]
                                 , $rows[FtaConditionnementModel::FIELDNAME_LARGEUR_FTA_CONDITIONNEMENT]
                 );
                 $return[FtaConditionnementModel::UVC_EMBALLAGE_DIMENSION_HAUTEUR] = $rows[FtaConditionnementModel::FIELDNAME_HAUTEUR_FTA_CONDITIONNEMENT];
-                $return[FtaConditionnementModel::UVC_EMBALLAGE_DIMENSION_LONGEUR] = $rows[FtaConditionnementModel::FIELDNAME_LONGUEUR_FTA_CONDITIONNEMENT];
+                $return[FtaConditionnementModel::UVC_EMBALLAGE_DIMENSION_LONGUEUR] = $rows[FtaConditionnementModel::FIELDNAME_LONGUEUR_FTA_CONDITIONNEMENT];
                 $return[FtaConditionnementModel::UVC_EMBALLAGE_DIMENSION_LARGEUR] = $rows[FtaConditionnementModel::FIELDNAME_LARGEUR_FTA_CONDITIONNEMENT];
 
                 //Les Calculs de la table fta

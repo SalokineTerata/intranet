@@ -2174,13 +2174,45 @@ function getXMLArcadiaArtSiteSiteAnalytique() {
 }
 
 function setXMLArcadiaArtSiteDateDebutEffet() {
-    /**
-     * Date+1 jours
-     */
-    $date = date_create(date("d-m-Y"));
-    date_modify($date, '+1 day');
-    $date1 = date_format($date, "d/m/Y");
 
+    /**
+     * Est-ce une création d'ArtSite interfiliale ?
+     */
+    $id_geo = $this->getFtaModel()->getModelSiteProduction()->getKeyValue();
+    $geoArcadiaModel = new GeoArcadiaModel($id_geo);
+    $id_site_anaytique = $geoArcadiaModel->getDataField(GeoArcadiaModel::FIELDNAME_ID_SITE_ANALYTIQUE)->getFieldValue();
+    if ($id_site_anaytique == GeoArcadiaModel::CODE_SITE_ANALYTIQUE_INTERFILIALE) {
+        $isArticleInterfiliale = TRUE;
+    } else {
+        $isArticleInterfiliale = FALSE;
+    }
+    /**
+     * S'agit-il d'une création article ?
+     */
+    if ($this->getActionProposal() == self::CREATE) {
+        $isArticleCreation = TRUE;
+    } else {
+        $isArticleCreation = FALSE;
+    }
+
+    /**
+     * Détermination de la date de début suivant s'il s'agit d'une création d'un article interfiliale ou pas
+     */
+    if ($isArticleInterfiliale && $isArticleCreation) {
+        $date1 = "=";
+    } else {
+
+        /**
+         * Date+1 jours
+         */
+        $date = date_create(date("d-m-Y"));
+        date_modify($date, '+1 day');
+        $date1 = date_format($date, "d/m/Y");
+    }
+
+    /**
+     * Construction du rendu XML
+     */
     $this->XMLarcadiaArtSiteDateDebutEffet = self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION
             . "<DATE_DEBUT_EFFET>" . $date1 . "</DATE_DEBUT_EFFET>" . self::SAUT_DE_LIGNE;
 }

@@ -20,13 +20,12 @@ class GeoArcadiaModel extends AbstractModel {
     const CODE_TYPE_PRODUIT_PLB_AGIS = '3';
     const CODE_TYPE_PRODUIT_PLB_MARIE_TDA = '2';
     const CODE_ATELIER = '1';
+    const CODE_SITE_ANALYTIQUE_INTERFILIALE = 210;
 
-     public function __construct($paramId = NULL, $paramIsCreateRecordsetInDatabaseIfKeyDoesntExist = AbstractModel::DEFAULT_IS_CREATE_RECORDSET_IN_DATABASE_IF_KEY_DOESNT_EXIST) {
+    public function __construct($paramId = NULL, $paramIsCreateRecordsetInDatabaseIfKeyDoesntExist = AbstractModel::DEFAULT_IS_CREATE_RECORDSET_IN_DATABASE_IF_KEY_DOESNT_EXIST) {
         parent::__construct($paramId, $paramIsCreateRecordsetInDatabaseIfKeyDoesntExist);
-        
-     }
-    
-    
+    }
+
     protected function setDefaultValues() {
         
     }

@@ -1631,13 +1631,13 @@ function getXMLArcadiaSiteRefInco() {
 
 function setXMLarcadiaSiteRefInco(GeoModel $paramArcadiaSiteDeProdModel) {
 
-    $recordsetGeoArcadia = new GeoArcadiaModel($paramArcadiaSiteDeProdModel->getKeyValue());
-    $idSiteRefInco = $recordsetGeoArcadia->getDataField(GeoArcadiaModel::FIELDNAME_ID_SITE_VALORISATION)->getFieldValue();
+//    $recordsetGeoArcadia = new GeoArcadiaModel($paramArcadiaSiteDeProdModel->getKeyValue());
+//    $idSiteRefInco = $recordsetGeoArcadia->getDataField(GeoArcadiaModel::FIELDNAME_ID_SITE_VALORISATION)->getFieldValue();
 
     $this->XMLarcadiaSiteRefInco = self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION
             . "<SITE_REF_INCO>"
             //. $paramArcadiaSiteDeProdModel->getDataField(GeoModel::FIELDNAME_ID_SITE_GROUPE)->getFieldValue() 
-            . $idSiteRefInco
+            . $paramArcadiaSiteDeProdModel->getDataField(GeoModel::FIELDNAME_ID_SITE_GROUPE)->getFieldValue()
             . "</SITE_REF_INCO><!-- "
             . $paramArcadiaSiteDeProdModel->getDataField(GeoModel::FIELDNAME_GEO)->getFieldValue() . " -->" . self::SAUT_DE_LIGNE;
 }

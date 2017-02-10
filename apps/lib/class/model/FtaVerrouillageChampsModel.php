@@ -189,6 +189,40 @@ class FtaVerrouillageChampsModel extends AbstractModel {
     }
 
     /**
+     * Retourne l'id_fta de la version validée d'une FTA pour un dossier FTA donné.
+     * @param type $paramFtaDossierPrimaire
+     * @return type
+     */
+    private static function getIdFtaValideFromPrimaryDirectory($paramFtaDossierPrimaire) {
+
+        $sql = "SELECT " . FtaModel::KEYNAME . " FROM " . FtaModel::TABLENAME
+                . " WHERE " . FtaModel::FIELDNAME_DOSSIER_FTA . " = " . $paramFtaDossierPrimaire
+                . " AND " . FtaModel::FIELDNAME_ID_FTA_ETAT . " = " . FtaEtatModel::ID_VALUE_VALIDE
+        ;
+        $arrayIdFtaValide = DatabaseOperation::convertSqlStatementWithoutKeyToArray($sql);
+        switch (count($arrayIdFtaValide)) {
+            case 0:
+                /**
+                 * Ce dossier FTA ne contient aucune version valdiée
+                 */
+                $return = NULL;
+                break;
+            case 1:
+                /**
+                 * Il existe bien une version en état valdié dans ce dosseir FTA
+                 */
+                $return = $arrayIdFtaValide[0][FtaModel::KEYNAME];
+                break;
+            default :
+                /**
+                 * Il existe plusieurs version validée dans ce dossier FTA (impossible)
+                 */
+                $return = NULL;
+        }
+        return $return;
+    }
+
+    /**
      * Synchronise les données verrouillées de la FTA primaire vers le FTA secondaire
      * @param int $paramIdFtaPrimaire
      * @param int $paramIdFtaSecondaire
@@ -198,15 +232,18 @@ class FtaVerrouillageChampsModel extends AbstractModel {
     public static function dataSynchronizeFtaPrimarySecondary($paramIdFtaPrimaire, $paramIdFtaSecondaire, $paramFtaDossierPrimaire, $paramState = NULL) {
 
         /**
-         * Tableau Affichant la liste des champs à traiter ordonnés par nom de table
-         * Ainsi pour chaque table on insert les nouvelles données
+         * Récupération de l'id_fta de la version validée.
          */
-        //if ($paramState == NULL) {
-        $arrayFtaDossierChampsVerrouiller = self::getArrayFtaLockedByPrimaryFolder($paramFtaDossierPrimaire);
-//        } else {
-//            $arrayFtaDossierChampsVerrouiller = self::getArrayFtaLockChangeStateByPrimaryFolder($paramFtaDossierPrimaire, $paramState);
-//        }
+        $idFtaPrimaire = self::getIdFtaValideFromPrimaryDirectory($paramFtaDossierPrimaire);
 
+        /**
+         * Récupération de la listes des champs verrouillés
+         */
+        $arrayFtaDossierChampsVerrouiller = self::getArrayFtaLockedByPrimaryFolder($paramFtaDossierPrimaire);
+
+        /**
+         * Parcours de chaque champ verrouillé
+         */
         if ($arrayFtaDossierChampsVerrouiller) {
             foreach ($arrayFtaDossierChampsVerrouiller as $rowsFtaDossierChampsVerrouiller) {
                 $tableName = $rowsFtaDossierChampsVerrouiller[self::FIELDNAME_TABLE_NAME];
@@ -221,24 +258,23 @@ class FtaVerrouillageChampsModel extends AbstractModel {
                         $arrayValue = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
                                         "SELECT " . $columnName
                                         . " FROM " . $tableName
-                                        . " WHERE " . FtaModel::KEYNAME . "=" . $paramIdFtaPrimaire
+                                        . " WHERE " . FtaModel::KEYNAME . "=" . $idFtaPrimaire
                         );
                         break;
+
                     case FtaComposantModel::TABLENAME:
 
                         /**
                          * Liste des composants primaires ayant un code semi-fini
                          * et donc à synchroniser.
                          */
-                        $arrayValue = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
+                        $arrayListeComposantPrimaire = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
                                         "SELECT " . FtaComposantModel::KEYNAME . "," . $columnName . "," . FtaComposantModel::FIELDNAME_CODE_PRODUIT_AGROLOGIC_FTA_NOMENCLATURE
                                         . " FROM " . $tableName
-                                        . " WHERE " . FtaModel::KEYNAME . "=" . $paramIdFtaPrimaire
+                                        . " WHERE " . FtaModel::KEYNAME . "=" . $idFtaPrimaire
                                         . " AND " . FtaComposantModel::FIELDNAME_CODE_PRODUIT_AGROLOGIC_FTA_NOMENCLATURE . " IS NOT NULL"
                                         . " AND " . FtaComposantModel::FIELDNAME_CODE_PRODUIT_AGROLOGIC_FTA_NOMENCLATURE . " != ''"
                         );
-
-                        //$nbPrimary = count($arrayValue);
 
                         /**
                          * Liste des composants secondaires ayant un code semi-fini
@@ -251,7 +287,6 @@ class FtaVerrouillageChampsModel extends AbstractModel {
                                         . " AND " . FtaComposantModel::FIELDNAME_CODE_PRODUIT_AGROLOGIC_FTA_NOMENCLATURE . " IS NOT NULL"
                                         . " AND " . FtaComposantModel::FIELDNAME_CODE_PRODUIT_AGROLOGIC_FTA_NOMENCLATURE . " != ''"
                         );
-                        //$nbSecondary = count($arrayIdFtaComposantSecondaire);
 
                         /**
                          * Listes des composants à synchroniser
@@ -269,7 +304,7 @@ class FtaVerrouillageChampsModel extends AbstractModel {
                         /**
                          * Parcours des composants primaires à synchroniser
                          */
-                        foreach ($arrayValue as $keyFtaComposantPrimaire => $valueFtaComposantPrimaire) {
+                        foreach ($arrayListeComposantPrimaire as $keyFtaComposantPrimaire => $valueFtaComposantPrimaire) {
 
                             /**
                              * Récupération du code produit semi-fini
@@ -414,16 +449,6 @@ class FtaVerrouillageChampsModel extends AbstractModel {
                                     );
                                 }
                                 break;
-
-//                            default:
-//                                
-//                                DatabaseOperation::execute(
-//                                        "UPDATE " . $tableName
-//                                        . " SET " . $columnName . "=\"" . $columnValue
-//                                        . "\" WHERE " . FtaModel::KEYNAME . "=" . $paramIdFtaSecondaire
-//                                );
-//
-//                                break;
                         }
                     }
                 }

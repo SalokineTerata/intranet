@@ -76,11 +76,6 @@ class FtaTransitionModel {
                  */
                 $nouveau_maj_fta = FtaController::getComment("Validation d'une Fta", $nomPrenom, NULL);
 
-                /**
-                 * Gestion des Code Article Arcadia Primaire/Secondaires
-                 */
-                $ftaModel->manageFtaPrimaireSecondaire(FtaEtatModel::ID_VALUE_VALIDE, FtaVerrouillageChampsModel::CHANGE_STATE_TRUE_VALIDATION_CHAPITRE);
-
                 break;
 //            case $paramAbreviationFtaTransition == FtaEtatModel::ETAT_ABREVIATION_VALUE_WORKFLOW:
 //                //Dans le cas d'une mise à jour, récupération des Chapitres à corriger.
@@ -236,13 +231,20 @@ class FtaTransitionModel {
         /**
          * Historisation du changement d'état de la Fta
          */
-        FtaEtatHistoriqueModel::setFtaEtatHistorique($paramIdFta, $idDossierFta, $versionDossierFta,$idFtaEtatByIdFta, $idFtaEtat, $idUser, $initial_abreviation_fta_etat);
+        FtaEtatHistoriqueModel::setFtaEtatHistorique($paramIdFta, $idDossierFta, $versionDossierFta, $idFtaEtatByIdFta, $idFtaEtat, $idUser, $initial_abreviation_fta_etat);
 
         //Fin Traitement Commun
 
         /*         * *****************************************************************************
           Post-traitement
          * ***************************************************************************** */
+
+        /**
+         * Gestion des Code Article Arcadia Primaire/Secondaires
+         */
+        $ftaModel->manageFtaPrimaireSecondaire(FtaEtatModel::ID_VALUE_VALIDE, FtaVerrouillageChampsModel::CHANGE_STATE_TRUE_VALIDATION_CHAPITRE);
+
+
 
         switch ($paramAbreviationFtaTransition) {
             case 'I':
@@ -638,8 +640,7 @@ class FtaTransitionModel {
                 . "\n"
                 . "INFORMATIONS DE DEBUGGAGE:\n"
                 . $logTransition
-        ;
-        {
+        ; {
             $expediteur = $prenom . " " . $nom . " <" . $mail . ">";
             envoismail($sujetmail, $corp, $mail, $expediteur, $typeMail);
         }
@@ -741,8 +742,7 @@ class FtaTransitionModel {
                 . $text
                 . "\n\n"
                 . $paramLogTransition
-        ;
-        {
+        ; {
             $expediteur = $prenom . " " . $nom . " <" . $mailUser . ">";
             envoismail($sujetmail, $corp, $mailUser, $expediteur, $typeMail);
         }

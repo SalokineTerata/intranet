@@ -223,7 +223,7 @@ class FtaVerrouillageChampsModel extends AbstractModel {
     }
 
     /**
-     * Synchronise les données verrouillées de la FTA primaire vers le FTA secondaire
+     * Synchronise les données verrouillées de la FTA primaire validée vers les FTA secondaires validées
      * @param int $paramIdFtaPrimaire
      * @param int $paramIdFtaSecondaire
      * @param int $paramFtaDossierPrimaire
@@ -244,7 +244,7 @@ class FtaVerrouillageChampsModel extends AbstractModel {
         /**
          * Parcours de chaque champ verrouillé
          */
-        if ($arrayFtaDossierChampsVerrouiller) {
+        if ($arrayFtaDossierChampsVerrouiller and $idFtaPrimaire != NULL) {
             foreach ($arrayFtaDossierChampsVerrouiller as $rowsFtaDossierChampsVerrouiller) {
                 $tableName = $rowsFtaDossierChampsVerrouiller[self::FIELDNAME_TABLE_NAME];
                 $columnName = $rowsFtaDossierChampsVerrouiller[self::FIELDNAME_FIELD_NAME];

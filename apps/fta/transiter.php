@@ -158,7 +158,7 @@ if (!FtaRoleModel::isGestionnaire($idFtaRole)) {
             . ' AND ' . FtaTransitionModel::FIELDNAME_ABREVIATION_FTA_TRANSITION . '<>\'' . FtaEtatModel::ETAT_ABREVIATION_VALUE_ARCHIVE . '\'';
 }
 
-$req .=' ORDER BY ' . FtaTransitionModel::FIELDNAME_ABREVIATION_FTA_TRANSITION . ' DESC';
+$req .=' ORDER BY ' . FtaTransitionModel::FIELDNAME_ABREVIATION_FTA_TRANSITION . ' ASC';
 $arrayFtaTransition = DatabaseOperation::convertSqlStatementWithoutKeyToArray($req);
 
 $flag_selection_chapitre = 0;    //Peut-on sélectionner un chapitre à mettre à jour ?

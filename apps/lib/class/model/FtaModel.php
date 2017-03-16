@@ -993,13 +993,13 @@ class FtaModel extends AbstractModel {
                 $return[FtaConditionnementModel::UVC_EMBALLAGE_DIMENSION] = FtaConditionnementModel::getCalculDimensionEmballageUvc(
                                 $return[FtaConditionnementModel::UVC_EMBALLAGE_DIMENSION_HAUTEUR]
                                 , $rows[FtaConditionnementModel::FIELDNAME_HAUTEUR_FTA_CONDITIONNEMENT]
-                                , $return[FtaConditionnementModel::UVC_EMBALLAGE_DIMENSION_LONGEUR]
+                                , $return[FtaConditionnementModel::UVC_EMBALLAGE_DIMENSION_LONGUEUR]
                                 , $rows[FtaConditionnementModel::FIELDNAME_LONGUEUR_FTA_CONDITIONNEMENT]
                                 , $return[FtaConditionnementModel::UVC_EMBALLAGE_DIMENSION_LARGEUR]
                                 , $rows[FtaConditionnementModel::FIELDNAME_LARGEUR_FTA_CONDITIONNEMENT]
                 );
                 $return[FtaConditionnementModel::UVC_EMBALLAGE_DIMENSION_HAUTEUR] = $rows[FtaConditionnementModel::FIELDNAME_HAUTEUR_FTA_CONDITIONNEMENT];
-                $return[FtaConditionnementModel::UVC_EMBALLAGE_DIMENSION_LONGEUR] = $rows[FtaConditionnementModel::FIELDNAME_LONGUEUR_FTA_CONDITIONNEMENT];
+                $return[FtaConditionnementModel::UVC_EMBALLAGE_DIMENSION_LONGUEUR] = $rows[FtaConditionnementModel::FIELDNAME_LONGUEUR_FTA_CONDITIONNEMENT];
                 $return[FtaConditionnementModel::UVC_EMBALLAGE_DIMENSION_LARGEUR] = $rows[FtaConditionnementModel::FIELDNAME_LARGEUR_FTA_CONDITIONNEMENT];
 
                 //Les Calculs de la table fta
@@ -2569,49 +2569,53 @@ class FtaModel extends AbstractModel {
     }
 
     /**
-     * Identification automatique de la Fta à traité
+     * Identification automatique de la Fta Primaire
+     * La FTA primaire est obligatoirement la version validée
      * @param type $paramDossierFtaPrimaire
      */
     function getIdFtaFromDossierFtaPrimary($paramDossierFtaPrimaire) {
-        $arrayDossierFtaModification = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
-                        "SELECT " . FtaModel::KEYNAME
-                        . " FROM " . FtaModel::TABLENAME
-                        . " WHERE " . FtaModel::FIELDNAME_DOSSIER_FTA . "=" . $paramDossierFtaPrimaire
-                        . " AND " . FtaModel::FIELDNAME_ID_FTA_ETAT . "=" . FtaEtatModel::ID_VALUE_MODIFICATION
-        );
+//        $arrayDossierFtaModification = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
+//                        "SELECT " . FtaModel::KEYNAME
+//                        . " FROM " . FtaModel::TABLENAME
+//                        . " WHERE " . FtaModel::FIELDNAME_DOSSIER_FTA . "=" . $paramDossierFtaPrimaire
+//                        . " AND " . FtaModel::FIELDNAME_ID_FTA_ETAT . "=" . FtaEtatModel::ID_VALUE_MODIFICATION
+//        );
         $arrayDossierFtaValide = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
                         "SELECT " . FtaModel::KEYNAME
                         . " FROM " . FtaModel::TABLENAME
                         . " WHERE " . FtaModel::FIELDNAME_DOSSIER_FTA . "=" . $paramDossierFtaPrimaire
                         . " AND " . FtaModel::FIELDNAME_ID_FTA_ETAT . "=" . FtaEtatModel::ID_VALUE_VALIDE
         );
-        $arrayDossierFtaLastVersion = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
-                        "SELECT " . FtaModel::FIELDNAME_DOSSIER_FTA . ", MAX(" . FtaModel::FIELDNAME_VERSION_DOSSIER_FTA . ") AS " . FtaModel::FIELDNAME_VERSION_DOSSIER_FTA
-                        . " FROM " . FtaModel::TABLENAME
-                        . " WHERE " . FtaModel::FIELDNAME_DOSSIER_FTA . "=" . $paramDossierFtaPrimaire
-        );
-        if ($arrayDossierFtaModification) {
-            foreach ($arrayDossierFtaModification as $rowsDossierFtaModification) {
-                $idFtaPrimaire = $rowsDossierFtaModification[FtaModel::KEYNAME];
-            }
-        } elseif ($arrayDossierFtaValide) {
-            foreach ($arrayDossierFtaValide as $rowsDossierFtaValide) {
-                $idFtaPrimaire = $rowsDossierFtaValide[FtaModel::KEYNAME];
-            }
-        } else {
-            foreach ($arrayDossierFtaLastVersion as $rowsDossierFtaLastVersion) {
-                $sqlDossierFtaLastVersionFinal = "SELECT " . FtaModel::KEYNAME
-                        . " FROM " . FtaModel::TABLENAME
-                        . " WHERE " . FtaModel::FIELDNAME_DOSSIER_FTA . "=" . $rowsDossierFtaLastVersion[FtaModel::FIELDNAME_DOSSIER_FTA]
-                        . " AND " . FtaModel::FIELDNAME_VERSION_DOSSIER_FTA . "=" . $rowsDossierFtaLastVersion[FtaModel::FIELDNAME_VERSION_DOSSIER_FTA]
-                ;
-                $arrayDossierFtaLastVersionFinal = DatabaseOperation::convertSqlStatementWithoutKeyToArray($sqlDossierFtaLastVersionFinal);
-                foreach ($arrayDossierFtaLastVersionFinal as $rowsDossierFtaLastVersionFinal) {
-                    $idFtaPrimaire = $rowsDossierFtaLastVersionFinal[FtaModel::KEYNAME];
-                }
-            }
-        }
+//        $arrayDossierFtaLastVersion = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
+//                        "SELECT " . FtaModel::FIELDNAME_DOSSIER_FTA . ", MAX(" . FtaModel::FIELDNAME_VERSION_DOSSIER_FTA . ") AS " . FtaModel::FIELDNAME_VERSION_DOSSIER_FTA
+//                        . " FROM " . FtaModel::TABLENAME
+//                        . " WHERE " . FtaModel::FIELDNAME_DOSSIER_FTA . "=" . $paramDossierFtaPrimaire
+//        );
+//        if ($arrayDossierFtaModification) {
+//            foreach ($arrayDossierFtaModification as $rowsDossierFtaModification) {
+//                $idFtaPrimaire = $rowsDossierFtaModification[FtaModel::KEYNAME];
+//            }
+//        } elseif ($arrayDossierFtaValide) {
+//            foreach ($arrayDossierFtaValide as $rowsDossierFtaValide) {
+//                $idFtaPrimaire = $rowsDossierFtaValide[FtaModel::KEYNAME];
+//            }
+//        } else {
+//            foreach ($arrayDossierFtaLastVersion as $rowsDossierFtaLastVersion) {
+//                $sqlDossierFtaLastVersionFinal = "SELECT " . FtaModel::KEYNAME
+//                        . " FROM " . FtaModel::TABLENAME
+//                        . " WHERE " . FtaModel::FIELDNAME_DOSSIER_FTA . "=" . $rowsDossierFtaLastVersion[FtaModel::FIELDNAME_DOSSIER_FTA]
+//                        . " AND " . FtaModel::FIELDNAME_VERSION_DOSSIER_FTA . "=" . $rowsDossierFtaLastVersion[FtaModel::FIELDNAME_VERSION_DOSSIER_FTA]
+//                ;
+//                $arrayDossierFtaLastVersionFinal = DatabaseOperation::convertSqlStatementWithoutKeyToArray($sqlDossierFtaLastVersionFinal);
+//                foreach ($arrayDossierFtaLastVersionFinal as $rowsDossierFtaLastVersionFinal) {
+//                    $idFtaPrimaire = $rowsDossierFtaLastVersionFinal[FtaModel::KEYNAME];
+//                }
+//            }
+//        }
 
+        foreach ($arrayDossierFtaValide as $rowsDossierFtaValide) {
+            $idFtaPrimaire = $rowsDossierFtaValide[FtaModel::KEYNAME];
+        }
         return $idFtaPrimaire;
     }
 
@@ -2629,7 +2633,6 @@ class FtaModel extends AbstractModel {
      * @return string
      */
     function getLinkToPrimaryFta($paramIdFtaChapitre, $paramSyntheseAction, $paramComeback, $paramIdFtaEtat, $paramAbrevationEtat, $paramIdFtaRole, $paramDossierFtaPrimaire, $paramIdFtaSecondaireEncours, $paramIsEditable) {
-
         if ($paramDossierFtaPrimaire) {
             /**
              * On vérifie si le code Article Arcadia est renseigné
@@ -2641,37 +2644,55 @@ class FtaModel extends AbstractModel {
             } else {
                 $valueLink = $this->getDataField(FtaModel::FIELDNAME_DOSSIER_FTA)->getFieldValue() . "v" . $this->getDataField(FtaModel::FIELDNAME_VERSION_DOSSIER_FTA)->getFieldValue();
             }
+
             /**
-             * Lien de modification d'un Fta Primaire
+             * Le lien vers la FTA primaire est-il activé ?
              */
-            $link = "<tr ><td class=\"contenu\"> " . UserInterfaceLabel::FR_FTA_PRIMAIRE . "</td ><td class=\"contenu\" width=75% >"
-                    . "<a href="
-                    . "modification_fiche.php?"
-                    . "id_fta=" . $this->getKeyValue()
-                    . "&id_fta_chapitre_encours=" . $paramIdFtaChapitre
-                    . "&synthese_action=" . $paramSyntheseAction
-                    . "&comeback=" . $paramComeback
-                    . "&id_fta_etat=" . $this->getDataField(self::FIELDNAME_ID_FTA_ETAT)->getFieldValue()
-                    . "&abreviation_fta_etat=" . $this->getModelFtaEtat()->getDataField(FtaEtatModel::FIELDNAME_ABREVIATION)->getFieldValue()
-                    . "&id_fta_role=" . $paramIdFtaRole
-                    . ">" . $valueLink . "</a>";
-            if ($paramIsEditable) {
-                $link .=" - <a href="
-                        . "modification_fta_primaire.php?"
-                        . "id_fta=" . $paramIdFtaSecondaireEncours
-                        . "&id_fta_chapitre_encours=" . $paramIdFtaChapitre
-                        . "&synthese_action=" . $paramSyntheseAction
-                        . "&comeback=" . $paramComeback
-                        . "&id_fta_etat=" . $paramIdFtaEtat
-                        . "&abreviation_fta_etat=" . $paramAbrevationEtat
-                        . "&id_fta_role=" . $paramIdFtaRole
-                        . ">Modifier Code Primaire</a>";
-                $link .=' - <a href=#'
-                        . ' onclick="desactivationLockFields(\'' . $paramIdFtaSecondaireEncours . '\',\'' . $paramIdFtaChapitre . '\',\'' . $paramSyntheseAction
-                        . '\', \'' . $paramComeback . '\', \'' . $paramIdFtaEtat
-                        . '\', \'' . $paramAbrevationEtat . '\', \'' . $paramIdFtaRole . '\' )"'
-                        . " >Désactiver le Code Primaire</a>";
+            switch (TRUE) {
+                // Si la FTA secondaire est en cours de modification ou validée, le lien est actif.
+                case $paramAbrevationEtat == FtaEtatModel::ETAT_ABREVIATION_VALUE_MODIFICATION:
+                case $paramAbrevationEtat == FtaEtatModel::ETAT_ABREVIATION_VALUE_VALIDE:
+                    /**
+                     * Lien de modification d'un Fta Primaire
+                     */
+                    $link = "<tr ><td class=\"contenu\"> " . UserInterfaceLabel::FR_FTA_PRIMAIRE . "</td ><td class=\"contenu\" width=75% >"
+                            . "<a href="
+                            . "modification_fiche.php?"
+                            . "id_fta=" . $this->getKeyValue()
+                            . "&id_fta_chapitre_encours=" . $paramIdFtaChapitre
+                            . "&synthese_action=" . $paramSyntheseAction
+                            . "&comeback=" . $paramComeback
+                            . "&id_fta_etat=" . $this->getDataField(self::FIELDNAME_ID_FTA_ETAT)->getFieldValue()
+                            . "&abreviation_fta_etat=" . $this->getModelFtaEtat()->getDataField(FtaEtatModel::FIELDNAME_ABREVIATION)->getFieldValue()
+                            . "&id_fta_role=" . $paramIdFtaRole
+                            . ">" . $valueLink . "</a>";
+                    if ($paramIsEditable) {
+//                        $link .=" - <a href="
+//                                . "modification_fta_primaire.php?"
+//                                . "id_fta=" . $paramIdFtaSecondaireEncours
+//                                . "&id_fta_chapitre_encours=" . $paramIdFtaChapitre
+//                                . "&synthese_action=" . $paramSyntheseAction
+//                                . "&comeback=" . $paramComeback
+//                                . "&id_fta_etat=" . $paramIdFtaEtat
+//                                . "&abreviation_fta_etat=" . $paramAbrevationEtat
+//                                . "&id_fta_role=" . $paramIdFtaRole
+//                                . ">Modifier Code Primaire</a>";
+                        $link .=' - <a href=#'
+                                . ' onclick="desactivationLockFields(\'' . $paramIdFtaSecondaireEncours . '\',\'' . $paramIdFtaChapitre . '\',\'' . $paramSyntheseAction
+                                . '\', \'' . $paramComeback . '\', \'' . $paramIdFtaEtat
+                                . '\', \'' . $paramAbrevationEtat . '\', \'' . $paramIdFtaRole . '\' )"'
+                                . " >Désactiver le Code Primaire</a>";
+                    }
+
+                    break;
+
+                //Sinon, le lien n'est pas actif et le code article est uniquement affiché à titre informatif et pour l'historique.
+                default :
+                    $link = "<tr ><td class=\"contenu\"> " . UserInterfaceLabel::FR_FTA_PRIMAIRE . "</td ><td class=\"contenu\" width=75% >"
+                            . $valueLink;
             }
+
+
 
             $link .= "</td></tr>";
         } else {
@@ -2694,16 +2715,21 @@ class FtaModel extends AbstractModel {
     }
 
     /**
-     * Tableau des IdFta correspondant à un dossier Fta primaire
+     * Retourne la liste des id_fta des FTA référençant l'actuelle FTA en tant que FTA primaire.
      * @return array
      */
     function getArrayIdFtaFromDossierFtaPrimary() {
-        $arrayFta = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
-                        "SELECT " . FtaModel::KEYNAME
-                        . " FROM " . FtaModel::TABLENAME
-                        . " WHERE " . FtaModel::FIELDNAME_DOSSIER_FTA_PRIMAIRE . "=" . $this->getDataField(FtaModel::FIELDNAME_DOSSIER_FTA)->getFieldValue()
-        );
-
+        $sql = "SELECT " . FtaModel::KEYNAME
+                . " FROM " . FtaModel::TABLENAME
+                . ", " . FtaEtatModel::TABLENAME
+                . " WHERE " . FtaModel::FIELDNAME_DOSSIER_FTA_PRIMAIRE . "=" . $this->getDataField(FtaModel::FIELDNAME_DOSSIER_FTA)->getFieldValue()
+                . " AND ( "
+                . FtaEtatModel::FIELDNAME_ABREVIATION . "=" . "'" . FtaEtatModel::ETAT_ABREVIATION_VALUE_VALIDE . "'"
+                . " OR " . FtaEtatModel::FIELDNAME_ABREVIATION . "=" . "'" . FtaEtatModel::ETAT_ABREVIATION_VALUE_MODIFICATION . "'"
+                . " ) "
+                . " AND " . FtaModel::TABLENAME . "." . FtaModel::FIELDNAME_ID_FTA_ETAT . "=" . FtaEtatModel::TABLENAME . "." . FtaEtatModel::KEYNAME
+        ;
+        $arrayFta = DatabaseOperation::convertSqlStatementWithoutKeyToArray($sql);
         return $arrayFta;
     }
 
@@ -2716,8 +2742,12 @@ class FtaModel extends AbstractModel {
      * @return string
      */
     function getLinkToSecondaryFta($paramIdFtaChapitre, $paramSyntheseAction, $paramComeback, $paramIdFtaRole) {
+
+        /**
+         * Liste des FTA secondaires en cours de modification ou validées
+         */
         $arraySecondaryFta = $this->getArrayIdFtaFromDossierFtaPrimary();
-        $separator = " ";
+        $separator = "";
         $link = "<tr ><td class=\"contenu\"> " . UserInterfaceLabel::FR_FTA_SECONDAIRE . "</td ><td class=\"contenu\" width=75% >";
         foreach ($arraySecondaryFta as $rowsSecondaryFta) {
 
@@ -2732,17 +2762,27 @@ class FtaModel extends AbstractModel {
             } else {
                 $valueLink = $ftaModelSecond->getDataField(self::FIELDNAME_DOSSIER_FTA)->getFieldValue() . "v" . $ftaModelSecond->getDataField(FtaModel::FIELDNAME_VERSION_DOSSIER_FTA)->getFieldValue();
             }
-
-            $link .=$separator . "<a href="
-                    . "modification_fiche.php?"
-                    . "id_fta=" . $ftaModelSecond->getKeyValue()
-                    . "&id_fta_chapitre_encours=" . $paramIdFtaChapitre
-                    . "&synthese_action=" . $paramSyntheseAction
-                    . "&comeback=" . $paramComeback
-                    . "&id_fta_etat=" . $ftaModelSecond->getDataField(self::FIELDNAME_ID_FTA_ETAT)->getFieldValue()
-                    . "&abreviation_fta_etat=" . $ftaModelSecond->getModelFtaEtat()->getDataField(FtaEtatModel::FIELDNAME_ABREVIATION)->getFieldValue()
-                    . "&id_fta_role=" . $paramIdFtaRole
-                    . ">" . $valueLink . "</a>";
+            $link .= $separator;
+            /**
+             * Pour les secondaire validée, il est possible d'aller sur la FTA
+             */
+            if ($ftaModelSecond->getModelFtaEtat()->getDataField(FtaEtatModel::FIELDNAME_ABREVIATION)->getFieldValue() == FtaEtatModel::ETAT_ABREVIATION_VALUE_VALIDE) {
+                $link .= "<a href="
+                        . "modification_fiche.php?"
+                        . "id_fta=" . $ftaModelSecond->getKeyValue()
+                        . "&id_fta_chapitre_encours=" . $paramIdFtaChapitre
+                        . "&synthese_action=" . $paramSyntheseAction
+                        . "&comeback=" . $paramComeback
+                        . "&id_fta_etat=" . $ftaModelSecond->getDataField(self::FIELDNAME_ID_FTA_ETAT)->getFieldValue()
+                        . "&abreviation_fta_etat=" . $ftaModelSecond->getModelFtaEtat()->getDataField(FtaEtatModel::FIELDNAME_ABREVIATION)->getFieldValue()
+                        . "&id_fta_role=" . $paramIdFtaRole
+                        . ">" . $valueLink . "</a>";
+            } else {
+                /**
+                 * Sinon, il s'agit forcément d'une FTA secondaire en cous de modification.
+                 */
+                $link .=$valueLink . "<i>(En cours de modification)</i>";
+            }
 
             $separator = " - ";
         }
@@ -2789,7 +2829,7 @@ class FtaModel extends AbstractModel {
      * On vérifie si la Fta en cours est une primaire ou une secondaire
      * ou encore aucune des deux
      */
-    function checkFtaPrimaireSecondaire($paramDataFieldName = NULL) {
+    function isFtaPrimaireOrSecondaire($paramDataFieldName = NULL) {
 
 
         $dossierFtaPrimaire = $this->getDossierPrimaire();
@@ -2856,28 +2896,32 @@ class FtaModel extends AbstractModel {
     }
 
     /**
-     * Tableau des idFta secondaires validé ou modifié de la Fta primaire en cours 
+     * Tableau des idFta secondaires validées ou modifiées associées à la Fta primaire en cours 
      * ordonné par dossier Fta puis par l'état de la Fta 
      * @return array
      */
     function getArrayIdFtaSecondaireByDossierPrimaire($paramTypeSynchro) {
         $dossierFta = $this->getDossierFta();
-        if ($paramTypeSynchro == FtaEtatModel::ID_VALUE_VALIDE) {
-            $paramTypeSynchro = " ( " . self::FIELDNAME_ID_FTA_ETAT . "=" . $paramTypeSynchro
-                    . " OR " . self::FIELDNAME_ID_FTA_ETAT . "=" . FtaEtatModel::ID_VALUE_MODIFICATION . " ) ";
-        } else {
-            $paramTypeSynchro = self::FIELDNAME_ID_FTA_ETAT . "=" . $paramTypeSynchro;
-        }
+//        if ($paramTypeSynchro == FtaEtatModel::ID_VALUE_VALIDE) {
+//            $paramTypeSynchro = " ( " . self::FIELDNAME_ID_FTA_ETAT . "=" . $paramTypeSynchro
+//                    . " OR " . self::FIELDNAME_ID_FTA_ETAT . "=" . FtaEtatModel::ID_VALUE_MODIFICATION . " ) ";
+//        } else {
+//            $paramTypeSynchro = self::FIELDNAME_ID_FTA_ETAT . "=" . $paramTypeSynchro;
+//        }
 
-        $arrayIdFtaSeondaire = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
+        $sqlFilter = " ( " . self::FIELDNAME_ID_FTA_ETAT . "=" . FtaEtatModel::ID_VALUE_VALIDE
+                . " OR " . self::FIELDNAME_ID_FTA_ETAT . "=" . FtaEtatModel::ID_VALUE_MODIFICATION . " ) "
+        ;
+
+        $arrayIdFtaSecondaire = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
                         "SELECT " . self::KEYNAME . "," . self::FIELDNAME_DOSSIER_FTA
                         . " FROM " . self::TABLENAME
                         . " WHERE " . self::FIELDNAME_DOSSIER_FTA_PRIMAIRE . "=" . $dossierFta
-                        . " AND " . $paramTypeSynchro
+                        . " AND " . $sqlFilter
                         . " ORDER BY " . self::FIELDNAME_DOSSIER_FTA . ", " . self::FIELDNAME_ID_FTA_ETAT
         );
 
-        return $arrayIdFtaSeondaire;
+        return $arrayIdFtaSecondaire;
     }
 
     /**
@@ -2902,34 +2946,37 @@ class FtaModel extends AbstractModel {
 
     /**
      * On gère les conditions des Codes Articles Primaires et Secondaires
-     * Dans le cas d'une validation d'un Fta Priamire, on synchronise les données de la Fta Primaires avec toutes les Secondaire
-     * La mise à jour est faîte sur la Fta Modifié > Validé
-     * FtaEtatModel::ID_VALUE_MODIFICATION - synchronisation que des fta modifié
-     * FtaEtatModel::ID_VALUE_VALIDE - synchronisation que des fta validé
+     * Dans le cas d'une validation d'un Fta Primaire, on synchronise les données de la Fta Primaires avec toutes les Secondaires
+     * La mise à jour est faîte sur la Fta Modifiée > Validé
+     * FtaEtatModel::ID_VALUE_MODIFICATION - synchronisation que des fta modifiée
+     * FtaEtatModel::ID_VALUE_VALIDE - synchronisation que des fta validée
      * @param string $paramTypeSynchro
      */
     function manageFtaPrimaireSecondaire($paramTypeSynchro, $paramState = NULL) {
         /**
          * Vérification de l'état de la Fta
          */
-        $ftaValue = $this->checkFtaPrimaireSecondaire();
+        $ftaValue = $this->isFtaPrimaireOrSecondaire();
 
         switch ($ftaValue) {
+            /**
+             * Si la FTA actuelle est une primaire
+             */
             case FtaModel::FTA_PRIMAIRE:
-                //Synchronisation des données de la Fta primaire avec les secondaires
-                $arrayIdFtaSeondaire = $this->getArrayIdFtaSecondaireByDossierPrimaire($paramTypeSynchro);
-                if ($arrayIdFtaSeondaire) {
-                    foreach ($arrayIdFtaSeondaire as $rowsIdFtaSeondaire) {
+                //Synchronisation des données de la Fta primaire vers les secondaires
+                $arrayIdFtaSecondaire = $this->getArrayIdFtaSecondaireByDossierPrimaire($paramTypeSynchro);
+                if ($arrayIdFtaSecondaire) {
+                    foreach ($arrayIdFtaSecondaire as $rowsIdFtaSeondaire) {
                         $dossierTmp = $rowsIdFtaSeondaire[self::FIELDNAME_DOSSIER_FTA];
                         /**
                          * On effectue la synchronisation des données en priorité sur les Fta Secondaires en modifiation 
-                         * Sinon elle seront faîte sur les Fta Validé
+                         * Sinon elle seront faîtes sur les Fta Validé
                          * Ordonnance du tableau permet ce traitement
                          */
-                        if ($dossierUse <> $dossierTmp) {
+                        //if ($dossierUse <> $dossierTmp) {
                             FtaVerrouillageChampsModel::dataSynchronizeFtaPrimarySecondary($this->getKeyValue(), $rowsIdFtaSeondaire[self::KEYNAME], $this->getDossierFta(), $paramState);
                             $dossierUse = $dossierTmp;
-                        }
+                        //}
                     }
                     switch ($paramState) {
                         /**

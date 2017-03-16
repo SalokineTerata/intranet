@@ -86,8 +86,8 @@ switch ($modeDeRecherche) {
         $page_action = $page_default . ".php";
         $titre = "Sélectionner le mode de recherche de la Fta Primaire";
         $selection = "<td>
-<INPUT type= \"radio\" name=\"modeDeRecherche\" value=\"id_dossier_fta\"> DOSSIER FTA
-<INPUT type= \"radio\" name=\"modeDeRecherche\" value=\"code_article_ldc\"> CODE ARTICLE ARCADIA
+<INPUT type= \"radio\" name=\"modeDeRecherche\" value=\"id_dossier_fta\" disabled> <strike>DOSSIER FTA</strike>
+<INPUT type= \"radio\" name=\"modeDeRecherche\" value=\"code_article_ldc\" checked> CODE ARTICLE ARCADIA
 </td>
 	
 ";

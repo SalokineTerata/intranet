@@ -234,8 +234,8 @@ class FtaView extends AbstractView {
                 $isEditable = $Fta2ArcadiaTransactionModel->isEditableNotificationMail();
                 $codeReply = $Fta2ArcadiaTransactionModel->getDataField(Fta2ArcadiaTransactionModel::FIELDNAME_CODE_REPLY)->getFieldValue();
                 /**
-                 * On peut valider le chapitre si la trasaction en cours est actif,
-                 * tant que le fichier de retour n'est pas était récupéré NULL
+                 * On peut valider le chapitre si la transaction en cours est actif,
+                 * tant que le fichier de retour n'a pas été récupéré NULL
                  * et que le fichier de retour ne soit pas en Erreur (1,2,3,4)
                  */
                 if ($codeReply <> Fta2ArcadiaTransactionModel::CONSOMME) {
@@ -556,25 +556,25 @@ class FtaView extends AbstractView {
     }
 
     /**
-     * Gestionnaire de l'affichage Html du code artilce arcadia primaire
+     * Gestionnaire de l'affichage Html du code article arcadia primaire
      * et les codes articles arcadia secondaires
      * @return string
      */
     function getHtmlCodeArticleArcadiaPrimaireSecondaire($paramIsEditable, $paramIdFtaChapitre, $paramSyntheseAction, $paramComeback, $paramIdFtaEtat, $paramAbrevationEtat, $paramIdFtaRole) {
         $idFtaSecondary = $this->getModel()->getKeyValue();
         /**
-         * On vérifie si le dosssier de la Fta encours  est utilisé comme dossier primaire
+         * On vérifie si le dossier de la Fta encours  est utilisé comme dossier primaire
          */
-        $isDosssierFtaPrimary = $this->getModel()->isDossierFtaPrimary();
+        $isDossierFtaPrimary = $this->getModel()->isDossierFtaPrimary();
 
         /**
          * Si oui alors on affiche la liste des Fta secondaires
          */
-        if ($isDosssierFtaPrimary) {
+        if ($isDossierFtaPrimary) {
             $html = $this->getModel()->getLinkToSecondaryFta($paramIdFtaChapitre, $paramSyntheseAction, $paramComeback, $paramIdFtaRole);
         } else {
             /**
-             * Sinon on vérifie si elle est rataché à un dossier primaire (donc si il s'agis d'une secondaire)
+             * Sinon on vérifie si elle est rattachée à un dossier primaire (donc si il s'agis d'une secondaire)
              */
             $dossierFtaPrimaire = $this->getModel()->getDataField(FtaModel::FIELDNAME_DOSSIER_FTA_PRIMAIRE)->getFieldValue();
             /**
@@ -1844,6 +1844,13 @@ class FtaView extends AbstractView {
         } else {
             $proprietaire = '0';
         }
+
+        $ftaModel = new FtaModel($paramIdFta);
+
+        if ($ftaModel->isFtaPrimaireOrSecondaire() == FtaModel::FTA_SECONDAIRE) {
+            $proprietaire = '0';
+        }
+
         $FtaComposant = FtaComposantModel::getIdFtaComposition($paramIdFta);
         if ($FtaComposant) {
             foreach ($FtaComposant as $rowsFtaComposant) {
@@ -1853,7 +1860,7 @@ class FtaView extends AbstractView {
             }
 
             $htmlEtiquetteComposant = Html::getHtmlObjectFromDataField($this->getModel()->getDataField(FtaModel::FIELDNAME_VIRTUAL_FTA_COMPOSANT));
-            $htmlEtiquetteComposant->setIsEditable($this->getIsEditable());
+            $htmlEtiquetteComposant->setIsEditable($proprietaire);
             $htmlEtiquetteComposant->setLienAjouter(FtaComposantModel::getAddAfterLinkComposition($paramIdFta, $paramChapitre, $paramSyntheseAction, $paramIdFtaEtat, $paramAbreviationEtat, $paramIdFtaRole, $proprietaire));
             $htmlEtiquetteComposant->setLienDetail(FtaComposantModel::getDetailLinkComposition($paramIdFta, $paramChapitre, $arrayIdFtaComposant, $paramSyntheseAction, $paramIdFtaEtat, $paramAbreviationEtat, $paramIdFtaRole, $proprietaire));
             $htmlEtiquetteComposant->setLienSuppression(FtaComposantModel::getDeleteLinkComposition($paramIdFta, $paramChapitre, $arrayIdFtaComposant, $paramSyntheseAction, $paramIdFtaEtat, $paramAbreviationEtat, $paramIdFtaRole));
@@ -1861,8 +1868,8 @@ class FtaView extends AbstractView {
             $return .= $htmlEtiquetteComposant->getHtmlResult();
         } else {
             $htmlEtiquetteComposant = Html::getHtmlObjectFromDataField($this->getModel()->getDataField(FtaModel::FIELDNAME_VIRTUAL_FTA_COMPOSANT));
-            $htmlEtiquetteComposant->setIsEditable($this->getIsEditable());
-            $htmlEtiquetteComposant->setRightToAdd(TRUE);
+            $htmlEtiquetteComposant->setIsEditable($proprietaire);
+            $htmlEtiquetteComposant->setRightToAdd($proprietaire);
             $htmlEtiquetteComposant->getAttributesGlobal()->setHrefAjoutValue(FtaComposantModel::getAddLinkComposition($paramIdFta, $paramChapitre, $paramSyntheseAction, $paramIdFtaEtat, $paramAbreviationEtat, $paramIdFtaRole, $proprietaire));
             $htmlEtiquetteComposant->setLien(FtaComposantModel::getAddLinkComposition($paramIdFta, $paramChapitre, $paramSyntheseAction, $paramIdFtaEtat, $paramAbreviationEtat, $paramIdFtaRole, $proprietaire));
             $return .= $htmlEtiquetteComposant->getHtmlResult();
@@ -1897,6 +1904,13 @@ class FtaView extends AbstractView {
         } else {
             $proprietaire = '0';
         }
+
+        $ftaModel = new FtaModel($paramIdFta);
+
+        if ($ftaModel->isFtaPrimaireOrSecondaire() == FtaModel::FTA_SECONDAIRE) {
+            $proprietaire = '0';
+        }
+
         $FtaComposant = FtaComposantModel::getIdFtaComposant($paramIdFta);
         if ($FtaComposant) {
             foreach ($FtaComposant as $rowsFtaComposant) {
@@ -1905,7 +1919,7 @@ class FtaView extends AbstractView {
             }
 
             $htmlEtiquetteComposant = Html::getHtmlObjectFromDataField($this->getModel()->getDataField(FtaModel::FIELDNAME_VIRTUAL_FTA_COMPOSANT_RD));
-            $htmlEtiquetteComposant->setIsEditable($this->getIsEditable());
+            $htmlEtiquetteComposant->setIsEditable($proprietaire);
             $htmlEtiquetteComposant->setLienAjouter(FtaComposantModel::getAddLinkComposant($paramIdFta, $paramChapitre, $paramSyntheseAction, $paramIdFtaEtat, $paramAbreviationEtat, $paramIdFtaRole, $proprietaire));
             $htmlEtiquetteComposant->setLienDetail(FtaComposantModel::getDetailLinkComposant($paramIdFta, $paramChapitre, $arrayIdFtaComposant, $paramSyntheseAction, $paramIdFtaEtat, $paramAbreviationEtat, $paramIdFtaRole, $proprietaire));
             $htmlEtiquetteComposant->setLienSuppression(FtaComposantModel::getDeleteLinkComposant($paramIdFta, $paramChapitre, $arrayIdFtaComposant, $paramSyntheseAction, $paramIdFtaEtat, $paramAbreviationEtat, $paramIdFtaRole));
@@ -1913,8 +1927,8 @@ class FtaView extends AbstractView {
             $return .= $htmlEtiquetteComposant->getHtmlResult();
         } else {
             $htmlEtiquetteComposant = Html::getHtmlObjectFromDataField($this->getModel()->getDataField(FtaModel::FIELDNAME_VIRTUAL_FTA_COMPOSANT_RD));
-            $htmlEtiquetteComposant->setIsEditable($this->getIsEditable());
-            $htmlEtiquetteComposant->setRightToAdd(TRUE);
+            $htmlEtiquetteComposant->setIsEditable($proprietaire);
+            $htmlEtiquetteComposant->setRightToAdd($proprietaire);
             $htmlEtiquetteComposant->getAttributesGlobal()->setHrefAjoutValue(FtaComposantModel::getAddLinkComposant($paramIdFta, $paramChapitre, $paramSyntheseAction, $paramIdFtaEtat, $paramAbreviationEtat, $paramIdFtaRole, $proprietaire));
             $htmlEtiquetteComposant->setLien(FtaComposantModel::getAddLinkComposant($paramIdFta, $paramChapitre, $paramSyntheseAction, $paramIdFtaEtat, $paramAbreviationEtat, $paramIdFtaRole, $proprietaire));
             $return .= $htmlEtiquetteComposant->getHtmlResult();

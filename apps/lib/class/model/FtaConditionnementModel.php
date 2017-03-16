@@ -40,7 +40,7 @@ class FtaConditionnementModel extends AbstractModel {
     const UVC_EMBALLAGE_BRUT = 'uvc_brut';
     const UVC_EMBALLAGE_DIMENSION = 'dimension_uvc';
     const UVC_EMBALLAGE_DIMENSION_HAUTEUR = 'dimension_uvc_hauteur';
-    const UVC_EMBALLAGE_DIMENSION_LONGEUR = 'dimension_uvc_longueur';
+    const UVC_EMBALLAGE_DIMENSION_LONGUEUR = 'dimension_uvc_longueur';
     const UVC_EMBALLAGE_DIMENSION_LARGEUR = 'dimension_uvc_largeur';
     const UVC_EMBALLAGE_DIMENSION_LABEL = 'Dimension de l\'UVF (en mm):';
     const UVC_EMBALLAGE_EMBALLAGE_POIDS_LABEL = 'Poids des Emballages (en g)';

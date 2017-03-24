@@ -1803,8 +1803,9 @@ function getXMLArcadiaArticleHauteurProduit() {
 }
 
 function setXMLArcadiaArticleTarePrivee($paramArcadiaArticleTarePrivee) {
+
     $this->XMLarcadiaArticleTarePrivee = self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION . self::TABULATION
-            . "<TARE_PRIVE>" . $paramArcadiaArticleTarePrivee . "</TARE_PRIVE>" . self::SAUT_DE_LIGNE;
+            . "<TARE_PRIVE>" . round($paramArcadiaArticleTarePrivee) . "</TARE_PRIVE>" . self::SAUT_DE_LIGNE;
 }
 
 function setXMLArcadiaArticleLongueurProduit($paramArcadiaArticleLongueurProduit) {

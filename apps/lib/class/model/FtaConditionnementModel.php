@@ -47,7 +47,8 @@ class FtaConditionnementModel extends AbstractModel {
     const COLIS_EMBALLAGE = 'colis_emballage';
     const COLIS_EMBALLAGE_TYPE_2 = 'colis_emballage_2';
     const COLIS_EMBALLAGE_TYPE_3 = 'colis_emballage_3';
-    const COLIS_EMBALLAGE_NET = 'colis_net';
+    const COLIS_EMBALLAGE_NET_SIMU = 'colis_net_simu';
+    const COLIS_EMBALLAGE_NET_REEL = 'colis_net_reel';
     const COLIS_EMBALLAGE_BRUT = 'colis_brut';
     const COLIS_EMBALLAGE_HAUTEUR = 'hauteur_colis';
     const PALETTE_EMBALLAGE = 'palette_emballage';

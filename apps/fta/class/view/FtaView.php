@@ -2181,7 +2181,7 @@ class FtaView extends AbstractView {
         $htmlPoidsNetColisUVC = new HtmlInputText();
 
         $htmlPoidsNetColisUVC->setLabel("Poids Net (en Kg):");
-        $htmlPoidsNetColisUVC->getAttributes()->getValue()->setValue(round($return["colis_net"], 2));
+        $htmlPoidsNetColisUVC->getAttributes()->getValue()->setValue(round($return[FtaConditionnementModel::COLIS_EMBALLAGE_NET_REEL], 2));
         $htmlPoidsNetColisUVC->setIsEditable(FALSE);
 
         return $htmlPoidsNetColisUVC->getHtmlResult();
@@ -2332,7 +2332,7 @@ class FtaView extends AbstractView {
              * Calcul type emballage UVC
              */
             $returnColis = $this->getModel()->buildArrayEmballageTypeDuColis();
-            $colis_pds_net = $returnColis[FtaConditionnementModel::COLIS_EMBALLAGE_NET];
+            $colis_pds_net = $returnColis[FtaConditionnementModel::COLIS_EMBALLAGE_NET_SIMU];
             /**
              * Calcul type emballage Colis
              */

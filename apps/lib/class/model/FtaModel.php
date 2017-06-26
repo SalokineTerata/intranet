@@ -923,9 +923,9 @@ class FtaModel extends AbstractModel {
     }
 
     public function buildArrayEmballageTypeDuColis() {
-        if (!$this->getDonneeEmballageDuColis()) {
+        //if (!$this->getDonneeEmballageDuColis()) {
             $this->getArrayEmballageTypeDuColis();
-        }
+        //}
         return $this->getDonneeEmballageDuColis();
     }
 
@@ -1077,23 +1077,23 @@ class FtaModel extends AbstractModel {
                     foreach ($arrayComposant as $rowsComposant) {
 
                         // Calcul du Poids net du colis
-                        $return[FtaConditionnementModel::COLIS_EMBALLAGE_NET] += FtaConditionnementModel::getCalculGenericMultiplication(
+                        $return[FtaConditionnementModel::COLIS_EMBALLAGE_NET_SIMU] += FtaConditionnementModel::getCalculGenericMultiplication(
                                         $rowsComposant[FtaComposantModel::FIELDNAME_QUANTITE_FTA_COMPOSITION]
                                         , $rowsComposant[FtaComposantModel::FIELDNAME_POIDS_FTA_COMPOSITION]
                         );
                     }
                 } else {
-                    $return[FtaConditionnementModel::COLIS_EMBALLAGE_NET] = "0";
+                    $return[FtaConditionnementModel::COLIS_EMBALLAGE_NET_SIMU] = "0";
                 }
 
                 // Calcul du Poids net du colis
-                $return[FtaConditionnementModel::COLIS_EMBALLAGE_NET] = $return[FtaConditionnementModel::COLIS_EMBALLAGE_NET] / "1000"; //Conversion en g --> Kg
-                if (!$return[FtaConditionnementModel::COLIS_EMBALLAGE_NET]) {
-                    $return[FtaConditionnementModel::COLIS_EMBALLAGE_NET] = FtaConditionnementModel::getCalculGenericMultiplication(
+                $return[FtaConditionnementModel::COLIS_EMBALLAGE_NET_SIMU] = $return[FtaConditionnementModel::COLIS_EMBALLAGE_NET_SIMU] / "1000"; //Conversion en g --> Kg
+                //if (!$return[FtaConditionnementModel::COLIS_EMBALLAGE_NET]) {
+                    $return[FtaConditionnementModel::COLIS_EMBALLAGE_NET_REEL] = FtaConditionnementModel::getCalculGenericMultiplication(
                                     $rowsFta[FtaModel::FIELDNAME_POIDS_ELEMENTAIRE]
                                     , $rowsFta[FtaModel::FIELDNAME_NOMBRE_UVC_PAR_CARTON]
                     );
-                }
+                //}
 
 
 
@@ -1137,14 +1137,14 @@ class FtaModel extends AbstractModel {
 
                 //Calcul du poids brut du Colis en Kg
                 $return[FtaConditionnementModel::COLIS_EMBALLAGE_BRUT] = FtaConditionnementModel::getCalculPoidsBrutEmballageColis(
-                                $return[FtaConditionnementModel::COLIS_EMBALLAGE_NET]
+                                $return[FtaConditionnementModel::COLIS_EMBALLAGE_NET_SIMU]
                                 , $return[FtaConditionnementModel::COLIS_EMBALLAGE]
                 );
 
 
                 //Calcul du Poids net par Palette
                 $return[FtaConditionnementModel::PALETTE_EMBALLAGE_NET] = FtaConditionnementModel::getCalculPoidsEmballage(
-                                $return[FtaConditionnementModel::COLIS_EMBALLAGE_NET]
+                                $return[FtaConditionnementModel::COLIS_EMBALLAGE_NET_SIMU]
                                 , $return[FtaConditionnementModel::PALETTE_NOMBRE_DE_COUCHE]
                                 , $return[FtaConditionnementModel::PALETTE_NOMBRE_COLIS_PAR_COUCHE])
                 ;
@@ -1193,19 +1193,19 @@ class FtaModel extends AbstractModel {
                 foreach ($arrayComposant as $rowsComposant) {
 
                     // Calcul du Poids net du colis
-                    $return[FtaConditionnementModel::COLIS_EMBALLAGE_NET] += FtaConditionnementModel::getCalculGenericMultiplication(
+                    $return[FtaConditionnementModel::COLIS_EMBALLAGE_NET_SIMU] += FtaConditionnementModel::getCalculGenericMultiplication(
                                     $rowsComposant[FtaComposantModel::FIELDNAME_QUANTITE_FTA_COMPOSITION]
                                     , $rowsComposant[FtaComposantModel::FIELDNAME_POIDS_FTA_COMPOSITION]
                     );
                 }
             } else {
-                $return[FtaConditionnementModel::COLIS_EMBALLAGE_NET] = "0";
+                $return[FtaConditionnementModel::COLIS_EMBALLAGE_NET_SIMU] = "0";
             }
 
             // Calcul du Poids net du colis
-            $return[FtaConditionnementModel::COLIS_EMBALLAGE_NET] = $return[FtaConditionnementModel::COLIS_EMBALLAGE_NET] / "1000"; //Conversion en g --> Kg
-            if (!$return[FtaConditionnementModel::COLIS_EMBALLAGE_NET]) {
-                $return[FtaConditionnementModel::COLIS_EMBALLAGE_NET] = FtaConditionnementModel::getCalculGenericMultiplication(
+            $return[FtaConditionnementModel::COLIS_EMBALLAGE_NET_SIMU] = $return[FtaConditionnementModel::COLIS_EMBALLAGE_NET_SIMU] / "1000"; //Conversion en g --> Kg
+            if (!$return[FtaConditionnementModel::COLIS_EMBALLAGE_NET_SIMU]) {
+                $return[FtaConditionnementModel::COLIS_EMBALLAGE_NET_SIMU] = FtaConditionnementModel::getCalculGenericMultiplication(
                                 $return[FtaModel::FIELDNAME_POIDS_ELEMENTAIRE]
                                 , $return[FtaModel::FIELDNAME_NOMBRE_UVC_PAR_CARTON]
                 );
@@ -1249,14 +1249,14 @@ class FtaModel extends AbstractModel {
             }
             //Calcul du poids brut du Colis en Kg
             $return[FtaConditionnementModel::COLIS_EMBALLAGE_BRUT] = FtaConditionnementModel::getCalculPoidsBrutEmballageColis(
-                            $return[FtaConditionnementModel::COLIS_EMBALLAGE_NET]
+                            $return[FtaConditionnementModel::COLIS_EMBALLAGE_NET_SIMU]
                             , $return[FtaConditionnementModel::COLIS_EMBALLAGE]
             );
 
 
             //Calcul du Poids net par Palette
             $return[FtaConditionnementModel::PALETTE_EMBALLAGE_NET] = FtaConditionnementModel::getCalculPoidsEmballage(
-                            $return[FtaConditionnementModel::COLIS_EMBALLAGE_NET]
+                            $return[FtaConditionnementModel::COLIS_EMBALLAGE_NET_SIMU]
                             , $return[FtaConditionnementModel::PALETTE_NOMBRE_DE_COUCHE]
                             , $return[FtaConditionnementModel::PALETTE_NOMBRE_COLIS_PAR_COUCHE])
             ;

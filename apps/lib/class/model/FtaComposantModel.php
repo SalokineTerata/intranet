@@ -40,6 +40,8 @@ class FtaComposantModel extends AbstractModel {
     const FIELDNAME_K_ETIQUETTE_FTA_COMPOSITION = 'k_etiquette_fta_composition';
     const FIELDNAME_K_ETIQUETTE_VERSO_FTA_COMPOSITION = 'k_etiquette_verso_fta_composition';
     const FIELDNAME_K_CODESOFT_ETIQUETTE_LOGO = 'k_codesoft_etiquette_logo';
+    const FIELDNAME_K_CODESOFT_NB_PORTION_ETIQUETTE = 'k_codesoft_nb_portion_etiquette';
+    const FIELDNAME_K_CODESOFT_MODE_PREPARATION_ETIQUETTE = 'k_codesoft_mode_preparation_etiquette';
     const FIELDNAME_K_STYLE_PARAGRAPHE_INGREDIENT_FTA_COMPOSITION = 'k_style_paragraphe_ingredient_fta_composition';
     const FIELDNAME_LAST_ID_FTA_COMPOSANT = 'last_id_fta_composant';
     const FIELDNAME_MODE_ETIQUETTE_FTA_COMPOSITION = 'mode_etiquette_fta_composition';

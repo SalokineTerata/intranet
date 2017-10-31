@@ -33,6 +33,7 @@ class FtaModel extends AbstractModel {
     const FIELDNAME_CONDITION_SOUS_ATMOSPHERE = "atmosphere_protectrice";
     const FIELDNAME_CONSEIL_APRES_OUVERTURE = "apres_ouverture_fta";
     const FIELDNAME_CONSEIL_DE_RECHAUFFAGE = "conseil_rechauffage_valide_fta";
+    const FIELDNAME_K_CODESOFT_MODE_PREPARATION_ETIQUETTE = 'k_codesoft_mode_preparation_etiquette';
     const FIELDNAME_CONSEIL_DE_RECHAUFFAGE_DEVELOPPEMENT = "conseil_rechauffage_experimentale_fta";
     const FIELDNAME_CONSEIL_DE_PRESENTATION = "presentation_fta";
     const FIELDNAME_CREATEUR = "createur_fta";
@@ -88,6 +89,7 @@ class FtaModel extends AbstractModel {
     const FIELDNAME_NOM_ABREGE = "OLD_nom_abrege_fta";
     const FIELDNAME_NOM_DEMANDEUR = "nom_demandeur_fta";
     const FIELDNAME_NOMBRE_PORTION_FTA = "nombre_portion_fta";
+    const FIELDNAME_K_CODESOFT_NB_PORTION_ETIQUETTE = 'k_codesoft_nb_portion_etiquette';
     const FIELDNAME_NOMBRE_UVC_PAR_CARTON = "NB_UNIT_ELEM";
     const FIELDNAME_ORIGINE_MATIERE_PREMIERE = "origine_matiere_fta";
     const FIELDNAME_PERIODE_DE_COMMERCIALISATION = "periode_commercialisation_fta";

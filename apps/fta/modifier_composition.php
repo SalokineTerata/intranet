@@ -171,8 +171,8 @@ if ($id_fta_composant) {
     $val_nut_kcal = $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_VAL_NUT_KCAL)->getFieldValue();
     $k_etiquette_verso_fta_composition = $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_K_ETIQUETTE_VERSO_FTA_COMPOSITION)->getFieldValue();
     $k_codesoft_etiquette_logo = $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_K_CODESOFT_ETIQUETTE_LOGO)->getFieldValue();
-    $k_codesoft_nb_portion_etiquette = $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_K_CODESOFT_NB_PORTION_ETIQUETTE)->getFieldValue();
-    $k_codesoft_mode_preparation_etiquette = $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_K_CODESOFT_MODE_PREPARATION_ETIQUETTE)->getFieldValue();
+    //$k_codesoft_nb_portion_etiquette = $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_K_CODESOFT_NB_PORTION_ETIQUETTE)->getFieldValue();
+    //$k_codesoft_mode_preparation_etiquette = $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_K_CODESOFT_MODE_PREPARATION_ETIQUETTE)->getFieldValue();
     $etiquette_decomposition_poids_fta_composant = $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_ETIQUETTE_DECOMPOSITION_POIDS_FTA_COMPOSANT)->getFieldValue();
     $etiquette_information_complementaire_recto_fta_composant = $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_ETIQUETTE_INFORMATION_COMPLEMENTAIRE_RECTO_FTA_COMPOSANT)->getFieldValue();
     $etiquette_libelle_legal_fta_composition = $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_ETIQUETTE_LIBELLE_LEGAL_FTA_COMPOSITION)->getFieldValue();
@@ -690,9 +690,7 @@ if ($mode_etiquette_fta_composition == 1 or $mode_etiquette_fta_composition == 2
 //    $bloc.="</td></tr>";
     $bloc .=$ftaComposantView->getHtmlDataField(FtaComposantModel::FIELDNAME_K_CODESOFT_ETIQUETTE_LOGO);
     
-    $bloc .=$ftaComposantView->getHtmlDataField(FtaComposantModel::FIELDNAME_K_CODESOFT_NB_PORTION_ETIQUETTE);
-    
-    $bloc .=$ftaComposantView->getHtmlDataField(FtaComposantModel::FIELDNAME_K_CODESOFT_MODE_PREPARATION_ETIQUETTE);
+       
     
 }
 //echo $mode_etiquette_fta_composition;

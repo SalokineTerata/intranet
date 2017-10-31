@@ -67,8 +67,6 @@ $k_style_paragraphe_ingredient_fta_composition = Lib::getParameterFromRequest(Ft
 $k_etiquette = Lib::getParameterFromRequest(FtaComposantModel::FIELDNAME_K_ETIQUETTE_FTA_COMPOSITION);
 $k_etiquette_verso_fta_composition = Lib::getParameterFromRequest(FtaComposantModel::FIELDNAME_K_ETIQUETTE_VERSO_FTA_COMPOSITION);
 $k_codesoft_etiquette_logo = Lib::getParameterFromRequest(FtaComposantModel::FIELDNAME_K_CODESOFT_ETIQUETTE_LOGO);
-$k_codesoft_nb_portion_etiquette = Lib::getParameterFromRequest(FtaComposantModel::FIELDNAME_K_CODESOFT_NB_PORTION_ETIQUETTE);
-$k_codesoft_mode_preparation_etiquette = Lib::getParameterFromRequest(FtaComposantModel::FIELDNAME_K_CODESOFT_MODE_PREPARATION_ETIQUETTE);
 
 $etiquette_decomposition_poids_fta_composant = Lib::getParameterFromRequest(FtaComposantModel::FIELDNAME_ETIQUETTE_DECOMPOSITION_POIDS_FTA_COMPOSANT);
 $etiquette_information_complementaire_recto_fta_composant = Lib::getParameterFromRequest(FtaComposantModel::FIELDNAME_ETIQUETTE_INFORMATION_COMPLEMENTAIRE_RECTO_FTA_COMPOSANT);

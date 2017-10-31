@@ -732,6 +732,9 @@ class Chapitre {
 
         //Conseil de Réchauffage Validé
         $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_CONSEIL_DE_RECHAUFFAGE);
+        
+        //Picto Mode de Preparation
+        $bloc .=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_K_CODESOFT_MODE_PREPARATION_ETIQUETTE);
 
         //Durée de vie Production (en jours)
         $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_DUREE_DE_VIE_TECHNIQUE_PRODUCTION);
@@ -1041,6 +1044,9 @@ class Chapitre {
         //Nombre de portion
         $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_NOMBRE_PORTION_FTA);
 
+        //Picto nb portion
+        $bloc .=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_K_CODESOFT_NB_PORTION_ETIQUETTE);     
+        
         //Produit Transformé en France
         $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_PRODUIT_TRANSFORME);
 
@@ -1084,6 +1090,9 @@ class Chapitre {
 
         //Nombre de portion
         $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_NOMBRE_PORTION_FTA);
+        
+        //Picto nb portion
+        $bloc .=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_K_CODESOFT_NB_PORTION_ETIQUETTE); 
 
         //Service consommateur
         $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_SERVICE_CONSOMMATEUR);
@@ -1198,6 +1207,10 @@ class Chapitre {
         //Conseil de Réchauffage Validé
         $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_CONSEIL_DE_RECHAUFFAGE);
 
+        //Picto Mode de Preparation
+        $bloc .=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_K_CODESOFT_MODE_PREPARATION_ETIQUETTE);
+        
+        
         if ($ftaView->isDataValidationSuccessful() == "0") {
             self::setDataValidationSuccessfulToTrue();
         }
@@ -1653,6 +1666,9 @@ class Chapitre {
 
         //Conseil de Réchauffage Validé
         $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_CONSEIL_DE_RECHAUFFAGE);
+        
+        //Picto Mode de Preparation
+        $bloc .=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_K_CODESOFT_MODE_PREPARATION_ETIQUETTE);
 
         //Durée de vie Production (en jours)
         $bloc.=$ftaView->getHtmlDataField(FtaModel::FIELDNAME_DUREE_DE_VIE_TECHNIQUE_PRODUCTION);

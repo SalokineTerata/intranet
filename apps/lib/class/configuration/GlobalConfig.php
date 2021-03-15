@@ -95,6 +95,10 @@ class GlobalConfig {
              */
             if ($this->getConf()->getSessionDebugEnable()) {
                 $this->setNeedBuildConf(TRUE);
+                /**
+                 * Force l'initialisation de la description de la base de donnée en mode debug
+                 */
+                //$this->setDatabaseIsInitializedToFalse();
             }
         }
 

@@ -16,6 +16,7 @@ require_once('../plugins/htmlMimeMail-2.5.1/htmlMimeMail5.php');
 
 //Free PDF: Classe Racine
 $fpdf_path = '../plugins/fpdf/';
+$fpdi_path = '../plugins/fpdi/';
 define('RELATIVE_PATH', $fpdf_path);
 define('FPDF_FONTPATH', RELATIVE_PATH . 'font/');
 require_once ($fpdf_path . 'fpdf.php');

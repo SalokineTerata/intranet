@@ -49,6 +49,7 @@ $quantite_fta_composition = Lib::getParameterFromRequest(FtaComposantModel::FIEL
 //$ordre_fta_composition = Lib::getParameterFromRequest(FtaComposantModel::FIELDNAME_ORDRE_FTA_COMPOSITION);
 $val_nut_kcal = Lib::getParameterFromRequest(FtaComposantModel::FIELDNAME_VAL_NUT_KCAL);
 $val_nut_sel = Lib::getParameterFromRequest(FtaComposantModel::FIELDNAME_VAL_SEL);
+$fibre = Lib::getParameterFromRequest(FtaComposantModel::FIELDNAME_VAL_FIBRE);
 $val_nut_proteine = Lib::getParameterFromRequest(FtaComposantModel::FIELDNAME_VAL_PROTEINE);
 $val_nut_sucre = Lib::getParameterFromRequest(FtaComposantModel::FIELDNAME_VAL_SUCRE);
 $val_nut_glucide = Lib::getParameterFromRequest(FtaComposantModel::FIELDNAME_VAL_GLUCIDE);

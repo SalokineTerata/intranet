@@ -307,6 +307,9 @@ class DatabaseDescription {
         $array = DatabaseOperation::convertSqlStatementKeyAndOneFieldToArray('SHOW TABLES');
         foreach ($array as $rowsTables) {
             $tableName = $rowsTables[0];
+//            if ($tableName == "fta_composant") {
+//                $tmp = 1;
+//            }
             $tableDescription = DatabaseOperation::convertSqlStatementWithoutKeyToArray(
                             'DESC ' . DatabaseOperation::convertNameToSqlClause($tableName)
             );

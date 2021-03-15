@@ -64,6 +64,7 @@ class FtaComposantModel extends AbstractModel {
     const FIELDNAME_VAL_SUCRE = 'val_nut_sucre';
     const FIELDNAME_VAL_PROTEINE = 'val_nut_proteine';
     const FIELDNAME_VAL_SEL = 'val_nut_sel';
+    const FIELDNAME_VAL_FIBRE = 'fibre';
     const FIELDNAME_VIRTUAL_INGREDIENT_FTA_COMPOSITION = 'virtual_ingredient_fta_composition';
     const FIELDNAME_VIRTUAL_NOM_DU_COMPOSANT = 'virtual_nom_du_composant';
     const FIELDNAME_VIRTUAL_POIDS_FTA_COMPOSITION = 'virtual_poids_fta_composition';

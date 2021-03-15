@@ -169,6 +169,7 @@ if ($id_fta_composant) {
     $val_nut_mat_grasse = $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_VAL_MAT_GRASSE)->getFieldValue();
     $val_nut_kj = $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_VAL_NUT_KJ)->getFieldValue();
     $val_nut_kcal = $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_VAL_NUT_KCAL)->getFieldValue();
+    $fibre = $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_VAL_FIBRE)->getFieldValue();
     $k_etiquette_verso_fta_composition = $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_K_ETIQUETTE_VERSO_FTA_COMPOSITION)->getFieldValue();
     $k_codesoft_etiquette_logo = $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_K_CODESOFT_ETIQUETTE_LOGO)->getFieldValue();
     //$k_codesoft_nb_portion_etiquette = $ftaComposantModel->getDataField(FtaComposantModel::FIELDNAME_K_CODESOFT_NB_PORTION_ETIQUETTE)->getFieldValue();
@@ -861,6 +862,11 @@ $bloc .=$ftaComposantView->getHtmlDataField(FtaComposantModel::FIELDNAME_VAL_SEL
 
 //}
 
+/**
+ * Fibre
+ */
+
+$bloc .=$ftaComposantView->getHtmlDataField(FtaComposantModel::FIELDNAME_VAL_FIBRE);
 
 
 
